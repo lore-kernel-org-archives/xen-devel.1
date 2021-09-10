@@ -2,57 +2,57 @@ Return-Path: <SRS0=iZSu=OA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F18EC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 05:49:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEDB6C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 05:55:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0ABA96113E
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 05:49:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0ABA96113E
+	by mail.kernel.org (Postfix) with ESMTPS id 9816C6113E
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 05:55:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9816C6113E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.184025.332528 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.184032.332538 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOZPM-00016K-2O; Fri, 10 Sep 2021 05:49:04 +0000
+	id 1mOZVV-0002mz-Oe; Fri, 10 Sep 2021 05:55:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 184025.332528; Fri, 10 Sep 2021 05:49:04 +0000
+Received: by outflank-mailman (output) from mailman id 184032.332538; Fri, 10 Sep 2021 05:55:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOZPL-00016D-VH; Fri, 10 Sep 2021 05:49:03 +0000
-Received: by outflank-mailman (input) for mailman id 184025;
- Fri, 10 Sep 2021 05:49:03 +0000
+	id 1mOZVV-0002ms-LZ; Fri, 10 Sep 2021 05:55:25 +0000
+Received: by outflank-mailman (input) for mailman id 184032;
+ Fri, 10 Sep 2021 05:55:24 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dvCC=OA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mOZPL-000167-1q
- for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 05:49:03 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ id 1mOZVU-0002mm-ET
+ for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 05:55:24 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id cc7721be-11fa-11ec-b210-12813bfff9fa;
- Fri, 10 Sep 2021 05:49:01 +0000 (UTC)
+ id afb5fd60-11fb-11ec-b210-12813bfff9fa;
+ Fri, 10 Sep 2021 05:55:23 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CB2F51FE45;
- Fri, 10 Sep 2021 05:49:00 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 2BC1A223F2;
+ Fri, 10 Sep 2021 05:55:22 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6CB7E13D02;
- Fri, 10 Sep 2021 05:49:00 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CC9BB13D0C;
+ Fri, 10 Sep 2021 05:55:21 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id kliZGMzxOmHiDQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 10 Sep 2021 05:49:00 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cJiAMEnzOmEDEAAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 10 Sep 2021 05:55:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,205 +64,107 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc7721be-11fa-11ec-b210-12813bfff9fa
+X-Inumbo-ID: afb5fd60-11fb-11ec-b210-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1631252940; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
+	t=1631253322; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CVQYFneEpxXGr/1pOngzMGqStazfKW04mzES2WC26/g=;
-	b=qZGYPkm+KdwdYxfh7k8r6JiEiPL6I10f1YhLHsgSQSuF94loXNI8dKlQVtYoxnO1Z+69r/
-	rIhKtW/M/CN5mgYStglCkyTz7FXt9IWMT4P+JFJNgLh3IlgaebnG3Owd70sF285AyLz0PL
-	JVnLlSMvewDsHuoxtLd38p334IqlTvc=
-Subject: Re: [PATCH v2 1/3] stubdom: fix build with disabled pv-grub
-To: Ian Jackson <iwj@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>
-References: <20210909124924.1698-1-jgross@suse.com>
- <20210909124924.1698-2-jgross@suse.com>
- <24890.2778.780247.724651@mariner.uk.xensource.com>
- <7e635caa-0956-332c-bd17-0bec61e58ef0@suse.com>
- <24890.12692.44064.995392@mariner.uk.xensource.com>
+	bh=xV8rdwiG4q9toCr/6b+aaGACeRQj1/7eJo0Ol2OKeRo=;
+	b=YqZjTZsf0xfHXnshigWUy37ia2m5fkNKqan+OsRvi2PlL3ZNh03lWky1a6Rou/oVVVijsv
+	EZ9GAkSwOOHDZIaAZctSYWUJNv3WmIzjkv0Lcv48lTO2ZqFuL2yoMn0U/sD+6sSQFJpeiL
+	a9BR0OCfw5byHfSLdAWpwizGi9yjYPA=
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <462de39a-2edc-ee3e-8016-85ce29e7ca59@suse.com>
-Date: Fri, 10 Sep 2021 07:48:59 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Samuel Thibault <samuel.thibault@ens-lyon.org>
+Subject: [PATCH v3 1/3] stubdom: fix build with disabled pv-grub
+Date: Fri, 10 Sep 2021 07:55:16 +0200
+Message-Id: <20210910055518.562-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210910055518.562-1-jgross@suse.com>
+References: <20210910055518.562-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <24890.12692.44064.995392@mariner.uk.xensource.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="FB87yRzkXPOes7Xk4mfczWU7MXM6c7um0"
+Content-Transfer-Encoding: 8bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---FB87yRzkXPOes7Xk4mfczWU7MXM6c7um0
-Content-Type: multipart/mixed; boundary="G7yk8I5DY8SeMAqrXhzXB6QqbxRtsBGuY";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Ian Jackson <iwj@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>
-Message-ID: <462de39a-2edc-ee3e-8016-85ce29e7ca59@suse.com>
-Subject: Re: [PATCH v2 1/3] stubdom: fix build with disabled pv-grub
-References: <20210909124924.1698-1-jgross@suse.com>
- <20210909124924.1698-2-jgross@suse.com>
- <24890.2778.780247.724651@mariner.uk.xensource.com>
- <7e635caa-0956-332c-bd17-0bec61e58ef0@suse.com>
- <24890.12692.44064.995392@mariner.uk.xensource.com>
-In-Reply-To: <24890.12692.44064.995392@mariner.uk.xensource.com>
+Today the build will fail if --disable-pv-grub as a parameter of
+configure, as the main Makefile will unconditionally try to build a
+32-bit pv-grub stubdom.
 
---G7yk8I5DY8SeMAqrXhzXB6QqbxRtsBGuY
-Content-Type: multipart/mixed;
- boundary="------------01FED0D97D741FAEECD4A949"
-Content-Language: en-US
+Fix that by introducing a pv-grub-if-enabled target in
+stubdom/Makefile taking care of this situation.
 
-This is a multi-part message in MIME format.
---------------01FED0D97D741FAEECD4A949
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
+--
+V3:
+- rename pv-grub32 target (Ian Jackson)
+---
+ Makefile         |  4 ++--
+ stubdom/Makefile | 13 +++++++++++++
+ 2 files changed, 15 insertions(+), 2 deletions(-)
 
-On 09.09.21 18:08, Ian Jackson wrote:
-> Juergen Gross writes ("Re: [PATCH v2 1/3] stubdom: fix build with disab=
-led pv-grub"):
->> On 09.09.21 15:23, Ian Jackson wrote:
->>> How about "pv-grub-maybe" ?  Or something.
->>
->> What about "pv-grub-if-enabled"?
->=20
-> Fine by me.
->=20
->> And could that be done when committing, or should I send another round=
-?
->=20
-> Please do send another round (sorry).
+diff --git a/Makefile b/Makefile
+index 96d32cfd50..346d73a0dc 100644
+--- a/Makefile
++++ b/Makefile
+@@ -72,7 +72,7 @@ build-tools-oxenstored: build-tools-public-headers
+ build-stubdom: mini-os-dir build-tools-public-headers
+ 	$(MAKE) -C stubdom build
+ ifeq (x86_64,$(XEN_TARGET_ARCH))
+-	XEN_TARGET_ARCH=x86_32 $(MAKE) -C stubdom pv-grub
++	XEN_TARGET_ARCH=x86_32 $(MAKE) -C stubdom pv-grub-if-enabled
+ endif
+ 
+ .PHONY: build-docs
+@@ -143,7 +143,7 @@ install-tools: install-tools-public-headers
+ install-stubdom: mini-os-dir install-tools
+ 	$(MAKE) -C stubdom install
+ ifeq (x86_64,$(XEN_TARGET_ARCH))
+-	XEN_TARGET_ARCH=x86_32 $(MAKE) -C stubdom install-grub
++	XEN_TARGET_ARCH=x86_32 $(MAKE) -C stubdom install-grub-if-enabled
+ endif
+ 
+ .PHONY: tools/firmware/seabios-dir-force-update
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 06aa69d8bc..ccfcf5b75f 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -531,6 +531,13 @@ vtpmmgr-stubdom: mini-os-$(XEN_TARGET_ARCH)-vtpmmgr vtpmmgr
+ pv-grub: mini-os-$(XEN_TARGET_ARCH)-grub libxenguest grub
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/grub/minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< APP_OBJS=$(CURDIR)/grub-$(XEN_TARGET_ARCH)/main.a
+ 
++.PHONY: pv-grub-if-enabled
++ifneq ($(filter grub,$(STUBDOM_TARGETS)),)
++pv-grub-if-enabled: pv-grub
++else
++pv-grub-if-enabled:
++endif
++
+ .PHONY: xenstore-stubdom
+ xenstore-stubdom: mini-os-$(XEN_TARGET_ARCH)-xenstore libxenguest xenstore
+ 	DEF_CPPFLAGS="$(TARGET_CPPFLAGS)" DEF_CFLAGS="$(TARGET_CFLAGS)" DEF_LDFLAGS="$(TARGET_LDFLAGS)" MINIOS_CONFIG="$(CURDIR)/xenstore-minios.cfg" $(MAKE) DESTDIR= -C $(MINI_OS) OBJ_DIR=$(CURDIR)/$< APP_OBJS=$(CURDIR)/xenstore/xenstored.a
+@@ -560,6 +567,12 @@ install-grub: pv-grub
+ 	$(INSTALL_DIR) "$(DESTDIR)$(XENFIRMWAREDIR)"
+ 	$(INSTALL_DATA) mini-os-$(XEN_TARGET_ARCH)-grub/mini-os.gz "$(DESTDIR)$(XENFIRMWAREDIR)/pv-grub-$(XEN_TARGET_ARCH).gz"
+ 
++ifneq ($(filter grub,$(STUBDOM_TARGETS)),)
++install-grub-if-enabled: install-grub
++else
++install-grub-if-enabled:
++endif
++
+ install-c: c-stubdom
+ 
+ install-caml: caml-stubdom
+-- 
+2.26.2
 
-NP.
-
-BTW, you probably want to modify OSStest to use configure with:
-
---enable-pv-grub --enable-qemu-traditional
-
-in order to not let the tests fail (applies to x86 only, of course).
-
-
-Juergen
-
---------------01FED0D97D741FAEECD4A949
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: OpenPGP public key
-Content-Disposition: attachment;
- filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
-cWx
-w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
-f8Z
-d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
-9bf
-IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
-G7/
-377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
-3Jv
-c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
-QIe
-AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
-hpw
-dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
-MbD
-1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
-oPH
-Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
-5QL
-+qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
-2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
-QoL
-BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
-Wf0
-teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
-/nu
-AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
-ITT
-d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
-XBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
-80h
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
-AcD
-AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
-FOX
-gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
-jnD
-kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
-N51
-N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
-otu
-fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
-tqS
-EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
-hsD
-BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
-g3O
-ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
-dM7
-wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
-D+j
-LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
-V2x
-AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
-Eaw
-QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
-nHI
-s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
-wgn
-BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
-bVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
-pEd
-IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
-QAB
-wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
-Tbe
-8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
-vJz
-Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
-VGi
-wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
-svi
-uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
-zXs
-ZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------01FED0D97D741FAEECD4A949--
-
---G7yk8I5DY8SeMAqrXhzXB6QqbxRtsBGuY--
-
---FB87yRzkXPOes7Xk4mfczWU7MXM6c7um0
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmE68csFAwAAAAAACgkQsN6d1ii/Ey+F
-vwgAmplXoANW+mhw9bZlcGOr3WTuwXiK7siIGPCl6FuHYtW2o7KmdZW8QDdd4MLDxSOEmydIJbBP
-h+Wlwy8Ji19E0KIS6hs6bPJ04QPLhTODtC5vtAkdmpCLcJJYb+tjWtg23xg2WvahcqFtm4wlg79l
-6NllGGKco3w+i4H0VNL6K05pr9Z8WPr/MsiTrMHU0yHo8CAebdCHA79qk++iFV0n6OgGpnOQJaDp
-9bxH4vX00CIyIh3c8CUE52oK+V0WOadmz5ep/JPW7UpS9dzmRMgPCTlKBcIQsIRPg89oyFQRhlTR
-NwcQIcmEZI/BYA+HQQjeK/AhPJANUM8gp/T+vqU+BQ==
-=hr5g
------END PGP SIGNATURE-----
-
---FB87yRzkXPOes7Xk4mfczWU7MXM6c7um0--
 
