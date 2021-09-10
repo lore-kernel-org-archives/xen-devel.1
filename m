@@ -2,47 +2,45 @@ Return-Path: <SRS0=iZSu=OA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,
+	DATE_IN_FUTURE_03_06,DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90872C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 15:34:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B36AFC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 16:13:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5F03A611EE
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 15:34:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5F03A611EE
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 795B26124F
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Sep 2021 16:13:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 795B26124F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=apertussolutions.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.184561.333257 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.184575.333268 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOiXl-0000K7-3K; Fri, 10 Sep 2021 15:34:21 +0000
+	id 1mOj99-0006N1-4H; Fri, 10 Sep 2021 16:12:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 184561.333257; Fri, 10 Sep 2021 15:34:21 +0000
+Received: by outflank-mailman (output) from mailman id 184575.333268; Fri, 10 Sep 2021 16:12:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mOiXl-0000Jy-0J; Fri, 10 Sep 2021 15:34:21 +0000
-Received: by outflank-mailman (input) for mailman id 184561;
- Fri, 10 Sep 2021 15:34:19 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mOiXj-0000I5-J3
- for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 15:34:19 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mOiXj-0001VG-II
- for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 15:34:19 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mOiXj-0001Ly-HT
- for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 15:34:19 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1mOiXg-0002wW-CN; Fri, 10 Sep 2021 16:34:16 +0100
+	id 1mOj99-0006Mu-18; Fri, 10 Sep 2021 16:12:59 +0000
+Received: by outflank-mailman (input) for mailman id 184575;
+ Fri, 10 Sep 2021 16:12:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=OyUy=OA=apertussolutions.com=dpsmith@srs-us1.protection.inumbo.net>)
+ id 1mOj97-0006Mo-Cx
+ for xen-devel@lists.xenproject.org; Fri, 10 Sep 2021 16:12:57 +0000
+Received: from sender4-of-o51.zoho.com (unknown [136.143.188.51])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b40aa41c-c8c4-45f7-922e-27ac559ccc0a;
+ Fri, 10 Sep 2021 16:12:56 +0000 (UTC)
+Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
+ [72.81.132.2]) by mx.zohomail.com
+ with SMTPS id 1631290370242444.1939855081141;
+ Fri, 10 Sep 2021 09:12:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +52,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=PY+koOgOtrOY8a+2WMPC2QRjJ2w9TYtusU9QWR9owkg=; b=QFOnpAi3iiazL6XQDIpwh3RKfe
-	VTq4Sg7L5FqaXHC1r5oYJCV1mkv61v0h05TPJO2ZtPFZn+hMzV0Vpu/I0oBsO574PdxobeHZWHwLE
-	YjIf8x04bbw1uJtdX1LwChz7Frsxw5vKa2Q98Hq/Z20/70uB2aik+1NJJYfPj7VUcz/g=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: b40aa41c-c8c4-45f7-922e-27ac559ccc0a
+ARC-Seal: i=1; a=rsa-sha256; t=1631290373; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=S7zH1Yr+e5vBmhRWJYSz9bqQdfjzzlKQLDc1erq4JGAZCaaudXm9QJxvYErSAlXqsUmXBpFckBfnXxg2nTrgM8LCojU8xmV1XN/drrsLWRzZMCZ2qQhx87Wdf+kFTF/QT7YfNL/kGsFQw5Fc8X7my5qcZXi50H+pD4ucMU2VzTk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1631290373; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
+	bh=2Q9d75Ru4N44075sHiEBdOazR6OiC0qVA4Rjf8vgGlM=; 
+	b=CThCCe2uhc/ol9EpIeA17vAYVkjYxy5D5eoNehKmIXsgX11f8/AfaTkjgH0e3NqZGk8RSsT5j1i++NUqRJzLp7Jn2eoPIxh+YxzxGfCsUGujMYQFSu9k1zyx0hCof4AwcAgERHD9PiOhw4V4PCu/0fshESX1/WPtLNW3qcb2UKc=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1631290373;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=2Q9d75Ru4N44075sHiEBdOazR6OiC0qVA4Rjf8vgGlM=;
+	b=YniGmm+PdOuDK0xEwillFqEVU9D6Y5uU7DTZsHpDrIsA102bV5IhySvcRZQCswNg
+	jTiPHccYTvwuHthnQCIJO5giGhFvDUszUiHoiZe2TJlmpgukAaulW5Ghj+SgZ4U+YZS
+	Ms1JoA3cPPabOZH57ziLqXxO/5p0JjJP2PUt0Sas=
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+To: xen-devel@lists.xenproject.org
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v6 00/10] xsm: refactoring xsm hooks
+Date: Fri, 10 Sep 2021 16:12:55 -0400
+Message-Id: <20210910201305.32526-1-dpsmith@apertussolutions.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24891.31480.165445.521062@mariner.uk.xensource.com>
-Date: Fri, 10 Sep 2021 16:34:16 +0100
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org,
-    Andrew Cooper <andrew.cooper3@citrix.com>,
-    George Dunlap <george.dunlap@citrix.com>,
-    Jan Beulich <jbeulich@suse.com>,
-    Julien Grall <julien@xen.org>,
-    Stefano Stabellini <sstabellini@kernel.org>,
-    Wei Liu <wl@xen.org>,
-    Samuel Thibault <samuel.thibault@ens-lyon.org>,
-    Community Manager <community.manager@xenproject.org>
-Subject: Re: [PATCH v3 0/3] disable building of pv-grub and qemu-trad per default
-In-Reply-To: <20210910055518.562-1-jgross@suse.com>
-References: <20210910055518.562-1-jgross@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
-Juergen Gross writes ("[PATCH v3 0/3] disable building of pv-grub and qemu-trad per default"):
-> This is a first step of deprecating pv-grub and qemu-trad including
-> ioemu-stubdom. Switch the default to not building it.
+Based on feedback from 2021 Xen Developers Summit the xsm-roles RFC patch set
+is being split into two separate patch sets. This is the first patch set and is
+focused purely on the clean up and refactoring of the XSM hooks.
 
-This is now fully acked.  But can we wait with committing it until we
-have a decision about whether to (a) have osstest explicitly enable
-the pv-grub and qemu-trad builds (b) have osstest stop testing these
-configurations ?
+This patch set refactors the xsm_ops wrapper hooks to use the alternative_call
+infrastructure. Then proceeds to move and realign the headers to simplify the
+unnecessarily complicated header inclusions, remove the facad of being able to
+enable/disable XSM, and simplify the XSM hooks down to a single interface and
+implementation. The remainder of the changes are clean up and removing no
+longer necessary abstractions.
 
-Ian.
+v2:
+ - restructured the patches, breaking them up as needed
+ - incorporate Andrew Cooper's alternative call common code
+ - change XSM module registration, removing register_xsm
+ - incoporate KConfig recommendations
+ - reworded commit messages
+ - incorporate macro expansion recommendations
+ - misc clean-up fallout from recommendations
+
+v3:
+ - renamed struct xsm_operations to struct xsm_ops
+ - flask and silo ops structs made __initconst
+ - fixed misplacement of __init on flask/silo_init
+ - lots of coding style alignment
+ - further clean up from FLASK_DISABLE removal
+ - addressed commit message comments
+ - removed missed guard around alternative-call include
+- reworked approach to XSM hooks, merging the two interfaces instead of
+   dropping one
+
+v4:
+- make __alt_call_maybe_initdata resolve to __read_mostly when
+  CONFIG_ALTERNATIVE_CALL is not set
+- removed the masking of void with xsm_op_t
+- moved all the coding style conformity to an early commit
+- fixed declaration on real and stub declarations in xsm.h
+- corrected to __initconstrel
+- made the xsm_ops global __read_mostly
+- adjusted blank lines in xsm_ops struct to provide consistent grouping
+- moved extern references to built in policy to where they are used
+- Added back in the #ifdef CONFIG_XSM into struct evtchn
+- split the patch removing the duplicate interface up further
+
+v5
+- changed 80 col wrapping style to preferred style
+- a few additional code style cleanups caught in v4 review
+- made xsm_ops_registered __initdata
+- pulled duplicate if out of switch cases in xsm_core_init()
+- dropped struct evtchn commit
+- dropped silo hooks direct calls to xsm_default_action
+
+v6
+- adjusted alt call documentation comment
+- fixed the leak of hard tabs into the commits
+
+Andrew Cooper (1):
+  xen: Implement xen/alternative-call.h for use in common code
+
+Daniel P. Smith (9):
+  xsm: remove the ability to disable flask
+  xsm: remove remnants of xsm_memtype hook
+  xsm: drop dubious xsm_op_t type
+  xsm: apply coding style
+  xsm: refactor xsm_ops handling
+  xsm: convert xsm_ops hook calls to alternative call
+  xsm: decouple xsm header inclusion selection
+  kconfig: update xsm config to reflect reality
+  xsm: remove alternate xsm hook interface
+
+ xen/arch/x86/Kconfig               |   1 +
+ xen/common/Kconfig                 |  52 +-
+ xen/include/public/xsm/flask_op.h  |   2 +-
+ xen/include/xen/alternative-call.h |  63 +++
+ xen/include/xen/hypercall.h        |   4 +-
+ xen/include/xen/sched.h            |   2 +-
+ xen/include/xsm/dummy.h            | 215 +++++---
+ xen/include/xsm/xsm-core.h         | 266 ++++++++++
+ xen/include/xsm/xsm.h              | 802 +++++++++++++----------------
+ xen/xsm/Makefile                   |   4 +-
+ xen/xsm/dummy.c                    |   7 +-
+ xen/xsm/dummy.h                    | 659 ++++++++++++++++++++++++
+ xen/xsm/flask/flask_op.c           |  32 +-
+ xen/xsm/flask/hooks.c              |  16 +-
+ xen/xsm/silo.c                     |  11 +-
+ xen/xsm/xsm_core.c                 |  93 ++--
+ xen/xsm/xsm_policy.c               |   7 +-
+ 17 files changed, 1564 insertions(+), 672 deletions(-)
+ create mode 100644 xen/include/xen/alternative-call.h
+ create mode 100644 xen/include/xsm/xsm-core.h
+ create mode 100644 xen/xsm/dummy.h
+
+-- 
+2.20.1
+
 
