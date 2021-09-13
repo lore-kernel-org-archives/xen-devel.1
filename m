@@ -2,48 +2,42 @@ Return-Path: <SRS0=KcSv=OD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-19.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BC4CC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Sep 2021 16:31:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 21AB6C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Sep 2021 16:39:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1768B60EB4
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Sep 2021 16:31:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1768B60EB4
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id CA22360E8B
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Sep 2021 16:39:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CA22360E8B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.185806.334538 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.185842.334594 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mPorj-0001OO-8E; Mon, 13 Sep 2021 16:31:31 +0000
+	id 1mPoyy-0004hp-L3; Mon, 13 Sep 2021 16:39:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 185806.334538; Mon, 13 Sep 2021 16:31:31 +0000
+Received: by outflank-mailman (output) from mailman id 185842.334594; Mon, 13 Sep 2021 16:39:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mPorj-0001OH-5H; Mon, 13 Sep 2021 16:31:31 +0000
-Received: by outflank-mailman (input) for mailman id 185806;
- Mon, 13 Sep 2021 16:31:29 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mPorh-0001Nn-G3
- for xen-devel@lists.xenproject.org; Mon, 13 Sep 2021 16:31:29 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mPorh-00013O-DU
- for xen-devel@lists.xenproject.org; Mon, 13 Sep 2021 16:31:29 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mPorh-0006tn-CP
- for xen-devel@lists.xenproject.org; Mon, 13 Sep 2021 16:31:29 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by mariner.uk.xensource.com with esmtp (Exim 4.89)
- (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1mPorf-00038U-AR; Mon, 13 Sep 2021 17:31:27 +0100
+	id 1mPoyy-0004hi-Ha; Mon, 13 Sep 2021 16:39:00 +0000
+Received: by outflank-mailman (input) for mailman id 185842;
+ Mon, 13 Sep 2021 16:38:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=srN1=OD=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
+ id 1mPoyx-0004ha-D9
+ for xen-devel@lists.xenproject.org; Mon, 13 Sep 2021 16:38:59 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 1748f60b-14b1-11ec-b3bb-12813bfff9fa;
+ Mon, 13 Sep 2021 16:38:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,774 +49,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	Message-Id:Date:Subject:Cc:To:From;
-	bh=LGI6qRXBN2wzxnmRjeSiqUX0lkTiIFWU8AV8ecawCvA=; b=xy0ilulaO5pk4T+s6kM8DZ5uw3
-	dptotykisPW14ibh2cswk6ieDROFFMRBliIr/ZwCGs7EJuyFnX7c/VEhlPYt0ZXfRmRgWeLmZBGfY
-	ClZ+zcMrlK+yLl+D1pcqZ8DX3+LvIVfuwXZhTPDBjIGdJw69Iow+d4LOHuH+vMFNULlk=;
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 1/5] copyright notices: Add many missing notices
-Date: Mon, 13 Sep 2021 17:31:11 +0100
-Message-Id: <20210913163115.12749-1-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
+X-Inumbo-ID: 1748f60b-14b1-11ec-b3bb-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1631551137;
+  h=subject:to:cc:references:from:message-id:date:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=Dx2x2XqTpyd1p3QOah+oE8zdEEA/yEljPhBsZRZpkXo=;
+  b=auogYl2f7gzGMHQDFsI9SjzzRw+MNqqgMXTbqzkICggbt6n9d1HPNHyd
+   yuaOBHPOIJDmckmDSVTx8HTsE8cIiNNQhU6WlCXpVRT1BkZnzIlwC6tkc
+   CMSs0GOCCjVF3fx6BcE7AymilGcNZRwh5iOZ8gEUnGOnMtG/k9bp8mf7q
+   k=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: tf5oZ7PDK0TmhJPzoy6gm6CsjGC8Aw/21TQdtr//XMhnVptYLEAc8QyRsxdXmh1w2sgA2f0y8Y
+ EnPECNN0vu1bCWHsQVE0mVX1rJc+I1sz/khkj5hxCPfobYLZ+Q98Bjh5uJ/1Nel0Skk+YLNOHY
+ CVR0WaQm7qI7SYw8v/yXL06iOgjQb9sECyINu1F2QKbcqTIH81Zh3KcBU7Jjm4mjetfHl0n+DO
+ +Toii920AbzKTKqEtpf5teZGiEfwNO++bKxq5dWRPlMcWY5PhGclYVDeTL8tpcqj/Vs3rxDoKt
+ 7/N7nk+rjc0Dykg/+T0yC7JZ
+X-SBRS: 5.1
+X-MesageID: 52618433
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:yB6eI62PDIq5C2sxAfbD5fZ2kn2cJEfYwER7XKvMYLTBsI5bp2ECz
+ GMWXDyPP/iOZTP0e98iPYW3o0JXvMWEm4QyGVA/pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan0ZqTNMEn970EoywrVh2OaEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhuIwt0
+ OxxlK2KRCAqA4HyteQQVwl4DHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9t3J4XTaqFP
+ KL1bxIxbk7JXyFiB2wUN55hhb+viUjha2VH/Qf9Sa0fvDGIkV0ZPKLWGNjfd8GORM5Vtl2Fv
+ W+A9GP8ajkKOdraxTeb/3aEgu7UgTi9SI8UDKe/9PNhnBuU3GN7IAISfUu2p7++kEHWZj5EA
+ xVKoGx09/F0rRH1CImmN/GlnJKaljlAB8JpL8wL0gyqyZf43SuZC2wUbiEUPbTKq/QKqSwWO
+ k6hxo2yXGY07ezJFhpx5Z/P8mjjYnF9wXsqIHZeFFpbuYGLTJQb00qXJuuPBpJZmTEc9dvY+
+ DmMsCF2rLEal8djO06TrA2f3m7ESnQkSGcICuTrsoCNtVgRiG2NPdXABb3nARFodtrxc7V5l
+ CJY8/VyFchXZX13qMBofNjh4Znzv6rVWNEjvbKfN8Z4rGn8k5JSVatR/Ct/NC9UDyrwQhewO
+ BW7kVoIvPd7ZSL2BYcqM9PZI5l7lsDISIW6Ps04m/ITO/Cdgifcp3owDaNRtkiw+HURfVYXY
+ MfFKJn9XClDU8yKDlOeHo8g7FPi/QhnrUv7TpHn1RW3l72YYX+eU7AeN1WSKOs+6cu5TM/9q
+ b6z7uOGlEdSVvPQeC7S/dJBJFwGNyFjV5v3t9ZWZqiIJQ8/QDMtDPrYwLUAfY15nvsKyreUr
+ y/lAkIImkDigXDnKBmRbiwxYr3YQpsi/2kwOjYhPAj01iF7M5qv9qoWa7A+YaIjqL541fdxQ
+ vRcI5eAD/1DRy7p4TMYaZWh/oVueA7y3VCFPja/YSh5dJllHlSb9tjhdwrp1S8PEivo6pdu/
+ +z+jlvWGMNRSR5jAcDabOOU42mw5XVNyvhvW0boI8VIfBm++oZdNCGs3OQ8JNsBKEufy2LCh
+ RqWGxoRucLEv5QxrIvSnamBooqkT7l+E05dEzWJ5Lq6L3CHrG+qwIsGW+eUZzHNEmjz/fz6N
+ +lSyvj9NtwBnUpL7NUgQ+o6k/pm6ou9vaJewyRlAG7PPgaiBb5XK3Wb2dVC6/9WzbhDtArqA
+ k+C97G241lS1B8JxLLJGDcYUw==
+IronPort-HdrOrdr: A9a23:kIoRhaPoUvrC0MBcT1b155DYdb4zR+YMi2TDiHofdfUFSKClfp
+ 6V8cjztSWUtN4QMEtQ/exoS5PwPk80kqQFnbX5XI3SITUO3VHHEGgM1/qb/9SNIVyZygcZ79
+ YbT0EcMqyBMbEZt7eC3ODQKb9Jq7PmgcPY9ts2jU0dKj2CA5sQnjuRYTzrcHGeKjM2YKbRWK
+ Dsnfau8FGbCAoqh4mAdzU4dtmGg+eOuIPtYBYACRJiwA6SjQmw4Lq/NxSDxB8RXx5G3L9nqA
+ H+4kLEz5Tml8v+5g7X1mfV4ZgTsNz9yuFbDMjJrsQOMD3jhiuheYwkcbyfuzIepv2p9T8R4Z
+ bxiiZlG/42x2Laf2mzrxeo8w780Aw243un8lOciWuLm72zeBsKT+56wa5JeBrQ7EQt+Ptm1r
+ hQ4m6fv51LSTvdgSXU/bHzJlJXv3vxhUBnvf8YjnRZX4dbQqRWt5Yj8ERcF4pFND7m6bogDP
+ JlAKjnlbZrmGuhHjXkV1RUsZiRtixZJGbAfqFCgL3V79FupgE686NCr/Zv2Evp9/oGOtF5Dq
+ r/Q/1VfBwndL5gUUtHPpZ1fSKAMB2Fffv9ChPhHb3ZLtByB5vske+83Fxn3pDmRHQ3pKFC7q
+ gpFmko7VIPRw==
+X-IronPort-AV: E=Sophos;i="5.85,290,1624334400"; 
+   d="scan'208";a="52618433"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=WF9pudjKpxlMX+mvBxvDqVuDgFISSfoIWWAJNd5ggnh3nRe8jzReNtihCluKtT5hI8LzllXIELEOY9Oqb1woJfSNXeD2misCrf+Swn85t3A7qSSyAG8W8+oefnD0pSTqA+Q05x7NSk0u4xDMRuDnsFhMfz+Nqjcm2lKfbzrJxwhdrIoBbudj9Z0WnFAqjko4pJYly2ZcFCMx7CqoDlGXpvc9ovtBKf5GuDL5OaA+6pDvJVtV5mfEtPe/2ZbjHWYOZDshRhBTHDw6PUIc0lfx6OQzqkO2xqM3SjdIKo1wbgcLKSdPButu7Re1yZY7FNdAwOzN++sGTZtHB8aj5ToNvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=fDiQdlmJ5pKsz8BO73i8Oa/hYI1/pgvsgP1x8ianxO0=;
+ b=oJYVLbabQyBQo2JbWP5x836/iA7n4DVSKpR9olaqAMvZXpTde7gFH7Av/+0iSpzuXRJDoPT/88TFFQNaMb3pwmNzzab1/zfO9x0DgFQ1pSpfPydxX+zVf97aAXoat3SNuVf5LwSEBz4cIJUGRLx3Xr6RHcgieGdinOwPJSPSelTZOj4BtgvaeHdM9HKc/F+MoxrDhy88JOqFrNZQOaYNtNNJPd97wzL3A+S3LmjOH5XTk7bSUM0ZS1bs/OlWDE5eXP9Vut+OWM2p1EvOr9fymYdK4D7lG5nuL+mnhT8e8v9rHQru1dwUTVdB2CnsFcGhbE38MNzDnj7K8ZJ93iDCFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fDiQdlmJ5pKsz8BO73i8Oa/hYI1/pgvsgP1x8ianxO0=;
+ b=XOH1nB0jNqPhRRIMHW4q5SU8+tN+ipmP2WoA/rGt09wh2x1fRBnVpG/MO1vZzMnRfSNu+v/QGZ6dlbzulMEIATZ6nZ/E5TvJy0eKPSFc/dm3Kg902ed7df2w93ZSuq9631XTvGX73GwRlzs6a8h2XPhLLA4h5AiIXxHbc8x35Bk=
+Subject: Re: [PATCH] x86/boot: properly "ignore" early evaluated
+ "no-real-mode"
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+	<roger.pau@citrix.com>
+References: <6b7e3281-4893-a5fb-cd1e-5b1918a1ee05@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <cb65f6ad-7a43-6a66-e31b-69c123103c26@citrix.com>
+Date: Mon, 13 Sep 2021 17:38:48 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+In-Reply-To: <6b7e3281-4893-a5fb-cd1e-5b1918a1ee05@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: LO4P123CA0365.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18e::10) To BYAPR03MB3623.namprd03.prod.outlook.com
+ (2603:10b6:a02:aa::12)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: a6827bb7-c37a-4a48-8ec2-08d976d4f9d6
+X-MS-TrafficTypeDiagnostic: BYAPR03MB3495:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <BYAPR03MB34952D57727DB9C62B3B04ACBAD99@BYAPR03MB3495.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:972;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: qcARUnWDk3Pmo+FLFjvWuZMBt275G62myftknR61c7hbBaAXVKbKXh9alPanIk8SRGMr38lf5wkxRLVGlzHyuylCAvSrW0XeaJJ7pI3sDLfYAUpSQN8MRPfM7aU+BbV+TJZHbKce+T5Y1BxjZZok+5GqI26MYrgJ4WbnBSLJDU528r5IQQwaAeYm8cS/TXshr/oDS4W4CjtSN2ijKy2J+REKTc9YVt6/msECqMsdECWhvko2nXCQpNkOCVdUj/3Tq8g2UNsxxsm2Hdow8RBHSoncKfw5/eUPAkXsc3mP6RNiF00Ny7ElMfxjgtmejoSEqQf4omsfjEf1ZBJv7Mo1EYPvDi0zcfD+Fg5aCVgaEA9Oh31dqSUqY15MmoNcVQHSPWmbecOzLLmGYZug+AkHipAK0aZGhY+mASgu3GZuO94hvCm15jw9x0u2SNeh8/ZbJfwHUsh6gfOFkmX7H98qD/PcKR/SyzeR8XL1i5/RStTqs1JB/jloCIeL4KcMupVS+Mz1YWEwkVZsD2DPe3AHmx9xVtu7aa/1H2FU3FxbPxQEmKbz4OlvEqC0RVpMEy6fTMLcy65fEufxEegx7/A7kAcb0WAkjq6lHOVRYKRg4yCq67xw82JqfMsZQOulQ059Fn4v8VbfioMCdmJLw5m7A7XbPsPTGAmlI2RlojfwYOiGMfupO2TZfBmI+yLXW0VniTP4yIFovl3H7+s0xQdTg4NEtK3gjDw8olx6UGCszO0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(86362001)(31696002)(54906003)(66946007)(508600001)(107886003)(956004)(2616005)(31686004)(66556008)(66476007)(55236004)(5660300002)(26005)(186003)(38100700002)(4326008)(316002)(6486002)(8676002)(36756003)(16576012)(4744005)(8936002)(6666004)(2906002)(53546011)(110136005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bTZTSGJoVUxscExOL1o2Z2kvajdZSGRkNUJnUWVpaVdQYTd4dlMreXFGakFn?=
+ =?utf-8?B?c0dyTjNhRGZnc0xKSUkyckVrVjUrZ1hqVngwN2NJbmZTSzRvVnpPaGd1UW9C?=
+ =?utf-8?B?NnFlYVVlRlNyeURCMU5oUkgwSmRJWHV5TjZhM1hnVjZ6THRKM1hOUW43UlA5?=
+ =?utf-8?B?WmQzeDhPaExhdDYyenE1dTRHb29KSWVXaER0UXphVnl5aFA3V3RLeHlrc1c5?=
+ =?utf-8?B?cFBka3JBZjBJd3NLN2pQbFFPbTBqdmhZd2syR3ZDc0FRM1M5TExwSHJRc0pw?=
+ =?utf-8?B?Zm1KOTdobHdUMGI5RU80cXBBTUcxM1R2Qzk4ZitURElNZ0t4TzU5TlZqNUR6?=
+ =?utf-8?B?Q21ZNnhtMGVCS0V0ZHcxQkFLYmNQZU1HNThFcHZCZzJIcmp6YTJTOXFJVURn?=
+ =?utf-8?B?a0JlM3BtTTJodS9Xb1NaWFp6c25Va0g1d2JpT3NTeDhvQ0RDNXlzaE8zWXJB?=
+ =?utf-8?B?d3h0U3lBem8zaVlJbVNGVE5vRGw2RWNnTUMxS1VQNTNMb3BpaTdFK1pGZkc1?=
+ =?utf-8?B?cUpKenFxYmowNjRXTlIrUFFVbkpneWIwY3IrVnhWTlpiREZVbGRNRmxwajlj?=
+ =?utf-8?B?RmxEb0NKVVhJWFFhT0FjaE5HUDFJdkwxUHdRV2xpRWJYRGRJNE5zbWFJcUEy?=
+ =?utf-8?B?cFQyeG1vWWJ4SHBHUzh5ODl5a0wyZ0JTZDJKNDhZNDZPYmZWSTdFcFNGYSt2?=
+ =?utf-8?B?K1l0M1FLdXJRTGozc0dleStNT1lVL1dSWmlxOWxFK2lxNWFibDVzaGxtdG01?=
+ =?utf-8?B?TDhnNzRKbiticE4yMXdMV1FJZ1g1L21MWjUyV005clNrVTUvUDU4c0w0WFpQ?=
+ =?utf-8?B?WlR6RW5HTG9sQnhCRXZwaXhtWExnWngzZ2g2RXNaaHdYN2JYY2lCYzc4alFw?=
+ =?utf-8?B?Z3ZSbndKL1RLY2xlQllPNmFTQWZWcVFmQzNHODByU2RuVUFNWEFZSUVSMDFT?=
+ =?utf-8?B?R0VMY0hXd0ZMSXVwMjU5b0hzdTdOM2hlY245L044eTBQZXhPbThwK3IzTk9t?=
+ =?utf-8?B?Z0Y4REFrbUVrTzFyYzFhWXZ4RmViYmkvNXUvV0xDNlA1c3htWmdyWlkvTi9E?=
+ =?utf-8?B?cmNBc0p1TkZLZElhbzdtblptWWNuclFsU082VlVKaTFhTXR3cTE0d0d3K0xS?=
+ =?utf-8?B?WkMzZ29jSGlnNFR2cjJWcWp5RVpBalNkc1hvT3hsL1pEdzRTTFYrZlVwQjRI?=
+ =?utf-8?B?bnVJSzMvRkxWZGVRKzNnYytiVFRmbFBDSkRTYUJuLzBXaXVDdmtsZW1HQkFh?=
+ =?utf-8?B?L1VXSld6dU9TQTFHU0Vzek1iTEZzZkZnVEIrcUZlNi9uZ3BYUFJISk5Mem9a?=
+ =?utf-8?B?NFdPOVNpL0xIemlMa3F6aDBIU3Y0clBoWEtsUFh1WmQrcks4aHFDc0RHMFBo?=
+ =?utf-8?B?WE1vbE5QZ0NOMjhyQ0hWOEYySEU1WnNuMndWbE5sbkFZazM3eW1oZE5HWFpX?=
+ =?utf-8?B?VjdiWGtjUTVIaXdHOUd4a0pLLzdmYWlzYWp2bEpTMElJcStYOGJaL3Q4dXFq?=
+ =?utf-8?B?L25RbGdxUGMrMnlBRmhyN01ITjFSYi95bFRLMC93L3p2VnVQQ3J6NTBkWmll?=
+ =?utf-8?B?MEJxa2s3NWs3UERjL0t6bm1BYnNlQUY3bE4waUQycVFNSEtEeDhnTy9wcjlB?=
+ =?utf-8?B?SVpDQzAwdGZNNUVLUzdnQnhBR2RsdkdMWG5Weno3Y2JWSURLUlVUVGdNaGl0?=
+ =?utf-8?B?V3hUTFNaZDhhQkFjcWJVcjJmaU9MbFV5TDFOTXBCSW5teGlJM1FjdkdtYzhZ?=
+ =?utf-8?Q?ba0bg/cnUysojdLclk4hlfLoJlNqKjY+hsh7l+L?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: a6827bb7-c37a-4a48-8ec2-08d976d4f9d6
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Sep 2021 16:38:54.7347
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: knZ+LIp2j3M9zbCb3OJPEeKs+IckGT4bfNrlbQcVfzfVXaK6yiRb9Fs7RzZcuXSdKRrFm8lZsnF6oC0NIhER5Y5nvfxY4hGEsZmR7RsuHnM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR03MB3495
+X-OriginatorOrg: citrix.com
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
----
- mg-adjust-flight-makexrefs          | 16 ++++++++++++++++
- mg-blockage                         | 16 ++++++++++++++++
- mg-branch-setup                     | 16 ++++++++++++++++
- mg-crontab-install                  | 16 ++++++++++++++++
- mg-debug-fail                       | 16 ++++++++++++++++
- mg-force-push                       | 16 ++++++++++++++++
- mg-hostalloc-starvation-demo        | 16 ++++++++++++++++
- mg-list-all-branches                | 16 ++++++++++++++++
- mg-report-host-usage-tuples         | 16 ++++++++++++++++
- mg-schema-test-database             | 18 +++++++++++++++++-
- ms-flights-summary                  | 16 ++++++++++++++++
- schema/drop-old-resource-log.sql    | 16 ++++++++++++++++
- schema/flights-started-index.sql    | 16 ++++++++++++++++
- schema/host-lifecycle.sql           | 16 ++++++++++++++++
- schema/initial.sql                  | 16 ++++++++++++++++
- schema/runvars-built-index.sql      | 16 ++++++++++++++++
- schema/runvars-host-index.sql       | 16 ++++++++++++++++
- schema/runvars-revision-index.sql   | 16 ++++++++++++++++
- schema/schema-updates.sql           | 16 ++++++++++++++++
- schema/steps-broken-index.sql       | 16 ++++++++++++++++
- schema/steps-job-index.sql          | 16 ++++++++++++++++
- schema/steps-logfile-add.sql        | 16 ++++++++++++++++
- schema/steps-logfile-constraint.sql | 16 ++++++++++++++++
- schema/testid-constraint.sql        | 16 ++++++++++++++++
- standalone                          | 16 ++++++++++++++++
- ts-repeat-test                      | 16 ++++++++++++++++
- ts-xen-build-rump                   | 16 ++++++++++++++++
- 27 files changed, 433 insertions(+), 1 deletion(-)
+On 13/09/2021 17:02, Jan Beulich wrote:
+> The option parser takes off "no-" prefixes before matching, so they also
+> shouldn't be specified to match against.
+>
+> Fixes: e44d98608476 ("x86/setup: Ignore early boot parameters like no-real-mode")
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-diff --git a/mg-adjust-flight-makexrefs b/mg-adjust-flight-makexrefs
-index e3716c4c..73f3ed4e 100755
---- a/mg-adjust-flight-makexrefs
-+++ b/mg-adjust-flight-makexrefs
-@@ -23,6 +23,22 @@
- #             passing --debug in REF-CONDS too)
- #   -n      Dry run: do not actually run cs-adjust-flight
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- set -e -o posix
- 
- exec 3>/dev/null
-diff --git a/mg-blockage b/mg-blockage
-index dbec6df5..a61cba38 100755
---- a/mg-blockage
-+++ b/mg-blockage
-@@ -2,6 +2,22 @@
- #
- # usage: ./mg-blockage <date-from> <date-to> <hostflag> [<extra-xinfo>]
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- use strict qw(vars refs);
- use DBI;
- use Data::Dumper;
-diff --git a/mg-branch-setup b/mg-branch-setup
-index de61cc5d..ec48aee1 100755
---- a/mg-branch-setup
-+++ b/mg-branch-setup
-@@ -15,6 +15,22 @@
- #  - create any input/output tree on xenbits
- #  - run any test flights (obviously)
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- set -e -o posix
- 
- fail () { echo >&2 "$*"; exit 1; }
-diff --git a/mg-crontab-install b/mg-crontab-install
-index 4df8e6e8..49184dfb 100755
---- a/mg-crontab-install
-+++ b/mg-crontab-install
-@@ -4,6 +4,22 @@
- # where CRONTAB is a file containing a line
- #  #@@ USER@HOSTFQDN
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- set -e -o posix
- 
- case "$#.$1" in
-diff --git a/mg-debug-fail b/mg-debug-fail
-index 47ad68ab..89e98b30 100755
---- a/mg-debug-fail
-+++ b/mg-debug-fail
-@@ -4,6 +4,22 @@
- # wanted.  It prints its arguments, and its stdin, to its stderr, and
- # then exits nonzero.
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- if tty >/dev/null 2>&1; then
- 	exec </dev/null
- fi
-diff --git a/mg-force-push b/mg-force-push
-index 9c3cc786..286c1442 100755
---- a/mg-force-push
-+++ b/mg-force-push
-@@ -7,6 +7,22 @@
- #  valid for ap-fetch and ap-print-url
- #  the branch of flight FLIGHT
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- use strict;
- use warnings;
- 
-diff --git a/mg-hostalloc-starvation-demo b/mg-hostalloc-starvation-demo
-index 7944cc24..f9441822 100755
---- a/mg-hostalloc-starvation-demo
-+++ b/mg-hostalloc-starvation-demo
-@@ -1,5 +1,21 @@
- #!/usr/bin/perl -w
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- use strict;
- BEGIN { unshift @INC, qw(.); }
- 
-diff --git a/mg-list-all-branches b/mg-list-all-branches
-index 989b5ae7..1a04f617 100755
---- a/mg-list-all-branches
-+++ b/mg-list-all-branches
-@@ -2,6 +2,22 @@
- # prints on stdout a list of all the "branches"
- # mentioned in cr-daily-branch or crontab
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- use strict;
- use Sort::Versions;
- 
-diff --git a/mg-report-host-usage-tuples b/mg-report-host-usage-tuples
-index 375da888..0837cdab 100755
---- a/mg-report-host-usage-tuples
-+++ b/mg-report-host-usage-tuples
-@@ -1,5 +1,21 @@
- #!/usr/bin/python3
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- import re as regexp
- import sys
- import json
-diff --git a/mg-schema-test-database b/mg-schema-test-database
-index 357646bb..eae5d97e 100755
---- a/mg-schema-test-database
-+++ b/mg-schema-test-database
-@@ -1,5 +1,21 @@
- #!/bin/bash
--#
-+
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- # usages:
- #
- #
-diff --git a/ms-flights-summary b/ms-flights-summary
-index 8293d4f6..a2507249 100755
---- a/ms-flights-summary
-+++ b/ms-flights-summary
-@@ -1,5 +1,21 @@
- #!/usr/bin/perl -w
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- use strict qw(vars refs);
- 
- BEGIN { unshift @INC, qw(.); }
-diff --git a/schema/drop-old-resource-log.sql b/schema/drop-old-resource-log.sql
-index 9494e1b9..f3dd9ce6 100644
---- a/schema/drop-old-resource-log.sql
-+++ b/schema/drop-old-resource-log.sql
-@@ -4,5 +4,21 @@
- -- aborted attempt at resource logging.  Nothing actually reads or
- -- writes it.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- DROP TABLE resource_log;
- DROP SEQUENCE resource_log_evid_seq;
-diff --git a/schema/flights-started-index.sql b/schema/flights-started-index.sql
-index c230d9d8..b26fc641 100644
---- a/schema/flights-started-index.sql
-+++ b/schema/flights-started-index.sql
-@@ -3,5 +3,21 @@
- -- This index helps ts-hosts-allocate-Executive find recent instances
- -- of the same job.  It may be useful for other things too.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE INDEX flights_blessing_started_idx
-     ON flights (blessing, started);
-diff --git a/schema/host-lifecycle.sql b/schema/host-lifecycle.sql
-index 7e4fc2aa..6a7b2546 100644
---- a/schema/host-lifecycle.sql
-+++ b/schema/host-lifecycle.sql
-@@ -5,6 +5,22 @@
- -- reinitialised.  The information is persisted by being copied
- -- into a runvar for each job.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE SEQUENCE host_lifecycle_lcseq_seq
-     NO CYCLE;
- 
-diff --git a/schema/initial.sql b/schema/initial.sql
-index 4feeeb20..f9d120ae 100644
---- a/schema/initial.sql
-+++ b/schema/initial.sql
-@@ -2,6 +2,22 @@
- -- PostgreSQL database dump
- --
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- SET statement_timeout = 0;
- SET client_encoding = 'UTF8';
- SET standard_conforming_strings = off;
-diff --git a/schema/runvars-built-index.sql b/schema/runvars-built-index.sql
-index 128e69e9..8d1eadc9 100644
---- a/schema/runvars-built-index.sql
-+++ b/schema/runvars-built-index.sql
-@@ -2,6 +2,22 @@
- --
- -- This index helps sg-report-flight find relevant flights.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE INDEX runvars_built_revision_idx
-     ON runvars (val)
-  WHERE name LIKE 'built\_revision\_%';
-diff --git a/schema/runvars-host-index.sql b/schema/runvars-host-index.sql
-index 6a3ef377..0760b219 100644
---- a/schema/runvars-host-index.sql
-+++ b/schema/runvars-host-index.sql
-@@ -2,6 +2,22 @@
- --
- -- This index helps sg-report-host-history find relevant flights.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE INDEX runvars_host_idx
-     ON runvars (val, flight)
-  WHERE name ='host'
-diff --git a/schema/runvars-revision-index.sql b/schema/runvars-revision-index.sql
-index 25306354..4224b644 100644
---- a/schema/runvars-revision-index.sql
-+++ b/schema/runvars-revision-index.sql
-@@ -2,6 +2,22 @@
- --
- -- This index helps Executive::report__find_test find relevant flights.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE INDEX runvars_revision_idx
-     ON runvars (val)
-  WHERE name LIKE 'revision\_%';
-diff --git a/schema/schema-updates.sql b/schema/schema-updates.sql
-index cd8dc0ca..9b932a81 100644
---- a/schema/schema-updates.sql
-+++ b/schema/schema-updates.sql
-@@ -1,5 +1,21 @@
- -- ##OSSTEST## 001 Harmless
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE TABLE schema_updates (
-     updatename TEXT PRIMARY KEY,
-     applytime integer NOT NULL
-diff --git a/schema/steps-broken-index.sql b/schema/steps-broken-index.sql
-index 770747cc..d2e18d73 100644
---- a/schema/steps-broken-index.sql
-+++ b/schema/steps-broken-index.sql
-@@ -2,6 +2,22 @@
- --
- -- This index helps cs-bisection-flight check if flighss are broken.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE INDEX steps_broken_idx
-     ON steps (flight)
-  WHERE status='broken';
-diff --git a/schema/steps-job-index.sql b/schema/steps-job-index.sql
-index 2c33af72..21a6cf20 100644
---- a/schema/steps-job-index.sql
-+++ b/schema/steps-job-index.sql
-@@ -2,6 +2,22 @@
- --
- -- This index helps sg-report-flight find if a test ever passed.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- CREATE INDEX steps_job_testid_status_idx
-     ON steps (job, testid, status);
- 
-diff --git a/schema/steps-logfile-add.sql b/schema/steps-logfile-add.sql
-index abc89b9e..8be5469e 100644
---- a/schema/steps-logfile-add.sql
-+++ b/schema/steps-logfile-add.sql
-@@ -5,4 +5,20 @@
- --
- -- This change is compatible with old code.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- ALTER TABLE steps ADD COLUMN logfile TEXT;
-diff --git a/schema/steps-logfile-constraint.sql b/schema/steps-logfile-constraint.sql
-index f6f8a744..3d8b556d 100644
---- a/schema/steps-logfile-constraint.sql
-+++ b/schema/steps-logfile-constraint.sql
-@@ -3,6 +3,22 @@
- -- Previously, the logfile name was inferred from "stepno" and
- -- "testid".  Newer code will need it to be set explicitly.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- UPDATE steps
-    SET logfile = stepno || '.' || step || '.log'
-  WHERE logfile IS NULL;
-diff --git a/schema/testid-constraint.sql b/schema/testid-constraint.sql
-index 541f26e6..d1c3421e 100644
---- a/schema/testid-constraint.sql
-+++ b/schema/testid-constraint.sql
-@@ -5,6 +5,22 @@
- --
- -- The time_t value is Tue Jul  3 17:09:12 BST 2012, 5 years ago.
- 
-+-- This is part of "osstest", an automated testing framework for Xen.
-+-- Copyright (C) 2009-2020 Citrix Inc.
-+-- 
-+-- This program is free software: you can redistribute it and/or modify
-+-- it under the terms of the GNU Affero General Public License as published by
-+-- the Free Software Foundation, either version 3 of the License, or
-+-- (at your option) any later version.
-+-- 
-+-- This program is distributed in the hope that it will be useful,
-+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-- GNU Affero General Public License for more details.
-+-- 
-+-- You should have received a copy of the GNU Affero General Public License
-+-- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- WITH cutoff AS
-    (SELECT 1341331754)
- UPDATE steps
-diff --git a/standalone b/standalone
-index 4d1f3513..bc4e8ba8 100755
---- a/standalone
-+++ b/standalone
-@@ -1,5 +1,21 @@
- #!/bin/bash
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- set -e -o posix
- 
- usage() {
-diff --git a/ts-repeat-test b/ts-repeat-test
-index 5e17c335..619c0359 100755
---- a/ts-repeat-test
-+++ b/ts-repeat-test
-@@ -10,6 +10,22 @@
- # -          before script name means to ignore errors
- # \          at the start of any ARGSPEC is removed (after the checks above)
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- use strict;
- BEGIN { unshift @INC, qw(.); }
- use Osstest::TestSupport;
-diff --git a/ts-xen-build-rump b/ts-xen-build-rump
-index 9ea595b9..8b31a44b 100755
---- a/ts-xen-build-rump
-+++ b/ts-xen-build-rump
-@@ -1,6 +1,22 @@
- #!/bin/sh
- set -ex
- 
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
- exec ./ts-xen-build "$@"						\
- 	--disable-ovmf --disable-seabios --disable-blktap2		\
- 	--disable-rombios --disable-qemu-traditional			\
--- 
-2.20.1
+Oops.
+
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+>
+> --- a/xen/arch/x86/setup.c
+> +++ b/xen/arch/x86/setup.c
+> @@ -692,7 +692,7 @@ static void __init noreturn reinit_bsp_s
+>   * has options that are only used during the very initial boot process,
+>   * so they can be ignored now.
+>   */
+> -ignore_param("no-real-mode");
+> +ignore_param("real-mode");
+>  ignore_param("edd");
+>  ignore_param("edid");
+>  
+>
 
 
