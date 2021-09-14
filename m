@@ -2,78 +2,43 @@ Return-Path: <SRS0=GvD8=OE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C41F0C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 05:48:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF4FCC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 06:09:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8C80E60F6D
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 05:48:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8C80E60F6D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.ibm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 74573610FB
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 06:09:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 74573610FB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.186117.334844 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.186133.334855 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQ1J2-0001J1-EF; Tue, 14 Sep 2021 05:48:32 +0000
+	id 1mQ1d1-0003w4-Od; Tue, 14 Sep 2021 06:09:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 186117.334844; Tue, 14 Sep 2021 05:48:32 +0000
+Received: by outflank-mailman (output) from mailman id 186133.334855; Tue, 14 Sep 2021 06:09:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQ1J2-0001Iu-BG; Tue, 14 Sep 2021 05:48:32 +0000
-Received: by outflank-mailman (input) for mailman id 186117;
- Tue, 14 Sep 2021 05:48:31 +0000
+	id 1mQ1d1-0003vx-LY; Tue, 14 Sep 2021 06:09:11 +0000
+Received: by outflank-mailman (input) for mailman id 186133;
+ Tue, 14 Sep 2021 06:09:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rbOp=OE=linux.ibm.com=rppt@srs-us1.protection.inumbo.net>)
- id 1mQ1J1-0001I3-2P
- for xen-devel@lists.xenproject.org; Tue, 14 Sep 2021 05:48:31 +0000
-Received: from mx0a-001b2d01.pphosted.com (unknown [148.163.158.5])
+ <SRS0=Vvn+=OE=linaro.org=francois.ozog@srs-us1.protection.inumbo.net>)
+ id 1mQ1d0-0003vr-Pz
+ for xen-devel@lists.xen.org; Tue, 14 Sep 2021 06:09:10 +0000
+Received: from mail-ej1-x629.google.com (unknown [2a00:1450:4864:20::629])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e41cb6b8-8109-4ec0-bc3f-57996218d330;
- Tue, 14 Sep 2021 05:48:30 +0000 (UTC)
-Received: from pps.filterd (m0098413.ppops.net [127.0.0.1])
- by mx0b-001b2d01.pphosted.com (8.16.1.2/8.16.0.43) with SMTP id 18E4Z3cw022268;
- Tue, 14 Sep 2021 01:48:15 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0b-001b2d01.pphosted.com with ESMTP id 3b2mub92ab-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Sep 2021 01:48:14 -0400
-Received: from m0098413.ppops.net (m0098413.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 18E5ScOh028181;
- Tue, 14 Sep 2021 01:48:14 -0400
-Received: from ppma03fra.de.ibm.com (6b.4a.5195.ip4.static.sl-reverse.com
- [149.81.74.107])
- by mx0b-001b2d01.pphosted.com with ESMTP id 3b2mub929x-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Sep 2021 01:48:14 -0400
-Received: from pps.filterd (ppma03fra.de.ibm.com [127.0.0.1])
- by ppma03fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 18E5m7mT029668;
- Tue, 14 Sep 2021 05:48:12 GMT
-Received: from b06cxnps4075.portsmouth.uk.ibm.com
- (d06relay12.portsmouth.uk.ibm.com [9.149.109.197])
- by ppma03fra.de.ibm.com with ESMTP id 3b0m396afd-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 14 Sep 2021 05:48:12 +0000
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
- [9.149.105.62])
- by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 18E5mAxD42402234
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 14 Sep 2021 05:48:10 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id DE347AE045;
- Tue, 14 Sep 2021 05:48:09 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 2EBD8AE04D;
- Tue, 14 Sep 2021 05:48:09 +0000 (GMT)
-Received: from linux.ibm.com (unknown [9.145.48.104])
- by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
- Tue, 14 Sep 2021 05:48:09 +0000 (GMT)
+ id 42ca1a73-2553-4368-8875-c80cc8b593bf;
+ Tue, 14 Sep 2021 06:09:08 +0000 (UTC)
+Received: by mail-ej1-x629.google.com with SMTP id kt8so26287558ejb.13
+ for <xen-devel@lists.xen.org>; Mon, 13 Sep 2021 23:09:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -85,97 +50,259 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e41cb6b8-8109-4ec0-bc3f-57996218d330
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=date : from : to : cc :
- subject : message-id : references : content-type : in-reply-to :
- content-transfer-encoding : mime-version; s=pp1;
- bh=/VpZtdNzYrqZuVxW4hiLpEQZyzc1BnA7ReJVDhGvUQM=;
- b=fRRa085lMIf10cd1d2LKhroHGVoD82F+WhYU2LacffXPmPzaesAqO6iF8/rhhdeY4lq/
- 7nw5RQ2POFuEn/oCHDAF5JGnc8USWKF/+WcFMQl6qi0yea3VBC8otUUeD8R8885tyWeN
- Udqaya71hvz/fAP9WdQMrAhglHO5RDjHtI+XCEdRhpsrNedtYN2nGAkkR19HFUWEcYNx
- CkJntheHv9iZAztWpdSxVYalhP2c4TA3vrVLHCcswfsL7+MPWqXqO82vucM7fPfWk8Xf
- hb/K6QGORJIG25nCoaMOW/ldznO7R8HcPzt96K5ZpAtoTjAQCE8NG9LkiwF0Yzn2/2/j fA== 
-Date: Tue, 14 Sep 2021 08:48:07 +0300
-From: Mike Rapoport <rppt@linux.ibm.com>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@suse.de>,
-        Thomas Gleixner <tglx@linutronix.de>, x86@kernel.org,
-        linux-kernel@vger.kernel.org,
-        xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: Linux 5.13+ as Xen dom0 crashes on Ryzen CPU (ucode loading
- related?)
-Message-ID: <YUA3l0gnTh0gDJ4d@linux.ibm.com>
-References: <YT9I+Xs9wOPVCIVd@mail-itl>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <YT9I+Xs9wOPVCIVd@mail-itl>
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: -uT1WsMIWRkcvek1E0xEUKDb7S2Mk9gy
-X-Proofpoint-GUID: Lm4V19AmkqSPfjviWQ2kZm2WQyq4nFi0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+X-Inumbo-ID: 42ca1a73-2553-4368-8875-c80cc8b593bf
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=x5x/V1DMBpywPx69cHTaTCF0A6jodnWq7plIsPoJoZk=;
+        b=Z8u45XjMILFKL6nckgNBk1879wdxaTAqWCYIJBe+BOBzAzi8McV0zqm+CMG5JpN8XA
+         gx6DSYrD1tXNYthKeuToJ//pa192J1PRfArkmnZR3MzwqNAqXmVNskFosVq+MbztsenH
+         a0QVMmbmnRbSyGQzGTut94BiUiscpVm+5sljTvIK2eueg5qMAkIOrjTuIepwdfZ5MmNe
+         2kWHAUG05Ztekfl+dzGHTbxik9VD1ClIckycGpjtVXWcUjRD+jlIxIGb2nOhn3OySec0
+         J/K+60GmqMevwrPkQrDT0a+S5BwFepBU2auwPrerMnwXtFlp+f/sT6LXBsbbAdy/omrz
+         f9JA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=x5x/V1DMBpywPx69cHTaTCF0A6jodnWq7plIsPoJoZk=;
+        b=3CjSyAeApxsrtqWiBMyhCFK6QOzOHjNqzucv5ZuHeF3fiHJMQ2FUNAcBWkv759LPn7
+         jRDA3zgBb0BzJvEPQ8VFyEIAcwevwDtMR0EfySTeoRumiH09P3onF5uxMf7+lQcHPZNx
+         jv5uriQnXBI5pU5gd3b4wl8e+qoSdeXFbNpuqMEP5So3lQbCGn9Rz1jCdCixw+syJwUc
+         Ue4ZtLQX8VmLSLf/PJH8Irl0hDjk5K1w403Mi10yyjdeTzBiyLe3TH5S/mjqq6eIJtYQ
+         BCtGZNaChozW/Ums/MQK7MqDlPBqRF8AhGlpIpu7WXUcnKxOCVN+mUdTh/f/LSkOE6rB
+         BJ4A==
+X-Gm-Message-State: AOAM533iPOkBhfl7MFBHieE7NfhTuUkOJ1G3lmHe2Two8DXLlbGigM5u
+	cXhZXLc9yboIJYMjLqb+9OmnrDHB51trGuB/P6Lcfw==
+X-Google-Smtp-Source: ABdhPJwHefPyM/dt/KdBSgsrxLB2rVvE3l71w2Kr+TINTLh4FPMK7X9eRXOFh7owrwLasT/fiWrzFP7dbnrFty3nuBA=
+X-Received: by 2002:a17:906:2c0b:: with SMTP id e11mr17193602ejh.284.1631599747573;
+ Mon, 13 Sep 2021 23:09:07 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.687,Hydra:6.0.235,FMLib:17.0.607.475
- definitions=2020-10-13_15,2020-10-13_02,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 clxscore=1011
- malwarescore=0 mlxlogscore=999 suspectscore=0 spamscore=0
- lowpriorityscore=0 mlxscore=0 adultscore=0 impostorscore=0 phishscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2109030001 definitions=main-2109140018
+References: <87v94ldrqq.fsf@linaro.org> <alpine.DEB.2.21.2108041055390.9768@sstabellini-ThinkPad-T480s>
+ <YRuSPT9075NuWRYS@stefanha-x1.localdomain> <875yvkh1p1.fsf@linaro.org>
+ <20210903080609.GD47953@laputa> <87czpqq9qu.fsf@linaro.org>
+ <20210906022356.GD40187@laputa> <alpine.DEB.2.21.2109131615570.10523@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2109131615570.10523@sstabellini-ThinkPad-T480s>
+From: =?UTF-8?Q?Fran=C3=A7ois_Ozog?= <francois.ozog@linaro.org>
+Date: Tue, 14 Sep 2021 08:08:56 +0200
+Message-ID: <CAHFG_=WNfq7etkA1CG_xuPzaTJ7wtmBuWN5ES-uwwErLVCpEcw@mail.gmail.com>
+Subject: Re: [Stratos-dev] Enabling hypervisor agnosticism for VirtIO backends
+To: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, Arnd Bergmann <arnd.bergmann@linaro.org>, 
+	Artem_Mygaiev@epam.com, Bertrand.Marquis@arm.com, 
+	Carl van Schaik <cvanscha@qti.qualcomm.com>, Elena Afanasova <eafanasova@gmail.com>, 
+	Jan Kiszka <jan.kiszka@siemens.com>, Oleksandr_Tyshchenko@epam.com, 
+	Stefan Hajnoczi <stefanha@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Stratos Mailing List <stratos-dev@op-lists.linaro.org>, jgross@suse.com, julien@xen.org, 
+	olekstysh@gmail.com, paul@xen.org, virtio-dev@lists.oasis-open.org, 
+	xen-devel@lists.xen.org
+Content-Type: multipart/alternative; boundary="0000000000005ec22105cbee6b8c"
 
-Hi Marek,
+--0000000000005ec22105cbee6b8c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 13, 2021 at 02:50:00PM +0200, Marek Marczykowski-Górecki wrote:
-> Hi,
-> 
-> Since 5.13, the Xen (PV) dom0 crashes on boot, before even printing the
-> kernel version.
-> Test environment:
->  - Xen 4.14.2
->  - AMD Ryzen 5 4500U (reported also on AMD Ryzen 7 4750U)
->  - Linux 5.13.13, confirmed also on 5.14
-> 
-> The crash happens only if the initramfs has earlycpio with microcode.
+Hi
 
-Does the crash happen if you boot the same kernel and initrd directly
-without Xen?
+Le mar. 14 sept. 2021 =C3=A0 01:51, Stefano Stabellini via Stratos-dev <
+stratos-dev@op-lists.linaro.org> a =C3=A9crit :
 
-> I don't have a serial console, but I've got a photo with crash message
-> (from Xen, Linux doesn't managed to print anything):
-> https://user-images.githubusercontent.com/726704/133084966-5038f37e-001b-4688-9f90-83d09be3dc2d.jpg
-> 
-> Transcription of some of it:
-> 
->     mapping kernel into physical memory
->     about to get started
->     (XEN) Pagetable walk from ffffffff82810888:
->     (XEN)  L4[0x1ff] = 0000000332815067 0000000000002815
->     (XEN)  L3[0x1fe] = 0000000332816067 0000000000002816
->     (XEN)  L2[0x014] = 0000000334018067 0000000000004018
->     (XEN)  L1[0x010] = 0000000332810067 0000000000002810
->     (XEN) domain_crash_sync called from entry.S: fault at ffff82d04033e790 x86_64/entry.S#domain_crash_page_fault
->     (XEN) Domain 0 (vcpu#0) crashed on cpu#0:
->     (XEN) ----[ Xen-4.14.2  x86_64  debug=n  Not tainted ]----
->     (XEN) CPU:    0
->     (XEN) RIP:    e033:[<0000000000000000>]
+> On Mon, 6 Sep 2021, AKASHI Takahiro wrote:
+> > > the second is how many context switches are involved in a transaction=
+.
+> > > Of course with all things there is a trade off. Things involving the
+> > > very tightest latency would probably opt for a bare metal backend whi=
+ch
+> > > I think would imply hypervisor knowledge in the backend binary.
+> >
+> > In configuration phase of virtio device, the latency won't be a big
+> matter.
+> > In device operations (i.e. read/write to block devices), if we can
+> > resolve 'mmap' issue, as Oleksandr is proposing right now, the only
+> issue is
+> > how efficiently we can deliver notification to the opposite side. Right=
+?
+> > And this is a very common problem whatever approach we would take.
+> >
+> > Anyhow, if we do care the latency in my approach, most of virtio-proxy-
+> > related code can be re-implemented just as a stub (or shim?) library
+> > since the protocols are defined as RPCs.
+> > In this case, however, we would lose the benefit of providing "single
+> binary"
+> > BE.
+> > (I know this is is an arguable requirement, though.)
+>
+> In my experience, latency, performance, and security are far more
+> important than providing a single binary.
+>
+> In my opinion, we should optimize for the best performance and security,
+> then be practical on the topic of hypervisor agnosticism. For instance,
+> a shared source with a small hypervisor-specific component, with one
+> implementation of the small component for each hypervisor, would provide
+> a good enough hypervisor abstraction. It is good to be hypervisor
+> agnostic, but I wouldn't go extra lengths to have a single binary. I
+> cannot picture a case where a BE binary needs to be moved between
+> different hypervisors and a recompilation is impossible (BE, not FE).
+> Instead, I can definitely imagine detailed requirements on IRQ latency
+> having to be lower than 10us or bandwidth higher than 500 MB/sec.
+>
+> Instead of virtio-proxy, my suggestion is to work together on a common
+> project and common source with others interested in the same problem.
+>
+> I would pick something like kvmtool as a basis. It doesn't have to be
+> kvmtools, and kvmtools specifically is GPL-licensed, which is
+> unfortunate because it would help if the license was BSD-style for ease
+> of integration with Zephyr and other RTOSes.
+>
+> As long as the project is open to working together on multiple
+> hypervisors and deployment models then it is fine. For instance, the
+> shared source could be based on OpenAMP kvmtool [1] (the original
+> kvmtool likely prefers to stay small and narrow-focused on KVM). OpenAMP
+> kvmtool was created to add support for hypervisor-less virtio but they
+> are very open to hypervisors too. It could be a good place to add a Xen
+> implementation, a KVM fatqueue implementation, a Jailhouse
+> implementation, etc. -- work together toward the common goal of a single
+> BE source (not binary) supporting multiple different deployment models.
+>
+i like the hypervisor-less approach described in the link below. it can
+also be used to drfine abstract HAL between normal world and TrustZone to
+implement confidential workloads in the TZ. Virtio-sock is of particular
+interest.
+In addition, this can define a HAL that can be re-used in many contexts :
+could we use this to implement something similar to Android Generic Kernel
+Image stuff ?
 
-Is it possible to get the actual RIP of the instruction that faulted? 
-Feeding that to scripts/faddr2line would be just lovely.
- 
-> I've bisected it down to the commit a799c2bd29d19c565f37fa038b31a0a1d44d0e4d
-> 
->     x86/setup: Consolidate early memory reservations
-> 
-> Since this seems to affect Xen boot only, I'm copying xen-devel too.
-> 
-> Any ideas?
+>
+>
+> [1] https://github.com/OpenAMP/kvmtool
+> --
+> Stratos-dev mailing list
+> Stratos-dev@op-lists.linaro.org
+> https://op-lists.linaro.org/mailman/listinfo/stratos-dev
+>
+--=20
+Fran=C3=A7ois-Fr=C3=A9d=C3=A9ric Ozog | *Director Business Development*
+T: +33.67221.6485
+francois.ozog@linaro.org | Skype: ffozog
 
-The only thing I can suggest for now is to move the reservations from
-early_reserve_memory() back to where they were before this commit one by
-one to see which move caused the crash.
+--0000000000005ec22105cbee6b8c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
--- 
-Sincerely yours,
-Mike.
+<div dir=3D"auto">Hi</div><div><br><div class=3D"gmail_quote"><div dir=3D"l=
+tr" class=3D"gmail_attr">Le=C2=A0mar. 14 sept. 2021 =C3=A0 01:51, Stefano S=
+tabellini via Stratos-dev &lt;<a href=3D"mailto:stratos-dev@op-lists.linaro=
+.org">stratos-dev@op-lists.linaro.org</a>&gt; a =C3=A9crit=C2=A0:<br></div>=
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">On Mon, 6 Sep 2021, AKASHI Takahiro wrote:<b=
+r>
+&gt; &gt; the second is how many context switches are involved in a transac=
+tion.<br>
+&gt; &gt; Of course with all things there is a trade off. Things involving =
+the<br>
+&gt; &gt; very tightest latency would probably opt for a bare metal backend=
+ which<br>
+&gt; &gt; I think would imply hypervisor knowledge in the backend binary.<b=
+r>
+&gt; <br>
+&gt; In configuration phase of virtio device, the latency won&#39;t be a bi=
+g matter.<br>
+&gt; In device operations (i.e. read/write to block devices), if we can<br>
+&gt; resolve &#39;mmap&#39; issue, as Oleksandr is proposing right now, the=
+ only issue is<br>
+&gt; how efficiently we can deliver notification to the opposite side. Righ=
+t?<br>
+&gt; And this is a very common problem whatever approach we would take.<br>
+&gt; <br>
+&gt; Anyhow, if we do care the latency in my approach, most of virtio-proxy=
+-<br>
+&gt; related code can be re-implemented just as a stub (or shim?) library<b=
+r>
+&gt; since the protocols are defined as RPCs.<br>
+&gt; In this case, however, we would lose the benefit of providing &quot;si=
+ngle binary&quot;<br>
+&gt; BE.<br>
+&gt; (I know this is is an arguable requirement, though.)<br>
+<br>
+In my experience, latency, performance, and security are far more<br>
+important than providing a single binary.<br>
+<br>
+In my opinion, we should optimize for the best performance and security,<br=
+>
+then be practical on the topic of hypervisor agnosticism. For instance,<br>
+a shared source with a small hypervisor-specific component, with one<br>
+implementation of the small component for each hypervisor, would provide<br=
+>
+a good enough hypervisor abstraction. It is good to be hypervisor<br>
+agnostic, but I wouldn&#39;t go extra lengths to have a single binary. I<br=
+>
+cannot picture a case where a BE binary needs to be moved between<br>
+different hypervisors and a recompilation is impossible (BE, not FE).<br>
+Instead, I can definitely imagine detailed requirements on IRQ latency<br>
+having to be lower than 10us or bandwidth higher than 500 MB/sec.<br>
+<br>
+Instead of virtio-proxy, my suggestion is to work together on a common<br>
+project and common source with others interested in the same problem.<br>
+<br>
+I would pick something like kvmtool as a basis. It doesn&#39;t have to be<b=
+r>
+kvmtools, and kvmtools specifically is GPL-licensed, which is<br>
+unfortunate because it would help if the license was BSD-style for ease<br>
+of integration with Zephyr and other RTOSes.<br>
+<br>
+As long as the project is open to working together on multiple<br>
+hypervisors and deployment models then it is fine. For instance, the<br>
+shared source could be based on OpenAMP kvmtool [1] (the original<br>
+kvmtool likely prefers to stay small and narrow-focused on KVM). OpenAMP<br=
+>
+kvmtool was created to add support for hypervisor-less virtio but they<br>
+are very open to hypervisors too. It could be a good place to add a Xen<br>
+implementation, a KVM fatqueue implementation, a Jailhouse<br>
+implementation, etc. -- work together toward the common goal of a single<br=
+>
+BE source (not binary) supporting multiple different deployment models.<br>
+</blockquote><div dir=3D"auto">i like the hypervisor-less approach describe=
+d in the link below. it can also be used to drfine abstract HAL between nor=
+mal world and TrustZone to implement confidential workloads in the TZ. Virt=
+io-sock is of particular interest.=C2=A0</div><div dir=3D"auto">In addition=
+, this can define a HAL that can be re-used in many contexts : could we use=
+ this to implement something similar to Android Generic Kernel Image stuff =
+?</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-=
+left:1px #ccc solid;padding-left:1ex"><br>
+<br>
+[1] <a href=3D"https://github.com/OpenAMP/kvmtool" rel=3D"noreferrer" targe=
+t=3D"_blank">https://github.com/OpenAMP/kvmtool</a><br>
+-- <br>
+Stratos-dev mailing list<br>
+<a href=3D"mailto:Stratos-dev@op-lists.linaro.org" target=3D"_blank">Strato=
+s-dev@op-lists.linaro.org</a><br>
+<a href=3D"https://op-lists.linaro.org/mailman/listinfo/stratos-dev" rel=3D=
+"noreferrer" target=3D"_blank">https://op-lists.linaro.org/mailman/listinfo=
+/stratos-dev</a><br>
+</blockquote></div></div>-- <br><div dir=3D"ltr" class=3D"gmail_signature" =
+data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><=
+div><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div =
+dir=3D"ltr"><div><div dir=3D"ltr"><div><div><div><div dir=3D"ltr"><div dir=
+=3D"ltr"><div dir=3D"ltr"><table style=3D"font-size:small" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0"><tbody><tr><td style=3D"padding-right:10px=
+" valign=3D"top"><img src=3D"https://drive.google.com/a/linaro.org/uc?id=3D=
+0BxTAygkus3RgQVhuNHMwUi1mYWc&amp;export=3Ddownload" width=3D"96" height=3D"=
+53"></td><td valign=3D"top"><table border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0"><tbody><tr><td style=3D"font-family:Arial,Helvetica,&quot;Sans Ser=
+if&quot;;white-space:nowrap;font-size:9pt;padding-top:0px;color:rgb(87,87,8=
+7)" valign=3D"top"><span style=3D"font-weight:bold">Fran=C3=A7ois-Fr=C3=A9d=
+=C3=A9ric Ozog</span>=C2=A0<span style=3D"color:rgb(161,161,161)">|</span>=
+=C2=A0<i>Director Business Development</i></td></tr><tr><td style=3D"font-f=
+amily:Arial,Helvetica,&quot;Sans Serif&quot;;white-space:nowrap;font-size:9=
+pt;padding-top:2px;color:rgb(87,87,87)" valign=3D"top">T:=C2=A0<a value=3D"=
++393384075993" style=3D"color:rgb(17,85,204)">+33.67221.6485</a><br><a href=
+=3D"mailto:francois.ozog@linaro.org" style=3D"color:rgb(87,87,87);text-deco=
+ration:none" target=3D"_blank">francois.ozog@linaro.org</a>=C2=A0<span styl=
+e=3D"color:rgb(161,161,161)">|</span>=C2=A0Skype:=C2=A0ffozog</td></tr></tb=
+ody></table></td></tr></tbody></table></div></div></div></div></div><div><d=
+iv><br style=3D"font-size:small"></div></div></div></div></div></div></div>=
+</div></div></div></div></div></div></div></div></div></div>
+
+--0000000000005ec22105cbee6b8c--
 
