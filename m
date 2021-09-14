@@ -2,56 +2,57 @@ Return-Path: <SRS0=GvD8=OE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7029FC433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 12:36:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 596A2C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 12:36:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 37D6E6103B
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 12:36:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 37D6E6103B
+	by mail.kernel.org (Postfix) with ESMTPS id 2252E60FED
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 12:36:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2252E60FED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.186541.335274 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.186542.335285 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQ7fS-00070Z-5c; Tue, 14 Sep 2021 12:36:06 +0000
+	id 1mQ7fU-0007HC-Cz; Tue, 14 Sep 2021 12:36:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 186541.335274; Tue, 14 Sep 2021 12:36:06 +0000
+Received: by outflank-mailman (output) from mailman id 186542.335285; Tue, 14 Sep 2021 12:36:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQ7fS-00070S-1h; Tue, 14 Sep 2021 12:36:06 +0000
-Received: by outflank-mailman (input) for mailman id 186541;
- Tue, 14 Sep 2021 12:36:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mQ7fU-0007H1-99; Tue, 14 Sep 2021 12:36:08 +0000
+Received: by outflank-mailman (input) for mailman id 186542;
+ Tue, 14 Sep 2021 12:36:07 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8exS=OE=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mQ7fQ-00070M-JX
- for xen-devel@lists.xenproject.org; Tue, 14 Sep 2021 12:36:04 +0000
+ id 1mQ7fT-0007Eq-4s
+ for xen-devel@lists.xenproject.org; Tue, 14 Sep 2021 12:36:07 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1bcbe46a-b677-481e-ace2-8554af700768;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 5388358e-1558-11ec-b421-12813bfff9fa;
+ Tue, 14 Sep 2021 12:36:05 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 3AC06220EA;
+ Tue, 14 Sep 2021 12:36:04 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F3D8113F2C;
  Tue, 14 Sep 2021 12:36:03 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D74BB220BC;
- Tue, 14 Sep 2021 12:36:02 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6A4FB13342;
- Tue, 14 Sep 2021 12:36:02 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id n0JYGDKXQGE7MAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 14 Sep 2021 12:36:02 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id KAwKOjOXQGE7MAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 14 Sep 2021 12:36:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,90 +64,436 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1bcbe46a-b677-481e-ace2-8554af700768
+X-Inumbo-ID: 5388358e-1558-11ec-b421-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1631622962; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=M1dIWQCkg38Q5PQjLGTJ1A9BSt19LN0OahLQLwcJiqc=;
-	b=EIZG1R3W/2cd0m/AJaopGED7B2/odtslsTU+XcJg1pDVocGqA8FYZjlCx7jnOOOD7lVDAR
-	PuSZWDud5jubQVJm6SsF1GcehcxMqxGuREzWuBiy2guLGacfCPQ03iV1FjEYoL4IKEO9V2
-	D0DLuJP81RAXpV91a3pxeiXHxUQ5CzI=
+	t=1631622964; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=EH+dU3e+z7VJuNtk1nknzKQyPzqsv/7YUiwjiyb6J/Y=;
+	b=TAlRcuSOmk3CTnhnWvKPvzACQ7Z/l+R/61XeosOOYScQ8OsPEoN/cJtEFpSfb2XQBsR1JQ
+	Je4hMLDeXehqBLqwUo9bY4QCdnKRmkQ+VlSSeAL4HtSp1/tYGJF7hwGGkgcAEOWnFLOMor
+	EI0btNofF2tB5b5ozK7zgzAIhlb/LsY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH RFC 0/4] remove libxenctrl usage from xenstored
-Date: Tue, 14 Sep 2021 14:35:56 +0200
-Message-Id: <20210914123600.1626-1-jgross@suse.com>
+	Julien Grall <julien@xen.org>
+Subject: [PATCH RFC 4/4] tools/xenstore: use new stable interface instead of libxenctrl
+Date: Tue, 14 Sep 2021 14:36:00 +0200
+Message-Id: <20210914123600.1626-5-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210914123600.1626-1-jgross@suse.com>
+References: <20210914123600.1626-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Xenstored is using libxenctrl for only one purpose: to get information
-about state of domains.
+Xenstore is using libxenctrl only for obtaining state information
+about domains.
 
-This RFC patch series is removing that dependency by introducing a new
-stable interface which can be used by xenstored instead.
+Use the new stable interface XEN_CONTROL_OP_get_state_changed_domain
+instead.
 
-I have chosen to add a new hypercall with sub-commands. This can be
-changed, of course, but I thought this would be a good step towards
-stable control interfaces for the Xen tools.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/xenstore/Makefile            |   3 +-
+ tools/xenstore/xenstored_control.c |  14 +-
+ tools/xenstore/xenstored_domain.c  | 219 ++++++++++++++++-------------
+ 3 files changed, 130 insertions(+), 106 deletions(-)
 
-I have done only very little testing (basically normal domain creation
-and deletion). In case my approach is being accepted I'll do a more
-thorough test.
-
-What is missing right now is some cleanup (e.g. the need to allow
-the dominfo operation of the domctl hypercall for a stubdom based
-Xenstore could be removed). For Mini-OS some more work is needed to
-remove the dependency to libxenctrl for xenstore-stubdom, as Mini-OS
-can't be configured to use libxenevent and libxengnttab, but not
-libxenctrl today. Again, I'll do that cleanup in case the series is
-generally accepted.
-
-Juergen Gross (4):
-  xen: add a domain unique id to each domain
-  xen: add bitmap to indicate per-domain state changes
-  xen: add new stable control hypercall
-  tools/xenstore: use new stable interface instead of libxenctrl
-
- tools/flask/policy/modules/dom0.te  |   2 +-
- tools/xenstore/Makefile             |   3 +-
- tools/xenstore/xenstored_control.c  |  14 +-
- tools/xenstore/xenstored_domain.c   | 219 +++++++++++++++-------------
- xen/arch/arm/traps.c                |   1 +
- xen/arch/x86/hvm/hypercall.c        |   1 +
- xen/arch/x86/hypercall.c            |   1 +
- xen/arch/x86/pv/hypercall.c         |   1 +
- xen/common/Makefile                 |   1 +
- xen/common/control.c                |  52 +++++++
- xen/common/domain.c                 |  76 ++++++++++
- xen/common/event_channel.c          |  11 +-
- xen/include/Makefile                |   1 +
- xen/include/public/control.h        |  80 ++++++++++
- xen/include/public/xen.h            |   1 +
- xen/include/xen/event.h             |   6 +
- xen/include/xen/hypercall.h         |   5 +
- xen/include/xen/sched.h             |   7 +
- xen/include/xsm/dummy.h             |  14 ++
- xen/include/xsm/xsm.h               |   6 +
- xen/xsm/dummy.c                     |   1 +
- xen/xsm/flask/hooks.c               |   6 +
- xen/xsm/flask/policy/access_vectors |   2 +
- 23 files changed, 402 insertions(+), 109 deletions(-)
- create mode 100644 xen/common/control.c
- create mode 100644 xen/include/public/control.h
-
+diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
+index 292b478fa1..b78e29470b 100644
+--- a/tools/xenstore/Makefile
++++ b/tools/xenstore/Makefile
+@@ -11,6 +11,7 @@ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+ CFLAGS += -I./include
+ CFLAGS += $(CFLAGS_libxenevtchn)
+ CFLAGS += $(CFLAGS_libxenctrl)
++CFLAGS += $(CFLAGS_libxencall)
+ CFLAGS += $(CFLAGS_libxenguest)
+ CFLAGS += $(CFLAGS_libxentoolcore)
+ CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
+@@ -70,7 +71,7 @@ endif
+ $(XENSTORED_OBJS): CFLAGS += $(CFLAGS_libxengnttab)
+ 
+ xenstored: $(XENSTORED_OBJS)
+-	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxenctrl) $(LDLIBS_xenstored) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
++	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxencall) $(LDLIBS_xenstored) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
+ 
+ xenstored.a: $(XENSTORED_OBJS)
+ 	$(AR) cr $@ $^
+diff --git a/tools/xenstore/xenstored_control.c b/tools/xenstore/xenstored_control.c
+index 7b4300ef77..d767aea0f9 100644
+--- a/tools/xenstore/xenstored_control.c
++++ b/tools/xenstore/xenstored_control.c
+@@ -594,6 +594,13 @@ void lu_read_state(void)
+ 	void *ctx = talloc_new(NULL); /* Work context for subfunctions. */
+ 	struct xs_state_preamble *pre;
+ 
++	/*
++	 * We may have missed the VIRQ_DOM_EXC notification and a domain may
++	 * have died while we were live-updating. So check all the domains are
++	 * still alive. This will pre-initialize all domain structures.
++	 */
++	check_domains();
++
+ 	syslog(LOG_INFO, "live-update: read state\n");
+ 	lu_get_dump_state(&state);
+ 	if (state.size == 0)
+@@ -634,13 +641,6 @@ void lu_read_state(void)
+ 	lu_close_dump_state(&state);
+ 
+ 	talloc_free(ctx);
+-
+-	/*
+-	 * We may have missed the VIRQ_DOM_EXC notification and a domain may
+-	 * have died while we were live-updating. So check all the domains are
+-	 * still alive.
+-	 */
+-	check_domains();
+ }
+ 
+ static const char *lu_activate_binary(const void *ctx)
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index 47e9107c14..2801e4b24f 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -31,11 +31,12 @@
+ #include "xenstored_transaction.h"
+ #include "xenstored_watch.h"
+ 
++#include <xencall.h>
+ #include <xenevtchn.h>
+-#include <xenctrl.h>
++#include <xen/control.h>
+ #include <xen/grant_table.h>
+ 
+-static xc_interface **xc_handle;
++static xencall_handle **xc_handle;
+ xengnttab_handle **xgt_handle;
+ static evtchn_port_t virq_port;
+ 
+@@ -50,6 +51,7 @@ struct domain
+ 
+ 	/* The id of this domain */
+ 	unsigned int domid;
++	uint64_t unique_id;
+ 
+ 	/* Event channel port */
+ 	evtchn_port_t port;
+@@ -238,54 +240,114 @@ static int destroy_domain(void *_domain)
+ 	return 0;
+ }
+ 
+-static bool get_domain_info(unsigned int domid, xc_dominfo_t *dominfo)
++static bool get_domain_info(struct xen_control_changed_domain *dominfo)
+ {
+-	return xc_domain_getinfo(*xc_handle, domid, 1, dominfo) == 1 &&
+-	       dominfo->domid == domid;
++	struct xen_control_changed_domain *buf;
++	int ret;
++
++	buf = xencall_alloc_buffer(*xc_handle, sizeof(*buf));
++	if (!buf)
++		return false;
++	ret = xencall2(*xc_handle, __HYPERVISOR_control_op,
++		       XEN_CONTROL_OP_get_state_changed_domain,
++		       (unsigned long)buf);
++	*dominfo = *buf;
++	xencall_free_buffer(*xc_handle, buf);
++
++	return ret == 0;
+ }
+ 
+-void check_domains(void)
++static struct domain *find_domain_struct(unsigned int domid)
++{
++	struct domain *i;
++
++	list_for_each_entry(i, &domains, list) {
++		if (i->domid == domid)
++			return i;
++	}
++	return NULL;
++}
++
++static struct domain *alloc_domain(unsigned int domid)
+ {
+-	xc_dominfo_t dominfo;
+ 	struct domain *domain;
++
++	domain = talloc_zero(talloc_autofree_context(), struct domain);
++	if (!domain) {
++		errno = ENOMEM;
++		return NULL;
++	}
++
++	domain->domid = domid;
++	domain->generation = generation;
++	domain->introduced = false;
++
++	talloc_set_destructor(domain, destroy_domain);
++
++	list_add(&domain->list, &domains);
++
++	return domain;
++}
++
++static void domain_drop(struct domain *domain)
++{
+ 	struct connection *conn;
++
++	/* domain is a talloc child of domain->conn. */
++	conn = domain->conn;
++	domain->conn = NULL;
++	talloc_unlink(talloc_autofree_context(), conn);
++}
++
++void check_domains(void)
++{
++	struct xen_control_changed_domain dominfo;
++	struct domain *domain;
+ 	int notify = 0;
+-	bool dom_valid;
+ 
+- again:
+-	list_for_each_entry(domain, &domains, list) {
+-		dom_valid = get_domain_info(domain->domid, &dominfo);
+-		if (!domain->introduced) {
+-			if (!dom_valid) {
++	while (get_domain_info(&dominfo)) {
++		domain = find_domain_struct(dominfo.domid);
++
++		if (!dominfo.state) {
++			if (domain && !domain->introduced)
+ 				talloc_free(domain);
+-				goto again;
+-			}
+ 			continue;
+ 		}
+-		if (dom_valid) {
+-			if ((dominfo.crashed || dominfo.shutdown)
+-			    && !domain->shutdown) {
+-				domain->shutdown = true;
+-				notify = 1;
+-			}
+-			/*
+-			 * On Restore, we may have been unable to remap the
+-			 * interface and the port. As we don't know whether
+-			 * this was because of a dying domain, we need to
+-			 * check if the interface and port are still valid.
+-			 */
+-			if (!dominfo.dying && domain->port &&
+-			    domain->interface)
++
++		if (domain && domain->unique_id &&
++		    domain->unique_id != dominfo.unique_id) {
++			if (domain->conn)
++				domain_drop(domain);
++			else
++				talloc_free(domain);
++			domain = NULL;
++		}
++
++		if (!domain) {
++			domain = alloc_domain(dominfo.domid);
++			if (!domain)
+ 				continue;
++			domain->unique_id = dominfo.unique_id;
+ 		}
+-		if (domain->conn) {
+-			/* domain is a talloc child of domain->conn. */
+-			conn = domain->conn;
+-			domain->conn = NULL;
+-			talloc_unlink(talloc_autofree_context(), conn);
+-			notify = 0; /* destroy_domain() fires the watch */
+-			goto again;
++
++		if ((dominfo.state & XEN_CONTROL_CHANGEDDOM_STATE_SHUTDOWN) &&
++		    !domain->shutdown) {
++			domain->shutdown = true;
++			notify = 1;
+ 		}
++
++		/*
++		 * On Restore, we may have been unable to remap the
++		 * interface and the port. As we don't know whether
++		 * this was because of a dying domain, we need to
++		 * check if the interface and port are still valid.
++		 */
++		if (!(dominfo.state & XEN_CONTROL_CHANGEDDOM_STATE_DYING) &&
++		    domain->port && domain->interface)
++			continue;
++
++		if (domain->conn)
++			domain_drop(domain);
+ 	}
+ 
+ 	if (notify)
+@@ -323,46 +385,6 @@ static char *talloc_domain_path(void *context, unsigned int domid)
+ 	return talloc_asprintf(context, "/local/domain/%u", domid);
+ }
+ 
+-static struct domain *find_domain_struct(unsigned int domid)
+-{
+-	struct domain *i;
+-
+-	list_for_each_entry(i, &domains, list) {
+-		if (i->domid == domid)
+-			return i;
+-	}
+-	return NULL;
+-}
+-
+-static struct domain *alloc_domain(const void *context, unsigned int domid)
+-{
+-	struct domain *domain;
+-
+-	domain = talloc(context, struct domain);
+-	if (!domain) {
+-		errno = ENOMEM;
+-		return NULL;
+-	}
+-
+-	domain->domid = domid;
+-	domain->generation = generation;
+-	domain->introduced = false;
+-
+-	talloc_set_destructor(domain, destroy_domain);
+-
+-	list_add(&domain->list, &domains);
+-
+-	return domain;
+-}
+-
+-static struct domain *find_or_alloc_domain(const void *ctx, unsigned int domid)
+-{
+-	struct domain *domain;
+-
+-	domain = find_domain_struct(domid);
+-	return domain ? : alloc_domain(ctx, domid);
+-}
+-
+ static int new_domain(struct domain *domain, int port, bool restore)
+ {
+ 	int rc;
+@@ -443,9 +465,13 @@ static struct domain *introduce_domain(const void *ctx,
+ 	struct xenstore_domain_interface *interface;
+ 	bool is_master_domain = (domid == xenbus_master_domid());
+ 
+-	domain = find_or_alloc_domain(ctx, domid);
+-	if (!domain)
++	check_domains();
++
++	domain = find_domain_struct(domid);
++	if (!domain) {
++		errno = ENOENT;
+ 		return NULL;
++	}
+ 
+ 	if (!domain->introduced) {
+ 		interface = is_master_domain ? xenbus_map()
+@@ -650,7 +676,7 @@ int do_reset_watches(struct connection *conn, struct buffered_data *in)
+ 
+ static int close_xc_handle(void *_handle)
+ {
+-	xc_interface_close(*(xc_interface**)_handle);
++	xencall_close(*(xencall_handle **)_handle);
+ 	return 0;
+ }
+ 
+@@ -741,11 +767,11 @@ void domain_init(int evtfd)
+ {
+ 	int rc;
+ 
+-	xc_handle = talloc(talloc_autofree_context(), xc_interface*);
++	xc_handle = talloc(talloc_autofree_context(), xencall_handle *);
+ 	if (!xc_handle)
+ 		barf_perror("Failed to allocate domain handle");
+ 
+-	*xc_handle = xc_interface_open(0,0,0);
++	*xc_handle = xencall_open(NULL, 0);
+ 	if (!*xc_handle)
+ 		barf_perror("Failed to open connection to hypervisor");
+ 
+@@ -821,7 +847,6 @@ void domain_entry_inc(struct connection *conn, struct node *node)
+  * count (used for testing whether a node permission is older than a domain).
+  *
+  * Return values:
+- * -1: error
+  *  0: domain has higher generation count (it is younger than a node with the
+  *     given count), or domain isn't existing any longer
+  *  1: domain is older than the node
+@@ -829,7 +854,6 @@ void domain_entry_inc(struct connection *conn, struct node *node)
+ static int chk_domain_generation(unsigned int domid, uint64_t gen)
+ {
+ 	struct domain *d;
+-	xc_dominfo_t dominfo;
+ 
+ 	if (!xc_handle && domid == 0)
+ 		return 1;
+@@ -838,11 +862,9 @@ static int chk_domain_generation(unsigned int domid, uint64_t gen)
+ 	if (d)
+ 		return (d->generation <= gen) ? 1 : 0;
+ 
+-	if (!get_domain_info(domid, &dominfo))
+-		return 0;
+-
+-	d = alloc_domain(NULL, domid);
+-	return d ? 1 : -1;
++	check_domains();
++	d = find_domain_struct(domid);
++	return (d && d->generation <= gen) ? 1 : 0;
+ }
+ 
+ /*
+@@ -855,8 +877,6 @@ int domain_adjust_node_perms(struct node *node)
+ 	int ret;
+ 
+ 	ret = chk_domain_generation(node->perms.p[0].id, node->generation);
+-	if (ret < 0)
+-		return errno;
+ 
+ 	/* If the owner doesn't exist any longer give it to priv domain. */
+ 	if (!ret)
+@@ -867,8 +887,6 @@ int domain_adjust_node_perms(struct node *node)
+ 			continue;
+ 		ret = chk_domain_generation(node->perms.p[i].id,
+ 					    node->generation);
+-		if (ret < 0)
+-			return errno;
+ 		if (!ret)
+ 			node->perms.p[i].perms |= XS_PERM_IGNORE;
+ 	}
+@@ -1300,16 +1318,21 @@ void read_state_connection(const void *ctx, const void *state)
+ 	} else {
+ 		domain = introduce_domain(ctx, sc->spec.ring.domid,
+ 					  sc->spec.ring.evtchn, true);
+-		if (!domain)
++		if (!domain) {
++			/* Domain vanished during LM? */
++			if (errno = ENOENT)
++				return;
+ 			barf("domain allocation error");
++		}
+ 
+ 		if (sc->spec.ring.tdomid != DOMID_INVALID) {
+-			tdomain = find_or_alloc_domain(ctx,
+-						       sc->spec.ring.tdomid);
+-			if (!tdomain)
++			tdomain = find_domain_struct(sc->spec.ring.tdomid);
++			if (!tdomain && errno != ENOENT)
+ 				barf("target domain allocation error");
+-			talloc_reference(domain->conn, tdomain->conn);
+-			domain->conn->target = tdomain->conn;
++			if (tdomain) {
++				talloc_reference(domain->conn, tdomain->conn);
++				domain->conn->target = tdomain->conn;
++			}
+ 		}
+ 		conn = domain->conn;
+ 	}
 -- 
 2.26.2
 
