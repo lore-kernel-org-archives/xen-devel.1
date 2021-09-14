@@ -2,43 +2,48 @@ Return-Path: <SRS0=GvD8=OE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NO_RDNS_DOTCOM_HELO,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-10.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D114C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 13:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 92894C433FE
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 13:39:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CF13F60F44
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 13:35:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CF13F60F44
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=fedoraproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 473516112D
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Sep 2021 13:39:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 473516112D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.186625.335365 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.186647.335375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQ8aD-0000nz-1a; Tue, 14 Sep 2021 13:34:45 +0000
+	id 1mQ8ek-0001xC-Ki; Tue, 14 Sep 2021 13:39:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 186625.335365; Tue, 14 Sep 2021 13:34:45 +0000
+Received: by outflank-mailman (output) from mailman id 186647.335375; Tue, 14 Sep 2021 13:39:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQ8aC-0000nq-Ts; Tue, 14 Sep 2021 13:34:44 +0000
-Received: by outflank-mailman (input) for mailman id 186625;
- Tue, 14 Sep 2021 13:30:42 +0000
+	id 1mQ8ek-0001x5-HZ; Tue, 14 Sep 2021 13:39:26 +0000
+Received: by outflank-mailman (input) for mailman id 186647;
+ Tue, 14 Sep 2021 13:39:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WCGQ=OE=fedoraproject.org=pjp@srs-us1.protection.inumbo.net>)
- id 1mQ8WI-0000TI-6n
- for xen-devel@lists.xenproject.org; Tue, 14 Sep 2021 13:30:42 +0000
-Received: from sonic314-19.consmr.mail.sg3.yahoo.com (unknown [106.10.240.143])
+ <SRS0=2lzK=OE=gmail.com=ltykernel@srs-us1.protection.inumbo.net>)
+ id 1mQ8ei-0001wz-Ul
+ for xen-devel@lists.xenproject.org; Tue, 14 Sep 2021 13:39:25 +0000
+Received: from mail-pg1-x52b.google.com (unknown [2607:f8b0:4864:20::52b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9e780da9-ceb6-4470-862f-3368c9ce0b0f;
- Tue, 14 Sep 2021 13:30:39 +0000 (UTC)
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic314.consmr.mail.sg3.yahoo.com with HTTP; Tue, 14 Sep 2021 13:30:37 +0000
+ id 9f49761c-f8e8-4b81-ab60-b9240809ca7a;
+ Tue, 14 Sep 2021 13:39:23 +0000 (UTC)
+Received: by mail-pg1-x52b.google.com with SMTP id h3so12754319pgb.7
+ for <xen-devel@lists.xenproject.org>; Tue, 14 Sep 2021 06:39:23 -0700 (PDT)
+Received: from ubuntu-Virtual-Machine.corp.microsoft.com
+ ([2001:4898:80e8:7:6ea2:a529:4af3:5057])
+ by smtp.gmail.com with ESMTPSA id v13sm10461234pfm.16.2021.09.14.06.39.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Sep 2021 06:39:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,218 +55,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e780da9-ceb6-4470-862f-3368c9ce0b0f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1631626237; bh=0Nh/Y6xPV4CIgLPlomK2v31ad896Cuh8tuUla8gXYJA=; h=Date:From:Reply-To:To:Cc:In-Reply-To:References:Subject:From:Subject:Reply-To; b=WBgabCv7VqlSscHaoyJAnNULqsBKn/hLYKbCkeq7f7M0Ro2NVT6j6bU3WY3ygqB06Ve9Uku7tsiXpbWAc3xY1d1qcY4yF3kPIInABh2G8+pHJU9yBkjVr2MbYqTczkDsen2ScfTnBZrdRS37XgINASlCWjFsUdG407WF5yndA0DAP2gBnyBs2+fBSt4AYj53F6rHNTOUmPb+ZskDBfRrGHM4ma6r3sgeP/GUie+zxHhEbVmSp+vqklCUlz8q0o8VcjwXi34O+RYPRzjfuW+HfxY+dDNMKOgrlqveZe+W5Q/LYe28YuojVOlQZ7kZx3ZJbS+mBoLclo0V1D9WKmnCdw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1631626237; bh=SporCpWUHBPKtAiDhTZuOydwhJPEm0S5V10VKjyr79z=; h=X-Sonic-MF:Date:From:To:Subject:From:Subject; b=Lz/5jw/cd45EIRsRswLO/KZqCbn/IuavDVPIIGcItSAkXBxdu8Pn3DaohlECSAsZzOo+d1YH5NWdOe5c9Hnz35ZIFEaBWbbZGp1mvOV7Vz8u0zm0AXtNfit8pUH6z5eHhVF14C7FHz9RS2+Oq8eJmhORGEywo/GTCBqd9q9trl20pEp4iU/ZmEFDeVomG5yaGA0CqdzSrzztVCHaDs96dTgzEZDHDfzN5gnuq+YojIBMsT1IJ799Hqk2m3aog+5uRKT8W89pyQWMgKLuPSMdqkXPFotIv4deWoKbVfI5UxDlnyj3QAVVyzB3HYt2bbkkTlZ84o3E4LM9DM7UK4kQRw==
-X-YMail-OSG: mLlyaboVM1mrhSXnTyTjnjQoxs4Qgg55vR6LHFZ5jDzt0tKCU1qo9a7OSSpJT11
- E1sWGG.iFXwp3Hqx86Tctpm0zpMK_I6APui2eXcNQ91gzCiye0xw85TVtAMqGADTDAxsivZqS6aR
- TCZftZs2SYB7M5zXd8YBj.7gh.kuiSPD.mVgB4.zODc7fSswwsEVTuqwyEMkG.bnKFkdzhzvSeZG
- HjGbmupCeAHoDCe4ByHQkE1jrn8xoaHVGOiivWp_7y.tHPkE56rpc8_y9spE10XrbMyF8WhrjpXO
- JaIfcZzgUyFlort1Lla_canu2n1Sgw5xT6MgWWwa_ZWb6J0NWM3oX.GJllIyxW9Mw4zo8_3GZV0S
- AUQ_i8tGaJXN6gnm6Qo4pP0ZWBXt9dbDvI0M7u5gQWRQ4XKSqu7TKPNPuL8l71ZFGhvb2flpWSTx
- pUuZ5r1oJtfH979NOMGk9FCSkjPi8NaHiTqGaF6uaIGN7ob4f8gm9maBTOi95VpFZGjaxzWmtxdJ
- McfGhFH5.yGbNtcDueQ8FVZfnmzgKyq2Vn549KZNzBS7YQNajAsiFj6acA1qDMSHDhpsf7MpbGIJ
- h.tNENxZtUIvpSyL6nAVu6AZZRPUQ5ull64ZJx.xPHBSFcCUoY_OxCfYNC85vWMgjGTBUJo.SKpF
- v7ZM70Z6O73AcoTH6jmqKQlbJa5SWPpeBjsS8whGyPJwssm0Tkn9hcs_sOhzHZYPPm_Sft0SgLpi
- 0Bhl.csJDwu9uO6NbyGOM3TicHmEvrIjeg3ASEjGJFpEfv2M2wakU87Wan0XNJSsppNh4FirhvEO
- hUKxR4Bu2eveVBRI3a4qXF2QysBAWThaKdTLUkvaR4wtnoI9MUSU.EfUV2DFFK4USeOjrJYqJJz_
- MnvVTxPaU.qWlk0XHJrVa6pjEJCCP.gHpWerZUGGZfD5z_oRjg_vOgw7PeLDPm.8YElY_fysH5Lq
- NzYpA4ZW0FIYu1q617oWatc_cBhyZo4wJAR.YrcvlQfK00HT21ZSk.Kh1Y6tqa_w2TL4JVUkXweQ
- rPAbxIgS3QrhnoOdvYTswx.JmlibaMMPsBoXLYfA.wKr7JTdBXVQVA2Ep03Wq2OmxOT6aiW71WVm
- G72HL_3xIiNSRLhI7Z0jLvn0.eSuJrpcFC_NoJ8BExTHg4tOwn2E64CdW9EhFLg6M6mmUPPkzV2E
- yOsp8gJ.4wMXxC.dSTa8m4NzLgknCMSrtn0T4bTb897riI.mUX7ZdKzn.LrRTGGR0G2CYdTvnFxt
- 3yAZsT0ObwJhhWfA_6guW28QLQ00CmSrj8mOtewkXTHHjmEfUeFUGsfzN2DsA91biSLUNMrr2Vwb
- kJkBctRUhkdUQzl1h31i3.Q1zIMdK8R4IdJICpxZpTsAEZBP6PEzYCTGO7RleDo7uUfYwLGYZdBD
- Ue2tTnmH2kA2pdPwx6LlEqpthATG2FMZFSB.Y5tI_yNQ8FxL4tYrvcyglMmSJSyVERx8znF58tUb
- 510s67KW3yODK4aZKMqtrl4fpo.MxQQKiTrR_KW5W4gjuS2bM.W5w0u5BTxHanyCkZAU6DkKtyks
- QjF7y6X4YtD_uDBHD1mM3f.N9kZUInSlPlFnVZKSowSQtFpLkklzf4SthWjDXtTkOpY9OyIX_Rui
- 5XrNHhuNTQlHWTuit2H7ZbJwQxC_2PeLFFbVhEmuSPMczjHZjkiPuy2NKlJ7oun6oWS7cXxOcB8Z
- OzHQF5GdRSLSsinzsZi3Oel2Ox7xYnJN1goI82Bz_jKoeBMjTD1yFgU1RyRbkn.zEd2ezm8zv5Bk
- fMhk6OyFyqWMmcN51m5tKHdrAn56UiOnpYoM2garlCkv9NSNhMgw_Lh58gkHk4WMBvupBmGItvP0
- BJLXmnwbcjHe5TqovDVP_eFzDCG31EvpKUBywg1WoMAOuJEO_JBjcuhsjj0DaHwsTLM4a39Fb8gg
- 2q.5PEDUsDU_anowV42IQ6KhqtZ0N8VNbqw7xqwWFF01tcxN5Psy356obfXp7ghIl2KQpPZWf8MV
- KJBWSHE_n2Eqop.HfxCzzj7NSwVPag6bWcLMcuSyR3j8AjTEte2iseamCZCKnG41DSveXpC7XkSH
- kITanbdJBIITXhVNWLKTERKJS9WSPAjHtytE2kfQCIULoRWaY79KV0EQ7F2Mo0jC9tRifR3RJgi6
- b3qZwHAUKaDG1ryKDlPlMQmLG4GBPwBnpBrIItklixg0lFr1WjhtU5UInVL2piBEr2aB_k8xYlEQ
- mSWnZK11AOB9bkXojOwxF3AyVOaoRl60DWzmAQLNewn6STqDFa.PsugMJXuQyKRwyMKHGuTngFFG
- H9pOC5eGHZN0fBedKgh37FQoLRWya4OQPBTw7t2L4qk7lTzBi4lAYJomQGW1tZ0blrftW1D8trEM
- 14Fo-
-X-Sonic-MF: <pjp@fedoraproject.org>
-Date: Tue, 14 Sep 2021 13:30:27 +0000 (UTC)
-From: P J P <pjp@fedoraproject.org>
-Reply-To: P J P <pj.pandit@yahoo.co.in>
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@redhat.com>, 
-	=?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, 
-	Thomas Huth <thuth@redhat.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, 
-	Markus Armbruster <armbru@redhat.com>, 
-	Paolo Bonzini <pbonzini@redhat.com>, 
-	Eduardo Habkost <ehabkost@redhat.com>, 
-	=?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <f4bug@amsat.org>, 
-	Eric Blake <eblake@redhat.com>, 
-	Richard Henderson <richard.henderson@linaro.org>, 
-	"qemu-block@nongnu.org" <qemu-block@nongnu.org>, 
-	Peter Maydell <peter.maydell@linaro.org>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Message-ID: <798304472.4432617.1631626227208@mail.yahoo.com>
-In-Reply-To: <YTnhy/Wo5M1qVs1k@redhat.com>
-References: <20210908232024.2399215-1-philmd@redhat.com> <YTnhy/Wo5M1qVs1k@redhat.com>
-Subject: Re: [RFC PATCH 00/10] security: Introduce
- qemu_security_policy_taint() API
+X-Inumbo-ID: 9f49761c-f8e8-4b81-ab60-b9240809ca7a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=BHnwRGLPqH2A09ZXeDyMyxAcljYFX6n5VugCn85EoaM=;
+        b=pjWLs+F/UNZaQ69Ds31Zi6HGFXPIFegbFqnIPgAg/e7eumR7muKpnjQsK4h4ATjgb2
+         by7YiKtMcGNpi+ZXill2CZ9odlQEVqCHILMVlph6YQFKC8hHwp1QpE3r+RuSLxydvPYZ
+         eGAqVhTH+xBk/V/LWNCB2iXK6oGjpeCm6U1nP3C+AFVZg+TFR+itqQRDs0wgk7bN3jJj
+         IMVP9rnCIplN4weSfeBPFdD9eNEmq4L1JXa8SxhKOq/LaXmZsBWdbgaymudmjb7zfL2E
+         DKrQ17H/rltwz4VcgDwdq+noncaSP4fVO9efd8m4H7efVZrJSaN580PDrm6EaBFxrg5t
+         ohzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=BHnwRGLPqH2A09ZXeDyMyxAcljYFX6n5VugCn85EoaM=;
+        b=oUXUjJGkcW+3hI4FuXCdcUhk3ohvLpYzrlzaqnd/YxCQ+KH27bPuvNIUDtO1i99A2J
+         UwD9jcj7vxvTsVlkzYOerhZc9OEIcJ3Lk6qgxzOV2vVYZx++3qglrbH/Lrbwp/dYBLWb
+         jaM7CB4FmJWqaHONv3K9z28BW7jT4ZG8+NoVApOgCwTldyj+DUkUSE1r6lMTY6Uk2e1g
+         /lvma+eXE7Q9dwKVn34jwHV+ImGx+3tBXISOk8nBNaRZGe1d6YTBqMDuVj7jIPA5Ttv9
+         04jab08KPNeO+Mo4SC4IfLQRB03z8ZpBWUHkFYTyzKwj2oUrOHhkwWptqG7BSz8ou9Nu
+         PzlQ==
+X-Gm-Message-State: AOAM533xOdssshy+0AW3kji325tKvmBpfJOuZ+1P9yiDpZM6Jz6/zCfE
+	lZJ64XV1nLe//lqrH1732dQ=
+X-Google-Smtp-Source: ABdhPJysSi/ePEIpmop1TOOZL/EDUeVswpP9kBW06aQK1cw/R5aOGjFREOrMllhH8ENnzQcpU6ys4A==
+X-Received: by 2002:a63:3d4a:: with SMTP id k71mr15619461pga.276.1631626762730;
+        Tue, 14 Sep 2021 06:39:22 -0700 (PDT)
+From: Tianyu Lan <ltykernel@gmail.com>
+To: kys@microsoft.com,
+	haiyangz@microsoft.com,
+	sthemmin@microsoft.com,
+	wei.liu@kernel.org,
+	decui@microsoft.com,
+	tglx@linutronix.de,
+	mingo@redhat.com,
+	bp@alien8.de,
+	x86@kernel.org,
+	hpa@zytor.com,
+	dave.hansen@linux.intel.com,
+	luto@kernel.org,
+	peterz@infradead.org,
+	konrad.wilk@oracle.com,
+	boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	sstabellini@kernel.org,
+	joro@8bytes.org,
+	will@kernel.org,
+	davem@davemloft.net,
+	kuba@kernel.org,
+	jejb@linux.ibm.com,
+	martin.petersen@oracle.com,
+	gregkh@linuxfoundation.org,
+	arnd@arndb.de,
+	hch@lst.de,
+	m.szyprowski@samsung.com,
+	robin.murphy@arm.com,
+	brijesh.singh@amd.com,
+	Tianyu.Lan@microsoft.com,
+	thomas.lendacky@amd.com,
+	pgonda@google.com,
+	akpm@linux-foundation.org,
+	kirill.shutemov@linux.intel.com,
+	rppt@kernel.org,
+	sfr@canb.auug.org.au,
+	aneesh.kumar@linux.ibm.com,
+	saravanand@fb.com,
+	krish.sadhukhan@oracle.com,
+	xen-devel@lists.xenproject.org,
+	tj@kernel.org,
+	rientjes@google.com,
+	michael.h.kelley@microsoft.com
+Cc: iommu@lists.linux-foundation.org,
+	linux-arch@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
+	netdev@vger.kernel.org,
+	vkuznets@redhat.com,
+	parri.andrea@gmail.com,
+	dave.hansen@intel.com
+Subject: [PATCH V5 00/12] x86/Hyper-V: Add Hyper-V Isolation VM support
+Date: Tue, 14 Sep 2021 09:39:01 -0400
+Message-Id: <20210914133916.1440931-1-ltykernel@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: WebService/1.1.18924 YMailNorrin
+Content-Transfer-Encoding: 8bit
 
-Hello Philippe, all
+From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
->On Thursday, 9 September, 2021, 03:58:40 pm IST, Daniel P. Berrang=C3=A9 <=
-berrange@redhat.com> wrote:
->On Thu, Sep 09, 2021 at 01:20:14AM +0200, Philippe Mathieu-Daud=C3=A9 wrot=
-e:
->> This series is experimental! The goal is to better limit the
->> boundary of what code is considerated security critical, and
->> what is less critical (but still important!).
->>
->> This approach was quickly discussed few months ago with Markus
->> then Daniel. Instead of classifying the code on a file path
->> basis (see [1]), we insert (runtime) hints into the code
->> (which survive code movement). Offending unsafe code can
->> taint the global security policy. By default this policy
->> is 'none': the current behavior. It can be changed on the
->> command line to 'warn' to display warnings, and to 'strict'
->> to prohibit QEMU running with a tainted policy.
->
+Hyper-V provides two kinds of Isolation VMs. VBS(Virtualization-based
+security) and AMD SEV-SNP unenlightened Isolation VMs. This patchset
+is to add support for these Isolation VM support in Linux.
 
-* Thanks so much for restarting this thread. I've been at it intermittently=
- last few
-=C2=A0 months, thinking about how could we annotate the source/module objec=
-ts.
+The memory of these vms are encrypted and host can't access guest
+memory directly. Hyper-V provides new host visibility hvcall and
+the guest needs to call new hvcall to mark memory visible to host
+before sharing memory with host. For security, all network/storage
+stack memory should not be shared with host and so there is bounce
+buffer requests.
 
-=C2=A0 =C2=A0-> [*] https://lists.gnu.org/archive/html/qemu-devel/2020-07/m=
-sg04642.html
+Vmbus channel ring buffer already plays bounce buffer role because
+all data from/to host needs to copy from/to between the ring buffer
+and IO stack memory. So mark vmbus channel ring buffer visible.
 
-* Last time we discussed about having both compile and run time options for=
- users
-=C2=A0 to be able to select the qualified objects/backends/devices as desir=
-ed.
+There are two exceptions - packets sent by vmbus_sendpacket_
+pagebuffer() and vmbus_sendpacket_mpb_desc(). These packets
+contains IO stack memory address and host will access these memory.
+So add allocation bounce buffer support in vmbus for these packets.
 
-* To confirm: How/Where is the security policy defined? Is it device/module=
- specific OR QEMU project wide?
+For SNP isolation VM, guest needs to access the shared memory via
+extra address space which is specified by Hyper-V CPUID HYPERV_CPUID_
+ISOLATION_CONFIG. The access physical address of the shared memory
+should be bounce buffer memory GPA plus with shared_gpa_boundary
+reported by CPUID.
 
-> IOW, the reporting via QAPI introspetion is much more important
-> for libvirt and mgmt apps, than any custom cli arg / printfs
-> at the QEMU level.
->
+This patchset is based on the 5.15-rc1.
 
-* True, while it makes sense to have a solution that is conversant with
-=C2=A0 the management/libvirt layers, It'll be great if we could address qe=
-mu/cli
-=C2=A0 other use cases too.
+Change since v4:
+	- Hide hv_mark_gpa_visibility() and set memory visibility via
+	  set_memory_encrypted/decrypted() 
+	- Change gpadl handle in netvsc and uio driver from u32 to
+	  struct vmbus_gpadl.
+	- Change vmbus_establish_gpadl()'s gpadl_handle parameter
+	  to vmbus_gpadl data structure.
+	- Remove hv_get_simp(), hv_get_siefp()  hv_get_synint_*()
+	  helper function. Move the logic into hv_get/set_register().
+	- Use scsi_dma_map/unmap() instead of dma_map/unmap_sg() in storvsc driver.
+	- Allocate rx/tx ring buffer via alloc_pages() in Isolation VM  
 
->it feels like we need
->=C2=A0 'secure': 'bool'
+Change since V3:
+	- Initalize GHCB page in the cpu init callbac.
+	- Change vmbus_teardown_gpadl() parameter in order to
+	  mask the memory back to non-visible to host.
+	- Merge hv_ringbuffer_post_init() into hv_ringbuffer_init().
+	- Keep Hyper-V bounce buffer size as same as AMD SEV VM
+	- Use dma_map_sg() instead of dm_map_page() in the storvsc driver.
 
-* Though we started the (above [*]) discussion with '--security' option in =
-mind,
-=C2=A0 I wonder if 'secure' annotation is much specific. And if we could wi=
-den its scope.
---- x ---
+Change since V2:
+       - Drop x86_set_memory_enc static call and use platform check
+         in the __set_memory_enc_dec() to run platform callback of
+	 set memory encrypted or decrypted.
 
+Change since V1:
+       - Introduce x86_set_memory_enc static call and so platforms can
+         override __set_memory_enc_dec() with their implementation
+       - Introduce sev_es_ghcb_hv_call_simple() and share code
+         between SEV and Hyper-V code.
+       - Not remap monitor pages in the non-SNP isolation VM
+       - Make swiotlb_init_io_tlb_mem() return error code and return
+         error when dma_map_decrypted() fails.
 
-Source annotations: I've been thinking over following approaches
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Change since RFC V4:
+       - Introduce dma map decrypted function to remap bounce buffer
+          and provide dma map decrypted ops for platform to hook callback.        
+       - Split swiotlb and dma map decrypted change into two patches
+       - Replace vstart with vaddr in swiotlb changes.
 
-1) Segregate the QEMU sources under
+Change since RFC v3:
+       - Add interface set_memory_decrypted_map() to decrypt memory and
+         map bounce buffer in extra address space
+       - Remove swiotlb remap function and store the remap address
+         returned by set_memory_decrypted_map() in swiotlb mem data structure.
+       - Introduce hv_set_mem_enc() to make code more readable in the __set_memory_enc_dec().
 
-=C2=A0 =C2=A0 =C2=A0 ../staging/ =C2=A0 =C2=A0 =C2=A0<=3D devel/experimenta=
-l, not for production usage
-=C2=A0 =C2=A0 =C2=A0 ../src/ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0<=3D good fo=
-r production usage, hence security relevant
-=C2=A0 =C2=A0 =C2=A0 ../deprecated/ =C2=A0 <=3D Bad for production usage, n=
-ot security relevant=C2=A0
+Change since RFC v2:
+       - Remove not UIO driver in Isolation VM patch
+       - Use vmap_pfn() to replace ioremap_page_range function in
+       order to avoid exposing symbol ioremap_page_range() and
+       ioremap_page_range()
+       - Call hv set mem host visibility hvcall in set_memory_encrypted/decrypted()
+       - Enable swiotlb force mode instead of adding Hyper-V dma map/unmap hook
+       - Fix code style
 
-=C2=A0 =C2=A0- This is similar to Linux staging drivers' tree.
-=C2=A0 =C2=A0- Staging drivers are not considered for production usage and =
-hence CVE allocation.
-=C2=A0 =C2=A0- At build time by default we only build sources under ../src/=
- tree.
-=C2=A0 =C2=A0- But we can still have options to build /staging/ and /deprec=
-ated/ trees. =C2=A0
-=C2=A0 =C2=A0- It's readily understandable to end users.
+Tianyu Lan (12):
+  x86/hyperv: Initialize GHCB page in Isolation VM
+  x86/hyperv: Initialize shared memory boundary in the Isolation VM.
+  x86/hyperv: Add new hvcall guest address host visibility  support
+  Drivers: hv: vmbus: Mark vmbus ring buffer visible to host in
+    Isolation VM
+  x86/hyperv: Add Write/Read MSR registers via ghcb page
+  x86/hyperv: Add ghcb hvcall support for SNP VM
+  Drivers: hv: vmbus: Add SNP support for VMbus channel initiate 
+    message
+  Drivers: hv : vmbus: Initialize VMbus ring buffer for Isolation VM
+  x86/Swiotlb: Add Swiotlb bounce buffer remap function for HV IVM
+  hyperv/IOMMU: Enable swiotlb bounce buffer for Isolation VM
+  scsi: storvsc: Add Isolation VM support for storvsc driver
+  net: netvsc: Add Isolation VM support for netvsc driver
 
-2) pkgconfig(1) way:
-=C2=A0 =C2=A0- If we could define per device/backend a configuration (.pc) =
-file which is then used
-=C2=A0 =C2=A0 =C2=A0at build/run time to decide which sources are suitable =
-for the build or usage.
+ arch/x86/hyperv/Makefile           |   2 +-
+ arch/x86/hyperv/hv_init.c          |  78 ++++++--
+ arch/x86/hyperv/ivm.c              | 282 ++++++++++++++++++++++++++
+ arch/x86/include/asm/hyperv-tlfs.h |  17 ++
+ arch/x86/include/asm/mshyperv.h    |  62 ++++--
+ arch/x86/include/asm/sev.h         |   6 +
+ arch/x86/kernel/cpu/mshyperv.c     |   5 +
+ arch/x86/kernel/sev-shared.c       |  63 +++---
+ arch/x86/mm/mem_encrypt.c          |   3 +-
+ arch/x86/mm/pat/set_memory.c       |  19 +-
+ arch/x86/xen/pci-swiotlb-xen.c     |   3 +-
+ drivers/hv/Kconfig                 |   1 +
+ drivers/hv/channel.c               |  73 ++++---
+ drivers/hv/connection.c            |  96 ++++++++-
+ drivers/hv/hv.c                    |  85 ++++++--
+ drivers/hv/hv_common.c             |  12 ++
+ drivers/hv/hyperv_vmbus.h          |   2 +
+ drivers/hv/ring_buffer.c           |  55 ++++--
+ drivers/hv/vmbus_drv.c             |   4 +
+ drivers/iommu/hyperv-iommu.c       |  60 ++++++
+ drivers/net/hyperv/hyperv_net.h    |  12 +-
+ drivers/net/hyperv/netvsc.c        | 304 +++++++++++++++++++++++++++--
+ drivers/net/hyperv/netvsc_drv.c    |   1 +
+ drivers/net/hyperv/rndis_filter.c  |   2 +
+ drivers/scsi/storvsc_drv.c         |  24 ++-
+ drivers/uio/uio_hv_generic.c       |  20 +-
+ include/asm-generic/hyperv-tlfs.h  |   1 +
+ include/asm-generic/mshyperv.h     |  17 +-
+ include/linux/hyperv.h             |  19 +-
+ include/linux/swiotlb.h            |   6 +
+ kernel/dma/swiotlb.c               |  41 +++-
+ 31 files changed, 1204 insertions(+), 171 deletions(-)
+ create mode 100644 arch/x86/hyperv/ivm.c
 
-=C2=A0 =C2=A0- I'm trying to experiment with this.
+-- 
+2.25.1
 
-3) We annotate QEMU devices/backends/modules with macros which define its s=
-tatus.
-=C2=A0 =C2=A0It can then be used at build/run times to decide if it's suita=
-ble for usage.
-=C2=A0 =C2=A0For ex:
-
-=C2=A0 =C2=A0 $ cat annotsrc.h
-
-=C2=A0 =C2=A0 #include <inttypes.h>
-
-=C2=A0 =C2=A0 enum SRCSTATUS {
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 DEVEL =3D 0,
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 STAGING,
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 PRODUCTION,
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 DEPRECATED
-=C2=A0 =C2=A0 };
-
-=C2=A0 =C2=A0 uint8_t get_src_status(void);
-=C2=A0 =C2=A0 =3D=3D=3D
-
-=C2=A0 =C2=A0 $ cat libx.c
-
-=C2=A0 =C2=A0 #include <annotsrc.h>
-
-=C2=A0 =C2=A0 #define SRC_STATUS DEPRECATED
-
-=C2=A0 =C2=A0 uint8_t
-=C2=A0 =C2=A0 get_src_status(void)
-=C2=A0 =C2=A0 {
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 return SRC_STATUS;
-=C2=A0 =C2=A0 }
-=C2=A0 =C2=A0 =3D=3D=3D
-
-=C2=A0 =C2=A0 $ cat testlibx.c
-
-=C2=A0 =C2=A0 #include <stdio.h>
-=C2=A0 =C2=A0 #include <annotsrc.h>
-
-=C2=A0 =C2=A0 int
-=C2=A0 =C2=A0 main (int argc, char *argv[])
-=C2=A0 =C2=A0 {
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 printf("LibX status: %d\n", get_src_status());
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;
-=C2=A0 =C2=A0 }
---- x ---
-
-
-
-* Approach 3) above is similar to the _security_policy_taint() API,
-=C2=A0 but works at the source/object file level, rather than specific 'str=
-uct type' field.
-=C2=A0=C2=A0
-
-* Does adding a field to struct type (ex. DeviceClass) scale to all objects=
-/modules/backends etc?
-=C2=A0 Does it have any limitations to include/cover other sources/objects?
-
-
-* I'd really appreciate any feedback/inputs/suggestions you may have.
-
-
-Thank you.
----
-=C2=A0 -P J P
-http://feedmug.com
 
