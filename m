@@ -2,56 +2,49 @@ Return-Path: <SRS0=IZ0D=OF=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39816C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Sep 2021 14:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EBA4C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Sep 2021 14:26:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 00B5761164
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Sep 2021 14:08:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 00B5761164
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C1324600D4
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Sep 2021 14:26:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C1324600D4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.187694.336648 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.187704.336663 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQVaN-0000L4-Ez; Wed, 15 Sep 2021 14:08:27 +0000
+	id 1mQVrg-0002ri-A8; Wed, 15 Sep 2021 14:26:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 187694.336648; Wed, 15 Sep 2021 14:08:27 +0000
+Received: by outflank-mailman (output) from mailman id 187704.336663; Wed, 15 Sep 2021 14:26:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mQVaN-0000Kx-B3; Wed, 15 Sep 2021 14:08:27 +0000
-Received: by outflank-mailman (input) for mailman id 187694;
- Wed, 15 Sep 2021 14:08:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XwCH=OF=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mQVaL-0000IR-Lh
- for xen-devel@lists.xenproject.org; Wed, 15 Sep 2021 14:08:25 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 99d7e694-6503-4ba8-85ca-645479a1cc2d;
- Wed, 15 Sep 2021 14:08:18 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 062BC2217F;
- Wed, 15 Sep 2021 14:08:17 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CC95213C37;
- Wed, 15 Sep 2021 14:08:16 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 3i++MFD+QWHsdgAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 15 Sep 2021 14:08:16 +0000
+	id 1mQVrg-0002r8-6w; Wed, 15 Sep 2021 14:26:20 +0000
+Received: by outflank-mailman (input) for mailman id 187704;
+ Wed, 15 Sep 2021 14:26:18 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=7Uy1=OF=arm.com=luca.fancellu@srs-us1.protection.inumbo.net>)
+ id 1mQVre-0002oh-5f
+ for xen-devel@lists.xenproject.org; Wed, 15 Sep 2021 14:26:18 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id e3319440-1630-11ec-b535-12813bfff9fa;
+ Wed, 15 Sep 2021 14:26:16 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 839F71042;
+ Wed, 15 Sep 2021 07:26:16 -0700 (PDT)
+Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
+ [10.1.197.16])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9D5A43F719;
+ Wed, 15 Sep 2021 07:26:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,323 +56,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99d7e694-6503-4ba8-85ca-645479a1cc2d
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1631714897; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=Xozn4dABy+P/hAZ8HNwNB0Im8TWq1cxoQG3rmcU2AYY=;
-	b=d6rTs/CCIY0Ek/83+mMi5ojBDEp7c1YgI/Qh6fHn1xc6nJ8n7tJEfOozvFsgD0hNqV9RN5
-	KSaAhzHzJHH/pq0I+0GtQ5av0qDqHf0ztMyym2xDDtBylUpyI92sx+7JFvvPWHZhRDF7Lj
-	lUEMTf4esXwv3rYl3QR8yygg9P3FVJ8=
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	wl@xen.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3] xenbus: support large messages
-Date: Wed, 15 Sep 2021 16:08:15 +0200
-Message-Id: <20210915140815.26736-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: e3319440-1630-11ec-b535-12813bfff9fa
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 1/2] xen/efi: Restrict check for DT boot modules on EFI boot
+Date: Wed, 15 Sep 2021 15:26:01 +0100
+Message-Id: <20210915142602.42862-2-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210915142602.42862-1-luca.fancellu@arm.com>
+References: <20210915142602.42862-1-luca.fancellu@arm.com>
 
-Today the implementation of the xenbus protocol in Mini-OS will only
-allow to transfer the complete message to or from the ring page buffer.
-This is limiting the maximum message size to lower values as the xenbus
-protocol normally would allow.
+When Xen is started as EFI application, it is checking
+the presence of multiboot,module in the DT, if any is
+found, the configuration file is skipped.
+Restrict this check to just any multiboot,module that
+is a direct child of the /chosen node.
 
-Change that by allowing to transfer the xenbus message in chunks as
-soon as they are available.
-
-Avoid crashing Mini-OS in case of illegal data read from the ring
-buffer.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
-V2:
-- drop redundant if (Samuel Thibault)
-- move rmb() (Samuel Thibault)
-V3:
-- correct notification test (Samuel Thibault)
----
- xenbus/xenbus.c | 209 ++++++++++++++++++++++++++++--------------------
- 1 file changed, 121 insertions(+), 88 deletions(-)
+ xen/arch/arm/efi/efi-boot.h | 30 ++++++++++++++++++++++++++++--
+ 1 file changed, 28 insertions(+), 2 deletions(-)
 
-diff --git a/xenbus/xenbus.c b/xenbus/xenbus.c
-index 23de61e..c8d358d 100644
---- a/xenbus/xenbus.c
-+++ b/xenbus/xenbus.c
-@@ -29,6 +29,7 @@
- #include <xen/hvm/params.h>
- #include <mini-os/spinlock.h>
- #include <mini-os/xmalloc.h>
-+#include <mini-os/semaphore.h>
+diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
+index cf9c37153f..5ff626c6a0 100644
+--- a/xen/arch/arm/efi/efi-boot.h
++++ b/xen/arch/arm/efi/efi-boot.h
+@@ -581,6 +581,8 @@ static void __init efi_arch_load_addr_check(EFI_LOADED_IMAGE *loaded_image)
  
- #define min(x,y) ({                       \
-         typeof(x) tmpx = (x);                 \
-@@ -46,6 +47,7 @@
- static struct xenstore_domain_interface *xenstore_buf;
- static DECLARE_WAIT_QUEUE_HEAD(xb_waitq);
- DECLARE_WAIT_QUEUE_HEAD(xenbus_watch_queue);
-+static __DECLARE_SEMAPHORE_GENERIC(xb_write_sem, 1);
- 
- xenbus_event_queue xenbus_events;
- static struct watch {
-@@ -231,75 +233,102 @@ char *xenbus_wait_for_state_change(const char* path, XenbusState *state, xenbus_
- }
- 
- 
-+static void xenbus_read_data(char *buf, unsigned int len)
-+{
-+    unsigned int off = 0;
-+    unsigned int prod, cons;
-+    unsigned int size;
-+
-+    while (off != len)
-+    {
-+        wait_event(xb_waitq, xenstore_buf->rsp_prod != xenstore_buf->rsp_cons);
-+
-+        prod = xenstore_buf->rsp_prod;
-+        cons = xenstore_buf->rsp_cons;
-+        DEBUG("Rsp_cons %d, rsp_prod %d.\n", cons, prod);
-+        size = min(len - off, prod - cons);
-+
-+        rmb();   /* Make sure data read from ring is ordered with rsp_prod. */
-+        memcpy_from_ring(xenstore_buf->rsp, buf + off,
-+                         MASK_XENSTORE_IDX(cons), size);
-+        off += size;
-+        xenstore_buf->rsp_cons += size;
-+        wmb();
-+        if (xenstore_buf->rsp_prod - cons >= XENSTORE_RING_SIZE)
-+            notify_remote_via_evtchn(xenbus_evtchn);
-+    }
-+}
-+
- static void xenbus_thread_func(void *ign)
+ static bool __init efi_arch_use_config_file(EFI_SYSTEM_TABLE *SystemTable)
  {
-     struct xsd_sockmsg msg;
--    unsigned prod = xenstore_buf->rsp_prod;
-+    char *data;
- 
-     for (;;) {
--        wait_event(xb_waitq, prod != xenstore_buf->rsp_prod);
--        while (1) {
--            prod = xenstore_buf->rsp_prod;
--            DEBUG("Rsp_cons %d, rsp_prod %d.\n", xenstore_buf->rsp_cons,
--                  xenstore_buf->rsp_prod);
--            if (xenstore_buf->rsp_prod - xenstore_buf->rsp_cons < sizeof(msg))
--                break;
--            rmb();
--            memcpy_from_ring(xenstore_buf->rsp, &msg,
--                             MASK_XENSTORE_IDX(xenstore_buf->rsp_cons),
--                             sizeof(msg));
--            DEBUG("Msg len %d, %d avail, id %d.\n", msg.len + sizeof(msg),
--                  xenstore_buf->rsp_prod - xenstore_buf->rsp_cons, msg.req_id);
--
--            if (xenstore_buf->rsp_prod - xenstore_buf->rsp_cons <
--                sizeof(msg) + msg.len)
--                break;
--
--            DEBUG("Message is good.\n");
--
--            if (msg.type == XS_WATCH_EVENT) {
--                struct xenbus_event *event = malloc(sizeof(*event) + msg.len);
--                xenbus_event_queue *events = NULL;
--                char *data = (char*)event + sizeof(*event);
--                struct watch *watch;
--
--                memcpy_from_ring(xenstore_buf->rsp, data,
--                    MASK_XENSTORE_IDX(xenstore_buf->rsp_cons + sizeof(msg)),
--                    msg.len);
--
--                event->path = data;
--                event->token = event->path + strlen(event->path) + 1;
--
--                mb();
--                xenstore_buf->rsp_cons += msg.len + sizeof(msg);
--
--                for (watch = watches; watch; watch = watch->next)
--                    if (!strcmp(watch->token, event->token)) {
--                        events = watch->events;
--                        break;
--                    }
--
--                if (events) {
--                    event->next = *events;
--                    *events = event;
--                    wake_up(&xenbus_watch_queue);
--                } else {
--                    printk("unexpected watch token %s\n", event->token);
--                    free(event);
-+        xenbus_read_data((char *)&msg, sizeof(msg));
-+        DEBUG("Msg len %d, %d avail, id %d.\n", msg.len + sizeof(msg),
-+              xenstore_buf->rsp_prod - xenstore_buf->rsp_cons, msg.req_id);
++    int node;
++    bool dom0_module_found = false;
+     /*
+      * For arm, we may get a device tree from GRUB (or other bootloader)
+      * that contains modules that have already been loaded into memory.  In
+@@ -592,11 +594,35 @@ static bool __init efi_arch_use_config_file(EFI_SYSTEM_TABLE *SystemTable)
+     fdt = lookup_fdt_config_table(SystemTable);
+     dtbfile.ptr = fdt;
+     dtbfile.need_to_free = false; /* Config table memory can't be freed. */
+-    if ( !fdt || fdt_node_offset_by_compatible(fdt, 0, "multiboot,module") < 0 )
 +
-+        if (msg.len > XENSTORE_PAYLOAD_MAX) {
-+            printk("Xenstore violates protocol, message longer than allowed.\n");
-+            return;
-+        }
++    /* Locate chosen node */
++    node = fdt_subnode_offset(fdt, 0, "chosen");
 +
-+        if (msg.type == XS_WATCH_EVENT) {
-+            struct xenbus_event *event = malloc(sizeof(*event) + msg.len);
-+            xenbus_event_queue *events = NULL;
-+            struct watch *watch;
-+            char *c;
-+            int zeroes = 0;
-+
-+            data = (char*)event + sizeof(*event);
-+            xenbus_read_data(data, msg.len);
-+
-+            for (c = data; c < data + msg.len; c++)
-+                if (!*c)
-+                    zeroes++;
-+            if (zeroes != 2) {
-+                printk("Xenstore: illegal watch event data\n");
-+                free(event);
-+                continue;
-+            }
-+
-+            event->path = data;
-+            event->token = event->path + strlen(event->path) + 1;
-+
-+            for (watch = watches; watch; watch = watch->next)
-+                if (!strcmp(watch->token, event->token)) {
-+                    events = watch->events;
-+                    break;
-                 }
-+
-+            if (events) {
-+                event->next = *events;
-+                *events = event;
-+                wake_up(&xenbus_watch_queue);
-             } else {
--                req_info[msg.req_id].reply = malloc(sizeof(msg) + msg.len);
--                memcpy_from_ring(xenstore_buf->rsp, req_info[msg.req_id].reply,
--                                 MASK_XENSTORE_IDX(xenstore_buf->rsp_cons),
--                                 msg.len + sizeof(msg));
--                mb();
--                xenstore_buf->rsp_cons += msg.len + sizeof(msg);
--                wake_up(&req_info[msg.req_id].waitq);
-+                printk("Xenstore: unexpected watch token %s\n", event->token);
-+                free(event);
-             }
- 
--            wmb();
--            notify_remote_via_evtchn(xenbus_evtchn);
-+            continue;
-         }
-+
-+        data = malloc(sizeof(msg) + msg.len);
-+        memcpy(data, &msg, sizeof(msg));
-+        xenbus_read_data(data + sizeof(msg), msg.len);
-+
-+        if (msg.req_id >= NR_REQS || !req_info[msg.req_id].in_use) {
-+            printk("Xenstore: illegal request id %d\n", msg.req_id);
-+            free(data);
-+            continue;
-+        }
-+
-+        DEBUG("Message is good.\n");
-+
-+        req_info[msg.req_id].reply = data;
-+
-+        wake_up(&req_info[msg.req_id].waitq);
-     }
- }
- 
-@@ -451,36 +480,40 @@ static void xb_write(int type, int req_id, xenbus_transaction_t trans_id,
- 
-     cur_req = &header_req;
- 
--    BUG_ON(len > XENSTORE_RING_SIZE);
--    /* Wait for the ring to drain to the point where we can send the
--       message. */
--    prod = xenstore_buf->req_prod;
--    if (prod + len - xenstore_buf->req_cons > XENSTORE_RING_SIZE) 
--    {
--        /* Wait for there to be space on the ring */
--        DEBUG("prod %d, len %d, cons %d, size %d; waiting.\n",
--                prod, len, xenstore_buf->req_cons, XENSTORE_RING_SIZE);
--        wait_event(xb_waitq,
--                xenstore_buf->req_prod + len - xenstore_buf->req_cons <=
--                XENSTORE_RING_SIZE);
--        DEBUG("Back from wait.\n");
--        prod = xenstore_buf->req_prod;
--    }
-+    BUG_ON(len > XENSTORE_PAYLOAD_MAX);
-+
-+    /* Make sure we are the only thread trying to write. */
-+    down(&xb_write_sem);
- 
--    /* We're now guaranteed to be able to send the message without
--       overflowing the ring.  Do so. */
-+    /* Send the message in chunks using free ring space when available. */
-     total_off = 0;
-     req_off = 0;
--    while (total_off < len) 
-+    while (total_off < len)
-     {
-+        prod = xenstore_buf->req_prod;
-+        if (prod - xenstore_buf->req_cons >= XENSTORE_RING_SIZE)
++    /* Cycle through every node inside chosen having multiboot,module */
++    do {
++        int depth = 0;
++        node = fdt_node_offset_by_compatible(fdt, node, "multiboot,module");
++        /*
++         * If the multiboot,module just found is placed at depth less than 3,
++         * it means that it is here: /chosen/<module> so it is a module to
++         * start dom0. (root is counted as 0)
++         */
++        if ( node > 0 )
 +        {
-+            /* Send evtchn to notify remote */
-+            notify_remote_via_evtchn(xenbus_evtchn);
-+
-+            /* Wait for there to be space on the ring */
-+            DEBUG("prod %d, len %d, cons %d, size %d; waiting.\n", prod,
-+                  len - total_off, xenstore_buf->req_cons, XENSTORE_RING_SIZE);
-+            wait_event(xb_waitq,
-+                       prod - xenstore_buf->req_cons < XENSTORE_RING_SIZE);
-+            DEBUG("Back from wait.\n");
++            depth = fdt_node_depth(fdt, node);
++            if ( (depth >= 0) && (depth < 3) )
++            {
++                dom0_module_found = true;
++                break;
++            }
 +        }
++    } while(node > 0);
 +
-         this_chunk = min(cur_req->len - req_off,
--                XENSTORE_RING_SIZE - MASK_XENSTORE_IDX(prod));
-+                         XENSTORE_RING_SIZE - MASK_XENSTORE_IDX(prod));
-+        this_chunk = min(this_chunk,
-+                         xenstore_buf->req_cons + XENSTORE_RING_SIZE - prod);
-         memcpy((char *)xenstore_buf->req + MASK_XENSTORE_IDX(prod),
--                (char *)cur_req->data + req_off, this_chunk);
-+               (char *)cur_req->data + req_off, this_chunk);
-         prod += this_chunk;
-         req_off += this_chunk;
-         total_off += this_chunk;
--        if (req_off == cur_req->len) 
-+        if (req_off == cur_req->len)
-         {
-             req_off = 0;
-             if (cur_req == &header_req)
-@@ -488,20 +521,20 @@ static void xb_write(int type, int req_id, xenbus_transaction_t trans_id,
-             else
-                 cur_req++;
-         }
-+
-+        /* Remote must see entire message before updating indexes */
-+        wmb();
-+        xenstore_buf->req_prod = prod;
++    if ( !fdt || !dom0_module_found )
+     {
+         /*
+          * We either have no FDT, or one without modules, so we must have a
+-         * Xen EFI configuration file to specify modules.  (dom0 required)
++         * Xen EFI configuration file to specify modules.
+          */
+         return true;
      }
- 
-+    /* Send evtchn to notify remote */
-+    notify_remote_via_evtchn(xenbus_evtchn);
-+
-     DEBUG("Complete main loop of xb_write.\n");
-     BUG_ON(req_off != 0);
-     BUG_ON(total_off != len);
--    BUG_ON(prod > xenstore_buf->req_cons + XENSTORE_RING_SIZE);
- 
--    /* Remote must see entire message before updating indexes */
--    wmb();
--
--    xenstore_buf->req_prod += len;
--
--    /* Send evtchn to notify remote */
--    notify_remote_via_evtchn(xenbus_evtchn);
-+    up(&xb_write_sem);
- }
- 
- /* Send a mesasge to xenbus, in the same fashion as xb_write, and
 -- 
-2.26.2
+2.17.1
 
 
