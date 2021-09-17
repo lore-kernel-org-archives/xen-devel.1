@@ -2,54 +2,75 @@ Return-Path: <SRS0=v0KR=OH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.6 required=3.0 tests=BAYES_00,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DDDB9C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E8D50C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:30:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A270661130
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:29:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A270661130
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9273C60F48
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:30:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9273C60F48
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.189024.338483 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.189025.338494 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR8Jd-0007UV-9n; Fri, 17 Sep 2021 07:29:45 +0000
+	id 1mR8Jh-0007mK-Ip; Fri, 17 Sep 2021 07:29:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 189024.338483; Fri, 17 Sep 2021 07:29:45 +0000
+Received: by outflank-mailman (output) from mailman id 189025.338494; Fri, 17 Sep 2021 07:29:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR8Jd-0007UO-5Z; Fri, 17 Sep 2021 07:29:45 +0000
-Received: by outflank-mailman (input) for mailman id 189024;
- Fri, 17 Sep 2021 07:29:44 +0000
+	id 1mR8Jh-0007mB-E3; Fri, 17 Sep 2021 07:29:49 +0000
+Received: by outflank-mailman (input) for mailman id 189025;
+ Fri, 17 Sep 2021 07:29:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=82tu=OH=infradead.org=peterz@srs-us1.protection.inumbo.net>)
- id 1mR8Jb-0007UC-9F
- for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 07:29:43 +0000
-Received: from desiato.infradead.org (unknown
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 73375631-c64d-4f40-a014-5d4236266216;
+ <SRS0=eQru=OH=arm.com=Rahul.Singh@srs-us1.protection.inumbo.net>)
+ id 1mR8Jg-0007UC-1o
+ for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 07:29:48 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (unknown
+ [40.107.7.78]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 569c687d-b668-41af-a710-7b088ddc5ace;
  Fri, 17 Sep 2021 07:29:40 +0000 (UTC)
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mR8Ig-003p42-0g; Fri, 17 Sep 2021 07:28:46 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 64E5430031A;
- Fri, 17 Sep 2021 09:28:42 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id EBC3F2B27F98D; Fri, 17 Sep 2021 09:28:41 +0200 (CEST)
+Received: from PR3P191CA0025.EURP191.PROD.OUTLOOK.COM (2603:10a6:102:54::30)
+ by HE1PR0801MB1929.eurprd08.prod.outlook.com (2603:10a6:3:50::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.14; Fri, 17 Sep
+ 2021 07:29:38 +0000
+Received: from VE1EUR03FT026.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:102:54:cafe::b0) by PR3P191CA0025.outlook.office365.com
+ (2603:10a6:102:54::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.16 via Frontend
+ Transport; Fri, 17 Sep 2021 07:29:38 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT026.mail.protection.outlook.com (10.152.18.148) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4523.14 via Frontend Transport; Fri, 17 Sep 2021 07:29:38 +0000
+Received: ("Tessian outbound 16951d3c485e:v103");
+ Fri, 17 Sep 2021 07:29:37 +0000
+Received: from 8e2ff51be636.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ A760724D-C089-4E6E-A93C-0966CF724A45.1; 
+ Fri, 17 Sep 2021 07:29:26 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 8e2ff51be636.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Fri, 17 Sep 2021 07:29:26 +0000
+Received: from AS8PR08MB6919.eurprd08.prod.outlook.com (2603:10a6:20b:39e::10)
+ by AM6PR08MB4359.eurprd08.prod.outlook.com (2603:10a6:20b:b9::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.15; Fri, 17 Sep
+ 2021 07:29:23 +0000
+Received: from AS8PR08MB6919.eurprd08.prod.outlook.com
+ ([fe80::c8de:afad:1d5a:efd0]) by AS8PR08MB6919.eurprd08.prod.outlook.com
+ ([fe80::c8de:afad:1d5a:efd0%6]) with mapi id 15.20.4523.017; Fri, 17 Sep 2021
+ 07:29:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,111 +82,221 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73375631-c64d-4f40-a014-5d4236266216
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=17mkqfuKdfnPg9YSAeGWHc/O4GLOFEnsaFTJ4hUb1Qc=; b=R175PzEhjMPDTuiig9T+/8FvBN
-	wCwITbQjI86keC2UZcKL3oHklcXqScPxlhfsprjzgtQHXNUwlN8OYqdLQ7ztxGmPqLPGGL1HvK5TW
-	8un1CwadAtDZMXP8kHm7KJ60CKQlzq6kBsXmSOCidcFaqUG49FGQ/Q91WQSCSzrudnHUpN1n/dtAK
-	3oCiHTPea1eYl35kiZcqB3afHwTSqwkSRYpje8CyTQKsMtTXOUjDfhQXOeCpbGDLw3jXUuiLQwU+o
-	fpmbPjE5lGD64IJe7KimQfKhdgCV7/TWkKj798HvtN0fT0soP/DzPI91f4RdvEreoDEx02Cp2qq0O
-	NM1LgiIg==;
-Date: Fri, 17 Sep 2021 09:28:41 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Sean Christopherson <seanjc@google.com>
-Cc: Ingo Molnar <mingo@redhat.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Marc Zyngier <maz@kernel.org>, Guo Ren <guoren@kernel.org>,
-	Nick Hu <nickhu@andestech.com>, Greentime Hu <green.hu@gmail.com>,
-	Vincent Chen <deanbo422@gmail.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Borislav Petkov <bp@alien8.de>, x86@kernel.org,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@redhat.com>, Namhyung Kim <namhyung@kernel.org>,
-	James Morse <james.morse@arm.com>,
-	Alexandru Elisei <alexandru.elisei@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>,
-	Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, kvmarm@lists.cs.columbia.edu,
-	linux-csky@vger.kernel.org, linux-riscv@lists.infradead.org,
-	kvm@vger.kernel.org, xen-devel@lists.xenproject.org,
-	Artem Kashkanov <artem.kashkanov@intel.com>,
-	Like Xu <like.xu.linux@gmail.com>,
-	Zhu Lingshan <lingshan.zhu@intel.com>
-Subject: Re: [PATCH v2 00/13] perf: KVM: Fix, optimize, and clean up callbacks
-Message-ID: <YURDqVZ1UXKCiKPV@hirez.programming.kicks-ass.net>
-References: <20210828003558.713983-1-seanjc@google.com>
- <20210828201336.GD4353@worktop.programming.kicks-ass.net>
- <YUO5J/jTMa2KGbsq@google.com>
+X-Inumbo-ID: 569c687d-b668-41af-a710-7b088ddc5ace
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=32hs9lkEXp8u8+aXUbXvjic0i9Ga9cqihqwtBjJ6HRo=;
+ b=QhLSgxB9viWgu6mzaW4fpiZBIwmcU8D8Sy4FTzkLF8R7cEMUEdul8OwIZ2UyI0BPGlyKqh+wS2vuSF5dPAZ1LE1ttpuGgh3lS/ug7nobQga3gRLiHuhDMf4qofZvjUwwOOnsIw6NV7KgJWkuJ+ipJAOaerNRmUv2lfbuGo2bTxY=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
+ action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: cd03f33da22e8fff
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=b/JH8L1Z5jlkvAqEwGQo1K2upYa92R1OGqhst8BLevhp95Lw4tWEaNnmw5p7Ef23at0aZpcBDmjF3xVYiRltqOUFphEf5m77BdWp/bl+/WC8TR8ppcoaSjVLZ5ha4F+w3LhCuoWRntuofXD2KCEmwkeMJqxdUoT4aol/SeLZNbzPugMYpwwQC/JGO3cxjAluyR3nFmeOaZcnRCkuHzMb0LY3+JZopNe+gkb+qTrMABRhVa93R6qr9Nbjt+1L0AoJrHV1i2Yosq0StX6zKAVetkJKgVSI5vP3CVbx5EpZxIgbCj3KRMyKUD0keoYHuXILH89WNB+eH3ywx1HmgTxRmw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=32hs9lkEXp8u8+aXUbXvjic0i9Ga9cqihqwtBjJ6HRo=;
+ b=UUZK3M0BXZnheq639Y8zNmZj2ZjwsW+dgSFeplemiLOSyLuOPpClw+ml0pFKyi737L6DWFN1yHMC3Ibr2ENlIRfaWQNuC1zrcXD0clXLE0PIlcP01Crd1Mx0RCorEDqr8QOseVlKrlhFCzYJBuCQxYEKs8oOzm92jRJ5xKrhLHikZDtXF3J0LEwULiScwSwqrx/btTlanM8fyCWfGBB61FoG66a02lmWBO28DB2VVrxkBvh+fGgqNSMy0+4OBCGfyh5ZqZyVA/wil8+P8Lery/9vKbGHNlKI7Mu0V0x+4FmLek+svppU9V1xLxoERLzgmuXob9gmOBPcabP08d2PLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=32hs9lkEXp8u8+aXUbXvjic0i9Ga9cqihqwtBjJ6HRo=;
+ b=QhLSgxB9viWgu6mzaW4fpiZBIwmcU8D8Sy4FTzkLF8R7cEMUEdul8OwIZ2UyI0BPGlyKqh+wS2vuSF5dPAZ1LE1ttpuGgh3lS/ug7nobQga3gRLiHuhDMf4qofZvjUwwOOnsIw6NV7KgJWkuJ+ipJAOaerNRmUv2lfbuGo2bTxY=
+From: Rahul Singh <Rahul.Singh@arm.com>
+To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"julien@xen.org" <julien@xen.org>, Oleksandr Tyshchenko
+	<Oleksandr_Tyshchenko@epam.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>,
+	"roger.pau@citrix.com" <roger.pau@citrix.com>, Bertrand Marquis
+	<Bertrand.Marquis@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH 09/11] xen/arm: Setup MMIO range trap handlers for
+ hardware domain
+Thread-Topic: [PATCH 09/11] xen/arm: Setup MMIO range trap handlers for
+ hardware domain
+Thread-Index:
+ AQHXoJ57xrO/H5MzpEqKB3+2EFX1LqudvyUAgAXn+wCAAP1GAIAAWBqAgACkJYCAAjRZAIAAFToA
+Date: Fri, 17 Sep 2021 07:29:23 +0000
+Message-ID: <DA121AFC-E89C-43CB-A7F2-160D579AEC2C@arm.com>
+References: <20210903083347.131786-1-andr2000@gmail.com>
+ <20210903083347.131786-10-andr2000@gmail.com>
+ <alpine.DEB.2.21.2109101308490.10523@sstabellini-ThinkPad-T480s>
+ <6a4e6a1d-12c9-09bb-442d-ce7f6586ef89@epam.com>
+ <20b0a8c0-10dc-7473-3c56-a9baeaa43e62@epam.com>
+ <6EA9A8EE-8101-4679-832C-A912819891BC@arm.com>
+ <alpine.DEB.2.21.2109151321030.21985@sstabellini-ThinkPad-T480s>
+ <e413eea9-b6ae-9cf8-66a6-f02fdcb645bd@epam.com>
+In-Reply-To: <e413eea9-b6ae-9cf8-66a6-f02fdcb645bd@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: epam.com; dkim=none (message not signed)
+ header.d=none;epam.com; dmarc=none action=none header.from=arm.com;
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-Correlation-Id: 6122d151-4095-4289-7f4f-08d979ace7f0
+x-ms-traffictypediagnostic: AM6PR08MB4359:|HE1PR0801MB1929:
+x-ms-exchange-transport-forked: True
+X-Microsoft-Antispam-PRVS:
+	<HE1PR0801MB1929734195B3D01E1EFCD1D9FCDD9@HE1PR0801MB1929.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ 5Yt+B9UpJK46HE73clWGR+L1BPWIBAua3jfXy95ItJrG+QotKJG8M8/+qo5BLypTCLBLFPZLwwrOvVE++b012FhQoWNaccg3XKoQ2QJra7auUZClXOq1XBnbHqvzNjso8B0jjxI2y6ntrgNQjgJ9FKy+2zadDghOoge4uvkCuh5yrtXZmyoRUZ4vX486iKuOYhsIFzoJdXB5O0ReJCrBSuviK4XsLMP5Q4kx1cWB4gjOJL+0dAlDpM6ZsKkLUUJcFa5nDpU6yDOyvAn5UCGIOD01fP+/rw8IoFOcCFzy5VvWNKhs0PZ1MadtG0Q/IFPj9Km8MCIaUC/La0YCAPDMarzmDdTGcQdPvTDreuQN39eS1INf0xa3itLN8rEm/DJyUO3yod91ifgrhbu2oVfSoRvUFGYYptDDhzLF+GeUjBlWcMKWMkZT1g98hBv4ceGw269aMrTiBQlOxZcL4l+YmBTVd1z9QweT5Trc44YbnL4ItgMNSDImapmjkKBlJUqDV+BYLY1v+wzsicu0J4d5b3usf15DnsSnLA4VbgXKewvIzaDehTOONlvhRN9YhCzyx1GFJXoLNBVPSxcZvfMlXZB9lSq86blngfpxqAvvWpM9PDta7z3Nj1uObvyf06ekKm3QbPdMMCD/pDM0H9oGOOOQHjcThtmFRnAq0SIm6DEyuxK2eCniwKK4VryaxjZQweTMmDiRzc6m8aovB9098Ck5lYxCi3XXiKEw0vM6gM0ttArXCXfGiTEyakelLPhI28Pmtfts95PJsX5Paykyk25cU0p3m3lsujyjqwjKf5pnx/8unEgXySe3iJtoqghSQVb0wxRJoOckB3NWvTT2SQ==
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB6919.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39850400004)(346002)(396003)(376002)(366004)(136003)(33656002)(66446008)(71200400001)(26005)(6916009)(2616005)(478600001)(2906002)(66556008)(83380400001)(966005)(316002)(64756008)(66946007)(91956017)(66476007)(36756003)(76116006)(186003)(8676002)(5660300002)(4326008)(122000001)(38100700002)(38070700005)(86362001)(6506007)(6512007)(8936002)(6486002)(54906003)(53546011)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <A64F14B0DF37A94FB47121445280DEA2@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YUO5J/jTMa2KGbsq@google.com>
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4359
+Original-Authentication-Results: epam.com; dkim=none (message not signed)
+ header.d=none;epam.com; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ VE1EUR03FT026.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	b91a1034-4e33-4e29-65ed-08d979acdf31
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	4B60ywczJsrj6mCSycmBDAq+2uBNEb36uQ9aES7G7cTqpWwxzM7LUJe4uiaUIwLYg5VOnseS8XGUOaD7IgqKDdGEOWuyGGz/izTHUmBL0s4qVbShq9rCXIBw1HO+njOfb7imQcwbPr6YZ9e072tJCRgRxPaAO/68nN1taHkn+RszMdPLG7GYECvq7BQqKoYfxrw4qlNU91YLpqhY/rEFLQ68uEe6a+e5L0cflJ8Aeq9pzzSOXl6lqwDIpYAMa4wUoKNngJvDNl9Wztog5cVRUTny9/Y6JNLg7Ej0mZB14OOQ6a/RyXVuNxrqzY890oL/kyl40uzok3M55vdbiu97uPf02D2dzQQoILSoK41INfL8LBcv/dhSb0tsGfEsgJfpwAdbUG5hgN42YJqHP8QEXurY04Ue2N1vFD2Ok/K+1rq0n0B9bUxnOLkfCMvNi/h8OqcIOX8S7johtsb3JVWvERUfBl4Rc2yrXfyIgnY/GoWUR4Gqsk/SXEv98w0VkpGuwARzJASFOxcGkCDrNPWNfL/ORezazd9fj6wka8wg8m4pQP3DYjCMoYh9Yn3ihdkVkmBnlemKkFj5cuh4Nahjbpba2Kvfn72nBqs/eddwzYfbaBqQA6g06YJcNOH5RCbBEzBo8FLYxnWwlFgKB1rynWtw4uVPCj78Jry7Rufu4BeRWKozlM4bO4SJwnzi15aM+XUujLmOAt90pEW2fCjnkE5msCQkOWWACxueGpKwfTg96HF4caNogOCaR7BADWZLOrdPCIfvqvUJs6OInOm792gj+73XVufXVEzue89XiOc=
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(2906002)(316002)(53546011)(6506007)(70586007)(4326008)(6862004)(82310400003)(356005)(86362001)(26005)(81166007)(6486002)(36756003)(8676002)(36860700001)(54906003)(508600001)(5660300002)(2616005)(83380400001)(8936002)(966005)(186003)(33656002)(107886003)(47076005)(336012)(6512007)(70206006);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2021 07:29:38.1220
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6122d151-4095-4289-7f4f-08d979ace7f0
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	VE1EUR03FT026.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0801MB1929
 
-On Thu, Sep 16, 2021 at 09:37:43PM +0000, Sean Christopherson wrote:
-> On Sat, Aug 28, 2021, Peter Zijlstra wrote:
+Hi Oleksandr,
 
-> Argh, sorry, I somehow managed to miss all of your replies.  I'll get back to
-> this series next week.  Thanks for the quick response!
-> 
-> > Lets keep the whole intel_pt crud inside x86...
-> 
-> In theory, I like the idea of burying intel_pt inside x86 (and even in
-> Intel+VMX code for the most part), but the actual implementation is a
-> bit gross.  Because of the whole "KVM can be a module" thing,
+> On 17 Sep 2021, at 7:13 am, Oleksandr Andrushchenko <Oleksandr_Andrushche=
+nko@epam.com> wrote:
+>=20
+> Hi, Rahul!
+>=20
+> On 15.09.21 23:33, Stefano Stabellini wrote:
+>> On Wed, 15 Sep 2021, Rahul Singh wrote:
+>>> Hi Oleksandr, Stefano,
+>>>=20
+>>>> On 15 Sep 2021, at 6:30 am, Oleksandr Andrushchenko <Oleksandr_Andrush=
+chenko@epam.com> wrote:
+>>>>=20
+>>>> Hi, Rahul!
+>>>>=20
+>>>> On 14.09.21 17:24, Oleksandr Andrushchenko wrote:
+>>>>> }
+>>>>>>>   +static int pci_ecam_register_mmio_handler(struct domain *d,
+>>>>>>> +                                          struct pci_host_bridge *=
+bridge,
+>>>>>>> +                                          const struct mmio_handle=
+r_ops *ops)
+>>>>>>> +{
+>>>>>>> +    struct pci_config_window *cfg =3D bridge->sysdata;
+>>>>>>> +
+>>>>>>> +    register_mmio_handler(d, ops, cfg->phys_addr, cfg->size, NULL)=
+;
+>>>>>>> +    return 0;
+>>>>>>> +}
+>>>>>> Given that struct pci_config_window is generic (it is not specific t=
+o
+>>>>>> one bridge), I wonder if we even need the .register_mmio_handler
+>>>>>> callback here.
+>>>>>>=20
+>>>>>> In fact,pci_host_bridge->sysdata doesn't even need to be a void*, it
+>>>>>> could be a struct pci_config_window*, right?
+>>>>> Rahul, this actually may change your series.
+>>>>>=20
+>>>>> Do you think we can do that?
+>>>>>=20
+>>>> This is the only change requested that left unanswered by now.
+>>>>=20
+>>>> Will it be possible that you change the API accordingly, so I can
+>>>>=20
+>>>> implement as Stefano suggests?
+>>> We need pci_host_bridge->sysdata as void* in case we need to implement =
+the new non-ecam PCI controller in XEN.
+>>> Please have a look once in Linux code[1] how bridge->sysdata will be us=
+ed. struct pci_config_window is used only for
+>>> ecam supported host controller. Different PCI host controller will have=
+ different PCI interface to access the PCI controller.
+>>>=20
+>>> [1] https://urldefense.com/v3/__https://git.kernel.org/pub/scm/linux/ke=
+rnel/git/torvalds/linux.git/tree/drivers/pci/controller/pcie-rcar-host.c*n3=
+09__;Iw!!GF_29dbcQIUBPA!kjkv6KIlvXOEgVaS6BNPRo0gyABihhO0XmNHRPFJaFAGhhTEuK1=
+mIsWqPs0cXEipzkT_MmA-Eg$ [git[.]kernel[.]org]
+>>>=20
+>>> I think we need bridge->sysdata in future to implement the new PCI cont=
+roller.
+>> In my opinion the pci_config_window is too important of an information
+>> to be left inside an opaque pointer, especially when the info under
+>> pci_config_window is both critical and vendor-neutral.
+>>=20
+>> My preference would be something like this:
+>>=20
+>>=20
+>> diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+>> index 9c28a4bdc4..c80d846da3 100644
+>> --- a/xen/include/asm-arm/pci.h
+>> +++ b/xen/include/asm-arm/pci.h
+>> @@ -55,7 +55,6 @@ struct pci_config_window {
+>>      uint8_t         busn_start;
+>>      uint8_t         busn_end;
+>>      void __iomem    *win;
+>> -    const struct    pci_ecam_ops *ops;
+>>  };
+>>=20
+>>  /*
+>> @@ -68,7 +67,8 @@ struct pci_host_bridge {
+>>      uint16_t segment;                /* Segment number */
+>>      u8 bus_start;                    /* Bus start of this bridge. */
+>>      u8 bus_end;                      /* Bus end of this bridge. */
+>> -    void *sysdata;                   /* Pointer to the config space win=
+dow*/
+>> +    struct pci_config_window* cfg;   /* Pointer to the bridge config wi=
+ndow */
+>> +    void *sysdata;                   /* Pointer to bridge private data =
+*/
+>>      const struct pci_ops *ops;
+>>  };
+>>=20
+>>=20
+>> As a reference the attached patch builds. However, I had to remove const
+>> where struct pci_ecam_ops *ops is used.
+>=20
+> I'd like to know which route we go with this as this is now the last
+>=20
+> thing which stops me from sending v2 of this series.
 
-ARGH!! we should really fix that. I've heard other archs have made much
-better choices here.
+I will modify the code as per Stefano request and will send the next versio=
+n.
 
-> either
-> the static call and __static_call_return0 would need to be exported,
-> or a new register/unregister pair would have to be exported.
+Regards,
+Rahul
+>=20
+> Thank you,
+>=20
+> Oleksandr
 
-So I don't mind exporting __static_call_return0, but exporting a raw
-static_call is much like exporting a function pointer :/
-
-> The unregister path would also need its own synchronize_rcu().  In general, I
-> don't love duplicating the logic, but it's not the end of the world.
-> 
-> Either way works for me.  Paolo or Peter, do either of you have a preference?
-
-Can we de-feature kvm as a module and only have this PT functionality
-when built-in? :-)
-
-
-> > ---
-> > Index: linux-2.6/arch/x86/events/core.c
-> > ===================================================================
-> > --- linux-2.6.orig/arch/x86/events/core.c
-> > +++ linux-2.6/arch/x86/events/core.c
-> > @@ -92,7 +92,7 @@ DEFINE_STATIC_CALL_RET0(x86_pmu_guest_ge
-> >  
-> >  DEFINE_STATIC_CALL_RET0(x86_guest_state, *(perf_guest_cbs->state));
-> >  DEFINE_STATIC_CALL_RET0(x86_guest_get_ip, *(perf_guest_cbs->get_ip));
-> > -DEFINE_STATIC_CALL_RET0(x86_guest_handle_intel_pt_intr, *(perf_guest_cbs->handle_intel_pt_intr));
-> > +DEFINE_STATIC_CALL_RET0(x86_guest_handle_intel_pt_intr, unsigned int (*)(void));
-> 
-> FWIW, the param needs to be a raw function, not a function pointer. 
-
-Yeah, I keep making that mistake.. and I wrote the bloody thing :/
-
-I have a 'fix' for that, but I need to finish that and also flag-day
-change :-(
-
-  https://lkml.kernel.org/r/YS+0eIeAJsRRArk4@hirez.programming.kicks-ass.net
 
