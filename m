@@ -2,59 +2,48 @@ Return-Path: <SRS0=v0KR=OH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-15.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B725C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9D9EC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:29:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0FCA561130
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:26:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0FCA561130
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6A8E961130
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 07:29:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6A8E961130
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.189006.338458 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.189016.338472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR8GK-0005yX-9q; Fri, 17 Sep 2021 07:26:20 +0000
+	id 1mR8Ik-0006qz-RJ; Fri, 17 Sep 2021 07:28:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 189006.338458; Fri, 17 Sep 2021 07:26:20 +0000
+Received: by outflank-mailman (output) from mailman id 189016.338472; Fri, 17 Sep 2021 07:28:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR8GK-0005yQ-6R; Fri, 17 Sep 2021 07:26:20 +0000
-Received: by outflank-mailman (input) for mailman id 189006;
- Fri, 17 Sep 2021 07:26:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=fBbp=OH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1mR8GI-0005yG-I4
- for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 07:26:18 +0000
-Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.109.102])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8bc0ac10-1788-11ec-b66f-12813bfff9fa;
- Fri, 17 Sep 2021 07:26:17 +0000 (UTC)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04lp2055.outbound.protection.outlook.com [104.47.14.55]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- de-mta-31-rovLXMCbM8GrtK30tCfadw-1; Fri, 17 Sep 2021 09:26:15 +0200
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by VI1PR0401MB2608.eurprd04.prod.outlook.com (2603:10a6:800:4f::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.17; Fri, 17 Sep
- 2021 07:26:13 +0000
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::4d37:ec64:4e90:b16b]) by VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::4d37:ec64:4e90:b16b%7]) with mapi id 15.20.4523.016; Fri, 17 Sep 2021
- 07:26:13 +0000
-Received: from [10.156.60.236] (37.24.206.209) by
- FR3P281CA0050.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:4a::19) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4544.5 via Frontend Transport; Fri, 17 Sep 2021 07:26:12 +0000
+	id 1mR8Ik-0006qs-MH; Fri, 17 Sep 2021 07:28:50 +0000
+Received: by outflank-mailman (input) for mailman id 189016;
+ Fri, 17 Sep 2021 07:28:50 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=jmcU=OH=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1mR8Ij-0006qm-Ut
+ for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 07:28:50 +0000
+Received: from mail-lf1-x12f.google.com (unknown [2a00:1450:4864:20::12f])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 13df9831-2454-42ab-ad77-d0e9ebddb375;
+ Fri, 17 Sep 2021 07:28:47 +0000 (UTC)
+Received: by mail-lf1-x12f.google.com with SMTP id c8so29373086lfi.3
+ for <xen-devel@lists.xenproject.org>; Fri, 17 Sep 2021 00:28:47 -0700 (PDT)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id x15sm459360lfn.108.2021.09.17.00.28.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Sep 2021 00:28:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,137 +55,523 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8bc0ac10-1788-11ec-b66f-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1631863576;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=YFBhz6nwdzlrstTFpNbiXuqgmlHYUueogQifd2M0ax4=;
-	b=nqR5tI+Bd/oP8WeKpY3VF0CLaj4HqOJkSAPnUDWjw5w7ks5u6w6fIO/65OEbZNGfS+HREh
-	l78IlYrM75m9WjGvIsCxj8Dzgsd4xGhpeeytJo0xxGboW1d8lhmEwAMN9DYf0iUMsgn5IJ
-	Kg+NUQbqxCVTBwFcHJg7zxmCUeTpebk=
-X-MC-Unique: rovLXMCbM8GrtK30tCfadw-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EekxNJxJ9SQX8GMNt9/fa/1NHAioyG88UI2hbI4Gxeq8dZlIJvaCj4ifxzKjUTkLTFl09itZyODrABngWdFlzyY5pGOoBXiK5CmEfHnPJObrT0Zeg6eF33H6QU7VA/5zEU0sVF6fblBwERxa9oupz2lPNhK0j9nKEz89zYQsoTrZII0IEkjd6fnV2yLpxTjHNR7MX51uKt4XKWr4TrM1s4xdf24RYXgLya9y8wQEQbfHV4giPBlIYbJpM9aAvu4NIjuBcT1qZ/2WjOUwVTQN7y3eGDjpGKpEog9y/Xj9bT1DxmIn+vMW9/QKFGxlsmclnngChYjSvDDrvW9YhbMzhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=YFBhz6nwdzlrstTFpNbiXuqgmlHYUueogQifd2M0ax4=;
- b=N84SdCnduDCJMc3jNqm1JNxgQMjxMJgA+rsSY0ftDPn9u5aKccicrf2XcZHk6oi7inyXGdsGln2pnVqHXfkX6GUvi/sykMxKU83bkHXCt/SiLu3uKNx62qK+sBwCkRxZZ6PcMFiaPADAjWoKG7dC+tHORPxQCZtZ3giXY+Suv4Bul0gZNA/Y477hm3ww939srAT/j2ZugPXmY3o71+QElsQkNmh1vUMA+N/mM34XYJOBA/Cvr/cWirelIgSiUbNaeiib1ut4OY7j5Ubf0zIMfOhLQUT670uWe9lBN2Zt64zQJZ1LapLmHqVeUpsQolks0x9S7aazoRTMy6swBy8Jig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=none action=none
- header.from=suse.com;
-Subject: Re: [PATCH] x86/mem_sharing: don't lock parent during fork reset
-To: Tamas K Lengyel <tamas.lengyel@intel.com>
-Cc: Tamas K Lengyel <tamas@tklengyel.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu
- <wl@xen.org>, xen-devel@lists.xenproject.org
-References: <c21708c84c850ff8c976a3934099c54da044e7d9.1631802816.git.tamas.lengyel@intel.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <52b28c4d-1cf1-6c98-e1dc-1e0f7b2f768c@suse.com>
-Date: Fri, 17 Sep 2021 09:26:10 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-In-Reply-To: <c21708c84c850ff8c976a3934099c54da044e7d9.1631802816.git.tamas.lengyel@intel.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0050.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:4a::19) To VI1PR04MB5600.eurprd04.prod.outlook.com
- (2603:10a6:803:e7::16)
+X-Inumbo-ID: 13df9831-2454-42ab-ad77-d0e9ebddb375
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=qgbI4RF4QtWHUfQV5/L0znctien73LjWZZ67XaNeI5w=;
+        b=E7VObHj9RQ7Qn+awOIdOrYGCihJnVKu8gfFutbDmfsFEgotq9R9Mfd/4JnfTWJ+gdv
+         disBkphpHhXzCFyXyp6FFWVVsjyu397TbkrWT39q/u6pUjWxZx2jpN0MT2ZiSu1AWjmN
+         jmW+b+gmPOeXyK26EJb9eGl0P04pa0Q5bWqi4seMF8+iTop2t8BL+xb0uGT6OO863VF7
+         tPPEvEtOYRk5NcE8kBtHaJnVbj25A1Ozo0/Yw2LgELLQ48IRU4nd3Smtpgj/7QA3ensn
+         JCDh0MCDpZrecT2rveX0n4nQU6QplARo6clNJwXKkTii3IifWCWZr7PGFIDYxeN1ECit
+         +30A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=qgbI4RF4QtWHUfQV5/L0znctien73LjWZZ67XaNeI5w=;
+        b=xqL/aLUC7M+0334hXHzC7xmPbg0W+8pqnaJQtIMEMK+gwCmJf9KaY2lDcq9QIMTS9X
+         WtC4jVjO+xM5WmR7h0WUVEJSu30Gz+cWpFIpLeKivdAUk1JJNBuBHZj5wFiYjVNtRtx+
+         uI+RiNj6FgynvAkRG22Us1qNc8I5NmiLdeU/5MzAZW/5l+eV2oV7KPggOMwCmdeVN69b
+         wd8qRJKcXGlCb8m9Rs+qzVVIRtYmXFbHc9tbI+J6dVWIZ+4Nnx9m0enYEvwHI9VIx7Ur
+         SFfz7pPLreZVYoIZOaRQ/pdezYXr2Oy1j30TESGRzqvMyADt/glvRSjol8l8p+QaEG9S
+         fwOA==
+X-Gm-Message-State: AOAM533hi/i6FLrJ3Ug0KC7OJyngBi91/JV02AaMgVmq9Q4WM1YKgVx0
+	0R6oYlzr/n0QIp6+ntX6trA=
+X-Google-Smtp-Source: ABdhPJzpSDNnHkqmEYGG+hBHZbvMQT3mSwCXoZDsE1gMe5DyB0xA6daB9AYGDVGUT62c5wZuxrSZ8Q==
+X-Received: by 2002:a05:6512:114a:: with SMTP id m10mr3195414lfg.382.1631863726431;
+        Fri, 17 Sep 2021 00:28:46 -0700 (PDT)
+Subject: Re: [PATCH V2 2/3] xen/arm: Add handling of extended regions for Dom0
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Julien Grall <julien@xen.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, Henry Wang <Henry.Wang@arm.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>
+References: <1631297924-8658-1-git-send-email-olekstysh@gmail.com>
+ <1631297924-8658-3-git-send-email-olekstysh@gmail.com>
+ <alpine.DEB.2.21.2109131726420.10523@sstabellini-ThinkPad-T480s>
+ <c3fd1198-15bf-6c05-fe5d-ea29255f1dfe@gmail.com>
+ <alpine.DEB.2.21.2109151352100.21985@sstabellini-ThinkPad-T480s>
+ <b349e43a-91d9-16ba-57c6-34e790b8b31c@gmail.com>
+ <alpine.DEB.2.21.2109161423020.21985@sstabellini-ThinkPad-T480s>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <9579f367-d7f8-b4e7-c18f-af871ee0102d@gmail.com>
+Date: Fri, 17 Sep 2021 10:28:45 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7b150297-fbec-40c9-0402-08d979ac6da2
-X-MS-TrafficTypeDiagnostic: VI1PR0401MB2608:
-X-Microsoft-Antispam-PRVS:
-	<VI1PR0401MB260853BC50ADF76A78E78C1AB3DD9@VI1PR0401MB2608.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	lhoNbeBRHbqWdI9IUM3+jlv58pzvAVqwkGJ8s7aruERNV/80dDTxWIdSmx3PGNcUZbXRhNg225ryLA1YvaqOcwmdfVcP4ttKcuJGw42jAspnF8TpziKfczaa5inoN0hujwM5wA08Qs8OA0sKLC/MBUHslWTAOMqSS+Nra9n04v8H0ZXsfKCpv14d8QOkGxO4MkQq9IYpGC3gjlfWSJYLrKj0u7CEEoI2ibdTALWX9dpZu7FYcvFAwupp6Lrb0QHFA/aTF922W6nfrTrhXLQUMLIPPkI0zWj0z+mpi0wQI6NSn53Wx/fCBVepkxsncFfQQ2dcrUxtelA7DnBroCsBjWHFHnUADc6H6IjkGWYApKUp2FoCtffu+DyIbKrhn+WJmMHWlp6euEsVSTWktGKcmNk2UtBgDBO6SCBxnmYDmRYGziUl/4L8+zfqWKo4yx4gH9vEA3DeNsdmPyN9N5N1h7Lcluc+oLZs5kqOdzyflmtCaLAyp86cuJEQecVoqjezSQQrEG6JS2j2q9MZkTCAwseBDWrAkfxbfwIbe17z8pEXH0MtMpHLH5pasOVYdKu4Re0+T4OeFc+amLp6YpovyGtIWlX0rrNL43eZNT6gKsgOjmC8zmrtTj9Hv/+y3OJNHDFt+ppRJ1eMZDFh1VpUaVlXBO79rhAeZjjVEuDLYD96/fB1y52UqwbPxsvoygRbVG91eft3oepjxbEFoe/yCJJ79fJS6c6Hpzu62GRdtiA=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(956004)(2616005)(83380400001)(31696002)(38100700002)(6916009)(86362001)(31686004)(16576012)(8676002)(66556008)(66476007)(66946007)(316002)(8936002)(5660300002)(54906003)(26005)(186003)(2906002)(508600001)(6486002)(4326008)(53546011)(36756003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?V1Z6MmlpTUJQcTZoU3JMajhsN2hoazM1QnJ1WHdvK2duMkxubU5ORFE5YTA5?=
- =?utf-8?B?RGhLQlNmYk1RVERBdmpRQU9YUHM4ZDlaazYxNTFyVEhCc3Bha2EzbEpVTG5u?=
- =?utf-8?B?bTZKUFhqMit6d2xLcTdaRUEvVzh0VTBBZktZNVRFQ2tGU0FINlI2cldnOEZV?=
- =?utf-8?B?bEYra0lIZkJXeXZKbGRDc3UvVUhLQy9xdVRacTJRUHlISFZIMlJHOUV6clNM?=
- =?utf-8?B?M08xNUdPbWE0ajZQVDRlc2tJM2ZGSWZwZVM3QzlscDRKUVZXVGJOQXZwS1N5?=
- =?utf-8?B?SU53dzd5OE9WeHBVQWRaRFpaSVVaY2kzWFFXOVZGdzY4Q0tRUWxORnE5clZ6?=
- =?utf-8?B?UFRGWXFlQkJ0TW1nZFpWVmRXaURic2dhMms4ODc4VTRKSDhDSmVEdFJHUGlN?=
- =?utf-8?B?YWY3aHVuS0YrdE9qRCtvUDRnMVo4ODlDWmlwWXhIVkVwZ0RYbzBSOWRSYkNx?=
- =?utf-8?B?bC8xeHppVFVPbHJPKzB4WXRzbDYzOUhnSERFS09uak5VOVAzOTZrQTlTNlJs?=
- =?utf-8?B?Qmh2V1FyWWxjczZhQlcvZ3I3YVc2OUd1RjFlRlIvV0pLNXJzTWJaa01MekNv?=
- =?utf-8?B?b28ySitwenRmQ1BMOGNmcUg0ODhURTJucGduem03Y2RISm5Wa0psZ3RZWDNx?=
- =?utf-8?B?TU05aThWNlBucWM1Zk1LS0tnMHZIUERxdUo5MHJ6VXpBVTd1b1JZeGNUUXZk?=
- =?utf-8?B?UXhVeXhSdXIvMWdLU3hSaGJodnFuS3N4SFR6K1E3N0hVMEF4cmVTdlB1ZG9w?=
- =?utf-8?B?U25xYWd1RFQrZzIzWVJwcHA4V0NOeFFnaU1NSTAxbkU1ZkNGbE04RWtLZWZl?=
- =?utf-8?B?WTNCNlNEcGFNMmhiTFlZMEhDYlFJa0wxejZybTVxLzhYd25OTnkxb3dSMUQ0?=
- =?utf-8?B?TVlqbnVDUVlFbGM1ZmQxdVFyakpWNFFGbkhORHUzaXBLTkMvQ3ZjWGd1MmdB?=
- =?utf-8?B?bzNVKzlZYmlxNVVFdFRzZkI2V0w4Z3R4eW9OaGpVZ245KzdDaTZYeU11ekVC?=
- =?utf-8?B?QjJVWFlvOHE1SmxWNmhYWmFZOEZMZ3Q1UUNrbENqUnFvbHRNMjZpWVFoY1lM?=
- =?utf-8?B?VThzT1BwMkxOYzVqOGRVYWhRQ0NUb2g2a0FJTjlQTi9ybGIvSkRKWkhNanFt?=
- =?utf-8?B?aEFOeXpsK29lbXpYUkF6MWFlaWxtODlBRHlwUW5yOTh6RGovQWg4aTFQRTRV?=
- =?utf-8?B?Uzk3Mi9WTWI5TCswbGpFRzVUWFNzeHJuQmxjTEJ4elZiVjQ5YWZPSjl6Y0RB?=
- =?utf-8?B?ZVlhVkUzYktWRFFhN0JUWTV0MGo1d3N6endHcFJZSWp2T3B5OEdSQWNHS3lw?=
- =?utf-8?B?QWJ1ZHpmWGlWWjY0bldIM29UbmovMUMycm9YQWZGNmhoeCtuOWdMeVh0ZWZZ?=
- =?utf-8?B?MTlkdDJsaE9mcFp6RjVrRHMvb0YxOVZ0M3RMLzNNM1hpOE5XWFlSZ1FzWW1N?=
- =?utf-8?B?dHArQTdDcHZIYlROQi93ME95ems1b1ZxN2NvN3gvY1BQcjZsQXg5MW1jUjQx?=
- =?utf-8?B?TGJBaFhzbGJveUZyRGdZQ2taNktPZVJBUzB1Y2I4T0NMM2xYVDJPNmpUUjRT?=
- =?utf-8?B?Rks1Sm5ZVG93TWlNRmZodkFmQ1d3RDRNZ0xKeDhGa202Mmo2SkVlbVNlUkhs?=
- =?utf-8?B?T295Mm42Y0dTN0RWSVVwcTZSRE5jcitWamF5aEYxbitRbFkzZEV0Y3FDQWhr?=
- =?utf-8?B?b205bUxjL1BEQWdIR3lyUWFmd1lRSkJsWTAwWXlNVnJQcUw3cUkxditsNDVt?=
- =?utf-8?Q?MtW9e9Rt5ZW43M9kqVZGZIQQ9MQtjDKRUIWGB7h?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b150297-fbec-40c9-0402-08d979ac6da2
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2021 07:26:13.1375
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KoCoWMBA/jKtjtDDuKZ1uXUa9LE8dCMxvU3IAU1tUwgFyOnbm6zwlkdI0V1ABAxXe8ivKYWQOlhk4MRgbrzMTA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2608
+In-Reply-To: <alpine.DEB.2.21.2109161423020.21985@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On 16.09.2021 17:04, Tamas K Lengyel wrote:
-> During fork reset operation the parent domain doesn't need to be gathered using
-> rcu_lock_live_remote_domain_by_id as the fork reset doesn't modify anything on
-> the parent. The parent is also guaranteed to be paused while forks are active.
-> This patch reduces lock contention when performing resets in parallel.
 
-I'm a little in trouble following you here: RCU locks aren't really
-locks in that sense, so "lock contention" seems misleading to me. I
-can see that rcu_lock_domain_by_id()'s loop is extra overhead.
+On 17.09.21 00:30, Stefano Stabellini wrote:
 
-Furthermore - does the parent being paused really mean the parent
-can't go away behind the back of the fork reset? In fork() I see
+Hi Stefano
 
-    if ( rc && rc != -ERESTART )
-    {
-        domain_unpause(d);
-        put_domain(d);
-        cd->parent = NULL;
-    }
+> On Thu, 16 Sep 2021, Oleksandr wrote:
+>>> On Wed, 15 Sep 2021, Oleksandr wrote:
+>>>>> On Fri, 10 Sep 2021, Oleksandr Tyshchenko wrote:
+>>>>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>>>>
+>>>>>> The extended region (safe range) is a region of guest physical
+>>>>>> address space which is unused and could be safely used to create
+>>>>>> grant/foreign mappings instead of wasting real RAM pages from
+>>>>>> the domain memory for establishing these mappings.
+>>>>>>
+>>>>>> The extended regions are chosen at the domain creation time and
+>>>>>> advertised to it via "reg" property under hypervisor node in
+>>>>>> the guest device-tree. As region 0 is reserved for grant table
+>>>>>> space (always present), the indexes for extended regions are 1...N.
+>>>>>> If extended regions could not be allocated for some reason,
+>>>>>> Xen doesn't fail and behaves as usual, so only inserts region 0.
+>>>>>>
+>>>>>> Please note the following limitations:
+>>>>>> - The extended region feature is only supported for 64-bit domain.
+>>>>>> - The ACPI case is not covered.
+>>>>>>
+>>>>>> ***
+>>>>>>
+>>>>>> As Dom0 is direct mapped domain on Arm (e.g. MFN == GFN)
+>>>>>> the algorithm to choose extended regions for it is different
+>>>>>> in comparison with the algorithm for non-direct mapped DomU.
+>>>>>> What is more, that extended regions should be chosen differently
+>>>>>> whether IOMMU is enabled or not.
+>>>>>>
+>>>>>> Provide RAM not assigned to Dom0 if IOMMU is disabled or memory
+>>>>>> holes found in host device-tree if otherwise. Make sure that
+>>>>>> extended regions are 2MB-aligned and located within maximum possible
+>>>>>> addressable physical memory range. The maximum number of extended
+>>>>>> regions is 128.
+>>>>>>
+>>>>>> Suggested-by: Julien Grall <jgrall@amazon.com>
+>>>>>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>>>> ---
+>>>>>> Changes since RFC:
+>>>>>>       - update patch description
+>>>>>>       - drop uneeded "extended-region" DT property
+>>>>>> ---
+>>>>>>
+>>>>>>     xen/arch/arm/domain_build.c | 226
+>>>>>> +++++++++++++++++++++++++++++++++++++++++++-
+>>>>>>     1 file changed, 224 insertions(+), 2 deletions(-)
+>>>>>>
+>>>>>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+>>>>>> index 206038d..070ec27 100644
+>>>>>> --- a/xen/arch/arm/domain_build.c
+>>>>>> +++ b/xen/arch/arm/domain_build.c
+>>>>>> @@ -724,6 +724,196 @@ static int __init make_memory_node(const struct
+>>>>>> domain *d,
+>>>>>>         return res;
+>>>>>>     }
+>>>>>>     +static int __init add_ext_regions(unsigned long s, unsigned long
+>>>>>> e,
+>>>>>> void *data)
+>>>>>> +{
+>>>>>> +    struct meminfo *ext_regions = data;
+>>>>>> +    paddr_t start, size;
+>>>>>> +
+>>>>>> +    if ( ext_regions->nr_banks >= ARRAY_SIZE(ext_regions->bank) )
+>>>>>> +        return 0;
+>>>>>> +
+>>>>>> +    /* Both start and size of the extended region should be 2MB
+>>>>>> aligned
+>>>>>> */
+>>>>>> +    start = (s + SZ_2M - 1) & ~(SZ_2M - 1);
+>>>>>> +    if ( start > e )
+>>>>>> +        return 0;
+>>>>>> +
+>>>>>> +    size = (e - start + 1) & ~(SZ_2M - 1);
+>>>>>> +    if ( !size )
+>>>>>> +        return 0;
+>>>>> Can't you align size as well?
+>>>>>
+>>>>>      size = (size - (SZ_2M - 1)) & ~(SZ_2M - 1);
+>>>> I am sorry, I don't entirely get what you really meant here. We get both
+>>>> start
+>>>> and size 2MB-aligned by the calculations above
+>>>> (when calculating an alignment, we need to make sure that "start_passed <=
+>>>> start_aligned && size_aligned <= size_passed").
+>>>> If I add the proposing string after, I will reduce the already aligned
+>>>> size by
+>>>> 2MB.
+>>>> If I replace the size calculation with the following, I will get the
+>>>> reduced
+>>>> size even if the passed region is initially 2MB-aligned, so doesn't need
+>>>> to be
+>>>> adjusted.
+>>>> size = e - s + 1;
+>>>> size = (size - (SZ_2M - 1)) & ~(SZ_2M - 1);
+>>> Sorry I misread your original code, I think it was working as intended
+>>> except for the "+1". I think it should be:
+>>>
+>>>     size = (e - start) & ~(SZ_2M - 1);
+>> But why without "+1"? Isn't "e" here the *last address* of passed range?
+>> Without "+1" I get non entirely correct calculations, last valid 2MB is
+>> missed.
+> You are right: the "+1" should not be needed if this was "end",
+> following the normal definition of end. However, add_ext_regions is
+> called by rangeset_report_ranges, so end here is not actually "end", it
+> is "end-1".
 
-i.e. the ref gets dropped before the parent pointer gets cleared. If
-the parent having a reference kept was indeed properly guaranteed, I
-agree the code change itself is fine.
+Yes.
 
-(The sequence looks correct at the other put_domain() site [dealing
-with the success case of fork(), when the reference gets retained]
-in domain_relinquish_resources().)
 
-Jan
+>
+> For clarity, I would ask you to rewrite it like this:
+>
+> /*
+>   * e is actually "end-1" because it is called by rangeset functions
+>   * which are inclusive of the last address.
+>   */
+> e += 1;
+> size = (e - start) & ~(SZ_2M - 1);
+
+Ack, will do.
+
+
+>
+>
+>> [snip]
+>> (XEN) Extended region 14: 0x580000000->0x5ffe00000
+>> (XEN) Extended region 15: 0x680000000->0x6ffe00000
+>> (XEN) Extended region 16: 0x780000000->0xffffe00000
+>>
+>> But should get:
+>>
+>> [snip]
+>> (XEN) Extended region 15: 0x580000000->0x600000000
+>> (XEN) Extended region 16: 0x680000000->0x700000000
+>> (XEN) Extended region 17: 0x780000000->0x10000000000
+>>
+>> Let's consider how a hole between (for example) RAM bank 1 and bank 2 is
+>> calculated:
+>> (XEN) RAM: 0000000500000000 - 000000057fffffff <--- RAM bank 1 with size
+>> 0x80000000
+>> (XEN) RAM: 0000000600000000 - 000000067fffffff <--- RAM bank 2 with size
+>> 0x80000000
+>> So the hole size should also be 0x80000000.
+>> If we pass these RAM banks to rangeset_remove_range() one by one:
+>> 1: s = 0x500000000 e = 0x57FFFFFFF
+>> 2. s = 0x600000000 e = 0x67FFFFFFF
+>> we get s = 0x580000000 e = 0x5FFFFFFFF in add_ext_regions(), where "e" is the
+>> last address of the hole (not the first address out of the hole), so I think,
+>> that for proper size calculation we need to add 1 to "e - s". Or I really
+>> missed something?
+>>
+>>
+>>>>>> + */
+>>>>>> +#define EXT_REGION_START   0x40000000ULL
+>>>>>> +#define EXT_REGION_END     0x80003fffffffULL
+>>>>>> +
+>>>>>> +static int __init find_unallocated_memory(const struct kernel_info
+>>>>>> *kinfo,
+>>>>>> +                                          struct meminfo
+>>>>>> *ext_regions)
+>>>>>> +{
+>>>>>> +    const struct meminfo *assign_mem = &kinfo->mem;
+>>>>>> +    struct rangeset *unalloc_mem;
+>>>>>> +    paddr_t start, end;
+>>>>>> +    unsigned int i;
+>>>>>> +    int res;
+>>>>>> +
+>>>>>> +    dt_dprintk("Find unallocated memory for extended regions\n");
+>>>>>> +
+>>>>>> +    unalloc_mem = rangeset_new(NULL, NULL, 0);
+>>>>>> +    if ( !unalloc_mem )
+>>>>>> +        return -ENOMEM;
+>>>>>> +
+>>>>>> +    /* Start with all available RAM */
+>>>>>> +    for ( i = 0; i < bootinfo.mem.nr_banks; i++ )
+>>>>>> +    {
+>>>>>> +        start = bootinfo.mem.bank[i].start;
+>>>>>> +        end = bootinfo.mem.bank[i].start + bootinfo.mem.bank[i].size
+>>>>>> - 1;
+>>>>> Is the -1 needed? Isn't it going to screw up the size calculation later?
+>>>> I thought, it was needed. The calculation seems correct.
+>>> I think that normally for an example MMIO region:
+>>>
+>>> start = 0x48000000
+>>> size  = 0x40000000
+>>> end   = 0x88000000
+>>>
+>>> So end = start + size and points to the first address out of the range.
+>>> In other words, 0x88000000 doesn't actually belong to the MMIO region in
+>>> the example.
+>>>
+>>> But here you are passing addresses to rangeset_add_range and other
+>>> rangeset functions and I think rangeset takes *inclusive* addresses as
+>>> input. So you need to pass start and end-1 because end-1 is the last
+>>> address of the MMIO region.
+>>>
+>>> In fact you can see for instance in map_range_to_domain:
+>>>
+>>>           res = iomem_permit_access(d, paddr_to_pfn(addr),
+>>>                   paddr_to_pfn(PAGE_ALIGN(addr + len - 1)));
+>>>
+>>> Where iomem_permit_access is based on rangeset. So for clarity, I would
+>>> do:
+>>>
+>>> start = assign_mem->bank[i].start;
+>>> end = assign_mem->bank[i].start + assign_mem->bank[i].size;
+>>> res = rangeset_remove_range(unalloc_mem, start, end - 1);
+>>>
+>>> So that we don't get confused on the meaning of "end" which everywhere
+>>> else means the first address not in range.
+>> I got your point, I will update the code if it much cleaner.
+>>
+>>
+>>>>>> +        res = rangeset_add_range(unalloc_mem, start, end);
+>>>>>> +        if ( res )
+>>>>>> +        {
+>>>>>> +            printk(XENLOG_ERR "Failed to add:
+>>>>>> %#"PRIx64"->%#"PRIx64"\n",
+>>>>>> +                   start, end);
+>>>>>> +            goto out;
+>>>>>> +        }
+>>>>>> +    }
+>>>>>> +
+>>>>>> +    /* Remove RAM assigned to Dom0 */
+>>>>>> +    for ( i = 0; i < assign_mem->nr_banks; i++ )
+>>>>>> +    {
+>>>>>> +        start = assign_mem->bank[i].start;
+>>>>>> +        end = assign_mem->bank[i].start + assign_mem->bank[i].size -
+>>>>>> 1;
+>>>>>> +        res = rangeset_remove_range(unalloc_mem, start, end);
+>>>>>> +        if ( res )
+>>>>>> +        {
+>>>>>> +            printk(XENLOG_ERR "Failed to remove:
+>>>>>> %#"PRIx64"->%#"PRIx64"\n",
+>>>>>> +                   start, end);
+>>>>>> +            goto out;
+>>>>>> +        }
+>>>>>> +    }
+>>>>>> +
+>>>>>> +    /* Remove reserved-memory regions */
+>>>>>> +    for ( i = 0; i < bootinfo.reserved_mem.nr_banks; i++ )
+>>>>>> +    {
+>>>>>> +        start = bootinfo.reserved_mem.bank[i].start;
+>>>>>> +        end = bootinfo.reserved_mem.bank[i].start +
+>>>>>> +            bootinfo.reserved_mem.bank[i].size - 1;
+>>>>>> +        res = rangeset_remove_range(unalloc_mem, start, end);
+>>>>>> +        if ( res )
+>>>>>> +        {
+>>>>>> +            printk(XENLOG_ERR "Failed to remove:
+>>>>>> %#"PRIx64"->%#"PRIx64"\n",
+>>>>>> +                   start, end);
+>>>>>> +            goto out;
+>>>>>> +        }
+>>>>>> +    }
+>>>>>> +
+>>>>>> +    /* Remove grant table region */
+>>>>>> +    start = kinfo->gnttab_start;
+>>>>>> +    end = kinfo->gnttab_start + kinfo->gnttab_size - 1;
+>>>>>> +    res = rangeset_remove_range(unalloc_mem, start, end);
+>>>>>> +    if ( res )
+>>>>>> +    {
+>>>>>> +        printk(XENLOG_ERR "Failed to remove:
+>>>>>> %#"PRIx64"->%#"PRIx64"\n",
+>>>>>> +               start, end);
+>>>>>> +        goto out;
+>>>>>> +    }
+>>>>>> +
+>>>>>> +    start = EXT_REGION_START;
+>>>>>> +    end = min((1ULL << p2m_ipa_bits) - 1, EXT_REGION_END);
+>>>>>> +    res = rangeset_report_ranges(unalloc_mem, start, end,
+>>>>>> +                                 add_ext_regions, ext_regions);
+>>>>>> +    if ( res )
+>>>>>> +        ext_regions->nr_banks = 0;
+>>>>>> +    else if ( !ext_regions->nr_banks )
+>>>>>> +        res = -ENOENT;
+>>>>>> +
+>>>>>> +out:
+>>>>>> +    rangeset_destroy(unalloc_mem);
+>>>>>> +
+>>>>>> +    return res;
+>>>>>> +}
+>>>>>> +
+>>>>>> +static int __init find_memory_holes(const struct kernel_info *kinfo,
+>>>>>> +                                    struct meminfo *ext_regions)
+>>>>>> +{
+>>>>>> +    struct dt_device_node *np;
+>>>>>> +    struct rangeset *mem_holes;
+>>>>>> +    paddr_t start, end;
+>>>>>> +    unsigned int i;
+>>>>>> +    int res;
+>>>>>> +
+>>>>>> +    dt_dprintk("Find memory holes for extended regions\n");
+>>>>>> +
+>>>>>> +    mem_holes = rangeset_new(NULL, NULL, 0);
+>>>>>> +    if ( !mem_holes )
+>>>>>> +        return -ENOMEM;
+>>>>>> +
+>>>>>> +    /* Start with maximum possible addressable physical memory range
+>>>>>> */
+>>>>>> +    start = EXT_REGION_START;
+>>>>>> +    end = min((1ULL << p2m_ipa_bits) - 1, EXT_REGION_END);
+>>>>>> +    res = rangeset_add_range(mem_holes, start, end);
+>>>>>> +    if ( res )
+>>>>>> +    {
+>>>>>> +        printk(XENLOG_ERR "Failed to add: %#"PRIx64"->%#"PRIx64"\n",
+>>>>>> +               start, end);
+>>>>>> +        goto out;
+>>>>>> +    }
+>>>>>> +
+>>>>>> +    /* Remove all regions described by "reg" property (MMIO, RAM,
+>>>>>> etc) */
+>>>>>> +    dt_for_each_device_node( dt_host, np )
+>>>>> Don't you need something like device_tree_for_each_node ?
+>>>>> dt_for_each_device_node won't go down any deeper in the tree?
+>>>> Thank you for pointing this out, I will investigate and update the patch.
+>>>>
+>>>>
+>>>>> Alternatively, maybe we could simply record the highest possible address
+>>>>> of any memory/device/anything as we scan the device tree with
+>>>>> handle_node. Then we can use that as the starting point here.
+>>>> I also don't like the idea to scan the DT much, but I failed to find an
+>>>> effective solution how to avoid that.
+>>>> Yes, we can record the highest possible address, but I am afraid, I didn't
+>>>> entirely get a suggestion. Is the suggestion to provide a single region
+>>>> starting from highest possible address + 1 and up to the EXT_REGION_END
+>>>> suitably aligned? Could you please clarify?
+>>> Yes, that is what I was suggesting as a possible alternative: start from
+>>> the highest possible address in DT + 1 and up to the EXT_REGION_END
+>>> suitably aligned. But that wouldn't solve the <4GB issue.
+>>>
+>>>>>> +                goto out;
+>>>>>> +            }
+>>>>>> +
+>>>>>> +            start = addr & PAGE_MASK;
+>>>>>> +            end = PAGE_ALIGN(addr + size) - 1;
+>>>>>> +            res = rangeset_remove_range(mem_holes, start, end);
+>>>>>> +            if ( res )
+>>>>>> +            {
+>>>>>> +                printk(XENLOG_ERR "Failed to remove:
+>>>>>> %#"PRIx64"->%#"PRIx64"\n",
+>>>>>> +                       start, end);
+>>>>>> +                goto out;
+>>>>>> +            }
+>>>>>> +        }
+>>>>>> +    }
+>>>>> As is, it will result in a myriad of small ranges which is unuseful and
+>>>>> slow to parse. I suggest to simplify it by removing a larger region than
+>>>>> strictly necessary. For instance, you could remove a 1GB-aligned and
+>>>>> 1GB-multiple region for each range. That way, you are going to get fewer
+>>>>> large free ranges instance of many small ones which we don't need.
+>>>> I agree with you that a lot of small ranges increase the bookkeeping in
+>>>> Dom0
+>>>> and there is also a theoretical (?) possibility
+>>>> that small ranges occupy all space we provide for extended regions
+>>>> (NR_MEM_BANKS)...
+>>>> But, let's consider my setup as an example again, but when the IOMMU is
+>>>> enabled for Dom0 ("holes found in DT").
+>>>>
+>>>> --- The RAM configuration is the same:
+>>>>
+>>>> (XEN) RAM: 0000000048000000 - 00000000bfffffff <--- RAM bank 0
+>>>> (XEN) RAM: 0000000500000000 - 000000057fffffff <--- RAM bank 1
+>>>> (XEN) RAM: 0000000600000000 - 000000067fffffff <--- RAM bank 2
+>>>> (XEN) RAM: 0000000700000000 - 000000077fffffff <--- RAM bank 3
+>>>>
+>>>> --- There are a lot of various platform devices with reg property
+>>>> described in
+>>>> DT, I will probably not post all IO ranges here, just say that mostly all
+>>>> of
+>>>> them to be mapped at 0xE0000000-0xFFFFFFFF.
+>>>>
+>>>> --- As we only pick up ranges with size >= 2MB, the calculated extended
+>>>> regions are (based on 40-bit IPA):
+>>>>
+>>>> (XEN) Extended region 0: 0x40000000->0x47e00000
+>>>> (XEN) Extended region 1: 0xc0000000->0xe6000000
+>>>> (XEN) Extended region 2: 0xe7000000->0xe7200000
+>>>> (XEN) Extended region 3: 0xe7400000->0xe7600000
+>>>> (XEN) Extended region 4: 0xe7800000->0xec000000
+>>>> (XEN) Extended region 5: 0xec200000->0xec400000
+>>>> (XEN) Extended region 6: 0xec800000->0xee000000
+>>>> (XEN) Extended region 7: 0xee600000->0xee800000
+>>>> (XEN) Extended region 8: 0xeea00000->0xf1000000
+>>>> (XEN) Extended region 9: 0xf1200000->0xfd000000
+>>>> (XEN) Extended region 10: 0xfd200000->0xfd800000
+>>>> (XEN) Extended region 11: 0xfda00000->0xfe000000
+>>>> (XEN) Extended region 12: 0xfe200000->0xfe600000
+>>>> (XEN) Extended region 13: 0xfec00000->0xff800000
+>>>> (XEN) Extended region 14: 0x100000000->0x500000000
+>>>> (XEN) Extended region 15: 0x580000000->0x600000000
+>>>> (XEN) Extended region 16: 0x680000000->0x700000000
+>>>> (XEN) Extended region 17: 0x780000000->0x10000000000
+>>>>
+>>>> So, if I *correctly* understood your idea about removing 1GB-aligned
+>>>> 1GB-multiple region for each range we would get the following:
+>>>>
+>>>> (XEN) Extended region 0: 0x100000000->0x500000000
+>>>> (XEN) Extended region 1: 0x580000000->0x600000000
+>>>> (XEN) Extended region 2: 0x680000000->0x700000000
+>>>> (XEN) Extended region 3: 0x780000000->0x10000000000
+>>>>
+>>>> As you can see there are no extended regions below 4GB at all. I assume,
+>>>> it
+>>>> would be good to provide them for 1:1 mapped Dom0 (for 32-bit DMA
+>>>> devices?)
+>>>> What else worries me is that IPA size could be 36 or even 32. So, I am
+>>>> afraid,
+>>>> we might even fail to find extended regions above 4GB.
+>>>>
+>>>>
+>>>> I think, if 2MB is considered small enough to bother with, probably we
+>>>> should
+>>>> go with something in between (16MB, 32MB, 64MB).
+>>>> For example, we can take into the account ranges with size >= 16MB:
+>>>>
+>>>> (XEN) Extended region 0: 0x40000000->0x47e00000
+>>>> (XEN) Extended region 1: 0xc0000000->0xe6000000
+>>>> (XEN) Extended region 2: 0xe7800000->0xec000000
+>>>> (XEN) Extended region 3: 0xec800000->0xee000000
+>>>> (XEN) Extended region 4: 0xeea00000->0xf1000000
+>>>> (XEN) Extended region 5: 0xf1200000->0xfd000000
+>>>> (XEN) Extended region 6: 0x100000000->0x500000000
+>>>> (XEN) Extended region 7: 0x580000000->0x600000000
+>>>> (XEN) Extended region 8: 0x680000000->0x700000000
+>>>> (XEN) Extended region 9: 0x780000000->0x10000000000
+>>>>
+>>>> Any thoughts?
+>>> Yeah maybe an intermediate value would be best. I'd go with 64MB.
+>> I completely agree.
+>>
+>> So what I got on my setup with that value.
+>>
+>> 1. IOMMU is enabled for Dom0:
+>>
+>> (XEN) Extended region 0: 0x40000000->0x47e00000
+>> (XEN) Extended region 1: 0xc0000000->0xe6000000
+>> (XEN) Extended region 2: 0xe7800000->0xec000000
+>> (XEN) Extended region 3: 0xf1200000->0xfd000000
+>> (XEN) Extended region 4: 0x100000000->0x500000000
+>> (XEN) Extended region 5: 0x580000000->0x600000000
+>> (XEN) Extended region 6: 0x680000000->0x700000000
+>> (XEN) Extended region 7: 0x780000000->0x10000000000
+>>
+>> 2. IOMMU is disabled for Dom0:
+>>
+>> (XEN) Extended region 0: 0x48000000->0x54000000
+>> (XEN) Extended region 1: 0x57000000->0x60000000
+>> (XEN) Extended region 2: 0x70000000->0x78000000
+>> (XEN) Extended region 3: 0x78200000->0xc0000000
+>> (XEN) Extended region 4: 0x500000000->0x580000000
+>> (XEN) Extended region 5: 0x600000000->0x680000000
+>> (XEN) Extended region 6: 0x700000000->0x780000000
+>>
+>> Which is not bad.
+> Yeah I think that's good.
+
+-- 
+Regards,
+
+Oleksandr Tyshchenko
 
 
