@@ -2,42 +2,46 @@ Return-Path: <SRS0=v0KR=OH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-14.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+X-Spam-Status: No, score=-8.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C458DC4321E
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 08:46:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D1B7C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 09:27:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9245860FED
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 08:46:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9245860FED
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 14AF2611CA
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 09:27:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 14AF2611CA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.189092.338587 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.189154.338674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR9Vd-0003Cq-Gs; Fri, 17 Sep 2021 08:46:13 +0000
+	id 1mRA9f-0003Yh-73; Fri, 17 Sep 2021 09:27:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 189092.338587; Fri, 17 Sep 2021 08:46:13 +0000
+Received: by outflank-mailman (output) from mailman id 189154.338674; Fri, 17 Sep 2021 09:27:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR9Vd-0003CG-BV; Fri, 17 Sep 2021 08:46:13 +0000
-Received: by outflank-mailman (input) for mailman id 189092;
- Fri, 17 Sep 2021 08:46:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2OQJ=OH=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mR9Vb-0003AK-LB
- for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 08:46:11 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b3d53b2b-1793-11ec-b674-12813bfff9fa;
- Fri, 17 Sep 2021 08:46:09 +0000 (UTC)
+	id 1mRA9f-0003Ya-3H; Fri, 17 Sep 2021 09:27:35 +0000
+Received: by outflank-mailman (input) for mailman id 189154;
+ Fri, 17 Sep 2021 09:27:34 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1mRA9e-0003YU-B1
+ for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 09:27:34 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mRA9b-0002x7-V2; Fri, 17 Sep 2021 09:27:31 +0000
+Received: from 54-240-199-97.amazon.com ([54.240.199.97]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mRA9b-0000vv-BX; Fri, 17 Sep 2021 09:27:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,96 +53,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b3d53b2b-1793-11ec-b674-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1631868369;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=VrbXBQo8s3hHOV5Jry2hT2yLKMoeTSgjl76QM+cDmXQ=;
-  b=bPdHE0RjGqBewxIa+Pf8G8g1g847MYsApHca9R468l+Bpu+r72zUoq1f
-   o1Qm7yHRVMyD2THH3S7v4YuDxKMeOrqnhN+3wyNTCkMtp6l+YKS34BDmf
-   2VjyqiD/jOFK61g1rqCQ07sRQbPcbPCZZfvYCir3Ze9zmPewb93QVC4Q0
-   s=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QUyhN+jlEdxEXNrvPpd1KLdwoLYz96c6X3mIsq8p/QyRPzrbUWk1j3asbC7SgUZJz2p1umetlx
- Mnn5DWcpmKyiEl2p2XS/yzwkFbQqyu8HwaqcwdvuRNvT4i9Z4qYQ4x/yBm1FZLOxuHAAhw5xtV
- XCTZzw+5QT/ysqv57cx5Rf27ZRFA1wvk2w/G78z6Wcup0/uy6+l1yHudsy1Joo8/022+G3YTF3
- rde0ys0UAMoa+h0bB1O2WyqachXn4WcqBocU2+zna1NATqweWyuKBrhXZUXsY90FYK46O4zAlm
- qGBWvu+bhlaYuK0wLnP2LtUm
-X-SBRS: 5.1
-X-MesageID: 53378055
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:V1A1zK0Mu9L6p2VqufbD5S92kn2cJEfYwER7XKvMYLTBsI5bpz0Bn
- WUZWmHQbPeDYWekLdx0OYy0pktS68DWnYUyHVM5pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan0ZqTNMEn970EoywrFh2+aEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhzvJXk
- oxLn66JbzwgOoztiOQaYRN2OnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9t3ZsRTa6DO
- qL1bxI3NBWdWw8IG2wLCas8m8X2nSbmMAJh/Qf9Sa0fvDGIkV0ZPKLWGNjIft2HQ+1Fk0Deo
- XjJl0zbKBwHMN2UyRKe72mhwOTImEvTVIwbG7K58fprqEaO3WFVAxoTPXOkpdGph0j4XMhQQ
- 2QE9yxroaUs+UiDStjmQwb+sHOCpgQbWddbD6s98g7l4qvL4S6JC24cVDlDZdc68sgsSlQCz
- USVltnkAThutry9Sn+H8LqQ6zSoNkAowXQqPHFeC1Ffup+6/d913kmnostf/LCd3//TQ2j26
- QKzihM3g5Qync4M5a+V1AWS696znaQlXjLZ9y2OADn8s1ImO9D8D2C7wQOEtqcbde51WnHE5
- SJdypbEtIjiGLnQzHTlfQkbIF2+Cx9p2hXniFhzFtEK8z238hZPlqgBvWkjeC+F3isCEAIFg
- XM/WysKv/e/31PwNMebhr5d7exxlcAM8vy/DZjpgiJmOMQZSeN+1HgGibSsM4XRfK4EyvlX1
- XCzKp3EMJrnIf4/kGreqxk1iOd2rszB+Y8jbc+ilEn2uVZvTFWUVa0EIDOzghMRtfjfyDg5B
- +13bpPQoz0GCbWWSnCOreY7cABbRVBmVMueg5EGKYa+zv9ORThJ5wn5muh6JeSIXs19y4/1w
- 51KchQEkQGu2SKeclzih7IKQOqHYKuTZEkTZUQEVWtEEVB6CWp2xKtAJZYxY5c98+lvkax9Q
- /UfIp3SCfVTUDXXvT8aaMCl/oBlcR2qgyOIPjakP2djL8IxGVSR94+2ZBbr+QkPEjGz6Zk0r
- Yq/216JWpEEXQljUprbMar901OrsHEBs+tuRE+UcMJLcUDh/dEyeSz8h/M6Oe8WLhDHymfI3
- gqaG05A9+LMv5U04J/CgqXd99WlFO53H0x7GWjH7OnpaXmGrzT7mYIZCbSGZzHQUm/w6Z6OX
- +QNwqGuKuADkXZLr5F4T+Rhw5Uh6oa9vLRd1AllQinGNgz5FrN6L3Ca9sBTrakRlKRBsA67V
- 0/TqNlXPbKFZJHsHFILfVd3a+2C0bcfmyXI7ORzK0L/vXcl8L2CWERUHh+NlC0Cc+clbNJ7m
- b8s6JwM9giyqhs2KdLX3Clb+lOFImEET6h65IoRB5Xmi1Zzx1xPCXAG5vQaPH1bhw1wD3QX
-IronPort-HdrOrdr: A9a23:PL0HYqArr5CIKgDlHem655DYdb4zR+YMi2TC1yhKJyC9E/bo8P
- xG88566faZslossRIb6LS90cu7MBDhHPdOiOF7V9qftWHdyQ6VxepZjLcKrQeOJ8SHzJ8+6Z
- td
-X-IronPort-AV: E=Sophos;i="5.85,300,1624334400"; 
-   d="scan'208";a="53378055"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>, Dario Faggioli
-	<dfaggioli@suse.com>
-Subject: [PATCH 0/6] xen/trace: Fix leakage of uninitialised stack into the tracebuffer
-Date: Fri, 17 Sep 2021 09:45:53 +0100
-Message-ID: <20210917084559.22673-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=OVPtBbA96+972EE33f2c7pWRmvVZUFsGppBQap9lvn8=; b=P8yNgPVrzC0w16HGGWaYeLtqbT
+	CJI6MUyDfaJGUwHWxgqfLaJ/iZMaW63opY3eSG4gcSxbxyYM560OWqb/u4+ehWgHAZJ5kq0w/mYDy
+	cESh6Rofzt830uVvPPBePnxPSTeI+dX3gmf/XMaNAeUbnp49Tfyk5w63o5ZcSFuHcZJY=;
+Subject: Re: [PATCH v1] domctl: hold domctl lock while domain is destroyed
+To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
+ <iwj@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org,
+ Dmitry Isaikin <isaikin-dmitry@yandex.ru>, rjstone@amazon.co.uk,
+ raphning@amazon.co.uk, Paul Durrant <paul@xen.org>
+References: <2e7044de3cd8a6768a20250e61fe262f3a018724.1631790362.git.isaikin-dmitry@yandex.ru>
+ <22a4b3c7-7faa-607b-244a-0ab99d7ccfa9@suse.com>
+ <16d43ba8-d45f-021c-0e19-e233cb967938@citrix.com>
+ <f1dda72c-695f-34d3-619e-ec2aa7696bce@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <01ec71a5-a1f1-b7db-d467-bc4c734db096@xen.org>
+Date: Fri, 17 Sep 2021 14:27:20 +0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <f1dda72c-695f-34d3-619e-ec2aa7696bce@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-Patches 1-3 fix actual or latent bugs causing uninitialised stack to leak into
-the trace buffers.  Xentrace is a developer/debugging activity restricted to
-fully privileged entities, so the leaking of uninitialised stack contents is
-not a security concern here.
+Hi,
 
-Patches 4-6 are various pieces of cleanup.  This entire subsystem is a mess,
-but the practical gains in patch 4 speak for themselves.
+(+ some AWS folks)
 
-Andrew Cooper (6):
-  xen/trace: Don't over-read trace objects
-  xen/memory: Remove tail padding from TRC_MEM_* records
-  xen/credit2: Remove tail padding from TRC_CSCHED2_* records
-  x86/trace: Reduce stack usage from HVMTRACE_ND()
-  xen/credit2: Clean up trace handling
-  xen/trace: Minor code cleanup
+On 17/09/2021 11:17, Jan Beulich wrote:
+> On 16.09.2021 19:52, Andrew Cooper wrote:
+>> On 16/09/2021 13:30, Jan Beulich wrote:
+>>> On 16.09.2021 13:10, Dmitry Isaikin wrote:
+>>>> From: Dmitry Isaykin <isaikin-dmitry@yandex.ru>
+>>>>
+>>>> This significantly speeds up concurrent destruction of multiple domains on x86.
+>>> This effectively is a simplistic revert of 228ab9992ffb ("domctl:
+>>> improve locking during domain destruction"). There it was found to
+>>> actually improve things;
+>>
+>> Was it?  I recall that it was simply an expectation that performance
+>> would be better...
+> 
+> My recollection is that it was, for one of our customers.
+> 
+>> Amazon previously identified 228ab9992ffb as a massive perf hit, too.
+> 
+> Interesting. I don't recall any mail to that effect.
 
- tools/xentrace/formats          |   4 +
- tools/xentrace/xenalyze.c       |  12 +-
- xen/arch/x86/hvm/svm/svm.c      |   8 +-
- xen/arch/x86/hvm/vmx/vmx.c      |   9 +-
- xen/arch/x86/mm/p2m-pod.c       |  17 +-
- xen/common/memory.c             |   4 +-
- xen/common/sched/credit2.c      | 343 ++++++++++++++++++++--------------------
- xen/common/trace.c              |  58 +++----
- xen/include/asm-x86/hvm/trace.h |  30 ++--
- 9 files changed, 235 insertions(+), 250 deletions(-)
+Here we go:
+
+https://lore.kernel.org/xen-devel/de46590ad566d9be55b26eaca0bc4dc7fbbada59.1585063311.git.hongyxia@amazon.com/
+
+We have been using the revert for quite a while in production and didn't 
+notice any regression.
+
+> 
+>> Clearly some of the reasoning behind 228ab9992ffb was flawed and/or
+>> incomplete, and it appears as if it wasn't necessarily a wise move in
+>> hindsight.
+> 
+> Possible; I continue to think though that the present observation wants
+> properly understanding instead of more or less blindly undoing that
+> change.
+
+To be honest, I think this is the other way around. You wrote and merged 
+a patch with the following justification:
+
+"
+     There is no need to hold the global domctl lock across domain_kill() -
+     the domain lock is fully sufficient here, and parallel cleanup after
+     multiple domains performs quite a bit better this way.
+"
+
+Clearly, the original commit message is lacking details on the exact 
+setups and numbers. But we now have two stakeholders with proof that 
+your patch is harmful to the setup you claim perform better with your patch.
+
+To me this is enough justification to revert the original patch. Anyone 
+against the revert, should provide clear details of why the patch should 
+not be reverted.
+
+Cheers,
 
 -- 
-2.11.0
-
+Julien Grall
 
