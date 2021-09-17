@@ -7,36 +7,36 @@ X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1A09C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 08:46:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AB3FC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 08:46:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6139F60F58
+	by mail.kernel.org (Postfix) with ESMTPS id CD7C160FED
 	for <xen-devel@archiver.kernel.org>; Fri, 17 Sep 2021 08:46:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6139F60F58
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CD7C160FED
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.189091.338581 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.189093.338603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR9Vd-0003Ac-7H; Fri, 17 Sep 2021 08:46:13 +0000
+	id 1mR9Vg-0003hT-OX; Fri, 17 Sep 2021 08:46:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 189091.338581; Fri, 17 Sep 2021 08:46:13 +0000
+Received: by outflank-mailman (output) from mailman id 189093.338603; Fri, 17 Sep 2021 08:46:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mR9Vd-0003AV-4E; Fri, 17 Sep 2021 08:46:13 +0000
-Received: by outflank-mailman (input) for mailman id 189091;
- Fri, 17 Sep 2021 08:46:11 +0000
+	id 1mR9Vg-0003hL-Ka; Fri, 17 Sep 2021 08:46:16 +0000
+Received: by outflank-mailman (input) for mailman id 189093;
+ Fri, 17 Sep 2021 08:46:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2OQJ=OH=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mR9Vb-0003AJ-Bv
- for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 08:46:11 +0000
+ id 1mR9Vg-0003AJ-45
+ for xen-devel@lists.xenproject.org; Fri, 17 Sep 2021 08:46:16 +0000
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id eb5656a5-9797-4987-ab65-05c08dbf14b4;
- Fri, 17 Sep 2021 08:46:09 +0000 (UTC)
+ id d547ed4a-333f-44c9-9f2c-1ddc9a887db3;
+ Fri, 17 Sep 2021 08:46:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,56 +48,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb5656a5-9797-4987-ab65-05c08dbf14b4
+X-Inumbo-ID: d547ed4a-333f-44c9-9f2c-1ddc9a887db3
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1631868369;
+  d=citrix.com; s=securemail; t=1631868371;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=ZQl96R3uvW4xzr4o62S9ScZWcGCrnlnt7bSHNhrnNaU=;
-  b=V09bcFVy7+SVBcd2ifwZ9uUI2NgUFkIDiv8RWdrtnTHdsI72C71Zuv6U
-   8hiuP1JyMU69fOBqdoVykwrFgVXYgOA7mtS9J/JsNkY/G7I3CrOBlAiwl
-   pbR9NukIr4KDwzPRXiq125RSue9+26K5NF6LTF++8Fq/FfmuccjHeXglO
-   c=;
+  bh=r4SmFOIEP9O9irUeiBnJE4TyoFxvXpO9Kd5PyOYMvEY=;
+  b=VdEryaI+n2oP8rggt8mhuolRClVpUxk3JcmvrzkvHqAhVGxULyN2Du3l
+   LVSA08yOljQtbzURU1rby7k+yjWHjlyJZO3/7kJsvt1x5bjfsJ/fMGL4q
+   EoCW2icpl2G1FrbYfv4SnkgKfozUuSuTqP9mVHRm0BDlqO604BovW/F0f
+   4=;
 Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 2HwSl0Wy37iCWqK1V2Atl+jEb9D23bzvNaTNjZfsfml/Qw0LbobFvO+2H51Am8NEvA6N9q8F3U
- u54mHzrzOLsXTfuzDuba9XHO80bbx50yLrOKpjJlie+FkcH9SSI4iGEvZFN/2jIBQkK4hSFCrN
- ESafWK9rZpDjulP0SBHVmGpclH4boiTG5a38st7j+ffVkR2f9kwwh2zVl3pappV6OUpt08Rzjb
- qm1niSeRnGMQNgqCA5iucmJl/mIrXSmfsQ0AHQKoA0UsIE+Fe9NJJL4/A4aT4PVYSb2tMjDUVZ
- ZJsjGLJZTw8khpJpO+cCA3ce
+IronPort-SDR: JSm8SffdyxHUd9GVLPoEWHdUZetYvTIPnsvJw++KHnM9g7TtIDSLADXykFj5d7TLYoGcH2iEVY
+ WjjDFN0dKbyGZkmP1n30c94zl5/niS2MpbxpVhETM5l1iWfoCYpAzSfkg03znMt+HQRrcUxVLO
+ S+EBalbPRG1YJmf7lZ6ASho8Mwhc9iiT+KCvCU/2SQDXQkQTEM76Yx/k1yIoiwBfQoy4ki0ezK
+ qF4aH0SMs6FT4NwSN8yIiI4OJ1vROdfUTGJkJ+lNCVp327z8beqmgU+y7XFXN1oRx2EhMO3Vac
+ net3eBX44u6KPgYql4hj69hI
 X-SBRS: 5.1
-X-MesageID: 54750985
+X-MesageID: 54750987
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:fbU+dqkyrGYGByzO8oRKKlTo5gx9IURdPkR7XQ2eYbSJt1+Wr1Gzt
- xIWCG6Pbq2LazDxKooga9+/pE5VsZ/cztFmT1Rqq3swHiMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA185IMsdoUg7wbdh09c32YHR7z6l4
- rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
- s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- I8dtICxQjUzBKr3ydUiWCYANCBRBYQTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQKqBO
- pJIOWcHgBLoSCZJJls3B4wFrb2ku0HmY21WrXWxuv9ii4TU5FMoi+W8WDbPQfSIWMFUk0Cwt
- m/AuWPjDXkyFvaS1D6E+XKEnfLUkGXwX4d6PLG2//FlgVqXx0QIFQYbE1C8pJGRlUqWS99Zb
- UsO9UIGvaU0sUCmUNT5dxm5u2Kf+A4RXcJKFO834x3LzbDbiy6YGWosXjNHcMYhtsI9WXotz
- FDht8jyGTVlvbmRSHSc3rSZtzW/PW4SN2BqWMMfZVJbuZ+5+th110+RCIY4eEKosjHrMWugw
- iyLpxokvbIo3P803Jrj2lHouxv58/AlUTUJChXrsnONt10iPdP0ONP2sDA3/t4bc93IFQDpU
- Gws3pHEtbFQV8nleDmlHb1VdIxF8cppJ9E1bbRHJJAn6z3l0HqqZ4k4DNpWdRoxb5psldMEZ
- ibuVeJtCH17ZyDCgUxfOdvZ5yEWIU7IToyNuhf8NIEmX3SJXFXblByCnGbJt4wXrKTJrU3ZE
- czDGSpLJS1BYZmLMRLsH7tNuVPV7nlmmAs/uqwXPzz4iOHDNRZ5uJ8uMUeUb/BR0U93iFyOq
- L5i2z+x40wHCoXWO3CPmaZKdAxiBSVrVPje9p0MHsbec1UOJY3UI6KIqV/XU9c+xPo9eyah1
- izVZ3K0P3Kk2SSceFnVMys6AF4tNL4mxU8G0eUXFQ7A8xAejUyHtc/zrrM7Iusq8vJN1/lxQ
- 6VXcsmMGK0XGD/G5y4cfd/2q4k7LEanggeHPiyEZjkjfsE/G1yVq4G8Jga/pjMTCieXtNclp
- +Hy3A3sXpdeFR9pC9zbaazzwgrp72Qdgu97Q2DBPsJXJBf36IFvJiGo1q03LsgAJA/t3Dyf0
- wrKUx4UqfOU+90+8cXThLDCpICsSrMsEk1fFmjdzLC3KSiFoTbznd4eCL6FJGmPWnn19aOuY
- fRu48v9aPBXzkxXt4dcEqpwyf5s7dXYuLIHnB9vG2/Gbgr3B+o4cGWGx8RGqoZE2qRd5VmtQ
- kuK99RXZeeJNcfiHAJDLQYpdL3eh/Qdmz2U5vUpOkTqoiRw+ePfA0lVOhCNjg1bLad0b9x5k
- btw5pZO5lztkAcuP/aHkjtQpjaFIXE3Wqk6so0XXd3wgQ0xx1AeOZHRB0caOn1Uhwmg5qXyH
- gKpuQ==
-IronPort-HdrOrdr: A9a23:TYb2g61ZJvQfTtENkAZnJQqjBLAkLtp133Aq2lEZdPRUGvb3qy
+IronPort-Data: A9a23:d1SstK8cXCf95j2PDyx5DrUDfHmTJUtcMsCJ2f8bNWPcYEJGY0x3z
+ jFOWWGHOP2OZjb3e9AjbIvg/UtSupTUx9YwGVdupC88E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGGeIdA970Ug6w79g3dYx6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPgrm
+ NRRtJeCUz0uBfz9p+8iCz5ZPBlXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp0SQquGN
+ ppGAdZpRB/CbTwRAwwZMbsZluaMqWPeVDcJo2vA8MLb5ECMlVcsgdABKuH9eMGORMhTtlaVo
+ CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoeGrS3+f9thFy73XEIBVsdUl7Tiea9ol6zXZRYM
+ UN80jojq+0++VKmSvH5XgakuziUsxgEQd1SHuYmrgaXxcL84hmbLngJSCZbb94rv9NwQiYlv
+ neShM/gDzFrtLyTSFqe+62SoDf0PjIaRVLufgddE1FDuYO65thu0FSfFb6PDZJZkPWvSTDsw
+ ju4thI5vOQissU0j4K60mju1mfESofycuIl2unGdjv7tVokNdH6OdXABUvztqkbfd3AJrWVl
+ D1dwZHPsrpWZX2YvHHVGI0w8KeVC+Fp2dE2qWVmGYUovx+p8mSqFWy7yGAjfBo1WirolDmAX
+ aMyhe+zzMQIVJdJRfUuC25UNyjM5fO4fTgCfqqPBueimrArKGe6ENhGPCZ8JVwBdXTAd4lkY
+ f93lu73Vh4n5VlPlmLqF4/xL5dynn1WKZzvqWDTkE38jOv2iI+9YrYZKlqeBt3VH4vd+169z
+ jqrDOPTk083eLSnOkH/qNdPRXhXfSlTLc2n8KR/K7/cSjeK7Ul8Upc9N5t6INc790mU/8+Vl
+ kyAtrhwkwam3iybdlzRMxiOqtrHBP5CkJ7yBgR0VX7A5pTpSd/HAH43e8RlcL852vZkyPIoH
+ fAJd9/ZWqZESyjd+iRbZp749dQweBOujAOIHiykfDlgIMIwG12XoofpLln16S0DLiurrs9i8
+ beu4RzWHMgYTAN4AceINP/2lwGtvWIQkf5ZVlfTJoUBY13l9YVncnSjjvI+L8wWBw/Ewz+Wi
+ 1SfDRsC/LGfqI4p6tjZw6uDqt7xQed5G0NbGUjd7Kq3anaGrjbyn9cYXb/RLz7HVW7y9KGzX
+ slvzqnxYK8dgVJHk4tgCLI3n6gw0MTi+u1BxQN+EXSVM1nyUuF8ImOL1NVkv7FWwuMLohO/X
+ 0+C94UIObiNP8+5QlcdKBB8M7aG3PAQ3DLT8e40MAPx4youpOiLVkBbPh+tji1BLeQqbNN5k
+ Ll54MNGuRaijhcKM8qdinEG/muBGXUMTqE7u8xIG4TskAcqlglPbJG05vUaO31ThwGg6nUXH
+ wI=
+IronPort-HdrOrdr: A9a23:Dqtkna1wdC6jgNq1E38FPAqjBLAkLtp133Aq2lEZdPRUGvb3qy
  nOpoVj6faaslYssR0b9exofZPwJE80lqQFh7X5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtsp
  uIGJIeNDSfNzdHZL7BkWuFL+o=
 X-IronPort-AV: E=Sophos;i="5.85,300,1624334400"; 
-   d="scan'208";a="54750985"
+   d="scan'208";a="54750987"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
@@ -105,24 +105,43 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
 	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
 	<wl@xen.org>, Julien Grall <julien@xen.org>, Dario Faggioli
 	<dfaggioli@suse.com>
-Subject: [PATCH 1/6] xen/trace: Don't over-read trace objects
-Date: Fri, 17 Sep 2021 09:45:54 +0100
-Message-ID: <20210917084559.22673-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/6] x86/trace: Reduce stack usage from HVMTRACE_ND()
+Date: Fri, 17 Sep 2021 09:45:57 +0100
+Message-ID: <20210917084559.22673-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210917084559.22673-1-andrew.cooper3@citrix.com>
 References: <20210917084559.22673-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-In the case that 'extra' isn't a multiple of uint32_t, the calculation rounds
-the number of bytes up, causing later logic to read unrelated bytes beyond the
-end of the object.
+It is pointless to write all 6 entries and only consume the useful subset.
+bloat-o-meter shows quite how obscene the overhead is in vmx_vmexit_handler(),
+weighing in at 11% of the function arranging unread zeroes on the stack, and
+8% for svm_vmexit_handler().
 
-Also, asserting that the object is within TRACE_EXTRA_MAX, but truncating it
-in release builds is rude.
-
-Instead, reject any out-of-spec records, leaving enough of a message to
-identify the faulty caller.
+  add/remove: 0/0 grow/shrink: 0/20 up/down: 0/-1867 (-1867)
+  Function                                     old     new   delta
+  hvm_msr_write_intercept                     1049    1033     -16
+  vmx_enable_intr_window                       238     214     -24
+  svm_enable_intr_window                       337     313     -24
+  hvmemul_write_xcr                            115      91     -24
+  hvmemul_write_cr                             350     326     -24
+  hvmemul_read_xcr                             115      91     -24
+  hvmemul_read_cr                              146     122     -24
+  hvm_mov_to_cr                                438     414     -24
+  hvm_mov_from_cr                              253     229     -24
+  vmx_intr_assist                             1150    1118     -32
+  svm_intr_assist                              459     427     -32
+  hvm_rdtsc_intercept                          138     106     -32
+  hvm_msr_read_intercept                       898     866     -32
+  vmx_vmenter_helper                          1142    1094     -48
+  vmx_inject_event                             813     765     -48
+  svm_vmenter_helper                           238     190     -48
+  hvm_hlt                                      197     146     -51
+  svm_inject_event                            1678    1614     -64
+  svm_vmexit_handler                          5880    5416    -464
+  vmx_vmexit_handler                          7281    6473    -808
+  Total: Before=3644184, After=3642317, chg -0.05%
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -134,50 +153,124 @@ CC: Wei Liu <wl@xen.org>
 CC: Julien Grall <julien@xen.org>
 CC: Dario Faggioli <dfaggioli@suse.com>
 
-I've eyeballed the code and can't spot any problematic callers, but I came
-very close to accidentally introducing some when trying to fix the stack
-rubble leaks in subsequent patches.
+Normally I wouldn't recommend patches like this for backport, but
+{vmx,svm}_vmexit_handler() are fastpaths and this is a *lot* of I-cache lines
+dropped...
 ---
- xen/common/trace.c | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ xen/arch/x86/hvm/svm/svm.c      |  8 +++-----
+ xen/arch/x86/hvm/vmx/vmx.c      |  9 ++++-----
+ xen/include/asm-x86/hvm/trace.h | 28 ++++++++++------------------
+ 3 files changed, 17 insertions(+), 28 deletions(-)
 
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index a2a389a1c7c3..25af6e1bd25e 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -686,22 +686,21 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
-     unsigned long flags;
-     u32 bytes_to_tail, bytes_to_wrap;
-     unsigned int rec_size, total_size;
--    unsigned int extra_word;
-     bool_t started_below_highwater;
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index afb1ccb342c2..f0e10dec046e 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -1052,7 +1052,7 @@ void svm_vmenter_helper(const struct cpu_user_regs *regs)
+     if ( unlikely(tb_init_done) )
+         HVMTRACE_ND(VMENTRY,
+                     nestedhvm_vcpu_in_guestmode(curr) ? TRC_HVM_NESTEDFLAG : 0,
+-                    1/*cycles*/, 0, 0, 0, 0, 0, 0, 0);
++                    1/*cycles*/);
  
-     if( !tb_init_done )
-         return;
+     svm_sync_vmcb(curr, vmcb_needs_vmsave);
  
--    /* Convert byte count into word count, rounding up */
--    extra_word = (extra / sizeof(u32));
--    if ( (extra % sizeof(u32)) != 0 )
--        extra_word++;
--    
--    ASSERT(extra_word <= TRACE_EXTRA_MAX);
--    extra_word = min_t(int, extra_word, TRACE_EXTRA_MAX);
--
--    /* Round size up to nearest word */
--    extra = extra_word * sizeof(u32);
-+    /*
-+     * Trace records require extra data which is an exact multiple of
-+     * uint32_t.  Reject out-of-spec records.  Any failure here is an error in
-+     * the caller.
-+     */
-+    if ( extra % sizeof(uint32_t) ||
-+         extra / sizeof(uint32_t) > TRACE_EXTRA_MAX )
-+        return printk_once(XENLOG_WARNING
-+                           "Trace event %#x bad size %u, discarding\n",
-+                           event, extra);
+@@ -2565,12 +2565,10 @@ void svm_vmexit_handler(struct cpu_user_regs *regs)
  
-     if ( (tb_event_mask & event) == 0 )
-         return;
+     if ( hvm_long_mode_active(v) )
+         HVMTRACE_ND(VMEXIT64, vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0,
+-                    1/*cycles*/, 3, exit_reason,
+-                    regs->eip, regs->rip >> 32, 0, 0, 0);
++                    1/*cycles*/, exit_reason, TRC_PAR_LONG(regs->rip));
+     else
+         HVMTRACE_ND(VMEXIT, vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0,
+-                    1/*cycles*/, 2, exit_reason,
+-                    regs->eip, 0, 0, 0, 0);
++                    1/*cycles*/, exit_reason, regs->eip);
+ 
+     if ( vcpu_guestmode )
+     {
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index b0a42d05f86a..d403e2d8060a 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -3864,11 +3864,10 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
+     __vmread(VM_EXIT_REASON, &exit_reason);
+ 
+     if ( hvm_long_mode_active(v) )
+-        HVMTRACE_ND(VMEXIT64, 0, 1/*cycles*/, 3, exit_reason,
+-                    regs->eip, regs->rip >> 32, 0, 0, 0);
++        HVMTRACE_ND(VMEXIT64, 0, 1/*cycles*/, exit_reason,
++                    TRC_PAR_LONG(regs->rip));
+     else
+-        HVMTRACE_ND(VMEXIT, 0, 1/*cycles*/, 2, exit_reason,
+-                    regs->eip, 0, 0, 0, 0);
++        HVMTRACE_ND(VMEXIT, 0, 1/*cycles*/, exit_reason, regs->eip);
+ 
+     perfc_incra(vmexits, exit_reason);
+ 
+@@ -4645,7 +4644,7 @@ bool vmx_vmenter_helper(const struct cpu_user_regs *regs)
+     if ( unlikely(curr->arch.hvm.vmx.lbr_flags & LBR_FIXUP_MASK) )
+         lbr_fixup();
+ 
+-    HVMTRACE_ND(VMENTRY, 0, 1/*cycles*/, 0, 0, 0, 0, 0, 0, 0);
++    HVMTRACE_ND(VMENTRY, 0, 1/*cycles*/);
+ 
+     __vmwrite(GUEST_RIP,    regs->rip);
+     __vmwrite(GUEST_RSP,    regs->rsp);
+diff --git a/xen/include/asm-x86/hvm/trace.h b/xen/include/asm-x86/hvm/trace.h
+index 5cd459b855b7..2bbac45044ce 100644
+--- a/xen/include/asm-x86/hvm/trace.h
++++ b/xen/include/asm-x86/hvm/trace.h
+@@ -67,38 +67,30 @@
+ #define TRACE_2_LONG_4D(_e, d1, d2, d3, d4, ...) \
+     TRACE_6D(_e, d1, d2, d3, d4)
+ 
+-#define HVMTRACE_ND(evt, modifier, cycles, count, d1, d2, d3, d4, d5, d6) \
++#define HVMTRACE_ND(evt, modifier, cycles, ...)                           \
+     do {                                                                  \
+         if ( unlikely(tb_init_done) && DO_TRC_HVM_ ## evt )               \
+         {                                                                 \
+-            struct {                                                      \
+-                u32 d[6];                                                 \
+-            } _d;                                                         \
+-            _d.d[0]=(d1);                                                 \
+-            _d.d[1]=(d2);                                                 \
+-            _d.d[2]=(d3);                                                 \
+-            _d.d[3]=(d4);                                                 \
+-            _d.d[4]=(d5);                                                 \
+-            _d.d[5]=(d6);                                                 \
++            uint32_t _d[] = { __VA_ARGS__ };                              \
+             __trace_var(TRC_HVM_ ## evt | (modifier), cycles,             \
+-                        sizeof(*_d.d) * count, &_d);                      \
++                        sizeof(_d), _d);                                  \
+         }                                                                 \
+     } while(0)
+ 
+ #define HVMTRACE_6D(evt, d1, d2, d3, d4, d5, d6)    \
+-    HVMTRACE_ND(evt, 0, 0, 6, d1, d2, d3, d4, d5, d6)
++    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4, d5, d6)
+ #define HVMTRACE_5D(evt, d1, d2, d3, d4, d5)        \
+-    HVMTRACE_ND(evt, 0, 0, 5, d1, d2, d3, d4, d5,  0)
++    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4, d5)
+ #define HVMTRACE_4D(evt, d1, d2, d3, d4)            \
+-    HVMTRACE_ND(evt, 0, 0, 4, d1, d2, d3, d4,  0,  0)
++    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4)
+ #define HVMTRACE_3D(evt, d1, d2, d3)                \
+-    HVMTRACE_ND(evt, 0, 0, 3, d1, d2, d3,  0,  0,  0)
++    HVMTRACE_ND(evt, 0, 0, d1, d2, d3)
+ #define HVMTRACE_2D(evt, d1, d2)                    \
+-    HVMTRACE_ND(evt, 0, 0, 2, d1, d2,  0,  0,  0,  0)
++    HVMTRACE_ND(evt, 0, 0, d1, d2)
+ #define HVMTRACE_1D(evt, d1)                        \
+-    HVMTRACE_ND(evt, 0, 0, 1, d1,  0,  0,  0,  0,  0)
++    HVMTRACE_ND(evt, 0, 0, d1)
+ #define HVMTRACE_0D(evt)                            \
+-    HVMTRACE_ND(evt, 0, 0, 0,  0,  0,  0,  0,  0,  0)
++    HVMTRACE_ND(evt, 0, 0)
+ 
+ #define HVMTRACE_LONG_1D(evt, d1)                  \
+                    HVMTRACE_2D(evt ## 64, (d1) & 0xFFFFFFFF, (d1) >> 32)
 -- 
 2.11.0
 
