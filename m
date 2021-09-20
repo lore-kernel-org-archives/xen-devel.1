@@ -5,54 +5,53 @@ X-Spam-Level:
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=3.4.0
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34140C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 15:18:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2A99C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 15:19:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D36C6610CE
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 15:18:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D36C6610CE
+	by mail.kernel.org (Postfix) with ESMTPS id 73CDB610FB
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 15:19:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 73CDB610FB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.190964.340791 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.190967.340802 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSL3n-0001pI-Da; Mon, 20 Sep 2021 15:18:23 +0000
+	id 1mSL4I-0002Kx-OO; Mon, 20 Sep 2021 15:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 190964.340791; Mon, 20 Sep 2021 15:18:23 +0000
+Received: by outflank-mailman (output) from mailman id 190967.340802; Mon, 20 Sep 2021 15:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSL3n-0001pB-AX; Mon, 20 Sep 2021 15:18:23 +0000
-Received: by outflank-mailman (input) for mailman id 190964;
- Mon, 20 Sep 2021 15:18:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mSL4I-0002Kq-KR; Mon, 20 Sep 2021 15:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 190967;
+ Mon, 20 Sep 2021 15:18:52 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5pAY=OK=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mSL3m-0001p5-1q
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 15:18:22 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fcf848d0-1a25-11ec-b876-12813bfff9fa;
- Mon, 20 Sep 2021 15:18:20 +0000 (UTC)
+ id 1mSL4G-0002I7-Sn
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 15:18:52 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7144a6c8-2b57-4e90-be5f-3a46e592ddfa;
+ Mon, 20 Sep 2021 15:18:51 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id E81D521F17;
- Mon, 20 Sep 2021 15:18:19 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3344F200F0;
+ Mon, 20 Sep 2021 15:18:50 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C064213A61;
- Mon, 20 Sep 2021 15:18:19 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 013E813A61;
+ Mon, 20 Sep 2021 15:18:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id J0WJLTumSGGKHgAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 20 Sep 2021 15:18:19 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id BuCwOlmmSGHIHgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 20 Sep 2021 15:18:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,37 +63,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fcf848d0-1a25-11ec-b876-12813bfff9fa
+X-Inumbo-ID: 7144a6c8-2b57-4e90-be5f-3a46e592ddfa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1632151099; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1632151130; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=0mIeLZaSMwTeZ9TavvQTLwfuOguzPlIZjeInUwea/9Q=;
-	b=DI+v2JHoc8AY51gvMNcgs7SLKYZmig3VBWrhJqfJUuy1aItbNvpB35lvVM37ET3lKNBK3J
-	K+GLpG6P8yfvhW4dtvdD+CKER4iBgLriB4BG1uDTp2oDeDqK022xKkVNGJpNlt6yeWmbRb
-	/2pOSW7xuE+5htID246WYDPgHQOwAZA=
-Subject: Re: [PATCH] xen/x86: drop redundant zeroing from
- cpu_initialize_context()
+	bh=pkTjru/PAEkB2P2EV7YbVR87Hnj75AS/hOEMYeht3Rg=;
+	b=lEfJ+Wy0xwPd+eiCGASf3r0840uJ3ZKvD4MyLIaKTbI0H3OFu5XDgHTvohY8m4+qkCvpWR
+	4sBZvBVMHUzL/bLdS7rebpTPGO0WwChM1E4fxbD8BRzjCndlxFkf+2+1mmROwvjs/uJnLT
+	BbdkchYFgdnhE1AhxnSIRbQNJNl7CO4=
+Subject: Re: [PATCH] Xen/gntdev: don't ignore kernel unmapping error
 To: Jan Beulich <jbeulich@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
  lkml <linux-kernel@vger.kernel.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <14881835-a48e-29fa-0870-e177b10fcf65@suse.com>
+References: <c2513395-74dc-aea3-9192-fd265aa44e35@suse.com>
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <425ba7a3-9a1e-7ff5-f6de-ba9969116941@suse.com>
-Date: Mon, 20 Sep 2021 17:18:19 +0200
+Message-ID: <8084a911-b768-cc6d-8b06-ae0c358466d2@suse.com>
+Date: Mon, 20 Sep 2021 17:18:49 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <14881835-a48e-29fa-0870-e177b10fcf65@suse.com>
+In-Reply-To: <c2513395-74dc-aea3-9192-fd265aa44e35@suse.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="POxhCh9cDNfQXHpNNVoHMXj9HrJL1resm"
+ boundary="AE1KLi7Ljs1cLKslA7vFh8Z6YryVAZisk"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---POxhCh9cDNfQXHpNNVoHMXj9HrJL1resm
-Content-Type: multipart/mixed; boundary="sXjXXzKmDfQ3KZ30to8imRN1YIZJsiqcG";
+--AE1KLi7Ljs1cLKslA7vFh8Z6YryVAZisk
+Content-Type: multipart/mixed; boundary="nNntOiF3zUqSEDLgpGT46Xk2If5nO0koO";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
 To: Jan Beulich <jbeulich@suse.com>,
@@ -102,27 +100,27 @@ To: Jan Beulich <jbeulich@suse.com>,
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
  lkml <linux-kernel@vger.kernel.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Message-ID: <425ba7a3-9a1e-7ff5-f6de-ba9969116941@suse.com>
-Subject: Re: [PATCH] xen/x86: drop redundant zeroing from
- cpu_initialize_context()
-References: <14881835-a48e-29fa-0870-e177b10fcf65@suse.com>
-In-Reply-To: <14881835-a48e-29fa-0870-e177b10fcf65@suse.com>
+Message-ID: <8084a911-b768-cc6d-8b06-ae0c358466d2@suse.com>
+Subject: Re: [PATCH] Xen/gntdev: don't ignore kernel unmapping error
+References: <c2513395-74dc-aea3-9192-fd265aa44e35@suse.com>
+In-Reply-To: <c2513395-74dc-aea3-9192-fd265aa44e35@suse.com>
 
---sXjXXzKmDfQ3KZ30to8imRN1YIZJsiqcG
+--nNntOiF3zUqSEDLgpGT46Xk2If5nO0koO
 Content-Type: multipart/mixed;
- boundary="------------A0BD770B8B15DA09A26DD48C"
+ boundary="------------BBCF014F1A6D2869C05A0BCE"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------A0BD770B8B15DA09A26DD48C
+--------------BBCF014F1A6D2869C05A0BCE
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 16.09.21 17:05, Jan Beulich wrote:
-> Just after having obtained the pointer from kzalloc() there's no reason=
+On 17.09.21 08:13, Jan Beulich wrote:
+> While working on XSA-361 and its follow-ups, I failed to spot another
+> place where the kernel mapping part of an operation was not treated the=
 
-> at all to set part of the area to all zero yet another time. Similarly
-> there's no point explicitly clearing "ldt_ents".
+> same as the user space part. Detect and propagate errors and add a 2nd
+> pr_debug().
 >=20
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
@@ -131,7 +129,7 @@ Pushed to xen/tip.git for-linus-5.15b
 
 Juergen
 
---------------A0BD770B8B15DA09A26DD48C
+--------------BBCF014F1A6D2869C05A0BCE
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -223,25 +221,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------A0BD770B8B15DA09A26DD48C--
+--------------BBCF014F1A6D2869C05A0BCE--
 
---sXjXXzKmDfQ3KZ30to8imRN1YIZJsiqcG--
+--nNntOiF3zUqSEDLgpGT46Xk2If5nO0koO--
 
---POxhCh9cDNfQXHpNNVoHMXj9HrJL1resm
+--AE1KLi7Ljs1cLKslA7vFh8Z6YryVAZisk
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFIpjsFAwAAAAAACgkQsN6d1ii/Ey+s
-8Qf9HJwDtAJLXp1o4sVOAw0dkjQjSsqQVO4F3xNZpqMVGvlvStjQ+yOFyGaV6mIIEg8Os0QaZtOw
-uZ/Erms71Lx313yd3Lj3rach+kZSKXFGnR/ndVWTgGhFfK9kIrqgqbuGAfGvq9VeIZ+9RdovG3RO
-kNHEOiIAs1pS923biCJ2JTh2jtT8ahUHRpyQ7I5jQDpX0are60hpGMFSWAHR8U0v4VDtk6KAaEYt
-r/DvmY8r3Cx4YIid1ujymYtPW7Y6u1XaS7oiHVN7npfs0u9fOvvpC3qPXpa5IxpehIU52+TExdm7
-m/SDoPtIEGC5u6sxcVZBO2kePj0F6a4F52EbbCBftw==
-=uOZY
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFIplkFAwAAAAAACgkQsN6d1ii/Ey8w
+0gf/bsCaTiT9ct7po6hwInUR2oDfihHjmvv8cM6hFTsWSwoi9AGs6UIQIXzr0Tlcx/DHPhyxkidg
+YZM02TT0jCgiisUUNCBZCHrLevq/Navq3I2/aMI8oKwlJ7S7jmms2IdlI7u+hhzdC13jqUa8a4U5
+elDpsabjjUn5mVoDaSqxeBkqieojC06qogUNnr7bCFu2Ubxm+iHjM9NS3wFSJb91s5etntGEr47n
+Z8/NW3Ygce2CksQlu4ZW/UF+Xbw4xvu78TeQLJqaHokuvJZ/IfYdQxkycsI17/eu+9ddGi9UTY1j
+RZeocr3wZuX6/X+JjES8G+WvIqeVUl20vTNZqBSV8w==
+=HjA1
 -----END PGP SIGNATURE-----
 
---POxhCh9cDNfQXHpNNVoHMXj9HrJL1resm--
+--AE1KLi7Ljs1cLKslA7vFh8Z6YryVAZisk--
 
