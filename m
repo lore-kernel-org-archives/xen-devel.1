@@ -2,41 +2,43 @@ Return-Path: <SRS0=T9jm=OK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F428C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E0FFC4332F
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CA891632DE
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CA891632DE
+	by mail.kernel.org (Postfix) with ESMTPS id 07ECA632E5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 07ECA632E5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.191055.340985 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.191056.340995 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN3J-0006na-G7; Mon, 20 Sep 2021 17:26:01 +0000
+	id 1mSN3L-0007Cq-1H; Mon, 20 Sep 2021 17:26:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 191055.340985; Mon, 20 Sep 2021 17:26:01 +0000
+Received: by outflank-mailman (output) from mailman id 191056.340995; Mon, 20 Sep 2021 17:26:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN3J-0006nF-9r; Mon, 20 Sep 2021 17:26:01 +0000
-Received: by outflank-mailman (input) for mailman id 191055;
- Mon, 20 Sep 2021 17:25:59 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mSN3K-0007Ao-NE; Mon, 20 Sep 2021 17:26:02 +0000
+Received: by outflank-mailman (input) for mailman id 191056;
+ Mon, 20 Sep 2021 17:26:00 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=F8X/=OK=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mSN3H-0003ck-Jq
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:25:59 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 498bb826-dae4-419f-ac12-f9a647422097;
- Mon, 20 Sep 2021 17:25:41 +0000 (UTC)
+ id 1mSN3I-0003cq-DE
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:26:00 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c7800014-1a37-11ec-b87a-12813bfff9fa;
+ Mon, 20 Sep 2021 17:25:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,233 +50,252 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 498bb826-dae4-419f-ac12-f9a647422097
+X-Inumbo-ID: c7800014-1a37-11ec-b87a-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1632158741;
+  d=citrix.com; s=securemail; t=1632158742;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=J0c0EKnncyso937b/nTJN9IuK7CtJgbwEqGNFEbbFdw=;
-  b=XMLZZqrr0xpZvQ+ZtRLizLDBiFLs1uqWKFDjte7izRhO7XyvgvfOV8gt
-   RXXqAjjkR3BC1Qx+nsqU6qszje/xmB0iBgLsrNw47ntghRlzS0VWNnv43
-   +KHofx5kvA9NgLHv6cFBX1xuMy45H2l5SGAbUsB8JXbD6sQctCjBuNXe7
-   k=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QB/yb4BU8YtWfEDbbD4DxptDgnCuvdzoDh+lOslCjvNzO4tKfOWSn+1prs7uogfJ6ihuV5Ue7n
- cVTlTdvqGC0rqqfOyb/D3PSWb/h/vwShtTZwcQwimY0kS90tOPM9mUt80vZzkUOmn7rwb7N+aG
- Bvhpy1R5//SFzhQa2H6/XCsl/Q1Ngpxk9euAg+ReM8896N6Cjkt1p/LPZJZeX3R0bd8MpU7qwa
- np9qMPUp8QBV0usth7HbOPa0fDTNw6zsIOKIjouzDm3NLNupZOp6TMQxAD5h87tAxRmARwKTQi
- 5Kex866Cmmg2MLCEGmo1oM+s
+   references:mime-version;
+  bh=blg5bSVn1FtPA4eRCL98DmLL9LKNBmU4Jtzbra9P1k8=;
+  b=D5uqt+QsDawWW35aCg8jt4mqlc+UIIlq0CvqVejgTOwLVPddQOjUZjkc
+   oV4m9KbCx4J8Qk7WJdtPqGsZLqPfPV3Hek6vm3znzEIm2S2z7L9taUSPI
+   wWqYgXy5tio6pdzmCocF52mlztBiQvh14LjzlXBo7i6WrjISTy2jZWHow
+   c=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: +usJDprPJ7Vo3ZALqmwYSVG+CjURABaRCqpMYhYpw8Y1BL2bHBRRV1/FFKSMBeKjLhz5GNjKP9
+ 02ntmey2s4xsN5Q2UseyFRm+/f46R8Z7iJy5XBiGfGQwB3zXSgyehGxeTgY6SGeBZ+ipWbqJBQ
+ NPQ2qC2dvck5YnvBnCIfr3hVDrS1XGbrDYf03SAy7w8N9DHlGerYcfYPLboY7Wvi7Eo5d7widn
+ +yBj+tYJKKjSPO3tGTu05DP6U9JqUHpHos426uKNHoXiCaAJL8N4qTYUcqwIgpT7IAQk1mkjIq
+ zABYCEpTLQC1uFLLt5sNtKVa
 X-SBRS: 5.1
-X-MesageID: 54938587
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 53560997
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:4OdDPKMtBZYO/N/vrR29kMFynXyQoLVcMsEvi/4bfWQNrUoj3zAGn
- TBNUGGGbvmKazehLt0jbN/ioR8O6JDczdBgSQto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6ZUsxNbVU8En552Eg7w7RRbrNA2rBVPSvc4
- bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
- 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYoy+MgPBI5
- txPjpDqUgg5ALTTkdwaTjANRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
- 6VFdnZdNXhvhMrvqF6/YsBqit4uM4/AO4QHt2s75TrYEewnUdbIRKCiCdpwgWth3ZATTam2i
- 8wxWBVQNT7fajNzHEZQE80gwMiQo2j0WmgNwL6SjfVuuDWCpOBr65DyNPLFd9rMQt9a9m66j
- G/b+2XyAjkBKceSjzGC9xqEluLJ2C/2Ro8WPLm57eJxxk2ewHQJDx8bXkf9puO24nNSQPoGd
- RZSoHB36/Fvqgr7FbERQiFUvlaeuwE8YvRZEdY2shqC2pTN/A+hAXUtG2sphMMdiCMmedA7/
- gbXxIq5Xm0+6Of9pWG1rejP/GjrUcQBBSpbP3ZVE1FdizX2iNxr1nryosBf/LlZZzEfMQr5x
- SyD5AM6jq8a5SLg//TmpQ2b695AS56gc+LU2uk1djn+hu+aTNT8D2BN1bQ8xawbRLt1tnHb4
- BA5dzG2tYji961hcRBhp81WRtmUCwutamWA0TaD4bF4r2nFF4GfkXB4v2gleRYB3jcsUj71e
- k7D0T69F7cKZyDCUEODWKroU55C5fG5TbzND6mIBvITMskZXFLWp0lGOB/Pt10BZWBxyMnTz
- 7/AKp3yZZvbYIw6pAeLqxA1i+5zmn9mmjONGvgWDX2PiNKjWZJccp9dWHPmUwzzxPjsTNz9/
- 4kNOs2U5Q9YVeGiMCDb/ZRKdQIBLGQhBICwoMtSL7bRLg1jEWAnKvnQ3bJ+JNA1w/ULzr/Fr
- iOnR0tV6Fvjnnmbew+EXW9uNeH0VpFloHNlYSF1ZQS022IuaJqE5bsEc8dlZqEu8eFulKYmT
- /QMd8iaLO5ITzDLp2YUYZXn9dQwfxW3nwOeeSGiZWFnLZJnQgXI/P7ifxfuq3ZSXnbm65Nmr
- uT5hA3BQJcFSwBzN+rsaaqinwGroHwQuONuRE+UcNNdT1rhrdpxICvrg/5pf8xVcUffxiGX3
- hq9CAsDobWfuJc89dTEiPzWr4qtFOciTENWE3OCsOSzPCjeuGGi3ZVBQKCDejWEDDH4/6CrZ
- ON0yfDgMaJYwAYW4tQkS7s7n7gj49bPpqNBylU2FXrGWF2nF7d8LyTUxsJIrKBMmudUtAbet
- phjITWG1WFl4P/YLWM=
-IronPort-HdrOrdr: A9a23:N/op3a9jBN2bb8cCXCVuk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
- re5cjztCWE7gr5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAtBD4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:sdl5R6mWI1Kde09Wk8JvH3To5gx6IURdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJODG3TM/+PYWDzLtFyat7j9BsG75bSy95lGgFlqCg0HiMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA185IMsdoUg7wbdh09Qw2YLR7z6l4
+ rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
+ s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
+ NYdu7ibRiIIApHRhO0jciVjMTolGaITrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
+ 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQK2DO
+ ZJIOGUHgBLoMixmCEUWGYsHssCRt2GveGdhhU2FnP9ii4TU5FMoi+W8WDbPQfSob8hImkeTp
+ krd4n/0RBodMbS3yyeB83+qrv/Cm2X8Qo16PLG2//FlgVqXx0QIFQYbE1C8pJGRiEGkXMlEA
+ 1cJ4Sdopq83nGSqUdvVTxC+uGSDvBMXR5xXCeJSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
+ 1SV2dTzClRHr7m9WX+bsLCOoluaIjMJJGUPYSsFSwot4NT5pow3yBXVQb5e/LWd14OvX2uqm
+ nbT8XZ41+57YdM3O7uT/gDJpxmjg7n1chMp7zv2YlmH9Vhda9vwD2C30mQ3/cqsPa7AEALY7
+ CNVypDEhAwdJcrSz33WGY3hCJnsvqzcYWOG2TaDCrF8r2zFxpK1QWxHDNiSzm9SO8AYcHfCZ
+ EbJsGu9D7cCYSP3Mcebj2+3YvnGLJQM9/y+DZg4jfIUO/CdkTNrGwk0PiatM5jFyhRErE3GE
+ c7znTyQ4ZMm5UNPl2Deegvg+eVzmnBWKZ37HMimp/hY7VZuTCHMEupUWLd/Rss48LmFsG3oH
+ yV3bpDRoyizpNbWO3GNmaZKdAhiBSFiWfje9pwGHsbec1EOMDxwVJfsLUYJJtUNc1J9zbyTo
+ BlQmyZwlTLCuJEwAV/bMiw8MOy/A8kXQLBSFXVEAGtEEkMLOe6HhJrzvbNuFVX+3OA8n/NyU
+ dcffMCMXqZGRjjdomxPZpjhto1yMh+sgFvWbSaiZTE+eb9mRhDIpYC4Lle+qnFWA3rlr9Y6r
+ p2hyhjfHcgJSTN9AZuEc/mo1V6w4yQQwbogQ0vSL9BPU0zw64w2eTfph/o6LphUexXOzzeXz
+ SiMBhIcqbWfqoM56oCR16uFs52oA611GU8DRzvX6rO/NC/7+Gu/wNAfDLbULG6FDG6tofesf
+ +RYyf34IcYrplcSvtouCatvwII/+8Dr++1QwDN7ESiZdF+sEL5hfCWLhJEdqq1Xy7ZFkgKqQ
+ UbTqMJCMLCENc65Ql4cIA0pMraK2f0Ow2SA6P00JAPx5TNt/arBWkJXZkHehCtYJbpzEYUk3
+ eZ+55JGt13h0kInYoSckyRZ12WQNXhRAawou6YTDJLvlgd2mEpJZobRC3Ou7ZyCAzmW3pLG/
+ tNAaHL+uolh
+IronPort-HdrOrdr: A9a23:zzdLT6PsDXUPYcBcTv2jsMiBIKoaSvp037BN7TEUdfU1SL38qy
+ nApoV56faZslcssRIb9+xoWpPwJk80nKQdieN9AV7LZniBhILCFvAB0WKN+V3d8gTFh5dgPf
+ gKScND4afLYmSSJ/yKmDVQaOxN/OW6
 X-IronPort-AV: E=Sophos;i="5.85,308,1624334400"; 
-   d="scan'208";a="54938587"
+   d="scan'208";a="53560997"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 04/12] x86/hvm: Reduce stack usage from HVMTRACE_ND()
-Date: Mon, 20 Sep 2021 18:25:21 +0100
-Message-ID: <20210920172529.24932-5-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>, Juergen Gross <jgross@suse.com>,
+	Dario Faggioli <dfaggioli@suse.com>
+Subject: [PATCH v2 08/12] xen/sched: Clean up trace handling
+Date: Mon, 20 Sep 2021 18:25:25 +0100
+Message-ID: <20210920172529.24932-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 References: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-It is pointless to write all 6 entries and only consume the useful subset.
-bloat-o-meter shows quite how obscene the overhead is in vmx_vmexit_handler(),
-weighing in at 12% of the function arranging unread zeroes on the stack, and
-8% for svm_vmexit_handler().
+There is no need for bitfields anywhere - use more sensible types.  There is
+also no need to cast 'd' to (unsigned char *) before passing it to a function
+taking void *.
 
-  add/remove: 0/0 grow/shrink: 0/20 up/down: 0/-1929 (-1929)
-  Function                                     old     new   delta
-  hvm_msr_write_intercept                     1049    1033     -16
-  vmx_enable_intr_window                       238     214     -24
-  svm_enable_intr_window                       337     313     -24
-  hvmemul_write_xcr                            115      91     -24
-  hvmemul_write_cr                             350     326     -24
-  hvmemul_read_xcr                             115      91     -24
-  hvmemul_read_cr                              146     122     -24
-  hvm_mov_to_cr                                438     414     -24
-  hvm_mov_from_cr                              253     229     -24
-  vmx_intr_assist                             1150    1118     -32
-  svm_intr_assist                              459     427     -32
-  hvm_rdtsc_intercept                          138     106     -32
-  hvm_msr_read_intercept                       898     866     -32
-  vmx_vmenter_helper                          1142    1094     -48
-  vmx_inject_event                             813     765     -48
-  svm_vmenter_helper                           238     187     -51
-  hvm_hlt                                      197     146     -51
-  svm_inject_event                            1678    1614     -64
-  svm_vmexit_handler                          5880    5392    -488
-  vmx_vmexit_handler                          7281    6438    -843
-  Total: Before=3644277, After=3642348, chg -0.05%
-
-Adjust all users of HVMTRACE_ND(), using TRC_PAR_LONG() where appropriate
-instead of opencoding it.
-
-The 0 case needs a little help.  All object in C must have a unique address
-and _d is passed by pointer.  Explicitly permit the optimiser to drop the
-array.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Juergen Gross <jgross@suse.com>
+CC: Dario Faggioli <dfaggioli@suse.com>
 
 v2:
- * Adjust callers of HVMTRACE_ND() too
- * Drop _d[] for the 0 case.
-
-Normally I wouldn't recommend patches like this for backport, but
-{vmx,svm}_vmexit_handler() are fastpaths and this is a *lot* of I-cache lines
-dropped...
+ * New
 ---
- xen/arch/x86/hvm/svm/svm.c      |  8 +++-----
- xen/arch/x86/hvm/vmx/vmx.c      |  9 ++++-----
- xen/include/asm-x86/hvm/trace.h | 28 ++++++++++------------------
- 3 files changed, 17 insertions(+), 28 deletions(-)
+ xen/common/sched/core.c   |  4 ++--
+ xen/common/sched/credit.c | 38 ++++++++++++++++++--------------------
+ xen/common/sched/null.c   | 42 +++++++++++++++++++++++++-----------------
+ 3 files changed, 45 insertions(+), 39 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index afb1ccb342c2..f0e10dec046e 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1052,7 +1052,7 @@ void svm_vmenter_helper(const struct cpu_user_regs *regs)
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index 8f4b1ca10d1c..fe133cbf117c 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -205,7 +205,7 @@ static inline struct scheduler *vcpu_scheduler(const struct vcpu *v)
+ 
+ static inline void trace_runstate_change(const struct vcpu *v, int new_state)
+ {
+-    struct { uint32_t vcpu:16, domain:16; } d;
++    struct { uint16_t vcpu, domain; } d;
+     uint32_t event;
+ 
+     if ( likely(!tb_init_done) )
+@@ -223,7 +223,7 @@ static inline void trace_runstate_change(const struct vcpu *v, int new_state)
+ 
+ static inline void trace_continue_running(const struct vcpu *v)
+ {
+-    struct { uint32_t vcpu:16, domain:16; } d;
++    struct { uint16_t vcpu, domain; } d;
+ 
+     if ( likely(!tb_init_done) )
+         return;
+diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
+index d0aa017c643e..f277fa37a8b1 100644
+--- a/xen/common/sched/credit.c
++++ b/xen/common/sched/credit.c
+@@ -1828,21 +1828,18 @@ static void csched_schedule(
+     SCHED_STAT_CRANK(schedule);
+     CSCHED_UNIT_CHECK(unit);
+ 
+-    /*
+-     * Here in Credit1 code, we usually just call TRACE_nD() helpers, and
+-     * don't care about packing. But scheduling happens very often, so it
+-     * actually is important that the record is as small as possible.
+-     */
      if ( unlikely(tb_init_done) )
-         HVMTRACE_ND(VMENTRY,
-                     nestedhvm_vcpu_in_guestmode(curr) ? TRC_HVM_NESTEDFLAG : 0,
--                    1/*cycles*/, 0, 0, 0, 0, 0, 0, 0);
-+                    1/*cycles*/);
- 
-     svm_sync_vmcb(curr, vmcb_needs_vmsave);
- 
-@@ -2565,12 +2565,10 @@ void svm_vmexit_handler(struct cpu_user_regs *regs)
- 
-     if ( hvm_long_mode_active(v) )
-         HVMTRACE_ND(VMEXIT64, vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0,
--                    1/*cycles*/, 3, exit_reason,
--                    regs->eip, regs->rip >> 32, 0, 0, 0);
-+                    1/*cycles*/, exit_reason, TRC_PAR_LONG(regs->rip));
-     else
-         HVMTRACE_ND(VMEXIT, vcpu_guestmode ? TRC_HVM_NESTEDFLAG : 0,
--                    1/*cycles*/, 2, exit_reason,
--                    regs->eip, 0, 0, 0, 0);
-+                    1/*cycles*/, exit_reason, regs->eip);
- 
-     if ( vcpu_guestmode )
      {
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index b0a42d05f86a..d403e2d8060a 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -3864,11 +3864,10 @@ void vmx_vmexit_handler(struct cpu_user_regs *regs)
-     __vmread(VM_EXIT_REASON, &exit_reason);
+         struct {
+-            unsigned cpu:16, tasklet:8, idle:8;
+-        } d;
+-        d.cpu = cur_cpu;
+-        d.tasklet = tasklet_work_scheduled;
+-        d.idle = is_idle_unit(unit);
+-        __trace_var(TRC_CSCHED_SCHEDULE, 1, sizeof(d),
+-                    (unsigned char *)&d);
++            uint16_t cpu;
++            uint8_t tasklet, idle;
++        } d = {
++            .cpu     = cur_cpu,
++            .tasklet = tasklet_work_scheduled,
++            .idle    = is_idle_unit(unit),
++        };
++
++        __trace_var(TRC_CSCHED_SCHEDULE, 1, sizeof(d), &d);
+     }
  
-     if ( hvm_long_mode_active(v) )
--        HVMTRACE_ND(VMEXIT64, 0, 1/*cycles*/, 3, exit_reason,
--                    regs->eip, regs->rip >> 32, 0, 0, 0);
-+        HVMTRACE_ND(VMEXIT64, 0, 1/*cycles*/, exit_reason,
-+                    TRC_PAR_LONG(regs->rip));
-     else
--        HVMTRACE_ND(VMEXIT, 0, 1/*cycles*/, 2, exit_reason,
--                    regs->eip, 0, 0, 0, 0);
-+        HVMTRACE_ND(VMEXIT, 0, 1/*cycles*/, exit_reason, regs->eip);
+     runtime = now - unit->state_entry_time;
+@@ -1904,14 +1901,15 @@ static void csched_schedule(
+         if ( unlikely(tb_init_done) )
+         {
+             struct {
+-                unsigned unit:16, dom:16;
+-                unsigned runtime;
+-            } d;
+-            d.dom = unit->domain->domain_id;
+-            d.unit = unit->unit_id;
+-            d.runtime = runtime;
+-            __trace_var(TRC_CSCHED_RATELIMIT, 1, sizeof(d),
+-                        (unsigned char *)&d);
++                uint16_t unit, dom;
++                uint32_t runtime;
++            } d = {
++                .dom     = unit->domain->domain_id,
++                .unit    = unit->unit_id,
++                .runtime = runtime,
++            };
++
++            __trace_var(TRC_CSCHED_RATELIMIT, 1, sizeof(d), &d);
+         }
  
-     perfc_incra(vmexits, exit_reason);
+         goto out;
+diff --git a/xen/common/sched/null.c b/xen/common/sched/null.c
+index 82d5d1baab85..deb59747fbe8 100644
+--- a/xen/common/sched/null.c
++++ b/xen/common/sched/null.c
+@@ -329,10 +329,12 @@ pick_res(const struct null_private *prv, const struct sched_unit *unit)
+         struct {
+             uint16_t unit, dom;
+             uint32_t new_cpu;
+-        } d;
+-        d.dom = unit->domain->domain_id;
+-        d.unit = unit->unit_id;
+-        d.new_cpu = new_cpu;
++        } d = {
++            .unit    = unit->unit_id,
++            .dom     = unit->domain->domain_id,
++            .new_cpu = new_cpu,
++        };
++
+         __trace_var(TRC_SNULL_PICKED_CPU, 1, sizeof(d), &d);
+     }
  
-@@ -4645,7 +4644,7 @@ bool vmx_vmenter_helper(const struct cpu_user_regs *regs)
-     if ( unlikely(curr->arch.hvm.vmx.lbr_flags & LBR_FIXUP_MASK) )
-         lbr_fixup();
+@@ -357,10 +359,12 @@ static void unit_assign(struct null_private *prv, struct sched_unit *unit,
+         struct {
+             uint16_t unit, dom;
+             uint32_t cpu;
+-        } d;
+-        d.dom = unit->domain->domain_id;
+-        d.unit = unit->unit_id;
+-        d.cpu = cpu;
++        } d = {
++            .unit = unit->unit_id,
++            .dom  = unit->domain->domain_id,
++            .cpu  = cpu,
++        };
++
+         __trace_var(TRC_SNULL_UNIT_ASSIGN, 1, sizeof(d), &d);
+     }
+ }
+@@ -388,10 +392,12 @@ static bool unit_deassign(struct null_private *prv, const struct sched_unit *uni
+         struct {
+             uint16_t unit, dom;
+             uint32_t cpu;
+-        } d;
+-        d.dom = unit->domain->domain_id;
+-        d.unit = unit->unit_id;
+-        d.cpu = cpu;
++        } d = {
++            .unit = unit->unit_id,
++            .dom  = unit->domain->domain_id,
++            .cpu  = cpu,
++        };
++
+         __trace_var(TRC_SNULL_UNIT_DEASSIGN, 1, sizeof(d), &d);
+     }
  
--    HVMTRACE_ND(VMENTRY, 0, 1/*cycles*/, 0, 0, 0, 0, 0, 0, 0);
-+    HVMTRACE_ND(VMENTRY, 0, 1/*cycles*/);
+@@ -691,11 +697,13 @@ static void null_unit_migrate(const struct scheduler *ops,
+         struct {
+             uint16_t unit, dom;
+             uint16_t cpu, new_cpu;
+-        } d;
+-        d.dom = unit->domain->domain_id;
+-        d.unit = unit->unit_id;
+-        d.cpu = sched_unit_master(unit);
+-        d.new_cpu = new_cpu;
++        } d = {
++            .unit    = unit->unit_id,
++            .dom     = unit->domain->domain_id,
++            .cpu     = sched_unit_master(unit),
++            .new_cpu = new_cpu,
++        };
++
+         __trace_var(TRC_SNULL_MIGRATE, 1, sizeof(d), &d);
+     }
  
-     __vmwrite(GUEST_RIP,    regs->rip);
-     __vmwrite(GUEST_RSP,    regs->rsp);
-diff --git a/xen/include/asm-x86/hvm/trace.h b/xen/include/asm-x86/hvm/trace.h
-index 5cd459b855b7..145b59f6ac65 100644
---- a/xen/include/asm-x86/hvm/trace.h
-+++ b/xen/include/asm-x86/hvm/trace.h
-@@ -67,38 +67,30 @@
- #define TRACE_2_LONG_4D(_e, d1, d2, d3, d4, ...) \
-     TRACE_6D(_e, d1, d2, d3, d4)
- 
--#define HVMTRACE_ND(evt, modifier, cycles, count, d1, d2, d3, d4, d5, d6) \
-+#define HVMTRACE_ND(evt, modifier, cycles, ...)                           \
-     do {                                                                  \
-         if ( unlikely(tb_init_done) && DO_TRC_HVM_ ## evt )               \
-         {                                                                 \
--            struct {                                                      \
--                u32 d[6];                                                 \
--            } _d;                                                         \
--            _d.d[0]=(d1);                                                 \
--            _d.d[1]=(d2);                                                 \
--            _d.d[2]=(d3);                                                 \
--            _d.d[3]=(d4);                                                 \
--            _d.d[4]=(d5);                                                 \
--            _d.d[5]=(d6);                                                 \
-+            uint32_t _d[] = { __VA_ARGS__ };                              \
-             __trace_var(TRC_HVM_ ## evt | (modifier), cycles,             \
--                        sizeof(*_d.d) * count, &_d);                      \
-+                        sizeof(_d), sizeof(_d) ? _d : NULL);              \
-         }                                                                 \
-     } while(0)
- 
- #define HVMTRACE_6D(evt, d1, d2, d3, d4, d5, d6)    \
--    HVMTRACE_ND(evt, 0, 0, 6, d1, d2, d3, d4, d5, d6)
-+    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4, d5, d6)
- #define HVMTRACE_5D(evt, d1, d2, d3, d4, d5)        \
--    HVMTRACE_ND(evt, 0, 0, 5, d1, d2, d3, d4, d5,  0)
-+    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4, d5)
- #define HVMTRACE_4D(evt, d1, d2, d3, d4)            \
--    HVMTRACE_ND(evt, 0, 0, 4, d1, d2, d3, d4,  0,  0)
-+    HVMTRACE_ND(evt, 0, 0, d1, d2, d3, d4)
- #define HVMTRACE_3D(evt, d1, d2, d3)                \
--    HVMTRACE_ND(evt, 0, 0, 3, d1, d2, d3,  0,  0,  0)
-+    HVMTRACE_ND(evt, 0, 0, d1, d2, d3)
- #define HVMTRACE_2D(evt, d1, d2)                    \
--    HVMTRACE_ND(evt, 0, 0, 2, d1, d2,  0,  0,  0,  0)
-+    HVMTRACE_ND(evt, 0, 0, d1, d2)
- #define HVMTRACE_1D(evt, d1)                        \
--    HVMTRACE_ND(evt, 0, 0, 1, d1,  0,  0,  0,  0,  0)
-+    HVMTRACE_ND(evt, 0, 0, d1)
- #define HVMTRACE_0D(evt)                            \
--    HVMTRACE_ND(evt, 0, 0, 0,  0,  0,  0,  0,  0,  0)
-+    HVMTRACE_ND(evt, 0, 0)
- 
- #define HVMTRACE_LONG_1D(evt, d1)                  \
-                    HVMTRACE_2D(evt ## 64, (d1) & 0xFFFFFFFF, (d1) >> 32)
 -- 
 2.11.0
 
