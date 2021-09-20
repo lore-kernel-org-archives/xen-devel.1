@@ -2,58 +2,56 @@ Return-Path: <SRS0=T9jm=OK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 557C3C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 08:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6760C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 08:25:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 06490610FB
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 08:19:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 06490610FB
+	by mail.kernel.org (Postfix) with ESMTPS id 81F7260F6C
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 08:25:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 81F7260F6C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.190304.340137 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.190310.340148 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSEWW-0003Qz-6r; Mon, 20 Sep 2021 08:19:36 +0000
+	id 1mSEbZ-0004oT-Rq; Mon, 20 Sep 2021 08:24:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 190304.340137; Mon, 20 Sep 2021 08:19:36 +0000
+Received: by outflank-mailman (output) from mailman id 190310.340148; Mon, 20 Sep 2021 08:24:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSEWW-0003Qs-3W; Mon, 20 Sep 2021 08:19:36 +0000
-Received: by outflank-mailman (input) for mailman id 190304;
- Mon, 20 Sep 2021 08:19:35 +0000
+	id 1mSEbZ-0004oM-OA; Mon, 20 Sep 2021 08:24:49 +0000
+Received: by outflank-mailman (input) for mailman id 190310;
+ Mon, 20 Sep 2021 08:24:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Spoc=OK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1mSEWV-0003Qm-Bc
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 08:19:35 +0000
-Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
+ (envelope-from <SRS0=5pAY=OK=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1mSEbZ-0004oG-3o
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 08:24:49 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fadc63c1-a583-431d-9695-7d17f8d0acbe;
- Mon, 20 Sep 2021 08:19:34 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05lp2172.outbound.protection.outlook.com [104.47.17.172])
- (Using TLS) by relay.mimecast.com with ESMTP id
- de-mta-2-nioiX3AEM1CtRthzbdCQBw-1; Mon, 20 Sep 2021 10:19:32 +0200
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by VI1PR04MB4942.eurprd04.prod.outlook.com (2603:10a6:803:59::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.18; Mon, 20 Sep
- 2021 08:19:30 +0000
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::4d37:ec64:4e90:b16b]) by VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::4d37:ec64:4e90:b16b%7]) with mapi id 15.20.4523.018; Mon, 20 Sep 2021
- 08:19:30 +0000
-Received: from [10.156.60.236] (37.24.206.209) by
- PR0P264CA0265.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1::13) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4523.14 via Frontend Transport; Mon, 20 Sep 2021 08:19:29 +0000
+ id 2e571aaa-350e-4913-8e85-f981df22da30;
+ Mon, 20 Sep 2021 08:24:47 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id ABD9620041;
+ Mon, 20 Sep 2021 08:24:46 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7C6F913ACC;
+ Mon, 20 Sep 2021 08:24:46 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id ysJuHE5FSGGNGgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 20 Sep 2021 08:24:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,134 +63,449 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fadc63c1-a583-431d-9695-7d17f8d0acbe
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1632125973;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
+X-Inumbo-ID: 2e571aaa-350e-4913-8e85-f981df22da30
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1632126286; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=XHapG8vGOL6k8MmAWvtdgtXa/ewF3aDJIfEjIaAOB6k=;
-	b=FwJX5PZgRaSprrhLldhZgVDml0fcgzEEuj0hh5QBmAszrD/yjImFqSavGmpx3agTaKD/Sc
-	sYtylUZIVBrPT4XyBsMs1eirc8MvTTt+LAjoD3SgtnHv0fBcpPo7XGe2zcjLUvPbM2O2Y9
-	WOD53WnMBB3ixCcTse0rJdtjoTrTd9o=
-X-MC-Unique: nioiX3AEM1CtRthzbdCQBw-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LEtieiN88TuWYQhzutF/GZiVq7N+zHXmC1Iz8ofaA9mipkaAUUZ3NGGU6vTj8VCSaLV+lyPgkapZ+KmCWWLfyvLX0LSD9DksgzIYtjjM6LYo68IeByzyjBRu6cG6pcqGHH/NuTutlZV67eir1vho6Iykmr2BqB3gHDaEmRaN/UABHd4FXU3lVeSPJTpnvYisOAXcM08KP7OoDtyv6yX4xar7VAf1ChYOvEFIUGyou+fVEiQ7ouIY7GhlQpHCAsJnlLB5A4lcncYmlDQBlkGpElLaxEfZKjLMvBWGKJdq7o54J1rFJs0gH/8ooIsCUEYqk1ZE8Ueagha1ssiHKGXXJQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=XHapG8vGOL6k8MmAWvtdgtXa/ewF3aDJIfEjIaAOB6k=;
- b=DXwpXIJ2Aw6cVHz0zosNQG5ky/iJ93fmFJFNCLUmQdhIKVu7Sluvvqq3Vy4zr8biXq9VC7q4Dicv/UYzQ8fxea9CgF2Hr2MdPY9f4OMsOC63S8Ml3vNjTcDQUrkEGGQIjWOlWqk2Mmjfby1uwrFV0ZGbovVFoZre/GlDgHsfdN304wa/O+TFvEzRp8IqtpFwqiilLkaV19+tmML+faydhiZx78rSMQcj9Eyd0maRC6HQGDf/+MSUKCXe10GLHUw7nX8jmzx48WTp4FsqnoUrneCgdSUKLe/Xcv8xQemTOT7tWUwUkFjwdEluWt6PSMBXicSRgwMcxEb2JzAC01Y70w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: citrix.com; dkim=none (message not signed)
- header.d=none;citrix.com; dmarc=none action=none header.from=suse.com;
-Subject: Re: [PATCH v1] domctl: hold domctl lock while domain is destroyed
-To: Julien Grall <julien@xen.org>
-Cc: George Dunlap <george.dunlap@citrix.com>, Ian Jackson
- <iwj@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, xen-devel@lists.xenproject.org,
- Dmitry Isaikin <isaikin-dmitry@yandex.ru>, rjstone@amazon.co.uk,
- raphning@amazon.co.uk, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
-References: <2e7044de3cd8a6768a20250e61fe262f3a018724.1631790362.git.isaikin-dmitry@yandex.ru>
- <22a4b3c7-7faa-607b-244a-0ab99d7ccfa9@suse.com>
- <16d43ba8-d45f-021c-0e19-e233cb967938@citrix.com>
- <f1dda72c-695f-34d3-619e-ec2aa7696bce@suse.com>
- <01ec71a5-a1f1-b7db-d467-bc4c734db096@xen.org>
- <0fa0d369-c67c-1cdd-0ff8-1542487ffb8a@citrix.com>
- <0c860901-0992-74df-4a53-d75a0971d1f3@suse.com>
- <f6225dc6-0590-3456-8c48-7ab29aa00200@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <c242e3cc-d4ed-73b7-8e38-f94a8c479d20@suse.com>
-Date: Mon, 20 Sep 2021 10:19:29 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-In-Reply-To: <f6225dc6-0590-3456-8c48-7ab29aa00200@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PR0P264CA0265.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:100:1::13) To VI1PR04MB5600.eurprd04.prod.outlook.com
- (2603:10a6:803:e7::16)
+	bh=KG9nN2IOsT4a5w0uHs+Gi11848zjWgSPv3lXhfAD5uo=;
+	b=eGzBTSp2wL66vo61MJMX+mLk4xEawq2JwFxzC1cSNuDkx40cirTpwRDMPJNeV0wb+wyaB2
+	YxYVEv0H6U8/+YV2RfsI5T1t8VKBPi8sQfboNLgjM4z76G2vqQvGJQ9NTBJTraiw0B7cPK
+	ZjmQoNzpgbxyeI73fsu6/D7+OYmXp6s=
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Julien Grall <julien@xen.org>
+References: <20210917154625.89315-1-roger.pau@citrix.com>
+ <20210917154625.89315-6-roger.pau@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH DNA 5/6] tools/xenstored: restore support for mapping ring
+ as foreign memory
+Message-ID: <b1fb5e04-29a8-c60b-c754-5a4275a0601e@suse.com>
+Date: Mon, 20 Sep 2021 10:24:45 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 85a2d57f-b30d-48f2-1c37-08d97c0f5e81
-X-MS-TrafficTypeDiagnostic: VI1PR04MB4942:
-X-Microsoft-Antispam-PRVS:
-	<VI1PR04MB494245E9BEC2A8A9D298224FB3A09@VI1PR04MB4942.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	wCg3nREFKT8aFarEE8RfArIqMTggtj3HBrhMp8PIqSiB21710EDUMDSA+sbEkKgDmjqUasKCXMaBcUH2Lhe/PlK4QL1tiwjQRPEvQo3EBPKElgf9a4AT4ZaitD6cG+C8CfvAY6i+LXiMo3KZ1lmantZSdf5qflkXRjbBsL5MJUHbx/CPfojbk5pcCUf8BNuka4OWb25z0gCKF0zxOeUIHAuxxNiTMhjj5kM9uwn38tnx5uYe3K2X/7UzJkyOAO6Mg3Y1SsAbF8ebxy4uiC6QJaOqk/XtaZTEV2JyRv5HmPue+sZ7ef/L0k2OD3QgtWfChHDN82Q281CRYcewduOtR7qBTFPm1kdsAZj3kM/LtAXRxEYT9grttFH9M01HMLk51NUsyDkiMBQjluEvcV2Q/1nZxzGCpQVc0LBisyqeEJ9LxMxtcRziOs3B/QdUc88mgbnXe/Bna+QswDTgIAp62T3Be4HFO1Q8udhnoK0GCf9W9l1Czxs+FMA41GZyecQjhkRj0HNqz5JnbIOfI/g8tJb+XdYvNdp4j+9ZzLMVoTGhxsBlaNCxLb6qdK/EZBCDI3NKHgXF+dZJPyBEc+owGoXd0B2fihCXklJlPnrLsNZOr+QbeNz6zJU38WI5m19c77FilVROAW/Qu7sQ1MqULA49XR5YfFBTBbnJjOhcB60Re1rELSJklPOi9PNuyemMgybZ2P9ROQiNliwSK1ZQg3WKoWGkxf1lUwq8ri2iJTM=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(346002)(366004)(376002)(39860400002)(396003)(136003)(6486002)(2616005)(38100700002)(6916009)(7416002)(66946007)(956004)(186003)(26005)(83380400001)(36756003)(31696002)(53546011)(86362001)(2906002)(4744005)(54906003)(316002)(5660300002)(16576012)(31686004)(4326008)(66556008)(8676002)(478600001)(8936002)(66476007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?QXBMNGlWa2NTUVBPTGxMUjRvUmRVODFEVTIxZjdTdlM1Q29yenVDbkM4UGlR?=
- =?utf-8?B?b0JmM29YQ2NvOWJLOHBXVWc2WTFQcytydUtveWUyOTI0eE84eUV6RU1QcjJm?=
- =?utf-8?B?aVVnNlBaUklMOWxDNmV6eGcyNituNytLNlhESXJzaFlvbDEyd0VrdlhuNWFz?=
- =?utf-8?B?Q04ycmZtS2hMU1VobHFnMzl6RnJydG9tbmpiaHJ0MXFSa25Pbjl0bjV4S0wy?=
- =?utf-8?B?NmxURUN4bHdFUyt1b2hGODkwOXRhSUc3ZjVnSlNPOE5iR3VJN0M5TldOdkh0?=
- =?utf-8?B?LzFQTCttOFFDNUxGSitpV1JhYi9JcWpPQ0JLMnZXM1IwOFV2azlHUERWRXBQ?=
- =?utf-8?B?TXpjM0JMUm9BWDF6UDZKOXZqdGE4dmwrQVFoUm8rclNPWlhZV213VzV6cDlQ?=
- =?utf-8?B?UEc0ZzFCK25sczAyakwyS0o0aUdMVXkwLzJYckNBWDc0R0RiU2djc3RJcFZG?=
- =?utf-8?B?SUJsRm1pY1U0aHVQWWNzVXoyZ251TTIyVWYxb2I3RG16ZytUcmo4ODR5Y0Yr?=
- =?utf-8?B?dzhpNmVySFZRN1lYSVlQalplZC8xT21hWnhJN2NmZ3orVWg3eXh0MldObFBy?=
- =?utf-8?B?dzlXSnU5aTJUdDNaanVIam5rZmRDcy9LZyt4d1hHWnBpYnMzRXN1YUJDT3lv?=
- =?utf-8?B?cUp4UFAzbngrZ3gxalIwN3JuZzJ4ZHRJZG9tUXM3cEdaV2FSbVl0MGZLT3NC?=
- =?utf-8?B?dlZWQ0VsZGdMb2U4YUxSdENLd2phb2xqTjNCVUkzbW1PckNWMDlKRWRPcDlM?=
- =?utf-8?B?ZXVjMzlSRjUreDZJV1BRQlRydEkxVGQxY000ZHdmVElqbTN2dXR5MDdsUWJF?=
- =?utf-8?B?TUJldkliK2E4R1dJUFRnY2JEV01kbnJNODVsVXZxcVF2MGV4dGc5R0JicWFO?=
- =?utf-8?B?eWVRalhsbzk1UVBvSWdaRUZKMGdRQTlMaSs4QS9FRkY2bE5TMEpSc0Z6YTdl?=
- =?utf-8?B?R0h4c2czdTBTMHNEaVpGSTVoYkUxR29VVTF6VkJYcEtjbWJBUWJlWjVMWk5o?=
- =?utf-8?B?YlhFZ0pNNkliSlkyZEl1dlVUTTNhbXcwUmFEUmk3ZFF3REplVDR3blpscjRY?=
- =?utf-8?B?ZTFIeDZBaEhhZmFHTjQ3KzYwRXhhU2RhUGlkQXArOU9rNjlQK3ppa09UMGNo?=
- =?utf-8?B?aDJQMktOYmZ2SE5yVk5NSWRaRlNiTThqU3EvYnJTZG92RTZiK01WbUQxdUph?=
- =?utf-8?B?eElOWmtvZlY4L2VtMFdjekM0cVdLZmw1UFl0R0t6Q2NNREw0YzBSMTJ1YjVB?=
- =?utf-8?B?bDZEd1JiL09FN1J0VTFvTm1tOGF5cVJMS1JPakNBMlBMejlNNFNGR3FNVWx6?=
- =?utf-8?B?YTdKSEUyaTRjaXMxY0M1VDN1M2N1d0Uxa040a2FaRnJDdnU0alRCRVhiTmVG?=
- =?utf-8?B?b000TWUwRzFWOXA1c3o1M0ZNRjd4eGdETXpKbGNDT0ZSQXF3MnBXWEpvYlVB?=
- =?utf-8?B?MlVqUEsrckZ1TjJuUVJPdzZIU25mRWJ5OHV2SGplcTRNUkxpUnJwUFBIMml2?=
- =?utf-8?B?bEJRczdnbm1ZSGdjUVZWQytGQzNEbnJmN2NiTzN2N05hY0JnZTJJb1p4N2NO?=
- =?utf-8?B?ZjVpYUhraE14cUlqRFdJdldtUXpqekFORW9wei9MQzNjak1EeXpVeFBzZ2dT?=
- =?utf-8?B?ZGtzYkVHdjc5Sy9LODU2U3JhYVNWdDg1cWZnKzQ5R1crNWhNQ0VNbGVqK3RX?=
- =?utf-8?B?TTE4T1ZhSXIzc2c2YWpxWUJMYlBlc2o0a3hHTnZoTHZyMThFZWlXZVYrZkVF?=
- =?utf-8?Q?N3itjP5/hiWZmDK+yBt9kC4hQkZmoYLa+wErEY/?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85a2d57f-b30d-48f2-1c37-08d97c0f5e81
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2021 08:19:30.2648
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gE7+JpUld+MYA9ixvqLZfAlU1NMdB/FK2RHLRxtJqIINKnRCv+O8R3tLsGK/wPo6m9vWGSkIr7p5vku/htBGew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4942
+In-Reply-To: <20210917154625.89315-6-roger.pau@citrix.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="Hsp4u7qZ65kAJHwz1ETznUGJ4lJeCDzwu"
 
-On 17.09.2021 18:01, Julien Grall wrote:
-> I will quote what Hongyan wrote back on the first report:
-> 
-> "
-> The best solution is to make the heap scalable instead of a global
-> lock, but that is not going to be trivial.
-> 
-> Of course, another solution is to keep the domctl lock dropped in
-> domain_kill() but have another domain_kill lock so that competing
-> domain_kill()s will try to take that lock and back off with hypercall
-> continuation. But this is kind of hacky (we introduce a lock to reduce
-> spinlock contention elsewhere), which is probably not a solution but a
-> workaround.
-> "
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Hsp4u7qZ65kAJHwz1ETznUGJ4lJeCDzwu
+Content-Type: multipart/mixed; boundary="M7VJ1cDQq1MuKlTopkoGEWM0fgh7UKna2";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
+ Julien Grall <julien@xen.org>
+Message-ID: <b1fb5e04-29a8-c60b-c754-5a4275a0601e@suse.com>
+Subject: Re: [PATCH DNA 5/6] tools/xenstored: restore support for mapping ring
+ as foreign memory
+References: <20210917154625.89315-1-roger.pau@citrix.com>
+ <20210917154625.89315-6-roger.pau@citrix.com>
+In-Reply-To: <20210917154625.89315-6-roger.pau@citrix.com>
 
-Interesting. Is contention on the heap lock merely suspected or
-was that lock proven to be the problem one?
+--M7VJ1cDQq1MuKlTopkoGEWM0fgh7UKna2
+Content-Type: multipart/mixed;
+ boundary="------------A99C9F8B3E6D7D0E4FB0E828"
+Content-Language: en-US
 
-Jan
+This is a multi-part message in MIME format.
+--------------A99C9F8B3E6D7D0E4FB0E828
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
+On 17.09.21 17:46, Roger Pau Monne wrote:
+> Restore the previous way of mapping the xenstore ring using foreign
+> memory. Use xenforeignmemory instead of libxc in order to avoid adding
+> another dependency on a unstable interface.
+
+Mapping a guest page via xenforeignmemory is no good move IMO. A guest
+not supporting a grant table for security reasons is a rather strange
+idea, as it needs to trade that for a general memory access by any
+backend without a way to restrict such accesses. This contradicts one
+of the main concepts of the Xen security architecture.
+
+At the same time this will either kill the use of xenstore-stubdom, or
+it will require an extended XSM configuration allowing xenstore-stubdom
+to establish arbitrary page mappings of those guests.
+
+
+Juergen
+
+>=20
+> This in turn requires storing the gfn into xs_state_connection for
+> resume purposes, which breaks the current format.
+>=20
+> Note this is a preparatory patch in order to support the usage of
+> xenstore on domains without grant table. This not only allows xenstore
+> usage, but also makes things like "@introduceDomain" events work when
+> using such guests, otherwise the mapping done in introduce_domain
+> fails and the "@introduceDomain" event won't be signaled.
+>=20
+> Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> ---
+>   tools/xenstore/Makefile                 |  4 +-
+>   tools/xenstore/include/xenstore_state.h |  1 +
+>   tools/xenstore/xenstored_domain.c       | 69 +++++++++++++++++++-----=
+-
+>   3 files changed, 56 insertions(+), 18 deletions(-)
+>=20
+> diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
+> index 292b478fa1..9a9f7be5cb 100644
+> --- a/tools/xenstore/Makefile
+> +++ b/tools/xenstore/Makefile
+> @@ -67,10 +67,10 @@ $(XENSTORED_OBJS): CFLAGS +=3D $(SYSTEMD_CFLAGS)
+>   xenstored: LDFLAGS +=3D $(SYSTEMD_LIBS)
+>   endif
+>  =20
+> -$(XENSTORED_OBJS): CFLAGS +=3D $(CFLAGS_libxengnttab)
+> +$(XENSTORED_OBJS): CFLAGS +=3D $(CFLAGS_libxengnttab) $(CFLAGS_libxenf=
+oreignmemory)
+>  =20
+>   xenstored: $(XENSTORED_OBJS)
+> -	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(L=
+DLIBS_libxenctrl) $(LDLIBS_xenstored) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLA=
+GS)
+> +	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(L=
+DLIBS_libxenforeignmemory) $(LDLIBS_libxenctrl) $(LDLIBS_xenstored) $(SOC=
+KET_LIBS) -o $@ $(APPEND_LDFLAGS)
+>  =20
+>   xenstored.a: $(XENSTORED_OBJS)
+>   	$(AR) cr $@ $^
+> diff --git a/tools/xenstore/include/xenstore_state.h b/tools/xenstore/i=
+nclude/xenstore_state.h
+> index ae0d053c8f..8dcc8d9d8b 100644
+> --- a/tools/xenstore/include/xenstore_state.h
+> +++ b/tools/xenstore/include/xenstore_state.h
+> @@ -80,6 +80,7 @@ struct xs_state_connection {
+>               uint16_t domid;  /* Domain-Id. */
+>               uint16_t tdomid; /* Id of target domain or DOMID_INVALID.=
+ */
+>               uint32_t evtchn; /* Event channel port. */
+> +            uint64_t gfn;    /* Store GFN. */
+>           } ring;
+>           int32_t socket_fd;   /* File descriptor for socket connection=
+s. */
+>       } spec;
+> diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstor=
+ed_domain.c
+> index 8930303773..f3563e47aa 100644
+> --- a/tools/xenstore/xenstored_domain.c
+> +++ b/tools/xenstore/xenstored_domain.c
+> @@ -33,10 +33,12 @@
+>  =20
+>   #include <xenevtchn.h>
+>   #include <xenctrl.h>
+> +#include <xenforeignmemory.h>
+>   #include <xen/grant_table.h>
+>  =20
+>   static xc_interface *xc_handle;
+>   xengnttab_handle *xgt_handle;
+> +static xenforeignmemory_handle *xfm_handle;
+>   static evtchn_port_t virq_port;
+>  =20
+>   xenevtchn_handle *xce_handle =3D NULL;
+> @@ -66,12 +68,18 @@ struct domain
+>   	/* Generation count at domain introduction time. */
+>   	uint64_t generation;
+>  =20
+> +	/* Store GFN (if using a ring connection). */
+> +	xen_pfn_t gfn;
+> +
+>   	/* Have we noticed that this domain is shutdown? */
+>   	bool shutdown;
+>  =20
+>   	/* Has domain been officially introduced? */
+>   	bool introduced;
+>  =20
+> +	/* Is the ring memory foreign mapped? */
+> +	bool foreign_mapped;
+> +
+>   	/* number of entry from this domain in the store */
+>   	int nbentry;
+>  =20
+> @@ -196,16 +204,29 @@ static const struct interface_funcs domain_funcs =
+=3D {
+>   	.can_read =3D domain_can_read,
+>   };
+>  =20
+> -static void *map_interface(domid_t domid)
+> +static void *map_interface(domid_t domid, xen_pfn_t gfn, bool *foreign=
+_mapped)
+>   {
+> -	return xengnttab_map_grant_ref(xgt_handle, domid,
+> -				       GNTTAB_RESERVED_XENSTORE,
+> -				       PROT_READ|PROT_WRITE);
+> +	void *map =3D xengnttab_map_grant_ref(xgt_handle, domid,
+> +					    GNTTAB_RESERVED_XENSTORE,
+> +					    PROT_READ|PROT_WRITE);
+> +
+> +	if (!map)
+> +	{
+> +		map =3D xenforeignmemory_map(xfm_handle, domid,
+> +					   PROT_READ|PROT_WRITE, 1,
+> +					   &gfn, NULL);
+> +		*foreign_mapped =3D !!map;
+> +	}
+> +
+> +	return map;
+>   }
+>  =20
+> -static void unmap_interface(void *interface)
+> +static void unmap_interface(void *interface, bool foreign_mapped)
+>   {
+> -	xengnttab_unmap(xgt_handle, interface, 1);
+> +	if (foreign_mapped)
+> +		xenforeignmemory_unmap(xfm_handle, interface, 1);
+> +	else
+> +		xengnttab_unmap(xgt_handle, interface, 1);
+>   }
+>  =20
+>   static int destroy_domain(void *_domain)
+> @@ -228,7 +249,8 @@ static int destroy_domain(void *_domain)
+>   		if (domain->domid =3D=3D 0)
+>   			unmap_xenbus(domain->interface);
+>   		else
+> -			unmap_interface(domain->interface);
+> +			unmap_interface(domain->interface,
+> +					domain->foreign_mapped);
+>   	}
+>  =20
+>   	fire_watches(NULL, domain, "@releaseDomain", NULL, false, NULL);
+> @@ -363,12 +385,15 @@ static struct domain *find_or_alloc_domain(const =
+void *ctx, unsigned int domid)
+>   	return domain ? : alloc_domain(ctx, domid);
+>   }
+>  =20
+> -static int new_domain(struct domain *domain, int port, bool restore)
+> +static int new_domain(struct domain *domain, int port, xen_pfn_t gfn,
+> +		      bool foreign_mapped, bool restore)
+>   {
+>   	int rc;
+>  =20
+>   	domain->port =3D 0;
+>   	domain->shutdown =3D false;
+> +	domain->gfn =3D gfn;
+> +	domain->foreign_mapped =3D foreign_mapped;
+>   	domain->path =3D talloc_domain_path(domain, domain->domid);
+>   	if (!domain->path) {
+>   		errno =3D ENOMEM;
+> @@ -436,7 +461,8 @@ static void domain_conn_reset(struct domain *domain=
+)
+>  =20
+>   static struct domain *introduce_domain(const void *ctx,
+>   				       unsigned int domid,
+> -				       evtchn_port_t port, bool restore)
+> +				       evtchn_port_t port, xen_pfn_t gfn,
+> +				       bool restore)
+>   {
+>   	struct domain *domain;
+>   	int rc;
+> @@ -448,17 +474,21 @@ static struct domain *introduce_domain(const void=
+ *ctx,
+>   		return NULL;
+>  =20
+>   	if (!domain->introduced) {
+> +		bool foreign_mapped =3D false;
+> +
+>   		interface =3D is_master_domain ? xenbus_map()
+> -					     : map_interface(domid);
+> +					     : map_interface(domid, gfn,
+> +							     &foreign_mapped);
+>   		if (!interface && !restore)
+>   			return NULL;
+> -		if (new_domain(domain, port, restore)) {
+> +		if (new_domain(domain, port, gfn, foreign_mapped, restore)) {
+>   			rc =3D errno;
+>   			if (interface) {
+>   				if (is_master_domain)
+>   					unmap_xenbus(interface);
+>   				else
+> -					unmap_interface(interface);
+> +					unmap_interface(interface,
+> +							foreign_mapped);
+>   			}
+>   			errno =3D rc;
+>   			return NULL;
+> @@ -489,19 +519,20 @@ int do_introduce(struct connection *conn, struct =
+buffered_data *in)
+>   	char *vec[3];
+>   	unsigned int domid;
+>   	evtchn_port_t port;
+> +	xen_pfn_t gfn;
+>  =20
+>   	if (get_strings(in, vec, ARRAY_SIZE(vec)) < ARRAY_SIZE(vec))
+>   		return EINVAL;
+>  =20
+>   	domid =3D atoi(vec[0]);
+> -	/* Ignore the gfn, we don't need it. */
+> +	gfn =3D atol(vec[1]);
+>   	port =3D atoi(vec[2]);
+>  =20
+>   	/* Sanity check args. */
+>   	if (port <=3D 0)
+>   		return EINVAL;
+>  =20
+> -	domain =3D introduce_domain(in, domid, port, false);
+> +	domain =3D introduce_domain(in, domid, port, gfn, false);
+>   	if (!domain)
+>   		return errno;
+>  =20
+> @@ -718,7 +749,7 @@ void dom0_init(void)
+>   	if (port =3D=3D -1)
+>   		barf_perror("Failed to initialize dom0 port");
+>  =20
+> -	dom0 =3D introduce_domain(NULL, xenbus_master_domid(), port, false);
+> +	dom0 =3D introduce_domain(NULL, xenbus_master_domid(), port, 0, false=
+);
+>   	if (!dom0)
+>   		barf_perror("Failed to initialize dom0");
+>  =20
+> @@ -758,6 +789,10 @@ void domain_init(int evtfd)
+>   	 */
+>   	xengnttab_set_max_grants(xgt_handle, DOMID_FIRST_RESERVED);
+>  =20
+> +	xfm_handle =3D xenforeignmemory_open(NULL, 0);
+> +	if (!xfm_handle)
+> +		barf_perror("Failed to create handle for foreign memory");
+> +
+>   	if (evtfd < 0)
+>   		xce_handle =3D xenevtchn_open(NULL, XENEVTCHN_NO_CLOEXEC);
+>   	else
+> @@ -1189,6 +1224,7 @@ const char *dump_state_connections(FILE *fp)
+>   			sc.spec.ring.tdomid =3D c->target ? c->target->id
+>   						: DOMID_INVALID;
+>   			sc.spec.ring.evtchn =3D c->domain->port;
+> +			sc.spec.ring.gfn =3D c->domain->gfn;
+>   		} else {
+>   			sc.conn_type =3D XS_STATE_CONN_TYPE_SOCKET;
+>   			sc.spec.socket_fd =3D c->fd;
+> @@ -1290,7 +1326,8 @@ void read_state_connection(const void *ctx, const=
+ void *state)
+>   #endif
+>   	} else {
+>   		domain =3D introduce_domain(ctx, sc->spec.ring.domid,
+> -					  sc->spec.ring.evtchn, true);
+> +					  sc->spec.ring.evtchn,
+> +					  sc->spec.ring.gfn, true);
+>   		if (!domain)
+>   			barf("domain allocation error");
+>  =20
+>=20
+
+
+--------------A99C9F8B3E6D7D0E4FB0E828
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------A99C9F8B3E6D7D0E4FB0E828--
+
+--M7VJ1cDQq1MuKlTopkoGEWM0fgh7UKna2--
+
+--Hsp4u7qZ65kAJHwz1ETznUGJ4lJeCDzwu
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFIRU0FAwAAAAAACgkQsN6d1ii/Ey9b
+SQf/Z1afyFTCfUjM2Xw7BBOxu/XLkEl0EJnYY6wwmlqsrqzDftcWj6me2kOBWA4e97WvPhSvdzbL
+pCibiBMAbQjtfkgP9CWmhYLDgL39fs4SIZ+hGYr2dAusxMHRxSD133+/L1z9Gfiw6H3W5hW3JCZV
+srjGYR179+GAv6bP2EDCDh0nloovppbC4cufZLq37gdRRW8zzZEno9LX9mAD95CzL8fSmR3+1Y01
+Z7w7Oasqt5IR+jpt4sQlSk+3a/aQIVAl6S6LdMdvJodvAiT3D/OtKYt66ziqAZjqZCMbRmb/VVoS
+j2FV8F4ssJb7Qvz6XCt/kfPAf+WKh+/kcRMgRNSnlA==
+=TKD+
+-----END PGP SIGNATURE-----
+
+--Hsp4u7qZ65kAJHwz1ETznUGJ4lJeCDzwu--
 
