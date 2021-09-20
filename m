@@ -2,43 +2,41 @@ Return-Path: <SRS0=T9jm=OK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-17.4 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E0FFC4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A6D29C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:34:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 07ECA632E5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 07ECA632E5
+	by mail.kernel.org (Postfix) with ESMTPS id 5F7246337B
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:34:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5F7246337B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.191056.340995 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.191092.341006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN3L-0007Cq-1H; Mon, 20 Sep 2021 17:26:03 +0000
+	id 1mSNBg-0002PC-6j; Mon, 20 Sep 2021 17:34:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 191056.340995; Mon, 20 Sep 2021 17:26:02 +0000
+Received: by outflank-mailman (output) from mailman id 191092.341006; Mon, 20 Sep 2021 17:34:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN3K-0007Ao-NE; Mon, 20 Sep 2021 17:26:02 +0000
-Received: by outflank-mailman (input) for mailman id 191056;
- Mon, 20 Sep 2021 17:26:00 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mSNBg-0002P5-3k; Mon, 20 Sep 2021 17:34:40 +0000
+Received: by outflank-mailman (input) for mailman id 191092;
+ Mon, 20 Sep 2021 17:34:38 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=F8X/=OK=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mSN3I-0003cq-DE
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:26:00 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c7800014-1a37-11ec-b87a-12813bfff9fa;
- Mon, 20 Sep 2021 17:25:42 +0000 (UTC)
+ id 1mSNBe-0002Oz-Sr
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:34:38 +0000
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3aa76012-671c-46b2-b7a2-2af9ef69522c;
+ Mon, 20 Sep 2021 17:34:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,252 +48,322 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c7800014-1a37-11ec-b87a-12813bfff9fa
+X-Inumbo-ID: 3aa76012-671c-46b2-b7a2-2af9ef69522c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1632158742;
+  d=citrix.com; s=securemail; t=1632159276;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=blg5bSVn1FtPA4eRCL98DmLL9LKNBmU4Jtzbra9P1k8=;
-  b=D5uqt+QsDawWW35aCg8jt4mqlc+UIIlq0CvqVejgTOwLVPddQOjUZjkc
-   oV4m9KbCx4J8Qk7WJdtPqGsZLqPfPV3Hek6vm3znzEIm2S2z7L9taUSPI
-   wWqYgXy5tio6pdzmCocF52mlztBiQvh14LjzlXBo7i6WrjISTy2jZWHow
-   c=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: +usJDprPJ7Vo3ZALqmwYSVG+CjURABaRCqpMYhYpw8Y1BL2bHBRRV1/FFKSMBeKjLhz5GNjKP9
- 02ntmey2s4xsN5Q2UseyFRm+/f46R8Z7iJy5XBiGfGQwB3zXSgyehGxeTgY6SGeBZ+ipWbqJBQ
- NPQ2qC2dvck5YnvBnCIfr3hVDrS1XGbrDYf03SAy7w8N9DHlGerYcfYPLboY7Wvi7Eo5d7widn
- +yBj+tYJKKjSPO3tGTu05DP6U9JqUHpHos426uKNHoXiCaAJL8N4qTYUcqwIgpT7IAQk1mkjIq
- zABYCEpTLQC1uFLLt5sNtKVa
+   references:mime-version:content-transfer-encoding;
+  bh=bEpl8O1bP+VDWCJVrreYPoTbBZNOjPBNBltwePd93CU=;
+  b=KF5GMFAE6TRaE/3VSJfM+NcTNBHSQ94Xl6twuYgkrqIxIhECxhURbpHQ
+   otn6N/He5dOJZ4qPy0Fz4Mo0767et1gbX/6KdQUMfspkt7fnPS5mrRRDW
+   9pSHuKmcAujEgFttZvpi1ms13ggBlKywOskFaQ32zdYh0omwIvOvXpn80
+   w=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: jgyIU6088m3DDnn0RqsxcHn+/fcrkyd6geGy4fk9c2sF5hI+Xad3Tn7YU41JSyyJaW5ck7Gd+g
+ w5TGS1/+aZZ0ZzEuft50O1FXgLn4AQt0+7Cl5dyyPakWc+5749KEIgg462kis+2bqP0PsPDpvi
+ z32BucEwxDuVqS8msx2P/9A5/weFq770xh52KUNknDB44QyjQ1xW0dP68RQU2mBQaOV099mRax
+ STU++DjoGaMe6l0VqO+gvsgMlf+XfKut3VaZBrJ2/ic40tEwhZSitfoMXWMGP9S0OiAh3z+rd0
+ EJZSVcw4pA3wMh9pkHZNNpVO
 X-SBRS: 5.1
-X-MesageID: 53560997
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 53136338
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:sdl5R6mWI1Kde09Wk8JvH3To5gx6IURdPkR7XQ2eYbSJt1+Wr1Gzt
- xJODG3TM/+PYWDzLtFyat7j9BsG75bSy95lGgFlqCg0HiMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA185IMsdoUg7wbdh09Qw2YLR7z6l4
- rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
- s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- NYdu7ibRiIIApHRhO0jciVjMTolGaITrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQK2DO
- ZJIOGUHgBLoMixmCEUWGYsHssCRt2GveGdhhU2FnP9ii4TU5FMoi+W8WDbPQfSob8hImkeTp
- krd4n/0RBodMbS3yyeB83+qrv/Cm2X8Qo16PLG2//FlgVqXx0QIFQYbE1C8pJGRiEGkXMlEA
- 1cJ4Sdopq83nGSqUdvVTxC+uGSDvBMXR5xXCeJSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
- 1SV2dTzClRHr7m9WX+bsLCOoluaIjMJJGUPYSsFSwot4NT5pow3yBXVQb5e/LWd14OvX2uqm
- nbT8XZ41+57YdM3O7uT/gDJpxmjg7n1chMp7zv2YlmH9Vhda9vwD2C30mQ3/cqsPa7AEALY7
- CNVypDEhAwdJcrSz33WGY3hCJnsvqzcYWOG2TaDCrF8r2zFxpK1QWxHDNiSzm9SO8AYcHfCZ
- EbJsGu9D7cCYSP3Mcebj2+3YvnGLJQM9/y+DZg4jfIUO/CdkTNrGwk0PiatM5jFyhRErE3GE
- c7znTyQ4ZMm5UNPl2Deegvg+eVzmnBWKZ37HMimp/hY7VZuTCHMEupUWLd/Rss48LmFsG3oH
- yV3bpDRoyizpNbWO3GNmaZKdAhiBSFiWfje9pwGHsbec1EOMDxwVJfsLUYJJtUNc1J9zbyTo
- BlQmyZwlTLCuJEwAV/bMiw8MOy/A8kXQLBSFXVEAGtEEkMLOe6HhJrzvbNuFVX+3OA8n/NyU
- dcffMCMXqZGRjjdomxPZpjhto1yMh+sgFvWbSaiZTE+eb9mRhDIpYC4Lle+qnFWA3rlr9Y6r
- p2hyhjfHcgJSTN9AZuEc/mo1V6w4yQQwbogQ0vSL9BPU0zw64w2eTfph/o6LphUexXOzzeXz
- SiMBhIcqbWfqoM56oCR16uFs52oA611GU8DRzvX6rO/NC/7+Gu/wNAfDLbULG6FDG6tofesf
- +RYyf34IcYrplcSvtouCatvwII/+8Dr++1QwDN7ESiZdF+sEL5hfCWLhJEdqq1Xy7ZFkgKqQ
- UbTqMJCMLCENc65Ql4cIA0pMraK2f0Ow2SA6P00JAPx5TNt/arBWkJXZkHehCtYJbpzEYUk3
- eZ+55JGt13h0kInYoSckyRZ12WQNXhRAawou6YTDJLvlgd2mEpJZobRC3Ou7ZyCAzmW3pLG/
- tNAaHL+uolh
-IronPort-HdrOrdr: A9a23:zzdLT6PsDXUPYcBcTv2jsMiBIKoaSvp037BN7TEUdfU1SL38qy
- nApoV56faZslcssRIb9+xoWpPwJk80nKQdieN9AV7LZniBhILCFvAB0WKN+V3d8gTFh5dgPf
- gKScND4afLYmSSJ/yKmDVQaOxN/OW6
+IronPort-Data: A9a23:LIKyZ6r0JKXuBZcPfpBy+qXNNPBeBmIAYhIvgKrLsJaIsI4StFCzt
+ garIBnUOa2INGWkctF1boXno00EucXWm982SQM5pCkxHypB8ZuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd84f5fs7Rh2Ncw0ILhW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnb+gVlk7YI2WpMU2VQIfIShSG71MyIaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ pFAMmQ0N0SojxtnIFYUBs0TgemSoXS8KTJRiG3IofcV7D2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
+ 2SA+H72ajk4HtGCzTuO8lq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcUZ+B7T2PT0uTq4LW4fCQxIRPo2vv8PEGlCO
+ kCyoz/5OdB+mOTLEivNrebF9Wna1Ts9djBZNHRdJecRy5y6+thi0EiXJjp2OPPt1rXI9SfML
+ ydmRcTUr44ai9ICn46/9ErO695HjsmUFlNpjuk7s2TM0++YWGJHT9fzgbQ4xawZRGp8crVml
+ CJf8/VyFMhUUfmweNWlGY3h5o1FAspp1xWH2zZS82QJrWzxqxZPg6gJuGwWyLhV3jYsJmayP
+ R67VfJ5z55PJnq6BZKbkKroUJ9C8EQULvy8Dqq8RoMXOvBZLVbblAkzNR/49z28yyAEzPBgU
+ ap3hO7xVB72/4w8l2HoLwrcuJd2rh0DKZT7H8Gjk0v/jurAOxZ4i94taTOzUwzw14vcyC29z
+ jqVH5LiJ8x3XLKsby/J35QUKFxWf3E3CYqv855cd/KZIxogE2YkUqeDzbQkco1jvqJUiuaXo
+ S3tBh4GkALy1S/dNAGHSnF/c7ezD5xxmm02YH43NlGy1nl9PYv2tPUDd4E6dKUM/fB4yaImV
+ OEMfsiNW6wdSjnO9zkHQ4P6qYhuKEaiiQ6UZnL3azkjZZ9wAQfO/4a8LAfo8SAPCAuxtNc//
+ OL8hl+KH8JbSl07XsjMaf+pw1eghlQnmbp/DxnSP91eWETw64w2eSb/ueA6fpMXIhLZyzrEi
+ wvPWUUEpfPAqpMe+cXSgfzWtJ+gFuZzExYIH2Tf6rrqZyDW8nD6nN1FWeeMOzvcSHn16OOpY
+ uAMl6PwN/gOnVBrtYtgEuk0kfJitoW3/7IKnB55GHjrbkiwDuIyK3aL6sBDq6lRy+ILogCxQ
+ E+OpoFXNLjh1BkJy7LNyN7Jtti+6Mw=
+IronPort-HdrOrdr: A9a23:9esM3KBYDB6bG3XlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
+ xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
+ 9dmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.85,308,1624334400"; 
-   d="scan'208";a="53560997"
+   d="scan'208";a="53136338"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>, Juergen Gross <jgross@suse.com>,
-	Dario Faggioli <dfaggioli@suse.com>
-Subject: [PATCH v2 08/12] xen/sched: Clean up trace handling
-Date: Mon, 20 Sep 2021 18:25:25 +0100
-Message-ID: <20210920172529.24932-9-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 10/12] x86/pv: Move x86/trace.c to x86/pv/trace.c
+Date: Mon, 20 Sep 2021 18:25:27 +0100
+Message-ID: <20210920172529.24932-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 References: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-There is no need for bitfields anywhere - use more sensible types.  There is
-also no need to cast 'd' to (unsigned char *) before passing it to a function
-taking void *.
+This entire file is pv-only, and not excluded from the build by
+CONFIG_TRACEBUFFER.  Move it into the pv/ directory, build it conditionally,
+and drop unused includes.
 
-No functional change.
+Also move the contents of asm/trace.h to asm/pv/trace.h to avoid the functions
+being declared across the entire hypervisor.
+
+One caller in fixup_page_fault() is effectively PV only, but is not subject to
+dead code elimination.  Add an additional IS_ENABLED(CONFIG_PV) to keep the
+build happy.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
-CC: Ian Jackson <iwj@xenproject.org>
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Juergen Gross <jgross@suse.com>
-CC: Dario Faggioli <dfaggioli@suse.com>
 
 v2:
  * New
 ---
- xen/common/sched/core.c   |  4 ++--
- xen/common/sched/credit.c | 38 ++++++++++++++++++--------------------
- xen/common/sched/null.c   | 42 +++++++++++++++++++++++++-----------------
- 3 files changed, 45 insertions(+), 39 deletions(-)
+ xen/arch/x86/Makefile                |  1 -
+ xen/arch/x86/pv/Makefile             |  1 +
+ xen/arch/x86/pv/emul-inv-op.c        |  2 +-
+ xen/arch/x86/pv/emul-priv-op.c       |  1 +
+ xen/arch/x86/pv/ro-page-fault.c      |  2 +-
+ xen/arch/x86/{ => pv}/trace.c        | 13 +++++------
+ xen/arch/x86/pv/traps.c              |  2 +-
+ xen/arch/x86/traps.c                 |  3 ++-
+ xen/include/asm-x86/{ => pv}/trace.h |  8 ++++---
+ xen/include/asm-x86/trace.h          | 42 ------------------------------------
+ 10 files changed, 17 insertions(+), 58 deletions(-)
+ rename xen/arch/x86/{ => pv}/trace.c (95%)
+ copy xen/include/asm-x86/{ => pv}/trace.h (92%)
 
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 8f4b1ca10d1c..fe133cbf117c 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -205,7 +205,7 @@ static inline struct scheduler *vcpu_scheduler(const struct vcpu *v)
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 202d4d27823d..82dd4e18bd36 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -61,7 +61,6 @@ obj-y += spec_ctrl.o
+ obj-y += srat.o
+ obj-y += string.o
+ obj-y += time.o
+-obj-y += trace.o
+ obj-y += traps.o
+ obj-y += tsx.o
+ obj-y += usercopy.o
+diff --git a/xen/arch/x86/pv/Makefile b/xen/arch/x86/pv/Makefile
+index 75b01b0062d8..6cda354cc41f 100644
+--- a/xen/arch/x86/pv/Makefile
++++ b/xen/arch/x86/pv/Makefile
+@@ -12,6 +12,7 @@ obj-y += misc-hypercalls.o
+ obj-y += mm.o
+ obj-y += ro-page-fault.o
+ obj-$(CONFIG_PV_SHIM) += shim.o
++obj-$(CONFIG_TRACEBUFFER) += trace.o
+ obj-y += traps.o
  
- static inline void trace_runstate_change(const struct vcpu *v, int new_state)
- {
--    struct { uint32_t vcpu:16, domain:16; } d;
-+    struct { uint16_t vcpu, domain; } d;
-     uint32_t event;
+ obj-bin-y += dom0_build.init.o
+diff --git a/xen/arch/x86/pv/emul-inv-op.c b/xen/arch/x86/pv/emul-inv-op.c
+index b15f302bcaad..2c07eed9a092 100644
+--- a/xen/arch/x86/pv/emul-inv-op.c
++++ b/xen/arch/x86/pv/emul-inv-op.c
+@@ -19,7 +19,7 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
  
-     if ( likely(!tb_init_done) )
-@@ -223,7 +223,7 @@ static inline void trace_runstate_change(const struct vcpu *v, int new_state)
+-#include <xen/trace.h>
++#include <asm/pv/trace.h>
  
- static inline void trace_continue_running(const struct vcpu *v)
- {
--    struct { uint32_t vcpu:16, domain:16; } d;
-+    struct { uint16_t vcpu, domain; } d;
+ #include "emulate.h"
  
-     if ( likely(!tb_init_done) )
-         return;
-diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
-index d0aa017c643e..f277fa37a8b1 100644
---- a/xen/common/sched/credit.c
-+++ b/xen/common/sched/credit.c
-@@ -1828,21 +1828,18 @@ static void csched_schedule(
-     SCHED_STAT_CRANK(schedule);
-     CSCHED_UNIT_CHECK(unit);
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index 11467a1e3a90..d0df5bc616c0 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -30,6 +30,7 @@
+ #include <asm/hypercall.h>
+ #include <asm/mc146818rtc.h>
+ #include <asm/pv/domain.h>
++#include <asm/pv/trace.h>
+ #include <asm/shared.h>
  
--    /*
--     * Here in Credit1 code, we usually just call TRACE_nD() helpers, and
--     * don't care about packing. But scheduling happens very often, so it
--     * actually is important that the record is as small as possible.
--     */
-     if ( unlikely(tb_init_done) )
+ #include <xsm/xsm.h>
+diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
+index 335aa8dc5dc0..ac5b66870c8c 100644
+--- a/xen/arch/x86/pv/ro-page-fault.c
++++ b/xen/arch/x86/pv/ro-page-fault.c
+@@ -20,7 +20,7 @@
+  * along with this program; If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <xen/trace.h>
++#include <asm/pv/trace.h>
+ #include <asm/shadow.h>
+ 
+ #include "emulate.h"
+diff --git a/xen/arch/x86/trace.c b/xen/arch/x86/pv/trace.c
+similarity index 95%
+rename from xen/arch/x86/trace.c
+rename to xen/arch/x86/pv/trace.c
+index 4a953c5b2f1e..550c22765bae 100644
+--- a/xen/arch/x86/trace.c
++++ b/xen/arch/x86/pv/trace.c
+@@ -1,9 +1,6 @@
+-#include <xen/init.h>
+-#include <xen/kernel.h>
+-#include <xen/lib.h>
+-#include <xen/domain.h>
+ #include <xen/sched.h>
+-#include <xen/trace.h>
++
++#include <asm/pv/trace.h>
+ 
+ void __trace_pv_trap(int trapnr, unsigned long eip,
+                      int use_error_code, unsigned error_code)
+@@ -21,7 +18,7 @@ void __trace_pv_trap(int trapnr, unsigned long eip,
+         d.trapnr = trapnr;
+         d.error_code = error_code;
+         d.use_error_code=!!use_error_code;
+-                
++
+         __trace_var(TRC_PV_TRAP, 1, sizeof(d), &d);
+     }
+     else
+@@ -38,7 +35,7 @@ void __trace_pv_trap(int trapnr, unsigned long eip,
+         d.trapnr = trapnr;
+         d.error_code = error_code;
+         d.use_error_code=!!use_error_code;
+-                
++
+         event = TRC_PV_TRAP;
+         event |= TRC_64_FLAG;
+         __trace_var(event, 1, sizeof(d), &d);
+@@ -58,7 +55,7 @@ void __trace_pv_page_fault(unsigned long addr, unsigned error_code)
+         d.eip = eip;
+         d.addr = addr;
+         d.error_code = error_code;
+-                
++
+         __trace_var(TRC_PV_PAGE_FAULT, 1, sizeof(d), &d);
+     }
+     else
+diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
+index 7439b76df88d..764773c02104 100644
+--- a/xen/arch/x86/pv/traps.c
++++ b/xen/arch/x86/pv/traps.c
+@@ -22,10 +22,10 @@
+ #include <xen/event.h>
+ #include <xen/hypercall.h>
+ #include <xen/lib.h>
+-#include <xen/trace.h>
+ #include <xen/softirq.h>
+ 
+ #include <asm/apic.h>
++#include <asm/pv/trace.h>
+ #include <asm/shared.h>
+ #include <asm/traps.h>
+ #include <irq_vectors.h>
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 4a0e498b4c21..0cc1ee95cb5b 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -82,6 +82,7 @@
+ #include <xsm/xsm.h>
+ #include <asm/mach-default/irq_vectors.h>
+ #include <asm/pv/traps.h>
++#include <asm/pv/trace.h>
+ #include <asm/pv/mm.h>
+ 
+ /*
+@@ -1480,7 +1481,7 @@ static int fixup_page_fault(unsigned long addr, struct cpu_user_regs *regs)
      {
-         struct {
--            unsigned cpu:16, tasklet:8, idle:8;
--        } d;
--        d.cpu = cur_cpu;
--        d.tasklet = tasklet_work_scheduled;
--        d.idle = is_idle_unit(unit);
--        __trace_var(TRC_CSCHED_SCHEDULE, 1, sizeof(d),
--                    (unsigned char *)&d);
-+            uint16_t cpu;
-+            uint8_t tasklet, idle;
-+        } d = {
-+            .cpu     = cur_cpu,
-+            .tasklet = tasklet_work_scheduled,
-+            .idle    = is_idle_unit(unit),
-+        };
-+
-+        __trace_var(TRC_CSCHED_SCHEDULE, 1, sizeof(d), &d);
-     }
+         int ret = paging_fault(addr, regs);
  
-     runtime = now - unit->state_entry_time;
-@@ -1904,14 +1901,15 @@ static void csched_schedule(
-         if ( unlikely(tb_init_done) )
-         {
-             struct {
--                unsigned unit:16, dom:16;
--                unsigned runtime;
--            } d;
--            d.dom = unit->domain->domain_id;
--            d.unit = unit->unit_id;
--            d.runtime = runtime;
--            __trace_var(TRC_CSCHED_RATELIMIT, 1, sizeof(d),
--                        (unsigned char *)&d);
-+                uint16_t unit, dom;
-+                uint32_t runtime;
-+            } d = {
-+                .dom     = unit->domain->domain_id,
-+                .unit    = unit->unit_id,
-+                .runtime = runtime,
-+            };
-+
-+            __trace_var(TRC_CSCHED_RATELIMIT, 1, sizeof(d), &d);
-         }
- 
-         goto out;
-diff --git a/xen/common/sched/null.c b/xen/common/sched/null.c
-index 82d5d1baab85..deb59747fbe8 100644
---- a/xen/common/sched/null.c
-+++ b/xen/common/sched/null.c
-@@ -329,10 +329,12 @@ pick_res(const struct null_private *prv, const struct sched_unit *unit)
-         struct {
-             uint16_t unit, dom;
-             uint32_t new_cpu;
--        } d;
--        d.dom = unit->domain->domain_id;
--        d.unit = unit->unit_id;
--        d.new_cpu = new_cpu;
-+        } d = {
-+            .unit    = unit->unit_id,
-+            .dom     = unit->domain->domain_id,
-+            .new_cpu = new_cpu,
-+        };
-+
-         __trace_var(TRC_SNULL_PICKED_CPU, 1, sizeof(d), &d);
+-        if ( ret == EXCRET_fault_fixed )
++        if ( IS_ENABLED(CONFIG_PV) && ret == EXCRET_fault_fixed )
+             trace_trap_two_addr(TRC_PV_PAGING_FIXUP, regs->rip, addr);
+         return ret;
      }
- 
-@@ -357,10 +359,12 @@ static void unit_assign(struct null_private *prv, struct sched_unit *unit,
-         struct {
-             uint16_t unit, dom;
-             uint32_t cpu;
--        } d;
--        d.dom = unit->domain->domain_id;
--        d.unit = unit->unit_id;
--        d.cpu = cpu;
-+        } d = {
-+            .unit = unit->unit_id,
-+            .dom  = unit->domain->domain_id,
-+            .cpu  = cpu,
-+        };
+diff --git a/xen/include/asm-x86/trace.h b/xen/include/asm-x86/pv/trace.h
+similarity index 92%
+copy from xen/include/asm-x86/trace.h
+copy to xen/include/asm-x86/pv/trace.h
+index e65b5de6eec4..c616206eeb15 100644
+--- a/xen/include/asm-x86/trace.h
++++ b/xen/include/asm-x86/pv/trace.h
+@@ -1,5 +1,7 @@
+-#ifndef __ASM_TRACE_H__
+-#define __ASM_TRACE_H__
++#ifndef XEN_X86_PV_TRACE_H
++#define XEN_X86_PV_TRACE_H
 +
-         __trace_var(TRC_SNULL_UNIT_ASSIGN, 1, sizeof(d), &d);
-     }
++#include <xen/trace.h>
+ 
+ #include <asm/page.h>
+ 
+@@ -43,4 +45,4 @@ static inline void trace_ptwr_emulation(unsigned long addr, l1_pgentry_t npte)
+         __trace_ptwr_emulation(addr, npte);
  }
-@@ -388,10 +392,12 @@ static bool unit_deassign(struct null_private *prv, const struct sched_unit *uni
-         struct {
-             uint16_t unit, dom;
-             uint32_t cpu;
--        } d;
--        d.dom = unit->domain->domain_id;
--        d.unit = unit->unit_id;
--        d.cpu = cpu;
-+        } d = {
-+            .unit = unit->unit_id,
-+            .dom  = unit->domain->domain_id,
-+            .cpu  = cpu,
-+        };
-+
-         __trace_var(TRC_SNULL_UNIT_DEASSIGN, 1, sizeof(d), &d);
-     }
  
-@@ -691,11 +697,13 @@ static void null_unit_migrate(const struct scheduler *ops,
-         struct {
-             uint16_t unit, dom;
-             uint16_t cpu, new_cpu;
--        } d;
--        d.dom = unit->domain->domain_id;
--        d.unit = unit->unit_id;
--        d.cpu = sched_unit_master(unit);
--        d.new_cpu = new_cpu;
-+        } d = {
-+            .unit    = unit->unit_id,
-+            .dom     = unit->domain->domain_id,
-+            .cpu     = sched_unit_master(unit),
-+            .new_cpu = new_cpu,
-+        };
-+
-         __trace_var(TRC_SNULL_MIGRATE, 1, sizeof(d), &d);
-     }
+-#endif /* __ASM_TRACE_H__ */
++#endif /* XEN_X86_PV_TRACE_H */
+diff --git a/xen/include/asm-x86/trace.h b/xen/include/asm-x86/trace.h
+index e65b5de6eec4..edef1bb099d4 100644
+--- a/xen/include/asm-x86/trace.h
++++ b/xen/include/asm-x86/trace.h
+@@ -1,46 +1,4 @@
+ #ifndef __ASM_TRACE_H__
+ #define __ASM_TRACE_H__
  
+-#include <asm/page.h>
+-
+-void __trace_pv_trap(int trapnr, unsigned long eip,
+-                     int use_error_code, unsigned error_code);
+-static inline void trace_pv_trap(int trapnr, unsigned long eip,
+-                                 int use_error_code, unsigned error_code)
+-{
+-    if ( unlikely(tb_init_done) )
+-        __trace_pv_trap(trapnr, eip, use_error_code, error_code);
+-}
+-
+-void __trace_pv_page_fault(unsigned long addr, unsigned error_code);
+-static inline void trace_pv_page_fault(unsigned long addr,
+-                                       unsigned error_code)
+-{
+-    if ( unlikely(tb_init_done) )
+-        __trace_pv_page_fault(addr, error_code);
+-}
+-
+-void __trace_trap_one_addr(unsigned event, unsigned long va);
+-static inline void trace_trap_one_addr(unsigned event, unsigned long va)
+-{
+-    if ( unlikely(tb_init_done) )
+-        __trace_trap_one_addr(event, va);
+-}
+-
+-void __trace_trap_two_addr(unsigned event, unsigned long va1,
+-                           unsigned long va2);
+-static inline void trace_trap_two_addr(unsigned event, unsigned long va1,
+-                                       unsigned long va2)
+-{
+-    if ( unlikely(tb_init_done) )
+-        __trace_trap_two_addr(event, va1, va2);
+-}
+-
+-void __trace_ptwr_emulation(unsigned long addr, l1_pgentry_t npte);
+-static inline void trace_ptwr_emulation(unsigned long addr, l1_pgentry_t npte)
+-{
+-    if ( unlikely(tb_init_done) )
+-        __trace_ptwr_emulation(addr, npte);
+-}
+-
+ #endif /* __ASM_TRACE_H__ */
 -- 
 2.11.0
 
