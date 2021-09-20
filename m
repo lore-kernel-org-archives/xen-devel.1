@@ -7,36 +7,35 @@ X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19DBFC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:25:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 245F0C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:25:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C96C86135D
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:25:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C96C86135D
+	by mail.kernel.org (Postfix) with ESMTPS id D10E5632D6
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:25:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D10E5632D6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.191049.340930 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.191050.340941 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN34-0004VK-Qe; Mon, 20 Sep 2021 17:25:46 +0000
+	id 1mSN39-0004wj-CF; Mon, 20 Sep 2021 17:25:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 191049.340930; Mon, 20 Sep 2021 17:25:46 +0000
+Received: by outflank-mailman (output) from mailman id 191050.340941; Mon, 20 Sep 2021 17:25:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN34-0004V7-Mz; Mon, 20 Sep 2021 17:25:46 +0000
-Received: by outflank-mailman (input) for mailman id 191049;
- Mon, 20 Sep 2021 17:25:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mSN39-0004wW-89; Mon, 20 Sep 2021 17:25:51 +0000
+Received: by outflank-mailman (input) for mailman id 191050;
+ Mon, 20 Sep 2021 17:25:49 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=F8X/=OK=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mSN33-0003cq-CU
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:25:45 +0000
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c5b8efe2-1a37-11ec-b87a-12813bfff9fa;
+ id 1mSN37-0003ck-J8
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:25:49 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3da059ef-c2a7-4fd9-b9e7-9e82b9762130;
  Mon, 20 Sep 2021 17:25:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -49,219 +48,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5b8efe2-1a37-11ec-b87a-12813bfff9fa
+X-Inumbo-ID: 3da059ef-c2a7-4fd9-b9e7-9e82b9762130
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1632158739;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=ZTBK/i8V2Aw3dyyoK4GveFgWRMnudCEdHrs7LHz7jJM=;
-  b=ffYKYLXmdMK4xnNfiLN16nCAdivYhR1M2GMqA92dDa4xyr1Eftfc+gMz
-   j6xK8dGyzxoFh0ePGYQPKV4w4MEE3zzU/zR7MPCVepPIpBm/++bYHYwmF
-   AQVGQzX9CZNBoKSqrOGVarnblQKtMxzObKf+L3XLF5iEE5XVsfm4iAm2g
-   0=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: mo97rJIQ3QkUuROXYXDlf11JLR7AbsVApbznlGFG92hVQq+caeExaYNCld71797jQ2A0Hiw0nW
- DppHwsPdEVUzc3IQuxza5RGnaSDXsUO6nRDCg0PRHvVSFb4Nq9PsbwYgRc5PGAg3UoecSBZlCa
- LgP8AY4AhT5k3f5Td9/U2HDgQShZrk8pEmiGHDMYOBmpVhEf6Bi9Z1MysOWy5oGTjuTaVyTM4Y
- cpBQFIrj1e7A3c8YMzQhmTpWXkHxo9+SxwSXlCLnv3yCLg7uZYMVoEXp14UQFi60F2RatjJq9W
- 6A3mSP5+Z8grvzpafuVHJdtY
+   references:mime-version;
+  bh=PjTVtROVmKL1HBneR1Ooz1mqoxckEyucfjsCTUE+XFg=;
+  b=Ozj3BsnLMabdSHAFo6BAi6ZQqTe6xpnmvvY0GQqeb4liiUFN/uoDrkiO
+   TS4TKkM3Kvitti43Jquc+6kZOVPIbgfB7uAIPjsFVVWdURY3mvlGvniOe
+   9rJb1B1gbqfh454qYuB09y1zoQ6jwbLm8SUKbeeL9YF4WzVXAXPtK1w8H
+   w=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: fvWHELj4aqtuu/oBdfmJOefbJx7VCae4/OwcTFEZMZczMk6E9cSGfCSi9x35xRvWPVX6O3+JJ6
+ 8ANefdZqc0Np+xKeqRwAC2bQtPHOCIY9ZO82c+HfQsupQucvdlYWd58NOsM+TfhrjTXk4pzVJc
+ 8sOR1NyCvC8aUa9Z+G1ff0lM45j14MVZUDw7vklht6BCHYtKxet0NU3bOz47gKWDVHSDIJCvPG
+ k0YdaQSxdEybFhYNn9P7X8oQiz0Zo6nlUf52k6oFQItpyKV+gnIZB6FUrTl9/Q8aRrLOq7juz7
+ j/fDYSty/TjUDm0JaBHTfxGa
 X-SBRS: 5.1
-X-MesageID: 53560992
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 54938584
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:6NOjcatpx8vlFxNX/Ky1EVYXAefnVE5ZMUV32f8akzHdYApBsoF/q
- tZmKT/TOa6IM2GnfIt0bNvioRhSvJ7XnIRiTgpvqy89EX8T+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHpJZS5LwbZj29Y524DhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NpltZi0YiYlOff2qMMAcEQCPw1BZr945+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DP
- JdHMWs+NnwsZTUQAmY1DLgxs9ySn1b1bSVbg32onKgOtj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
- UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO+0+7Cqsxq2O2Ta+G0tZFBJtV4c0itBjEFTGy
- WS1c8PV6S1H6ePOECLGp+bM91teKgBOcjRTPnZsoR8tpoC5+dBt1EqnosNLTfbt5uAZDw0c1
- NxjQMIWvLwVkcdD/KGy51mvb9mE98WRE1JdCuk6WAuYAuJFiGyNPNfABbvzt68owGOlor6p5
- iNspiRmxLpSZaxhbQTUKAn3IF1M2xpiGGaG6WOD4rF7r2j9k5JdVdkIvVmS23uFwu5bIGS0M
- Sc/SCt65YNJPWvCUEOES9vqUKwXIVzbPY29DJj8N4MWCrAoLVPv1Hw+NCa4gjG2+GBxwP5XB
- HtuWZv1ZZrsIf88l2TeqiZ0+eJD+x3SMkuJFMinkEz4geTBDJNXIJ9cWGazgikCxPvsiG3oH
- xx3bqNmEj1TD7/zZDf564kWIQxYJHQ3H8mu+cdWavSCMkxtH2R4U63dxrYoeopEmaVJl7iXo
- iHhCxEAkFev12faLQiqa2x4bO+9V5hIsn9mbzcnOkyl2iZ/bN/3vrsfbZY+YZIu6PdnkaxvV
- /AAdsjZWqZPRz3L9i4zd574qIA+Jh2niRjXZ3iuYSQlfo4mTAvMo4e2cgzq/SgILyy2qcph/
- OHwilKFGcIOHl0wAtzXZfSjy0KKkUIcwO8iDVHVJtRzeVn39NQ4ISLGkfJqcdoHLg/Ox2XG2
- l/OUwsYv+TEv6Q87MLN2fKft46sHuZzQhhaEm3c4erkPCXW5DP+k4pJUeLOdjHBTmLkvq6lY
- LwNnf37NfQGmndMspZ9TOk3nf5vuYO3qu8I1BlgEVXKc0+vW+FpLXSx1MVSsrFAm+1CsgysV
- 0PTotRXNN1l4i8+/IL98Ob9Utm+6A==
-IronPort-HdrOrdr: A9a23:pGiDi6kiQF6IEeU6vajOw+xg70npDfLc3DAbv31ZSRFFG/Fw9/
- rCoB17726StN91YhsdcL+7V5VoLUmzyXcx2/hzAV7AZniDhILLFuFfBOLZqlWNJ8S9zJ8+6U
- 4JScND4bbLfD1HZKjBgTVRE7wbsaW6GKLDv5ag85+6JzsaFZ2J7G1Ce3em+lUdfnghOXKgfq
- DsnPauoVCbCA0qR/X+PFYpdc7ZqebGkZr3CCR2eiLOuGG1/EuVAKeRKWni4isj
+IronPort-Data: A9a23:ajyFH6zuT4yA1B8UMGx6t+exwSrEfRIJ4+MujC+fZmUNrF6WrkVUz
+ WpNDDuGaf6OYDD9LtAgYNm+8U4PupfTx9A2Sgo6+SAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAsLeNYYH1500s7yrRh2tQAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt/Zx2
+ MQchZjpcyI0PvD1u/g/CTlCDggraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY25wfRqaDN
+ 5ZxhTxHPTTNQTlrHg0tCswnu8fyuD7vYRpltwfAzUYwyzeKl1EguFT3C/L3UNGXQcRenm6Du
+ 3nLuW/+B3kyNsGbyDeD2mKhgKnIhyyTcIcfErKo69ZhgUbV23QeDhtQWFemydG1hEexVNNYL
+ 0084Tc1oO4580nDZtjiXTWorXicpBkeVtFMVeog52ml2qfSpgqUGGUAZjpAc8A98t87QyQw0
+ V2ElM+vAiZg2JWKTVqN+7HSqim9UQAONnMLbyIASQoD4vHgrZs1gxaJScxseJNZlfWsR2u2m
+ WrT6nFj2fND1qbnyplX43jhgyK996jNFzQQ+wWKZ0G5zFlZfpOMMtnABUfg0RpQEGqIZgDf5
+ yFUwJnPtLpm4YKlz3PWEb5UdF29z7PcamSN3wQ3d3U032n1oxaekZZsDCaSzauDGv0NfyPgK
+ GTXsBlYjHO4FCr3NfIrC25d5sJD8EQBKTgHfquPBjatSsIoHONiwM2JTRTLt10BaGB2zckC1
+ W6zKK5A90r27JiLKxLtHY8gPUIDnHhilQs/u7iil0nPPUWiiI69Fu5ebQrmghERx6KYugTFm
+ +uzxOPTkE43bQEKWQGOqdR7BQlTdRATXMmqw+QKJr/rClc3QwkJVq6OqY7NjqQ4xsy5YM+Tp
+ SrjMqKZoXKi7UD6xfKiMCE7NOy3AsYh8hrW/0UEZD6V5pTqWq73hI93Snf9VeNPGDVLwaEmQ
+ v8bVd+HB/gTGD3L9y5ENcv2rZB4dQTtjgWLZnL3bD86dp9mZgrI5t67IVe/qHhQVnK65Zkkv
+ rmt9gLHWp5fFQ5sO9nbNaC0xFSrsHlDxO8rBxnUIsNecVnH+ZRxL3Cjlec+JswBcE2RxjaT2
+ wuMLw0foO3B/908/NXT3PjWpIa1CepuWEFdGjCDv7qxMCDb+EulwJNBD7nULWyMCjus9fz7N
+ +tPzvz6PPkWp3pwstJxQ+Rx0KYzx9rzvLsGnA5qK2rGMgawAbR6L3jYgcQW7v9RxqVUsBedU
+ 16U/oUIIq2APc7oHQJDJAchaejfh/gYliOLsKYwKUT+oiR24KCGQQNZOBzV0H5RK758MYUEx
+ +Y9uZFJt1zj20RyatvW3DpJ82msL2AbV/R1v54XN4bnlw43xwwQepfbECL3vMmCZtgk3pPG+
+ dNIaH4uX4hh+3c=
+IronPort-HdrOrdr: A9a23:IYghL6GX72G5OYV6pLqE6seALOsnbusQ8zAXP0AYc3Jom62j5r
+ mTdZsgtSMc5Ax8ZJhko6HkBEDiewK7yXcW2/hzAV7KZmCP0wHEEGgh1/qH/9SJIVyYygc378
+ ZdmsZFZ+EYdWIK7/rH3A==
 X-IronPort-AV: E=Sophos;i="5.85,308,1624334400"; 
-   d="scan'208";a="53560992"
+   d="scan'208";a="54938584"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 05/12] x86/hvm: Remove duplicate calls caused by tracing
-Date: Mon, 20 Sep 2021 18:25:22 +0100
-Message-ID: <20210920172529.24932-6-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<George.Dunlap@eu.citrix.com>, Ian Jackson <iwj@xenproject.org>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>, Dario Faggioli
+	<dfaggioli@suse.com>, Meng Xu <mengxu@cis.upenn.edu>
+Subject: [PATCH v2 07/12] xen/rt: Clean up trace handling
+Date: Mon, 20 Sep 2021 18:25:24 +0100
+Message-ID: <20210920172529.24932-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 References: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-1) vpic_ack_pending_irq() calls vlapic_accept_pic_intr() twice, once in the
-   TRACE_2D() instantiation and once "for real".  Make the call only once.
+Most uses of bitfields and __packed are unnecessary.  There is also no need to
+cast 'd' to (unsigned char *) before passing it to a function taking void *.
 
-2) vlapic_accept_pic_intr() similarly calls __vlapic_accept_pic_intr() twice,
-   although this is more complicated to disentangle.
-
-   v cannot be NULL because it has already been dereferenced in the function,
-   causing the ternary expression to always call __vlapic_accept_pic_intr().
-   However, the return expression of the function takes care to skip the call
-   if this vCPU isn't the PIC target.  As __vlapic_accept_pic_intr() is far
-   from trivial, make the TRACE_2D() semantics match the return semantics by
-   only calling __vlapic_accept_pic_intr() when the vCPU is the PIC target.
-
-3) hpet_set_timer() duplicates calls to hpet_tick_to_ns().  Pull the logic out
-   which simplifies both the TRACE and create_periodic_time() calls.
-
-4) lapic_rearm() makes multiple calls to vlapic_lvtt_period().  Pull it out
-   into a local variable.
-
-vlapic_accept_pic_intr() is called on every VMEntry, so this is a reduction in
-VMEntry complexity across the board.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Ian Jackson <iwj@xenproject.org>
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Dario Faggioli <dfaggioli@suse.com>
+CC: Meng Xu <mengxu@cis.upenn.edu>
 
 v2:
  * New
 ---
- xen/arch/x86/hvm/hpet.c   | 15 +++++++++------
- xen/arch/x86/hvm/vlapic.c | 23 +++++++++++++++--------
- xen/arch/x86/hvm/vpic.c   |  9 +++++----
- 3 files changed, 29 insertions(+), 18 deletions(-)
+ xen/common/sched/rt.c | 97 ++++++++++++++++++++++++---------------------------
+ 1 file changed, 46 insertions(+), 51 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
-index ee756abb824d..475c3f8bf471 100644
---- a/xen/arch/x86/hvm/hpet.c
-+++ b/xen/arch/x86/hvm/hpet.c
-@@ -240,6 +240,7 @@ static void hpet_set_timer(HPETState *h, unsigned int tn,
-     uint64_t tn_cmp, cur_tick, diff;
-     unsigned int irq;
-     unsigned int oneshot;
-+    s_time_t diff_ns, period_ns = 0;
+diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+index c58edca0de84..d5da35cac75e 100644
+--- a/xen/common/sched/rt.c
++++ b/xen/common/sched/rt.c
+@@ -455,21 +455,21 @@ rt_update_deadline(s_time_t now, struct rt_unit *svc)
+     svc->cur_budget = svc->budget;
+     svc->priority_level = 0;
  
-     ASSERT(tn < HPET_TIMER_NUM);
-     ASSERT(rw_is_write_locked(&h->lock));
-@@ -311,13 +312,15 @@ static void hpet_set_timer(HPETState *h, unsigned int tn,
-      * status register) before another interrupt can be delivered.
-      */
-     oneshot = !timer_is_periodic(h, tn) || timer_level(h, tn);
-+    diff_ns = hpet_tick_to_ns(h, diff);
-+    if ( !oneshot )
-+        period_ns = hpet_tick_to_ns(h, h->hpet.period[tn]);
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+-        struct __packed {
+-            unsigned unit:16, dom:16;
+-            unsigned priority_level;
++        struct {
++            uint16_t unit, dom;
++            uint32_t priority_level;
+             uint64_t cur_deadline, cur_budget;
+-        } d;
+-        d.dom = svc->unit->domain->domain_id;
+-        d.unit = svc->unit->unit_id;
+-        d.priority_level = svc->priority_level;
+-        d.cur_deadline = (uint64_t) svc->cur_deadline;
+-        d.cur_budget = (uint64_t) svc->cur_budget;
+-        trace_var(TRC_RTDS_BUDGET_REPLENISH, 1,
+-                  sizeof(d),
+-                  (unsigned char *) &d);
++        } d = {
++            .dom             = svc->unit->domain->domain_id,
++            .unit            = svc->unit->unit_id,
++            .priority_level  = svc->priority_level,
++            .cur_deadline    = svc->cur_deadline,
++            .cur_budget      = svc->cur_budget,
++        };
 +
-     TRACE_2_LONG_4D(TRC_HVM_EMUL_HPET_START_TIMER, tn, irq,
--                    TRC_PAR_LONG(hpet_tick_to_ns(h, diff)),
--                    TRC_PAR_LONG(oneshot ? 0LL :
--                                 hpet_tick_to_ns(h, h->hpet.period[tn])));
--    create_periodic_time(vhpet_vcpu(h), &h->pt[tn],
--                         hpet_tick_to_ns(h, diff),
--                         oneshot ? 0 : hpet_tick_to_ns(h, h->hpet.period[tn]),
-+                    TRC_PAR_LONG(diff_ns),
-+                    TRC_PAR_LONG(period_ns));
-+
-+    create_periodic_time(vhpet_vcpu(h), &h->pt[tn], diff_ns, period_ns,
-                          irq, timer_level(h, tn) ? hpet_timer_fired : NULL,
-                          timer_level(h, tn) ? (void *)(unsigned long)tn : NULL,
-                          timer_level(h, tn));
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 5e21fb4937d9..b8c84458ffdc 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -1267,15 +1267,18 @@ static int __vlapic_accept_pic_intr(struct vcpu *v)
++        __trace_var(TRC_RTDS_BUDGET_REPLENISH, 1, sizeof(d), &d);
+     }
  
- int vlapic_accept_pic_intr(struct vcpu *v)
- {
-+    bool target, accept = false;
-+
-     if ( vlapic_hw_disabled(vcpu_vlapic(v)) || !has_vpic(v->domain) )
-         return 0;
+     return;
+@@ -965,7 +965,7 @@ burn_budget(const struct scheduler *ops, struct rt_unit *svc, s_time_t now)
+         }
+     }
  
--    TRACE_2D(TRC_HVM_EMUL_LAPIC_PIC_INTR,
--             (v == v->domain->arch.hvm.i8259_target),
--             v ? __vlapic_accept_pic_intr(v) : -1);
-+    target = v == v->domain->arch.hvm.i8259_target;
-+    if ( target )
-+        accept = __vlapic_accept_pic_intr(v);
-+
-+    TRACE_2D(TRC_HVM_EMUL_LAPIC_PIC_INTR, target, accept);
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+         struct __packed {
+             uint16_t unit, dom;
+@@ -982,9 +982,7 @@ burn_budget(const struct scheduler *ops, struct rt_unit *svc, s_time_t now)
+             .has_extratime   = !!(svc->flags & RTDS_extratime),
+         };
  
--    return ((v == v->domain->arch.hvm.i8259_target) &&
--            __vlapic_accept_pic_intr(v));
-+    return target && accept;
+-        trace_var(TRC_RTDS_BUDGET_BURN, 1,
+-                  sizeof(d),
+-                  (unsigned char *) &d);
++        __trace_var(TRC_RTDS_BUDGET_BURN, 1, sizeof(d), &d);
+     }
  }
  
- void vlapic_adjust_i8259_target(struct domain *d)
-@@ -1449,6 +1452,7 @@ static void lapic_rearm(struct vlapic *s)
- {
-     unsigned long tmict;
-     uint64_t period, tdt_msr;
-+    bool is_periodic;
+@@ -1019,22 +1017,19 @@ runq_pick(const struct scheduler *ops, const cpumask_t *mask, unsigned int cpu)
+         break;
+     }
  
-     s->pt.irq = vlapic_get_reg(s, APIC_LVTT) & APIC_VECTOR_MASK;
- 
-@@ -1464,12 +1468,15 @@ static void lapic_rearm(struct vlapic *s)
- 
-     period = ((uint64_t)APIC_BUS_CYCLE_NS *
-               (uint32_t)tmict * s->hw.timer_divisor);
-+    is_periodic = vlapic_lvtt_period(s);
+-    /* TRACE */
++    if ( unlikely(tb_init_done) && svc )
+     {
+-        if( svc != NULL )
+-        {
+-            struct __packed {
+-                unsigned unit:16, dom:16;
+-                uint64_t cur_deadline, cur_budget;
+-            } d;
+-            d.dom = svc->unit->domain->domain_id;
+-            d.unit = svc->unit->unit_id;
+-            d.cur_deadline = (uint64_t) svc->cur_deadline;
+-            d.cur_budget = (uint64_t) svc->cur_budget;
+-            trace_var(TRC_RTDS_RUNQ_PICK, 1,
+-                      sizeof(d),
+-                      (unsigned char *) &d);
+-        }
++        struct __packed {
++            uint16_t unit, dom;
++            uint64_t cur_deadline, cur_budget;
++        } d = {
++            .unit          = svc->unit->unit_id,
++            .dom           = svc->unit->domain->domain_id,
++            .cur_deadline  = svc->cur_deadline,
++            .cur_budget    = svc->cur_budget,
++        };
 +
-     TRACE_2_LONG_3D(TRC_HVM_EMUL_LAPIC_START_TIMER, TRC_PAR_LONG(period),
--             TRC_PAR_LONG(vlapic_lvtt_period(s) ? period : 0LL), s->pt.irq);
-+             TRC_PAR_LONG(is_periodic ? period : 0LL), s->pt.irq);
++        __trace_var(TRC_RTDS_RUNQ_PICK, 1, sizeof(d), &d);
+     }
+ 
+     return svc;
+@@ -1055,18 +1050,19 @@ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
+     struct rt_unit *snext = NULL;
+     bool migrated = false;
+ 
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+-        struct __packed {
+-            unsigned cpu:16, tasklet:8, tickled:4, idle:4;
+-        } d;
+-        d.cpu = cur_cpu;
+-        d.tasklet = tasklet_work_scheduled;
+-        d.tickled = cpumask_test_cpu(sched_cpu, &prv->tickled);
+-        d.idle = is_idle_unit(currunit);
+-        trace_var(TRC_RTDS_SCHEDULE, 1,
+-                  sizeof(d),
+-                  (unsigned char *)&d);
++        struct {
++            uint16_t cpu;
++            uint8_t tasklet, tickled:4, idle:4;
++        } d = {
++            .cpu      = cur_cpu,
++            .tasklet  = tasklet_work_scheduled,
++            .tickled  = cpumask_test_cpu(sched_cpu, &prv->tickled),
++            .idle     = is_idle_unit(currunit),
++        };
 +
-     create_periodic_time(vlapic_vcpu(s), &s->pt, period,
--                         vlapic_lvtt_period(s) ? period : 0,
-+                         is_periodic ? period : 0,
-                          s->pt.irq,
--                         vlapic_lvtt_period(s) ? vlapic_pt_cb : NULL,
-+                         is_periodic ? vlapic_pt_cb : NULL,
-                          &s->timer_last_update, false);
-     s->timer_last_update = s->pt.last_plt_gtime;
- }
-diff --git a/xen/arch/x86/hvm/vpic.c b/xen/arch/x86/hvm/vpic.c
-index af988a868c8a..91c2c6983393 100644
---- a/xen/arch/x86/hvm/vpic.c
-+++ b/xen/arch/x86/hvm/vpic.c
-@@ -512,14 +512,15 @@ void vpic_irq_negative_edge(struct domain *d, int irq)
++        __trace_var(TRC_RTDS_SCHEDULE, 1, sizeof(d), &d);
+     }
  
- int vpic_ack_pending_irq(struct vcpu *v)
- {
--    int irq;
-+    int irq, accept;
-     struct hvm_hw_vpic *vpic = &v->domain->arch.hvm.vpic[0];
- 
-     ASSERT(has_vpic(v->domain));
- 
--    TRACE_2D(TRC_HVM_EMUL_PIC_PEND_IRQ_CALL, vlapic_accept_pic_intr(v),
--             vpic->int_output);
--    if ( !vlapic_accept_pic_intr(v) || !vpic->int_output )
-+    accept = vlapic_accept_pic_intr(v);
+     /* clear ticked bit now that we've been scheduled */
+@@ -1223,16 +1219,15 @@ runq_tickle(const struct scheduler *ops, const struct rt_unit *new)
+     SCHED_STAT_CRANK(tickled_no_cpu);
+     return;
+  out:
+-    /* TRACE */
++    if ( unlikely(tb_init_done) )
+     {
+         struct {
+-            unsigned cpu:16, pad:16;
+-        } d;
+-        d.cpu = cpu_to_tickle;
+-        d.pad = 0;
+-        trace_var(TRC_RTDS_TICKLE, 1,
+-                  sizeof(d),
+-                  (unsigned char *)&d);
++            uint16_t cpu, _pad;
++        } d = {
++            .cpu = cpu_to_tickle,
++        };
 +
-+    TRACE_2D(TRC_HVM_EMUL_PIC_PEND_IRQ_CALL, accept, vpic->int_output);
-+    if ( !accept || !vpic->int_output )
-         return -1;
++        __trace_var(TRC_RTDS_TICKLE, 1, sizeof(d), &d);
+     }
  
-     irq = vpic_intack(vpic);
+     cpumask_set_cpu(cpu_to_tickle, &prv->tickled);
 -- 
 2.11.0
 
