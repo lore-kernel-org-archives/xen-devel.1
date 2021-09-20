@@ -7,42 +7,42 @@ X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F150EC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 10:34:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E2289C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 10:35:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A7CD760F3A
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 10:34:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A7CD760F3A
+	by mail.kernel.org (Postfix) with ESMTPS id A204760F3A
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 10:35:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A204760F3A
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.190676.340462 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.190682.340473 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSGcy-0007HG-Lh; Mon, 20 Sep 2021 10:34:24 +0000
+	id 1mSGe5-0007sB-0L; Mon, 20 Sep 2021 10:35:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 190676.340462; Mon, 20 Sep 2021 10:34:24 +0000
+Received: by outflank-mailman (output) from mailman id 190682.340473; Mon, 20 Sep 2021 10:35:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSGcy-0007H9-I2; Mon, 20 Sep 2021 10:34:24 +0000
-Received: by outflank-mailman (input) for mailman id 190676;
- Mon, 20 Sep 2021 10:34:23 +0000
+	id 1mSGe4-0007s4-Sr; Mon, 20 Sep 2021 10:35:32 +0000
+Received: by outflank-mailman (input) for mailman id 190682;
+ Mon, 20 Sep 2021 10:35:31 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mSGcx-0007H3-9r
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 10:34:23 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mSGe3-0007ry-DL
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 10:35:31 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mSGcx-0004jd-95
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 10:34:23 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mSGe3-0004lN-CV
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 10:35:31 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mSGcx-0006d7-8I
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 10:34:23 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mSGe3-0006kq-Bg
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 10:35:31 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1mSGcu-0005Tu-33; Mon, 20 Sep 2021 11:34:20 +0100
+ id 1mSGe0-0005Ui-5a; Mon, 20 Sep 2021 11:35:28 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,35 +57,35 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=+tKE82eIy0f699InwlfCUc6vRoD1PpPgEdrGJLTDL3Q=; b=srY2peH1G4gWpRNhrcbl3TxKwr
-	XqCJ1IyJoUhsxqtscvX2dhVZswsK14I+U6PQP7fp2qV4oBTjCITS5AfAj16U4daPwI8uUwoOt8+Mx
-	hP0pCXSHlIq1P4AUjh5KJFjAMSOJc0W5Wj+RgcxSUSJlFm1t0lXw828ZgSYP/LdhX8PA=;
+	bh=AywCxshs2A46tEZsdTT1hl1DjftwdGO+aYQ8DibDXdI=; b=bXaf4/yN3G9o26i2bIG5DkY3RJ
+	+fK/490fjy71nYXMwkjL9ba1J0dXnjtkJU56Ja9PN9k8rT3bc11szLf/rXN6wDR4dL0R3uPIKOL7a
+	yT1DXr/bT7fxRrWE4MFQUvA6n+HnPTEK0jOO6KTgNX5Kd/UQG78JXsGXxMvhznAJpMlM=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24904.25515.842754.402625@mariner.uk.xensource.com>
-Date: Mon, 20 Sep 2021 11:34:19 +0100
+Message-ID: <24904.25583.920124.88776@mariner.uk.xensource.com>
+Date: Mon, 20 Sep 2021 11:35:27 +0100
 To: Roger Pau Monne <roger.pau@citrix.com>
 Cc: <xen-devel@lists.xenproject.org>,
     Ian Jackson <iwj@xenproject.org>,
     Wei Liu <wl@xen.org>,
     Juergen Gross <jgross@suse.com>,
     Julien Grall <julien@xen.org>
-Subject: Re: [PATCH 4/6] tools/xenstored: use atexit to close interfaces
-In-Reply-To: <20210917154625.89315-5-roger.pau@citrix.com>
+Subject: Re: [PATCH DNA 5/6] tools/xenstored: restore support for mapping ring as foreign memory
+In-Reply-To: <20210917154625.89315-6-roger.pau@citrix.com>
 References: <20210917154625.89315-1-roger.pau@citrix.com>
-	<20210917154625.89315-5-roger.pau@citrix.com>
+	<20210917154625.89315-6-roger.pau@citrix.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Roger Pau Monne writes ("[PATCH 4/6] tools/xenstored: use atexit to close interfaces"):
-> Exploiting the talloc clean up routines to close the Xen interfaces
-> is cumbersome, specially when atexit can be used to the same effect.
+Roger Pau Monne writes ("[PATCH DNA 5/6] tools/xenstored: restore support for mapping ring as foreign memory"):
+> Restore the previous way of mapping the xenstore ring using foreign
+> memory. Use xenforeignmemory instead of libxc in order to avoid adding
+> another dependency on a unstable interface.
 
-Wait, what ?  Why do we need to do this at all ?  xenstored can't be
-restarted so if it exits we might as well leave whatever wreckage.
+AIUI this therefore partially reverts something - can you point us to
+the specific commits ?  In the commit message, ideally.
 
-AIUI the live update doesn't end up calling atexit ?
-
+Thanks,
 Ian.
 
