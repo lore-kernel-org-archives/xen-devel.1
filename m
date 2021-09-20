@@ -7,37 +7,37 @@ X-Spam-Status: No, score=-20.2 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE508C433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FF10C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8BE1D632DA
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8BE1D632DA
+	by mail.kernel.org (Postfix) with ESMTPS id DDFE8632DE
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Sep 2021 17:26:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DDFE8632DE
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.191051.340946 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.191053.340968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN39-00051d-RE; Mon, 20 Sep 2021 17:25:51 +0000
+	id 1mSN3E-0005xc-TT; Mon, 20 Sep 2021 17:25:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 191051.340946; Mon, 20 Sep 2021 17:25:51 +0000
+Received: by outflank-mailman (output) from mailman id 191053.340968; Mon, 20 Sep 2021 17:25:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSN39-0004zs-Ly; Mon, 20 Sep 2021 17:25:51 +0000
-Received: by outflank-mailman (input) for mailman id 191051;
- Mon, 20 Sep 2021 17:25:50 +0000
+	id 1mSN3E-0005vR-NX; Mon, 20 Sep 2021 17:25:56 +0000
+Received: by outflank-mailman (input) for mailman id 191053;
+ Mon, 20 Sep 2021 17:25:55 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=F8X/=OK=citrix.com=Andrew.Cooper3@srs-us1.protection.inumbo.net>)
- id 1mSN38-0003cq-Cg
- for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:25:50 +0000
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1mSN3D-0003cq-D3
+ for xen-devel@lists.xenproject.org; Mon, 20 Sep 2021 17:25:55 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c5e97c3b-1a37-11ec-b87a-12813bfff9fa;
- Mon, 20 Sep 2021 17:25:40 +0000 (UTC)
+ id c7499935-1a37-11ec-b87a-12813bfff9fa;
+ Mon, 20 Sep 2021 17:25:41 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,55 +49,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c5e97c3b-1a37-11ec-b87a-12813bfff9fa
+X-Inumbo-ID: c7499935-1a37-11ec-b87a-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1632158740;
+  d=citrix.com; s=securemail; t=1632158741;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=op3mN7Ssn2+qHvMncFrr9eY7JKq/qdFKvePUbUZAdVE=;
-  b=RcVOOoaze2uwR7P9cXIuOh6dtW2+TpF9fVjIuYhA13ckgTV3TFdk/sUY
-   LEXbWRfFhiKkFy+RQMRQpBZBVp0g0urKzrvln7NnKC0Mz68L8w3XmVnIV
-   AN5yiovRy7qCvhwf0Z7lCZxWwIV/mPGfxhxgVNSTkqJDrAlEvl4iCmi2/
-   w=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: eDVWBXpWkoIOoo1AZVM4liBpfZcmugDKNRYzyrxPPYjrE3mqsirArDaUXgCfQrbvgBVttQ+g0L
- cfkXCAwNbQllMw4iSPZrM2oKdbiBYaZhueWW5XOqphEN3V0+YbuWu6f5ZdO5ymNNC17D4L8WIe
- gwJWeHXsDR6DdWnMJJmXekeID0oLhgdmFtHTEH5AcbADiI6w0AdqMLkOTcLs5Jr+kYJo8h56jM
- y6DLYBwuuPnM4SpxTq6x+ufRoWFdcE27uXuhSf1r08j475mY/knmRA1WrDJVWtq+g5L1IohsmV
- ThmAn1z6meN8JTqlTq0hP1wv
+  bh=kRgS+FI6cDfW+xtWOVJXQyBa4B8IEHbmPbHmbF/E9Yc=;
+  b=goB6YPScwF17n/KBWnnCeAhyLpaWQr0oIcaoT0mpQnWQOXGQNz6ifBsS
+   dmNKUEgYxK/VtTgE4wc81skxqocZj2oBp83TUX8Oa9olACGILUytbzva5
+   mnkiUMQ4zrCz9lfY1HAr80ppczjdJLb+3NSwv4OdRrViIRHl7TXdoYO7J
+   Q=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 2aliCzhyOh0fDvZKu3MysIljbnxpZikxNlp9VbAgcwK44GiRR5MeWVrVLox707BH4fnTulyh8/
+ JSK7rvRSftpOVrrVXRjqRZEnjgZN4X0GyzaO2aKiy1sAiYBbf2tBRglWrhYmorWnLIU77L407n
+ 5h7PUo0cLpAhZfFuKe9Psq3dwaNr3wAIujY4FxWMmpIE+5pHIEMTEd+eHlwNasE5E1y2VtWg6y
+ otcHW0jFmKCrr1VQLkkTr8SoU5zjF13jCx6B9n893QksObBgkG6fQ7rZ+k/bODaCwlyK3E5kXo
+ W7MCoiG+qFuZnboTg41p3mle
 X-SBRS: 5.1
-X-MesageID: 54938585
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 53560996
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:VbwWZqwB1MSix56KN1h6t+ffwSrEfRIJ4+MujC+fZmUNrF6WrkVTy
- zEbWW/XMq2MNjGheNF2btzkpkJTvZDcztZiTAFprSAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAsLeNYYH1500s7yrRh2tQAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt/Zx2
- MQchZjpcyI0PvD1u/g/CTlCDggraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY25wfRqaDN
- 5dxhTxHXBvtXC1CZHMrUtEYpcio2nPRfiVHpwfAzUYwyzeKl1EguFT3C/LXZ9iLSMN9jkue4
- GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcI4cHbK39/lugXWI23ceThYRUDOTvv2RmkO4HdVFJ
- CQ86ico6KQ/6kGvZt38RAGj5m6JuAYGXNhdGPF87xuCooLV/ASxFmUCViRGatEtqIkxXzNC/
- kSSg9rjCDhrsbuUYXGQ7LGZqXW1Iyd9EIMZTXZaF01fuYCl+dxtyEKUJjp+LEKrpvv1CSCh8
- zTTlg0jh+gqrtIpjYWh4HmS1lpAuaP1oh4JChT/Bzz+t1MiNd/9PeRE+nCAsq0Rd9/xok2p+
- SFewpnAtrhm4YSlyXTVKNjhCo1F8Bps3Nf0uldpA5Bp3DCk4XfLkWt4sWwmeRsB3irpf1bUj
- K7vVeF5v8Q70JiCN/Yfj2eN5yMCl/OIKDgdfqqIBueim7AoHON9wM2LWaJ39zu3+HXAbIllY
- cvLGSpSJS9CVMyLMwZat89CiOR2l0jSNEv4RIzhzgTP7FZtTCfOEt843K+1Rrlhtsus+VyNm
- /4Gbpfi40gPAYXWP3iMmaZOfA9iEJTOLc2vwyChXrXYeVQO9aBII6K5/I7NjKQ/zvwJyb+Xr
- i/iMqKaoXKm7UD6xcyxQigLQNvSsVxX9hrX5AQgYgSl3WYNe4Gq4PtNfpc7Z+B/pudi0eR1X
- 78OfMDZWqZDTTHO+jI8a5jhrdM9KET31FzWZyf1MiIie5NARhDS/oO2dAXY6yRTXDG8stEzo
- uP821qDE4YDXQlrEO3fdOmrkwGqpXEYle8rBxnIL9BfdV/C6o9vLyCt3PY7L9tVcUfIxyeA1
- hbQChAd/LGfr4gw+djPpKaFs4b2TLcuQhsERzHWtO/kOzPb82yvxZ57fNyJJT2NBnnp/KiCZ
- PlOy62uOvMwg1sX4ZF3FKxmzPxi6oK39aNa1AltAF7Cc0+vVuF7OnCD0MRC6v9Ny7tetVfkU
- 06D4IAHa7CAOcejG18NPgs1KO+E0KhMyDXV6P00JmT85TN2o+XbARkDYUHUhXwPNqZxPaMk3
- fwl6Zwf5AGIgxY3NsqL03JP/GOWI31cC6gqu/n22mMwZtbHHr2aXaHhNw==
-IronPort-HdrOrdr: A9a23:fepU9qq6Y6YRGtz1OIBx+ngaV5opeYIsimQD101hICG8cqSj+f
- xG/c5rrCMc5wxwZJhNo7y90ey7MBbhHP1OkO8s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpM
- BdmsNFaeEYY2IUsS+D2njbL+od
+IronPort-Data: A9a23:KkDS6aBM/cbTDRVW/8Hkw5YqxClBgxIJ4kV8jS/XYbTApGxw32MBx
+ 2YWUDuDP/yCNjSnKt5yPIy3oUhQ6MSBzYJrQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLOs1hxZH1c+EX9w00o7wYbVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/izGNtPF9z
+ 493hbutalpzEoHzw/YjTEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcFh2pu3pEfQ54yY
+ eIDU2R0N0zMfyRBYAknOdV5tbuPuHzwJmgwRFW9+vNsvjm7IBZK+LrwNNvYfPSaSMMTmVyXz
+ krk1WnkBhARNPSE1CGItHmrg4fnkS3yV40TE7m53uV3m1DVzWsWYDUJUXOrrP//jVSxM/pPJ
+ kpR9icwoKwa8E2wUsK7TxC+uGSDvBMXR5xXCeJSwACSyILE7gCBHG8GQzVdLts8u6ceXic23
+ 1WEm9foAz1Hs7CPT3+ZsLCOoluP1TM9dDFYI3VeFE1cvoel8NpbYg/zoshLEKqxpfz5HmvK8
+ xeXj3Vkq5ks1tw1yPDulbzYuA5AtqQlXyZsuF6ODjn0v1sjDGK2T9f3sgmAtJ6sOK7cFwPY7
+ SZew6By+chTVcnlqcCbfAka8FhFDd6+OTvAiBZEG5A7/lxBEFbyINgNvFmSyKpvW/vomAMFg
+ meI4mu9B7cJZRNGiJObhKrrUKwXIVDIT4iNaxwtRoMmjmJNmOq7EMZGPhT44owQuBJ0zfFX1
+ WmzKJ7xZZrlNUiX5GXvHLpMuVPa7gs/2XnSVfjGI+ePiOHFDEN5vYwtaQPUBshgtfvsiFyMr
+ 753apvboz0CAbaWSnSGruYuwaUicCFT6Wbe8JcMKIZu42NORQkcNhMm6elwI9A6x/sFyLigE
+ 7PUchYw9WcTTEbvcW2iAk2Popu2NXqmhX5kbyEqI3iy3H0vPdSm4KsFLsNldrg77u1zi/VzS
+ qBdKcmHB/1OTBXB+igcMsah/NAzKkzziFLcJTehbRg+Y4VkG17D9Oj7c1a97yIJFCe265cz+
+ uXyygPBTJMfbA1+F8KKOum3xla8sCFFyuJ/VkfFOPdJf0Do/NQ4IiD9lKZvccoNNQ/C1n2R0
+ APPWUUUouzEookU9tjVhP/b89f1QrUmRkcDRjvV97e7MyXe71GP+44YXbbaZy3ZWUP15L6mO
+ bdfwcbjPaBVh11NqYd9TepmlPps+9v1qrZG5Q14B3GXPU+zA7ZtL3Taj8lCsqpBmu1QtQesA
+ x/d/9BbPfOCOd//EU5XLw0gN7zR2fYRkzjUzPI0PESlu3MnoOvZCR1fb0uWlShQDLppK4d0k
+ +4utfkf5xG7lhd3YM2NiTpZ9jjUI3ENO0n9Wkr23GM/ZtIX92x/
+IronPort-HdrOrdr: A9a23:d53ceKqbkf5TLc2PlQ0NeR0aV5oXeYIsimQD101hICG9Ffbo8/
+ xG/c5rsCMc5wxhO03I9ergBEDiex3hHPxOkO4s1N6ZNWGN1VdARLsSi7cKqAeQeREWmNQ86U
+ 5ISdkGNDWuZmIQsS+B2maF+nwbsaG6GduT6dvj8w==
 X-IronPort-AV: E=Sophos;i="5.85,308,1624334400"; 
-   d="scan'208";a="54938585"
+   d="scan'208";a="53560996"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
@@ -105,20 +105,21 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
 	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
 	<wl@xen.org>, Julien Grall <julien@xen.org>, Dario Faggioli
 	<dfaggioli@suse.com>
-Subject: [PATCH v2 09/12] xen/trace: Minor code cleanup
-Date: Mon, 20 Sep 2021 18:25:26 +0100
-Message-ID: <20210920172529.24932-10-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 03/12] xen/credit2: Remove tail padding from TRC_CSCHED2_* records
+Date: Mon, 20 Sep 2021 18:25:20 +0100
+Message-ID: <20210920172529.24932-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 References: <20210920172529.24932-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
- * Delete trailing whitespace
- * Replace an opencoded DIV_ROUND_UP()
- * Drop bogus smp_rmb() - spin_lock_irqsave() has full smp_mb() semantics.
+All three of these records have tail padding, leaking stack rubble into the
+trace buffer.  Introduce an explicit _pad field and have the compiler zero the
+padding automatically.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: George Dunlap <George.Dunlap@eu.citrix.com>
 CC: Ian Jackson <iwj@xenproject.org>
@@ -128,159 +129,81 @@ CC: Wei Liu <wl@xen.org>
 CC: Julien Grall <julien@xen.org>
 CC: Dario Faggioli <dfaggioli@suse.com>
 ---
- xen/common/trace.c              | 37 +++++++++++++++----------------------
- xen/include/asm-x86/hvm/trace.h |  2 +-
- 2 files changed, 16 insertions(+), 23 deletions(-)
+ xen/common/sched/credit2.c | 47 +++++++++++++++++++++++++++-------------------
+ 1 file changed, 28 insertions(+), 19 deletions(-)
 
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index 4297ff505fb9..41a3c170446b 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -75,10 +75,6 @@ static cpumask_t tb_cpu_mask;
- /* which tracing events are enabled */
- static u32 tb_event_mask = TRC_ALL;
- 
--/* Return the number of elements _type necessary to store at least _x bytes of data
-- * i.e., sizeof(_type) * ans >= _x. */
--#define fit_to_type(_type, _x) (((_x)+sizeof(_type)-1) / sizeof(_type))
--
- static int cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-@@ -96,8 +92,8 @@ static struct notifier_block cpu_nfb = {
- 
- static uint32_t calc_tinfo_first_offset(void)
- {
--    int offset_in_bytes = offsetof(struct t_info, mfn_offset[NR_CPUS]);
--    return fit_to_type(uint32_t, offset_in_bytes);
-+    return DIV_ROUND_UP(offsetof(struct t_info, mfn_offset[NR_CPUS]),
-+                        sizeof(uint32_t));
- }
- 
- /**
-@@ -148,7 +144,7 @@ static int calculate_tbuf_size(unsigned int pages, uint16_t t_info_first_offset)
-         pages = max_pages;
-     }
- 
--    /* 
-+    /*
-      * NB this calculation is correct, because t_info_first_offset is
-      * in words, not bytes
-      */
-@@ -167,7 +163,7 @@ static int calculate_tbuf_size(unsigned int pages, uint16_t t_info_first_offset)
-  * trace buffers.  The trace buffers are then available for debugging use, via
-  * the %TRACE_xD macros exported in <xen/trace.h>.
-  *
-- * This function may also be called later when enabling trace buffers 
-+ * This function may also be called later when enabling trace buffers
-  * via the SET_SIZE hypercall.
-  */
- static int alloc_trace_bufs(unsigned int pages)
-@@ -401,7 +397,7 @@ int tb_control(struct xen_sysctl_tbuf_op *tbc)
-         break;
-     case XEN_SYSCTL_TBUFOP_enable:
-         /* Enable trace buffers. Check buffers are already allocated. */
--        if ( opt_tbuf_size == 0 ) 
-+        if ( opt_tbuf_size == 0 )
-             rc = -EINVAL;
-         else
-             tb_init_done = 1;
-@@ -438,7 +434,7 @@ int tb_control(struct xen_sysctl_tbuf_op *tbc)
-     return rc;
- }
- 
--static inline unsigned int calc_rec_size(bool_t cycles, unsigned int extra) 
-+static inline unsigned int calc_rec_size(bool_t cycles, unsigned int extra)
- {
-     unsigned int rec_size = 4;
- 
-@@ -597,7 +593,7 @@ static inline void __insert_record(struct t_buf *buf,
-         rec->u.cycles.cycles_lo = (uint32_t)tsc;
-         rec->u.cycles.cycles_hi = (uint32_t)(tsc >> 32);
-         dst = rec->u.cycles.extra_u32;
--    } 
-+    }
- 
-     if ( extra_data && extra )
-         memcpy(dst, extra_data, extra);
-@@ -717,9 +713,6 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
-     if ( !cpumask_test_cpu(smp_processor_id(), &tb_cpu_mask) )
-         return;
- 
--    /* Read tb_init_done /before/ t_bufs. */
--    smp_rmb();
--
-     spin_lock_irqsave(&this_cpu(t_lock), flags);
- 
-     buf = this_cpu(t_bufs);
-@@ -735,14 +728,14 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
- 
-     /* Calculate the record size */
-     rec_size = calc_rec_size(cycles, extra);
-- 
-+
-     /* How many bytes are available in the buffer? */
-     bytes_to_tail = calc_bytes_avail(buf);
--    
-+
-     /* How many bytes until the next wrap-around? */
-     bytes_to_wrap = calc_bytes_to_wrap(buf);
--    
--    /* 
-+
-+    /*
-      * Calculate expected total size to commit this record by
-      * doing a dry-run.
-      */
-@@ -756,7 +749,7 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
-         {
-             total_size += bytes_to_wrap;
-             bytes_to_wrap = data_size;
--        } 
-+        }
-         total_size += LOST_REC_SIZE;
-         bytes_to_wrap -= LOST_REC_SIZE;
- 
-@@ -768,7 +761,7 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
-     if ( rec_size > bytes_to_wrap )
+diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+index 6396b38e044c..41312158ec63 100644
+--- a/xen/common/sched/credit2.c
++++ b/xen/common/sched/credit2.c
+@@ -1106,12 +1106,14 @@ _runq_assign(struct csched2_unit *svc, struct csched2_runqueue_data *rqd)
+     if ( unlikely(tb_init_done) )
      {
-         total_size += bytes_to_wrap;
--    } 
-+    }
-     total_size += rec_size;
- 
-     /* Do we have enough space for everything? */
-@@ -781,7 +774,7 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
-     }
- 
-     /*
--     * Now, actually write information 
-+     * Now, actually write information
-      */
-     bytes_to_wrap = calc_bytes_to_wrap(buf);
- 
-@@ -791,7 +784,7 @@ void __trace_var(u32 event, bool_t cycles, unsigned int extra,
-         {
-             insert_wrap_record(buf, LOST_REC_SIZE);
-             bytes_to_wrap = data_size;
--        } 
-+        }
-         insert_lost_records(buf);
-         bytes_to_wrap -= LOST_REC_SIZE;
- 
-diff --git a/xen/include/asm-x86/hvm/trace.h b/xen/include/asm-x86/hvm/trace.h
-index 145b59f6ac65..696e42eb9499 100644
---- a/xen/include/asm-x86/hvm/trace.h
-+++ b/xen/include/asm-x86/hvm/trace.h
-@@ -52,7 +52,7 @@
- #define DO_TRC_HVM_CLTS        DEFAULT_HVM_MISC
- #define DO_TRC_HVM_LMSW        DEFAULT_HVM_MISC
- #define DO_TRC_HVM_LMSW64      DEFAULT_HVM_MISC
--#define DO_TRC_HVM_REALMODE_EMULATE DEFAULT_HVM_MISC 
-+#define DO_TRC_HVM_REALMODE_EMULATE DEFAULT_HVM_MISC
- #define DO_TRC_HVM_TRAP             DEFAULT_HVM_MISC
- #define DO_TRC_HVM_TRAP_DEBUG       DEFAULT_HVM_MISC
- #define DO_TRC_HVM_VLAPIC           DEFAULT_HVM_MISC
+         struct {
+-            unsigned unit:16, dom:16;
+-            unsigned rqi:16;
+-        } d;
+-        d.dom = svc->unit->domain->domain_id;
+-        d.unit = svc->unit->unit_id;
+-        d.rqi=rqd->id;
++            uint16_t unit, dom;
++            uint16_t rqi, _pad;
++        } d = {
++            .unit = svc->unit->unit_id,
++            .dom  = svc->unit->domain->domain_id,
++            .rqi  = rqd->id,
++        };
++
+         __trace_var(TRC_CSCHED2_RUNQ_ASSIGN, 1,
+                     sizeof(d),
+                     (unsigned char *)&d);
+@@ -1336,13 +1338,17 @@ update_runq_load(const struct scheduler *ops,
+     {
+         struct {
+             uint64_t rq_avgload, b_avgload;
+-            unsigned rq_load:16, rq_id:8, shift:8;
+-        } d;
+-        d.rq_id = rqd->id;
+-        d.rq_load = rqd->load;
+-        d.rq_avgload = rqd->avgload;
+-        d.b_avgload = rqd->b_avgload;
+-        d.shift = P;
++            uint16_t rq_load;
++            uint8_t  rq_id, shift;
++            uint32_t _pad;
++        } d = {
++            .rq_avgload  = rqd->avgload,
++            .b_avgload   = rqd->b_avgload,
++            .rq_load     = rqd->load,
++            .rq_id       = rqd->id,
++            .shift       = P,
++        };
++
+         __trace_var(TRC_CSCHED2_UPDATE_RUNQ_LOAD, 1,
+                     sizeof(d),
+                     (unsigned char *)&d);
+@@ -2799,12 +2805,15 @@ static void balance_load(const struct scheduler *ops, int cpu, s_time_t now)
+     {
+         struct {
+             uint64_t lb_avgload, ob_avgload;
+-            unsigned lrq_id:16, orq_id:16;
+-        } d;
+-        d.lrq_id = st.lrqd->id;
+-        d.lb_avgload = st.lrqd->b_avgload;
+-        d.orq_id = st.orqd->id;
+-        d.ob_avgload = st.orqd->b_avgload;
++            uint16_t lrq_id, orq_id;
++            uint32_t _pad;
++        } d = {
++            .lb_avgload  = st.lrqd->b_avgload,
++            .ob_avgload  = st.orqd->b_avgload,
++            .lrq_id      = st.lrqd->id,
++            .orq_id      = st.orqd->id,
++        };
++
+         __trace_var(TRC_CSCHED2_LOAD_BALANCE, 1,
+                     sizeof(d),
+                     (unsigned char *)&d);
 -- 
 2.11.0
 
