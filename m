@@ -2,44 +2,45 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DEDE2C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:15:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B17BC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9EB12611CA
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:15:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9EB12611CA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0E18261214
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0E18261214
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193207.344123 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193212.344133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCNr-0001L4-1g; Thu, 23 Sep 2021 00:14:39 +0000
+	id 1mTCeL-0003xg-GQ; Thu, 23 Sep 2021 00:31:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193207.344123; Thu, 23 Sep 2021 00:14:39 +0000
+Received: by outflank-mailman (output) from mailman id 193212.344133; Thu, 23 Sep 2021 00:31:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCNq-0001Kx-V2; Thu, 23 Sep 2021 00:14:38 +0000
-Received: by outflank-mailman (input) for mailman id 193207;
- Thu, 23 Sep 2021 00:14:37 +0000
+	id 1mTCeL-0003xZ-Da; Thu, 23 Sep 2021 00:31:41 +0000
+Received: by outflank-mailman (input) for mailman id 193212;
+ Thu, 23 Sep 2021 00:31:40 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/SRu=ON=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mTCNp-0001Kr-ND
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:14:37 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=fO2a=ON=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
+ id 1mTCeJ-0003xN-Tn
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:40 +0000
+Received: from beetle.greensocs.com (unknown [5.135.226.135])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3bf8a6b8-1c03-11ec-b9f4-12813bfff9fa;
- Thu, 23 Sep 2021 00:14:36 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1A1C361211;
- Thu, 23 Sep 2021 00:14:35 +0000 (UTC)
+ id 9ce9660e-1c05-11ec-b9f4-12813bfff9fa;
+ Thu, 23 Sep 2021 00:31:38 +0000 (UTC)
+Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
+ by beetle.greensocs.com (Postfix) with ESMTPS id 615DE21EC9;
+ Wed, 22 Sep 2021 16:15:54 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,198 +52,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3bf8a6b8-1c03-11ec-b9f4-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1632356075;
-	bh=5PXi0iXkZLIcUn9AG/uHf3EMU3TwdNwyR6t8Sv7IOT4=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=MBzblnQRB8ygBo1Y1+AiNKO7ggD+eahXnCAVl1sKayoklZUo3a3EmKPrTLbtd4lgW
-	 jKVDE+uyTSZqSKTJCBnPcqB5b1R8CIrRPxF7+tfGYWh7lCvQXQp3At9gF/QvvS7QB/
-	 k2qbxf0pcowcXCcwFu87ggRPGXFIiYTAmr782aCcgVf+4hX4tfuhhLcF2DUL49wHZQ
-	 CT8xhyKZF5DfNFAFKDQ5UAvU0YFbAN5o0FzZBthUjR2bzY/CH2nrotgvS1Y8OEfubu
-	 HwQM+Fr4Z4xY7gMNaqci7PnLWxOwh+SA01eRszNdejHye0A7oT/sLEVrmuC4FKOSqa
-	 uGfqYvwma1qog==
-Date: Wed, 22 Sep 2021 17:14:34 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Rahul Singh <rahul.singh@arm.com>
-cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
-    andre.przywara@arm.com, Andrew Cooper <andrew.cooper3@citrix.com>, 
-    George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, 
-    Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-    Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 10/17] xen/arm: Add cmdline boot option "pci-passthrough
- = <boolean>"
-In-Reply-To: <9dcb9b3b6b6923db00d6e56da26a8503d5a4855a.1632307952.git.rahul.singh@arm.com>
-Message-ID: <alpine.DEB.2.21.2109221708500.17979@sstabellini-ThinkPad-T480s>
-References: <cover.1632307952.git.rahul.singh@arm.com> <9dcb9b3b6b6923db00d6e56da26a8503d5a4855a.1632307952.git.rahul.singh@arm.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 9ce9660e-1c05-11ec-b9f4-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+	s=mail; t=1632327354;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PDCjVxFBi4vz75aeR9pd9AbmoW6STuPuMbNBE/FSM7I=;
+	b=ICuAAVCXm0R5uk9SjJ8PoZaJwYoy4CElxlYLonWdbRGOal6uenKQyWFhRGYtaMcpNGrB6U
+	a6eNGZVWTngTm/nJTjQ651qUUGJcEfSF62QKzWyQ8J+LWw+rY7XTtY9hl/Kg9JWezPiQT2
+	mj0ltS02PcDOghYVnG1qEo0ZJHBn8H4=
+From: Damien Hedde <damien.hedde@greensocs.com>
+To: qemu-devel@nongnu.org
+Cc: Damien Hedde <damien.hedde@greensocs.com>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Eduardo Habkost <ehabkost@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Igor Mammedov <imammedo@redhat.com>,
+	Ani Sinha <ani@anisinha.ca>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Eric Auger <eric.auger@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	Peter Xu <peterx@redhat.com>,
+	David Hildenbrand <david@redhat.com>,
+	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+	Markus Armbruster <armbru@redhat.com>,
+	Eric Blake <eblake@redhat.com>,
+	qemu-riscv@nongnu.org,
+	xen-devel@lists.xenproject.org,
+	mark.burton@greensocs.com,
+	mirela.grujic@greensocs.com,
+	edgari@xilinx.com,
+	Peter Maydell <peter.maydell@linaro.org>
+Subject: [RFC PATCH v2 09/16] hw/core/machine: Remove the dynamic sysbus devices type check
+Date: Wed, 22 Sep 2021 18:13:58 +0200
+Message-Id: <20210922161405.140018-10-damien.hedde@greensocs.com>
+X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
+References: <20210922161405.140018-1-damien.hedde@greensocs.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+X-Spam: Yes
 
-On Wed, 22 Sep 2021, Rahul Singh wrote:
-> Add cmdline boot option "pci-passthrough = = <boolean>" to enable
-> disable the PCI passthrough support on ARM.
- ^ or disable
+Now that we check sysbus device types during device creation, we
+can remove the check done in the machine init done notifier.
+This was the only thing done by this notifier, so we remove the
+whole sysbus_notifier structure of the MachineState.
 
-> 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> ---
-> Change in v2:
-> - Add option in xen-command-line.pandoc
-> - Change pci option to pci-passthrough
-> - modify option from custom_param to boolean param
-> ---
->  docs/misc/xen-command-line.pandoc |  7 +++++++
->  xen/arch/arm/pci/pci.c            | 14 ++++++++++++++
->  xen/common/physdev.c              |  6 ++++++
->  xen/include/asm-arm/pci.h         | 13 +++++++++++++
->  xen/include/asm-x86/pci.h         |  8 ++++++++
->  5 files changed, 48 insertions(+)
-> 
-> diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-> index b175645fde..c867f1cf58 100644
-> --- a/docs/misc/xen-command-line.pandoc
-> +++ b/docs/misc/xen-command-line.pandoc
-> @@ -1783,6 +1783,13 @@ All numbers specified must be hexadecimal ones.
->  
->  This option can be specified more than once (up to 8 times at present).
->  
-> +### pci-passthrough (arm)
-> +> `= <boolean>`
-> +
-> +> Default: `false`
-> +
-> +Flag to enable or disable support for PCI passthrough
-> +
->  ### pcid (x86)
->  > `= <boolean> | xpti=<bool>`
->  
-> diff --git a/xen/arch/arm/pci/pci.c b/xen/arch/arm/pci/pci.c
-> index 71fa532842..fe96a9b135 100644
-> --- a/xen/arch/arm/pci/pci.c
-> +++ b/xen/arch/arm/pci/pci.c
-> @@ -16,6 +16,7 @@
->  #include <xen/device_tree.h>
->  #include <xen/errno.h>
->  #include <xen/init.h>
-> +#include <xen/param.h>
->  #include <xen/pci.h>
->  
->  /*
-> @@ -65,8 +66,21 @@ static inline int __init acpi_pci_init(void)
->  }
->  #endif
->  
-> +/*
-> + * By default pci passthrough is disabled
-> + */
-> +bool_t __read_mostly pci_passthrough_enabled = 0;
+Note: This notifier was checking all /peripheral and /peripheral-anon
+sysbus devices. Now we only check those added by -device cli option or
+device_add qmp command when handling the command/option. So if there
+are some devices added in one of these containers manually (eg in
+machine C code), these will not be checked anymore.
+This use case does not seem to appear apart from
+hw/xen/xen-legacy-backend.c (it uses qdev_set_id() and in this case,
+not for a sysbus device, so it's ok).
 
-I think we are using bool rather than bool_t nowadays. Also could do =
-false.
+Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+---
+ include/hw/boards.h |  1 -
+ hw/core/machine.c   | 27 ---------------------------
+ 2 files changed, 28 deletions(-)
 
+diff --git a/include/hw/boards.h b/include/hw/boards.h
+index 934443c1cd..ccbc40355a 100644
+--- a/include/hw/boards.h
++++ b/include/hw/boards.h
+@@ -311,7 +311,6 @@ typedef struct CpuTopology {
+ struct MachineState {
+     /*< private >*/
+     Object parent_obj;
+-    Notifier sysbus_notifier;
+ 
+     /*< public >*/
+ 
+diff --git a/hw/core/machine.c b/hw/core/machine.c
+index 1a18912dc8..521438e90a 100644
+--- a/hw/core/machine.c
++++ b/hw/core/machine.c
+@@ -571,18 +571,6 @@ bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
+     return allowed;
+ }
+ 
+-static void validate_sysbus_device(SysBusDevice *sbdev, void *opaque)
+-{
+-    MachineState *machine = opaque;
+-    MachineClass *mc = MACHINE_GET_CLASS(machine);
+-
+-    if (!device_is_dynamic_sysbus(mc, DEVICE(sbdev))) {
+-        error_report("Option '-device %s' cannot be handled by this machine",
+-                     object_class_get_name(object_get_class(OBJECT(sbdev))));
+-        exit(1);
+-    }
+-}
+-
+ static char *machine_get_memdev(Object *obj, Error **errp)
+ {
+     MachineState *ms = MACHINE(obj);
+@@ -598,17 +586,6 @@ static void machine_set_memdev(Object *obj, const char *value, Error **errp)
+     ms->ram_memdev_id = g_strdup(value);
+ }
+ 
+-static void machine_init_notify(Notifier *notifier, void *data)
+-{
+-    MachineState *machine = MACHINE(qdev_get_machine());
+-
+-    /*
+-     * Loop through all dynamically created sysbus devices and check if they are
+-     * all allowed.  If a device is not allowed, error out.
+-     */
+-    foreach_dynamic_sysbus_device(validate_sysbus_device, machine);
+-}
+-
+ HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
+ {
+     int i;
+@@ -1030,10 +1007,6 @@ static void machine_initfn(Object *obj)
+                                         "Table (HMAT)");
+     }
+ 
+-    /* Register notifier when init is done for sysbus sanity checks */
+-    ms->sysbus_notifier.notify = machine_init_notify;
+-    qemu_add_machine_init_done_notifier(&ms->sysbus_notifier);
+-
+     /* default to mc->default_cpus */
+     ms->smp.cpus = mc->default_cpus;
+     ms->smp.max_cpus = mc->default_cpus;
+-- 
+2.33.0
 
-> +boolean_param("pci-passthrough", pci_passthrough_enabled);
-> +
->  static int __init pci_init(void)
->  {
-> +    /*
-> +     * Enable PCI passthrough when has been enabled explicitly
-> +     * (pci-passthrough=on)
-> +     */
-> +    if ( !pci_passthrough_enabled)
-
-missing space
-
-
-> +        return 0;
-> +
->      pci_segments_init();
->  
->      if ( acpi_disabled )
-> diff --git a/xen/common/physdev.c b/xen/common/physdev.c
-> index 8d44b20db8..7390d5d584 100644
-> --- a/xen/common/physdev.c
-> +++ b/xen/common/physdev.c
-> @@ -19,6 +19,9 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
->          struct pci_dev_info pdev_info;
->          nodeid_t node;
->  
-> +        if ( !is_pci_passthrough_enabled() )
-> +            return -ENOSYS;
-> +
->          ret = -EFAULT;
->          if ( copy_from_guest(&add, arg, 1) != 0 )
->              break;
-> @@ -54,6 +57,9 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
->      case PHYSDEVOP_pci_device_remove: {
->          struct physdev_pci_device dev;
->  
-> +        if ( !is_pci_passthrough_enabled() )
-> +            return -ENOSYS;
-> +
->          ret = -EFAULT;
->          if ( copy_from_guest(&dev, arg, 1) != 0 )
->              break;
-> diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-> index 7dd9eb3dba..f2f86be9bc 100644
-> --- a/xen/include/asm-arm/pci.h
-> +++ b/xen/include/asm-arm/pci.h
-> @@ -19,14 +19,27 @@
->  
->  #define pci_to_dev(pcidev) (&(pcidev)->arch.dev)
->  
-> +extern bool_t pci_passthrough_enabled;
-> +
->  /* Arch pci dev struct */
->  struct arch_pci_dev {
->      struct device dev;
->  };
->  
-> +static always_inline bool is_pci_passthrough_enabled(void)
-> +{
-> +    return pci_passthrough_enabled;
-> +}
->  #else   /*!CONFIG_HAS_PCI*/
->  
-> +#define pci_passthrough_enabled (false)
-
-We don't need to define it, do we?
-
-
->  struct arch_pci_dev { };
->  
-> +static always_inline bool is_pci_passthrough_enabled(void)
-> +{
-> +    return false;
-> +}
-> +
->  #endif  /*!CONFIG_HAS_PCI*/
->  #endif /* __ARM_PCI_H__ */
-> diff --git a/xen/include/asm-x86/pci.h b/xen/include/asm-x86/pci.h
-> index cc05045e9c..0e160c6d01 100644
-> --- a/xen/include/asm-x86/pci.h
-> +++ b/xen/include/asm-x86/pci.h
-> @@ -32,4 +32,12 @@ bool_t pci_ro_mmcfg_decode(unsigned long mfn, unsigned int *seg,
->  extern int pci_mmcfg_config_num;
->  extern struct acpi_mcfg_allocation *pci_mmcfg_config;
->  
-> +/*
-> + * Unlike ARM, PCI passthrough always enabled for x86.
-                                 ^ is
-
-
-> + */
-> +static always_inline bool is_pci_passthrough_enabled(void)
-> +{
-> +    return true;
-> +}
-> +
->  #endif /* __X86_PCI_H__ */
-> -- 
-> 2.17.1
-> 
 
