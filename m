@@ -2,45 +2,43 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6857CC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 21:01:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D4D1C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 21:05:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B8A616115A
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 21:01:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B8A616115A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
+	by mail.kernel.org (Postfix) with ESMTPS id DDE0A611C4
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 21:05:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DDE0A611C4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193048.343866 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193061.343878 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT9ND-00008w-G1; Wed, 22 Sep 2021 21:01:47 +0000
+	id 1mT9QU-0001BD-Ut; Wed, 22 Sep 2021 21:05:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193048.343866; Wed, 22 Sep 2021 21:01:47 +0000
+Received: by outflank-mailman (output) from mailman id 193061.343878; Wed, 22 Sep 2021 21:05:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT9ND-00008j-Cf; Wed, 22 Sep 2021 21:01:47 +0000
-Received: by outflank-mailman (input) for mailman id 193048;
- Wed, 22 Sep 2021 21:01:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mT9QU-0001B6-Rj; Wed, 22 Sep 2021 21:05:10 +0000
+Received: by outflank-mailman (input) for mailman id 193061;
+ Wed, 22 Sep 2021 21:05:10 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D6HN=OM=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mT9NB-0008HS-87
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 21:01:45 +0000
-Received: from beetle.greensocs.com (unknown [5.135.226.135])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 470d8a7b-1be8-11ec-b9df-12813bfff9fa;
- Wed, 22 Sep 2021 21:01:38 +0000 (UTC)
-Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id F3DEA21CC1;
- Wed, 22 Sep 2021 16:15:44 +0000 (UTC)
+ <SRS0=ilSY=OM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1mT9QU-0001Az-E4
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 21:05:10 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7622092f-875d-4caa-ba0d-1549d45aee0a;
+ Wed, 22 Sep 2021 21:05:09 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 652A36112F;
+ Wed, 22 Sep 2021 21:05:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,313 +50,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 470d8a7b-1be8-11ec-b9df-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327345;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=VdnVuRz8orSzm80d4V6oo8FtHFI6VLNiM7CokKV1kg0=;
-	b=FUm2HUwzttyCZe+8dhBbh50LnWpTBgfyRBKEmQweI52IibjcVgDn4DK1o5YtxElR7pK3VG
-	FzivmPgZdVq7CIwOWz8C/0JHcJLoWkMZTuJkoIZq/q7EtIWQYR432EE+RLBVUQvkum1SsI
-	7ZnOmjO/M8NkPARS4NSxeS/ky6/tWQE=
-From: Damien Hedde <damien.hedde@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: Damien Hedde <damien.hedde@greensocs.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	Ani Sinha <ani@anisinha.ca>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Eric Auger <eric.auger@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Peter Xu <peterx@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	qemu-riscv@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	mark.burton@greensocs.com,
-	mirela.grujic@greensocs.com,
-	edgari@xilinx.com,
-	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 01/16] rename MachineInitPhase enum constants for QAPI compatibility
-Date: Wed, 22 Sep 2021 18:13:50 +0200
-Message-Id: <20210922161405.140018-2-damien.hedde@greensocs.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+X-Inumbo-ID: 7622092f-875d-4caa-ba0d-1549d45aee0a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1632344708;
+	bh=CLlsYr/xMME+lA6Uj07qC22IdfSkZ/DckOstv95Y8GM=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=R5ccNQ/UMqrSzun10aanrfvZeMsRNKRNVuR/RXiilnHZs/geRf5x+ywmtGfmRoy8X
+	 CPpqR8UQuDkHboLC5FoBXSzJdJGg2tXC+b4Kg4j8UbneG2FogRfq5zckfzwpCNTsuA
+	 DdY/sci08TA1dV0HSv4vs2JVSu0x4uqy12IRBRIc7EG9J/U/kyABE3CwiTPfv6eZ1R
+	 Ar4GKx07aQrY+LcrvhVbF52Vdb6iPPqDDct9cc6pikSoxGG2U4Amw/vubBq7DommjL
+	 tlGcs3KZMRGwK+I/jgLQK3H8JCT2Ct6hV5Z5MdRHkdFsfrE26IrD+VvVQu4BkPXpgG
+	 YiE/96eCiOaWQ==
+Date: Wed, 22 Sep 2021 14:05:07 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Oleksandr <olekstysh@gmail.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    xen-devel@lists.xenproject.org, 
+    Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Henry Wang <Henry.Wang@arm.com>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>
+Subject: Re: [PATCH V2 2/3] xen/arm: Add handling of extended regions for
+ Dom0
+In-Reply-To: <a3f5707b-b161-1c94-ebe1-d6b8bbe11081@gmail.com>
+Message-ID: <alpine.DEB.2.21.2109221402420.17979@sstabellini-ThinkPad-T480s>
+References: <1631297924-8658-1-git-send-email-olekstysh@gmail.com> <1631297924-8658-3-git-send-email-olekstysh@gmail.com> <0a72559e-5742-dc33-1c8f-5903c50b27be@xen.org> <08294c53-109a-8544-3a23-85e034d2992d@gmail.com> <alpine.DEB.2.21.2109171451230.21985@sstabellini-ThinkPad-T480s>
+ <a993466f-1b7d-ceb3-aa3b-16f5f145b2fb@gmail.com> <a3f5707b-b161-1c94-ebe1-d6b8bbe11081@gmail.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam: Yes
+Content-Type: multipart/mixed; boundary="8323329-1843995332-1632344708=:17979"
 
-From: Mirela Grujic <mirela.grujic@greensocs.com>
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-This commit is a preparation to switch to a QAPI definition
-of the MachineInitPhase enum.
+--8323329-1843995332-1632344708=:17979
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-QAPI will generate enumeration constants prefixed with the
-MACHINE_INIT_PHASE_, so rename values accordingly.
+On Wed, 22 Sep 2021, Oleksandr wrote:
+> > > > > You will also need to cover "ranges" that will describe the BARs for
+> > > > > the PCI
+> > > > > devices.
+> > > > Good point.
+> > > Yes, very good point!
+> > > 
+> > > 
+> > > > Could you please clarify how to recognize whether it is a PCI
+> > > > device as long as PCI support is not merged? Or just to find any device
+> > > > nodes
+> > > > with non-empty "ranges" property
+> > > > and retrieve addresses?
+> > > Normally any bus can have a ranges property with the aperture and
+> > > possible address translations, including /amba (compatible =
+> > > "simple-bus"). However, in these cases dt_device_get_address already
+> > > takes care of it, see xen/common/device_tree.c:dt_device_get_address.
+> > > 
+> > > The PCI bus is special for 2 reasons:
+> > > - the ranges property has a different format
+> > > - the bus is hot-pluggable
+> > > 
+> > > So I think the only one that we need to treat specially is PCI.
+> > > 
+> > > As far as I am aware PCI is the only bus (or maybe just the only bus
+> > > that we support?) where ranges means the aperture.
+> > Thank you for the clarification. I need to find device node with non-empty
+> > ranges property
+> > (and make sure that device_type property is "pci"), after that I need to
+> > read the context of ranges property and translate it.
+> > 
+> > 
+> 
+> OK, I experimented with that and managed to parse ranges property for PCI host
+> bridge node.
+> 
+> I tested on my setup where the host device tree contains two PCI host bridge
+> nodes with the following:
+> 
+> pcie@fe000000 {
+> ...
+>             ranges = <0x1000000 0x0 0x0 0x0 0xfe100000 0x0 0x100000 0x2000000
+> 0x0 0xfe200000 0x0 0xfe200000 0x0 0x200000 0x2000000 0x0 0x30000000 0x0
+> 0x30000000 0x0 0x8000000 0x42000000 0x0 0x38000000 0x0 0x38000000 0x0
+> 0x8000000>;
+> ...
+> };
+> 
+> pcie@ee800000 {
+> ...
+>             ranges = <0x1000000 0x0 0x0 0x0 0xee900000 0x0 0x100000 0x2000000
+> 0x0 0xeea00000 0x0 0xeea00000 0x0 0x200000 0x2000000 0x0 0xc0000000 0x0
+> 0xc0000000 0x0 0x8000000 0x42000000 0x0 0xc8000000 0x0 0xc8000000 0x0
+> 0x8000000>;
+> ...
+> };
+> 
+> So Xen retrieves the *CPU addresses* from the ranges:
+> 
+> (XEN) dev /soc/pcie@fe000000 range_size 7 nr_ranges 4
+> (XEN) 0: addr=fe100000, size=100000
+> (XEN) 1: addr=fe200000, size=200000
+> (XEN) 2: addr=30000000, size=8000000
+> (XEN) 3: addr=38000000, size=8000000
+> (XEN) dev /soc/pcie@ee800000 range_size 7 nr_ranges 4
+> (XEN) 0: addr=ee900000, size=100000
+> (XEN) 1: addr=eea00000, size=200000
+> (XEN) 2: addr=c0000000, size=8000000
+> (XEN) 3: addr=c8000000, size=8000000
+> 
+> The code below covers ranges property in the context of finding memory holes
+> (to be squashed with current patch):
+> 
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index d37156a..7d20c10 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -834,6 +834,8 @@ static int __init find_memory_holes(struct meminfo
+> *ext_regions)
+>      {
+>          unsigned int naddr;
+>          u64 addr, size;
+> +        const __be32 *ranges;
+> +        u32 len;
+> 
+>          naddr = dt_number_of_address(np);
+> 
+> @@ -857,6 +859,41 @@ static int __init find_memory_holes(struct meminfo
+> *ext_regions)
+>                  goto out;
+>              }
+>          }
+> +
+> +        /*
+> +         * Also looking for non-empty ranges property which would likely mean
+> +         * that we deal with PCI host bridge device and the property here
+> +         * describes the BARs for the PCI devices.
+> +         */
 
-Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
----
- include/hw/qdev-core.h     | 10 +++++-----
- hw/core/machine-qmp-cmds.c |  2 +-
- hw/core/machine.c          |  6 +++---
- hw/core/qdev.c             |  2 +-
- hw/pci/pci.c               |  2 +-
- hw/usb/core.c              |  2 +-
- hw/virtio/virtio-iommu.c   |  2 +-
- monitor/hmp.c              |  2 +-
- softmmu/qdev-monitor.c     |  9 +++++----
- softmmu/vl.c               |  6 +++---
- ui/console.c               |  3 ++-
- 11 files changed, 24 insertions(+), 22 deletions(-)
+One thing to be careful is that ranges with a valid parameter is not
+only present in PCI busses. It can be present in amba and other
+simple-busses too. In that case the format for ranges in simpler as it
+doesn't have a "memory type" like PCI.
 
-diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
-index 34c8a7506a..859fd913bb 100644
---- a/include/hw/qdev-core.h
-+++ b/include/hw/qdev-core.h
-@@ -841,30 +841,30 @@ bool qdev_should_hide_device(QemuOpts *opts);
- 
- typedef enum MachineInitPhase {
-     /* current_machine is NULL.  */
--    PHASE_NO_MACHINE,
-+    MACHINE_INIT_PHASE_NO_MACHINE,
- 
-     /* current_machine is not NULL, but current_machine->accel is NULL.  */
--    PHASE_MACHINE_CREATED,
-+    MACHINE_INIT_PHASE_MACHINE_CREATED,
- 
-     /*
-      * current_machine->accel is not NULL, but the machine properties have
-      * not been validated and machine_class->init has not yet been called.
-      */
--    PHASE_ACCEL_CREATED,
-+    MACHINE_INIT_PHASE_ACCEL_CREATED,
- 
-     /*
-      * machine_class->init has been called, thus creating any embedded
-      * devices and validating machine properties.  Devices created at
-      * this time are considered to be cold-plugged.
-      */
--    PHASE_MACHINE_INITIALIZED,
-+    MACHINE_INIT_PHASE_INITIALIZED,
- 
-     /*
-      * QEMU is ready to start CPUs and devices created at this time
-      * are considered to be hot-plugged.  The monitor is not restricted
-      * to "preconfig" commands.
-      */
--    PHASE_MACHINE_READY,
-+    MACHINE_INIT_PHASE_READY,
- } MachineInitPhase;
- 
- extern bool phase_check(MachineInitPhase phase);
-diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
-index 216fdfaf3a..52168a3771 100644
---- a/hw/core/machine-qmp-cmds.c
-+++ b/hw/core/machine-qmp-cmds.c
-@@ -147,7 +147,7 @@ HotpluggableCPUList *qmp_query_hotpluggable_cpus(Error **errp)
- 
- void qmp_set_numa_node(NumaOptions *cmd, Error **errp)
- {
--    if (phase_check(PHASE_MACHINE_INITIALIZED)) {
-+    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-         error_setg(errp, "The command is permitted only before the machine has been created");
-         return;
-     }
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 067f42b528..9125c9aad0 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -1274,7 +1274,7 @@ void machine_run_board_init(MachineState *machine)
- 
-     accel_init_interfaces(ACCEL_GET_CLASS(machine->accelerator));
-     machine_class->init(machine);
--    phase_advance(PHASE_MACHINE_INITIALIZED);
-+    phase_advance(MACHINE_INIT_PHASE_INITIALIZED);
- }
- 
- static NotifierList machine_init_done_notifiers =
-@@ -1283,7 +1283,7 @@ static NotifierList machine_init_done_notifiers =
- void qemu_add_machine_init_done_notifier(Notifier *notify)
- {
-     notifier_list_add(&machine_init_done_notifiers, notify);
--    if (phase_check(PHASE_MACHINE_READY)) {
-+    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-         notify->notify(notify, NULL);
-     }
- }
-@@ -1306,7 +1306,7 @@ void qdev_machine_creation_done(void)
-      * ok, initial machine setup is done, starting from now we can
-      * only create hotpluggable devices
-      */
--    phase_advance(PHASE_MACHINE_READY);
-+    phase_advance(MACHINE_INIT_PHASE_READY);
-     qdev_assert_realized_properly();
- 
-     /* TODO: once all bus devices are qdevified, this should be done
-diff --git a/hw/core/qdev.c b/hw/core/qdev.c
-index cefc5eaa0a..c5fc704f55 100644
---- a/hw/core/qdev.c
-+++ b/hw/core/qdev.c
-@@ -904,7 +904,7 @@ static void device_initfn(Object *obj)
- {
-     DeviceState *dev = DEVICE(obj);
- 
--    if (phase_check(PHASE_MACHINE_READY)) {
-+    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-         dev->hotplugged = 1;
-         qdev_hot_added = true;
-     }
-diff --git a/hw/pci/pci.c b/hw/pci/pci.c
-index 23d2ae2ab2..5ed798b480 100644
---- a/hw/pci/pci.c
-+++ b/hw/pci/pci.c
-@@ -1102,7 +1102,7 @@ static PCIDevice *do_pci_register_device(PCIDevice *pci_dev,
-     address_space_init(&pci_dev->bus_master_as,
-                        &pci_dev->bus_master_container_region, pci_dev->name);
- 
--    if (phase_check(PHASE_MACHINE_READY)) {
-+    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-         pci_init_bus_master(pci_dev);
-     }
-     pci_dev->irq_state = 0;
-diff --git a/hw/usb/core.c b/hw/usb/core.c
-index 975f76250a..7a9a81c4fe 100644
---- a/hw/usb/core.c
-+++ b/hw/usb/core.c
-@@ -97,7 +97,7 @@ void usb_wakeup(USBEndpoint *ep, unsigned int stream)
-     USBDevice *dev = ep->dev;
-     USBBus *bus = usb_bus_from_device(dev);
- 
--    if (!phase_check(PHASE_MACHINE_READY)) {
-+    if (!phase_check(MACHINE_INIT_PHASE_READY)) {
-         /*
-          * This is machine init cold plug.  No need to wakeup anyone,
-          * all devices will be reset anyway.  And trying to wakeup can
-diff --git a/hw/virtio/virtio-iommu.c b/hw/virtio/virtio-iommu.c
-index 1b23e8e18c..b777a80be2 100644
---- a/hw/virtio/virtio-iommu.c
-+++ b/hw/virtio/virtio-iommu.c
-@@ -948,7 +948,7 @@ static int virtio_iommu_set_page_size_mask(IOMMUMemoryRegion *mr,
-      * accept it. Having a different masks is possible but the guest will use
-      * sub-optimal block sizes, so warn about it.
-      */
--    if (phase_check(PHASE_MACHINE_READY)) {
-+    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-         int new_granule = ctz64(new_mask);
-         int cur_granule = ctz64(cur_mask);
- 
-diff --git a/monitor/hmp.c b/monitor/hmp.c
-index d50c3124e1..ad012b0b22 100644
---- a/monitor/hmp.c
-+++ b/monitor/hmp.c
-@@ -216,7 +216,7 @@ static bool cmd_can_preconfig(const HMPCommand *cmd)
- 
- static bool cmd_available(const HMPCommand *cmd)
- {
--    return phase_check(PHASE_MACHINE_READY) || cmd_can_preconfig(cmd);
-+    return phase_check(MACHINE_INIT_PHASE_READY) || cmd_can_preconfig(cmd);
- }
- 
- static void help_cmd_dump_one(Monitor *mon,
-diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
-index 0705f00846..25275984bd 100644
---- a/softmmu/qdev-monitor.c
-+++ b/softmmu/qdev-monitor.c
-@@ -262,7 +262,7 @@ static DeviceClass *qdev_get_device_class(const char **driver, Error **errp)
- 
-     dc = DEVICE_CLASS(oc);
-     if (!dc->user_creatable ||
--        (phase_check(PHASE_MACHINE_READY) && !dc->hotpluggable)) {
-+        (phase_check(MACHINE_INIT_PHASE_READY) && !dc->hotpluggable)) {
-         error_setg(errp, QERR_INVALID_PARAMETER_VALUE, "driver",
-                    "a pluggable device type");
-         return NULL;
-@@ -649,7 +649,8 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
-         }
-     }
- 
--    if (phase_check(PHASE_MACHINE_READY) && bus && !qbus_is_hotpluggable(bus)) {
-+    if (phase_check(MACHINE_INIT_PHASE_READY) && bus &&
-+        !qbus_is_hotpluggable(bus)) {
-         error_setg(errp, QERR_BUS_NO_HOTPLUG, bus->name);
-         return NULL;
-     }
-@@ -663,7 +664,7 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
-     dev = qdev_new(driver);
- 
-     /* Check whether the hotplug is allowed by the machine */
--    if (phase_check(PHASE_MACHINE_READY)) {
-+    if (phase_check(MACHINE_INIT_PHASE_READY)) {
-         if (!qdev_hotplug_allowed(dev, errp)) {
-             goto err_del_dev;
-         }
-@@ -1011,7 +1012,7 @@ int qemu_global_option(const char *str)
- 
- bool qmp_command_available(const QmpCommand *cmd, Error **errp)
- {
--    if (!phase_check(PHASE_MACHINE_READY) &&
-+    if (!phase_check(MACHINE_INIT_PHASE_READY) &&
-         !(cmd->options & QCO_ALLOW_PRECONFIG)) {
-         error_setg(errp, "The command '%s' is permitted only after machine initialization has completed",
-                    cmd->name);
-diff --git a/softmmu/vl.c b/softmmu/vl.c
-index 55ab70eb97..d2552ba8ac 100644
---- a/softmmu/vl.c
-+++ b/softmmu/vl.c
-@@ -2692,7 +2692,7 @@ static void qemu_machine_creation_done(void)
- 
- void qmp_x_exit_preconfig(Error **errp)
- {
--    if (phase_check(PHASE_MACHINE_INITIALIZED)) {
-+    if (phase_check(MACHINE_INIT_PHASE_INITIALIZED)) {
-         error_setg(errp, "The command is permitted only before machine initialization");
-         return;
-     }
-@@ -3665,14 +3665,14 @@ void qemu_init(int argc, char **argv, char **envp)
-     qemu_apply_legacy_machine_options(machine_opts_dict);
-     qemu_apply_machine_options(machine_opts_dict);
-     qobject_unref(machine_opts_dict);
--    phase_advance(PHASE_MACHINE_CREATED);
-+    phase_advance(MACHINE_INIT_PHASE_MACHINE_CREATED);
- 
-     /*
-      * Note: uses machine properties such as kernel-irqchip, must run
-      * after qemu_apply_machine_options.
-      */
-     configure_accelerators(argv[0]);
--    phase_advance(PHASE_ACCEL_CREATED);
-+    phase_advance(MACHINE_INIT_PHASE_ACCEL_CREATED);
- 
-     /*
-      * Beware, QOM objects created before this point miss global and
-diff --git a/ui/console.c b/ui/console.c
-index eabbbc951c..b09b0f9760 100644
---- a/ui/console.c
-+++ b/ui/console.c
-@@ -1353,7 +1353,8 @@ static QemuConsole *new_console(DisplayState *ds, console_type_t console_type,
-     if (QTAILQ_EMPTY(&consoles)) {
-         s->index = 0;
-         QTAILQ_INSERT_TAIL(&consoles, s, next);
--    } else if (console_type != GRAPHIC_CONSOLE || phase_check(PHASE_MACHINE_READY)) {
-+    } else if (console_type != GRAPHIC_CONSOLE ||
-+               phase_check(MACHINE_INIT_PHASE_READY)) {
-         QemuConsole *last = QTAILQ_LAST(&consoles);
-         s->index = last->index + 1;
-         QTAILQ_INSERT_TAIL(&consoles, s, next);
--- 
-2.33.0
+When you get addresses from reg, bus ranges properties are automatically
+handled for you.
 
+All of this to say that a check on "ranges" is not enough because it
+might capture other non-PCI busses that have a different, simpler,
+ranges format. You want to check for "ranges" under a device_type =
+"pci"; node.
+
+
+> +        ranges = dt_get_property(np, "ranges", &len);
+> +        if ( ranges && len )
+> +        {
+> +            unsigned int range_size, nr_ranges;
+> +            int na, ns, pna;
+> +
+> +            pna = dt_n_addr_cells(np);
+> +            na = dt_child_n_addr_cells(np);
+> +            ns = dt_child_n_size_cells(np);
+> +            range_size = pna + na + ns;
+> +            nr_ranges = len / sizeof(__be32) / range_size;
+> +
+> +            for ( i = 0; i < nr_ranges; i++, ranges += range_size )
+> +            {
+> +                /* Skip the child address and get the parent (CPU) address */
+> +                addr = dt_read_number(ranges + na, pna);
+> +                size = dt_read_number(ranges + na + pna, ns);
+> +
+> +                start = addr & PAGE_MASK;
+> +                end = PAGE_ALIGN(addr + size);
+> +                res = rangeset_remove_range(mem_holes, start, end - 1);
+> +                if ( res )
+> +                {
+> +                    printk(XENLOG_ERR "Failed to remove:
+> %#"PRIx64"->%#"PRIx64"\n",
+> +                           start, end);
+> +                    goto out;
+> +                }
+> +            }
+> +        }
+>      }
+
+--8323329-1843995332-1632344708=:17979--
 
