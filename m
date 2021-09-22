@@ -7,39 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 815E9C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D821C433FE
 	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0DF561211
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A0DF561211
+	by mail.kernel.org (Postfix) with ESMTPS id 0E9E760EFF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0E9E760EFF
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193213.344140 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193214.344155 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeL-00041B-SI; Thu, 23 Sep 2021 00:31:41 +0000
+	id 1mTCeP-0004Va-76; Thu, 23 Sep 2021 00:31:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193213.344140; Thu, 23 Sep 2021 00:31:41 +0000
+Received: by outflank-mailman (output) from mailman id 193214.344155; Thu, 23 Sep 2021 00:31:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeL-00040J-M2; Thu, 23 Sep 2021 00:31:41 +0000
-Received: by outflank-mailman (input) for mailman id 193213;
- Thu, 23 Sep 2021 00:31:40 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mTCeP-0004VR-3d; Thu, 23 Sep 2021 00:31:45 +0000
+Received: by outflank-mailman (input) for mailman id 193214;
+ Thu, 23 Sep 2021 00:31:44 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fO2a=ON=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mTCeK-0003xO-8a
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:40 +0000
+ id 1mTCeO-0003xN-Mb
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:44 +0000
 Received: from beetle.greensocs.com (unknown [5.135.226.135])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 333be660-3c1a-4c30-818c-689c9aa597fb;
- Thu, 23 Sep 2021 00:31:39 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 9ce81cae-1c05-11ec-b9f4-12813bfff9fa;
+ Thu, 23 Sep 2021 00:31:38 +0000 (UTC)
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 29DC821ECF;
- Wed, 22 Sep 2021 16:15:57 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 6B2F521EB7;
+ Wed, 22 Sep 2021 16:15:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 333be660-3c1a-4c30-818c-689c9aa597fb
+X-Inumbo-ID: 9ce81cae-1c05-11ec-b9f4-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327359;
+	s=mail; t=1632327347;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YFwTgaEumzc2XGbjK4hpWpdj4pZUzdb1skxz4Vmg8i8=;
-	b=J+Wmqk4a8kuzHCMVCeIGgJjNaAhGIf80oYCh+/fvuoSlwd8WukKbcCqGi6wVcYUIS4uQKG
-	/a8dur7Nk0YA6/FfoYgSVEqf/P0POAC01x1RLhg1ZUWOh0CgUNQ4C0nG1dSJsSu+dGdi1N
-	f1rziCvvT/vfiWxVDVTEbOMcSei2Y0c=
+	bh=uO+rxeU8HZHEUI7sNPCnX4N20yxgThgHilFwN01tQgY=;
+	b=4nwd0mKYOh88Bq4/k8c2ah+UaLuLdmXU2GInH88kJxYAg7EbL+YtSjZJK2c1dGQBJKmftg
+	4vAVxgxK4VmkfrqkOGJ0zDbZ2nOewcMfN23UNSDTJ+uvKx1YBbYpqTbVYD/e/IUguDE62+
+	uTYcsOtlMDJL+LNvRXe+uEKGS6FD+Ew=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -90,9 +91,9 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
 	mirela.grujic@greensocs.com,
 	edgari@xilinx.com,
 	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 12/16] add x-sysbus-mmio-map qmp command
-Date: Wed, 22 Sep 2021 18:14:01 +0200
-Message-Id: <20210922161405.140018-13-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 02/16] qapi: Implement query-machine-phase QMP command
+Date: Wed, 22 Sep 2021 18:13:51 +0200
+Message-Id: <20210922161405.140018-3-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -100,125 +101,166 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam: Yes
 
-This command allows to map an mmio region of sysbus device onto
-the system memory. Its behavior mimics the sysbus_mmio_map()
-function apart from the automatic unmap (the C function unmaps
-the region if it is already mapped).
-For the qmp function we consider it is an error to try to map
-an already mapped function. If unmapping is required, it is
-probably better to add a sysbus-mmip-unmap function.
+From: Mirela Grujic <mirela.grujic@greensocs.com>
 
-This command is still experimental (hence the x prefix), as it
-is related to the sysbus device creation through qmp commands.
+The command returns current machine initialization phase.
+From now on, the MachineInitPhase enum is generated from the
+QAPI schema.
 
-In future, we expect to have to handle the overlap/priority
-parameter but also multiple mapping of one mmio. For some
-devices, one mmio is mapped several times at different addresses on
-the bus (which is not supported by sysbus_mmio_map() function and
-requires the use of memory region aliases).
-
-Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
 ---
+ qapi/machine.json          | 56 ++++++++++++++++++++++++++++++++++++++
+ include/hw/qdev-core.h     | 30 ++------------------
+ hw/core/machine-qmp-cmds.c |  9 ++++++
+ hw/core/qdev.c             |  5 ++++
+ 4 files changed, 72 insertions(+), 28 deletions(-)
 
-Note: this qmp command is required to be able to build a machine from
-scratch as there is no qmp-way of doing a memory mapping today.
-
-We've added the command into qapi/qdev.json section. It does not seem to
-have any really adequate section yet. Any idea ? should we create for
-example a new one: qapi/sysbus.json or qapi/memory.json ?
----
- qapi/qdev.json   | 21 +++++++++++++++++++++
- hw/core/sysbus.c | 41 +++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 62 insertions(+)
-
-diff --git a/qapi/qdev.json b/qapi/qdev.json
-index ad669ae175..dfc1104197 100644
---- a/qapi/qdev.json
-+++ b/qapi/qdev.json
-@@ -125,3 +125,24 @@
- ##
- { 'event': 'DEVICE_DELETED',
-   'data': { '*device': 'str', 'path': 'str' } }
+diff --git a/qapi/machine.json b/qapi/machine.json
+index 157712f006..969d37fb03 100644
+--- a/qapi/machine.json
++++ b/qapi/machine.json
+@@ -1312,3 +1312,59 @@
+      '*cores': 'int',
+      '*threads': 'int',
+      '*maxcpus': 'int' } }
 +
 +##
-+# @x-sysbus-mmio-map:
++# @MachineInitPhase:
 +#
-+# Map a sysbus device mmio onto the main system bus.
++# Enumeration of machine initialization phases.
 +#
-+# @device: the device's QOM path
++# @no-machine: machine does not exist
 +#
-+# @mmio: The mmio number to be mapped (defaults to 0).
++# @machine-created: machine is created, but its accelerator is not
 +#
-+# @addr: The base address for the mapping.
++# @accel-created: accelerator is created, but the machine properties have not
++#                 been validated and machine initialization is not done yet
++#
++# @initialized: machine is initialized, thus creating any embedded devices and
++#               validating machine properties. Devices created at this time are
++#               considered to be cold-plugged.
++#
++# @ready: QEMU is ready to start CPUs and devices created at this time are
++#         considered to be hot-plugged. The monitor is not restricted to
++#         "preconfig" commands.
++#
++# Since: 6.2
++##
++{ 'enum': 'MachineInitPhase',
++  'data': [ 'no-machine', 'machine-created', 'accel-created', 'initialized',
++            'ready' ] }
++
++##
++# @MachineInitPhaseStatus:
++#
++# Information about machine initialization phase
++#
++# @phase: the machine initialization phase
++#
++# Since: 6.2
++##
++{ 'struct': 'MachineInitPhaseStatus',
++  'data': { 'phase': 'MachineInitPhase' } }
++
++##
++# @query-machine-phase:
++#
++# Return machine initialization phase
 +#
 +# Since: 6.2
 +#
-+# Returns: Nothing on success
++# Returns: MachineInitPhaseStatus
++#
++# Example:
++#
++# -> { "execute": "query-machine-phase" }
++# <- { "return": { "phase": "initialized" } }
 +#
 +##
-+
-+{ 'command': 'x-sysbus-mmio-map',
-+  'data': {'device': 'str', '*mmio': 'uint8', 'addr': 'uint64'},
-+  'allow-preconfig' : true }
-diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
-index aaae8e23cc..b0891f37b6 100644
---- a/hw/core/sysbus.c
-+++ b/hw/core/sysbus.c
-@@ -23,6 +23,7 @@
- #include "hw/sysbus.h"
- #include "monitor/monitor.h"
- #include "exec/address-spaces.h"
-+#include "qapi/qapi-commands-qdev.h"
++{ 'command': 'query-machine-phase', 'returns': 'MachineInitPhaseStatus',
++             'allow-preconfig': true }
+diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
+index 859fd913bb..800eda8f54 100644
+--- a/include/hw/qdev-core.h
++++ b/include/hw/qdev-core.h
+@@ -1,6 +1,7 @@
+ #ifndef QDEV_CORE_H
+ #define QDEV_CORE_H
  
- static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
- static char *sysbus_get_fw_dev_path(DeviceState *dev);
-@@ -154,6 +155,46 @@ static void sysbus_mmio_map_common(SysBusDevice *dev, int n, hwaddr addr,
-     }
++#include "qapi/qapi-types-machine.h"
+ #include "qemu/queue.h"
+ #include "qemu/bitmap.h"
+ #include "qemu/rcu.h"
+@@ -839,35 +840,8 @@ void device_listener_unregister(DeviceListener *listener);
+  */
+ bool qdev_should_hide_device(QemuOpts *opts);
+ 
+-typedef enum MachineInitPhase {
+-    /* current_machine is NULL.  */
+-    MACHINE_INIT_PHASE_NO_MACHINE,
+-
+-    /* current_machine is not NULL, but current_machine->accel is NULL.  */
+-    MACHINE_INIT_PHASE_MACHINE_CREATED,
+-
+-    /*
+-     * current_machine->accel is not NULL, but the machine properties have
+-     * not been validated and machine_class->init has not yet been called.
+-     */
+-    MACHINE_INIT_PHASE_ACCEL_CREATED,
+-
+-    /*
+-     * machine_class->init has been called, thus creating any embedded
+-     * devices and validating machine properties.  Devices created at
+-     * this time are considered to be cold-plugged.
+-     */
+-    MACHINE_INIT_PHASE_INITIALIZED,
+-
+-    /*
+-     * QEMU is ready to start CPUs and devices created at this time
+-     * are considered to be hot-plugged.  The monitor is not restricted
+-     * to "preconfig" commands.
+-     */
+-    MACHINE_INIT_PHASE_READY,
+-} MachineInitPhase;
+-
+ extern bool phase_check(MachineInitPhase phase);
+ extern void phase_advance(MachineInitPhase phase);
++extern MachineInitPhase phase_get(void);
+ 
+ #endif
+diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
+index 52168a3771..d3b9a04855 100644
+--- a/hw/core/machine-qmp-cmds.c
++++ b/hw/core/machine-qmp-cmds.c
+@@ -204,3 +204,12 @@ MemdevList *qmp_query_memdev(Error **errp)
+     object_child_foreach(obj, query_memdev, &list);
+     return list;
+ }
++
++MachineInitPhaseStatus *qmp_query_machine_phase(Error **errp)
++{
++    MachineInitPhaseStatus *status = g_malloc0(sizeof(*status));
++
++    status->phase = phase_get();
++
++    return status;
++}
+diff --git a/hw/core/qdev.c b/hw/core/qdev.c
+index c5fc704f55..d83f1c029a 100644
+--- a/hw/core/qdev.c
++++ b/hw/core/qdev.c
+@@ -1150,6 +1150,11 @@ void phase_advance(MachineInitPhase phase)
+     machine_phase = phase;
  }
  
-+void qmp_x_sysbus_mmio_map(const char *device, bool has_mmio, uint8_t mmio,
-+                           uint64_t addr, Error **errp)
++MachineInitPhase phase_get(void)
 +{
-+    Object *obj = object_resolve_path_type(device, TYPE_SYS_BUS_DEVICE, NULL);
-+    SysBusDevice *dev;
-+
-+    if (phase_get() != MACHINE_INIT_PHASE_INITIALIZED) {
-+        error_setg(errp, "The command is permitted only when "
-+                         "the machine is in initialized phase");
-+        return;
-+    }
-+
-+    if (obj == NULL) {
-+        error_setg(errp, "Device '%s' not found", device);
-+        return;
-+    }
-+
-+    dev = SYS_BUS_DEVICE(obj);
-+    if (!has_mmio) {
-+        mmio = 0;
-+    }
-+    if (mmio >= dev->num_mmio) {
-+        error_setg(errp, "MMIO index '%u' is out of range", mmio);
-+        return;
-+    }
-+
-+    if (dev->mmio[mmio].addr != (hwaddr)-1) {
-+        error_setg(errp, "MMIO index '%u' is already mapped", mmio);
-+        return;
-+    }
-+
-+    if (!memory_region_try_add_subregion(get_system_memory(), addr,
-+                                         dev->mmio[mmio].memory, 0,
-+                                         errp)) {
-+        return;
-+    }
-+
-+    dev->mmio[mmio].addr = addr;
++    return machine_phase;
 +}
 +
- void sysbus_mmio_unmap(SysBusDevice *dev, int n)
- {
-     assert(n >= 0 && n < dev->num_mmio);
+ static const TypeInfo device_type_info = {
+     .name = TYPE_DEVICE,
+     .parent = TYPE_OBJECT,
 -- 
 2.33.0
 
