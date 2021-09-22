@@ -7,39 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81DE4C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 815E9C433F5
 	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0C4061019
+	by mail.kernel.org (Postfix) with ESMTPS id A0DF561211
 	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A0C4061019
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A0DF561211
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193215.344167 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193213.344140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeQ-0004nW-Hj; Thu, 23 Sep 2021 00:31:46 +0000
+	id 1mTCeL-00041B-SI; Thu, 23 Sep 2021 00:31:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193215.344167; Thu, 23 Sep 2021 00:31:46 +0000
+Received: by outflank-mailman (output) from mailman id 193213.344140; Thu, 23 Sep 2021 00:31:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeQ-0004n4-CN; Thu, 23 Sep 2021 00:31:46 +0000
-Received: by outflank-mailman (input) for mailman id 193215;
- Thu, 23 Sep 2021 00:31:45 +0000
+	id 1mTCeL-00040J-M2; Thu, 23 Sep 2021 00:31:41 +0000
+Received: by outflank-mailman (input) for mailman id 193213;
+ Thu, 23 Sep 2021 00:31:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fO2a=ON=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mTCeP-0003xO-6B
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:45 +0000
+ id 1mTCeK-0003xO-8a
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:40 +0000
 Received: from beetle.greensocs.com (unknown [5.135.226.135])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f1eaeec4-e2e9-4cc1-87ac-df7a2884e1e9;
- Thu, 23 Sep 2021 00:31:38 +0000 (UTC)
+ id 333be660-3c1a-4c30-818c-689c9aa597fb;
+ Thu, 23 Sep 2021 00:31:39 +0000 (UTC)
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 16B1021EBD;
- Wed, 22 Sep 2021 16:15:49 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 29DC821ECF;
+ Wed, 22 Sep 2021 16:15:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f1eaeec4-e2e9-4cc1-87ac-df7a2884e1e9
+X-Inumbo-ID: 333be660-3c1a-4c30-818c-689c9aa597fb
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327349;
+	s=mail; t=1632327359;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=XKa7YpvCaHNP7B/Gx81xxfSEDEFxmlko5ypNT6F1RPs=;
-	b=wtOmf1TGRi5+LsCZ7dTaWkdafLDUIQXjxY7cZKMSJPwbDnsncS8770qaxVmTeU8tVxHdsy
-	98gXhs3KUKW1OrVqW4NQVrvc+Q9klOB56ADRcupW0/lzsumJ9QGaU1grDQEcXmiK54ZKOs
-	5X4IsCXiqP+1fadiUoWHXRzy0Q+v+Wo=
+	bh=YFwTgaEumzc2XGbjK4hpWpdj4pZUzdb1skxz4Vmg8i8=;
+	b=J+Wmqk4a8kuzHCMVCeIGgJjNaAhGIf80oYCh+/fvuoSlwd8WukKbcCqGi6wVcYUIS4uQKG
+	/a8dur7Nk0YA6/FfoYgSVEqf/P0POAC01x1RLhg1ZUWOh0CgUNQ4C0nG1dSJsSu+dGdi1N
+	f1rziCvvT/vfiWxVDVTEbOMcSei2Y0c=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -90,9 +90,9 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
 	mirela.grujic@greensocs.com,
 	edgari@xilinx.com,
 	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 04/16] softmmu/qdev-monitor: add error handling in qdev_set_id
-Date: Wed, 22 Sep 2021 18:13:53 +0200
-Message-Id: <20210922161405.140018-5-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 12/16] add x-sysbus-mmio-map qmp command
+Date: Wed, 22 Sep 2021 18:14:01 +0200
+Message-Id: <20210922161405.140018-13-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -100,142 +100,125 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam: Yes
 
-qdev_set_id() is mostly used when the user adds a device (using
--device cli option or device_add qmp command). This commit adds
-an error parameter to handle the case where the given id is
-already taken.
+This command allows to map an mmio region of sysbus device onto
+the system memory. Its behavior mimics the sysbus_mmio_map()
+function apart from the automatic unmap (the C function unmaps
+the region if it is already mapped).
+For the qmp function we consider it is an error to try to map
+an already mapped function. If unmapping is required, it is
+probably better to add a sysbus-mmip-unmap function.
 
-Also document the function and add a return value in order to
-be able to capture success/failure: the function now returns the
-id in case of success, or NULL in case of failure.
+This command is still experimental (hence the x prefix), as it
+is related to the sysbus device creation through qmp commands.
 
-The commit modifies the 2 calling places (qdev-monitor and
-xen-legacy-backend) to add the error object parameter.
-
-Note that the id is, right now, guaranteed to be unique because
-all ids came from the "device" QemuOptsList where the id is used
-as key. This addition is a preparation for a future commit which
-will relax the uniqueness.
+In future, we expect to have to handle the overlap/priority
+parameter but also multiple mapping of one mmio. For some
+devices, one mmio is mapped several times at different addresses on
+the bus (which is not supported by sysbus_mmio_map() function and
+requires the use of memory region aliases).
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
- include/monitor/qdev.h      | 25 +++++++++++++++++++++++-
- hw/xen/xen-legacy-backend.c |  3 ++-
- softmmu/qdev-monitor.c      | 38 +++++++++++++++++++++++++++----------
- 3 files changed, 54 insertions(+), 12 deletions(-)
 
-diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
-index eaa947d73a..23c31f5296 100644
---- a/include/monitor/qdev.h
-+++ b/include/monitor/qdev.h
-@@ -9,6 +9,29 @@ void qmp_device_add(QDict *qdict, QObject **ret_data, Error **errp);
- 
- int qdev_device_help(QemuOpts *opts);
- DeviceState *qdev_device_add(QemuOpts *opts, Error **errp);
--void qdev_set_id(DeviceState *dev, const char *id);
+Note: this qmp command is required to be able to build a machine from
+scratch as there is no qmp-way of doing a memory mapping today.
+
+We've added the command into qapi/qdev.json section. It does not seem to
+have any really adequate section yet. Any idea ? should we create for
+example a new one: qapi/sysbus.json or qapi/memory.json ?
+---
+ qapi/qdev.json   | 21 +++++++++++++++++++++
+ hw/core/sysbus.c | 41 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 62 insertions(+)
+
+diff --git a/qapi/qdev.json b/qapi/qdev.json
+index ad669ae175..dfc1104197 100644
+--- a/qapi/qdev.json
++++ b/qapi/qdev.json
+@@ -125,3 +125,24 @@
+ ##
+ { 'event': 'DEVICE_DELETED',
+   'data': { '*device': 'str', 'path': 'str' } }
 +
-+/**
-+ * qdev_set_id: parent the device and set its id if provided.
-+ * @dev: device to handle
-+ * @id: id to be given to the device, or NULL.
-+ *
-+ * Returns: the id of the device in case of success; otherwise NULL.
-+ *
-+ * @dev must be unrealized, unparented and must not have an id.
-+ *
-+ * If @id is non-NULL, this function tries to setup @dev qom path as
-+ * "/peripheral/id". If @id is already taken, it fails. If it succeeds,
-+ * the id field of @dev is set to @id (@dev now owns the given @id
-+ * parameter).
-+ *
-+ * If @id is NULL, this function generates a unique name and setups @dev
-+ * qom path as "/peripheral-anon/name". This name is not set as the id
-+ * of @dev.
-+ *
-+ * Upon success, it returns the id/name (generated or provided). The
-+ * returned string is owned by the corresponding child property and must
-+ * not be freed by the caller.
-+ */
-+const char *qdev_set_id(DeviceState *dev, const char *id, Error **errp);
++##
++# @x-sysbus-mmio-map:
++#
++# Map a sysbus device mmio onto the main system bus.
++#
++# @device: the device's QOM path
++#
++# @mmio: The mmio number to be mapped (defaults to 0).
++#
++# @addr: The base address for the mapping.
++#
++# Since: 6.2
++#
++# Returns: Nothing on success
++#
++##
++
++{ 'command': 'x-sysbus-mmio-map',
++  'data': {'device': 'str', '*mmio': 'uint8', 'addr': 'uint64'},
++  'allow-preconfig' : true }
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index aaae8e23cc..b0891f37b6 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -23,6 +23,7 @@
+ #include "hw/sysbus.h"
+ #include "monitor/monitor.h"
+ #include "exec/address-spaces.h"
++#include "qapi/qapi-commands-qdev.h"
  
- #endif
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index dd8ae1452d..f541cfa0e9 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -276,7 +276,8 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
-     xendev = g_malloc0(ops->size);
-     object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
-     OBJECT(xendev)->free = g_free;
--    qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev));
-+    qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
-+                &error_fatal);
-     qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
-     object_unref(OBJECT(xendev));
- 
-diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
-index 25275984bd..0007698ff3 100644
---- a/softmmu/qdev-monitor.c
-+++ b/softmmu/qdev-monitor.c
-@@ -578,22 +578,34 @@ static BusState *qbus_find(const char *path, Error **errp)
-     return bus;
+ static void sysbus_dev_print(Monitor *mon, DeviceState *dev, int indent);
+ static char *sysbus_get_fw_dev_path(DeviceState *dev);
+@@ -154,6 +155,46 @@ static void sysbus_mmio_map_common(SysBusDevice *dev, int n, hwaddr addr,
+     }
  }
  
--void qdev_set_id(DeviceState *dev, const char *id)
-+const char *qdev_set_id(DeviceState *dev, const char *id, Error **errp)
- {
-+    ObjectProperty *prop;
++void qmp_x_sysbus_mmio_map(const char *device, bool has_mmio, uint8_t mmio,
++                           uint64_t addr, Error **errp)
++{
++    Object *obj = object_resolve_path_type(device, TYPE_SYS_BUS_DEVICE, NULL);
++    SysBusDevice *dev;
 +
-+    assert(!dev->id && !dev->realized);
-+
-+    /*
-+     * object_property_[try_]add_child() below will assert the device
-+     * has no parent
-+     */
-     if (id) {
--        dev->id = id;
--    }
--
--    if (dev->id) {
--        object_property_add_child(qdev_get_peripheral(), dev->id,
--                                  OBJECT(dev));
-+        prop = object_property_try_add_child(qdev_get_peripheral(), id,
-+                                             OBJECT(dev), NULL);
-+        if (prop) {
-+            dev->id = id;
-+        } else {
-+            error_setg(errp, "Duplicate device ID '%s'", id);
-+            return NULL;
-+        }
-     } else {
-         static int anon_count;
-         gchar *name = g_strdup_printf("device[%d]", anon_count++);
--        object_property_add_child(qdev_get_peripheral_anon(), name,
--                                  OBJECT(dev));
-+        prop = object_property_add_child(qdev_get_peripheral_anon(), name,
-+                                         OBJECT(dev));
-         g_free(name);
-     }
-+
-+    return prop->name;
- }
- 
- DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
-@@ -677,7 +689,13 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
-         }
-     }
- 
--    qdev_set_id(dev, qemu_opts_id(opts));
-+    /*
-+     * set dev's parent and register its id.
-+     * If it fails it means the id is already taken.
-+     */
-+    if (!qdev_set_id(dev, qemu_opts_id(opts), errp)) {
-+        goto err_del_dev;
++    if (phase_get() != MACHINE_INIT_PHASE_INITIALIZED) {
++        error_setg(errp, "The command is permitted only when "
++                         "the machine is in initialized phase");
++        return;
 +    }
- 
-     /* set properties */
-     if (qemu_opt_foreach(opts, set_property, dev, errp)) {
++
++    if (obj == NULL) {
++        error_setg(errp, "Device '%s' not found", device);
++        return;
++    }
++
++    dev = SYS_BUS_DEVICE(obj);
++    if (!has_mmio) {
++        mmio = 0;
++    }
++    if (mmio >= dev->num_mmio) {
++        error_setg(errp, "MMIO index '%u' is out of range", mmio);
++        return;
++    }
++
++    if (dev->mmio[mmio].addr != (hwaddr)-1) {
++        error_setg(errp, "MMIO index '%u' is already mapped", mmio);
++        return;
++    }
++
++    if (!memory_region_try_add_subregion(get_system_memory(), addr,
++                                         dev->mmio[mmio].memory, 0,
++                                         errp)) {
++        return;
++    }
++
++    dev->mmio[mmio].addr = addr;
++}
++
+ void sysbus_mmio_unmap(SysBusDevice *dev, int n)
+ {
+     assert(n >= 0 && n < dev->num_mmio);
 -- 
 2.33.0
 
