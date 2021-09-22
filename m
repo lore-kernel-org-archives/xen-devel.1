@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
 	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8EB40C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 23:21:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DF73C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 23:21:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F9D061153
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 23:21:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0F9D061153
+	by mail.kernel.org (Postfix) with ESMTPS id 8FD5061153
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 23:21:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8FD5061153
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193162.344050 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193163.344067 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTBYb-00088l-4U; Wed, 22 Sep 2021 23:21:41 +0000
+	id 1mTBYg-0000Ei-Ct; Wed, 22 Sep 2021 23:21:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193162.344050; Wed, 22 Sep 2021 23:21:41 +0000
+Received: by outflank-mailman (output) from mailman id 193163.344067; Wed, 22 Sep 2021 23:21:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTBYa-00087M-W6; Wed, 22 Sep 2021 23:21:40 +0000
-Received: by outflank-mailman (input) for mailman id 193162;
- Wed, 22 Sep 2021 23:21:40 +0000
+	id 1mTBYg-0000EZ-9c; Wed, 22 Sep 2021 23:21:46 +0000
+Received: by outflank-mailman (input) for mailman id 193163;
+ Wed, 22 Sep 2021 23:21:44 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=D6HN=OM=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mTBYZ-000854-KW
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 23:21:40 +0000
+ id 1mTBYe-000854-GD
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 23:21:44 +0000
 Received: from beetle.greensocs.com (unknown [5.135.226.135])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d5839110-1bfb-11ec-b9f2-12813bfff9fa;
+ id d5839112-1bfb-11ec-b9f2-12813bfff9fa;
  Wed, 22 Sep 2021 23:21:38 +0000 (UTC)
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id F1D0E21EC1;
- Wed, 22 Sep 2021 16:15:49 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 3C58E21ECD;
+ Wed, 22 Sep 2021 16:15:56 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5839110-1bfb-11ec-b9f2-12813bfff9fa
+X-Inumbo-ID: d5839112-1bfb-11ec-b9f2-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327350;
+	s=mail; t=1632327356;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=jPWHcx8frG0Bxx16IuAMBta1shU2F7IxandpxY+0m3o=;
-	b=R2JacUH5kcSgL3a0GBx59skiUZLwlJrwuwsPCJPKp/jfsGnSFIs+eudHgACISfwNN8yzup
-	PCA4EJ5Gc/WoYe//HHjbUL42WxmqWvbtS6uTYjxX75b2H+nsza1Ny7Oyp1hqgAG32pAcXI
-	W+J++3yJDsAwelYtREZpkVK9EkRGLEc=
+	bh=83vzCH47KASlUcuFQINQpuff64c+MWa6MS19Qg8Yxnk=;
+	b=P7hcyu+pxVIWKnhY3fU1nC0/ApGUVDeZbSeiHxcpgkCZWg35zWms2xJ3anjKnSVUoSAD8c
+	H+qh2umF75EUBiBBC7qMvIrQtuaCSddKC0OjRXsV4MQS+CTdyIeI2BmpDSKe3DXTKRIt0Q
+	VCthFEhyqAq/QRJQzHUCvH2QWSOp70s=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -91,9 +91,9 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
 	mirela.grujic@greensocs.com,
 	edgari@xilinx.com,
 	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 05/16] qdev-monitor: prevent conflicts between qmp/device_add and cli/-device
-Date: Wed, 22 Sep 2021 18:13:54 +0200
-Message-Id: <20210922161405.140018-6-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 11/16] softmmu/memory: add memory_region_try_add_subregion function
+Date: Wed, 22 Sep 2021 18:14:00 +0200
+Message-Id: <20210922161405.140018-12-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -101,73 +101,110 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam: Yes
 
-This commit prepares to extend device_add qmp command when using
--preconfig option.
+It allows to try to add a subregion to a memory region with error
+handling. Like memory_region_add_subregion_overlap, it handles
+priority as well.
+Apart the error handling, the behavior is the same. It can be used
+to do the simple memory_region_add_subregion() (with no overlap) by
+setting the priority parameter to 0.
 
-In order to avoid conflicts with the cli -device option handling, we
-need to handle some special case with the QemuOpts.
-The qemu_device_opts is traversed when switching from
-MACHINE_INIT_PHASE_INITIALIZED to MACHINE_INIT_PHASE_READY in order
-to create any device specified by cli -device. Until now any
-device_add qmp command was issued after that point so there was no
-problem.
-
-If we execute the qmp command before the MACHINE_INIT_PHASE_READY
-phase we need to discard the QemuOpts from the qemu_device_opts in
-order to avoid the cli -device code to try to create the device
-again.
-
-This commit preserves the opts behavior regarding the devices added
-in 'ready' phase by the QMP command device_add.
+This commit is a preparation to further use this function in the
+context of qmp command which needs error handling support.
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
 
-Although we keep the original behavior for QMP commands issued when
-the machine is ready (only authorized case so far), we are not sure
-it is necessary: keeping the opts in the list is not needed anymore
-to ensure the id uniqueness of devices but it has the 2 following
-consequences:
-
-1. the device opts stay in the QemuOptsList. Is this list needed
-   after traversing the device cli options?
-
-2. the DeviceState "opts" field is set. Do we need to keep it after
-   the device is realized ?
-
-Any information on this will be appreciated.
+Adding a new function is obviously not ideal. But there is ~900
+occurrences of memory_region_add_subregion[_overlap] calls in the code
+base. We do not really see an alternative here.
 ---
- softmmu/qdev-monitor.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ include/exec/memory.h | 22 ++++++++++++++++++++++
+ softmmu/memory.c      | 22 ++++++++++++++--------
+ 2 files changed, 36 insertions(+), 8 deletions(-)
 
-diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
-index 0007698ff3..834f2b56b5 100644
---- a/softmmu/qdev-monitor.c
-+++ b/softmmu/qdev-monitor.c
-@@ -848,6 +848,23 @@ void qmp_device_add(QDict *qdict, QObject **ret_data, Error **errp)
-     if (!dev) {
-         qemu_opts_del(opts);
-         return;
-+    } else if (!phase_check(MACHINE_INIT_PHASE_READY)) {
-+        /*
-+         * Always delete the related opts in case the device was created
-+         * before handling of cli -device arguments:
-+         * We do not want a device added by the qmp command to be handled
-+         * again by the cli -device creation code. This does not break
-+         * the ID uniqueness because it is checked in qdev_device_add().
-+         *
-+         * Note: We check the phase in order to keep the legacy behavior:
-+         * in the machine ready phase case, the QemuOpts remains in the list
-+         * (and the dev->opts field is kept).
-+         * If it happens it was done only to ensure the ID uniqueness and
-+         * the QemuOpts is never used after this point: then we could
-+         * remove QemuOpts in any phase.
-+         */
-+        dev->opts = NULL;
-+        qemu_opts_del(opts);
-     }
-     object_unref(OBJECT(dev));
+diff --git a/include/exec/memory.h b/include/exec/memory.h
+index c3d417d317..422e1eda67 100644
+--- a/include/exec/memory.h
++++ b/include/exec/memory.h
+@@ -2162,6 +2162,28 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+                                          MemoryRegion *subregion,
+                                          int priority);
+ 
++/**
++ * memory_region_try_add_subregion: Add a subregion to a container
++ *                                  with error handling.
++ *
++ * Behaves like memory_region_add_subregion_overlap(), but errors are
++ * reported if the subregion cannot be added.
++ *
++ * @mr: the region to contain the new subregion; must be a container
++ *      initialized with memory_region_init().
++ * @offset: the offset relative to @mr where @subregion is added.
++ * @subregion: the subregion to be added.
++ * @priority: used for resolving overlaps; highest priority wins.
++ * @errp: pointer to Error*, to store an error if it happens.
++ *
++ * Returns: True in case of success, false otherwise.
++ */
++bool memory_region_try_add_subregion(MemoryRegion *mr,
++                                     hwaddr offset,
++                                     MemoryRegion *subregion,
++                                     int priority,
++                                     Error **errp);
++
+ /**
+  * memory_region_get_ram_addr: Get the ram address associated with a memory
+  *                             region
+diff --git a/softmmu/memory.c b/softmmu/memory.c
+index bfedaf9c4d..eac61f8236 100644
+--- a/softmmu/memory.c
++++ b/softmmu/memory.c
+@@ -2513,22 +2513,28 @@ done:
+     memory_region_transaction_commit();
  }
+ 
+-static void memory_region_add_subregion_common(MemoryRegion *mr,
+-                                               hwaddr offset,
+-                                               MemoryRegion *subregion)
++bool memory_region_try_add_subregion(MemoryRegion *mr,
++                                     hwaddr offset,
++                                     MemoryRegion *subregion,
++                                     int priority,
++                                     Error **errp)
+ {
+-    assert(!subregion->container);
++    if (subregion->container) {
++        error_setg(errp, "The memory region is already in another region");
++        return false;
++    }
++    subregion->priority = priority;
+     subregion->container = mr;
+     subregion->addr = offset;
+     memory_region_update_container_subregions(subregion);
++    return true;
+ }
+ 
+ void memory_region_add_subregion(MemoryRegion *mr,
+                                  hwaddr offset,
+                                  MemoryRegion *subregion)
+ {
+-    subregion->priority = 0;
+-    memory_region_add_subregion_common(mr, offset, subregion);
++    memory_region_try_add_subregion(mr, offset, subregion, 0, &error_abort);
+ }
+ 
+ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+@@ -2536,8 +2542,8 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+                                          MemoryRegion *subregion,
+                                          int priority)
+ {
+-    subregion->priority = priority;
+-    memory_region_add_subregion_common(mr, offset, subregion);
++    memory_region_try_add_subregion(mr, offset, subregion, priority,
++                                    &error_abort);
+ }
+ 
+ void memory_region_del_subregion(MemoryRegion *mr,
 -- 
 2.33.0
 
