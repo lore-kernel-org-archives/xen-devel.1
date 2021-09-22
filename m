@@ -2,45 +2,44 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA917C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 22:11:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 417AEC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 22:13:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 216626109E
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 22:11:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 216626109E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0D9FE60F3A
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 22:13:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0D9FE60F3A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193128.343990 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193140.344013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTASr-0006A3-Gk; Wed, 22 Sep 2021 22:11:41 +0000
+	id 1mTAUp-0007Ml-6H; Wed, 22 Sep 2021 22:13:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193128.343990; Wed, 22 Sep 2021 22:11:41 +0000
+Received: by outflank-mailman (output) from mailman id 193140.344013; Wed, 22 Sep 2021 22:13:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTASr-00069w-Ds; Wed, 22 Sep 2021 22:11:41 +0000
-Received: by outflank-mailman (input) for mailman id 193128;
- Wed, 22 Sep 2021 22:11:40 +0000
+	id 1mTAUp-0007Me-25; Wed, 22 Sep 2021 22:13:43 +0000
+Received: by outflank-mailman (input) for mailman id 193140;
+ Wed, 22 Sep 2021 22:13:42 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D6HN=OM=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mTASq-00069k-0k
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 22:11:40 +0000
-Received: from beetle.greensocs.com (unknown [5.135.226.135])
+ <SRS0=ilSY=OM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1mTAUn-0007MU-UL
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 22:13:41 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0e48a7ee-1bf2-11ec-b9ee-12813bfff9fa;
- Wed, 22 Sep 2021 22:11:38 +0000 (UTC)
-Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 89D1B21ED5;
- Wed, 22 Sep 2021 16:16:01 +0000 (UTC)
+ id 578debc4-1bf2-11ec-b9ee-12813bfff9fa;
+ Wed, 22 Sep 2021 22:13:41 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 179C96103C;
+ Wed, 22 Sep 2021 22:13:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,81 +51,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0e48a7ee-1bf2-11ec-b9ee-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327362;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=V/wXO8Fw46s42gvXscl9fDzKCmjnZalAaCkoeLW9idc=;
-	b=fzmPX4ObaVsIGjwR4GzoY/SbGumd3hE8zzTj5wQNt93NX3hZr8kYnEk/i6a/ahRb3BcyzH
-	r4OPUKes6fAREsZ6M/d6oRgJNM/rLp/UW1rGVvosF72Xhv4ZT3ZMvT7X96ovqsT8bIwjFg
-	MzDwJiVoSLVcg/Nq1RzI5wAN8p9MecQ=
-From: Damien Hedde <damien.hedde@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: Damien Hedde <damien.hedde@greensocs.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	Ani Sinha <ani@anisinha.ca>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Eric Auger <eric.auger@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Peter Xu <peterx@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	qemu-riscv@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	mark.burton@greensocs.com,
-	mirela.grujic@greensocs.com,
-	edgari@xilinx.com,
-	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 15/16] hw/char/ibex_uart: set user_creatable
-Date: Wed, 22 Sep 2021 18:14:04 +0200
-Message-Id: <20210922161405.140018-16-damien.hedde@greensocs.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+X-Inumbo-ID: 578debc4-1bf2-11ec-b9ee-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1632348820;
+	bh=S0NFt5MtrdqOEMYTxFcUac2mrdB+b4BgWYpchcIEUuc=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=iF61E41TkYzpbBpaLWXTaJBENqr8KFG+308MKqVKXTrLozSfevYsFalZA5nZLbPgg
+	 Xl8M0p6CxG2YMPaodqXnhlGy2G2SOogAPP3PQeNgfN5wBwx8WeWOh5Ns9V2LTBnT19
+	 BwxsPtsPwlJTW53ykwbJUU3BCdNofJzIwYOXxFkAa86RTH3jLWf/KzjVHvfEAux7DS
+	 a/GpVBvWaTb+4fy5+3EMiImrByP/3sSZTur7hgIRopTEW1G2ZfQk4mqIRc3ztiKJM6
+	 OeJi45PsQH3JO1I0TZwoFCLqK1FSj1BPgiW7XAkmn5lBrkhJ/n8mjE7eWxwT2hSLsL
+	 GJQuw18aYfL0A==
+Date: Wed, 22 Sep 2021 15:13:39 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Rahul Singh <rahul.singh@arm.com>
+cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
+    andre.przywara@arm.com, Ian Jackson <iwj@xenproject.org>, 
+    Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2 04/17] xen/arm: xc_domain_ioport_permission(..) not
+ supported on ARM.
+In-Reply-To: <e71044315a6d2a3fb127d62954579390cb837d10.1632307952.git.rahul.singh@arm.com>
+Message-ID: <alpine.DEB.2.21.2109221511320.17979@sstabellini-ThinkPad-T480s>
+References: <cover.1632307952.git.rahul.singh@arm.com> <e71044315a6d2a3fb127d62954579390cb837d10.1632307952.git.rahul.singh@arm.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam: Yes
+Content-Type: text/plain; charset=US-ASCII
 
-This patch allows to create the device using device_add
-using -preconfig mode. This sysbus device still needs to
-be allowed by a machine to be created after preconfig is done.
+On Wed, 22 Sep 2021, Rahul Singh wrote:
+> ARM architecture does not implement I/O ports. Ignore this call on ARM
+> to avoid the overhead of making a hypercall just for Xen to return
+> -ENOSYS.
+> 
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+> ---
+> Change in v2:
+> - Instead of returning success in XEN, ignored the call in xl.
+> ---
+>  tools/libs/ctrl/xc_domain.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/tools/libs/ctrl/xc_domain.c b/tools/libs/ctrl/xc_domain.c
+> index 23322b70b5..25c95f6596 100644
+> --- a/tools/libs/ctrl/xc_domain.c
+> +++ b/tools/libs/ctrl/xc_domain.c
+> @@ -1348,6 +1348,14 @@ int xc_domain_ioport_permission(xc_interface *xch,
+>                                  uint32_t nr_ports,
+>                                  uint32_t allow_access)
+>  {
+> +#if defined(__arm__) || defined(__aarch64__)
+> +    /*
+> +     * The ARM architecture does not implement I/O ports.
+> +     * Avoid the overhead of making a hypercall just for Xen to return -ENOSYS.
+> +     * It is safe to ignore this call on ARM so we just return 0.
+> +     */
+> +    return 0;
 
-Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
----
+I think this is fine from a code change point of view.
 
-Depending on chosen condition for a device to be added, this commit
-may change.
----
- hw/char/ibex_uart.c | 1 +
- 1 file changed, 1 insertion(+)
+I wonder if we want to return 0 or return an error here, but I am
+thinking that 0 is OK because there is really nothing to do anyway as
+they end up ignored one way or the other.
 
-diff --git a/hw/char/ibex_uart.c b/hw/char/ibex_uart.c
-index 9b0a817713..b1646422c0 100644
---- a/hw/char/ibex_uart.c
-+++ b/hw/char/ibex_uart.c
-@@ -546,6 +546,7 @@ static void ibex_uart_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
- 
-+    dc->user_creatable = true;
-     dc->reset = ibex_uart_reset;
-     dc->realize = ibex_uart_realize;
-     dc->vmsd = &vmstate_ibex_uart;
--- 
-2.33.0
+Based on that reasoning:
 
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
+> +#else
+>      DECLARE_DOMCTL;
+>  
+>      domctl.cmd = XEN_DOMCTL_ioport_permission;
+> @@ -1357,6 +1365,7 @@ int xc_domain_ioport_permission(xc_interface *xch,
+>      domctl.u.ioport_permission.allow_access = allow_access;
+>  
+>      return do_domctl(xch, &domctl);
+> +#endif
+>  }
+>  
+>  int xc_availheap(xc_interface *xch,
+> -- 
+> 2.17.1
+> 
+> 
 
