@@ -7,43 +7,43 @@ X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9E7CCC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 37598C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:38:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6D12060F26
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:37:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6D12060F26
+	by mail.kernel.org (Postfix) with ESMTPS id 0486F60EE7
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:38:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0486F60EE7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192558.343059 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.192565.343069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT0ZE-0007dm-9O; Wed, 22 Sep 2021 11:37:36 +0000
+	id 1mT0Zb-0008H6-Iw; Wed, 22 Sep 2021 11:37:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192558.343059; Wed, 22 Sep 2021 11:37:36 +0000
+Received: by outflank-mailman (output) from mailman id 192565.343069; Wed, 22 Sep 2021 11:37:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT0ZE-0007df-6H; Wed, 22 Sep 2021 11:37:36 +0000
-Received: by outflank-mailman (input) for mailman id 192558;
- Wed, 22 Sep 2021 11:37:35 +0000
+	id 1mT0Zb-0008Gz-GA; Wed, 22 Sep 2021 11:37:59 +0000
+Received: by outflank-mailman (input) for mailman id 192565;
+ Wed, 22 Sep 2021 11:37:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=hzcW=OM=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1mT0ZD-0007Zf-5P
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 11:37:35 +0000
+ id 1mT0Za-0008Gc-Bt
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 11:37:58 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id c222c13e-8bb5-4352-b475-868966b89b92;
- Wed, 22 Sep 2021 11:37:33 +0000 (UTC)
+ id 2e26ecf1-1f2d-4167-9210-37c43a669938;
+ Wed, 22 Sep 2021 11:37:57 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6B95711B3;
- Wed, 22 Sep 2021 04:37:33 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1F11011B3;
+ Wed, 22 Sep 2021 04:37:57 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8664C3F719;
- Wed, 22 Sep 2021 04:37:32 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 39D573F719;
+ Wed, 22 Sep 2021 04:37:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,7 +55,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c222c13e-8bb5-4352-b475-868966b89b92
+X-Inumbo-ID: 2e26ecf1-1f2d-4167-9210-37c43a669938
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
@@ -63,9 +63,9 @@ Cc: bertrand.marquis@arm.com,
 	andre.przywara@arm.com,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH v2 06/17] xen/device-tree: Add dt_property_read_variable_u32_array helper
-Date: Wed, 22 Sep 2021 12:34:52 +0100
-Message-Id: <35eb7ec429da3a9e1af626af4521c13c9683f8fd.1632307952.git.rahul.singh@arm.com>
+Subject: [PATCH v2 07/17] xen/device-tree: Add dt_property_read_u32_array helper
+Date: Wed, 22 Sep 2021 12:34:53 +0100
+Message-Id: <852610e258d4c36888b68771061afdc0df95e401.1632307952.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1632307952.git.rahul.singh@arm.com>
 References: <cover.1632307952.git.rahul.singh@arm.com>
@@ -74,123 +74,61 @@ References: <cover.1632307952.git.rahul.singh@arm.com>
 
 Based on tag Linux v5.14.2 commit bbdd3de144fc142f2f4b9834c9241cc4e7f3d3fc
 
-Import the Linux helper of_property_read_variable_u32_array. This
-function find and read an array of 32 bit integers from a property,
-with bounds on the minimum and maximum array size.
+Import the Linux helper of_property_read_u32_array. This function find
+and read an array of 32 bit integers from a property.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
 Change in v2: Patch introduced in v2
 ---
- xen/common/device_tree.c      | 61 +++++++++++++++++++++++++++++++++++
- xen/include/xen/device_tree.h | 26 +++++++++++++++
- 2 files changed, 87 insertions(+)
+ xen/include/xen/device_tree.h | 31 ++++++++++++++++++++++++++++++-
+ 1 file changed, 30 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index 03d25a81ce..53160d61f8 100644
---- a/xen/common/device_tree.c
-+++ b/xen/common/device_tree.c
-@@ -208,6 +208,67 @@ int dt_property_read_string(const struct dt_device_node *np,
-     return 0;
- }
- 
-+/**
-+ * dt_find_property_value_of_size
-+ *
-+ * @np:     device node from which the property value is to be read.
-+ * @propname:   name of the property to be searched.
-+ * @min:    minimum allowed length of property value
-+ * @max:    maximum allowed length of property value (0 means unlimited)
-+ * @len:    if !=NULL, actual length is written to here
-+ *
-+ * Search for a property in a device node and valid the requested size.
-+ *
-+ * Return: The property value on success, -EINVAL if the property does not
-+ * exist, -ENODATA if property does not have a value, and -EOVERFLOW if the
-+ * property data is too small or too large.
-+ */
-+static void *dt_find_property_value_of_size(const struct dt_device_node *np,
-+                                            const char *propname, u32 min,
-+                                            u32 max, size_t *len)
-+{
-+    const struct dt_property *prop = dt_find_property(np, propname, NULL);
-+
-+    if ( !prop )
-+        return ERR_PTR(-EINVAL);
-+    if ( !prop->value )
-+        return ERR_PTR(-ENODATA);
-+    if ( prop->length < min )
-+        return ERR_PTR(-EOVERFLOW);
-+    if ( max && prop->length > max )
-+        return ERR_PTR(-EOVERFLOW);
-+
-+    if ( len )
-+        *len = prop->length;
-+
-+    return prop->value;
-+}
-+
-+int dt_property_read_variable_u32_array(const struct dt_device_node *np,
-+                                        const char *propname, u32 *out_values,
-+                                        size_t sz_min, size_t sz_max)
-+{
-+    size_t sz, count;
-+    const __be32 *val = dt_find_property_value_of_size(np, propname,
-+                        (sz_min * sizeof(*out_values)),
-+                        (sz_max * sizeof(*out_values)),
-+                        &sz);
-+
-+    if ( IS_ERR(val) )
-+        return PTR_ERR(val);
-+
-+    if ( !sz_max )
-+        sz = sz_min;
-+    else
-+        sz /= sizeof(*out_values);
-+
-+    count = sz;
-+    while ( count-- )
-+        *out_values++ = be32_to_cpup(val++);
-+
-+    return sz;
-+}
-+
- int dt_property_match_string(const struct dt_device_node *np,
-                              const char *propname, const char *string)
- {
 diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index b02696be94..1693fb8e8c 100644
+index 1693fb8e8c..497144b8a7 100644
 --- a/xen/include/xen/device_tree.h
 +++ b/xen/include/xen/device_tree.h
-@@ -366,6 +366,32 @@ bool_t dt_property_read_u32(const struct dt_device_node *np,
+@@ -366,7 +366,6 @@ bool_t dt_property_read_u32(const struct dt_device_node *np,
  bool_t dt_property_read_u64(const struct dt_device_node *np,
                              const char *name, u64 *out_value);
  
-+
+-
+ /**
+  * dt_property_read_variable_u32_array - Find and read an array of 32 bit
+  * integers from a property, with bounds on the minimum and maximum array size.
+@@ -392,6 +391,36 @@ int dt_property_read_variable_u32_array(const struct dt_device_node *np,
+                                         const char *propname, u32 *out_values,
+                                         size_t sz_min, size_t sz_max);
+ 
 +/**
-+ * dt_property_read_variable_u32_array - Find and read an array of 32 bit
-+ * integers from a property, with bounds on the minimum and maximum array size.
++ * dt_property_read_u32_array - Find and read an array of 32 bit integers
++ * from a property.
 + *
 + * @np:     device node from which the property value is to be read.
 + * @propname:   name of the property to be searched.
-+ * @out_values: pointer to return found values.
-+ * @sz_min: minimum number of array elements to read
-+ * @sz_max: maximum number of array elements to read, if zero there is no
-+ *      upper limit on the number of elements in the dts entry but only
-+ *      sz_min will be read.
++ * @out_values: pointer to return value, modified only if return value is 0.
++ * @sz:     number of array elements to read
 + *
 + * Search for a property in a device node and read 32-bit value(s) from
 + * it.
 + *
-+ * Return: The number of elements read on success, -EINVAL if the property
-+ * does not exist, -ENODATA if property does not have a value, and -EOVERFLOW
-+ * if the property data is smaller than sz_min or longer than sz_max.
++ * Return: 0 on success, -EINVAL if the property does not exist,
++ * -ENODATA if property does not have a value, and -EOVERFLOW if the
++ * property data isn't large enough.
 + *
 + * The out_values is modified only if a valid u32 value can be decoded.
 + */
-+int dt_property_read_variable_u32_array(const struct dt_device_node *np,
-+                                        const char *propname, u32 *out_values,
-+                                        size_t sz_min, size_t sz_max);
++static inline int dt_property_read_u32_array(const struct dt_device_node *np,
++                                             const char *propname,
++                                             u32 *out_values, size_t sz)
++{
++    int ret = dt_property_read_variable_u32_array(np, propname, out_values,
++                              sz, 0);
++    if ( ret >= 0 )
++        return 0;
++    else
++        return ret;
++}
 +
  /**
   * dt_property_read_bool - Check if a property exists
