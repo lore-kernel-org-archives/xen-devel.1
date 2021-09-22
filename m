@@ -2,45 +2,56 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A684C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 10:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F37D1C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 10:31:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F3C360F44
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 10:28:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0F3C360F44
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9F7E060F44
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 10:31:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9F7E060F44
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192455.342901 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.192463.342934 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSzUG-0000W0-Bd; Wed, 22 Sep 2021 10:28:24 +0000
+	id 1mSzX1-0002R4-GT; Wed, 22 Sep 2021 10:31:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192455.342901; Wed, 22 Sep 2021 10:28:24 +0000
+Received: by outflank-mailman (output) from mailman id 192463.342934; Wed, 22 Sep 2021 10:31:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSzUG-0000Vt-7x; Wed, 22 Sep 2021 10:28:24 +0000
-Received: by outflank-mailman (input) for mailman id 192455;
- Wed, 22 Sep 2021 10:28:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1mSzX1-0002Qr-Cm; Wed, 22 Sep 2021 10:31:15 +0000
+Received: by outflank-mailman (input) for mailman id 192463;
+ Wed, 22 Sep 2021 10:31:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mSzUF-0000Vn-64
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 10:28:23 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mSzUE-0004mO-CB; Wed, 22 Sep 2021 10:28:22 +0000
-Received: from [202.153.84.92] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mSzUD-0001fQ-Gd; Wed, 22 Sep 2021 10:28:22 +0000
+ (envelope-from <SRS0=U2Du=OM=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1mSzWz-0001rn-Tf
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 10:31:13 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e77e6817-55e9-45f3-ba1c-791dba56408a;
+ Wed, 22 Sep 2021 10:31:08 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id C57DC201E0;
+ Wed, 22 Sep 2021 10:31:07 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6EEA813D69;
+ Wed, 22 Sep 2021 10:31:07 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id gNPdGesFS2GHWAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 22 Sep 2021 10:31:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,114 +63,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
-	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=CPMr5A/aryLVbQ2Idr7tUHKgDUVUTrk5R3/EN889HlU=; b=liPhpRWuzeS1lH6J2x93akwJmM
-	ksdPwY2QOyIXqtk1z5O41lOEOorTd119bdZUcVAdbaNcXnKQmFY2Ub6nC4l+wc/h3LvbflRBnMkQ4
-	ku6dFlSJ3pcO/cnibhV9OaWVE36MX3UX+Ipwi34y0Srrj6Y3PQ89sui2njV/CcFZQrxQ=;
-Subject: Re: [PATCH 1/2] gnttab: remove guest_physmap_remove_page() call from
- gnttab_map_frame()
-To: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>
-References: <4f54456b-e8da-f67f-b6a0-b5ce2cf12cae@suse.com>
- <8b73ff7c-4dd6-ff2e-14b9-088fdce0beb9@suse.com>
- <YUhgdMyTbfL8Hyke@MacBook-Air-de-Roger.local>
- <5c1fd288-2972-d264-d6b0-3c7bc6d67be0@suse.com>
- <YUmYpzhJrBZkSYyd@MacBook-Air-de-Roger.local>
- <ae0fb20c-b7c9-2467-0951-b84b2f647382@suse.com>
- <YUr2zZL3kV4/nBQp@MacBook-Air-de-Roger.local>
- <8fd9e2d5-b875-ef7d-d80a-15b6ba2948b5@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <b7947619-3520-174c-f5ec-49564ee048a1@xen.org>
-Date: Wed, 22 Sep 2021 15:28:15 +0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.14.0
+X-Inumbo-ID: e77e6817-55e9-45f3-ba1c-791dba56408a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1632306667; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=86firgN1jlIPP55LKir2kex+Qi/Crgc5F8hTbnkpj2U=;
+	b=kZGArRO73g3w8z8IReMclRkOaaUnVYe0ECsdBZfUOlFhmaUZHgqupIR64JXeM1AHaQXDsA
+	CijKASyMoETKc7tdXh1H8YtbxRn7zNVjB1cwhvD/ldCJZSZDDhSIuExXIGRBBu3MMqWqB4
+	WjQ9ub50sn99ss24Wydkqxj9LgIgvOY=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	x86@kernel.org,
+	virtualization@lists.linux-foundation.org,
+	linux-kernel@vger.kernel.org
+Cc: peterz@infradead.org,
+	Juergen Gross <jgross@suse.com>,
+	Deep Shah <sdeep@vmware.com>,
+	"VMware, Inc." <pv-drivers@vmware.com>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 2/2] x86/xen: switch initial pvops IRQ functions to dummy ones
+Date: Wed, 22 Sep 2021 12:31:02 +0200
+Message-Id: <20210922103102.3589-3-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20210922103102.3589-1-jgross@suse.com>
+References: <20210922103102.3589-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <8fd9e2d5-b875-ef7d-d80a-15b6ba2948b5@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 
-Hi,
+The initial pvops functions handling irq flags will only ever be called
+before interrupts are being enabled.
 
-On 22/09/2021 14:42, Jan Beulich wrote:
-> On 22.09.2021 11:26, Roger Pau Monné wrote:
->> On Tue, Sep 21, 2021 at 12:12:05PM +0200, Jan Beulich wrote:
->>> On 21.09.2021 10:32, Roger Pau Monné wrote:
->>>> On Mon, Sep 20, 2021 at 05:27:17PM +0200, Jan Beulich wrote:
->>>>> On 20.09.2021 12:20, Roger Pau Monné wrote:
->>>>>> On Mon, Sep 13, 2021 at 08:41:47AM +0200, Jan Beulich wrote:
->>>>>>> --- a/xen/include/asm-arm/grant_table.h
->>>>>>> +++ b/xen/include/asm-arm/grant_table.h
->>>>>>> +        if ( gfn_eq(ogfn, INVALID_GFN) || gfn_eq(ogfn, gfn) ||           \
->>>>>>
->>>>>> I'm slightly confused by this checks, don't you need to check for
->>>>>> gfn_eq(gfn, INVALID_GFN) (not ogfn) in order to call
->>>>>> guest_physmap_remove_page?
->>>>>
->>>>> Why? It's ogfn which gets passed to the function. And it indeed is the
->>>>> prior GFN's mapping that we want to remove here.
->>>>>
->>>>>> Or assuming that ogfn is not invalid can be used to imply a removal?
->>>>>
->>>>> That implication can be (and on x86 is) used for the incoming argument,
->>>>> i.e. "gfn". I don't think "ogfn" can serve this purpose.
->>>>
->>>> I guess I'm confused due to the ogfn checks done on the Arm side that
->>>> are not performed on x86. So on Arm you always need to explicitly
->>>> unhook the previous GFN before attempting to setup a new mapping,
->>>> while on x86 you only need to do this when it's a removal in order to
->>>> clear the entry?
->>>
->>> The difference isn't with guest_physmap_add_entry() (both x86 and
->>> Arm only insert a new mapping there), but with
->>> xenmem_add_to_physmap_one(): Arm's variant doesn't care about prior
->>> mappings. And gnttab_map_frame() gets called only from there. This
->>> is effectively what the first paragraph of the description is about.
->>
->> OK, sorry, it wasn't clear to me from the description. Could you
->> explicitly mention in the description that the removal is moved into
->> gnttab_set_frame_gfn on Arm in order to cope with the fact that
->> xenmem_add_to_physmap_one doesn't perform it.
-> 
-> Well, it's not really "in order to cope" - that's true for the placement
-> prior to this change as well, so not a justification for the change.
-> Nevertheless I've tried to make this more clear by changing the 1st
-> paragraph to:
-> 
-> "Without holding appropriate locks, attempting to remove a prior mapping
->   of the underlying page is pointless, as the same (or another) mapping
->   could be re-established by a parallel request on another vCPU. Move the
->   code to Arm's gnttab_set_frame_gfn(); it cannot be dropped there since
->   xenmem_add_to_physmap_one() doesn't call it either (unlike on x86). Of
->   course this new placement doesn't improve things in any way as far as
->   the security of grant status frame mappings goes (see XSA-379). Proper
->   locking would be needed here to allow status frames to be mapped
->   securely."
-> 
->> TBH I think it would be in our best interest to try to make
->> xenmem_add_to_physmap_one behave as close as possible between arches.
->> This discrepancy between x86 and Arm regarding page removal is just
->> going to bring more trouble in the long term, and hiding the
->> differences inside gnttab_set_frame_gfn just makes it even more
->> obscure.
-> 
-> Stefano, Julien?
+So make the __init and switch them to be dummy functions:
+- xen_save_fl() can always return 0
+- xen_irq_disable() is a nop
+- xen_irq_enable() can BUG()
 
-This would be ideal as I don't particular like the approach taken in 
-this patch. But AFAICT, this would require us to implement an M2P. Or is 
-there another way to do it?
+Add some generic paravirt functions for that purpose.
 
-In another context, I saw the suggestion to bring an M2P on Arm. But I 
-am still somewhat split whether this is really worth it for the current use.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/include/asm/paravirt_types.h |  2 +
+ arch/x86/kernel/paravirt.c            | 13 +++++-
+ arch/x86/xen/enlighten.c              | 19 +--------
+ arch/x86/xen/irq.c                    | 61 ++-------------------------
+ 4 files changed, 20 insertions(+), 75 deletions(-)
 
-Cheers,
-
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index d9d6b0203ec4..fc1151e77569 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -577,7 +577,9 @@ void paravirt_leave_lazy_mmu(void);
+ void paravirt_flush_lazy_mmu(void);
+ 
+ void _paravirt_nop(void);
++void paravirt_BUG(void);
+ u64 _paravirt_ident_64(u64);
++unsigned long paravirt_ret0(void);
+ 
+ #define paravirt_nop	((void *)_paravirt_nop)
+ 
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index 04cafc057bed..4f0ebc46a15d 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -46,6 +46,17 @@ asm (".pushsection .entry.text, \"ax\"\n"
+      ".type _paravirt_nop, @function\n\t"
+      ".popsection");
+ 
++/* stub always return ing 0. */
++asm (".pushsection .entry.text, \"ax\"\n"
++     ".global paravirt_ret0\n"
++     "paravirt_ret0:\n\t"
++     "xor %" _ASM_AX ", %" _ASM_AX ";\n\t"
++     "ret\n\t"
++     ".size paravirt_ret0, . - paravirt_ret0\n\t"
++     ".type paravirt_ret0, @function\n\t"
++     ".popsection");
++
++
+ void __init default_banner(void)
+ {
+ 	printk(KERN_INFO "Booting paravirtualized kernel on %s\n",
+@@ -53,7 +64,7 @@ void __init default_banner(void)
+ }
+ 
+ /* Undefined instruction for dealing with missing ops pointers. */
+-static void paravirt_BUG(void)
++void paravirt_BUG(void)
+ {
+ 	BUG();
+ }
+diff --git a/arch/x86/xen/enlighten.c b/arch/x86/xen/enlighten.c
+index 8a7bd3f4591e..d96cabe34a01 100644
+--- a/arch/x86/xen/enlighten.c
++++ b/arch/x86/xen/enlighten.c
+@@ -27,25 +27,10 @@ EXPORT_SYMBOL_GPL(hypercall_page);
+  * Pointer to the xen_vcpu_info structure or
+  * &HYPERVISOR_shared_info->vcpu_info[cpu]. See xen_hvm_init_shared_info
+  * and xen_vcpu_setup for details. By default it points to share_info->vcpu_info
+- * but if the hypervisor supports VCPUOP_register_vcpu_info then it can point
+- * to xen_vcpu_info. The pointer is used in __xen_evtchn_do_upcall to
+- * acknowledge pending events.
+- * Also more subtly it is used by the patched version of irq enable/disable
+- * e.g. xen_irq_enable_direct and xen_iret in PV mode.
+- *
+- * The desire to be able to do those mask/unmask operations as a single
+- * instruction by using the per-cpu offset held in %gs is the real reason
+- * vcpu info is in a per-cpu pointer and the original reason for this
+- * hypercall.
+- *
++ * but during boot it is switched to point to xen_vcpu_info.
++ * The pointer is used in __xen_evtchn_do_upcall to acknowledge pending events.
+  */
+ DEFINE_PER_CPU(struct vcpu_info *, xen_vcpu);
+-
+-/*
+- * Per CPU pages used if hypervisor supports VCPUOP_register_vcpu_info
+- * hypercall. This can be used both in PV and PVHVM mode. The structure
+- * overrides the default per_cpu(xen_vcpu, cpu) value.
+- */
+ DEFINE_PER_CPU(struct vcpu_info, xen_vcpu_info);
+ 
+ /* Linux <-> Xen vCPU id mapping */
+diff --git a/arch/x86/xen/irq.c b/arch/x86/xen/irq.c
+index dfa091d79c2e..ae8537583102 100644
+--- a/arch/x86/xen/irq.c
++++ b/arch/x86/xen/irq.c
+@@ -24,60 +24,6 @@ void xen_force_evtchn_callback(void)
+ 	(void)HYPERVISOR_xen_version(0, NULL);
+ }
+ 
+-asmlinkage __visible unsigned long xen_save_fl(void)
+-{
+-	struct vcpu_info *vcpu;
+-	unsigned long flags;
+-
+-	vcpu = this_cpu_read(xen_vcpu);
+-
+-	/* flag has opposite sense of mask */
+-	flags = !vcpu->evtchn_upcall_mask;
+-
+-	/* convert to IF type flag
+-	   -0 -> 0x00000000
+-	   -1 -> 0xffffffff
+-	*/
+-	return (-flags) & X86_EFLAGS_IF;
+-}
+-PV_CALLEE_SAVE_REGS_THUNK(xen_save_fl);
+-
+-asmlinkage __visible void xen_irq_disable(void)
+-{
+-	/* There's a one instruction preempt window here.  We need to
+-	   make sure we're don't switch CPUs between getting the vcpu
+-	   pointer and updating the mask. */
+-	preempt_disable();
+-	this_cpu_read(xen_vcpu)->evtchn_upcall_mask = 1;
+-	preempt_enable_no_resched();
+-}
+-PV_CALLEE_SAVE_REGS_THUNK(xen_irq_disable);
+-
+-asmlinkage __visible void xen_irq_enable(void)
+-{
+-	struct vcpu_info *vcpu;
+-
+-	/*
+-	 * We may be preempted as soon as vcpu->evtchn_upcall_mask is
+-	 * cleared, so disable preemption to ensure we check for
+-	 * events on the VCPU we are still running on.
+-	 */
+-	preempt_disable();
+-
+-	vcpu = this_cpu_read(xen_vcpu);
+-	vcpu->evtchn_upcall_mask = 0;
+-
+-	/* Doesn't matter if we get preempted here, because any
+-	   pending event will get dealt with anyway. */
+-
+-	barrier(); /* unmask then check (avoid races) */
+-	if (unlikely(vcpu->evtchn_upcall_pending))
+-		xen_force_evtchn_callback();
+-
+-	preempt_enable();
+-}
+-PV_CALLEE_SAVE_REGS_THUNK(xen_irq_enable);
+-
+ static void xen_safe_halt(void)
+ {
+ 	/* Blocking includes an implicit local_irq_enable(). */
+@@ -95,9 +41,10 @@ static void xen_halt(void)
+ }
+ 
+ static const struct pv_irq_ops xen_irq_ops __initconst = {
+-	.save_fl = PV_CALLEE_SAVE(xen_save_fl),
+-	.irq_disable = PV_CALLEE_SAVE(xen_irq_disable),
+-	.irq_enable = PV_CALLEE_SAVE(xen_irq_enable),
++	/* Initial interrupt flag handling only called while interrupts off. */
++	.save_fl = __PV_IS_CALLEE_SAVE(paravirt_ret0),
++	.irq_disable = __PV_IS_CALLEE_SAVE(paravirt_nop),
++	.irq_enable = __PV_IS_CALLEE_SAVE(paravirt_BUG),
+ 
+ 	.safe_halt = xen_safe_halt,
+ 	.halt = xen_halt,
 -- 
-Julien Grall
+2.26.2
+
 
