@@ -7,40 +7,39 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B17BC433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81DE4C4332F
 	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E18261214
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0E18261214
+	by mail.kernel.org (Postfix) with ESMTPS id A0C4061019
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A0C4061019
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193212.344133 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193215.344167 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeL-0003xg-GQ; Thu, 23 Sep 2021 00:31:41 +0000
+	id 1mTCeQ-0004nW-Hj; Thu, 23 Sep 2021 00:31:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193212.344133; Thu, 23 Sep 2021 00:31:41 +0000
+Received: by outflank-mailman (output) from mailman id 193215.344167; Thu, 23 Sep 2021 00:31:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeL-0003xZ-Da; Thu, 23 Sep 2021 00:31:41 +0000
-Received: by outflank-mailman (input) for mailman id 193212;
- Thu, 23 Sep 2021 00:31:40 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mTCeQ-0004n4-CN; Thu, 23 Sep 2021 00:31:46 +0000
+Received: by outflank-mailman (input) for mailman id 193215;
+ Thu, 23 Sep 2021 00:31:45 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fO2a=ON=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mTCeJ-0003xN-Tn
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:40 +0000
+ id 1mTCeP-0003xO-6B
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:45 +0000
 Received: from beetle.greensocs.com (unknown [5.135.226.135])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9ce9660e-1c05-11ec-b9f4-12813bfff9fa;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f1eaeec4-e2e9-4cc1-87ac-df7a2884e1e9;
  Thu, 23 Sep 2021 00:31:38 +0000 (UTC)
 Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 615DE21EC9;
- Wed, 22 Sep 2021 16:15:54 +0000 (UTC)
+ by beetle.greensocs.com (Postfix) with ESMTPS id 16B1021EBD;
+ Wed, 22 Sep 2021 16:15:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +51,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ce9660e-1c05-11ec-b9f4-12813bfff9fa
+X-Inumbo-ID: f1eaeec4-e2e9-4cc1-87ac-df7a2884e1e9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327354;
+	s=mail; t=1632327349;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PDCjVxFBi4vz75aeR9pd9AbmoW6STuPuMbNBE/FSM7I=;
-	b=ICuAAVCXm0R5uk9SjJ8PoZaJwYoy4CElxlYLonWdbRGOal6uenKQyWFhRGYtaMcpNGrB6U
-	a6eNGZVWTngTm/nJTjQ651qUUGJcEfSF62QKzWyQ8J+LWw+rY7XTtY9hl/Kg9JWezPiQT2
-	mj0ltS02PcDOghYVnG1qEo0ZJHBn8H4=
+	bh=XKa7YpvCaHNP7B/Gx81xxfSEDEFxmlko5ypNT6F1RPs=;
+	b=wtOmf1TGRi5+LsCZ7dTaWkdafLDUIQXjxY7cZKMSJPwbDnsncS8770qaxVmTeU8tVxHdsy
+	98gXhs3KUKW1OrVqW4NQVrvc+Q9klOB56ADRcupW0/lzsumJ9QGaU1grDQEcXmiK54ZKOs
+	5X4IsCXiqP+1fadiUoWHXRzy0Q+v+Wo=
 From: Damien Hedde <damien.hedde@greensocs.com>
 To: qemu-devel@nongnu.org
 Cc: Damien Hedde <damien.hedde@greensocs.com>,
@@ -91,9 +90,9 @@ Cc: Damien Hedde <damien.hedde@greensocs.com>,
 	mirela.grujic@greensocs.com,
 	edgari@xilinx.com,
 	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 09/16] hw/core/machine: Remove the dynamic sysbus devices type check
-Date: Wed, 22 Sep 2021 18:13:58 +0200
-Message-Id: <20210922161405.140018-10-damien.hedde@greensocs.com>
+Subject: [RFC PATCH v2 04/16] softmmu/qdev-monitor: add error handling in qdev_set_id
+Date: Wed, 22 Sep 2021 18:13:53 +0200
+Message-Id: <20210922161405.140018-5-damien.hedde@greensocs.com>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
@@ -101,90 +100,142 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Spam: Yes
 
-Now that we check sysbus device types during device creation, we
-can remove the check done in the machine init done notifier.
-This was the only thing done by this notifier, so we remove the
-whole sysbus_notifier structure of the MachineState.
+qdev_set_id() is mostly used when the user adds a device (using
+-device cli option or device_add qmp command). This commit adds
+an error parameter to handle the case where the given id is
+already taken.
 
-Note: This notifier was checking all /peripheral and /peripheral-anon
-sysbus devices. Now we only check those added by -device cli option or
-device_add qmp command when handling the command/option. So if there
-are some devices added in one of these containers manually (eg in
-machine C code), these will not be checked anymore.
-This use case does not seem to appear apart from
-hw/xen/xen-legacy-backend.c (it uses qdev_set_id() and in this case,
-not for a sysbus device, so it's ok).
+Also document the function and add a return value in order to
+be able to capture success/failure: the function now returns the
+id in case of success, or NULL in case of failure.
+
+The commit modifies the 2 calling places (qdev-monitor and
+xen-legacy-backend) to add the error object parameter.
+
+Note that the id is, right now, guaranteed to be unique because
+all ids came from the "device" QemuOptsList where the id is used
+as key. This addition is a preparation for a future commit which
+will relax the uniqueness.
 
 Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
 ---
- include/hw/boards.h |  1 -
- hw/core/machine.c   | 27 ---------------------------
- 2 files changed, 28 deletions(-)
+ include/monitor/qdev.h      | 25 +++++++++++++++++++++++-
+ hw/xen/xen-legacy-backend.c |  3 ++-
+ softmmu/qdev-monitor.c      | 38 +++++++++++++++++++++++++++----------
+ 3 files changed, 54 insertions(+), 12 deletions(-)
 
-diff --git a/include/hw/boards.h b/include/hw/boards.h
-index 934443c1cd..ccbc40355a 100644
---- a/include/hw/boards.h
-+++ b/include/hw/boards.h
-@@ -311,7 +311,6 @@ typedef struct CpuTopology {
- struct MachineState {
-     /*< private >*/
-     Object parent_obj;
--    Notifier sysbus_notifier;
+diff --git a/include/monitor/qdev.h b/include/monitor/qdev.h
+index eaa947d73a..23c31f5296 100644
+--- a/include/monitor/qdev.h
++++ b/include/monitor/qdev.h
+@@ -9,6 +9,29 @@ void qmp_device_add(QDict *qdict, QObject **ret_data, Error **errp);
  
-     /*< public >*/
+ int qdev_device_help(QemuOpts *opts);
+ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp);
+-void qdev_set_id(DeviceState *dev, const char *id);
++
++/**
++ * qdev_set_id: parent the device and set its id if provided.
++ * @dev: device to handle
++ * @id: id to be given to the device, or NULL.
++ *
++ * Returns: the id of the device in case of success; otherwise NULL.
++ *
++ * @dev must be unrealized, unparented and must not have an id.
++ *
++ * If @id is non-NULL, this function tries to setup @dev qom path as
++ * "/peripheral/id". If @id is already taken, it fails. If it succeeds,
++ * the id field of @dev is set to @id (@dev now owns the given @id
++ * parameter).
++ *
++ * If @id is NULL, this function generates a unique name and setups @dev
++ * qom path as "/peripheral-anon/name". This name is not set as the id
++ * of @dev.
++ *
++ * Upon success, it returns the id/name (generated or provided). The
++ * returned string is owned by the corresponding child property and must
++ * not be freed by the caller.
++ */
++const char *qdev_set_id(DeviceState *dev, const char *id, Error **errp);
  
-diff --git a/hw/core/machine.c b/hw/core/machine.c
-index 1a18912dc8..521438e90a 100644
---- a/hw/core/machine.c
-+++ b/hw/core/machine.c
-@@ -571,18 +571,6 @@ bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
-     return allowed;
+ #endif
+diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
+index dd8ae1452d..f541cfa0e9 100644
+--- a/hw/xen/xen-legacy-backend.c
++++ b/hw/xen/xen-legacy-backend.c
+@@ -276,7 +276,8 @@ static struct XenLegacyDevice *xen_be_get_xendev(const char *type, int dom,
+     xendev = g_malloc0(ops->size);
+     object_initialize(&xendev->qdev, ops->size, TYPE_XENBACKEND);
+     OBJECT(xendev)->free = g_free;
+-    qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev));
++    qdev_set_id(DEVICE(xendev), g_strdup_printf("xen-%s-%d", type, dev),
++                &error_fatal);
+     qdev_realize(DEVICE(xendev), xen_sysbus, &error_fatal);
+     object_unref(OBJECT(xendev));
+ 
+diff --git a/softmmu/qdev-monitor.c b/softmmu/qdev-monitor.c
+index 25275984bd..0007698ff3 100644
+--- a/softmmu/qdev-monitor.c
++++ b/softmmu/qdev-monitor.c
+@@ -578,22 +578,34 @@ static BusState *qbus_find(const char *path, Error **errp)
+     return bus;
  }
  
--static void validate_sysbus_device(SysBusDevice *sbdev, void *opaque)
--{
--    MachineState *machine = opaque;
--    MachineClass *mc = MACHINE_GET_CLASS(machine);
--
--    if (!device_is_dynamic_sysbus(mc, DEVICE(sbdev))) {
--        error_report("Option '-device %s' cannot be handled by this machine",
--                     object_class_get_name(object_get_class(OBJECT(sbdev))));
--        exit(1);
+-void qdev_set_id(DeviceState *dev, const char *id)
++const char *qdev_set_id(DeviceState *dev, const char *id, Error **errp)
+ {
++    ObjectProperty *prop;
++
++    assert(!dev->id && !dev->realized);
++
++    /*
++     * object_property_[try_]add_child() below will assert the device
++     * has no parent
++     */
+     if (id) {
+-        dev->id = id;
 -    }
--}
 -
- static char *machine_get_memdev(Object *obj, Error **errp)
- {
-     MachineState *ms = MACHINE(obj);
-@@ -598,17 +586,6 @@ static void machine_set_memdev(Object *obj, const char *value, Error **errp)
-     ms->ram_memdev_id = g_strdup(value);
+-    if (dev->id) {
+-        object_property_add_child(qdev_get_peripheral(), dev->id,
+-                                  OBJECT(dev));
++        prop = object_property_try_add_child(qdev_get_peripheral(), id,
++                                             OBJECT(dev), NULL);
++        if (prop) {
++            dev->id = id;
++        } else {
++            error_setg(errp, "Duplicate device ID '%s'", id);
++            return NULL;
++        }
+     } else {
+         static int anon_count;
+         gchar *name = g_strdup_printf("device[%d]", anon_count++);
+-        object_property_add_child(qdev_get_peripheral_anon(), name,
+-                                  OBJECT(dev));
++        prop = object_property_add_child(qdev_get_peripheral_anon(), name,
++                                         OBJECT(dev));
+         g_free(name);
+     }
++
++    return prop->name;
  }
  
--static void machine_init_notify(Notifier *notifier, void *data)
--{
--    MachineState *machine = MACHINE(qdev_get_machine());
--
--    /*
--     * Loop through all dynamically created sysbus devices and check if they are
--     * all allowed.  If a device is not allowed, error out.
--     */
--    foreach_dynamic_sysbus_device(validate_sysbus_device, machine);
--}
--
- HotpluggableCPUList *machine_query_hotpluggable_cpus(MachineState *machine)
- {
-     int i;
-@@ -1030,10 +1007,6 @@ static void machine_initfn(Object *obj)
-                                         "Table (HMAT)");
+ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
+@@ -677,7 +689,13 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
+         }
      }
  
--    /* Register notifier when init is done for sysbus sanity checks */
--    ms->sysbus_notifier.notify = machine_init_notify;
--    qemu_add_machine_init_done_notifier(&ms->sysbus_notifier);
--
-     /* default to mc->default_cpus */
-     ms->smp.cpus = mc->default_cpus;
-     ms->smp.max_cpus = mc->default_cpus;
+-    qdev_set_id(dev, qemu_opts_id(opts));
++    /*
++     * set dev's parent and register its id.
++     * If it fails it means the id is already taken.
++     */
++    if (!qdev_set_id(dev, qemu_opts_id(opts), errp)) {
++        goto err_del_dev;
++    }
+ 
+     /* set properties */
+     if (qemu_opt_foreach(opts, set_property, dev, errp)) {
 -- 
 2.33.0
 
