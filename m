@@ -2,47 +2,49 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 42CBEC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:21:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D8F74C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:35:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D8074610A0
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:21:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D8074610A0
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 95C07608FB
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 11:35:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 95C07608FB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192509.342982 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.192517.343004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT0J2-0002Fc-4T; Wed, 22 Sep 2021 11:20:52 +0000
+	id 1mT0XW-0004EW-QP; Wed, 22 Sep 2021 11:35:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192509.342982; Wed, 22 Sep 2021 11:20:52 +0000
+Received: by outflank-mailman (output) from mailman id 192517.343004; Wed, 22 Sep 2021 11:35:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT0J2-0002FV-1R; Wed, 22 Sep 2021 11:20:52 +0000
-Received: by outflank-mailman (input) for mailman id 192509;
- Wed, 22 Sep 2021 11:20:50 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mT0J0-0002FP-Jj
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 11:20:50 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mT0J0-0005h3-HX
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 11:20:50 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mT0J0-0006Sn-GT
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 11:20:50 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1mT0Iu-00039E-6C; Wed, 22 Sep 2021 12:20:44 +0100
+	id 1mT0XW-0004EL-N0; Wed, 22 Sep 2021 11:35:50 +0000
+Received: by outflank-mailman (input) for mailman id 192517;
+ Wed, 22 Sep 2021 11:35:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=hzcW=OM=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
+ id 1mT0XV-0004D6-38
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 11:35:49 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 3aaef6c8-1b99-11ec-b970-12813bfff9fa;
+ Wed, 22 Sep 2021 11:35:47 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BB93A11B3;
+ Wed, 22 Sep 2021 04:35:46 -0700 (PDT)
+Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
+ [10.1.199.1])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BE5783F719;
+ Wed, 22 Sep 2021 04:35:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,84 +56,377 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=zI12UCiAWcdhToVdwvm9v56wtLvDQCvSl/0SE7uChVY=; b=BAxII3mfogjFhELlIccXuFqrP7
-	kraw14+2GiYxiuBh4Z0i83wEs2Bz04CAZpsdmzD1sbGLwjLgwbxv7Sf9Ng69H7sfedZ+Vn2+opxGd
-	E0cbuIJVxpYGs3mww0ahzZRM1V523ynnxDDkDCcon9U8kPctb2KWWx0KHn6aCC4Be9w4=;
-From: Ian Jackson <iwj@xenproject.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24907.4491.895219.37845@mariner.uk.xensource.com>
-Date: Wed, 22 Sep 2021 12:20:43 +0100
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-    Ian Jackson <iwj@xenproject.org>,
-    xen-devel@lists.xenproject.org,
-    dpsmith@apertussolutions.com
-Subject: Re: [xen-unstable test] 164996: regressions - FAIL
-In-Reply-To: <19906cf8-365b-63c9-5c59-aef8dae41505@suse.com>
-References: <osstest-164996-mainreport@xen.org>
-	<d049ba60-db81-aaa4-1769-54c6964cfd06@suse.com>
-	<24904.44119.940679.241639@mariner.uk.xensource.com>
-	<alpine.DEB.2.21.2109211631330.17979@sstabellini-ThinkPad-T480s>
-	<19906cf8-365b-63c9-5c59-aef8dae41505@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+X-Inumbo-ID: 3aaef6c8-1b99-11ec-b970-12813bfff9fa
+From: Rahul Singh <rahul.singh@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	rahul.singh@arm.com,
+	andre.przywara@arm.com,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Paul Durrant <paul@xen.org>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v2 01/17] xen/pci: Refactor MSI code that implements MSI functionality within XEN
+Date: Wed, 22 Sep 2021 12:34:47 +0100
+Message-Id: <27a7c53a862c0c8dcbe4ecef203d5efeee5746a8.1632307952.git.rahul.singh@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1632307952.git.rahul.singh@arm.com>
+References: <cover.1632307952.git.rahul.singh@arm.com>
+In-Reply-To: <cover.1632307952.git.rahul.singh@arm.com>
+References: <cover.1632307952.git.rahul.singh@arm.com>
 
-Jan Beulich writes ("Re: [xen-unstable test] 164996: regressions - FAIL"):
-> On 22.09.2021 01:38, Stefano Stabellini wrote:
-> > On Mon, 20 Sep 2021, Ian Jackson wrote:
-> >>> Sep 15 14:44:55.598538 [ 1613.419061] DMA32: 2788*4kB (UMEC) 890*8kB (UMEC) 497*16kB (UMEC) 36*32kB (UMC) 1*64kB (C) 1*128kB (C) 9*256kB (C) 7*512kB (C) 0*1024kB 0*2048kB 0*4096kB = 33456kB
-> >>>
-> >>> there even look to be a number of higher order pages available (albeit
-> >>> without digging I can't tell what "(C)" means). Nevertheless order-4
-> >>> allocations aren't really nice.
-> >>
-> >> The host history suggests this may possibly be related to a qemu update.
-> >>
-> >> http://logs.test-lab.xenproject.org/osstest/results/host/rochester0.html
-> 
-> Stefano - as per some of your investigation detailed further down I
-> wonder whether you had seen this part of Ian's reply. (Question of
-> course then is how that qemu update had managed to get pushed.)
+On Arm, the initial plan is to only support GICv3 ITS which doesn't
+require us to manage the MSIs because the HW will protect against
+spoofing. Move the code under CONFIG_HAS_PCI_MSI flag to gate the code
+for ARM.
 
-I looked for bisection results for this failure and
+No functional change intended.
 
-  http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable/test-arm64-arm64-libvirt-xsm.guest-start--debian.repeat.html
+Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Reviewed-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+---
+Change in v2: Fixed minor comments
+---
+ xen/arch/x86/Kconfig             |  1 +
+ xen/drivers/passthrough/Makefile |  1 +
+ xen/drivers/passthrough/msi.c    | 83 ++++++++++++++++++++++++++++++++
+ xen/drivers/passthrough/pci.c    | 54 +++++----------------
+ xen/drivers/pci/Kconfig          |  4 ++
+ xen/include/xen/msi.h            | 43 +++++++++++++++++
+ xen/xsm/flask/hooks.c            |  8 +--
+ 7 files changed, 149 insertions(+), 45 deletions(-)
+ create mode 100644 xen/drivers/passthrough/msi.c
+ create mode 100644 xen/include/xen/msi.h
 
-it's a heisenbug.  Also, the tests got reorganised slightly as a
-side-effect of dropping some i386 tests, so some of these tests are
-"new" from osstest's pov, although their content isn't really new.
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 1f83518ee0..b4abfca46f 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -20,6 +20,7 @@ config X86
+ 	select HAS_NS16550
+ 	select HAS_PASSTHROUGH
+ 	select HAS_PCI
++	select HAS_PCI_MSI
+ 	select HAS_PDX
+ 	select HAS_SCHED_GRANULARITY
+ 	select HAS_UBSAN
+diff --git a/xen/drivers/passthrough/Makefile b/xen/drivers/passthrough/Makefile
+index 445690e3e5..a5efa22714 100644
+--- a/xen/drivers/passthrough/Makefile
++++ b/xen/drivers/passthrough/Makefile
+@@ -7,3 +7,4 @@ obj-y += iommu.o
+ obj-$(CONFIG_HAS_PCI) += pci.o
+ obj-$(CONFIG_HAS_DEVICE_TREE) += device_tree.o
+ obj-$(CONFIG_HAS_PCI) += ats.o
++obj-$(CONFIG_HAS_PCI_MSI) += msi.o
+diff --git a/xen/drivers/passthrough/msi.c b/xen/drivers/passthrough/msi.c
+new file mode 100644
+index 0000000000..ce1a450f6f
+--- /dev/null
++++ b/xen/drivers/passthrough/msi.c
+@@ -0,0 +1,83 @@
++#include <xen/init.h>
++#include <xen/pci.h>
++#include <xen/msi.h>
++#include <asm/hvm/io.h>
++
++int pdev_msix_assign(struct domain *d, struct pci_dev *pdev)
++{
++    int rc;
++
++    if ( pdev->msix )
++    {
++        rc = pci_reset_msix_state(pdev);
++        if ( rc )
++            return rc;
++        msixtbl_init(d);
++    }
++
++    return 0;
++}
++
++int pdev_msi_init(struct pci_dev *pdev)
++{
++    unsigned int pos;
++
++    INIT_LIST_HEAD(&pdev->msi_list);
++
++    pos = pci_find_cap_offset(pdev->seg, pdev->bus, PCI_SLOT(pdev->devfn),
++                              PCI_FUNC(pdev->devfn), PCI_CAP_ID_MSI);
++    if ( pos )
++    {
++        uint16_t ctrl = pci_conf_read16(pdev->sbdf, msi_control_reg(pos));
++
++        pdev->msi_maxvec = multi_msi_capable(ctrl);
++    }
++
++    pos = pci_find_cap_offset(pdev->seg, pdev->bus, PCI_SLOT(pdev->devfn),
++                              PCI_FUNC(pdev->devfn), PCI_CAP_ID_MSIX);
++    if ( pos )
++    {
++        struct arch_msix *msix = xzalloc(struct arch_msix);
++        uint16_t ctrl;
++
++        if ( !msix )
++            return -ENOMEM;
++
++        spin_lock_init(&msix->table_lock);
++
++        ctrl = pci_conf_read16(pdev->sbdf, msix_control_reg(pos));
++        msix->nr_entries = msix_table_size(ctrl);
++
++        pdev->msix = msix;
++    }
++
++    return 0;
++}
++
++void pdev_msi_deinit(struct pci_dev *pdev)
++{
++    XFREE(pdev->msix);
++}
++
++void pdev_dump_msi(const struct pci_dev *pdev)
++{
++    const struct msi_desc *msi;
++
++    if ( list_empty(&pdev->msi_list) )
++        return;
++
++    printk(" - MSIs < ");
++    list_for_each_entry ( msi, &pdev->msi_list, list )
++        printk("%d ", msi->irq);
++    printk(">");
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index fc4fa2e5c3..8996403161 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -32,8 +32,8 @@
+ #include <xen/softirq.h>
+ #include <xen/tasklet.h>
+ #include <xen/vpci.h>
++#include <xen/msi.h>
+ #include <xsm/xsm.h>
+-#include <asm/msi.h>
+ #include "ats.h"
+ 
+ struct pci_seg {
+@@ -314,6 +314,7 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
+ {
+     struct pci_dev *pdev;
+     unsigned int pos;
++    int rc;
+ 
+     list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
+         if ( pdev->bus == bus && pdev->devfn == devfn )
+@@ -327,35 +328,12 @@ static struct pci_dev *alloc_pdev(struct pci_seg *pseg, u8 bus, u8 devfn)
+     *((u8*) &pdev->bus) = bus;
+     *((u8*) &pdev->devfn) = devfn;
+     pdev->domain = NULL;
+-    INIT_LIST_HEAD(&pdev->msi_list);
+-
+-    pos = pci_find_cap_offset(pseg->nr, bus, PCI_SLOT(devfn), PCI_FUNC(devfn),
+-                              PCI_CAP_ID_MSI);
+-    if ( pos )
+-    {
+-        uint16_t ctrl = pci_conf_read16(pdev->sbdf, msi_control_reg(pos));
+-
+-        pdev->msi_maxvec = multi_msi_capable(ctrl);
+-    }
+ 
+-    pos = pci_find_cap_offset(pseg->nr, bus, PCI_SLOT(devfn), PCI_FUNC(devfn),
+-                              PCI_CAP_ID_MSIX);
+-    if ( pos )
++    rc = pdev_msi_init(pdev);
++    if ( rc )
+     {
+-        struct arch_msix *msix = xzalloc(struct arch_msix);
+-        uint16_t ctrl;
+-
+-        if ( !msix )
+-        {
+-            xfree(pdev);
+-            return NULL;
+-        }
+-        spin_lock_init(&msix->table_lock);
+-
+-        ctrl = pci_conf_read16(pdev->sbdf, msix_control_reg(pos));
+-        msix->nr_entries = msix_table_size(ctrl);
+-
+-        pdev->msix = msix;
++        xfree(pdev);
++        return NULL;
+     }
+ 
+     list_add(&pdev->alldevs_list, &pseg->alldevs_list);
+@@ -449,7 +427,7 @@ static void free_pdev(struct pci_seg *pseg, struct pci_dev *pdev)
+     }
+ 
+     list_del(&pdev->alldevs_list);
+-    xfree(pdev->msix);
++    pdev_msi_deinit(pdev);
+     xfree(pdev);
+ }
+ 
+@@ -1271,18 +1249,16 @@ bool_t pcie_aer_get_firmware_first(const struct pci_dev *pdev)
+ static int _dump_pci_devices(struct pci_seg *pseg, void *arg)
+ {
+     struct pci_dev *pdev;
+-    struct msi_desc *msi;
+ 
+     printk("==== segment %04x ====\n", pseg->nr);
+ 
+     list_for_each_entry ( pdev, &pseg->alldevs_list, alldevs_list )
+     {
+-        printk("%pp - %pd - node %-3d - MSIs < ",
++        printk("%pp - %pd - node %-3d",
+                &pdev->sbdf, pdev->domain,
+                (pdev->node != NUMA_NO_NODE) ? pdev->node : -1);
+-        list_for_each_entry ( msi, &pdev->msi_list, list )
+-               printk("%d ", msi->irq);
+-        printk(">\n");
++        pdev_dump_msi(pdev);
++        printk("\n");
+     }
+ 
+     return 0;
+@@ -1422,13 +1398,9 @@ static int assign_device(struct domain *d, u16 seg, u8 bus, u8 devfn, u32 flag)
+     ASSERT(pdev && (pdev->domain == hardware_domain ||
+                     pdev->domain == dom_io));
+ 
+-    if ( pdev->msix )
+-    {
+-        rc = pci_reset_msix_state(pdev);
+-        if ( rc )
+-            goto done;
+-        msixtbl_init(d);
+-    }
++    rc = pdev_msix_assign(d, pdev);
++    if ( rc )
++        goto done;
+ 
+     pdev->fault.count = 0;
+ 
+diff --git a/xen/drivers/pci/Kconfig b/xen/drivers/pci/Kconfig
+index 7da03fa13b..c6a7bc8007 100644
+--- a/xen/drivers/pci/Kconfig
++++ b/xen/drivers/pci/Kconfig
+@@ -1,3 +1,7 @@
+ 
+ config HAS_PCI
+ 	bool
++
++config HAS_PCI_MSI
++	bool
++	depends on HAS_PCI
+diff --git a/xen/include/xen/msi.h b/xen/include/xen/msi.h
+new file mode 100644
+index 0000000000..c903d0050c
+--- /dev/null
++++ b/xen/include/xen/msi.h
+@@ -0,0 +1,43 @@
++#ifndef __XEN_MSI_H_
++#define __XEN_MSI_H_
++
++#include <xen/pci.h>
++
++#ifdef CONFIG_HAS_PCI_MSI
++
++#include <asm/msi.h>
++
++int pdev_msix_assign(struct domain *d, struct pci_dev *pdev);
++int pdev_msi_init(struct pci_dev *pdev);
++void pdev_msi_deinit(struct pci_dev *pdev);
++void pdev_dump_msi(const struct pci_dev *pdev);
++
++#else /* !CONFIG_HAS_PCI_MSI */
++
++static inline int pdev_msix_assign(struct domain *d, struct pci_dev *pdev)
++{
++    return 0;
++}
++
++static inline int pdev_msi_init(struct pci_dev *pdev)
++{
++    return 0;
++}
++
++static inline void pdev_msi_deinit(struct pci_dev *pdev) {}
++static inline void pci_cleanup_msi(struct pci_dev *pdev) {}
++static inline void pdev_dump_msi(const struct pci_dev *pdev) {}
++
++#endif /* CONFIG_HAS_PCI_MSI */
++
++#endif /* __XEN_MSI_H */
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 25e87180b4..ea9a12bd71 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -21,7 +21,7 @@
+ #include <xen/guest_access.h>
+ #include <xen/xenoprof.h>
+ #include <xen/iommu.h>
+-#ifdef CONFIG_HAS_PCI
++#ifdef CONFIG_HAS_PCI_MSI
+ #include <asm/msi.h>
+ #endif
+ #include <public/xen.h>
+@@ -114,7 +114,7 @@ static int get_irq_sid(int irq, u32 *sid, struct avc_audit_data *ad)
+         }
+         return security_irq_sid(irq, sid);
+     }
+-#ifdef CONFIG_HAS_PCI
++#ifdef CONFIG_HAS_PCI_MSI
+     {
+         struct irq_desc *desc = irq_to_desc(irq);
+         if ( desc->msi_desc && desc->msi_desc->dev ) {
+@@ -874,7 +874,7 @@ static int flask_map_domain_pirq (struct domain *d)
+ static int flask_map_domain_msi (struct domain *d, int irq, const void *data,
+                                  u32 *sid, struct avc_audit_data *ad)
+ {
+-#ifdef CONFIG_HAS_PCI
++#ifdef CONFIG_HAS_PCI_MSI
+     const struct msi_info *msi = data;
+     u32 machine_bdf = (msi->seg << 16) | (msi->bus << 8) | msi->devfn;
+ 
+@@ -940,7 +940,7 @@ static int flask_unmap_domain_pirq (struct domain *d)
+ static int flask_unmap_domain_msi (struct domain *d, int irq, const void *data,
+                                    u32 *sid, struct avc_audit_data *ad)
+ {
+-#ifdef CONFIG_HAS_PCI
++#ifdef CONFIG_HAS_PCI_MSI
+     const struct pci_dev *pdev = data;
+     u32 machine_bdf = (pdev->seg << 16) | (pdev->bus << 8) | pdev->devfn;
+ 
+-- 
+2.17.1
 
-Unfortunately, with it being a heisenbug, we won't get any useful
-bisection results, which would otherwise conclusively tell us which
-tree the problem was in.
-
-> >> The grub cfg has this:
-> >>
-> >>  multiboot /xen placeholder conswitch=x watchdog noreboot async-show-all console=dtuart dom0_mem=512M,max:512M ucode=scan  ${xen_rm_opts}
-> >>
-> >> It's not clear to me whether xen_rm_opts is "" or "no-real-mode edd=off".
-> > 
-> > I definitely recommend to increase dom0 memory, especially as I guess
-> > the box is going to have a significant amount, far more than 4GB. I
-> > would set it to 2GB. Also the syntax on ARM is simpler, so it should be
-> > just: dom0_mem=2G
-> 
-> Ian - I guess that's an adjustment relatively easy to make? I wonder
-> though whether we wouldn't want to address the underlying issue first.
-> Presumably not, because the fix would likely take quite some time to
-> propagate suitably. Yet if not, we will want to have some way of
-> verifying that an eventual fix there would have helped here.
-
-It could propagate fairly quickly.  But I'm loathe to make this change
-because it seems to me that it would be simply masking the bug.
-
-Notably, when this goes wrong, it seems to happen after the guest has
-been started once successfully already.  So there *is* enough
-memory...
-
-Ian.
 
