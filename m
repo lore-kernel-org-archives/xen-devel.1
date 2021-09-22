@@ -8,39 +8,39 @@ X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
 	USER_AGENT_GIT,USER_IN_DEF_DKIM_WL autolearn=unavailable autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD9BCC433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 00:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A6EDC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 00:17:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5BB3D61166
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 00:17:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5BB3D61166
+	by mail.kernel.org (Postfix) with ESMTPS id 5159660F48
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 00:17:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5159660F48
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192041.342316 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.192032.342294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSpwe-0000o0-MU; Wed, 22 Sep 2021 00:17:04 +0000
+	id 1mSpwd-0000G9-39; Wed, 22 Sep 2021 00:17:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192041.342316; Wed, 22 Sep 2021 00:17:04 +0000
+Received: by outflank-mailman (output) from mailman id 192032.342294; Wed, 22 Sep 2021 00:17:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mSpwe-0000nB-HY; Wed, 22 Sep 2021 00:17:04 +0000
-Received: by outflank-mailman (input) for mailman id 192041;
- Wed, 22 Sep 2021 00:17:03 +0000
+	id 1mSpwd-0000G2-03; Wed, 22 Sep 2021 00:17:03 +0000
+Received: by outflank-mailman (input) for mailman id 192032;
+ Wed, 22 Sep 2021 00:17:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Dbqz=OM=flex--seanjc.bounces.google.com=3c3NKYQYKCZQG2yB704CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@srs-us1.protection.inumbo.net>)
- id 1mSpnD-0000pt-S8
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 00:07:19 +0000
-Received: from mail-qk1-x74a.google.com (unknown [2607:f8b0:4864:20::74a])
+ <SRS0=mFIr=OM=flex--seanjc.bounces.google.com=3eHNKYQYKCZkL73GC59HH9E7.5HFQ7G-67O7EEBLML.Q7GIKHC75M.HK9@srs-us1.protection.inumbo.net>)
+ id 1mSpnS-0000pt-SV
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 00:07:34 +0000
+Received: from mail-qv1-xf49.google.com (unknown [2607:f8b0:4864:20::f49])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 860f2a03-19c6-484d-961b-c8714f1a266e;
- Wed, 22 Sep 2021 00:06:12 +0000 (UTC)
-Received: by mail-qk1-x74a.google.com with SMTP id
- h4-20020a05620a244400b004334ede5036so5562383qkn.13
- for <xen-devel@lists.xenproject.org>; Tue, 21 Sep 2021 17:06:12 -0700 (PDT)
+ id 1332bf12-5f7c-4a6e-a8fc-38bad2e7c2d1;
+ Wed, 22 Sep 2021 00:06:17 +0000 (UTC)
+Received: by mail-qv1-xf49.google.com with SMTP id
+ w10-20020a0cb54a000000b0037a9848b92fso8990393qvd.0
+ for <xen-devel@lists.xenproject.org>; Tue, 21 Sep 2021 17:06:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,44 +52,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 860f2a03-19c6-484d-961b-c8714f1a266e
+X-Inumbo-ID: 1332bf12-5f7c-4a6e-a8fc-38bad2e7c2d1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=reply-to:date:in-reply-to:message-id:mime-version:references
          :subject:from:to:cc;
-        bh=y8OYsYpDs1HLDvFjdurM0d7KqhhKHNQa2gUw1mVnDLE=;
-        b=VgUrfICBEU208O8puU1yf0798dMNWQPdVEv1umOOfyY7+MLL+nmtJuMQRYhGk6ACPB
-         kV7DCUw8x7TThTD9JohJr12iNp9IVCl2gpkkOQsZfWo7I0JLG16fmuO2MGI3z76Slotc
-         tAS3raY0P7YO93IW++jVoxXSx7bgW6LXHh9Lg2GYrEnit4mDk0PviAE/NTWZXLAHL0sx
-         tQX8bpmjgklBcXInIIRO8BoGyPy1BMCOolkyTRz+cls0PNm7fOz8/SKH73cd2RwpkSM5
-         C8zyjgBkrIzTe2Xfi0y9KCgCoaxdmORS5u5QyM9nNkpibluFvb/Koa8wFffrHGQL3WIt
-         pSLg==
+        bh=6Icjr/ACV1XsfVUfKjKZi9JPiJa8aiN8zAxRj7zkg58=;
+        b=lodyKSv5s5L9FuAs5M0G0kMx/zVrl93Ee68EIaXohxy+LQ+d8m+TXXDCkue1vWSnVV
+         ViQYh0dHzV9iJNwFB6yjTYg0JxCSrOowA0Ye/c7r2V2aOqrV/LmltE8U0Zt+k8GFxu9h
+         2la1t1UJWIkOSVjh2yV0uEzAZiwrdvHA0zHKk46Dq/OX6UEK0uGcCRXWfsZIO3eQTKqS
+         ConZVcLZT+4wy0TFLTPjpjtLAOIGL9YLutbbFVl73zcBDJOID6vgd5v4Ln2GZlWHiqop
+         o86J2gkYFymM8L2O6tTywYJkqskrpEBIkrTz73Gvpj/PmQ5jYyO0eaPS4tdU3c0It1S4
+         A6OA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:reply-to:date:in-reply-to:message-id
          :mime-version:references:subject:from:to:cc;
-        bh=y8OYsYpDs1HLDvFjdurM0d7KqhhKHNQa2gUw1mVnDLE=;
-        b=IjIOTsTtBD8GeCtYKE2ttl2/szwwo801ikfR2mi1n8dCPoFAH5glNTAMTKOhJesH3p
-         41f2WaBxp5Zj2NPFDx7zGFKffiFsNPrwQBD03NSwDdDFJiwIksLvsWgG/tKkUTHNn3K5
-         NSXwgyp99UR/4yLbKyao8Nj6c/dA17foZYPRFFlusBfGRjsnzbC/hLn5sQCZq3NpPAtQ
-         HcWIv9tdKs5L+r7TwrtduafqnTTlM97h/x36zuCouYQIc6a545xjv7YVbOTcTXPx3T5R
-         67va3CPNUmWZkKHpEdzgedCGEHUY7vMtLboU6vvBwyLpFRQtLL8n5gUEQuRYtZH2fkEZ
-         eSGw==
-X-Gm-Message-State: AOAM530eGoAHTayqPlJmztfMgaQENqBy2wp6geefBLLHidFDTagT64Ax
-	sggNJoQqDiE/UIq2KHHFSVIkaCLNYbY=
-X-Google-Smtp-Source: ABdhPJyHtapTp0OfNUKTfdvcX6WW6HZmgDH9RXeTSlkheaqjZb44gygT11cJLtQ1bPei5p+RUE6ibKLU+f0=
+        bh=6Icjr/ACV1XsfVUfKjKZi9JPiJa8aiN8zAxRj7zkg58=;
+        b=RsC5Gw6fMmWMVJXp8G2aWGu5Ze4LxGdkgbGhLx9XVmK59ItRuoJ3pQKG6mJK1/VBjo
+         EvJ85ntvKc/LZBIsumKDg05fmcEKytKWbWKOFNk1yaN8qdXlIFTG+toslNwq1nhFsJI2
+         nR0sJlCyxmq6FZj7jQOUrMWmxi82tyQBBeLvz4g6TdP1DBMUaiaU8tHIG/vUGxVeG5tZ
+         TkzRQQm9n7VCCDTE4cDFF6rPjlKBpRqcz0CypoTvTA8/7G9wch91pjBvMvC3dLkwGnec
+         RvydSoxBZZHgf7lzImG9hUDQXwudZpU7AkJghYGlWmtnsJHn/92T/fyIliWGMbo5qDso
+         9jeg==
+X-Gm-Message-State: AOAM533RCwWVe7c5h2bXhq31HBrCBq2A9PyT8+hZRgLvSInnHv8Bg2pB
+	uvnj2j3s2/K8kD4mEP4hJHmBXJegEKc=
+X-Google-Smtp-Source: ABdhPJzlQAzmSdl3nY/YBM5ZcGipBomoLCiu3CqrYXxVZ0o44Jz0iqe4JnQizT8BW9SKS2QFzZIdD02YgoQ=
 X-Received: from seanjc798194.pdx.corp.google.com ([2620:15c:90:200:b022:92d6:d37b:686c])
- (user=seanjc job=sendgmr) by 2002:a25:d9cc:: with SMTP id q195mr41667087ybg.15.1632269171910;
- Tue, 21 Sep 2021 17:06:11 -0700 (PDT)
+ (user=seanjc job=sendgmr) by 2002:a25:7350:: with SMTP id o77mr39621975ybc.549.1632269176658;
+ Tue, 21 Sep 2021 17:06:16 -0700 (PDT)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Tue, 21 Sep 2021 17:05:30 -0700
+Date: Tue, 21 Sep 2021 17:05:32 -0700
 In-Reply-To: <20210922000533.713300-1-seanjc@google.com>
-Message-Id: <20210922000533.713300-14-seanjc@google.com>
+Message-Id: <20210922000533.713300-16-seanjc@google.com>
 Mime-Version: 1.0
 References: <20210922000533.713300-1-seanjc@google.com>
 X-Mailer: git-send-email 2.33.0.464.g1972c5931b-goog
-Subject: [PATCH v3 13/16] KVM: x86: Move Intel Processor Trace interrupt
- handler to vmx.c
+Subject: [PATCH v3 15/16] KVM: arm64: Drop perf.c and fold its tiny bits of
+ code into arm.c / pmu.c
 From: Sean Christopherson <seanjc@google.com>
 To: Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
 	Arnaldo Carvalho de Melo <acme@kernel.org>, Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
@@ -112,122 +112,135 @@ Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@re
 	Zhu Lingshan <lingshan.zhu@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Now that all state needed for VMX's PT interrupt handler is exposed to
-vmx.c (specifically the currently running vCPU), move the handler into
-vmx.c where it belongs.
+Call KVM's (un)register perf callbacks helpers directly from arm.c, and
+move the PMU bits into pmu.c and rename the related helper accordingly.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/include/asm/kvm_host.h |  2 +-
- arch/x86/kvm/vmx/vmx.c          | 22 +++++++++++++++++++++-
- arch/x86/kvm/x86.c              | 20 +-------------------
- 3 files changed, 23 insertions(+), 21 deletions(-)
+ arch/arm64/include/asm/kvm_host.h |  3 ---
+ arch/arm64/kvm/Makefile           |  2 +-
+ arch/arm64/kvm/arm.c              |  6 ++++--
+ arch/arm64/kvm/perf.c             | 27 ---------------------------
+ arch/arm64/kvm/pmu.c              |  8 ++++++++
+ include/kvm/arm_pmu.h             |  1 +
+ 6 files changed, 14 insertions(+), 33 deletions(-)
+ delete mode 100644 arch/arm64/kvm/perf.c
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index 6efe4e03a6d2..d40814b57ae8 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -1495,7 +1495,7 @@ struct kvm_x86_init_ops {
- 	int (*disabled_by_bios)(void);
- 	int (*check_processor_compatibility)(void);
- 	int (*hardware_setup)(void);
--	bool (*intel_pt_intr_in_guest)(void);
-+	unsigned int (*handle_intel_pt_intr)(void);
+diff --git a/arch/arm64/include/asm/kvm_host.h b/arch/arm64/include/asm/kvm_host.h
+index 828b6eaa2c56..f141ac65f4f1 100644
+--- a/arch/arm64/include/asm/kvm_host.h
++++ b/arch/arm64/include/asm/kvm_host.h
+@@ -670,9 +670,6 @@ unsigned long kvm_mmio_read_buf(const void *buf, unsigned int len);
+ int kvm_handle_mmio_return(struct kvm_vcpu *vcpu);
+ int io_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa);
  
- 	struct kvm_x86_ops *runtime_ops;
- };
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index 61a4f5ff2acd..33f92febe3ce 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -7687,6 +7687,20 @@ static struct kvm_x86_ops vmx_x86_ops __initdata = {
- 	.vcpu_deliver_sipi_vector = kvm_vcpu_deliver_sipi_vector,
- };
- 
-+static unsigned int vmx_handle_intel_pt_intr(void)
-+{
-+	struct kvm_vcpu *vcpu = kvm_get_running_vcpu();
-+
-+	/* '0' on failure so that the !PT case can use a RET0 static call. */
-+	if (!kvm_arch_pmi_in_guest(vcpu))
-+		return 0;
-+
-+	kvm_make_request(KVM_REQ_PMI, vcpu);
-+	__set_bit(MSR_CORE_PERF_GLOBAL_OVF_CTRL_TRACE_TOPA_PMI_BIT,
-+		  (unsigned long *)&vcpu->arch.pmu.global_status);
-+	return 1;
-+}
-+
- static __init void vmx_setup_user_return_msrs(void)
+-void kvm_perf_init(void);
+-void kvm_perf_teardown(void);
+-
+ #ifdef CONFIG_GUEST_PERF_EVENTS
+ static inline bool kvm_arch_pmi_in_guest(struct kvm_vcpu *vcpu)
  {
+diff --git a/arch/arm64/kvm/Makefile b/arch/arm64/kvm/Makefile
+index 989bb5dad2c8..0bcc378b7961 100644
+--- a/arch/arm64/kvm/Makefile
++++ b/arch/arm64/kvm/Makefile
+@@ -12,7 +12,7 @@ obj-$(CONFIG_KVM) += hyp/
  
-@@ -7713,6 +7727,8 @@ static __init void vmx_setup_user_return_msrs(void)
- 		kvm_add_user_return_msr(vmx_uret_msrs_list[i]);
+ kvm-y := $(KVM)/kvm_main.o $(KVM)/coalesced_mmio.o $(KVM)/eventfd.o \
+ 	 $(KVM)/vfio.o $(KVM)/irqchip.o $(KVM)/binary_stats.o \
+-	 arm.o mmu.o mmio.o psci.o perf.o hypercalls.o pvtime.o \
++	 arm.o mmu.o mmio.o psci.o hypercalls.o pvtime.o \
+ 	 inject_fault.o va_layout.o handle_exit.o \
+ 	 guest.o debug.o reset.o sys_regs.o \
+ 	 vgic-sys-reg-v3.o fpsimd.o pmu.o \
+diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
+index 2b542fdc237e..48f89d80f464 100644
+--- a/arch/arm64/kvm/arm.c
++++ b/arch/arm64/kvm/arm.c
+@@ -1744,7 +1744,9 @@ static int init_subsystems(void)
+ 	if (err)
+ 		goto out;
+ 
+-	kvm_perf_init();
++	kvm_pmu_init();
++	kvm_register_perf_callbacks(NULL);
++
+ 	kvm_sys_reg_table_init();
+ 
+ out:
+@@ -2160,7 +2162,7 @@ int kvm_arch_init(void *opaque)
+ /* NOP: Compiling as a module not supported */
+ void kvm_arch_exit(void)
+ {
+-	kvm_perf_teardown();
++	kvm_unregister_perf_callbacks();
  }
  
-+static struct kvm_x86_init_ops vmx_init_ops __initdata;
-+
- static __init int hardware_setup(void)
- {
- 	unsigned long host_bndcfgs;
-@@ -7873,6 +7889,10 @@ static __init int hardware_setup(void)
- 		return -EINVAL;
- 	if (!enable_ept || !cpu_has_vmx_intel_pt())
- 		pt_mode = PT_MODE_SYSTEM;
-+	if (pt_mode == PT_MODE_HOST_GUEST)
-+		vmx_init_ops.handle_intel_pt_intr = vmx_handle_intel_pt_intr;
-+	else
-+		vmx_init_ops.handle_intel_pt_intr = NULL;
- 
- 	setup_default_sgx_lepubkeyhash();
- 
-@@ -7898,7 +7918,7 @@ static struct kvm_x86_init_ops vmx_init_ops __initdata = {
- 	.disabled_by_bios = vmx_disabled_by_bios,
- 	.check_processor_compatibility = vmx_check_processor_compat,
- 	.hardware_setup = hardware_setup,
--	.intel_pt_intr_in_guest = vmx_pt_mode_is_host_guest,
-+	.handle_intel_pt_intr = NULL,
- 
- 	.runtime_ops = &vmx_x86_ops,
- };
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index 1bea616402e6..b79b2d29260d 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -8264,20 +8264,6 @@ static void kvm_timer_init(void)
- 			  kvmclock_cpu_online, kvmclock_cpu_down_prep);
- }
- 
--static unsigned int kvm_handle_intel_pt_intr(void)
+ static int __init early_kvm_mode_cfg(char *arg)
+diff --git a/arch/arm64/kvm/perf.c b/arch/arm64/kvm/perf.c
+deleted file mode 100644
+index 0b902e0d5b5d..000000000000
+--- a/arch/arm64/kvm/perf.c
++++ /dev/null
+@@ -1,27 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- * Based on the x86 implementation.
+- *
+- * Copyright (C) 2012 ARM Ltd.
+- * Author: Marc Zyngier <marc.zyngier@arm.com>
+- */
+-
+-#include <linux/perf_event.h>
+-#include <linux/kvm_host.h>
+-
+-#include <asm/kvm_emulate.h>
+-
+-DEFINE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
+-
+-void kvm_perf_init(void)
 -{
--	struct kvm_vcpu *vcpu = kvm_get_running_vcpu();
+-	if (kvm_pmu_probe_pmuver() != 0xf && !is_protected_kvm_enabled())
+-		static_branch_enable(&kvm_arm_pmu_available);
 -
--	/* '0' on failure so that the !PT case can use a RET0 static call. */
--	if (!kvm_arch_pmi_in_guest(vcpu))
--		return 0;
--
--	kvm_make_request(KVM_REQ_PMI, vcpu);
--	__set_bit(MSR_CORE_PERF_GLOBAL_OVF_CTRL_TRACE_TOPA_PMI_BIT,
--			(unsigned long *)&vcpu->arch.pmu.global_status);
--	return 1;
+-	kvm_register_perf_callbacks(NULL);
 -}
 -
- #ifdef CONFIG_X86_64
- static void pvclock_gtod_update_fn(struct work_struct *work)
+-void kvm_perf_teardown(void)
+-{
+-	kvm_unregister_perf_callbacks();
+-}
+diff --git a/arch/arm64/kvm/pmu.c b/arch/arm64/kvm/pmu.c
+index 03a6c1f4a09a..d98b57a17043 100644
+--- a/arch/arm64/kvm/pmu.c
++++ b/arch/arm64/kvm/pmu.c
+@@ -7,6 +7,14 @@
+ #include <linux/perf_event.h>
+ #include <asm/kvm_hyp.h>
+ 
++DEFINE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
++
++void kvm_pmu_init(void)
++{
++	if (kvm_pmu_probe_pmuver() != 0xf && !is_protected_kvm_enabled())
++		static_branch_enable(&kvm_arm_pmu_available);
++}
++
+ /*
+  * Given the perf event attributes and system type, determine
+  * if we are going to need to switch counters at guest entry/exit.
+diff --git a/include/kvm/arm_pmu.h b/include/kvm/arm_pmu.h
+index 864b9997efb2..42270676498d 100644
+--- a/include/kvm/arm_pmu.h
++++ b/include/kvm/arm_pmu.h
+@@ -14,6 +14,7 @@
+ #define ARMV8_PMU_MAX_COUNTER_PAIRS	((ARMV8_PMU_MAX_COUNTERS + 1) >> 1)
+ 
+ DECLARE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
++void kvm_pmu_init(void);
+ 
+ static __always_inline bool kvm_arm_support_pmu_v3(void)
  {
-@@ -11031,11 +11017,7 @@ int kvm_arch_hardware_setup(void *opaque)
- 	memcpy(&kvm_x86_ops, ops->runtime_ops, sizeof(kvm_x86_ops));
- 	kvm_ops_static_call_update();
- 
--	/* Temporary ugliness. */
--	if (ops->intel_pt_intr_in_guest && ops->intel_pt_intr_in_guest())
--		kvm_register_perf_callbacks(kvm_handle_intel_pt_intr);
--	else
--		kvm_register_perf_callbacks(NULL);
-+	kvm_register_perf_callbacks(ops->handle_intel_pt_intr);
- 
- 	if (!kvm_cpu_cap_has(X86_FEATURE_XSAVES))
- 		supported_xss = 0;
 -- 
 2.33.0.464.g1972c5931b-goog
 
