@@ -2,45 +2,54 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 063F3C4332F
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:31:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DF87C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:38:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7979D61168
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:31:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7979D61168
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
+	by mail.kernel.org (Postfix) with ESMTPS id 45F2261019
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:38:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 45F2261019
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192961.343709 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.192969.343721 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT65q-0003pG-ND; Wed, 22 Sep 2021 17:31:38 +0000
+	id 1mT6Bs-0004k3-H6; Wed, 22 Sep 2021 17:37:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192961.343709; Wed, 22 Sep 2021 17:31:38 +0000
+Received: by outflank-mailman (output) from mailman id 192969.343721; Wed, 22 Sep 2021 17:37:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT65q-0003p9-Jh; Wed, 22 Sep 2021 17:31:38 +0000
-Received: by outflank-mailman (input) for mailman id 192961;
- Wed, 22 Sep 2021 17:31:38 +0000
+	id 1mT6Bs-0004jw-D7; Wed, 22 Sep 2021 17:37:52 +0000
+Received: by outflank-mailman (input) for mailman id 192969;
+ Wed, 22 Sep 2021 17:37:51 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D6HN=OM=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mT65p-0003p3-Uf
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 17:31:37 +0000
-Received: from beetle.greensocs.com (unknown [5.135.226.135])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id efd3b8be-1bca-11ec-b9c0-12813bfff9fa;
- Wed, 22 Sep 2021 17:31:36 +0000 (UTC)
-Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 98B7F21ED8;
- Wed, 22 Sep 2021 16:16:02 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=tKcP=OM=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1mT6Bq-0004jq-NY
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 17:37:50 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id ce3ffac2-1bcb-11ec-b9c1-12813bfff9fa;
+ Wed, 22 Sep 2021 17:37:49 +0000 (UTC)
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-145-s3trJ2EeMrStDEAWK4WXKQ-1; Wed, 22 Sep 2021 13:37:47 -0400
+Received: by mail-wr1-f69.google.com with SMTP id
+ j16-20020adfa550000000b0016012acc443so2828563wrb.14
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Sep 2021 10:37:47 -0700 (PDT)
+Received: from [192.168.1.36] (118.red-83-35-24.dynamicip.rima-tde.net.
+ [83.35.24.118])
+ by smtp.gmail.com with ESMTPSA id v10sm3041925wri.29.2021.09.22.10.37.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Sep 2021 10:37:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,81 +61,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: efd3b8be-1bca-11ec-b9c0-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327363;
+X-Inumbo-ID: ce3ffac2-1bcb-11ec-b9c1-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1632332269;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=20eMulj3Qy/DZxWmekzYSt42bv07Z1NJC97opChMppc=;
-	b=0GTRQNrK+8eC4nSIBI1SyRdVgk/yz3AcWIgo1jZc+3/ixKzyuHi/rbXlOmb7SF5gwUT4je
-	Kafcyz3ZizvLJ94FKvPqVu6mxe7wLyPq9T2y/XORwkJswxh9nvcCQaC5xGv/EED3DiFvN+
-	S0CxATzuTlW34AF4O/BZxkpylFrb5Mg=
-From: Damien Hedde <damien.hedde@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: Damien Hedde <damien.hedde@greensocs.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	Ani Sinha <ani@anisinha.ca>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Eric Auger <eric.auger@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Peter Xu <peterx@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	qemu-riscv@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	mark.burton@greensocs.com,
-	mirela.grujic@greensocs.com,
-	edgari@xilinx.com,
-	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 16/16] hw/intc/ibex_plic: set user_creatable
-Date: Wed, 22 Sep 2021 18:14:05 +0200
-Message-Id: <20210922161405.140018-17-damien.hedde@greensocs.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+	bh=w1l0AiXwDhCyCu/u0vTki8Ygujm+OCz4LudDX2/nmkU=;
+	b=O3ocui0qCFzw/Q8mEsUfC9BGpUhdsun9gDBL8u9hgwcjKNWX2tjdxEIpNbHE6gWTMaLU+I
+	pwRit7KWC6mhJrQf7pl+wPde8Km5Xh3q/pnD50zq103BuMoawBM19flDfe4i7ce7weitsR
+	P5J9euhmmCcBMe9fa3vxcjsNxLBuk3Y=
+X-MC-Unique: s3trJ2EeMrStDEAWK4WXKQ-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=w1l0AiXwDhCyCu/u0vTki8Ygujm+OCz4LudDX2/nmkU=;
+        b=5ns83/uxcmdka/TeyKaA1ck4PvwzKpxTslVnXPItLzZNKj9WZ3mSBi02VRYLW1t9wf
+         w42R+BLb7eHAkmvCbVAT+zum49ICWvJe+e9UlZE7nz4EG64crSJiHp+RZnk+aGMHnxbf
+         NNs9qFH4qVI0eqfPCtMNmyuRCE4LcAbtoevr/aEW5of5xa3APXh2ZoKoBsN+vXWHqAWV
+         rEsdKoaklpbW5i2wZjgVH5LLfD/6exQdI7U1dh9l79ywLUeJRHcMIkP5SGbbdELRfrC4
+         NTveEcTXn5+qgP0Eiq09tTwgg+cwZbbmmTl09wSd1/jZarKgmjYqJa1UzreC5dO9R6Mc
+         Xcow==
+X-Gm-Message-State: AOAM531zsHwb4ZHMrZTCZseyvgKh4M5Kk+8CmWQSauS5zcJZljUEHPRv
+	/uWbQn6ILti9AO0ViYvLew4158DKiGaKXpao8R8M+6rw05IWPmWn1AX4pH634uA7urIND9on3QS
+	MKdQ0RiW6PTVUPoVie6JqZFiYsRc=
+X-Received: by 2002:a05:600c:2046:: with SMTP id p6mr12223532wmg.88.1632332266708;
+        Wed, 22 Sep 2021 10:37:46 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyg6vmpdLqfWALQ+aYScr0ufGB6YbggOHa9PzO72FTcIBc1TC/o6Tu07FmCA0vADFzchZXYUQ==
+X-Received: by 2002:a05:600c:2046:: with SMTP id p6mr12223500wmg.88.1632332266506;
+        Wed, 22 Sep 2021 10:37:46 -0700 (PDT)
+Message-ID: <d27c5829-e28f-4d17-966e-6cb86ebe00e6@redhat.com>
+Date: Wed, 22 Sep 2021 19:37:43 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.0
+Subject: Re: [RFC PATCH v2 02/16] qapi: Implement query-machine-phase QMP
+ command
+To: Damien Hedde <damien.hedde@greensocs.com>, qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>,
+ Peter Xu <peterx@redhat.com>, mirela.grujic@greensocs.com,
+ Alistair Francis <Alistair.Francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Ani Sinha <ani@anisinha.ca>,
+ Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
+ Markus Armbruster <armbru@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ qemu-riscv@nongnu.org, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
+ <berrange@redhat.com>, mark.burton@greensocs.com, edgari@xilinx.com,
+ Igor Mammedov <imammedo@redhat.com>
+References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+ <20210922161405.140018-3-damien.hedde@greensocs.com>
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+In-Reply-To: <20210922161405.140018-3-damien.hedde@greensocs.com>
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Spam: Yes
 
-This patch allows to create the device using device_add
-using -preconfig mode. This sysbus device still needs to
-be allowed by a machine to be created after preconfig is done.
+On 9/22/21 18:13, Damien Hedde wrote:
+> From: Mirela Grujic <mirela.grujic@greensocs.com>
+> 
+> The command returns current machine initialization phase.
+>  From now on, the MachineInitPhase enum is generated from the
+> QAPI schema.
+> 
+> Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
 
-Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
----
+Missing your S-o-b, otherwise:
+Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 
-Depending on chosen condition for a device to be added, this commit
-may change.
----
- hw/intc/ibex_plic.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/hw/intc/ibex_plic.c b/hw/intc/ibex_plic.c
-index edf76e4f61..8abd5ee613 100644
---- a/hw/intc/ibex_plic.c
-+++ b/hw/intc/ibex_plic.c
-@@ -291,6 +291,7 @@ static void ibex_plic_class_init(ObjectClass *klass, void *data)
- {
-     DeviceClass *dc = DEVICE_CLASS(klass);
- 
-+    dc->user_creatable = true;
-     dc->reset = ibex_plic_reset;
-     device_class_set_props(dc, ibex_plic_properties);
-     dc->realize = ibex_plic_realize;
--- 
-2.33.0
+> ---
+>   qapi/machine.json          | 56 ++++++++++++++++++++++++++++++++++++++
+>   include/hw/qdev-core.h     | 30 ++------------------
+>   hw/core/machine-qmp-cmds.c |  9 ++++++
+>   hw/core/qdev.c             |  5 ++++
+>   4 files changed, 72 insertions(+), 28 deletions(-)
 
 
