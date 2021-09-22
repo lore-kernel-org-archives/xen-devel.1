@@ -8,47 +8,47 @@ X-Spam-Status: No, score=-18.7 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C461C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:42:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 560F5C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:49:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C868F611B0
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:42:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C868F611B0
+	by mail.kernel.org (Postfix) with ESMTPS id 035B9611CA
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:49:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 035B9611CA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192975.343732 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.192982.343743 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT6Gd-00067V-40; Wed, 22 Sep 2021 17:42:47 +0000
+	id 1mT6N3-00070R-RM; Wed, 22 Sep 2021 17:49:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192975.343732; Wed, 22 Sep 2021 17:42:47 +0000
+Received: by outflank-mailman (output) from mailman id 192982.343743; Wed, 22 Sep 2021 17:49:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT6Gd-00067O-0Z; Wed, 22 Sep 2021 17:42:47 +0000
-Received: by outflank-mailman (input) for mailman id 192975;
- Wed, 22 Sep 2021 17:42:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mT6N3-00070K-N0; Wed, 22 Sep 2021 17:49:25 +0000
+Received: by outflank-mailman (input) for mailman id 192982;
+ Wed, 22 Sep 2021 17:49:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=tKcP=OM=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1mT6Gb-00067I-8Z
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 17:42:45 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 2bb333d3-ef26-49f8-86cf-69b74f0549dc;
- Wed, 22 Sep 2021 17:42:44 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-483-ggp9NKr6NNmscOmBfPvVtQ-1; Wed, 22 Sep 2021 13:42:42 -0400
-Received: by mail-wr1-f71.google.com with SMTP id
- e1-20020adfa741000000b0015e424fdd01so2851944wrd.11
- for <xen-devel@lists.xenproject.org>; Wed, 22 Sep 2021 10:42:42 -0700 (PDT)
-Received: from [192.168.1.36] (118.red-83-35-24.dynamicip.rima-tde.net.
- [83.35.24.118])
- by smtp.gmail.com with ESMTPSA id w1sm6588014wmc.19.2021.09.22.10.42.39
+ (envelope-from <SRS0=XTvp=OM=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1mT6N3-0006zv-7o
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 17:49:25 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 6c2d21b5-1bcd-11ec-b9c4-12813bfff9fa;
+ Wed, 22 Sep 2021 17:49:24 +0000 (UTC)
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-28-rlQXclYWMMeNbimgPpj5Jw-1; Wed, 22 Sep 2021 13:49:22 -0400
+Received: by mail-wr1-f72.google.com with SMTP id
+ c2-20020adfa302000000b0015e4260febdso2825999wrb.20
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Sep 2021 10:49:22 -0700 (PDT)
+Received: from [192.168.3.132] (p5b0c64dd.dip0.t-ipconnect.de. [91.12.100.221])
+ by smtp.gmail.com with ESMTPSA id m4sm3482985wrx.81.2021.09.22.10.49.19
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Sep 2021 10:42:41 -0700 (PDT)
+ Wed, 22 Sep 2021 10:49:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,75 +60,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2bb333d3-ef26-49f8-86cf-69b74f0549dc
+X-Inumbo-ID: 6c2d21b5-1bcd-11ec-b9c4-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1632332564;
+	s=mimecast20190719; t=1632332963;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=uVaOmuvSmYMdDMUDJJ0nLDELyFbMOLlDnDD2b93jvo8=;
-	b=Htwu1n9DeDxsziaCPMz9t6wz0Mw0GtG++cWp/nBcFvG6MM6eM5UywOJvFWeioZrknvIQMD
-	BBYgMXFCWrpjbf59/YJNDt/e8o6cbWAEIRHGKmLGfdTK7EBPQeGgjt1uf/R6xGfw+B7q+X
-	6GVImcLQ8pK8m9UKXmhJNv9hUnuVK+E=
-X-MC-Unique: ggp9NKr6NNmscOmBfPvVtQ-1
+	bh=8R2eWgo3mCPiEWKHImVoU3s0Qt0O78iy+gHqpXKDMHg=;
+	b=Ag07l4jLOAcBPXgy08f5PMjSH8BISpFcZxHWZ3NGnZCCw7EE04gLvZDd+bE4A/TshlKUM5
+	Y6Z3qfmDFq7fmG6SXXJthZfZldme8mgOvhqpi/w/LyrcsIdAnS4XuiDMVtKiCYaiwv7yB5
+	0Yum6r0WiiSNefvjClMXaBHTJ4Ou5Ec=
+X-MC-Unique: rlQXclYWMMeNbimgPpj5Jw-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=uVaOmuvSmYMdDMUDJJ0nLDELyFbMOLlDnDD2b93jvo8=;
-        b=oitZFyFq4UYLAInIGuCa5ZDaOwFcYbFyXQl6JorvRTAlYrf8vS9eA4sxlegKK86LUU
-         UW5D/gYhRqxAwvdfbtcdCn4qSeso9gv/0stCHA23gQ1cxrgYPQ4bB3/XZ4gZIn3n85gj
-         lXgFvpBgoaDUUNZAE3j8p7QmB5jcoasfqy+jVlZCABzifFkX97rf/MXlwGNPP0OoqHtj
-         uWnlS90B1Zg4bmMdzZO5RhNUgWIGLA8+G2pBpmJUPYzMkTRKkuKR5CihC3BM7q4rjqMf
-         E50ujdWcGBLe8JoOwKVQ/NCTHdVHcnpwzKSAZY3RI0MPx0rot3GseXskfol6iM9UloJ9
-         VmJw==
-X-Gm-Message-State: AOAM530+9d9hW8flowghdwAN0C3dmPOjMS3fKddXxEmKqchux8d2uKaW
-	ewYslyIqZQrofHjOZhBOHUbR10iuy0UOvHvClkiWjgNJXyGTjmqDdDtf1r59O+qUd2FqznMhZIg
-	ZtemzrT+bix+fOP5RIZ//DFSd/u0=
-X-Received: by 2002:a1c:7310:: with SMTP id d16mr326728wmb.30.1632332561639;
-        Wed, 22 Sep 2021 10:42:41 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyMUMMi8eLqjRXCSalitvGzPda/oA8H6U5KYwVIDPTTCJLTISya0LAgbbYFrl2db1iXLKfbNQ==
-X-Received: by 2002:a1c:7310:: with SMTP id d16mr326712wmb.30.1632332561486;
-        Wed, 22 Sep 2021 10:42:41 -0700 (PDT)
-Message-ID: <bc37831d-4d31-8b02-acc9-c54191bbf31e@redhat.com>
-Date: Wed, 22 Sep 2021 19:42:39 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.1.0
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=8R2eWgo3mCPiEWKHImVoU3s0Qt0O78iy+gHqpXKDMHg=;
+        b=XphXeaQiGrN+EzwMrl3bJuNCvau9YQsSDpDWsi63N2TSBMNljMzAp8H85WzFH/gl2d
+         PqOzJ1f3t7rKhrHYmfL7rOwEDw+PfVyPo1cVA+bHkYVTGAujIfJUBdz9FNhzMXDNvmn4
+         j0NLTXRO4NfcVlaVEwdIyYz6a+y7bdWdud97PqiyWONPrVr8Sm0AEQxSqbaVoVXDRGHB
+         LQw+fWG6fYGgzYEbpq1ejC8Yaw3MQDEHUPIkK8ZEu89fUY/x33atEwW0p2/SJfQPGTDQ
+         Qgnbusvf+KDl3GB1jhMW0WwtuExRpYt4faptpcmbdXgE3c5C6lSLw8SDICSLHGuVDguX
+         y97g==
+X-Gm-Message-State: AOAM531uPDnGx0UX0sQFTl8ctOl0+u1iVDnt4aIX9arckGh3yjfaLBvD
+	nRxP/qhtwklZqdpIZJUfDh4DPjSVQUpDtgqMlIsM6Fn1GCQfjTTQU+ett3C78rO8SfouciXLw6b
+	LAeQyYgAEXIu9y0Faee7XqrckRtE=
+X-Received: by 2002:a05:6000:1844:: with SMTP id c4mr187151wri.355.1632332961339;
+        Wed, 22 Sep 2021 10:49:21 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwDZycGgzlG5PLVo/6Isj0bTJcO/O5J4WdjAYiBchkHxW5ecBClNDAyi9t+1qZPrUoaXfO12g==
+X-Received: by 2002:a05:6000:1844:: with SMTP id c4mr187105wri.355.1632332961083;
+        Wed, 22 Sep 2021 10:49:21 -0700 (PDT)
 Subject: Re: [RFC PATCH v2 11/16] softmmu/memory: add
  memory_region_try_add_subregion function
 To: Damien Hedde <damien.hedde@greensocs.com>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>,
- Peter Xu <peterx@redhat.com>, mirela.grujic@greensocs.com,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Ani Sinha <ani@anisinha.ca>,
- Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
- Markus Armbruster <armbru@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>,
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
  =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Eric Auger <eric.auger@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org, =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?=
- <berrange@redhat.com>, mark.burton@greensocs.com, edgari@xilinx.com,
- Igor Mammedov <imammedo@redhat.com>
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Ani Sinha <ani@anisinha.ca>, Gerd Hoffmann <kraxel@redhat.com>,
+ Eric Auger <eric.auger@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Peter Xu <peterx@redhat.com>, "Dr. David Alan Gilbert"
+ <dgilbert@redhat.com>, Markus Armbruster <armbru@redhat.com>,
+ Eric Blake <eblake@redhat.com>, qemu-riscv@nongnu.org,
+ xen-devel@lists.xenproject.org, mark.burton@greensocs.com,
+ mirela.grujic@greensocs.com, edgari@xilinx.com,
+ Peter Maydell <peter.maydell@linaro.org>
 References: <20210922161405.140018-1-damien.hedde@greensocs.com>
  <20210922161405.140018-12-damien.hedde@greensocs.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat
+Message-ID: <8ff0d8c9-94f1-cc21-a9f9-bb5fcd1cc3e7@redhat.com>
+Date: Wed, 22 Sep 2021 19:49:19 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+MIME-Version: 1.0
 In-Reply-To: <20210922161405.140018-12-damien.hedde@greensocs.com>
 Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=philmd@redhat.com
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 9/22/21 18:14, Damien Hedde wrote:
+On 22.09.21 18:14, Damien Hedde wrote:
 > It allows to try to add a subregion to a memory region with error
 > handling. Like memory_region_add_subregion_overlap, it handles
 > priority as well.
@@ -149,7 +150,97 @@ On 9/22/21 18:14, Damien Hedde wrote:
 >   include/exec/memory.h | 22 ++++++++++++++++++++++
 >   softmmu/memory.c      | 22 ++++++++++++++--------
 >   2 files changed, 36 insertions(+), 8 deletions(-)
+> 
+> diff --git a/include/exec/memory.h b/include/exec/memory.h
+> index c3d417d317..422e1eda67 100644
+> --- a/include/exec/memory.h
+> +++ b/include/exec/memory.h
+> @@ -2162,6 +2162,28 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+>                                            MemoryRegion *subregion,
+>                                            int priority);
+>   
+> +/**
+> + * memory_region_try_add_subregion: Add a subregion to a container
+> + *                                  with error handling.
+> + *
+> + * Behaves like memory_region_add_subregion_overlap(), but errors are
+> + * reported if the subregion cannot be added.
+> + *
+> + * @mr: the region to contain the new subregion; must be a container
+> + *      initialized with memory_region_init().
+> + * @offset: the offset relative to @mr where @subregion is added.
+> + * @subregion: the subregion to be added.
+> + * @priority: used for resolving overlaps; highest priority wins.
+> + * @errp: pointer to Error*, to store an error if it happens.
+> + *
+> + * Returns: True in case of success, false otherwise.
+> + */
+> +bool memory_region_try_add_subregion(MemoryRegion *mr,
+> +                                     hwaddr offset,
+> +                                     MemoryRegion *subregion,
+> +                                     int priority,
+> +                                     Error **errp);
+> +
+>   /**
+>    * memory_region_get_ram_addr: Get the ram address associated with a memory
+>    *                             region
+> diff --git a/softmmu/memory.c b/softmmu/memory.c
+> index bfedaf9c4d..eac61f8236 100644
+> --- a/softmmu/memory.c
+> +++ b/softmmu/memory.c
+> @@ -2513,22 +2513,28 @@ done:
+>       memory_region_transaction_commit();
+>   }
+>   
+> -static void memory_region_add_subregion_common(MemoryRegion *mr,
+> -                                               hwaddr offset,
+> -                                               MemoryRegion *subregion)
+> +bool memory_region_try_add_subregion(MemoryRegion *mr,
+> +                                     hwaddr offset,
+> +                                     MemoryRegion *subregion,
+> +                                     int priority,
+> +                                     Error **errp)
+>   {
+> -    assert(!subregion->container);
+> +    if (subregion->container) {
+> +        error_setg(errp, "The memory region is already in another region");
+> +        return false;
+> +    }
+> +    subregion->priority = priority;
+>       subregion->container = mr;
+>       subregion->addr = offset;
+>       memory_region_update_container_subregions(subregion);
+> +    return true;
+>   }
+>   
+>   void memory_region_add_subregion(MemoryRegion *mr,
+>                                    hwaddr offset,
+>                                    MemoryRegion *subregion)
+>   {
+> -    subregion->priority = 0;
+> -    memory_region_add_subregion_common(mr, offset, subregion);
+> +    memory_region_try_add_subregion(mr, offset, subregion, 0, &error_abort);
+>   }
+>   
+>   void memory_region_add_subregion_overlap(MemoryRegion *mr,
+> @@ -2536,8 +2542,8 @@ void memory_region_add_subregion_overlap(MemoryRegion *mr,
+>                                            MemoryRegion *subregion,
+>                                            int priority)
+>   {
+> -    subregion->priority = priority;
+> -    memory_region_add_subregion_common(mr, offset, subregion);
+> +    memory_region_try_add_subregion(mr, offset, subregion, priority,
+> +                                    &error_abort);
+>   }
+>   
+>   void memory_region_del_subregion(MemoryRegion *mr,
+> 
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+Reviewed-by: David Hildenbrand <david@redhat.com>
+
+-- 
+Thanks,
+
+David / dhildenb
 
 
