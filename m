@@ -2,45 +2,47 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DCC6C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 18:41:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E61A8C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 20:47:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C66446109E
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 18:41:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C66446109E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
+	by mail.kernel.org (Postfix) with ESMTPS id A0B3D610D1
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 20:47:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A0B3D610D1
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193028.343820 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193034.343831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT7Bd-0000QG-Ht; Wed, 22 Sep 2021 18:41:41 +0000
+	id 1mT99R-0005FK-No; Wed, 22 Sep 2021 20:47:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193028.343820; Wed, 22 Sep 2021 18:41:41 +0000
+Received: by outflank-mailman (output) from mailman id 193034.343831; Wed, 22 Sep 2021 20:47:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT7Bd-0000Q9-E3; Wed, 22 Sep 2021 18:41:41 +0000
-Received: by outflank-mailman (input) for mailman id 193028;
- Wed, 22 Sep 2021 18:41:40 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=D6HN=OM=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mT7Bb-0000Q3-7Y
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 18:41:39 +0000
-Received: from beetle.greensocs.com (unknown [5.135.226.135])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b77be324-1bd4-11ec-b9cc-12813bfff9fa;
- Wed, 22 Sep 2021 18:41:37 +0000 (UTC)
-Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 879E321ED3;
- Wed, 22 Sep 2021 16:16:00 +0000 (UTC)
+	id 1mT99R-0005FD-Ko; Wed, 22 Sep 2021 20:47:33 +0000
+Received: by outflank-mailman (input) for mailman id 193034;
+ Wed, 22 Sep 2021 20:47:33 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mT99R-0005F3-19; Wed, 22 Sep 2021 20:47:33 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mT99Q-0007zE-Qd; Wed, 22 Sep 2021 20:47:32 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mT99Q-0004tj-Iq; Wed, 22 Sep 2021 20:47:32 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mT99Q-0007Fd-IL; Wed, 22 Sep 2021 20:47:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,147 +54,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b77be324-1bd4-11ec-b9cc-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327361;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Lg6JGGOuMKgOK9bkuvAzYukD8OqEWtmOgbk2hQPItz8=;
-	b=ND0iqKFzTzDcZ27ooxhDOEEEV8AccARG7AJHhC9a02u1e9KnwGeBRww88INrFwYdnUiGLU
-	iWgot6Scekg2EdCjx5zulK0cCIpl/uZhww0kpehf4I9kg6qVmrIhlxI6IZCWAofixBVreB
-	IFn8x3hm1X67NsswL2KN8XfRLNp4fgc=
-From: Damien Hedde <damien.hedde@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: Damien Hedde <damien.hedde@greensocs.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	Ani Sinha <ani@anisinha.ca>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Eric Auger <eric.auger@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Peter Xu <peterx@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	qemu-riscv@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	mark.burton@greensocs.com,
-	mirela.grujic@greensocs.com,
-	edgari@xilinx.com,
-	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 14/16] docs/system: add doc about the initialized machine phase and an example
-Date: Wed, 22 Sep 2021 18:14:03 +0200
-Message-Id: <20210922161405.140018-15-damien.hedde@greensocs.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=d7XrgVjbrrlBPL86Ij/OiMtD0FBKwjVYOQl0sFghkW8=; b=3O88E8WV1obpM85OVA2tR6Dv7T
+	Rb4vd/LHw5FWhmQUs1DDWdL1yjwn3F97SUmt5aa2bVR9SE0bGKyVGZEDpwoDiSS4RmjTgQCkV7ysv
+	K+LCRJtKdNkxBNRYWoriXo1i6HdINbYXwtLR1ZFVUuS5tGnIUrFDZyu1CW8TJicCeIqY=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-165155-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Spam: Yes
+MIME-Version: 1.0
+Subject: [ovmf test] 165155: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=79019c7a42287e8591ec98487db0e849384a74e1
+X-Osstest-Versions-That:
+    ovmf=f334c5a41dc4702b1c767c6614025aa2f802f9a4
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 22 Sep 2021 20:47:32 +0000
 
-Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
----
- docs/system/managed-startup.rst | 77 +++++++++++++++++++++++++++++++++
- 1 file changed, 77 insertions(+)
+flight 165155 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/165155/
 
-diff --git a/docs/system/managed-startup.rst b/docs/system/managed-startup.rst
-index 9bcf98ea79..af12a10d27 100644
---- a/docs/system/managed-startup.rst
-+++ b/docs/system/managed-startup.rst
-@@ -32,4 +32,81 @@ machine, including but not limited to:
- - ``query-qmp-schema``
- - ``query-commands``
- - ``query-status``
-+- ``x-machine-init``
- - ``x-exit-preconfig``
-+
-+In particular these commands allow to advance and stop qemu at different
-+phases of the VM creation and finally to leave the "preconfig" state. The
-+accessible phases are:
-+
-+- ``accel-created``
-+- ``initialized``
-+- ``ready``
-+
-+The order of the phases is enforced. It is not possible to go backwards.
-+Note that other early phases exist, but they are not attainable with
-+``--preconfig``. Depending on the phase, QMP commands can be issued to modify
-+some part of the VM creation.
-+
-+accel-created phase
-+-------------------
-+
-+Initial phase entered with ``--preconfig``.
-+
-+initialized phase
-+-----------------
-+
-+``x-machine-init`` advances to ``initialized`` phase. During this phase, the
-+machine is initialized and populated with buses and devices. The following QMP
-+commands are available to manually populate or modify the machine:
-+
-+- ``device_add``
-+- ``x-sysbus-mmio-map``
-+- ``qom-set``
-+
-+ready phase
-+-----------
-+
-+``x-exit-preconfig`` advances to the final phase. When entering this phase,
-+the VM creation finishes. "preconfig" state is then done and QEMU goes to
-+normal execution.
-+
-+Machine creation example
-+------------------------
-+
-+The following is an example that shows how to add some devices with qmp
-+commands, memory map them, and add interrupts::
-+
-+  x-machine-init
-+
-+  device_add        driver=sysbus-memory id=rom size=0x4000 readonly=true
-+  x-sysbus-mmio-map device=rom addr=32768
-+
-+  device_add        driver=sysbus-memory id=flash size=0x80000 readonly=true
-+  x-sysbus-mmio-map device=flash addr=536870912
-+
-+  device_add        driver=sysbus-memory id=ram size=0x10000
-+  x-sysbus-mmio-map device=ram addr=268435456
-+
-+  device_add        driver=ibex-plic id=plic
-+  x-sysbus-mmio-map device=plic addr=1090584576
-+
-+  device_add        driver=ibex-uart id=uart chardev=serial0
-+  x-sysbus-mmio-map device=uart addr=1073741824
-+  qom-set path=uart property=sysbus-irq[0] value=plic/unnamed-gpio-in[1]
-+  qom-set path=uart property=sysbus-irq[1] value=plic/unnamed-gpio-in[2]
-+  qom-set path=uart property=sysbus-irq[2] value=plic/unnamed-gpio-in[3]
-+  qom-set path=uart property=sysbus-irq[3] value=plic/unnamed-gpio-in[4]
-+
-+  x-exit-preconfig
-+
-+These commands reproduce a subset of the riscv32 opentitan (hw/riscv/opentitan)
-+machine. We can start qemu using::
-+
-+  qemu-sytem-riscv32 -preconfig -qmp unix:./qmp-sock,server \
-+  -machine none -cpu lowriscv-ibex -serial mon:stdio ...
-+
-+Then we just have to issue the commands, for example using `qmp-shell`. If the
-+previous commands were in a file named `machine.qmp`, we could do::
-+
-+  qmp-shell ./qmp-sock < machine.qmp
--- 
-2.33.0
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 79019c7a42287e8591ec98487db0e849384a74e1
+baseline version:
+ ovmf                 f334c5a41dc4702b1c767c6614025aa2f802f9a4
 
+Last test of basis   165151  2021-09-22 09:30:38 Z    0 days
+Testing same since   165155  2021-09-22 12:40:08 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Corvin Köhne <c.koehne@beckhoff.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   f334c5a41d..79019c7a42  79019c7a42287e8591ec98487db0e849384a74e1 -> xen-tested-master
 
