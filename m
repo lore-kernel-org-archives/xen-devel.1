@@ -2,50 +2,44 @@ Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B5A0C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E97EAC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 18:07:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 45A2A611CA
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 17:50:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 45A2A611CA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by mail.kernel.org (Postfix) with ESMTPS id ACFFF6103C
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 18:07:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org ACFFF6103C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.192990.343764 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193002.343776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT6OM-0000HD-DX; Wed, 22 Sep 2021 17:50:46 +0000
+	id 1mT6e5-0002LA-1X; Wed, 22 Sep 2021 18:07:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 192990.343764; Wed, 22 Sep 2021 17:50:46 +0000
+Received: by outflank-mailman (output) from mailman id 193002.343776; Wed, 22 Sep 2021 18:07:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mT6OM-0000H3-Ac; Wed, 22 Sep 2021 17:50:46 +0000
-Received: by outflank-mailman (input) for mailman id 192990;
- Wed, 22 Sep 2021 17:50:44 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mT6e4-0002L3-UC; Wed, 22 Sep 2021 18:07:00 +0000
+Received: by outflank-mailman (input) for mailman id 193002;
+ Wed, 22 Sep 2021 18:06:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pxyX=OM=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1mT6OK-0000En-JT
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 17:50:44 +0000
-Received: from mail-wr1-x42c.google.com (unknown [2a00:1450:4864:20::42c])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2b936fbb-83c3-4531-a2cb-1fe5ed750b8f;
- Wed, 22 Sep 2021 17:50:43 +0000 (UTC)
-Received: by mail-wr1-x42c.google.com with SMTP id i23so9426179wrb.2
- for <xen-devel@lists.xenproject.org>; Wed, 22 Sep 2021 10:50:43 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id c8sm2984483wru.30.2021.09.22.10.50.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Sep 2021 10:50:41 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 265891FF96;
- Wed, 22 Sep 2021 18:50:41 +0100 (BST)
+ <SRS0=ilSY=OM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1mT6e3-0002Kt-Lq
+ for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 18:06:59 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e077f100-1bcf-11ec-b9c8-12813bfff9fa;
+ Wed, 22 Sep 2021 18:06:58 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 3002F6103C;
+ Wed, 22 Sep 2021 18:06:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,106 +51,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b936fbb-83c3-4531-a2cb-1fe5ed750b8f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=references:user-agent:from:to:cc:subject:date:in-reply-to
-         :message-id:mime-version:content-transfer-encoding;
-        bh=EowvngywS72jBE6RikxFXgqAP7QU+TKgMADLoAphN+0=;
-        b=cRAwE43CJ0p2nCPQMHV0nj54ejgyt3xuERBZDKA5f2t86nHrc5A1U/PJ9zkn0y0Zkt
-         twTViH0WRRUj3qQTLy68RmSXltVvPu66d5aSRH9PmEAz7iliPm9JGYExcd14D+8WhZ9u
-         G40GMKh4ANdiBQtu2pJjUPb1VOyxkdaK/M/mGlyZ7iEl0ttRni1uD1szE1kpORfyTJuP
-         eXIjUOVRswZhaE/O49CAQbJeXmGBLF2y8gboGWSGeJrmJBwwNZINhrFAcFEhFzU3d/w5
-         eY+Y/hw5v1YuSWsuzvdqFRpZ37PQ0ev6OM9fE/63KjKUx/nGJ1KrDQUR93hTXV3XM6FN
-         nQAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
-         :in-reply-to:message-id:mime-version:content-transfer-encoding;
-        bh=EowvngywS72jBE6RikxFXgqAP7QU+TKgMADLoAphN+0=;
-        b=5UfkqmUpfaWkJ68Jt0egl7XcjlIXElCnDIvteqCRT9YmuKPuoj5M/LTJcrjUbFZnds
-         QWcOsoytEvRCLEeyqtU59Atg02r6e+UxeEkaTIdZBfkkAhn5gL0a/zAqZkUaw1ImMl76
-         8u3sSTOsI+BeXBkBbu3C9qDh95fyLjGDOhrBUxSCZ7KQPrRgyiymFcQ2Po+AKddLkM+N
-         Zm8KqbLFoIKVdY19VHxCQAOZYJWO1kc75m8qSmgX6hb6UET+nXQAhfvllI0KAb4NVbbC
-         vnIcGrauQHU9x44wbuM21XbkMJDBOd+wGqD+gJNBxw0ReMRGsp1JLt5pCxqo7tZ6C8ha
-         WRVg==
-X-Gm-Message-State: AOAM532sSFqIQuFZYZPLnxxWjKKf9EwpUI7pr14Z8Guo+rjAaPmg2K7W
-	xV8JdSXOhLkaiPoIGEtAzNoufA==
-X-Google-Smtp-Source: ABdhPJzRWalyaDRlvA4ti6UQssgLp7cmcVNXyjS70Jwd6eeSvG/1b8HOaBGQYuTHbywYFos5SkbPvQ==
-X-Received: by 2002:a7b:c1c5:: with SMTP id a5mr346897wmj.144.1632333042791;
-        Wed, 22 Sep 2021 10:50:42 -0700 (PDT)
-References: <87lf40vay1.fsf@linaro.org>
- <04272e87a8939be46acddd3c75bbffa84b0a40c1.camel@infradead.org>
-User-agent: mu4e 1.7.0; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: David Woodhouse <dwmw2@infradead.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>, Viresh Kumar
- <viresh.kumar@linaro.org>, Wei Liu <wl@xen.org>, Alexandru Agache
- <aagch@amazon.com>, "rust-vmm@lists.opendev.org"
- <rust-vmm@lists.opendev.org>, xen-devel@lists.xenproject.org, Stratos
- Mailing List <stratos-dev@op-lists.linaro.org>, Oleksandr Tyshchenko
- <olekstysh@gmail.com>, Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: Re: Is it time to start implementing Xen bindings for rust-vmm?
-Date: Wed, 22 Sep 2021 18:44:41 +0100
-In-reply-to: <04272e87a8939be46acddd3c75bbffa84b0a40c1.camel@infradead.org>
-Message-ID: <871r5go5xq.fsf@linaro.org>
+X-Inumbo-ID: e077f100-1bcf-11ec-b9c8-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1632334017;
+	bh=kj4DT4Ve2Tgqljtt6pKuRqGj9inEbX9Imtax6vVXr8I=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=fmmGp3KAY2OfzHtizPuVVEvI4DHz2UvGjkOq5Mw7IilOpnFIJYlb9Njfx23cghsdv
+	 GdhaUy6/E/VpOCWHatWkgv8XspEyuSQW5Fqcs9I5/vcNjPfCwqpYn/kSHXC6h8pHev
+	 fEhf/FBzklrOqikHUhp79WFaVlUK9700WlSgw30qcotpsNbcjGofcu0BqW21+ZLd04
+	 6Hr24h7fhRoAa5jtkOWD26iCcWR/EsTX6NAVAJSGEAL6039+P8bxprwbses5TIf9+A
+	 3muanXuclN3kst/2oD2PMLE68EGaK+OI5fjZBsLYfpS6NmT9DtMVNM7UjakUNGJScX
+	 CLRGnDPiYNkGQ==
+Date: Wed, 22 Sep 2021 11:06:56 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Jan Beulich <jbeulich@suse.com>
+cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Andrew Cooper <andrew.cooper3@citrix.com>, 
+    George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, 
+    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+    Ian Jackson <iwj@xenproject.org>
+Subject: Re: [PATCH] common: guest_physmap_add_page()'s return value needs
+ checking
+In-Reply-To: <ad798aae-0f8e-219f-59d4-7ff5fe52c984@suse.com>
+Message-ID: <alpine.DEB.2.21.2109221105080.17979@sstabellini-ThinkPad-T480s>
+References: <ea5d1c22-967c-b11c-bc6f-9a8cac9a9823@suse.com> <YUmj3P3j6f5Gl/xh@MacBook-Air-de-Roger.local> <58e2e6e2-c154-f09f-193e-6bef2b42995f@suse.com> <YUm3yLOfAfqrwgmH@MacBook-Air-de-Roger.local> <24905.47298.105494.711706@mariner.uk.xensource.com>
+ <ad798aae-0f8e-219f-59d4-7ff5fe52c984@suse.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/mixed; boundary="8323329-667531506-1632334017=:17979"
 
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-David Woodhouse <dwmw2@infradead.org> writes:
+--8323329-667531506-1632334017=:17979
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-> [[S/MIME Signed Part:Undecided]]
-> On Mon, 2021-09-13 at 13:44 +0100, Alex Benn=C3=A9e wrote:
->> Hi,
->>=20
->> As we consider the next cycle for Project Stratos I would like to make
->> some more progress on hypervisor agnosticism for our virtio backends.
->> While we have implemented a number of virtio vhost-user backends using C
->> we've rapidly switched to using rust-vmm based ones for virtio-i2c,
->> virtio-rng and virtio-gpio. Given the interest in Rust for implementing
->> backends does it make sense to do some enabling work in rust-vmm to
->> support Xen?
->
-> I like this idea.
->
-> Somewhat separately, Alex Agache has already started some preliminary
-> hacking on supporting Xen guests within rust-vmm (on top of Linux/KVM):
-> https://github.com/alexandruag/vmm-reference/commits/xen
+On Wed, 22 Sep 2021, Jan Beulich wrote:
+> On 21.09.2021 12:49, Ian Jackson wrote:
+> > Roger Pau Monné writes ("Re: [PATCH] common: guest_physmap_add_page()'s return value needs checking"):
+> >> On Tue, Sep 21, 2021 at 12:28:12PM +0200, Jan Beulich wrote:
+> >>> On 21.09.2021 11:20, Roger Pau Monné wrote:
+> >>>> On Wed, Sep 01, 2021 at 06:06:37PM +0200, Jan Beulich wrote:
+> >>>>> The function may fail; it is not correct to indicate "success" in this
+> >>>>> case up the call stack. Mark the function must-check to prove all
+> >>>>> cases have been caught (and no new ones will get introduced).
+> >>>>>
+> >>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> >>>>
+> >>>> Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+> >>>
+> >>> Thanks. Albeit strictly speaking an ack here isn't enough for the change
+> >>> to go in, it would need to be R-b or come from a REST maintainer.
+> >>
+> >> Oh, FE:
+> >>
+> >> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+> > 
+> > Acked-by: Ian Jackson <iwj@xenproject.org>
+> 
+> With these, any chance of getting an Arm side ack here as well?
 
-I'll be sending along a more detailed post once I've finished my
-work breakdown but I'm currently envisioning two parts. A xen-sys crate
-for the low level access that supports both ioctl and hypercall calls.
-This would be useful for other projects such as stubdomains (think a
-"bare-metal" RTOS with some sort of backend, uni-kernel style). It would
-also be the lowest layer that rust-vmm can use to interact with the
-hypervisor.
-
-I'm aware the HyperV solution is to present a KVM-like ioctl interface
-via the host kernel. However if we want generality with type-1
-hypervisors we can't assume all will get suitable translation layers in
-the kernel.
-
-Fortunately for the time being our focus is on virtio backends so we
-don't need to get directly involved in the hypervisor run loop... for
-now.
-
-> Being able to run on *actual* Xen would be good too. And we should also
-> aspire to do guest-transparent live migration between the two hosting
-> environments.
->
-> Where relevant, it would be great to be able to share components (like
-> emulation of the Xen PCI platform device, a completely single-tenant
-> XenStore implementation dedicated to a single guest, perhaps PV
-> netback/blkback and other things).
-
-For Stratos portable virtio backends is one of our project goals.
->
->
-> [[End of S/MIME Signed Part]]
-
-
---=20
-Alex Benn=C3=A9e
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+--8323329-667531506-1632334017=:17979--
 
