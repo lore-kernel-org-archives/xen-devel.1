@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F169C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AC75C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:52:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C9DBF60F56
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:48:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C9DBF60F56
+	by mail.kernel.org (Postfix) with ESMTPS id 52B4C610C9
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:52:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 52B4C610C9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193671.344992 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193683.345004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTMGh-00075J-SW; Thu, 23 Sep 2021 10:47:55 +0000
+	id 1mTMKm-0000G6-Lp; Thu, 23 Sep 2021 10:52:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193671.344992; Thu, 23 Sep 2021 10:47:55 +0000
+Received: by outflank-mailman (output) from mailman id 193683.345004; Thu, 23 Sep 2021 10:52:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTMGh-000759-PL; Thu, 23 Sep 2021 10:47:55 +0000
-Received: by outflank-mailman (input) for mailman id 193671;
- Thu, 23 Sep 2021 10:47:53 +0000
+	id 1mTMKm-0000Fz-Ij; Thu, 23 Sep 2021 10:52:08 +0000
+Received: by outflank-mailman (input) for mailman id 193683;
+ Thu, 23 Sep 2021 10:52:07 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mTMGf-000714-Rs
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 10:47:53 +0000
+ (envelope-from <julien@xen.org>) id 1mTMKl-0000Ft-DP
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 10:52:07 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1mTMGf-0005iY-Ol; Thu, 23 Sep 2021 10:47:53 +0000
+ id 1mTMKl-0005oC-5s; Thu, 23 Sep 2021 10:52:07 +0000
 Received: from [202.153.84.92] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1mTMGf-0001JI-Ed; Thu, 23 Sep 2021 10:47:53 +0000
+ id 1mTMKk-0001dh-RS; Thu, 23 Sep 2021 10:52:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,22 +55,23 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
 	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
-	bh=AsQaybsN+y6K9nSwJw8z39y9Zr8Ja6WqTb2Egp8zowk=; b=LJLXolA/St+7XfSzRfMn6lIHVX
-	Z9CeQJAYi4MXjpwGA+W+v8EMh872Hx6tu7TgGvaYcyk+JtPsfxM0zC5mPXGbR5iQ8E65gu2wQGgw5
-	MnvzkTsJv4IZHBgXOToW0OzG9WO26tB9bM35ARhMJdrzqIkScDtB/m0ksRZLOnvpDxdQ=;
-Subject: Re: [PATCH 06/11] xen/arm: new vgic: update vgic_cpu_base
+	bh=Q6dwjDIOEVQxb8x7Gyad+iCjguS1FstWTow7Js2xGwI=; b=c4ZWhFBRTo7XMXx5V11NRCxVnT
+	SvAZPfQny4IkOgHQvdkIP3UUipmZGjjn4J7+W3NWV8VdmY/vth6c8X6TSZB9EY/rict2zt33S4EDB
+	QtBUUxMcqy2xNJYBngBRkQT2wm2lAqxBR36m8ZJVg/w17XYHfSxBZtKmS3huzCV8TJyg=;
+Subject: Re: [PATCH 07/11] xen/arm: if 1:1 direct-map domain use native
+ addresses for GICv2
 To: Penny Zheng <penny.zheng@arm.com>, xen-devel@lists.xenproject.org,
  sstabellini@kernel.org
 Cc: Bertrand.Marquis@arm.com, Wei.Chen@arm.com
 References: <20210923031115.1429719-1-penny.zheng@arm.com>
- <20210923031115.1429719-7-penny.zheng@arm.com>
+ <20210923031115.1429719-8-penny.zheng@arm.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <b8c3659d-e1d5-0957-6e4a-89e3222a0480@xen.org>
-Date: Thu, 23 Sep 2021 15:47:47 +0500
+Message-ID: <ac986e10-0ecf-3a2a-65a7-4cfe6567c64f@xen.org>
+Date: Thu, 23 Sep 2021 15:52:00 +0500
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
  Gecko/20100101 Thunderbird/78.14.0
 MIME-Version: 1.0
-In-Reply-To: <20210923031115.1429719-7-penny.zheng@arm.com>
+In-Reply-To: <20210923031115.1429719-8-penny.zheng@arm.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
@@ -80,61 +81,124 @@ Hi,
 On 23/09/2021 08:11, Penny Zheng wrote:
 > From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 > 
-> In vgic_v2_map_resources, use the new vgic_cpu_base field of struct
-> vgic_dist instead of original local variable.
-
-I think this wants to be folded in patch #5.
-
+> Today we use native addresses to map the GICv2 for Dom0 and fixed
+> addresses for DomUs.
+> 
+> This patch changes the behavior so that native addresses are used for
+> all domains that are 1:1 direct-map(including Dom0).
+> 
+> Update the accessors to use the struct vgic variables to provide the
+> updated addresses.
 > 
 > Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 > Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 > ---
->   xen/arch/arm/vgic/vgic-v2.c | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
+>   xen/arch/arm/vgic-v2.c         | 16 ++++++++++++++++
+>   xen/arch/arm/vgic/vgic-v2.c    | 17 +++++++++++++++++
+>   xen/include/asm-arm/new_vgic.h |  4 ++--
+>   xen/include/asm-arm/vgic.h     |  4 ++--
+>   4 files changed, 37 insertions(+), 4 deletions(-)
 > 
+> diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
+> index b34ec88106..a8cf8173d0 100644
+> --- a/xen/arch/arm/vgic-v2.c
+> +++ b/xen/arch/arm/vgic-v2.c
+> @@ -673,6 +673,22 @@ static int vgic_v2_domain_init(struct domain *d)
+>           csize = vgic_v2_hw.csize;
+>           vbase = vgic_v2_hw.vbase;
+>       }
+> +    else if ( is_domain_direct_mapped(d) )
+> +    {
+> +        /*
+> +         * For non-dom0 direct_mapped guests we only map a 8kB CPU
+> +         * interface but we make sure it is at a location occupied by
+> +         * the physical GIC in the host device tree.
+> +         *
+> +         * We need to add an offset to the virtual CPU interface base
+> +         * address when the GIC is aliased to get a 8kB contiguous
+> +         * region.
+> +         */
+
+So I agree that we need to differentiate between dom0 and other direct 
+mapped domains. However, I think it would be good to explainm why given 
+that in other places you treat dom0 and direct mapped domain the same way.
+
+> +        d->arch.vgic.dbase = vgic_v2_hw.dbase;
+> +        d->arch.vgic.cbase = vgic_v2_hw.cbase + vgic_v2_hw.aliased_offset;
+> +        csize = GUEST_GICC_SIZE;
+> +        vbase = vgic_v2_hw.vbase + vgic_v2_hw.aliased_offset;
+> +    }
+>       else
+>       {
+>           d->arch.vgic.dbase = GUEST_GICD_BASE;
 > diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
-> index b5ba4ace87..fd452fcb5a 100644
+> index fd452fcb5a..ce1f6e4373 100644
 > --- a/xen/arch/arm/vgic/vgic-v2.c
 > +++ b/xen/arch/arm/vgic/vgic-v2.c
-> @@ -258,7 +258,7 @@ void vgic_v2_enable(struct vcpu *vcpu)
->   int vgic_v2_map_resources(struct domain *d)
->   {
->       struct vgic_dist *dist = &d->arch.vgic;
-> -    paddr_t cbase, csize;
-> +    paddr_t csize;
->       paddr_t vbase;
->       int ret;
->   
-> @@ -276,7 +276,7 @@ int vgic_v2_map_resources(struct domain *d)
->            * Note that we assume the size of the CPU interface is always
->            * aligned to PAGE_SIZE.
->            */
-> -        cbase = gic_v2_hw_data.cbase;
-> +        d->arch.vgic.vgic_cpu_base = gic_v2_hw_data.cbase;
+> @@ -280,6 +280,23 @@ int vgic_v2_map_resources(struct domain *d)
 >           csize = gic_v2_hw_data.csize;
 >           vbase = gic_v2_hw_data.vbase;
 >       }
-> @@ -290,7 +290,7 @@ int vgic_v2_map_resources(struct domain *d)
->            * region.
->            */
->           BUILD_BUG_ON(GUEST_GICC_SIZE != SZ_8K);
-> -        cbase = GUEST_GICC_BASE;
-> +        d->arch.vgic.vgic_cpu_base = GUEST_GICC_BASE;
->           csize = GUEST_GICC_SIZE;
->           vbase = gic_v2_hw_data.vbase + gic_v2_hw_data.aliased_offset;
->       }
-> @@ -308,8 +308,8 @@ int vgic_v2_map_resources(struct domain *d)
->        * Map the gic virtual cpu interface in the gic cpu interface
->        * region of the guest.
->        */
-> -    ret = map_mmio_regions(d, gaddr_to_gfn(cbase), csize / PAGE_SIZE,
-> -                           maddr_to_mfn(vbase));
-> +    ret = map_mmio_regions(d, gaddr_to_gfn(d->arch.vgic.vgic_cpu_base),
-> +                           csize / PAGE_SIZE, maddr_to_mfn(vbase));
->       if ( ret )
+> +    else if ( is_domain_direct_mapped(d) )
+> +    {
+> +        d->arch.vgic.vgic_dist_base = gic_v2_hw_data.dbase;
+> +        /*
+> +         * For non-dom0 direct_mapped guests we only map a 8kB CPU
+> +         * interface but we make sure it is at a location occupied by
+> +         * the physical GIC in the host device tree.
+> +         *
+> +         * We need to add an offset to the virtual CPU interface base
+> +         * address when the GIC is aliased to get a 8kB contiguous
+> +         * region.
+> +         */
+> +        d->arch.vgic.vgic_cpu_base = gic_v2_hw_data.cbase +
+> +                                     gic_v2_hw_data.aliased_offset;
+> +        csize = GUEST_GICC_SIZE;
+> +        vbase = gic_v2_hw_data.vbase + gic_v2_hw_data.aliased_offset;
+> +    }
+>       else
 >       {
->           gdprintk(XENLOG_ERR, "Unable to remap VGIC CPU to VCPU\n");
-> 
+>           d->arch.vgic.vgic_dist_base = GUEST_GICD_BASE;
+> diff --git a/xen/include/asm-arm/new_vgic.h b/xen/include/asm-arm/new_vgic.h
+> index 9097522b27..0d16f878eb 100644
+> --- a/xen/include/asm-arm/new_vgic.h
+> +++ b/xen/include/asm-arm/new_vgic.h
+> @@ -188,12 +188,12 @@ struct vgic_cpu {
+>   
+>   static inline paddr_t vgic_cpu_base(struct vgic_dist *vgic)
+>   {
+> -    return GUEST_GICC_BASE;
+> +    return vgic->vgic_cpu_base;
+>   }
+>   
+>   static inline paddr_t vgic_dist_base(struct vgic_dist *vgic)
+>   {
+> -    return GUEST_GICD_BASE;
+> +    return vgic->vgic_dist_base;
+>   }
+>   
+>   static inline unsigned int vgic_rdist_nr(struct vgic_dist *vgic)
+> diff --git a/xen/include/asm-arm/vgic.h b/xen/include/asm-arm/vgic.h
+> index d5ad1f387b..92f6a2d15d 100644
+> --- a/xen/include/asm-arm/vgic.h
+> +++ b/xen/include/asm-arm/vgic.h
+> @@ -280,12 +280,12 @@ enum gic_sgi_mode;
+>   
+>   static inline paddr_t vgic_cpu_base(struct vgic_dist *vgic)
+>   {
+> -    return GUEST_GICC_BASE;
+> +    return vgic->cbase;
+>   }
+>   
+>   static inline paddr_t vgic_dist_base(struct vgic_dist *vgic)
+>   {
+> -    return GUEST_GICD_BASE;
+> +    return vgic->dbase;
+>   }
+>   
+>   #ifdef CONFIG_GICV3 >
+
+Cheers,
 
 -- 
 Julien Grall
