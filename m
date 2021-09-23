@@ -2,48 +2,48 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AD62C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19893C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5A7E260F43
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5A7E260F43
+	by mail.kernel.org (Postfix) with ESMTPS id C7A8661019
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C7A8661019
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194124.345854 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194125.345858 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOHn-00023Z-2N; Thu, 23 Sep 2021 12:57:11 +0000
+	id 1mTOHn-00027K-DR; Thu, 23 Sep 2021 12:57:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194124.345854; Thu, 23 Sep 2021 12:57:11 +0000
+Received: by outflank-mailman (output) from mailman id 194125.345858; Thu, 23 Sep 2021 12:57:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOHm-00023S-VC; Thu, 23 Sep 2021 12:57:10 +0000
-Received: by outflank-mailman (input) for mailman id 194124;
- Thu, 23 Sep 2021 12:57:09 +0000
+	id 1mTOHn-000266-8l; Thu, 23 Sep 2021 12:57:11 +0000
+Received: by outflank-mailman (input) for mailman id 194125;
+ Thu, 23 Sep 2021 12:57:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOGw-0004it-5t
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:56:18 +0000
-Received: from mail-lf1-x12f.google.com (unknown [2a00:1450:4864:20::12f])
+ id 1mTOHG-0004it-6L
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:56:38 +0000
+Received: from mail-lf1-x136.google.com (unknown [2a00:1450:4864:20::136])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b26bf262-48c3-45ed-bbc2-aa8f8a0ed16e;
- Thu, 23 Sep 2021 12:55:07 +0000 (UTC)
-Received: by mail-lf1-x12f.google.com with SMTP id u18so25609793lfd.12
- for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:55:07 -0700 (PDT)
+ id 9d0baee5-c887-4f26-b64c-1231e4c064d0;
+ Thu, 23 Sep 2021 12:55:09 +0000 (UTC)
+Received: by mail-lf1-x136.google.com with SMTP id t10so26352813lfd.8
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:55:09 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.02
+ by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:55:03 -0700 (PDT)
+ Thu, 23 Sep 2021 05:55:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b26bf262-48c3-45ed-bbc2-aa8f8a0ed16e
+X-Inumbo-ID: 9d0baee5-c887-4f26-b64c-1231e4c064d0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xjptWExU6TWM7wvE9QyWUsFVZpNpHRTTMdpxk2EhC08=;
-        b=qKoY6kLGWNocUC9YkflO59mYUD/aorNBD60p3xgQ2vM+uFVxL45hsNzjZhiDVSldyt
-         vYa6gNOodlA9lptZuPstRE52EhHkvCvAtsyyfp7ChzF4xhwVNMLBiRmPgWyz9imHUYv+
-         7o1AywfCBf2Ok2/x1Yk8aIbBbI5sMmg/dtFM06U7oGTGSJnGptkgWmnSt07Qp78WaLZy
-         MbA5gvhVyYKQH0f6s6d8rOVjetw2uTvxCEp0RK8jYTar4QidFIJemDkSl2I6yS63kJB3
-         2Se4o/x4n36AIjDzDYPMStgYdii2TqjxvlyAtbyehQ5adOyKrEVeWpiEOZx0QnMUZ9WO
-         R7Mw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=8BU9mTDeAzJlCIShSCG3B8dpXtNyqwk/IzMfbTSVhQk=;
+        b=EMo4gYUd9HuWyuM57Ppq0ISKssPDVmxqd/a2Lx8YxHs+mmxcN3gEsd/EPXpnRYNWZp
+         xUlW26eHqyQlqEpQH2chnUCMJNrSGZO3Olbx+hOgheIIXNim7uQ4qz1WphFudbVt50hd
+         BCE6CDc6s2BR9ov02TwJG7FxwD0KVKAB8inrPSF6WAz2svtSEwAjq2zndY8KtQBCs2Bt
+         HImAJ9sxfgDV5pyymroSzP67w/57I5BESX9bfWnOdMX54tMd6Ku2IEzbJ+9gjj97OMYH
+         lbjW5qmWvr4ZF3gWxm6X3XoGpR5GKQmxcH2VeFEYmbXfqZJOLOnSZqJuBjHlzRFybmot
+         cppw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=xjptWExU6TWM7wvE9QyWUsFVZpNpHRTTMdpxk2EhC08=;
-        b=N/lXeT7cqTRc+V5RmuGAd+iB7mzzi0Wtv4/e0KVOJThM3fki9jqQmxxiyeKh4dm4uO
-         B7eNPexuRvBmvNRv5XlYWiZ5BbrB5J5fd9ptyNBScCAR0v9agfaNQkAlBP6lGVK5NPeA
-         dnrqxWMbe6BOSgQpyyl6CKetTV6wqj4YLEe0QdLPqlSKcEWlzM5wDMkbq9SDPuhKiTLl
-         xhYQEn50IKjAGkVWlkL/Z71OzH4K+gkkntjLWc4PoWFtSvur0XlQLg833txUrnDsw7PH
-         RoQuKgX30Est5bDnoZ0wwKTNUtfrTMsbb27goW52KTTVbsxvL4POsgV1oODZCWXuktFN
-         EBdw==
-X-Gm-Message-State: AOAM530c75IBikLNpC1KxUvGYffMBSnShg2KcoAKcfsf0raeWzgxaVJh
-	uzL4aXgf4TArjXMBrqGd1DrzZ0zK4lKX3Q==
-X-Google-Smtp-Source: ABdhPJxwYqEoAkmKlLJL7pG8wGA8T/J8LGPSsCQnLc2yjHBgONmMkR8ingCNcm4T6tjqEAz/b6x9Jg==
-X-Received: by 2002:ac2:5467:: with SMTP id e7mr3860249lfn.537.1632401703781;
-        Thu, 23 Sep 2021 05:55:03 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=8BU9mTDeAzJlCIShSCG3B8dpXtNyqwk/IzMfbTSVhQk=;
+        b=4a0G+kWshZWoBxi7Xqd6K1O0pb4xD9vF9QBvwoI+2kpIT30DmiXFGhsxycY2KiQi3S
+         Lw5b9ssgWW9GSy9SiRzo2bRAcaAo4Yuex4wY0zslgEyQqhd2hDbJd6+O/p2UKgcuGLuf
+         2Ry2oZ4bRY0rAOXt+RcG5gOSCDuJKmDzDmguPcS+Mgtippe3FZPtYI/ov8jTS8WHfkx0
+         V2GrjXDjxMLpF0RHBkqAM/uyZOow8uCx3gTXnA+PUaAL3kND54isqo/kA6OMlDRfm5xO
+         V0mB5IqAo6aerG/eQBCwGEITkgGZ+X4tCiZkuZOpvxuBhzUMlxsIyo5C1q14PH+n6Ju3
+         wz5w==
+X-Gm-Message-State: AOAM530be766ngxLmP3nQ1ryXOXn/iHx3aoT3hHskcql+DL0REAxtDYC
+	uIiuKsby47M63fe6c8Zz40S0P+MwCL9U9A==
+X-Google-Smtp-Source: ABdhPJyHMtn4B5EwqiLHMWf9G5BqvVikcJTSRJI2KpV/yKtKmYNsU7V2hYr/2ZAL2nqe2p+lvspzlQ==
+X-Received: by 2002:a05:6512:10d0:: with SMTP id k16mr4161319lfg.530.1632401708273;
+        Thu, 23 Sep 2021 05:55:08 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -95,78 +95,232 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 00/11] PCI devices passthrough on Arm, part 3
-Date: Thu, 23 Sep 2021 15:54:50 +0300
-Message-Id: <20210923125501.234252-1-andr2000@gmail.com>
+Subject: [PATCH v2 04/11] vpci/header: Add and remove register handlers dynamically
+Date: Thu, 23 Sep 2021 15:54:54 +0300
+Message-Id: <20210923125501.234252-5-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210923125501.234252-1-andr2000@gmail.com>
+References: <20210923125501.234252-1-andr2000@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Hi, all!
+Add relevant vpci register handlers when assigning PCI device to a domain
+and remove those when de-assigning. This allows having different
+handlers for different domains, e.g. hwdom and other guests.
 
-This patch series is focusing on vPCI and adds support for non-identity
-PCI BAR mappings which is required while passing through a PCI device to
-a guest. The highlights are:
+Use stubs for guest domains for now.
 
-- Add relevant vpci register handlers when assigning PCI device to a domain
-  and remove those when de-assigning. This allows having different
-  handlers for different domains, e.g. hwdom and other guests.
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-- Emulate guest BAR register values based on physical BAR values.
-  This allows creating a guest view of the registers and emulates
-  size and properties probe as it is done during PCI device enumeration by
-  the guest.
+---
+Since v1:
+ - constify struct pci_dev where possible
+ - do not open code is_system_domain()
+ - simplify some code3. simplify
+ - use gdprintk + error code instead of gprintk
+ - gate vpci_bar_{add|remove}_handlers with CONFIG_HAS_VPCI_GUEST_SUPPORT,
+   so these do not get compiled for x86
+ - removed unneeded is_system_domain check
+---
+ xen/drivers/Kconfig       |  4 +++
+ xen/drivers/vpci/header.c | 72 ++++++++++++++++++++++++++++++++++-----
+ xen/drivers/vpci/vpci.c   |  8 +++++
+ xen/include/xen/vpci.h    |  8 +++++
+ 4 files changed, 84 insertions(+), 8 deletions(-)
 
-- Instead of handling a single range set, that contains all the memory
-  regions of all the BARs and ROM, have them per BAR.
-
-- Take into account guest's BAR view and program its p2m accordingly:
-  gfn is guest's view of the BAR and mfn is the physical BAR value as set
-  up by the host bridge in the hardware domain.
-  This way hardware doamin sees physical BAR values and guest sees
-  emulated ones.
-
-The series also adds support for virtual PCI bus topology for guests:
- - We emulate a single host bridge for the guest, so segment is always 0.
- - The implementation is limited to 32 devices which are allowed on
-   a single PCI bus.
- - The virtual bus number is set to 0, so virtual devices are seen
-   as embedded endpoints behind the root complex.
-
-The series was also tested on x86 PVH Dom0 and doesn't break it.
-
-Thank you,
-Oleksandr
-
-Oleksandr Andrushchenko (11):
-  vpci: Make vpci registers removal a dedicated function
-  vpci: Add hooks for PCI device assign/de-assign
-  vpci/header: Move register assignments from init_bars
-  vpci/header: Add and remove register handlers dynamically
-  vpci/header: Implement guest BAR register handlers
-  vpci/header: Handle p2m range sets per BAR
-  vpci/header: program p2m with guest BAR view
-  vpci/header: Emulate PCI_COMMAND register for guests
-  vpci/header: Reset the command register when adding devices
-  vpci: Add initial support for virtual PCI bus topology
-  xen/arm: Translate virtual PCI bus topology for guests
-
- xen/arch/arm/domain.c         |   1 +
- xen/arch/arm/vpci.c           |  87 ++++++-
- xen/arch/arm/vpci.h           |   3 +
- xen/common/domain.c           |   1 +
- xen/drivers/Kconfig           |   4 +
- xen/drivers/passthrough/pci.c |  91 ++++++++
- xen/drivers/vpci/header.c     | 412 +++++++++++++++++++++++++++-------
- xen/drivers/vpci/vpci.c       |  48 +++-
- xen/include/asm-arm/pci.h     |   1 +
- xen/include/xen/pci.h         |  19 ++
- xen/include/xen/sched.h       |   8 +
- xen/include/xen/vpci.h        |  34 ++-
- 12 files changed, 617 insertions(+), 92 deletions(-)
-
+diff --git a/xen/drivers/Kconfig b/xen/drivers/Kconfig
+index db94393f47a6..f3e3a05a4544 100644
+--- a/xen/drivers/Kconfig
++++ b/xen/drivers/Kconfig
+@@ -15,4 +15,8 @@ source "drivers/video/Kconfig"
+ config HAS_VPCI
+ 	bool
+ 
++config HAS_VPCI_GUEST_SUPPORT
++	bool
++	depends on HAS_PCI
++
+ endmenu
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index 3d571356397a..1ce98795fcca 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -397,6 +397,17 @@ static void bar_write(const struct pci_dev *pdev, unsigned int reg,
+     pci_conf_write32(pdev->sbdf, reg, val);
+ }
+ 
++static void guest_bar_write(const struct pci_dev *pdev, unsigned int reg,
++                            uint32_t val, void *data)
++{
++}
++
++static uint32_t guest_bar_read(const struct pci_dev *pdev, unsigned int reg,
++                               void *data)
++{
++    return 0xffffffff;
++}
++
+ static void rom_write(const struct pci_dev *pdev, unsigned int reg,
+                       uint32_t val, void *data)
+ {
+@@ -445,14 +456,25 @@ static void rom_write(const struct pci_dev *pdev, unsigned int reg,
+         rom->addr = val & PCI_ROM_ADDRESS_MASK;
+ }
+ 
+-static int add_bar_handlers(const struct pci_dev *pdev)
++static void guest_rom_write(const struct pci_dev *pdev, unsigned int reg,
++                            uint32_t val, void *data)
++{
++}
++
++static uint32_t guest_rom_read(const struct pci_dev *pdev, unsigned int reg,
++                               void *data)
++{
++    return 0xffffffff;
++}
++
++static int add_bar_handlers(const struct pci_dev *pdev, bool is_hwdom)
+ {
+     unsigned int i;
+     struct vpci_header *header = &pdev->vpci->header;
+     struct vpci_bar *bars = header->bars;
+     int rc;
+ 
+-    /* Setup a handler for the command register. */
++    /* Setup a handler for the command register: same for hwdom and guests. */
+     rc = vpci_add_register(pdev->vpci, vpci_hw_read16, cmd_write, PCI_COMMAND,
+                            2, header);
+     if ( rc )
+@@ -475,8 +497,13 @@ static int add_bar_handlers(const struct pci_dev *pdev)
+                 rom_reg = PCI_ROM_ADDRESS;
+             else
+                 rom_reg = PCI_ROM_ADDRESS1;
+-            rc = vpci_add_register(pdev->vpci, vpci_hw_read32, rom_write,
+-                                   rom_reg, 4, &bars[i]);
++            if ( is_hwdom )
++                rc = vpci_add_register(pdev->vpci, vpci_hw_read32, rom_write,
++                                       rom_reg, 4, &bars[i]);
++            else
++                rc = vpci_add_register(pdev->vpci,
++                                       guest_rom_read, guest_rom_write,
++                                       rom_reg, 4, &bars[i]);
+             if ( rc )
+                 return rc;
+         }
+@@ -485,8 +512,13 @@ static int add_bar_handlers(const struct pci_dev *pdev)
+             uint8_t reg = PCI_BASE_ADDRESS_0 + i * 4;
+ 
+             /* This is either VPCI_BAR_MEM32 or VPCI_BAR_MEM64_{LO|HI}. */
+-            rc = vpci_add_register(pdev->vpci, vpci_hw_read32, bar_write, reg,
+-                                   4, &bars[i]);
++            if ( is_hwdom )
++                rc = vpci_add_register(pdev->vpci, vpci_hw_read32, bar_write,
++                                       reg, 4, &bars[i]);
++            else
++                rc = vpci_add_register(pdev->vpci,
++                                       guest_bar_read, guest_bar_write,
++                                       reg, 4, &bars[i]);
+             if ( rc )
+                 return rc;
+         }
+@@ -520,7 +552,7 @@ static int init_bars(struct pci_dev *pdev)
+     }
+ 
+     if ( pdev->ignore_bars )
+-        return add_bar_handlers(pdev);
++        return add_bar_handlers(pdev, true);
+ 
+     /* Disable memory decoding before sizing. */
+     cmd = pci_conf_read16(pdev->sbdf, PCI_COMMAND);
+@@ -582,7 +614,7 @@ static int init_bars(struct pci_dev *pdev)
+                               PCI_ROM_ADDRESS_ENABLE;
+     }
+ 
+-    rc = add_bar_handlers(pdev);
++    rc = add_bar_handlers(pdev, true);
+     if ( rc )
+     {
+         pci_conf_write16(pdev->sbdf, PCI_COMMAND, cmd);
+@@ -593,6 +625,30 @@ static int init_bars(struct pci_dev *pdev)
+ }
+ REGISTER_VPCI_INIT(init_bars, VPCI_PRIORITY_MIDDLE);
+ 
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++int vpci_bar_add_handlers(const struct domain *d, const struct pci_dev *pdev)
++{
++    int rc;
++
++    /* Remove previously added registers. */
++    vpci_remove_device_registers(pdev);
++
++    rc = add_bar_handlers(pdev, is_hardware_domain(d));
++    if ( rc )
++        gdprintk(XENLOG_ERR,
++                 "%pp: failed to add BAR handlers for dom%pd: %d\n",
++                 &pdev->sbdf, d, rc);
++    return rc;
++}
++
++int vpci_bar_remove_handlers(const struct domain *d, const struct pci_dev *pdev)
++{
++    /* Remove previously added registers. */
++    vpci_remove_device_registers(pdev);
++    return 0;
++}
++#endif
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index a8fed3d2c42e..0cdc0c3f75c4 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -94,7 +94,11 @@ int vpci_assign_device(struct domain *d, const struct pci_dev *dev)
+     if ( is_system_domain(d) || !has_vpci(d) )
+         return 0;
+ 
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    return vpci_bar_add_handlers(d, dev);
++#else
+     return 0;
++#endif
+ }
+ 
+ /* Notify vPCI that device is de-assigned from guest. */
+@@ -104,7 +108,11 @@ int vpci_deassign_device(struct domain *d, const struct pci_dev *dev)
+     if ( is_system_domain(d) || !has_vpci(d) )
+         return 0;
+ 
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    return vpci_bar_remove_handlers(d, dev);
++#else
+     return 0;
++#endif
+ }
+ 
+ #endif /* __XEN__ */
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index b9485b2aea1b..912cbc6aa7ad 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -63,6 +63,14 @@ uint32_t vpci_hw_read32(const struct pci_dev *pdev, unsigned int reg,
+  */
+ bool __must_check vpci_process_pending(struct vcpu *v);
+ 
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++/* Add/remove BAR handlers for a domain. */
++int vpci_bar_add_handlers(const struct domain *d,
++                          const struct pci_dev *pdev);
++int vpci_bar_remove_handlers(const struct domain *d,
++                             const struct pci_dev *pdev);
++#endif
++
+ struct vpci {
+     /* List of vPCI handlers for a device. */
+     struct list_head handlers;
 -- 
 2.25.1
 
