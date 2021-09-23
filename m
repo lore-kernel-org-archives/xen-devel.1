@@ -2,45 +2,44 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D821C433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AD550C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 01:10:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E9E760EFF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:31:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0E9E760EFF
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
+	by mail.kernel.org (Postfix) with ESMTPS id 796976109E
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 01:10:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 796976109E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193214.344155 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193234.344178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeP-0004Va-76; Thu, 23 Sep 2021 00:31:45 +0000
+	id 1mTDFd-0000Rh-Gd; Thu, 23 Sep 2021 01:10:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193214.344155; Thu, 23 Sep 2021 00:31:45 +0000
+Received: by outflank-mailman (output) from mailman id 193234.344178; Thu, 23 Sep 2021 01:10:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTCeP-0004VR-3d; Thu, 23 Sep 2021 00:31:45 +0000
-Received: by outflank-mailman (input) for mailman id 193214;
- Thu, 23 Sep 2021 00:31:44 +0000
+	id 1mTDFd-0000Ra-Dh; Thu, 23 Sep 2021 01:10:13 +0000
+Received: by outflank-mailman (input) for mailman id 193234;
+ Thu, 23 Sep 2021 01:10:12 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=fO2a=ON=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
- id 1mTCeO-0003xN-Mb
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:31:44 +0000
-Received: from beetle.greensocs.com (unknown [5.135.226.135])
+ <SRS0=/SRu=ON=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1mTDFc-0000RU-3C
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 01:10:12 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9ce81cae-1c05-11ec-b9f4-12813bfff9fa;
- Thu, 23 Sep 2021 00:31:38 +0000 (UTC)
-Received: from crumble.bar.greensocs.com (unknown [172.17.10.6])
- by beetle.greensocs.com (Postfix) with ESMTPS id 6B2F521EB7;
- Wed, 22 Sep 2021 16:15:46 +0000 (UTC)
+ id ff9a8972-1c0a-11ec-b9fc-12813bfff9fa;
+ Thu, 23 Sep 2021 01:10:10 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0A9786109E;
+ Thu, 23 Sep 2021 01:10:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,216 +51,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ce81cae-1c05-11ec-b9f4-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1632327347;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=uO+rxeU8HZHEUI7sNPCnX4N20yxgThgHilFwN01tQgY=;
-	b=4nwd0mKYOh88Bq4/k8c2ah+UaLuLdmXU2GInH88kJxYAg7EbL+YtSjZJK2c1dGQBJKmftg
-	4vAVxgxK4VmkfrqkOGJ0zDbZ2nOewcMfN23UNSDTJ+uvKx1YBbYpqTbVYD/e/IUguDE62+
-	uTYcsOtlMDJL+LNvRXe+uEKGS6FD+Ew=
-From: Damien Hedde <damien.hedde@greensocs.com>
-To: qemu-devel@nongnu.org
-Cc: Damien Hedde <damien.hedde@greensocs.com>,
-	Alistair Francis <Alistair.Francis@wdc.com>,
-	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Igor Mammedov <imammedo@redhat.com>,
-	Ani Sinha <ani@anisinha.ca>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Eric Auger <eric.auger@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Peter Xu <peterx@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	Markus Armbruster <armbru@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	qemu-riscv@nongnu.org,
-	xen-devel@lists.xenproject.org,
-	mark.burton@greensocs.com,
-	mirela.grujic@greensocs.com,
-	edgari@xilinx.com,
-	Peter Maydell <peter.maydell@linaro.org>
-Subject: [RFC PATCH v2 02/16] qapi: Implement query-machine-phase QMP command
-Date: Wed, 22 Sep 2021 18:13:51 +0200
-Message-Id: <20210922161405.140018-3-damien.hedde@greensocs.com>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210922161405.140018-1-damien.hedde@greensocs.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+X-Inumbo-ID: ff9a8972-1c0a-11ec-b9fc-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1632359410;
+	bh=2mcxG55qKaKMA20YKNot3P1eLyODJ/0MAZ99tHgpG5s=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=lyexlZ4lBUwrFW3Vk4IwygVIaPjezGV33BVlzg07ifZdrh64pBdnyw8eXB0DVRMrq
+	 91287bNVrTt1Y5DGQI7IG+UMgIA1m8QyvQDyD6n8Hm3y74voh3WIgHH4CySqDCVoOx
+	 Yfnw8XrPRRWiYm9VK5LrInMvvf/G2551X9CLA+piz0j2eoHPiaFg/7GEcroqHx7+KJ
+	 3q+3okObUkKY64YZI8sMaNxjoiaLCPSy0GjWfU3V+PB2pI7B1AHrYErWuZJGSdpyHu
+	 +e+iYou6dD/ZLTrff3xdzix2YH316rK9LBTG5qt/j3hy6xDybZOc1BDqc4xxwp94C/
+	 X/V6nP1M8E2AA==
+Date: Wed, 22 Sep 2021 18:10:09 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Jan Beulich <jbeulich@suse.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, 
+    Ian Jackson <iwj@xenproject.org>, xen-devel@lists.xenproject.org, 
+    dpsmith@apertussolutions.com
+Subject: Re: [xen-unstable test] 164996: regressions - FAIL
+In-Reply-To: <19906cf8-365b-63c9-5c59-aef8dae41505@suse.com>
+Message-ID: <alpine.DEB.2.21.2109221807131.17979@sstabellini-ThinkPad-T480s>
+References: <osstest-164996-mainreport@xen.org> <d049ba60-db81-aaa4-1769-54c6964cfd06@suse.com> <24904.44119.940679.241639@mariner.uk.xensource.com> <alpine.DEB.2.21.2109211631330.17979@sstabellini-ThinkPad-T480s>
+ <19906cf8-365b-63c9-5c59-aef8dae41505@suse.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spam: Yes
+Content-Type: text/plain; charset=US-ASCII
 
-From: Mirela Grujic <mirela.grujic@greensocs.com>
+On Wed, 22 Sep 2021, Jan Beulich wrote:
+> On 22.09.2021 01:38, Stefano Stabellini wrote:
+> > On Mon, 20 Sep 2021, Ian Jackson wrote:
+> >> Jan Beulich writes ("Re: [xen-unstable test] 164996: regressions - FAIL"):
+> >>> As per
+> >>>
+> >>> Sep 15 14:44:55.502598 [ 1613.322585] Mem-Info:
+> >>> Sep 15 14:44:55.502643 [ 1613.324918] active_anon:5639 inactive_anon:15857 isolated_anon:0
+> >>> Sep 15 14:44:55.514480 [ 1613.324918]  active_file:13286 inactive_file:11182 isolated_file:0
+> >>> Sep 15 14:44:55.514545 [ 1613.324918]  unevictable:0 dirty:30 writeback:0 unstable:0
+> >>> Sep 15 14:44:55.526477 [ 1613.324918]  slab_reclaimable:10922 slab_unreclaimable:30234
+> >>> Sep 15 14:44:55.526540 [ 1613.324918]  mapped:11277 shmem:10975 pagetables:401 bounce:0
+> >>> Sep 15 14:44:55.538474 [ 1613.324918]  free:8364 free_pcp:100 free_cma:1650
+> >>>
+> >>> the system doesn't look to really be out of memory; as per
+> >>>
+> >>> Sep 15 14:44:55.598538 [ 1613.419061] DMA32: 2788*4kB (UMEC) 890*8kB (UMEC) 497*16kB (UMEC) 36*32kB (UMC) 1*64kB (C) 1*128kB (C) 9*256kB (C) 7*512kB (C) 0*1024kB 0*2048kB 0*4096kB = 33456kB
+> >>>
+> >>> there even look to be a number of higher order pages available (albeit
+> >>> without digging I can't tell what "(C)" means). Nevertheless order-4
+> >>> allocations aren't really nice.
+> >>
+> >> The host history suggests this may possibly be related to a qemu update.
+> >>
+> >> http://logs.test-lab.xenproject.org/osstest/results/host/rochester0.html
+> 
+> Stefano - as per some of your investigation detailed further down I
+> wonder whether you had seen this part of Ian's reply. (Question of
+> course then is how that qemu update had managed to get pushed.)
+> 
+> >> The grub cfg has this:
+> >>
+> >>  multiboot /xen placeholder conswitch=x watchdog noreboot async-show-all console=dtuart dom0_mem=512M,max:512M ucode=scan  ${xen_rm_opts}
+> >>
+> >> It's not clear to me whether xen_rm_opts is "" or "no-real-mode edd=off".
+> > 
+> > I definitely recommend to increase dom0 memory, especially as I guess
+> > the box is going to have a significant amount, far more than 4GB. I
+> > would set it to 2GB. Also the syntax on ARM is simpler, so it should be
+> > just: dom0_mem=2G
+> 
+> Ian - I guess that's an adjustment relatively easy to make? I wonder
+> though whether we wouldn't want to address the underlying issue first.
+> Presumably not, because the fix would likely take quite some time to
+> propagate suitably. Yet if not, we will want to have some way of
+> verifying that an eventual fix there would have helped here.
+> 
+> > In addition, I also did some investigation just in case there is
+> > actually a bug in the code and it is not a simple OOM problem.
+> 
+> I think the actual issue is quite clear; what I'm struggling with is
+> why we weren't hit by it earlier.
+> 
+> As imo always, non-order-0 allocations (perhaps excluding the bringing
+> up of the kernel or whichever entity) are to be avoided it at possible.
+> The offender in this case looks to be privcmd's alloc_empty_pages().
+> For it to request through kcalloc() what ends up being an order-4
+> allocation, the original IOCTL_PRIVCMD_MMAPBATCH must specify a pretty
+> large chunk of guest memory to get mapped. Which may in turn be
+> questionable, but I'm afraid I don't have the time to try to drill
+> down where that request is coming from and whether that also wouldn't
+> better be split up.
+> 
+> The solution looks simple enough - convert from kcalloc() to kvcalloc().
+> I can certainly spin up a patch to Linux to this effect. Yet that still
+> won't answer the question of why this issue has popped up all of the
+> sudden (and hence whether there are things wanting changing elsewhere
+> as well).
 
-The command returns current machine initialization phase.
-From now on, the MachineInitPhase enum is generated from the
-QAPI schema.
+Also, I saw your patches for Linux. Let's say that the patches are
+reviewed and enqueued immediately to be sent to Linus at the next
+opportunity. It is going to take a while for them to take effect in
+OSSTest, unless we import them somehow in the Linux tree used by OSSTest
+straight away, right?
 
-Signed-off-by: Mirela Grujic <mirela.grujic@greensocs.com>
----
- qapi/machine.json          | 56 ++++++++++++++++++++++++++++++++++++++
- include/hw/qdev-core.h     | 30 ++------------------
- hw/core/machine-qmp-cmds.c |  9 ++++++
- hw/core/qdev.c             |  5 ++++
- 4 files changed, 72 insertions(+), 28 deletions(-)
-
-diff --git a/qapi/machine.json b/qapi/machine.json
-index 157712f006..969d37fb03 100644
---- a/qapi/machine.json
-+++ b/qapi/machine.json
-@@ -1312,3 +1312,59 @@
-      '*cores': 'int',
-      '*threads': 'int',
-      '*maxcpus': 'int' } }
-+
-+##
-+# @MachineInitPhase:
-+#
-+# Enumeration of machine initialization phases.
-+#
-+# @no-machine: machine does not exist
-+#
-+# @machine-created: machine is created, but its accelerator is not
-+#
-+# @accel-created: accelerator is created, but the machine properties have not
-+#                 been validated and machine initialization is not done yet
-+#
-+# @initialized: machine is initialized, thus creating any embedded devices and
-+#               validating machine properties. Devices created at this time are
-+#               considered to be cold-plugged.
-+#
-+# @ready: QEMU is ready to start CPUs and devices created at this time are
-+#         considered to be hot-plugged. The monitor is not restricted to
-+#         "preconfig" commands.
-+#
-+# Since: 6.2
-+##
-+{ 'enum': 'MachineInitPhase',
-+  'data': [ 'no-machine', 'machine-created', 'accel-created', 'initialized',
-+            'ready' ] }
-+
-+##
-+# @MachineInitPhaseStatus:
-+#
-+# Information about machine initialization phase
-+#
-+# @phase: the machine initialization phase
-+#
-+# Since: 6.2
-+##
-+{ 'struct': 'MachineInitPhaseStatus',
-+  'data': { 'phase': 'MachineInitPhase' } }
-+
-+##
-+# @query-machine-phase:
-+#
-+# Return machine initialization phase
-+#
-+# Since: 6.2
-+#
-+# Returns: MachineInitPhaseStatus
-+#
-+# Example:
-+#
-+# -> { "execute": "query-machine-phase" }
-+# <- { "return": { "phase": "initialized" } }
-+#
-+##
-+{ 'command': 'query-machine-phase', 'returns': 'MachineInitPhaseStatus',
-+             'allow-preconfig': true }
-diff --git a/include/hw/qdev-core.h b/include/hw/qdev-core.h
-index 859fd913bb..800eda8f54 100644
---- a/include/hw/qdev-core.h
-+++ b/include/hw/qdev-core.h
-@@ -1,6 +1,7 @@
- #ifndef QDEV_CORE_H
- #define QDEV_CORE_H
- 
-+#include "qapi/qapi-types-machine.h"
- #include "qemu/queue.h"
- #include "qemu/bitmap.h"
- #include "qemu/rcu.h"
-@@ -839,35 +840,8 @@ void device_listener_unregister(DeviceListener *listener);
-  */
- bool qdev_should_hide_device(QemuOpts *opts);
- 
--typedef enum MachineInitPhase {
--    /* current_machine is NULL.  */
--    MACHINE_INIT_PHASE_NO_MACHINE,
--
--    /* current_machine is not NULL, but current_machine->accel is NULL.  */
--    MACHINE_INIT_PHASE_MACHINE_CREATED,
--
--    /*
--     * current_machine->accel is not NULL, but the machine properties have
--     * not been validated and machine_class->init has not yet been called.
--     */
--    MACHINE_INIT_PHASE_ACCEL_CREATED,
--
--    /*
--     * machine_class->init has been called, thus creating any embedded
--     * devices and validating machine properties.  Devices created at
--     * this time are considered to be cold-plugged.
--     */
--    MACHINE_INIT_PHASE_INITIALIZED,
--
--    /*
--     * QEMU is ready to start CPUs and devices created at this time
--     * are considered to be hot-plugged.  The monitor is not restricted
--     * to "preconfig" commands.
--     */
--    MACHINE_INIT_PHASE_READY,
--} MachineInitPhase;
--
- extern bool phase_check(MachineInitPhase phase);
- extern void phase_advance(MachineInitPhase phase);
-+extern MachineInitPhase phase_get(void);
- 
- #endif
-diff --git a/hw/core/machine-qmp-cmds.c b/hw/core/machine-qmp-cmds.c
-index 52168a3771..d3b9a04855 100644
---- a/hw/core/machine-qmp-cmds.c
-+++ b/hw/core/machine-qmp-cmds.c
-@@ -204,3 +204,12 @@ MemdevList *qmp_query_memdev(Error **errp)
-     object_child_foreach(obj, query_memdev, &list);
-     return list;
- }
-+
-+MachineInitPhaseStatus *qmp_query_machine_phase(Error **errp)
-+{
-+    MachineInitPhaseStatus *status = g_malloc0(sizeof(*status));
-+
-+    status->phase = phase_get();
-+
-+    return status;
-+}
-diff --git a/hw/core/qdev.c b/hw/core/qdev.c
-index c5fc704f55..d83f1c029a 100644
---- a/hw/core/qdev.c
-+++ b/hw/core/qdev.c
-@@ -1150,6 +1150,11 @@ void phase_advance(MachineInitPhase phase)
-     machine_phase = phase;
- }
- 
-+MachineInitPhase phase_get(void)
-+{
-+    return machine_phase;
-+}
-+
- static const TypeInfo device_type_info = {
-     .name = TYPE_DEVICE,
-     .parent = TYPE_OBJECT,
--- 
-2.33.0
-
+Should we arrange for one test OSSTest flight now with the patches
+applied to see if they actually fix the issue? Otherwise we might end up
+waiting for nothing...
 
