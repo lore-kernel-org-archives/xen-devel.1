@@ -7,51 +7,52 @@ X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E015DC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:02:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6566DC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:05:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 961B061038
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:02:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 961B061038
+	by mail.kernel.org (Postfix) with ESMTPS id 1B51B610D1
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:05:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1B51B610D1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194383.346268 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194388.346278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTQEk-0006XC-Rd; Thu, 23 Sep 2021 15:02:10 +0000
+	id 1mTQHK-0007AY-9N; Thu, 23 Sep 2021 15:04:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194383.346268; Thu, 23 Sep 2021 15:02:10 +0000
+Received: by outflank-mailman (output) from mailman id 194388.346278; Thu, 23 Sep 2021 15:04:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTQEk-0006X5-OM; Thu, 23 Sep 2021 15:02:10 +0000
-Received: by outflank-mailman (input) for mailman id 194383;
- Thu, 23 Sep 2021 15:02:10 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mTQHK-0007AR-6R; Thu, 23 Sep 2021 15:04:50 +0000
+Received: by outflank-mailman (input) for mailman id 194388;
+ Thu, 23 Sep 2021 15:04:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=q2Jl=ON=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mTQEj-0006Wz-UN
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 15:02:09 +0000
+ id 1mTQHJ-0007AL-3Q
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 15:04:49 +0000
 Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e88feefc-3b36-46c9-ac03-1af8b74fc9ae;
- Thu, 23 Sep 2021 15:02:09 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 97f19d72-1c7f-11ec-ba50-12813bfff9fa;
+ Thu, 23 Sep 2021 15:04:48 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 6341A20294;
- Thu, 23 Sep 2021 15:02:08 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5BFBB1FD83;
+ Thu, 23 Sep 2021 15:04:47 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3BB8513E76;
- Thu, 23 Sep 2021 15:02:08 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2CE6613E82;
+ Thu, 23 Sep 2021 15:04:47 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id P1NwDfCWTGEwAgAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 23 Sep 2021 15:02:08 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id CEW9CY+XTGGfAwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 23 Sep 2021 15:04:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,37 +64,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e88feefc-3b36-46c9-ac03-1af8b74fc9ae
+X-Inumbo-ID: 97f19d72-1c7f-11ec-ba50-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1632409328; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1632409487; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=jxkpWB9pOzMT5Ky0Sf1nmXwSl8g4r5MQkHH+2F49T1M=;
-	b=mE8lBu+QFbB7uuyU1VWNDGbUOeFjnYndLQKJS93e8ExPOI7s6PFDrYeX0e++T3zh7ir+5J
-	w9XfIaTRg5vYVhv3zxwjoUvltMhJkELZk3jklIQ3oCzcRUeWZEqfuzSjbl3BrNoarh82Pj
-	amyCumuRaHA2GJKtuU77GThKgddqwgU=
-Subject: Re: [PATCH 8/9] x86/PVH: adjust function/data placement
+	bh=NjQbEyoSx0YxSIwoKNcSM/Z7wVUqWHXkni/5eDVktMA=;
+	b=N7S8vWIo5mF9BTTYwZWmiNvQBnfhtlZTf70WXpdZxxd/utSfu69qJTn3G3OPZ0qp2q13wE
+	fKiRZL2YLO7AHKts3it/7RBLroF8g35p2VFNSlfyuM/rSolk0isKlCxNOFPL7ZvbZXqJQX
+	GwB8c8uKOhcNJpiLXK5ghIX0kt1TlcM=
+Subject: Re: [PATCH 9/9] xen/x86: adjust data placement
 To: Jan Beulich <jbeulich@suse.com>,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
  lkml <linux-kernel@vger.kernel.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <4efa804e-3250-227f-00c7-347581366cd4@suse.com>
- <cf3fd833-0379-aba5-421d-7f2588d2d881@suse.com>
+ <a7d9936d-2fa8-507e-5b0a-a4930eb457dd@suse.com>
 From: Juergen Gross <jgross@suse.com>
-Message-ID: <42fc11c8-de4a-4f00-8bef-1f9268551f4b@suse.com>
-Date: Thu, 23 Sep 2021 17:02:07 +0200
+Message-ID: <97182850-ebdc-aac2-5265-a3cac9244979@suse.com>
+Date: Thu, 23 Sep 2021 17:04:46 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <cf3fd833-0379-aba5-421d-7f2588d2d881@suse.com>
+In-Reply-To: <a7d9936d-2fa8-507e-5b0a-a4930eb457dd@suse.com>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="tdg01WsrPs5385VXsxmJfbLOaCgKlOHjq"
+ boundary="0Sx9cgE53kdTwMqk7K9cToIUkiBuNibHj"
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---tdg01WsrPs5385VXsxmJfbLOaCgKlOHjq
-Content-Type: multipart/mixed; boundary="8U5rkdWgyq2Y57YzPy0pQ2feesNhNjJUi";
+--0Sx9cgE53kdTwMqk7K9cToIUkiBuNibHj
+Content-Type: multipart/mixed; boundary="H5gPcRA7OkalQqgpm7NNjNEglpEMbritD";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
 To: Jan Beulich <jbeulich@suse.com>,
@@ -101,38 +102,45 @@ To: Jan Beulich <jbeulich@suse.com>,
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
  lkml <linux-kernel@vger.kernel.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Message-ID: <42fc11c8-de4a-4f00-8bef-1f9268551f4b@suse.com>
-Subject: Re: [PATCH 8/9] x86/PVH: adjust function/data placement
+Message-ID: <97182850-ebdc-aac2-5265-a3cac9244979@suse.com>
+Subject: Re: [PATCH 9/9] xen/x86: adjust data placement
 References: <4efa804e-3250-227f-00c7-347581366cd4@suse.com>
- <cf3fd833-0379-aba5-421d-7f2588d2d881@suse.com>
-In-Reply-To: <cf3fd833-0379-aba5-421d-7f2588d2d881@suse.com>
+ <a7d9936d-2fa8-507e-5b0a-a4930eb457dd@suse.com>
+In-Reply-To: <a7d9936d-2fa8-507e-5b0a-a4930eb457dd@suse.com>
 
---8U5rkdWgyq2Y57YzPy0pQ2feesNhNjJUi
+--H5gPcRA7OkalQqgpm7NNjNEglpEMbritD
 Content-Type: multipart/mixed;
- boundary="------------DC890C5714C660458BFB6630"
+ boundary="------------8851BDAFF3F6C844886BE608"
 Content-Language: en-US
 
 This is a multi-part message in MIME format.
---------------DC890C5714C660458BFB6630
+--------------8851BDAFF3F6C844886BE608
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-On 07.09.21 12:12, Jan Beulich wrote:
-> Two of the variables can live in .init.data, allowing the open-coded
-> placing in .data to go away. Another "variable" is used to communicate =
-a
-> size value only to very early assembly code, which hence can be both
-> const and live in .init.*. Additionally two functions were lacking
-> __init annotations.
+On 07.09.21 12:13, Jan Beulich wrote:
+> Both xen_pvh and xen_start_flags get written just once aeryl during
+> init. Using the respective annotation then allows the open-coded placin=
+g
+> in .data to go away.
+>=20
+> Additionally the former, like the latter, wants exporting, or else
+> xen_pvh_domain() can't be used from modules.
 >=20
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> I have to admit that it is completely unclear to me which form of
+> exporting I should have used: xen_domain_type is GPL-only while
+> xen_start_flags is not, yet both are used in similar ways, extending to=
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+> xen_pvh.
+
+I'd use EXPORT_SYMBOL_GPL(xen_pvh).
 
 
 Juergen
 
---------------DC890C5714C660458BFB6630
+--------------8851BDAFF3F6C844886BE608
 Content-Type: application/pgp-keys;
  name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Transfer-Encoding: quoted-printable
@@ -224,25 +232,25 @@ ZDn8R38=3D
 =3D2wuH
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------DC890C5714C660458BFB6630--
+--------------8851BDAFF3F6C844886BE608--
 
---8U5rkdWgyq2Y57YzPy0pQ2feesNhNjJUi--
+--H5gPcRA7OkalQqgpm7NNjNEglpEMbritD--
 
---tdg01WsrPs5385VXsxmJfbLOaCgKlOHjq
+--0Sx9cgE53kdTwMqk7K9cToIUkiBuNibHj
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFMlu8FAwAAAAAACgkQsN6d1ii/Ey/u
-ogf/Xg3OFbD3rxakzq49yd7jHeyC1xaLcZB6zQrMJ2eoRNGzIu2+5UEnDZd5UjlX6oytv6lrNy/n
-ieEhgybp0Pd+P1JlcQh2U0FKWve616nkQrZgSbhtwyJ3+50pSQChkbKvJtZeT4ri1xSfx4hV3bwY
-irp0o7hmY4SRV1JPJ/fLVywtt5SXH3SSYbs+lh2Sui1P1B2OzeW205Z9o6cwAyJO1Oiwiqo/MbwH
-8bjjqzD6Y2/pRZL9eokVUeJ6kvg+PuRz0VYLQmU/UcvD5jnWDpQq1K1hZix7oWeFfsusYRTBP1Pm
-AtIRDABgiZbwJ/cqSAYzPtKZfChfxLvCnxg7V0G0Aw==
-=Ps0F
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFMl44FAwAAAAAACgkQsN6d1ii/Ey+1
+/gf/UqD3JRe6kpdcgdfU1RG/Pw01LoglcuTSAWRJ33pYK5kMLvjbqLD2PFNbaMvPdS7GL1ezLmBm
+XVXrJ6LnyU2d6JmIO/vz8ThaVcdAyjS1q4VrUYCZd3GVw/KPTvYMQrmD2BoBhZlGO8B+1VSaCNwB
+N9b2LonVm5wlSPGruIz36opNwo0lzpd+8QDQFDKq8dQ11IsuSx141isYzcyNTse6OMh8kDiq+3+4
+GKWcKpWVPH0TeQM4dJvWL7AO2dP9HMLfImKaVs0KHUfNnCTY5eGkwX/bBCxvzpuGz3Zpj5ivUzJS
+aLWBnHafyugQSyt7SYCU47EOG4koBfrRvCzlrPO56g==
+=QB+E
 -----END PGP SIGNATURE-----
 
---tdg01WsrPs5385VXsxmJfbLOaCgKlOHjq--
+--0Sx9cgE53kdTwMqk7K9cToIUkiBuNibHj--
 
