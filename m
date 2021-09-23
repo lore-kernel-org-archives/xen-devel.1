@@ -2,76 +2,57 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 123FDC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46049C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:15:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AEB1161029
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:15:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AEB1161029
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id EC86661029
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 15:15:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EC86661029
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194411.346334 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194412.346345 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTQRl-0002g0-Hx; Thu, 23 Sep 2021 15:15:37 +0000
+	id 1mTQRp-00030N-Rq; Thu, 23 Sep 2021 15:15:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194411.346334; Thu, 23 Sep 2021 15:15:37 +0000
+Received: by outflank-mailman (output) from mailman id 194412.346345; Thu, 23 Sep 2021 15:15:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTQRl-0002fr-Eu; Thu, 23 Sep 2021 15:15:37 +0000
-Received: by outflank-mailman (input) for mailman id 194411;
- Thu, 23 Sep 2021 15:15:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Y7SS=ON=arm.com=Rahul.Singh@srs-us1.protection.inumbo.net>)
- id 1mTQRk-0002OA-S8
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 15:15:37 +0000
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com (unknown
- [40.107.0.86]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1929f9e2-1c81-11ec-ba51-12813bfff9fa;
- Thu, 23 Sep 2021 15:15:34 +0000 (UTC)
-Received: from DB7PR03CA0077.eurprd03.prod.outlook.com (2603:10a6:10:72::18)
- by AM5PR0801MB1732.eurprd08.prod.outlook.com (2603:10a6:203:35::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.17; Thu, 23 Sep
- 2021 15:15:31 +0000
-Received: from DB5EUR03FT033.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:72:cafe::e6) by DB7PR03CA0077.outlook.office365.com
- (2603:10a6:10:72::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13 via Frontend
- Transport; Thu, 23 Sep 2021 15:15:31 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT033.mail.protection.outlook.com (10.152.20.76) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4544.13 via Frontend Transport; Thu, 23 Sep 2021 15:15:31 +0000
-Received: ("Tessian outbound a492f2284909:v103");
- Thu, 23 Sep 2021 15:15:30 +0000
-Received: from d15928c17eef.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 83D1DC5D-B044-4AE6-98CC-7CA82DE851C6.1; 
- Thu, 23 Sep 2021 15:15:18 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id d15928c17eef.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 23 Sep 2021 15:15:18 +0000
-Received: from AS8PR08MB6919.eurprd08.prod.outlook.com (2603:10a6:20b:39e::10)
- by AM6PR08MB4933.eurprd08.prod.outlook.com (2603:10a6:20b:e9::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13; Thu, 23 Sep
- 2021 15:15:17 +0000
-Received: from AS8PR08MB6919.eurprd08.prod.outlook.com
- ([fe80::c8de:afad:1d5a:efd0]) by AS8PR08MB6919.eurprd08.prod.outlook.com
- ([fe80::c8de:afad:1d5a:efd0%7]) with mapi id 15.20.4544.014; Thu, 23 Sep 2021
- 15:15:17 +0000
+	id 1mTQRp-000308-OJ; Thu, 23 Sep 2021 15:15:41 +0000
+Received: by outflank-mailman (input) for mailman id 194412;
+ Thu, 23 Sep 2021 15:15:40 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=q2Jl=ON=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1mTQRo-0002yp-Ee
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 15:15:40 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6bc83fef-b7e5-4552-8dcb-d34fb63797be;
+ Thu, 23 Sep 2021 15:15:39 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A87422213F;
+ Thu, 23 Sep 2021 15:15:38 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 70AF013E6E;
+ Thu, 23 Sep 2021 15:15:38 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id jxU6GRqaTGG1CQAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 23 Sep 2021 15:15:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -83,263 +64,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1929f9e2-1c81-11ec-ba51-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Bu6yH2OU1L8pGt0OBEYLrX9c4kaLijVOoTSHnKy0jo0=;
- b=rMmyeTC52PALgvE75fyHk0fA7ICOD+FgYNWJeGuUcWSsEVDmYbik3mn7RJ7qhDr615Mdi/W3K6LdCiIQoeQmVcQWAO4MN004m5fqXYgNUxtdpsB2ZRV+Zm1NJTxUyk9YYXsf46wmB4apdCrdOyY2FlvGw/kMbPTml02aJqS11hg=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 98f3d76b6eb4bfd1
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UAEHBz2Bq0xGcIAfj9UlQYBAwSOdhoClVC9FSOorz+BE9+Gwp1lTq2NQT0F0lvmK0dB4p8xkWuO/BKGRxYRmejXz+WqT01QL9EmCx0gWoUjPuu1xWp7whtU09oT6veMOAoiE9KDguZDZGeJ1jJaxb6K91bIvZnfVgljHC3FLet/+JZfcOHi/tuB+wbwz8Gn0xtMNoaH9ydC4Zon6FFFYJaFVdAaUkfVr75tlH4LSUhoGvvXiN7N5+2PifxS/QmkIsGBSwimfNlGR7DCCQZ6BG/XxVsGvReFjoK+K9erR3UFJsQyQ9BPP06lQZqQvyAAgt4Gp8PaK9npj8VDwvMH5BA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=Bu6yH2OU1L8pGt0OBEYLrX9c4kaLijVOoTSHnKy0jo0=;
- b=QX6J4XLyW/ShRYF1YNCyz21DKzSlKpQUZ3Q4b0u37dPrpTAs70qztLXjqcqHdFHcxZ5cQ9H5cxBwx7FHehNB0erk6PCtVcVULAEAdqY+oZTBOIbFsrD4dJWe3uFJJh5Hbe9eZ2eaOcDZgEyWaCcMD4n0tvGUhxAmAddJnGjhn7xHUFAT7JxW5UkOUBDd8e6T+JRODqgLRdVkdhZjrpr65NZ2oVhKTib3HLaFq6/tl9RBPqft+F/p9QjFOKnlF7HAWOo6zl6HG5/mQQZdZKmdGlDmZOvp0Je0r7cKeV757DKCOESQfaVjdUwlrSLl8nh1pSFfnbg2SXyLdj2HBxJMNA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Bu6yH2OU1L8pGt0OBEYLrX9c4kaLijVOoTSHnKy0jo0=;
- b=rMmyeTC52PALgvE75fyHk0fA7ICOD+FgYNWJeGuUcWSsEVDmYbik3mn7RJ7qhDr615Mdi/W3K6LdCiIQoeQmVcQWAO4MN004m5fqXYgNUxtdpsB2ZRV+Zm1NJTxUyk9YYXsf46wmB4apdCrdOyY2FlvGw/kMbPTml02aJqS11hg=
-From: Rahul Singh <Rahul.Singh@arm.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-CC: xen-devel <xen-devel@lists.xenproject.org>, Bertrand Marquis
-	<Bertrand.Marquis@arm.com>, Andre Przywara <Andre.Przywara@arm.com>, Julien
- Grall <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH v2 13/17] xen:arm: Implement pci access functions
-Thread-Topic: [PATCH v2 13/17] xen:arm: Implement pci access functions
-Thread-Index: AQHXr6aktO5EpOLLjku5HahQRSHFEauw5LyAgADXlwA=
-Date: Thu, 23 Sep 2021 15:15:17 +0000
-Message-ID: <96F69005-D39F-4F6B-A684-7A4BCA275860@arm.com>
-References: <cover.1632307952.git.rahul.singh@arm.com>
- <f05b02c04803809bbe4ebd49ed4abb5a4656b010.1632307952.git.rahul.singh@arm.com>
- <alpine.DEB.2.21.2109221913430.17979@sstabellini-ThinkPad-T480s>
-In-Reply-To: <alpine.DEB.2.21.2109221913430.17979@sstabellini-ThinkPad-T480s>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-Authentication-Results-Original: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=arm.com;
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-Correlation-Id: 24b323bd-eaa3-4265-9663-08d97ea4fbd5
-x-ms-traffictypediagnostic: AM6PR08MB4933:|AM5PR0801MB1732:
-x-ms-exchange-transport-forked: True
-X-Microsoft-Antispam-PRVS:
-	<AM5PR0801MB173227F653DD978CD23C83FEFCA39@AM5PR0801MB1732.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:8273;OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- HKMEx/iL+arVCwdNvGwpQ07lsSfxTehw6yOdPOz1/srx8t8cazWios7yRQFgu4lqZHxifFdI7GP7UKvU8jZ2vibGu0n9NbQc5lX74SEkhOihntf7C7SdOMqJeTgIi0Nt+E3BiXNW8oo39S2Z1GIYs0Bx6IZDc76bSB3n8+5lKJj02Oc0k4UnoplheJOS/W/sJYFN5p2jYzUWqOC/73zKBJmy+P9ldETfV2xOMl4GLu63iE1AJ3tVqnnkvqdDJO5samBAuQFRFj5NaSPHm4gYoxdpPif2hoY9B+MjbOESl1rmTGZymiSSqE7l4u5UzxlU2eCqBCPHzNULMPkr3SgI7BXYq6RTAX0Of+9XXLg4Gj1O1X7SlT1wTGuXvCAzerR2ooB+5dkHoF6YlOp3Y+WPy9VYmoCSFgfPpWjsLjlL7lCxJDZBEfNfEItGrHVl1SZwWvqIeG49EI6KnY2phDkupXyJXsdSJDym8WNEU8ow+LcesprlA4GBf8rYLSCP2ZMokt+cal7X1rSptaiEBWI7S2jCGjz1mmB9AT+xjCUjwhEg2NoFIUJBJSziPNmgl9qVbMKjTBRwlhMSXbXLlUrluYN2t8/jw+Jlre4f1SFo01LEZ6XJeELwpI4HuGhPOt8Vlc2/mInrGOLNXmyxgdlyVIL8qFfg2syVSAekOENbaCTnKrS0rULKug6eBdPom3EmksYqHptRHh4IB92NRXiQ8jc8iEJmmVS7bF5AlXkQoY4s8dmkpH6X5NToBrLqRLo8
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB6919.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(2906002)(4326008)(53546011)(26005)(36756003)(86362001)(71200400001)(33656002)(6506007)(38070700005)(6916009)(54906003)(316002)(186003)(66476007)(508600001)(66556008)(83380400001)(38100700002)(2616005)(64756008)(66946007)(6486002)(8676002)(6512007)(66446008)(122000001)(5660300002)(91956017)(8936002)(76116006)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <28394010AEEA9843B2A93847D8DAB758@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
+X-Inumbo-ID: 6bc83fef-b7e5-4552-8dcb-d34fb63797be
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1632410138; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qiutPdaDUEQ53OVxPbWUI57eHOHJmixSloo1uUtF/HQ=;
+	b=b9q3+E8fNtxbq9TBJSjcVGQBGVgDFmEOCzxIbLRb2xZyHQyeykuPcz01tn6d7lMZTxdv5G
+	otsWgjFiqMP8zmhQALXwc5D0vgk024l+hgpVZRsmCmrq1S4r6w/cP84VG959dTtWL1/dUe
+	nbNhFNbN/Z/kERDW8Z8CCE4yvzTG510=
+Subject: Re: [PATCH 7/9] xen/x86: hook up xen_banner() also for PVH
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ lkml <linux-kernel@vger.kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+References: <4efa804e-3250-227f-00c7-347581366cd4@suse.com>
+ <5af11027-cf9d-cf78-9f48-b2ce2edd6e62@suse.com>
+ <2ded8c58-b9c3-89dc-6883-1794d1c4126a@suse.com>
+ <d9b6e98c-4e75-73f3-1e6d-42df300cfd49@suse.com>
+From: Juergen Gross <jgross@suse.com>
+Message-ID: <89cb2d39-2bfc-dccf-8e92-39e4e952750d@suse.com>
+Date: Thu, 23 Sep 2021 17:15:37 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4933
-Original-Authentication-Results: kernel.org; dkim=none (message not signed)
- header.d=none;kernel.org; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT033.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	de500561-e58b-4fb7-9e25-08d97ea4f35d
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	E/Oj6aUHNEo1cksKlpd5IjKlPg6a+mmgXk9LKZwKc8JdaXLMLAojlTnSUVPKLGCCitXhucTo/5uAUWdcuEyLN9gQ97lPs4Gdvhs75DXAXMGb+FPIMimOPjDjNLZYPUjWShPNDjvozV07SSkVywLqkqmLLNnmVfZbXBYH729ztoPO06SM9DSm8koDkz/JeTt8VVpayDz5+yzVvFlfkLVal7muIOV1Vznuy/tYRVD4asaKMNvscGM7Eanf02zVFYPdac73GyH/b2wtlm2U/YQ6soUW/6BeHSEHhRT9Vfjp8C27C7rdn9m+aRImlHdxoGROQYJ8k7K5ZbPW9+gugxYHELSHjJY7gRGr9hCEBNxn2Mh27EW6xhD95+aSqiOQeIFVYRS5zSlPuw6T22Xt3XZtxfsFFDHN8Fjo7DR7v2epMrrwlIEkViifZpJXn4qdC5TxKPtOTw3Gsh5YN+3O5c3Xvqfc81eo3jNpnYdhULMh5v40y99n3F0otND/0SDK63XHlImBh9R2dInVYdooUUakfOXXJCO4y1IwKJ/pUr205+f1vbdS+LO+CIPBKkfvrG4l77mZCLLDXxILz8n4Fx8gvJts/1zmPmWPaAJXxMdYox9R4Cn6B/FWyw0QvNYezIJSrqLWEjMel4IClLmQbjyIghGU9UxrSB1UC3WkLSsKNdcbeghFgZst64MkOYH2617iVJKlZxq+vVBZ8D4LmVZhXA==
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(81166007)(26005)(86362001)(508600001)(2616005)(83380400001)(82310400003)(70586007)(70206006)(33656002)(47076005)(6486002)(6506007)(36860700001)(6862004)(186003)(356005)(6512007)(5660300002)(8676002)(54906003)(336012)(8936002)(36756003)(2906002)(4326008)(53546011)(316002)(107886003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2021 15:15:31.4381
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 24b323bd-eaa3-4265-9663-08d97ea4fbd5
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT033.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0801MB1732
+In-Reply-To: <d9b6e98c-4e75-73f3-1e6d-42df300cfd49@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="eB5LX1qkXLLfbcP2eMLtht3bzL22XkEnp"
 
-Hi Stefano,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--eB5LX1qkXLLfbcP2eMLtht3bzL22XkEnp
+Content-Type: multipart/mixed; boundary="mh2JNQMn8SCSb66PUXlECvaGtLWicgkYR";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ lkml <linux-kernel@vger.kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Message-ID: <89cb2d39-2bfc-dccf-8e92-39e4e952750d@suse.com>
+Subject: Re: [PATCH 7/9] xen/x86: hook up xen_banner() also for PVH
+References: <4efa804e-3250-227f-00c7-347581366cd4@suse.com>
+ <5af11027-cf9d-cf78-9f48-b2ce2edd6e62@suse.com>
+ <2ded8c58-b9c3-89dc-6883-1794d1c4126a@suse.com>
+ <d9b6e98c-4e75-73f3-1e6d-42df300cfd49@suse.com>
+In-Reply-To: <d9b6e98c-4e75-73f3-1e6d-42df300cfd49@suse.com>
 
-> On 23 Sep 2021, at 3:23 am, Stefano Stabellini <sstabellini@kernel.org> w=
-rote:
->=20
-> Subject should have xen/arm
->=20
->=20
-> On Wed, 22 Sep 2021, Rahul Singh wrote:
->> Implement generic pci access functions to read/write the configuration
->> space.
->>=20
->> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
->> ---
->> Change in v2: Fixed comments=20
->> ---
->> xen/arch/arm/pci/pci-access.c      | 58 ++++++++++++++++++++++++++++++
->> xen/arch/arm/pci/pci-host-common.c | 19 ++++++++++
->> xen/include/asm-arm/pci.h          |  2 ++
->> 3 files changed, 79 insertions(+)
->>=20
->> diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access=
-.c
->> index 04fe9fbf92..45500cec2a 100644
->> --- a/xen/arch/arm/pci/pci-access.c
->> +++ b/xen/arch/arm/pci/pci-access.c
->> @@ -16,6 +16,7 @@
->> #include <asm/io.h>
->>=20
->> #define INVALID_VALUE (~0U)
->> +#define PCI_ERR_VALUE(len) GENMASK(0, len * 8)
->>=20
->> int pci_generic_config_read(struct pci_host_bridge *bridge, uint32_t sbd=
-f,
->>                             uint32_t reg, uint32_t len, uint32_t *value)
->> @@ -72,6 +73,63 @@ int pci_generic_config_write(struct pci_host_bridge *=
-bridge, uint32_t sbdf,
->>     return 0;
->> }
->>=20
->> +static uint32_t pci_config_read(pci_sbdf_t sbdf, unsigned int reg,
->> +                                unsigned int len)
->> +{
->> +    uint32_t val =3D PCI_ERR_VALUE(len);
->> +
->=20
-> No blank line
-Ack.
->=20
->=20
->> +    struct pci_host_bridge *bridge =3D pci_find_host_bridge(sbdf.seg, s=
-bdf.bus);
->> +
->> +    if ( unlikely(!bridge) )
->> +        return val;
->> +
->> +    if ( unlikely(!bridge->ops->read) )
->> +        return val;
->> +
->> +    bridge->ops->read(bridge, (uint32_t) sbdf.sbdf, reg, len, &val);
->=20
-> The more I look at these casts the less I like them :-D
->=20
-> One idea is to move the definition of pci_sbdf_t somewhere else
-> entirely, for instance xen/include/xen/types.h, then we can use
-> pci_sbdf_t everywhere
->=20
-Ok. Let me try to get rid of this in the next version.
->=20
->> +    return val;
->> +}
->> +
->> +static void pci_config_write(pci_sbdf_t sbdf, unsigned int reg,
->> +                             unsigned int len, uint32_t val)
->> +{
->> +    struct pci_host_bridge *bridge =3D pci_find_host_bridge(sbdf.seg, s=
-bdf.bus);
->> +
->> +    if ( unlikely(!bridge) )
->> +        return;
->> +
->> +    if ( unlikely(!bridge->ops->write) )
->> +        return;
->> +
->> +    bridge->ops->write(bridge, (uint32_t) sbdf.sbdf, reg, len, val);
->> +}
->> +
->> +/*
->> + * Wrappers for all PCI configuration access functions.
->> + */
->> +
->> +#define PCI_OP_WRITE(size, type)                            \
->> +    void pci_conf_write##size(pci_sbdf_t sbdf,              \
->> +                              unsigned int reg, type val)   \
->> +{                                                           \
->> +    pci_config_write(sbdf, reg, size / 8, val);             \
->> +}
->> +
->> +#define PCI_OP_READ(size, type)                             \
->> +    type pci_conf_read##size(pci_sbdf_t sbdf,               \
->> +                              unsigned int reg)             \
->> +{                                                           \
->> +    return pci_config_read(sbdf, reg, size / 8);            \
->> +}
->> +
->> +PCI_OP_READ(8, uint8_t)
->> +PCI_OP_READ(16, uint16_t)
->> +PCI_OP_READ(32, uint32_t)
->> +PCI_OP_WRITE(8, uint8_t)
->> +PCI_OP_WRITE(16, uint16_t)
->> +PCI_OP_WRITE(32, uint32_t)
->> +
->> /*
->>  * Local variables:
->>  * mode: C
->> diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-h=
-ost-common.c
->> index 4beec14f2f..3bdc336268 100644
->> --- a/xen/arch/arm/pci/pci-host-common.c
->> +++ b/xen/arch/arm/pci/pci-host-common.c
->> @@ -243,6 +243,25 @@ err_exit:
->>     return err;
->> }
->>=20
->> +/*
->> + * This function will lookup an hostbridge based on the segment and bus
->> + * number.
->> + */
->> +struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t =
-bus)
->> +{
->> +    struct pci_host_bridge *bridge;
->> +
->> +    list_for_each_entry( bridge, &pci_host_bridges, node )
->> +    {
->> +        if ( bridge->segment !=3D segment )
->> +            continue;
->> +        if ( (bus < bridge->bus_start) || (bus > bridge->bus_end) )
->> +            continue;
->> +        return bridge;
->> +    }
->> +
->> +    return NULL;
->> +}
->> /*
->>  * Local variables:
->>  * mode: C
->> diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
->> index 4b32c7088a..5406daecda 100644
->> --- a/xen/include/asm-arm/pci.h
->> +++ b/xen/include/asm-arm/pci.h
->> @@ -18,6 +18,7 @@
->> #ifdef CONFIG_HAS_PCI
->>=20
->> #define pci_to_dev(pcidev) (&(pcidev)->arch.dev)
->> +#define PRI_pci "%04x:%02x:%02x.%u"
->=20
-> This is added in this patch but it is unused here
+--mh2JNQMn8SCSb66PUXlECvaGtLWicgkYR
+Content-Type: multipart/mixed;
+ boundary="------------8709DC3FBC915280D9627895"
+Content-Language: en-US
 
-Ack. I will remove this and will use %pp to print SBDF.
+This is a multi-part message in MIME format.
+--------------8709DC3FBC915280D9627895
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Regards,
-Rahul
+On 23.09.21 17:10, Jan Beulich wrote:
+> On 23.09.2021 16:59, Juergen Gross wrote:
+>> On 07.09.21 12:11, Jan Beulich wrote:
+>>> This was effectively lost while dropping PVHv1 code. Move the functio=
+n
+>>> and arrange for it to be called the same way as done in PV mode. Clea=
+rly
+>>> this then needs re-introducing the XENFEAT_mmu_pt_update_preserve_ad
+>>> check that was recently removed, as that's a PV-only feature.
+>>>
+>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>
+>>> --- a/arch/x86/xen/enlighten.c
+>>> +++ b/arch/x86/xen/enlighten.c
+>>> @@ -261,6 +261,18 @@ int xen_vcpu_setup(int cpu)
+>>>    	return ((per_cpu(xen_vcpu, cpu) =3D=3D NULL) ? -ENODEV : 0);
+>>>    }
+>>>   =20
+>>> +void __init xen_banner(void)
+>>> +{
+>>> +	unsigned version =3D HYPERVISOR_xen_version(XENVER_version, NULL);
+>>> +	struct xen_extraversion extra;
+>>
+>> Please add a blank line here.
+>=20
+> Oops.
+>=20
+>>> +	HYPERVISOR_xen_version(XENVER_extraversion, &extra);
+>>> +
+>>> +	pr_info("Booting paravirtualized kernel on %s\n", pv_info.name);
+>>
+>> Is this correct? I don't think the kernel needs to be paravirtualized
+>> with PVH (at least not to the same extend as for PV).
+>=20
+> What else do you suggest the message to say? Simply drop
+> "paravirtualized"? To some extent it is applicable imo, further
+> qualified by pv_info.name. And that's how it apparently was with
+> PVHv1.
 
+The string could be selected depending on CONFIG_XEN_PV.
+
+
+Juergen
+
+--------------8709DC3FBC915280D9627895
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------8709DC3FBC915280D9627895--
+
+--mh2JNQMn8SCSb66PUXlECvaGtLWicgkYR--
+
+--eB5LX1qkXLLfbcP2eMLtht3bzL22XkEnp
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFMmhkFAwAAAAAACgkQsN6d1ii/Ey/Y
+Mwf+LW2t72MHtJWCoGlUMA/77oMXOPnTIo1U3l2LEMoesswuyQqGBMtFNXbz91NUdqv6xF+0nAME
+rgSXsWK289p+Mrsq9FedKXg9/LLjEsCOh6PRE7qK6SwkbmsO4CB6JnkWIrytprgn273Ngcs+LnIE
+Izqe9aEjiCQYwVMnSL0orWuq8WTKrc4vSQz3puHaIrvakVjtfucVPQMjH3KIaM+I8+Fgm7v4QXb4
+c3an2dhYGASYtjh7Sf1EMLDzymMU1QPIpo799valwpK0mATVL02z+qcUdpZ+ipStjhOZtYa8lPMH
+kOrp1nkKen/VH6fK8iRq69A8reCM8qJowaDKS4KVRg==
+=h7Jj
+-----END PGP SIGNATURE-----
+
+--eB5LX1qkXLLfbcP2eMLtht3bzL22XkEnp--
 
