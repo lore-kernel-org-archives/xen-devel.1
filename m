@@ -2,48 +2,48 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A0568C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8AD62C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 59AAA60F43
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 59AAA60F43
+	by mail.kernel.org (Postfix) with ESMTPS id 5A7E260F43
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5A7E260F43
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194122.345843 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194124.345854 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOHd-0001ez-Qh; Thu, 23 Sep 2021 12:57:01 +0000
+	id 1mTOHn-00023Z-2N; Thu, 23 Sep 2021 12:57:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194122.345843; Thu, 23 Sep 2021 12:57:01 +0000
+Received: by outflank-mailman (output) from mailman id 194124.345854; Thu, 23 Sep 2021 12:57:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOHd-0001es-ND; Thu, 23 Sep 2021 12:57:01 +0000
-Received: by outflank-mailman (input) for mailman id 194122;
- Thu, 23 Sep 2021 12:57:00 +0000
+	id 1mTOHm-00023S-VC; Thu, 23 Sep 2021 12:57:10 +0000
+Received: by outflank-mailman (input) for mailman id 194124;
+ Thu, 23 Sep 2021 12:57:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOHV-0004it-6j
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:56:53 +0000
-Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
+ id 1mTOGw-0004it-5t
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:56:18 +0000
+Received: from mail-lf1-x12f.google.com (unknown [2a00:1450:4864:20::12f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5945c790-8869-4b99-afdc-a6c7733b4bcc;
- Thu, 23 Sep 2021 12:55:13 +0000 (UTC)
-Received: by mail-lf1-x12d.google.com with SMTP id z24so26712439lfu.13
- for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:55:13 -0700 (PDT)
+ id b26bf262-48c3-45ed-bbc2-aa8f8a0ed16e;
+ Thu, 23 Sep 2021 12:55:07 +0000 (UTC)
+Received: by mail-lf1-x12f.google.com with SMTP id u18so25609793lfd.12
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:55:07 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.10
+ by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:55:11 -0700 (PDT)
+ Thu, 23 Sep 2021 05:55:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5945c790-8869-4b99-afdc-a6c7733b4bcc
+X-Inumbo-ID: b26bf262-48c3-45ed-bbc2-aa8f8a0ed16e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=/VZhQBHA/qWsZnQaFLYfN7XFH1H4UA39toP1GBs37TM=;
-        b=P8Hj9IuBQQDngliolaPP7ZmvBgMYQvbZ3Apn/ouQ8J5yPra/sFgxauc0LD/tzbp8wo
-         rQVHv5c8j9RWxG5p+ChF6f6tuID8Q5zvstZjZXEgtkX07RIVDTs+GA7+lz++OaiMcLhi
-         IFjpzJZaoO3dkvtRJMTIhAmVdMP2OA+9A/SwKLgTT56y7vVw7+JpwsebBeCIWEfcb1hD
-         M/puTGIUrPojnOjh1Pv8I8JEqW926nKjvKg3bpiEvoid8ZqJ+/nD/+SNZGC+xtHx2zhb
-         PUk7NxVks2afQC+Z3eZ0AeqP4bhyZ5n3O66dDvY+S8vQsxsiz6I0/wUTjrG+70nJjuNw
-         ZCyQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xjptWExU6TWM7wvE9QyWUsFVZpNpHRTTMdpxk2EhC08=;
+        b=qKoY6kLGWNocUC9YkflO59mYUD/aorNBD60p3xgQ2vM+uFVxL45hsNzjZhiDVSldyt
+         vYa6gNOodlA9lptZuPstRE52EhHkvCvAtsyyfp7ChzF4xhwVNMLBiRmPgWyz9imHUYv+
+         7o1AywfCBf2Ok2/x1Yk8aIbBbI5sMmg/dtFM06U7oGTGSJnGptkgWmnSt07Qp78WaLZy
+         MbA5gvhVyYKQH0f6s6d8rOVjetw2uTvxCEp0RK8jYTar4QidFIJemDkSl2I6yS63kJB3
+         2Se4o/x4n36AIjDzDYPMStgYdii2TqjxvlyAtbyehQ5adOyKrEVeWpiEOZx0QnMUZ9WO
+         R7Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=/VZhQBHA/qWsZnQaFLYfN7XFH1H4UA39toP1GBs37TM=;
-        b=JmCcsFNyCR1+yeqn4tUT48yvyQ6/eojjMBv74n7WWxb2axj3GbIw8LTWCrqQT7rBz2
-         kY3IUSr0IblsBKKuvSkkxs/bpdmr7WRNt7ii9X5dS9vn1pIidADsMTZxOFp+Yq+Jb2Ja
-         sC/n7WSm0ucGzH/pvs4dNZ+X5SUfG8MSZYAaboGRED3lUdW8UdHyj9PxjBWfZuOzNBK2
-         9duN9CI5AgiZoU9/ZBInGoM3EnusrmEYLKVhkU6Ob8NODqkFayMmIw/4/xF4bF7Px12f
-         E6wcacS3lwvD3tBduD39I/sk8X8fp3XhBOofJFOPKQYxJQtWgXiY30/AHTtfV1RYBAcj
-         +/og==
-X-Gm-Message-State: AOAM533QoIhod2VbBZrkh0F8oAk/l1evunRrcJbxJTN7rjtqnVj1IhYv
-	BXNJLWZea9MKEJDIEw2WWPaUhjvxW5snYw==
-X-Google-Smtp-Source: ABdhPJxVZKYeKANBbtQt4yOeYPS1abKifRIc3+NhdRNVbgxW2Y/9Ry0MALLSfk/9SB4lbTL6En8Icg==
-X-Received: by 2002:a05:6512:110a:: with SMTP id l10mr4093541lfg.550.1632401711887;
-        Thu, 23 Sep 2021 05:55:11 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xjptWExU6TWM7wvE9QyWUsFVZpNpHRTTMdpxk2EhC08=;
+        b=N/lXeT7cqTRc+V5RmuGAd+iB7mzzi0Wtv4/e0KVOJThM3fki9jqQmxxiyeKh4dm4uO
+         B7eNPexuRvBmvNRv5XlYWiZ5BbrB5J5fd9ptyNBScCAR0v9agfaNQkAlBP6lGVK5NPeA
+         dnrqxWMbe6BOSgQpyyl6CKetTV6wqj4YLEe0QdLPqlSKcEWlzM5wDMkbq9SDPuhKiTLl
+         xhYQEn50IKjAGkVWlkL/Z71OzH4K+gkkntjLWc4PoWFtSvur0XlQLg833txUrnDsw7PH
+         RoQuKgX30Est5bDnoZ0wwKTNUtfrTMsbb27goW52KTTVbsxvL4POsgV1oODZCWXuktFN
+         EBdw==
+X-Gm-Message-State: AOAM530c75IBikLNpC1KxUvGYffMBSnShg2KcoAKcfsf0raeWzgxaVJh
+	uzL4aXgf4TArjXMBrqGd1DrzZ0zK4lKX3Q==
+X-Google-Smtp-Source: ABdhPJxwYqEoAkmKlLJL7pG8wGA8T/J8LGPSsCQnLc2yjHBgONmMkR8ingCNcm4T6tjqEAz/b6x9Jg==
+X-Received: by 2002:ac2:5467:: with SMTP id e7mr3860249lfn.537.1632401703781;
+        Thu, 23 Sep 2021 05:55:03 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -95,119 +95,78 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 07/11] vpci/header: program p2m with guest BAR view
-Date: Thu, 23 Sep 2021 15:54:57 +0300
-Message-Id: <20210923125501.234252-8-andr2000@gmail.com>
+Subject: [PATCH v2 00/11] PCI devices passthrough on Arm, part 3
+Date: Thu, 23 Sep 2021 15:54:50 +0300
+Message-Id: <20210923125501.234252-1-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210923125501.234252-1-andr2000@gmail.com>
-References: <20210923125501.234252-1-andr2000@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Take into account guest's BAR view and program its p2m accordingly:
-gfn is guest's view of the BAR and mfn is the physical BAR value as set
-up by the host bridge in the hardware domain.
-This way hardware doamin sees physical BAR values and guest sees
-emulated ones.
+Hi, all!
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+This patch series is focusing on vPCI and adds support for non-identity
+PCI BAR mappings which is required while passing through a PCI device to
+a guest. The highlights are:
 
----
-Since v1:
- - s/MSI/MSI-X in comments
----
- xen/drivers/vpci/header.c | 35 +++++++++++++++++++++++++++++++++--
- 1 file changed, 33 insertions(+), 2 deletions(-)
+- Add relevant vpci register handlers when assigning PCI device to a domain
+  and remove those when de-assigning. This allows having different
+  handlers for different domains, e.g. hwdom and other guests.
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 9c603d26d302..bdd18599b205 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -30,6 +30,10 @@
- 
- struct map_data {
-     struct domain *d;
-+    /* Start address of the BAR as seen by the guest. */
-+    gfn_t start_gfn;
-+    /* Physical start address of the BAR. */
-+    mfn_t start_mfn;
-     bool map;
- };
- 
-@@ -37,12 +41,28 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-                      unsigned long *c)
- {
-     const struct map_data *map = data;
-+    gfn_t start_gfn;
-     int rc;
- 
-     for ( ; ; )
-     {
-         unsigned long size = e - s + 1;
- 
-+        /*
-+         * Any BAR may have holes in its memory we want to map, e.g.
-+         * we don't want to map MSI-X regions which may be a part of that BAR,
-+         * e.g. when a single BAR is used for both MMIO and MSI-X.
-+         * In this case MSI-X regions are subtracted from the mapping, but
-+         * map->start_gfn still points to the very beginning of the BAR.
-+         * So if there is a hole present then we need to adjust start_gfn
-+         * to reflect the fact of that substraction.
-+         */
-+        start_gfn = gfn_add(map->start_gfn, s - mfn_x(map->start_mfn));
-+
-+        printk(XENLOG_G_DEBUG
-+               "%smap [%lx, %lx] -> %#"PRI_gfn" for d%d\n",
-+               map->map ? "" : "un", s, e, gfn_x(start_gfn),
-+               map->d->domain_id);
-         /*
-          * ARM TODOs:
-          * - On ARM whether the memory is prefetchable or not should be passed
-@@ -52,8 +72,10 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-          * - {un}map_mmio_regions doesn't support preemption.
-          */
- 
--        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(s))
--                      : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(s));
-+        rc = map->map ? map_mmio_regions(map->d, start_gfn,
-+                                         size, _mfn(s))
-+                      : unmap_mmio_regions(map->d, start_gfn,
-+                                           size, _mfn(s));
-         if ( rc == 0 )
-         {
-             *c += size;
-@@ -69,6 +91,7 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-         ASSERT(rc < size);
-         *c += rc;
-         s += rc;
-+        gfn_add(map->start_gfn, rc);
-         if ( general_preempt_check() )
-                 return -ERESTART;
-     }
-@@ -149,6 +172,10 @@ bool vpci_process_pending(struct vcpu *v)
-             if ( !bar->mem )
-                 continue;
- 
-+            data.start_gfn = is_hardware_domain(v->vpci.pdev->domain) ?
-+                _gfn(PFN_DOWN(bar->addr)) :
-+                _gfn(PFN_DOWN(bar->guest_addr));
-+            data.start_mfn = _mfn(PFN_DOWN(bar->addr));
-             rc = rangeset_consume_ranges(bar->mem, map_range, &data);
- 
-             if ( rc == -ERESTART )
-@@ -194,6 +221,10 @@ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
-         if ( !bar->mem )
-             continue;
- 
-+        data.start_gfn = is_hardware_domain(d) ?
-+            _gfn(PFN_DOWN(bar->addr)) :
-+            _gfn(PFN_DOWN(bar->guest_addr));
-+        data.start_mfn = _mfn(PFN_DOWN(bar->addr));
-         while ( (rc = rangeset_consume_ranges(bar->mem, map_range,
-                                               &data)) == -ERESTART )
-             process_pending_softirqs();
+- Emulate guest BAR register values based on physical BAR values.
+  This allows creating a guest view of the registers and emulates
+  size and properties probe as it is done during PCI device enumeration by
+  the guest.
+
+- Instead of handling a single range set, that contains all the memory
+  regions of all the BARs and ROM, have them per BAR.
+
+- Take into account guest's BAR view and program its p2m accordingly:
+  gfn is guest's view of the BAR and mfn is the physical BAR value as set
+  up by the host bridge in the hardware domain.
+  This way hardware doamin sees physical BAR values and guest sees
+  emulated ones.
+
+The series also adds support for virtual PCI bus topology for guests:
+ - We emulate a single host bridge for the guest, so segment is always 0.
+ - The implementation is limited to 32 devices which are allowed on
+   a single PCI bus.
+ - The virtual bus number is set to 0, so virtual devices are seen
+   as embedded endpoints behind the root complex.
+
+The series was also tested on x86 PVH Dom0 and doesn't break it.
+
+Thank you,
+Oleksandr
+
+Oleksandr Andrushchenko (11):
+  vpci: Make vpci registers removal a dedicated function
+  vpci: Add hooks for PCI device assign/de-assign
+  vpci/header: Move register assignments from init_bars
+  vpci/header: Add and remove register handlers dynamically
+  vpci/header: Implement guest BAR register handlers
+  vpci/header: Handle p2m range sets per BAR
+  vpci/header: program p2m with guest BAR view
+  vpci/header: Emulate PCI_COMMAND register for guests
+  vpci/header: Reset the command register when adding devices
+  vpci: Add initial support for virtual PCI bus topology
+  xen/arm: Translate virtual PCI bus topology for guests
+
+ xen/arch/arm/domain.c         |   1 +
+ xen/arch/arm/vpci.c           |  87 ++++++-
+ xen/arch/arm/vpci.h           |   3 +
+ xen/common/domain.c           |   1 +
+ xen/drivers/Kconfig           |   4 +
+ xen/drivers/passthrough/pci.c |  91 ++++++++
+ xen/drivers/vpci/header.c     | 412 +++++++++++++++++++++++++++-------
+ xen/drivers/vpci/vpci.c       |  48 +++-
+ xen/include/asm-arm/pci.h     |   1 +
+ xen/include/xen/pci.h         |  19 ++
+ xen/include/xen/sched.h       |   8 +
+ xen/include/xen/vpci.h        |  34 ++-
+ 12 files changed, 617 insertions(+), 92 deletions(-)
+
 -- 
 2.25.1
 
