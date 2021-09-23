@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F05D3C4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 547DAC4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 957D66103D
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 957D66103D
+	by mail.kernel.org (Postfix) with ESMTPS id 24BC360F39
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 24BC360F39
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194130.345881 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194143.345919 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOI3-0003Bi-Cn; Thu, 23 Sep 2021 12:57:27 +0000
+	id 1mTOII-00050m-Iy; Thu, 23 Sep 2021 12:57:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194130.345881; Thu, 23 Sep 2021 12:57:27 +0000
+Received: by outflank-mailman (output) from mailman id 194143.345919; Thu, 23 Sep 2021 12:57:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOI3-0003Al-5o; Thu, 23 Sep 2021 12:57:27 +0000
-Received: by outflank-mailman (input) for mailman id 194130;
- Thu, 23 Sep 2021 12:57:25 +0000
+	id 1mTOII-000503-EB; Thu, 23 Sep 2021 12:57:42 +0000
+Received: by outflank-mailman (input) for mailman id 194143;
+ Thu, 23 Sep 2021 12:57:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOGI-0004it-4Q
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:55:38 +0000
-Received: from mail-lf1-x12f.google.com (unknown [2a00:1450:4864:20::12f])
+ id 1mTOGD-0004it-4L
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:55:33 +0000
+Received: from mail-lf1-x129.google.com (unknown [2a00:1450:4864:20::129])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 50e1c962-e474-4a32-a272-e52fa77ddbba;
- Thu, 23 Sep 2021 12:54:53 +0000 (UTC)
-Received: by mail-lf1-x12f.google.com with SMTP id i4so26248019lfv.4
- for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:54:53 -0700 (PDT)
+ id b31eb32d-d0f7-4a3d-99f4-de4ecf029500;
+ Thu, 23 Sep 2021 12:54:54 +0000 (UTC)
+Received: by mail-lf1-x129.google.com with SMTP id u18so25607498lfd.12
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:54:54 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id l7sm453584lfk.52.2021.09.23.05.54.51
+ by smtp.gmail.com with ESMTPSA id l7sm453584lfk.52.2021.09.23.05.54.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:54:52 -0700 (PDT)
+ Thu, 23 Sep 2021 05:54:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50e1c962-e474-4a32-a272-e52fa77ddbba
+X-Inumbo-ID: b31eb32d-d0f7-4a3d-99f4-de4ecf029500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=1/Av7G6GeJczbDfxqzlnIjolaRGsuAU++UwoP8I05TI=;
-        b=RwhaNlcv18og0qKohd2m91E9PVXuI6XFKWNx/rnHegXZWaORWUqBS/43wI5i8bRO1k
-         ypQSFQwAXMm+HQKJTqyn+7EPdAPy1W1/ZQ0pgTetQIzKoxJa1esuxYlR5qwBvPT4qNK0
-         Wvinvok3mchwEGtguo+OSdJmUO43zcpu2KTsOGnn5V1mL/qhLR9n9vHBE1Dsz95yj5Zh
-         KOOmgnr3cCMRy0ITTy4QTb8k66psaD8X5bJKcdTtXQ2R+85BZ6kFEYArZviQvWJ7LKmI
-         VKVCQOaLndulJqSCN2iyIDpRc6fg3aJZ3K16iql2qxe/SVca6J12RejijfWtPLl1cvMJ
-         BpTQ==
+        bh=7YmzvU66v4oKyYcFR8Qcx6xXzeJU6lQheixQJ2KXwag=;
+        b=UfedQtUeDFQTn+SL64ems4Rn0J9SCZv6TQxUejF3126H4dXW34Fw4o335M+EgmuAVd
+         Q+vcH55CqHDM1pXmnjXaPaOVe1VITRUSu5KXOh04yowdL3yGAtoN+5EaxqzzaU6qFi/w
+         saapwqv3p3gpPNF+fCgc17fZVTb29xUu2viB7O22AyvNkzeroO4y1c/DDEzVJY32qKv5
+         Fcwqf7Upq2oQFzm0tI0xEkjpjRRGSRVhZA2zwNFjvYuVwJwNZQsTsusoXy1tgf0JV05F
+         IUgAvoCTNPEoVXx3FTZSPXP2TFvw6GhfjmySjOo5Y1UpfNnXInYqc8q7/HMGpyT+EPfg
+         +JVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=1/Av7G6GeJczbDfxqzlnIjolaRGsuAU++UwoP8I05TI=;
-        b=6huGpiWKNfwGQFcNpjTiYXM9teRpP7plnf+EIoTnu0/wIJP9teezfKQ9p2GSE9mk+d
-         L1RQD4ogIfJRALcf3/yXtRiK3jzTz0SU+MXFmSPcFBbtxPa20n8wAJ309qBahM1c9Keu
-         GpYFR6H3+X0R/NdYf+VqCSDFMfFJ9U7/rUZm9L/qLIrFrtf8J2Bg3q+n+3ud5OOwIRwZ
-         t1TqCFMRTI0Ecd6RFHru7bnv1jfVZjL9Xy6AWMMZROnc/nG8oZEKIhcrzky7qd3wYex9
-         SygIQYTAeRiHQEiP8y2MSA9bUJmYgNLPsShpIBO5/RR/V6twGeL4W+v26wzHHpvH6ROK
-         qUog==
-X-Gm-Message-State: AOAM531A5CSPjdvo6MMXIOamnrEmJMlfjpd5eX/9BYzPKIIh2yEjj1zN
-	N2CB27J8nmMmrL6MN9dr32mlvNnZEt7/6A==
-X-Google-Smtp-Source: ABdhPJzx6pBtO2ant5XNGCw2LSXesDoDIg25KnxrYda03oE7UEIslZOTnYnpYVvYtxr9mbJCfYR3Kg==
-X-Received: by 2002:a05:6512:3a89:: with SMTP id q9mr3902643lfu.515.1632401692595;
-        Thu, 23 Sep 2021 05:54:52 -0700 (PDT)
+        bh=7YmzvU66v4oKyYcFR8Qcx6xXzeJU6lQheixQJ2KXwag=;
+        b=59WPZJewSNCCV6sZRSRIj5ycvpfiopsanY2e+JqnDUT7Xfw9cw6b8cX9IIAPo7jb9N
+         mpCWc3rjl3lQAwK2PKes8uxQlgdb+P5azrLjgrivgKY9H3QQiR+v1lGFaD7pDxju8zad
+         C/54hwEOJTmKDZckEk7s2v48iy3hdZQ2killPSK3VcNu/NhS4KGt8rRLDfEYgtwyXHEY
+         g4JzNEMrRNiUoOqoMPeOz4SmuAF3GUMyckRqGFNeYvbA+H3ssyoR9T7/Xe5InvTm+swr
+         OirMD/Td1rI+vh00LFZsvi/5UfgsbNu/cKD41PF/j/p/8J7AMGsZ0orQloffAXWYVRq0
+         h9sw==
+X-Gm-Message-State: AOAM531r2mCtl9ogTa74P9hp8fF74QdUf+aw6IcYfmI9pVfQHNazlN6Q
+	s/cY2ptm0CIFVlY9cbzggt8NXD+8mRUM9Q==
+X-Google-Smtp-Source: ABdhPJwQFyQoC6ZyqfOZz0jz5BMc2q86hNOrzHCE+sQ7nVhOg/JEVk7PIv0iNGvCwLta+XxiRKvQlw==
+X-Received: by 2002:a2e:7f17:: with SMTP id a23mr5074537ljd.133.1632401690450;
+        Thu, 23 Sep 2021 05:54:50 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -93,10 +93,12 @@ Cc: julien@xen.org,
 	roger.pau@citrix.com,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 10/11] xen/arm: Do not map PCI ECAM and MMIO space to Domain-0's p2m
-Date: Thu, 23 Sep 2021 15:54:37 +0300
-Message-Id: <20210923125438.234162-11-andr2000@gmail.com>
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH v2 08/11] libxl: Only map legacy PCI IRQs if they are supported
+Date: Thu, 23 Sep 2021 15:54:35 +0300
+Message-Id: <20210923125438.234162-9-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210923125438.234162-1-andr2000@gmail.com>
 References: <20210923125438.234162-1-andr2000@gmail.com>
@@ -105,346 +107,78 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-PCI host bridges are special devices in terms of implementing PCI
-passthrough. According to [1] the current implementation depends on
-Domain-0 to perform the initialization of the relevant PCI host
-bridge hardware and perform PCI device enumeration. In order to
-achieve that one of the required changes is to not map all the memory
-ranges in map_range_to_domain as we traverse the device tree on startup
-and perform some additional checks if the range needs to be mapped to
-Domain-0.
-
-The generic PCI host controller device tree binding says [2]:
-- ranges: As described in IEEE Std 1275-1994, but must provide
-          at least a definition of non-prefetchable memory. One
-          or both of prefetchable Memory and IO Space may also
-          be provided.
-
-- reg   : The Configuration Space base address and size, as accessed
-          from the parent bus.  The base address corresponds to
-          the first bus in the "bus-range" property.  If no
-          "bus-range" is specified, this will be bus 0 (the default).
-
-From the above none of the memory ranges from the "ranges" property
-needs to be mapped to Domain-0 at startup as MMIO mapping is going to
-be handled dynamically by vPCI as we assign PCI devices, e.g. each
-device assigned to Domain-0/guest will have its MMIOs mapped/unmapped
-as needed by Xen.
-
-The "reg" property covers not only ECAM space, but may also have other
-then the configuration memory ranges described, for example [3]:
-- reg: Should contain rc_dbi, config registers location and length.
-- reg-names: Must include the following entries:
-   "rc_dbi": controller configuration registers;
-   "config": PCIe configuration space registers.
-
-This patch makes it possible to not map all the ranges from the
-"ranges" property and also ECAM from the "reg". All the rest from the
-"reg" property still needs to be mapped to Domain-0, so the PCI
-host bridge remains functional in Domain-0.
-
-[1] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg00777.html
-[2] https://www.kernel.org/doc/Documentation/devicetree/bindings/pci/host-generic-pci.txt
-[3] https://www.kernel.org/doc/Documentation/devicetree/bindings/pci/hisilicon-pcie.txt
+Arm's PCI passthrough implementation doesn't support legacy interrupts,
+but MSI/MSI-X. This can be the case for other platforms too.
+For that reason introduce a new CONFIG_PCI_SUPP_LEGACY_IRQ and add
+it to the CFLAGS and compile the relevant code in the toolstack only if
+applicable.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Cc: Ian Jackson <iwj@xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>
 
 ---
 Since v1:
- - Added better description of why and what needs to be mapped into
-   Domain-0's p2m and what doesn't
- - Do not do any mappings for PCI devices while traversing the DT
- - Walk all the bridges and make required mappings in one go
+ - Minimized #idefery by introducing pci_supp_legacy_irq function
+   for relevant checks
 ---
- xen/arch/arm/domain_build.c        | 38 +++++++++++++++--------
- xen/arch/arm/pci/ecam.c            | 14 +++++++++
- xen/arch/arm/pci/pci-host-common.c | 48 ++++++++++++++++++++++++++++++
- xen/arch/arm/pci/pci-host-zynqmp.c |  1 +
- xen/include/asm-arm/pci.h          |  9 ++++++
- xen/include/asm-arm/setup.h        | 13 ++++++++
- 6 files changed, 111 insertions(+), 12 deletions(-)
+ tools/libs/light/Makefile    |  4 ++++
+ tools/libs/light/libxl_pci.c | 13 +++++++++++++
+ 2 files changed, 17 insertions(+)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 83ab0d52cce9..e72c1b881cae 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -10,7 +10,6 @@
- #include <asm/regs.h>
- #include <xen/errno.h>
- #include <xen/err.h>
--#include <xen/device_tree.h>
- #include <xen/libfdt/libfdt.h>
- #include <xen/guest_access.h>
- #include <xen/iocap.h>
-@@ -47,12 +46,6 @@ static int __init parse_dom0_mem(const char *s)
- }
- custom_param("dom0_mem", parse_dom0_mem);
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index 7d8c51d49242..bd3f6be2a183 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -46,6 +46,10 @@ CFLAGS += -Wno-format-zero-length -Wmissing-declarations \
+ 	-Wno-declaration-after-statement -Wformat-nonliteral
+ CFLAGS += -I.
  
--struct map_range_data
--{
--    struct domain *d;
--    p2m_type_t p2mt;
--};
--
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef virt_to_mfn
- #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
-@@ -1388,9 +1381,8 @@ static int __init map_dt_irq_to_domain(const struct dt_device_node *dev,
-     return 0;
++ifeq ($(CONFIG_X86),y)
++CFLAGS += -DCONFIG_PCI_SUPP_LEGACY_IRQ
++endif
++
+ SRCS-$(CONFIG_X86) += libxl_cpuid.c
+ SRCS-$(CONFIG_X86) += libxl_x86.c
+ SRCS-$(CONFIG_X86) += libxl_psr.c
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index 59f3686fc85e..4c2d7aeefbb2 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -1364,6 +1364,15 @@ static void pci_add_timeout(libxl__egc *egc, libxl__ev_time *ev,
+     pci_add_dm_done(egc, pas, rc);
  }
  
--static int __init map_range_to_domain(const struct dt_device_node *dev,
--                                      u64 addr, u64 len,
--                                      void *data)
-+int __init map_range_to_domain(const struct dt_device_node *dev,
-+                               u64 addr, u64 len, void *data)
- {
-     struct map_range_data *mr_data = data;
-     struct domain *d = mr_data->d;
-@@ -1417,6 +1409,13 @@ static int __init map_range_to_domain(const struct dt_device_node *dev,
++static bool pci_supp_legacy_irq(void)
++{
++#ifdef CONFIG_PCI_SUPP_LEGACY_IRQ
++    return true;
++#else
++    return false;
++#endif
++}
++
+ static void pci_add_dm_done(libxl__egc *egc,
+                             pci_add_state *pas,
+                             int rc)
+@@ -1434,6 +1443,8 @@ static void pci_add_dm_done(libxl__egc *egc,
          }
      }
- 
-+#ifdef CONFIG_HAS_PCI
-+    if ( is_pci_passthrough_enabled() &&
-+         (device_get_class(dev) == DEVICE_PCI) &&
-+         !mr_data->map_pci_bridge )
-+        need_mapping = false;
-+#endif
-+
-     if ( need_mapping )
-     {
-         res = map_regions_p2mt(d,
-@@ -1450,7 +1449,11 @@ static int __init map_device_children(struct domain *d,
-                                       const struct dt_device_node *dev,
-                                       p2m_type_t p2mt)
- {
--    struct map_range_data mr_data = { .d = d, .p2mt = p2mt };
-+    struct map_range_data mr_data = {
-+        .d = d,
-+        .p2mt = p2mt,
-+        .map_pci_bridge = false
-+    };
-     int ret;
- 
-     if ( dt_device_type_is_equal(dev, "pci") )
-@@ -1582,7 +1585,11 @@ static int __init handle_device(struct domain *d, struct dt_device_node *dev,
-     /* Give permission and map MMIOs */
-     for ( i = 0; i < naddr; i++ )
-     {
--        struct map_range_data mr_data = { .d = d, .p2mt = p2mt };
-+        struct map_range_data mr_data = {
-+            .d = d,
-+            .p2mt = p2mt,
-+            .map_pci_bridge = false
-+        };
-         res = dt_device_get_address(dev, i, &addr, &size);
-         if ( res )
-         {
-@@ -2754,7 +2761,14 @@ static int __init construct_dom0(struct domain *d)
-         return rc;
- 
-     if ( acpi_disabled )
-+    {
-         rc = prepare_dtb_hwdom(d, &kinfo);
-+#ifdef CONFIG_HAS_PCI
-+        if ( rc < 0 )
-+            return rc;
-+        rc = pci_host_bridge_mappings(d, p2m_mmio_direct_c);
-+#endif
-+    }
-     else
-         rc = prepare_acpi(d, &kinfo);
- 
-diff --git a/xen/arch/arm/pci/ecam.c b/xen/arch/arm/pci/ecam.c
-index 9b88b1cedaa2..eae177f2cbc2 100644
---- a/xen/arch/arm/pci/ecam.c
-+++ b/xen/arch/arm/pci/ecam.c
-@@ -39,6 +39,19 @@ void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
-     return base + (PCI_DEVFN2(sbdf) << devfn_shift) + where;
- }
- 
-+bool pci_ecam_need_p2m_mapping(struct domain *d,
-+                               struct pci_host_bridge *bridge,
-+                               uint64_t addr)
-+{
-+    struct pci_config_window *cfg = bridge->cfg;
-+
-+    /*
-+     * We do not want ECAM address space to be mapped in Domain-0's p2m,
-+     * so we can trap access to it.
-+     */
-+    return cfg->phys_addr != addr;
-+}
-+
- /* ECAM ops */
- const struct pci_ecam_ops pci_generic_ecam_ops = {
-     .bus_shift  = 20,
-@@ -46,6 +59,7 @@ const struct pci_ecam_ops pci_generic_ecam_ops = {
-         .map_bus                = pci_ecam_map_bus,
-         .read                   = pci_generic_config_read,
-         .write                  = pci_generic_config_write,
-+        .need_p2m_mapping       = pci_ecam_need_p2m_mapping,
-     }
- };
- 
-diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-index 155f2a2743af..f350826ea26b 100644
---- a/xen/arch/arm/pci/pci-host-common.c
-+++ b/xen/arch/arm/pci/pci-host-common.c
-@@ -18,6 +18,7 @@
- 
- #include <xen/init.h>
- #include <xen/pci.h>
-+#include <asm/setup.h>
- #include <xen/rwlock.h>
- #include <xen/sched.h>
- #include <xen/vmap.h>
-@@ -328,6 +329,53 @@ int pci_host_get_num_bridges(void)
-     return count;
- }
- 
-+int __init pci_host_bridge_mappings(struct domain *d, p2m_type_t p2mt)
-+{
-+    struct pci_host_bridge *bridge;
-+    struct map_range_data mr_data = {
-+        .d = d,
-+        .p2mt = p2mt,
-+        .map_pci_bridge = true
-+    };
-+
-+    /*
-+     * For each PCI host bridge we need to only map those ranges
-+     * which are used by Domain-0 to properly initialize the bridge,
-+     * e.g. we do not want to map ECAM configuration space which lives in
-+     * "reg" or "assigned-addresses" device tree property.
-+     * Neither we want to map any of the MMIO ranges found in the "ranges"
-+     * device tree property.
-+     */
-+    list_for_each_entry( bridge, &pci_host_bridges, node )
-+    {
-+        const struct dt_device_node *dev = bridge->dt_node;
-+        int i;
-+
-+        for ( i = 0; i < dt_number_of_address(dev); i++ )
-+        {
-+            uint64_t addr, size;
-+            int err;
-+
-+            err = dt_device_get_address(dev, i, &addr, &size);
-+            if ( err )
-+            {
-+                printk(XENLOG_ERR "Unable to retrieve address %u for %s\n",
-+                       i, dt_node_full_name(dev));
-+                return err;
-+            }
-+
-+            if ( bridge->ops->need_p2m_mapping(d, bridge, addr) )
-+            {
-+                err = map_range_to_domain(dev, addr, size, &mr_data);
-+                if ( err )
-+                    return err;
-+            }
-+        }
-+    }
-+
-+    return 0;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/pci/pci-host-zynqmp.c b/xen/arch/arm/pci/pci-host-zynqmp.c
-index c27b4ea9f02f..adbe3627871f 100644
---- a/xen/arch/arm/pci/pci-host-zynqmp.c
-+++ b/xen/arch/arm/pci/pci-host-zynqmp.c
-@@ -33,6 +33,7 @@ const struct pci_ecam_ops nwl_pcie_ops = {
-         .map_bus                = pci_ecam_map_bus,
-         .read                   = pci_generic_config_read,
-         .write                  = pci_generic_config_write,
-+        .need_p2m_mapping       = pci_ecam_need_p2m_mapping,
-     }
- };
- 
-diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-index 7618f0b6725b..b81f66e813ef 100644
---- a/xen/include/asm-arm/pci.h
-+++ b/xen/include/asm-arm/pci.h
-@@ -19,6 +19,8 @@
- 
- #ifdef CONFIG_HAS_PCI
- 
-+#include <asm/p2m.h>
-+
- #define pci_to_dev(pcidev) (&(pcidev)->arch.dev)
- #define PRI_pci "%04x:%02x:%02x.%u"
- 
-@@ -79,6 +81,9 @@ struct pci_ops {
-                 uint32_t reg, uint32_t len, uint32_t *value);
-     int (*write)(struct pci_host_bridge *bridge, uint32_t sbdf,
-                  uint32_t reg, uint32_t len, uint32_t value);
-+    bool (*need_p2m_mapping)(struct domain *d,
-+                             struct pci_host_bridge *bridge,
-+                             uint64_t addr);
- };
- 
- /*
-@@ -102,6 +107,9 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, uint32_t sbdf,
-                             uint32_t reg, uint32_t len, uint32_t value);
- void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
-                                uint32_t sbdf, uint32_t where);
-+bool pci_ecam_need_p2m_mapping(struct domain *d,
-+                               struct pci_host_bridge *bridge,
-+                               uint64_t addr);
- struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
- int pci_get_host_bridge_segment(const struct dt_device_node *node,
-                                 uint16_t *segment);
-@@ -116,6 +124,7 @@ int pci_host_iterate_bridges(struct domain *d,
-                              int (*clb)(struct domain *d,
-                                         struct pci_host_bridge *bridge));
- int pci_host_get_num_bridges(void);
-+int pci_host_bridge_mappings(struct domain *d, p2m_type_t p2mt);
- #else   /*!CONFIG_HAS_PCI*/
- 
- #define pci_passthrough_enabled (false)
-diff --git a/xen/include/asm-arm/setup.h b/xen/include/asm-arm/setup.h
-index 95da0b7ab9cd..21863dd2bc58 100644
---- a/xen/include/asm-arm/setup.h
-+++ b/xen/include/asm-arm/setup.h
-@@ -2,6 +2,8 @@
- #define __ARM_SETUP_H_
- 
- #include <public/version.h>
-+#include <asm/p2m.h>
-+#include <xen/device_tree.h>
- 
- #define MIN_FDT_ALIGN 8
- #define MAX_FDT_SIZE SZ_2M
-@@ -77,6 +79,14 @@ struct bootinfo {
- #endif
- };
- 
-+struct map_range_data
-+{
-+    struct domain *d;
-+    p2m_type_t p2mt;
-+    /* Set if mappings for PCI host bridges must not be skipped. */
-+    bool map_pci_bridge;
-+};
-+
- extern struct bootinfo bootinfo;
- 
- extern domid_t max_init_domid;
-@@ -124,6 +134,9 @@ void device_tree_get_reg(const __be32 **cell, u32 address_cells,
- u32 device_tree_get_u32(const void *fdt, int node,
-                         const char *prop_name, u32 dflt);
- 
-+int map_range_to_domain(const struct dt_device_node *dev,
-+                        u64 addr, u64 len, void *data);
-+
- #endif
- /*
-  * Local variables:
+     fclose(f);
++    if (!pci_supp_legacy_irq())
++        goto out_no_irq;
+     sysfs_path = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/irq", pci->domain,
+                                 pci->bus, pci->dev, pci->func);
+     f = fopen(sysfs_path, "r");
+@@ -1983,6 +1994,8 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
+         }
+         fclose(f);
+ skip1:
++        if (!pci_supp_legacy_irq())
++            goto skip_irq;
+         sysfs_path = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/irq", pci->domain,
+                                pci->bus, pci->dev, pci->func);
+         f = fopen(sysfs_path, "r");
 -- 
 2.25.1
 
