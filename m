@@ -2,47 +2,45 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA0DFC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:52:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BE45C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:59:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9AD05610C9
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:52:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9AD05610C9
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=anisinha.ca
+	by mail.kernel.org (Postfix) with ESMTPS id C0B9861107
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 10:59:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C0B9861107
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193681.345015 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193692.345026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTML4-0000fr-VC; Thu, 23 Sep 2021 10:52:26 +0000
+	id 1mTMS6-0001no-OT; Thu, 23 Sep 2021 10:59:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193681.345015; Thu, 23 Sep 2021 10:52:26 +0000
+Received: by outflank-mailman (output) from mailman id 193692.345026; Thu, 23 Sep 2021 10:59:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTML4-0000fk-SF; Thu, 23 Sep 2021 10:52:26 +0000
-Received: by outflank-mailman (input) for mailman id 193681;
- Thu, 23 Sep 2021 10:51:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mTMS6-0001nh-Kw; Thu, 23 Sep 2021 10:59:42 +0000
+Received: by outflank-mailman (input) for mailman id 193692;
+ Thu, 23 Sep 2021 10:59:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ZpLY=ON=anisinha.ca=ani@srs-us1.protection.inumbo.net>)
- id 1mTMK4-0000Eq-KF
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 10:51:24 +0000
-Received: from mail-pl1-x634.google.com (unknown [2607:f8b0:4864:20::634])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 11461a33-4c5f-4c4b-b0b0-1094f814d6d0;
- Thu, 23 Sep 2021 10:51:23 +0000 (UTC)
-Received: by mail-pl1-x634.google.com with SMTP id y1so3720435plk.10
- for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 03:51:23 -0700 (PDT)
-Received: from anisinha-lenovo ([115.96.156.170])
- by smtp.googlemail.com with ESMTPSA id e13sm5257765pfi.210.2021.09.23.03.51.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 03:51:21 -0700 (PDT)
+ (envelope-from <julien@xen.org>) id 1mTMS4-0001nb-W1
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 10:59:41 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mTMS4-0005wS-Pn; Thu, 23 Sep 2021 10:59:40 +0000
+Received: from [202.153.84.92] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mTMS4-0002Vj-Fo; Thu, 23 Sep 2021 10:59:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,158 +52,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 11461a33-4c5f-4c4b-b0b0-1094f814d6d0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=anisinha-ca.20210112.gappssmtp.com; s=20210112;
-        h=from:date:to:cc:subject:in-reply-to:message-id:references
-         :user-agent:mime-version;
-        bh=4fJXlclBbnkVQPBywtqy0QsfK3GLzEGhebPQ86PZ4yM=;
-        b=UwDv30mJvlcUbc5vsqv5ShtJ3oE0rdWz5cuSzKVT1VMx7oOAhptBwIZn+62mHKdIda
-         CcTYo+EH+KpGcDyZdaNnrJToFa4sWqSUcsxSlx9OQMQwM6QNX2Bww7OSG0RQXXbD3De5
-         /pWCE/0WJrdF+Yon0++dBCaOxfyz5xkXytI1DQ+bx6EBoEMTn9XJoS68bJ+H7GOwtgB8
-         qoSCK6s0PZy1TP/XYoD8RYoHjlNP3fM2zc0dTANnUrIbLemr+exTR/fR3LouYTH11512
-         q0A2gT3vXM5gNC++K3kAcqiW6ZU/MP54Ed6BdACd1DXgZye8fizrfC83ybMpvRifxhXA
-         lPMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:date:to:cc:subject:in-reply-to:message-id
-         :references:user-agent:mime-version;
-        bh=4fJXlclBbnkVQPBywtqy0QsfK3GLzEGhebPQ86PZ4yM=;
-        b=VXIpjNXwcQ4dC8pW25Ecqfz+r5N47avqQvSKRZwqj+8qRBdQYGKcgfs4WpxqrQFOR1
-         nb6pAux0UA7DBrH8Y8ysGR1GLDgRNrQ8zw/3FMtLgp+TiFT7HjXBgf3VgQ3FoV9Ywps1
-         Ddez/dtmi2FxiI1QmHiyEQWGkPvzHqnGK2iUDjfBTDhUWylwhFfLAckeMrTd0ZvBsKoE
-         yOst9ZZAwLM3r7YgrzBh/w2LDhpNIaHqxtj/DHYaFyeWrzb4GAbIWqrHyJ/WIF3yB2k8
-         J5GrpbDNQIEAQSbj8EyZfVceu1EBbOvQuzqcqK5RnVkq7Pitql+fY6iYZmaUPxoBwoni
-         sufg==
-X-Gm-Message-State: AOAM5339eKGXUUwHByCHSTAfQJWFRVtz2hKmpSuVD4m6mRZefRAfHDqr
-	u1ZVUwN1iEuRNnvHFmmCLtutVg==
-X-Google-Smtp-Source: ABdhPJzia+90/vmutfv9+OVhfiSOiEAHqZONBLVWc1gCXXoo34eh7DSYhO2/LLO7Y/O8VFiKodZgxw==
-X-Received: by 2002:a17:90b:4d8f:: with SMTP id oj15mr4553491pjb.13.1632394282429;
-        Thu, 23 Sep 2021 03:51:22 -0700 (PDT)
-From: Ani Sinha <ani@anisinha.ca>
-X-Google-Original-From: Ani Sinha <anisinha@anisinha.ca>
-Date: Thu, 23 Sep 2021 16:21:11 +0530 (IST)
-X-X-Sender: anisinha@anisinha-lenovo
-To: Damien Hedde <damien.hedde@greensocs.com>
-cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>, 
-    =?ISO-8859-15?Q?Marc-Andr=E9_Lureau?= <marcandre.lureau@redhat.com>, 
-    Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>, 
-    Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
-    =?ISO-8859-15?Q?Daniel_P=2E_Berrang=E9?= <berrange@redhat.com>, 
-    "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>, 
-    Ani Sinha <ani@anisinha.ca>, Gerd Hoffmann <kraxel@redhat.com>, 
-    Eric Auger <eric.auger@redhat.com>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>, 
-    Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>, 
-    "Dr. David Alan Gilbert" <dgilbert@redhat.com>, 
-    Markus Armbruster <armbru@redhat.com>, Eric Blake <eblake@redhat.com>, 
-    qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org, 
-    mark.burton@greensocs.com, mirela.grujic@greensocs.com, edgari@xilinx.com, 
-    Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [RFC PATCH v2 07/16] hw/core/machine: add
- machine_class_is_dynamic_sysbus_dev_allowed
-In-Reply-To: <20210922161405.140018-8-damien.hedde@greensocs.com>
-Message-ID: <alpine.DEB.2.22.394.2109231559230.630@anisinha-lenovo>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com> <20210922161405.140018-8-damien.hedde@greensocs.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:Cc:To:Subject;
+	bh=xQRgn9oeecq7YDlbjVCHlp9AqlPzYJ0NNSTWpfkmSHs=; b=CLKQ74khakJNGPdHnh/h7kxl0g
+	/QRxGXgxDZcrIL7VyOLTKMwWZC7n8hvf+tG6Zg3g8ws+LYkSmEwhMm0rMaq6Gz84NU967ThonKbdx
+	BmtXleJ6Rj6cCPHgcm7jETNlJnTspH6fPc+JZiAw9lgTO4Jc0JlmTqbtSkX7Yfo/ZQuI=;
+Subject: Re: [PATCH 08/11] xen/arm: if 1:1 direct-map domain use native
+ addresses for GICv3
+To: Penny Zheng <penny.zheng@arm.com>, xen-devel@lists.xenproject.org,
+ sstabellini@kernel.org
+Cc: Bertrand.Marquis@arm.com, Wei.Chen@arm.com
+References: <20210923031115.1429719-1-penny.zheng@arm.com>
+ <20210923031115.1429719-9-penny.zheng@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <3efa0620-0a55-bce7-1e2c-66f3449af7cc@xen.org>
+Date: Thu, 23 Sep 2021 15:59:35 +0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <20210923031115.1429719-9-penny.zheng@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
+Hi,
 
-
-On Wed, 22 Sep 2021, Damien Hedde wrote:
-
-> Right now the allowance check for adding a sysbus device using
-> -device cli option (or device_add qmp command) is done well after
-> the device has been created. It is done during the machine init done
-> notifier: machine_init_notify() in hw/core/machine.c
->
-> This new function will allow us to check if a sysbus device type is
-> allowed to be dynamically created by the machine during the device
-> creation time.
->
-> Also make device_is_dynamic_sysbus() use the new function.
->
-> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+On 23/09/2021 08:11, Penny Zheng wrote:
+> From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> 
+> Today we use native addresses to map the GICv3 for Dom0 and fixed
+> addresses for DomUs.
+> 
+> This patch changes the behavior so that native addresses are used for
+> all domains that are 1:1 direct-map(including Dom0).
+> 
+> Update the rdist accessor to use the struct vgic variables to provide
+> the updated addresses.
+> 
+> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 > ---
->
-> In the context of our series, we need to be able to do the check at
-> device creation time to allow doing it depending on the current
-> MACHINE_INIT phase.
-> ---
->  include/hw/boards.h | 17 +++++++++++++++++
->  hw/core/machine.c   | 15 ++++++++++++---
->  2 files changed, 29 insertions(+), 3 deletions(-)
->
-> diff --git a/include/hw/boards.h b/include/hw/boards.h
-> index 463a5514f9..934443c1cd 100644
-> --- a/include/hw/boards.h
-> +++ b/include/hw/boards.h
-> @@ -51,6 +51,23 @@ void machine_set_cpu_numa_node(MachineState *machine,
->   */
->  void machine_class_allow_dynamic_sysbus_dev(MachineClass *mc, const char *type);
->
-> +/**
-> + * machine_class_is_dynamic_sysbus_dev_allowed: Check if type is an allowed
-> + * sysbus device type for the machine class.
-> + * @mc: Machine class
-> + * @type: type to check (should be a subtype of TYPE_SYS_BUS_DEVICE)
-> + *
-> + * Returns: true if @type is a type in the machine's list of
-> + * dynamically pluggable sysbus devices; otherwise false.
-> + *
-> + * Check if the QOM type @type is in the list of allowed sysbus device
-> + * types (see machine_class_allowed_dynamic_sysbus_dev()).
-> + * Note that if @type is a subtype of a type which is in the list, it is
-> + * allowed too.
-> + */
-> +bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
-> +                                                 const char *type);
+>   xen/arch/arm/domain_build.c | 32 ++++++++++++++++++++++++--------
+>   xen/arch/arm/vgic-v3.c      | 10 +++++-----
+>   xen/include/asm-arm/vgic.h  |  6 +++---
+>   3 files changed, 32 insertions(+), 16 deletions(-)
+> 
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index d5f201f73e..120f1ae575 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -1854,10 +1854,11 @@ static int __init make_gicv3_domU_node(struct kernel_info *kinfo)
+>   {
+>       void *fdt = kinfo->fdt;
+>       int res = 0;
+> -    __be32 reg[(GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS) * 2];
+> +    __be32 *reg;
+>       __be32 *cells;
+>       struct domain *d = kinfo->d;
+>       char buf[38];
+> +    unsigned int i, len = 0;
+>   
+>       snprintf(buf, sizeof(buf), "interrupt-controller@%"PRIx64,
+>                vgic_dist_base(&d->arch.vgic));
+> @@ -1881,27 +1882,42 @@ static int __init make_gicv3_domU_node(struct kernel_info *kinfo)
+>       if ( res )
+>           return res;
+>   
+> +    /* reg specifies all re-distributors and Distributor. */
+> +    len = (GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS) *
+> +          (vgic_rdist_nr(&d->arch.vgic) + 1) * sizeof(__be32);
+> +    reg = xmalloc_bytes(len);
+> +    if ( reg == NULL )
+> +        return -ENOMEM;
 > +
+>       cells = &reg[0];
+>       dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
+>                          vgic_dist_base(&d->arch.vgic), GUEST_GICV3_GICD_SIZE);
+> -    dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
+> -                       vgic_rdist_base(&d->arch.vgic, 0),
+> -                       vgic_rdist_size(&d->arch.vgic, 0));
+> +    for ( i = 0;
+> +          i < vgic_rdist_nr(&d->arch.vgic);
+> +          i++, cells += (GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS) )
+> +    {
+> +        dt_child_set_range(&cells,
+> +                           GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
+> +                           vgic_rdist_base(&d->arch.vgic, i),
+> +                           vgic_rdist_size(&d->arch.vgic, i));
+> +    }
+>   
+> -    res = fdt_property(fdt, "reg", reg, sizeof(reg));
+> +    res = fdt_property(fdt, "reg", reg, len);
+>       if (res)
+> -        return res;
+> +        goto out;
+>   
+>       res = fdt_property_cell(fdt, "linux,phandle", kinfo->phandle_gic);
+>       if (res)
+> -        return res;
+> +        goto out;
+>   
+>       res = fdt_property_cell(fdt, "phandle", kinfo->phandle_gic);
+>       if (res)
+> -        return res;
+> +        goto out;
+>   
+>       res = fdt_end_node(fdt);
+>   
+> + out:
+> +    xfree(reg);
+>       return res;
+>   }
+>   
+> diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
+> index cb5a70c42e..83f996b46c 100644
+> --- a/xen/arch/arm/vgic-v3.c
+> +++ b/xen/arch/arm/vgic-v3.c
+> @@ -1647,8 +1647,8 @@ static inline unsigned int vgic_v3_max_rdist_count(struct domain *d)
+>        * However DomU get a constructed memory map, so we can go with
+>        * the architected single redistributor region.
+>        */
 
-How about renaming this to device_type_is_allowed_dynamic_sysbus() ?
+The comment needs to be updated.
 
->  /**
->   * device_is_dynamic_sysbus: test whether device is a dynamic sysbus device
->   * @mc: Machine class
-> diff --git a/hw/core/machine.c b/hw/core/machine.c
-> index 9125c9aad0..1a18912dc8 100644
-> --- a/hw/core/machine.c
-> +++ b/hw/core/machine.c
-> @@ -545,18 +545,27 @@ void machine_class_allow_dynamic_sysbus_dev(MachineClass *mc, const char *type)
->
->  bool device_is_dynamic_sysbus(MachineClass *mc, DeviceState *dev)
->  {
-> -    bool allowed = false;
-> -    strList *wl;
->      Object *obj = OBJECT(dev);
->
->      if (!object_dynamic_cast(obj, TYPE_SYS_BUS_DEVICE)) {
->          return false;
->      }
->
-> +    return machine_class_is_dynamic_sysbus_dev_allowed(mc,
-> +            object_get_typename(obj));
-> +}
-> +
-> +bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
-> +                                                 const char *type)
-> +{
-> +    bool allowed = false;
-> +    strList *wl;
-> +    ObjectClass *klass = object_class_by_name(type);
-> +
->      for (wl = mc->allowed_dynamic_sysbus_devices;
->           !allowed && wl;
->           wl = wl->next) {
-> -        allowed |= !!object_dynamic_cast(obj, wl->value);
-> +        allowed |= !!object_class_dynamic_cast(klass, wl->value);
->      }
->
->      return allowed;
-> --
-> 2.33.0
->
->
+> -    return is_hardware_domain(d) ? vgic_v3_hw.nr_rdist_regions :
+> -               GUEST_GICV3_RDIST_REGIONS;
+> +    return is_domain_direct_mapped(d) ? vgic_v3_hw.nr_rdist_regions :
+> +                                        GUEST_GICV3_RDIST_REGIONS;
+
+Let's avoid to make the assumption that dom0 is always direct mapped. So 
+this should be "is_domain_direct_mapped(d) || is_hardware_domain(d)".
+
+I would actually suggest to introduce a new helper 
+"is_domain_use_host_layout()" (or similar) that wraps the two check. 
+This would make the code a bit more flexible.
+
+>   }
+>   
+>   static int vgic_v3_domain_init(struct domain *d)
+> @@ -1670,10 +1670,10 @@ static int vgic_v3_domain_init(struct domain *d)
+>       radix_tree_init(&d->arch.vgic.pend_lpi_tree);
+>   
+>       /*
+> -     * Domain 0 gets the hardware address.
+> -     * Guests get the virtual platform layout.
+> +     * 1:1 direct-map domain (including Dom0) gets the hardware address.
+> +     * Other guests get the virtual platform layout.
+>        */
+> -    if ( is_hardware_domain(d) )
+> +    if ( is_domain_direct_mapped(d) )
+
+Same here.
+
+>       {
+>           unsigned int first_cpu = 0;
+>   
+> diff --git a/xen/include/asm-arm/vgic.h b/xen/include/asm-arm/vgic.h
+> index 92f6a2d15d..0f7cb32c58 100644
+> --- a/xen/include/asm-arm/vgic.h
+> +++ b/xen/include/asm-arm/vgic.h
+> @@ -291,17 +291,17 @@ static inline paddr_t vgic_dist_base(struct vgic_dist *vgic)
+>   #ifdef CONFIG_GICV3
+>   static inline unsigned int vgic_rdist_nr(struct vgic_dist *vgic)
+>   {
+> -    return GUEST_GICV3_RDIST_REGIONS;
+> +    return vgic->nr_regions;
+>   }
+>   
+>   static inline paddr_t vgic_rdist_base(struct vgic_dist *vgic, unsigned int i)
+>   {
+> -    return GUEST_GICV3_GICR0_BASE;
+> +    return vgic->rdist_regions[i].base;
+>   }
+>   
+>   static inline paddr_t vgic_rdist_size(struct vgic_dist *vgic, unsigned int i)
+>   {
+> -    return GUEST_GICV3_GICR0_SIZE;
+> +    return vgic->rdist_regions[i].size;
+>   }
+
+I think this change in vgic.h should have belong to the patch 
+introducing the helpers (if we still plan to use them).
+
+>   #else
+>   static inline unsigned int vgic_rdist_nr(struct vgic_dist *vgic)
+> 
+
+Cheers,
+
+-- 
+Julien Grall
 
