@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57540C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:55:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CF10C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:55:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 26FCF61019
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:55:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 26FCF61019
+	by mail.kernel.org (Postfix) with ESMTPS id 4493F6103D
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:55:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4493F6103D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194104.345788 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194108.345810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOFj-00069W-Rj; Thu, 23 Sep 2021 12:55:03 +0000
+	id 1mTOFt-0007HV-P4; Thu, 23 Sep 2021 12:55:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194104.345788; Thu, 23 Sep 2021 12:55:03 +0000
+Received: by outflank-mailman (output) from mailman id 194108.345810; Thu, 23 Sep 2021 12:55:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOFj-00069K-O4; Thu, 23 Sep 2021 12:55:03 +0000
-Received: by outflank-mailman (input) for mailman id 194104;
- Thu, 23 Sep 2021 12:55:03 +0000
+	id 1mTOFt-0007HH-JH; Thu, 23 Sep 2021 12:55:13 +0000
+Received: by outflank-mailman (input) for mailman id 194108;
+ Thu, 23 Sep 2021 12:55:13 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOFj-0004it-36
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:55:03 +0000
-Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
+ id 1mTOFt-0004it-3g
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:55:13 +0000
+Received: from mail-lf1-x132.google.com (unknown [2a00:1450:4864:20::132])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f9edd8dd-1b80-4a1e-8fa5-90642b8eaa89;
- Thu, 23 Sep 2021 12:54:46 +0000 (UTC)
-Received: by mail-lf1-x12d.google.com with SMTP id z24so26706855lfu.13
- for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:54:46 -0700 (PDT)
+ id 57490847-57d1-49bd-b0a4-403c336c5255;
+ Thu, 23 Sep 2021 12:54:48 +0000 (UTC)
+Received: by mail-lf1-x132.google.com with SMTP id e15so26186690lfr.10
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:54:48 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id l7sm453584lfk.52.2021.09.23.05.54.44
+ by smtp.gmail.com with ESMTPSA id l7sm453584lfk.52.2021.09.23.05.54.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:54:44 -0700 (PDT)
+ Thu, 23 Sep 2021 05:54:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f9edd8dd-1b80-4a1e-8fa5-90642b8eaa89
+X-Inumbo-ID: 57490847-57d1-49bd-b0a4-403c336c5255
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=yvjDacI417BPdKlJvGk7p+c4OF7HOtW+eGbmd4BLwuQ=;
-        b=KOEKA0CpK+2fx5D8i0IiC0UcNJ/awgi6r6h3MF+wm7BRKSywc3+9cvPq9lK1ldbvVY
-         EYGyrKDvqHOiz5P9ip+8adsBWwjA6oy3VhcUlYED1KOIxEdKFrLXjdoUQ9JuAXR/7PtJ
-         WtISAU9iKzh3nSH9rougHWArA+9Z4dW07ff4PaOFjrDe+7a28spqEEv3ON2hZzYwfd/Q
-         C3sNpeq3Z6Ab8EqyG06A3nfyN3BhBQ99XH9KjDKXzNrOKXZqIl26S3cpv5KVF6Ptca9E
-         Jl50A4MC/9vspNZNPNnO4q6j9tKZWtCX2zgfkc3TeyAEB3vapwjc1PQd6r9KjzbeIHpC
-         sOmg==
+        bh=1NF2VdRzcAopkt/ag2bsT0u3KlYDxtxCU6z2CshuS9A=;
+        b=c3W4pHiP0SQbXwXikrCRW/5HNiXnuy0GiKtdlTMWgAt+q5OKH4BJh+UUyzBsXiVDS4
+         zPujaViJYEAM1QBWCUMzgq0wdSiZnFKwIkmo4ONopW1JG57hen9QfipVt6XjuZv5dpHN
+         +YZTLjE3or8uWGVSg/JLS4x8b8vO46ynKoDjhM76qSZMVy23quiQ7/h5HTNam0Chti+d
+         cHX6/fjEQyzwcG8VH0oaZiSQfWyva9YO9Pn+bnG6KgJL3cn/+TJLLMZxWdxC67rMJN3b
+         78QCugavjre0R6syfKKbFQJo858XMtYRKwARobETSbeIjp/EG7uAtioOjwSw/slcBrGg
+         KlDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=yvjDacI417BPdKlJvGk7p+c4OF7HOtW+eGbmd4BLwuQ=;
-        b=2s2X6EtyT57HVCmhiEsr0lTzfyz+rTrmBmPzzM/Rw56ucbeEYJ0rRZe2bQN1q8qlTl
-         DJ5rq+k2lXhF1F3SrimBIFFL+bZw49hGMfmUikGu43yfJULJyNt7uQrP3juKXEVoiimw
-         eomvl95cf+RcN7cwfUwf4lqFumRdEJB1NwR910Cce9UAzwezoxt0NXdHWNf2MsP4FPpn
-         MunFb+3G7WtjcpkKNpQkbprm4BDttiNePfpXAm5Q7nyP3Wpda9bcFKc9/KULjMzoQ618
-         tz5WuRPNtlEh13ZwRRszl/PqR8WSjdkxCPd4oSXgAgyfH0gO+GKk7TnzLcI20Er02mYP
-         NDTw==
-X-Gm-Message-State: AOAM531GsWQjAcfh1sRrOYX//hTul6ajy/anrVRb2uiFP/cnG4wYi8zj
-	ZQJ6pKRE/GabCj/CwRO4JwcxscvdVRJbVg==
-X-Google-Smtp-Source: ABdhPJyT22i21H5QrosLmLTvjvbY/GOQr+1/ScI3gtJHYC4bLwkBlXfvXTV5VzcTJKuzm1EhUp3eEw==
-X-Received: by 2002:a19:c1c3:: with SMTP id r186mr4106670lff.400.1632401684938;
-        Thu, 23 Sep 2021 05:54:44 -0700 (PDT)
+        bh=1NF2VdRzcAopkt/ag2bsT0u3KlYDxtxCU6z2CshuS9A=;
+        b=MIqAw/6marq3Squ39n51JKi53v5TAx7FPvbNOGOVkEkTaJ3+6NldJ016FN+7++bHqZ
+         xYn+p77TsjnqH+DvuDrA9dCxhvY+HnA3v/WXfBD7d7tcz4oSPI+fVNDTXEWCPi5K4efy
+         W9ua1lUu0jThWaOcvJJ3QOsnSksoHbxswNiWjlQbPgIktBLfgW8yzMelec5855Sh39k/
+         aq+X37Dq7YZhN6mpeSipeMaUJODjheBoaavj70IxDEncNVp347fYyZnzVEWAsPknI5DP
+         hCvsISO+LPuAO6xot2d1omY5STNdIZsSZMKb1rBKlUv8szPVTNNCwqlUWP3/iAZvTFQH
+         RcaQ==
+X-Gm-Message-State: AOAM533dDIMSbctiEsiG9Kj8UEovxrU00HoOAJHPR0HihxHZx1gX1deh
+	YLm8bRUc5aJVgD0jkceQsHAdQogl7cRTzw==
+X-Google-Smtp-Source: ABdhPJzELccAtlQYBFFcQSEcUG96n2lCiiukq2T8exQ27ScjvOLHxHZt3jzH71KXNO1heo96QkLGcw==
+X-Received: by 2002:a05:651c:3c3:: with SMTP id f3mr5182916ljp.222.1632401687403;
+        Thu, 23 Sep 2021 05:54:47 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -92,54 +92,57 @@ Cc: julien@xen.org,
 	Artem_Mygaiev@epam.com,
 	roger.pau@citrix.com,
 	bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 04/11] xen/device-tree: Make dt_find_node_by_phandle global
-Date: Thu, 23 Sep 2021 15:54:31 +0300
-Message-Id: <20210923125438.234162-5-andr2000@gmail.com>
+	rahul.singh@arm.com
+Subject: [PATCH v2 06/11] xen/domain: Call pci_release_devices() when releasing domain resources
+Date: Thu, 23 Sep 2021 15:54:33 +0300
+Message-Id: <20210923125438.234162-7-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210923125438.234162-1-andr2000@gmail.com>
 References: <20210923125438.234162-1-andr2000@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Make dt_find_node_by_phandle globally visible, so it can be re-used by
-other frameworks.
+This is the very same that we already do for DT devices. Moreover, x86
+already calls pci_release_devices().
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+
 ---
- xen/common/device_tree.c      | 2 +-
- xen/include/xen/device_tree.h | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+Since v1:
+ - re-wording in the commit message
+---
+ xen/arch/arm/domain.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index ea93da1725f6..4aae281e89bf 100644
---- a/xen/common/device_tree.c
-+++ b/xen/common/device_tree.c
-@@ -1047,7 +1047,7 @@ int dt_for_each_range(const struct dt_device_node *dev,
-  *
-  * Returns a node pointer.
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index f7ed130023d5..854e8fed0393 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -985,7 +985,8 @@ static int relinquish_memory(struct domain *d, struct page_list_head *list)
+  * function which may return -ERESTART.
   */
--static struct dt_device_node *dt_find_node_by_phandle(dt_phandle handle)
-+struct dt_device_node *dt_find_node_by_phandle(dt_phandle handle)
- {
-     struct dt_device_node *np;
+ enum {
+-    PROG_tee = 1,
++    PROG_pci = 1,
++    PROG_tee,
+     PROG_xen,
+     PROG_page,
+     PROG_mapping,
+@@ -1022,6 +1023,12 @@ int domain_relinquish_resources(struct domain *d)
+ #ifdef CONFIG_IOREQ_SERVER
+         ioreq_server_destroy_all(d);
+ #endif
++#ifdef CONFIG_HAS_PCI
++    PROGRESS(pci):
++        ret = pci_release_devices(d);
++        if ( ret )
++            return ret;
++#endif
  
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index 9069040ef7f7..3334048d3bb5 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -850,6 +850,8 @@ int dt_count_phandle_with_args(const struct dt_device_node *np,
-  */
- int dt_get_pci_domain_nr(struct dt_device_node *node);
- 
-+struct dt_device_node *dt_find_node_by_phandle(dt_phandle handle);
-+
- #ifdef CONFIG_DEVICE_TREE_DEBUG
- #define dt_dprintk(fmt, args...)  \
-     printk(XENLOG_DEBUG fmt, ## args)
+     PROGRESS(tee):
+         ret = tee_relinquish_resources(d);
 -- 
 2.25.1
 
