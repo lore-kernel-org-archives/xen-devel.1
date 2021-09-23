@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 547DAC4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 257AEC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24BC360F39
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 24BC360F39
+	by mail.kernel.org (Postfix) with ESMTPS id DFFFF60F39
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 12:57:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DFFFF60F39
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194143.345919 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194139.345909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOII-00050m-Iy; Thu, 23 Sep 2021 12:57:42 +0000
+	id 1mTOIH-0004ea-7T; Thu, 23 Sep 2021 12:57:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194143.345919; Thu, 23 Sep 2021 12:57:42 +0000
+Received: by outflank-mailman (output) from mailman id 194139.345909; Thu, 23 Sep 2021 12:57:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOII-000503-EB; Thu, 23 Sep 2021 12:57:42 +0000
-Received: by outflank-mailman (input) for mailman id 194143;
- Thu, 23 Sep 2021 12:57:41 +0000
+	id 1mTOIH-0004eP-3r; Thu, 23 Sep 2021 12:57:41 +0000
+Received: by outflank-mailman (input) for mailman id 194139;
+ Thu, 23 Sep 2021 12:57:39 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOGD-0004it-4L
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:55:33 +0000
-Received: from mail-lf1-x129.google.com (unknown [2a00:1450:4864:20::129])
+ id 1mTOGS-0004it-4i
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:55:48 +0000
+Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b31eb32d-d0f7-4a3d-99f4-de4ecf029500;
+ id bf44b32d-d9fe-4f80-a0a0-a5c01915bd04;
  Thu, 23 Sep 2021 12:54:54 +0000 (UTC)
-Received: by mail-lf1-x129.google.com with SMTP id u18so25607498lfd.12
+Received: by mail-lf1-x12d.google.com with SMTP id i25so26492013lfg.6
  for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:54:54 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id l7sm453584lfk.52.2021.09.23.05.54.49
+ by smtp.gmail.com with ESMTPSA id l7sm453584lfk.52.2021.09.23.05.54.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:54:50 -0700 (PDT)
+ Thu, 23 Sep 2021 05:54:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b31eb32d-d0f7-4a3d-99f4-de4ecf029500
+X-Inumbo-ID: bf44b32d-d9fe-4f80-a0a0-a5c01915bd04
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=7YmzvU66v4oKyYcFR8Qcx6xXzeJU6lQheixQJ2KXwag=;
-        b=UfedQtUeDFQTn+SL64ems4Rn0J9SCZv6TQxUejF3126H4dXW34Fw4o335M+EgmuAVd
-         Q+vcH55CqHDM1pXmnjXaPaOVe1VITRUSu5KXOh04yowdL3yGAtoN+5EaxqzzaU6qFi/w
-         saapwqv3p3gpPNF+fCgc17fZVTb29xUu2viB7O22AyvNkzeroO4y1c/DDEzVJY32qKv5
-         Fcwqf7Upq2oQFzm0tI0xEkjpjRRGSRVhZA2zwNFjvYuVwJwNZQsTsusoXy1tgf0JV05F
-         IUgAvoCTNPEoVXx3FTZSPXP2TFvw6GhfjmySjOo5Y1UpfNnXInYqc8q7/HMGpyT+EPfg
-         +JVA==
+        bh=HNTngv5ONOEO5gpzLyGmdvTGyFjpzr3RFglNf5/7Wm8=;
+        b=MQjwcQdvOef1lREXofpeWL8/hQj819MvOexAPoO/+yK43KhOF8+lTN/74YVCe2+PZX
+         cLlHsy60bn2dnjMUUiJeS54azNeSD/fAJA1zzqv/xntDTbsGFBNzFU/Rrg1paOYaT5IU
+         NMuYaT3azDD9cH9ObvJXcliJQAbvqMHPbaKj/qY8c+KDyIvbDpz2QBwnvpWTbIxWNVwW
+         RQltD2fhQ3TObamBbgOjbByRtpB1fZitsEbEPyIz3icTBeF3TUi2pSGhE7+5kiwUktKi
+         MGouv5VkY3Db/bu2cOZTzdogcoa8ane8TMtqA7scSmEN6UqIwQ6RLMzxIqE7QgXSEyHf
+         q1pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=7YmzvU66v4oKyYcFR8Qcx6xXzeJU6lQheixQJ2KXwag=;
-        b=59WPZJewSNCCV6sZRSRIj5ycvpfiopsanY2e+JqnDUT7Xfw9cw6b8cX9IIAPo7jb9N
-         mpCWc3rjl3lQAwK2PKes8uxQlgdb+P5azrLjgrivgKY9H3QQiR+v1lGFaD7pDxju8zad
-         C/54hwEOJTmKDZckEk7s2v48iy3hdZQ2killPSK3VcNu/NhS4KGt8rRLDfEYgtwyXHEY
-         g4JzNEMrRNiUoOqoMPeOz4SmuAF3GUMyckRqGFNeYvbA+H3ssyoR9T7/Xe5InvTm+swr
-         OirMD/Td1rI+vh00LFZsvi/5UfgsbNu/cKD41PF/j/p/8J7AMGsZ0orQloffAXWYVRq0
-         h9sw==
-X-Gm-Message-State: AOAM531r2mCtl9ogTa74P9hp8fF74QdUf+aw6IcYfmI9pVfQHNazlN6Q
-	s/cY2ptm0CIFVlY9cbzggt8NXD+8mRUM9Q==
-X-Google-Smtp-Source: ABdhPJwQFyQoC6ZyqfOZz0jz5BMc2q86hNOrzHCE+sQ7nVhOg/JEVk7PIv0iNGvCwLta+XxiRKvQlw==
-X-Received: by 2002:a2e:7f17:: with SMTP id a23mr5074537ljd.133.1632401690450;
-        Thu, 23 Sep 2021 05:54:50 -0700 (PDT)
+        bh=HNTngv5ONOEO5gpzLyGmdvTGyFjpzr3RFglNf5/7Wm8=;
+        b=qWOewXG0PCc3ox5YtxTTPUHkZ69FuexJaH9vAmMgrpabceVMD5fOnZCThfzj86eKaY
+         1vJiIqE5UvbVBMJnVZQMF6kC/uDQ6Hca8BgC+OXs4MoLwfiEclLd1GoO/R9tKU6lGtCB
+         yfTLjtIsLxFBLBIZKoG0zqk3+lhtwSd3Rj7CUcFUielj7n/mRDyA474OL/JUyiX/2Tb8
+         qcBtlvmYm74m3FUv9yRKsWlJx5ZubVWuljk2I9DX6b+U+I0s9dgwhgYtNjKsZnfXdkvb
+         ZtYr5h/qGrXOVrOuc8O0MrOvD8sLzDhBoDLmHSudQpH6kvPvl4RvV6uPlRFmaJODEFgt
+         pe8g==
+X-Gm-Message-State: AOAM530Hll+bwNI111fplKR7l43D82E+BLlruONj6LPsZkvZEDExGq7Z
+	2O6m3O7Br0LWTw/MKqPMVffd6wLqcdQ5uw==
+X-Google-Smtp-Source: ABdhPJycKsS0ZD76qSoGLuJUcMkJfAL1kNCC9tMBeWWfrb3lwIIN2AJTC93++bij/sHp820gH1XtOg==
+X-Received: by 2002:ac2:442f:: with SMTP id w15mr3929533lfl.491.1632401693567;
+        Thu, 23 Sep 2021 05:54:53 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -93,12 +93,10 @@ Cc: julien@xen.org,
 	roger.pau@citrix.com,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 08/11] libxl: Only map legacy PCI IRQs if they are supported
-Date: Thu, 23 Sep 2021 15:54:35 +0300
-Message-Id: <20210923125438.234162-9-andr2000@gmail.com>
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Subject: [PATCH v2 11/11] xen/arm: Process pending vPCI map/unmap operations
+Date: Thu, 23 Sep 2021 15:54:38 +0300
+Message-Id: <20210923125438.234162-12-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210923125438.234162-1-andr2000@gmail.com>
 References: <20210923125438.234162-1-andr2000@gmail.com>
@@ -107,78 +105,106 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Arm's PCI passthrough implementation doesn't support legacy interrupts,
-but MSI/MSI-X. This can be the case for other platforms too.
-For that reason introduce a new CONFIG_PCI_SUPP_LEGACY_IRQ and add
-it to the CFLAGS and compile the relevant code in the toolstack only if
-applicable.
+vPCI may map and unmap PCI device memory (BARs) being passed through which
+may take a lot of time. For this those operations may be deferred to be
+performed later, so that they can be safely preempted.
+Run the corresponding vPCI code while switching a vCPU.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Juergen Gross <jgross@suse.com>
 
 ---
 Since v1:
- - Minimized #idefery by introducing pci_supp_legacy_irq function
-   for relevant checks
+ - Moved the check for pending vpci work from the common IOREQ code
+   to hvm_do_resume on x86
+ - Re-worked the code for Arm to ensure we don't miss pending vPCI work
 ---
- tools/libs/light/Makefile    |  4 ++++
- tools/libs/light/libxl_pci.c | 13 +++++++++++++
- 2 files changed, 17 insertions(+)
+ xen/arch/arm/traps.c   | 13 +++++++++++++
+ xen/arch/x86/hvm/hvm.c |  6 ++++++
+ xen/common/ioreq.c     |  9 ---------
+ 3 files changed, 19 insertions(+), 9 deletions(-)
 
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index 7d8c51d49242..bd3f6be2a183 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -46,6 +46,10 @@ CFLAGS += -Wno-format-zero-length -Wmissing-declarations \
- 	-Wno-declaration-after-statement -Wformat-nonliteral
- CFLAGS += -I.
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 219ab3c3fbde..b246f51086e3 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -34,6 +34,7 @@
+ #include <xen/symbols.h>
+ #include <xen/version.h>
+ #include <xen/virtual_region.h>
++#include <xen/vpci.h>
  
-+ifeq ($(CONFIG_X86),y)
-+CFLAGS += -DCONFIG_PCI_SUPP_LEGACY_IRQ
-+endif
-+
- SRCS-$(CONFIG_X86) += libxl_cpuid.c
- SRCS-$(CONFIG_X86) += libxl_x86.c
- SRCS-$(CONFIG_X86) += libxl_psr.c
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 59f3686fc85e..4c2d7aeefbb2 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -1364,6 +1364,15 @@ static void pci_add_timeout(libxl__egc *egc, libxl__ev_time *ev,
-     pci_add_dm_done(egc, pas, rc);
- }
- 
-+static bool pci_supp_legacy_irq(void)
-+{
-+#ifdef CONFIG_PCI_SUPP_LEGACY_IRQ
-+    return true;
-+#else
-+    return false;
-+#endif
-+}
-+
- static void pci_add_dm_done(libxl__egc *egc,
-                             pci_add_state *pas,
-                             int rc)
-@@ -1434,6 +1443,8 @@ static void pci_add_dm_done(libxl__egc *egc,
-         }
+ #include <public/sched.h>
+ #include <public/xen.h>
+@@ -2304,6 +2305,18 @@ static bool check_for_vcpu_work(void)
      }
-     fclose(f);
-+    if (!pci_supp_legacy_irq())
-+        goto out_no_irq;
-     sysfs_path = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/irq", pci->domain,
-                                 pci->bus, pci->dev, pci->func);
-     f = fopen(sysfs_path, "r");
-@@ -1983,6 +1994,8 @@ static void do_pci_remove(libxl__egc *egc, pci_remove_state *prs)
-         }
-         fclose(f);
- skip1:
-+        if (!pci_supp_legacy_irq())
-+            goto skip_irq;
-         sysfs_path = GCSPRINTF(SYSFS_PCI_DEV"/"PCI_BDF"/irq", pci->domain,
-                                pci->bus, pci->dev, pci->func);
-         f = fopen(sysfs_path, "r");
+ #endif
+ 
++    if ( has_vpci(v->domain) )
++    {
++        bool pending;
++
++        local_irq_enable();
++        pending = vpci_process_pending(v);
++        local_irq_disable();
++
++        if ( pending )
++            return true;
++    }
++
+     if ( likely(!v->arch.need_flush_to_ram) )
+         return false;
+ 
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 7b48a1b925bb..d32f5d572941 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -549,6 +549,12 @@ void hvm_do_resume(struct vcpu *v)
+     if ( !vcpu_ioreq_handle_completion(v) )
+         return;
+ 
++    if ( has_vpci(v->domain) && vpci_process_pending(v) )
++    {
++        raise_softirq(SCHEDULE_SOFTIRQ);
++        return;
++    }
++
+     if ( unlikely(v->arch.vm_event) )
+         hvm_vm_event_do_resume(v);
+ 
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index d732dc045df9..689d256544c8 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -25,9 +25,7 @@
+ #include <xen/lib.h>
+ #include <xen/paging.h>
+ #include <xen/sched.h>
+-#include <xen/softirq.h>
+ #include <xen/trace.h>
+-#include <xen/vpci.h>
+ 
+ #include <asm/guest_atomics.h>
+ #include <asm/ioreq.h>
+@@ -212,19 +210,12 @@ static bool wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
+ 
+ bool vcpu_ioreq_handle_completion(struct vcpu *v)
+ {
+-    struct domain *d = v->domain;
+     struct vcpu_io *vio = &v->io;
+     struct ioreq_server *s;
+     struct ioreq_vcpu *sv;
+     enum vio_completion completion;
+     bool res = true;
+ 
+-    if ( has_vpci(d) && vpci_process_pending(v) )
+-    {
+-        raise_softirq(SCHEDULE_SOFTIRQ);
+-        return false;
+-    }
+-
+     while ( (sv = get_pending_vcpu(v, &s)) != NULL )
+         if ( !wait_for_io(sv, get_ioreq(s, v)) )
+             return false;
 -- 
 2.25.1
 
