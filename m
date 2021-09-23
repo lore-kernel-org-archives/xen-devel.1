@@ -8,42 +8,42 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B754C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:08:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 306B8C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:08:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E6D396103D
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:08:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E6D396103D
+	by mail.kernel.org (Postfix) with ESMTPS id D38A36103D
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:08:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D38A36103D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194208.346008 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194209.346019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOSm-0003pP-3E; Thu, 23 Sep 2021 13:08:32 +0000
+	id 1mTOSn-00047j-CB; Thu, 23 Sep 2021 13:08:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194208.346008; Thu, 23 Sep 2021 13:08:32 +0000
+Received: by outflank-mailman (output) from mailman id 194209.346019; Thu, 23 Sep 2021 13:08:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTOSm-0003pI-00; Thu, 23 Sep 2021 13:08:32 +0000
-Received: by outflank-mailman (input) for mailman id 194208;
- Thu, 23 Sep 2021 13:08:30 +0000
+	id 1mTOSn-00047Z-7h; Thu, 23 Sep 2021 13:08:33 +0000
+Received: by outflank-mailman (input) for mailman id 194209;
+ Thu, 23 Sep 2021 13:08:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOHz-0004it-87
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:57:23 +0000
-Received: from mail-lf1-x131.google.com (unknown [2a00:1450:4864:20::131])
+ id 1mTOI4-0004it-89
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:57:28 +0000
+Received: from mail-lf1-x132.google.com (unknown [2a00:1450:4864:20::132])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dde5d022-867a-48eb-9e7e-8b40d99586ad;
+ id c1ab318b-7c38-43f1-8007-8693397c9763;
  Thu, 23 Sep 2021 12:55:17 +0000 (UTC)
-Received: by mail-lf1-x131.google.com with SMTP id b15so25738434lfe.7
+Received: by mail-lf1-x132.google.com with SMTP id i25so26496283lfg.6
  for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:55:17 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.13
+ by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:55:13 -0700 (PDT)
+ Thu, 23 Sep 2021 05:55:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,34 +55,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dde5d022-867a-48eb-9e7e-8b40d99586ad
+X-Inumbo-ID: c1ab318b-7c38-43f1-8007-8693397c9763
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=t+TG3ZsjniyYOn1TjIrSDa/ZTsIEIfPrt6I6dPYbhyk=;
-        b=eV8YVH5NC4DmSL4x9/RAgitTwlfCmkQPMgFjPMCQK0n3AeZxwnSn+Udn3ubor53chc
-         UEnrd9Smm1404yKVVdaLjy3hOJiWBs7T/rVlalmkXg8d5F1EoxTvtMek+bFqTzq7ufkJ
-         Ydn5qa0Q1Oxs7w9E3XPmEQi5d5dBjhmPZfK3TsooOGEDddIb3G3she0IOltWH9l+WSHp
-         BoZAPk6yFF9zp3nTpBJacx+xWWVLPo3Lt6e8BYc8qB1gr7SsEU4ljwiOFgqvyHmb9Leo
-         VFFmKbTyuoA/iNCivDgXGHSYRXDzRaeZbBxNiOBI6RvCi+2vKVJbQWuifzkPHZXRqUEv
-         jw/w==
+        bh=XlpFRu8hRrvPpjMFenpSAJbBdeavkULfWEH3e9kj/3o=;
+        b=pn/1WK9cTRCVMT8S8N+kHcScv8SVfp4WAmQl55y/V20VbgiCkjI6Mk421HuVf6HD5d
+         gDj6lasHPMcFqrunqkhsT24D1oJD0PfKOWmQLaRUOyNed5XAR7hMxyJZ/puHpCBQKzlq
+         GeA2LA9d28oc5bmqWILcBA1L3xPM08dTwe5eVd/3dhpR6mLVE9XbtOzCp18JDAg19kK1
+         MSTJNsM0HppMoi6zI5afgpVAVQlaOc97sFuV7yj5jvHo+w6X6PoZrUhXvz6jZn30jTAq
+         PrhFFr4qfbF33EQv2Xff6GNBP7lYEX2WiZq1luKuv6c9ezife0E9U3tQnXqFF0k7uy+G
+         dwZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=t+TG3ZsjniyYOn1TjIrSDa/ZTsIEIfPrt6I6dPYbhyk=;
-        b=a4/HE7eoZgMpj0aWHKgbDfO6ZtTPItnWKwsbJHvbMH45Q6R0cJlyjXAt+x1R+40x0b
-         x59R7FZAfaSfjNbw7QCO5xsCIkOoBBNmei47TleChP1Kvtye2uOy/QykAmKzaKb1DMK5
-         JZWdVDJQIb4a/tr6bmRmC/Zg4mOichC8cKiZIpuwKwfQComQbzeP4vq4o7Ax3Fn3oOIu
-         IdUHAxe4LO0wl4MV0F+HXFDQT5WeNEntgUlAQ7l2jygd6KkoTYtsE0oDoJ7TFgQzKl+y
-         myz5c63ww7C4SgbDcifSbDVNkUJJUdTc4JZ175psdAXDt0rJigyBp9HNwcVAwJ94p3vx
-         IDdw==
-X-Gm-Message-State: AOAM530xdypUlPNi81Zzfcc264FQKMSX2UEoFBFTVHR/y2k++2zUxPSW
-	GNSakt2H/UpebwyaZIRsXK4MeGIOKAVgfA==
-X-Google-Smtp-Source: ABdhPJyeEpTK6x6nOoWHlX/qYeM4XHS0Q00/ZB2U8VKbmN/QGEVH32sZonpdDV4deZk47lwatxUBhA==
-X-Received: by 2002:a2e:bd03:: with SMTP id n3mr5073432ljq.359.1632401714161;
-        Thu, 23 Sep 2021 05:55:14 -0700 (PDT)
+        bh=XlpFRu8hRrvPpjMFenpSAJbBdeavkULfWEH3e9kj/3o=;
+        b=yNttErMUSD8q+Gz2bHDy7TpdMhaYjVpufRncBVD7FfZN9qlUsfLeOAUg46bYOb3Jcw
+         Mh2CyJwL2mAVahntilEtfs/oMrkjbC/iKBU+ymTFgO7oznIEGwuUEropsA7qFkow/dnF
+         4mrYIEsAzQpKK2hjaDFroPbqT1K2yWI2MlQEDtnazlTpioLDuYAnvUm5QT6w0Og8i3DR
+         9vAGuQgU9ZU6QrKhTlIYFjpJ/GUroR7vBFUGNH/pFLN3k7cCNj7aOhk+jj/jh49qyMVc
+         +am2ZBN7MG6Ku08+BZb1gSF+4INDd5QX8lfz/Qo/4dXt4KBWzhpgd5PIH7nr49E9MRxe
+         /u2w==
+X-Gm-Message-State: AOAM530VvNIpAoQJabylMuoyRopAMu5aZ0RoegxAQDLf9p2EyhGoiD1k
+	ThFQ7IZWx25pyeHg3rUsqlTl+ixkQl0mpg==
+X-Google-Smtp-Source: ABdhPJx2iIC0KBtVCRSDDJlP12bf3jCvWEtBjbBIXUe+n2z2VKx+YKSykuDGyFp3BrRnSXWUp8dwoA==
+X-Received: by 2002:a05:6512:1151:: with SMTP id m17mr4030772lfg.144.1632401716421;
+        Thu, 23 Sep 2021 05:55:16 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -95,9 +95,9 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 09/11] vpci/header: Reset the command register when adding devices
-Date: Thu, 23 Sep 2021 15:54:59 +0300
-Message-Id: <20210923125501.234252-10-andr2000@gmail.com>
+Subject: [PATCH v2 11/11] xen/arm: Translate virtual PCI bus topology for guests
+Date: Thu, 23 Sep 2021 15:55:01 +0300
+Message-Id: <20210923125501.234252-12-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210923125501.234252-1-andr2000@gmail.com>
 References: <20210923125501.234252-1-andr2000@gmail.com>
@@ -106,70 +106,291 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Reset the command register when passing through a PCI device:
-it is possible that when passing through a PCI device its memory
-decoding bits in the command register are already set. Thus, a
-guest OS may not write to the command register to update memory
-decoding, so guest mappings (guest's view of the BARs) are
-left not updated.
+There are three  originators for the PCI configuration space access:
+1. The domain that owns physical host bridge: MMIO handlers are
+there so we can update vPCI register handlers with the values
+written by the hardware domain, e.g. physical view of the registers
+vs guest's view on the configuration space.
+2. Guest access to the passed through PCI devices: we need to properly
+map virtual bus topology to the physical one, e.g. pass the configuration
+space access to the corresponding physical devices.
+3. Emulated host PCI bridge access. It doesn't exist in the physical
+topology, e.g. it can't be mapped to some physical host bridge.
+So, all access to the host bridge itself needs to be trapped and
+emulated.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
 ---
-Since v1:
- - do not write 0 to the command register, but respect host settings.
+New in v2
 ---
- xen/drivers/vpci/header.c | 17 +++++++++++++----
- 1 file changed, 13 insertions(+), 4 deletions(-)
+ xen/arch/arm/domain.c         |  1 +
+ xen/arch/arm/vpci.c           | 87 +++++++++++++++++++++++++++++++----
+ xen/arch/arm/vpci.h           |  3 ++
+ xen/drivers/passthrough/pci.c | 25 ++++++++++
+ xen/include/asm-arm/pci.h     |  1 +
+ xen/include/xen/pci.h         |  1 +
+ xen/include/xen/sched.h       |  2 +
+ 7 files changed, 111 insertions(+), 9 deletions(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 99f9c37dfb00..b2829b9d206b 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -452,8 +452,7 @@ static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
-         pci_conf_write16(pdev->sbdf, reg, cmd);
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index c7b25bc70439..c0ad6ad682d2 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -797,6 +797,7 @@ void arch_domain_destroy(struct domain *d)
+                        get_order_from_bytes(d->arch.efi_acpi_len));
+ #endif
+     domain_io_free(d);
++    domain_vpci_free(d);
  }
  
--static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
--                            uint32_t cmd, void *data)
-+static uint32_t emulate_cmd_reg(const struct pci_dev *pdev, uint32_t cmd)
+ void arch_domain_shutdown(struct domain *d)
+diff --git a/xen/arch/arm/vpci.c b/xen/arch/arm/vpci.c
+index 14947e975d69..012f958960d1 100644
+--- a/xen/arch/arm/vpci.c
++++ b/xen/arch/arm/vpci.c
+@@ -17,6 +17,14 @@
+ 
+ #define REGISTER_OFFSET(addr)  ( (addr) & 0x00000fff)
+ 
++struct vpci_mmio_priv {
++    /*
++     * Set to true if the MMIO handlers were set up for the emulated
++     * ECAM host PCI bridge.
++     */
++    bool is_virt_ecam;
++};
++
+ /* Do some sanity checks. */
+ static bool vpci_mmio_access_allowed(unsigned int reg, unsigned int len)
  {
-     /* TODO: Add proper emulation for all bits of the command register. */
+@@ -38,6 +46,7 @@ static int vpci_mmio_read(struct vcpu *v, mmio_info_t *info,
+     pci_sbdf_t sbdf;
+     unsigned long data = ~0UL;
+     unsigned int size = 1U << info->dabt.size;
++    struct vpci_mmio_priv *priv = (struct vpci_mmio_priv *)p;
  
-@@ -468,14 +467,20 @@ static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
-             cmd |= PCI_COMMAND_INTX_DISABLE;
-         else
-         {
--            uint16_t current_cmd = pci_conf_read16(pdev->sbdf, reg);
-+            uint16_t current_cmd = pci_conf_read16(pdev->sbdf, PCI_COMMAND);
+     sbdf.sbdf = MMCFG_BDF(info->gpa);
+     reg = REGISTER_OFFSET(info->gpa);
+@@ -45,6 +54,13 @@ static int vpci_mmio_read(struct vcpu *v, mmio_info_t *info,
+     if ( !vpci_mmio_access_allowed(reg, size) )
+         return 0;
  
-             if ( current_cmd & PCI_COMMAND_INTX_DISABLE )
-                 cmd |= PCI_COMMAND_INTX_DISABLE;
-         }
-     }
++    /*
++     * For the passed through devices we need to map their virtual SBDF
++     * to the physical PCI device being passed through.
++     */
++    if ( priv->is_virt_ecam && !pci_translate_virtual_device(v, &sbdf) )
++            return 1;
++
+     data = vpci_read(sbdf, reg, min(4u, size));
+     if ( size == 8 )
+         data |= (uint64_t)vpci_read(sbdf, reg + 4, 4) << 32;
+@@ -61,6 +77,7 @@ static int vpci_mmio_write(struct vcpu *v, mmio_info_t *info,
+     pci_sbdf_t sbdf;
+     unsigned long data = r;
+     unsigned int size = 1U << info->dabt.size;
++    struct vpci_mmio_priv *priv = (struct vpci_mmio_priv *)p;
  
--    cmd_write(pdev, reg, cmd, data);
-+    return cmd;
+     sbdf.sbdf = MMCFG_BDF(info->gpa);
+     reg = REGISTER_OFFSET(info->gpa);
+@@ -68,6 +85,13 @@ static int vpci_mmio_write(struct vcpu *v, mmio_info_t *info,
+     if ( !vpci_mmio_access_allowed(reg, size) )
+         return 0;
+ 
++    /*
++     * For the passed through devices we need to map their virtual SBDF
++     * to the physical PCI device being passed through.
++     */
++    if ( priv->is_virt_ecam && !pci_translate_virtual_device(v, &sbdf) )
++            return 1;
++
+     vpci_write(sbdf, reg, min(4u, size), data);
+     if ( size == 8 )
+         vpci_write(sbdf, reg + 4, 4, data >> 32);
+@@ -80,13 +104,48 @@ static const struct mmio_handler_ops vpci_mmio_handler = {
+     .write = vpci_mmio_write,
+ };
+ 
++/*
++ * There are three  originators for the PCI configuration space access:
++ * 1. The domain that owns physical host bridge: MMIO handlers are
++ *    there so we can update vPCI register handlers with the values
++ *    written by the hardware domain, e.g. physical view of the registers/
++ *    configuration space.
++ * 2. Guest access to the passed through PCI devices: we need to properly
++ *    map virtual bus topology to the physical one, e.g. pass the configuration
++ *    space access to the corresponding physical devices.
++ * 3. Emulated host PCI bridge access. It doesn't exist in the physical
++ *    topology, e.g. it can't be mapped to some physical host bridge.
++ *    So, all access to the host bridge itself needs to be trapped and
++ *    emulated.
++ */
+ static int vpci_setup_mmio_handler(struct domain *d,
+                                    struct pci_host_bridge *bridge)
+ {
+-    struct pci_config_window *cfg = bridge->cfg;
++    struct vpci_mmio_priv *priv;
++
++    priv = xzalloc(struct vpci_mmio_priv);
++    if ( !priv )
++        return -ENOMEM;
++
++    priv->is_virt_ecam = !is_hardware_domain(d);
+ 
+-    register_mmio_handler(d, &vpci_mmio_handler,
+-                          cfg->phys_addr, cfg->size, NULL);
++    if ( is_hardware_domain(d) )
++    {
++        struct pci_config_window *cfg = bridge->cfg;
++
++        bridge->mmio_priv = priv;
++        register_mmio_handler(d, &vpci_mmio_handler,
++                              cfg->phys_addr, cfg->size,
++                              priv);
++    }
++    else
++    {
++        d->vpci_mmio_priv = priv;
++        /* Guest domains use what is programmed in their device tree. */
++        register_mmio_handler(d, &vpci_mmio_handler,
++                              GUEST_VPCI_ECAM_BASE, GUEST_VPCI_ECAM_SIZE,
++                              priv);
++    }
+     return 0;
+ }
+ 
+@@ -95,13 +154,16 @@ int domain_vpci_init(struct domain *d)
+     if ( !has_vpci(d) )
+         return 0;
+ 
+-    if ( is_hardware_domain(d) )
+-        return pci_host_iterate_bridges(d, vpci_setup_mmio_handler);
+-
+-    /* Guest domains use what is programmed in their device tree. */
+-    register_mmio_handler(d, &vpci_mmio_handler,
+-                          GUEST_VPCI_ECAM_BASE, GUEST_VPCI_ECAM_SIZE, NULL);
++    return pci_host_iterate_bridges(d, vpci_setup_mmio_handler);
++}
+ 
++static int domain_vpci_free_cb(struct domain *d,
++                               struct pci_host_bridge *bridge)
++{
++    if ( is_hardware_domain(d) )
++        XFREE(bridge->mmio_priv);
++    else
++        XFREE(d->vpci_mmio_priv);
+     return 0;
+ }
+ 
+@@ -124,6 +186,13 @@ int domain_vpci_get_num_mmio_handlers(struct domain *d)
+     return count;
+ }
+ 
++void domain_vpci_free(struct domain *d)
++{
++    if ( !has_vpci(d) )
++        return;
++
++    pci_host_iterate_bridges(d, domain_vpci_free_cb);
++}
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/vpci.h b/xen/arch/arm/vpci.h
+index 27a2b069abd2..38e5a28c0d95 100644
+--- a/xen/arch/arm/vpci.h
++++ b/xen/arch/arm/vpci.h
+@@ -18,6 +18,7 @@
+ #ifdef CONFIG_HAS_VPCI
+ int domain_vpci_init(struct domain *d);
+ int domain_vpci_get_num_mmio_handlers(struct domain *d);
++void domain_vpci_free(struct domain *d);
+ #else
+ static inline int domain_vpci_init(struct domain *d)
+ {
+@@ -28,6 +29,8 @@ static inline int domain_vpci_get_num_mmio_handlers(struct domain *d)
+ {
+     return 0;
+ }
++
++static inline void domain_vpci_free(struct domain *d) { }
+ #endif
+ 
+ #endif /* __ARCH_ARM_VPCI_H__ */
+diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+index 4552ace855e0..579c6947cc35 100644
+--- a/xen/drivers/passthrough/pci.c
++++ b/xen/drivers/passthrough/pci.c
+@@ -890,6 +890,31 @@ int pci_remove_virtual_device(struct domain *d, const struct pci_dev *pdev)
+     return 0;
+ }
+ 
++/*
++ * Find the physical device which is mapped to the virtual device
++ * and translate virtual SBDF to the physical one.
++ */
++bool pci_translate_virtual_device(struct vcpu *v, pci_sbdf_t *sbdf)
++{
++    struct domain *d = v->domain;
++    struct vpci_dev *vdev;
++    bool found = false;
++
++    pcidevs_lock();
++    list_for_each_entry ( vdev, &d->vdev_list, list )
++    {
++        if ( vdev->sbdf.sbdf == sbdf->sbdf )
++        {
++            /* Replace virtual SBDF with the physical one. */
++            *sbdf = vdev->pdev->sbdf;
++            found = true;
++            break;
++        }
++    }
++    pcidevs_unlock();
++    return found;
 +}
 +
-+static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
-+                            uint32_t cmd, void *data)
-+{
-+    cmd_write(pdev, reg, emulate_cmd_reg(pdev, cmd), data);
- }
+ /* Caller should hold the pcidevs_lock */
+ static int deassign_device(struct domain *d, uint16_t seg, uint8_t bus,
+                            uint8_t devfn)
+diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+index b81f66e813ef..983a63be7572 100644
+--- a/xen/include/asm-arm/pci.h
++++ b/xen/include/asm-arm/pci.h
+@@ -72,6 +72,7 @@ struct pci_host_bridge {
+     struct pci_config_window* cfg;   /* Pointer to the bridge config window */
+     void *sysdata;                   /* Pointer to the config space window*/
+     const struct pci_ops *ops;
++    void *mmio_priv;                 /* MMIO handler's private data. */
+ };
  
- static void bar_write(const struct pci_dev *pdev, unsigned int reg,
-@@ -794,6 +799,10 @@ int vpci_bar_add_handlers(const struct domain *d, const struct pci_dev *pdev)
-         gdprintk(XENLOG_ERR,
-                  "%pp: failed to add BAR handlers for dom%pd: %d\n",
-                  &pdev->sbdf, d, rc);
-+
-+    /* Reset the command register with respect to host settings. */
-+    pci_conf_write16(pdev->sbdf, PCI_COMMAND, emulate_cmd_reg(pdev, 0));
-+
-     return rc;
- }
+ struct pci_ops {
+diff --git a/xen/include/xen/pci.h b/xen/include/xen/pci.h
+index 35ae1d093921..0017de19e7c8 100644
+--- a/xen/include/xen/pci.h
++++ b/xen/include/xen/pci.h
+@@ -191,6 +191,7 @@ struct pci_dev *pci_get_real_pdev(int seg, int bus, int devfn);
+ struct pci_dev *pci_get_pdev_by_domain(const struct domain *, int seg,
+                                        int bus, int devfn);
+ void pci_check_disable_device(u16 seg, u8 bus, u8 devfn);
++bool pci_translate_virtual_device(struct vcpu *v, pci_sbdf_t *sbdf);
  
+ uint8_t pci_conf_read8(pci_sbdf_t sbdf, unsigned int reg);
+ uint16_t pci_conf_read16(pci_sbdf_t sbdf, unsigned int reg);
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index d304c7ebe766..0626820545cc 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -450,6 +450,8 @@ struct domain
+      * to assign a unique SBDF to a passed through virtual PCI device.
+      */
+     int vpci_dev_next;
++    /* Virtual PCI MMIO handler's private data. */
++    void *vpci_mmio_priv;
+ #endif
+ 
+ #ifdef CONFIG_HAS_PASSTHROUGH
 -- 
 2.25.1
 
