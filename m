@@ -7,83 +7,82 @@ X-Spam-Status: No, score=-16.7 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B31BEC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 03:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C40BFC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 03:12:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E99F60FE6
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 03:12:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4E99F60FE6
+	by mail.kernel.org (Postfix) with ESMTPS id 5D98F610A1
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 03:12:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5D98F610A1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193313.344349 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193314.344360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTF9S-00054T-MK; Thu, 23 Sep 2021 03:11:58 +0000
+	id 1mTF9U-0005Mf-0j; Thu, 23 Sep 2021 03:12:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193313.344349; Thu, 23 Sep 2021 03:11:58 +0000
+Received: by outflank-mailman (output) from mailman id 193314.344360; Thu, 23 Sep 2021 03:11:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTF9S-00054G-HY; Thu, 23 Sep 2021 03:11:58 +0000
-Received: by outflank-mailman (input) for mailman id 193313;
- Thu, 23 Sep 2021 03:11:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mTF9T-0005LQ-RM; Thu, 23 Sep 2021 03:11:59 +0000
+Received: by outflank-mailman (input) for mailman id 193314;
+ Thu, 23 Sep 2021 03:11:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=qvJY=ON=arm.com=Penny.Zheng@srs-us1.protection.inumbo.net>)
- id 1mTF9Q-0004kC-Mt
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 03:11:56 +0000
-Received: from EUR02-AM5-obe.outbound.protection.outlook.com (unknown
- [2a01:111:f400:fe07::623])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 778e0bce-ad3f-4456-8a34-228c3e56888f;
- Thu, 23 Sep 2021 03:11:54 +0000 (UTC)
-Received: from DB6PR07CA0101.eurprd07.prod.outlook.com (2603:10a6:6:2c::15) by
- PA4PR08MB5887.eurprd08.prod.outlook.com (2603:10a6:102:f2::23) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4544.13; Thu, 23 Sep 2021 03:11:53 +0000
-Received: from DB5EUR03FT060.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:6:2c:cafe::30) by DB6PR07CA0101.outlook.office365.com
- (2603:10a6:6:2c::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.6 via Frontend
- Transport; Thu, 23 Sep 2021 03:11:53 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT060.mail.protection.outlook.com (10.152.21.231) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4544.13 via Frontend Transport; Thu, 23 Sep 2021 03:11:53 +0000
-Received: ("Tessian outbound 78bf72cc015a:v103");
- Thu, 23 Sep 2021 03:11:52 +0000
-Received: from 91027c4583da.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 0A2E9B97-84CC-48F1-B068-6DF3A2608A30.1; 
- Thu, 23 Sep 2021 03:11:45 +0000
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 91027c4583da.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 23 Sep 2021 03:11:45 +0000
-Received: from AS9PR06CA0264.eurprd06.prod.outlook.com (2603:10a6:20b:45f::9)
- by AM0PR08MB3137.eurprd08.prod.outlook.com (2603:10a6:208:64::27)
+ id 1mTF9T-0004Qj-DW
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 03:11:59 +0000
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com (unknown
+ [40.107.2.75]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ffdad977-1c1b-11ec-ba0a-12813bfff9fa;
+ Thu, 23 Sep 2021 03:11:53 +0000 (UTC)
+Received: from DU2PR04CA0237.eurprd04.prod.outlook.com (2603:10a6:10:2b1::32)
+ by AM8PR08MB6562.eurprd08.prod.outlook.com (2603:10a6:20b:355::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13; Thu, 23 Sep
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4523.17; Thu, 23 Sep
  2021 03:11:43 +0000
-Received: from VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:45f:cafe::cd) by AS9PR06CA0264.outlook.office365.com
- (2603:10a6:20b:45f::9) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DB5EUR03FT028.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:10:2b1:cafe::74) by DU2PR04CA0237.outlook.office365.com
+ (2603:10a6:10:2b1::32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13 via Frontend
  Transport; Thu, 23 Sep 2021 03:11:43 +0000
+Received: from 64aa7808-outbound-2.mta.getcheckrecipient.com (63.33.187.114)
+ by DB5EUR03FT028.mail.protection.outlook.com (10.152.20.99) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4544.13 via Frontend Transport; Thu, 23 Sep 2021 03:11:42 +0000
+Received: ("Tessian outbound c9f4ff96a6ad:v103");
+ Thu, 23 Sep 2021 03:11:42 +0000
+Received: from 328040812834.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 3AB28AAE-394B-455B-9593-66F767380AEF.1; 
+ Thu, 23 Sep 2021 03:11:30 +0000
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 328040812834.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 23 Sep 2021 03:11:30 +0000
+Received: from AS8PR04CA0080.eurprd04.prod.outlook.com (2603:10a6:20b:313::25)
+ by DBBPR08MB4521.eurprd08.prod.outlook.com (2603:10a6:10:cd::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13; Thu, 23 Sep
+ 2021 03:11:27 +0000
+Received: from VE1EUR03FT039.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:313:cafe::3c) by AS8PR04CA0080.outlook.office365.com
+ (2603:10a6:20b:313::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13 via Frontend
+ Transport; Thu, 23 Sep 2021 03:11:27 +0000
 Received: from nebula.arm.com (40.67.248.234) by
- VE1EUR03FT035.mail.protection.outlook.com (10.152.18.110) with Microsoft SMTP
+ VE1EUR03FT039.mail.protection.outlook.com (10.152.19.196) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4544.13 via Frontend Transport; Thu, 23 Sep 2021 03:11:43 +0000
+ 15.20.4544.13 via Frontend Transport; Thu, 23 Sep 2021 03:11:27 +0000
 Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX03.Arm.com
  (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.14; Thu, 23 Sep
- 2021 03:11:38 +0000
+ 2021 03:11:26 +0000
 Received: from penny.shanghai.arm.com (10.169.190.66) by mail.arm.com
  (10.251.24.32) with Microsoft SMTP Server id 15.1.2308.14 via Frontend
- Transport; Thu, 23 Sep 2021 03:11:36 +0000
+ Transport; Thu, 23 Sep 2021 03:11:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -95,28 +94,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 778e0bce-ad3f-4456-8a34-228c3e56888f
+X-Inumbo-ID: ffdad977-1c1b-11ec-ba0a-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e41YLk3dIbgdmwmpIt94ilkD1EszsH0czIzcF48m2hU=;
- b=DpeA9lX6eC9cJYKShAaXaM0mb2wSy4r7+a/sgcrVzireNfDh9QhtjsyEMQr98V1+/tsw2J6MSJA6M9feJfJtofmubAdRkusSnO1QgTWFF5rqmb3mrHh9/B1T6AfvHNGEgBBkS6rp+lAEFclfPn9rJOyTTM2wzAMsL/NC2g2KQaE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ bh=qHVKimCebnfTnXl/cdcWvwlQTjDe3a3vxMZKNxFvmJA=;
+ b=i1VoeOZq/COXIp7ZbnpyZQVqsu5uUNZnHJaRzwrtdj9mPh/FV/aFfxwDlsBlGYBVCFKmrq7aGrF9PmuP909Zdbgb26BDFxzf5JbK0Pf7E+aItb8kJiPD1jxSwtm9NtRq1JpDJao7tsaaK2w6WM9D6vUETRL9G1xeHLv2M4RcrAA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.33.187.114)
  smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
  verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
  action=none header.from=arm.com;
 Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ 63.33.187.114 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.33.187.114; helo=64aa7808-outbound-2.mta.getcheckrecipient.com;
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 2e3f64499d581046
+X-CR-MTA-CID: 3c0ad97f2e027594
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lOgeWG4uMUCwoCIp0NFyr9RuM1AhSE6MHUBa89vTqSxCSDJJWPulZqY9vCZaMkMiH7wGCD40UWDWQ28FlqVU8fCoaaJL+DR9TFDTemRo4MGMCHXsHrROUdyJFLnBxjvarRur9/+QEmBMarM2i0RHdG7ZehXvrQxJy4JamRNyuED4Nsf4EfF+zbkUr7hfulHYJCIWs7/9S9/A+A3zE9U19QeE4jh/0S7+j3N2cvKYo2W/D/uurZ/Opg/IS104+zPqcqybEfWUSoUi/TYwHBZ4thrxLlxvdGmUQd8QhhHtiSgRivX6OTYJo4l2OTSzNPvsefoxsp4JNIXrSBCcEnlfjg==
+ b=hwY3/gCgm8FFI+//Y8bWgllcA4uiJCy5D//le6d3gRFdQ80qyseUmsGnxVdB2mwJJlWkUK1bfzDbopug7eYM66xknZHK2sz0tYd9i5aHjlDs48rnKIkoLKozMUQ7S1bNNtcb+Hn+6DhbLhYKh9fjqXjc3GzC6ornpAtRnfRM43yC6xxXBOH9BCG7e0Rghhvh+FeiCAo/Z5vYOx3XIok/diyWYKS156/fzPoB1xLMQqwQVunhnHWZtizM+YevLz5dc0d4OiDF2G7TlDLvbmVHqbgpIW1qI5yyImP4hHA4jt5i6pWZzOwo6IKeHPBrH3AxRXsmq/92UOJAvNS+en86vA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=e41YLk3dIbgdmwmpIt94ilkD1EszsH0czIzcF48m2hU=;
- b=jYzuEPIVgk3hWoT0P6/rYgZfZlkV+qQJ1W7E/Kw5WhvuSgk15Y1PqJDXKEALKXjARQ6OSKLSzDU8n2RX0I/e9lKDnLlbU20+QEWG4Ipzp6rmWRIDP1ILpgMqQS7zipCykZ/bPHyjOi4sMVk+aZbmftI6YlHwueryphYqLBvCUPuUPzgjac13Q2Ehm6g7UFRykS27O5H6/5UL/AJPPZvl5n+X7FN9YN2PfXA6sA3FXGO0EtodaMllcg+rbJFCJUKNT7o2BmJb591sOBEDaN75PUZHIHlBGCX1LxSuYGng8r549y5bM8jvMwsh7GQRCFWlw35ciBNWnRzBjpsr8qJblg==
+ bh=qHVKimCebnfTnXl/cdcWvwlQTjDe3a3vxMZKNxFvmJA=;
+ b=AfgfBHyZVQf58vqVzf95ri3+Z+E0vfIenu7+wtaGtpvp10Kk8nUuV6AjKKdXTw+JOg7tEyHaFflftiClfBKVqMk6KL1CcACg+vyUNGccGyfvV/ewRBmMtx+eTvEDeWMTpNq/2vKLJJvvXpGH72ftIiBeBpXvd4YIRVQ4ot8mypQx5qQu8GAD3Zd5yFlYS0i2r1MvYnVxOrfUjgKf0vPeseIeom6S9ANHXDgFWC4Y+X8mzj3/1txiL38VObTKovXNVt5AHLgbC837DJ+qG+qFWDJQ9hG7b3MH2fBfCaHRou2a2USEeTikySxAlQJoV+HSusFZ6R7O/tQG7rpf4ewxog==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -124,8 +123,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e41YLk3dIbgdmwmpIt94ilkD1EszsH0czIzcF48m2hU=;
- b=DpeA9lX6eC9cJYKShAaXaM0mb2wSy4r7+a/sgcrVzireNfDh9QhtjsyEMQr98V1+/tsw2J6MSJA6M9feJfJtofmubAdRkusSnO1QgTWFF5rqmb3mrHh9/B1T6AfvHNGEgBBkS6rp+lAEFclfPn9rJOyTTM2wzAMsL/NC2g2KQaE=
+ bh=qHVKimCebnfTnXl/cdcWvwlQTjDe3a3vxMZKNxFvmJA=;
+ b=i1VoeOZq/COXIp7ZbnpyZQVqsu5uUNZnHJaRzwrtdj9mPh/FV/aFfxwDlsBlGYBVCFKmrq7aGrF9PmuP909Zdbgb26BDFxzf5JbK0Pf7E+aItb8kJiPD1jxSwtm9NtRq1JpDJao7tsaaK2w6WM9D6vUETRL9G1xeHLv2M4RcrAA=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
  smtp.mailfrom=arm.com; lists.xenproject.org; dkim=none (message not signed)
  header.d=none;lists.xenproject.org; dmarc=pass action=none
@@ -137,166 +136,144 @@ From: Penny Zheng <penny.zheng@arm.com>
 To: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
 	<julien@xen.org>
 CC: <Bertrand.Marquis@arm.com>, <Penny.Zheng@arm.com>, <Wei.Chen@arm.com>
-Subject: [PATCH 07/11] xen/arm: if 1:1 direct-map domain use native addresses for GICv2
-Date: Thu, 23 Sep 2021 03:11:11 +0000
-Message-ID: <20210923031115.1429719-8-penny.zheng@arm.com>
+Subject: [PATCH 02/11] xen/arm: introduce XEN_DOMCTL_INTERNAL_directmap
+Date: Thu, 23 Sep 2021 03:11:06 +0000
+Message-ID: <20210923031115.1429719-3-penny.zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210923031115.1429719-1-penny.zheng@arm.com>
 References: <20210923031115.1429719-1-penny.zheng@arm.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-EOPAttributedMessage: 1
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6142d902-90fa-4d54-2c0e-08d97e3fe47a
-X-MS-TrafficTypeDiagnostic: AM0PR08MB3137:|PA4PR08MB5887:
+X-MS-Office365-Filtering-Correlation-Id: d7638033-1e47-4487-6928-08d97e3fde68
+X-MS-TrafficTypeDiagnostic: DBBPR08MB4521:|AM8PR08MB6562:
 X-Microsoft-Antispam-PRVS:
-	<PA4PR08MB5887B37A8575CE966E26F472F7A39@PA4PR08MB5887.eurprd08.prod.outlook.com>
+	<AM8PR08MB6562B705C129DDDE7A1B604AF7A39@AM8PR08MB6562.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 NoDisclaimer: true
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;OLM:8273;
+X-MS-Oob-TLC-OOBClassifiers: OLM:229;OLM:229;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- FLiKy1Ir1H1QB01hK7TC2sRyFE97xkd/sUGW2vJEg9VBp+lbrcJs9sV7PvWJTcNIU08VsDlCVD6AsXQ/UdiwiWrBH424rHh2xwokZk333SW0wUubIWSpCg8MIbuqL4UimhGBjR+CxeAi6IzZyrsMEq389TRKo53ETecWGgnBWxY9+ZOUr1EUIo9mOQ+rKM+zwUOpsK54FPW2ndtY2cmc9guostmSV+Qx6cQRQ5/DJcRi1FBk01mxfe2FjOuKyuKDrVPKXf1Q+7drg+ZgZlXbcMFeeRGajd9TYv/iw4QueIGEQthYUynawkV+ZoXk2YCNl7Au1GuDgSkkTx6NYG+x6Umfp+Wfn/HuTqqth2sCimWtEiD4XH5NMLarTQDVJA4YB2Pf237JPrVCsJccl3iw0sbke2TBD1h7wGpJ6vOhXjDMRE0V+HfDOhjPXsjRmodmOLU9+ZaFcd68ePGmoer052B3hBlnlVfNPqaEfqfyv7uZ0CxHsEZNQ+V8K0NdVBbE1ivwC6hGn/9EXnSPtFseV0Pl9lJozAs0n/csyhLsIgCqIZLpKlnqSUoCfwIsKQf7oY4CHOJyQ2MqRG6vQ5HFuonn2VwMxDFVK2fv8o0kTCwUtB2W9pZCW+aZY8F4jbITLr3w1jIQAA212vTaxnedX1BEVCxE8WNn2/K3S0jek35MMJ8QL8RKUlgiZlfhHeM889HIssstCuGg2bLgOwvWmSDY5gXkgAH5AtNc+xguVgM=
+ jtH2pJ/rqcJUjKN21pHyIOZmf6cu17r3p9OEYfYSXgyVmrpktCeFWsahkl/Zwy25iwD3zpX5b8luqiJ6o8vIM3Mvw8wHDzSGXg7ZA14nNL+f9xHAlSWgZaRyqkdMBOZWccd/Awnid/bFv/4jbkyJsrWOElkdfHHNQRXA/bzv5aFRBbJlq0x2y/HgWzdzEcb33DacVx/6hD1m8jG9+9ZmHvhw7sfhQ5fbOfcJ36lca8NlYLKG/tBc5EFVmfAMwUxDT1GISY4z15uGemW4GXoC4XwTtnzlF7NbCxIMW3piceTmkTkh+mzFEVHqVp8fh/7vkhYG7gQtGDaloKCyASyMXw4bgMgATBF7v/c1noeAkMLPScdxK8WtZWWAw3MpdzBqCOuF+4EWnEfswfz9DD4AVwZOIhXdTxKpJBRlAfPMGPOdIEdXifFDBH5hPyJ77rfWT72cwKwZM64zvLqdO81louCYpnIxDTNwxfj/c/fiRKTfMl5/j5WUOokRA/66AsSVeKRIx88RbDRpAEVddjORoH3fVYQVvXEDDm4Ue0Ogs0eJhQHAzHw7Gn7Vu5MSaVsNUsOaTjX2bRsZuFfrP7Alid8jFRr3s0ombp3PhAug3J6C/IDlFIKRNHdzKi3zJIXaherUBde8v2ykAidhvBP815z3oujNcE3lssGaztVEb90PDlBtscjc3GDsv/lQ4d/ITJW56oFvshpahH8j4qbrL7K1Nrc3QSlGuci0YssLtns=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(47076005)(2906002)(2616005)(1076003)(36756003)(82310400003)(4326008)(316002)(54906003)(5660300002)(8936002)(426003)(356005)(508600001)(26005)(6666004)(7696005)(86362001)(36860700001)(70586007)(186003)(8676002)(81166007)(70206006)(44832011)(83380400001)(336012)(110136005)(36900700001);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB3137
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(508600001)(70586007)(54906003)(83380400001)(70206006)(316002)(426003)(82310400003)(4326008)(110136005)(7696005)(44832011)(2616005)(5660300002)(186003)(36756003)(81166007)(356005)(6666004)(47076005)(86362001)(1076003)(8676002)(36860700001)(8936002)(2906002)(336012)(26005)(36900700001);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR08MB4521
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT060.eop-EUR03.prod.protection.outlook.com
+ DB5EUR03FT028.eop-EUR03.prod.protection.outlook.com
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	1c52c898-0a8f-42ee-5ee4-08d97e3fdece
+	09e2341e-c755-40cc-640b-08d97e3fd528
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	Jb2aR2oLJpNDTd2Tej4BUq0E7WiabSnCIXC1K01W1KfpFLOH2Zls0ngOIBzaGodYcA5mdeKxhB6I1J9SWDwbo34gTml/YYpGaurmJb75sMlizWlBTvC4il1eqF7A1QhcuLczXZ4DNGSsyxG6Ig8otGhaWGcV0gEODf+k2+tK1jbaBuYAstTzO037+dGzdlIvIwwaivMw6bsabErx2TEcg2pwIVjODnO9dyVxKK5T9dg5FTgR0pEsXJUVnNgZwegV2xLXgwEti4thF/dDW2i1zXPtRL3zb0lJjk0LqJnQNuuBG4PyMvTxXSMP++jaTFKdKork1Um294C1KWNAcwb9yS8SIm2DMMD9AmV+bw8SvmgDwrIP1R5zxxBhdS+rIecPEnDfs6SXJnzXgru6voGBg56Gm2K5xL9NYR4SIs2BFxQR6yb/BVmV4X1aCOfl4cqQcvK0RVApJcll4XOn04jujUmonrGuVkl2a9ozd61jyJyRhxEkc48uLLJ/j7iloKCMAOu9QJFG04GjHYGCgTwnHsUU5dwDALsi9trUyuJawBEShRH+fyKs6sgkvLezcaP1Mh+FFi1C4wsCiNOUTZesOLujruMcrrqEnyA7iRlntCoaL6MmheDYR+SBNcNIXIgbX6NRyzXkKn8L8mi+x2j+mjBAuD837H3CCUExYuORzvCfAKcK8bipYYCQItuNVX75QKdJcZ3ZwZBynvQK1WxA4A==
+	YhFj2w7HnknwFrSWixp24/IGxrJuy/fM8XHWkDJfWrUMVmKJRD+ZfjPq/kAi2SR/mwjEpZJHKjeIo4lNN/cWvhEz6jNbiRo3PxuBLJudhfzkI6Hqw3j6kk2kblCjD4Zx0T5a+wzDyBeoA4UqPkOFra5dbauhWkrDROwfMLFh625bBrZEegO6k5/PbNEWreGUJxiI4bomlLqqGeMoA2yK6iZdBB6PQnHwRbWLRMVJaURmjBZRDcosj4hHFVer/Ka3GKXMYiGhdHy315abftfYPgFv90NjsaGCxR13KcdDD5281Fdk5WV6pqVQOUzBCNfbu+DMYamWZH7ZwIiTv//SXoNlmV+Dj9l6IE075ICMkZ3NWuDDvhFBYeB0/Q4NVMmVG2jpW3dKvEAHYMjY1/NOTWsZta9fQAPhcbIN/LEyIyij0hHo70v4m1bWndkAi14D/G7Jq/ixgfxyo08tk54AEE57ZnZBfUf92b8aJYBKx1lyZXVM7iQ2Q9T7vJUsmyXMtRq3g15pbUEbNohe7KWGBi/T2siQF6c/92Q2hArVUHXgnF8hO4wGty3hWauH/CDM2ayhWzRNAKXDZpJWTXDiFruq06uncditSBIBLBMKIHqNYNlCZgvokrKpFR+aqRKEATBxpOwqQw2kiyrdhCCz0B2AB/7/v/d8G5hshV0RxFXucM0yEihmV42Vb9HJMoH62dLx+5xINjwstvsBbqaRVQ==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(186003)(26005)(7696005)(70586007)(4326008)(81166007)(36756003)(8936002)(5660300002)(426003)(336012)(44832011)(70206006)(82310400003)(8676002)(2906002)(110136005)(2616005)(316002)(508600001)(54906003)(1076003)(6666004)(86362001)(47076005)(83380400001)(36860700001);DIR:OUT;SFP:1101;
+	CIP:63.33.187.114;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-2.mta.getcheckrecipient.com;PTR:ec2-63-33-187-114.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(44832011)(8676002)(81166007)(36860700001)(70586007)(186003)(8936002)(70206006)(82310400003)(5660300002)(86362001)(83380400001)(426003)(26005)(110136005)(7696005)(2616005)(47076005)(36756003)(6666004)(508600001)(54906003)(336012)(4326008)(1076003)(316002)(2906002);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2021 03:11:53.0817
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2021 03:11:42.8989
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6142d902-90fa-4d54-2c0e-08d97e3fe47a
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7638033-1e47-4487-6928-08d97e3fde68
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.33.187.114];Helo=[64aa7808-outbound-2.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT060.eop-EUR03.prod.protection.outlook.com
+	DB5EUR03FT028.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB5887
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB6562
 
 From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-Today we use native addresses to map the GICv2 for Dom0 and fixed
-addresses for DomUs.
+This commit introduces a new ARM-specific flag to specify that the
+domain should be 1:1 directly mapped (guest physical addresses ==
+physical addresses).
 
-This patch changes the behavior so that native addresses are used for
-all domains that are 1:1 direct-map(including Dom0).
-
-Update the accessors to use the struct vgic variables to provide the
-updated addresses.
+Also, add a direct_map flag under struct arch_domain and use it to
+implement is_domain_direct_mapped.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+CC: andrew.cooper3@citrix.com
+CC: jbeulich@suse.com
+CC: George Dunlap <George.Dunlap@eu.citrix.com>
+CC: Ian Jackson <ian.jackson@eu.citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: "Roger Pau Monné" <roger.pau@citrix.com>
 ---
- xen/arch/arm/vgic-v2.c         | 16 ++++++++++++++++
- xen/arch/arm/vgic/vgic-v2.c    | 17 +++++++++++++++++
- xen/include/asm-arm/new_vgic.h |  4 ++--
- xen/include/asm-arm/vgic.h     |  4 ++--
- 4 files changed, 37 insertions(+), 4 deletions(-)
+ xen/arch/arm/domain.c        | 1 +
+ xen/arch/arm/domain_build.c  | 2 +-
+ xen/include/asm-arm/domain.h | 9 +++++++--
+ xen/include/xen/domain.h     | 4 ++++
+ 4 files changed, 13 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-index b34ec88106..a8cf8173d0 100644
---- a/xen/arch/arm/vgic-v2.c
-+++ b/xen/arch/arm/vgic-v2.c
-@@ -673,6 +673,22 @@ static int vgic_v2_domain_init(struct domain *d)
-         csize = vgic_v2_hw.csize;
-         vbase = vgic_v2_hw.vbase;
-     }
-+    else if ( is_domain_direct_mapped(d) )
-+    {
-+        /*
-+         * For non-dom0 direct_mapped guests we only map a 8kB CPU
-+         * interface but we make sure it is at a location occupied by
-+         * the physical GIC in the host device tree.
-+         *
-+         * We need to add an offset to the virtual CPU interface base
-+         * address when the GIC is aliased to get a 8kB contiguous
-+         * region.
-+         */
-+        d->arch.vgic.dbase = vgic_v2_hw.dbase;
-+        d->arch.vgic.cbase = vgic_v2_hw.cbase + vgic_v2_hw.aliased_offset;
-+        csize = GUEST_GICC_SIZE;
-+        vbase = vgic_v2_hw.vbase + vgic_v2_hw.aliased_offset;
-+    }
-     else
-     {
-         d->arch.vgic.dbase = GUEST_GICD_BASE;
-diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
-index fd452fcb5a..ce1f6e4373 100644
---- a/xen/arch/arm/vgic/vgic-v2.c
-+++ b/xen/arch/arm/vgic/vgic-v2.c
-@@ -280,6 +280,23 @@ int vgic_v2_map_resources(struct domain *d)
-         csize = gic_v2_hw_data.csize;
-         vbase = gic_v2_hw_data.vbase;
-     }
-+    else if ( is_domain_direct_mapped(d) )
-+    {
-+        d->arch.vgic.vgic_dist_base = gic_v2_hw_data.dbase;
-+        /*
-+         * For non-dom0 direct_mapped guests we only map a 8kB CPU
-+         * interface but we make sure it is at a location occupied by
-+         * the physical GIC in the host device tree.
-+         *
-+         * We need to add an offset to the virtual CPU interface base
-+         * address when the GIC is aliased to get a 8kB contiguous
-+         * region.
-+         */
-+        d->arch.vgic.vgic_cpu_base = gic_v2_hw_data.cbase +
-+                                     gic_v2_hw_data.aliased_offset;
-+        csize = GUEST_GICC_SIZE;
-+        vbase = gic_v2_hw_data.vbase + gic_v2_hw_data.aliased_offset;
-+    }
-     else
-     {
-         d->arch.vgic.vgic_dist_base = GUEST_GICD_BASE;
-diff --git a/xen/include/asm-arm/new_vgic.h b/xen/include/asm-arm/new_vgic.h
-index 9097522b27..0d16f878eb 100644
---- a/xen/include/asm-arm/new_vgic.h
-+++ b/xen/include/asm-arm/new_vgic.h
-@@ -188,12 +188,12 @@ struct vgic_cpu {
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 7922249d26..0b3cff8a40 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -696,6 +696,7 @@ int arch_domain_create(struct domain *d,
+         return 0;
  
- static inline paddr_t vgic_cpu_base(struct vgic_dist *vgic)
- {
--    return GUEST_GICC_BASE;
-+    return vgic->vgic_cpu_base;
- }
+     ASSERT(config != NULL);
++    d->arch.direct_map = config->flags & XEN_DOMCTL_INTERNAL_directmap;
  
- static inline paddr_t vgic_dist_base(struct vgic_dist *vgic)
- {
--    return GUEST_GICD_BASE;
-+    return vgic->vgic_dist_base;
- }
+ #ifdef CONFIG_IOREQ_SERVER
+     ioreq_domain_init(d);
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 8cc4c800e9..21d8a559af 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2753,7 +2753,7 @@ void __init create_dom0(void)
+     struct domain *dom0;
+     struct xen_domctl_createdomain dom0_cfg = {
+         .flags = XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap |
+-                 XEN_DOMCTL_INTERNAL_ispriv,
++                 XEN_DOMCTL_INTERNAL_ispriv | XEN_DOMCTL_INTERNAL_directmap,
+         .max_evtchn_port = -1,
+         .max_grant_frames = gnttab_dom0_frames(),
+         .max_maptrack_frames = -1,
+diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
+index c9277b5c6d..a74ee5720c 100644
+--- a/xen/include/asm-arm/domain.h
++++ b/xen/include/asm-arm/domain.h
+@@ -29,8 +29,11 @@ enum domain_type {
+ #define is_64bit_domain(d) (0)
+ #endif
  
- static inline unsigned int vgic_rdist_nr(struct vgic_dist *vgic)
-diff --git a/xen/include/asm-arm/vgic.h b/xen/include/asm-arm/vgic.h
-index d5ad1f387b..92f6a2d15d 100644
---- a/xen/include/asm-arm/vgic.h
-+++ b/xen/include/asm-arm/vgic.h
-@@ -280,12 +280,12 @@ enum gic_sgi_mode;
+-/* The hardware domain has always its memory direct mapped. */
+-#define is_domain_direct_mapped(d) is_hardware_domain(d)
++/*
++ * The hardware domain has always its memory direct mapped. And DOM0 shall
++ * be always been set as 1:1 direct-map domain.
++ */
++#define is_domain_direct_mapped(d) (d)->arch.direct_map
  
- static inline paddr_t vgic_cpu_base(struct vgic_dist *vgic)
- {
--    return GUEST_GICC_BASE;
-+    return vgic->cbase;
- }
+ struct vtimer {
+     struct vcpu *v;
+@@ -89,6 +92,8 @@ struct arch_domain
+ #ifdef CONFIG_TEE
+     void *tee;
+ #endif
++
++    bool direct_map;
+ }  __cacheline_aligned;
  
- static inline paddr_t vgic_dist_base(struct vgic_dist *vgic)
- {
--    return GUEST_GICD_BASE;
-+    return vgic->dbase;
- }
+ struct arch_vcpu
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 7ed0b62b78..6c2b07eb42 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -32,6 +32,10 @@ void arch_get_domain_info(const struct domain *d,
+ #define _XEN_DOMCTL_INTERNAL_ispriv         16
+ #define XEN_DOMCTL_INTERNAL_ispriv          (1U<<_XEN_DOMCTL_INTERNAL_ispriv)
  
- #ifdef CONFIG_GICV3
++/* This flag is ARM specific */
++#define _XEN_DOMCTL_INTERNAL_directmap      17
++#define XEN_DOMCTL_INTERNAL_directmap       (1U<<_XEN_DOMCTL_INTERNAL_directmap)
++
+ /*
+  * Arch-specifics.
+  */
 -- 
 2.25.1
 
