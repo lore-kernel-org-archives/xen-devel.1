@@ -2,48 +2,44 @@ Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,NICE_REPLY_A,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53621C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:07:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81D89C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:07:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1C3BB61090
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:07:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1C3BB61090
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id E8A4060F39
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 13:07:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E8A4060F39
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.194181.345986 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.194192.345996 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTORj-0002YV-IA; Thu, 23 Sep 2021 13:07:27 +0000
+	id 1mTOS3-00039D-QZ; Thu, 23 Sep 2021 13:07:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 194181.345986; Thu, 23 Sep 2021 13:07:27 +0000
+Received: by outflank-mailman (output) from mailman id 194192.345996; Thu, 23 Sep 2021 13:07:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTORj-0002YO-ED; Thu, 23 Sep 2021 13:07:27 +0000
-Received: by outflank-mailman (input) for mailman id 194181;
- Thu, 23 Sep 2021 13:07:26 +0000
+	id 1mTOS3-000396-N7; Thu, 23 Sep 2021 13:07:47 +0000
+Received: by outflank-mailman (input) for mailman id 194192;
+ Thu, 23 Sep 2021 13:07:46 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JD/Q=ON=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mTOHp-0004it-7d
- for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 12:57:13 +0000
-Received: from mail-lf1-x136.google.com (unknown [2a00:1450:4864:20::136])
+ <SRS0=fO2a=ON=greensocs.com=damien.hedde@srs-us1.protection.inumbo.net>)
+ id 1mTOS2-00035D-5l
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 13:07:46 +0000
+Received: from beetle.greensocs.com (unknown [5.135.226.135])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id af9177de-3a8d-49c1-bd4a-675a79d72820;
- Thu, 23 Sep 2021 12:55:14 +0000 (UTC)
-Received: by mail-lf1-x136.google.com with SMTP id g41so26148978lfv.1
- for <xen-devel@lists.xenproject.org>; Thu, 23 Sep 2021 05:55:14 -0700 (PDT)
-Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id o12sm453010lft.254.2021.09.23.05.55.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Sep 2021 05:55:12 -0700 (PDT)
+ id afe49a30-0ebe-4859-b677-71560ff0171f;
+ Thu, 23 Sep 2021 13:07:44 +0000 (UTC)
+Received: from [192.168.15.189] (unknown [195.68.53.70])
+ by beetle.greensocs.com (Postfix) with ESMTPSA id 664F520786;
+ Thu, 23 Sep 2021 13:07:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,123 +51,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af9177de-3a8d-49c1-bd4a-675a79d72820
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=fpEmkp363zGTNG/sREpOTD2+RNFlDcJmlTvIa8Vah1w=;
-        b=bpnFyr4vGY6stFAtsMo9qX7ZkqJW7256vkP2otZyANDs5R1Qyh53a03oaQJiIO9Tfi
-         VADZFcegMz3d43HptXQRRBCE9Gxx0vMyS8AniNFVc6xLaJS/vx7Kr/+07sfBFJGV6Xpy
-         LWMfQ+PUwmyqY1X4GEDMUqma1EjVbZWsOyffYXaXWsC3eFY2Q3Tjq5sZYjCYc7l44EbK
-         +BEtyp5dq7r4QF+GRr9FVsKAJNxYFta58KVMQ46xAP7fQOZS6a7hNPN2rK1zMl8tkN0i
-         jQnXs/gd5/oBSDCzcsb/stq18qcDugzMPAdsbGVksToFDkWLkYEExgyQFAkWHJhxMcTk
-         0iYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=fpEmkp363zGTNG/sREpOTD2+RNFlDcJmlTvIa8Vah1w=;
-        b=XNnh9CH91uvB4PJSWypfv+a04zGMlc4T0gpFr0UW/wldx8mHS8w+AfqnBoNeEld63T
-         FkMAWn85cOS+DWTIt/qDxow0sTpgNhiNo1ISDEyDaugaJIDn5iQQYEZhr55tR9ASs6X0
-         YHYKxYgiIky21a+m90TD+uwgD0ZP/fcn5c/94Ff+ipXGvsiTasr+p15aq+E+A7AbaNtd
-         WQ5OjQE37XOAyDcKzvvCjCbHzhFshhHDfsw+IAoWOpiaH3H2GWo+SGm4rX92idwe+fEn
-         Ad60xkX8w5NC4lrVrVUwgmgecjVWElRnVd2BzQRFjDEbKyM5kzvaXrn9oM8KKPgIz2R9
-         Z0vw==
-X-Gm-Message-State: AOAM533t8YI7tTjNk9C3SUk3nz/tlb3MMoGhftBhiAuFhRKfAYti2fex
-	DzEdRyooIXWUDc8uKlfJWcbMqWmt9HcHiQ==
-X-Google-Smtp-Source: ABdhPJzdYDxTei6IVbz6wkAAT9SIcXwlU/2hhWG9paV9ZKyig0hoON0I5dQvzIu3rLdWmGK1j+rN+w==
-X-Received: by 2002:a05:6512:32c6:: with SMTP id f6mr3953415lfg.503.1632401713136;
-        Thu, 23 Sep 2021 05:55:13 -0700 (PDT)
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	sstabellini@kernel.org,
-	oleksandr_tyshchenko@epam.com,
-	volodymyr_babchuk@epam.com,
-	Artem_Mygaiev@epam.com,
-	roger.pau@citrix.com,
-	jbeulich@suse.com,
-	bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v2 08/11] vpci/header: Emulate PCI_COMMAND register for guests
-Date: Thu, 23 Sep 2021 15:54:58 +0300
-Message-Id: <20210923125501.234252-9-andr2000@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210923125501.234252-1-andr2000@gmail.com>
-References: <20210923125501.234252-1-andr2000@gmail.com>
+X-Inumbo-ID: afe49a30-0ebe-4859-b677-71560ff0171f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
+	s=mail; t=1632402463;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=vFKXSKDeRNHY9r3dJXAy1S04EIsRqGcyMaUITIfJp/E=;
+	b=Vgjrf4zf3hLAwwoZpB4MMGRryvLD4WxAgB6E7p3RGlh+GLG2sR84EQIPeqHslh9hEijOx5
+	nNtoHHTIsQpYwOwgG/vY2WEuAlFPSV2ZBYrKkAib0o9e+EW4Mn4fmHDVaHLy2lNpaWMqxb
+	O0dEBOioAyO97QP65z5rCdIdK0W9DF0=
+Message-ID: <87197aa8-cce2-4f76-ca31-7989cbeaedba@greensocs.com>
+Date: Thu, 23 Sep 2021 15:07:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.1.0
+Subject: Re: [RFC PATCH v2 07/16] hw/core/machine: add
+ machine_class_is_dynamic_sysbus_dev_allowed
+Content-Language: en-US-large
+To: Ani Sinha <ani@anisinha.ca>
+Cc: qemu-devel@nongnu.org, Alistair Francis <Alistair.Francis@wdc.com>,
+ =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>,
+ Gerd Hoffmann <kraxel@redhat.com>, Eric Auger <eric.auger@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>,
+ Peter Xu <peterx@redhat.com>, David Hildenbrand <david@redhat.com>,
+ "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
+ Markus Armbruster <armbru@redhat.com>, Eric Blake <eblake@redhat.com>,
+ qemu-riscv@nongnu.org, xen-devel@lists.xenproject.org,
+ mark.burton@greensocs.com, mirela.grujic@greensocs.com, edgari@xilinx.com,
+ Peter Maydell <peter.maydell@linaro.org>
+References: <20210922161405.140018-1-damien.hedde@greensocs.com>
+ <20210922161405.140018-8-damien.hedde@greensocs.com>
+ <alpine.DEB.2.22.394.2109231559230.630@anisinha-lenovo>
+From: Damien Hedde <damien.hedde@greensocs.com>
+In-Reply-To: <alpine.DEB.2.22.394.2109231559230.630@anisinha-lenovo>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Add basic emulation support for guests. At the moment only emulate
-PCI_COMMAND_INTX_DISABLE bit, the rest is not emulated yet and left
-as TODO.
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+On 9/23/21 12:51, Ani Sinha wrote:
+> 
+> 
+> On Wed, 22 Sep 2021, Damien Hedde wrote:
+> 
+>> Right now the allowance check for adding a sysbus device using
+>> -device cli option (or device_add qmp command) is done well after
+>> the device has been created. It is done during the machine init done
+>> notifier: machine_init_notify() in hw/core/machine.c
+>>
+>> This new function will allow us to check if a sysbus device type is
+>> allowed to be dynamically created by the machine during the device
+>> creation time.
+>>
+>> Also make device_is_dynamic_sysbus() use the new function.
+>>
+>> Signed-off-by: Damien Hedde <damien.hedde@greensocs.com>
+>> ---
+>>
+>> In the context of our series, we need to be able to do the check at
+>> device creation time to allow doing it depending on the current
+>> MACHINE_INIT phase.
+>> ---
+>>   include/hw/boards.h | 17 +++++++++++++++++
+>>   hw/core/machine.c   | 15 ++++++++++++---
+>>   2 files changed, 29 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/include/hw/boards.h b/include/hw/boards.h
+>> index 463a5514f9..934443c1cd 100644
+>> --- a/include/hw/boards.h
+>> +++ b/include/hw/boards.h
+>> @@ -51,6 +51,23 @@ void machine_set_cpu_numa_node(MachineState *machine,
+>>    */
+>>   void machine_class_allow_dynamic_sysbus_dev(MachineClass *mc, const char *type);
+>>
+>> +/**
+>> + * machine_class_is_dynamic_sysbus_dev_allowed: Check if type is an allowed
+>> + * sysbus device type for the machine class.
+>> + * @mc: Machine class
+>> + * @type: type to check (should be a subtype of TYPE_SYS_BUS_DEVICE)
+>> + *
+>> + * Returns: true if @type is a type in the machine's list of
+>> + * dynamically pluggable sysbus devices; otherwise false.
+>> + *
+>> + * Check if the QOM type @type is in the list of allowed sysbus device
+>> + * types (see machine_class_allowed_dynamic_sysbus_dev()).
+>> + * Note that if @type is a subtype of a type which is in the list, it is
+>> + * allowed too.
+>> + */
+>> +bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
+>> +                                                 const char *type);
+>> +
+> 
+> How about renaming this to device_type_is_allowed_dynamic_sysbus() ?
 
----
-New in v2
----
- xen/drivers/vpci/header.c | 35 ++++++++++++++++++++++++++++++++---
- 1 file changed, 32 insertions(+), 3 deletions(-)
+I followed the "machine_class_allow_dynamic_sysbus_dev" function name style.
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index bdd18599b205..99f9c37dfb00 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -452,6 +452,32 @@ static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
-         pci_conf_write16(pdev->sbdf, reg, cmd);
- }
- 
-+static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
-+                            uint32_t cmd, void *data)
-+{
-+    /* TODO: Add proper emulation for all bits of the command register. */
-+
-+    if ( (cmd & PCI_COMMAND_INTX_DISABLE) == 0 )
-+    {
-+        /*
-+         * Guest wants to enable INTx. It can't be enabled if:
-+         *  - host has INTx disabled
-+         *  - MSI/MSI-X enabled
-+         */
-+        if ( pdev->vpci->msi->enabled )
-+            cmd |= PCI_COMMAND_INTX_DISABLE;
-+        else
-+        {
-+            uint16_t current_cmd = pci_conf_read16(pdev->sbdf, reg);
-+
-+            if ( current_cmd & PCI_COMMAND_INTX_DISABLE )
-+                cmd |= PCI_COMMAND_INTX_DISABLE;
-+        }
-+    }
-+
-+    cmd_write(pdev, reg, cmd, data);
-+}
-+
- static void bar_write(const struct pci_dev *pdev, unsigned int reg,
-                       uint32_t val, void *data)
- {
-@@ -599,9 +625,12 @@ static int add_bar_handlers(const struct pci_dev *pdev, bool is_hwdom)
-     struct vpci_bar *bars = header->bars;
-     int rc;
- 
--    /* Setup a handler for the command register: same for hwdom and guests. */
--    rc = vpci_add_register(pdev->vpci, vpci_hw_read16, cmd_write, PCI_COMMAND,
--                           2, header);
-+    if ( is_hwdom )
-+        rc = vpci_add_register(pdev->vpci, vpci_hw_read16, cmd_write,
-+                               PCI_COMMAND, 2, header);
-+    else
-+        rc = vpci_add_register(pdev->vpci, vpci_hw_read16, guest_cmd_write,
-+                               PCI_COMMAND, 2, header);
-     if ( rc )
-         return rc;
- 
--- 
-2.25.1
+But sure I'll rename it. We can even drop the "allowed" if we want
+to stay closer to the device_is_dynamic_sysbus legacy function which if 
+used to check this on a device instance.
 
+Damien
+--
+Thanks
+
+
+> 
+>>   /**
+>>    * device_is_dynamic_sysbus: test whether device is a dynamic sysbus device
+>>    * @mc: Machine class
+>> diff --git a/hw/core/machine.c b/hw/core/machine.c
+>> index 9125c9aad0..1a18912dc8 100644
+>> --- a/hw/core/machine.c
+>> +++ b/hw/core/machine.c
+>> @@ -545,18 +545,27 @@ void machine_class_allow_dynamic_sysbus_dev(MachineClass *mc, const char *type)
+>>
+>>   bool device_is_dynamic_sysbus(MachineClass *mc, DeviceState *dev)
+>>   {
+>> -    bool allowed = false;
+>> -    strList *wl;
+>>       Object *obj = OBJECT(dev);
+>>
+>>       if (!object_dynamic_cast(obj, TYPE_SYS_BUS_DEVICE)) {
+>>           return false;
+>>       }
+>>
+>> +    return machine_class_is_dynamic_sysbus_dev_allowed(mc,
+>> +            object_get_typename(obj));
+>> +}
+>> +
+>> +bool machine_class_is_dynamic_sysbus_dev_allowed(MachineClass *mc,
+>> +                                                 const char *type)
+>> +{
+>> +    bool allowed = false;
+>> +    strList *wl;
+>> +    ObjectClass *klass = object_class_by_name(type);
+>> +
+>>       for (wl = mc->allowed_dynamic_sysbus_devices;
+>>            !allowed && wl;
+>>            wl = wl->next) {
+>> -        allowed |= !!object_dynamic_cast(obj, wl->value);
+>> +        allowed |= !!object_class_dynamic_cast(klass, wl->value);
+>>       }
+>>
+>>       return allowed;
+>> --
+>> 2.33.0
+>>
+>>
 
