@@ -1,4 +1,4 @@
-Return-Path: <SRS0=cgBe=OM=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=63tD=ON=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
@@ -7,39 +7,38 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE0B6C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 23:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF743C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:03:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 752DE61038
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Sep 2021 23:50:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 752DE61038
+	by mail.kernel.org (Postfix) with ESMTPS id 8CCB661131
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Sep 2021 00:03:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8CCB661131
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.193193.344101 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.193199.344112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTC0J-0005p6-Fe; Wed, 22 Sep 2021 23:50:19 +0000
+	id 1mTCDG-000875-0Q; Thu, 23 Sep 2021 00:03:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 193193.344101; Wed, 22 Sep 2021 23:50:19 +0000
+Received: by outflank-mailman (output) from mailman id 193199.344112; Thu, 23 Sep 2021 00:03:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTC0J-0005oz-Bz; Wed, 22 Sep 2021 23:50:19 +0000
-Received: by outflank-mailman (input) for mailman id 193193;
- Wed, 22 Sep 2021 23:50:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mTCDF-00086y-T7; Thu, 23 Sep 2021 00:03:41 +0000
+Received: by outflank-mailman (input) for mailman id 193199;
+ Thu, 23 Sep 2021 00:03:40 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ilSY=OM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mTC0I-0005ot-5u
- for xen-devel@lists.xenproject.org; Wed, 22 Sep 2021 23:50:18 +0000
+ <SRS0=/SRu=ON=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1mTCDE-00086s-CR
+ for xen-devel@lists.xenproject.org; Thu, 23 Sep 2021 00:03:40 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d6409e82-1bff-11ec-b9f3-12813bfff9fa;
- Wed, 22 Sep 2021 23:50:17 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2EECE61131;
- Wed, 22 Sep 2021 23:50:16 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d9371d51-c5af-40e7-b69b-4a642f969a0e;
+ Thu, 23 Sep 2021 00:03:39 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4FE1E61040;
+ Thu, 23 Sep 2021 00:03:38 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,107 +50,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d6409e82-1bff-11ec-b9f3-12813bfff9fa
+X-Inumbo-ID: d9371d51-c5af-40e7-b69b-4a642f969a0e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1632354616;
-	bh=zJ3WjaxN2JEd2pJJPs4Gnnct7HIdWR52lI2GSPP+WLE=;
+	s=k20201202; t=1632355418;
+	bh=0gLP7gQB9I4DdUjrcPOD3CPCp+uA/6+96tfHuOreojo=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=oJSmAMxa7gzi9zCa0oLEOKeUvFaJRnGSedKeD8Wwl6kMSUv6FadQZrM1J3iL5YGU4
-	 hM4/iLN+I/JWkYBJ46Lig3jnskWa84rKnquadlZildMSG7RnvKEqqnEGWJwmAYwjjt
-	 /o69tZt09JZIhh7qLVRfoqDpz7n2KdAquzTDvGZ6cPU+KN9SSBoUTbib0jZI+pOyFn
-	 7E+Bj/6yzMa2vDcGIy3uLyAugoqNOzk4I0bH+Flg8lHVca0T4m/qJq5uU68C+aXPrP
-	 Y12ujGBaFb/a0h1D8Iaqe3V4jyPj3cLI5IInKw/B9+dSeaDndmO6/hw4eako76baJM
-	 xB+WSnUH5EMLg==
-Date: Wed, 22 Sep 2021 16:50:14 -0700 (PDT)
+	b=irvutLhBTJuUOXs0e9g3SKNOuhiL+xgz0qC90rSc5wmL8chu0uddOMYuJzphwab5t
+	 hgwH87KbhfguJQZew+GdTsfCLix9X/e3eZNkrPhiL1K4FuKenFIJGccLpFgU6ju2lu
+	 aBz06swGzrU9jhGJkL5hf+nmxs9mzt7+Mc7Z31N9CHlMqIMfBLghQuAakKoLCiAdnF
+	 elgEsrxsnQ0n8pyl1TAy8VZJirxaH1k/8Bwr3j9aR8X0hM1uAIcaOKEUKFIOoMzvDA
+	 5+QdCKfNnyxwWxi2mBS66iuJ/krs06qK1OMtMTGqBcUgx/otrlhdDDPaIovwlHlkll
+	 RjSooh4wWyaDw==
+Date: Wed, 22 Sep 2021 17:03:37 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: Rahul Singh <rahul.singh@arm.com>
 cc: xen-devel@lists.xenproject.org, bertrand.marquis@arm.com, 
     andre.przywara@arm.com, Stefano Stabellini <sstabellini@kernel.org>, 
-    Julien Grall <julien@xen.org>
-Subject: Re: [PATCH v2 08/17] xen/device-tree: Add dt_get_pci_domain_nr
- helper
-In-Reply-To: <b649f9f978ed38f05927573381e23f9b3c6c24b8.1632307952.git.rahul.singh@arm.com>
-Message-ID: <alpine.DEB.2.21.2109221649260.17979@sstabellini-ThinkPad-T480s>
-References: <cover.1632307952.git.rahul.singh@arm.com> <b649f9f978ed38f05927573381e23f9b3c6c24b8.1632307952.git.rahul.singh@arm.com>
+    Julien Grall <julien@xen.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v2 09/17] xen/arm: Add support for PCI init to initialize
+ the PCI driver.
+In-Reply-To: <000832623dc7fb429db4b4517583f16affdba35b.1632307952.git.rahul.singh@arm.com>
+Message-ID: <alpine.DEB.2.21.2109221657080.17979@sstabellini-ThinkPad-T480s>
+References: <cover.1632307952.git.rahul.singh@arm.com> <000832623dc7fb429db4b4517583f16affdba35b.1632307952.git.rahul.singh@arm.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Wed, 22 Sep 2021, Rahul Singh wrote:
-> Based on tag Linux v5.14.2 commit bbdd3de144fc142f2f4b9834c9241cc4e7f3d3fc
-
-Please use an upstream commit id
-
-
-> Import the Linux helper of_get_pci_domain_nr. This function will try to
-> obtain the host bridge domain number by finding a property called
-> "linux,pci-domain" of the given device node.
+> pci_init(..) will be called during xen startup to initialize and probe
+> the PCI host-bridge driver.
 > 
 > Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 > ---
-> Change in v2: Patch introduced in v2
+> Change in v2:
+> - ACPI init function to return int
+> - pci_segments_init() called before dt/acpi init
 > ---
->  xen/common/device_tree.c      | 12 ++++++++++++
->  xen/include/xen/device_tree.h | 19 +++++++++++++++++++
->  2 files changed, 31 insertions(+)
+>  xen/arch/arm/pci/pci.c       | 54 ++++++++++++++++++++++++++++++++++++
+>  xen/include/asm-arm/device.h |  1 +
+>  2 files changed, 55 insertions(+)
 > 
-> diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-> index 53160d61f8..ea93da1725 100644
-> --- a/xen/common/device_tree.c
-> +++ b/xen/common/device_tree.c
-> @@ -2183,6 +2183,18 @@ void __init dt_unflatten_host_device_tree(void)
->      dt_alias_scan();
+> diff --git a/xen/arch/arm/pci/pci.c b/xen/arch/arm/pci/pci.c
+> index a7a7bc3213..71fa532842 100644
+> --- a/xen/arch/arm/pci/pci.c
+> +++ b/xen/arch/arm/pci/pci.c
+> @@ -12,6 +12,10 @@
+>   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+>   */
+>  
+> +#include <xen/acpi.h>
+> +#include <xen/device_tree.h>
+> +#include <xen/errno.h>
+> +#include <xen/init.h>
+>  #include <xen/pci.h>
+>  
+>  /*
+> @@ -22,6 +26,56 @@ int arch_pci_clean_pirqs(struct domain *d)
+>      return 0;
 >  }
 >  
-> +int dt_get_pci_domain_nr(struct dt_device_node *node)
+> +static int __init dt_pci_init(void)
 > +{
-> +    u32 domain;
-> +    int error;
+> +    struct dt_device_node *np;
+> +    int rc;
 > +
-> +    error = dt_property_read_u32(node, "linux,pci-domain", &domain);
-> +    if ( !error )
-> +        return -EINVAL;
+> +    dt_for_each_device_node(dt_host, np)
+> +    {
+> +        rc = device_init(np, DEVICE_PCI, NULL);
+> +        if( !rc )
+> +            continue;
+
+This is a NIT, so feel free to code it as you prefer, but I would write
+it as follows for simplicity:
+
+
+/* comment about EBADF and ENODEV */
+if ( !rc || rc == -EBADF || rc == -ENODEV )
+    continue;
+return rc;
+
+
+> +        /*
+> +         * Ignore the following error codes:
+> +         *   - EBADF: Indicate the current is not an pci
+                                             ^ device ^a   ^ device
+
+
+> +         *   - ENODEV: The pci device is not present or cannot be used by
+> +         *     Xen.
+> +         */
+> +        else if ( rc != -EBADF && rc != -ENODEV )
+> +        {
+> +            printk(XENLOG_ERR "No driver found in XEN or driver init error.\n");
+> +            return rc;
+> +        }
+> +    }
 > +
-> +    return (u16)domain;
+> +    return 0;
 > +}
+> +
+> +#ifdef CONFIG_ACPI
+> +static int __init acpi_pci_init(void)
+> +{
+> +    printk(XENLOG_ERR "ACPI pci init not supported \n");
+> +    return 0;
+
+Should return ENOSYS or EOPNOTSUPP?
+
+
+> +}
+> +#else
+> +static inline int __init acpi_pci_init(void)
+
+Not sure I would inline it but OK either way
+
+
+> +{
+> +    return -EINVAL;
+> +}
+> +#endif
+> +
+> +static int __init pci_init(void)
+> +{
+> +    pci_segments_init();
+> +
+> +    if ( acpi_disabled )
+> +        return dt_pci_init();
+> +    else
+> +        return acpi_pci_init();
+> +}
+> +__initcall(pci_init);
 > +
 >  /*
 >   * Local variables:
 >   * mode: C
-> diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-> index 497144b8a7..9069040ef7 100644
-> --- a/xen/include/xen/device_tree.h
-> +++ b/xen/include/xen/device_tree.h
-> @@ -831,6 +831,25 @@ int dt_count_phandle_with_args(const struct dt_device_node *np,
->                                 const char *list_name,
->                                 const char *cells_name);
->  
-> +/**
-> + * dt_get_pci_domain_nr - Find the host bridge domain number
-> + *            of the given device node.
-> + * @node: Device tree node with the domain information.
-> + *
-> + * This function will try to obtain the host bridge domain number by finding
-> + * a property called "linux,pci-domain" of the given device node.
-> + *
-> + * Return:
-> + * * > 0    - On success, an associated domain number.
-> + * * -EINVAL    - The property "linux,pci-domain" does not exist.
-> + * * -ENODATA   - The linux,pci-domain" property does not have value.
-> + * * -EOVERFLOW - Invalid "linux,pci-domain" property value.
-
-This doesn't match reality for us because it can only return EINVAL
-
-
-> + * Returns the associated domain number from DT in the range [0-0xffff], or
-> + * a negative value if the required property is not found.
-> + */
-> +int dt_get_pci_domain_nr(struct dt_device_node *node);
-> +
->  #ifdef CONFIG_DEVICE_TREE_DEBUG
->  #define dt_dprintk(fmt, args...)  \
->      printk(XENLOG_DEBUG fmt, ## args)
+> diff --git a/xen/include/asm-arm/device.h b/xen/include/asm-arm/device.h
+> index ee7cff2d44..5ecd5e7bd1 100644
+> --- a/xen/include/asm-arm/device.h
+> +++ b/xen/include/asm-arm/device.h
+> @@ -34,6 +34,7 @@ enum device_class
+>      DEVICE_SERIAL,
+>      DEVICE_IOMMU,
+>      DEVICE_GIC,
+> +    DEVICE_PCI,
+>      /* Use for error */
+>      DEVICE_UNKNOWN,
+>  };
 > -- 
 > 2.17.1
 > 
