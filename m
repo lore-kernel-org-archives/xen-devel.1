@@ -2,45 +2,50 @@ Return-Path: <SRS0=CWmW=OO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 430DBC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Sep 2021 16:30:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E0A1C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Sep 2021 16:50:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CFC056124C
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Sep 2021 16:30:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CFC056124C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by mail.kernel.org (Postfix) with ESMTPS id D392D61250
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Sep 2021 16:50:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D392D61250
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.195528.348272 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.195534.348282 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTo5E-00071l-1a; Fri, 24 Sep 2021 16:29:56 +0000
+	id 1mToOz-0002H8-Pi; Fri, 24 Sep 2021 16:50:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 195528.348272; Fri, 24 Sep 2021 16:29:56 +0000
+Received: by outflank-mailman (output) from mailman id 195534.348282; Fri, 24 Sep 2021 16:50:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mTo5D-00071e-Uf; Fri, 24 Sep 2021 16:29:55 +0000
-Received: by outflank-mailman (input) for mailman id 195528;
- Fri, 24 Sep 2021 16:29:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mToOz-0002H1-Mh; Fri, 24 Sep 2021 16:50:21 +0000
+Received: by outflank-mailman (input) for mailman id 195534;
+ Fri, 24 Sep 2021 16:50:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Ux8n=OO=linaro.org=alex.bennee@srs-us1.protection.inumbo.net>)
- id 1mTo5C-00071Y-PI
- for xen-devel@lists.xenproject.org; Fri, 24 Sep 2021 16:29:55 +0000
-Received: from mail-wr1-x436.google.com (unknown [2a00:1450:4864:20::436])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 53515554-81fd-4d5c-904d-a7458f354e79;
- Fri, 24 Sep 2021 16:29:52 +0000 (UTC)
-Received: by mail-wr1-x436.google.com with SMTP id w29so29088837wra.8
- for <xen-devel@lists.xenproject.org>; Fri, 24 Sep 2021 09:29:52 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id u5sm9395511wrg.57.2021.09.24.09.29.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Sep 2021 09:29:50 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 9722A1FF96;
- Fri, 24 Sep 2021 17:29:49 +0100 (BST)
+ <SRS0=3weo=OO=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1mToOy-0002Gv-R3
+ for xen-devel@lists.xenproject.org; Fri, 24 Sep 2021 16:50:20 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7ff7cb78-1d57-11ec-baff-12813bfff9fa;
+ Fri, 24 Sep 2021 16:50:19 +0000 (UTC)
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+ (mail-am5eur02lp2054.outbound.protection.outlook.com [104.47.4.54]) (Using
+ TLS) by relay.mimecast.com with ESMTP id de-mta-4-PHeMdsOjNle11dol2LZ0og-1;
+ Fri, 24 Sep 2021 18:50:17 +0200
+Received: from AM0PR04MB5826.eurprd04.prod.outlook.com (2603:10a6:208:134::22)
+ by AM0PR04MB7089.eurprd04.prod.outlook.com (2603:10a6:208:1a1::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.18; Fri, 24 Sep
+ 2021 16:50:15 +0000
+Received: from AM0PR04MB5826.eurprd04.prod.outlook.com
+ ([fe80::7dc7:c:77b6:ed95]) by AM0PR04MB5826.eurprd04.prod.outlook.com
+ ([fe80::7dc7:c:77b6:ed95%7]) with mapi id 15.20.4544.018; Fri, 24 Sep 2021
+ 16:50:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,587 +57,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53515554-81fd-4d5c-904d-a7458f354e79
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=user-agent:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=pK+e0gcZSWyBBOoTvejTaB+/zyvm0r9wyq1cvfaHXU4=;
-        b=vQhxZeohU4exu/jwGyxm7tJJGZaGq1dMuhdkp2PAuU72UjELINp3Cv4kuFTRFkA8o+
-         MP+WJ/BviYn3eA29rR0ZVCb8VWjFHhlHPMt6TjUg6zYqK9iPRjDYmpTzGKv0oJIfJHF7
-         gBeeTPFv3sol0GldPG/WvzaC2TUVCtxXRl5xYTPuUxY5Mq2QlzQP34qAQYCvJSN1yVod
-         IFSzLBfxlPMjFvI9twk5BAmYSKMXPwWOOfpBlCnS/szGEX6Kyhq0YzYFQvu5fnKGQtYI
-         0MmZerE0WI4mSbebsZ6mPWwBlrEqbSUw57oZ+2Q4jD+v7aTL3/yRB2y3fgEF4buArC97
-         sEUw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:user-agent:from:to:cc:subject:date:message-id
-         :mime-version:content-transfer-encoding;
-        bh=pK+e0gcZSWyBBOoTvejTaB+/zyvm0r9wyq1cvfaHXU4=;
-        b=jvjz98WrUmg4+iJb1FF4rH3mMVtFt5aUH56GMWYc72l3cFDazdGjFR8GQczlKvckgt
-         KrTdusWwB+gOe7CGxvvrpweM5AHfLdFjqHI6Dcp4I6X65Pwiks+fbM8k8OFrq8/pRBng
-         WG8ln2MWuqEsegBS/0ue5O0I3YDb8Iq4baGajQ1kTbxfAQlq5yuVGg5qZNdxx8UaFzD+
-         d+xqS8WV20B7vab1fJUQzvIxFe15Qe4Ncw7yEg8GN5oOYXGGTiLooCsTWAsgjWRTqHO/
-         K3xiWUJDeJ46EayThDD+AorAtg1g73B1I37Il0tXbvp/nGL1C3E0+fiJsq0nZYxg2rzp
-         wqiA==
-X-Gm-Message-State: AOAM530f9LKbSK635zj5KNfdxNT5rKgnC5T+tMXEbF9fy6bt7YXGQWQp
-	4wNusrQlsGsV0+wwYK8EXVWUHw==
-X-Google-Smtp-Source: ABdhPJyr5rsOWUnFfKbQyu5WNqvZfGkfv2j2QIG/rgh9kYWQpaVzAPa8kgY70OTZ+bBraZdbrxBdSg==
-X-Received: by 2002:a7b:c191:: with SMTP id y17mr3108178wmi.122.1632500991281;
-        Fri, 24 Sep 2021 09:29:51 -0700 (PDT)
-User-agent: mu4e 1.7.0; emacs 28.0.50
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Stratos Mailing List <stratos-dev@op-lists.linaro.org>
-Cc: Mike Holmes <mike.holmes@linaro.org>,
- Mathieu Poirier <mathieu.poirier@linaro.org>,
- Viresh Kumar <viresh.kumar@linaro.org>,
- Peter Griffin <peter.griffin@linaro.org>,
- xen-devel@lists.xenproject.org, wl@xen.org,
- Artem Mygaiev <Artem_Mygaiev@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Doug Goldstein <cardoe@cardoe.com>,
- Oleksandr Tyshchenko <olekstysh@gmail.com>,
- "Rust-VMM Mailing List" <rust-vmm@lists.opendev.org>,
- Sergio Lopez <slp@redhat.com>, Stefan Hajnoczi <stefanha@gmail.com>, David
- Woodhouse <dwmw2@infradead.org>
-Subject: Xen Rust VirtIO demos work breakdown for Project Stratos
-Date: Fri, 24 Sep 2021 17:02:46 +0100
-Message-ID: <87pmsylywy.fsf@linaro.org>
+X-Inumbo-ID: 7ff7cb78-1d57-11ec-baff-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1632502218;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=9A0+pnQRcAewGwpyyb5SKYkn/HCvTCcn0tztU1NU3PA=;
+	b=Ln++xIen5dfyKUVnHXR7OMHQbeML6uknPiwbZpQoq8X5dmEGIttGhE3IgWzyLS613NP+dH
+	4tRBRgvWcRh3/GX1W3WhosrO8rHUn6rnLmGJntNcrOt5Zj38KqZ58WPionV56/APU9Uueg
+	EvaPTeN+muu3jf2akPHU0NAnjApEAQQ=
+X-MC-Unique: PHeMdsOjNle11dol2LZ0og-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jSuHP3GBaE1fg98lgJURIpB8431AkMQutWepoB4Lb3PS1R145eSRnkRSZeCO9xFEW33zxNA1chdSuCY8dKYpxBZGgokIeKQh/dTYwZTeZq+WMi8kZU2ijjAilXuz/i/SRraBPtqH4LlM++BvaKzkqUlheWgW2lrj3z0XNlFKUZnw0ViZjbyhvXofM+Tphdj1Zep7YPolfcWuDHLqMR9Tx9igtX1QP01xc4VpPfKip1W2qvMW5VcN0YE3Egg5As6ohvbVbSNY4h11uvApTjNiI6FKo8loI3/E/Bn4U2qYT7N6WtIqysEkuxCGT8+91verBOv4hZveG6Sv0B0tG9cR/A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=9A0+pnQRcAewGwpyyb5SKYkn/HCvTCcn0tztU1NU3PA=;
+ b=O3BK7iBvsZoodbctepiqUigwSp5FsY9d8nyy97qpIt/TTeDG5acDEccqrWigEUU6gN6vXrdODYhKwdRb8029bPhFpdJCDWMhGdRUVYnyqbqGHs8zHf2+L/zibQOcUg413h5eYfVOHqCrIZYQiytvYLe7VYakIVBhtp+dWzboog0AbyhNiS04qCJiAUcFbKvmy+ZCMgZ5rkpbqvH/7T6Cc7l6yUcprCK31NVTMy4zh1vpZu6A33B/LVwnuJozqAfCA4GBVMU4A7yS0XLmFcbFgX6buF3MRBr/eqm6k9pno0yg3I93AZOEjAX2SY/OLj6P5TY/sgGMD7K1+axoQQA+sA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+From: Dario Faggioli <dfaggioli@suse.com>
+To: "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: "julien@xen.org" <julien@xen.org>, "George.Dunlap@eu.citrix.com"
+	<George.Dunlap@eu.citrix.com>, "sstabellini@kernel.org"
+	<sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>,
+	"iwj@xenproject.org" <iwj@xenproject.org>, "wl@xen.org" <wl@xen.org>
+Subject: Re: [PATCH v2 02/12] xen/memory: Remove tail padding from TRC_MEM_*
+ records
+Thread-Topic: [PATCH v2 02/12] xen/memory: Remove tail padding from TRC_MEM_*
+ records
+Thread-Index: AQHXrkSKbARHP/AzFEumZlsoMq5Uf6uza/QA
+Date: Fri, 24 Sep 2021 16:50:15 +0000
+Message-ID: <dbecc633dda9f0efb4b458a204affad44dfaa177.camel@suse.com>
+References: <20210920172529.24932-1-andrew.cooper3@citrix.com>
+	 <20210920172529.24932-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20210920172529.24932-3-andrew.cooper3@citrix.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+user-agent: Evolution 3.42.0 (by Flathub.org) 
+authentication-results: citrix.com; dkim=none (message not signed)
+ header.d=none;citrix.com; dmarc=none action=none header.from=suse.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 70ebaf77-b529-47eb-5d96-08d97f7b6223
+x-ms-traffictypediagnostic: AM0PR04MB7089:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs:
+ <AM0PR04MB70895722889E15F3D62F66ECC5A49@AM0PR04MB7089.eurprd04.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ nLDBB+DKJJOLo76yhW+EheCK6Fw94AkdsdNipiHPIl0vijyu1Urh4FMceNOTnxR1eK6v5P+Gp5xS57WDgbQ73LZAnae9Fb7aeVANJsSiI3KrnYfoTYvXimYAB+J4rlOCtN4SqoEOuzraVeg0nYWvFQfWzsH3qr6D9r573xioqOeS0mLidvz1l9CFxq2NNFc5nE+wmm2lU+V2RjrE3a5fxwqhRmKBLsgIqas5Ty/4yGkLBIPHTqqkwxBNwzqRF3sytKitiskb0FR2z+UkkDWVobWhQkMm97hv83f0sNBgRoU1jSmHJr6iwuABGSfvemXrqzrqk5XqM4XnSkhptJ8GO+TrfaMn2DPPbn9KdnwoaiUBWrhsp6y5nIm9v2gOsHnwmUVjmOp7GibJn1mq/NPOy/+ZCytubfRp6gqI4d/YQA3g297oFnyQPeDO9K95Isi61HXgpxYrCTYZMqzYfwK0ZF0DVv7DzL7fDSlxkhnc9CEQQxzaCKaOTDRlVWUh+iTiAz+wJBzVXEmL3x/WJfFiBZ5YplnB0Zqptfl9t2Utfomfc63zbNB70dJofDnc4OhloDDf9RmzCPMawR9W4ssMMGQBY1JCJpnlRDqZPkye/rTfOjpsH4K/PEETpA+G6gzkO5KWfPTWAFLQLgYxBpI2GEOUiaCe/b3GQfzMWdWJEFnQtwAX9WiDYv9yLPyssNVQptlsvUZ4xY65mtG9CafGvHp6d8vwH+PEI+qF8CN+M3J4YOIy9tNkUoIqox+FMQV6XIsjgtazfCx3pHOiEiScxYsV+PNDMNLQZJEXu5L5RhYP+VuiEvsInoDm29aP41TB4KjjmDrw6a0CVwFOrZJRjw==
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR04MB5826.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(316002)(6512007)(5660300002)(99936003)(86362001)(110136005)(54906003)(508600001)(2616005)(8936002)(71200400001)(4326008)(76116006)(91956017)(66446008)(26005)(38070700005)(64756008)(66476007)(6486002)(6506007)(66556008)(66616009)(186003)(66946007)(966005)(83380400001)(2906002)(122000001)(36756003)(8676002)(38100700002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?VEl5QndLNGRVQ0JyOU9mOGpqbXRPWkowcThqMEVqdTB0Skc0MGc5YTdCN2FK?=
+ =?utf-8?B?WEJJSkRnY3U4dE1ZejRWQWFOMGYySmZQYWo4cGozMU1vbHJBREdpZXJ6ZDR6?=
+ =?utf-8?B?Wmh0RVJkN014dmpQdFUxZ28xcUFHbzRqNkx1L0VZUVZPM0V6NUtUc1BrdUdM?=
+ =?utf-8?B?VUZFNXl4aVVwazg1R0E0eDlQS29EandTQWd6ZDgyS1lOM2Qrc1JzMHpiS3Qx?=
+ =?utf-8?B?bVdMMzQ3ejFKQ2xNdEZRNHZlNEtIeDNDMWxNNURXNkdJVkEyYVYvL1VWbTY1?=
+ =?utf-8?B?d0lqbHJZT1NNdzBMbm1oSFAyNUQ3aHdYazV0YURzdHYzeFZpTERIQ0FHcEt4?=
+ =?utf-8?B?dENPM1ZtSjYyV3ljaTBFckFyNTFtTGFUalRzUE8rWGRQRXZaMmVCVllNMmIr?=
+ =?utf-8?B?MmpnNkNVa0dCYWtqelAxSFVwNmJnU2x3MUFZT1NjM3BhT1NLdWtmbzE3NDdC?=
+ =?utf-8?B?Qm5FNkRJbVdnQU5tZ2tqM20xcmRybll2VHlEZXAxZzF5aTZaMmk4dlFENnIz?=
+ =?utf-8?B?OHhxTWVzeHJFbFBvNWpSQXJmUWhpQmk2WHIxNytkT1hvNWhqVmxTcUtqMkVQ?=
+ =?utf-8?B?ejk5cU1hSjBVODNORjQ2TEJDYVA1V3VjeHVibEIrWEl3M2dCOXdhSkFIR0V1?=
+ =?utf-8?B?SmdjWVdEY3FzZE5rWW14OGxBalVibmh5VkJxNGRIOWlJdHhXcjdKcDREaXIv?=
+ =?utf-8?B?TWVUK1Q3UTltOHhnQW5BUWI2ZTQ1Ym9xaytta3JHUmVBOERkNWU0VWRTWkNF?=
+ =?utf-8?B?V3ZlTUdMeWs2QlpLM29NelBNRXVjUHpHZElyWGtIeFRkWTFsZ2NGZTYxeVpt?=
+ =?utf-8?B?QkFBNFZYMGRCTkxwRG9naHJEQVRDTW9ZdmhrNDAyUmFhdUVFN1orT3dPUDlL?=
+ =?utf-8?B?SmVvempSQk4rMmQxaXkzcEhGVjMzOEF5UFUyeDdlWEIwR0FNU1U5dDR0ajhs?=
+ =?utf-8?B?UHBqNDRGeFFpWHRBZnB1UTVjUGdIUWRXajI4OUhGVVpKQ0JldkxwWTdHZzRq?=
+ =?utf-8?B?cUtoNDkrSkVzcU9UMHJ6L1Y0MEpySjVWZCtFLzVvc1I2SkZCRU8zQ01uOW84?=
+ =?utf-8?B?K214WExzZGZyZ0FOcmwyTCtlM2FuRGlTU0tqRy9qeDJFTjlEWXZ0dUdyajVR?=
+ =?utf-8?B?TGIrMVA5QzcxeUxxQTRmdlIrNXhheEJSY1pjMCtUbDBxU0RiTUtPUlF4S2s0?=
+ =?utf-8?B?ZnRHUjdkN2o2M0UvNkNWZmMwWTJBcjhaMm0xWHhhVW15YXFpbFNyM2JMc2hz?=
+ =?utf-8?B?NlpWdDhaVWNJVEVxc3ZuMVpELzNSbmpldDJVcmRtL2ZzTkFFR1RSdjMzcnJ4?=
+ =?utf-8?B?Y3pOd3hueEpCdFAvL3dNNzRUbkpGV2hSQnMvckMyVE1pY0tlWW56OHJJYnQz?=
+ =?utf-8?B?ZHIxenJUTTU0MThDSExkdzZXSFF1Q1A0YnlvcTIvYUNIci9SZ0xrVDZGUTVF?=
+ =?utf-8?B?TSs1WUgzQzhyamFCQUhHcTdFc29Qb1RsZWUvcU04OFJENjBmVStUYXVscmVQ?=
+ =?utf-8?B?NFplaVUrUGRHRTZwdHNPYlVpVk1VdDhQaXNiWFlBQmNNVzRtaFFYRWZZODlp?=
+ =?utf-8?B?ZS9JYThIbGFkM0w0VkxrdXMrQ042T1NYeTQxNERQVEtzQzE5TVJvZDJmanNz?=
+ =?utf-8?B?YVo0emlSandtUUtFZjJPQWpOeFZkc0QyTS9jUUpqZHhUSTEyVDYvU2ZaallP?=
+ =?utf-8?B?Vjd5eThIejR3ZEhORXE0Q3dtUGE0c3NhNVVsS1FCRlVIOWFueUVicFRrdm1a?=
+ =?utf-8?Q?yt7hNTNDeh/hXDL063+NOPyZe9QUKkII0pM2M6g?=
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-yreP9YeHWsEKtcDML9fj"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5826.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70ebaf77-b529-47eb-5d96-08d97f7b6223
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2021 16:50:15.3036
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: M1AmenVmVXD6jXNcX9LLzfEklWUUaIqxtXyoB2kGCcWOBsOCeenvslKFy0Mhr7jHsJMqv7QIIQGLf5SCuEJ8uw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7089
+
+--=-yreP9YeHWsEKtcDML9fj
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-
-Hi,
-
-The following is a breakdown (as best I can figure) of the work needed
-to demonstrate VirtIO backends in Rust on the Xen hypervisor. It
-requires work across a number of projects but notably core rust and virtio
-enabling in the Xen project (building on the work EPAM has already done)
-and the start of enabling rust-vmm crate to work with Xen.
-
-The first demo is a fairly simple toy to exercise the direct hypercall
-approach for a unikernel backend. On it's own it isn't super impressive
-but hopefully serves as a proof of concept for the idea of having
-backends running in a single exception level where latency will be
-important.
-
-The second is a much more ambitious bridge between Xen and vhost-user to
-allow for re-use of the existing vhost-user backends with the bridge
-acting as a proxy for what would usually be a full VMM in the type-2
-hypervisor case. With that in mind the rust-vmm work is only aimed at
-doing the device emulation and doesn't address the larger question of
-how type-1 hypervisors can be integrated into the rust-vmm hypervisor
-model.
-
-A quick note about the estimates. They are exceedingly rough guesses
-plucked out of the air and I would be grateful for feedback from the
-appropriate domain experts on if I'm being overly optimistic or
-pessimistic.
-
-The links to the Stratos JIRA should be at least read accessible to all
-although they contain the same information as the attached document
-(albeit with nicer PNG renderings of my ASCII art ;-). There is a
-Stratos sync-up call next Thursday:
-
-  https://calendar.google.com/event?action=3DTEMPLATE&tmeid=3DMWpidm5lbzM5N=
-jlydnAxdWxvc2s4aGI0ZGpfMjAyMTA5MzBUMTUwMDAwWiBjX2o3bmdpMW84cmxvZmtwZWQ0cjVj=
-aDk4bXZnQGc&tmsrc=3Dc_j7ngi1o8rlofkped4r5ch98mvg%40group.calendar.google.com
-
-and I'm sure there will also be discussion in the various projects
-(hence the wide CC list). The Stratos calls are open to anyone who wants
-to attend and we welcome feedback from all who are interested.
-
-So on with the work breakdown:
-
-                    =E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=
-=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=
-=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=
-=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81
-                     STRATOS PLANNING FOR 21 TO 22
-
-                              Alex Benn=C3=A9e
-                    =E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=
-=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=
-=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=
-=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81=E2=94=81
-
-
-Table of Contents
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80
-
-1. Xen Rust Bindings ([STR-51])
-.. 1. Upstream an "official" rust crate for Xen ([STR-52])
-.. 2. Basic Hypervisor Interactions hypercalls ([STR-53])
-.. 3. [#10] Access to XenStore service ([STR-54])
-.. 4. VirtIO support hypercalls ([STR-55])
-2. Xen Hypervisor Support for Stratos ([STR-56])
-.. 1. Stable ABI for foreignmemory mapping to non-dom0 ([STR-57])
-.. 2. Tweaks to tooling to launch VirtIO guests
-3. rust-vmm support for Xen VirtIO ([STR-59])
-.. 1. Make vm-memory Xen aware ([STR-60])
-.. 2. Xen IO notification and IRQ injections ([STR-61])
-4. Stratos Demos
-.. 1. Rust based stubdomain monitor ([STR-62])
-.. 2. Xen aware vhost-user master ([STR-63])
-
-
-
-
-
-1 Xen Rust Bindings ([STR-51])
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=
-=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=
-=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90
-
-  There exists a [placeholder repository] with the start of a set of
-  x86_64 bindings for Xen and a very basic hello world uni-kernel
-  example. This forms the basis of the initial Xen Rust work and will be
-  available as a [xen-sys crate] via cargo.
-
-
-[STR-51] <https://linaro.atlassian.net/browse/STR-51>
-
-[placeholder repository] <https://gitlab.com/cardoe/oxerun.git>
-
-[xen-sys crate] <https://crates.io/crates/xen-sys>
-
-1.1 Upstream an "official" rust crate for Xen ([STR-52])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80
-
-  To start with we will want an upstream location for future work to be
-  based upon. The intention is the crate is independent of the version
-  of Xen it runs on (above the baseline version chosen). This will
-  entail:
-
-  =E2=80=A2 =E2=98=90 agreeing with upstream the name/location for the sour=
-ce
-  =E2=80=A2 =E2=98=90 documenting the rules for the "stable" hypercall ABI
-  =E2=80=A2 =E2=98=90 establish an internal interface to elide between ioct=
-l mediated
-    and direct hypercalls
-  =E2=80=A2 =E2=98=90 ensure the crate is multi-arch and has feature parity=
- for arm64
-
-  As such we expect the implementation to be standalone, i.e. not
-  wrapping the existing Xen libraries for mediation. There should be a
-  close (1-to-1) mapping between the interfaces in the crate and the
-  eventual hypercall made to the hypervisor.
-
-  Estimate: 4w (elapsed likely longer due to discussion)
-
-
-[STR-52] <https://linaro.atlassian.net/browse/STR-52>
-
-
-1.2 Basic Hypervisor Interactions hypercalls ([STR-53])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80
-
-  These are the bare minimum hypercalls implemented as both ioctl and
-  direct calls. These allow for a very basic binary to:
-
-  =E2=80=A2 =E2=98=90 console_io - output IO via the Xen console
-  =E2=80=A2 =E2=98=90 domctl stub - basic stub for domain control (differen=
-t API?)
-  =E2=80=A2 =E2=98=90 sysctl stub - basic stub for system control (differen=
-t API?)
-
-  The idea would be this provides enough hypercall interface to query
-  the list of domains and output their status via the xen console. There
-  is an open question about if the domctl and sysctl hypercalls are way
-  to go.
-
-  Estimate: 6w
-
-
-[STR-53] <https://linaro.atlassian.net/browse/STR-53>
-
-
-1.3 [#10] Access to XenStore service ([STR-54])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80
-
-  This is a shared configuration storage space accessed via either Unix
-  sockets (on dom0) or via the Xenbus. This is used to access
-  configuration information for the domain.
-
-  Is this needed for a backend though? Can everything just be passed
-  direct on the command line?
-
-  Estimate: 4w
-
-
-[STR-54] <https://linaro.atlassian.net/browse/STR-54>
-
-
-1.4 VirtIO support hypercalls ([STR-55])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80
-
-  These are the hypercalls that need to be implemented to support a
-  VirtIO backend. This includes the ability to map another guests memory
-  into the current domains address space, register to receive IOREQ
-  events when the guest knocks at the doorbell and inject kicks into the
-  guest. The hypercalls we need to support would be:
-
-  =E2=80=A2 =E2=98=90 dmop - device model ops (*_ioreq_server, setirq, nr_v=
-pus)
-  =E2=80=A2 =E2=98=90 foreignmemory - map and unmap guest memory
-
-  The DMOP space is larger than what we need for an IOREQ backend so
-  I've based it just on what arch/arm/dm.c exports which is the subset
-  introduced for EPAM's virtio work.
-
-  Estimate: 12w
-
-
-[STR-55] <https://linaro.atlassian.net/browse/STR-55>
-
-
-2 Xen Hypervisor Support for Stratos ([STR-56])
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=
-=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=
-=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=
-=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=
-=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90
-
-  These tasks include tasks needed to support the various different
-  deployments of Stratos components in Xen.
-
-
-[STR-56] <https://linaro.atlassian.net/browse/STR-56>
-
-2.1 Stable ABI for foreignmemory mapping to non-dom0 ([STR-57])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80
-
-  Currently the foreign memory mapping support only works for dom0 due
-  to reference counting issues. If we are to support backends running in
-  their own domains this will need to get fixed.
-
-  Estimate: 8w
-
-
-[STR-57] <https://linaro.atlassian.net/browse/STR-57>
-
-
-2.2 Tweaks to tooling to launch VirtIO guests
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80
-
-  There might not be too much to do here. The EPAM work already did
-  something similar for their PoC for virtio-block. Essentially we need
-  to ensure:
-  =E2=80=A2 =E2=98=90 DT bindings are passed to the guest for virtio-mmio d=
-evice
-    discovery
-  =E2=80=A2 =E2=98=90 Our rust backend can be instantiated before the domU =
-is launched
-
-  This currently assumes the tools and the backend are running in dom0.
-
-  Estimate: 4w
-
-
-3 rust-vmm support for Xen VirtIO ([STR-59])
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=
-=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=
-=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=
-=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=
-=90=E2=95=90=E2=95=90
-
-  This encompasses the tasks required to get a vhost-user server up and
-  running while interfacing to the Xen hypervisor. This will require the
-  xen-sys.rs crate for the actual interface to the hypervisor.
-
-  We need to work out how a Xen configuration option would be passed to
-  the various bits of rust-vmm when something is being built.
-
-
-[STR-59] <https://linaro.atlassian.net/browse/STR-59>
-
-3.1 Make vm-memory Xen aware ([STR-60])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80
-
-  The vm-memory crate is the root crate for abstracting access to the
-  guests memory. It currently has multiple configuration builds to
-  handle difference between mmap on Windows and Unix. Although mmap
-  isn't directly exposed the public interfaces support a mmap like
-  interface. We would need to:
-
-  =E2=80=A2 =E2=98=90 work out how to expose foreign memory via the vm-memo=
-ry mechanism
-
-  I'm not sure if this just means implementing the GuestMemory trait for
-  a GuestMemoryXen or if we need to present a mmap like interface.
-
-  Estimate: 8w
-
-
-[STR-60] <https://linaro.atlassian.net/browse/STR-60>
-
-
-3.2 Xen IO notification and IRQ injections ([STR-61])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80
-
-  The KVM world provides for ioeventfd (notifications) and irqfd
-  (injection) to signal asynchronously between the guest and the
-  backend. As far a I can tell this is currently handled inside the
-  various VMMs which assume a KVM backend.
-
-  While the vhost-user slave code doesn't see the
-  register_ioevent/register_irqfd events it does deal with EventFDs
-  throughout the code. Perhaps the best approach here would be to create
-  a IOREQ crate that can create EventFD descriptors which can then be
-  passed to the slaves to use for notification and injection.
-
-  Otherwise there might be an argument for a new crate that can
-  encapsulate this behaviour for both KVM/ioeventd and Xen/IOREQ setups?
-
-  Estimate: 8w?
-
-
-[STR-61] <https://linaro.atlassian.net/browse/STR-61>
-
-
-4 Stratos Demos
-=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=
-=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90=E2=95=90
-
-  These tasks cover the creation of demos that brig together all the
-  previous bits of work to demonstrate a new area of capability that has
-  been opened up by Stratos work.
-
-
-4.1 Rust based stubdomain monitor ([STR-62])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80
-
-  This is a basic demo that is a proof of concept for a unikernel style
-  backend written in pure Rust. This work would be a useful precursor
-  for things such as the RTOS Dom0 on a safety island ([STR-11]) or as a
-  carrier for the virtio-scmi backend.
-
-  The monitor program will periodically poll the state of the other
-  domains and echo their status to the Xen console.
-
-  Estimate: 4w
-
-#+name: stub-domain-example
-#+begin_src ditaa :cmdline -o :file stub_domain_example.png
-                      Dom0                      |        DomU       |      =
-DomStub=20=20=20
-                                                |                   |=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                :  /-------------\  :=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                |  |cPNK         |  |=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                |  |             |  |=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                |  |             |  |=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-        /------------------------------------\  |  |   GuestOS   |  |=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-        |cPNK                                |  |  |             |  |=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-  EL0   |   Dom0 Userspace (xl tools, QEMU)  |  |  |             |  |  /---=
-------------\
-        |                                    |  |  |             |  |  |cYE=
-L           |
-        \------------------------------------/  |  |             |  |  |   =
-            |
-        +------------------------------------+  |  |             |  |  | Ru=
-st Monitor  |
-  EL1   |cA1B        Dom0 Kernel             |  |  |             |  |  |   =
-            |
-        +------------------------------------+  |  \-------------/  |  \---=
-------------/
-  -------------------------------------------------------------------------=
-------=3D------------------
-        +------------------------------------------------------------------=
--------------------+
-  EL2   |cC02                              Xen Hypervisor                  =
-                   |
-        +------------------------------------------------------------------=
--------------------+
-#+end_src
-
-[STR-62] <https://linaro.atlassian.net/browse/STR-62>
-
-[STR-11] <https://linaro.atlassian.net/browse/STR-11>
-
-
-4.2 Xen aware vhost-user master ([STR-63])
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=
-=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=
-=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=80=E2=94=
-=80
-
-  Usually the master side of a vhost-user system is embedded directly in
-  the VMM itself. However in a Xen deployment their is no overarching
-  VMM but a series of utility programs that query the hypervisor
-  directly. The Xen tooling is also responsible for setting up any
-  support processes that are responsible for emulating HW for the guest.
-
-  The task aims to bridge the gap between Xen's normal HW emulation path
-  (ioreq) and VirtIO's userspace device emulation (vhost-user). The
-  process would be started with some information on where the
-  virtio-mmio address space is and what the slave binary will be. It
-  will then:
-
-  =E2=80=A2 map the guest into Dom0 userspace and attach to a MemFD
-  =E2=80=A2 register the appropriate memory regions as IOREQ regions with X=
-en
-  =E2=80=A2 create EventFD channels for the virtio kick notifications (one =
-each
-    way)
-  =E2=80=A2 spawn the vhost-user slave process and mediate the notification=
-s and
-    kicks between the slave and Xen itself
-
-#+name: xen-vhost-user-master
-#+begin_src ditaa :cmdline -o :file xen_vhost_user_master.png
-
-                          Dom0                                            D=
-omU=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20
-                                                          |=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                          |=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                          |=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                          |=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                          |=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-                                                          |=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-  +-------------------+            +-------------------+  |
-  |                   |----------->|                   |  |
-  |    vhost-user     | vhost-user |    vhost-user     |  :  /-------------=
------------------------\
-  |      slave        |  protocol  |      master       |  |  |             =
-                       |
-  |    (existing)     |<-----------|      (rust)       |  |  |             =
-                       |
-  +-------------------+            +-------------------+  |  |             =
-                       |
-           ^                           ^   |       ^      |  |             =
-Guest Userspace        |
-           |                           |   |       |      |  |             =
-                       |
-           |                           |   | IOREQ |      |  |             =
-                       |=20=20=20=20=20=20=20
-           |                           |   |       |      |  |             =
-                       |=20=20=20=20=20=20=20
-           v                           v   V       |      |  \-------------=
------------------------/=20=20=20=20=20=20=20
-   +---------------------------------------------------+  |  +-------------=
------------------------+
-   |       ^                           ^   | ioctl ^   |  |  |             =
-                       |
-   |       |   iofd/irqfd eventFD      |   |       |   |  |  |             =
- Guest Kernel          |
-   |       +---------------------------+   |       |   |  |  | +-----------=
---+                    |
-   |                                       |       |   |  |  | | virtio-dev=
-  |                    |
-   |                       Host Kernel     V       |   |  |  | +-----------=
---+                    |
-   +---------------------------------------------------+  |  +-------------=
------------------------+
-                                           |       ^      |      |         =
-^=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20
-                                           | hyper |             |         =
-|=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20
-      ----------------------=3D------------- | -=3D--- | ----=3D------ | --=
----=3D- | --------=3D------------------=20=20
-                                           |  call |        Trap |         =
-| IRQ=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20
-                                           V       |             V         =
-|=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=
-=20=20=20=20=20=20
-            +--------------------------------------------------------------=
------------------------+=20=20=20=20=20=20=20
-            |                              |       ^             |         =
-^                      |=20=20=20=20=20=20=20
-            |                              |       +-------------+         =
-|                      |=20=20=20=20=20=20=20
-      EL2   |      Xen Hypervisor          |                               =
-|                      |=20=20=20=20=20=20=20
-            |                              +-------------------------------=
-+                      |=20=20=20=20=20=20=20
-            |                                                              =
-                       |=20=20=20=20=20=20=20
-            +--------------------------------------------------------------=
------------------------+=20=20=20=20=20=20=20
-
-#+end_src
-
-[STR-63] <https://linaro.atlassian.net/browse/STR-63>
-
+On Mon, 2021-09-20 at 18:25 +0100, Andrew Cooper wrote:
+> Four TRC_MEM_* records supply custom structures with tail padding,
+> leaking
+> stack rubble into the trace buffer.=C2=A0 Three of the records were fine
+> in 32-bit
+> builds of Xen, due to the relaxed alignment of 64-bit integers, but
+> POD_SUPERPAGE_SPLITER was broken right from the outset.
+>=20
+> We could pack the datastructures to remove the padding, but
+> xentrace_format
+> has no way of rendering the upper half of a 16-bit field.=C2=A0 Instead,
+> expand all
+> 16-bit fields to 32-bit.
+>=20
+> For POD_SUPERPAGE_SPLINTER, introduce an order field as it is
+> relevant
+> information, and to match DECREASE_RESERVATION, and so it doesn't
+> require a
+> __packed attribute to drop tail padding.
+>=20
+> Update xenalyze's structures to match, and introduce xentrace_format
+> rendering
+> which was absent previously.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Thanks and Regards
 --=20
-Alex Benn=C3=A9e
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+--=-yreP9YeHWsEKtcDML9fj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAmFOAcYACgkQFkJ4iaW4
+c+79zw//TlLQ7V82XrFwJwJOqVTscw0tkTv07UzpF0CB27W8Jtwjxz9ZonCG67zp
+h9ZDnuCtutmLZ0U/NSa1HShDgthj2H+wZbICKMhseE/MTngCai8pzuVT+dg4dPVX
+Bbvqpy7ZiSKxXUxF9mX5G/XOK2b55ofbD94g0Z57ZeSeb1UR42crLMhGFOdzgLWa
+LHTN5eB9Gu9p+SlM40QlKqFylnUYuYiG9u9ap0gNqpnKbwP+qGdp0lWp9VfxkkIG
+gKgNUKAWMCA2u69EjToX4vBeFaNRbRKg+FtYIBXBiA+FkQ0Bj27sdMAnCJdXPJAJ
+PTBhbF1FZBCNiiBuWHVtx4zJGIc5jinMFxbsd8imR2LL/esR5ipH8tgz1Ej2zXI6
+WJp6UJRl6aExU+7WFDZSy7tZVxKxQ7kWAf+erbj6Wf0KE6qHxbOrurVdCJ5hPisR
+BUwyfSjXLALj82CpxarEd6EMiCL+yx/HpXM7wVme4FZPSwCH1DMj9N8pet0Puva6
+N+qu8L6pfBj5gUJkDNM8/k7nGjTHF6nF6Rm8HDBcVXMlr5YMMlDSuZoiACzjzVsX
+iJouM+PzR4cY4fMyJr9v0RRYzYdvmZljjobSz5G99KgaDszTf8WeGY7tDB1cz8iH
+gkWhMX2+nB9FMBqW1EeP7ufXFoGwx+ZUxXuD6xYByPICbALrVaw=
+=2bPf
+-----END PGP SIGNATURE-----
+
+--=-yreP9YeHWsEKtcDML9fj--
+
 
