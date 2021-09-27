@@ -2,39 +2,49 @@ Return-Path: <SRS0=aFvL=OS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 698B9C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 05:01:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF5A7C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 05:02:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1E87060F9B
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 05:01:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1E87060F9B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4F8DD6023B
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 05:02:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4F8DD6023B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=kleine-koenig.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.197451.350496 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.197173.350507 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mV5FA-0001Xi-Fm; Tue, 28 Sep 2021 05:01:28 +0000
+	id 1mV5Fq-00025W-P8; Tue, 28 Sep 2021 05:02:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 197451.350496; Tue, 28 Sep 2021 05:01:28 +0000
+Received: by outflank-mailman (output) from mailman id 197173.350507; Tue, 28 Sep 2021 05:02:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mV5FA-0001Xb-Cg; Tue, 28 Sep 2021 05:01:28 +0000
-Received: by outflank-mailman (input) for mailman id 197451;
- Tue, 28 Sep 2021 05:01:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mV5Fq-00025P-M9; Tue, 28 Sep 2021 05:02:10 +0000
+Received: by outflank-mailman (input) for mailman id 197173;
+ Mon, 27 Sep 2021 20:44:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Gf2A=OS=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mV5F9-0001XV-3C
- for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 05:01:27 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 21ab4fbd-2019-11ec-bc65-12813bfff9fa;
- Tue, 28 Sep 2021 05:01:25 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id E441861153;
- Tue, 28 Sep 2021 05:01:24 +0000 (UTC)
+ <SRS0=Ukqu=OR=pengutronix.de=ukl@srs-us1.protection.inumbo.net>)
+ id 1mUxTw-0008O6-8g
+ for xen-devel@lists.xenproject.org; Mon, 27 Sep 2021 20:44:12 +0000
+Received: from metis.ext.pengutronix.de (unknown
+ [2001:67c:670:201:290:27ff:fe1d:cc33])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5451584a-43a2-47fe-be1c-b8aff57295f3;
+ Mon, 27 Sep 2021 20:44:06 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mUxTa-0001jo-U0; Mon, 27 Sep 2021 22:43:50 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mUxTY-0001YU-BC; Mon, 27 Sep 2021 22:43:48 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mUxTY-0001N9-9X; Mon, 27 Sep 2021 22:43:48 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,183 +56,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 21ab4fbd-2019-11ec-bc65-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1632805285;
-	bh=t8H8YPdMJiXnsapCfFlSV6luQZJAg7RLgrmgj8Lqnyk=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=JsL8A69uzmWM44kxnsge4W10L+BirbKicrAohCazz0ujbeFlI3zWJl6lnvBfOzEBj
-	 x9vFvavrweHgRB7xNxIpLJvYlybQKRCxXt2fYwEq8lZSHTrlRkm9Iehsxn41F9WyAO
-	 PIJN53S4bjsmANReJ1PnPDyi915/QSMW4NhME/+NJtVeZSjXmVDLBS4XPRiX0qVfPB
-	 4z0L+4/4TgYpREEairvVYwt+Eh74U0JugCror3sX7WUC+JSAlXA+prgSkWh1gS+ESL
-	 V7eBaWBN5xAVtXP9YApAkK8b+WQl8UCu0jKGok5F3DS/oNbUDMLZlyR9nsxyeX2SoW
-	 4n79dwFpHrnOQ==
-Date: Mon, 27 Sep 2021 22:01:24 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Wei Chen <Wei.Chen@arm.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Jan Beulich <jbeulich@suse.com>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    "julien@xen.org" <julien@xen.org>, 
-    Bertrand Marquis <Bertrand.Marquis@arm.com>
-Subject: RE: [PATCH 20/37] xen: introduce CONFIG_EFI to stub API for non-EFI
- architecture
-In-Reply-To: <DB9PR08MB6857E57847E38C400F6571EA9EA89@DB9PR08MB6857.eurprd08.prod.outlook.com>
-Message-ID: <alpine.DEB.2.21.2109272159590.5022@sstabellini-ThinkPad-T480s>
-References: <20210923120236.3692135-1-wei.chen@arm.com> <20210923120236.3692135-21-wei.chen@arm.com> <alpine.DEB.2.21.2109231811420.17979@sstabellini-ThinkPad-T480s> <PAXPR08MB68640027443F267495804A529EA49@PAXPR08MB6864.eurprd08.prod.outlook.com>
- <b4433faf-bb70-d083-126c-0224da3d9a82@suse.com> <DB9PR08MB685742B691E39FD3161BFE289EA49@DB9PR08MB6857.eurprd08.prod.outlook.com> <a295cc34-9cc0-468b-c85a-2e5d1238d9a3@suse.com> <DB9PR08MB6857EE6294A1062EE0FAF0289EA69@DB9PR08MB6857.eurprd08.prod.outlook.com>
- <DB9PR08MB6857AB9DBB66A4E02140987B9EA79@DB9PR08MB6857.eurprd08.prod.outlook.com> <alpine.DEB.2.21.2109271420560.5022@sstabellini-ThinkPad-T480s> <DB9PR08MB6857E57847E38C400F6571EA9EA89@DB9PR08MB6857.eurprd08.prod.outlook.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 5451584a-43a2-47fe-be1c-b8aff57295f3
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <uwe@kleine-koenig.org>
+To: Bjorn Helgaas <helgaas@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>
+Cc: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
+	linux-pci@vger.kernel.org,
+	kernel@pengutronix.de,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	xen-devel@lists.xenproject.org,
+	Christoph Hellwig <hch@lst.de>
+Subject: [PATCH v4 3/8] xen/pci: Drop some checks that are always true
+Date: Mon, 27 Sep 2021 22:43:21 +0200
+Message-Id: <20210927204326.612555-4-uwe@kleine-koenig.org>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20210927204326.612555-1-uwe@kleine-koenig.org>
+References: <20210927204326.612555-1-uwe@kleine-koenig.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-921827469-1632805284=:5022"
-
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-921827469-1632805284=:5022
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+X-Patch-Hashes: v=1; h=sha256; i=7QOFRnoxyPrPqaGt2Yf8oJvx3xwgCvlMdm130sPrxr8=; m=Ixh7t2kv5MnS1JaJxFtVrqNhjBtz3xQyoCGo2anqbI0=; p=dOfuuSLv1l/M9DCuxyIBdCuX9kCH+yUzno229EZfUDs=; g=9e481f95a51887868b05f8a86c3e5a9f8aff47c6
+X-Patch-Sig: m=pgp; i=uwe@kleine-koenig.org; s=0x0D2511F322BFAB1C1580266BE2DCDD9132669BD6; b=iQEzBAABCgAdFiEEfnIqFpAYrP8+dKQLwfwUeK3K7AkFAmFSLMkACgkQwfwUeK3K7AnqIQgAnhz 0fOpo2dlkGtlWUJ6sTE0pwT6RIA2NSk6vrj9r36En7FhfasqWDQb4xX9gZspK5EgYSbybhxpPPFyq 80ehLBLcirNNq2x0pS57eDfwYdvbxOU+nqi2Hc1l1SF1j+CXEW8x9g5bn3MDb8kdclUwMMAK6yXVj bTii6/k2laEZQGj8CnAZmeIkDn8Ateozw5/Ukl6ojqTlWBH5AeuCCMyftDeAtZ42j4wLO45ZEiDx8 Tdw3LCh937pothK2cEWwbY7AdxW4F5JN0OLWnmNil0Cf/txxoSibymGe0GhVSJ1ClE3AM+N6IGrue IAT5IVmrMKtEZWZLy1ujTlCxs22jC6A==
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
 
-On Tue, 28 Sep 2021, Wei Chen wrote:
-> > -----Original Message-----
-> > From: Stefano Stabellini <sstabellini@kernel.org>
-> > Sent: 2021年9月28日 9:00
-> > To: Wei Chen <Wei.Chen@arm.com>
-> > Cc: Jan Beulich <jbeulich@suse.com>; xen-devel@lists.xenproject.org;
-> > julien@xen.org; Bertrand Marquis <Bertrand.Marquis@arm.com>; Stefano
-> > Stabellini <sstabellini@kernel.org>
-> > Subject: RE: [PATCH 20/37] xen: introduce CONFIG_EFI to stub API for non-
-> > EFI architecture
-> > 
-> > On Mon, 27 Sep 2021, Wei Chen wrote:
-> > > > -----Original Message-----
-> > > > From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of
-> > Wei
-> > > > Chen
-> > > > Sent: 2021年9月26日 18:25
-> > > > To: Jan Beulich <jbeulich@suse.com>
-> > > > Cc: xen-devel@lists.xenproject.org; julien@xen.org; Bertrand Marquis
-> > > > <Bertrand.Marquis@arm.com>; Stefano Stabellini <sstabellini@kernel.org>
-> > > > Subject: RE: [PATCH 20/37] xen: introduce CONFIG_EFI to stub API for
-> > non-
-> > > > EFI architecture
-> > > >
-> > > > Hi Jan,
-> > > >
-> > > > > -----Original Message-----
-> > > > > From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf
-> > Of
-> > > > Jan
-> > > > > Beulich
-> > > > > Sent: 2021年9月24日 18:49
-> > > > > To: Wei Chen <Wei.Chen@arm.com>
-> > > > > Cc: xen-devel@lists.xenproject.org; julien@xen.org; Bertrand Marquis
-> > > > > <Bertrand.Marquis@arm.com>; Stefano Stabellini
-> > <sstabellini@kernel.org>
-> > > > > Subject: Re: [PATCH 20/37] xen: introduce CONFIG_EFI to stub API for
-> > > > non-
-> > > > > EFI architecture
-> > > > >
-> > > > > On 24.09.2021 12:31, Wei Chen wrote:
-> > > > > >> From: Jan Beulich <jbeulich@suse.com>
-> > > > > >> Sent: 2021年9月24日 15:59
-> > > > > >>
-> > > > > >> On 24.09.2021 06:34, Wei Chen wrote:
-> > > > > >>>> From: Stefano Stabellini <sstabellini@kernel.org>
-> > > > > >>>> Sent: 2021年9月24日 9:15
-> > > > > >>>>
-> > > > > >>>> On Thu, 23 Sep 2021, Wei Chen wrote:
-> > > > > >>>>> --- a/xen/common/Kconfig
-> > > > > >>>>> +++ b/xen/common/Kconfig
-> > > > > >>>>> @@ -11,6 +11,16 @@ config COMPAT
-> > > > > >>>>>  config CORE_PARKING
-> > > > > >>>>>  	bool
-> > > > > >>>>>
-> > > > > >>>>> +config EFI
-> > > > > >>>>> +	bool
-> > > > > >>>>
-> > > > > >>>> Without the title the option is not user-selectable (or de-
-> > > > > selectable).
-> > > > > >>>> So the help message below can never be seen.
-> > > > > >>>>
-> > > > > >>>> Either add a title, e.g.:
-> > > > > >>>>
-> > > > > >>>> bool "EFI support"
-> > > > > >>>>
-> > > > > >>>> Or fully make the option a silent option by removing the help
-> > text.
-> > > > > >>>
-> > > > > >>> OK, in current Xen code, EFI is unconditionally compiled. Before
-> > > > > >>> we change related code, I prefer to remove the help text.
-> > > > > >>
-> > > > > >> But that's not true: At least on x86 EFI gets compiled depending
-> > on
-> > > > > >> tool chain capabilities. Ultimately we may indeed want a user
-> > > > > >> selectable option here, but until then I'm afraid having this
-> > option
-> > > > > >> at all may be misleading on x86.
-> > > > > >>
-> > > > > >
-> > > > > > I check the build scripts, yes, you're right. For x86, EFI is not
-> > a
-> > > > > > selectable option in Kconfig. I agree with you, we can't use
-> > Kconfig
-> > > > > > system to decide to enable EFI build for x86 or not.
-> > > > > >
-> > > > > > So how about we just use this EFI option for Arm only? Because on
-> > Arm,
-> > > > > > we do not have such toolchain dependency.
-> > > > >
-> > > > > To be honest - don't know. That's because I don't know what you want
-> > > > > to use the option for subsequently.
-> > > > >
-> > > >
-> > > > In last version, I had introduced an arch-helper to stub EFI_BOOT
-> > > > in Arm's common code for Arm32. Because Arm32 doesn't support EFI.
-> > > > So Julien suggested me to introduce a CONFIG_EFI option for non-EFI
-> > > > supported architectures to stub in EFI layer.
-> > > >
-> > > > [1] https://lists.xenproject.org/archives/html/xen-devel/2021-
-> > > > 08/msg00808.html
-> > > >
-> > >
-> > > As Jan' reminded, x86 doesn't depend on Kconfig to build EFI code.
-> > > So, if we CONFIG_EFI to stub EFI API's for x86, we will encounter
-> > > that toolchains enable EFI, but Kconfig disable EFI. Or Kconfig
-> > > enable EFI but toolchain doesn't provide EFI build supports. And
-> > > then x86 could not work well.
-> > >
-> > > If we use CONFIG_EFI for Arm only, that means CONFIG_EFI for x86
-> > > is off, this will also cause problem.
-> > >
-> > > So, can we still use previous arch_helpers to stub for Arm32?
-> > > until x86 can use this selectable option?
-> > 
-> > EFI doesn't have to be necessarily a user-visible option in Kconfig at
-> > this point. I think Julien was just asking to make the #ifdef based on
-> > a EFI-related config rather than just based CONFIG_ARM64.
-> > 
-> > On x86 EFI is detected based on compiler support, setting XEN_BUILD_EFI
-> > in xen/arch/x86/Makefile. Let's say that we keep using the same name
-> > "XEN_BUILD_EFI" on ARM as well.
-> > 
-> > On ARM32, XEN_BUILD_EFI should be always unset.
-> > 
-> > On ARM64 XEN_BUILD_EFI should be always set.
-> > 
-> > That's it, right? I'd argue that CONFIG_EFI or HAS_EFI are better names
-> > than XEN_BUILD_EFI, but that's OK anyway. So for instance you can make
-> > XEN_BUILD_EFI an invisible symbol in xen/arch/arm/Kconfig and select it
-> > only on ARM64.
-> 
-> Thanks, this is a good approach. But if we place XEN_BUILD_EFI in Kconfig
-> it will be transfer to CONFIG_XEN_BUILD_EFI. How about using another name
-> in Kconfig like ARM_EFI, but use CONFIG_ARM_EFI in config.h to define
-> XEN_BUILD_EFI?
+From: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
 
-I am OK with that. Another option is to rename XEN_BUILD_EFI to
-CONFIG_XEN_BUILD_EFI on x86. Either way is fine by me. Jan, do you havea
-preference?
---8323329-921827469-1632805284=:5022--
+pcifront_common_process() has a check at the start that exits early if
+pcidev or pdidev->driver are NULL. So simplify the following code by not
+checking these two again.
+
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+---
+ drivers/pci/xen-pcifront.c | 57 +++++++++++++++++---------------------
+ 1 file changed, 25 insertions(+), 32 deletions(-)
+
+diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
+index 2156c632524d..f2d7f70a7a10 100644
+--- a/drivers/pci/xen-pcifront.c
++++ b/drivers/pci/xen-pcifront.c
+@@ -594,7 +594,6 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 	int devfn = pdev->sh_info->aer_op.devfn;
+ 	int domain = pdev->sh_info->aer_op.domain;
+ 	struct pci_dev *pcidev;
+-	int flag = 0;
+ 
+ 	dev_dbg(&pdev->xdev->dev,
+ 		"pcifront AER process: cmd %x (bus:%x, devfn%x)",
+@@ -609,40 +608,34 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 	}
+ 	pdrv = pcidev->driver;
+ 
+-	if (pdrv) {
+-		if (pdrv->err_handler && pdrv->err_handler->error_detected) {
+-			pci_dbg(pcidev, "trying to call AER service\n");
+-			if (pcidev) {
+-				flag = 1;
+-				switch (cmd) {
+-				case XEN_PCI_OP_aer_detected:
+-					result = pdrv->err_handler->
+-						 error_detected(pcidev, state);
+-					break;
+-				case XEN_PCI_OP_aer_mmio:
+-					result = pdrv->err_handler->
+-						 mmio_enabled(pcidev);
+-					break;
+-				case XEN_PCI_OP_aer_slotreset:
+-					result = pdrv->err_handler->
+-						 slot_reset(pcidev);
+-					break;
+-				case XEN_PCI_OP_aer_resume:
+-					pdrv->err_handler->resume(pcidev);
+-					break;
+-				default:
+-					dev_err(&pdev->xdev->dev,
+-						"bad request in aer recovery "
+-						"operation!\n");
+-
+-				}
+-			}
++	if (pdrv->err_handler && pdrv->err_handler->error_detected) {
++		pci_dbg(pcidev, "trying to call AER service\n");
++		switch (cmd) {
++		case XEN_PCI_OP_aer_detected:
++			result = pdrv->err_handler->
++				 error_detected(pcidev, state);
++			break;
++		case XEN_PCI_OP_aer_mmio:
++			result = pdrv->err_handler->
++				 mmio_enabled(pcidev);
++			break;
++		case XEN_PCI_OP_aer_slotreset:
++			result = pdrv->err_handler->
++				 slot_reset(pcidev);
++			break;
++		case XEN_PCI_OP_aer_resume:
++			pdrv->err_handler->resume(pcidev);
++			break;
++		default:
++			dev_err(&pdev->xdev->dev,
++				"bad request in aer recovery "
++				"operation!\n");
+ 		}
++
++		return result;
+ 	}
+-	if (!flag)
+-		result = PCI_ERS_RESULT_NONE;
+ 
+-	return result;
++	return PCI_ERS_RESULT_NONE;
+ }
+ 
+ 
+-- 
+2.30.2
+
 
