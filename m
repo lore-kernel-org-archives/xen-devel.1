@@ -2,38 +2,38 @@ Return-Path: <SRS0=KeRi=OR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86589C433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Sep 2021 22:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 85960C433FE
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Sep 2021 22:01:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 58CCF60E73
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Sep 2021 22:01:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 58CCF60E73
+	by mail.kernel.org (Postfix) with ESMTPS id 5315F60E54
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Sep 2021 22:01:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5315F60E54
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.197209.350252 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.197211.350263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mUygm-00047e-BN; Mon, 27 Sep 2021 22:01:32 +0000
+	id 1mUygr-0004nC-QH; Mon, 27 Sep 2021 22:01:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 197209.350252; Mon, 27 Sep 2021 22:01:32 +0000
+Received: by outflank-mailman (output) from mailman id 197211.350263; Mon, 27 Sep 2021 22:01:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mUygm-00047X-6y; Mon, 27 Sep 2021 22:01:32 +0000
-Received: by outflank-mailman (input) for mailman id 197209;
- Mon, 27 Sep 2021 22:01:31 +0000
+	id 1mUygr-0004ly-M4; Mon, 27 Sep 2021 22:01:37 +0000
+Received: by outflank-mailman (input) for mailman id 197211;
+ Mon, 27 Sep 2021 22:01:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0LRd=OR=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
- id 1mUygl-0000mS-F7
- for xen-devel@lists.xenproject.org; Mon, 27 Sep 2021 22:01:31 +0000
+ id 1mUygq-0000mS-FD
+ for xen-devel@lists.xenproject.org; Mon, 27 Sep 2021 22:01:36 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6cf0e5b8-187c-4d9c-80b9-ddd084603ee4;
+ id 42fe048f-1dbc-4ca2-b663-4e7f16da06f0;
  Mon, 27 Sep 2021 22:00:50 +0000 (UTC)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1mUyfw-004SvY-Q6; Mon, 27 Sep 2021 22:00:40 +0000
+ (Red Hat Linux)) id 1mUyfw-004SvC-K7; Mon, 27 Sep 2021 22:00:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 6cf0e5b8-187c-4d9c-80b9-ddd084603ee4
+X-Inumbo-ID: 42fe048f-1dbc-4ca2-b663-4e7f16da06f0
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Zp3peWChzsLwJZgR1i8Dtyh3FOO544lFeJzlWbkfyco=; b=xyicbK2H0CR7mxWgNNAbZZVOoG
-	f/TY+aOtnMS/uoVtMXqtPXis+vbZhtpiS/ndUP0AdX9IDRGIobYET1+iWMgf0eic3hI0JSLbAulKG
-	8wvXxEzmhDvXeOmmj8TPh+HGQ0Q2wvHySLXwxFAgsiQ0IWl+sk40LXHXcOXOHWUbo3breLF9OOmtC
-	aU5QvqBV5mC+pgxhFyfAWSzB39tzj8teDlNoEJNNKk8zoulQfqxsIBVBuYTJraMMbw8Z6hDN9ZQpa
-	LM244ocJ/fpPGEyLZkxh+GCiIuoIMgqFitcviGyRgvFztoaDWVexx1nlLNy/oEUY4relGyOFoN2oa
-	SP4Bj1fA==;
+	bh=RKU66AnJzLKhhgSWEHLOfZ4aIkidqzrddEWqP9yNa3s=; b=DlwowCHOstgFTHo1OasqvBBrRA
+	Ln5Lnf/XerBeGqMUcmhKvtfbTCWtF7GYSUu6/OOKkAt4grh0hFRd5deBekspTSIWg8AjRZ2eeZKUD
+	6NbxnpIf/ny+fShWjWFE6NSx57iAqpvB2STaOYmGxyb8gkLmyIU2giqEJ/wc7Q+0HvyHInp4oNX0U
+	bQN6nQAoBsEQtyjaUCBNU3TPonPPX0fO9u+NSEcfBEKREBZlbiBhi12yjpAEzm6ia6MdWXUqfZHUV
+	P/j52UBMOkCxN2xoIsyxrUw2HuJVLpC29l30Op1PLWCmJ9OOvtEigV+Jc9XvZfDpXkyxXLigTBOU0
+	B5Qzou+A==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: axboe@kernel.dk,
 	colyli@suse.de,
@@ -80,9 +80,9 @@ Cc: xen-devel@lists.xenproject.org,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH v2 10/10] zram: add error handling support for add_disk()
-Date: Mon, 27 Sep 2021 15:00:39 -0700
-Message-Id: <20210927220039.1064193-11-mcgrof@kernel.org>
+Subject: [PATCH v2 06/10] nvdimm/btt: add error handling support for add_disk()
+Date: Mon, 27 Sep 2021 15:00:35 -0700
+Message-Id: <20210927220039.1064193-7-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210927220039.1064193-1-mcgrof@kernel.org>
 References: <20210927220039.1064193-1-mcgrof@kernel.org>
@@ -96,33 +96,24 @@ error handling.
 
 Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 ---
- drivers/block/zram/zram_drv.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/nvdimm/btt.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
-index f61910c65f0f..59086e178fbd 100644
---- a/drivers/block/zram/zram_drv.c
-+++ b/drivers/block/zram/zram_drv.c
-@@ -1953,7 +1953,9 @@ static int zram_add(void)
- 		blk_queue_max_write_zeroes_sectors(zram->disk->queue, UINT_MAX);
+diff --git a/drivers/nvdimm/btt.c b/drivers/nvdimm/btt.c
+index 23ee8c005db5..57b921c5fbb5 100644
+--- a/drivers/nvdimm/btt.c
++++ b/drivers/nvdimm/btt.c
+@@ -1542,7 +1542,9 @@ static int btt_blk_init(struct btt *btt)
+ 	}
  
- 	blk_queue_flag_set(QUEUE_FLAG_STABLE_WRITES, zram->disk->queue);
--	device_add_disk(NULL, zram->disk, zram_disk_attr_groups);
-+	ret = device_add_disk(NULL, zram->disk, zram_disk_attr_groups);
-+	if (ret)
+ 	set_capacity(btt->btt_disk, btt->nlba * btt->sector_size >> 9);
+-	device_add_disk(&btt->nd_btt->dev, btt->btt_disk, NULL);
++	rc = device_add_disk(&btt->nd_btt->dev, btt->btt_disk, NULL);
++	if (rc)
 +		goto out_cleanup_disk;
  
- 	strlcpy(zram->compressor, default_compressor, sizeof(zram->compressor));
- 
-@@ -1961,6 +1963,8 @@ static int zram_add(void)
- 	pr_info("Added device: %s\n", zram->disk->disk_name);
- 	return device_id;
- 
-+out_cleanup_disk:
-+	blk_cleanup_disk(zram->disk);
- out_free_idr:
- 	idr_remove(&zram_index_idr, device_id);
- out_free_dev:
+ 	btt->nd_btt->size = btt->nlba * (u64)btt->sector_size;
+ 	nvdimm_check_and_set_ro(btt->btt_disk);
 -- 
 2.30.2
 
