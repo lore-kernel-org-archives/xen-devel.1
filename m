@@ -2,44 +2,49 @@ Return-Path: <SRS0=aFvL=OS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06176C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:24:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44B84C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:25:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1B5A61371
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:24:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C1B5A61371
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id E7CDA61378
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:25:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E7CDA61378
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.198336.351784 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.198345.351795 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHma-0001qS-KO; Tue, 28 Sep 2021 18:24:48 +0000
+	id 1mVHnA-0002c9-2u; Tue, 28 Sep 2021 18:25:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 198336.351784; Tue, 28 Sep 2021 18:24:48 +0000
+Received: by outflank-mailman (output) from mailman id 198345.351795; Tue, 28 Sep 2021 18:25:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHma-0001qL-Gf; Tue, 28 Sep 2021 18:24:48 +0000
-Received: by outflank-mailman (input) for mailman id 198336;
- Tue, 28 Sep 2021 18:24:47 +0000
+	id 1mVHn9-0002c2-Um; Tue, 28 Sep 2021 18:25:23 +0000
+Received: by outflank-mailman (input) for mailman id 198345;
+ Tue, 28 Sep 2021 18:25:23 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4iZ8=OS=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1mVHmZ-0001pr-Fg
- for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:24:47 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jiAA=OS=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1mVHn8-0002MP-Va
+ for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:25:23 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.129.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 5bd91d34-2089-11ec-bcc4-12813bfff9fa;
- Tue, 28 Sep 2021 18:24:46 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5DC786D;
- Tue, 28 Sep 2021 11:24:46 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5DFCC3F793;
- Tue, 28 Sep 2021 11:24:45 -0700 (PDT)
+ id 68e8b53e-2089-11ec-bcc4-12813bfff9fa;
+ Tue, 28 Sep 2021 18:25:08 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-27-tfQVnEQpPz2XZ-E6EUT2ZA-1; Tue, 28 Sep 2021 14:25:06 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 57A0C824FA8;
+ Tue, 28 Sep 2021 18:25:04 +0000 (UTC)
+Received: from t480s.redhat.com (unknown [10.39.194.120])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D16BB60854;
+ Tue, 28 Sep 2021 18:24:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,127 +56,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5bd91d34-2089-11ec-bcc4-12813bfff9fa
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Andre.Przywara@arm.com,
+X-Inumbo-ID: 68e8b53e-2089-11ec-bcc4-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1632853508;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nJ4bVTfY2RBZ7dKHJReSBumHsyhYfakPMn9Oqd8JPC0=;
+	b=etqVQ8C2Y8Dqe5zlDHBVyetBME4Hm9bFB3v+8JFC7aq8+e2ViAtogD7w7qbNiaXRBHyM3s
+	96OBiBGVN9l9xmQ/qrq372XN0gv13Y10H5K7CW41ODSqj3wPj9pcQhvhoHQzrX57GIY9mK
+	2qa5462w6tJhf/+r/lcb1evdglxBmUE=
+X-MC-Unique: tfQVnEQpPz2XZ-E6EUT2ZA-1
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Cc: David Hildenbrand <david@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 17/17] xen/arm: Add linux,pci-domain property for hwdom if not available.
-Date: Tue, 28 Sep 2021 19:18:26 +0100
-Message-Id: <f290d8e2f9b3780c5a956a8032aba6f35de83a90.1632847120.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1632847120.git.rahul.singh@arm.com>
-References: <cover.1632847120.git.rahul.singh@arm.com>
-In-Reply-To: <cover.1632847120.git.rahul.singh@arm.com>
-References: <cover.1632847120.git.rahul.singh@arm.com>
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Dave Young <dyoung@redhat.com>,
+	Baoquan He <bhe@redhat.com>,
+	Vivek Goyal <vgoyal@redhat.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Oscar Salvador <osalvador@suse.de>,
+	Mike Rapoport <rppt@kernel.org>,
+	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+	x86@kernel.org,
+	xen-devel@lists.xenproject.org,
+	virtualization@lists.linux-foundation.org,
+	kexec@lists.infradead.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH v1 6/8] virtio-mem: factor out hotplug specifics from virtio_mem_probe() into virtio_mem_init_hotplug()
+Date: Tue, 28 Sep 2021 20:22:56 +0200
+Message-Id: <20210928182258.12451-7-david@redhat.com>
+In-Reply-To: <20210928182258.12451-1-david@redhat.com>
+References: <20210928182258.12451-1-david@redhat.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 
-If the property is not present in the device tree node for host bridge,
-XEN while creating the dtb for hwdom will create this property and
-assigns the already allocated segment to the host bridge
-so that XEN and linux will have the same segment for the host bridges.
+Let's prepare for a new virtio-mem kdump mode in which we don't actually
+hot(un)plug any memory but only observe the state of device blocks.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
-Change in v3:
-- Use is_pci_passthrough_enabled()
-Change in v2:
-- Add linux,pci-domain only when pci-passthrough command line option is enabeld
----
- xen/arch/arm/domain_build.c        | 16 ++++++++++++++++
- xen/arch/arm/pci/pci-host-common.c | 21 +++++++++++++++++++++
- xen/include/asm-arm/pci.h          |  9 +++++++++
- 3 files changed, 46 insertions(+)
+ drivers/virtio/virtio_mem.c | 87 +++++++++++++++++++------------------
+ 1 file changed, 45 insertions(+), 42 deletions(-)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 1731ae2028..026c9e5c6c 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -743,6 +743,22 @@ static int __init write_properties(struct domain *d, struct kernel_info *kinfo,
-             return res;
-     }
+diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+index 2ba7e8d6ba8d..1be3ee7f684d 100644
+--- a/drivers/virtio/virtio_mem.c
++++ b/drivers/virtio/virtio_mem.c
+@@ -260,6 +260,8 @@ static void virtio_mem_fake_offline_going_offline(unsigned long pfn,
+ static void virtio_mem_fake_offline_cancel_offline(unsigned long pfn,
+ 						   unsigned long nr_pages);
+ static void virtio_mem_retry(struct virtio_mem *vm);
++static int virtio_mem_create_resource(struct virtio_mem *vm);
++static void virtio_mem_delete_resource(struct virtio_mem *vm);
  
-+    if ( is_pci_passthrough_enabled() && dt_device_type_is_equal(node, "pci") )
-+    {
-+        if ( !dt_find_property(node, "linux,pci-domain", NULL) )
-+        {
-+            uint16_t segment;
-+
-+            res = pci_get_host_bridge_segment(node, &segment);
-+            if ( res < 0 )
-+                return res;
-+
-+            res = fdt_property_cell(kinfo->fdt, "linux,pci-domain", segment);
-+            if ( res )
-+                return res;
-+        }
-+    }
-+
-     /*
-      * Override the property "status" to disable the device when it's
-      * marked for passthrough.
-diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-index c5941b10e9..593beeb48c 100644
---- a/xen/arch/arm/pci/pci-host-common.c
-+++ b/xen/arch/arm/pci/pci-host-common.c
-@@ -255,6 +255,27 @@ struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus)
- 
-     return NULL;
- }
-+
-+/*
-+ * This function will lookup an hostbridge based on config space address.
-+ */
-+int pci_get_host_bridge_segment(const struct dt_device_node *node,
-+                                uint16_t *segment)
-+{
-+    struct pci_host_bridge *bridge;
-+
-+    list_for_each_entry( bridge, &pci_host_bridges, node )
-+    {
-+        if ( bridge->dt_node != node )
-+            continue;
-+
-+        *segment = bridge->segment;
-+        return 0;
-+    }
-+
-+    return -EINVAL;
-+}
-+
  /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-index 5532ce3977..7cb2e2f1ed 100644
---- a/xen/include/asm-arm/pci.h
-+++ b/xen/include/asm-arm/pci.h
-@@ -90,6 +90,8 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
- void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
-                                pci_sbdf_t sbdf, uint32_t where);
- struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
-+int pci_get_host_bridge_segment(const struct dt_device_node *node,
-+                                uint16_t *segment);
- 
- static always_inline bool is_pci_passthrough_enabled(void)
+  * Register a virtio-mem device so it will be considered for the online_page
+@@ -2395,7 +2397,8 @@ static int virtio_mem_init_vq(struct virtio_mem *vm)
+ static int virtio_mem_init_hotplug(struct virtio_mem *vm)
  {
-@@ -104,5 +106,12 @@ static always_inline bool is_pci_passthrough_enabled(void)
-     return false;
+ 	const struct range pluggable_range = mhp_get_pluggable_range(true);
+-	uint64_t sb_size, addr;
++	uint64_t unit_pages, sb_size, addr;
++	int rc;
+ 
+ 	/* bad device setup - warn only */
+ 	if (!IS_ALIGNED(vm->addr, memory_block_size_bytes()))
+@@ -2474,7 +2477,48 @@ static int virtio_mem_init_hotplug(struct virtio_mem *vm)
+ 		dev_info(&vm->vdev->dev, "big block size: 0x%llx",
+ 			 (unsigned long long)vm->bbm.bb_size);
+ 
++	/* create the parent resource for all memory */
++	rc = virtio_mem_create_resource(vm);
++	if (rc)
++		return rc;
++
++	/* use a single dynamic memory group to cover the whole memory device */
++	if (vm->in_sbm)
++		unit_pages = PHYS_PFN(memory_block_size_bytes());
++	else
++		unit_pages = PHYS_PFN(vm->bbm.bb_size);
++	rc = memory_group_register_dynamic(vm->nid, unit_pages);
++	if (rc < 0)
++		goto out_del_resource;
++	vm->mgid = rc;
++
++	/*
++	 * If we still have memory plugged, we have to unplug all memory first.
++	 * Registering our parent resource makes sure that this memory isn't
++	 * actually in use (e.g., trying to reload the driver).
++	 */
++	if (vm->plugged_size) {
++		vm->unplug_all_required = true;
++		dev_info(&vm->vdev->dev, "unplugging all memory is required\n");
++	}
++
++	/* register callbacks */
++	vm->memory_notifier.notifier_call = virtio_mem_memory_notifier_cb;
++	rc = register_memory_notifier(&vm->memory_notifier);
++	if (rc)
++		goto out_unreg_group;
++	rc = register_virtio_mem_device(vm);
++	if (rc)
++		goto out_unreg_mem;
++
+ 	return 0;
++out_unreg_mem:
++	unregister_memory_notifier(&vm->memory_notifier);
++out_unreg_group:
++	memory_group_unregister(vm->mgid);
++out_del_resource:
++	virtio_mem_delete_resource(vm);
++	return rc;
  }
  
-+static inline int pci_get_host_bridge_segment(const struct dt_device_node *node,
-+                                              uint16_t *segment)
-+{
-+    ASSERT_UNREACHABLE();
-+    return -EINVAL;
-+}
-+
- #endif  /*!CONFIG_HAS_PCI*/
- #endif /* __ARM_PCI_H__ */
+ static int virtio_mem_init(struct virtio_mem *vm)
+@@ -2578,7 +2622,6 @@ static bool virtio_mem_has_memory_added(struct virtio_mem *vm)
+ static int virtio_mem_probe(struct virtio_device *vdev)
+ {
+ 	struct virtio_mem *vm;
+-	uint64_t unit_pages;
+ 	int rc;
+ 
+ 	BUILD_BUG_ON(sizeof(struct virtio_mem_req) != 24);
+@@ -2608,40 +2651,6 @@ static int virtio_mem_probe(struct virtio_device *vdev)
+ 	if (rc)
+ 		goto out_del_vq;
+ 
+-	/* create the parent resource for all memory */
+-	rc = virtio_mem_create_resource(vm);
+-	if (rc)
+-		goto out_del_vq;
+-
+-	/* use a single dynamic memory group to cover the whole memory device */
+-	if (vm->in_sbm)
+-		unit_pages = PHYS_PFN(memory_block_size_bytes());
+-	else
+-		unit_pages = PHYS_PFN(vm->bbm.bb_size);
+-	rc = memory_group_register_dynamic(vm->nid, unit_pages);
+-	if (rc < 0)
+-		goto out_del_resource;
+-	vm->mgid = rc;
+-
+-	/*
+-	 * If we still have memory plugged, we have to unplug all memory first.
+-	 * Registering our parent resource makes sure that this memory isn't
+-	 * actually in use (e.g., trying to reload the driver).
+-	 */
+-	if (vm->plugged_size) {
+-		vm->unplug_all_required = true;
+-		dev_info(&vm->vdev->dev, "unplugging all memory is required\n");
+-	}
+-
+-	/* register callbacks */
+-	vm->memory_notifier.notifier_call = virtio_mem_memory_notifier_cb;
+-	rc = register_memory_notifier(&vm->memory_notifier);
+-	if (rc)
+-		goto out_unreg_group;
+-	rc = register_virtio_mem_device(vm);
+-	if (rc)
+-		goto out_unreg_mem;
+-
+ 	virtio_device_ready(vdev);
+ 
+ 	/* trigger a config update to start processing the requested_size */
+@@ -2649,12 +2658,6 @@ static int virtio_mem_probe(struct virtio_device *vdev)
+ 	queue_work(system_freezable_wq, &vm->wq);
+ 
+ 	return 0;
+-out_unreg_mem:
+-	unregister_memory_notifier(&vm->memory_notifier);
+-out_unreg_group:
+-	memory_group_unregister(vm->mgid);
+-out_del_resource:
+-	virtio_mem_delete_resource(vm);
+ out_del_vq:
+ 	vdev->config->del_vqs(vdev);
+ out_free_vm:
 -- 
-2.17.1
+2.31.1
 
 
