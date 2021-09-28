@@ -2,48 +2,48 @@ Return-Path: <SRS0=aFvL=OS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A3373C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44D7DC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:27:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5BFB361381
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:26:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5BFB361381
+	by mail.kernel.org (Postfix) with ESMTPS id E12B8613A6
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:27:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E12B8613A6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.198348.351806 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.198358.351817 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHnz-0003HE-Bc; Tue, 28 Sep 2021 18:26:15 +0000
+	id 1mVHpE-00040M-Mo; Tue, 28 Sep 2021 18:27:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 198348.351806; Tue, 28 Sep 2021 18:26:15 +0000
+Received: by outflank-mailman (output) from mailman id 198358.351817; Tue, 28 Sep 2021 18:27:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHnz-0003H7-8C; Tue, 28 Sep 2021 18:26:15 +0000
-Received: by outflank-mailman (input) for mailman id 198348;
- Tue, 28 Sep 2021 18:26:13 +0000
+	id 1mVHpE-00040F-JT; Tue, 28 Sep 2021 18:27:32 +0000
+Received: by outflank-mailman (input) for mailman id 198358;
+ Tue, 28 Sep 2021 18:27:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jiAA=OS=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1mVHnx-0003Ga-8U
- for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:26:13 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
+ id 1mVHmc-0007ni-MI
+ for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:24:50 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id f078858f-39f8-4a43-a981-d574e6b88e2a;
- Tue, 28 Sep 2021 18:26:11 +0000 (UTC)
+ id 1c185ed4-4f73-4c6c-bb5b-2b88a20728ba;
+ Tue, 28 Sep 2021 18:24:10 +0000 (UTC)
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-18-4ipKgBKjNMS9GXMmOtGfLA-1; Tue, 28 Sep 2021 14:26:09 -0400
+ us-mta-449-rpm4hXWDPGGhvyyl4qPVLg-1; Tue, 28 Sep 2021 14:24:08 -0400
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 690D3A40C1;
- Tue, 28 Sep 2021 18:26:07 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F05E41B2C980;
+ Tue, 28 Sep 2021 18:24:05 +0000 (UTC)
 Received: from t480s.redhat.com (unknown [10.39.194.120])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 893F260854;
- Tue, 28 Sep 2021 18:25:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6147C60854;
+ Tue, 28 Sep 2021 18:23:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,18 +55,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f078858f-39f8-4a43-a981-d574e6b88e2a
+X-Inumbo-ID: 1c185ed4-4f73-4c6c-bb5b-2b88a20728ba
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1632853571;
+	s=mimecast20190719; t=1632853449;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=uzlLhr7xjIoW1XJLU3ED3fLv2V7GEnOWprvFn/XGCFI=;
-	b=f/2+TviPXKP4Dumks4c2kr57KjcyuUDkfA8hljxIS8xn26gmGpFxiHDM3n8bQ5EfjxqQDf
-	QFOR2ygalqXi77BcgVd5jk+5KYApuTEvCLfb1so1gGuNojAPOVnUAxNPj+MO8dZ+ydfJxS
-	DA+o3iqTxjxJyIF1mm3xIYeGN8rzbVo=
-X-MC-Unique: 4ipKgBKjNMS9GXMmOtGfLA-1
+	bh=YxVxDaMF8Dvr5dJnhnKtXBDkasxDLaxdtEfkC3HanCE=;
+	b=fMzU62lrwd+Yy9xtxXsot4PJFkC5SzASmXH8wLg35TY8j9GvgYOC/v/IhuwUsVIKi/1t95
+	oY54T9sno+VXRkBACZcnW0+wFM4GeQ4Z9yqlxMZGRYRQjP4Fd1bH4l1Z+zUSQNzljDYHnW
+	U7za+EJ2Qve+lppsIFlqoDCR0W/ANNk=
+X-MC-Unique: rpm4hXWDPGGhvyyl4qPVLg-1
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
 Cc: David Hildenbrand <david@redhat.com>,
@@ -93,280 +93,321 @@ Cc: David Hildenbrand <david@redhat.com>,
 	kexec@lists.infradead.org,
 	linux-fsdevel@vger.kernel.org,
 	linux-mm@kvack.org
-Subject: [PATCH v1 8/8] virtio-mem: kdump mode to sanitize /proc/vmcore access
-Date: Tue, 28 Sep 2021 20:22:58 +0200
-Message-Id: <20210928182258.12451-9-david@redhat.com>
+Subject: [PATCH v1 4/8] proc/vmcore: convert oldmem_pfn_is_ram callback to more generic vmcore callbacks
+Date: Tue, 28 Sep 2021 20:22:54 +0200
+Message-Id: <20210928182258.12451-5-david@redhat.com>
 In-Reply-To: <20210928182258.12451-1-david@redhat.com>
 References: <20210928182258.12451-1-david@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 
-Although virtio-mem currently supports reading unplugged memory in the
-hypervisor, this will change in the future, indicated to the device via
-a new feature flag. We similarly sanitized /proc/kcore access recently. [1]
+Let's support multiple registered callbacks, making sure that
+registering vmcore callbacks cannot fail. Make the callback return a
+bool instead of an int, handling how to deal with errors internally.
+Drop unused HAVE_OLDMEM_PFN_IS_RAM.
 
-Let's register a vmcore callback, to allow vmcore code to check if a PFN
-belonging to a virtio-mem device is either currently plugged and should
-be dumped or is currently unplugged and should not be accessed, instead
-mapping the shared zeropage or returning zeroes when reading.
+We soon want to make use of this infrastructure from other drivers:
+virtio-mem, registering one callback for each virtio-mem device, to
+prevent reading unplugged virtio-mem memory.
 
-This is important when not capturing /proc/vmcore via tools like
-"makedumpfile" that can identify logically unplugged virtio-mem memory via
-PG_offline in the memmap, but simply by e.g., copying the file.
+Handle it via a generic vmcore_cb structure, prepared for future
+extensions: for example, once we support virtio-mem on s390x where the
+vmcore is completely constructed in the second kernel, we want to detect
+and add plugged virtio-mem memory ranges to the vmcore in order for them
+to get dumped properly.
 
-Distributions that support virtio-mem+kdump have to make sure that the
-virtio_mem module will be part of the kdump kernel or the kdump initrd;
-dracut was recently [2] extended to include virtio-mem in the generated
-initrd. As long as no special kdump kernels are used, this will
-automatically make sure that virtio-mem will be around in the kdump initrd
-and sanitize /proc/vmcore access -- with dracut.
-
-With this series, we'll send one virtio-mem state request for every
-~2 MiB chunk of virtio-mem memory indicated in the vmcore that we intend
-to read/map.
-
-In the future, we might want to allow building virtio-mem for kdump
-mode only, even without CONFIG_MEMORY_HOTPLUG and friends: this way,
-we could support special stripped-down kdump kernels that have many
-other config options disabled; we'll tackle that once required. Further,
-we might want to try sensing bigger blocks (e.g., memory sections)
-first before falling back to device blocks on demand.
-
-Tested with Fedora rawhide, which contains a recent kexec-tools version
-(considering "System RAM (virtio_mem)" when creating the vmcore header) and
-a recent dracut version (including the virtio_mem module in the kdump
-initrd).
-
-[1] https://lkml.kernel.org/r/20210526093041.8800-1-david@redhat.com
-[2] https://github.com/dracutdevs/dracut/pull/1157
+Handle corner cases that are unexpected and shouldn't happen in sane
+setups: registering a callback after the vmcore has already been opened
+(warn only) and unregistering a callback after the vmcore has already been
+opened (warn and essentially read only zeroes from that point on).
 
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 136 ++++++++++++++++++++++++++++++++----
- 1 file changed, 124 insertions(+), 12 deletions(-)
+ arch/x86/kernel/aperture_64.c | 13 ++++-
+ arch/x86/xen/mmu_hvm.c        | 15 +++---
+ fs/proc/vmcore.c              | 99 ++++++++++++++++++++++++-----------
+ include/linux/crash_dump.h    | 26 +++++++--
+ 4 files changed, 113 insertions(+), 40 deletions(-)
 
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 76d8aef3cfd2..ec0b2ab37acb 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -223,6 +223,9 @@ struct virtio_mem {
- 	 * When this lock is held the pointers can't change, ONLINE and
- 	 * OFFLINE blocks can't change the state and no subblocks will get
- 	 * plugged/unplugged.
-+	 *
-+	 * In kdump mode, used to serialize requests, last_block_addr and
-+	 * last_block_plugged.
- 	 */
- 	struct mutex hotplug_mutex;
- 	bool hotplug_active;
-@@ -230,6 +233,9 @@ struct virtio_mem {
- 	/* An error occurred we cannot handle - stop processing requests. */
- 	bool broken;
- 
-+	/* Cached valued of is_kdump_kernel() when the device was probed. */
-+	bool in_kdump;
-+
- 	/* The driver is being removed. */
- 	spinlock_t removal_lock;
- 	bool removing;
-@@ -243,6 +249,13 @@ struct virtio_mem {
- 	/* Memory notifier (online/offline events). */
- 	struct notifier_block memory_notifier;
- 
-+#ifdef CONFIG_PROC_VMCORE
-+	/* vmcore callback for /proc/vmcore handling in kdump mode */
-+	struct vmcore_cb vmcore_cb;
-+	uint64_t last_block_addr;
-+	bool last_block_plugged;
-+#endif /* CONFIG_PROC_VMCORE */
-+
- 	/* Next device in the list of virtio-mem devices. */
- 	struct list_head next;
- };
-@@ -2293,6 +2306,12 @@ static void virtio_mem_run_wq(struct work_struct *work)
- 	uint64_t diff;
- 	int rc;
- 
-+	if (unlikely(vm->in_kdump)) {
-+		dev_warn_once(&vm->vdev->dev,
-+			     "unexpected workqueue run in kdump kernel\n");
-+		return;
-+	}
-+
- 	hrtimer_cancel(&vm->retry_timer);
- 
- 	if (vm->broken)
-@@ -2521,6 +2540,86 @@ static int virtio_mem_init_hotplug(struct virtio_mem *vm)
- 	return rc;
+diff --git a/arch/x86/kernel/aperture_64.c b/arch/x86/kernel/aperture_64.c
+index 10562885f5fc..af3ba08b684b 100644
+--- a/arch/x86/kernel/aperture_64.c
++++ b/arch/x86/kernel/aperture_64.c
+@@ -73,12 +73,23 @@ static int gart_mem_pfn_is_ram(unsigned long pfn)
+ 		      (pfn >= aperture_pfn_start + aperture_page_count));
  }
  
 +#ifdef CONFIG_PROC_VMCORE
-+static int virtio_mem_send_state_request(struct virtio_mem *vm, uint64_t addr,
-+					 uint64_t size)
++static bool gart_oldmem_pfn_is_ram(struct vmcore_cb *cb, unsigned long pfn)
 +{
-+	const uint64_t nb_vm_blocks = size / vm->device_block_size;
-+	const struct virtio_mem_req req = {
-+		.type = cpu_to_virtio16(vm->vdev, VIRTIO_MEM_REQ_STATE),
-+		.u.state.addr = cpu_to_virtio64(vm->vdev, addr),
-+		.u.state.nb_blocks = cpu_to_virtio16(vm->vdev, nb_vm_blocks),
-+	};
-+	int rc = -ENOMEM;
-+
-+	dev_dbg(&vm->vdev->dev, "requesting state: 0x%llx - 0x%llx\n", addr,
-+		addr + size - 1);
-+
-+	switch (virtio_mem_send_request(vm, &req)) {
-+	case VIRTIO_MEM_RESP_ACK:
-+		return virtio16_to_cpu(vm->vdev, vm->resp.u.state.state);
-+	case VIRTIO_MEM_RESP_ERROR:
-+		rc = -EINVAL;
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	dev_dbg(&vm->vdev->dev, "requesting state failed: %d\n", rc);
-+	return rc;
++	return !!gart_mem_pfn_is_ram(pfn);
 +}
 +
-+static bool virtio_mem_vmcore_pfn_is_ram(struct vmcore_cb *cb,
-+					 unsigned long pfn)
-+{
-+	struct virtio_mem *vm = container_of(cb, struct virtio_mem,
-+					     vmcore_cb);
-+	uint64_t addr = PFN_PHYS(pfn);
-+	bool is_ram;
-+	int rc;
++static struct vmcore_cb gart_vmcore_cb = {
++	.pfn_is_ram = gart_oldmem_pfn_is_ram,
++};
++#endif
 +
-+	if (!virtio_mem_contains_range(vm, addr, addr + PAGE_SIZE))
-+		return true;
-+	if (!vm->plugged_size)
-+		return false;
-+
-+	/*
-+	 * We have to serialize device requests and access to the information
-+	 * about the block queried last.
-+	 */
-+	mutex_lock(&vm->hotplug_mutex);
-+
-+	addr = ALIGN_DOWN(addr, vm->device_block_size);
-+	if (addr != vm->last_block_addr) {
-+		rc = virtio_mem_send_state_request(vm, addr,
-+						   vm->device_block_size);
-+		/* On any kind of error, we're going to signal !ram. */
-+		if (rc == VIRTIO_MEM_STATE_PLUGGED)
-+			vm->last_block_plugged = true;
-+		else
-+			vm->last_block_plugged = false;
-+		vm->last_block_addr = addr;
-+	}
-+
-+	is_ram = vm->last_block_plugged;
-+	mutex_unlock(&vm->hotplug_mutex);
-+	return is_ram;
-+}
-+#endif /* CONFIG_PROC_VMCORE */
-+
-+static int virtio_mem_init_kdump(struct virtio_mem *vm)
-+{
-+#ifdef CONFIG_PROC_VMCORE
-+	dev_info(&vm->vdev->dev, "memory hot(un)plug disabled in kdump kernel\n");
-+	vm->vmcore_cb.pfn_is_ram = virtio_mem_vmcore_pfn_is_ram;
-+	register_vmcore_cb(&vm->vmcore_cb);
-+	return 0;
-+#else /* CONFIG_PROC_VMCORE */
-+	dev_warn(&vm->vdev->dev, "disabled in kdump kernel without vmcore\n");
-+	return -EBUSY;
-+#endif /* CONFIG_PROC_VMCORE */
-+}
-+
- static int virtio_mem_init(struct virtio_mem *vm)
+ static void __init exclude_from_core(u64 aper_base, u32 aper_order)
  {
- 	uint16_t node_id;
-@@ -2530,15 +2629,6 @@ static int virtio_mem_init(struct virtio_mem *vm)
- 		return -EINVAL;
+ 	aperture_pfn_start = aper_base >> PAGE_SHIFT;
+ 	aperture_page_count = (32 * 1024 * 1024) << aper_order >> PAGE_SHIFT;
+ #ifdef CONFIG_PROC_VMCORE
+-	WARN_ON(register_oldmem_pfn_is_ram(&gart_mem_pfn_is_ram));
++	register_vmcore_cb(&gart_vmcore_cb);
+ #endif
+ #ifdef CONFIG_PROC_KCORE
+ 	WARN_ON(register_mem_pfn_is_ram(&gart_mem_pfn_is_ram));
+diff --git a/arch/x86/xen/mmu_hvm.c b/arch/x86/xen/mmu_hvm.c
+index eb61622df75b..49bd4a6a5858 100644
+--- a/arch/x86/xen/mmu_hvm.c
++++ b/arch/x86/xen/mmu_hvm.c
+@@ -12,10 +12,10 @@
+  * The kdump kernel has to check whether a pfn of the crashed kernel
+  * was a ballooned page. vmcore is using this function to decide
+  * whether to access a pfn of the crashed kernel.
+- * Returns 0 if the pfn is not backed by a RAM page, the caller may
++ * Returns "false" if the pfn is not backed by a RAM page, the caller may
+  * handle the pfn special in this case.
+  */
+-static int xen_oldmem_pfn_is_ram(unsigned long pfn)
++static bool xen_vmcore_pfn_is_ram(struct vmcore_cb *cb, unsigned long pfn)
+ {
+ 	struct xen_hvm_get_mem_type a = {
+ 		.domid = DOMID_SELF,
+@@ -23,15 +23,18 @@ static int xen_oldmem_pfn_is_ram(unsigned long pfn)
+ 	};
+ 
+ 	if (HYPERVISOR_hvm_op(HVMOP_get_mem_type, &a))
+-		return -ENXIO;
++		return true;
+ 
+ 	switch (a.mem_type) {
+ 	case HVMMEM_mmio_dm:
+-		return 0;
++		return false;
+ 	default:
+-		return 1;
++		return true;
  	}
+ }
++static struct vmcore_cb xen_vmcore_cb = {
++	.pfn_is_ram = xen_vmcore_pfn_is_ram,
++};
+ #endif
+ 
+ static void xen_hvm_exit_mmap(struct mm_struct *mm)
+@@ -65,6 +68,6 @@ void __init xen_hvm_init_mmu_ops(void)
+ 	if (is_pagetable_dying_supported())
+ 		pv_ops.mmu.exit_mmap = xen_hvm_exit_mmap;
+ #ifdef CONFIG_PROC_VMCORE
+-	WARN_ON(register_oldmem_pfn_is_ram(&xen_oldmem_pfn_is_ram));
++	register_vmcore_cb(&xen_vmcore_cb);
+ #endif
+ }
+diff --git a/fs/proc/vmcore.c b/fs/proc/vmcore.c
+index a9bd80ab670e..7a04b2eca287 100644
+--- a/fs/proc/vmcore.c
++++ b/fs/proc/vmcore.c
+@@ -62,46 +62,75 @@ core_param(novmcoredd, vmcoredd_disabled, bool, 0);
+ /* Device Dump Size */
+ static size_t vmcoredd_orig_sz;
+ 
+-/*
+- * Returns > 0 for RAM pages, 0 for non-RAM pages, < 0 on error
+- * The called function has to take care of module refcounting.
+- */
+-static int (*oldmem_pfn_is_ram)(unsigned long pfn);
+-
+-int register_oldmem_pfn_is_ram(int (*fn)(unsigned long pfn))
++static DECLARE_RWSEM(vmcore_cb_rwsem);
++/* List of registered vmcore callbacks. */
++static LIST_HEAD(vmcore_cb_list);
++/* Whether we had a surprise unregistration of a callback. */
++static bool vmcore_cb_unstable;
++/* Whether the vmcore has been opened once. */
++static bool vmcore_opened;
++
++void register_vmcore_cb(struct vmcore_cb *cb)
+ {
+-	if (oldmem_pfn_is_ram)
+-		return -EBUSY;
+-	oldmem_pfn_is_ram = fn;
+-	return 0;
++	down_write(&vmcore_cb_rwsem);
++	INIT_LIST_HEAD(&cb->next);
++	list_add_tail(&cb->next, &vmcore_cb_list);
++	/*
++	 * Registering a vmcore callback after the vmcore was opened is
++	 * very unusual (e.g., manual driver loading).
++	 */
++	if (vmcore_opened)
++		pr_warn_once("Unexpected vmcore callback registration\n");
++	up_write(&vmcore_cb_rwsem);
+ }
+-EXPORT_SYMBOL_GPL(register_oldmem_pfn_is_ram);
++EXPORT_SYMBOL_GPL(register_vmcore_cb);
+ 
+-void unregister_oldmem_pfn_is_ram(void)
++void unregister_vmcore_cb(struct vmcore_cb *cb)
+ {
+-	oldmem_pfn_is_ram = NULL;
+-	wmb();
++	down_write(&vmcore_cb_rwsem);
++	list_del(&cb->next);
++	/*
++	 * Unregistering a vmcore callback after the vmcore was opened is
++	 * very unusual (e.g., forced driver removal), but we cannot stop
++	 * unregistering.
++	 */
++	if (vmcore_opened) {
++		pr_warn_once("Unexpected vmcore callback unregistration\n");
++		vmcore_cb_unstable = true;
++	}
++	up_write(&vmcore_cb_rwsem);
+ }
+-EXPORT_SYMBOL_GPL(unregister_oldmem_pfn_is_ram);
++EXPORT_SYMBOL_GPL(unregister_vmcore_cb);
+ 
+ static bool pfn_is_ram(unsigned long pfn)
+ {
+-	int (*fn)(unsigned long pfn);
+-	/* pfn is ram unless fn() checks pagetype */
++	struct vmcore_cb *cb;
+ 	bool ret = true;
  
 -	/*
--	 * We don't want to (un)plug or reuse any memory when in kdump. The
--	 * memory is still accessible (but not mapped).
+-	 * Ask hypervisor if the pfn is really ram.
+-	 * A ballooned page contains no data and reading from such a page
+-	 * will cause high load in the hypervisor.
 -	 */
--	if (is_kdump_kernel()) {
--		dev_warn(&vm->vdev->dev, "disabled in kdump kernel\n");
--		return -EBUSY;
--	}
--
- 	/* Fetch all properties that can't change. */
- 	virtio_cread_le(vm->vdev, struct virtio_mem_config, plugged_size,
- 			&vm->plugged_size);
-@@ -2562,6 +2652,12 @@ static int virtio_mem_init(struct virtio_mem *vm)
- 	if (vm->nid != NUMA_NO_NODE && IS_ENABLED(CONFIG_NUMA))
- 		dev_info(&vm->vdev->dev, "nid: %d", vm->nid);
- 
-+	/*
-+	 * We don't want to (un)plug or reuse any memory when in kdump. The
-+	 * memory is still accessible (but not exposed to Linux).
-+	 */
-+	if (vm->in_kdump)
-+		return virtio_mem_init_kdump(vm);
- 	return virtio_mem_init_hotplug(vm);
- }
- 
-@@ -2640,6 +2736,7 @@ static int virtio_mem_probe(struct virtio_device *vdev)
- 	hrtimer_init(&vm->retry_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
- 	vm->retry_timer.function = virtio_mem_timer_expired;
- 	vm->retry_timer_ms = VIRTIO_MEM_RETRY_TIMER_MIN_MS;
-+	vm->in_kdump = is_kdump_kernel();
- 
- 	/* register the virtqueue */
- 	rc = virtio_mem_init_vq(vm);
-@@ -2654,8 +2751,10 @@ static int virtio_mem_probe(struct virtio_device *vdev)
- 	virtio_device_ready(vdev);
- 
- 	/* trigger a config update to start processing the requested_size */
--	atomic_set(&vm->config_changed, 1);
--	queue_work(system_freezable_wq, &vm->wq);
-+	if (!vm->in_kdump) {
-+		atomic_set(&vm->config_changed, 1);
-+		queue_work(system_freezable_wq, &vm->wq);
+-	fn = oldmem_pfn_is_ram;
+-	if (fn)
+-		ret = !!fn(pfn);
++	lockdep_assert_held_read(&vmcore_cb_rwsem);
++	if (unlikely(vmcore_cb_unstable))
++		return false;
++
++	list_for_each_entry(cb, &vmcore_cb_list, next) {
++		if (unlikely(!cb->pfn_is_ram))
++			continue;
++		ret = cb->pfn_is_ram(cb, pfn);
++		if (!ret)
++			break;
 +	}
  
- 	return 0;
- out_del_vq:
-@@ -2732,11 +2831,21 @@ static void virtio_mem_deinit_hotplug(struct virtio_mem *vm)
- 	}
+ 	return ret;
  }
  
-+static void virtio_mem_deinit_kdump(struct virtio_mem *vm)
++static int open_vmcore(struct inode *inode, struct file *file)
 +{
-+#ifdef CONFIG_PROC_VMCORE
-+	unregister_vmcore_cb(&vm->vmcore_cb);
-+#endif /* CONFIG_PROC_VMCORE */
++	down_read(&vmcore_cb_rwsem);
++	vmcore_opened = true;
++	up_read(&vmcore_cb_rwsem);
++
++	return 0;
 +}
 +
- static void virtio_mem_remove(struct virtio_device *vdev)
- {
- 	struct virtio_mem *vm = vdev->priv;
+ /* Reads a page from the oldmem device from given offset. */
+ ssize_t read_from_oldmem(char *buf, size_t count,
+ 			 u64 *ppos, int userbuf,
+@@ -117,6 +146,7 @@ ssize_t read_from_oldmem(char *buf, size_t count,
+ 	offset = (unsigned long)(*ppos % PAGE_SIZE);
+ 	pfn = (unsigned long)(*ppos / PAGE_SIZE);
  
--	virtio_mem_deinit_hotplug(vm);
-+	if (vm->in_kdump)
-+		virtio_mem_deinit_kdump(vm);
-+	else
-+		virtio_mem_deinit_hotplug(vm);
++	down_read(&vmcore_cb_rwsem);
+ 	do {
+ 		if (count > (PAGE_SIZE - offset))
+ 			nr_bytes = PAGE_SIZE - offset;
+@@ -136,8 +166,10 @@ ssize_t read_from_oldmem(char *buf, size_t count,
+ 				tmp = copy_oldmem_page(pfn, buf, nr_bytes,
+ 						       offset, userbuf);
  
- 	/* reset the device and cleanup the queues */
- 	vdev->config->reset(vdev);
-@@ -2750,6 +2859,9 @@ static void virtio_mem_config_changed(struct virtio_device *vdev)
- {
- 	struct virtio_mem *vm = vdev->priv;
+-			if (tmp < 0)
++			if (tmp < 0) {
++				up_read(&vmcore_cb_rwsem);
+ 				return tmp;
++			}
+ 		}
+ 		*ppos += nr_bytes;
+ 		count -= nr_bytes;
+@@ -147,6 +179,7 @@ ssize_t read_from_oldmem(char *buf, size_t count,
+ 		offset = 0;
+ 	} while (count);
  
-+	if (unlikely(vm->in_kdump))
-+		return;
-+
- 	atomic_set(&vm->config_changed, 1);
- 	virtio_mem_retry(vm);
++	up_read(&vmcore_cb_rwsem);
+ 	return read;
  }
+ 
+@@ -537,14 +570,19 @@ static int vmcore_remap_oldmem_pfn(struct vm_area_struct *vma,
+ 			    unsigned long from, unsigned long pfn,
+ 			    unsigned long size, pgprot_t prot)
+ {
++	int ret;
++
+ 	/*
+ 	 * Check if oldmem_pfn_is_ram was registered to avoid
+ 	 * looping over all pages without a reason.
+ 	 */
+-	if (oldmem_pfn_is_ram)
+-		return remap_oldmem_pfn_checked(vma, from, pfn, size, prot);
++	down_read(&vmcore_cb_rwsem);
++	if (!list_empty(&vmcore_cb_list) || vmcore_cb_unstable)
++		ret = remap_oldmem_pfn_checked(vma, from, pfn, size, prot);
+ 	else
+-		return remap_oldmem_pfn_range(vma, from, pfn, size, prot);
++		ret = remap_oldmem_pfn_range(vma, from, pfn, size, prot);
++	up_read(&vmcore_cb_rwsem);
++	return ret;
+ }
+ 
+ static int mmap_vmcore(struct file *file, struct vm_area_struct *vma)
+@@ -668,6 +706,7 @@ static int mmap_vmcore(struct file *file, struct vm_area_struct *vma)
+ #endif
+ 
+ static const struct proc_ops vmcore_proc_ops = {
++	.proc_open	= open_vmcore,
+ 	.proc_read	= read_vmcore,
+ 	.proc_lseek	= default_llseek,
+ 	.proc_mmap	= mmap_vmcore,
+diff --git a/include/linux/crash_dump.h b/include/linux/crash_dump.h
+index 2618577a4d6d..0c547d866f1e 100644
+--- a/include/linux/crash_dump.h
++++ b/include/linux/crash_dump.h
+@@ -91,9 +91,29 @@ static inline void vmcore_unusable(void)
+ 		elfcorehdr_addr = ELFCORE_ADDR_ERR;
+ }
+ 
+-#define HAVE_OLDMEM_PFN_IS_RAM 1
+-extern int register_oldmem_pfn_is_ram(int (*fn)(unsigned long pfn));
+-extern void unregister_oldmem_pfn_is_ram(void);
++/**
++ * struct vmcore_cb - driver callbacks for /proc/vmcore handling
++ * @pfn_is_ram: check whether a PFN really is RAM and should be accessed when
++ *              reading the vmcore. Will return "true" if it is RAM or if the
++ *              callback cannot tell. If any callback returns "false", it's not
++ *              RAM and the page must not be accessed; zeroes should be
++ *              indicated in the vmcore instead. For example, a ballooned page
++ *              contains no data and reading from such a page will cause high
++ *              load in the hypervisor.
++ * @next: List head to manage registered callbacks internally; initialized by
++ *        register_vmcore_cb().
++ *
++ * vmcore callbacks allow drivers managing physical memory ranges to
++ * coordinate with vmcore handling code, for example, to prevent accessing
++ * physical memory ranges that should not be accessed when reading the vmcore,
++ * although included in the vmcore header as memory ranges to dump.
++ */
++struct vmcore_cb {
++	bool (*pfn_is_ram)(struct vmcore_cb *cb, unsigned long pfn);
++	struct list_head next;
++};
++extern void register_vmcore_cb(struct vmcore_cb *cb);
++extern void unregister_vmcore_cb(struct vmcore_cb *cb);
+ 
+ #else /* !CONFIG_CRASH_DUMP */
+ static inline bool is_kdump_kernel(void) { return 0; }
 -- 
 2.31.1
 
