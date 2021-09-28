@@ -2,49 +2,43 @@ Return-Path: <SRS0=aFvL=OS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 38775C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1A55C433FE
 	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:24:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0AA3B61371
+	by mail.kernel.org (Postfix) with ESMTPS id A457061361
 	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:24:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0AA3B61371
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A457061361
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.198311.351751 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.198312.351762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHlo-00083b-MO; Tue, 28 Sep 2021 18:24:00 +0000
+	id 1mVHlp-0008Nu-Uy; Tue, 28 Sep 2021 18:24:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 198311.351751; Tue, 28 Sep 2021 18:24:00 +0000
+Received: by outflank-mailman (output) from mailman id 198312.351762; Tue, 28 Sep 2021 18:24:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHlo-00083U-IS; Tue, 28 Sep 2021 18:24:00 +0000
-Received: by outflank-mailman (input) for mailman id 198311;
- Tue, 28 Sep 2021 18:23:59 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jiAA=OS=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1mVHlm-0007E1-Ul
- for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:23:58 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 3c09fb0f-2089-11ec-bcc4-12813bfff9fa;
- Tue, 28 Sep 2021 18:23:53 +0000 (UTC)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-441-77qRMUygOxyTob3UgChZqw-1; Tue, 28 Sep 2021 14:23:52 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F21C1A40C2;
- Tue, 28 Sep 2021 18:23:49 +0000 (UTC)
-Received: from t480s.redhat.com (unknown [10.39.194.120])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3200E60854;
- Tue, 28 Sep 2021 18:23:41 +0000 (UTC)
+	id 1mVHlp-0008Nm-Qo; Tue, 28 Sep 2021 18:24:01 +0000
+Received: by outflank-mailman (input) for mailman id 198312;
+ Tue, 28 Sep 2021 18:24:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=4iZ8=OS=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
+ id 1mVHlo-0007ni-KZ
+ for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:24:00 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 60b7dc57-d8fb-42d8-aaa2-b15f0d1259c7;
+ Tue, 28 Sep 2021 18:23:56 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 725F86D;
+ Tue, 28 Sep 2021 11:23:56 -0700 (PDT)
+Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
+ [10.1.199.1])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 57A203F793;
+ Tue, 28 Sep 2021 11:23:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,99 +50,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c09fb0f-2089-11ec-bcc4-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1632853433;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=rRKr51/8zMLS50oc29PqKZsNRavWkybmtHfcIniBEhA=;
-	b=bm0FYZtUD4yWki63YmFUxIAN8X3u/zoe3j9b6zhFlBmZP86nQaS4e2xEPzt3bna2UzDjJE
-	Pi0tfURFhQr42liWzPfH0EBrhnGuD7yuUO029QhquD6zeAUMsJILhJT+KzJw9Mg7aOLZRM
-	s5Tr6jRi8bmquPutYekjrJH7dVsEKTA=
-X-MC-Unique: 77qRMUygOxyTob3UgChZqw-1
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Cc: David Hildenbrand <david@redhat.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
+X-Inumbo-ID: 60b7dc57-d8fb-42d8-aaa2-b15f0d1259c7
+From: Rahul Singh <rahul.singh@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	rahul.singh@arm.com,
+	Andre.Przywara@arm.com,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Jason Wang <jasowang@redhat.com>,
-	Dave Young <dyoung@redhat.com>,
-	Baoquan He <bhe@redhat.com>,
-	Vivek Goyal <vgoyal@redhat.com>,
-	Michal Hocko <mhocko@suse.com>,
-	Oscar Salvador <osalvador@suse.de>,
-	Mike Rapoport <rppt@kernel.org>,
-	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org,
-	virtualization@lists.linux-foundation.org,
-	kexec@lists.infradead.org,
-	linux-fsdevel@vger.kernel.org,
-	linux-mm@kvack.org
-Subject: [PATCH v1 3/8] proc/vmcore: let pfn_is_ram() return a bool
-Date: Tue, 28 Sep 2021 20:22:53 +0200
-Message-Id: <20210928182258.12451-4-david@redhat.com>
-In-Reply-To: <20210928182258.12451-1-david@redhat.com>
-References: <20210928182258.12451-1-david@redhat.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 15/17] xen/arm: Transitional change to build HAS_VPCI on ARM.
+Date: Tue, 28 Sep 2021 19:18:24 +0100
+Message-Id: <adabef3cd1774ca51f1b409bd97a2ae353eaac2b.1632847120.git.rahul.singh@arm.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1632847120.git.rahul.singh@arm.com>
+References: <cover.1632847120.git.rahul.singh@arm.com>
+In-Reply-To: <cover.1632847120.git.rahul.singh@arm.com>
+References: <cover.1632847120.git.rahul.singh@arm.com>
 
-The callback should deal with errors internally, it doesn't make sense to
-expose these via pfn_is_ram(). We'll rework the callbacks next. Right now
-we consider errors as if "it's RAM"; no functional change.
+This patch will be reverted once we add support for VPCI MSI/MSIX
+support on ARM.
 
-Signed-off-by: David Hildenbrand <david@redhat.com>
+Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 ---
- fs/proc/vmcore.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Change in v3: none
+Change in v2: Patch introduced in v2
+---
+ xen/drivers/vpci/Makefile | 3 ++-
+ xen/drivers/vpci/header.c | 2 ++
+ xen/include/asm-arm/pci.h | 8 ++++++++
+ 3 files changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/fs/proc/vmcore.c b/fs/proc/vmcore.c
-index 9a15334da208..a9bd80ab670e 100644
---- a/fs/proc/vmcore.c
-+++ b/fs/proc/vmcore.c
-@@ -84,11 +84,11 @@ void unregister_oldmem_pfn_is_ram(void)
- }
- EXPORT_SYMBOL_GPL(unregister_oldmem_pfn_is_ram);
+diff --git a/xen/drivers/vpci/Makefile b/xen/drivers/vpci/Makefile
+index 55d1bdfda0..1a1413b93e 100644
+--- a/xen/drivers/vpci/Makefile
++++ b/xen/drivers/vpci/Makefile
+@@ -1 +1,2 @@
+-obj-y += vpci.o header.o msi.o msix.o
++obj-y += vpci.o header.o
++obj-$(CONFIG_HAS_PCI_MSI) += msi.o msix.o
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index ba9a036202..f8cd55e7c0 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -96,8 +96,10 @@ static void modify_decoding(const struct pci_dev *pdev, uint16_t cmd,
+      * FIXME: punching holes after the p2m has been set up might be racy for
+      * DomU usage, needs to be revisited.
+      */
++#ifdef CONFIG_HAS_PCI_MSI
+     if ( map && !rom_only && vpci_make_msix_hole(pdev) )
+         return;
++#endif
  
--static int pfn_is_ram(unsigned long pfn)
-+static bool pfn_is_ram(unsigned long pfn)
- {
- 	int (*fn)(unsigned long pfn);
- 	/* pfn is ram unless fn() checks pagetype */
--	int ret = 1;
-+	bool ret = true;
+     for ( i = 0; i < ARRAY_SIZE(header->bars); i++ )
+     {
+diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+index 49c9622902..5532ce3977 100644
+--- a/xen/include/asm-arm/pci.h
++++ b/xen/include/asm-arm/pci.h
+@@ -26,6 +26,14 @@ struct arch_pci_dev {
+     struct device dev;
+ };
  
- 	/*
- 	 * Ask hypervisor if the pfn is really ram.
-@@ -97,7 +97,7 @@ static int pfn_is_ram(unsigned long pfn)
- 	 */
- 	fn = oldmem_pfn_is_ram;
- 	if (fn)
--		ret = fn(pfn);
-+		ret = !!fn(pfn);
- 
- 	return ret;
- }
-@@ -124,7 +124,7 @@ ssize_t read_from_oldmem(char *buf, size_t count,
- 			nr_bytes = count;
- 
- 		/* If pfn is not ram, return zeros for sparse dump files */
--		if (pfn_is_ram(pfn) == 0)
-+		if (!pfn_is_ram(pfn))
- 			memset(buf, 0, nr_bytes);
- 		else {
- 			if (encrypted)
++/* Arch-specific MSI data for vPCI. */
++struct vpci_arch_msi {
++};
++
++/* Arch-specific MSI-X entry data for vPCI. */
++struct vpci_arch_msix_entry {
++};
++
+ /*
+  * struct to hold the mappings of a config space window. This
+  * is expected to be used as sysdata for PCI controllers that
 -- 
-2.31.1
+2.17.1
 
 
