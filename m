@@ -2,43 +2,49 @@ Return-Path: <SRS0=aFvL=OS=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CEC8C4167E
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:23:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0EF60C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:23:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 607F560F70
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:23:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 607F560F70
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id B99216136F
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Sep 2021 18:23:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B99216136F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.198280.351696 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.198297.351707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHko-00054c-3F; Tue, 28 Sep 2021 18:22:58 +0000
+	id 1mVHlE-00063V-Be; Tue, 28 Sep 2021 18:23:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 198280.351696; Tue, 28 Sep 2021 18:22:58 +0000
+Received: by outflank-mailman (output) from mailman id 198297.351707; Tue, 28 Sep 2021 18:23:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVHkn-00054R-VN; Tue, 28 Sep 2021 18:22:57 +0000
-Received: by outflank-mailman (input) for mailman id 198280;
- Tue, 28 Sep 2021 18:22:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4iZ8=OS=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1mVHkn-0004g0-Bj
- for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:22:57 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id a725ef51-be9c-48fa-a825-9e0c02c51380;
- Tue, 28 Sep 2021 18:22:55 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 220626D;
- Tue, 28 Sep 2021 11:22:55 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.1])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 214DB3F793;
- Tue, 28 Sep 2021 11:22:54 -0700 (PDT)
+	id 1mVHlE-00063O-82; Tue, 28 Sep 2021 18:23:24 +0000
+Received: by outflank-mailman (input) for mailman id 198297;
+ Tue, 28 Sep 2021 18:23:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jiAA=OS=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1mVHlD-0005WT-65
+ for xen-devel@lists.xenproject.org; Tue, 28 Sep 2021 18:23:23 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 28da69b0-2089-11ec-bcc4-12813bfff9fa;
+ Tue, 28 Sep 2021 18:23:21 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-297-iyZcQTaONDm3MWfcKShKpA-1; Tue, 28 Sep 2021 14:23:19 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 810A51023F50;
+ Tue, 28 Sep 2021 18:23:16 +0000 (UTC)
+Received: from t480s.redhat.com (unknown [10.39.194.120])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0433660877;
+ Tue, 28 Sep 2021 18:22:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,157 +56,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a725ef51-be9c-48fa-a825-9e0c02c51380
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Andre.Przywara@arm.com,
+X-Inumbo-ID: 28da69b0-2089-11ec-bcc4-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1632853400;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=8/a5gkIL9yAofs88ckFRESPQGSjIdBv52g14ib29Qfw=;
+	b=fSH7GZ1PtF8GFEluGZIH5MaHzfZmrJ0fCrzXSiBry14JbWeXeaLeHDjwI3SeP8eg4r3kwj
+	BfKmdxL2T6eZ3KZ4kd5P45j/Ggg0I/y7dCDGsEUBun/Fw18Wiyx0Txn8ONFh3itKTxdEgg
+	i9JFgvNmB6zvROnf0Y5t2mMXK+yFigQ=
+X-MC-Unique: iyZcQTaONDm3MWfcKShKpA-1
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Cc: David Hildenbrand <david@redhat.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 13/17] xen/arm: Implement pci access functions
-Date: Tue, 28 Sep 2021 19:18:22 +0100
-Message-Id: <33cc6b7a133787700ea8ba4e54a03141d3aca1ea.1632847120.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1632847120.git.rahul.singh@arm.com>
-References: <cover.1632847120.git.rahul.singh@arm.com>
-In-Reply-To: <cover.1632847120.git.rahul.singh@arm.com>
-References: <cover.1632847120.git.rahul.singh@arm.com>
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Dave Young <dyoung@redhat.com>,
+	Baoquan He <bhe@redhat.com>,
+	Vivek Goyal <vgoyal@redhat.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Oscar Salvador <osalvador@suse.de>,
+	Mike Rapoport <rppt@kernel.org>,
+	"Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+	x86@kernel.org,
+	xen-devel@lists.xenproject.org,
+	virtualization@lists.linux-foundation.org,
+	kexec@lists.infradead.org,
+	linux-fsdevel@vger.kernel.org,
+	linux-mm@kvack.org
+Subject: [PATCH v1 0/8] proc/vmcore: sanitize access to virtio-mem memory
+Date: Tue, 28 Sep 2021 20:22:50 +0200
+Message-Id: <20210928182258.12451-1-david@redhat.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 
-Implement generic pci access functions to read/write the configuration
-space.
+As so often with virtio-mem changes that mess with common MM
+infrastructure, this might be a good candiate to go via Andrew's tree.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
----
-Change in v3:
-- Remove PRI_pci as not used.
-- Replace uint32_t sbdf to pci_sbdf_t sbdf to avoid typecast
-Change in v2: Fixed comments
----
- xen/arch/arm/pci/pci-access.c      | 57 ++++++++++++++++++++++++++++++
- xen/arch/arm/pci/pci-host-common.c | 19 ++++++++++
- xen/include/asm-arm/pci.h          |  1 +
- 3 files changed, 77 insertions(+)
+--
 
-diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access.c
-index 3cd14a4b87..9f9aac43d7 100644
---- a/xen/arch/arm/pci/pci-access.c
-+++ b/xen/arch/arm/pci/pci-access.c
-@@ -16,6 +16,7 @@
- #include <asm/io.h>
- 
- #define INVALID_VALUE (~0U)
-+#define PCI_ERR_VALUE(len) GENMASK(0, len * 8)
- 
- int pci_generic_config_read(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
-                             uint32_t reg, uint32_t len, uint32_t *value)
-@@ -72,6 +73,62 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
-     return 0;
- }
- 
-+static uint32_t pci_config_read(pci_sbdf_t sbdf, unsigned int reg,
-+                                unsigned int len)
-+{
-+    uint32_t val = PCI_ERR_VALUE(len);
-+    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
-+
-+    if ( unlikely(!bridge) )
-+        return val;
-+
-+    if ( unlikely(!bridge->ops->read) )
-+        return val;
-+
-+    bridge->ops->read(bridge, sbdf, reg, len, &val);
-+
-+    return val;
-+}
-+
-+static void pci_config_write(pci_sbdf_t sbdf, unsigned int reg,
-+                             unsigned int len, uint32_t val)
-+{
-+    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
-+
-+    if ( unlikely(!bridge) )
-+        return;
-+
-+    if ( unlikely(!bridge->ops->write) )
-+        return;
-+
-+    bridge->ops->write(bridge, sbdf, reg, len, val);
-+}
-+
-+/*
-+ * Wrappers for all PCI configuration access functions.
-+ */
-+
-+#define PCI_OP_WRITE(size, type)                            \
-+    void pci_conf_write##size(pci_sbdf_t sbdf,              \
-+                              unsigned int reg, type val)   \
-+{                                                           \
-+    pci_config_write(sbdf, reg, size / 8, val);             \
-+}
-+
-+#define PCI_OP_READ(size, type)                             \
-+    type pci_conf_read##size(pci_sbdf_t sbdf,               \
-+                              unsigned int reg)             \
-+{                                                           \
-+    return pci_config_read(sbdf, reg, size / 8);            \
-+}
-+
-+PCI_OP_READ(8, uint8_t)
-+PCI_OP_READ(16, uint16_t)
-+PCI_OP_READ(32, uint32_t)
-+PCI_OP_WRITE(8, uint8_t)
-+PCI_OP_WRITE(16, uint16_t)
-+PCI_OP_WRITE(32, uint32_t)
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-index a08e06cea1..c5941b10e9 100644
---- a/xen/arch/arm/pci/pci-host-common.c
-+++ b/xen/arch/arm/pci/pci-host-common.c
-@@ -236,6 +236,25 @@ err_exit:
-     return err;
- }
- 
-+/*
-+ * This function will lookup an hostbridge based on the segment and bus
-+ * number.
-+ */
-+struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus)
-+{
-+    struct pci_host_bridge *bridge;
-+
-+    list_for_each_entry( bridge, &pci_host_bridges, node )
-+    {
-+        if ( bridge->segment != segment )
-+            continue;
-+        if ( (bus < bridge->cfg->busn_start) || (bus > bridge->cfg->busn_end) )
-+            continue;
-+        return bridge;
-+    }
-+
-+    return NULL;
-+}
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-index bb7eda6705..49c9622902 100644
---- a/xen/include/asm-arm/pci.h
-+++ b/xen/include/asm-arm/pci.h
-@@ -81,6 +81,7 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
-                              uint32_t reg, uint32_t len, uint32_t value);
- void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
-                                pci_sbdf_t sbdf, uint32_t where);
-+struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
- 
- static always_inline bool is_pci_passthrough_enabled(void)
- {
+After removing /dev/kmem, sanitizing /proc/kcore and handling /dev/mem,
+this series tackles the last sane way how a VM could accidentially access
+logically unplugged memory managed by a virtio-mem device: /proc/vmcore
+
+When dumping memory via "makedumpfile", PG_offline pages, used by
+virtio-mem to flag logically unplugged memory, are already properly
+excluded; however, especially when accessing/copying /proc/vmcore "the
+usual way", we can still end up reading logically unplugged memory part of
+a virtio-mem device.
+
+Patch #1-#3 are cleanups. Patch #4 extends the existing oldmem_pfn_is_ram
+mechanism. Patch #5-#7 are virtio-mem refactorings for patch #8, which
+implements the virtio-mem logic to query the state of device blocks.
+
+Patch #8:
+
+"
+Although virtio-mem currently supports reading unplugged memory in the
+hypervisor, this will change in the future, indicated to the device via
+a new feature flag. We similarly sanitized /proc/kcore access recently.
+[...]
+Distributions that support virtio-mem+kdump have to make sure that the
+virtio_mem module will be part of the kdump kernel or the kdump initrd;
+dracut was recently [2] extended to include virtio-mem in the generated
+initrd. As long as no special kdump kernels are used, this will
+automatically make sure that virtio-mem will be around in the kdump initrd
+and sanitize /proc/vmcore access -- with dracut.
+"
+
+This is the last remaining bit to support
+VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE [3] in the Linux implementation of
+virtio-mem.
+
+Note: this is best-effort. We'll never be able to control what runs inside
+the second kernel, really, but we also don't have to care: we only care
+about sane setups where we don't want our VM getting zapped once we
+touch the wrong memory location while dumping. While we usually expect sane
+setups to use "makedumfile", nothing really speaks against just copying
+/proc/vmcore, especially in environments where HWpoisioning isn't typically
+expected. Also, we really don't want to put all our trust completely on the
+memmap, so sanitizing also makes sense when just using "makedumpfile".
+
+[1] https://lkml.kernel.org/r/20210526093041.8800-1-david@redhat.com
+[2] https://github.com/dracutdevs/dracut/pull/1157
+[3] https://lists.oasis-open.org/archives/virtio-comment/202109/msg00021.html
+
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: "H. Peter Anvin" <hpa@zytor.com>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Dave Young <dyoung@redhat.com>
+Cc: Baoquan He <bhe@redhat.com>
+Cc: Vivek Goyal <vgoyal@redhat.com>
+Cc: Michal Hocko <mhocko@suse.com>
+Cc: Oscar Salvador <osalvador@suse.de>
+Cc: Mike Rapoport <rppt@kernel.org>
+Cc: "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
+Cc: x86@kernel.org
+Cc: xen-devel@lists.xenproject.org
+Cc: virtualization@lists.linux-foundation.org
+Cc: kexec@lists.infradead.org
+Cc: linux-fsdevel@vger.kernel.org
+Cc: linux-mm@kvack.org
+
+David Hildenbrand (8):
+  x86/xen: update xen_oldmem_pfn_is_ram() documentation
+  x86/xen: simplify xen_oldmem_pfn_is_ram()
+  proc/vmcore: let pfn_is_ram() return a bool
+  proc/vmcore: convert oldmem_pfn_is_ram callback to more generic vmcore
+    callbacks
+  virtio-mem: factor out hotplug specifics from virtio_mem_init() into
+    virtio_mem_init_hotplug()
+  virtio-mem: factor out hotplug specifics from virtio_mem_probe() into
+    virtio_mem_init_hotplug()
+  virtio-mem: factor out hotplug specifics from virtio_mem_remove() into
+    virtio_mem_deinit_hotplug()
+  virtio-mem: kdump mode to sanitize /proc/vmcore access
+
+ arch/x86/kernel/aperture_64.c |  13 +-
+ arch/x86/xen/mmu_hvm.c        |  31 ++--
+ drivers/virtio/virtio_mem.c   | 297 ++++++++++++++++++++++++----------
+ fs/proc/vmcore.c              | 105 ++++++++----
+ include/linux/crash_dump.h    |  26 ++-
+ 5 files changed, 332 insertions(+), 140 deletions(-)
+
+
+base-commit: 5816b3e6577eaa676ceb00a848f0fd65fe2adc29
 -- 
-2.17.1
+2.31.1
 
 
