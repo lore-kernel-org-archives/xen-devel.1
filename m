@@ -2,42 +2,42 @@ Return-Path: <SRS0=3HPv=OT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0DF17C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 20:50:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4B15C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 21:36:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C81CF61390
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 20:50:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C81CF61390
+	by mail.kernel.org (Postfix) with ESMTPS id A19C86058D
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 21:36:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A19C86058D
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.199308.353275 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.199314.353286 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVgWq-0000M5-Sz; Wed, 29 Sep 2021 20:50:12 +0000
+	id 1mVhF9-00051c-8q; Wed, 29 Sep 2021 21:35:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 199308.353275; Wed, 29 Sep 2021 20:50:12 +0000
+Received: by outflank-mailman (output) from mailman id 199314.353286; Wed, 29 Sep 2021 21:35:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVgWq-0000Ly-P2; Wed, 29 Sep 2021 20:50:12 +0000
-Received: by outflank-mailman (input) for mailman id 199308;
- Wed, 29 Sep 2021 20:50:11 +0000
+	id 1mVhF9-00051V-5Y; Wed, 29 Sep 2021 21:35:59 +0000
+Received: by outflank-mailman (input) for mailman id 199314;
+ Wed, 29 Sep 2021 21:35:58 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mVgWp-0000Ls-Jb
- for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 20:50:11 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mVhF8-00051N-6X
+ for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 21:35:58 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mVgWp-0000Vd-H8
- for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 20:50:11 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mVhF8-0001Gi-45
+ for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 21:35:58 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mVgWp-0001YO-G8
- for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 20:50:11 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mVhF8-0005kd-2z
+ for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 21:35:58 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1mVgWn-0000Gv-Qa; Wed, 29 Sep 2021 21:50:09 +0100
+ id 1mVhF3-0000V3-DA; Wed, 29 Sep 2021 22:35:53 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,47 +52,50 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:To:Date:
 	Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=P035az/3F/SWq9Q9ubjL95zAELjd1lWm1l6ysAB2UEA=; b=i5et6UqVgcywc+ZWQhkh17/uj2
-	AeLIcBDF912kgy7OfzxVbkGMw+02yakyaalWRyp6Pwv/mCL/O9TIJ0BGUIoBt9l5NBaA90j9TVfkb
-	oYCCBBx2Fosea4cjxEZ8S4bdanLylZW47beJFcel68kLv73u1MjpCpjQRzfJtIh3mG2c=;
+	bh=2LgtL/bOBLKlY+f62iWCjTBNXfxnBCoS7kexrmF43FA=; b=LqkJhR2s/Y1OIzRItC9IVmDCmI
+	rmy5MwE6rIK2ROtYrBbOUp7i8KKm/OqPss4HRyW0ssbs85nJULcAXLpdJ0u3b+qSMYnlK3MR2B3t3
+	0O79Y6wScIkjm3/lchvb4Pe3Q8MYe5P8igyAdEcJCA0mKd2XWkKmbAylpule0r0dN2VA=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24916.53633.593814.456485@mariner.uk.xensource.com>
-Date: Wed, 29 Sep 2021 21:50:09 +0100
-To: xen-devel@lists.xenproject.org,
-    committers@xenproject.org
-Subject: Re: osstest down, PDU failure
-In-Reply-To: <24916.14069.358118.417330@mariner.uk.xensource.com>
-References: <24916.14069.358118.417330@mariner.uk.xensource.com>
+Message-ID: <24916.56377.137361.34717@mariner.uk.xensource.com>
+Date: Wed, 29 Sep 2021 22:35:53 +0100
+To: Jan Beulich <jbeulich@suse.com>,
+    Julien Grall <julien.grall.oss@gmail.com>,
+    xen-devel <xen-devel@lists.xenproject.org>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    dpsmith@apertussolutions.com
+Subject: Re: [xen-unstable test] 164996: regressions - FAIL
+In-Reply-To: <24915.16323.60012.172236@mariner.uk.xensource.com>
+References: <osstest-164996-mainreport@xen.org>
+	<d049ba60-db81-aaa4-1769-54c6964cfd06@suse.com>
+	<24904.44119.940679.241639@mariner.uk.xensource.com>
+	<alpine.DEB.2.21.2109211631330.17979@sstabellini-ThinkPad-T480s>
+	<19906cf8-365b-63c9-5c59-aef8dae41505@suse.com>
+	<alpine.DEB.2.21.2109221807131.17979@sstabellini-ThinkPad-T480s>
+	<CAJ=z9a1W9BqeOGFu3F2+qbXM6UNo8ZO=0y-zYsnK01MNSNdbkw@mail.gmail.com>
+	<dda286dc-1edc-4505-a049-e82047b44590@suse.com>
+	<24915.16323.60012.172236@mariner.uk.xensource.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Ian Jackson writes ("osstest down, PDU failure"):
-> Currently, osstest is not working.  We have lost one of our PDUs,
-> meaning that about half a rack is out of action, including one of the
-> VM hosts.
+Ian Jackson writes ("Re: [xen-unstable test] 164996: regressions - FAIL"):
+> Thanks.  The attachment didn't git-am but I managed to make a tree
+> with it in (but a bogus commit message).
 > 
-> There has been quite a bit of outstanding maintenance which has been
-> deferred due to the pandemic.  I am trying to see if we can get
-> someone on-site to the colo, in Massachusetts, soon.  A complication
-> is that the replacement PDU is in still New York.  Again, due to the
-> pandemic.
+> I have a repro of 165218 test-arm64-arm64-libvirt-raw (that's the last
+> xen-unstable flight) running.  If all goes well it will rebuild Linux
+> from my branch (new flight 165241) and then run the test using that
+> kernel (new flight 165242).  I have told it to report to the people on
+> this thread (and the list).
+> 
+> It will probably report in an hour or two (since it needs to rebuild a
+> kernel and then negotiate to get a host to run the repro on).
+> I didn't ask it to keep the host for me, but it ought to publish the
+> logs and as I say, send an email report here.
 
-I managed to get an on-site look by the staff of the colo facility.  A
-breaker had tripped, depriving our PDU of power.  They reset the
-breaker.  The VM host has come back fully operational.  I have
-verified that all the test boxes connected to that PDU (apart from one
-knonw-dead box) are powered and responsive enough.  Initial reports
-from a smoke flight were encouraging, so I have re-enabled everything.
-
-It may trip again of course.
-
-A power trip in a colo is not a normal event, but we haven't
-determined the root cause.  The colo facility are going to ask their
-electrical supply technicians to investigate the trip.  I think the
-breaker or associated equipment is probably "smart" and will have some
-useful records.
+Restarted as 165323 and 165324.  Maybe the thing won't catch fire this
+time.  Unusual consequences for a small kernel patch :-).
 
 Ian.
 
