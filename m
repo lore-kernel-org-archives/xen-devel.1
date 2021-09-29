@@ -2,49 +2,54 @@ Return-Path: <SRS0=3HPv=OT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 59006C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 08:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 49EE9C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 08:59:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 036EF61357
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 08:55:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 036EF61357
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by mail.kernel.org (Postfix) with ESMTPS id C4EEF6108F
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 08:59:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C4EEF6108F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.198877.352602 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.198886.352614 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVVNX-0000Yo-D8; Wed, 29 Sep 2021 08:55:51 +0000
+	id 1mVVQe-0001Sn-0a; Wed, 29 Sep 2021 08:59:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 198877.352602; Wed, 29 Sep 2021 08:55:51 +0000
+Received: by outflank-mailman (output) from mailman id 198886.352614; Wed, 29 Sep 2021 08:59:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVVNX-0000Yh-AB; Wed, 29 Sep 2021 08:55:51 +0000
-Received: by outflank-mailman (input) for mailman id 198877;
- Wed, 29 Sep 2021 08:55:49 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mVVQd-0001Sg-Ti; Wed, 29 Sep 2021 08:59:03 +0000
+Received: by outflank-mailman (input) for mailman id 198886;
+ Wed, 29 Sep 2021 08:59:03 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CEC3=OT=pengutronix.de=ukl@srs-us1.protection.inumbo.net>)
- id 1mVVNV-0000YU-Er
- for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 08:55:49 +0000
-Received: from metis.ext.pengutronix.de (unknown
- [2001:67c:670:201:290:27ff:fe1d:cc33])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a00477e7-3e9b-409a-904e-985d7576e1e5;
- Wed, 29 Sep 2021 08:55:47 +0000 (UTC)
-Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
- by metis.ext.pengutronix.de with esmtps
- (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1mVVL8-0001if-2j; Wed, 29 Sep 2021 10:53:22 +0200
-Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
- by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1mVVL1-0004fa-GN; Wed, 29 Sep 2021 10:53:15 +0200
-Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
- (envelope-from <ukl@pengutronix.de>)
- id 1mVVL1-0000Ow-C0; Wed, 29 Sep 2021 10:53:15 +0200
+ <SRS0=mM9C=OT=epam.com=prvs=09065c5b4f=oleksandr_andrushchenko@srs-us1.protection.inumbo.net>)
+ id 1mVVQd-0001Sa-As
+ for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 08:59:03 +0000
+Received: from mx0b-0039f301.pphosted.com (unknown [148.163.137.242])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7d7a7094-2103-11ec-bcdf-12813bfff9fa;
+ Wed, 29 Sep 2021 08:59:01 +0000 (UTC)
+Received: from pps.filterd (m0174683.ppops.net [127.0.0.1])
+ by mx0b-0039f301.pphosted.com (8.16.1.2/8.16.0.43) with SMTP id 18T84kr4019554;
+ Wed, 29 Sep 2021 08:58:57 GMT
+Received: from eur01-db5-obe.outbound.protection.outlook.com
+ (mail-db5eur01lp2059.outbound.protection.outlook.com [104.47.2.59])
+ by mx0b-0039f301.pphosted.com with ESMTP id 3bcg0n0t1q-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 29 Sep 2021 08:58:57 +0000
+Received: from AM0PR03MB6324.eurprd03.prod.outlook.com (2603:10a6:20b:153::17)
+ by AM0PR03MB6321.eurprd03.prod.outlook.com (2603:10a6:20b:157::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.15; Wed, 29 Sep
+ 2021 08:58:53 +0000
+Received: from AM0PR03MB6324.eurprd03.prod.outlook.com
+ ([fe80::e966:6290:5736:b7bd]) by AM0PR03MB6324.eurprd03.prod.outlook.com
+ ([fe80::e966:6290:5736:b7bd%7]) with mapi id 15.20.4566.015; Wed, 29 Sep 2021
+ 08:58:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,294 +61,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a00477e7-3e9b-409a-904e-985d7576e1e5
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: Christoph Hellwig <hch@lst.de>,
-	linux-pci@vger.kernel.org,
-	kernel@pengutronix.de,
-	Alexander Duyck <alexanderduyck@fb.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Andrew Donnellan <ajd@linux.ibm.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	"David S. Miller" <davem@davemloft.net>,
-	Fiona Trahe <fiona.trahe@intel.com>,
-	Frederic Barrat <fbarrat@linux.ibm.com>,
-	Giovanni Cabiddu <giovanni.cabiddu@intel.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Ido Schimmel <idosch@nvidia.com>,
-	Ingo Molnar <mingo@redhat.com>,
-	Jack Xu <jack.xu@intel.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Jesse Brandeburg <jesse.brandeburg@intel.com>,
-	Jiri Olsa <jolsa@redhat.com>,
-	Jiri Pirko <jiri@nvidia.com>,
-	Juergen Gross <jgross@suse.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Marco Chiappero <marco.chiappero@intel.com>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Mathias Nyman <mathias.nyman@intel.com>,
-	Michael Buesch <m@bues.ch>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Namhyung Kim <namhyung@kernel.org>,
-	"Oliver O'Halloran" <oohall@gmail.com>,
-	Paul Mackerras <paulus@samba.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	=?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <zajec5@gmail.com>,
-	Russell Currey <ruscur@russell.cc>,
-	Salil Mehta <salil.mehta@huawei.com>,
-	Sathya Prakash <sathya.prakash@broadcom.com>,
-	Simon Horman <simon.horman@corigine.com>,
-	Sreekanth Reddy <sreekanth.reddy@broadcom.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>,
-	Taras Chornyi <tchornyi@marvell.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Tomaszx Kowalik <tomaszx.kowalik@intel.com>,
-	Vadym Kochan <vkochan@marvell.com>,
-	Wojciech Ziemba <wojciech.ziemba@intel.com>,
-	Yisen Zhuang <yisen.zhuang@huawei.com>,
-	Zhou Wang <wangzhou1@hisilicon.com>,
-	linux-crypto@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-perf-users@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-scsi@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
-	MPT-FusionLinux.pdl@broadcom.com,
-	netdev@vger.kernel.org,
-	oss-drivers@corigine.com,
-	qat-linux@intel.com,
-	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 00/11] PCI: Drop duplicated tracking of a pci_dev's bound driver
-Date: Wed, 29 Sep 2021 10:52:55 +0200
-Message-Id: <20210929085306.2203850-1-u.kleine-koenig@pengutronix.de>
-X-Mailer: git-send-email 2.30.2
+X-Inumbo-ID: 7d7a7094-2103-11ec-bcdf-12813bfff9fa
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=VgXLDAgFNTrivUDY3h1uFxMsyfKSbi19j524k8TmEQiLCobo5uCEXWpCXe/RYBpfiKRsUbZ3BueMOcj6leOfCK/cyxwn065NEPC+oMHyWkbIhSP8KVYgx3t/Im87HM+0G8DfhS02UhZGFPmKYx7NeXlfCy2yyfQGycUhmaerFtgsWpVZwAFYdTWzzqArJVCIWAQdAkvRQQtTfsnDmOkgfsX1XC2fwuGA8qxPCAceLZtPAnpkorysx3Sjb5F9tVXrdfYqL1mXTdfRvudIwkl/iKMo6sZzGgK0VJXvczATLDfAEiUl9vsvA3FJs8/fsfiFGWg17DbwDXUdzxzFqYHF1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=Y9yIjwUgEDjl0IhuAuptyB1XfD7qbghho+J9Lpgir7E=;
+ b=O8xpdbKcKIiVw5H26FUPY+INu4TadXddB6ijbI1aGBw1WVIxgD0JjszAq8RoNoGbaJUFCTfdPn72CXk2IOnq8gMqJYtDCMBVMp+ETmxbGVyuEgf/sQrEIfqLirk1Y/SPUNGwnGZtTWz3wFR00EmGZSRi9NxPwDrb6Sir8xbP5KZVNq0pwuPOR54OcSj/bxMn8ngGQaYDdTVgDr++ng0SgeE72PEQlJ69WlMLCAa3w+pCEY0BB2TD3J8sRob9aFml97F2dhEByMHoeUSMp8hu9fA+EXp9RX1H1J9asjQPDXId43pJALsUYbxbSi3PTMW4uRNhBhJ4VZrVzzT/4viccw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Y9yIjwUgEDjl0IhuAuptyB1XfD7qbghho+J9Lpgir7E=;
+ b=Kqg0FMXGm0eBqOr9YHLfZk69D6HhEfUGPmmc1qBt2Uxpv74NwAWb0qyzWITQN83cTwD2sFqhInyxBNnmzhopWIZIiG46lU3zlF39pigiUTa/9B7RGTpZctj9WHVwlS1Qt+SX+VqC9K5WK6yE7nsCP51RA47aY0LyLgw1GEeBwjAYUhY7n/WV4r/zFpeFAi93AwCivMrdtnpFdiXnmWXldowM9o8lzeYsBZCoiFUwIlcqlXLiVhjJqpxXAYqaAK8Uqdv6ik9hO6/cL32PXz1t+icUF6d+an45i2qwCISsfwT0FNln8W6lgJAkrmaE2qpebkT5Omvq6aMt54fVsHeRxA==
+From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: "julien@xen.org" <julien@xen.org>,
+        "sstabellini@kernel.org"
+	<sstabellini@kernel.org>,
+        Oleksandr Tyshchenko
+	<Oleksandr_Tyshchenko@epam.com>,
+        Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>,
+        Artem Mygaiev <Artem_Mygaiev@epam.com>,
+        "roger.pau@citrix.com" <roger.pau@citrix.com>,
+        Bertrand Marquis
+	<bertrand.marquis@arm.com>,
+        Rahul Singh <rahul.singh@arm.com>,
+        "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+        Michal
+ Orzel <michal.orzel@arm.com>
+Subject: Re: [PATCH v2 07/11] vpci/header: program p2m with guest BAR view
+Thread-Topic: [PATCH v2 07/11] vpci/header: program p2m with guest BAR view
+Thread-Index: AQHXsHpCfe0n3k8oF0eTl7KOfxT3R6u6ssAAgAAA3gCAAAIlAIAAA4oAgAAGMQA=
+Date: Wed, 29 Sep 2021 08:58:53 +0000
+Message-ID: <fd611978-b6f8-3ded-5b5d-f132c8a6de5c@epam.com>
+References: <20210923125501.234252-1-andr2000@gmail.com>
+ <20210923125501.234252-8-andr2000@gmail.com>
+ <1a341bc1-f7ad-e7ae-1241-a2d5f38f368f@arm.com>
+ <f59b48fd-564e-64f8-1422-fb842957f213@suse.com>
+ <7ae0fad7-499b-1bda-5c9e-9313265abf8c@epam.com>
+ <30b8c6b8-5dc4-6972-eaf9-76024f7e97bb@suse.com>
+In-Reply-To: <30b8c6b8-5dc4-6972-eaf9-76024f7e97bb@suse.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: suse.com; dkim=none (message not signed)
+ header.d=none;suse.com; dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: ece8db52-d26f-4b28-ed9a-08d983275cc5
+x-ms-traffictypediagnostic: AM0PR03MB6321:
+x-ms-exchange-transport-forked: True
+x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
+x-microsoft-antispam-prvs: 
+ <AM0PR03MB6321E5042F833AF29B19D275E7A99@AM0PR03MB6321.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:5236;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ sUq94av34TcaakcrW70YQsXEq5kIGYdkn6rjmRF7gami1O9cxHTGqU4bInhenLT9qb90zT05KmrtlKKzUzU4Ej7hLWaUboDdkngASRcIIETbdnnzd/Oicx+P0oQeSysSXQvVIc8uN3VI7LGi1CVQkBPXlKhZtPRijMNIcOjF8lprKduVNfwg0qPDarGoJIbq6mWdZbPUPNbQZvXAIHoG8QbdLcWK/sxpuepeywoMoawI/4RP2cettPdDEldvnv5ffvEidWJhRVBjMZAV9BEjJJ/zRxaPR50fDYHV0jj+wuGZM/kS0UJ4WnleO/eqJg+pC84zjR3/DFcbrcw+AFUpaZpDT0oPDn4JW8Z5W9LUnbj2c26nUuJRx/z2deQ3F2nBi+3q2+jBjql6FFFTfR6RnqJyKSJv+9oeudo8TP0tBZ5/qoeM9/4m6wkGhDmYMyY1mJ9WnXfZR9YL/KRPLky99D4u8sCRZ0isjxDpyvxmVqu6meJ9UJA+AITpvIzy43vgeN6PNB0eX/oT9AKaqXVL6gFPq2gsZ80U1S9/RSnVKRNJkOXnj4nc3luvYM1gA7lTXI4d+IpoHYSFWpZaCP8hREn6+j/ExTLkyqIZ2/oWgWf65QResA8PFteChsi58q/4nFbuwjeZks23+srt7e6s/RbCkPsBKXWx9N3o5S5cMvlMZK8sHqZ0mzysZdC3/Mx6QmvgJMhXyGx4g1Nnv0g4by6+k7AHyFNM/F6XGWq4Gko=
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB6324.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(71200400001)(2616005)(508600001)(36756003)(316002)(4326008)(6916009)(38070700005)(76116006)(122000001)(38100700002)(26005)(31696002)(86362001)(186003)(2906002)(8676002)(6512007)(66446008)(64756008)(66556008)(66476007)(31686004)(55236004)(6486002)(53546011)(5660300002)(54906003)(6506007)(8936002)(66946007)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?utf-8?B?NmNwNjAydFFoYkpjbFhpQ3RaaWlRUnZmdWFuaXhueGFGQnJ5NTA4cFcyWTNz?=
+ =?utf-8?B?ZDl3UkNhZHdUSG9TVHFSTmg5WVZNb1lCUnF3TVlldUxuMVdKMlJtWHJPSE5h?=
+ =?utf-8?B?WFcyR1ZkVDBXY0g0b1UyQnBGbmVFMEdiOUpBWVRHTEd0SFRWblNScmM0dEJM?=
+ =?utf-8?B?NXBJdnZBTXM0WUtoM3F1akJLcGZaQ3FPbVhSVzFDY0RCVlN5ai90N0dJd0tN?=
+ =?utf-8?B?R2dLUlpWcVQ5Wktjdmg2bmFmR2tnUDA3aUtJSGJqNWVJYWZkNmsyYUpDdmRn?=
+ =?utf-8?B?UThpM2UxcFcrMUFIbDFxbWs3ZGtqWml6ZHl5dWlISnovTTd2ajV3QUlLdHpF?=
+ =?utf-8?B?aTBFb0JEUjRHT01kRHRHUVk2cTV1ZzVDYzZiNzRpWm1neFNSc3N0M3ZSb3FI?=
+ =?utf-8?B?Q2gzdllzZHBMMXROWm9LZTIxWTdDVkJNNXhpemltTTkrSHFPL2hQaU56Ukwr?=
+ =?utf-8?B?VG96R21iVUpBRHJFUU5rTkM2eUVIRjRxM1NBV2U1RExvQzBKRWQrcm03WkNC?=
+ =?utf-8?B?bFZWZGRaQUc0TmV2b09keTIwOTRDbzlWQytCSWE1MjRZR2lVSkRaN3p3WktW?=
+ =?utf-8?B?YndjUHE1V1RXeHRLYVpzV0lKd3BPUUE5Y0M4N3pVY3l6ZUxZMVFYd1BRTGU3?=
+ =?utf-8?B?U2dUWmhqemFaR0IvQXgzMmN2NTVqWnkzTHIrdnRoeDFlbEluOE1BMWtrREhI?=
+ =?utf-8?B?aHM3VXl6aU9XekxkSVBxb29mRFQzLzRkZWsvRmE0L1d4Q0FMeDE2MXFpM3hh?=
+ =?utf-8?B?ZC9VVjZNdkd1RlBUNi95bVdDc3VDNzZsZURONEpIVTZFVDMzZDloMU53V21h?=
+ =?utf-8?B?TEJYeFR5dHhVN1E5czl0aE9DUU0zbGZubUtuakgvcUhJQ0RSRktzWThhRG54?=
+ =?utf-8?B?ZmJNYy9CTnUwQ2cwKzN6QmUzdmN3RUtRNjdyaVY1bTRIWkVOTUxvcjRlQ3du?=
+ =?utf-8?B?WEo2QzZ1bDY0VEx6ZENxNWxZZUZURWxxcTEvOFl6ZElEUHRFTEZpemZVRXA5?=
+ =?utf-8?B?alZ4T1BWT1VxUjhCcm81ZnI0WEp2VU9nUHFaNlgraHBMK2pRdENsVk91ZWR5?=
+ =?utf-8?B?YjVqeEdra00wdkZQMGNtTGJVZjVlK09RMnBiRWxNUnc5M1ZRbHFOdVE4bHBT?=
+ =?utf-8?B?V2tCOGxlQ094TmpyYmZWaHFzQk14dnJuV2N2djJPQ1dZZGdPZHFtL3JpNS9t?=
+ =?utf-8?B?cFlBTG52L2pzcTIzUnNNNGlCTTZsdHcwRE9CK01HTWNlMVh0ZG1Gblh0V2JM?=
+ =?utf-8?B?bnFoOGtmNXBTVXhxSFRWSWtLcFVOVDdvcXQrV0w5NXVPT2NlYWo2djJiVGJl?=
+ =?utf-8?B?czAxa0k3SkRrcTJTR3BHQmRES2ZKZ0JMa05BZGN2d2tXUEVUVXdGUDRvM3k2?=
+ =?utf-8?B?M1NPS2J1YmdWZEk0bmtpdUQxUmZHTFJxem9pVkRSSUp2RkF6UUZIaEh3STk0?=
+ =?utf-8?B?cmdla2YxN1RkK2V1M0tmRjBWcVJIZlFQcGxkWnJOQzNDaDNuTysxVVZya2Vv?=
+ =?utf-8?B?OWZldkE0aVRlWG1UNGxFbTE5NEo1ZDVXQ3drQVNSSzlZR0lDc1gzbS9zaWtl?=
+ =?utf-8?B?SG9MTjNhSlEwL1VQc1g4SWd4dk95NU1BSTFDOUZUQjR4SlJqMzA0cEJwdTlT?=
+ =?utf-8?B?Wkx4VkthZ2hvL2dpZ0dnOHhGR0hmZm4zRHllcFFpelJCd3FsMDg4U1k3aW5G?=
+ =?utf-8?B?UG0xYlhjdEFveXB5UGtKNVN6bE1McFBaTnkwQ0FjbVhMQTZDUEptSFNKNTRM?=
+ =?utf-8?B?d1ZEb3FFZXBnZmRSOTlyZUdLTUdJeldNdXJESlM3QUdOVTdLa2h6d05NZEZk?=
+ =?utf-8?B?Tk9POWxRUEVZTGJFL2E2UT09?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <1EA9130C972C854584E84C300159F5C3@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
-X-SA-Exim-Mail-From: ukl@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB6324.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ece8db52-d26f-4b28-ed9a-08d983275cc5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Sep 2021 08:58:53.1939
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 2YyUE0/6/PI3dzwvortDLBEjbJM4xTBw6HNVNbYBvWPK/xtNjs9ydwX0IJFIZ/m/L/BR+brD8wc6v/qKPsRz9iyj0GBAtVaz+d/t0cVjmQbx0yOqzPYxLzZcpp9yvzdn
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR03MB6321
+X-Proofpoint-ORIG-GUID: ALes0xBjEU6Cnxdob-dgk9DJ8l-a9hSL
+X-Proofpoint-GUID: ALes0xBjEU6Cnxdob-dgk9DJ8l-a9hSL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
+ definitions=2021-09-29_02,2021-09-28_01,2020-04-07_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 suspectscore=0
+ mlxlogscore=730 lowpriorityscore=0 impostorscore=0 adultscore=0
+ bulkscore=0 clxscore=1015 malwarescore=0 priorityscore=1501 spamscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2109230001 definitions=main-2109290053
 
-Hello,
-
-this is v5 of the quest to drop the "driver" member from struct pci_dev
-which tracks the same data (apart from a constant offset) as dev.driver.
-
-Changes since v4:
- - split some changes out of "PCI: replace pci_dev::driver usage that
-   gets the driver name" and reworked them a bit as suggested by Bjorn.
- - Add a line break in
-   drivers/net/ethernet/netronome/nfp/nfp_net_ethtool.c to please
-   checkpatch --strict and Simon Horman.
- - Fixed a build problem in "crypto: qat - simplify adf_enable_aer()",
-   thanks to Giovanni Cabiddu for spotting and a suggested fix.
-
-I didn't replace :: by . as suggested by Bjorn as I'm unsure if his
-preference is stronger than mine.
-
-This patch stack survived an allmodconfig build on arm64, m68k, powerpc,
-riscv, s390, sparc64 and x86_64 on top of v5.15-rc3.
-
-Best regards
-Uwe
-
-Uwe Kleine-König (11):
-  PCI: Simplify pci_device_remove()
-  PCI: Drop useless check from pci_device_probe()
-  xen/pci: Drop some checks that are always true
-  bcma: simplify reference to the driver's name
-  powerpc/eeh: Don't use driver member of struct pci_dev and further
-    cleanups
-  ssb: Simplify determination of driver name
-  PCI: Replace pci_dev::driver usage that gets the driver name
-  scsi: message: fusion: Remove unused parameter of mpt_pci driver's
-    probe()
-  crypto: qat - simplify adf_enable_aer()
-  PCI: Replace pci_dev::driver usage by pci_dev::dev.driver
-  PCI: Drop duplicated tracking of a pci_dev's bound driver
-
- arch/powerpc/include/asm/ppc-pci.h            |  5 --
- arch/powerpc/kernel/eeh.c                     |  8 +++
- arch/powerpc/kernel/eeh_driver.c              | 10 +--
- arch/x86/events/intel/uncore.c                |  2 +-
- arch/x86/kernel/probe_roms.c                  |  2 +-
- drivers/bcma/host_pci.c                       |  6 +-
- drivers/crypto/hisilicon/qm.c                 |  2 +-
- drivers/crypto/qat/qat_4xxx/adf_drv.c         |  7 +--
- drivers/crypto/qat/qat_c3xxx/adf_drv.c        |  7 +--
- drivers/crypto/qat/qat_c62x/adf_drv.c         |  7 +--
- drivers/crypto/qat/qat_common/adf_aer.c       | 10 +--
- .../crypto/qat/qat_common/adf_common_drv.h    |  3 +-
- drivers/crypto/qat/qat_dh895xcc/adf_drv.c     |  7 +--
- drivers/message/fusion/mptbase.c              |  7 +--
- drivers/message/fusion/mptbase.h              |  2 +-
- drivers/message/fusion/mptctl.c               |  4 +-
- drivers/message/fusion/mptlan.c               |  2 +-
- drivers/misc/cxl/guest.c                      | 24 ++++---
- drivers/misc/cxl/pci.c                        | 30 +++++----
- .../ethernet/hisilicon/hns3/hns3_ethtool.c    |  2 +-
- .../ethernet/marvell/prestera/prestera_pci.c  |  2 +-
- drivers/net/ethernet/mellanox/mlxsw/pci.c     |  2 +-
- .../ethernet/netronome/nfp/nfp_net_ethtool.c  |  3 +-
- drivers/pci/iov.c                             | 25 +++++---
- drivers/pci/pci-driver.c                      | 45 ++++++-------
- drivers/pci/pci.c                             |  4 +-
- drivers/pci/pcie/err.c                        | 36 ++++++-----
- drivers/pci/xen-pcifront.c                    | 63 +++++++++----------
- drivers/ssb/pcihost_wrapper.c                 |  6 +-
- drivers/usb/host/xhci-pci.c                   |  2 +-
- include/linux/pci.h                           |  1 -
- 31 files changed, 161 insertions(+), 175 deletions(-)
-
-Range-diff against v4:
- 1:  8d064bbc74b0 =  1:  c2b53ab26a6b PCI: Simplify pci_device_remove()
- 2:  966b49c308b4 =  2:  2c733e1d5186 PCI: Drop useless check from pci_device_probe()
- 3:  ce710d6e8a1b =  3:  547ca5a7aa16 xen/pci: Drop some checks that are always true
- -:  ------------ >  4:  40eb07353844 bcma: simplify reference to the driver's name
- -:  ------------ >  5:  bab59c1dff6d powerpc/eeh: Don't use driver member of struct pci_dev and further cleanups
- -:  ------------ >  6:  abd70de9782d ssb: Simplify determination of driver name
- 4:  3e4e6994a59d !  7:  735845bd26b9 PCI: replace pci_dev::driver usage that gets the driver name
-    @@ Metadata
-     Author: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
-     
-      ## Commit message ##
-    -    PCI: replace pci_dev::driver usage that gets the driver name
-    +    PCI: Replace pci_dev::driver usage that gets the driver name
-     
-         struct pci_dev::driver holds (apart from a constant offset) the same
-         data as struct pci_dev::dev->driver. With the goal to remove struct
-    @@ Commit message
-     
-         Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
-     
-    - ## arch/powerpc/include/asm/ppc-pci.h ##
-    -@@ arch/powerpc/include/asm/ppc-pci.h: void eeh_sysfs_remove_device(struct pci_dev *pdev);
-    - 
-    - static inline const char *eeh_driver_name(struct pci_dev *pdev)
-    - {
-    --	return (pdev && pdev->driver) ? pdev->driver->name : "<null>";
-    -+	if (pdev) {
-    -+		const char *drvstr = dev_driver_string(&pdev->dev);
-    -+
-    -+		if (strcmp(drvstr, ""))
-    -+			return drvstr;
-    -+	}
-    -+
-    -+	return "<null>";
-    - }
-    - 
-    - #endif /* CONFIG_EEH */
-    -
-    - ## drivers/bcma/host_pci.c ##
-    -@@ drivers/bcma/host_pci.c: static int bcma_host_pci_probe(struct pci_dev *dev,
-    - 	if (err)
-    - 		goto err_kfree_bus;
-    - 
-    --	name = dev_name(&dev->dev);
-    --	if (dev->driver && dev->driver->name)
-    --		name = dev->driver->name;
-    -+	name = dev_driver_string(&dev->dev);
-    -+	if (!strcmp(name, ""))
-    -+		name = dev_name(&dev->dev);
-    -+
-    - 	err = pci_request_regions(dev, name);
-    - 	if (err)
-    - 		goto err_pci_disable;
-    -
-      ## drivers/crypto/hisilicon/qm.c ##
-     @@ drivers/crypto/hisilicon/qm.c: static int qm_alloc_uacce(struct hisi_qm *qm)
-      	};
-    @@ drivers/net/ethernet/netronome/nfp/nfp_net_ethtool.c: nfp_get_drvinfo(struct nfp
-      	char nsp_version[ETHTOOL_FWVERS_LEN] = {};
-      
-     -	strlcpy(drvinfo->driver, pdev->driver->name, sizeof(drvinfo->driver));
-    -+	strlcpy(drvinfo->driver, dev_driver_string(&pdev->dev), sizeof(drvinfo->driver));
-    ++	strlcpy(drvinfo->driver, dev_driver_string(&pdev->dev),
-    ++		sizeof(drvinfo->driver));
-      	nfp_net_get_nspinfo(app, nsp_version);
-      	snprintf(drvinfo->fw_version, sizeof(drvinfo->fw_version),
-      		 "%s %s %s %s", vnic_version, nsp_version,
-    -
-    - ## drivers/ssb/pcihost_wrapper.c ##
-    -@@ drivers/ssb/pcihost_wrapper.c: static int ssb_pcihost_probe(struct pci_dev *dev,
-    - 	err = pci_enable_device(dev);
-    - 	if (err)
-    - 		goto err_kfree_ssb;
-    --	name = dev_name(&dev->dev);
-    --	if (dev->driver && dev->driver->name)
-    --		name = dev->driver->name;
-    -+
-    -+	name = dev_driver_string(&dev->dev);
-    -+	if (*name == '\0')
-    -+		name = dev_name(&dev->dev);
-    -+
-    - 	err = pci_request_regions(dev, name);
-    - 	if (err)
-    - 		goto err_pci_disable;
- 5:  574b743327b8 =  8:  1e58019165b9 scsi: message: fusion: Remove unused parameter of mpt_pci driver's probe()
- 6:  674c6efd3dab !  9:  dea72a470141 crypto: qat - simplify adf_enable_aer()
-    @@ drivers/crypto/qat/qat_4xxx/adf_drv.c: static struct pci_driver adf_driver = {
-      	.probe = adf_probe,
-      	.remove = adf_remove,
-      	.sriov_configure = adf_sriov_configure,
-    -+	.err_handler = adf_err_handler,
-    ++	.err_handler = &adf_err_handler,
-      };
-      
-      module_pci_driver(adf_driver);
-    @@ drivers/crypto/qat/qat_c3xxx/adf_drv.c: static struct pci_driver adf_driver = {
-      	.probe = adf_probe,
-      	.remove = adf_remove,
-      	.sriov_configure = adf_sriov_configure,
-    -+	.err_handler = adf_err_handler,
-    ++	.err_handler = &adf_err_handler,
-      };
-      
-      static void adf_cleanup_pci_dev(struct adf_accel_dev *accel_dev)
-    @@ drivers/crypto/qat/qat_c62x/adf_drv.c: static struct pci_driver adf_driver = {
-      	.probe = adf_probe,
-      	.remove = adf_remove,
-      	.sriov_configure = adf_sriov_configure,
-    -+	.err_handler = adf_err_handler,
-    ++	.err_handler = &adf_err_handler,
-      };
-      
-      static void adf_cleanup_pci_dev(struct adf_accel_dev *accel_dev)
-    @@ drivers/crypto/qat/qat_common/adf_common_drv.h: void adf_ae_fw_release(struct ad
-      int adf_ae_stop(struct adf_accel_dev *accel_dev);
-      
-     -int adf_enable_aer(struct adf_accel_dev *accel_dev);
-    ++extern const struct pci_error_handlers adf_err_handler;
-     +void adf_enable_aer(struct adf_accel_dev *accel_dev);
-      void adf_disable_aer(struct adf_accel_dev *accel_dev);
-      void adf_reset_sbr(struct adf_accel_dev *accel_dev);
-    @@ drivers/crypto/qat/qat_dh895xcc/adf_drv.c: static struct pci_driver adf_driver =
-      	.probe = adf_probe,
-      	.remove = adf_remove,
-      	.sriov_configure = adf_sriov_configure,
-    -+	.err_handler = adf_err_handler,
-    ++	.err_handler = &adf_err_handler,
-      };
-      
-      static void adf_cleanup_pci_dev(struct adf_accel_dev *accel_dev)
- 7:  0e022deb0f75 = 10:  b4165dda38ea PCI: Replace pci_dev::driver usage by pci_dev::dev.driver
- 8:  edd9d24df02a = 11:  d93a138bd7ab PCI: Drop duplicated tracking of a pci_dev's bound driver
-
-base-commit: 5816b3e6577eaa676ceb00a848f0fd65fe2adc29
--- 
-2.30.2
-
+DQpPbiAyOS4wOS4yMSAxMTozNiwgSmFuIEJldWxpY2ggd3JvdGU6DQo+IE9uIDI5LjA5LjIwMjEg
+MTA6MjQsIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOg0KPj4gT24gMjkuMDkuMjEgMTE6
+MTYsIEphbiBCZXVsaWNoIHdyb3RlOg0KPj4+IE9uIDI5LjA5LjIwMjEgMTA6MTMsIE1pY2hhbCBP
+cnplbCB3cm90ZToNCj4+Pj4gT24gMjMuMDkuMjAyMSAxNDo1NCwgT2xla3NhbmRyIEFuZHJ1c2hj
+aGVua28gd3JvdGU6DQo+Pj4+PiBAQCAtMTQ5LDYgKzE3MiwxMCBAQCBib29sIHZwY2lfcHJvY2Vz
+c19wZW5kaW5nKHN0cnVjdCB2Y3B1ICp2KQ0KPj4+Pj4gICAgICAgICAgICAgICAgaWYgKCAhYmFy
+LT5tZW0gKQ0KPj4+Pj4gICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOw0KPj4+Pj4gICAgDQo+
+Pj4+PiArICAgICAgICAgICAgZGF0YS5zdGFydF9nZm4gPSBpc19oYXJkd2FyZV9kb21haW4odi0+
+dnBjaS5wZGV2LT5kb21haW4pID8NCj4+Pj4+ICsgICAgICAgICAgICAgICAgX2dmbihQRk5fRE9X
+TihiYXItPmFkZHIpKSA6DQo+Pj4+PiArICAgICAgICAgICAgICAgIF9nZm4oUEZOX0RPV04oYmFy
+LT5ndWVzdF9hZGRyKSk7DQo+Pj4+IEkgYmVsaWV2ZSB0aGlzIHdvdWxkIGxvb2sgYmV0dGVyIHdp
+dGggdGhlIGZvbGxvd2luZyBhbGlnbm1lbnQ6DQo+Pj4+IGRhdGEuc3RhcnRfZ2ZuID0gaXNfaGFy
+ZHdhcmVfZG9tYWluKHYtPnZwY2kucGRldi0+ZG9tYWluKQ0KPj4+PiAgICAgICAgICAgICAgICAg
+ICAgPyBfZ2ZuKFBGTl9ET1dOKGJhci0+YWRkcikpDQo+Pj4+ICAgICAgICAgICAgICAgICAgICA6
+IF9nZm4oUEZOX0RPV04oYmFyLT5ndWVzdF9hZGRyKSk7DQo+Pj4gRldJVyBJIGFncmVlLCB5ZXQg
+cGVyc29uYWxseSBJIHRoaW5rIHRoZSBjb25kaXRpb25hbCBvcGVyYXRvciBoZXJlDQo+Pj4gZXZl
+biB3YW50cyB0byBtb3ZlIGluc2lkZSB0aGUgX2dmbihQRk5fRE9XTigpKS4NCj4+IEkgY2FuIGRv
+IGl0IGFzIHdlbGw6DQo+Pg0KPj4gZGF0YS5zdGFydF9nZm4gPSBfZ2ZuKFBGTl9ET1dOKGlzX2hh
+cmR3YXJlX2RvbWFpbih2LT52cGNpLnBkZXYtPmRvbWFpbikgPyBiYXItPmFkZHIgOiBiYXItPmd1
+ZXN0X2FkZHIpKQ0KPj4gQnV0LCBoZWxwIG1lIHBsZWFzZSBicmVha2luZyBpdCBpbnRvIG11bHRp
+bGluZSB3aXRoIDgwIGNoYXJzIHJlc3BlY3RlZA0KPiBCZXNpZGVzIHRoZSBvcHRpb24gb2YgbGF0
+Y2hpbmcgdi0+dnBjaS5wZGV2LT5kb21haW4gb3INCj4gaXNfaGFyZHdhcmVfZG9tYWluKHYtPnZw
+Y2kucGRldi0+ZG9tYWluKSBpbnRvIGEgaGVscGVyIHZhcmlhYmxlLA0KPg0KPiAgICAgICAgICAg
+ICAgZGF0YS5zdGFydF9nZm4gPQ0KPiAgICAgICAgICAgICAgICAgICBfZ2ZuKFBGTl9ET1dOKGlz
+X2hhcmR3YXJlX2RvbWFpbih2LT52cGNpLnBkZXYtPmRvbWFpbikNCj4gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICA/IGJhci0+YWRkciA6IGJhci0+Z3Vlc3RfYWRkcikpOw0KSSdsbCBn
+byB3aXRoIHRoaXMgb25lLCB0aGFuayB5b3UNCj4NCj4gb3INCj4NCj4gICAgICAgICAgICAgIGRh
+dGEuc3RhcnRfZ2ZuID0NCj4gICAgICAgICAgICAgICAgICAgX2dmbihQRk5fRE9XTihpc19oYXJk
+d2FyZV9kb21haW4odi0+dnBjaS5wZGV2LT5kb21haW4pDQo+ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgPyBiYXItPmFkZHINCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICA6IGJhci0+Z3Vlc3RfYWRkcikpOw0KPg0KPiBKYW4NCj4=
 
