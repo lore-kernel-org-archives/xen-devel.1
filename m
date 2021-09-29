@@ -2,79 +2,53 @@ Return-Path: <SRS0=3HPv=OT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2261BC433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 13:16:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FF05C433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 13:24:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC4DA611C8
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 13:16:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CC4DA611C8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linux.ibm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0AE4861407
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Sep 2021 13:24:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0AE4861407
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.199107.352971 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.199120.352981 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVZRr-0004Ea-Lu; Wed, 29 Sep 2021 13:16:35 +0000
+	id 1mVZYu-0006CU-Fb; Wed, 29 Sep 2021 13:23:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 199107.352971; Wed, 29 Sep 2021 13:16:35 +0000
+Received: by outflank-mailman (output) from mailman id 199120.352981; Wed, 29 Sep 2021 13:23:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVZRr-0004ET-IR; Wed, 29 Sep 2021 13:16:35 +0000
-Received: by outflank-mailman (input) for mailman id 199107;
- Wed, 29 Sep 2021 13:16:33 +0000
+	id 1mVZYu-0006CN-CK; Wed, 29 Sep 2021 13:23:52 +0000
+Received: by outflank-mailman (input) for mailman id 199120;
+ Wed, 29 Sep 2021 13:23:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=lrrL=OT=linux.ibm.com=ajd@srs-us1.protection.inumbo.net>)
- id 1mVZRp-0003pX-Mq
- for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 13:16:33 +0000
-Received: from mx0a-001b2d01.pphosted.com (unknown [148.163.156.1])
+ (envelope-from <SRS0=lbjb=OT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1mVZYs-0006CH-DW
+ for xen-devel@lists.xenproject.org; Wed, 29 Sep 2021 13:23:50 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1d2d0db6-194d-4892-9da5-1133d81ce5c6;
- Wed, 29 Sep 2021 13:16:30 +0000 (UTC)
-Received: from pps.filterd (m0098410.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18TD0Tpj027476; 
- Wed, 29 Sep 2021 09:15:46 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3bcrn9rbsx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 29 Sep 2021 09:15:46 -0400
-Received: from m0098410.ppops.net (m0098410.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 18TD1Rbo030294;
- Wed, 29 Sep 2021 09:15:45 -0400
-Received: from ppma01fra.de.ibm.com (46.49.7a9f.ip4.static.sl-reverse.com
- [159.122.73.70])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3bcrn9rbrq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 29 Sep 2021 09:15:45 -0400
-Received: from pps.filterd (ppma01fra.de.ibm.com [127.0.0.1])
- by ppma01fra.de.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 18TDC3n0019787;
- Wed, 29 Sep 2021 13:15:42 GMT
-Received: from b06cxnps4074.portsmouth.uk.ibm.com
- (d06relay11.portsmouth.uk.ibm.com [9.149.109.196])
- by ppma01fra.de.ibm.com with ESMTP id 3b9ud9xasx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 29 Sep 2021 13:15:42 +0000
-Received: from d06av25.portsmouth.uk.ibm.com (d06av25.portsmouth.uk.ibm.com
- [9.149.105.61])
- by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 18TDFevi57213414
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 29 Sep 2021 13:15:40 GMT
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id E44C911C04C;
- Wed, 29 Sep 2021 13:15:39 +0000 (GMT)
-Received: from d06av25.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 8BE3911C05E;
- Wed, 29 Sep 2021 13:15:39 +0000 (GMT)
-Received: from ozlabs.au.ibm.com (unknown [9.192.253.14])
- by d06av25.portsmouth.uk.ibm.com (Postfix) with ESMTP;
- Wed, 29 Sep 2021 13:15:39 +0000 (GMT)
-Received: from [9.206.131.40] (unknown [9.206.131.40])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by ozlabs.au.ibm.com (Postfix) with ESMTPSA id 7E5A9600F5;
- Wed, 29 Sep 2021 23:15:37 +1000 (AEST)
+ id da39c8c0-55b6-4ddc-a1dd-f1c5f49e0dd0;
+ Wed, 29 Sep 2021 13:23:49 +0000 (UTC)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04lp2058.outbound.protection.outlook.com [104.47.12.58]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-40-W5CYHx9SN-e0rqNP3yJQpg-1; Wed, 29 Sep 2021 15:23:47 +0200
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR0401MB2333.eurprd04.prod.outlook.com (2603:10a6:800:28::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.13; Wed, 29 Sep
+ 2021 13:23:45 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::4d37:ec64:4e90:b16b]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::4d37:ec64:4e90:b16b%7]) with mapi id 15.20.4566.014; Wed, 29 Sep 2021
+ 13:23:45 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AS8P251CA0027.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:2f2::9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4566.14 via Frontend Transport; Wed, 29 Sep 2021 13:23:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -86,83 +60,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1d2d0db6-194d-4892-9da5-1133d81ce5c6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=8WNH5WIjmi4VXGGXQVQqQGa9LxSWiuKObMKI3R3N3v0=;
- b=eTICHaTe5EWn0Iqkz8yeEUgAvudcmWSKeYOZL3tmsOVg2p/vuJCd3lLc7X4IpTJRsQvN
- N+h9f7ERDYgfvyZzbNdXaYE4xiu6SSMbi+oOoQnXmFqA0MDjRWByMV8QDZklznxhWnP8
- Zfu6Z65PrhA/glaMqoEOzOj4/+LPoWJLpdQ3z2MhMDq2F8jcszdMujO8CYHVNV9Cz7k0
- sstnbptCuAlwXwUd+5bwWpT1qWREPrnHxzZBLT02ytCWu6N5JyvTo1qOy/7Be3XDwwgp
- SBf9sCOqX6+7qHmwe/BbrU7S8zsBAly7zJlvoZTU2jK/RY4l2dgZ/h3Am2Pd3krxwQpW Gg== 
-Subject: Re: [PATCH v5 10/11] PCI: Replace pci_dev::driver usage by
- pci_dev::dev.driver
-To: =?UTF-8?Q?Uwe_Kleine-K=c3=b6nig?= <u.kleine-koenig@pengutronix.de>,
-        Bjorn Helgaas <helgaas@kernel.org>
-Cc: Christoph Hellwig <hch@lst.de>, linux-pci@vger.kernel.org,
-        kernel@pengutronix.de, Russell Currey <ruscur@russell.cc>,
-        "Oliver O'Halloran" <oohall@gmail.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Jiri Olsa <jolsa@redhat.com>, Namhyung Kim <namhyung@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Frederic Barrat <fbarrat@linux.ibm.com>, Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        Juergen Gross
- <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-        Mathias Nyman <mathias.nyman@intel.com>, linuxppc-dev@lists.ozlabs.org,
-        linux-perf-users@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-usb@vger.kernel.org
-References: <20210929085306.2203850-1-u.kleine-koenig@pengutronix.de>
- <20210929085306.2203850-11-u.kleine-koenig@pengutronix.de>
-From: Andrew Donnellan <ajd@linux.ibm.com>
-Message-ID: <75dd6d60-08b9-fa68-352c-3a0c5a04c0ab@linux.ibm.com>
-Date: Wed, 29 Sep 2021 23:15:37 +1000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+X-Inumbo-ID: da39c8c0-55b6-4ddc-a1dd-f1c5f49e0dd0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1632921828;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LxxVHC5DI2Oe+uQaFcjF9bzlScAMMc57H+MBGVqKnZE=;
+	b=eeXBb3VDYRpYkdGwvITpRKlRhJomTDWLaq9bdUWy2Oycv+rFvmpsJQ37A3hC9GExKSI1eL
+	eIoaQ/XQ2EiO3fcTC85Ih8byij6D80AirVkSIe4D+NdI/nYUm/JVvye8MMYeRlWTq3CyyK
+	1/Kj9QLxk1x7DZFzQZ44OnehX9lL070=
+X-MC-Unique: W5CYHx9SN-e0rqNP3yJQpg-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=b6LbTx+d33V/CrpqLr94URQHO1B0CsbY4MYVDCLGfwwRjaeuFqXvXSvAwW8slU+575xgldlQppkCuokmvy9P2bDNyz8puXcLFTOg1z6zrenjYMalW4LriT0S5HnPmmrDvZqEY62Qjwejm5rxo151QPSeYE1Y4MD/5LZo+89pSJIrLjbHFQSppOyu5s6e9YTTi+AqOVAISss7JnQJl3MmsPJ05V5Rsc2U3zwqMFWzKyyCueRoOwRLU4AdvCaA5+0k+WvceVYFz5u4bZRL6accXk4dtDSaF1DQUGfuxktLjwklHhDoFasVdX+RTn1d5/INp0kzbts5PjAHLJId5ZQnNw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+ bh=7bWYQaG7TskQCma8sk6hdeKPJ8HJVY7LRSAjfWfTtLw=;
+ b=eLDzijqvFqxr8iPR05EvVV0Hb+M/xPtz6TMKgxL0cs2B+P6VJME7tRXzDKfcfhD0c2HLlQl+D25U2NuGTI6v8c8wKmp19Y9VU93gPAkplchC4EXdQgXBHiAWYVYXqONPjQoohOBvy8FPiEkqw2loxIwtacYwCtjkID8l00AL35vHCarRpC0wSQlHvKEAEpE0/8qH9zpxheAtFs3eMVTJ2w5UUHPP48zG1h/ANGEfOwLCMMrzzFweabRR/Wim7lVZckHyHKQa6rKsvqgIiT+p03IFQzVIP4P12NfUe7GOm+o7EoemUZ7XRzG3vGWBKjlmBNY7zsmCpecwMdIeCX9kNw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: arm.com; dkim=none (message not signed)
+ header.d=none;arm.com; dmarc=none action=none header.from=suse.com;
+Subject: Re: [PATCH v2 10/11] vpci: Add initial support for virtual PCI bus
+ topology
+To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+CC: "julien@xen.org" <julien@xen.org>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Artem Mygaiev <Artem_Mygaiev@epam.com>,
+ "roger.pau@citrix.com" <roger.pau@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Rahul Singh <rahul.singh@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Michal Orzel <michal.orzel@arm.com>
+References: <20210923125501.234252-1-andr2000@gmail.com>
+ <20210923125501.234252-11-andr2000@gmail.com>
+ <6a760126-ba6e-bdf7-97a3-205d75d3d99f@arm.com>
+ <66cc2b43-eedf-5d58-bf93-5047ecf9ac7b@suse.com>
+ <71d8eda6-49f8-691c-1e6b-711ce9f99d50@arm.com>
+ <600cc603-5e6c-b430-def3-74a9b596daa0@epam.com>
+ <8f5f9b93-2b13-30dc-372b-10326130b71d@epam.com>
+ <4bde7d37-6b11-675e-79c1-e6e413fc97f9@suse.com>
+ <7402aa24-e203-795b-0ca7-69e55c6b3f4b@epam.com>
+ <38d64660-bf9f-98a5-9aef-5a3c39804f7f@suse.com>
+ <26c228b1-eb4d-1984-4f24-30dcd24e1cb5@epam.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <548561a6-f878-cacc-cda2-30508a43072d@suse.com>
+Date: Wed, 29 Sep 2021 15:23:42 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
  Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <20210929085306.2203850-11-u.kleine-koenig@pengutronix.de>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <26c228b1-eb4d-1984-4f24-30dcd24e1cb5@epam.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: hXtcU9LxcZFWJ3_AQvYkTcqzdGELwYzx
-X-Proofpoint-GUID: JvUu1pq2Dv5jXGImGMo8koe6SjbY5_vk
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.182.1,Aquarius:18.0.790,Hydra:6.0.391,FMLib:17.0.607.475
- definitions=2021-09-29_05,2021-09-29_01,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
- malwarescore=0 clxscore=1011 lowpriorityscore=0 mlxlogscore=928
- spamscore=0 impostorscore=0 bulkscore=0 mlxscore=0 adultscore=0
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2109230001 definitions=main-2109290081
+Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: AS8P251CA0027.EURP251.PROD.OUTLOOK.COM
+ (2603:10a6:20b:2f2::9) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 6c863af8-d35a-4185-25d9-08d9834c5cf8
+X-MS-TrafficTypeDiagnostic: VI1PR0401MB2333:
+X-Microsoft-Antispam-PRVS:
+	<VI1PR0401MB2333D02029FBED74A3DF69AFB3A99@VI1PR0401MB2333.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	GSyFRYE6v3HRTfEgtE3WaGC2lLUaXK8uoQHZ1G5Rx9EUjZTsbZu4ThUreemrG1qlYgaMUqusmnF6wl1eaLEJt1hIHbmHCLz1AYx4fQaGcvynpjmaMVfNrxuuL3ajz5fs9K3T3ghjWX7jDaasZM8+SJa9fMIbv4oD+IQ4HGGNE1/jHUI5ZWzwZiTqiQ2iZzhpFBM+mAJOR+LjNz1Ig0WWNZqETqk0oMYVIZg7+AEduiQacBOzqKWEIKFa2EaoR5cGgbphXsxF5jhiZjR39lKsotffUwXuu73AySY04Ii+OIoJrk9ZCNLHVyrQUwJT9Zjg3QeQf0vZpsqDF+wZeRyVmzG7vll4ivqD7ZwKSdYkU/JxbsqsDDuj9QifFkPKJ/uJhCrH7huq/l9DUxc9pIfvjW9DsOkIgrdIJUlMQAEXoWDqjYSAMS9qDhcrjx58FziRXXom8yXKR0hUB3L1wu5C/XIRuwjY3o8tixgZ+S4xG0rf6njZSVQh8xFVMVE85ryjG2nBJF/CZpGe/kS2B6qyWZdEqlgFOGwHp1exRccJCMkYkSvhfqF2kCm2kD/FnzCg4GtvVtfAWPq5ZAP4+Y1dans3UyA8b8spLuqKMY/ZnWwvNV75HWH1COdEaIDZx4uXF4RfdhxgVoWsrKlo36cV9WdwtPXZkS9Wgcdd15zjzRUVlHJiav/sfM9hBuUbn/EqnZULmZH6mBS2q68t3uQoFoCg7/vSYEyJSNsRJ4SUeck=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(186003)(26005)(508600001)(8676002)(83380400001)(38100700002)(53546011)(4326008)(956004)(2616005)(31686004)(5660300002)(54906003)(16576012)(66556008)(66476007)(66946007)(8936002)(86362001)(7416002)(6916009)(316002)(6486002)(31696002)(2906002)(36756003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?kgOLTnNfpVKXDsn+/JmdIBgo7zAev71sKG8S7f4v/mBtjkP9XnUKTopgJhLh?=
+ =?us-ascii?Q?puqD+3x8cB95MYivVGCx2MUn6JTzH0ntK7mh3UHShYBpBUXURh7zhkjhGy3Q?=
+ =?us-ascii?Q?ZaDnvrndlM1cciO9Pmlb8BFAuZhjb//OpnLGh+Bw8/AYyy9InCse5XkA12v2?=
+ =?us-ascii?Q?4r9VWNhD38lPWeZjg5a5dxz7YPif2KZw9qZTsb0MNlTqAbrQkiabO0A7/DRt?=
+ =?us-ascii?Q?n26oc9bY7nE4Uxm5yhtQ3puuiDjIE/ZsABXuoKKi03eUui2lo6uXNmD/Rof4?=
+ =?us-ascii?Q?1SNwRYCECtm+Kxb/lpuwIqJ+b3eWAsfemLO5ubRDO/M4pijXazAoWSwcSO+M?=
+ =?us-ascii?Q?dct8d/2M7SkTCiB54Gfwtare4qzezakez4H4K0jB1bhAxwifiMOJe8J3wkQk?=
+ =?us-ascii?Q?ujj21+ZH+kAoevALE6DUmOUWRk8XGKPppcuLjKky0U5sFVidHvEpv1uNr/4P?=
+ =?us-ascii?Q?/bIYYHkxKbzd5LTyhKeBs5y+UGfIU4PAIkywwVKHmIdSWJmGWHDi9UGmXz/I?=
+ =?us-ascii?Q?+2lHhjS6l0xJWYoU0vBLg7nMQ/4VoUJoYYQtgHUMtPCa6DyHKJk/w79RAjTF?=
+ =?us-ascii?Q?Akg0g3Jjx9+19leg1siA5U1uMGRPkJLpNXLuJzrzrXRaUj07O82LdoM8Dy1q?=
+ =?us-ascii?Q?MmNFN9/+MlQ87DZRM+dcYBWK6opyaezds5QsRyUsX5SfrxESX4C9n1Lu1cjB?=
+ =?us-ascii?Q?h1mN1heGpL4zHmKj9k7KI6oBN6VR0Tp2uyQ//zlw1CLWTTSii8ET3QgmfynM?=
+ =?us-ascii?Q?z5Fq/uSVxuQmBa/p0ZZM0CBMR+sW4lYWC0ztzOasK+Z5I0V1DBIEuh1LxXmw?=
+ =?us-ascii?Q?URWx0q2VbbZ6WUoeDgUgDQ89V/2ZgSKPIpEsJTLKSglohpAIV5znvot5bJLn?=
+ =?us-ascii?Q?pagLWSEZGoI15TCwun/BEpZVnBc4bT828yQyYz7+9bP3YaET9Ywastx3o9bT?=
+ =?us-ascii?Q?wUgzcpvZ1URnmIkCpuaBfs2S50vC5lGVBNkqhv/T4iJSrZ6YT5mSNSvIZ9dH?=
+ =?us-ascii?Q?Tr7ywxd2dELs2gWrtHnEStZo+O+BSJoTkqWz+TAtHR8bwMYsRvSs+7WY+08k?=
+ =?us-ascii?Q?fFjLpg3hbbKp1/7kFGkpGG0YGgi55FJgsGtwkuv9uwDpjtkZzaHFn1WFVVLg?=
+ =?us-ascii?Q?eTzADsuNbeubkf2+vPDkYhK9S9HyDYfSvQg8oQjCV4F1tLhQ1Tcn3N+3Xc1y?=
+ =?us-ascii?Q?2ThCaeooLpTKcXeAwcZrl78aCvHPg7Lu3wzbwx7EHH7jBcD3cDOze7MjgjGa?=
+ =?us-ascii?Q?2kuQ6ymxR8H/J+PZ46oOKr3SH1D3SAmNXZymjc8bV3MopkTZH6PwMXMZbTcR?=
+ =?us-ascii?Q?AqCCvAq2P4EuzUEHvH4SgBEA?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6c863af8-d35a-4185-25d9-08d9834c5cf8
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2021 13:23:45.1454
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: V4So5Z465Az18rgKRJDPwSkLyYHwTIpNPSIqQi7X+yUNnNCiIHpqTfVOwT1a4im41wzjjWaZvwC5xTSmkqGIoA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2333
 
-On 29/9/21 6:53 pm, Uwe Kleine-König wrote:>   	 
-list_for_each_entry(afu_dev, &afu->phb->bus->devices, bus_list) {
-> -			if (afu_dev->driver && afu_dev->driver->err_handler &&
-> -			    afu_dev->driver->err_handler->resume)
-> -				afu_dev->driver->err_handler->resume(afu_dev);
-> +			struct pci_driver *afu_drv;
-> +			if (afu_dev->dev.driver &&
-> +			    (afu_drv = to_pci_driver(afu_dev->dev.driver))->err_handler &&
+On 29.09.2021 15:16, Oleksandr Andrushchenko wrote:
+>=20
+> On 29.09.21 15:54, Jan Beulich wrote:
+>> On 29.09.2021 13:56, Oleksandr Andrushchenko wrote:
+>>> On 29.09.21 12:09, Jan Beulich wrote:
+>>>> On 29.09.2021 11:03, Oleksandr Andrushchenko wrote:
+>>>>> Sorry for top posting, but this is a general question on this patch/f=
+unctionality.
+>>>>>
+>>>>> Do you see we need to gate all this with CONFIG_HAS_VPCI_GUEST_SUPPOR=
+T
+>>>>> as this renders in somewhat dead code for x86 for now? I do think thi=
+s still
+>>>>> needs to be in the common code though.
+>>>> I agree it wants to live in common code, but I'd still like the code t=
+o
+>>>> not bloat x86 binaries. Hence yes, I think there want to be
+>>>> "if ( !IS_ENABLED() )" early bailout paths or, whenever this isn't
+>>>> possible without breaking the build, respective #ifdef-s.
+>>> Then it needs to be defined as (xen/drivers/Kconfig):
+>>>
+>>> config HAS_VPCI_GUEST_SUPPORT
+>>>   =C2=A0=C2=A0=C2=A0 # vPCI guest support is only enabled for Arm now
+>>>   =C2=A0=C2=A0=C2=A0 def_bool y if ARM
+>>>   =C2=A0=C2=A0=C2=A0 depends on HAS_VPCI
+>>>
+>>> Because it needs to be defined as "y" for Arm with vPCI support.
+>>>
+>>> Otherwise it breaks the PCI passthrough feature, e.g. it compiles,
+>>>
+>>> but the resulting binary behaves wrong.
+>>>
+>>> Do you see this as an acceptable solution?
+>> Like all (or at least the majority) of other HAS_*, it ought to be
+>> "select"-ed (by arm/Kconfig). Is there a reason this isn't possible?
+>> (I don't mind the "depends on", as long as it's clear that it exists
+>> solely to allow kconfig to warn about bogus "select"s.)
+>=20
+> There is yet no Kconfig exists (even for Arm) that enables HAS_VPCI,
+>=20
+> thus I can't do that at the moment even if I want to. Yes, this can be de=
+ferred
+>=20
+> to the later stage when we enable VPCI for Arm, bit this config option is=
+ still
+>=20
+> considered as "common code" as the functionality being added
+>=20
+> to the common code is just gated with CONFIG_HAS_VPCI_GUEST_SUPPORT.
+>=20
+> With this defined now and not later the code seems to be complete and mor=
+e clean
+>=20
+> as it is seen what is this configuration option and how it is enabled and=
+ used in the
+>=20
+> code.
+>=20
+> So, I see no problem if it is defined in this Kconfig and evaluates to "n=
+" for x86
+>=20
+> and eventually will be "y" for Arm when it enables HAS_VPCI.
 
-I'm not a huge fan of assignments in if statements and if you send a v6 
-I'd prefer you break it up.
+I'm afraid I don't view this as a reply reflecting that you have
+understood what I'm asking for. The primary request is for there to
+not be "def_bool y" but just "bool" accompanied by a "select" in
+Arm's Kconfig. If HAS_VPCI doesn't exist as an option yet, simply
+omit the (questionable) "depends on".
 
-Apart from that everything in the powerpc and cxl sections looks good to me.
+Jan
 
--- 
-Andrew Donnellan              OzLabs, ADL Canberra
-ajd@linux.ibm.com             IBM Australia Limited
+PS: The more replies I get from you, the more annoying I find the
+insertion of blank lines between every two lines of text. Blank
+lines are usually used to separate paragraphs. If it is your mail
+program which inserts these, can you please try to do something
+about this? Thanks.
+
 
