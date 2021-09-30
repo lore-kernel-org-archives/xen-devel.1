@@ -2,71 +2,55 @@ Return-Path: <SRS0=PA4M=OU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 633A0C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Sep 2021 14:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C601C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Sep 2021 14:51:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 05F0161423
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Sep 2021 14:35:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 05F0161423
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4C5346115A
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Sep 2021 14:51:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4C5346115A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.200005.354373 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.200025.354395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVx9C-0000hF-R0; Thu, 30 Sep 2021 14:34:54 +0000
+	id 1mVxOz-0003zj-Ke; Thu, 30 Sep 2021 14:51:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 200005.354373; Thu, 30 Sep 2021 14:34:54 +0000
+Received: by outflank-mailman (output) from mailman id 200025.354395; Thu, 30 Sep 2021 14:51:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mVx9C-0000h8-Nn; Thu, 30 Sep 2021 14:34:54 +0000
-Received: by outflank-mailman (input) for mailman id 200005;
- Thu, 30 Sep 2021 14:34:54 +0000
+	id 1mVxOz-0003zc-Hg; Thu, 30 Sep 2021 14:51:13 +0000
+Received: by outflank-mailman (input) for mailman id 200025;
+ Thu, 30 Sep 2021 14:51:11 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=YInd=OU=arm.com=Bertrand.Marquis@srs-us1.protection.inumbo.net>)
- id 1mVx9C-0000e5-96
- for xen-devel@lists.xenproject.org; Thu, 30 Sep 2021 14:34:54 +0000
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com (unknown
- [40.107.8.43]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9297bc4b-21fb-11ec-bd4e-12813bfff9fa;
- Thu, 30 Sep 2021 14:34:53 +0000 (UTC)
-Received: from AS9PR06CA0213.eurprd06.prod.outlook.com (2603:10a6:20b:45e::12)
- by PA4PR08MB6032.eurprd08.prod.outlook.com (2603:10a6:102:e4::12)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=lHSZ=OU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1mVxOx-0003zW-Sn
+ for xen-devel@lists.xenproject.org; Thu, 30 Sep 2021 14:51:11 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.109.102])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d95309f8-21fd-11ec-bd52-12813bfff9fa;
+ Thu, 30 Sep 2021 14:51:10 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04lp2055.outbound.protection.outlook.com [104.47.14.55]) (Using
+ TLS) by relay.mimecast.com with ESMTP id de-mta-3-XvnH9s1tOgqgOhuJ6aE7tw-1;
+ Thu, 30 Sep 2021 16:51:08 +0200
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VE1PR04MB6479.eurprd04.prod.outlook.com (2603:10a6:803:11c::33)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.14; Thu, 30 Sep
- 2021 14:34:51 +0000
-Received: from AM5EUR03FT037.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:45e:cafe::2d) by AS9PR06CA0213.outlook.office365.com
- (2603:10a6:20b:45e::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.14 via Frontend
- Transport; Thu, 30 Sep 2021 14:34:50 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM5EUR03FT037.mail.protection.outlook.com (10.152.17.241) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4566.14 via Frontend Transport; Thu, 30 Sep 2021 14:34:50 +0000
-Received: ("Tessian outbound a492f2284909:v103");
- Thu, 30 Sep 2021 14:33:46 +0000
-Received: from 7c533c432ce7.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 813328F4-B15B-4199-8845-86E9136F7F88.1; 
- Thu, 30 Sep 2021 14:33:33 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 7c533c432ce7.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 30 Sep 2021 14:33:33 +0000
-Received: from PAXPR08MB6446.eurprd08.prod.outlook.com (2603:10a6:102:12d::10)
- by PAXPR08MB6365.eurprd08.prod.outlook.com (2603:10a6:102:156::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.14; Thu, 30 Sep
- 2021 14:33:30 +0000
-Received: from PAXPR08MB6446.eurprd08.prod.outlook.com
- ([fe80::c029:ed0:82e7:3c2f]) by PAXPR08MB6446.eurprd08.prod.outlook.com
- ([fe80::c029:ed0:82e7:3c2f%6]) with mapi id 15.20.4566.017; Thu, 30 Sep 2021
- 14:33:30 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4544.18; Thu, 30 Sep
+ 2021 14:51:07 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::4d37:ec64:4e90:b16b]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::4d37:ec64:4e90:b16b%7]) with mapi id 15.20.4566.014; Thu, 30 Sep 2021
+ 14:51:07 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AM6PR01CA0065.eurprd01.prod.exchangelabs.com (2603:10a6:20b:e0::42) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.15 via Frontend
+ Transport; Thu, 30 Sep 2021 14:51:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -78,248 +62,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9297bc4b-21fb-11ec-bd4e-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=19xI88ys4R3Ukt/N9WTN1BTeGYle4keyVGvSxbzotoQ=;
- b=jgYDGAC+1s0Q9PxnlZ0/PVMFZzM3gA2FxvfVwgbK2wLRPdoxy07UPgHYa9+ciqPnoT4NVK7fTtoteTJXjEN0a7TZOhnz3cNcE20AgIGsAaaoMVYGTiCdOlC9aPlTtzZcyBOQIglVaFPQYuwD2tl22QiXtT8qPCpKItP8j4RgfYo=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: e92ac0beda1af1e9
-X-CR-MTA-TID: 64aa7808
+X-Inumbo-ID: d95309f8-21fd-11ec-bd52-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1633013469;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=srFDW2pOcHBYQzELexsxJ7TSCRkMdj8CE4QVd8VrhBs=;
+	b=GrY/mM5brBfOBY5uXFTA7GNN/DE+9IDgmCNjhCs9nbtYD+Ho0Vc0TJaRF1lG/SINI1rU4P
+	dE44pJKVEfr4yj2/vdm97nrjTkUX+0rjua5Jg0Q+FAK/gl2TR1RoVzO+PACFGtIsCMViD0
+	hIjZaYQtq0X/sNN/edmuHddrYyW7dzY=
+X-MC-Unique: XvnH9s1tOgqgOhuJ6aE7tw-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HuXUygolcnfHsGvUGqvBBhXFHiZ5OCFVPbSfHEekKiSg4PtI5PDSEbwTM7so4F8aZCFUZopOiAau1FN+fGxlMesU5w56Inb/IFnMHt+hsTmCebmn/sz9i7Jm2Pq2HAEbOC+6y3wl7w7mLSo75dpCzgtzQ5kLYTsPXcRvK2Bm7FI5XHNT1RDSj8m1NANVT/KQQh3gDoMOuEOz20pugN8vvggU3Z0E9gGQd0I8j1lFVMwAaJLzrOTpgTx0HIvJczwzsiCgUnjxOROYn6oDiUxSIvIcA04xkykXOsxaeB6DhIK60Wru5Kdgm/zhKkT7kF6JdhVqSiE6HFK7H+92KQXasA==
+ b=R8HDDEWcyccI2B87WJUEQQNDnd3Zdp7deo1iSvhMdT09s8kAmUVSIvWKuUxdfkfvKyXrT3yqMjSVLepx9kt3EcNALL0W9u8pndzoaLcRWtnHsVa/k5qz0J+y6Qr+oK2DkwS8AyFZr876xlJyzsD2BGY4JX/CtaeOrms1lDO9G7JscYkRX4/Zs4dD+qwNvq7SExPPL0hYF28v20IH7fcMjbi/qKmKmzk7ezTpjLXyi8o5yHIl731it3bq8GyWPCjNVS/hcJ0vWSbM1qLX/Rm0Rr1yjZM0ci5qIw8MbffoM+Huy3FBdOffQbNGV70Pn9MhIV8M+XWdLwBjwqTfV1HeDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
- bh=19xI88ys4R3Ukt/N9WTN1BTeGYle4keyVGvSxbzotoQ=;
- b=WVcWXJ9stWvVbt/Rnt/PVKoStVU40XOxWQPfkICYvuBu+IyFJnZeuuQSLYNXEWL2HwWUmkpdzVL9v/i1qhGxlU5HBhOS8Hk390lTPdIwSsceia19M+RD7TwknfSdht3pH/AbQpE8OaBwRsChpuMoeiAjwh5b/J5tx8DL2IdynmQWcIv1XseoPKtNe2Eikgqgie+FoQPxiKloVRvnJXb0/7iLzTUcxMPmGYQXrUqw0XNZTwBWthOogQt8UAmU70mjLQfnvtapKlQ2xEriD8Myk0KHYQN2tL0O3ucLv/IK9KnQi+Aibww3P02pYFi4B4SE9Xo1Mf5KUphc1BNiu/wNOw==
+ bh=srFDW2pOcHBYQzELexsxJ7TSCRkMdj8CE4QVd8VrhBs=;
+ b=G/ySFCSu2DtePpKITow1zmyCXpkaf8fKy7HN6sSXBKx22pIBytXP9PKoaGkIqX6dlRvmXkjodPymHnkjGztSJ3DTofgEwLzF/ZVfXQsHUzWUgDGVKzvxEFKm76ScWOIlgJKI9xQcFz0Xsq1NrWAkCTeOXsTxezR46jaMQ1Ju5MSF9JPxpx5n1LG5rS00PV1HePV8P6LSvaBA4dWzl1OyA+u+RxBcxp4/MAnRPtvwlKtULenynl2uQZiKLIFqdq6Jt8SK3Lb5zSp4a/K/Ao3RoGpPsSZ+RFdmhONYRwjoE90pU8EYvgDzXcrxWAJsIIBOfcrtKpytWLY35tPcbhaY+Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=19xI88ys4R3Ukt/N9WTN1BTeGYle4keyVGvSxbzotoQ=;
- b=jgYDGAC+1s0Q9PxnlZ0/PVMFZzM3gA2FxvfVwgbK2wLRPdoxy07UPgHYa9+ciqPnoT4NVK7fTtoteTJXjEN0a7TZOhnz3cNcE20AgIGsAaaoMVYGTiCdOlC9aPlTtzZcyBOQIglVaFPQYuwD2tl22QiXtT8qPCpKItP8j4RgfYo=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Luca Fancellu <Luca.Fancellu@arm.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Wei Chen <Wei.Chen@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Ian
- Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Wei Liu
-	<wl@xen.org>
-Subject: Re: [PATCH v4 1/3] arm/efi: Introduce xen,uefi-cfg-load DT property
-Thread-Topic: [PATCH v4 1/3] arm/efi: Introduce xen,uefi-cfg-load DT property
-Thread-Index: AQHXtgeKm5+W6XbeOUevr2j0oD4u3qu8pDcA
-Date: Thu, 30 Sep 2021 14:33:30 +0000
-Message-ID: <0A3942A2-C668-4BDD-A1A0-D6EFD2738560@arm.com>
-References: <20210930142846.13348-1-luca.fancellu@arm.com>
- <20210930142846.13348-2-luca.fancellu@arm.com>
-In-Reply-To: <20210930142846.13348-2-luca.fancellu@arm.com>
-Accept-Language: en-GB, en-US
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=none action=none
+ header.from=suse.com;
+Subject: Re: [PATCH v3 05/17] xen/arm: Add PHYSDEVOP_pci_device_* support for
+ ARM
+To: Rahul Singh <rahul.singh@arm.com>
+Cc: bertrand.marquis@arm.com, Andre.Przywara@arm.com,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
+References: <cover.1632847120.git.rahul.singh@arm.com>
+ <f8ac00f7d52f4853d276b4da24294fbeb3602245.1632847120.git.rahul.singh@arm.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <f4ff4369-3be1-eed0-d3e3-6c9d93952526@suse.com>
+Date: Thu, 30 Sep 2021 16:51:04 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+In-Reply-To: <f8ac00f7d52f4853d276b4da24294fbeb3602245.1632847120.git.rahul.singh@arm.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3654.120.0.1.13)
-Authentication-Results-Original: arm.com; dkim=none (message not signed)
- header.d=none;arm.com; dmarc=none action=none header.from=arm.com;
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-Correlation-Id: bcb5bbce-548d-4c1e-9794-08d9841f75c7
-x-ms-traffictypediagnostic: PAXPR08MB6365:|PA4PR08MB6032:
-x-ms-exchange-transport-forked: True
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM6PR01CA0065.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:e0::42) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: fc0b3b67-4c82-45cf-8896-08d98421bbc9
+X-MS-TrafficTypeDiagnostic: VE1PR04MB6479:
 X-Microsoft-Antispam-PRVS:
-	<PA4PR08MB6032EDE507FB49BE2BC9BC4B9DAA9@PA4PR08MB6032.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:9508;OLM:9508;
+	<VE1PR04MB64798F427007DA2F5F506FD8B3AA9@VE1PR04MB6479.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- rj0dKr6twHPE9X6cOtOaMOz3qo2WFQTb655aha2g2rQGX/I/WUa+gtZJ9rMRpnLrgEPTfGNJnJb7FylvjJTZqYulJWI7NKnw5vAW90RiYF7m9mFxWayH3hXFR9NuLafFqQapHUe7UG5OeIm2tMUYRoNXkjnhFZR5e1Zzwj7QonVaI/akGHjdBYPn0pwXAkFKugsiaLORxoHFOfvS+VFtRoFtw5Ggvb0tso9qt7WNKpdYbAzTLauHZ4Ke663Z9a6udFPYY5M1vv49IP6yzBUDXrS7uI1UWWbsuy/xlr811PnW3foqPOlYBi6JNAr1PmKrXaTANYeZHKZxfiixi9m2/QsE0f/LOQ4vm+DIxeXJ1vEe+oczJFr/+HzUP5OPNHQii2fNNwuFJ5dZzuEbv4MG0QPzKdmWwMxFOKid3VuplyhRJfQFHdrtKjg99N84p4OZGIinm8SiRBoecA60vBEgBbdELHx72X7wyPClfofGcYLo9F/lrar4kR1SgggYeDkCCuQzfUg6XSI868MiB80QXcWJMMHomi48wR/7ipzgvVoe2rnwJObqMlKYDnRcZ6llbt+X3owGMcrA2V6yWCtv/2XM0ujFHJS1uWsu03WkLNipCrbaBhXJG7WmSVwCSY2bcuGKgSARWh8R/ZXGKmPHV305UEa/hWt2jZiw8cTjccqLPADMZNPSMbnO7zfyU24izZsuNSDG7oKD4xV/lZAb5eZxXlTeP9XjlqQvQ7ADwGhEICBSFwK5mjCnqJMA9FLO
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR08MB6446.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(8676002)(6862004)(6486002)(6512007)(508600001)(71200400001)(53546011)(37006003)(54906003)(2906002)(186003)(316002)(4326008)(26005)(2616005)(6636002)(6506007)(8936002)(83380400001)(76116006)(91956017)(64756008)(66946007)(66556008)(66476007)(66446008)(86362001)(33656002)(38070700005)(38100700002)(122000001)(5660300002)(36756003)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <7D0F0FB8D4138F4CB582D24B708E264D@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6365
-Original-Authentication-Results: arm.com; dkim=none (message not signed)
- header.d=none;arm.com; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM5EUR03FT037.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	c39bdc37-e2f2-4613-3b50-08d9841f4658
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	wYnGC8x5tBlRHWd8p+kijtSm5CpwKbFvQoovqCXE0j6p8GeY2+Ym32pMH+CssBOL9C6pFIek7gI61/Lew+tACTkevXpMOSiFmh+DG2L4wi0wOKowNN4watN/5DpdC++YRFn9AshJWJ/MSf4uPlpQkp5vNLlAPrLXJp4yFjVfjwVgVtNKoOWMQbxyo2+ql2eR2uZagJT8ac0u1MuFu1ZeykfYq0E+oScPSK0GTL+W489Vn/f1IBtFINDqU5RjKvhbgbDVPRdRWIeKNRTKkkdKkD/edaLCRPL/PLl9HvHGqqpq4+NcF5fEdyyQQds3ntW1BPJAdfrGK+cptl+YKSohj9bYJTPOFg6vPukxl4HRodE1hYR3qu1QNsaHRNoL5AH3YIVbgFCQqXdrmfONpi5VlEmD7SnCsFd7CsbY6IxXTfcS/21oQsXVI9V0WBeJud6K4qAwlVTrrreNJnBEekNraRovAcFHEc5u0n5xlY15hsJEtHk8HuoMQa2+XEPGiQx6IwAj1v5tQAHqpEdt154CYPSVjQX5Oc+W0xfqiKeGVgyF/7ugYeTM3Gb9gF9vMkFA8TgCQHpAcu7vbCDzagg872zKVEM6nKSnhYAX+Mc3cziMYWjvS3KS9bSGrdKB7u6iyfRlBOxVYX7RPGTokCoKtlmyDhnpo6RtLllBTKqTkGLAhScsiEN9ZMxoS3eQ4jumYeL2vjSY/AKnpv2csIhqdw==
+	ImUrXuWjtfeCjEbPy8ZxKzvxJp7jQ7RJPE7gqwt3+nk7dqmLTr92YmrS8YYZj6tk/Vn5Ui1jhX58ETZB/WnGRfc/1rbQ+mHexaftHms95wYCG8YhQ6bQjX43SYRmXN0l9AuAU6Y9E71RXFJuAFawOsSUqeBgfZe5Jyck8zsbYu6LnH3yOcYhe0gPW0RFBMWWDeYT+bNp1rVRNynHalrCe+5UuKXVZ8DgwPxSwvbwxpKUcVjCTpXmzoIBH/LMKwVFKprsRlR3xT/PIr1LEEPfr2WAflg3jNmqpIzpwn+opF9e5Sockc56THqaXhfdRz/1pVpwQ6aIbJVPW3zwVrCpb2qauAj0x+BUsQTOIkR1ii7CUeytS0asFcu49Rs586jVw0pms28vmNNYgeMDUor7+pRwgcElacu64TW6IXSVd64LcSxRnIdixjO2i1+YfpYb+iqGZHfVUQ6bagpMsipRPEXa+mzhP6YxoHk4u3DyGTpjzyF+X1c8C6WuD5/hIZv3g85oNuYtLHdSrWQDnJKfPtflPdbAmunXsht6sIqN4QXZAo5yVZgN1c5RbullOige8P/1Zjg3KHEQn6Y301ahjVdtXKv7MMYDFz5uSUr6yFWkXfHmkWmcBXqDGuBlPTTteFLFbdZOiSQJiHSJgIm3hl3rmyGR41P2rjI3w953MphCwtIKSYn0puMrw0ZX71UyH0NQk4vuT1atR6upauLzBw==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(70206006)(26005)(70586007)(36860700001)(6862004)(316002)(86362001)(81166007)(336012)(37006003)(508600001)(54906003)(2906002)(33656002)(2616005)(6512007)(8676002)(82310400003)(4326008)(186003)(53546011)(8936002)(6506007)(47076005)(83380400001)(5660300002)(36756003)(356005)(6636002)(6486002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2021 14:34:50.3943
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(2906002)(508600001)(6916009)(36756003)(86362001)(26005)(16576012)(316002)(186003)(53546011)(956004)(6486002)(31686004)(54906003)(4326008)(83380400001)(38100700002)(8936002)(2616005)(66946007)(31696002)(66476007)(5660300002)(8676002)(66556008)(7416002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?RDBqbUo3VC9mOUFWcldTNllzYnZTNXlWY25zMDV4a0dHU1VhZEdZWG43aE1m?=
+ =?utf-8?B?SThHZkdiSzN0ZDN3a3I1dWd1ZEpGNDQxZ2dwK3JiR1ZJZ1IwblF0bnVNVjdP?=
+ =?utf-8?B?VVdqaXBBM3MrSkhoNjgzN0lXU1BPaDByV01yWEpqNnFJOFBUSDVNdjY5eVlv?=
+ =?utf-8?B?QnRwejJ1WHlUdDlSdVRndFJFVHY1VU4zWEZLVGRZaEFrSUFiU3Y1RTc3N2N2?=
+ =?utf-8?B?N2lFb3drQ2lEZG1veFZCMFNtaS9ybHFzZVk4T2g5cnZJT1RWSmVNSCtnbDZP?=
+ =?utf-8?B?Q1FMVklVeTN5OGMvdjBzVGdUYjI2TVdoSGN3dDVoZVBOSnJCVHU0aE51bTda?=
+ =?utf-8?B?L2h4Q2s0UmFMZ0VJL0JZK1VzZ2E3YWZYTWhRajVPdXdiNTR5bU0yQnQ4aVla?=
+ =?utf-8?B?Nk5rMVNsdFQ3T1pvd2JrVlI5V0VYZk94RjlGVUZIZTd4SGN6cE0yaGpLN3BZ?=
+ =?utf-8?B?ZEp3ajhyV1p5djJVZVNHZ3lmbWlQWFg1dHBBZG0rTjZGNi9hdnpjcHZMOFRy?=
+ =?utf-8?B?MjdLVjVRQzJ4eW5WSkhCSVE0S3JTOEpVK0xBZFpwZFB0L3VwUU4yRXBIVEUy?=
+ =?utf-8?B?T3lxd3JKMU9rZ1htMDduVXNKSHpnS3dZRTJyVURILzdLUWVMQVBNSFBPbnUz?=
+ =?utf-8?B?UUxQY1N6M092S21jcUdGNjdEUEIwY1NHY2hRdEVOd3l0WlpWbmdmeXgyRXB1?=
+ =?utf-8?B?S3ZLazkvTlFOZENaWUQ4a3g0ait2UlBJRGloQVZMaGxIMGRObHNvbWVYWlVG?=
+ =?utf-8?B?MHJJTGZsb2oweXMvUDFyMlZ4dEh2R3BlUS9qNWpyNTdnZzBkUzMvOXFLcjhw?=
+ =?utf-8?B?RUsxNCtzS0p5KzVmZnZaS0FocU56a3JlZjJLMkhqYlZ6R2Y0dGtvLy9VNDFn?=
+ =?utf-8?B?N3B0MFRoWHdYcVBTR0VkWlFCc2NpZmpMR3JxUDJ3OVQzYWtkSDNkUFlSNWkw?=
+ =?utf-8?B?K05RZ1grOG9DNUR5ajhtTGovT3BUWXEyRFR1bGdVMDhlamJ2TWxoTXNxalFl?=
+ =?utf-8?B?MU51SkFGZ0lJMGo2NS9yVkg1T0UwcTNQcjJiRTA5bXE5S2ozc2pIdDIxNVBX?=
+ =?utf-8?B?bUx5NmQ4cFhubnM5c0JXVWZFbTNGVmIzelk1bWV3Rk90QWM2TmdlRGFVNm0z?=
+ =?utf-8?B?UXBaNDkyRmx2a0NNZlVzYzdXaFRBd1JZZEc1aEFtanhhZDBNNG43U08vbEpy?=
+ =?utf-8?B?bndhaEY3R1dyT3V6T3hYZmFhNkJOa1FtU3NEWU5MeHdhQmVFU1kxK2V1d3c2?=
+ =?utf-8?B?RDdSRVJBVVZnLzFUekFKVkF0ZnhrVmJ1ZGw0MTZkT3Q1cUtPWEo3K21HTVRN?=
+ =?utf-8?B?K2E2RUtIenNIVEVkNDFvL29xZUVCZmc2aEFFME1zSHBITXRlUVBYb0NHQVRU?=
+ =?utf-8?B?ZjVQbnJzaEplNVA0SWt6dUVmbzk4eENaWVVKeVJ0RmEvMGVMRzd2MGdmRWZ4?=
+ =?utf-8?B?SVNsemNvKzZ4K1ZEWHNkY1NhU0Vja3FsSEUxUkprWHlQRmlrSitkL1g1ZFh6?=
+ =?utf-8?B?d2REQ3dzTjArSVU3Nk9aUmdWSXJ2MmFwbStzMURzOStMVXl2bjlxY3R3Tm9a?=
+ =?utf-8?B?VXkwQXZYaWliK0hNL2RmQ3RFSC9jb2Z4U3VBSWdoSEhjcldZTnJLUkswTWZN?=
+ =?utf-8?B?QWF2ZXVyV29KQjA3YUUwalpncE1LMC9qNkYxUGVqK1dmYXBQM1VRdXk3MGx2?=
+ =?utf-8?B?bkx4VjhhK3RPSnMxaVRMdDE3M3NwSnBmUlc2S1hwV1lXSWJZdE9qazNRSkhM?=
+ =?utf-8?Q?huxRxaYwYIbV3nDUbKIJ4Lv/tz/GHCvFIW73KMj?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc0b3b67-4c82-45cf-8896-08d98421bbc9
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2021 14:51:06.9949
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bcb5bbce-548d-4c1e-9794-08d9841f75c7
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	AM5EUR03FT037.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6032
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3qumflTGaykpbWFThVAz2ZHOz4b18NOG1K5XpqsKb1O4lZMc7K3bMk3ea6TjNaHu3xQF2gI6ND1vJpgoahsTOw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB6479
 
-Hi Luca,
+On 28.09.2021 20:18, Rahul Singh wrote:
+> Hardware domain is in charge of doing the PCI enumeration and will
+> discover the PCI devices and then will communicate to XEN via hyper
+> call PHYSDEVOP_pci_device_add(..) to add the PCI devices in XEN.
+> 
+> Also implement PHYSDEVOP_pci_device_remove(..) to remove the PCI device.
+> 
+> As most of the code for PHYSDEVOP_pci_device_* is the same between x86
+> and ARM, move the code to a common file to avoid duplication.
+> 
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 
-> On 30 Sep 2021, at 15:28, Luca Fancellu <Luca.Fancellu@arm.com> wrote:
->=20
-> Introduce the xen,uefi-cfg-load DT property of /chosen
-> node for ARM whose presence decide whether to force
-> the load of the UEFI Xen configuration file.
->=20
-> The logic is that if any multiboot,module is found in
-> the DT, then the xen,uefi-cfg-load property is used to see
-> if the UEFI Xen configuration file is needed.
->=20
-> Modify a comment in efi_arch_use_config_file, removing
-> the part that states "dom0 required" because it's not
-> true anymore with this commit.
->=20
-> Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-> Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+On v1 Julien said:
 
-Cheers
-Bertrand
+"There are other PHYSDEVOP operations to add PCI devices. I think it is 
+ fine to only implement the latest (CC Jan for some opinion and confirm 
+ this is the latest). However, this ought to be explained in the commit 
+ message."
 
-> ---
-> v4 changes:
-> - modify property name to xen,uefi-cfg-load
-> v3 changes:
-> - add documentation to misc/arm/device-tree/booting.txt
-> - Modified variable name and logic from skip_cfg_file to
-> load_cfg_file
-> - Add in the commit message that I'm modifying a comment.
-> v2 changes:
-> - Introduced uefi,cfg-load property
-> - Add documentation about the property
-> ---
-> docs/misc/arm/device-tree/booting.txt |  8 ++++++++
-> docs/misc/efi.pandoc                  |  2 ++
-> xen/arch/arm/efi/efi-boot.h           | 28 ++++++++++++++++++++++-----
-> 3 files changed, 33 insertions(+), 5 deletions(-)
->=20
-> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device=
--tree/booting.txt
-> index 44cd9e1a9a..352b0ec43a 100644
-> --- a/docs/misc/arm/device-tree/booting.txt
-> +++ b/docs/misc/arm/device-tree/booting.txt
-> @@ -121,6 +121,14 @@ A Xen-aware bootloader would set xen,xen-bootargs fo=
-r Xen, xen,dom0-bootargs
-> for Dom0 and bootargs for native Linux.
->=20
->=20
-> +UEFI boot and DT
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> @@ -82,6 +83,7 @@ CHECK_physdev_pci_device
+>  typedef int ret_t;
+>  
+>  #include "../physdev.c"
+> +#include "../../../common/physdev.c"
+
+Please don't unless entirely unavoidable: common/ has its own
+common/compat/.
+
+> --- /dev/null
+> +++ b/xen/common/physdev.c
+> @@ -0,0 +1,81 @@
 > +
-> +When Xen is booted using UEFI, it doesn't read the configuration file if=
- any
-> +multiboot module is specified. To force Xen to load the configuration fi=
-le, the
-> +boolean property xen,uefi-cfg-load must be declared in the /chosen node.
+> +#include <xen/guest_access.h>
+> +#include <xen/hypercall.h>
+> +#include <xen/init.h>
 > +
+> +#ifndef COMPAT
+> +typedef long ret_t;
+> +#endif
 > +
-> Creating Multiple Domains directly from Xen
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> diff --git a/docs/misc/efi.pandoc b/docs/misc/efi.pandoc
-> index ac3cd58cae..ed85351541 100644
-> --- a/docs/misc/efi.pandoc
-> +++ b/docs/misc/efi.pandoc
-> @@ -14,6 +14,8 @@ loaded the modules and describes them in the device tre=
-e provided to Xen.  If a
-> bootloader provides a device tree containing modules then any configurati=
-on
-> files are ignored, and the bootloader is responsible for populating all
-> relevant device tree nodes.
-> +The property "xen,uefi-cfg-load" can be specified in the /chosen node to=
- force
-> +Xen to load the configuration file even if multiboot modules are found.
->=20
-> Once built, `make install-xen` will place the resulting binary directly i=
-nto
-> the EFI boot partition, provided `EFI_VENDOR` is set in the environment (=
-and
-> diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
-> index cf9c37153f..a3e46453d4 100644
-> --- a/xen/arch/arm/efi/efi-boot.h
-> +++ b/xen/arch/arm/efi/efi-boot.h
-> @@ -581,22 +581,40 @@ static void __init efi_arch_load_addr_check(EFI_LOA=
-DED_IMAGE *loaded_image)
->=20
-> static bool __init efi_arch_use_config_file(EFI_SYSTEM_TABLE *SystemTable=
-)
-> {
-> +    bool load_cfg_file =3D true;
->     /*
->      * For arm, we may get a device tree from GRUB (or other bootloader)
->      * that contains modules that have already been loaded into memory.  =
-In
-> -     * this case, we do not use a configuration file, and rely on the
-> -     * bootloader to have loaded all required modules and appropriate
-> -     * options.
-> +     * this case, we search for the property xen,uefi-cfg-load in the /c=
-hosen
-> +     * node to decide whether to skip the UEFI Xen configuration file or=
- not.
->      */
->=20
->     fdt =3D lookup_fdt_config_table(SystemTable);
->     dtbfile.ptr =3D fdt;
->     dtbfile.need_to_free =3D false; /* Config table memory can't be freed=
-. */
-> -    if ( !fdt || fdt_node_offset_by_compatible(fdt, 0, "multiboot,module=
-") < 0 )
+> +ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+> +{
+> +    ret_t ret;
 > +
-> +    if ( fdt_node_offset_by_compatible(fdt, 0, "multiboot,module") > 0 )
+> +    switch ( cmd )
 > +    {
-> +        /* Locate chosen node */
-> +        int node =3D fdt_subnode_offset(fdt, 0, "chosen");
-> +        const void *cfg_load_prop;
-> +        int cfg_load_len;
+> +#ifdef CONFIG_HAS_PCI
+
+All of the enclosed code should really be under drivers/pci/ or in
+drivers/passthrough/pci.c, e.g. in a pci_physdev_op() function
+called from both Arm and x86. Unless, I will admit, this would pose
+undue problems for x86'es compat handling. But I'd like to know
+whether that route was at least explored. (I.e. I'm afraid Julien's
+request to move this code to "common" was understood too much to the
+word, sorry.)
+
+> +    case PHYSDEVOP_pci_device_add: {
+> +        struct physdev_pci_device_add add;
+> +        struct pci_dev_info pdev_info;
+> +        nodeid_t node;
 > +
-> +        if ( node > 0 )
+> +        ret = -EFAULT;
+> +        if ( copy_from_guest(&add, arg, 1) != 0 )
+> +            break;
+> +
+> +        pdev_info.is_extfn = !!(add.flags & XEN_PCI_DEV_EXTFN);
+
+While I'm not going to insist (as you're merely moving this code), it
+would be nice if the !!() was dropped here, ...
+
+> +        if ( add.flags & XEN_PCI_DEV_VIRTFN )
 > +        {
-> +            /* Check if xen,uefi-cfg-load property exists */
-> +            cfg_load_prop =3D fdt_getprop(fdt, node, "xen,uefi-cfg-load"=
-,
-> +                                        &cfg_load_len);
-> +            if ( !cfg_load_prop )
-> +                load_cfg_file =3D false;
+> +            pdev_info.is_virtfn = 1;
+
+... "true" was used here, and ...
+
+> +            pdev_info.physfn.bus = add.physfn.bus;
+> +            pdev_info.physfn.devfn = add.physfn.devfn;
 > +        }
+> +        else
+> +            pdev_info.is_virtfn = 0;
+
+... "false" here while moving, as both fields are bool.
+
+> +        if ( add.flags & XEN_PCI_DEV_PXM )
+> +        {
+> +            uint32_t pxm;
+> +            size_t optarr_off = offsetof(struct physdev_pci_device_add, optarr) /
+> +                                sizeof(add.optarr[0]);
+> +
+> +            if ( copy_from_guest_offset(&pxm, arg, optarr_off, 1) )
+> +                break;
+> +
+> +            node = pxm_to_node(pxm);
+> +        }
+> +        else
+
+I think this code should become CONFIG_NUMA dependent, now that it
+gets moved to common code. This would save you from (oddly; see
+below) implementing pxm_to_node() on Arm.
+
+> +            node = NUMA_NO_NODE;
+> +
+> +        ret = pci_add_device(add.seg, add.bus, add.devfn, &pdev_info, node);
+> +        break;
 > +    }
 > +
-> +    if ( !fdt || load_cfg_file )
->     {
->         /*
->          * We either have no FDT, or one without modules, so we must have=
- a
-> -         * Xen EFI configuration file to specify modules.  (dom0 require=
-d)
-> +         * Xen EFI configuration file to specify modules.
->          */
->         return true;
->     }
-> --=20
-> 2.17.1
->=20
+> +    case PHYSDEVOP_pci_device_remove: {
+> +        struct physdev_pci_device dev;
+> +
+> +        ret = -EFAULT;
+> +        if ( copy_from_guest(&dev, arg, 1) != 0 )
+> +            break;
+> +
+> +        ret = pci_remove_device(dev.seg, dev.bus, dev.devfn);
+> +        break;
+> +    }
+> +#endif
+> +    default:
+
+Blank line between non-fall-through case blocks please.
+
+> --- a/xen/include/asm-arm/numa.h
+> +++ b/xen/include/asm-arm/numa.h
+> @@ -25,6 +25,11 @@ extern mfn_t first_valid_mfn;
+>  #define node_start_pfn(nid) (mfn_x(first_valid_mfn))
+>  #define __node_distance(a, b) (20)
+>  
+> +static inline nodeid_t pxm_to_node(unsigned pxm)
+> +{
+> +    return 0xff;
+
+If you can use NUMA_NO_NODE in do_physdev_op(), why not also here?
+(Assuming this function is going to survive in this series in the
+first place, as per the earlier comment.)
+
+Jan
 
 
