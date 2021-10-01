@@ -2,52 +2,38 @@ Return-Path: <SRS0=BUeu=OV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9A89C433EF
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Oct 2021 15:09:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64566C433F5
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Oct 2021 15:13:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5079F611C0
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Oct 2021 15:09:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5079F611C0
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 31DB161A6F
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Oct 2021 15:13:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 31DB161A6F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=linuxfoundation.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.200733.355287 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.200740.355298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mWK9o-0000kx-AX; Fri, 01 Oct 2021 15:09:04 +0000
+	id 1mWKEM-0002C8-Vw; Fri, 01 Oct 2021 15:13:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 200733.355287; Fri, 01 Oct 2021 15:09:04 +0000
+Received: by outflank-mailman (output) from mailman id 200740.355298; Fri, 01 Oct 2021 15:13:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mWK9o-0000kq-6q; Fri, 01 Oct 2021 15:09:04 +0000
-Received: by outflank-mailman (input) for mailman id 200733;
- Fri, 01 Oct 2021 15:09:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=kuDH=OV=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mWK9m-0000kk-Og
- for xen-devel@lists.xenproject.org; Fri, 01 Oct 2021 15:09:02 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 824b920c-22c9-11ec-bdb3-12813bfff9fa;
- Fri, 01 Oct 2021 15:09:01 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CD32B1FEDA;
- Fri,  1 Oct 2021 15:09:00 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 780FA13C6D;
- Fri,  1 Oct 2021 15:09:00 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id c6sYHIwkV2FVPwAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 01 Oct 2021 15:09:00 +0000
+	id 1mWKEM-0002C1-So; Fri, 01 Oct 2021 15:13:46 +0000
+Received: by outflank-mailman (input) for mailman id 200740;
+ Fri, 01 Oct 2021 15:13:45 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=1xS6=OV=linuxfoundation.org=gregkh@srs-us1.protection.inumbo.net>)
+ id 1mWKEL-0002Bv-5n
+ for xen-devel@lists.xenproject.org; Fri, 01 Oct 2021 15:13:45 +0000
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 41729e8c-2b9f-4fa2-b198-e559fa171c6c;
+ Fri, 01 Oct 2021 15:13:44 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0EB1761A03;
+ Fri,  1 Oct 2021 15:13:42 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,237 +45,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 824b920c-22c9-11ec-bdb3-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1633100940; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=uCuBT5tgF8p5Dex86InSy5Qi/RM5e8rP5mvOOKS7cT4=;
-	b=TN0ergq45NhnaLE3x2d92L2Ki5wIJfTxU717e/ex8tarSC3uPJv/3r1t8iKGYKlADFou5Z
-	YUqzpEzion7/P7Jy24M/fN8VsAdObIxFictoxe3gcYMkQGwxGbRlcQigNnOndBu/bVJ5/3
-	yi0JyAB8R5a8ceC6pV06GLkYQNCn4pM=
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, Alex Olson <this.is.a0lson@gmail.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Ian Jackson <iwj@xenproject.org>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Alex Olson <alex.olson@starlab.io>, xen-devel@lists.xenproject.org
-References: <cover.1632512149.git.this.is.a0lson@gmail.com>
- <85b59046315b8a84afa8538aacdea92b19200faa.1632512149.git.this.is.a0lson@gmail.com>
- <d899b058-a201-e2f8-35d2-f0e59ab4bab3@suse.com>
- <d63a0e7d-7f9d-0dcb-0ac9-8995e56698b4@citrix.com>
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 1/1] x86: centralize default APIC id definition
-Message-ID: <2ff385c7-55bd-4647-efb5-9909addca226@suse.com>
-Date: Fri, 1 Oct 2021 17:08:58 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+X-Inumbo-ID: 41729e8c-2b9f-4fa2-b198-e559fa171c6c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1633101223;
+	bh=lBCw9bkSZZDHUXzzaKop+6Hnc/MB752lkrnFW0SX3Yw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=VldMVTz6nDca+vkVL8e0kiTzKzysrG6rFWnNAdrhL29IS+EMl5QwhGpw8dSZLXlBh
+	 RYbctzhceiSbuD4LaWuLtoUIuBQXVmxEPSlh4UE5F+8UMCNeglXC361wnol0MdUsAc
+	 ExxYnVHJCfPy1EhxNh6TSc2+qsyiFjynOVMT4zPg=
+Date: Fri, 1 Oct 2021 17:13:40 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 2/3] usb: Introduce Xen pvUSB frontend (xen hcd)
+Message-ID: <YVclpB4HP4hynENV@kroah.com>
+References: <20211001150039.15921-1-jgross@suse.com>
+ <20211001150039.15921-3-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <d63a0e7d-7f9d-0dcb-0ac9-8995e56698b4@citrix.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="qFnRQ2vezRbBQsa6Pi5FUPWd9zwwnp5nX"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20211001150039.15921-3-jgross@suse.com>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---qFnRQ2vezRbBQsa6Pi5FUPWd9zwwnp5nX
-Content-Type: multipart/mixed; boundary="qloal8KDuf0hTndT05o5FZvYOhMa5RJ0J";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
- <jbeulich@suse.com>, Alex Olson <this.is.a0lson@gmail.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Wei Liu <wl@xen.org>, Ian Jackson <iwj@xenproject.org>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Alex Olson <alex.olson@starlab.io>, xen-devel@lists.xenproject.org
-Message-ID: <2ff385c7-55bd-4647-efb5-9909addca226@suse.com>
-Subject: Re: [PATCH 1/1] x86: centralize default APIC id definition
-References: <cover.1632512149.git.this.is.a0lson@gmail.com>
- <85b59046315b8a84afa8538aacdea92b19200faa.1632512149.git.this.is.a0lson@gmail.com>
- <d899b058-a201-e2f8-35d2-f0e59ab4bab3@suse.com>
- <d63a0e7d-7f9d-0dcb-0ac9-8995e56698b4@citrix.com>
-In-Reply-To: <d63a0e7d-7f9d-0dcb-0ac9-8995e56698b4@citrix.com>
+On Fri, Oct 01, 2021 at 05:00:38PM +0200, Juergen Gross wrote:
+> --- /dev/null
+> +++ b/drivers/usb/host/xen-hcd.c
+> @@ -0,0 +1,1641 @@
+> +/*
+> + * xen-hcd.c
 
---qloal8KDuf0hTndT05o5FZvYOhMa5RJ0J
-Content-Type: multipart/mixed;
- boundary="------------B0C5C823692A514D8492CBCF"
-Content-Language: en-US
+Need a SPDX line here, instead of the license boiler-plate text you
+have.
 
-This is a multi-part message in MIME format.
---------------B0C5C823692A514D8492CBCF
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Did you run checkpatch on this thing?  I thought that would have told
+you about this.
 
-On 01.10.21 16:29, Andrew Cooper wrote:
-> On 01/10/2021 15:19, Jan Beulich wrote:
->> On 24.09.2021 21:39, Alex Olson wrote:
->>> Inspired by an earlier attempt by Chao Gao <chao.gao@intel.com>,
->>> this revision aims to put the hypervisor in control of x86 APIC ident=
-ifier
->>> definition instead of hard-coding a formula in multiple places
->>> (libxl, hvmloader, hypervisor).
->>>
->>> This is intended as a first step toward exposing/altering CPU topolog=
-y
->>> seen by guests.
->>>
->>> Changes:
->>>
->>> - Add field to vlapic for holding default ID (on reset)
->>>
->>> - add HVMOP_get_vcpu_topology_id hypercall so libxl (for PVH domains)=
+> + *
+> + * Xen USB Virtual Host Controller driver
+> + *
+> + * Copyright (C) 2009, FUJITSU LABORATORIES LTD.
+> + * Author: Noboru Iwamatsu <n_iwamatsu@jp.fujitsu.com>
+> + *
+> + * This program is free software; you can redistribute it and/or modify
+> + * it under the terms of the GNU General Public License as published by
+> + * the Free Software Foundation; either version 2 of the License, or
+> + * (at your option) any later version.
+> + *
+> + * This program is distributed in the hope that it will be useful,
+> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
+> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+> + * GNU General Public License for more details.
+> + *
+> + * You should have received a copy of the GNU General Public License
+> + * along with this program; if not, see <http://www.gnu.org/licenses/>.
+> + *
+> + * Or, by your choice:
+> + *
+> + * When distributed separately from the Linux kernel or incorporated into
+> + * other software packages, subject to the following license:
+> + *
+> + * Permission is hereby granted, free of charge, to any person obtaining a copy
+> + * of this software and associated documentation files (the "Software"), to
+> + * deal in the Software without restriction, including without limitation the
+> + * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+> + * sell copies of the Software, and to permit persons to whom the Software is
+> + * furnished to do so, subject to the following conditions:
+> + *
+> + * The above copyright notice and this permission notice shall be included in
+> + * all copies or substantial portions of the Software.
+> + *
+> + * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> + * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> + * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> + * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> + * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+> + * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> + * DEALINGS IN THE SOFTWARE.
 
->>>    can access APIC ids needed for ACPI table definition prior to doma=
-in start.
->>>
->>> - For HVM guests, hvmloader now also uses the same hypercall.
->>>
->>> - Make CPUID code use vlapic ID instead of hard-coded formula
->>>    for runtime reporting to guests
->> I'm afraid a primary question from back at the time remains: How is
->> migration of a guest from an old hypervisor to one with this change
->> in place going to work?
->=20
-> I'm afraid its not.
->=20
-> Fixing this is incredibly complicated.=C2=A0 I have a vague plan, but i=
-t
-> needs building on the still-pending libxl cpuid work of Rogers.
->=20
-> Both the toolstack and Xen need to learn about how to describe topology=
+Dual licensing a USB host controller driver is, um, a very dubious
+thing given that you can only interact with symbols exported with
+EXPORT_SYMBOL_GPL() from the USB stack.
 
-> correctly (and I'm afraid this patch isn't correct even for a number of=
+So you might want to change this...
 
-> the simple cases), and know about "every VM booted up until this point
-> in time" being wrong.
+If not, and you want to keep the dual license, I need some explaination
+from a legal person at your company included in the changelog text, and
+a signed-off-by from them as well.
 
-What about:
+thanks,
 
-- adding APIC-Id to the migration stream
-- adding an optional translation layer for guest APIC-Id to the
-   hypervisor
-- adding the functionality to set a specific APIC-Id for a vcpu
-   (will use the translation layer if not the same as preferred
-   by the hypervisor)
-
-
-Juergen
-
-
---------------B0C5C823692A514D8492CBCF
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: OpenPGP public key
-Content-Disposition: attachment;
- filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
-cWx
-w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
-f8Z
-d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
-9bf
-IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
-G7/
-377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
-3Jv
-c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
-QIe
-AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
-hpw
-dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
-MbD
-1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
-oPH
-Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
-5QL
-+qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
-2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
-QoL
-BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
-Wf0
-teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
-/nu
-AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
-ITT
-d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
-XBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
-80h
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
-AcD
-AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
-FOX
-gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
-jnD
-kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
-N51
-N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
-otu
-fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
-tqS
-EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
-hsD
-BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
-g3O
-ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
-dM7
-wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
-D+j
-LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
-V2x
-AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
-Eaw
-QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
-nHI
-s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
-wgn
-BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
-bVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
-pEd
-IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
-QAB
-wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
-Tbe
-8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
-vJz
-Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
-VGi
-wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
-svi
-uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
-zXs
-ZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------B0C5C823692A514D8492CBCF--
-
---qloal8KDuf0hTndT05o5FZvYOhMa5RJ0J--
-
---qFnRQ2vezRbBQsa6Pi5FUPWd9zwwnp5nX
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmFXJIoFAwAAAAAACgkQsN6d1ii/Ey9Z
-2Qf/fUUv8rgcstveoCfe0PTSI5EvBDh6gFSxZjKUEKnnCi/mXJHz2kf/J8F/hGuG1bJqRxL0PvBx
-y3qYY2Nx7QhbJ8jUIOeYN4L4cmvNBEsGxqs0Cq8fOuwW3UnOjyjEioDktSSxL+G6B/pakNiSj+YH
-kj+KdvvIDisu4x6quHnfWRoV/+eVA/+8Uukno1l2tjGqLTQjq1MmB3ic7BF8ocVOzb+yIcIn2mfq
-m6a72r+sM60aq3GXdAqCvZkGAwM8izyoALUpf/ugYML0Tb2FZNbPJQACA0GWSs6pPrHurxt9sifw
-Ez+qVXD4X36mJ4/d03B26r6leh8WI4R5ExjhBAaByw==
-=IWGm
------END PGP SIGNATURE-----
-
---qFnRQ2vezRbBQsa6Pi5FUPWd9zwwnp5nX--
+greg k-h
 
