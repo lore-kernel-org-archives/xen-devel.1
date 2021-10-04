@@ -2,42 +2,42 @@ Return-Path: <SRS0=yhtS=OY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 953EBC433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 09:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D895C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 09:54:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 648C1610A2
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 09:54:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 648C1610A2
+	by mail.kernel.org (Postfix) with ESMTPS id DF7DE6126A
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 09:54:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DF7DE6126A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.201255.355685 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.201257.355708 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXKfq-0003lN-41; Mon, 04 Oct 2021 09:54:18 +0000
+	id 1mXKfz-0004Mb-Le; Mon, 04 Oct 2021 09:54:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 201255.355685; Mon, 04 Oct 2021 09:54:18 +0000
+Received: by outflank-mailman (output) from mailman id 201257.355708; Mon, 04 Oct 2021 09:54:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXKfq-0003ky-0u; Mon, 04 Oct 2021 09:54:18 +0000
-Received: by outflank-mailman (input) for mailman id 201255;
- Mon, 04 Oct 2021 09:54:16 +0000
+	id 1mXKfz-0004MU-Gq; Mon, 04 Oct 2021 09:54:27 +0000
+Received: by outflank-mailman (input) for mailman id 201257;
+ Mon, 04 Oct 2021 09:54:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=sY6e=OY=gmail.com=rm.skakun@srs-us1.protection.inumbo.net>)
- id 1mXKfo-0003kC-EE
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 09:54:16 +0000
-Received: from mail-lf1-x136.google.com (unknown [2a00:1450:4864:20::136])
+ id 1mXKfy-0003kC-Br
+ for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 09:54:26 +0000
+Received: from mail-lf1-x133.google.com (unknown [2a00:1450:4864:20::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 887292d1-525d-42b3-8227-f4ab322db6e8;
- Mon, 04 Oct 2021 09:54:15 +0000 (UTC)
-Received: by mail-lf1-x136.google.com with SMTP id b20so69477628lfv.3
- for <xen-devel@lists.xenproject.org>; Mon, 04 Oct 2021 02:54:15 -0700 (PDT)
+ id 7cfb36a7-985a-4f7a-8746-bb783082fc2f;
+ Mon, 04 Oct 2021 09:54:18 +0000 (UTC)
+Received: by mail-lf1-x133.google.com with SMTP id i4so69637767lfv.4
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Oct 2021 02:54:17 -0700 (PDT)
 Received: from localhost ([178.151.124.169])
- by smtp.gmail.com with ESMTPSA id be14sm1567669ljb.7.2021.10.04.02.54.13
+ by smtp.gmail.com with ESMTPSA id w14sm1612368ljw.73.2021.10.04.02.54.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 04 Oct 2021 02:54:13 -0700 (PDT)
+ Mon, 04 Oct 2021 02:54:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,34 +49,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 887292d1-525d-42b3-8227-f4ab322db6e8
+X-Inumbo-ID: 7cfb36a7-985a-4f7a-8746-bb783082fc2f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0umGd92a5dhGAHF7Qb3MENIFYI1Ca0QKQfItQDzaBxM=;
-        b=IJXsSg7f7CuqFLZDozayVwOcdOWRbDcPFeXiQtPrVxoH4DVpZ/R4MqsC1jpL69JCVJ
-         OJYW4CWbZsLty43lxWD0WUBPW9IhH6ZgfmA8baGlwA3FRkdIcXLQ7AwoSOFrGb53L2P9
-         i2CglZWLyZwUk4tk7oOqQLYAPT9tT5BELPtnWH+Qnafczo9dmOJoDoSXySrtZFUCR882
-         9NsPHDWdVZZeLQWbBK6efcsF6o7oykMINmGjWybpA0IEaJWiF0F2cQdAatBeK6dEQvc+
-         3ORqbK913Q9Il9yLCTq3ESI7+O4XonfW2WBTthAKIcD0ckyTIudJnLJAsl9UXG/Jtvm1
-         pN4A==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=dvnwbtKXuUTovX39gB85uB/X6CcafQCm1x1qqRSoYLU=;
+        b=YNmeI4BJ3NA50ZgVWUtmG53Yz9NzRqEsySE7NtRQV0dVt15bwba1LF7cnFL3leFtCf
+         pBEheknC/K/zeSTz3nPcdD830yk8aH0N4ClnDpWJh8AZSzlj0hDbgiCz2+Q2WrRSSYRH
+         VJP+uNx6H8U36Rvv15TKmBEulFJBQlHAqa8qZOba1sC1XPebeTCdnl041eT0jGop3wol
+         iissrEgIuk8pDlrT1Nnt5f7YPjeQoUu3zS4muj4nBlYYohyYcsHpf3KCAztRqh3OsGqg
+         EUMmofKcocqfEFa03Jd2cInRnoDTxY5Ofq/F62slQloVVaPpRL72OuIMol9aZVrGXD7Z
+         WMXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=0umGd92a5dhGAHF7Qb3MENIFYI1Ca0QKQfItQDzaBxM=;
-        b=pVa6QY5OLnnBXsh9sA3Pkm6dZkQO4Y1GsQWSOr6iTATRQT8vWJ7eB0ct/tzZCjji6L
-         FzWcmv5T7QwXIxQlnVq92/LSc8DwyYofS2qMhqlvf52xDw6eCxQkVTUccarGttL3FqOj
-         1xGkEgvX4yP4tkS5tft0TlfLlSjkpGNywBfkfFC1gKLUPpvxLGzArLYlatF36GAxIbNl
-         xKnG6aCdJpcx2O9vLG/3cGa2kgt9HGaU+wSkFtFQxNJF1k4w4c5Ww3sbdttjJVZhnT9S
-         k9W7Tt67EOwLIJlq+53rp1enxMj8MS233qk4vJQZuUj6pZo/rsM4er6tE8qKGGXRCtyL
-         Wbeg==
-X-Gm-Message-State: AOAM533uVX9MlSi4u+Td81RM+qAelQMxGVNrmpegODUgnqICCYFM0eln
-	pxdl6adwflzDSTq8uuvIi5E=
-X-Google-Smtp-Source: ABdhPJwp405WaBYmXsqHCSb7cDL4QAlEtFiejN/aKi+OD7BtyLRtbMLig4/eOqFY/iW31AZt1z2S/Q==
-X-Received: by 2002:a05:6512:39ca:: with SMTP id k10mr14186305lfu.54.1633341254121;
-        Mon, 04 Oct 2021 02:54:14 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=dvnwbtKXuUTovX39gB85uB/X6CcafQCm1x1qqRSoYLU=;
+        b=nJ50rz7cER+32P5FywPKwms5LGlPw+5P5S3fUJ/6gxDBy6N436nkKntwgOM7da0y+U
+         rxLGMGh/+B0nwGQLMvcpSlXx1DDFbe8QTPDoont26BGcTwYigs4Pci+2rcytyYqmkjye
+         NuOkErsCn537CjArvzPh0Bx5j2ir87HIzlMQvex4m3p3ReWCEV4TweXi0lf3SU/oOuhI
+         n8S9TYSv53eY5wtVzqYp4k9dLNy2Tc6eWuuENfeiikwPafUvZ3/JAd5px7l+k60xV2uI
+         99oaqTj2uMob+XGH8/23o5a1VFT/QyfRhPfYcwdAN9w5i9ZEQcLixhfcgTUd0s/0Cxg2
+         1AAw==
+X-Gm-Message-State: AOAM531pzWy7rdBumeF9G5EK1By+/oAErWko7rvEkKYEGJDr+Zn145MN
+	Dn3YA2QCIpMuNZqgjP+XSds=
+X-Google-Smtp-Source: ABdhPJzyJGasKtm3y+zLqxQVYpV5fmsIGojp/kBAB//FqkuWucfSlK8Vxl8hFgwI2mPCd49zyc8X8g==
+X-Received: by 2002:a2e:504a:: with SMTP id v10mr14456170ljd.9.1633341257004;
+        Mon, 04 Oct 2021 02:54:17 -0700 (PDT)
 From: Roman Skakun <rm.skakun@gmail.com>
 X-Google-Original-From: Roman Skakun <Roman_Skakun@epam.com>
 To: Stefano Stabellini <sstabellini@kernel.org>,
@@ -85,57 +85,85 @@ To: Stefano Stabellini <sstabellini@kernel.org>,
 Cc: Roman Skakun <roman_skakun@epam.com>,
 	Roman Skakun <rm.skakun@gmail.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Andrii Anisov <andrii_anisov@epam.com>
-Subject: [RFC 0/1] tag IOMMU-protected devices in Dom0 fdt
-Date: Mon,  4 Oct 2021 12:54:01 +0300
-Message-Id: <cover.1633106362.git.roman_skakun@epam.com>
+	Andrii Anisov <andrii_anisov@epam.com>,
+	Roman Skakun <Roman_Skakun@epam.com>
+Subject: [RFC PATCH] dma-mapping: don't set swiotlb-xen fops for IOMMU-protected devices
+Date: Mon,  4 Oct 2021 12:54:03 +0300
+Message-Id: <20211004095415.100756-1-Roman_Skakun@epam.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <cover.1633106362.git.roman_skakun@epam.com>
+References: <cover.1633106362.git.roman_skakun@epam.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Roman Skakun <roman_skakun@epam.com>
+Prior to this patch swiotlb-xen fops are set for all devices when
+we are booting as as Dom0 or direct-mapped DomU.
 
-At the moment, Dom0 can't distinguish which devices are protected by
-IOMMU and which are not. In some cases, this can cause swiotlb bounce
-buffer use for DMA addresses above 32 bits, which in turn can lead
-to poor performance. I started a conversation at [1], where we discussed
-addition of a new device tree property to mark IOMMU-protected devices for Dom0.
+Since Xen now marks devices which are IOMMU-protected by
+adding additional property to the relevant device, we can
+check for this property and don't set swiotlb-xen fops for
+any IOMMU-protected device.
 
-As a result of negotiation at [1], I would like to present two
-patches:
+Signed-off-by: Roman Skakun <Roman_Skakun@epam.com>
+---
+ arch/arm/mm/dma-mapping.c   | 2 +-
+ arch/arm/xen/enlighten.c    | 4 ++++
+ arch/arm64/mm/dma-mapping.c | 2 +-
+ include/xen/xen.h           | 2 ++
+ 4 files changed, 8 insertions(+), 2 deletions(-)
 
-1. The first patch for the hypervisor. It adds a new device property
-'xen,behind-iommu' to a relevant device node when the device is
-IOMMU-protected.
-
-2. The second patch is a Linux kernel counterpart. It detects the said
-property and disables swiotlb for a device.
-
-There is a possible issue: some devices may not be able to use DMA
-addresses above 32 bit boundaries, so we can have problems in the
-direct DMA mechanism when swiotlb-xen is disabled for a such
-device. More generally, this can affect any device which DMA address
-range is narrower than CPU one.
+diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
+index c4b8df2ad328..c3e5841d871e 100644
+--- a/arch/arm/mm/dma-mapping.c
++++ b/arch/arm/mm/dma-mapping.c
+@@ -2280,7 +2280,7 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
+ 	set_dma_ops(dev, dma_ops);
  
-In this case,
-the device DMA address should be no bigger than 32 bit boundaries for
-each device that is not using swiotlb-xen.
-
-Several ideas on how to overcome it:
-1. Do not use high memory for Dom0.
-2. Set DMA 32bit mask for each device if swiotlb is not used for this device.
-3. Force balloon driver to allocate buffers only below 4GB.
-
-I will be glad to get any comments or suggestions.
-
-[1] https://lore.kernel.org/xen-devel/AM7PR03MB65936E5D0B25567D1B2FAECA85CC9@AM7PR03MB6593.eurprd03.prod.outlook.com/
-
-Roman Skakun (1):
-  xen/arm: set iommu property for IOMMU-protected devices
-
- xen/arch/arm/domain_build.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
+ #ifdef CONFIG_XEN
+-	if (xen_initial_domain())
++	if (xen_initial_domain() && !xen_is_device_protected(dev))
+ 		dev->dma_ops = &xen_swiotlb_dma_ops;
+ #endif
+ 	dev->archdata.dma_ops_setup = true;
+diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
+index 49f566ad9acb..6ddef3233095 100644
+--- a/arch/arm/xen/enlighten.c
++++ b/arch/arm/xen/enlighten.c
+@@ -425,6 +425,10 @@ static int __init xen_pm_init(void)
+ }
+ late_initcall(xen_pm_init);
+ 
++bool xen_is_device_protected(void *obj) {
++	struct device *dev = obj;
++	return of_property_read_bool(dev->of_node, "xen,behind-iommu");
++}
+ 
+ /* empty stubs */
+ void xen_arch_pre_suspend(void) { }
+diff --git a/arch/arm64/mm/dma-mapping.c b/arch/arm64/mm/dma-mapping.c
+index 93e87b287556..0af5f7a63124 100644
+--- a/arch/arm64/mm/dma-mapping.c
++++ b/arch/arm64/mm/dma-mapping.c
+@@ -53,7 +53,7 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
+ 		iommu_setup_dma_ops(dev, dma_base, size);
+ 
+ #ifdef CONFIG_XEN
+-	if (xen_initial_domain())
++	if (xen_initial_domain() && !xen_is_device_protected(dev))
+ 		dev->dma_ops = &xen_swiotlb_dma_ops;
+ #endif
+ }
+diff --git a/include/xen/xen.h b/include/xen/xen.h
+index 43efba045acc..3725d69de6f9 100644
+--- a/include/xen/xen.h
++++ b/include/xen/xen.h
+@@ -61,4 +61,6 @@ void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages);
+ #include <xen/balloon.h>
+ #endif
+ 
++bool xen_is_device_protected(void *obj);
++
+ #endif	/* _XEN_XEN_H */
 -- 
 2.27.0
 
