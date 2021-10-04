@@ -2,43 +2,43 @@ Return-Path: <SRS0=yhtS=OY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E226C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B84BC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D07BD6023F
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D07BD6023F
+	by mail.kernel.org (Postfix) with ESMTPS id EF56A6023F
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EF56A6023F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.201467.355970 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.201466.355960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXOhI-0000G2-NA; Mon, 04 Oct 2021 14:12:04 +0000
+	id 1mXOhD-0008QT-Fs; Mon, 04 Oct 2021 14:11:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 201467.355970; Mon, 04 Oct 2021 14:12:04 +0000
+Received: by outflank-mailman (output) from mailman id 201466.355960; Mon, 04 Oct 2021 14:11:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXOhI-0000Fq-K5; Mon, 04 Oct 2021 14:12:04 +0000
-Received: by outflank-mailman (input) for mailman id 201467;
- Mon, 04 Oct 2021 14:12:03 +0000
+	id 1mXOhD-0008QM-Cn; Mon, 04 Oct 2021 14:11:59 +0000
+Received: by outflank-mailman (input) for mailman id 201466;
+ Mon, 04 Oct 2021 14:11:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=U/Qt=OY=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mXOhH-0008QG-DL
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 14:12:03 +0000
-Received: from mail-lf1-x130.google.com (unknown [2a00:1450:4864:20::130])
+ id 1mXOhC-0008QG-HW
+ for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 14:11:58 +0000
+Received: from mail-lf1-x12b.google.com (unknown [2a00:1450:4864:20::12b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6d1dcbb3-cf72-42f4-b41d-3dccba6c6d2d;
- Mon, 04 Oct 2021 14:11:59 +0000 (UTC)
-Received: by mail-lf1-x130.google.com with SMTP id b20so72639255lfv.3
- for <xen-devel@lists.xenproject.org>; Mon, 04 Oct 2021 07:11:59 -0700 (PDT)
+ id e7119be3-e1ee-4df1-9ab7-77b6af9936dd;
+ Mon, 04 Oct 2021 14:11:57 +0000 (UTC)
+Received: by mail-lf1-x12b.google.com with SMTP id e15so72225018lfr.10
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Oct 2021 07:11:57 -0700 (PDT)
 Received: from localhost.localdomain (host-176-36-245-220.b024.la.net.ua.
  [176.36.245.220])
- by smtp.gmail.com with ESMTPSA id n12sm1076809lfe.145.2021.10.04.07.11.56
+ by smtp.gmail.com with ESMTPSA id n12sm1076809lfe.145.2021.10.04.07.11.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Oct 2021 07:11:57 -0700 (PDT)
+ Mon, 04 Oct 2021 07:11:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6d1dcbb3-cf72-42f4-b41d-3dccba6c6d2d
+X-Inumbo-ID: e7119be3-e1ee-4df1-9ab7-77b6af9936dd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=6SnkOg3n8e3cKJ07G/rY49f9q+Znw0T7C7j0b8OToUE=;
-        b=cG3bTjz1jG08qYOXTlqDkOVKK6Tg673becU6zGcsV/7A2cAwe7yX+KGh9RDSf3gYpq
-         Kz0RCQi9yqcM2Zwsb257xGhctCVFRdpcQsF4Q+KEMyYQIhnyyC2/aYIOYtVwDJeAoQL3
-         4kfFLdH20LTN2Gj4DoTAMB/dQO9EWm5x+GO5X3XTgheRLMMseqaTHTVE7AhZedsiQnO1
-         7SkNLG+45kk6n8ws49Du7rmm6Gzf7moLsJCxMWgcpHUhm3HPojpIOihojoCtUH5Id6Qs
-         gu5vqXMmVPkWYRaitGnOJIPy3BB46drDrXe+ierlC/yl/Qwo/2/AlRqCkoFd98fFIORz
-         G/zQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=WsOpifpsOxtx/89eDSKv6jrXALsdW46waxc0qV6yaCU=;
+        b=Vj0nRmiwciVoHjPaOjjFiSgbrkxgBNS56qAtBB70b36pVaaHK146k9SUlNZIipqr5W
+         4yQgaJddnnlF8sVCGPLfARgISDtwIiTm2Dj8Py3IzJ0OhJIZXafvSRXlwR6rxl+ZwvlW
+         uxFXPbBBWhYbz0EcUPiDmm+EV82IKhhXTtbPAzoS7pV+C8o9CZELr5HcA+8MJy466HyX
+         rXJ6ZlpvmkWNzzqKFh8VHbxfdTwo02XkE42XnH84R6DQzUavaEVIInPLU64g/zq4zLuG
+         s8OHWqDbJ3ysOtNUVl6Jb788Ncm5zliP/6cZUfMM1pqXIPcBo7D7H6QEvZ28bJ5BnGJi
+         N6aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6SnkOg3n8e3cKJ07G/rY49f9q+Znw0T7C7j0b8OToUE=;
-        b=mbNYvbCXX96n2XtVo3KapwZD7QfaCBRrpyCbKagBzTiaSfZN2FXx3EFAUd/GMxDy2Z
-         HQXe3l0Hei4Idq+cbpnFOMsOkyMB1oLG8fj92JjJajwjrgKS6xokifrrwWv3YHkFfu8b
-         UTFEK9xZCwl9tfE2lceMxJw8m5j02TQpeV6K3HuYhli/Zd6hUmaPVbK9bTvI5zf7KNej
-         PB55kXZLZHWh+llTAQqnO81lujnBmkh34HOr8nbAT9RfYUgyxqUTcB3EJ89op9/qsiaN
-         xOHCJuGeXx/+vTQicEhQzwKQ+Sn1Xr3IjuOc8QPjz50231gPOg8QWmSGq8CG1JeVPkoU
-         9IGA==
-X-Gm-Message-State: AOAM5330ddfyC3DM1/3sZFmCcCwUbCxP5BZg3MHFiWZu4o+q0j3r9QjY
-	lvM0rJlLGtamp6QT0wJg4NX8tyXfJbA=
-X-Google-Smtp-Source: ABdhPJzpujgVo0AAnDsvX0/mO7rPD9uSovOIu8r7ciZeOT0kK7o5OIiRJSqZhSSxGquwC3JhyagoMg==
-X-Received: by 2002:a2e:7d15:: with SMTP id y21mr15846457ljc.70.1633356717899;
-        Mon, 04 Oct 2021 07:11:57 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=WsOpifpsOxtx/89eDSKv6jrXALsdW46waxc0qV6yaCU=;
+        b=LyXMyyIq1VWor7M0xCGcxiVmBIWvInajzd9uSflE9pgft2nG/JF2SngDV1XEBB7uWA
+         9h7nIcxYe4GdXJNWYgqP3yLPysnjeG6WiIpgU8c49jReQV6b1Ef5VuBbyWvCK/fbG3d+
+         t4hdfwWkC6rs/0R4FdcLuqHwx11MFkXRJV6RQSu88OOGndOerqhf3k/rH9IaUNMDpbo2
+         e06kc7Gz9UBTKKeamylzsAHKHYBlheku5UHYVy6l2cEuXjATub2yHCkgNj1srVGwXo6R
+         MKr3nDO300Q38SFQMq3crwdDiSqaobTDxrg+yaISEHOo6LLeMPSDjTgCaUGuSeQwy6lJ
+         r0gA==
+X-Gm-Message-State: AOAM5315mCeSHk5Mzd8znBPYEres3iTY2XqcFe1zfGPRfS1eCXKWTige
+	UYCZwLdgrKm2Ook55UOOgX2Ixug26To=
+X-Google-Smtp-Source: ABdhPJwB/a1zy6Ef/4Lj6tH2TNIceuwzXWD04m55Gg0d9hbchYpf9rv8pc8D40AzumYOBkn9a5ylRg==
+X-Received: by 2002:ac2:5c0f:: with SMTP id r15mr2380137lfp.564.1633356713814;
+        Mon, 04 Oct 2021 07:11:53 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -93,73 +93,69 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v4 03/11] xen/arm: Introduce pci_find_host_bridge_node helper
-Date: Mon,  4 Oct 2021 17:11:43 +0300
-Message-Id: <20211004141151.132231-4-andr2000@gmail.com>
+Subject: [PATCH v4 00/11] PCI devices passthrough on Arm, part 2
+Date: Mon,  4 Oct 2021 17:11:40 +0300
+Message-Id: <20211004141151.132231-1-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211004141151.132231-1-andr2000@gmail.com>
-References: <20211004141151.132231-1-andr2000@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Get host bridge node given a PCI device attached to it.
+Hi, all!
 
-This helper will be re-used for adding PCI devices by the subsequent
-patches.
+This is an assorted series of patches which aim is to make some further
+basis for PCI passthrough on Arm support. The series continues the work
+published earlier by Arm [1] and adds new helpers and clears the way for
+vPCI changes which will follow.
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
-Since v2:
- - !! dropped Stefano's r-b because of the changes
- - s/PRI_pci/%pp after rebase onto Arm series
----
- xen/arch/arm/pci/pci-host-common.c | 16 ++++++++++++++++
- xen/include/asm-arm/pci.h          |  1 +
- 2 files changed, 17 insertions(+)
+RFC is at [2], [3]. Design presentation can be found at [4].
 
-diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-index 593beeb48ce4..592c01aae5bb 100644
---- a/xen/arch/arm/pci/pci-host-common.c
-+++ b/xen/arch/arm/pci/pci-host-common.c
-@@ -276,6 +276,22 @@ int pci_get_host_bridge_segment(const struct dt_device_node *node,
-     return -EINVAL;
- }
- 
-+/*
-+ * Get host bridge node given a device attached to it.
-+ */
-+struct dt_device_node *pci_find_host_bridge_node(struct device *dev)
-+{
-+    struct pci_host_bridge *bridge;
-+    struct pci_dev *pdev = dev_to_pci(dev);
-+
-+    bridge = pci_find_host_bridge(pdev->seg, pdev->bus);
-+    if ( unlikely(!bridge) )
-+    {
-+        printk(XENLOG_ERR "Unable to find PCI bridge for %pp\n", &pdev->sbdf);
-+        return NULL;
-+    }
-+    return bridge->dt_node;
-+}
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-index 603a1fc072d1..e6d4000e2ac8 100644
---- a/xen/include/asm-arm/pci.h
-+++ b/xen/include/asm-arm/pci.h
-@@ -99,6 +99,7 @@ void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
- struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
- int pci_get_host_bridge_segment(const struct dt_device_node *node,
-                                 uint16_t *segment);
-+struct dt_device_node *pci_find_host_bridge_node(struct device *dev);
- 
- static always_inline bool is_pci_passthrough_enabled(void)
- {
+Thank you,
+Oleksandr
+
+[1] https://patchwork.kernel.org/project/xen-devel/list/?series=557111
+[2] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg01184.html
+[3] https://lists.xenproject.org/archives/html/xen-devel/2020-07/threads.html#01184
+[4] https://static.sched.com/hosted_files/xen2021/e4/PCI_Device_Passthrough_On_Arm.pdf
+
+Oleksandr Andrushchenko (10):
+  xen/arm: Fix dev_is_dt macro definition
+  xen/arm: Add new device type for PCI
+  xen/arm: Introduce pci_find_host_bridge_node helper
+  xen/device-tree: Make dt_find_node_by_phandle global
+  xen/arm: Mark device as PCI while creating one
+  libxl: Allow removing PCI devices for all types of domains
+  libxl: Only map legacy PCI IRQs if they are supported
+  xen/arm: Setup MMIO range trap handlers for hardware domain
+  xen/arm: Do not map PCI ECAM and MMIO space to Domain-0's p2m
+  xen/arm: Process pending vPCI map/unmap operations
+
+Oleksandr Tyshchenko (1):
+  xen/domain: Call pci_release_devices() when releasing domain resources
+
+ tools/libs/light/Makefile          |  4 ++
+ tools/libs/light/libxl_pci.c       | 15 ++++-
+ xen/arch/arm/domain.c              | 11 +++-
+ xen/arch/arm/domain_build.c        | 50 ++++++++--------
+ xen/arch/arm/pci/ecam.c            | 14 +++++
+ xen/arch/arm/pci/pci-host-common.c | 93 ++++++++++++++++++++++++++++++
+ xen/arch/arm/pci/pci-host-zynqmp.c |  1 +
+ xen/arch/arm/pci/pci.c             | 12 ++++
+ xen/arch/arm/traps.c               | 13 +++++
+ xen/arch/arm/vpci.c                | 34 +++++++++++
+ xen/arch/arm/vpci.h                |  6 ++
+ xen/arch/x86/hvm/hvm.c             |  6 ++
+ xen/common/device_tree.c           |  2 +-
+ xen/common/ioreq.c                 |  9 ---
+ xen/drivers/passthrough/pci.c      |  2 +
+ xen/include/asm-arm/device.h       |  6 +-
+ xen/include/asm-arm/pci.h          | 30 ++++++++++
+ xen/include/asm-arm/setup.h        | 13 +++++
+ xen/include/asm-x86/pci.h          |  2 +
+ xen/include/xen/device_tree.h      |  2 +
+ 20 files changed, 286 insertions(+), 39 deletions(-)
+
 -- 
 2.25.1
 
