@@ -2,43 +2,43 @@ Return-Path: <SRS0=yhtS=OY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id ED55BC433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 808DBC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B0EB06023F
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B0EB06023F
+	by mail.kernel.org (Postfix) with ESMTPS id 47E1861354
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 14:12:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 47E1861354
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.201468.355982 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.201470.356003 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXOhO-0000ac-2A; Mon, 04 Oct 2021 14:12:10 +0000
+	id 1mXOhX-0001ON-Qq; Mon, 04 Oct 2021 14:12:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 201468.355982; Mon, 04 Oct 2021 14:12:10 +0000
+Received: by outflank-mailman (output) from mailman id 201470.356003; Mon, 04 Oct 2021 14:12:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXOhN-0000aT-Ul; Mon, 04 Oct 2021 14:12:09 +0000
-Received: by outflank-mailman (input) for mailman id 201468;
- Mon, 04 Oct 2021 14:12:08 +0000
+	id 1mXOhX-0001OC-Nb; Mon, 04 Oct 2021 14:12:19 +0000
+Received: by outflank-mailman (input) for mailman id 201470;
+ Mon, 04 Oct 2021 14:12:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=U/Qt=OY=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1mXOhM-0008QG-DX
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 14:12:08 +0000
-Received: from mail-lf1-x136.google.com (unknown [2a00:1450:4864:20::136])
+ id 1mXOhW-0008QG-E8
+ for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 14:12:18 +0000
+Received: from mail-lf1-x12a.google.com (unknown [2a00:1450:4864:20::12a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2a84c4a3-d15a-4ce4-b8c6-68ed5b4f4ef1;
- Mon, 04 Oct 2021 14:11:59 +0000 (UTC)
-Received: by mail-lf1-x136.google.com with SMTP id x27so72243825lfu.5
- for <xen-devel@lists.xenproject.org>; Mon, 04 Oct 2021 07:11:59 -0700 (PDT)
+ id 2b54face-c132-49cc-8c13-b830f68026ae;
+ Mon, 04 Oct 2021 14:12:03 +0000 (UTC)
+Received: by mail-lf1-x12a.google.com with SMTP id m3so71513774lfu.2
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Oct 2021 07:12:03 -0700 (PDT)
 Received: from localhost.localdomain (host-176-36-245-220.b024.la.net.ua.
  [176.36.245.220])
- by smtp.gmail.com with ESMTPSA id n12sm1076809lfe.145.2021.10.04.07.11.55
+ by smtp.gmail.com with ESMTPSA id n12sm1076809lfe.145.2021.10.04.07.11.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 04 Oct 2021 07:11:56 -0700 (PDT)
+ Mon, 04 Oct 2021 07:11:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a84c4a3-d15a-4ce4-b8c6-68ed5b4f4ef1
+X-Inumbo-ID: 2b54face-c132-49cc-8c13-b830f68026ae
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=mico79NSg1dTzXgY8IQRVxF4SlAfW6DJKkQE/et5l+E=;
-        b=ICTepnxsockaYNS6J7TvmXTgJKo44BlX5+Dwx/rzhbLH9pAOqtVErpd8UCPGo6wHei
-         vDMr2/dAU8tinEvhYOkGYarLsqxSUu9fSU6vVD6oZrIZFLcx0cL8AQXeLk0RU233XNFY
-         buy5VZZ137b3oTlIiiwmd+6SO72Pfe/8FI6EgG+YXljtjB2J8el+FU2tLYNEaSKyt5i5
-         6uwEzOunBNDhnCC3oDDg3cLkSRA5wxFTSTbLYZ/C9ybq607EV5l7tPzMKAi07PQEqrrV
-         odMDsApervGjMsT8Dg93Nt4gbuXCMesvjhmBB5LH4vNceiuQjQ/H7wS88eqTJK5xme+s
-         ExXw==
+        bh=IBrpPALaHgEu2bRfUzTni2BaAuDBWtjiAy9s9dEtWuo=;
+        b=Ez3QUU4M+ZzyRJzYI7PxNH6KFybpw2X52IIyCfolA/goD64BD0H1ylyW/UjcmfXbQm
+         T9LUfCMCd3cOx44P7lzDKzq6KTS04CXPeOjx3ExEBRD6chKSC8hwx+jzUciYnpJh+Q9x
+         xJh0RPoWKHUuZGpX41d2p6iEbR4DbO6Yjd85Fk5ZRu7Dcj/sAXHyv5QZewIDyPOrbbWf
+         Uj1298AJ46nwJev0K9WD/T4PsdnpR0B7Q32JIVWIs4+SOeN3ey1J1yEOxkEVddEpkjGw
+         ADp+s6yhOEDIMVO4uG7g5QzmzXKwqkgE1JmHfTe+wak/eKZ3zBIoxyjR158UG5pHKTAL
+         +EKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=mico79NSg1dTzXgY8IQRVxF4SlAfW6DJKkQE/et5l+E=;
-        b=2L0eAwl9kOv1i2W/X6CC3FV5p7mHIlopnO5157zxA1fm1ZrjQ9neAJieC4vlU85uG+
-         6bVIiUFuDL0q87t4UP4JoYg1Po98ycq5RnNFaiEAgnOgCjk6G40GeX+bV12JiONQFg8k
-         7VkliVHliZx7X2DIKquvkhOIw6LoZxZ9TvKFZKupnKLZhOOFv/LOlsBZC+NVbC5IYEMV
-         evbTCDwJwUfNWzcFhqWQAl/2WEC1VM6jkhtwgSa2b5dQIrYjEK+07ZTqavoj6TSP6KrC
-         3MkKhZv1kuSRvvAVL/EN6rwK8Pd/sXAHywroPyHgtkndnUeJJro9V9M0e5TO/6Y0QXdF
-         9Auw==
-X-Gm-Message-State: AOAM530tHiOedjao5shnxnDp+xM9yMZoerJoi7hpcuDOUkNBRxwBf7ak
-	EzUoc0ZajR+jbJ2/1mbDavAoRPwepqA=
-X-Google-Smtp-Source: ABdhPJx6BLkwzCWXnYzL8PCkpvh5BukwzmSkRNCjUNZQtrb5PtZlYg9g1G4HfyIGbc5giXQbXeZV3Q==
-X-Received: by 2002:ac2:5e31:: with SMTP id o17mr15074866lfg.36.1633356716497;
-        Mon, 04 Oct 2021 07:11:56 -0700 (PDT)
+        bh=IBrpPALaHgEu2bRfUzTni2BaAuDBWtjiAy9s9dEtWuo=;
+        b=aa6fEVcu68NwYYn3aCywFJk7NwPSk8RorkdQPg9V6DdfCr/13jNoFrqllZkwMcA+/t
+         68gJFB9+HNk17IA0aOksf7wnSHrw/YQwTUuDpxfb97cd1v23qBey6sfty18mMiYUPdvH
+         JQqeXYVmM/2t3h7OAuiM3KqznuzBoylmpAzzR5zR18BtFLgCtOa6hFWg1DOBdW54Yz28
+         CNsmWSeUsZmTnBYCQMYxnJlhgWFJFbJhsaTCYZIZp9SwpWIDWz6BjEG7n7pHyZj16eZo
+         KDMLZe3dXytJALAqAacB2Yd9hbEopnM9fGSk5zHZ2nAeEd41nblNpmIJGbXYVDDLccmy
+         6Rpg==
+X-Gm-Message-State: AOAM532eE2z13AjRfdckATepEJ7RaTChM99IgTxPBX1b3uhgEugVbRrY
+	APJUntPNmquJzMFjKdZl0/vIbkA73iQ=
+X-Google-Smtp-Source: ABdhPJz1SHMt2ZTDbeA6PPu/8DUsuEKadrrUL9iIVMY3wTj3Updc7wVxwvB7+bWha+S4A5GsivnE5A==
+X-Received: by 2002:a05:6512:3d86:: with SMTP id k6mr15180736lfv.120.1633356715255;
+        Mon, 04 Oct 2021 07:11:55 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -92,10 +92,11 @@ Cc: julien@xen.org,
 	paul@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v4 02/11] xen/arm: Add new device type for PCI
-Date: Mon,  4 Oct 2021 17:11:42 +0300
-Message-Id: <20211004141151.132231-3-andr2000@gmail.com>
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Michal Orzel <michal.orzel@arm.com>
+Subject: [PATCH v4 01/11] xen/arm: Fix dev_is_dt macro definition
+Date: Mon,  4 Oct 2021 17:11:41 +0300
+Message-Id: <20211004141151.132231-2-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211004141151.132231-1-andr2000@gmail.com>
 References: <20211004141151.132231-1-andr2000@gmail.com>
@@ -104,90 +105,33 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Add new device type (DEV_PCI) to distinguish PCI devices from platform
-DT devices, so some drivers, like IOMMU, can handle PCI devices
-differently.
+This macro is not currently used, but still has an error in it:
+a missing parenthesis. Fix this, so the macro is properly defined.
 
-Also add a helper which is when given a struct device returns the
-corresponding struct pci_dev which this device is a part of.
-
-Because of the header cross-dependencies, e.g. we need both
-struct pci_dev and struct arch_pci_dev at the same time, this cannot be
-done with an inline.
+Fixes: 6c5d3075d97e ("xen/arm: Introduce a generic way to describe device")
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Reviewed-by: Michal Orzel <michal.orzel@arm.com>
 ---
-Since v2:
- - !! dropped Stefano's r-b because of the changes
- - simplified dev_to_pci to use a single
-   container_of(dev, struct pci_dev, arch.dev) (Jan)
-Since v1:
- - Folded new device type (DEV_PCI) into this patch.
+New in v2
 ---
- xen/arch/arm/pci/pci.c       | 7 +++++++
- xen/include/asm-arm/device.h | 4 ++--
- xen/include/asm-arm/pci.h    | 7 +++++++
- 3 files changed, 16 insertions(+), 2 deletions(-)
+ xen/include/asm-arm/device.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/xen/arch/arm/pci/pci.c b/xen/arch/arm/pci/pci.c
-index 73540045d187..138da19284ab 100644
---- a/xen/arch/arm/pci/pci.c
-+++ b/xen/arch/arm/pci/pci.c
-@@ -27,6 +27,13 @@ int arch_pci_clean_pirqs(struct domain *d)
-     return 0;
- }
- 
-+struct pci_dev *dev_to_pci(struct device *dev)
-+{
-+    ASSERT(dev->type == DEV_PCI);
-+
-+    return container_of(dev, struct pci_dev, arch.dev);
-+}
-+
- static int __init dt_pci_init(void)
- {
-     struct dt_device_node *np;
 diff --git a/xen/include/asm-arm/device.h b/xen/include/asm-arm/device.h
-index ebe84ea853cd..7bf040560363 100644
+index 5ecd5e7bd15e..ebe84ea853cd 100644
 --- a/xen/include/asm-arm/device.h
 +++ b/xen/include/asm-arm/device.h
-@@ -4,6 +4,7 @@
- enum device_type
- {
-     DEV_DT,
-+    DEV_PCI,
- };
+@@ -27,7 +27,7 @@ typedef struct device device_t;
  
- struct dev_archdata {
-@@ -25,8 +26,7 @@ typedef struct device device_t;
- 
- #include <xen/device_tree.h>
- 
--/* TODO: Correctly implement dev_is_pci when PCI is supported on ARM */
--#define dev_is_pci(dev) ((void)(dev), 0)
-+#define dev_is_pci(dev) ((dev)->type == DEV_PCI)
- #define dev_is_dt(dev)  ((dev)->type == DEV_DT)
+ /* TODO: Correctly implement dev_is_pci when PCI is supported on ARM */
+ #define dev_is_pci(dev) ((void)(dev), 0)
+-#define dev_is_dt(dev)  ((dev->type == DEV_DT)
++#define dev_is_dt(dev)  ((dev)->type == DEV_DT)
  
  enum device_class
-diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-index 7cb2e2f1edaf..603a1fc072d1 100644
---- a/xen/include/asm-arm/pci.h
-+++ b/xen/include/asm-arm/pci.h
-@@ -26,6 +26,13 @@ struct arch_pci_dev {
-     struct device dev;
- };
- 
-+/*
-+ * Because of the header cross-dependencies, e.g. we need both
-+ * struct pci_dev and struct arch_pci_dev at the same time, this cannot be
-+ * done with an inline here. Macro can be implemented, but looks scary.
-+ */
-+struct pci_dev *dev_to_pci(struct device *dev);
-+
- /* Arch-specific MSI data for vPCI. */
- struct vpci_arch_msi {
- };
+ {
 -- 
 2.25.1
 
