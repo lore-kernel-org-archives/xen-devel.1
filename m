@@ -2,43 +2,43 @@ Return-Path: <SRS0=yhtS=OY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D6DC3C433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 17:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98B7CC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 17:39:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 98E5661159
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 17:07:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 98E5661159
+	by mail.kernel.org (Postfix) with ESMTPS id 5E80F61039
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 17:39:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5E80F61039
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.201610.356197 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.201660.356269 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXRQf-0002rF-A8; Mon, 04 Oct 2021 17:07:05 +0000
+	id 1mXRvL-0001P1-Vi; Mon, 04 Oct 2021 17:38:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 201610.356197; Mon, 04 Oct 2021 17:07:05 +0000
+Received: by outflank-mailman (output) from mailman id 201660.356269; Mon, 04 Oct 2021 17:38:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXRQf-0002pz-42; Mon, 04 Oct 2021 17:07:05 +0000
-Received: by outflank-mailman (input) for mailman id 201610;
- Mon, 04 Oct 2021 17:07:03 +0000
+	id 1mXRvL-0001Ou-Sj; Mon, 04 Oct 2021 17:38:47 +0000
+Received: by outflank-mailman (input) for mailman id 201660;
+ Mon, 04 Oct 2021 17:38:46 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mXRQd-0002oc-Oi
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 17:07:03 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mXRvK-0001Ok-QA; Mon, 04 Oct 2021 17:38:46 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mXRQd-0000L7-Nr
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 17:07:03 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mXRQd-0005gF-N1
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 17:07:03 +0000
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by mariner.uk.xensource.com with esmtp (Exim 4.89)
- (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1mXRQb-0006NI-OK; Mon, 04 Oct 2021 18:07:01 +0100
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mXRvK-0000uQ-F9; Mon, 04 Oct 2021 17:38:46 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mXRvK-0005SJ-5g; Mon, 04 Oct 2021 17:38:46 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mXRvK-0001aX-5K; Mon, 04 Oct 2021 17:38:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,44 +51,90 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=T94U9z+a5DsOSr2q2nxD2XUprqIrdu2ze8pMDFZ0Qko=; b=jAvAwnXVBx47CSt+3PTpMkmqtL
-	j6BV0iSYdG9C1ZvBrkUwayBetQe01BY+DvkcmRjBfm3ZjGEztYrKI0UfOyntQDzCjNekww1M6DJv4
-	zm7VvGRnrDJ+FznpPNKMXFh/ICqruK5GXmn++RrS2/yDP0CCr2dXkldE82kaK/oPh7zQ=;
-From: Ian Jackson <iwj@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 1/6] host lifecycle: Use correct taskid column for runvar reconstruction
-Date: Mon,  4 Oct 2021 18:06:49 +0100
-Message-Id: <20211004170654.21864-2-iwj@xenproject.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20211004170654.21864-1-iwj@xenproject.org>
-References: <20211004170654.21864-1-iwj@xenproject.org>
-MIME-Version: 1.0
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=TW9hGdTHe7YCFWb0c/iQQLygw2decUpwkxiJOZ2omJU=; b=4EKu/96zwcxd6H80cLvhRlgRlZ
+	EjrVbp7pqJu1Yj0TPSymZX2rYWpNhLXwi7JHgJVhpoAhLVRaSyk+3XACzx23zwlU/xBxY0r4Myzhz
+	8b6UnnD2bA0bobcLfyn4z1EMCyXVv8YxWFu4vZnXBWfUEDL/RU1MbOZ9cgMqZaQ9JwWY=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-165350-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 165350: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=b6fe410936e30b2089cc8c6d54d786e535efafa3
+X-Osstest-Versions-That:
+    xen=ab4a83023eda9f04ad864877c1956b087ec6fc4f
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 04 Oct 2021 17:38:46 +0000
 
-t.taskid might be NULL since the task may have been deleted.
+flight 165350 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/165350/
 
-Signed-off-by: Ian Jackson <iwj@xenproject.org>
----
- Osstest/JobDB/Executive.pm | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Failures :-/ but no regressions.
 
-diff --git a/Osstest/JobDB/Executive.pm b/Osstest/JobDB/Executive.pm
-index 097c8d75b..c5db2691b 100644
---- a/Osstest/JobDB/Executive.pm
-+++ b/Osstest/JobDB/Executive.pm
-@@ -542,7 +542,7 @@ END
- 
-     my $scanq = $dbh_tests->prepare(<<END);
- 	   SELECT h.flight, h.job, h.isprep, h.ident, h.stepno,
--                  t.live, t.taskid,
-+                  t.live, h.taskid,
-                   h2.lcseq later_notprep
- 	     FROM host_lifecycle h
-         LEFT JOIN host_lifecycle h2
--- 
-2.20.1
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
+version targeted for testing:
+ xen                  b6fe410936e30b2089cc8c6d54d786e535efafa3
+baseline version:
+ xen                  ab4a83023eda9f04ad864877c1956b087ec6fc4f
+
+Last test of basis   165317  2021-09-29 20:22:11 Z    4 days
+Testing same since   165350  2021-10-04 13:00:25 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Anthony PERARD <anthony.perard@citrix.com>
+  Anthony PERARD <anthony.perard@gmail.com>
+  Jan Beulich <jbeulich@suse.com>
+  Juergen Gross <jgross@suse.com>
+  Luca Fancellu <luca.fancellu@arm.com>
+  Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+  Rahul Singh <rahul.singh@arm.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   ab4a83023e..b6fe410936  b6fe410936e30b2089cc8c6d54d786e535efafa3 -> smoke
 
