@@ -2,42 +2,49 @@ Return-Path: <SRS0=yhtS=OY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5ED8C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 12:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72B42C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 13:00:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B702611C8
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 12:22:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7B702611C8
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 3CEA161AFB
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Oct 2021 13:00:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3CEA161AFB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.201420.355912 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.201437.355927 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXMys-0004UA-NP; Mon, 04 Oct 2021 12:22:06 +0000
+	id 1mXNZR-0007vP-Qa; Mon, 04 Oct 2021 12:59:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 201420.355912; Mon, 04 Oct 2021 12:22:06 +0000
+Received: by outflank-mailman (output) from mailman id 201437.355927; Mon, 04 Oct 2021 12:59:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mXMys-0004U3-KR; Mon, 04 Oct 2021 12:22:06 +0000
-Received: by outflank-mailman (input) for mailman id 201420;
- Mon, 04 Oct 2021 12:22:05 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mXMyr-0004Tx-AA
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 12:22:05 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mXMyr-0003JE-6k
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 12:22:05 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mXMyr-0004l0-5N
- for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 12:22:05 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1mXMyp-0005VP-6b; Mon, 04 Oct 2021 13:22:03 +0100
+	id 1mXNZR-0007vI-N5; Mon, 04 Oct 2021 12:59:53 +0000
+Received: by outflank-mailman (input) for mailman id 201437;
+ Mon, 04 Oct 2021 12:59:52 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=r6Rd=OY=pengutronix.de=ukl@srs-us1.protection.inumbo.net>)
+ id 1mXNZQ-0007vB-Fe
+ for xen-devel@lists.xenproject.org; Mon, 04 Oct 2021 12:59:52 +0000
+Received: from metis.ext.pengutronix.de (unknown
+ [2001:67c:670:201:290:27ff:fe1d:cc33])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 078b5df6-85fe-4a89-b7fc-468d2d28a5bb;
+ Mon, 04 Oct 2021 12:59:50 +0000 (UTC)
+Received: from drehscheibe.grey.stw.pengutronix.de ([2a0a:edc0:0:c01:1d::a2])
+ by metis.ext.pengutronix.de with esmtps
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mXNZH-00054g-5h; Mon, 04 Oct 2021 14:59:43 +0200
+Received: from [2a0a:edc0:0:900:1d::77] (helo=ptz.office.stw.pengutronix.de)
+ by drehscheibe.grey.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mXNZF-0000L2-HD; Mon, 04 Oct 2021 14:59:41 +0200
+Received: from ukl by ptz.office.stw.pengutronix.de with local (Exim 4.92)
+ (envelope-from <ukl@pengutronix.de>)
+ id 1mXNZF-0000cM-GA; Mon, 04 Oct 2021 14:59:41 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,31 +56,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:To:Date:
-	Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=+fsfgGeZ4qqUEfE2iKExcwVirGCGdw0KtX4yevEB2+M=; b=UzBsYXJ0N486M/h7rV4crfZRJs
-	MUt3sAFL2CboL1JaGdGIM+2s5wzcwgrQAUrvCNdssECI8HfX34We4d3eKMY3RRCN1HqkAJdlNIkYM
-	07nHYPDb2LJI/4Ewu5IvKI/0Ui8HSe4X1w3HAtWW6DFyQfbEtwo26XUFIWi+anz5cTd0=;
-From: Ian Jackson <iwj@xenproject.org>
+X-Inumbo-ID: 078b5df6-85fe-4a89-b7fc-468d2d28a5bb
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>
+To: Bjorn Helgaas <helgaas@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>
+Cc: linux-pci@vger.kernel.org,
+	kernel@pengutronix.de,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	xen-devel@lists.xenproject.org,
+	Christoph Hellwig <hch@lst.de>
+Subject: [PATCH v6 03/11] xen/pci: Drop some checks that are always true
+Date: Mon,  4 Oct 2021 14:59:27 +0200
+Message-Id: <20211004125935.2300113-4-u.kleine-koenig@pengutronix.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20211004125935.2300113-1-u.kleine-koenig@pengutronix.de>
+References: <20211004125935.2300113-1-u.kleine-koenig@pengutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24922.61930.715312.781769@mariner.uk.xensource.com>
-Date: Mon, 4 Oct 2021 13:22:02 +0100
-To: xen-devel@lists.xenproject.org,
-    committers@xenproject.org
-Subject: Re: osstest down, PDU failure
-In-Reply-To: <24917.61577.291999.406078@mariner.uk.xensource.com>
-References: <24916.14069.358118.417330@mariner.uk.xensource.com>
-	<24916.53633.593814.456485@mariner.uk.xensource.com>
-	<24917.61577.291999.406078@mariner.uk.xensource.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Content-Type: text/plain; charset=UTF-8
+X-Patch-Hashes: v=1; h=sha256; i=7QOFRnoxyPrPqaGt2Yf8oJvx3xwgCvlMdm130sPrxr8=; m=Ixh7t2kv5MnS1JaJxFtVrqNhjBtz3xQyoCGo2anqbI0=; p=dOfuuSLv1l/M9DCuxyIBdCuX9kCH+yUzno229EZfUDs=; g=9e481f95a51887868b05f8a86c3e5a9f8aff47c6
+X-Patch-Sig: m=pgp; i=u.kleine-koenig@pengutronix.de; s=0x0D2511F322BFAB1C1580266BE2DCDD9132669BD6; b=iQEzBAABCgAdFiEEfnIqFpAYrP8+dKQLwfwUeK3K7AkFAmFa+ocACgkQwfwUeK3K7Amivgf+JL3 VuSxNpZrDO5AQClHSuKBtHBaW7oTZrnAnrcEOp1mfJQ0APZDzc4FyTrDOrUqKGOTJKFHVWuxJGT5k TV31y+QhV/acV/nGCdglSS0qVvPZWqpehJx1tUmYnbE+pljLQXJM1iULrwC6v1Wx0B879pKQ1o4P3 7f+xl1YwNv+uOF52e0xNSTJ/PkPZucaNDdq6UtbfOtxHrPBrNmTp1KOgxWymujpRDxvtiNbBz7uGk XG1wfHDNRrB/TpXbkJVRPm842O3/GnSCKiV5BAgsFqeYcUc1vBOZ9afXqseT1w7tG3/4uovlnIqKZ 0yDw0Ltrn/A3l39G2RtzPL+eLsre9Pg==
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:c01:1d::a2
+X-SA-Exim-Mail-From: ukl@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: xen-devel@lists.xenproject.org
 
-We replaced two PDUs and did a number of other on-site repairs etc.
+pcifront_common_process() has a check at the start that exits early if
+pcidev or pdidev->driver are NULL. So simplify the following code by not
+checking these two again.
 
-Service is in the process of being restored.  I hope to be fully
-operational by the end of the day.
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Signed-off-by: Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+---
+ drivers/pci/xen-pcifront.c | 57 +++++++++++++++++---------------------
+ 1 file changed, 25 insertions(+), 32 deletions(-)
 
-Ian.
+diff --git a/drivers/pci/xen-pcifront.c b/drivers/pci/xen-pcifront.c
+index 2156c632524d..f2d7f70a7a10 100644
+--- a/drivers/pci/xen-pcifront.c
++++ b/drivers/pci/xen-pcifront.c
+@@ -594,7 +594,6 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 	int devfn = pdev->sh_info->aer_op.devfn;
+ 	int domain = pdev->sh_info->aer_op.domain;
+ 	struct pci_dev *pcidev;
+-	int flag = 0;
+ 
+ 	dev_dbg(&pdev->xdev->dev,
+ 		"pcifront AER process: cmd %x (bus:%x, devfn%x)",
+@@ -609,40 +608,34 @@ static pci_ers_result_t pcifront_common_process(int cmd,
+ 	}
+ 	pdrv = pcidev->driver;
+ 
+-	if (pdrv) {
+-		if (pdrv->err_handler && pdrv->err_handler->error_detected) {
+-			pci_dbg(pcidev, "trying to call AER service\n");
+-			if (pcidev) {
+-				flag = 1;
+-				switch (cmd) {
+-				case XEN_PCI_OP_aer_detected:
+-					result = pdrv->err_handler->
+-						 error_detected(pcidev, state);
+-					break;
+-				case XEN_PCI_OP_aer_mmio:
+-					result = pdrv->err_handler->
+-						 mmio_enabled(pcidev);
+-					break;
+-				case XEN_PCI_OP_aer_slotreset:
+-					result = pdrv->err_handler->
+-						 slot_reset(pcidev);
+-					break;
+-				case XEN_PCI_OP_aer_resume:
+-					pdrv->err_handler->resume(pcidev);
+-					break;
+-				default:
+-					dev_err(&pdev->xdev->dev,
+-						"bad request in aer recovery "
+-						"operation!\n");
+-
+-				}
+-			}
++	if (pdrv->err_handler && pdrv->err_handler->error_detected) {
++		pci_dbg(pcidev, "trying to call AER service\n");
++		switch (cmd) {
++		case XEN_PCI_OP_aer_detected:
++			result = pdrv->err_handler->
++				 error_detected(pcidev, state);
++			break;
++		case XEN_PCI_OP_aer_mmio:
++			result = pdrv->err_handler->
++				 mmio_enabled(pcidev);
++			break;
++		case XEN_PCI_OP_aer_slotreset:
++			result = pdrv->err_handler->
++				 slot_reset(pcidev);
++			break;
++		case XEN_PCI_OP_aer_resume:
++			pdrv->err_handler->resume(pcidev);
++			break;
++		default:
++			dev_err(&pdev->xdev->dev,
++				"bad request in aer recovery "
++				"operation!\n");
+ 		}
++
++		return result;
+ 	}
+-	if (!flag)
+-		result = PCI_ERS_RESULT_NONE;
+ 
+-	return result;
++	return PCI_ERS_RESULT_NONE;
+ }
+ 
+ 
+-- 
+2.30.2
+
 
