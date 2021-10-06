@@ -2,44 +2,43 @@ Return-Path: <SRS0=j8AU=O2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DBD1C433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Oct 2021 17:42:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 809AEC433F5
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Oct 2021 17:42:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A7E06052B
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Oct 2021 17:42:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3A7E06052B
+	by mail.kernel.org (Postfix) with ESMTPS id 51CB360F6C
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Oct 2021 17:42:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 51CB360F6C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.202994.358079 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.202997.358096 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mYAvY-0006Sc-VH; Wed, 06 Oct 2021 17:42:00 +0000
+	id 1mYAvd-0007Fy-7h; Wed, 06 Oct 2021 17:42:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 202994.358079; Wed, 06 Oct 2021 17:42:00 +0000
+Received: by outflank-mailman (output) from mailman id 202997.358096; Wed, 06 Oct 2021 17:42:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mYAvY-0006SG-M6; Wed, 06 Oct 2021 17:42:00 +0000
-Received: by outflank-mailman (input) for mailman id 202994;
- Wed, 06 Oct 2021 17:41:58 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mYAvd-0007Fk-3E; Wed, 06 Oct 2021 17:42:05 +0000
+Received: by outflank-mailman (input) for mailman id 202997;
+ Wed, 06 Oct 2021 17:42:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=13oh=O2=arm.com=rahul.singh@srs-us1.protection.inumbo.net>)
- id 1mYAvW-0005xz-Fg
- for xen-devel@lists.xenproject.org; Wed, 06 Oct 2021 17:41:58 +0000
+ id 1mYAvb-0004uL-8Q
+ for xen-devel@lists.xenproject.org; Wed, 06 Oct 2021 17:42:03 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id b3c6aa2c-26cc-11ec-bf8b-12813bfff9fa;
- Wed, 06 Oct 2021 17:41:57 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 6d7f437f-a58a-45a2-bef9-8925afe7acd5;
+ Wed, 06 Oct 2021 17:41:50 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1DD8411D4;
- Wed,  6 Oct 2021 10:41:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0D4B76D;
+ Wed,  6 Oct 2021 10:41:50 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A6F5D3F70D;
- Wed,  6 Oct 2021 10:41:55 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0CB783F70D;
+ Wed,  6 Oct 2021 10:41:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,262 +50,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b3c6aa2c-26cc-11ec-bf8b-12813bfff9fa
+X-Inumbo-ID: 6d7f437f-a58a-45a2-bef9-8925afe7acd5
 From: Rahul Singh <rahul.singh@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Andre.Przywara@arm.com,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v5 10/11] arm/libxl: Emulated PCI device tree node in libxl
-Date: Wed,  6 Oct 2021 18:40:36 +0100
-Message-Id: <b81b5dea800c8fe47071f3dbd20588b1e472fb99.1633540842.git.rahul.singh@arm.com>
+Subject: [PATCH v5 06/11] xen/arm: Implement pci access functions
+Date: Wed,  6 Oct 2021 18:40:32 +0100
+Message-Id: <b3fd5516dca0bc82b018d75bd85e09b6484888d7.1633540842.git.rahul.singh@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1633540842.git.rahul.singh@arm.com>
 References: <cover.1633540842.git.rahul.singh@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-libxl will create an emulated PCI device tree node in the device tree to
-enable the guest OS to discover the virtual PCI during guest boot.
-Emulated PCI device tree node will only be created when there is any
-device assigned to guest.
-
-A new area has been reserved in the arm guest physical map at
-which the VPCI bus is declared in the device tree (reg and ranges
-parameters of the node).
+Implement generic pci access functions to read/write the configuration
+space.
 
 Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-Change in v5:
-- Move setting the arch_arm.vpci and XEN_DOMCTL_CDF_vpci to libxl_arm.c
+Change in v5: none
 Change in v4:
-- Gate code for x86 for setting the XEN_DOMCTL_CDF_vpci for x86.
+- Added Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+- Added Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
 Change in v3:
-- Make GUEST_VPCI_MEM_ADDR address 2MB aligned
-Change in v2:
-- enable doamin_vpci_init() when XEN_DOMCTL_CDF_vpci is set for domain.
+- Remove PRI_pci as not used.
+- Replace uint32_t sbdf to pci_sbdf_t sbdf to avoid typecast
+Change in v2: Fixed comments
 ---
 ---
- tools/include/libxl.h            |   6 ++
- tools/libs/light/libxl_arm.c     | 111 +++++++++++++++++++++++++++++++
- tools/libs/light/libxl_types.idl |   1 +
- xen/include/public/arch-arm.h    |  10 +++
- 4 files changed, 128 insertions(+)
+ xen/arch/arm/pci/pci-access.c      | 57 ++++++++++++++++++++++++++++++
+ xen/arch/arm/pci/pci-host-common.c | 19 ++++++++++
+ xen/include/asm-arm/pci.h          |  1 +
+ 3 files changed, 77 insertions(+)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index b9ba16d698..3362073b21 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -358,6 +358,12 @@
-  */
- #define LIBXL_HAVE_BUILDINFO_ARM_VUART 1
+diff --git a/xen/arch/arm/pci/pci-access.c b/xen/arch/arm/pci/pci-access.c
+index 3cd14a4b87..9f9aac43d7 100644
+--- a/xen/arch/arm/pci/pci-access.c
++++ b/xen/arch/arm/pci/pci-access.c
+@@ -16,6 +16,7 @@
+ #include <asm/io.h>
+ 
+ #define INVALID_VALUE (~0U)
++#define PCI_ERR_VALUE(len) GENMASK(0, len * 8)
+ 
+ int pci_generic_config_read(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
+                             uint32_t reg, uint32_t len, uint32_t *value)
+@@ -72,6 +73,62 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
+     return 0;
+ }
+ 
++static uint32_t pci_config_read(pci_sbdf_t sbdf, unsigned int reg,
++                                unsigned int len)
++{
++    uint32_t val = PCI_ERR_VALUE(len);
++    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
++
++    if ( unlikely(!bridge) )
++        return val;
++
++    if ( unlikely(!bridge->ops->read) )
++        return val;
++
++    bridge->ops->read(bridge, sbdf, reg, len, &val);
++
++    return val;
++}
++
++static void pci_config_write(pci_sbdf_t sbdf, unsigned int reg,
++                             unsigned int len, uint32_t val)
++{
++    struct pci_host_bridge *bridge = pci_find_host_bridge(sbdf.seg, sbdf.bus);
++
++    if ( unlikely(!bridge) )
++        return;
++
++    if ( unlikely(!bridge->ops->write) )
++        return;
++
++    bridge->ops->write(bridge, sbdf, reg, len, val);
++}
++
++/*
++ * Wrappers for all PCI configuration access functions.
++ */
++
++#define PCI_OP_WRITE(size, type)                            \
++    void pci_conf_write##size(pci_sbdf_t sbdf,              \
++                              unsigned int reg, type val)   \
++{                                                           \
++    pci_config_write(sbdf, reg, size / 8, val);             \
++}
++
++#define PCI_OP_READ(size, type)                             \
++    type pci_conf_read##size(pci_sbdf_t sbdf,               \
++                              unsigned int reg)             \
++{                                                           \
++    return pci_config_read(sbdf, reg, size / 8);            \
++}
++
++PCI_OP_READ(8, uint8_t)
++PCI_OP_READ(16, uint16_t)
++PCI_OP_READ(32, uint32_t)
++PCI_OP_WRITE(8, uint8_t)
++PCI_OP_WRITE(16, uint16_t)
++PCI_OP_WRITE(32, uint32_t)
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
+index a08e06cea1..c5941b10e9 100644
+--- a/xen/arch/arm/pci/pci-host-common.c
++++ b/xen/arch/arm/pci/pci-host-common.c
+@@ -236,6 +236,25 @@ err_exit:
+     return err;
+ }
  
 +/*
-+ * LIBXL_HAVE_BUILDINFO_ARM_VPCI indicates that the toolstack supports virtual
-+ * PCI for ARM.
++ * This function will lookup an hostbridge based on the segment and bus
++ * number.
 + */
-+#define LIBXL_HAVE_BUILDINFO_ARM_VPCI 1
++struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus)
++{
++    struct pci_host_bridge *bridge;
 +
++    list_for_each_entry( bridge, &pci_host_bridges, node )
++    {
++        if ( bridge->segment != segment )
++            continue;
++        if ( (bus < bridge->cfg->busn_start) || (bus > bridge->cfg->busn_end) )
++            continue;
++        return bridge;
++    }
++
++    return NULL;
++}
  /*
-  * LIBXL_HAVE_BUILDINFO_GRANT_LIMITS indicates that libxl_domain_build_info
-  * has the max_grant_frames and max_maptrack_frames fields.
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index e3140a6e00..2be208b99b 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -101,6 +101,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
+  * Local variables:
+  * mode: C
+diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
+index bb7eda6705..49c9622902 100644
+--- a/xen/include/asm-arm/pci.h
++++ b/xen/include/asm-arm/pci.h
+@@ -81,6 +81,7 @@ int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
+                              uint32_t reg, uint32_t len, uint32_t value);
+ void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
+                                pci_sbdf_t sbdf, uint32_t where);
++struct pci_host_bridge *pci_find_host_bridge(uint16_t segment, uint8_t bus);
  
-+    /* Enable VPCI support. */
-+    if (d_config->num_pcidevs) {
-+        config->flags |= XEN_DOMCTL_CDF_vpci;
-+        libxl_defbool_set(&d_config->b_info.arch_arm.vpci, true);
-+    }
-+
-     return 0;
- }
- 
-@@ -269,6 +275,58 @@ static int fdt_property_regs(libxl__gc *gc, void *fdt,
-     return fdt_property(fdt, "reg", regs, sizeof(regs));
- }
- 
-+static int fdt_property_values(libxl__gc *gc, void *fdt,
-+        const char *name, unsigned num_cells, ...)
-+{
-+    uint32_t prop[num_cells];
-+    be32 *cells = &prop[0];
-+    int i;
-+    va_list ap;
-+    uint32_t arg;
-+
-+    va_start(ap, num_cells);
-+    for (i = 0 ; i < num_cells; i++) {
-+        arg = va_arg(ap, uint32_t);
-+        set_cell(&cells, 1, arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, name, prop, sizeof(prop));
-+}
-+
-+static int fdt_property_vpci_ranges(libxl__gc *gc, void *fdt,
-+                                    unsigned addr_cells,
-+                                    unsigned size_cells,
-+                                    unsigned num_regs, ...)
-+{
-+    uint32_t regs[num_regs*((addr_cells*2)+size_cells+1)];
-+    be32 *cells = &regs[0];
-+    int i;
-+    va_list ap;
-+    uint64_t arg;
-+
-+    va_start(ap, num_regs);
-+    for (i = 0 ; i < num_regs; i++) {
-+        /* Set the memory bit field */
-+        arg = va_arg(ap, uint32_t);
-+        set_cell(&cells, 1, arg);
-+
-+        /* Set the vpci bus address */
-+        arg = addr_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, addr_cells , arg);
-+
-+        /* Set the cpu bus address where vpci address is mapped */
-+        set_cell(&cells, addr_cells, arg);
-+
-+        /* Set the vpci size requested */
-+        arg = size_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, size_cells, arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, "ranges", regs, sizeof(regs));
-+}
-+
- static int make_root_properties(libxl__gc *gc,
-                                 const libxl_version_info *vers,
-                                 void *fdt)
-@@ -668,6 +726,53 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
-     return 0;
- }
- 
-+static int make_vpci_node(libxl__gc *gc, void *fdt,
-+        const struct arch_info *ainfo,
-+        struct xc_dom_image *dom)
-+{
-+    int res;
-+    const uint64_t vpci_ecam_base = GUEST_VPCI_ECAM_BASE;
-+    const uint64_t vpci_ecam_size = GUEST_VPCI_ECAM_SIZE;
-+    const char *name = GCSPRINTF("pcie@%"PRIx64, vpci_ecam_base);
-+
-+    res = fdt_begin_node(fdt, name);
-+    if (res) return res;
-+
-+    res = fdt_property_compat(gc, fdt, 1, "pci-host-ecam-generic");
-+    if (res) return res;
-+
-+    res = fdt_property_string(fdt, "device_type", "pci");
-+    if (res) return res;
-+
-+    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+            GUEST_ROOT_SIZE_CELLS, 1, vpci_ecam_base, vpci_ecam_size);
-+    if (res) return res;
-+
-+    res = fdt_property_values(gc, fdt, "bus-range", 2, 0, 255);
-+    if (res) return res;
-+
-+    res = fdt_property_cell(fdt, "#address-cells", 3);
-+    if (res) return res;
-+
-+    res = fdt_property_cell(fdt, "#size-cells", 2);
-+    if (res) return res;
-+
-+    res = fdt_property_string(fdt, "status", "okay");
-+    if (res) return res;
-+
-+    res = fdt_property_vpci_ranges(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+        GUEST_ROOT_SIZE_CELLS, 2,
-+        GUEST_VPCI_ADDR_TYPE_MEM, GUEST_VPCI_MEM_ADDR, GUEST_VPCI_MEM_SIZE,
-+        GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM, GUEST_VPCI_PREFETCH_MEM_ADDR,
-+        GUEST_VPCI_PREFETCH_MEM_SIZE);
-+    if (res) return res;
-+
-+    res = fdt_end_node(fdt);
-+    if (res) return res;
-+
-+    return 0;
-+}
-+
- static const struct arch_info *get_arch_info(libxl__gc *gc,
-                                              const struct xc_dom_image *dom)
+ static always_inline bool is_pci_passthrough_enabled(void)
  {
-@@ -971,6 +1076,9 @@ next_resize:
-         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
-             FDT( make_optee_node(gc, fdt) );
- 
-+        if (libxl_defbool_val(info->arch_arm.vpci))
-+            FDT( make_vpci_node(gc, fdt, ainfo, dom) );
-+
-         if (pfdt)
-             FDT( copy_partial_fdt(gc, fdt, pfdt) );
- 
-@@ -1189,6 +1297,9 @@ void libxl__arch_domain_build_info_setdefault(libxl__gc *gc,
-     /* ACPI is disabled by default */
-     libxl_defbool_setdefault(&b_info->acpi, false);
- 
-+    /* VPCI is disabled by default */
-+    libxl_defbool_setdefault(&b_info->arch_arm.vpci, false);
-+
-     if (b_info->type != LIBXL_DOMAIN_TYPE_PV)
-         return;
- 
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 3f9fff653a..78b1ddf0b8 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -644,6 +644,7 @@ libxl_domain_build_info = Struct("domain_build_info",[
- 
-     ("arch_arm", Struct(None, [("gic_version", libxl_gic_version),
-                                ("vuart", libxl_vuart_type),
-+                               ("vpci", libxl_defbool),
-                               ])),
-     ("arch_x86", Struct(None, [("msr_relaxed", libxl_defbool),
-                               ])),
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index 44be337dec..45aac5d18f 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -433,6 +433,11 @@ typedef uint64_t xen_callback_t;
- #define GUEST_PL011_BASE    xen_mk_ullong(0x22000000)
- #define GUEST_PL011_SIZE    xen_mk_ullong(0x00001000)
- 
-+/* Guest PCI-PCIe memory space where config space and BAR will be available.*/
-+#define GUEST_VPCI_ADDR_TYPE_MEM            xen_mk_ullong(0x02000000)
-+#define GUEST_VPCI_MEM_ADDR                 xen_mk_ullong(0x23000000)
-+#define GUEST_VPCI_MEM_SIZE                 xen_mk_ullong(0x10000000)
-+
- /*
-  * 16MB == 4096 pages reserved for guest to use as a region to map its
-  * grant table in.
-@@ -448,6 +453,11 @@ typedef uint64_t xen_callback_t;
- #define GUEST_RAM0_BASE   xen_mk_ullong(0x40000000) /* 3GB of low RAM @ 1GB */
- #define GUEST_RAM0_SIZE   xen_mk_ullong(0xc0000000)
- 
-+/* 4GB @ 4GB Prefetch Memory for VPCI */
-+#define GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM   xen_mk_ullong(0x42000000)
-+#define GUEST_VPCI_PREFETCH_MEM_ADDR        xen_mk_ullong(0x100000000)
-+#define GUEST_VPCI_PREFETCH_MEM_SIZE        xen_mk_ullong(0x100000000)
-+
- #define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /* 1016GB of RAM @ 8GB */
- #define GUEST_RAM1_SIZE   xen_mk_ullong(0xfe00000000)
- 
 -- 
 2.25.1
 
