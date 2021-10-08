@@ -2,55 +2,42 @@ Return-Path: <SRS0=LZyn=O4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD2E3C433EF
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Oct 2021 08:14:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD7AEC433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Oct 2021 08:20:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5889760FE8
-	for <xen-devel@archiver.kernel.org>; Fri,  8 Oct 2021 08:14:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5889760FE8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7A17461038
+	for <xen-devel@archiver.kernel.org>; Fri,  8 Oct 2021 08:20:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7A17461038
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.204499.359643 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.204508.359665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mYl0n-0006Aj-BX; Fri, 08 Oct 2021 08:13:49 +0000
+	id 1mYl6i-0007Av-Cq; Fri, 08 Oct 2021 08:19:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 204499.359643; Fri, 08 Oct 2021 08:13:49 +0000
+Received: by outflank-mailman (output) from mailman id 204508.359665; Fri, 08 Oct 2021 08:19:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mYl0n-0006Ac-85; Fri, 08 Oct 2021 08:13:49 +0000
-Received: by outflank-mailman (input) for mailman id 204499;
- Fri, 08 Oct 2021 08:13:47 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=aYfl=O4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1mYl0l-0006AW-Pw
- for xen-devel@lists.xenproject.org; Fri, 08 Oct 2021 08:13:47 +0000
-Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a824ca16-280f-11ec-8024-12813bfff9fa;
- Fri, 08 Oct 2021 08:13:46 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05lp2106.outbound.protection.outlook.com [104.47.17.106])
- (Using TLS) by relay.mimecast.com with ESMTP id
- de-mta-28-dpBFHXTtPAudUpyRV-Q30Q-1; Fri, 08 Oct 2021 10:13:43 +0200
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by VI1PR0401MB2333.eurprd04.prod.outlook.com (2603:10a6:800:28::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4566.22; Fri, 8 Oct
- 2021 08:13:41 +0000
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::4d37:ec64:4e90:b16b]) by VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::4d37:ec64:4e90:b16b%7]) with mapi id 15.20.4587.022; Fri, 8 Oct 2021
- 08:13:41 +0000
-Received: from [10.156.60.236] (37.24.206.209) by
- AM5PR0202CA0011.eurprd02.prod.outlook.com (2603:10a6:203:69::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4587.18 via Frontend
- Transport; Fri, 8 Oct 2021 08:13:40 +0000
+	id 1mYl6i-0007Ao-9n; Fri, 08 Oct 2021 08:19:56 +0000
+Received: by outflank-mailman (input) for mailman id 204508;
+ Fri, 08 Oct 2021 08:19:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=HhL2=O4=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
+ id 1mYl6h-0006su-Kt
+ for xen-devel@lists.xenproject.org; Fri, 08 Oct 2021 08:19:55 +0000
+Received: from foss.arm.com (unknown [217.140.110.172])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 1ca1e0ce-e9ab-47e6-9dd7-6898e8a98a88;
+ Fri, 08 Oct 2021 08:19:52 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6CCB2ED1;
+ Fri,  8 Oct 2021 01:19:52 -0700 (PDT)
+Received: from e123311-lin.arm.com (unknown [10.57.24.215])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C06733F70D;
+ Fri,  8 Oct 2021 01:19:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,205 +49,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a824ca16-280f-11ec-8024-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1633680825;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hqWELZeks3LgEfaO4qPvZ2j58FW9M+MeMqcPnZFGtx8=;
-	b=Lu4vGo2vzL11BIwiRfIZVAx6tziExL5cSs1ElQP/DDLbpDN4LprxAGs7DAOP6IcifQYf/I
-	w3XJrj2hS5c73MG967GtZx26QxOQDbd5/EwWOsUxGlZ57LPnAxgaxQZ3oYjXoCAIrwWSg9
-	GyfJpyzEogCUSU9Kh2jpAXlzeif0l8o=
-X-MC-Unique: dpBFHXTtPAudUpyRV-Q30Q-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=n0V5SYWDl72Rw44OHGDELfhqDBvXb9uo1br+l/K0WEXsOxlvmrCwupM4sq3fotWbXOs8IjOYlc2aIYb9BSis4tc4Rn87i9DRPs7uywBKCQkt1f+x1gXr21CvDRQYUotM9XX9kuNdVz2UQitNMrOoV7V+7aGLIG3hB8otl2vWWLQryskgrBbZMmoMx7QjB/JACl2FOuO6d49skIvbIt3XyEJXizDkAjwpk7Uvpvcp4bv21ndir74qWwj963N+usUG/0DFhJZBPGBXlSupf2zEvGJIZGIyS95IzaVk59GJ6fwDxISCDYHk5SuOtB8Fkg+yOUVuTaTzMwCNQDkK7eIZGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hqWELZeks3LgEfaO4qPvZ2j58FW9M+MeMqcPnZFGtx8=;
- b=JYX79DsDtL/eeOOw27PDfnwOj7nIle613lTQTxsW6cVImLoFyvrIwAFHnnMMxMW4k1J1i6pvC3ZRI60STujEeRKNRv5T6TTXK4xzSiW+u40pI2L10ieGbA0hak1R9EhllkqfyK9+RSgFk2QFCqCW6a4rddW/+H8gfMClLFXhMtz00Hqa8PEgFyMIzwjE7zSnZEFHbEhK9WOMN4bKL0ixbwdDxwGrKaYmGLUR/Rz+iiKWjkaZFJBxjhHsZFvJOwEkfDqjmJRvatUmM9rY+uQukWs4wal/ARrw3lkJu//dWla0crINW0vq7mLn03jps0PCgmIt2LUxwUqJXB6eiDiYjA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
- header.d=none;lists.xenproject.org; dmarc=none action=none
- header.from=suse.com;
-Subject: Re: [PATCH V5 1/3] xen/arm: Introduce gpaddr_bits field to struct
- xen_arch_domainconfig
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr <olekstysh@gmail.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Ian Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Juergen Gross <jgross@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org
-References: <1633519346-3686-1-git-send-email-olekstysh@gmail.com>
- <1633519346-3686-2-git-send-email-olekstysh@gmail.com>
- <68cb29bb-7d84-dc27-eead-4a079b9caf68@suse.com>
- <e77eea6f-163d-0920-2e90-fb9f3a602743@gmail.com>
- <ffb40f3b-2394-7747-2c06-955e2aa87cfc@suse.com>
- <387608b9-c7b2-e814-7fa5-a262acc0c73d@gmail.com>
- <ae852345-66ff-7bcf-f68e-2161e23933a1@suse.com>
- <alpine.DEB.2.21.2110071311450.414@sstabellini-ThinkPad-T480s>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b8e868a2-9af3-de6c-0683-4bb2ff7821f3@suse.com>
-Date: Fri, 8 Oct 2021 10:13:38 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-In-Reply-To: <alpine.DEB.2.21.2110071311450.414@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM5PR0202CA0011.eurprd02.prod.outlook.com
- (2603:10a6:203:69::21) To VI1PR04MB5600.eurprd04.prod.outlook.com
- (2603:10a6:803:e7::16)
+X-Inumbo-ID: 1ca1e0ce-e9ab-47e6-9dd7-6898e8a98a88
+From: Michal Orzel <michal.orzel@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@citrix.com>,
+	Nick Rosbrook <rosbrookn@ainfosec.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Christian Lindig <christian.lindig@citrix.com>,
+	David Scott <dave@recoil.org>
+Subject: [PATCH v3 1/3] xen+tools: Introduce XEN_SYSCTL_PHYSCAP_vpmu
+Date: Fri,  8 Oct 2021 10:19:31 +0200
+Message-Id: <20211008081933.18546-2-michal.orzel@arm.com>
+X-Mailer: git-send-email 2.29.0
+In-Reply-To: <20211008081933.18546-1-michal.orzel@arm.com>
+References: <20211008081933.18546-1-michal.orzel@arm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f8758e5e-e333-4e65-62b3-08d98a3389dd
-X-MS-TrafficTypeDiagnostic: VI1PR0401MB2333:
-X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS:
-	<VI1PR0401MB233347F829043D142B5EB156B3B29@VI1PR0401MB2333.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	r55kVbK9T3hJD3Sdv4cSkzQb5fL8CCnRDi+hYyzvSRqyyEYJF+JFu6jlQ+H3sbl4RpVcAVeX5RWgWIs49GP3eVTB2ktmP/icPtMS6iA07bxV35p28F/+Tu+eOLOCwmJ01/U9sOxvFRpMUjcmbaOX1iogzQvoa6h3wtKU8RjUSnG1hUo/Pd1Vx10ZTqXbbMHOVzAnRMsxqaembdvQZjO61hM0cnFOtes47kHSOaDuLsJQkicfbZHqFAGMN/nimuzfQSCobirIf73c+Jse+HYRrxZ0LUQ0QXLusked04RxHAfWkkRMmJuO6v5GaUyoJsCtr1ke4sp30E2zAHb6jLzRXup6wMgwgtwhGhHYMICZqRecTRKN5HmVezxtgm59Q8Y5r+mXt8hVG5Cc0Medvlr3WXM4luCpCJYFfuvOGBG/e1351wolGTD+2mNC1KwKNUstQtyR05QTMzlCIoPa9UkYsNoKLBoNG2KGBYq7hIeuIdP7kld7FNNw7dRPZuehU1ixphzFzJTpj4EKw1OjPM8W4yxbseEa9WyW78E773lsIU3E+bou3AOYcfCaUe/WceIjJz48jm2dPYXI3tdmLvQZYIm1IGSz4DJu+KhMEnLdcnGBJyw6GXUcr8AjlUkvAZMWYiv8rnLOs9DxB5Mtfr99/V/SHjc+GfBkcbMyofzKZPQJYBKdhq9fbl77gqOBtISlhpsJDtXqNAbGJLu2V8fTykNoSdE1o5NzPtkLoPzgcLLkIkDXxHTTWzm8Zg7TLAGr
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(186003)(6916009)(86362001)(508600001)(7416002)(36756003)(16576012)(316002)(8936002)(54906003)(6486002)(2616005)(26005)(2906002)(5660300002)(66946007)(4326008)(53546011)(66476007)(31686004)(8676002)(38100700002)(31696002)(66556008)(83380400001)(956004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bGs3VEZIeEZ5ajVxSU0wSlJQQ1UrdE1BcmJuTEdxMzBjWlhWRHZ2d3U2eGhD?=
- =?utf-8?B?TGJaVjRFTVJzck8rMWFjN3J5WWtiOW5qREhHQWtCUlgwVERkWWl6RmpvUUkv?=
- =?utf-8?B?cGIyYi90d0tkUGVHcGVUdlExd2piS1EyaVlaUzlIVzEvdlVONlpXR0JwWm04?=
- =?utf-8?B?Z0N3RFlleFppL0pTUDFaTUs1Q3pSS2hveVF3ZldPdGpZN3c0Ym1KQ0Q2R2ZK?=
- =?utf-8?B?UFdBbUdsUzc4RWJjU3ZSRHpqR0RsZW9nRmVRT0l2VTV3MEd0SVJzSWMwWFdy?=
- =?utf-8?B?OHJoS0dMRlpvTUFmalRlZitSTTIzSHd3NmQ2aTBXaHRCRE9QK2U3VzVHbzhZ?=
- =?utf-8?B?dDRJNTBVcmwvY1FaVmdRckFFL0VRdjJsMnVVdFZJdnJFUlJVdU5NMGhBU0FR?=
- =?utf-8?B?YmxpdHRHMXphQXFjeWlnUDdXc2w5ZVJPcmVCWFB5dFQ0blJTWUFHbmlMTUZE?=
- =?utf-8?B?L05CTVNscDZFSHJ0emdrOVJucmxwYnI2ZFEzVjBpajFKb1dCWWR4OUZCUGJJ?=
- =?utf-8?B?VTJFU0EzbGNCSmx2OFlSYTMvVTAxanVTMVFMSEs5MFFhckpBWHRBNVdJd3Fo?=
- =?utf-8?B?NlBieWNReDZLTVI4Szh4SzFqYU94SFVWeUhCbWg0ZUY0NzBKT2xpZjJHTlk0?=
- =?utf-8?B?dVBLM1lsWk9wZlBqeXJVSS93RnlzWW9YZ252V0VBNnNvT1U4cjFwdFNIbE1o?=
- =?utf-8?B?M0k2Yys5MDhGQ1BBbDM5d3hlOTFhVzIrL0ZPR21DY0JEN1hSVmtqNkZKZS82?=
- =?utf-8?B?ZFF6UWxBRThZdEpzY29yV2R0MTlTczFmb0FoUlFjUFc2QVF2dzZ3VGhUU1p2?=
- =?utf-8?B?OFhJR1BKYWlzZ1FqR2ViS2hnbGZnNGtjNG1sRmhmSjJnclpGRHAyMWhZbWky?=
- =?utf-8?B?TzdkV3dEcDhweDlKM0ZucEQzQ2o1V1RPZmZYdTJkekRic0NUWlh6L0kwaUtY?=
- =?utf-8?B?Sy9ZNE9UYXhaUi9MOU9HZVNJTkc1Q0RLVDlGRDdualVGaUh2Q2NTQ0J1MDRm?=
- =?utf-8?B?RzZUZ3N4NUtyOTFYbEN3YVc0UFozNjA3U0NSbnlscjYvM0pGcVRJZDJwb2VV?=
- =?utf-8?B?SnBoRlZwOU1PZnRQb1VEQUNXTHNUbHFKcjRhenRXaTNYMk5tcGR0Y1hSUDlD?=
- =?utf-8?B?TVBlaGZNaEdIbU5SdXQ0UkhBSHdkQnhmZU9CbWJyM0p4OVBmZEloQ0Y0emsx?=
- =?utf-8?B?OGFuK2ljSkxRWGN5VldGVktqZEpoUmp3UHVURkc4cHFWaG0zUnFjejN1Vkdz?=
- =?utf-8?B?T0ZBM2Q2NkFzNEtwUXk1ZWUzSHg2c0cxOEpJaThOTjlUWnI0UmV0UHpzWGpx?=
- =?utf-8?B?SGxDSDh4SmdhaXFDVjBneS9VVmlLcTRqZEgvNFpCVWRJZVlKU3dQTVR5S1Nq?=
- =?utf-8?B?TlRpTmVaUlRQY1pXN0NlcXpSUjFyNTh3eFE4alZ3Mk5kMG5yQlJyeVBlTXFp?=
- =?utf-8?B?MnNDa1BtWW4yRnF0Q3UwUnZTbGR1TUxOVGlsMTdJVmhwTmlXRk9IcDRlRVJz?=
- =?utf-8?B?T21XK0RDWEgyMGNML2NXLzFxOGpTMG4xZndORVZ3MithdnRJOWZBallsM3VQ?=
- =?utf-8?B?ZnNoeThPeFJpWXlsVTRoMFVyejhiYkdlK0VDY1BOK2NTcUtVcW5jNElUam4v?=
- =?utf-8?B?d3RzV2FUUWxER3NjS1dJbnMzMFVDdmt0WmROekJkZElLL3JpdmlFK1NPRHFV?=
- =?utf-8?B?MnliVkppSFRXSEVwZ0pxY3kxSFNvZUdVZUNyamljWDFlV0pJU3FZU2ZGUlo3?=
- =?utf-8?Q?DioIMaTeYyoE4bAwcgGHLJVPNFecwfWgJ50TpQ+?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f8758e5e-e333-4e65-62b3-08d98a3389dd
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2021 08:13:41.3286
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0irD3Vr79aSpX8AQOuGznV8iP8vFXc+6dYV2+AKLYgDKtELUhyghB04c1QDPfTQ8qIPtzHvhqwAgfhKKUzHbsg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2333
+Content-Transfer-Encoding: 8bit
 
-On 07.10.2021 22:23, Stefano Stabellini wrote:
-> On Thu, 7 Oct 2021, Jan Beulich wrote:
->> On 07.10.2021 15:12, Oleksandr wrote:
->>>
->>> On 07.10.21 15:43, Jan Beulich wrote:
->>>
->>> Hi Jan.
->>>
->>>> On 07.10.2021 14:30, Oleksandr wrote:
->>>>> On 07.10.21 10:42, Jan Beulich wrote:
->>>>>> On 06.10.2021 13:22, Oleksandr Tyshchenko wrote:
->>>>>>> Changes V4 -> V5:
->>>>>>>      - update patch subject and description
->>>>>>>      - drop Michal's R-b
->>>>>>>      - pass gpaddr_bits via createdomain domctl
->>>>>>>        (struct xen_arch_domainconfig)
->>>>>> I'm afraid I can't bring this in line with ...
->>>>>>
->>>>>>> --- a/xen/include/public/arch-arm.h
->>>>>>> +++ b/xen/include/public/arch-arm.h
->>>>>>> @@ -333,6 +333,11 @@ struct xen_arch_domainconfig {
->>>>>>>         *
->>>>>>>         */
->>>>>>>        uint32_t clock_frequency;
->>>>>>> +    /*
->>>>>>> +     * OUT
->>>>>>> +     * Guest physical address space size
->>>>>>> +     */
->>>>>>> +    uint8_t gpaddr_bits;
->>>>>> ... this being an OUT field. Is this really what Andrew had asked for?
->>>>>> I would have expected the entire struct to be IN (and the comment at
->>>>>> the top of the containing struct in public/domctl.h also suggests so,
->>>>>> i.e. your new field renders that comment stale). gic_version being
->>>>>> IN/OUT is already somewhat in conflict ...
->>>>> I am sorry but I'm totally confused now, we want the Xen to provide
->>>>> gpaddr_bits to the toolstack, but not the other way around.
->>>>> As I understand the main ask was to switch to domctl for which I wanted
->>>>> to get some clarification on how it would look like... Well, this patch
->>>>> switches to use
->>>>> domctl, and I think exactly as it was suggested at [1] in case if a
->>>>> common one is a difficult to achieve. I have to admit, I felt it was
->>>>> indeed difficult to achieve.
->>>> Sadly the mail you reference isn't the one I was referring to. It's not
->>>> even from Andrew. Unfortunately I also can't seem to be able to locate
->>>> this, i.e. I'm now wondering whether this was under a different subject.
->>>> Julien, in any event, confirmed in a recent reply on this thread that
->>>> there was such a mail (otherwise I would have started wondering whether
->>>> the request was made on irc). In any case it is _that_ mail that would
->>>> need going through again.
->>>
->>> I think, this is the email [1] you are referring to.
->>
->> Well, that's still a mail you sent, not Andrew's. And while I have yours
->> in my mailbox, I don't have Andrew's for whatever reason.
->>
->> Nevertheless there's enough context to be halfway certain that this
->> wasn't meant as an extension to the create domctl, but rather a separate
->> new one (merely replacing what you had originally as a sysctl to become
->> per-domain, to allow returning varying [between domains] values down the
->> road). I continue to think that if such a field was added to "create",
->> it would be an input (only).
-> 
-> During the Xen Community Call on Tuesday, we briefly spoke about this.
-> Andrew confirmed that what he meant with his original email is to use a
-> domctl. We didn't discuss which domctl specifically.
-> 
-> This patch now follows the same pattern of clock_frequency and
-> gic_version (see xen/include/public/arch-arm.h:struct xen_arch_domainconfig).
-> Note that gic_version is an IN/OUT parameter, showing that if in the
-> future we want the ability to set gpaddr_bits (in addition to get
-> gpaddr_bits), it will be possible.
+Introduce flag XEN_SYSCTL_PHYSCAP_vpmu which
+indicates whether the platform supports vPMU
+functionality. Modify Xen and tools accordingly.
 
-Well, as said before - I'm not convinced gic_version being IN/OUT is
-appropriate. At the very least a 2nd way to merely retrieve the value
-would seem to be necessary, so that it's not only the party creating
-the guest which would be able to know.
+Take the opportunity and fix XEN_SYSCTL_PHYSCAP_vmtrace
+definition in sysctl.h which wrongly use (1<<6)
+instead of (1u<<6).
 
-Since here's we're solely after retrieving the value, I don't see
-the point in altering "create". As you say, domctl can be changed,
-and hence at the point this needs to become an input to "create", it
-could easily be added there.
+Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+---
+Changes since v2:
+-do not define bit position and mask separately
+Changes since v1:
+-new in v2
+---
+ tools/golang/xenlight/helpers.gen.go | 2 ++
+ tools/golang/xenlight/types.gen.go   | 1 +
+ tools/include/libxl.h                | 6 ++++++
+ tools/libs/light/libxl.c             | 1 +
+ tools/libs/light/libxl_types.idl     | 1 +
+ tools/ocaml/libs/xc/xenctrl.ml       | 1 +
+ tools/ocaml/libs/xc/xenctrl.mli      | 1 +
+ tools/xl/xl_info.c                   | 5 +++--
+ xen/common/domain.c                  | 2 ++
+ xen/common/sysctl.c                  | 3 +++
+ xen/include/public/sysctl.h          | 6 ++++--
+ xen/include/xen/domain.h             | 2 ++
+ 12 files changed, 27 insertions(+), 4 deletions(-)
 
-Jan
+diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
+index bfc1e7f312..c8669837d8 100644
+--- a/tools/golang/xenlight/helpers.gen.go
++++ b/tools/golang/xenlight/helpers.gen.go
+@@ -3360,6 +3360,7 @@ x.CapHap = bool(xc.cap_hap)
+ x.CapShadow = bool(xc.cap_shadow)
+ x.CapIommuHapPtShare = bool(xc.cap_iommu_hap_pt_share)
+ x.CapVmtrace = bool(xc.cap_vmtrace)
++x.CapVpmu = bool(xc.cap_vpmu)
+ 
+  return nil}
+ 
+@@ -3391,6 +3392,7 @@ xc.cap_hap = C.bool(x.CapHap)
+ xc.cap_shadow = C.bool(x.CapShadow)
+ xc.cap_iommu_hap_pt_share = C.bool(x.CapIommuHapPtShare)
+ xc.cap_vmtrace = C.bool(x.CapVmtrace)
++xc.cap_vpmu = C.bool(x.CapVpmu)
+ 
+  return nil
+  }
+diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
+index 09a3bb67e2..45f2cba3d2 100644
+--- a/tools/golang/xenlight/types.gen.go
++++ b/tools/golang/xenlight/types.gen.go
+@@ -1008,6 +1008,7 @@ CapHap bool
+ CapShadow bool
+ CapIommuHapPtShare bool
+ CapVmtrace bool
++CapVpmu bool
+ }
+ 
+ type Connectorinfo struct {
+diff --git a/tools/include/libxl.h b/tools/include/libxl.h
+index b9ba16d698..ec5e3badae 100644
+--- a/tools/include/libxl.h
++++ b/tools/include/libxl.h
+@@ -502,6 +502,12 @@
+  */
+ #define LIBXL_HAVE_X86_MSR_RELAXED 1
+ 
++/*
++ * LIBXL_HAVE_PHYSINFO_CAP_VPMU indicates that libxl_physinfo has a cap_vpmu
++ * field, which indicates the availability of vPMU functionality.
++ */
++#define LIBXL_HAVE_PHYSINFO_CAP_VPMU 1
++
+ /*
+  * libxl ABI compatibility
+  *
+diff --git a/tools/libs/light/libxl.c b/tools/libs/light/libxl.c
+index 204eb0be2d..a032723fde 100644
+--- a/tools/libs/light/libxl.c
++++ b/tools/libs/light/libxl.c
+@@ -404,6 +404,7 @@ int libxl_get_physinfo(libxl_ctx *ctx, libxl_physinfo *physinfo)
+         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share);
+     physinfo->cap_vmtrace =
+         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_vmtrace);
++    physinfo->cap_vpmu = !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_vpmu);
+ 
+     GC_FREE;
+     return 0;
+diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
+index 3f9fff653a..993e83acca 100644
+--- a/tools/libs/light/libxl_types.idl
++++ b/tools/libs/light/libxl_types.idl
+@@ -1061,6 +1061,7 @@ libxl_physinfo = Struct("physinfo", [
+     ("cap_shadow", bool),
+     ("cap_iommu_hap_pt_share", bool),
+     ("cap_vmtrace", bool),
++    ("cap_vpmu", bool),
+     ], dir=DIR_OUT)
+ 
+ libxl_connectorinfo = Struct("connectorinfo", [
+diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+index a5588c643f..6da3ed3c6f 100644
+--- a/tools/ocaml/libs/xc/xenctrl.ml
++++ b/tools/ocaml/libs/xc/xenctrl.ml
+@@ -121,6 +121,7 @@ type physinfo_cap_flag =
+ 	| CAP_Shadow
+ 	| CAP_IOMMU_HAP_PT_SHARE
+ 	| CAP_Vmtrace
++	| CAP_Vpmu
+ 
+ type physinfo =
+ {
+diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+index 6e94940a8a..b8faff6721 100644
+--- a/tools/ocaml/libs/xc/xenctrl.mli
++++ b/tools/ocaml/libs/xc/xenctrl.mli
+@@ -106,6 +106,7 @@ type physinfo_cap_flag =
+   | CAP_Shadow
+   | CAP_IOMMU_HAP_PT_SHARE
+   | CAP_Vmtrace
++  | CAP_Vpmu
+ 
+ type physinfo = {
+   threads_per_core : int;
+diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
+index 8383e4a6df..2c86b317b7 100644
+--- a/tools/xl/xl_info.c
++++ b/tools/xl/xl_info.c
+@@ -210,7 +210,7 @@ static void output_physinfo(void)
+          info.hw_cap[4], info.hw_cap[5], info.hw_cap[6], info.hw_cap[7]
+         );
+ 
+-    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s\n",
++    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s%s\n",
+          info.cap_pv ? " pv" : "",
+          info.cap_hvm ? " hvm" : "",
+          info.cap_hvm && info.cap_hvm_directio ? " hvm_directio" : "",
+@@ -218,7 +218,8 @@ static void output_physinfo(void)
+          info.cap_hap ? " hap" : "",
+          info.cap_shadow ? " shadow" : "",
+          info.cap_iommu_hap_pt_share ? " iommu_hap_pt_share" : "",
+-         info.cap_vmtrace ? " vmtrace" : ""
++         info.cap_vmtrace ? " vmtrace" : "",
++         info.cap_vpmu ? " vpmu" : ""
+         );
+ 
+     vinfo = libxl_get_version_info(ctx);
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 6ee5d033b0..4d0e909eec 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -84,6 +84,8 @@ vcpu_info_t dummy_vcpu_info;
+ 
+ bool __read_mostly vmtrace_available;
+ 
++bool __read_mostly vpmu_is_available;
++
+ static void __domain_finalise_shutdown(struct domain *d)
+ {
+     struct vcpu *v;
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index 3558641cd9..6e7189bb3c 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -280,6 +280,9 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+         if ( vmtrace_available )
+             pi->capabilities |= XEN_SYSCTL_PHYSCAP_vmtrace;
+ 
++        if ( vpmu_is_available )
++            pi->capabilities |= XEN_SYSCTL_PHYSCAP_vpmu;
++
+         if ( copy_to_guest(u_sysctl, op, 1) )
+             ret = -EFAULT;
+     }
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 039ccf885c..b794c9d351 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -100,10 +100,12 @@ struct xen_sysctl_tbuf_op {
+ #define _XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share 5
+ #define XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share  \
+     (1u << _XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share)
+-#define XEN_SYSCTL_PHYSCAP_vmtrace       (1 << 6)
++#define XEN_SYSCTL_PHYSCAP_vmtrace       (1u<<6)
++/* The platform supports vPMU. */
++#define XEN_SYSCTL_PHYSCAP_vpmu          (1u<<7)
+ 
+ /* Max XEN_SYSCTL_PHYSCAP_* constant.  Used for ABI checking. */
+-#define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_vmtrace
++#define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_vpmu
+ 
+ struct xen_sysctl_physinfo {
+     uint32_t threads_per_core;
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 1708c36964..160c8dbdab 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -133,4 +133,6 @@ static inline void vnuma_destroy(struct vnuma_info *vnuma) { ASSERT(!vnuma); }
+ 
+ extern bool vmtrace_available;
+ 
++extern bool vpmu_is_available;
++
+ #endif /* __XEN_DOMAIN_H__ */
+-- 
+2.29.0
 
 
