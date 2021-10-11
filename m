@@ -2,37 +2,54 @@ Return-Path: <SRS0=RYVw=O7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D054C433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Oct 2021 13:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2626FC4332F
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Oct 2021 14:02:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E436560F38
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Oct 2021 13:57:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E436560F38
-Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id C885E61278
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Oct 2021 14:02:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C885E61278
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.206037.361494 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.206053.361515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mZvo7-0004Xz-Lg; Mon, 11 Oct 2021 13:57:35 +0000
+	id 1mZvsu-0006h5-LI; Mon, 11 Oct 2021 14:02:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 206037.361494; Mon, 11 Oct 2021 13:57:35 +0000
+Received: by outflank-mailman (output) from mailman id 206053.361515; Mon, 11 Oct 2021 14:02:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mZvo7-0004Xs-GG; Mon, 11 Oct 2021 13:57:35 +0000
-Received: by outflank-mailman (input) for mailman id 206037;
- Mon, 11 Oct 2021 13:57:33 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=rMo6=O7=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1mZvo5-0004Xg-P7
- for xen-devel@lists.xenproject.org; Mon, 11 Oct 2021 13:57:33 +0000
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2dfaa331-2a9b-11ec-80dd-12813bfff9fa;
- Mon, 11 Oct 2021 13:57:32 +0000 (UTC)
+	id 1mZvsu-0006gy-IH; Mon, 11 Oct 2021 14:02:32 +0000
+Received: by outflank-mailman (input) for mailman id 206053;
+ Mon, 11 Oct 2021 14:02:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=9TNE=O7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1mZvst-0006gs-VF
+ for xen-devel@lists.xenproject.org; Mon, 11 Oct 2021 14:02:32 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.109.102])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b24f3af0-7f15-4f41-8a70-efeb4bf8a786;
+ Mon, 11 Oct 2021 14:02:30 +0000 (UTC)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01lp2055.outbound.protection.outlook.com [104.47.1.55]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-23-1WmZarAUOJe4AhYIf4Sgog-1; Mon, 11 Oct 2021 16:02:27 +0200
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR04MB3117.eurprd04.prod.outlook.com (2603:10a6:802:6::32) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4587.25; Mon, 11 Oct
+ 2021 14:02:25 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::4d37:ec64:4e90:b16b]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::4d37:ec64:4e90:b16b%7]) with mapi id 15.20.4587.026; Mon, 11 Oct 2021
+ 14:02:25 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AM5PR0701CA0057.eurprd07.prod.outlook.com (2603:10a6:203:2::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.4 via Frontend
+ Transport; Mon, 11 Oct 2021 14:02:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,138 +61,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2dfaa331-2a9b-11ec-80dd-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1633960652;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=m4JmGSHnjUE9wVUM9KfqBA9lRy8EvSMhBMK2Cn3fR7c=;
-  b=ISLnSEu4ID+x8u/wx//LYymEzAP00+9l8gzZoslQQQTB69Uz7REkMM2P
-   ezD4aPXUPJdzvSmSZtCVrpv0zsDm4JEKlApZ7b69b85sRU3FSns0q9fxU
-   lG8TVDchGMTMVjGF7lgBjsFxGqqY234mTlYR2ttr8hszWSRsbFNYla1ld
-   w=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 0FYsQRq4mrxEbaELJzw6eZQpr0MaYYITmMWY+gI02W7NXPBjtjKSBrdGj2gtuaGifN4xIrM5z3
- wv38rOBZDWupKmZpdYjctW0mLDdVkco67sd10DW9xW9/0fI0/Zg0ad/eRVeqichFgmxKg9VViS
- 0GKnUs/2qcXVpGgPwBumDr2Y5tQ+EqEpFtwskQ2/7A4DKkfZt+pTmMcbtdrXdQ+aYkntyAt6MY
- f343qnCHqxX+2EuZCQtEnLrObslKz/VKfs6gXYFqwmIh3e320PxhwhsE2TuTi68sBIqxhk1tL7
- s/VHyPKshq7OI1N0t3snWudr
-X-SBRS: 5.1
-X-MesageID: 54880359
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23: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
-IronPort-HdrOrdr: A9a23:DzMfjKhlNt9cuhrq/fhnisfsXnBQXtgji2hC6mlwRA09TySZ//
- rOoB0+726StN9xYgBFpTnuAsW9qB/nmqKdpLNhW4tKPzOW3VdATrsSjrcKqgeIc0aVm9K1l5
- 0QEZSWYOeAdGSS5vyb3ODXKbgd/OU=
-X-IronPort-AV: E=Sophos;i="5.85,364,1624334400"; 
-   d="scan'208";a="54880359"
-Date: Mon, 11 Oct 2021 14:57:14 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>, Alexandru Isaila
-	<aisaila@bitdefender.com>, Petre Pircalabu <ppircalabu@bitdefender.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Konrad Rzeszutek Wilk
-	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, "Bob
- Eshleman" <bobbyeshleman@gmail.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Roger Pau
- =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Jun Nakajima
-	<jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Lukasz Hawrylko
-	<lukasz.hawrylko@linux.intel.com>, <xen-devel@lists.xenproject.org>
-Subject: Re: [XEN PATCH v7 14/51] xen: move include/asm-* to
- arch/*/include/asm
-Message-ID: <YWRCumOjPlYD1sE6@perard>
+X-Inumbo-ID: b24f3af0-7f15-4f41-8a70-efeb4bf8a786
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1633960949;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=xbjm/insLpSAtnftwykU3DoT0k9nscyGQ6ldLJaxOA0=;
+	b=PwEP1u+vxs7oPY5VXuOtX46k9H43V32mzEo4u0Jreo0iq1k8cCbLfu4TSw+5m0bDvLnBPC
+	tAgbOVRu0Tz2CiTPkI/MvzcRmtND4F3gM4+eulpb8mU4GH85TxQsKC5+rVsLOu0Kd7uuOv
+	kHvdEUZUWPEds3lLj0OqQyjpCHjKhJ4=
+X-MC-Unique: 1WmZarAUOJe4AhYIf4Sgog-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RWYOlAYZPRYjlrqvhtsZ2GLlrP6FhbsUfVb4S9LwElgJB/vq9LbRkJNzCHDRH7zklyjkQ0CLRXcNfo4sI1BmKipBXcErrmnal4bigqgepZ7BPEZEY3HXCnA1PbCmln53lBrbhlBtvf0gMIcmUOp16+NHcp7G2BdlS7U2jo3QVZvfQXK09KWacoT0Z3M4jSKtqL2UejFGpVpFRHm9Xc6939oyySwpEZmkRQbrJ1Qzh+We5b8MpozE0fsdB7bv3IJXkPFwgXyWEzm5s4Y210k8hFBEjeCcYJMPxXXU6MyRW+YUGED70YmTft6L8jPaU1zIgYtzmQ/H7NGaOE9RfzH6hA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xbjm/insLpSAtnftwykU3DoT0k9nscyGQ6ldLJaxOA0=;
+ b=dJlpeqlmd13Qpc7v7ofpZDqzGvFV2bs0DDitRHDKhJSiWQHLCkrUn9O47ZWDsVQico1Mr+E77d0k1fDJpNxGF9OcyB2lOapBrd+SBOdBl0GKGD/Z0AXC38UHl1H6uFlNb0G2So6Ls0NFiauRr5qQNaBlC4xxaVGxBn0goOj9fmRUkw11DPiN/gzkFrI7DpI8iLRqnJcpPn2NNBXOH6r9P+g2og1YC/CyxGB2mV6+D9Sn2FziTF2uaosbdI/cCe3JZYfHXEgQOphqwShnTu5U25N6Gl7P9+HzjnVsS28korK/Dci3NcaRA85XpZC/ffSMgBeYw5dHed3Fz4boRoxXSQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=none action=none
+ header.from=suse.com;
+Subject: Re: [XEN PATCH v7 26/51] build: build everything from the root dir,
+ use obj=$subdir
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: Bob Eshleman <bobbyeshleman@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
+ <roger.pau@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
 References: <20210824105038.1257926-1-anthony.perard@citrix.com>
- <20210824105038.1257926-15-anthony.perard@citrix.com>
- <320e5dde-2017-2420-8323-cbe4c2f0914f@suse.com>
+ <20210824105038.1257926-27-anthony.perard@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <eca3f533-9841-e4a8-dfde-840451ed8aef@suse.com>
+Date: Mon, 11 Oct 2021 16:02:22 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+In-Reply-To: <20210824105038.1257926-27-anthony.perard@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM5PR0701CA0057.eurprd07.prod.outlook.com
+ (2603:10a6:203:2::19) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <320e5dde-2017-2420-8323-cbe4c2f0914f@suse.com>
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 4665c29d-1808-4574-3b0f-08d98cbfc0ef
+X-MS-TrafficTypeDiagnostic: VI1PR04MB3117:
+X-Microsoft-Antispam-PRVS:
+	<VI1PR04MB31173D1FA58C430C487C1BCAB3B59@VI1PR04MB3117.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6108;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	/VacpLWM/mBIxv1igtBswNYpa6fTEdeuY3BTIwIJMn8BKfmwY79OYO5S6ldCm4Bb1IoAXRa+i+RzGAABxc3vl1Z2rD+BFY4dwjBtFZyOS8pyMojRgPwFwXHGGxABrCAlnv1EWzXVawsoRIXOabg7diRt6TVPO74jAPfu3VnNE1Z6R1CB1XjPRctzHQrFxfskpVWGnDCH4yanJAVUHAJxZwbIs7kXiN29KTLRD3NFblgO2n/+Za9f+jZ45bQoce1Blt2Oat78x4uUeomkaqeVpNnkzbJAUqNxeY9VSzbqNfLi1geS0bxEnVjMnaXVrRTIpJYyo0+TEOOsyntxoFUvOt/St66K704Jb3fZlTjVoIWiDRAknGM/qvyCx1LNK5sqZW0/eEFjUvkENl60NBU4oyuQmSpH5hbmkwmj3XQmXPKlRisbZWs2h6tKbGM0fKmClXXcUGq4xU9wlO6JTvMOtIV9MvmOG3jaVFp1TVNyMVvHNDzThk+/f+KaKbvTq2nvHdd/zSxsLWOG8RlHngOe7ZGkOuSla+xSfAnWodot6fUjrm/pieIle2Se4nGcyIfoU3YuW3K8DiNG1dczAwM/cuuVbR2mLFMqXniepQi5ai06VZU4nDjbAk6GAPqfE/lKeo9ZGp9dHfkcWyJdulFSHBeFZeSYVA3RgpJt7dJLAuOMHRBmLRli2RlTd5MJV36QKvMxUpU5ZjrXFe8KEU/9gCHp/mXqzx57yKyA6vPzVtq5LwPn60+rRkBf/8R7RC+NWVMo9agMiOkxml5jbYrZoA==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(7416002)(86362001)(31696002)(53546011)(186003)(4326008)(36756003)(316002)(8936002)(16576012)(5660300002)(26005)(956004)(2616005)(6916009)(508600001)(54906003)(31686004)(83380400001)(38100700002)(66556008)(66476007)(66946007)(6486002)(2906002)(8676002)(155303001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?NXhDRG1KdG01WnM3dEtmeGs4ZnJxRlNrYkRmZHprMUR3b2k1ZFVaNTNZMXpj?=
+ =?utf-8?B?ZXFqc2xHR0N1WlZnUk5mSG8wWFkvU0F4NWdUR2pFWFg4K1NIUUoyNjBObzB1?=
+ =?utf-8?B?czYxaVBoYTI5Nm1kV0UwVWN4ZjdNWDQ1dE80R0VPd3ZGVmdNdFpUQVh6bjkw?=
+ =?utf-8?B?SjgzeW1BL3N6SlBzVHI5TW5qWGRiamJuMmtZejhxdFpvQTBBQ2RIRjNXZzFZ?=
+ =?utf-8?B?UXRWMDB1aktaRTMrMVFXZUs1VDBSaGh0emxvM2FxejY4YzZBcUhuZzFQdE1j?=
+ =?utf-8?B?U2szN29Pc1JoSUJFUk5YZ1hCMGo1b1lOZHdCU3BlVXZpb28xeHpObWhodXNL?=
+ =?utf-8?B?d1NVSG1DSWxzT2RRWVBHNnI2am5GUFRZSWtQcG02dzJsRm1FbE4zaXhUU3Z3?=
+ =?utf-8?B?dEV6cFFBMHp5WmpCRlNNSkdNMUZFaW9RSStUSm5rZnR6ZEprNEdEck4ycUdV?=
+ =?utf-8?B?S0xvL2FUR1A1QjZLNWw1NFJXS3NuUnVLRVR4TlRLN2kyZUprQ2tYWmJKS05N?=
+ =?utf-8?B?RWJ2NDU1aEpHZG5GVU4yKzR6S0Fiekl6QnNrTlIvRE9kRjhuZnlLcE9WTmd6?=
+ =?utf-8?B?d29PN0ZXNE1Sa01zUFlpUUNic2dXaXJRK0ZUTTZNL3BkaFpJRllHVE1vdXA2?=
+ =?utf-8?B?MGp0ZnFkMzVKc1FNME1kaFNDWHBFeG1JbUFjN2xyTWlJdHp2Wis1SHNrQ2Uy?=
+ =?utf-8?B?b1RTcUpxL1pISDgxUjQ5anVxQi8ydWVlSExqUEdvL2U3UHVmdlR1K1pWanRi?=
+ =?utf-8?B?K1BrV1g5V0NFQ3F2YmJrdUxKZlc4MFdkWGVLNUxwK1dUUGdEYVlIVW53cEF4?=
+ =?utf-8?B?K0FJc1VpTm9pMnorMldZeFlYUlkrSEpsOFRRbmUvcVJUbmszQ1JvMlk3b0Vv?=
+ =?utf-8?B?M2thMzBFa1FzaXZkWlpoYTUzL3VYSWYzT1E2d3c2dllubStHcTEvd2hCVTAw?=
+ =?utf-8?B?NHZtelFQZHB1WitORnNrZVQwWW0vdHlFVlZMWkV0K213em5vSUtuc05hUHYv?=
+ =?utf-8?B?a0F4ODZkQTJkaWFQcE9EMTdKSlFOZ1l4Wk93cmVOeStEQmJBVXpkQWE5SFVY?=
+ =?utf-8?B?N05NM0lLNlRyUTdNZXVCZFV4MFBLaG9nQmJIL25PclVMSkJ1WFhBRE91dktn?=
+ =?utf-8?B?bGxKTmxXbkZrSFJRUTlYaWQyUjV2SnR6dWlUMWNERmdRN1licHFYWTVOd1FP?=
+ =?utf-8?B?TjhyVHNwclc5OG5xUnozMU9Jd3liNHhqYUJkell0TStZNjBoNUVja2ptWjQz?=
+ =?utf-8?B?NStabEd0VkNyRkd4UlFLemkzM0VnendXZTNqclVidGVVWWtlaXV1dk5MeFNu?=
+ =?utf-8?B?bkRTcTRBQVBLbTR1WkFVNVFKRHhFaGo5c1QzNE9tWHJuL0JYUmlUY09rb2Jt?=
+ =?utf-8?B?RXhiZHZNdEZRQkVtNjBwRnpGMHdkUUVjUlBNYUdMT2xOS085ZGpnZHVKY05k?=
+ =?utf-8?B?dUo0elhERVNicEQ2ZTRrV051MnhXQTVldG5vN2lDVzRaUk9aL2YrTXFCekdJ?=
+ =?utf-8?B?YW5oNGRHMGJGT09xWHBMMnZ4RWlMZmlvd0JUelF4UzhTUUtDTGRyVmZaaExC?=
+ =?utf-8?B?RGY1V3I0V3g0WUVrUkRtaE82Ykx5RnZyRnl1U25lRGN4WEhsZ2xmNlA2NjhQ?=
+ =?utf-8?B?ZFhSbWh6ZnM3a08yTnM4aU1nN1lrUStJakl5bjBBb0MrY043bEFZSlVyZE5k?=
+ =?utf-8?B?UVg4bmE4ZGlQbDlLcFZKSXp4TkF0OXc5QTNYME5vcHptMDBrblprQmkrQWI2?=
+ =?utf-8?Q?5+v6ubNNUfn/CKYaPY77vfYgziK8TxpChz38wp7?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4665c29d-1808-4574-3b0f-08d98cbfc0ef
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2021 14:02:25.4890
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NV/xcwibR8nlBSYAT3mVkWzryd/LuepJLuOjkaMXUGE3XkAxgnvmsHrskMQrOiqohlai5CgjzkpaDD/9ib5JUA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB3117
 
-On Thu, Oct 07, 2021 at 04:17:28PM +0200, Jan Beulich wrote:
-> On 24.08.2021 12:50, Anthony PERARD wrote:
-> > --- a/tools/include/Makefile
-> > +++ b/tools/include/Makefile
-> > @@ -30,7 +30,7 @@ xen-dir:
-> >  	ln -s $(XEN_ROOT)/xen/include/acpi/platform acpi/
-> >  	ln -s $(XEN_ROOT)/xen/include/acpi/ac*.h acpi/
-> >  ifeq ($(CONFIG_X86),y)
-> > -	ln -s $(XEN_ROOT)/xen/include/asm-x86 xen/asm
-> > +	ln -s $(XEN_ROOT)/xen/arch/x86/include/asm xen/asm
+On 24.08.2021 12:50, Anthony PERARD wrote:
+> A subdirectory is now built by setting "$(obj)" instead of changing
+> directory. "$(obj)" should always be set when using "Rules.mk" and
+> thus a shortcut "$(build)" is introduced and should be used.
 > 
-> I think this would now better be
-> 
-> 	ln -s $(XEN_ROOT)/xen/arch/x86/include/asm xen/
-> 
-> matching what is visible in context.
+> A new variable "$(need-builtin)" is introduce. It is to be used
+> whenever a "built_in.o" is wanted from a subdirectory. "built_in.o"
+> isn't the main target anymore, and thus only needs to depends on the
+> objects that should be part of "built_in.o".
 
-I'll change it.
+How "good" are our chances that we hit a need-builtin variable from
+the environment? Its uses are simply using "ifdef".
 
-> > --- a/xen/arch/riscv/arch.mk
-> > +++ b/xen/arch/riscv/arch.mk
-> > @@ -12,3 +12,4 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
-> >  
-> >  CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
-> >  CFLAGS += -I$(BASEDIR)/include
-> > +CFLAGS += -I$(BASEDIR)/arch/$(TARGET_ARCH)/include
-> 
-> I find it odd that this needed repeating in every arch.mk. Can't
-> this be done once for all arches?
+> --- a/xen/Rules.mk
+> +++ b/xen/Rules.mk
+> @@ -3,19 +3,29 @@
+>  # Makefile and are consumed by Rules.mk
+>  #
+>  
+> -obj := .
+>  src := $(obj)
+>  
+> +PHONY := __build
+> +__build:
+> +
+>  -include $(BASEDIR)/include/config/auto.conf
+>  
+>  include $(XEN_ROOT)/Config.mk
+>  include $(BASEDIR)/scripts/Kbuild.include
+>  
+> +ifndef obj
+> +$(warning kbuild: Rules.mk is included improperly)
+> +endif
 
-I actually do that much later in the series with patch "build: Add
-headers path to CFLAGS once for all archs".
+Is there a particular reason for this to come only here, rather than
+before the include-s (e.g. right at where the assignment to the
+variable lived)?
 
-> > --- a/xen/common/page_alloc.c
-> > +++ b/xen/common/page_alloc.c
-> > @@ -241,7 +241,7 @@ PAGE_LIST_HEAD(page_broken_list);
-> >  
-> >  /*
-> >   * first_valid_mfn is exported because it is use in ARM specific NUMA
-> > - * helpers. See comment in asm-arm/numa.h.
-> > + * helpers. See comment in asm/numa.h.
-> >   */
-> >  mfn_t first_valid_mfn = INVALID_MFN_INITIALIZER;
-> 
-> I'm afraid that in this case it is relevant that it's Arm's header,
-> like ...
+> @@ -51,27 +61,54 @@ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
+>  quiet_cmd_binfile = BINFILE $@
+>  cmd_binfile = $(SHELL) $(BASEDIR)/tools/binfile $(BINFILE_FLAGS) $@ $(2)
+>  
+> -define gendep
+> -    ifneq ($(1),$(subst /,:,$(1)))
+> -        DEPS += $(dir $(1)).$(notdir $(1)).d
+> -    endif
+> -endef
+> -$(foreach o,$(filter-out %/,$(obj-y) $(obj-bin-y) $(extra-y)),$(eval $(call gendep,$(o))))
+> +# Figure out what we need to build from the various variables
+> +# ===========================================================================
+> +
+> +# Libraries are always collected in one lib file.
+> +# Filter out objects already built-in
+> +lib-y := $(filter-out $(obj-y), $(sort $(lib-y)))
+> +
+> +# Subdirectories we need to descend into
+> +subdir-y := $(subdir-y) $(patsubst %/,%,$(filter %/, $(obj-y)))
 
-Will fix.
+Deliberately or accidentally not += ?
 
-Thanks,
+> @@ -156,21 +192,13 @@ endif
+>  PHONY += FORCE
+>  FORCE:
+>  
+> -%/built_in.o %/lib.a: FORCE
+> -	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in.o
+> -
+> -%/built_in_bin.o: FORCE
+> -	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in_bin.o
+> -
+> -SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
+> -
+>  quiet_cmd_cc_o_c = CC      $@
+>  ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
+>      cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $(dot-target).tmp -MQ $@
+>      ifeq ($(CONFIG_CC_IS_CLANG),y)
+> -        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(dot-target).tmp $@
+> +        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$< $(dot-target).tmp $@
 
--- 
-Anthony PERARD
+Are you sure about the $< => $(<F) transformation here? Previoiusly it
+was present only ...
+
+>      else
+> -        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(dot-target).tmp $@
+> +        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$< $(dot-target).tmp $@
+
+... here.
+
+> @@ -251,6 +292,9 @@ existing-targets := $(wildcard $(sort $(targets)))
+>  
+>  -include $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
+>  
+> +DEPS:= $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).d)
+
+Nit: Preferably blanks on both sides of := or none at all, please.
+
+> --- a/xen/arch/x86/Makefile
+> +++ b/xen/arch/x86/Makefile
+> @@ -81,6 +81,9 @@ endif
+>  extra-y += asm-macros.i
+>  extra-y += xen.lds
+>  
+> +# Allows usercopy.c to includes itself
+
+Nit: include
+
+> +$(obj)/usercopy.o: CFLAGS-y += -I.
+
+This is ugly, but presumably unavoidable. Preferably I would see us
+the more specific -iquote though, assuming clang also supports it.
+
+> --- a/xen/arch/x86/boot/Makefile
+> +++ b/xen/arch/x86/boot/Makefile
+> @@ -1,8 +1,8 @@
+>  obj-bin-y += head.o
+>  
+> -DEFS_H_DEPS = $(src)/defs.h $(BASEDIR)/include/xen/stdbool.h
+> +DEFS_H_DEPS = $(BASEDIR)/$(src)/defs.h $(BASEDIR)/include/xen/stdbool.h
+>  
+> -CMDLINE_DEPS = $(DEFS_H_DEPS) $(src)/video.h
+> +CMDLINE_DEPS = $(DEFS_H_DEPS) $(BASEDIR)/$(src)/video.h
+
+Hmm, new uses of $(BASEDIR) (a few more further down). Why not
+$(srctree)?
+
+Jan
+
 
