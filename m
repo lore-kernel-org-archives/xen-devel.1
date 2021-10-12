@@ -2,42 +2,42 @@ Return-Path: <SRS0=KVmu=PA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1F43C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 14:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD8D5C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 15:03:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA2656052B
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 14:54:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AA2656052B
+	by mail.kernel.org (Postfix) with ESMTPS id 8126860D42
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 15:03:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8126860D42
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.207335.363127 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.207345.363137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maJAN-0007N3-Sj; Tue, 12 Oct 2021 14:54:07 +0000
+	id 1maJJb-0000RD-QA; Tue, 12 Oct 2021 15:03:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 207335.363127; Tue, 12 Oct 2021 14:54:07 +0000
+Received: by outflank-mailman (output) from mailman id 207345.363137; Tue, 12 Oct 2021 15:03:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maJAN-0007Mw-PP; Tue, 12 Oct 2021 14:54:07 +0000
-Received: by outflank-mailman (input) for mailman id 207335;
- Tue, 12 Oct 2021 14:54:06 +0000
+	id 1maJJb-0000R6-NK; Tue, 12 Oct 2021 15:03:39 +0000
+Received: by outflank-mailman (input) for mailman id 207345;
+ Tue, 12 Oct 2021 15:03:38 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1maJAM-0007Mo-HE
- for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 14:54:06 +0000
+ (envelope-from <iwj@xenproject.org>) id 1maJJa-0000R0-1Y
+ for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 15:03:38 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1maJAM-0003Bt-GM
- for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 14:54:06 +0000
+ (envelope-from <iwj@xenproject.org>) id 1maJJZ-0003O0-Vx
+ for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 15:03:37 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1maJAM-0001Lw-FY
- for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 14:54:06 +0000
+ (envelope-from <iwj@xenproject.org>) id 1maJJZ-0002VP-Uq
+ for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 15:03:37 +0000
 Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
  (envelope-from <iwj@xenproject.org>)
- id 1maJAE-0004bW-83; Tue, 12 Oct 2021 15:53:58 +0100
+ id 1maJJW-0004eJ-Ir; Tue, 12 Oct 2021 16:03:34 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,77 +52,47 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
 	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=dH8iJq3o9Yhes/6IkPftbdJ8pqK8LeeD6+3zVFruVYI=; b=TArYzDXflXlGGgUOUbXZC262nF
-	busPQrUrukmAi3Qib1rLChmzUa1hVh1Jr1MB34AEUYlRJ7bEc6vPAInHqic2pHjJe90LMJ7mdO4wB
-	kYQkeVTmdWnL2JHDBaw3imyguiVLLq8CBB16cbQ+Ye2Y+GXdsRY9lUhwpfn64UrD79Q8=;
+	bh=FOYoEW8KI7o4uzQlqUDJZjWTqq3iruwDf0kf/sUVJRw=; b=UuEQirFJ8k3Q5ZR5n2ne+qz5/C
+	bzjd0xLE92nDIHRMwdZtl4Juk8tnKkJVDJzwgAxnXuFkvgERn+bog2FPVLXN8hfunUxP2v0ZagTvE
+	R4JiwX/ABWJGyHxYGnW2brjI3z6TQ0yF6yRixfH1kxq6o5M9GxD+4LWpSNZ+tgOASSOY=;
 From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Message-ID: <24933.41349.893363.203683@mariner.uk.xensource.com>
-Date: Tue, 12 Oct 2021 15:53:57 +0100
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: Jan Beulich <jbeulich@suse.com>,
-    Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>,
-    Rahul Singh <Rahul.Singh@arm.com>,
-    "xen-devel\@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-    Andre Przywara <Andre.Przywara@arm.com>,
-    Ian Jackson <iwj@xenproject.org>,
+Message-ID: <24933.41926.168289.698356@mariner.uk.xensource.com>
+Date: Tue, 12 Oct 2021 16:03:34 +0100
+To: Rahul Singh <rahul.singh@arm.com>
+Cc: xen-devel@lists.xenproject.org,
+    bertrand.marquis@arm.com,
+    Andre.Przywara@arm.com,
     Wei Liu <wl@xen.org>,
+    Anthony PERARD <anthony.perard@citrix.com>,
     Juergen Gross <jgross@suse.com>,
     Stefano Stabellini <sstabellini@kernel.org>,
-    Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v5 01/11] xen/arm: xc_domain_ioport_permission(..) not
- supported on ARM.
+    Julien Grall <julien@xen.org>,
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v5 10/11] arm/libxl: Emulated PCI device tree node in libxl
 Newsgroups: chiark.mail.xen.devel
-In-Reply-To: <69A83587-B7E0-4653-AF8C-AEE802922CE5@arm.com>
+In-Reply-To: <b81b5dea800c8fe47071f3dbd20588b1e472fb99.1633540842.git.rahul.singh@arm.com>
 References: <cover.1633540842.git.rahul.singh@arm.com>
-	<d292392268df2c74c4103a82ef917072643407a8.1633540842.git.rahul.singh@arm.com>
-	<YWQkblfNMYEs6jI9@MacBook-Air-de-Roger.local>
-	<77CF7FA5-C566-469E-B4A8-0400789890BB@arm.com>
-	<YWQ6Nk3Jk+BqgkwZ@MacBook-Air-de-Roger.local>
-	<53AE6E2A-01D7-41EC-9B2C-C0D596EB8D4D@arm.com>
-	<YWRCxXGQIyTOAepC@MacBook-Air-de-Roger.local>
-	<FEF0B03A-5AC8-4F8D-B821-191AC2EF8295@arm.com>
-	<ac6d4785-ac9a-4491-26bb-c66ffe82c55b@suse.com>
-	<ED8FC92F-B5EF-4473-B4A9-641C7D44859F@arm.com>
-	<0744b957-1832-dff2-9ae2-b8e8534f501b@suse.com>
-	<c3952fd5-b893-4cb6-a9bc-325a89e859db@epam.com>
-	<c125b447-53e8-7d13-3b08-af62fd3a9140@suse.com>
-	<c6b6c22f-fb8a-f2d9-7735-f1ebc9809908@epam.com>
-	<09656882-b297-7144-c291-1ee997edb119@suse.com>
-	<69A83587-B7E0-4653-AF8C-AEE802922CE5@arm.com>
+	<b81b5dea800c8fe47071f3dbd20588b1e472fb99.1633540842.git.rahul.singh@arm.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Bertrand Marquis writes ("Re: [PATCH v5 01/11] xen/arm: xc_domain_ioport_permission(..) not supported on ARM."):
-> So there is no comment remaining on this patch ?
+Rahul Singh writes ("[PATCH v5 10/11] arm/libxl: Emulated PCI device tree node in libxl"):
+> libxl will create an emulated PCI device tree node in the device tree to
+> enable the guest OS to discover the virtual PCI during guest boot.
+> Emulated PCI device tree node will only be created when there is any
+> device assigned to guest.
+> 
+> A new area has been reserved in the arm guest physical map at
+> which the VPCI bus is declared in the device tree (reg and ranges
+> parameters of the node).
 
-I have been following this thread.  I think I have a notion of why
-this is needed but I'm not 100% clear on it.  The commit message says
-this:
+I think this series is targeted for 4.16.  Stefano drew this patch to
+my attention.  I have read the thread on this patch and it is not
+clear to me that it has converged.  Code freeze is imminent.
 
-> ARM architecture does not implement I/O ports. Ignore this call on ARM
-> to avoid the overhead of making a hypercall just for Xen to return
-> -ENOSYS.
+Is there some way I can help here ?
 
-which implies it's a performance improvement.  But the change also
-suppresses an error return, so this commit message is false.  I think
-that the thread has concluded something different, but it should be
-explained in the commit message.  The purpose of a commit message is
-precisely to capture the kind of considerations and discussion that
-occurred in this thread.
-
-If the overall outcome implied by this patch is correct (as I *think*
-the thread has concluded) then I don't think the #ifdefery is
-appropriate.  This should be done with a new arch-specific function in
-libxl_x86.c and libxl_arm.c.  I'm not sure precisely what that
-function should be called, but maybe something like
-  libxl_ioports_supported
-?
-
-I see that the fact that we avoid #ifdefs wasn't documented in
-CODING_STYLE, so I have sent a patch to add that.  Sorry about that.
-
-Thanks,
 Ian.
 
