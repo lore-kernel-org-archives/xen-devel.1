@@ -2,40 +2,37 @@ Return-Path: <SRS0=KVmu=PA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8889C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 15:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 323C6C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 15:04:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 58DC160527
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 15:04:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 58DC160527
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id EC98460527
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 15:04:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EC98460527
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.207350.363149 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.207351.363160 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maJKK-0000yy-3c; Tue, 12 Oct 2021 15:04:24 +0000
+	id 1maJKR-0001IR-Cm; Tue, 12 Oct 2021 15:04:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 207350.363149; Tue, 12 Oct 2021 15:04:24 +0000
+Received: by outflank-mailman (output) from mailman id 207351.363160; Tue, 12 Oct 2021 15:04:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maJKK-0000yr-0B; Tue, 12 Oct 2021 15:04:24 +0000
-Received: by outflank-mailman (input) for mailman id 207350;
- Tue, 12 Oct 2021 15:04:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1maJKI-0000yh-V9
- for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 15:04:22 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1maJKD-0003Ox-Aa; Tue, 12 Oct 2021 15:04:17 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233] helo=[192.168.23.5])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1maJKD-0002bB-3y; Tue, 12 Oct 2021 15:04:17 +0000
+	id 1maJKR-0001IJ-96; Tue, 12 Oct 2021 15:04:31 +0000
+Received: by outflank-mailman (input) for mailman id 207351;
+ Tue, 12 Oct 2021 15:04:30 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Tock=PA=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1maJKQ-0001Hx-IT
+ for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 15:04:30 +0000
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b23ae07f-2b6d-11ec-8135-12813bfff9fa;
+ Tue, 12 Oct 2021 15:04:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,96 +44,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=1GR2CwjD3R7VzwxcFot31PWBrMQJpsn3Stq843ni6pQ=; b=gDa8Q2AL6pyTKTKZMB79cYzKGR
-	M7CnFPnOtF0F1hJnTWkV8c64AXp8DtU3iv09O/3DXGK0Ce6z2ongguu2Msh/8OAfvrI9FXKAxSXiC
-	009qYjRxLpos6eEbmn5Ly3ruVQ2UvmOlxROM5a3cBqNSkUJbkh39MiM4+Qs9K30uT/HQ=;
-Message-ID: <2b0670e9-b442-047c-9479-daa97d6329f6@xen.org>
-Date: Tue, 12 Oct 2021 16:04:14 +0100
+X-Inumbo-ID: b23ae07f-2b6d-11ec-8135-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1634051069;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=AhaWvrsNw4MxXGdVWPcK2ihNuq8/77IISBWZXWc5DLY=;
+  b=c3x8IntEPlPSe+3McbZfMf1ipPS34FYJ1TGkLX5w8U4GUOAncwmHutFP
+   f6jtskuzA7Q0nW60X2w3B8KGb7htkXEjnsesztnpEClyLFr7yrl34nf2M
+   SE2dIowKMWJd2khRoCy2pqTJKZFIaNdQd+VP5XD3csZOmXvxBjJr66Zx6
+   I=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: OuRgQDMzgJy/ub8hNyUZm9KJCEgKY1w+oyVWRSbbZlDqB093nVL0c4WxP77HRnTXHZRJQtlHiI
+ B1Nj9uVb2+HYmkuxFLaOy1nxZ5h1t+mqbFpYrClRUvNX1ylqNMqdxES3pIHl9LOzLe7ey3392L
+ A3ujECqNFn4c5J9bcLoo2um0uTTv/DmsULNzvClq8G9cfd8jr+7Y7lnYy/OXVtsStrnnsrbwVn
+ cmfA/L9G2c9Pgj1HupIwgCxPE5bXUrHqVcVTet4PIuUyGlpPLL9EuafwY+Sp+YHp6lGr7GQMgR
+ HqWp+0awIdsQMexm10DblFrL
+X-SBRS: 5.1
+X-MesageID: 55395209
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:26jMqqykVN5aGP9BwUl6t+fSwSrEfRIJ4+MujC+fZmUNrF6WrkVRx
+ jcaWWmDMq2IZzT2fN92O4my80IFvp/Vz4BgTgdv+SAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAsLeNYYH1500s6w7dj2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt/9x8
+ dJcqsShdV0SB6mVktUNTCtBTj4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVors0lMMnsOpJZonx6xCvVJf0nXYrCU+PB4towMDIY250VTKuEP
+ 5txhTxHXAT/fhZCZnAsUY8QsKSGpkanWhNkkQfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
+ krE8H7+GQoyL8GExHyO9XfEru7QnwvrVYQKDrq6+/V2xlqJyQQ7GBAQEFe2v/S9okq/QM5Eb
+ VwZ/DI0qqo//1DtScPyNyBUu1bd4ERaAYAJVbRntkfdkcI4/jp1GEArTgdGecN+pfNsfgUuj
+ 1W4j8zbHGFw5ej9pW2myp+Yqja7OC4wJGAEZDMZQQZt3+QPsL3fnTqUEY49SP/dYsndXGiqm
+ WjT/XdWa6A71JZTj82GEUb7byVAT3QjZjU+4RnLRSqb5wd9aZ/Ni2eAuAWDs6gowGp0SDC8U
+ Jk4dyq2sL5m4XKlznXlrAAx8FeBvajt3Nr02w8HInXZ327xk0NPhKgJiN2EGG9nM9wfZRjia
+ 1LJtAVa6fd7ZSXxNv4oPNLhVZp3kcAM8OgJsNiOMLKihbArJWe6ENxGPxbMjwgBbmB9+U3AB
+ XtrWZn1VitLYUiW5DG3W/0cwdcWKtMWngvuqWTA503/i9K2PSfNIZ9caQfmRr1pvcus/VSOm
+ /4CZpTi9vmqeLCnCsUh2dVIdg5iwLlSLc2elvG7gcbaelA4Rzp7V6OIqV7jEqQ895loei7z1
+ inVcidlJJDX3CKXQelTQnw8Or7pQ7hlqnc3YX4lMVqygiBxaoez9qYPMZAweOB/puBkyPd1S
+ dgDetmBXasTGmiWpWxFYMmvtpFmeTSqmRmKY3ivbg8gcsMyXAfO4NLlIFfirXFcEiqtuMIii
+ LS8zQeHE4EbTgFvAZ+OOvKixl+8p1YHn+d2UxeaK9VfYhy0ooNrNzbwnrk8JMRVcUfPwT6T1
+ gC3BxYEpLaS/99poYeR3a3d9tWnCepzGEZeDlL317fuOHmI5HenzK9BTP2MIWLXWlTr9fjwf
+ u5S1fz9bqEKxQ4Yr4pmHr935qsi/N+z9aRCxwFpEXiXPVSmDrRsfiuP0cVV7/Afw7ZYvU29W
+ 16V+8kcMrKMYZu3HFkULQsjT+KCyfBLxWWCsaVreB33tH1t4b6KcUROJB3d2iVSIYx8PJ4h3
+ ep86tUd7Bayi0ZyP9uL5syOG79g8pDUv30bi6wn
+IronPort-HdrOrdr: A9a23:ThauEqv/RJPa+3J86J8r55ah7skDdNV00zEX/kB9WHVpmszxra
+ GTddAgpHjJYVcqKRUdcL+7VJVoLUmyyXcx2/h2AV7AZniChILLFvAA0WKK+VSJcEeSygce79
+ YDT0EXMqyIMbEQt6bHCWeDfeod/A==
+X-IronPort-AV: E=Sophos;i="5.85,367,1624334400"; 
+   d="scan'208";a="55395209"
+Date: Tue, 12 Oct 2021 16:02:52 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Ian Jackson <iwj@xenproject.org>
+CC: <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>
+Subject: Re: [PATCH] libxl: CODING_STYLE: Explicitly deprecate #ifdef
+Message-ID: <YWWjnAhkMGbct5Ii@perard>
+References: <20211012145226.6065-1-iwj@xenproject.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.2.0
-Subject: Re: [PATCH v5 08/11] xen/arm: Enable the existing x86 virtual PCI
- support for ARM.
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Jan Beulich <jbeulich@suse.com>
-Cc: Rahul Singh <Rahul.Singh@arm.com>, Andre Przywara
- <Andre.Przywara@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1633540842.git.rahul.singh@arm.com>
- <9bdca2cda5d2e83f94dc2423e55714273539760a.1633540842.git.rahul.singh@arm.com>
- <6752f2d3-171b-37f5-c809-82995a8f3f36@suse.com>
- <CEF7FFB0-779A-4F46-8667-6BCD9BA5CB6C@arm.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <CEF7FFB0-779A-4F46-8667-6BCD9BA5CB6C@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20211012145226.6065-1-iwj@xenproject.org>
 
-On 11/10/2021 13:41, Bertrand Marquis wrote:
-> Hi Jan,
-
-Hi Bertrand,
-
-> As Rahul is on leave, I will answer you and make the changes needed.
+On Tue, Oct 12, 2021 at 03:52:26PM +0100, Ian Jackson wrote:
+> We don't use ifdefs in the main code.  Actually document this.
 > 
->> On 7 Oct 2021, at 14:43, Jan Beulich <jbeulich@suse.com> wrote:
->> Independent of this - is bare metal Arm enforcing this same
->> alignment restriction (unconditionally)? Iirc on x86 we felt we'd
->> better synthesize misaligned accesses.
+> Signed-off-by: Ian Jackson <iwj@xenproject.org>
+> ---
+>  tools/libs/light/CODING_STYLE | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 > 
-> Unaligned IO access could be synthesise also on arm to but I would
-> rather not make such a change now without testing it (and there is
-> also a question of it making sense).
+> diff --git a/tools/libs/light/CODING_STYLE b/tools/libs/light/CODING_STYLE
+> index 3d572f6925..c2342c9d3b 100644
+> --- a/tools/libs/light/CODING_STYLE
+> +++ b/tools/libs/light/CODING_STYLE
+> @@ -121,6 +121,16 @@ permitted exceptions to the usual libxl code formatting rules.
+>  
+>  
+>  
+> +ARCHITECTURE-SPECIFIC CODE, CONDITIONAL COMPILATION
+> +---------------------------------------------------
+> +
+> +Architecture-specific code should be isolated in libxl_<arch>.c,
+> +with a function call interface, whereever possible.
 
-Yes it makes sense. I actually have an item in my TODO list to forbid 
-unaligned access because they should not happen on any device we 
-currently emulate.
+s/whereever/wherever/ ?
 
-Although, I am not aware of any issue other than the guest would shoot 
-itself in the foot if this happens.
+> +
+> +#ifdefs should be avoided, and in any case not interspersed through
+> +the primary functional code.
+> +
+> +
+>  IDEMPOTENT DATA STRUCTURE CONSTRUCTION/DESTRUCTION
+>  --------------------------------------------------
+>  
 
-> 
-> So if it is ok with you I will keep that check and discuss it with Rahul
-> when he is back. I will add a comment in the code to make that clear.
+Sounds good,
 
-I am OK with it.
-
-[...]
-
->> Throughout this series I haven't been able to spot where the HAS_VPCI
->> Kconfig symbol would get selected. Hence I cannot tell whether all of
->> this is Arm64-specific. Otherwise I wonder whether size 8 actually
->> can occur on Arm32.
-> 
-> Dabt.size could be 3 even on ARM32 but we should not allow 64bit
-> access on mmio regions on arm32.
-
-Hmmm... Looking at the Armv7 and Armv8 spec, ldrd/strd (64-bit read) 
-would not present a valid ISV. So I think it is not be possible to have 
-dabt.size = 3 for 32-bit domain. But I agree we probably want to harden 
-the code.
-
-> 
-> So I will surround this code with ifdef CONFIG_ARM_64 and add a test
-> for len > 4 to prevent this case on 32bit.
-> 
-> To be completely right we should disable this also for 32bit guests but
-> this change would be a bit more invasive.
-
-I think the following should be sufficient:
-
-if ( is_domain_32bit_domain() && len > 4 )
-   return ...;
-
-Cheers,
+Acked-by: Anthony PERARD <anthony.perard@citrix.com>
 
 -- 
-Julien Grall
+Anthony PERARD
 
