@@ -2,42 +2,42 @@ Return-Path: <SRS0=KVmu=PA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D586DC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 08:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34430C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 08:14:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9D48A60F23
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 08:14:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9D48A60F23
+	by mail.kernel.org (Postfix) with ESMTPS id 02BFA60F23
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Oct 2021 08:14:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 02BFA60F23
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.206864.362555 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.206862.362533 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maCv8-0000z4-VX; Tue, 12 Oct 2021 08:13:58 +0000
+	id 1maCuy-0000Hn-F4; Tue, 12 Oct 2021 08:13:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 206864.362555; Tue, 12 Oct 2021 08:13:58 +0000
+Received: by outflank-mailman (output) from mailman id 206862.362533; Tue, 12 Oct 2021 08:13:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maCv8-0000yt-SG; Tue, 12 Oct 2021 08:13:58 +0000
-Received: by outflank-mailman (input) for mailman id 206864;
- Tue, 12 Oct 2021 08:13:57 +0000
+	id 1maCuy-0000Hb-BN; Tue, 12 Oct 2021 08:13:48 +0000
+Received: by outflank-mailman (input) for mailman id 206862;
+ Tue, 12 Oct 2021 08:13:47 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lNhP=PA=arm.com=michal.orzel@srs-us1.protection.inumbo.net>)
- id 1maCv6-0008RX-VI
- for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 08:13:57 +0000
+ id 1maCuw-0008RX-V8
+ for xen-devel@lists.xenproject.org; Tue, 12 Oct 2021 08:13:46 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 5335a8e3-a0bb-4acd-8631-c3f7c8b9aa6a;
- Tue, 12 Oct 2021 08:13:50 +0000 (UTC)
+ id 62797bfd-b31b-4777-b009-26179e934a09;
+ Tue, 12 Oct 2021 08:13:44 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DE77DED1;
- Tue, 12 Oct 2021 01:13:49 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 506A6ED1;
+ Tue, 12 Oct 2021 01:13:44 -0700 (PDT)
 Received: from e123311-lin.arm.com (unknown [10.57.27.99])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 893EE3F694;
- Tue, 12 Oct 2021 01:13:46 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E43823F694;
+ Tue, 12 Oct 2021 01:13:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,387 +49,245 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5335a8e3-a0bb-4acd-8631-c3f7c8b9aa6a
+X-Inumbo-ID: 62797bfd-b31b-4777-b009-26179e934a09
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
+Cc: George Dunlap <george.dunlap@citrix.com>,
+	Nick Rosbrook <rosbrookn@ainfosec.com>,
 	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Nick Rosbrook <rosbrookn@ainfosec.com>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>,
 	Christian Lindig <christian.lindig@citrix.com>,
 	David Scott <dave@recoil.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	bertrand.marquis@arm.com
-Subject: [PATCH v5 3/3] xen: Expose the PMU to the guests
-Date: Tue, 12 Oct 2021 10:13:23 +0200
-Message-Id: <20211012081323.14141-4-michal.orzel@arm.com>
+Subject: [PATCH v5 1/3] xen+tools: Introduce XEN_SYSCTL_PHYSCAP_vpmu
+Date: Tue, 12 Oct 2021 10:13:21 +0200
+Message-Id: <20211012081323.14141-2-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.29.0
 In-Reply-To: <20211012081323.14141-1-michal.orzel@arm.com>
 References: <20211012081323.14141-1-michal.orzel@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add parameter vpmu to xl domain configuration syntax
-to enable the access to PMU registers by disabling
-the PMU traps(currently only for ARM).
+Introduce flag XEN_SYSCTL_PHYSCAP_vpmu which
+indicates whether the platform supports vPMU
+functionality. Modify Xen and tools accordingly.
 
-The current status is that the PMU registers are not
-virtualized and the physical registers are directly
-accessible when this parameter is enabled. There is no
-interrupt support and Xen will not save/restore the
-register values on context switches.
-
-According to Arm Arm, section D7.1:
-"The Performance Monitors Extension is common
-to AArch64 operation and AArch32 operation."
-That means we have an ensurance that if PMU is
-present in one exception state, it must also be
-present in the other.
-
-Please note that this feature is experimental.
+Take the opportunity and fix XEN_SYSCTL_PHYSCAP_vmtrace
+definition in sysctl.h which wrongly use (1 << 6)
+instead of (1u << 6).
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
-Signed-off-by: Julien Grall <julien@xen.org>
 Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Acked-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Acked-by: Ian Jackson <iwj@xenproject.org>
 ---
 Changes since v4:
--update SUPPORT.md
--move vpmu_is_available assignment after the secondary
-CPUs have been brought up
--introduce masks for flags that need to be set and
-for flags that are optional
+-none
 Changes since v3:
--fail if vpmu is set but not supported
+-add spaces between brackets and keyword
 Changes since v2:
--remove redundant check from x86 code
 -do not define bit position and mask separately
 Changes since v1:
--modify vpmu parameter to be common rather than arch specific
+-new in v2
 ---
- SUPPORT.md                           |  9 +++++++++
- docs/man/xl.cfg.5.pod.in             | 17 +++++++++++++++++
- tools/golang/xenlight/helpers.gen.go |  6 ++++++
- tools/golang/xenlight/types.gen.go   |  1 +
- tools/include/libxl.h                |  6 ++++++
- tools/libs/light/libxl_create.c      | 10 ++++++++++
- tools/libs/light/libxl_types.idl     |  2 ++
- tools/ocaml/libs/xc/xenctrl.ml       |  1 +
- tools/ocaml/libs/xc/xenctrl.mli      |  1 +
- tools/xl/xl_parse.c                  |  2 ++
- xen/arch/arm/domain.c                | 13 ++++++++++---
- xen/arch/arm/setup.c                 |  3 +++
- xen/common/domain.c                  | 10 +++++++++-
- xen/include/asm-arm/domain.h         |  1 +
- xen/include/public/domctl.h          |  4 +++-
- 15 files changed, 81 insertions(+), 5 deletions(-)
+ tools/golang/xenlight/helpers.gen.go | 2 ++
+ tools/golang/xenlight/types.gen.go   | 1 +
+ tools/include/libxl.h                | 6 ++++++
+ tools/libs/light/libxl.c             | 1 +
+ tools/libs/light/libxl_types.idl     | 1 +
+ tools/ocaml/libs/xc/xenctrl.ml       | 1 +
+ tools/ocaml/libs/xc/xenctrl.mli      | 1 +
+ tools/xl/xl_info.c                   | 5 +++--
+ xen/common/domain.c                  | 2 ++
+ xen/common/sysctl.c                  | 3 +++
+ xen/include/public/sysctl.h          | 6 ++++--
+ xen/include/xen/domain.h             | 2 ++
+ 12 files changed, 27 insertions(+), 4 deletions(-)
 
-diff --git a/SUPPORT.md b/SUPPORT.md
-index 317392d8f3..2f1f60c49a 100644
---- a/SUPPORT.md
-+++ b/SUPPORT.md
-@@ -256,6 +256,15 @@ from dom0.
- 
-     Status, x86: Tech Preview
- 
-+### vPMU support
-+
-+Support for accessing PMU registers from the guests.
-+There is no interrupt support and Xen will not save/restore
-+the register values on context switches.
-+Disabled by default (enable with guest parameter).
-+
-+    Status, ARM: Experimental
-+
- ## Memory Management
- 
- ### Dynamic memory control
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index 4b1e3028d2..55c4881205 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -690,6 +690,23 @@ default.
- B<NOTE>: Acceptable values are platform specific.  For Intel Processor
- Trace, this value must be a power of 2 between 4k and 16M.
- 
-+=item B<vpmu=BOOLEAN>
-+
-+Currently ARM only.
-+
-+Specifies whether to enable the access to PMU registers by disabling
-+the PMU traps.
-+
-+The PMU registers are not virtualized and the physical registers are directly
-+accessible when this parameter is enabled. There is no interrupt support and
-+Xen will not save/restore the register values on context switches.
-+
-+vPMU, by design and purpose, exposes system level performance
-+information to the guest. Only to be used by sufficiently privileged
-+domains. This feature is currently in experimental state.
-+
-+If this option is not specified then it will default to B<false>.
-+
- =back
- 
- =head2 Devices
 diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index c8669837d8..2449580bad 100644
+index bfc1e7f312..c8669837d8 100644
 --- a/tools/golang/xenlight/helpers.gen.go
 +++ b/tools/golang/xenlight/helpers.gen.go
-@@ -1119,6 +1119,9 @@ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
- }
- x.Altp2M = Altp2MMode(xc.altp2m)
- x.VmtraceBufKb = int(xc.vmtrace_buf_kb)
-+if err := x.Vpmu.fromC(&xc.vpmu);err != nil {
-+return fmt.Errorf("converting field Vpmu: %v", err)
-+}
+@@ -3360,6 +3360,7 @@ x.CapHap = bool(xc.cap_hap)
+ x.CapShadow = bool(xc.cap_shadow)
+ x.CapIommuHapPtShare = bool(xc.cap_iommu_hap_pt_share)
+ x.CapVmtrace = bool(xc.cap_vmtrace)
++x.CapVpmu = bool(xc.cap_vpmu)
  
   return nil}
  
-@@ -1600,6 +1603,9 @@ return fmt.Errorf("converting field ArchX86.MsrRelaxed: %v", err)
- }
- xc.altp2m = C.libxl_altp2m_mode(x.Altp2M)
- xc.vmtrace_buf_kb = C.int(x.VmtraceBufKb)
-+if err := x.Vpmu.toC(&xc.vpmu); err != nil {
-+return fmt.Errorf("converting field Vpmu: %v", err)
-+}
+@@ -3391,6 +3392,7 @@ xc.cap_hap = C.bool(x.CapHap)
+ xc.cap_shadow = C.bool(x.CapShadow)
+ xc.cap_iommu_hap_pt_share = C.bool(x.CapIommuHapPtShare)
+ xc.cap_vmtrace = C.bool(x.CapVmtrace)
++xc.cap_vpmu = C.bool(x.CapVpmu)
  
   return nil
   }
 diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index 45f2cba3d2..b2e8bd1a85 100644
+index 09a3bb67e2..45f2cba3d2 100644
 --- a/tools/golang/xenlight/types.gen.go
 +++ b/tools/golang/xenlight/types.gen.go
-@@ -521,6 +521,7 @@ MsrRelaxed Defbool
- }
- Altp2M Altp2MMode
- VmtraceBufKb int
-+Vpmu Defbool
+@@ -1008,6 +1008,7 @@ CapHap bool
+ CapShadow bool
+ CapIommuHapPtShare bool
+ CapVmtrace bool
++CapVpmu bool
  }
  
- type DomainBuildInfoTypeUnion interface {
+ type Connectorinfo struct {
 diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index ec5e3badae..ee73eb06f1 100644
+index b9ba16d698..ec5e3badae 100644
 --- a/tools/include/libxl.h
 +++ b/tools/include/libxl.h
-@@ -508,6 +508,12 @@
+@@ -502,6 +502,12 @@
   */
- #define LIBXL_HAVE_PHYSINFO_CAP_VPMU 1
+ #define LIBXL_HAVE_X86_MSR_RELAXED 1
  
 +/*
-+ * LIBXL_HAVE_VPMU indicates that libxl_domain_build_info has a vpmu parameter,
-+ * which allows to enable the access to PMU registers.
++ * LIBXL_HAVE_PHYSINFO_CAP_VPMU indicates that libxl_physinfo has a cap_vpmu
++ * field, which indicates the availability of vPMU functionality.
 + */
-+#define LIBXL_HAVE_VPMU 1
++#define LIBXL_HAVE_PHYSINFO_CAP_VPMU 1
 +
  /*
   * libxl ABI compatibility
   *
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index e356b2106d..2a0234ec16 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -91,6 +91,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
-     }
+diff --git a/tools/libs/light/libxl.c b/tools/libs/light/libxl.c
+index 204eb0be2d..a032723fde 100644
+--- a/tools/libs/light/libxl.c
++++ b/tools/libs/light/libxl.c
+@@ -404,6 +404,7 @@ int libxl_get_physinfo(libxl_ctx *ctx, libxl_physinfo *physinfo)
+         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share);
+     physinfo->cap_vmtrace =
+         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_vmtrace);
++    physinfo->cap_vpmu = !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_vpmu);
  
-     libxl_defbool_setdefault(&b_info->device_model_stubdomain, false);
-+    libxl_defbool_setdefault(&b_info->vpmu, false);
- 
-     if (libxl_defbool_val(b_info->device_model_stubdomain) &&
-         !b_info->device_model_ssidref)
-@@ -622,6 +623,9 @@ int libxl__domain_make(libxl__gc *gc, libxl_domain_config *d_config,
-                 create.flags |= XEN_DOMCTL_CDF_nested_virt;
-         }
- 
-+        if ( libxl_defbool_val(b_info->vpmu) )
-+            create.flags |= XEN_DOMCTL_CDF_vpmu;
-+
-         assert(info->passthrough != LIBXL_PASSTHROUGH_DEFAULT);
-         LOG(DETAIL, "passthrough: %s",
-             libxl_passthrough_to_string(info->passthrough));
-@@ -1199,6 +1203,12 @@ int libxl__domain_config_setdefault(libxl__gc *gc,
-         goto error_out;
-     }
- 
-+    if (libxl_defbool_val(d_config->b_info.vpmu) && !physinfo.cap_vpmu) {
-+        ret = ERROR_INVAL;
-+        LOGD(ERROR, domid, "vpmu not supported on this platform\n");
-+        goto error_out;
-+    }
-+
-     ret = 0;
-  error_out:
-     return ret;
+     GC_FREE;
+     return 0;
 diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 993e83acca..b96fb5c47e 100644
+index 3f9fff653a..993e83acca 100644
 --- a/tools/libs/light/libxl_types.idl
 +++ b/tools/libs/light/libxl_types.idl
-@@ -655,6 +655,8 @@ libxl_domain_build_info = Struct("domain_build_info",[
-     # Use zero value to disable this feature.
-     ("vmtrace_buf_kb", integer),
+@@ -1061,6 +1061,7 @@ libxl_physinfo = Struct("physinfo", [
+     ("cap_shadow", bool),
+     ("cap_iommu_hap_pt_share", bool),
+     ("cap_vmtrace", bool),
++    ("cap_vpmu", bool),
+     ], dir=DIR_OUT)
  
-+    ("vpmu", libxl_defbool),
-+
-     ], dir=DIR_IN,
-        copy_deprecated_fn="libxl__domain_build_info_copy_deprecated",
- )
+ libxl_connectorinfo = Struct("connectorinfo", [
 diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 7a4030a192..86758babb3 100644
+index 7ed1c00e47..7a4030a192 100644
 --- a/tools/ocaml/libs/xc/xenctrl.ml
 +++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -70,6 +70,7 @@ type domain_create_flag =
- 	| CDF_IOMMU
- 	| CDF_NESTED_VIRT
- 	| CDF_VPCI
-+	| CDF_VPMU
+@@ -122,6 +122,7 @@ type physinfo_cap_flag =
+ 	| CAP_Shadow
+ 	| CAP_IOMMU_HAP_PT_SHARE
+ 	| CAP_Vmtrace
++	| CAP_Vpmu
  
- type domain_create_iommu_opts =
- 	| IOMMU_NO_SHAREPT
+ type physinfo =
+ {
 diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index 6900513e7f..0fdb0cc169 100644
+index 391d4abdf8..6900513e7f 100644
 --- a/tools/ocaml/libs/xc/xenctrl.mli
 +++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -63,6 +63,7 @@ type domain_create_flag =
-   | CDF_IOMMU
-   | CDF_NESTED_VIRT
-   | CDF_VPCI
-+  | CDF_VPMU
+@@ -107,6 +107,7 @@ type physinfo_cap_flag =
+   | CAP_Shadow
+   | CAP_IOMMU_HAP_PT_SHARE
+   | CAP_Vmtrace
++  | CAP_Vpmu
  
- type domain_create_iommu_opts =
-   | IOMMU_NO_SHAREPT
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 17dddb4cd5..c503b9be00 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2750,6 +2750,8 @@ skip_usbdev:
-                     "If it fixes an issue you are having please report to "
-                     "xen-devel@lists.xenproject.org.\n");
+ type physinfo = {
+   threads_per_core : int;
+diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
+index 8383e4a6df..2c86b317b7 100644
+--- a/tools/xl/xl_info.c
++++ b/tools/xl/xl_info.c
+@@ -210,7 +210,7 @@ static void output_physinfo(void)
+          info.hw_cap[4], info.hw_cap[5], info.hw_cap[6], info.hw_cap[7]
+         );
  
-+    xlu_cfg_get_defbool(config, "vpmu", &b_info->vpmu, 0);
-+
-     xlu_cfg_destroy(config);
- }
+-    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s\n",
++    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s%s\n",
+          info.cap_pv ? " pv" : "",
+          info.cap_hvm ? " hvm" : "",
+          info.cap_hvm && info.cap_hvm_directio ? " hvm_directio" : "",
+@@ -218,7 +218,8 @@ static void output_physinfo(void)
+          info.cap_hap ? " hap" : "",
+          info.cap_shadow ? " shadow" : "",
+          info.cap_iommu_hap_pt_share ? " iommu_hap_pt_share" : "",
+-         info.cap_vmtrace ? " vmtrace" : ""
++         info.cap_vmtrace ? " vmtrace" : "",
++         info.cap_vpmu ? " vpmu" : ""
+         );
  
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index aae4472479..ad21c9b950 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -276,6 +276,8 @@ static void ctxt_switch_to(struct vcpu *n)
-      * timer. The interrupt needs to be injected into the guest. */
-     WRITE_SYSREG(n->arch.cntkctl, CNTKCTL_EL1);
-     virt_timer_restore(n);
-+
-+    WRITE_SYSREG(n->arch.mdcr_el2, MDCR_EL2);
- }
- 
- /* Update per-VCPU guest runstate shared memory area (if registered). */
-@@ -586,6 +588,10 @@ int arch_vcpu_create(struct vcpu *v)
- 
-     v->arch.hcr_el2 = get_default_hcr_flags();
- 
-+    v->arch.mdcr_el2 = HDCR_TDRA | HDCR_TDOSA | HDCR_TDA;
-+    if ( !(v->domain->options & XEN_DOMCTL_CDF_vpmu) )
-+        v->arch.mdcr_el2 |= HDCR_TPM | HDCR_TPMCR;
-+
-     if ( (rc = vcpu_vgic_init(v)) != 0 )
-         goto fail;
- 
-@@ -621,10 +627,11 @@ void vcpu_switch_to_aarch64_mode(struct vcpu *v)
- int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
- {
-     unsigned int max_vcpus;
-+    unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
-+    unsigned int flags_optional = (XEN_DOMCTL_CDF_iommu | XEN_DOMCTL_CDF_vpci |
-+                                   XEN_DOMCTL_CDF_vpmu);
- 
--    /* HVM and HAP must be set. IOMMU and VPCI may or may not be */
--    if ( (config->flags & ~XEN_DOMCTL_CDF_iommu & ~XEN_DOMCTL_CDF_vpci) !=
--         (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap) )
-+    if ( (config->flags & ~flags_optional) != flags_required )
-     {
-         dprintk(XENLOG_INFO, "Unsupported configuration %#x\n",
-                 config->flags);
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 49dc90d198..d5d0792ed4 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -999,6 +999,9 @@ void __init start_xen(unsigned long boot_phys_offset,
-     printk("Brought up %ld CPUs\n", (long)num_online_cpus());
-     /* TODO: smp_cpus_done(); */
- 
-+    /* This should be done in a vpmu driver but we do not have one yet. */
-+    vpmu_is_available = cpu_has_pmu;
-+
-     /*
-      * The IOMMU subsystem must be initialized before P2M as we need
-      * to gather requirements regarding the maximum IPA bits supported by
+     vinfo = libxl_get_version_info(ctx);
 diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 262b6c0c3c..8543fb54fd 100644
+index 40d67ec342..262b6c0c3c 100644
 --- a/xen/common/domain.c
 +++ b/xen/common/domain.c
-@@ -480,12 +480,14 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-     bool hvm = config->flags & XEN_DOMCTL_CDF_hvm;
-     bool hap = config->flags & XEN_DOMCTL_CDF_hap;
-     bool iommu = config->flags & XEN_DOMCTL_CDF_iommu;
-+    bool vpmu = config->flags & XEN_DOMCTL_CDF_vpmu;
+@@ -84,6 +84,8 @@ vcpu_info_t dummy_vcpu_info;
  
-     if ( config->flags &
-          ~(XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap |
-            XEN_DOMCTL_CDF_s3_integrity | XEN_DOMCTL_CDF_oos_off |
-            XEN_DOMCTL_CDF_xs_domain | XEN_DOMCTL_CDF_iommu |
--           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpci) )
-+           XEN_DOMCTL_CDF_nested_virt | XEN_DOMCTL_CDF_vpci |
-+           XEN_DOMCTL_CDF_vpmu) )
-     {
-         dprintk(XENLOG_INFO, "Unknown CDF flags %#x\n", config->flags);
-         return -EINVAL;
-@@ -534,6 +536,12 @@ static int sanitise_domain_config(struct xen_domctl_createdomain *config)
-         return -EINVAL;
-     }
+ bool __read_mostly vmtrace_available;
  
-+    if ( vpmu && !vpmu_is_available )
-+    {
-+        dprintk(XENLOG_INFO, "vpmu requested but cannot be enabled this way\n");
-+        return -EINVAL;
-+    }
++bool __read_mostly vpmu_is_available;
 +
-     return arch_sanitise_domain_config(config);
- }
+ static void __domain_finalise_shutdown(struct domain *d)
+ {
+     struct vcpu *v;
+diff --git a/xen/common/sysctl.c b/xen/common/sysctl.c
+index 3558641cd9..6e7189bb3c 100644
+--- a/xen/common/sysctl.c
++++ b/xen/common/sysctl.c
+@@ -280,6 +280,9 @@ long do_sysctl(XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl)
+         if ( vmtrace_available )
+             pi->capabilities |= XEN_SYSCTL_PHYSCAP_vmtrace;
  
-diff --git a/xen/include/asm-arm/domain.h b/xen/include/asm-arm/domain.h
-index c9277b5c6d..14e575288f 100644
---- a/xen/include/asm-arm/domain.h
-+++ b/xen/include/asm-arm/domain.h
-@@ -166,6 +166,7 @@ struct arch_vcpu
++        if ( vpmu_is_available )
++            pi->capabilities |= XEN_SYSCTL_PHYSCAP_vpmu;
++
+         if ( copy_to_guest(u_sysctl, op, 1) )
+             ret = -EFAULT;
+     }
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 039ccf885c..fead0e5b53 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -100,10 +100,12 @@ struct xen_sysctl_tbuf_op {
+ #define _XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share 5
+ #define XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share  \
+     (1u << _XEN_SYSCTL_PHYSCAP_iommu_hap_pt_share)
+-#define XEN_SYSCTL_PHYSCAP_vmtrace       (1 << 6)
++#define XEN_SYSCTL_PHYSCAP_vmtrace       (1u << 6)
++/* The platform supports vPMU. */
++#define XEN_SYSCTL_PHYSCAP_vpmu          (1u << 7)
  
-     /* HYP configuration */
-     register_t hcr_el2;
-+    register_t mdcr_el2;
+ /* Max XEN_SYSCTL_PHYSCAP_* constant.  Used for ABI checking. */
+-#define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_vmtrace
++#define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_vpmu
  
-     uint32_t teecr, teehbr; /* ThumbEE, 32-bit guests only */
- #ifdef CONFIG_ARM_32
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 4cb3f662c2..a53cbd16f4 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -71,9 +71,11 @@ struct xen_domctl_createdomain {
- #define _XEN_DOMCTL_CDF_nested_virt   6
- #define XEN_DOMCTL_CDF_nested_virt    (1U << _XEN_DOMCTL_CDF_nested_virt)
- #define XEN_DOMCTL_CDF_vpci           (1U << 7)
-+/* Should we expose the vPMU to the guest? */
-+#define XEN_DOMCTL_CDF_vpmu           (1U << 8)
+ struct xen_sysctl_physinfo {
+     uint32_t threads_per_core;
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 1708c36964..160c8dbdab 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -133,4 +133,6 @@ static inline void vnuma_destroy(struct vnuma_info *vnuma) { ASSERT(!vnuma); }
  
- /* Max XEN_DOMCTL_CDF_* constant.  Used for ABI checking. */
--#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_vpci
-+#define XEN_DOMCTL_CDF_MAX XEN_DOMCTL_CDF_vpmu
+ extern bool vmtrace_available;
  
-     uint32_t flags;
- 
++extern bool vpmu_is_available;
++
+ #endif /* __XEN_DOMAIN_H__ */
 -- 
 2.29.0
 
