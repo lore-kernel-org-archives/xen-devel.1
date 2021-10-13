@@ -2,39 +2,54 @@ Return-Path: <SRS0=Xj29=PB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DA1EC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 06:05:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CE52C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 06:10:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2269A60E53
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 06:05:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2269A60E53
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=greensocs.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4A39860E74
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 06:10:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4A39860E74
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.207872.363831 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.207890.363842 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maXOZ-0000Gh-5Y; Wed, 13 Oct 2021 06:05:43 +0000
+	id 1maXTM-0001hi-P5; Wed, 13 Oct 2021 06:10:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 207872.363831; Wed, 13 Oct 2021 06:05:43 +0000
+Received: by outflank-mailman (output) from mailman id 207890.363842; Wed, 13 Oct 2021 06:10:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maXOZ-0000GZ-2l; Wed, 13 Oct 2021 06:05:43 +0000
-Received: by outflank-mailman (input) for mailman id 207872;
- Wed, 13 Oct 2021 05:56:59 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Y9pJ=PB=greensocs.com=mark.burton@srs-us1.protection.inumbo.net>)
- id 1maXG6-0007CH-St
- for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 05:56:59 +0000
-Received: from beetle.greensocs.com (unknown [5.135.226.135])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 633c6259-a640-4e30-a52d-1bfa3dca2c2a;
- Wed, 13 Oct 2021 05:56:55 +0000 (UTC)
-Received: from smtpclient.apple (unknown [54.37.16.242])
- by beetle.greensocs.com (Postfix) with ESMTPSA id 0BDBE21A8F;
- Wed, 13 Oct 2021 05:56:51 +0000 (UTC)
+	id 1maXTM-0001hb-Lv; Wed, 13 Oct 2021 06:10:40 +0000
+Received: by outflank-mailman (input) for mailman id 207890;
+ Wed, 13 Oct 2021 06:10:39 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=bU9L=PB=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1maXTL-0001hV-Dz
+ for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 06:10:39 +0000
+Received: from de-smtp-delivery-102.mimecast.com (unknown [194.104.111.102])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 48aba1fa-2bec-11ec-8160-12813bfff9fa;
+ Wed, 13 Oct 2021 06:10:38 +0000 (UTC)
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur02lp2057.outbound.protection.outlook.com [104.47.6.57]) (Using
+ TLS) by relay.mimecast.com with ESMTP id
+ de-mta-38-u_8kKY1pNV-ejMcavAC6Vw-1; Wed, 13 Oct 2021 08:10:34 +0200
+Received: from AM0PR04MB5587.eurprd04.prod.outlook.com (2603:10a6:208:125::12)
+ by AM0PR04MB5905.eurprd04.prod.outlook.com (2603:10a6:208:125::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4587.22; Wed, 13 Oct
+ 2021 06:10:32 +0000
+Received: from AM0PR04MB5587.eurprd04.prod.outlook.com
+ ([fe80::79a1:1c43:93d3:d136]) by AM0PR04MB5587.eurprd04.prod.outlook.com
+ ([fe80::79a1:1c43:93d3:d136%6]) with mapi id 15.20.4587.027; Wed, 13 Oct 2021
+ 06:10:32 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AS8PR04CA0062.eurprd04.prod.outlook.com (2603:10a6:20b:313::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4587.25 via Frontend Transport; Wed, 13 Oct 2021 06:10:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,228 +61,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 633c6259-a640-4e30-a52d-1bfa3dca2c2a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=greensocs.com;
-	s=mail; t=1634104613;
+X-Inumbo-ID: 48aba1fa-2bec-11ec-8160-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1634105437;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=NmENBHpmx11BFYuaIRMqtVJxSEZwgv5Rg+5FKo1F1EU=;
-	b=n8qFCNPvW+tem6mfNDqDAmYlqDScNkjpLwuFa5/eMVeB897n3G/Iy6YDCjRDfpwRN+d8+N
-	geHeGCltVaRzoIWe7y4h9fUXaxq7y7ZABps9lIectcz9ioLN7YvuhvnRpypSJHcMSU0Ycr
-	c/GRrbwgYzaWkXZ+CyTPcRX2Q2M1tDI=
-Content-Type: text/plain;
-	charset=us-ascii
-Mime-Version: 1.0 (Mac OS X Mail 14.0 \(3654.120.0.1.13\))
-Subject: Re: [RFC PATCH v2 00/16] Initial support for machine creation via QMP
-From: Mark Burton <mark.burton@greensocs.com>
-In-Reply-To: <CAKmqyKMUvtRPCp=FJMHcMdsECfJ_fRHBi4dA2N3gtqmPHspNJA@mail.gmail.com>
-Date: Wed, 13 Oct 2021 07:56:46 +0200
-Cc: Damien Hedde <damien.hedde@greensocs.com>,
- "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>,
- Peter Maydell <peter.maydell@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- Peter Xu <peterx@redhat.com>,
- mirela.grujic@greensocs.com,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- Ani Sinha <ani@anisinha.ca>,
- Eric Blake <eblake@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "open list:X86" <xen-devel@lists.xenproject.org>,
- Paul Durrant <paul@xen.org>,
- Markus Armbruster <armbru@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- =?utf-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Eric Auger <eric.auger@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- "open list:RISC-V" <qemu-riscv@nongnu.org>,
- =?utf-8?B?IkRhbmllbCBQLiBCZXJyYW5nw6ki?= <berrange@redhat.com>,
- Edgar Iglesias <edgari@xilinx.com>,
- Igor Mammedov <imammedo@redhat.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <D12EA69C-A1CC-4132-89F8-499D7F99F34C@greensocs.com>
-References: <20210922161405.140018-1-damien.hedde@greensocs.com>
- <CAKmqyKMUvtRPCp=FJMHcMdsECfJ_fRHBi4dA2N3gtqmPHspNJA@mail.gmail.com>
-To: Alistair Francis <alistair23@gmail.com>
-X-Mailer: Apple Mail (2.3654.120.0.1.13)
+	bh=UPvW0alhaeN1fEesfffuVnvDNBcasXEl2o+PRj1zBn0=;
+	b=h3/LY9xVoEERvocKYYOUILVWpiIAQc6VxfD0i/XIjnIqH8FF3R4CunP/LJgLu7zxgkpMOh
+	uboQq94rkGBbgUH6vfdMPOjePSWx91qux6+fSiceTurn7TETviiRamxzapu95y3RuDNDwb
+	5DoyiHGYd/fv0Hcz9WlD82IvAk/ruZ4=
+X-MC-Unique: u_8kKY1pNV-ejMcavAC6Vw-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eRvtUz+3UkhjMmIWPFkIjvMD6QbBHaA4hPwsP4c9GrWJwMDUuNzejulnRBKykMZQML6ZCPJgT6IdcpWrfdROEnG8hAGBAGnk+4Mg0QdHgvbCAc3RHo81pb8Ov/b9Qhq4mhdsgBTtjPV4G17R3SF7W9TiickbnGg+ZS+ujnpnnLey0JyYidvjTprHoT2Rxd1cKgRJioRoLrOnMQY8S9dVrriaxVVbOYxuGE6hB89PkINTZodw84sFcviQd8qN/fR2sfhhzu72jbex9XDV33UxweMbH8luFMPIEA2rHopFIGB7ybO0vNGSecesR8OLD+CRHY7NJt3nKY29OjJrBDjTWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UPvW0alhaeN1fEesfffuVnvDNBcasXEl2o+PRj1zBn0=;
+ b=QYzdPJHncT73gi7JLMsILAsobtf6rjrYFi/Y9Ti9Xi4vZu192jlVfRlgpF+j+FEahNMIxw1/qDiMXrOr+hLGY4YT9/Q0jKNpaeEfmF9woXaBZq3At4klOZRellLitJkX19nlZAEFBT/jHTy27V0Lu+Oc9l2uDYndF5H1iB346sc0M3zrR0vQqiURkU7HlR/rlzoW79h89BhISwniLG6HNHgTY4xa55lUjhLMfJbBmah53B1fQsW7qN8qEsJT2T9MR8q8DwbMaNnXEhNtacwc7Pn074DaN0fWi0forr/f8tSSiT5kTiV3kG6IdCIAhy0O/wWGv+S+eTfSFLYI9QuJyA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: lists.xenproject.org; dkim=none (message not signed)
+ header.d=none;lists.xenproject.org; dmarc=none action=none
+ header.from=suse.com;
+Subject: Re: [PATCH v5 08/11] xen/arm: Enable the existing x86 virtual PCI
+ support for ARM.
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Rahul Singh <Rahul.Singh@arm.com>, Andre Przywara <Andre.Przywara@arm.com>,
+ Julien Grall <julien@xen.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+ Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1633540842.git.rahul.singh@arm.com>
+ <9bdca2cda5d2e83f94dc2423e55714273539760a.1633540842.git.rahul.singh@arm.com>
+ <6752f2d3-171b-37f5-c809-82995a8f3f36@suse.com>
+ <CEF7FFB0-779A-4F46-8667-6BCD9BA5CB6C@arm.com>
+ <b735c2d3-1dbb-ce0a-c2fa-160d4c6938d3@suse.com>
+ <A8DEBD07-FB45-4E4E-A2C3-7AF8B393B032@arm.com>
+ <59c9e102-c710-64d3-2a1a-cc8dcbcceead@suse.com>
+ <alpine.DEB.2.21.2110111105180.25528@sstabellini-ThinkPad-T480s>
+ <2fa4d2e2-7daf-6d52-ff4c-38a482af1fb9@suse.com>
+ <alpine.DEB.2.21.2110121436020.9408@sstabellini-ThinkPad-T480s>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <f15de716-4c4f-47b8-b6ba-ea549c61369c@suse.com>
+Date: Wed, 13 Oct 2021 08:10:30 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
+In-Reply-To: <alpine.DEB.2.21.2110121436020.9408@sstabellini-ThinkPad-T480s>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AS8PR04CA0062.eurprd04.prod.outlook.com
+ (2603:10a6:20b:313::7) To AM0PR04MB5587.eurprd04.prod.outlook.com
+ (2603:10a6:208:125::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 0af34b8b-2bfb-4ee1-f24a-08d98e102a12
+X-MS-TrafficTypeDiagnostic: AM0PR04MB5905:
+X-Microsoft-Antispam-PRVS:
+	<AM0PR04MB5905FFAD2E644624D6228435B3B79@AM0PR04MB5905.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	nGMv6r+CBDo0q/WCOUPULTGhfbjxAMMrc72Dm1booYrZuhibgj6uBlT27uv3ct5f9x5YYOOyDu/35xIg58tlNbiYOpZIDwTl2A3L4Iy6xLC+KqYw/x6eYG2JnU/IBw+M+jSphr8i2BPLtOU5M6lZUODYJ8lMEQ+JWfGlUkUbEwMivqOKpfvwzqWweHsUE7tsQnIv4P75jzdvXN82bbBFhmh1afUHs331aRmK65FUPhZzqPum3ZwxBGhWSfAmtR5MFUygJPHvXTicwa1vcu32s7GORrzNF6FvOzAIkMB/b1fEFPpbW6+0SjXLS1Ye+4qU+AwobhLyJyaBIhv8hPsS7dl8RTJKntP1atbIN7s/Q6o3c79E7H5S36K4MWmXz6fNMRf8sqb/GNPPBr0QKoM8NIDNI+EHQAnaLYb7J1qGIOANhkwxi4sjwaNR6J0ntXjB7dCdk8jHk7nU7O/V83F6oTkMFI2odKoT/tWTf6kgZ9feoj8+hYDvvzlXqUps4HbPTlIUBzqxUp+7wNIILplQLsiY7/lB0uHAp+VcE/QLKhBA21g0bdvMSEZLKmvuqdgqrMBB82YfrAT5GkRK7j5W8UkbYMXruhUiznQGFldd6OPgd0sjqcV0LfPX+dzZJtM25d3EW8H6ZfLpOnLcPDzfms4fjz9vYpkxsWgV5S074nmqixN8fF3SEoS5xMTOFbcK/1MRhZ2kncraltx7xbTLZGlwGbB9lAS9+YUl3AZwo6HAXkAgT8KhQZgUu1hWz6Ju
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR04MB5587.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(4326008)(186003)(8936002)(86362001)(956004)(6916009)(316002)(16576012)(31686004)(6486002)(7416002)(36756003)(54906003)(83380400001)(26005)(66946007)(31696002)(66556008)(66476007)(38100700002)(5660300002)(8676002)(508600001)(53546011)(2906002)(2616005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?eTZ0cWxNRzgwR1h2MkR3dWNCRHc4RTJyNm5hVmlVVk1yVHZsdWlkUnJCZmZP?=
+ =?utf-8?B?TWYrcUtXWUY5VG1iTVRucm5FRWRZQllNSGJLMTV3UjBBeVFLLzhzV2d1V3Z3?=
+ =?utf-8?B?OVdtTFVrencyTGNjbm1KUFlGRXdhL29McjZKbS9NTUNzOTNPTitOMXZ3dVRK?=
+ =?utf-8?B?cTkxTGZ0QytUcnN1alMxdkFPRVJEbjlXQzNOYVM2NmdFOE1wYWs0M0lHZjhK?=
+ =?utf-8?B?YkNFVVBMcE11RE9vNzNOT01qTWdETVRXUC9EVDNVNWhIS3lDMk1hSVg3aUR0?=
+ =?utf-8?B?VEVtSG83V2dZb2IwMW5MSnl6SWVwWjNma1NldGYrRE9zZWxjZlZxaVJPclB5?=
+ =?utf-8?B?bzJGd3cyczY1L3czSVdmRENlWllmOUxVZjFiYnYwc0d5VGRwd2JaZDdTdUtQ?=
+ =?utf-8?B?ejNuMVd6ZFRMT25Xc2ZHK3kyR20zMm1wblc4Si9vV21sOVVERytCUExTTmlV?=
+ =?utf-8?B?ZTd0anNRaHkvQlJRU3V0NUcvRVRIK1dyUDdrK1BHU1VDNjFOV3VIdGxHbDFW?=
+ =?utf-8?B?RmcwckE4ZFgvaXZ1SXdjVXZqaW5kc201bjY4OG9OdzVlcklFUlFiU2dFZTQz?=
+ =?utf-8?B?VGl4U050V3BuVW9MekcxTTNuUE5DbXZtaUp5VGM0dWZZUUNTNGlRaFp5cHVU?=
+ =?utf-8?B?cy81em1GZHFpMEZvaEtmazMrUmRwb1FFY0pBaW9Sbi9HUHQ2TTYydVhtQ0cz?=
+ =?utf-8?B?TG1MMVdrSlF1VHlwanFlZkhTVnFsVFlLQWRQaXFad2RDSHJwcE43YmZ6S1I3?=
+ =?utf-8?B?NWV3cE5TM2lGUmJtamZiQ2FibmJNNzhERHh2d0Jrd0s0UmpreFJhUFlHM1Vo?=
+ =?utf-8?B?dkx5UlREZHZNZ3lQamM3b2tDTkRPN3cvVUpsUGhXbVIwNzkrQ1cwSTVrYytz?=
+ =?utf-8?B?d0RlaVVaWkxORThEdWZDMFJ5RUdLL3NQT1VqZzlBRGdkMXI1UWNjUzJ0ZXV3?=
+ =?utf-8?B?cEtGZ1lEN3Y5Nm9jeTFWVjRqdnBRdEhTTVplOW45Zld1QjU5eDVMSW1wVXV4?=
+ =?utf-8?B?ZkRaK1hZTHQvbm9oWWdKUWhFV2s1MU1BbUZiVFdiTE9JRFh6TENnNWpZb2JG?=
+ =?utf-8?B?azVxSkZaUStxTjYrOUdDL3dGODZPbFk4cDRpT0Q5YVg0cGlFTklNU3grSk5k?=
+ =?utf-8?B?MERkbEZpWHF2RGNLVTM0R0JvcGpPcnYyM3IrZXBNT2dST0tVRHdIK0Y2V2Mz?=
+ =?utf-8?B?ZXhJeEVUYVljTGtmV01BdUpra3FvMTh3K2FpSmJxbTZkL2VjZHA5WHQ1RlNJ?=
+ =?utf-8?B?MEtUdW5TOTBMTVNvOElvRUtnOWJNNXdDQU1KeHpJekIwWnFScy9QZktpeFVk?=
+ =?utf-8?B?ZS9OMkhUWUc5Q1pFSkxveHQzQzZvbHRCdHZUaUQ1OWtWT3lyZ3pYcVM4NHVG?=
+ =?utf-8?B?ckhPTXhJNXFsYUQrN2JkNlR6M0tMN2dUN3ZVNXhLN2o3azIxYlFHcFpvYkpk?=
+ =?utf-8?B?SEhTN3grRnhkZGlXL0ZJbzRCMVg0WFo1UkYvUkcyejhHZnJjbGIwMktZOVJV?=
+ =?utf-8?B?L2RsaXlsSWJ2MW8vaFJoRmFQK3VCSGNJQ1lDUXhKc1RnclpGTm1JbEFDT1cx?=
+ =?utf-8?B?VVUxT2JJdktDekl4T1FWVDI4MzdQVDFZQ29ZWmplZXhUQVFFVzQ1OG04WUtp?=
+ =?utf-8?B?cGN6YWxpTVhkWmF6WTVkQkhlSnhYbkZkRG9OSVlyNzR3Rjh5dVB3NTlzbnZk?=
+ =?utf-8?B?TFB5TlJtZXo5eWl4VFlvMUJOamlkYWFWZjRzeGxKVmJuRUt3K240V2JLUmJB?=
+ =?utf-8?Q?kZIVEqDQOW0x1QKkYLuesbw+qUR+Gfv+/bXXC7G?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0af34b8b-2bfb-4ee1-f24a-08d98e102a12
+X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB5587.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2021 06:10:32.7150
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9BruSfMlj86zSlLa1Dr8a8xsmL8jwufpTccqDp1Vq1lE8sKg7JhRjHttOigYhREnyvdfD4GldIguG5fneveg0Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB5905
 
-Fixed
-Cheers
-Mark.
+On 12.10.2021 23:37, Stefano Stabellini wrote:
+> On Tue, 12 Oct 2021, Jan Beulich wrote:
+>> On 11.10.2021 20:18, Stefano Stabellini wrote:
+>>> On Mon, 11 Oct 2021, Jan Beulich wrote:
+>>>> On 11.10.2021 15:34, Bertrand Marquis wrote:
+>>>>>> On 11 Oct 2021, at 14:09, Jan Beulich <jbeulich@suse.com> wrote:
+>>>>>> On 11.10.2021 14:41, Bertrand Marquis wrote:
+>>>>>>> But digging deeper into this, I would have 2 questions:
+>>>>>>>
+>>>>>>> - msi_cleanup was done there after a request from Stefano, but is not
+>>>>>>> done in case or iommu error, is there an issue to solve here ?
+>>>>>>
+>>>>>> Maybe, but I'm not sure. This very much depends on what a domain
+>>>>>> could in principle do with a partly set-up device. Plus let's
+>>>>>> not forget that we're talking of only Dom0 here (for now at least,
+>>>>>> i.e. not considering the dom0less case).
+>>>>>>
+>>>>>> But I'd also like to further defer to Stefano.
+>>>>>
+>>>>> Ok, I must admit I do not really see at that stage why doing an MSI cleanup
+>>>>> could be needed so I will wait for Stefano to know if I need to keep this when
+>>>>> moving the block up (at the end it is theoretical right now as this is empty).
+>>>
+>>> I know that MSIs are not supported yet on ARM (pci_cleanup_msi does
+>>> nothing). But I wanted to make sure that the pci_cleanup_msi() calls are
+>>> present anywhere necessary, especially on the error paths. So that once
+>>> we add MSI support, we don't need to search through the code to find all
+>>> the error paths missing a pci_cleanup_msi() call.
+>>>
+>>> To answer your first question: you are right, we are also missing a
+>>> pci_cleanup_msi() call in the case of IOMMU error. So it might be better
+>>> to move the call to pci_cleanup_msi() under the "out" label so that we
+>>> can do it once for both cases.
+>>>
+>>> To answer your second point about whether it is necessary at all: if
+>>> MSIs and MSI-Xs cannot be already setup at this point at all (not even
+>>> the enable bit), then we don't need any call to pci_cleanup_msi() in
+>>> pci_add_device.
+>>
+>> Well, at the very least MSI can't be set up ahead of the traps getting
+>> put in place. Whether partial success of putting traps in place may
+>> allow a cunning guest to set up MSI may depend on further aspects.
+> 
+> Good point about MSIs not being setup before the traps. We should remove
+> the call to pci_cleanup_msi() in the error path then.
 
+Your reply makes me fear you didn't pay enough attention to the "partial"
+in my earlier reply. The traps for the various registers can't all be set
+up atomically, so there may be a transient period where enough traps are
+already in place for a cunning guest to arrange for setup. Unless, as
+said, there are further setup steps needed before a guest could succeed
+in doing so.
 
-> On 13 Oct 2021, at 00:16, Alistair Francis <alistair23@gmail.com> =
-wrote:
->=20
-> On Thu, Sep 23, 2021 at 2:22 AM Damien Hedde =
-<damien.hedde@greensocs.com> wrote:
->>=20
->> Hi,
->>=20
->> The goal of this work is to bring dynamic machine creation to QEMU:
->> we want to setup a machine without compiling a specific machine C
->> code. It would ease supporting highly configurable platforms (for
->> example resulting from an automated design flow). The requirements
->> for such configuration include begin able to specify the number of
->> cores, available peripherals, emmory mapping, IRQ mapping, etc.
->>=20
->> This series focuses on the first step: populating a machine with
->> devices during its creation. We propose patches to support this
->> using QMP commands. This is a working set of patches and improves
->> over the earlier rfc (posted in May):
->> https://lists.gnu.org/archive/html/qemu-devel/2021-05/msg03706.html
->>=20
->> Although it is working and could be merged, it is tag as an RFC:
->> we probably need to discuss the conditions for allowing a device to
->> be created at an early stage. Patches 6, 10 and 13, 15 and 16 depend
->> on such conditions and are subject to change. Other patches are
->> unrelated to this point.
->>=20
->> We address several issues in this series. They are detailed below.
->>=20
->> ## 1. Stoping QEMU to populate the machine with devices
->>=20
->> QEMU goes through several steps (called _machine phases_) when
->> creating the machine: 'no-machine', 'machine-created',
->> 'accel-created', 'initialized', and finally 'ready'. At 'ready'
->> phase, QEMU is ready to start (see Paolo's page
->> https://wiki.qemu.org/User:Paolo_Bonzini/Machine_init_sequence for
->> more details).
->>=20
->> Using the -preconfig CLI option, QEMU can be stopped today during
->> the 'accel-created' phase. Then the 'x-exit-preconfig' QMP command
->> triggers QEMU moving forwards to the completion of the machine
->> creation ('ready' phase).
->>=20
->> The devices are created during the 'initialized' phase.
->> In this phase the machine init() method has been executed and thus
->> machine properties have been handled. Although the sysbus exists and
->> the machine may have been populated by the init(),
->> _machine_init_done_ notifiers have not been called yet. At this point
->> we can add more devices to a machine.
->>=20
->> We propose to add 2 QMP commands:
->> + The 'query-machine-phase' command would return the current machine
->>  phase.
->> + The 'x-machine-init' command would advance the machine phase to
->>  'initialized'. 'x-exit-preconfig' could then still be used to
->>  advance to the last phase.
->>=20
->> ## 2. Adding devices
->>=20
->> Right now, the user can create devices in 2 ways: using '-device' CLI
->> option or 'device_add' QMP command. Both are executed after the
->> machine is ready: such devices are hot-plugged. We propose to allow
->> 'device_add' QMP command to be used during the 'initialized' phase.
->>=20
->> In this series, we keep the constraint that the device must be
->> 'user-creatable' (this is a device class flag). We do not see any
->> reason why a device the user can hot-plug could not be created at an
->> earlier stage.
->>=20
->> This part is still RFC because, as Peter mentioned it (in this thread
->> https://lists.gnu.org/archive/html/qemu-devel/2021-08/msg01933.html),
->> we may want additional or distinct conditions for:
->> + device we can hot-plug
->> + device we can add in '-preconfig' (cold-plug)
->> We are open to suggestions. We could for example add a
->> 'preconfig-creatable' or 'init-creatable' flag to device class, which
->> can identify a set of devices we can create this way.
->>=20
->> The main addition is how we handle the case of sysbus devices. Sysbus
->> devices are particular because unlike, for example, pci devices, you
->> have to manually handle the memory mapping and interrupts wiring. So
->> right now, a sysbus device is dynamically creatable (using -device
->> CLI option or device_add QMP command) only if:
->> + it is 'user_creatable' (like any other device),
->> + and it is in the current machine sysbus device allow list.
->>=20
->> In this series, we propose to relax the second constraint during the
->> earlier phases of machine creation so that when using -preconfig we
->> can create any 'user-creatable' sysbus device. When the machine
->> progresses to the 'ready' phase, sysbus devices creation will come
->> back to the legacy behavior: it will be possible only based on the
->> per-machine authorization basis.
->>=20
->> For sysbus devices, wiring interrupts is not a problem as we can use
->> the 'qom-set' QMP command, but memory mapping is.
->>=20
->> ## 3. Memory mapping
->>=20
->> There is no point allowing the creation sysbus devices if we cannot
->> map them onto the memory bus (the 'sysbus').
->>=20
->> As far as we know, right now, there is no way to add memory mapping
->> for sysbus device using QMP commands. We propose a =
-'x-sysbus-mmio-map'
->> command to do this. This command would only be allowed during the
->> 'initialized' phase when using -preconfig.
->>=20
->> ## 4. Working example
->>=20
->> The last patches of the series add and modify devices in order to
->> build a working machine starting from the 'none' machine.
->>=20
->> We add a new sysbus device modeling a simple memory (ram or rom). We
->> also set 'user-creatable' flag of some sysbus devices. These are
->> trivial patches, but they depends on the conditions we choose to =
-allow
->> creating devices with -preconfig. Therefore, there is really no need
->> to review them until we settled on the device conditions first.
->>=20
->> With these devices (memory, ibex_uart, ibex_plic) we can dynamically
->> configure a part (we did not add the timer, but we could) the
->> opentitan machine very easily and run firmwares which demonstrates
->> interrupts and memory-mapping are working.
->>=20
->> We use the existing qmp-shell script to issue machine devices
->> from a qmp commands script file which contains qmp commands listed in
->> a file.
->>=20
->> The following qmp commands add some memories, an interrupt controller
->> and an uart with an interrupt.
->>=20
->> cat > opentitan.qmp <<EOF
->> x-machine-init
->>=20
->> # ROM 0x00008000
->> device_add        driver=3Dsysbus-memory id=3Drom size=3D0x4000 =
-readonly=3Dtrue
->> x-sysbus-mmio-map device=3Drom addr=3D32768
->>=20
->> # FLASH 0x20000000
->> device_add        driver=3Dsysbus-memory id=3Dflash size=3D0x80000 =
-readonly=3Dtrue
->> x-sysbus-mmio-map device=3Dflash addr=3D536870912
->>=20
->> # RAM 0x10000000
->> device_add        driver=3Dsysbus-memory id=3Dram size=3D0x10000
->> x-sysbus-mmio-map device=3Dram addr=3D268435456
->>=20
->> # PLIC 0x41010000
->> device_add        driver=3Dibex-plic id=3Dplic
->> x-sysbus-mmio-map device=3Dplic addr=3D1090584576
->>=20
->> # UART 0x40000000
->> device_add        driver=3Dibex-uart id=3Duart chardev=3Dserial0
->> x-sysbus-mmio-map device=3Duart addr=3D1073741824
->> qom-set path=3Duart property=3Dsysbus-irq[1] =
-value=3Dplic/unnamed-gpio-in[2]
->>=20
->> x-exit-preconfig
->> EOF
->>=20
->> We've put the opentitan.qmp and a firmware opentitan-echo.elf here
->> (among some other qmp machine files we are working on):
->> https://github.com/GreenSocs/qemu-qmp-machines
->=20
-> I am unable to access this repo, maybe it's not public?
->=20
-> Alistair
+But even if partial trap setup alone was sufficient, I think the cleaning
+up of MSI then might still better go on the error path there than on that
+of pci_add_device().
+
+Jan
 
 
