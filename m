@@ -2,71 +2,52 @@ Return-Path: <SRS0=Xj29=PB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4C96C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 07:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76CEEC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 07:52:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 691C860241
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 07:52:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 691C860241
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2538060462
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 07:52:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2538060462
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.208008.364016 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.208011.364049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maZ3d-0000y0-PG; Wed, 13 Oct 2021 07:52:13 +0000
+	id 1maZ3l-0001qk-Lb; Wed, 13 Oct 2021 07:52:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 208008.364016; Wed, 13 Oct 2021 07:52:13 +0000
+Received: by outflank-mailman (output) from mailman id 208011.364049; Wed, 13 Oct 2021 07:52:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maZ3d-0000xt-LR; Wed, 13 Oct 2021 07:52:13 +0000
-Received: by outflank-mailman (input) for mailman id 208008;
- Wed, 13 Oct 2021 07:52:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K3Kx=PB=arm.com=Penny.Zheng@srs-us1.protection.inumbo.net>)
- id 1maZ3c-0000xn-Ff
- for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 07:52:12 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
- [2a01:111:f400:7e1b::62f])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 406b65bb-7cd3-454b-b717-7c0da660af3a;
- Wed, 13 Oct 2021 07:52:09 +0000 (UTC)
-Received: from DB6PR0501CA0035.eurprd05.prod.outlook.com (2603:10a6:4:67::21)
- by VI1PR0802MB2560.eurprd08.prod.outlook.com (2603:10a6:800:ad::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.15; Wed, 13 Oct
- 2021 07:52:07 +0000
-Received: from DB5EUR03FT020.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:4:67:cafe::d8) by DB6PR0501CA0035.outlook.office365.com
- (2603:10a6:4:67::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.14 via Frontend
- Transport; Wed, 13 Oct 2021 07:52:07 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT020.mail.protection.outlook.com (10.152.20.134) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4608.15 via Frontend Transport; Wed, 13 Oct 2021 07:52:07 +0000
-Received: ("Tessian outbound e27daf245730:v103");
- Wed, 13 Oct 2021 07:52:07 +0000
-Received: from 4b8d9bb8ea07.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- B4069505-B476-4454-8746-7670F46B33CE.1; 
- Wed, 13 Oct 2021 07:52:01 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 4b8d9bb8ea07.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Wed, 13 Oct 2021 07:52:01 +0000
-Received: from VE1PR08MB5215.eurprd08.prod.outlook.com (2603:10a6:803:10a::33)
- by VI1PR08MB4510.eurprd08.prod.outlook.com (2603:10a6:803:fc::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.15; Wed, 13 Oct
- 2021 07:51:57 +0000
-Received: from VE1PR08MB5215.eurprd08.prod.outlook.com
- ([fe80::41d6:b115:3b22:2cd]) by VE1PR08MB5215.eurprd08.prod.outlook.com
- ([fe80::41d6:b115:3b22:2cd%2]) with mapi id 15.20.4587.026; Wed, 13 Oct 2021
- 07:51:57 +0000
+	id 1maZ3l-0001qX-Hc; Wed, 13 Oct 2021 07:52:21 +0000
+Received: by outflank-mailman (input) for mailman id 208011;
+ Wed, 13 Oct 2021 07:52:20 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=quvz=PB=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1maZ3k-0001Eb-QK
+ for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 07:52:20 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7a6ba66e-2bfa-11ec-8160-12813bfff9fa;
+ Wed, 13 Oct 2021 07:52:14 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7D72022243;
+ Wed, 13 Oct 2021 07:52:13 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 47B8613CBE;
+ Wed, 13 Oct 2021 07:52:13 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id yOhSEC2QZmEjfwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 13 Oct 2021 07:52:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -78,194 +59,479 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 406b65bb-7cd3-454b-b717-7c0da660af3a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8AaT4SztkR+AXQ/RcQng7S1Fo4t3+Vlyd953aPRlwGs=;
- b=JerfVfzSUtK4/rZH88MYVxFAUSkpMto2oVdRegFZIn7qJnkKSJpWNI5W5GmUnzR35cnECqDSj6HTDpDoDgf+MEShDZ21KMR9bNooIJjtL4W2VW9zOPSKeuaHVkPqZG//mNR4xMobCSHjjbfQNfNEJcpM+FURW8BRWrtVd3uQahI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
- verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
- action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CR-MTA-TID: 64aa7808
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gGUE5Wok7ij5/MHy7bd9ApXkuDLHSDtvEsb/i/y7YWX35X8GvLoic8IhVVscUn+5Zb7TNFmIM7i8pljBwvxoerOHPhg5lNgg4Dbv9JbDtGz/LGyy8WZXkeskvR+zC+/WQqtXpEQw0ktVGEgxPs71IAJ5R7gHDUxFwUvTF2JewGOfhWN5Dy0+uGjRSQ+pJIrTBp5ZQzkVDxcHc6Q05tBliL8iQKnv1GBIouGxQhJ/gpKvEaTRZh4Ucj3+AZwGs6sJIr9lE/tSX14rvjADe0SJEC/qI7PeU5I3ghJtssR5j9hoatOzhp/eesQ7ewiNP+dfW7abnwyBK6Cu2BQaW4EftA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8AaT4SztkR+AXQ/RcQng7S1Fo4t3+Vlyd953aPRlwGs=;
- b=FcIMkGZszsadmHAUdFCiYNCIMvznxMrGWB6zqdzOwC6q5sOTCSy+f+EZteq2NfeaSK1Z4eLC6PG1BRFrKGgTQn+PPb0vtCLTZSN1hoCQdwcMojFsj91FeVdRSz6PLXmVqT9k2ZVv8AdTbQoVYPMrDHRUEwWHjXK+le5qOcVUbtV7z0Acy9meN5i9UdDdFfdPzkdGhTajHSctM07Vdn+q02dBK5KF9YkRgjLJnl9q20wTj/8IUTmNmFN8N/KA647u5a/z/gwc1L7aRjG//DIY444+SlNOPoFG34Ym/74Aa0I/bch64sbkLDWBSD6K79dYJf25BMtEx5xms1g4PMMVsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8AaT4SztkR+AXQ/RcQng7S1Fo4t3+Vlyd953aPRlwGs=;
- b=JerfVfzSUtK4/rZH88MYVxFAUSkpMto2oVdRegFZIn7qJnkKSJpWNI5W5GmUnzR35cnECqDSj6HTDpDoDgf+MEShDZ21KMR9bNooIJjtL4W2VW9zOPSKeuaHVkPqZG//mNR4xMobCSHjjbfQNfNEJcpM+FURW8BRWrtVd3uQahI=
-From: Penny Zheng <Penny.Zheng@arm.com>
-To: Julien Grall <julien@xen.org>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>, "sstabellini@kernel.org"
-	<sstabellini@kernel.org>
-CC: Bertrand Marquis <Bertrand.Marquis@arm.com>, Wei Chen <Wei.Chen@arm.com>
-Subject: RE: [PATCH 10/11] xen/arm: device assignment on 1:1 direct-map domain
-Thread-Topic: [PATCH 10/11] xen/arm: device assignment on 1:1 direct-map
- domain
-Thread-Index: AQHXsCjEx0HGlBpA+Em1L92CXDXaB6uxe3AAgBj87fCAA0mcAIAC50BAgAAD9KA=
-Date: Wed, 13 Oct 2021 07:51:57 +0000
-Message-ID:
- <VE1PR08MB5215D0769F05388F43B0F761F7B79@VE1PR08MB5215.eurprd08.prod.outlook.com>
-References: <20210923031115.1429719-1-penny.zheng@arm.com>
- <20210923031115.1429719-11-penny.zheng@arm.com>
- <c6730ec5-53c7-9bf2-4620-eefbc7c7c4a3@xen.org>
- <VE1PR08MB5215A1D5695F388F17C367D4F7B39@VE1PR08MB5215.eurprd08.prod.outlook.com>
- <9237c85c-87d0-14ac-07ce-244958add7d3@xen.org>
- <VE1PR08MB5215AAFF71A1A6CDE19A50EFF7B79@VE1PR08MB5215.eurprd08.prod.outlook.com>
-In-Reply-To:
- <VE1PR08MB5215AAFF71A1A6CDE19A50EFF7B79@VE1PR08MB5215.eurprd08.prod.outlook.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-ts-tracking-id: 317600F42BF9764F8DC3F30C0EFB7584.0
-x-checkrecipientchecked: true
-Authentication-Results-Original: xen.org; dkim=none (message not signed)
- header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
-x-ms-publictraffictype: Email
-X-MS-Office365-Filtering-Correlation-Id: cd15b561-045e-4b69-76eb-08d98e1e5ac1
-x-ms-traffictypediagnostic: VI1PR08MB4510:|VI1PR0802MB2560:
-x-ms-exchange-transport-forked: True
-X-Microsoft-Antispam-PRVS:
-	<VI1PR0802MB25600C6D64785C8E9C59A8E7F7B79@VI1PR0802MB2560.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
-x-ms-oob-tlc-oobclassifiers: OLM:9508;OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- 3LsV7q80esrXy+rmCs+b8E7eleXfVrLAC+PR75WqedxDdWij1djeyhHjwQGxvsIJnExxQYRLoyIK1h+zSAlXRU890BeRQN9RFuOdhFbc1EWUY5b7KQL4Wi4fy5gI9a29W3bpFwJSxCCspz7pluf3SO9jVd8CdO8tPG/bU41m3qr7r/PcJ4Vs0qBIv9umviLwZ7g/fkrQePWzcGHbCIRWNttVWB7AVJlcxFB17RnTDpR/b/BcZtIQxNoZeCi++YEoMRFUE6HMKQ7arrDfoJQ4KL9KuRBAFU9dOCyqc/obPSPQS2uv/JJ6ImItR/6KiNuf3LaommiZElum9OF0eFdDot1SmMOvX0T64zy+kyKyLRXRnmXC3NBTGu22DqZuE+UKDYkFwj93jCdl08PqzWfzvTa6VBN3bTWbbJd4p7cdZQepKlQEYVqa4I0YBaaa6/6KEuLtnqHMqw6fesOt84tBOrfg0ouxXC3m0vKq24y+CH9BaVJG8YcKQEDYLp/DndM/tgLwjaJQOlUo20jhX7mGnCx7a2i1c7URPKwHWvjSUDbuhpM2BXLiEEVJgfdZ4YYcVgWzsf2wxvBF5CAgKWVBpSBfpCAlD+S9zi1PAht9T1tT5f0CCPyJxGWZtwE2kOME8rjYRypGesxannBTkSQc5Vu/fBePoTdTunltjpRQOvpINe1CxZU2P8j0IV7RBoKC0OcWevM8X9S3ScoLwT04fg==
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR08MB5215.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(5660300002)(2940100002)(8936002)(2906002)(66946007)(8676002)(7696005)(4326008)(122000001)(64756008)(66476007)(66556008)(86362001)(38100700002)(76116006)(110136005)(54906003)(52536014)(38070700005)(55016002)(71200400001)(83380400001)(316002)(9686003)(186003)(26005)(508600001)(6506007)(53546011)(66446008)(33656002);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: 7a6ba66e-2bfa-11ec-8160-12813bfff9fa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1634111533; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zse2pNf3Nqq9ce0C5luvO4nVc/A6VAHCPFmY1kxIMr0=;
+	b=tMfFTMvJgUugjH9Ns8NG0AXFOvMcxTfx0U50De6R5WNza2GxCp+a5sLuG2KGjaAy1m1GGk
+	cqCr5uxOi3Gf6FLFTXrUPEnoNwB89CREhIz9uSm/v0s3hMZ9etlpTFvXUf0/AR+aeMLkpT
+	2oiR5LvXs8BEJT2mnALuE1NfRKWmzPM=
+From: Juergen Gross <jgross@suse.com>
+To: linux-usb@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v6 1/3] usb: Add Xen pvUSB protocol description
+Date: Wed, 13 Oct 2021 09:52:05 +0200
+Message-Id: <20211013075207.13910-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20211013075207.13910-1-jgross@suse.com>
+References: <20211013075207.13910-1-jgross@suse.com>
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4510
-Original-Authentication-Results: xen.org; dkim=none (message not signed)
- header.d=none;xen.org; dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT020.eop-EUR03.prod.protection.outlook.com
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	3f1d69d2-1dba-4da5-d1e7-08d98e1e5527
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	pMZ+jlySo9Ntx05zTR/TTsDE1wyz7KPFK++7ai0nUKAPrNe1ZM8z/b7J7CE6vBcRVyAjNRqN+mP/4TgmhWigLjTQNUbvBf8MhhSuPnSL4lMxg9mh0AFi5tFuWT8Tt6n8uyhBIP1crF4VGEOqI7LwOIlTFfJz3GuOsts645TOr5nx42u6LZrA0378kICl6BCBi6Cksu7L5CVkuTBvqNO5QbaWzq22Y38TprVu4O2uWN+4/N9H0Ys//6hr7QInDO0HHn9fF762sNOqY0RRmR9B7DsIlSzxn9a3k1LaG4Fb3UMKBkqpqGiFY4/DDDs6pssZ70a3f80CrHq9YN4dFHTpVf6QJxy8CvgnIeozoS2PtVZL6mHi9/mGYIQg5HmbJT3CTvqkOHAEEoFYLK/Dp3kIzy9jPxP/oXEAQqDOjCgPQQp1Kjrhn2reEgla6KlL40JKSeXwilgsDaqzg1RmPRCBU7COMPNMTtVd2aVqhrnRwgLrmr1xQdO4aAv7tJ+Vvm1g9H68097NFNFmbXjaACByvIhRLp/mKwfxOLph+RuZIcn5tXw+7rH+DLc4TOZI8rrAR8FVePBYSW9CvFGpQt4xSWHdpzjprYPkc4Z5hMBkJVMatUOtrXiI6p+4v8UxUEPaOMgKsBkTnhn5KmUEeXi8s+3Dz4qRWnjv7Sdn7qg+hj1QkI50F8udte2NqfNhI40e
-X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(8676002)(110136005)(55016002)(356005)(82310400003)(53546011)(508600001)(52536014)(316002)(2940100002)(47076005)(54906003)(186003)(6506007)(4326008)(5660300002)(70586007)(26005)(336012)(70206006)(86362001)(8936002)(81166007)(9686003)(36860700001)(33656002)(83380400001)(7696005)(2906002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2021 07:52:07.2347
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd15b561-045e-4b69-76eb-08d98e1e5ac1
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT020.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0802MB2560
+Content-Transfer-Encoding: 8bit
 
-DQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IFBlbm55IFpoZW5nDQo+IFNl
-bnQ6IFdlZG5lc2RheSwgT2N0b2JlciAxMywgMjAyMSAzOjQ0IFBNDQo+IFRvOiBKdWxpZW4gR3Jh
-bGwgPGp1bGllbkB4ZW4ub3JnPjsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnOw0KPiBz
-c3RhYmVsbGluaUBrZXJuZWwub3JnDQo+IENjOiBCZXJ0cmFuZCBNYXJxdWlzIDxCZXJ0cmFuZC5N
-YXJxdWlzQGFybS5jb20+OyBXZWkgQ2hlbg0KPiA8V2VpLkNoZW5AYXJtLmNvbT4NCj4gU3ViamVj
-dDogUkU6IFtQQVRDSCAxMC8xMV0geGVuL2FybTogZGV2aWNlIGFzc2lnbm1lbnQgb24gMToxIGRp
-cmVjdC1tYXANCj4gZG9tYWluDQo+IA0KPiBIaSBKdWxpZW4NCj4gDQo+ID4gLS0tLS1PcmlnaW5h
-bCBNZXNzYWdlLS0tLS0NCj4gPiBGcm9tOiBKdWxpZW4gR3JhbGwgPGp1bGllbkB4ZW4ub3JnPg0K
-PiA+IFNlbnQ6IE1vbmRheSwgT2N0b2JlciAxMSwgMjAyMSA3OjE0IFBNDQo+ID4gVG86IFBlbm55
-IFpoZW5nIDxQZW5ueS5aaGVuZ0Bhcm0uY29tPjsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnOw0KPiA+IHNzdGFiZWxsaW5pQGtlcm5lbC5vcmcNCj4gPiBDYzogQmVydHJhbmQgTWFycXVp
-cyA8QmVydHJhbmQuTWFycXVpc0Bhcm0uY29tPjsgV2VpIENoZW4NCj4gPiA8V2VpLkNoZW5AYXJt
-LmNvbT4NCj4gPiBTdWJqZWN0OiBSZTogW1BBVENIIDEwLzExXSB4ZW4vYXJtOiBkZXZpY2UgYXNz
-aWdubWVudCBvbiAxOjENCj4gPiBkaXJlY3QtbWFwIGRvbWFpbg0KPiA+DQo+ID4NCj4gPg0KPiA+
-IE9uIDA5LzEwLzIwMjEgMTA6NDAsIFBlbm55IFpoZW5nIHdyb3RlOg0KPiA+ID4gSGkgSnVsaWVu
-DQo+ID4NCj4gPiBIaSBQZW5ueSwNCj4gPg0KPiA+ID4NCj4gPiA+PiAtLS0tLU9yaWdpbmFsIE1l
-c3NhZ2UtLS0tLQ0KPiA+ID4+IEZyb206IEp1bGllbiBHcmFsbCA8anVsaWVuQHhlbi5vcmc+DQo+
-ID4gPj4gU2VudDogVGh1cnNkYXksIFNlcHRlbWJlciAyMywgMjAyMSA3OjI3IFBNDQo+ID4gPj4g
-VG86IFBlbm55IFpoZW5nIDxQZW5ueS5aaGVuZ0Bhcm0uY29tPjsNCj4gPiA+PiB4ZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmc7IHNzdGFiZWxsaW5pQGtlcm5lbC5vcmcNCj4gPiA+PiBDYzog
-QmVydHJhbmQgTWFycXVpcyA8QmVydHJhbmQuTWFycXVpc0Bhcm0uY29tPjsgV2VpIENoZW4NCj4g
-PiA+PiA8V2VpLkNoZW5AYXJtLmNvbT4NCj4gPiA+PiBTdWJqZWN0OiBSZTogW1BBVENIIDEwLzEx
-XSB4ZW4vYXJtOiBkZXZpY2UgYXNzaWdubWVudCBvbiAxOjENCj4gPiA+PiBkaXJlY3QtbWFwIGRv
-bWFpbg0KPiA+ID4+DQo+ID4gPj4gSGksDQo+ID4gPj4NCj4gPiA+PiBPbiAyMy8wOS8yMDIxIDA4
-OjExLCBQZW5ueSBaaGVuZyB3cm90ZToNCj4gPiA+Pj4gVXNlciBjb3VsZCBkbyBkZXZpY2UgcGFz
-c3Rocm91Z2gsIHdpdGgNCj4gPiA+Pj4gInhlbixmb3JjZS1hc3NpZ24td2l0aG91dC1pb21tdSIg
-aW4gdGhlIGRldmljZSB0cmVlIHNuaXBwZXQsIG9uDQo+ID4gPj4+IHRydXN0ZWQgZ3Vlc3QgdGhy
-b3VnaCAxOjEgZGlyZWN0LW1hcCwgaWYgSU9NTVUgYWJzZW50IG9yIGRpc2FibGVkDQo+ID4gPj4+
-IG9uDQo+ID4gPj4gaGFyZHdhcmUuDQo+ID4gPj4NCj4gPiA+PiBBdCB0aGUgbW9tZW50LCBpdCB3
-b3VsZCBiZSBwb3NzaWJsZSB0byBwYXNzdGhyb3VnaCBhIG5vbi1ETUENCj4gPiA+PiBjYXBhYmxl
-IGRldmljZSB3aXRoIGRpcmVjdC1tYXBwaW5nLiBBZnRlciB0aGlzIHBhdGNoLCB0aGlzIGlzIGdv
-aW5nIHRvIGJlDQo+IGZvcmJpZGRlbi4NCj4gPiA+Pg0KPiA+ID4+Pg0KPiA+ID4+PiBJbiBvcmRl
-ciB0byBhY2hpZXZlIHRoYXQsIHRoaXMgcGF0Y2ggYWRkcyAxOjEgZGlyZWN0LW1hcCBjaGVjayBh
-bmQNCj4gPiA+Pj4gZGlzYWJsZXMgaW9tbXUtcmVsYXRlZCBhY3Rpb24uDQo+ID4gPj4+DQo+ID4g
-Pj4+IFNpZ25lZC1vZmYtYnk6IFBlbm55IFpoZW5nIDxwZW5ueS56aGVuZ0Bhcm0uY29tPg0KPiA+
-ID4+PiAtLS0NCj4gPiA+Pj4gICAgeGVuL2FyY2gvYXJtL2RvbWFpbl9idWlsZC5jIHwgMTIgKysr
-KysrKystLS0tDQo+ID4gPj4+ICAgIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDQg
-ZGVsZXRpb25zKC0pDQo+ID4gPj4+DQo+ID4gPj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0v
-ZG9tYWluX2J1aWxkLmMNCj4gPiA+Pj4gYi94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgaW5k
-ZXggYzkyZTUxMGFlNy4uOWE5ZDI1MjJiNyAxMDA2NDQNCj4gPiA+Pj4gLS0tIGEveGVuL2FyY2gv
-YXJtL2RvbWFpbl9idWlsZC5jDQo+ID4gPj4+ICsrKyBiL3hlbi9hcmNoL2FybS9kb21haW5fYnVp
-bGQuYw0KPiA+ID4+PiBAQCAtMjA3MCwxNCArMjA3MCwxOCBAQCBzdGF0aWMgaW50IF9faW5pdA0K
-PiA+ID4+IGhhbmRsZV9wYXNzdGhyb3VnaF9wcm9wKHN0cnVjdCBrZXJuZWxfaW5mbyAqa2luZm8s
-DQo+ID4gPj4+ICAgICAgICBpZiAoIHJlcyA8IDAgKQ0KPiA+ID4+PiAgICAgICAgICAgIHJldHVy
-biByZXM7DQo+ID4gPj4+DQo+ID4gPj4+ICsgICAgLyoNCj4gPiA+Pj4gKyAgICAgKiBJZiB4ZW5f
-Zm9yY2UsIHdlIGFsbG93IGFzc2lnbm1lbnQgb2YgZGV2aWNlcyB3aXRob3V0IElPTU1VDQo+ID4g
-Pj4gcHJvdGVjdGlvbi4NCj4gPiA+Pj4gKyAgICAgKiBBbmQgaWYgSU9NTVUgaXMgZGlzYWJsZWQg
-b3IgYWJzZW50LCAxOjEgZGlyZWN0LW1hcCBpcw0KPiA+ID4+PiArIG5lY2Vzc2FyeSA+ICsNCj4g
-PiA+PiAqLw0KPiA+ID4+PiArICAgIGlmICggeGVuX2ZvcmNlICYmIGlzX2RvbWFpbl9kaXJlY3Rf
-bWFwcGVkKGtpbmZvLT5kKSAmJg0KPiA+ID4+PiArICAgICAgICAgIWR0X2RldmljZV9pc19wcm90
-ZWN0ZWQobm9kZSkgKQ0KPiA+ID4+DQo+ID4gPj4gZHRfZGV2aWNlX2lzX3Byb3RlY3RlZCgpIHdp
-bGwgYmUgYWx3YXlzIGZhbHNlIHVubGVzcyB0aGUgZGV2aWNlIGlzDQo+ID4gPj4gcHJvdGVjdGVk
-IGJlaGluZyBhbiBTTU1VIHVzaW5nIHRoZSBsZWdhY3kgYmluZGluZy4gU28gSSBkb24ndCB0aGlu
-aw0KPiA+ID4+IHRoaXMgaXMgY29ycmVjdCB0byBtb3ZlIHRoaXMgY2hlY2sgYWhlYWQuIEluIGZh
-Y3QuLg0KPiA+ID4+DQo+ID4gPj4+ICsgICAgICAgIHJldHVybiAwOw0KPiA+ID4+PiArDQo+ID4g
-Pj4+ICAgICAgICByZXMgPSBpb21tdV9hZGRfZHRfZGV2aWNlKG5vZGUpOw0KPiA+ID4+DQo+ID4g
-Pj4gLi4uIHRoZSBjYWxsIHNob3VsZCBhbHJlYWR5IGJlIGEgTk9QIHdoZW4gdGhlIElPTU1VIGlz
-IGRpc2FibGVkIG9yDQo+ID4gPj4gdGhlIGRldmljZSBpcyBub3QgYmVoaW5kIGFuIElPTU1VLiBT
-byBjYW4geW91IGV4cGxhaW4gd2hhdCB5b3UgYXJlDQo+ID4gPj4gdHJ5aW5nIHRvIHByZXZlbnQg
-aGVyZT8NCj4gPiA+Pg0KPiA+ID4NCj4gPiA+IElmIHRoZSBJT01NVSBpcyBkaXNhYmxlZCwgaW9t
-bXVfYWRkX2R0X2RldmljZSB3aWxsIHJldHVybiAxIGFzIGVycm5vLg0KPiA+ID4gU28gd2UgY291
-bGQgbm90IG1ha2UgaXQgdG8gdGhlIHhlbl9mb3JjZSBjaGVjay4uLg0KPiA+DQo+ID4gSSBkaXNh
-Z3JlZS4gVGhlIGNoZWNrIGlzOg0KPiA+DQo+ID4gaWYgKCByZXMgPCAwICkNCj4gPiAgICByZXR1
-cm4gcmVzOw0KPiA+DQo+ID4gR2l2ZW4gdGhhdCByZXMgaXMgMSwgd2Ugd291bGRuJ3QgcmV0dXJu
-IGFuZCBtb3ZlIHRvIGNoZWNrIHdoZXRoZXIgdGhlDQo+ID4gYXNzaWdubWVudCBjYW4gYmUgZG9u
-ZS4NCj4gPg0KPiA+ID4NCj4gPiA+IFNvIEkgdHJpZWQgdG8gbW92ZSBhbGwgSU9NTVUgYWN0aW9u
-IGJlaGluZCB4ZW5fZm9yY2UgY2hlY2suDQo+ID4gPg0KPiA+ID4gTm93LCBkZXZpY2UgYXNzaWdu
-bWVudCB3aXRob3V0IElPTU1VIHByb3RlY3Rpb24gaXMgb25seSBhcHBsaWNhYmxlDQo+ID4gPiBv
-biBkaXJlY3QtbWFwIGRvbWFpbnMsDQo+ID4NCj4gPiBJdCBpcyBmaW5lIHRvIGFzc2lnbiBhIG5v
-bi1ETUEgY2FwYWJsZSBkZXZpY2Ugd2l0aG91dCBkaXJlY3QtbWFwcGluZy4NCj4gPiBTbyB3aHkg
-ZG8geW91IHdhbnQgdG8gYWRkIHRoaXMgcmVzdHJpY3Rpb24/DQo+ID4NCj4gDQo+IFdoZW4gY29u
-c3RydWN0aW5nIGRpcmVjdC1tYXAtdjIsIGZvdW5kIHRoYXQsIGluDQo+IHhlbi9hcmNoL2FybS9k
-b21haW5fYnVpbGQuYw0KPiANCj4gaWYgKCBkdF9maW5kX2NvbXBhdGlibGVfbm9kZShub2RlLCBO
-VUxMLCAibXVsdGlib290LGRldmljZS10cmVlIikgKQ0KPiAgICAgZF9jZmcuZmxhZ3MgfD0gWEVO
-X0RPTUNUTF9DREZfaW9tbXU7DQo+IA0KPiBBbmQgdGhpcyBmbGFnIFhFTl9ET01DVExfQ0RGX2lv
-bW11IGRldGVybWluZXMgd2hldGhlciBpb21tdSBpcw0KPiBlbmFibGVkLg0KPiANCj4gSW4gLi94
-ZW4vaW5jbHVkZS94ZW4vc2NoZWQuaA0KPiANCj4gc3RhdGljIGFsd2F5c19pbmxpbmUgYm9vbCBp
-c19pb21tdV9lbmFibGVkKGNvbnN0IHN0cnVjdCBkb21haW4gKmQpIHsNCj4gICAgIHJldHVybiBl
-dmFsdWF0ZV9ub3NwZWMoZC0+b3B0aW9ucyAmIFhFTl9ET01DVExfQ0RGX2lvbW11KTsgfQ0KPiAN
-Cj4gVGhhdCBpcywgZXZlbiBpZiB3ZSBhc3NpZ24gYSBub24tRE1BIGNhcGFibGUgZGV2aWNlLCB3
-ZSByZXF1ZXN0IHRoZSBwbGF0Zm9ybQ0KPiB0byBiZSBpb21tdSBlbmFibGVkLg0KPg0KDQpJIGlu
-dGVuZCB0byBjaGFuZ2UgaXQgdG8NCg0KICAgICAgICBpZiAoIGR0X2ZpbmRfY29tcGF0aWJsZV9u
-b2RlKG5vZGUsIE5VTEwsICJtdWx0aWJvb3QsZGV2aWNlLXRyZWUiKSApDQogICAgICAgIHsNCiAg
-ICAgICAgICAgIGlmICggaW9tbXVfZW5hYmxlZCApDQogICAgICAgICAgICAgICAgZF9jZmcuZmxh
-Z3MgfD0gWEVOX0RPTUNUTF9DREZfaW9tbXU7DQogICAgICAgICAgICBlbHNlIGlmICggZF9jZmcu
-ZmxhZ3MgJiBYRU5fRE9NQ1RMX0NERl9kaXJlY3RtYXAgKQ0KICAgICAgICAgICAgICAgIHdhcm5p
-bmdfYWRkKCJQbGVhc2UgYmUgc3VyZSBvZiBoYXZpbmcgdHJ1c3RlZCBndWVzdHMsIHdoZW4gZG9p
-bmcgZGV2aWNlIGFzc2lnbm1lbnQgd2l0aG91dCBJT01NVSBwcm90ZWN0aW9uXG4iKTsNCiAgICAg
-ICAgfQ0KDQo+ID4gQ2hlZXJzLA0KPiA+DQo+ID4gLS0NCj4gPiBKdWxpZW4gR3JhbGwNCg==
+Add the definition of pvUSB protocol used between the pvUSB frontend in
+a Xen domU and the pvUSB backend in a Xen driver domain (usually Dom0).
+
+This header was originally provided by Fujitsu for Xen based on Linux
+2.6.18.
+
+Changes are:
+- adapt to Linux kernel style guide
+- use Xen namespace
+- add lots of comments
+- don't use kernel internal defines
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+---
+ include/xen/interface/io/usbif.h | 421 +++++++++++++++++++++++++++++++
+ 1 file changed, 421 insertions(+)
+ create mode 100644 include/xen/interface/io/usbif.h
+
+diff --git a/include/xen/interface/io/usbif.h b/include/xen/interface/io/usbif.h
+new file mode 100644
+index 000000000000..9494b1c9be99
+--- /dev/null
++++ b/include/xen/interface/io/usbif.h
+@@ -0,0 +1,421 @@
++/*
++ * usbif.h
++ *
++ * USB I/O interface for Xen guest OSes.
++ *
++ * Copyright (C) 2009, FUJITSU LABORATORIES LTD.
++ * Author: Noboru Iwamatsu <n_iwamatsu@jp.fujitsu.com>
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to
++ * deal in the Software without restriction, including without limitation the
++ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
++ * sell copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++
++#ifndef __XEN_PUBLIC_IO_USBIF_H__
++#define __XEN_PUBLIC_IO_USBIF_H__
++
++#include "ring.h"
++#include "../grant_table.h"
++
++/*
++ * Detailed Interface Description
++ * ==============================
++ * The pvUSB interface is using a split driver design: a frontend driver in
++ * the guest and a backend driver in a driver domain (normally dom0) having
++ * access to the physical USB device(s) being passed to the guest.
++ *
++ * The frontend and backend drivers use XenStore to initiate the connection
++ * between them, the I/O activity is handled via two shared ring pages and an
++ * event channel. As the interface between frontend and backend is at the USB
++ * host connector level, multiple (up to 31) physical USB devices can be
++ * handled by a single connection.
++ *
++ * The Xen pvUSB device name is "qusb", so the frontend's XenStore entries are
++ * to be found under "device/qusb", while the backend's XenStore entries are
++ * under "backend/<guest-dom-id>/qusb".
++ *
++ * When a new pvUSB connection is established, the frontend needs to setup the
++ * two shared ring pages for communication and the event channel. The ring
++ * pages need to be made available to the backend via the grant table
++ * interface.
++ *
++ * One of the shared ring pages is used by the backend to inform the frontend
++ * about USB device plug events (device to be added or removed). This is the
++ * "conn-ring".
++ *
++ * The other ring page is used for USB I/O communication (requests and
++ * responses). This is the "urb-ring".
++ *
++ * Feature and Parameter Negotiation
++ * =================================
++ * The two halves of a Xen pvUSB driver utilize nodes within the XenStore to
++ * communicate capabilities and to negotiate operating parameters. This
++ * section enumerates these nodes which reside in the respective front and
++ * backend portions of the XenStore, following the XenBus convention.
++ *
++ * Any specified default value is in effect if the corresponding XenBus node
++ * is not present in the XenStore.
++ *
++ * XenStore nodes in sections marked "PRIVATE" are solely for use by the
++ * driver side whose XenBus tree contains them.
++ *
++ *****************************************************************************
++ *                            Backend XenBus Nodes
++ *****************************************************************************
++ *
++ *------------------ Backend Device Identification (PRIVATE) ------------------
++ *
++ * num-ports
++ *      Values:         unsigned [1...31]
++ *
++ *      Number of ports for this (virtual) USB host connector.
++ *
++ * usb-ver
++ *      Values:         unsigned [1...2]
++ *
++ *      USB version of this host connector: 1 = USB 1.1, 2 = USB 2.0.
++ *
++ * port/[1...31]
++ *      Values:         string
++ *
++ *      Physical USB device connected to the given port, e.g. "3-1.5".
++ *
++ *****************************************************************************
++ *                            Frontend XenBus Nodes
++ *****************************************************************************
++ *
++ *----------------------- Request Transport Parameters -----------------------
++ *
++ * event-channel
++ *      Values:         unsigned
++ *
++ *      The identifier of the Xen event channel used to signal activity
++ *      in the ring buffer.
++ *
++ * urb-ring-ref
++ *      Values:         unsigned
++ *
++ *      The Xen grant reference granting permission for the backend to map
++ *      the sole page in a single page sized ring buffer. This is the ring
++ *      buffer for urb requests.
++ *
++ * conn-ring-ref
++ *      Values:         unsigned
++ *
++ *      The Xen grant reference granting permission for the backend to map
++ *      the sole page in a single page sized ring buffer. This is the ring
++ *      buffer for connection/disconnection requests.
++ *
++ * protocol
++ *      Values:         string (XEN_IO_PROTO_ABI_*)
++ *      Default Value:  XEN_IO_PROTO_ABI_NATIVE
++ *
++ *      The machine ABI rules governing the format of all ring request and
++ *      response structures.
++ *
++ * Protocol Description
++ * ====================
++ *
++ *-------------------------- USB device plug events --------------------------
++ *
++ * USB device plug events are send via the "conn-ring" shared page. As only
++ * events are being sent, the respective requests from the frontend to the
++ * backend are just dummy ones.
++ * The events sent to the frontend have the following layout:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                |    portnum     |     speed      | 4
++ * +----------------+----------------+----------------+----------------+
++ *   id - uint16_t, event id (taken from the actual frontend dummy request)
++ *   portnum - uint8_t, port number (1 ... 31)
++ *   speed - uint8_t, device XENUSB_SPEED_*, XENUSB_SPEED_NONE == unplug
++ *
++ * The dummy request:
++ *         0                1        octet
++ * +----------------+----------------+
++ * |               id                | 2
++ * +----------------+----------------+
++ *   id - uint16_t, guest supplied value (no need for being unique)
++ *
++ *-------------------------- USB I/O request ---------------------------------
++ *
++ * A single USB I/O request on the "urb-ring" has the following layout:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                |         nr_buffer_segs          | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                               pipe                                | 8
++ * +----------------+----------------+----------------+----------------+
++ * |         transfer_flags          |          buffer_length          | 12
++ * +----------------+----------------+----------------+----------------+
++ * |                       request type specific                       | 16
++ * |                               data                                | 20
++ * +----------------+----------------+----------------+----------------+
++ * |                              seg[0]                               | 24
++ * |                               data                                | 28
++ * +----------------+----------------+----------------+----------------+
++ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
++ * +----------------+----------------+----------------+----------------+
++ * |             seg[XENUSB_MAX_SEGMENTS_PER_REQUEST - 1]              | 144
++ * |                               data                                | 148
++ * +----------------+----------------+----------------+----------------+
++ * Bit field bit number 0 is always least significant bit, undefined bits must
++ * be zero.
++ *   id - uint16_t, guest supplied value
++ *   nr_buffer_segs - uint16_t, number of segment entries in seg[] array
++ *   pipe - uint32_t, bit field with multiple information:
++ *     bits 0-4: port request to send to
++ *     bit 5: unlink request with specified id (cancel I/O) if set (see below)
++ *     bit 7: direction (1 = read from device)
++ *     bits 8-14: device number on port
++ *     bits 15-18: endpoint of device
++ *     bits 30-31: request type: 00 = isochronous, 01 = interrupt,
++ *                               10 = control, 11 = bulk
++ *   transfer_flags - uint16_t, bit field with processing flags:
++ *     bit 0: less data than specified allowed
++ *   buffer_length - uint16_t, total length of data
++ *   request type specific data - 8 bytes, see below
++ *   seg[] - array with 8 byte elements, see below
++ *
++ * Request type specific data for isochronous request:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |            interval             |           start_frame           | 4
++ * +----------------+----------------+----------------+----------------+
++ * |       number_of_packets         |       nr_frame_desc_segs        | 8
++ * +----------------+----------------+----------------+----------------+
++ *   interval - uint16_t, time interval in msecs between frames
++ *   start_frame - uint16_t, start frame number
++ *   number_of_packets - uint16_t, number of packets to transfer
++ *   nr_frame_desc_segs - uint16_t number of seg[] frame descriptors elements
++ *
++ * Request type specific data for interrupt request:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |            interval             |                0                | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                                 0                                 | 8
++ * +----------------+----------------+----------------+----------------+
++ *   interval - uint16_t, time in msecs until interruption
++ *
++ * Request type specific data for control request:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |                      data of setup packet                         | 4
++ * |                                                                   | 8
++ * +----------------+----------------+----------------+----------------+
++ *
++ * Request type specific data for bulk request:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |                                 0                                 | 4
++ * |                                 0                                 | 8
++ * +----------------+----------------+----------------+----------------+
++ *
++ * Request type specific data for unlink request:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |           unlink_id             |                0                | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                                 0                                 | 8
++ * +----------------+----------------+----------------+----------------+
++ *   unlink_id - uint16_t, request id of request to terminate
++ *
++ * seg[] array element layout:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |                               gref                                | 4
++ * +----------------+----------------+----------------+----------------+
++ * |             offset              |             length              | 8
++ * +----------------+----------------+----------------+----------------+
++ *   gref - uint32_t, grant reference of buffer page
++ *   offset - uint16_t, offset of buffer start in page
++ *   length - uint16_t, length of buffer in page
++ *
++ *-------------------------- USB I/O response --------------------------------
++ *
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                |          start_frame            | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                              status                               | 8
++ * +----------------+----------------+----------------+----------------+
++ * |                          actual_length                            | 12
++ * +----------------+----------------+----------------+----------------+
++ * |                           error_count                             | 16
++ * +----------------+----------------+----------------+----------------+
++ *   id - uint16_t, id of the request this response belongs to
++ *   start_frame - uint16_t, start_frame this response (iso requests only)
++ *   status - int32_t, XENUSB_STATUS_* (non-iso requests)
++ *   actual_length - uint32_t, actual size of data transferred
++ *   error_count - uint32_t, number of errors (iso requests)
++ */
++
++enum xenusb_spec_version {
++	XENUSB_VER_UNKNOWN = 0,
++	XENUSB_VER_USB11,
++	XENUSB_VER_USB20,
++	XENUSB_VER_USB30,	/* not supported yet */
++};
++
++/*
++ *  USB pipe in xenusb_request
++ *
++ *  - port number:      bits 0-4
++ *                              (USB_MAXCHILDREN is 31)
++ *
++ *  - operation flag:   bit 5
++ *                              (0 = submit urb,
++ *                               1 = unlink urb)
++ *
++ *  - direction:        bit 7
++ *                              (0 = Host-to-Device [Out]
++ *                               1 = Device-to-Host [In])
++ *
++ *  - device address:   bits 8-14
++ *
++ *  - endpoint:         bits 15-18
++ *
++ *  - pipe type:        bits 30-31
++ *                              (00 = isochronous, 01 = interrupt,
++ *                               10 = control, 11 = bulk)
++ */
++
++#define XENUSB_PIPE_PORT_MASK	0x0000001f
++#define XENUSB_PIPE_UNLINK	0x00000020
++#define XENUSB_PIPE_DIR		0x00000080
++#define XENUSB_PIPE_DEV_MASK	0x0000007f
++#define XENUSB_PIPE_DEV_SHIFT	8
++#define XENUSB_PIPE_EP_MASK	0x0000000f
++#define XENUSB_PIPE_EP_SHIFT	15
++#define XENUSB_PIPE_TYPE_MASK	0x00000003
++#define XENUSB_PIPE_TYPE_SHIFT	30
++#define XENUSB_PIPE_TYPE_ISOC	0
++#define XENUSB_PIPE_TYPE_INT	1
++#define XENUSB_PIPE_TYPE_CTRL	2
++#define XENUSB_PIPE_TYPE_BULK	3
++
++#define xenusb_pipeportnum(pipe)		((pipe) & XENUSB_PIPE_PORT_MASK)
++#define xenusb_setportnum_pipe(pipe, portnum)	((pipe) | (portnum))
++
++#define xenusb_pipeunlink(pipe)			((pipe) & XENUSB_PIPE_UNLINK)
++#define xenusb_pipesubmit(pipe)			(!xenusb_pipeunlink(pipe))
++#define xenusb_setunlink_pipe(pipe)		((pipe) | XENUSB_PIPE_UNLINK)
++
++#define xenusb_pipein(pipe)			((pipe) & XENUSB_PIPE_DIR)
++#define xenusb_pipeout(pipe)			(!xenusb_pipein(pipe))
++
++#define xenusb_pipedevice(pipe)			\
++	(((pipe) >> XENUSB_PIPE_DEV_SHIFT) & XENUSB_PIPE_DEV_MASK)
++
++#define xenusb_pipeendpoint(pipe)		\
++	(((pipe) >> XENUSB_PIPE_EP_SHIFT) & XENUSB_PIPE_EP_MASK)
++
++#define xenusb_pipetype(pipe)			\
++	(((pipe) >> XENUSB_PIPE_TYPE_SHIFT) & XENUSB_PIPE_TYPE_MASK)
++#define xenusb_pipeisoc(pipe)	(xenusb_pipetype(pipe) == XENUSB_PIPE_TYPE_ISOC)
++#define xenusb_pipeint(pipe)	(xenusb_pipetype(pipe) == XENUSB_PIPE_TYPE_INT)
++#define xenusb_pipectrl(pipe)	(xenusb_pipetype(pipe) == XENUSB_PIPE_TYPE_CTRL)
++#define xenusb_pipebulk(pipe)	(xenusb_pipetype(pipe) == XENUSB_PIPE_TYPE_BULK)
++
++#define XENUSB_MAX_SEGMENTS_PER_REQUEST (16)
++#define XENUSB_MAX_PORTNR		31
++#define XENUSB_RING_SIZE		4096
++
++/*
++ * RING for transferring urbs.
++ */
++struct xenusb_request_segment {
++	grant_ref_t gref;
++	uint16_t offset;
++	uint16_t length;
++};
++
++struct xenusb_urb_request {
++	uint16_t id;			/* request id */
++	uint16_t nr_buffer_segs;	/* number of urb->transfer_buffer segments */
++
++	/* basic urb parameter */
++	uint32_t pipe;
++	uint16_t transfer_flags;
++#define XENUSB_SHORT_NOT_OK	0x0001
++	uint16_t buffer_length;
++	union {
++		uint8_t ctrl[8];	/* setup_packet (Ctrl) */
++
++		struct {
++			uint16_t interval;	/* maximum (1024*8) in usb core */
++			uint16_t start_frame;	/* start frame */
++			uint16_t number_of_packets;	/* number of ISO packet */
++			uint16_t nr_frame_desc_segs;	/* number of iso_frame_desc segments */
++		} isoc;
++
++		struct {
++			uint16_t interval;	/* maximum (1024*8) in usb core */
++			uint16_t pad[3];
++		} intr;
++
++		struct {
++			uint16_t unlink_id;	/* unlink request id */
++			uint16_t pad[3];
++		} unlink;
++
++	} u;
++
++	/* urb data segments */
++	struct xenusb_request_segment seg[XENUSB_MAX_SEGMENTS_PER_REQUEST];
++};
++
++struct xenusb_urb_response {
++	uint16_t id;		/* request id */
++	uint16_t start_frame;	/* start frame (ISO) */
++	int32_t status;		/* status (non-ISO) */
++#define XENUSB_STATUS_OK	0
++#define XENUSB_STATUS_NODEV	(-19)
++#define XENUSB_STATUS_INVAL	(-22)
++#define XENUSB_STATUS_STALL	(-32)
++#define XENUSB_STATUS_IOERROR	(-71)
++#define XENUSB_STATUS_BABBLE	(-75)
++#define XENUSB_STATUS_SHUTDOWN	(-108)
++	int32_t actual_length;	/* actual transfer length */
++	int32_t error_count;	/* number of ISO errors */
++};
++
++DEFINE_RING_TYPES(xenusb_urb, struct xenusb_urb_request, struct xenusb_urb_response);
++#define XENUSB_URB_RING_SIZE __CONST_RING_SIZE(xenusb_urb, XENUSB_RING_SIZE)
++
++/*
++ * RING for notifying connect/disconnect events to frontend
++ */
++struct xenusb_conn_request {
++	uint16_t id;
++};
++
++struct xenusb_conn_response {
++	uint16_t id;		/* request id */
++	uint8_t portnum;	/* port number */
++	uint8_t speed;		/* usb_device_speed */
++#define XENUSB_SPEED_NONE	0
++#define XENUSB_SPEED_LOW	1
++#define XENUSB_SPEED_FULL	2
++#define XENUSB_SPEED_HIGH	3
++};
++
++DEFINE_RING_TYPES(xenusb_conn, struct xenusb_conn_request, struct xenusb_conn_response);
++#define XENUSB_CONN_RING_SIZE __CONST_RING_SIZE(xenusb_conn, XENUSB_RING_SIZE)
++
++#endif /* __XEN_PUBLIC_IO_USBIF_H__ */
+-- 
+2.26.2
+
 
