@@ -2,38 +2,70 @@ Return-Path: <SRS0=Xj29=PB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 63523C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 09:27:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CA4FC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 09:36:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 12AD860EB4
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 09:27:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 12AD860EB4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id E05C360FDA
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 09:36:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E05C360FDA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.208118.364148 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.208127.364158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maaXj-0000CE-FH; Wed, 13 Oct 2021 09:27:23 +0000
+	id 1maagK-0001g7-94; Wed, 13 Oct 2021 09:36:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 208118.364148; Wed, 13 Oct 2021 09:27:23 +0000
+Received: by outflank-mailman (output) from mailman id 208127.364158; Wed, 13 Oct 2021 09:36:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maaXj-0000C7-C2; Wed, 13 Oct 2021 09:27:23 +0000
-Received: by outflank-mailman (input) for mailman id 208118;
- Wed, 13 Oct 2021 09:27:22 +0000
+	id 1maagK-0001fr-60; Wed, 13 Oct 2021 09:36:16 +0000
+Received: by outflank-mailman (input) for mailman id 208127;
+ Wed, 13 Oct 2021 09:36:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Wjg9=PB=gmail.com=andy.shevchenko@srs-us1.protection.inumbo.net>)
- id 1maaXh-0000Bz-SG
- for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 09:27:22 +0000
-Received: from mail-ed1-x532.google.com (unknown [2a00:1450:4864:20::532])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c8c60941-ca9a-48df-9e6a-b2144e60353a;
- Wed, 13 Oct 2021 09:27:20 +0000 (UTC)
-Received: by mail-ed1-x532.google.com with SMTP id d3so7527321edp.3
- for <xen-devel@lists.xenproject.org>; Wed, 13 Oct 2021 02:27:20 -0700 (PDT)
+ <SRS0=0M7b=PB=arm.com=Bertrand.Marquis@srs-us1.protection.inumbo.net>)
+ id 1maagJ-0001fl-Fs
+ for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 09:36:15 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (unknown
+ [40.107.20.65]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 275cf0a6-3c67-404f-b862-6c84931855ce;
+ Wed, 13 Oct 2021 09:36:13 +0000 (UTC)
+Received: from AM6P193CA0098.EURP193.PROD.OUTLOOK.COM (2603:10a6:209:88::39)
+ by AM5PR0802MB2484.eurprd08.prod.outlook.com (2603:10a6:203:a1::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.15; Wed, 13 Oct
+ 2021 09:36:10 +0000
+Received: from VE1EUR03FT036.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:209:88:cafe::1d) by AM6P193CA0098.outlook.office365.com
+ (2603:10a6:209:88::39) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.14 via Frontend
+ Transport; Wed, 13 Oct 2021 09:36:10 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT036.mail.protection.outlook.com (10.152.19.204) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4608.15 via Frontend Transport; Wed, 13 Oct 2021 09:36:09 +0000
+Received: ("Tessian outbound f1898412aff1:v103");
+ Wed, 13 Oct 2021 09:36:09 +0000
+Received: from 7fe779da9699.2
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ D78291B1-78A8-4E0C-8C38-9797000B114C.1; 
+ Wed, 13 Oct 2021 09:36:03 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 7fe779da9699.2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Wed, 13 Oct 2021 09:36:03 +0000
+Received: from DB6PR0801MB2024.eurprd08.prod.outlook.com (2603:10a6:4:74::9)
+ by DB8PR08MB5498.eurprd08.prod.outlook.com (2603:10a6:10:11c::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4608.15; Wed, 13 Oct
+ 2021 09:36:01 +0000
+Received: from DB6PR0801MB2024.eurprd08.prod.outlook.com
+ ([fe80::45c9:9096:a15b:6955]) by DB6PR0801MB2024.eurprd08.prod.outlook.com
+ ([fe80::45c9:9096:a15b:6955%4]) with mapi id 15.20.4587.026; Wed, 13 Oct 2021
+ 09:36:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,254 +77,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8c60941-ca9a-48df-9e6a-b2144e60353a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=+/MfPZS60YJ0eap0AJdMs6gge+XO+BZUvon0pBTzNGA=;
-        b=evc4kDT+QZNhO898nkNWsOvYd5uoHISP2WxjXfUrXPc/LAvzY9eu3qYsrzHLMiVRP3
-         7ek8KrGpW83pP3+71f6NoTqJUNew57wgLSdZESolUuO3w3SjswV4oNuZrRCsx5d2Sz6Z
-         U6Dil/exw/Z01VwoZLKDTI9+cXYT6HoMhvbPnOyg97B0PkHUENz49VLf5qJ3twBM3fy6
-         bHXGjIYLA3Q6jVCBIp04R0UFvkX24frr6ijNGP3vuZmaos7c/PDqm98vd8l9QZ2VLZ00
-         0EBJxe8ZaQK4AqNo/Rk1lDSww7yrEMjrcnUEwQvCtD2OBAhLhOYcZrSIMXdkiq7GrIG/
-         lN/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=+/MfPZS60YJ0eap0AJdMs6gge+XO+BZUvon0pBTzNGA=;
-        b=Sfheb1MaaBRsv0863w8LCd+bJ52lJH6VDUGZUfPHwMNdFTGozpbVYrjYIWKYIvZDhR
-         yPAyGlvlLD5RxxK3/ngavxl3ansT+eZq9cAPOV87yfOIOMf7XHGyj7Fy1LvQwvUb29HD
-         o+sVh5Poi7GyckkwAFzTBngDNGOqhJ6Ke37hJPj6x8oJ+vr48FYm2eK498Bg6pIDFvUn
-         z5vVHtlsW4mM78sK+PWNs1YTkUbij/LD38vXTW9sAInl7mW1T+nt3Lu4BZOHFKxi0Z3+
-         0Pb6sJ5BW0OgdwR3+/r2zqI4J12sOFa2kYVK9SZwBq49Mhwl7KwIHEC8UVZ3rlNX+61v
-         8/Ag==
-X-Gm-Message-State: AOAM5311ge0vUf+gy0tc+hGrgF6Xz8eKO8NKELUinrniK462hp9P76qt
-	sFwq41GcWQDEokZEVfZQRmvMc/JMW+F4G6FOEYo=
-X-Google-Smtp-Source: ABdhPJzL0SqFZyZBLTfBNcE8CpMsywyY4boERpEcXyUfc9yUq7Z2mLOKk/hnon0PQ/WXXVk02NgEbEHqrWvW2H64g2s=
-X-Received: by 2002:a17:907:7601:: with SMTP id jx1mr40092015ejc.69.1634117238956;
- Wed, 13 Oct 2021 02:27:18 -0700 (PDT)
+X-Inumbo-ID: 275cf0a6-3c67-404f-b862-6c84931855ce
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=raRbqoRtl/8bp6k7UArUhXheVAvcHhHyfZT2zcMkpak=;
+ b=qa98AzczCJPCrGJQxTGRHoXSeeN0Eqb8f3LfoQI96BGvS6W7wYgdXEj/pI1OyGMmLnT6ap3VLF0CSN7lkWrTMZ1U0H7AQ+N5CpVj9rnaAMSTRcutxJqPfAG6pKgFB79nWHIZ7IE1fZ8LnATwWbaeb44C7qE6sDZEyAH5Dx05ecE=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.xenproject.org; dkim=pass (signature was
+ verified) header.d=armh.onmicrosoft.com;lists.xenproject.org; dmarc=pass
+ action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 8e4f8158cbb334bb
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ME+fXWM+d2UKijXHSJjmcFCr8cNVgrgkBRbbrSD5YncTXemca1YBxx7wy7sMB91OGapB7Bur2j855cqIKvHhrKlNrfDYQqWzLnmPRBqRfEM+40KpiMrFx17JoLP9hl5x8D5L3e3pqb7IT1lp5HuZLPSTUrNt3UDoSNc0lPXLovQXamMgl14/6BITyOyI+R4I8H4eo8I+rIT71197uVVKfUiQnyWgH8wpidrg2n5aJrrttLkm6SihZynf+cYa5z7dsh6KC61FispjMx04YopcNJH+qhVQVS6E4bA+ceGr+6e+PFIXIS6UG20RqrV29MoOqNYoITlFM8I0grubZMuL6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=raRbqoRtl/8bp6k7UArUhXheVAvcHhHyfZT2zcMkpak=;
+ b=FlDQav6QF/Pcw51AVz0vRXRQ0xOV+NKJ/4HWKFzATzKMAgWOtRsmzCboTzCtAJs3o8r4yXQ3a29+SxF5yPrwCZHCPf7agVdUCpwX6/UlLJviED4OSz7NPRvz6mNiclQefjtvD2ueYE/rsfTFWSZQ9lN/O8N8mnW3OxOFA2kTMOh1//fkjV/MsSgbIfpeDswSDKTL41hVqm3XNBQAO1PFgR0jqH9s1VCVSp+VTWW6dAX6COMABZrj2Vaf1bIulDONjkJBgKRApxZ3S1cqm8Jp/41YnYzg/8roMoIf4bcEa5fLsiNUPweo2gig3yk5HSzQlIWha89J8c9dG8JRzkgR/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=raRbqoRtl/8bp6k7UArUhXheVAvcHhHyfZT2zcMkpak=;
+ b=qa98AzczCJPCrGJQxTGRHoXSeeN0Eqb8f3LfoQI96BGvS6W7wYgdXEj/pI1OyGMmLnT6ap3VLF0CSN7lkWrTMZ1U0H7AQ+N5CpVj9rnaAMSTRcutxJqPfAG6pKgFB79nWHIZ7IE1fZ8LnATwWbaeb44C7qE6sDZEyAH5Dx05ecE=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
+CC: Michal Orzel <Michal.Orzel@arm.com>, Rahul Singh <Rahul.Singh@arm.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andre
+ Przywara <Andre.Przywara@arm.com>, Christian Lindig
+	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Ian Jackson
+	<iwj@xenproject.org>, Wei Liu <wl@xen.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan
+ Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v5 07/11] xen/domctl: Introduce XEN_DOMCTL_CDF_vpci flag
+Thread-Topic: [PATCH v5 07/11] xen/domctl: Introduce XEN_DOMCTL_CDF_vpci flag
+Thread-Index: AQHXutmFlM61oLukkkqK7dSQSsVJ1qvNjrkAgAGmMoCAAW6PgIAAEkkA
+Date: Wed, 13 Oct 2021 09:36:01 +0000
+Message-ID: <8F9D6B9C-58CB-4000-995A-95517EE72A3B@arm.com>
+References: <cover.1633540842.git.rahul.singh@arm.com>
+ <20d5b9d6a0d01a7b90711d28cbefb5701a88b438.1633540842.git.rahul.singh@arm.com>
+ <YWQDguvmf/O4rDIs@MacBook-Air-de-Roger.local>
+ <9217a6b8-fc53-a049-7cd3-7458b574424b@arm.com>
+ <YWaZKX44IOfIBtX6@MacBook-Air-de-Roger.local>
+In-Reply-To: <YWaZKX44IOfIBtX6@MacBook-Air-de-Roger.local>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3654.120.0.1.13)
+Authentication-Results-Original: citrix.com; dkim=none (message not signed)
+ header.d=none;citrix.com; dmarc=none action=none header.from=arm.com;
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-Correlation-Id: 66fd4687-db23-4e51-2506-08d98e2ce3ac
+x-ms-traffictypediagnostic: DB8PR08MB5498:|AM5PR0802MB2484:
+x-ms-exchange-transport-forked: True
+X-Microsoft-Antispam-PRVS:
+	<AM5PR0802MB248429723BD137459C4D54DF9DB79@AM5PR0802MB2484.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ F7g6wkn4G0EJSYjAHyDYbYSGJQj9JhvG9Dd5ZIvBwEGXzDcSYK7CIBzoryGD9/i2nC7BoJLa25prux/a2XGIQHzHabo6dY/Hcfr+84tBvUZs74JpSHDMrEadK37lMQjcX3EWxHqwLA664c/Zvv80fI7MoT1kApNOQCj3jzTva81FD6HhABSCOY4p3k/2QZJf4EtrV1V9efu3504UVik4SRuUZ5BCoxtlAkskt2XStl1Ugfs1qSO1E6keSg5aznVTVyYW9AFyE+ws1RC1fDA9iR1Y0HeeDDR3z4NSpYvfSc1SeXiAwe4oeS3fXS/twWKWA+M+Ff5mpgyRR2r1rnAjJhp1R3doY2A5LRwpHetk+xDAMwPCWgqKwQlDwjlsjwkQ60WBTpsI5vNlGbntemoqJfvJ7h1tczjYHWVUHc+dzZmn/KT9snns7YyDfhfWeVYYxwLtQCqymIM+kXEaS3jUXjQFua6o1TTzlKisakcHm39MVBveEBUvl2Ck5LDSIaJcoiNX+gggvM9K4c0OfU7WneOUHqzpS6AVZBEpNF3ZRLLRSEYD97c7wKmKhRvTM/WXNQ9bkZkTqLiQk2J4IAHlqxLLUeAlMfkK+ZDIJdSQyb9Vb6oeOFJLGqZmM0mUEq3nySc6v28cB+tdBKtIzQy/DnarIWHUlXE6SAjCbyDhNpJMDeNEL6qqVoxTiKVYhOTk4MBrz2LLsfIxmMJnpnXln7Gs9Ot2jAejc6z1ul+6z10PaEGtNIg6qCBNZmHT1/i6
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB6PR0801MB2024.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(66446008)(66946007)(64756008)(66556008)(66476007)(8676002)(53546011)(508600001)(91956017)(6486002)(36756003)(2906002)(83380400001)(122000001)(38100700002)(4326008)(6916009)(71200400001)(5660300002)(76116006)(33656002)(316002)(8936002)(54906003)(26005)(7416002)(6506007)(38070700005)(186003)(86362001)(2616005)(6512007)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <ECCCBE60E4886B4F811E862C4DF8CDE9@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20211004125935.2300113-1-u.kleine-koenig@pengutronix.de> <20211012233212.GA1806189@bhelgaas>
-In-Reply-To: <20211012233212.GA1806189@bhelgaas>
-From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Wed, 13 Oct 2021 12:26:42 +0300
-Message-ID: <CAHp75Vd0uYEdfB0XaQuUV34V91qJdHR5ARku1hX_TCJLJHEjxQ@mail.gmail.com>
-Subject: Re: [PATCH v6 00/11] PCI: Drop duplicated tracking of a pci_dev's
- bound driver
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>, 
-	linux-pci <linux-pci@vger.kernel.org>, Sascha Hauer <kernel@pengutronix.de>, 
-	Alexander Duyck <alexanderduyck@fb.com>, 
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Andrew Donnellan <ajd@linux.ibm.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Bjorn Helgaas <bhelgaas@google.com>, 
-	Borislav Petkov <bp@alien8.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	"David S. Miller" <davem@davemloft.net>, Fiona Trahe <fiona.trahe@intel.com>, 
-	Frederic Barrat <fbarrat@linux.ibm.com>, Giovanni Cabiddu <giovanni.cabiddu@intel.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"H. Peter Anvin" <hpa@zytor.com>, Ido Schimmel <idosch@nvidia.com>, Ingo Molnar <mingo@redhat.com>, 
-	Jack Xu <jack.xu@intel.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Jesse Brandeburg <jesse.brandeburg@intel.com>, Jiri Olsa <jolsa@redhat.com>, 
-	Jiri Pirko <jiri@nvidia.com>, Juergen Gross <jgross@suse.com>, 
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Marco Chiappero <marco.chiappero@intel.com>, 
-	Mark Rutland <mark.rutland@arm.com>, Mathias Nyman <mathias.nyman@intel.com>, 
-	Michael Buesch <m@bues.ch>, Michael Ellerman <mpe@ellerman.id.au>, Namhyung Kim <namhyung@kernel.org>, 
-	"Oliver O'Halloran" <oohall@gmail.com>, Paul Mackerras <paulus@samba.org>, 
-	Peter Zijlstra <peterz@infradead.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, 
-	Russell Currey <ruscur@russell.cc>, Salil Mehta <salil.mehta@huawei.com>, 
-	Sathya Prakash <sathya.prakash@broadcom.com>, Simon Horman <simon.horman@corigine.com>, 
-	Sreekanth Reddy <sreekanth.reddy@broadcom.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>, 
-	Taras Chornyi <tchornyi@marvell.com>, Thomas Gleixner <tglx@linutronix.de>, 
-	Tomaszx Kowalik <tomaszx.kowalik@intel.com>, Vadym Kochan <vkochan@marvell.com>, 
-	Wojciech Ziemba <wojciech.ziemba@intel.com>, Yisen Zhuang <yisen.zhuang@huawei.com>, 
-	Zhou Wang <wangzhou1@hisilicon.com>, linux-crypto <linux-crypto@vger.kernel.org>, 
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, linux-perf-users@vger.kernel.org, 
-	"open list:LINUX FOR POWERPC PA SEMI PWRFICIENT" <linuxppc-dev@lists.ozlabs.org>, linux-scsi <linux-scsi@vger.kernel.org>, 
-	USB <linux-usb@vger.kernel.org>, 
-	"open list:TI WILINK WIRELES..." <linux-wireless@vger.kernel.org>, MPT-FusionLinux.pdl@broadcom.com, 
-	netdev <netdev@vger.kernel.org>, oss-drivers@corigine.com, qat-linux@intel.com, 
-	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5498
+Original-Authentication-Results: citrix.com; dkim=none (message not signed)
+ header.d=none;citrix.com; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ VE1EUR03FT036.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	fb16cd06-d26e-4481-43a7-08d98e2cded0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	Cij4UHeoWEFvHx+6FJvIzTMkG5Qk4jeGo8SGqa2r+a4EqXejIYP56S26RC97NDcr1cktIjLZYRcbqTNpCjtOY0mxqNQ5i8WqTJHYdYN8L6VJYQtlBF+dp1He1cmV0SG+JkEj4dmOEq0D1Pey0M7xZgZXQZsCN9ifedaq0SgEZCJCQBKIdIeInlcMoGhRTtq89HoW4wJIgNdUQgwPleFb5LdkVz3e4DzjiEWhW0VU6pu+IhV0GIwXYpUI3avaRIJyiGLvAYJXGKNmGaH9PaCDg9HOuKHI1aeNDkLrYq42rwN64wKRa/AekHsqPLrEhnN/TtaBXLuUr0U7L6mhQVrqxbMoMKZBu7MREUEP89++eqpwE5mLc9wxOCHWsRQOzRHwUn7Rijs5KkidiMMUkZ60ScPNRY+4+h1p0mtsHjoUT3bk/CrcAuaQqxGsH1RylD6j00DROMG+llubMo44qn/XOBJPL5N2CVlP8jmtt4tJvlGe3ZAK29bcjIouFdK2TcfAOVuf+O42Ll2+jPa6hC8jvq7mrBnysieOHgBjC7GZ9zfdDF26E2Am9NjL/8dGJWIebUCW9i9+oa8VFOvIbEALMkDRsaCzZrr5MJy09hAhL2oU8ZhglX8Hx+w7LlgwPu10cxRFSZAYrtbt5aKe0CFaq2Y1qWdt94IjH+6oDgyIHm9vgkguiNZvWiQbuPZzpCqazXZUBg4i5PBgBY1yqsyVMA==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(82310400003)(316002)(6862004)(8936002)(5660300002)(81166007)(6512007)(70206006)(2616005)(356005)(26005)(4326008)(83380400001)(186003)(107886003)(54906003)(36756003)(508600001)(47076005)(8676002)(336012)(33656002)(6486002)(86362001)(6506007)(2906002)(70586007)(36860700001)(53546011);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2021 09:36:09.7951
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66fd4687-db23-4e51-2506-08d98e2ce3ac
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	VE1EUR03FT036.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM5PR0802MB2484
 
-On Wed, Oct 13, 2021 at 2:33 AM Bjorn Helgaas <helgaas@kernel.org> wrote:
-> On Mon, Oct 04, 2021 at 02:59:24PM +0200, Uwe Kleine-K=C3=B6nig wrote:
-
-> I split some of the bigger patches apart so they only touched one
-> driver or subsystem at a time.  I also updated to_pci_driver() so it
-> returns NULL when given NULL, which makes some of the validations
-> quite a bit simpler, especially in the PM code in pci-driver.c.
-
-It's a bit unusual. Other to_*_dev() are not NULL-aware IIRC.
-
-Below are some comments as well.
-
-...
-
->  static bool match_id(struct pci_dev *pdev, unsigned short vendor, unsign=
-ed short device)
->  {
-> +       struct pci_driver *drv =3D to_pci_driver(pdev->dev.driver);
->         const struct pci_device_id *id;
->
->         if (pdev->vendor =3D=3D vendor && pdev->device =3D=3D device)
->                 return true;
-
-> +       for (id =3D drv ? drv->id_table : NULL; id && id->vendor; id++)
-> +               if (id->vendor =3D=3D vendor && id->device =3D=3D device)
-
-> +                       break;
-
-return true;
-
->         return id && id->vendor;
-
-return false;
-
->  }
-
-...
-
-> +                       afu_result =3D err_handler->error_detected(afu_de=
-v,
-> +                                                                state);
-
-One line?
-
-...
-
->         device_lock(&vf_dev->dev);
-> -       if (vf_dev->dev.driver) {
-> +       if (to_pci_driver(vf_dev->dev.driver)) {
-
-Hmm...
-
-...
-
-> +               if (!pci_dev->state_saved && pci_dev->current_state !=3D =
-PCI_D0
-
-> +                   && pci_dev->current_state !=3D PCI_UNKNOWN) {
-
-Can we keep && on the previous line?
-
-> +                       pci_WARN_ONCE(pci_dev, pci_dev->current_state !=
-=3D prev,
-> +                                     "PCI PM: Device state not saved by =
-%pS\n",
-> +                                     drv->suspend);
->                 }
-
-...
-
-> +       return drv && drv->resume ?
-> +                       drv->resume(pci_dev) : pci_pm_reenable_device(pci=
-_dev);
-
-One line?
-
-...
-
-> +       struct pci_driver *drv =3D to_pci_driver(dev->dev.driver);
->         const struct pci_error_handlers *err_handler =3D
-> -                       dev->dev.driver ? to_pci_driver(dev->dev.driver)-=
->err_handler : NULL;
-> +                       drv ? drv->err_handler : NULL;
-
-Isn't dev->driver =3D=3D to_pci_driver(dev->dev.driver)?
-
-...
-
-> +       struct pci_driver *drv =3D to_pci_driver(dev->dev.driver);
->         const struct pci_error_handlers *err_handler =3D
-> -                       dev->dev.driver ? to_pci_driver(dev->dev.driver)-=
->err_handler : NULL;
-> +                       drv ? drv->err_handler : NULL;
-
-Ditto.
-
-...
-
->         device_lock(&dev->dev);
-> +       pdrv =3D to_pci_driver(dev->dev.driver);
->         if (!pci_dev_set_io_state(dev, state) ||
-> -               !dev->dev.driver ||
-> -               !(pdrv =3D to_pci_driver(dev->dev.driver))->err_handler |=
-|
-
-> +               !pdrv ||
-> +               !pdrv->err_handler ||
-
-One line now?
-
->                 !pdrv->err_handler->error_detected) {
-
-Or this and the previous line?
-
-...
-
-> +       pdrv =3D to_pci_driver(dev->dev.driver);
-> +       if (!pdrv ||
-> +               !pdrv->err_handler ||
->                 !pdrv->err_handler->mmio_enabled)
->                 goto out;
-
-Ditto.
-
-...
-
-> +       pdrv =3D to_pci_driver(dev->dev.driver);
-> +       if (!pdrv ||
-> +               !pdrv->err_handler ||
->                 !pdrv->err_handler->slot_reset)
->                 goto out;
-
-Ditto.
-
-...
-
->         if (!pci_dev_set_io_state(dev, pci_channel_io_normal) ||
-> -               !dev->dev.driver ||
-> -               !(pdrv =3D to_pci_driver(dev->dev.driver))->err_handler |=
-|
-> +               !pdrv ||
-> +               !pdrv->err_handler ||
->                 !pdrv->err_handler->resume)
->                 goto out;
-
-Ditto.
-
-> -       result =3D PCI_ERS_RESULT_NONE;
->
->         pcidev =3D pci_get_domain_bus_and_slot(domain, bus, devfn);
->         if (!pcidev || !pcidev->dev.driver) {
->                 dev_err(&pdev->xdev->dev, "device or AER driver is NULL\n=
-");
->                 pci_dev_put(pcidev);
-> -               return result;
-> +               return PCI_ERS_RESULT_NONE;
->         }
->         pdrv =3D to_pci_driver(pcidev->dev.driver);
-
-What about splitting the conditional to two with clear error message
-in each and use pci_err() in the second one?
-
-...
-
->                 default:
->                         dev_err(&pdev->xdev->dev,
-> -                               "bad request in aer recovery "
-> -                               "operation!\n");
-> +                               "bad request in AER recovery operation!\n=
-");
-
-Stray change? Or is it in a separate patch in your tree?
-
---=20
-With Best Regards,
-Andy Shevchenko
+SGkgUm9nZXIsDQoNCj4gT24gMTMgT2N0IDIwMjEsIGF0IDA5OjMwLCBSb2dlciBQYXUgTW9ubsOp
+IDxyb2dlci5wYXVAY2l0cml4LmNvbT4gd3JvdGU6DQo+IA0KPiBPbiBUdWUsIE9jdCAxMiwgMjAy
+MSBhdCAxMjozODozNVBNICswMjAwLCBNaWNoYWwgT3J6ZWwgd3JvdGU6DQo+PiBIaSBSb2dlciwN
+Cj4+IA0KPj4gT24gMTEuMTAuMjAyMSAxMToyNywgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToNCj4+
+PiBPbiBXZWQsIE9jdCAwNiwgMjAyMSBhdCAwNjo0MDozM1BNICswMTAwLCBSYWh1bCBTaW5naCB3
+cm90ZToNCj4+Pj4gSW50cm9kdWNlIFhFTl9ET01DVExfQ0RGX3ZwY2kgZmxhZyB0byBlbmFibGUg
+VlBDSSBzdXBwb3J0IGluIFhFTi4NCj4+Pj4gUmVqZWN0IHRoZSB1c2Ugb2YgdGhpcyBuZXcgZmxh
+ZyBmb3IgeDg2IGFzIFZQQ0kgaXMgbm90IHN1cHBvcnRlZCBmb3INCj4+Pj4gRE9NVSBndWVzdHMg
+Zm9yIHg4Ni4NCj4+PiANCj4+PiBJIGRvbid0IGxpa2UgdGhpcyBhcHByb2FjaCwgWEVOX0RPTUNU
+TF9DREZfdnBjaSBzaG91bGQgYmUgc2V0IGZvciB4ODYNCj4+PiBQVkggZG9tMCwgbGlrZSB3ZSBk
+byBmb3IgYW55IG90aGVyIENERiBmbGFncyB3aGVuIFhlbiBidWlsZHMgZG9tMC4NCj4+PiANCj4+
+PiBUaGluZ3MgbGlrZSBQVkggdnMgUFYgZ2V0IHRyYW5zbGF0ZWQgaW50byBDREYgZmxhZ3MgYnkg
+Y3JlYXRlX2RvbTAsDQo+Pj4gYW5kIHByb2Nlc3NlZCBub3JtYWxseSBieSB0aGUgc2FuaXRpc2Vf
+ZG9tYWluX2NvbmZpZyBsb2dpYywgdlBDSQ0KPj4+IHNob3VsZCBiZSBoYW5kbGVkIHRoYXQgd2F5
+Lg0KPj4+IA0KPj4+IERvIHlvdSB0aGluayB5b3UgY291bGQgc2VlIGFib3V0IGZpeGluZyB0aGlz
+Pw0KPj4+IA0KPj4+IFRoYW5rcywgUm9nZXIuDQo+Pj4gDQo+PiANCj4+IEkgaGF2ZSBvbmUgcXVl
+c3Rpb24gYWJvdXQgdGhpcyBmaXguDQo+PiBJZiBJIHNldCBYRU5fRE9NQ1RMX0NERl92cGNpIGZv
+ciBkb20wIHB2aCBpbiBjcmVhdGVfZG9tMCwgdGhlbiBpbg0KPj4gc2FuaXRpc2VfZG9tYWluX2Nv
+bmZpZyBvciBhcmNoX3Nhbml0aXNlX2RvbWFpbl9jb25maWcgSSBoYXZlIG5vDQo+PiBrbm93bGVk
+Z2Ugb24gd2hldGhlciBJIGFtIGRvbTAgb3Igbm90LiBJIGNhbiBjaGVjayBpZiBJJ20gUFZIIGJ1
+dCBub3QgaWYgZG9tMC4NCj4+IFRoaXMgd291bGQgYmUgbmVlZGVkIHRvIGFkZCBhIHdhcm5pbmcg
+aWYgdGhpcyBmbGFnIGlzIHNldCBidXQgd2UgYXJlIG5vdCBkb20wIHB2aC4NCj4+IA0KPj4gQW55
+IGlkZWFzPw0KPiANCj4gSSd2ZSBqdXN0IHJlYWxpemVkIHRoaXMgaXMgbW9yZSB3cm9uZyB0aGF0
+IEkgdGhvdWdodC4gdlBDSSBpcw0KPiBzaWduYWxlZCBvbiB4ODYgaW4geGVuX2FyY2hfZG9tYWlu
+Y29uZmlnLmVtdWxhdGlvbl9mbGFncywgc28NCj4gaW50cm9kdWNpbmcgYSB0b3AgbGV2ZWwgb3B0
+aW9uIGZvciBpdCB3aXRob3V0IHJlbW92aW5nIHRoZSBhcmNoDQo+IHNwZWNpZmljIG9uZSBpcyB3
+cm9uZywgYXMgdGhlbiBvbiB4ODYgd2UgaGF2ZSBhIGR1cGxpY2F0ZWQgb3B0aW9uLg0KPiANCj4g
+VGhlbiBJJ20gYWxzbyBub3Qgc3VyZSB3aGV0aGVyIHdlIHdhbnQgdG8gbW92ZSBpdCBmcm9tDQo+
+IGVtdWxhdGlvbl9mbGFncywgaXQgc2VlbXMgbGlrZSB0aGUgbW9yZSBuYXR1cmFsIHBsYWNlIGZv
+ciBpdCB0byBsaXZlDQo+IG9uIHg4Ni4NCj4gDQo+IElmIHdlIHJlYWxseSB3YW50IHRvIG1ha2Ug
+dlBDSSBhIENERiBvcHRpb24gd2UgbXVzdCBkZWFsIHdpdGggdGhlDQo+IHJlbW92YWwgb2YgWEVO
+X1g4Nl9FTVVfVlBDSSwgb3IgZWxzZSB5b3UgY291bGQgaW50cm9kdWNlIGFuIGFyY2gNCj4gc3Bl
+Y2lmaWMgZmxhZyBmb3IgdlBDSSBvbiBBcm0uDQoNCkZpcnN0IGlzc3VlIHRoYXQgd2UgaGF2ZSBo
+ZXJlIGlzIHRoYXQgdGhlcmUgaXMgbm8gZW11bGF0aW9uX2ZsYWdzIHJpZ2h0IG5vdyBvbiBhcm0u
+DQoNClNvIEkgdGhpbmsgdGhlcmUgYXJlIDIgc29sdXRpb25zOg0KDQotIGludHJvZHVjZSBQSFlT
+Q0FQLiBUaGUgcHJvYmxlbSBoZXJlIGlzIHRoYXQgaXQgaXMgbm90IGEgcGh5c2ljYWwgY2FwYWNp
+dHkgYW5kDQpJIHRoaW5rIHRoYXQgd2lsbCBoaXQgdXMgaW4gdGhlIGZ1dHVyZSBmb3IgZXhhbXBs
+ZSBpZiB3ZSB3YW50IHRvIHVzZSB2cGNpIGZvciBWSVJUSU8NCmV2ZW4gaWYgdGhlcmUgaXMgbm90
+IHBoeXNpY2FsIFBDSSBvbiB0aGUgcGxhdGZvcm0uDQoNCi0gaW50cm9kdWNlIGFuIGVtdWxhdGlv
+biBmbGFnIG9uIGFybS4gVGhlIHByb2JsZW0gaGVyZSBpcyB0aGF0IHRoZXJlIGlzIG5vIGVtdWxh
+dGlvbg0KZmxhZyByaWdodCBub3cgb24gYXJtIHNvIGFkZGluZyB0aGlzIGZlYXR1cmUgd2lsbCBy
+ZXF1aXJlIGEgY2hhbmdlIG9mIGludGVyZmFjZSBpbg0KYXJjaC1hcm0uaCBhbmQgaW4geGVuIGRv
+bWN0bCBpbnRlcmZhY2UuIEJ1dCBpZiB3ZSBpbnRyb2R1Y2Ugb25lIG9uIEFybSwgaXQgd291bGQg
+YWxsb3cNCnRoZSB0b29scyB0byBjaGVjayBpZiBDREZfdnBjaSBjYW4gYmUgc2V0IG9yIG5vdCB3
+aGljaCB3b3VsZCBzb2x2ZSBjdXJyZW50IGlzc3Vlcy4NCg0KSSB0aGluayB0aGUgc2Vjb25kIHNv
+bHV0aW9uIGlzIHRoZSByaWdodCBvbmUgYnV0IGl0IGNhbm5vdCBiZSBkb25lIHNvIG5lYXIgZnJv
+bSB0aGUNCmZlYXR1cmUgZnJlZXplLg0KDQpUaGUgQ0RGIGZsYWcgYXMgaW50cm9kdWNlZCByaWdo
+dCBub3cgaXMgbm90IGNyZWF0aW5nIGFueSBpc3N1ZSBhbmQgd2lsbCBiZSB1c2VkIG9uY2UNCnRo
+ZSBlbXVsYXRpb24gZmxhZyB3aWxsIGJlIGludHJvZHVjZS4gV2Ugd2lsbCBiZSBhYmxlIGF0IHRo
+aXMgc3RhZ2UgdG8gc2V0IHRoaXMgcHJvcGVybHkNCmFsc28gb24geDg2IChmb3IgZG9tMCBwdmgp
+Lg0KTW9yZW92ZXIga2VlcGluZyBpdCB3aWxsIGFsbG93IHRvIGNvbnRpbnVlIHRvIG1lcmdlIHRo
+ZSByZW1haW5pbmcgcGFydCBvZiB0aGUgUENJDQpwYXNzdGhyb3VnaCB3aGljaCBhcmUgb3RoZXJ3
+aXNlIG5vdCBwb3NzaWJsZSB0byBiZSBkb25lIGFzIHRoZXkgYXJlIGRlcGVuZGVudCBvbiB0aGlz
+IGZsYWcuDQoNCkNhbiB3ZSBhZ3JlZSBvbiBrZWVwIHRoZSBET01DVExfQ0RGX3ZwY2kgZmxhZyBh
+bmQgaW50cm9kdWNlIHRoZSBlbXVsYXRpb24NCmZsYWcgb24gQXJtIGFmdGVyIDQuMTYgcmVsZWFz
+ZSA/DQoNCkNoZWVycw0KQmVydHJhbmQNCg0K
 
