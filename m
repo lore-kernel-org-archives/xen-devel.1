@@ -2,52 +2,36 @@ Return-Path: <SRS0=Xj29=PB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E94DC433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 07:52:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79E0DC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 08:03:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 16CD661039
-	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 07:52:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 16CD661039
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1FE9860C40
+	for <xen-devel@archiver.kernel.org>; Wed, 13 Oct 2021 08:03:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1FE9860C40
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.208012.364059 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.208054.364071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maZ3r-0002Hh-4y; Wed, 13 Oct 2021 07:52:27 +0000
+	id 1maZEA-0005aA-Hg; Wed, 13 Oct 2021 08:03:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 208012.364059; Wed, 13 Oct 2021 07:52:27 +0000
+Received: by outflank-mailman (output) from mailman id 208054.364071; Wed, 13 Oct 2021 08:03:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1maZ3r-0002HU-0W; Wed, 13 Oct 2021 07:52:27 +0000
-Received: by outflank-mailman (input) for mailman id 208012;
- Wed, 13 Oct 2021 07:52:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=quvz=PB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1maZ3p-0001Eb-QY
- for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 07:52:25 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7a6ba66f-2bfa-11ec-8160-12813bfff9fa;
- Wed, 13 Oct 2021 07:52:14 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id B8ED920106;
- Wed, 13 Oct 2021 07:52:13 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8558113CBE;
- Wed, 13 Oct 2021 07:52:13 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id WMt2Hy2QZmEjfwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 13 Oct 2021 07:52:13 +0000
+	id 1maZEA-0005a3-EZ; Wed, 13 Oct 2021 08:03:06 +0000
+Received: by outflank-mailman (input) for mailman id 208054;
+ Wed, 13 Oct 2021 08:03:05 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=EFKL=PB=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1maZE9-0005Zx-Gp
+ for xen-devel@lists.xenproject.org; Wed, 13 Oct 2021 08:03:05 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ed4b5c4e-63c4-4b98-979c-6bd8a53790f9;
+ Wed, 13 Oct 2021 08:03:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,1697 +43,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7a6ba66f-2bfa-11ec-8160-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1634111533; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=d/eSTT2AxRYa7ZAP4NgwwqIwkZd90o8OYMcT+I3l7bw=;
-	b=rJ7kPyyGgCYZ9KXHYvlj5ONLKDmsP9K3uXB2UJtC4brXFONql0euM4uulEPpa9nuQ1jRX9
-	rq6tXOVckqDIfgm0o313fFz9RyeYjeRtPsGz+EQl9JFOPR5tdFYhrvXx9E7cnKrjw18eyH
-	AARjqpnfuGzsYChfRZNjMiE9S9D+NlU=
-From: Juergen Gross <jgross@suse.com>
-To: linux-usb@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH v6 2/3] usb: Introduce Xen pvUSB frontend (xen hcd)
-Date: Wed, 13 Oct 2021 09:52:06 +0200
-Message-Id: <20211013075207.13910-3-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211013075207.13910-1-jgross@suse.com>
-References: <20211013075207.13910-1-jgross@suse.com>
+X-Inumbo-ID: ed4b5c4e-63c4-4b98-979c-6bd8a53790f9
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1634112183;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=zqvRV5kQKDaBPi6oqAtCKIfidDg8nH+0iqL5oatu+T8=;
+  b=P6MWkUpWQgBcjWOzprX1156SbkyrpKPFiCVyO4NpQY85aFxYXxvIcFMc
+   gGmO1b4cONAieJsRby/b4iMiziI9ryJtFvp92WlNIpwl1X8caBzRMk8Jm
+   XbW5AHno2AHGSY7cZYJ4Hps9JEDyCSaW1QmGPNeSDFZC2YulQP1Hnj117
+   Y=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: gjfcgcDmispWOpgaQAJndpeUhXIVy7SXaKZlxk+rWsurBee6+uqFcIXXkvRqbl53RALRL50y9J
+ GLM5q91j96QQ5vGe1HnNHVI9EXuE/9orzq79tlBSmyHf2Y9U9eZCCzu/2auyD3eaauKaQ4TIOX
+ MxkljK08owTi5Ir1ZBVW3TWsyXQ78hVZems7J6ePJuwQRSHa4LYKUMecLt8lBSdrFRQO+uvYx4
+ pE2Bh0vPKFlS6VlMSdX+qLGgyAKgzIMkx8LH3lRzY6VJV3sBdBmMgluC41WW8lDQuz0d320/q7
+ zy9+8foOPpl31H1qedy74Ivl
+X-SBRS: 5.1
+X-MesageID: 56941193
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:d+5ALqAAOwkIOhVW/yjlw5YqxClBgxIJ4kV8jS/XYbTApDglhDxRm
+ 2QXXWmAafjeZWf2eIh2ao60ox8OsMPUxt8wQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLOs1hxZH1c+EX550Ek7wobVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/2jOgsM984
+ ul0v5GqGCwYDojFxOUzXEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTUO5ji95lNMD2FIgepmth3XfSCvNOrZXrHvubuYYBjWxYasZmG+T8N
+ 5QeQzdVSwXbQgxDEFhOVo8dg7L97pX4W2IB8w/EzUYt2ED6ygBr3f7VKsjEZdWQTO1chEPer
+ WXDl0zpDxdfONGBxD6t9nO3mvSJjS79QJgVFrCz6rhtmlL77nMXIA0bUx28u/bRolWlR9tVJ
+ kgQ+ywvhas/7kqmSp/6RRLQiHyLpBkHQPJLDvY3rgqKz8L84hmbLngJSCZbb94rv9NwQiYlv
+ nejksn1HzVpvPuwQGiE67aPhTqoPG4eKmpqTS0OQBYB4tLjiJoulR+JRdFmeIaPh93oHXfLw
+ jaFrAA3nbBVhskOv42c+V3EmDuqqoL+Zwg5/BjMXmml4wV6Y6aof4Wtr1Pc6J59wJ2xFwfb+
+ iJewo7Hsb5IXcrleDGxrPslTbeAyOmIGgHli1N1TrIQxxGkp3+NctUFiN1hH3tBPsEBcD7vR
+ UbcvwJN+ZNeVEeXgb9Lj5GZUJtyk/CxfTjxfrWNNIAWO8kuHOOS1Hg2PRb44oz7rKQ7fUjT0
+ 7+gesGwEW1SN61jyDenLwv2+e52nn5grY8/qJaS8vhG7VZ8TCLLIVvmGAHXBgzc0E9iiF6Km
+ zq4H5HboyizqMWkPkHqHXc7dDjm10QTC5HssNBwfeWeOAdgE2xJI6aPmu95JdA/x/4JzbugE
+ pSBtqlwkwWXaZrvc1TiV5yeQOm3AcYXQYwTbETAwmpEK1B8ON3yvc/zhrM8fKU99fwL8BKHZ
+ 6JtRil0OdwWEm6v021ENfHV9dU+HDz21VPmF3f0O1AXIs8/LzElD/e5J2MDAgFVVXHp3Sb/y
+ pX9vj7mrW0rHlw4UpmNMq7zljtcfxE1wYpPYqcBGfEKEG3E+4l2MS3hyPgxJsAHMxLYwTWGk
+ Q2RBH8lSSPl+ufZKfHF2vKJqZmHCex7EhYIFmXX9+/uZyLb4nCi0clLV+PRJWLRU2b9+aODY
+ +RJzq6jbK1bzQgS64csQax2ya8e5sf0o+MIxApTA3iWPU+gDaltIyfa0JAX5LFN3LJQpSC/R
+ lmLpotBIbyMNc68SAwRKQMpY/6tz/YRnjWOv/05LF+jvH18/aadUFUUNB6J0XQPILxwOYIj4
+ OEgpM9JtFDv1kt0ao6L13kG+X6NI3oMV7QcmqsbWIK72BA2zlxiYIDHDnOk6p+4dNgRYFIhJ
+ SWZhfSeiu0ElFbCaXc6CVPEwfFZ2cYVoBlPwVIPewaJl97CiqNl1RFd621qHAFczxEB2ONvI
+ Gl7cUZyIPzWrTtvgcFCWUGqGh1AW0LFqhCglQNRmT2LVVSsW0zMMHY5aLSE800u+m5BeiRWo
+ eODw2H/XDe2JMz800Peg6K+RyAPmTCpyjD/pQ==
+IronPort-HdrOrdr: A9a23:seXg9a7yes6KY2hYhQPXwMzXdLJyesId70hD6qkXc20zTiX4rb
+ HLoB1/73TJYVkqNE3I9eruBEDiexPhHPxOj7X5VI3KNGOKhILCFuBfxLqn7zr8GzDvss5xvJ
+ 0QFpSW0eeAbmSSW/yKgjWFLw==
+X-IronPort-AV: E=Sophos;i="5.85,370,1624334400"; 
+   d="scan'208";a="56941193"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=H5CnKF1hhW21quagJEfmpcRabOLHhjVWuEFXSLHtHmTeDl7ppbik39qSPCpf5y2VPNkySMdzfbVYbdZI8GnyYmvXBuGmZRmImMpvdT7pW6zFEsCc/eRYS/PAHZ6m6EauSzQpeYfSA+/pz6QB2wppFidW9r3oxdNuuFjEGzj3l94BlCCnR/WXwdqkLy4GzGsiuSQQMdzKYPzi7vxtW04f0BgRQtCHnE2agKBOBAuM9bYetXlpe+P1vq3h/TRLAgytyKgozrcHuHwsMAHcwFFEt2137APK8n3Ltxi9xkdlIdrsprVH4IXUl2mun24/fbJFYC04ocb/CAMd4P0IID1Gnw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=E2SCPJSS9nMQfiNegwvoJ6bjoxoDS441F4wEAIsJ/2A=;
+ b=BZOQVvk4mT0xvOhedT66NUaYHD59ttAijLyzOurC9ePV0vuuuQFa+hoM7QK+oamC5AsGsjdic9OjSTKQWQUtsG6D6+ubx/9yaow10oYyawk39NUdyCGuo0rM6CE9GGVOYbh7DTO8ecL89b1vXdWC5OEwfJbrGpqTVZH6U1v0hSvuvNEoETGz3eiFBBis0N0AZPwfiWWAWdNTnVRgQoj9gzyeolxg4FizSwG94H8znPZqjqEDMhiVJTyU3K+5v1uTyKE8vdDaw1hsIPFHcMkBFl689pC5dEk+UXtAW1NBxzqmxVSXbhbgvm7/BMF2zNM9ePRUO0QD/ONS7scUedpISg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=E2SCPJSS9nMQfiNegwvoJ6bjoxoDS441F4wEAIsJ/2A=;
+ b=LIAJBofZ6DTAc+nidJFeGLbjt1N2OEPGVexoq9SQA/1v6fQKJ3fe0tlOEYsDVp3D/6D64I6uICOtUeiuSUVf5ZRmV0F14q4Wfo7laBsQCMu0X0RhEdy+SBSbAB0GA3BekEL1rroIcJV/SLLUesMzK2VXZeirWgQasnuO3TsDQzk=
+Date: Wed, 13 Oct 2021 10:02:26 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+CC: Ian Jackson <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>,
+	Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, Rahul Singh
+	<Rahul.Singh@arm.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>, Andre Przywara <Andre.Przywara@arm.com>,
+	Wei Liu <wl@xen.org>, Juergen Gross <jgross@suse.com>, Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: Re: [PATCH v5 01/11] xen/arm: xc_domain_ioport_permission(..) not
+ supported on ARM.
+Message-ID: <YWaSkrqzXoysQkCz@MacBook-Air-de-Roger.local>
+References: <ac6d4785-ac9a-4491-26bb-c66ffe82c55b@suse.com>
+ <ED8FC92F-B5EF-4473-B4A9-641C7D44859F@arm.com>
+ <0744b957-1832-dff2-9ae2-b8e8534f501b@suse.com>
+ <c3952fd5-b893-4cb6-a9bc-325a89e859db@epam.com>
+ <c125b447-53e8-7d13-3b08-af62fd3a9140@suse.com>
+ <c6b6c22f-fb8a-f2d9-7735-f1ebc9809908@epam.com>
+ <09656882-b297-7144-c291-1ee997edb119@suse.com>
+ <69A83587-B7E0-4653-AF8C-AEE802922CE5@arm.com>
+ <24933.41349.893363.203683@mariner.uk.xensource.com>
+ <AB6D62B6-2ED2-4957-A933-08EC77A4DFD6@arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <AB6D62B6-2ED2-4957-A933-08EC77A4DFD6@arm.com>
+X-ClientProxiedBy: LNXP265CA0044.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:5c::32) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 57226bc9-281e-4506-13d6-08d98e1fcecd
+X-MS-TrafficTypeDiagnostic: DM6PR03MB4474:
+X-Microsoft-Antispam-PRVS: <DM6PR03MB447405AC54113294C8EDD1698FB79@DM6PR03MB4474.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Geq27QIDYOz+S1Q5Gun/iDhXO/vDV5oFdKw1ZquJXozqz0lXGp7uzGbozXMjIZctp+5QPH0EnZmIWRnNRdpuAFbesgp6crk5mzvs86QiCVCxkTYwx82QhD2U0p/C9Yw5Mgzyi2Iibpc4a9SlhRMGduhOkQGZtAz0pnVrdII3krPUuoAFCfPs5MYszZYprP1vdZ6UqGXe0KcuNN37xD0LlTtdMNxZEXpVNbMDkIe67K2RlFipEA9HxBJM6iWCzPxqZvZ9zxq2xMDwImJh49stgGzOkxsArVqD7IsQ3iOHM+2c4VG6fh40Qs+XiLGYYaoKmdabuuvQPybhKWSY/lvHTnZMqEyR18J/UA3y5CT/PAz3JXCF8e0drcuf0xDmkPlGWYNdsIuNbbNBoJOVH/OFxDPX5U1bUfbpDU18KgM61/eMKrZGXqnyxMDGu+Rd1Wh1Ic3xvBEqfEauwWX3xVu/NA7bvldFobJPDop623qKE6Ofd7vORbOJAg//vPS8OMO2RrdgLvp0D1UETUczFxFjtGsbgf5A716l9DYKdchG9IlFbx8sfafU2wnQYeJSfT+xGQ3hDuDaRH6qGUV4In+XptrkWbPP2WNEE9wBRi8bE/zMZwogreSMJGJNS7a25bO0ZE/bj5TJaaDAI/rOxhfYxw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(6496006)(8936002)(66946007)(6486002)(7416002)(53546011)(508600001)(38100700002)(66476007)(9686003)(54906003)(316002)(66556008)(186003)(8676002)(5660300002)(6666004)(956004)(2906002)(6916009)(86362001)(85182001)(26005)(82960400001)(4326008)(83380400001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K0MzdlBiWUpXZmxybytzZXF0T0ZneEhhelJFWE9QZkhYT2hOYjVqYVpKVUt0?=
+ =?utf-8?B?OGpyN0QxUTRwbHdsYlNkNHRCU3ZGajlBUVB1YlBSQmd0ZVMwa0M5b2RaTWIx?=
+ =?utf-8?B?UU9XUVRXeVFEYzJLRVpEcVFCZFpyTEJvWlFvemZScFB3YmJNd29yNzVxaGtm?=
+ =?utf-8?B?djhlZ1FnaTZiWk56cFBWem5rejJ3eURtaUJlNGRKSVVUdUViM3BxdHpiNFJJ?=
+ =?utf-8?B?aUFmbVJHL1h2aitRUEY1bWpSdDczZjFYZWEzWXZxT2NFUlUzU3llV0VDdS9C?=
+ =?utf-8?B?MFA1NXF6enBrT0dsSVFTNUY1RE80cjgyb1JWNmYvYzlHOWQ4OThBai8wVndR?=
+ =?utf-8?B?bVBob0NGemlPekZ0czBXSUU1UVlpNjg1TS9SYkszYjgrVGVWNDZ1eVJZR291?=
+ =?utf-8?B?NEdwWUNSS042bkR3T0s0RHFESFlvVmdCUmhEcVFySC9MNTdsc0VqNDNvTytk?=
+ =?utf-8?B?cFJJbm1oT0FaWE5QWDZMa3NTMjJ4T0h2NzFDMnF1djU0NkxITDhZZzIrajhQ?=
+ =?utf-8?B?K0VTZmhrcDk4Ni9FRUpRVFBud3NjS3ltZUNpT1ZYSWZOVHdKM0JCQlJrckRN?=
+ =?utf-8?B?aERIeUxtcVNjVSswQ29TN0VxUmFBbmczVjQ5TkxRaTNkQzE5THE4cjdBTGxw?=
+ =?utf-8?B?OUdXSTZqSjBhdzFmc0VHYW02NWJFSXdmamIzdDFEOHU0eDBaR00rQ0Ruek1X?=
+ =?utf-8?B?Rk5NRUQrU3NyWWZEQ0RSWVJVc2szaHJoOERFd09RL09QcXRUQVFKT0dia0dR?=
+ =?utf-8?B?YVViMjZVcnpUTXB3em0vSHh3YnVNU3FUZVFLNVhOTEdzbTcwam1GY1NDT09S?=
+ =?utf-8?B?YmhqencvMUQ5bmIxMUF6WjYweFYrSUdpN0NVTXZvaFkzbnBEcjdxTFRyV1ps?=
+ =?utf-8?B?eVhRRFNBenNqdHNMTCtWNHA4QTdyZUQ0bSt6RXlrbEQzR0tReWRRTmdlRCtD?=
+ =?utf-8?B?UjdHL0xDdnY1YUJ4Ym93N2lwS0ZOZStvb1RRZ2phalVOZmlRcTRCQmRrQm1W?=
+ =?utf-8?B?eUw0U2k1OFhwNE5kZnltdnRCZ3NUZnRFQ0YrMHlDZVhZbVVuQlZZQ2hBNTQr?=
+ =?utf-8?B?SkdhU3d2NGoyVUFvTzB5NEwyaEVkL2VoYWg1bUJOeC9sTG9lL2xucmZSSlhK?=
+ =?utf-8?B?NktOeEM0cFVRUkJ0QXBiUjAyWlR0eXk5eUE5V0ZHelE1ZWFEdlgvRS8yR3Q5?=
+ =?utf-8?B?SVZNTDJjSFNMK3F4WjBOcjdWdXNIUmRMOTNsbGtFRG9JcDNZTGxoQStxN0g3?=
+ =?utf-8?B?dlY2M3ZmWWVCNEVncFJYZy9MUnNrYXU2T0FLdCtaMHV1VXo5Y01zUGhUM013?=
+ =?utf-8?B?ZlZ0dDJKMllZaEkydlhWNGIrSldFT3VxMm5kVWp0ZkRUeVlaWnUrejFQd0Vy?=
+ =?utf-8?B?MzdJYzg5Tkh6U2Z2dC9BZEZFZjdOK3ZHTDNiYXR6eG1URjRLczVvdjg2Q0p5?=
+ =?utf-8?B?dkJVNTlCVmNoa2hydlBja3Y5NWlYeHBHdCthbTBwYnV3a1B5R0pDZDFZWWVt?=
+ =?utf-8?B?cjVMSXlBamU1blFzMHlrUFFXb2JEMlFoYWVkVGFOYSsyVVNCZldBZEZ5WEJI?=
+ =?utf-8?B?ZFJBK3A1Ti8xV3ZscmF6L2JjRWFRbmhoT0dnNkdyYjJyNkNxVXJMbWFjaTVw?=
+ =?utf-8?B?VnpuTHVLYzZ5d0RjZWV5OVpjVWdpZlNyMHZSN2h1MFpOVUU2eElTSjBNa243?=
+ =?utf-8?B?cUdWN0VhYTBLM2Uwb1pZUWpCK1BSNzhaMHpLbmN4WkMxRFpWU3R3cWd2V0Fx?=
+ =?utf-8?Q?OyyfdUSzbvldBJxwksdH7Y/g9eiOUqFMi1VzJnP?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 57226bc9-281e-4506-13d6-08d98e1fcecd
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2021 08:02:31.6791
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: k2PhHOxui/X/a8Z8t7XbxX3Quxeedes4r9OR9rDYc8MZCk71cXCoMeOtl2xO9p8fXrSAjUHwv8Q83v5sxpVRbQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB4474
+X-OriginatorOrg: citrix.com
 
-Introduces the Xen pvUSB frontend. With pvUSB it is possible for a Xen
-domU to communicate with a USB device assigned to that domU. The
-communication is all done via the pvUSB backend in a driver domain
-(usually Dom0) which is owner of the physical device.
+On Tue, Oct 12, 2021 at 04:15:20PM +0000, Bertrand Marquis wrote:
+> Hi Ian,
+> 
+> > On 12 Oct 2021, at 15:53, Ian Jackson <iwj@xenproject.org> wrote:
+> > 
+> > Bertrand Marquis writes ("Re: [PATCH v5 01/11] xen/arm: xc_domain_ioport_permission(..) not supported on ARM."):
+> >> So there is no comment remaining on this patch ?
+> > 
+> > I have been following this thread.  I think I have a notion of why
+> > this is needed but I'm not 100% clear on it.  The commit message says
+> > this:
+> > 
+> >> ARM architecture does not implement I/O ports. Ignore this call on ARM
+> >> to avoid the overhead of making a hypercall just for Xen to return
+> >> -ENOSYS.
+> > 
+> > which implies it's a performance improvement.  But the change also
+> > suppresses an error return, so this commit message is false.  I think
+> > that the thread has concluded something different, but it should be
+> > explained in the commit message.  The purpose of a commit message is
+> > precisely to capture the kind of considerations and discussion that
+> > occurred in this thread.
+> 
+> I can add something in the commit message about the fact that we improve
+> performance and prevent to do a call that is and will not be supported in Xen.
 
-The pvUSB frontend is a USB hcd for a virtual USB host connector.
+IMO it would be good to modify the commit message so it covers the
+fact that the emulated host bridge on Arm does not advertise IO port
+support, so the guest is capable of realizing IO BARs are not
+supported.
 
-The code is taken from the pvUSB implementation in Xen done by Fujitsu
-based on Linux kernel 2.6.18.
+Otherwise it seems like the toolstack is ignoring a failure which
+could cause a device to malfunction when passed though (which is still
+the case, but the guest will be able to notice).
 
-Changes from the original version are:
-- port to upstream kernel
-- put all code in just one source file
-- move module to appropriate location in kernel tree
-- adapt to Linux style guide
-- minor code modifications to increase readability
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- drivers/usb/host/Kconfig   |   11 +
- drivers/usb/host/Makefile  |    1 +
- drivers/usb/host/xen-hcd.c | 1606 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 1618 insertions(+)
- create mode 100644 drivers/usb/host/xen-hcd.c
-
-diff --git a/drivers/usb/host/Kconfig b/drivers/usb/host/Kconfig
-index c4736d1d020c..c0a398aeb7c6 100644
---- a/drivers/usb/host/Kconfig
-+++ b/drivers/usb/host/Kconfig
-@@ -770,3 +770,14 @@ config USB_HCD_TEST_MODE
- 	  This option is of interest only to developers who need to validate
- 	  their USB hardware designs.  It is not needed for normal use.  If
- 	  unsure, say N.
-+
-+config USB_XEN_HCD
-+	tristate "Xen usb virtual host driver"
-+	depends on XEN
-+	select XEN_XENBUS_FRONTEND
-+	help
-+	  The Xen usb virtual host driver serves as a frontend driver enabling
-+	  a Xen guest system to access USB Devices passed through to the guest
-+	  by the Xen host (usually Dom0).
-+	  Only needed if the kernel is running in a Xen guest and generic
-+	  access to a USB device is needed.
-diff --git a/drivers/usb/host/Makefile b/drivers/usb/host/Makefile
-index 171de4df50bd..2948983618fb 100644
---- a/drivers/usb/host/Makefile
-+++ b/drivers/usb/host/Makefile
-@@ -85,3 +85,4 @@ obj-$(CONFIG_USB_HCD_BCMA)	+= bcma-hcd.o
- obj-$(CONFIG_USB_HCD_SSB)	+= ssb-hcd.o
- obj-$(CONFIG_USB_FOTG210_HCD)	+= fotg210-hcd.o
- obj-$(CONFIG_USB_MAX3421_HCD)	+= max3421-hcd.o
-+obj-$(CONFIG_USB_XEN_HCD)	+= xen-hcd.o
-diff --git a/drivers/usb/host/xen-hcd.c b/drivers/usb/host/xen-hcd.c
-new file mode 100644
-index 000000000000..7801dde6f5ee
---- /dev/null
-+++ b/drivers/usb/host/xen-hcd.c
-@@ -0,0 +1,1606 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * xen-hcd.c
-+ *
-+ * Xen USB Virtual Host Controller driver
-+ *
-+ * Copyright (C) 2009, FUJITSU LABORATORIES LTD.
-+ * Author: Noboru Iwamatsu <n_iwamatsu@jp.fujitsu.com>
-+ */
-+
-+#include <linux/module.h>
-+#include <linux/usb.h>
-+#include <linux/list.h>
-+#include <linux/usb/hcd.h>
-+#include <linux/io.h>
-+
-+#include <xen/xen.h>
-+#include <xen/xenbus.h>
-+#include <xen/grant_table.h>
-+#include <xen/events.h>
-+#include <xen/page.h>
-+
-+#include <xen/interface/io/usbif.h>
-+
-+/* Private per-URB data */
-+struct urb_priv {
-+	struct list_head list;
-+	struct urb *urb;
-+	int req_id;		/* RING_REQUEST id for submitting */
-+	int unlink_req_id;	/* RING_REQUEST id for unlinking */
-+	int status;
-+	bool unlinked;		/* dequeued marker */
-+};
-+
-+/* virtual roothub port status */
-+struct rhport_status {
-+	__u32 status;
-+	bool resuming;		/* in resuming */
-+	bool c_connection;	/* connection changed */
-+	unsigned long timeout;
-+};
-+
-+/* status of attached device */
-+struct vdevice_status {
-+	int devnum;
-+	enum usb_device_state status;
-+	enum usb_device_speed speed;
-+};
-+
-+/* RING request shadow */
-+struct usb_shadow {
-+	struct xenusb_urb_request req;
-+	struct urb *urb;
-+};
-+
-+struct xenhcd_info {
-+	/* Virtual Host Controller has 4 urb queues */
-+	struct list_head pending_submit_list;
-+	struct list_head pending_unlink_list;
-+	struct list_head in_progress_list;
-+	struct list_head giveback_waiting_list;
-+
-+	spinlock_t lock;
-+
-+	/* timer that kick pending and giveback waiting urbs */
-+	struct timer_list watchdog;
-+	unsigned long actions;
-+
-+	/* virtual root hub */
-+	int rh_numports;
-+	struct rhport_status ports[XENUSB_MAX_PORTNR];
-+	struct vdevice_status devices[XENUSB_MAX_PORTNR];
-+
-+	/* Xen related staff */
-+	struct xenbus_device *xbdev;
-+	int urb_ring_ref;
-+	int conn_ring_ref;
-+	struct xenusb_urb_front_ring urb_ring;
-+	struct xenusb_conn_front_ring conn_ring;
-+
-+	unsigned int evtchn;
-+	unsigned int irq;
-+	struct usb_shadow shadow[XENUSB_URB_RING_SIZE];
-+	unsigned int shadow_free;
-+
-+	bool error;
-+};
-+
-+#define GRANT_INVALID_REF 0
-+
-+#define XENHCD_RING_JIFFIES (HZ/200)
-+#define XENHCD_SCAN_JIFFIES 1
-+
-+enum xenhcd_timer_action {
-+	TIMER_RING_WATCHDOG,
-+	TIMER_SCAN_PENDING_URBS,
-+};
-+
-+static struct kmem_cache *xenhcd_urbp_cachep;
-+
-+static inline struct xenhcd_info *xenhcd_hcd_to_info(struct usb_hcd *hcd)
-+{
-+	return (struct xenhcd_info *)hcd->hcd_priv;
-+}
-+
-+static inline struct usb_hcd *xenhcd_info_to_hcd(struct xenhcd_info *info)
-+{
-+	return container_of((void *)info, struct usb_hcd, hcd_priv);
-+}
-+
-+static void xenhcd_set_error(struct xenhcd_info *info, const char *msg)
-+{
-+	info->error = true;
-+
-+	pr_alert("xen-hcd: protocol error: %s!\n", msg);
-+}
-+
-+static inline void xenhcd_timer_action_done(struct xenhcd_info *info,
-+					    enum xenhcd_timer_action action)
-+{
-+	clear_bit(action, &info->actions);
-+}
-+
-+static void xenhcd_timer_action(struct xenhcd_info *info,
-+				enum xenhcd_timer_action action)
-+{
-+	if (timer_pending(&info->watchdog) &&
-+	    test_bit(TIMER_SCAN_PENDING_URBS, &info->actions))
-+		return;
-+
-+	if (!test_and_set_bit(action, &info->actions)) {
-+		unsigned long t;
-+
-+		switch (action) {
-+		case TIMER_RING_WATCHDOG:
-+			t = XENHCD_RING_JIFFIES;
-+			break;
-+		default:
-+			t = XENHCD_SCAN_JIFFIES;
-+			break;
-+		}
-+		mod_timer(&info->watchdog, t + jiffies);
-+	}
-+}
-+
-+/*
-+ * set virtual port connection status
-+ */
-+static void xenhcd_set_connect_state(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	if (info->ports[port].status & USB_PORT_STAT_POWER) {
-+		switch (info->devices[port].speed) {
-+		case XENUSB_SPEED_NONE:
-+			info->ports[port].status &=
-+				~(USB_PORT_STAT_CONNECTION |
-+				  USB_PORT_STAT_ENABLE |
-+				  USB_PORT_STAT_LOW_SPEED |
-+				  USB_PORT_STAT_HIGH_SPEED |
-+				  USB_PORT_STAT_SUSPEND);
-+			break;
-+		case XENUSB_SPEED_LOW:
-+			info->ports[port].status |= USB_PORT_STAT_CONNECTION;
-+			info->ports[port].status |= USB_PORT_STAT_LOW_SPEED;
-+			break;
-+		case XENUSB_SPEED_FULL:
-+			info->ports[port].status |= USB_PORT_STAT_CONNECTION;
-+			break;
-+		case XENUSB_SPEED_HIGH:
-+			info->ports[port].status |= USB_PORT_STAT_CONNECTION;
-+			info->ports[port].status |= USB_PORT_STAT_HIGH_SPEED;
-+			break;
-+		default: /* error */
-+			return;
-+		}
-+		info->ports[port].status |= (USB_PORT_STAT_C_CONNECTION << 16);
-+	}
-+}
-+
-+/*
-+ * set virtual device connection status
-+ */
-+static int xenhcd_rhport_connect(struct xenhcd_info *info, __u8 portnum,
-+				 __u8 speed)
-+{
-+	int port;
-+
-+	if (portnum < 1 || portnum > info->rh_numports)
-+		return -EINVAL; /* invalid port number */
-+
-+	port = portnum - 1;
-+	if (info->devices[port].speed != speed) {
-+		switch (speed) {
-+		case XENUSB_SPEED_NONE: /* disconnect */
-+			info->devices[port].status = USB_STATE_NOTATTACHED;
-+			break;
-+		case XENUSB_SPEED_LOW:
-+		case XENUSB_SPEED_FULL:
-+		case XENUSB_SPEED_HIGH:
-+			info->devices[port].status = USB_STATE_ATTACHED;
-+			break;
-+		default: /* error */
-+			return -EINVAL;
-+		}
-+		info->devices[port].speed = speed;
-+		info->ports[port].c_connection = true;
-+
-+		xenhcd_set_connect_state(info, portnum);
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * SetPortFeature(PORT_SUSPENDED)
-+ */
-+static void xenhcd_rhport_suspend(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	info->ports[port].status |= USB_PORT_STAT_SUSPEND;
-+	info->devices[port].status = USB_STATE_SUSPENDED;
-+}
-+
-+/*
-+ * ClearPortFeature(PORT_SUSPENDED)
-+ */
-+static void xenhcd_rhport_resume(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	if (info->ports[port].status & USB_PORT_STAT_SUSPEND) {
-+		info->ports[port].resuming = true;
-+		info->ports[port].timeout = jiffies + msecs_to_jiffies(20);
-+	}
-+}
-+
-+/*
-+ * SetPortFeature(PORT_POWER)
-+ */
-+static void xenhcd_rhport_power_on(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	if ((info->ports[port].status & USB_PORT_STAT_POWER) == 0) {
-+		info->ports[port].status |= USB_PORT_STAT_POWER;
-+		if (info->devices[port].status != USB_STATE_NOTATTACHED)
-+			info->devices[port].status = USB_STATE_POWERED;
-+		if (info->ports[port].c_connection)
-+			xenhcd_set_connect_state(info, portnum);
-+	}
-+}
-+
-+/*
-+ * ClearPortFeature(PORT_POWER)
-+ * SetConfiguration(non-zero)
-+ * Power_Source_Off
-+ * Over-current
-+ */
-+static void xenhcd_rhport_power_off(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	if (info->ports[port].status & USB_PORT_STAT_POWER) {
-+		info->ports[port].status = 0;
-+		if (info->devices[port].status != USB_STATE_NOTATTACHED)
-+			info->devices[port].status = USB_STATE_ATTACHED;
-+	}
-+}
-+
-+/*
-+ * ClearPortFeature(PORT_ENABLE)
-+ */
-+static void xenhcd_rhport_disable(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	info->ports[port].status &= ~USB_PORT_STAT_ENABLE;
-+	info->ports[port].status &= ~USB_PORT_STAT_SUSPEND;
-+	info->ports[port].resuming = false;
-+	if (info->devices[port].status != USB_STATE_NOTATTACHED)
-+		info->devices[port].status = USB_STATE_POWERED;
-+}
-+
-+/*
-+ * SetPortFeature(PORT_RESET)
-+ */
-+static void xenhcd_rhport_reset(struct xenhcd_info *info, int portnum)
-+{
-+	int port;
-+
-+	port = portnum - 1;
-+	info->ports[port].status &= ~(USB_PORT_STAT_ENABLE |
-+				      USB_PORT_STAT_LOW_SPEED |
-+				      USB_PORT_STAT_HIGH_SPEED);
-+	info->ports[port].status |= USB_PORT_STAT_RESET;
-+
-+	if (info->devices[port].status != USB_STATE_NOTATTACHED)
-+		info->devices[port].status = USB_STATE_ATTACHED;
-+
-+	/* 10msec reset signaling */
-+	info->ports[port].timeout = jiffies + msecs_to_jiffies(10);
-+}
-+
-+#ifdef CONFIG_PM
-+static int xenhcd_bus_suspend(struct usb_hcd *hcd)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+	int ret = 0;
-+	int i, ports;
-+
-+	ports = info->rh_numports;
-+
-+	spin_lock_irq(&info->lock);
-+	if (!test_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags)) {
-+		ret = -ESHUTDOWN;
-+	} else {
-+		/* suspend any active ports*/
-+		for (i = 1; i <= ports; i++)
-+			xenhcd_rhport_suspend(info, i);
-+	}
-+	spin_unlock_irq(&info->lock);
-+
-+	del_timer_sync(&info->watchdog);
-+
-+	return ret;
-+}
-+
-+static int xenhcd_bus_resume(struct usb_hcd *hcd)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+	int ret = 0;
-+	int i, ports;
-+
-+	ports = info->rh_numports;
-+
-+	spin_lock_irq(&info->lock);
-+	if (!test_bit(HCD_FLAG_HW_ACCESSIBLE, &hcd->flags)) {
-+		ret = -ESHUTDOWN;
-+	} else {
-+		/* resume any suspended ports*/
-+		for (i = 1; i <= ports; i++)
-+			xenhcd_rhport_resume(info, i);
-+	}
-+	spin_unlock_irq(&info->lock);
-+
-+	return ret;
-+}
-+#endif
-+
-+static void xenhcd_hub_descriptor(struct xenhcd_info *info,
-+				  struct usb_hub_descriptor *desc)
-+{
-+	__u16 temp;
-+	int ports = info->rh_numports;
-+
-+	desc->bDescriptorType = 0x29;
-+	desc->bPwrOn2PwrGood = 10; /* EHCI says 20ms max */
-+	desc->bHubContrCurrent = 0;
-+	desc->bNbrPorts = ports;
-+
-+	/* size of DeviceRemovable and PortPwrCtrlMask fields */
-+	temp = 1 + (ports / 8);
-+	desc->bDescLength = 7 + 2 * temp;
-+
-+	/* bitmaps for DeviceRemovable and PortPwrCtrlMask */
-+	memset(&desc->u.hs.DeviceRemovable[0], 0, temp);
-+	memset(&desc->u.hs.DeviceRemovable[temp], 0xff, temp);
-+
-+	/* per-port over current reporting and no power switching */
-+	temp = 0x000a;
-+	desc->wHubCharacteristics = cpu_to_le16(temp);
-+}
-+
-+/* port status change mask for hub_status_data */
-+#define PORT_C_MASK	((USB_PORT_STAT_C_CONNECTION |		\
-+			  USB_PORT_STAT_C_ENABLE |		\
-+			  USB_PORT_STAT_C_SUSPEND |		\
-+			  USB_PORT_STAT_C_OVERCURRENT |		\
-+			  USB_PORT_STAT_C_RESET) << 16)
-+
-+/*
-+ * See USB 2.0 Spec, 11.12.4 Hub and Port Status Change Bitmap.
-+ * If port status changed, writes the bitmap to buf and return
-+ * that length(number of bytes).
-+ * If Nothing changed, return 0.
-+ */
-+static int xenhcd_hub_status_data(struct usb_hcd *hcd, char *buf)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+	int ports;
-+	int i;
-+	unsigned long flags;
-+	int ret;
-+	int changed = 0;
-+
-+	/* initialize the status to no-changes */
-+	ports = info->rh_numports;
-+	ret = 1 + (ports / 8);
-+	memset(buf, 0, ret);
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+
-+	for (i = 0; i < ports; i++) {
-+		/* check status for each port */
-+		if (info->ports[i].status & PORT_C_MASK) {
-+			buf[(i + 1) / 8] |= 1 << (i + 1) % 8;
-+			changed = 1;
-+		}
-+	}
-+
-+	if ((hcd->state == HC_STATE_SUSPENDED) && (changed == 1))
-+		usb_hcd_resume_root_hub(hcd);
-+
-+	spin_unlock_irqrestore(&info->lock, flags);
-+
-+	return changed ? ret : 0;
-+}
-+
-+static int xenhcd_hub_control(struct usb_hcd *hcd, __u16 typeReq, __u16 wValue,
-+			      __u16 wIndex, char *buf, __u16 wLength)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+	int ports = info->rh_numports;
-+	unsigned long flags;
-+	int ret = 0;
-+	int i;
-+	int changed = 0;
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+	switch (typeReq) {
-+	case ClearHubFeature:
-+		/* ignore this request */
-+		break;
-+	case ClearPortFeature:
-+		if (!wIndex || wIndex > ports)
-+			goto error;
-+
-+		switch (wValue) {
-+		case USB_PORT_FEAT_SUSPEND:
-+			xenhcd_rhport_resume(info, wIndex);
-+			break;
-+		case USB_PORT_FEAT_POWER:
-+			xenhcd_rhport_power_off(info, wIndex);
-+			break;
-+		case USB_PORT_FEAT_ENABLE:
-+			xenhcd_rhport_disable(info, wIndex);
-+			break;
-+		case USB_PORT_FEAT_C_CONNECTION:
-+			info->ports[wIndex - 1].c_connection = false;
-+			fallthrough;
-+		default:
-+			info->ports[wIndex - 1].status &= ~(1 << wValue);
-+			break;
-+		}
-+		break;
-+	case GetHubDescriptor:
-+		xenhcd_hub_descriptor(info, (struct usb_hub_descriptor *)buf);
-+		break;
-+	case GetHubStatus:
-+		/* always local power supply good and no over-current exists. */
-+		*(__le32 *)buf = cpu_to_le32(0);
-+		break;
-+	case GetPortStatus:
-+		if (!wIndex || wIndex > ports)
-+			goto error;
-+
-+		wIndex--;
-+
-+		/* resume completion */
-+		if (info->ports[wIndex].resuming &&
-+		    time_after_eq(jiffies, info->ports[wIndex].timeout)) {
-+			info->ports[wIndex].status |=
-+				USB_PORT_STAT_C_SUSPEND << 16;
-+			info->ports[wIndex].status &= ~USB_PORT_STAT_SUSPEND;
-+		}
-+
-+		/* reset completion */
-+		if ((info->ports[wIndex].status & USB_PORT_STAT_RESET) != 0 &&
-+		    time_after_eq(jiffies, info->ports[wIndex].timeout)) {
-+			info->ports[wIndex].status |=
-+				USB_PORT_STAT_C_RESET << 16;
-+			info->ports[wIndex].status &= ~USB_PORT_STAT_RESET;
-+
-+			if (info->devices[wIndex].status !=
-+			    USB_STATE_NOTATTACHED) {
-+				info->ports[wIndex].status |=
-+					USB_PORT_STAT_ENABLE;
-+				info->devices[wIndex].status =
-+					USB_STATE_DEFAULT;
-+			}
-+
-+			switch (info->devices[wIndex].speed) {
-+			case XENUSB_SPEED_LOW:
-+				info->ports[wIndex].status |=
-+					USB_PORT_STAT_LOW_SPEED;
-+				break;
-+			case XENUSB_SPEED_HIGH:
-+				info->ports[wIndex].status |=
-+					USB_PORT_STAT_HIGH_SPEED;
-+				break;
-+			default:
-+				break;
-+			}
-+		}
-+
-+		*(__le32 *)buf = cpu_to_le32(info->ports[wIndex].status);
-+		break;
-+	case SetPortFeature:
-+		if (!wIndex || wIndex > ports)
-+			goto error;
-+
-+		switch (wValue) {
-+		case USB_PORT_FEAT_POWER:
-+			xenhcd_rhport_power_on(info, wIndex);
-+			break;
-+		case USB_PORT_FEAT_RESET:
-+			xenhcd_rhport_reset(info, wIndex);
-+			break;
-+		case USB_PORT_FEAT_SUSPEND:
-+			xenhcd_rhport_suspend(info, wIndex);
-+			break;
-+		default:
-+			if (info->ports[wIndex-1].status & USB_PORT_STAT_POWER)
-+				info->ports[wIndex-1].status |= (1 << wValue);
-+		}
-+		break;
-+
-+	case SetHubFeature:
-+		/* not supported */
-+	default:
-+error:
-+		ret = -EPIPE;
-+	}
-+	spin_unlock_irqrestore(&info->lock, flags);
-+
-+	/* check status for each port */
-+	for (i = 0; i < ports; i++) {
-+		if (info->ports[i].status & PORT_C_MASK)
-+			changed = 1;
-+	}
-+	if (changed)
-+		usb_hcd_poll_rh_status(hcd);
-+
-+	return ret;
-+}
-+
-+static void xenhcd_free_urb_priv(struct urb_priv *urbp)
-+{
-+	urbp->urb->hcpriv = NULL;
-+	kmem_cache_free(xenhcd_urbp_cachep, urbp);
-+}
-+
-+static inline unsigned int xenhcd_get_id_from_freelist(struct xenhcd_info *info)
-+{
-+	unsigned int free;
-+
-+	free = info->shadow_free;
-+	info->shadow_free = info->shadow[free].req.id;
-+	info->shadow[free].req.id = 0x0fff; /* debug */
-+	return free;
-+}
-+
-+static inline void xenhcd_add_id_to_freelist(struct xenhcd_info *info,
-+					     unsigned int id)
-+{
-+	info->shadow[id].req.id	= info->shadow_free;
-+	info->shadow[id].urb = NULL;
-+	info->shadow_free = id;
-+}
-+
-+static inline int xenhcd_count_pages(void *addr, int length)
-+{
-+	unsigned long vaddr = (unsigned long)addr;
-+
-+	return PFN_UP(vaddr + length) - PFN_DOWN(vaddr);
-+}
-+
-+static void xenhcd_gnttab_map(struct xenhcd_info *info, void *addr, int length,
-+			      grant_ref_t *gref_head,
-+			      struct xenusb_request_segment *seg,
-+			      int nr_pages, int flags)
-+{
-+	grant_ref_t ref;
-+	unsigned long buffer_mfn;
-+	unsigned int offset;
-+	unsigned int len = length;
-+	unsigned int bytes;
-+	int i;
-+
-+	for (i = 0; i < nr_pages; i++) {
-+		buffer_mfn = PFN_DOWN(arbitrary_virt_to_machine(addr).maddr);
-+		offset = offset_in_page(addr);
-+
-+		bytes = PAGE_SIZE - offset;
-+		if (bytes > len)
-+			bytes = len;
-+
-+		ref = gnttab_claim_grant_reference(gref_head);
-+		gnttab_grant_foreign_access_ref(ref, info->xbdev->otherend_id,
-+						buffer_mfn, flags);
-+		seg[i].gref = ref;
-+		seg[i].offset = (__u16)offset;
-+		seg[i].length = (__u16)bytes;
-+
-+		addr += bytes;
-+		len -= bytes;
-+	}
-+}
-+
-+static __u32 xenhcd_pipe_urb_to_xenusb(__u32 urb_pipe, __u8 port)
-+{
-+	static __u32 pipe;
-+
-+	pipe = usb_pipedevice(urb_pipe) << XENUSB_PIPE_DEV_SHIFT;
-+	pipe |= usb_pipeendpoint(urb_pipe) << XENUSB_PIPE_EP_SHIFT;
-+	if (usb_pipein(urb_pipe))
-+		pipe |= XENUSB_PIPE_DIR;
-+	switch (usb_pipetype(urb_pipe)) {
-+	case PIPE_ISOCHRONOUS:
-+		pipe |= XENUSB_PIPE_TYPE_ISOC << XENUSB_PIPE_TYPE_SHIFT;
-+		break;
-+	case PIPE_INTERRUPT:
-+		pipe |= XENUSB_PIPE_TYPE_INT << XENUSB_PIPE_TYPE_SHIFT;
-+		break;
-+	case PIPE_CONTROL:
-+		pipe |= XENUSB_PIPE_TYPE_CTRL << XENUSB_PIPE_TYPE_SHIFT;
-+		break;
-+	case PIPE_BULK:
-+		pipe |= XENUSB_PIPE_TYPE_BULK << XENUSB_PIPE_TYPE_SHIFT;
-+		break;
-+	}
-+	pipe = xenusb_setportnum_pipe(pipe, port);
-+
-+	return pipe;
-+}
-+
-+static int xenhcd_map_urb_for_request(struct xenhcd_info *info, struct urb *urb,
-+				      struct xenusb_urb_request *req)
-+{
-+	grant_ref_t gref_head;
-+	int nr_buff_pages = 0;
-+	int nr_isodesc_pages = 0;
-+	int nr_grants = 0;
-+
-+	if (urb->transfer_buffer_length) {
-+		nr_buff_pages = xenhcd_count_pages(urb->transfer_buffer,
-+						urb->transfer_buffer_length);
-+
-+		if (usb_pipeisoc(urb->pipe))
-+			nr_isodesc_pages = xenhcd_count_pages(
-+				&urb->iso_frame_desc[0],
-+				sizeof(struct usb_iso_packet_descriptor) *
-+				urb->number_of_packets);
-+
-+		nr_grants = nr_buff_pages + nr_isodesc_pages;
-+		if (nr_grants > XENUSB_MAX_SEGMENTS_PER_REQUEST) {
-+			pr_err("xenhcd: error: %d grants\n", nr_grants);
-+			return -E2BIG;
-+		}
-+
-+		if (gnttab_alloc_grant_references(nr_grants, &gref_head)) {
-+			pr_err("xenhcd: gnttab_alloc_grant_references() error\n");
-+			return -ENOMEM;
-+		}
-+
-+		xenhcd_gnttab_map(info, urb->transfer_buffer,
-+				  urb->transfer_buffer_length, &gref_head,
-+				  &req->seg[0], nr_buff_pages,
-+				  usb_pipein(urb->pipe) ? 0 : GTF_readonly);
-+	}
-+
-+	req->pipe = xenhcd_pipe_urb_to_xenusb(urb->pipe, urb->dev->portnum);
-+	req->transfer_flags = 0;
-+	if (urb->transfer_flags & URB_SHORT_NOT_OK)
-+		req->transfer_flags |= XENUSB_SHORT_NOT_OK;
-+	req->buffer_length = urb->transfer_buffer_length;
-+	req->nr_buffer_segs = nr_buff_pages;
-+
-+	switch (usb_pipetype(urb->pipe)) {
-+	case PIPE_ISOCHRONOUS:
-+		req->u.isoc.interval = urb->interval;
-+		req->u.isoc.start_frame = urb->start_frame;
-+		req->u.isoc.number_of_packets = urb->number_of_packets;
-+		req->u.isoc.nr_frame_desc_segs = nr_isodesc_pages;
-+
-+		xenhcd_gnttab_map(info, &urb->iso_frame_desc[0],
-+				  sizeof(struct usb_iso_packet_descriptor) *
-+				  urb->number_of_packets,
-+				  &gref_head, &req->seg[nr_buff_pages],
-+				  nr_isodesc_pages, 0);
-+		break;
-+	case PIPE_INTERRUPT:
-+		req->u.intr.interval = urb->interval;
-+		break;
-+	case PIPE_CONTROL:
-+		if (urb->setup_packet)
-+			memcpy(req->u.ctrl, urb->setup_packet, 8);
-+		break;
-+	case PIPE_BULK:
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	if (nr_grants)
-+		gnttab_free_grant_references(gref_head);
-+
-+	return 0;
-+}
-+
-+static void xenhcd_gnttab_done(struct usb_shadow *shadow)
-+{
-+	int nr_segs = 0;
-+	int i;
-+
-+	nr_segs = shadow->req.nr_buffer_segs;
-+
-+	if (xenusb_pipeisoc(shadow->req.pipe))
-+		nr_segs += shadow->req.u.isoc.nr_frame_desc_segs;
-+
-+	for (i = 0; i < nr_segs; i++)
-+		gnttab_end_foreign_access(shadow->req.seg[i].gref, 0, 0UL);
-+
-+	shadow->req.nr_buffer_segs = 0;
-+	shadow->req.u.isoc.nr_frame_desc_segs = 0;
-+}
-+
-+static int xenhcd_translate_status(int status)
-+{
-+	switch (status) {
-+	case XENUSB_STATUS_OK:
-+		return 0;
-+	case XENUSB_STATUS_NODEV:
-+		return -ENODEV;
-+	case XENUSB_STATUS_INVAL:
-+		return -EINVAL;
-+	case XENUSB_STATUS_STALL:
-+		return -EPIPE;
-+	case XENUSB_STATUS_IOERROR:
-+		return -EPROTO;
-+	case XENUSB_STATUS_BABBLE:
-+		return -EOVERFLOW;
-+	default:
-+		return -ESHUTDOWN;
-+	}
-+}
-+
-+static void xenhcd_giveback_urb(struct xenhcd_info *info, struct urb *urb,
-+				int status)
-+{
-+	struct urb_priv *urbp = (struct urb_priv *)urb->hcpriv;
-+	int priv_status = urbp->status;
-+
-+	list_del_init(&urbp->list);
-+	xenhcd_free_urb_priv(urbp);
-+
-+	if (urb->status == -EINPROGRESS)
-+		urb->status = xenhcd_translate_status(status);
-+
-+	spin_unlock(&info->lock);
-+	usb_hcd_giveback_urb(xenhcd_info_to_hcd(info), urb,
-+			     priv_status <= 0 ? priv_status : urb->status);
-+	spin_lock(&info->lock);
-+}
-+
-+static int xenhcd_do_request(struct xenhcd_info *info, struct urb_priv *urbp)
-+{
-+	struct xenusb_urb_request *req;
-+	struct urb *urb = urbp->urb;
-+	unsigned int id;
-+	int notify;
-+	int ret;
-+
-+	id = xenhcd_get_id_from_freelist(info);
-+	req = &info->shadow[id].req;
-+	req->id = id;
-+
-+	if (unlikely(urbp->unlinked)) {
-+		req->u.unlink.unlink_id = urbp->req_id;
-+		req->pipe = xenusb_setunlink_pipe(xenhcd_pipe_urb_to_xenusb(
-+						 urb->pipe, urb->dev->portnum));
-+		urbp->unlink_req_id = id;
-+	} else {
-+		ret = xenhcd_map_urb_for_request(info, urb, req);
-+		if (ret) {
-+			xenhcd_add_id_to_freelist(info, id);
-+			return ret;
-+		}
-+		urbp->req_id = id;
-+	}
-+
-+	req = RING_GET_REQUEST(&info->urb_ring, info->urb_ring.req_prod_pvt);
-+	*req = info->shadow[id].req;
-+
-+	info->urb_ring.req_prod_pvt++;
-+	info->shadow[id].urb = urb;
-+
-+	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info->urb_ring, notify);
-+	if (notify)
-+		notify_remote_via_irq(info->irq);
-+
-+	return 0;
-+}
-+
-+static void xenhcd_kick_pending_urbs(struct xenhcd_info *info)
-+{
-+	struct urb_priv *urbp;
-+
-+	while (!list_empty(&info->pending_submit_list)) {
-+		if (RING_FULL(&info->urb_ring)) {
-+			xenhcd_timer_action(info, TIMER_RING_WATCHDOG);
-+			return;
-+		}
-+
-+		urbp = list_entry(info->pending_submit_list.next,
-+				  struct urb_priv, list);
-+		if (!xenhcd_do_request(info, urbp))
-+			list_move_tail(&urbp->list, &info->in_progress_list);
-+		else
-+			xenhcd_giveback_urb(info, urbp->urb, -ESHUTDOWN);
-+	}
-+	xenhcd_timer_action_done(info, TIMER_SCAN_PENDING_URBS);
-+}
-+
-+/*
-+ * caller must lock info->lock
-+ */
-+static void xenhcd_cancel_all_enqueued_urbs(struct xenhcd_info *info)
-+{
-+	struct urb_priv *urbp, *tmp;
-+	int req_id;
-+
-+	list_for_each_entry_safe(urbp, tmp, &info->in_progress_list, list) {
-+		req_id = urbp->req_id;
-+		if (!urbp->unlinked) {
-+			xenhcd_gnttab_done(&info->shadow[req_id]);
-+			if (urbp->urb->status == -EINPROGRESS)
-+				/* not dequeued */
-+				xenhcd_giveback_urb(info, urbp->urb,
-+						    -ESHUTDOWN);
-+			else	/* dequeued */
-+				xenhcd_giveback_urb(info, urbp->urb,
-+						    urbp->urb->status);
-+		}
-+		info->shadow[req_id].urb = NULL;
-+	}
-+
-+	list_for_each_entry_safe(urbp, tmp, &info->pending_submit_list, list)
-+		xenhcd_giveback_urb(info, urbp->urb, -ESHUTDOWN);
-+}
-+
-+/*
-+ * caller must lock info->lock
-+ */
-+static void xenhcd_giveback_unlinked_urbs(struct xenhcd_info *info)
-+{
-+	struct urb_priv *urbp, *tmp;
-+
-+	list_for_each_entry_safe(urbp, tmp, &info->giveback_waiting_list, list)
-+		xenhcd_giveback_urb(info, urbp->urb, urbp->urb->status);
-+}
-+
-+static int xenhcd_submit_urb(struct xenhcd_info *info, struct urb_priv *urbp)
-+{
-+	int ret;
-+
-+	if (RING_FULL(&info->urb_ring)) {
-+		list_add_tail(&urbp->list, &info->pending_submit_list);
-+		xenhcd_timer_action(info, TIMER_RING_WATCHDOG);
-+		return 0;
-+	}
-+
-+	if (!list_empty(&info->pending_submit_list)) {
-+		list_add_tail(&urbp->list, &info->pending_submit_list);
-+		xenhcd_timer_action(info, TIMER_SCAN_PENDING_URBS);
-+		return 0;
-+	}
-+
-+	ret = xenhcd_do_request(info, urbp);
-+	if (ret == 0)
-+		list_add_tail(&urbp->list, &info->in_progress_list);
-+
-+	return ret;
-+}
-+
-+static int xenhcd_unlink_urb(struct xenhcd_info *info, struct urb_priv *urbp)
-+{
-+	int ret;
-+
-+	/* already unlinked? */
-+	if (urbp->unlinked)
-+		return -EBUSY;
-+
-+	urbp->unlinked = true;
-+
-+	/* the urb is still in pending_submit queue */
-+	if (urbp->req_id == ~0) {
-+		list_move_tail(&urbp->list, &info->giveback_waiting_list);
-+		xenhcd_timer_action(info, TIMER_SCAN_PENDING_URBS);
-+		return 0;
-+	}
-+
-+	/* send unlink request to backend */
-+	if (RING_FULL(&info->urb_ring)) {
-+		list_move_tail(&urbp->list, &info->pending_unlink_list);
-+		xenhcd_timer_action(info, TIMER_RING_WATCHDOG);
-+		return 0;
-+	}
-+
-+	if (!list_empty(&info->pending_unlink_list)) {
-+		list_move_tail(&urbp->list, &info->pending_unlink_list);
-+		xenhcd_timer_action(info, TIMER_SCAN_PENDING_URBS);
-+		return 0;
-+	}
-+
-+	ret = xenhcd_do_request(info, urbp);
-+	if (ret == 0)
-+		list_move_tail(&urbp->list, &info->in_progress_list);
-+
-+	return ret;
-+}
-+
-+static int xenhcd_urb_request_done(struct xenhcd_info *info)
-+{
-+	struct xenusb_urb_response res;
-+	struct urb *urb;
-+	RING_IDX i, rp;
-+	__u16 id;
-+	int more_to_do = 0;
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+
-+	rp = info->urb_ring.sring->rsp_prod;
-+	if (RING_RESPONSE_PROD_OVERFLOW(&info->urb_ring, rp)) {
-+		xenhcd_set_error(info, "Illegal index on urb-ring");
-+		return 0;
-+	}
-+	rmb(); /* ensure we see queued responses up to "rp" */
-+
-+	for (i = info->urb_ring.rsp_cons; i != rp; i++) {
-+		RING_COPY_RESPONSE(&info->urb_ring, i, &res);
-+		id = res.id;
-+		if (id >= XENUSB_URB_RING_SIZE) {
-+			xenhcd_set_error(info, "Illegal data on urb-ring");
-+			continue;
-+		}
-+
-+		if (likely(xenusb_pipesubmit(info->shadow[id].req.pipe))) {
-+			xenhcd_gnttab_done(&info->shadow[id]);
-+			urb = info->shadow[id].urb;
-+			if (likely(urb)) {
-+				urb->actual_length = res.actual_length;
-+				urb->error_count = res.error_count;
-+				urb->start_frame = res.start_frame;
-+				xenhcd_giveback_urb(info, urb, res.status);
-+			}
-+		}
-+
-+		xenhcd_add_id_to_freelist(info, id);
-+	}
-+	info->urb_ring.rsp_cons = i;
-+
-+	if (i != info->urb_ring.req_prod_pvt)
-+		RING_FINAL_CHECK_FOR_RESPONSES(&info->urb_ring, more_to_do);
-+	else
-+		info->urb_ring.sring->rsp_event = i + 1;
-+
-+	spin_unlock_irqrestore(&info->lock, flags);
-+
-+	return more_to_do;
-+}
-+
-+static int xenhcd_conn_notify(struct xenhcd_info *info)
-+{
-+	struct xenusb_conn_response res;
-+	struct xenusb_conn_request *req;
-+	RING_IDX rc, rp;
-+	__u16 id;
-+	__u8 portnum, speed;
-+	int more_to_do = 0;
-+	int notify;
-+	int port_changed = 0;
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+
-+	rc = info->conn_ring.rsp_cons;
-+	rp = info->conn_ring.sring->rsp_prod;
-+	if (RING_RESPONSE_PROD_OVERFLOW(&info->conn_ring, rp)) {
-+		xenhcd_set_error(info, "Illegal index on conn-ring");
-+		return 0;
-+	}
-+	rmb(); /* ensure we see queued responses up to "rp" */
-+
-+	while (rc != rp) {
-+		RING_COPY_RESPONSE(&info->conn_ring, rc, &res);
-+		id = res.id;
-+		portnum = res.portnum;
-+		speed = res.speed;
-+		info->conn_ring.rsp_cons = ++rc;
-+
-+		if (xenhcd_rhport_connect(info, portnum, speed)) {
-+			xenhcd_set_error(info, "Illegal data on conn-ring");
-+			return 0;
-+		}
-+
-+		if (info->ports[portnum - 1].c_connection)
-+			port_changed = 1;
-+
-+		barrier();
-+
-+		req = RING_GET_REQUEST(&info->conn_ring,
-+				       info->conn_ring.req_prod_pvt);
-+		req->id = id;
-+		info->conn_ring.req_prod_pvt++;
-+	}
-+
-+	if (rc != info->conn_ring.req_prod_pvt)
-+		RING_FINAL_CHECK_FOR_RESPONSES(&info->conn_ring, more_to_do);
-+	else
-+		info->conn_ring.sring->rsp_event = rc + 1;
-+
-+	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info->conn_ring, notify);
-+	if (notify)
-+		notify_remote_via_irq(info->irq);
-+
-+	spin_unlock_irqrestore(&info->lock, flags);
-+
-+	if (port_changed)
-+		usb_hcd_poll_rh_status(xenhcd_info_to_hcd(info));
-+
-+	return more_to_do;
-+}
-+
-+static irqreturn_t xenhcd_int(int irq, void *dev_id)
-+{
-+	struct xenhcd_info *info = (struct xenhcd_info *)dev_id;
-+
-+	if (unlikely(info->error))
-+		return IRQ_HANDLED;
-+
-+	while (xenhcd_urb_request_done(info) | xenhcd_conn_notify(info))
-+		/* Yield point for this unbounded loop. */
-+		cond_resched();
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static void xenhcd_destroy_rings(struct xenhcd_info *info)
-+{
-+	if (info->irq)
-+		unbind_from_irqhandler(info->irq, info);
-+	info->irq = 0;
-+
-+	if (info->urb_ring_ref != GRANT_INVALID_REF) {
-+		gnttab_end_foreign_access(info->urb_ring_ref, 0,
-+					  (unsigned long)info->urb_ring.sring);
-+		info->urb_ring_ref = GRANT_INVALID_REF;
-+	}
-+	info->urb_ring.sring = NULL;
-+
-+	if (info->conn_ring_ref != GRANT_INVALID_REF) {
-+		gnttab_end_foreign_access(info->conn_ring_ref, 0,
-+					  (unsigned long)info->conn_ring.sring);
-+		info->conn_ring_ref = GRANT_INVALID_REF;
-+	}
-+	info->conn_ring.sring = NULL;
-+}
-+
-+static int xenhcd_setup_rings(struct xenbus_device *dev,
-+			      struct xenhcd_info *info)
-+{
-+	struct xenusb_urb_sring *urb_sring;
-+	struct xenusb_conn_sring *conn_sring;
-+	grant_ref_t gref;
-+	int err;
-+
-+	info->urb_ring_ref = GRANT_INVALID_REF;
-+	info->conn_ring_ref = GRANT_INVALID_REF;
-+
-+	urb_sring = (struct xenusb_urb_sring *)get_zeroed_page(
-+							GFP_NOIO | __GFP_HIGH);
-+	if (!urb_sring) {
-+		xenbus_dev_fatal(dev, -ENOMEM, "allocating urb ring");
-+		return -ENOMEM;
-+	}
-+	SHARED_RING_INIT(urb_sring);
-+	FRONT_RING_INIT(&info->urb_ring, urb_sring, PAGE_SIZE);
-+
-+	err = xenbus_grant_ring(dev, urb_sring, 1, &gref);
-+	if (err < 0) {
-+		free_page((unsigned long)urb_sring);
-+		info->urb_ring.sring = NULL;
-+		goto fail;
-+	}
-+	info->urb_ring_ref = gref;
-+
-+	conn_sring = (struct xenusb_conn_sring *)get_zeroed_page(
-+							GFP_NOIO | __GFP_HIGH);
-+	if (!conn_sring) {
-+		xenbus_dev_fatal(dev, -ENOMEM, "allocating conn ring");
-+		err = -ENOMEM;
-+		goto fail;
-+	}
-+	SHARED_RING_INIT(conn_sring);
-+	FRONT_RING_INIT(&info->conn_ring, conn_sring, PAGE_SIZE);
-+
-+	err = xenbus_grant_ring(dev, conn_sring, 1, &gref);
-+	if (err < 0) {
-+		free_page((unsigned long)conn_sring);
-+		info->conn_ring.sring = NULL;
-+		goto fail;
-+	}
-+	info->conn_ring_ref = gref;
-+
-+	err = xenbus_alloc_evtchn(dev, &info->evtchn);
-+	if (err) {
-+		xenbus_dev_fatal(dev, err, "xenbus_alloc_evtchn");
-+		goto fail;
-+	}
-+
-+	err = bind_evtchn_to_irq(info->evtchn);
-+	if (err <= 0) {
-+		xenbus_dev_fatal(dev, err, "bind_evtchn_to_irq");
-+		goto fail;
-+	}
-+
-+	info->irq = err;
-+
-+	err = request_threaded_irq(info->irq, NULL, xenhcd_int,
-+				   IRQF_ONESHOT, "xenhcd", info);
-+	if (err) {
-+		xenbus_dev_fatal(dev, err, "request_threaded_irq");
-+		goto free_irq;
-+	}
-+
-+	return 0;
-+
-+free_irq:
-+	unbind_from_irqhandler(info->irq, info);
-+fail:
-+	xenhcd_destroy_rings(info);
-+	return err;
-+}
-+
-+static int xenhcd_talk_to_backend(struct xenbus_device *dev,
-+				  struct xenhcd_info *info)
-+{
-+	const char *message;
-+	struct xenbus_transaction xbt;
-+	int err;
-+
-+	err = xenhcd_setup_rings(dev, info);
-+	if (err)
-+		return err;
-+
-+again:
-+	err = xenbus_transaction_start(&xbt);
-+	if (err) {
-+		xenbus_dev_fatal(dev, err, "starting transaction");
-+		goto destroy_ring;
-+	}
-+
-+	err = xenbus_printf(xbt, dev->nodename, "urb-ring-ref", "%u",
-+			    info->urb_ring_ref);
-+	if (err) {
-+		message = "writing urb-ring-ref";
-+		goto abort_transaction;
-+	}
-+
-+	err = xenbus_printf(xbt, dev->nodename, "conn-ring-ref", "%u",
-+			    info->conn_ring_ref);
-+	if (err) {
-+		message = "writing conn-ring-ref";
-+		goto abort_transaction;
-+	}
-+
-+	err = xenbus_printf(xbt, dev->nodename, "event-channel", "%u",
-+			    info->evtchn);
-+	if (err) {
-+		message = "writing event-channel";
-+		goto abort_transaction;
-+	}
-+
-+	err = xenbus_transaction_end(xbt, 0);
-+	if (err) {
-+		if (err == -EAGAIN)
-+			goto again;
-+		xenbus_dev_fatal(dev, err, "completing transaction");
-+		goto destroy_ring;
-+	}
-+
-+	return 0;
-+
-+abort_transaction:
-+	xenbus_transaction_end(xbt, 1);
-+	xenbus_dev_fatal(dev, err, "%s", message);
-+
-+destroy_ring:
-+	xenhcd_destroy_rings(info);
-+
-+	return err;
-+}
-+
-+static int xenhcd_connect(struct xenbus_device *dev)
-+{
-+	struct xenhcd_info *info = dev_get_drvdata(&dev->dev);
-+	struct xenusb_conn_request *req;
-+	int idx, err;
-+	int notify;
-+	char name[TASK_COMM_LEN];
-+	struct usb_hcd *hcd;
-+
-+	hcd = xenhcd_info_to_hcd(info);
-+	snprintf(name, TASK_COMM_LEN, "xenhcd.%d", hcd->self.busnum);
-+
-+	err = xenhcd_talk_to_backend(dev, info);
-+	if (err)
-+		return err;
-+
-+	/* prepare ring for hotplug notification */
-+	for (idx = 0; idx < XENUSB_CONN_RING_SIZE; idx++) {
-+		req = RING_GET_REQUEST(&info->conn_ring, idx);
-+		req->id = idx;
-+	}
-+	info->conn_ring.req_prod_pvt = idx;
-+
-+	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info->conn_ring, notify);
-+	if (notify)
-+		notify_remote_via_irq(info->irq);
-+
-+	return 0;
-+}
-+
-+static void xenhcd_disconnect(struct xenbus_device *dev)
-+{
-+	struct xenhcd_info *info = dev_get_drvdata(&dev->dev);
-+	struct usb_hcd *hcd = xenhcd_info_to_hcd(info);
-+
-+	usb_remove_hcd(hcd);
-+	xenbus_frontend_closed(dev);
-+}
-+
-+static void xenhcd_watchdog(struct timer_list *timer)
-+{
-+	struct xenhcd_info *info = from_timer(info, timer, watchdog);
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+	if (likely(HC_IS_RUNNING(xenhcd_info_to_hcd(info)->state))) {
-+		xenhcd_timer_action_done(info, TIMER_RING_WATCHDOG);
-+		xenhcd_giveback_unlinked_urbs(info);
-+		xenhcd_kick_pending_urbs(info);
-+	}
-+	spin_unlock_irqrestore(&info->lock, flags);
-+}
-+
-+/*
-+ * one-time HC init
-+ */
-+static int xenhcd_setup(struct usb_hcd *hcd)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+
-+	spin_lock_init(&info->lock);
-+	INIT_LIST_HEAD(&info->pending_submit_list);
-+	INIT_LIST_HEAD(&info->pending_unlink_list);
-+	INIT_LIST_HEAD(&info->in_progress_list);
-+	INIT_LIST_HEAD(&info->giveback_waiting_list);
-+	timer_setup(&info->watchdog, xenhcd_watchdog, 0);
-+
-+	hcd->has_tt = (hcd->driver->flags & HCD_MASK) != HCD_USB11;
-+
-+	return 0;
-+}
-+
-+/*
-+ * start HC running
-+ */
-+static int xenhcd_run(struct usb_hcd *hcd)
-+{
-+	hcd->uses_new_polling = 1;
-+	clear_bit(HCD_FLAG_POLL_RH, &hcd->flags);
-+	hcd->state = HC_STATE_RUNNING;
-+	return 0;
-+}
-+
-+/*
-+ * stop running HC
-+ */
-+static void xenhcd_stop(struct usb_hcd *hcd)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+
-+	del_timer_sync(&info->watchdog);
-+	spin_lock_irq(&info->lock);
-+	/* cancel all urbs */
-+	hcd->state = HC_STATE_HALT;
-+	xenhcd_cancel_all_enqueued_urbs(info);
-+	xenhcd_giveback_unlinked_urbs(info);
-+	spin_unlock_irq(&info->lock);
-+}
-+
-+/*
-+ * called as .urb_enqueue()
-+ * non-error returns are promise to giveback the urb later
-+ */
-+static int xenhcd_urb_enqueue(struct usb_hcd *hcd, struct urb *urb,
-+			      gfp_t mem_flags)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+	struct urb_priv *urbp;
-+	unsigned long flags;
-+	int ret;
-+
-+	if (unlikely(info->error))
-+		return -ESHUTDOWN;
-+
-+	urbp = kmem_cache_zalloc(xenhcd_urbp_cachep, mem_flags);
-+	if (!urbp)
-+		return -ENOMEM;
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+
-+	urbp->urb = urb;
-+	urb->hcpriv = urbp;
-+	urbp->req_id = ~0;
-+	urbp->unlink_req_id = ~0;
-+	INIT_LIST_HEAD(&urbp->list);
-+	urbp->status = 1;
-+	urb->unlinked = false;
-+
-+	ret = xenhcd_submit_urb(info, urbp);
-+
-+	if (ret)
-+		xenhcd_free_urb_priv(urbp);
-+
-+	spin_unlock_irqrestore(&info->lock, flags);
-+
-+	return ret;
-+}
-+
-+/*
-+ * called as .urb_dequeue()
-+ */
-+static int xenhcd_urb_dequeue(struct usb_hcd *hcd, struct urb *urb, int status)
-+{
-+	struct xenhcd_info *info = xenhcd_hcd_to_info(hcd);
-+	struct urb_priv *urbp;
-+	unsigned long flags;
-+	int ret = 0;
-+
-+	spin_lock_irqsave(&info->lock, flags);
-+
-+	urbp = urb->hcpriv;
-+	if (urbp) {
-+		urbp->status = status;
-+		ret = xenhcd_unlink_urb(info, urbp);
-+	}
-+
-+	spin_unlock_irqrestore(&info->lock, flags);
-+
-+	return ret;
-+}
-+
-+/*
-+ * called from usb_get_current_frame_number(),
-+ * but, almost all drivers not use such function.
-+ */
-+static int xenhcd_get_frame(struct usb_hcd *hcd)
-+{
-+	/* it means error, but probably no problem :-) */
-+	return 0;
-+}
-+
-+static struct hc_driver xenhcd_usb20_hc_driver = {
-+	.description = "xen-hcd",
-+	.product_desc = "Xen USB2.0 Virtual Host Controller",
-+	.hcd_priv_size = sizeof(struct xenhcd_info),
-+	.flags = HCD_USB2,
-+
-+	/* basic HC lifecycle operations */
-+	.reset = xenhcd_setup,
-+	.start = xenhcd_run,
-+	.stop = xenhcd_stop,
-+
-+	/* managing urb I/O */
-+	.urb_enqueue = xenhcd_urb_enqueue,
-+	.urb_dequeue = xenhcd_urb_dequeue,
-+	.get_frame_number = xenhcd_get_frame,
-+
-+	/* root hub operations */
-+	.hub_status_data = xenhcd_hub_status_data,
-+	.hub_control = xenhcd_hub_control,
-+#ifdef CONFIG_PM
-+	.bus_suspend = xenhcd_bus_suspend,
-+	.bus_resume = xenhcd_bus_resume,
-+#endif
-+};
-+
-+static struct hc_driver xenhcd_usb11_hc_driver = {
-+	.description = "xen-hcd",
-+	.product_desc = "Xen USB1.1 Virtual Host Controller",
-+	.hcd_priv_size = sizeof(struct xenhcd_info),
-+	.flags = HCD_USB11,
-+
-+	/* basic HC lifecycle operations */
-+	.reset = xenhcd_setup,
-+	.start = xenhcd_run,
-+	.stop = xenhcd_stop,
-+
-+	/* managing urb I/O */
-+	.urb_enqueue = xenhcd_urb_enqueue,
-+	.urb_dequeue = xenhcd_urb_dequeue,
-+	.get_frame_number = xenhcd_get_frame,
-+
-+	/* root hub operations */
-+	.hub_status_data = xenhcd_hub_status_data,
-+	.hub_control = xenhcd_hub_control,
-+#ifdef CONFIG_PM
-+	.bus_suspend = xenhcd_bus_suspend,
-+	.bus_resume = xenhcd_bus_resume,
-+#endif
-+};
-+
-+static struct usb_hcd *xenhcd_create_hcd(struct xenbus_device *dev)
-+{
-+	int i;
-+	int err = 0;
-+	int num_ports;
-+	int usb_ver;
-+	struct usb_hcd *hcd = NULL;
-+	struct xenhcd_info *info;
-+
-+	err = xenbus_scanf(XBT_NIL, dev->otherend, "num-ports", "%d",
-+			   &num_ports);
-+	if (err != 1) {
-+		xenbus_dev_fatal(dev, err, "reading num-ports");
-+		return ERR_PTR(-EINVAL);
-+	}
-+	if (num_ports < 1 || num_ports > XENUSB_MAX_PORTNR) {
-+		xenbus_dev_fatal(dev, err, "invalid num-ports");
-+		return ERR_PTR(-EINVAL);
-+	}
-+
-+	err = xenbus_scanf(XBT_NIL, dev->otherend, "usb-ver", "%d", &usb_ver);
-+	if (err != 1) {
-+		xenbus_dev_fatal(dev, err, "reading usb-ver");
-+		return ERR_PTR(-EINVAL);
-+	}
-+	switch (usb_ver) {
-+	case XENUSB_VER_USB11:
-+		hcd = usb_create_hcd(&xenhcd_usb11_hc_driver, &dev->dev,
-+				     dev_name(&dev->dev));
-+		break;
-+	case XENUSB_VER_USB20:
-+		hcd = usb_create_hcd(&xenhcd_usb20_hc_driver, &dev->dev,
-+				     dev_name(&dev->dev));
-+		break;
-+	default:
-+		xenbus_dev_fatal(dev, err, "invalid usb-ver");
-+		return ERR_PTR(-EINVAL);
-+	}
-+	if (!hcd) {
-+		xenbus_dev_fatal(dev, err,
-+				 "fail to allocate USB host controller");
-+		return ERR_PTR(-ENOMEM);
-+	}
-+
-+	info = xenhcd_hcd_to_info(hcd);
-+	info->xbdev = dev;
-+	info->rh_numports = num_ports;
-+
-+	for (i = 0; i < XENUSB_URB_RING_SIZE; i++) {
-+		info->shadow[i].req.id = i + 1;
-+		info->shadow[i].urb = NULL;
-+	}
-+	info->shadow[XENUSB_URB_RING_SIZE - 1].req.id = 0x0fff;
-+
-+	return hcd;
-+}
-+
-+static void xenhcd_backend_changed(struct xenbus_device *dev,
-+				   enum xenbus_state backend_state)
-+{
-+	switch (backend_state) {
-+	case XenbusStateInitialising:
-+	case XenbusStateReconfiguring:
-+	case XenbusStateReconfigured:
-+	case XenbusStateUnknown:
-+		break;
-+
-+	case XenbusStateInitWait:
-+	case XenbusStateInitialised:
-+	case XenbusStateConnected:
-+		if (dev->state != XenbusStateInitialising)
-+			break;
-+		if (!xenhcd_connect(dev))
-+			xenbus_switch_state(dev, XenbusStateConnected);
-+		break;
-+
-+	case XenbusStateClosed:
-+		if (dev->state == XenbusStateClosed)
-+			break;
-+		fallthrough;	/* Missed the backend's Closing state. */
-+	case XenbusStateClosing:
-+		xenhcd_disconnect(dev);
-+		break;
-+
-+	default:
-+		xenbus_dev_fatal(dev, -EINVAL, "saw state %d at frontend",
-+				 backend_state);
-+		break;
-+	}
-+}
-+
-+static int xenhcd_remove(struct xenbus_device *dev)
-+{
-+	struct xenhcd_info *info = dev_get_drvdata(&dev->dev);
-+	struct usb_hcd *hcd = xenhcd_info_to_hcd(info);
-+
-+	xenhcd_destroy_rings(info);
-+	usb_put_hcd(hcd);
-+
-+	return 0;
-+}
-+
-+static int xenhcd_probe(struct xenbus_device *dev,
-+			const struct xenbus_device_id *id)
-+{
-+	int err;
-+	struct usb_hcd *hcd;
-+	struct xenhcd_info *info;
-+
-+	if (usb_disabled())
-+		return -ENODEV;
-+
-+	hcd = xenhcd_create_hcd(dev);
-+	if (IS_ERR(hcd)) {
-+		err = PTR_ERR(hcd);
-+		xenbus_dev_fatal(dev, err,
-+				 "fail to create usb host controller");
-+		return err;
-+	}
-+
-+	info = xenhcd_hcd_to_info(hcd);
-+	dev_set_drvdata(&dev->dev, info);
-+
-+	err = usb_add_hcd(hcd, 0, 0);
-+	if (err) {
-+		xenbus_dev_fatal(dev, err, "fail to add USB host controller");
-+		usb_put_hcd(hcd);
-+		dev_set_drvdata(&dev->dev, NULL);
-+	}
-+
-+	return err;
-+}
-+
-+static const struct xenbus_device_id xenhcd_ids[] = {
-+	{ "vusb" },
-+	{ "" },
-+};
-+
-+static struct xenbus_driver xenhcd_driver = {
-+	.ids			= xenhcd_ids,
-+	.probe			= xenhcd_probe,
-+	.otherend_changed	= xenhcd_backend_changed,
-+	.remove			= xenhcd_remove,
-+};
-+
-+static int __init xenhcd_init(void)
-+{
-+	if (!xen_domain())
-+		return -ENODEV;
-+
-+	xenhcd_urbp_cachep = kmem_cache_create("xenhcd_urb_priv",
-+					sizeof(struct urb_priv), 0, 0, NULL);
-+	if (!xenhcd_urbp_cachep) {
-+		pr_err("xenhcd failed to create kmem cache\n");
-+		return -ENOMEM;
-+	}
-+
-+	return xenbus_register_frontend(&xenhcd_driver);
-+}
-+module_init(xenhcd_init);
-+
-+static void __exit xenhcd_exit(void)
-+{
-+	kmem_cache_destroy(xenhcd_urbp_cachep);
-+	xenbus_unregister_driver(&xenhcd_driver);
-+}
-+module_exit(xenhcd_exit);
-+
-+MODULE_ALIAS("xen:vusb");
-+MODULE_AUTHOR("Juergen Gross <jgross@suse.com>");
-+MODULE_DESCRIPTION("Xen USB Virtual Host Controller driver (xen-hcd)");
-+MODULE_LICENSE("Dual BSD/GPL");
--- 
-2.26.2
-
+Thanks, Roger.
 
