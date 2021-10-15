@@ -2,43 +2,38 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87A4CC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E4BAC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:53:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5669760C49
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:52:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5669760C49
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 40B4661181
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:53:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 40B4661181
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.210929.368008 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.210963.368018 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbQRO-0006nE-Qb; Fri, 15 Oct 2021 16:52:18 +0000
+	id 1mbQSe-00007E-2h; Fri, 15 Oct 2021 16:53:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 210929.368008; Fri, 15 Oct 2021 16:52:18 +0000
+Received: by outflank-mailman (output) from mailman id 210963.368018; Fri, 15 Oct 2021 16:53:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbQRO-0006my-Kn; Fri, 15 Oct 2021 16:52:18 +0000
-Received: by outflank-mailman (input) for mailman id 210929;
- Fri, 15 Oct 2021 16:52:17 +0000
+	id 1mbQSd-000074-W1; Fri, 15 Oct 2021 16:53:35 +0000
+Received: by outflank-mailman (input) for mailman id 210963;
+ Fri, 15 Oct 2021 16:53:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Fqmt=PD=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1mbQRN-00052U-9D
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 16:52:17 +0000
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 76f43db9-2b5a-45af-97d4-4fe8e00b74cc;
- Fri, 15 Oct 2021 16:52:07 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 218681480;
- Fri, 15 Oct 2021 09:52:07 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A88EA3F70D;
- Fri, 15 Oct 2021 09:52:05 -0700 (PDT)
+ <SRS0=1aKp=PD=gmail.com=andy.shevchenko@srs-us1.protection.inumbo.net>)
+ id 1mbQSd-00006p-9Q
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 16:53:35 +0000
+Received: from mail-ed1-x533.google.com (unknown [2a00:1450:4864:20::533])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5fb46bc0-1163-4960-9021-3306e67006e7;
+ Fri, 15 Oct 2021 16:53:34 +0000 (UTC)
+Received: by mail-ed1-x533.google.com with SMTP id y30so22910749edi.0
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Oct 2021 09:53:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,249 +45,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76f43db9-2b5a-45af-97d4-4fe8e00b74cc
-From: Bertrand Marquis <bertrand.marquis@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: iwj@xenproject.org,
-	sstabellini@kernel.org,
-	Rahul Singh <rahul.singh@arm.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Michal Orzel <michal.orzel@arm.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v8 5/5] arm/libxl: Emulated PCI device tree node in libxl
-Date: Fri, 15 Oct 2021 17:51:45 +0100
-Message-Id: <400225e0736c7b5b1f1950a919677fc0a72d212f.1634315461.git.bertrand.marquis@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1634315461.git.bertrand.marquis@arm.com>
-References: <cover.1634315461.git.bertrand.marquis@arm.com>
+X-Inumbo-ID: 5fb46bc0-1163-4960-9021-3306e67006e7
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=DFAfhL2wTnA/x1oOiRIEIccRhRGZWYerK6em4KwuQr0=;
+        b=WhznUYR2nkpwiwbTRwmHKoc047JsFdk3RvHIe/jtOLSDmdxX07MCX9Eow0Bi+yLoQp
+         EyU08OzLxLG5ZCsUs7GUsgWdhql+ygc3SL2hgpQj7qkueaPaH4FCl+VEJFbTT66B35gH
+         GDagaCdrbJmPFv3m1vjK25dlCo+SurtmwsJpbtn+lVZ1hUtQu8pPUJ/3APaMcce/rMb+
+         gK4/JKJga2A5DLyU3cXWQ467mYYMbHs26I04bEcKD9mvTuveZ0BpijvVaw9Fg5WzWNNW
+         l7COh3PfIisjI8gWM0rsyxYaukEsrZpFMim7hIuXFIwI4NkGZUXxkbzqxVTnksr3mpP4
+         SUYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=DFAfhL2wTnA/x1oOiRIEIccRhRGZWYerK6em4KwuQr0=;
+        b=zXW59JpnuDXKIapTKzL11AZzoclk39l8OB7pOB29F14aZ9ZZTp11sYBCsdu35WulBP
+         Wr4Nqm8Rb9n9f3DU8WOjUbD9L7/i7mL8hCCXo5fEXKM4mglJBr9vt+AHp3QJuF4SQbrH
+         +/qGGqUrQZDxTfQgbmYEh3LIpE1PhC9d2aDKnO9O4pmUqLRJS75xhdJQjjn3dnXoApWs
+         /sZqjt71HW5LfGLVwMt3qKYl1112CGiajPq4bA5LR1jP4XJHb/4V2FQ8R7Y2F9VZH3m/
+         rRcLxahjVH/VKLkt957cZSTwJAs4uYBLBTWvuzkbD/an6S7ZiMFKQLSemZVzdDbNwKqF
+         B6tw==
+X-Gm-Message-State: AOAM53174cbMJje67L404c7JHVVbSutLTj9a3NDGWI+SpwlR7gDGk0k5
+	Naetn0hs6eZFMP0FsZ4RdThk+4DD9YNar1B2HGE=
+X-Google-Smtp-Source: ABdhPJw1GMYkf4/DzQ6xCdDldbViFURlmc0YnNdhDKa/6j1hrF7JWMyfM92nI6tIEj+fn7ChYTDQotvOC+uhf3cE48A=
+X-Received: by 2002:a50:e188:: with SMTP id k8mr19911628edl.119.1634316813165;
+ Fri, 15 Oct 2021 09:53:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <YWbdvc7EWEZLVTHM@smile.fi.intel.com> <20211015164653.GA2108651@bhelgaas>
+In-Reply-To: <20211015164653.GA2108651@bhelgaas>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Fri, 15 Oct 2021 22:52:45 +0300
+Message-ID: <CAHp75VdpVwvOkjDWHcnWA-qZFm062UBp7VwdcpWbkdVR=i75Hw@mail.gmail.com>
+Subject: Re: [PATCH v6 00/11] PCI: Drop duplicated tracking of a pci_dev's
+ bound driver
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>, 
+	linux-pci <linux-pci@vger.kernel.org>, Sascha Hauer <kernel@pengutronix.de>, 
+	Alexander Duyck <alexanderduyck@fb.com>, 
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Andrew Donnellan <ajd@linux.ibm.com>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Borislav Petkov <bp@alien8.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+	"David S. Miller" <davem@davemloft.net>, Fiona Trahe <fiona.trahe@intel.com>, 
+	Frederic Barrat <fbarrat@linux.ibm.com>, Giovanni Cabiddu <giovanni.cabiddu@intel.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Herbert Xu <herbert@gondor.apana.org.au>, 
+	"H. Peter Anvin" <hpa@zytor.com>, Ido Schimmel <idosch@nvidia.com>, Ingo Molnar <mingo@redhat.com>, 
+	Jack Xu <jack.xu@intel.com>, Jakub Kicinski <kuba@kernel.org>, 
+	Jesse Brandeburg <jesse.brandeburg@intel.com>, Jiri Olsa <jolsa@redhat.com>, 
+	Jiri Pirko <jiri@nvidia.com>, Juergen Gross <jgross@suse.com>, 
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Marco Chiappero <marco.chiappero@intel.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Mathias Nyman <mathias.nyman@intel.com>, 
+	Michael Buesch <m@bues.ch>, Michael Ellerman <mpe@ellerman.id.au>, Namhyung Kim <namhyung@kernel.org>, 
+	"Oliver O'Halloran" <oohall@gmail.com>, Paul Mackerras <paulus@samba.org>, 
+	Peter Zijlstra <peterz@infradead.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, 
+	Russell Currey <ruscur@russell.cc>, Salil Mehta <salil.mehta@huawei.com>, 
+	Sathya Prakash <sathya.prakash@broadcom.com>, Simon Horman <simon.horman@corigine.com>, 
+	Sreekanth Reddy <sreekanth.reddy@broadcom.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>, 
+	Taras Chornyi <tchornyi@marvell.com>, Thomas Gleixner <tglx@linutronix.de>, 
+	Tomaszx Kowalik <tomaszx.kowalik@intel.com>, Vadym Kochan <vkochan@marvell.com>, 
+	Wojciech Ziemba <wojciech.ziemba@intel.com>, Yisen Zhuang <yisen.zhuang@huawei.com>, 
+	Zhou Wang <wangzhou1@hisilicon.com>, linux-crypto <linux-crypto@vger.kernel.org>, 
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, linux-perf-users@vger.kernel.org, 
+	"open list:LINUX FOR POWERPC PA SEMI PWRFICIENT" <linuxppc-dev@lists.ozlabs.org>, linux-scsi <linux-scsi@vger.kernel.org>, 
+	USB <linux-usb@vger.kernel.org>, 
+	"open list:TI WILINK WIRELES..." <linux-wireless@vger.kernel.org>, MPT-FusionLinux.pdl@broadcom.com, 
+	netdev <netdev@vger.kernel.org>, oss-drivers@corigine.com, qat-linux@intel.com, 
+	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
 
-From: Rahul Singh <rahul.singh@arm.com>
+On Fri, Oct 15, 2021 at 7:46 PM Bjorn Helgaas <helgaas@kernel.org> wrote:
+> On Wed, Oct 13, 2021 at 04:23:09PM +0300, Andy Shevchenko wrote:
 
-libxl will create an emulated PCI device tree node in the device tree to
-enable the guest OS to discover the virtual PCI during guest boot.
-Emulated PCI device tree node will only be created when there is any
-device assigned to guest.
+...
 
-A new area has been reserved in the arm guest physical map at
-which the VPCI bus is declared in the device tree (reg and ranges
-parameters of the node).
+> so compared to Uwe's v6, I restored that section to the original code.
+> My goal here was to make the patch as simple and easy to review as
+> possible.
 
-Note that currently we are using num_pcidevs instead of
-c_info->passthrough to decide whether to create a vPCI DT node.
-This will be insufficient if and when ARM does PCI hotplug.
-Add this note inside libxl_create.c where c_info->passthrough
-is set.
+Thanks for elaboration. I have got it.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-Signed-off-by: Michal Orzel <michal.orzel@arm.com>
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
-Acked-by: Ian Jackson <iwj@xenproject.org>
----
-Changes in v8: add Signed-off Bertrand Marquis
-Changes in v7:
--remove arch_arm.vpci
--create vpci DT note if (d_config->num_pcidevs)
-Changes in v6:
-According to https://marc.info/?l=xen-devel&m=163415838129479&w=2:
--do not set XEN_DOMCTL_CDF_vpci
--do not enable VPCI support (by setting b_info.arch_arm.vpci)
--do not define LIBXL_HAVE_BUILDINFO_ARM_VPCI
--keep b_info.arch_arm.vpci, make_vpci_node and its helpers
-Change in v5:
-- Move setting the arch_arm.vpci and XEN_DOMCTL_CDF_vpci to libxl_arm.c
-Change in v4:
-- Gate code for x86 for setting the XEN_DOMCTL_CDF_vpci for x86.
-Change in v3:
-- Make GUEST_VPCI_MEM_ADDR address 2MB aligned
-Change in v2:
-- enable doamin_vpci_init() when XEN_DOMCTL_CDF_vpci is set for domain.
----
----
- tools/libs/light/libxl_arm.c    | 103 ++++++++++++++++++++++++++++++++
- tools/libs/light/libxl_create.c |   5 ++
- xen/include/public/arch-arm.h   |  10 ++++
- 3 files changed, 118 insertions(+)
+...
 
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index fdae129605..eef1de0939 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -284,6 +284,59 @@ static int fdt_property_reg_placeholder(libxl__gc *gc, void *fdt,
-     return fdt_property(fdt, "reg", regs, sizeof(regs));
- }
- 
-+static int fdt_property_values(libxl__gc *gc, void *fdt,
-+                               const char *name,
-+                               unsigned num_cells, ...)
-+{
-+    uint32_t prop[num_cells];
-+    be32 *cells = &prop[0];
-+    int i;
-+    va_list ap;
-+    uint32_t arg;
-+
-+    va_start(ap, num_cells);
-+    for (i = 0 ; i < num_cells; i++) {
-+        arg = va_arg(ap, uint32_t);
-+        set_cell(&cells, 1, arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, name, prop, sizeof(prop));
-+}
-+
-+static int fdt_property_vpci_ranges(libxl__gc *gc, void *fdt,
-+                                    unsigned addr_cells,
-+                                    unsigned size_cells,
-+                                    unsigned num_regs, ...)
-+{
-+    uint32_t regs[num_regs*((addr_cells*2)+size_cells+1)];
-+    be32 *cells = &regs[0];
-+    int i;
-+    va_list ap;
-+    uint64_t arg;
-+
-+    va_start(ap, num_regs);
-+    for (i = 0 ; i < num_regs; i++) {
-+        /* Set the memory bit field */
-+        arg = va_arg(ap, uint32_t);
-+        set_cell(&cells, 1, arg);
-+
-+        /* Set the vpci bus address */
-+        arg = addr_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, addr_cells , arg);
-+
-+        /* Set the cpu bus address where vpci address is mapped */
-+        set_cell(&cells, addr_cells, arg);
-+
-+        /* Set the vpci size requested */
-+        arg = size_cells ? va_arg(ap, uint64_t) : 0;
-+        set_cell(&cells, size_cells, arg);
-+    }
-+    va_end(ap);
-+
-+    return fdt_property(fdt, "ranges", regs, sizeof(regs));
-+}
-+
- static int make_root_properties(libxl__gc *gc,
-                                 const libxl_version_info *vers,
-                                 void *fdt)
-@@ -687,6 +740,53 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
-     return 0;
- }
- 
-+static int make_vpci_node(libxl__gc *gc, void *fdt,
-+                          const struct arch_info *ainfo,
-+                          struct xc_dom_image *dom)
-+{
-+    int res;
-+    const uint64_t vpci_ecam_base = GUEST_VPCI_ECAM_BASE;
-+    const uint64_t vpci_ecam_size = GUEST_VPCI_ECAM_SIZE;
-+    const char *name = GCSPRINTF("pcie@%"PRIx64, vpci_ecam_base);
-+
-+    res = fdt_begin_node(fdt, name);
-+    if (res) return res;
-+
-+    res = fdt_property_compat(gc, fdt, 1, "pci-host-ecam-generic");
-+    if (res) return res;
-+
-+    res = fdt_property_string(fdt, "device_type", "pci");
-+    if (res) return res;
-+
-+    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+            GUEST_ROOT_SIZE_CELLS, 1, vpci_ecam_base, vpci_ecam_size);
-+    if (res) return res;
-+
-+    res = fdt_property_values(gc, fdt, "bus-range", 2, 0, 255);
-+    if (res) return res;
-+
-+    res = fdt_property_cell(fdt, "#address-cells", 3);
-+    if (res) return res;
-+
-+    res = fdt_property_cell(fdt, "#size-cells", 2);
-+    if (res) return res;
-+
-+    res = fdt_property_string(fdt, "status", "okay");
-+    if (res) return res;
-+
-+    res = fdt_property_vpci_ranges(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
-+        GUEST_ROOT_SIZE_CELLS, 2,
-+        GUEST_VPCI_ADDR_TYPE_MEM, GUEST_VPCI_MEM_ADDR, GUEST_VPCI_MEM_SIZE,
-+        GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM, GUEST_VPCI_PREFETCH_MEM_ADDR,
-+        GUEST_VPCI_PREFETCH_MEM_SIZE);
-+    if (res) return res;
-+
-+    res = fdt_end_node(fdt);
-+    if (res) return res;
-+
-+    return 0;
-+}
-+
- static const struct arch_info *get_arch_info(libxl__gc *gc,
-                                              const struct xc_dom_image *dom)
- {
-@@ -991,6 +1091,9 @@ next_resize:
-         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
-             FDT( make_optee_node(gc, fdt) );
- 
-+        if (d_config->num_pcidevs)
-+            FDT( make_vpci_node(gc, fdt, ainfo, dom) );
-+
-         if (pfdt)
-             FDT( copy_partial_fdt(gc, fdt, pfdt) );
- 
-diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
-index 6ebb2bfc76..5a61d01722 100644
---- a/tools/libs/light/libxl_create.c
-+++ b/tools/libs/light/libxl_create.c
-@@ -1096,6 +1096,11 @@ int libxl__domain_config_setdefault(libxl__gc *gc,
-         goto error_out;
-     }
- 
-+    /*
-+     * Note: libxl_arm directly examines num_pcidevs to decide whether
-+     * to create a vPCI DT node, rather than using c_info->passthrough.
-+     * This will be insufficient if and when ARM does PCI hotplug.
-+     */
-     bool need_pt = d_config->num_pcidevs || d_config->num_dtdevs;
-     if (c_info->passthrough == LIBXL_PASSTHROUGH_DEFAULT) {
-         c_info->passthrough = need_pt
-diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
-index b4c615bcdf..94b31511dd 100644
---- a/xen/include/public/arch-arm.h
-+++ b/xen/include/public/arch-arm.h
-@@ -433,6 +433,11 @@ typedef uint64_t xen_callback_t;
- #define GUEST_PL011_BASE    xen_mk_ullong(0x22000000)
- #define GUEST_PL011_SIZE    xen_mk_ullong(0x00001000)
- 
-+/* Guest PCI-PCIe memory space where config space and BAR will be available.*/
-+#define GUEST_VPCI_ADDR_TYPE_MEM            xen_mk_ullong(0x02000000)
-+#define GUEST_VPCI_MEM_ADDR                 xen_mk_ullong(0x23000000)
-+#define GUEST_VPCI_MEM_SIZE                 xen_mk_ullong(0x10000000)
-+
- /*
-  * 16MB == 4096 pages reserved for guest to use as a region to map its
-  * grant table in.
-@@ -453,6 +458,11 @@ typedef uint64_t xen_callback_t;
- #define GUEST_RAM0_BASE   xen_mk_ullong(0x40000000) /* 3GB of low RAM @ 1GB */
- #define GUEST_RAM0_SIZE   xen_mk_ullong(0xc0000000)
- 
-+/* 4GB @ 4GB Prefetch Memory for VPCI */
-+#define GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM   xen_mk_ullong(0x42000000)
-+#define GUEST_VPCI_PREFETCH_MEM_ADDR        xen_mk_ullong(0x100000000)
-+#define GUEST_VPCI_PREFETCH_MEM_SIZE        xen_mk_ullong(0x100000000)
-+
- #define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /* 1016GB of RAM @ 8GB */
- #define GUEST_RAM1_SIZE   xen_mk_ullong(0xfe00000000)
- 
+> You're right, this didn't make much sense in that patch.  I moved the
+> line join to the previous patch, which unindented this section and
+> made space for this to fit on one line.  Here's the revised commit:
+>
+>   https://git.kernel.org/cgit/linux/kernel/git/helgaas/pci.git/commit/?id=34ab316d7287
+
+Side remark: default without break or return is error prone (okay, to
+some extent). Perhaps adding the return statement there will make
+things robust and clean.
+
 -- 
-2.25.1
-
+With Best Regards,
+Andy Shevchenko
 
