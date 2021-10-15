@@ -2,39 +2,38 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA10EC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC120C43219
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8435C6105A
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 22:55:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8435C6105A
+	by mail.kernel.org (Postfix) with ESMTPS id 8C4E661211
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8C4E661211
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.211121.368229 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.211130.368250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbW71-0005Ct-W9; Fri, 15 Oct 2021 22:55:40 +0000
+	id 1mbWfH-0000zG-S0; Fri, 15 Oct 2021 23:31:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 211121.368229; Fri, 15 Oct 2021 22:55:39 +0000
+Received: by outflank-mailman (output) from mailman id 211130.368250; Fri, 15 Oct 2021 23:31:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbW71-0005Cm-SN; Fri, 15 Oct 2021 22:55:39 +0000
-Received: by outflank-mailman (input) for mailman id 211121;
- Fri, 15 Oct 2021 22:55:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mbWfH-0000z9-Oh; Fri, 15 Oct 2021 23:31:03 +0000
+Received: by outflank-mailman (input) for mailman id 211130;
+ Fri, 15 Oct 2021 23:31:02 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OB3O=PD=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mbW70-0005Cg-Jc
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 22:55:38 +0000
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 02d0b67c-2e0b-11ec-826a-12813bfff9fa;
- Fri, 15 Oct 2021 22:55:37 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CE9346105A;
- Fri, 15 Oct 2021 22:55:35 +0000 (UTC)
+ <SRS0=ZYBM=PD=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
+ id 1mbWfG-0000i4-3e
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:31:02 +0000
+Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3bac32ea-5a6e-4dec-a2d5-60f929f3e428;
+ Fri, 15 Oct 2021 23:30:56 +0000 (UTC)
+Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
+ (Red Hat Linux)) id 1mbWej-0095v5-Ct; Fri, 15 Oct 2021 23:30:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,195 +44,120 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 02d0b67c-2e0b-11ec-826a-12813bfff9fa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1634338536;
-	bh=3bxZhWBUcCw55RihIAnDgki0ivkuQs6PuULt0GyliDk=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=Ic71hPWiInirVNvoquJTuQWOV8f2K45FgrYpKBbKsx7az+6mn4ajf2sY09iN+icnw
-	 4+gEop0ARmmxtBVbP5DKE0rBknZcJDrhSzVzO70ZZIUCWZpr8awJ4Xnmnicjz3R9qn
-	 5V2EmyUymgqltpyH0jOk6DmwUMZ6g27dKo4bbqOfWWSlaOh2SSyFxro117difHS66I
-	 UpiBlw0/Zhtk6eQ6N7wU+kJXqt//qXuWg2hJvrpyo1fU+gbzBI+gE06FLs+qrHwb/I
-	 3mAWvKect14DpXrZ3rQOHb3r6g2PoWVZOfdjsK/WmagLAh0mlInf3ss0JuOg45rCxI
-	 RMLpxWrsPJvew==
-Date: Fri, 15 Oct 2021 15:55:34 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Jan Beulich <jbeulich@suse.com>
-cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, 
-    =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-    Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>, 
-    iwj@xenproject.org
-Subject: Re: [PATCH 1/2] x86/shadow: adjust some shadow_set_l<N>e() callers
-In-Reply-To: <298846aa-f93f-4564-dbf4-4f893df8f328@suse.com>
-Message-ID: <alpine.DEB.2.21.2110151554450.31303@sstabellini-ThinkPad-T480s>
-References: <24329000-06d7-2047-b0a1-51b149d19189@suse.com> <298846aa-f93f-4564-dbf4-4f893df8f328@suse.com>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+X-Inumbo-ID: 3bac32ea-5a6e-4dec-a2d5-60f929f3e428
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+	Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=9ZsOqn3b5/QR03MhD1Dx1DTw82KOKjoplYOfmtrSAjo=; b=GZiKyVUl5h20WldEdrGbqyto8+
+	F1vc70D//lVIeo9F6TBNDnV9e55gE+P7li975g7REzacZFJKwEAeidozUGuR+k5GME36IWRQgNuj5
+	urOtJ8gdj+Bf/OPhiy9VBUYENb8BuHmtpnjNJWLDK0eSdpNiooD7FGQjHbhMc5UAm9cOA6udp1s+p
+	NSkiIce6DCoLM7V11sN9tyvsjfnUlUwaqyRyrhv0W5dk9rLWQZy0h7Zy1oAtjzbbYqpj4LhPjkl3a
+	v8c4n9oLWSkDy6E0r4PTZRTOQWB17HvTEyzFhn/Iz8DTM/4WrajYQEVYOkt5laZZ3N+xB/yVPdxzK
+	Gf2nTOxA==;
+From: Luis Chamberlain <mcgrof@kernel.org>
+To: axboe@kernel.dk,
+	jejb@linux.ibm.com,
+	martin.petersen@oracle.com,
+	agk@redhat.com,
+	snitzer@redhat.com,
+	colyli@suse.de,
+	kent.overstreet@gmail.com,
+	boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	sstabellini@kernel.org,
+	roger.pau@citrix.com,
+	geert@linux-m68k.org,
+	ulf.hansson@linaro.org,
+	tj@kernel.org,
+	hare@suse.de,
+	jdike@addtoit.com,
+	richard@nod.at,
+	anton.ivanov@cambridgegreys.com,
+	johannes.berg@intel.com,
+	krisman@collabora.com,
+	chris.obbard@collabora.com,
+	thehajime@gmail.com,
+	zhuyifei1999@gmail.com,
+	haris.iqbal@ionos.com,
+	jinpu.wang@ionos.com,
+	miquel.raynal@bootlin.com,
+	vigneshr@ti.com,
+	linux-mtd@lists.infradead.org
+Cc: linux-scsi@vger.kernel.org,
+	dm-devel@redhat.com,
+	linux-bcache@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-m68k@lists.linux-m68k.org,
+	linux-um@lists.infradead.org,
+	linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Luis Chamberlain <mcgrof@kernel.org>
+Subject: [PATCH 7/9] um/drivers/ubd_kern: add error handling support for add_disk()
+Date: Fri, 15 Oct 2021 16:30:26 -0700
+Message-Id: <20211015233028.2167651-8-mcgrof@kernel.org>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20211015233028.2167651-1-mcgrof@kernel.org>
+References: <20211015233028.2167651-1-mcgrof@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
+Sender: Luis Chamberlain <mcgrof@infradead.org>
 
-This patch broke gitlab-ci:
+We never checked for errors on add_disk() as this function
+returned void. Now that this is fixed, use the shiny new
+error handling.
 
-https://gitlab.com/xen-project/people/sstabellini/xen/-/jobs/1684530258
+ubd_disk_register() never returned an error, so just fix
+that now and let the caller handle the error condition.
 
-In file included from guest_4.c:2:
-./multi.c:2159:9: error: unused variable 'r' [-Werror,-Wunused-variable]
-    int r;
-        ^
-1 error generated.
-make[5]: *** [/builds/xen-project/people/sstabellini/xen/xen/Rules.mk:197: guest_4.o] Error 1
+Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
+---
+ arch/um/drivers/ubd_kern.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
+diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
+index fefd343412c7..69d2d0049a61 100644
+--- a/arch/um/drivers/ubd_kern.c
++++ b/arch/um/drivers/ubd_kern.c
+@@ -855,8 +855,8 @@ static const struct attribute_group *ubd_attr_groups[] = {
+ 	NULL,
+ };
+ 
+-static void ubd_disk_register(int major, u64 size, int unit,
+-			      struct gendisk *disk)
++static int ubd_disk_register(int major, u64 size, int unit,
++			     struct gendisk *disk)
+ {
+ 	disk->major = major;
+ 	disk->first_minor = unit << UBD_SHIFT;
+@@ -873,7 +873,7 @@ static void ubd_disk_register(int major, u64 size, int unit,
+ 
+ 	disk->private_data = &ubd_devs[unit];
+ 	disk->queue = ubd_devs[unit].queue;
+-	device_add_disk(&ubd_devs[unit].pdev.dev, disk, ubd_attr_groups);
++	return device_add_disk(&ubd_devs[unit].pdev.dev, disk, ubd_attr_groups);
+ }
+ 
+ #define ROUND_BLOCK(n) ((n + (SECTOR_SIZE - 1)) & (-SECTOR_SIZE))
+@@ -920,10 +920,15 @@ static int ubd_add(int n, char **error_out)
+ 	blk_queue_write_cache(ubd_dev->queue, true, false);
+ 	blk_queue_max_segments(ubd_dev->queue, MAX_SG);
+ 	blk_queue_segment_boundary(ubd_dev->queue, PAGE_SIZE - 1);
+-	ubd_disk_register(UBD_MAJOR, ubd_dev->size, n, disk);
++	err = ubd_disk_register(UBD_MAJOR, ubd_dev->size, n, disk);
++	if (err)
++		goto out_cleanup_disk;
++
+ 	ubd_gendisk[n] = disk;
+ 	return 0;
+ 
++out_cleanup_disk:
++	blk_cleanup_disk(disk);
+ out_cleanup_tags:
+ 	blk_mq_free_tag_set(&ubd_dev->tag_set);
+ out:
+-- 
+2.30.2
 
-To be sure I got the right commit, I confirmed that by reverting the
-commit gitlab-ci passes again:
-
-https://gitlab.com/xen-project/people/sstabellini/xen/-/pipelines/389383466
-
-
-On Wed, 13 Oct 2021, Jan Beulich wrote:
-> Coverity dislikes sh_page_fault() storing the return value into a local
-> variable but then never using the value (and oddly enough spots this in
-> the 2- and 3-level cases, but not in the 4-level one). Instead of adding
-> yet another cast to void as replacement, take the opportunity and drop a
-> bunch of such casts at the same time - not using function return values
-> is a common thing to do. (It of course is an independent question
-> whether ignoring errors like this is a good idea.)
-> 
-> Coverity-ID: 1492856
-> Coverity-ID: 1492858
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> --- a/xen/arch/x86/mm/shadow/multi.c
-> +++ b/xen/arch/x86/mm/shadow/multi.c
-> @@ -1416,7 +1416,7 @@ void sh_unhook_32b_mappings(struct domai
->      shadow_l2e_t *sl2e;
->      SHADOW_FOREACH_L2E(sl2mfn, sl2e, 0, 0, d, {
->          if ( !user_only || (sl2e->l2 & _PAGE_USER) )
-> -            (void) shadow_set_l2e(d, sl2e, shadow_l2e_empty(), sl2mfn);
-> +            shadow_set_l2e(d, sl2e, shadow_l2e_empty(), sl2mfn);
->      });
->  }
->  
-> @@ -1428,7 +1428,7 @@ void sh_unhook_pae_mappings(struct domai
->      shadow_l2e_t *sl2e;
->      SHADOW_FOREACH_L2E(sl2mfn, sl2e, 0, 0, d, {
->          if ( !user_only || (sl2e->l2 & _PAGE_USER) )
-> -            (void) shadow_set_l2e(d, sl2e, shadow_l2e_empty(), sl2mfn);
-> +            shadow_set_l2e(d, sl2e, shadow_l2e_empty(), sl2mfn);
->      });
->  }
->  
-> @@ -1439,7 +1439,7 @@ void sh_unhook_64b_mappings(struct domai
->      shadow_l4e_t *sl4e;
->      SHADOW_FOREACH_L4E(sl4mfn, sl4e, 0, 0, d, {
->          if ( !user_only || (sl4e->l4 & _PAGE_USER) )
-> -            (void) shadow_set_l4e(d, sl4e, shadow_l4e_empty(), sl4mfn);
-> +            shadow_set_l4e(d, sl4e, shadow_l4e_empty(), sl4mfn);
->      });
->  }
->  
-> @@ -1969,7 +1969,7 @@ static void sh_prefetch(struct vcpu *v,
->  
->          /* Propagate the entry.  */
->          l1e_propagate_from_guest(v, gl1e, gmfn, &sl1e, ft_prefetch, p2mt);
-> -        (void) shadow_set_l1e(d, ptr_sl1e + i, sl1e, p2mt, sl1mfn);
-> +        shadow_set_l1e(d, ptr_sl1e + i, sl1e, p2mt, sl1mfn);
->  
->  #if (SHADOW_OPTIMIZATIONS & SHOPT_OUT_OF_SYNC)
->          if ( snpl1p != NULL )
-> @@ -2534,7 +2534,7 @@ static int sh_page_fault(struct vcpu *v,
->  
->      /* Calculate the shadow entry and write it */
->      l1e_propagate_from_guest(v, gw.l1e, gmfn, &sl1e, ft, p2mt);
-> -    r = shadow_set_l1e(d, ptr_sl1e, sl1e, p2mt, sl1mfn);
-> +    shadow_set_l1e(d, ptr_sl1e, sl1e, p2mt, sl1mfn);
->  
->  #if (SHADOW_OPTIMIZATIONS & SHOPT_OUT_OF_SYNC)
->      if ( mfn_valid(gw.l1mfn)
-> @@ -3014,8 +3014,7 @@ static bool sh_invlpg(struct vcpu *v, un
->                  shadow_l1e_t *sl1;
->                  sl1 = sh_linear_l1_table(v) + shadow_l1_linear_offset(linear);
->                  /* Remove the shadow entry that maps this VA */
-> -                (void) shadow_set_l1e(d, sl1, shadow_l1e_empty(),
-> -                                      p2m_invalid, sl1mfn);
-> +                shadow_set_l1e(d, sl1, shadow_l1e_empty(), p2m_invalid, sl1mfn);
->              }
->              paging_unlock(d);
->              /* Need the invlpg, to pick up the disappeareance of the sl1e */
-> @@ -3608,7 +3607,8 @@ int sh_rm_write_access_from_l1(struct do
->               && (mfn_x(shadow_l1e_get_mfn(*sl1e)) == mfn_x(readonly_mfn)) )
->          {
->              shadow_l1e_t ro_sl1e = shadow_l1e_remove_flags(*sl1e, _PAGE_RW);
-> -            (void) shadow_set_l1e(d, sl1e, ro_sl1e, p2m_ram_rw, sl1mfn);
-> +
-> +            shadow_set_l1e(d, sl1e, ro_sl1e, p2m_ram_rw, sl1mfn);
->  #if SHADOW_OPTIMIZATIONS & SHOPT_WRITABLE_HEURISTIC
->              /* Remember the last shadow that we shot a writeable mapping in */
->              if ( curr->domain == d )
-> @@ -3637,8 +3637,7 @@ int sh_rm_mappings_from_l1(struct domain
->          if ( (flags & _PAGE_PRESENT)
->               && (mfn_x(shadow_l1e_get_mfn(*sl1e)) == mfn_x(target_mfn)) )
->          {
-> -            (void) shadow_set_l1e(d, sl1e, shadow_l1e_empty(),
-> -                                  p2m_invalid, sl1mfn);
-> +            shadow_set_l1e(d, sl1e, shadow_l1e_empty(), p2m_invalid, sl1mfn);
->              if ( sh_check_page_has_no_refs(mfn_to_page(target_mfn)) )
->                  /* This breaks us cleanly out of the FOREACH macro */
->                  done = 1;
-> @@ -3656,20 +3655,20 @@ void sh_clear_shadow_entry(struct domain
->      switch ( mfn_to_page(smfn)->u.sh.type )
->      {
->      case SH_type_l1_shadow:
-> -        (void) shadow_set_l1e(d, ep, shadow_l1e_empty(), p2m_invalid, smfn);
-> +        shadow_set_l1e(d, ep, shadow_l1e_empty(), p2m_invalid, smfn);
->          break;
->      case SH_type_l2_shadow:
->  #if GUEST_PAGING_LEVELS >= 4
->      case SH_type_l2h_shadow:
->  #endif
-> -        (void) shadow_set_l2e(d, ep, shadow_l2e_empty(), smfn);
-> +        shadow_set_l2e(d, ep, shadow_l2e_empty(), smfn);
->          break;
->  #if GUEST_PAGING_LEVELS >= 4
->      case SH_type_l3_shadow:
-> -        (void) shadow_set_l3e(d, ep, shadow_l3e_empty(), smfn);
-> +        shadow_set_l3e(d, ep, shadow_l3e_empty(), smfn);
->          break;
->      case SH_type_l4_shadow:
-> -        (void) shadow_set_l4e(d, ep, shadow_l4e_empty(), smfn);
-> +        shadow_set_l4e(d, ep, shadow_l4e_empty(), smfn);
->          break;
->  #endif
->      default: BUG(); /* Called with the wrong kind of shadow. */
-> @@ -3689,7 +3688,7 @@ int sh_remove_l1_shadow(struct domain *d
->          if ( (flags & _PAGE_PRESENT)
->               && (mfn_x(shadow_l2e_get_mfn(*sl2e)) == mfn_x(sl1mfn)) )
->          {
-> -            (void) shadow_set_l2e(d, sl2e, shadow_l2e_empty(), sl2mfn);
-> +            shadow_set_l2e(d, sl2e, shadow_l2e_empty(), sl2mfn);
->              if ( mfn_to_page(sl1mfn)->u.sh.type == 0 )
->                  /* This breaks us cleanly out of the FOREACH macro */
->                  done = 1;
-> @@ -3712,7 +3711,7 @@ int sh_remove_l2_shadow(struct domain *d
->          if ( (flags & _PAGE_PRESENT)
->               && (mfn_x(shadow_l3e_get_mfn(*sl3e)) == mfn_x(sl2mfn)) )
->          {
-> -            (void) shadow_set_l3e(d, sl3e, shadow_l3e_empty(), sl3mfn);
-> +            shadow_set_l3e(d, sl3e, shadow_l3e_empty(), sl3mfn);
->              if ( mfn_to_page(sl2mfn)->u.sh.type == 0 )
->                  /* This breaks us cleanly out of the FOREACH macro */
->                  done = 1;
-> @@ -3734,7 +3733,7 @@ int sh_remove_l3_shadow(struct domain *d
->          if ( (flags & _PAGE_PRESENT)
->               && (mfn_x(shadow_l4e_get_mfn(*sl4e)) == mfn_x(sl3mfn)) )
->          {
-> -            (void) shadow_set_l4e(d, sl4e, shadow_l4e_empty(), sl4mfn);
-> +            shadow_set_l4e(d, sl4e, shadow_l4e_empty(), sl4mfn);
->              if ( mfn_to_page(sl3mfn)->u.sh.type == 0 )
->                  /* This breaks us cleanly out of the FOREACH macro */
->                  done = 1;
-> 
-> 
 
