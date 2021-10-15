@@ -2,43 +2,44 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 547B4C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 13:59:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19179C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 13:59:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E860A6054F
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 13:59:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E860A6054F
+	by mail.kernel.org (Postfix) with ESMTPS id D534B6054F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 13:59:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D534B6054F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.210638.367586 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.210640.367609 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbNkN-000224-B5; Fri, 15 Oct 2021 13:59:43 +0000
+	id 1mbNkT-0002eF-0U; Fri, 15 Oct 2021 13:59:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 210638.367586; Fri, 15 Oct 2021 13:59:43 +0000
+Received: by outflank-mailman (output) from mailman id 210640.367609; Fri, 15 Oct 2021 13:59:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbNkN-00021x-7w; Fri, 15 Oct 2021 13:59:43 +0000
-Received: by outflank-mailman (input) for mailman id 210638;
- Fri, 15 Oct 2021 13:59:41 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mbNkS-0002e4-TI; Fri, 15 Oct 2021 13:59:48 +0000
+Received: by outflank-mailman (input) for mailman id 210640;
+ Fri, 15 Oct 2021 13:59:46 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Fqmt=PD=arm.com=bertrand.marquis@srs-us1.protection.inumbo.net>)
- id 1mbNkL-00020z-7t
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 13:59:41 +0000
+ id 1mbNkQ-0002KR-Fj
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 13:59:46 +0000
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id a2b38552-6df8-4faf-9778-cada5db9f8e5;
- Fri, 15 Oct 2021 13:59:40 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 2769dd60-2dc0-11ec-8237-12813bfff9fa;
+ Fri, 15 Oct 2021 13:59:46 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 30528147A;
- Fri, 15 Oct 2021 06:59:40 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C94F8147A;
+ Fri, 15 Oct 2021 06:59:45 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 301D93F694;
- Fri, 15 Oct 2021 06:59:39 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 78E733F694;
+ Fri, 15 Oct 2021 06:59:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,255 +51,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a2b38552-6df8-4faf-9778-cada5db9f8e5
+X-Inumbo-ID: 2769dd60-2dc0-11ec-8237-12813bfff9fa
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: iwj@xenproject.org,
-	Paul Durrant <paul@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v7 1/5] xen/vpci: Move ecam access functions to common code
-Date: Fri, 15 Oct 2021 14:59:18 +0100
-Message-Id: <bac1cc0d06dffc8f00233ea31233080bae8868aa.1634305870.git.bertrand.marquis@arm.com>
+	Rahul Singh <rahul.singh@arm.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Michal Orzel <michal.orzel@arm.com>
+Subject: [PATCH v7 5/5] arm/libxl: Emulated PCI device tree node in libxl
+Date: Fri, 15 Oct 2021 14:59:22 +0100
+Message-Id: <4a22121e6474adfb1c5166e0fdaddff47c6dae46.1634305870.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1634305870.git.bertrand.marquis@arm.com>
 References: <cover.1634305870.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-PCI standard is using ECAM and not MCFG which is coming from ACPI[1].
-Use ECAM/ecam instead of MCFG in common code and in new functions added
-in common vpci code by this patch.
+From: Rahul Singh <rahul.singh@arm.com>
 
-Move vpci_access_allowed from arch/x86/hvm/io.c to drivers/vpci/vpci.c.
+libxl will create an emulated PCI device tree node in the device tree to
+enable the guest OS to discover the virtual PCI during guest boot.
+Emulated PCI device tree node will only be created when there is any
+device assigned to guest.
 
-Create vpci_ecam_{read,write} in drivers/vpci/vpci.c that
-contains the common code to perform these operations, changed
-vpci_mmcfg_{read,write} accordingly to make use of these functions.
+A new area has been reserved in the arm guest physical map at
+which the VPCI bus is declared in the device tree (reg and ranges
+parameters of the node).
 
-The vpci_ecam_{read,write} functions are returning false on error and
-true on success. As the x86 code was previously always returning
-X86EMUL_OKAY the return code is ignored. A comment has been added in
-the code to show that this is intentional.
+Note that currently we are using num_pcidevs instead of
+c_info->passthrough to decide whether to create a vPCI DT node.
+This will be insufficient if and when ARM does PCI hotplug.
+Add this note inside libxl_create.c where c_info->passthrough
+is set.
 
-Those functions will be used in a following patch inside by arm vpci
-implementation.
-
-Rename MMCFG_BDF to VPCI_ECAM_BDF and move it to vpci.h.
-This macro is only used by functions calling vpci_ecam helpers.
-
-No functional change intended with this patch.
-
-[1] https://wiki.osdev.org/PCI_Express
-
-Suggested-by: Roger Pau Monné <roger.pau@citrix.com>
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+Signed-off-by: Michal Orzel <michal.orzel@arm.com>
 ---
 Changes in v7:
-- Rename vpci_ecam_access_allowed to vpci_access_allowed
-- Rename vpci_ecam_mmio_{read/write} to vpci_ecam_{read/write}
-- Replace comment in x86/hvm/io.c with one suggested by Roger
-- Remove 32bit comments and fixes from this patch and move it to the next
-one to keep only the moving+renaming in this patch
-- Change return type of vpci_ecam_{read/write} to bool
-- rename ECAM_BDF to VPCI_ECAM_BDF and move it to vpci.h
-Changes in v6: Patch added
+-remove arch_arm.vpci
+-create vpci DT note if (d_config->num_pcidevs)
+Changes in v6:
+According to https://marc.info/?l=xen-devel&m=163415838129479&w=2:
+-do not set XEN_DOMCTL_CDF_vpci
+-do not enable VPCI support (by setting b_info.arch_arm.vpci)
+-do not define LIBXL_HAVE_BUILDINFO_ARM_VPCI
+-keep b_info.arch_arm.vpci, make_vpci_node and its helpers
+Change in v5:
+- Move setting the arch_arm.vpci and XEN_DOMCTL_CDF_vpci to libxl_arm.c
+Change in v4:
+- Gate code for x86 for setting the XEN_DOMCTL_CDF_vpci for x86.
+Change in v3:
+- Make GUEST_VPCI_MEM_ADDR address 2MB aligned
+Change in v2:
+- enable doamin_vpci_init() when XEN_DOMCTL_CDF_vpci is set for domain.
 ---
- xen/arch/x86/hvm/io.c     | 46 ++++-----------------------------
- xen/drivers/vpci/vpci.c   | 54 +++++++++++++++++++++++++++++++++++++++
- xen/include/asm-x86/pci.h |  2 --
- xen/include/xen/vpci.h    | 12 +++++++++
- 4 files changed, 71 insertions(+), 43 deletions(-)
+---
+ tools/libs/light/libxl_arm.c    | 103 ++++++++++++++++++++++++++++++++
+ tools/libs/light/libxl_create.c |   5 ++
+ xen/include/public/arch-arm.h   |  10 ++++
+ 3 files changed, 118 insertions(+)
 
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index 046a8eb4ed..eb3c80743e 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -260,20 +260,6 @@ unsigned int hvm_pci_decode_addr(unsigned int cf8, unsigned int addr,
-     return CF8_ADDR_LO(cf8) | (addr & 3);
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index fdae129605..eef1de0939 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -284,6 +284,59 @@ static int fdt_property_reg_placeholder(libxl__gc *gc, void *fdt,
+     return fdt_property(fdt, "reg", regs, sizeof(regs));
  }
  
--/* Do some sanity checks. */
--static bool vpci_access_allowed(unsigned int reg, unsigned int len)
--{
--    /* Check access size. */
--    if ( len != 1 && len != 2 && len != 4 && len != 8 )
--        return false;
--
--    /* Check that access is size aligned. */
--    if ( (reg & (len - 1)) )
--        return false;
--
--    return true;
--}
--
- /* vPCI config space IO ports handlers (0xcf8/0xcfc). */
- static bool vpci_portio_accept(const struct hvm_io_handler *handler,
-                                const ioreq_t *p)
-@@ -394,7 +380,7 @@ static unsigned int vpci_mmcfg_decode_addr(const struct hvm_mmcfg *mmcfg,
-                                            paddr_t addr, pci_sbdf_t *sbdf)
++static int fdt_property_values(libxl__gc *gc, void *fdt,
++                               const char *name,
++                               unsigned num_cells, ...)
++{
++    uint32_t prop[num_cells];
++    be32 *cells = &prop[0];
++    int i;
++    va_list ap;
++    uint32_t arg;
++
++    va_start(ap, num_cells);
++    for (i = 0 ; i < num_cells; i++) {
++        arg = va_arg(ap, uint32_t);
++        set_cell(&cells, 1, arg);
++    }
++    va_end(ap);
++
++    return fdt_property(fdt, name, prop, sizeof(prop));
++}
++
++static int fdt_property_vpci_ranges(libxl__gc *gc, void *fdt,
++                                    unsigned addr_cells,
++                                    unsigned size_cells,
++                                    unsigned num_regs, ...)
++{
++    uint32_t regs[num_regs*((addr_cells*2)+size_cells+1)];
++    be32 *cells = &regs[0];
++    int i;
++    va_list ap;
++    uint64_t arg;
++
++    va_start(ap, num_regs);
++    for (i = 0 ; i < num_regs; i++) {
++        /* Set the memory bit field */
++        arg = va_arg(ap, uint32_t);
++        set_cell(&cells, 1, arg);
++
++        /* Set the vpci bus address */
++        arg = addr_cells ? va_arg(ap, uint64_t) : 0;
++        set_cell(&cells, addr_cells , arg);
++
++        /* Set the cpu bus address where vpci address is mapped */
++        set_cell(&cells, addr_cells, arg);
++
++        /* Set the vpci size requested */
++        arg = size_cells ? va_arg(ap, uint64_t) : 0;
++        set_cell(&cells, size_cells, arg);
++    }
++    va_end(ap);
++
++    return fdt_property(fdt, "ranges", regs, sizeof(regs));
++}
++
+ static int make_root_properties(libxl__gc *gc,
+                                 const libxl_version_info *vers,
+                                 void *fdt)
+@@ -687,6 +740,53 @@ static int make_vpl011_uart_node(libxl__gc *gc, void *fdt,
+     return 0;
+ }
+ 
++static int make_vpci_node(libxl__gc *gc, void *fdt,
++                          const struct arch_info *ainfo,
++                          struct xc_dom_image *dom)
++{
++    int res;
++    const uint64_t vpci_ecam_base = GUEST_VPCI_ECAM_BASE;
++    const uint64_t vpci_ecam_size = GUEST_VPCI_ECAM_SIZE;
++    const char *name = GCSPRINTF("pcie@%"PRIx64, vpci_ecam_base);
++
++    res = fdt_begin_node(fdt, name);
++    if (res) return res;
++
++    res = fdt_property_compat(gc, fdt, 1, "pci-host-ecam-generic");
++    if (res) return res;
++
++    res = fdt_property_string(fdt, "device_type", "pci");
++    if (res) return res;
++
++    res = fdt_property_regs(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
++            GUEST_ROOT_SIZE_CELLS, 1, vpci_ecam_base, vpci_ecam_size);
++    if (res) return res;
++
++    res = fdt_property_values(gc, fdt, "bus-range", 2, 0, 255);
++    if (res) return res;
++
++    res = fdt_property_cell(fdt, "#address-cells", 3);
++    if (res) return res;
++
++    res = fdt_property_cell(fdt, "#size-cells", 2);
++    if (res) return res;
++
++    res = fdt_property_string(fdt, "status", "okay");
++    if (res) return res;
++
++    res = fdt_property_vpci_ranges(gc, fdt, GUEST_ROOT_ADDRESS_CELLS,
++        GUEST_ROOT_SIZE_CELLS, 2,
++        GUEST_VPCI_ADDR_TYPE_MEM, GUEST_VPCI_MEM_ADDR, GUEST_VPCI_MEM_SIZE,
++        GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM, GUEST_VPCI_PREFETCH_MEM_ADDR,
++        GUEST_VPCI_PREFETCH_MEM_SIZE);
++    if (res) return res;
++
++    res = fdt_end_node(fdt);
++    if (res) return res;
++
++    return 0;
++}
++
+ static const struct arch_info *get_arch_info(libxl__gc *gc,
+                                              const struct xc_dom_image *dom)
  {
-     addr -= mmcfg->addr;
--    sbdf->bdf = MMCFG_BDF(addr);
-+    sbdf->bdf = VCPI_ECAM_BDF(addr);
-     sbdf->bus += mmcfg->start_bus;
-     sbdf->seg = mmcfg->segment;
+@@ -991,6 +1091,9 @@ next_resize:
+         if (info->tee == LIBXL_TEE_TYPE_OPTEE)
+             FDT( make_optee_node(gc, fdt) );
  
-@@ -434,25 +420,8 @@ static int vpci_mmcfg_read(struct vcpu *v, unsigned long addr,
-     reg = vpci_mmcfg_decode_addr(mmcfg, addr, &sbdf);
-     read_unlock(&d->arch.hvm.mmcfg_lock);
++        if (d_config->num_pcidevs)
++            FDT( make_vpci_node(gc, fdt, ainfo, dom) );
++
+         if (pfdt)
+             FDT( copy_partial_fdt(gc, fdt, pfdt) );
  
--    if ( !vpci_access_allowed(reg, len) ||
--         (reg + len) > PCI_CFG_SPACE_EXP_SIZE )
--        return X86EMUL_OKAY;
--
--    /*
--     * According to the PCIe 3.1A specification:
--     *  - Configuration Reads and Writes must usually be DWORD or smaller
--     *    in size.
--     *  - Because Root Complex implementations are not required to support
--     *    accesses to a RCRB that cross DW boundaries [...] software
--     *    should take care not to cause the generation of such accesses
--     *    when accessing a RCRB unless the Root Complex will support the
--     *    access.
--     *  Xen however supports 8byte accesses by splitting them into two
--     *  4byte accesses.
--     */
--    *data = vpci_read(sbdf, reg, min(4u, len));
--    if ( len == 8 )
--        *data |= (uint64_t)vpci_read(sbdf, reg + 4, 4) << 32;
-+    /* Failed reads are not propagated to the caller */
-+    vpci_ecam_read(sbdf, reg, len, data);
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 6ebb2bfc76..5a61d01722 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -1096,6 +1096,11 @@ int libxl__domain_config_setdefault(libxl__gc *gc,
+         goto error_out;
+     }
  
-     return X86EMUL_OKAY;
- }
-@@ -476,13 +445,8 @@ static int vpci_mmcfg_write(struct vcpu *v, unsigned long addr,
-     reg = vpci_mmcfg_decode_addr(mmcfg, addr, &sbdf);
-     read_unlock(&d->arch.hvm.mmcfg_lock);
- 
--    if ( !vpci_access_allowed(reg, len) ||
--         (reg + len) > PCI_CFG_SPACE_EXP_SIZE )
--        return X86EMUL_OKAY;
--
--    vpci_write(sbdf, reg, min(4u, len), data);
--    if ( len == 8 )
--        vpci_write(sbdf, reg + 4, 4, data >> 32);
-+    /* Failed writes are not propagated to the caller */
-+    vpci_ecam_write(sbdf, reg, len, data);
- 
-     return X86EMUL_OKAY;
- }
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index cbd1bac7fc..ef690f15a9 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -478,6 +478,60 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
-     spin_unlock(&pdev->vpci->lock);
- }
- 
-+/* Helper function to check an access size and alignment on vpci space. */
-+bool vpci_access_allowed(unsigned int reg, unsigned int len)
-+{
-+    /* Check access size. */
-+    if ( len != 1 && len != 2 && len != 4 && len != 8 )
-+        return false;
-+
-+    /* Check that access is size aligned. */
-+    if ( (reg & (len - 1)) )
-+        return false;
-+
-+    return true;
-+}
-+
-+bool vpci_ecam_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int len,
-+                         unsigned long data)
-+{
-+    if ( !vpci_access_allowed(reg, len) ||
-+         (reg + len) > PCI_CFG_SPACE_EXP_SIZE )
-+        return false;
-+
-+    vpci_write(sbdf, reg, min(4u, len), data);
-+    if ( len == 8 )
-+        vpci_write(sbdf, reg + 4, 4, data >> 32);
-+
-+    return true;
-+}
-+
-+bool vpci_ecam_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int len,
-+                        unsigned long *data)
-+{
-+    if ( !vpci_access_allowed(reg, len) ||
-+         (reg + len) > PCI_CFG_SPACE_EXP_SIZE )
-+        return false;
-+
 +    /*
-+     * According to the PCIe 3.1A specification:
-+     *  - Configuration Reads and Writes must usually be DWORD or smaller
-+     *    in size.
-+     *  - Because Root Complex implementations are not required to support
-+     *    accesses to a RCRB that cross DW boundaries [...] software
-+     *    should take care not to cause the generation of such accesses
-+     *    when accessing a RCRB unless the Root Complex will support the
-+     *    access.
-+     *  Xen however supports 8byte accesses by splitting them into two
-+     *  4byte accesses.
++     * Note: libxl_arm directly examines num_pcidevs to decide whether
++     * to create a vPCI DT node, rather than using c_info->passthrough.
++     * This will be insufficient if and when ARM does PCI hotplug.
 +     */
-+    *data = vpci_read(sbdf, reg, min(4u, len));
-+    if ( len == 8 )
-+        *data |= (uint64_t)vpci_read(sbdf, reg + 4, 4) << 32;
-+
-+    return true;
-+}
+     bool need_pt = d_config->num_pcidevs || d_config->num_dtdevs;
+     if (c_info->passthrough == LIBXL_PASSTHROUGH_DEFAULT) {
+         c_info->passthrough = need_pt
+diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+index b4c615bcdf..94b31511dd 100644
+--- a/xen/include/public/arch-arm.h
++++ b/xen/include/public/arch-arm.h
+@@ -433,6 +433,11 @@ typedef uint64_t xen_callback_t;
+ #define GUEST_PL011_BASE    xen_mk_ullong(0x22000000)
+ #define GUEST_PL011_SIZE    xen_mk_ullong(0x00001000)
+ 
++/* Guest PCI-PCIe memory space where config space and BAR will be available.*/
++#define GUEST_VPCI_ADDR_TYPE_MEM            xen_mk_ullong(0x02000000)
++#define GUEST_VPCI_MEM_ADDR                 xen_mk_ullong(0x23000000)
++#define GUEST_VPCI_MEM_SIZE                 xen_mk_ullong(0x10000000)
 +
  /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/asm-x86/pci.h b/xen/include/asm-x86/pci.h
-index edd7c3e71a..443f25347d 100644
---- a/xen/include/asm-x86/pci.h
-+++ b/xen/include/asm-x86/pci.h
-@@ -6,8 +6,6 @@
- #define CF8_ADDR_HI(cf8) (  ((cf8) & 0x0f000000) >> 16)
- #define CF8_ENABLED(cf8) (!!((cf8) & 0x80000000))
+  * 16MB == 4096 pages reserved for guest to use as a region to map its
+  * grant table in.
+@@ -453,6 +458,11 @@ typedef uint64_t xen_callback_t;
+ #define GUEST_RAM0_BASE   xen_mk_ullong(0x40000000) /* 3GB of low RAM @ 1GB */
+ #define GUEST_RAM0_SIZE   xen_mk_ullong(0xc0000000)
  
--#define MMCFG_BDF(addr)  ( ((addr) & 0x0ffff000) >> 12)
--
- #define IS_SNB_GFX(id) (id == 0x01068086 || id == 0x01168086 \
-                         || id == 0x01268086 || id == 0x01028086 \
-                         || id == 0x01128086 || id == 0x01228086 \
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 9f5b5d52e1..d6cf0baf14 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -19,6 +19,8 @@ typedef int vpci_register_init_t(struct pci_dev *dev);
- #define VPCI_PRIORITY_MIDDLE    "5"
- #define VPCI_PRIORITY_LOW       "9"
++/* 4GB @ 4GB Prefetch Memory for VPCI */
++#define GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM   xen_mk_ullong(0x42000000)
++#define GUEST_VPCI_PREFETCH_MEM_ADDR        xen_mk_ullong(0x100000000)
++#define GUEST_VPCI_PREFETCH_MEM_SIZE        xen_mk_ullong(0x100000000)
++
+ #define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /* 1016GB of RAM @ 8GB */
+ #define GUEST_RAM1_SIZE   xen_mk_ullong(0xfe00000000)
  
-+#define VPCI_ECAM_BDF(addr)     (((addr) & 0x0ffff000) >> 12)
-+
- #define REGISTER_VPCI_INIT(x, p)                \
-   static vpci_register_init_t *const x##_entry  \
-                __used_section(".data.vpci." p) = x
-@@ -208,6 +210,16 @@ static inline unsigned int vmsix_entry_nr(const struct vpci_msix *msix,
- {
-     return entry - msix->entries;
- }
-+
-+/* ECAM mmio read/write helpers */
-+bool vpci_access_allowed(unsigned int reg, unsigned int len);
-+
-+bool vpci_ecam_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int len,
-+                         unsigned long data);
-+
-+bool vpci_ecam_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int len,
-+                        unsigned long *data);
-+
- #endif /* __XEN__ */
- 
- #else /* !CONFIG_HAS_VPCI */
 -- 
 2.25.1
 
