@@ -2,51 +2,51 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14434C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 53B56C43217
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1E5B60230
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C1E5B60230
+	by mail.kernel.org (Postfix) with ESMTPS id EC6E16101E
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EC6E16101E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.210478.367374 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.210476.367353 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbMh0-0001aV-9B; Fri, 15 Oct 2021 12:52:10 +0000
+	id 1mbMgu-000131-M8; Fri, 15 Oct 2021 12:52:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 210478.367374; Fri, 15 Oct 2021 12:52:10 +0000
+Received: by outflank-mailman (output) from mailman id 210476.367353; Fri, 15 Oct 2021 12:52:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbMh0-0001aK-5b; Fri, 15 Oct 2021 12:52:10 +0000
-Received: by outflank-mailman (input) for mailman id 210478;
- Fri, 15 Oct 2021 12:52:09 +0000
+	id 1mbMgu-00012u-Iv; Fri, 15 Oct 2021 12:52:04 +0000
+Received: by outflank-mailman (input) for mailman id 210476;
+ Fri, 15 Oct 2021 12:52:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=esao=PD=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mbMgz-00012o-2z
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 12:52:09 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ id 1mbMgu-00012o-4G
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 12:52:04 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 40cbc8a5-4797-46f1-86f7-a8bb1b3388ee;
- Fri, 15 Oct 2021 12:52:04 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4FF3621A63;
+ id 06d854fb-6787-4ba4-ad8a-409e563bf1c8;
  Fri, 15 Oct 2021 12:52:03 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 20ED713FC3;
- Fri, 15 Oct 2021 12:52:03 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 29F6E1FD39;
+ Fri, 15 Oct 2021 12:52:02 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D0CB813C1A;
+ Fri, 15 Oct 2021 12:52:01 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id YOatBnN5aWEYHgAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 15 Oct 2021 12:52:03 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id ePzMMXF5aWEYHgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 15 Oct 2021 12:52:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,57 +58,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40cbc8a5-4797-46f1-86f7-a8bb1b3388ee
+X-Inumbo-ID: 06d854fb-6787-4ba4-ad8a-409e563bf1c8
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1634302323; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=YcsMVWc26F4IzPW2qrnc4ICY7a8VQjWrlsP2Sb59fyU=;
-	b=b5jLXeJGRzgnF+yPJZIrIJWvYnXluHjYMdVg9xIscKbfTQKjyiujP9hn1EeaijyMyOD9RS
-	zAYSX0PULlPGj5LPeX02dGUILdmViL492DfiIV7HiDsCy0TfKQQXrYkLq3BnsvahvzQI7n
-	Ug5PjXPL/n3M/X2YjaHH9lF50c0dsGQ=
+	t=1634302322; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=h/aThGSgBclseJubeLeify5D5fKyfeInIDBDmjWAbXI=;
+	b=mgfx1mPuqx8QPBgWxSs4lT6zY/yY0XglsxROx8ZQSISYz74TwIRM3jeQhTi2LpJGqk/TMG
+	KUZwetUF5tM951dPJL6HLejis7R+mAb+wHwiKu1URBX0/Ov8suGCieUdzhvRTIPQAyH0pm
+	5ZhmOT70NZqd6RjjNA0EM6yavWGvqSA=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 04/12] xen/x86: modify hvm_memory_op() prototype
-Date: Fri, 15 Oct 2021 14:51:44 +0200
-Message-Id: <20211015125152.25198-5-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Christopher Clark <christopher.w.clark@gmail.com>
+Subject: [PATCH 00/12] xen: drop hypercall function tables
+Date: Fri, 15 Oct 2021 14:51:40 +0200
+Message-Id: <20211015125152.25198-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211015125152.25198-1-jgross@suse.com>
-References: <20211015125152.25198-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-hvm_memory_op() should take an unsigned long as cmd, like
-do_memory_op().
+In order to avoid indirect function calls on the hypercall path as
+much as possible this series is removing the hypercall function tables
+and is replacing the hypercall handler calls via the function array
+by automatically generated switch statements.
 
-As hvm_memory_op() is basically just calling do_memory_op() (or
-compat_memory_op()) passing through the parameters the cmd parameter
-should have no smaller size than that of the called functions.
+Another by-product of generating the switch statements is the
+automatic generating of the hypercall handler prototypes from the
+same data base which is used to generate the switch.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- xen/arch/x86/hvm/hypercall.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This has the additional advantage of using type safe calls of the
+handlers and to ensure related handler (e.g. PV and HVM ones) share
+the same prototypes.
 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 5be1050453..9d3b193bad 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -31,7 +31,7 @@
- #include <public/hvm/hvm_op.h>
- #include <public/hvm/params.h>
- 
--static long hvm_memory_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-+static long hvm_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-     long rc;
- 
+A very brief performance test (parallel build of the Xen hypervisor
+in a 6 vcpu guest) showed a very slim improvement (less than 1%) of
+the performance with the patches applied. The test was performed using
+a PV and a PVH guest.
+
+Juergen Gross (12):
+  xen: limit number of hypercall parameters to 5
+  xen: move do_vcpu_op() to arch specific code
+  xen: harmonize return types of hypercall handlers
+  xen/x86: modify hvm_memory_op() prototype
+  xen: don't include asm/hypercall.h from C sources
+  xen: generate hypercall interface related code
+  xen: use generated prototypes for hypercall handlers
+  x86/pv-shim: don't modify hypercall table
+  xen/x86: don't use hypercall table for calling compat hypercalls
+  xen/x86: call hypercall handlers via switch statement
+  xen/arm: call hypercall handlers via switch statement
+  xen/x86: add hypercall performance counters for hvm, correct pv
+
+ .gitignore                               |   2 +
+ xen/Makefile                             |  10 +
+ xen/arch/arm/domain.c                    |  15 +-
+ xen/arch/arm/hvm.c                       |   3 +-
+ xen/arch/arm/physdev.c                   |   2 +-
+ xen/arch/arm/platform_hypercall.c        |   6 +-
+ xen/arch/arm/traps.c                     | 124 +++--------
+ xen/arch/x86/compat.c                    |  14 +-
+ xen/arch/x86/cpu/vpmu.c                  |   1 +
+ xen/arch/x86/domain.c                    |  11 +-
+ xen/arch/x86/domctl.c                    |   4 +-
+ xen/arch/x86/hvm/hypercall.c             | 172 ++------------
+ xen/arch/x86/hypercall.c                 |  59 -----
+ xen/arch/x86/mm.c                        |   1 -
+ xen/arch/x86/mm/paging.c                 |   3 +-
+ xen/arch/x86/platform_hypercall.c        |   6 +-
+ xen/arch/x86/pv/callback.c               |  20 +-
+ xen/arch/x86/pv/emul-priv-op.c           |   2 +-
+ xen/arch/x86/pv/hypercall.c              | 188 ++--------------
+ xen/arch/x86/pv/iret.c                   |   5 +-
+ xen/arch/x86/pv/misc-hypercalls.c        |  14 +-
+ xen/arch/x86/pv/shim.c                   |  48 ++--
+ xen/arch/x86/traps.c                     |   2 +-
+ xen/arch/x86/x86_64/compat.c             |   1 -
+ xen/arch/x86/x86_64/compat/mm.c          |   1 +
+ xen/arch/x86/x86_64/domain.c             |  16 +-
+ xen/arch/x86/x86_64/mm.c                 |   1 -
+ xen/arch/x86/x86_64/platform_hypercall.c |   9 +-
+ xen/common/argo.c                        |  12 +-
+ xen/common/compat/domain.c               |  14 +-
+ xen/common/compat/grant_table.c          |   1 +
+ xen/common/compat/multicall.c            |   2 +-
+ xen/common/domain.c                      |  11 +-
+ xen/common/event_channel.c               |  10 +
+ xen/common/grant_table.c                 |  10 +
+ xen/common/kexec.c                       |   6 +-
+ xen/common/multicall.c                   |   1 +
+ xen/common/trace.c                       |   2 +-
+ xen/include/asm-arm/hypercall.h          |   7 +-
+ xen/include/asm-x86/hypercall.h          | 195 +++-------------
+ xen/include/asm-x86/paging.h             |   3 -
+ xen/include/asm-x86/pv/shim.h            |   3 +
+ xen/include/hypercall-defs.c             | 272 +++++++++++++++++++++++
+ xen/include/xen/hypercall.h              | 181 +--------------
+ xen/scripts/gen_hypercall.awk            | 228 +++++++++++++++++++
+ 45 files changed, 769 insertions(+), 929 deletions(-)
+ create mode 100644 xen/include/hypercall-defs.c
+ create mode 100644 xen/scripts/gen_hypercall.awk
+
 -- 
 2.26.2
 
