@@ -2,38 +2,38 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5941EC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FD47C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2376461151
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2376461151
+	by mail.kernel.org (Postfix) with ESMTPS id 62C916023E
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 62C916023E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.211147.368328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.211151.368339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbWfq-0004KB-8O; Fri, 15 Oct 2021 23:31:38 +0000
+	id 1mbWfv-00052o-Jw; Fri, 15 Oct 2021 23:31:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 211147.368328; Fri, 15 Oct 2021 23:31:38 +0000
+Received: by outflank-mailman (output) from mailman id 211151.368339; Fri, 15 Oct 2021 23:31:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbWfq-0004Jl-45; Fri, 15 Oct 2021 23:31:38 +0000
-Received: by outflank-mailman (input) for mailman id 211147;
- Fri, 15 Oct 2021 23:31:37 +0000
+	id 1mbWfv-00052b-FN; Fri, 15 Oct 2021 23:31:43 +0000
+Received: by outflank-mailman (input) for mailman id 211151;
+ Fri, 15 Oct 2021 23:31:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZYBM=PD=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
- id 1mbWfp-0000i4-4a
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:31:37 +0000
+ id 1mbWfu-0000i4-4h
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:31:42 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1469910f-8477-418a-950d-d21ea64b40cf;
- Fri, 15 Oct 2021 23:30:58 +0000 (UTC)
+ id d9d9b6e3-f2ec-4260-b0db-a90eb21ca918;
+ Fri, 15 Oct 2021 23:31:09 +0000 (UTC)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1mbWej-0095uz-9F; Fri, 15 Oct 2021 23:30:29 +0000
+ (Red Hat Linux)) id 1mbWej-0095v3-Bg; Fri, 15 Oct 2021 23:30:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 1469910f-8477-418a-950d-d21ea64b40cf
+X-Inumbo-ID: d9d9b6e3-f2ec-4260-b0db-a90eb21ca918
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=hYL8LO+ietZVLiEWE2oEBW5mwRVdCiTP81FH5yaWaJI=; b=f+ADLXwubj85qcYLZJoMkaccF0
-	LA88l99fFG2x11Wj0W927MuLNzxH+aLXSi41Sta0kPK0c00mcuAfJRMhRo8O2/gVT8jFEkt0Zk4hr
-	nRpIIyZaEygIxOu2Ir+1WF5xTs39HUTMf1P+eojMMuW0QLIF0wbil/OQxvEmzd64iDDxrFcmE+0yv
-	kE8A86cACAhv+x1ja677g+NC4hNwoUKBXx1xqWEMK3YQiQVLgxdzr8G77MuSAupgfSMZX4TFT1Edb
-	SbvQjQ/3HgQObpF99DOxhOoPdReW+f1FUge3qPoQJgqPVxOn1VIhcnU4ycnlt6M5auGj2buchrJJi
-	DE0a5Yog==;
+	bh=agaE6D36LcS3m3yT/hy8ziCroVpqabvNI/EGY/bikug=; b=JZN7KnMFum6DusEMzQaTsmPto3
+	iq0vhkylIJTrRi3kI9DyDDhakbylqaU5ngke9FXegqhHlTjzaES6xYJGeZrlmkrs5X82hd0xUZPly
+	51vs2mHbjxbZ/JrfFkVlCzqGzxcHT6V0Rizcnxt0Xea2U4EbeIEwAYjpLQOYDW9BT1bzfC5yajRai
+	glC6KamA1aVYdFKGePYEOx2LGrVyVLkNNW+ZqxRXr7CKdibjpFjc4X28nYiugdtg8MptBKUKfdmaw
+	DpCnXlnKNpbt7FZn75/eotERzBrmV/jDeJiM/sUdmtdBCIWBuoe8kaRe5aUI7BgROEiElZFn9evkO
+	A1LiSSlQ==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: axboe@kernel.dk,
 	jejb@linux.ibm.com,
@@ -93,9 +93,9 @@ Cc: linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 4/9] bcache: add error handling support for add_disk()
-Date: Fri, 15 Oct 2021 16:30:23 -0700
-Message-Id: <20211015233028.2167651-5-mcgrof@kernel.org>
+Subject: [PATCH 6/9] m68k/emu/nfblock: add error handling support for add_disk()
+Date: Fri, 15 Oct 2021 16:30:25 -0700
+Message-Id: <20211015233028.2167651-7-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211015233028.2167651-1-mcgrof@kernel.org>
 References: <20211015233028.2167651-1-mcgrof@kernel.org>
@@ -107,69 +107,48 @@ We never checked for errors on add_disk() as this function
 returned void. Now that this is fixed, use the shiny new
 error handling.
 
-This driver doesn't do any unwinding with blk_cleanup_disk()
-even on errors after add_disk() and so we follow that
-tradition.
-
-Acked-by: Coly Li <colyli@suse.de>
+Reviewed-by: Geert Uytterhoeven <geert@linux-m68k.org>
+Acked-by: Geert Uytterhoeven <geert@linux-m68k.org>
 Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 ---
- drivers/md/bcache/super.c | 17 ++++++++++++-----
- 1 file changed, 12 insertions(+), 5 deletions(-)
+ arch/m68k/emu/nfblock.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/md/bcache/super.c b/drivers/md/bcache/super.c
-index f2874c77ff79..f0c32cdd6594 100644
---- a/drivers/md/bcache/super.c
-+++ b/drivers/md/bcache/super.c
-@@ -1082,7 +1082,9 @@ int bch_cached_dev_run(struct cached_dev *dc)
- 		closure_sync(&cl);
- 	}
- 
--	add_disk(d->disk);
-+	ret = add_disk(d->disk);
-+	if (ret)
-+		goto out;
- 	bd_link_disk_holder(dc->bdev, dc->disk.disk);
- 	/*
- 	 * won't show up in the uevent file, use udevadm monitor -e instead
-@@ -1534,10 +1536,11 @@ static void flash_dev_flush(struct closure *cl)
- 
- static int flash_dev_run(struct cache_set *c, struct uuid_entry *u)
+diff --git a/arch/m68k/emu/nfblock.c b/arch/m68k/emu/nfblock.c
+index 9a8394e96388..4de5a6087034 100644
+--- a/arch/m68k/emu/nfblock.c
++++ b/arch/m68k/emu/nfblock.c
+@@ -100,6 +100,7 @@ static int __init nfhd_init_one(int id, u32 blocks, u32 bsize)
  {
+ 	struct nfhd_device *dev;
+ 	int dev_id = id - NFHD_DEV_OFFSET;
 +	int err = -ENOMEM;
- 	struct bcache_device *d = kzalloc(sizeof(struct bcache_device),
- 					  GFP_KERNEL);
- 	if (!d)
--		return -ENOMEM;
-+		goto err_ret;
  
- 	closure_init(&d->cl, NULL);
- 	set_closure_fn(&d->cl, flash_dev_flush, system_wq);
-@@ -1551,9 +1554,12 @@ static int flash_dev_run(struct cache_set *c, struct uuid_entry *u)
- 	bcache_device_attach(d, c, u - c->uuids);
- 	bch_sectors_dirty_init(d);
- 	bch_flash_dev_request_init(d);
--	add_disk(d->disk);
-+	err = add_disk(d->disk);
+ 	pr_info("nfhd%u: found device with %u blocks (%u bytes)\n", dev_id,
+ 		blocks, bsize);
+@@ -130,16 +131,20 @@ static int __init nfhd_init_one(int id, u32 blocks, u32 bsize)
+ 	sprintf(dev->disk->disk_name, "nfhd%u", dev_id);
+ 	set_capacity(dev->disk, (sector_t)blocks * (bsize / 512));
+ 	blk_queue_logical_block_size(dev->disk->queue, bsize);
+-	add_disk(dev->disk);
++	err = add_disk(dev->disk);
 +	if (err)
-+		goto err;
++		goto out_cleanup_disk;
  
--	if (kobject_add(&d->kobj, &disk_to_dev(d->disk)->kobj, "bcache"))
-+	err = kobject_add(&d->kobj, &disk_to_dev(d->disk)->kobj, "bcache");
-+	if (err)
- 		goto err;
+ 	list_add_tail(&dev->list, &nfhd_list);
  
- 	bcache_device_link(d, c, "volume");
-@@ -1567,7 +1573,8 @@ static int flash_dev_run(struct cache_set *c, struct uuid_entry *u)
  	return 0;
- err:
- 	kobject_put(&d->kobj);
+ 
++out_cleanup_disk:
++	blk_cleanup_disk(dev->disk);
+ free_dev:
+ 	kfree(dev);
+ out:
 -	return -ENOMEM;
-+err_ret:
 +	return err;
  }
  
- static int flash_devs_run(struct cache_set *c)
+ static int __init nfhd_init(void)
 -- 
 2.30.2
 
