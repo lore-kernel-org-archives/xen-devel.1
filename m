@@ -2,43 +2,40 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A8BEC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 17:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4732EC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 18:38:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ECF4560ED4
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 17:50:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org ECF4560ED4
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id E9D4261037
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 18:38:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E9D4261037
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.211015.368074 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.211030.368088 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbRLx-00008k-FC; Fri, 15 Oct 2021 17:50:45 +0000
+	id 1mbS65-0004Iz-3n; Fri, 15 Oct 2021 18:38:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 211015.368074; Fri, 15 Oct 2021 17:50:45 +0000
+Received: by outflank-mailman (output) from mailman id 211030.368088; Fri, 15 Oct 2021 18:38:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbRLx-00008d-C3; Fri, 15 Oct 2021 17:50:45 +0000
-Received: by outflank-mailman (input) for mailman id 211015;
- Fri, 15 Oct 2021 17:50:44 +0000
+	id 1mbS64-0004Is-VI; Fri, 15 Oct 2021 18:38:24 +0000
+Received: by outflank-mailman (input) for mailman id 211030;
+ Fri, 15 Oct 2021 18:38:23 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mbRLw-00008T-7L; Fri, 15 Oct 2021 17:50:44 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>) id 1mbS63-0004Im-T8
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 18:38:23 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mbRLv-0001yd-V4; Fri, 15 Oct 2021 17:50:43 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mbRLv-0000w5-Na; Fri, 15 Oct 2021 17:50:43 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mbRLv-0007hL-N5; Fri, 15 Oct 2021 17:50:43 +0000
+ (envelope-from <julien@xen.org>)
+ id 1mbS62-0002q9-9a; Fri, 15 Oct 2021 18:38:22 +0000
+Received: from [54.239.6.185] (helo=[192.168.0.140])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mbS62-0002tJ-1G; Fri, 15 Oct 2021 18:38:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,86 +47,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=f+YAdhseczWiuqVlHMG1TDgu2HQzuPzxBZzy0qIo7f4=; b=h7y8xM3abr60Z0UEswuH3vDZI5
-	NDUYqx97UTw4+uXLYwDOXB5TSJ8IS2zxwC6SsgdR0+jjr/+e5JrYW5OrcgmxnbMsDxwuuUwRYu3vE
-	Hpk0Xq51lRd+NwJDBJb4itWTcK/cWLcLt6HbvhRI6lytsqKKkKtOwak8dzZw1wOHJbtI=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-165527-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=xWB/GjandfxY7il5xlUzhjF2/0EcAFuuglOttH/SFLo=; b=eThHxZiLZu68aD/A6mZ6Yg/CiK
+	ada8w6khFhT6vk2UMt4GKFXVVFr6cVQFBmoZmaP7zRofeQ3CpxYvdi8PRo4XGu76uY2xzIprsFx26
+	7z1g8l86vUS4YCfI04R2VbwbjPGmG6LhFotLIK1mK1ThpOS0P0eM9a6JL8ln5aSCx0AA=;
+Message-ID: <a45077dc-e144-4427-9ae2-5815045ecaec@xen.org>
+Date: Fri, 15 Oct 2021 19:38:19 +0100
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 165527: tolerable all pass - PUSHED
-X-Osstest-Failures:
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=f791392f82ffe39cc1ea4c4db1d877223754a04a
-X-Osstest-Versions-That:
-    xen=9f4f20b27b0733e9b792e3cd2ad996febdea46ba
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 15 Oct 2021 17:50:43 +0000
-
-flight 165527 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/165527/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  f791392f82ffe39cc1ea4c4db1d877223754a04a
-baseline version:
- xen                  9f4f20b27b0733e9b792e3cd2ad996febdea46ba
-
-Last test of basis   165522  2021-10-15 11:02:48 Z    0 days
-Testing same since   165527  2021-10-15 14:01:46 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.0
+Subject: Re: [PATCH v8 2/5] xen/arm: Enable the existing x86 virtual PCI
+ support for ARM
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ "iwj@xenproject.org" <iwj@xenproject.org>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>,
+ Rahul Singh <Rahul.Singh@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <cover.1634315461.git.bertrand.marquis@arm.com>
+ <e2b10f56043155e4bb8eae824723045ccc042f8e.1634315461.git.bertrand.marquis@arm.com>
+ <cef8d2a6-91c1-2d4d-2078-98d0a92b067a@xen.org>
+ <F447A1D8-A023-4127-AAC0-7511868DE9C4@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <F447A1D8-A023-4127-AAC0-7511868DE9C4@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+On 15/10/2021 18:33, Bertrand Marquis wrote:
+> Hi Julien,
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+Hi Bertrand,
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+> 
+>> On 15 Oct 2021, at 18:25, Julien Grall <julien@xen.org> wrote:
+>>
+>> Hi Bertrand,
+>>
+>> On 15/10/2021 17:51, Bertrand Marquis wrote:
+>>> diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
+>>> index 3aa8c3175f..35e0190796 100644
+>>> --- a/xen/drivers/passthrough/pci.c
+>>> +++ b/xen/drivers/passthrough/pci.c
+>>> @@ -756,6 +756,19 @@ int pci_add_device(u16 seg, u8 bus, u8 devfn,
+>>>       if ( !pdev->domain )
+>>>       {
+>>>           pdev->domain = hardware_domain;
+>>> +#ifdef CONFIG_ARM
+>>> +        /*
+>>> +         * On ARM PCI devices discovery will be done by Dom0. Add vpci handler
+>>> +         * when Dom0 inform XEN to add the PCI devices in XEN.
+>>> +         */
+>>> +        ret = vpci_add_handlers(pdev);
+>>
+>> I don't seem to find the code to remove __init_hwdom in this series. Are you intending to fix it separately?
+> 
+> Yes I think it is better to fix that in a new patch as it will require some discussion as it will impact the x86 code if I just remove the flag now.
+For the future patch series, may I ask to keep track of outstanding 
+issues in the commit message (if you don't plan to address them before 
+commiting) or after --- (if they are meant to be addressed before 
+commiting)?
 
+In this case, the impact on Arm is this would result to an hypervisor 
+crash if called. If we drop __init_hwdom, the impact on x86 is Xen text 
+will slightly be bigger after the boot time.
 
-Pushing revision :
+AFAICT, the code is not reachable on Arm (?). Therefore, one could argue 
+we this can wait after the week-end as this is a latent bug. Yet, I am 
+not really comfortable to see knowningly buggy code merged.
 
-To xenbits.xen.org:/home/xen/git/xen.git
-   9f4f20b27b..f791392f82  f791392f82ffe39cc1ea4c4db1d877223754a04a -> smoke
+Stefano, would you be willing to remove __init_hwdom while committing 
+it? If not, can you update the commit message and mention this patch 
+doesn't work as intended?
+
+Cheers,
+
+-- 
+Julien Grall
 
