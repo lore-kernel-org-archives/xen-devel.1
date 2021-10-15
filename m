@@ -2,38 +2,36 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E4BAC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:53:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CC9D7C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:59:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 40B4661181
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:53:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 40B4661181
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 81F77611C1
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 16:59:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 81F77611C1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.210963.368018 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.210976.368029 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbQSe-00007E-2h; Fri, 15 Oct 2021 16:53:36 +0000
+	id 1mbQXz-0000vz-Mo; Fri, 15 Oct 2021 16:59:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 210963.368018; Fri, 15 Oct 2021 16:53:36 +0000
+Received: by outflank-mailman (output) from mailman id 210976.368029; Fri, 15 Oct 2021 16:59:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbQSd-000074-W1; Fri, 15 Oct 2021 16:53:35 +0000
-Received: by outflank-mailman (input) for mailman id 210963;
- Fri, 15 Oct 2021 16:53:35 +0000
+	id 1mbQXz-0000vs-Jm; Fri, 15 Oct 2021 16:59:07 +0000
+Received: by outflank-mailman (input) for mailman id 210976;
+ Fri, 15 Oct 2021 16:59:06 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1aKp=PD=gmail.com=andy.shevchenko@srs-us1.protection.inumbo.net>)
- id 1mbQSd-00006p-9Q
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 16:53:35 +0000
-Received: from mail-ed1-x533.google.com (unknown [2a00:1450:4864:20::533])
+ <SRS0=gHjW=PD=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1mbQXy-0000vm-Lv
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 16:59:06 +0000
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5fb46bc0-1163-4960-9021-3306e67006e7;
- Fri, 15 Oct 2021 16:53:34 +0000 (UTC)
-Received: by mail-ed1-x533.google.com with SMTP id y30so22910749edi.0
- for <xen-devel@lists.xenproject.org>; Fri, 15 Oct 2021 09:53:34 -0700 (PDT)
+ id bd9ae0da-9023-48d0-94f0-081d59450ab9;
+ Fri, 15 Oct 2021 16:59:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,102 +43,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5fb46bc0-1163-4960-9021-3306e67006e7
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=DFAfhL2wTnA/x1oOiRIEIccRhRGZWYerK6em4KwuQr0=;
-        b=WhznUYR2nkpwiwbTRwmHKoc047JsFdk3RvHIe/jtOLSDmdxX07MCX9Eow0Bi+yLoQp
-         EyU08OzLxLG5ZCsUs7GUsgWdhql+ygc3SL2hgpQj7qkueaPaH4FCl+VEJFbTT66B35gH
-         GDagaCdrbJmPFv3m1vjK25dlCo+SurtmwsJpbtn+lVZ1hUtQu8pPUJ/3APaMcce/rMb+
-         gK4/JKJga2A5DLyU3cXWQ467mYYMbHs26I04bEcKD9mvTuveZ0BpijvVaw9Fg5WzWNNW
-         l7COh3PfIisjI8gWM0rsyxYaukEsrZpFMim7hIuXFIwI4NkGZUXxkbzqxVTnksr3mpP4
-         SUYg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=DFAfhL2wTnA/x1oOiRIEIccRhRGZWYerK6em4KwuQr0=;
-        b=zXW59JpnuDXKIapTKzL11AZzoclk39l8OB7pOB29F14aZ9ZZTp11sYBCsdu35WulBP
-         Wr4Nqm8Rb9n9f3DU8WOjUbD9L7/i7mL8hCCXo5fEXKM4mglJBr9vt+AHp3QJuF4SQbrH
-         +/qGGqUrQZDxTfQgbmYEh3LIpE1PhC9d2aDKnO9O4pmUqLRJS75xhdJQjjn3dnXoApWs
-         /sZqjt71HW5LfGLVwMt3qKYl1112CGiajPq4bA5LR1jP4XJHb/4V2FQ8R7Y2F9VZH3m/
-         rRcLxahjVH/VKLkt957cZSTwJAs4uYBLBTWvuzkbD/an6S7ZiMFKQLSemZVzdDbNwKqF
-         B6tw==
-X-Gm-Message-State: AOAM53174cbMJje67L404c7JHVVbSutLTj9a3NDGWI+SpwlR7gDGk0k5
-	Naetn0hs6eZFMP0FsZ4RdThk+4DD9YNar1B2HGE=
-X-Google-Smtp-Source: ABdhPJw1GMYkf4/DzQ6xCdDldbViFURlmc0YnNdhDKa/6j1hrF7JWMyfM92nI6tIEj+fn7ChYTDQotvOC+uhf3cE48A=
-X-Received: by 2002:a50:e188:: with SMTP id k8mr19911628edl.119.1634316813165;
- Fri, 15 Oct 2021 09:53:33 -0700 (PDT)
+X-Inumbo-ID: bd9ae0da-9023-48d0-94f0-081d59450ab9
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1634317144;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=jBZndRRIyTWDv3s8jOCkMrX0hwxt3EJUrDq+/4qMEQs=;
+  b=SaL/+EJG1LF+eM2aCSAuSQah7zDLm+ZXe15MuXBsYB7wOBXC88rhMgz6
+   7n8qR2Ezt9E1KJW3tVZUN2o0CElx+hzqNY5ohjhiFLHcMk/8zkZmlMkco
+   Mr7QILat1c4+Kgp9KcWamM/h9rO7F87uHf4JhzsbzCwNrasvl5Gs7lx4Y
+   c=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: aOT8yUw6daduCZ7a82yy0Gf/AQsvQAhTmVdaBXu1VOxI+Mo2DCshT7qMJb/6K7sFiLnlr4YXQN
+ IUwNTZKaO/2aHcKMdsFNG0lWTaTR7j9M/uelx2szjpGlTcIVBvmfSvmQwnPMBGgydKz12NB9UF
+ 3E5ixRI9nllDOBE+1YQgqCTP8DSUJPqLNj7l5b4nsll/2MHojqsHs7LTtL1PEFRDFwG2A0DScJ
+ VZHcJvgETpEkRTQ/aflLSXIPq5t8hO4FZfu6RHBTUK3nuUhcG9qcgNaZTzV3hOXxqNBuTvrxZK
+ X5OVIDxm3Vkn2jCNODbfHYq6
+X-SBRS: 5.1
+X-MesageID: 55337302
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:TmheZ6w4jlZ5/eei0mJ6t+dDwCrEfRIJ4+MujC+fZmUNrF6WrkVRm
+ mJKDGiAPP+KZTf1fIwjaN+wpk8OvJKEm99kHVRl+yAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAsLeNYYH1500s6w7dk2tQAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt+tzx
+ Phvsp+McAA0P7PIgMREazNnIz4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVors0lMMnsOpJZonx6xCvVJf0nXYrCU+PB4towMDIY250VRqmFP
+ 5BxhTxHbgbZaD5GeXYuMYMkkeSjo1DRfiNYpwfAzUYwyzeKl1EguFT3C/LWfdqQTMkTgUecp
+ UrB5W3yBhxcP9uaoRK79Xariv7KjDnMcosYH72l9dZnmFSWgGcUDXU+WVS3rPajg2aiStlfL
+ AoS4SNooq8snGS7Q9+4UxCmrXqsuh8HR8EWA+A88BuKyKff/0CeHGdsZjJZc9knqM8eTCQnz
+ EOUhMjuASFzsbqTUjSW8bL8hTKtOwAFIGkafygGQAAZpd75r+kbjBjCU9JiG66dlcDuFHf7x
+ DXihCojg7Qei+Yb2qP9+krI6xqzorDZQwhz4R/YNkq+9R9wboOhY42u6HDY4OxGIYLfSUOO1
+ EXogODHsrpIV8vU0nXQHqNdR9lF+sppLhXng1JCPZ4iyw2q5n+9eZhwuQlUG3d2Z5NslSDSX
+ GffvgZY5Zl2NXSsbLNqb4/ZN/nG3ZQMBvy+CaiKNosmjoxZMVbdpnk3NBH4M3XFyRB0yckC1
+ YGnndFA5JrwIZ9syyaqXK8j2LsvyzFWKYj7FM2jkUrPPVZzYheopVY53LmmMr9RAECs+ly9H
+ zNj2y2ikEg3vArWOHi/zGLrBQpWRUXX/LivwyCtSsaNIxB9BEYqAOLLzLUqduRNxvoOyr2Tp
+ CrgAx8CljITYEErzy3RNxiPj5u0Bf5CQY8TZ3RwbT5EJVByCWpQ0EvvX8RuJuR2nACS5fV1U
+ +MEa6297gdnEVz6F8AmRcCl9uRKLU3z7SrXZnbNSGVvLvZIGl2Skve5L1SHycX7Jnfu3SfIi
+ +b7jV2zrFtqb1kKMfs6n9r0kQ7v5yFGxr8rN6YKS/EKEHjRHEFRA3SZppcKzwskc30vHxOWi
+ FSbBwk2v+7Ir9Nn+dXFn/nc/YyoD/F/DgxRGGyCteS6MizT/2yCx45cUbnXIWCBBT2soKjyN
+ /9Iy/zcMeEcmAoYuYRLDLs2n7k14MHipuEGw108TmnLdVmiFphpPmKCgZtUrqRIy7IA4Vm2V
+ 0uD98N0I7KMPM+5QlcdKBB8NraI1O0OmymU5vMweR2o6Chy9buBcENTIxjT13ANcOoraNsom
+ L5zttQX5gqzjgsRHuyH1i0EpX6RKnEgUrk8ss1ICoHclQd2mEpJZobRC3Gq7cjXOclMKEQjP
+ hSdmLHG2+ZH3kPHfnc+SSrN0O5aichcsRxG1gZfdVGAm96Djf4rxhxBtz8wS10NnBlA1utyP
+ EltNlF0evrSr2s52pAbUjD+ARxFCT2Y5lf1mgkAm2DuRkW1UnDAcT8mMuGX8UFFq29Rc1C3J
+ l1DJLoJhdoyQPzM4w==
+IronPort-HdrOrdr: A9a23:8mhadaOLGLTQXsBcTsOjsMiBIKoaSvp037Eqv3oRdfVwSL3+qy
+ nOpoV+6faaslossR0b9uxofZPwJ080lqQFhLX5X43SPzUO0VHAROoJgLcKgQeQeREWntQtrJ
+ uIGJIfNDSfNzZHsfo=
+X-IronPort-AV: E=Sophos;i="5.85,376,1624334400"; 
+   d="scan'208";a="55337302"
+Date: Fri, 15 Oct 2021 17:58:50 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Roger Pau
+ =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Konrad Rzeszutek Wilk
+	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>, "Daniel
+ De Graaf" <dgdegra@tycho.nsa.gov>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, <xen-devel@lists.xenproject.org>
+Subject: Re: [XEN PATCH v7 49/51] build: adding out-of-tree support to the
+ xen build
+Message-ID: <YWmzSkLdH5wtQ77V@perard>
+References: <20210824105038.1257926-1-anthony.perard@citrix.com>
+ <20210824105038.1257926-50-anthony.perard@citrix.com>
+ <2aaf0858-1602-be5c-77e4-2daa7fddc534@suse.com>
 MIME-Version: 1.0
-References: <YWbdvc7EWEZLVTHM@smile.fi.intel.com> <20211015164653.GA2108651@bhelgaas>
-In-Reply-To: <20211015164653.GA2108651@bhelgaas>
-From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Fri, 15 Oct 2021 22:52:45 +0300
-Message-ID: <CAHp75VdpVwvOkjDWHcnWA-qZFm062UBp7VwdcpWbkdVR=i75Hw@mail.gmail.com>
-Subject: Re: [PATCH v6 00/11] PCI: Drop duplicated tracking of a pci_dev's
- bound driver
-To: Bjorn Helgaas <helgaas@kernel.org>
-Cc: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <u.kleine-koenig@pengutronix.de>, 
-	linux-pci <linux-pci@vger.kernel.org>, Sascha Hauer <kernel@pengutronix.de>, 
-	Alexander Duyck <alexanderduyck@fb.com>, 
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Andrew Donnellan <ajd@linux.ibm.com>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>, Bjorn Helgaas <bhelgaas@google.com>, 
-	Borislav Petkov <bp@alien8.de>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
-	"David S. Miller" <davem@davemloft.net>, Fiona Trahe <fiona.trahe@intel.com>, 
-	Frederic Barrat <fbarrat@linux.ibm.com>, Giovanni Cabiddu <giovanni.cabiddu@intel.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"H. Peter Anvin" <hpa@zytor.com>, Ido Schimmel <idosch@nvidia.com>, Ingo Molnar <mingo@redhat.com>, 
-	Jack Xu <jack.xu@intel.com>, Jakub Kicinski <kuba@kernel.org>, 
-	Jesse Brandeburg <jesse.brandeburg@intel.com>, Jiri Olsa <jolsa@redhat.com>, 
-	Jiri Pirko <jiri@nvidia.com>, Juergen Gross <jgross@suse.com>, 
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Marco Chiappero <marco.chiappero@intel.com>, 
-	Mark Rutland <mark.rutland@arm.com>, Mathias Nyman <mathias.nyman@intel.com>, 
-	Michael Buesch <m@bues.ch>, Michael Ellerman <mpe@ellerman.id.au>, Namhyung Kim <namhyung@kernel.org>, 
-	"Oliver O'Halloran" <oohall@gmail.com>, Paul Mackerras <paulus@samba.org>, 
-	Peter Zijlstra <peterz@infradead.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <zajec5@gmail.com>, 
-	Russell Currey <ruscur@russell.cc>, Salil Mehta <salil.mehta@huawei.com>, 
-	Sathya Prakash <sathya.prakash@broadcom.com>, Simon Horman <simon.horman@corigine.com>, 
-	Sreekanth Reddy <sreekanth.reddy@broadcom.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Suganath Prabu Subramani <suganath-prabu.subramani@broadcom.com>, 
-	Taras Chornyi <tchornyi@marvell.com>, Thomas Gleixner <tglx@linutronix.de>, 
-	Tomaszx Kowalik <tomaszx.kowalik@intel.com>, Vadym Kochan <vkochan@marvell.com>, 
-	Wojciech Ziemba <wojciech.ziemba@intel.com>, Yisen Zhuang <yisen.zhuang@huawei.com>, 
-	Zhou Wang <wangzhou1@hisilicon.com>, linux-crypto <linux-crypto@vger.kernel.org>, 
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, linux-perf-users@vger.kernel.org, 
-	"open list:LINUX FOR POWERPC PA SEMI PWRFICIENT" <linuxppc-dev@lists.ozlabs.org>, linux-scsi <linux-scsi@vger.kernel.org>, 
-	USB <linux-usb@vger.kernel.org>, 
-	"open list:TI WILINK WIRELES..." <linux-wireless@vger.kernel.org>, MPT-FusionLinux.pdl@broadcom.com, 
-	netdev <netdev@vger.kernel.org>, oss-drivers@corigine.com, qat-linux@intel.com, 
-	"maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <2aaf0858-1602-be5c-77e4-2daa7fddc534@suse.com>
 
-On Fri, Oct 15, 2021 at 7:46 PM Bjorn Helgaas <helgaas@kernel.org> wrote:
-> On Wed, Oct 13, 2021 at 04:23:09PM +0300, Andy Shevchenko wrote:
+On Thu, Oct 14, 2021 at 12:14:29PM +0200, Jan Beulich wrote:
+> On 24.08.2021 12:50, Anthony PERARD wrote:
+> > This implement out-of-tree support, there's two ways to create an
+> > out-of-tree build tree (after that, `make` in that new directory
+> > works):
+> >     make O=build
+> >     mkdir build; cd build; make -f ../Makefile
+> > also works with an absolute path for both.
+> > 
+> > This implementation only works if the source tree is clean, as we use
+> > VPATH.
+> > 
+> > This patch copies most new code with handling out-of-tree build from
+> > Linux v5.12.
+> > 
+> > Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+> > ---
+> >  xen/Makefile                | 173 +++++++++++++++++++++++++++++-------
+> >  xen/Rules.mk                |  11 ++-
+> >  xen/arch/arm/efi/Makefile   |   3 +
+> >  xen/arch/x86/arch.mk        |   3 +
+> >  xen/arch/x86/boot/Makefile  |   5 +-
+> >  xen/arch/x86/efi/Makefile   |   3 +
+> >  xen/include/Makefile        |   9 +-
+> >  xen/scripts/mkmakefile      |  17 ++++
+> >  xen/test/livepatch/Makefile |   2 +
+> >  xen/xsm/flask/Makefile      |   3 +
+> >  xen/xsm/flask/ss/Makefile   |   3 +
+> >  11 files changed, 194 insertions(+), 38 deletions(-)
+> >  create mode 100755 xen/scripts/mkmakefile
+> 
+> Linux have done away with this script just recently; I don't think we
+> should introduce it.
 
-...
+Will change.
 
-> so compared to Uwe's v6, I restored that section to the original code.
-> My goal here was to make the patch as simple and easy to review as
-> possible.
+> > --- a/xen/Makefile
+> > +++ b/xen/Makefile
+> > @@ -1,3 +1,7 @@
+> > +# $(lastword,) for GNU Make older than 0.81
+> 
+> DYM 3.81?
 
-Thanks for elaboration. I have got it.
+Yes.
 
-...
+> > +lastword = $(word $(words $(1)),$(1))
+> > +this-makefile := $(call lastword,$(MAKEFILE_LIST))
+> 
+> Oh - is it documented somewhere that this would always be last?
 
-> You're right, this didn't make much sense in that patch.  I moved the
-> line join to the previous patch, which unindented this section and
-> made space for this to fit on one line.  Here's the revised commit:
->
->   https://git.kernel.org/cgit/linux/kernel/git/helgaas/pci.git/commit/?id=34ab316d7287
+Yes, it is even in Make's documentation about the variable:
+    "if the first thing a makefile does is examine the last word in this
+    variable, it will be the name of the current makefile."
+    (taken from Make 3.80 documentation)
 
-Side remark: default without break or return is error prone (okay, to
-some extent). Perhaps adding the return statement there will make
-things robust and clean.
+> > @@ -17,33 +21,18 @@ export XEN_BUILD_HOST	?= $(shell hostname)
+> >  PYTHON_INTERPRETER	:= $(word 1,$(shell which python3 python python2 2>/dev/null) python)
+> >  export PYTHON		?= $(PYTHON_INTERPRETER)
+> >  
+> > -export XEN_ROOT := $(CURDIR)/..
+> > +$(if $(filter __%, $(MAKECMDGOALS)), \
+> > +	$(error targets prefixed with '__' are only for internal use))
+> >  
+> > -srctree := .
+> > -objtree := .
+> > -export srctree objtree
+> > +# That's our default target when none is given on the command line
+> > +PHONY := __all
+> > +__all:
+> >  
+> >  # Do not use make's built-in rules and variables
+> >  MAKEFLAGS += -rR
+> >  
+> >  EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
+> >  
+> > -ARCH=$(XEN_TARGET_ARCH)
+> > -SRCARCH=$(shell echo $(ARCH) | \
+> > -          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
+> > -              -e s'/riscv.*/riscv/g')
+> > -export ARCH SRCARCH
+> > -
+> > -# Don't break if the build process wasn't called from the top level
+> > -# we need XEN_TARGET_ARCH to generate the proper config
+> > -include $(XEN_ROOT)/Config.mk
+> > -
+> > -# Set ARCH/SUBARCH appropriately.
+> > -export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
+> > -export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
+> > -                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
+> > -                                -e s'/riscv.*/riscv/g')
+> > -
+> >  # Allow someone to change their config file
+> >  export KCONFIG_CONFIG ?= .config
+> 
+> Would it be possible to split off some of the pure movement of pieces,
+> to make it easier to see what (if anything) is actually changed at the
+> same time as getting moved?
+
+I'll give it a try.
+
+> > @@ -51,14 +40,9 @@ export CC CXX LD
+> >  
+> >  export TARGET := xen
+> >  
+> > -.PHONY: default
+> > -default: build
+> > -
+> >  .PHONY: dist
+> >  dist: install
+> >  
+> > -include scripts/Kbuild.include
+> > -
+> >  ifneq ($(root-make-done),y)
+> >  # section to run before calling Rules.mk, but only once.
+> >  
+> > @@ -130,14 +114,93 @@ endif
+> >  
+> >  ifneq ($(findstring s,$(filter-out --%,$(MAKEFLAGS))),)
+> >      quiet := silent_
+> > +    KBUILD_VERBOSE = 0
+> >  endif
+> 
+> In how far is this related here? Doesn't this belong in an earlier patch?
+
+That probably belong to a patch that have been committed some time ago,
+and I've notice it was missing when comparing our makefile to Linux's
+one. (Or maybe it wasn't set as well in Linux originally). I'll look if
+that can be added to another patch, or just have a patch for this single
+line.
+
+> > --- a/xen/Rules.mk
+> > +++ b/xen/Rules.mk
+> > @@ -38,7 +38,7 @@ SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
+> >                           $(foreach r,rel rel.ro,data.$(r).local)
+> >  
+> >  # The filename build.mk has precedence over Makefile
+> > -mk-dir := $(src)
+> > +mk-dir := $(srctree)/$(src)
+> >  include $(if $(wildcard $(mk-dir)/build.mk),$(mk-dir)/build.mk,$(mk-dir)/Makefile)
+> 
+> Perhaps already when it was changed to $(src) the name has become
+> slightly misleading, at least imo: I would rather expect a variable
+> with this name to refer to the build dir/tree. Maybe "srcdir" or
+> even shorted "sd" right from the start? (Reaching here I can finally
+> see why having a shorthand is helpful.)
+
+I have to think about that. I've made some further progress in order to
+be able to build the Xen pvhshim without a link farm and notice that
+nearly every source file needs to use "$(srctree)/$(src)" and I'm not
+sure "$(src)" could be use alone. So having a single variable which have
+both would be useful.
+
+"srcdir" might be to close to "srctree" and one might mistake it for the
+other, so "sd" might be better.
+
+> > --- a/xen/arch/x86/efi/Makefile
+> > +++ b/xen/arch/x86/efi/Makefile
+> > @@ -1,5 +1,8 @@
+> >  CFLAGS-y += -fshort-wchar
+> >  CFLAGS-y += -I$(srctree)/common/efi
+> > +ifdef building_out_of_srctree
+> > +CFLAGS-y += -I$(srctree)/$(src)
+> > +endif
+> 
+> At the example of this (where perhaps -iquote could be used again) - is
+> it strictly necessary to have the ifdef-s around such? I.e. would things
+> fail to work for an in-tree build without them?
+
+ifdef isn't really necessary, gcc always check that directory first
+anyway (for quote-included headers), so it is just a duplicate of gcc's
+path list, but it would work fine. So I'll remove the ifdef.
+
+> > --- a/xen/xsm/flask/ss/Makefile
+> > +++ b/xen/xsm/flask/ss/Makefile
+> > @@ -9,3 +9,6 @@ obj-y += conditional.o
+> >  obj-y += mls.o
+> >  
+> >  CFLAGS-y += -I$(srctree)/xsm/flask/include
+> > +ifdef building_out_of_srctree
+> > +    CFLAGS-y += -I$(objtree)/xsm/flask/include
+> 
+> There's no header in $(srctree)/xsm/flask/include in this case, so if you
+> use "ifdef" here, shouldn't that other part move into an "else"?
+
+Actually, there are headers in the source, like "security.h", and `git
+ls-files xen/xsm/flask/include` shows plenty other headers.
+
+Thanks,
 
 -- 
-With Best Regards,
-Andy Shevchenko
+Anthony PERARD
 
