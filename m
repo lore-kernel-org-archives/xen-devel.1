@@ -2,38 +2,38 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A37DAC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED595C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6E6776023E
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6E6776023E
+	by mail.kernel.org (Postfix) with ESMTPS id C18166023E
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C18166023E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.211137.368305 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.211141.368317 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbWfg-0003Bz-HX; Fri, 15 Oct 2021 23:31:28 +0000
+	id 1mbWfl-0003iX-1n; Fri, 15 Oct 2021 23:31:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 211137.368305; Fri, 15 Oct 2021 23:31:28 +0000
+Received: by outflank-mailman (output) from mailman id 211141.368317; Fri, 15 Oct 2021 23:31:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbWfg-0003Bl-ED; Fri, 15 Oct 2021 23:31:28 +0000
-Received: by outflank-mailman (input) for mailman id 211137;
- Fri, 15 Oct 2021 23:31:27 +0000
+	id 1mbWfk-0003hw-Re; Fri, 15 Oct 2021 23:31:32 +0000
+Received: by outflank-mailman (input) for mailman id 211141;
+ Fri, 15 Oct 2021 23:31:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZYBM=PD=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
- id 1mbWff-0000i4-4H
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:31:27 +0000
+ id 1mbWfk-0000i4-4S
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:31:32 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 27a045e9-e729-4dfc-ac2f-7a5ade56d66b;
+ id 26397316-d3ca-4d18-9a4b-cf635678a856;
  Fri, 15 Oct 2021 23:30:57 +0000 (UTC)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1mbWej-0095v9-FL; Fri, 15 Oct 2021 23:30:29 +0000
+ (Red Hat Linux)) id 1mbWej-0095v7-E9; Fri, 15 Oct 2021 23:30:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 27a045e9-e729-4dfc-ac2f-7a5ade56d66b
+X-Inumbo-ID: 26397316-d3ca-4d18-9a4b-cf635678a856
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=1bxbk0s3lfDVOxUu9YL+DFpJGCsQmsW80G59PebYRqE=; b=aalz1ZDhgOT13yhanR/NqZ5sjs
-	X5pioDiqsq7wCK2104+ErSt/d87llJaWu6pQoxxECmaoO81hQebB3KNTX5PwVwh0Wlle8KkYwZZBB
-	EY4W4L6CCmX4otbH/vrigBKCha0gJhBOPJveGJURS1xTFt80WQfF7LB3v5CMYxLrjOS8eZd3kniVy
-	HyXUMIAEzA7S5SKbG2+6Yqkl2uLf/5+8Zq1fNAP9Axdv7DJBliakso6t7DsDPgMdI8rCvMziP5o8M
-	CGo1BDA88hi8eOF897sCgWMsxi2JB/fnJEqvFbB4ooRNqP1S/IXuebirvfHfM/xaTn3IphBxajPsD
-	XdhftxIw==;
+	bh=rG9IqTjAKDoxlaB9WcX4+FIDpVpRocTi/WMidAyqb5E=; b=zZoTqdfJ9Fxpi6GVhbzlxeBy5Z
+	TSHUOtdRa3bmpLqWSLW0djXO8cm89eWDPeRyuLhvJmh9r4yCfAdeswev1Akm1dngsVKrFxxVL/vwK
+	/o0NcsEQRPnpKqBDS1R1QPBK6jlB+L2FrQUNxMjpJa0MZyI7LNFOdAQQxAqGzBZuu+NpaCLnK3MOq
+	nsEWwUrmMKWD9Ul/gId96Lp5lFjisiK/c0hgYHvTulpiaTXtvHI9nZC5vP4MLTaqoMmCcfqzH0mzI
+	6UZRd/twOEufTonfDKYrunADAuSDWqwpR01BKU3v0w7aRz+6+suErEvLj7p0zymwJC/+eLN8Tnv2x
+	9guF9rCQ==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: axboe@kernel.dk,
 	jejb@linux.ibm.com,
@@ -93,9 +93,9 @@ Cc: linux-scsi@vger.kernel.org,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 9/9] mtd: add add_disk() error handling
-Date: Fri, 15 Oct 2021 16:30:28 -0700
-Message-Id: <20211015233028.2167651-10-mcgrof@kernel.org>
+Subject: [PATCH 8/9] rnbd: add error handling support for add_disk()
+Date: Fri, 15 Oct 2021 16:30:27 -0700
+Message-Id: <20211015233028.2167651-9-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211015233028.2167651-1-mcgrof@kernel.org>
 References: <20211015233028.2167651-1-mcgrof@kernel.org>
@@ -107,36 +107,51 @@ We never checked for errors on add_disk() as this function
 returned void. Now that this is fixed, use the shiny new
 error handling.
 
-Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Acked-by: Jack Wang <jinpu.wang@ionos.com>
 Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 ---
- drivers/mtd/mtd_blkdevs.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/block/rnbd/rnbd-clt.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/mtd/mtd_blkdevs.c b/drivers/mtd/mtd_blkdevs.c
-index b8ae1ec14e17..4eaba6f4ec68 100644
---- a/drivers/mtd/mtd_blkdevs.c
-+++ b/drivers/mtd/mtd_blkdevs.c
-@@ -384,7 +384,9 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
- 	if (new->readonly)
- 		set_disk_ro(gd, 1);
+diff --git a/drivers/block/rnbd/rnbd-clt.c b/drivers/block/rnbd/rnbd-clt.c
+index 5864c9b46cb9..3b78dc55a9a2 100644
+--- a/drivers/block/rnbd/rnbd-clt.c
++++ b/drivers/block/rnbd/rnbd-clt.c
+@@ -1384,8 +1384,10 @@ static void setup_request_queue(struct rnbd_clt_dev *dev)
+ 	blk_queue_write_cache(dev->queue, dev->wc, dev->fua);
+ }
  
--	device_add_disk(&new->mtd->dev, gd, NULL);
-+	ret = device_add_disk(&new->mtd->dev, gd, NULL);
-+	if (ret)
-+		goto out_cleanup_disk;
+-static void rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
++static int rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
+ {
++	int err;
++
+ 	dev->gd->major		= rnbd_client_major;
+ 	dev->gd->first_minor	= idx << RNBD_PART_BITS;
+ 	dev->gd->minors		= 1 << RNBD_PART_BITS;
+@@ -1410,7 +1412,11 @@ static void rnbd_clt_setup_gen_disk(struct rnbd_clt_dev *dev, int idx)
  
- 	if (new->disk_attributes) {
- 		ret = sysfs_create_group(&disk_to_dev(gd)->kobj,
-@@ -393,6 +395,8 @@ int add_mtd_blktrans_dev(struct mtd_blktrans_dev *new)
- 	}
- 	return 0;
+ 	if (!dev->rotational)
+ 		blk_queue_flag_set(QUEUE_FLAG_NONROT, dev->queue);
+-	add_disk(dev->gd);
++	err = add_disk(dev->gd);
++	if (err)
++		blk_cleanup_disk(dev->gd);
++
++	return err;
+ }
  
-+out_cleanup_disk:
-+	blk_cleanup_disk(new->disk);
- out_free_tag_set:
- 	blk_mq_free_tag_set(new->tag_set);
- out_kfree_tag_set:
+ static int rnbd_client_setup_device(struct rnbd_clt_dev *dev)
+@@ -1426,8 +1432,7 @@ static int rnbd_client_setup_device(struct rnbd_clt_dev *dev)
+ 	rnbd_init_mq_hw_queues(dev);
+ 
+ 	setup_request_queue(dev);
+-	rnbd_clt_setup_gen_disk(dev, idx);
+-	return 0;
++	return rnbd_clt_setup_gen_disk(dev, idx);
+ }
+ 
+ static struct rnbd_clt_dev *init_dev(struct rnbd_clt_session *sess,
 -- 
 2.30.2
 
