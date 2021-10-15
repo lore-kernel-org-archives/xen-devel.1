@@ -2,51 +2,52 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB668C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CFE20C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 819F860F56
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 819F860F56
+	by mail.kernel.org (Postfix) with ESMTPS id 8C39E60F56
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 12:52:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8C39E60F56
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.210484.367441 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.210488.367452 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbMhF-0003ti-SY; Fri, 15 Oct 2021 12:52:25 +0000
+	id 1mbMhI-0004Nb-L1; Fri, 15 Oct 2021 12:52:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 210484.367441; Fri, 15 Oct 2021 12:52:25 +0000
+Received: by outflank-mailman (output) from mailman id 210488.367452; Fri, 15 Oct 2021 12:52:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbMhF-0003se-Jq; Fri, 15 Oct 2021 12:52:25 +0000
-Received: by outflank-mailman (input) for mailman id 210484;
- Fri, 15 Oct 2021 12:52:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mbMhI-0004Mk-Bb; Fri, 15 Oct 2021 12:52:28 +0000
+Received: by outflank-mailman (input) for mailman id 210488;
+ Fri, 15 Oct 2021 12:52:27 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=esao=PD=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mbMhE-00012o-3r
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 12:52:24 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7384eba4-6dd3-4a31-8f37-ead6aba339fd;
+ id 1mbMhG-0001If-Uc
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 12:52:26 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id b2375fdd-2db6-11ec-8235-12813bfff9fa;
  Fri, 15 Oct 2021 12:52:05 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id EDBEC21A67;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 4B8A01FD50;
  Fri, 15 Oct 2021 12:52:04 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C1B6413C1A;
- Fri, 15 Oct 2021 12:52:04 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EB18113C1A;
+ Fri, 15 Oct 2021 12:52:03 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id yIMXLnR5aWEYHgAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 15 Oct 2021 12:52:04 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id oA48OHN5aWEYHgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 15 Oct 2021 12:52:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,629 +59,442 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7384eba4-6dd3-4a31-8f37-ead6aba339fd
+X-Inumbo-ID: b2375fdd-2db6-11ec-8235-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1634302324; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=YbzgjhMjFz2fWHYnyWUY/M+bimSV/pLOA+XqwH3l3Aw=;
-	b=LdLDqd87d31wjMIlDA/zNFkeruGrcTmVrnV+BCNHuHI4dimTIAW7T11JHvgWiWQk7JoeZL
-	rfjWSzYm6wV9dxZm66VoZO6rSxcagw1GFzU6KVVf7Xeehrl3zJ7+MKjaP4UetgN21Q7Szh
-	5rEMjOcg4Ke/Q+6iP36bkQgU3OgGJrs=
+	bh=9PRIFBYfDAkDfF9JUnG+6Qyh2bCaAakz0Z0+rRDQ7n8=;
+	b=fB+c2faxHuKx6rMVi51l0BNcKFEfpdBQnKRQQHYAzP32lZRkb8Cw2T4Oq1cXY83PlHCMmm
+	P6U8A2LTRA42tB0OHHM7vRCl5ijHZDmsnTaQoHRgQQWzPhguCyqbDhFo50+nrOWKXt2fuN
+	6eQQBp+YCt4tjhOm9VdH1tGehS1HCBU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 10/12] xen/x86: call hypercall handlers via switch statement
-Date: Fri, 15 Oct 2021 14:51:50 +0200
-Message-Id: <20211015125152.25198-11-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 07/12] xen: use generated prototypes for hypercall handlers
+Date: Fri, 15 Oct 2021 14:51:47 +0200
+Message-Id: <20211015125152.25198-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211015125152.25198-1-jgross@suse.com>
 References: <20211015125152.25198-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of using a function table use the generated switch statement
-macros for calling the appropriate hypercall handlers.
+Remove the hypercall handler's prototypes in the related header files
+and use the generated ones instead.
 
-This is beneficial to performance and avoids speculation issues.
-
-With calling the handlers using the correct number of parameters now
-it is possible to do the parameter register clobbering in the NDEBUG
-case after returning from the handler. This in turn removes the only
-users of hypercall_args_table[] which can be removed now.
+Some handlers having been static before need to be made globally
+visible.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- xen/arch/x86/hvm/hypercall.c    | 144 +++----------------------
- xen/arch/x86/hypercall.c        |  59 -----------
- xen/arch/x86/pv/hypercall.c     | 180 +++-----------------------------
- xen/include/asm-x86/hypercall.h |  43 +++++---
- 4 files changed, 60 insertions(+), 366 deletions(-)
+ xen/arch/x86/hvm/hypercall.c    |   6 +-
+ xen/include/asm-x86/hypercall.h | 133 ------------------------
+ xen/include/xen/hypercall.h     | 177 +-------------------------------
+ 3 files changed, 5 insertions(+), 311 deletions(-)
 
 diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 85b7a33523..e766cf4c72 100644
+index 9d3b193bad..85b7a33523 100644
 --- a/xen/arch/x86/hvm/hypercall.c
 +++ b/xen/arch/x86/hvm/hypercall.c
-@@ -108,56 +108,10 @@ long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-         return compat_physdev_op(cmd, arg);
+@@ -31,7 +31,7 @@
+ #include <public/hvm/hvm_op.h>
+ #include <public/hvm/params.h>
+ 
+-static long hvm_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++long hvm_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+     long rc;
+ 
+@@ -51,7 +51,7 @@ static long hvm_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  }
  
--#define HYPERCALL(x)                                         \
--    [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x,  \
--                               (hypercall_fn_t *) do_ ## x }
--
--#define HVM_CALL(x)                                          \
--    [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) hvm_ ## x, \
--                               (hypercall_fn_t *) hvm_ ## x }
--
--#define COMPAT_CALL(x)                                       \
--    [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x,  \
--                               (hypercall_fn_t *) compat_ ## x }
--
--static const struct {
--    hypercall_fn_t *native, *compat;
--} hvm_hypercall_table[] = {
--    HVM_CALL(memory_op),
--    COMPAT_CALL(multicall),
--#ifdef CONFIG_GRANT_TABLE
--    HVM_CALL(grant_table_op),
--#endif
--    HYPERCALL(vm_assist),
--    COMPAT_CALL(vcpu_op),
--    HVM_CALL(physdev_op),
--    COMPAT_CALL(xen_version),
--    HYPERCALL(console_io),
--    HYPERCALL(event_channel_op),
--    COMPAT_CALL(sched_op),
--    COMPAT_CALL(set_timer_op),
--    COMPAT_CALL(xsm_op),
--    HYPERCALL(hvm_op),
--    HYPERCALL(sysctl),
--    HYPERCALL(domctl),
--#ifdef CONFIG_ARGO
--    COMPAT_CALL(argo_op),
--#endif
--    COMPAT_CALL(platform_op),
--#ifdef CONFIG_PV
--    COMPAT_CALL(mmuext_op),
--#endif
--    HYPERCALL(xenpmu_op),
--    COMPAT_CALL(dm_op),
--#ifdef CONFIG_HYPFS
--    HYPERCALL(hypfs_op),
-+#ifndef NDEBUG
-+static unsigned char hypercall_args_64[] = hypercall_args_hvm64;
-+static unsigned char hypercall_args_32[] = hypercall_args_hvm32;
- #endif
--    HYPERCALL(paging_domctl_cont)
--};
--
--#undef HYPERCALL
--#undef HVM_CALL
--#undef COMPAT_CALL
- 
- int hvm_hypercall(struct cpu_user_regs *regs)
+ #ifdef CONFIG_GRANT_TABLE
+-static long hvm_grant_table_op(
++long hvm_grant_table_op(
+     unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop, unsigned int count)
  {
-@@ -203,23 +157,6 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         return ret;
-     }
- 
--    BUILD_BUG_ON(ARRAY_SIZE(hvm_hypercall_table) >
--                 ARRAY_SIZE(hypercall_args_table));
--
--    if ( eax >= ARRAY_SIZE(hvm_hypercall_table) )
--    {
--        regs->rax = -ENOSYS;
--        return HVM_HCALL_completed;
--    }
--
--    eax = array_index_nospec(eax, ARRAY_SIZE(hvm_hypercall_table));
--
--    if ( !hvm_hypercall_table[eax].native )
--    {
--        regs->rax = -ENOSYS;
--        return HVM_HCALL_completed;
--    }
--
-     /*
-      * Caching is intended for instruction emulation only. Disable it
-      * for any accesses by hypercall argument copy-in / copy-out.
-@@ -239,33 +176,11 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%lx, %lx, %lx, %lx, %lx)",
-                     eax, rdi, rsi, rdx, r10, r8);
- 
--#ifndef NDEBUG
--        /* Deliberately corrupt parameter regs not used by this hypercall. */
--        switch ( hypercall_args_table[eax].native )
--        {
--        case 0: rdi = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 1: rsi = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 2: rdx = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 3: r10 = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 4: r8 = 0xdeadbeefdeadf00dUL;
--        }
--#endif
--
--        regs->rax = hvm_hypercall_table[eax].native(rdi, rsi, rdx, r10, r8);
-+        call_handlers_hvm64(eax, regs->rax, rdi, rsi, rdx, r10, r8);
- 
- #ifndef NDEBUG
--        if ( !curr->hcall_preempted )
--        {
--            /* Deliberately corrupt parameter regs used by this hypercall. */
--            switch ( hypercall_args_table[eax].native )
--            {
--            case 5: regs->r8  = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 4: regs->r10 = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 3: regs->rdx = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 2: regs->rsi = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 1: regs->rdi = 0xdeadbeefdeadf00dUL;
--            }
--        }
-+        if ( !curr->hcall_preempted && regs->rax != -ENOSYS )
-+            clobber_regs(regs, hypercall_args_64[eax]);
+     switch ( cmd )
+@@ -77,7 +77,7 @@ static long hvm_grant_table_op(
+ }
  #endif
-     }
-     else
-@@ -279,35 +194,13 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%x, %x, %x, %x, %x)", eax,
-                     ebx, ecx, edx, esi, edi);
  
--#ifndef NDEBUG
--        /* Deliberately corrupt parameter regs not used by this hypercall. */
--        switch ( hypercall_args_table[eax].compat )
--        {
--        case 0: ebx = 0xdeadf00d; fallthrough;
--        case 1: ecx = 0xdeadf00d; fallthrough;
--        case 2: edx = 0xdeadf00d; fallthrough;
--        case 3: esi = 0xdeadf00d; fallthrough;
--        case 4: edi = 0xdeadf00d;
--        }
--#endif
--
-         curr->hcall_compat = true;
--        regs->eax = hvm_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi);
-+        call_handlers_hvm32(eax, regs->eax, ebx, ecx, edx, esi, edi);
-         curr->hcall_compat = false;
- 
- #ifndef NDEBUG
--        if ( !curr->hcall_preempted )
--        {
--            /* Deliberately corrupt parameter regs used by this hypercall. */
--            switch ( hypercall_args_table[eax].compat )
--            {
--            case 5: regs->rdi = 0xdeadf00d; fallthrough;
--            case 4: regs->rsi = 0xdeadf00d; fallthrough;
--            case 3: regs->rdx = 0xdeadf00d; fallthrough;
--            case 2: regs->rcx = 0xdeadf00d; fallthrough;
--            case 1: regs->rbx = 0xdeadf00d;
--            }
--        }
-+        if ( !curr->hcall_preempted && regs->eax != -ENOSYS )
-+            clobber_regs32(regs, hypercall_args_32[eax]);
- #endif
-     }
- 
-@@ -327,31 +220,20 @@ int hvm_hypercall(struct cpu_user_regs *regs)
- enum mc_disposition hvm_do_multicall_call(struct mc_state *state)
+-static long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  {
-     struct vcpu *curr = current;
--    hypercall_fn_t *func = NULL;
- 
-     if ( hvm_guest_x86_mode(curr) == 8 )
-     {
-         struct multicall_entry *call = &state->call;
- 
--        if ( call->op < ARRAY_SIZE(hvm_hypercall_table) )
--            func = array_access_nospec(hvm_hypercall_table, call->op).native;
--        if ( func )
--            call->result = func(call->args[0], call->args[1], call->args[2],
--                                call->args[3], call->args[4]);
--        else
--            call->result = -ENOSYS;
-+        call_handlers_hvm64(call->op, call->result, call->args[0], call->args[1],
-+                            call->args[2], call->args[3], call->args[4]);
-     }
-     else
-     {
-         struct compat_multicall_entry *call = &state->compat_call;
- 
--        if ( call->op < ARRAY_SIZE(hvm_hypercall_table) )
--            func = array_access_nospec(hvm_hypercall_table, call->op).compat;
--        if ( func )
--            call->result = func(call->args[0], call->args[1], call->args[2],
--                                call->args[3], call->args[4]);
--        else
--            call->result = -ENOSYS;
-+        call_handlers_hvm32(call->op, call->result, call->args[0], call->args[1],
-+                            call->args[2], call->args[3], call->args[4]);
-     }
- 
-     return !hvm_get_cpl(curr) ? mc_continue : mc_preempt;
-diff --git a/xen/arch/x86/hypercall.c b/xen/arch/x86/hypercall.c
-index 07e1a45ef5..6b73cff9b9 100644
---- a/xen/arch/x86/hypercall.c
-+++ b/xen/arch/x86/hypercall.c
-@@ -22,65 +22,6 @@
- #include <xen/hypercall.h>
- #include <asm/multicall.h>
- 
--#ifdef CONFIG_COMPAT
--#define ARGS(x, n)                              \
--    [ __HYPERVISOR_ ## x ] = { n, n }
--#define COMP(x, n, c)                           \
--    [ __HYPERVISOR_ ## x ] = { n, c }
--#else
--#define ARGS(x, n)    [ __HYPERVISOR_ ## x ] = { n }
--#define COMP(x, n, c) ARGS(x, n)
--#endif
--
--const hypercall_args_t hypercall_args_table[NR_hypercalls] =
--{
--    ARGS(set_trap_table, 1),
--    ARGS(mmu_update, 4),
--    ARGS(set_gdt, 2),
--    ARGS(stack_switch, 2),
--    COMP(set_callbacks, 3, 4),
--    ARGS(fpu_taskswitch, 1),
--    ARGS(sched_op_compat, 2),
--    ARGS(platform_op, 1),
--    ARGS(set_debugreg, 2),
--    ARGS(get_debugreg, 1),
--    COMP(update_descriptor, 2, 4),
--    ARGS(memory_op, 2),
--    ARGS(multicall, 2),
--    COMP(update_va_mapping, 3, 4),
--    COMP(set_timer_op, 1, 2),
--    ARGS(event_channel_op_compat, 1),
--    ARGS(xen_version, 2),
--    ARGS(console_io, 3),
--    ARGS(physdev_op_compat, 1),
--    ARGS(grant_table_op, 3),
--    ARGS(vm_assist, 2),
--    COMP(update_va_mapping_otherdomain, 4, 5),
--    ARGS(vcpu_op, 3),
--    COMP(set_segment_base, 2, 0),
--    ARGS(mmuext_op, 4),
--    ARGS(xsm_op, 1),
--    ARGS(nmi_op, 2),
--    ARGS(sched_op, 2),
--    ARGS(callback_op, 2),
--    ARGS(xenoprof_op, 2),
--    ARGS(event_channel_op, 2),
--    ARGS(physdev_op, 2),
--    ARGS(sysctl, 1),
--    ARGS(domctl, 1),
--    ARGS(kexec_op, 2),
--    ARGS(argo_op, 5),
--    ARGS(xenpmu_op, 2),
--    ARGS(hvm_op, 2),
--    ARGS(dm_op, 3),
--    ARGS(hypfs_op, 5),
--    ARGS(mca, 1),
--    ARGS(paging_domctl_cont, 1),
--};
--
--#undef COMP
--#undef ARGS
--
- #define NEXT_ARG(fmt, args)                                                 \
- ({                                                                          \
-     unsigned long __arg;                                                    \
-diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
-index 6c4a32d2a6..9b575e5c0b 100644
---- a/xen/arch/x86/pv/hypercall.c
-+++ b/xen/arch/x86/pv/hypercall.c
-@@ -27,119 +27,22 @@
- #include <asm/multicall.h>
- #include <irq_vectors.h>
- 
--typedef struct {
--    hypercall_fn_t *native;
--#ifdef CONFIG_PV32
--    hypercall_fn_t *compat;
--#endif
--} pv_hypercall_table_t;
--
-+#ifndef NDEBUG
-+static unsigned char hypercall_args_64[] = hypercall_args_pv64;
- #ifdef CONFIG_PV32
--#define HYPERCALL(x)                                                \
--    [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x,         \
--                               (hypercall_fn_t *) do_ ## x }
--#define COMPAT_CALL(x)                                              \
--    [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x,         \
--                               (hypercall_fn_t *) compat_ ## x }
--#else
--#define HYPERCALL(x)                                                \
--    [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x }
--#define COMPAT_CALL(x) HYPERCALL(x)
--#endif
--
--static const pv_hypercall_table_t pv_hypercall_table[] = {
--    COMPAT_CALL(set_trap_table),
--    HYPERCALL(mmu_update),
--    COMPAT_CALL(set_gdt),
--    HYPERCALL(stack_switch),
--    COMPAT_CALL(set_callbacks),
--    HYPERCALL(fpu_taskswitch),
--    HYPERCALL(sched_op_compat),
--#ifndef CONFIG_PV_SHIM_EXCLUSIVE
--    COMPAT_CALL(platform_op),
--#endif
--    HYPERCALL(set_debugreg),
--    HYPERCALL(get_debugreg),
--    COMPAT_CALL(update_descriptor),
--    COMPAT_CALL(memory_op),
--    COMPAT_CALL(multicall),
--    COMPAT_CALL(update_va_mapping),
--    COMPAT_CALL(set_timer_op),
--    HYPERCALL(event_channel_op_compat),
--    COMPAT_CALL(xen_version),
--    HYPERCALL(console_io),
--    COMPAT_CALL(physdev_op_compat),
--#ifdef CONFIG_GRANT_TABLE
--    COMPAT_CALL(grant_table_op),
--#endif
--    HYPERCALL(vm_assist),
--    COMPAT_CALL(update_va_mapping_otherdomain),
--    COMPAT_CALL(iret),
--    COMPAT_CALL(vcpu_op),
--    HYPERCALL(set_segment_base),
--    COMPAT_CALL(mmuext_op),
--    COMPAT_CALL(xsm_op),
--    COMPAT_CALL(nmi_op),
--    COMPAT_CALL(sched_op),
--    COMPAT_CALL(callback_op),
--#ifdef CONFIG_XENOPROF
--    COMPAT_CALL(xenoprof_op),
--#endif
--    HYPERCALL(event_channel_op),
--    COMPAT_CALL(physdev_op),
--#ifndef CONFIG_PV_SHIM_EXCLUSIVE
--    HYPERCALL(sysctl),
--    HYPERCALL(domctl),
-+static unsigned char hypercall_args_32[] = hypercall_args_pv32;
- #endif
--#ifdef CONFIG_KEXEC
--    COMPAT_CALL(kexec_op),
- #endif
--#ifdef CONFIG_ARGO
--    COMPAT_CALL(argo_op),
--#endif
--    HYPERCALL(xenpmu_op),
--#ifdef CONFIG_HVM
--    HYPERCALL(hvm_op),
--    COMPAT_CALL(dm_op),
--#endif
--#ifdef CONFIG_HYPFS
--    HYPERCALL(hypfs_op),
--#endif
--    HYPERCALL(mca),
--#ifndef CONFIG_PV_SHIM_EXCLUSIVE
--    HYPERCALL(paging_domctl_cont),
--#endif
--};
--
--#undef COMPAT_CALL
--#undef HYPERCALL
- 
- /* Forced inline to cause 'compat' to be evaluated at compile time. */
- static void always_inline
- _pv_hypercall(struct cpu_user_regs *regs, bool compat)
- {
-     struct vcpu *curr = current;
--    unsigned long eax = compat ? regs->eax : regs->rax;
-+    unsigned long eax;
- 
-     ASSERT(guest_kernel_mode(curr, regs));
- 
--    BUILD_BUG_ON(ARRAY_SIZE(pv_hypercall_table) >
--                 ARRAY_SIZE(hypercall_args_table));
--
--    if ( eax >= ARRAY_SIZE(pv_hypercall_table) )
--    {
--        regs->rax = -ENOSYS;
--        return;
--    }
--
--    eax = array_index_nospec(eax, ARRAY_SIZE(pv_hypercall_table));
--
--    if ( !pv_hypercall_table[eax].native )
--    {
--        regs->rax = -ENOSYS;
--        return;
--    }
--
-     curr->hcall_preempted = false;
- 
-     if ( !compat )
-@@ -150,17 +53,8 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         unsigned long r10 = regs->r10;
-         unsigned long r8 = regs->r8;
- 
--#ifndef NDEBUG
--        /* Deliberately corrupt parameter regs not used by this hypercall. */
--        switch ( hypercall_args_table[eax].native )
--        {
--        case 0: rdi = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 1: rsi = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 2: rdx = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 3: r10 = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 4: r8 = 0xdeadbeefdeadf00dUL;
--        }
--#endif
-+        eax = regs->rax;
-+
-         if ( unlikely(tb_init_done) )
-         {
-             unsigned long args[5] = { rdi, rsi, rdx, r10, r8 };
-@@ -168,21 +62,11 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-             __trace_hypercall(TRC_PV_HYPERCALL_V2, eax, args);
-         }
- 
--        regs->rax = pv_hypercall_table[eax].native(rdi, rsi, rdx, r10, r8);
-+        call_handlers_pv64(eax, regs->rax, rdi, rsi, rdx, r10, r8);
- 
- #ifndef NDEBUG
--        if ( !curr->hcall_preempted )
--        {
--            /* Deliberately corrupt parameter regs used by this hypercall. */
--            switch ( hypercall_args_table[eax].native )
--            {
--            case 5: regs->r8  = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 4: regs->r10 = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 3: regs->rdx = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 2: regs->rsi = 0xdeadbeefdeadf00dUL; fallthrough;
--            case 1: regs->rdi = 0xdeadbeefdeadf00dUL;
--            }
--        }
-+        if ( !curr->hcall_preempted && regs->rax != -ENOSYS )
-+            clobber_regs(regs, hypercall_args_64[eax]);
- #endif
-     }
- #ifdef CONFIG_PV32
-@@ -194,17 +78,7 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         unsigned int esi = regs->esi;
-         unsigned int edi = regs->edi;
- 
--#ifndef NDEBUG
--        /* Deliberately corrupt parameter regs not used by this hypercall. */
--        switch ( hypercall_args_table[eax].compat )
--        {
--        case 0: ebx = 0xdeadf00d; fallthrough;
--        case 1: ecx = 0xdeadf00d; fallthrough;
--        case 2: edx = 0xdeadf00d; fallthrough;
--        case 3: esi = 0xdeadf00d; fallthrough;
--        case 4: edi = 0xdeadf00d;
--        }
--#endif
-+        eax = regs->eax;
- 
-         if ( unlikely(tb_init_done) )
-         {
-@@ -214,22 +88,12 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         }
- 
-         curr->hcall_compat = true;
--        regs->eax = pv_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi);
-+        call_handlers_pv32(eax, regs->eax, ebx, ecx, edx, esi, edi);
-         curr->hcall_compat = false;
- 
- #ifndef NDEBUG
--        if ( !curr->hcall_preempted )
--        {
--            /* Deliberately corrupt parameter regs used by this hypercall. */
--            switch ( hypercall_args_table[eax].compat )
--            {
--            case 5: regs->edi = 0xdeadf00d; fallthrough;
--            case 4: regs->esi = 0xdeadf00d; fallthrough;
--            case 3: regs->edx = 0xdeadf00d; fallthrough;
--            case 2: regs->ecx = 0xdeadf00d; fallthrough;
--            case 1: regs->ebx = 0xdeadf00d;
--            }
--        }
-+        if ( !curr->hcall_preempted && regs->eax != -ENOSYS )
-+            clobber_regs32(regs, hypercall_args_32[eax]);
- #endif
-     }
- #endif /* CONFIG_PV32 */
-@@ -256,13 +120,8 @@ enum mc_disposition pv_do_multicall_call(struct mc_state *state)
-         struct compat_multicall_entry *call = &state->compat_call;
- 
-         op = call->op;
--        if ( (op < ARRAY_SIZE(pv_hypercall_table)) &&
--             pv_hypercall_table[op].compat )
--            call->result = pv_hypercall_table[op].compat(
--                call->args[0], call->args[1], call->args[2],
--                call->args[3], call->args[4]);
--        else
--            call->result = -ENOSYS;
-+        call_handlers_pv32(op, call->result, call->args[0], call->args[1],
-+                           call->args[2], call->args[3], call->args[4]);
-     }
-     else
- #endif
-@@ -270,13 +129,8 @@ enum mc_disposition pv_do_multicall_call(struct mc_state *state)
-         struct multicall_entry *call = &state->call;
- 
-         op = call->op;
--        if ( (op < ARRAY_SIZE(pv_hypercall_table)) &&
--             pv_hypercall_table[op].native )
--            call->result = pv_hypercall_table[op].native(
--                call->args[0], call->args[1], call->args[2],
--                call->args[3], call->args[4]);
--        else
--            call->result = -ENOSYS;
-+        call_handlers_pv64(op, call->result, call->args[0], call->args[1],
-+                           call->args[2], call->args[3], call->args[4]);
-     }
- 
-     return unlikely(op == __HYPERVISOR_iret)
+     const struct vcpu *curr = current;
+     const struct domain *currd = curr->domain;
 diff --git a/xen/include/asm-x86/hypercall.h b/xen/include/asm-x86/hypercall.h
-index eb2907b5b6..f2db3f3c21 100644
+index efe5963ee5..2547572ccd 100644
 --- a/xen/include/asm-x86/hypercall.h
 +++ b/xen/include/asm-x86/hypercall.h
-@@ -17,19 +17,6 @@
+@@ -52,104 +52,6 @@ void pv_ring3_init_hypercall_page(void *ptr);
+  */
+ #define MMU_UPDATE_PREEMPTED          (~(~0U>>1))
  
- #define __HYPERVISOR_paging_domctl_cont __HYPERVISOR_arch_1
+-extern long
+-do_event_channel_op_compat(
+-    XEN_GUEST_HANDLE_PARAM(evtchn_op_t) uop);
+-
+-/* Legacy hypercall (as of 0x00030202). */
+-extern long do_physdev_op_compat(
+-    XEN_GUEST_HANDLE(physdev_op_t) uop);
+-
+-/* Legacy hypercall (as of 0x00030101). */
+-extern long do_sched_op_compat(
+-    int cmd, unsigned long arg);
+-
+-extern long
+-do_set_trap_table(
+-    XEN_GUEST_HANDLE_PARAM(const_trap_info_t) traps);
+-
+-extern long
+-do_mmu_update(
+-    XEN_GUEST_HANDLE_PARAM(mmu_update_t) ureqs,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(uint) pdone,
+-    unsigned int foreigndom);
+-
+-extern long
+-do_set_gdt(
+-    XEN_GUEST_HANDLE_PARAM(xen_ulong_t) frame_list,
+-    unsigned int entries);
+-
+-extern long
+-do_stack_switch(
+-    unsigned long ss,
+-    unsigned long esp);
+-
+-extern long
+-do_fpu_taskswitch(
+-    int set);
+-
+-extern long
+-do_set_debugreg(
+-    int reg,
+-    unsigned long value);
+-
+-extern long
+-do_get_debugreg(
+-    int reg);
+-
+-extern long
+-do_update_descriptor(
+-    uint64_t gaddr, seg_desc_t desc);
+-
+-extern long
+-do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc);
+-
+-extern long
+-do_update_va_mapping(
+-    unsigned long va,
+-    uint64_t val64,
+-    unsigned long flags);
+-
+-extern long
+-do_update_va_mapping_otherdomain(
+-    unsigned long va,
+-    uint64_t val64,
+-    unsigned long flags,
+-    domid_t domid);
+-
+-extern long
+-do_mmuext_op(
+-    XEN_GUEST_HANDLE_PARAM(mmuext_op_t) uops,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(uint) pdone,
+-    unsigned int foreigndom);
+-
+-extern long do_callback_op(
+-    int cmd, XEN_GUEST_HANDLE_PARAM(const_void) arg);
+-
+-extern long
+-do_iret(
+-    void);
+-
+-extern long
+-do_set_callbacks(
+-    unsigned long event_address,
+-    unsigned long failsafe_address,
+-    unsigned long syscall_address);
+-
+-extern long
+-do_set_segment_base(
+-    unsigned int which,
+-    unsigned long base);
+-
+-long do_nmi_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-long do_xenpmu_op(unsigned int op,
+-                  XEN_GUEST_HANDLE_PARAM(xen_pmu_params_t) arg);
+-
+-long do_paging_domctl_cont(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+-
+ #ifdef CONFIG_COMPAT
  
--typedef unsigned long hypercall_fn_t(
--    unsigned long, unsigned long, unsigned long,
--    unsigned long, unsigned long);
--
--typedef struct {
--    uint8_t native;
--#ifdef CONFIG_COMPAT
--    uint8_t compat;
--#endif
--} hypercall_args_t;
--
--extern const hypercall_args_t hypercall_args_table[NR_hypercalls];
--
- #ifdef CONFIG_PV
- void pv_hypercall(struct cpu_user_regs *regs);
- #endif
-@@ -55,4 +42,34 @@ compat_common_vcpu_op(
+ #include <compat/arch-x86/xen.h>
+@@ -159,41 +61,6 @@ extern int
+ compat_common_vcpu_op(
+     int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg);
  
+-extern int compat_mmuext_op(
+-    XEN_GUEST_HANDLE_PARAM(void) arg,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(uint) pdone,
+-    unsigned int foreigndom);
+-
+-extern int compat_callback_op(
+-    int cmd, XEN_GUEST_HANDLE(const_void) arg);
+-
+-extern int compat_update_va_mapping(
+-    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags);
+-
+-extern int compat_update_va_mapping_otherdomain(
+-    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags, domid_t domid);
+-
+-DEFINE_XEN_GUEST_HANDLE(trap_info_compat_t);
+-extern int compat_set_trap_table(XEN_GUEST_HANDLE(trap_info_compat_t) traps);
+-
+-extern int compat_set_gdt(
+-    XEN_GUEST_HANDLE_PARAM(uint) frame_list, unsigned int entries);
+-
+-extern int compat_update_descriptor(
+-    uint32_t pa_lo, uint32_t pa_hi, uint32_t desc_lo, uint32_t desc_hi);
+-
+-extern int compat_iret(void);
+-
+-extern int compat_nmi_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int compat_set_callbacks(
+-    unsigned long event_selector, unsigned long event_address,
+-    unsigned long failsafe_selector, unsigned long failsafe_address);
+-
+-DEFINE_XEN_GUEST_HANDLE(physdev_op_compat_t);
+-extern int compat_physdev_op_compat(XEN_GUEST_HANDLE(physdev_op_compat_t) uop);
+-
  #endif /* CONFIG_COMPAT */
  
-+#ifndef NDEBUG
-+static inline void clobber_regs(struct cpu_user_regs *regs,
-+                                unsigned int nargs)
-+{
-+    /* Deliberately corrupt used parameter regs. */
-+    switch ( nargs )
-+    {
-+    case 5: regs->r8  = 0xdeadbeefdeadf00dUL; fallthrough;
-+    case 4: regs->r10 = 0xdeadbeefdeadf00dUL; fallthrough;
-+    case 3: regs->rdx = 0xdeadbeefdeadf00dUL; fallthrough;
-+    case 2: regs->rsi = 0xdeadbeefdeadf00dUL; fallthrough;
-+    case 1: regs->rdi = 0xdeadbeefdeadf00dUL;
-+    }
-+}
-+
-+static inline void clobber_regs32(struct cpu_user_regs *regs,
-+                                  unsigned int nargs)
-+{
-+    /* Deliberately corrupt used parameter regs. */
-+    switch ( nargs )
-+    {
-+    case 5: regs->edi = 0xdeadf00dUL; fallthrough;
-+    case 4: regs->esi = 0xdeadf00dUL; fallthrough;
-+    case 3: regs->edx = 0xdeadf00dUL; fallthrough;
-+    case 2: regs->ecx = 0xdeadf00dUL; fallthrough;
-+    case 1: regs->ebx = 0xdeadf00dUL;
-+    }
-+}
-+#endif
-+
  #endif /* __ASM_X86_HYPERCALL_H__ */
+diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
+index 8247a7ffc8..cf6a3c463d 100644
+--- a/xen/include/xen/hypercall.h
++++ b/xen/include/xen/hypercall.h
+@@ -18,33 +18,19 @@
+ #include <asm/hypercall.h>
+ #include <xsm/xsm.h>
+ 
+-extern long
+-do_sched_op(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long
+-do_domctl(
+-    XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
++/* Needs to be after asm/hypercall.h. */
++#include <xen/hypercall-defs.h>
+ 
+ extern long
+ arch_do_domctl(
+     struct xen_domctl *domctl, struct domain *d,
+     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+ 
+-extern long
+-do_sysctl(
+-    XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl);
+-
+ extern long
+ arch_do_sysctl(
+     struct xen_sysctl *sysctl,
+     XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl);
+ 
+-extern long
+-do_platform_op(
+-    XEN_GUEST_HANDLE_PARAM(void) u_xenpf_op);
+-
+ extern long
+ pci_physdev_op(
+     int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+@@ -62,170 +48,11 @@ pci_physdev_op(
+ #define MEMOP_EXTENT_SHIFT 6 /* cmd[:6] == start_extent */
+ #define MEMOP_CMD_MASK     ((1 << MEMOP_EXTENT_SHIFT) - 1)
+ 
+-extern long
+-do_memory_op(
+-    unsigned long cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long
+-do_multicall(
+-    XEN_GUEST_HANDLE_PARAM(multicall_entry_t) call_list,
+-    unsigned int nr_calls);
+-
+-extern long
+-do_set_timer_op(
+-    s_time_t timeout);
+-
+-extern long
+-do_event_channel_op(
+-    int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long
+-do_xen_version(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long
+-do_console_io(
+-    unsigned int cmd,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(char) buffer);
+-
+-extern long
+-do_grant_table_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) uop,
+-    unsigned int count);
+-
+-extern long
+-do_vm_assist(
+-    unsigned int cmd,
+-    unsigned int type);
+-
+-extern long
+-do_vcpu_op(
+-    int cmd,
+-    unsigned int vcpuid,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-struct vcpu;
+ extern long
+ common_vcpu_op(int cmd,
+     struct vcpu *v,
+     XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
+-extern long
+-do_hvm_op(
+-    unsigned long op,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long
+-do_kexec_op(
+-    unsigned int op,
+-    XEN_GUEST_HANDLE_PARAM(void) uarg);
+-
+-extern long
+-do_xsm_op(
+-    XEN_GUEST_HANDLE_PARAM(void) u_xsm_op);
+-
+-long do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-#ifdef CONFIG_ARGO
+-extern long do_argo_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg1,
+-    XEN_GUEST_HANDLE_PARAM(void) arg2,
+-    unsigned long arg3,
+-    unsigned long arg4);
+-#endif
+-
+-extern long
+-do_xenoprof_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long
+-do_dm_op(
+-    domid_t domid,
+-    unsigned int nr_bufs,
+-    XEN_GUEST_HANDLE_PARAM(xen_dm_op_buf_t) bufs);
+-
+-#ifdef CONFIG_HYPFS
+-extern long
+-do_hypfs_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(const_char) arg1,
+-    unsigned long arg2,
+-    XEN_GUEST_HANDLE_PARAM(void) arg3,
+-    unsigned long arg4);
+-#endif
+-
+-#ifdef CONFIG_COMPAT
+-
+-extern int
+-compat_memory_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int
+-compat_grant_table_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) uop,
+-    unsigned int count);
+-
+-extern int
+-compat_vcpu_op(
+-    int cmd,
+-    unsigned int vcpuid,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int
+-compat_xenoprof_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int
+-compat_xen_version(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int
+-compat_sched_op(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int
+-compat_set_timer_op(
+-    uint32_t lo,
+-    int32_t hi);
+-
+-extern int compat_xsm_op(
+-    XEN_GUEST_HANDLE_PARAM(void) op);
+-
+-extern int compat_kexec_op(unsigned int op, XEN_GUEST_HANDLE_PARAM(void) uarg);
+-
+-DEFINE_XEN_GUEST_HANDLE(multicall_entry_compat_t);
+-extern int compat_multicall(
+-    XEN_GUEST_HANDLE_PARAM(multicall_entry_compat_t) call_list,
+-    uint32_t nr_calls);
+-
+-int compat_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-int compat_platform_op(XEN_GUEST_HANDLE_PARAM(void) u_xenpf_op);
+-
+-#ifdef CONFIG_ARGO
+-extern int compat_argo_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg1,
+-    XEN_GUEST_HANDLE_PARAM(void) arg2,
+-    unsigned long arg3,
+-    unsigned long arg4);
+-#endif
+-
+-extern int
+-compat_dm_op(
+-    domid_t domid,
+-    unsigned int nr_bufs,
+-    XEN_GUEST_HANDLE_PARAM(void) bufs);
+-
+-#endif
+-
+ void arch_get_xen_caps(xen_capabilities_info_t *info);
+ 
+ #endif /* __XEN_HYPERCALL_H__ */
 -- 
 2.26.2
 
