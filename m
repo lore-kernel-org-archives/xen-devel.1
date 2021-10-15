@@ -2,38 +2,38 @@ Return-Path: <SRS0=Vzag=PD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC120C43219
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E96CEC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8C4E661211
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8C4E661211
+	by mail.kernel.org (Postfix) with ESMTPS id BB17961151
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Oct 2021 23:31:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BB17961151
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.211130.368250 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.211129.368240 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbWfH-0000zG-S0; Fri, 15 Oct 2021 23:31:03 +0000
+	id 1mbWfC-0000ia-Kx; Fri, 15 Oct 2021 23:30:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 211130.368250; Fri, 15 Oct 2021 23:31:03 +0000
+Received: by outflank-mailman (output) from mailman id 211129.368240; Fri, 15 Oct 2021 23:30:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mbWfH-0000z9-Oh; Fri, 15 Oct 2021 23:31:03 +0000
-Received: by outflank-mailman (input) for mailman id 211130;
- Fri, 15 Oct 2021 23:31:02 +0000
+	id 1mbWfC-0000iT-HG; Fri, 15 Oct 2021 23:30:58 +0000
+Received: by outflank-mailman (input) for mailman id 211129;
+ Fri, 15 Oct 2021 23:30:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ZYBM=PD=infradead.org=mcgrof@srs-us1.protection.inumbo.net>)
- id 1mbWfG-0000i4-3e
- for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:31:02 +0000
+ id 1mbWfB-0000i4-64
+ for xen-devel@lists.xenproject.org; Fri, 15 Oct 2021 23:30:57 +0000
 Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3bac32ea-5a6e-4dec-a2d5-60f929f3e428;
- Fri, 15 Oct 2021 23:30:56 +0000 (UTC)
+ id c09bccb6-a6e2-41b0-8ec2-4fc0a94e3e80;
+ Fri, 15 Oct 2021 23:30:55 +0000 (UTC)
 Received: from mcgrof by bombadil.infradead.org with local (Exim 4.94.2 #2
- (Red Hat Linux)) id 1mbWej-0095v5-Ct; Fri, 15 Oct 2021 23:30:29 +0000
+ (Red Hat Linux)) id 1mbWej-0095ut-6A; Fri, 15 Oct 2021 23:30:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,17 +44,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
-X-Inumbo-ID: 3bac32ea-5a6e-4dec-a2d5-60f929f3e428
+X-Inumbo-ID: c09bccb6-a6e2-41b0-8ec2-4fc0a94e3e80
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Sender:Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
 	Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=9ZsOqn3b5/QR03MhD1Dx1DTw82KOKjoplYOfmtrSAjo=; b=GZiKyVUl5h20WldEdrGbqyto8+
-	F1vc70D//lVIeo9F6TBNDnV9e55gE+P7li975g7REzacZFJKwEAeidozUGuR+k5GME36IWRQgNuj5
-	urOtJ8gdj+Bf/OPhiy9VBUYENb8BuHmtpnjNJWLDK0eSdpNiooD7FGQjHbhMc5UAm9cOA6udp1s+p
-	NSkiIce6DCoLM7V11sN9tyvsjfnUlUwaqyRyrhv0W5dk9rLWQZy0h7Zy1oAtjzbbYqpj4LhPjkl3a
-	v8c4n9oLWSkDy6E0r4PTZRTOQWB17HvTEyzFhn/Iz8DTM/4WrajYQEVYOkt5laZZ3N+xB/yVPdxzK
-	Gf2nTOxA==;
+	bh=+CQFH8oK70TJq0uFxZnllLSBarTFCbdKjMNvi/6R0AU=; b=SaCfLufaBBFJ5YdrAwSo0fvVDu
+	MEDLEYbBM5r6bkQBn40iujou+0VmJ+pOupACXUkgfZGd0H80fQ3GpVUXSJVd55U0FnAojp88La+XZ
+	A+JVcfQjTDsMHFZCVKHc/NoxLOewX90cZOK69Bnxa6Ag4G+qF3x/srHfVcTZInS1uIgS4Gj22jaER
+	AyKLtEOGF7EhRgLSMFpt0zATZcaMo6hIgbpKTGkt8dKK1stX24tf9yHxuprWxbJQHy82ZMGgrrG81
+	+q26GmRzr157Y7UTbLCxP7FCp8Gq+lduxVAiLznbifG4GwAr/TTAIhSlPJFaFqM4qhw6Ut2dNf2+2
+	dgm1lHrQ==;
 From: Luis Chamberlain <mcgrof@kernel.org>
 To: axboe@kernel.dk,
 	jejb@linux.ibm.com,
@@ -92,10 +92,11 @@ Cc: linux-scsi@vger.kernel.org,
 	linux-um@lists.infradead.org,
 	linux-block@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Luis Chamberlain <mcgrof@kernel.org>
-Subject: [PATCH 7/9] um/drivers/ubd_kern: add error handling support for add_disk()
-Date: Fri, 15 Oct 2021 16:30:26 -0700
-Message-Id: <20211015233028.2167651-8-mcgrof@kernel.org>
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Christoph Hellwig <hch@lst.de>
+Subject: [PATCH 1/9] scsi/sd: add error handling support for add_disk()
+Date: Fri, 15 Oct 2021 16:30:20 -0700
+Message-Id: <20211015233028.2167651-2-mcgrof@kernel.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20211015233028.2167651-1-mcgrof@kernel.org>
 References: <20211015233028.2167651-1-mcgrof@kernel.org>
@@ -107,56 +108,35 @@ We never checked for errors on add_disk() as this function
 returned void. Now that this is fixed, use the shiny new
 error handling.
 
-ubd_disk_register() never returned an error, so just fix
-that now and let the caller handle the error condition.
+As with the error handling for device_add() we follow the same
+logic and just put the device so that cleanup is done via the
+scsi_disk_release().
 
-Reviewed-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 Signed-off-by: Luis Chamberlain <mcgrof@kernel.org>
 ---
- arch/um/drivers/ubd_kern.c | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ drivers/scsi/sd.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
-index fefd343412c7..69d2d0049a61 100644
---- a/arch/um/drivers/ubd_kern.c
-+++ b/arch/um/drivers/ubd_kern.c
-@@ -855,8 +855,8 @@ static const struct attribute_group *ubd_attr_groups[] = {
- 	NULL,
- };
- 
--static void ubd_disk_register(int major, u64 size, int unit,
--			      struct gendisk *disk)
-+static int ubd_disk_register(int major, u64 size, int unit,
-+			     struct gendisk *disk)
- {
- 	disk->major = major;
- 	disk->first_minor = unit << UBD_SHIFT;
-@@ -873,7 +873,7 @@ static void ubd_disk_register(int major, u64 size, int unit,
- 
- 	disk->private_data = &ubd_devs[unit];
- 	disk->queue = ubd_devs[unit].queue;
--	device_add_disk(&ubd_devs[unit].pdev.dev, disk, ubd_attr_groups);
-+	return device_add_disk(&ubd_devs[unit].pdev.dev, disk, ubd_attr_groups);
- }
- 
- #define ROUND_BLOCK(n) ((n + (SECTOR_SIZE - 1)) & (-SECTOR_SIZE))
-@@ -920,10 +920,15 @@ static int ubd_add(int n, char **error_out)
- 	blk_queue_write_cache(ubd_dev->queue, true, false);
- 	blk_queue_max_segments(ubd_dev->queue, MAX_SG);
- 	blk_queue_segment_boundary(ubd_dev->queue, PAGE_SIZE - 1);
--	ubd_disk_register(UBD_MAJOR, ubd_dev->size, n, disk);
-+	err = ubd_disk_register(UBD_MAJOR, ubd_dev->size, n, disk);
-+	if (err)
-+		goto out_cleanup_disk;
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index a646d27df681..d69f2e626e76 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -3457,7 +3457,13 @@ static int sd_probe(struct device *dev)
+ 		pm_runtime_set_autosuspend_delay(dev,
+ 			sdp->host->hostt->rpm_autosuspend_delay);
+ 	}
+-	device_add_disk(dev, gd, NULL);
 +
- 	ubd_gendisk[n] = disk;
- 	return 0;
++	error = device_add_disk(dev, gd, NULL);
++	if (error) {
++		put_device(&sdkp->dev);
++		goto out;
++	}
++
+ 	if (sdkp->capacity)
+ 		sd_dif_config_host(sdkp);
  
-+out_cleanup_disk:
-+	blk_cleanup_disk(disk);
- out_cleanup_tags:
- 	blk_mq_free_tag_set(&ubd_dev->tag_set);
- out:
 -- 
 2.30.2
 
