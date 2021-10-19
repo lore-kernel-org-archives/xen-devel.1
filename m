@@ -2,42 +2,43 @@ Return-Path: <SRS0=1/kX=PH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DBB32C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 11:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 24A72C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 11:07:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA829604DB
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 11:05:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AA829604DB
+	by mail.kernel.org (Postfix) with ESMTPS id E6B0B60F25
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 11:07:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E6B0B60F25
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.213002.371081 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.213011.371092 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mcmvX-0005XR-BD; Tue, 19 Oct 2021 11:05:03 +0000
+	id 1mcmxf-0006A6-NI; Tue, 19 Oct 2021 11:07:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 213002.371081; Tue, 19 Oct 2021 11:05:03 +0000
+Received: by outflank-mailman (output) from mailman id 213011.371092; Tue, 19 Oct 2021 11:07:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mcmvX-0005XK-7x; Tue, 19 Oct 2021 11:05:03 +0000
-Received: by outflank-mailman (input) for mailman id 213002;
- Tue, 19 Oct 2021 11:05:01 +0000
+	id 1mcmxf-00069z-K6; Tue, 19 Oct 2021 11:07:15 +0000
+Received: by outflank-mailman (input) for mailman id 213011;
+ Tue, 19 Oct 2021 11:07:13 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mcmvV-0005XE-KW
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 11:05:01 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mcmxd-00069p-TP; Tue, 19 Oct 2021 11:07:13 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mcmvV-0008AP-Iv
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 11:05:01 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mcmvV-0004qB-Hn
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 11:05:01 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1mcmvP-0000FM-0D; Tue, 19 Oct 2021 12:04:55 +0100
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mcmxd-0008DR-QA; Tue, 19 Oct 2021 11:07:13 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mcmxd-0000Gv-G8; Tue, 19 Oct 2021 11:07:13 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mcmxd-0003HX-Fd; Tue, 19 Oct 2021 11:07:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,82 +51,74 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=nnb2geRbcbSlLgx5UdzGDOidH9vfIgTEmDTEzYRrLh4=; b=bFWHsskyJYCiklS6BHMq8i+lxK
-	s1HwetjJbecHc0QGHkoHb1hhkTRuTY9wUek4kvIdUP4IOMVG8vd6ShWmUzOzmhlIWo/6E5pXnfUFi
-	Q1/st3Bp6SBkw2qNUN5FiKlIUNpm2gSOqrBgbsZubGkT93N0Y5sc0NvSUm3Tx0ozo3AQ=;
-From: Ian Jackson <iwj@xenproject.org>
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=1rY2b755Vwr/ziBY6G4BNPYDvcmN6ljayQ5l790Aa7k=; b=JigZ1xzpUS+Y5PAwsB9hC6AWXp
+	47W91zwXgCJ5XwX1KWBAptX29frWZm8JnzxYMlZwclwNNmtqotPWGUStdJjbdTq68ng8uf9z7mAXQ
+	Rsx884U13FAp76stvlS5VpFOuUHp1BXbDwNDTpaJPFWKCv7rrChShJIquNYYJzje67F8=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-165657-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24942.42582.584340.453247@mariner.uk.xensource.com>
-Date: Tue, 19 Oct 2021 12:04:54 +0100
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Juergen Gross <jgross@suse.com>,
-    Wei Liu <wl@xen.org>,
-    xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] tools: fix oom setting of xenstored
-In-Reply-To: <912b03a3-90df-e94e-77a9-5c673acfef04@suse.com>
-References: <20211019044123.29648-1-jgross@suse.com>
-	<0c93abe3-3908-009f-efca-08000092cd4d@suse.com>
-	<c486ebb9-7cda-da67-7122-bceb291805b3@suse.com>
-	<912b03a3-90df-e94e-77a9-5c673acfef04@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Subject: [ovmf test] 165657: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=91a978ce7e0c7a327cff1d9411b0e1c9dae8824a
+X-Osstest-Versions-That:
+    ovmf=36b561623a4b8a6c7fea0b1b01f6789f2adf97e0
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 19 Oct 2021 11:07:13 +0000
 
-Jan Beulich writes ("Re: [PATCH] tools: fix oom setting of xenstored"):
-> On 19.10.2021 09:31, Juergen Gross wrote:
-> > I don't think set -e would have a negative effect on above line. The
-> > bash man-page tells me that:
-> > 
-> >    The shell does not exit if the command that fails is part of the
-> >    command list immediately following a while or until keyword, part of
-> >    the test following the if, ...
-> > 
-> > And I believe that "[ ... ]" is treated like an "if".
-> 
-> I don't think so - "[ ... ]" is an equivalent of "test ...", i.e.
-> unrelated to whether that's an operand of "if". The question is
-> what effect && has, i.e. the behavior is due to what you've
-> hidden by using ... in your quotation: "..., and is not a part of
-> an AND or OR list, ...".
+flight 165657 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/165657/
 
-"[ ... ]" is precisely equivalent to "test ...".  But neither of these
-is eqivalent to an "if".  When the docs say "part of the test
-following the if" they are using the word "test" informally.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 91a978ce7e0c7a327cff1d9411b0e1c9dae8824a
+baseline version:
+ ovmf                 36b561623a4b8a6c7fea0b1b01f6789f2adf97e0
 
-> I think I recall constructs like the one you use not working with
-> "set -e" on at least some bash versions, though. Apparently this
-> was due to a bash bug then (or I'm misremembering, but that's not
-> overly likely since some of my long used scripts specifically
-> avoid using && in such situations).
+Last test of basis   165652  2021-10-19 01:40:11 Z    0 days
+Testing same since   165657  2021-10-19 04:10:05 Z    0 days    1 attempts
 
-I agree that we should avoid this && construct.  Can we not just use
-conditional assignment of a default value or an if statement ?
+------------------------------------------------------------
+People who touched revisions under test:
+  Guo Dong <guo.dong@intel.com>
+  Moritz Fischer <moritzf@google.com>
 
-> >    ( set -e; [ -z "" ] && xx=okay; echo $xx; )
-> > 
-> > This will print "okay", so bash didn't exit.
-> 
-> Of course, because the left side of && succeeds. You'd need
-> 
->    ( set -e; [ -z "xxx" ] && xx=okay; echo xx=$xx; )
-> 
-> and observe "xx=" getting printed. Which indeed I do observe on
-> the one bash version I've tried to double check. But that one's
-> surely newer than what I think I saw such problems on.
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
-I think this particular && and || usage is not an idiomatic way of
-spelling what would normally be a conditional in shell.
 
-I think
-  try_this || try_that
-is fine but
-  variable_nonempty || variable=value
-is strange.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-I would use ${param:=default_setting} or ${param:-default}
-(or perhaps the colon-less variants).
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Ian.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   36b561623a..91a978ce7e  91a978ce7e0c7a327cff1d9411b0e1c9dae8824a -> xen-tested-master
 
