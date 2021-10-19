@@ -2,44 +2,43 @@ Return-Path: <SRS0=1/kX=PH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B9F03C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 13:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CE1BAC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 14:15:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7269461378
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 13:55:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7269461378
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.cz
+	by mail.kernel.org (Postfix) with ESMTPS id 875D561057
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 14:15:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 875D561057
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenbits.xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.213297.371478 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.213313.371490 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mcpa5-00084O-Kl; Tue, 19 Oct 2021 13:55:05 +0000
+	id 1mcpto-0002FX-9K; Tue, 19 Oct 2021 14:15:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 213297.371478; Tue, 19 Oct 2021 13:55:05 +0000
+Received: by outflank-mailman (output) from mailman id 213313.371490; Tue, 19 Oct 2021 14:15:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mcpa5-00084H-HV; Tue, 19 Oct 2021 13:55:05 +0000
-Received: by outflank-mailman (input) for mailman id 213297;
- Tue, 19 Oct 2021 13:55:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mcpto-0002FQ-50; Tue, 19 Oct 2021 14:15:28 +0000
+Received: by outflank-mailman (input) for mailman id 213313;
+ Tue, 19 Oct 2021 14:15:26 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=M2za=PH=suse.cz=dsterba@srs-us1.protection.inumbo.net>)
- id 1mcpa4-000845-55
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 13:55:04 +0000
-Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c673987d-c9d3-42b1-8278-8f1831973172;
- Tue, 19 Oct 2021 13:55:03 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id A63E321A99;
- Tue, 19 Oct 2021 13:55:02 +0000 (UTC)
-Received: from ds.suse.cz (ds.suse.cz [10.100.12.205])
- by relay2.suse.de (Postfix) with ESMTP id 0D869A3B85;
- Tue, 19 Oct 2021 13:55:02 +0000 (UTC)
-Received: by ds.suse.cz (Postfix, from userid 10065)
- id 8F6DBDA7A3; Tue, 19 Oct 2021 15:54:34 +0200 (CEST)
+ (envelope-from <iwj@xenbits.xen.org>) id 1mcptm-0002FK-NI
+ for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 14:15:26 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1mcptl-00038f-Dx; Tue, 19 Oct 2021 14:15:25 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1mcptl-0000A9-7H; Tue, 19 Oct 2021 14:15:25 +0000
+Received: from iwj by osstest.test-lab.xenproject.org with local (Exim 4.92)
+ (envelope-from <iwj@xenbits.xen.org>)
+ id 1mcptl-0002fM-6i; Tue, 19 Oct 2021 14:15:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,59 +50,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c673987d-c9d3-42b1-8278-8f1831973172
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1634651702;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=lCAmwd04vR+8ISMPrZZs/6BPlrRsuF68LDbyHwEPntQ=;
-	b=tLZsnCbfP/PE33Cg8Lb4wiLOBxR8QveId9HdyLQwr2cih36yShITfbjTETbGmX7qoPSLnV
-	KpgAA8+dbLeP0XdSU+qtQz6RQ6J5EBZxRaplNcIZug7sxD7fof1K7Oihxwjp0TkV6E8qRu
-	UqkFmpgJ7dUVgd+qqNHE1kGVvaHvryE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1634651702;
-	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
-	 cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=lCAmwd04vR+8ISMPrZZs/6BPlrRsuF68LDbyHwEPntQ=;
-	b=eVe2N40rhMpqpW06F4v/0V4nL0bZy0/F/3sDzYIThe2zCSwt2+BtKDOwwYusSYK+iBuJ9x
-	/SDiTxQlN3QaJABg==
-Date: Tue, 19 Oct 2021 15:54:34 +0200
-From: David Sterba <dsterba@suse.cz>
-To: Christoph Hellwig <hch@lst.de>
-Cc: Jens Axboe <axboe@kernel.dk>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-	Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>,
-	OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
-	Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
-	linux-block@vger.kernel.org, xen-devel@lists.xenproject.org,
-	linux-btrfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	ntfs3@lists.linux.dev
-Subject: Re: [PATCH 4/7] btrfs: use sync_blockdev
-Message-ID: <20211019135434.GS30611@twin.jikos.cz>
-Reply-To: dsterba@suse.cz
-Mail-Followup-To: dsterba@suse.cz, Christoph Hellwig <hch@lst.de>,
-	Jens Axboe <axboe@kernel.dk>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>,
-	Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>,
-	OGAWA Hirofumi <hirofumi@mail.parknet.co.jp>,
-	Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
-	linux-block@vger.kernel.org, xen-devel@lists.xenproject.org,
-	linux-btrfs@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-	ntfs3@lists.linux.dev
-References: <20211019062530.2174626-1-hch@lst.de>
- <20211019062530.2174626-5-hch@lst.de>
+To: jgross@suse.com,iwj@xenproject.org,xen-devel@lists.xenproject.org
+Subject: [adhoc test] 165675: truncated
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211019062530.2174626-5-hch@lst.de>
-User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+Message-Id: <E1mcptl-0002fM-6i@osstest.test-lab.xenproject.org>
+From: iwj@xenbits.xen.org
+Date: Tue, 19 Oct 2021 14:15:25 +0000
 
-On Tue, Oct 19, 2021 at 08:25:27AM +0200, Christoph Hellwig wrote:
-> Use sync_blockdev instead of opencoding it.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
+[adhoc play] <testing.git (HEAD detached at 14a279c4) /dev/pts/3>
+harness 14a279c4: osstest: explicitly enable building qemu-traditional
+165675: truncated
 
-Acked-by: David Sterba <dsterba@suse.com>
+flight 165675 xen-unstable play [play]
+http://logs.test-lab.xenproject.org/osstest/logs/165675/
+
+Perfect :-)
+All tests in this flight passed as required
+baseline version:
+ flight               165635
+
+jobs:
+ build-amd64                                                  truncated
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
 
