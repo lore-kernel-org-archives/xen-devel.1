@@ -2,42 +2,40 @@ Return-Path: <SRS0=1/kX=PH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78D01C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 13:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0BD6C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 13:06:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44C4B61372
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 13:04:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 44C4B61372
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id A86F561372
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Oct 2021 13:06:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A86F561372
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.213175.371309 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.213181.371330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mconG-0002ws-Nc; Tue, 19 Oct 2021 13:04:38 +0000
+	id 1mcooV-0003oH-AF; Tue, 19 Oct 2021 13:05:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 213175.371309; Tue, 19 Oct 2021 13:04:38 +0000
+Received: by outflank-mailman (output) from mailman id 213181.371330; Tue, 19 Oct 2021 13:05:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mconG-0002wl-KX; Tue, 19 Oct 2021 13:04:38 +0000
-Received: by outflank-mailman (input) for mailman id 213175;
- Tue, 19 Oct 2021 13:04:36 +0000
+	id 1mcooV-0003o8-7B; Tue, 19 Oct 2021 13:05:55 +0000
+Received: by outflank-mailman (input) for mailman id 213181;
+ Tue, 19 Oct 2021 13:05:54 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mconE-0002wf-KR
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 13:04:36 +0000
+ (envelope-from <julien@xen.org>) id 1mcooU-0003jn-NT
+ for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 13:05:54 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mconE-0001oh-I8
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 13:04:36 +0000
-Received: from iwj (helo=mariner.uk.xensource.com)
- by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <iwj@xenproject.org>) id 1mconE-0007HJ-H4
- for xen-devel@lists.xenproject.org; Tue, 19 Oct 2021 13:04:36 +0000
-Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
- (envelope-from <iwj@xenproject.org>)
- id 1mconB-0000XY-35; Tue, 19 Oct 2021 14:04:33 +0100
+ (envelope-from <julien@xen.org>)
+ id 1mcooS-0001pr-3r; Tue, 19 Oct 2021 13:05:52 +0000
+Received: from [54.239.6.189] (helo=[192.168.0.120])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mcooR-0007OW-Tt; Tue, 19 Oct 2021 13:05:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,39 +47,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
-	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
-	bh=Up5fdvqg8uvFQ7gAewWyL74izpNTS4bfpRQDa1qbhsY=; b=OLSF3pPpyhPyCZLmwHmqxxgdTR
-	AMYunZM7xvXdboJ/ueHVNtgPMOwwCUHQqpVm8GYZkPBYQmNwJXFYR33NMGReqIVb2rYzg2c+gxtI3
-	2m8X+OPeU1HsO5Jd+JO1SrtU+WepgpEYC+TouW3JR1qVn8QfhjOTb7R8nprks3XpH9BE=;
-From: Ian Jackson <iwj@xenproject.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=g8YXb52Ju3ZoCyKAwm/nE1Y9OgmgrAPTCcRTFPbMDfc=; b=LW3QhCWvE3l70JjMv0/KdljF6X
+	i2zxMuIle6CGHOjNvjzta9uUjJ8UwfzEOppKrUBDyD+HLOvcTr6oK9ZrQvEDGZDprGzglhmMxBAxy
+	xYb/LA6+byJz441dmpMV4AWE84LIYzulmYpDCRhgG14ug/u/x+mXeszNR/y+IBkS0E5w=;
+Message-ID: <7f6a0b1b-c325-95c4-a9d2-2bc28ae79268@xen.org>
+Date: Tue, 19 Oct 2021 14:05:49 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-Message-ID: <24942.49760.686147.851391@mariner.uk.xensource.com>
-Date: Tue, 19 Oct 2021 14:04:32 +0100
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] OSStest: explicitly enable building qemu-traditional
-In-Reply-To: <20211019130211.32233-1-jgross@suse.com>
-References: <20211019130211.32233-1-jgross@suse.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.0
+Subject: Re: Xen Booting Problem on ARM Machine
+To: Sai Kiran Kumar Reddy Y <ysaikiran1997@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Cc: Bertrand Marquis <bertrand.marquis@arm.com>,
+ Jan Beulich <jbeulich@suse.com>, Luca Fancellu <luca.fancellu@arm.com>,
+ xen-devel@lists.xenproject.org, kannan@cimware.in
+References: <33C29853-D896-4E4E-91D3-4D2FA89A9B91@hxcore.ol>
+ <eb5fd47b-6bc9-2eec-7f46-9ab9a42c9f1f@xen.org>
+ <CAEsO4uzsCnsTtTmYHAT4NN6=girCY2NHHdAHbH6GG33D7jwe_A@mail.gmail.com>
+ <alpine.DEB.2.21.2109131437030.10523@sstabellini-ThinkPad-T480s>
+ <CAEsO4uwpiDO2QoqLRTOxpsYM9YSPAsbX0P=gagdEy21pk1VsPQ@mail.gmail.com>
+ <alpine.DEB.2.21.2109141825330.21985@sstabellini-ThinkPad-T480s>
+ <CAEsO4uyjNs97Cx8n2owDk4kKTVCycji377pm7aXHcPWzeszUTw@mail.gmail.com>
+ <alpine.DEB.2.21.2109301942370.3209@sstabellini-ThinkPad-T480s>
+ <CAEsO4ux_AqXBeCtbwnPAdnBnVYHTur_2EfcZBTuN4QKCq4ko8Q@mail.gmail.com>
+ <alpine.DEB.2.21.2110131711280.9408@sstabellini-ThinkPad-T480s>
+ <CAEsO4uxo_A4pEwP6dHK8kvYtKcbSr-ewqX1v-KLsEkyHNLFyUA@mail.gmail.com>
+ <alpine.DEB.2.21.2110141536090.9408@sstabellini-ThinkPad-T480s>
+ <CAEsO4uzwNHiLEZVEy90uua9YRud=Bmj=EPhzbhyk0tsEai=UQg@mail.gmail.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <CAEsO4uzwNHiLEZVEy90uua9YRud=Bmj=EPhzbhyk0tsEai=UQg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Juergen Gross writes ("[PATCH] OSStest: explicitly enable building qemu-traditional"):
-> It is planned to no longer build qemu-traditional per default.
+
+
+On 19/10/2021 13:04, Sai Kiran Kumar Reddy Y wrote:
+> Hi,
+
+Hello,
+
 > 
-> In order to be able to continue running tests with ioemu-stubdom run
-> configure with --enable-qemu-traditional.
+> Thanks for your inputs. As you have mentioned, I tried to boot Xen 
+> directly from EFI, thereby skipping GRUB. I made sure that kernel, 
+> xen.cfg and ramdisk are on the first FAT partition. I still get "All 128 
+> bootinfo membanks exhausted error". The following link has my grub.cfg 
+> config. file and also the snapshot of the error.
 > 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Link: 
+> https://drive.google.com/drive/folders/1o7WT5oB7UsaZBeY5m4mWSidT5NalzvvJ?usp=sharing 
+> <https://drive.google.com/drive/folders/1o7WT5oB7UsaZBeY5m4mWSidT5NalzvvJ?usp=sharing>
+> 
+> I feel that even with EFI bootloader, there's some issue with bootinfo 
+> mem banks and it maynot be a bug in GRUB. Let me know your thoughts on this.
 
-Reviewed-by: Ian Jackson <iwj@xenproject.org>
+As I wrote a few weeks ago. Both issues ("mem banks exhausted" and 
+"Cannot exit boot services") are meant to be non-fatal. So you should be 
+able to continue booting Xen afterwards.
 
-OOI, have you done any kind of test on this ?
+The fact you don't see any log seems to suggest that you didn't enable 
+properly earlyprintk. Would you be able to post your xen/.config?
 
-I'm kind of inclined to just push it and let osstest's pre-production
-self-test test it.
+Could you also confirm which server are you using? The ACPI table seems 
+to suggest this is an Ampere Altra.
 
-Ian.
+Best regards,
+
+-- 
+Julien Grall
 
