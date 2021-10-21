@@ -2,38 +2,39 @@ Return-Path: <SRS0=26F+=PJ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43D01C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Oct 2021 23:08:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D14CC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Oct 2021 23:11:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F2B9C6128E
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Oct 2021 23:08:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org F2B9C6128E
+	by mail.kernel.org (Postfix) with ESMTPS id 0CA6F610EA
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Oct 2021 23:11:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0CA6F610EA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.214616.373231 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.214624.373252 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mdhAp-0006Cd-BI; Thu, 21 Oct 2021 23:08:35 +0000
+	id 1mdhD3-0007oI-Vm; Thu, 21 Oct 2021 23:10:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 214616.373231; Thu, 21 Oct 2021 23:08:35 +0000
+Received: by outflank-mailman (output) from mailman id 214624.373252; Thu, 21 Oct 2021 23:10:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mdhAp-0006CW-7h; Thu, 21 Oct 2021 23:08:35 +0000
-Received: by outflank-mailman (input) for mailman id 214616;
- Thu, 21 Oct 2021 23:08:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mdhD3-0007o7-Sm; Thu, 21 Oct 2021 23:10:53 +0000
+Received: by outflank-mailman (input) for mailman id 214624;
+ Thu, 21 Oct 2021 23:10:52 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FXrv=PJ=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mdhAo-0006CQ-EX
- for xen-devel@lists.xenproject.org; Thu, 21 Oct 2021 23:08:34 +0000
+ id 1mdhD2-0007Xs-PJ
+ for xen-devel@lists.xenproject.org; Thu, 21 Oct 2021 23:10:52 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 897cc301-9859-46c3-9059-fec2dc71b232;
- Thu, 21 Oct 2021 23:08:33 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A7688610EA;
- Thu, 21 Oct 2021 23:08:32 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 22683254-32c4-11ec-839a-12813bfff9fa;
+ Thu, 21 Oct 2021 23:10:51 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E27646135F;
+ Thu, 21 Oct 2021 23:10:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,71 +46,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 897cc301-9859-46c3-9059-fec2dc71b232
+X-Inumbo-ID: 22683254-32c4-11ec-839a-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1634857713;
-	bh=fu5FSK0nfBCvtW4RDWEEmy3EjlarFXwEa5zENq/8TwM=;
-	h=Date:From:To:cc:Subject:From;
-	b=BLDqVOmHOLJ+yovmewxxQFBRxWgZwsHG7vUbyGfDZ3ZTrwWq6y5LfOXdyXIWo5j8Q
-	 ranG+zS8/QWcX8l66+JCNfaQafsEbjNTFQtkRbEeiCh+Skk8BWVbH7hgK2mtIrdfbv
-	 laUew1F7bHw1ulki4/E9P7Z1/mU1k4fVRmNgKVIttZMBZLf4rsFXEBRm3+zIW9/4V/
-	 un+Xu3wh5rZJMrRdqarLH9j63kl9JwJ3eAR+fY7L+Pi4+otsBtFQ3sBFYjxUlYqJjn
-	 vwHmHVRXRaCohGr6a0dehI4zSEhTGj+rFCgevhcv+pHM01P9vrptxTfSLIX6u7Abe7
-	 cnbBQ75654wAg==
-Date: Thu, 21 Oct 2021 16:08:31 -0700 (PDT)
+	s=k20201202; t=1634857851;
+	bh=anK1IWiowWa3QzIYeypqJDTgghewGZPtlPhXiip9xco=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ezVGuG4czhHVfzMxnuxYuS7wD9FUREil9i8auRTkT+zoQoBCO0VmLjTUEUUHKYpRu
+	 QwGYf/OT+wQHcHOaSGSehlaR5V+mMqR2AsracPkE51kIRagBcuRypbRXpTc9JQFrNZ
+	 shC3AxgbeigS79UThEIytULUs/GtUoddIO53OzbZ42moU7EAIgEOJc+SgrwAMQtbk2
+	 hhzGIaC3jtDINfiIZwdcQ1wH4HWifx1aSjCqBV3w9PpgyDQRgeMLnEQTntOiqVotlu
+	 uhder5mNnsvtVZw9nw9PVu3S3eIIKsJHuL6o5INJqoAWf2PzyWv3RS5ckhZXEKfGXo
+	 a1cNoZNgUFMUg==
 From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: xen-devel@lists.xenproject.org
-cc: sstabellini@kernel.org, iwj@xenproject.org, cardoe@cardoe.com, wl@xen.org, 
-    andrew.cooper3@citrix.com, anthony.perard@citrix.com
-Subject: [PATCH 0/3] automation: introduce an x86_64 Dom0/DomU test
-Message-ID: <alpine.DEB.2.21.2110210831470.2311@sstabellini-ThinkPad-T480s>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Cc: sstabellini@kernel.org,
+	iwj@xenproject.org,
+	cardoe@cardoe.com,
+	wl@xen.org,
+	andrew.cooper3@citrix.com,
+	anthony.perard@citrix.com,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH 2/3] automation: Linux 5.10.74 test-artifact
+Date: Thu, 21 Oct 2021 16:08:38 -0700
+Message-Id: <20211021230839.10794-2-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <alpine.DEB.2.21.2110210831470.2311@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2110210831470.2311@sstabellini-ThinkPad-T480s>
 
-Hi all,
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-This small patch series introduces a new QEMU-based test to Gitlab-CI.
-It uses QEMU to emulate an x86_64 machine and run Xen, Dom0 and start a
-DomU. It is very similar to the existing qemu-alpine-arm64-gcc test but
-based on x86_64 rather than ARM64. I think it is important because all
-the other x86_64 gitlab-ci tests we currently have are more narrow and
-based on XTF. This would be the first end-to-end x86_64 test in
-gitlab-ci.
+Build a 5.10 kernel to be used as Dom0 and DomU kernel for testing. This
+is almost the same as the existing ARM64 recipe for Linux 5.9, the
+only differences are:
+- upgrade to latest 5.10.x stable
+- force Xen modules to built-in (on ARM it was already done by defconfig)
 
-To make it happen, we need an Alpine Linux rootfs and a Linux kernel.
-The first two patches introduce them to gitlab-ci. Note that actually
-nothing will get build during gitlab-ci runs, it has already been done
-beforehand and uploaded as containers. They only import *existing*
-containers and binaries into a gitlab-ci run, thus, they cannot fail.
-The risk to the release of the first two patches is as close to zero as
-possible.
+Also add the exporting job to build.yaml so that the binary can be used
+during gitlab-ci runs.
 
-The last patch is the one introducing a new test. This one can fail.
-However, it is a new test at the end of the pipeline: it doesn't impact
-the existing tests. In the worst case, the test will fail and the whole
-pipeline will be marked as "failed" but looking at the jobs all the
-other will continue to be marked as successful. In short, if it fails,
-we can simply ignore it. Also, at the moment it is actually succeeding.
-
-Cheers,
-
-Stefano
-
-
-Stefano Stabellini (3):
-      automation: add x86_64 alpine 3.12 test-artifact
-      automation: Linux 5.10.74 test-artifact
-      automation: add a QEMU based x86_64 Dom0/DomU test
-
- automation/gitlab-ci/build.yaml                    | 24 ++++++
- automation/gitlab-ci/test.yaml                     | 24 ++++++
- automation/scripts/qemu-alpine-x86_64.sh           | 92 ++++++++++++++++++++++
- automation/tests-artifacts/alpine/3.12.dockerfile  | 68 ++++++++++++++++
- .../tests-artifacts/kernel/5.10.74.dockerfile      | 38 +++++++++
- 5 files changed, 246 insertions(+)
- create mode 100644 automation/scripts/qemu-alpine-x86_64.sh
- create mode 100644 automation/tests-artifacts/alpine/3.12.dockerfile
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+---
+ automation/gitlab-ci/build.yaml               | 11 ++++++
+ .../tests-artifacts/kernel/5.10.74.dockerfile | 38 +++++++++++++++++++
+ 2 files changed, 49 insertions(+)
  create mode 100644 automation/tests-artifacts/kernel/5.10.74.dockerfile
+
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 76b73beead..0034c50950 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -609,3 +609,14 @@ alpine-3.12-rootfs-export:
+       - binaries/initrd.tar.gz
+   tags:
+     - x86_64
++
++kernel-5.10.74-export:
++  stage: build
++  image: registry.gitlab.com/xen-project/xen/tests-artifacts/kernel:5.10.74
++  script:
++    - mkdir binaries && cp /bzImage binaries/bzImage
++  artifacts:
++    paths:
++      - binaries/bzImage
++  tags:
++    - x86_64
+diff --git a/automation/tests-artifacts/kernel/5.10.74.dockerfile b/automation/tests-artifacts/kernel/5.10.74.dockerfile
+new file mode 100644
+index 0000000000..f2dbbecf74
+--- /dev/null
++++ b/automation/tests-artifacts/kernel/5.10.74.dockerfile
+@@ -0,0 +1,38 @@
++FROM debian:unstable
++LABEL maintainer.name="The Xen Project" \
++      maintainer.email="xen-devel@lists.xenproject.org"
++
++ENV DEBIAN_FRONTEND=noninteractive
++ENV LINUX_VERSION=5.10.74
++ENV USER root
++
++RUN mkdir /build
++WORKDIR /build
++
++# build depends
++RUN apt-get update && \
++    apt-get --quiet --yes install \
++        build-essential \
++        libssl-dev \
++        bc \
++        curl \
++        flex \
++        bison \
++        libelf-dev \
++        && \
++    \
++    # Build the kernel
++    curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-"$LINUX_VERSION".tar.xz && \
++    tar xvJf linux-"$LINUX_VERSION".tar.xz && \
++    cd linux-"$LINUX_VERSION" && \
++    make defconfig && \
++    make xen.config && \
++    cp .config .config.orig && \
++    cat .config.orig | grep XEN | grep =m |sed 's/=m/=y/g' >> .config && \
++    make -j$(nproc) bzImage && \
++    cp arch/x86/boot/bzImage / && \
++    cd /build && \
++    rm -rf linux-"$LINUX_VERSION"* && \
++    apt-get autoremove -y && \
++    apt-get clean && \
++    rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/*
+-- 
+2.17.1
+
 
