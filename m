@@ -2,37 +2,36 @@ Return-Path: <SRS0=pycK=PK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDA9DC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 64B69C43217
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7A3EF611CB
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7A3EF611CB
+	by mail.kernel.org (Postfix) with ESMTPS id 1D5E360560
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1D5E360560
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.214949.373828 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.214950.373844 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mds5o-00067a-V0; Fri, 22 Oct 2021 10:48:08 +0000
+	id 1mds5u-0006d3-59; Fri, 22 Oct 2021 10:48:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 214949.373828; Fri, 22 Oct 2021 10:48:08 +0000
+Received: by outflank-mailman (output) from mailman id 214950.373844; Fri, 22 Oct 2021 10:48:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mds5o-000672-P4; Fri, 22 Oct 2021 10:48:08 +0000
-Received: by outflank-mailman (input) for mailman id 214949;
- Fri, 22 Oct 2021 10:48:07 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mds5u-0006cp-1Z; Fri, 22 Oct 2021 10:48:14 +0000
+Received: by outflank-mailman (input) for mailman id 214950;
+ Fri, 22 Oct 2021 10:48:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h+2b=PK=citrix.com=lin.liu@srs-us1.protection.inumbo.net>)
- id 1mds5n-00063s-Ot
- for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 10:48:07 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 899cacfa-3325-11ec-83b2-12813bfff9fa;
- Fri, 22 Oct 2021 10:48:06 +0000 (UTC)
+ id 1mds5r-00063m-SC
+ for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 10:48:11 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3dd4d950-1f2d-4743-9f3c-a27dcd40da0c;
+ Fri, 22 Oct 2021 10:48:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,65 +43,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 899cacfa-3325-11ec-83b2-12813bfff9fa
+X-Inumbo-ID: 3dd4d950-1f2d-4743-9f3c-a27dcd40da0c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1634899686;
+  d=citrix.com; s=securemail; t=1634899685;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=IFE0UJWngehF/A2SEsMzjIMw1cebKLctc7j7VVKm2kg=;
-  b=DYDcyYc2cqpGUHTxjTE64aII/dVtmZZvJfdO814hzVxBmtIrZIXti2ht
-   h7sLs9lHr4po4BlJ4HNgnW7yfTb28HlQ/4pc5e+WiqjWERIR4p1x5UXU/
-   JkI6VtslI/kJjMk5UJANpf/r67ZejCG/uYWmCA8Zq9DOn1WdA9GIRM+Qy
-   s=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 9ODWXCtlXJsgGAcpdr47VuOgrNDlPEua4piplJW1s+UBl/uFlNhmUT04tLNIP0bkikNn7t5Hmt
- 4gjBemsZz5YwqZs+MV3N+qbVlE7KNlcga3fIwiA/LmmCdwUVAQtshXMHFR/9jTCKEKOngq9zj0
- +kQAsiW/SEmaInkPqRIWCiPmzfjqxzYVjiozt8hqofY1qpjMBaXQi/7dLsMOnt/PjrCsCYCuJU
- qCM0mNQNOlXATNqHUPSzpZGv+DW05yM1JTgTEu3NJlqtdwzl9Vyd8Yv2Fi+CvDIq0/+2jbSFT1
- sSITJLNRVutURWfvnG5j84wI
+  bh=vWYcScFFcIQEVZP3kMCIm4XAsFx3uk4EAC/JiEqA390=;
+  b=QGkYz30joJGyvg1l0BRFy0aI79YAFLix6L+giFTfhjG3RHjt2er4r8lc
+   kMkgOQ/mjO5PxQFvzvXzT9djVIHme611uBuF1XlmWosPJHkXVE/AWaC0E
+   +Ml8ku+hGiI4RdNP4b+XkwhXmKXnAzbK8a6WLBXX7blO6AuLvAGu7Sxe5
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: MPfO+Wji9x93Dsji5f9qlta4Pv88cGaAAS+EM5FZXGK2iKhRqVvC1tjrQlIDzCZdwt7rEWuha8
+ VLZjVNlhz8R9lxhIlP6hHMcQJWAfBqjVG2H9qc2JXm6WuYzCPXoZ0jBkItPp6PdnRysJNaRXIO
+ uY8+KsuQEhQXBzQZESCDFsSqNqoIy/1pRSXZL/wYAba0H/zII1tu7UlSxr8p4sG6I0MOg1dGEK
+ DLweIuVPdpwxyXssPDPNpBtpQ/44BpyDpVSMysQjUwytKkZ79TYHXEatLB+dulc5XFifIfMm4M
+ 6dfINCFFVd7YQzDPDREwpuse
 X-SBRS: 5.1
-X-MesageID: 55807250
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 57733154
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:sA+ND6AXIj/COxVW/63kw5YqxClBgxIJ4kV8jS/XYbTApD120jUFn
- zNNCmyFa/yJNmrxe91yb9m3/R4HsZWHnYI3QQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX5500g7wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/m3LKgu1N5
- Ot3s4WSFzkXYJ3clac9akwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTTuhqwMAiMeHgPZ8Fu2EmxjbcZRojac2eE/2Vv4IAtNs2rpBVAez8O
- 88dUgtiLznyeAUMPXc6LqtryY9EgVGgKmYF+Tp5v5Ef+HPPxQZ81LzsNtv9edGQQ8hR2EGCq
- Qru/Xn9AxwcHMySz3yC6H3ErvDLtTP2XsQVDrLQ3u5nhhify3IeDDUSVECnur+ph0imQdVdJ
- kcIvC00osAa9VOpZsnwWQWip3yJtQJaXMBfe8U44gyQzqvf4y6CG3MJCDVGbbQbWNQeHGJwk
- AXTxpWwWGIp4Ob9pW+hGqm8vXTxJBUpAVE4YzYmEzU7venzrcITt0eaJjp8K5KdgtrwEDD25
- jmFqikimrke5fI2O7WHEUPv2G30+MCYJuIhzkCOBDj9t1ImDGKwT9XwsQCz0BpWEGqOorBtV
- lA/kM+C8PtGM5iJkCGcKAnmNOD0v6jbWNEwbFgGInXAy9hP0yL8FWyzyGsnTKuMDiriUWW1C
- KM0kVgJjKK/xFPwMcdKj3uZUqzGN5TIG9X/TezzZdFTeJV3fwLv1HgwPhLAgzmywBB3zPBX1
- XKnnSCEVypy5UNPl2Leegvg+eVzmnBWKZ37FfgXMChLIZLBPSXIGN/pwXOFb/wj7bPsnekm2
- 403Cid+8D0GCLeWSnCOqeY7dAlWRVBmVcGeg5EGLYarf1s5cFzN/teMmNvNjaQ+xP8L/goJl
- 1ngMnJlJK3X3Cyed1/SMy07NNsCn/9X9BoGAMDlBn7ws1BLXGplxP53m0IfceZ1+ep94+RzS
- vVZKcyMDu4WEmbM+igHbIm7p4tnLUz5iQWLNiujQT4+Y58/GFCZpo66JlPipHsUEy66lcoiu
- Ln8hAnVdoUOGlZ5B8HMZfPxk17o5SoBmPh/VlfjK8VIfBm+65BjLiH816dlI8wFJRjZ6CGd0
- gKaXUURqeXX+tdn+9jVn6GU6YyuFrImTEZdGmDa65ewNDXboTX/kdMRDr7QcGmEBm3u+aika
- eFE9N3GMaUKzARQro5xM7d31qZitdHhkKBXk1Z/F3LRYlX1Vr45eiua3dNCv7Fmz6NCvVfkQ
- VqG/9RXNOnbOM7hF1JNdgMpYv7aiKMRkzjWq/80PF/79Gl8+7/eCRdeOByFiSp8KrppMdx6n
- bd96ZBOswHv2AA3NtumjzxP8zXeJ3MNZKwrq5UGDdK5kQEs0FxDPcTRByKeDEtjsDmQ3p3G+
- gOpuZc=
-IronPort-HdrOrdr: A9a23:lQQukavz14qfGMCrNNHCFY4O7skDTtV00zEX/kB9WHVpmszxra
+IronPort-Data: A9a23:kdxOaavWtra2khdHMvlh0CH/wufnVNFZMUV32f8akzHdYApBsoF/q
+ tZmKTqDO63fMGb2co91aoS//UNXvJDVmNBnSQs4pCBmEn8S+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cw24LhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ NplqayOEAhyMob2ydssdABXUGZXZaJ09+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DOIIZ/HVh0BnSDOo8QICFSKLPjTNd9Gpv2ZsVRKuCD
+ yYfQStpchjbYDJGAH1NIqMEpfjyiEi4bwQN/Tp5ooJoujOOnWSdyoPFDt3RfdCbQNRPqWyRr
+ GnG4mfRDwkTMZqUzj/t2nGrgPXGkWXkWYYRPLqi//VujRuYwWl7IB8LUVq2p9Gph0j4XMhQQ
+ 2QE9yxroaUs+UiDStjmQwb+sHOCpgQbWddbD6s98g7l4rHP/w+TC2wATzhAQN8rrsk7QXotz
+ FDhoj/yLWUx6vvPEyvbr+rK62PpUcQIEYMcTTM0c1IKuNXImtAMvzXWQZUkOfa6vNKgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6IBjz9v2uVcKbgPtbysQGKsp6sOa7AFgHZ1
+ EXojfRy+wzn4XulryeKXPkWVI+g4/KIIVUwanY+QsF/qVxBF5OlFL28AQ2Sxm81ba7omhezO
+ Sc/XD+9ArcJYBNGiocsO+qM5zwCl/SIKDgcfqm8giBySpZwbhSb2ypleFSd2Wvg+GB1z/pja
+ cvCLpb0VitLYUiC8NZQb71BuVPM7ntmrV4/uLihl0j3uVZgTC79pUg53KumMblisfLsTPT9+
+ NdDLcqaoyizo8WlChQ7BbU7dAhQRVBiXMieg5UOKoarf1o3cEl8WqS56e5wJORYc1F9y76gE
+ oeVARQDljISRBTvdG23V5yUQOq+BMgl9StmZXBE0JTB8yFLXLtDJZw3L/MfFYTLPsQ6pRKtZ
+ /VaKciGHNpVTTHLp2YUYZXn9dQwfxW3nwOeeSGiZWFnLZJnQgXI/P7ifxfuq3ZSXnbm65Nmr
+ u3yzB7fTLoCWx9mUJTcZsWwwg7jpnMagu9zARfFe4EBZEX2/YF2ACXtlftrcdoUIBDOy2LCh
+ QabCBsVv8fXpIox/IWbjKyItd7xQeB/AlBbDy/Q6rPvbXvW+W+qwIlhVueUfG+CCDOoqfv6P
+ egMlqPyKvwKmlpOorFQKbczwPJs/cbrqp9b0h9gQCfBYWO0B+4yOXKBx8RO6PFAn+cLpQusV
+ 0uT0dBGIrHVatj9GVscKQd5POSO0fYYxmvb4fgveRio4SZ2+PyMUFlIPgnKgytYdeMnPIQgy
+ OYnmcgX9w3g1UZ6bofY1nhZpzaWM3gNc6Q7rZVLUobkhz0ixkxGfZGBWDT954uCaokUP0QnS
+ tNOaHEuW1iIKpL+TkcO
+IronPort-HdrOrdr: A9a23:bcAep6sMtuPLYcOQ20HBTbLS7skDTtV00zEX/kB9WHVpmszxra
  6TdZMgpHnJYVcqKQkdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
  YFT0EXMqyIMbEQt6fHCWeDfOrIuOP3kpyVuQ==
 X-IronPort-AV: E=Sophos;i="5.87,172,1631592000"; 
-   d="scan'208";a="55807250"
+   d="scan'208";a="57733154"
 From: Lin Liu <lin.liu@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Lin Liu <lin.liu@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 1/7] xen: implement byteswap.h
-Date: Fri, 22 Oct 2021 10:47:22 +0000
-Message-ID: <89afdafa9020ab77b9d662bd5c8f7b2d31e53c5c.1634897942.git.lin.liu@citrix.com>
+CC: Lin Liu <lin.liu@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: [PATCH v2 4/7] arm: Switch to byteswap.h
+Date: Fri, 22 Oct 2021 10:47:25 +0000
+Message-ID: <306bc005bc3786fcbccc0a0aca3c7b22e50d8c67.1634897942.git.lin.liu@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1634897942.git.lin.liu@citrix.com>
 References: <cover.1634897942.git.lin.liu@citrix.com>
@@ -110,150 +109,146 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-swab() is massively over complicated and can be simplified by builtins.
-The compilers provide builtin function to swap bytes.
-* gcc:   https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
-* clang: https://clang.llvm.org/docs/LanguageExtensions.html
-This patch simplify swab() with builtins and fallback for old compilers.
+Update to use byteswap.h to swap bytes.
+
+No functional change.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
 ---
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Ian Jackson <iwj@xenproject.org>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
 Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
-Changes in v2:
-- Add fallback for compilers without __builtin_bswap
-- Implement with plain C instead of macros
+Cc: Julien Grall <julien@xen.org>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>
 ---
- xen/include/xen/byteswap.h | 93 ++++++++++++++++++++++++++++++++++++++
- xen/include/xen/compiler.h | 12 +++++
- 2 files changed, 105 insertions(+)
- create mode 100644 xen/include/xen/byteswap.h
+ xen/arch/arm/alternative.c          | 2 +-
+ xen/arch/arm/arm64/livepatch.c      | 2 +-
+ xen/arch/arm/kernel.c               | 2 +-
+ xen/arch/arm/vgic/vgic-mmio.c       | 2 +-
+ xen/include/asm-arm/arm32/io.h      | 2 +-
+ xen/include/asm-arm/arm64/io.h      | 2 +-
+ xen/include/xen/libfdt/libfdt_env.h | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/xen/include/xen/byteswap.h b/xen/include/xen/byteswap.h
-new file mode 100644
-index 0000000000..848a4bbaee
---- /dev/null
-+++ b/xen/include/xen/byteswap.h
-@@ -0,0 +1,93 @@
-+#ifndef _BYTESWAP_H
-+#define _BYTESWAP_H
-+
-+#include <xen/types.h>
-+
-+#if !__has_builtin(__builtin_bswap16)
-+static always_inline uint16_t __builtin_bswap16(uint16_t val)
-+{
-+    return ((val & 0x00FF) << 8) | ((val & 0xFF00) >> 8);
-+}
-+#endif
-+
-+#if !__has_builtin(__builtin_bswap32)
-+static always_inline uint32_t __builtin_bswap32(uint32_t val)
-+{
-+    return ((val & 0x000000FF) << 24) |
-+           ((val & 0x0000FF00) <<  8) |
-+           ((val & 0x00FF0000) >>  8) |
-+           ((val & 0xFF000000) >> 24);
-+}
-+#endif
-+
-+#if !__has_builtin(__builtin_bswap64)
-+static always_inline uint64_t __builtin_bswap64(uint64_t val)
-+{
-+    return ((val & 0x00000000000000FF) << 56) |
-+           ((val & 0x000000000000FF00) << 40) |
-+           ((val & 0x0000000000FF0000) << 24) |
-+           ((val & 0x00000000FF000000) <<  8) |
-+           ((val & 0x000000FF00000000) >>  8) |
-+           ((val & 0x0000FF0000000000) >> 24) |
-+           ((val & 0x00FF000000000000) >> 40) |
-+           ((val & 0xFF00000000000000) >> 56);
-+}
-+#endif
-+
-+#define bswap16(x) __builtin_bswap16(x)
-+#define bswap32(x) __builtin_bswap32(x)
-+#define bswap64(x) __builtin_bswap64(x)
-+
-+#define bswap_ul(x) bswap##BITS_PER_LONG(x)
-+
-+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-+
-+#  ifndef __LITTLE_ENDIAN
-+#    define __LITTLE_ENDIAN 1234
-+#  endif
-+
-+#  ifndef __LITTLE_ENDIAN_BITFIELD
-+#    define __LITTLE_ENDIAN_BITFIELD
-+#  endif
-+
-+#  define cpu_to_le64(x) (x)
-+#  define le64_to_cpu(x) (x)
-+#  define cpu_to_le32(x) (x)
-+#  define le32_to_cpu(x) (x)
-+#  define cpu_to_le16(x) (x)
-+#  define le16_to_cpu(x) (x)
-+#  define cpu_to_be64(x) bswap64(x)
-+#  define be64_to_cpu(x) bswap64(x)
-+#  define cpu_to_be32(x) bswap32(x)
-+#  define be32_to_cpu(x) bswap32(x)
-+#  define cpu_to_be16(x) bswap16(x)
-+#  define be16_to_cpu(x) bswap16(x)
-+
-+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-+
-+#  ifndef __BIG_ENDIAN
-+#    define __BIG_ENDIAN 4321
-+#  endif
-+
-+#  ifndef __BIG_ENDIAN_BITFIELD
-+#    define __BIG_ENDIAN_BITFIELD
-+#  endif
-+
-+#  define cpu_to_le64(x) bswap64(x)
-+#  define le64_to_cpu(x) bswap64(x)
-+#  define cpu_to_le32(x) bswap32(x)
-+#  define le32_to_cpu(x) bswap32(x)
-+#  define cpu_to_le16(x) bswap16(x)
-+#  define le16_to_cpu(x) bswap16(x)
-+#  define cpu_to_be64(x) (x)
-+#  define be64_to_cpu(x) (x)
-+#  define cpu_to_be32(x) (x)
-+#  define be32_to_cpu(x) (x)
-+#  define cpu_to_be16(x) (x)
-+#  define be16_to_cpu(x) (x)
-+
-+#else
-+#  error "Unknown Endianness"
-+#endif /* __BYTE_ORDER__ */
-+
-+#endif /* _LINUX_BITOPS_H */
-diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
-index 696c7eb89e..68f28082a5 100644
---- a/xen/include/xen/compiler.h
-+++ b/xen/include/xen/compiler.h
-@@ -179,4 +179,16 @@
- # define CLANG_DISABLE_WARN_GCC_COMPAT_END
- #endif
+diff --git a/xen/arch/arm/alternative.c b/xen/arch/arm/alternative.c
+index 237c4e5642..0f84260ac9 100644
+--- a/xen/arch/arm/alternative.c
++++ b/xen/arch/arm/alternative.c
+@@ -17,6 +17,7 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
  
-+#if (!defined(__clang__) && (__GNUC__ < 10))
-+/*
-+ * Backwards compatibility for GCC < 10.
-+ * All supported versions of Clang support __has_builtin
-+ * */
-+#define __has_builtin(x) GCC_has ## x
-+
-+#define GCC_has__builtin_bswap16 (CONFIG_GCC_VERSION >= 40800)
-+#define GCC_has__builtin_bswap32 (CONFIG_GCC_VERSION >= 40400)
-+#define GCC_has__builtin_bswap64 (CONFIG_GCC_VERSION >= 40400)
-+#endif
-+
- #endif /* __LINUX_COMPILER_H */
++#include <xen/byteswap.h>
+ #include <xen/init.h>
+ #include <xen/types.h>
+ #include <xen/kernel.h>
+@@ -27,7 +28,6 @@
+ #include <xen/virtual_region.h>
+ #include <asm/alternative.h>
+ #include <asm/atomic.h>
+-#include <asm/byteorder.h>
+ #include <asm/cpufeature.h>
+ #include <asm/insn.h>
+ #include <asm/page.h>
+diff --git a/xen/arch/arm/arm64/livepatch.c b/xen/arch/arm/arm64/livepatch.c
+index 6ec8dc60f0..26b5729edf 100644
+--- a/xen/arch/arm/arm64/livepatch.c
++++ b/xen/arch/arm/arm64/livepatch.c
+@@ -3,6 +3,7 @@
+  */
+ 
+ #include <xen/bitops.h>
++#include <xen/byteswap.h>
+ #include <xen/errno.h>
+ #include <xen/lib.h>
+ #include <xen/livepatch_elf.h>
+@@ -11,7 +12,6 @@
+ #include <xen/vmap.h>
+ 
+ #include <asm/bitops.h>
+-#include <asm/byteorder.h>
+ #include <asm/insn.h>
+ #include <asm/livepatch.h>
+ 
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 8f43caa186..e89bb9cef8 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -3,6 +3,7 @@
+  *
+  * Copyright (C) 2011 Citrix Systems, Inc.
+  */
++#include <xen/byteswap.h>
+ #include <xen/domain_page.h>
+ #include <xen/errno.h>
+ #include <xen/guest_access.h>
+@@ -14,7 +15,6 @@
+ #include <xen/sched.h>
+ #include <xen/vmap.h>
+ 
+-#include <asm/byteorder.h>
+ #include <asm/kernel.h>
+ #include <asm/setup.h>
+ 
+diff --git a/xen/arch/arm/vgic/vgic-mmio.c b/xen/arch/arm/vgic/vgic-mmio.c
+index 5d935a7301..d9c5066246 100644
+--- a/xen/arch/arm/vgic/vgic-mmio.c
++++ b/xen/arch/arm/vgic/vgic-mmio.c
+@@ -13,10 +13,10 @@
+  */
+ 
+ #include <xen/bitops.h>
++#include <xen/byteswap.h>
+ #include <xen/lib.h>
+ #include <xen/sched.h>
+ #include <asm/new_vgic.h>
+-#include <asm/byteorder.h>
+ 
+ #include "vgic.h"
+ #include "vgic-mmio.h"
+diff --git a/xen/include/asm-arm/arm32/io.h b/xen/include/asm-arm/arm32/io.h
+index 73a879e9fb..df8547403c 100644
+--- a/xen/include/asm-arm/arm32/io.h
++++ b/xen/include/asm-arm/arm32/io.h
+@@ -21,8 +21,8 @@
+ #ifndef _ARM_ARM32_IO_H
+ #define _ARM_ARM32_IO_H
+ 
++#include <xen/byteswap.h>
+ #include <asm/system.h>
+-#include <asm/byteorder.h>
+ 
+ static inline void __raw_writeb(u8 val, volatile void __iomem *addr)
+ {
+diff --git a/xen/include/asm-arm/arm64/io.h b/xen/include/asm-arm/arm64/io.h
+index 30bfc78d9e..db328d9e3c 100644
+--- a/xen/include/asm-arm/arm64/io.h
++++ b/xen/include/asm-arm/arm64/io.h
+@@ -20,8 +20,8 @@
+ #ifndef _ARM_ARM64_IO_H
+ #define _ARM_ARM64_IO_H
+ 
++#include <xen/byteswap.h>
+ #include <asm/system.h>
+-#include <asm/byteorder.h>
+ #include <asm/alternative.h>
+ 
+ /*
+diff --git a/xen/include/xen/libfdt/libfdt_env.h b/xen/include/xen/libfdt/libfdt_env.h
+index 035bf754d2..f8ea1ea07a 100644
+--- a/xen/include/xen/libfdt/libfdt_env.h
++++ b/xen/include/xen/libfdt/libfdt_env.h
+@@ -1,9 +1,9 @@
+ #ifndef _LIBFDT_ENV_H
+ #define _LIBFDT_ENV_H
+ 
++#include <xen/byteswap.h>
+ #include <xen/types.h>
+ #include <xen/string.h>
+-#include <asm/byteorder.h>
+ 
+ typedef uint16_t fdt16_t;
+ typedef uint32_t fdt32_t;
 -- 
 2.27.0
 
