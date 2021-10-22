@@ -2,36 +2,35 @@ Return-Path: <SRS0=pycK=PK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 81F8CC4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 63789C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 42F6261163
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 42F6261163
+	by mail.kernel.org (Postfix) with ESMTPS id 1948F61163
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1948F61163
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.214951.373848 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.214952.373866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mds5u-0006fn-Gm; Fri, 22 Oct 2021 10:48:14 +0000
+	id 1mds5x-0007Fx-UL; Fri, 22 Oct 2021 10:48:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 214951.373848; Fri, 22 Oct 2021 10:48:14 +0000
+Received: by outflank-mailman (output) from mailman id 214952.373866; Fri, 22 Oct 2021 10:48:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mds5u-0006f7-As; Fri, 22 Oct 2021 10:48:14 +0000
-Received: by outflank-mailman (input) for mailman id 214951;
- Fri, 22 Oct 2021 10:48:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mds5x-0007Fh-Om; Fri, 22 Oct 2021 10:48:17 +0000
+Received: by outflank-mailman (input) for mailman id 214952;
+ Fri, 22 Oct 2021 10:48:16 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h+2b=PK=citrix.com=lin.liu@srs-us1.protection.inumbo.net>)
- id 1mds5s-00063s-J0
- for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 10:48:12 +0000
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8aaffa20-3325-11ec-83b2-12813bfff9fa;
+ id 1mds5w-00063m-SN
+ for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 10:48:16 +0000
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f06f55d9-7516-4143-8db2-48f17f8c1914;
  Fri, 22 Oct 2021 10:48:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -44,62 +43,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8aaffa20-3325-11ec-83b2-12813bfff9fa
+X-Inumbo-ID: f06f55d9-7516-4143-8db2-48f17f8c1914
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1634899687;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=KXdMTUepQc/hWgrrZYpWXrp3b/8Yk5JMcrV/PHsyXk8=;
-  b=CBOnxnnSZHoq9WMG/jcYbwpGgX6tWk25cLlIj3/ck1cM0TGe8RalBcQD
-   39GMHUm9YSp38uOllQXfB5yaFXHtpym8OCCy/KyPzTjuZhFdEpQRh8cGO
-   DUuJDB7y33obkqD5N2xOF20ga0L5js2wSSxFBAomYBDX2qoXkAwFOcc9K
-   A=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 5mV+QcJuMbU1xqtO+XxIArH03DeejP7wBDUKBvGVXkm3MZrcF9qzgOVv4yecmboHYycM1Vflk0
- 5i3hChc0YQ9YowmZezRDpSA32TSB8OCaxG+EHSxk9xZjxz5VlTa3M0Hw0XutKF0G1+hsnZVc+C
- 68ze2YdqIDFWFIItGHmjSV/FaZ7K30Mr751aZwc/YPLr3OF8bpzZtLbLa8mo5yx7jJ7DTlyE/V
- uZlNdYx3Q0Zu0Ul0quvuehcm2UHx55DlBQcIgiV4YiW4ZHr6/S15RDhUN7Wv8btxjVghqrHz1L
- X62c5dseILazvfIQRis2jK9r
+  bh=arMkqO0Q4MIEtmu8VJig4sN6edJ7nb/bgiFiX5lqa8c=;
+  b=eTJv55e3Lp+uU2aC716fPVPYRjVGdtIWgf4iSwrf/a/5IjBbkEa4wsik
+   U3R6csVQorfoMOpi+JUJldRqRojW28Xx5rvfavEAqestOQyFy1Dz5kwQx
+   rIzZdAbeldEYLnYxAScMzJg0AFB9x9rtLCVxzpgtMrAsscuAX0R1rG2UX
+   0=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: gzgD0Aqt+8NJtKdFIeJMXLFKKycQr/Rx0IQcq1ZbxHWWR+jiKWE3ua5xfsK6L25JhTLomjrqig
+ JRJJ0niuWCQYwy30tlVbiETg0H8vgG8BpmN6GIF9BKs+c5fw73K6Q2PVfgHCxl4oGJcCMaTmlN
+ l9vrVLQBN8wIq4OsWIA3Iwz7IJSzkmRKYLyp7zAWsveEaJHUpl+cPcmt8ZJgQEuHkiv7kNZ6IN
+ 96cY7gCrGao64wenrjjVTLZLInkfkfkYmm3Q7UHfSziKGKlqY16CgKRX7UtOiij7CdOk8Ol3yV
+ X53l6uT4DECkXO/8qdRdwGvZ
 X-SBRS: 5.1
-X-MesageID: 55807253
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 55376143
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:m7bC0qubxBSeGMlPh5sjBrMyKufnVIhZMUV32f8akzHdYApBsoF/q
- tZmKW3VOf/bYGvyeosnOY/j/EMG7cOGnN9qSFZo/yFkES8T+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cw24LhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- Nplu8fzUAMUJvT2vstEdUB8Gid/IqJI0eqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DOIIZ/HVh0BnSDOo8QICFSKLPjTNd9Gpt1pgRR6uFD
- yYfQTBjQw/pQAJlAWUoGZ4FnMGIqSPkcDIN/Tp5ooJoujOOnWSdyoPFPMLOf92WRe1chkuCu
- n/d5GP9Hw0bM9qEjzGC9xqEiuDDkCzhUaoOBba48bhsm1TVyWsNYDUGWF3+rfSnh0qWX9NEN
- 1dS6icotbI19kGgUp/6RRLQnZKflkdCAZwKSbR8sVzTjPqPi+qEOoQaZjAaK8UiiddvfxoFj
- 3nQu9rvBCNgvpTAHBpx6YyohT+1PCEUK0oLaikFURYJ7rHfnW0jsv7cZo08SPDt37UZDRm1m
- mrQ9HFv2N3/mOZSj/3jlW0rlQ5AsXQgouQd3Q7QQn6+pj1wYIqoduREAnCKsK4ecu51orSH1
- UXoevRyDshSUvlhdwTXGY3h+Y1FAd7fbFUwZnY0R/EcG8yFoSLLQGypyGgWyL1VGsgFYyT1R
- 0TYpBlc4pReVFPzM/QrM97oVJRylvWxfTgAahwyRoASCnSWXFTflByCmGbKhzy9+KTSufFX1
- WinnTaEUi9BVPUPIMueTOYBy747rh3SNkuILa0XOy+PiOLEDFbMEO9tGALXMogRsfPVyC2Io
- o03H5bblH1ivBjWP3C/HXg7dgtRcxDWxPne9qRqSwJ0ClM3QT97U6aMme9Jlk4Mt/09q9okN
- 0qVAidwoGcTT1WeQelTQnw8Or7pQ7hlqnc3YX4lMVqygiBxaoez9qYPMZAweOB/puBkyPd1S
- dgDetmBXasTGmiWpWxFYMmvtpFmeTSqmRmKY3ivbg8gcsMyXAfO4NLlIFfirXFcEiqtuMIii
- LS8zQeHE4EbTgFvAZ+OOvKixl+8p1YHn+d2UxeaK9VfYhy0ooNrNzbwnrk8JMRVcUfPwT6T1
- gC3BxYEpLaS/99poYeR3a3d9tWnCepzGEZeDlL317fuOHmI5HenzK9BTP2MIWLXWlTr9fjwf
- u5S1fz9bqEKxQ4Yr4pmHr935qsi/N+z9aRCxwFpEXiXPVSmDrRsfiuP0cVV7/Afw7ZYvU29W
- 16V+8kcMrKMYZu3HFkULQsjT+KCyfBLxWWCsaVreB33tH1t4b6KcUROJB3d2iVSIYx8PJ4h3
- ep86tUd7Bayi0ZyP9uL5syOG79g8pDUv30bi6wn
-IronPort-HdrOrdr: A9a23:Rx5Bgq8GbjfmWaIMfPxuk+DiI+orL9Y04lQ7vn2YSXRuE/Bw8P
- re5cjztCWE8wr5N0tQ+uxoVJPufZqYz+8Q3WBzB8bFYOCFghrLEGgK1+KLqFeMdxEWtNQtsp
- uIG5IOcOEYZmIbsS+V2meF+q4bsby6zJw=
+IronPort-Data: A9a23:8FGM6K58AzjVO4ztE7kwegxRtNfAchMFZxGqfqrLsTDasY5as4F+v
+ mUcWGCDafbZZ2L0c9kgbNni9hsOvpXcyd43TAZt/ithHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdh2NQw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zz
+ PxGkYyRRyQQGYL+qe5NSwhKIX9+IvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALKMjteocep1lrzC3DDOZgSpfGK0nPzYIFh2hu35wVdRrYT
+ +4Dcj5mTTXMWT0VAmUMMp0Rs/+xnHaqJlW0r3rK/PFqsgA/1jdZ0qXpMdfTUsyHQ4NShEnwj
+ lzB+2P1ExQLLuu1wDCO8m+vruLXlCa9U4UXfJWo+/gvjFCNy2g7DBwNSUD9sfS/klS5Wd9UN
+ woT4CVGhbMp6EWhQ935Xhu5iH2JpBgRX5xXCeJS1e2W4vOKuUDDXDFCF2MfLox93CMredA0/
+ luglPf5JDJMiZq6e0OXpq+FvwHsOTdAeAfuehQ4ZQcC5tDipqQ6gRTOUstvHcaJszHlJd3j6
+ 2vV9HZm1t3/meZOjv/hpQmW3FpAs7CQFlZtjjg7SF5J+e+QiGSNXIev9UTApchJKIKUXzFtV
+ 1BVxpDAsoji4XyL/RFhodnh/pn1uJ5p0xWG2DaD+qXNERz3pxZPmqgLuFlDyL9BaJpsRNMQS
+ Ba7VfltzJFSJmC2SqR8fpi8Dc8npYC5S4+5BqyNMYoWOcUgHONiwM2ITRTMt4wKuBN0+ZzTx
+ L/BKZr8ZZrkIfQPIMWKqxc1juZwm3FWKZL7TpHn1RW3uYdyl1bOIYrpxGCmN7hjhIvd+V292
+ 48Ga6OilkUOOMWjM3K/2dNCcjg3wY0TWMmeRzp/LbXYfGKL2QgJVpfs/F/WU9U0xvoPzr6Vp
+ i3Vt40x4AOXuEAr4D6iMhhLAI4Dl74mxZ7iFSBzb1uuxVY5ZoOjsPUWe5ctJOF1/+1/1/9kC
+ fICfpzYUPhITz3G/RUbbIX889M+JEj621rWMnr3eiU7cr5hWxfNpo3ucDzw+XRcFSGwr8Y//
+ eGtj1uJXZoZSg1+J8/Kc/bznUiptH0QlbsqDUvFK9VeYmv2941uJ3Cjh/M7OZhUex7C2iGbx
+ 0CdBhJB/bvBpIo88d/og6GYrtj2T7siTxQCR2SCtOS4LyjX+Gan0LRsaufQcGCPTn7w9YWje
+ f5Rk6P2PsoYkQsYqIF7Cbtqk/4zvoO9u79Aww14N3zXdFD3WKh4K3yL0MQT5K1AwrhV5Vm/V
+ k6Vo4QIPLyIPIXuEUILJRpjZeOGjKlGlj7X5PUzAUP7+C4oo+bXDRQMZ0GB2H5HMb94EII52
+ uNw6scZ5ju2hgcuLtvb3Dtf8H6BLyBYXqgq3n3A7FQHVub/Jol+XKHh
+IronPort-HdrOrdr: A9a23:+CjiXa7kuJroxuP+VwPXwPDXdLJyesId70hD6qhwISY6TiX+rb
+ HJoB17726NtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QCpSWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.87,172,1631592000"; 
-   d="scan'208";a="55807253"
+   d="scan'208";a="55376143"
 From: Lin Liu <lin.liu@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Lin Liu <lin.liu@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v2 5/7] xen/xsm: Switch to byteswap.h
-Date: Fri, 22 Oct 2021 10:47:26 +0000
-Message-ID: <400efbc5c394140bb01664e5847046e8c4a38ea2.1634897942.git.lin.liu@citrix.com>
+CC: Lin Liu <lin.liu@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 3/7] arm64/find_next_bit: Remove ext2_swab()
+Date: Fri, 22 Oct 2021 10:47:24 +0000
+Message-ID: <ad5aba3410913496254975e1ad531708329246aa.1634897942.git.lin.liu@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1634897942.git.lin.liu@citrix.com>
 References: <cover.1634897942.git.lin.liu@citrix.com>
@@ -107,74 +106,122 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Update to use byteswap.h to swap bytes
+ext2 has nothing to do with this logic.  Clean up the code with
+xen/byteswap.h which now has an unsigned long helper.
 
-No functional change
+No functional change.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
 ---
-Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Julien Grall <julien@xen.org>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+The patches are not well tested without running environment
 ---
- xen/xsm/flask/ss/avtab.c       | 2 +-
- xen/xsm/flask/ss/conditional.c | 2 +-
- xen/xsm/flask/ss/ebitmap.c     | 2 +-
- xen/xsm/flask/ss/policydb.c    | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ xen/arch/arm/arm64/lib/find_next_bit.c | 40 ++++++--------------------
+ 1 file changed, 8 insertions(+), 32 deletions(-)
 
-diff --git a/xen/xsm/flask/ss/avtab.c b/xen/xsm/flask/ss/avtab.c
-index bfc91c8b0c..1fa796f625 100644
---- a/xen/xsm/flask/ss/avtab.c
-+++ b/xen/xsm/flask/ss/avtab.c
-@@ -19,8 +19,8 @@
- 
- /* Ported to Xen 3.0, George Coker, <gscoker@alpha.ncsc.mil> */
- 
-+#include <xen/byteswap.h>
- #include <xen/lib.h>
+diff --git a/xen/arch/arm/arm64/lib/find_next_bit.c b/xen/arch/arm/arm64/lib/find_next_bit.c
+index 8ebf8bfe97..8a7cfc0949 100644
+--- a/xen/arch/arm/arm64/lib/find_next_bit.c
++++ b/xen/arch/arm/arm64/lib/find_next_bit.c
+@@ -8,9 +8,9 @@
+  * as published by the Free Software Foundation; either version
+  * 2 of the License, or (at your option) any later version.
+  */
+-#include <xen/bitops.h>
+ #include <asm/types.h>
 -#include <asm/byteorder.h>
- #include <xen/types.h>
- #include <xen/xmalloc.h>
- #include <xen/errno.h>
-diff --git a/xen/xsm/flask/ss/conditional.c b/xen/xsm/flask/ss/conditional.c
-index 3e58aea551..059f6e07e5 100644
---- a/xen/xsm/flask/ss/conditional.c
-+++ b/xen/xsm/flask/ss/conditional.c
-@@ -9,7 +9,7 @@
- 
- /* Ported to Xen 3.0, George Coker, <gscoker@alpha.ncsc.mil> */
- 
--#include <asm/byteorder.h>
++#include <xen/bitops.h>
 +#include <xen/byteswap.h>
- #include <xen/lib.h>
- #include <xen/types.h>
- #include <xen/errno.h>
-diff --git a/xen/xsm/flask/ss/ebitmap.c b/xen/xsm/flask/ss/ebitmap.c
-index e1d0a586a7..1550437c6f 100644
---- a/xen/xsm/flask/ss/ebitmap.c
-+++ b/xen/xsm/flask/ss/ebitmap.c
-@@ -10,7 +10,7 @@
  
- /* Ported to Xen 3.0, George Coker, <gscoker@alpha.ncsc.mil> */
+ #ifndef find_next_bit
+ /*
+@@ -161,30 +161,6 @@ EXPORT_SYMBOL(find_first_zero_bit);
  
--#include <asm/byteorder.h>
-+#include <xen/byteswap.h>
- #include <xen/lib.h>
- #include <xen/xmalloc.h>
- #include <xen/errno.h>
-diff --git a/xen/xsm/flask/ss/policydb.c b/xen/xsm/flask/ss/policydb.c
-index 9426164353..595005c3b7 100644
---- a/xen/xsm/flask/ss/policydb.c
-+++ b/xen/xsm/flask/ss/policydb.c
-@@ -22,7 +22,7 @@
+ #ifdef __BIG_ENDIAN
  
- /* Ported to Xen 3.0, George Coker, <gscoker@alpha.ncsc.mil> */
+-/* include/linux/byteorder does not support "unsigned long" type */
+-static inline unsigned long ext2_swabp(const unsigned long * x)
+-{
+-#if BITS_PER_LONG == 64
+-	return (unsigned long) __swab64p((u64 *) x);
+-#elif BITS_PER_LONG == 32
+-	return (unsigned long) __swab32p((u32 *) x);
+-#else
+-#error BITS_PER_LONG not defined
+-#endif
+-}
+-
+-/* include/linux/byteorder doesn't support "unsigned long" type */
+-static inline unsigned long ext2_swab(const unsigned long y)
+-{
+-#if BITS_PER_LONG == 64
+-	return (unsigned long) __swab64((u64) y);
+-#elif BITS_PER_LONG == 32
+-	return (unsigned long) __swab32((u32) y);
+-#else
+-#error BITS_PER_LONG not defined
+-#endif
+-}
+-
+ #ifndef find_next_zero_bit_le
+ unsigned long find_next_zero_bit_le(const void *addr, unsigned
+ 		long size, unsigned long offset)
+@@ -199,7 +175,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
+ 	size -= result;
+ 	offset &= (BITS_PER_LONG - 1UL);
+ 	if (offset) {
+-		tmp = ext2_swabp(p++);
++		tmp = bswap_ul(*p++);
+ 		tmp |= (~0UL >> (BITS_PER_LONG - offset));
+ 		if (size < BITS_PER_LONG)
+ 			goto found_first;
+@@ -217,7 +193,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
+ 	}
+ 	if (!size)
+ 		return result;
+-	tmp = ext2_swabp(p);
++	tmp = bswap_ul(*p);
+ found_first:
+ 	tmp |= ~0UL << size;
+ 	if (tmp == ~0UL)	/* Are any bits zero? */
+@@ -226,7 +202,7 @@ found_middle:
+ 	return result + ffz(tmp);
  
--#include <asm/byteorder.h>
-+#include <xen/byteswap.h>
- #include <xen/lib.h>
- #include <xen/types.h>
- #include <xen/xmalloc.h>
+ found_middle_swap:
+-	return result + ffz(ext2_swab(tmp));
++	return result + ffz(bswap_ul(tmp));
+ }
+ EXPORT_SYMBOL(find_next_zero_bit_le);
+ #endif
+@@ -245,7 +221,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
+ 	size -= result;
+ 	offset &= (BITS_PER_LONG - 1UL);
+ 	if (offset) {
+-		tmp = ext2_swabp(p++);
++		tmp = bswap_ul(*p++);
+ 		tmp &= (~0UL << offset);
+ 		if (size < BITS_PER_LONG)
+ 			goto found_first;
+@@ -264,7 +240,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
+ 	}
+ 	if (!size)
+ 		return result;
+-	tmp = ext2_swabp(p);
++	tmp = bswap_ul(*p);
+ found_first:
+ 	tmp &= (~0UL >> (BITS_PER_LONG - size));
+ 	if (tmp == 0UL)		/* Are any bits set? */
+@@ -273,7 +249,7 @@ found_middle:
+ 	return result + __ffs(tmp);
+ 
+ found_middle_swap:
+-	return result + __ffs(ext2_swab(tmp));
++	return result + __ffs(bswap_ul(tmp));
+ }
+ EXPORT_SYMBOL(find_next_bit_le);
+ #endif
 -- 
 2.27.0
 
