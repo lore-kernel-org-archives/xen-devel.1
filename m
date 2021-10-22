@@ -2,36 +2,36 @@ Return-Path: <SRS0=pycK=PK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B00E9C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B9B06C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 650AD6120D
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 650AD6120D
+	by mail.kernel.org (Postfix) with ESMTPS id 67C22611F2
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 10:48:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 67C22611F2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.214954.373888 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.214955.373899 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mds62-00080Q-Oj; Fri, 22 Oct 2021 10:48:22 +0000
+	id 1mds68-0000EL-5l; Fri, 22 Oct 2021 10:48:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 214954.373888; Fri, 22 Oct 2021 10:48:22 +0000
+Received: by outflank-mailman (output) from mailman id 214955.373899; Fri, 22 Oct 2021 10:48:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mds62-0007zU-Ix; Fri, 22 Oct 2021 10:48:22 +0000
-Received: by outflank-mailman (input) for mailman id 214954;
- Fri, 22 Oct 2021 10:48:21 +0000
+	id 1mds68-0000D6-0z; Fri, 22 Oct 2021 10:48:28 +0000
+Received: by outflank-mailman (input) for mailman id 214955;
+ Fri, 22 Oct 2021 10:48:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h+2b=PK=citrix.com=lin.liu@srs-us1.protection.inumbo.net>)
- id 1mds61-00063m-Sc
- for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 10:48:21 +0000
+ id 1mds66-00063m-Sr
+ for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 10:48:26 +0000
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 21720d4b-1c5e-4ff2-abb1-670f19cdc7f6;
- Fri, 22 Oct 2021 10:48:07 +0000 (UTC)
+ id 28c6be87-f6ea-42ef-9151-413cd568356b;
+ Fri, 22 Oct 2021 10:48:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,76 +43,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 21720d4b-1c5e-4ff2-abb1-670f19cdc7f6
+X-Inumbo-ID: 28c6be87-f6ea-42ef-9151-413cd568356b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1634899687;
+  d=citrix.com; s=securemail; t=1634899688;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=bfisxychtO/D4CCkbsgtm3RJ+Fi6Cv0nOU8o5cia1XU=;
-  b=BcJzWJPeRZQgwteUcwD8rFvKcckb+Gx5UYJSCD1P7/G5YoBea8xEvjWI
-   L91EPz1G6pFi5YeF84PryIHSYN/Bp66ofrHcjZtZAAJ2cNkUlt1fVinnu
-   mZQXUFUiZV3ZK+RXAEY6xv7dNaexbmvGtltR88UVezCk/ZXzLlSFf9yxi
-   A=;
+  bh=k/jOhLHPZRA8Ag0Zx9f8hcyG0uLCD9lIG9NbqTmotxQ=;
+  b=P5LLaymYDDd7YPzHgw8VO//tiGscp2o2P63uah3hGxrvsMT55ARBFp/p
+   9vY++0HNE+WxlPloQuix8r0ZSKovztZH3SQURBpBSCitVnWMzF8/t5gji
+   o5PNHYYJU8oLOkSz4/gkHNbReHFwYtR4FnEcJHreivFJ12K1q0Nu9die6
+   Q=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: cE3i5g0JyT38eH7D6JiAjqPsCSe1+kOq1dm5/wDz28TF8TagMmd0W9E9YOUmGFQ3UKXIbCpIba
- gKCXuaIhx0x7XPoq/zDzvNsIuqzjWoDdBLnlUPrqf6vLHkro4f4QRNK/xmclcOKSknCYoE1a4K
- x3hzLZyenWSRW4JrhXVGbzmWVeKHcSKAjdTtayf5k1JsI5rbO6Pk9yOBSpwpSp7dWNZNbWO7+H
- 8oiB7JbhunwacKZiLP65PeTtxiViUAl27srwWVTGZwro6HqLPBQECu1Z1lbMFsvQxd2rkjLNks
- iZfvCyv0+LXCC4+Q2hptAIvr
+IronPort-SDR: FVYnoo/wTcjQj0Hr19f8bSUOfLUjj69j01RWR4xcgBFEKEIcjAhmQYdt6l3l+wjkD6bnW9NPSo
+ RCKh2amD6+7hRLEkbwzHJgxBzhwDseJ7E0zbajPN+p73WzP9ErRyq8ztPTUa9rOajkNVLfTE51
+ OweUEt8q13ibX5emWvJ2XXWdP8ck9PQCqaX1C2+RwTdBEB/B9t7CQF8ESe24tWbpeluKD/QS3q
+ jsBtQgykNf6n/q/n5xcvJlskC5/Rw8Jz2G5lWc+SB1kokBJVWhLrKC8EZolGDmtlbw/Aopu+nB
+ lBxSz3aKH919eiSMYH/tCb+6
 X-SBRS: 5.1
-X-MesageID: 55807252
+X-MesageID: 55807254
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:88jFLaO2xRsFxBrvrR0hkMFynXyQoLVcMsEvi/4bfWQNrUom0WcAy
- GEeXTqFM/2JM2X0ft1wb43n/EJSvJCAmt9mGgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6bUsxNbVU8En540Ug5w7RRbrNA2rBVPSvc4
- bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
- 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYozvS3Ml19
- c0Uj7qfECFwGqTKmfsSXTANRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
- 6VFdnZdNXhvhMrvqF6/Yu1tgIInLdTDN4IDoHBwizreCJ7KRLieHvWSuoUFhl/cgOhEE6/8S
- epGcQZyRzKeTV4XfUY0GJYXybLAan7XLGQD9QP9SbAMy3PI0AV73bzpMdzUUt+HX8NYmgCfv
- G2u12bkBhAXMvSPxDzD9Wij7sfQmQvrVYRUE6e3ntZ6jVvWymENBRk+UVqgveL/mkO4Q8hYK
- UEf5mwpt6da3E20TPHtUhugunmGsxUAHd1KHIUS6guA167V6AaxHXUfQ3hKb9lOiSMtbWV0j
- BnTxYqvXGEx9u3OIZ6AyluKhT3pejEREHdbXwkrFC1cx9DloZ48gDuaG76PD5WJptHyHDjxx
- RWDoy4/m6gfgKY36kmrwbzUq2nz/saRH2bZ8i2SBzj/tlooO+ZJcqTxsQCDhcusOrp1WbVoU
- JIsoMOZ8PwVRa+EkCiAUY3h95n4uq7bblUwbbNpdqTNFghBGVb/Iui8AxkkfS+F1/ronxezP
- Cc/XisKvPdu0IOCN/MfXm5II51CIVLcPdrkTOvISdFFf4J8cgSKlAk3OxXMjzy0zxh0yvxuU
- Xt+TSpKJSxGYUiA5GHuL9rxLJdxnnxurY8tbcCTI+ubPUq2OyfOFOZt3KqmZeEl9qKUyDg5A
- P4EX/ZmPy53CbWkCgGOqNZ7BQlTcRATWMCnw+QKJ7XrClc3Rwkc5wr5nOpJl3pNxP8OyI8lP
- xiVBydl9bYIrSSWcFvQMik+MO+HsFQWhStTABHA9G2AgxALCbtDJo9GH3fuVbV4puFl09BuS
- PwJJ5eJDvhVE2yV8DUBd5jt6odlcU3z1w6JOiOkZhk5foJhGFOVqoO1IFO3+XlcFDezuOs/v
- 6akilHRT60cSlkwF83Rcv+ukQ+85CBPhOJoUkLUCdBPY0GwopNyIin8g6ZvccEBIBnO3BWA0
- AOSDUtKrOXBudZtotLImbqFv8GiFO4nRhhWGGzS7LCXMyjG/zX8nd8cAbjQJT2EDTH64qSvY
- +lR3srQCvxfkQYYqZd4HpZq0bk6u4nlqYhFw1k2B37MdVmqVO9teyHUwclVu6RR7bZFog/qC
- FmX89xXNLjVasPoFFkdeFgsYuiZjKxGnzDT6bI+IVng5T8x972CCB0AMx6JgS1bDb10LIJ6n
- rtx5J9Is1Sy2kgwL9KLriFI7GDdfHUPXpIuuoweHIK22BEgzUtPYMCEByL7iH1Vhw6g7qX+z
- ueouZf/
-IronPort-HdrOrdr: A9a23:YzSfE6ljPtNM2bxtlocEAke+QtfpDfIW3DAbv31ZSRFFG/Fxl6
- iV/cjzsiWE8Qr5OUtQ4uxoV5PwIk80maQb3WBVB8bHYOCEghrPEGgB1/qB/9SIIUSXnYQxuZ
- uIMZIOb+EYZWIK9foSizPZLz9P+re6GdiT9ILj80s=
+IronPort-Data: A9a23:7ljUfaiBYtUcWl1AmEunBh4yX1615BcKZh0ujC45NGQN5FlHY01je
+ htvWGyAPPzbZWuhf99xbdu1o08H6JSBmIc1QARv+XtkFyIb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29Yy24Dja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /1D7t+pTToxZ5fqt707Cj1RFSBhMqNvreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHvPYVZvnB95TrYEewnUdbIRKCiCdpwgWpg3p8UQKq2i
+ 8wxWGssbAnGOExzGVoFJ88En+KlnVTSfGgNwL6SjfVuuDWCpOBr65D2K8bccNGOQcRTn26bq
+ 3jA8mC/BQsVXPSd1D6E/3SEluLJ2yThV+o6C7mQ5vNsxlqJyQQ7GBAQEFe2v/S9okq/QM5Eb
+ VwZ/DI0qqo//1DtScPyNzW5v3ysrhMaQ8BXEeAx9EeK0KW8ywSTC3UATzVBQMc7r8JwTjsvv
+ mJlhPuwW2Yp6ufMDyvAqPHE9lteJBT5M0cMPmwdSTYduuPFj9gV1zbGSNd8H6Cc24id9S7L/
+ xiGqy03hrM2hMEN1rmm8V2vvw9AtqQlXSZuuV2JBjPNAhdRIdf/PdTxuAezAeNodd7BFjG8U
+ G44d99yBQzkJaqGkzCRW60zFbWt6uft3Nb00AM3QcdJG9hA/ReekWFsDNNWeBgB3iUsI2aBj
+ KrvVeV5vsM70JyCNvcfXm5JI552pZUM7Py8PhwuUvJAY4JqaCiM9zx0aEib0gjFyRZ3zfFjY
+ MjLKZ3xXB727JiLKhLsG4/xNpdwnkgDKZ77H8inn3xLL5LODJJqdVv1GATXNb1ohE91iA7U7
+ 8xeJ6O3J+Z3C4XDjt3s2ddLdzgidCFjbbiv8pA/XrPTc2JORTB6Y9eMkOxJRmCQt/kM/gs+1
+ irmAREwJZuWrSCvFDhmnVg6OeqxB84m8CpnVcHuVH7xs0UejU+UxP93X/MKkXMPrYSPFNZ4E
+ KsIfduuGPNKRmiV8jgRd8Cl/odjaA6qlUSFOC/8OGozeJtpRgro/N74f1SwqHlSX3Tv7cZu8
+ ae90g77QIYYQ1gwBsjhd//ynUi6umIQmbwuUhKQcMVTYkjl7KNjNzf10q0sO8gJJBianmma2
+ g+aDA02v+7Ip4NpotDFibrd99WiEvdkH1ocFG7etO7kOS7f92ul4IlBTOfXImyNCDKqoP2vP
+ LwHwev9PfsLmEdxn7B9S7s7n7gj49bPpqNBylg2Fnv8cFn2WKhrJWOL3JcTu/QVlKNZowa/R
+ mmG5sJeZeeSIMrgHVMceFglY+CE2a1GkzXe961ockDz5Ssx97ubS0RCeRKLjXUFfrdyNYokx
+ 8YnudIXtFPj2kZ7bI7eg3AG7XmII1wBT74j58MTD4LcgwY2zk1PPM7HASjs7ZDTM9hBPyHG+
+ NNPaHYuU1iE+nf/Tg==
+IronPort-HdrOrdr: A9a23:Rh3HMaB6h2VVMLvlHemW55DYdb4zR+YMi2TC1yhKKCC9Ffbo7/
+ xG/c5rrCMc5wxhO03I9eruBEDEewK5yXcX2/h2AV7BZniFhILAFugLhuGOrwEIWReOkdK1vZ
+ 0QCJSWY+eRMbEVt6jHCXGDYrMd/OU=
 X-IronPort-AV: E=Sophos;i="5.87,172,1631592000"; 
-   d="scan'208";a="55807252"
+   d="scan'208";a="55807254"
 From: Lin Liu <lin.liu@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Lin Liu <lin.liu@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
 	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 2/7] crypto/vmac: Simplify code with byteswap.h
-Date: Fri, 22 Oct 2021 10:47:23 +0000
-Message-ID: <97aca2e39ff1eefdab1e0b3440929958e4b99892.1634897942.git.lin.liu@citrix.com>
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 6/7] xen: Switch to byteswap.h
+Date: Fri, 22 Oct 2021 10:47:27 +0000
+Message-ID: <f5a79881bfdcef06aa950632250f551e0ec26458.1634897942.git.lin.liu@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1634897942.git.lin.liu@citrix.com>
 References: <cover.1634897942.git.lin.liu@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-This file has its own implementation of swap bytes. Clean up
-the code with xen/byteswap.h.
+Update to use byteswap.h to swap bytes.
 
-No functional change.
+No functional chagne.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
 ---
@@ -123,140 +123,292 @@ Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Julien Grall <julien@xen.org>
 Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
 ---
- xen/crypto/vmac.c | 76 ++---------------------------------------------
- 1 file changed, 3 insertions(+), 73 deletions(-)
+ xen/common/bitmap.c                |  2 +-
+ xen/common/gdbstub.c               |  2 +-
+ xen/common/libelf/libelf-private.h |  8 ++++----
+ xen/common/lz4/defs.h              |  2 +-
+ xen/common/lzo.c                   |  2 +-
+ xen/common/unlzo.c                 |  2 +-
+ xen/common/xz/private.h            |  4 ++--
+ xen/drivers/char/ehci-dbgp.c       |  2 +-
+ xen/include/asm-x86/msi.h          |  2 +-
+ xen/include/xen/bitmap.h           |  2 +-
+ xen/include/xen/device_tree.h      |  2 +-
+ xen/include/xen/unaligned.h        | 14 +++++++-------
+ xen/lib/divmod.c                   |  2 +-
+ 13 files changed, 23 insertions(+), 23 deletions(-)
 
-diff --git a/xen/crypto/vmac.c b/xen/crypto/vmac.c
-index 294dd16a52..acb4e015f5 100644
---- a/xen/crypto/vmac.c
-+++ b/xen/crypto/vmac.c
-@@ -8,6 +8,7 @@
+diff --git a/xen/common/bitmap.c b/xen/common/bitmap.c
+index 7d4551f782..be274ca04a 100644
+--- a/xen/common/bitmap.c
++++ b/xen/common/bitmap.c
+@@ -9,10 +9,10 @@
+ #include <xen/errno.h>
+ #include <xen/bitmap.h>
+ #include <xen/bitops.h>
++#include <xen/byteswap.h>
+ #include <xen/cpumask.h>
+ #include <xen/guest_access.h>
+ #include <xen/lib.h>
+-#include <asm/byteorder.h>
  
- /* start for Xen */
- #include <xen/init.h>
+ /*
+  * bitmaps provide an array of bits, implemented using an an
+diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
+index 848c1f4327..3c8ed52d6b 100644
+--- a/xen/common/gdbstub.c
++++ b/xen/common/gdbstub.c
+@@ -33,6 +33,7 @@
+ /* Resuming after we've stopped used to work, but more through luck
+    than any actual intention.  It doesn't at the moment. */
+ 
++#include <xen/byteswap.h>
+ #include <xen/lib.h>
+ #include <xen/spinlock.h>
+ #include <xen/serial.h>
+@@ -45,7 +46,6 @@
+ #include <xen/console.h>
+ #include <xen/errno.h>
+ #include <xen/delay.h>
+-#include <asm/byteorder.h>
+ 
+ /* Printk isn't particularly safe just after we've trapped to the
+    debugger. so avoid it. */
+diff --git a/xen/common/libelf/libelf-private.h b/xen/common/libelf/libelf-private.h
+index 47db679966..b7089cb31b 100644
+--- a/xen/common/libelf/libelf-private.h
++++ b/xen/common/libelf/libelf-private.h
+@@ -17,10 +17,10 @@
+ 
+ #ifdef __XEN__
+ 
++#include <xen/byteswap.h>
+ #include <xen/lib.h>
+ #include <xen/libelf.h>
+ #include <xen/softirq.h>
+-#include <asm/byteorder.h>
+ #include <public/elfnote.h>
+ 
+ /* we would like to use elf->log_callback but we can't because
+@@ -31,9 +31,9 @@
+    printk(fmt, ## args )
+ 
+ #define strtoull(str, end, base) simple_strtoull(str, end, base)
+-#define bswap_16(x) swab16(x)
+-#define bswap_32(x) swab32(x)
+-#define bswap_64(x) swab64(x)
++#define bswap_16(x) bswap16(x)
++#define bswap_32(x) bswap32(x)
++#define bswap_64(x) bswap64(x)
+ 
+ #else /* !__XEN__ */
+ 
+diff --git a/xen/common/lz4/defs.h b/xen/common/lz4/defs.h
+index 10609f5a53..1ce4476478 100644
+--- a/xen/common/lz4/defs.h
++++ b/xen/common/lz4/defs.h
+@@ -9,7 +9,7 @@
+  */
+ 
+ #ifdef __XEN__
+-#include <asm/byteorder.h>
++#include <xen/byteswap.h>
+ #include <asm/unaligned.h>
+ #else
+ 
+diff --git a/xen/common/lzo.c b/xen/common/lzo.c
+index a87c76dded..17be9675f4 100644
+--- a/xen/common/lzo.c
++++ b/xen/common/lzo.c
+@@ -96,7 +96,7 @@
+ 
+ #ifdef __XEN__
+ #include <xen/lib.h>
+-#include <asm/byteorder.h>
++#include <xen/byteswap.h>
+ #include <asm/unaligned.h>
+ #else
+ #define get_unaligned_le16(_p) (*(u16 *)(_p))
+diff --git a/xen/common/unlzo.c b/xen/common/unlzo.c
+index 74056778eb..f908d2a61f 100644
+--- a/xen/common/unlzo.c
++++ b/xen/common/unlzo.c
+@@ -33,7 +33,7 @@
+ #include <xen/lzo.h>
+ 
+ #ifdef __XEN__
+-#include <asm/byteorder.h>
++#include <xen/byteswap.h>
+ #include <asm/unaligned.h>
+ #else
+ 
+diff --git a/xen/common/xz/private.h b/xen/common/xz/private.h
+index 511343fcc2..647f9699a7 100644
+--- a/xen/common/xz/private.h
++++ b/xen/common/xz/private.h
+@@ -12,7 +12,7 @@
+ 
+ #ifdef __XEN__
+ #include <xen/kernel.h>
+-#include <asm/byteorder.h>
++#include <xen/byteswap.h>
+ #include <asm/unaligned.h>
+ #else
+ 
+@@ -28,7 +28,7 @@ static inline void put_unaligned_le32(u32 val, void *p)
+ 
+ #endif
+ 
+-#define get_le32(p) le32_to_cpup((const uint32_t *)(p))
++#define get_le32(p) le32_to_cpu(*(const uint32_t *)(p))
+ 
+ #define false 0
+ #define true 1
+diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
+index c893d246de..8412da1b11 100644
+--- a/xen/drivers/char/ehci-dbgp.c
++++ b/xen/drivers/char/ehci-dbgp.c
+@@ -5,13 +5,13 @@
+  * Linux; see the Linux source for authorship and copyrights.
+  */
+ 
++#include <xen/byteswap.h>
+ #include <xen/console.h>
+ #include <xen/delay.h>
+ #include <xen/errno.h>
+ #include <xen/param.h>
+ #include <xen/pci.h>
+ #include <xen/serial.h>
+-#include <asm/byteorder.h>
+ #include <asm/io.h>
+ #include <asm/fixmap.h>
+ #include <public/physdev.h>
+diff --git a/xen/include/asm-x86/msi.h b/xen/include/asm-x86/msi.h
+index e228b0f3f3..277375183c 100644
+--- a/xen/include/asm-x86/msi.h
++++ b/xen/include/asm-x86/msi.h
+@@ -1,9 +1,9 @@
+ #ifndef __ASM_MSI_H
+ #define __ASM_MSI_H
+ 
++#include <xen/byteswap.h>
+ #include <xen/cpumask.h>
+ #include <xen/pci.h>
+-#include <asm/byteorder.h>
+ #include <asm/hvm/vmx/vmcs.h>
+ 
+ /*
+diff --git a/xen/include/xen/bitmap.h b/xen/include/xen/bitmap.h
+index e9175ab54a..c44a1cb63c 100644
+--- a/xen/include/xen/bitmap.h
++++ b/xen/include/xen/bitmap.h
+@@ -229,7 +229,7 @@ static inline int bitmap_weight(const unsigned long *src, int nbits)
+ 	return __bitmap_weight(src, nbits);
+ }
+ 
+-#include <asm/byteorder.h>
++#include <xen/byteswap.h>
+ 
+ #ifdef __LITTLE_ENDIAN
+ #define BITMAP_MEM_ALIGNMENT 8
+diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
+index fd6cd00b43..4921e6b142 100644
+--- a/xen/include/xen/device_tree.h
++++ b/xen/include/xen/device_tree.h
+@@ -10,10 +10,10 @@
+ #ifndef __XEN_DEVICE_TREE_H__
+ #define __XEN_DEVICE_TREE_H__
+ 
+-#include <asm/byteorder.h>
+ #include <asm/device.h>
+ #include <public/xen.h>
+ #include <public/device_tree_defs.h>
++#include <xen/byteswap.h>
+ #include <xen/kernel.h>
+ #include <xen/string.h>
+ #include <xen/types.h>
+diff --git a/xen/include/xen/unaligned.h b/xen/include/xen/unaligned.h
+index 0a2b16d05d..8a9ec8a0ac 100644
+--- a/xen/include/xen/unaligned.h
++++ b/xen/include/xen/unaligned.h
+@@ -11,8 +11,8 @@
+ #define __XEN_UNALIGNED_H__
+ 
+ #ifdef __XEN__
 +#include <xen/byteswap.h>
  #include <xen/types.h>
+-#include <asm/byteorder.h>
+ #endif
+ 
+ #define get_unaligned(p) (*(p))
+@@ -20,7 +20,7 @@
+ 
+ static inline uint16_t get_unaligned_be16(const void *p)
+ {
+-	return be16_to_cpup(p);
++	return be16_to_cpu(*(uint16_t*)p);
+ }
+ 
+ static inline void put_unaligned_be16(uint16_t val, void *p)
+@@ -30,7 +30,7 @@ static inline void put_unaligned_be16(uint16_t val, void *p)
+ 
+ static inline uint32_t get_unaligned_be32(const void *p)
+ {
+-	return be32_to_cpup(p);
++	return be32_to_cpu(*(uint32_t*)p);
+ }
+ 
+ static inline void put_unaligned_be32(uint32_t val, void *p)
+@@ -40,7 +40,7 @@ static inline void put_unaligned_be32(uint32_t val, void *p)
+ 
+ static inline uint64_t get_unaligned_be64(const void *p)
+ {
+-	return be64_to_cpup(p);
++	return be64_to_cpu(*(uint64_t*)p);
+ }
+ 
+ static inline void put_unaligned_be64(uint64_t val, void *p)
+@@ -50,7 +50,7 @@ static inline void put_unaligned_be64(uint64_t val, void *p)
+ 
+ static inline uint16_t get_unaligned_le16(const void *p)
+ {
+-	return le16_to_cpup(p);
++	return le16_to_cpu(*(uint16_t*)p);
+ }
+ 
+ static inline void put_unaligned_le16(uint16_t val, void *p)
+@@ -60,7 +60,7 @@ static inline void put_unaligned_le16(uint16_t val, void *p)
+ 
+ static inline uint32_t get_unaligned_le32(const void *p)
+ {
+-	return le32_to_cpup(p);
++	return le32_to_cpu(*(uint32_t*)p);
+ }
+ 
+ static inline void put_unaligned_le32(uint32_t val, void *p)
+@@ -70,7 +70,7 @@ static inline void put_unaligned_le32(uint32_t val, void *p)
+ 
+ static inline uint64_t get_unaligned_le64(const void *p)
+ {
+-	return le64_to_cpup(p);
++	return le64_to_cpu(*(uint64_t*)p);
+ }
+ 
+ static inline void put_unaligned_le64(uint64_t val, void *p)
+diff --git a/xen/lib/divmod.c b/xen/lib/divmod.c
+index 0be6ccc700..dfc1129cfe 100644
+--- a/xen/lib/divmod.c
++++ b/xen/lib/divmod.c
+@@ -1,6 +1,6 @@
++#include <xen/byteswap.h>
  #include <xen/lib.h>
- #include <crypto/vmac.h>
-@@ -50,7 +51,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
-  * MUL64: 64x64->128-bit multiplication
-  * PMUL64: assumes top bits cleared on inputs
-  * ADD128: 128x128->128-bit addition
-- * GET_REVERSED_64: load and byte-reverse 64-bit word  
-  * ----------------------------------------------------------------------- */
+ #include <xen/types.h>
+-#include <asm/byteorder.h>
  
- /* ----------------------------------------------------------------------- */
-@@ -68,22 +68,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- 
- #define PMUL64 MUL64
- 
--#define GET_REVERSED_64(p)                                                \
--    ({uint64_t x;                                                         \
--     asm ("bswapq %0" : "=r" (x) : "0"(*(uint64_t *)(p))); x;})
--
--/* ----------------------------------------------------------------------- */
--#elif (__GNUC__ && __i386__)
--/* ----------------------------------------------------------------------- */
--
--#define GET_REVERSED_64(p)                                                \
--    ({ uint64_t x;                                                        \
--    uint32_t *tp = (uint32_t *)(p);                                       \
--    asm  ("bswap %%edx\n\t"                                               \
--          "bswap %%eax"                                                   \
--    : "=A"(x)                                                             \
--    : "a"(tp[1]), "d"(tp[0]));                                            \
--    x; })
- 
- /* ----------------------------------------------------------------------- */
- #elif (__GNUC__ && __ppc64__)
-@@ -103,37 +87,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- 
- #define PMUL64 MUL64
- 
--#define GET_REVERSED_64(p)                                                \
--    ({ uint32_t hi, lo, *_p = (uint32_t *)(p);                            \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(lo) : "b%"(0), "r"(_p) );  \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(hi) : "b%"(4), "r"(_p) );  \
--       ((uint64_t)hi << 32) | (uint64_t)lo; } )
--
--/* ----------------------------------------------------------------------- */
--#elif (__GNUC__ && (__ppc__ || __PPC__))
--/* ----------------------------------------------------------------------- */
--
--#define GET_REVERSED_64(p)                                                \
--    ({ uint32_t hi, lo, *_p = (uint32_t *)(p);                            \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(lo) : "b%"(0), "r"(_p) );  \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(hi) : "b%"(4), "r"(_p) );  \
--       ((uint64_t)hi << 32) | (uint64_t)lo; } )
--
--/* ----------------------------------------------------------------------- */
--#elif (__GNUC__ && (__ARMEL__ || __ARM__))
--/* ----------------------------------------------------------------------- */
--
--#define bswap32(v)                                                        \
--({ uint32_t tmp,out;                                                      \
--    asm volatile(                                                         \
--        "eor    %1, %2, %2, ror #16\n"                                    \
--        "bic    %1, %1, #0x00ff0000\n"                                    \
--        "mov    %0, %2, ror #8\n"                                         \
--        "eor    %0, %0, %1, lsr #8"                                       \
--    : "=r" (out), "=&r" (tmp)                                             \
--    : "r" (v));                                                           \
--    out;})
--
- /* ----------------------------------------------------------------------- */
- #elif _MSC_VER
- /* ----------------------------------------------------------------------- */
-@@ -154,11 +107,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
-         (rh) += (ih) + ((rl) < (_il));                               \
-     }
- 
--#if _MSC_VER >= 1300
--#define GET_REVERSED_64(p) _byteswap_uint64(*(uint64_t *)(p))
--#pragma intrinsic(_byteswap_uint64)
--#endif
--
- #if _MSC_VER >= 1400 && \
-     (!defined(__INTEL_COMPILER) || __INTEL_COMPILER >= 1000)
- #define MUL32(i1,i2)    (__emulu((uint32_t)(i1),(uint32_t)(i2)))
-@@ -219,24 +167,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
-     }
- #endif
- 
--#ifndef GET_REVERSED_64
--#ifndef bswap64
--#ifndef bswap32
--#define bswap32(x)                                                        \
--  ({ uint32_t bsx = (x);                                                  \
--      ((((bsx) & 0xff000000u) >> 24) | (((bsx) & 0x00ff0000u) >>  8) |    \
--       (((bsx) & 0x0000ff00u) <<  8) | (((bsx) & 0x000000ffu) << 24)); })
--#endif
--#define bswap64(x)                                                        \
--     ({ union { uint64_t ll; uint32_t l[2]; } w, r;                       \
--         w.ll = (x);                                                      \
--         r.l[0] = bswap32 (w.l[1]);                                       \
--         r.l[1] = bswap32 (w.l[0]);                                       \
--         r.ll; })
--#endif
--#define GET_REVERSED_64(p) bswap64(*(uint64_t *)(p)) 
--#endif
--
- /* ----------------------------------------------------------------------- */
- 
- #if (VMAC_PREFER_BIG_ENDIAN)
-@@ -247,9 +177,9 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
- 
- #if (VMAC_ARCH_BIG_ENDIAN)
- #  define get64BE(ptr) (*(uint64_t *)(ptr))
--#  define get64LE(ptr) GET_REVERSED_64(ptr)
-+#  define get64LE(ptr) bswap64(*(uint64_t *)(ptr))
- #else /* assume little-endian */
--#  define get64BE(ptr) GET_REVERSED_64(ptr)
-+#  define get64BE(ptr) bswap64(*(uint64_t *)(ptr))
- #  define get64LE(ptr) (*(uint64_t *)(ptr))
- #endif
- 
+ /*
+  * A couple of 64 bit operations ported from FreeBSD.
 -- 
 2.27.0
 
