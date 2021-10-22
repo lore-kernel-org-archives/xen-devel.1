@@ -2,51 +2,50 @@ Return-Path: <SRS0=pycK=PK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 292F0C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 06:49:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98E57C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 06:49:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E163560FE7
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 06:49:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E163560FE7
+	by mail.kernel.org (Postfix) with ESMTPS id 6CE6F60F50
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Oct 2021 06:49:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6CE6F60F50
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.214753.373505 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.214754.373522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mdoMb-0006Vu-7q; Fri, 22 Oct 2021 06:49:13 +0000
+	id 1mdoMf-00076H-Cj; Fri, 22 Oct 2021 06:49:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 214753.373505; Fri, 22 Oct 2021 06:49:13 +0000
+Received: by outflank-mailman (output) from mailman id 214754.373522; Fri, 22 Oct 2021 06:49:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mdoMb-0006Uu-0D; Fri, 22 Oct 2021 06:49:13 +0000
-Received: by outflank-mailman (input) for mailman id 214753;
- Fri, 22 Oct 2021 06:49:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mdoMf-000766-9T; Fri, 22 Oct 2021 06:49:17 +0000
+Received: by outflank-mailman (input) for mailman id 214754;
+ Fri, 22 Oct 2021 06:49:16 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=e5cR=PK=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mdoMa-0005uk-6I
- for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 06:49:12 +0000
+ id 1mdoMe-0005ue-DF
+ for xen-devel@lists.xenproject.org; Fri, 22 Oct 2021 06:49:16 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 25f39ae1-3304-11ec-83ad-12813bfff9fa;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d2eba9bc-ae27-4240-bf2d-f7c2d54967da;
  Fri, 22 Oct 2021 06:49:06 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id E3BC221990;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 5F30621987;
  Fri, 22 Oct 2021 06:49:05 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A440413AAD;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 27AD313AAD;
  Fri, 22 Oct 2021 06:49:05 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id AC3KJuFecmEIEwAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4MdyCOFecmEIEwAAMHmgww
  (envelope-from <jgross@suse.com>); Fri, 22 Oct 2021 06:49:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -59,53 +58,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 25f39ae1-3304-11ec-83ad-12813bfff9fa
+X-Inumbo-ID: d2eba9bc-ae27-4240-bf2d-f7c2d54967da
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1634885345; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=GAsfBSRBhYlwXE3GyHCt8Ao1r3itvvqFCqQg0v1jsus=;
-	b=SdSUM0FodxI8IXPl1XHMXJhVw3Me2pABjtUdj1hKPdqshPqCIsAAXZqsRZO1aUudUaxmtl
-	JuhtTn1OVnzf6RV7Te3zCJgEJIA3GyWHiKamnv57aSsq/rEENoQ9shSlnVgKz/g5U4u9/L
-	hCTdddL//8JOOmVeoYV+a8q+iqYfjdY=
+	bh=ZGFLBrnqymYc576QWcBAPp39DNchapbOqDccE+bC2B4=;
+	b=nPoFYAlsG8eI8QkyTtJ/jdrD187CIaKEB4Pi66VrVfFl0vcOszW9dWtjskMIuFJmaWrTGi
+	j5DMQGG6b282uRpPenKQornG6hFnM1Y1PwxQUDx58+8xV9Pkkwpo1qiiW0HR7Vfe9t76Zf
+	vrKs9+fZVIPp2gILTgfmowX+yujaT6s=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
+	linuxppc-dev@lists.ozlabs.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	alsa-devel@alsa-project.org
-Subject: [PATCH 5/5] xen: flag xen_snd_front to be not essential for system boot
-Date: Fri, 22 Oct 2021 08:48:00 +0200
-Message-Id: <20211022064800.14978-6-jgross@suse.com>
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jiri Slaby <jirislaby@kernel.org>
+Subject: [PATCH 3/5] xen: flag hvc_xen to be not essential for system boot
+Date: Fri, 22 Oct 2021 08:47:58 +0200
+Message-Id: <20211022064800.14978-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211022064800.14978-1-jgross@suse.com>
 References: <20211022064800.14978-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The Xen pv sound driver is not essential for booting. Set the respective
+The Xen pv console driver is not essential for boot. Set the respective
 flag.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- sound/xen/xen_snd_front.c | 1 +
+ drivers/tty/hvc/hvc_xen.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/sound/xen/xen_snd_front.c b/sound/xen/xen_snd_front.c
-index 2cb0a19be2b8..7be9fbcf788f 100644
---- a/sound/xen/xen_snd_front.c
-+++ b/sound/xen/xen_snd_front.c
-@@ -358,6 +358,7 @@ static struct xenbus_driver xen_driver = {
- 	.probe = xen_drv_probe,
- 	.remove = xen_drv_remove,
- 	.otherend_changed = sndback_changed,
-+	.not_essential = true;
+diff --git a/drivers/tty/hvc/hvc_xen.c b/drivers/tty/hvc/hvc_xen.c
+index f0bf01ea069a..71e0dd2c0ce5 100644
+--- a/drivers/tty/hvc/hvc_xen.c
++++ b/drivers/tty/hvc/hvc_xen.c
+@@ -522,6 +522,7 @@ static struct xenbus_driver xencons_driver = {
+ 	.remove = xencons_remove,
+ 	.resume = xencons_resume,
+ 	.otherend_changed = xencons_backend_changed,
++	.not_essential = true,
  };
+ #endif /* CONFIG_HVC_XEN_FRONTEND */
  
- static int __init xen_drv_init(void)
 -- 
 2.26.2
 
