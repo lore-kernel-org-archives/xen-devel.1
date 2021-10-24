@@ -1,44 +1,44 @@
-Return-Path: <SRS0=AoZ0=PL=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=GWB2=PM=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90D13C433EF
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Oct 2021 18:08:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E70FC433F5
+	for <xen-devel@archiver.kernel.org>; Sun, 24 Oct 2021 00:35:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3102060E9C
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Oct 2021 18:08:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3102060E9C
+	by mail.kernel.org (Postfix) with ESMTPS id 0429860EFE
+	for <xen-devel@archiver.kernel.org>; Sun, 24 Oct 2021 00:35:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0429860EFE
 Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.215433.374609 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.215450.374650 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1meLQh-0002Qb-Sp; Sat, 23 Oct 2021 18:07:39 +0000
+	id 1meRTo-0003Dw-Np; Sun, 24 Oct 2021 00:35:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 215433.374609; Sat, 23 Oct 2021 18:07:39 +0000
+Received: by outflank-mailman (output) from mailman id 215450.374650; Sun, 24 Oct 2021 00:35:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1meLQh-0002QU-Pp; Sat, 23 Oct 2021 18:07:39 +0000
-Received: by outflank-mailman (input) for mailman id 215433;
- Sat, 23 Oct 2021 18:07:39 +0000
+	id 1meRTo-0003Dp-Ko; Sun, 24 Oct 2021 00:35:16 +0000
+Received: by outflank-mailman (input) for mailman id 215450;
+ Sun, 24 Oct 2021 00:35:14 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1meLQg-0002QK-Vn; Sat, 23 Oct 2021 18:07:38 +0000
+ id 1meRTm-0003Dd-L0; Sun, 24 Oct 2021 00:35:14 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1meLQg-0004b2-N4; Sat, 23 Oct 2021 18:07:38 +0000
+ id 1meRTm-0003Fo-DL; Sun, 24 Oct 2021 00:35:14 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1meLQg-00064q-Bx; Sat, 23 Oct 2021 18:07:38 +0000
+ id 1meRTm-0004sd-3I; Sun, 24 Oct 2021 00:35:14 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1meLQg-0007nM-BU; Sat, 23 Oct 2021 18:07:38 +0000
+ id 1meRTm-0003vI-2l; Sun, 24 Oct 2021 00:35:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=znihICh2Xsvs/1HuayyOmktT9M7QZtK1NDq7SjXSkBg=; b=IUJZ2iaD7Es8/PscsqnSkkg3en
-	qOY8i7H+BwCHecQUVPVa3Z58ExH/GCgg9s3d5ZOAQxZ64+NvYlqaNEkZRpat6w3zcW2oCUnxdwqKW
-	gKvTglHTsIEmQfIevzbfvzXt0o156n47BsA9Zy7zTLcM/lRxYYZiYY+mfjtWs9oxff2Y=;
+	bh=gNcDCgDFAzlNvXgaTgPiGMZ6u7aQ+iWYNKHoKe3q1CA=; b=cUcO7gb5YvztvyUTslA/pw90c1
+	ojr7X3f8VzWyDk2ew7pXGzsk2Q+kXvPAFA8hzD5niZQVO5We9CCcuzxyI/QicQSQsCvEbbGPljcKn
+	cF6AFeSecsPrdhjyW3C6Oe91OSHKTxZNYXQlPnTgECRn/+mNS2pAGkd1vetJGAoyOmkc=;
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-165799-mainreport@xen.org>
+Message-ID: <osstest-165817-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [qemu-mainline test] 165799: regressions - FAIL
+Subject: [qemu-mainline test] 165817: regressions - FAIL
 X-Osstest-Failures:
     qemu-mainline:build-i386:xen-build:fail:regression
     qemu-mainline:build-i386-xsm:xen-build:fail:regression
@@ -133,10 +133,10 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     qemuu=50352cce138ef3b30c1cda28a4df68fff5da3202
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 23 Oct 2021 18:07:38 +0000
+Date: Sun, 24 Oct 2021 00:35:14 +0000
 
-flight 165799 qemu-mainline real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/165799/
+flight 165817 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/165817/
 
 Regressions :-(
 
@@ -214,9 +214,9 @@ version targeted for testing:
 baseline version:
  qemuu                50352cce138ef3b30c1cda28a4df68fff5da3202
 
-Last test of basis   165682  2021-10-19 21:09:14 Z    3 days
-Failing since        165694  2021-10-20 18:09:12 Z    2 days    7 attempts
-Testing same since   165799  2021-10-23 02:04:24 Z    0 days    1 attempts
+Last test of basis   165682  2021-10-19 21:09:14 Z    4 days
+Failing since        165694  2021-10-20 18:09:12 Z    3 days    8 attempts
+Testing same since   165799  2021-10-23 02:04:24 Z    0 days    2 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
