@@ -2,42 +2,51 @@ Return-Path: <SRS0=xOjs=PN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 21565C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Oct 2021 01:26:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D751C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Oct 2021 05:16:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D1BE460E96
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Oct 2021 01:26:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D1BE460E96
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id F159460F92
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Oct 2021 05:16:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org F159460F92
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.215616.374925 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.215634.374952 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1meokV-0002V2-6p; Mon, 25 Oct 2021 01:26:03 +0000
+	id 1mesKt-0007GF-UJ; Mon, 25 Oct 2021 05:15:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 215616.374925; Mon, 25 Oct 2021 01:26:03 +0000
+Received: by outflank-mailman (output) from mailman id 215634.374952; Mon, 25 Oct 2021 05:15:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1meokV-0002Uv-3r; Mon, 25 Oct 2021 01:26:03 +0000
-Received: by outflank-mailman (input) for mailman id 215616;
- Mon, 25 Oct 2021 01:26:01 +0000
+	id 1mesKt-0007G7-OX; Mon, 25 Oct 2021 05:15:51 +0000
+Received: by outflank-mailman (input) for mailman id 215634;
+ Mon, 25 Oct 2021 05:15:51 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9eqc=PN=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1meokT-0002Ul-G0
- for xen-devel@lists.xenproject.org; Mon, 25 Oct 2021 01:26:01 +0000
-Received: from mail-qk1-x72b.google.com (unknown [2607:f8b0:4864:20::72b])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=cRlh=PN=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1mesKt-0007G1-FS
+ for xen-devel@lists.xenproject.org; Mon, 25 Oct 2021 05:15:51 +0000
+Received: from smtp-out2.suse.de (unknown [195.135.220.29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dc59fe92-a2c6-486b-9e83-df967df2cc64;
- Mon, 25 Oct 2021 01:26:00 +0000 (UTC)
-Received: by mail-qk1-x72b.google.com with SMTP id h20so10227437qko.13
- for <xen-devel@lists.xenproject.org>; Sun, 24 Oct 2021 18:26:00 -0700 (PDT)
-Received: from shine.lan ([2001:470:8:67e:51e0:9342:22f6:f52e])
- by smtp.gmail.com with ESMTPSA id r186sm7786376qkf.128.2021.10.24.18.25.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Oct 2021 18:26:00 -0700 (PDT)
+ id 07f8dff7-192b-4f86-809a-29632ae868ab;
+ Mon, 25 Oct 2021 05:15:50 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 905111FD34;
+ Mon, 25 Oct 2021 05:15:49 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 52EB713216;
+ Mon, 25 Oct 2021 05:15:49 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 559qEoU9dmExXQAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 25 Oct 2021 05:15:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,120 +58,238 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dc59fe92-a2c6-486b-9e83-df967df2cc64
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=VTEYBOVFC48ADDa8N43omwk7puK0joc4PFn0uiGMRcg=;
-        b=jKwWtJj2+XorNlj49nPSke8a/Qft4zbyuljV+uV1cJ7UmjuQuKWRkIXvggCUofTGt2
-         fVLAFa4nO7JOjDgshLvnReog5af2DO50+AKqbFHsLrCtSaIDbdw/d+yolCFh41KxOSfN
-         JVrb5fOhJaDW0VdpOkD29CdgWJIRr413QXPcsaa21SPYZeWR1awOiKVnY5bYaAwYT63e
-         bcdon+VyuSQ/O2n5n6MdhWxvzdZFckaSws/nc0JIcHPY8GX9nTah8n3p2z6eDL8M3BFF
-         ZdhsE+C9QKoA/Bmsq03tfGHaljFw1Onk2KR26sai4r2EtPJtDmHiT1O6XklkU9XdFD90
-         +Usw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=VTEYBOVFC48ADDa8N43omwk7puK0joc4PFn0uiGMRcg=;
-        b=aQZbhqCZ2MqMlH3UI+2XdjpPlml9Zy5rq/kdZ2R/df8E+4cNQdjd5hlmlOt/T6QJG/
-         488rcavU2utXWRnCiV8ZqLqlPtzt2ICWnGEjlBtmCTi+V7D8E5imWpOaJU90aGCO+n4o
-         UzfmJVRmBX8r4Z3B1If9SzSFzvUt2o1YE9uGJhJxEOWWxfqsjp4nlv+wF4ZhyUgZekWa
-         puHpB3VPM87aTc6H0TjSDS8zcywsEX9NxnW0Yi0M1vmHye9tDtM7n2FlBAFFi6lKaVLd
-         TFll+Wbpj/SeTh7JypYjMJ2LcX0EcffuAcDP6KYJpgg+3wufZAO5dakmLCTABL8vrXLD
-         PRVA==
-X-Gm-Message-State: AOAM530OuME6GMthHu8hlAtPXxLuz4XwU8PjF3SozK7BOWqckzaUv53v
-	gJVgs43jUMP5+wysGcvNZG0=
-X-Google-Smtp-Source: ABdhPJxdhx9YsyD2piku1kRFpYGiExJbAde47xpWYo9zrILaPmf8HpF05Y/EzU1HwylCgQrMbg2KWQ==
-X-Received: by 2002:a05:620a:45a3:: with SMTP id bp35mr11126547qkb.262.1635125160419;
-        Sun, 24 Oct 2021 18:26:00 -0700 (PDT)
-From: Jason Andryuk <jandryuk@gmail.com>
-To: josef@oderland.se
-Cc: boris.ostrovsky@oracle.com,
-	helgaas@kernel.org,
-	jandryuk@gmail.com,
-	jgross@suse.com,
-	linux-pci@vger.kernel.org,
-	maz@kernel.org,
-	tglx@linutronix.de,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH] PCI/MSI: Fix masking MSI/MSI-X on Xen PV
-Date: Sun, 24 Oct 2021 21:25:03 -0400
-Message-Id: <20211025012503.33172-1-jandryuk@gmail.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <90277228-cf14-0cfa-c95e-d42e7d533353@oderland.se>
-References: <90277228-cf14-0cfa-c95e-d42e7d533353@oderland.se>
+X-Inumbo-ID: 07f8dff7-192b-4f86-809a-29632ae868ab
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1635138949; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=VkF58/O6rMYF7w+fW/mhWpG2ZdamDJNVtN8YuYc72cg=;
+	b=trXnJpxG4YHOaOfig3UEvtz/gDmvOKfizZpWTqhTdPW71rudV5rXfOUhEwgjQH8HyAcROU
+	hnn5eSSIOMZlgUkGQXnUgrXPJcw8LazOcxcZmrqMO6LZGMArkgJSRnZLOm3uUcHRsysN96
+	IoBqP09vTVEnrZ8JK2mPa0+pmf32ylo=
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, iwj@xenproject.org, cardoe@cardoe.com,
+ wl@xen.org, anthony.perard@citrix.com,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
+References: <alpine.DEB.2.21.2110210831470.2311@sstabellini-ThinkPad-T480s>
+ <20211021230839.10794-2-sstabellini@kernel.org>
+ <19aa9196-eb5f-22a1-206c-c9c87ee79fa9@citrix.com>
+ <alpine.DEB.2.21.2110221219300.2311@sstabellini-ThinkPad-T480s>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 2/3] automation: Linux 5.10.74 test-artifact
+Message-ID: <d559b765-9e38-00bd-039b-9c33845b8e54@suse.com>
+Date: Mon, 25 Oct 2021 07:15:48 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <alpine.DEB.2.21.2110221219300.2311@sstabellini-ThinkPad-T480s>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="nbcqAfpKddhmkMvvlZ0yEvivxsSipFDjd"
 
-commit fcacdfbef5a1 ("PCI/MSI: Provide a new set of mask and unmask
-functions") introduce functions pci_msi_update_mask() and
-pci_msix_write_vector_ctrl() that is missing checks for
-pci_msi_ignore_mask that exists in commit 446a98b19fd6 ("PCI/MSI: Use
-new mask/unmask functions").  The checks are in place at the high level
-__pci_msi_mask_desc()/__pci_msi_unmask_desc(), but some functions call
-directly to the helpers.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--nbcqAfpKddhmkMvvlZ0yEvivxsSipFDjd
+Content-Type: multipart/mixed; boundary="bWDib4N95X55xsvAnbHvayXog9ReJuXwW";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, iwj@xenproject.org, cardoe@cardoe.com,
+ wl@xen.org, anthony.perard@citrix.com,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
+Message-ID: <d559b765-9e38-00bd-039b-9c33845b8e54@suse.com>
+Subject: Re: [PATCH 2/3] automation: Linux 5.10.74 test-artifact
+References: <alpine.DEB.2.21.2110210831470.2311@sstabellini-ThinkPad-T480s>
+ <20211021230839.10794-2-sstabellini@kernel.org>
+ <19aa9196-eb5f-22a1-206c-c9c87ee79fa9@citrix.com>
+ <alpine.DEB.2.21.2110221219300.2311@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2110221219300.2311@sstabellini-ThinkPad-T480s>
 
-Push the pci_msi_ignore_mask check down to the functions that make
-the actual writes.  This keeps the logic local to the writes that need
-to be bypassed.
+--bWDib4N95X55xsvAnbHvayXog9ReJuXwW
+Content-Type: multipart/mixed;
+ boundary="------------4A24964856533E683D482D35"
+Content-Language: en-US
 
-With Xen PV, the hypervisor is responsible for masking and unmasking the
-interrupts, which pci_msi_ignore_mask is used to indicate.
+This is a multi-part message in MIME format.
+--------------4A24964856533E683D482D35
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-This change avoids lockups in amdgpu drivers under Xen during boot.
+On 22.10.21 21:41, Stefano Stabellini wrote:
+> +Juergen
+>=20
+> On Fri, 22 Oct 2021, Andrew Cooper wrote:
+>> On 22/10/2021 00:08, Stefano Stabellini wrote:
+>>> +# build depends
+>>> +RUN apt-get update && \
+>>> +    apt-get --quiet --yes install \
+>>> +        build-essential \
+>>> +        libssl-dev \
+>>> +        bc \
+>>> +        curl \
+>>> +        flex \
+>>> +        bison \
+>>> +        libelf-dev \
+>>> +        && \
+>>> +    \
+>>> +    # Build the kernel
+>>> +    curl -fsSLO https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-"=
+$LINUX_VERSION".tar.xz && \
+>>> +    tar xvJf linux-"$LINUX_VERSION".tar.xz && \
+>>> +    cd linux-"$LINUX_VERSION" && \
+>>> +    make defconfig && \
+>>> +    make xen.config && \
+>>> +    cp .config .config.orig && \
+>>> +    cat .config.orig | grep XEN | grep =3Dm |sed 's/=3Dm/=3Dy/g' >> =
+=2Econfig && \
+>>> +    make -j$(nproc) bzImage && \
+>>
+>> defconfig is huuuuge.=C2=A0 Can we use tinyconfig instead?
+>>
+>> Also, you want to turn off CONFIG_MODULES seeing as you only copy
+>> bzImage to the test.
+>>
+>> This also fixes the fact that `grep XEN` also matches CONFIG_NETXEN_NI=
+C
+>> which has nothing to do with Xen.
+>=20
+> Tinyconfig would be a good idea but it crashes on QEMU with the appende=
+d
+> boot log. I did:
+>=20
+> # make tinyconfig
+> # make xen.config
+> # make bzImage
+>=20
+> Of course we could have our own tailored special kernel config for this=
 
-Fixes: commit 446a98b19fd6 ("PCI/MSI: Use new mask/unmask functions")
-Reported-by: Josef Johansson <josef@oderland.se>
-Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
----
- drivers/pci/msi.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+> kernel but I like the simplicify of "make tinyconfig" or "make
+> defconfig" followed by "make xen.config".
+>=20
+> Unless you know one kconfig option or two that we need to add to
+> tinyconfig to make it work my preference is to go with defconfig for
+> now.
 
-diff --git a/drivers/pci/msi.c b/drivers/pci/msi.c
-index 4b4792940e86..478536bafc39 100644
---- a/drivers/pci/msi.c
-+++ b/drivers/pci/msi.c
-@@ -148,6 +148,9 @@ static noinline void pci_msi_update_mask(struct msi_desc *desc, u32 clear, u32 s
- 	raw_spinlock_t *lock = &desc->dev->msi_lock;
- 	unsigned long flags;
- 
-+	if (pci_msi_ignore_mask)
-+		return;
-+
- 	raw_spin_lock_irqsave(lock, flags);
- 	desc->msi_mask &= ~clear;
- 	desc->msi_mask |= set;
-@@ -181,6 +184,9 @@ static void pci_msix_write_vector_ctrl(struct msi_desc *desc, u32 ctrl)
- {
- 	void __iomem *desc_addr = pci_msix_desc_addr(desc);
- 
-+	if (pci_msi_ignore_mask)
-+		return;
-+
- 	writel(ctrl, desc_addr + PCI_MSIX_ENTRY_VECTOR_CTRL);
- }
- 
-@@ -200,7 +206,7 @@ static inline void pci_msix_unmask(struct msi_desc *desc)
- 
- static void __pci_msi_mask_desc(struct msi_desc *desc, u32 mask)
- {
--	if (pci_msi_ignore_mask || desc->msi_attrib.is_virtual)
-+	if (desc->msi_attrib.is_virtual)
- 		return;
- 
- 	if (desc->msi_attrib.is_msix)
-@@ -211,7 +217,7 @@ static void __pci_msi_mask_desc(struct msi_desc *desc, u32 mask)
- 
- static void __pci_msi_unmask_desc(struct msi_desc *desc, u32 mask)
- {
--	if (pci_msi_ignore_mask || desc->msi_attrib.is_virtual)
-+	if (desc->msi_attrib.is_virtual)
- 		return;
- 
- 	if (desc->msi_attrib.is_msix)
--- 
-2.30.2
+You will need to add the dom0 and SMP related config options at least.
 
+I'll have a look at config.xen, which is a little bit weird: it
+configures the backends, but not dom0.
+
+
+Juergen
+
+--------------4A24964856533E683D482D35
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------4A24964856533E683D482D35--
+
+--bWDib4N95X55xsvAnbHvayXog9ReJuXwW--
+
+--nbcqAfpKddhmkMvvlZ0yEvivxsSipFDjd
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmF2PYQFAwAAAAAACgkQsN6d1ii/Ey9o
+Zgf/ccrmkzM8R+wIcL6v65HmdsC64c/O5bYVeqxcFMgd18f8G0NR8ivFtgGDdwGj3Lzdc2+4yz8n
+QspwQAFbcYKJq20oj+VmPHY5NdT7Zn0OiqtyDGm67epkrLMmxU0zL+vwvBrwWJh9WZCDG/AhjENI
+bpR8VKKA4LAQ6RsOUiAvu/rD1eJ7TD9BdQ/43041b5XGgw9lS46woRXWqMm5UR+QWHtF9PzdoeoU
+RV5qBIkT+0C6bKmfZnOFqeberKnUlI4sDTe9uiqMHZh2vVxRV6sQGQD6GTUEJ4MUKi0NSVDG2r9c
+Z2i5UAiB0h3WvVuhtWIdWcH0YePlhquywkqkIZHCOw==
+=RdfD
+-----END PGP SIGNATURE-----
+
+--nbcqAfpKddhmkMvvlZ0yEvivxsSipFDjd--
 
