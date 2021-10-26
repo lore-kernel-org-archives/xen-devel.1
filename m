@@ -2,42 +2,42 @@ Return-Path: <SRS0=UA04=PO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2F2EC433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:08:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F94EC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:09:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BD79360EB9
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:08:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BD79360EB9
+	by mail.kernel.org (Postfix) with ESMTPS id 5433F60527
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:09:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5433F60527
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.216525.376162 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.216530.376173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfOzw-0002zh-J4; Tue, 26 Oct 2021 16:08:24 +0000
+	id 1mfP0X-0003bw-Rn; Tue, 26 Oct 2021 16:09:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 216525.376162; Tue, 26 Oct 2021 16:08:24 +0000
+Received: by outflank-mailman (output) from mailman id 216530.376173; Tue, 26 Oct 2021 16:09:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfOzw-0002za-Fu; Tue, 26 Oct 2021 16:08:24 +0000
-Received: by outflank-mailman (input) for mailman id 216525;
- Tue, 26 Oct 2021 16:08:23 +0000
+	id 1mfP0X-0003bp-Og; Tue, 26 Oct 2021 16:09:01 +0000
+Received: by outflank-mailman (input) for mailman id 216530;
+ Tue, 26 Oct 2021 16:09:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gydQ=PO=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1mfOzu-0002xh-VM
- for xen-devel@lists.xenproject.org; Tue, 26 Oct 2021 16:08:22 +0000
-Received: from mail-ed1-x52a.google.com (unknown [2a00:1450:4864:20::52a])
+ id 1mfP0W-0003bh-LI
+ for xen-devel@lists.xenproject.org; Tue, 26 Oct 2021 16:09:00 +0000
+Received: from mail-ed1-x52e.google.com (unknown [2a00:1450:4864:20::52e])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 43f52045-a0c7-41f1-a812-8143ae00020a;
- Tue, 26 Oct 2021 16:08:20 +0000 (UTC)
-Received: by mail-ed1-x52a.google.com with SMTP id w12so9829486edd.11
- for <xen-devel@lists.xenproject.org>; Tue, 26 Oct 2021 09:08:20 -0700 (PDT)
+ id 67cf74b4-1946-45ed-bd74-b4d35ecfedcc;
+ Tue, 26 Oct 2021 16:08:59 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id g8so14517461edb.2
+ for <xen-devel@lists.xenproject.org>; Tue, 26 Oct 2021 09:08:59 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id eu9sm4025195ejc.14.2021.10.26.09.05.18
+ by smtp.gmail.com with ESMTPSA id eu9sm4025195ejc.14.2021.10.26.09.05.20
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 26 Oct 2021 09:05:19 -0700 (PDT)
+ Tue, 26 Oct 2021 09:05:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,32 +49,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43f52045-a0c7-41f1-a812-8143ae00020a
+X-Inumbo-ID: 67cf74b4-1946-45ed-bd74-b4d35ecfedcc
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=bAVBWRDZRgubnRSuBYCl4clj0aVWREQm4G5cX+KG1p4=;
-        b=IRDZVkn1hy6HTn6NCAY05VCjxdq5sZSzZ/zhkxVxmJgo79/McEOL3/iJ/d1r//8JgI
-         35NahJ8ril6M+lshDWp+3AU6poeOYlGjmAXVxV0JB2UQL7Ghwxjz0h0vXbMxSRi3nhiv
-         xwxv03QLNDivyn9pXc3PkfJSCC6JURlI+0JbfKbO1J8bMFt2GGA5kOsgNU/HTwVxY80e
-         9OfKFDdZSXoFBP4DwuPaGMAnk0jS7qW24jrn7NgJDPscT59nn5Lffb/EvmJKmH2fJObN
-         kWg+uYQvl2aryBOblgagD4nMXooTtyuPn5IHQ4xv843vNj1zyR3C10vYR4P6CImPG352
-         f1Tg==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=LFIfrPhDzMtnbpEZVPATV5Kch9wCoKpxpC7Ie87gFbI=;
+        b=bs16QmQOkeJH5M96StGB5D0kKi6yFSOn6Bb9Z1JxuWPs8n7m9DKoVvOrnj02v/zFzP
+         xDOoHIzz+zeajJzCemByRC4cUhlUVLJVjRbHpcKMUnYABP7tE+tsTgFM1I0SHu8abRc8
+         ODiLRcwwLBdfek+yo1znmX1Q9TEwfSC5fNtbn5wv1OaBbxTqRsgloUZ+TK0SbXmiGJc6
+         G1GHBYDlnnzrXk8efngJ4GTPAToixurpJzxE7zWSYia37K7y1+/QPLPRYdE4AahOmGMH
+         lbGNyaSdDwcEo4G2rc2sREnoAaA4RLoLBKyH/sIz8xNUN6PVFS8Z3UgSMF4X9vhzAjci
+         1gnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=bAVBWRDZRgubnRSuBYCl4clj0aVWREQm4G5cX+KG1p4=;
-        b=0i78pUflsEl7pzlfxFPdStbsQrVL6kr8arez70EYJwWG3nQVY2kTn2tZhD5bm7BazM
-         UlYcg/Dd2taH1LPdynCca96AyONRJzKlcwqRr+vQ129Zvs6VkvEiOYzpsV8zcLg3EB90
-         9PcDULkZw6KiI2oScNAn24erFZtq/vOXT4eGgpd85WEZq24wPx5s3fxmGNWluMGiEGa8
-         Bk0ges2X2v7WcS+q9VFPpns+EvWAHvNJUbgiKliFuf7RCN4vx12VL7Lin5RsaFXSht9B
-         8ZGMyJ8r+ZfbsSkeT7JQaj/N4ay1w4VI9ArQMokZfwn7wyggojuMJMj53OAcNfX2W73S
-         QKzg==
-X-Gm-Message-State: AOAM530EZfAsdexRZswoa7mzfgetOhCm1epuZGf5dToBkWREpctYcw1y
-	PC+whj9HcTX9jqiQire4uNjau3HI0Iw=
-X-Google-Smtp-Source: ABdhPJxtMgA2kyKQC10zrMOP8KtcHqswMqEj2qKkSjTogokVg/wr2Px2E1gCaIw0gu0zlXxwCQNP+g==
-X-Received: by 2002:a17:907:76cc:: with SMTP id kf12mr18527547ejc.228.1635264319752;
-        Tue, 26 Oct 2021 09:05:19 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=LFIfrPhDzMtnbpEZVPATV5Kch9wCoKpxpC7Ie87gFbI=;
+        b=iD7GNzZ9J4CcCOT7uKlTaknL4TGo9QEkv8fHTRCNXlueRUp7b3NYP98zjpcwm8rKqM
+         7/OQ6N+U+AcOWmjkYaLQtOimo1Vg0q9yJS+UC/A3YPM+83LHdJ5dhKYOVkan9rJ5GLA3
+         q1rbADx/HvaOypkCZ7GZjJl+iHmDZG0aFiW7iP/s6y2hOXv0Tmq+ifLCLLBWBxNy1drC
+         Oy/Jf93t+hKpqxzouB2Qc7ilkfs4b/DBm1ABNBoiCOzmgAXHyMMJDTJx7DbDSr01RmtN
+         bzIqI3Rq0xuAn6IaJatfea/6/9PZUbAWzm3JW+klCHf4nryFVDhwNUPKdhcETnXC2IYg
+         YZ2g==
+X-Gm-Message-State: AOAM5324Bq1qG31LYgn8t9hRwJg++0X139thanw3upylCuislM8VHTaS
+	ihg3xdyjPHSLBJPz2moDQWOQkuiHnwQ=
+X-Google-Smtp-Source: ABdhPJyDWvPDbHKN80B2wI0HUdKZkTQtxYSe3AhrmMT52rr89emWm0qnYTKAFM1mwoDlbefou8hA/Q==
+X-Received: by 2002:a05:6402:486:: with SMTP id k6mr11970130edv.315.1635264321080;
+        Tue, 26 Oct 2021 09:05:21 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org,
 	linux-arm-kernel@lists.infradead.org,
@@ -82,70 +83,127 @@ To: xen-devel@lists.xenproject.org,
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Russell King <linux@armlinux.org.uk>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Wei Chen <Wei.Chen@arm.com>,
-	Henry Wang <Henry.Wang@arm.com>
-Subject: [PATCH V2 0/4] xen: Add support of extended regions (safe ranges) on Arm
-Date: Tue, 26 Oct 2021 19:05:08 +0300
-Message-Id: <1635264312-3796-1-git-send-email-olekstysh@gmail.com>
+	Julien Grall <julien@xen.org>
+Subject: [PATCH V2 2/4] arm/xen: Switch to use gnttab_setup_auto_xlat_frames() for DT
+Date: Tue, 26 Oct 2021 19:05:10 +0300
+Message-Id: <1635264312-3796-3-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1635264312-3796-1-git-send-email-olekstysh@gmail.com>
+References: <1635264312-3796-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-You can find the RFC patch series at [1].
+Read the start address of the grant table space from DT
+(region 0).
 
-The corresponding Xen support (for both Dom0 and DomU) is already committed and
-is available in mainline Xen since the following commit:
-57f87857dc2de452a796d6bad4f476510efd2aba libxl/arm: Add handling of extended regions for DomU
+This patch mostly restores behaviour before commit 3cf4095d7446
+("arm/xen: Use xen_xlate_map_ballooned_pages to setup grant table")
+but trying not to break the ACPI support added after that commit.
+So the patch touches DT part only and leaves the ACPI part with
+xen_xlate_map_ballooned_pages().
 
-The extended region (safe range) is a region of guest physical address space
-which is unused and could be safely used to create grant/foreign mappings instead
-of ballooning out real RAM pages to obtain a physical address space for creating
-these mappings (which simply results in wasting domain memory and shattering super
-pages in P2M table).
+This is a preparation for using Xen extended region feature
+where unused regions of guest physical address space (provided
+by the hypervisor) will be used to create grant/foreign/whatever
+mappings instead of wasting real RAM pages from the domain memory
+for establishing these mappings.
 
-The problem is that we cannot follow Linux advise which memory ranges are unused
-on Arm as there might be some identity mappings in P2M table (stage 2) the guest is not
-aware of or not all device I/O regions might be known (registered) by the time the guest
-starts creating grant/foreign mappings. This is why we need some hints from the hypervisor
-which knows all details in advance to be able to choose extended regions (which won't
-clash with other resources).
+The immediate benefit of this change:
+- Avoid superpage shattering in Xen P2M when establishing
+  stage-2 mapping (GFN <-> MFN) for the grant table space
+- Avoid wasting real RAM pages (reducing the amount of memory
+  usuable) for mapping grant table space
+- The grant table space is always mapped at the exact
+  same place (region 0 is reserved for the grant table)
 
-The extended regions are chosen at the domain creation time and advertised to it via
-"reg" property under hypervisor node in the guest device-tree [2]. As region 0 is reserved
-for grant table space (always present), the indexes for extended regions are 1...N.
-No device tree bindings update is needed, guest infers the presence of extended regions
-from the number of regions in "reg" property.
-    
-Please note the following:
-- The ACPI case is not covered for now
-- patch series was created in a way to retain existing behavior on x86
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+---
+Changes RFC -> V2:
+   - new patch
+---
+ arch/arm/xen/enlighten.c | 32 +++++++++++++++++++++++++-------
+ 1 file changed, 25 insertions(+), 7 deletions(-)
 
-The patch series is based on v5.15-rc7 and also available at [3], it was fully
-tested on Arm64 and only compile tested on x86.
-
-[1] https://lore.kernel.org/all/1627490656-1267-1-git-send-email-olekstysh@gmail.com/
-    https://lore.kernel.org/all/1627490656-1267-2-git-send-email-olekstysh@gmail.com/
-
-[2] https://xenbits.xen.org/gitweb/?p=xen.git;a=blob_plain;f=docs/misc/arm/device-tree/guest.txt;hb=refs/heads/master
-
-[3] https://github.com/otyshchenko1/linux/commits/map_opt_ml5
-
-Oleksandr Tyshchenko (4):
-  xen/unpopulated-alloc: Drop check for virt_addr_valid() in fill_list()
-  arm/xen: Switch to use gnttab_setup_auto_xlat_frames() for DT
-  xen/unpopulated-alloc: Add mechanism to use Xen resource
-  arm/xen: Read extended regions from DT and init Xen resource
-
- arch/arm/xen/enlighten.c        | 144 ++++++++++++++++++++++++++++++++++++++--
- drivers/xen/Kconfig             |   2 +-
- drivers/xen/unpopulated-alloc.c |  90 +++++++++++++++++++++++--
- include/xen/xen.h               |   2 +
- 4 files changed, 226 insertions(+), 12 deletions(-)
-
+diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
+index 7f1c106b..dea46ec 100644
+--- a/arch/arm/xen/enlighten.c
++++ b/arch/arm/xen/enlighten.c
+@@ -59,6 +59,9 @@ unsigned long xen_released_pages;
+ struct xen_memory_region xen_extra_mem[XEN_EXTRA_MEM_MAX_REGIONS] __initdata;
+ 
+ static __read_mostly unsigned int xen_events_irq;
++static phys_addr_t xen_grant_frames;
++
++#define GRANT_TABLE_INDEX   0
+ 
+ uint32_t xen_start_flags;
+ EXPORT_SYMBOL(xen_start_flags);
+@@ -303,6 +306,7 @@ static void __init xen_acpi_guest_init(void)
+ static void __init xen_dt_guest_init(void)
+ {
+ 	struct device_node *xen_node;
++	struct resource res;
+ 
+ 	xen_node = of_find_compatible_node(NULL, NULL, "xen,xen");
+ 	if (!xen_node) {
+@@ -310,6 +314,12 @@ static void __init xen_dt_guest_init(void)
+ 		return;
+ 	}
+ 
++	if (of_address_to_resource(xen_node, GRANT_TABLE_INDEX, &res)) {
++		pr_err("Xen grant table region is not found\n");
++		return;
++	}
++	xen_grant_frames = res.start;
++
+ 	xen_events_irq = irq_of_parse_and_map(xen_node, 0);
+ }
+ 
+@@ -317,16 +327,20 @@ static int __init xen_guest_init(void)
+ {
+ 	struct xen_add_to_physmap xatp;
+ 	struct shared_info *shared_info_page = NULL;
+-	int cpu;
++	int rc, cpu;
+ 
+ 	if (!xen_domain())
+ 		return 0;
+ 
+ 	if (!acpi_disabled)
+ 		xen_acpi_guest_init();
+-	else
++	else {
+ 		xen_dt_guest_init();
+ 
++		if (!xen_grant_frames)
++			return -ENODEV;
++	}
++
+ 	if (!xen_events_irq) {
+ 		pr_err("Xen event channel interrupt not found\n");
+ 		return -ENODEV;
+@@ -370,12 +384,16 @@ static int __init xen_guest_init(void)
+ 	for_each_possible_cpu(cpu)
+ 		per_cpu(xen_vcpu_id, cpu) = cpu;
+ 
+-	xen_auto_xlat_grant_frames.count = gnttab_max_grant_frames();
+-	if (xen_xlate_map_ballooned_pages(&xen_auto_xlat_grant_frames.pfn,
+-					  &xen_auto_xlat_grant_frames.vaddr,
+-					  xen_auto_xlat_grant_frames.count)) {
++	if (!acpi_disabled) {
++		xen_auto_xlat_grant_frames.count = gnttab_max_grant_frames();
++		rc = xen_xlate_map_ballooned_pages(&xen_auto_xlat_grant_frames.pfn,
++										   &xen_auto_xlat_grant_frames.vaddr,
++										   xen_auto_xlat_grant_frames.count);
++	} else
++		rc = gnttab_setup_auto_xlat_frames(xen_grant_frames);
++	if (rc) {
+ 		free_percpu(xen_vcpu_info);
+-		return -ENOMEM;
++		return rc;
+ 	}
+ 	gnttab_init();
+ 
 -- 
 2.7.4
 
