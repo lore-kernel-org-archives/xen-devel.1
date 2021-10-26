@@ -2,42 +2,40 @@ Return-Path: <SRS0=UA04=PO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B96CBC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C157AC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:29:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6A23660EB9
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:09:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6A23660EB9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 81F0460527
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 16:29:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 81F0460527
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.216532.376184 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.216552.376201 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfP0r-00046L-4g; Tue, 26 Oct 2021 16:09:21 +0000
+	id 1mfPJh-0006kY-T5; Tue, 26 Oct 2021 16:28:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 216532.376184; Tue, 26 Oct 2021 16:09:21 +0000
+Received: by outflank-mailman (output) from mailman id 216552.376201; Tue, 26 Oct 2021 16:28:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfP0r-00046C-1b; Tue, 26 Oct 2021 16:09:21 +0000
-Received: by outflank-mailman (input) for mailman id 216532;
- Tue, 26 Oct 2021 16:09:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gydQ=PO=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1mfP0p-00044Y-RE
- for xen-devel@lists.xenproject.org; Tue, 26 Oct 2021 16:09:19 +0000
-Received: from mail-ed1-x52e.google.com (unknown [2a00:1450:4864:20::52e])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 55fdda75-b496-4e7c-a0d1-49ce389de717;
- Tue, 26 Oct 2021 16:09:18 +0000 (UTC)
-Received: by mail-ed1-x52e.google.com with SMTP id w15so15349871edc.9
- for <xen-devel@lists.xenproject.org>; Tue, 26 Oct 2021 09:09:18 -0700 (PDT)
-Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id eu9sm4025195ejc.14.2021.10.26.09.05.21
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 26 Oct 2021 09:05:21 -0700 (PDT)
+	id 1mfPJh-0006kR-P3; Tue, 26 Oct 2021 16:28:49 +0000
+Received: by outflank-mailman (input) for mailman id 216552;
+ Tue, 26 Oct 2021 16:28:48 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1mfPJg-0006js-JU
+ for xen-devel@lists.xenproject.org; Tue, 26 Oct 2021 16:28:48 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mfPJg-0004fJ-1v; Tue, 26 Oct 2021 16:28:48 +0000
+Received: from [54.239.6.189] (helo=[10.85.97.81])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mfPJf-0004uu-Rm; Tue, 26 Oct 2021 16:28:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,257 +47,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55fdda75-b496-4e7c-a0d1-49ce389de717
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=ajewXwLh6uwl+3oBu0hbZUbC19wx0AYb/I/F6COPjeM=;
-        b=U3N/q9FFvFCmmrpMt2cjbyrZGTWLI8aYWMuWlxVKon2BNKrVOdefe0pZcid+IOAgdh
-         IHy6lv/3TRCGg/Iqh7kmoF4Fg4rHa+NqfAzaz9wRaL6CVBUvECbpOFAZU6RJESEkB98/
-         Y5I9Oq4rdHccg0GEvwvD4whjflY43q2BjErpYMUBRbu2Lwf235S4qZ7o16ywxoHfpuxR
-         gx0iLhzdsYDcnbF20A2x+L0EFGx8biMJmfAr6ix03XlJ+JOMk21G6/ZtFcdflkylF4KG
-         uXX49KX7gu0kYMlocuPThS66RnoOFnmwRXxDBNs5db/f6mKW8ocFNgIKUqNmy+spVuvX
-         O8Dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=ajewXwLh6uwl+3oBu0hbZUbC19wx0AYb/I/F6COPjeM=;
-        b=EnLwzEueyJnZ75/e9Jeppm2GSc2emB2/KFKqGKEGMY0q3wFy0n6BgR6P/dOAdb6KdY
-         BFPIVpqvNyahbUwbHnzyZ70EDeoNeFLlHujjhMwzBfsKULPS35+d4/wSclq9M6okwSyv
-         3U0Yjbzn/FKAas1T8U4Hpm78Vsx1+199XKU1iLLSywndtcRV84xYL3J2CJNw51j/EJYN
-         8SUUxucipdvH9Q/5m7LUFhDOWx2GeZ9yq3TPLJquzg2DiEVkHH2xOM10+hVpaLene+HN
-         Nxt3I75Lm/mhC6pxdkJ4msE2zbK/jg62rTeNXGUv8whaUartQdXT/2wyC8CcuZQdMKBa
-         3vkg==
-X-Gm-Message-State: AOAM531wAKnK39rOE8RNL1qhqkFal5JtI6lLY8+ZTmOW0zFnCeFreAFx
-	P/WqcEuvvfS5ma7gOAu86S1yGghQ36M=
-X-Google-Smtp-Source: ABdhPJyrh0WP1ZENmH/Ydn3rieWDW8GYW8YWGEy1yCC5roMzqs86ACi1TObo2NcZ97xR3N7TTReTvQ==
-X-Received: by 2002:a05:6402:2808:: with SMTP id h8mr36760367ede.394.1635264321764;
-        Tue, 26 Oct 2021 09:05:21 -0700 (PDT)
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH V2 3/4] xen/unpopulated-alloc: Add mechanism to use Xen resource
-Date: Tue, 26 Oct 2021 19:05:11 +0300
-Message-Id: <1635264312-3796-4-git-send-email-olekstysh@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1635264312-3796-1-git-send-email-olekstysh@gmail.com>
-References: <1635264312-3796-1-git-send-email-olekstysh@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=Bx6kGXQIsK0qjZ+q2P/KQ6fNZkeu0jChjmrlYC7CoC0=; b=1bRM97NQIsT4qqt1f3PVisLPAO
+	h5hFBmKwYG2tv4/TyIg/5D22QpsqEdWoe8SJYFbdXb62gHihBRZuG9iWe1pMXOg5hEkf3jGKsr9GE
+	PijrUSO7Vkshl1/w2XIMZ4XjirGVD8Rn0lSLXw29xVxjBhQuRAFdFNunUs6JmC9KAHYA=;
+Message-ID: <e5632a4e-db98-41b4-1045-2b3532c098fa@xen.org>
+Date: Tue, 26 Oct 2021 17:28:45 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.1
+Subject: Re: [patch-4.16] arm/smmuv1,v2: Protect smmu master list with a lock
+To: Michal Orzel <michal.orzel@arm.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, bertrand.marquis@arm.com,
+ Ian Jackson <iwj@xenproject.org>
+References: <20211026122903.15042-1-michal.orzel@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20211026122903.15042-1-michal.orzel@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Hi Michal,
 
-The main reason of this change is that unpopulated-alloc
-code cannot be used in its current form on Arm, but there
-is a desire to reuse it to avoid wasting real RAM pages
-for the grant/foreign mappings.
+On 26/10/2021 13:29, Michal Orzel wrote:
+> If a device is added to SMMUv1/v2 from DT and PCI
+> at the same time, there is a concurrent access
+> to a smmu master list. This could lead to a
+> scenario where one is looking into a list that
+> is being modified at the same time. Add a lock
+> to prevent this issue.
 
-The problem is that system "iomem_resource" is used for
-the address space allocation, but the really unallocated
-space can't be figured out precisely by the domain on Arm
-without hypervisor involvement. For example, not all device
-I/O regions are known by the time domain starts creating
-grant/foreign mappings. And following the advise from
-"iomem_resource" we might end up reusing these regions by
-a mistake. So, the hypervisor which maintains the P2M for
-the domain is in the best position to provide unused regions
-of guest physical address space which could be safely used
-to create grant/foreign mappings.
+Did you intend to say "Hold" rather than "Add"?
 
-Introduce new helper arch_xen_unpopulated_init() which purpose
-is to create specific Xen resource based on the memory regions
-provided by the hypervisor to be used as unused space for Xen
-scratch pages.
+> 
+> Reuse the existing spinlock arm_smmu_devices_lock
+> as it is already protecting find_smmu_master.
+> 
+> ipmmu-smmu and smmuv3 are not impacted by this
+> issue as there is no access or modification of
+> a global resource during add_device.
+> 
+> Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+> ---
+> This patch aims for 4.16 release.
+> Benefits:
+> Remove a bug that could lead to a corruption of the
+> smmu master list, which would be very hard to debug.
 
-If arch doesn't implement arch_xen_unpopulated_init() to
-initialize Xen resource the default "iomem_resource" will be used.
-So the behavior on x86 won't be changed.
+ From my understanding, this corruption would only happen with 
+CONFIG_HAS_PCI. At the moment, this is a experimental feature as it is 
+not fully complete.
 
-Also fall back to allocate xenballooned pages (steal real RAM
-pages) if we do not have any suitable resource to work with and
-as the result we won't be able to provide unpopulated pages.
+> Risks:
+> Overall the risk is low as we are touching init code
+> rather than a runtime one. In case of any issue, the
+> problem would be catched during system boot or guest
+> start.
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
----
-Changes RFC -> V2:
-   - new patch, instead of
-    "[RFC PATCH 2/2] xen/unpopulated-alloc: Query hypervisor to provide unallocated space"
----
- drivers/xen/unpopulated-alloc.c | 89 +++++++++++++++++++++++++++++++++++++++--
- include/xen/xen.h               |  2 +
- 2 files changed, 88 insertions(+), 3 deletions(-)
+With the PCI feature enabled, this can be called at runtime as this 
+plumbed through a PHYSDEVOP. That said, it doesn't matter here as for 
+supported code (platform/DT device), this will only happen during boot.
 
-diff --git a/drivers/xen/unpopulated-alloc.c b/drivers/xen/unpopulated-alloc.c
-index a03dc5b..1f1d8d8 100644
---- a/drivers/xen/unpopulated-alloc.c
-+++ b/drivers/xen/unpopulated-alloc.c
-@@ -8,6 +8,7 @@
- 
- #include <asm/page.h>
- 
-+#include <xen/balloon.h>
- #include <xen/page.h>
- #include <xen/xen.h>
- 
-@@ -15,13 +16,29 @@ static DEFINE_MUTEX(list_lock);
- static struct page *page_list;
- static unsigned int list_count;
- 
-+static struct resource *target_resource;
-+static struct resource xen_resource = {
-+	.name = "Xen unused space",
-+};
-+
-+/*
-+ * If arch is not happy with system "iomem_resource" being used for
-+ * the region allocation it can provide it's own view by initializing
-+ * "xen_resource" with unused regions of guest physical address space
-+ * provided by the hypervisor.
-+ */
-+int __weak arch_xen_unpopulated_init(struct resource *res)
-+{
-+	return -ENOSYS;
-+}
-+
- static int fill_list(unsigned int nr_pages)
- {
- 	struct dev_pagemap *pgmap;
--	struct resource *res;
-+	struct resource *res, *tmp_res = NULL;
- 	void *vaddr;
- 	unsigned int i, alloc_pages = round_up(nr_pages, PAGES_PER_SECTION);
--	int ret = -ENOMEM;
-+	int ret;
- 
- 	res = kzalloc(sizeof(*res), GFP_KERNEL);
- 	if (!res)
-@@ -30,7 +47,7 @@ static int fill_list(unsigned int nr_pages)
- 	res->name = "Xen scratch";
- 	res->flags = IORESOURCE_MEM | IORESOURCE_BUSY;
- 
--	ret = allocate_resource(&iomem_resource, res,
-+	ret = allocate_resource(target_resource, res,
- 				alloc_pages * PAGE_SIZE, 0, -1,
- 				PAGES_PER_SECTION * PAGE_SIZE, NULL, NULL);
- 	if (ret < 0) {
-@@ -38,6 +55,31 @@ static int fill_list(unsigned int nr_pages)
- 		goto err_resource;
- 	}
- 
-+	/*
-+	 * Reserve the region previously allocated from Xen resource to avoid
-+	 * re-using it by someone else.
-+	 */
-+	if (target_resource != &iomem_resource) {
-+		tmp_res = kzalloc(sizeof(*tmp_res), GFP_KERNEL);
-+		if (!res) {
-+			ret = -ENOMEM;
-+			goto err_insert;
-+		}
-+
-+		tmp_res->name = res->name;
-+		tmp_res->start = res->start;
-+		tmp_res->end = res->end;
-+		tmp_res->flags = res->flags;
-+
-+		ret = insert_resource(&iomem_resource, tmp_res);
-+		if (ret < 0) {
-+			pr_err("Cannot insert IOMEM resource [%llx - %llx]\n",
-+			       tmp_res->start, tmp_res->end);
-+			kfree(tmp_res);
-+			goto err_insert;
-+		}
-+	}
-+
- 	pgmap = kzalloc(sizeof(*pgmap), GFP_KERNEL);
- 	if (!pgmap) {
- 		ret = -ENOMEM;
-@@ -95,12 +137,40 @@ static int fill_list(unsigned int nr_pages)
- err_memremap:
- 	kfree(pgmap);
- err_pgmap:
-+	if (tmp_res) {
-+		release_resource(tmp_res);
-+		kfree(tmp_res);
-+	}
-+err_insert:
- 	release_resource(res);
- err_resource:
- 	kfree(res);
- 	return ret;
- }
- 
-+static void unpopulated_init(void)
-+{
-+	static bool inited = false;
-+	int ret;
-+
-+	if (inited)
-+		return;
-+
-+	/*
-+	 * Try to initialize Xen resource the first and fall back to default
-+	 * resource if arch doesn't offer one.
-+	 */
-+	ret = arch_xen_unpopulated_init(&xen_resource);
-+	if (!ret)
-+		target_resource = &xen_resource;
-+	else if (ret == -ENOSYS)
-+		target_resource = &iomem_resource;
-+	else
-+		pr_err("Cannot initialize Xen resource\n");
-+
-+	inited = true;
-+}
-+
- /**
-  * xen_alloc_unpopulated_pages - alloc unpopulated pages
-  * @nr_pages: Number of pages
-@@ -112,6 +182,16 @@ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages)
- 	unsigned int i;
- 	int ret = 0;
- 
-+	unpopulated_init();
-+
-+	/*
-+	 * Fall back to default behavior if we do not have any suitable resource
-+	 * to allocate required region from and as the result we won't be able to
-+	 * construct pages.
-+	 */
-+	if (!target_resource)
-+		return alloc_xenballooned_pages(nr_pages, pages);
-+
- 	mutex_lock(&list_lock);
- 	if (list_count < nr_pages) {
- 		ret = fill_list(nr_pages - list_count);
-@@ -159,6 +239,9 @@ void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages)
- {
- 	unsigned int i;
- 
-+	if (!target_resource)
-+		return free_xenballooned_pages(nr_pages, pages);
-+
- 	mutex_lock(&list_lock);
- 	for (i = 0; i < nr_pages; i++) {
- 		pages[i]->zone_device_data = page_list;
-diff --git a/include/xen/xen.h b/include/xen/xen.h
-index 43efba0..55d2ef8 100644
---- a/include/xen/xen.h
-+++ b/include/xen/xen.h
-@@ -55,6 +55,8 @@ extern u64 xen_saved_max_mem_size;
- #ifdef CONFIG_XEN_UNPOPULATED_ALLOC
- int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages);
- void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages);
-+struct resource;
-+int arch_xen_unpopulated_init(struct resource *res);
- #else
- #define xen_alloc_unpopulated_pages alloc_xenballooned_pages
- #define xen_free_unpopulated_pages free_xenballooned_pages
+The patch looks straighforward, so I would not mind to have it in Xen 
+4.16. Ian, what do you think?
+
+> ---
+>   xen/drivers/passthrough/arm/smmu.c | 25 +++++++++++++++++++------
+>   1 file changed, 19 insertions(+), 6 deletions(-)
+> 
+> diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+> index c9dfc4caa0..be62a66a28 100644
+> --- a/xen/drivers/passthrough/arm/smmu.c
+> +++ b/xen/drivers/passthrough/arm/smmu.c
+> @@ -820,21 +820,25 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
+>   					 struct device *dev,
+>   					 struct iommu_fwspec *fwspec)
+>   {
+> -	int i;
+> +	int i, ret;
+>   	struct arm_smmu_master *master;
+>   	struct device_node *dev_node = dev_get_dev_node(dev);
+>   
+> +	spin_lock(&arm_smmu_devices_lock);
+>   	master = find_smmu_master(smmu, dev_node);
+>   	if (master) {
+>   		dev_err(dev,
+>   			"rejecting multiple registrations for master device %s\n",
+>   			dev_node->name);
+> -		return -EBUSY;
+> +		ret = -EBUSY;
+> +		goto out_unlock;
+>   	}
+>   
+>   	master = devm_kzalloc(dev, sizeof(*master), GFP_KERNEL);
+> -	if (!master)
+> -		return -ENOMEM;
+> +	if (!master) {
+> +		ret = -ENOMEM;
+> +		goto out_unlock;
+> +	}
+>   	master->of_node = dev_node;
+>   
+>   	/* Xen: Let Xen know that the device is protected by an SMMU */
+> @@ -846,11 +850,17 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
+>   			dev_err(dev,
+>   				"stream ID for master device %s greater than maximum allowed (%d)\n",
+>   				dev_node->name, smmu->num_mapping_groups);
+> -			return -ERANGE;
+> +			ret = -ERANGE;
+> +			goto out_unlock;
+>   		}
+>   		master->cfg.smendx[i] = INVALID_SMENDX;
+>   	}
+> -	return insert_smmu_master(smmu, master);
+> +
+> +	ret = insert_smmu_master(smmu, master);
+> +
+> +out_unlock:
+> +	spin_unlock(&arm_smmu_devices_lock);
+
+Please add a newline here.
+
+> +	return ret;
+>   }
+>   
+>   static int register_smmu_master(struct arm_smmu_device *smmu,
+> @@ -2056,7 +2066,10 @@ static int arm_smmu_add_device(struct device *dev)
+>   	} else {
+>   		struct arm_smmu_master *master;
+>   
+> +		spin_lock(&arm_smmu_devices_lock);
+>   		master = find_smmu_master(smmu, dev->of_node);
+> +		spin_unlock(&arm_smmu_devices_lock);
+
+At the moment, unlocking here is fine because we don't remove the 
+device. However, there are a series to supporting removing a device (see 
+[1]). So I think it would be preferable to unlock after the last use of 
+'cfg'.
+
+Looking at the code, I also noticed that the error path is not correct 
+for at least the PCI device and we would leak memory. We also assume 
+that Stream ID == Requester ID. Are both of them in your radar for PCI 
+passthrough?
+
+Cheers,
+
+[1] 
+https://lore.kernel.org/xen-devel/1630562763-390068-9-git-send-email-fnu.vikram@xilinx.com/
+
 -- 
-2.7.4
-
+Julien Grall
 
