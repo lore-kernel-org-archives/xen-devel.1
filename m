@@ -2,43 +2,40 @@ Return-Path: <SRS0=UA04=PO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B184C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 01:55:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4EE65C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 06:16:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2A86D60F9B
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 01:55:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 2A86D60F9B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0AF6A60EFF
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Oct 2021 06:16:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0AF6A60EFF
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.216187.375701 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.216199.375735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfBgJ-0005Zv-RV; Tue, 26 Oct 2021 01:55:15 +0000
+	id 1mfFkc-0004kO-D0; Tue, 26 Oct 2021 06:15:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 216187.375701; Tue, 26 Oct 2021 01:55:15 +0000
+Received: by outflank-mailman (output) from mailman id 216199.375735; Tue, 26 Oct 2021 06:15:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfBgJ-0005Zo-OH; Tue, 26 Oct 2021 01:55:15 +0000
-Received: by outflank-mailman (input) for mailman id 216187;
- Tue, 26 Oct 2021 01:55:14 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mfFkc-0004kG-8p; Tue, 26 Oct 2021 06:15:58 +0000
+Received: by outflank-mailman (input) for mailman id 216199;
+ Tue, 26 Oct 2021 03:27:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=izNm=PO=gmail.com=f.fainelli@srs-us1.protection.inumbo.net>)
- id 1mfBgI-0005Zi-G5
- for xen-devel@lists.xenproject.org; Tue, 26 Oct 2021 01:55:14 +0000
-Received: from mail-qk1-x72c.google.com (unknown [2607:f8b0:4864:20::72c])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9f2621b8-1156-4327-a1db-ae0b33138e89;
- Tue, 26 Oct 2021 01:55:13 +0000 (UTC)
-Received: by mail-qk1-x72c.google.com with SMTP id h20so13574813qko.13
- for <xen-devel@lists.xenproject.org>; Mon, 25 Oct 2021 18:55:13 -0700 (PDT)
-Received: from ?IPV6:2600:1700:dfe0:49f0:f0b4:bed7:bbf6:a2b1?
- ([2600:1700:dfe0:49f0:f0b4:bed7:bbf6:a2b1])
- by smtp.gmail.com with ESMTPSA id b2sm9291563qtg.88.2021.10.25.18.55.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Oct 2021 18:55:12 -0700 (PDT)
+ <SRS0=LJH3=PO=iscas.ac.cn=jiasheng@srs-us1.protection.inumbo.net>)
+ id 1mfD82-00064z-9H
+ for xen-devel@lists.xenproject.org; Tue, 26 Oct 2021 03:27:58 +0000
+Received: from cstnet.cn (unknown [159.226.251.25])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id b4a15a7e-360c-11ec-8423-12813bfff9fa;
+ Tue, 26 Oct 2021 03:27:55 +0000 (UTC)
+Received: from localhost.localdomain (unknown [124.16.138.128])
+ by APP-05 (Coremail) with SMTP id zQCowAAH6u61dXdhPPotBQ--.46973S2;
+ Tue, 26 Oct 2021 11:27:50 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,93 +47,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9f2621b8-1156-4327-a1db-ae0b33138e89
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=mCnwnbPbhYcrF9QBa5LUo8e7y29tVyuzmG2cawteQCA=;
-        b=olTS1hbEonbFLujA4x2P8XYUAvZ7BmbseWok6MxtRkkecckkwKz0CEcHcKTIFXqAD1
-         HysBjR0qkBfUHxMdYr2Xq5WICeG/B9+27ROdTcp0AvFcS0g4Panq/rOvWzZ2TmhkTOXG
-         lSJNmzpWOQeUmYVpALraWJDQWLuUknFeO6s2pGwmj3D2HA6DehAJ7vias+zNbYSCewk1
-         t7w4J7gvXmEP+Bv2hY6sasrL+NEZ/KwUlrLQqJNmU9pfR9B8LF4M7no6jIPjIBosEvfP
-         akouqDz9bsBhAcLG0UbstP7ZEIAFG1yuS2OO+gWrMUchRrdLVCvwNZPt4kSFnpe7FKZl
-         vh6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=mCnwnbPbhYcrF9QBa5LUo8e7y29tVyuzmG2cawteQCA=;
-        b=NGQ+cJx4EtJvG9JsZOEvBEda9brsrYr+0E8WChuTbFbETxjW9ofBeMnFgwdNuJKYYo
-         BQD9juRrDDdoKLxwrKfLkh8svDYLxJMxAT3/WUh8/w/S4fC1YKZt4XNiJ1dDwhm2jSTT
-         UKXe0LiShP2d4eVcLHGk8HQJ1Lh49L+9Z8YEWIl3I/8bkBXx21OfTDawED680pCDApGM
-         l721qDet6r0Q+zy78ZGwazxpnYDeBser0q8lASfBoV28eBjDB7p2oJa0bpznmbWP3KTt
-         ykaQQmDxfHklOXq7F8aZSDh6C4puQezgSxAbYnyF/FaD8++gCs2cK8NMz2AWXDTLAnOq
-         Tx0w==
-X-Gm-Message-State: AOAM531feOc3sBQ33VDB4SEwlYSW4Aq+WyIvOhK2zOhrgzBHvNELFz8k
-	5s5bWUpDbzb3q+tobdL32u8=
-X-Google-Smtp-Source: ABdhPJwolSe/hyU6zweo2PfHcxsIbYIwTjHsxR3G5XrXvY2VF2DpbOrilwEvBsvaMiIxs6LTirOehA==
-X-Received: by 2002:a05:620a:25ce:: with SMTP id y14mr4685253qko.66.1635213313158;
-        Mon, 25 Oct 2021 18:55:13 -0700 (PDT)
-Message-ID: <f0b28cb6-be34-9b78-844c-0913592fe5f9@gmail.com>
-Date: Mon, 25 Oct 2021 18:55:09 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.1
-Subject: Re: [RESEND 0/5] ARM/arm64: arm_pm_restart removal
-Content-Language: en-US
-To: Guenter Roeck <linux@roeck-us.net>, Dmitry Osipenko <digetx@gmail.com>,
- Lee Jones <lee.jones@linaro.org>, linux@armlinux.org.uk,
- catalin.marinas@arm.com, will@kernel.org, mark.rutland@arm.com,
- lorenzo.pieralisi@arm.com, sstabellini@kernel.org
-Cc: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- wsa+renesas@sang-engineering.com, treding@nvidia.com, arnd@arndb.de,
- xen-devel@lists.xenproject.org, patches@armlinux.org.uk
-References: <20210604140357.2602028-1-lee.jones@linaro.org>
- <526fe66f-df08-c873-2a20-f1295e30a855@gmail.com>
- <a4fe088f-0f13-f80f-5011-4eee2d44ef63@gmail.com>
- <321b167f-8744-9ca8-58b0-e09ff39dfa02@roeck-us.net>
-From: Florian Fainelli <f.fainelli@gmail.com>
-In-Reply-To: <321b167f-8744-9ca8-58b0-e09ff39dfa02@roeck-us.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: b4a15a7e-360c-11ec-8423-12813bfff9fa
+From: Jiasheng Jiang <jiasheng@iscas.ac.cn>
+To: boris.ostrovsky@oracle.com,
+	jgross@suse.com,
+	sstabellini@kernel.org
+Cc: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	Jiasheng Jiang <jiasheng@iscas.ac.cn>
+Subject: [PATCH] xen: Fix implicit type conversion
+Date: Tue, 26 Oct 2021 03:27:48 +0000
+Message-Id: <1635218868-2437564-1-git-send-email-jiasheng@iscas.ac.cn>
+X-Mailer: git-send-email 2.7.4
+X-CM-TRANSID:zQCowAAH6u61dXdhPPotBQ--.46973S2
+X-Coremail-Antispam: 1UD129KBjvdXoWruw18Xr43urW8Gr4Uuw43trb_yoWDtFbE9r
+	s0qr1xXrWvvF1qvayUKw4fZFW09w1xuayfXw1qg39xAw1Sqr47Xryjqr93Xw17GrWIyFsr
+	Zw17Xr1xAryUGjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbcAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+	A2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
+	Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
+	0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
+	6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
+	0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkIecxEwVAFwVW8
+	GwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r
+	1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij
+	64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr
+	0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_Jr0_Gr1l
+	IxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfU84SoDUUUU
+X-Originating-IP: [124.16.138.128]
+X-CM-SenderInfo: pmld2xxhqjqxpvfd2hldfou0/
 
+The variable 'i' is defined as UINT.
+However in the for_each_possible_cpu, its value is assigned to -1.
+That doesn't make sense and in the cpumask_next() it is implicitly
+type conversed to INT.
+It is universally accepted that the implicit type conversion is
+terrible.
+Also, having the good programming custom will set an example for
+others.
+Thus, it might be better to change the definition of 'i' from UINT
+to INT.
 
+Fixes: 3fac101 ("xen: Re-upload processor PM data to hypervisor after S3 resume (v2)")
+Signed-off-by: Jiasheng Jiang <jiasheng@iscas.ac.cn>
+---
+ drivers/xen/xen-acpi-processor.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 10/25/2021 6:02 PM, Guenter Roeck wrote:
-> On 10/25/21 4:55 PM, Dmitry Osipenko wrote:
->> 26.10.2021 02:29, Florian Fainelli пишет:
->>> On 6/4/21 7:03 AM, Lee Jones wrote:
->>>> This is a rebase/refresh of a set sent out, reviewed,
->>>> then forgotten about.  It's still considered useful.
->>>>
->>>> Here is an excerpt from the previous attempt:
->>>>
->>>>   "Hi Russell, ARM SoC maintainers,
->>>>
->>>>   here's the full set of patches that remove arm_pm_restart as 
->>>> discussed
->>>>   earlier. There's some background on the series in this thread:
->>>>
->>>>     https://lore.kernel.org/linux-arm-kernel/20170130110512.6943-1-thierry.reding@gmail.com/ 
->>>>
->>>>
->>>>   I also have a set of patches that build on top of this and try to add
->>>>   something slightly more formal by adding a power/reset framework that
->>>>   driver can register with. If we can get this series merged, I'll find
->>>>   some time to refresh those patches and send out for review again.
->>>
->>> What happened to this patch series? Is there any chance we will get it
->>> included at some point? It is included in the Android13-5.10 tree AFAICT
->>>
->>
->> It's in mainline since v5.14, AFAICS.
->>
-> 
-> Yes, indeed.
-
-Great, thanks!
+diff --git a/drivers/xen/xen-acpi-processor.c b/drivers/xen/xen-acpi-processor.c
+index df7cab8..2551691 100644
+--- a/drivers/xen/xen-acpi-processor.c
++++ b/drivers/xen/xen-acpi-processor.c
+@@ -518,7 +518,7 @@ static struct syscore_ops xap_syscore_ops = {
+ 
+ static int __init xen_acpi_processor_init(void)
+ {
+-	unsigned int i;
++	int i;
+ 	int rc;
+ 
+ 	if (!xen_initial_domain())
 -- 
-Florian
+2.7.4
+
 
