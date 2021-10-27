@@ -2,43 +2,40 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 33379C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 17:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1CB68C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 18:07:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F312560F92
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 17:57:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org F312560F92
-Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id D9E2A61040
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 18:07:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D9E2A61040
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217158.377029 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217166.377043 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfnAW-0003uT-1a; Wed, 27 Oct 2021 17:56:56 +0000
+	id 1mfnKN-0005WG-Tw; Wed, 27 Oct 2021 18:07:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217158.377029; Wed, 27 Oct 2021 17:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 217166.377043; Wed, 27 Oct 2021 18:07:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfnAV-0003uM-Uq; Wed, 27 Oct 2021 17:56:55 +0000
-Received: by outflank-mailman (input) for mailman id 217158;
- Wed, 27 Oct 2021 17:56:54 +0000
+	id 1mfnKN-0005W9-Pm; Wed, 27 Oct 2021 18:07:07 +0000
+Received: by outflank-mailman (input) for mailman id 217166;
+ Wed, 27 Oct 2021 18:07:06 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mfnAU-0003uC-Ku; Wed, 27 Oct 2021 17:56:54 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ (envelope-from <julien@xen.org>) id 1mfnKM-0005Vn-ND
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 18:07:06 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mfnAU-00012R-Gw; Wed, 27 Oct 2021 17:56:54 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mfnAU-0004cK-9n; Wed, 27 Oct 2021 17:56:54 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mfnAU-0006bn-71; Wed, 27 Oct 2021 17:56:54 +0000
+ (envelope-from <julien@xen.org>)
+ id 1mfnKL-0001Iq-FZ; Wed, 27 Oct 2021 18:07:05 +0000
+Received: from [54.239.6.185] (helo=[192.168.29.96])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mfnKL-0004Ni-8M; Wed, 27 Oct 2021 18:07:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,74 +47,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=w274TJilkZqbkjOMyvrxwVUGXyxsmeDbhenjI0SbGsM=; b=S+G8e8argXgwpZGQK/jRKdwPqJ
-	MKf0g20LWZhVK4iP2Yh7iV1yZ/2EYTo6s9A6z0cuahK7OBx1X08jB2Y12YZIKkMjVuIn9pnsIbY6u
-	O8QiZaTcM/Y52hqKhTN1NIUWqY2fE8lNX4SSw2KKCssMG5E4g6fS/0+eV6h9NCUkL9ss=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-165899-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=cSAsLeSYfMVI+YiyzBjCtswDKla10wlmd6gbsDtBuvA=; b=nuBEaXaEIPs2lUHFquNs8ztckm
+	OAHbdgJAXv2WGrRrKUQt9kn7WSLP228sN17tnJvPUTg/gbKA+qbjZSyiFYC73VA3Y2VV4xvZvzzdl
+	3bHt0jc5vKFJm9I+rXbIGkzNDTNUFvqs3RS0A97ynM7Z2XhoNw18Ome4s/cjEulJ4EYQ=;
+Message-ID: <7a97bbef-68a9-8f52-0c93-88d4e84a07fc@xen.org>
+Date: Wed, 27 Oct 2021 19:07:03 +0100
 MIME-Version: 1.0
-Subject: [ovmf test] 165899: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=9a95d11023ac2f2ee49a2958cf80658270442c42
-X-Osstest-Versions-That:
-    ovmf=2f6f3329add328103cb0654b71d7b814dc0c9759
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 27 Oct 2021 17:56:54 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.2.1
+Subject: Re: [PATCH] xen/arm: do not try to add pci-domain for disabled
+ devices
+To: Oleksandr Andrushchenko <andr2000@gmail.com>,
+ xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, iwj@xenproject.org, bertrand.marquis@arm.com,
+ rahul.singh@arm.com,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+References: <20211027083730.1406947-1-andr2000@gmail.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20211027083730.1406947-1-andr2000@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-flight 165899 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/165899/
+Hi Oleksandr,
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 9a95d11023ac2f2ee49a2958cf80658270442c42
-baseline version:
- ovmf                 2f6f3329add328103cb0654b71d7b814dc0c9759
+On 27/10/2021 09:37, Oleksandr Andrushchenko wrote:
+> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> 
+> If a PCI host bridge device is present in the device tree, but is
+> disabled, then its PCI host bridge driver was not instantiated.
+> This results in the following panic during Xen start:
+> 
+> (XEN) Device tree generation failed (-22).
 
-Last test of basis   165873  2021-10-26 05:40:10 Z    1 days
-Testing same since   165899  2021-10-27 12:10:06 Z    0 days    1 attempts
+It would good to clarify in the commit message where the error is coming 
+from. I think this is from pci_get_host_bridge_segment().
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Chasel Chiu <chasel.chiu@intel.com>
+> (XEN)
+> (XEN) ****************************************
+> (XEN) Panic on CPU 0:
+> (XEN) Could not set up DOM0 guest OS
+> (XEN) ****************************************
+> 
+> Fix this by not adding linux,pci-domain property for hwdom if it is
+> neither available nor device enabled.
+ From my reading of the binding [1], the property should be present in 
+all the hostbridges if one specify it. IOW, I think the property should 
+also be added for hostbridges that are not available.
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
+AFAICT, Linux will ignore hostbridge that are not available. But it 
+feels to me we are twisting the rule. So, could we consider to allocate 
+an unused number?
 
+> 
+> Fixes: 4cfab4425d39 ("xen/arm: Add linux,pci-domain property for hwdom if not available.")
+> 
+> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> ---
+>   xen/arch/arm/domain_build.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index 124ade09123a..beeecf84a209 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -747,7 +747,8 @@ static int __init write_properties(struct domain *d, struct kernel_info *kinfo,
+>               return res;
+>       }
+>   
+> -    if ( is_pci_passthrough_enabled() && dt_device_type_is_equal(node, "pci") )
+> +    if ( is_pci_passthrough_enabled() && dt_device_type_is_equal(node, "pci") &&
+ From my understanding, PCI device described in the DT would also have 
+'type="pci"'. So we would also return an error because we don't have a 
+corresponding hostbridge.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+I think this check should be replaced with device_get_class(node) == 
+DEVICE_PCI (confusingly DEVICE_PCI indicates that this is an 
+hostbridge...). Although, I would consider to pass the device class as a 
+parameter of write_properties() to avoid calling device_class() multiple 
+time (it is already used twice in handle_node()).
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+I am aware this is not a bug introduced by your patch, but I think this 
+should be dealt in this patch as well.
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+> +         dt_device_is_available(node) )
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+Shouldn't you also check that the hostbridge wasn't passthrough-ed?
 
+>       {
+>           if ( !dt_find_property(node, "linux,pci-domain", NULL) )
+>           {
+> 
 
-Pushing revision :
+Cheers,
 
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   2f6f3329ad..9a95d11023  9a95d11023ac2f2ee49a2958cf80658270442c42 -> xen-tested-master
+[1] Documentation/devicetree/bindings/pci/pci.txt
+
+-- 
+Julien Grall
 
