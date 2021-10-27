@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9514C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06C30C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 58B0B60E73
+	by mail.kernel.org (Postfix) with ESMTPS id AC18960E74
 	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 58B0B60E73
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AC18960E74
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217270.377239 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217278.377273 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSb-0008TD-EW; Wed, 27 Oct 2021 21:27:49 +0000
+	id 1mfqSe-0000l5-4m; Wed, 27 Oct 2021 21:27:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217270.377239; Wed, 27 Oct 2021 21:27:49 +0000
+Received: by outflank-mailman (output) from mailman id 217278.377273; Wed, 27 Oct 2021 21:27:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSb-0008T6-9H; Wed, 27 Oct 2021 21:27:49 +0000
-Received: by outflank-mailman (input) for mailman id 217270;
- Wed, 27 Oct 2021 21:27:48 +0000
+	id 1mfqSd-0000jW-QJ; Wed, 27 Oct 2021 21:27:51 +0000
+Received: by outflank-mailman (input) for mailman id 217278;
+ Wed, 27 Oct 2021 21:27:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqKi-0000sJ-Ar
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:19:40 +0000
-Received: from mail-lf1-x131.google.com (unknown [2a00:1450:4864:20::131])
+ id 1mfqNS-0000sJ-FF
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:22:30 +0000
+Received: from mail-lj1-x22c.google.com (unknown [2a00:1450:4864:20::22c])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6b544073-9049-4d9c-951a-73ca878768f3;
- Wed, 27 Oct 2021 21:18:31 +0000 (UTC)
-Received: by mail-lf1-x131.google.com with SMTP id j9so8978698lfu.7
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:31 -0700 (PDT)
+ id 75304b2b-e4b2-4f61-96e2-041fe02a1904;
+ Wed, 27 Oct 2021 21:19:08 +0000 (UTC)
+Received: by mail-lj1-x22c.google.com with SMTP id i26so5091804ljg.7
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:19:08 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.28
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.19.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:29 -0700 (PDT)
+ Wed, 27 Oct 2021 14:19:06 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b544073-9049-4d9c-951a-73ca878768f3
+X-Inumbo-ID: 75304b2b-e4b2-4f61-96e2-041fe02a1904
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=0HObz0L7jYC33/Dxy7x3kt14KoppaRcQ+sU+HcRStgU=;
-        b=juuYY7khswyJq9WLrD2Xv0L7DT3egfGiA3J+op4ykA5lhTUc4DxfT1yB0Oh88agPiv
-         UhoKqT4ns2hfuw9gr/v0jAGL8GkGSlrTsMjRAQAm62Utk3Ft2TKiyIKDHiM1MbMECMuo
-         YhNAqYcsFGhVw4jQXQFg7Xiu9P0ShsfWNYxHZwYj/2saBc/VAXVzxB4ozqBsrO+obQNg
-         sFt44IAUuRDv+vAvbmBDNGqc/rVW0RxicCJ9k+jGGnO7zutAFJ4cO/39uMNR4REocLb+
-         fT+JvIjl7o4XFJOJc5uobpc1ra4sZ3Uq0sG0p07pr/mfIHANj05r1FY541LLyuiyYuuI
-         01TQ==
+        bh=IyeKRcg+jY+d7mV074g++I9amtFxwmtCwLh3hlXwjuE=;
+        b=QnkHqeqzRHJ5AsPp67EWmABUOzsGTZSEBDGiay4nrsnQYbRzqAwsk2Smx/z5LQ/pzF
+         rdPrmuGWIQsGZY0bghrDq1od6/1Zl94Y7Qb1GFsmOOrt3AmEW7aEpgHOlwWIuWg9pF6h
+         Oq2ibAnCelRGtOXc03WYR55PI40ZligMz8SFKQbuKJzels1J9jjvQqZYNvv/xzelX9Df
+         3ooSIaYPCZ69IQLFRxzA4xs/vR6PqnP/beBugw1fOkkPovapvfxOsncNdJLVW4zeoK8b
+         skyzHaRP9ZlGt9pP4tePYITTWnPX31LYoVXuqb9igbxjWGO6dkZHNW0xRIrqWzuV8p7l
+         c4kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=0HObz0L7jYC33/Dxy7x3kt14KoppaRcQ+sU+HcRStgU=;
-        b=acfnmuqIlNnfB4OFtbYvx1D968GPMkRdfh2lNKsjbWRFq19PSfqf4hRhTNo1Q3h/FD
-         DHUCu4fJNkCTuFvyuYIneEN5b7xqBjtJU+y3GPLonIqPQU68tpZ9l1Q2Th0blRR5s1rb
-         A0HEciiNi+XbXqOmx5motbnuhX2joRtgHymw+5aaglI8sTd8uZ6jYjValMkq29nVJYPf
-         jVHcHFpsC9IJZPPUrAB7FHfxsTj+DBiVPJkgONvPg/GJr8Y2qDaMibQYAnjX0E7+1JHd
-         8aOkXgpK3cWm7FhizFrvbg3nEjpYXvTLl8sRxKdiW4rCoxtPCBC8RKYokBmAZVRkjsXG
-         hx/w==
-X-Gm-Message-State: AOAM5333kPG0SLpK+KdwFOWehCItqYKd+5eB1DdyMFZScbUuPCo1jkBO
-	Qld38IZYdTI49x+m7o7WCdI=
-X-Google-Smtp-Source: ABdhPJwvis6SZ3kogk4xA1IHskuhNiRlAlBXPnsBTS3IAzxRcr2G+o3cy4E7zzZ6V+F8EKCBP2j+FA==
-X-Received: by 2002:ac2:4ec4:: with SMTP id p4mr108449lfr.127.1635369510228;
-        Wed, 27 Oct 2021 14:18:30 -0700 (PDT)
+        bh=IyeKRcg+jY+d7mV074g++I9amtFxwmtCwLh3hlXwjuE=;
+        b=yskBtUYTkO7vMc3nH96aWtDfWa/j2vhawnvPdCDsnad9aYEb2lFjMe4J3ITK2IC90U
+         1Ygw3EfOcJFkfPOCXgbV5JHjXhEzY3rPQV6tRDaoGiqqZrTfTS3TKlHVttkgfwWUeA8H
+         nFO9t21dbUy/S5ih6+SPhyk0FCv9JhNA24fnivHd+cmjDQ2IdYlOYQKs/o+ASPWVSNvA
+         fjgXZZT8PRCoVnrZn7H9+VmyVBt7v14+t38l+KK4rUjtDuSCdAj5oyD5aP7AzHDBlq8e
+         44DBwxJqFqxquWt06I0QT9vdtL3ajfBPO2bz1FdwjDLZDJ5hVceeUWhi95z8sbBWCRyv
+         Hm2A==
+X-Gm-Message-State: AOAM533CLgVHPhUSs2arwTkSYcJ5jFPVw/1L6BhxPYZZlcXbMERj6nOb
+	ExUo7bkPlSpOtCdvtHbR3so=
+X-Google-Smtp-Source: ABdhPJy4ahVYxTGf2Y3bPKsNGZG7BdaFjyQVV1JaKCPUvFr94r9L7duD8TnIWNPTqCXGHbJewLuL1g==
+X-Received: by 2002:a05:651c:1256:: with SMTP id h22mr358353ljh.348.1635369547137;
+        Wed, 27 Oct 2021 14:19:07 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,42 +152,58 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 20/45] x86: Use do_kernel_power_off()
-Date: Thu, 28 Oct 2021 00:16:50 +0300
-Message-Id: <20211027211715.12671-21-digetx@gmail.com>
+Subject: [PATCH v2 40/45] mfd: twl4030: Use devm_register_trivial_power_off_handler()
+Date: Thu, 28 Oct 2021 00:17:10 +0300
+Message-Id: <20211027211715.12671-41-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new power-off API.
+Use devm_register_trivial_power_off_handler() that replaces global
+pm_power_off variable and allows to register multiple power-off handlers.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- arch/x86/kernel/reboot.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/mfd/twl4030-power.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/kernel/reboot.c b/arch/x86/kernel/reboot.c
-index 0a40df66a40d..cd7d9416d81a 100644
---- a/arch/x86/kernel/reboot.c
-+++ b/arch/x86/kernel/reboot.c
-@@ -747,10 +747,10 @@ static void native_machine_halt(void)
+diff --git a/drivers/mfd/twl4030-power.c b/drivers/mfd/twl4030-power.c
+index 6b36932263ba..72df4735d628 100644
+--- a/drivers/mfd/twl4030-power.c
++++ b/drivers/mfd/twl4030-power.c
+@@ -29,6 +29,7 @@
+ #include <linux/platform_device.h>
+ #include <linux/of.h>
+ #include <linux/of_device.h>
++#include <linux/reboot.h>
  
- static void native_machine_power_off(void)
- {
--	if (pm_power_off) {
-+	if (kernel_can_power_off()) {
- 		if (!reboot_force)
- 			machine_shutdown();
--		pm_power_off();
-+		do_kernel_power_off();
+ #include <asm/mach-types.h>
+ 
+@@ -923,7 +924,7 @@ static int twl4030_power_probe(struct platform_device *pdev)
  	}
- 	/* A fallback in case there is no PM info available */
- 	tboot_shutdown(TB_SHUTDOWN_HALT);
+ 
+ 	/* Board has to be wired properly to use this feature */
+-	if (twl4030_power_use_poweroff(pdata, node) && !pm_power_off) {
++	if (twl4030_power_use_poweroff(pdata, node)) {
+ 		/* Default for SEQ_OFFSYNC is set, lets ensure this */
+ 		err = twl_i2c_read_u8(TWL_MODULE_PM_MASTER, &val,
+ 				      TWL4030_PM_MASTER_CFG_P123_TRANSITION);
+@@ -939,7 +940,12 @@ static int twl4030_power_probe(struct platform_device *pdev)
+ 			}
+ 		}
+ 
+-		pm_power_off = twl4030_power_off;
++		err = devm_register_trivial_power_off_handler(&pdev->dev,
++							      twl4030_power_off);
++		if (err) {
++			dev_err(&pdev->dev, "Failed to register power-off handler\n");
++			goto relock;
++		}
+ 	}
+ 
+ relock:
 -- 
 2.33.1
 
