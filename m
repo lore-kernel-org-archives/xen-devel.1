@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C420C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0D5A1C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BAE666109E
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BAE666109E
+	by mail.kernel.org (Postfix) with ESMTPS id BEE7160E73
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BEE7160E73
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217295.377369 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217301.377383 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSt-0004GG-U7; Wed, 27 Oct 2021 21:28:07 +0000
+	id 1mfqSz-0005Ma-Br; Wed, 27 Oct 2021 21:28:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217295.377369; Wed, 27 Oct 2021 21:28:07 +0000
+Received: by outflank-mailman (output) from mailman id 217301.377383; Wed, 27 Oct 2021 21:28:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSt-0004B9-4f; Wed, 27 Oct 2021 21:28:07 +0000
-Received: by outflank-mailman (input) for mailman id 217295;
- Wed, 27 Oct 2021 21:28:03 +0000
+	id 1mfqSy-0005If-9k; Wed, 27 Oct 2021 21:28:12 +0000
+Received: by outflank-mailman (input) for mailman id 217301;
+ Wed, 27 Oct 2021 21:28:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqKT-0000sJ-AJ
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:19:25 +0000
-Received: from mail-lj1-x22f.google.com (unknown [2a00:1450:4864:20::22f])
+ id 1mfqMP-0000sJ-Dd
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:21:25 +0000
+Received: from mail-lf1-x135.google.com (unknown [2a00:1450:4864:20::135])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b85a0f4c-68ce-41fd-81db-436811659b39;
- Wed, 27 Oct 2021 21:18:27 +0000 (UTC)
-Received: by mail-lj1-x22f.google.com with SMTP id s19so6943375ljj.11
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:27 -0700 (PDT)
+ id ed9f40e7-2116-4b6d-ad37-3eab09f39abc;
+ Wed, 27 Oct 2021 21:18:58 +0000 (UTC)
+Received: by mail-lf1-x135.google.com with SMTP id bp15so9015747lfb.4
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:58 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.24
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:26 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b85a0f4c-68ce-41fd-81db-436811659b39
+X-Inumbo-ID: ed9f40e7-2116-4b6d-ad37-3eab09f39abc
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=+aSuiMovnmRlKPN5Rl3JuNmFHUt6skQo3O4wD7dX5JQ=;
-        b=ehfhpJuO10tH0JJc+NToykiYU0vR9QNQWRGBFoJEmaOxGSK6IxZtCBEULR0W0LLrnh
-         rWgUh4Kku73ZADq2I2DXfxnNngsudNBU15HzSYHJ5ZGaDy4yKkQqtcH85+TmIu3x8kh9
-         Xstkp84P8gb9NHhImh/kkEu/eLRzihVMriWTiS1lyvVYlI0S9doH7srHH4uUDtgtagHH
-         NnlFwVxtytB+YFKInQI4zlx/qw9ggp+d792cFqZ86NXSDRvmn2HsZCjK5JnAlXZtcFzO
-         y6wwCc1x7j8EpGXUAyH+X2YWcF6tl/6iZWVr+mUSLKEmJFL/9H+FbFwe9fJf0ZNH5qP/
-         q9Cw==
+        bh=/Hqy/1scbv2xgSJ+Pfjnwd9vR5EU0n/d3WfB2tugTgE=;
+        b=fdXEajT5ReWU0k76RL+UMQexWX6+dI9dqZX5MdJXsVZcuokskYVO71+oKjzDY4A2wc
+         hJ1YtaH4eNeZaWabxSPD6IdHvppV9tDUjSfbiCZ9pzJbnyd1ILGvgPlaBo02Y2jjZnzD
+         JbO/7oiPSFxLAQwFLHGGO2Gfwy8dZZlQdidry7vBInQu2wS67Np/bBN1rUC/SIaULQAp
+         mZSgP8kJbrDoclvDh2sRCaJ+wiPArCAPZMKwm6/7+fwfn1T4SmuQIaJDkhw4NUU2izwl
+         4ikxIWp8MhgEKidppyJcozjOV5jYdL31Pn9EYMxWJrcs7VGZ0QCvDnuFIw51Kr2focF2
+         kW1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+aSuiMovnmRlKPN5Rl3JuNmFHUt6skQo3O4wD7dX5JQ=;
-        b=yDZar7Z4ETp0eiJMYqbWz+Pv9sP/D9+OjaQQiTCH2cy9PFh/9b4EbdLdECZdz3eByQ
-         nlubfo90lbmCH0UpQMGoQQ7lvbdKVWrLWKbg3Yb2r/zq2+DjPUr3BJSMcjuJtydQy41+
-         ElyYpdnDUe7+iBGJmtDTa3O31K4BamF5WZMkxPcbDm5RdF4GL7A2fwP8hKxMlB0ZmrAq
-         VheMi+jJHltaVvY/+jKi1Hxx77i+GaikoB+YZYG8yQvzN57Yp88AaQa4iZM0EHFa18cS
-         2Q/sTFEOqJcsKTbBoImdSVdDw26F1btxxVaIpRYNqja84Zqvse//2thnzWE8bi5NI40C
-         BoQQ==
-X-Gm-Message-State: AOAM5339T7wC4DSHhL6SxFZqYKsBVBIOHvPIAkfRqWs3Q2YeIRIlsmiZ
-	J2L56yJBv6FO3Sk3YwVOMto=
-X-Google-Smtp-Source: ABdhPJySCnLdJnyefyOJzA6HMZEBF+hyXH0EM8QKUFyfoUHamOZK7R7lRqwGKBcRpuomVJFL6q66/Q==
-X-Received: by 2002:a2e:891a:: with SMTP id d26mr331100lji.368.1635369506344;
-        Wed, 27 Oct 2021 14:18:26 -0700 (PDT)
+        bh=/Hqy/1scbv2xgSJ+Pfjnwd9vR5EU0n/d3WfB2tugTgE=;
+        b=I5kACTmRG3JXiYMQEH1UugQcBwvTXlF1XclwGQBRTjvuJaE0IxJJwOWY/DxLZCTp9L
+         +JFN6Y64/SnZohMczrBKTUbhipu/mO8zH13VmfBpVU9M9yEvMYEnKHKE5BMSeLC+Bc9P
+         d5aQPCM93zwqCgRAR9rfKSRn/YWKAolcBCOtz4XZ6P0HQinSGybdt3mW1qIoaTjabBv8
+         oHREsBzclOFRJGvczhT1yK6Fd/8YpHK+BEuH1dNIRAvKVOLkK/uQXEGoU5eyyZCiQRGe
+         J72MoujsJVmYKq45CRzfJo2LukPQYj3Ki8AN72lDhFRTVlSIJ6SquICz9I/K+tZzqERA
+         gnFw==
+X-Gm-Message-State: AOAM5330ZC1+DL/qhfcxPA91rYSj0jeo7o3+ZhzlY0Cjlf2JudUXDye2
+	laUjQDMBgyLf4MFUgGJrcMQ=
+X-Google-Smtp-Source: ABdhPJxErOfbgWaHoJDyROU+wtxCyzAJwEEk/21TSkl3Wl7+6OTCwc5MbFi2KTtZM0ExVMRMX2XJDw==
+X-Received: by 2002:a05:6512:344a:: with SMTP id j10mr78084lfr.653.1635369538003;
+        Wed, 27 Oct 2021 14:18:58 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,50 +152,78 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 18/45] riscv: Use do_kernel_power_off()
-Date: Thu, 28 Oct 2021 00:16:48 +0300
-Message-Id: <20211027211715.12671-19-digetx@gmail.com>
+Subject: [PATCH v2 35/45] mfd: max8907: Use devm_register_simple_power_off_handler()
+Date: Thu, 28 Oct 2021 00:17:05 +0300
+Message-Id: <20211027211715.12671-36-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new power-off API.
+Use devm_register_simple_power_off_handler() that replaces global
+pm_power_off variable and allows to register multiple power-off handlers.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- arch/riscv/kernel/reset.c | 12 ++++--------
- 1 file changed, 4 insertions(+), 8 deletions(-)
+ drivers/mfd/max8907.c | 22 +++++++++++++++-------
+ 1 file changed, 15 insertions(+), 7 deletions(-)
 
-diff --git a/arch/riscv/kernel/reset.c b/arch/riscv/kernel/reset.c
-index 9c842c41684a..912288572226 100644
---- a/arch/riscv/kernel/reset.c
-+++ b/arch/riscv/kernel/reset.c
-@@ -23,16 +23,12 @@ void machine_restart(char *cmd)
+diff --git a/drivers/mfd/max8907.c b/drivers/mfd/max8907.c
+index 41f566e6a096..58699510311b 100644
+--- a/drivers/mfd/max8907.c
++++ b/drivers/mfd/max8907.c
+@@ -16,6 +16,7 @@
+ #include <linux/module.h>
+ #include <linux/of.h>
+ #include <linux/of_device.h>
++#include <linux/reboot.h>
+ #include <linux/regmap.h>
+ #include <linux/slab.h>
  
- void machine_halt(void)
- {
--	if (pm_power_off != NULL)
--		pm_power_off();
--	else
--		default_power_off();
-+	do_kernel_power_off();
-+	default_power_off();
- }
+@@ -174,9 +175,10 @@ static const struct regmap_irq_chip max8907_rtc_irq_chip = {
+ 	.num_irqs = ARRAY_SIZE(max8907_rtc_irqs),
+ };
  
- void machine_power_off(void)
+-static struct max8907 *max8907_pm_off;
+-static void max8907_power_off(void)
++static void max8907_power_off(void *data)
  {
--	if (pm_power_off != NULL)
--		pm_power_off();
--	else
--		default_power_off();
-+	do_kernel_power_off();
-+	default_power_off();
++	struct max8907 *max8907_pm_off = data;
++
+ 	regmap_update_bits(max8907_pm_off->regmap_gen, MAX8907_REG_RESET_CNFG,
+ 			MAX8907_MASK_POWER_OFF, MAX8907_MASK_POWER_OFF);
  }
+@@ -214,6 +216,17 @@ static int max8907_i2c_probe(struct i2c_client *i2c,
+ 		goto err_regmap_gen;
+ 	}
+ 
++	if (pm_off) {
++		ret = devm_register_simple_power_off_handler(&i2c->dev,
++							     max8907_power_off,
++							     max8907);
++		if (ret) {
++			dev_err(&i2c->dev,
++				"failed to register power-off handler: %d\n", ret);
++			return ret;
++		}
++	}
++
+ 	max8907->i2c_rtc = i2c_new_dummy_device(i2c->adapter, MAX8907_RTC_I2C_ADDR);
+ 	if (IS_ERR(max8907->i2c_rtc)) {
+ 		ret = PTR_ERR(max8907->i2c_rtc);
+@@ -260,11 +273,6 @@ static int max8907_i2c_probe(struct i2c_client *i2c,
+ 		goto err_add_devices;
+ 	}
+ 
+-	if (pm_off && !pm_power_off) {
+-		max8907_pm_off = max8907;
+-		pm_power_off = max8907_power_off;
+-	}
+-
+ 	return 0;
+ 
+ err_add_devices:
 -- 
 2.33.1
 
