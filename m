@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A194CC433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 908ADC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5AFF4610CA
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5AFF4610CA
+	by mail.kernel.org (Postfix) with ESMTPS id 4AE0860E74
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4AE0860E74
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217363.377502 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217365.377511 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqTU-0003AY-FY; Wed, 27 Oct 2021 21:28:44 +0000
+	id 1mfqTW-0003Xo-OX; Wed, 27 Oct 2021 21:28:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217363.377502; Wed, 27 Oct 2021 21:28:44 +0000
+Received: by outflank-mailman (output) from mailman id 217365.377511; Wed, 27 Oct 2021 21:28:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqTT-00033w-NJ; Wed, 27 Oct 2021 21:28:43 +0000
-Received: by outflank-mailman (input) for mailman id 217363;
- Wed, 27 Oct 2021 21:28:41 +0000
+	id 1mfqTV-0003S7-Hy; Wed, 27 Oct 2021 21:28:45 +0000
+Received: by outflank-mailman (input) for mailman id 217365;
+ Wed, 27 Oct 2021 21:28:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqKn-0000sJ-B1
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:19:45 +0000
-Received: from mail-lf1-x134.google.com (unknown [2a00:1450:4864:20::134])
+ id 1mfqMA-0000sJ-DL
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:21:10 +0000
+Received: from mail-lj1-x233.google.com (unknown [2a00:1450:4864:20::233])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fed3223e-1a96-44bf-b846-2ec276fe5515;
- Wed, 27 Oct 2021 21:18:33 +0000 (UTC)
-Received: by mail-lf1-x134.google.com with SMTP id b32so5809968lfv.0
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:33 -0700 (PDT)
+ id 5b88031b-e522-4827-becf-81d9a5b22854;
+ Wed, 27 Oct 2021 21:18:55 +0000 (UTC)
+Received: by mail-lj1-x233.google.com with SMTP id s19so6945173ljj.11
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:55 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.30
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:31 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fed3223e-1a96-44bf-b846-2ec276fe5515
+X-Inumbo-ID: 5b88031b-e522-4827-becf-81d9a5b22854
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=guWA5fFZeGPtiBZOYoQcCwu2VFdVsVhLW9/JhrymZ0g=;
-        b=Y3ajD9hSFiO6I4QqBgfg35JQ5CG9aR8SawQdCZ/PvBPpTrKpea4VQPEYGG2e2LlPNw
-         INBF/7ltt3G3417Dh9CdQfPTHSkRg6FMpjv8P1ntJFwpZqSV1uSTE4GmrYnNoXeajbha
-         R/xICM0awt4oVDfnXFmFRQIZuNOfUQCww36nBDR3iRSiJcFpUgR7ytoBp8ilJAXX1BoV
-         q3WrRdzyqUShxUhnVnyU+VPDZDBm93MNtu5SNFBPibM7EM2q+6x7IVUVp7KS5HkYIUo5
-         6/azutWfWLEZTqcTTzvxBwc0sMsrgJicmN8uMy0n0bR+IWtSXzppNigQSpvDusN76BYk
-         OmuA==
+        bh=Vtt3o4MswiJ8Uwk5SbVoJldxGf1+YbPRO7EtWlQaYpw=;
+        b=h9Sc10ekNHuFL9pzFR5ivr4ubnoV3ErBKpxwq8qtLnmmEwmpDGD4jSeaWauc76yLUe
+         mSt4r4zCNyFKj4h5OR8HLlxF7zfIwR2mYZXQxAs/YUFPraXy5oJXAYRRb5XFp5DFvHId
+         dp4uwopusQmPxwo8pBprt9hjoN+nwfiSLFgat9Xg5VUZGhfoEbJhN2yWrZJiei/Mb3oo
+         mtgvsX4Y0EPIUr2yLJuO6jAqsOYLbfr0p9vS8kzfJK4fcF7aAzjiqNMDP4LlFTOflII0
+         /Ozi7fljMZ5bdh0k27GOMuAQZgJbYkevh7WpkJcoo8VpN/Xp7c/9529BJm6xL6ZNrYi/
+         VmuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=guWA5fFZeGPtiBZOYoQcCwu2VFdVsVhLW9/JhrymZ0g=;
-        b=6mZxwjxX8n/6jWjp9NQ3L1SsmMkt0ikUFuq8nEr97Dt4c1g8L0wGs//PXlADKfrMuT
-         ok6M9jXJXs12wMbndXbWFbCyZB9mwwA81HbbkdpoY2wJKe66CXqCtdnqLcVnlj24UTxI
-         loLEZyBgJKtPI5Df4EuuJq/UKzS5gesLo49P41Me7y0xUlI2+ezVGy6NILKb1aNYLD24
-         VCJ1iMODYtgu1yg16yey3GRWDzUzDqitTX5cuTBBh7vR3SI19zI9kWJeVLqLxvdhXQ6l
-         mdV7i8x3AB+NQ8cGFadhyHYnhaU/bQjAplGHvsL1C8DJ83fn/YE5fXmvjQ+MzQcrg7bw
-         aHsg==
-X-Gm-Message-State: AOAM530ij2vVunU9aLOySLUnJLN1IvTUVKCdi4sK2GX45DZCP2Ncodt5
-	td4MYNCpqUo9wgCpLbLuvPw=
-X-Google-Smtp-Source: ABdhPJw9hBA3rUBC1cmHCV5isZVZ9pveXdrJpcvckt2xCHU4v9xkBuaEqDJVomXcVNELr8shz4+44g==
-X-Received: by 2002:a05:6512:324d:: with SMTP id c13mr91026lfr.349.1635369512043;
-        Wed, 27 Oct 2021 14:18:32 -0700 (PDT)
+        bh=Vtt3o4MswiJ8Uwk5SbVoJldxGf1+YbPRO7EtWlQaYpw=;
+        b=zW87Cb28Ra2mF2jh4VUx07tpYuwVyYlSNfj0U7XmyzkZpQuNfeUdQ4/n10xQoMjNC8
+         FUK1KqBAkBhCPeXGGhAZFPqEVm3kAWH/RndMpAihmVB5wkb4LdCdagmUHiD676OmCok2
+         wQDbtaWAo7/KIJpquQEKL4m805JcAdIf0Kbu/j7McZDEoJVo318DFpqyJKkb4Swqbjry
+         3/a4tTNn8jIzEgOg9lzxyr+jzNNBsz3VQLNE7ywcNk+h+En4uDJlEEUOmsOOEV1UvTgR
+         yEKTjc/T0mBFfj64LwjKcuReEBFROImb1tDEcL4fz3Ilb/MQ5eEudvL4NQWscE1bT8j+
+         E2+A==
+X-Gm-Message-State: AOAM532MK1UbnfPtD7V6pnkmI72J6+YTu0sPPclaJG8qmKGsZQsFyCFY
+	B2rATSksO3C722yk0MYwezw=
+X-Google-Smtp-Source: ABdhPJyyBz+GAYvcNwhzUHtMKnc91wku7za2iucydPD6HlUd9fBk/92YnwCUeQIBB5tQ4kJ4zljd+g==
+X-Received: by 2002:a2e:b804:: with SMTP id u4mr293626ljo.425.1635369534279;
+        Wed, 27 Oct 2021 14:18:54 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,140 +152,80 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 21/45] m68k: Switch to new power-handler API
-Date: Thu, 28 Oct 2021 00:16:51 +0300
-Message-Id: <20211027211715.12671-22-digetx@gmail.com>
+Subject: [PATCH v2 33/45] mfd: rk808: Use devm_register_simple_power_off_handler()
+Date: Thu, 28 Oct 2021 00:17:03 +0300
+Message-Id: <20211027211715.12671-34-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use
-register_power_off_handler() that registers power-off handlers and
-do_kernel_power_off() that invokes chained power-off handlers. Legacy
-pm_power_off() will be removed once all drivers will be converted to
-the new power-off API.
-
-Normally arch code should adopt only the do_kernel_power_off() at first,
-but m68k is a special case because it uses pm_power_off() "inside out",
-i.e. pm_power_off() invokes machine_power_off() [in fact it does nothing],
-while it's machine_power_off() that should invoke the pm_power_off(), and
-thus, we can't convert platforms to the new API separately. There are only
-two platforms changed here, so it's not a big deal.
+Use devm_register_simple_power_off_handler() that replaces global
+pm_power_off variable and allows to register multiple power-off handlers.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- arch/m68k/emu/natfeat.c         | 3 ++-
- arch/m68k/include/asm/machdep.h | 1 -
- arch/m68k/kernel/process.c      | 5 ++---
- arch/m68k/kernel/setup_mm.c     | 1 -
- arch/m68k/kernel/setup_no.c     | 1 -
- arch/m68k/mac/config.c          | 4 +++-
- 6 files changed, 7 insertions(+), 8 deletions(-)
+ drivers/mfd/rk808.c | 23 +++++++++++------------
+ 1 file changed, 11 insertions(+), 12 deletions(-)
 
-diff --git a/arch/m68k/emu/natfeat.c b/arch/m68k/emu/natfeat.c
-index 71b78ecee75c..b19dc00026d9 100644
---- a/arch/m68k/emu/natfeat.c
-+++ b/arch/m68k/emu/natfeat.c
-@@ -15,6 +15,7 @@
- #include <linux/string.h>
- #include <linux/kernel.h>
+diff --git a/drivers/mfd/rk808.c b/drivers/mfd/rk808.c
+index b181fe401330..3bf369469053 100644
+--- a/drivers/mfd/rk808.c
++++ b/drivers/mfd/rk808.c
+@@ -18,6 +18,7 @@
+ #include <linux/mfd/core.h>
  #include <linux/module.h>
+ #include <linux/of_device.h>
 +#include <linux/reboot.h>
- #include <linux/io.h>
- #include <asm/machdep.h>
- #include <asm/natfeat.h>
-@@ -90,5 +91,5 @@ void __init nf_init(void)
- 	pr_info("NatFeats found (%s, %lu.%lu)\n", buf, version >> 16,
- 		version & 0xffff);
+ #include <linux/regmap.h>
  
--	mach_power_off = nf_poweroff;
-+	register_platform_power_off(nf_poweroff);
- }
-diff --git a/arch/m68k/include/asm/machdep.h b/arch/m68k/include/asm/machdep.h
-index 8fd80ef1b77e..8d8c3ee2069f 100644
---- a/arch/m68k/include/asm/machdep.h
-+++ b/arch/m68k/include/asm/machdep.h
-@@ -24,7 +24,6 @@ extern int (*mach_get_rtc_pll)(struct rtc_pll_info *);
- extern int (*mach_set_rtc_pll)(struct rtc_pll_info *);
- extern void (*mach_reset)( void );
- extern void (*mach_halt)( void );
--extern void (*mach_power_off)( void );
- extern unsigned long (*mach_hd_init) (unsigned long, unsigned long);
- extern void (*mach_hd_setup)(char *, int *);
- extern void (*mach_heartbeat) (int);
-diff --git a/arch/m68k/kernel/process.c b/arch/m68k/kernel/process.c
-index a6030dbaa089..e160a7c57bd3 100644
---- a/arch/m68k/kernel/process.c
-+++ b/arch/m68k/kernel/process.c
-@@ -67,12 +67,11 @@ void machine_halt(void)
+ struct rk808_reg_data {
+@@ -526,12 +527,11 @@ static const struct regmap_irq_chip rk818_irq_chip = {
+ 	.init_ack_masked = true,
+ };
  
- void machine_power_off(void)
+-static struct i2c_client *rk808_i2c_client;
+-
+-static void rk808_pm_power_off(void)
++static void rk808_pm_power_off(void *data)
  {
--	if (mach_power_off)
--		mach_power_off();
-+	do_kernel_power_off();
- 	for (;;);
+ 	int ret;
+ 	unsigned int reg, bit;
++	struct i2c_client *rk808_i2c_client = data;
+ 	struct rk808 *rk808 = i2c_get_clientdata(rk808_i2c_client);
+ 
+ 	switch (rk808->variant) {
+@@ -725,8 +725,14 @@ static int rk808_probe(struct i2c_client *client,
+ 	}
+ 
+ 	if (of_property_read_bool(np, "rockchip,system-power-controller")) {
+-		rk808_i2c_client = client;
+-		pm_power_off = rk808_pm_power_off;
++		ret = devm_register_simple_power_off_handler(&client->dev,
++							     rk808_pm_power_off,
++							     client);
++		if (ret) {
++			dev_err(&client->dev,
++				"failed to register power-off handler %d\n", ret);
++			goto err_irq;
++		}
+ 	}
+ 
+ 	return 0;
+@@ -742,13 +748,6 @@ static int rk808_remove(struct i2c_client *client)
+ 
+ 	regmap_del_irq_chip(client->irq, rk808->irq_data);
+ 
+-	/**
+-	 * pm_power_off may points to a function from another module.
+-	 * Check if the pointer is set by us and only then overwrite it.
+-	 */
+-	if (pm_power_off == rk808_pm_power_off)
+-		pm_power_off = NULL;
+-
+ 	return 0;
  }
- 
--void (*pm_power_off)(void) = machine_power_off;
-+void (*pm_power_off)(void);
- EXPORT_SYMBOL(pm_power_off);
- 
- void show_regs(struct pt_regs * regs)
-diff --git a/arch/m68k/kernel/setup_mm.c b/arch/m68k/kernel/setup_mm.c
-index 4b51bfd38e5f..50f4f120a4ff 100644
---- a/arch/m68k/kernel/setup_mm.c
-+++ b/arch/m68k/kernel/setup_mm.c
-@@ -98,7 +98,6 @@ EXPORT_SYMBOL(mach_get_rtc_pll);
- EXPORT_SYMBOL(mach_set_rtc_pll);
- void (*mach_reset)( void );
- void (*mach_halt)( void );
--void (*mach_power_off)( void );
- #ifdef CONFIG_HEARTBEAT
- void (*mach_heartbeat) (int);
- EXPORT_SYMBOL(mach_heartbeat);
-diff --git a/arch/m68k/kernel/setup_no.c b/arch/m68k/kernel/setup_no.c
-index 5e4104f07a44..00bf82258233 100644
---- a/arch/m68k/kernel/setup_no.c
-+++ b/arch/m68k/kernel/setup_no.c
-@@ -55,7 +55,6 @@ int (*mach_hwclk) (int, struct rtc_time*);
- /* machine dependent reboot functions */
- void (*mach_reset)(void);
- void (*mach_halt)(void);
--void (*mach_power_off)(void);
- 
- #ifdef CONFIG_M68000
- #if defined(CONFIG_M68328)
-diff --git a/arch/m68k/mac/config.c b/arch/m68k/mac/config.c
-index 5d16f9b47aa9..727320dedf08 100644
---- a/arch/m68k/mac/config.c
-+++ b/arch/m68k/mac/config.c
-@@ -12,6 +12,7 @@
- 
- #include <linux/errno.h>
- #include <linux/module.h>
-+#include <linux/reboot.h>
- #include <linux/types.h>
- #include <linux/mm.h>
- #include <linux/tty.h>
-@@ -139,7 +140,6 @@ void __init config_mac(void)
- 	mach_hwclk = mac_hwclk;
- 	mach_reset = mac_reset;
- 	mach_halt = mac_poweroff;
--	mach_power_off = mac_poweroff;
- #if IS_ENABLED(CONFIG_INPUT_M68K_BEEP)
- 	mach_beep = mac_mksound;
- #endif
-@@ -159,6 +159,8 @@ void __init config_mac(void)
- 
- 	if (macintosh_config->ident == MAC_MODEL_IICI)
- 		mach_l2_flush = via_l2_flush;
-+
-+	register_platform_power_off(mac_poweroff);
- }
- 
  
 -- 
 2.33.1
