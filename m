@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2557C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4961CC433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 68F62610CA
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 68F62610CA
+	by mail.kernel.org (Postfix) with ESMTPS id 121F460E73
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 121F460E73
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217291.377349 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217293.377357 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSp-0003Pb-6T; Wed, 27 Oct 2021 21:28:03 +0000
+	id 1mfqSr-0003m0-Dn; Wed, 27 Oct 2021 21:28:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217291.377349; Wed, 27 Oct 2021 21:28:03 +0000
+Received: by outflank-mailman (output) from mailman id 217293.377357; Wed, 27 Oct 2021 21:28:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSp-0003PH-2K; Wed, 27 Oct 2021 21:28:03 +0000
-Received: by outflank-mailman (input) for mailman id 217291;
+	id 1mfqSq-0003kR-Sv; Wed, 27 Oct 2021 21:28:04 +0000
+Received: by outflank-mailman (input) for mailman id 217293;
  Wed, 27 Oct 2021 21:28:02 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqLg-0000sJ-Cm
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:20:40 +0000
+ id 1mfqJp-0000sJ-9M
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:18:45 +0000
 Received: from mail-lj1-x22c.google.com (unknown [2a00:1450:4864:20::22c])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2a30c3a8-3914-4552-9591-340833ae07dc;
- Wed, 27 Oct 2021 21:18:45 +0000 (UTC)
-Received: by mail-lj1-x22c.google.com with SMTP id k13so6922068ljj.12
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:45 -0700 (PDT)
+ id fa87cbdc-a519-4dc2-8f4a-cb53f367af93;
+ Wed, 27 Oct 2021 21:18:12 +0000 (UTC)
+Received: by mail-lj1-x22c.google.com with SMTP id d23so5636747ljj.10
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:12 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.43
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:44 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a30c3a8-3914-4552-9591-340833ae07dc
+X-Inumbo-ID: fa87cbdc-a519-4dc2-8f4a-cb53f367af93
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=XVkgO3q8+3iXvnI8C7YHW1hpsebxqvqNvVwPho8vSws=;
-        b=JvBjth71MhsyIm0JdpPylPRsS4KUFW6BneSIAqxDXDzbFjW9Bt93MWfm5UnDUVT+LY
-         PN2DoVOg4LkGHqR46okUaH0xtknlZuN7sz1m2rXWFP+8ycrv0mDE2+lXOLhNQyopT3Vb
-         C9HJqmEvn5NNTeFE+Yqt8PhYhqF5nNL7X6uD9nn3NzyyFpNh4ofur6IOki9Q5zCOptdK
-         PNXfyjJD/8x2BE3QO9lZ5RaDpWCetJjHnzeJvzuWrsMKLwqp5dFqdwNw5X1p5tIb9H77
-         X9gwILOKempj602Hj9wd8g1ui3+PA2eteBB91Roi8uzQIKwV7mQ4s5O8fFD8fUrtUyG6
-         Kjfw==
+        bh=SC0z1BXiHBYdSnCagR43oAXvnFYzAsSZgTyQ9BiR6xA=;
+        b=OqqZ454WmFhFtJRhrw1iVetFaZ5cTmy1bK8cAKF7x4FJ4EjwPLEB4smQoL+kFj8hga
+         BjmXNHow4qrZGAK5gLKqSouT5oIb6yppthDueiLerRGv55Pbl/JgRUYLNcFzmXzu9NWO
+         EfhhNkXWXYZNWJhLg94zD8UyrvrtUOP73QnC8NTzMu/ENt6HanrdBXR7OCg2dyRE+fYN
+         1aO4sBj2Cdgy8VygaDgIGG5bFgsrX38xxJAfHh6M83eOLzNNbly5jBUwBwT1c3/ScSfl
+         6ZeIfaA93j63rbj1hC4fiWUjcO1LV9zENBfV1gxkADNuk/sNHvjjMOa2SIgObFEQihCd
+         GDlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=XVkgO3q8+3iXvnI8C7YHW1hpsebxqvqNvVwPho8vSws=;
-        b=Cv6uTIRUoRiNxUDYded0HSpKvlZPwGeb2gPoFy0B36ap8b767QFpNMBV3eQwfBlSQu
-         YbuJgQ5blV6EV/LFQB4WxtL4goTzHhJN5L3zeKyCh/gZOnbWW3/03T24r4b2O3YuAl3d
-         lu4C+bCFb0/+merDn1ZnM0tMC0lZO20loeqvgHd22ZLe86HlyaEkBVLx01yZvjIScBwG
-         smxWdTRQjkalmg7AGdlb6w1SYvEwlVUlZJCIHpwf0urSSQ5K+IjgJSSnEjJhPKY3xh1A
-         1fXA7GDMzn2lCQ6SOpgzt5P5L7h0un+MUx0J6TZTgNzBt9PLu86Ubxi/NKQUeyk5htiC
-         OLzw==
-X-Gm-Message-State: AOAM533V+wAfoJO5TwDZNOi1ZykbfglfosZqd2HY5ujTzdI+krnVL4+8
-	0OuMOVx4vbuZT7+WtpfjWVo=
-X-Google-Smtp-Source: ABdhPJyyXdjb3N9Ed9Jr705ZzPzIsFRHZUJ+KOYE2dHtjD39JQsr/OWSSeXdN0P7Zob21uOYhbWDdA==
-X-Received: by 2002:a2e:9b55:: with SMTP id o21mr306486ljj.141.1635369524980;
-        Wed, 27 Oct 2021 14:18:44 -0700 (PDT)
+        bh=SC0z1BXiHBYdSnCagR43oAXvnFYzAsSZgTyQ9BiR6xA=;
+        b=z8Q9DWuAXsgqcQ+MIzqcXJHobJKYZWvEqvg0H235r9zMqA89hhRgneH+IPwWrFSesw
+         YE5in9E7gjCHF7cGxDJREE0CQbTHL2h8GLZ+fKuaSct/PAUnfYp8mczqZGeokYaOUG/9
+         PxeRY6Sv8pAXo/PuEEVut4DY+kQ2zodZwndePD9DRHHEQvDV70VtLUmV4PNpMzmRTWk0
+         jH2tcF83UN+o8oY/kWUhyko+goqAoXhWXGZMADZ9XAzXEe5a8yvV2xj7w8/m0q4ZDHeC
+         +SzFW01yhwVakB4vykrdlxIhjitx5oU1BG4d8mnBE4kuM230TAUeAEezxSVuDRbiAiGi
+         enEA==
+X-Gm-Message-State: AOAM532Fuwwy6f9Zx6XVafLo+C420Yq6VBnzuNeHuDBEy8Ex9/3LzPj9
+	nexmhH7BY/jxwLmtC4HomVM=
+X-Google-Smtp-Source: ABdhPJyn+zaTZhCmg6enYSN9xCI0Iv7Hmc/0KiXYEr7/tCUpX3ufLRXDN1zs5d0zePAVBcBxKNrxsQ==
+X-Received: by 2002:a05:651c:291:: with SMTP id b17mr380232ljo.90.1635369491425;
+        Wed, 27 Oct 2021 14:18:11 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,140 +152,40 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 28/45] mfd: rn5t618: Use devm_register_power_handler()
-Date: Thu, 28 Oct 2021 00:16:58 +0300
-Message-Id: <20211027211715.12671-29-digetx@gmail.com>
+Subject: [PATCH v2 10/45] ARM: Use do_kernel_power_off()
+Date: Thu, 28 Oct 2021 00:16:40 +0300
+Message-Id: <20211027211715.12671-11-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use devm_register_power_handler() that replaces global pm_power_off
-variable and allows to register multiple power-off handlers. It also
-provides restart-handler support, i.e. all in one API.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/mfd/rn5t618.c | 56 ++++++++++++++++---------------------------
- 1 file changed, 21 insertions(+), 35 deletions(-)
+ arch/arm/kernel/reboot.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/drivers/mfd/rn5t618.c b/drivers/mfd/rn5t618.c
-index 384acb459427..12d7b2339bbe 100644
---- a/drivers/mfd/rn5t618.c
-+++ b/drivers/mfd/rn5t618.c
-@@ -84,9 +84,6 @@ static const struct regmap_irq_chip rc5t619_irq_chip = {
- 	.mask_invert = true,
- };
- 
--static struct i2c_client *rn5t618_pm_power_off;
--static struct notifier_block rn5t618_restart_handler;
--
- static int rn5t618_irq_init(struct rn5t618 *rn5t618)
+diff --git a/arch/arm/kernel/reboot.c b/arch/arm/kernel/reboot.c
+index 3044fcb8d073..2cb943422554 100644
+--- a/arch/arm/kernel/reboot.c
++++ b/arch/arm/kernel/reboot.c
+@@ -116,9 +116,7 @@ void machine_power_off(void)
  {
- 	const struct regmap_irq_chip *irq_chip = NULL;
-@@ -115,7 +112,9 @@ static int rn5t618_irq_init(struct rn5t618 *rn5t618)
- 	return ret;
+ 	local_irq_disable();
+ 	smp_send_stop();
+-
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
  }
  
--static void rn5t618_trigger_poweroff_sequence(bool repower)
-+static void
-+rn5t618_trigger_poweroff_sequence(struct i2c_client *rn5t618_pm_power_off,
-+				  bool repower)
- {
- 	int ret;
- 
-@@ -151,25 +150,31 @@ static void rn5t618_trigger_poweroff_sequence(bool repower)
- 	dev_alert(&rn5t618_pm_power_off->dev, "Failed to shutdown (err = %d)\n", ret);
- }
- 
--static void rn5t618_power_off(void)
-+static void rn5t618_power_off(struct power_off_data *data)
- {
--	rn5t618_trigger_poweroff_sequence(false);
-+	struct i2c_client *client = data->cb_data;
-+
-+	rn5t618_trigger_poweroff_sequence(client, false);
- }
- 
--static int rn5t618_restart(struct notifier_block *this,
--			    unsigned long mode, void *cmd)
-+static void rn5t618_restart(struct restart_data *data)
- {
--	rn5t618_trigger_poweroff_sequence(true);
-+	struct i2c_client *client = data->cb_data;
-+
-+	rn5t618_trigger_poweroff_sequence(client, true);
- 
- 	/*
- 	 * Re-power factor detection on PMIC side is not instant. 1ms
- 	 * proved to be enough time until reset takes effect.
- 	 */
- 	mdelay(1);
--
--	return NOTIFY_DONE;
- }
- 
-+static struct power_handler rn5t618_power_handler = {
-+	.restart_cb = rn5t618_restart,
-+	.restart_priority = RESTART_PRIO_HIGH,
-+};
-+
- static const struct of_device_id rn5t618_of_match[] = {
- 	{ .compatible = "ricoh,rn5t567", .data = (void *)RN5T567 },
- 	{ .compatible = "ricoh,rn5t618", .data = (void *)RN5T618 },
-@@ -221,38 +226,20 @@ static int rn5t618_i2c_probe(struct i2c_client *i2c)
- 		return ret;
- 	}
- 
--	rn5t618_pm_power_off = i2c;
--	if (of_device_is_system_power_controller(i2c->dev.of_node)) {
--		if (!pm_power_off)
--			pm_power_off = rn5t618_power_off;
--		else
--			dev_warn(&i2c->dev, "Poweroff callback already assigned\n");
--	}
-+	if (of_device_is_system_power_controller(i2c->dev.of_node))
-+		rn5t618_power_handler.power_off_cb = rn5t618_power_off;
- 
--	rn5t618_restart_handler.notifier_call = rn5t618_restart;
--	rn5t618_restart_handler.priority = 192;
-+	rn5t618_power_handler.cb_data = i2c;
- 
--	ret = register_restart_handler(&rn5t618_restart_handler);
-+	ret = devm_register_power_handler(&i2c->dev, &rn5t618_power_handler);
- 	if (ret) {
--		dev_err(&i2c->dev, "cannot register restart handler, %d\n", ret);
-+		dev_err(&i2c->dev, "failed to register power handler: %d\n", ret);
- 		return ret;
- 	}
- 
- 	return rn5t618_irq_init(priv);
- }
- 
--static int rn5t618_i2c_remove(struct i2c_client *i2c)
--{
--	if (i2c == rn5t618_pm_power_off) {
--		rn5t618_pm_power_off = NULL;
--		pm_power_off = NULL;
--	}
--
--	unregister_restart_handler(&rn5t618_restart_handler);
--
--	return 0;
--}
--
- static int __maybe_unused rn5t618_i2c_suspend(struct device *dev)
- {
- 	struct rn5t618 *priv = dev_get_drvdata(dev);
-@@ -284,7 +271,6 @@ static struct i2c_driver rn5t618_i2c_driver = {
- 		.pm = &rn5t618_i2c_dev_pm_ops,
- 	},
- 	.probe_new = rn5t618_i2c_probe,
--	.remove = rn5t618_i2c_remove,
- };
- 
- module_i2c_driver(rn5t618_i2c_driver);
+ /*
 -- 
 2.33.1
 
