@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB53CC433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38B41C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A3FD2610C7
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A3FD2610C7
+	by mail.kernel.org (Postfix) with ESMTPS id 0862B610C7
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:29:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0862B610C7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217366.377518 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217372.377537 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqTZ-0004DJ-7Y; Wed, 27 Oct 2021 21:28:49 +0000
+	id 1mfqTd-0005DX-4f; Wed, 27 Oct 2021 21:28:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217366.377518; Wed, 27 Oct 2021 21:28:49 +0000
+Received: by outflank-mailman (output) from mailman id 217372.377537; Wed, 27 Oct 2021 21:28:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqTY-00044A-F1; Wed, 27 Oct 2021 21:28:48 +0000
-Received: by outflank-mailman (input) for mailman id 217366;
- Wed, 27 Oct 2021 21:28:43 +0000
+	id 1mfqTc-00059t-He; Wed, 27 Oct 2021 21:28:52 +0000
+Received: by outflank-mailman (input) for mailman id 217372;
+ Wed, 27 Oct 2021 21:28:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqMU-0000sJ-Dm
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:21:30 +0000
-Received: from mail-lf1-x12f.google.com (unknown [2a00:1450:4864:20::12f])
+ id 1mfqKE-0000sJ-9s
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:19:10 +0000
+Received: from mail-lf1-x12a.google.com (unknown [2a00:1450:4864:20::12a])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f281c280-7e2c-4b52-8649-7ff7b12073ce;
- Wed, 27 Oct 2021 21:19:00 +0000 (UTC)
-Received: by mail-lf1-x12f.google.com with SMTP id bi35so8960334lfb.9
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:19:00 -0700 (PDT)
+ id 0b8a1e4b-85eb-4c9e-ba9c-2f8a196adde9;
+ Wed, 27 Oct 2021 21:18:21 +0000 (UTC)
+Received: by mail-lf1-x12a.google.com with SMTP id u11so9039924lfs.1
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:21 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.58
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:59 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f281c280-7e2c-4b52-8649-7ff7b12073ce
+X-Inumbo-ID: 0b8a1e4b-85eb-4c9e-ba9c-2f8a196adde9
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=/EvvYGeTVCQImKsIJ5eG/5fF3PWyG/w2giRYqfawyD8=;
-        b=WISWhItqSg2B7RF+VMq4lOAEaPJboj2meAQ+IB5/V1NHbNJFBmj5XS0xlb4zCXSKCT
-         6NsXWHZYq9LRGS+jBn6SfWgsJR2EyLsQBWeeDJtEZfPXB1ZJ5N3cxcINwqw5WxZcKDSN
-         DIvIUkbk9mQPYxMXhFN2I7TObVzLJ8eVxU8hzEXgYSzj8Cm7i8BXlPfHwlq3yNPgneQb
-         CHkJFZxdfY5RLlI3BGfXo88fraOgWdNEzamQkJbIJD18e+/pItOdQTQl7YVu3LpCjfDV
-         vOVdkFjMAfH4ytXgGRWsun/uVtAnjn/uKIwgKMmU3X2UQuuCd1+gugzIIN8JE0FZ4XsA
-         8FgQ==
+        bh=IgdEY3brdUGAcbkVUTuopyRaDKQjmT9IOiG4donLZPs=;
+        b=A3JO6VvJimX2FDA0dLxQreYnwNBhx07tWQqQ/SXHhnBPoY3sXPbkG7/+E3nQpmOX0A
+         xlWT2EkBKpC8k8ZWfgyhIneFn7gx6l3JU5mZMCJ9Gg2YcXAy3/1zaAAc5fiz8vpe6tlD
+         ZvghxSem0XLQoHwdT6xVe9kcSCqZDVrl06JyyBvtaA4P5y8CnmEwrM6jHVXlGrSBhDO0
+         o8SePrtzTGOU2c+h0yCzi7vHVuNfd1Z0T1OIQTsX0utpaovYy+QkExsu3rsU1LEkDfsA
+         b8P9cl2mQ3B7fspke5UfEwNdCDRC5NS7RaIYXDvPpdxxluddWoVhn2i0iC+LZc0Zjzjl
+         nizw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=/EvvYGeTVCQImKsIJ5eG/5fF3PWyG/w2giRYqfawyD8=;
-        b=U+exVGjIuZrTZvaorfdlm/oyMq/hAou4g7Vw/VviOIsVhOIHQaH7ZsgzcBUs7BDYjA
-         xraSSIeYu8vLir9B69E23edFmqksnkzkDjlj0XX9iP/YQjAQsOqBvPE2H0o4GgtlRZWU
-         hNb8Vt0pzE/X4FnG6j1bTSaVkkiaPKZy4XStEshgOR5EVDgbiCYau9+cgT96W8kxvvjh
-         Jes/wNAAN6xcwNzNW7NF/R1UoYY+g3+1Tetx6QyDld+fZiZBt8XbGVa6aKBwJ2veesUB
-         ejKBdjDxK1tTRYWB6HttVhUmGEiggrsbBMFOpESh0/WytCeQjzfCZBdMqOkMt4a2eBrR
-         KceQ==
-X-Gm-Message-State: AOAM533mQDpK4i0E42aqLHLCnefrjicLGCp8rNX3Nr7Sip/m3X9UaPTm
-	hees8pr1YHC7aEumg+rfsP4=
-X-Google-Smtp-Source: ABdhPJxRCjxAoGlWdRIW6Oj8xz2ri71YJVQnEgFasE3kMNBOfZWQ65DiEYFCvQ3qjpKPcAaJZhmXrA==
-X-Received: by 2002:ac2:4c08:: with SMTP id t8mr95028lfq.281.1635369539813;
-        Wed, 27 Oct 2021 14:18:59 -0700 (PDT)
+        bh=IgdEY3brdUGAcbkVUTuopyRaDKQjmT9IOiG4donLZPs=;
+        b=08iVB7RQGYBcC9LIiw7uhNy98+HvujL5P93s1q88YJbqKGpQ7Awv+XRJGbaPbjJzP5
+         SGb5ZnDVnyWtHXpuoDlM/w6WCRBBcC5Cmb8A1c25J7b7xYjxz1kWd+b2736qgGqwV9iR
+         Eclw1PBap1h7x91P7IDsXIyugynMEoziMGwJlmj1rKaUYRmBb1z1bgFvQEv1XreHC0kj
+         aAnEbhl/X5txrjcdyqgo8wPPE6rpZc9x5H8k7TVT8XjmkpVGYPn9BXzHw8gbnnm/D4Lu
+         pJBu9NhtBB8w2PNtWG14FRerdel7ChzjY8oqtQjIBYAIYlSTlljjSTi7ctzjdSLcZ5Wu
+         ZEeg==
+X-Gm-Message-State: AOAM530PUgffhrAveixWGtV+j+wG2cIWtUsWLnD7H/a0qXczQVPNzy5u
+	im4u2GVvHBrXULXefBPNM0o=
+X-Google-Smtp-Source: ABdhPJwtMjA7PlvcFRu5kz6vTDm0WOPOzzhi40W0Cp5+CpUA24meJt6Drh8JDJU/Rr1wsTlEzin4/g==
+X-Received: by 2002:a05:6512:401f:: with SMTP id br31mr96058lfb.169.1635369500752;
+        Wed, 27 Oct 2021 14:18:20 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,77 +152,39 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 36/45] mfd: tps6586x: Use devm_register_simple_power_off_handler()
-Date: Thu, 28 Oct 2021 00:17:06 +0300
-Message-Id: <20211027211715.12671-37-digetx@gmail.com>
+Subject: [PATCH v2 15/45] nds32: Use do_kernel_power_off()
+Date: Thu, 28 Oct 2021 00:16:45 +0300
+Message-Id: <20211027211715.12671-16-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use devm_register_simple_power_off_handler() that replaces global
-pm_power_off variable and allows to register multiple power-off handlers.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/mfd/tps6586x.c | 21 ++++++++++++++-------
- 1 file changed, 14 insertions(+), 7 deletions(-)
+ arch/nds32/kernel/process.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/mfd/tps6586x.c b/drivers/mfd/tps6586x.c
-index c9303d3d6602..9033ed936d1e 100644
---- a/drivers/mfd/tps6586x.c
-+++ b/drivers/mfd/tps6586x.c
-@@ -22,6 +22,7 @@
- #include <linux/err.h>
- #include <linux/i2c.h>
- #include <linux/platform_device.h>
-+#include <linux/reboot.h>
- #include <linux/regmap.h>
- #include <linux/of.h>
+diff --git a/arch/nds32/kernel/process.c b/arch/nds32/kernel/process.c
+index 49fab9e39cbf..0936dcd7db1b 100644
+--- a/arch/nds32/kernel/process.c
++++ b/arch/nds32/kernel/process.c
+@@ -54,8 +54,7 @@ EXPORT_SYMBOL(machine_halt);
  
-@@ -461,9 +462,10 @@ static const struct regmap_config tps6586x_regmap_config = {
- 	.cache_type = REGCACHE_RBTREE,
- };
- 
--static struct device *tps6586x_dev;
--static void tps6586x_power_off(void)
-+static void tps6586x_power_off(void *data)
+ void machine_power_off(void)
  {
-+	struct device *tps6586x_dev = data;
-+
- 	if (tps6586x_clr_bits(tps6586x_dev, TPS6586X_SUPPLYENE, EXITSLREQ_BIT))
- 		return;
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
+ }
  
-@@ -540,6 +542,16 @@ static int tps6586x_i2c_probe(struct i2c_client *client,
- 		return ret;
- 	}
- 
-+	if (pdata->pm_off) {
-+		ret = devm_register_simple_power_off_handler(&client->dev,
-+							     tps6586x_power_off,
-+							     &client->dev);
-+		if (ret) {
-+			dev_err(&client->dev,
-+				"failed to register power-off handler: %d\n", ret);
-+			return ret;
-+		}
-+	}
- 
- 	if (client->irq) {
- 		ret = tps6586x_irq_init(tps6586x, client->irq,
-@@ -564,11 +576,6 @@ static int tps6586x_i2c_probe(struct i2c_client *client,
- 		goto err_add_devs;
- 	}
- 
--	if (pdata->pm_off && !pm_power_off) {
--		tps6586x_dev = &client->dev;
--		pm_power_off = tps6586x_power_off;
--	}
--
- 	return 0;
- 
- err_add_devs:
+ EXPORT_SYMBOL(machine_power_off);
 -- 
 2.33.1
 
