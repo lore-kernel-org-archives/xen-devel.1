@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 320C2C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41A27C433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DB813610CB
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DB813610CB
+	by mail.kernel.org (Postfix) with ESMTPS id E404C60E74
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E404C60E74
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217352.377465 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217350.377460 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqTM-0001Xa-Tj; Wed, 27 Oct 2021 21:28:36 +0000
+	id 1mfqTM-0001PZ-92; Wed, 27 Oct 2021 21:28:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217352.377465; Wed, 27 Oct 2021 21:28:36 +0000
+Received: by outflank-mailman (output) from mailman id 217350.377460; Wed, 27 Oct 2021 21:28:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqTM-0001VV-9s; Wed, 27 Oct 2021 21:28:36 +0000
-Received: by outflank-mailman (input) for mailman id 217352;
- Wed, 27 Oct 2021 21:28:33 +0000
+	id 1mfqTL-0001M3-Gf; Wed, 27 Oct 2021 21:28:35 +0000
+Received: by outflank-mailman (input) for mailman id 217350;
+ Wed, 27 Oct 2021 21:28:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqN3-0000sJ-Eh
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:22:05 +0000
-Received: from mail-lf1-x12e.google.com (unknown [2a00:1450:4864:20::12e])
+ id 1mfqLv-0000sJ-D2
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:20:55 +0000
+Received: from mail-lf1-x132.google.com (unknown [2a00:1450:4864:20::132])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 65faa95e-9d9e-4589-b672-ba4175121473;
- Wed, 27 Oct 2021 21:19:02 +0000 (UTC)
-Received: by mail-lf1-x12e.google.com with SMTP id x27so9006560lfu.5
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:19:02 -0700 (PDT)
+ id 765197f5-6d84-42ba-939a-91f43f9d5d2b;
+ Wed, 27 Oct 2021 21:18:51 +0000 (UTC)
+Received: by mail-lf1-x132.google.com with SMTP id bi35so8959697lfb.9
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:51 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.59
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:19:01 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 65faa95e-9d9e-4589-b672-ba4175121473
+X-Inumbo-ID: 765197f5-6d84-42ba-939a-91f43f9d5d2b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=IkN5RxNvfWU6udxIv0HqPwHPsreqVVHZYAiW4uOSdQE=;
-        b=EBSN3i6pBzJ/QX6b7hWJ61FbfkEkrcOrflTwto+4KX4or46ACVz9Tr/1pugxTtiHmi
-         G7CMVOoidyYK0g+Vg4pJnm/bKfolm8lIe6sk0vITgUl/0On7GAe1avC+nPdsUhal8n/2
-         2LfBGzyZF4kisF1H8Fy3oqJJlA7mP+5FCx9jGZBePen+YJxCg52jU7glSS7bDwelermJ
-         QOk39GQqnkcumTBHd2mHERoDOJXwlx4KsuyCu/MObr6DT96WNWvs0v/iyAkBnjjhRCxD
-         gw7GTseQp5qiH+atTqu6Rg9n+NmY0IzLKdyAE4sSGNY6W234A5z05GeGyvCsr57AR1H6
-         zVgw==
+        bh=MQWhTF0wBI+IugzPE3ghLHT129hypIGKpejDwrM3hyE=;
+        b=RZvyurGZNweTiQS39Ean2OjgLccYrK032pC/dpD5TIetEdWActoZDZ0pbxUwZ65EB3
+         f6HHqHOjaIJRkLRbNXFH+a9dD2g5xu+MxS8srOD+UoT89FXGbOpnIpBzsogwI4SrHnvI
+         Xp4OXB4rFx2UJNCOe+1ontZRmKhqDl18fc0h55fLU7qhbVovqyZfQtN1oE2ZBblN4A6p
+         LG+FlNBhlZ+ejJ/tR/o9Ca2I3+iU/ni7hPa9YCzdcCgi2bkMHewfSz0zfMDsoGnOZiG5
+         WYH0N8y7+ABYK8jopd3eQsXttqeRRQN+xpWJ5QIjK2cUfd8tbZPE8negDAsL0a+gaJ2V
+         fJ3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=IkN5RxNvfWU6udxIv0HqPwHPsreqVVHZYAiW4uOSdQE=;
-        b=QQRK7uNfkfXqzh/2+qQB2MBTUpYfY33zA5szHcVFIkXZkR0RvDa8Tuz3JK8x6ySli9
-         eVRGuLNRWtkyZYfGkhVaPgixrOkMdiN9DO4/Vg0p7aO/4jRO7dBUmg7vTAhGleHCS0W/
-         DtfzuiJxJnpm/NliR9eU3OuIvXPBNwbxbm+NnOEZFdYo8epCKQKr31KWpU76Jl9i/vq1
-         6llItVoOnjKUOESZEEve4RRWAYdTNEghGVqW9AdNAbXSCpZcOi3e5fWDvDJPrDuEEXPO
-         Jy1sxBH6dZ0fM6/TZyr/A84UyjIht9NoK9JuzPZwJ+RfFdartxC6cXMxTrzyivSSgXeK
-         6vqw==
-X-Gm-Message-State: AOAM533yRwLzsgkPHU9agHgQM72/9qu/2LVgrf9CagaeHQ/CWo4fsrwD
-	ytPEBubdFEq5l68D2yfMXJM=
-X-Google-Smtp-Source: ABdhPJxsr/pRUcPc/yvXJw9vQsQsBRCfPMRUucvUkltufw5utcaA8e0PD5R7U1W5XHhl0HmaGsY5xg==
-X-Received: by 2002:a05:6512:aca:: with SMTP id n10mr150724lfu.66.1635369541621;
-        Wed, 27 Oct 2021 14:19:01 -0700 (PDT)
+        bh=MQWhTF0wBI+IugzPE3ghLHT129hypIGKpejDwrM3hyE=;
+        b=TrWHUXfnUy4TAP/21iJjmHLf5D1rssfNba3HCQtdgoa5UnY5Gi69Peuh2LaeSC+HEg
+         GplshlLQwjhwi+JFPFZxZbD10p0ScPYIeMDnqQRZAK25R+CLzpOZl5y/xSZ+frcY/I9s
+         PbMxWxRFTQiNpT/87xIN5ChognVwVms5Q2P8G/xhi7xQ/n072b//jy7Dfvmk4Wj1IsL8
+         0hyhAhYaiiXjbDJo4p2V0b5t36wk3xBay4WEPAAR4Em4Vjo+wL3PeOr2Ypjop/r6DCB6
+         hjGzu96SPJs7tUvc9OZ4qPQze0lNQ/58+FbKNRuGJai3ux1t8cbIIW8d2gFs652OrqTk
+         uR5Q==
+X-Gm-Message-State: AOAM533Zd8U4h9uqqxFDJ/+xq9vNGZY9tzp3qtR+BJ8GRFZAm6rKXpzL
+	Rj+mKIBS1lrrF0u1roulv7M=
+X-Google-Smtp-Source: ABdhPJyooWx5IN/z+hq1uWs5thGA811Cpi77JA6dUlt/XGnE5KIxJDhql9o1FzopBJlB1UrwswiMLg==
+X-Received: by 2002:a05:6512:3f04:: with SMTP id y4mr131405lfa.180.1635369530580;
+        Wed, 27 Oct 2021 14:18:50 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,66 +152,91 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 37/45] mfd: tps65910: Use devm_register_simple_power_off_handler()
-Date: Thu, 28 Oct 2021 00:17:07 +0300
-Message-Id: <20211027211715.12671-38-digetx@gmail.com>
+Subject: [PATCH v2 31/45] mfd: axp20x: Use register_simple_power_off_handler()
+Date: Thu, 28 Oct 2021 00:17:01 +0300
+Message-Id: <20211027211715.12671-32-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use devm_register_simple_power_off_handler() that replaces global
-pm_power_off variable and allows to register multiple power-off handlers.
+Use register_simple_power_off_handler() that replaces global pm_power_off
+variable and allows to register multiple power-off handlers.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/mfd/tps65910.c | 17 ++++++++++++-----
- 1 file changed, 12 insertions(+), 5 deletions(-)
+ drivers/mfd/axp20x.c       | 22 +++++++++++-----------
+ include/linux/mfd/axp20x.h |  1 +
+ 2 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/mfd/tps65910.c b/drivers/mfd/tps65910.c
-index 6e105cca27d4..8fab30dc84e5 100644
---- a/drivers/mfd/tps65910.c
-+++ b/drivers/mfd/tps65910.c
-@@ -16,6 +16,7 @@
- #include <linux/irq.h>
- #include <linux/irqdomain.h>
- #include <linux/mfd/core.h>
+diff --git a/drivers/mfd/axp20x.c b/drivers/mfd/axp20x.c
+index 8161a5dc68e8..db31fdb169e4 100644
+--- a/drivers/mfd/axp20x.c
++++ b/drivers/mfd/axp20x.c
+@@ -24,6 +24,7 @@
+ #include <linux/module.h>
+ #include <linux/of_device.h>
+ #include <linux/pm_runtime.h>
 +#include <linux/reboot.h>
  #include <linux/regmap.h>
- #include <linux/mfd/tps65910.h>
- #include <linux/of.h>
-@@ -429,9 +430,9 @@ struct tps65910_board *tps65910_parse_dt(struct i2c_client *client,
- }
- #endif
+ #include <linux/regulator/consumer.h>
  
--static struct i2c_client *tps65910_i2c_client;
--static void tps65910_power_off(void)
-+static void tps65910_power_off(void *data)
+@@ -823,9 +824,10 @@ static const struct mfd_cell axp813_cells[] = {
+ 	},
+ };
+ 
+-static struct axp20x_dev *axp20x_pm_power_off;
+-static void axp20x_power_off(void)
++static void axp20x_power_off(void *data)
  {
-+	struct i2c_client *tps65910_i2c_client = data;
- 	struct tps65910 *tps65910;
++	struct axp20x_dev *axp20x_pm_power_off = data;
++
+ 	if (axp20x_pm_power_off->variant == AXP288_ID)
+ 		return;
  
- 	tps65910 = dev_get_drvdata(&tps65910_i2c_client->dev);
-@@ -503,9 +504,15 @@ static int tps65910_i2c_probe(struct i2c_client *i2c,
- 	tps65910_ck32k_init(tps65910, pmic_plat_data);
- 	tps65910_sleepinit(tps65910, pmic_plat_data);
- 
--	if (pmic_plat_data->pm_off && !pm_power_off) {
--		tps65910_i2c_client = i2c;
--		pm_power_off = tps65910_power_off;
-+	if (pmic_plat_data->pm_off) {
-+		ret = devm_register_simple_power_off_handler(&i2c->dev,
-+							     tps65910_power_off,
-+							     i2c);
-+		if (ret) {
-+			dev_err(&i2c->dev,
-+				"failed to register power-off handler: %d\n", ret);
-+			return ret;
-+		}
+@@ -1000,10 +1002,12 @@ int axp20x_device_probe(struct axp20x_dev *axp20x)
+ 		return ret;
  	}
  
- 	ret = devm_mfd_add_devices(tps65910->dev, -1,
+-	if (!pm_power_off) {
+-		axp20x_pm_power_off = axp20x;
+-		pm_power_off = axp20x_power_off;
+-	}
++	axp20x->power_handler =
++		register_simple_power_off_handler(axp20x_power_off, axp20x);
++
++	if (IS_ERR(axp20x->power_handler))
++		dev_err(axp20x->dev, "failed to register power-off handler: %pe",
++			axp20x->power_handler);
+ 
+ 	dev_info(axp20x->dev, "AXP20X driver loaded\n");
+ 
+@@ -1013,11 +1017,7 @@ EXPORT_SYMBOL(axp20x_device_probe);
+ 
+ void axp20x_device_remove(struct axp20x_dev *axp20x)
+ {
+-	if (axp20x == axp20x_pm_power_off) {
+-		axp20x_pm_power_off = NULL;
+-		pm_power_off = NULL;
+-	}
+-
++	unregister_simple_power_off_handler(axp20x->power_handler);
+ 	mfd_remove_devices(axp20x->dev);
+ 	regmap_del_irq_chip(axp20x->irq, axp20x->regmap_irqc);
+ }
+diff --git a/include/linux/mfd/axp20x.h b/include/linux/mfd/axp20x.h
+index 9ab0e2fca7ea..49319a0ac369 100644
+--- a/include/linux/mfd/axp20x.h
++++ b/include/linux/mfd/axp20x.h
+@@ -643,6 +643,7 @@ struct axp20x_dev {
+ 	const struct mfd_cell           *cells;
+ 	const struct regmap_config	*regmap_cfg;
+ 	const struct regmap_irq_chip	*regmap_irq_chip;
++	struct power_handler		*power_handler;
+ };
+ 
+ /* generic helper function for reading 9-16 bit wide regs */
 -- 
 2.33.1
 
