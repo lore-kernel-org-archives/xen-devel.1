@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45CC6C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 850BEC43217
 	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 008A8610CA
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 008A8610CA
+	by mail.kernel.org (Postfix) with ESMTPS id 3F55B610EA
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3F55B610EA
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217282.377288 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217281.377279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSf-00015B-Bc; Wed, 27 Oct 2021 21:27:53 +0000
+	id 1mfqSe-0000tG-KR; Wed, 27 Oct 2021 21:27:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217282.377288; Wed, 27 Oct 2021 21:27:53 +0000
+Received: by outflank-mailman (output) from mailman id 217281.377279; Wed, 27 Oct 2021 21:27:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSf-00012Q-0E; Wed, 27 Oct 2021 21:27:53 +0000
-Received: by outflank-mailman (input) for mailman id 217282;
+	id 1mfqSe-0000qC-7d; Wed, 27 Oct 2021 21:27:52 +0000
+Received: by outflank-mailman (input) for mailman id 217281;
  Wed, 27 Oct 2021 21:27:50 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqJz-0000sJ-9b
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:18:55 +0000
-Received: from mail-lf1-x12f.google.com (unknown [2a00:1450:4864:20::12f])
+ id 1mfqND-0000sJ-Ey
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:22:15 +0000
+Received: from mail-lj1-x231.google.com (unknown [2a00:1450:4864:20::231])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0222bae1-7769-490d-af5a-95eedee2bd43;
- Wed, 27 Oct 2021 21:18:16 +0000 (UTC)
-Received: by mail-lf1-x12f.google.com with SMTP id u21so8955846lff.8
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:16 -0700 (PDT)
+ id ff658b29-29e8-4a31-ab27-c640fd96d1ac;
+ Wed, 27 Oct 2021 21:19:04 +0000 (UTC)
+Received: by mail-lj1-x231.google.com with SMTP id 17so3841722ljq.0
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:19:04 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.13
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.19.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:14 -0700 (PDT)
+ Wed, 27 Oct 2021 14:19:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0222bae1-7769-490d-af5a-95eedee2bd43
+X-Inumbo-ID: ff658b29-29e8-4a31-ab27-c640fd96d1ac
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Vv5v7NJqa2pgRBcibgPiURAuuSzsOgTRkcWT+pa422M=;
-        b=VGbgvR+u/npCM8vNPn38NuZ+MIrzGhV81ZfjU+MvKS7AiNy8hSxCjA7ujiUYCw1avb
-         GAS28yQKe3RY82NkG0EyIE3kAScJ6kyKTE9XbDbIDpQ4/fNIy31zksAcsMcf8bk9+oZI
-         1wHpYlYvsjYNqCu/GmNzEr8yZmApiaFT6QsgmW5CvvcXj9w3x5S6f7cRGSestmqNVLhh
-         o9VGqc+8lw97d2ugsZVtaD4DU57/XiuAmduAg/0PPfMVALR+BIUtVf/vGT/0dSW22xNm
-         0l5U0Yw6vCM5eFCBC2LE4tjs/ctA+ukPU11+6ITwiBuENW3D9cS5YJDtN5S1cIiSXp7j
-         wB1A==
+        bh=Mu7tO95vXROZ9xbCJkoDzGl64HT6xR31EdIoyaMnKtk=;
+        b=kPE91xXN+stBc0ha+PSjaOkkNGKlDTid0pZMJS4/z0xuWbbpv+/mX7oe8gzrFGsnxt
+         knUKantyHU6PWIePiCnlFQ4UN8ZQdQP1oXKoJzSLIKv1lTDAhiLZjpDPc+aijhkrEZAj
+         Xd8HN8BgZu0o5hpIxMQVtpuABAaRE4DHHXJZzo4Dy3xXk62gjG4MyDoYUHzKrSYuupRB
+         lCz2OE27nWCjWUb+PHoI0yIS0mi3esed5R8cO+FhwY/2Rv4/jyVsNkj3xtgaoN5/YStc
+         dCcP9WUacf6ElBGM42XMwNMMkAZqDoGVD/aHJJj9Cz/Tk9wj2JFlAJdIXkKMwT6cvxA3
+         e31g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Vv5v7NJqa2pgRBcibgPiURAuuSzsOgTRkcWT+pa422M=;
-        b=0F+OIJvsYsGhRiZNJ72olscU3yMuCPfgyQTS+uu7olyHpLJDpnKujzpOoH5QIYWjRl
-         f0QxYEMFk18jonOGw5y/nS5NHMTMIZ1vjCjk/UU9KKz5MP6tDpnJmBpbDMIX2ZtkvVeB
-         UqlgpoTLivzGTAW8rtvmQAI6utRG6Ksb9GdRS8dIo0/X1MCt/PrvSMDVQNT0JvXTrh5K
-         OGYv4zjRSNu09OwfZ0je/Fbz7ZKxFWRmxzrbSM4gObu3KIePnVEYsGj6wCiBs8U99LKM
-         21hnGX3tUihmsZn14Az8TgzHu9DQ8F/3gHptJXf+1dobEnXoLKkHYPSuk1Ot+RTnpnQn
-         CPDQ==
-X-Gm-Message-State: AOAM530DKGns7N7S9ogSVOYjDGJew81eHlmrAqBbu+oSuayO43iAldjW
-	1C+aab59xWUTNTLC581sM0g=
-X-Google-Smtp-Source: ABdhPJycpSIBttPaIIeVkgKRen/cPXePW42pRZoMffRx62Sit7qS0BR3pB37ZmB7g4nrP0IYjPFMsA==
-X-Received: by 2002:ac2:5c43:: with SMTP id s3mr133719lfp.248.1635369495190;
-        Wed, 27 Oct 2021 14:18:15 -0700 (PDT)
+        bh=Mu7tO95vXROZ9xbCJkoDzGl64HT6xR31EdIoyaMnKtk=;
+        b=OWKFoUhWj90xmynbKzk3p4ZGwVeB7PunJvv2FX2kQToVbg/8bfGMZK9JnheeQBZg85
+         c7vsd2obubGPEN2cyAvIF9hDywbjd6cT8yjA2v2wawF3fxX0pJuVeaF4dIyc+OrgO1aC
+         6CPUP33yFZTtE3kJm54CeGcxBab0GvDONSDgVvUlf2w8RUrc7ZrTa7P1M+qPqZ0qzNXN
+         krh4M/eTfT47nwFKNLcmVmJsxeqXZnfGB0ppLhqQPqy4hNyL7TyNir/zcBd6zgdQpoOh
+         G8xXbaZBCruzK3g0MZ/oPopKwqn07rV6O41zwULXSDV7DZU0Z/7gWnVMxXBUxbHSk76k
+         mS/w==
+X-Gm-Message-State: AOAM530vDxhtg/vif7zKvrUjSQiDMITFpfdcYCQAmHVOh9UuTNVUqgb0
+	O4vFUDMXMX4EVQMhNIrECQ8=
+X-Google-Smtp-Source: ABdhPJx+pRFjcRYPR1om8nKBpIgAHoRaPbEg7vS4nL7YKN3yH6zq2Ajomu3cvpnY+yAbJLhjtqI1TQ==
+X-Received: by 2002:a2e:bb98:: with SMTP id y24mr344716lje.168.1635369543476;
+        Wed, 27 Oct 2021 14:19:03 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,48 +152,80 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 12/45] csky: Use do_kernel_power_off()
-Date: Thu, 28 Oct 2021 00:16:42 +0300
-Message-Id: <20211027211715.12671-13-digetx@gmail.com>
+Subject: [PATCH v2 38/45] mfd: max77620: Use devm_register_simple_power_off_handler()
+Date: Thu, 28 Oct 2021 00:17:08 +0300
+Message-Id: <20211027211715.12671-39-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new power-off API.
+Use devm_register_simple_power_off_handler() that replaces global
+pm_power_off variable and allows to register multiple power-off handlers.
+
+Nexus 7 Android tablet can be powered off using MAX77663 PMIC and using
+a special bootloader command. At first the bootloader option should be
+tried, it will have a higher priority than of PMIC that uses default
+priority.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- arch/csky/kernel/power.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ drivers/mfd/max77620.c | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
 
-diff --git a/arch/csky/kernel/power.c b/arch/csky/kernel/power.c
-index 923ee4e381b8..86ee202906f8 100644
---- a/arch/csky/kernel/power.c
-+++ b/arch/csky/kernel/power.c
-@@ -9,16 +9,14 @@ EXPORT_SYMBOL(pm_power_off);
- void machine_power_off(void)
- {
- 	local_irq_disable();
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
- 	asm volatile ("bkpt");
+diff --git a/drivers/mfd/max77620.c b/drivers/mfd/max77620.c
+index fec2096474ad..29487ccc191a 100644
+--- a/drivers/mfd/max77620.c
++++ b/drivers/mfd/max77620.c
+@@ -31,11 +31,10 @@
+ #include <linux/init.h>
+ #include <linux/of.h>
+ #include <linux/of_device.h>
++#include <linux/reboot.h>
+ #include <linux/regmap.h>
+ #include <linux/slab.h>
+ 
+-static struct max77620_chip *max77620_scratch;
+-
+ static const struct resource gpio_resources[] = {
+ 	DEFINE_RES_IRQ(MAX77620_IRQ_TOP_GPIO),
+ };
+@@ -483,13 +482,13 @@ static int max77620_read_es_version(struct max77620_chip *chip)
+ 	return ret;
  }
  
- void machine_halt(void)
+-static void max77620_pm_power_off(void)
++static void max77620_pm_power_off(void *data)
  {
- 	local_irq_disable();
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
- 	asm volatile ("bkpt");
+-	struct max77620_chip *chip = max77620_scratch;
++	struct max77620_chip *chip = data;
+ 
+ 	regmap_update_bits(chip->rmap, MAX77620_REG_ONOFFCNFG1,
+-			   MAX77620_ONOFFCNFG1_SFT_RST,
+-			   MAX77620_ONOFFCNFG1_SFT_RST);
++				   MAX77620_ONOFFCNFG1_SFT_RST,
++				   MAX77620_ONOFFCNFG1_SFT_RST);
  }
  
+ static int max77620_probe(struct i2c_client *client,
+@@ -566,9 +565,13 @@ static int max77620_probe(struct i2c_client *client,
+ 	}
+ 
+ 	pm_off = of_device_is_system_power_controller(client->dev.of_node);
+-	if (pm_off && !pm_power_off) {
+-		max77620_scratch = chip;
+-		pm_power_off = max77620_pm_power_off;
++	if (pm_off) {
++		ret = devm_register_simple_power_off_handler(chip->dev,
++							     max77620_pm_power_off,
++							     chip);
++		if (ret < 0)
++			dev_err(chip->dev,
++				"Failed to register power-off handler: %d\n", ret);
+ 	}
+ 
+ 	return 0;
 -- 
 2.33.1
 
