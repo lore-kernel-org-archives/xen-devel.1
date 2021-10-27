@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C5453C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C420C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 838DF610C7
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 838DF610C7
+	by mail.kernel.org (Postfix) with ESMTPS id BAE666109E
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BAE666109E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217294.377364 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217295.377369 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSs-00040e-Ta; Wed, 27 Oct 2021 21:28:06 +0000
+	id 1mfqSt-0004GG-U7; Wed, 27 Oct 2021 21:28:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217294.377364; Wed, 27 Oct 2021 21:28:06 +0000
+Received: by outflank-mailman (output) from mailman id 217295.377369; Wed, 27 Oct 2021 21:28:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSs-0003sc-0v; Wed, 27 Oct 2021 21:28:06 +0000
-Received: by outflank-mailman (input) for mailman id 217294;
+	id 1mfqSt-0004B9-4f; Wed, 27 Oct 2021 21:28:07 +0000
+Received: by outflank-mailman (input) for mailman id 217295;
  Wed, 27 Oct 2021 21:28:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqLW-0000sJ-CQ
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:20:30 +0000
-Received: from mail-lf1-x129.google.com (unknown [2a00:1450:4864:20::129])
+ id 1mfqKT-0000sJ-AJ
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:19:25 +0000
+Received: from mail-lj1-x22f.google.com (unknown [2a00:1450:4864:20::22f])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 86a69c89-a557-4740-824b-69dfcad5c2ab;
- Wed, 27 Oct 2021 21:18:44 +0000 (UTC)
-Received: by mail-lf1-x129.google.com with SMTP id l13so8991340lfg.6
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:44 -0700 (PDT)
+ id b85a0f4c-68ce-41fd-81db-436811659b39;
+ Wed, 27 Oct 2021 21:18:27 +0000 (UTC)
+Received: by mail-lj1-x22f.google.com with SMTP id s19so6943375ljj.11
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:27 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.41
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:42 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 86a69c89-a557-4740-824b-69dfcad5c2ab
+X-Inumbo-ID: b85a0f4c-68ce-41fd-81db-436811659b39
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=C0CUDQ/mpKr8nQVI8ALn1ZNGlMYg+VmEWd/lyCBC2+I=;
-        b=Z3brf9Hxnc2b6ua3/QaRBg13ceKk9pypP3vq3e3axfEBPvBW41vI/qfBl8+BwawzwO
-         NlHu2lL93XTrvXoS8prTqJO+oc3t3LVioKZpz1/2twqHxmO2Rep4n956JPepAb55tnvu
-         Yq8u1nymmyHqcHNTOwToESfBr2ALI5JLRcu8Vew43TUipSvAyYGlhtxcdEE10JjxQ8L7
-         CgvM26J/cz900816o54jCXMSmEWOFUvtpqIxxDad09smC+hGdBM0SBN82Upy8AJEypnh
-         RA0SpOKKidR5e2HsVPYqqyxDECtb4bl9tRIXX4QIA46Li7tlvPD9rk0WAJDNE7RcwF/Y
-         YL9g==
+        bh=+aSuiMovnmRlKPN5Rl3JuNmFHUt6skQo3O4wD7dX5JQ=;
+        b=ehfhpJuO10tH0JJc+NToykiYU0vR9QNQWRGBFoJEmaOxGSK6IxZtCBEULR0W0LLrnh
+         rWgUh4Kku73ZADq2I2DXfxnNngsudNBU15HzSYHJ5ZGaDy4yKkQqtcH85+TmIu3x8kh9
+         Xstkp84P8gb9NHhImh/kkEu/eLRzihVMriWTiS1lyvVYlI0S9doH7srHH4uUDtgtagHH
+         NnlFwVxtytB+YFKInQI4zlx/qw9ggp+d792cFqZ86NXSDRvmn2HsZCjK5JnAlXZtcFzO
+         y6wwCc1x7j8EpGXUAyH+X2YWcF6tl/6iZWVr+mUSLKEmJFL/9H+FbFwe9fJf0ZNH5qP/
+         q9Cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=C0CUDQ/mpKr8nQVI8ALn1ZNGlMYg+VmEWd/lyCBC2+I=;
-        b=QYZHkayd1rU4KUiFbHPPi7aR8O2qeW/LVfrCQJUYnt5HStEqeB4cg1UyF+ntyiDSbR
-         jaIhcVRzEnHzAmiXgs7z8+SdkQZtI+tggiZaPAByC+woMHrPOMvpxICkR07c0xdj39jO
-         a2YuBoUt7OStOf4xYlYP4478ZMpXsBWhjhQTlgQ52lWhTmQqLqmFOmQiGWa9aVgXVC3w
-         ZuSpHDgU/bh+Vm/rX3duBTih7fO2AFJ8IUAbmo0ybvN0cyZph/NyQe00ob6A85X+nqDr
-         arbtgiLmI7wMMjQsrNAFV254AWJnBSwmuBY7VkPl064RVEkRy3ipEfuRpiTLvCi0w5Je
-         vN+Q==
-X-Gm-Message-State: AOAM5315Xdz3q2hAqaORyn7zn0EdN/AegwxiVJYasd95BRO0OuLhlDun
-	HoBA0WoC3QUdfPNktT2YM1g=
-X-Google-Smtp-Source: ABdhPJw9ag+XL4jMbHM8NK1hhlQp61Q60DmRHFpovh5w79ZSq7lT/XD7C7FFPkBUSvk0m7mbQoA/BQ==
-X-Received: by 2002:a05:6512:31a:: with SMTP id t26mr125024lfp.280.1635369523122;
-        Wed, 27 Oct 2021 14:18:43 -0700 (PDT)
+        bh=+aSuiMovnmRlKPN5Rl3JuNmFHUt6skQo3O4wD7dX5JQ=;
+        b=yDZar7Z4ETp0eiJMYqbWz+Pv9sP/D9+OjaQQiTCH2cy9PFh/9b4EbdLdECZdz3eByQ
+         nlubfo90lbmCH0UpQMGoQQ7lvbdKVWrLWKbg3Yb2r/zq2+DjPUr3BJSMcjuJtydQy41+
+         ElyYpdnDUe7+iBGJmtDTa3O31K4BamF5WZMkxPcbDm5RdF4GL7A2fwP8hKxMlB0ZmrAq
+         VheMi+jJHltaVvY/+jKi1Hxx77i+GaikoB+YZYG8yQvzN57Yp88AaQa4iZM0EHFa18cS
+         2Q/sTFEOqJcsKTbBoImdSVdDw26F1btxxVaIpRYNqja84Zqvse//2thnzWE8bi5NI40C
+         BoQQ==
+X-Gm-Message-State: AOAM5339T7wC4DSHhL6SxFZqYKsBVBIOHvPIAkfRqWs3Q2YeIRIlsmiZ
+	J2L56yJBv6FO3Sk3YwVOMto=
+X-Google-Smtp-Source: ABdhPJySCnLdJnyefyOJzA6HMZEBF+hyXH0EM8QKUFyfoUHamOZK7R7lRqwGKBcRpuomVJFL6q66/Q==
+X-Received: by 2002:a2e:891a:: with SMTP id d26mr331100lji.368.1635369506344;
+        Wed, 27 Oct 2021 14:18:26 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,134 +152,50 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 27/45] mfd: ntxec: Use devm_register_power_handler()
-Date: Thu, 28 Oct 2021 00:16:57 +0300
-Message-Id: <20211027211715.12671-28-digetx@gmail.com>
+Subject: [PATCH v2 18/45] riscv: Use do_kernel_power_off()
+Date: Thu, 28 Oct 2021 00:16:48 +0300
+Message-Id: <20211027211715.12671-19-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Use devm_register_power_handler() that replaces global pm_power_off
-variable and allows to register multiple power-off handlers. It also
-provides restart-handler support, i.e. all in one API.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/mfd/ntxec.c | 50 ++++++++++-----------------------------------
- 1 file changed, 11 insertions(+), 39 deletions(-)
+ arch/riscv/kernel/reset.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/mfd/ntxec.c b/drivers/mfd/ntxec.c
-index b711e73eedcb..fd6410cbe153 100644
---- a/drivers/mfd/ntxec.c
-+++ b/drivers/mfd/ntxec.c
-@@ -32,12 +32,11 @@
- #define NTXEC_POWERKEEP_VALUE	0x0800
- #define NTXEC_RESET_VALUE	0xff00
+diff --git a/arch/riscv/kernel/reset.c b/arch/riscv/kernel/reset.c
+index 9c842c41684a..912288572226 100644
+--- a/arch/riscv/kernel/reset.c
++++ b/arch/riscv/kernel/reset.c
+@@ -23,16 +23,12 @@ void machine_restart(char *cmd)
  
--static struct i2c_client *poweroff_restart_client;
--
--static void ntxec_poweroff(void)
-+static void ntxec_poweroff(struct power_off_data *data)
+ void machine_halt(void)
  {
- 	int res;
- 	u8 buf[3] = { NTXEC_REG_POWEROFF };
-+	struct i2c_client *poweroff_restart_client = data->cb_data;
- 	struct i2c_msg msgs[] = {
- 		{
- 			.addr = poweroff_restart_client->addr,
-@@ -62,8 +61,7 @@ static void ntxec_poweroff(void)
- 	msleep(5000);
+-	if (pm_power_off != NULL)
+-		pm_power_off();
+-	else
+-		default_power_off();
++	do_kernel_power_off();
++	default_power_off();
  }
  
--static int ntxec_restart(struct notifier_block *nb,
--			 unsigned long action, void *data)
-+static void ntxec_restart(struct restart_data *data)
+ void machine_power_off(void)
  {
- 	int res;
- 	u8 buf[3] = { NTXEC_REG_RESET };
-@@ -72,6 +70,7 @@ static int ntxec_restart(struct notifier_block *nb,
- 	 * it causes an I2C error. (The reset handler in the downstream driver
- 	 * does send the full two-byte value, but doesn't check the result).
- 	 */
-+	struct i2c_client *poweroff_restart_client = data->cb_data;
- 	struct i2c_msg msgs[] = {
- 		{
- 			.addr = poweroff_restart_client->addr,
-@@ -87,13 +86,11 @@ static int ntxec_restart(struct notifier_block *nb,
- 	if (res < 0)
- 		dev_warn(&poweroff_restart_client->dev,
- 			 "Failed to restart (err = %d)\n", res);
--
--	return NOTIFY_DONE;
+-	if (pm_power_off != NULL)
+-		pm_power_off();
+-	else
+-		default_power_off();
++	do_kernel_power_off();
++	default_power_off();
  }
- 
--static struct notifier_block ntxec_restart_handler = {
--	.notifier_call = ntxec_restart,
--	.priority = 128,
-+static struct power_handler ntxec_power_handler = {
-+	.restart_cb = ntxec_restart,
-+	.power_off_cb = ntxec_poweroff,
- };
- 
- static int regmap_ignore_write(void *context,
-@@ -208,25 +205,12 @@ static int ntxec_probe(struct i2c_client *client)
- 		if (res < 0)
- 			return res;
- 
--		if (poweroff_restart_client)
--			/*
--			 * Another instance of the driver already took
--			 * poweroff/restart duties.
--			 */
--			dev_err(ec->dev, "poweroff_restart_client already assigned\n");
--		else
--			poweroff_restart_client = client;
--
--		if (pm_power_off)
--			/* Another driver already registered a poweroff handler. */
--			dev_err(ec->dev, "pm_power_off already assigned\n");
--		else
--			pm_power_off = ntxec_poweroff;
--
--		res = register_restart_handler(&ntxec_restart_handler);
-+		ntxec_power_handler.cb_data = client;
-+
-+		res = devm_register_power_handler(ec->dev, &ntxec_power_handler);
- 		if (res)
- 			dev_err(ec->dev,
--				"Failed to register restart handler: %d\n", res);
-+				"Failed to register power handler: %d\n", res);
- 	}
- 
- 	i2c_set_clientdata(client, ec);
-@@ -239,17 +223,6 @@ static int ntxec_probe(struct i2c_client *client)
- 	return res;
- }
- 
--static int ntxec_remove(struct i2c_client *client)
--{
--	if (client == poweroff_restart_client) {
--		poweroff_restart_client = NULL;
--		pm_power_off = NULL;
--		unregister_restart_handler(&ntxec_restart_handler);
--	}
--
--	return 0;
--}
--
- static const struct of_device_id of_ntxec_match_table[] = {
- 	{ .compatible = "netronix,ntxec", },
- 	{}
-@@ -262,7 +235,6 @@ static struct i2c_driver ntxec_driver = {
- 		.of_match_table = of_ntxec_match_table,
- 	},
- 	.probe_new = ntxec_probe,
--	.remove = ntxec_remove,
- };
- module_i2c_driver(ntxec_driver);
- 
 -- 
 2.33.1
 
