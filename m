@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12B2FC4321E
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43A74C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BB11160E74
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org BB11160E74
+	by mail.kernel.org (Postfix) with ESMTPS id EFD2B60E73
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:28:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EFD2B60E73
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217277.377265 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217271.377244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSd-0000dU-Jc; Wed, 27 Oct 2021 21:27:51 +0000
+	id 1mfqSb-0008W1-Nc; Wed, 27 Oct 2021 21:27:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217277.377265; Wed, 27 Oct 2021 21:27:51 +0000
+Received: by outflank-mailman (output) from mailman id 217271.377244; Wed, 27 Oct 2021 21:27:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqSd-0000cJ-EU; Wed, 27 Oct 2021 21:27:51 +0000
-Received: by outflank-mailman (input) for mailman id 217277;
- Wed, 27 Oct 2021 21:27:49 +0000
+	id 1mfqSb-0008Uy-Hl; Wed, 27 Oct 2021 21:27:49 +0000
+Received: by outflank-mailman (input) for mailman id 217271;
+ Wed, 27 Oct 2021 21:27:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqL7-0000sJ-Bg
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:20:05 +0000
-Received: from mail-lf1-x130.google.com (unknown [2a00:1450:4864:20::130])
+ id 1mfqLq-0000sJ-D1
+ for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:20:50 +0000
+Received: from mail-lf1-x12b.google.com (unknown [2a00:1450:4864:20::12b])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8e7ff3db-fb04-477a-9d59-8253b9171804;
- Wed, 27 Oct 2021 21:18:36 +0000 (UTC)
-Received: by mail-lf1-x130.google.com with SMTP id x27so9004728lfu.5
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:36 -0700 (PDT)
+ id 6b24b17d-f326-4da9-87af-f64c80f064d3;
+ Wed, 27 Oct 2021 21:18:49 +0000 (UTC)
+Received: by mail-lf1-x12b.google.com with SMTP id f3so806989lfu.12
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:49 -0700 (PDT)
 Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
  [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.33
+ by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:35 -0700 (PDT)
+ Wed, 27 Oct 2021 14:18:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,34 +50,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e7ff3db-fb04-477a-9d59-8253b9171804
+X-Inumbo-ID: 6b24b17d-f326-4da9-87af-f64c80f064d3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=rTg0c6UJkUtA3xox9iyqZdpwaCfteR79knUJVekTw18=;
-        b=IOOovw4HthrHOXjOs46Y3yITm9+R54zah3HqdDtgfe0CoTVx3Ny/qQfSWJECq3va5v
-         POFxHfUV4nFfAVF/2xQmQF0GAuAxqBjz1BtRvOKx4MR0EfN6IoGEZZUqz+WUpBWyPywt
-         GrOnqTwA95eu+J8qffyJd/WsYZnQLcqOy0MiUotidUtoWBtzitEMBsbvSCmIUhOFOmfU
-         TN0N1IIFJs2PwhqjyrirBl5OZM0AJ4ETZ7OvQijCQBnaCq4fjrrAiLoAARG8gCOMWpFL
-         isJ90k/kflRmNXJGxu4rOU7Ttcg3V2boCXpvP5Lo62Urd2fuc4VonqYdYqPHg73Ap8Wn
-         SfNw==
+        bh=umNH2+YT7M6ZKcjQGvjjohnKVEe/3rK29YQH+BDj6i4=;
+        b=nj5zb43OqtwdizDOJ4YZ+fYZadM1gdDKmRqYZUCoy6YYJ9FK+h8NFV8Fm4J2Ku+dUO
+         VD1iu0fINLYL61cuY7tNDYLtDDcpQWTMBS3LiXmrEVigOlROqEfbjJpsrnK8lw9w6k0A
+         Q5RVvk+HURAmLxg4yngnt6lHHBxEc4oSlIcG3ZpIBx+R3YAOuuSSdjMf/vRVMuvqCw1Z
+         E8uGSsJkZ6VWq/NOLfLD+OAnXKEDLZsNGIWjcaZrIrkicK6f30puV4871fbRXrX4aoDM
+         yS04DJACEKWBr3KF/AjOj2De3JGJ2p+GHt74NSrUBKQDPvr858UletsNh5sICSkmVEWD
+         3KsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=rTg0c6UJkUtA3xox9iyqZdpwaCfteR79knUJVekTw18=;
-        b=2Ryq/cOZEhk7RoiARC42+tDS60H2d+EuMIyg06Q1PpOG0Yq/s7z6Ap68lw8o9xwuJC
-         qqbj+4IRq/+LcU6dpevIT+wTLbm731cyOdcK0FJAkJDWFkpRZI9OpB9spds1NB0AA7Me
-         kqT5K0zvrC/ter1x+4gx3iA6IKc6DhisEBNIROm4dBfHLROH42Umyzdr9S+uadT5k9O0
-         U3tKYYhAzFqQcT44405loytao+6b7LpxiZuC2WuJz1qmRytNdt400E5pipIuj2fG7HzS
-         FRXP/5T5ELECNh5TfthLVOwh0KbOWpct7SnEcdnekY3cRr39LUAnPIzt88/yPDAPvTGG
-         LtEA==
-X-Gm-Message-State: AOAM531sfyCzsovH055k4VMx/4FneZeIxwzXNmsEXBMqBXUpHGZN1ILT
-	Q6FVsobAu+oYhePupn//BR4=
-X-Google-Smtp-Source: ABdhPJxFzFVD2w1ioavz6oJ1REfrGLdo1ULxWozIc4isKil/5p3npr9c6ZJggbEvwegyiOXfsqbr2g==
-X-Received: by 2002:a05:6512:3699:: with SMTP id d25mr132127lfs.380.1635369515664;
-        Wed, 27 Oct 2021 14:18:35 -0700 (PDT)
+        bh=umNH2+YT7M6ZKcjQGvjjohnKVEe/3rK29YQH+BDj6i4=;
+        b=wRRl6TaF/lWmwyCCvr9GZAD93OnfkRb//X5tW9b5zEnU0uM2wAWxS4zjUIpclUVpBD
+         VM40jfJIKs9MgJ+0HlH7YUr54szABsr+RAjAGiLcTQu5qxOYA/Hgpq5WkAXgdBv5JjhD
+         OVjB8H/yAA3W6SVDmOHXEIigvB4m3W0pL6Gkcd6qssCrxoTGHD54VDWiy6rTTflhxlij
+         1zu/k6X1FJFyzpT7JSsB2BXJIW7lQxQrTIQA4evCaMeFTxxLPbU/RZk5w/r1heTDQaT5
+         MVNIrDb8Yfpq6i9L6yMIMnYwsubjUZNXuq+LDx4ex6rQNglXGBpNu7Il9e+uUMTqTLaN
+         B+eQ==
+X-Gm-Message-State: AOAM531Xz80I7RwlXZ6T1lICkZCULmqZ2QUBAViKksvq4b1zn7TJjX7M
+	ZeCBqlwuN83zg5DfVy1BRqg=
+X-Google-Smtp-Source: ABdhPJyzuSZuOYHEQbprBgwtJMyx5L9tc7ERtjIIXrEKG72XHaUi8WMWlLHXLzXgCVfDIwEbrdMbVw==
+X-Received: by 2002:a05:6512:38d0:: with SMTP id p16mr83922lft.483.1635369528748;
+        Wed, 27 Oct 2021 14:18:48 -0700 (PDT)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -152,96 +152,117 @@ Cc: Catalin Marinas <catalin.marinas@arm.com>,
 	openbmc@lists.ozlabs.org,
 	linux-tegra@vger.kernel.org,
 	linux-pm@vger.kernel.org
-Subject: [PATCH v2 23/45] ACPI: power: Switch to power-handler API
-Date: Thu, 28 Oct 2021 00:16:53 +0300
-Message-Id: <20211027211715.12671-24-digetx@gmail.com>
+Subject: [PATCH v2 30/45] mfd: ene-kb3930: Use devm_register_power_handler()
+Date: Thu, 28 Oct 2021 00:17:00 +0300
+Message-Id: <20211027211715.12671-31-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
 References: <20211027211715.12671-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Switch to power-handler API that replaces legacy pm_power_off callbacks.
+Use devm_register_power_handler() that replaces global pm_power_off
+variable and allows to register multiple power-off handlers. It also
+provides restart-handler support, i.e. all in one API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/acpi/sleep.c | 25 +++++++++++--------------
- 1 file changed, 11 insertions(+), 14 deletions(-)
+ drivers/mfd/ene-kb3930.c | 45 ++++++++++++++--------------------------
+ 1 file changed, 15 insertions(+), 30 deletions(-)
 
-diff --git a/drivers/acpi/sleep.c b/drivers/acpi/sleep.c
-index 3023224515ab..41b3ea867f8f 100644
---- a/drivers/acpi/sleep.c
-+++ b/drivers/acpi/sleep.c
-@@ -47,19 +47,11 @@ static void acpi_sleep_tts_switch(u32 acpi_state)
- 	}
- }
+diff --git a/drivers/mfd/ene-kb3930.c b/drivers/mfd/ene-kb3930.c
+index 1b73318d1f1f..6a3c5f48e5e1 100644
+--- a/drivers/mfd/ene-kb3930.c
++++ b/drivers/mfd/ene-kb3930.c
+@@ -31,10 +31,9 @@ struct kb3930 {
+ 	struct i2c_client *client;
+ 	struct regmap *ram_regmap;
+ 	struct gpio_descs *off_gpios;
++	struct power_handler power_handler;
+ };
  
--static int tts_notify_reboot(struct notifier_block *this,
--			unsigned long code, void *x)
-+static void tts_reboot_prepare(struct reboot_prep_data *data)
- {
- 	acpi_sleep_tts_switch(ACPI_STATE_S5);
--	return NOTIFY_DONE;
- }
- 
--static struct notifier_block tts_notifier = {
--	.notifier_call	= tts_notify_reboot,
--	.next		= NULL,
--	.priority	= 0,
--};
+-static struct kb3930 *kb3930_power_off;
 -
- static int acpi_sleep_prepare(u32 acpi_state)
- {
- #ifdef CONFIG_ACPI_SLEEP
-@@ -1016,7 +1008,7 @@ static void acpi_sleep_hibernate_setup(void)
- static inline void acpi_sleep_hibernate_setup(void) {}
- #endif /* !CONFIG_HIBERNATION */
+ #define EC_GPIO_WAVE		0
+ #define EC_GPIO_OFF_MODE	1
  
--static void acpi_power_off_prepare(void)
-+static void acpi_power_off_prepare(struct power_off_prep_data *data)
- {
- 	/* Prepare to power off the system */
- 	acpi_sleep_prepare(ACPI_STATE_S5);
-@@ -1024,7 +1016,7 @@ static void acpi_power_off_prepare(void)
- 	acpi_os_wait_events_complete();
- }
- 
--static void acpi_power_off(void)
-+static void acpi_power_off(struct power_off_data *data)
- {
- 	/* acpi_sleep_prepare(ACPI_STATE_S5) should have already been called */
- 	pr_debug("%s called\n", __func__);
-@@ -1032,6 +1024,11 @@ static void acpi_power_off(void)
- 	acpi_enter_sleep_state(ACPI_STATE_S5);
- }
- 
-+static struct power_handler acpi_power_handler = {
-+	.power_off_priority = POWEROFF_PRIO_FIRMWARE,
-+	.reboot_prepare_cb = tts_reboot_prepare,
-+};
-+
- int __init acpi_sleep_init(void)
- {
- 	char supported[ACPI_S_STATE_COUNT * 3 + 1];
-@@ -1048,8 +1045,8 @@ int __init acpi_sleep_init(void)
- 
- 	if (acpi_sleep_state_supported(ACPI_STATE_S5)) {
- 		sleep_states[ACPI_STATE_S5] = 1;
--		pm_power_off_prepare = acpi_power_off_prepare;
--		pm_power_off = acpi_power_off;
-+		acpi_power_handler.power_off_cb = acpi_power_off;
-+		acpi_power_handler.power_off_prepare_cb = acpi_power_off_prepare;
- 	} else {
- 		acpi_no_s5 = true;
+@@ -60,21 +59,19 @@ static void kb3930_off(struct kb3930 *ddata, int off_mode)
  	}
-@@ -1065,6 +1062,6 @@ int __init acpi_sleep_init(void)
- 	 * Register the tts_notifier to reboot notifier list so that the _TTS
- 	 * object can also be evaluated when the system enters S5.
- 	 */
--	register_reboot_notifier(&tts_notifier);
-+	register_power_handler(&acpi_power_handler);
+ }
+ 
+-static int kb3930_restart(struct notifier_block *this,
+-			  unsigned long mode, void *cmd)
++static void kb3930_restart(struct restart_data *data)
+ {
+-	kb3930_off(kb3930_power_off, EC_OFF_MODE_REBOOT);
+-	return NOTIFY_DONE;
++	struct kb3930 *ddata = data->cb_data;
++
++	kb3930_off(ddata, EC_OFF_MODE_REBOOT);
+ }
+ 
+-static void kb3930_pm_power_off(void)
++static void kb3930_power_off(struct power_off_data *data)
+ {
+-	kb3930_off(kb3930_power_off, EC_OFF_MODE_POWER);
+-}
++	struct kb3930 *ddata = data->cb_data;
+ 
+-static struct notifier_block kb3930_restart_nb = {
+-	.notifier_call = kb3930_restart,
+-};
++	kb3930_off(ddata, EC_OFF_MODE_POWER);
++}
+ 
+ static const struct mfd_cell ariel_ec_cells[] = {
+ 	{ .name = "dell-wyse-ariel-led", },
+@@ -131,7 +128,6 @@ static int kb3930_probe(struct i2c_client *client)
+ 	if (!ddata)
+ 		return -ENOMEM;
+ 
+-	kb3930_power_off = ddata;
+ 	ddata->client = client;
+ 	i2c_set_clientdata(client, ddata);
+ 
+@@ -169,24 +165,14 @@ static int kb3930_probe(struct i2c_client *client)
+ 	}
+ 
+ 	if (ddata->off_gpios) {
+-		register_restart_handler(&kb3930_restart_nb);
+-		if (!pm_power_off)
+-			pm_power_off = kb3930_pm_power_off;
+-	}
++		ddata->power_handler.cb_data = ddata;
++		ddata->power_handler.restart_cb = kb3930_restart;
++		ddata->power_handler.power_off_cb = kb3930_power_off;
+ 
+-	return 0;
+-}
+-
+-static int kb3930_remove(struct i2c_client *client)
+-{
+-	struct kb3930 *ddata = i2c_get_clientdata(client);
+-
+-	if (ddata->off_gpios) {
+-		if (pm_power_off == kb3930_pm_power_off)
+-			pm_power_off = NULL;
+-		unregister_restart_handler(&kb3930_restart_nb);
++		ret = devm_register_power_handler(dev, &ddata->power_handler);
++		if (ret)
++			return ret;
+ 	}
+-	kb3930_power_off = NULL;
+ 
  	return 0;
  }
+@@ -199,7 +185,6 @@ MODULE_DEVICE_TABLE(of, kb3930_dt_ids);
+ 
+ static struct i2c_driver kb3930_driver = {
+ 	.probe_new = kb3930_probe,
+-	.remove = kb3930_remove,
+ 	.driver = {
+ 		.name = "ene-kb3930",
+ 		.of_match_table = kb3930_dt_ids,
 -- 
 2.33.1
 
