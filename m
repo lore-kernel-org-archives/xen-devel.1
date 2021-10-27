@@ -2,43 +2,43 @@ Return-Path: <SRS0=eAWX=PP=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39172C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:18:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E895CC4321E
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:19:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E052D610C7
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:18:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E052D610C7
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 92E64610C7
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Oct 2021 21:19:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 92E64610C7
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217233.377214 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217250.377225 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqJm-00059H-11; Wed, 27 Oct 2021 21:18:42 +0000
+	id 1mfqKU-0006kd-H9; Wed, 27 Oct 2021 21:19:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217233.377214; Wed, 27 Oct 2021 21:18:41 +0000
+Received: by outflank-mailman (output) from mailman id 217250.377225; Wed, 27 Oct 2021 21:19:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mfqJl-000598-Tq; Wed, 27 Oct 2021 21:18:41 +0000
-Received: by outflank-mailman (input) for mailman id 217233;
- Wed, 27 Oct 2021 21:18:40 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mfqKU-0006kW-De; Wed, 27 Oct 2021 21:19:26 +0000
+Received: by outflank-mailman (input) for mailman id 217250;
+ Wed, 27 Oct 2021 21:19:25 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=nMly=PP=gmail.com=digetx@srs-us1.protection.inumbo.net>)
- id 1mfqJk-0000sJ-9F
- for xen-devel@lists.xenproject.org; Wed, 27 Oct 2021 21:18:40 +0000
-Received: from mail-lj1-x229.google.com (unknown [2a00:1450:4864:20::229])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3344fc9b-88c1-4226-bfe0-1e061a865c5c;
- Wed, 27 Oct 2021 21:18:08 +0000 (UTC)
-Received: by mail-lj1-x229.google.com with SMTP id e2so6926591ljg.13
- for <xen-devel@lists.xenproject.org>; Wed, 27 Oct 2021 14:18:08 -0700 (PDT)
-Received: from localhost.localdomain (46-138-41-28.dynamic.spd-mgts.ru.
- [46.138.41.28])
- by smtp.gmail.com with ESMTPSA id d7sm104336ljl.18.2021.10.27.14.18.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Oct 2021 14:18:07 -0700 (PDT)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mfqKT-0006k6-6t; Wed, 27 Oct 2021 21:19:25 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mfqKS-0004aa-SY; Wed, 27 Oct 2021 21:19:24 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mfqKS-0005j3-HR; Wed, 27 Oct 2021 21:19:24 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mfqKS-0004fv-Gy; Wed, 27 Oct 2021 21:19:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,1000 +50,331 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3344fc9b-88c1-4226-bfe0-1e061a865c5c
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=fMubR/4yBWUsww90rEyWY4dQ/XIE0qHuvtbXYbD4Pcs=;
-        b=PqCG395LcNV60Qtp9Eu+DTDleDk9S+RpTfMF0TfPgeQNI7so50v1YaWYDZEm91iiCp
-         stqqT31Aw/f237mfaJZBez2KJOlBBu7yQ98GuPbn0Fd6OHOrOUOIxbGKQzyeoEhI5d7U
-         MaBsKPUXg/EUUv+aX6yG0KDR/rz5MnoalTZ2EQX7cxTfGCEi5fn/e2tAfWVQjz7cx+Cl
-         FA6SmHKqY94Xx88iXkSj3vwZ5v8NluykZ6pHT7wJbq5dzQ3vU6x4mnoyEhNfbPxeYtlB
-         xjgt4J5kOapwcnmeYf3Jiro9Ajf5AzXtfbVfgy9Vs0NcvOiCK5vS43vmXx4Ff0yYTgVu
-         NUXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=fMubR/4yBWUsww90rEyWY4dQ/XIE0qHuvtbXYbD4Pcs=;
-        b=izQ5CZGekrlIHPN/N2Ihz05dL9/rP3NQhcwdOEgOEEWCAmtmxc1sr4lNuf/Q/8qswa
-         wcsbXaJZ0JSTcV1+g53ixywPuWGeuGpeA06Y8i5Bm7wXnvYAnCbmfRPGzkhxGB0X7Xzc
-         YJ53lQlZJxuHiTFwQM0IDAOCSQCbv5/YNHnoklisw4Im10YkXmzgwWCk4yuVCiH8G7tT
-         L/HcUe81dPW5DMb3AixJIx5+SElsCNQzHRP1V3EeQEo0CypvW8M0zo5ScmDe4dAj8NIm
-         X/tDw2vwHcQTp/bKvGtCapyNHTMr/D6BXVuBayE3VOHG1bea1nMp9YgBjtgWf2Zrf6b5
-         Ysdw==
-X-Gm-Message-State: AOAM532+uKeB77BK9qDnwu67UFKmo8RYNXBxBsWk2pyprisoX0y0niNq
-	VWKIKx8wr801qYTdZu2TIgaQ5XTPYLU=
-X-Google-Smtp-Source: ABdhPJx+Js0me0cUAXGk9csOUj0IQmbpvMK95ONWvTRhfCm5GVYebrAN8Mns/32HOctyWJz6JrEWGw==
-X-Received: by 2002:a2e:b701:: with SMTP id j1mr325708ljo.133.1635369487617;
-        Wed, 27 Oct 2021 14:18:07 -0700 (PDT)
-From: Dmitry Osipenko <digetx@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Lee Jones <lee.jones@linaro.org>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Mark Brown <broonie@kernel.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Russell King <linux@armlinux.org.uk>,
-	Daniel Lezcano <daniel.lezcano@linaro.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Guo Ren <guoren@kernel.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Greg Ungerer <gerg@linux-m68k.org>,
-	Joshua Thompson <funaho@jurai.org>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Nick Hu <nickhu@andestech.com>,
-	Greentime Hu <green.hu@gmail.com>,
-	Vincent Chen <deanbo422@gmail.com>,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	Helge Deller <deller@gmx.de>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Paul Mackerras <paulus@samba.org>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Rich Felker <dalias@libc.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Len Brown <lenb@kernel.org>,
-	Santosh Shilimkar <ssantosh@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Chen-Yu Tsai <wens@csie.org>,
-	=?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-	Tony Lindgren <tony@atomide.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Vladimir Zapolskiy <vz@mleia.com>,
-	Avi Fishman <avifishman70@gmail.com>,
-	Tomer Maimon <tmaimon77@gmail.com>,
-	Tali Perry <tali.perry1@gmail.com>,
-	Patrick Venture <venture@google.com>,
-	Nancy Yuen <yuenn@google.com>,
-	Benjamin Fair <benjaminfair@google.com>,
-	Pavel Machek <pavel@ucw.cz>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	linux-csky@vger.kernel.org,
-	linux-ia64@vger.kernel.org,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-parisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-sh@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-acpi@vger.kernel.org,
-	linux-omap@vger.kernel.org,
-	openbmc@lists.ozlabs.org,
-	linux-tegra@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: [PATCH v2 08/45] kernel: Add combined power-off+restart handler call chain API
-Date: Thu, 28 Oct 2021 00:16:38 +0300
-Message-Id: <20211027211715.12671-9-digetx@gmail.com>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20211027211715.12671-1-digetx@gmail.com>
-References: <20211027211715.12671-1-digetx@gmail.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=4AXboFFIBpGS8MeQYyny0pSAazGKu5vCqbuQYfm+8/o=; b=w4l9c4rUnr6yeIfYuibgcwcBtw
+	SUIumOta6XIx64+DtdJBDZcBjX2mdAplfTozwJEPBHrg/PGdW+V8yH8VeJbESiZfvdhSA12xKTJ7S
+	ozUzJr97dumx9MVd0uwvdpsrkLktiahpoYYZ+ZJk3ccYhUKXndtjTpeMMdwkmmPHusTM=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-165901-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [qemu-mainline test] 165901: regressions - FAIL
+X-Osstest-Failures:
+    qemu-mainline:build-i386:xen-build:fail:regression
+    qemu-mainline:build-i386-xsm:xen-build:fail:regression
+    qemu-mainline:build-armhf:xen-build:fail:regression
+    qemu-mainline:test-armhf-armhf-libvirt:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-libvirt-qcow2:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-libvirt-raw:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-credit2:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-cubietruck:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-multivcpu:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-rtds:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-vhd:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-qemuu-rhel6hvm-amd:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-pair:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-libvirt-xsm:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-libvirt-raw:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-libvirt-pair:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-libvirt:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-freebsd10-i386:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-freebsd10-amd64:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-coresched-i386-xl:build-check(1):blocked:nonblocking
+    qemu-mainline:build-armhf-libvirt:build-check(1):blocked:nonblocking
+    qemu-mainline:build-i386-libvirt:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-arndale:build-check(1):blocked:nonblocking
+    qemu-mainline:test-armhf-armhf-xl-credit1:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-qemuu-rhel6hvm-intel:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-pvshim:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-debianhvm-i386-xsm:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-win7-amd64:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-qemuu-ws16-amd64:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-shadow:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-vhd:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-i386-xl-xsm:build-check(1):blocked:nonblocking
+    qemu-mainline:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    qemu-mainline:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    qemu-mainline:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
+    qemu-mainline:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    qemuu=931ce30859176f0f7daac6bac255dae5eb21284e
+X-Osstest-Versions-That:
+    qemuu=50352cce138ef3b30c1cda28a4df68fff5da3202
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 27 Oct 2021 21:19:24 +0000
 
-SoC platforms often have multiple options of how to perform system's
-power-off and restart operations. Meanwhile today's kernel is limited to
-a single option. Add combined power-off+restart handler call chain API,
-which is inspired by the restart API. The new API provides both power-off
-and restart functionality.
+flight 165901 qemu-mainline real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/165901/
 
-The old pm_power_off method will be kept around till all users are
-converted to the new API.
+Regressions :-(
 
-Current restart API will be replaced by the new unified API since
-new API is its superset. The restart functionality of the power-handler
-API is built upon the existing restart-notifier APIs.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-i386                    6 xen-build                fail REGR. vs. 165682
+ build-i386-xsm                6 xen-build                fail REGR. vs. 165682
+ build-armhf                   6 xen-build                fail REGR. vs. 165682
 
-In order to ease conversion to the new API, convenient helpers are added
-for the common use-cases. They will reduce amount of boilerplate code and
-remove global variables. These helpers preserve old behaviour for cases
-where only one power-off handler is executed, this is what existing
-drivers want, and thus, they could be easily converted to the new API.
-Users of the new API should explicitly enable power-off chaining by
-setting corresponding flag of the power_handler structure.
+Tests which did not succeed, but are not blocking:
+ test-armhf-armhf-libvirt      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-qcow2  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-libvirt-raw  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit2   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-cubietruck  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-multivcpu  1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-rtds      1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-vhd       1 build-check(1)               blocked  n/a
+ test-amd64-i386-qemuu-rhel6hvm-amd  1 build-check(1)               blocked n/a
+ test-amd64-i386-pair          1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-xsm   1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-raw   1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm 1 build-check(1) blocked n/a
+ test-amd64-i386-libvirt-pair  1 build-check(1)               blocked  n/a
+ test-amd64-i386-libvirt       1 build-check(1)               blocked  n/a
+ test-amd64-i386-freebsd10-i386  1 build-check(1)               blocked  n/a
+ test-amd64-i386-freebsd10-amd64  1 build-check(1)               blocked  n/a
+ test-amd64-coresched-i386-xl  1 build-check(1)               blocked  n/a
+ build-armhf-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-arndale   1 build-check(1)               blocked  n/a
+ test-armhf-armhf-xl-credit1   1 build-check(1)               blocked  n/a
+ test-amd64-i386-qemuu-rhel6hvm-intel  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl            1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-pvshim     1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-qemuu-debianhvm-amd64  1 build-check(1)         blocked n/a
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow  1 build-check(1)  blocked n/a
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm  1 build-check(1)      blocked n/a
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict 1 build-check(1) blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+ test-amd64-i386-xl-qemuu-win7-amd64  1 build-check(1)              blocked n/a
+ test-amd64-i386-xl-qemuu-ws16-amd64  1 build-check(1)              blocked n/a
+ test-amd64-i386-xl-shadow     1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-vhd        1 build-check(1)               blocked  n/a
+ test-amd64-i386-xl-xsm        1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 165682
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 165682
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 165682
+ test-arm64-arm64-xl-seattle  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-seattle  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-amd64-amd64-libvirt-vhd 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
 
-Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
----
- include/linux/reboot.h   | 176 +++++++++++-
- kernel/power/hibernate.c |   2 +-
- kernel/reboot.c          | 601 ++++++++++++++++++++++++++++++++++++++-
- 3 files changed, 768 insertions(+), 11 deletions(-)
+version targeted for testing:
+ qemuu                931ce30859176f0f7daac6bac255dae5eb21284e
+baseline version:
+ qemuu                50352cce138ef3b30c1cda28a4df68fff5da3202
 
-diff --git a/include/linux/reboot.h b/include/linux/reboot.h
-index b7fa25726323..0ec835338c27 100644
---- a/include/linux/reboot.h
-+++ b/include/linux/reboot.h
-@@ -8,10 +8,16 @@
- 
- struct device;
- 
--#define SYS_DOWN	0x0001	/* Notify of system down */
--#define SYS_RESTART	SYS_DOWN
--#define SYS_HALT	0x0002	/* Notify of system halt */
--#define SYS_POWER_OFF	0x0003	/* Notify of system power off */
-+enum reboot_prepare_mode {
-+	SYS_DOWN = 1,		/* Notify of system down */
-+	SYS_RESTART = SYS_DOWN,
-+	SYS_HALT,		/* Notify of system halt */
-+	SYS_POWER_OFF,		/* Notify of system power off */
-+};
-+
-+#define RESTART_PRIO_RESERVED		0
-+#define RESTART_PRIO_DEFAULT		128
-+#define RESTART_PRIO_HIGH		192
- 
- enum reboot_mode {
- 	REBOOT_UNDEFINED = -1,
-@@ -49,6 +55,167 @@ int register_restart_handler(struct notifier_block *);
- int unregister_restart_handler(struct notifier_block *);
- void do_kernel_restart(char *cmd);
- 
-+/*
-+ * Unified poweroff + restart API.
-+ */
-+
-+#define POWEROFF_PRIO_RESERVED		0
-+#define POWEROFF_PRIO_PLATFORM		1
-+#define POWEROFF_PRIO_DEFAULT		128
-+#define POWEROFF_PRIO_HIGH		192
-+#define POWEROFF_PRIO_FIRMWARE		224
-+
-+enum poweroff_mode {
-+	POWEROFF_NORMAL = 0,
-+	POWEROFF_PREPARE,
-+};
-+
-+struct power_off_data {
-+	void *cb_data;
-+};
-+
-+struct power_off_prep_data {
-+	void *cb_data;
-+};
-+
-+struct restart_data {
-+	void *cb_data;
-+	const char *cmd;
-+	enum reboot_mode mode;
-+};
-+
-+struct reboot_prep_data {
-+	void *cb_data;
-+	const char *cmd;
-+	enum reboot_prepare_mode mode;
-+};
-+
-+struct power_handler_private_data {
-+	struct notifier_block reboot_prep_nb;
-+	struct notifier_block power_off_nb;
-+	struct notifier_block restart_nb;
-+	void (*trivial_power_off_cb)(void);
-+	void (*simple_power_off_cb)(void *data);
-+	void *simple_power_off_cb_data;
-+	bool registered;
-+};
-+
-+/**
-+ * struct power_handler - Machine power-off + restart handler
-+ *
-+ * Describes power-off and restart handlers which are invoked by kernel
-+ * to power off or restart this machine.  Supports prioritized chaining for
-+ * both restart and power-off handlers.  Callback's priority must be unique.
-+ * Intended to be used by device drivers that are responsible for restarting
-+ * and powering off hardware which kernel is running on.
-+ *
-+ * Struct power_handler can be static.  Members of this structure must not be
-+ * altered while handler is registered.
-+ *
-+ * Fill the structure members and pass it to register_power_handler().
-+ */
-+struct power_handler {
-+	/**
-+	 * @cb_data:
-+	 *
-+	 * User data included in callback's argument.
-+	 */
-+	void *cb_data;
-+
-+	/**
-+	 * @power_off_cb:
-+	 *
-+	 * Callback that should turn off machine.  Inactive if NULL.
-+	 */
-+	void (*power_off_cb)(struct power_off_data *data);
-+
-+	/**
-+	 * @power_off_prepare_cb:
-+	 *
-+	 * Power-off preparation callback.  All power-off preparation callbacks
-+	 * are invoked before @restart_cb.  Inactive if NULL.
-+	 */
-+	void (*power_off_prepare_cb)(struct power_off_prep_data *data);
-+
-+	/**
-+	 * @power_off_priority:
-+	 *
-+	 * Power-off callback priority, must be unique.  Zero value is
-+	 * reassigned to default priority.  Inactive if @power_off_cb is NULL.
-+	 */
-+	int power_off_priority;
-+
-+	/**
-+	 * @power_off_chaining_allowed:
-+	 *
-+	 * False if callbacks execution should stop when @power_off_cb fails
-+	 * to power off machine.  True if further lower priority power-off
-+	 * callback should be executed.
-+	 */
-+	bool power_off_chaining_allowed;
-+
-+	/**
-+	 * @restart_cb:
-+	 *
-+	 * Callback that should reboot machine.  Inactive if NULL.
-+	 */
-+	void (*restart_cb)(struct restart_data *data);
-+
-+	/**
-+	 * @restart_priority:
-+	 *
-+	 * Restart callback priority, must be unique.  Zero value is reassigned
-+	 * to default priority.  Inactive if @restart_cb is NULL.
-+	 */
-+	int restart_priority;
-+
-+	/**
-+	 * @reboot_prepare_cb:
-+	 *
-+	 * Reboot preparation callback.  All reboot preparation callbacks are
-+	 * invoked before @restart_cb.  Inactive if NULL.
-+	 */
-+	void (*reboot_prepare_cb)(struct reboot_prep_data *data);
-+
-+	/**
-+	 * @priv:
-+	 *
-+	 * Internal data.  Shouldn't be touched.
-+	 */
-+	const struct power_handler_private_data priv;
-+};
-+
-+int register_power_handler(struct power_handler *handler);
-+void unregister_power_handler(struct power_handler *handler);
-+
-+struct power_handler *
-+register_simple_power_off_handler(void (*callback)(void *data), void *data);
-+
-+void unregister_simple_power_off_handler(struct power_handler *handler);
-+
-+int devm_register_power_handler(struct device *dev,
-+				struct power_handler *handler);
-+
-+int devm_register_simple_power_off_handler(struct device *dev,
-+					   void (*callback)(void *data),
-+					   void *data);
-+
-+int devm_register_trivial_power_off_handler(struct device *dev,
-+					    void (*callback)(void));
-+
-+int devm_register_simple_restart_handler(struct device *dev,
-+					 void (*callback)(struct restart_data *data),
-+					 void *data);
-+
-+int devm_register_prioritized_restart_handler(struct device *dev,
-+					      int priority,
-+					      void (*callback)(struct restart_data *data),
-+					      void *data);
-+
-+int register_platform_power_off(void (*power_off)(void));
-+
-+void do_kernel_power_off(void);
-+
- /*
-  * Architecture-specific implementations of sys_reboot commands.
-  */
-@@ -70,6 +237,7 @@ void kernel_restart_prepare(char *cmd);
- void kernel_restart(char *cmd);
- void kernel_halt(void);
- void kernel_power_off(void);
-+bool kernel_can_power_off(void);
- 
- extern int C_A_D; /* for sysctl */
- void ctrl_alt_del(void);
-diff --git a/kernel/power/hibernate.c b/kernel/power/hibernate.c
-index 559acef3fddb..13ad98352fde 100644
---- a/kernel/power/hibernate.c
-+++ b/kernel/power/hibernate.c
-@@ -664,7 +664,7 @@ static void power_down(void)
- 		hibernation_platform_enter();
- 		fallthrough;
- 	case HIBERNATION_SHUTDOWN:
--		if (pm_power_off)
-+		if (kernel_can_power_off())
- 			kernel_power_off();
- 		break;
- 	}
-diff --git a/kernel/reboot.c b/kernel/reboot.c
-index 291d44082f42..779429726616 100644
---- a/kernel/reboot.c
-+++ b/kernel/reboot.c
-@@ -189,9 +189,8 @@ int register_restart_handler(struct notifier_block *nb)
- 		return ret;
- 
- 	/*
--	 * Handler must have unique priority. Otherwise invocation order is
--	 * determined by the registration order, which is presumed to be
--	 * unreliable.
-+	 * Handler must have unique priority. Otherwise call order is
-+	 * determined by registration order, which is unreliable.
- 	 */
- 	WARN_ON(!atomic_notifier_has_unique_priority(&restart_handler_list, nb));
- 
-@@ -294,6 +293,587 @@ void kernel_halt(void)
- }
- EXPORT_SYMBOL_GPL(kernel_halt);
- 
-+/*
-+ *	Notifier list for kernel code which wants to be called
-+ *	to power off the system.
-+ */
-+static BLOCKING_NOTIFIER_HEAD(power_off_handler_list);
-+
-+static void dummy_pm_power_off(void)
-+{
-+	/* temporary stub until pm_power_off() is gone, see more below */
-+}
-+
-+static struct notifier_block *pm_power_off_nb;
-+
-+/**
-+ *	register_power_off_handler - Register function to be called to power off
-+ *				     the system
-+ *	@nb: Info about handler function to be called
-+ *	@nb->priority:	Handler priority. Handlers should follow the
-+ *			following guidelines for setting priorities.
-+ *			0:	Power-off handler of last resort,
-+ *				with limited power-off capabilities
-+ *			128:	Default power-off handler; use if no other
-+ *				power-off handler is expected to be available,
-+ *				and/or if power-off functionality is
-+ *				sufficient to power-off the entire system
-+ *			255:	Highest priority power-off handler, will
-+ *				preempt all other power-off handlers
-+ *
-+ *	Registers a function with code to be called to power off the
-+ *	system.
-+ *
-+ *	Registered functions will be called as last step of the power-off
-+ *	sequence.
-+ *
-+ *	Registered functions are expected to power off the system immediately.
-+ *	If more than one function is registered, the power-off handler priority
-+ *	selects which function will be called first.
-+ *
-+ *	Power-off handlers are expected to be registered from non-architecture
-+ *	code, typically from drivers. A typical use case would be a system
-+ *	where power-off functionality is provided through a PMIC. Multiple
-+ *	power-off handlers may exist; for example, one power-off handler might
-+ *	turn off the entire system, while another only turns off part of
-+ *	system. In such cases, the power-off handler which only disables part
-+ *	of the hardware is expected to register with low priority to ensure
-+ *	that it only runs if no other means to power off the system is
-+ *	available.
-+ *
-+ *	Currently always returns zero, as blocking_notifier_chain_register()
-+ *	always returns zero.
-+ */
-+static int register_power_off_handler(struct notifier_block *nb)
-+{
-+	int ret;
-+
-+	ret = blocking_notifier_chain_register(&power_off_handler_list, nb);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Handler must have unique priority. Otherwise invocation order is
-+	 * determined by the registration order, which is presumed to be
-+	 * unreliable.
-+	 */
-+	WARN_ON(!blocking_notifier_has_unique_priority(&power_off_handler_list, nb));
-+
-+	/*
-+	 * Some drivers check whether pm_power_off was already installed.
-+	 * Install dummy callback using new API to preserve old behaviour
-+	 * for those drivers during period of transition to the new API.
-+	 */
-+	if (!pm_power_off) {
-+		pm_power_off = dummy_pm_power_off;
-+		pm_power_off_nb = nb;
-+	}
-+
-+	return 0;
-+}
-+
-+static void unregister_power_off_handler(struct notifier_block *nb)
-+{
-+	if (nb == pm_power_off_nb) {
-+		/*
-+		 * Check whether somebody replaced pm_power_off behind
-+		 * out back.
-+		 */
-+		if (!WARN_ON(pm_power_off != dummy_pm_power_off))
-+			pm_power_off = NULL;
-+
-+		pm_power_off_nb = NULL;
-+	}
-+
-+	WARN_ON(blocking_notifier_chain_unregister(&power_off_handler_list, nb));
-+}
-+
-+static void devm_unregister_power_off_handler(void *data)
-+{
-+	struct notifier_block *nb = data;
-+
-+	unregister_power_off_handler(nb);
-+}
-+
-+static int devm_register_power_off_handler(struct device *dev,
-+					   struct notifier_block *nb)
-+{
-+	int err;
-+
-+	err = register_power_off_handler(nb);
-+	if (err)
-+		return err;
-+
-+	return devm_add_action_or_reset(dev, devm_unregister_power_off_handler,
-+					nb);
-+}
-+
-+static int power_handler_power_off(struct notifier_block *nb,
-+				   unsigned long mode, void *unused)
-+{
-+	struct power_off_prep_data prep_data = {};
-+	struct power_handler_private_data *priv;
-+	struct power_off_data data = {};
-+	struct power_handler *h;
-+	int ret = NOTIFY_DONE;
-+
-+	priv = container_of(nb, struct power_handler_private_data, power_off_nb);
-+	h = container_of(priv, struct power_handler, priv);
-+	prep_data.cb_data = h->cb_data;
-+	data.cb_data = h->cb_data;
-+
-+	switch (mode) {
-+	case POWEROFF_NORMAL:
-+		if (h->power_off_cb)
-+			h->power_off_cb(&data);
-+
-+		if (priv->simple_power_off_cb)
-+			priv->simple_power_off_cb(priv->simple_power_off_cb_data);
-+
-+		if (priv->trivial_power_off_cb)
-+			priv->trivial_power_off_cb();
-+
-+		if (!h->power_off_chaining_allowed)
-+			ret = NOTIFY_STOP;
-+
-+		break;
-+
-+	case POWEROFF_PREPARE:
-+		if (h->power_off_prepare_cb)
-+			h->power_off_prepare_cb(&prep_data);
-+
-+		break;
-+
-+	default:
-+		unreachable();
-+	}
-+
-+	return ret;
-+}
-+
-+static int power_handler_restart(struct notifier_block *nb,
-+				 unsigned long mode, void *cmd)
-+{
-+	struct power_handler_private_data *priv;
-+	struct restart_data data = {};
-+	struct power_handler *h;
-+
-+	priv = container_of(nb, struct power_handler_private_data, restart_nb);
-+	h = container_of(priv, struct power_handler, priv);
-+
-+	data.cb_data = h->cb_data;
-+	data.mode = mode;
-+	data.cmd = cmd;
-+
-+	h->restart_cb(&data);
-+
-+	return NOTIFY_DONE;
-+}
-+
-+static int power_handler_restart_prep(struct notifier_block *nb,
-+				      unsigned long mode, void *cmd)
-+{
-+	struct power_handler_private_data *priv;
-+	struct reboot_prep_data data = {};
-+	struct power_handler *h;
-+
-+	priv = container_of(nb, struct power_handler_private_data, reboot_prep_nb);
-+	h = container_of(priv, struct power_handler, priv);
-+
-+	data.cb_data = h->cb_data;
-+	data.mode = mode;
-+	data.cmd = cmd;
-+
-+	h->reboot_prepare_cb(&data);
-+
-+	return NOTIFY_DONE;
-+}
-+
-+static struct power_handler_private_data *
-+power_handler_private_data(struct power_handler *handler)
-+{
-+	return (struct power_handler_private_data *)&handler->priv;
-+}
-+
-+/**
-+ *	devm_register_power_handler - Register power handler
-+ *	@dev: Device that registers handler
-+ *	@handler: Power handler descriptor
-+ *
-+ *	Registers power handler that will be called as last step of the
-+ *	power-off and restart sequences.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int register_power_handler(struct power_handler *handler)
-+{
-+	struct power_handler_private_data *priv = power_handler_private_data(handler);
-+	int err, priority;
-+
-+	/* sanity-check whether handler is registered twice */
-+	if (WARN_ON(priv->registered))
-+		return -EBUSY;
-+
-+	if (handler->power_off_cb || handler->power_off_prepare_cb) {
-+		if (handler->power_off_priority == POWEROFF_PRIO_RESERVED)
-+			priority = POWEROFF_PRIO_DEFAULT;
-+		else
-+			priority = handler->power_off_priority;
-+
-+		priv->power_off_nb.notifier_call = power_handler_power_off;
-+		priv->power_off_nb.priority = priority;
-+
-+		err = register_power_off_handler(&priv->power_off_nb);
-+		if (err)
-+			goto reset_power_handler;
-+	}
-+
-+	if (handler->restart_cb) {
-+		if (handler->restart_priority == RESTART_PRIO_RESERVED)
-+			priority = RESTART_PRIO_DEFAULT;
-+		else
-+			priority = handler->restart_priority;
-+
-+		priv->restart_nb.notifier_call = power_handler_restart;
-+		priv->restart_nb.priority = priority;
-+
-+		err = register_restart_handler(&priv->restart_nb);
-+		if (err)
-+			goto unreg_power_off_handler;
-+	}
-+
-+	if (handler->reboot_prepare_cb) {
-+		priv->reboot_prep_nb.notifier_call = power_handler_restart_prep;
-+		priv->reboot_prep_nb.priority = 0;
-+
-+		err = register_reboot_notifier(&priv->reboot_prep_nb);
-+		if (err)
-+			goto unreg_restart_handler;
-+	}
-+
-+	priv->registered = true;
-+
-+	return 0;
-+
-+unreg_restart_handler:
-+	if (handler->restart_cb)
-+		unregister_restart_handler(&priv->restart_nb);
-+
-+unreg_power_off_handler:
-+	if (handler->power_off_cb)
-+		unregister_power_off_handler(&priv->power_off_nb);
-+
-+reset_power_handler:
-+	memset(priv, 0, sizeof(*priv));
-+
-+	return err;
-+}
-+EXPORT_SYMBOL(register_power_handler);
-+
-+/**
-+ *	unregister_power_handler - Unregister power handler
-+ *	@handler: Power handler descriptor
-+ *
-+ *	Unregisters a previously registered power handler. Does nothing if
-+ *	handler is NULL.
-+ */
-+void unregister_power_handler(struct power_handler *handler)
-+{
-+	struct power_handler_private_data *priv;
-+
-+	if (!handler)
-+		return;
-+
-+	priv = power_handler_private_data(handler);
-+
-+	/* sanity-check whether handler is unregistered twice */
-+	if (WARN_ON(!priv->registered))
-+		return;
-+
-+	if (handler->reboot_prepare_cb)
-+		unregister_reboot_notifier(&priv->reboot_prep_nb);
-+
-+	if (handler->restart_cb)
-+		unregister_restart_handler(&priv->restart_nb);
-+
-+	if (handler->power_off_cb)
-+		unregister_power_off_handler(&priv->power_off_nb);
-+
-+	memset(priv, 0, sizeof(*priv));
-+}
-+EXPORT_SYMBOL(unregister_power_handler);
-+
-+static void devm_unregister_power_handler(void *data)
-+{
-+	struct power_handler *handler = data;
-+
-+	unregister_power_handler(handler);
-+}
-+
-+/**
-+ *	devm_register_power_handler - Register power handler
-+ *	@dev: Device that registers handler
-+ *	@handler: Power handler descriptor
-+ *
-+ *	Resource-managed variant of register_power_handler();
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int devm_register_power_handler(struct device *dev,
-+				struct power_handler *handler)
-+{
-+	int err;
-+
-+	err = register_power_handler(handler);
-+	if (err)
-+		return err;
-+
-+	return devm_add_action_or_reset(dev, devm_unregister_power_handler,
-+					handler);
-+}
-+EXPORT_SYMBOL(devm_register_power_handler);
-+
-+/**
-+ *	register_simple_power_off_handler - Register simple power-off callback
-+ *	@dev: Device that registers callback
-+ *	@callback: Callback function
-+ *	@data: Callback's argument
-+ *
-+ *	Registers power-off callback with default priority, it will be called
-+ *	as last step of the power-off sequence.
-+ *
-+ *	Returns power_handler pointer on success, or ERR_PTR on failure.
-+ */
-+struct power_handler *
-+register_simple_power_off_handler(void (*callback)(void *data), void *data)
-+{
-+	struct power_handler_private_data *priv;
-+	struct power_handler *handler;
-+	int err;
-+
-+	handler = kzalloc(sizeof(*handler), GFP_KERNEL);
-+	if (!handler)
-+		return ERR_PTR(-ENOMEM);
-+
-+	priv = power_handler_private_data(handler);
-+
-+	priv->power_off_nb.notifier_call = power_handler_power_off;
-+	priv->power_off_nb.priority = POWEROFF_PRIO_DEFAULT;
-+	priv->simple_power_off_cb_data = data;
-+	priv->simple_power_off_cb = callback;
-+
-+	err = register_power_off_handler(&priv->power_off_nb);
-+	if (err) {
-+		kfree(handler);
-+		return ERR_PTR(err);
-+	}
-+
-+	return handler;
-+}
-+EXPORT_SYMBOL(register_simple_power_off_handler);
-+
-+/**
-+ *	unregister_power_handler - Unregister simple power-off handler
-+ *	@handler: Power handler descriptor
-+ *
-+ *	Unregisters power handler that was registered by
-+ *	register_simple_power_off_handler(). Does nothing if handler is
-+ *	error or NULL.
-+ */
-+void unregister_simple_power_off_handler(struct power_handler *handler)
-+{
-+	struct power_handler_private_data *priv;
-+
-+	if (!IS_ERR_OR_NULL(handler)) {
-+		priv = power_handler_private_data(handler);
-+		unregister_power_off_handler(&priv->power_off_nb);
-+		kfree(handler);
-+	}
-+}
-+EXPORT_SYMBOL(unregister_simple_power_off_handler);
-+
-+/**
-+ *	devm_register_simple_power_off_handler - Register simple power-off callback
-+ *	@dev: Device that registers callback
-+ *	@callback: Callback function
-+ *	@data: Callback's argument
-+ *
-+ *	Registers resource-managed power-off callback with default priority,
-+ *	it will be called as last step of the power-off sequence. Further
-+ *	lower priority callbacks won't be executed if this @callback fails.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int devm_register_simple_power_off_handler(struct device *dev,
-+					   void (*callback)(void *data),
-+					   void *data)
-+{
-+	struct power_handler_private_data *priv;
-+	struct power_handler *handler;
-+
-+	handler = devm_kzalloc(dev, sizeof(*handler), GFP_KERNEL);
-+	if (!handler)
-+		return -ENOMEM;
-+
-+	priv = power_handler_private_data(handler);
-+
-+	priv->power_off_nb.notifier_call = power_handler_power_off;
-+	priv->power_off_nb.priority = POWEROFF_PRIO_DEFAULT;
-+	priv->simple_power_off_cb_data = data;
-+	priv->simple_power_off_cb = callback;
-+
-+	return devm_register_power_off_handler(dev, &priv->power_off_nb);
-+}
-+EXPORT_SYMBOL(devm_register_simple_power_off_handler);
-+
-+/**
-+ *	devm_register_trivial_power_off_handler - Register trivial power-off callback
-+ *	@dev: Device that registers callback
-+ *	@desc: Callback descriptor
-+ *
-+ *	Same as devm_register_simple_power_off_handler(), but callback
-+ *	doesn't take argument. Further lower priority callbacks won't be
-+ *	executed if this @callback fails.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int devm_register_trivial_power_off_handler(struct device *dev,
-+					    void (*callback)(void))
-+{
-+	struct power_handler_private_data *priv;
-+	struct power_handler *handler;
-+
-+	handler = devm_kzalloc(dev, sizeof(*handler), GFP_KERNEL);
-+	if (!handler)
-+		return -ENOMEM;
-+
-+	priv = power_handler_private_data(handler);
-+
-+	priv->power_off_nb.notifier_call = power_handler_power_off;
-+	priv->power_off_nb.priority = POWEROFF_PRIO_DEFAULT;
-+	priv->trivial_power_off_cb = callback;
-+
-+	return devm_register_power_off_handler(dev, &priv->power_off_nb);
-+}
-+EXPORT_SYMBOL(devm_register_trivial_power_off_handler);
-+
-+/**
-+ *	devm_register_simple_restart_handler - Register simple restart callback
-+ *	@dev: Device that registers callback
-+ *	@callback: Callback function
-+ *	@data: Callback's argument
-+ *
-+ *	Registers resource-managed restart callback with default priority,
-+ *	it will be called as last step of the restart sequence.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int devm_register_simple_restart_handler(struct device *dev,
-+					 void (*callback)(struct restart_data *data),
-+					 void *data)
-+{
-+	return devm_register_prioritized_restart_handler(dev,
-+							 RESTART_PRIO_DEFAULT,
-+							 callback, data);
-+}
-+EXPORT_SYMBOL(devm_register_simple_restart_handler);
-+
-+/**
-+ *	devm_register_prioritized_restart_handler - Register prioritized restart callback
-+ *	@dev: Device that registers callback
-+ *	@priority: Callback's priority
-+ *	@callback: Callback function
-+ *	@data: Callback's argument
-+ *
-+ *	Registers resource-managed restart callback with a given priority,
-+ *	it will be called as last step of the restart sequence.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int devm_register_prioritized_restart_handler(struct device *dev,
-+					      int priority,
-+					      void (*callback)(struct restart_data *data),
-+					      void *data)
-+{
-+	struct power_handler *handler;
-+
-+	handler = devm_kzalloc(dev, sizeof(*handler), GFP_KERNEL);
-+	if (!handler)
-+		return -ENOMEM;
-+
-+	handler->restart_priority = priority;
-+	handler->restart_cb = callback;
-+	handler->cb_data = data;
-+
-+	return devm_register_power_handler(dev, handler);
-+}
-+EXPORT_SYMBOL(devm_register_prioritized_restart_handler);
-+
-+static struct power_handler platform_power_off_handler = {
-+	.priv = {
-+		.power_off_nb = {
-+			.notifier_call = power_handler_power_off,
-+			.priority = POWEROFF_PRIO_PLATFORM,
-+		},
-+	},
-+};
-+
-+/**
-+ *	register_platform_power_off - Register platform-level power-off callback
-+ *	@power_off: Power-off callback
-+ *
-+ *	Registers power-off callback that will be called as last step
-+ *	of the power-off sequence. This callback is expected to be invoked
-+ *	for the last resort. Further lower priority callbacks won't be
-+ *	executed if @power_off fails. Only one platform power-off callback
-+ *	is allowed to be registered.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int register_platform_power_off(void (*power_off)(void))
-+{
-+	struct power_handler_private_data *priv;
-+
-+	/* this function is allowed to be called only once */
-+	if (WARN_ON(platform_power_off_handler.priv.trivial_power_off_cb))
-+		return -EBUSY;
-+
-+	priv = power_handler_private_data(&platform_power_off_handler);
-+	priv->trivial_power_off_cb = power_off;
-+
-+	return register_power_off_handler(&priv->power_off_nb);
-+}
-+
-+/**
-+ *	do_kernel_power_off - Execute kernel power-off handler call chain
-+ *
-+ *	Calls functions registered with register_power_off_handler.
-+ *
-+ *	Expected to be called as last step of the power-off sequence.
-+ *
-+ *	Powers off the system immediately if a power-off handler function has
-+ *	been registered. Otherwise does nothing.
-+ */
-+void do_kernel_power_off(void)
-+{
-+	/* legacy pm_power_off() is unchained and it has highest priority */
-+	if (pm_power_off && pm_power_off != dummy_pm_power_off)
-+		return pm_power_off();
-+
-+	blocking_notifier_call_chain(&power_off_handler_list, POWEROFF_NORMAL,
-+				     NULL);
-+}
-+
-+static void do_kernel_power_off_prepare(void)
-+{
-+	/* legacy pm_power_off_prepare() is unchained and it has highest priority */
-+	if (pm_power_off_prepare)
-+		return pm_power_off_prepare();
-+
-+	blocking_notifier_call_chain(&power_off_handler_list, POWEROFF_PREPARE,
-+				     NULL);
-+}
-+
- /**
-  *	kernel_power_off - power_off the system
-  *
-@@ -302,8 +882,7 @@ EXPORT_SYMBOL_GPL(kernel_halt);
- void kernel_power_off(void)
- {
- 	kernel_shutdown_prepare(SYSTEM_POWER_OFF);
--	if (pm_power_off_prepare)
--		pm_power_off_prepare();
-+	do_kernel_power_off_prepare();
- 	migrate_to_reboot_cpu();
- 	syscore_shutdown();
- 	pr_emerg("Power down\n");
-@@ -312,6 +891,16 @@ void kernel_power_off(void)
- }
- EXPORT_SYMBOL_GPL(kernel_power_off);
- 
-+bool kernel_can_power_off(void)
-+{
-+	if (!pm_power_off &&
-+	    blocking_notifier_call_chain_empty(&power_off_handler_list))
-+		return false;
-+
-+	return true;
-+}
-+EXPORT_SYMBOL_GPL(kernel_can_power_off);
-+
- DEFINE_MUTEX(system_transition_mutex);
- 
- /*
-@@ -353,7 +942,7 @@ SYSCALL_DEFINE4(reboot, int, magic1, int, magic2, unsigned int, cmd,
- 	/* Instead of trying to make the power_off code look like
- 	 * halt when pm_power_off is not set do it the easy way.
- 	 */
--	if ((cmd == LINUX_REBOOT_CMD_POWER_OFF) && !pm_power_off)
-+	if (cmd == LINUX_REBOOT_CMD_POWER_OFF && !kernel_can_power_off())
- 		cmd = LINUX_REBOOT_CMD_HALT;
- 
- 	mutex_lock(&system_transition_mutex);
--- 
-2.33.1
+Last test of basis   165682  2021-10-19 21:09:14 Z    8 days
+Failing since        165694  2021-10-20 18:09:12 Z    7 days   17 attempts
+Testing same since   165883  2021-10-26 21:38:10 Z    0 days    3 attempts
 
+------------------------------------------------------------
+People who touched revisions under test:
+  Alistair Francis <alistair.francis@wdc.com>
+  Andrew Jones <drjones@redhat.com>
+  Ani Sinha <ani@anisinha.ca>
+  BALATON Zoltan <balaton@eik.bme.hu>
+  Bin Meng <bmeng.cn@gmail.com>
+  Cédric Le Goater <clg@kaod.org>
+  Daniel Henrique Barboza <danielhb413@gmail.com>
+  David Gibson <david@gibson.dropbear.id.au>
+  David Hildenbrand <david@redhat.com>
+  Dr. David Alan Gilbert <dgilbert@redhat.com>
+  Eric Auger <eric.auger@redhat.com>
+  Eugenio Pérez <eperezma@redhat.com>
+  Frank Chang <frank.chang@sifive.com>
+  Gavin Shan <gshan@redhat.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Greg Kurz <groug@kaod.org>
+  Gustavo Romero <gromero@linux.ibm.com>
+  Igor Mammedov <imammedo@redhat.com>
+  Jason Wang <jasowang@redhat.com>
+  John Wang <wangzhiqiang02@inspur.com>
+  John Wang <wangzq.jn@gmail.com>
+  Laurent Vivier <laurent@vivier.eu>
+  Laurent Vivier <lvivier@redhat.com>
+  Luc Michel <lmichel@kalray.eu>
+  Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>
+  Matheus Ferst <matheus.ferst@eldorado.org.br>
+  Mathieu Poirier <mathieu.poirier@linaro.org>
+  Michael S. Tsirkin <mst@redhat.com>
+  Mingwang Li <limingwang@huawei.com>
+  Oğuz Ersen <oguzersen@protonmail.com>
+  Philipp Tomsich <philipp.tomsich@vrull.eu>
+  Philippe Mathieu-Daudé <f4bug@amsat.org>
+  Philippe Mathieu-Daudé <philmd@redhat.com>
+  Richard Henderson <richard.henderson@linaro.org>
+  Shuuichirou Ishii <ishii.shuuichir@fujitsu.com>
+  Stefan Hajnoczi <stefanha@redhat.com>
+  Thomas Huth <thuth@redhat.com>
+  Tong Ho <tong.ho@xilinx.com>
+  Travis Geiselbrecht <travisg@gmail.com>
+  Vincent Palatin <vpalatin@rivosinc.com>
+  Vivek Goyal <vgoyal@redhat.com>
+  Xueming Li <xuemingl@nvidia.com>
+  Yanan Wang <wangyanan55@huawei.com>
+  Yifei Jiang <jiangyifei@huawei.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          blocked 
+ test-amd64-i386-xl                                           blocked 
+ test-amd64-coresched-i386-xl                                 blocked 
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm            blocked 
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-i386-xl-qemuu-debianhvm-i386-xsm                  blocked 
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-i386-libvirt-xsm                                  blocked 
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-i386-xl-xsm                                       blocked 
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-i386-qemuu-rhel6hvm-amd                           blocked 
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64                     blocked 
+ test-amd64-i386-freebsd10-amd64                              blocked 
+ test-amd64-amd64-qemuu-freebsd11-amd64                       pass    
+ test-amd64-amd64-qemuu-freebsd12-amd64                       pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-i386-xl-qemuu-win7-amd64                          blocked 
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-amd64-i386-xl-qemuu-ws16-amd64                          blocked 
+ test-armhf-armhf-xl-arndale                                  blocked 
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  blocked 
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  blocked 
+ test-armhf-armhf-xl-cubietruck                               blocked 
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict         blocked 
+ test-amd64-i386-freebsd10-i386                               blocked 
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-i386-qemuu-rhel6hvm-intel                         blocked 
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     blocked 
+ test-amd64-i386-libvirt                                      blocked 
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                blocked 
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-i386-pair                                         blocked 
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-i386-libvirt-pair                                 blocked 
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-i386-xl-pvshim                                    blocked 
+ test-amd64-amd64-pygrub                                      pass    
+ test-armhf-armhf-libvirt-qcow2                               blocked 
+ test-amd64-amd64-xl-qcow2                                    pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 blocked 
+ test-amd64-i386-libvirt-raw                                  blocked 
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     blocked 
+ test-arm64-arm64-xl-seattle                                  pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-i386-xl-qemuu-debianhvm-amd64-shadow              blocked 
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-amd64-i386-xl-shadow                                    blocked 
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-libvirt-vhd                                 pass    
+ test-arm64-arm64-xl-vhd                                      pass    
+ test-armhf-armhf-xl-vhd                                      blocked 
+ test-amd64-i386-xl-vhd                                       blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 3749 lines long.)
 
