@@ -2,52 +2,51 @@ Return-Path: <SRS0=FpJc=PQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 622E0C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 08:13:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94CA9C43217
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 08:13:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 22EB960F9B
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 08:13:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 22EB960F9B
+	by mail.kernel.org (Postfix) with ESMTPS id 60A4060F9B
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 08:13:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 60A4060F9B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217724.377894 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217721.377861 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mg0WY-0004sp-Hs; Thu, 28 Oct 2021 08:12:34 +0000
+	id 1mg0WR-00042D-JF; Thu, 28 Oct 2021 08:12:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217724.377894; Thu, 28 Oct 2021 08:12:34 +0000
+Received: by outflank-mailman (output) from mailman id 217721.377861; Thu, 28 Oct 2021 08:12:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mg0WY-0004sb-Dm; Thu, 28 Oct 2021 08:12:34 +0000
-Received: by outflank-mailman (input) for mailman id 217724;
- Thu, 28 Oct 2021 08:12:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mg0WR-000426-Fy; Thu, 28 Oct 2021 08:12:27 +0000
+Received: by outflank-mailman (input) for mailman id 217721;
+ Thu, 28 Oct 2021 08:12:26 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=vfrR=PQ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mg0WV-000420-E4
- for xen-devel@lists.xenproject.org; Thu, 28 Oct 2021 08:12:31 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c8ed97ca-37c6-11ec-849a-12813bfff9fa;
- Thu, 28 Oct 2021 08:12:26 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 533B81FD50;
+ id 1mg0WQ-00041u-4A
+ for xen-devel@lists.xenproject.org; Thu, 28 Oct 2021 08:12:26 +0000
+Received: from smtp-out1.suse.de (unknown [195.135.220.28])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fa1a8677-4a17-4393-b02a-b061a7bfd820;
  Thu, 28 Oct 2021 08:12:25 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0D7CE13B7D;
- Thu, 28 Oct 2021 08:12:25 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0749421969;
+ Thu, 28 Oct 2021 08:12:24 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 94FC613B7D;
+ Thu, 28 Oct 2021 08:12:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 6B8ZAmlbemE/MQAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 28 Oct 2021 08:12:25 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cAz8ImdbemE/MQAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 28 Oct 2021 08:12:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,16 +58,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8ed97ca-37c6-11ec-849a-12813bfff9fa
+X-Inumbo-ID: fa1a8677-4a17-4393-b02a-b061a7bfd820
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1635408745; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Xwab1206kf6LPwimd9DqBNkl2HPMyacCxBPHJc6oauA=;
-	b=lXctq1nTr/IrpFNo9dzqTLg+Mk1DHZaLUAO1sv3bfQ2soI/KtJHeCVSpvwoaVFIthWU0W7
-	JK3fBD95T9sTH3Cj0cGhOQFvUtMTlplsFlS4HSWyMKrCHMfX6hpvgOsajs2KiFqgr1ce3n
-	S/YBqk6nsSp6iJ9uuY1NpttjHYqYmSc=
+	t=1635408744; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=MAdAn9lpXksqynEY71tU+xB36Uh2pHZMgZIOmXx5QU4=;
+	b=oHPcT2FRTlfOw5yijkWBtet9X2gojCMg6OeMHOToEdrwFfsTjLhzRvqSpw0D2tQG0a8pa0
+	xcIGS5u++8uvD2Qxr75dbGuvqfKHVXNd/W2R1qKUMFHthtVP3ocDnuubBMr3ywbae33Rwr
+	d1iPp8Gg8fKtI8iVlvKc+O1Bw939tn4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
@@ -80,50 +77,37 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>
-Subject: [PATCH 4/4] x86/xen: remove 32-bit awareness from startup_xen
-Date: Thu, 28 Oct 2021 10:12:21 +0200
-Message-Id: <20211028081221.2475-5-jgross@suse.com>
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	linux-arm-kernel@lists.infradead.org
+Subject: [PATCH 0/4] xen: do some cleanup
+Date: Thu, 28 Oct 2021 10:12:17 +0200
+Message-Id: <20211028081221.2475-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211028081221.2475-1-jgross@suse.com>
-References: <20211028081221.2475-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-startup_xen is still 32-bit aware, even if no longer needed.
+Some cleanups, mostly related to no longer supporting 32-bit PV mode.
 
-Replace the register macros by the 64-bit register names for making
-it more readable.
+Juergen Gross (4):
+  x86/xen: remove 32-bit pv leftovers
+  xen: allow pv-only hypercalls only with CONFIG_XEN_PV
+  xen: remove highmem remnants
+  x86/xen: remove 32-bit awareness from startup_xen
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/xen-head.S | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ arch/arm/xen/enlighten.c             |   1 -
+ arch/arm/xen/hypercall.S             |   1 -
+ arch/arm64/xen/hypercall.S           |   1 -
+ arch/x86/include/asm/xen/hypercall.h | 233 ++++++++++++---------------
+ arch/x86/xen/enlighten_pv.c          |   7 -
+ arch/x86/xen/mmu_pv.c                |   1 -
+ arch/x86/xen/xen-head.S              |  12 +-
+ drivers/xen/mem-reservation.c        |  27 ++--
+ include/xen/arm/hypercall.h          |  15 --
+ 9 files changed, 118 insertions(+), 180 deletions(-)
 
-diff --git a/arch/x86/xen/xen-head.S b/arch/x86/xen/xen-head.S
-index cb6538ae2fe0..38b0a3226c95 100644
---- a/arch/x86/xen/xen-head.S
-+++ b/arch/x86/xen/xen-head.S
-@@ -28,13 +28,13 @@ SYM_CODE_START(startup_xen)
- 
- 	/* Clear .bss */
- 	xor %eax,%eax
--	mov $__bss_start, %_ASM_DI
--	mov $__bss_stop, %_ASM_CX
--	sub %_ASM_DI, %_ASM_CX
--	shr $__ASM_SEL(2, 3), %_ASM_CX
--	rep __ASM_SIZE(stos)
-+	mov $__bss_start, %rdi
-+	mov $__bss_stop, %rcx
-+	sub %rdi, %rcx
-+	shr $3, %rcx
-+	rep stosq
- 
--	mov %_ASM_SI, xen_start_info
-+	mov %rsi, xen_start_info
- 	mov initial_stack(%rip), %rsp
- 
- 	/* Set up %gs.
 -- 
 2.26.2
 
