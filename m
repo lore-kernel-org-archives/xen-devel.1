@@ -2,51 +2,36 @@ Return-Path: <SRS0=FpJc=PQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55F3EC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 08:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18686C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 09:49:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0A69C60F9B
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 08:13:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0A69C60F9B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C7FA460FC0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Oct 2021 09:49:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C7FA460FC0
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.217725.377905 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.217758.377916 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mg0Wb-0005E8-QQ; Thu, 28 Oct 2021 08:12:37 +0000
+	id 1mg21M-0006oK-SF; Thu, 28 Oct 2021 09:48:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 217725.377905; Thu, 28 Oct 2021 08:12:37 +0000
+Received: by outflank-mailman (output) from mailman id 217758.377916; Thu, 28 Oct 2021 09:48:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mg0Wb-0005Dt-Mx; Thu, 28 Oct 2021 08:12:37 +0000
-Received: by outflank-mailman (input) for mailman id 217725;
- Thu, 28 Oct 2021 08:12:35 +0000
+	id 1mg21M-0006oD-Oh; Thu, 28 Oct 2021 09:48:28 +0000
+Received: by outflank-mailman (input) for mailman id 217758;
+ Thu, 28 Oct 2021 09:48:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=vfrR=PQ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mg0WZ-00041u-Ti
- for xen-devel@lists.xenproject.org; Thu, 28 Oct 2021 08:12:35 +0000
-Received: from smtp-out2.suse.de (unknown [195.135.220.29])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=WzT0=PQ=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1mg21K-0006o3-Q6
+ for xen-devel@lists.xenproject.org; Thu, 28 Oct 2021 09:48:26 +0000
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id eb631bc3-ad74-4c17-a4d9-b2eeb376b7cf;
- Thu, 28 Oct 2021 08:12:25 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id B15881FD4E;
- Thu, 28 Oct 2021 08:12:24 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 58B2813B7D;
- Thu, 28 Oct 2021 08:12:24 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id WOSfFGhbemE/MQAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 28 Oct 2021 08:12:24 +0000
+ id 6be20bab-61d9-48c7-9ebc-9b29a977d1ae;
+ Thu, 28 Oct 2021 09:48:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,387 +43,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb631bc3-ad74-4c17-a4d9-b2eeb376b7cf
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1635408744; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=QksQebk1Y8FPDBoAglLu73ax8R7o9eRK4x+nsqV+elk=;
-	b=lRnnR5fTPLeK40Bxibys9A9K4vacdHa60hfErHP2QMDlMAYS5tZ2OFxKFgIyzjDvyyneJq
-	PtWY0wY+RlPdkWOtQlg1hLP644z5QrjQ14SBUP0M0No27CpxKyVolR4eycuZUHWyPswFvo
-	pib9cppXK/qTrRCRqpBLV6HJOibwId4=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	linux-arm-kernel@lists.infradead.org
-Subject: [PATCH 2/4] xen: allow pv-only hypercalls only with CONFIG_XEN_PV
-Date: Thu, 28 Oct 2021 10:12:19 +0200
-Message-Id: <20211028081221.2475-3-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211028081221.2475-1-jgross@suse.com>
-References: <20211028081221.2475-1-jgross@suse.com>
+X-Inumbo-ID: 6be20bab-61d9-48c7-9ebc-9b29a977d1ae
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1635414504;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=CnFZ75dQ6xsXYjMS/S7fCNUFlHqMD2os8BP2OWgW/8E=;
+  b=Q846xqrWk8XD9DQs1Wxa27ahnUIxkc0I7xqlMGbqVb7ZTZWksnYgf3NE
+   mguLupj9S58C3HDhTySKvyrlnhrGny3GknNvpQUflANUBjQ0IEUI129Ha
+   34XW2c3WvazbwMwxkRpZQsBR9IHF5tGk1sBQd95KxIUQ46Zj9uJVKwraa
+   8=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 8tFzC1kL3YfRIxKhIZoaS0VkzHMCMocbjjwMPSJSSBBv06NwH/OOQN+qPu03dTqlAiulAvvr/w
+ z60GILbu56ZpNqLaM46b3+2Xw3LcNB8BjIfsNQEJ9kTImvki9RhQo0YYauqYbf7QdCHqNEr4yR
+ yJ/Qu7UpzLTCCq4oa05Fh8+s5Fp5t3OJSjkLsPfPyc/Cbmxwq3SlaQuKk721fevrH4+iN8uOwC
+ TN+aG5U4gNh7hE7QmmD247kCscoThL7LWhGB7R0O/YVLlCgvDQM0OebwFkS7m3UjGzVZrqAPYV
+ WunIZRSaJ2eDjG79PEdaPtk4
+X-SBRS: 5.1
+X-MesageID: 58467448
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:fT3Ffqybw3MvIIp6Y0h6t+eqwSrEfRIJ4+MujC+fZmUNrF6WrkUPn
+ WUeUDrTMvqIajfzKtwibd609h8FvZLWy9NhQAVvqyAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAuLeNYYH1500s6w7Rp2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt8JBm
+ OUKpYXhcEQSJ6nTlb4NcxJkDBgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVors0lMMnsOpJZonx6xCvVJf0nXYrCU+PB4towMDIY25ASQ6mCO
+ 5pxhTxHcgbpQi9qPgouUMgXo8ChqCDtfj1apwfAzUYwyzeKl1EguFT3C/LUZd6iVchThlyfp
+ G/N4yL+GB5yHMOb4SqI9DSrnOCntTjnVYwbErr+7eJjilCXwm0VCTUGVF+6p+n/gUm7M/pEM
+ FAd8Ccqqak09WSoQ8P7Uhn+p2SL1jYXUsBcFOAS4wiXxq3ZpQ2eAwAsXjNHLdArqsIybTgrz
+ UOS2cPkAyR1t7+YQm7b8a2bxQ5eIgBMczVEP3VdC1JYvZ+z++nfky4jUP5xIP6Fyc3sSAiz+
+ CmOsyVkl5UYsdEygvDTEU/8vxqgoZ3ATwgQ7wrRX3644g4RWLNJd7BE+nCAsq4edNfxok2p+
+ SFewZDHvb9m4YSlzXTVGI0w8KeVC+Fp2dE2qWVkGIU97HyT8nqncJE4DNpWdRoxbJhsldMEZ
+ ibuVeJtCH17YCTCgUxfOdvZ5yEWIU7ITo2Nuhf8NYMmX3SJXFXblByCnGbJt4wXrGAikLskJ
+ bCQetu2AHARBMxPlWTtGrxDieVwmHFumQs/oKwXKTz8iNJyg1bOEN843KamNLhlvMtoXi2Mq
+ 76zyPdmOz0ACbajM0E7AKYYLEwQLGhTOHwFg5c/SwJ3GSI/QDtJI6aImdsJItU594wIxrag1
+ izsASdwlQug7UAr3C3XMxiPnpu0Bs0hxZ/6VARxVWuVN48LOtfysv1HLcJrLdHKNoVLlJZJc
+ hXMQO3Yatwnd9gN0211gUDVoNMweRK1qxiJOib5MjEzc4Q5H17C+8P+fxup/y4LV3Llucw7q
+ rym9wXaXZtcGFgyUJeIMKqinwGroHwQuONuRE+UcNNdT1rhrdpxICvrg/5pf8xVcUffxiGX3
+ hq9CAsDobWfuJc89dTE3PjWr4qgH+ZkMFBdGm3XseS/OSXApzLxyo5cSueYOzvaUTqsqqmlY
+ OxUydD6MeEGwwkW49YtTe4zwPtntdX1prJcwgB1J1nxbgymWuF6P32L/chTrakRlLVXjhS7B
+ xCU8d5ANLTXZM68SAwNJBAoZ/io3O0PnmWA9uw8JUj36XMl/LeDVkkObRCAhDYEcelwOYIhh
+ +wgpNQX+0q0jR9zaoSKiSVd9mKtKH0cUvp46sFGUdGz0gd7mEtfZZH8CzPt5MDdYtpBBUAmP
+ zuIifeQnL9b3EfDLyI+GHWlMTCxXnjSVMSmFGM/Gmk=
+IronPort-HdrOrdr: A9a23:+Yl2zKGA62x5gytGpLqE6MeALOsnbusQ8zAXP0AYc3Jom+ij5q
+ STdZUgpHrJYVkqNU3I9ertBEDEewK6yXcX2/hyAV7BZmnbUQKTRekIh7cKgQeQeBEWntQts5
+ uIGJIeNDSfNzdHsfo=
+X-IronPort-AV: E=Sophos;i="5.87,189,1631592000"; 
+   d="scan'208";a="58467448"
+Date: Thu, 28 Oct 2021 10:48:20 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+CC: <cardoe@cardoe.com>, <xen-devel@lists.xenproject.org>,
+	<iwj@xenproject.org>, <wl@xen.org>, <andrew.cooper3@citrix.com>, "Stefano
+ Stabellini" <stefano.stabellini@xilinx.com>
+Subject: Re: Solving the gitlab-ci git fetch issue, was: [PATCH 3/3]
+ automation: add a QEMU based x86_64 Dom0/DomU test
+Message-ID: <YXpx5PJwZoJQ6YIy@perard>
+References: <alpine.DEB.2.21.2110210831470.2311@sstabellini-ThinkPad-T480s>
+ <20211021230839.10794-3-sstabellini@kernel.org>
+ <YXK2lTWZHiTXIBtJ@perard>
+ <alpine.DEB.2.21.2110221219520.2311@sstabellini-ThinkPad-T480s>
+ <YXbXwjxHPNjSAKrG@perard>
+ <alpine.DEB.2.21.2110251754210.4586@sstabellini-ThinkPad-T480s>
+ <YXlbOjiphjN/XqMz@perard>
+ <alpine.DEB.2.21.2110271437120.20134@sstabellini-ThinkPad-T480s>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.21.2110271437120.20134@sstabellini-ThinkPad-T480s>
 
-Put the definitions of the hypercalls usable only by pv guests inside
-CONFIG_XEN_PV sections.
+On Wed, Oct 27, 2021 at 02:43:46PM -0700, Stefano Stabellini wrote:
+> On Wed, 27 Oct 2021, Anthony PERARD wrote:
+> > > But we do have a severe problem at the moment with external sources: our
+> > > "git clones" keep failing during the build on x86. That is definitely
+> > > something worth improving (see my other email thread on the subject) and
+> > > it is the main problem affecting gitlab-ci at the moment, I keep having
+> > > to restart jobs almost daily to get the overall pipeline to "pass".
+> > > 
+> > > If you have any ideas on how to stop fetching things using "git" from
+> > > external repositories in gitlab-ci that would be fantastic :-)
+> > > The only thing I could think of to "fix it" is moving all external repos
+> > > to gitlab repositories mirrors.
+> > 
+> > I don't think that would work, I've seen the initial clone/fetch of a
+> > job fail as well, so from gitlab. If we could have a cache of those
+> > external resources closer to the runners, that would be better.
+> 
+> You mean like a git repository mirror inside the Rackspace network (the
+> provider of the x86 runner), right? Then we would force the git client
+> to go to the Rackspace mirror instead of directly to the target using
+> "insteadOf".
 
-On Arm two dummy functions related to pv hypercalls can be removed.
+That would seems the best to me. If we could install Ian's
+git-cache-proxy that is used in osstest, that would be good I think.
+Having a mirror instead might work too but that would mean figure out
+which repo we would need a mirror of.
 
-While at it remove the no longer supported tmem hypercall definition.
+I did try a different alternative a while back, I tried to use gitlab's
+caching capability:
+    automation: Cache sub-project git tree in build jobs
+    https://lore.kernel.org/xen-devel/20191219144217.305851-3-anthony.perard@citrix.com/
+It mostly works but I'm not sure how useful it is as it seems there is
+10 computers that would maintain 10 different caches, and most of them
+for a short while.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/arm/xen/enlighten.c             |   1 -
- arch/arm/xen/hypercall.S             |   1 -
- arch/arm64/xen/hypercall.S           |   1 -
- arch/x86/include/asm/xen/hypercall.h | 211 +++++++++++++--------------
- include/xen/arm/hypercall.h          |  15 --
- 5 files changed, 102 insertions(+), 127 deletions(-)
+> Is that what you meant? Doug, do you think it would work?
 
-diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
-index 7f1c106b746f..7619fbffcea2 100644
---- a/arch/arm/xen/enlighten.c
-+++ b/arch/arm/xen/enlighten.c
-@@ -442,7 +442,6 @@ EXPORT_SYMBOL_GPL(HYPERVISOR_hvm_op);
- EXPORT_SYMBOL_GPL(HYPERVISOR_memory_op);
- EXPORT_SYMBOL_GPL(HYPERVISOR_physdev_op);
- EXPORT_SYMBOL_GPL(HYPERVISOR_vcpu_op);
--EXPORT_SYMBOL_GPL(HYPERVISOR_tmem_op);
- EXPORT_SYMBOL_GPL(HYPERVISOR_platform_op_raw);
- EXPORT_SYMBOL_GPL(HYPERVISOR_multicall);
- EXPORT_SYMBOL_GPL(HYPERVISOR_vm_assist);
-diff --git a/arch/arm/xen/hypercall.S b/arch/arm/xen/hypercall.S
-index b11bba542fac..f794dac9859a 100644
---- a/arch/arm/xen/hypercall.S
-+++ b/arch/arm/xen/hypercall.S
-@@ -88,7 +88,6 @@ HYPERCALL2(hvm_op);
- HYPERCALL2(memory_op);
- HYPERCALL2(physdev_op);
- HYPERCALL3(vcpu_op);
--HYPERCALL1(tmem_op);
- HYPERCALL1(platform_op_raw);
- HYPERCALL2(multicall);
- HYPERCALL2(vm_assist);
-diff --git a/arch/arm64/xen/hypercall.S b/arch/arm64/xen/hypercall.S
-index 5b09aca55108..9d01361696a1 100644
---- a/arch/arm64/xen/hypercall.S
-+++ b/arch/arm64/xen/hypercall.S
-@@ -80,7 +80,6 @@ HYPERCALL2(hvm_op);
- HYPERCALL2(memory_op);
- HYPERCALL2(physdev_op);
- HYPERCALL3(vcpu_op);
--HYPERCALL1(tmem_op);
- HYPERCALL1(platform_op_raw);
- HYPERCALL2(multicall);
- HYPERCALL2(vm_assist);
-diff --git a/arch/x86/include/asm/xen/hypercall.h b/arch/x86/include/asm/xen/hypercall.h
-index 02156b76aa92..b4832ec1a047 100644
---- a/arch/x86/include/asm/xen/hypercall.h
-+++ b/arch/x86/include/asm/xen/hypercall.h
-@@ -248,6 +248,7 @@ privcmd_call(unsigned int call,
- 	return res;
- }
- 
-+#ifdef CONFIG_XEN_PV
- static inline int
- HYPERVISOR_set_trap_table(struct trap_info *table)
- {
-@@ -280,6 +281,107 @@ HYPERVISOR_callback_op(int cmd, void *arg)
- 	return _hypercall2(int, callback_op, cmd, arg);
- }
- 
-+static inline int
-+HYPERVISOR_set_debugreg(int reg, unsigned long value)
-+{
-+	return _hypercall2(int, set_debugreg, reg, value);
-+}
-+
-+static inline unsigned long
-+HYPERVISOR_get_debugreg(int reg)
-+{
-+	return _hypercall1(unsigned long, get_debugreg, reg);
-+}
-+
-+static inline int
-+HYPERVISOR_update_descriptor(u64 ma, u64 desc)
-+{
-+	return _hypercall2(int, update_descriptor, ma, desc);
-+}
-+
-+static inline int
-+HYPERVISOR_update_va_mapping(unsigned long va, pte_t new_val,
-+			     unsigned long flags)
-+{
-+	return _hypercall3(int, update_va_mapping, va, new_val.pte, flags);
-+}
-+
-+static inline int
-+HYPERVISOR_set_segment_base(int reg, unsigned long value)
-+{
-+	return _hypercall2(int, set_segment_base, reg, value);
-+}
-+
-+static inline void
-+MULTI_fpu_taskswitch(struct multicall_entry *mcl, int set)
-+{
-+	mcl->op = __HYPERVISOR_fpu_taskswitch;
-+	mcl->args[0] = set;
-+
-+	trace_xen_mc_entry(mcl, 1);
-+}
-+
-+static inline void
-+MULTI_update_va_mapping(struct multicall_entry *mcl, unsigned long va,
-+			pte_t new_val, unsigned long flags)
-+{
-+	mcl->op = __HYPERVISOR_update_va_mapping;
-+	mcl->args[0] = va;
-+	mcl->args[1] = new_val.pte;
-+	mcl->args[2] = flags;
-+
-+	trace_xen_mc_entry(mcl, 3);
-+}
-+
-+static inline void
-+MULTI_update_descriptor(struct multicall_entry *mcl, u64 maddr,
-+			struct desc_struct desc)
-+{
-+	mcl->op = __HYPERVISOR_update_descriptor;
-+	mcl->args[0] = maddr;
-+	mcl->args[1] = *(unsigned long *)&desc;
-+
-+	trace_xen_mc_entry(mcl, 2);
-+}
-+
-+static inline void
-+MULTI_mmu_update(struct multicall_entry *mcl, struct mmu_update *req,
-+		 int count, int *success_count, domid_t domid)
-+{
-+	mcl->op = __HYPERVISOR_mmu_update;
-+	mcl->args[0] = (unsigned long)req;
-+	mcl->args[1] = count;
-+	mcl->args[2] = (unsigned long)success_count;
-+	mcl->args[3] = domid;
-+
-+	trace_xen_mc_entry(mcl, 4);
-+}
-+
-+static inline void
-+MULTI_mmuext_op(struct multicall_entry *mcl, struct mmuext_op *op, int count,
-+		int *success_count, domid_t domid)
-+{
-+	mcl->op = __HYPERVISOR_mmuext_op;
-+	mcl->args[0] = (unsigned long)op;
-+	mcl->args[1] = count;
-+	mcl->args[2] = (unsigned long)success_count;
-+	mcl->args[3] = domid;
-+
-+	trace_xen_mc_entry(mcl, 4);
-+}
-+
-+static inline void
-+MULTI_stack_switch(struct multicall_entry *mcl,
-+		   unsigned long ss, unsigned long esp)
-+{
-+	mcl->op = __HYPERVISOR_stack_switch;
-+	mcl->args[0] = ss;
-+	mcl->args[1] = esp;
-+
-+	trace_xen_mc_entry(mcl, 2);
-+}
-+#endif
-+
- static inline int
- HYPERVISOR_sched_op(int cmd, void *arg)
- {
-@@ -308,24 +410,6 @@ HYPERVISOR_platform_op(struct xen_platform_op *op)
- 	return _hypercall1(int, platform_op, op);
- }
- 
--static inline int
--HYPERVISOR_set_debugreg(int reg, unsigned long value)
--{
--	return _hypercall2(int, set_debugreg, reg, value);
--}
--
--static inline unsigned long
--HYPERVISOR_get_debugreg(int reg)
--{
--	return _hypercall1(unsigned long, get_debugreg, reg);
--}
--
--static inline int
--HYPERVISOR_update_descriptor(u64 ma, u64 desc)
--{
--	return _hypercall2(int, update_descriptor, ma, desc);
--}
--
- static inline long
- HYPERVISOR_memory_op(unsigned int cmd, void *arg)
- {
-@@ -338,13 +422,6 @@ HYPERVISOR_multicall(void *call_list, uint32_t nr_calls)
- 	return _hypercall2(int, multicall, call_list, nr_calls);
- }
- 
--static inline int
--HYPERVISOR_update_va_mapping(unsigned long va, pte_t new_val,
--			     unsigned long flags)
--{
--	return _hypercall3(int, update_va_mapping, va, new_val.pte, flags);
--}
--
- static inline int
- HYPERVISOR_event_channel_op(int cmd, void *arg)
- {
-@@ -387,14 +464,6 @@ HYPERVISOR_vcpu_op(int cmd, int vcpuid, void *extra_args)
- 	return _hypercall3(int, vcpu_op, cmd, vcpuid, extra_args);
- }
- 
--#ifdef CONFIG_X86_64
--static inline int
--HYPERVISOR_set_segment_base(int reg, unsigned long value)
--{
--	return _hypercall2(int, set_segment_base, reg, value);
--}
--#endif
--
- static inline int
- HYPERVISOR_suspend(unsigned long start_info_mfn)
- {
-@@ -415,13 +484,6 @@ HYPERVISOR_hvm_op(int op, void *arg)
-        return _hypercall2(unsigned long, hvm_op, op, arg);
- }
- 
--static inline int
--HYPERVISOR_tmem_op(
--	struct tmem_op *op)
--{
--	return _hypercall1(int, tmem_op, op);
--}
--
- static inline int
- HYPERVISOR_xenpmu_op(unsigned int op, void *arg)
- {
-@@ -439,73 +501,4 @@ HYPERVISOR_dm_op(
- 	return ret;
- }
- 
--static inline void
--MULTI_fpu_taskswitch(struct multicall_entry *mcl, int set)
--{
--	mcl->op = __HYPERVISOR_fpu_taskswitch;
--	mcl->args[0] = set;
--
--	trace_xen_mc_entry(mcl, 1);
--}
--
--static inline void
--MULTI_update_va_mapping(struct multicall_entry *mcl, unsigned long va,
--			pte_t new_val, unsigned long flags)
--{
--	mcl->op = __HYPERVISOR_update_va_mapping;
--	mcl->args[0] = va;
--	mcl->args[1] = new_val.pte;
--	mcl->args[2] = flags;
--
--	trace_xen_mc_entry(mcl, 3);
--}
--
--static inline void
--MULTI_update_descriptor(struct multicall_entry *mcl, u64 maddr,
--			struct desc_struct desc)
--{
--	mcl->op = __HYPERVISOR_update_descriptor;
--	mcl->args[0] = maddr;
--	mcl->args[1] = *(unsigned long *)&desc;
--
--	trace_xen_mc_entry(mcl, 2);
--}
--
--static inline void
--MULTI_mmu_update(struct multicall_entry *mcl, struct mmu_update *req,
--		 int count, int *success_count, domid_t domid)
--{
--	mcl->op = __HYPERVISOR_mmu_update;
--	mcl->args[0] = (unsigned long)req;
--	mcl->args[1] = count;
--	mcl->args[2] = (unsigned long)success_count;
--	mcl->args[3] = domid;
--
--	trace_xen_mc_entry(mcl, 4);
--}
--
--static inline void
--MULTI_mmuext_op(struct multicall_entry *mcl, struct mmuext_op *op, int count,
--		int *success_count, domid_t domid)
--{
--	mcl->op = __HYPERVISOR_mmuext_op;
--	mcl->args[0] = (unsigned long)op;
--	mcl->args[1] = count;
--	mcl->args[2] = (unsigned long)success_count;
--	mcl->args[3] = domid;
--
--	trace_xen_mc_entry(mcl, 4);
--}
--
--static inline void
--MULTI_stack_switch(struct multicall_entry *mcl,
--		   unsigned long ss, unsigned long esp)
--{
--	mcl->op = __HYPERVISOR_stack_switch;
--	mcl->args[0] = ss;
--	mcl->args[1] = esp;
--
--	trace_xen_mc_entry(mcl, 2);
--}
--
- #endif /* _ASM_X86_XEN_HYPERCALL_H */
-diff --git a/include/xen/arm/hypercall.h b/include/xen/arm/hypercall.h
-index b40485e54d80..9d7dd1c65a21 100644
---- a/include/xen/arm/hypercall.h
-+++ b/include/xen/arm/hypercall.h
-@@ -53,7 +53,6 @@ unsigned long HYPERVISOR_hvm_op(int op, void *arg);
- int HYPERVISOR_memory_op(unsigned int cmd, void *arg);
- int HYPERVISOR_physdev_op(int cmd, void *arg);
- int HYPERVISOR_vcpu_op(int cmd, int vcpuid, void *extra_args);
--int HYPERVISOR_tmem_op(void *arg);
- int HYPERVISOR_vm_assist(unsigned int cmd, unsigned int type);
- int HYPERVISOR_dm_op(domid_t domid, unsigned int nr_bufs,
- 		     struct xen_dm_op_buf *bufs);
-@@ -74,18 +73,4 @@ HYPERVISOR_suspend(unsigned long start_info_mfn)
- 	return HYPERVISOR_sched_op(SCHEDOP_shutdown, &r);
- }
- 
--static inline void
--MULTI_update_va_mapping(struct multicall_entry *mcl, unsigned long va,
--			unsigned int new_val, unsigned long flags)
--{
--	BUG();
--}
--
--static inline void
--MULTI_mmu_update(struct multicall_entry *mcl, struct mmu_update *req,
--		 int count, int *success_count, domid_t domid)
--{
--	BUG();
--}
--
- #endif /* _ASM_ARM_XEN_HYPERCALL_H */
 -- 
-2.26.2
-
+Anthony PERARD
 
