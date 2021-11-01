@@ -2,48 +2,47 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 45E24C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D4229C4332F
 	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EC0D360C51
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:09:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EC0D360C51
+	by mail.kernel.org (Postfix) with ESMTPS id 9C1486058D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9C1486058D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219427.380239 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219428.380250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfUd-0008OK-9t; Mon, 01 Nov 2021 22:09:27 +0000
+	id 1mhfUf-0000FN-Iu; Mon, 01 Nov 2021 22:09:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219427.380239; Mon, 01 Nov 2021 22:09:27 +0000
+Received: by outflank-mailman (output) from mailman id 219428.380250; Mon, 01 Nov 2021 22:09:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfUd-0008OD-6W; Mon, 01 Nov 2021 22:09:27 +0000
-Received: by outflank-mailman (input) for mailman id 219427;
- Mon, 01 Nov 2021 22:09:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mhfUf-0000FE-Ec; Mon, 01 Nov 2021 22:09:29 +0000
+Received: by outflank-mailman (input) for mailman id 219428;
+ Mon, 01 Nov 2021 22:09:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfUb-0007pr-N9
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:25 +0000
+ id 1mhfUe-0000By-BX
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:28 +0000
 Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 5c9453dd-3b60-11ec-854e-12813bfff9fa;
- Mon, 01 Nov 2021 22:09:19 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-554-eXk5BEdqNLmhJzQa-EAuKg-1; Mon, 01 Nov 2021 18:09:18 -0400
-Received: by mail-wr1-f71.google.com with SMTP id
- p17-20020adff211000000b0017b902a7701so3974632wro.19
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:18 -0700 (PDT)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id faed5ff8-c9c6-43ca-808f-521c3c679996;
+ Mon, 01 Nov 2021 22:09:27 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-464-TpMtcGBdNeesXy2DrtFEFQ-1; Mon, 01 Nov 2021 18:09:26 -0400
+Received: by mail-wr1-f70.google.com with SMTP id
+ d7-20020a5d6447000000b00186a113463dso1198922wrw.10
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:26 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id r1sm726567wmr.36.2021.11.01.15.09.16
+ by smtp.gmail.com with ESMTPSA id o17sm685487wmq.11.2021.11.01.15.09.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:16 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,37 +54,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5c9453dd-3b60-11ec-854e-12813bfff9fa
+X-Inumbo-ID: faed5ff8-c9c6-43ca-808f-521c3c679996
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804559;
+	s=mimecast20190719; t=1635804567;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=hSQaBGBpJWy0B8DIEKBqKdfykrzA4ow4TzC1HWV6kH0=;
-	b=hNSNMXU2Y/ryCTwvF3V47yRHi+POxwBr4glDBEfYK0S0Ns5en9qYlDbeWezXQMwMhHb6MF
-	OWKSfyUcZnxqlywL8QICTVFh9cuj2k3GFG93i+t2kCnnKwFJvGDewoZ3tDcjlv9S0F5Y0s
-	PZGrDGd+EHen92OgTkJja7gRK8dXI8U=
-X-MC-Unique: eXk5BEdqNLmhJzQa-EAuKg-1
+	bh=GGo9WanuJU04tuhhnw4peEWGOBw6c3WDbeGbMBl0UrM=;
+	b=CxE49QFwEnLn5ozH0njoOjqV0y/Y9CbD0DHU97jOrCpeiZ73tHyjt2KFCAkRCrotaFm8PT
+	IOP4IFxlq+NBRFVWHQC+dynHM0bhn+EQJe3r+cRU1Sr4oouxMZaZK6gT+ZwT4lBt5cvNBf
+	w9Cl+GmwmkIY40c9fqDupbx4Sf43htg=
+X-MC-Unique: TpMtcGBdNeesXy2DrtFEFQ-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=hSQaBGBpJWy0B8DIEKBqKdfykrzA4ow4TzC1HWV6kH0=;
-        b=S365fwufjsHeXo+5HWY4KYuTzdl6YXz4Gra/SjD4LMpAgriVyQ3gQKtDfvZo7IVuWf
-         qDST12A2D0pTi5FfKNInhTX/GNqzDVMj32qXwZSsi/u+18lSTrrOiZPHCg4s5t2gTkL+
-         bNb+0f21C8Y67ejQyZRLA2n4a3NhKgGI5BuBxt9fo5ZwNIm+7eICiuvXGLbNsZ7wr9oD
-         DHHkyLCF5Ib72sV1GQWej5YQSsH2xybrbA7/1yT66kJFzkIMtUTomW4usMk4GLDzd3IH
-         Z89LMxTYw8rbh4J0ODcy/AmAadHeQTcs0SqwUocW+ZkRL0vgLwEQBEamcyPmYGz46Qw5
-         it7g==
-X-Gm-Message-State: AOAM533A6yKO9SNUg2K8jOG8fGzHiPdLiz2noI22B9FJQIcFDUcNIJWP
-	aNCKVakOoNThu/NI+2yldGAqiaythCbT+/ZLZ+UepEAp4zLIwD3WX8zT8otw1dF4CSKhijGF6BM
-	qfHmGejZfp9su6GxQRViK7abi2Ro=
-X-Received: by 2002:adf:a78a:: with SMTP id j10mr42370726wrc.105.1635804557396;
-        Mon, 01 Nov 2021 15:09:17 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzHSBNKTiLO5JlEV3iFexkub7waHAM8W6BpiJr+wCxnuH8FeGBZ5Ook1cyDpaRUcX/w/4yrnA==
-X-Received: by 2002:adf:a78a:: with SMTP id j10mr42370691wrc.105.1635804557180;
-        Mon, 01 Nov 2021 15:09:17 -0700 (PDT)
+        bh=GGo9WanuJU04tuhhnw4peEWGOBw6c3WDbeGbMBl0UrM=;
+        b=v3VabxmKuOXMtxhN/3foCTRQD0Ig48DNpNt2XkKDiICJahE8tlavhjnQPhK5ITRkaX
+         JRRKAPwl7VUOl0aGG8kgnx9UJH5zMqE/NPHzolt5pueYGZhdV1vveJpbU4DkmtqmD4rn
+         bQjeIu6yXtRMaQbo9uyBRAXc4nlJ/Mb3FoFbi98X00m/kqCvJWZgBfgEI+8oINcC8Vtf
+         LS4XUyfpJHjiS60qDPGCPLSyvHobEzpHv4eR/f8PgFy8vsnS4mV0I9UiA9LkJxFkiTVC
+         ZkG8Jh6uGKZbHDP12q9CV5lP2pe3J5UwSCGTqQIo4F9ppReM6VZF75ymfSCbiZL9+0P/
+         Jn0A==
+X-Gm-Message-State: AOAM530y5dVFML1YVVIOY0n6n/TVsuq2omMrQ4eSbrm+UiRiMxheKr2s
+	1nBAtHwyaX712b3ReMnPqSQEDr9BMPcUg+a3ZVVHooP16w4heBhOtKvueRASJAgfIdZGSXonWPY
+	PZY8glQ/L3UBVcSOH1djOrmhCv5k=
+X-Received: by 2002:a1c:7e41:: with SMTP id z62mr1955936wmc.9.1635804565091;
+        Mon, 01 Nov 2021 15:09:25 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwpSY2086+CnGB9WPrHW5bo96aeVOpNDlLfr+WAapyjvAt6zv6pqshWIvxGHLts1sX02fyU2g==
+X-Received: by 2002:a1c:7e41:: with SMTP id z62mr1955923wmc.9.1635804564942;
+        Mon, 01 Nov 2021 15:09:24 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -105,11 +104,10 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	=?UTF-8?q?Hyman=20Huang=28=C3=A9=C2=BB=E2=80=9E=C3=A5=E2=80=B9?= =?UTF-8?q?=E2=80=A1=29?= <huangy81@chinatelecom.cn>
-Subject: [PULL 02/20] KVM: introduce dirty_pages and kvm_dirty_ring_enabled
-Date: Mon,  1 Nov 2021 23:08:54 +0100
-Message-Id: <20211101220912.10039-3-quintela@redhat.com>
+	Anthony Perard <anthony.perard@citrix.com>
+Subject: [PULL 08/20] migration: Make migration blocker work for snapshots too
+Date: Mon,  1 Nov 2021 23:09:00 +0100
+Message-Id: <20211101220912.10039-9-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -121,96 +119,48 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
+From: Peter Xu <peterx@redhat.com>
 
-dirty_pages is used to calculate dirtyrate via dirty ring, when
-enabled, kvm-reaper will increase the dirty pages after gfns
-being dirtied.
+save_snapshot() checks migration blocker, which looks sane.  At the meantime we
+should also teach the blocker add helper to fail if during a snapshot, just
+like for migrations.
 
-kvm_dirty_ring_enabled shows if kvm-reaper is working. dirtyrate
-thread could use it to check if measurement can base on dirty
-ring feature.
-
-Signed-off-by: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
-Message-Id: <fee5fb2ab17ec2159405fc54a3cff8e02322f816.1624040308.git.huangy81@chinatelecom.cn>
-Reviewed-by: Peter Xu <peterx@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Peter Xu <peterx@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- include/hw/core/cpu.h  | 1 +
- include/sysemu/kvm.h   | 1 +
- accel/kvm/kvm-all.c    | 7 +++++++
- accel/stubs/kvm-stub.c | 5 +++++
- 4 files changed, 14 insertions(+)
+ migration/migration.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
-index 1a10497af3..e948e81f1a 100644
---- a/include/hw/core/cpu.h
-+++ b/include/hw/core/cpu.h
-@@ -381,6 +381,7 @@ struct CPUState {
-     struct kvm_run *kvm_run;
-     struct kvm_dirty_gfn *kvm_dirty_gfns;
-     uint32_t kvm_fetch_index;
-+    uint64_t dirty_pages;
- 
-     /* Used for events with 'vcpu' and *without* the 'disabled' properties */
-     DECLARE_BITMAP(trace_dstate_delayed, CPU_TRACE_DSTATE_MAX_EVENTS);
-diff --git a/include/sysemu/kvm.h b/include/sysemu/kvm.h
-index a1ab1ee12d..7b22aeb6ae 100644
---- a/include/sysemu/kvm.h
-+++ b/include/sysemu/kvm.h
-@@ -547,4 +547,5 @@ bool kvm_cpu_check_are_resettable(void);
- 
- bool kvm_arch_cpu_check_are_resettable(void);
- 
-+bool kvm_dirty_ring_enabled(void);
- #endif
-diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
-index db8d83b137..eecd8031cf 100644
---- a/accel/kvm/kvm-all.c
-+++ b/accel/kvm/kvm-all.c
-@@ -469,6 +469,7 @@ int kvm_init_vcpu(CPUState *cpu, Error **errp)
-     cpu->kvm_fd = ret;
-     cpu->kvm_state = s;
-     cpu->vcpu_dirty = true;
-+    cpu->dirty_pages = 0;
- 
-     mmap_size = kvm_ioctl(s, KVM_GET_VCPU_MMAP_SIZE, 0);
-     if (mmap_size < 0) {
-@@ -743,6 +744,7 @@ static uint32_t kvm_dirty_ring_reap_one(KVMState *s, CPUState *cpu)
-         count++;
+diff --git a/migration/migration.c b/migration/migration.c
+index 9172686b89..e81e473f5a 100644
+--- a/migration/migration.c
++++ b/migration/migration.c
+@@ -2058,15 +2058,16 @@ int migrate_add_blocker(Error *reason, Error **errp)
+         return -EACCES;
      }
-     cpu->kvm_fetch_index = fetch;
-+    cpu->dirty_pages += count;
  
-     return count;
- }
-@@ -2296,6 +2298,11 @@ bool kvm_vcpu_id_is_valid(int vcpu_id)
-     return vcpu_id >= 0 && vcpu_id < kvm_max_vcpu_id(s);
+-    if (migration_is_idle()) {
+-        migration_blockers = g_slist_prepend(migration_blockers, reason);
+-        return 0;
++    /* Snapshots are similar to migrations, so check RUN_STATE_SAVE_VM too. */
++    if (runstate_check(RUN_STATE_SAVE_VM) || !migration_is_idle()) {
++        error_propagate_prepend(errp, error_copy(reason),
++                                "disallowing migration blocker "
++                                "(migration/snapshot in progress) for: ");
++        return -EBUSY;
+     }
+ 
+-    error_propagate_prepend(errp, error_copy(reason),
+-                            "disallowing migration blocker "
+-                            "(migration in progress) for: ");
+-    return -EBUSY;
++    migration_blockers = g_slist_prepend(migration_blockers, reason);
++    return 0;
  }
  
-+bool kvm_dirty_ring_enabled(void)
-+{
-+    return kvm_state->kvm_dirty_ring_size ? true : false;
-+}
-+
- static int kvm_init(MachineState *ms)
- {
-     MachineClass *mc = MACHINE_GET_CLASS(ms);
-diff --git a/accel/stubs/kvm-stub.c b/accel/stubs/kvm-stub.c
-index 5b1d00a222..5319573e00 100644
---- a/accel/stubs/kvm-stub.c
-+++ b/accel/stubs/kvm-stub.c
-@@ -147,4 +147,9 @@ bool kvm_arm_supports_user_irq(void)
- {
-     return false;
- }
-+
-+bool kvm_dirty_ring_enabled(void)
-+{
-+    return false;
-+}
- #endif
+ void migrate_del_blocker(Error *reason)
 -- 
 2.33.1
 
