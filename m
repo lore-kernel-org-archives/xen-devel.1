@@ -2,48 +2,47 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2737AC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FBCEC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CD0F860C51
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CD0F860C51
+	by mail.kernel.org (Postfix) with ESMTPS id DC7C260F56
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DC7C260F56
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219431.380283 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219432.380287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfUn-0001Nv-NB; Mon, 01 Nov 2021 22:09:37 +0000
+	id 1mhfUo-0001UE-7I; Mon, 01 Nov 2021 22:09:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219431.380283; Mon, 01 Nov 2021 22:09:37 +0000
+Received: by outflank-mailman (output) from mailman id 219432.380287; Mon, 01 Nov 2021 22:09:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfUn-0001NS-Ha; Mon, 01 Nov 2021 22:09:37 +0000
-Received: by outflank-mailman (input) for mailman id 219431;
- Mon, 01 Nov 2021 22:09:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mhfUn-0001Ss-VB; Mon, 01 Nov 2021 22:09:37 +0000
+Received: by outflank-mailman (input) for mailman id 219432;
+ Mon, 01 Nov 2021 22:09:37 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfUl-0007pr-NU
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:35 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 5e1b86dc-3b60-11ec-854e-12813bfff9fa;
- Mon, 01 Nov 2021 22:09:22 +0000 (UTC)
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-268-AoAgT-_7MfGQZC-dnIEWZg-1; Mon, 01 Nov 2021 18:09:21 -0400
-Received: by mail-wm1-f72.google.com with SMTP id
- z138-20020a1c7e90000000b003319c5f9164so170014wmc.7
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:21 -0700 (PDT)
+ id 1mhfUn-0000By-2n
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:37 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id b63a24c9-cad6-4c63-a6e5-34cebeecd0e3;
+ Mon, 01 Nov 2021 22:09:35 +0000 (UTC)
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-423-uHm58rQjOLmW1Rgc9VYPKg-1; Mon, 01 Nov 2021 18:09:34 -0400
+Received: by mail-wm1-f70.google.com with SMTP id
+ k25-20020a05600c1c9900b00332f798ba1dso174898wms.4
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:34 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id g5sm709951wmi.2.2021.11.01.15.09.18
+ by smtp.gmail.com with ESMTPSA id m35sm1212614wms.2.2021.11.01.15.09.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:19 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,37 +54,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e1b86dc-3b60-11ec-854e-12813bfff9fa
+X-Inumbo-ID: b63a24c9-cad6-4c63-a6e5-34cebeecd0e3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804562;
+	s=mimecast20190719; t=1635804575;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=zC+zxEH+pUhjgORZ5ETFB7/+CsNzKhs7SNRZ+CUF1/0=;
-	b=D0ygIqxRSY5Sl+3gvqB/NSQ8h4qa/gD/WFYh5IuLJraAntcO8uP6NH0Ci5xFMQuthBGBxG
-	jhiX9O8doGFwN36n5ItLILypvBkTjo4IiIgvqpngg6WrPT2BnaIJHzXnGPq94AMNJEuZnH
-	EE5oCAg4SoyUOSUAEj6pyJEFrz9ZajY=
-X-MC-Unique: AoAgT-_7MfGQZC-dnIEWZg-1
+	bh=FIlkv3kUVM5FLjDY6YlHGmvpDrEJaIZ60b+7KENr5m4=;
+	b=AI7g+aK5oG1K9x5wMvy6YzafdFzn2EC+YuW65LKn4s1BAB/thT31Dy+x+7T5dstdCM+LO3
+	0Bm+1STmd8ppX9q41iiXSZKEDUpNBBUvZGHyufKixIdlXt9klDW7srlOXLBs5edkFLAMTF
+	0Yckj1i5tJtwDmR4HGDi941NsnZIUyM=
+X-MC-Unique: uHm58rQjOLmW1Rgc9VYPKg-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=zC+zxEH+pUhjgORZ5ETFB7/+CsNzKhs7SNRZ+CUF1/0=;
-        b=FlQ8VcFtHenZbW4cAs3E7kcZXxvZeKe4uvd30Ba31QHsACbfSgC9KJxAR88af7IYNx
-         7VCE4/vGRdjG/KUZ1ccA9xdYCkpyTnEnEfr2ty6Nz0GbS/JYrLODMMp+JPFk46AR2Eey
-         AAGT24MJpTLa1fYGfuIH+vpQZjbbWy2CqWnpqEp2iRAoerAwMTCDgPmP7LMxeajj9if/
-         c172+0O81/K/Hjqr8Ba4LOQeE3F7NqE2EtuCCJw8K8e+PyytHCwTnbMDRbhBjuor9OsL
-         e81EXvW1UQMD2iofJS4H4m0zTZq63K3m2ULP6PIElmbFLBMsOL+MiMuGRf0hbABIqjhU
-         IehA==
-X-Gm-Message-State: AOAM5302R6sz7a5N0g9amTLf/TqHOHwc+6Ef1q085up/RDST/D/aJMhW
-	M0LZDBfU+9VhCdJKobpqGPparbiKaGbRYCZ4iHOVKezL08v/wdVN1qyPCvo7EXn7bhB0hloBok8
-	UKpupecJVivHPjuyXKmmDy3+2EQk=
-X-Received: by 2002:a5d:46cb:: with SMTP id g11mr24140823wrs.26.1635804559961;
-        Mon, 01 Nov 2021 15:09:19 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwOqU8wWYVaIjRWd2sjZqSUpY8HCgD5Gu3n1DFyO90oDUDzJdkVJM68NrFLzLaF6oWA+5DyZw==
-X-Received: by 2002:a5d:46cb:: with SMTP id g11mr24140791wrs.26.1635804559728;
-        Mon, 01 Nov 2021 15:09:19 -0700 (PDT)
+        bh=FIlkv3kUVM5FLjDY6YlHGmvpDrEJaIZ60b+7KENr5m4=;
+        b=G/wmcO5YkS4UhvdiRSY9uBnU68dtvtaRGOqSWbovhxCaZ0zVr5zT2FT0iKpjvPhLNE
+         TaMV2I+xRTv2rj2DOf7xokOUrCF1Ug0Cg85J8uE/nnkt+i4HXYtvF2+Sf1tGnNiIsw2p
+         BOE5bEWN2ERK7WnCGB36lo1sqMMD/uIZDFxpw+NBaT2+OzYPtZPBTO4mgFWKf03nazYE
+         /DM01G6U+OGnIDpQMiR9QhPiSGNdHdUgvYrh9QzHZwK8PszxWh5wvHLIHQjLR2qnOqmc
+         AcL7fTZeX/7qvgr8K579rGaNVkSHsnmEMrmmCMIA1WQdKdoUEkGOME5tJXK1nClrwwjh
+         tKyw==
+X-Gm-Message-State: AOAM532A3kdVZ2w5s7POOZeVhrpuAEmd7/pCXq+2RgkCk1H22ZjTBU9c
+	Xvmokrc8oiuypsVQBUtZcUXKq0bSkLLSff9m7qx+vBxsLHC5f4qEc6VXgHqB1u9h9D+YX3klu1r
+	uUj+JIUjQj+3XHGSAv5R9XblzbJ8=
+X-Received: by 2002:a5d:64af:: with SMTP id m15mr12543614wrp.267.1635804573221;
+        Mon, 01 Nov 2021 15:09:33 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzrZQZMxAe13255F4Umt/lsvtqR2XTX2d+P8MJlbDMrZGA3GCpF4nzZPJktxVFBm5Hby8r3Kg==
+X-Received: by 2002:a5d:64af:: with SMTP id m15mr12543584wrp.267.1635804573009;
+        Mon, 01 Nov 2021 15:09:33 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -105,11 +104,10 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	=?UTF-8?q?Hyman=20Huang=28=C3=A9=C2=BB=E2=80=9E=C3=A5=E2=80=B9?= =?UTF-8?q?=E2=80=A1=29?= <huangy81@chinatelecom.cn>
-Subject: [PULL 04/20] migration/dirtyrate: introduce struct and adjust DirtyRateStat
-Date: Mon,  1 Nov 2021 23:08:56 +0100
-Message-Id: <20211101220912.10039-5-quintela@redhat.com>
+	Anthony Perard <anthony.perard@citrix.com>
+Subject: [PULL 14/20] virtio-mem: Drop precopy notifier
+Date: Mon,  1 Nov 2021 23:09:06 +0100
+Message-Id: <20211101220912.10039-15-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -118,222 +116,103 @@ Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=quintela@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"
 
-From: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
+From: David Hildenbrand <david@redhat.com>
 
-introduce "DirtyRateMeasureMode" to specify what method should be
-used to calculate dirty rate, introduce "DirtyRateVcpu" to store
-dirty rate for each vcpu.
+Migration code now properly handles RAMBlocks which are indirectly managed
+by a RamDiscardManager. No need for manual handling via the free page
+optimization interface, let's get rid of it.
 
-use union to store stat data of specific mode
-
-Signed-off-by: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
-Message-Id: <661c98c40f40e163aa58334337af8f3ddf41316a.1624040308.git.huangy81@chinatelecom.cn>
-Reviewed-by: Peter Xu <peterx@redhat.com>
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
+Acked-by: Peter Xu <peterx@redhat.com>
+Signed-off-by: David Hildenbrand <david@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- qapi/migration.json   | 30 +++++++++++++++++++++++++++
- migration/dirtyrate.h | 21 +++++++++++++++----
- migration/dirtyrate.c | 48 +++++++++++++++++++++++++------------------
- 3 files changed, 75 insertions(+), 24 deletions(-)
+ include/hw/virtio/virtio-mem.h |  3 ---
+ hw/virtio/virtio-mem.c         | 34 ----------------------------------
+ 2 files changed, 37 deletions(-)
 
-diff --git a/qapi/migration.json b/qapi/migration.json
-index 9aa8bc5759..94eece16e1 100644
---- a/qapi/migration.json
-+++ b/qapi/migration.json
-@@ -1731,6 +1731,21 @@
- { 'event': 'UNPLUG_PRIMARY',
-   'data': { 'device-id': 'str' } }
+diff --git a/include/hw/virtio/virtio-mem.h b/include/hw/virtio/virtio-mem.h
+index 9a6e348fa2..a5dd6a493b 100644
+--- a/include/hw/virtio/virtio-mem.h
++++ b/include/hw/virtio/virtio-mem.h
+@@ -65,9 +65,6 @@ struct VirtIOMEM {
+     /* notifiers to notify when "size" changes */
+     NotifierList size_change_notifiers;
  
-+##
-+# @DirtyRateVcpu:
-+#
-+# Dirty rate of vcpu.
-+#
-+# @id: vcpu index.
-+#
-+# @dirty-rate: dirty rate.
-+#
-+# Since: 6.1
-+#
-+##
-+{ 'struct': 'DirtyRateVcpu',
-+  'data': { 'id': 'int', 'dirty-rate': 'int64' } }
-+
- ##
- # @DirtyRateStatus:
- #
-@@ -1748,6 +1763,21 @@
- { 'enum': 'DirtyRateStatus',
-   'data': [ 'unstarted', 'measuring', 'measured'] }
- 
-+##
-+# @DirtyRateMeasureMode:
-+#
-+# An enumeration of mode of measuring dirtyrate.
-+#
-+# @page-sampling: calculate dirtyrate by sampling pages.
-+#
-+# @dirty-ring: calculate dirtyrate by via dirty ring.
-+#
-+# Since: 6.1
-+#
-+##
-+{ 'enum': 'DirtyRateMeasureMode',
-+  'data': ['page-sampling', 'dirty-ring'] }
-+
- ##
- # @DirtyRateInfo:
- #
-diff --git a/migration/dirtyrate.h b/migration/dirtyrate.h
-index e1fd29089e..69d4c5b865 100644
---- a/migration/dirtyrate.h
-+++ b/migration/dirtyrate.h
-@@ -43,6 +43,7 @@
- struct DirtyRateConfig {
-     uint64_t sample_pages_per_gigabytes; /* sample pages per GB */
-     int64_t sample_period_seconds; /* time duration between two sampling */
-+    DirtyRateMeasureMode mode; /* mode of dirtyrate measurement */
+-    /* don't migrate unplugged memory */
+-    NotifierWithReturn precopy_notifier;
+-
+     /* listeners to notify on plug/unplug activity. */
+     QLIST_HEAD(, RamDiscardListener) rdl_list;
  };
+diff --git a/hw/virtio/virtio-mem.c b/hw/virtio/virtio-mem.c
+index 284096ec5f..d5a578142b 100644
+--- a/hw/virtio/virtio-mem.c
++++ b/hw/virtio/virtio-mem.c
+@@ -776,7 +776,6 @@ static void virtio_mem_device_realize(DeviceState *dev, Error **errp)
+     host_memory_backend_set_mapped(vmem->memdev, true);
+     vmstate_register_ram(&vmem->memdev->mr, DEVICE(vmem));
+     qemu_register_reset(virtio_mem_system_reset, vmem);
+-    precopy_add_notifier(&vmem->precopy_notifier);
  
- /*
-@@ -58,17 +59,29 @@ struct RamblockDirtyInfo {
-     uint32_t *hash_result; /* array of hash result for sampled pages */
- };
- 
--/*
-- * Store calculation statistics for each measure.
-- */
--struct DirtyRateStat {
-+typedef struct SampleVMStat {
-     uint64_t total_dirty_samples; /* total dirty sampled page */
-     uint64_t total_sample_count; /* total sampled pages */
-     uint64_t total_block_mem_MB; /* size of total sampled pages in MB */
-+} SampleVMStat;
-+
-+typedef struct VcpuStat {
-+    int nvcpu; /* number of vcpu */
-+    DirtyRateVcpu *rates; /* array of dirty rate for each vcpu */
-+} VcpuStat;
-+
-+/*
-+ * Store calculation statistics for each measure.
-+ */
-+struct DirtyRateStat {
-     int64_t dirty_rate; /* dirty rate in MB/s */
-     int64_t start_time; /* calculation start time in units of second */
-     int64_t calc_time; /* time duration of two sampling in units of second */
-     uint64_t sample_pages; /* sample pages per GB */
-+    union {
-+        SampleVMStat page_sampling;
-+        VcpuStat dirty_ring;
-+    };
- };
- 
- void *get_dirtyrate_thread(void *arg);
-diff --git a/migration/dirtyrate.c b/migration/dirtyrate.c
-index 320c56ba2c..e0a27a992c 100644
---- a/migration/dirtyrate.c
-+++ b/migration/dirtyrate.c
-@@ -88,33 +88,44 @@ static struct DirtyRateInfo *query_dirty_rate_info(void)
-     return info;
+     /*
+      * Set ourselves as RamDiscardManager before the plug handler maps the
+@@ -796,7 +795,6 @@ static void virtio_mem_device_unrealize(DeviceState *dev)
+      * found via an address space anymore. Unset ourselves.
+      */
+     memory_region_set_ram_discard_manager(&vmem->memdev->mr, NULL);
+-    precopy_remove_notifier(&vmem->precopy_notifier);
+     qemu_unregister_reset(virtio_mem_system_reset, vmem);
+     vmstate_unregister_ram(&vmem->memdev->mr, DEVICE(vmem));
+     host_memory_backend_set_mapped(vmem->memdev, false);
+@@ -1089,43 +1087,11 @@ static void virtio_mem_set_block_size(Object *obj, Visitor *v, const char *name,
+     vmem->block_size = value;
  }
  
--static void init_dirtyrate_stat(int64_t start_time, int64_t calc_time,
--                                uint64_t sample_pages)
-+static void init_dirtyrate_stat(int64_t start_time,
-+                                struct DirtyRateConfig config)
+-static int virtio_mem_precopy_exclude_range_cb(const VirtIOMEM *vmem, void *arg,
+-                                               uint64_t offset, uint64_t size)
+-{
+-    void * const host = qemu_ram_get_host_addr(vmem->memdev->mr.ram_block);
+-
+-    qemu_guest_free_page_hint(host + offset, size);
+-    return 0;
+-}
+-
+-static void virtio_mem_precopy_exclude_unplugged(VirtIOMEM *vmem)
+-{
+-    virtio_mem_for_each_unplugged_range(vmem, NULL,
+-                                        virtio_mem_precopy_exclude_range_cb);
+-}
+-
+-static int virtio_mem_precopy_notify(NotifierWithReturn *n, void *data)
+-{
+-    VirtIOMEM *vmem = container_of(n, VirtIOMEM, precopy_notifier);
+-    PrecopyNotifyData *pnd = data;
+-
+-    switch (pnd->reason) {
+-    case PRECOPY_NOTIFY_AFTER_BITMAP_SYNC:
+-        virtio_mem_precopy_exclude_unplugged(vmem);
+-        break;
+-    default:
+-        break;
+-    }
+-
+-    return 0;
+-}
+-
+ static void virtio_mem_instance_init(Object *obj)
  {
--    DirtyStat.total_dirty_samples = 0;
--    DirtyStat.total_sample_count = 0;
--    DirtyStat.total_block_mem_MB = 0;
-     DirtyStat.dirty_rate = -1;
-     DirtyStat.start_time = start_time;
--    DirtyStat.calc_time = calc_time;
--    DirtyStat.sample_pages = sample_pages;
-+    DirtyStat.calc_time = config.sample_period_seconds;
-+    DirtyStat.sample_pages = config.sample_pages_per_gigabytes;
-+
-+    switch (config.mode) {
-+    case DIRTY_RATE_MEASURE_MODE_PAGE_SAMPLING:
-+        DirtyStat.page_sampling.total_dirty_samples = 0;
-+        DirtyStat.page_sampling.total_sample_count = 0;
-+        DirtyStat.page_sampling.total_block_mem_MB = 0;
-+        break;
-+    case DIRTY_RATE_MEASURE_MODE_DIRTY_RING:
-+        DirtyStat.dirty_ring.nvcpu = -1;
-+        DirtyStat.dirty_ring.rates = NULL;
-+        break;
-+    default:
-+        break;
-+    }
- }
+     VirtIOMEM *vmem = VIRTIO_MEM(obj);
  
- static void update_dirtyrate_stat(struct RamblockDirtyInfo *info)
- {
--    DirtyStat.total_dirty_samples += info->sample_dirty_count;
--    DirtyStat.total_sample_count += info->sample_pages_count;
-+    DirtyStat.page_sampling.total_dirty_samples += info->sample_dirty_count;
-+    DirtyStat.page_sampling.total_sample_count += info->sample_pages_count;
-     /* size of total pages in MB */
--    DirtyStat.total_block_mem_MB += (info->ramblock_pages *
--                                     TARGET_PAGE_SIZE) >> 20;
-+    DirtyStat.page_sampling.total_block_mem_MB += (info->ramblock_pages *
-+                                                   TARGET_PAGE_SIZE) >> 20;
- }
+     notifier_list_init(&vmem->size_change_notifiers);
+-    vmem->precopy_notifier.notify = virtio_mem_precopy_notify;
+     QLIST_INIT(&vmem->rdl_list);
  
- static void update_dirtyrate(uint64_t msec)
- {
-     uint64_t dirtyrate;
--    uint64_t total_dirty_samples = DirtyStat.total_dirty_samples;
--    uint64_t total_sample_count = DirtyStat.total_sample_count;
--    uint64_t total_block_mem_MB = DirtyStat.total_block_mem_MB;
-+    uint64_t total_dirty_samples = DirtyStat.page_sampling.total_dirty_samples;
-+    uint64_t total_sample_count = DirtyStat.page_sampling.total_sample_count;
-+    uint64_t total_block_mem_MB = DirtyStat.page_sampling.total_block_mem_MB;
- 
-     dirtyrate = total_dirty_samples * total_block_mem_MB *
-                 1000 / (total_sample_count * msec);
-@@ -327,7 +338,7 @@ static bool compare_page_hash_info(struct RamblockDirtyInfo *info,
-         update_dirtyrate_stat(block_dinfo);
-     }
- 
--    if (DirtyStat.total_sample_count == 0) {
-+    if (DirtyStat.page_sampling.total_sample_count == 0) {
-         return false;
-     }
- 
-@@ -372,8 +383,6 @@ void *get_dirtyrate_thread(void *arg)
-     struct DirtyRateConfig config = *(struct DirtyRateConfig *)arg;
-     int ret;
-     int64_t start_time;
--    int64_t calc_time;
--    uint64_t sample_pages;
- 
-     ret = dirtyrate_set_state(&CalculatingState, DIRTY_RATE_STATUS_UNSTARTED,
-                               DIRTY_RATE_STATUS_MEASURING);
-@@ -383,9 +392,7 @@ void *get_dirtyrate_thread(void *arg)
-     }
- 
-     start_time = qemu_clock_get_ms(QEMU_CLOCK_REALTIME) / 1000;
--    calc_time = config.sample_period_seconds;
--    sample_pages = config.sample_pages_per_gigabytes;
--    init_dirtyrate_stat(start_time, calc_time, sample_pages);
-+    init_dirtyrate_stat(start_time, config);
- 
-     calculate_dirtyrate(config);
- 
-@@ -442,6 +449,7 @@ void qmp_calc_dirty_rate(int64_t calc_time, bool has_sample_pages,
- 
-     config.sample_period_seconds = calc_time;
-     config.sample_pages_per_gigabytes = sample_pages;
-+    config.mode = DIRTY_RATE_MEASURE_MODE_PAGE_SAMPLING;
-     qemu_thread_create(&thread, "get_dirtyrate", get_dirtyrate_thread,
-                        (void *)&config, QEMU_THREAD_DETACHED);
- }
+     object_property_add(obj, VIRTIO_MEM_SIZE_PROP, "size", virtio_mem_get_size,
 -- 
 2.33.1
 
