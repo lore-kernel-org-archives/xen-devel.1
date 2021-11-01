@@ -2,48 +2,47 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D769C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECC3C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3978060F56
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3978060F56
+	by mail.kernel.org (Postfix) with ESMTPS id 016DF6058D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 016DF6058D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219449.380349 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219452.380360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfV6-0004v7-MQ; Mon, 01 Nov 2021 22:09:56 +0000
+	id 1mhfVC-0005fr-3o; Mon, 01 Nov 2021 22:10:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219449.380349; Mon, 01 Nov 2021 22:09:56 +0000
+Received: by outflank-mailman (output) from mailman id 219452.380360; Mon, 01 Nov 2021 22:10:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfV6-0004uf-HU; Mon, 01 Nov 2021 22:09:56 +0000
-Received: by outflank-mailman (input) for mailman id 219449;
- Mon, 01 Nov 2021 22:09:55 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mhfVB-0005f5-Ul; Mon, 01 Nov 2021 22:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 219452;
+ Mon, 01 Nov 2021 22:10:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfV5-0007pr-OE
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:55 +0000
+ id 1mhfV9-0000By-Uo
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:59 +0000
 Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 61ecb4d2-3b60-11ec-854e-12813bfff9fa;
- Mon, 01 Nov 2021 22:09:28 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-561-1I9Q6WROPouj75ijb7n91g-1; Mon, 01 Nov 2021 18:09:27 -0400
-Received: by mail-wr1-f71.google.com with SMTP id
- j12-20020adf910c000000b0015e4260febdso6748669wrj.20
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 6b2d1a7e-0af0-4180-a813-9d980d389361;
+ Mon, 01 Nov 2021 22:09:44 +0000 (UTC)
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-565-xcyTHfv5PXuvlLEvakV6YA-1; Mon, 01 Nov 2021 18:09:41 -0400
+Received: by mail-wr1-f69.google.com with SMTP id
+ f1-20020a5d64c1000000b001611832aefeso6799441wri.17
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:40 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id u16sm620998wmc.21.2021.11.01.15.09.25
+ by smtp.gmail.com with ESMTPSA id d24sm610262wmb.35.2021.11.01.15.09.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:25 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,37 +54,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 61ecb4d2-3b60-11ec-854e-12813bfff9fa
+X-Inumbo-ID: 6b2d1a7e-0af0-4180-a813-9d980d389361
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804568;
+	s=mimecast20190719; t=1635804584;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xgA8Pg4pioYTYcQYYaUz2yN31K5Rcv8HQjmwYm8rweY=;
-	b=P3PUolCz4j4ymEn/0u53vtsuTYUJ2crPH6lHWspESqFkkPYiBJ2ZFimpYFTl3CEJfed1b3
-	eBQubuPdQ83yo3v71Fs0IpFQi52Qjmd4csSJO0cCyI+Cz6QL9ngRmga2MadZqlwu73xsUP
-	DVjT94/OzHHw/2r3QDvTeIbtgrP7Aus=
-X-MC-Unique: 1I9Q6WROPouj75ijb7n91g-1
+	bh=2DiI4EfnW7YWT1ASaakXUWvRZyN7+/5k2450FBy0sI4=;
+	b=Xb0g7SXKN3gMQwrDbVTtqyQ9hWaE7hszEykvM35dqycnip/y5ibYBxuXLVIBAdWw6q+N2U
+	ozD2VZb7xovP6qa1DsYYZ95Itzd4WUuSQYQ5thWAZ6ikfdb2nkLHOJjwkToK9FFLcRHDxC
+	eTdjFTllwP1GqPbVN76tcWgEfVsg+DM=
+X-MC-Unique: xcyTHfv5PXuvlLEvakV6YA-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=xgA8Pg4pioYTYcQYYaUz2yN31K5Rcv8HQjmwYm8rweY=;
-        b=ojdnY+mxsT4AP/6/20bLnTMobtYctrO/o2KlhCgGYHw3n4WAfS6v1AsCX6yHe4Stn5
-         mAv/M2znq/JEzHqZ0gyT11aPFMppJDWHHaDXGaEz9FC/qe+BxcLKZr/U9hd9hy9OefRW
-         9DVvi7fAprkXwQsWwH/7gDtgz/CxGEb64daX9Fb3f8uPJJ0zkU34LwUasClm8/EPN4W7
-         NOscsXCEq6rul1bJcM63zQH2NkGIK8Bs7LQmid4ZtwAvyGf+z42ik8OVgOym9DiT/r4h
-         tCvg79beY5m3/1yl2xU0v0YT2fL1UR0sP/VxlceTH2VMRZcGRcIbkztdL59k7OJe6QiL
-         tZyw==
-X-Gm-Message-State: AOAM530ZR2IS499UrAZDWvvD4gn94SOPuxLxLEJb9+nd5xtooeLll2xJ
-	aVudnqflFA5NSCGDNGwZlqUPw1uZElpcbrf/Q5BPOhSdAhfTB40byWCHTTiOAp6XI0ApCdgfA2b
-	vGN0pf/FjFwXkLwlPUVHDRE4hhqQ=
-X-Received: by 2002:adf:c70b:: with SMTP id k11mr40015414wrg.154.1635804566477;
-        Mon, 01 Nov 2021 15:09:26 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzUrxZpRrNYU7lx4z1CYr7OY2cCtGorBz1ob+LkkuKyWgUku8HgKdZfOfBOrsPY7hoBqfW6RQ==
-X-Received: by 2002:adf:c70b:: with SMTP id k11mr40015380wrg.154.1635804566314;
-        Mon, 01 Nov 2021 15:09:26 -0700 (PDT)
+        bh=2DiI4EfnW7YWT1ASaakXUWvRZyN7+/5k2450FBy0sI4=;
+        b=wLnKDiV/fsXXFUTG2E/Xp/4LF9YCf7lziCLSUwsB8Ulr1daUseUDIQrd4BaEPP7N01
+         AUFalc258gry9oEXQ2tN7vPS5k3eJ2TPH1XZv8MQz29D1VAu93kyKIjB5rnidWbNehBQ
+         yHXLubUfglBXMNHyU2qWIw374AfDpfkiFcJEC8y7j6d/95gvPFX3khp+JtF6w+oVNaBL
+         2FoEKMxK8wHDr5zhzxVug4md1NBCMcNNc9U2mYmT/WJD+WoViFNMtFpVTArk8kAWc7pR
+         fBLdSLBFR8H7ZUnmmB4N1OsVAuVFE1b9szsBEl2BPjKRBm/4G2iIhEUcTgmIXglDDbwh
+         PuFg==
+X-Gm-Message-State: AOAM533D9ySq9D3QqPciMgb6zz4PLpoacHR75L52ePfr8OhkDhzVAdsq
+	1hN8QONEMvsJnMIphOvsuYWgG8QVE8j0WUh7s9fLIhHpXWKoVbgNXXtQY7MuHB/nuDCKS169LrC
+	cO0jbrK3TdF/xHUh6+afMUH7MBg8=
+X-Received: by 2002:adf:e292:: with SMTP id v18mr39964931wri.369.1635804579986;
+        Mon, 01 Nov 2021 15:09:39 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJysID67lQG9xljT2Fw7myH50fBYiqoMMqtw2ZP9fgHwBDYxBz5RqDHeu2EAgEpnNBhOmOcEEQ==
+X-Received: by 2002:adf:e292:: with SMTP id v18mr39964906wri.369.1635804579845;
+        Mon, 01 Nov 2021 15:09:39 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -105,10 +104,11 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>
-Subject: [PULL 09/20] migration: Add migrate_add_blocker_internal()
-Date: Mon,  1 Nov 2021 23:09:01 +0100
-Message-Id: <20211101220912.10039-10-quintela@redhat.com>
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Hyman=20Huang=28=E9=BB=84=E5=8B=87=29?= <huangy81@chinatelecom.cn>
+Subject: [PULL 19/20] memory: introduce total_dirty_pages to stat dirty pages
+Date: Mon,  1 Nov 2021 23:09:11 +0100
+Message-Id: <20211101220912.10039-20-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -120,87 +120,72 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Peter Xu <peterx@redhat.com>
+From: Hyman Huang(黄勇) <huangy81@chinatelecom.cn>
 
-An internal version that removes -only-migratable implications.  It can be used
-for temporary migration blockers like dump-guest-memory.
+introduce global var total_dirty_pages to stat dirty pages
+along with memory_global_dirty_log_sync.
 
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Hyman Huang(黄勇) <huangy81@chinatelecom.cn>
+Reviewed-by: Peter Xu <peterx@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
-Signed-off-by: Peter Xu <peterx@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- include/migration/blocker.h | 16 ++++++++++++++++
- migration/migration.c       | 21 +++++++++++++--------
- 2 files changed, 29 insertions(+), 8 deletions(-)
+ include/exec/ram_addr.h | 9 +++++++++
+ migration/dirtyrate.c   | 7 +++++++
+ 2 files changed, 16 insertions(+)
 
-diff --git a/include/migration/blocker.h b/include/migration/blocker.h
-index acd27018e9..9cebe2ba06 100644
---- a/include/migration/blocker.h
-+++ b/include/migration/blocker.h
-@@ -25,6 +25,22 @@
-  */
- int migrate_add_blocker(Error *reason, Error **errp);
+diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
+index 45c913264a..64fb936c7c 100644
+--- a/include/exec/ram_addr.h
++++ b/include/exec/ram_addr.h
+@@ -26,6 +26,8 @@
+ #include "exec/ramlist.h"
+ #include "exec/ramblock.h"
  
-+/**
-+ * @migrate_add_blocker_internal - prevent migration from proceeding without
-+ *                                 only-migrate implications
-+ *
-+ * @reason - an error to be returned whenever migration is attempted
-+ *
-+ * @errp - [out] The reason (if any) we cannot block migration right now.
-+ *
-+ * @returns - 0 on success, -EBUSY on failure, with errp set.
-+ *
-+ * Some of the migration blockers can be temporary (e.g., for a few seconds),
-+ * so it shouldn't need to conflict with "-only-migratable".  For those cases,
-+ * we can call this function rather than @migrate_add_blocker().
-+ */
-+int migrate_add_blocker_internal(Error *reason, Error **errp);
++extern uint64_t total_dirty_pages;
 +
  /**
-  * @migrate_del_blocker - remove a blocking error from migration
+  * clear_bmap_size: calculate clear bitmap size
   *
-diff --git a/migration/migration.c b/migration/migration.c
-index e81e473f5a..e1c0082530 100644
---- a/migration/migration.c
-+++ b/migration/migration.c
-@@ -2049,15 +2049,8 @@ void migrate_init(MigrationState *s)
-     s->threshold_size = 0;
- }
+@@ -373,6 +375,10 @@ static inline void cpu_physical_memory_set_dirty_lebitmap(unsigned long *bitmap,
+                         qatomic_or(
+                                 &blocks[DIRTY_MEMORY_MIGRATION][idx][offset],
+                                 temp);
++                        if (unlikely(
++                            global_dirty_tracking & GLOBAL_DIRTY_DIRTY_RATE)) {
++                            total_dirty_pages += ctpopl(temp);
++                        }
+                     }
  
--int migrate_add_blocker(Error *reason, Error **errp)
-+int migrate_add_blocker_internal(Error *reason, Error **errp)
- {
--    if (only_migratable) {
--        error_propagate_prepend(errp, error_copy(reason),
--                                "disallowing migration blocker "
--                                "(--only-migratable) for: ");
--        return -EACCES;
--    }
--
-     /* Snapshots are similar to migrations, so check RUN_STATE_SAVE_VM too. */
-     if (runstate_check(RUN_STATE_SAVE_VM) || !migration_is_idle()) {
-         error_propagate_prepend(errp, error_copy(reason),
-@@ -2070,6 +2063,18 @@ int migrate_add_blocker(Error *reason, Error **errp)
-     return 0;
- }
+                     if (tcg_enabled()) {
+@@ -403,6 +409,9 @@ static inline void cpu_physical_memory_set_dirty_lebitmap(unsigned long *bitmap,
+         for (i = 0; i < len; i++) {
+             if (bitmap[i] != 0) {
+                 c = leul_to_cpu(bitmap[i]);
++                if (unlikely(global_dirty_tracking & GLOBAL_DIRTY_DIRTY_RATE)) {
++                    total_dirty_pages += ctpopl(c);
++                }
+                 do {
+                     j = ctzl(c);
+                     c &= ~(1ul << j);
+diff --git a/migration/dirtyrate.c b/migration/dirtyrate.c
+index f92c4b498e..17b3d2cbb5 100644
+--- a/migration/dirtyrate.c
++++ b/migration/dirtyrate.c
+@@ -28,6 +28,13 @@
+ #include "sysemu/runstate.h"
+ #include "exec/memory.h"
  
-+int migrate_add_blocker(Error *reason, Error **errp)
-+{
-+    if (only_migratable) {
-+        error_propagate_prepend(errp, error_copy(reason),
-+                                "disallowing migration blocker "
-+                                "(--only-migratable) for: ");
-+        return -EACCES;
-+    }
++/*
++ * total_dirty_pages is procted by BQL and is used
++ * to stat dirty pages during the period of two
++ * memory_global_dirty_log_sync
++ */
++uint64_t total_dirty_pages;
 +
-+    return migrate_add_blocker_internal(reason, errp);
-+}
-+
- void migrate_del_blocker(Error *reason)
- {
-     migration_blockers = g_slist_remove(migration_blockers, reason);
+ typedef struct DirtyPageRecord {
+     uint64_t start_pages;
+     uint64_t end_pages;
 -- 
 2.33.1
 
