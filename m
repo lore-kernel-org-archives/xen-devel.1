@@ -2,48 +2,48 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1BA9C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2F70C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B2E160C51
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 7B2E160C51
+	by mail.kernel.org (Postfix) with ESMTPS id 749C660C49
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 749C660C49
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219519.380404 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219528.380414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfdB-0002Ax-9r; Mon, 01 Nov 2021 22:18:17 +0000
+	id 1mhfdH-0002XR-GZ; Mon, 01 Nov 2021 22:18:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219519.380404; Mon, 01 Nov 2021 22:18:17 +0000
+Received: by outflank-mailman (output) from mailman id 219528.380414; Mon, 01 Nov 2021 22:18:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfdB-0002An-5y; Mon, 01 Nov 2021 22:18:17 +0000
-Received: by outflank-mailman (input) for mailman id 219519;
- Mon, 01 Nov 2021 22:18:15 +0000
+	id 1mhfdH-0002XG-DY; Mon, 01 Nov 2021 22:18:23 +0000
+Received: by outflank-mailman (input) for mailman id 219528;
+ Mon, 01 Nov 2021 22:18:22 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfVK-0007pr-P1
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:10 +0000
+ id 1mhfVU-0007pr-PO
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:20 +0000
 Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 665c7387-3b60-11ec-854e-12813bfff9fa;
- Mon, 01 Nov 2021 22:09:36 +0000 (UTC)
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-242-570G33pbNI-j4P4ohZf5Fg-1; Mon, 01 Nov 2021 18:09:33 -0400
-Received: by mail-wm1-f70.google.com with SMTP id
- b133-20020a1c808b000000b0032cdd691994so184408wmd.1
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:32 -0700 (PDT)
+ id 69b51b8c-3b60-11ec-854e-12813bfff9fa;
+ Mon, 01 Nov 2021 22:09:41 +0000 (UTC)
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-404-xOwcUxRFPMS887nrzbfRvg-1; Mon, 01 Nov 2021 18:09:38 -0400
+Received: by mail-wr1-f71.google.com with SMTP id
+ v18-20020a5d5912000000b001815910d2c0so2363625wrd.1
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:38 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id h16sm9219637wrm.27.2021.11.01.15.09.30
+ by smtp.gmail.com with ESMTPSA id f1sm14841974wrc.74.2021.11.01.15.09.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:31 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,37 +55,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 665c7387-3b60-11ec-854e-12813bfff9fa
+X-Inumbo-ID: 69b51b8c-3b60-11ec-854e-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804576;
+	s=mimecast20190719; t=1635804581;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=UAlWjWoEMOZw+xZxC0WiKGp4PGVHqFH6WrrAJ6wsQRw=;
-	b=ND5+484L/VIHEwuXA49K43iuygLlkhXpQF+UGCow1qLrWqETFQTAVltvR2UUjS975973sL
-	fCLKwvtj34ISb1XpWFUKd7L/8cMi0FWr8ZjeRe6xFUbxsx7+QMt+Izf2fP9lmNeUG9V1i4
-	r+P3pxeNqkZnkA6DxTV7JSYNouM51e0=
-X-MC-Unique: 570G33pbNI-j4P4ohZf5Fg-1
+	bh=ut0I0bOpeQjRvVatojvb4Hc5X8NOzmNkKKtiHDMU41A=;
+	b=Mu4MzLgwItrojXmSjZalYoQ6+1MYX//a1sMWyAT2gsPa74RYthkpx3SD6RTcl/TJwPbpDo
+	nYQ0qrhBED9e+BfIEhBa8CFT1YUJgVq6mWq/98vpSWWPNJzkSqF6wSu0PeVMzzvJe8s+kt
+	22IVneHZaHAHJqN6oKEObKVAKUkpdVE=
+X-MC-Unique: xOwcUxRFPMS887nrzbfRvg-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=UAlWjWoEMOZw+xZxC0WiKGp4PGVHqFH6WrrAJ6wsQRw=;
-        b=pF1PMhciodxBPNrHVw/IBSqU+Vd9ldq1mbJ8BJ03TYh8e3pyCArHdUjb6lcd3IfLPG
-         WsjcnvYZD8Gc/OwqOjy/ztHzsgT/UcEc+RAPsKA5SuXZcoHktUaCQDPDqb+7sG8va6GJ
-         D/SWEZsadPvujElD0RgwWcHu4FVTZhrPc4hJru8syOdsA2Elns4MLiUDmneoV8nbURqN
-         t8Vm+x+60mScLK33/0NlZJTmk4GJs3eFN+0I86uRY2gXAVPo5CPtG2q7w6gDWWax5aHR
-         DakbwSaELUvU7g2duxdDxMLk4Voa6QokhkRLFANz7i2FZ0PC7DfNq5qwVjNBB6IlXykR
-         uR/g==
-X-Gm-Message-State: AOAM533FJdba+q7gNQLpSb0TlDkC56xatPUnkFlVw5VTxr+lAbCA060b
-	5Q5FZhjH6JKsgNvIsNnrXn1ZdILylZQ2h1Uo+fN0wD2tl2ikZnAdQQNma1E6LleYRLBkqsrLF3/
-	DbhVAH45XUYJCrstlUYrNHOqkOmY=
-X-Received: by 2002:a5d:6151:: with SMTP id y17mr33450599wrt.275.1635804571734;
-        Mon, 01 Nov 2021 15:09:31 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwtxtTYPSTZydDNAKjX/wG8BXfEAdBg4wUEf4pzVhU0q8NeY6R4dn/NUoY2vV1PgKczmSzIOA==
-X-Received: by 2002:a5d:6151:: with SMTP id y17mr33450569wrt.275.1635804571558;
-        Mon, 01 Nov 2021 15:09:31 -0700 (PDT)
+        bh=ut0I0bOpeQjRvVatojvb4Hc5X8NOzmNkKKtiHDMU41A=;
+        b=Ptrzf4HdrECptjY0Mpb7kVFfw1eopXxoOniLPxkRYxnso9MLHIAvD3lYwuu2sxglAi
+         FxPDMqwkn+gwE0YMDOyRXk/QfZESFpLCzjWCw5FFkkwCeMgdVFO+D2w4DnixqXGwjEA6
+         fvorUT/zEbmCOabIv09um0tSU2TLl/cMX4sYAflcftXGuh01NhQZXueSttTAWEsBG2+Q
+         TyXo7gosjglrELTc6FNoqv1Mn0xjKXlJpxsbCVIZEbkSi6kGDjA+Yuc2vek9zEqtyIbd
+         rRFutrY8Z1oaN5nPLkra3nIP7CkgFhq9toCvfyn9cL12eT99mcEjcHCQ8qcyX9ebqoTL
+         tPeg==
+X-Gm-Message-State: AOAM5303Tjsbs1lwnW5NlR0Sb0YR+eGpzvLa33veIeWn2KxVvg9Mq3ok
+	Z0gNjg//Jv/5vGqGMH0xbR4jnP2H6Ju0I1EV3xS09HtFD0phJXubUntscfWIq2zxOqoNCeidjey
+	MtVQPSVQ3y2tnJ0DF08Fnxk1Rxcs=
+X-Received: by 2002:a05:600c:4f92:: with SMTP id n18mr1960070wmq.22.1635804577431;
+        Mon, 01 Nov 2021 15:09:37 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzk1mlsAWBnPV3UAdQaOyBp79mHrO95iLydgSFEaD+slGORmkvNAM202r9ngtyh0byPMnYLqg==
+X-Received: by 2002:a05:600c:4f92:: with SMTP id n18mr1960047wmq.22.1635804577205;
+        Mon, 01 Nov 2021 15:09:37 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -106,9 +106,9 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Anthony Perard <anthony.perard@citrix.com>
-Subject: [PULL 13/20] migration/ram: Handle RAMBlocks with a RamDiscardManager on the migration source
-Date: Mon,  1 Nov 2021 23:09:05 +0100
-Message-Id: <20211101220912.10039-14-quintela@redhat.com>
+Subject: [PULL 17/20] migration/ram: Factor out populating pages readable in ram_block_populate_pages()
+Date: Mon,  1 Nov 2021 23:09:09 +0100
+Message-Id: <20211101220912.10039-18-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -122,154 +122,85 @@ Content-Type: text/plain; charset="US-ASCII"
 
 From: David Hildenbrand <david@redhat.com>
 
-We don't want to migrate memory that corresponds to discarded ranges as
-managed by a RamDiscardManager responsible for the mapped memory region of
-the RAMBlock. The content of these pages is essentially stale and
-without any guarantees for the VM ("logically unplugged").
+Let's factor out prefaulting/populating to make further changes easier to
+review and add a comment what we are actually expecting to happen. While at
+it, use the actual page size of the ramblock, which defaults to
+qemu_real_host_page_size for anonymous memory. Further, rename
+ram_block_populate_pages() to ram_block_populate_read() as well, to make
+it clearer what we are doing.
 
-Depending on the underlying memory type, even reading memory might populate
-memory on the source, resulting in an undesired memory consumption. Of
-course, on the destination, even writing a zeropage consumes memory,
-which we also want to avoid (similar to free page hinting).
-
-Currently, virtio-mem tries achieving that goal (not migrating "unplugged"
-memory that was discarded) by going via qemu_guest_free_page_hint() - but
-it's hackish and incomplete.
-
-For example, background snapshots still end up reading all memory, as
-they don't do bitmap syncs. Postcopy recovery code will re-add
-previously cleared bits to the dirty bitmap and migrate them.
-
-Let's consult the RamDiscardManager after setting up our dirty bitmap
-initially and when postcopy recovery code reinitializes it: clear
-corresponding bits in the dirty bitmaps (e.g., of the RAMBlock and inside
-KVM). It's important to fixup the dirty bitmap *after* our initial bitmap
-sync, such that the corresponding dirty bits in KVM are actually cleared.
-
-As colo is incompatible with discarding of RAM and inhibits it, we don't
-have to bother.
-
-Note: if a misbehaving guest would use discarded ranges after migration
-started we would still migrate that memory: however, then we already
-populated that memory on the migration source.
+In the future, we might want to use MADV_POPULATE_READ to speed up
+population.
 
 Reviewed-by: Peter Xu <peterx@redhat.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- migration/ram.c | 77 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 77 insertions(+)
+ migration/ram.c | 35 ++++++++++++++++++++++-------------
+ 1 file changed, 22 insertions(+), 13 deletions(-)
 
 diff --git a/migration/ram.c b/migration/ram.c
-index ae2601bf3b..e8c06f207c 100644
+index 54df5dc0fc..92c7b788ae 100644
 --- a/migration/ram.c
 +++ b/migration/ram.c
-@@ -858,6 +858,60 @@ static inline bool migration_bitmap_clear_dirty(RAMState *rs,
+@@ -1639,26 +1639,35 @@ out:
      return ret;
  }
  
-+static void dirty_bitmap_clear_section(MemoryRegionSection *section,
-+                                       void *opaque)
++static inline void populate_read_range(RAMBlock *block, ram_addr_t offset,
++                                       ram_addr_t size)
 +{
-+    const hwaddr offset = section->offset_within_region;
-+    const hwaddr size = int128_get64(section->size);
-+    const unsigned long start = offset >> TARGET_PAGE_BITS;
-+    const unsigned long npages = size >> TARGET_PAGE_BITS;
-+    RAMBlock *rb = section->mr->ram_block;
-+    uint64_t *cleared_bits = opaque;
-+
 +    /*
-+     * We don't grab ram_state->bitmap_mutex because we expect to run
-+     * only when starting migration or during postcopy recovery where
-+     * we don't have concurrent access.
++     * We read one byte of each page; this will preallocate page tables if
++     * required and populate the shared zeropage on MAP_PRIVATE anonymous memory
++     * where no page was populated yet. This might require adaption when
++     * supporting other mappings, like shmem.
 +     */
-+    if (!migration_in_postcopy() && !migrate_background_snapshot()) {
-+        migration_clear_memory_region_dirty_bitmap_range(rb, start, npages);
++    for (; offset < size; offset += block->page_size) {
++        char tmp = *((char *)block->host + offset);
++
++        /* Don't optimize the read out */
++        asm volatile("" : "+r" (tmp));
 +    }
-+    *cleared_bits += bitmap_count_one_with_offset(rb->bmap, start, npages);
-+    bitmap_clear(rb->bmap, start, npages);
 +}
 +
-+/*
-+ * Exclude all dirty pages from migration that fall into a discarded range as
-+ * managed by a RamDiscardManager responsible for the mapped memory region of
-+ * the RAMBlock. Clear the corresponding bits in the dirty bitmaps.
-+ *
-+ * Discarded pages ("logically unplugged") have undefined content and must
-+ * not get migrated, because even reading these pages for migration might
-+ * result in undesired behavior.
-+ *
-+ * Returns the number of cleared bits in the RAMBlock dirty bitmap.
-+ *
-+ * Note: The result is only stable while migrating (precopy/postcopy).
-+ */
-+static uint64_t ramblock_dirty_bitmap_clear_discarded_pages(RAMBlock *rb)
-+{
-+    uint64_t cleared_bits = 0;
-+
-+    if (rb->mr && rb->bmap && memory_region_has_ram_discard_manager(rb->mr)) {
-+        RamDiscardManager *rdm = memory_region_get_ram_discard_manager(rb->mr);
-+        MemoryRegionSection section = {
-+            .mr = rb->mr,
-+            .offset_within_region = 0,
-+            .size = int128_make64(qemu_ram_get_used_length(rb)),
-+        };
-+
-+        ram_discard_manager_replay_discarded(rdm, &section,
-+                                             dirty_bitmap_clear_section,
-+                                             &cleared_bits);
-+    }
-+    return cleared_bits;
-+}
-+
- /* Called with RCU critical section */
- static void ramblock_sync_dirty_bitmap(RAMState *rs, RAMBlock *rb)
+ /*
+- * ram_block_populate_pages: populate memory in the RAM block by reading
+- *   an integer from the beginning of each page.
++ * ram_block_populate_read: preallocate page tables and populate pages in the
++ *   RAM block by reading a byte of each page.
+  *
+  * Since it's solely used for userfault_fd WP feature, here we just
+  *   hardcode page size to qemu_real_host_page_size.
+  *
+  * @block: RAM block to populate
+  */
+-static void ram_block_populate_pages(RAMBlock *block)
++static void ram_block_populate_read(RAMBlock *block)
  {
-@@ -2675,6 +2729,19 @@ static void ram_list_init_bitmaps(void)
+-    char *ptr = (char *) block->host;
+-
+-    for (ram_addr_t offset = 0; offset < block->used_length;
+-            offset += qemu_real_host_page_size) {
+-        char tmp = *(ptr + offset);
+-
+-        /* Don't optimize the read out */
+-        asm volatile("" : "+r" (tmp));
+-    }
++    populate_read_range(block, 0, block->used_length);
+ }
+ 
+ /*
+@@ -1684,7 +1693,7 @@ void ram_write_tracking_prepare(void)
+          * UFFDIO_WRITEPROTECT_MODE_WP mode setting would silently skip
+          * pages with pte_none() entries in page table.
+          */
+-        ram_block_populate_pages(block);
++        ram_block_populate_read(block);
      }
  }
  
-+static void migration_bitmap_clear_discarded_pages(RAMState *rs)
-+{
-+    unsigned long pages;
-+    RAMBlock *rb;
-+
-+    RCU_READ_LOCK_GUARD();
-+
-+    RAMBLOCK_FOREACH_NOT_IGNORED(rb) {
-+            pages = ramblock_dirty_bitmap_clear_discarded_pages(rb);
-+            rs->migration_dirty_pages -= pages;
-+    }
-+}
-+
- static void ram_init_bitmaps(RAMState *rs)
- {
-     /* For memory_global_dirty_log_start below.  */
-@@ -2691,6 +2758,12 @@ static void ram_init_bitmaps(RAMState *rs)
-     }
-     qemu_mutex_unlock_ramlist();
-     qemu_mutex_unlock_iothread();
-+
-+    /*
-+     * After an eventual first bitmap sync, fixup the initial bitmap
-+     * containing all 1s to exclude any discarded pages from migration.
-+     */
-+    migration_bitmap_clear_discarded_pages(rs);
- }
- 
- static int ram_init_all(RAMState **rsp)
-@@ -4119,6 +4192,10 @@ int ram_dirty_bitmap_reload(MigrationState *s, RAMBlock *block)
-      */
-     bitmap_complement(block->bmap, block->bmap, nbits);
- 
-+    /* Clear dirty bits of discarded ranges that we don't want to migrate. */
-+    ramblock_dirty_bitmap_clear_discarded_pages(block);
-+
-+    /* We'll recalculate migration_dirty_pages in ram_state_resume_prepare(). */
-     trace_ram_dirty_bitmap_reload_complete(block->idstr);
- 
-     /*
 -- 
 2.33.1
 
