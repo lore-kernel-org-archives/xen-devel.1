@@ -2,51 +2,51 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBE59C43219
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3348CC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6C700610FC
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 6C700610FC
+	by mail.kernel.org (Postfix) with ESMTPS id E12D4610D2
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E12D4610D2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219239.379941 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219245.380002 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhZ6m-0008H0-0s; Mon, 01 Nov 2021 15:20:24 +0000
+	id 1mhZ6z-0001iQ-Tl; Mon, 01 Nov 2021 15:20:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219239.379941; Mon, 01 Nov 2021 15:20:23 +0000
+Received: by outflank-mailman (output) from mailman id 219245.380002; Mon, 01 Nov 2021 15:20:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhZ6l-0008Gk-Rd; Mon, 01 Nov 2021 15:20:23 +0000
-Received: by outflank-mailman (input) for mailman id 219239;
- Mon, 01 Nov 2021 15:20:21 +0000
+	id 1mhZ6z-0001iC-Ot; Mon, 01 Nov 2021 15:20:37 +0000
+Received: by outflank-mailman (input) for mailman id 219245;
+ Mon, 01 Nov 2021 15:20:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rWtG=PU=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mhZ6j-0008DA-RL
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 15:20:21 +0000
+ id 1mhZ6y-0008DA-La
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 15:20:36 +0000
 Received: from smtp-out2.suse.de (unknown [195.135.220.29])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 13092484-eb58-4f28-b7ee-8f277d1aa63f;
- Mon, 01 Nov 2021 15:20:20 +0000 (UTC)
+ id 116c999b-c4b1-46e1-b39a-854453387f59;
+ Mon, 01 Nov 2021 15:20:22 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 6E2B61FD29;
- Mon,  1 Nov 2021 15:20:19 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E2B931FD77;
+ Mon,  1 Nov 2021 15:20:21 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 38DB713A4A;
- Mon,  1 Nov 2021 15:20:19 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9B39E13A4A;
+ Mon,  1 Nov 2021 15:20:21 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id iD6WDLMFgGFzNwAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 01 Nov 2021 15:20:19 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id CGOxJLUFgGFzNwAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 01 Nov 2021 15:20:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,16 +58,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13092484-eb58-4f28-b7ee-8f277d1aa63f
+X-Inumbo-ID: 116c999b-c4b1-46e1-b39a-854453387f59
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1635780019; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1635780021; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=DEHpkmfZZt1as/ZYBqmT3ZnKiWxNryhzyhq2qPkcsrg=;
-	b=VQOhdc8JMSXr770NdXGYoKbD68X0XCUrRBpwUYjT6YKvj3FRT2H63AIdrXGTVZ76HJaInT
-	lk94ERWftow7eurqX5vS6a/kYSFR25rL8GnUcy0BXSlHLiLVmdtgGy9yED6ohmgSu6TQLh
-	Tv2vGPYBi6mg0DyjUlHhxi2y2/gXpNw=
+	bh=D7p81uvIjBLlAROdby8lQ54/U9wmyTthcMwaGdQ0Ndc=;
+	b=nVqYvVo8rQ+/Hh+t2UKIFqfomIt6QFl6uXhDYzrbKptXBxV6WshW4PHSceMIcEDw6R2RSm
+	XepLtmtDydDd+V/OJ+bCb+lA2b6QisAeCKoe+S87crIr/G/ag2jg/YvbuSdF58wZcBkekK
+	l2bBtwL1pgb8q5uYDlYUrEx9O57Qb7A=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -75,255 +75,234 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH v2 01/15] xen: limit number of hypercall parameters to 5
-Date: Mon,  1 Nov 2021 16:20:01 +0100
-Message-Id: <20211101152015.28488-2-jgross@suse.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v2 09/15] x86/pv-shim: don't modify hypercall table
+Date: Mon,  1 Nov 2021 16:20:09 +0100
+Message-Id: <20211101152015.28488-10-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211101152015.28488-1-jgross@suse.com>
 References: <20211101152015.28488-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today there is no hypercall with more than 5 parameters, while the ABI
-allows up to 6 parameters. Especially for the X86 32-bit case using
-6 parameters would require to run without frame pointer, which isn't
-very fortunate. Note that for Arm the limit is 5 parameters already.
+When running as pv-shim the hypercall is modified today in order to
+replace the functions for __HYPERVISOR_event_channel_op and
+__HYPERVISOR_grant_table_op hypercalls.
 
-So limit the maximum number of parameters to 5 for x86, too.
+Change this to call the related functions from the normal handlers
+instead when running as shim. The performance implications are not
+really relevant, as a normal production hypervisor will not be
+configured to support shim mode, so the related calls will be dropped
+due to optimization of the compiler.
+
+Note that for the CONFIG_PV_SHIM_EXCLUSIVE case there is a dummy
+wrapper do_grant_table_op() needed, as in this case grant_table.c
+isn't being built.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/hvm/hypercall.c    | 28 ++++++++++------------------
- xen/arch/x86/pv/hypercall.c     | 22 ++++++++--------------
- xen/common/trace.c              |  2 +-
- xen/include/asm-x86/hypercall.h |  2 +-
- 4 files changed, 20 insertions(+), 34 deletions(-)
+V2:
+- add test for pv_shim to wrappers (Jan Beulich)
+- add grant_table_op to hypercall table if CONFIG_PV_SHIM (Jan Beulich)
+---
+ xen/arch/x86/pv/hypercall.c   |  2 +-
+ xen/arch/x86/pv/shim.c        | 54 +++++++++++++++++------------------
+ xen/common/event_channel.c    |  9 ++++++
+ xen/common/grant_table.c      |  9 ++++++
+ xen/include/asm-x86/pv/shim.h |  3 ++
+ 5 files changed, 49 insertions(+), 28 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 122abf80de..f0321c6cb4 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -239,10 +239,9 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         unsigned long rdx = regs->rdx;
-         unsigned long r10 = regs->r10;
-         unsigned long r8 = regs->r8;
--        unsigned long r9 = regs->r9;
- 
--        HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%lx, %lx, %lx, %lx, %lx, %lx)",
--                    eax, rdi, rsi, rdx, r10, r8, r9);
-+        HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%lx, %lx, %lx, %lx, %lx)",
-+                    eax, rdi, rsi, rdx, r10, r8);
- 
- #ifndef NDEBUG
-         /* Deliberately corrupt parameter regs not used by this hypercall. */
-@@ -252,13 +251,11 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         case 1: rsi = 0xdeadbeefdeadf00dUL; fallthrough;
-         case 2: rdx = 0xdeadbeefdeadf00dUL; fallthrough;
-         case 3: r10 = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 4: r8 = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 5: r9 = 0xdeadbeefdeadf00dUL;
-+        case 4: r8 = 0xdeadbeefdeadf00dUL;
-         }
- #endif
- 
--        regs->rax = hvm_hypercall_table[eax].native(rdi, rsi, rdx, r10, r8,
--                                                    r9);
-+        regs->rax = hvm_hypercall_table[eax].native(rdi, rsi, rdx, r10, r8);
- 
- #ifndef NDEBUG
-         if ( !curr->hcall_preempted )
-@@ -266,7 +263,6 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-             /* Deliberately corrupt parameter regs used by this hypercall. */
-             switch ( hypercall_args_table[eax].native )
-             {
--            case 6: regs->r9  = 0xdeadbeefdeadf00dUL; fallthrough;
-             case 5: regs->r8  = 0xdeadbeefdeadf00dUL; fallthrough;
-             case 4: regs->r10 = 0xdeadbeefdeadf00dUL; fallthrough;
-             case 3: regs->rdx = 0xdeadbeefdeadf00dUL; fallthrough;
-@@ -283,10 +279,9 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         unsigned int edx = regs->edx;
-         unsigned int esi = regs->esi;
-         unsigned int edi = regs->edi;
--        unsigned int ebp = regs->ebp;
- 
--        HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%x, %x, %x, %x, %x, %x)", eax,
--                    ebx, ecx, edx, esi, edi, ebp);
-+        HVM_DBG_LOG(DBG_LEVEL_HCALL, "hcall%lu(%x, %x, %x, %x, %x)", eax,
-+                    ebx, ecx, edx, esi, edi);
- 
- #ifndef NDEBUG
-         /* Deliberately corrupt parameter regs not used by this hypercall. */
-@@ -296,14 +291,12 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-         case 1: ecx = 0xdeadf00d; fallthrough;
-         case 2: edx = 0xdeadf00d; fallthrough;
-         case 3: esi = 0xdeadf00d; fallthrough;
--        case 4: edi = 0xdeadf00d; fallthrough;
--        case 5: ebp = 0xdeadf00d;
-+        case 4: edi = 0xdeadf00d;
-         }
- #endif
- 
-         curr->hcall_compat = true;
--        regs->rax = hvm_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi,
--                                                    ebp);
-+        regs->rax = hvm_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi);
-         curr->hcall_compat = false;
- 
- #ifndef NDEBUG
-@@ -312,7 +305,6 @@ int hvm_hypercall(struct cpu_user_regs *regs)
-             /* Deliberately corrupt parameter regs used by this hypercall. */
-             switch ( hypercall_args_table[eax].compat )
-             {
--            case 6: regs->rbp = 0xdeadf00d; fallthrough;
-             case 5: regs->rdi = 0xdeadf00d; fallthrough;
-             case 4: regs->rsi = 0xdeadf00d; fallthrough;
-             case 3: regs->rdx = 0xdeadf00d; fallthrough;
-@@ -349,7 +341,7 @@ enum mc_disposition hvm_do_multicall_call(struct mc_state *state)
-             func = array_access_nospec(hvm_hypercall_table, call->op).native;
-         if ( func )
-             call->result = func(call->args[0], call->args[1], call->args[2],
--                                call->args[3], call->args[4], call->args[5]);
-+                                call->args[3], call->args[4]);
-         else
-             call->result = -ENOSYS;
-     }
-@@ -361,7 +353,7 @@ enum mc_disposition hvm_do_multicall_call(struct mc_state *state)
-             func = array_access_nospec(hvm_hypercall_table, call->op).compat;
-         if ( func )
-             call->result = func(call->args[0], call->args[1], call->args[2],
--                                call->args[3], call->args[4], call->args[5]);
-+                                call->args[3], call->args[4]);
-         else
-             call->result = -ENOSYS;
-     }
 diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
-index 3579ba905c..16a77e3a35 100644
+index 7e99dbda34..abe4dd7839 100644
 --- a/xen/arch/x86/pv/hypercall.c
 +++ b/xen/arch/x86/pv/hypercall.c
-@@ -145,7 +145,6 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         unsigned long rdx = regs->rdx;
-         unsigned long r10 = regs->r10;
-         unsigned long r8 = regs->r8;
--        unsigned long r9 = regs->r9;
- 
- #ifndef NDEBUG
-         /* Deliberately corrupt parameter regs not used by this hypercall. */
-@@ -155,18 +154,17 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         case 1: rsi = 0xdeadbeefdeadf00dUL; fallthrough;
-         case 2: rdx = 0xdeadbeefdeadf00dUL; fallthrough;
-         case 3: r10 = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 4: r8 = 0xdeadbeefdeadf00dUL; fallthrough;
--        case 5: r9 = 0xdeadbeefdeadf00dUL;
-+        case 4: r8 = 0xdeadbeefdeadf00dUL;
-         }
+@@ -62,7 +62,7 @@ const pv_hypercall_table_t pv_hypercall_table[] = {
+     COMPAT_CALL(xen_version),
+     HYPERCALL(console_io),
+     COMPAT_CALL(physdev_op_compat),
+-#ifdef CONFIG_GRANT_TABLE
++#if defined(CONFIG_GRANT_TABLE) || defined(CONFIG_PV_SHIM)
+     COMPAT_CALL(grant_table_op),
  #endif
-         if ( unlikely(tb_init_done) )
-         {
--            unsigned long args[6] = { rdi, rsi, rdx, r10, r8, r9 };
-+            unsigned long args[5] = { rdi, rsi, rdx, r10, r8 };
+     HYPERCALL(vm_assist),
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index d9704121a7..7e891fe2f7 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -56,11 +56,6 @@ static DEFINE_SPINLOCK(balloon_lock);
  
-             __trace_hypercall(TRC_PV_HYPERCALL_V2, eax, args);
-         }
+ static struct platform_bad_page __initdata reserved_pages[2];
  
--        regs->rax = pv_hypercall_table[eax].native(rdi, rsi, rdx, r10, r8, r9);
-+        regs->rax = pv_hypercall_table[eax].native(rdi, rsi, rdx, r10, r8);
- 
- #ifndef NDEBUG
-         if ( !curr->hcall_preempted )
-@@ -174,7 +172,6 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-             /* Deliberately corrupt parameter regs used by this hypercall. */
-             switch ( hypercall_args_table[eax].native )
-             {
--            case 6: regs->r9  = 0xdeadbeefdeadf00dUL; fallthrough;
-             case 5: regs->r8  = 0xdeadbeefdeadf00dUL; fallthrough;
-             case 4: regs->r10 = 0xdeadbeefdeadf00dUL; fallthrough;
-             case 3: regs->rdx = 0xdeadbeefdeadf00dUL; fallthrough;
-@@ -192,7 +189,6 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         unsigned int edx = regs->edx;
-         unsigned int esi = regs->esi;
-         unsigned int edi = regs->edi;
--        unsigned int ebp = regs->ebp;
- 
- #ifndef NDEBUG
-         /* Deliberately corrupt parameter regs not used by this hypercall. */
-@@ -202,20 +198,19 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-         case 1: ecx = 0xdeadf00d; fallthrough;
-         case 2: edx = 0xdeadf00d; fallthrough;
-         case 3: esi = 0xdeadf00d; fallthrough;
--        case 4: edi = 0xdeadf00d; fallthrough;
--        case 5: ebp = 0xdeadf00d;
-+        case 4: edi = 0xdeadf00d;
-         }
- #endif
- 
-         if ( unlikely(tb_init_done) )
-         {
--            unsigned long args[6] = { ebx, ecx, edx, esi, edi, ebp };
-+            unsigned long args[5] = { ebx, ecx, edx, esi, edi };
- 
-             __trace_hypercall(TRC_PV_HYPERCALL_V2, eax, args);
-         }
- 
-         curr->hcall_compat = true;
--        regs->eax = pv_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi, ebp);
-+        regs->eax = pv_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi);
-         curr->hcall_compat = false;
- 
- #ifndef NDEBUG
-@@ -224,7 +219,6 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
-             /* Deliberately corrupt parameter regs used by this hypercall. */
-             switch ( hypercall_args_table[eax].compat )
-             {
--            case 6: regs->ebp = 0xdeadf00d; fallthrough;
-             case 5: regs->edi = 0xdeadf00d; fallthrough;
-             case 4: regs->esi = 0xdeadf00d; fallthrough;
-             case 3: regs->edx = 0xdeadf00d; fallthrough;
-@@ -262,7 +256,7 @@ enum mc_disposition pv_do_multicall_call(struct mc_state *state)
-              pv_hypercall_table[op].compat )
-             call->result = pv_hypercall_table[op].compat(
-                 call->args[0], call->args[1], call->args[2],
--                call->args[3], call->args[4], call->args[5]);
-+                call->args[3], call->args[4]);
-         else
-             call->result = -ENOSYS;
-     }
-@@ -276,7 +270,7 @@ enum mc_disposition pv_do_multicall_call(struct mc_state *state)
-              pv_hypercall_table[op].native )
-             call->result = pv_hypercall_table[op].native(
-                 call->args[0], call->args[1], call->args[2],
--                call->args[3], call->args[4], call->args[5]);
-+                call->args[3], call->args[4]);
-         else
-             call->result = -ENOSYS;
-     }
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index a2a389a1c7..61fecc2b2b 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -822,7 +822,7 @@ void __trace_hypercall(uint32_t event, unsigned long op,
+-static long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-static long pv_shim_grant_table_op(unsigned int cmd,
+-                                   XEN_GUEST_HANDLE_PARAM(void) uop,
+-                                   unsigned int count);
+-
+ /*
+  * By default give the shim 1MB of free memory slack. Some users may wish to
+  * tune this constants for better memory utilization. This can be achieved
+@@ -203,7 +198,6 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
+                               start_info_t *si)
  {
-     struct {
-         uint32_t op;
--        uint32_t args[6];
-+        uint32_t args[5];
-     } d;
-     uint32_t *a = d.args;
+     bool compat = is_pv_32bit_domain(d);
+-    pv_hypercall_table_t *rw_pv_hypercall_table;
+     uint64_t param = 0;
+     long rc;
  
-diff --git a/xen/include/asm-x86/hypercall.h b/xen/include/asm-x86/hypercall.h
-index 0ae3b8b043..5d394d4923 100644
---- a/xen/include/asm-x86/hypercall.h
-+++ b/xen/include/asm-x86/hypercall.h
-@@ -13,7 +13,7 @@
+@@ -249,23 +243,6 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
+         consoled_set_ring_addr(page);
+     }
  
- typedef unsigned long hypercall_fn_t(
-     unsigned long, unsigned long, unsigned long,
--    unsigned long, unsigned long, unsigned long);
-+    unsigned long, unsigned long);
+-    /*
+-     * Locate pv_hypercall_table[] (usually .rodata) in the directmap (which
+-     * is writeable) and insert some shim-specific hypercall handlers.
+-     */
+-    rw_pv_hypercall_table = __va(__pa(pv_hypercall_table));
+-    rw_pv_hypercall_table[__HYPERVISOR_event_channel_op].native =
+-        (hypercall_fn_t *)pv_shim_event_channel_op;
+-    rw_pv_hypercall_table[__HYPERVISOR_grant_table_op].native =
+-        (hypercall_fn_t *)pv_shim_grant_table_op;
+-
+-#ifdef CONFIG_PV32
+-    rw_pv_hypercall_table[__HYPERVISOR_event_channel_op].compat =
+-        (hypercall_fn_t *)pv_shim_event_channel_op;
+-    rw_pv_hypercall_table[__HYPERVISOR_grant_table_op].compat =
+-        (hypercall_fn_t *)pv_shim_grant_table_op;
+-#endif
+-
+     guest = d;
  
- typedef struct {
-     hypercall_fn_t *native;
+     /*
+@@ -435,7 +412,7 @@ int pv_shim_shutdown(uint8_t reason)
+     return 0;
+ }
+ 
+-static long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+     struct domain *d = current->domain;
+     struct evtchn_close close;
+@@ -683,9 +660,9 @@ void pv_shim_inject_evtchn(unsigned int port)
+ # define compat_handle_okay guest_handle_okay
+ #endif
+ 
+-static long pv_shim_grant_table_op(unsigned int cmd,
+-                                   XEN_GUEST_HANDLE_PARAM(void) uop,
+-                                   unsigned int count)
++long pv_shim_grant_table_op(unsigned int cmd,
++                            XEN_GUEST_HANDLE_PARAM(void) uop,
++                            unsigned int count)
+ {
+     struct domain *d = current->domain;
+     long rc = 0;
+@@ -845,6 +822,29 @@ static long pv_shim_grant_table_op(unsigned int cmd,
+     return rc;
+ }
+ 
++#ifndef CONFIG_GRANT_TABLE
++/* Thin wrapper(s) needed. */
++long do_grant_table_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop,
++                       unsigned int count)
++{
++    if ( !pv_shim )
++        return -ENOSYS;
++
++    return pv_shim_grant_table_op(cmd, uop, count);
++}
++
++#ifdef CONFIG_PV32
++int compat_grant_table_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop,
++                          unsigned int count)
++{
++    if ( !pv_shim )
++        return -ENOSYS;
++
++    return pv_shim_grant_table_op(cmd, uop, count);
++}
++#endif
++#endif
++
+ long pv_shim_cpu_up(void *data)
+ {
+     struct vcpu *v = data;
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index 12006f592e..a15f986b32 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -32,6 +32,10 @@
+ #include <public/event_channel.h>
+ #include <xsm/xsm.h>
+ 
++#ifdef CONFIG_PV_SHIM
++#include <asm/guest.h>
++#endif
++
+ #define ERROR_EXIT(_errno)                                          \
+     do {                                                            \
+         gdprintk(XENLOG_WARNING,                                    \
+@@ -1190,6 +1194,11 @@ long do_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+     int rc;
+ 
++#ifdef CONFIG_PV_SHIM
++    if ( pv_shim )
++        return pv_shim_event_channel_op(cmd, arg);
++#endif
++
+     switch ( cmd )
+     {
+     case EVTCHNOP_alloc_unbound: {
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 49e12621ac..de097c0eda 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -45,6 +45,10 @@
+ #include <asm/flushtlb.h>
+ #include <asm/guest_atomics.h>
+ 
++#ifdef CONFIG_PV_SHIM
++#include <asm/guest.h>
++#endif
++
+ /* Per-domain grant information. */
+ struct grant_table {
+     /*
+@@ -3526,6 +3530,11 @@ do_grant_table_op(
+     long rc;
+     unsigned int opaque_in = cmd & GNTTABOP_ARG_MASK, opaque_out = 0;
+ 
++#ifdef CONFIG_PV_SHIM
++    if ( pv_shim )
++        return pv_shim_grant_table_op(cmd, uop, count);
++#endif
++
+     if ( (int)count < 0 )
+         return -EINVAL;
+ 
+diff --git a/xen/include/asm-x86/pv/shim.h b/xen/include/asm-x86/pv/shim.h
+index 8a91f4f9df..6415f8068e 100644
+--- a/xen/include/asm-x86/pv/shim.h
++++ b/xen/include/asm-x86/pv/shim.h
+@@ -19,6 +19,7 @@
+ #ifndef __X86_PV_SHIM_H__
+ #define __X86_PV_SHIM_H__
+ 
++#include <xen/hypercall.h>
+ #include <xen/types.h>
+ 
+ #if defined(CONFIG_PV_SHIM_EXCLUSIVE)
+@@ -45,6 +46,8 @@ domid_t get_initial_domain_id(void);
+ uint64_t pv_shim_mem(uint64_t avail);
+ void pv_shim_fixup_e820(struct e820map *e820);
+ const struct platform_bad_page *pv_shim_reserved_pages(unsigned int *size);
++typeof(do_event_channel_op) pv_shim_event_channel_op;
++typeof(do_grant_table_op) pv_shim_grant_table_op;
+ 
+ #else
+ 
 -- 
 2.26.2
 
