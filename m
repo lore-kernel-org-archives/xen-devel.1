@@ -2,47 +2,48 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4ECC3C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84602C433EF
 	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 016DF6058D
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 016DF6058D
+	by mail.kernel.org (Postfix) with ESMTPS id 3412F60FD9
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3412F60FD9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219452.380360 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219453.380367 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfVC-0005fr-3o; Mon, 01 Nov 2021 22:10:02 +0000
+	id 1mhfVC-0005ls-SW; Mon, 01 Nov 2021 22:10:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219452.380360; Mon, 01 Nov 2021 22:10:02 +0000
+Received: by outflank-mailman (output) from mailman id 219453.380367; Mon, 01 Nov 2021 22:10:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfVB-0005f5-Ul; Mon, 01 Nov 2021 22:10:01 +0000
-Received: by outflank-mailman (input) for mailman id 219452;
+	id 1mhfVC-0005kM-BN; Mon, 01 Nov 2021 22:10:02 +0000
+Received: by outflank-mailman (input) for mailman id 219453;
  Mon, 01 Nov 2021 22:10:00 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfV9-0000By-Uo
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:59 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 6b2d1a7e-0af0-4180-a813-9d980d389361;
- Mon, 01 Nov 2021 22:09:44 +0000 (UTC)
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-565-xcyTHfv5PXuvlLEvakV6YA-1; Mon, 01 Nov 2021 18:09:41 -0400
-Received: by mail-wr1-f69.google.com with SMTP id
- f1-20020a5d64c1000000b001611832aefeso6799441wri.17
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:40 -0700 (PDT)
+ id 1mhfVA-0007pr-OS
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:00 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 62e4f7fa-3b60-11ec-854e-12813bfff9fa;
+ Mon, 01 Nov 2021 22:09:30 +0000 (UTC)
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-32-4X10BvvaO2m5-Rv-dpJHvA-1; Mon, 01 Nov 2021 18:09:29 -0400
+Received: by mail-wr1-f71.google.com with SMTP id
+ p17-20020adff211000000b0017b902a7701so3974740wro.19
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:29 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id d24sm610262wmb.35.2021.11.01.15.09.39
+ by smtp.gmail.com with ESMTPSA id o17sm685550wmq.11.2021.11.01.15.09.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:39 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,37 +55,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b2d1a7e-0af0-4180-a813-9d980d389361
+X-Inumbo-ID: 62e4f7fa-3b60-11ec-854e-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804584;
+	s=mimecast20190719; t=1635804570;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2DiI4EfnW7YWT1ASaakXUWvRZyN7+/5k2450FBy0sI4=;
-	b=Xb0g7SXKN3gMQwrDbVTtqyQ9hWaE7hszEykvM35dqycnip/y5ibYBxuXLVIBAdWw6q+N2U
-	ozD2VZb7xovP6qa1DsYYZ95Itzd4WUuSQYQ5thWAZ6ikfdb2nkLHOJjwkToK9FFLcRHDxC
-	eTdjFTllwP1GqPbVN76tcWgEfVsg+DM=
-X-MC-Unique: xcyTHfv5PXuvlLEvakV6YA-1
+	bh=Eb45pt+rx+z3d/QNqQ0ka/rPHoe06plBoXsL9wFgC3A=;
+	b=XtbMSMGTQZvMco2cqRvB6sMNp2kXWpDgubhBSI/o3ct+u0hRuPelBE3jucBTFg1jjr/Why
+	kLLoLyLGU6A1J7RIr1r7Aw5eUqFBllDRjog5qJtscdAYk0Pcq6YnQA8umpeYe5Vf8y85l5
+	1KXLUFCxkvc4P7/ZD47YRfIPjKRP2l4=
+X-MC-Unique: 4X10BvvaO2m5-Rv-dpJHvA-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2DiI4EfnW7YWT1ASaakXUWvRZyN7+/5k2450FBy0sI4=;
-        b=wLnKDiV/fsXXFUTG2E/Xp/4LF9YCf7lziCLSUwsB8Ulr1daUseUDIQrd4BaEPP7N01
-         AUFalc258gry9oEXQ2tN7vPS5k3eJ2TPH1XZv8MQz29D1VAu93kyKIjB5rnidWbNehBQ
-         yHXLubUfglBXMNHyU2qWIw374AfDpfkiFcJEC8y7j6d/95gvPFX3khp+JtF6w+oVNaBL
-         2FoEKMxK8wHDr5zhzxVug4md1NBCMcNNc9U2mYmT/WJD+WoViFNMtFpVTArk8kAWc7pR
-         fBLdSLBFR8H7ZUnmmB4N1OsVAuVFE1b9szsBEl2BPjKRBm/4G2iIhEUcTgmIXglDDbwh
-         PuFg==
-X-Gm-Message-State: AOAM533D9ySq9D3QqPciMgb6zz4PLpoacHR75L52ePfr8OhkDhzVAdsq
-	1hN8QONEMvsJnMIphOvsuYWgG8QVE8j0WUh7s9fLIhHpXWKoVbgNXXtQY7MuHB/nuDCKS169LrC
-	cO0jbrK3TdF/xHUh6+afMUH7MBg8=
-X-Received: by 2002:adf:e292:: with SMTP id v18mr39964931wri.369.1635804579986;
-        Mon, 01 Nov 2021 15:09:39 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJysID67lQG9xljT2Fw7myH50fBYiqoMMqtw2ZP9fgHwBDYxBz5RqDHeu2EAgEpnNBhOmOcEEQ==
-X-Received: by 2002:adf:e292:: with SMTP id v18mr39964906wri.369.1635804579845;
-        Mon, 01 Nov 2021 15:09:39 -0700 (PDT)
+        bh=Eb45pt+rx+z3d/QNqQ0ka/rPHoe06plBoXsL9wFgC3A=;
+        b=aYJn7Rxn/khwZxZTbJUD7I1kCMlJq+CtZe9BOtRhaP8thZJ0p2EjCV3/jTbEmBJA3e
+         tb8IoaKUSx51lTjNX3B0IPxsU1MO8jIazFgdZIRF2PHP2hIuAR2Tem2xGHYuBIDT6pbQ
+         TROZoOhnws655eeOIMm/PCcxbPzo39l1jFec1GVkvaykac8HjWluGWFTFMharn1tsBZv
+         O0s9BMJxg0C5efXs+Lv9w41zWRXEaIwFEAR3camGtHcmND+36ChB8hpxDeV6awP9z713
+         4n93ZblyM8L4QN7zyZ6nTA+57tM12TGyLch/EdpA/GINOHFrugzwi4hvf/SFEK0kL+Ve
+         8JVQ==
+X-Gm-Message-State: AOAM530xlU421PpnKjlZxWHr8bcUhNHN6eh22vOhMS9IcXiqm7VZx5gd
+	GSCGrBl0eZD5RqH+spYncmNLWXG7gQqlKvhntPpgljVAxiDsiEqFBvKNG553eCc2X8x+F1E4fvQ
+	Y9kVIp4fpp79p/8VT4svmj3KyAGg=
+X-Received: by 2002:adf:e387:: with SMTP id e7mr30508149wrm.412.1635804567993;
+        Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwTDcj674kEGI9dl471cqGKZI5Q3j6okD5bAskecUMcRegbtpEz5VGFYHzxKsv8krfzx5uJsg==
+X-Received: by 2002:adf:e387:: with SMTP id e7mr30508114wrm.412.1635804567768;
+        Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -104,11 +105,10 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	=?UTF-8?q?Hyman=20Huang=28=E9=BB=84=E5=8B=87=29?= <huangy81@chinatelecom.cn>
-Subject: [PULL 19/20] memory: introduce total_dirty_pages to stat dirty pages
-Date: Mon,  1 Nov 2021 23:09:11 +0100
-Message-Id: <20211101220912.10039-20-quintela@redhat.com>
+	Anthony Perard <anthony.perard@citrix.com>
+Subject: [PULL 10/20] dump-guest-memory: Block live migration
+Date: Mon,  1 Nov 2021 23:09:02 +0100
+Message-Id: <20211101220912.10039-11-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -120,72 +120,80 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Hyman Huang(黄勇) <huangy81@chinatelecom.cn>
+From: Peter Xu <peterx@redhat.com>
 
-introduce global var total_dirty_pages to stat dirty pages
-along with memory_global_dirty_log_sync.
+Both dump-guest-memory and live migration caches vm state at the beginning.
+Either of them entering the other one will cause race on the vm state, and even
+more severe on that (please refer to the crash report in the bug link).
 
-Signed-off-by: Hyman Huang(黄勇) <huangy81@chinatelecom.cn>
-Reviewed-by: Peter Xu <peterx@redhat.com>
+Let's block live migration in dump-guest-memory, and that'll also block
+dump-guest-memory if it detected that we're during a live migration.
+
+Side note: migrate_del_blocker() can be called even if the blocker is not
+inserted yet, so it's safe to unconditionally delete that blocker in
+dump_cleanup (g_slist_remove allows no-entry-found case).
+
+Suggested-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
+Bugzilla: https://bugzilla.redhat.com/show_bug.cgi?id=1996609
+Signed-off-by: Peter Xu <peterx@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- include/exec/ram_addr.h | 9 +++++++++
- migration/dirtyrate.c   | 7 +++++++
- 2 files changed, 16 insertions(+)
+ dump/dump.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
-diff --git a/include/exec/ram_addr.h b/include/exec/ram_addr.h
-index 45c913264a..64fb936c7c 100644
---- a/include/exec/ram_addr.h
-+++ b/include/exec/ram_addr.h
-@@ -26,6 +26,8 @@
- #include "exec/ramlist.h"
- #include "exec/ramblock.h"
+diff --git a/dump/dump.c b/dump/dump.c
+index ab625909f3..662d0a62cd 100644
+--- a/dump/dump.c
++++ b/dump/dump.c
+@@ -29,6 +29,7 @@
+ #include "qemu/error-report.h"
+ #include "qemu/main-loop.h"
+ #include "hw/misc/vmcoreinfo.h"
++#include "migration/blocker.h"
  
-+extern uint64_t total_dirty_pages;
+ #ifdef TARGET_X86_64
+ #include "win_dump.h"
+@@ -47,6 +48,8 @@
+ 
+ #define MAX_GUEST_NOTE_SIZE (1 << 20) /* 1MB should be enough */
+ 
++static Error *dump_migration_blocker;
 +
- /**
-  * clear_bmap_size: calculate clear bitmap size
-  *
-@@ -373,6 +375,10 @@ static inline void cpu_physical_memory_set_dirty_lebitmap(unsigned long *bitmap,
-                         qatomic_or(
-                                 &blocks[DIRTY_MEMORY_MIGRATION][idx][offset],
-                                 temp);
-+                        if (unlikely(
-+                            global_dirty_tracking & GLOBAL_DIRTY_DIRTY_RATE)) {
-+                            total_dirty_pages += ctpopl(temp);
-+                        }
-                     }
+ #define ELF_NOTE_SIZE(hdr_size, name_size, desc_size)   \
+     ((DIV_ROUND_UP((hdr_size), 4) +                     \
+       DIV_ROUND_UP((name_size), 4) +                    \
+@@ -101,6 +104,7 @@ static int dump_cleanup(DumpState *s)
+             qemu_mutex_unlock_iothread();
+         }
+     }
++    migrate_del_blocker(dump_migration_blocker);
  
-                     if (tcg_enabled()) {
-@@ -403,6 +409,9 @@ static inline void cpu_physical_memory_set_dirty_lebitmap(unsigned long *bitmap,
-         for (i = 0; i < len; i++) {
-             if (bitmap[i] != 0) {
-                 c = leul_to_cpu(bitmap[i]);
-+                if (unlikely(global_dirty_tracking & GLOBAL_DIRTY_DIRTY_RATE)) {
-+                    total_dirty_pages += ctpopl(c);
-+                }
-                 do {
-                     j = ctzl(c);
-                     c &= ~(1ul << j);
-diff --git a/migration/dirtyrate.c b/migration/dirtyrate.c
-index f92c4b498e..17b3d2cbb5 100644
---- a/migration/dirtyrate.c
-+++ b/migration/dirtyrate.c
-@@ -28,6 +28,13 @@
- #include "sysemu/runstate.h"
- #include "exec/memory.h"
+     return 0;
+ }
+@@ -2005,6 +2009,21 @@ void qmp_dump_guest_memory(bool paging, const char *file,
+         return;
+     }
  
-+/*
-+ * total_dirty_pages is procted by BQL and is used
-+ * to stat dirty pages during the period of two
-+ * memory_global_dirty_log_sync
-+ */
-+uint64_t total_dirty_pages;
++    if (!dump_migration_blocker) {
++        error_setg(&dump_migration_blocker,
++                   "Live migration disabled: dump-guest-memory in progress");
++    }
 +
- typedef struct DirtyPageRecord {
-     uint64_t start_pages;
-     uint64_t end_pages;
++    /*
++     * Allows even for -only-migratable, but forbid migration during the
++     * process of dump guest memory.
++     */
++    if (migrate_add_blocker_internal(dump_migration_blocker, errp)) {
++        /* Remember to release the fd before passing it over to dump state */
++        close(fd);
++        return;
++    }
++
+     s = &dump_state_global;
+     dump_state_prepare(s);
+ 
 -- 
 2.33.1
 
