@@ -2,47 +2,48 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E61BC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 45E24C433F5
 	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1032560F56
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1032560F56
+	by mail.kernel.org (Postfix) with ESMTPS id EC0D360C51
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:09:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EC0D360C51
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219425.380217 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219427.380239 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfUX-0007q4-JH; Mon, 01 Nov 2021 22:09:21 +0000
+	id 1mhfUd-0008OK-9t; Mon, 01 Nov 2021 22:09:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219425.380217; Mon, 01 Nov 2021 22:09:21 +0000
+Received: by outflank-mailman (output) from mailman id 219427.380239; Mon, 01 Nov 2021 22:09:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfUX-0007px-G1; Mon, 01 Nov 2021 22:09:21 +0000
-Received: by outflank-mailman (input) for mailman id 219425;
- Mon, 01 Nov 2021 22:09:20 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1mhfUd-0008OD-6W; Mon, 01 Nov 2021 22:09:27 +0000
+Received: by outflank-mailman (input) for mailman id 219427;
+ Mon, 01 Nov 2021 22:09:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfUV-0007pl-Uw
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:20 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 48062fba-59dd-4727-ad3d-190af613b836;
- Mon, 01 Nov 2021 22:09:18 +0000 (UTC)
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-393-_dseDoJZNLCO2oPxmaRC9g-1; Mon, 01 Nov 2021 18:09:15 -0400
-Received: by mail-wm1-f69.google.com with SMTP id
- k25-20020a05600c1c9900b00332f798ba1dso174559wms.4
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:15 -0700 (PDT)
+ id 1mhfUb-0007pr-N9
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:09:25 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id 5c9453dd-3b60-11ec-854e-12813bfff9fa;
+ Mon, 01 Nov 2021 22:09:19 +0000 (UTC)
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-554-eXk5BEdqNLmhJzQa-EAuKg-1; Mon, 01 Nov 2021 18:09:18 -0400
+Received: by mail-wr1-f71.google.com with SMTP id
+ p17-20020adff211000000b0017b902a7701so3974632wro.19
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:18 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id i15sm630121wmb.20.2021.11.01.15.09.13
+ by smtp.gmail.com with ESMTPSA id r1sm726567wmr.36.2021.11.01.15.09.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:13 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,36 +55,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48062fba-59dd-4727-ad3d-190af613b836
+X-Inumbo-ID: 5c9453dd-3b60-11ec-854e-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804558;
+	s=mimecast20190719; t=1635804559;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=UcUIBTO6A2A6Mr3DNTGimCFNhmnrVDJGDlnfgcY6wsE=;
-	b=AbbEtOqV5+v9HxPUyMgPaJBRNs5rFG57PZzamI8JbU1O28Ar0ZkzItmo8wX5JeyGJ3lnfM
-	6ZAgG+yyzP+ddHGZOCA83YZz5N+JN7TW2hZJSjZ3Kq4bgxYYlaN/RvPO0KYMg3KrVofEC3
-	lWZlhKYK0/WNgQbTqg7phKFYVD95YNo=
-X-MC-Unique: _dseDoJZNLCO2oPxmaRC9g-1
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=hSQaBGBpJWy0B8DIEKBqKdfykrzA4ow4TzC1HWV6kH0=;
+	b=hNSNMXU2Y/ryCTwvF3V47yRHi+POxwBr4glDBEfYK0S0Ns5en9qYlDbeWezXQMwMhHb6MF
+	OWKSfyUcZnxqlywL8QICTVFh9cuj2k3GFG93i+t2kCnnKwFJvGDewoZ3tDcjlv9S0F5Y0s
+	PZGrDGd+EHen92OgTkJja7gRK8dXI8U=
+X-MC-Unique: eXk5BEdqNLmhJzQa-EAuKg-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=mg126+9me9ZhZB/Tacp08IAkZeaGvGDXykNGOzkIohU=;
-        b=fb+FhMtZ9nNS5KwSWKJvWGSd+POIbRy1UFwlH9CvEuiaCmfQfBuCPUQ5m3xMEEAJSt
-         Gy5bscYruo0PrWigkqNk1kyVnQBM4jHiP8bwgp/jqgZkYFF6R2u/TnAbLkNP2+xh0pJj
-         /4Ij3MrtM3q1Qf1YMFMnlQQ/5ynUgdSKwOWtV4tQyeH1hUsLuyhDIJYcIZsHewTYNsPZ
-         h3Cey7nDGnmPzF9Wmoc2cPMLDdpCi5CEZCqwNtqKcG05g5c3XCdFMLW0zZ49vn7b5woR
-         +s9qogKbMCXpNVs0mUNzryCadpnXA4QAtUT4vRIFV/eMBpI8QghdtdfLh7HX8YNuTWMi
-         f3Yw==
-X-Gm-Message-State: AOAM533b72YJ9YBItTlREBmhUQtHq8RHXXdB38pE2aoYIQ+P7gGisAoR
-	+JVg+EniLDwYEUjPIsONXVsStcNhyh4XUHeoVImnVMjuV+zGFpi0v621nPwxr7CoqifIzM+CaPD
-	lvYakb1xr5Xlai6sNYwGCQvW4cS0=
-X-Received: by 2002:a5d:6e8c:: with SMTP id k12mr40207231wrz.401.1635804554337;
-        Mon, 01 Nov 2021 15:09:14 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwiYqS6XG9xwq0Xi+0IIDYOMlQDxPDwjRqxs0xc44YT7VvgO+jFUiosfcGK1mj6k1mDxUBPBw==
-X-Received: by 2002:a5d:6e8c:: with SMTP id k12mr40207187wrz.401.1635804554086;
-        Mon, 01 Nov 2021 15:09:14 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=hSQaBGBpJWy0B8DIEKBqKdfykrzA4ow4TzC1HWV6kH0=;
+        b=S365fwufjsHeXo+5HWY4KYuTzdl6YXz4Gra/SjD4LMpAgriVyQ3gQKtDfvZo7IVuWf
+         qDST12A2D0pTi5FfKNInhTX/GNqzDVMj32qXwZSsi/u+18lSTrrOiZPHCg4s5t2gTkL+
+         bNb+0f21C8Y67ejQyZRLA2n4a3NhKgGI5BuBxt9fo5ZwNIm+7eICiuvXGLbNsZ7wr9oD
+         DHHkyLCF5Ib72sV1GQWej5YQSsH2xybrbA7/1yT66kJFzkIMtUTomW4usMk4GLDzd3IH
+         Z89LMxTYw8rbh4J0ODcy/AmAadHeQTcs0SqwUocW+ZkRL0vgLwEQBEamcyPmYGz46Qw5
+         it7g==
+X-Gm-Message-State: AOAM533A6yKO9SNUg2K8jOG8fGzHiPdLiz2noI22B9FJQIcFDUcNIJWP
+	aNCKVakOoNThu/NI+2yldGAqiaythCbT+/ZLZ+UepEAp4zLIwD3WX8zT8otw1dF4CSKhijGF6BM
+	qfHmGejZfp9su6GxQRViK7abi2Ro=
+X-Received: by 2002:adf:a78a:: with SMTP id j10mr42370726wrc.105.1635804557396;
+        Mon, 01 Nov 2021 15:09:17 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzHSBNKTiLO5JlEV3iFexkub7waHAM8W6BpiJr+wCxnuH8FeGBZ5Ook1cyDpaRUcX/w/4yrnA==
+X-Received: by 2002:adf:a78a:: with SMTP id j10mr42370691wrc.105.1635804557180;
+        Mon, 01 Nov 2021 15:09:17 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -103,114 +105,113 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>
-Subject: [PULL 00/20] Migration 20211031 patches
-Date: Mon,  1 Nov 2021 23:08:52 +0100
-Message-Id: <20211101220912.10039-1-quintela@redhat.com>
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Hyman=20Huang=28=C3=A9=C2=BB=E2=80=9E=C3=A5=E2=80=B9?= =?UTF-8?q?=E2=80=A1=29?= <huangy81@chinatelecom.cn>
+Subject: [PULL 02/20] KVM: introduce dirty_pages and kvm_dirty_ring_enabled
+Date: Mon,  1 Nov 2021 23:08:54 +0100
+Message-Id: <20211101220912.10039-3-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
+In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
+References: <20211101220912.10039-1-quintela@redhat.com>
 MIME-Version: 1.0
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=quintela@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The following changes since commit af531756d25541a1b3b3d9a14e72e7fedd941a2e=
-:=0D
-=0D
-  Merge remote-tracking branch 'remotes/philmd/tags/renesas-20211030' into =
-staging (2021-10-30 11:31:41 -0700)=0D
-=0D
-are available in the Git repository at:=0D
-=0D
-  https://github.com/juanquintela/qemu.git tags/migration-20211031-pull-req=
-uest=0D
-=0D
-for you to fetch changes up to 826b8bc80cb191557a4ce7cf0e155b436d2d1afa:=0D
-=0D
-  migration/dirtyrate: implement dirty-bitmap dirtyrate calculation (2021-1=
-1-01 22:56:44 +0100)=0D
-=0D
-----------------------------------------------------------------=0D
-Migration Pull request=0D
-=0D
-Hi=0D
-=0D
-this includes pending bits of migration patches.=0D
-=0D
-- virtio-mem support by David Hildenbrand=0D
-- dirtyrate improvements by Hyman Huang=0D
-- fix rdma wrid by Li Zhijian=0D
-- dump-guest-memory fixes by Peter Xu=0D
-=0D
-Pleas apply.=0D
-=0D
-Thanks, Juan.=0D
-=0D
-----------------------------------------------------------------=0D
-=0D
-David Hildenbrand (8):=0D
-  memory: Introduce replay_discarded callback for RamDiscardManager=0D
-  virtio-mem: Implement replay_discarded RamDiscardManager callback=0D
-  migration/ram: Handle RAMBlocks with a RamDiscardManager on the=0D
-    migration source=0D
-  virtio-mem: Drop precopy notifier=0D
-  migration/postcopy: Handle RAMBlocks with a RamDiscardManager on the=0D
-    destination=0D
-  migration: Simplify alignment and alignment checks=0D
-  migration/ram: Factor out populating pages readable in=0D
-    ram_block_populate_pages()=0D
-  migration/ram: Handle RAMBlocks with a RamDiscardManager on background=0D
-    snapshots=0D
-=0D
-Hyman Huang(=C3=A9=C2=BB=E2=80=9E=C3=A5=E2=80=B9=E2=80=A1) (6):=0D
-  KVM: introduce dirty_pages and kvm_dirty_ring_enabled=0D
-  memory: make global_dirty_tracking a bitmask=0D
-  migration/dirtyrate: introduce struct and adjust DirtyRateStat=0D
-  migration/dirtyrate: adjust order of registering thread=0D
-  migration/dirtyrate: move init step of calculation to main thread=0D
-  migration/dirtyrate: implement dirty-ring dirtyrate calculation=0D
-=0D
-Hyman Huang(=E9=BB=84=E5=8B=87) (2):=0D
-  memory: introduce total_dirty_pages to stat dirty pages=0D
-  migration/dirtyrate: implement dirty-bitmap dirtyrate calculation=0D
-=0D
-Li Zhijian (1):=0D
-  migration/rdma: Fix out of order wrid=0D
-=0D
-Peter Xu (3):=0D
-  migration: Make migration blocker work for snapshots too=0D
-  migration: Add migrate_add_blocker_internal()=0D
-  dump-guest-memory: Block live migration=0D
-=0D
- qapi/migration.json            |  48 ++++-=0D
- include/exec/memory.h          |  41 +++-=0D
- include/exec/ram_addr.h        |  13 +-=0D
- include/hw/core/cpu.h          |   1 +=0D
- include/hw/virtio/virtio-mem.h |   3 -=0D
- include/migration/blocker.h    |  16 ++=0D
- include/sysemu/kvm.h           |   1 +=0D
- migration/dirtyrate.h          |  21 +-=0D
- migration/ram.h                |   1 +=0D
- accel/kvm/kvm-all.c            |   7 +=0D
- accel/stubs/kvm-stub.c         |   5 +=0D
- dump/dump.c                    |  19 ++=0D
- hw/i386/xen/xen-hvm.c          |   4 +-=0D
- hw/virtio/virtio-mem.c         |  92 ++++++---=0D
- migration/dirtyrate.c          | 367 ++++++++++++++++++++++++++++++---=0D
- migration/migration.c          |  30 +--=0D
- migration/postcopy-ram.c       |  40 +++-=0D
- migration/ram.c                | 180 ++++++++++++++--=0D
- migration/rdma.c               | 138 +++++++++----=0D
- softmmu/memory.c               |  43 +++-=0D
- hmp-commands.hx                |   8 +-=0D
- migration/trace-events         |   2 +=0D
- softmmu/trace-events           |   1 +=0D
- 23 files changed, 909 insertions(+), 172 deletions(-)=0D
-=0D
---=20=0D
-2.33.1=0D
-=0D
+From: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
+
+dirty_pages is used to calculate dirtyrate via dirty ring, when
+enabled, kvm-reaper will increase the dirty pages after gfns
+being dirtied.
+
+kvm_dirty_ring_enabled shows if kvm-reaper is working. dirtyrate
+thread could use it to check if measurement can base on dirty
+ring feature.
+
+Signed-off-by: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
+Message-Id: <fee5fb2ab17ec2159405fc54a3cff8e02322f816.1624040308.git.huangy81@chinatelecom.cn>
+Reviewed-by: Peter Xu <peterx@redhat.com>
+Reviewed-by: Juan Quintela <quintela@redhat.com>
+Signed-off-by: Juan Quintela <quintela@redhat.com>
+---
+ include/hw/core/cpu.h  | 1 +
+ include/sysemu/kvm.h   | 1 +
+ accel/kvm/kvm-all.c    | 7 +++++++
+ accel/stubs/kvm-stub.c | 5 +++++
+ 4 files changed, 14 insertions(+)
+
+diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+index 1a10497af3..e948e81f1a 100644
+--- a/include/hw/core/cpu.h
++++ b/include/hw/core/cpu.h
+@@ -381,6 +381,7 @@ struct CPUState {
+     struct kvm_run *kvm_run;
+     struct kvm_dirty_gfn *kvm_dirty_gfns;
+     uint32_t kvm_fetch_index;
++    uint64_t dirty_pages;
+ 
+     /* Used for events with 'vcpu' and *without* the 'disabled' properties */
+     DECLARE_BITMAP(trace_dstate_delayed, CPU_TRACE_DSTATE_MAX_EVENTS);
+diff --git a/include/sysemu/kvm.h b/include/sysemu/kvm.h
+index a1ab1ee12d..7b22aeb6ae 100644
+--- a/include/sysemu/kvm.h
++++ b/include/sysemu/kvm.h
+@@ -547,4 +547,5 @@ bool kvm_cpu_check_are_resettable(void);
+ 
+ bool kvm_arch_cpu_check_are_resettable(void);
+ 
++bool kvm_dirty_ring_enabled(void);
+ #endif
+diff --git a/accel/kvm/kvm-all.c b/accel/kvm/kvm-all.c
+index db8d83b137..eecd8031cf 100644
+--- a/accel/kvm/kvm-all.c
++++ b/accel/kvm/kvm-all.c
+@@ -469,6 +469,7 @@ int kvm_init_vcpu(CPUState *cpu, Error **errp)
+     cpu->kvm_fd = ret;
+     cpu->kvm_state = s;
+     cpu->vcpu_dirty = true;
++    cpu->dirty_pages = 0;
+ 
+     mmap_size = kvm_ioctl(s, KVM_GET_VCPU_MMAP_SIZE, 0);
+     if (mmap_size < 0) {
+@@ -743,6 +744,7 @@ static uint32_t kvm_dirty_ring_reap_one(KVMState *s, CPUState *cpu)
+         count++;
+     }
+     cpu->kvm_fetch_index = fetch;
++    cpu->dirty_pages += count;
+ 
+     return count;
+ }
+@@ -2296,6 +2298,11 @@ bool kvm_vcpu_id_is_valid(int vcpu_id)
+     return vcpu_id >= 0 && vcpu_id < kvm_max_vcpu_id(s);
+ }
+ 
++bool kvm_dirty_ring_enabled(void)
++{
++    return kvm_state->kvm_dirty_ring_size ? true : false;
++}
++
+ static int kvm_init(MachineState *ms)
+ {
+     MachineClass *mc = MACHINE_GET_CLASS(ms);
+diff --git a/accel/stubs/kvm-stub.c b/accel/stubs/kvm-stub.c
+index 5b1d00a222..5319573e00 100644
+--- a/accel/stubs/kvm-stub.c
++++ b/accel/stubs/kvm-stub.c
+@@ -147,4 +147,9 @@ bool kvm_arm_supports_user_irq(void)
+ {
+     return false;
+ }
++
++bool kvm_dirty_ring_enabled(void)
++{
++    return false;
++}
+ #endif
+-- 
+2.33.1
 
 
