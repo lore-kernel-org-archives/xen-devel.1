@@ -2,48 +2,48 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 71285C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D583C433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1BB5160C49
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1BB5160C49
+	by mail.kernel.org (Postfix) with ESMTPS id 1843660C51
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:18:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 1843660C51
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219541.380426 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219542.380431 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfdU-0003BM-QU; Mon, 01 Nov 2021 22:18:36 +0000
+	id 1mhfdV-0003Gf-9n; Mon, 01 Nov 2021 22:18:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219541.380426; Mon, 01 Nov 2021 22:18:36 +0000
+Received: by outflank-mailman (output) from mailman id 219542.380431; Mon, 01 Nov 2021 22:18:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfdU-0003BF-NJ; Mon, 01 Nov 2021 22:18:36 +0000
-Received: by outflank-mailman (input) for mailman id 219541;
+	id 1mhfdV-0003FY-1w; Mon, 01 Nov 2021 22:18:37 +0000
+Received: by outflank-mailman (input) for mailman id 219542;
  Mon, 01 Nov 2021 22:18:35 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfVP-0007pr-PD
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:15 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
+ id 1mhfVe-0007pr-Pf
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:30 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.129.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 67a04d9e-3b60-11ec-854e-12813bfff9fa;
- Mon, 01 Nov 2021 22:09:38 +0000 (UTC)
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-421-023sZdd2N7eeCddHFagydg-1; Mon, 01 Nov 2021 18:09:37 -0400
-Received: by mail-wm1-f69.google.com with SMTP id
- n189-20020a1c27c6000000b00322f2e380f2so171751wmn.6
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:36 -0700 (PDT)
+ id 6a026a0f-3b60-11ec-854e-12813bfff9fa;
+ Mon, 01 Nov 2021 22:09:43 +0000 (UTC)
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-101-hSh5pPCwOLqPUsAmPza-aA-1; Mon, 01 Nov 2021 18:09:42 -0400
+Received: by mail-wm1-f72.google.com with SMTP id
+ l187-20020a1c25c4000000b0030da46b76daso166204wml.9
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:42 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id l8sm667683wmc.40.2021.11.01.15.09.34
+ by smtp.gmail.com with ESMTPSA id k8sm688985wms.41.2021.11.01.15.09.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:35 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,37 +55,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 67a04d9e-3b60-11ec-854e-12813bfff9fa
+X-Inumbo-ID: 6a026a0f-3b60-11ec-854e-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804578;
+	s=mimecast20190719; t=1635804583;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=H80g6dMw2Mv72MY8J/rqWuWQm27PgZOf7gOHLz8JbhA=;
-	b=bjsc1aWn+K8zk7qoHc4vHv+090mDJzTUnYChUKAmdLv0SI3mBliUZgb20OdxFMlFf33slq
-	tvU7U65m0m686+XN+xWYoM0541HcdlNxQna19nV/cWk7jzOPxwxsamKH3I7HTZAQRPSsPj
-	utRhPnLylBbhLvMj8FZFT+N8dg0YyjI=
-X-MC-Unique: 023sZdd2N7eeCddHFagydg-1
+	bh=jP/I5apHpfB9miqWjOSmHHOjh4FLTnrs+cMqC3xHGrM=;
+	b=UJ5ZYR8tosx+CzcwON4T+X4Pi1p9fiytMUwu6K59IdAOrEjcL6tYOckZh6mWgAEMaWzGNb
+	GJsPqHbPkym0ee8SwOdKSLQXidEtiXVZUgTjkyK+QblnVNU4R9BH13RooVy4Fcax8pQ/jC
+	Gf+M7G/GN81pNH1GLN9S/L/bL4GtVqg=
+X-MC-Unique: hSh5pPCwOLqPUsAmPza-aA-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=H80g6dMw2Mv72MY8J/rqWuWQm27PgZOf7gOHLz8JbhA=;
-        b=R45WHOgqB7E9BsB7P/1qvgHW2iq8CBKhb6en4Yl7CAJ9x1Y9mCqaRJUCU1bgIrpo4A
-         AT+0xv1WibDCYhtXz+j/v13Pct8lMhtESsJEqvpQBGCIHuwQUrHkKtlO8LPpvQ8LZ4K6
-         MlSLeYZu4hPJbxZbl6iS9MQABN3ToeuIVKGqjWIAJHNrkkqszppDuUZuM2bKPPHktg9N
-         37Hstwet6oJcy+HY4gj02dyJluO7PGGwO7UlPEO/dBg1Sd7I9moeP8Qza0oSfKc2pUsz
-         GfeNtSsMnTFcBBmnpkr9pd7YzpoJQGnKUVwNsE7x8mO8vqMbfkHD5lGKBQyU6U1eyjbn
-         TkHw==
-X-Gm-Message-State: AOAM533vYt5SG10rXBNW6wBv2E5i4vIjVecs6ITXDmZ0zh669wGMKj++
-	1Hy0V+YsVCi07bZv1r4cO0P0Hll1r21N+u5F4/AaBt9rETu9LT3xi9vGPton8saUIkmmVuXcVhB
-	UBUn6pXVMB0HUexziwr060ZIErZA=
-X-Received: by 2002:a05:6000:54e:: with SMTP id b14mr40644770wrf.308.1635804575959;
-        Mon, 01 Nov 2021 15:09:35 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyeYrI4G4BKiXAB/InRvOnWTy+hbH8wuPZhOXw0coLYSKiQ6S2dlFWrOoqN5kf/uLhyOXH1Ww==
-X-Received: by 2002:a05:6000:54e:: with SMTP id b14mr40644755wrf.308.1635804575814;
-        Mon, 01 Nov 2021 15:09:35 -0700 (PDT)
+        bh=jP/I5apHpfB9miqWjOSmHHOjh4FLTnrs+cMqC3xHGrM=;
+        b=0NuVXFoAXvHH9UPq7E6Sn51EG4cbKpXyTf34UObSPcGvQqWFFU+GgzY+sBC9+jrTXj
+         IaDAx7Nr7GyRIKZ2fvA/IwJuNy9rt25tJbHmhwRFX+hZ08ZpKbkkVOIVbsaxbh10DFx7
+         ZalajO3m/Nsl9aGNCE8aVGHjX0OuabeTIX486WrX6cAQPbjEwC2lpkEIRWPFUO2aijKJ
+         3GLLUdZ0knFIgyJGTt1FZ6ad0O/FJJWUIqH5op7R0i9rZ7AXxb5+Lp8bRYsj6bcveL2A
+         GxEK/QpZiru6Ol2Cy8di5aL1+4WTeVe0mZ9uOljsEIECRzqSJULZGX+QHU9JzZQEeuXh
+         g47g==
+X-Gm-Message-State: AOAM533QNxkUy+VBelWBg+x4gEbndstI0By10Vszjqs0gevMFqk/Zn3m
+	CNPQjgzIeMNiKkdJCKISC3ls5Sf83UtvvE1/80tfKmrkFLgLCcrwq9sQQHOATxk51UsdITfJiGp
+	3TCplFM8LwKk/BS0jui6pMK7KFfg=
+X-Received: by 2002:a5d:69ca:: with SMTP id s10mr17619025wrw.312.1635804581262;
+        Mon, 01 Nov 2021 15:09:41 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwekiY665T3KtWYk+MojmKh2E8nDk/brzhW8Smm/r4bdKRN1BvOX4dI3pL5wzRW0aYS3i58/A==
+X-Received: by 2002:a5d:69ca:: with SMTP id s10mr17619009wrw.312.1635804581077;
+        Mon, 01 Nov 2021 15:09:41 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -105,10 +105,11 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>
-Subject: [PULL 16/20] migration: Simplify alignment and alignment checks
-Date: Mon,  1 Nov 2021 23:09:08 +0100
-Message-Id: <20211101220912.10039-17-quintela@redhat.com>
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Hyman=20Huang=28=E9=BB=84=E5=8B=87=29?= <huangy81@chinatelecom.cn>
+Subject: [PULL 20/20] migration/dirtyrate: implement dirty-bitmap dirtyrate calculation
+Date: Mon,  1 Nov 2021 23:09:12 +0100
+Message-Id: <20211101220912.10039-21-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -120,100 +121,232 @@ X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: David Hildenbrand <david@redhat.com>
+From: Hyman Huang(黄勇) <huangy81@chinatelecom.cn>
 
-Let's use QEMU_ALIGN_DOWN() and friends to make the code a bit easier to
-read.
+introduce dirty-bitmap mode as the third method of calc-dirty-rate.
+implement dirty-bitmap dirtyrate calculation, which can be used
+to measuring dirtyrate in the absence of dirty-ring.
 
+introduce "dirty_bitmap:-b" option in hmp calc_dirty_rate to
+indicate dirty bitmap method should be used for calculation.
+
+Signed-off-by: Hyman Huang(黄勇) <huangy81@chinatelecom.cn>
 Reviewed-by: Peter Xu <peterx@redhat.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- migration/migration.c    | 6 +++---
- migration/postcopy-ram.c | 9 ++++-----
- migration/ram.c          | 2 +-
- 3 files changed, 8 insertions(+), 9 deletions(-)
+ qapi/migration.json   |   6 ++-
+ migration/dirtyrate.c | 112 ++++++++++++++++++++++++++++++++++++++----
+ hmp-commands.hx       |   9 ++--
+ 3 files changed, 112 insertions(+), 15 deletions(-)
 
-diff --git a/migration/migration.c b/migration/migration.c
-index e1c0082530..53b9a8af96 100644
---- a/migration/migration.c
-+++ b/migration/migration.c
-@@ -391,7 +391,7 @@ int migrate_send_rp_message_req_pages(MigrationIncomingState *mis,
- int migrate_send_rp_req_pages(MigrationIncomingState *mis,
-                               RAMBlock *rb, ram_addr_t start, uint64_t haddr)
- {
--    void *aligned = (void *)(uintptr_t)(haddr & (-qemu_ram_pagesize(rb)));
-+    void *aligned = (void *)(uintptr_t)ROUND_DOWN(haddr, qemu_ram_pagesize(rb));
-     bool received = false;
+diff --git a/qapi/migration.json b/qapi/migration.json
+index fae4bc608c..87146ceea2 100644
+--- a/qapi/migration.json
++++ b/qapi/migration.json
+@@ -1770,13 +1770,15 @@
+ #
+ # @page-sampling: calculate dirtyrate by sampling pages.
+ #
+-# @dirty-ring: calculate dirtyrate by via dirty ring.
++# @dirty-ring: calculate dirtyrate by dirty ring.
++#
++# @dirty-bitmap: calculate dirtyrate by dirty bitmap.
+ #
+ # Since: 6.1
+ #
+ ##
+ { 'enum': 'DirtyRateMeasureMode',
+-  'data': ['page-sampling', 'dirty-ring'] }
++  'data': ['page-sampling', 'dirty-ring', 'dirty-bitmap'] }
  
-     WITH_QEMU_LOCK_GUARD(&mis->page_request_mutex) {
-@@ -2637,8 +2637,8 @@ static void migrate_handle_rp_req_pages(MigrationState *ms, const char* rbname,
-      * Since we currently insist on matching page sizes, just sanity check
-      * we're being asked for whole host pages.
-      */
--    if (start & (our_host_ps - 1) ||
--       (len & (our_host_ps - 1))) {
-+    if (!QEMU_IS_ALIGNED(start, our_host_ps) ||
-+        !QEMU_IS_ALIGNED(len, our_host_ps)) {
-         error_report("%s: Misaligned page request, start: " RAM_ADDR_FMT
-                      " len: %zd", __func__, start, len);
-         mark_source_rp_bad(ms);
-diff --git a/migration/postcopy-ram.c b/migration/postcopy-ram.c
-index 3609ce7e52..e721f69d0f 100644
---- a/migration/postcopy-ram.c
-+++ b/migration/postcopy-ram.c
-@@ -402,7 +402,7 @@ bool postcopy_ram_supported_by_host(MigrationIncomingState *mis)
-                      strerror(errno));
-         goto out;
-     }
--    g_assert(((size_t)testarea & (pagesize - 1)) == 0);
-+    g_assert(QEMU_PTR_IS_ALIGNED(testarea, pagesize));
- 
-     reg_struct.range.start = (uintptr_t)testarea;
-     reg_struct.range.len = pagesize;
-@@ -660,7 +660,7 @@ int postcopy_wake_shared(struct PostCopyFD *pcfd,
-     struct uffdio_range range;
-     int ret;
-     trace_postcopy_wake_shared(client_addr, qemu_ram_get_idstr(rb));
--    range.start = client_addr & ~(pagesize - 1);
-+    range.start = ROUND_DOWN(client_addr, pagesize);
-     range.len = pagesize;
-     ret = ioctl(pcfd->fd, UFFDIO_WAKE, &range);
-     if (ret) {
-@@ -702,8 +702,7 @@ static int postcopy_request_page(MigrationIncomingState *mis, RAMBlock *rb,
- int postcopy_request_shared_page(struct PostCopyFD *pcfd, RAMBlock *rb,
-                                  uint64_t client_addr, uint64_t rb_offset)
- {
--    size_t pagesize = qemu_ram_pagesize(rb);
--    uint64_t aligned_rbo = rb_offset & ~(pagesize - 1);
-+    uint64_t aligned_rbo = ROUND_DOWN(rb_offset, qemu_ram_pagesize(rb));
-     MigrationIncomingState *mis = migration_incoming_get_current();
- 
-     trace_postcopy_request_shared_page(pcfd->idstr, qemu_ram_get_idstr(rb),
-@@ -993,7 +992,7 @@ static void *postcopy_ram_fault_thread(void *opaque)
-                 break;
+ ##
+ # @DirtyRateInfo:
+diff --git a/migration/dirtyrate.c b/migration/dirtyrate.c
+index 17b3d2cbb5..d65e744af9 100644
+--- a/migration/dirtyrate.c
++++ b/migration/dirtyrate.c
+@@ -15,6 +15,7 @@
+ #include "qapi/error.h"
+ #include "cpu.h"
+ #include "exec/ramblock.h"
++#include "exec/ram_addr.h"
+ #include "qemu/rcu_queue.h"
+ #include "qemu/main-loop.h"
+ #include "qapi/qapi-commands-migration.h"
+@@ -118,6 +119,10 @@ static struct DirtyRateInfo *query_dirty_rate_info(void)
              }
+             info->vcpu_dirty_rate = head;
+         }
++
++        if (dirtyrate_mode == DIRTY_RATE_MEASURE_MODE_DIRTY_BITMAP) {
++            info->sample_pages = 0;
++        }
+     }
  
--            rb_offset &= ~(qemu_ram_pagesize(rb) - 1);
-+            rb_offset = ROUND_DOWN(rb_offset, qemu_ram_pagesize(rb));
-             trace_postcopy_ram_fault_thread_request(msg.arg.pagefault.address,
-                                                 qemu_ram_get_idstr(rb),
-                                                 rb_offset,
-diff --git a/migration/ram.c b/migration/ram.c
-index 4f629de7d0..54df5dc0fc 100644
---- a/migration/ram.c
-+++ b/migration/ram.c
-@@ -811,7 +811,7 @@ static void migration_clear_memory_region_dirty_bitmap(RAMBlock *rb,
-     assert(shift >= 6);
- 
-     size = 1ULL << (TARGET_PAGE_BITS + shift);
--    start = (((ram_addr_t)page) << TARGET_PAGE_BITS) & (-size);
-+    start = QEMU_ALIGN_DOWN((ram_addr_t)page << TARGET_PAGE_BITS, size);
-     trace_migration_bitmap_clear_dirty(rb->idstr, start, size, page);
-     memory_region_clear_dirty_bitmap(rb->mr, start, size);
+     trace_query_dirty_rate_info(DirtyRateStatus_str(CalculatingState));
+@@ -429,6 +434,79 @@ static int64_t do_calculate_dirtyrate_vcpu(DirtyPageRecord dirty_pages)
+     return memory_size_MB / time_s;
  }
+ 
++static inline void record_dirtypages_bitmap(DirtyPageRecord *dirty_pages,
++                                            bool start)
++{
++    if (start) {
++        dirty_pages->start_pages = total_dirty_pages;
++    } else {
++        dirty_pages->end_pages = total_dirty_pages;
++    }
++}
++
++static void do_calculate_dirtyrate_bitmap(DirtyPageRecord dirty_pages)
++{
++    DirtyStat.dirty_rate = do_calculate_dirtyrate_vcpu(dirty_pages);
++}
++
++static inline void dirtyrate_manual_reset_protect(void)
++{
++    RAMBlock *block = NULL;
++
++    WITH_RCU_READ_LOCK_GUARD() {
++        RAMBLOCK_FOREACH_MIGRATABLE(block) {
++            memory_region_clear_dirty_bitmap(block->mr, 0,
++                                             block->used_length);
++        }
++    }
++}
++
++static void calculate_dirtyrate_dirty_bitmap(struct DirtyRateConfig config)
++{
++    int64_t msec = 0;
++    int64_t start_time;
++    DirtyPageRecord dirty_pages;
++
++    qemu_mutex_lock_iothread();
++    memory_global_dirty_log_start(GLOBAL_DIRTY_DIRTY_RATE);
++
++    /*
++     * 1'round of log sync may return all 1 bits with
++     * KVM_DIRTY_LOG_INITIALLY_SET enable
++     * skip it unconditionally and start dirty tracking
++     * from 2'round of log sync
++     */
++    memory_global_dirty_log_sync();
++
++    /*
++     * reset page protect manually and unconditionally.
++     * this make sure kvm dirty log be cleared if
++     * KVM_DIRTY_LOG_MANUAL_PROTECT_ENABLE cap is enabled.
++     */
++    dirtyrate_manual_reset_protect();
++    qemu_mutex_unlock_iothread();
++
++    record_dirtypages_bitmap(&dirty_pages, true);
++
++    start_time = qemu_clock_get_ms(QEMU_CLOCK_REALTIME);
++    DirtyStat.start_time = start_time / 1000;
++
++    msec = config.sample_period_seconds * 1000;
++    msec = set_sample_page_period(msec, start_time);
++    DirtyStat.calc_time = msec / 1000;
++
++    /*
++     * dirtyrate_global_dirty_log_stop do two things.
++     * 1. fetch dirty bitmap from kvm
++     * 2. stop dirty tracking
++     */
++    dirtyrate_global_dirty_log_stop();
++
++    record_dirtypages_bitmap(&dirty_pages, false);
++
++    do_calculate_dirtyrate_bitmap(dirty_pages);
++}
++
+ static void calculate_dirtyrate_dirty_ring(struct DirtyRateConfig config)
+ {
+     CPUState *cpu;
+@@ -514,7 +592,9 @@ out:
+ 
+ static void calculate_dirtyrate(struct DirtyRateConfig config)
+ {
+-    if (config.mode == DIRTY_RATE_MEASURE_MODE_DIRTY_RING) {
++    if (config.mode == DIRTY_RATE_MEASURE_MODE_DIRTY_BITMAP) {
++        calculate_dirtyrate_dirty_bitmap(config);
++    } else if (config.mode == DIRTY_RATE_MEASURE_MODE_DIRTY_RING) {
+         calculate_dirtyrate_dirty_ring(config);
+     } else {
+         calculate_dirtyrate_sample_vm(config);
+@@ -597,12 +677,15 @@ void qmp_calc_dirty_rate(int64_t calc_time,
+ 
+     /*
+      * dirty ring mode only works when kvm dirty ring is enabled.
++     * on the contrary, dirty bitmap mode is not.
+      */
+-    if ((mode == DIRTY_RATE_MEASURE_MODE_DIRTY_RING) &&
+-        !kvm_dirty_ring_enabled()) {
+-        error_setg(errp, "dirty ring is disabled, use sample-pages method "
+-                         "or remeasure later.");
+-        return;
++    if (((mode == DIRTY_RATE_MEASURE_MODE_DIRTY_RING) &&
++        !kvm_dirty_ring_enabled()) ||
++        ((mode == DIRTY_RATE_MEASURE_MODE_DIRTY_BITMAP) &&
++         kvm_dirty_ring_enabled())) {
++        error_setg(errp, "mode %s is not enabled, use other method instead.",
++                         DirtyRateMeasureMode_str(mode));
++         return;
+     }
+ 
+     /*
+@@ -678,9 +761,8 @@ void hmp_calc_dirty_rate(Monitor *mon, const QDict *qdict)
+     int64_t sample_pages = qdict_get_try_int(qdict, "sample_pages_per_GB", -1);
+     bool has_sample_pages = (sample_pages != -1);
+     bool dirty_ring = qdict_get_try_bool(qdict, "dirty_ring", false);
+-    DirtyRateMeasureMode mode =
+-        (dirty_ring ? DIRTY_RATE_MEASURE_MODE_DIRTY_RING :
+-         DIRTY_RATE_MEASURE_MODE_PAGE_SAMPLING);
++    bool dirty_bitmap = qdict_get_try_bool(qdict, "dirty_bitmap", false);
++    DirtyRateMeasureMode mode = DIRTY_RATE_MEASURE_MODE_PAGE_SAMPLING;
+     Error *err = NULL;
+ 
+     if (!sec) {
+@@ -688,6 +770,18 @@ void hmp_calc_dirty_rate(Monitor *mon, const QDict *qdict)
+         return;
+     }
+ 
++    if (dirty_ring && dirty_bitmap) {
++        monitor_printf(mon, "Either dirty ring or dirty bitmap "
++                       "can be specified!\n");
++        return;
++    }
++
++    if (dirty_bitmap) {
++        mode = DIRTY_RATE_MEASURE_MODE_DIRTY_BITMAP;
++    } else if (dirty_ring) {
++        mode = DIRTY_RATE_MEASURE_MODE_DIRTY_RING;
++    }
++
+     qmp_calc_dirty_rate(sec, has_sample_pages, sample_pages, true,
+                         mode, &err);
+     if (err) {
+diff --git a/hmp-commands.hx b/hmp-commands.hx
+index b6d47bd03f..3a5aeba3fe 100644
+--- a/hmp-commands.hx
++++ b/hmp-commands.hx
+@@ -1737,9 +1737,10 @@ ERST
+ 
+     {
+         .name       = "calc_dirty_rate",
+-        .args_type  = "dirty_ring:-r,second:l,sample_pages_per_GB:l?",
+-        .params     = "[-r] second [sample_pages_per_GB]",
+-        .help       = "start a round of guest dirty rate measurement (using -d to"
+-                      "\n\t\t\t specify dirty ring as the method of calculation)",
++        .args_type  = "dirty_ring:-r,dirty_bitmap:-b,second:l,sample_pages_per_GB:l?",
++        .params     = "[-r] [-b] second [sample_pages_per_GB]",
++        .help       = "start a round of guest dirty rate measurement (using -r to"
++                      "\n\t\t\t specify dirty ring as the method of calculation and"
++                      "\n\t\t\t -b to specify dirty bitmap as method of calculation)",
+         .cmd        = hmp_calc_dirty_rate,
+     },
 -- 
 2.33.1
 
