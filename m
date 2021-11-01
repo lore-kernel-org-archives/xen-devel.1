@@ -2,52 +2,51 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 931F2C433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 73ACCC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5908D610FD
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 5908D610FD
+	by mail.kernel.org (Postfix) with ESMTPS id 41C4C610FC
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 15:20:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 41C4C610FC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219248.380029 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219249.380046 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhZ75-0002jS-OO; Mon, 01 Nov 2021 15:20:43 +0000
+	id 1mhZ7A-0003bh-65; Mon, 01 Nov 2021 15:20:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219248.380029; Mon, 01 Nov 2021 15:20:43 +0000
+Received: by outflank-mailman (output) from mailman id 219249.380046; Mon, 01 Nov 2021 15:20:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhZ75-0002hS-Dq; Mon, 01 Nov 2021 15:20:43 +0000
-Received: by outflank-mailman (input) for mailman id 219248;
- Mon, 01 Nov 2021 15:20:41 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mhZ79-0003bU-Vm; Mon, 01 Nov 2021 15:20:47 +0000
+Received: by outflank-mailman (input) for mailman id 219249;
+ Mon, 01 Nov 2021 15:20:46 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rWtG=PU=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1mhZ73-0008DB-Na
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 15:20:41 +0000
+ id 1mhZ78-0008DA-Lt
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 15:20:46 +0000
 Received: from smtp-out1.suse.de (unknown [195.135.220.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3a74d3e6-3b27-11ec-8548-12813bfff9fa;
- Mon, 01 Nov 2021 15:20:22 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 7c7e07be-614e-4e1f-8d60-617c344bf99b;
+ Mon, 01 Nov 2021 15:20:24 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id F040D2195E;
- Mon,  1 Nov 2021 15:20:20 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 4DB092196F;
+ Mon,  1 Nov 2021 15:20:23 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AFA2D13A4A;
- Mon,  1 Nov 2021 15:20:20 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2216413A4A;
+ Mon,  1 Nov 2021 15:20:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id yNKQKbQFgGFzNwAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 01 Nov 2021 15:20:20 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cM0LB7cFgGFzNwAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 01 Nov 2021 15:20:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,79 +58,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a74d3e6-3b27-11ec-8548-12813bfff9fa
+X-Inumbo-ID: 7c7e07be-614e-4e1f-8d60-617c344bf99b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1635780020; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1635780023; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=2fOAnqYxsnad8GqJq5hXRodGMqLBqJqDZsiqhfOtnv4=;
-	b=dmVJvcHjlAFox+w7U7UJhXGRcyhbfhJlw/WY/mMMQbBGHd+pbF34GP7lgZTC+6Dm/xaJtD
-	1KdNN7OW3wM67qY3FlM1OxD9yQcRuHrcoMjJHQHjQ3BrgBG0hrqdoJViH5vpzpI08FE24r
-	TA47+bjDizjHp3k+DBHB6NJsodC0cik=
+	bh=H629Skc+4HUyFvxQxJWzVqDkNXqgQ0ZyU5Da5yGGsZY=;
+	b=SpiH1gw91xN4jGcy6lMLTFgnciz4R7VV6l3QNBg2NZlNiVNVqKucGAhVx+h681W3VrPGDc
+	LBvoNlUssn3sF0wnC2vLfquJZYGQfkdAiii5n+aMLkTtE3kNIQQmE/4zY4aOe51KaPuS+Z
+	XhEA5HsnGJHGgo2q98UqXb/W+yQeP60=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Ian Jackson <iwj@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 06/15] add .gitignore entries for *.[is] below xen
-Date: Mon,  1 Nov 2021 16:20:06 +0100
-Message-Id: <20211101152015.28488-7-jgross@suse.com>
+Subject: [PATCH v2 15/15] tools/xenperf: update hypercall names
+Date: Mon,  1 Nov 2021 16:20:15 +0100
+Message-Id: <20211101152015.28488-16-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211101152015.28488-1-jgross@suse.com>
 References: <20211101152015.28488-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of listing each single file with .s or .i suffixes in
-.gitignore use pattern based entries. Restrict those to the xen
-directory as we have e.g. tools/libs/stat/bindings/swig/xenstat.i in
-our tree.
+The hypercall names need some update.
 
-Below xen the pattern based entries are fine, as we have pattern rules
-for creating *.s and *.i files in xen/Rules.mk.
-
-Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
 V2:
 - new patch
 ---
- .gitignore | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/misc/xenperf.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/.gitignore b/.gitignore
-index 8ebb51b6c5..9513506dd9 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -301,12 +301,13 @@ tools/xentrace/xentrace_setsize
- tools/xentrace/tbctl
- tools/xentrace/xenctx
- tools/xentrace/xentrace
-+xen/**/*.i
-+xen/**/*.s
- xen/.banner
- xen/.config
- xen/.config.old
- xen/.xen.elf32
- xen/System.map
--xen/arch/x86/asm-macros.i
- xen/arch/x86/boot/mkelf32
- xen/arch/x86/boot/cmdline.S
- xen/arch/x86/boot/reloc.S
-@@ -322,7 +323,6 @@ xen/arch/*/efi/ebmalloc.c
- xen/arch/*/efi/efi.h
- xen/arch/*/efi/pe.c
- xen/arch/*/efi/runtime.c
--xen/asm-offsets.s
- xen/common/config_data.S
- xen/common/config.gz
- xen/include/headers*.chk
+diff --git a/tools/misc/xenperf.c b/tools/misc/xenperf.c
+index a5fbdaa45f..2ad737e661 100644
+--- a/tools/misc/xenperf.c
++++ b/tools/misc/xenperf.c
+@@ -57,6 +57,11 @@ const char *hypercall_name_table[64] =
+     X(sysctl),
+     X(domctl),
+     X(kexec_op),
++    X(tmem_op),
++    X(argo_op),
++    X(xenpmu_op),
++    X(dm_op),
++    X(hypfs_op),
+     X(arch_0),
+     X(arch_1),
+     X(arch_2),
 -- 
 2.26.2
 
