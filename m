@@ -2,48 +2,48 @@ Return-Path: <SRS0=4CEK=PU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84602C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D84BC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3412F60FD9
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3412F60FD9
+	by mail.kernel.org (Postfix) with ESMTPS id D8CDB6058D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Nov 2021 22:10:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D8CDB6058D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.219453.380367 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.219456.380382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfVC-0005ls-SW; Mon, 01 Nov 2021 22:10:02 +0000
+	id 1mhfVG-0006lZ-Uj; Mon, 01 Nov 2021 22:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 219453.380367; Mon, 01 Nov 2021 22:10:02 +0000
+Received: by outflank-mailman (output) from mailman id 219456.380382; Mon, 01 Nov 2021 22:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mhfVC-0005kM-BN; Mon, 01 Nov 2021 22:10:02 +0000
-Received: by outflank-mailman (input) for mailman id 219453;
- Mon, 01 Nov 2021 22:10:00 +0000
+	id 1mhfVG-0006kq-On; Mon, 01 Nov 2021 22:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 219456;
+ Mon, 01 Nov 2021 22:10:05 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z02t=PU=redhat.com=quintela@srs-us1.protection.inumbo.net>)
- id 1mhfVA-0007pr-OS
- for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:00 +0000
-Received: from us-smtp-delivery-124.mimecast.com (unknown [170.10.133.124])
+ id 1mhfVF-0007pr-Ov
+ for xen-devel@lists.xenproject.org; Mon, 01 Nov 2021 22:10:05 +0000
+Received: from us-smtp-delivery-124.mimecast.com (unknown [216.205.24.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 62e4f7fa-3b60-11ec-854e-12813bfff9fa;
- Mon, 01 Nov 2021 22:09:30 +0000 (UTC)
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-32-4X10BvvaO2m5-Rv-dpJHvA-1; Mon, 01 Nov 2021 18:09:29 -0400
-Received: by mail-wr1-f71.google.com with SMTP id
- p17-20020adff211000000b0017b902a7701so3974740wro.19
- for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:29 -0700 (PDT)
+ id 645c45ac-3b60-11ec-854e-12813bfff9fa;
+ Mon, 01 Nov 2021 22:09:32 +0000 (UTC)
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-275-P0W4ND1lNVGjo1WzmCnSTw-1; Mon, 01 Nov 2021 18:09:31 -0400
+Received: by mail-wr1-f70.google.com with SMTP id
+ q5-20020a5d5745000000b00178abb72486so4821993wrw.9
+ for <xen-devel@lists.xenproject.org>; Mon, 01 Nov 2021 15:09:31 -0700 (PDT)
 Received: from localhost (static-233-86-86-188.ipcom.comunitel.net.
  [188.86.86.233])
- by smtp.gmail.com with ESMTPSA id o17sm685550wmq.11.2021.11.01.15.09.26
+ by smtp.gmail.com with ESMTPSA id f133sm655275wmf.31.2021.11.01.15.09.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
+ Mon, 01 Nov 2021 15:09:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,37 +55,37 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 62e4f7fa-3b60-11ec-854e-12813bfff9fa
+X-Inumbo-ID: 645c45ac-3b60-11ec-854e-12813bfff9fa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1635804570;
+	s=mimecast20190719; t=1635804572;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Eb45pt+rx+z3d/QNqQ0ka/rPHoe06plBoXsL9wFgC3A=;
-	b=XtbMSMGTQZvMco2cqRvB6sMNp2kXWpDgubhBSI/o3ct+u0hRuPelBE3jucBTFg1jjr/Why
-	kLLoLyLGU6A1J7RIr1r7Aw5eUqFBllDRjog5qJtscdAYk0Pcq6YnQA8umpeYe5Vf8y85l5
-	1KXLUFCxkvc4P7/ZD47YRfIPjKRP2l4=
-X-MC-Unique: 4X10BvvaO2m5-Rv-dpJHvA-1
+	bh=fSoWVIR9hKZoxnk9uhtu16nhbmo8V4KFxeuBGBhsQZ8=;
+	b=g5IBJUWP2yKXZE+swNWoz9MBOkji3KR974PW0xf/9MkNpokE954S+yRF1gFvJn24o2UjMg
+	cOTc1HmEfYynv9itQrGPCQIndoC8P+9NdqxrJrShp3vqt87/CsaN/qU5L0yhXJ2ZiCunuC
+	c6BgNTrRAE0hI1SCCRbvY39s/D5q2sY=
+X-MC-Unique: P0W4ND1lNVGjo1WzmCnSTw-1
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Eb45pt+rx+z3d/QNqQ0ka/rPHoe06plBoXsL9wFgC3A=;
-        b=aYJn7Rxn/khwZxZTbJUD7I1kCMlJq+CtZe9BOtRhaP8thZJ0p2EjCV3/jTbEmBJA3e
-         tb8IoaKUSx51lTjNX3B0IPxsU1MO8jIazFgdZIRF2PHP2hIuAR2Tem2xGHYuBIDT6pbQ
-         TROZoOhnws655eeOIMm/PCcxbPzo39l1jFec1GVkvaykac8HjWluGWFTFMharn1tsBZv
-         O0s9BMJxg0C5efXs+Lv9w41zWRXEaIwFEAR3camGtHcmND+36ChB8hpxDeV6awP9z713
-         4n93ZblyM8L4QN7zyZ6nTA+57tM12TGyLch/EdpA/GINOHFrugzwi4hvf/SFEK0kL+Ve
-         8JVQ==
-X-Gm-Message-State: AOAM530xlU421PpnKjlZxWHr8bcUhNHN6eh22vOhMS9IcXiqm7VZx5gd
-	GSCGrBl0eZD5RqH+spYncmNLWXG7gQqlKvhntPpgljVAxiDsiEqFBvKNG553eCc2X8x+F1E4fvQ
-	Y9kVIp4fpp79p/8VT4svmj3KyAGg=
-X-Received: by 2002:adf:e387:: with SMTP id e7mr30508149wrm.412.1635804567993;
-        Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwTDcj674kEGI9dl471cqGKZI5Q3j6okD5bAskecUMcRegbtpEz5VGFYHzxKsv8krfzx5uJsg==
-X-Received: by 2002:adf:e387:: with SMTP id e7mr30508114wrm.412.1635804567768;
-        Mon, 01 Nov 2021 15:09:27 -0700 (PDT)
+        bh=fSoWVIR9hKZoxnk9uhtu16nhbmo8V4KFxeuBGBhsQZ8=;
+        b=gWdYUV47bsH1KQjLMDUsUHb1ERdqL6wRrjCaF93Y/MOSW4N8kM5jbzRSi7os/UyfcU
+         9e/aUhMhIicOKZRJAJFVWtecytkAGH6AzMwAsStdM5+A11/J5c8Ekpa/hA9LVbjZTuEc
+         CdJrWVQgO9mYRidHhqfaVc7SMWK22JCRmocQIGOye0EKpV0HRSSqfcgA0n6h11UnyiF1
+         CVG6dK6ybsMMEzA8lZ2OYbtXwri6J3maxso/GbN9zu/90fZTeFBvi51IkDa7cS6H3KYM
+         3KLpSb/1UaQlPgLp21x3CAmBKafziyWHKwbV9toGgaxhqyA3/r+lXxcM8NrBn+YnS+/c
+         yM6A==
+X-Gm-Message-State: AOAM532vRyj2GQ2aOSfZdDDl0iw6Dr44XtAWBj/DgT17i4PCvnmS8JCh
+	X2hBDuFjiwGmvFJoPOW0wqICL5e0FEX1JiimJlJP+VXcNLi2zzhfK3KRRSKx3bJrYm5Z6lzk88p
+	uVN8YgD7n3Fnli6mz6JERwQHY9u8=
+X-Received: by 2002:a1c:ed1a:: with SMTP id l26mr1960964wmh.19.1635804570445;
+        Mon, 01 Nov 2021 15:09:30 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwu/QxnhEuNymsrQqTg8NiGiNIcnxGmbn+stcw6LipoHUBGhkcJBUusifbHj5C9b6NJX/heIQ==
+X-Received: by 2002:a1c:ed1a:: with SMTP id l26mr1960945wmh.19.1635804570300;
+        Mon, 01 Nov 2021 15:09:30 -0700 (PDT)
 From: Juan Quintela <quintela@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Markus Armbruster <armbru@redhat.com>,
@@ -106,9 +106,9 @@ Cc: Markus Armbruster <armbru@redhat.com>,
 	Juan Quintela <quintela@redhat.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Anthony Perard <anthony.perard@citrix.com>
-Subject: [PULL 10/20] dump-guest-memory: Block live migration
-Date: Mon,  1 Nov 2021 23:09:02 +0100
-Message-Id: <20211101220912.10039-11-quintela@redhat.com>
+Subject: [PULL 12/20] virtio-mem: Implement replay_discarded RamDiscardManager callback
+Date: Mon,  1 Nov 2021 23:09:04 +0100
+Message-Id: <20211101220912.10039-13-quintela@redhat.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211101220912.10039-1-quintela@redhat.com>
 References: <20211101220912.10039-1-quintela@redhat.com>
@@ -117,83 +117,104 @@ Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=quintela@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="US-ASCII"
 
-From: Peter Xu <peterx@redhat.com>
+From: David Hildenbrand <david@redhat.com>
 
-Both dump-guest-memory and live migration caches vm state at the beginning.
-Either of them entering the other one will cause race on the vm state, and even
-more severe on that (please refer to the crash report in the bug link).
+Implement it similar to the replay_populated callback.
 
-Let's block live migration in dump-guest-memory, and that'll also block
-dump-guest-memory if it detected that we're during a live migration.
-
-Side note: migrate_del_blocker() can be called even if the blocker is not
-inserted yet, so it's safe to unconditionally delete that blocker in
-dump_cleanup (g_slist_remove allows no-entry-found case).
-
-Suggested-by: Dr. David Alan Gilbert <dgilbert@redhat.com>
-Bugzilla: https://bugzilla.redhat.com/show_bug.cgi?id=1996609
-Signed-off-by: Peter Xu <peterx@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Acked-by: Peter Xu <peterx@redhat.com>
+Signed-off-by: David Hildenbrand <david@redhat.com>
 Reviewed-by: Juan Quintela <quintela@redhat.com>
 Signed-off-by: Juan Quintela <quintela@redhat.com>
 ---
- dump/dump.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+ hw/virtio/virtio-mem.c | 58 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
 
-diff --git a/dump/dump.c b/dump/dump.c
-index ab625909f3..662d0a62cd 100644
---- a/dump/dump.c
-+++ b/dump/dump.c
-@@ -29,6 +29,7 @@
- #include "qemu/error-report.h"
- #include "qemu/main-loop.h"
- #include "hw/misc/vmcoreinfo.h"
-+#include "migration/blocker.h"
- 
- #ifdef TARGET_X86_64
- #include "win_dump.h"
-@@ -47,6 +48,8 @@
- 
- #define MAX_GUEST_NOTE_SIZE (1 << 20) /* 1MB should be enough */
- 
-+static Error *dump_migration_blocker;
-+
- #define ELF_NOTE_SIZE(hdr_size, name_size, desc_size)   \
-     ((DIV_ROUND_UP((hdr_size), 4) +                     \
-       DIV_ROUND_UP((name_size), 4) +                    \
-@@ -101,6 +104,7 @@ static int dump_cleanup(DumpState *s)
-             qemu_mutex_unlock_iothread();
-         }
-     }
-+    migrate_del_blocker(dump_migration_blocker);
- 
-     return 0;
+diff --git a/hw/virtio/virtio-mem.c b/hw/virtio/virtio-mem.c
+index df91e454b2..284096ec5f 100644
+--- a/hw/virtio/virtio-mem.c
++++ b/hw/virtio/virtio-mem.c
+@@ -228,6 +228,38 @@ static int virtio_mem_for_each_plugged_section(const VirtIOMEM *vmem,
+     return ret;
  }
-@@ -2005,6 +2009,21 @@ void qmp_dump_guest_memory(bool paging, const char *file,
-         return;
-     }
  
-+    if (!dump_migration_blocker) {
-+        error_setg(&dump_migration_blocker,
-+                   "Live migration disabled: dump-guest-memory in progress");
-+    }
++static int virtio_mem_for_each_unplugged_section(const VirtIOMEM *vmem,
++                                                 MemoryRegionSection *s,
++                                                 void *arg,
++                                                 virtio_mem_section_cb cb)
++{
++    unsigned long first_bit, last_bit;
++    uint64_t offset, size;
++    int ret = 0;
 +
-+    /*
-+     * Allows even for -only-migratable, but forbid migration during the
-+     * process of dump guest memory.
-+     */
-+    if (migrate_add_blocker_internal(dump_migration_blocker, errp)) {
-+        /* Remember to release the fd before passing it over to dump state */
-+        close(fd);
-+        return;
-+    }
++    first_bit = s->offset_within_region / vmem->bitmap_size;
++    first_bit = find_next_zero_bit(vmem->bitmap, vmem->bitmap_size, first_bit);
++    while (first_bit < vmem->bitmap_size) {
++        MemoryRegionSection tmp = *s;
 +
-     s = &dump_state_global;
-     dump_state_prepare(s);
++        offset = first_bit * vmem->block_size;
++        last_bit = find_next_bit(vmem->bitmap, vmem->bitmap_size,
++                                 first_bit + 1) - 1;
++        size = (last_bit - first_bit + 1) * vmem->block_size;
++
++        if (!virito_mem_intersect_memory_section(&tmp, offset, size)) {
++            break;
++        }
++        ret = cb(&tmp, arg);
++        if (ret) {
++            break;
++        }
++        first_bit = find_next_zero_bit(vmem->bitmap, vmem->bitmap_size,
++                                       last_bit + 2);
++    }
++    return ret;
++}
++
+ static int virtio_mem_notify_populate_cb(MemoryRegionSection *s, void *arg)
+ {
+     RamDiscardListener *rdl = arg;
+@@ -1170,6 +1202,31 @@ static int virtio_mem_rdm_replay_populated(const RamDiscardManager *rdm,
+                                             virtio_mem_rdm_replay_populated_cb);
+ }
  
++static int virtio_mem_rdm_replay_discarded_cb(MemoryRegionSection *s,
++                                              void *arg)
++{
++    struct VirtIOMEMReplayData *data = arg;
++
++    ((ReplayRamDiscard)data->fn)(s, data->opaque);
++    return 0;
++}
++
++static void virtio_mem_rdm_replay_discarded(const RamDiscardManager *rdm,
++                                            MemoryRegionSection *s,
++                                            ReplayRamDiscard replay_fn,
++                                            void *opaque)
++{
++    const VirtIOMEM *vmem = VIRTIO_MEM(rdm);
++    struct VirtIOMEMReplayData data = {
++        .fn = replay_fn,
++        .opaque = opaque,
++    };
++
++    g_assert(s->mr == &vmem->memdev->mr);
++    virtio_mem_for_each_unplugged_section(vmem, s, &data,
++                                          virtio_mem_rdm_replay_discarded_cb);
++}
++
+ static void virtio_mem_rdm_register_listener(RamDiscardManager *rdm,
+                                              RamDiscardListener *rdl,
+                                              MemoryRegionSection *s)
+@@ -1234,6 +1291,7 @@ static void virtio_mem_class_init(ObjectClass *klass, void *data)
+     rdmc->get_min_granularity = virtio_mem_rdm_get_min_granularity;
+     rdmc->is_populated = virtio_mem_rdm_is_populated;
+     rdmc->replay_populated = virtio_mem_rdm_replay_populated;
++    rdmc->replay_discarded = virtio_mem_rdm_replay_discarded;
+     rdmc->register_listener = virtio_mem_rdm_register_listener;
+     rdmc->unregister_listener = virtio_mem_rdm_unregister_listener;
+ }
 -- 
 2.33.1
 
