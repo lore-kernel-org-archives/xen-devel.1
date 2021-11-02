@@ -2,39 +2,38 @@ Return-Path: <SRS0=WSjk=PV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9BB6C433F5
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Nov 2021 22:48:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C982AC433EF
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Nov 2021 23:18:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 98DEF61053
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Nov 2021 22:48:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 98DEF61053
+	by mail.kernel.org (Postfix) with ESMTPS id 93A9860EBD
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Nov 2021 23:18:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 93A9860EBD
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.220495.381776 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.220504.381798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mi2ZZ-0005Rx-4a; Tue, 02 Nov 2021 22:48:05 +0000
+	id 1mi32L-0000Tg-Nv; Tue, 02 Nov 2021 23:17:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 220495.381776; Tue, 02 Nov 2021 22:48:05 +0000
+Received: by outflank-mailman (output) from mailman id 220504.381798; Tue, 02 Nov 2021 23:17:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mi2ZZ-0005Rq-1N; Tue, 02 Nov 2021 22:48:05 +0000
-Received: by outflank-mailman (input) for mailman id 220495;
- Tue, 02 Nov 2021 22:48:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1mi32L-0000TX-Kg; Tue, 02 Nov 2021 23:17:49 +0000
+Received: by outflank-mailman (input) for mailman id 220504;
+ Tue, 02 Nov 2021 23:17:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=z8t6=PV=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1mi2ZX-0005Rk-Ek
- for xen-devel@lists.xenproject.org; Tue, 02 Nov 2021 22:48:03 +0000
+ id 1mi32K-0000Ry-3J
+ for xen-devel@lists.xenproject.org; Tue, 02 Nov 2021 23:17:48 +0000
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id eeb80d3e-3c2e-11ec-855d-12813bfff9fa;
- Tue, 02 Nov 2021 22:48:01 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id B39D461051;
- Tue,  2 Nov 2021 22:48:00 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f2079852-2d17-4da6-89f8-70e2b4538a2f;
+ Tue, 02 Nov 2021 23:17:47 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 30A656109D;
+ Tue,  2 Nov 2021 23:17:46 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,97 +45,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eeb80d3e-3c2e-11ec-855d-12813bfff9fa
+X-Inumbo-ID: f2079852-2d17-4da6-89f8-70e2b4538a2f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1635893281;
-	bh=pAeJaHQe5+rHr3JUhZrARj9BOIVQjkoZXCqHHaksyn4=;
+	s=k20201202; t=1635895066;
+	bh=wSc4z3tjtUxUopFnH2Hov7h54Lh+zRs3KC+jBurocGE=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=MX5Zfps0Jkv2wdtTKBf3cYGDjHha7kT3ttEv9ekU2ahs0de9uogGhD0BhW5cC0I/a
-	 o37X2Xalpw02DDWplGHV+zPDUSjni98jlQ09sRhpvz93xCHw52MhJpOcYNb88ntj8o
-	 JnqBUJAE2vW/EioPP/8qfyOI4+6vcaiuagRFuCYOBAQQNxVeMiCEUFhrnHGDtf0Rxp
-	 OT6LBRm5CqPaxd8iJoxIGaKLPpyg0hV4xI9rwH5k9XJRI3GXu6mn5R2GA7dKn0CmmZ
-	 4P/BH5PVvyC18WYbpDMz8W+r5GKyYSMAlXi/piN1jOBIYPof6Hv/I0z5tSijVbsN9+
-	 cW1LBNPC2hdDw==
-Date: Tue, 2 Nov 2021 15:47:54 -0700 (PDT)
+	b=UG2RC4CWPO+fVzY20303YVhVNVUs7HXlcA/o4XZmbnwv0NmZ6C5YLCrMkzsG/la86
+	 KFpYMmrVVVd7gDqm9EDM4TTgqYfQ0SuYPsJfclRxAuqnyFqxvV3hi4/ZlsLpyOAp5V
+	 DhAo/aN5MG9dUCukICqvDXN7v1rfYhwmRmLYGRhB0SdyAOHb4kub3T1OXK75CPKnX4
+	 TieoWcXtUDldfTY/rmEmCLbdvv12JSsWlgFNl9trkeB/NqF3ffVKC0YRvFgbjiI1Rx
+	 sydDbt3lInBKmov+CyxGuFN748+a/y9VmhNGfJKlMesQR9mqboYWkix/NAQe32UeoD
+	 SW9AtPA4SPV7Q==
+Date: Tue, 2 Nov 2021 16:17:45 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Oleksandr Andrushchenko <andr2000@gmail.com>
-cc: xen-devel@lists.xenproject.org, julien@xen.org, sstabellini@kernel.org, 
-    iwj@xenproject.org, bertrand.marquis@arm.com, rahul.singh@arm.com, 
-    Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: Re: [PATCH-4.16 v2] xen/arm: fix SBDF calculation for vPCI MMIO
- handlers
-In-Reply-To: <20211102112041.551369-1-andr2000@gmail.com>
-Message-ID: <alpine.DEB.2.21.2111021545130.18170@sstabellini-ThinkPad-T480s>
-References: <20211102112041.551369-1-andr2000@gmail.com>
+To: Luca Fancellu <luca.fancellu@arm.com>
+cc: Jan Beulich <jbeulich@suse.com>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, wei.chen@arm.com, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    Xen-devel <xen-devel@lists.xenproject.org>, 
+    Ian Jackson <iwj@xenproject.org>
+Subject: Re: [PATCH] xen/efi: Fix Grub2 boot on arm64
+In-Reply-To: <6F65B5FB-A511-4553-AA17-B144C3DB70CA@arm.com>
+Message-ID: <alpine.DEB.2.21.2111021615220.18170@sstabellini-ThinkPad-T480s>
+References: <20211102140511.5542-1-luca.fancellu@arm.com> <5290fa91-9470-be1b-47e4-a8de911b4fb3@suse.com> <6F65B5FB-A511-4553-AA17-B144C3DB70CA@arm.com>
 User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: multipart/mixed; BOUNDARY="8323329-361158706-1635895044=:18170"
+Content-ID: <alpine.DEB.2.21.2111021617390.18170@sstabellini-ThinkPad-T480s>
 
-On Tue, 2 Nov 2021, Oleksandr Andrushchenko wrote:
-> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-> 
-> While in vPCI MMIO trap handlers for the guest PCI host bridge it is not
-> enough for SBDF translation to simply call VPCI_ECAM_BDF(info->gpa) as
-> the base address may not be aligned in the way that the translation
-> always work. If not adjusted with respect to the base address it may not be
-> able to properly convert SBDF.
-> Fix this by adjusting the gpa with respect to the host bridge base address
-> in a way as it is done for x86.
-> 
-> Please note, that this change is not strictly required given the current
-> value of GUEST_VPCI_ECAM_BASE which has bits 0 to 27 clear, but could cause
-> issues if such value is changed, or when handlers for dom0 ECAM
-> regions are added as those will be mapped over existing hardware
-> regions that could use non-aligned base addresses.
-> 
-> Fixes: d59168dc05a5 ("xen/arm: Enable the existing x86 virtual PCI support for ARM")
-> 
-> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+--8323329-361158706-1635895044=:18170
+Content-Type: text/plain; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.21.2111021617391.18170@sstabellini-ThinkPad-T480s>
 
-Also, Ian already gave his release-ack.
+On Tue, 2 Nov 2021, Luca Fancellu wrote:
+> + Ian Jackson for 4.16 release
+> 
+> > On 2 Nov 2021, at 14:45, Jan Beulich <jbeulich@suse.com> wrote:
+> > 
+> > On 02.11.2021 15:05, Luca Fancellu wrote:
+> >> The code introduced by commit a1743fc3a9fe9b68c265c45264dddf214fd9b882
+> >> ("arm/efi: Use dom0less configuration when using EFI boot") is
+> >> introducing a problem to boot Xen using Grub2 on ARM machine using EDK2.
+> >> 
+> >> The problem comes from the function get_parent_handle(...) that inside
+> >> uses the HandleProtocol on loaded_image->DeviceHandle, but the last
+> >> is NULL, making Xen stop the UEFI boot.
+> > 
+> > According to my reading the UEFI spec doesn't (explicitly) allow for
+> > this to be NULL. Could you clarify why this is the case? What other
+> > information may end up being invalid / absent? Is e.g. read_section()
+> > safe to use?
+> 
+> My test on an arm machine running Grub2 on top of EDK2 showed that
+> when Xen is started, the get_parent_handle(…) call was failing and stopping
+> the boot because the efi_bs->HandleProtocol(…) was called with the
+> loaded_image->DeviceHandle argument NULL and the call was returning
+> a EFI_INVALID_PARAMETER.
+> So the parent handle can’t be requested and the filesystem can’t be used,
+> but any other code that doesn’t use the handle provided by get_parent_handle(…)
+> can be used without problem like read_section(...).
+
+It could be the case that Grub2 is doing something not entirely
+compliant to the spec.
 
 
-> ---
-> Since v1:
->  - updated commit message (Roger)
+> > 
+> >> --- a/xen/common/efi/boot.c
+> >> +++ b/xen/common/efi/boot.c
+> >> @@ -449,6 +449,13 @@ static EFI_FILE_HANDLE __init get_parent_handle(EFI_LOADED_IMAGE *loaded_image,
+> >>     CHAR16 *pathend, *ptr;
+> >>     EFI_STATUS ret;
+> >> 
+> >> +    /*
+> >> +     * If DeviceHandle is NULL, we can't use the SIMPLE_FILE_SYSTEM_PROTOCOL
+> >> +     * to have access to the filesystem.
+> >> +     */
+> >> +    if ( !loaded_image->DeviceHandle )
+> >> +        return NULL;
+> > 
+> > I couldn't find anything in the spec saying that NULL (a pointer with
+> > the numeric value zero) could actually not be a valid handle. Could
+> > you point me to text saying so?
 > 
-> This patch aims for 4.16 release.
-> Benefits:
-> Fix potential bug and clear the way for further PCI passthrough
-> development.
-> Risks:
-> None as the change doesn't change the behaviour of the current code,
-> but brings clarity into SBDF calculation.
-> ---
->  xen/arch/arm/vpci.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> I am reading UEFI spec 2.8 A, section 7.3 Protocol Handler Services, when it talks about
+> EFI_BOOT_SERVICES.HandleProtocol() there is a table of “Status Code Returned” listing
+> the EFI_INVALID_PARAMETER when the Handle is NULL.
 > 
-> diff --git a/xen/arch/arm/vpci.c b/xen/arch/arm/vpci.c
-> index 8f40a0dec6d2..23f45386f4b3 100644
-> --- a/xen/arch/arm/vpci.c
-> +++ b/xen/arch/arm/vpci.c
-> @@ -24,7 +24,7 @@ static int vpci_mmio_read(struct vcpu *v, mmio_info_t *info,
->      unsigned long data;
->  
->      /* We ignore segment part and always handle segment 0 */
-> -    sbdf.sbdf = VPCI_ECAM_BDF(info->gpa);
-> +    sbdf.sbdf = VPCI_ECAM_BDF(info->gpa - GUEST_VPCI_ECAM_BASE);
->  
->      if ( vpci_ecam_read(sbdf, ECAM_REG_OFFSET(info->gpa),
->                          1U << info->dabt.size, &data) )
-> @@ -44,7 +44,7 @@ static int vpci_mmio_write(struct vcpu *v, mmio_info_t *info,
->      pci_sbdf_t sbdf;
->  
->      /* We ignore segment part and always handle segment 0 */
-> -    sbdf.sbdf = VPCI_ECAM_BDF(info->gpa);
-> +    sbdf.sbdf = VPCI_ECAM_BDF(info->gpa - GUEST_VPCI_ECAM_BASE);
->  
->      return vpci_ecam_write(sbdf, ECAM_REG_OFFSET(info->gpa),
->                             1U << info->dabt.size, r);
-> -- 
-> 2.25.1
+> > 
+> >> @@ -581,6 +588,8 @@ static bool __init read_file(EFI_FILE_HANDLE dir_handle, CHAR16 *name,
+> >>     EFI_STATUS ret;
+> >>     const CHAR16 *what = NULL;
+> >> 
+> >> +    if ( !dir_handle )
+> >> +        blexit(L"Error: No access to the filesystem");
+> > 
+> > dir_handle also gets passed to efi_arch_cfg_file_{early,late}() -
+> > those don't need any adjustment only because they merely pass the
+> > parameter on to read_file()?
 > 
+> Yes, the handling is done in read_file(...)
+
+But it is not super obvious, that's one I suggested an additional
+explicit check in my other email
+--8323329-361158706-1635895044=:18170--
 
