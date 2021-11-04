@@ -2,50 +2,39 @@ Return-Path: <SRS0=zGdd=PX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24111C433F5
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 20:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E72F7C433F5
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 21:01:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D7EDE61220
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 20:56:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D7EDE61220
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id A2D816124F
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 21:01:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org A2D816124F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.221871.383777 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.221885.383798 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mijmR-0003e1-V1; Thu, 04 Nov 2021 20:56:15 +0000
+	id 1mijqy-0005i4-Sy; Thu, 04 Nov 2021 21:00:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 221871.383777; Thu, 04 Nov 2021 20:56:15 +0000
+Received: by outflank-mailman (output) from mailman id 221885.383798; Thu, 04 Nov 2021 21:00:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mijmR-0003du-R9; Thu, 04 Nov 2021 20:56:15 +0000
-Received: by outflank-mailman (input) for mailman id 221871;
- Thu, 04 Nov 2021 20:56:14 +0000
+	id 1mijqy-0005hx-Pw; Thu, 04 Nov 2021 21:00:56 +0000
+Received: by outflank-mailman (input) for mailman id 221885;
+ Thu, 04 Nov 2021 21:00:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=dXG6=PX=redhat.com=eblake@srs-se1.protection.inumbo.net>)
- id 1mijmQ-0003do-Ft
- for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 20:56:14 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=mqP1=PX=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1mijqx-0005hr-Al
+ for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 21:00:55 +0000
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a1ee97f3-3db1-11ec-a9d2-d9f7a1cc8784;
- Thu, 04 Nov 2021 21:56:09 +0100 (CET)
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-593-E_i9VflPPPOlxP1i9h_oYw-1; Thu, 04 Nov 2021 16:56:06 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5A3121006AA3;
- Thu,  4 Nov 2021 20:56:03 +0000 (UTC)
-Received: from redhat.com (ovpn-112-104.phx2.redhat.com [10.3.112.104])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6D6EB1017CF5;
- Thu,  4 Nov 2021 20:54:30 +0000 (UTC)
+ id 4c4f3916-3db2-11ec-a9d2-d9f7a1cc8784;
+ Thu, 04 Nov 2021 22:00:54 +0100 (CET)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D51906124A;
+ Thu,  4 Nov 2021 21:00:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,105 +46,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a1ee97f3-3db1-11ec-a9d2-d9f7a1cc8784
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1636059367;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=IfcsgPcnlI/5XKJkTvjUo3gZAIv46LvfuSL2K44V28E=;
-	b=E+GlgoTrurMjNLoiwiLBJwIJuYPeIDB2ruTvzl0HVcx6KajwxG/564tnS4AjeH6IvvJdpz
-	wJBb8E24V0+yMu1jhxOZ0q9LH+b0zJID47Z/U6s07ikeJvCdNLKCGx7PMTeOUYDBp3J64O
-	JClb2WVMj7vs4oObf3xdqzSemONGMXY=
-X-MC-Unique: E_i9VflPPPOlxP1i9h_oYw-1
-Date: Thu, 4 Nov 2021 15:54:28 -0500
-From: Eric Blake <eblake@redhat.com>
-To: Juan Quintela <quintela@redhat.com>
-Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
-	David Hildenbrand <david@redhat.com>,
-	Eduardo Habkost <ehabkost@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
-	kvm@vger.kernel.org, Peter Xu <peterx@redhat.com>,
-	=?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>,
-	Paul Durrant <paul@xen.org>, Paolo Bonzini <pbonzini@redhat.com>,
-	"Dr. David Alan Gilbert" <dgilbert@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Hyman =?utf-8?B?SHVhbmcow6nCu+KAnsOl4oC54oChKQ==?= <huangy81@chinatelecom.cn>
-Subject: Re: [PULL 04/20] migration/dirtyrate: introduce struct and adjust
- DirtyRateStat
-Message-ID: <20211104205428.stcjcd54moksfep2@redhat.com>
-References: <20211101220912.10039-1-quintela@redhat.com>
- <20211101220912.10039-5-quintela@redhat.com>
+X-Inumbo-ID: 4c4f3916-3db2-11ec-a9d2-d9f7a1cc8784
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1636059653;
+	bh=rkWwZl1orBqN8GfHdUHU+9HlIMR3FOjWj6Imce2oXAs=;
+	h=Date:From:To:cc:Subject:From;
+	b=GkzOdtO+C5ccaeaxqlYOxjDvwtp76j/WEvVfy1AAaJnDyxpiIEJVJP12PXMK5eDR5
+	 i3JgNVEzMmvhLU3po+/0yiAIvKJ9RfX7CdOhjJrnznjPVe5QylnesrHRjORQgDoZb4
+	 IUoXFyq9xWc7ufKBindizRoeo7qD/B+i+Xpd6Cx6WEjFeLQkyf/K4rXh3xXynA1/+E
+	 PjDnFzHJOWPvyz9Of+6vztZIPqRdw6SE9CQPqacH+sFxtODiczwsRLRRhbXVXcThEk
+	 X22khIgNidiAn0WxdZ2wa87brgtfmDnk6tTNPaGDuf2HLvTPwXSWWnzpYYBu8fVBBx
+	 9LzsxGKRsgVtg==
+Date: Thu, 4 Nov 2021 14:00:52 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: xen-devel@lists.xenproject.org
+cc: sstabellini@kernel.org, julien@xen.org, bertrand.marquis@arm.com, 
+    Volodymyr_Babchuk@epam.com
+Subject: [PATCH] MAINTAINERS: add Bertrand to the ARM reviewers
+Message-ID: <alpine.DEB.2.22.394.2111041357580.284830@ubuntu-linux-20-04-desktop>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20211101220912.10039-5-quintela@redhat.com>
-User-Agent: NeoMutt/20211029-10-fe244a
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Content-Type: text/plain; charset=US-ASCII
 
-On Mon, Nov 01, 2021 at 11:08:56PM +0100, Juan Quintela wrote:
-> From: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
-> 
-> introduce "DirtyRateMeasureMode" to specify what method should be
-> used to calculate dirty rate, introduce "DirtyRateVcpu" to store
-> dirty rate for each vcpu.
-> 
-> use union to store stat data of specific mode
-> 
-> Signed-off-by: Hyman Huang(é»„å‹‡) <huangy81@chinatelecom.cn>
-> Message-Id: <661c98c40f40e163aa58334337af8f3ddf41316a.1624040308.git.huangy81@chinatelecom.cn>
-> Reviewed-by: Peter Xu <peterx@redhat.com>
-> Reviewed-by: Juan Quintela <quintela@redhat.com>
-> Signed-off-by: Juan Quintela <quintela@redhat.com>
-> ---
->  qapi/migration.json   | 30 +++++++++++++++++++++++++++
->  migration/dirtyrate.h | 21 +++++++++++++++----
->  migration/dirtyrate.c | 48 +++++++++++++++++++++++++------------------
->  3 files changed, 75 insertions(+), 24 deletions(-)
-> 
-> diff --git a/qapi/migration.json b/qapi/migration.json
-> index 9aa8bc5759..94eece16e1 100644
-> --- a/qapi/migration.json
-> +++ b/qapi/migration.json
-> @@ -1731,6 +1731,21 @@
->  { 'event': 'UNPLUG_PRIMARY',
->    'data': { 'device-id': 'str' } }
->  
-> +##
-> +# @DirtyRateVcpu:
-> +#
-> +# Dirty rate of vcpu.
-> +#
-> +# @id: vcpu index.
-> +#
-> +# @dirty-rate: dirty rate.
-> +#
-> +# Since: 6.1
 
-I'm a bit late on the review, since this pull request is already in.
-We'll want a followup patch that changes this to mention 6.2, to
-correctly match the release that will first have it.  Such a followup
-is safe during freeze, since it is doc-only.
+Acked-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 
-> +#
-> +##
-> +{ 'struct': 'DirtyRateVcpu',
-> +  'data': { 'id': 'int', 'dirty-rate': 'int64' } }
-> +
->  ##
->  # @DirtyRateStatus:
->  #
-
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3266
-Virtualization:  qemu.org | libvirt.org
-
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9be4ad653a..4956db1011 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -232,6 +232,7 @@ ARM (W/ VIRTUALISATION EXTENSIONS) ARCHITECTURE
+ M:	Stefano Stabellini <sstabellini@kernel.org>
+ M:	Julien Grall <julien@xen.org>
+ R:	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
++R:	Bertrand Marquis <bertrand.marquis@arm.com>
+ S:	Supported
+ L:	xen-devel@lists.xenproject.org
+ F:	docs/misc/arm/
 
