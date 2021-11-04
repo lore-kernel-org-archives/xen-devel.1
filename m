@@ -2,54 +2,64 @@ Return-Path: <SRS0=zGdd=PX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B690C433F5
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 06:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 71891C433F5
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 06:20:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4CB0A611AE
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 06:02:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4CB0A611AE
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
+	by mail.kernel.org (Postfix) with ESMTPS id 22AF2611CB
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 06:20:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 22AF2611CB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=xilinx.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.221244.382869 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.221259.382880 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1miVp0-00049D-7J; Thu, 04 Nov 2021 06:01:58 +0000
+	id 1miW6m-0006gt-LC; Thu, 04 Nov 2021 06:20:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 221244.382869; Thu, 04 Nov 2021 06:01:58 +0000
+Received: by outflank-mailman (output) from mailman id 221259.382880; Thu, 04 Nov 2021 06:20:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1miVp0-000496-3h; Thu, 04 Nov 2021 06:01:58 +0000
-Received: by outflank-mailman (input) for mailman id 221244;
- Thu, 04 Nov 2021 06:01:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cFoW=PX=epam.com=prvs=194277eb9a=oleksandr_andrushchenko@srs-se1.protection.inumbo.net>)
- id 1miVoy-000481-OC
- for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 06:01:57 +0000
-Received: from mx0b-0039f301.pphosted.com (mx0b-0039f301.pphosted.com
- [148.163.137.242]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b51b5048-3d34-11ec-a9d2-d9f7a1cc8784;
- Thu, 04 Nov 2021 07:01:54 +0100 (CET)
-Received: from pps.filterd (m0174681.ppops.net [127.0.0.1])
- by mx0b-0039f301.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1A45unCd009663;
- Thu, 4 Nov 2021 06:01:51 GMT
-Received: from eur01-db5-obe.outbound.protection.outlook.com
- (mail-db5eur01lp2053.outbound.protection.outlook.com [104.47.2.53])
- by mx0b-0039f301.pphosted.com (PPS) with ESMTPS id 3c49dc02rr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 04 Nov 2021 06:01:51 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com (2603:10a6:20b:153::17)
- by AM0PR0302MB3281.eurprd03.prod.outlook.com (2603:10a6:208:a::24)
+	id 1miW6m-0006gm-Hn; Thu, 04 Nov 2021 06:20:20 +0000
+Received: by outflank-mailman (input) for mailman id 221259;
+ Thu, 04 Nov 2021 06:20:20 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jTzK=PX=xilinx.com=fnuv@srs-se1.protection.inumbo.net>)
+ id 1miW6l-0006gg-W1
+ for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 06:20:19 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20619.outbound.protection.outlook.com
+ [2a01:111:f400:fe5b::619])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4786cfb8-3d37-11ec-9787-a32c541c8605;
+ Thu, 04 Nov 2021 07:20:18 +0100 (CET)
+Received: from SA0PR11CA0116.namprd11.prod.outlook.com (2603:10b6:806:d1::31)
+ by SN6PR02MB3968.namprd02.prod.outlook.com (2603:10b6:805:2b::25)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.10; Thu, 4 Nov
- 2021 05:56:14 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::c038:e032:595a:651]) by AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::c038:e032:595a:651%9]) with mapi id 15.20.4669.011; Thu, 4 Nov 2021
- 05:56:14 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4649.13; Thu, 4 Nov
+ 2021 06:20:14 +0000
+Received: from SN1NAM02FT0041.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:806:d1:cafe::d1) by SA0PR11CA0116.outlook.office365.com
+ (2603:10b6:806:d1::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.11 via Frontend
+ Transport; Thu, 4 Nov 2021 06:20:14 +0000
+Received: from xsj-pvapexch01.xlnx.xilinx.com (149.199.62.198) by
+ SN1NAM02FT0041.mail.protection.outlook.com (10.97.5.44) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.4669.10 via Frontend Transport; Thu, 4 Nov 2021 06:20:14 +0000
+Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
+ xsj-pvapexch01.xlnx.xilinx.com (172.19.86.40) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.14; Wed, 3 Nov 2021 23:20:03 -0700
+Received: from smtp.xilinx.com (172.19.127.95) by
+ xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
+ 15.1.2176.14 via Frontend Transport; Wed, 3 Nov 2021 23:20:03 -0700
+Received: from [172.19.2.115] (port=60724 helo=xsjfnuv50.xilinx.com)
+ by smtp.xilinx.com with esmtp (Exim 4.90)
+ (envelope-from <fnu.vikram@xilinx.com>)
+ id 1miW6U-0006GW-58; Wed, 03 Nov 2021 23:20:03 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,157 +71,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b51b5048-3d34-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 4786cfb8-3d37-11ec-9787-a32c541c8605
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fpGlxOynnZLAKn9i1SzdjC/oiuWs4UubwXyp+eBZOZj4nczPmZVZ/yFxy6nulRb/605nxUJW0wFWoW9HOmA6fygUyAju/AHMHRD7YqG0W6wXepnuizuMMWMzasX5nhno4aK9qAnaCM54a81x95706RGpgZQjURVrXFCT1SisfCZsQj8iyO6nyz4IgaP4unZcm+Ncv/DTaIENu4rAmJR8vKCEGFfpHNJChf0pUCGpsp875CIj1AowdNzU+nUluClpHRvIv07fINKtF35mvikzuxbYzj+kA79VEombGBsOeiOn0gJLx5uiw7FGzhN+BC9diGu6SkGNJ6/Pp3PkWn6Osg==
+ b=NpT27fEcj0ZcpE67lz3x4pS+CuLZA81mqd2UG49Thpg42ApHhp3E4Vh3iSX/pcL9C7SJtL8kGfF0KAzhzEkwsgtOQeMAP8RbKIhhbB/cWtSKzdkRcnQOrUhn0oQr1jhjoDBsbeGn1BFP0K4LC43dddq93Vo1+wuOvpgMnRL/NrU9NB6vepjVM3SehhAx8R0oQhqgIUrUw+Sunfbg5kpnZ9nfuald4xRa9gQQ+o9BW4in3obyNHqv18UiX0Z/oKWs3rObnRr1SW5EghnFr90iP3sx1Fb9Ox05+7gvF7PGDsglQbn/RRM9eOvvOZ0uSRCLozgdDAeT7X00owXjWZMMkw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6xD4aOzzrmyrPeI7wtP+M1VF7la7CPCoP50Qw3RVEu4=;
- b=CYOE1fnyuII+P4E4Si3KMeiBQv76wDNez/BLyWinw3wVj6DiWPLsRy21bZqxMcv+MHeRvBODdBmHTjLFBXN40wLFIFwfnsdOvJeAFHRrs9fVDdjHIIGSQuYeWqUr/ZGMrV7nmGQ6Ezs5vA8GEdFe4/6ZAw2H6HCUNgwiUMWXZQoz6Cr5co0WJ4HFym6SOwFhB3P7+6b8y2ZVOKEbPeGa3c4GtrgEy99ng87jc3v9QuSZac8T0BaELBtFNb4yeTosfIuiCGcLU85SFamtoVb3u6S/XdqEn8U8O+6npLl7G6DuaJRBirqeuV4qFbYGiNC1yKnKVH/n8NTBI/j8DtOeQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
+ bh=2U4jXB6apTf85EYjY++ZUwGS6bfjwI92tFO5pG6fENU=;
+ b=ZoAHmx+h7rs96g4bfcZAdjc0XJlQkZUJEGcaLAz9g7hWyKmclXTy4WeabIOrRUEJ/KPjrlNF9Yj3LK74l+Ywm3kPn/dHcFDiCwcIJvI2UJl5p9ln1sntM9CYwyzcPam+iAtfQ157KtAiqh66Kr0yK3qlcmcZGaAC93CJcYybcS084fW+HTlE1BSN5HVAjglc5RFzfJw1sAKx4W2lQlNq1y3hc9MjZRpuopjLzUTAuFbCMKTZPQFD3ipnlmsvD+u8/heE/1kyeYPOH3zpk58FahARMO9kWhdTQ+omc7gHqI33kqakF+0dy8lJGz0Mi6YUbaAPccDOx/gtp/B2uStgyw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
+ smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=xilinx.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6xD4aOzzrmyrPeI7wtP+M1VF7la7CPCoP50Qw3RVEu4=;
- b=WbEQFKkIjUni5mTPoS+yLQC84+W6UJWA1UF8RiDT7shJxSEkYLQ/y0kctCy8wbHroxQmXlAfpGzJkwH9drHPbAEfidgIaXVLm8akdoRIXM3ET8wogL4xRoxgXtO9GIldMWaWouoI73J4BC0ilaHiZcR5XdR1Qgb+h6n3Jh4AfcSHA2KDndDX/4laEjcq1kpcshSoj9WgJJxwEvIJhzYpukrVyH4VjD8aULqwmYnInE8t3TlToVwjw7xCL1ZR5kM5NpuYc24Ok8pW8FeC5k62m3KpcoNBWad8T9VDI4H0OBwzwe4Bli/siFTOoVO4338f1PWqaCiBDc4L79SgbGhM5w==
-From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-To: Julien Grall <julien@xen.org>,
-        Stefano Stabellini
-	<sstabellini@kernel.org>,
-        "iwj@xenproject.org" <iwj@xenproject.org>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-        Bertrand Marquis <bertrand.marquis@arm.com>,
-        Rahul Singh
-	<rahul.singh@arm.com>
-Subject: Re: [PATCH-4.16 v2] xen/arm: fix SBDF calculation for vPCI MMIO
- handlers
-Thread-Topic: [PATCH-4.16 v2] xen/arm: fix SBDF calculation for vPCI MMIO
- handlers
-Thread-Index: AQHXz9uvpkVSL/P+h0KvYyBzgfugSKvw16AAgADfnQCAAGctgIAAwzYA
-Date: Thu, 4 Nov 2021 05:56:14 +0000
-Message-ID: <6512850c-08b8-ddb2-3e7c-28ec463f51d6@epam.com>
-References: <20211102112041.551369-1-andr2000@gmail.com>
- <alpine.DEB.2.21.2111021545130.18170@sstabellini-ThinkPad-T480s>
- <4559d7c6-7a03-54c0-ca93-9319cc7989d5@epam.com>
- <568d087e-d740-47e2-173e-34915f645a76@xen.org>
-In-Reply-To: <568d087e-d740-47e2-173e-34915f645a76@xen.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 13359ada-0029-47d0-ff1f-08d99f57cfd2
-x-ms-traffictypediagnostic: AM0PR0302MB3281:
-x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
-x-microsoft-antispam-prvs: 
- <AM0PR0302MB3281A5299FF24F4149126720E78D9@AM0PR0302MB3281.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- cky8aYFx4CNtn4sKX75R7iuGzVJ1uoeyFmBJl9h68njBUMLD5A5d+bp78pY0yLMmQlchYoGVWfqjpDCpskuBX/PuwG/dnIbec7971JLPJtarG8Ub2S6eqFLEdSab9q0F9Fqc2Ng258Af9v7Tri+ktcah2pbpZi6FvRHbcy7E+RZvRkExDP9fFDEgTMPGiVyVhdN/ezif6VzNk2Zk9hHYCsQCk4NsLZeWSoTnucS0pr5asEOnnUnTFmRhq1r4DeuPVFt0Kb/9emFq/w+R1vB3d9W9zxjuH9rNAwI7PIqiZTSrD2ZU9fQqVffuj9QAmw8w9kwmz8dPCkfI9VvgqgsNtX6Pm344NJQpZ8opPiGmU0m0CgsvlXvH6rOUd8LMvDPHQE8MQM/tz6ISacGkoCzgyTlBa4w1w3l4PUdeh5j9G37TVS3q9voUl7GrBgQHlaLLEdgWvrg8YNpn7PCjklU1X7AWHS48u5wWWmhNtMVzaE4OyrGYhj7dRvDGXp4NdKRZvLk46crRJvk3rDTSEmnQWaKxudfrwZvtUQ/UHTTMZbZNQ7l7oVFLlTIhPdcXkRFVxPGP8h6fixs7ChzVoG5AzFqM+YR/dhysoMqMGH3b0SdSkcjIPrFrYBIaoUR1vx/4VYXVpKgiec5reA820lPoNViEBiRLZSsZ97KbCGvhkIyhiuHj5iYfKCLOWy2QuukMGR3sYHtHTIAZg0jSiE+rHZV8m5Z0/SxTQiIG8fBsSPIXtjpRCosLglxb8AAUo7r4
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB6324.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(66446008)(122000001)(66556008)(64756008)(31696002)(186003)(8676002)(53546011)(38100700002)(5660300002)(6506007)(36756003)(66476007)(71200400001)(26005)(6512007)(110136005)(91956017)(4326008)(54906003)(8936002)(508600001)(86362001)(2906002)(76116006)(38070700005)(2616005)(316002)(6486002)(31686004)(66946007)(45980500001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?bVVpMjl3bFU1aTBmTGVKM3czVStwaDI1dW9oeWVTQStHc3RWbVBSTlhNUk9Y?=
- =?utf-8?B?WXZVVHh3QTdTVjk2SWpZZ0J5eUx2c0krWEpzNXV0NEZXMGVEaGw3b1Ezd0ZP?=
- =?utf-8?B?NjNYRUUzbTZPSDUvdlNzYnFsa1pCWUJzRTVmTXdMcHRjTkpZR1pvOStURGJV?=
- =?utf-8?B?OFBRNWVIY0NuaVVEOUU5SHd5b29jY1lranFxTDd3WW1rWE1jMU51djRLUG9F?=
- =?utf-8?B?T1c4bG40a1lyNmNQOW94VEFKNTBpQVl2TEZ0cEc0TUhHWXpHbWVOVThzcVlE?=
- =?utf-8?B?SXRIOXZvUXU0dm43L1JpZmdaQWdnNXVKWHQ4cUVxcXhySWFzYS9Kc2ZNekhZ?=
- =?utf-8?B?blpFUXg1N1dpTk9jbXdOYVVXVnN4a2xvZk1GWlZkaDRRR1pjQnZncHZDR1Nw?=
- =?utf-8?B?Slo4aGg5eDJVQzBKVXRXc0hnS2JWTkpEeFRoOEhkTnhCMFNWZ1NyREJpd0lI?=
- =?utf-8?B?aUhPd2xpM2ZXY2ZlNllQT040SFJhWXJLV2l0WXFibk1WaTBuZ0ROTHFBRHdj?=
- =?utf-8?B?TlB5Z3praS84aU9hWjhtS1VMSXhhMTJOUnJndkRMUGNyNk90YkNiUTJ3SEdL?=
- =?utf-8?B?VzdhTHVLWlZSVmk4MGVzWmVwYTR4ZmxxcjdGVStzSENQRXhWU1ZkSG5oalFr?=
- =?utf-8?B?Ymw3czdLUmpVMWNxV0VDRmN4cEY3MVVEeSttcy8xVm84OFBjdEhwT0wxa1cr?=
- =?utf-8?B?aXJvbExiMnhIM1ZoMGlwR2JuMm9KZFdGN0JEbnlvQ21GYlB1Qkp6SWFNaWRQ?=
- =?utf-8?B?K3VJcTFoQXpPUzA4K0s1NFI0VTlFa2RRck04SEtYcFBaUStaZThnRFVoUHky?=
- =?utf-8?B?Y2VzaUhkNnV5RjNnWEQrZURsdFgxcFY3SzcyVjhxL2p1WmxzWWJYV2tGMWdn?=
- =?utf-8?B?akk1U0swVGRFOUM2R1B5K1NBUE5SNUEyZG1xaXB2dXluSW1IK3MvSUhPZlVh?=
- =?utf-8?B?T2ZYTk93SEVwVlZSMndHbjJhbW5WS3hpUzVEMVIrMWtBZHJ0cDVWbURTL3A0?=
- =?utf-8?B?OTJJMzNzVTlsM25KWG9BSURHNTVCRUkwaGlBbEw1S2lsNmk4SGtzQThhY25Z?=
- =?utf-8?B?cUpzN09MZFJFQnJ0aHBKenRTejA1R2cyMFlrN0hRUndpUFllNS9ubSthN2Er?=
- =?utf-8?B?OG14VkloM3dnVHdyVmdMeWZLVE5iZGFCYURad0VnQzNoMVhqZUJZZ3htRm5D?=
- =?utf-8?B?Z3JyM0NqekZFNTdDdlA0OExRMEZ0dmNFcE9iTkd5SjgrQnpGT3oySlJ1eHdu?=
- =?utf-8?B?Ni9lZ1hCM0c5NEdkbkVEWjdDVUFNeEQyZGdwQ3RaQjhxOVN4V1JkbVQyYjVh?=
- =?utf-8?B?UkZUbUFsODFhMndaSE5CbHpkeFlWZWxkT2NqNGNzVnZQZE8zYUI2dDgwckF2?=
- =?utf-8?B?MXJqbm93eHhzdzVJbEhMczZES0ZOS1ovbDNYbk8rQWprZnRhUmJQYk9pVGhp?=
- =?utf-8?B?SGp1NHpKL25WdHdNOXpnSElSaXRRTDZBejhoa2xJajl1aHRqbXRnMVlzeE4w?=
- =?utf-8?B?eGJCb0NPZkZ6NEtMVnJHcnJuMDVHeTdNbHhUYmJJNjI1SzJiRlYxVmZhRS9X?=
- =?utf-8?B?U0lSRTkxVG1PVFJHRmliUzAxWW43UlE5WG56UEhEeXNZSDNibmNETkNheUd3?=
- =?utf-8?B?RjRpSkJ3anBFUUxueXp5eHl5VlYzdTlyL2lEbHVOMGVtUlk4clFIZ0JuT3pl?=
- =?utf-8?B?cmpRUnN2R1NnWHo0NDlGeGpiUjdMeXRLeC94Y29wbTgzM29YZzd2MkRFVCsr?=
- =?utf-8?B?WnZkYUlqcmFvWndKdVhuVXRLNFY3MlBzSGpyUU5jaGFPWEw0ZFkwUStMMXJW?=
- =?utf-8?B?QVhLRzZVelBtSWxPaDIzQkZLSEtLcmZXSWUzNlBGMCsxSHlka0NpTnQrd2pH?=
- =?utf-8?B?SXNtT3VXbGdKdzhNZWJ0WkJMNWVKVXBxZjBITmZMLzhnT1J2elVXT0FOZXR1?=
- =?utf-8?B?M2VqYlZnbUFUcy9XdjVkV3kyRGtGTnNaWFNEdEoyRVI3SUE5bVFRenVNejJs?=
- =?utf-8?B?WC83M2d4SVoyQjl1U3dlbnZZNVlodEk3RFRCNmQ3Tnpsc3RZUlhtOWdVWEh4?=
- =?utf-8?B?d21aSGVkRXJMbzVHSUk1a2paS3lzY1VIOHVYVTRhdXZWbFF5REcyVzRyV1FN?=
- =?utf-8?B?eXBFYzQ1MWNpYUR0TjNVeWpPNWNRb3BHV0gzb0lLaW9xbGlYMjllRyszRlll?=
- =?utf-8?B?MHZZTVFvc1drdzlRdU40MkFKakVBOGh2N3Arb1V0VGRKYUtRMnNTU2xlRTJ2?=
- =?utf-8?B?R1ZSOGpoeXErVWxMMm9oSzVnQkdMYVluN3d3UVRhRXpRaFhYMGFOQXYwYVlJ?=
- =?utf-8?B?NXhqc2Z6bjVsaVdkeG9XNmpaN0ZuRWZkTDcxV0tvdUtta0lEWHBOUT09?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <1618C9D09025E847A0239479464BE582@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ bh=2U4jXB6apTf85EYjY++ZUwGS6bfjwI92tFO5pG6fENU=;
+ b=PQzlyD2JOIGN3ZkHbtN2znmv0G7MOAJfgMJiHmqQgnhc9hUaCUA3fDZHDU92EjnHciY7L9m8eePhFsEfJZinVSkBW0M7oup2Ozf3vbaTYtTC8ceMo6RPGWebfNASPTvk+8zhRMdCYiMTSw2PFSoD8PJkrMLIEixXp8lEMe5fomA=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
+ smtp.mailfrom=xilinx.com; lists.xenproject.org; dkim=none (message not
+ signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
+ header.from=xilinx.com;
+Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
+ 149.199.62.198 as permitted sender) receiver=protection.outlook.com;
+ client-ip=149.199.62.198; helo=xsj-pvapexch01.xlnx.xilinx.com;
+From: Vikram Garhwal <fnu.vikram@xilinx.com>
+To: <xen-devel@lists.xenproject.org>
+CC: <sstabellini@kernel.org>, <julien@xen.org>, Vikram Garhwal
+	<fnu.vikram@xilinx.com>
+Subject: [XEN][PATCH v2 0/1] Update libfdt to v1.6.1
+Date: Wed, 3 Nov 2021 23:19:55 -0700
+Message-ID: <1636006796-360115-1-git-send-email-fnu.vikram@xilinx.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB6324.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 13359ada-0029-47d0-ff1f-08d99f57cfd2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Nov 2021 05:56:14.6322
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d198d29e-5542-4435-d0f7-08d99f5b29e2
+X-MS-TrafficTypeDiagnostic: SN6PR02MB3968:
+X-Microsoft-Antispam-PRVS:
+	<SN6PR02MB3968AC5397808A388BE6DDACBC8D9@SN6PR02MB3968.namprd02.prod.outlook.com>
+X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
+X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	2QLxpvFOx8+OK9XLxD14KxQApW5I6QTOpahYKUmIky3GzSUhXMJvg0Yd41RzfhKio8dBjfgldfaKlS/fahJngJ/z7xRY7gSCxMUrpjl25ddsZGMqRk39Meyqvz9W3iaskCNZIbbCmZvZSI5N/efPqun5rx2wjpa8BhLftxIC/+EkqVDeGdeB4Mgq3l6QhMdJStBa/QhkjFcjp28UW7GLJRLbpvwvz4C3l6mZ46HtxejewSR9nQ2+H+vzfk9lKOYWQwz67aWrrMkDrSSH9mFQllbqx7ED2ZNYoRneugCO/78HGNYdzQHTVyWMNRXL7X4i4+j0Gy/ak+VGbth9Rz1kKaiv4FkuuN/fJZWkBu3oPjeCDQYDcrUqqbTMPBTroHs3K0mXXBpQo4n/aasj3YW0xvFCWMqnCih8M9PGdmgLeiCnxcMWU5VJ2t3Xfy0TTgKz+8i8yfWdqsFhXkvqVIWbqHHRObJrP/6hAx9UqWWwZLNowkK6bFamjWRJscXAQBrsfr4wS0lYm/4IViJoN9I8fY4M3v2xe80gtKWRShp70wyhUs0z0rNcHTmMd1Vk9RTI7nCrYMCa62rEPlKD68lrfTL2mUYDWbESGaIxLy4pzWqAwyftsjtQiWrLdxBqzxEPhRlHc2MdfJhJHcUEXS59msfrW0XVRmAJtKBcTT7dH+m5Yeb4B+xFPwGOtaiGCDVgcnce96N6CSk+rAU6Uy+Q+qYZqemvEmL6NFkl6wSpsX9hu8mEc/ObRiM6Nhe9e5xuadOeRcpQnJPrUQ7ErWAb/GFgLvcrB96Z+FxJTbIc/6u1K/lubl7xp7F496vnEC1W
+X-Forefront-Antispam-Report:
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(46966006)(36840700001)(36860700001)(70586007)(36756003)(336012)(186003)(5660300002)(26005)(82310400003)(7696005)(107886003)(2906002)(15650500001)(4326008)(70206006)(2616005)(8936002)(316002)(7636003)(54906003)(36906005)(6916009)(8676002)(356005)(426003)(508600001)(6666004)(83380400001)(9786002)(47076005)(102446001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: xilinx.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2021 06:20:14.2377
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: J5rIYOGUrjGW+r7D+E/a6NRV7AgHB2fxNhdQ5hpCfNU/Zo+vhCRTj5EZV7ei08GjC9aNrKGAtkyR8KA19wNkoY5bOX5s1+R7hsaOVBtvlNfvpdqZTLtHzYp5PnZGG88M
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0302MB3281
-X-Proofpoint-GUID: Kzug3eiQjcZXm3afix6BgWna44Jffc8g
-X-Proofpoint-ORIG-GUID: Kzug3eiQjcZXm3afix6BgWna44Jffc8g
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-11-04_01,2021-11-03_01,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
- priorityscore=1501 bulkscore=0 clxscore=1015 mlxlogscore=999 mlxscore=0
- impostorscore=0 phishscore=0 spamscore=0 suspectscore=0 adultscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2110150000 definitions=main-2111040033
+X-MS-Exchange-CrossTenant-Network-Message-Id: d198d29e-5542-4435-d0f7-08d99f5b29e2
+X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch01.xlnx.xilinx.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SN1NAM02FT0041.eop-nam02.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR02MB3968
 
-SGksIEp1bGllbiENCg0KT24gMDMuMTEuMjEgMjA6MTcsIEp1bGllbiBHcmFsbCB3cm90ZToNCj4g
-SGkgT2xla3NhbmRyLA0KPg0KPiBPbiAwMy8xMS8yMDIxIDEyOjA4LCBPbGVrc2FuZHIgQW5kcnVz
-aGNoZW5rbyB3cm90ZToNCj4+DQo+Pg0KPj4gT24gMDMuMTEuMjEgMDA6NDcsIFN0ZWZhbm8gU3Rh
-YmVsbGluaSB3cm90ZToNCj4+PiBPbiBUdWUsIDIgTm92IDIwMjEsIE9sZWtzYW5kciBBbmRydXNo
-Y2hlbmtvIHdyb3RlOg0KPj4+PiBGcm9tOiBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyA8b2xla3Nh
-bmRyX2FuZHJ1c2hjaGVua29AZXBhbS5jb20+DQo+Pj4+DQo+Pj4+IFdoaWxlIGluIHZQQ0kgTU1J
-TyB0cmFwIGhhbmRsZXJzIGZvciB0aGUgZ3Vlc3QgUENJIGhvc3QgYnJpZGdlIGl0IGlzIG5vdA0K
-Pj4+PiBlbm91Z2ggZm9yIFNCREYgdHJhbnNsYXRpb24gdG8gc2ltcGx5IGNhbGwgVlBDSV9FQ0FN
-X0JERihpbmZvLT5ncGEpIGFzDQo+Pj4+IHRoZSBiYXNlIGFkZHJlc3MgbWF5IG5vdCBiZSBhbGln
-bmVkIGluIHRoZSB3YXkgdGhhdCB0aGUgdHJhbnNsYXRpb24NCj4+Pj4gYWx3YXlzIHdvcmsuIElm
-IG5vdCBhZGp1c3RlZCB3aXRoIHJlc3BlY3QgdG8gdGhlIGJhc2UgYWRkcmVzcyBpdCBtYXkgbm90
-IGJlDQo+Pj4+IGFibGUgdG8gcHJvcGVybHkgY29udmVydCBTQkRGLg0KPj4+PiBGaXggdGhpcyBi
-eSBhZGp1c3RpbmcgdGhlIGdwYSB3aXRoIHJlc3BlY3QgdG8gdGhlIGhvc3QgYnJpZGdlIGJhc2Ug
-YWRkcmVzcw0KPj4+PiBpbiBhIHdheSBhcyBpdCBpcyBkb25lIGZvciB4ODYuDQo+Pj4+DQo+Pj4+
-IFBsZWFzZSBub3RlLCB0aGF0IHRoaXMgY2hhbmdlIGlzIG5vdCBzdHJpY3RseSByZXF1aXJlZCBn
-aXZlbiB0aGUgY3VycmVudA0KPj4+PiB2YWx1ZSBvZiBHVUVTVF9WUENJX0VDQU1fQkFTRSB3aGlj
-aCBoYXMgYml0cyAwIHRvIDI3IGNsZWFyLCBidXQgY291bGQgY2F1c2UNCj4+Pj4gaXNzdWVzIGlm
-IHN1Y2ggdmFsdWUgaXMgY2hhbmdlZCwgb3Igd2hlbiBoYW5kbGVycyBmb3IgZG9tMCBFQ0FNDQo+
-Pj4+IHJlZ2lvbnMgYXJlIGFkZGVkIGFzIHRob3NlIHdpbGwgYmUgbWFwcGVkIG92ZXIgZXhpc3Rp
-bmcgaGFyZHdhcmUNCj4+Pj4gcmVnaW9ucyB0aGF0IGNvdWxkIHVzZSBub24tYWxpZ25lZCBiYXNl
-IGFkZHJlc3Nlcy4NCj4+Pj4NCj4+Pj4gRml4ZXM6IGQ1OTE2OGRjMDVhNSAoInhlbi9hcm06IEVu
-YWJsZSB0aGUgZXhpc3RpbmcgeDg2IHZpcnR1YWwgUENJIHN1cHBvcnQgZm9yIEFSTSIpDQo+Pj4+
-DQo+Pj4+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJf
-YW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4NCj4+PiBBY2tlZC1ieTogU3RlZmFubyBTdGFiZWxsaW5p
-IDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPg0KPj4+DQo+Pj4gQWxzbywgSWFuIGFscmVhZHkgZ2F2
-ZSBoaXMgcmVsZWFzZS1hY2suDQo+PiBUaGFuayB5b3UsDQo+PiBEbyBJIG5lZWQgdG8gcmVzZW5k
-IHRoZSBwYXRjaCB3aXRoIEFja3M/IE9yIGhvcGVmdWxseSB0aG9zZSBjYW4gYmUgYXBwbGllZA0K
-Pj4gb24gY29tbWl0Pw0KPg0KPiBJIGhhdmUgY29tbWl0dGVkIHdpdGggdGhlIHR3byB0YWdzIGFw
-cGxpZWQuDQpUaGFuayB5b3UNCj4NCj4gTmV4dCB0aW1lLCBwbGVhc2UgcmVtZW1iZXIgdG8gY2Fy
-cnkgUmVsZWFzZS1hY2tlZC1ieSB0YWcuDQpUaGUgUmVsZWFzZS1hY2tlZC1ieSB0YWcgd2FzIHNl
-bnQgYnkgSWFuICphZnRlciogSSd2ZSBzZW50IHYyIG9mIHRoZSBwYXRjaA0KKHRoaXMgb25lKSBh
-bmQgaXQgd2FzIGluIHYxIG1haWwgdGhyZWFkLi4uLg0KPg0KPiBDaGVlcnMsDQo+DQo=
+This update is done to support device tree overlays functionality. This is taken
+from David Gibson's DTC git: github.com/dgibson/dtc
+
+Change log:
+v1 -> v2:
+    Correct the compilation issue due to incorrect lib.h path.
+
+Regards,
+Vikram
+
+
+Vikram Garhwal (1):
+  Update libfdt to v1.6.1
+
+ xen/common/libfdt/Makefile.libfdt   |  10 +-
+ xen/common/libfdt/fdt.c             | 226 ++++++---
+ xen/common/libfdt/fdt_addresses.c   | 101 ++++
+ xen/common/libfdt/fdt_check.c       |  93 ++++
+ xen/common/libfdt/fdt_empty_tree.c  |  46 +-
+ xen/common/libfdt/fdt_overlay.c     | 884 ++++++++++++++++++++++++++++++++++++
+ xen/common/libfdt/fdt_ro.c          | 514 ++++++++++++++++-----
+ xen/common/libfdt/fdt_rw.c          | 249 +++++-----
+ xen/common/libfdt/fdt_strerror.c    |  55 +--
+ xen/common/libfdt/fdt_sw.c          | 312 +++++++++----
+ xen/common/libfdt/fdt_wip.c         |  88 ++--
+ xen/common/libfdt/libfdt_internal.h | 223 ++++++---
+ xen/include/xen/libfdt/fdt.h        |  51 +--
+ xen/include/xen/libfdt/libfdt.h     | 858 +++++++++++++++++++++++++++++-----
+ xen/include/xen/libfdt/libfdt_env.h | 100 +++-
+ 15 files changed, 3025 insertions(+), 785 deletions(-)
+ create mode 100644 xen/common/libfdt/fdt_addresses.c
+ create mode 100644 xen/common/libfdt/fdt_check.c
+ create mode 100644 xen/common/libfdt/fdt_overlay.c
+
+-- 
+2.7.4
+
 
