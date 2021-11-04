@@ -2,52 +2,42 @@ Return-Path: <SRS0=zGdd=PX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 542A6C433FE
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 12:04:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C136C433F5
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 12:05:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 178F761073
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 12:04:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 178F761073
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id EA21461205
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Nov 2021 12:05:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org EA21461205
+Authentication-Results: mail.kernel.org; dmarc=pass (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.221459.383175 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.221481.383208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mibSu-0001ek-8e; Thu, 04 Nov 2021 12:03:32 +0000
+	id 1mibUz-0003QT-95; Thu, 04 Nov 2021 12:05:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 221459.383175; Thu, 04 Nov 2021 12:03:32 +0000
+Received: by outflank-mailman (output) from mailman id 221481.383208; Thu, 04 Nov 2021 12:05:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mibSu-0001ed-5D; Thu, 04 Nov 2021 12:03:32 +0000
-Received: by outflank-mailman (input) for mailman id 221459;
- Thu, 04 Nov 2021 12:03:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mibUz-0003QM-5a; Thu, 04 Nov 2021 12:05:41 +0000
+Received: by outflank-mailman (input) for mailman id 221481;
+ Thu, 04 Nov 2021 12:05:40 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=93tI=PX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mibSs-0001eM-6g
- for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 12:03:30 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 38d9d1a5-3d67-11ec-a9d2-d9f7a1cc8784;
- Thu, 04 Nov 2021 13:03:29 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4CB701FD33;
- Thu,  4 Nov 2021 12:03:28 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 105FD13C68;
- Thu,  4 Nov 2021 12:03:28 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id aZWdAhDMg2HJfQAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 04 Nov 2021 12:03:28 +0000
+ (envelope-from <iwj@xenproject.org>) id 1mibUy-0003QE-Cw
+ for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 12:05:40 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1mibUy-0003Br-BH
+ for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 12:05:40 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <iwj@xenproject.org>) id 1mibUy-0005eg-AY
+ for xen-devel@lists.xenproject.org; Thu, 04 Nov 2021 12:05:40 +0000
+Received: from iwj by mariner.uk.xensource.com with local (Exim 4.89)
+ (envelope-from <iwj@xenproject.org>)
+ id 1mibUu-0002cx-LE; Thu, 04 Nov 2021 12:05:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,42 +49,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38d9d1a5-3d67-11ec-a9d2-d9f7a1cc8784
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1636027408; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=a9R4E0HB2xLDp4LWHws5TWDAPG+j3kmu84UPTEalP5k=;
-	b=nzFIHgQVNLTTLwftyBNwFVgPa60mMmMxGnUZ/DIvWa3G/nv/hrOi03fa0bl6QVSVPPfPE4
-	zD8/gDhKCf0BlAdCDzw7elKYeIps45ImfSpKIYN+GPVprmRG4Ocos8mm6QAB+4FAacDCXD
-	LJYzjWuzIMG13UMUe/rsrZhEIyD3yio=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Ian Jackson <iwj@xenproject.org>,
-	Wei Liu <wl@xen.org>,
-	Community Manager <community.manager@xenproject.org>,
-	Samuel Thibault <samuel.thibault@ens-lyon.org>
-Subject: [PATCH-for-4.16 0/2] next try for disabling build of qemu-trad
-Date: Thu,  4 Nov 2021 13:03:22 +0100
-Message-Id: <20211104120324.9668-1-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=References:In-Reply-To:Subject:Cc:To:Date
+	:Message-ID:Content-Transfer-Encoding:Content-Type:MIME-Version:From;
+	bh=fYs3/kt/25W/RXG+fn+moxgx2aoM0459AtPpOLLnnYE=; b=obctjq6A36hy5BMoZV5N8z5yGm
+	95pcBT7aAbjSG0OxcA7uUvpWn0ch0a/8gD/jdsQxzEYKheuiRMPR3SFax96b/SseAgQdqTRObIpQV
+	r9plh2QZNbhZT9Nfzfow2JpchKRbOPg0r77eH+i5Ko7vKbEEczOWk+Cev8JxKd2TrL1Q=;
+From: Ian Jackson <iwj@xenproject.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: 8bit
+Message-ID: <24963.52367.786659.412345@mariner.uk.xensource.com>
+Date: Thu, 4 Nov 2021 12:05:35 +0000
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: <xen-devel@lists.xenproject.org>,
+    Wei Liu <wl@xen.org>,
+    Andrew  Cooper <andrew.cooper3@citrix.com>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Jan Beulich <jbeulich@suse.com>,
+    Julien Grall <julien@xen.org>,
+    Stefano  Stabellini <sstabellini@kernel.org>,
+    Anthony PERARD <anthony.perard@citrix.com>,
+    Juergen Gross <jgross@suse.com>,
+    Christian  Lindig <christian.lindig@citrix.com>,
+    David Scott <dave@recoil.org>,
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+Subject: Re: [PATCH for-4.16 v6] gnttab: allow setting max version per-domain
+In-Reply-To: <20211104104834.10977-1-roger.pau@citrix.com>
+References: <20211104104834.10977-1-roger.pau@citrix.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 
-Another try to disable building qemu-traditional per default.
+Roger Pau Monne writes ("[PATCH for-4.16 v6] gnttab: allow setting max version per-domain"):
+> Introduce a new domain create field so that toolstack can specify the
+> maximum grant table version usable by the domain. This is plumbed into
+> xl and settable by the user as max_grant_version.
+> 
+> Previously this was only settable on a per host basis using the
+> gnttab command line option.
+> 
+> Note the version is specified using 4 bits, which leaves room to
+> specify up to grant table version 15. Given that we only have 2 grant
+> table versions right now, and a new version is unlikely in the near
+> future using 4 bits seems more than enough.
+> 
+> xenstored stubdomains are limited to grant table v1 because the
+> current MiniOS code used to build them only has support for grants v1.
+> There are existing limits set for xenstored stubdomains at creation
+> time that already match the defaults in MiniOS.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> This needs to be applied on top of Andrew's:
+> 
+> xen: Report grant table v1/v2 capabilities to the toolstack
+> https://lore.kernel.org/xen-devel/20211029173813.23002-1-andrew.cooper3@citrix.com/
 
-Juergen Gross (2):
-  configure: modify default of building rombios
-  tools: disable building qemu-trad per default
+Tools:
 
- CHANGELOG.md         |   3 +
- stubdom/configure    |   8 ---
- stubdom/configure.ac |   8 +--
- tools/configure      | 131 ++++++++++++++++++-------------------------
- tools/configure.ac   |  80 +++++++++++---------------
- 5 files changed, 92 insertions(+), 138 deletions(-)
+Reviewed-by: Ian Jackson <iwj@xenproject.org>
 
--- 
-2.26.2
+> NB: the stubdom max grant version is cloned from the domain one. Not
+> sure whether long term we might want to use different options for the
+> stubdom and the domain. In any case the attack surface will always be
+> max(stubdom, domain), so maybe it's just pointless to allow more fine
+> grained settings.
 
+^ I think maybe this should go into a comment or commit message or
+something, not just a tail note ?
+
+Ian.
 
