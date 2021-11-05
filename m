@@ -2,44 +2,44 @@ Return-Path: <SRS0=/wKp=PY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88603C4321E
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:56:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97C86C433FE
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:57:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 394366124F
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:56:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 394366124F
+	by mail.kernel.org (Postfix) with ESMTPS id 508316124F
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:57:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 508316124F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.222089.384143 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.222092.384183 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mit9T-0000e5-JN; Fri, 05 Nov 2021 06:56:39 +0000
+	id 1mit9Y-0001l3-1L; Fri, 05 Nov 2021 06:56:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 222089.384143; Fri, 05 Nov 2021 06:56:39 +0000
+Received: by outflank-mailman (output) from mailman id 222092.384183; Fri, 05 Nov 2021 06:56:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mit9T-0000da-CM; Fri, 05 Nov 2021 06:56:39 +0000
-Received: by outflank-mailman (input) for mailman id 222089;
- Fri, 05 Nov 2021 06:56:38 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mit9X-0001jh-Oh; Fri, 05 Nov 2021 06:56:43 +0000
+Received: by outflank-mailman (input) for mailman id 222092;
+ Fri, 05 Nov 2021 06:56:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Gmz5=PY=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1mit9S-0008Eb-Ei
- for xen-devel@lists.xenproject.org; Fri, 05 Nov 2021 06:56:38 +0000
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [2a00:1450:4864:20::529])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 855f26ec-3e05-11ec-9787-a32c541c8605;
- Fri, 05 Nov 2021 07:56:37 +0100 (CET)
-Received: by mail-ed1-x529.google.com with SMTP id b15so10471843edd.7
- for <xen-devel@lists.xenproject.org>; Thu, 04 Nov 2021 23:56:37 -0700 (PDT)
+ id 1mit9W-0008NQ-0U
+ for xen-devel@lists.xenproject.org; Fri, 05 Nov 2021 06:56:42 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 87859bdc-3e05-11ec-a9d2-d9f7a1cc8784;
+ Fri, 05 Nov 2021 07:56:41 +0100 (CET)
+Received: by mail-ed1-x533.google.com with SMTP id f8so29948103edy.4
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Nov 2021 23:56:41 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id dt4sm3735150ejb.27.2021.11.04.23.56.35
+ by smtp.gmail.com with ESMTPSA id dt4sm3735150ejb.27.2021.11.04.23.56.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Nov 2021 23:56:36 -0700 (PDT)
+ Thu, 04 Nov 2021 23:56:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,34 +51,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 855f26ec-3e05-11ec-9787-a32c541c8605
+X-Inumbo-ID: 87859bdc-3e05-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=/BhVSzCyfrKMDozwQH/ExTubI3Dx6s3goXHMqPKDfjg=;
-        b=K7U9vUsEU4wDAlfzmWQaQ3shYxNk5c+bFa7pzSjVc9szODwmj997M5/1FpSgD0eaVK
-         7WplqIySozk5AxYy4oMhaEPLGSxfkN7celQjwmaMeHS+9al9oeFLxn+hEpRWIJa0eRol
-         dlHYax4HBRFmhwYC3bpinjWlU6KifLIXjkHPNDZCfYl72u7mFp94E98wGor0WhXKYgxH
-         qQEwipLYMJzmuI3UVKAce6WXBmnz/4GF2u00pzkS12WokvNCrlTiduespTGbsV7HPQ7H
-         nOb5v5gbIG0bG+S8nGlsSF0o31vuHYLCu5UMBL/Az9um0vy3VGFtqOD3W4GYs+hpk3ur
-         x7Cg==
+        bh=XyZSMZ7iKKLkWA3FJonAF/JNUpQ9LSX1yaRvNFIyvMA=;
+        b=paJTQbNmX2422YdQxWAkilGdnCnfHcrX2/PzNL261GPmAbwsW/hW0kMVLU7BDmktI9
+         +JANFVQP1BD65WstErEcXciOyRkV+R1+rIcSIldz9iiZz9R1NqpO/uDu7NI80dpdkYTW
+         kQ4y8h1qZ5/OeU6Sf8vPNnkB+orjbVrz53tjMfsRJz2MJJ6SFSVYtyV3I56I7Su5ANvx
+         j2UqBdk0N++TAeevhZHkrGmZ93CtMT4iINrgTFs4mdGojt4F7ZCvfJ9eFIq1i7Llo6xl
+         ebr68ogUy0sBwWO7Om6TPtN/Nc1yl6KavKrpJBrEn4vwqZ6tpdqoCAoOxFPcv3NpziqY
+         cXSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=/BhVSzCyfrKMDozwQH/ExTubI3Dx6s3goXHMqPKDfjg=;
-        b=SQq3uEdo7fmz7TJxivUoW8bVukEoAv/vH6ieZUZdIei13N6BKsniNPyQqpHaKUsyP4
-         FmRz2rIWhX35FFw7Ls4I6HH0rrXGTTNg2h/gZmkHJw+zt0TIeoQnh+RtwPZV44Ziiy9P
-         6P3HCJZMgaFm1ncT/4p+5KGQwcyvm5OwBZA2Ck00WhmpEgLNct78YxnUU1p6t/hMezf7
-         j7MPwReGMLFEALfrm267j/Zs/DKargxbOWTl5Niz5ligCl9J873xbj4nLOMSJueTnXHP
-         6ePn3jvdR5Hfatc4KWQhIBMRSHAHJWy0k4CJ/WAtOCDr0UKgGypIErhVrYWLmuNZhlg7
-         poFA==
-X-Gm-Message-State: AOAM532sxEcSLL6kVmZhBTXlGBFYtaxadXAx7lOfnr1UFSiknYSKZyYa
-	54rCsZIYsfk0ZWj6a5B71cXEAVuWhbaraQ==
-X-Google-Smtp-Source: ABdhPJwH3nj2qgzWQi6uwb8KYRy2nn02Sm8YsU5o9cvWZgY9/c+lRZTPHGNkKX53KMbOHn9w8eTdEg==
-X-Received: by 2002:a17:906:3408:: with SMTP id c8mr14550874ejb.41.1636095397004;
-        Thu, 04 Nov 2021 23:56:37 -0700 (PDT)
+        bh=XyZSMZ7iKKLkWA3FJonAF/JNUpQ9LSX1yaRvNFIyvMA=;
+        b=N5OvLfxvUmZ/dspgu4KNY3YjfyEQ5HEpIEuw1WMneZLsH6aKWb2zkysaYlMl1gjMzN
+         xpB3LRzeUchVAHBXfHZsvnt/Z/phr6GZ7W13MY/m8mCjVfGezItZkM6icH0t8OicW6Ie
+         TFyUthVuh/sTk+TR+tsfUFPDIfUgsGafEJIZup6IsQIdaSQ4+MKZ9X83we4cISeb1Pyi
+         flJtGuW7UQacgcNfqYAQahadkkO2ShzEMjtXIgwLgYindW5CvgMl8iZqZMIrkaMAM9pj
+         e8hObMTym9gHXhJApZgeM7ee/divEWitMRP7j3ZCigd/tabRbp0DtWWktFlCEVH4g+sE
+         A7Cg==
+X-Gm-Message-State: AOAM532d6KOXxM1zl1RVPRfvMmcaNl+B8Iuo/P2iNDndU67bLRW18Wc4
+	iuiMw/QeoKzYQ1wEeomg7Ea1w8kC92o7sQ==
+X-Google-Smtp-Source: ABdhPJw6edY8YQ99u9eqfsvwlkGtZAjVgFNAwPaaqGlEbF+LcSDWS6OORU0obPFktGIYzCLWO6v6Bw==
+X-Received: by 2002:a17:907:8a1b:: with SMTP id sc27mr35150537ejc.572.1636095400630;
+        Thu, 04 Nov 2021 23:56:40 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -94,9 +94,9 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v4 04/11] vpci: add hooks for PCI device assign/de-assign
-Date: Fri,  5 Nov 2021 08:56:22 +0200
-Message-Id: <20211105065629.940943-5-andr2000@gmail.com>
+Subject: [PATCH v4 07/11] vpci/header: program p2m with guest BAR view
+Date: Fri,  5 Nov 2021 08:56:25 +0200
+Message-Id: <20211105065629.940943-8-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211105065629.940943-1-andr2000@gmail.com>
 References: <20211105065629.940943-1-andr2000@gmail.com>
@@ -105,182 +105,114 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-When a PCI device gets assigned/de-assigned some work on vPCI side needs
-to be done for that device. Introduce a pair of hooks so vPCI can handle
-that.
+Take into account guest's BAR view and program its p2m accordingly:
+gfn is guest's view of the BAR and mfn is the physical BAR value as set
+up by the host bridge in the hardware domain.
+This way hardware doamin sees physical BAR values and guest sees
+emulated ones.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
 Since v3:
- - remove toolstack roll-back description from the commit message
-   as error are to be handled with proper cleanup in Xen itself
- - remove __must_check
- - remove redundant rc check while assigning devices
- - fix redundant CONFIG_HAS_VPCI check for CONFIG_HAS_VPCI_GUEST_SUPPORT
- - use REGISTER_VPCI_INIT machinery to run required steps on device
-   init/assign: add run_vpci_init helper
+- updated comment (Roger)
+- removed gfn_add(map->start_gfn, rc); which is wrong
+- use v->domain instead of v->vpci.pdev->domain
+- removed odd e.g. in comment
+- s/d%d/%pd in altered code
+- use gdprintk for map/unmap logs
 Since v2:
-- define CONFIG_HAS_VPCI_GUEST_SUPPORT so dead code is not compiled
-  for x86
+- improve readability for data.start_gfn and restructure ?: construct
 Since v1:
- - constify struct pci_dev where possible
- - do not open code is_system_domain()
- - extended the commit message
+ - s/MSI/MSI-X in comments
 ---
- xen/drivers/Kconfig           |  4 +++
- xen/drivers/passthrough/pci.c |  6 ++++
- xen/drivers/vpci/vpci.c       | 57 ++++++++++++++++++++++++++++++-----
- xen/include/xen/vpci.h        | 16 ++++++++++
- 4 files changed, 75 insertions(+), 8 deletions(-)
+ xen/drivers/vpci/header.c | 33 +++++++++++++++++++++++++++++----
+ 1 file changed, 29 insertions(+), 4 deletions(-)
 
-diff --git a/xen/drivers/Kconfig b/xen/drivers/Kconfig
-index db94393f47a6..780490cf8e39 100644
---- a/xen/drivers/Kconfig
-+++ b/xen/drivers/Kconfig
-@@ -15,4 +15,8 @@ source "drivers/video/Kconfig"
- config HAS_VPCI
- 	bool
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index 5fc2dfbbc864..34158da2d5f6 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -30,6 +30,10 @@
  
-+config HAS_VPCI_GUEST_SUPPORT
-+	bool
-+	depends on HAS_VPCI
-+
- endmenu
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index a9d31293ac09..529a4f50aa80 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -873,6 +873,10 @@ static int deassign_device(struct domain *d, uint16_t seg, uint8_t bus,
-     if ( ret )
-         goto out;
+ struct map_data {
+     struct domain *d;
++    /* Start address of the BAR as seen by the guest. */
++    gfn_t start_gfn;
++    /* Physical start address of the BAR. */
++    mfn_t start_mfn;
+     bool map;
+ };
  
-+    ret = vpci_deassign_device(d, pdev);
-+    if ( ret )
-+        goto out;
-+
-     if ( pdev->domain == hardware_domain  )
-         pdev->quarantine = false;
- 
-@@ -1445,6 +1449,8 @@ static int assign_device(struct domain *d, u16 seg, u8 bus, u8 devfn, u32 flag)
-         rc = hd->platform_ops->assign_device(d, devfn, pci_to_dev(pdev), flag);
-     }
- 
-+    rc = vpci_assign_device(d, pdev);
-+
-  done:
-     if ( rc )
-         printk(XENLOG_G_WARNING "%pd: assign (%pp) failed (%d)\n",
-diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
-index d7f033a0811f..5f086398a98c 100644
---- a/xen/drivers/vpci/vpci.c
-+++ b/xen/drivers/vpci/vpci.c
-@@ -63,11 +63,25 @@ void vpci_remove_device(struct pci_dev *pdev)
-     pdev->vpci = NULL;
- }
- 
--int vpci_add_handlers(struct pci_dev *pdev)
-+static int run_vpci_init(struct pci_dev *pdev)
+@@ -37,12 +41,24 @@ static int map_range(unsigned long s, unsigned long e, void *data,
+                      unsigned long *c)
  {
-     unsigned int i;
-     int rc = 0;
+     const struct map_data *map = data;
++    gfn_t start_gfn;
+     int rc;
  
-+    for ( i = 0; i < NUM_VPCI_INIT; i++ )
-+    {
-+        rc = __start_vpci_array[i](pdev);
-+        if ( rc )
-+            break;
-+    }
-+
-+    return rc;
-+}
-+
-+int vpci_add_handlers(struct pci_dev *pdev)
-+{
-+    int rc;
-+
-     if ( !has_vpci(pdev->domain) )
-         return 0;
+     for ( ; ; )
+     {
+         unsigned long size = e - s + 1;
  
-@@ -81,18 +95,45 @@ int vpci_add_handlers(struct pci_dev *pdev)
-     INIT_LIST_HEAD(&pdev->vpci->handlers);
-     spin_lock_init(&pdev->vpci->lock);
++        /*
++         * Ranges to be mapped don't always start at the BAR start address, as
++         * there can be holes or partially consumed ranges. Account for the
++         * offset of the current address from the BAR start.
++         */
++        start_gfn = gfn_add(map->start_gfn, s - mfn_x(map->start_mfn));
++
++        gdprintk(XENLOG_G_DEBUG,
++                 "%smap [%lx, %lx] -> %#"PRI_gfn" for %pd\n",
++                 map->map ? "" : "un", s, e, gfn_x(start_gfn),
++                 map->d);
+         /*
+          * ARM TODOs:
+          * - On ARM whether the memory is prefetchable or not should be passed
+@@ -52,8 +68,10 @@ static int map_range(unsigned long s, unsigned long e, void *data,
+          * - {un}map_mmio_regions doesn't support preemption.
+          */
  
--    for ( i = 0; i < NUM_VPCI_INIT; i++ )
--    {
--        rc = __start_vpci_array[i](pdev);
--        if ( rc )
--            break;
--    }
--
-+    rc = run_vpci_init(pdev);
-     if ( rc )
-         vpci_remove_device(pdev);
+-        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(s))
+-                      : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(s));
++        rc = map->map ? map_mmio_regions(map->d, start_gfn,
++                                         size, _mfn(s))
++                      : unmap_mmio_regions(map->d, start_gfn,
++                                           size, _mfn(s));
+         if ( rc == 0 )
+         {
+             *c += size;
+@@ -62,8 +80,8 @@ static int map_range(unsigned long s, unsigned long e, void *data,
+         if ( rc < 0 )
+         {
+             printk(XENLOG_G_WARNING
+-                   "Failed to identity %smap [%lx, %lx] for d%d: %d\n",
+-                   map->map ? "" : "un", s, e, map->d->domain_id, rc);
++                   "Failed to identity %smap [%lx, %lx] for %pd: %d\n",
++                   map->map ? "" : "un", s, e, map->d, rc);
+             break;
+         }
+         ASSERT(rc < size);
+@@ -149,6 +167,10 @@ bool vpci_process_pending(struct vcpu *v)
+             if ( rangeset_is_empty(bar->mem) )
+                 continue;
  
-     return rc;
- }
-+
-+#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
-+/* Notify vPCI that device is assigned to guest. */
-+int vpci_assign_device(struct domain *d, struct pci_dev *pdev)
-+{
-+    int rc;
-+
-+    /* It only makes sense to assign for hwdom or guest domain. */
-+    if ( is_system_domain(d) || !has_vpci(d) )
-+        return 0;
-+
-+    vpci_remove_device_handlers(pdev);
-+
-+    rc = run_vpci_init(pdev);
-+    if ( rc )
-+        vpci_deassign_device(d, pdev);
-+
-+    return rc;
-+}
-+
-+/* Notify vPCI that device is de-assigned from guest. */
-+int vpci_deassign_device(struct domain *d, struct pci_dev *pdev)
-+{
-+    /* It only makes sense to de-assign from hwdom or guest domain. */
-+    if ( is_system_domain(d) || !has_vpci(d) )
-+        return 0;
-+
-+    vpci_remove_device_handlers(pdev);
-+
-+    return 0;
-+}
-+#endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
-+
- #endif /* __XEN__ */
++            data.start_gfn =
++                 _gfn(PFN_DOWN(is_hardware_domain(v->domain)
++                               ? bar->addr : bar->guest_addr));
++            data.start_mfn = _mfn(PFN_DOWN(bar->addr));
+             rc = rangeset_consume_ranges(bar->mem, map_range, &data);
  
- static int vpci_register_cmp(const struct vpci_register *r1,
-diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 1883b9d08a70..a016b4197801 100644
---- a/xen/include/xen/vpci.h
-+++ b/xen/include/xen/vpci.h
-@@ -262,6 +262,22 @@ static inline void vpci_cancel_pending(const struct pci_dev *pdev)
- }
- #endif
+             if ( rc == -ERESTART )
+@@ -223,6 +245,9 @@ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
+         if ( rangeset_is_empty(bar->mem) )
+             continue;
  
-+#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
-+/* Notify vPCI that device is assigned/de-assigned to/from guest. */
-+int vpci_assign_device(struct domain *d, struct pci_dev *pdev);
-+int vpci_deassign_device(struct domain *d, struct pci_dev *pdev);
-+#else
-+static inline int vpci_assign_device(struct domain *d, struct pci_dev *pdev)
-+{
-+    return 0;
-+};
-+
-+static inline int vpci_deassign_device(struct domain *d, struct pci_dev *pdev)
-+{
-+    return 0;
-+};
-+#endif
-+
- #endif
- 
- /*
++        data.start_gfn = _gfn(PFN_DOWN(is_hardware_domain(d)
++                                       ? bar->addr : bar->guest_addr));
++        data.start_mfn = _mfn(PFN_DOWN(bar->addr));
+         while ( (rc = rangeset_consume_ranges(bar->mem, map_range,
+                                               &data)) == -ERESTART )
+             process_pending_softirqs();
 -- 
 2.25.1
 
