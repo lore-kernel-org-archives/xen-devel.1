@@ -2,44 +2,44 @@ Return-Path: <SRS0=/wKp=PY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20EB6C43217
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:33:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E14BC433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:33:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DDCAB611C4
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:33:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org DDCAB611C4
+	by mail.kernel.org (Postfix) with ESMTPS id CA2E9611C4
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Nov 2021 06:33:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org CA2E9611C4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.222026.384081 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.222025.384063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1misnF-0002k1-5k; Fri, 05 Nov 2021 06:33:41 +0000
+	id 1misnD-0002GP-Ko; Fri, 05 Nov 2021 06:33:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 222026.384081; Fri, 05 Nov 2021 06:33:41 +0000
+Received: by outflank-mailman (output) from mailman id 222025.384063; Fri, 05 Nov 2021 06:33:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1misnE-0002i1-S8; Fri, 05 Nov 2021 06:33:40 +0000
-Received: by outflank-mailman (input) for mailman id 222026;
- Fri, 05 Nov 2021 06:33:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1misnD-0002E9-EJ; Fri, 05 Nov 2021 06:33:39 +0000
+Received: by outflank-mailman (input) for mailman id 222025;
+ Fri, 05 Nov 2021 06:33:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Gmz5=PY=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1misnD-0001ER-Hv
- for xen-devel@lists.xenproject.org; Fri, 05 Nov 2021 06:33:39 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4f8eac75-3e02-11ec-9787-a32c541c8605;
- Fri, 05 Nov 2021 07:33:38 +0100 (CET)
-Received: by mail-ed1-x534.google.com with SMTP id j21so29439095edt.11
- for <xen-devel@lists.xenproject.org>; Thu, 04 Nov 2021 23:33:38 -0700 (PDT)
+ id 1misnC-0000uf-BP
+ for xen-devel@lists.xenproject.org; Fri, 05 Nov 2021 06:33:38 +0000
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [2a00:1450:4864:20::533])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4ed02a88-3e02-11ec-a9d2-d9f7a1cc8784;
+ Fri, 05 Nov 2021 07:33:37 +0100 (CET)
+Received: by mail-ed1-x533.google.com with SMTP id r4so28862671edi.5
+ for <xen-devel@lists.xenproject.org>; Thu, 04 Nov 2021 23:33:37 -0700 (PDT)
 Received: from localhost.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id e12sm3599870ejs.86.2021.11.04.23.33.37
+ by smtp.gmail.com with ESMTPSA id e12sm3599870ejs.86.2021.11.04.23.33.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Nov 2021 23:33:37 -0700 (PDT)
+ Thu, 04 Nov 2021 23:33:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,34 +51,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4f8eac75-3e02-11ec-9787-a32c541c8605
+X-Inumbo-ID: 4ed02a88-3e02-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=LylF1cpLHbISjBJqhF+mgwyYAEJHR3syGzKHfKTNLi4=;
-        b=Gb1Tzc+FiWeAo4gYgZJI7/zVVhxSsRR70ZC7KSuPQvNGguptQB3sNexSAp5CwJI5VJ
-         /K2eB1ZF8c98NyO/gtNCcQKPCZni/nPcUtnYGaX1mcSNU1P1u839zJDKFkRcYZlAgVxS
-         PfUwixFuQgTRq9ATCMli/7FLRqm/QVwsQ8a//7FSGlnj1JOirpsL0ctL2Nx58pgE6/X6
-         x+gtsipn21Vr0nhRB5c0q1UtxPSeSe+aqIRW6ZeFKNiEylI37ZWSoz+tuWvO54ratC3m
-         xZ4ihes4NrAbGYrkOTH+FY30KwAgvEH2kPptjphIpP9HTLNEFSszxF3vDm7HKkS6qRGp
-         iWNA==
+        bh=sGK8Pm6RypWgXJkvMD4+e3RPRWZCdgGUZOOGFT2QhCc=;
+        b=i7ywQryvHdyLIfZJGgicojKb9SnEXWuT1Bj9bVk6hTWVxo91p52uTyU0HR4FNKFYZi
+         dzeslv82jS4cHhWqhsCvXNG2exjYcpMtDAUG34M7SW1HF0uO+8xJHz2QGPMgtRiDKXxB
+         2vLLz098HV7e4qaeu21VvmDtBjsxw4gUaTAbAJra8dzuPQ+YQxw3P/WlRDwtPvmaDC2Q
+         vPwdfNV1vYMzdN35G97zbyD2CMph+IHMZXd1rQA5JCUKRrHbw8ykvIbB/EjAcDM8SEJq
+         p+V2alnGb9FUbkYler+gX0VXQssM37lXJu13di3G0eGc2Lg1D2o5TAW2/uI65DBUpkei
+         D3BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=LylF1cpLHbISjBJqhF+mgwyYAEJHR3syGzKHfKTNLi4=;
-        b=eXtkw8VwrXPw88OZ55aO5RS8DgS+v8kGzOHn8A5hol3dSujPxZD6ObFHbtlQH5KIfG
-         lKFxoA6E2o056IKyuN5iJZUogpnCKpKpCo1y32nyRzbtyNTlETiwAEUY5dkMrDxqsjS6
-         aB/t3bHXFwFCfmzclZLClMq8ivVHzJ20AOYdY4Eu/3v3fqbqwyZRCPf8ZIGXKpJUfvUg
-         xnIJ/g2GJBVjgzlRR4hmwHtBx7HOFm9UmBlR/STCN40Fbt8h5oq5jwf9v9z36U0ufJ3x
-         Z6K9+jsTiyaghfpuD9zbYO3aItzhXIg0p3QdpK0vNmLC4GZo4hDORThVGRF8Xzt+OCTB
-         4PkQ==
-X-Gm-Message-State: AOAM532ei8AhDJeJdt/mKFkalIpY3EruU3MMr/9FHoFgvVgqPps8DF8W
-	WYZCHtfMNDyTKx/COKCyWOlRM/2FhMAVfA==
-X-Google-Smtp-Source: ABdhPJx6KXyOXUui/Xab210y17uEpTCWAHBBf70htETILb3uWGGNACWCe6wxS5hfGSRplFUVJGz2Tw==
-X-Received: by 2002:a17:907:6289:: with SMTP id nd9mr68670282ejc.101.1636094018309;
-        Thu, 04 Nov 2021 23:33:38 -0700 (PDT)
+        bh=sGK8Pm6RypWgXJkvMD4+e3RPRWZCdgGUZOOGFT2QhCc=;
+        b=hAbZUx9ZPAKocGyZ+cvNcgaxAHdFZ+2ahqlMA3MnWmhde4M5bg2RAZQlzphb8SCVLN
+         MQUvHbQimbCf1v99jBesJ6Iefz/61wZpBS1NuEWCMgze6lSkpuEoWbywyVU3XioP7E+y
+         XIz6+25k+zyTB9f1T5cBcxSUlBaGCGMBFaKd3RnEhTR4mWpyok2aLs61H4QQd3LYuo0x
+         a7aBB5EWGK8WBZPZy2/iGnjdQ/VUAjtnc98Moy++/4wsoOCEFo/USX9kmy0tTTSBaZX1
+         aABW3bpND5bb7QUYpNG5U1dArUInoWJ9hdDhgEA9cdzlWCjvpF7xSakJFZpN1DTJvkQT
+         itJA==
+X-Gm-Message-State: AOAM530AMHmToPNvFqJ/LQvhoOyABCNT2s+Iyg859Iesj6s25fjWgS9I
+	vJw/n/zwxTHhXy5PP4V2+gIvCwsx8dqS3g==
+X-Google-Smtp-Source: ABdhPJxj576TShH4DBFMpmVbDp7CpVwPbsc9NWydnsmtIkF+CjmzVn+aOPMN4Hce10ZKTtAbYmEdww==
+X-Received: by 2002:a17:906:c187:: with SMTP id g7mr67130837ejz.534.1636094016970;
+        Thu, 04 Nov 2021 23:33:36 -0700 (PDT)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -94,9 +94,9 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v6 7/7] xen/arm: do not use void pointer in pci_host_common_probe
-Date: Fri,  5 Nov 2021 08:33:26 +0200
-Message-Id: <20211105063326.939843-8-andr2000@gmail.com>
+Subject: [PATCH v6 6/7] xen/arm: process pending vPCI map/unmap operations
+Date: Fri,  5 Nov 2021 08:33:25 +0200
+Message-Id: <20211105063326.939843-7-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211105063326.939843-1-andr2000@gmail.com>
 References: <20211105063326.939843-1-andr2000@gmail.com>
@@ -105,81 +105,125 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-There is no reason to use void pointer while passing ECAM ops to the
-pci_host_common_probe function as it is anyway casted to struct pci_ecam_ops
-inside. For that reason remove the void pointer and pass struct pci_ecam_ops
-pointer as is.
+vPCI may map and unmap PCI device memory (BARs) being passed through which
+may take a lot of time. For this those operations may be deferred to be
+performed later, so that they can be safely preempted.
+
+Currently this deferred processing is happening in common IOREQ code
+which doesn't seem to be the right place for x86 and is even more
+doubtful because IOREQ may not be enabled for Arm at all.
+So, for Arm the pending vPCI work may have no chance to be executed
+if the processing is left as is in the common IOREQ code only.
+For that reason make vPCI processing happen in arch specific code.
+
+Please be aware that there are a few outstanding TODOs affecting this
+code path, see xen/drivers/vpci/header.c:map_range and
+xen/drivers/vpci/header.c:vpci_process_pending.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-
 ---
-New in v4
----
- xen/arch/arm/pci/ecam.c            | 4 ++--
- xen/arch/arm/pci/pci-host-common.c | 6 ++----
- xen/include/asm-arm/pci.h          | 5 +++--
- 3 files changed, 7 insertions(+), 8 deletions(-)
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Paul Durrant <paul@xen.org>
 
-diff --git a/xen/arch/arm/pci/ecam.c b/xen/arch/arm/pci/ecam.c
-index 4f71b11c3057..6aeea12a68bf 100644
---- a/xen/arch/arm/pci/ecam.c
-+++ b/xen/arch/arm/pci/ecam.c
-@@ -24,8 +24,8 @@ void __iomem *pci_ecam_map_bus(struct pci_host_bridge *bridge,
-                                pci_sbdf_t sbdf, uint32_t where)
+Since v5:
+ - check_for_vcpu_work: vPCI addition is moved before the
+   vcpu_ioreq__handle_completion(v). This is to avoid differences
+   with the x86 version. (Julien)
+Since v2:
+ - update commit message with more insight on x86, IOREQ and Arm
+ - restored order of invocation for IOREQ and vPCI processing (Jan)
+Since v1:
+ - Moved the check for pending vpci work from the common IOREQ code
+   to hvm_do_resume on x86
+ - Re-worked the code for Arm to ensure we don't miss pending vPCI work
+---
+ xen/arch/arm/traps.c   | 13 +++++++++++++
+ xen/arch/x86/hvm/hvm.c |  6 ++++++
+ xen/common/ioreq.c     |  9 ---------
+ 3 files changed, 19 insertions(+), 9 deletions(-)
+
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 219ab3c3fbde..8757210a798b 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -34,6 +34,7 @@
+ #include <xen/symbols.h>
+ #include <xen/version.h>
+ #include <xen/virtual_region.h>
++#include <xen/vpci.h>
+ 
+ #include <public/sched.h>
+ #include <public/xen.h>
+@@ -2290,6 +2291,18 @@ static bool check_for_vcpu_work(void)
  {
-     const struct pci_config_window *cfg = bridge->cfg;
--    struct pci_ecam_ops *ops =
--        container_of(bridge->ops, struct pci_ecam_ops, pci_ops);
-+    const struct pci_ecam_ops *ops =
-+        container_of(bridge->ops, const struct pci_ecam_ops, pci_ops);
-     unsigned int devfn_shift = ops->bus_shift - 8;
-     void __iomem *base;
+     struct vcpu *v = current;
  
-diff --git a/xen/arch/arm/pci/pci-host-common.c b/xen/arch/arm/pci/pci-host-common.c
-index 6af845ab9d6c..1aad664b213e 100644
---- a/xen/arch/arm/pci/pci-host-common.c
-+++ b/xen/arch/arm/pci/pci-host-common.c
-@@ -194,15 +194,13 @@ static int pci_bus_find_domain_nr(struct dt_device_node *dev)
-     return domain;
- }
++    if ( has_vpci(v->domain) )
++    {
++        bool pending;
++
++        local_irq_enable();
++        pending = vpci_process_pending(v);
++        local_irq_disable();
++
++        if ( pending )
++            return true;
++    }
++
+ #ifdef CONFIG_IOREQ_SERVER
+     if ( domain_has_ioreq_server(v->domain) )
+     {
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index eee365711d63..096a61b7ea02 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -546,6 +546,12 @@ void hvm_do_resume(struct vcpu *v)
  
--int pci_host_common_probe(struct dt_device_node *dev, const void *data)
-+int pci_host_common_probe(struct dt_device_node *dev,
-+                          const struct pci_ecam_ops *ops)
+     pt_restore_timer(v);
+ 
++    if ( has_vpci(v->domain) && vpci_process_pending(v) )
++    {
++        raise_softirq(SCHEDULE_SOFTIRQ);
++        return;
++    }
++
+     if ( !vcpu_ioreq_handle_completion(v) )
+         return;
+ 
+diff --git a/xen/common/ioreq.c b/xen/common/ioreq.c
+index d732dc045df9..689d256544c8 100644
+--- a/xen/common/ioreq.c
++++ b/xen/common/ioreq.c
+@@ -25,9 +25,7 @@
+ #include <xen/lib.h>
+ #include <xen/paging.h>
+ #include <xen/sched.h>
+-#include <xen/softirq.h>
+ #include <xen/trace.h>
+-#include <xen/vpci.h>
+ 
+ #include <asm/guest_atomics.h>
+ #include <asm/ioreq.h>
+@@ -212,19 +210,12 @@ static bool wait_for_io(struct ioreq_vcpu *sv, ioreq_t *p)
+ 
+ bool vcpu_ioreq_handle_completion(struct vcpu *v)
  {
-     struct pci_host_bridge *bridge;
-     struct pci_config_window *cfg;
--    struct pci_ecam_ops *ops;
-     int err;
+-    struct domain *d = v->domain;
+     struct vcpu_io *vio = &v->io;
+     struct ioreq_server *s;
+     struct ioreq_vcpu *sv;
+     enum vio_completion completion;
+     bool res = true;
  
--    ops = (struct pci_ecam_ops *) data;
+-    if ( has_vpci(d) && vpci_process_pending(v) )
+-    {
+-        raise_softirq(SCHEDULE_SOFTIRQ);
+-        return false;
+-    }
 -
-     bridge = pci_alloc_host_bridge();
-     if ( !bridge )
-         return -ENOMEM;
-diff --git a/xen/include/asm-arm/pci.h b/xen/include/asm-arm/pci.h
-index 3d706fdd1d88..4199e0267d24 100644
---- a/xen/include/asm-arm/pci.h
-+++ b/xen/include/asm-arm/pci.h
-@@ -65,7 +65,7 @@ struct pci_host_bridge {
-     struct list_head node;           /* Node in list of host bridges */
-     uint16_t segment;                /* Segment number */
-     struct pci_config_window* cfg;   /* Pointer to the bridge config window */
--    struct pci_ops *ops;
-+    const struct pci_ops *ops;
- };
- 
- struct pci_ops {
-@@ -94,7 +94,8 @@ struct pci_ecam_ops {
- /* Default ECAM ops */
- extern const struct pci_ecam_ops pci_generic_ecam_ops;
- 
--int pci_host_common_probe(struct dt_device_node *dev, const void *data);
-+int pci_host_common_probe(struct dt_device_node *dev,
-+                          const struct pci_ecam_ops *ops);
- int pci_generic_config_read(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
-                             uint32_t reg, uint32_t len, uint32_t *value);
- int pci_generic_config_write(struct pci_host_bridge *bridge, pci_sbdf_t sbdf,
+     while ( (sv = get_pending_vcpu(v, &s)) != NULL )
+         if ( !wait_for_io(sv, get_ioreq(s, v)) )
+             return false;
 -- 
 2.25.1
 
