@@ -2,45 +2,45 @@ Return-Path: <SRS0=lh5P=P3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05DA9C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:58:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9552EC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:58:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AADE36135F
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:58:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org AADE36135F
+	by mail.kernel.org (Postfix) with ESMTPS id 61E2761354
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:58:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 61E2761354
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.222946.385485 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.222959.385495 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjsz6-0007JB-D0; Mon, 08 Nov 2021 00:58:04 +0000
+	id 1mjszJ-0008Oq-Lb; Mon, 08 Nov 2021 00:58:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 222946.385485; Mon, 08 Nov 2021 00:58:04 +0000
+Received: by outflank-mailman (output) from mailman id 222959.385495; Mon, 08 Nov 2021 00:58:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjsz6-0007Iz-89; Mon, 08 Nov 2021 00:58:04 +0000
-Received: by outflank-mailman (input) for mailman id 222946;
- Mon, 08 Nov 2021 00:58:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mjszJ-0008Oj-Ic; Mon, 08 Nov 2021 00:58:17 +0000
+Received: by outflank-mailman (input) for mailman id 222959;
+ Mon, 08 Nov 2021 00:58:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ZOPF=P3=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mjspp-0004R0-JV
- for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:48:29 +0000
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [2a00:1450:4864:20::231])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 969a005f-402d-11ec-9787-a32c541c8605;
- Mon, 08 Nov 2021 01:48:28 +0100 (CET)
-Received: by mail-lj1-x231.google.com with SMTP id z8so3357782ljz.9
- for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:48:28 -0800 (PST)
+ id 1mjspj-0004MH-RI
+ for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:48:23 +0000
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [2a00:1450:4864:20::234])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 93581600-402d-11ec-a9d2-d9f7a1cc8784;
+ Mon, 08 Nov 2021 01:48:23 +0100 (CET)
+Received: by mail-lj1-x234.google.com with SMTP id 207so8000561ljf.10
+ for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:48:23 -0800 (PST)
 Received: from localhost.localdomain (79-139-188-96.dynamic.spd-mgts.ru.
  [79.139.188.96])
- by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.48.26
+ by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.48.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Nov 2021 16:48:28 -0800 (PST)
+ Sun, 07 Nov 2021 16:48:22 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,34 +52,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 969a005f-402d-11ec-9787-a32c541c8605
+X-Inumbo-ID: 93581600-402d-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=mfpn4GjmPLTNTnhqDUdqufcuPWBAqiXi1zu9JyEbhbk=;
-        b=W+BA6i1yQfPHIvKbww0H/Kx11NRHF71Rxe4SzvnJDlq9uOKEN4w96ovj4OquXqfPQJ
-         JCbSMj3tYPJKeCx5ruhMxqh9HJs5RtCzyXJO/lX0VrHMlYovhvUDgzUTuXzAvRaAEx6k
-         BQjK3uMGMr9zDhSEkM6cFPwapFEkDP2nhbeboGEs7tpPwcQ0ORLVbdqRCj1JsmfdENWp
-         Wouvje//jgWEX2Go+W+RKzH6ZjhuUXnF7t/nwShOxV4e7SlATuz/nLumpcFWdS/dBBBB
-         eU28/GWtwfAP3B25fdf33iLfMN4macxZ7oQWLC6+1CIjVCLAfP+kj1aowIKfSp3wSgHJ
-         6KxQ==
+        bh=JCVonCJqoXNh2ybv9/bzELaj4OwJ6cxhXavcxt3mhlI=;
+        b=Q8JF+9TmNS0WZ8hpVHwd8AXSh3hxGIkdEeKisuuELUInvGpHgj0PJY+V29uhsgKld+
+         r8CfBVuSI4NkHcs0hVppWdwlPLHhpSgd0CjmFQBK9FBHGbfgCTXKcCzLnSOfxqWHxWCz
+         fvRdaMfb3QcOG6ij+1fi2QVgcV2QIl/Hc+lkF5CoHp4nfB4tVnXup/sHsVTSjmHe/2r2
+         cTLlXVYo5nHca5l7xuLJZmINZSy922nAbAPRyVUt7UAX/Pbbpcua7yGGUADPtExoOz9+
+         5EibQyeT+l2gIMxAztls7M/jxYtV1YE0NiDvwKKnXwGVcCsb4Ri0ise5izaG+WBMH9Pz
+         9TGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=mfpn4GjmPLTNTnhqDUdqufcuPWBAqiXi1zu9JyEbhbk=;
-        b=jHYHh5xk9O6vcPpHwMTSczdFBLPaSiX7vv969Bahb6I/a3lbG42kqWsbwq46F4slWl
-         Qgqc+u4FJkxe2em9vd4N3XGEPYkR18xXyzGroq+9pXgj121tvmHMhbYq6IccHWBpvx1f
-         fjiwLFt4X9aH8QCZg3onI9tsVFkX4nD5G0lX5/A1981gR+RR4Hrikvmfv+mhcIjrAfZu
-         fx9L6Sl0DDlmB+Ssu6viTHuG7OqzCX8X7UY6Cqd5Au1KyiAzQ017xfEy+E+PJTL2Z/yM
-         lsI+H3IlZbwr0meSxgft3mK/3wm5+03LVnBkzidPM7sSzMPDYQjoBSvDyo0lo0pN0fGV
-         91Zg==
-X-Gm-Message-State: AOAM532ZjCk34LHvN6WEi5L3rJKmZv1fO5lPhkg5NyTIzEM5wK9/ArCB
-	qaP7ogyfh57/82P3bE0RhM8=
-X-Google-Smtp-Source: ABdhPJxvKGMB3QY7Ut5kEA8s6doinUC1/Ww9qKJdN+MXM8K/PkyljZbitnj0m2icyEnTqlRtLd3GMw==
-X-Received: by 2002:a2e:a482:: with SMTP id h2mr8611915lji.87.1636332508421;
-        Sun, 07 Nov 2021 16:48:28 -0800 (PST)
+        bh=JCVonCJqoXNh2ybv9/bzELaj4OwJ6cxhXavcxt3mhlI=;
+        b=IqLXorrS1thKt5j/H+BxbC1O4qOzgFbtCx7HkNCzPoGQtDo5JzvbEcvfsJtFq2vf61
+         1HxQUau07DqyBSaOEVavtotBOQhZpLAYUdJ/WOcZy5TUvkAMU0fjdPNw7y9VxvrG28+e
+         kIlERl6SYU4FM58IlF41GPWRzmpemdcbrTJyCcgd4Y5E8ycyX30CBy498bYdkzjO+E76
+         eZKNfeHkHCTFsZzC1+UBpF+RFT7ZgevWT/0++ggzkkyOBjhg85+h6zuJLZXvUtzTurzi
+         UJpEK5Gv2wUFbyGWjHKM7V/fut8HQ/iCF18ohi8tK+gqR4rhaEQ8t48l3BZL0i1f7zUN
+         PkVw==
+X-Gm-Message-State: AOAM5323gJ7/DhKsOevqU9UkFgW4MlAKyebryybGwsekvlwIVSyJJ8l5
+	pXmtATnTlyOlNO1VPoLs9Eo=
+X-Google-Smtp-Source: ABdhPJxZSO/cYSCCCdiwyDyaURALsH3U+a81Aljy1ksTTNIiufhrqrRcy3NDHYWNvgn17GQ8voaZpQ==
+X-Received: by 2002:a05:651c:1698:: with SMTP id bd24mr7285148ljb.97.1636332502958;
+        Sun, 07 Nov 2021 16:48:22 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -140,96 +140,55 @@ Cc: linux-arm-kernel@lists.infradead.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v3 23/25] ACPI: power: Switch to sys-off handler API
-Date: Mon,  8 Nov 2021 03:45:22 +0300
-Message-Id: <20211108004524.29465-24-digetx@gmail.com>
+Subject: [PATCH v3 20/25] powerpc: Use do_kernel_power_off()
+Date: Mon,  8 Nov 2021 03:45:19 +0300
+Message-Id: <20211108004524.29465-21-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211108004524.29465-1-digetx@gmail.com>
 References: <20211108004524.29465-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Switch to sys-off API that replaces legacy pm_power_off callbacks.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/acpi/sleep.c | 25 +++++++++++--------------
- 1 file changed, 11 insertions(+), 14 deletions(-)
+ arch/powerpc/kernel/setup-common.c | 4 +---
+ arch/powerpc/xmon/xmon.c           | 3 +--
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/acpi/sleep.c b/drivers/acpi/sleep.c
-index eaa47753b758..2e613fddd614 100644
---- a/drivers/acpi/sleep.c
-+++ b/drivers/acpi/sleep.c
-@@ -47,19 +47,11 @@ static void acpi_sleep_tts_switch(u32 acpi_state)
- 	}
- }
- 
--static int tts_notify_reboot(struct notifier_block *this,
--			unsigned long code, void *x)
-+static void tts_reboot_prepare(struct reboot_prep_data *data)
+diff --git a/arch/powerpc/kernel/setup-common.c b/arch/powerpc/kernel/setup-common.c
+index 4f1322b65760..71c4ccd9bbb1 100644
+--- a/arch/powerpc/kernel/setup-common.c
++++ b/arch/powerpc/kernel/setup-common.c
+@@ -161,9 +161,7 @@ void machine_restart(char *cmd)
+ void machine_power_off(void)
  {
- 	acpi_sleep_tts_switch(ACPI_STATE_S5);
--	return NOTIFY_DONE;
- }
- 
--static struct notifier_block tts_notifier = {
--	.notifier_call	= tts_notify_reboot,
--	.next		= NULL,
--	.priority	= 0,
--};
+ 	machine_shutdown();
+-	if (pm_power_off)
+-		pm_power_off();
 -
- static int acpi_sleep_prepare(u32 acpi_state)
- {
- #ifdef CONFIG_ACPI_SLEEP
-@@ -1020,7 +1012,7 @@ static void acpi_sleep_hibernate_setup(void)
- static inline void acpi_sleep_hibernate_setup(void) {}
- #endif /* !CONFIG_HIBERNATION */
- 
--static void acpi_power_off_prepare(void)
-+static void acpi_power_off_prepare(struct power_off_prep_data *data)
- {
- 	/* Prepare to power off the system */
- 	acpi_sleep_prepare(ACPI_STATE_S5);
-@@ -1028,7 +1020,7 @@ static void acpi_power_off_prepare(void)
- 	acpi_os_wait_events_complete();
++	do_kernel_power_off();
+ 	smp_send_stop();
+ 	machine_hang();
  }
- 
--static void acpi_power_off(void)
-+static void acpi_power_off(struct power_off_data *data)
- {
- 	/* acpi_sleep_prepare(ACPI_STATE_S5) should have already been called */
- 	pr_debug("%s called\n", __func__);
-@@ -1036,6 +1028,11 @@ static void acpi_power_off(void)
- 	acpi_enter_sleep_state(ACPI_STATE_S5);
- }
- 
-+static struct sys_off_handler acpi_sys_off_handler = {
-+	.power_off_priority = POWEROFF_PRIO_FIRMWARE,
-+	.reboot_prepare_cb = tts_reboot_prepare,
-+};
-+
- int __init acpi_sleep_init(void)
- {
- 	char supported[ACPI_S_STATE_COUNT * 3 + 1];
-@@ -1052,8 +1049,8 @@ int __init acpi_sleep_init(void)
- 
- 	if (acpi_sleep_state_supported(ACPI_STATE_S5)) {
- 		sleep_states[ACPI_STATE_S5] = 1;
--		pm_power_off_prepare = acpi_power_off_prepare;
--		pm_power_off = acpi_power_off;
-+		acpi_sys_off_handler.power_off_cb = acpi_power_off;
-+		acpi_sys_off_handler.power_off_prepare_cb = acpi_power_off_prepare;
- 	} else {
- 		acpi_no_s5 = true;
+diff --git a/arch/powerpc/xmon/xmon.c b/arch/powerpc/xmon/xmon.c
+index 8b28ff9d98d1..8b9c9ff4834b 100644
+--- a/arch/powerpc/xmon/xmon.c
++++ b/arch/powerpc/xmon/xmon.c
+@@ -1243,8 +1243,7 @@ static void bootcmds(void)
+ 	} else if (cmd == 'h') {
+ 		ppc_md.halt();
+ 	} else if (cmd == 'p') {
+-		if (pm_power_off)
+-			pm_power_off();
++		do_kernel_power_off();
  	}
-@@ -1069,6 +1066,6 @@ int __init acpi_sleep_init(void)
- 	 * Register the tts_notifier to reboot notifier list so that the _TTS
- 	 * object can also be evaluated when the system enters S5.
- 	 */
--	register_reboot_notifier(&tts_notifier);
-+	register_sys_off_handler(&acpi_sys_off_handler);
- 	return 0;
  }
+ 
 -- 
 2.33.1
 
