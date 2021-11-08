@@ -2,45 +2,45 @@ Return-Path: <SRS0=lh5P=P3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 876C5C43219
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87208C4332F
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:48:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 407C760C4D
+	by mail.kernel.org (Postfix) with ESMTPS id 4FEA461251
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:48:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 407C760C4D
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4FEA461251
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.222881.385352 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.222879.385330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjspO-0006Jq-26; Mon, 08 Nov 2021 00:48:02 +0000
+	id 1mjspK-0005bz-4t; Mon, 08 Nov 2021 00:47:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 222881.385352; Mon, 08 Nov 2021 00:48:02 +0000
+Received: by outflank-mailman (output) from mailman id 222879.385330; Mon, 08 Nov 2021 00:47:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjspN-0006Io-U4; Mon, 08 Nov 2021 00:48:01 +0000
-Received: by outflank-mailman (input) for mailman id 222881;
- Mon, 08 Nov 2021 00:48:01 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mjspJ-0005bP-UY; Mon, 08 Nov 2021 00:47:57 +0000
+Received: by outflank-mailman (input) for mailman id 222879;
+ Mon, 08 Nov 2021 00:47:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ZOPF=P3=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mjspM-0004MH-T9
- for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:48:01 +0000
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [2a00:1450:4864:20::231])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 858f46e7-402d-11ec-a9d2-d9f7a1cc8784;
- Mon, 08 Nov 2021 01:48:00 +0100 (CET)
-Received: by mail-lj1-x231.google.com with SMTP id z8so3355987ljz.9
- for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:48:00 -0800 (PST)
+ id 1mjspJ-0004R0-2p
+ for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:47:57 +0000
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [2a00:1450:4864:20::129])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 836ce4f1-402d-11ec-9787-a32c541c8605;
+ Mon, 08 Nov 2021 01:47:56 +0100 (CET)
+Received: by mail-lf1-x129.google.com with SMTP id b40so3076245lfv.10
+ for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:47:56 -0800 (PST)
 Received: from localhost.localdomain (79-139-188-96.dynamic.spd-mgts.ru.
  [79.139.188.96])
- by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.47.58
+ by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.47.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Nov 2021 16:47:59 -0800 (PST)
+ Sun, 07 Nov 2021 16:47:55 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,34 +52,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 858f46e7-402d-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 836ce4f1-402d-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=YMqE3plwxFsGF2jAAFpub/HIgtQoag7R/7s0kLQElmo=;
-        b=DefuhZbt4OnMz/wVwAIWNCALoygvvDVImXqcSeaDNkrH+ru6t4LVzbAUndl/LZOpWO
-         1Efhuk6PQO29JOeoi5KlQ/yRmgN4iklMKAv4PvStXMmGVw2Jtj5IoPHy5CyJDSdjRs0i
-         yriQPAmo7UIy+FrEG+A7H72zXrcEYKOUEa8b1CKRxGAcWxgAYq1CFtAxtuwXyhvjgk4K
-         lte1XwrEWK7M1fH+qxpCth02fxZtOwNmkDnMhde9A04zaHhPgtL983fQ89kdDOA/3AEf
-         Do/YcemkRghD2n99FcExca9IcSL1gRhAAAZW/waRgmmb7TxCy/6h4hAjOVFtj6bVAaT9
-         0COA==
+        bh=xS83fHvJX20ICn8zHYRDKvqQ1GY72vd2riIHxwkjweU=;
+        b=KpydubZgLJ3vuCT00hrCdbf3OtAnjru1YwdDJxo9+hC27tQN3Q4KiomzYSDJMCZXbA
+         EhaYZwalwwy91+aZLY1TS0S40bR84eElruKYesdGlVKFC/aUwPezwIPn/067lWyDW0+Z
+         x4XmqT3PESi2/Nn4WIINCY94V/zeTchenrXpu2fqnWvEylnT7LN71F2WHWj7NjlVp0tD
+         ugoKO0gc6fQ1WUgdslo/PfvFMxmzh/vxeeDZA6/emihAeEIqzA/7Lk07cW3q8vRXpO5g
+         t/bVMWqe23nOV5HEFivxqx8tKkAzcIdw5EiLLiV/QpkyUezErBQd+Ycn225L15v7txub
+         fGhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=YMqE3plwxFsGF2jAAFpub/HIgtQoag7R/7s0kLQElmo=;
-        b=wC83ltO8r2KxRB2lmfNll/b6PT/BXrERjoNhePedFCA6Mq/I7U89apGcPlQ56L+BXH
-         0P6DOpGJY26Rw12GWRfhkifjsoKFMoAyaNVv9DDpNvyYx3IUxkS5mIdRLBXP4tLWPcNR
-         AjkszoiV4RfL+OCDQyyZ+eeOkDgnsg3LhrvRp/WnDrt1Y45kkEkgdBWaWfByqO4QpIj9
-         T9LgyYoxNgMVIT5qFGUQC6GGyKm7YiXUJpLepJBC0nWa/cddrAZArav/DitSKlFFWGKS
-         26RRBvDkYwS+nBNtwPJ1b952GBDHr3jSgYVriamF/T9u1kO/M6Nwt/TnAFZsQrqwYgQ3
-         ++jQ==
-X-Gm-Message-State: AOAM533tGzRWPbFBcSXyMLjH7UwuesW7jhNTMuWuVV5T8uKwB1hs/GxY
-	eBQm5cvosBU0CSxS9C/KvAE=
-X-Google-Smtp-Source: ABdhPJwrPiyodjCt6O7VMd1jbx6YuCXnOFCKgXtyhOlyn238pF2627CcQET7kkCBFMqgNL1jiu7NKw==
-X-Received: by 2002:a05:651c:4d4:: with SMTP id e20mr27622982lji.498.1636332479792;
-        Sun, 07 Nov 2021 16:47:59 -0800 (PST)
+        bh=xS83fHvJX20ICn8zHYRDKvqQ1GY72vd2riIHxwkjweU=;
+        b=IbnzZolLb6TyGalImr++BgT4uNUHOaVG1KK/2ebvAWa5con1qocGtOmLx0x1nHThlU
+         e+Sm7qwZX/+ZSCaKzM2WtiA/1kTci/Koh6u4e/J+rDfM3h5RlEhDz2QU7wHvxfs5H+L4
+         kSQHgVvvyC1G/UIKMCUfeLuF6SCmpJfKOtPORUqmsXFyBTdkU07sY9ugGNvCi89w1uNq
+         Wf0VrhmO2vP0BBXga9SMQI0x/ULljno8LWoVDRMT4svvflKZEkhPtKmtvmPBWabZ08in
+         eeAXLnhDHqtE4LW+WHb52fFMWBTlKD7FMeCPCB7gbFlBjmFCQNXiuwWJeYQnvHo/90qF
+         seKQ==
+X-Gm-Message-State: AOAM533hEweRl4jzU6xQBOJGH9hcvpHXAMcwMb7+ph2YlTDx4bii1Tl4
+	HiqsHDPgRXmIIOwiV5vgHsg=
+X-Google-Smtp-Source: ABdhPJxCboLcXN9lEOmhNp5QiL1yAnh5Fr04KXxv3nzMPaKilPbSu8P/FkJk3gpH04kDYFe9UJDOXg==
+X-Received: by 2002:a05:6512:1323:: with SMTP id x35mr74261803lfu.613.1636332476232;
+        Sun, 07 Nov 2021 16:47:56 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -140,99 +140,50 @@ Cc: linux-arm-kernel@lists.infradead.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v3 07/25] reboot: Remove extern annotation from function prototypes
-Date: Mon,  8 Nov 2021 03:45:06 +0300
-Message-Id: <20211108004524.29465-8-digetx@gmail.com>
+Subject: [PATCH v3 05/25] reboot: Warn if restart handler has duplicated priority
+Date: Mon,  8 Nov 2021 03:45:04 +0300
+Message-Id: <20211108004524.29465-6-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211108004524.29465-1-digetx@gmail.com>
 References: <20211108004524.29465-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-There is no need to annotate function prototypes with 'extern', it makes
-code less readable. Remove unnecessary annotations from <reboot.h>.
+Add sanity check which ensures that there are no two restart handlers
+registered with the same priority. Normally it's a direct sign of a
+problem if two handlers use the same priority.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- include/linux/reboot.h | 38 +++++++++++++++++++-------------------
- 1 file changed, 19 insertions(+), 19 deletions(-)
+ kernel/reboot.c | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/reboot.h b/include/linux/reboot.h
-index 7c288013a3ca..b7fa25726323 100644
---- a/include/linux/reboot.h
-+++ b/include/linux/reboot.h
-@@ -40,36 +40,36 @@ extern int reboot_cpu;
- extern int reboot_force;
- 
- 
--extern int register_reboot_notifier(struct notifier_block *);
--extern int unregister_reboot_notifier(struct notifier_block *);
-+int register_reboot_notifier(struct notifier_block *);
-+int unregister_reboot_notifier(struct notifier_block *);
- 
--extern int devm_register_reboot_notifier(struct device *, struct notifier_block *);
-+int devm_register_reboot_notifier(struct device *, struct notifier_block *);
- 
--extern int register_restart_handler(struct notifier_block *);
--extern int unregister_restart_handler(struct notifier_block *);
--extern void do_kernel_restart(char *cmd);
-+int register_restart_handler(struct notifier_block *);
-+int unregister_restart_handler(struct notifier_block *);
-+void do_kernel_restart(char *cmd);
- 
- /*
-  * Architecture-specific implementations of sys_reboot commands.
+diff --git a/kernel/reboot.c b/kernel/reboot.c
+index 6bcc5d6a6572..e6659ae329f1 100644
+--- a/kernel/reboot.c
++++ b/kernel/reboot.c
+@@ -182,7 +182,20 @@ static ATOMIC_NOTIFIER_HEAD(restart_handler_list);
   */
+ int register_restart_handler(struct notifier_block *nb)
+ {
+-	return atomic_notifier_chain_register(&restart_handler_list, nb);
++	int ret;
++
++	ret = atomic_notifier_chain_register(&restart_handler_list, nb);
++	if (ret)
++		return ret;
++
++	/*
++	 * Handler must have unique priority. Otherwise call order is
++	 * determined by registration order, which is unreliable.
++	 */
++	WARN(!atomic_notifier_has_unique_priority(&restart_handler_list, nb),
++	     "restart handler must have unique priority\n");
++
++	return 0;
+ }
+ EXPORT_SYMBOL(register_restart_handler);
  
--extern void migrate_to_reboot_cpu(void);
--extern void machine_restart(char *cmd);
--extern void machine_halt(void);
--extern void machine_power_off(void);
-+void migrate_to_reboot_cpu(void);
-+void machine_restart(char *cmd);
-+void machine_halt(void);
-+void machine_power_off(void);
- 
--extern void machine_shutdown(void);
-+void machine_shutdown(void);
- struct pt_regs;
--extern void machine_crash_shutdown(struct pt_regs *);
-+void machine_crash_shutdown(struct pt_regs *);
- 
- /*
-  * Architecture independent implementations of sys_reboot commands.
-  */
- 
--extern void kernel_restart_prepare(char *cmd);
--extern void kernel_restart(char *cmd);
--extern void kernel_halt(void);
--extern void kernel_power_off(void);
-+void kernel_restart_prepare(char *cmd);
-+void kernel_restart(char *cmd);
-+void kernel_halt(void);
-+void kernel_power_off(void);
- 
- extern int C_A_D; /* for sysctl */
- void ctrl_alt_del(void);
-@@ -77,15 +77,15 @@ void ctrl_alt_del(void);
- #define POWEROFF_CMD_PATH_LEN	256
- extern char poweroff_cmd[POWEROFF_CMD_PATH_LEN];
- 
--extern void orderly_poweroff(bool force);
--extern void orderly_reboot(void);
-+void orderly_poweroff(bool force);
-+void orderly_reboot(void);
- void hw_protection_shutdown(const char *reason, int ms_until_forced);
- 
- /*
-  * Emergency restart, callable from an interrupt handler.
-  */
- 
--extern void emergency_restart(void);
-+void emergency_restart(void);
- #include <asm/emergency-restart.h>
- 
- #endif /* _LINUX_REBOOT_H */
 -- 
 2.33.1
 
