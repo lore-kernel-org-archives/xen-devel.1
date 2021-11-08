@@ -2,52 +2,40 @@ Return-Path: <SRS0=lh5P=P3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA574C4332F
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:29:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F98CC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:37:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 68C6261077
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:29:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 68C6261077
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=suse.de
+	by mail.kernel.org (Postfix) with ESMTPS id 0B16C60F5A
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:37:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0B16C60F5A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.223208.385826 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.223230.385846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mk1tV-00058I-Pz; Mon, 08 Nov 2021 10:28:53 +0000
+	id 1mk21v-00082V-Mv; Mon, 08 Nov 2021 10:37:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 223208.385826; Mon, 08 Nov 2021 10:28:53 +0000
+Received: by outflank-mailman (output) from mailman id 223230.385846; Mon, 08 Nov 2021 10:37:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mk1tV-00055P-Dn; Mon, 08 Nov 2021 10:28:53 +0000
-Received: by outflank-mailman (input) for mailman id 223208;
- Mon, 08 Nov 2021 10:28:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=B9hq=P3=suse.de=tzimmermann@srs-se1.protection.inumbo.net>)
- id 1mk1tT-0004ix-Qo
- for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 10:28:51 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a93b30a6-407e-11ec-9787-a32c541c8605;
- Mon, 08 Nov 2021 11:28:49 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id D586A1FD72;
- Mon,  8 Nov 2021 10:28:48 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7A97213B37;
- Mon,  8 Nov 2021 10:28:48 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id AAviHOD7iGHPHQAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 08 Nov 2021 10:28:48 +0000
+	id 1mk21v-00082O-Ib; Mon, 08 Nov 2021 10:37:35 +0000
+Received: by outflank-mailman (input) for mailman id 223230;
+ Mon, 08 Nov 2021 10:37:34 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1mk21u-00082I-3L
+ for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 10:37:34 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mk21t-0001xU-LL; Mon, 08 Nov 2021 10:37:33 +0000
+Received: from 54-240-197-224.amazon.com ([54.240.197.224]
+ helo=[10.95.146.147]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1mk21t-0004gX-F5; Mon, 08 Nov 2021 10:37:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,241 +47,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a93b30a6-407e-11ec-9787-a32c541c8605
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1636367328; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=e86M7pe+HXa6lq1rJiYReShYEDfFQwnHYAeibyHmDK4=;
-	b=n/2k3aEH2IRfk46CEAwCG5c7HSuuQsTfrTJbSP6DPDhKpPx+NY32BY4U68wUON7o9bUjvt
-	NZkAnZZBTzfIcwrS87U6Kw37t9OdSautN1Xi0keNHQzhxwAeXScNIMrUKJ8W5ZzokzMvNt
-	2Q5OcOTYcZvMAY2G0euHXFTqXag/ERc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1636367328;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=e86M7pe+HXa6lq1rJiYReShYEDfFQwnHYAeibyHmDK4=;
-	b=ul1XNYfaAlNBWtN19m9OIJ/i1HX5DiIMawpf8txh2KWnKWysWX1vqQqyC3lqppwO73oBUs
-	uJezsJFlORi2UIBw==
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch,
-	airlied@linux.ie,
-	maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	inki.dae@samsung.com,
-	jy0922.shim@samsung.com,
-	sw0312.kim@samsung.com,
-	kyungmin.park@samsung.com,
-	krzysztof.kozlowski@canonical.com,
-	oleksandr_andrushchenko@epam.com
-Cc: dri-devel@lists.freedesktop.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-samsung-soc@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 1/3] drm/exynox: Implement mmap as GEM object function
-Date: Mon,  8 Nov 2021 11:28:44 +0100
-Message-Id: <20211108102846.309-2-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20211108102846.309-1-tzimmermann@suse.de>
-References: <20211108102846.309-1-tzimmermann@suse.de>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=Nj/lKmQ6q9a3v5gfY230zqeTy8GzXapFZr/UE2kGyAQ=; b=qNF8vS3QREyXif3hfgRbrHW6g5
+	j31B8DM1t9DX7L8mbkFVP1uzutN3bL84cweMIa8/kxlnIgNWfwUaMhTX5LtKZI/RSMOANzAPZIcqj
+	1IgHq1208PeiHwGrMp7vMq+xKgjluF3bm/JrtaEFFY9euya5UpuJ3//kR+gKxFmyScZQ=;
+Message-ID: <caac2d2b-46a7-e12b-7cb0-ac1b7791d8a1@xen.org>
+Date: Mon, 8 Nov 2021 10:37:31 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.3.0
+Subject: Re: [XEN][PATCH v3 1/1] Update libfdt to v1.6.1
+To: Vikram Garhwal <fnu.vikram@xilinx.com>, xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, bertrand.marquis@arm.com,
+ volodymyr_babchuk@epam.com
+References: <1636147719-80482-1-git-send-email-fnu.vikram@xilinx.com>
+ <1636147719-80482-2-git-send-email-fnu.vikram@xilinx.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <1636147719-80482-2-git-send-email-fnu.vikram@xilinx.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Moving the driver-specific mmap code into a GEM object function allows
-for using DRM helpers for various mmap callbacks.
+Hi Vikram,
 
-The respective exynos functions are being removed. The file_operations
-structure exynos_drm_driver_fops is now being created by the helper macro
-DEFINE_DRM_GEM_FOPS().
+On 05/11/2021 21:28, Vikram Garhwal wrote:
+> Update libfdt to v1.6.1 of libfdt taken from git://github.com/dgibson/dtc.
+> This update is done to support device tree overlays.
+> 
+> A few minor changes are done to make it compatible with Xen:
+>      fdt_overlay.c: overlay_fixup_phandle()
+> 
+>          Replace strtoul() with simple_strtoul() as strtoul() is not available in
+>          Xen lib and included lib.h.
+> 
+>          Change char *endptr to const char *endptr.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/exynos/exynos_drm_drv.c   | 13 ++-----
- drivers/gpu/drm/exynos/exynos_drm_fbdev.c | 20 ++---------
- drivers/gpu/drm/exynos/exynos_drm_gem.c   | 43 +++++------------------
- drivers/gpu/drm/exynos/exynos_drm_gem.h   |  5 ---
- 4 files changed, 13 insertions(+), 68 deletions(-)
+I would clarify this is a requirement to use simple_strtoul().
 
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_drv.c b/drivers/gpu/drm/exynos/exynos_drm_drv.c
-index d8f1cf4d6b69..9743b6b17447 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_drv.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_drv.c
-@@ -102,16 +102,7 @@ static const struct drm_ioctl_desc exynos_ioctls[] = {
- 			DRM_RENDER_ALLOW),
- };
- 
--static const struct file_operations exynos_drm_driver_fops = {
--	.owner		= THIS_MODULE,
--	.open		= drm_open,
--	.mmap		= exynos_drm_gem_mmap,
--	.poll		= drm_poll,
--	.read		= drm_read,
--	.unlocked_ioctl	= drm_ioctl,
--	.compat_ioctl = drm_compat_ioctl,
--	.release	= drm_release,
--};
-+DEFINE_DRM_GEM_FOPS(exynos_drm_driver_fops);
- 
- static const struct drm_driver exynos_drm_driver = {
- 	.driver_features	= DRIVER_MODESET | DRIVER_GEM
-@@ -124,7 +115,7 @@ static const struct drm_driver exynos_drm_driver = {
- 	.prime_fd_to_handle	= drm_gem_prime_fd_to_handle,
- 	.gem_prime_import	= exynos_drm_gem_prime_import,
- 	.gem_prime_import_sg_table	= exynos_drm_gem_prime_import_sg_table,
--	.gem_prime_mmap		= exynos_drm_gem_prime_mmap,
-+	.gem_prime_mmap		= drm_gem_prime_mmap,
- 	.ioctls			= exynos_ioctls,
- 	.num_ioctls		= ARRAY_SIZE(exynos_ioctls),
- 	.fops			= &exynos_drm_driver_fops,
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-index 5147f5929be7..02c97b9ca926 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_fbdev.c
-@@ -15,6 +15,7 @@
- #include <drm/drm_crtc.h>
- #include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
-+#include <drm/drm_prime.h>
- #include <drm/drm_probe_helper.h>
- #include <drm/exynos_drm.h>
- 
-@@ -39,25 +40,8 @@ static int exynos_drm_fb_mmap(struct fb_info *info,
- 	struct drm_fb_helper *helper = info->par;
- 	struct exynos_drm_fbdev *exynos_fbd = to_exynos_fbdev(helper);
- 	struct exynos_drm_gem *exynos_gem = exynos_fbd->exynos_gem;
--	unsigned long vm_size;
--	int ret;
--
--	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
--
--	vm_size = vma->vm_end - vma->vm_start;
--
--	if (vm_size > exynos_gem->size)
--		return -EINVAL;
- 
--	ret = dma_mmap_attrs(to_dma_dev(helper->dev), vma, exynos_gem->cookie,
--			     exynos_gem->dma_addr, exynos_gem->size,
--			     exynos_gem->dma_attrs);
--	if (ret < 0) {
--		DRM_DEV_ERROR(to_dma_dev(helper->dev), "failed to mmap.\n");
--		return ret;
--	}
--
--	return 0;
-+	return drm_gem_prime_mmap(&exynos_gem->base, vma);
- }
- 
- static const struct fb_ops exynos_drm_fb_ops = {
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.c b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-index 4396224227d1..c4b63902ee7a 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_gem.c
-+++ b/drivers/gpu/drm/exynos/exynos_drm_gem.c
-@@ -17,6 +17,8 @@
- #include "exynos_drm_drv.h"
- #include "exynos_drm_gem.h"
- 
-+static int exynos_drm_gem_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
-+
- static int exynos_drm_alloc_buf(struct exynos_drm_gem *exynos_gem, bool kvmap)
- {
- 	struct drm_device *dev = exynos_gem->base.dev;
-@@ -135,6 +137,7 @@ static const struct vm_operations_struct exynos_drm_gem_vm_ops = {
- static const struct drm_gem_object_funcs exynos_drm_gem_object_funcs = {
- 	.free = exynos_drm_gem_free_object,
- 	.get_sg_table = exynos_drm_gem_prime_get_sg_table,
-+	.mmap = exynos_drm_gem_mmap,
- 	.vm_ops = &exynos_drm_gem_vm_ops,
- };
- 
-@@ -354,12 +357,16 @@ int exynos_drm_gem_dumb_create(struct drm_file *file_priv,
- 	return 0;
- }
- 
--static int exynos_drm_gem_mmap_obj(struct drm_gem_object *obj,
--				   struct vm_area_struct *vma)
-+static int exynos_drm_gem_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
- {
- 	struct exynos_drm_gem *exynos_gem = to_exynos_gem(obj);
- 	int ret;
- 
-+	if (obj->import_attach)
-+		return dma_buf_mmap(obj->dma_buf, vma, 0);
-+
-+	vma->vm_flags |= VM_IO | VM_DONTEXPAND | VM_DONTDUMP;
-+
- 	DRM_DEV_DEBUG_KMS(to_dma_dev(obj->dev), "flags = 0x%x\n",
- 			  exynos_gem->flags);
- 
-@@ -385,26 +392,6 @@ static int exynos_drm_gem_mmap_obj(struct drm_gem_object *obj,
- 	return ret;
- }
- 
--int exynos_drm_gem_mmap(struct file *filp, struct vm_area_struct *vma)
--{
--	struct drm_gem_object *obj;
--	int ret;
--
--	/* set vm_area_struct. */
--	ret = drm_gem_mmap(filp, vma);
--	if (ret < 0) {
--		DRM_ERROR("failed to mmap.\n");
--		return ret;
--	}
--
--	obj = vma->vm_private_data;
--
--	if (obj->import_attach)
--		return dma_buf_mmap(obj->dma_buf, vma, 0);
--
--	return exynos_drm_gem_mmap_obj(obj, vma);
--}
--
- /* low-level interface prime helpers */
- struct drm_gem_object *exynos_drm_gem_prime_import(struct drm_device *dev,
- 					    struct dma_buf *dma_buf)
-@@ -466,15 +453,3 @@ exynos_drm_gem_prime_import_sg_table(struct drm_device *dev,
- 	exynos_gem->sgt = sgt;
- 	return &exynos_gem->base;
- }
--
--int exynos_drm_gem_prime_mmap(struct drm_gem_object *obj,
--			      struct vm_area_struct *vma)
--{
--	int ret;
--
--	ret = drm_gem_mmap_obj(obj, obj->size, vma);
--	if (ret < 0)
--		return ret;
--
--	return exynos_drm_gem_mmap_obj(obj, vma);
--}
-diff --git a/drivers/gpu/drm/exynos/exynos_drm_gem.h b/drivers/gpu/drm/exynos/exynos_drm_gem.h
-index a23272fb96fb..79d7e1a87419 100644
---- a/drivers/gpu/drm/exynos/exynos_drm_gem.h
-+++ b/drivers/gpu/drm/exynos/exynos_drm_gem.h
-@@ -96,9 +96,6 @@ int exynos_drm_gem_dumb_create(struct drm_file *file_priv,
- 			       struct drm_device *dev,
- 			       struct drm_mode_create_dumb *args);
- 
--/* set vm_flags and we can change the vm attribute to other one at here. */
--int exynos_drm_gem_mmap(struct file *filp, struct vm_area_struct *vma);
--
- /* low-level interface prime helpers */
- struct drm_gem_object *exynos_drm_gem_prime_import(struct drm_device *dev,
- 					    struct dma_buf *dma_buf);
-@@ -107,7 +104,5 @@ struct drm_gem_object *
- exynos_drm_gem_prime_import_sg_table(struct drm_device *dev,
- 				     struct dma_buf_attachment *attach,
- 				     struct sg_table *sgt);
--int exynos_drm_gem_prime_mmap(struct drm_gem_object *obj,
--			      struct vm_area_struct *vma);
- 
- #endif
+[...]
+
+> diff --git a/xen/include/xen/libfdt/libfdt_env.h b/xen/include/xen/libfdt/libfdt_env.h
+> index 035bf75..03380d5 100644
+> --- a/xen/include/xen/libfdt/libfdt_env.h
+> +++ b/xen/include/xen/libfdt/libfdt_env.h
+> @@ -1,22 +1,98 @@
+> -#ifndef _LIBFDT_ENV_H
+> -#define _LIBFDT_ENV_H
+> +/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
+> +#ifndef LIBFDT_ENV_H
+> +#define LIBFDT_ENV_H
+> +/*
+> + * libfdt - Flat Device Tree manipulation
+> + * Copyright (C) 2006 David Gibson, IBM Corporation.
+> + * Copyright 2012 Kim Phillips, Freescale Semiconductor.
+> + */
+>   
+> +#include <xen/config.h>
+
+The build system should always include <xen/config.h> automagically. So 
+can you clarify why this is necessary?
+
+>   #include <xen/types.h>
+>   #include <xen/string.h>
+>   #include <asm/byteorder.h>
+> +#include <xen/stdbool.h>
+
+We usually order the headers so <xen/...> are first and then <asm/...>. 
+They are then ordered alphabetically within themself.
+
+But it is not clear why you are adding <xen/stdbool.h> as AFAICT it is 
+already going to be included by existing headers. Did you see an error 
+without including it?
+
+Cheers,
+
 -- 
-2.33.1
-
+Julien Grall
 
