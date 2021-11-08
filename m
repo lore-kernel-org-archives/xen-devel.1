@@ -2,43 +2,43 @@ Return-Path: <SRS0=lh5P=P3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 69607C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:13:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C2CCC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:19:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24768610F8
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:13:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 24768610F8
+	by mail.kernel.org (Postfix) with ESMTPS id 199D760F45
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 10:19:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 199D760F45
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=alien8.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.223175.385766 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.223197.385791 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mk1ds-0001Dh-MD; Mon, 08 Nov 2021 10:12:44 +0000
+	id 1mk1ka-0003Ey-Sd; Mon, 08 Nov 2021 10:19:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 223175.385766; Mon, 08 Nov 2021 10:12:44 +0000
+Received: by outflank-mailman (output) from mailman id 223197.385791; Mon, 08 Nov 2021 10:19:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mk1ds-0001Da-IG; Mon, 08 Nov 2021 10:12:44 +0000
-Received: by outflank-mailman (input) for mailman id 223175;
- Mon, 08 Nov 2021 10:12:43 +0000
+	id 1mk1ka-0003Er-Or; Mon, 08 Nov 2021 10:19:40 +0000
+Received: by outflank-mailman (input) for mailman id 223197;
+ Mon, 08 Nov 2021 10:19:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=uasK=P3=alien8.de=bp@srs-se1.protection.inumbo.net>)
- id 1mk1dr-0000dK-0y
- for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 10:12:43 +0000
+ id 1mk1kQ-0003ER-2Z
+ for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 10:19:40 +0000
 Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 68c7ac1a-407c-11ec-9787-a32c541c8605;
- Mon, 08 Nov 2021 11:12:42 +0100 (CET)
+ id 5b3b6381-407d-11ec-9787-a32c541c8605;
+ Mon, 08 Nov 2021 11:19:28 +0100 (CET)
 Received: from zn.tnic (p200300ec2f33110088892b77bd117736.dip0.t-ipconnect.de
  [IPv6:2003:ec:2f33:1100:8889:2b77:bd11:7736])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 97BC51EC0535;
- Mon,  8 Nov 2021 11:12:41 +0100 (CET)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 295D81EC04E0;
+ Mon,  8 Nov 2021 11:19:28 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,21 +50,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 68c7ac1a-407c-11ec-9787-a32c541c8605
+X-Inumbo-ID: 5b3b6381-407d-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-	t=1636366361;
+	t=1636366768;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ZSl40zXDlt+0/rSkoDA+/axSBICuEw4xrW9t+JeAzRg=;
-	b=O9utTH7kzvF0ogbSAjrVux8Q2NyGvuXt2DXX+lXMfGwQDD5NsnAlA7vS1HO+tdNI+F2ntn
-	CZwfQStJuxv3i5Q66Ie7iUHTOBEhoA6pq6felnVAUxHBDq6LlMPMTRyA2hQo7p+FfRiqlX
-	omkNlvF2ej63UhZNrO1CmPB0HckLABU=
+	bh=CDGB0dpLCqhyN2VLkOyFdq64uDUd6G/RUsDL3dC+Ipo=;
+	b=OmXDZQiNXAykW6msgQxQV2D3jyNeh8L8Ur0LKSqcBbS8Z5Dq+lMoh+uc1KE9lZoNFhTNi5
+	HSfl5kEDRsOkXKmO9qqEW67WUQUsv5GaQK9Erwx9IjY3o31Y8ehQnIfkizrSs0P3bzV/5j
+	Fq9nLmulJEIgHjmCW/c8QaecUsrUi0U=
 From: Borislav Petkov <bp@alien8.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>,
-	Arnd Bergmann <arnd@arndb.de>,
+Cc: Arnd Bergmann <arnd@arndb.de>,
 	Ayush Sawal <ayush.sawal@chelsio.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Rohit Maheshwari <rohitm@chelsio.com>,
@@ -103,9 +102,9 @@ Cc: Thomas Gleixner <tglx@linutronix.de>,
 	sparclinux@vger.kernel.org,
 	x86@kernel.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH v0 42/42] notifier: Return an error when callback is already registered
-Date: Mon,  8 Nov 2021 11:11:57 +0100
-Message-Id: <20211108101157.15189-43-bp@alien8.de>
+Subject: [PATCH v0 00/42] notifiers: Return an error when callback is already registered
+Date: Mon,  8 Nov 2021 11:19:24 +0100
+Message-Id: <20211108101924.15759-1-bp@alien8.de>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20211108101157.15189-1-bp@alien8.de>
 References: <20211108101157.15189-1-bp@alien8.de>
@@ -115,34 +114,42 @@ Content-Transfer-Encoding: 8bit
 
 From: Borislav Petkov <bp@suse.de>
 
-The notifier registration routine doesn't return a proper error value
-when a callback has already been registered, leading people to track
-whether that registration has happened at the call site:
+Hi all,
 
-  https://lore.kernel.org/amd-gfx/20210512013058.6827-1-mukul.joshi@amd.com/
+this is a huge patchset for something which is really trivial - it
+changes the notifier registration routines to return an error value
+if a notifier callback is already present on the respective list of
+callbacks. For more details scroll to the last patch.
 
-Which is unnecessary.
+Everything before it is converting the callers to check the return value
+of the registration routines and issue a warning, instead of the WARN()
+notifier_chain_register() does now.
 
-Return -EEXIST to signal that case so that callers can act accordingly.
-Enforce callers to check the return value, leading to loud screaming
-during build:
+Before the last patch has been applied, though, that checking is a
+NOP which would make the application of those patches trivial - every
+maintainer can pick a patch at her/his discretion - only the last one
+enables the build warnings and that one will be queued only after the
+preceding patches have all been merged so that there are no build
+warnings.
 
-  arch/x86/kernel/cpu/mce/core.c: In function ‘mce_register_decode_chain’:
-  arch/x86/kernel/cpu/mce/core.c:167:2: error: ignoring return value of \
-   ‘blocking_notifier_chain_register’, declared with attribute warn_unused_result [-Werror=unused-result]
-    blocking_notifier_chain_register(&x86_mce_decoder_chain, nb);
-  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Due to the sheer volume of the patches, I have addressed the respective
+patch and the last one, which enables the warning, with addressees for
+each maintained area so as not to spam people unnecessarily.
 
-Drop the WARN too, while at it.
+If people prefer I carry some through tip, instead, I'll gladly do so -
+your call.
 
-Suggested-by: Thomas Gleixner <tglx@linutronix.de>
-Signed-off-by: Borislav Petkov <bp@suse.de>
+And, if you think the warning messages need to be more precise, feel
+free to adjust them before committing.
+
+Thanks!
+
 Cc: Arnd Bergmann <arnd@arndb.de>
 Cc: Ayush Sawal <ayush.sawal@chelsio.com>
 Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Rohit Maheshwari <rohitm@chelsio.com>
 Cc: Steven Rostedt <rostedt@goodmis.org>
-Cc: Vinay Kumar Yadav <vinay.yadav@chelsio.com>
+Cc: Vinay Kumar Yadav <vinay.yadav@chelsio.com> 
 Cc: alsa-devel@alsa-project.org
 Cc: bcm-kernel-feedback-list@broadcom.com
 Cc: intel-gfx@lists.freedesktop.org
@@ -177,114 +184,118 @@ Cc: rcu@vger.kernel.org
 Cc: sparclinux@vger.kernel.org
 Cc: x86@kernel.org
 Cc: xen-devel@lists.xenproject.org
----
- include/linux/notifier.h |  8 ++++----
- kernel/notifier.c        | 36 +++++++++++++++++++-----------------
- 2 files changed, 23 insertions(+), 21 deletions(-)
 
-diff --git a/include/linux/notifier.h b/include/linux/notifier.h
-index 87069b8459af..45cc5a8d0fd8 100644
---- a/include/linux/notifier.h
-+++ b/include/linux/notifier.h
-@@ -141,13 +141,13 @@ extern void srcu_init_notifier_head(struct srcu_notifier_head *nh);
- 
- #ifdef __KERNEL__
- 
--extern int atomic_notifier_chain_register(struct atomic_notifier_head *nh,
-+extern int __must_check atomic_notifier_chain_register(struct atomic_notifier_head *nh,
- 		struct notifier_block *nb);
--extern int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
-+extern int __must_check blocking_notifier_chain_register(struct blocking_notifier_head *nh,
- 		struct notifier_block *nb);
--extern int raw_notifier_chain_register(struct raw_notifier_head *nh,
-+extern int __must_check raw_notifier_chain_register(struct raw_notifier_head *nh,
- 		struct notifier_block *nb);
--extern int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
-+extern int __must_check srcu_notifier_chain_register(struct srcu_notifier_head *nh,
- 		struct notifier_block *nb);
- 
- extern int atomic_notifier_chain_unregister(struct atomic_notifier_head *nh,
-diff --git a/kernel/notifier.c b/kernel/notifier.c
-index b8251dc0bc0f..451ef3f73ad2 100644
---- a/kernel/notifier.c
-+++ b/kernel/notifier.c
-@@ -20,13 +20,11 @@ BLOCKING_NOTIFIER_HEAD(reboot_notifier_list);
-  */
- 
- static int notifier_chain_register(struct notifier_block **nl,
--		struct notifier_block *n)
-+				   struct notifier_block *n)
- {
- 	while ((*nl) != NULL) {
--		if (unlikely((*nl) == n)) {
--			WARN(1, "double register detected");
--			return 0;
--		}
-+		if (unlikely((*nl) == n))
-+			return -EEXIST;
- 		if (n->priority > (*nl)->priority)
- 			break;
- 		nl = &((*nl)->next);
-@@ -134,10 +132,11 @@ static int notifier_call_chain_robust(struct notifier_block **nl,
-  *
-  *	Adds a notifier to an atomic notifier chain.
-  *
-- *	Currently always returns zero.
-+ *	Returns 0 on success, %-EEXIST on error.
-  */
--int atomic_notifier_chain_register(struct atomic_notifier_head *nh,
--		struct notifier_block *n)
-+int __must_check
-+atomic_notifier_chain_register(struct atomic_notifier_head *nh,
-+			       struct notifier_block *n)
- {
- 	unsigned long flags;
- 	int ret;
-@@ -216,10 +215,11 @@ NOKPROBE_SYMBOL(atomic_notifier_call_chain);
-  *	Adds a notifier to a blocking notifier chain.
-  *	Must be called in process context.
-  *
-- *	Currently always returns zero.
-+ *	Returns 0 on success, %-EEXIST on error.
-  */
--int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
--		struct notifier_block *n)
-+int __must_check
-+blocking_notifier_chain_register(struct blocking_notifier_head *nh,
-+				 struct notifier_block *n)
- {
- 	int ret;
- 
-@@ -335,10 +335,11 @@ EXPORT_SYMBOL_GPL(blocking_notifier_call_chain);
-  *	Adds a notifier to a raw notifier chain.
-  *	All locking must be provided by the caller.
-  *
-- *	Currently always returns zero.
-+ *	Returns 0 on success, %-EEXIST on error.
-  */
--int raw_notifier_chain_register(struct raw_notifier_head *nh,
--		struct notifier_block *n)
-+int __must_check
-+raw_notifier_chain_register(struct raw_notifier_head *nh,
-+			    struct notifier_block *n)
- {
- 	return notifier_chain_register(&nh->head, n);
- }
-@@ -406,10 +407,11 @@ EXPORT_SYMBOL_GPL(raw_notifier_call_chain);
-  *	Adds a notifier to an SRCU notifier chain.
-  *	Must be called in process context.
-  *
-- *	Currently always returns zero.
-+ *	Returns 0 on success, %-EEXIST on error.
-  */
--int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
--		struct notifier_block *n)
-+int __must_check
-+srcu_notifier_chain_register(struct srcu_notifier_head *nh,
-+			     struct notifier_block *n)
- {
- 	int ret;
- 
+Borislav Petkov (42):
+  x86: Check notifier registration return value
+  xen/x86: Check notifier registration return value
+  impi: Check notifier registration return value
+  clk: renesas: Check notifier registration return value
+  dca: Check notifier registration return value
+  firmware: Check notifier registration return value
+  drm/i915: Check notifier registration return value
+  Drivers: hv: vmbus: Check notifier registration return value
+  iio: proximity: cros_ec: Check notifier registration return value
+  leds: trigger: Check notifier registration return value
+  misc: Check notifier registration return value
+  ethernet: chelsio: Check notifier registration return value
+  power: reset: Check notifier registration return value
+  remoteproc: Check notifier registration return value
+  scsi: target: Check notifier registration return value
+  USB: Check notifier registration return value
+  drivers: video: Check notifier registration return value
+  drivers/xen: Check notifier registration return value
+  kernel/hung_task: Check notifier registration return value
+  rcu: Check notifier registration return value
+  tracing: Check notifier registration return value
+  net: fib_notifier: Check notifier registration return value
+  ASoC: soc-jack: Check notifier registration return value
+  staging: olpc_dcon: Check notifier registration return value
+  arch/um: Check notifier registration return value
+  alpha: Check notifier registration return value
+  bus: brcmstb_gisb: Check notifier registration return value
+  soc: bcm: brcmstb: pm: pm-arm: Check notifier registration return
+    value
+  arm64: Check notifier registration return value
+  soc/tegra: Check notifier registration return value
+  parisc: Check notifier registration return value
+  macintosh/adb: Check notifier registration return value
+  mips: Check notifier registration return value
+  powerpc: Check notifier registration return value
+  sh: Check notifier registration return value
+  s390: Check notifier registration return value
+  sparc: Check notifier registration return value
+  xtensa: Check notifier registration return value
+  crypto: ccree - check notifier registration return value
+  EDAC/altera: Check notifier registration return value
+  power: supply: ab8500: Check notifier registration return value
+  notifier: Return an error when callback is already registered
+
+ arch/alpha/kernel/setup.c                     |  5 +--
+ arch/arm64/kernel/setup.c                     |  6 ++--
+ arch/mips/kernel/relocate.c                   |  6 ++--
+ arch/mips/sgi-ip22/ip22-reset.c               |  4 ++-
+ arch/mips/sgi-ip32/ip32-reset.c               |  4 ++-
+ arch/parisc/kernel/pdc_chassis.c              |  5 +--
+ arch/powerpc/kernel/setup-common.c            | 12 ++++---
+ arch/s390/kernel/ipl.c                        |  4 ++-
+ arch/s390/kvm/kvm-s390.c                      |  7 ++--
+ arch/sh/kernel/cpu/sh4a/setup-sh7724.c        | 11 +++---
+ arch/sparc/kernel/sstate.c                    |  6 ++--
+ arch/um/drivers/mconsole_kern.c               |  6 ++--
+ arch/um/kernel/um_arch.c                      |  5 +--
+ arch/x86/kernel/cpu/mce/core.c                |  3 +-
+ arch/x86/kernel/cpu/mce/dev-mcelog.c          |  3 +-
+ arch/x86/kernel/setup.c                       |  7 ++--
+ arch/x86/xen/enlighten.c                      |  4 ++-
+ arch/xtensa/platforms/iss/setup.c             |  3 +-
+ drivers/bus/brcmstb_gisb.c                    |  6 ++--
+ drivers/char/ipmi/ipmi_msghandler.c           |  3 +-
+ drivers/clk/renesas/clk-div6.c                |  4 ++-
+ drivers/clk/renesas/rcar-cpg-lib.c            |  4 ++-
+ drivers/crypto/ccree/cc_fips.c                |  4 ++-
+ drivers/dca/dca-core.c                        |  3 +-
+ drivers/edac/altera_edac.c                    |  6 ++--
+ drivers/firmware/arm_scmi/notify.c            |  3 +-
+ drivers/firmware/google/gsmi.c                |  6 ++--
+ drivers/gpu/drm/i915/gvt/scheduler.c          |  6 ++--
+ drivers/hv/vmbus_drv.c                        |  4 +--
+ .../iio/proximity/cros_ec_mkbp_proximity.c    |  3 +-
+ drivers/leds/trigger/ledtrig-activity.c       |  6 ++--
+ drivers/leds/trigger/ledtrig-heartbeat.c      |  6 ++--
+ drivers/leds/trigger/ledtrig-panic.c          |  4 +--
+ drivers/macintosh/adbhid.c                    |  4 +--
+ drivers/misc/ibmasm/heartbeat.c               |  3 +-
+ drivers/misc/pvpanic/pvpanic.c                |  3 +-
+ .../chelsio/inline_crypto/chtls/chtls_main.c  |  5 ++-
+ drivers/parisc/power.c                        |  5 +--
+ drivers/power/reset/ltc2952-poweroff.c        |  6 ++--
+ drivers/power/supply/ab8500_charger.c         |  8 ++---
+ drivers/remoteproc/qcom_common.c              |  3 +-
+ drivers/remoteproc/qcom_sysmon.c              |  4 ++-
+ drivers/remoteproc/remoteproc_core.c          |  4 ++-
+ drivers/s390/char/con3215.c                   |  5 ++-
+ drivers/s390/char/con3270.c                   |  5 ++-
+ drivers/s390/char/sclp_con.c                  |  4 ++-
+ drivers/s390/char/sclp_vt220.c                |  4 ++-
+ drivers/s390/char/zcore.c                     |  4 ++-
+ drivers/soc/bcm/brcmstb/pm/pm-arm.c           |  5 +--
+ drivers/soc/tegra/ari-tegra186.c              |  7 ++--
+ drivers/staging/olpc_dcon/olpc_dcon.c         |  4 ++-
+ drivers/target/tcm_fc/tfc_conf.c              |  4 ++-
+ drivers/usb/core/notify.c                     |  3 +-
+ drivers/video/console/dummycon.c              |  3 +-
+ drivers/video/fbdev/hyperv_fb.c               |  5 +--
+ drivers/xen/manage.c                          |  3 +-
+ drivers/xen/xenbus/xenbus_probe.c             |  8 +++--
+ include/linux/notifier.h                      |  8 ++---
+ kernel/hung_task.c                            |  3 +-
+ kernel/notifier.c                             | 36 ++++++++++---------
+ kernel/rcu/tree_stall.h                       |  4 ++-
+ kernel/trace/trace.c                          |  4 +--
+ net/core/fib_notifier.c                       |  4 ++-
+ sound/soc/soc-jack.c                          |  3 +-
+ 64 files changed, 222 insertions(+), 118 deletions(-)
+
 -- 
 2.29.2
 
