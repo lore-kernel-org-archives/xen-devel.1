@@ -2,45 +2,45 @@ Return-Path: <SRS0=lh5P=P3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B4E6FC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEE4EC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:59:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8139C61288
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:58:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8139C61288
+	by mail.kernel.org (Postfix) with ESMTPS id 9352561354
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:59:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 9352561354
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.222971.385529 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.222994.385540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjszS-0001CG-TA; Mon, 08 Nov 2021 00:58:26 +0000
+	id 1mjszl-0002YP-6K; Mon, 08 Nov 2021 00:58:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 222971.385529; Mon, 08 Nov 2021 00:58:26 +0000
+Received: by outflank-mailman (output) from mailman id 222994.385540; Mon, 08 Nov 2021 00:58:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjszS-0001C1-OI; Mon, 08 Nov 2021 00:58:26 +0000
-Received: by outflank-mailman (input) for mailman id 222971;
- Mon, 08 Nov 2021 00:58:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mjszl-0002YD-2f; Mon, 08 Nov 2021 00:58:45 +0000
+Received: by outflank-mailman (input) for mailman id 222994;
+ Mon, 08 Nov 2021 00:58:43 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ZOPF=P3=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mjspd-0004R0-9z
- for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:48:17 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8e0e4204-402d-11ec-9787-a32c541c8605;
- Mon, 08 Nov 2021 01:48:14 +0100 (CET)
-Received: by mail-lj1-x235.google.com with SMTP id m5so7885831ljp.4
- for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:48:14 -0800 (PST)
+ id 1mjspe-0004MH-Gf
+ for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:48:18 +0000
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [2a00:1450:4864:20::12d])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 902ea2b5-402d-11ec-a9d2-d9f7a1cc8784;
+ Mon, 08 Nov 2021 01:48:17 +0100 (CET)
+Received: by mail-lf1-x12d.google.com with SMTP id b40so3077220lfv.10
+ for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:48:17 -0800 (PST)
 Received: from localhost.localdomain (79-139-188-96.dynamic.spd-mgts.ru.
  [79.139.188.96])
- by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.48.12
+ by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.48.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Nov 2021 16:48:13 -0800 (PST)
+ Sun, 07 Nov 2021 16:48:17 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,34 +52,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e0e4204-402d-11ec-9787-a32c541c8605
+X-Inumbo-ID: 902ea2b5-402d-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=032w538UVpeATjNmIAIpxMVbSRQ+KkFSikcjH52Go7E=;
-        b=CYX+rsWLev5P9iFzQc17Hii5aXl3X9I+N37IjUBPzT3fhs7ejibZMyODAFDdV6x7VJ
-         5ZP+Hd71CAUWxtxryja3mUN+CaKHMdnjhX8yiRm1zru3VMaw1ejVu9ZClQmsYSpFhK78
-         HJ592agYH/bCrPu2rETaR5XM30/EVbl3bPu5RbPwarWfT6a7OXYwpFfNN/bWsoOdhR5z
-         4pjgJh0QLIxf0LagwrjW8fFOa+5fTJF5PXw0QY75bgP3vWV2t/oub8mHgmsVpyYpLQcn
-         3aMRiOPeqIpjt7G8XmPwPxPRlc0uQlk6m3r7OnawAviMa5pFwVrm3wWEJl29tulXyA+Z
-         C10Q==
+        bh=jIixMSKlDuHM/ROsyXYWDI0GhGtBfDPAGuo/NFEP3H8=;
+        b=hSCECj6oief95mUKAFt1aYs1z2BhI3PyCJpHbMUlNZ/M49sY1G7gzTeEyttE60gMak
+         BF+5uDSKoSn4CaOELlWWJK6Z03Rk6y4HTwrmSVMcH4REAv0cUqJCMn3qEJCUcKMx0Yg2
+         hZUAWfnWhmv0u8d55RvvttbeCJzqzTllkqZ8sZrYO0dyywzXm1H9T9B85gH//tK7VGaP
+         LSTKHt3pU1K6UjbgljgztfzIXizYQhXuqyNy4a5wOAJ6zgoCDgTzWA5VXtRTbqr75uP5
+         JNN1xexiLEoZfDmssN9kF5V9y9vHzkvg7OruyPjb23gGAachOOiZE7sCXiHSj3rLrdzh
+         uUnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=032w538UVpeATjNmIAIpxMVbSRQ+KkFSikcjH52Go7E=;
-        b=R0knU0TPcg5kOyhQ6Y73wDC7LJrOWp1uB8NL/7lPYu/DgvqI3juI9h7S9gRkLKAjYo
-         O2iCutmgrsnpC32XMG0lrEid9TQG8qynB32HX+FpbgxzswRIUIuhkw635gISAMnt4xVu
-         1sw3XbssT8I4Tnqo/TxhtGYLte16FfAQgoJDwfa/eQljf5/LzO3GLFuxNkqP8OWwYMKH
-         kvq767wcUuuoDEn1kCc9aTlIuNFDPbGtCsYFjreqXM5yNfN0xge2/rUnQ9Zpz8tIOG5N
-         Gat0z5wnLaFepHlk1TvH/T4E/6fMThtToI3l6xnZnWQAsK3c75EowdnaJIMqv/U89sF4
-         yZNQ==
-X-Gm-Message-State: AOAM532QX6t4NJVVIirhmlRn11bA67GyezImicYMEULQO7nSindA0h8M
-	FjF74oOGiaMtcZ5MqbTHBNY=
-X-Google-Smtp-Source: ABdhPJw9pdaDkOXr3QmoCQ8lY8yPKwvYp6w85pF5+hYdZ4RiByLUnL5yspSV2AH/ECvDb66W5TciQA==
-X-Received: by 2002:a2e:751a:: with SMTP id q26mr21102478ljc.168.1636332494070;
-        Sun, 07 Nov 2021 16:48:14 -0800 (PST)
+        bh=jIixMSKlDuHM/ROsyXYWDI0GhGtBfDPAGuo/NFEP3H8=;
+        b=5pBAbBaBDu3OcL/PxG0gSgHVEeb+1LWXqKZVergoSqjHqTAfJeacj0n0vW45/OrFYG
+         e0FNNXbqk5wZ5kOSzOYzh41z7FXS1mjTWeTIgExm0wwnalkQdLN/Gme2dSF35he3dwfi
+         v7SvA9VZNazdBlEo/X1LCkaIOJx8scoE+gXMIlBsaIV3M7LgHhjkVOpuxqG5RcD8Esy5
+         0ThmfHI5Y9ONtndiA/Xkh7h20IccgicIc5EkQkINiZm4kcVLvCDoER2GadxAr4gmActE
+         KlwFwHhUpiGQNCFqGp7AqxfG8JJeNLWdtVvHrwitX9cpJghsAHdqpSVuu43TqnZYLwQA
+         OBaA==
+X-Gm-Message-State: AOAM5311B1FZ2UW/rcBIIjXTqfr+zHuqGlaeuHWeyPKIfVDoj0PRj5Ca
+	obKgnvjoOepEv6Bv+neTl/Y=
+X-Google-Smtp-Source: ABdhPJzYDrvoemDzHy5lRXulk7VBYq7aeBqM7UdlzGSCmj4dbWeKpvaVLmRfE93Wr+MuGPe+b8E4Uw==
+X-Received: by 2002:ac2:4e13:: with SMTP id e19mr3337438lfr.561.1636332497640;
+        Sun, 07 Nov 2021 16:48:17 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -140,9 +140,9 @@ Cc: linux-arm-kernel@lists.infradead.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v3 15/25] sh: Use do_kernel_power_off()
-Date: Mon,  8 Nov 2021 03:45:14 +0300
-Message-Id: <20211108004524.29465-16-digetx@gmail.com>
+Subject: [PATCH v3 17/25] ia64: Use do_kernel_power_off()
+Date: Mon,  8 Nov 2021 03:45:16 +0300
+Message-Id: <20211108004524.29465-18-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211108004524.29465-1-digetx@gmail.com>
 References: <20211108004524.29465-1-digetx@gmail.com>
@@ -156,23 +156,31 @@ be converted to the new power-off API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- arch/sh/kernel/reboot.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ arch/ia64/kernel/process.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/sh/kernel/reboot.c b/arch/sh/kernel/reboot.c
-index 5c33f036418b..e8eeedc9b182 100644
---- a/arch/sh/kernel/reboot.c
-+++ b/arch/sh/kernel/reboot.c
-@@ -46,8 +46,7 @@ static void native_machine_shutdown(void)
- 
- static void native_machine_power_off(void)
+diff --git a/arch/ia64/kernel/process.c b/arch/ia64/kernel/process.c
+index 834df24a88f1..cee4d7db2143 100644
+--- a/arch/ia64/kernel/process.c
++++ b/arch/ia64/kernel/process.c
+@@ -19,6 +19,7 @@
+ #include <linux/module.h>
+ #include <linux/notifier.h>
+ #include <linux/personality.h>
++#include <linux/reboot.h>
+ #include <linux/sched.h>
+ #include <linux/sched/debug.h>
+ #include <linux/sched/hotplug.h>
+@@ -599,8 +600,7 @@ machine_halt (void)
+ void
+ machine_power_off (void)
  {
 -	if (pm_power_off)
 -		pm_power_off();
 +	do_kernel_power_off();
+ 	machine_halt();
  }
  
- static void native_machine_halt(void)
 -- 
 2.33.1
 
