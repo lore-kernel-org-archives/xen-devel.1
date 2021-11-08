@@ -2,45 +2,45 @@ Return-Path: <SRS0=lh5P=P3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BBB06C4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EC16DC4167E
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:48:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8530D61251
+	by mail.kernel.org (Postfix) with ESMTPS id B8FE76139E
 	for <xen-devel@archiver.kernel.org>; Mon,  8 Nov 2021 00:48:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8530D61251
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B8FE76139E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.222880.385342 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.222878.385314 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjspM-00062H-Li; Mon, 08 Nov 2021 00:48:00 +0000
+	id 1mjspI-0005D0-Sb; Mon, 08 Nov 2021 00:47:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 222880.385342; Mon, 08 Nov 2021 00:48:00 +0000
+Received: by outflank-mailman (output) from mailman id 222878.385314; Mon, 08 Nov 2021 00:47:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mjspM-000620-GP; Mon, 08 Nov 2021 00:48:00 +0000
-Received: by outflank-mailman (input) for mailman id 222880;
- Mon, 08 Nov 2021 00:47:59 +0000
+	id 1mjspI-0005Bn-LD; Mon, 08 Nov 2021 00:47:56 +0000
+Received: by outflank-mailman (input) for mailman id 222878;
+ Mon, 08 Nov 2021 00:47:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ZOPF=P3=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mjspK-0004MH-TH
- for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:47:59 +0000
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [2a00:1450:4864:20::230])
+ id 1mjspH-0004MH-9c
+ for xen-devel@lists.xenproject.org; Mon, 08 Nov 2021 00:47:55 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 847dc7d0-402d-11ec-a9d2-d9f7a1cc8784;
- Mon, 08 Nov 2021 01:47:58 +0100 (CET)
-Received: by mail-lj1-x230.google.com with SMTP id i26so26172911ljg.7
- for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:47:58 -0800 (PST)
+ id 82577403-402d-11ec-a9d2-d9f7a1cc8784;
+ Mon, 08 Nov 2021 01:47:54 +0100 (CET)
+Received: by mail-lj1-x235.google.com with SMTP id i63so914282lji.3
+ for <xen-devel@lists.xenproject.org>; Sun, 07 Nov 2021 16:47:54 -0800 (PST)
 Received: from localhost.localdomain (79-139-188-96.dynamic.spd-mgts.ru.
  [79.139.188.96])
- by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.47.56
+ by smtp.gmail.com with ESMTPSA id p17sm1625266lfu.209.2021.11.07.16.47.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 07 Nov 2021 16:47:57 -0800 (PST)
+ Sun, 07 Nov 2021 16:47:54 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,34 +52,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 847dc7d0-402d-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 82577403-402d-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=idp+KUM0Lads56hMjVdKoUEucrYOLC8M0llXkHYfiR0=;
-        b=MSIokg9fBl5wCKU+YCh/ZsTnRbPxtyYkn0IXkmz1QgysWSCzedTHzXunmbe5h3S6bm
-         UnVL+wV6mqmFlzA/9Cm1DjvGCGyG1UlF0UpjGzAyekOseWLiiFHuU/rzzoJCNBaI+Ut+
-         tXv3jqiyClz8c/yGI+0sql8rliP5FMVBt2m13PFdeI0ncEKECxTJKTD2uIvZxfhnpZtc
-         pTtiL6yFqIiWFaztPJXKxizN2sS1pJLHyx55ZI+6yNFLo/Lx5fkTcHCO0Wef47K1i5ee
-         hCd51zpj+5nuMAdYUzdECYDopq77neBqCsiLrTGv9/feFU5+CZJd4t4x88wQvcjrAxlc
-         1+wg==
+        bh=TugVlbRXpFiQ9yttEJ2CYhwYKdBA8PSz6pBjqNjtqe8=;
+        b=qGyzuk9bzwP/18mgZA5opqkVY0uVUy+tVPfW2WYN1KphXlcW2Q+w2WAU/6WZNf57LM
+         qJ4eYesG/AVtiYQbx6XiDRV7T5AuMxyGQ216v1qPIOzs89Hff+bf4lZf1jt+ER21rBOl
+         HONymPsCAtxnkmv4pkJQTsQypH0+0XmtAGzllxDhcASTyvxis2fFkz6lytuE8myfCgCw
+         m9JFB37KExTbVRxVqh3r/x0jYz92VN4nsKWVD0nWCm1XktHXgkzuksbVdAjBiuLFaKZ/
+         AY7V9wqwv7IWe10elmoqy019vMjtrGfbjo+zM6o4NTXkbvdPF08pHM+GsNheZd6RkSJl
+         Fhsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=idp+KUM0Lads56hMjVdKoUEucrYOLC8M0llXkHYfiR0=;
-        b=iVOnovTtf/lAlmregCVYiSL33aPy45i+j/B+ViMmbQKRdVqzIsihs0DQvdmFhvtFF0
-         ftvQqGCaClYkTwrlxhHfv9Gqv2uIA69Y/RGRMlZnPMdddJLGJXrUnlOWZM2z+JfDtbMP
-         GjCd3SljAWpWuX1eEwBrzh4f8r0ocMIXYnY5WOYsaAcoToEkZz4AC8c+EEpyXmsIEgfJ
-         dPARWLbopkrIoyUOgYI3MDf+xAcAyPdRm1sNmieIKd4T7oo6lkDho2OTnK0enA0vJn1T
-         dTlLIzOwawrmGw9DVxqGmtFDjoSbeusIFBVggeJnua/80j5/YufVdysXkaNcM2JzYCka
-         tP/Q==
-X-Gm-Message-State: AOAM531OxRaqc+gqADGTflt3U0C1GVgRmA9NRTzAE/SVOQUuxOb/g4Vr
-	jRq/kSPL6npD6AHBC9GGeDs=
-X-Google-Smtp-Source: ABdhPJxSy/O3ZKQtb6VfZ0yaPaYZOmyzwu5OdP3V3ve+XGbVnBVt+toWzoBqdj+8FoRHXqlPFKwvJw==
-X-Received: by 2002:a2e:b88f:: with SMTP id r15mr57944203ljp.309.1636332477998;
-        Sun, 07 Nov 2021 16:47:57 -0800 (PST)
+        bh=TugVlbRXpFiQ9yttEJ2CYhwYKdBA8PSz6pBjqNjtqe8=;
+        b=SGJdwyS8l+2hYawjW3SX4Hj2vYs++xiy08jbvAM4gIe+0pbS620XM1N1YS53JokA3g
+         1WC4aL7JVzafK2Wzj+/MydC1OXaCOhGnKr96Q3jghppCUmoXBqoBsKFWx/UmPyRK0A6y
+         /ZQvD6dBLhLP4w9+e+0TtPpNDOPNdT3WN7bvOAO1/PzsPx/w0cN5bMZisGkpxqKJ+2FG
+         9mOXHkPUvOP+NVAubZwwW4cO/t472UAMB8XaqL+Zy7A4TPAGQcorEHCKYhgFuoTvxCSy
+         OplaAzlaTnrzug2AV2SPrd0CcBdVEaMo6QCNANpIqXvhGAlsLrmtNRv+l7XtWVkQTG/n
+         4yGw==
+X-Gm-Message-State: AOAM531yhtm+rELMmDQc/zNh/KpHGim91mdULAnwVNyUHQwb1T9OkA+7
+	h52mbrl5WhH2Ny7VXtgAHIE=
+X-Google-Smtp-Source: ABdhPJzFYVx5IFgfdDhOR9e83sgbkaPAeNsCANjmWUXHuabW0BVJv1Mhw8sAAFHy3OCvobmKncQgJA==
+X-Received: by 2002:a05:651c:907:: with SMTP id e7mr81850646ljq.300.1636332474410;
+        Sun, 07 Nov 2021 16:47:54 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -140,36 +140,35 @@ Cc: linux-arm-kernel@lists.infradead.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v3 06/25] reboot: Warn if unregister_restart_handler() fails
-Date: Mon,  8 Nov 2021 03:45:05 +0300
-Message-Id: <20211108004524.29465-7-digetx@gmail.com>
+Subject: [PATCH v3 04/25] reboot: Correct typo in a comment
+Date: Mon,  8 Nov 2021 03:45:03 +0300
+Message-Id: <20211108004524.29465-5-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211108004524.29465-1-digetx@gmail.com>
 References: <20211108004524.29465-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Emit warning if unregister_restart_handler() fails since it never should
-fail. This will ease further API development by catching mistakes early.
+Correct s/implemenations/implementations/ in <reboot.h>.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- kernel/reboot.c | 2 +-
+ include/linux/reboot.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/kernel/reboot.c b/kernel/reboot.c
-index e6659ae329f1..f0e7b9c13f6b 100644
---- a/kernel/reboot.c
-+++ b/kernel/reboot.c
-@@ -210,7 +210,7 @@ EXPORT_SYMBOL(register_restart_handler);
-  */
- int unregister_restart_handler(struct notifier_block *nb)
- {
--	return atomic_notifier_chain_unregister(&restart_handler_list, nb);
-+	return WARN_ON(atomic_notifier_chain_unregister(&restart_handler_list, nb));
- }
- EXPORT_SYMBOL(unregister_restart_handler);
+diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+index af907a3d68d1..7c288013a3ca 100644
+--- a/include/linux/reboot.h
++++ b/include/linux/reboot.h
+@@ -63,7 +63,7 @@ struct pt_regs;
+ extern void machine_crash_shutdown(struct pt_regs *);
  
+ /*
+- * Architecture independent implemenations of sys_reboot commands.
++ * Architecture independent implementations of sys_reboot commands.
+  */
+ 
+ extern void kernel_restart_prepare(char *cmd);
 -- 
 2.33.1
 
