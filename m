@@ -2,64 +2,64 @@ Return-Path: <SRS0=fUSO=P4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D241C433FE
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7B246C433EF
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:03:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4CE4B6115B
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:03:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 4CE4B6115B
+	by mail.kernel.org (Postfix) with ESMTPS id 3A2BE611C5
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:03:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 3A2BE611C5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=xilinx.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.223698.386519 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.223697.386508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mkL9k-0000Lz-DR; Tue, 09 Nov 2021 07:02:56 +0000
+	id 1mkL9j-000052-64; Tue, 09 Nov 2021 07:02:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 223698.386519; Tue, 09 Nov 2021 07:02:56 +0000
+Received: by outflank-mailman (output) from mailman id 223697.386508; Tue, 09 Nov 2021 07:02:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mkL9k-0000Ls-9J; Tue, 09 Nov 2021 07:02:56 +0000
-Received: by outflank-mailman (input) for mailman id 223698;
- Tue, 09 Nov 2021 07:02:55 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mkL9j-00004t-1P; Tue, 09 Nov 2021 07:02:55 +0000
+Received: by outflank-mailman (input) for mailman id 223697;
+ Tue, 09 Nov 2021 07:02:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+rF7=P4=xilinx.com=fnuv@srs-se1.protection.inumbo.net>)
- id 1mkL9j-00004s-Da
- for xen-devel@lists.xenproject.org; Tue, 09 Nov 2021 07:02:55 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20626.outbound.protection.outlook.com
- [2a01:111:f400:7e88::626])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0de8392e-412b-11ec-9787-a32c541c8605;
- Tue, 09 Nov 2021 08:02:52 +0100 (CET)
-Received: from SA0PR11CA0076.namprd11.prod.outlook.com (2603:10b6:806:d2::21)
- by MN2PR02MB6047.namprd02.prod.outlook.com (2603:10b6:208:186::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.11; Tue, 9 Nov
- 2021 07:02:49 +0000
-Received: from SN1NAM02FT0016.eop-nam02.prod.protection.outlook.com
- (2603:10b6:806:d2:cafe::23) by SA0PR11CA0076.outlook.office365.com
- (2603:10b6:806:d2::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.11 via Frontend
- Transport; Tue, 9 Nov 2021 07:02:49 +0000
-Received: from xsj-pvapexch01.xlnx.xilinx.com (149.199.62.198) by
- SN1NAM02FT0016.mail.protection.outlook.com (10.97.4.82) with Microsoft SMTP
+ id 1mkL9h-0008WR-L0
+ for xen-devel@lists.xenproject.org; Tue, 09 Nov 2021 07:02:53 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20620.outbound.protection.outlook.com
+ [2a01:111:f400:fe5a::620])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0ce2e50c-412b-11ec-a9d2-d9f7a1cc8784;
+ Tue, 09 Nov 2021 08:02:51 +0100 (CET)
+Received: from DS7PR03CA0324.namprd03.prod.outlook.com (2603:10b6:8:2b::24) by
+ PH0PR02MB7319.namprd02.prod.outlook.com (2603:10b6:510:1e::14) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4669.13; Tue, 9 Nov 2021 07:02:48 +0000
+Received: from DM3NAM02FT010.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:8:2b:cafe::60) by DS7PR03CA0324.outlook.office365.com
+ (2603:10b6:8:2b::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.10 via Frontend
+ Transport; Tue, 9 Nov 2021 07:02:48 +0000
+Received: from xsj-pvapexch02.xlnx.xilinx.com (149.199.62.198) by
+ DM3NAM02FT010.mail.protection.outlook.com (10.13.5.124) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4669.10 via Frontend Transport; Tue, 9 Nov 2021 07:02:48 +0000
+ 15.20.4669.10 via Frontend Transport; Tue, 9 Nov 2021 07:02:47 +0000
 Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
- xsj-pvapexch01.xlnx.xilinx.com (172.19.86.40) with Microsoft SMTP Server
+ xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Mon, 8 Nov 2021 23:02:39 -0800
+ 15.1.2176.14; Mon, 8 Nov 2021 23:02:47 -0800
 Received: from smtp.xilinx.com (172.19.127.95) by
  xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Mon, 8 Nov 2021 23:02:34 -0800
+ 15.1.2176.14 via Frontend Transport; Mon, 8 Nov 2021 23:02:47 -0800
 Received: from [172.19.2.115] (port=44056 helo=xsjfnuv50.xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <fnu.vikram@xilinx.com>)
- id 1mkL9O-000Ga6-2A; Mon, 08 Nov 2021 23:02:34 -0800
+ id 1mkL9b-000Ga6-Ly; Mon, 08 Nov 2021 23:02:47 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,14 +71,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0de8392e-412b-11ec-9787-a32c541c8605
+X-Inumbo-ID: 0ce2e50c-412b-11ec-a9d2-d9f7a1cc8784
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KhVqvpwO/TiLFWYXby/Qz0B456srIkPhmj8gchV9h40wP8mTR2r/oAUjHpWbHYxCaX3uTLkt/RALzjkuWAW958do/fs1sqHKXuMW8rZa0Z5rXq9Kh0b7TTRXD5FWnXCHaBceu0kgpuAXg4xsjyNQgZdp29dybjAwMo0Y8hJnDapdPttdIMYczOoP3Wf1TaznqqdlOoWbMCZx+7/y3aAqW267n6Pi1QhHTMFVs/YYSBcuMInbPsuMHZKAbQor89sOiapvPJlKte/kmsBFr3y2iziTtKLNwaXAIkynPhb3GQHH7EkxCpm9ijJEqbRI9IvUFBllEAh0DBe2uCqItgO9Zg==
+ b=eAP3qgvzQ3dPMe3SrwEtSEu1Dr3ppafUBsjhSG+PA+Gd5vxY/0c/CRdPMMWVzNnmYuZyL7PzCzf/kbmM+knLC27hRTknAbxg97mhcWbcHK1XH2UwXi3hJanceOOjcwYRerenn/ORieMONQQms2A2EFXU0dt38x/l8W/bEBkX//zltAB/DdjQEre5jLw0omyLyp/4xxXDEojBzaS38wdtgdDPTjcEwZWrFi6hzPSO1oDR9sOWCPeBgAuEwIrR2+/FCTTsb31/mdoQT26YnwQ5Svoc7FCc7yuA1u6r8izLoUJWoj0PC4Kqd9od94EPYlK/T9/mrifj7IMKo5LAdMGH9g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xtJLc1JfjYiw9k5F0Qw1/n6JDGWssDVQSwbVx+ZYHRQ=;
- b=FyFCiJ3y7pUrU57ErLiESkdzIRspI3DsLHTFamlFTd48Dc+RVYKIj1XJ10hqcZ3dgDmPqsZ6CYKucD0ZjqfiN4bBvJbwg9D3TbSnW4T6ue40L07JgspESBlmU098M+F0qQ336k+5vFonZ6MnkFkTiKCkv/oL+uMFvEUJFeSRX+gQa75C7zgt8O/JsTBTjsBf327DeYKx6OCOBFUPPuQ0ugRB3ED3/DnEvTiSH7zuOvmIt+e4lFCAbM9TqBlrt5gd7UULpv7KdMhpdJyEk0hJPcfliVK6TQ4VQc9FS8vCyYAO2LfGyAs3geaVIQkE4Yu0By0Uzms9mDkoHZ1dyYZkLg==
+ bh=kIewzG8LywGWbHesUbd3OwI+EI+4G2+90rM3TjxjMto=;
+ b=AC+zclWUX4ssIdyn93a9IQn6m6QDevnHOpDEA9DcDCC5Q1U5zkjQHjomzZ74t019M8o7u3TpPg9dM9jXl+0e7Putf8JHToEi/J6K6ij0hIY9BLLSL/JZ+owJohdsrY63CqvGue4hDPMm9w8GAlvKUkDHRU8EZJsLkt30dSux81pj2r8IV5PNbmHzAs8zeNWU1LAg1gQgmrCuWmF3BlKaWKFVeNcAaOo5qVgklJcYkvF/sZ0FpCOw98+JkazGJyKW8Op2Ux+8AzkigC6NIKChNCjAEU7iBG7sUAUUQWAGioJBG/fZT7PhN7F8oiQNkwaOsmVWt4HhP1pltaSDRYEBXQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -86,143 +86,112 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xtJLc1JfjYiw9k5F0Qw1/n6JDGWssDVQSwbVx+ZYHRQ=;
- b=bN9lsulsL8EcxPgPG7pdsiOKpKbYO4aolPH4rkqd5f012ZKAygVRmnnl31UhBJ+MZkx5HIWNR8iOukoKKMfv+hjVGjG+dYe+xQ2nOUtS0nUp8euuhkUGHydoJeYlhUl4DItmqd6S3WhpXGljP/CP33RD+Q94Y5cV2zj+a3aHOk8=
+ bh=kIewzG8LywGWbHesUbd3OwI+EI+4G2+90rM3TjxjMto=;
+ b=RxwU6jSjsdsz0tComLWtsmkxc7BuI1XJtTd1Bxms/rbKzjwRWdKazW0IilVeMiZj/rCd1wI8WM7iBvO2lO2Cj70EHVrxtJdmJ25lmUJ4/2O8/sBPhwaAF5u8PRtCNkPIk3L/EKh61s34clGjuPlWAxXRrZMb+DOJe1GF1K7v+AQ=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
  smtp.mailfrom=xilinx.com; lists.xenproject.org; dkim=none (message not
  signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
  header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
  149.199.62.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.62.198; helo=xsj-pvapexch01.xlnx.xilinx.com;
+ client-ip=149.199.62.198; helo=xsj-pvapexch02.xlnx.xilinx.com;
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
-	<volodymyr_babchuk@epam.com>, Vikram Garhwal <fnu.vikram@xilinx.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Jan Beulich
-	<jbeulich@suse.com>, Paul Durrant <paul@xen.org>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Ian
- Jackson <iwj@xenproject.org>, Wei Liu <wl@xen.org>, Juergen Gross
-	<jgross@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
-Subject: [XEN][RFC PATCH v2 00/12] dynamic node programming using overlay dtbo
-Date: Mon, 8 Nov 2021 23:02:15 -0800
-Message-ID: <1636441347-133850-1-git-send-email-fnu.vikram@xilinx.com>
+	<volodymyr_babchuk@epam.com>, Vikram Garhwal <fnu.vikram@xilinx.com>
+Subject: [XEN][RFC PATCH v2 05/12] device tree: Add _dt_find_node_by_path() to find nodes in device tree
+Date: Mon, 8 Nov 2021 23:02:20 -0800
+Message-ID: <1636441347-133850-6-git-send-email-fnu.vikram@xilinx.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1636441347-133850-1-git-send-email-fnu.vikram@xilinx.com>
+References: <1636441347-133850-1-git-send-email-fnu.vikram@xilinx.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 28161322-8565-4c2b-751b-08d9a34ef092
-X-MS-TrafficTypeDiagnostic: MN2PR02MB6047:
+X-MS-Office365-Filtering-Correlation-Id: 16419d0b-8a6a-4c6d-519f-08d9a34ef01b
+X-MS-TrafficTypeDiagnostic: PH0PR02MB7319:
 X-Microsoft-Antispam-PRVS:
-	<MN2PR02MB60476F13F02226D7AB5C5DB9BC929@MN2PR02MB6047.namprd02.prod.outlook.com>
+	<PH0PR02MB73192148A09CB12916062838BC929@PH0PR02MB7319.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	oBzgNB/bxnz0jy7yNnmuOFbcOvVq5dmBdfR1wUdbZhiJM+o9pVWnsW2qwN+XZxLrPqdQZa33VSyxoSGPQVpjn9LQmwyHCZ9ZPjm9CCSiMj1tDW51XVofKCoSqGfbWdP4LHwIRJ0FlwpO4yPYGpfAnINRct2pwOIdPZHiB3A+jPKpm27LsyUFeTgOEJAaUo2u7pC0uZXy1dzZArcimkz+vmRw4Bn7C0/5aNJgByV32cWhEmE9eNxddaJPrVm1u3yW40YWwevHRJ99Va6aKMz7fSOnBHtI2giLQnWERfWB2kgO7OjpTu1d3B9ywkiS7el1b1RTw/tly9OhoNdteCOlXABdq8Dy/HCG7JN4/Mi/awuQR1UGXkqS1in8n/DeT57bC6XRdKDJWP08BoCMRdahtWTXNy+dF4tGurTpKZtFEDdlma6aBdvU+M+paL9b3gfw0k3Ze0KoVarX+fvWd1s45fY8WfNmtJ1UFaKjM0fpFMVDccyUO+Yh0W1nKQzTtkiBMnRC9WjqXb52w15IyWd8MBwzMG9nvHtmH5R98SgG9HcRq/+An+tMVKdQkJrkYNwlgZiZD2kMTu7J5A0stKWciAnOJZ/swKd1O+X9JayeOg1yhlkAmvbWZTHyxnQzb0O3NXlAyCUV23XsZ2T/+PWykAB5PYq7n/xJDke+Bzx9r4f9sWSZX6BcIVqaJgEPloHIGO5N7TE/uepzKJU4NKk6cIbHjfsVTAI5OfKRHMgoIEE=
+	CxrKvQBgjaFpqcDX9shXu8wa92CnssaHYwKGafmN6YKDRGt6L4gNl595IsjZJ4BvF8Uw+OY2Y1GCneV2XjdMkuxHfHIzIAvXlG5jxcKgJg0edp8LHMJArYw0NTW1zngjBMV0c2ABNrHxEvA/d99RJ1+vMxU4VqTNbIS3kCU1urUDiNfNqpbHbklGEhAFQgxyaPTN0N+vSFqUuPKAsOUasY9t2dSOjpN64f72Fw3EZ476FzPQycLxO07/hcqXovaZtRK8v2HuT1AaKsS0iYb/vALngN/hLwOptK+Y8y7Q5ptOdnNGlIuZiJXm9DeLjfF00k5psJhgwswRAfIbvhIZS9jnDmJ5ReZ6yPiJ/mevQabMvuAFEHIYI9faQq6fUN2pCnSiHQ4azgar4W2z52H8F/24RQU7p8ccg5qFrf+PRSjfUphq83xGtYZX9Vcdu/gUdotttxVsrYD+tPbZwK6dtVz7FxCTWLzbuZXeeusqAfAQHREehjiBwoSdk0+WizXybFI9duUXrum4zpO24FUMa1Rza+SXopaQEs0nFoDA7uk2r/PtCXsbCE6QWE/VVwnoiNAGiPpCLEA0aQpD6CgvzPRDhIG+aC6yaJn5vsRQmgNTuxCzXrv0y0Dn9ETHiAU4ucJaf4v09AzMK1nIAvw0eY6ScNSciOqhM5tcitd5LdYFZF2oBtkF6U/u7KI/ZrIusFzX01tgkvavrRuPXmu6uYRL/8oODc2FkS0nZITnhadDrrIS8LAc0y7QZy1P8RAf
 X-Forefront-Antispam-Report:
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(46966006)(36840700001)(9786002)(54906003)(186003)(7636003)(2906002)(82310400003)(8676002)(36756003)(336012)(4326008)(36906005)(6666004)(316002)(70586007)(70206006)(6916009)(8936002)(508600001)(2616005)(26005)(5660300002)(83380400001)(36860700001)(7696005)(7416002)(426003)(47076005)(356005)(102446001);DIR:OUT;SFP:1101;
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(46966006)(36840700001)(336012)(5660300002)(426003)(36906005)(7636003)(82310400003)(36860700001)(70586007)(2906002)(316002)(4326008)(2616005)(36756003)(107886003)(9786002)(47076005)(356005)(7696005)(83380400001)(54906003)(26005)(6916009)(186003)(8936002)(8676002)(6666004)(70206006)(508600001)(102446001)(37363002);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2021 07:02:48.7702
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2021 07:02:47.9785
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 28161322-8565-4c2b-751b-08d9a34ef092
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16419d0b-8a6a-4c6d-519f-08d9a34ef01b
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch01.xlnx.xilinx.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch02.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1NAM02FT0016.eop-nam02.prod.protection.outlook.com
+	DM3NAM02FT010.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR02MB6047
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR02MB7319
 
-Hi,
-This RFC patch series is for introducing dynamic programming i.e. add/remove the
-devices during run time. Using "xl overlay" a device can be added/removed with dtbo.
+Add _dt_find_by_path() to find a matching node with path for a dt_device_node.
 
-For adding a node using dynamic programming:
-    1. flatten device tree overlay node will be added to a fdt
-    2. Updated fdt will be unflattened to a new dt_host_new
-    3. Extract the newly added node information from dt_host_new
-    4. Add the added node under correct parent in original dt_host.
-    3. Map interrupt and iomem region as required.
+Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
+---
+ xen/common/device_tree.c      | 10 ++++++++--
+ xen/include/xen/device_tree.h |  9 +++++++++
+ 2 files changed, 17 insertions(+), 2 deletions(-)
 
-For removing a node:
-    1. Find the node with given path.
-    2. Check if the node is used by any of dom0 or domus. Removes the node
-only when it's not used by any domain.
-    3. Removes IRQ permissions and MMIO access.
-    5. Find the node in dt_host and delete the device node entry from dt_host.
-    6. Free the overlay_tracker entry which means free dt_host_new also(created
-in adding node step).
-
-Question: I am not sure how to enable CONFIG_OVERLAY_DTB in tool stack like the
-way we do in xen using menuconfig or editing .config file. Would it be possible
-for someone in tool stack expertise to guide me?
-
-Reminder: This patch series has dependency on libfdt v1.6.1. A patch for libfdt
-upgrade was already sent earlier with below subject:
-    [XEN][PATCH v2 0/1] Update libfdt to v1.6.1
-
-Change Log:
- v1 -> v2:
-    Add support for multiple node addition/removal using dtbo.
-    Replaced fpga-add and fpga-remove with one hypercall overlay_op.
-    Moved common domain_build.c function to device.c
-    Add OVERLAY_DTB configuration.
-    Renamed overlay_get_target() to fdt_overlay_get_target().
-    Split remove_device patch into two patches.
-    Moved overlay_add/remove code to sysctl and changed it from domctl to sysctl.
-    Added all overlay code under CONFIG_OVERLAY_DTB
-    Renamed all tool domains fpga function to overlay
-    Addressed code issues from v1 review.
-
-Regards,
-Vikram
-
-Vikram Garhwal (12):
-  device tree: Remove __init from function type
-  xen: arm: Add CONFIG_OVERLAY_DTB
-  libfdt: Keep fdt functions after init for CONFIG_OVERLAY_DTB.
-  libfdt: Add fdt_ prefix to overlay_get_target()
-  device tree: Add _dt_find_node_by_path() to find nodes in device tree
-  xen/smmu: Add remove_device callback for smmu_iommu ops
-  xen/smmu: Add remove_device callback for smmu_iommu ops
-  xen/arm: Implement device tree node removal functionalities
-  xen/arm: Implement device tree node addition functionalities
-  tools/libs/ctrl: Implement new xc interfaces for dt overlay
-  tools/libs/light: Implement new libxl functions for device tree
-    overlay ops
-  tools/xl: Add new xl command overlay
-
- tools/include/libxl.h                 |   5 +
- tools/include/xenctrl.h               |   5 +
- tools/libs/ctrl/Makefile              |   1 +
- tools/libs/ctrl/xc_overlay.c          |  51 +++
- tools/libs/light/Makefile             |   3 +
- tools/libs/light/libxl_overlay.c      |  65 ++++
- tools/xl/xl.h                         |   8 +
- tools/xl/xl_cmdtable.c                |   8 +
- tools/xl/xl_vmcontrol.c               |  47 +++
- xen/arch/arm/Kconfig                  |   8 +
- xen/arch/arm/device.c                 | 146 +++++++++
- xen/arch/arm/domain_build.c           | 150 ---------
- xen/common/device_tree.c              | 122 +++++++-
- xen/common/libfdt/Makefile            |   3 +
- xen/common/libfdt/fdt_overlay.c       |  12 +-
- xen/common/sysctl.c                   | 571 ++++++++++++++++++++++++++++++++++
- xen/drivers/passthrough/arm/smmu.c    |  54 ++++
- xen/drivers/passthrough/device_tree.c |  30 ++
- xen/include/asm-arm/domain_build.h    |  10 +
- xen/include/public/sysctl.h           |  23 ++
- xen/include/xen/device_tree.h         |  20 ++
- xen/include/xen/iommu.h               |   2 +
- xen/include/xen/libfdt/libfdt.h       |   3 +
- 23 files changed, 1180 insertions(+), 167 deletions(-)
- create mode 100644 tools/libs/ctrl/xc_overlay.c
- create mode 100644 tools/libs/light/libxl_overlay.c
-
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index 88f3f7e..26d2e28 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -358,17 +358,23 @@ struct dt_device_node *dt_find_node_by_type(struct dt_device_node *from,
+     return np;
+ }
+ 
+-struct dt_device_node *dt_find_node_by_path(const char *path)
++struct dt_device_node *_dt_find_node_by_path(struct dt_device_node *dt,
++                                             const char *path)
+ {
+     struct dt_device_node *np;
+ 
+-    dt_for_each_device_node(dt_host, np)
++    dt_for_each_device_node(dt, np)
+         if ( np->full_name && (dt_node_cmp(np->full_name, path) == 0) )
+             break;
+ 
+     return np;
+ }
+ 
++struct dt_device_node *dt_find_node_by_path(const char *path)
++{
++    return _dt_find_node_by_path(dt_host, path);
++}
++
+ void dt_print_node_names(struct dt_device_node *dt)
+ {
+     struct dt_device_node *np;
+diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
+index 9fc63ab..5ba26a0 100644
+--- a/xen/include/xen/device_tree.h
++++ b/xen/include/xen/device_tree.h
+@@ -525,6 +525,15 @@ struct dt_device_node *dt_find_node_by_alias(const char *alias);
+  */
+ struct dt_device_node *dt_find_node_by_path(const char *path);
+ 
++/**
++ * _dt_find_node_by_path - Find a node matching a full DT path
++ * @dt_node: The device tree to search
++ * @path: The full path to match
++ *
++ * Returns a node pointer.
++ */
++struct dt_device_node *_dt_find_node_by_path(struct dt_device_node *dt,
++                                             const char *path);
+ 
+ /**
+  * dt_find_node_by_gpath - Same as dt_find_node_by_path but retrieve the
 -- 
 2.7.4
 
