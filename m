@@ -2,64 +2,64 @@ Return-Path: <SRS0=fUSO=P4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E30D3C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:03:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3A7ECC433F5
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:47:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 999F7611C5
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:03:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 999F7611C5
+	by mail.kernel.org (Postfix) with ESMTPS id D508561175
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Nov 2021 07:47:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org D508561175
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=xilinx.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.223713.386625 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.223775.386651 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mkLA4-0003gQ-Vl; Tue, 09 Nov 2021 07:03:16 +0000
+	id 1mkLqa-00036A-QH; Tue, 09 Nov 2021 07:47:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 223713.386625; Tue, 09 Nov 2021 07:03:16 +0000
+Received: by outflank-mailman (output) from mailman id 223775.386651; Tue, 09 Nov 2021 07:47:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mkLA4-0003eY-9T; Tue, 09 Nov 2021 07:03:16 +0000
-Received: by outflank-mailman (input) for mailman id 223713;
- Tue, 09 Nov 2021 07:03:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mkLqa-000363-Li; Tue, 09 Nov 2021 07:47:12 +0000
+Received: by outflank-mailman (input) for mailman id 223775;
+ Tue, 09 Nov 2021 07:47:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+rF7=P4=xilinx.com=fnuv@srs-se1.protection.inumbo.net>)
- id 1mkLA1-00004s-PT
- for xen-devel@lists.xenproject.org; Tue, 09 Nov 2021 07:03:13 +0000
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060e.outbound.protection.outlook.com
- [2a01:111:f400:7eaa::60e])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1a3634d2-412b-11ec-9787-a32c541c8605;
- Tue, 09 Nov 2021 08:03:12 +0100 (CET)
-Received: from SN7PR04CA0171.namprd04.prod.outlook.com (2603:10b6:806:125::26)
- by CY4PR0201MB3619.namprd02.prod.outlook.com (2603:10b6:910:8c::29)
+ id 1mkLqY-00035V-Vy
+ for xen-devel@lists.xenproject.org; Tue, 09 Nov 2021 07:47:10 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2062c.outbound.protection.outlook.com
+ [2a01:111:f400:7eae::62c])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3d3a28bf-4131-11ec-a9d2-d9f7a1cc8784;
+ Tue, 09 Nov 2021 08:47:09 +0100 (CET)
+Received: from BN6PR19CA0086.namprd19.prod.outlook.com (2603:10b6:404:133::24)
+ by CH2PR02MB7096.namprd02.prod.outlook.com (2603:10b6:610:8c::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.10; Tue, 9 Nov
- 2021 07:03:06 +0000
-Received: from SN1NAM02FT0011.eop-nam02.prod.protection.outlook.com
- (2603:10b6:806:125:cafe::b7) by SN7PR04CA0171.outlook.office365.com
- (2603:10b6:806:125::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.11 via Frontend
- Transport; Tue, 9 Nov 2021 07:03:06 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.11; Tue, 9 Nov
+ 2021 07:47:05 +0000
+Received: from BN1NAM02FT023.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:404:133:cafe::38) by BN6PR19CA0086.outlook.office365.com
+ (2603:10b6:404:133::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4669.10 via Frontend
+ Transport; Tue, 9 Nov 2021 07:47:05 +0000
 Received: from xsj-pvapexch01.xlnx.xilinx.com (149.199.62.198) by
- SN1NAM02FT0011.mail.protection.outlook.com (10.97.5.171) with Microsoft SMTP
+ BN1NAM02FT023.mail.protection.outlook.com (10.13.2.137) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4669.10 via Frontend Transport; Tue, 9 Nov 2021 07:03:06 +0000
+ 15.20.4669.10 via Frontend Transport; Tue, 9 Nov 2021 07:47:05 +0000
 Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
  xsj-pvapexch01.xlnx.xilinx.com (172.19.86.40) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Mon, 8 Nov 2021 23:02:53 -0800
-Received: from smtp.xilinx.com (172.19.127.95) by
+ 15.1.2176.14; Mon, 8 Nov 2021 23:47:04 -0800
+Received: from smtp.xilinx.com (172.19.127.96) by
  xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Mon, 8 Nov 2021 23:02:48 -0800
-Received: from [172.19.2.115] (port=44056 helo=xsjfnuv50.xilinx.com)
+ 15.1.2176.14 via Frontend Transport; Mon, 8 Nov 2021 23:47:04 -0800
+Received: from [172.19.2.115] (port=44100 helo=xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <fnu.vikram@xilinx.com>)
- id 1mkL9c-000Ga6-5x; Mon, 08 Nov 2021 23:02:48 -0800
+ id 1mkLqS-000AmH-Mf; Mon, 08 Nov 2021 23:47:04 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,167 +71,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a3634d2-412b-11ec-9787-a32c541c8605
+X-Inumbo-ID: 3d3a28bf-4131-11ec-a9d2-d9f7a1cc8784
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=H3GKJ4r3y3CWlFyoB/zQMb0f7UQM5KSJLKCARc6DzgoW23d3RZcbavHp4fjoO2VtJ68Dycw8PUF6Vqiwota5tSVqvOMl4jmlmRk+mO3B8DsX6DmEMaU+lqp1vwiu4/Ar+fZLcS8t4EtNYqNEOV1v8952VnLhJSfnb091rb26IzM9snQvVW/bSZsR2EzT++2fxY9ZxI30f9HPA2W2L/+P0yD/XppTEPvqy3hZ4v0FsZG8/6uEZGrJPHJCFcj97MbPGHLQ9XKcJ1kQ6eH7alISNqoNS/3N7C2qVxrPlwtZ6Se/F0lEZklUmiNlZV50SJfoUaiqFCvHiEknYugCpT3Rkw==
+ b=cYc0XXFg4yZApRxNSrV9VzLoP3r6dgj1G351MUwu5Vy0Zx/fykJe4yhazTwU50bm4iw7NhcGkLSks9NQRtdB9owSXaethoN1TIrHdCm8aw0KrnDOX94pak0XXfORTWZfCwsTCbpYYyADy5pIeXvy3IciJ5ZwpHSHR0wvJQTDhOwSTL4HQLKEqH/OfukFCP8yEFDShwRRzh7N1QYOHdxZ2GCxO/b0+KsNWKditHxDaOIIqOVKYP7F/LeQ+qE7vpusqThjN2HQBCFUVgHVxMByCE1365uzooOvXCEJ/POHehfKeFiJ9csod6z54xZc7nmvWEIW6SAdE+FP7N5BjvYlYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aqdp/GvnsU179UtkDRtrXW3Ma3HQaHxw15Jk4pDNfYo=;
- b=ZD5xW270DnlVUPcovsyyDgb4hl8G4fLv2/wg5w9VwlH5Xe4JifH8z7+8hYWYeA3lFWA/PazEASRVCKmktZ9/6jokjynHgYZEM9dVnJ8GRh8exk6NQ4MFLAeJJntZ0mPgt8A7lb+7cY4aQaJCH570Ne7XxebeRw89nN4s7M/uOuI37R9RAYKfYrC5N1DuQxXXjPIiI6gTZNcMhTC5ot7D28rQH06TIsfG4rgEA9hfppSr4s3l8NpoGiUCO/EJ50S/pNKfXGIkKoOpEMpK/N4qjHhbZmmx1Qqc9DhJ7y9GxLGAHZ7YVy3stUDReq98TrOmAnHx0IkAX/sGreUifl4ACw==
+ bh=NwIntXkifYQ8RKlL0jbwCGXz4AM+YJ1ZSWK////ySSw=;
+ b=jNNFMufyjUD6B8bDkCUnkmHTGuk/sGCFsrFNWlfXZblKb60Si8T+rDd32NLSYyARPIPRqyUT9DlQq7s+rR6Pif4HYJpugrQWHzT2Vxiq8xKCD5Hp5o9AtznlLMmp5H/eC1L37sfHp11AXBdjB+HyymnuuxSPuiSAwStWR3hu6CvHNG3wcYhbYAY05aJ7hEkukOnIlRB3PSdR/rwCpgbVulsMMkTL//9YZD/sTDI5WR5RfHWFBCTUFNlPBAUXcLvbOgfolsuvRkEfJAaZcim1tWOUWiTynE5GP5oAe5s+rssLAPWcwSHL8R1VyYDcu0sskabqm9Cbd0pOQi4D79biXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
- smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
- header.from=xilinx.com; dkim=none (message not signed); arc=none
+ 149.199.62.198) smtp.rcpttodomain=xen.org smtp.mailfrom=xilinx.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=xilinx.com;
+ dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aqdp/GvnsU179UtkDRtrXW3Ma3HQaHxw15Jk4pDNfYo=;
- b=XBYUbDxAxubZQ38sWbNo/V4IM2MaLyBbB17nDFhX8vHg/T/GQNkmvHoGg+N4rqmQMzLb8snQ3Z+Vwz2a+Grm6jHWZ52nOOFW7EKR3TrPH35+PdZuvJymmFnbameTHOFBNYzOt1VP5XWfPrbfaArhsohoMnwiCh3EEQENyQFcG2Q=
+ bh=NwIntXkifYQ8RKlL0jbwCGXz4AM+YJ1ZSWK////ySSw=;
+ b=XAvuQEDJIAnovthrAL3mvd9EgaEDZvGxoFtKF3LmzTvCqbKhoIsEteIy+qQEtAg3Vly0+VFm1dPyDDtc40de/uNBspU4WUTj7ZjzGz9e5K/a1+u2/6zO8tklkhWtBzxiEqkYH8YNmyOSe/qxtnEM2f0Qazwg40e3WN7RG/F3i3I=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
- smtp.mailfrom=xilinx.com; lists.xenproject.org; dkim=none (message not
- signed) header.d=none;lists.xenproject.org; dmarc=pass action=none
- header.from=xilinx.com;
+ smtp.mailfrom=xilinx.com; xen.org; dkim=none (message not signed)
+ header.d=none;xen.org; dmarc=pass action=none header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
  149.199.62.198 as permitted sender) receiver=protection.outlook.com;
  client-ip=149.199.62.198; helo=xsj-pvapexch01.xlnx.xilinx.com;
+Date: Mon, 8 Nov 2021 23:47:04 -0800
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
-To: <xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
-	<volodymyr_babchuk@epam.com>, Vikram Garhwal <fnu.vikram@xilinx.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [XEN][RFC PATCH v2 06/12] xen/smmu: Add remove_device callback for smmu_iommu ops
-Date: Mon, 8 Nov 2021 23:02:21 -0800
-Message-ID: <1636441347-133850-7-git-send-email-fnu.vikram@xilinx.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1636441347-133850-1-git-send-email-fnu.vikram@xilinx.com>
-References: <1636441347-133850-1-git-send-email-fnu.vikram@xilinx.com>
+To: Julien Grall <julien@xen.org>
+CC: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
+	<bertrand.marquis@arm.com>, <volodymyr_babchuk@epam.com>
+Subject: Re: [XEN][PATCH v3 1/1] Update libfdt to v1.6.1
+Message-ID: <20211109074703.GA159999@xilinx.com>
+References: <1636147719-80482-1-git-send-email-fnu.vikram@xilinx.com>
+ <1636147719-80482-2-git-send-email-fnu.vikram@xilinx.com>
+ <caac2d2b-46a7-e12b-7cb0-ac1b7791d8a1@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <caac2d2b-46a7-e12b-7cb0-ac1b7791d8a1@xen.org>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7d74691a-c175-4967-4fe6-08d9a34efb27
-X-MS-TrafficTypeDiagnostic: CY4PR0201MB3619:
+X-MS-Office365-Filtering-Correlation-Id: 11e15e55-4344-466d-04d8-08d9a3551feb
+X-MS-TrafficTypeDiagnostic: CH2PR02MB7096:
 X-Microsoft-Antispam-PRVS:
-	<CY4PR0201MB361909393219C8514602972DBC929@CY4PR0201MB3619.namprd02.prod.outlook.com>
+	<CH2PR02MB7096AF988618861436DDF863BC929@CH2PR02MB7096.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	VEOLW/UI1lpFtm/Lr4yeO2cQz5ryPivi0xHg5pebB55DFvQJs2gUUiXkhQOiDySkl1DDy07hiQJo+KzSgs5rvCyI3oYo2pCqSipboIPQHdiU9D6niTSeLfItzdI753H7F0psW1nJq1JWEsOrwDR1nNSPhf0UQnjjOH6IxsukDNN8rSRZhZ2igJjvdQBi7fUuG9csvt14outrrgGfVIFEIP48epZfpFUMk596R39LcBDUVfn6iS4QCfMQsHlr0Q2yqPgOARpbY3hUBwpSfOwhccybsQBEqL2XyHFyXoW7VRYNoy5+t1uAcI7e2sr735wg7wWA9j5ru32Uy3gIoKyp7DVdHsyhFqLLEVPW8SEkS/M+dEiVinx56JDNC6/EEjq0RTzb7ecSLLTX2vwbkWys7SC5XZIELPy/HLbth0VpPh1kathmHMKXA9xW749SyJwPHB7dhzkf+j1IDvoxzBJJOFL8P67sDnTHRGp5pvRYtKeKgQeEGX9cDCXth8Tcif9xk0Zg5qlU5FUV4SJRztsz/76H6mUJq2ZrGO+MEUzW1Sk9gne1rf4TeX++f2g6my9ejq2iJquhpw3lcMzYaPbOrrE9Z4wFProp/WlCczmtyiu74svUPIYYPNg4cawfESyEIcbjRPehJAqMXueDuuP0KpM45yhM/gAe95Ab5PoNHKocBYu2D+nTlYUBLNSBaxUYBFHa1tITPTd6yt/qeusydTZ1GqZ9fQs1MBUmiwY7FBk=
+	S0mVOAws4GoZDbtxI1N1Of8apHyapMuIuAGIAmnHGrq8w5+59aykT6C1Z3Quj+MW6Vn8k+OVGB7A/JR5kOOenAFf6qG7BfUpf14WeWtAuaG91l1Bk3XajYKqyx/oH19kv9dpjb+NnyNikAUHJODltXKPxR2iK3XDbkElNOYAU5tq1sINjxhpXZ3byXfTfWZdStYmYOhEAq3Y/MY9PEOM5tt4vdBtEBOlgagpJ3YWHCHNUfOgzBbO657RgwyVJohdhG540g25RrHQtnTfe05MtspBubryqgSVKRPK6wJl480gDet32c6DN1Cu3A3Of5Tk8IY3AETFxq+IlIHWuuhULJbHnRVBWpkPFemDW++wm+OHKOqNSLFlwKY52aigkSdrwGjX7j/9RIuL3IwUYYKUbaejsYg00VocWoGC9PLlZZLrI5VgqD2eaqPCwSIsffN+vsoGKhSqJNh+zMkBj/uGXRlwEkh6x8kbny8exjUK/TFm7JYqo914d+rxoBtO2iqqgeshInhZUi3RTob7yCfcBhYxkjjIWf2bh3CWgydQpAOa5B1EifCZaBTznyVwoHhVhIfDOQiUtZlTlac0IzuQ8Ah2EMS8FaRl1OXND9JjN0vxWoYntG/43tvq8GtW/uzI7aM2KlONA76EXX3pBJzbC6Q6YNpKwb9PZajhVdw5dVY2QRb79SKISWPZL1OJ2lYGPkPUpsM3Gy/X5KgSNgs/Fs7rVPKrbXhjxUP+Hg2lAj0=
 X-Forefront-Antispam-Report:
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(36840700001)(46966006)(8676002)(6916009)(186003)(47076005)(26005)(6666004)(356005)(426003)(2906002)(2616005)(70206006)(70586007)(7636003)(336012)(9786002)(5660300002)(7696005)(4326008)(8936002)(82310400003)(508600001)(316002)(36860700001)(36906005)(36756003)(54906003)(102446001);DIR:OUT;SFP:1101;
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch01.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(36840700001)(46966006)(15650500001)(508600001)(8936002)(8676002)(70586007)(2906002)(6916009)(70206006)(26005)(54906003)(5660300002)(7696005)(36756003)(33656002)(47076005)(1076003)(4326008)(36860700001)(82310400003)(186003)(83380400001)(336012)(316002)(2616005)(36906005)(426003)(356005)(7636003)(53546011)(9786002)(27376004);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2021 07:03:06.5220
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Nov 2021 07:47:05.1309
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d74691a-c175-4967-4fe6-08d9a34efb27
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11e15e55-4344-466d-04d8-08d9a3551feb
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch01.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SN1NAM02FT0011.eop-nam02.prod.protection.outlook.com
+	BN1NAM02FT023.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR0201MB3619
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR02MB7096
 
-Add remove_device callback for removing the device entry from smmu-master using
-following steps:
-1. Find if SMMU master exists for the device node.
-2. Remove the SMMU master
+On Mon, Nov 08, 2021 at 10:37:31AM +0000, Julien Grall wrote:
+Hi Julien,
+> Hi Vikram,
+> 
+> On 05/11/2021 21:28, Vikram Garhwal wrote:
+> >Update libfdt to v1.6.1 of libfdt taken from git://github.com/dgibson/dtc.
+> >This update is done to support device tree overlays.
+> >
+> >A few minor changes are done to make it compatible with Xen:
+> >     fdt_overlay.c: overlay_fixup_phandle()
+> >
+> >         Replace strtoul() with simple_strtoul() as strtoul() is not available in
+> >         Xen lib and included lib.h.
+> >
+> >         Change char *endptr to const char *endptr.
+> 
+> I would clarify this is a requirement to use simple_strtoul().
+Will add it in next version.
+> 
+> [...]
+> 
+> >diff --git a/xen/include/xen/libfdt/libfdt_env.h b/xen/include/xen/libfdt/libfdt_env.h
+> >index 035bf75..03380d5 100644
+> >--- a/xen/include/xen/libfdt/libfdt_env.h
+> >+++ b/xen/include/xen/libfdt/libfdt_env.h
+> >@@ -1,22 +1,98 @@
+> >-#ifndef _LIBFDT_ENV_H
+> >-#define _LIBFDT_ENV_H
+> >+/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
+> >+#ifndef LIBFDT_ENV_H
+> >+#define LIBFDT_ENV_H
+> >+/*
+> >+ * libfdt - Flat Device Tree manipulation
+> >+ * Copyright (C) 2006 David Gibson, IBM Corporation.
+> >+ * Copyright 2012 Kim Phillips, Freescale Semiconductor.
+> >+ */
+> >+#include <xen/config.h>
+> 
+> The build system should always include <xen/config.h> automagically. So can
+> you clarify why this is necessary?
+You are right. This was something got carried over from v1.4. I can build without this.
+Will remove it in v4 patch.
+> 
+> >  #include <xen/types.h>
+> >  #include <xen/string.h>
+> >  #include <asm/byteorder.h>
+> >+#include <xen/stdbool.h>
+> 
+> We usually order the headers so <xen/...> are first and then <asm/...>. They
+> are then ordered alphabetically within themself.
+> 
+> But it is not clear why you are adding <xen/stdbool.h> as AFAICT it is
+> already going to be included by existing headers. Did you see an error
+> without including it?
+Perhaps my build was messed up then. I tried just now and can build without it.
+Will remove this one too in v4.
 
-Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
----
- xen/drivers/passthrough/arm/smmu.c | 54 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
+Thanks for corrections!
 
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index c9dfc4c..1a32e2c 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -816,6 +816,17 @@ static int insert_smmu_master(struct arm_smmu_device *smmu,
- 	return 0;
- }
- 
-+static int remove_smmu_master(struct arm_smmu_device *smmu,
-+			      struct arm_smmu_master *master)
-+{
-+	if (!(smmu->masters.rb_node))
-+		return -ENOENT;
-+
-+	rb_erase(&master->node, &smmu->masters);
-+
-+	return 0;
-+}
-+
- static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
- 					 struct device *dev,
- 					 struct iommu_fwspec *fwspec)
-@@ -853,6 +864,32 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
- 	return insert_smmu_master(smmu, master);
- }
- 
-+static int arm_smmu_dt_remove_device_legacy(struct arm_smmu_device *smmu,
-+					 struct device *dev)
-+{
-+	struct arm_smmu_master *master;
-+	struct device_node *dev_node = dev_get_dev_node(dev);
-+	int ret;
-+
-+	master = find_smmu_master(smmu, dev_node);
-+	if (master == NULL) {
-+		dev_err(dev,
-+			"No registrations found for master device %s\n",
-+			dev_node->name);
-+		return -EINVAL;
-+	}
-+
-+	ret = remove_smmu_master(smmu, master);
-+
-+	if (ret)
-+		return ret;
-+
-+    dev_node->is_protected = false;
-+
-+	kfree(master);
-+	return 0;
-+}
-+
- static int register_smmu_master(struct arm_smmu_device *smmu,
- 				struct device *dev,
- 				struct of_phandle_args *masterspec)
-@@ -876,6 +913,22 @@ static int register_smmu_master(struct arm_smmu_device *smmu,
- 					     fwspec);
- }
- 
-+static int arm_smmu_dt_remove_device_generic(u8 devfn, struct device *dev)
-+{
-+	struct arm_smmu_device *smmu;
-+	struct iommu_fwspec *fwspec;
-+
-+	fwspec = dev_iommu_fwspec_get(dev);
-+	if (fwspec == NULL)
-+		return -ENXIO;
-+
-+	smmu = find_smmu(fwspec->iommu_dev);
-+	if (smmu == NULL)
-+		return -ENXIO;
-+
-+	return arm_smmu_dt_remove_device_legacy(smmu, dev);
-+}
-+
- static int arm_smmu_dt_add_device_generic(u8 devfn, struct device *dev)
- {
- 	struct arm_smmu_device *smmu;
-@@ -2876,6 +2929,7 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
-     .init = arm_smmu_iommu_domain_init,
-     .hwdom_init = arm_smmu_iommu_hwdom_init,
-     .add_device = arm_smmu_dt_add_device_generic,
-+    .remove_device = arm_smmu_dt_remove_device_generic,
-     .teardown = arm_smmu_iommu_domain_teardown,
-     .iotlb_flush = arm_smmu_iotlb_flush,
-     .iotlb_flush_all = arm_smmu_iotlb_flush_all,
--- 
-2.7.4
-
+Regards,
+Vikram
+> 
+> Cheers,
+> 
+> -- 
+> Julien Grall
 
