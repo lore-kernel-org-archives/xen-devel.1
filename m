@@ -2,37 +2,37 @@ Return-Path: <SRS0=hUiL=P6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 65312C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 17:58:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2FD7EC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 17:58:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0AF6461268
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 17:58:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 0AF6461268
+	by mail.kernel.org (Postfix) with ESMTPS id C821B61268
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 17:58:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C821B61268
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.224829.388339 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.224831.388361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mlEKr-0005ke-7d; Thu, 11 Nov 2021 17:58:05 +0000
+	id 1mlEKx-0006IT-Rg; Thu, 11 Nov 2021 17:58:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 224829.388339; Thu, 11 Nov 2021 17:58:05 +0000
+Received: by outflank-mailman (output) from mailman id 224831.388361; Thu, 11 Nov 2021 17:58:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mlEKr-0005kX-4e; Thu, 11 Nov 2021 17:58:05 +0000
-Received: by outflank-mailman (input) for mailman id 224829;
- Thu, 11 Nov 2021 17:58:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mlEKx-0006IK-ON; Thu, 11 Nov 2021 17:58:11 +0000
+Received: by outflank-mailman (input) for mailman id 224831;
+ Thu, 11 Nov 2021 17:58:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=GOKj=P6=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mlEKp-0005kR-5A
- for xen-devel@lists.xenproject.org; Thu, 11 Nov 2021 17:58:03 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e83478eb-4318-11ec-9787-a32c541c8605;
- Thu, 11 Nov 2021 18:58:01 +0100 (CET)
+ id 1mlEKw-00061G-5V
+ for xen-devel@lists.xenproject.org; Thu, 11 Nov 2021 17:58:10 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ec2a8953-4318-11ec-a9d2-d9f7a1cc8784;
+ Thu, 11 Nov 2021 18:58:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,63 +44,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e83478eb-4318-11ec-9787-a32c541c8605
+X-Inumbo-ID: ec2a8953-4318-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1636653481;
+  d=citrix.com; s=securemail; t=1636653488;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=CXeFV8Xqmdo3yz2//NOSZu7RJ4WSbd7zRTgIylaOvOw=;
-  b=LuMpIMBnDZfdtGN4urH92ShVuE5jKi4uBdIkQPRr/rqxnDT/rTPmNXv+
-   grhxNFTU1vjdai248yix1jksNE4xj5VbbBcJwIvPzDYgMRJIYuCSC8GA/
-   17JOOcDNqM2HfriTzY7i2AMfWaUq3YQgVBdHTTBk3gglNL/zBzA2Zv+vq
-   I=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: codMHIFZaRjxz7BqHayLa6IhmuTXM70vyzcqWvu+3nat2xxYf616NZ2HzcV1RQ/mxvnRjG1euK
- d4opZAV13N9LFdUWQjddNjSBmMCaXCqelaZTdHBMaws62FWMX66lyCpRIrxUjCjbaIyiq8tjlL
- agoUmbu1zMCAkNtjuAnTvSq1GNpKeIKDNswgIopjGfsbEKLGXxvUsWlhJ8vMIUkS0br7NnN/FH
- tmMT+hOqSD+nB/558Yd5WZxNwM7yYMzabhMRg5tIe0tQgm9uKWBS3Qi+BafTAMt1XdZQldgwPZ
- XV5G2EKGHlTJHi7sKIowXa2I
+  bh=Q5M5rcMoU8akU3ihfSLxmIL46Dy+ECH9/kCBIHplY3E=;
+  b=OytE1qHlpiMydDCtFeFan2b8VzRr61p/mBCjNT0biynru1hjh1zvxM9R
+   K8XCLa5rugzds5qxpWkje4D40jwUzQENPBaCx7ANYy8p2PE2lZJ0DsA3t
+   +UebRuun1rUBRrxR8Ug9bcivW2mfj2r04wZLz6Kt3MzYx254ORxLuP2nd
+   c=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: /5QAJWGpTY9N2d1Jfoqx3UvI3Cet8f1whoEibQWWfYDm67MA1UMg64e+4MkGlCqrn6vWd/9pam
+ ldTQ20c2VokFHPSaQl3Bmz77sHhsCuT9WeaxDQM3xEjppJ3ypymo5I7SQA6H9oU94SA0p0saDF
+ zYoIcU8Fbq0/XLsmzupyIsJLbhQqOkDitY9UOdq5DHRQbmPyB5GJRfOZ5U8EbJktjrDGLNmJ8a
+ +7WtKaAvVmIY0bc6H2/tAzQ/niJ+aFsh1hZ6SHf0aw19KE8YFVnXBdgxfZlgACKoyI1NOtg/gi
+ SCyrsaeT3AUiP78TGfeJ/gW6
 X-SBRS: 5.1
-X-MesageID: 57653922
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 59593529
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:ot6mJa/UsPR6BQ9CkMnVDrUDVHmTJUtcMsCJ2f8bNWPcYEJGY0x3x
- 2tNWT/VOqzbZWTzfN0gYY3noRhSv5TVy4drS1Ro+yw8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdg29Yx6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhfx
- +tQrKG8FD0JHafql/wcYgV0FCRHaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp0RQ6uFN
- pBDAdZpRETtSRB0PQY5Mc4BhM6W3lLdch9ipV3A8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru3U70HxUbP9y30iee/zSngeqntTP2XsceGaO18tZugUaP3SoDBRsOT1y5rPKlzEmkVLpix
- 1c8o3R06/JorQryE4e7D0bQTGO4UgA0ddVuDvQH5Fy36onexQmBB1kYYjlEUYlz3CMpfgAC2
- liMltLvIDVgtryJVH6QnoupQSOO1Ts9djFbO3JdJecRy5y6+dxo0EqTJjp2OPft1oWdJN3m/
- 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiGyNO9PABbvzt68owGOlor+p5
- Slsdy+2trBmMH11vHbRKNjh5o2B6fefKyH7ilVyBZQn/DnF0yf9Jt4NvmAhdBo2bZlsldrVj
- Kn74FI5CHh7ZivCUEOKS9jpV5RCIVbISbwJqcw4nvIRO8MsJWdrDQllZFKK3nCFraTfufpXB
- HtvSu71VSxyIf0+lFKeHr5BuZd2lnFW7T6CHvjTkkX4uYdykVbIEN8tKkWVVOkl4cus+UONm
- zqpH5DRkEs3vSyXSnS/zLP/2nhWdyVmXs6v9JQMHgNBSyI/cFwc5zbq6etJU+RYc259zI8kJ
- 1mxBR1VzkTRn3rCJVnYY3xvcuq3D51+sWg6LWonOlPxgyovZoOm7aE+cZorfOZ4qLw/nKAsF
- /RVKd+dBvlvSyjc/2hPZ5fKs4E/Jg+gghiDPnT5bWFnLYJgXQHA5vTtYhDrqHsVFiOyuMZn+
- ++g2wrXTIAtXQNnCMqKOvujw0no5SoWmf5oXluOKd5WIR2+/I9vIi33r/k2P8BTdkmTmmrEj
- 16bWE5Kq/PMrok59MjyqZqF94r5QfFjGkd6HnXA6erkPyft4Wf+k5RLV/yFfG6BWTqsqrmif
- +hc09r1LOYDwARRq4N5HrtmkfA+6t/oq+MIxwhoBiyWPVGiC7cmKXiax8hf8KZKw+YB6wexX
- 0uO/PhcOKmIZ5y5QAJAelJ9Y7TRz+wQlxnT8e8xcRfz6yJA9baaVVlfYkuXgytHIbopaI4oz
- I/NYiLNB9BTXvbyDuu7sw==
-IronPort-HdrOrdr: A9a23:YmBkxq9Bxiv3lbj1Ue9uk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
- re5cjztCWE7gr5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAtBD4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:RqOhU6ymMp+2Qn49mhB6t+eUwSrEfRIJ4+MujC+fZmUNrF6WrkVVz
+ 2IaW2HSM/yOamSnfNt1Yduz9EwFv5PXx4NjTgdt+yAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAuLeNYYH1500s6wrdg2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt8Iqm
+ N5Lk5aRdSYsLpPtoLw9VhB4HQgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY25ETTK2DP
+ ZtxhTxHSRDyZRZdMF0tNNEUsuS5r2PgegNHpwfAzUYwyzeKl1EguFT3C/LXZ9iLSMN9jkue4
+ GXc8AzRPBYeM9COzCufxViljOTPgCDTVZobEfuz8fsCqFee3HAJARsaE16yu+Cki1WWUshab
+ UcT/0IGsqwa5EGtCN7nUHWQsHOC+xIRRddUO+k78x2WjLrZ5R6DAWoJRSIHb8Yp3OcUbzE30
+ l6Cn/vyGCdi9raSTBq17ayIpDm/PSwUK24qZiIeSwYBpd75r+kOYgnnF4g5VvTv15usRG+2k
+ 2viQDUCa6s7n5Vb3KOd93H7oje8mLnxFi4w7yXZdzfwhu9mX7KNa4ut4FndyP9PKoeFU1WM1
+ EQ5d9iiAPMmVs/UynHUKAkZNPTwvqvebmWA6bJ6N8B5r2zFxpK1QWxHDNiSzm9NO91MRzLma
+ VS7Veh5tM4KZyvCgUOajuuM5yUWIUrISYuNuhP8NIMmjn1NmOmvpXAGiam4hTCFraTUuftjU
+ ap3iO71ZZrgNYxpzSCtW8AW2qIxyyY1yAv7HM6gkUn5gOXOOSHKFt/p1WdiiMhgvctoRy2Po
+ 75i2zaikU0DAIUSnAGLmWLsEbz6BSdiXs2nwyCmXuWCPhBnCAkc5wz5mtscl3het/0NzI/gp
+ yjlMmcBkQaXrSCXeG2iNyE4AJuyDMkXkJ7OFXF1Vbpe8yN4OtjHAWZ2X8ZfQITLA8Q/l6MpF
+ KdcJJ3bahmNIxyekwkggVDGhNQKXHyWacimZEJJuRAzIMxtQRLn4Njhcle9/SUCFHPv58A/v
+ 6ehxkXQRp9aH1ZuC8PfafSOyVKtvCdCxLIuDhWQetQDKl/x9IVKKjDqiqNlKc87NhielCCR0
+ BybAElEqLCV8ZM16tTAmYuNs5ytT7llBkNfEmSCteS2OCDW83CN24hFVOrULznRWHmtoPepZ
+ PlPzuG6O/oCxQ4Yv415Grdt7KQ/+9qw+OMKklU6RC3GNg35BKlhL3+K2dh0mpdMnrIJ6xGrX
+ k+v+8VBPenbMs3SD1NMdhEuaf6O1K9Il2CKv+g1Okjz+AR+4KGDDRdJJxCJhSFQcOl1PYciz
+ btzscIa8VXi2B8jM9LAhSFI7WWcaHcHVvx/5J0dBYbqjCsty01DPsOAWnOnvsnXZoUeKFQuL
+ x+VmLHG1uZVyUf1enYuEWTAgLhGjpMUtREWlFIPKjxlQDYeaiPbCPGJzQkKcw==
+IronPort-HdrOrdr: A9a23:UZfBy6tgzqn1yTZt2rYmbeu67skDTtV00zEX/kB9WHVpmszxra
+ 6TdZMgpGbJYVcqKRcdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
+ YFT0EXMqyJMbEQt6fHCWeDfOrIuOP3kpyVuQ==
 X-IronPort-AV: E=Sophos;i="5.87,226,1631592000"; 
-   d="scan'208";a="57653922"
+   d="scan'208";a="59593529"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 5/5] x86/ioapic: Drop function pointers from __ioapic_{read,write}_entry()
-Date: Thu, 11 Nov 2021 17:57:40 +0000
-Message-ID: <20211111175740.23480-6-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH 2/5] xen/domain: Improve pirq handling
+Date: Thu, 11 Nov 2021 17:57:37 +0000
+Message-ID: <20211111175740.23480-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211111175740.23480-1-andrew.cooper3@citrix.com>
 References: <20211111175740.23480-1-andrew.cooper3@citrix.com>
@@ -108,91 +111,120 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Function pointers are expensive, and the raw parameter is a constant from all
-callers, meaning that it predicts very well with local branch history.
+free_pirq_struct() has no external users, so shouldn't be exposed.  Making it
+static necessitates moving the function as domain_destroy() uses it.
 
-Furthermore, the knock-on effects are quite impressive.
-
-  $ ../scripts/bloat-o-meter xen-syms-before xen-syms-after
-  add/remove: 0/4 grow/shrink: 3/9 up/down: 459/-823 (-364)
-  Function                                     old     new   delta
-  __ioapic_write_entry                          73     286    +213
-  __ioapic_read_entry                           75     276    +201
-  save_IO_APIC_setup                           182     227     +45
-  eoi_IO_APIC_irq                              241     229     -12
-  disable_IO_APIC                              296     280     -16
-  mask_IO_APIC_setup                           272     240     -32
-  __io_apic_write                               46       -     -46
-  __io_apic_read                                46       -     -46
-  io_apic_set_pci_routing                      985     930     -55
-  __io_apic_eoi.part                           223     161     -62
-  io_apic_write                                 69       -     -69
-  io_apic_read                                  69       -     -69
-  restore_IO_APIC_setup                        325     253     -72
-  ioapic_guest_write                          1413    1333     -80
-  clear_IO_APIC_pin                            447     343    -104
-  setup_IO_APIC                               5148    4988    -160
+Rework pirq_get_info() to have easier-to-follow logic.  The one functional
+change is to the insertion failure path; we should not be using a full
+call_rcu() chain to free an otherwise local structure we failed to insert into
+the radix tree to begin with.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
- xen/arch/x86/io_apic.c | 30 ++++++++++++++++++++++--------
- 1 file changed, 22 insertions(+), 8 deletions(-)
+ xen/common/domain.c      | 62 ++++++++++++++++++++++++++----------------------
+ xen/include/xen/domain.h |  1 -
+ 2 files changed, 33 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index c3ad9efac88d..1c49a0fe1478 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -235,11 +235,19 @@ union entry_union {
- struct IO_APIC_route_entry __ioapic_read_entry(
-     unsigned int apic, unsigned int pin, bool raw)
- {
--    unsigned int (*read)(unsigned int, unsigned int)
--        = raw ? __io_apic_read : io_apic_read;
-     union entry_union eu;
--    eu.w1 = (*read)(apic, 0x10 + 2 * pin);
--    eu.w2 = (*read)(apic, 0x11 + 2 * pin);
-+
-+    if ( raw )
-+    {
-+        eu.w1 = __io_apic_read(apic, 0x10 + 2 * pin);
-+        eu.w2 = __io_apic_read(apic, 0x11 + 2 * pin);
-+    }
-+    else
-+    {
-+        eu.w1 = io_apic_read(apic, 0x10 + 2 * pin);
-+        eu.w2 = io_apic_read(apic, 0x11 + 2 * pin);
-+    }
-+
-     return eu.entry;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 562872cdf87a..a53dd114d5ba 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -365,6 +365,39 @@ static int __init parse_extra_guest_irqs(const char *s)
  }
+ custom_param("extra_guest_irqs", parse_extra_guest_irqs);
  
-@@ -259,12 +267,18 @@ void __ioapic_write_entry(
-     unsigned int apic, unsigned int pin, bool raw,
-     struct IO_APIC_route_entry e)
- {
--    void (*write)(unsigned int, unsigned int, unsigned int)
--        = raw ? __io_apic_write : io_apic_write;
-     union entry_union eu = { .entry = e };
- 
--    (*write)(apic, 0x11 + 2*pin, eu.w2);
--    (*write)(apic, 0x10 + 2*pin, eu.w1);
-+    if ( raw )
-+    {
-+        __io_apic_write(apic, 0x11 + 2 * pin, eu.w2);
-+        __io_apic_write(apic, 0x10 + 2 * pin, eu.w1);
-+    }
-+    else
-+    {
-+        io_apic_write(apic, 0x11 + 2 * pin, eu.w2);
-+        io_apic_write(apic, 0x10 + 2 * pin, eu.w1);
-+    }
++static void _free_pirq_struct(struct rcu_head *head)
++{
++    xfree(container_of(head, struct pirq, rcu_head));
++}
++
++static void free_pirq_struct(void *ptr)
++{
++    struct pirq *pirq = ptr;
++
++    call_rcu(&pirq->rcu_head, _free_pirq_struct);
++}
++
++struct pirq *pirq_get_info(struct domain *d, int pirq)
++{
++    struct pirq *info = pirq_info(d, pirq);
++
++    if ( likely(info) )
++        return info;
++
++    info = alloc_pirq_struct(d);
++    if ( unlikely(!info) )
++        return NULL;
++
++    info->pirq = pirq;
++    if ( likely(radix_tree_insert(&d->pirq_tree, pirq, info) == 0) )
++        return info; /* Success. */
++
++    /* Don't use call_rcu() to free a struct we failed to insert. */
++    _free_pirq_struct(&info->rcu_head);
++
++    return NULL;
++}
++
+ /*
+  * Release resources held by a domain.  There may or may not be live
+  * references to the domain, and it may or may not be fully constructed.
+@@ -1789,35 +1822,6 @@ long do_vm_assist(unsigned int cmd, unsigned int type)
  }
+ #endif
  
- static void ioapic_write_entry(
+-struct pirq *pirq_get_info(struct domain *d, int pirq)
+-{
+-    struct pirq *info = pirq_info(d, pirq);
+-
+-    if ( !info && (info = alloc_pirq_struct(d)) != NULL )
+-    {
+-        info->pirq = pirq;
+-        if ( radix_tree_insert(&d->pirq_tree, pirq, info) )
+-        {
+-            free_pirq_struct(info);
+-            info = NULL;
+-        }
+-    }
+-
+-    return info;
+-}
+-
+-static void _free_pirq_struct(struct rcu_head *head)
+-{
+-    xfree(container_of(head, struct pirq, rcu_head));
+-}
+-
+-void free_pirq_struct(void *ptr)
+-{
+-    struct pirq *pirq = ptr;
+-
+-    call_rcu(&pirq->rcu_head, _free_pirq_struct);
+-}
+-
+ struct migrate_info {
+     long (*func)(void *data);
+     void *data;
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 160c8dbdab33..b4d202fda9fd 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -44,7 +44,6 @@ void free_vcpu_struct(struct vcpu *v);
+ #ifndef alloc_pirq_struct
+ struct pirq *alloc_pirq_struct(struct domain *);
+ #endif
+-void free_pirq_struct(void *);
+ 
+ /*
+  * Initialise/destroy arch-specific details of a VCPU.
 -- 
 2.11.0
 
