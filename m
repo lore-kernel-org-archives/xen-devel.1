@@ -2,41 +2,41 @@ Return-Path: <SRS0=hUiL=P6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09684C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 02:17:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25639C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 02:17:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B4560610A0
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 02:17:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B4560610A0
+	by mail.kernel.org (Postfix) with ESMTPS id C813B610A0
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 02:17:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org C813B610A0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.224581.387992 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.224586.387999 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mkzeJ-0005mn-WB; Thu, 11 Nov 2021 02:17:11 +0000
+	id 1mkzeK-0005uS-Ic; Thu, 11 Nov 2021 02:17:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 224581.387992; Thu, 11 Nov 2021 02:17:11 +0000
+Received: by outflank-mailman (output) from mailman id 224586.387999; Thu, 11 Nov 2021 02:17:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mkzeJ-0005lm-Rp; Thu, 11 Nov 2021 02:17:11 +0000
-Received: by outflank-mailman (input) for mailman id 224581;
- Thu, 11 Nov 2021 02:17:10 +0000
+	id 1mkzeK-0005rX-DS; Thu, 11 Nov 2021 02:17:12 +0000
+Received: by outflank-mailman (input) for mailman id 224586;
+ Thu, 11 Nov 2021 02:17:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SlTo=P6=flex--seanjc.bounces.google.com=3AXuMYQYKCTwqcYlhaemmejc.amkvcl-bctcjjgqrq.vclnpmhcar.mpe@srs-se1.protection.inumbo.net>)
- id 1mkzVU-0004E5-7A
- for xen-devel@lists.xenproject.org; Thu, 11 Nov 2021 02:08:04 +0000
-Received: from mail-pf1-x44a.google.com (mail-pf1-x44a.google.com
- [2607:f8b0:4864:20::44a])
+ <SRS0=WKvj=P6=flex--seanjc.bounces.google.com=3BXuMYQYKCUAugcpleiqqing.eqozgp-fgxgnnkuvu.zgprtqlgev.qti@srs-se1.protection.inumbo.net>)
+ id 1mkzVY-0004E5-29
+ for xen-devel@lists.xenproject.org; Thu, 11 Nov 2021 02:08:08 +0000
+Received: from mail-pg1-x54a.google.com (mail-pg1-x54a.google.com
+ [2607:f8b0:4864:20::54a])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 33566626-4294-11ec-9787-a32c541c8605;
- Thu, 11 Nov 2021 03:08:03 +0100 (CET)
-Received: by mail-pf1-x44a.google.com with SMTP id
- 134-20020a62198c000000b0047bf0981003so3066318pfz.4
- for <xen-devel@lists.xenproject.org>; Wed, 10 Nov 2021 18:08:03 -0800 (PST)
+ id 355f8803-4294-11ec-9787-a32c541c8605;
+ Thu, 11 Nov 2021 03:08:07 +0100 (CET)
+Received: by mail-pg1-x54a.google.com with SMTP id
+ j18-20020a63fc12000000b002dd2237eb1cso2508252pgi.5
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Nov 2021 18:08:07 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,45 +48,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 33566626-4294-11ec-9787-a32c541c8605
+X-Inumbo-ID: 355f8803-4294-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=reply-to:date:in-reply-to:message-id:mime-version:references
          :subject:from:to:cc;
-        bh=fHeYagzJUlx8WvSWOWzAacKfteJvqH26iwX6/BL5oRM=;
-        b=I1iMFlsTKJ7I9ZBlooH8LUuysl6kvigdxx570TJkSRxR5Epl554X0SupugqMgxooRa
-         Js7Gd3LnB4f/Od2LdYQfjJvJrd7Jj5SR+bgYd/KsVTHaX78qwBxLzlhPNrgrGQW9HBZM
-         Gf+2IkKjJau7mgLZiDcv4KWoS8FOEgdksbSmIKXguTp9uiLzYV0qE4TCK48GTJ0xK34S
-         pPAdtQowal2kVffJJ8FkMF2ePQNvYgo/wLvddDptRGq7iTfLonp7DuFAyOF+gUabTETs
-         Um+LI0mma5pdcsVh0PUQ0Cq0ms/rh1QbrsfaYQV7RfZ7Xi1vwzyVVaWe1zMfes0/v0pu
-         VVEw==
+        bh=/YIqAIDcHFuwAQfZoGFGpCQkR+bed1xlNZgqyVQf28E=;
+        b=e7isaWxZT/WwPXJW8Qx7YWkAPbx8+WwYXnyULWOmnQdcxssVcaIQUjV7l9ocfrzj/1
+         z1dBSLWak0xiQCBEw4pQBZlvDqmdEqTRJUP+Z40PCX/NEachrYFN0ukP1ZGzNNDz6hC8
+         ypXPhlkEqsMB53P1s/G0Q8Dg2n01FI0WXWYQbrYIvGu6VNt899fuhgkx/Wx+L0fumdK0
+         DgUKSgQ9NGEeMAWRcQat/qxuE6PEmuWNOgqyoFgMMRQ8e+j8axNSLg3wwL/mVfqWCfju
+         QtZrvT4+EtSeFefALo6da9zs6M611OWSowxrRuYjpqYPmBtDlX0Y/PjaKJe2gSlYH6Gm
+         X8tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:reply-to:date:in-reply-to:message-id
          :mime-version:references:subject:from:to:cc;
-        bh=fHeYagzJUlx8WvSWOWzAacKfteJvqH26iwX6/BL5oRM=;
-        b=f3ocXV1UHZzLR8iVN+85j7az7ZGPOPZWmn7eNoFx/gN3A2O23dtJOyw0BxFJDKM25E
-         uCZhHG+S6mgJGoEZG4MGbJfWq7u6zDNjvpCYmbmO/JXN4EdbMARkq5nybO86cnz6puXv
-         jPKUdhPhZF+9QJQUBFQR0uqjri6+zNmqBmY49CtjYANG5U/z02X60b3CNFXioD6CKJEv
-         58WTybC/ItahFblHZjs7T8xZJ/TSCfKP4I4llILnZM8aheduId9hYYwNSdWMDsvtON6U
-         isJOnzCtPYTYOMUHLLRDUeW2PzingFmJsIvFpTqQKko9h+w67+YbPIfm3datBhayqdlU
-         uHqw==
-X-Gm-Message-State: AOAM531haqjgsV15iBLYZ3S6OAmyNwoz4b8PZg3YusA7IpFfO5GCLzi+
-	N3gtWVo3SjZkacqau5z3e9zfnR934MY=
-X-Google-Smtp-Source: ABdhPJwlj+RL95wDPLaJIcjI0VzoyEr26DB5cELwjkd8PtU9zdr9HE6g2qmDfqx1IbL5j6HU26ZztAJb2Z8=
+        bh=/YIqAIDcHFuwAQfZoGFGpCQkR+bed1xlNZgqyVQf28E=;
+        b=diyZP+EqWc/AHfEph704YUtq3F6Vn9j46zuZFtgStta1/c0gAphCQYp05dsottdD6w
+         2++Ppy8ySCXyLPIn5TZj06Xf0s2GJ6PUQwjjWPcDd7iNEtCGxh908eTCij3uzXizTkxV
+         RgrMeKyti3f3Js4H1n8MnlgV8nTS5BaZJxILIw8302oQjBs6RVl/xFMlVsCTk1XNYG5v
+         CoSnwDd9DRLmOJgXDIdF/K2egw0nepOiUX1fEojaoHQtja1UuOHocJHc2iargouUW3V2
+         Qjjqtn8obFxBFCm8bApcXXmGE288uH4LHOuZ5DCUtYh70S8HBXRqNyYkBbAxtRNAtEug
+         KHZw==
+X-Gm-Message-State: AOAM532h9WzU1qZVvbIZhu4+tNHs9+IfAP0LHDI0ziljPhdpfi108M+z
+	IzorTxPCdXI4P6lThsHs3s4a7HVbh/k=
+X-Google-Smtp-Source: ABdhPJzNTXRg0manAu6ukUacQ/aIuXahOUAgZ+nsuAEIEEiY7jrc1n1CQ1z/uBehVd+2Ly8STcnpos0K1ss=
 X-Received: from seanjc.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:3e5])
- (user=seanjc job=sendgmr) by 2002:aa7:808e:0:b0:493:f071:274f with SMTP id
- v14-20020aa7808e000000b00493f071274fmr3568138pff.37.1636596481978; Wed, 10
- Nov 2021 18:08:01 -0800 (PST)
+ (user=seanjc job=sendgmr) by 2002:a17:902:e88a:b0:141:dfde:eed7 with SMTP id
+ w10-20020a170902e88a00b00141dfdeeed7mr4246270plg.17.1636596485366; Wed, 10
+ Nov 2021 18:08:05 -0800 (PST)
 Reply-To: Sean Christopherson <seanjc@google.com>
-Date: Thu, 11 Nov 2021 02:07:34 +0000
+Date: Thu, 11 Nov 2021 02:07:36 +0000
 In-Reply-To: <20211111020738.2512932-1-seanjc@google.com>
-Message-Id: <20211111020738.2512932-14-seanjc@google.com>
+Message-Id: <20211111020738.2512932-16-seanjc@google.com>
 Mime-Version: 1.0
 References: <20211111020738.2512932-1-seanjc@google.com>
 X-Mailer: git-send-email 2.34.0.rc0.344.g81b53c2807-goog
-Subject: [PATCH v4 13/17] KVM: x86: Move Intel Processor Trace interrupt
- handler to vmx.c
+Subject: [PATCH v4 15/17] KVM: arm64: Hide kvm_arm_pmu_available behind CONFIG_HW_PERF_EVENTS=y
 From: Sean Christopherson <seanjc@google.com>
 To: Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
 	Arnaldo Carvalho de Melo <acme@kernel.org>, Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
@@ -114,122 +113,103 @@ Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@re
 	Zhu Lingshan <lingshan.zhu@intel.com>
 Content-Type: text/plain; charset="UTF-8"
 
-Now that all state needed for VMX's PT interrupt handler is exposed to
-vmx.c (specifically the currently running vCPU), move the handler into
-vmx.c where it belongs.
+Move the definition of kvm_arm_pmu_available to pmu-emul.c and, out of
+"necessity", hide it behind CONFIG_HW_PERF_EVENTS.  Provide a stub for
+the key's wrapper, kvm_arm_support_pmu_v3().  Moving the key's definition
+out of perf.c will allow a future commit to delete perf.c entirely.
 
 Signed-off-by: Sean Christopherson <seanjc@google.com>
 ---
- arch/x86/include/asm/kvm_host.h |  2 +-
- arch/x86/kvm/vmx/vmx.c          | 22 +++++++++++++++++++++-
- arch/x86/kvm/x86.c              | 20 +-------------------
- 3 files changed, 23 insertions(+), 21 deletions(-)
+ arch/arm64/kernel/image-vars.h |  2 ++
+ arch/arm64/kvm/perf.c          |  2 --
+ arch/arm64/kvm/pmu-emul.c      |  2 ++
+ include/kvm/arm_pmu.h          | 19 ++++++++++++-------
+ 4 files changed, 16 insertions(+), 9 deletions(-)
 
-diff --git a/arch/x86/include/asm/kvm_host.h b/arch/x86/include/asm/kvm_host.h
-index ec16f645cb8c..621bedff0aa5 100644
---- a/arch/x86/include/asm/kvm_host.h
-+++ b/arch/x86/include/asm/kvm_host.h
-@@ -1515,7 +1515,7 @@ struct kvm_x86_init_ops {
- 	int (*disabled_by_bios)(void);
- 	int (*check_processor_compatibility)(void);
- 	int (*hardware_setup)(void);
--	bool (*intel_pt_intr_in_guest)(void);
-+	unsigned int (*handle_intel_pt_intr)(void);
+diff --git a/arch/arm64/kernel/image-vars.h b/arch/arm64/kernel/image-vars.h
+index c96a9a0043bf..7eaf1f7c4168 100644
+--- a/arch/arm64/kernel/image-vars.h
++++ b/arch/arm64/kernel/image-vars.h
+@@ -102,7 +102,9 @@ KVM_NVHE_ALIAS(__stop___kvm_ex_table);
+ KVM_NVHE_ALIAS(kvm_arm_hyp_percpu_base);
  
- 	struct kvm_x86_ops *runtime_ops;
- };
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index 36098eb9a7f9..7cb7f261f7dc 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -7708,6 +7708,20 @@ static struct kvm_x86_ops vmx_x86_ops __initdata = {
- 	.vcpu_deliver_sipi_vector = kvm_vcpu_deliver_sipi_vector,
- };
+ /* PMU available static key */
++#ifdef CONFIG_HW_PERF_EVENTS
+ KVM_NVHE_ALIAS(kvm_arm_pmu_available);
++#endif
  
-+static unsigned int vmx_handle_intel_pt_intr(void)
-+{
-+	struct kvm_vcpu *vcpu = kvm_get_running_vcpu();
-+
-+	/* '0' on failure so that the !PT case can use a RET0 static call. */
-+	if (!kvm_arch_pmi_in_guest(vcpu))
-+		return 0;
-+
-+	kvm_make_request(KVM_REQ_PMI, vcpu);
-+	__set_bit(MSR_CORE_PERF_GLOBAL_OVF_CTRL_TRACE_TOPA_PMI_BIT,
-+		  (unsigned long *)&vcpu->arch.pmu.global_status);
-+	return 1;
-+}
-+
- static __init void vmx_setup_user_return_msrs(void)
+ /* Position-independent library routines */
+ KVM_NVHE_ALIAS_HYP(clear_page, __pi_clear_page);
+diff --git a/arch/arm64/kvm/perf.c b/arch/arm64/kvm/perf.c
+index 374c496a3f1d..52cfab253c65 100644
+--- a/arch/arm64/kvm/perf.c
++++ b/arch/arm64/kvm/perf.c
+@@ -11,8 +11,6 @@
+ 
+ #include <asm/kvm_emulate.h>
+ 
+-DEFINE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
+-
+ void kvm_perf_init(void)
  {
+ 	kvm_register_perf_callbacks(NULL);
+diff --git a/arch/arm64/kvm/pmu-emul.c b/arch/arm64/kvm/pmu-emul.c
+index a5e4bbf5e68f..3308ceefa129 100644
+--- a/arch/arm64/kvm/pmu-emul.c
++++ b/arch/arm64/kvm/pmu-emul.c
+@@ -14,6 +14,8 @@
+ #include <kvm/arm_pmu.h>
+ #include <kvm/arm_vgic.h>
  
-@@ -7734,6 +7748,8 @@ static __init void vmx_setup_user_return_msrs(void)
- 		kvm_add_user_return_msr(vmx_uret_msrs_list[i]);
- }
- 
-+static struct kvm_x86_init_ops vmx_init_ops __initdata;
++DEFINE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
 +
- static __init int hardware_setup(void)
- {
- 	unsigned long host_bndcfgs;
-@@ -7892,6 +7908,10 @@ static __init int hardware_setup(void)
- 		return -EINVAL;
- 	if (!enable_ept || !cpu_has_vmx_intel_pt())
- 		pt_mode = PT_MODE_SYSTEM;
-+	if (pt_mode == PT_MODE_HOST_GUEST)
-+		vmx_init_ops.handle_intel_pt_intr = vmx_handle_intel_pt_intr;
-+	else
-+		vmx_init_ops.handle_intel_pt_intr = NULL;
+ static void kvm_pmu_create_perf_event(struct kvm_vcpu *vcpu, u64 select_idx);
+ static void kvm_pmu_update_pmc_chained(struct kvm_vcpu *vcpu, u64 select_idx);
+ static void kvm_pmu_stop_counter(struct kvm_vcpu *vcpu, struct kvm_pmc *pmc);
+diff --git a/include/kvm/arm_pmu.h b/include/kvm/arm_pmu.h
+index 90f21898aad8..f9ed4c171d7b 100644
+--- a/include/kvm/arm_pmu.h
++++ b/include/kvm/arm_pmu.h
+@@ -13,13 +13,6 @@
+ #define ARMV8_PMU_CYCLE_IDX		(ARMV8_PMU_MAX_COUNTERS - 1)
+ #define ARMV8_PMU_MAX_COUNTER_PAIRS	((ARMV8_PMU_MAX_COUNTERS + 1) >> 1)
  
- 	setup_default_sgx_lepubkeyhash();
- 
-@@ -7920,7 +7940,7 @@ static struct kvm_x86_init_ops vmx_init_ops __initdata = {
- 	.disabled_by_bios = vmx_disabled_by_bios,
- 	.check_processor_compatibility = vmx_check_processor_compat,
- 	.hardware_setup = hardware_setup,
--	.intel_pt_intr_in_guest = vmx_pt_mode_is_host_guest,
-+	.handle_intel_pt_intr = NULL,
- 
- 	.runtime_ops = &vmx_x86_ops,
- };
-diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
-index bafd2e78ad04..a4d25d0587e6 100644
---- a/arch/x86/kvm/x86.c
-+++ b/arch/x86/kvm/x86.c
-@@ -8410,20 +8410,6 @@ static void kvm_timer_init(void)
- 			  kvmclock_cpu_online, kvmclock_cpu_down_prep);
- }
- 
--static unsigned int kvm_handle_intel_pt_intr(void)
+-DECLARE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
+-
+-static __always_inline bool kvm_arm_support_pmu_v3(void)
 -{
--	struct kvm_vcpu *vcpu = kvm_get_running_vcpu();
--
--	/* '0' on failure so that the !PT case can use a RET0 static call. */
--	if (!kvm_arch_pmi_in_guest(vcpu))
--		return 0;
--
--	kvm_make_request(KVM_REQ_PMI, vcpu);
--	__set_bit(MSR_CORE_PERF_GLOBAL_OVF_CTRL_TRACE_TOPA_PMI_BIT,
--			(unsigned long *)&vcpu->arch.pmu.global_status);
--	return 1;
+-	return static_branch_likely(&kvm_arm_pmu_available);
 -}
 -
- #ifdef CONFIG_X86_64
- static void pvclock_gtod_update_fn(struct work_struct *work)
- {
-@@ -11116,11 +11102,7 @@ int kvm_arch_hardware_setup(void *opaque)
- 	memcpy(&kvm_x86_ops, ops->runtime_ops, sizeof(kvm_x86_ops));
- 	kvm_ops_static_call_update();
+ #ifdef CONFIG_HW_PERF_EVENTS
  
--	/* Temporary ugliness. */
--	if (ops->intel_pt_intr_in_guest && ops->intel_pt_intr_in_guest())
--		kvm_register_perf_callbacks(kvm_handle_intel_pt_intr);
--	else
--		kvm_register_perf_callbacks(NULL);
-+	kvm_register_perf_callbacks(ops->handle_intel_pt_intr);
+ struct kvm_pmc {
+@@ -36,6 +29,13 @@ struct kvm_pmu {
+ 	struct irq_work overflow_work;
+ };
  
- 	if (!kvm_cpu_cap_has(X86_FEATURE_XSAVES))
- 		supported_xss = 0;
++DECLARE_STATIC_KEY_FALSE(kvm_arm_pmu_available);
++
++static __always_inline bool kvm_arm_support_pmu_v3(void)
++{
++	return static_branch_likely(&kvm_arm_pmu_available);
++}
++
+ #define kvm_arm_pmu_irq_initialized(v)	((v)->arch.pmu.irq_num >= VGIC_NR_SGIS)
+ u64 kvm_pmu_get_counter_value(struct kvm_vcpu *vcpu, u64 select_idx);
+ void kvm_pmu_set_counter_value(struct kvm_vcpu *vcpu, u64 select_idx, u64 val);
+@@ -65,6 +65,11 @@ int kvm_arm_pmu_v3_enable(struct kvm_vcpu *vcpu);
+ struct kvm_pmu {
+ };
+ 
++static inline bool kvm_arm_support_pmu_v3(void)
++{
++	return false;
++}
++
+ #define kvm_arm_pmu_irq_initialized(v)	(false)
+ static inline u64 kvm_pmu_get_counter_value(struct kvm_vcpu *vcpu,
+ 					    u64 select_idx)
 -- 
 2.34.0.rc0.344.g81b53c2807-goog
 
