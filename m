@@ -2,45 +2,41 @@ Return-Path: <SRS0=hUiL=P6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 00A65C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 00:40:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CD8C2C4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 02:08:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B83BB61381
-	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 00:40:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org B83BB61381
+	by mail.kernel.org (Postfix) with ESMTPS id 82B8761073
+	for <xen-devel@archiver.kernel.org>; Thu, 11 Nov 2021 02:08:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 82B8761073
 Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=google.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.224499.387806 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.224508.387834 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mky8H-00027m-27; Thu, 11 Nov 2021 00:40:01 +0000
+	id 1mkzVE-0004XO-75; Thu, 11 Nov 2021 02:07:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 224499.387806; Thu, 11 Nov 2021 00:40:01 +0000
+Received: by outflank-mailman (output) from mailman id 224508.387834; Thu, 11 Nov 2021 02:07:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mky8G-00027f-VF; Thu, 11 Nov 2021 00:40:00 +0000
-Received: by outflank-mailman (input) for mailman id 224499;
- Thu, 11 Nov 2021 00:40:00 +0000
+	id 1mkzVE-0004Wq-0w; Thu, 11 Nov 2021 02:07:48 +0000
+Received: by outflank-mailman (input) for mailman id 224508;
+ Thu, 11 Nov 2021 02:07:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=4OkG=P6=google.com=seanjc@srs-se1.protection.inumbo.net>)
- id 1mky8G-00027Z-Fe
- for xen-devel@lists.xenproject.org; Thu, 11 Nov 2021 00:40:00 +0000
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [2607:f8b0:4864:20::431])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=gswl=P6=flex--seanjc.bounces.google.com=38HqMYQYKCSsZLHUQJNVVNSL.JVTeLU-KLcLSSPZaZ.eLUWYVQLJa.VYN@srs-se1.protection.inumbo.net>)
+ id 1mkzVC-0004E5-Nz
+ for xen-devel@lists.xenproject.org; Thu, 11 Nov 2021 02:07:46 +0000
+Received: from mail-pf1-x449.google.com (mail-pf1-x449.google.com
+ [2607:f8b0:4864:20::449])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e55b5cf8-4287-11ec-9787-a32c541c8605;
- Thu, 11 Nov 2021 01:39:58 +0100 (CET)
-Received: by mail-pf1-x431.google.com with SMTP id g19so4095139pfb.8
- for <xen-devel@lists.xenproject.org>; Wed, 10 Nov 2021 16:39:58 -0800 (PST)
-Received: from google.com (157.214.185.35.bc.googleusercontent.com.
- [35.185.214.157])
- by smtp.gmail.com with ESMTPSA id h194sm750078pfe.156.2021.11.10.16.39.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Nov 2021 16:39:56 -0800 (PST)
+ id 28f337b1-4294-11ec-9787-a32c541c8605;
+ Thu, 11 Nov 2021 03:07:46 +0100 (CET)
+Received: by mail-pf1-x449.google.com with SMTP id
+ z187-20020a6233c4000000b0047c2090f1abso2998379pfz.23
+ for <xen-devel@lists.xenproject.org>; Wed, 10 Nov 2021 18:07:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,98 +48,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e55b5cf8-4287-11ec-9787-a32c541c8605
+X-Inumbo-ID: 28f337b1-4294-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=GCvgNnriUarmCbicpFHHYqZw6hipmqUHqLUNYcuQ5mQ=;
-        b=C/MSXc16d+vnyvPXnpHvWobOFVkGiZtvk8Fqn9KlAR5wdGaXHNSYYEqouCychGdG8p
-         5qAR+o3QR3qaB0TDQ3yAC+dSCwOdKvfiEZ3Kln4q4atLvJqPKPRHW1o5zq6Ns5xwkOtC
-         ik1lkhQwf39tyN70E9VZseTQvLWw0Txmbjd6Pu8ATSLAClCUTw6YIKKav5QdSu46fQ/5
-         +e5c/wEbKgc1jOnG5VvHUJ9ey6iGYkWAk7F4ceZqKKEK8rilWv0ZFkZJXl5cjnWfQIx8
-         55tsEZ8ESYtzoMLt6c2A3hOaXpTct4C6eIipQoqRcDMTUY4c5FxHvAnMIbgpRMgbfXry
-         LjOA==
+        h=reply-to:date:in-reply-to:message-id:mime-version:references
+         :subject:from:to:cc;
+        bh=hK/bb2+8SYaruhoQBxjUMD9dzEtjE9dODoHgmaxXM04=;
+        b=ioMgfZT9xO/74nIuEa5s079HZzqYDthukPpMRSdF0C3awDBWthDsWqAFo50b69aUgk
+         Nhl7hmTYeB+KSKGuShd9pnZgSHEJ4YdF59a3n2gw+3Am+iHw8BnPD9PQEuIObPEX1zet
+         XT5oCTwKFkgZjUeOaAP52YI/QxstVIlhlvJS+3cp25s9mkhbYvGe1eTarbKtvSx415JI
+         ECVQms8ylbLIS/A+wF3YHJcodbwqtGvWDNxp9OhyCccF49POD6LZ1YDg80r7wc3jC1/x
+         2UeOF3HXehBTuQGieAJ2PQ8fh4iSC2ZmT1gzNp9Gsi+Io2TQjCObkIi6pMuDLYQvs7JU
+         qJOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=GCvgNnriUarmCbicpFHHYqZw6hipmqUHqLUNYcuQ5mQ=;
-        b=zwJSzdO/y62WKWFrAE5KWAn+f8bmshIBQgVL4YNb9Gn/0Uq6eAD/3kaYd1PDmEY8/U
-         TfyHdA7afkN3OZGLz3qQfriu1YirSUN7ekzMg2PkzxLozd8AlgJQaOVECzjmHnq16irh
-         pLuvSSY0izkNEI0f4eaNEaKNB4yqJaY3H8OepBRMHeQfyodkkkavU409ZuucSP/7rStJ
-         JWn75P1xDSMXCpMRUfNJBUZxpZWyNmLu1hLrOWIezB/XK1m+mGL8Q/viSaW7BeT5jhr+
-         S29ypkt9q+/p8DrSG4NvVsgYGesC9ZfnOxVlcqIT1mM1OyyShiHFR8SIcg7vIhNyqdX1
-         30Rw==
-X-Gm-Message-State: AOAM530ERWjmW14XsAlP9YkH2JS4PruUciyhN9LJnHg7Q92LkB4aMqT/
-	jvceqWJT3wSGlfQypc0FoKiGdQ==
-X-Google-Smtp-Source: ABdhPJyzWkgci9VXixrCRz+lgwFJsP+1qd2jH9xIE5pUKSl6Qej6NdegD7xki773sUR8p4Puao3+lQ==
-X-Received: by 2002:a63:6302:: with SMTP id x2mr1983608pgb.5.1636591196936;
-        Wed, 10 Nov 2021 16:39:56 -0800 (PST)
-Date: Thu, 11 Nov 2021 00:39:52 +0000
+        h=x-gm-message-state:reply-to:date:in-reply-to:message-id
+         :mime-version:references:subject:from:to:cc;
+        bh=hK/bb2+8SYaruhoQBxjUMD9dzEtjE9dODoHgmaxXM04=;
+        b=Khl5ghCR0GJbaGA/0hkqQO1pk+cOl5Jw/OSWEqCdhi8qn5hPLhMOmKNC246ANZPuiC
+         u2LNTNaAur9zvGGwiXLH62y7GMVtC6aHLBZHh80pH4YncQ/hb5/1bJyJaH1IDo1T2cPT
+         fpfEuy7HRZ1BCrR11txlB+xDO2+4CzUsxRybOhbFiEeLBmJi/M3jPaJL6mFKXflOAuTt
+         3kEnA0GSikln4F17dQqcXL6Hsq/ZHNeJ36MNZYqt8rlSv/dPLHytprhiOGiganvnzEJL
+         QqX03HUjx77UV2rSZyOgjmF+xMmD8bAtZAjFQ9LU5+N9/gySF3fiq38SRTK+TnMSMBWt
+         f/sQ==
+X-Gm-Message-State: AOAM532YJKmfDWNQYvq0wHE7uarP+Pz5UayReiU8Tkv7eIPlN92r12Y+
+	RieZIRmDGf05v4mgTRQmHISpYVNyQR4=
+X-Google-Smtp-Source: ABdhPJyQu0wj6xnqaOSUJnCa9iYYs/0X0i20LUCAU5FW0hNQJqyaWntSFAsP1Erw+w1uVAuo6SyrzLgxEvw=
+X-Received: from seanjc.c.googlers.com ([fda3:e722:ac3:cc00:7f:e700:c0a8:3e5])
+ (user=seanjc job=sendgmr) by 2002:a05:6a00:1822:b0:49f:c55b:6235 with SMTP id
+ y34-20020a056a00182200b0049fc55b6235mr3668521pfa.66.1636596464117; Wed, 10
+ Nov 2021 18:07:44 -0800 (PST)
+Reply-To: Sean Christopherson <seanjc@google.com>
+Date: Thu, 11 Nov 2021 02:07:23 +0000
+In-Reply-To: <20211111020738.2512932-1-seanjc@google.com>
+Message-Id: <20211111020738.2512932-3-seanjc@google.com>
+Mime-Version: 1.0
+References: <20211111020738.2512932-1-seanjc@google.com>
+X-Mailer: git-send-email 2.34.0.rc0.344.g81b53c2807-goog
+Subject: [PATCH v4 02/17] KVM: x86: Register perf callbacks after calling
+ vendor's hardware_setup()
 From: Sean Christopherson <seanjc@google.com>
-To: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Like Xu <like.xu.linux@gmail.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Will Deacon <will@kernel.org>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@redhat.com>, Namhyung Kim <namhyung@kernel.org>,
-	James Morse <james.morse@arm.com>,
-	Alexandru Elisei <alexandru.elisei@arm.com>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Wanpeng Li <wanpengli@tencent.com>,
-	Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-perf-users@vger.kernel.org, linux-kernel@vger.kernel.org,
-	kvmarm@lists.cs.columbia.edu, linux-csky@vger.kernel.org,
-	linux-riscv@lists.infradead.org, kvm@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	Artem Kashkanov <artem.kashkanov@intel.com>,
-	Zhu Lingshan <lingshan.zhu@intel.com>,
-	Juergen Gross <jgross@suse.com>, Ingo Molnar <mingo@redhat.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Vincent Chen <deanbo422@gmail.com>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Greentime Hu <green.hu@gmail.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Marc Zyngier <maz@kernel.org>, Nick Hu <nickhu@andestech.com>,
-	Guo Ren <guoren@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>
-Subject: Re: [PATCH v3 01/16] perf: Ensure perf_guest_cbs aren't reloaded
- between !NULL check and deref
-Message-ID: <YYxmWGB6IUwEu4VZ@google.com>
-References: <20210922000533.713300-1-seanjc@google.com>
- <20210922000533.713300-2-seanjc@google.com>
- <77e3a76a-016b-8945-a1d5-aae4075e2147@gmail.com>
- <YYPrst2CUBXLYc9h@google.com>
- <f86fe9cb-bf4b-1c10-e0da-276fbb3f62ee@redhat.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f86fe9cb-bf4b-1c10-e0da-276fbb3f62ee@redhat.com>
+To: Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Will Deacon <will@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+	Russell King <linux@armlinux.org.uk>, Marc Zyngier <maz@kernel.org>, 
+	Catalin Marinas <catalin.marinas@arm.com>, Guo Ren <guoren@kernel.org>, 
+	Nick Hu <nickhu@andestech.com>, Greentime Hu <green.hu@gmail.com>, 
+	Vincent Chen <deanbo422@gmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+	Thomas Gleixner <tglx@linutronix.de>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	Paolo Bonzini <pbonzini@redhat.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, 
+	Juergen Gross <jgross@suse.com>
+Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@redhat.com>, 
+	Namhyung Kim <namhyung@kernel.org>, James Morse <james.morse@arm.com>, 
+	Alexandru Elisei <alexandru.elisei@arm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
+	"H. Peter Anvin" <hpa@zytor.com>, Sean Christopherson <seanjc@google.com>, 
+	Vitaly Kuznetsov <vkuznets@redhat.com>, Wanpeng Li <wanpengli@tencent.com>, 
+	Jim Mattson <jmattson@google.com>, Joerg Roedel <joro@8bytes.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, linux-perf-users@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	kvmarm@lists.cs.columbia.edu, linux-csky@vger.kernel.org, 
+	linux-riscv@lists.infradead.org, kvm@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, Artem Kashkanov <artem.kashkanov@intel.com>, 
+	Like Xu <like.xu.linux@gmail.com>, Like Xu <like.xu@linux.intel.com>, 
+	Zhu Lingshan <lingshan.zhu@intel.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Nov 10, 2021, Paolo Bonzini wrote:
-> On 11/4/21 15:18, Sean Christopherson wrote:
-> > If I'm interpeting Paolo's suggestion
-> > correctly, he's pointing out that oustanding stores to the function pointers in
-> > @cbs need to complete before assigning a non-NULL pointer to perf_guest_cbs,
-> > otherwise a perf event handler may see a valid pointer with half-baked callbacks.
-> > 
-> > I think smp_store_release() with a comment would be appropriate, assuming my
-> > above interpretation is correct.
-> > 
-> 
-> Yes, exactly.  It should even be rcu_assign_pointer(), matching the
-> synchronize_rcu()
+Wait to register perf callbacks until after doing vendor hardaware setup.
+VMX's hardware_setup() configures Intel Processor Trace (PT) mode, and a
+future fix to register the Intel PT guest interrupt hook if and only if
+Intel PT is exposed to the guest will consume the configured PT mode.
 
-And perf_guest_cbs should be tagged __rcu and accessed accordingly.  Which is
-effectively what this version (poorly) implemented with a homebrewed mix of
-{READ,WRITE}_ONCE, lockdep(), and synchronize_rcu().
+Delaying registration to hardware setup is effectively a nop as KVM's perf
+hooks all pivot on the per-CPU current_vcpu, which is non-NULL only when
+KVM is handling an IRQ/NMI in a VM-Exit path.  I.e. current_vcpu will be
+NULL throughout both kvm_arch_init() and kvm_arch_hardware_setup().
 
-> in patch 1 (and the change can be done in patch 1, too).
+Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Artem Kashkanov <artem.kashkanov@intel.com>
+Cc: stable@vger.kernel.org
+Acked-by: Paolo Bonzini <pbonzini@redhat.com>
+Signed-off-by: Sean Christopherson <seanjc@google.com>
+---
+ arch/x86/kvm/x86.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-Ya, the change needs to go into patch 1.
+diff --git a/arch/x86/kvm/x86.c b/arch/x86/kvm/x86.c
+index c1c4e2b05a63..021b2c1ac9f0 100644
+--- a/arch/x86/kvm/x86.c
++++ b/arch/x86/kvm/x86.c
+@@ -8567,8 +8567,6 @@ int kvm_arch_init(void *opaque)
+ 
+ 	kvm_timer_init();
+ 
+-	perf_register_guest_info_callbacks(&kvm_guest_cbs);
+-
+ 	if (boot_cpu_has(X86_FEATURE_XSAVE)) {
+ 		host_xcr0 = xgetbv(XCR_XFEATURE_ENABLED_MASK);
+ 		supported_xcr0 = host_xcr0 & KVM_SUPPORTED_XCR0;
+@@ -8600,7 +8598,6 @@ void kvm_arch_exit(void)
+ 		clear_hv_tscchange_cb();
+ #endif
+ 	kvm_lapic_exit();
+-	perf_unregister_guest_info_callbacks(&kvm_guest_cbs);
+ 
+ 	if (!boot_cpu_has(X86_FEATURE_CONSTANT_TSC))
+ 		cpufreq_unregister_notifier(&kvmclock_cpufreq_notifier_block,
+@@ -11149,6 +11146,8 @@ int kvm_arch_hardware_setup(void *opaque)
+ 	memcpy(&kvm_x86_ops, ops->runtime_ops, sizeof(kvm_x86_ops));
+ 	kvm_ops_static_call_update();
+ 
++	perf_register_guest_info_callbacks(&kvm_guest_cbs);
++
+ 	if (!kvm_cpu_cap_has(X86_FEATURE_XSAVES))
+ 		supported_xss = 0;
+ 
+@@ -11176,6 +11175,8 @@ int kvm_arch_hardware_setup(void *opaque)
+ 
+ void kvm_arch_hardware_unsetup(void)
+ {
++	perf_unregister_guest_info_callbacks(&kvm_guest_cbs);
++
+ 	static_call(kvm_x86_hardware_unsetup)();
+ }
+ 
+-- 
+2.34.0.rc0.344.g81b53c2807-goog
+
 
