@@ -2,45 +2,45 @@ Return-Path: <SRS0=YOfz=QD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDA4FC43217
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Nov 2021 15:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39385C43219
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Nov 2021 15:39:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8BC7E60EE0
-	for <xen-devel@archiver.kernel.org>; Tue, 16 Nov 2021 15:39:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org 8BC7E60EE0
+	by mail.kernel.org (Postfix) with ESMTPS id E772360F38
+	for <xen-devel@archiver.kernel.org>; Tue, 16 Nov 2021 15:39:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.1 mail.kernel.org E772360F38
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=lists.xenproject.org
-Received: from list by lists.xenproject.org with outflank-mailman.226388.391213 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.226392.391256 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mn0Yd-0007w2-KJ; Tue, 16 Nov 2021 15:39:39 +0000
+	id 1mn0Yi-0000aT-8v; Tue, 16 Nov 2021 15:39:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 226388.391213; Tue, 16 Nov 2021 15:39:39 +0000
+Received: by outflank-mailman (output) from mailman id 226392.391256; Tue, 16 Nov 2021 15:39:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mn0Yd-0007vv-GP; Tue, 16 Nov 2021 15:39:39 +0000
-Received: by outflank-mailman (input) for mailman id 226388;
- Tue, 16 Nov 2021 15:39:38 +0000
+	id 1mn0Yi-0000Yz-2U; Tue, 16 Nov 2021 15:39:44 +0000
+Received: by outflank-mailman (input) for mailman id 226392;
+ Tue, 16 Nov 2021 15:39:42 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6+K+=QD=gmail.com=ltykernel@srs-se1.protection.inumbo.net>)
- id 1mn0Yc-0007uz-7u
- for xen-devel@lists.xenproject.org; Tue, 16 Nov 2021 15:39:38 +0000
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [2607:f8b0:4864:20::42f])
+ id 1mn0Yg-0007uz-87
+ for xen-devel@lists.xenproject.org; Tue, 16 Nov 2021 15:39:42 +0000
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [2607:f8b0:4864:20::42c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6704d35b-46f3-11ec-9787-a32c541c8605;
- Tue, 16 Nov 2021 16:39:37 +0100 (CET)
-Received: by mail-pf1-x42f.google.com with SMTP id c4so18560050pfj.2
- for <xen-devel@lists.xenproject.org>; Tue, 16 Nov 2021 07:39:37 -0800 (PST)
+ id 69889a1e-46f3-11ec-9787-a32c541c8605;
+ Tue, 16 Nov 2021 16:39:41 +0100 (CET)
+Received: by mail-pf1-x42c.google.com with SMTP id c4so18560320pfj.2
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Nov 2021 07:39:41 -0800 (PST)
 Received: from ubuntu-Virtual-Machine.corp.microsoft.com
  ([2001:4898:80e8:3:57e4:b776:c854:76dd])
- by smtp.gmail.com with ESMTPSA id x64sm1981948pfd.151.2021.11.16.07.39.29
+ by smtp.gmail.com with ESMTPSA id x64sm1981948pfd.151.2021.11.16.07.39.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Nov 2021 07:39:29 -0800 (PST)
+ Tue, 16 Nov 2021 07:39:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,34 +52,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6704d35b-46f3-11ec-9787-a32c541c8605
+X-Inumbo-ID: 69889a1e-46f3-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=A871xRYimWpuymqSDqhiZkbRS8n6nHIMpIOunv30ysw=;
-        b=MfZeD4SICRk2M6gRj1QxEYd4A8GvB/tRH7apw5VqkE/bVG+e8yrO8ijV4aIzjOYHCC
-         lQaASY53qGtDAM8wVSmTdWy3cvr1fvftCXOr1EfkVi6q9+ynxxKdWVTFAB9VaO2TfYRR
-         tfbCajFfMAXlVqh3Ee2e0v9R0QcUDnq2f75xm0EEX761w/daoZNmHuD6pTxtXrJk+zhI
-         AuO4Y0S1MvttNc6duCjVc1isZ8WPRdME3vdYmZuaOWojOYPqotm4HvFO/DdtAUnehn/u
-         imITBVFlmiur1TnzAUd4yqml2N6tmP0mPVoeHVKo0W1d72FZEHoNJmiMrsvCB8TvjN82
-         hWIA==
+        bh=Ak926pCUpNKs+47FmVVMlYhwNY9vAunl0LxYrKNKSNw=;
+        b=fXIPR+PBwyjS3i7KU87DbF3H65iqGoi9c5lPfq49MXW5Agb+PbqhhCkodBUwgncfY0
+         8u558Gxgx+hyneHiMFFna+v0Tplu2XVGB323yn9Mi4PItfFkrOZL6mOPTtH84jId0xpi
+         OOq6zxxTIdjHmAiazs/l0ad1ZmnSo+bM1W9zJ7IapW3AW9cS0fE8fz7OYNZi78x2Nywm
+         NgYC+p+lYyKgO/DkWdX54e2PkDPaW+2ZM3yoNgy3n0P5AWQrZ1b8yG7V4TDZUmyvRdgv
+         9XPyZIT1LGCfNUbwhEfH/a+tLJRP3N9cwJNlhcq5BgdP8Ivttu+Pv7oZJiv6uaRyb8G9
+         Jfng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=A871xRYimWpuymqSDqhiZkbRS8n6nHIMpIOunv30ysw=;
-        b=mnhn0KyGxjuS4bPk/lNT3VJYQwjnETN0XdcYPfD7G2DOdRde5DjtpHWg6ZNsMwdETW
-         XElUP5Kic+HQQ9hp19NsAfs1Y7rcwmJMDz5OFRM75zeDAIybJAU7ZsVaTlN3UyNw6I8g
-         bzYgjKXxiZgkwdDjPALadhpx/Hn+yvTMP1nqGGL4IrqaU/v7bfpaPunEw70catsF3fjQ
-         OcMHjkOXO1UL/Gi4gkHx2lgir9tsPbqWxzereFxIySNh81fIkIpekd9iYVO9xuYxeWrP
-         MQ4pl8iQzwaR3q6x617WD4V+1p6KzSLxEGFP0Qnk4kzyXvgLIaCpkJ5fRR40QbWqCtdj
-         Nvgw==
-X-Gm-Message-State: AOAM531duneFLTWNkdEHfVRUKujfujZE8051NLajyvx77f+azNUrb0wA
-	N9K7LBd56whPnTi7xKhvsKM=
-X-Google-Smtp-Source: ABdhPJyHY3AIAxxj2PlCrLjDoT50XcH+uS0J9YrXheMYn9wWskO9/XhyBYsqQ+PUuD81c8+MSeo8ig==
-X-Received: by 2002:a62:2503:0:b0:4a2:b772:25ac with SMTP id l3-20020a622503000000b004a2b77225acmr17439529pfl.53.1637077170490;
-        Tue, 16 Nov 2021 07:39:30 -0800 (PST)
+        bh=Ak926pCUpNKs+47FmVVMlYhwNY9vAunl0LxYrKNKSNw=;
+        b=k3+zotBHrR3Z/hWjXsOnoB3gzRpS/M4XW5kZ7zGaAXEjK6+o/hGoSVi0fQkY4ngAOM
+         HBy0E+FLQimXVudmRc8ASGVeVBhrmUgCQpy8RZLW4XTSkcTsQM0mC7fgocDS6F6uegmF
+         7/GOTucPduWo9LIfTQg7yERwKXXLRpIJcEwDMu4bQpDE/2R7Ko84y8Aw6EHUn9EItXOE
+         hFZqDtUA6w2oKh9VP8VRaThoxX1X8L3m4fdSjAO0XbkxV+xuR+i1HJxImyiMYxnmGsBs
+         xUo70Rgc69rwWlJcci4q1fKA+PzGe9ZdyQjUhju8RlY3/NzB6ktpyvI111HqBoMcAmoT
+         Abrw==
+X-Gm-Message-State: AOAM531/qkJa0BGAokyy0rKRw9wPSTrrj7Db6HEFPwvEtF1T8Z4aQX23
+	CSRnlgu0OpkyYehez+v1sSU=
+X-Google-Smtp-Source: ABdhPJzCZCY+jvEVnSW7E8X0qlp8/NYaXSoxi8D4QUD1eJWMFglw+EAvUZHg9VPQ+6zuVOjNnuFh+Q==
+X-Received: by 2002:a05:6a00:230d:b0:49f:b8ad:ae23 with SMTP id h13-20020a056a00230d00b0049fb8adae23mr33547pfh.80.1637077179809;
+        Tue, 16 Nov 2021 07:39:39 -0800 (PST)
 From: Tianyu Lan <ltykernel@gmail.com>
 To: dave.hansen@linux.intel.com,
 	luto@kernel.org,
@@ -120,9 +120,9 @@ Cc: Tianyu Lan <Tianyu.Lan@microsoft.com>,
 	parri.andrea@gmail.com,
 	thomas.lendacky@amd.com,
 	dave.hansen@intel.com
-Subject: [PATCH 1/5] x86/Swiotlb: Add Swiotlb bounce buffer remap function for HV IVM
-Date: Tue, 16 Nov 2021 10:39:19 -0500
-Message-Id: <20211116153923.196763-2-ltykernel@gmail.com>
+Subject: [PATCH 5/5] scsi: storvsc: Add Isolation VM support for storvsc driver
+Date: Tue, 16 Nov 2021 10:39:23 -0500
+Message-Id: <20211116153923.196763-6-ltykernel@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20211116153923.196763-1-ltykernel@gmail.com>
 References: <20211116153923.196763-1-ltykernel@gmail.com>
@@ -131,210 +131,130 @@ Content-Transfer-Encoding: 8bit
 
 From: Tianyu Lan <Tianyu.Lan@microsoft.com>
 
-In Isolation VM with AMD SEV, bounce buffer needs to be accessed via
-extra address space which is above shared_gpa_boundary (E.G 39 bit
-address line) reported by Hyper-V CPUID ISOLATION_CONFIG. The access
-physical address will be original physical address + shared_gpa_boundary.
-The shared_gpa_boundary in the AMD SEV SNP spec is called virtual top of
-memory(vTOM). Memory addresses below vTOM are automatically treated as
-private while memory above vTOM is treated as shared.
+In Isolation VM, all shared memory with host needs to mark visible
+to host via hvcall. vmbus_establish_gpadl() has already done it for
+storvsc rx/tx ring buffer. The page buffer used by vmbus_sendpacket_
+mpb_desc() still needs to be handled. Use DMA API(scsi_dma_map/unmap)
+to map these memory during sending/receiving packet and return swiotlb
+bounce buffer dma address. In Isolation VM, swiotlb  bounce buffer is
+marked to be visible to host and the swiotlb force mode is enabled.
 
-Expose swiotlb_unencrypted_base for platforms to set unencrypted
-memory base offset and platform calls swiotlb_update_mem_attributes()
-to remap swiotlb mem to unencrypted address space. memremap() can
-not be called in the early stage and so put remapping code into
-swiotlb_update_mem_attributes(). Store remap address and use it to copy
-data from/to swiotlb bounce buffer.
+Set device's dma min align mask to HV_HYP_PAGE_SIZE - 1 in order to
+keep the original data offset in the bounce buffer.
 
 Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
 ---
- include/linux/swiotlb.h |  6 ++++
- kernel/dma/swiotlb.c    | 75 ++++++++++++++++++++++++++++++++++++-----
- 2 files changed, 73 insertions(+), 8 deletions(-)
+ drivers/scsi/storvsc_drv.c | 37 +++++++++++++++++++++----------------
+ include/linux/hyperv.h     |  1 +
+ 2 files changed, 22 insertions(+), 16 deletions(-)
 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 569272871375..09a140d617fa 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -73,6 +73,9 @@ extern enum swiotlb_force swiotlb_force;
-  * @end:	The end address of the swiotlb memory pool. Used to do a quick
-  *		range check to see if the memory was in fact allocated by this
-  *		API.
-+ * @vaddr:	The vaddr of the swiotlb memory pool. The swiotlb
-+ *		memory pool may be remapped in the memory encrypted case and store
-+ *		virtual address for bounce buffer operation.
-  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
-  *		@end. For default swiotlb, this is command line adjustable via
-  *		setup_io_tlb_npages.
-@@ -92,6 +95,7 @@ extern enum swiotlb_force swiotlb_force;
- struct io_tlb_mem {
- 	phys_addr_t start;
- 	phys_addr_t end;
-+	void *vaddr;
- 	unsigned long nslabs;
- 	unsigned long used;
- 	unsigned int index;
-@@ -186,4 +190,6 @@ static inline bool is_swiotlb_for_alloc(struct device *dev)
- }
- #endif /* CONFIG_DMA_RESTRICTED_POOL */
+diff --git a/drivers/scsi/storvsc_drv.c b/drivers/scsi/storvsc_drv.c
+index 20595c0ba0ae..ae293600d799 100644
+--- a/drivers/scsi/storvsc_drv.c
++++ b/drivers/scsi/storvsc_drv.c
+@@ -21,6 +21,8 @@
+ #include <linux/device.h>
+ #include <linux/hyperv.h>
+ #include <linux/blkdev.h>
++#include <linux/dma-mapping.h>
++
+ #include <scsi/scsi.h>
+ #include <scsi/scsi_cmnd.h>
+ #include <scsi/scsi_host.h>
+@@ -1336,6 +1338,7 @@ static void storvsc_on_channel_callback(void *context)
+ 					continue;
+ 				}
+ 				request = (struct storvsc_cmd_request *)scsi_cmd_priv(scmnd);
++				scsi_dma_unmap(scmnd);
+ 			}
  
-+extern phys_addr_t swiotlb_unencrypted_base;
-+
- #endif /* __LINUX_SWIOTLB_H */
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 8e840fbbed7c..4735c5e0f44d 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -50,6 +50,7 @@
- #include <asm/io.h>
- #include <asm/dma.h>
+ 			storvsc_on_receive(stor_device, packet, request);
+@@ -1749,7 +1752,6 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 	struct hv_host_device *host_dev = shost_priv(host);
+ 	struct hv_device *dev = host_dev->dev;
+ 	struct storvsc_cmd_request *cmd_request = scsi_cmd_priv(scmnd);
+-	int i;
+ 	struct scatterlist *sgl;
+ 	unsigned int sg_count;
+ 	struct vmscsi_request *vm_srb;
+@@ -1831,10 +1833,11 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 	payload_sz = sizeof(cmd_request->mpb);
  
-+#include <linux/io.h>
- #include <linux/init.h>
- #include <linux/memblock.h>
- #include <linux/iommu-helper.h>
-@@ -72,6 +73,8 @@ enum swiotlb_force swiotlb_force;
+ 	if (sg_count) {
+-		unsigned int hvpgoff, hvpfns_to_add;
+ 		unsigned long offset_in_hvpg = offset_in_hvpage(sgl->offset);
+ 		unsigned int hvpg_count = HVPFN_UP(offset_in_hvpg + length);
+-		u64 hvpfn;
++		struct scatterlist *sg;
++		unsigned long hvpfn, hvpfns_to_add;
++		int j, i = 0;
  
- struct io_tlb_mem io_tlb_default_mem;
+ 		if (hvpg_count > MAX_PAGE_BUFFER_COUNT) {
  
-+phys_addr_t swiotlb_unencrypted_base;
-+
- /*
-  * Max segment that we can provide which (if pages are contingous) will
-  * not be bounced (unless SWIOTLB_FORCE is set).
-@@ -155,6 +158,31 @@ static inline unsigned long nr_slots(u64 val)
- 	return DIV_ROUND_UP(val, IO_TLB_SIZE);
- }
+@@ -1848,21 +1851,22 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 		payload->range.len = length;
+ 		payload->range.offset = offset_in_hvpg;
  
-+/*
-+ * Remap swioltb memory in the unencrypted physical address space
-+ * when swiotlb_unencrypted_base is set. (e.g. for Hyper-V AMD SEV-SNP
-+ * Isolation VMs).
-+ */
-+void *swiotlb_mem_remap(struct io_tlb_mem *mem, unsigned long bytes)
-+{
-+	void *vaddr;
-+
-+	if (swiotlb_unencrypted_base) {
-+		phys_addr_t paddr = mem->start + swiotlb_unencrypted_base;
-+
-+		vaddr = memremap(paddr, bytes, MEMREMAP_WB);
-+		if (!vaddr) {
-+			pr_err("Failed to map the unencrypted memory %llx size %lx.\n",
-+			       paddr, bytes);
-+			return NULL;
-+		}
-+
-+		return vaddr;
-+	}
-+
-+	return phys_to_virt(mem->start);
-+}
-+
- /*
-  * Early SWIOTLB allocation may be too early to allow an architecture to
-  * perform the desired operations.  This function allows the architecture to
-@@ -172,10 +200,17 @@ void __init swiotlb_update_mem_attributes(void)
- 	vaddr = phys_to_virt(mem->start);
- 	bytes = PAGE_ALIGN(mem->nslabs << IO_TLB_SHIFT);
- 	set_memory_decrypted((unsigned long)vaddr, bytes >> PAGE_SHIFT);
--	memset(vaddr, 0, bytes);
-+
-+	mem->vaddr = swiotlb_mem_remap(mem, bytes);
-+	if (!mem->vaddr) {
-+		pr_err("Fail to remap swiotlb mem.\n");
-+		return;
-+	}
-+
-+	memset(mem->vaddr, 0, bytes);
- }
++		sg_count = scsi_dma_map(scmnd);
++		if (sg_count < 0)
++			return SCSI_MLQUEUE_DEVICE_BUSY;
  
--static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
-+static int swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 				    unsigned long nslabs, bool late_alloc)
- {
- 	void *vaddr = phys_to_virt(start);
-@@ -196,13 +231,28 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
- 		mem->slots[i].alloc_size = 0;
+-		for (i = 0; sgl != NULL; sgl = sg_next(sgl)) {
++		for_each_sg(sgl, sg, sg_count, j) {
+ 			/*
+-			 * Init values for the current sgl entry. hvpgoff
+-			 * and hvpfns_to_add are in units of Hyper-V size
+-			 * pages. Handling the PAGE_SIZE != HV_HYP_PAGE_SIZE
+-			 * case also handles values of sgl->offset that are
+-			 * larger than PAGE_SIZE. Such offsets are handled
+-			 * even on other than the first sgl entry, provided
+-			 * they are a multiple of PAGE_SIZE.
++			 * Init values for the current sgl entry. hvpfns_to_add
++			 * is in units of Hyper-V size pages. Handling the
++			 * PAGE_SIZE != HV_HYP_PAGE_SIZE case also handles
++			 * values of sgl->offset that are larger than PAGE_SIZE.
++			 * Such offsets are handled even on other than the first
++			 * sgl entry, provided they are a multiple of PAGE_SIZE.
+ 			 */
+-			hvpgoff = HVPFN_DOWN(sgl->offset);
+-			hvpfn = page_to_hvpfn(sg_page(sgl)) + hvpgoff;
+-			hvpfns_to_add =	HVPFN_UP(sgl->offset + sgl->length) -
+-						hvpgoff;
++			hvpfn = HVPFN_DOWN(sg_dma_address(sg));
++			hvpfns_to_add = HVPFN_UP(sg_dma_address(sg) +
++						 sg_dma_len(sg)) - hvpfn;
+ 
+ 			/*
+ 			 * Fill the next portion of the PFN array with
+@@ -1872,7 +1876,7 @@ static int storvsc_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *scmnd)
+ 			 * the PFN array is filled.
+ 			 */
+ 			while (hvpfns_to_add--)
+-				payload->range.pfn_array[i++] =	hvpfn++;
++				payload->range.pfn_array[i++] = hvpfn++;
+ 		}
  	}
-+
-+	/*
-+	 * With swiotlb_unencrypted_base setting, swiotlb bounce buffer will
-+	 * be remapped in the swiotlb_update_mem_attributes() and return here
-+	 * directly.
-+	 */
-+	if (swiotlb_unencrypted_base)
-+		return 0;
-+
-+	if (set_memory_decrypted((unsigned long)vaddr, bytes >> PAGE_SHIFT))
-+		return -EFAULT;
-+
- 	memset(vaddr, 0, bytes);
-+	mem->vaddr = vaddr;
-+	return 0;
- }
  
- int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- {
- 	struct io_tlb_mem *mem = &io_tlb_default_mem;
- 	size_t alloc_size;
-+	int ret;
+@@ -2016,6 +2020,7 @@ static int storvsc_probe(struct hv_device *device,
+ 	stor_device->vmscsi_size_delta = sizeof(struct vmscsi_win8_extension);
+ 	spin_lock_init(&stor_device->lock);
+ 	hv_set_drvdata(device, stor_device);
++	dma_set_min_align_mask(&device->device, HV_HYP_PAGE_SIZE - 1);
  
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -217,7 +267,11 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- 		panic("%s: Failed to allocate %zu bytes align=0x%lx\n",
- 		      __func__, alloc_size, PAGE_SIZE);
+ 	stor_device->port_number = host->host_no;
+ 	ret = storvsc_connect_to_vsp(device, storvsc_ringbuffer_size, is_fc);
+diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
+index 8882e46d1070..2840e51ee5c5 100644
+--- a/include/linux/hyperv.h
++++ b/include/linux/hyperv.h
+@@ -1262,6 +1262,7 @@ struct hv_device {
  
--	swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
-+	ret = swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, false);
-+	if (ret) {
-+		memblock_free(mem->slots, alloc_size);
-+		return ret;
-+	}
+ 	struct vmbus_channel *channel;
+ 	struct kset	     *channels_kset;
++	struct device_dma_parameters dma_parms;
  
- 	if (verbose)
- 		swiotlb_print_info();
-@@ -304,7 +358,9 @@ int
- swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- {
- 	struct io_tlb_mem *mem = &io_tlb_default_mem;
--	unsigned long bytes = nslabs << IO_TLB_SHIFT;
-+	unsigned long order
-+		= get_order(array_size(sizeof(*mem->slots), nslabs));
-+	int ret;
- 
- 	if (swiotlb_force == SWIOTLB_NO_FORCE)
- 		return 0;
-@@ -314,12 +370,15 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- 		return -ENOMEM;
- 
- 	mem->slots = (void *)__get_free_pages(GFP_KERNEL | __GFP_ZERO,
--		get_order(array_size(sizeof(*mem->slots), nslabs)));
-+		order);
- 	if (!mem->slots)
- 		return -ENOMEM;
- 
--	set_memory_decrypted((unsigned long)tlb, bytes >> PAGE_SHIFT);
--	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
-+	ret = swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
-+	if (ret) {
-+		free_pages((unsigned long)mem->slots, order);
-+		return ret;
-+	}
- 
- 	swiotlb_print_info();
- 	swiotlb_set_max_segment(mem->nslabs << IO_TLB_SHIFT);
-@@ -371,7 +430,7 @@ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size
- 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
- 	size_t alloc_size = mem->slots[index].alloc_size;
- 	unsigned long pfn = PFN_DOWN(orig_addr);
--	unsigned char *vaddr = phys_to_virt(tlb_addr);
-+	unsigned char *vaddr = mem->vaddr + tlb_addr - mem->start;
- 	unsigned int tlb_offset, orig_addr_offset;
- 
- 	if (orig_addr == INVALID_PHYS_ADDR)
+ 	/* place holder to keep track of the dir for hv device in debugfs */
+ 	struct dentry *debug_dir;
 -- 
 2.25.1
 
