@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21ECDC433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 22 Nov 2021 11:42:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.228835.396025 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19018C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 22 Nov 2021 11:53:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.228841.396037 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mp7i2-0000qT-SG; Mon, 22 Nov 2021 11:42:06 +0000
+	id 1mp7sR-0002Iu-TO; Mon, 22 Nov 2021 11:52:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 228835.396025; Mon, 22 Nov 2021 11:42:06 +0000
+Received: by outflank-mailman (output) from mailman id 228841.396037; Mon, 22 Nov 2021 11:52:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mp7i2-0000qM-P9; Mon, 22 Nov 2021 11:42:06 +0000
-Received: by outflank-mailman (input) for mailman id 228835;
- Mon, 22 Nov 2021 11:42:05 +0000
+	id 1mp7sR-0002In-P9; Mon, 22 Nov 2021 11:52:51 +0000
+Received: by outflank-mailman (input) for mailman id 228841;
+ Mon, 22 Nov 2021 11:52:51 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1mp7i1-0000qG-Iq
- for xen-devel@lists.xenproject.org; Mon, 22 Nov 2021 11:42:05 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mp7sQ-0002IY-VW
+ for xen-devel@lists.xenproject.org; Mon, 22 Nov 2021 11:52:50 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mp7i0-0006g0-5N; Mon, 22 Nov 2021 11:42:04 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=[192.168.28.80]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1mp7hz-0001at-VC; Mon, 22 Nov 2021 11:42:04 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mp7sQ-0006qj-SI
+ for xen-devel@lists.xenproject.org; Mon, 22 Nov 2021 11:52:50 +0000
+Received: from iwj (helo=mariner.uk.xensource.com)
+ by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1mp7sQ-00022c-R8
+ for xen-devel@lists.xenproject.org; Mon, 22 Nov 2021 11:52:50 +0000
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+ by mariner.uk.xensource.com with esmtp (Exim 4.89)
+ (envelope-from <ijackson@chiark.greenend.org.uk>)
+ id 1mp7sO-0000Fy-H3; Mon, 22 Nov 2021 11:52:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,80 +44,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=R0eY9AyT2sTIfNz3c9vjCGKxp+7caoprCrFviPHPEhM=; b=zsfwpM93XgQciwZP5bqipDKcgL
-	ZR/NI7vx/EtJaVVNC9c3WAH9kwPIeu5evcTI9G89R1LQsuxvuINA4V/owg8I+e0smzTCSvA5jzamY
-	gupoign+us3BHSlvzZTqBp3EJC0zg3+BZVJoUBWZImxuvUJqAp+BnTv/1h4ZUxaYBhH8=;
-Message-ID: <8fe9a5bd-030c-66b7-ccf3-4545cfb80f66@xen.org>
-Date: Mon, 22 Nov 2021 11:42:01 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	Message-Id:Date:Subject:Cc:To:From;
+	bh=A8tQwTTMjTvXftLlpa9RUQgFc7HF0aVLNGVPoKDuv9Q=; b=Ml000PporhyZFXZwf8VZgLTqIl
+	Qhyx/Lnw2UqVIu6lImr+A6Si+iyTVq3fjCnlSY6E1+zyBeI5Yd9IbtU66MJ5SBZ1heupnFPN1B+0u
+	Ja8S3lTXNuYSjFf/SY6VzSRDYEN23czg19sWZwphEIq33p3+KY6woo0alwTzJtUNAEAc=;
+From: Ian Jackson <iwj@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Ian Jackson <iwj@xenproject.org>
+Subject: [OSSTEST PATCH 1/2] README.dev: Document to use updated osstest for commissioning
+Date: Mon, 22 Nov 2021 11:52:38 +0000
+Message-Id: <20211122115239.21743-1-iwj@xenproject.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.3.1
-Subject: Re: [PATCH RFC 1/4] xen: add a domain unique id to each domain
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
- Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-References: <20210914123600.1626-1-jgross@suse.com>
- <20210914123600.1626-2-jgross@suse.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <20210914123600.1626-2-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Juergen,
+Signed-off-by: Ian Jackson <iwj@xenproject.org>
+Release-Acked-by: Ian Jackson <iwj@xenproject.org>
+---
+ README.dev | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On 14/09/2021 13:35, Juergen Gross wrote:
-> Xenstore is referencing domains by their domid, but reuse of a domid
-> can lead to the situation that Xenstore can't tell whether a domain
-> with that domid has been deleted and created again without Xenstore
-> noticing the domain is a new one now.
-> 
-> Add a global domain creation unique id which is updated when creating
-> a new domain, and store that value in struct domain of the new domain.
-> The global unique id is initialized with the system time and updates
-> are done via the xorshift algorithm which is used for pseudo random
-> number generation, too (see https://en.wikipedia.org/wiki/Xorshift).
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> ---
->   xen/common/domain.c     | 16 ++++++++++++++++
->   xen/include/xen/sched.h |  3 +++
->   2 files changed, 19 insertions(+)
-> 
-> diff --git a/xen/common/domain.c b/xen/common/domain.c
-> index 6ee5d033b0..755349b93f 100644
-> --- a/xen/common/domain.c
-> +++ b/xen/common/domain.c
-> @@ -84,6 +84,9 @@ vcpu_info_t dummy_vcpu_info;
->   
->   bool __read_mostly vmtrace_available;
->   
-> +/* Unique domain identifier, protected by domctl lock. */
-> +static uint64_t unique_id;
-> +
->   static void __domain_finalise_shutdown(struct domain *d)
->   {
->       struct vcpu *v;
-> @@ -473,6 +476,18 @@ static void _domain_destroy(struct domain *d)
->       free_domain_struct(d);
->   }
->   
-> +static uint64_t get_unique_id(void)
-
-The implementation is assuming that domain cannot be created 
-concurrently. The rest of domain_create() seems to be able to cope with 
-concurrent call (even if domctl prevents this situation today).
-
-So I think we would want to make this call safe as well. One possibility 
-would be to (ab)use the domlist_update_lock (I think the uniq ID is only 
-necessary for real domains).
-
-Cheers,
-
+diff --git a/README.dev b/README.dev
+index 3d09b3c6b..132772fb4 100644
+--- a/README.dev
++++ b/README.dev
+@@ -108,6 +108,8 @@ Create the tftp directory (must be done after firmware is set):
+ Run commissioning test flights
+ ------------------------------
+ 
++(Update your osstest tree to the latest production.)
++
+ Firstly, a basic "host examination" that checks that we can install
+ and boot Xen:
+ 
 -- 
-Julien Grall
+2.20.1
+
 
