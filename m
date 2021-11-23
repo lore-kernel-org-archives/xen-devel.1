@@ -4,37 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E579C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Nov 2021 14:37:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.229649.397158 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67ADEC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Nov 2021 14:45:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.229668.397168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mpWux-0007t8-5m; Tue, 23 Nov 2021 14:37:07 +0000
+	id 1mpX3E-0002Rr-4e; Tue, 23 Nov 2021 14:45:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 229649.397158; Tue, 23 Nov 2021 14:37:07 +0000
+Received: by outflank-mailman (output) from mailman id 229668.397168; Tue, 23 Nov 2021 14:45:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mpWux-0007sf-1Z; Tue, 23 Nov 2021 14:37:07 +0000
-Received: by outflank-mailman (input) for mailman id 229649;
- Tue, 23 Nov 2021 14:37:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mpX3E-0002Rk-1S; Tue, 23 Nov 2021 14:45:40 +0000
+Received: by outflank-mailman (input) for mailman id 229668;
+ Tue, 23 Nov 2021 14:45:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=PpN+=QK=gmail.com=ltykernel@srs-se1.protection.inumbo.net>)
- id 1mpWuv-0006Ps-4x
- for xen-devel@lists.xenproject.org; Tue, 23 Nov 2021 14:37:05 +0000
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [2607:f8b0:4864:20::429])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d1e3c9d3-4c6a-11ec-9787-a32c541c8605;
- Tue, 23 Nov 2021 15:37:03 +0100 (CET)
-Received: by mail-pf1-x429.google.com with SMTP id g19so19644319pfb.8
- for <xen-devel@lists.xenproject.org>; Tue, 23 Nov 2021 06:37:03 -0800 (PST)
-Received: from ubuntu-Virtual-Machine.corp.microsoft.com
- ([2001:4898:80e8:1:af65:c3d4:6df:5a8b])
- by smtp.gmail.com with ESMTPSA id j13sm11926127pfc.151.2021.11.23.06.36.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Nov 2021 06:37:00 -0800 (PST)
+ <SRS0=r6oU=QK=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
+ id 1mpX3B-0002RU-Fm
+ for xen-devel@lists.xenproject.org; Tue, 23 Nov 2021 14:45:38 +0000
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+ (mail-am5eur02on060b.outbound.protection.outlook.com
+ [2a01:111:f400:fe07::60b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0475581c-4c6c-11ec-a9d2-d9f7a1cc8784;
+ Tue, 23 Nov 2021 15:45:36 +0100 (CET)
+Received: from AM6P191CA0049.EURP191.PROD.OUTLOOK.COM (2603:10a6:209:7f::26)
+ by AM0PR08MB4403.eurprd08.prod.outlook.com (2603:10a6:208:141::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4713.21; Tue, 23 Nov
+ 2021 14:45:32 +0000
+Received: from AM5EUR03FT005.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:209:7f:cafe::ca) by AM6P191CA0049.outlook.office365.com
+ (2603:10a6:209:7f::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4713.19 via Frontend
+ Transport; Tue, 23 Nov 2021 14:45:32 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM5EUR03FT005.mail.protection.outlook.com (10.152.16.146) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4713.19 via Frontend Transport; Tue, 23 Nov 2021 14:45:32 +0000
+Received: ("Tessian outbound dbb52aec1fa6:v110");
+ Tue, 23 Nov 2021 14:45:32 +0000
+Received: from d764d2ed4d3f.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ B81F37D7-280A-4DA8-BE04-9937953CE072.1; 
+ Tue, 23 Nov 2021 14:45:20 +0000
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id d764d2ed4d3f.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Tue, 23 Nov 2021 14:45:20 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by AM6PR08MB3367.eurprd08.prod.outlook.com (2603:10a6:20b:44::25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4713.24; Tue, 23 Nov
+ 2021 14:45:16 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::69d7:e26:6610:ebd8]) by AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::69d7:e26:6610:ebd8%4]) with mapi id 15.20.4713.025; Tue, 23 Nov 2021
+ 14:45:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,486 +74,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d1e3c9d3-4c6a-11ec-9787-a32c541c8605
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=JY7pElcL7BP9H4psSINWD9PF2/JWAEjs+L3UP6LQB6Q=;
-        b=oQ83HmoHFD085agRy/yeSEpNrdiXveNtgrkgLlTJ1AMwBzBStPW+er+NxwGaxnjyvt
-         WHsUBBcynmKBNjPBpC43h5dqEDpOktT5czz5EWgsqD1rThQtKYa98t341JDknF9C7A/q
-         McbOW8ICcIRyyZIj8CIq4rakCYysnIvAp9//MQghkqFKZ+JrdXcNma2RJFmDr/BCudOJ
-         jruLBSJn/lixdkyAroEamsINDHEDJw8SWIOJvrlJf3QP/wkDK4Z5RG9f03c9R1YM2biV
-         pZ02GrdWfDup5tdyieZazgjcdzuIp2ZhGGHCsawB384nfBKev0cvxwNB3dfrMB9/rPI4
-         SNoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=JY7pElcL7BP9H4psSINWD9PF2/JWAEjs+L3UP6LQB6Q=;
-        b=q8L9C0r0TaE4QJrVysc9IZoVLKkSfmvU2CzfEZDJXBsa3H0jQKwn284eXq0cSPJwev
-         0w9nXU/cXLgtJESTnqJjzwtxbBOYoe/zREpLNQTPHzpct/L+77jPDL3RTA9wl6q8Zca9
-         5fbNpETptveZrWlZO9+fKovgepqiVMA+l0gxTuN0RGdGZvNmYf6zSiHG23/tDH31sxBZ
-         u7BeGGbWQrV66BdGadbxb965lsmufTQFhEm+szP757JUea3rHN+0ZLt/AtEjYlQuEEsM
-         zhjOPr6Vq8rToJ1CiFjSlA/H0FINZ0FtWZSTictF+IDKDvSCE0ZomKrxNSJ0stvTSzKQ
-         kv0g==
-X-Gm-Message-State: AOAM53285OO1KdpyfGGc+UgyW7ATXO74dH8C5hJxDHczCBitCM/SAC9p
-	BZpdXWcIaiAoxsPv0MVSZHo=
-X-Google-Smtp-Source: ABdhPJx5ENbC602il693O1d//w8VCd0w5BvdKcn8pIWg+EC4X/avZhuFZM6oB2wl60kqZ+KHOtIsww==
-X-Received: by 2002:a65:6a47:: with SMTP id o7mr3999207pgu.439.1637678220735;
-        Tue, 23 Nov 2021 06:37:00 -0800 (PST)
-From: Tianyu Lan <ltykernel@gmail.com>
-To: tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	luto@kernel.org,
-	peterz@infradead.org,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	boris.ostrovsky@oracle.com,
-	kys@microsoft.com,
-	haiyangz@microsoft.com,
-	sthemmin@microsoft.com,
-	wei.liu@kernel.org,
-	decui@microsoft.com,
-	joro@8bytes.org,
-	will@kernel.org,
-	davem@davemloft.net,
-	kuba@kernel.org,
-	jejb@linux.ibm.com,
-	martin.petersen@oracle.com,
-	hch@lst.de,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com,
-	Tianyu.Lan@microsoft.com,
-	thomas.lendacky@amd.com,
-	xen-devel@lists.xenproject.org,
-	michael.h.kelley@microsoft.com
-Cc: iommu@lists.linux-foundation.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	netdev@vger.kernel.org,
-	vkuznets@redhat.com,
-	brijesh.singh@amd.com,
-	konrad.wilk@oracle.com,
-	parri.andrea@gmail.com,
-	dave.hansen@intel.com
-Subject: [PATCH V2 5/6] net: netvsc: Add Isolation VM support for netvsc driver
-Date: Tue, 23 Nov 2021 09:30:36 -0500
-Message-Id: <20211123143039.331929-6-ltykernel@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211123143039.331929-1-ltykernel@gmail.com>
-References: <20211123143039.331929-1-ltykernel@gmail.com>
+X-Inumbo-ID: 0475581c-4c6c-11ec-a9d2-d9f7a1cc8784
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KDPhrhNp8c4RyScvZPAQiS28zsf54b2antgvUA/wqDY=;
+ b=K6ZWsyl6R9irEqxGr3XGqPFjHRKvrlmCykBotNVVoNZ+i+HPnZIExEEDZDTIXmXKxtXyXCNd7CusRHVzNP3UqBoK9ZHJrctBGOJCHNiCpYmz5kFz/I/0YahnwqVZ3nglCEVnPmiK4hp5WtM6YZv0W4Qhib48T54qHMjORteJfEc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: f013f2b427da65a4
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=GqF79gkG+P/2bMMq81uOoODLscnDrmgjCmXXXbqyaaOrvvJ8SqiVTls+3CZWMiUYjVWFA5/Z7SJNeyrze7qAcIlzhaIC+rrtCArX/BkQJ5ZA8hGKzWbgHogyzxwMuVMpZaxX2p5eN/LYolHMQ0BGWKyOkfJLWZG/243rum+JjfJO2AGek6hofpW5HmX2g+4OlNjUgERhnu3ALHHIq+URrDDTzHAR7aEOkufaBef2nNigB361kRkBT90Jk8DVworanPJqlQ4tyrdKJcPbUUjLJ0XU+pLd1uuU5vUc86/RupldyJyuWHSAWbVIhrR6ePagKIHiYtLyvrYBcG3Aoto0Zg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KDPhrhNp8c4RyScvZPAQiS28zsf54b2antgvUA/wqDY=;
+ b=YuW90gdT5QAKd2JXHIJENpa4pKSThTtsuUNur06TqaDoQ9e0nkTDbeObnbN07qPxRTDmQQBFa46297NP2+ZBdWqTjiS+okwSRMl8EADiY8BPNo0fM2Plq2jbkIATA30Uwtf363idJSY0M99FMeMf/gL9fUgPO90E6I5yDnw2w6QQ1zqmVApJ/TK7Nm9V6u3QEqEoWJWj/q2RzpYtYhC761y7GaRb2zfMvtvz9AWE04a4JsyW7nltq5lrCIeaZt8yY2PXGbT9cmRyJR+wAKaSJoBUmolCs2D2fDvDRELsdmSNfAbc0UStP4vxvhNBLXBLErQ0fARnujWXyxnSwrD9YQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KDPhrhNp8c4RyScvZPAQiS28zsf54b2antgvUA/wqDY=;
+ b=K6ZWsyl6R9irEqxGr3XGqPFjHRKvrlmCykBotNVVoNZ+i+HPnZIExEEDZDTIXmXKxtXyXCNd7CusRHVzNP3UqBoK9ZHJrctBGOJCHNiCpYmz5kFz/I/0YahnwqVZ3nglCEVnPmiK4hp5WtM6YZv0W4Qhib48T54qHMjORteJfEc=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Julien Grall <julien@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko
+	<oleksandr_tyshchenko@epam.com>, Luca Fancellu <Luca.Fancellu@arm.com>,
+	Xen-devel <xen-devel@lists.xenproject.org>, Wei Chen <Wei.Chen@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, George Dunlap
+	<george.dunlap@citrix.com>, Juergen Gross <jgross@suse.com>, Dario Faggioli
+	<dfaggioli@suse.com>
+Subject: Re: [RFC PATCH 0/2] Boot time cpupools
+Thread-Topic: [RFC PATCH 0/2] Boot time cpupools
+Thread-Index:
+ AQHX25mOHH0z58pAdkqC6AziO7R1GqwHg+AAgAAN94CAAAkVgIAABTgAgAB2SICAAHfeAIACmeEAgAAOqoCABfUlAIAADkaA
+Date: Tue, 23 Nov 2021 14:45:16 +0000
+Message-ID: <75B06FD4-B2EC-4C93-95B1-8E3C9A181913@arm.com>
+References: <20211117095711.26596-1-luca.fancellu@arm.com>
+ <26c01edc-46a9-47eb-0c9d-986b92e02158@xen.org>
+ <B20FC780-3E2D-4B4A-BF1D-CF34763D237E@arm.com>
+ <d42781c4-b01b-9064-4c90-ff99d960958b@xen.org>
+ <1941B2BF-6451-4665-8591-DB14739121A9@arm.com>
+ <f744c406-9801-a001-fb8e-90680cebb0c9@xen.org>
+ <alpine.DEB.2.22.394.2111171724330.1412361@ubuntu-linux-20-04-desktop>
+ <17cd2c69-56cb-15b9-d381-f854aea55d27@xen.org>
+ <alpine.DEB.2.22.394.2111191052050.1412361@ubuntu-linux-20-04-desktop>
+ <d1139023-6788-2c58-5873-327e0917f868@xen.org>
+In-Reply-To: <d1139023-6788-2c58-5873-327e0917f868@xen.org>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3654.120.0.1.13)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+x-ms-publictraffictype: Email
+X-MS-Office365-Filtering-Correlation-Id: a038824d-49c6-41bf-6ad6-08d9ae8fe6ca
+x-ms-traffictypediagnostic: AM6PR08MB3367:|AM0PR08MB4403:
+X-Microsoft-Antispam-PRVS:
+	<AM0PR08MB440316BBF1D3537EB33AA6349D609@AM0PR08MB4403.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ zhewgHgrYHrlgM21QZA5OvGin/iay3equIGUyiMgyGVgDql5R5K+CNmL1QwEFn14n3W4WZVrMNS2hqwS5eshtXOk/3b759Ml3Tmn2fr8wJavqmLT7l1mmxELkGvMMFS2gpAWjzAr8pbpC5q2eO/eBXHM74K0UmDA0bX33WoUq0n9b8eSN8c8P9/WoyJvk7OuerPSls157pW7J5S4jRK6JHHOk3BVKllDK2w8Tg7ma/urBXr5QCOIUOEXlwaciLzwoCaQffxfPHA0/inia1F46i+zP8QwZY+FZGRAGH4JWx1YlWq/6BSZsT+n6pLlsU1Ik9u7ilYgTOc4Rw7875mlcIiAFuozZuOpETN5C/Pht4cpufnhkYbx1nbruWCuVNT22vgNiESmKLoi3kRLzEOig67or/XXw/YLYkBcrrMxMjN+Rv74iepBOrtcNKsOwuCw1sh/JHMnYG37BMBiiriSvAJ4/nRXevovxhVru9PROkila4OrzuOPa0tjWF8knL+iBkqVnDgxj5KW6JZHImJ1KT7kXZzRi1NfWq9FfI2tDJ7Betze1l8zadJOzqDOsOlyOY7D31l/u9ZfgYkJ+X5hqAByhNiMQnkQsu+wXcBGZv8iTC3ZsIVb14ARrajKi8CcdgZu2bJMkixPjjZBfCJ+WmYtDqFpegSqwkPkBcHZml6hvG/3UCAZ3pPT2AA/dyMOTCZp8dyJxpeebLvPDmRfhqxHmPMQ9RoSQuGn9QFqChWBRiblklRC25r/9Qge9K2m
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(36756003)(186003)(86362001)(26005)(2906002)(2616005)(76116006)(38070700005)(91956017)(6916009)(8936002)(71200400001)(66446008)(64756008)(66556008)(66476007)(54906003)(66946007)(508600001)(316002)(5660300002)(6486002)(8676002)(53546011)(6512007)(6506007)(122000001)(38100700002)(33656002)(4326008)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <E6787D72FCAB7740902413998A0D7865@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB3367
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ AM5EUR03FT005.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	26f2d739-107a-4ffe-ed6a-08d9ae8fdd56
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	sdqcJiPxR1jRaI+EKarlMfF/WGpBjeUosL5e/lPGETrGaXerWocoWFiIJ0fTI4I+wjLS8Rr5jYUNiGHyXqPhDUcE51Gf7dH0qTQP48pT1FPJg7vDHIiHNAjz5j/ECXWZSlwHUEbqbkWuTNup7tiQzg6K+aueriSuRHnZFtJE5lSJ7s5m97q0tunogBKjiCD4kapCYikeQrqdiIFX1vrmcaCCs4cAC6Y4Yaz8Tc9HmRcGTISO+9WJowaRBJNLnPNRNtoaJeaL6UhDTLK/1uMaKYRjb+dApmou52iWtYfAUi6+vHZ/v9Q5E2SykuHhaoN658eOcC4TlX71gJxk04VfJ57Jh0wwqpxaneOyrJEIGjP6bPgY3kINleqANDJVDnFz5A9Iod32MdCCJxr9IOJeDQUEgjdUDTr4agep4X9jkGNoqFNEZkgouh3am6SOJMNgkM0dggDoOgstIre2CKRjwPD6F4xUQhb/cqiPJ644+U+eNYHxLNNwhy8eeKJPOjixYH2OlDtDWT6ZNFOb3JXSoYaDJSPPhzU1tlSMl/NG52yQ0K1vhdKAFIqzdUNLcVTJZ/S77WiEH+jHsYg1IpCd7+0m1bYEMHiVHHveCebokSgayw0X4z/eusjBmmHSTXWrvKA1OOlqQ3xqEx7ofcvEHz/YqJjNQoI2YeoxCue2RGFgfb7qPLMmFK8mJ9fcSn8ZQcm5PJMaO5G3A4YIBKvRBA==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(36840700001)(46966006)(6512007)(86362001)(356005)(26005)(508600001)(107886003)(186003)(47076005)(6862004)(316002)(33656002)(6506007)(8936002)(82310400004)(53546011)(6486002)(4326008)(70206006)(81166007)(36756003)(5660300002)(36860700001)(2906002)(70586007)(54906003)(8676002)(336012)(2616005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2021 14:45:32.4617
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a038824d-49c6-41bf-6ad6-08d9ae8fe6ca
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	AM5EUR03FT005.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB4403
 
-From: Tianyu Lan <Tianyu.Lan@microsoft.com>
+Hi Julien,
 
-In Isolation VM, all shared memory with host needs to mark visible
-to host via hvcall. vmbus_establish_gpadl() has already done it for
-netvsc rx/tx ring buffer. The page buffer used by vmbus_sendpacket_
-pagebuffer() stills need to be handled. Use DMA API to map/umap
-these memory during sending/receiving packet and Hyper-V swiotlb
-bounce buffer dma address will be returned. The swiotlb bounce buffer
-has been masked to be visible to host during boot up.
+> On 23 Nov 2021, at 13:54, Julien Grall <julien@xen.org> wrote:
+>=20
+> Hi Stefano,
+>=20
+> On 19/11/2021 18:55, Stefano Stabellini wrote:
+>> On Fri, 19 Nov 2021, Julien Grall wrote:
+>>> I like better Juergen's version. But before agreeing on the command lin=
+e , I
+>>> would like to understand how Linux is dealing with big.LITTLE today (se=
+e my
+>>> question above).
+>> I also like Juergen's version better :-)
+>> The device tree binding that covers big.LITTLE is the same that covers
+>> cpus: Documentation/devicetree/bindings/arm/cpus.yaml
+>=20
+> Are you sure? I found Documentation/devicetree/bindings/arm/cpu-capacity.=
+txt.
+>=20
+>> So basically, you can tell it is a big.LITTLE system because the
+>> compatible strings differ between certain cpus, e.g.:
+>>       cpu@0 {
+>>         device_type =3D "cpu";
+>>         compatible =3D "arm,cortex-a15";
+>>         reg =3D <0x0>;
+>>       };
+>>       cpu@1 {
+>>         device_type =3D "cpu";
+>>         compatible =3D "arm,cortex-a15";
+>>         reg =3D <0x1>;
+>>       };
+>>       cpu@100 {
+>>         device_type =3D "cpu";
+>>         compatible =3D "arm,cortex-a7";
+>>         reg =3D <0x100>;
+>>       };
+>>       cpu@101 {
+>>         device_type =3D "cpu";
+>>         compatible =3D "arm,cortex-a7";
+>>         reg =3D <0x101>;
+>>       };
+>=20
+> I have not found any code in Linux using the compatible. Instead, they al=
+l seem to use the cpu-map (see drivers/base/arch_topology.c).
+>=20
+> Anyway, to me it would be better to parse the Device-Tree over using the =
+MIDR. The advantage is we can cover a wide range of cases (you may have pro=
+cessor with the same MIDR but different frequency). For now, we could creat=
+e a cpupool per cluster.
 
-Allocate rx/tx ring buffer via dma_alloc_noncontiguous() in Isolation
-VM. After calling vmbus_establish_gpadl() which marks these pages visible
-to host, map these pages unencrypted addes space via dma_vmap_noncontiguous().
+This is a really good idea as this could also work for NUMA systems.
 
-Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
----
- drivers/net/hyperv/hyperv_net.h   |   5 +
- drivers/net/hyperv/netvsc.c       | 192 +++++++++++++++++++++++++++---
- drivers/net/hyperv/rndis_filter.c |   2 +
- include/linux/hyperv.h            |   6 +
- 4 files changed, 190 insertions(+), 15 deletions(-)
+So reg & ~0xff would give the cluster number ?
 
-diff --git a/drivers/net/hyperv/hyperv_net.h b/drivers/net/hyperv/hyperv_net.h
-index 315278a7cf88..31c77a00d01e 100644
---- a/drivers/net/hyperv/hyperv_net.h
-+++ b/drivers/net/hyperv/hyperv_net.h
-@@ -164,6 +164,7 @@ struct hv_netvsc_packet {
- 	u32 total_bytes;
- 	u32 send_buf_index;
- 	u32 total_data_buflen;
-+	struct hv_dma_range *dma_range;
- };
- 
- #define NETVSC_HASH_KEYLEN 40
-@@ -1074,6 +1075,7 @@ struct netvsc_device {
- 
- 	/* Receive buffer allocated by us but manages by NetVSP */
- 	void *recv_buf;
-+	struct sg_table *recv_sgt;
- 	u32 recv_buf_size; /* allocated bytes */
- 	struct vmbus_gpadl recv_buf_gpadl_handle;
- 	u32 recv_section_cnt;
-@@ -1082,6 +1084,7 @@ struct netvsc_device {
- 
- 	/* Send buffer allocated by us */
- 	void *send_buf;
-+	struct sg_table *send_sgt;
- 	u32 send_buf_size;
- 	struct vmbus_gpadl send_buf_gpadl_handle;
- 	u32 send_section_cnt;
-@@ -1731,4 +1734,6 @@ struct rndis_message {
- #define RETRY_US_HI	10000
- #define RETRY_MAX	2000	/* >10 sec */
- 
-+void netvsc_dma_unmap(struct hv_device *hv_dev,
-+		      struct hv_netvsc_packet *packet);
- #endif /* _HYPERV_NET_H */
-diff --git a/drivers/net/hyperv/netvsc.c b/drivers/net/hyperv/netvsc.c
-index 396bc1c204e6..9cdc71930830 100644
---- a/drivers/net/hyperv/netvsc.c
-+++ b/drivers/net/hyperv/netvsc.c
-@@ -20,6 +20,7 @@
- #include <linux/vmalloc.h>
- #include <linux/rtnetlink.h>
- #include <linux/prefetch.h>
-+#include <linux/gfp.h>
- 
- #include <asm/sync_bitops.h>
- #include <asm/mshyperv.h>
-@@ -146,15 +147,39 @@ static struct netvsc_device *alloc_net_device(void)
- 	return net_device;
- }
- 
-+static struct hv_device *netvsc_channel_to_device(struct vmbus_channel *channel)
-+{
-+	struct vmbus_channel *primary = channel->primary_channel;
-+
-+	return primary ? primary->device_obj : channel->device_obj;
-+}
-+
- static void free_netvsc_device(struct rcu_head *head)
- {
- 	struct netvsc_device *nvdev
- 		= container_of(head, struct netvsc_device, rcu);
-+	struct hv_device *dev =
-+		netvsc_channel_to_device(nvdev->chan_table[0].channel);
- 	int i;
- 
- 	kfree(nvdev->extension);
--	vfree(nvdev->recv_buf);
--	vfree(nvdev->send_buf);
-+
-+	if (nvdev->recv_sgt) {
-+		dma_vunmap_noncontiguous(&dev->device, nvdev->recv_buf);
-+		dma_free_noncontiguous(&dev->device, nvdev->recv_buf_size,
-+				       nvdev->recv_sgt, DMA_FROM_DEVICE);
-+	} else {
-+		vfree(nvdev->recv_buf);
-+	}
-+
-+	if (nvdev->send_sgt) {
-+		dma_vunmap_noncontiguous(&dev->device, nvdev->send_buf);
-+		dma_free_noncontiguous(&dev->device, nvdev->send_buf_size,
-+				       nvdev->send_sgt, DMA_TO_DEVICE);
-+	} else {
-+		vfree(nvdev->send_buf);
-+	}
-+
- 	kfree(nvdev->send_section_map);
- 
- 	for (i = 0; i < VRSS_CHANNEL_MAX; i++) {
-@@ -348,7 +373,21 @@ static int netvsc_init_buf(struct hv_device *device,
- 		buf_size = min_t(unsigned int, buf_size,
- 				 NETVSC_RECEIVE_BUFFER_SIZE_LEGACY);
- 
--	net_device->recv_buf = vzalloc(buf_size);
-+	if (hv_isolation_type_snp()) {
-+		net_device->recv_sgt =
-+			dma_alloc_noncontiguous(&device->device, buf_size,
-+						DMA_FROM_DEVICE, GFP_KERNEL, 0);
-+		if (!net_device->recv_sgt) {
-+			pr_err("Fail to allocate recv buffer buf_size %d.\n.", buf_size);
-+			ret = -ENOMEM;
-+			goto cleanup;
-+		}
-+
-+		net_device->recv_buf = (void *)net_device->recv_sgt->sgl->dma_address;
-+	} else {
-+		net_device->recv_buf = vzalloc(buf_size);
-+	}
-+
- 	if (!net_device->recv_buf) {
- 		netdev_err(ndev,
- 			   "unable to allocate receive buffer of size %u\n",
-@@ -357,8 +396,6 @@ static int netvsc_init_buf(struct hv_device *device,
- 		goto cleanup;
- 	}
- 
--	net_device->recv_buf_size = buf_size;
--
- 	/*
- 	 * Establish the gpadl handle for this buffer on this
- 	 * channel.  Note: This call uses the vmbus connection rather
-@@ -373,6 +410,19 @@ static int netvsc_init_buf(struct hv_device *device,
- 		goto cleanup;
- 	}
- 
-+	if (net_device->recv_sgt) {
-+		net_device->recv_buf =
-+			dma_vmap_noncontiguous(&device->device, buf_size,
-+					       net_device->recv_sgt);
-+		if (!net_device->recv_buf) {
-+			pr_err("Fail to vmap recv buffer.\n");
-+			ret = -ENOMEM;
-+			goto cleanup;
-+		}
-+	}
-+
-+	net_device->recv_buf_size = buf_size;
-+
- 	/* Notify the NetVsp of the gpadl handle */
- 	init_packet = &net_device->channel_init_pkt;
- 	memset(init_packet, 0, sizeof(struct nvsp_message));
-@@ -454,14 +504,27 @@ static int netvsc_init_buf(struct hv_device *device,
- 	buf_size = device_info->send_sections * device_info->send_section_size;
- 	buf_size = round_up(buf_size, PAGE_SIZE);
- 
--	net_device->send_buf = vzalloc(buf_size);
-+	if (hv_isolation_type_snp()) {
-+		net_device->send_sgt =
-+			dma_alloc_noncontiguous(&device->device, buf_size,
-+						DMA_TO_DEVICE, GFP_KERNEL, 0);
-+		if (!net_device->send_sgt) {
-+			pr_err("Fail to allocate send buffer buf_size %d.\n.", buf_size);
-+			ret = -ENOMEM;
-+			goto cleanup;
-+		}
-+
-+		net_device->send_buf = (void *)net_device->send_sgt->sgl->dma_address;
-+	} else {
-+		net_device->send_buf = vzalloc(buf_size);
-+	}
-+
- 	if (!net_device->send_buf) {
- 		netdev_err(ndev, "unable to allocate send buffer of size %u\n",
- 			   buf_size);
- 		ret = -ENOMEM;
- 		goto cleanup;
- 	}
--	net_device->send_buf_size = buf_size;
- 
- 	/* Establish the gpadl handle for this buffer on this
- 	 * channel.  Note: This call uses the vmbus connection rather
-@@ -476,6 +539,19 @@ static int netvsc_init_buf(struct hv_device *device,
- 		goto cleanup;
- 	}
- 
-+	if (net_device->send_sgt) {
-+		net_device->send_buf =
-+			dma_vmap_noncontiguous(&device->device, buf_size,
-+					       net_device->send_sgt);
-+		if (!net_device->send_buf) {
-+			pr_err("Fail to vmap send buffer.\n");
-+			ret = -ENOMEM;
-+			goto cleanup;
-+		}
-+	}
-+
-+	net_device->send_buf_size = buf_size;
-+
- 	/* Notify the NetVsp of the gpadl handle */
- 	init_packet = &net_device->channel_init_pkt;
- 	memset(init_packet, 0, sizeof(struct nvsp_message));
-@@ -766,7 +842,7 @@ static void netvsc_send_tx_complete(struct net_device *ndev,
- 
- 	/* Notify the layer above us */
- 	if (likely(skb)) {
--		const struct hv_netvsc_packet *packet
-+		struct hv_netvsc_packet *packet
- 			= (struct hv_netvsc_packet *)skb->cb;
- 		u32 send_index = packet->send_buf_index;
- 		struct netvsc_stats *tx_stats;
-@@ -782,6 +858,7 @@ static void netvsc_send_tx_complete(struct net_device *ndev,
- 		tx_stats->bytes += packet->total_bytes;
- 		u64_stats_update_end(&tx_stats->syncp);
- 
-+		netvsc_dma_unmap(ndev_ctx->device_ctx, packet);
- 		napi_consume_skb(skb, budget);
- 	}
- 
-@@ -946,6 +1023,87 @@ static void netvsc_copy_to_send_buf(struct netvsc_device *net_device,
- 		memset(dest, 0, padding);
- }
- 
-+void netvsc_dma_unmap(struct hv_device *hv_dev,
-+		      struct hv_netvsc_packet *packet)
-+{
-+	u32 page_count = packet->cp_partial ?
-+		packet->page_buf_cnt - packet->rmsg_pgcnt :
-+		packet->page_buf_cnt;
-+	int i;
-+
-+	if (!hv_is_isolation_supported())
-+		return;
-+
-+	if (!packet->dma_range)
-+		return;
-+
-+	for (i = 0; i < page_count; i++)
-+		dma_unmap_single(&hv_dev->device, packet->dma_range[i].dma,
-+				 packet->dma_range[i].mapping_size,
-+				 DMA_TO_DEVICE);
-+
-+	kfree(packet->dma_range);
-+}
-+
-+/* netvsc_dma_map - Map swiotlb bounce buffer with data page of
-+ * packet sent by vmbus_sendpacket_pagebuffer() in the Isolation
-+ * VM.
-+ *
-+ * In isolation VM, netvsc send buffer has been marked visible to
-+ * host and so the data copied to send buffer doesn't need to use
-+ * bounce buffer. The data pages handled by vmbus_sendpacket_pagebuffer()
-+ * may not be copied to send buffer and so these pages need to be
-+ * mapped with swiotlb bounce buffer. netvsc_dma_map() is to do
-+ * that. The pfns in the struct hv_page_buffer need to be converted
-+ * to bounce buffer's pfn. The loop here is necessary because the
-+ * entries in the page buffer array are not necessarily full
-+ * pages of data.  Each entry in the array has a separate offset and
-+ * len that may be non-zero, even for entries in the middle of the
-+ * array.  And the entries are not physically contiguous.  So each
-+ * entry must be individually mapped rather than as a contiguous unit.
-+ * So not use dma_map_sg() here.
-+ */
-+static int netvsc_dma_map(struct hv_device *hv_dev,
-+			  struct hv_netvsc_packet *packet,
-+			  struct hv_page_buffer *pb)
-+{
-+	u32 page_count =  packet->cp_partial ?
-+		packet->page_buf_cnt - packet->rmsg_pgcnt :
-+		packet->page_buf_cnt;
-+	dma_addr_t dma;
-+	int i;
-+
-+	if (!hv_is_isolation_supported())
-+		return 0;
-+
-+	packet->dma_range = kcalloc(page_count,
-+				    sizeof(*packet->dma_range),
-+				    GFP_KERNEL);
-+	if (!packet->dma_range)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < page_count; i++) {
-+		char *src = phys_to_virt((pb[i].pfn << HV_HYP_PAGE_SHIFT)
-+					 + pb[i].offset);
-+		u32 len = pb[i].len;
-+
-+		dma = dma_map_single(&hv_dev->device, src, len,
-+				     DMA_TO_DEVICE);
-+		if (dma_mapping_error(&hv_dev->device, dma)) {
-+			kfree(packet->dma_range);
-+			return -ENOMEM;
-+		}
-+
-+		packet->dma_range[i].dma = dma;
-+		packet->dma_range[i].mapping_size = len;
-+		pb[i].pfn = dma >> HV_HYP_PAGE_SHIFT;
-+		pb[i].offset = offset_in_hvpage(dma);
-+		pb[i].len = len;
-+	}
-+
-+	return 0;
-+}
-+
- static inline int netvsc_send_pkt(
- 	struct hv_device *device,
- 	struct hv_netvsc_packet *packet,
-@@ -986,14 +1144,24 @@ static inline int netvsc_send_pkt(
- 
- 	trace_nvsp_send_pkt(ndev, out_channel, rpkt);
- 
-+	packet->dma_range = NULL;
- 	if (packet->page_buf_cnt) {
- 		if (packet->cp_partial)
- 			pb += packet->rmsg_pgcnt;
- 
-+		ret = netvsc_dma_map(ndev_ctx->device_ctx, packet, pb);
-+		if (ret) {
-+			ret = -EAGAIN;
-+			goto exit;
-+		}
-+
- 		ret = vmbus_sendpacket_pagebuffer(out_channel,
- 						  pb, packet->page_buf_cnt,
- 						  &nvmsg, sizeof(nvmsg),
- 						  req_id);
-+
-+		if (ret)
-+			netvsc_dma_unmap(ndev_ctx->device_ctx, packet);
- 	} else {
- 		ret = vmbus_sendpacket(out_channel,
- 				       &nvmsg, sizeof(nvmsg),
-@@ -1001,6 +1169,7 @@ static inline int netvsc_send_pkt(
- 				       VMBUS_DATA_PACKET_FLAG_COMPLETION_REQUESTED);
- 	}
- 
-+exit:
- 	if (ret == 0) {
- 		atomic_inc_return(&nvchan->queue_sends);
- 
-@@ -1515,13 +1684,6 @@ static int netvsc_process_raw_pkt(struct hv_device *device,
- 	return 0;
- }
- 
--static struct hv_device *netvsc_channel_to_device(struct vmbus_channel *channel)
--{
--	struct vmbus_channel *primary = channel->primary_channel;
--
--	return primary ? primary->device_obj : channel->device_obj;
--}
--
- /* Network processing softirq
-  * Process data in incoming ring buffer from host
-  * Stops when ring is empty or budget is met or exceeded.
-diff --git a/drivers/net/hyperv/rndis_filter.c b/drivers/net/hyperv/rndis_filter.c
-index f6c9c2a670f9..448fcc325ed7 100644
---- a/drivers/net/hyperv/rndis_filter.c
-+++ b/drivers/net/hyperv/rndis_filter.c
-@@ -361,6 +361,8 @@ static void rndis_filter_receive_response(struct net_device *ndev,
- 			}
- 		}
- 
-+		netvsc_dma_unmap(((struct net_device_context *)
-+			netdev_priv(ndev))->device_ctx, &request->pkt);
- 		complete(&request->wait_event);
- 	} else {
- 		netdev_err(ndev,
-diff --git a/include/linux/hyperv.h b/include/linux/hyperv.h
-index 4d44fb3b3f1c..8882e46d1070 100644
---- a/include/linux/hyperv.h
-+++ b/include/linux/hyperv.h
-@@ -25,6 +25,7 @@
- #include <linux/interrupt.h>
- #include <linux/reciprocal_div.h>
- #include <asm/hyperv-tlfs.h>
-+#include <linux/dma-map-ops.h>
- 
- #define MAX_PAGE_BUFFER_COUNT				32
- #define MAX_MULTIPAGE_BUFFER_COUNT			32 /* 128K */
-@@ -1583,6 +1584,11 @@ struct hyperv_service_callback {
- 	void (*callback)(void *context);
- };
- 
-+struct hv_dma_range {
-+	dma_addr_t dma;
-+	u32 mapping_size;
-+};
-+
- #define MAX_SRV_VER	0x7ffffff
- extern bool vmbus_prep_negotiate_resp(struct icmsg_hdr *icmsghdrp, u8 *buf, u32 buflen,
- 				const int *fw_version, int fw_vercnt,
--- 
-2.25.1
+We will probably end up splitting cores into different cpupools even if the=
+y are all the same as there are several CPUs having several clusters but th=
+e same cores (I recall some NXP boards being like that).
+
+Some device tree also have a cpu-map definition:
+        cpu-map {
+            cluster0 {
+                core0 {
+                    cpu =3D <&A57_0>;
+                };
+                core1 {
+                    cpu =3D <&A57_1>;
+                };
+            };
+
+            cluster1 {
+                core0 {
+                    cpu =3D <&A53_0>;
+                };
+                core1 {
+                    cpu =3D <&A53_1>;
+                };
+                core2 {
+                    cpu =3D <&A53_2>;
+                };
+                core3 {
+                    cpu =3D <&A53_3>;
+                };
+            };
+        };
+
+@stefano: is the cpu-map something standard ? Lots of device trees do have =
+it in Linux now but I do not recall seeing that on older device trees.
+
+Maybe using cpu-map could be a solution, we could say that device tree with=
+out a cpu-map are not supported.
+
+Cheers
+Bertrand
+
+
+
+>=20
+> Cheers,
+>=20
+> --=20
+> Julien Grall
 
 
