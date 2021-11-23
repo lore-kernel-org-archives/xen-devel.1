@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0FBAC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 23 Nov 2021 13:21:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.229581.397004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88D05C433FE
+	for <xen-devel@archiver.kernel.org>; Tue, 23 Nov 2021 13:21:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.229580.396993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mpVjD-0002nx-5W; Tue, 23 Nov 2021 13:20:55 +0000
+	id 1mpVjB-0002YE-Tn; Tue, 23 Nov 2021 13:20:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 229581.397004; Tue, 23 Nov 2021 13:20:55 +0000
+Received: by outflank-mailman (output) from mailman id 229580.396993; Tue, 23 Nov 2021 13:20:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mpVjD-0002nq-1q; Tue, 23 Nov 2021 13:20:55 +0000
-Received: by outflank-mailman (input) for mailman id 229581;
- Tue, 23 Nov 2021 13:20:53 +0000
+	id 1mpVjB-0002Y7-Qo; Tue, 23 Nov 2021 13:20:53 +0000
+Received: by outflank-mailman (input) for mailman id 229580;
+ Tue, 23 Nov 2021 13:20:52 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Yj1i=QK=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mpVjB-0002Xw-Cx
- for xen-devel@lists.xenproject.org; Tue, 23 Nov 2021 13:20:53 +0000
+ id 1mpVjA-0002Xw-KR
+ for xen-devel@lists.xenproject.org; Tue, 23 Nov 2021 13:20:52 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2e06a899-4c60-11ec-a9d2-d9f7a1cc8784;
+ id 2daee996-4c60-11ec-a9d2-d9f7a1cc8784;
  Tue, 23 Nov 2021 14:20:51 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4E28321954;
- Tue, 23 Nov 2021 13:20:51 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A120821940;
+ Tue, 23 Nov 2021 13:20:50 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2401413E08;
- Tue, 23 Nov 2021 13:20:51 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6A6D213DE9;
+ Tue, 23 Nov 2021 13:20:50 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 8J6vB7PqnGH9CgAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 23 Nov 2021 13:20:51 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id fPTAGLLqnGH9CgAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 23 Nov 2021 13:20:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,59 +53,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e06a899-4c60-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 2daee996-4c60-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1637673651; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=ydq29op3Uut8kGUc+uMZHwfZgLUyDFkJcJa0BA/hp2o=;
-	b=aE2lIQcvn8yWSfbm78fERFlbWdgumlWSpB0YoGZ7L/CIcN/LI4T9kEzzbVgNcrqrqvpWZx
-	w1nQqngyJ2tp7D8IOWuMF6PnxBMO4Q66+jAZhkS673UjP59gjXs0HGzPMrHRHQc9dfy6IP
-	rxr/pcv+pVL9A9WYShqOMfI28e3/hNU=
+	t=1637673650; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=7MFKZbNAVdl2EUgQeeUJA5/cSNPz9947JBoucY3tvZA=;
+	b=ldzEZ69g0Qwal/zZhhM52f60Z7cvvWSVyAQPpYuh4bnOgmRkEkBQMMgmvQpcCNp3uGWvuK
+	IV21m8dRP++wTEM9SyEP5tRDzQOY+uxBfjVpPueU9loJR9cb2w5WB9URqB/nOK1EOs5A0I
+	WS4DFXMVoH6UQuEFad+LbeUJ4ySoVjo=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	linux-usb@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Konrad Rzeszutek Wilk <Konrad.wilk@oracle.com>
-Subject: [PATCH v7 3/3] xen: add Xen pvUSB maintainer
-Date: Tue, 23 Nov 2021 14:20:48 +0100
-Message-Id: <20211123132048.5335-4-jgross@suse.com>
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: [PATCH v7 0/3] xen, usb: support pvUSB frontend driver
+Date: Tue, 23 Nov 2021 14:20:45 +0100
+Message-Id: <20211123132048.5335-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211123132048.5335-1-jgross@suse.com>
-References: <20211123132048.5335-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add myself as maintainer for the Xen pvUSB stuff.
+This series adds XEN guest pvUSB support. With pvUSB it is possible to
+use physical USB devices from a XEN domain.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Konrad Rzeszutek Wilk <Konrad.wilk@oracle.com>
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Since V4 a lot of time (several years) has passed. This is a revived
+attempt to get the frontend into the kernel.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5250298d2817..da7fd3d32dc4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -20831,6 +20831,14 @@ F:	drivers/scsi/xen-scsifront.c
- F:	drivers/xen/xen-scsiback.c
- F:	include/xen/interface/io/vscsiif.h
- 
-+XEN PVUSB DRIVER
-+M:	Juergen Gross <jgross@suse.com>
-+L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
-+L:	linux-usb@vger.kernel.org
-+S:	Supported
-+F:	divers/usb/host/xen*
-+F:	include/xen/interface/io/usbif.h
-+
- XEN SOUND FRONTEND DRIVER
- M:	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
- L:	xen-devel@lists.xenproject.org (moderated for non-subscribers)
+The support consists of a frontend in form of a virtual hcd driver in
+the unprivileged domU passing I/O-requests to the backend in a driver
+domain (usually Dom0). The backend is not part of this patch series,
+as it is supported via qemu.
+
+The code is taken (and adapted) from the original pvUSB implementation
+done for Linux 2.6 in 2008 by Fujitsu.
+
+Normal operation of USB devices by adding and removing them dynamically
+to/from a domain has been tested using various USB devices (USB 1.1,
+2.0 and 3.0) using the qemu based backend.
+
+Changes in V7:
+- use SPDX header in usbif.h
+
+Changes in V6:
+- add SPDX line to driver
+
+Changes in V5:
+- added interface documentation to patch 1
+- frontend no longer trusts backend to return only sane values
+
+Changes in V4:
+- remove sysfs file from frontend, as it violated the "one value per file"
+  rule and didn't serve any real purpose.
+
+Changes in V3:
+- move frontend to drivers/usb/host and rename it to xen-hcd.
+- changed name prefixes in patch 1 to "xenusb" as requested by Greg
+- use __u<n> types rather than uint<n>_t as requested by Greg
+
+Changes in V2:
+- removed backend, as it can be implemented in user land
+- added some access macros and definitions to the pvUSB interface
+  description to make it independant from linux kernel USB internals
+- adapted frontend to newer kernel version and use new pvUSB
+  interface macros
+- set port status in one chunk as suggested by Oliver Neukum
+
+Juergen Gross (3):
+  usb: Add Xen pvUSB protocol description
+  usb: Introduce Xen pvUSB frontend (xen hcd)
+  xen: add Xen pvUSB maintainer
+
+ MAINTAINERS                      |    8 +
+ drivers/usb/host/Kconfig         |   11 +
+ drivers/usb/host/Makefile        |    1 +
+ drivers/usb/host/xen-hcd.c       | 1606 ++++++++++++++++++++++++++++++
+ include/xen/interface/io/usbif.h |  405 ++++++++
+ 5 files changed, 2031 insertions(+)
+ create mode 100644 drivers/usb/host/xen-hcd.c
+ create mode 100644 include/xen/interface/io/usbif.h
+
 -- 
 2.26.2
 
