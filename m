@@ -4,38 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DBC8C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Nov 2021 19:04:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.230539.398528 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06BBBC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Nov 2021 20:54:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.230552.398587 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mpxYe-0004Xt-NT; Wed, 24 Nov 2021 19:03:52 +0000
+	id 1mpzHF-0007CP-E3; Wed, 24 Nov 2021 20:54:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 230539.398528; Wed, 24 Nov 2021 19:03:52 +0000
+Received: by outflank-mailman (output) from mailman id 230552.398587; Wed, 24 Nov 2021 20:54:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mpxYe-0004Xm-KS; Wed, 24 Nov 2021 19:03:52 +0000
-Received: by outflank-mailman (input) for mailman id 230539;
- Wed, 24 Nov 2021 19:03:51 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jHA0=QL=srcf.net=amc96@srs-se1.protection.inumbo.net>)
- id 1mpxYd-0004XJ-Di
- for xen-devel@lists.xenproject.org; Wed, 24 Nov 2021 19:03:51 +0000
-Received: from ppsw-43.csi.cam.ac.uk (ppsw-43.csi.cam.ac.uk [131.111.8.143])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4205b5fb-4d59-11ec-9787-a32c541c8605;
- Wed, 24 Nov 2021 20:03:50 +0100 (CET)
-Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:38880)
- by ppsw-43.csi.cam.ac.uk (ppsw.cam.ac.uk [131.111.8.139]:25)
- with esmtps (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- id 1mpxYb-000aj2-nh (Exim 4.95) (return-path <amc96@srcf.net>);
- Wed, 24 Nov 2021 19:03:49 +0000
-Received: from [192.168.1.10] (host-92-12-61-86.as13285.net [92.12.61.86])
- (Authenticated sender: amc96)
- by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id 2FA4E1FDB0;
- Wed, 24 Nov 2021 19:03:49 +0000 (GMT)
+	id 1mpzHF-00079N-1E; Wed, 24 Nov 2021 20:54:01 +0000
+Received: by outflank-mailman (input) for mailman id 230552;
+ Wed, 24 Nov 2021 20:53:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=vMcq=QL=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1mpzHD-0006Ij-Hw
+ for xen-devel@lists.xenproject.org; Wed, 24 Nov 2021 20:53:59 +0000
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [2a00:1450:4864:20::234])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a551efa8-4d68-11ec-a9d2-d9f7a1cc8784;
+ Wed, 24 Nov 2021 21:53:58 +0100 (CET)
+Received: by mail-lj1-x234.google.com with SMTP id l9so8085216ljq.5
+ for <xen-devel@lists.xenproject.org>; Wed, 24 Nov 2021 12:53:58 -0800 (PST)
+Received: from otyshchenko.router ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id j11sm97608ljc.9.2021.11.24.12.53.57
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 24 Nov 2021 12:53:58 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,51 +45,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4205b5fb-4d59-11ec-9787-a32c541c8605
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: https://help.uis.cam.ac.uk/email-scanner-virus
-Message-ID: <c22b2d35-7b72-3e44-ce92-2a3fab20af5e@srcf.net>
-Date: Wed, 24 Nov 2021 19:03:49 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.1
-Subject: Re: [PATCH for-4.16] x86/cpuid: do not shrink number of leaves in max
- policies
-Content-Language: en-GB
-To: Ian Jackson <iwj@xenproject.org>
-Cc: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- Wei Liu <wl@xen.org>
-References: <20211124161649.83189-1-roger.pau@citrix.com>
- <24990.26451.287618.213116@mariner.uk.xensource.com>
- <9fd0c2f4-1b8f-bcd3-93bd-eea47b61e445@srcf.net>
- <24990.32581.766301.992950@mariner.uk.xensource.com>
- <471892da-6e64-2faa-3198-3859531c4d11@srcf.net>
- <24990.35845.537742.58478@mariner.uk.xensource.com>
-From: Andrew Cooper <amc96@srcf.net>
-In-Reply-To: <24990.35845.537742.58478@mariner.uk.xensource.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: a551efa8-4d68-11ec-a9d2-d9f7a1cc8784
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=4IyNvYikGx/k9tdDU8szk4MiN32bXrdjaPGV4oWEMDs=;
+        b=n18cstBkdjX7c+UShE1M0pp9AYFZa32iOb6HZ8rdrt8352PocjOxC7sjVmfskpFFXJ
+         cP7FvZ6BWua0oznO+XQuZiW0mLUpmRy/h+zuw8dCqT/V+JNfFBCfu/u5oiBnVWhVtKiD
+         R0+SnwDYwNlsoJhw/nYxYgSSU94QG+gmJGIwNvZB7CPivO3tHkuFA7PMxidgOT42knwb
+         8+rQr70H2QlDBFrCqfUR21+P6rOWVBDezxc6r+nKLjN9Sgrj8z8x9gKvTIgM25fwD6pT
+         f/T2ppOTcyjYvVgFEMcfRXKpWsQYSP/Q7CFluriF7V92BmHfr0hnGQmJkYIyOT12Uqji
+         MVwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=4IyNvYikGx/k9tdDU8szk4MiN32bXrdjaPGV4oWEMDs=;
+        b=U+ASQf4MLyhXy33AQZd4Hx1OcUXwDeKc1XNGkjrTAlT4Uo+tBxU42BG/DIFgi8UJ++
+         xOrH9XLA56VP6/+JT0pLr8JzP1RupLOWwJYI/p9j/tF1aZCfYK9hdU135kmAs9v5iJo4
+         3H7avEUXm4V/bAL/0UReNLu6IFe9Deh9WthwT/uLFbphjS1QN6d+45LH6+A+Rlq1jhec
+         lQHexPRfOtSh7k6KiTUdnc6iEeZbmSOh+riljtiSW/0UVD0Mru4wLW1B6a50A3Djqa8S
+         imv+YHp1L9wmQBUMdzmcLC7dw/o19Xzx6JrmWwyL5gSij91LZgMwz+Wy6KZET1gA+2nD
+         RWaw==
+X-Gm-Message-State: AOAM532jFepp36erTlN8Yob6Xcol3Q92ovG21Yvzr6s1FvvFXYCpn/Oz
+	xbFTrdOa+p5k28g9VupdNI9mXIw/NkMFpA==
+X-Google-Smtp-Source: ABdhPJzbg9X4RTlpGwA/0nX9yg4bi5EiUdsWZuy6cXGIhElPKfsHllDQlnKAQo4feHXv3B9QBwXKpA==
+X-Received: by 2002:a2e:3c0c:: with SMTP id j12mr19053688lja.402.1637787238288;
+        Wed, 24 Nov 2021 12:53:58 -0800 (PST)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Rob Herring <robh+dt@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>
+Subject: [PATCH V3 6/6] dt-bindings: xen: Clarify "reg" purpose
+Date: Wed, 24 Nov 2021 22:53:43 +0200
+Message-Id: <1637787223-21129-7-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1637787223-21129-1-git-send-email-olekstysh@gmail.com>
+References: <1637787223-21129-1-git-send-email-olekstysh@gmail.com>
 
-On 24/11/2021 19:01, Ian Jackson wrote:
-> Andrew Cooper writes ("Re: [PATCH for-4.16] x86/cpuid: do not shrink number of leaves in max policies"):
->> It may revert cleanly, but it won't build because of the first hunk in
->> 81da2b544cbb00.  That hunk needs reverting too, because it too breaks
->> some cpuid= settings in VM config files.
-> Would you be able to prepare the two-patch series (?) that does the
-> necessary reverts ?
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-I'd do it as a single patch, but I can try to prepare one.
+Xen on Arm has gained new support recently to calculate and report
+extended regions (unused address space) safe to use for external
+mappings. These regions are reported via "reg" property under
+"hypervisor" node in the guest device-tree. As region 0 is reserved
+for grant table space (always present), the indexes for extended
+regions are 1...N.
 
->> In principle, the *final* thing the toolstack should do, *for brand new
->> VMs only*, is a shrink of that form, but this depends on whole load more
->> toolstack work before it can be done safely.  There is a plan to fix
->> CPUID handling, in a safe way, and it is ongoing (subject to all the
->> security interruptions), but has a long way to go yet.
-> For clarity: I think you are discussing future aspirations, which do
-> not concern us for 4.16.
+No device-tree bindings update is needed (except clarifying the text)
+as guest infers the presence of extended regions from the number
+of regions in "reg" property.
 
-Correct.
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+---
+According to the recent update to Xen's guest.txt:
+https://xenbits.xen.org/gitweb/?p=xen.git;a=blob_plain;f=docs/misc/arm/device-tree/guest.txt;hb=refs/heads/master
 
-~Andrew
+Changes V2 -> V3:
+   - new patch
+---
+ Documentation/devicetree/bindings/arm/xen.txt | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/arm/xen.txt b/Documentation/devicetree/bindings/arm/xen.txt
+index db5c56d..156fe10b 100644
+--- a/Documentation/devicetree/bindings/arm/xen.txt
++++ b/Documentation/devicetree/bindings/arm/xen.txt
+@@ -7,10 +7,14 @@ the following properties:
+ 	compatible = "xen,xen-<version>", "xen,xen";
+   where <version> is the version of the Xen ABI of the platform.
+ 
+-- reg: specifies the base physical address and size of a region in
+-  memory where the grant table should be mapped to, using an
+-  HYPERVISOR_memory_op hypercall. The memory region is large enough to map
+-  the whole grant table (it is larger or equal to gnttab_max_grant_frames()).
++- reg: specifies the base physical address and size of the regions in memory
++  where the special resources should be mapped to, using an HYPERVISOR_memory_op
++  hypercall.
++  Region 0 is reserved for mapping grant table, it must be always present.
++  The memory region is large enough to map the whole grant table (it is larger
++  or equal to gnttab_max_grant_frames()).
++  Regions 1...N are extended regions (unused address space) for mapping foreign
++  GFNs and grants, they might be absent if there is nothing to expose.
+   This property is unnecessary when booting Dom0 using ACPI.
+ 
+ - interrupts: the interrupt used by Xen to inject event notifications.
+-- 
+2.7.4
+
 
