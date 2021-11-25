@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9640EC433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:48:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231315.400366 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F311DC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:48:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.231318.400392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF6X-0002U1-FP; Thu, 25 Nov 2021 13:48:01 +0000
+	id 1mqF6c-0003hm-Li; Thu, 25 Nov 2021 13:48:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231315.400366; Thu, 25 Nov 2021 13:48:01 +0000
+Received: by outflank-mailman (output) from mailman id 231318.400392; Thu, 25 Nov 2021 13:48:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF6W-0002PB-Kg; Thu, 25 Nov 2021 13:48:00 +0000
-Received: by outflank-mailman (input) for mailman id 231315;
- Thu, 25 Nov 2021 13:47:58 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqF6b-0003cv-Md; Thu, 25 Nov 2021 13:48:05 +0000
+Received: by outflank-mailman (input) for mailman id 231318;
+ Thu, 25 Nov 2021 13:48:03 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqF0Z-00076i-Go
- for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:51 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 70706428-4df5-11ec-a9d2-d9f7a1cc8784;
- Thu, 25 Nov 2021 14:41:50 +0100 (CET)
+ id 1mqF0M-0007NX-As
+ for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:38 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 682b4b48-4df5-11ec-9787-a32c541c8605;
+ Thu, 25 Nov 2021 14:41:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,73 +38,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 70706428-4df5-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 682b4b48-4df5-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847710;
+  d=citrix.com; s=securemail; t=1637847696;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=+5GlssNqzezOU4qfx2oQIRykHbCirnnHU6kOEffUfDw=;
-  b=U3Ke+kHiIBtcVeKPXF7u2lZJKOX6HDX06BbfhNDRnOb+uByPdYk0y6KB
-   KoCAkdx2Fl6ONjGcGuBlQcB4AQ7wU8kmaCa1kGscSOdWFxLeOhb3t7QTe
-   Bnth5x0lSwi1+9L04VVVEqwgi2am5iMmoBJX0ypEYdAJLCfOKnuAHjWf1
-   Y=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: roT4h0hXUysONDDGByW2I8X4yX2zQKPYQYLq90RMxZ1O0lcTeqIMkXmQ8Zsof3sdeRT4rUvyDq
- Mkm/KnU38wBlNCJxumT81tPVhLYySfWefyDrhPMQHgplYg5H6R4tHbPuox35nm0vC0NSMyc0Zu
- TOwZWNRE8qk+7ZwlAvU/kZgPxpypVDCU/dq6wBnOGIvJ4+XI7mNisNjj8ojw3Q4IuN37h/acMj
- kZJrcP6XZFMhB+dLaQnPgvrG4T3jUIrDnaaip6Sabq6j4shJCD46OdEexpbmpLacCX3ZBZPNeg
- GEJG0zbS4ikWFqVFuFLNlG65
+  bh=0dwWPZpy0KkJ+4xdfvtRcrAAB0kbPpTPYuJAwuL/Dtw=;
+  b=aMv9hvnMFTmRvaM98W4aNy5AwrpgL8cY81hA32lBSG0awbI3KAAk31Nf
+   YrT6rQ7Eb3Ow9K3gbk6RQWF1iOqsq2yEsGTmN7X+ivQnqVvx3lKAc0ipG
+   7L8GdpZusOciyLJUlHqIjYbR4KJXv7tBPW/WnpDTVSjp/RKYx+VA8VTFs
+   M=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: yA3hOxrap6m/MqP6PIvyqdPo+yEYS+YXrv8+M+u630gD3nh6wM/unVUC/IPppLFE2HrAb0Oo8l
+ vlBwS69H0keRJujuK2AHHsKr1/BtkSEmapu0u5sC7/oKSMyZQyWvBydOMDpUTsp0ci1df7XCQn
+ WvZTfyxrmoh/S3eb4EiTHTXWTI/X9DpF3TmU8yNXmzv4qXKqdIRqLS0ajSyY8Ea2MA0deuU9H4
+ E/IMTZZAcrwp6G/yscmv2QWILi6rN4xXaKkwlcevtQ4fW3QvVuw5K6rd/GmUdUQ0nOKqXwUXi9
+ FcZ/ORgK/kyCtslFjS/M7sZw
 X-SBRS: 5.1
-X-MesageID: 59006050
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 58617683
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:DRU4L6g1xBZ/0G24iuslO8GVX161nRcKZh0ujC45NGQN5FlHY01je
- htvWmuCPqnZZ2D8ct0lOYzgoE8FuJPQnN8wSAo5r3s9ECwb9cadCdqndUqhZCn6wu8v7a5EA
- 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy3IDja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /0T5YHzakADHZTtne4aAhADKX1bZfBZreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNauPP
- 5JHMWc3BPjGSyFTHQYaJbsioMqh22KgTwxiplaqtbVitgA/yyQuieOwYbI5YOeiR9hRn0uej
- nLL+SL+GB5yHMeE1TOP/3aoh+nOtSD2QoQfEPu/7PECqEKX7nweDlsRT1TTiem0jAuyVsxSL
- 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WsVSO/037hmXzajZ6BrfAXILJhZDYtE7sM49RRQxy
- 0SE2djuAFRSXKa9ECzHsO3O9HXrZHZTfTRqiTI4oRUtvYn+46J0pDH2b9NpF/+81eepPGmt3
- GXfxMQhvIk7gckO3qS92FnIhTOwu5TEJjIIChXrsnGNtV0gOtP8D2C8wR2CtKsbct7FJrWUl
- CFcw5D20QwYMX2aeMVhqs0pFarh2fuKOSa0bbVHT8h4rGTFF5JOkOltDNBCyKVBbplsldzBO
- ha7VeZtCHh7ZibCUEOPS9jtY/nGNIC5fTgfatjab8BVfr96fxKd8SdlaCa4hj62zxdzwPFva
- M3FIK5A6Er27ow9klKLqxo1i+d3lkjSO0uPLXwE8/hX+eXHPyPEIVv0GFCPcvo4/Mu5TPb9q
- L5i2z+x40wHCoXWO3CPmaZKdAxiBSVrVPje9p0MHsbec1UOJY3UI6KIqV/XU9c+xPo9eyah1
- izVZ3K0P3Kj3yCaclvTNSg4AF4tNL4mxU8G0eUXFQ7A8xAejUyHtc/zrrM7Iusq8vJN1/lxQ
- 6VXcsmMGK0XGD/G5y4cfd/2q4k7LEanggeHPiyEZjkjfsE/G1yVq4G8Jga/pjMTCieXtNclp
- +Hy3A3sXpdeFR9pC9zbaazzwgrp72Qdgu97Q2DBPsJXJBf36IFvJiGo1q03LsgAJA/t3Dyf0
- wrKUx4UqfOU+90+8cXThLDCpICsSrMsEk1fFmjdzLC3KSiFoTbznd4eCL6FJGmPWnn19aOuY
- fRu48v9aPBXzkxXt4dcEqpwyf5s7dXYuLIHnB9vG2/Gbgr3B+o4cGWGx8RGqoZE2qRd5VmtQ
- kuK99RXZeeJNcfiHAJDLQYpdL3eh/Qdmz2U5vUpOkTqoiRw+ePfA0lVOhCNjg1bLad0b9x5k
- btw5pZO5lztkAcuP/aHkjtQpjaFIXE3Wqk6so0XXd3wgQ0xx1AeOZHRB0caOn1Uhwmg5qXyH
- gKpuQ==
-IronPort-HdrOrdr: A9a23:I8/ecKilnECIIwrEl8fB6sU4uXBQX1913DAbv31ZSRFFG/FwyP
- re/sjzhCWE6wr5BktBpTnZAtj/fZoYz+8G3WBjB8bSYOCGggWVxe5ZnPHfKlHbakrDH6tmpN
- hdmstFeZLN5DpB/LvHCWCDer5KqrbngcXY4dsy100AcegpUdAd0+4QMHfZLqQcfng+OXNNLu
- vm2iMxnUvZRZ14VLXcOlA1G8LEqtH3ipSjRRIdHRYo5Cmi5AnYqYLSIlyz2BoTbi1I+Kwl+2
- TeiQD1j5/T881T/iWslVM7oq4mwOcIBbN4dYCxo/lQDg+pphejZYxnVbHHlDcpoNu34FJvq9
- XIqwdIBbU515uEFFvZnTLdny3blBo+4X7rzlGVxVH5p9bieT48A81dwapEbxrw8SMbzYBB+Z
- MO+1jcm4tcDBvGkii4zcPPTQtWmk29pmdnufIPjkZYTZAVZNZq3NIiFXtuYcc99R/Bmdwa+a
- hVfZzhDc9tAAmnhqXizzZSKN/FZAV6Iv7JeDlNy5+oO/4/pgE986JS/r1uop46zuNId3Gfj9
- 60dpiA3Is+PfP+TZgNQtvpEvHHU1Akt3r3QS+vyWqOLtBwB5o7w6SHqondotvaI6AgzJw8no
- nMWlIdtWNaQTOoNSS+5uwDzvmWehTJYd3E8LAo26RE
+IronPort-Data: A9a23:LRHkIqCNuTeWvBVW/2rlw5YqxClBgxIJ4kV8jS/XYbTApDsq12dUn
+ DcaCG2Ca/3bZTf3KtEgPN62pBkAvZLSnNNmQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX540087wYbVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/2gunxY8g2
+ f9xlcKMElsWJYTIpPkaakwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTQ+9whsMlPY/zMZkWoH1IxjDFF/c2B5vERs0m4PcFjGlp2Z4eRp4yY
+ eICMiNSUkj/fCEVEVlGBckYxtmQnl7GJmgwRFW9+vNsvjm7IBZK+IbqNN3Za9mbX/J/l0yTp
+ n/F12nhCxRcP9uaoRKa9lq8i+mJmjn0MKoRE7ui//Isn1yXxUQUEhQdUVb9qv684ma0VshDM
+ UUS9mwrpLIr6U2wZtDnWluzp3vslgUHR9NaHuk+6QeM4qnZ+QCUAi4DVDEpQN05tucmSDoyz
+ FiLktj1Qzt1v9W9WX+bs7uZsz62ESwUNnMZIz8JSxMf5Nvuq511iQjAJv5hDaq0g9vdCTz2h
+ TeQo0AWhb8ekMoK3KWT5k3cjnSnoZ2hc+IuzlyJBCT/tFo/PdP7IdzzgbTG0RpeBNenYAPe7
+ Wkup+jA0LtSMoqkkBCQR9xYSdlF+M25GDHbhFduGbwo+DKs52OvcOhs3d1uGKt6Gp1aIGG0O
+ Sc/rSsUvcYOZyXyMcebdqroU5xypZUMA+gJQRw9gjBmRpFqPDGK8yh1DaJ79zC8yRN8+U3T1
+ HryTCpNMZr4Ifg4pNZVb71EuVPO+szZ7TmOLa0XNzz9jdKjiIe9EN/pymemYOEj97+jqw7I6
+ dtZPMbi40wBC7KhPXiHod9JcwFiwZ0H6Xfe8ZI/SwJ+ClA+RDFJ5wH5ndvNhLCJb4wKz7yVr
+ xlRq2dTyUblhG2vFOl5QisLVV8bZr4m9ShTFXV1ZT6AgiF/Ca7yvPZ3X8ZmJtEPqb08pcOYu
+ tFYIq1s9NwUEW+Zk9ncBLGgxLFfmOOD2VjTYnH7OWdnJPaNhWXho7fZQ+cmzwFWZgLfiCf0i
+ +TIOtrzTcVRSgJ8ItzRbf7znVq9sWJEwLB5XlfSI8kVc0LpqdA4Jyv0h/4xAscNNRScmWfKi
+ 1fIWU8V9bvXvos40NjVnqTY/Y2nJPRzQxhBFG7B4LfoaSSDpji/wZVNWfqjdCzGUD+m472rY
+ OhYlqmuMPAOkFtQnZB7FrJnkfA369f1/ucIxQV4BnTbKV+sD+o4cHWB2MBOsIxLx6NY5lTqC
+ h7epIECNOzQas3/EVMXKA40Vci51KkZymvI8PA4AETm/ysrrrCJZlpfYkuXgytHIborbI58m
+ bU9uNQb4hCUgwYxNorUlThd8mmBIyBSU6gjsZ1GUobnhhBylwNHaJ3YTCT3/IuOe5NHNUxze
+ m2Yg6/LhrJ9wEveciVsSSiRjLQF3Zle6gpXyFIiJkiSnouXj/A66xRd7DArQ1kH1R5Aye9yZ
+ jBmOkAdyX9iJNu0aByvh1yRJjw=
+IronPort-HdrOrdr: A9a23:1uUI1ajwLjY6Q1EfdBhsRVHjQ3BQXuIji2hC6mlwRA09TySZ//
+ rBoB19726TtN9xYgBZpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
+ 0QF5SWYOeAdGSS5vya3ODXKbkdKaG8gcKVuds=
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="59006050"
+   d="scan'208";a="58617683"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v8 34/47] build: add %.E targets
-Date: Thu, 25 Nov 2021 13:39:53 +0000
-Message-ID: <20211125134006.1076646-35-anthony.perard@citrix.com>
+	<wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, "Bertrand
+ Marquis" <bertrand.marquis@arm.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, "Ross
+ Lagerwall" <ross.lagerwall@citrix.com>
+Subject: [XEN PATCH v8 28/47] build: replace $(BASEDIR) by $(objtree)
+Date: Thu, 25 Nov 2021 13:39:47 +0000
+Message-ID: <20211125134006.1076646-29-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -112,48 +109,217 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-I guess it's easier to remember that %.E does "$(CC) -E" or "$(CPP)".
+We need to differentiate between source files and generated/built
+files. We will be replacing $(BASEDIR) by $(objtree) for files that
+are generated.
 
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile | 4 ++--
- xen/Rules.mk | 5 +++++
- 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 995815e82235..e39a6f82859a 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -609,10 +609,10 @@ cscope:
- _MAP:
- 	$(NM) -n $(TARGET)-syms | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aUw] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)' > System.map
- 
--%.o %.i %.s: %.c tools_fixdep FORCE
-+%.o %.i %.s %.E: %.c tools_fixdep FORCE
- 	$(Q)$(MAKE) $(build)=$(*D) $(*D)/$(@F)
- 
--%.o %.s: %.S tools_fixdep FORCE
-+%.o %.s %.E: %.S tools_fixdep FORCE
- 	$(Q)$(MAKE) $(build)=$(*D) $(*D)/$(@F)
- 
- %/: tools_fixdep FORCE
+Notes:
+    v8:
+    - rebased
+
+ xen/Rules.mk                |  2 +-
+ xen/arch/arm/Makefile       | 10 +++++-----
+ xen/arch/x86/Makefile       | 28 ++++++++++++++--------------
+ xen/common/Makefile         |  2 +-
+ xen/test/livepatch/Makefile | 12 ++++++------
+ 5 files changed, 27 insertions(+), 27 deletions(-)
+
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 73d5b82ab2e7..745d892d0707 100644
+index d6eabd3415b5..cd00f006ee8f 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -287,6 +287,11 @@ $(obj)/%.s: $(src)/%.c FORCE
- $(obj)/%.s: $(src)/%.S FORCE
- 	$(call if_changed_dep,cpp_s_S)
+@@ -12,7 +12,7 @@ src := $(obj)
+ PHONY := __build
+ __build:
  
-+$(obj)/%.E: $(src)/%.c FORCE
-+	$(call if_changed_dep,cpp_i_c)
-+$(obj)/%.E: $(src)/%.S FORCE
-+	$(call if_changed_dep,cpp_s_S)
-+
- # Linker scripts, .lds.S -> .lds
- quiet_cmd_cpp_lds_S = LDS     $@
- cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -DLINKER_SCRIPT -MQ $@ -o $@ $<
+--include $(BASEDIR)/include/config/auto.conf
++-include $(objtree)/include/config/auto.conf
+ 
+ include $(XEN_ROOT)/Config.mk
+ include $(BASEDIR)/scripts/Kbuild.include
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index cecfaf4f3c0f..ae7a2f907540 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -90,21 +90,21 @@ ifeq ($(CONFIG_ARM_64),y)
+ 	ln -sf $(@F) $@.efi
+ endif
+ 
+-$(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
++$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
+-	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
++	    $(objtree)/common/symbols-dummy.o -o $(@D)/.$(@F).0
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
+ 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
+ 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
+ 	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+ 	    $(@D)/.$(@F).1.o -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+-		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort \
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		>$(@D)/$(@F).map
+ 	rm -f $(@D)/.$(@F).[0-9]*
+ 
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index eabd8d3919a4..5fb7f1408768 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -94,8 +94,8 @@ ifneq ($(CONFIG_HVM),y)
+ $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
+ endif
+ 
+-efi-y := $(shell if [ ! -r $(BASEDIR)/include/xen/compile.h -o \
+-                      -O $(BASEDIR)/include/xen/compile.h ]; then \
++efi-y := $(shell if [ ! -r $(objtree)/include/xen/compile.h -o \
++                      -O $(objtree)/include/xen/compile.h ]; then \
+                          echo '$(TARGET).efi'; fi) \
+          $(space)
+ efi-$(CONFIG_PV_SHIM_EXCLUSIVE) :=
+@@ -133,23 +133,23 @@ $(TARGET): $(TARGET)-syms $(efi-y) $(obj)/boot/mkelf32
+ 
+ CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
+ 
+-$(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
++$(TARGET)-syms: $(objtree)/prelink.o $(obj)/xen.lds
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+-	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
++	    $(objtree)/common/symbols-dummy.o -o $(@D)/.$(@F).0
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort \
+ 		>$(@D)/.$(@F).0.S
+ 	$(MAKE) $(build)=$(@D) efi-y= $(@D)/.$(@F).0.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+ 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
+ 		>$(@D)/.$(@F).1.S
+ 	$(MAKE) $(build)=$(@D) efi-y= $(@D)/.$(@F).1.o
+ 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
+ 	    $(@D)/.$(@F).1.o -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+-		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort \
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort \
+ 		>$(@D)/$(@F).map
+ 	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
+ 
+@@ -199,28 +199,28 @@ note_file_option ?= $(note_file)
+ 
+ extra-$(XEN_BUILD_PE) += efi.lds
+ ifeq ($(XEN_BUILD_PE),y)
+-$(TARGET).efi: $(BASEDIR)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
++$(TARGET).efi: $(objtree)/prelink.o $(note_file) $(obj)/efi.lds $(obj)/efi/relocs-dummy.o $(obj)/efi/mkreloc
+ ifeq ($(CONFIG_DEBUG_INFO),y)
+ 	$(if $(filter --strip-debug,$(EFI_LDFLAGS)),echo,:) "Will strip debug info from $(@F)"
+ endif
+ 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
+ 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< $(relocs-dummy) \
+-	                $(BASEDIR)/common/symbols-dummy.o $(note_file_option) -o $(@D)/.$(@F).$(base).0 &&) :
++	                $(objtree)/common/symbols-dummy.o $(note_file_option) -o $(@D)/.$(@F).$(base).0 &&) :
+ 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).0) >$(@D)/.$(@F).0r.S
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).0 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
+ 	$(MAKE) $(build)=$(@D) efi-y= .$(@F).0r.o .$(@F).0s.o
+ 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
+ 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< \
+ 	                $(@D)/.$(@F).0r.o $(@D)/.$(@F).0s.o $(note_file_option) -o $(@D)/.$(@F).$(base).1 &&) :
+ 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).1) >$(@D)/.$(@F).1r.S
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).1 \
+-		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
++		| $(objtree)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
+ 	$(MAKE) $(build)=$(@D) efi-y= .$(@F).1r.o .$(@F).1s.o
+ 	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds -N $< \
+ 	                $(@D)/.$(@F).1r.o $(@D)/.$(@F).1s.o $(note_file_option) -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+-		| $(BASEDIR)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
++		| $(objtree)/tools/symbols --all-symbols --xensyms --sysv --sort >$(@D)/$(@F).map
+ 	rm -f $(@D)/.$(@F).[0-9]* $(@D)/..$(@F).[0-9]*
+ else
+ $(TARGET).efi: FORCE
+@@ -232,11 +232,11 @@ endif
+ $(obj)/efi/buildid.o $(obj)/efi/relocs-dummy.o: ;
+ 
+ .PHONY: include
+-include: $(BASEDIR)/arch/x86/include/asm/asm-macros.h
++include: $(objtree)/arch/x86/include/asm/asm-macros.h
+ 
+ $(obj)/asm-macros.i: CFLAGS-y += -D__ASSEMBLY__ -P
+ 
+-$(BASEDIR)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefile
++$(objtree)/arch/x86/include/asm/asm-macros.h: $(obj)/asm-macros.i $(src)/Makefile
+ 	$(call filechk,asm-macros.h)
+ 
+ define filechk_asm-macros.h
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index dc8d3a13f5b8..30641a737231 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -74,7 +74,7 @@ obj-$(CONFIG_UBSAN) += ubsan/
+ obj-$(CONFIG_NEEDS_LIBELF) += libelf/
+ obj-$(CONFIG_HAS_DEVICE_TREE) += libfdt/
+ 
+-CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(BASEDIR)/)$(KCONFIG_CONFIG)
++CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(objtree)/)$(KCONFIG_CONFIG)
+ $(obj)/config.gz: $(CONF_FILE)
+ 	gzip -n -c $< >$@
+ 
+diff --git a/xen/test/livepatch/Makefile b/xen/test/livepatch/Makefile
+index e6fee84b69da..ddb07371315e 100644
+--- a/xen/test/livepatch/Makefile
++++ b/xen/test/livepatch/Makefile
+@@ -22,9 +22,9 @@ $(obj)/xen_hello_world.o: $(obj)/config.h
+ $(obj)/config.h: $(obj)/xen_hello_world_func.o
+ 	(set -e; \
+ 	 echo "#define NEW_CODE_SZ $(call CODE_SZ,$<,xen_hello_world)"; \
+-	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_minor_version)"; \
+-	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(BASEDIR)/xen-syms,xen_minor_version)"; \
+-	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(BASEDIR)/xen-syms,xen_extra_version)") > $@
++	 echo "#define MINOR_VERSION_SZ $(call CODE_SZ,$(objtree)/xen-syms,xen_minor_version)"; \
++	 echo "#define MINOR_VERSION_ADDR $(call CODE_ADDR,$(objtree)/xen-syms,xen_minor_version)"; \
++	 echo "#define OLD_CODE_SZ $(call CODE_SZ,$(objtree)/xen-syms,xen_extra_version)") > $@
+ 
+ $(obj)/modinfo.o:
+ 	(set -e; \
+@@ -42,7 +42,7 @@ $(obj)/modinfo.o:
+ # not be built (it is for EFI builds), and that we do not have
+ # the note.o.bin to muck with (as it gets deleted)
+ #
+-$(obj)/note.o: $(BASEDIR)/xen-syms
++$(obj)/note.o: $(objtree)/xen-syms
+ 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.depends,alloc,load,readonly,data,contents -S $@.bin $@
+@@ -52,7 +52,7 @@ $(obj)/note.o: $(BASEDIR)/xen-syms
+ # Append .livepatch.xen_depends section
+ # with Xen build-id derived from xen-syms.
+ #
+-$(obj)/xen_note.o: $(BASEDIR)/xen-syms
++$(obj)/xen_note.o: $(objtree)/xen-syms
+ 	$(OBJCOPY) -O binary --only-section=.note.gnu.build-id $< $@.bin
+ 	$(OBJCOPY) $(OBJCOPY_MAGIC) \
+ 		   --rename-section=.data=.livepatch.xen_depends,alloc,load,readonly,data,contents -S $@.bin $@
+@@ -125,7 +125,7 @@ xen_action_hooks_norevert-objs := xen_action_hooks_marker.o xen_hello_world_func
+ 
+ EXPECT_BYTES_COUNT := 8
+ CODE_GET_EXPECT=$(shell $(OBJDUMP) -d --insn-width=1 $(1) | sed -n -e '/<'$(2)'>:$$/,/^$$/ p' | tail -n +2 | head -n $(EXPECT_BYTES_COUNT) | awk '{$$0=$$2; printf "%s", substr($$0,length-1)}' | sed 's/.\{2\}/0x&,/g' | sed 's/^/{/;s/,$$/}/g')
+-$(obj)/expect_config.h: $(BASEDIR)/xen-syms
++$(obj)/expect_config.h: $(objtree)/xen-syms
+ 	(set -e; \
+ 	 echo "#define EXPECT_BYTES $(call CODE_GET_EXPECT,$<,xen_extra_version)"; \
+          echo "#define EXPECT_BYTES_COUNT $(EXPECT_BYTES_COUNT)") > $@
 -- 
 Anthony PERARD
 
