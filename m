@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C41EC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2EFDC433EF
 	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:47:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231285.400247 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.231290.400254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF68-000533-If; Thu, 25 Nov 2021 13:47:36 +0000
+	id 1mqF69-0005L4-G7; Thu, 25 Nov 2021 13:47:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231285.400247; Thu, 25 Nov 2021 13:47:36 +0000
+Received: by outflank-mailman (output) from mailman id 231290.400254; Thu, 25 Nov 2021 13:47:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF67-0004yO-PE; Thu, 25 Nov 2021 13:47:35 +0000
-Received: by outflank-mailman (input) for mailman id 231285;
- Thu, 25 Nov 2021 13:47:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqF68-0005Ez-V9; Thu, 25 Nov 2021 13:47:36 +0000
+Received: by outflank-mailman (input) for mailman id 231290;
+ Thu, 25 Nov 2021 13:47:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqEzv-00076i-P6
- for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:11 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5816b795-4df5-11ec-a9d2-d9f7a1cc8784;
- Thu, 25 Nov 2021 14:41:09 +0100 (CET)
+ id 1mqF0h-0007NX-KW
+ for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:59 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 75dbf48d-4df5-11ec-9787-a32c541c8605;
+ Thu, 25 Nov 2021 14:41:58 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,65 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5816b795-4df5-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 75dbf48d-4df5-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847669;
+  d=citrix.com; s=securemail; t=1637847718;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=ZCs/Xx5M756MIsDnJYXw+m9V8UisU6uX8z4z8/g/Ths=;
-  b=WiVegfMAoCwRYivSU2ZTqyaubOCr1QY35zqMQhLs+WFMRZpjN9W1q5iy
-   lKMzwQz1ume4s6jlZUbBU8qrvTx/neY2XHAi0c7K6RjFb1dFo9YPxlLYf
-   oduimfdlx1anCCMDl+PhTMxnK6dRaCjImEPW9Rxhv2PcMs93HeTuzWmj6
-   g=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 4tr52D3X9HWXH1iw01BXLR6ba5oDHtKx8Ef7AFctZoE/TgiC34JWwhwPzbwPKM8XqFmbgOk43n
- qvvrVOFDhgVvfTcwilUhRu673NXyD2ZcoUiD1Wui2UCqTelfKOSYEBCwIdBnuRE2kJYJGpxZWU
- gHBaHnOxXaNVHPf+2JgB3txYNyjWf9gr3RuxTcX/3lpgKodoZDoxvfnjmF1/cVakSSgBS8ADAs
- pXfmdRcjMpIAjgwnfL+Eh0EmtIXI35dG5AmGXNFJBKkYp86FrfFt6M3vJhqexBdy08dtC7vgHf
- PQVV2542W2I8meLjAhZEdSIF
+  bh=B5VOkpfrwP2eJU5CJkGnpLSWbZA0WNl/g37hS+zmyXc=;
+  b=d2QVA48Js5vVqo0r6uSFIXckwuE6nBulUwHSSK8EbK2Il8ibs+1CRRoR
+   wjCbAFBZ1lN3UAhzqxXCKB9y9w1kVktFG0XcbJJaflhLK7lh2HQJ2RbCt
+   PS8OAVa61Zzxip/ICATPxpwUQtvhmkY9l4xe4TOGL87I6oNllDMn0AJsp
+   I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: r23o05NSS7N9utzX3GZjNdfn8NR2ahYDzERWs2Mvd9EoEvJm8StOqMdOmNZHWOmlR/mPybolMn
+ nHTiW5TPhM9OPESq+BRKvzy2mighS0Ex+Os19efb5BwOKU1QrTvEiNgXn4Lglarfzl3yMU1sp0
+ Lwp5aU7xiy6qx03yLY4bzHWjO0LakUWvf+SznyBVEj9go7fuJ6gNzbRmSQqWFv0F0rH5JpKCly
+ c/66nvr/NIppMXR9RMGVMsN3v/hHr6L+yqF/7AyrucywPqP3d0RcoClDnLnIS4lZ6J23F+NUSF
+ gezsM3C33jAgriFKkBbdVqiK
 X-SBRS: 5.1
-X-MesageID: 58617668
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 60634184
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:aPmGqqC3r2fKwBVW/9Tkw5YqxClBgxIJ4kV8jS/XYbTApDxw0DFSz
- WFKWW/XOPzeZGehL4gkOd+z9kpT6MKGzoVlQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX540087wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/uyu4n4hP2
- OdxtqOxalswEIDxns0BakwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTQ+9whsMlPY/zMZkWoH1IxjDFF/c2B5vERs0m4PcFjGlp2Z4QTZ4yY
- eIfURhuVRPAQCcMEQ8VGo06paDr2nfWJmgwRFW9+vNsvjm7IBZK+LrwNNvYfPSaSMMTmVyXz
- krd5HjwCBweMN2ZyBKG/2iqi+uJmjn0MKoNEJWo+/gsh0ecrkQDBRtTWValrP2Rjk+lR8kZO
- 0ES4jApr6U56AqsVNaVdx+yrWOAvxUcc8FNCOB84waIooLV/ASxFmUCViRGatEtqIkxXzNC6
- 7OSt4q3X3o16uTTEC/DsOfPxd+vBcQLBV8cVC9ccxs339rcoaJvlzzic9BKDJfg27UZBgrM6
- zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4ZdN7BJmRtq
- kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JBVdwPiN2dDB0wWirhRdMOS
- BWO0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZp34xOh/AjzG3zhlEfUQD1
- XCzK5jEMJrnIf4/kGreqxk1jdfHORzSNUuMHMumnnxLIJKVZWKPSKdtDbd9RrtR0U9wmy2Mq
- 4w3H5LTk313CbSiCgGKod97BQ1bdhATWMGpw/G7g8bee2KK7kl6UKSPqV7gEqQ495loehDgo
- ivgBxQGkQWn3hUq62yiMxheVV8mZr4nxVpTAMDmFQzAN6ELbdn94aEBWYEweLV7puVvweQtF
- 6sOetmaA+QJQTPComxPYZ74pY1kVRKqmQPRYHb1PGlhJ8ZtF17T59vpXgrz7y1SXCC5gtQz/
- u+73QTBTJtdGwk7VJTKaOiixk+atGQGnL4gRFPBJ9ReIR2+8IVjJyHroOUwJsUAdUfKyjeAj
- l7EChYEv+jd5YQy9YCR16yDqo6oFcp4H1ZbQDaHverna3GC8zP6k4FaUeuOcTTMb0/O+f2vN
- bdP0vXxEPwbh1IW4YByJKlmkPAl7Nz1qr4Ekgk9RCfXb06mA69LK2Wd2ZUdrbVEw7JUtFfkW
- k+L/dUGa7yFNNm8TQwULQshKO+CyesVin/Z6vFseBf24yp+/bymV0ROPkbT1HwBfeUtaI51k
- /08vMM26hCkjkt4O9mLuSlY6mCQIyFSSK4grJwbXNfmhwdDJouuunAA5vsaOK2yVug=
-IronPort-HdrOrdr: A9a23:4DuZ96O7XnbBsMBcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3gqy
- nOpoV86faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrZ
- uIGJIeNDSfNzdHZL7BkWuFL+o=
+IronPort-Data: A9a23:fcohw6IBeLswchRXFE+RApIlxSXFcZb7ZxGr2PjKsXjdYENS0TQCy
+ zNKDDiFbKrcZmukL49+ad60px5XvZHQnNAwQAplqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xrZj6mJVqYPR7z2l6
+ IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2Svssvk
+ tx3sKeUQF8qBpXcuccyC0lhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Glo2JsSRKaCD
+ yYfQQhvdRviWUV1AGwwNZwlnfeYl0PDQQQN/Tp5ooJoujOOnWSdyoPFMtDYZ9iLTsV9hVuDq
+ yTN+GGRKg4eHMySz3yC6H3Erv/Cm2b3VZwfEJW89+V2mxuDy2oLEhoUWFCn5/6jhSaWUtRDK
+ 0sS62w2oLI77kCDQdz0Xhn+q3mB1iPwQPIJTbd8slvUjPOJvUDJXQDoUwKtdvQ9ldRoHzUQ0
+ 2StlovqPQR/kZ66ESKko+L8QSyJBQAZKmoLZCkhRAQD4sX+rIxbsi8jXuqPA4bu0ISrRGiYL
+ ySi6XFn2u5N1ZJjO7CTpAif21qRSo71ohnZD+k9dkas9UtHaYGsfOREAnCLvK8bfO51orRs1
+ UXoevRyDshSUvlhdwTXGY3h+Y1FAN7fbVXhbaZHRcVJythU0yfLkXpsyD9/Plx1Fc0PZCXkZ
+ kTe0SsIusQMYyT7Pf8mOdzgYyjP8UQHPY67Ps04k/IUOsQhHON51H0GibGsM5DFzxF3zPBX1
+ WazesewF3cKYZmLPxLtL9rxJYQDn3hkrUuKHMiT503+jdK2OS7EIZ9YYQDmRr1os8u5TPD9r
+ o832z2ikE4EDoUTo0D/rOYuELz9BSRhWM2t9ZUILrXrz8gPMDhJNsI9CIgJI+RN95m5XM+Sl
+ p1kckMHmlf5m1PdLgCGNiJqZL/1BM4tpnMnJy08e12v3iF7M4qo6a4ecboxfKUmq7M/naIlE
+ aFddpXSGOlLRxTG5y8ZMcv3ort9eUn5ngmJJSekPmQyJsYyWwzT99b4VQLz7y1SXDGvvM4zr
+ uT4hAPWSJYOXSp4C8PSZK79xl+9pyFFyulzQ1HJMp9Yf0C1qNpmLCn4j/kWJcAQKEqcmmvGh
+ ljOWRpB/LvDuY449tXNlJuolYbxHrssBFdeEkna8a2yaXvQ8F28zNISS+2PZz3cCj/5of3we
+ eVPwvjgG/Qbh1IW4ZFkGrNmwK9itdvio7hWklZtEHnRNgn5D7phJj+N3NVVt70Lzbhc4FPkV
+ kWK89hcGLOIJMK6TwJBeFt7NryOhaMOhz3fzfUpO0GrtiZ48Y2OXVhWIxTR2jdWK6F4Md99z
+ Oos0CLMB9dTVvb+3g66sx1p
+IronPort-HdrOrdr: A9a23:ZHUwNavuVD1sNTzoGtU0F8DW7skDTtV00zEX/kB9WHVpmszxra
+ 6TdZMgpHnJYVcqKQkdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
+ YFT0EXMqyIMbEQt6fHCWeDfOrIuOP3kpyVuQ==
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="58617668"
+   d="scan'208";a="60634184"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v8 18/47] build: handle always-y and hostprogs-always-y
-Date: Thu, 25 Nov 2021 13:39:37 +0000
-Message-ID: <20211125134006.1076646-19-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Anthony PERARD
+	<anthony.perard@gmail.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v8 39/47] RFC, no-VPATH: x86/boot: workaround gcc including the wrong file
+Date: Thu, 25 Nov 2021 13:39:58 +0000
+Message-ID: <20211125134006.1076646-40-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -104,60 +103,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This will be used for xen/tools/.
+From: Anthony PERARD <anthony.perard@gmail.com>
+
+we generate cmdline.S and reloc.S, so we should include those
+generated file as presented in the build tree, but for file included
+with quote, gcc will first look into the directory where the source
+file is, that is where head.S is located and thus include cmdline.S
+that is present in the source tree when it is dirty. But that the
+wrong file as we want to include the file from the build tree. Work
+around by using <> to include those file as if the come from the
+system, as gcc will first look in directories listed with '-I' on the
+command line.
+
+So now we also need to add -I when building in the source tree.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/Rules.mk               | 10 +++++++++-
- xen/scripts/Makefile.clean |  3 ++-
- 2 files changed, 11 insertions(+), 2 deletions(-)
+ xen/arch/x86/boot/Makefile | 4 +++-
+ xen/arch/x86/boot/head.S   | 4 ++--
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index f452a821cc86..9eb3093f43fb 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -78,9 +78,17 @@ else
- obj-y    := $(filter-out %/, $(obj-y))
+diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
+index 04ee9da83333..4fc6b1d8ffc2 100644
+--- a/xen/arch/x86/boot/Makefile
++++ b/xen/arch/x86/boot/Makefile
+@@ -8,7 +8,9 @@ targets += $(head-objs:.S=.o)
+ head-objs := $(addprefix $(obj)/, $(head-objs))
+ 
+ ifdef building_out_of_srctree
+-$(obj)/head.o: CFLAGS-y += -iquote $(obj)
++$(obj)/head.o: CFLAGS-y += -I$(obj)
++else
++$(obj)/head.o: CFLAGS-y += -I$(src)
  endif
+ $(obj)/head.o: $(head-objs)
  
-+# hostprogs-always-y += foo
-+# ... is a shorthand for
-+# hostprogs-y += foo
-+# always-y  += foo
-+hostprogs-y += $(hostprogs-always-y)
-+always-y += $(hostprogs-always-y)
-+
- # Add subdir path
+diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
+index dd1bea0d10b3..66acd2e9bfc0 100644
+--- a/xen/arch/x86/boot/head.S
++++ b/xen/arch/x86/boot/head.S
+@@ -772,10 +772,10 @@ trampoline_setup:
+         lret
  
- extra-y         := $(addprefix $(obj)/,$(extra-y))
-+always-y        := $(addprefix $(obj)/,$(always-y))
- targets         := $(addprefix $(obj)/,$(targets))
- lib-y           := $(addprefix $(obj)/,$(lib-y))
- obj-y           := $(addprefix $(obj)/,$(obj-y))
-@@ -283,7 +291,7 @@ targets += $(call intermediate_targets, .init.o, .o) \
- # Build
- # ---------------------------------------------------------------------------
+ cmdline_parse_early:
+-#include "cmdline.S"
++#include <cmdline.S>
  
--__build: $(targets-for-builtin) $(subdir-y)
-+__build: $(targets-for-builtin) $(subdir-y) $(always-y)
- 	@:
+ reloc:
+-#include "reloc.S"
++#include <reloc.S>
  
- # Descending
-diff --git a/xen/scripts/Makefile.clean b/xen/scripts/Makefile.clean
-index 156d6307cf83..c2689d4af5fa 100644
---- a/xen/scripts/Makefile.clean
-+++ b/xen/scripts/Makefile.clean
-@@ -18,7 +18,8 @@ subdir-all := $(subdir-y) $(subdir-n) $(subdir-) \
-               $(patsubst %/,%, $(filter %/, $(obj-y) $(obj-n) $(obj-)))
- 
- __clean-files := \
--    $(clean-files) $(hostprogs-y) $(hostprogs-)
-+    $(clean-files) $(hostprogs-y) $(hostprogs-) \
-+    $(hostprogs-always-y) $(hostprogs-always-)
- 
- __clean-files := $(wildcard $(__clean-files))
- 
+ ENTRY(trampoline_start)
+ #include "trampoline.S"
 -- 
 Anthony PERARD
 
