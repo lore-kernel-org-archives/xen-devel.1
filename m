@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19923C433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:47:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231281.400230 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAEDEC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:47:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.231284.400238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF65-0004Hq-8Q; Thu, 25 Nov 2021 13:47:33 +0000
+	id 1mqF66-0004iW-Q6; Thu, 25 Nov 2021 13:47:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231281.400230; Thu, 25 Nov 2021 13:47:33 +0000
+Received: by outflank-mailman (output) from mailman id 231284.400238; Thu, 25 Nov 2021 13:47:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF64-0004Gn-Uy; Thu, 25 Nov 2021 13:47:32 +0000
-Received: by outflank-mailman (input) for mailman id 231281;
- Thu, 25 Nov 2021 13:47:30 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqF66-0004fy-IC; Thu, 25 Nov 2021 13:47:34 +0000
+Received: by outflank-mailman (input) for mailman id 231284;
+ Thu, 25 Nov 2021 13:47:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqF0U-00076i-Mx
- for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:46 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6d6c76ec-4df5-11ec-a9d2-d9f7a1cc8784;
- Thu, 25 Nov 2021 14:41:45 +0100 (CET)
+ id 1mqEzw-0007NX-I9
+ for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:12 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5662e8e8-4df5-11ec-9787-a32c541c8605;
+ Thu, 25 Nov 2021 14:41:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,65 +38,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6d6c76ec-4df5-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 5662e8e8-4df5-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847705;
+  d=citrix.com; s=securemail; t=1637847666;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=o+kA5ufKOUX7cHgHO/shUnoM69Ej2+dSlJV54ErUF+0=;
-  b=G9n+AX1UQo80TDZ+ZBfFvgc1hGpTGfV+/VcF9dm1nH68jxeH6zn3DNr+
-   B8QLqZpG21IQUvggwNW4EbjRRVEyHNPT/pV14vuKU3Q75GO5RwIeuuLTZ
-   pIOTz3nPPyH4IzRqz3wCgCR4sv4kiQAT6Qm/EflbMe6ytbGjBPzBxZm+G
-   U=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: veMVtzRDvR9Az3eriOtzviuZLksqoVwo3rOzhYcgu6t6xGyCcgZrDIDyy+ZnUL2sruI+A3V+Hi
- VKoXybqlNMx+/nPfv0vefj0KYz6EMPWptHIRPUqgKYrqM64fk1aGBfK5SfFmIm3bhyO3BsHuaT
- 5DkotiS1PoF8RqfA3zgv7LQpawWMKyvU58JA/sQwWIZuxBgB/LMYfXzmQcIkHhg6XXrrH1gyJT
- 7WN5N+hRqzutex27WOpW2K03rbx1OtFOLeoOxmYwAdfJsP6efK4E1wHPoBBbt6y5Ani0mfiZUS
- 9Scp08EX+5DfzFkihekXMevw
+  bh=sxCVIENXL7U4uJ6PAJaPF/nE5SLDBzALYwkN0k1BGWI=;
+  b=Ep9XIVirbsQWcyJ24uWe3/3faAB5XVRNqkw8zX3xGfRt8c70mAiGwL75
+   CctvCSPhYFRrN8bEoYyvx1bIml+zQJw0kiNKaDnRBd2pgX9ezAcocJoAh
+   cVP75lvsu7oU4whfBz7DGAePwuEcOVKO1ieFK406Ss8V8ri64nfqZeSVr
+   0=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Ah9LABVBcQ5ud4W8ehu1CUiyw3Vl4ew/y08mOCVWO2lPvIqSL3OQ3EGb70j6tFaVSOPU/cRzHh
+ tqh8TLO0UdGid2HR3kLnb1/7anr5fV2QTh0DU3ddJb7Im96NmJAcfQMJ0wzVYRtsCwLngSXSD8
+ Eg9BoRFQmgg1kqGf2oNv5a/YfMxVUYTwaSF3xvPE9CXirnjvo09UYnQmuTxnZUbtn0xIXNaa9x
+ RTiMJBonkUXVy6VGsCuS1v0Ou7M8gPCw2cGgscy5b7X+ZukZ/INtGGtosSG6vFSEwi+cnM7oWZ
+ kGdG0DfCduhr+OovybpiIHxU
 X-SBRS: 5.1
-X-MesageID: 58135484
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 60634139
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:rOEXRKB7lf11hRVW/9Tkw5YqxClBgxIJ4kV8jS/XYbTApG4n0DUAm
- 2oWWWuHbPveYGD2L94nb4q/p0JQ7JKBnIM3QQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX540087wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/0AysmMpjx
- 4t2soGJVCIbN4KXhMkhTEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTQ+9whsMlPY/zMZkWoH1IxjDFF/c2B5vERs0m4PcFjG5r25weQZ4yY
- eIwNj5FbT/vOSFMFXVPU5Mgh7aRpVvWJmgwRFW9+vNsvjm7IBZK+LrwNNvYfPSaSMMTmVyXz
- krd5HjwCBweMN2ZyBKG/2iqi+uJmjn0MKoNEJWo+/gsh0ecrkQDBRtTWValrP2Rjk+lR8kZO
- 0ES4jApr6U56AqsVNaVdxynolaUsxgEQd1SHuYmrgaXxcL84QyUG2wFRT5pc8E9uYk9QjlC6
- 7OSt4q3X3o16uTTEC/DsOfPxd+vBcQLBTQ7QCgeXwRb2N7+mZwWvBvgFcpOLLHg27UZBgrM6
- zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4ZdN7BJmRtq
- kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JBVdwPiN2dDB0wWirhRdMOS
- BWO0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZp34xOh/AjzG3zhlEfUQD1
- XCzK5jEMJrnIf4/kGreqxk1jdfHORzSNUuMHMumnnxLIJKVZWKPSKdtDbd9RrtR0U9wmy2Mq
- 4w3H5LTk313CbSiCgGKod97BQ1bdhATWMGpw/G7g8bee2KK7kl6UKSPqV7gEqQ495loehDgo
- ivgBxQGkQWn3hUq62yiMxheVV8mZr4nxVpTAMDmFQ/AN6ELbdn94aEBWYEweLV7puVvweQtF
- 6sOetmaA+QJQTPComxPYZ74pY1kVRKqmQPRYHb1PGlhJ8ZtF17T59vpXgrz7y1SXCC5gtQz/
- u+73QTBTJtdGwk7VJTKaOiixk+atGQGnL4gRFPBJ9ReIR2+8IVjJyHroOUwJsUAdUfKyjeAj
- l7EChYEv+jd5YQy9YCR16yDqo6oFcp4H1ZbQDaHverna3GC8zP6k4FaUeuOcTTMb0/O+f2vN
- bdP0vXxEPwbh1IW4YByJKlmkPAl7Nz1qr4Ekgk9RCfXb06mA69LK2Wd2ZUdrbVEw7JUtFfkW
- k+L/dUGa7yFNNm8TQwULQshKO+CyesVin/Z6vFseBf24yp+/bymV0ROPkbT1HwBfeUtaI51k
- /08vMM26hCkjkt4O9mLuSlY6mCQIyFSSK4grJwbXNfmhwdDJouuunAA5vsaOK2yVug=
-IronPort-HdrOrdr: A9a23:4cltCq/L8WX0tfj/CiNuk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
- re+sjztCWE8Ar5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAtFD4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:8piItqp4+FnnBj/uGEqKOyQLSaFeBmLlYhIvgKrLsJaIsI4StFCzt
+ garIBmAa/yCNGL1eNxzPN/kpEMHupLUn99jQQY+rC0xRC0Q+JuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2ILkW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnZ+TVQsGPrDjobsmcDhkEyQ9Peoc97CSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFIoZpnFnyyCfFfs8SIrPa67L+cVZzHE7gcUm8fP2O
+ ZJHMmY2N0WojxtnK3saT78cru2T3njETxtgp0OYhpVw7D2GpOB2+Oe0a4eEEjCQfu1Xg0KZq
+ 2Tu72n/RBYAO7S30iGZ+3ihguvOmyLTW48IErC8sPlwjzW72Wg7GBAQE1yhrpGRmkO4Ht5SN
+ UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JSGeAn7ACGyoLP/h2UQGMDS1ZpacMknN87QyQw0
+ V2ElM+vAiZg2IB5UlrEqO3S92nrf3FIcylSPkfoUDfp/fHgg50/oRLSYe88K42Ust3wWjG3m
+ T+F+X1Wa6ooseYH0KCy/Fbiij2qp4TUQgNd2jg7Tl5J/SsiOtf7OtXABUzzqK8Zcd3HFgXpU
+ G0swpDGtIgz4YexeDthqQnnNJWg/L67PTLVmjaD9LFxpm32qxZPkW29iQySxXuF0O5YJlcFg
+ 2eJ4Gu9AaO/21PwMMdKj3qZUZhC8EQZPY2NugroRtRPeINtUwSM4TtjY0Wdt0i0zhNzzv5ua
+ cfKK5j9ZZr/NUiA5GDoL9rxLJdxnnxurY8tbcyTI+ubPUq2OyfOFOZt3KqmZeEl9qKUyDg5A
+ P4EX/ZmPy53CbWkCgGOqNZ7BQlTcRATWMCnw+QKJ7XrClc3Rwkc5wr5nOpJl3pNxP8OyI8lP
+ xiVBydl9bYIrSGddFjRNCk8MOiHsFQWhStTABHA9G2AgxALCbtDJo9FH3fuVbV4puFl09BuS
+ PwJJ5eJDvhVE2yV8DUBd5jt6odlcU3z1w6JOiOkZhk5foJhGFOVqoO1IFO3+XlcFDezuOs/v
+ 6akilHRT60cSlkwF83Rcv+ukQ+85CBPhOJoUkLUCdBPY0GwopNyIin8g6ZvccEBIBnO3BWA0
+ AOSDUtKrOXBudZtotLImbqFv8GiFO4nRhhWGGzS7LCXMyjG/zX8nd8cAbjQJT2EDTH64qSvY
+ +lR3srQCvxfkQYYqZd4HpZq0bk6u4nlqYhFw1k2B37MdVmqVO9teyHUwclVu6RR7bZFog/qC
+ FmX89xXNLjVasPoFFkdeFgsYuiZjKxGnzDT6bI+IVng5T8x972CCB0AMx6JgS1bDb10LIJ6n
+ rtx5J9Is1Sy2kgwL9KLriFI7GDdfHUPXpIuuoweHIK22BEgzUtPYMCEByL7iH1Vhw6g7qX+z
+ ueouZf/
+IronPort-HdrOrdr: A9a23:4gWV6Ko+2+AKFz+8j3UshbgaV5oteYIsimQD101hICG8cqSj+P
+ xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
+ 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="58135484"
+   d="scan'208";a="60634139"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
- Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
 	<wl@xen.org>
-Subject: [XEN PATCH v8 32/47] build: shuffle main Makefile
-Date: Thu, 25 Nov 2021 13:39:51 +0000
-Message-ID: <20211125134006.1076646-33-anthony.perard@citrix.com>
+Subject: [XEN PATCH v8 17/47] build: remove KBUILD_ specific from Makefile.host
+Date: Thu, 25 Nov 2021 13:39:36 +0000
+Message-ID: <20211125134006.1076646-18-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -104,116 +105,103 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Reorganize a bit the Makefile ahead of patch
-"build: adding out-of-tree support to the xen build"
+This will allow $(HOSTCFLAGS) to actually be used when building
+programmes for the build-host.
 
-This should only be code movement without functional changes.
+The other variable don't exist in our build system.
+
+Also remove $(KBUILD_EXTMOD) since it should always be empty.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
+ xen/scripts/Makefile.host | 26 ++++++++++++--------------
+ 1 file changed, 12 insertions(+), 14 deletions(-)
 
-Notes:
-    v8:
-    - new patch
-
- xen/Makefile | 58 ++++++++++++++++++++++++++--------------------------
- 1 file changed, 29 insertions(+), 29 deletions(-)
-
-diff --git a/xen/Makefile b/xen/Makefile
-index 318320e79c7d..bfc96562c5ec 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -19,38 +19,11 @@ export PYTHON		?= $(PYTHON_INTERPRETER)
+diff --git a/xen/scripts/Makefile.host b/xen/scripts/Makefile.host
+index 8a85f94316bc..d6c358095ee8 100644
+--- a/xen/scripts/Makefile.host
++++ b/xen/scripts/Makefile.host
+@@ -82,18 +82,16 @@ host-cxxshobjs	:= $(addprefix $(obj)/,$(host-cxxshobjs))
+ #####
+ # Handle options to gcc. Support building with separate output directory
  
- export CHECKPOLICY	?= checkpolicy
+-_hostc_flags   = $(KBUILD_HOSTCFLAGS)   $(HOST_EXTRACFLAGS)   \
++_hostc_flags   = $(HOSTCFLAGS)   $(HOST_EXTRACFLAGS)   \
+                  $(HOSTCFLAGS_$(target-stem).o)
+-_hostcxx_flags = $(KBUILD_HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \
++_hostcxx_flags = $(HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \
+                  $(HOSTCXXFLAGS_$(target-stem).o)
  
--export XEN_ROOT := $(CURDIR)/..
--
--abs_objtree := $(CURDIR)
--abs_srctree := $(CURDIR)
--
--export abs_srctree abs_objtree
--
--srctree := .
--objtree := .
--export srctree objtree
--
- # Do not use make's built-in rules and variables
- MAKEFLAGS += -rR
- 
- EFI_MOUNTPOINT ?= $(BOOT_DIR)/efi
- 
--ARCH=$(XEN_TARGET_ARCH)
--SRCARCH=$(shell echo $(ARCH) | \
--          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
--              -e s'/riscv.*/riscv/g')
--export ARCH SRCARCH
--
--# Don't break if the build process wasn't called from the top level
--# we need XEN_TARGET_ARCH to generate the proper config
--include $(XEN_ROOT)/Config.mk
--
--# Set ARCH/SUBARCH appropriately.
--export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
--export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
--                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
--                                -e s'/riscv.*/riscv/g')
--
- # Allow someone to change their config file
- export KCONFIG_CONFIG ?= .config
- 
-@@ -64,8 +37,6 @@ default: build
- .PHONY: dist
- dist: install
- 
--include scripts/Kbuild.include
--
- ifneq ($(root-make-done),y)
- # section to run before calling Rules.mk, but only once.
- 
-@@ -141,6 +112,17 @@ endif
- 
- export quiet Q KBUILD_VERBOSE
- 
-+abs_objtree := $(CURDIR)
-+abs_srctree := $(CURDIR)
-+
-+export abs_srctree abs_objtree
-+
-+srctree := .
-+objtree := .
-+export srctree objtree
-+
-+export XEN_ROOT := $(CURDIR)/..
-+
- # To make sure we do not include .config for any of the *config targets
- # catch them early, and hand them over to tools/kconfig/Makefile
- 
-@@ -163,6 +145,24 @@ ifneq ($(filter %config,$(MAKECMDGOALS)),)
-     config-build := y
+ # $(objtree)/$(obj) for including generated headers from checkin source files
+-ifeq ($(KBUILD_EXTMOD),)
+ ifdef building_out_of_srctree
+ _hostc_flags   += -I $(objtree)/$(obj)
+ _hostcxx_flags += -I $(objtree)/$(obj)
  endif
+-endif
  
-+include scripts/Kbuild.include
-+
-+ARCH=$(XEN_TARGET_ARCH)
-+SRCARCH=$(shell echo $(ARCH) | \
-+          sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-+              -e s'/riscv.*/riscv/g')
-+export ARCH SRCARCH
-+
-+# Don't break if the build process wasn't called from the top level
-+# we need XEN_TARGET_ARCH to generate the proper config
-+include $(XEN_ROOT)/Config.mk
-+
-+# Set ARCH/SUBARCH appropriately.
-+export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
-+export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
-+                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-+                                -e s'/riscv.*/riscv/g')
-+
- export CONFIG_SHELL := $(SHELL)
- export YACC = $(if $(BISON),$(BISON),bison)
- export LEX = $(if $(FLEX),$(FLEX),flex)
+ hostc_flags    = -Wp,-MD,$(depfile) $(_hostc_flags)
+ hostcxx_flags  = -Wp,-MD,$(depfile) $(_hostcxx_flags)
+@@ -104,17 +102,17 @@ hostcxx_flags  = -Wp,-MD,$(depfile) $(_hostcxx_flags)
+ # Create executable from a single .c file
+ # host-csingle -> Executable
+ quiet_cmd_host-csingle 	= HOSTCC  $@
+-      cmd_host-csingle	= $(HOSTCC) $(hostc_flags) $(KBUILD_HOSTLDFLAGS) -o $@ $< \
+-		$(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
++      cmd_host-csingle	= $(HOSTCC) $(hostc_flags) $(HOSTLDFLAGS) -o $@ $< \
++		$(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
+ $(host-csingle): $(obj)/%: $(src)/%.c FORCE
+ 	$(call if_changed_dep,host-csingle)
+ 
+ # Link an executable based on list of .o files, all plain c
+ # host-cmulti -> executable
+ quiet_cmd_host-cmulti	= HOSTLD  $@
+-      cmd_host-cmulti	= $(HOSTCC) $(KBUILD_HOSTLDFLAGS) -o $@ \
++      cmd_host-cmulti	= $(HOSTCC) $(HOSTLDFLAGS) -o $@ \
+ 			  $(addprefix $(obj)/, $($(target-stem)-objs)) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
+ $(host-cmulti): FORCE
+ 	$(call if_changed,host-cmulti)
+ $(call multi-depend, $(host-cmulti), , -objs)
+@@ -129,10 +127,10 @@ $(host-cobjs): $(obj)/%.o: $(src)/%.c FORCE
+ # Link an executable based on list of .o files, a mixture of .c and .cc
+ # host-cxxmulti -> executable
+ quiet_cmd_host-cxxmulti	= HOSTLD  $@
+-      cmd_host-cxxmulti	= $(HOSTCXX) $(KBUILD_HOSTLDFLAGS) -o $@ \
++      cmd_host-cxxmulti	= $(HOSTCXX) $(HOSTLDFLAGS) -o $@ \
+ 			  $(foreach o,objs cxxobjs,\
+ 			  $(addprefix $(obj)/, $($(target-stem)-$(o)))) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
+ $(host-cxxmulti): FORCE
+ 	$(call if_changed,host-cxxmulti)
+ $(call multi-depend, $(host-cxxmulti), , -objs -cxxobjs)
+@@ -163,9 +161,9 @@ $(host-cxxshobjs): $(obj)/%.o: $(src)/%.c FORCE
+ # Link a shared library, based on position independent .o files
+ # *.o -> .so shared library (host-cshlib)
+ quiet_cmd_host-cshlib	= HOSTLLD -shared $@
+-      cmd_host-cshlib	= $(HOSTCC) $(KBUILD_HOSTLDFLAGS) -shared -o $@ \
++      cmd_host-cshlib	= $(HOSTCC) $(HOSTLDFLAGS) -shared -o $@ \
+ 			  $(addprefix $(obj)/, $($(target-stem)-objs)) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
+ $(host-cshlib): FORCE
+ 	$(call if_changed,host-cshlib)
+ $(call multi-depend, $(host-cshlib), .so, -objs)
+@@ -173,9 +171,9 @@ $(call multi-depend, $(host-cshlib), .so, -objs)
+ # Link a shared library, based on position independent .o files
+ # *.o -> .so shared library (host-cxxshlib)
+ quiet_cmd_host-cxxshlib	= HOSTLLD -shared $@
+-      cmd_host-cxxshlib	= $(HOSTCXX) $(KBUILD_HOSTLDFLAGS) -shared -o $@ \
++      cmd_host-cxxshlib	= $(HOSTCXX) $(HOSTLDFLAGS) -shared -o $@ \
+ 			  $(addprefix $(obj)/, $($(target-stem)-objs)) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
+ $(host-cxxshlib): FORCE
+ 	$(call if_changed,host-cxxshlib)
+ $(call multi-depend, $(host-cxxshlib), .so, -objs)
 -- 
 Anthony PERARD
 
