@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0681AC433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:48:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231311.400344 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60099C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:48:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.231313.400358 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF6S-0001Rx-L7; Thu, 25 Nov 2021 13:47:56 +0000
+	id 1mqF6W-0002Ap-0v; Thu, 25 Nov 2021 13:48:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231311.400344; Thu, 25 Nov 2021 13:47:56 +0000
+Received: by outflank-mailman (output) from mailman id 231313.400358; Thu, 25 Nov 2021 13:47:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF6S-0001Oc-2o; Thu, 25 Nov 2021 13:47:56 +0000
-Received: by outflank-mailman (input) for mailman id 231311;
- Thu, 25 Nov 2021 13:47:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqF6V-00026e-5s; Thu, 25 Nov 2021 13:47:59 +0000
+Received: by outflank-mailman (input) for mailman id 231313;
+ Thu, 25 Nov 2021 13:47:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqEzp-0007NX-7d
- for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:05 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 53c40e20-4df5-11ec-9787-a32c541c8605;
- Thu, 25 Nov 2021 14:41:02 +0100 (CET)
+ id 1mqF0t-00076i-HJ
+ for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:42:11 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7cfb8380-4df5-11ec-a9d2-d9f7a1cc8784;
+ Thu, 25 Nov 2021 14:42:10 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,73 +38,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 53c40e20-4df5-11ec-9787-a32c541c8605
+X-Inumbo-ID: 7cfb8380-4df5-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847662;
+  d=citrix.com; s=securemail; t=1637847730;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=RXcp/FFcN5mYkoMn+8MsGpkECzNRJcUwjpBXUKglChM=;
-  b=O7Q+8WaToGC+ZOHqHw+U2c1lNXHmRt6ZNm5SeSFAo8HyB1/o6C+xSKEg
-   5kHUiWN6ub1pl09Wqpb1gOSZHJQ6r7bz28/snmHbLluzX0PGhjShz6qZT
-   NhIfPOIf4lH8dkp4SKL6hIkHu5AAWl4h3+wmlrnni/s3giJAR0iLLu3bQ
-   Y=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: F7hIUb88nLqpZhH7E9pCB6Umz3lhqqQrrBS7bZ6sIFHr3GaKXeW+bIMgmHsu50sPL8awl/Ednx
- Gy9Vk9VlTDCrsosmRVU+lEXvWPspzFW4pdeQrlBsdcSLB3lqQmQvPg2lZNXgJksYnuztOZY53H
- hGvBAnyu/5sxsgbrXCA8DYsBn+SZJOfqYhkxCwsSyl7JG/hljkO1qbV74JmtGyOlyU0RsqxtX1
- 7mxKBjDJBISIu7hqAVwOLkCuIYYsm1pp0fQiLP9u4jxoV0rMad0ShpDm6oa/HC5gpPJjvApMoe
- f/N34FOgpblsX9JFgpvOa2Ok
+  bh=qiTCQde4ESeiEmkkyzpe1PUHy1DiTkjg/pAXNlV41C8=;
+  b=fm1yg1FP1ScNdkBPHYS1Sxh6mFKwi4y0Y3OuVX4eJVEEz8LDawQNbiIc
+   FOFrkmINkyvW8ICakNsvm5/kJazuSKsJbpeN7264C/8ZCC+bvMst++9eC
+   lp+DLtO6SqotCCXz4EgexWABIujM/7k8ud1p/3N945TzZqVvPhGp+BkQw
+   Q=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: p2E3iK5ubT2TJdzcT1TYGnOtYAnCJXZSJgSZdmYK29bNZEfw6lVl4SVJAUI1R8NNwidRu4Z/7W
+ fmBnygXvUMNieufWuSG/r818X60MVeR0u926HauLxZ+82ttMDh0bJ7N4naGxeMmFxaU2lXPzdi
+ 8o3zi+BWz+wfRO4xSUFqedqCUYxzuHlAHg6S13BWpPNT+lVXMcH6vgbBrTtjRf54A+vSygusZS
+ sp8+4aExr4uaGqDHuls/JFhG0Q7ZFTUibmniwB6Xx3xBzxsV+ctQhHJGAGDuS36JMg5xqMXHKe
+ Lzqe+SWerqEthP/oTuPIsUj5
 X-SBRS: 5.1
-X-MesageID: 58637842
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 58576729
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:d0H3WaoZjSP7dXIpEZErTehnHo1eBmKJYhIvgKrLsJaIsI4StFCzt
- garIBmHPf2OYmD8eoxwbNmwoE1Su8OBmoUwSAY6ryo1FStHopuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2ILkW1nlV
- e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
- 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
- DlCnbWVdD9uIbPLo+02aj98PQZDB6xAwbCSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
- 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFIoZpnFnyyCfFfs8SIrPa67L+cVZzHE7gcUm8fP2O
- ppHMmU/ME6ojxtnBVUtK4x5ms6SmUK4KzNZmFSznbs6/D2GpOB2+Oe0a4eEEjCQfu1OhVqRr
- G/C+2X/AzkZOcaZxD7D9Wij7sfQmQvrVYRUE6e3ntZhiUefwWE7AxQMWVy25/K+jyaWWc9bK
- kES0jojq+417kPDZsnwWVi0rWCJujYYWsFMCKsq5QeV0K3W7g2FQG8eQVZpatYrqcs3TjwCz
- UKSkpXiAjkHmLyKS1qN+7GMtzSwNCMJa2gYakc5oRAtuoe55ttp11SWE4glQPXdYsDJ9S/Y6
- hW3lG8hmbIohOUy8YGV2m39gjSVqc2cJuIq3Tn/UmWg5wJ/QYeqYY209FTWhcp9wJalokqp5
- yZdxZXHhAwaJdTUzXHWHr1RdF28z6/daGW0vLJ5I3U2G91BEVaHdJsY3jxxLVwB3i0sKW6wO
- x+7Ve+8CfZu0JqWgU1fP93Z5ycCl/GI+THZuhf8NIcmX3SJXFXblByCn3K40WH3i1QLmqoiI
- 5qdesvEJS9EUvs4k2vmF7ZHj+5DKsUCKYT7H86T8vha+eDGOC79pUktbDNikdzVHIvb+V6Io
- r6zxuOByglFUf2WX8Uk2dV7ELz+FlBiXcqeg5UOLoare1M6cEl8W6656e5wIORNwvUK/tokC
- 1ngAydw0kTkv3TbJG2iMzY7AF8Zdc0k9ixT0O1FFQvA5kXPlq7ztvpCLMVuIuF8nAGhpNYtJ
- 8Q4lwy7KqwnYlz6F/41NPERdaRuK0amgxygJS2gbGRtdpJsXVWRqNTlYhHu5G8FCS/u7Zkyp
- Lip1wX6R5sfRls9UJaKOaz3l17h72IAnO9SXlfTJoUBckvb74U3eTf6ieU6Ip9QJEyblCeaz
- QufHTwRufLJ/90u6NDMiK3d99WpHuJyE1B0BW7e6brqZyDW8nD6md1LUfqSfCCbX2Txof3wa
- eJQxvD6EfsGgFcV7NYsT+c1lfozvoK9qaVbwwJoGGTwQ26qUr4wcGOb2cRvt7FWwuMLswWBR
- U/SqMJRPq+EOZ25HQdJdhYldOmKydodhiLWsaYuOEz/6SJ6oOiHXEFVM0XegSBRNuIoYoYsw
- ONns88K8Q2vzBEtN4/e3CxT8m2NKF0GUrkm6c5GUNO61FJzxwEQe4HYBw/3/IqLOodFPUQdK
- zOJgLbP2uZHzU3YfntvTXXA0IKxX3jVVMymGLPaG2m0pw==
-IronPort-HdrOrdr: A9a23:1+5PE6wC1+W0qN5WwSUqKrPxqeskLtp133Aq2lEZdPULSL37qy
- n+poV56farslYssSkb6K690Wy7MAHhHO1OkPgs1NaZMjUO11HYVr2KgbGSpAEIXheOidK1tp
- 0QPJSWaueAcGSS5PySiGLTfLdQpajizE2xv4vjJjVWPH1XgslbnkRE422gYzRLrXx9dOEE/e
- 2nl7J6TlSbCBIqR/X+LH8JU9XcoZnumIj9aRALJzNP0njOsRqYrJT9HhSkwBEmSDVEza05/W
- WtqX242kyWiYD49vaQ7R6K03yY8OGRhudrNYipsIw4Oz/sggGnaMBIXKCDhik8pKWV5FMjgL
- D30lwd15AY0R7sV1DwhSGo9xjr0T4o5XOn40Sfm2HfrcvwQy9/I9ZdhKpCGyGpunYIjZVZ6u
- ZmzmiZv51YAVfrhyLm/eXFUBlsiw6dvWciq+gOlHZSOLFuNoO5lbZvrH+9La1wQB4SqbpXTd
- WGNfusvsq+pGnqMEwwvQFUsZSRtzoIb1n2EXTrfKSuon1rdTtCvjslLfck7wM9HEhUcegB2w
- 2NCNUaqFhvdL5RUUsvPpZZfSNAYla9DC4lDgqpUCLa/FZuAQOGl3ew2sRv2Mirf5MP0Zc5md
- DAXTpjxCkPknPVeISzNcdwg2XwqU2GLEPQ9v0=
+IronPort-Data: A9a23:725R7KtZsRD2jzLt4P41BUD9lOfnVNJZMUV32f8akzHdYApBsoF/q
+ tZmKWzVOffbN2b2c95xYN/i9x5U7JCDn9ZmTQNkpX8xES4T+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24XhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ Nplr6K3dgQCNYjwpboQdUd+LSRZZawX9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DNYUDunZm3HfBAOwvW5zrSKTW/95Imjw3g6iiGN6DN
+ 5dGN2U1PXwsZTVJHXITA7wUnt24j17tVmJ8q3mFqJEetj27IAtZj+G2bYu9lsaxbcdImkeVo
+ ErW8mK/BQsVXPSE0iaM+H+ogu7JnAv4VZgUGbn+8eRl6HWMwkQDBRtQUkG0ydGph0j7V99BJ
+ kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c9tPEcUq5QeV0K3W7g2FQG8eQVZpatYrqcs3TjwCz
+ UKSkpXiAjkHjVGOYSvDrPHO92r0YHVLaz9ZDcMZcecby8Pdp74wpRnqcus9HYjrqOPwPmnxk
+ j/f+UDSmI4vpcIM0qy6+3XOjDStuoXFQ2YJ2+nHYo62xlgnPdD4PuRE/XCetK8dd9jBEjFtq
+ VBdw5DGhN3iG61hg8BkrA8lOLiyr8iIPzTH6bKEN8lwrm/9k5JPkG053d2fGKuLGppbEdMKS
+ BWK0e+02HO0FCH3BZKbm6rrV6wXIVLcPdrkTOvISdFFf4J8cgSKlAk3OxXPgD+8wBh9y/9uU
+ Xt+TSpLJSxEYZmLMRLsH7tNuVPV7nxWKZzvqWDTkE38jOv2iI+9QrYZKlqeBt3VH4vfyDg5B
+ +13bpPQoz0GCbWWSnCOreY7cABbRVBmVMueg5EGKYa+zv9ORThJI+XP2okoZ4ENt/0Tzo8kC
+ FnmARQGoLc+7FWaQTi3hodLNOmyAM0h9C1jZkTB/z+AghAeXGpm149HH7NfQFXt3LYLISdcQ
+ 6ZXdsOeLO5ITzibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz8
+ ++6ywfWYZsfXAA+XszYX+2ikgGqtn8HleMsA0aReotPeF/h+ZRBIjDqiqNlONkFLBjOn2PI1
+ wufDRoCi/PKpos5rIvAiaye9t/7GOpiBEtKWWLc6O/uZyXd+2Oix65GUfqJIm+BBD+lpv36a
+ LwMnf/mMfABkFJbiKZGEu5mnfAk+t/ih75G1QA4Tn/FWEumV+F7KX6c0MgR6qAUnu1FuRG7U
+ 16k88VBPenbI9vsFVMcKVZ3bumH0v1IyDDe4e5sfRf/7S5zurGGTV9TL1+HjykEdOl5N4Ysw
+ OEAvs8K6lPg1kp2Y4je1i0EpX6RKnEgUrk8ssBICYDmvQMn11VebMGOESTx+pyON41BP0RCz
+ uV4X0Yea2CwHnb/Tkc=
+IronPort-HdrOrdr: A9a23:y2VlsKNEAx6esMBcTsejsMiBIKoaSvp037Eqv3ofdfUzSL3+qy
+ nOpoVj6faaslcssR0b9OxofZPwI080lqQFhbX5X43DYOCOggLBR+tfBMnZsljd8kXFh4hgPM
+ xbHZSWZuedMbEDt7eY3DWF
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="58637842"
+   d="scan'208";a="58576729"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>, Julien Grall
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
+ Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Doug Goldstein <cardoe@cardoe.com>
-Subject: [XEN PATCH v8 15/47] build: hook kconfig into xen build system
-Date: Thu, 25 Nov 2021 13:39:34 +0000
-Message-ID: <20211125134006.1076646-16-anthony.perard@citrix.com>
+	<wl@xen.org>
+Subject: [XEN PATCH v8 44/47] WIP, no-VPATH: build object from S source to be in build_in.o
+Date: Thu, 25 Nov 2021 13:40:03 +0000
+Message-ID: <20211125134006.1076646-45-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -112,408 +105,115 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Now that xen's build system is very close to Linux's ones, we can hook
-"Makefile.host" into Xen's build system, and we can build Kconfig with
-that.
-
-"tools/kconfig/Makefile" now needs a workaround to not rebuild
-"$(XEN_ROOT)/.config", as `make` tries the rules "%.config" which
-fails with:
-    tools/kconfig/Makefile:95: *** No configuration exists for this target on this architecture.  Stop.
+similair to gen-objs-S, but obj-gen-y will be added to build_in.o
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
-    v8:
-    - reviewed
-    - adjust Makefile.host to use the renamed macro "multi-depend".
-    - move .config empty rules workaround into kconfig/Makefile (from Rules.mk)
-      and merge the change of patch
-            build: add an other explicite rules to not build $(XEN_ROOT)/.config
-      into
-            build: hook kconfig into xen build system
+    we could maybe use $(targets) instead of introducing new variables.
 
- xen/Makefile                                 |  34 ++++--
- xen/Rules.mk                                 |  13 ++-
- xen/scripts/Kbuild.include                   |  31 ++++++
- xen/scripts/Makefile.clean                   |  11 +-
- xen/{tools/kconfig => scripts}/Makefile.host |  11 +-
- xen/tools/kconfig/Makefile                   |   3 +
- xen/tools/kconfig/Makefile.kconfig           | 106 -------------------
- 7 files changed, 86 insertions(+), 123 deletions(-)
- rename xen/{tools/kconfig => scripts}/Makefile.host (95%)
- delete mode 100644 xen/tools/kconfig/Makefile.kconfig
+ xen/Rules.mk        | 21 ++++++++++++++-------
+ xen/common/Makefile |  2 +-
+ 2 files changed, 15 insertions(+), 8 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index d38425234c6c..c26c44818916 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -40,6 +40,7 @@ ARCH=$(XEN_TARGET_ARCH)
- SRCARCH=$(shell echo $(ARCH) | \
-           sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-               -e s'/riscv.*/riscv/g')
-+export ARCH SRCARCH
- 
- # Don't break if the build process wasn't called from the top level
- # we need XEN_TARGET_ARCH to generate the proper config
-@@ -163,6 +164,13 @@ ifneq ($(filter %config,$(MAKECMDGOALS)),)
-     config-build := y
- endif
- 
-+export CONFIG_SHELL := $(SHELL)
-+export YACC = $(if $(BISON),$(BISON),bison)
-+export LEX = $(if $(FLEX),$(FLEX),flex)
-+
-+# Default file for 'make defconfig'.
-+export KBUILD_DEFCONFIG := $(ARCH)_defconfig
-+
- # CLANG_FLAGS needs to be calculated before calling Kconfig
- ifneq ($(shell $(CC) --version 2>&1 | head -n 1 | grep clang),)
- CLANG_FLAGS :=
-@@ -203,9 +211,6 @@ PHONY += tools_fixdep
- tools_fixdep:
- 	$(MAKE) -C tools fixdep
- 
--# Shorthand for kconfig
--kconfig = -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)"
--
- ifeq ($(config-build),y)
- # ===========================================================================
- # *config targets only - make sure prerequisites are updated, and descend
-@@ -221,14 +226,14 @@ filechk_kconfig_allconfig = \
- .allconfig.tmp: FORCE
- 	set -e; { $(call filechk_kconfig_allconfig); } > $@
- 
--config: FORCE
--	$(MAKE) $(kconfig) $@
-+config: tools_fixdep FORCE
-+	$(Q)$(MAKE) $(build)=tools/kconfig $@
- 
- # Config.mk tries to include .config file, don't try to remake it
- %/.config: ;
- 
--%config: .allconfig.tmp FORCE
--	$(MAKE) $(kconfig) KCONFIG_ALLCONFIG=$< $@
-+%config: .allconfig.tmp tools_fixdep FORCE
-+	$(Q)$(MAKE) $(build)=tools/kconfig KCONFIG_ALLCONFIG=$< $@
- 
- else # !config-build
- 
-@@ -238,9 +243,15 @@ ifeq ($(need-config),y)
- # changes are detected.
- -include include/config/auto.conf.cmd
- 
-+# This allows make to build fixdep before invoking defconfig. We can't use
-+# "tools_fixdep" which is a .PHONY target and would force make to call
-+# "defconfig" again to update $(KCONFIG_CONFIG).
-+tools/fixdep:
-+	$(MAKE) -C tools fixdep
-+
- # Allow people to just run `make` as before and not force them to configure
--$(KCONFIG_CONFIG):
--	$(MAKE) $(kconfig) defconfig
-+$(KCONFIG_CONFIG): tools/fixdep
-+	$(Q)$(MAKE) $(build)=tools/kconfig defconfig
- 
- # The actual configuration files used during the build are stored in
- # include/generated/ and include/config/. Update them if .config is newer than
-@@ -249,7 +260,7 @@ $(KCONFIG_CONFIG):
- # This exploits the 'multi-target pattern rule' trick.
- # The syncconfig should be executed only once to make all the targets.
- include/config/%.conf include/config/%.conf.cmd: $(KCONFIG_CONFIG)
--	$(MAKE) $(kconfig) syncconfig
-+	$(Q)$(MAKE) $(build)=tools/kconfig syncconfig
- 
- ifeq ($(CONFIG_DEBUG),y)
- CFLAGS += -O1
-@@ -409,9 +420,10 @@ _clean:
- 	$(MAKE) $(clean) arch/riscv
- 	$(MAKE) $(clean) arch/x86
- 	$(MAKE) $(clean) test
--	$(MAKE) $(kconfig) clean
-+	$(MAKE) $(clean) tools/kconfig
- 	find . \( -name "*.o" -o -name ".*.d" -o -name ".*.d2" \
- 		-o -name ".*.o.tmp" -o -name "*~" -o -name "core" \
-+		-o -name '*.lex.c' -o -name '*.tab.[ch]' \
- 		-o -name "*.gcno" -o -name ".*.cmd" -o -name "lib.a" \) -exec rm -f {} \;
- 	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
- 	rm -f asm-offsets.s arch/*/include/asm/asm-offsets.h
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index d32fec0ae037..f452a821cc86 100644
+index 2d8d32f5fd72..0ef45d2c7087 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -89,6 +89,13 @@ subdir-y        := $(addprefix $(obj)/,$(subdir-y))
- nocov-y         := $(addprefix $(obj)/,$(nocov-y))
- noubsan-y       := $(addprefix $(obj)/,$(noubsan-y))
+@@ -22,6 +22,7 @@ include $(srctree)/scripts/Kbuild.include
  
-+# Do not include hostprogs rules unless needed.
-+# $(sort ...) is used here to remove duplicated words and excessive spaces.
-+hostprogs-y := $(sort $(hostprogs-y))
-+ifneq ($(hostprogs-y),)
-+include scripts/Makefile.host
+ # Initialise some variables
+ obj-y :=
++obj-gen-y :=
+ lib-y :=
+ targets :=
+ ## targets made from generated sources
+@@ -98,6 +99,7 @@ always-y        := $(addprefix $(obj)/,$(always-y))
+ targets         := $(addprefix $(obj)/,$(targets))
+ lib-y           := $(addprefix $(obj)/,$(lib-y))
+ obj-y           := $(addprefix $(obj)/,$(obj-y))
++obj-gen-y       := $(addprefix $(obj)/,$(obj-gen-y))
+ obj-bin-y       := $(addprefix $(obj)/,$(obj-bin-y))
+ gen-objs-c      := $(addprefix $(obj)/,$(gen-objs-c))
+ gen-objs-S      := $(addprefix $(obj)/,$(gen-objs-S))
+@@ -112,6 +114,11 @@ ifneq ($(hostprogs-y),)
+ include $(srctree)/scripts/Makefile.host
+ endif
+ 
++ifndef building_out_of_srctree
++    obj-y += $(obj-gen-y)
++    obj-gen-y :=
 +endif
 +
  # subdir-builtin may contain duplications. Use $(sort ...)
  subdir-builtin := $(sort $(filter %/built_in.o, $(obj-y)))
  
-@@ -267,7 +274,11 @@ intermediate_targets = $(foreach sfx, $(2), \
- 				$(patsubst %$(strip $(1)),%$(sfx), \
- 					$(filter %$(strip $(1)), $(targets))))
- # %.init.o <- %.o
--targets += $(call intermediate_targets, .init.o, .o)
-+# %.lex.o <- %.lex.c <- %.l
-+# %.tab.o <- %.tab.[ch] <- %.y
-+targets += $(call intermediate_targets, .init.o, .o) \
-+	   $(call intermediate_targets, .lex.o, .lex.c) \
-+	   $(call intermediate_targets, .tab.o, .tab.c .tab.h)
+@@ -144,7 +151,7 @@ else
+ endif
  
- # Build
- # ---------------------------------------------------------------------------
-diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
-index 6be38301e835..79b42e1252d6 100644
---- a/xen/scripts/Kbuild.include
-+++ b/xen/scripts/Kbuild.include
-@@ -25,6 +25,37 @@ real-prereqs = $(filter-out $(PHONY), $^)
- # Escape single quote for use in echo statements
- escsq = $(subst $(squote),'\$(squote)',$1)
+ # Reset COV_FLAGS in cases where an objects has another one as prerequisite
+-$(nocov-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
++$(nocov-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(obj-gen-y) $(extra-y)): \
+     COV_FLAGS :=
  
-+###
-+# Easy method for doing a status message
-+       kecho := :
-+ quiet_kecho := echo
-+silent_kecho := :
-+kecho := $($(quiet)kecho)
-+
-+###
-+# filechk is used to check if the content of a generated file is updated.
-+# Sample usage:
-+#
-+# filechk_sample = echo $(KERNELRELEASE)
-+# version.h: FORCE
-+#	$(call filechk,sample)
-+#
-+# The rule defined shall write to stdout the content of the new file.
-+# The existing file will be compared with the new one.
-+# - If no file exist it is created
-+# - If the content differ the new file is used
-+# - If they are equal no change, and no timestamp update
-+define filechk
-+	$(Q)set -e;						\
-+	mkdir -p $(dir $@);					\
-+	trap "rm -f $(dot-target).tmp" EXIT;			\
-+	{ $(filechk_$(1)); } > $(dot-target).tmp;		\
-+	if [ ! -r $@ ] || ! cmp -s $@ $(dot-target).tmp; then	\
-+		$(kecho) '  UPD     $@';			\
-+		mv -f $(dot-target).tmp $@;			\
-+	fi
-+endef
-+
- # as-insn: Check whether assembler supports an instruction.
- # Usage: cflags-y += $(call as-insn,CC FLAGS,"insn",option-yes,option-no)
- as-insn = $(if $(shell echo 'void _(void) { asm volatile ( $(2) ); }' \
-diff --git a/xen/scripts/Makefile.clean b/xen/scripts/Makefile.clean
-index c3b0681611da..156d6307cf83 100644
---- a/xen/scripts/Makefile.clean
-+++ b/xen/scripts/Makefile.clean
-@@ -17,8 +17,17 @@ include $(src)/Makefile
- subdir-all := $(subdir-y) $(subdir-n) $(subdir-) \
-               $(patsubst %/,%, $(filter %/, $(obj-y) $(obj-n) $(obj-)))
+ $(non-init-objects): _c_flags += $(COV_FLAGS)
+@@ -155,7 +162,7 @@ ifeq ($(CONFIG_UBSAN),y)
+ UBSAN_FLAGS := $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
  
-+__clean-files := \
-+    $(clean-files) $(hostprogs-y) $(hostprogs-)
-+
-+__clean-files := $(wildcard $(__clean-files))
-+
- .PHONY: clean
--clean:: $(subdir-all) ;
-+clean:: $(subdir-all)
-+ifneq ($(strip $(__clean-files)),)
-+	rm -rf $(__clean-files)
-+endif
-+	@:
+ # Reset UBSAN_FLAGS in cases where an objects has another one as prerequisite
+-$(noubsan-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
++$(noubsan-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(obj-gen-y) $(extra-y)): \
+     UBSAN_FLAGS :=
  
- # Descending
- # ---------------------------------------------------------------------------
-diff --git a/xen/tools/kconfig/Makefile.host b/xen/scripts/Makefile.host
-similarity index 95%
-rename from xen/tools/kconfig/Makefile.host
-rename to xen/scripts/Makefile.host
-index 4c51c95d40f4..8a85f94316bc 100644
---- a/xen/tools/kconfig/Makefile.host
-+++ b/xen/scripts/Makefile.host
-@@ -1,5 +1,8 @@
- # SPDX-License-Identifier: GPL-2.0
+ $(non-init-objects): _c_flags += $(UBSAN_FLAGS)
+@@ -209,13 +216,13 @@ cmd_ld_builtin = \
+     $(LD) $(XEN_LDFLAGS) -r -o $@ $(real-prereqs)
+ endif
  
-+# target with $(obj)/ and its suffix stripped
-+target-stem = $(basename $(patsubst $(obj)/%,%,$@))
-+
- # LEX
- # ---------------------------------------------------------------------------
- quiet_cmd_flex = LEX     $@
-@@ -114,7 +117,7 @@ quiet_cmd_host-cmulti	= HOSTLD  $@
- 			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
- $(host-cmulti): FORCE
- 	$(call if_changed,host-cmulti)
--$(call multi_depend, $(host-cmulti), , -objs)
-+$(call multi-depend, $(host-cmulti), , -objs)
+-$(obj)/built_in.o: $(obj-y) FORCE
+-	$(call if_changed,$(if $(strip $(obj-y)),ld_builtin,cc_builtin))
++$(obj)/built_in.o: $(obj-y) $(obj-gen-y) FORCE
++	$(call if_changed,$(if $(strip $(obj-y) $(obj-gen-y)),ld_builtin,cc_builtin))
  
- # Create .o file from a single .c file
- # host-cobjs -> .o
-@@ -132,7 +135,7 @@ quiet_cmd_host-cxxmulti	= HOSTLD  $@
- 			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
- $(host-cxxmulti): FORCE
- 	$(call if_changed,host-cxxmulti)
--$(call multi_depend, $(host-cxxmulti), , -objs -cxxobjs)
-+$(call multi-depend, $(host-cxxmulti), , -objs -cxxobjs)
+ $(obj)/lib.a: $(lib-y) FORCE
+ 	$(call if_changed,ar)
  
- # Create .o file from a single .cc (C++) file
- quiet_cmd_host-cxxobjs	= HOSTCXX $@
-@@ -165,7 +168,7 @@ quiet_cmd_host-cshlib	= HOSTLLD -shared $@
- 			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
- $(host-cshlib): FORCE
- 	$(call if_changed,host-cshlib)
--$(call multi_depend, $(host-cshlib), .so, -objs)
-+$(call multi-depend, $(host-cshlib), .so, -objs)
+-targets += $(filter-out $(subdir-builtin), $(obj-y))
++targets += $(filter-out $(subdir-builtin), $(obj-y) $(obj-gen-y))
+ targets += $(lib-y) $(MAKECMDGOALS)
  
- # Link a shared library, based on position independent .o files
- # *.o -> .so shared library (host-cxxshlib)
-@@ -175,7 +178,7 @@ quiet_cmd_host-cxxshlib	= HOSTLLD -shared $@
- 			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
- $(host-cxxshlib): FORCE
- 	$(call if_changed,host-cxxshlib)
--$(call multi_depend, $(host-cxxshlib), .so, -objs)
-+$(call multi-depend, $(host-cxxshlib), .so, -objs)
+ $(obj)/built_in_bin.o: $(obj-bin-y)
+@@ -258,7 +265,7 @@ quiet_cmd_cc_o_S = CC      $@
+ cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
  
- targets += $(host-csingle)  $(host-cmulti) $(host-cobjs)\
- 	   $(host-cxxmulti) $(host-cxxobjs) $(host-cshlib) $(host-cshobjs) $(host-cxxshlib) $(host-cxxshobjs)
-diff --git a/xen/tools/kconfig/Makefile b/xen/tools/kconfig/Makefile
-index f39521a0ed5b..b7b9a419ad59 100644
---- a/xen/tools/kconfig/Makefile
-+++ b/xen/tools/kconfig/Makefile
-@@ -91,6 +91,9 @@ endif
+ ifdef building_out_of_srctree
+-$(gen-objs-S): $(obj)/%.o: $(obj)/%.S FORCE
++$(gen-objs-S) $(obj-gen-y): $(obj)/%.o: $(obj)/%.S FORCE
+ 	$(call if_changed_dep,cc_o_S)
+ endif
+ $(obj)/%.o: $(src)/%.S FORCE
+@@ -279,7 +286,7 @@ define cmd_obj_init_o
+     $(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
+ endef
  
- configfiles=$(wildcard $(srctree)/kernel/configs/$@ $(srctree)/arch/$(SRCARCH)/configs/$@)
+-$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): $(obj)/%.init.o: $(obj)/%.o FORCE
++$(filter %.init.o,$(obj-y) $(obj-bin-y) $(obj-gen-y) $(extra-y)): $(obj)/%.init.o: $(obj)/%.o FORCE
+ 	$(call if_changed,obj_init_o)
  
-+# Don't try to remake this file included by Config.mk.
-+$(XEN_ROOT)/.config: ;
-+
- %.config: $(obj)/conf
- 	$(if $(call configfiles),, $(error No configuration exists for this target on this architecture))
- 	$(Q)$(CONFIG_SHELL) $(srctree)/tools/kconfig/merge_config.sh -m .config $(configfiles)
-diff --git a/xen/tools/kconfig/Makefile.kconfig b/xen/tools/kconfig/Makefile.kconfig
-deleted file mode 100644
-index 799321ec4d07..000000000000
---- a/xen/tools/kconfig/Makefile.kconfig
-+++ /dev/null
-@@ -1,106 +0,0 @@
--# xen/tools/kconfig
--
--# default rule to do nothing
--all:
--
--# Xen doesn't have a silent build flag
--quiet :=
--Q :=
--kecho := :
--
--# eventually you'll want to do out of tree builds
--srctree := $(BASEDIR)
--objtree := $(srctree)
--src := tools/kconfig
--obj := $(src)
--
--# handle functions (most of these lifted from different Linux makefiles
--dot-target = $(dir $@).$(notdir $@)
--depfile = $(subst $(comma),,$(dot-target).d)
--basetarget = $(basename $(notdir $@))
--# target with $(obj)/ and its suffix stripped
--target-stem = $(basename $(patsubst $(obj)/%,%,$@))
--cmd = $(cmd_$(1))
--if_changed = $(cmd_$(1))
--if_changed_dep = $(cmd_$(1))
--
--###
--# filechk is used to check if the content of a generated file is updated.
--# Sample usage:
--#
--# filechk_sample = echo $(KERNELRELEASE)
--# version.h: FORCE
--#	$(call filechk,sample)
--#
--# The rule defined shall write to stdout the content of the new file.
--# The existing file will be compared with the new one.
--# - If no file exist it is created
--# - If the content differ the new file is used
--# - If they are equal no change, and no timestamp update
--# - stdin is piped in from the first prerequisite ($<) so one has
--#   to specify a valid file as first prerequisite (often the kbuild file)
--define filechk
--	$(Q)set -e;				\
--	mkdir -p $(dir $@);			\
--	{ $(filechk_$(1)); } > $@.tmp;		\
--	if [ -r $@ ] && cmp -s $@ $@.tmp; then	\
--		rm -f $@.tmp;			\
--	else					\
--		$(kecho) '  UPD     $@';	\
--		mv -f $@.tmp $@;		\
--	fi
--endef
--
--define multi_depend
--$(foreach m, $(notdir $1), \
--	$(eval $(obj)/$m: \
--	$(addprefix $(obj)/, $(foreach s, $3, $($(m:%$(strip $2)=%$(s)))))))
--endef
--
--# Set our default defconfig file
--KBUILD_DEFCONFIG := $(ARCH)_defconfig
--
--# provide our shell
--CONFIG_SHELL := $(SHELL)
--
--# provide the host compiler
--HOSTCC ?= gcc
--HOSTCXX ?= g++
--YACC = $(if $(BISON),$(BISON),bison)
--LEX = $(if $(FLEX),$(FLEX),flex)
--
--# force target
--PHONY += FORCE
--
--FORCE:
--
--# include the original Makefile and Makefile.host from Linux
--include $(src)/Makefile
--include $(src)/Makefile.host
--
--# Add intermediate targets:
--# When building objects with specific suffix patterns, add intermediate
--# targets that the final targets are derived from.
--intermediate_targets = $(foreach sfx, $(2), \
--				$(patsubst %$(strip $(1)),%$(sfx), \
--					$(filter %$(strip $(1)), $(targets))))
--
--# %.lex.o <- %.lex.c <- %.l
--# %.tab.o <- %.tab.[ch] <- %.y
--targets += $(call intermediate_targets, .lex.o, .lex.c) \
--	   $(call intermediate_targets, .tab.o, .tab.c .tab.h)
--
--# clean up rule
--clean-deps = $(foreach f,$(host-cobjs) $(host-cxxobjs),$(dir $f).$(notdir $f).d)
--clean-shipped = $(patsubst %_shipped,%,$(wildcard $(obj)/*_shipped))
--
--clean:
--	rm -rf $(clean-files)
--	rm -rf $(clean-deps)
--	rm -rf $(host-csingle) $(host-cmulti) $(host-cxxmulti) $(host-cobjs) $(host-cxxobjs)
--	rm -rf $(clean-shipped)
--
--$(obj)/zconf%: $(src)/zconf%_shipped
--	cp -f $< $@
--
--.PHONY: $(PHONY)
+ quiet_cmd_cpp_i_c = CPP     $@
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index b1e076c30b81..fe3a4b7a8619 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -1,6 +1,6 @@
+ obj-$(CONFIG_ARGO) += argo.o
+ obj-y += bitmap.o
+-obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
++obj-gen-$(CONFIG_HYPFS_CONFIG) += config_data.o
+ obj-$(CONFIG_CORE_PARKING) += core_parking.o
+ obj-y += cpu.o
+ obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
 -- 
 Anthony PERARD
 
