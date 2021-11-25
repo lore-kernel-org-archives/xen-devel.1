@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4059C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2ACC43219
 	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:40:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231211.399973 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.231210.399968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqEzP-0008M5-4N; Thu, 25 Nov 2021 13:40:39 +0000
+	id 1mqEzO-0008IU-My; Thu, 25 Nov 2021 13:40:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231211.399973; Thu, 25 Nov 2021 13:40:39 +0000
+Received: by outflank-mailman (output) from mailman id 231210.399968; Thu, 25 Nov 2021 13:40:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqEzO-0008Kj-Rs; Thu, 25 Nov 2021 13:40:38 +0000
-Received: by outflank-mailman (input) for mailman id 231211;
+	id 1mqEzO-0008Hg-I5; Thu, 25 Nov 2021 13:40:38 +0000
+Received: by outflank-mailman (input) for mailman id 231210;
  Thu, 25 Nov 2021 13:40:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqEzM-0007NX-Jr
+ id 1mqEzL-00076i-UX
  for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:40:36 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 43c6aa46-4df5-11ec-9787-a32c541c8605;
- Thu, 25 Nov 2021 14:40:35 +0100 (CET)
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4191a2af-4df5-11ec-a9d2-d9f7a1cc8784;
+ Thu, 25 Nov 2021 14:40:32 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,65 +38,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43c6aa46-4df5-11ec-9787-a32c541c8605
+X-Inumbo-ID: 4191a2af-4df5-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847635;
+  d=citrix.com; s=securemail; t=1637847631;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=jQJAUxBLM/0m6SUtricyeZkrF61UL/f8bZNw+7LnUuE=;
-  b=AlOItSa0uLQlF2q5Wom1cF2QvDZteffvWuQb5gQUQ5CWTZf2bQBSQwgW
-   gpRDmVgqnCZ2r7YVw0E+1sJ1E2DiHo8iUpx1j4mHO+FlIvzZpfnL8YBFf
-   Prxa+EnBsbSLWLcW2oxDgJxCZ2/LxATn0+Cjzts+4ySjlHcXGH2azUwII
-   M=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: SpLB2JVZLT1tpqFMwNTKwhY0jtt7aiU/VagXUS33Zq8+3C3opRRGVoCF7VnfYEvwXWhjClWUYL
- +BvugkFmclJ+TSOcI9O+65lgd5X9SdVAve0f4ZBegdZAv8zBbgtRGoFH8HunFFEGcdg6WlyMHm
- RvAyH7oxxZEkRKxIykyMXSW/67MEVaY/rRiYdlbuuiN5zA6N424ygPSXN8wa5Q2Lp6Q+W3MFi9
- onrIkyqt4nIS2bBnfb6Bd/o3sUADtwP/yV5ieqQPbMFHVYyU2tEhPcas8d/4L37YUoGrhXzpCN
- LCVmu09b8sFRgU399y9MBhfT
+  bh=z/WT05OcUodD6RGHso4Z+Hq1+po51KMdUGAn2O0jpV0=;
+  b=ZAWq4EeOVIDRUbEy/7i8b2gPliM3P9NeUvJsDZUs/QFNLvxEFjelb/FK
+   21vZ8hahXpuLKF+mM/qJPB6F5/YTVaERNFHLZKv9PwKK3FbS1fg6bzhxG
+   aR3ufZGAzWWdg2cpPwJGJyVzgQOxM/Icpv0NuCj/rvP8n4bV9gWFsNsce
+   o=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: NlgjfJW98Grgo79rJFB0j2lKZZP6pmsV+RhUwPF+L98C7ubzhJyURbNM6dJdFn456UacZ7oSAK
+ YDQPfh0Yb2XLMPDLKXBz7dErIdLCPeQT/PQ/nr8cbvbuzgg1vEGyjrsQLPWFbiXpVOH1qapvJM
+ X/QiDCeYkt27L85Mmht/i03S+Vg3HC/Lo3blZ51Mxukg4Bz1U3AcDLa9CiQBEHBIcUbgCzmzRY
+ 3Xeqt077mdRoE4AeLmX5zdyumWmSRpTlYpxDf49x6jc3ZfkB5bJyu7XU/kTvBlLP1t+1Ug54Oe
+ fGjd9J2R0Lv+8Ce2cZl06MYW
 X-SBRS: 5.1
-X-MesageID: 59005967
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 58576636
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:KSkYVK/8aKM06a6KKYqfDrUDC3mTJUtcMsCJ2f8bNWPcYEJGY0x3y
- mAfCzyGOPffZWb3LtkjbN6/ph5UsMOHx9VgTgVrrS48E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdj39Yy6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPgg9
- elnuaCAdDsYEa2TlrUEWjViOBNhaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwqKtXrO4UO/Glt1zjDAd4tQIzZQrWM7thdtNs1rp0fRa6DN
- pRGAdZpRDXvXl5hAX0TMoMZhvyzi3/uIgUH63vA8MLb5ECMlVcsgdABKuH9eMGORMhTtlaVo
- CTB5WuRKi8dMNuT2D+U6EWGj+XEnT74cI8KHbj+/flv6HWZy3YPEhQQWR2+qOOgl0+lc9tFL
- gof/S9Ghbg/8gmnQ8fwWzW8oWWYpVgMVtxICeo45QqRjK3O7G6xBGIJUzpAY9wOr9ItSHoh0
- Vrht8jyGTVlvbmRSHSc3rSZtzW/PW4SN2BqWMMfZVJbuZ+5+th110+RCIY4eEKosjHrMWDN/
- xqGkBgDu4Q8jZEFhryy0WrssS358/AlUTUJzgnQW2uk6CZwa4ike5Gk5DDn0BpQEGqKZgLf5
- SZZwqBy+MhLVMjQz3LVHI3hCZnwv67dWAAwl2KDCHXIG96F33e4Nb5d7zhlTKuCGpZVIGS5C
- KM/VO442XOyAJdIRfMoC25SI55zpUQFKTgCfqqJBueimrArKGe6ENhGPCZ8JVzFnkk2ir0YM
- pyGa8uqBntyIf05l2XpGLZNge5xmHFWKYbvqXfTlUrP7FZjTCTNFedt3KWmMojVE59oUC2Kq
- o0CZqNmOj1UUfHkYzm/zGLgBQtiEJTPPriv85Y/XrfaemJOQTh9Y9eMkeJJU9E0xMx9y7aXl
- kxRr2cFkTITc1Wccl7UAp2iAZuyNatCQYUTYXZxYA32gid7Ou5CLs43LvMKQFXuz8Q7pdYcc
- hXPU5zo7i1nRmuV9jIDQ4P6qYA+Jh2niRjXZ3iuYSQlfo4mTAvMo4e2cgzq/SgILyy2qcph/
- OHwilKFGcIOF1Z4EcLbSPOz1Fft73ITr/1/AhnTKd5JdUSyrIUzc37tjuU6Kt0nIAnYwmfIz
- B6fBBoV/LGfo4I8/NTTq7qDqoOlT7l3EkZARjGJ5reqLyjKuGGkxNYYAuqPeDncUkLy+bmjO
- roJn62tbqVfkQ8T4YRmErttwaYv3PfVpudXnlZ+AXHGT1W3Ebc8cHOI6tZC6/9WzbhDtAroB
- k/WootGOa+EMd/OGUIKIFZ3dfyK0PwZl2WA7fkxJ0mmtiZ78KDeDBdXNhiIzidcMKF0IMUux
- uJ44Jwa7Am2ixwLNNeaj38LqzTQfyJYC6h35IsHBILLixYwzgAQaJPRPSb6/ZWTZogeKUItO
- DKV2PLPirk0KpAuqJbv+awhBdZguKk=
-IronPort-HdrOrdr: A9a23:ou8a4KjUqFS9D0myolYCb/bCLnBQXtwji2hC6mlwRA09TySZ//
- rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
- JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+IronPort-Data: A9a23:g0YqoqJe7reD1XSsFE+RVZIlxSXFcZb7ZxGr2PjKsXjdYENS0mQAy
+ TRKD2iPbKmJYDb1Lo8gPYy39BxVvcPUmtE2SlBlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xrZj6mJVqYPR7z2l6
+ IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2gmIgo7
+ fRxlKfrRDkABaLlwOsMTERXRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Gpg258QQ62AD
+ yYfQRwyfC/YPgRKAGgsFI0Ot7erxULicwQN/Tp5ooJoujOOnWSdyoPFMsfRe9GMbdVYmACfv
+ G2u13/iHhgQOdibyDyE2nGhnOnCmWX8Qo16PKK83u5nhhuU3GN7IA0bUx63rOe0jma6WslDM
+ AoE9yw2t68w+Ue3CN7nUHWQoWGGlg4RXcJKFO834x3LzbDbiy6bDGUZSj9KaPQ9qdQ7Azct0
+ ze0c8jBXGI19ufPEDTEq+nS/Wja1TUpwXEqTChcFC4k3/jY+4wNpynAZ45sAbHogYigcd3v+
+ AyioC87jrQVqMcE0aSn4FzK6w6RSoj1oh0dvVuOAD/8hu9tTMv8PtHztwCHhRpVBN/BFgHpg
+ ZQSpySJAAni57mpnTfFfugCFarBCx2tYGyF2g4H83XMGl2QF5+fkWJ4vG4WyKRBaJ9sldrVj
+ Kj741452XOrFCH2BZKbmb6ZBcUw1rTHHt/4TP3SZdcmSsEvL1DYo3A+NR/KgTGFfK0QfUYXY
+ 8nzTCpRJSxCVfQPIMSeG4/xLoPHNghhnDiOFPgXPjys0KaEZW79dFv2GADmUwzN14vd+F+92
+ 48Gb6OikkwDOMWjMni/2dNCdjgicClkba0aXuQKL4arOBR9Img9Bpf5mPV5E2CTt/8OzbmgE
+ 7DUchIw9WcTclWbc1jXMS46N+u0NXu9xFpiVRER0Z+T8yBLSe6SAG03LvPbpJErq75uy+BaV
+ f4Ad5nSC/hDUG2fqT8ccYP8vMppcxHy3VCCOC+sYT4eeZ98RlOWpo+4L1W3rCReXDCqscYeo
+ qG70l+JS5Q0WAk/Xt3db+iizg3tsCFFyv5yRUbBPvJaZF7orNpxMyX0g/Jue5MMJBzPyyG0z
+ QGTBRtE9+DBr5VsqIvChLyerpfvGOx7RxIIE27e5LewFC/b4mv8ntMQDLfWJWjQDTqm9r+ja
+ ONZy+DHHMcGxFsa4ZBhF7tLzL4l44e9rbFt0Qk5Tm7AaE6mC+08LyDej9VPrKBE2pRQpRCyB
+ hCU4tBfNLiEZJHlHVoWKFZ3Z+iPz6hJyDzb7PBzK0Tm/i5nurGAVBwKbRWLjSVcKppzMZ8kn
+ rh96JJHtVTnh0p4KMuCgwBV63+Ify4JXKgQv50HBJPm11gwwVZYbJ2AUiL77fljsTmX3pXG9
+ tNMuJf/ug==
+IronPort-HdrOrdr: A9a23:SqegZq2JElQSNMSfjakpKgqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoV86faUskdoZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOceEYZmIasS+V2maF+q4bsbu6zJw=
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="59005967"
+   d="scan'208";a="58576636"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "Julien
- Grall" <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH v8 05/47] build: adjust $(TARGET).efi creation in arch/arm
-Date: Thu, 25 Nov 2021 13:39:24 +0000
-Message-ID: <20211125134006.1076646-6-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
+ Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>
+Subject: [XEN PATCH v8 03/47] build: generate "include/xen/compile.h" with if_changed
+Date: Thu, 25 Nov 2021 13:39:22 +0000
+Message-ID: <20211125134006.1076646-4-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -104,35 +105,115 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-There is no need to try to guess a relative path to the "xen.efi" file,
-we can simply use $@. Also, there's no need to use `notdir`, make
-already do that work via $(@F).
+This will avoid regenerating "compile.h" if the content hasn't changed.
+
+As it's currently the case, the file isn't regenerated during `sudo
+make install` if it exist and does belong to a different user, thus we
+can remove the target "delete-unfresh-files". Target "$(TARGET)" still
+need a phony dependency, so add "FORCE".
+
+Use "$(dot-target).tmp" as temporary file as this is already cover by
+".*.tmp" partern in ".gitconfig".
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
     v8:
-    - s/fix/adjust/ in patch title
-    - reviewed
+    - drop change in .gitignore
+    
+    v7:
+    - Use $(if_changed,) instead of importing a new macro from Linux
+      (filechk).
+    - use $(dot-target).tmp as temporary file, that way is hiden, and
+      already cover by .gitignore via ".*.tmp". (filechk was doing the same)
+    - update .gitignore.
 
- xen/arch/arm/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/Makefile | 35 ++++++++++++++++++-----------------
+ 1 file changed, 18 insertions(+), 17 deletions(-)
 
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index a3a497bafe89..d0dee10102b6 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -95,7 +95,7 @@ endif
- $(TARGET): $(TARGET)-syms
- 	$(OBJCOPY) -O binary -S $< $@
- ifeq ($(CONFIG_ARM_64),y)
--	ln -sf $(notdir $@)  ../../$(notdir $@).efi
-+	ln -sf $(@F) $@.efi
- endif
+diff --git a/xen/Makefile b/xen/Makefile
+index b2a63edca1eb..2ad7da7ad67b 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -365,7 +365,7 @@ _debug:
+ 	$(OBJDUMP) -D -S $(TARGET)-syms > $(TARGET).s
  
- ifeq ($(CONFIG_LTO),y)
+ .PHONY: _clean
+-_clean: delete-unfresh-files
++_clean:
+ 	$(MAKE) -C tools clean
+ 	$(MAKE) $(clean) include
+ 	$(MAKE) $(clean) common
+@@ -383,7 +383,7 @@ _clean: delete-unfresh-files
+ 		-o -name "*.gcno" -o -name ".*.cmd" -o -name "lib.a" \) -exec rm -f {} \;
+ 	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
+ 	rm -f asm-offsets.s arch/*/include/asm/asm-offsets.h
+-	rm -f .banner .allconfig.tmp
++	rm -f .banner .allconfig.tmp include/xen/compile.h
+ 
+ .PHONY: _distclean
+ _distclean: clean
+@@ -393,7 +393,7 @@ $(TARGET).gz: $(TARGET)
+ 	gzip -n -f -9 < $< > $@.new
+ 	mv $@.new $@
+ 
+-$(TARGET): delete-unfresh-files
++$(TARGET): FORCE
+ 	$(MAKE) -C tools
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk include/xen/compile.h
+ 	[ -e arch/$(TARGET_ARCH)/efi ] && for f in $$(cd common/efi; echo *.[ch]); \
+@@ -406,14 +406,6 @@ $(TARGET): delete-unfresh-files
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk -C arch/$(TARGET_ARCH) $@
+ 
+-# drivers/char/console.o contains static banner/compile info. Blow it away.
+-# Don't refresh these files during e.g., 'sudo make install'
+-.PHONY: delete-unfresh-files
+-delete-unfresh-files:
+-	@if [ ! -r include/xen/compile.h -o -O include/xen/compile.h ]; then \
+-		rm -f include/xen/compile.h; \
+-	fi
+-
+ quiet_cmd_banner = BANNER  $@
+ define cmd_banner
+     if which figlet >/dev/null 2>&1 ; then \
+@@ -428,9 +420,11 @@ endef
+ 	$(call if_changed,banner)
+ targets += .banner
+ 
+-# compile.h contains dynamic build info. Rebuilt on every 'make' invocation.
+-include/xen/compile.h: include/xen/compile.h.in .banner
+-	@sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
++# Don't refresh this files during e.g., 'sudo make install'
++quiet_cmd_compile.h = UPD     $@
++define cmd_compile.h
++    if [ ! -r $@ -o -O $@ ]; then \
++	sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
+ 	    -e 's/@@time@@/$(XEN_BUILD_TIME)/g' \
+ 	    -e 's/@@whoami@@/$(XEN_WHOAMI)/g' \
+ 	    -e 's/@@domain@@/$(XEN_DOMAIN)/g' \
+@@ -440,10 +434,17 @@ include/xen/compile.h: include/xen/compile.h.in .banner
+ 	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
+ 	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
+ 	    -e 's!@@changeset@@!$(shell tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
+-	    < include/xen/compile.h.in > $@.new
++	    < $< > $(dot-target).tmp; \
++	sed -rf tools/process-banner.sed < .banner >> $(dot-target).tmp; \
++	mv -f $(dot-target).tmp $@; \
++    fi
++endef
++
++include/xen/compile.h: include/xen/compile.h.in .banner FORCE
+ 	@cat .banner
+-	@sed -rf tools/process-banner.sed < .banner >> $@.new
+-	@mv -f $@.new $@
++	$(call if_changed,compile.h)
++
++targets += include/xen/compile.h
+ 
+ asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
+ 	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
 -- 
 Anthony PERARD
 
