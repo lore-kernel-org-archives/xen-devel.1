@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60099C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:48:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231313.400358 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9640EC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:48:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.231315.400366 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF6W-0002Ap-0v; Thu, 25 Nov 2021 13:48:00 +0000
+	id 1mqF6X-0002U1-FP; Thu, 25 Nov 2021 13:48:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231313.400358; Thu, 25 Nov 2021 13:47:59 +0000
+Received: by outflank-mailman (output) from mailman id 231315.400366; Thu, 25 Nov 2021 13:48:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF6V-00026e-5s; Thu, 25 Nov 2021 13:47:59 +0000
-Received: by outflank-mailman (input) for mailman id 231313;
- Thu, 25 Nov 2021 13:47:57 +0000
+	id 1mqF6W-0002PB-Kg; Thu, 25 Nov 2021 13:48:00 +0000
+Received: by outflank-mailman (input) for mailman id 231315;
+ Thu, 25 Nov 2021 13:47:58 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqF0t-00076i-HJ
- for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:42:11 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7cfb8380-4df5-11ec-a9d2-d9f7a1cc8784;
- Thu, 25 Nov 2021 14:42:10 +0100 (CET)
+ id 1mqF0Z-00076i-Go
+ for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:51 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 70706428-4df5-11ec-a9d2-d9f7a1cc8784;
+ Thu, 25 Nov 2021 14:41:50 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,56 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7cfb8380-4df5-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 70706428-4df5-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847730;
+  d=citrix.com; s=securemail; t=1637847710;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qiTCQde4ESeiEmkkyzpe1PUHy1DiTkjg/pAXNlV41C8=;
-  b=fm1yg1FP1ScNdkBPHYS1Sxh6mFKwi4y0Y3OuVX4eJVEEz8LDawQNbiIc
-   FOFrkmINkyvW8ICakNsvm5/kJazuSKsJbpeN7264C/8ZCC+bvMst++9eC
-   lp+DLtO6SqotCCXz4EgexWABIujM/7k8ud1p/3N945TzZqVvPhGp+BkQw
-   Q=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: p2E3iK5ubT2TJdzcT1TYGnOtYAnCJXZSJgSZdmYK29bNZEfw6lVl4SVJAUI1R8NNwidRu4Z/7W
- fmBnygXvUMNieufWuSG/r818X60MVeR0u926HauLxZ+82ttMDh0bJ7N4naGxeMmFxaU2lXPzdi
- 8o3zi+BWz+wfRO4xSUFqedqCUYxzuHlAHg6S13BWpPNT+lVXMcH6vgbBrTtjRf54A+vSygusZS
- sp8+4aExr4uaGqDHuls/JFhG0Q7ZFTUibmniwB6Xx3xBzxsV+ctQhHJGAGDuS36JMg5xqMXHKe
- Lzqe+SWerqEthP/oTuPIsUj5
+  bh=+5GlssNqzezOU4qfx2oQIRykHbCirnnHU6kOEffUfDw=;
+  b=U3Ke+kHiIBtcVeKPXF7u2lZJKOX6HDX06BbfhNDRnOb+uByPdYk0y6KB
+   KoCAkdx2Fl6ONjGcGuBlQcB4AQ7wU8kmaCa1kGscSOdWFxLeOhb3t7QTe
+   Bnth5x0lSwi1+9L04VVVEqwgi2am5iMmoBJX0ypEYdAJLCfOKnuAHjWf1
+   Y=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: roT4h0hXUysONDDGByW2I8X4yX2zQKPYQYLq90RMxZ1O0lcTeqIMkXmQ8Zsof3sdeRT4rUvyDq
+ Mkm/KnU38wBlNCJxumT81tPVhLYySfWefyDrhPMQHgplYg5H6R4tHbPuox35nm0vC0NSMyc0Zu
+ TOwZWNRE8qk+7ZwlAvU/kZgPxpypVDCU/dq6wBnOGIvJ4+XI7mNisNjj8ojw3Q4IuN37h/acMj
+ kZJrcP6XZFMhB+dLaQnPgvrG4T3jUIrDnaaip6Sabq6j4shJCD46OdEexpbmpLacCX3ZBZPNeg
+ GEJG0zbS4ikWFqVFuFLNlG65
 X-SBRS: 5.1
-X-MesageID: 58576729
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 59006050
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:725R7KtZsRD2jzLt4P41BUD9lOfnVNJZMUV32f8akzHdYApBsoF/q
- tZmKWzVOffbN2b2c95xYN/i9x5U7JCDn9ZmTQNkpX8xES4T+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24XhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- Nplr6K3dgQCNYjwpboQdUd+LSRZZawX9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DNYUDunZm3HfBAOwvW5zrSKTW/95Imjw3g6iiGN6DN
- 5dGN2U1PXwsZTVJHXITA7wUnt24j17tVmJ8q3mFqJEetj27IAtZj+G2bYu9lsaxbcdImkeVo
- ErW8mK/BQsVXPSE0iaM+H+ogu7JnAv4VZgUGbn+8eRl6HWMwkQDBRtQUkG0ydGph0j7V99BJ
- kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c9tPEcUq5QeV0K3W7g2FQG8eQVZpatYrqcs3TjwCz
- UKSkpXiAjkHjVGOYSvDrPHO92r0YHVLaz9ZDcMZcecby8Pdp74wpRnqcus9HYjrqOPwPmnxk
- j/f+UDSmI4vpcIM0qy6+3XOjDStuoXFQ2YJ2+nHYo62xlgnPdD4PuRE/XCetK8dd9jBEjFtq
- VBdw5DGhN3iG61hg8BkrA8lOLiyr8iIPzTH6bKEN8lwrm/9k5JPkG053d2fGKuLGppbEdMKS
- BWK0e+02HO0FCH3BZKbm6rrV6wXIVLcPdrkTOvISdFFf4J8cgSKlAk3OxXPgD+8wBh9y/9uU
- Xt+TSpLJSxEYZmLMRLsH7tNuVPV7nxWKZzvqWDTkE38jOv2iI+9QrYZKlqeBt3VH4vfyDg5B
- +13bpPQoz0GCbWWSnCOreY7cABbRVBmVMueg5EGKYa+zv9ORThJI+XP2okoZ4ENt/0Tzo8kC
- FnmARQGoLc+7FWaQTi3hodLNOmyAM0h9C1jZkTB/z+AghAeXGpm149HH7NfQFXt3LYLISdcQ
- 6ZXdsOeLO5ITzibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz8
- ++6ywfWYZsfXAA+XszYX+2ikgGqtn8HleMsA0aReotPeF/h+ZRBIjDqiqNlONkFLBjOn2PI1
- wufDRoCi/PKpos5rIvAiaye9t/7GOpiBEtKWWLc6O/uZyXd+2Oix65GUfqJIm+BBD+lpv36a
- LwMnf/mMfABkFJbiKZGEu5mnfAk+t/ih75G1QA4Tn/FWEumV+F7KX6c0MgR6qAUnu1FuRG7U
- 16k88VBPenbI9vsFVMcKVZ3bumH0v1IyDDe4e5sfRf/7S5zurGGTV9TL1+HjykEdOl5N4Ysw
- OEAvs8K6lPg1kp2Y4je1i0EpX6RKnEgUrk8ssBICYDmvQMn11VebMGOESTx+pyON41BP0RCz
- uV4X0Yea2CwHnb/Tkc=
-IronPort-HdrOrdr: A9a23:y2VlsKNEAx6esMBcTsejsMiBIKoaSvp037Eqv3ofdfUzSL3+qy
- nOpoVj6faaslcssR0b9OxofZPwI080lqQFhbX5X43DYOCOggLBR+tfBMnZsljd8kXFh4hgPM
- xbHZSWZuedMbEDt7eY3DWF
+IronPort-Data: A9a23:DRU4L6g1xBZ/0G24iuslO8GVX161nRcKZh0ujC45NGQN5FlHY01je
+ htvWmuCPqnZZ2D8ct0lOYzgoE8FuJPQnN8wSAo5r3s9ECwb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy3IDja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /0T5YHzakADHZTtne4aAhADKX1bZfBZreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNauPP
+ 5JHMWc3BPjGSyFTHQYaJbsioMqh22KgTwxiplaqtbVitgA/yyQuieOwYbI5YOeiR9hRn0uej
+ nLL+SL+GB5yHMeE1TOP/3aoh+nOtSD2QoQfEPu/7PECqEKX7nweDlsRT1TTiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WsVSO/037hmXzajZ6BrfAXILJhZDYtE7sM49RRQxy
+ 0SE2djuAFRSXKa9ECzHsO3O9HXrZHZTfTRqiTI4oRUtvYn+46J0pDH2b9NpF/+81eepPGmt3
+ GXfxMQhvIk7gckO3qS92FnIhTOwu5TEJjIIChXrsnGNtV0gOtP8D2C8wR2CtKsbct7FJrWUl
+ CFcw5D20QwYMX2aeMVhqs0pFarh2fuKOSa0bbVHT8h4rGTFF5JOkOltDNBCyKVBbplsldzBO
+ ha7VeZtCHh7ZibCUEOPS9jtY/nGNIC5fTgfatjab8BVfr96fxKd8SdlaCa4hj62zxdzwPFva
+ M3FIK5A6Er27ow9klKLqxo1i+d3lkjSO0uPLXwE8/hX+eXHPyPEIVv0GFCPcvo4/Mu5TPb9q
+ L5i2z+x40wHCoXWO3CPmaZKdAxiBSVrVPje9p0MHsbec1UOJY3UI6KIqV/XU9c+xPo9eyah1
+ izVZ3K0P3Kj3yCaclvTNSg4AF4tNL4mxU8G0eUXFQ7A8xAejUyHtc/zrrM7Iusq8vJN1/lxQ
+ 6VXcsmMGK0XGD/G5y4cfd/2q4k7LEanggeHPiyEZjkjfsE/G1yVq4G8Jga/pjMTCieXtNclp
+ +Hy3A3sXpdeFR9pC9zbaazzwgrp72Qdgu97Q2DBPsJXJBf36IFvJiGo1q03LsgAJA/t3Dyf0
+ wrKUx4UqfOU+90+8cXThLDCpICsSrMsEk1fFmjdzLC3KSiFoTbznd4eCL6FJGmPWnn19aOuY
+ fRu48v9aPBXzkxXt4dcEqpwyf5s7dXYuLIHnB9vG2/Gbgr3B+o4cGWGx8RGqoZE2qRd5VmtQ
+ kuK99RXZeeJNcfiHAJDLQYpdL3eh/Qdmz2U5vUpOkTqoiRw+ePfA0lVOhCNjg1bLad0b9x5k
+ btw5pZO5lztkAcuP/aHkjtQpjaFIXE3Wqk6so0XXd3wgQ0xx1AeOZHRB0caOn1Uhwmg5qXyH
+ gKpuQ==
+IronPort-HdrOrdr: A9a23:I8/ecKilnECIIwrEl8fB6sU4uXBQX1913DAbv31ZSRFFG/FwyP
+ re/sjzhCWE6wr5BktBpTnZAtj/fZoYz+8G3WBjB8bSYOCGggWVxe5ZnPHfKlHbakrDH6tmpN
+ hdmstFeZLN5DpB/LvHCWCDer5KqrbngcXY4dsy100AcegpUdAd0+4QMHfZLqQcfng+OXNNLu
+ vm2iMxnUvZRZ14VLXcOlA1G8LEqtH3ipSjRRIdHRYo5Cmi5AnYqYLSIlyz2BoTbi1I+Kwl+2
+ TeiQD1j5/T881T/iWslVM7oq4mwOcIBbN4dYCxo/lQDg+pphejZYxnVbHHlDcpoNu34FJvq9
+ XIqwdIBbU515uEFFvZnTLdny3blBo+4X7rzlGVxVH5p9bieT48A81dwapEbxrw8SMbzYBB+Z
+ MO+1jcm4tcDBvGkii4zcPPTQtWmk29pmdnufIPjkZYTZAVZNZq3NIiFXtuYcc99R/Bmdwa+a
+ hVfZzhDc9tAAmnhqXizzZSKN/FZAV6Iv7JeDlNy5+oO/4/pgE986JS/r1uop46zuNId3Gfj9
+ 60dpiA3Is+PfP+TZgNQtvpEvHHU1Akt3r3QS+vyWqOLtBwB5o7w6SHqondotvaI6AgzJw8no
+ nMWlIdtWNaQTOoNSS+5uwDzvmWehTJYd3E8LAo26RE
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="58576729"
+   d="scan'208";a="59006050"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
@@ -95,9 +102,9 @@ CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
  Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
 	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
 	<wl@xen.org>
-Subject: [XEN PATCH v8 44/47] WIP, no-VPATH: build object from S source to be in build_in.o
-Date: Thu, 25 Nov 2021 13:40:03 +0000
-Message-ID: <20211125134006.1076646-45-anthony.perard@citrix.com>
+Subject: [XEN PATCH v8 34/47] build: add %.E targets
+Date: Thu, 25 Nov 2021 13:39:53 +0000
+Message-ID: <20211125134006.1076646-35-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -105,115 +112,48 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-similair to gen-objs-S, but obj-gen-y will be added to build_in.o
+I guess it's easier to remember that %.E does "$(CC) -E" or "$(CPP)".
 
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+ xen/Makefile | 4 ++--
+ xen/Rules.mk | 5 +++++
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-Notes:
-    we could maybe use $(targets) instead of introducing new variables.
-
- xen/Rules.mk        | 21 ++++++++++++++-------
- xen/common/Makefile |  2 +-
- 2 files changed, 15 insertions(+), 8 deletions(-)
-
+diff --git a/xen/Makefile b/xen/Makefile
+index 995815e82235..e39a6f82859a 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -609,10 +609,10 @@ cscope:
+ _MAP:
+ 	$(NM) -n $(TARGET)-syms | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aUw] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)' > System.map
+ 
+-%.o %.i %.s: %.c tools_fixdep FORCE
++%.o %.i %.s %.E: %.c tools_fixdep FORCE
+ 	$(Q)$(MAKE) $(build)=$(*D) $(*D)/$(@F)
+ 
+-%.o %.s: %.S tools_fixdep FORCE
++%.o %.s %.E: %.S tools_fixdep FORCE
+ 	$(Q)$(MAKE) $(build)=$(*D) $(*D)/$(@F)
+ 
+ %/: tools_fixdep FORCE
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 2d8d32f5fd72..0ef45d2c7087 100644
+index 73d5b82ab2e7..745d892d0707 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -22,6 +22,7 @@ include $(srctree)/scripts/Kbuild.include
+@@ -287,6 +287,11 @@ $(obj)/%.s: $(src)/%.c FORCE
+ $(obj)/%.s: $(src)/%.S FORCE
+ 	$(call if_changed_dep,cpp_s_S)
  
- # Initialise some variables
- obj-y :=
-+obj-gen-y :=
- lib-y :=
- targets :=
- ## targets made from generated sources
-@@ -98,6 +99,7 @@ always-y        := $(addprefix $(obj)/,$(always-y))
- targets         := $(addprefix $(obj)/,$(targets))
- lib-y           := $(addprefix $(obj)/,$(lib-y))
- obj-y           := $(addprefix $(obj)/,$(obj-y))
-+obj-gen-y       := $(addprefix $(obj)/,$(obj-gen-y))
- obj-bin-y       := $(addprefix $(obj)/,$(obj-bin-y))
- gen-objs-c      := $(addprefix $(obj)/,$(gen-objs-c))
- gen-objs-S      := $(addprefix $(obj)/,$(gen-objs-S))
-@@ -112,6 +114,11 @@ ifneq ($(hostprogs-y),)
- include $(srctree)/scripts/Makefile.host
- endif
- 
-+ifndef building_out_of_srctree
-+    obj-y += $(obj-gen-y)
-+    obj-gen-y :=
-+endif
++$(obj)/%.E: $(src)/%.c FORCE
++	$(call if_changed_dep,cpp_i_c)
++$(obj)/%.E: $(src)/%.S FORCE
++	$(call if_changed_dep,cpp_s_S)
 +
- # subdir-builtin may contain duplications. Use $(sort ...)
- subdir-builtin := $(sort $(filter %/built_in.o, $(obj-y)))
- 
-@@ -144,7 +151,7 @@ else
- endif
- 
- # Reset COV_FLAGS in cases where an objects has another one as prerequisite
--$(nocov-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
-+$(nocov-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(obj-gen-y) $(extra-y)): \
-     COV_FLAGS :=
- 
- $(non-init-objects): _c_flags += $(COV_FLAGS)
-@@ -155,7 +162,7 @@ ifeq ($(CONFIG_UBSAN),y)
- UBSAN_FLAGS := $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
- 
- # Reset UBSAN_FLAGS in cases where an objects has another one as prerequisite
--$(noubsan-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
-+$(noubsan-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(obj-gen-y) $(extra-y)): \
-     UBSAN_FLAGS :=
- 
- $(non-init-objects): _c_flags += $(UBSAN_FLAGS)
-@@ -209,13 +216,13 @@ cmd_ld_builtin = \
-     $(LD) $(XEN_LDFLAGS) -r -o $@ $(real-prereqs)
- endif
- 
--$(obj)/built_in.o: $(obj-y) FORCE
--	$(call if_changed,$(if $(strip $(obj-y)),ld_builtin,cc_builtin))
-+$(obj)/built_in.o: $(obj-y) $(obj-gen-y) FORCE
-+	$(call if_changed,$(if $(strip $(obj-y) $(obj-gen-y)),ld_builtin,cc_builtin))
- 
- $(obj)/lib.a: $(lib-y) FORCE
- 	$(call if_changed,ar)
- 
--targets += $(filter-out $(subdir-builtin), $(obj-y))
-+targets += $(filter-out $(subdir-builtin), $(obj-y) $(obj-gen-y))
- targets += $(lib-y) $(MAKECMDGOALS)
- 
- $(obj)/built_in_bin.o: $(obj-bin-y)
-@@ -258,7 +265,7 @@ quiet_cmd_cc_o_S = CC      $@
- cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
- 
- ifdef building_out_of_srctree
--$(gen-objs-S): $(obj)/%.o: $(obj)/%.S FORCE
-+$(gen-objs-S) $(obj-gen-y): $(obj)/%.o: $(obj)/%.S FORCE
- 	$(call if_changed_dep,cc_o_S)
- endif
- $(obj)/%.o: $(src)/%.S FORCE
-@@ -279,7 +286,7 @@ define cmd_obj_init_o
-     $(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
- endef
- 
--$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): $(obj)/%.init.o: $(obj)/%.o FORCE
-+$(filter %.init.o,$(obj-y) $(obj-bin-y) $(obj-gen-y) $(extra-y)): $(obj)/%.init.o: $(obj)/%.o FORCE
- 	$(call if_changed,obj_init_o)
- 
- quiet_cmd_cpp_i_c = CPP     $@
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index b1e076c30b81..fe3a4b7a8619 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -1,6 +1,6 @@
- obj-$(CONFIG_ARGO) += argo.o
- obj-y += bitmap.o
--obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
-+obj-gen-$(CONFIG_HYPFS_CONFIG) += config_data.o
- obj-$(CONFIG_CORE_PARKING) += core_parking.o
- obj-y += cpu.o
- obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
+ # Linker scripts, .lds.S -> .lds
+ quiet_cmd_cpp_lds_S = LDS     $@
+ cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -DLINKER_SCRIPT -MQ $@ -o $@ $<
 -- 
 Anthony PERARD
 
