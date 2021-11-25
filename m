@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2EFDC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:47:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.231290.400254 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73E88C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Nov 2021 13:47:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.231291.400264 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF69-0005L4-G7; Thu, 25 Nov 2021 13:47:37 +0000
+	id 1mqF6B-0005ql-R0; Thu, 25 Nov 2021 13:47:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 231290.400254; Thu, 25 Nov 2021 13:47:37 +0000
+Received: by outflank-mailman (output) from mailman id 231291.400264; Thu, 25 Nov 2021 13:47:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqF68-0005Ez-V9; Thu, 25 Nov 2021 13:47:36 +0000
-Received: by outflank-mailman (input) for mailman id 231290;
- Thu, 25 Nov 2021 13:47:35 +0000
+	id 1mqF6A-0005ie-Vp; Thu, 25 Nov 2021 13:47:39 +0000
+Received: by outflank-mailman (input) for mailman id 231291;
+ Thu, 25 Nov 2021 13:47:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Nd7+=QM=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1mqF0h-0007NX-KW
- for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:59 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 75dbf48d-4df5-11ec-9787-a32c541c8605;
- Thu, 25 Nov 2021 14:41:58 +0100 (CET)
+ id 1mqF0N-0007NX-Uj
+ for xen-devel@lists.xenproject.org; Thu, 25 Nov 2021 13:41:40 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6a04796b-4df5-11ec-9787-a32c541c8605;
+ Thu, 25 Nov 2021 14:41:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 75dbf48d-4df5-11ec-9787-a32c541c8605
+X-Inumbo-ID: 6a04796b-4df5-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637847718;
+  d=citrix.com; s=securemail; t=1637847698;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=B5VOkpfrwP2eJU5CJkGnpLSWbZA0WNl/g37hS+zmyXc=;
-  b=d2QVA48Js5vVqo0r6uSFIXckwuE6nBulUwHSSK8EbK2Il8ibs+1CRRoR
-   wjCbAFBZ1lN3UAhzqxXCKB9y9w1kVktFG0XcbJJaflhLK7lh2HQJ2RbCt
-   PS8OAVa61Zzxip/ICATPxpwUQtvhmkY9l4xe4TOGL87I6oNllDMn0AJsp
-   I=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: r23o05NSS7N9utzX3GZjNdfn8NR2ahYDzERWs2Mvd9EoEvJm8StOqMdOmNZHWOmlR/mPybolMn
- nHTiW5TPhM9OPESq+BRKvzy2mighS0Ex+Os19efb5BwOKU1QrTvEiNgXn4Lglarfzl3yMU1sp0
- Lwp5aU7xiy6qx03yLY4bzHWjO0LakUWvf+SznyBVEj9go7fuJ6gNzbRmSQqWFv0F0rH5JpKCly
- c/66nvr/NIppMXR9RMGVMsN3v/hHr6L+yqF/7AyrucywPqP3d0RcoClDnLnIS4lZ6J23F+NUSF
- gezsM3C33jAgriFKkBbdVqiK
+  bh=FtVQFQfJL5CyXQ1ZSfQvYF26EeFUF5cby1srpXXTn8k=;
+  b=eZqFY6otvEt7tCa2l/8ciQWddfU4yRN8YMdX8JmxiFgzm5M6ViyiJpsB
+   mcjUkWdAe4OgQETYPwXLIS+VGq9OVa8UqmhBVlWOWPsdntcmhN26+2zqP
+   Gf8lpsiPfFzr1q5zim9PGw5bI8e/lQSXuwkubfSKhsCSw2ObX8Fz1HG6C
+   4=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: +bIhSrwkA0hCCTnI0uc+8tdcEcuFSS9cQlB329mXcfgAXawm9cc4E+2Rz+TukriUS29v6WUTOX
+ 2Gne4sCyhjlpCU0TAj/k1sD/QdshbEO4qe3nKQib9BNLX8LTysKThcU1rhl8wm5NyAxdem2gLL
+ otA7XzrIsyLj+oUiKoMqSEZqiMPBVPRiXaNEQJ42u+0I7WDh7yYw7f5O2EhpgE1S1jPWfA06Ge
+ H5bMlV+8AfqPQMWhx91XPaafKyOC9sYjWbN093bkhYx3R+R/xmHG9JS0Ls5G9QOt52Z8miLbWL
+ QbXARuq/LDXCMIT6tnIWW7wR
 X-SBRS: 5.1
-X-MesageID: 60634184
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 58617688
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:fcohw6IBeLswchRXFE+RApIlxSXFcZb7ZxGr2PjKsXjdYENS0TQCy
- zNKDDiFbKrcZmukL49+ad60px5XvZHQnNAwQAplqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xrZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2Svssvk
- tx3sKeUQF8qBpXcuccyC0lhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Glo2JsSRKaCD
- yYfQQhvdRviWUV1AGwwNZwlnfeYl0PDQQQN/Tp5ooJoujOOnWSdyoPFMtDYZ9iLTsV9hVuDq
- yTN+GGRKg4eHMySz3yC6H3Erv/Cm2b3VZwfEJW89+V2mxuDy2oLEhoUWFCn5/6jhSaWUtRDK
- 0sS62w2oLI77kCDQdz0Xhn+q3mB1iPwQPIJTbd8slvUjPOJvUDJXQDoUwKtdvQ9ldRoHzUQ0
- 2StlovqPQR/kZ66ESKko+L8QSyJBQAZKmoLZCkhRAQD4sX+rIxbsi8jXuqPA4bu0ISrRGiYL
- ySi6XFn2u5N1ZJjO7CTpAif21qRSo71ohnZD+k9dkas9UtHaYGsfOREAnCLvK8bfO51orRs1
- UXoevRyDshSUvlhdwTXGY3h+Y1FAN7fbVXhbaZHRcVJythU0yfLkXpsyD9/Plx1Fc0PZCXkZ
- kTe0SsIusQMYyT7Pf8mOdzgYyjP8UQHPY67Ps04k/IUOsQhHON51H0GibGsM5DFzxF3zPBX1
- WazesewF3cKYZmLPxLtL9rxJYQDn3hkrUuKHMiT503+jdK2OS7EIZ9YYQDmRr1os8u5TPD9r
- o832z2ikE4EDoUTo0D/rOYuELz9BSRhWM2t9ZUILrXrz8gPMDhJNsI9CIgJI+RN95m5XM+Sl
- p1kckMHmlf5m1PdLgCGNiJqZL/1BM4tpnMnJy08e12v3iF7M4qo6a4ecboxfKUmq7M/naIlE
- aFddpXSGOlLRxTG5y8ZMcv3ort9eUn5ngmJJSekPmQyJsYyWwzT99b4VQLz7y1SXDGvvM4zr
- uT4hAPWSJYOXSp4C8PSZK79xl+9pyFFyulzQ1HJMp9Yf0C1qNpmLCn4j/kWJcAQKEqcmmvGh
- ljOWRpB/LvDuY449tXNlJuolYbxHrssBFdeEkna8a2yaXvQ8F28zNISS+2PZz3cCj/5of3we
- eVPwvjgG/Qbh1IW4ZFkGrNmwK9itdvio7hWklZtEHnRNgn5D7phJj+N3NVVt70Lzbhc4FPkV
- kWK89hcGLOIJMK6TwJBeFt7NryOhaMOhz3fzfUpO0GrtiZ48Y2OXVhWIxTR2jdWK6F4Md99z
- Oos0CLMB9dTVvb+3g66sx1p
-IronPort-HdrOrdr: A9a23:ZHUwNavuVD1sNTzoGtU0F8DW7skDTtV00zEX/kB9WHVpmszxra
- 6TdZMgpHnJYVcqKQkdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
- YFT0EXMqyIMbEQt6fHCWeDfOrIuOP3kpyVuQ==
+IronPort-Data: A9a23:vnXV363VLHi3j8tQ4/bD5Xt2kn2cJEfYwER7XKvMYLTBsI5bp2MBy
+ 2pKC23VP66MYGPzfognaYy0p05V7ZHcx4NnSwpqpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es6wbNh2OaEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhs8Fsy
+ 4xKu5GKbQ4YMrLvnMgCbjcbOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Ej8I/LM7tLcUHt2tp1z3xBvc6W5HTBa7N4Le02R9t1p4XQqiON
+ 6L1bxJAYw2bcR5+EGxGUsw1sczyoUHwcxdx/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
+ nnd423zDxUeNdqe4TmI6HShgqnIhyyTcI4KD7i56v5CiUWe3HAOEwYRUUanoP6/kQi1XNc3A
+ 0Ab9icht6Ea6F2gTt67WQax5nGDoHY0WsVSO/037hmXzajZ6BrfAXILJhZRZdpjuMIoSDgC0
+ l6Sg8ivFTFpqKeSS3+W6vGTtzzaESoIKW4PYwcUQA1D5MPsyKkxhB/SStdoEIauk8b4Xzr3x
+ li3QDMW3utJy5RRjuPioA6B02nESoX1ohAdyhTKXTui4A5DQIeUa5OL7XTE0NgDBdPMJrWeh
+ 0Qsl8+b5eEIKJiCki2RXekAdI2UC+a53C702gA2QcR4n9i50zv6JN0LvmkiTKt8Gp9cIWeBX
+ aPFhe9GCHa/1lOOZLQ/XY++At9CIUPIRYW8DaC8gjajj/FMmO67EMNGORH4M4PFyhFEfUQD1
+ XCzK5vEMJriIf47pAdavs9EuVPR+ggwxHnIWbfwxAm93LyVaRa9EOlebwTRP7Bpvfna8W05F
+ uqz0OPQlX1ivBDWOHGLoeb/03hWRZTEOXwGg5MOLbPSSuaXMGogF+XQ0dscl39NxMxoehPz1
+ ijlACdwkQOn7VWecFniQi0zOdvHAMckxVpmbHNEALpd8yV6CWpZxPxELMVfkHhO3LEL8MOYu
+ NFZIZjdWaoWFWyck9nfBLGkxLFfmN2QrVrmF0KYjPIXJvaMniTFpY3peBXB7i4LAnblvMcyu
+ eT4hAjaXYACV0JpC8OPMKCjyFa4vH48nuNuXhSXfokPKRu0qIU6eTbsivIXIt0XLUmRzDWty
+ AvLUwwTovPAotFp/YCR17yEtYqgD8B3AlFeQzvA9b+zOCSDpjijzIZMXfymZzfYUG+oqqyua
+ f8Ml6P3MeEdnUYMuI15Su45waU77trphrlb0gU7QymbMwX1UutteyDU09NOu6tBwq5ilTG3A
+ k/fqMNHPbipOd/+FAJDLgQSceneh+ofnSPf7KppLRyitjN35reOTW5bIwKI1H5GNLJwPY4on
+ bUhtcoR51DtgxYmKI/b3CVd9mDKJX0cSaQ38JodBdaz2AYsz1hDZ73aCzP3v87TO4kdbBFyL
+ 2/GnrfGipRd2lHGIig6GnX61OZAgYgD5UJRx1gYKlXVwtfIi5fbBvGKHejbmuiN8ih67g==
+IronPort-HdrOrdr: A9a23:9GPbgKH7ACxPdG0tpLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5q
+ aTdZUgpGfJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YYT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.87,263,1631592000"; 
-   d="scan'208";a="60634184"
+   d="scan'208";a="58617688"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Anthony PERARD
-	<anthony.perard@gmail.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v8 39/47] RFC, no-VPATH: x86/boot: workaround gcc including the wrong file
-Date: Thu, 25 Nov 2021 13:39:58 +0000
-Message-ID: <20211125134006.1076646-40-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Ian
+ Jackson" <iwj@xenproject.org>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>
+Subject: [XEN PATCH v8 29/47] build: replace $(BASEDIR) and use $(srctree)
+Date: Thu, 25 Nov 2021 13:39:48 +0000
+Message-ID: <20211125134006.1076646-30-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.0
 In-Reply-To: <20211125134006.1076646-1-anthony.perard@citrix.com>
 References: <20211125134006.1076646-1-anthony.perard@citrix.com>
@@ -103,58 +107,299 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Anthony PERARD <anthony.perard@gmail.com>
+$(srctree) is a better description for the source directory than
+$(BASEDIR) that has been used for both source and build directory
+(which where the same).
 
-we generate cmdline.S and reloc.S, so we should include those
-generated file as presented in the build tree, but for file included
-with quote, gcc will first look into the directory where the source
-file is, that is where head.S is located and thus include cmdline.S
-that is present in the source tree when it is dirty. But that the
-wrong file as we want to include the file from the build tree. Work
-around by using <> to include those file as if the come from the
-system, as gcc will first look in directories listed with '-I' on the
-command line.
+This adds $(srctree) to a few path where make's VPATH=$(srctree) won't
+apply. And replace $(BASEDIR) by $(srctree).
 
-So now we also need to add -I when building in the source tree.
+Introduce "$(srcdir)" as a shortcut for "$(srctree)/$(src)" as the
+later is used often enough.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/arch/x86/boot/Makefile | 4 +++-
- xen/arch/x86/boot/head.S   | 4 ++--
- 2 files changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index 04ee9da83333..4fc6b1d8ffc2 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -8,7 +8,9 @@ targets += $(head-objs:.S=.o)
- head-objs := $(addprefix $(obj)/, $(head-objs))
+Notes:
+    v8:
+    - merge of two patchs from v7:
+        build: add $(srctree) in few key places
+        build: replace $(BASEDIR) by $(srctree)
+      both patch were acked
+    - introduce $(srcdir) as a shortcut for $(srctree)/$(src)
+
+ xen/Kconfig                 |  4 ++--
+ xen/Makefile                |  7 +++----
+ xen/Rules.mk                |  9 ++++++---
+ xen/arch/x86/arch.mk        |  2 +-
+ xen/build.mk                |  4 ++--
+ xen/common/Makefile         |  2 +-
+ xen/common/libfdt/Makefile  |  2 +-
+ xen/include/Makefile        | 14 +++++++-------
+ xen/scripts/Kconfig.include |  2 +-
+ xen/scripts/Makefile.clean  |  5 ++++-
+ xen/xsm/flask/Makefile      | 10 +++++-----
+ 11 files changed, 33 insertions(+), 28 deletions(-)
+
+diff --git a/xen/Kconfig b/xen/Kconfig
+index bcbd2758e5d3..ac9a638d372e 100644
+--- a/xen/Kconfig
++++ b/xen/Kconfig
+@@ -14,14 +14,14 @@ config CC_IS_GCC
  
- ifdef building_out_of_srctree
--$(obj)/head.o: CFLAGS-y += -iquote $(obj)
-+$(obj)/head.o: CFLAGS-y += -I$(obj)
-+else
-+$(obj)/head.o: CFLAGS-y += -I$(src)
- endif
- $(obj)/head.o: $(head-objs)
+ config GCC_VERSION
+ 	int
+-	default $(shell,$(BASEDIR)/scripts/gcc-version.sh $(CC))
++	default $(shell,$(srctree)/scripts/gcc-version.sh $(CC))
  
-diff --git a/xen/arch/x86/boot/head.S b/xen/arch/x86/boot/head.S
-index dd1bea0d10b3..66acd2e9bfc0 100644
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -772,10 +772,10 @@ trampoline_setup:
-         lret
+ config CC_IS_CLANG
+ 	def_bool $(success,$(CC) --version | head -n 1 | grep -q clang)
  
- cmdline_parse_early:
--#include "cmdline.S"
-+#include <cmdline.S>
+ config CLANG_VERSION
+ 	int
+-	default $(shell,$(BASEDIR)/scripts/clang-version.sh $(CC))
++	default $(shell,$(srctree)/scripts/clang-version.sh $(CC))
  
- reloc:
--#include "reloc.S"
-+#include <reloc.S>
+ # -fvisibility=hidden reduces -fpic cost, if it's available
+ config CC_HAS_VISIBILITY_ATTRIBUTE
+diff --git a/xen/Makefile b/xen/Makefile
+index 2a809d577fc3..318320e79c7d 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -19,8 +19,7 @@ export PYTHON		?= $(PYTHON_INTERPRETER)
  
- ENTRY(trampoline_start)
- #include "trampoline.S"
+ export CHECKPOLICY	?= checkpolicy
+ 
+-export BASEDIR := $(CURDIR)
+-export XEN_ROOT := $(BASEDIR)/..
++export XEN_ROOT := $(CURDIR)/..
+ 
+ abs_objtree := $(CURDIR)
+ abs_srctree := $(CURDIR)
+@@ -189,7 +188,7 @@ ifeq ($(TARGET_ARCH),x86)
+ t1 = $(call as-insn,$(CC),".L0: .L1: .skip (.L1 - .L0)",,-no-integrated-as)
+ 
+ # Check whether clang asm()-s support .include.
+-t2 = $(call as-insn,$(CC) -I$(BASEDIR)/arch/x86/include,".include \"asm/asm-defns.h\"",,-no-integrated-as)
++t2 = $(call as-insn,$(CC) -I$(srctree)/arch/x86/include,".include \"asm/asm-defns.h\"",,-no-integrated-as)
+ 
+ # Check whether clang keeps .macro-s between asm()-s:
+ # https://bugs.llvm.org/show_bug.cgi?id=36110
+@@ -329,7 +328,7 @@ ALL_OBJS-$(CONFIG_CRYPTO) += crypto/built_in.o
+ 
+ ALL_LIBS-y                := lib/lib.a
+ 
+-include $(BASEDIR)/arch/$(TARGET_ARCH)/arch.mk
++include $(srctree)/arch/$(TARGET_ARCH)/arch.mk
+ 
+ export ALL_OBJS := $(ALL_OBJS-y)
+ export ALL_LIBS := $(ALL_LIBS-y)
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index cd00f006ee8f..20dedce06cd8 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -9,13 +9,16 @@ endif
+ 
+ src := $(obj)
+ 
++# shortcut for $(srctree)/$(src)
++srcdir := $(srctree)/$(src)
++
+ PHONY := __build
+ __build:
+ 
+ -include $(objtree)/include/config/auto.conf
+ 
+ include $(XEN_ROOT)/Config.mk
+-include $(BASEDIR)/scripts/Kbuild.include
++include $(srctree)/scripts/Kbuild.include
+ 
+ # Initialise some variables
+ obj-y :=
+@@ -58,7 +61,7 @@ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
+ # binfile
+ # use e.g. $(call if_changed,binfile,binary-file varname)
+ quiet_cmd_binfile = BINFILE $@
+-cmd_binfile = $(SHELL) $(BASEDIR)/tools/binfile $(BINFILE_FLAGS) $@ $(2)
++cmd_binfile = $(SHELL) $(srctree)/tools/binfile $(BINFILE_FLAGS) $@ $(2)
+ 
+ # Figure out what we need to build from the various variables
+ # ===========================================================================
+@@ -177,7 +180,7 @@ cpp_flags = $(filter-out -Wa$(comma)% -flto,$(1))
+ c_flags = -MMD -MP -MF $(depfile) $(XEN_CFLAGS)
+ a_flags = -MMD -MP -MF $(depfile) $(XEN_AFLAGS)
+ 
+-include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
++include $(srctree)/arch/$(TARGET_ARCH)/Rules.mk
+ 
+ c_flags += $(_c_flags)
+ a_flags += $(_c_flags)
+diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
+index 1ba488d645c0..7cfc9fd3bb1c 100644
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -63,7 +63,7 @@ ifneq ($(CONFIG_PV_SHIM_EXCLUSIVE),y)
+ efi-check-o := arch/x86/efi/check.o
+ 
+ # Check if the compiler supports the MS ABI.
+-XEN_BUILD_EFI := $(call if-success,$(CC) $(CFLAGS) -c $(efi-check-o:.o=.c) -o $(efi-check-o),y)
++XEN_BUILD_EFI := $(call if-success,$(CC) $(CFLAGS) -c $(srctree)/$(efi-check-o:.o=.c) -o $(efi-check-o),y)
+ 
+ # Check if the linker supports PE.
+ EFI_LDFLAGS := $(patsubst -m%,-mi386pep,$(LDFLAGS)) --subsystem=10
+diff --git a/xen/build.mk b/xen/build.mk
+index c471312f98a3..65d8dbc13828 100644
+--- a/xen/build.mk
++++ b/xen/build.mk
+@@ -26,9 +26,9 @@ define cmd_compile.h
+ 	    -e 's/@@version@@/$(XEN_VERSION)/g' \
+ 	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
+ 	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
+-	    -e 's!@@changeset@@!$(shell tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
++	    -e 's!@@changeset@@!$(shell $(srctree)/tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
+ 	    < $< > $(dot-target).tmp; \
+-	sed -rf tools/process-banner.sed < .banner >> $(dot-target).tmp; \
++	sed -rf $(srctree)/tools/process-banner.sed < .banner >> $(dot-target).tmp; \
+ 	mv -f $(dot-target).tmp $@; \
+     fi
+ endef
+diff --git a/xen/common/Makefile b/xen/common/Makefile
+index 30641a737231..b1e076c30b81 100644
+--- a/xen/common/Makefile
++++ b/xen/common/Makefile
+@@ -80,7 +80,7 @@ $(obj)/config.gz: $(CONF_FILE)
+ 
+ $(obj)/config_data.o: $(obj)/config.gz
+ 
+-$(obj)/config_data.S: $(BASEDIR)/tools/binfile FORCE
++$(obj)/config_data.S: $(srctree)/tools/binfile FORCE
+ 	$(call if_changed,binfile,$(obj)/config.gz xen_config_data)
+ targets += config_data.S
+ 
+diff --git a/xen/common/libfdt/Makefile b/xen/common/libfdt/Makefile
+index 6708af12e583..75aaefa2e37f 100644
+--- a/xen/common/libfdt/Makefile
++++ b/xen/common/libfdt/Makefile
+@@ -6,7 +6,7 @@ OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
+ obj-y += libfdt.o
+ nocov-y += libfdt.o
+ 
+-CFLAGS-y += -I$(BASEDIR)/include/xen/libfdt/
++CFLAGS-y += -I$(srctree)/include/xen/libfdt/
+ 
+ $(obj)/libfdt.o: $(obj)/libfdt-temp.o FORCE
+ 	$(call if_changed,objcopy)
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index a3c2511f5f60..5a2b4c9f65fa 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -45,22 +45,22 @@ public-$(CONFIG_ARM) := $(wildcard $(src)/public/arch-arm/*.h $(src)/public/arch
+ .PHONY: all
+ all: $(addprefix $(obj)/,$(headers-y))
+ 
+-$(obj)/compat/%.h: $(obj)/compat/%.i $(src)/Makefile $(BASEDIR)/tools/compat-build-header.py
+-	$(PYTHON) $(BASEDIR)/tools/compat-build-header.py <$< $(patsubst $(obj)/%,%,$@) >>$@.new; \
++$(obj)/compat/%.h: $(obj)/compat/%.i $(src)/Makefile $(srctree)/tools/compat-build-header.py
++	$(PYTHON) $(srctree)/tools/compat-build-header.py <$< $(patsubst $(obj)/%,%,$@) >>$@.new; \
+ 	mv -f $@.new $@
+ 
+ $(obj)/compat/%.i: $(obj)/compat/%.c $(src)/Makefile
+ 	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(XEN_CFLAGS)) $(cppflags-y) -o $@ $<
+ 
+-$(obj)/compat/%.c: $(src)/public/%.h $(src)/xlat.lst $(src)/Makefile $(BASEDIR)/tools/compat-build-source.py
++$(obj)/compat/%.c: $(src)/public/%.h $(src)/xlat.lst $(src)/Makefile $(srctree)/tools/compat-build-source.py
+ 	mkdir -p $(@D)
+-	$(PYTHON) $(BASEDIR)/tools/compat-build-source.py $(src)/xlat.lst <$< >$@.new
++	$(PYTHON) $(srctree)/tools/compat-build-source.py $(srcdir)/xlat.lst <$< >$@.new
+ 	mv -f $@.new $@
+ 
+-$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(BASEDIR)/tools/get-fields.sh $(src)/Makefile
++$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/get-fields.sh $(src)/Makefile
+ 	export PYTHON=$(PYTHON); \
+ 	while read what name; do \
+-		$(SHELL) $(BASEDIR)/tools/get-fields.sh "$$what" compat_$$name $< || exit $$?; \
++		$(SHELL) $(srctree)/tools/get-fields.sh "$$what" compat_$$name $< || exit $$?; \
+ 	done <$(patsubst $(obj)/compat/%,$(obj)/compat/.xlat/%,$(basename $<)).lst >$@.new
+ 	mv -f $@.new $@
+ 
+@@ -70,7 +70,7 @@ $(obj)/compat/.xlat/%.lst: $(src)/xlat.lst $(src)/Makefile
+ 	grep -v '^[[:blank:]]*#' $< | sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,[[:blank:]]+$*\.h[[:blank:]]*$$,,p' >$@.new
+ 	$(call move-if-changed,$@.new,$@)
+ 
+-xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(src)/xlat.lst | uniq)
++xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(srcdir)/xlat.lst | uniq)
+ xlat-y := $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
+ 
+ $(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/auto.conf $(src)/Makefile
+diff --git a/xen/scripts/Kconfig.include b/xen/scripts/Kconfig.include
+index e1f13e17207e..389a690a127a 100644
+--- a/xen/scripts/Kconfig.include
++++ b/xen/scripts/Kconfig.include
+@@ -40,4 +40,4 @@ $(error-if,$(failure,command -v $(CC)),compiler '$(CC)' not found)
+ $(error-if,$(failure,command -v $(LD)),linker '$(LD)' not found)
+ 
+ # gcc version including patch level
+-gcc-version := $(shell,$(BASEDIR)/scripts/gcc-version.sh $(CC))
++gcc-version := $(shell,$(srctree)/scripts/gcc-version.sh $(CC))
+diff --git a/xen/scripts/Makefile.clean b/xen/scripts/Makefile.clean
+index 4eed31974509..53f7a76b3075 100644
+--- a/xen/scripts/Makefile.clean
++++ b/xen/scripts/Makefile.clean
+@@ -5,9 +5,12 @@
+ 
+ src := $(obj)
+ 
++# shortcut for $(srctree)/$(src)
++srcdir := $(srctree)/$(src)
++
+ clean::
+ 
+-include $(BASEDIR)/scripts/Kbuild.include
++include $(srctree)/scripts/Kbuild.include
+ 
+ include $(src)/Makefile
+ 
+diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
+index 4ac6fb8778ae..a99038cb5722 100644
+--- a/xen/xsm/flask/Makefile
++++ b/xen/xsm/flask/Makefile
+@@ -8,8 +8,8 @@ CFLAGS-y += -I$(obj)/include
+ 
+ AWK = awk
+ 
+-FLASK_H_DEPEND := $(addprefix $(src)/policy/,security_classes initial_sids)
+-AV_H_DEPEND = $(src)/policy/access_vectors
++FLASK_H_DEPEND := $(addprefix $(srcdir)/policy/,security_classes initial_sids)
++AV_H_DEPEND := $(srcdir)/policy/access_vectors
+ 
+ FLASK_H_FILES := flask.h class_to_string.h initial_sid_to_string.h
+ AV_H_FILES := av_perm_to_string.h av_permissions.h
+@@ -18,14 +18,14 @@ ALL_H_FILES := $(addprefix include/,$(FLASK_H_FILES) $(AV_H_FILES))
+ $(addprefix $(obj)/,$(obj-y)) $(obj)/ss/built_in.o: $(addprefix $(obj)/,$(ALL_H_FILES))
+ extra-y += $(ALL_H_FILES)
+ 
+-mkflask := $(src)/policy/mkflask.sh
++mkflask := $(srcdir)/policy/mkflask.sh
+ quiet_cmd_mkflask = MKFLASK $@
+ cmd_mkflask = $(SHELL) $(mkflask) $(AWK) $(obj)/include $(FLASK_H_DEPEND)
+ 
+ $(addprefix $(obj)/%/,$(FLASK_H_FILES)): $(FLASK_H_DEPEND) $(mkflask) FORCE
+ 	$(call if_changed,mkflask)
+ 
+-mkaccess := $(src)/policy/mkaccess_vector.sh
++mkaccess := $(srcdir)/policy/mkaccess_vector.sh
+ quiet_cmd_mkaccess = MKACCESS VECTOR $@
+ cmd_mkaccess = $(SHELL) $(mkaccess) $(AWK) $(obj)/include $(AV_H_DEPEND)
+ 
+@@ -36,7 +36,7 @@ obj-bin-$(CONFIG_XSM_FLASK_POLICY) += flask-policy.o
+ $(obj)/flask-policy.o: $(obj)/policy.bin
+ 
+ $(obj)/flask-policy.S: BINFILE_FLAGS := -i
+-$(obj)/flask-policy.S: $(BASEDIR)/tools/binfile FORCE
++$(obj)/flask-policy.S: $(srctree)/tools/binfile FORCE
+ 	$(call if_changed,binfile,$(obj)/policy.bin xsm_flask_init_policy)
+ targets += flask-policy.S
+ 
 -- 
 Anthony PERARD
 
