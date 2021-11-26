@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA7BC433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:05:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232754.403665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4969FC4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:05:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232755.403674 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauQ-0004yx-Dr; Fri, 26 Nov 2021 13:04:58 +0000
+	id 1mqauR-0005Gk-JB; Fri, 26 Nov 2021 13:04:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232754.403665; Fri, 26 Nov 2021 13:04:58 +0000
+Received: by outflank-mailman (output) from mailman id 232755.403674; Fri, 26 Nov 2021 13:04:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauQ-0004xK-56; Fri, 26 Nov 2021 13:04:58 +0000
-Received: by outflank-mailman (input) for mailman id 232754;
- Fri, 26 Nov 2021 13:04:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqauR-0005EM-9j; Fri, 26 Nov 2021 13:04:59 +0000
+Received: by outflank-mailman (input) for mailman id 232755;
+ Fri, 26 Nov 2021 13:04:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqauO-0003W9-JE
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:56 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 73534a72-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:04:55 +0100 (CET)
+ id 1mqauQ-0002zD-BW
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:58 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 73a512a7-4eb9-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 14:04:57 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 73534a72-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 73a512a7-4eb9-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931895;
+  d=citrix.com; s=securemail; t=1637931897;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Degf477TCtQ3FmowYF+lOZnis5KOFl3+kW7P+vUMuYY=;
-  b=H+XzcUyQaqH+ckcmGQTOqLsup8sn70SJQDL+Y5z6FVYnzqTl9+h0xeDy
-   8DyqmUmJI9kRWWmtQpVTFV37+5LjZmrfiPuapzqw5IzuGU9o/PR89ntrz
-   ixtMjQGAlwWZquwD5vDywx0bDA1UdqXVjDACTkE6MFyPE7rV6ns+MAIji
-   Q=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: S1H98ih+QfrsJlL1I6ZDXlwgw168vOd0Me5EUfzsKA+uvBpAg7qucL9EQ9wkGXRfWEsnnnBk+3
- ldVtCfDSNhdFWrQFVzEkJh++lga4vNG+ppaQCeHqucJbPjYQ/WUgUgsvTsO3hN+IyOl98UYbUK
- aUiLJ5YZ1uvHGHuj+GraK1V1SoeEWb+75XWqVWg9T4JGbrZdUW/7xcBZISFDmfa+bPQt9d4qP1
- KFQb/qpjZkcHYDaXz38nrvCeooWH9bdGyr8Z5pSG649QvOiiUWd3s01cYu29tMp17DHRHV7p2t
- mjNErD6SdXLDgMSnFIAZyDFB
+  bh=kxMBCLxYJcgL5gD+raiROxZG9c0M3vO+3cMFtFlzQtM=;
+  b=U4QDuJ8CsthjleWF4gs0sYogp9IWHGUAqNa71fIAL8I3OZb0qIKw2qeU
+   KMXHx2jcyT2o31wIumbIxQavCN5pcjcg2JAqtclJp3SkGMmquL4yMzcI3
+   +Dh0kRrMACom30MGX0GisZ5EvNSw3IU/lbkEnQza/Sxhb1rVzMwNYutdb
+   A=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: TDmvKVtgsxQpQCb6YRl/gPx5kb4NDDZGF2hDYlO2IQ5Stx9TmORE+dBNqRDQhyR6bAU4hcxcR4
+ ARuU9IXn1ocZhop4HrdU0p+YOgPYHd3ex21BecHQSvSQoN3EpVDDtYQtdhi7b/KQDVdlh1ykHy
+ Z5owYzt09pLFXYg3ZAf9rwm0GVkcQgNI/+URoyFrbSIcHqiSXYeVY8eYZN3ZFQV5Ob1cYinhwL
+ PMqvmBnbm4Magh7d7B3MJ/3Cv/8Z8mXhV88ttV9tQJ/HpItw7dQpExT585ylrZrVjwMtSad2zj
+ /GwGg0MR+bkt6xD+FAi7OKYu
 X-SBRS: 5.1
-X-MesageID: 58634956
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 59063944
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:bRQitqtRba3EWiS2HQ43Q83e9OfnVKNZMUV32f8akzHdYApBsoF/q
- tZmKW+BaP+NZ2r9L9BzOti2/B8EscLdzNVjSAtlpC8xRS1D+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- Npl5K2gbxsRJaL2gMsEXT1IKhlMMLIaweqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
- 5RCNWsyMnwsZTV0Jn4bEsMcrNyplyP/QgMEgmyq9aootj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKhMHMN2SzxKV/3TqgfXA9QvgQ54bHrC88v9sgXWQy3YVBRlQUkG0ydGph0j7V99BJ
- kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c/h6HvA+6QqN4rHJ+AvfDW8BJgOtc/R/6pVwH2Zzk
- AbUwZW5XlSDrYF5V1rMx6eysQupNhINAnYMQT89dTkI/IXa9dRbYg30cv5vF6u8j9vQED72w
- iyXoCVWu4j/nfLnxI3gowmZ3mvESozhC1dsu16JBj7NAhZRPdb9P+SVBU7nAeGsxWpzZn2Ip
- zA6lseX94ji5rndxXXWEI3h8FxEjstp0QEwY3YzQPHNFBz3ohZPmLy8Bhklfy+F1e5eJFfUj
- Lf741852XOqFCLCgVVLS4ywEd826qPrCM7oUPvZBvIXPMMuJFHao3AyOxLLt4wIrKTKufpkU
- Xt8WZzxZUv29Iw9lGbmLwvj+eNDKt8CKZP7GsmgkkXPPUu2b3+JU7YVWGZinchihJ5oVD79q
- o4FX+PTkk03eLSnPkH/rN5CRXhXfCNTLc2n9KRqmhurf1MO9JcJUKSKn9vMuuVNwsxoqws/1
- i3nBxIDlgOg3SavxMfjQikLVY4DlK1X9RoTVRHA937ys5T6SYrwvqoZabUterwrqL5qwfJuF
- qFXcMScGPVfDD/A/m1FP5X6qYVjcjWthB6PYHX5MGRuIcY4Slyb4MLgcyvu6DIKUni9u/whr
- uDyzQjcW5cCGVhvVZ6EdPK1wlqtlnEBg+YuDVDQK9xedRy0oohnIiD8lNEtJMQIJUmRzzeWz
- V/OUxwZufPMs8k+99yQ3fKIqIKgEu1fGEtGHjaEsebqZHeCpmf6mN1OSueFezzZRVjYwqT6a
- LUH1ez4Pd0GgE1O79h2HYF0wP9s/NDovbJbkFhpRS2Zc1SxB7p8CXCaxs0T5LZVz7pUtAbqC
- EKC/t5WZeeANM//SQNDIQMkaqKI1O0OmymU5vMweR2o6Chy9buBcENTIxjT13ANcOoraNsok
- bU7pcobyw2jkR57YN+Jgxdd+3mIMnFdAb4ssYsXAdOzhwcmor2YjUcw1sMiDEmzVuhx
-IronPort-HdrOrdr: A9a23:rbnQl67AUyJohka1ZAPXwPLXdLJyesId70hD6qhwISY1TiX+rb
- HXoB17726MtN9/YgBCpTntAsa9qDbnhPpICOoqTNGftWvdyQmVxehZhOOIqVCNJ8S9zJ876U
- 4JSdkENDSaNzhHZKjBjjVQa+xQpeW6zA==
+IronPort-Data: A9a23:ejN0KahhiOQTLuwy1gD0VXAEX161rRcKZh0ujC45NGQN5FlHY01je
+ htvW22Eb6uJa2akKtl/b9nk9RhT7JaHmNJhQAtvqilnFiob9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy34Dja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /1tsZa6VQgXYZfps+EjTxAENz1UGpR/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNauPP
+ 5RCOGYzBPjGS0FXCHUyCYwRpeGHjWvvXRtKtWyyq6VitgA/yyQuieOwYbI5YOeiWsF9jkue4
+ GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
+ CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4M+kw4h2C9PXuxi2cOHQNEhpdQvsfjZpjLdA17
+ WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoStQWmY/
+ tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtQezARVodt/xory9U
+ J4swJP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRkybZZaJGC4P
+ BGP4mu9AaO/2lPxNsebhKrrVqwXIVXIT4y5Bpg4kPISCnSOSON31H43PhPBt4wcuEMtjbs+K
+ f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
+ Ig32grj40g3bdASlQGLq9NOdg5TciBgbX00wuQOHtO+zsNdMDlJI5fsLXkJIuSJRoxZybXF+
+ G+TQEhdxAatjHHLM1zSOHtidKnuTdB0qndiZX4gOlOh2n4CZ4ez7fhAK8trLOd/rOEzn+RpS
+ /QletmbBqgdQDrw5DlAP4L2q5ZvdUr3iFvWbTalejU2Y7VpWxfNpo3/ZgLq+SRXVni3uMIyr
+ qeOzATeRZZfFQ1uANyPMKCkzk+rvGhbk+V3BhOaLt5WcUTq0Y5rNy2u0aNnf5BScU3On2LI2
+ RyXDBEUofj2j7U0qNSZ17qZq4qJEvdlGhYIFWfs8rvrZzLR+XCuwNEcXb/QLyzdTm795I6re
+ f5Rk6PnKPQCkVtH79h8HrJswf5s7tfjveYHnAFtHXGNZFW3ELJwZHKB2JAX5KFKw7ZYvyqwW
+ 16OpYYGaenYZpu9HQ5DPhchY8SCyeoQy2vb4vkCKUnn4DN6oeicWkJIMhjQ0CFQIdOZ6m/+L
+ TvNbCLO1zGCtw==
+IronPort-HdrOrdr: A9a23:HiDd16zUmy4CE7xUWPaPKrPwFL1zdoMgy1knxilNoRw8SKKlfq
+ eV7Y0mPH7P+VAssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
+ 4JSdkHNDSaNzlHZKjBjzVQa+xQouW6zA==
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58634956"
+   d="scan'208";a="59063944"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 13/65] xen: Annotate fnptr targets from open_softirq()
-Date: Fri, 26 Nov 2021 12:33:54 +0000
-Message-ID: <20211126123446.32324-14-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 42/65] x86/guest: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:23 +0000
+Message-ID: <20211126123446.32324-43-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -106,185 +105,103 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/cpu/mcheck/mce.c     | 2 +-
- xen/arch/x86/domain.c             | 2 +-
- xen/arch/x86/pv/traps.c           | 2 +-
- xen/arch/x86/smp.c                | 2 +-
- xen/arch/x86/time.c               | 2 +-
- xen/common/rcupdate.c             | 2 +-
- xen/common/sched/core.c           | 6 +++---
- xen/common/tasklet.c              | 2 +-
- xen/common/timer.c                | 2 +-
- xen/drivers/passthrough/x86/hvm.c | 2 +-
- xen/include/asm-x86/flushtlb.h    | 2 +-
- 11 files changed, 13 insertions(+), 13 deletions(-)
+ xen/arch/x86/guest/hyperv/hyperv.c | 10 +++++-----
+ xen/arch/x86/guest/xen/xen.c       | 11 ++++++-----
+ 2 files changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 43f6c8471a90..3467e0f1a315 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1837,7 +1837,7 @@ static int mce_delayed_action(mctelem_cookie_t mctc)
+diff --git a/xen/arch/x86/guest/hyperv/hyperv.c b/xen/arch/x86/guest/hyperv/hyperv.c
+index 84221b751453..b101ba3080b4 100644
+--- a/xen/arch/x86/guest/hyperv/hyperv.c
++++ b/xen/arch/x86/guest/hyperv/hyperv.c
+@@ -175,7 +175,7 @@ static int setup_vp_assist(void)
+     return 0;
  }
  
- /* Softirq Handler for this MCE# processing */
--static void mce_softirq(void)
-+static void cf_check mce_softirq(void)
+-static void __init setup(void)
++static void __init cf_check setup(void)
  {
-     static DEFINE_MCE_BARRIER(mce_inside_bar);
-     static DEFINE_MCE_BARRIER(mce_severity_bar);
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index f943283b2a88..1c3a1ec2a080 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2523,7 +2523,7 @@ void vcpu_mark_events_pending(struct vcpu *v)
-         vcpu_kick(v);
+     ASM_CONSTANT(HV_HCALL_PAGE, __fix_x_to_virt(FIX_X_HYPERV_HCALL));
+ 
+@@ -188,7 +188,7 @@ static void __init setup(void)
+         panic("VP assist page setup failed\n");
  }
  
--static void vcpu_kick_softirq(void)
-+static void cf_check vcpu_kick_softirq(void)
+-static int ap_setup(void)
++static int cf_check ap_setup(void)
  {
-     /*
-      * Nothing to do here: we merely prevent notifiers from racing with checks
-diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
-index 1d1cb0784c98..3e8ca8b6fc15 100644
---- a/xen/arch/x86/pv/traps.c
-+++ b/xen/arch/x86/pv/traps.c
-@@ -130,7 +130,7 @@ bool set_guest_nmi_trapbounce(void)
+     int rc;
  
- static DEFINE_PER_CPU(struct vcpu *, softirq_nmi_vcpu);
- 
--static void nmi_softirq(void)
-+static void cf_check nmi_softirq(void)
- {
-     struct vcpu **v_ptr = &this_cpu(softirq_nmi_vcpu);
- 
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index f6fd7f95df58..b9a696f61963 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -290,7 +290,7 @@ void flush_area_mask(const cpumask_t *mask, const void *va, unsigned int flags)
+@@ -199,7 +199,7 @@ static int ap_setup(void)
+     return setup_vp_assist();
  }
  
- /* Call with no locks held and interrupts enabled (e.g., softirq context). */
--void new_tlbflush_clock_period(void)
-+void cf_check new_tlbflush_clock_period(void)
+-static void __init e820_fixup(struct e820map *e820)
++static void __init cf_check e820_fixup(struct e820map *e820)
  {
-     cpumask_t allbutself;
+     uint64_t s = HV_HCALL_MFN << PAGE_SHIFT;
  
-diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index ea34b4343c17..1ebf5fca96cc 100644
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -1450,7 +1450,7 @@ int cpu_frequency_change(u64 freq)
- static DEFINE_PER_CPU(struct cpu_time_stamp, cpu_calibration);
- 
- /* Softirq handler for per-CPU time calibration. */
--static void local_time_calibration(void)
-+static void cf_check local_time_calibration(void)
- {
-     struct cpu_time *t = &this_cpu(cpu_time);
-     const struct cpu_time_stamp *c = &this_cpu(cpu_calibration);
-diff --git a/xen/common/rcupdate.c b/xen/common/rcupdate.c
-index 423d6b1d6d02..212a99acd8c8 100644
---- a/xen/common/rcupdate.c
-+++ b/xen/common/rcupdate.c
-@@ -466,7 +466,7 @@ static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp,
-         rcu_do_batch(rdp);
+@@ -207,8 +207,8 @@ static void __init e820_fixup(struct e820map *e820)
+         panic("Unable to reserve Hyper-V hypercall range\n");
  }
  
--static void rcu_process_callbacks(void)
-+static void cf_check rcu_process_callbacks(void)
+-static int flush_tlb(const cpumask_t *mask, const void *va,
+-                     unsigned int flags)
++static int cf_check flush_tlb(
++    const cpumask_t *mask, const void *va, unsigned int flags)
  {
-     struct rcu_data *rdp = &this_cpu(rcu_data);
- 
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 285de9ee2a19..b1836b591c0a 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -2568,7 +2568,7 @@ static struct sched_unit *sched_wait_rendezvous_in(struct sched_unit *prev,
-     return prev->next_task;
+     if ( !(ms_hyperv.hints & HV_X64_REMOTE_TLB_FLUSH_RECOMMENDED) )
+         return -EOPNOTSUPP;
+diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
+index 17807cdea688..9c2defaa6621 100644
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -237,7 +237,7 @@ static int init_evtchn(void)
+     return rc;
  }
  
--static void sched_slave(void)
-+static void cf_check sched_slave(void)
+-static void __init setup(void)
++static void __init cf_check setup(void)
  {
-     struct vcpu          *v, *vprev = current;
-     struct sched_unit    *prev = vprev->sched_unit, *next;
-@@ -2632,7 +2632,7 @@ static void sched_slave(void)
-  * - deschedule the current domain (scheduler independent).
-  * - pick a new domain (scheduler dependent).
-  */
--static void schedule(void)
-+static void cf_check schedule(void)
- {
-     struct vcpu          *vnext, *vprev = current;
-     struct sched_unit    *prev = vprev->sched_unit, *next = NULL;
-@@ -2928,7 +2928,7 @@ const cpumask_t *sched_get_opt_cpumask(enum sched_gran opt, unsigned int cpu)
-     return mask;
+     init_memmap();
+ 
+@@ -265,7 +265,7 @@ static void __init setup(void)
+     BUG_ON(init_evtchn());
  }
  
--static void schedule_dummy(void)
-+static void cf_check schedule_dummy(void)
+-static int ap_setup(void)
++static int cf_check ap_setup(void)
  {
-     sched_tasklet_check_cpu(smp_processor_id());
- }
-diff --git a/xen/common/tasklet.c b/xen/common/tasklet.c
-index 1b16bbcdeb0b..3ad67b5c2493 100644
---- a/xen/common/tasklet.c
-+++ b/xen/common/tasklet.c
-@@ -135,7 +135,7 @@ void do_tasklet(void)
+     set_vcpu_id();
+ 
+@@ -295,7 +295,7 @@ static void cf_check ap_resume(void *unused)
+     BUG_ON(init_evtchn());
  }
  
- /* Softirq context work */
--static void tasklet_softirq_action(void)
-+static void cf_check tasklet_softirq_action(void)
+-static void resume(void)
++static void cf_check resume(void)
  {
-     unsigned int cpu = smp_processor_id();
-     struct list_head *list = &per_cpu(softirq_tasklet_list, cpu);
-diff --git a/xen/common/timer.c b/xen/common/timer.c
-index b788050ea1d8..700f191a70b4 100644
---- a/xen/common/timer.c
-+++ b/xen/common/timer.c
-@@ -450,7 +450,7 @@ static void execute_timer(struct timers *ts, struct timer *t)
+     /* Reset shared info page. */
+     map_shared_info();
+@@ -318,13 +318,14 @@ static void resume(void)
+         pv_console_init();
  }
  
- 
--static void timer_softirq_action(void)
-+static void cf_check timer_softirq_action(void)
+-static void __init e820_fixup(struct e820map *e820)
++static void __init cf_check e820_fixup(struct e820map *e820)
  {
-     struct timer  *t, **heap, *next;
-     struct timers *ts;
-diff --git a/xen/drivers/passthrough/x86/hvm.c b/xen/drivers/passthrough/x86/hvm.c
-index fef350ef3a1d..7a6d9ac3d40d 100644
---- a/xen/drivers/passthrough/x86/hvm.c
-+++ b/xen/drivers/passthrough/x86/hvm.c
-@@ -999,7 +999,7 @@ int arch_pci_clean_pirqs(struct domain *d)
-  * Note: 'pt_pirq_softirq_reset' can clear the STATE_SCHED before we get to
-  * doing it. If that is the case we let 'pt_pirq_softirq_reset' do ref-counting.
-  */
--static void dpci_softirq(void)
-+static void cf_check dpci_softirq(void)
- {
-     unsigned int cpu = smp_processor_id();
-     LIST_HEAD(our_list);
-diff --git a/xen/include/asm-x86/flushtlb.h b/xen/include/asm-x86/flushtlb.h
-index 0be2273387ed..18777f1d4c00 100644
---- a/xen/include/asm-x86/flushtlb.h
-+++ b/xen/include/asm-x86/flushtlb.h
-@@ -87,7 +87,7 @@ static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp)
-             __cpumask_clear_cpu(cpu, mask);
+     if ( pv_shim )
+         pv_shim_fixup_e820(e820);
  }
  
--void new_tlbflush_clock_period(void);
-+void cf_check new_tlbflush_clock_period(void);
- 
- /* Read pagetable base. */
- static inline unsigned long read_cr3(void)
+-static int flush_tlb(const cpumask_t *mask, const void *va, unsigned int flags)
++static int cf_check flush_tlb(
++    const cpumask_t *mask, const void *va, unsigned int flags)
+ {
+     return xen_hypercall_hvm_op(HVMOP_flush_tlbs, NULL);
+ }
 -- 
 2.11.0
 
