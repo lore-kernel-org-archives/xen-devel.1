@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C07C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E84B9C433EF
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:05:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232748.403617 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.232749.403628 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauE-0003XN-6Y; Fri, 26 Nov 2021 13:04:46 +0000
+	id 1mqauI-0003t7-JU; Fri, 26 Nov 2021 13:04:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232748.403617; Fri, 26 Nov 2021 13:04:46 +0000
+Received: by outflank-mailman (output) from mailman id 232749.403628; Fri, 26 Nov 2021 13:04:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauE-0003XG-2x; Fri, 26 Nov 2021 13:04:46 +0000
-Received: by outflank-mailman (input) for mailman id 232748;
- Fri, 26 Nov 2021 13:04:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqauI-0003sy-Fb; Fri, 26 Nov 2021 13:04:50 +0000
+Received: by outflank-mailman (input) for mailman id 232749;
+ Fri, 26 Nov 2021 13:04:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqauC-0003W9-Ux
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:45 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6abd2811-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:04:42 +0100 (CET)
+ id 1mqauF-0002zD-UG
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:48 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6bcea279-4eb9-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 14:04:44 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,787 +38,1740 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6abd2811-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 6bcea279-4eb9-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931882;
+  d=citrix.com; s=securemail; t=1637931884;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=lyv9Zq2/wNiGM7cedY7jC5rNlTlcp+sDuu1OiqPjFTg=;
-  b=M5aUjTN3C+ErM1grARTSTiuiEOO8CMpENPpVt8sHqH/eJfJxAVky0zx6
-   CJou6ZfIJ8u1C/gz4oLSwlzNjZfR91YqggGCJ3kkqCJT3RxwP9zqow2Op
-   inydMKMDeuaNEDarXfm5sozCj6+RJSCe7/vp5QIJJIPh8j9HiVH3TkjHV
-   I=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: fOYU9aW3l2wmwGsPd6CF/fr/ZOec+IzVsloqAFGDwWe+hD09ck9tQvXWbEgXc3WZcidVlFk2lV
- 3a01fkSNuUQ0fAsCDnP42VDS7pdx6DRRSnds6xOazrI5qLhtteHiVQqgrfqE/p7WwWRe67iAtr
- 3E5vhOg1Envlt3lUjMZl2wExtaZStH4CO9kldE6FjaxLBUCheNDjG3O6yw0rnaXm82F5r0G2io
- hgUUfNtiLIX207yh8N0EGcD8Dg7XcETvayWqG+WzrGCs1QQg81Zhb7k1lx25x2QBx67UM2gSLo
- JpWHnT8ZCF5PKrYrGQ/5/dz2
+   references:mime-version;
+  bh=WZas5lwNPdncK4Rv1+NDFQxVxTq8NeKx0mS2Ud2CRLY=;
+  b=BSMoRmCUezvx0kP9ek7d3HainlLWKH5VZbzgDvNOwGjlzdVNo4LHdG/E
+   cLSLFqg8q2X+FKvkoHwsUvtbgxNWYp5ua9zoOaTx6o6KCO1WWyHCnq/rW
+   cbBKt8GGnuxtURJtVGoXhks/Bqpu9MxpGRwAvnJC5eudKgA9dGdf7Ub3l
+   s=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: nEBN93GGus7IfEhHzTrohCke4FCpbz9WERilz0ViiYuBqTvFck6GE6WF0vK7jT1zkU2NgkzX/h
+ YjxboT6LR+mxjX2XqOdAqHk9X2SSavW7dy5BdQFpcj3cytWEEmUx1gnwlQ4Htm/znfxRUgYEux
+ 88pSCPLdqgK99JRG3zgaQ1V9V7rPKWSHTEgQwixzMyqYCQWf+OESCZ3bARbeJLgEQhpg3QHc0A
+ XOYRKBQxPJ/l0YZGhI2r3+3ez5gX/gm3lSeQRPp6k14y4uiQokWSr0xQWy2lHIcq/Ox+z7Ca5u
+ k2j9/ClAUG9jBdXFyJ7tkEze
 X-SBRS: 5.1
-X-MesageID: 60695210
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 58676316
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:YDhxuKKufnPyGEB/FE+RJJIlxSXFcZb7ZxGr2PjKsXjdYENSgTJWy
- jEbUG/SaPbYZ2f9KN0nOYiz9B8G7Z/UnIJlQQNlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xbZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2txuJQ7
- vlGpKWUdhokPK7VtcgASxtXRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Glo2JETR6+GD
- yYfQWFuSQrbXkxfAWkeWY8kvPmC2yjecTIN/Tp5ooJoujOOnWSdyoPFL979atGMA8JPkS6wp
- H/C/mn/KgEXMpqY0zXt2mm3mubFkCf/WYQTPL617PhnhBuU3GN7IA0bUx63rOe0jma6WslDM
- AoE9yw2t68w+Ue3CN7nUHWQglSJoxodUNp4CPAh5UeGza+83uqCLjFaFHgbMoVg7ZJoA2xxv
- rOUoz/3LRg2gpyzZXmMz5OrsD6wOjE4AXIaZyBRGGPp/OLfiI00ixvOSPNqH6i0ksD5FFnM/
- tyakMQtr+5N1JBWjs1X6XiC2mvx/caREmbZ8y2OBjr9hj6VcrJJcGBBBbLzyf9bZLiUQVCa1
- JTvs5jPtbteZX1hecHkfQnsIF1Lz6raWNE/qQQ2d3XEy9hL0yX4FWy3yGsjTHqFyu5eJVfUj
- Lb74Gu9HqN7MnqwdrNQaImsEcksxqWIPY27Da+EMIcRM8QvKFTvEMRSiai4hDuFfK8Ey/xXB
- HtmWZz0USZy5VpPkFJauNvxIZd0n3tjlAs/tLjwzgi90Kr2WZJmYextDbd6VchgtPnsiFyMq
- 753bpLWoz0CALyWSnSGquY7cAFVRUXX8Lir8qS7gMbYeVE4cIzgYteMqY4cl3tNw/4Iy7yWp
- y7lASe1CjPX3BX6FOlDUVg7AJuHYHq1hSlT0fUEMQn61n49T5yo6atDJZI7caN+rL5ozOJuT
- ulDcMKFW6wdRjPC8jUbTJ/8sI09K0j72VPQZ3KoMGolYpptZw3V4du4LAHhwzYDU3isvswkr
- rz+ig6CGcgfRx5vBdr9Ye60yw/jpmAUne9/BhOaItRadEj23pJtLij90q0+L80WcE2RzTqGz
- QeGRxwfoLCV8YMy9dDIg4GCrpuoTLQiThYLQTGD4O/vZyfA/2elzYtRa8qyfGjQBDHu5aGvR
- eRJ1PWgYvcJq0lH7thnGLFxwKNgu9a2/+1Gzh5pFWngZkiwDu8yOWGP2MRCu/EfxrJdvgfqC
- EuD9sMDZOeMMcLhVlUQOBAkfqKI0vRNwmve6vE8IUPb4i5r/eXYDRUObkfU0CENfqFoNI4Fw
- Ps6vJ9E4gOyvRMmL9Kag30G7G+LNHEBD/0qu5xy7FUHUeb3JoWuuaDhNxI=
-IronPort-HdrOrdr: A9a23:3tQAn62SzL3BLmlAceXccwqjBIokLtp133Aq2lEZdPRUGvb3qy
- nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
- uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
+IronPort-Data: A9a23:KoOHka7PahteBZs/nQ0NfwxRtOPAchMFZxGqfqrLsTDasY5as4F+v
+ mAcWTzQPPuDY2bxftAkPtu/90IF7ZGGyYIwGwFu+CxnHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdg2NAw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z9
+ u1yqKKUVTgSb5LjouAFdBRpOSVDBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gTTaiBO
+ ZFAN1KDajyZUjxmZQwNT6sD37+2pnPRLRgDkEys8P9fD2/7k1UqjemF3MDuUtCSXsBUgkawr
+ 3rL5XjkGQodMMGDyD2D6TSngeqntS/0VI8dDrSQ6u9hgFrVwHcaThIRSzOTsfS/z0KzRd9bA
+ 0gV4TY167g/8lSxSdvwVAH+p2SL1iPwQPIJTbd8slvUjPOJvUDJXQDoUwKtdvQYjPArexg26
+ WTYoPzTASRIvYy/TU+ko+L8QSyJBQAZKmoLZCkhRAQD4sX+rIxbsi8jXuqPA4bu0ISrRGiYL
+ ySi6XFn2u5N1ZJjO7CTpAif21qRSo71ohnZD+k9dkas9UtHaYGsfOREAnCLvK8bfO51orRs1
+ UXoevRyDshSUvlhdwTXGY3h+Y1FAd7ea1UwZnY1QvEcG8yFoSLLQGypyGgWyL1VGsgFYyT1R
+ 0TYpBlc4pReVFPzM/QoM9zsVJV2k/S7fTgAahwyRoEVCnSWXFXalByCmGbKhzy9+KTSuf1X1
+ WinnTaEUi9BVPUPIMueTOYBy747rh3SNkuILa0XOy+PiOLEDFbMEO9tGALXMogRsfPVyC2Io
+ o03H5bblH1ivBjWP3C/HXg7dgtRcxDWxPne9qRqSwJ0ClY8RTx6VaaOmehJlk4Mt/09q9okN
+ 0qVAidwoGcTT1WeQelTQnw8Or7pQ7hlqnc3YX4lMVqygiBxaoez9qYPMZAweOB/puBkyPd1S
+ dgDetmBXasTGmiWpWxFYMmvtpFmeTSqmRmKY3ivbg8gcsMyXAfO4NLlIFfirXFcEiqtuMIii
+ LS8zQeHE4EbTgFvAZ+OOvKixl+8p1YHn+d2UxeaK9VfYhy0ooNrNzbwnrk8JMRVcUfPwT6T1
+ gC3BxYEpLaS/99poYeR3a3d9tWnCepzGEZeDlL317fuOHmI5HenzK9BTP2MIWLXWlTr9fjwf
+ u5S1fz9bqEKxQ4Yr4pmHr935qsi/N+z9aRCxwFpEXiXPVSmDrRsfiuP0cVV7/Afw7ZYvU29W
+ 16V+8kcMrKMYZu3HFkULQsjT+KCyfBLxWWCsaVreB33tH1t4b6KcUROJB3d2iVSIYx8PJ4h3
+ ep86tUd7Bayi0ZyP9uL5syOG79g8pDUv30bi6wn
+IronPort-HdrOrdr: A9a23:3opOB6mK/TCE2HZOlPXEpjW3iKzpDfI/3DAbv31ZSRFFG/Fw9v
+ re/8jzuiWftN98YhwdcLO7WJVoI0mzyXcd2+B4VotKOjOLhILCFuBfBOXZrAEJ30bFh4tgPW
+ AKSdkdNOHN
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="60695210"
+   d="scan'208";a="58676316"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 20/65] xen/keyhandler: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:01 +0000
-Message-ID: <20211126123446.32324-21-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Daniel De Graaf
+	<dgdegra@tycho.nsa.gov>, Daniel Smith <dpsmith@apertussolutions.com>
+Subject: [PATCH 15/65] xsm: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:33:56 +0000
+Message-ID: <20211126123446.32324-16-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-
-Tweak {IRQ_,}KEYHANDLER() to use a named initialiser instead of requiring a
-pointer cast to compile in the IRQ case.
-
-Reposition iommu_dump_page_tables() to avoid a forward declaration.
+Content-Type: text/plain
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+CC: Daniel Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/acpi/cpu_idle.c             |  2 +-
- xen/arch/x86/hvm/irq.c                   |  2 +-
- xen/arch/x86/hvm/svm/vmcb.c              |  2 +-
- xen/arch/x86/hvm/vmx/vmcs.c              |  2 +-
- xen/arch/x86/io_apic.c                   |  2 +-
- xen/arch/x86/irq.c                       |  2 +-
- xen/arch/x86/mm/p2m-ept.c                |  2 +-
- xen/arch/x86/mm/shadow/common.c          |  4 +--
- xen/arch/x86/msi.c                       |  2 +-
- xen/arch/x86/nmi.c                       |  4 +--
- xen/arch/x86/numa.c                      |  2 +-
- xen/arch/x86/time.c                      |  2 +-
- xen/common/debugtrace.c                  |  2 +-
- xen/common/event_channel.c               |  2 +-
- xen/common/grant_table.c                 |  2 +-
- xen/common/kexec.c                       |  2 +-
- xen/common/keyhandler.c                  | 35 ++++++++++++---------
- xen/common/livepatch.c                   |  2 +-
- xen/common/page_alloc.c                  |  4 +--
- xen/common/perfc.c                       |  4 +--
- xen/common/sched/cpupool.c               |  2 +-
- xen/common/spinlock.c                    |  4 +--
- xen/common/timer.c                       |  2 +-
- xen/drivers/char/console.c               |  8 ++---
- xen/drivers/passthrough/amd/iommu.h      |  2 +-
- xen/drivers/passthrough/amd/iommu_intr.c |  2 +-
- xen/drivers/passthrough/iommu.c          | 52 +++++++++++++++-----------------
- xen/drivers/passthrough/pci.c            |  2 +-
- xen/drivers/passthrough/vtd/extern.h     |  2 +-
- xen/drivers/passthrough/vtd/utils.c      |  2 +-
- xen/include/xen/perfc.h                  |  4 +--
- xen/include/xen/sched.h                  |  2 +-
- xen/include/xen/spinlock.h               |  4 +--
- 33 files changed, 86 insertions(+), 83 deletions(-)
+ xen/include/xsm/dummy.h  | 211 ++++++++++++++++++++++--------------------
+ xen/xsm/flask/flask_op.c |   2 +-
+ xen/xsm/flask/hooks.c    | 232 ++++++++++++++++++++++++++---------------------
+ xen/xsm/flask/private.h  |   4 +-
+ xen/xsm/silo.c           |  24 ++---
+ 5 files changed, 257 insertions(+), 216 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index 22c8bb0c2d94..0142671bb836 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -377,7 +377,7 @@ static void print_acpi_power(uint32_t cpu, struct acpi_processor_power *power)
-     print_hw_residencies(cpu);
+diff --git a/xen/include/xsm/dummy.h b/xen/include/xsm/dummy.h
+index b024119896e6..58afc1d58973 100644
+--- a/xen/include/xsm/dummy.h
++++ b/xen/include/xsm/dummy.h
+@@ -101,46 +101,48 @@ static always_inline int xsm_default_action(
+     }
  }
  
--static void dump_cx(unsigned char key)
-+static void cf_check dump_cx(unsigned char key)
+-static XSM_INLINE void xsm_security_domaininfo(
++static XSM_INLINE void cf_check xsm_security_domaininfo(
+     struct domain *d, struct xen_domctl_getdomaininfo *info)
  {
-     unsigned int cpu;
- 
-diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
-index 6045c9149bad..a7f8991a7b84 100644
---- a/xen/arch/x86/hvm/irq.c
-+++ b/xen/arch/x86/hvm/irq.c
-@@ -635,7 +635,7 @@ static void irq_dump(struct domain *d)
-            hvm_irq->callback_via_asserted ? "" : " not");
+     return;
  }
  
--static void dump_irq_info(unsigned char key)
-+static void cf_check dump_irq_info(unsigned char key)
+-static XSM_INLINE int xsm_domain_create(
++static XSM_INLINE int cf_check xsm_domain_create(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t ssidref)
  {
-     struct domain *d;
- 
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index 565e997155f2..811afb8fa8d6 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -226,7 +226,7 @@ void svm_destroy_vmcb(struct vcpu *v)
-     svm->vmcb = NULL;
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
  }
  
--static void vmcb_dump(unsigned char ch)
-+static void cf_check vmcb_dump(unsigned char ch)
+-static XSM_INLINE int xsm_getdomaininfo(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_getdomaininfo(
++    XSM_DEFAULT_ARG struct domain *d)
  {
-     struct domain *d;
-     struct vcpu *v;
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 98fe91aff80b..1bb3710f7baa 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -2117,7 +2117,7 @@ void vmcs_dump_vcpu(struct vcpu *v)
-     vmx_vmcs_exit(v);
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
  }
  
--static void vmcs_dump(unsigned char ch)
-+static void cf_check vmcs_dump(unsigned char ch)
+-static XSM_INLINE int xsm_domctl_scheduler_op(
++static XSM_INLINE int cf_check xsm_domctl_scheduler_op(
+     XSM_DEFAULT_ARG struct domain *d, int cmd)
  {
-     struct domain *d;
-     struct vcpu *v;
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index 4135a9c06052..4c5eaef86273 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -1268,7 +1268,7 @@ static void __init print_IO_APIC(void)
-         __print_IO_APIC(1);
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
  }
  
--static void _print_IO_APIC_keyhandler(unsigned char key)
-+static void cf_check _print_IO_APIC_keyhandler(unsigned char key)
+-static XSM_INLINE int xsm_sysctl_scheduler_op(XSM_DEFAULT_ARG int cmd)
++static XSM_INLINE int cf_check xsm_sysctl_scheduler_op(XSM_DEFAULT_ARG int cmd)
  {
-     __print_IO_APIC(0);
- }
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index d9bd355113d7..f43b926ed26b 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -2424,7 +2424,7 @@ void free_domain_pirqs(struct domain *d)
-     pcidevs_unlock();
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
  }
  
--static void dump_irqs(unsigned char key)
-+static void cf_check dump_irqs(unsigned char key)
+-static XSM_INLINE int xsm_set_target(
++static XSM_INLINE int cf_check xsm_set_target(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *e)
  {
-     int i, irq, pirq;
-     struct irq_desc *desc;
-diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
-index 1459f66c006b..ac36afcc1d64 100644
---- a/xen/arch/x86/mm/p2m-ept.c
-+++ b/xen/arch/x86/mm/p2m-ept.c
-@@ -1434,7 +1434,7 @@ static const char *memory_type_to_str(unsigned int x)
-     return memory_types[x][0] ? memory_types[x] : "?";
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
  }
  
--static void ept_dump_p2m_table(unsigned char key)
-+static void cf_check ept_dump_p2m_table(unsigned char key)
+-static XSM_INLINE int xsm_domctl(XSM_DEFAULT_ARG struct domain *d, int cmd)
++static XSM_INLINE int cf_check xsm_domctl(
++    XSM_DEFAULT_ARG struct domain *d, int cmd)
  {
-     struct domain *d;
-     ept_entry_t *table, *ept_entry;
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index b8cacbefef5f..03bcd9518c39 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -98,7 +98,7 @@ void shadow_vcpu_init(struct vcpu *v)
- #if SHADOW_AUDIT
- int shadow_audit_enable = 0;
- 
--static void shadow_audit_key(unsigned char key)
-+static void cf_check shadow_audit_key(unsigned char key)
- {
-     shadow_audit_enable = !shadow_audit_enable;
-     printk("%s shadow_audit_enable=%d\n",
-@@ -1046,7 +1046,7 @@ void shadow_blow_tables_per_domain(struct domain *d)
- /* Blow all shadows of all shadowed domains: this can be used to cause the
-  * guest's pagetables to be re-shadowed if we suspect that the shadows
-  * have somehow got out of sync */
--static void shadow_blow_all_tables(unsigned char c)
-+static void cf_check shadow_blow_all_tables(unsigned char c)
- {
-     struct domain *d;
-     printk("'%c' pressed -> blowing all shadow tables\n", c);
-diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
-index d1497254b188..77a4fbf13f9f 100644
---- a/xen/arch/x86/msi.c
-+++ b/xen/arch/x86/msi.c
-@@ -1411,7 +1411,7 @@ void __init early_msi_init(void)
-         return;
+     XSM_ASSERT_ACTION(XSM_OTHER);
+     switch ( cmd )
+@@ -157,91 +159,93 @@ static XSM_INLINE int xsm_domctl(XSM_DEFAULT_ARG struct domain *d, int cmd)
+     }
  }
  
--static void dump_msi(unsigned char key)
-+static void cf_check dump_msi(unsigned char key)
+-static XSM_INLINE int xsm_sysctl(XSM_DEFAULT_ARG int cmd)
++static XSM_INLINE int cf_check xsm_sysctl(XSM_DEFAULT_ARG int cmd)
  {
-     unsigned int irq;
- 
-diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
-index e20d1393c881..5c26e8785dfc 100644
---- a/xen/arch/x86/nmi.c
-+++ b/xen/arch/x86/nmi.c
-@@ -578,13 +578,13 @@ void self_nmi(void)
-     local_irq_restore(flags);
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
  }
  
--static void do_nmi_trigger(unsigned char key)
-+static void cf_check do_nmi_trigger(unsigned char key)
+-static XSM_INLINE int xsm_readconsole(XSM_DEFAULT_ARG uint32_t clear)
++static XSM_INLINE int cf_check xsm_readconsole(XSM_DEFAULT_ARG uint32_t clear)
  {
-     printk("Triggering NMI on APIC ID %x\n", get_apic_id());
-     self_nmi();
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
  }
  
--static void do_nmi_stats(unsigned char key)
-+static void cf_check do_nmi_stats(unsigned char key)
+-static XSM_INLINE int xsm_alloc_security_domain(struct domain *d)
++static XSM_INLINE int cf_check xsm_alloc_security_domain(struct domain *d)
  {
-     const struct vcpu *v;
-     unsigned int cpu;
-diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
-index 5de9db4e9943..680b7d9002c5 100644
---- a/xen/arch/x86/numa.c
-+++ b/xen/arch/x86/numa.c
-@@ -369,7 +369,7 @@ unsigned int __init arch_get_dma_bitsize(void)
-                  + PAGE_SHIFT, 32);
- }
- 
--static void dump_numa(unsigned char key)
-+static void cf_check dump_numa(unsigned char key)
- {
-     s_time_t now = NOW();
-     unsigned int i, j, n;
-diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index 1ebf5fca96cc..9f8fdb209041 100644
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -2536,7 +2536,7 @@ int tsc_set_info(struct domain *d,
- }
- 
- /* vtsc may incur measurable performance degradation, diagnose with this */
--static void dump_softtsc(unsigned char key)
-+static void cf_check dump_softtsc(unsigned char key)
- {
-     struct domain *d;
-     int domcnt = 0;
-diff --git a/xen/common/debugtrace.c b/xen/common/debugtrace.c
-index 160d00b79607..a272e5e43761 100644
---- a/xen/common/debugtrace.c
-+++ b/xen/common/debugtrace.c
-@@ -233,7 +233,7 @@ void debugtrace_printk(const char *fmt, ...)
-     spin_unlock_irqrestore(&debugtrace_lock, flags);
- }
- 
--static void debugtrace_key(unsigned char key)
-+static void cf_check debugtrace_key(unsigned char key)
- {
-     debugtrace_toggle();
- }
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index e26904e7508f..0e65178a524e 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -1629,7 +1629,7 @@ static void domain_dump_evtchn_info(struct domain *d)
-     spin_unlock(&d->event_lock);
- }
- 
--static void dump_evtchn_info(unsigned char key)
-+static void cf_check dump_evtchn_info(unsigned char key)
- {
-     struct domain *d;
- 
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 7b2f593e8b6c..7ea72ca01251 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -4257,7 +4257,7 @@ static void gnttab_usage_print(struct domain *rd)
-         printk("no active grant table entries\n");
- }
- 
--static void gnttab_usage_print_all(unsigned char key)
-+static void cf_check gnttab_usage_print_all(unsigned char key)
- {
-     struct domain *d;
- 
-diff --git a/xen/common/kexec.c b/xen/common/kexec.c
-index b222a5fd782e..a2ffb6530cff 100644
---- a/xen/common/kexec.c
-+++ b/xen/common/kexec.c
-@@ -408,7 +408,7 @@ static long cf_check kexec_reboot(void *_image)
      return 0;
  }
  
--static void do_crashdump_trigger(unsigned char key)
-+static void cf_check do_crashdump_trigger(unsigned char key)
+-static XSM_INLINE void xsm_free_security_domain(struct domain *d)
++static XSM_INLINE void cf_check xsm_free_security_domain(struct domain *d)
  {
-     printk("'%c' pressed -> triggering crashdump\n", key);
-     kexec_crash(CRASHREASON_DEBUGKEY);
-diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-index b568484ca62c..5dc650a37c5c 100644
---- a/xen/common/keyhandler.c
-+++ b/xen/common/keyhandler.c
-@@ -26,10 +26,11 @@
- static unsigned char keypress_key;
- static bool_t alt_key_handling;
- 
--static keyhandler_fn_t show_handlers, dump_hwdom_registers,
--    dump_domains, read_clocks;
--static irq_keyhandler_fn_t do_toggle_alt_key, dump_registers,
--    reboot_machine, run_all_keyhandlers, do_debug_key;
-+static keyhandler_fn_t cf_check show_handlers, cf_check dump_hwdom_registers,
-+    cf_check dump_domains, cf_check read_clocks;
-+static irq_keyhandler_fn_t cf_check do_toggle_alt_key, cf_check dump_registers,
-+    cf_check reboot_machine, cf_check run_all_keyhandlers,
-+    cf_check do_debug_key;
- 
- static struct keyhandler {
-     union {
-@@ -43,10 +44,10 @@ static struct keyhandler {
- } key_table[128] __read_mostly =
- {
- #define KEYHANDLER(k, f, desc, diag)            \
--    [k] = { { (f) }, desc, 0, diag }
-+    [k] = { { .fn = (f) }, desc, 0, diag }
- 
- #define IRQ_KEYHANDLER(k, f, desc, diag)        \
--    [k] = { { (keyhandler_fn_t *)(f) }, desc, 1, diag }
-+    [k] = { { .irq_fn = (f) }, desc, 1, diag }
- 
-     IRQ_KEYHANDLER('A', do_toggle_alt_key, "toggle alternative key handling", 0),
-     IRQ_KEYHANDLER('d', dump_registers, "dump registers", 1),
-@@ -124,7 +125,7 @@ void register_irq_keyhandler(unsigned char key, irq_keyhandler_fn_t fn,
-     key_table[key].diagnostic = diagnostic;
+     return;
  }
  
--static void show_handlers(unsigned char key)
-+static void cf_check show_handlers(unsigned char key)
+-static XSM_INLINE int xsm_grant_mapref(
++static XSM_INLINE int cf_check xsm_grant_mapref(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2, uint32_t flags)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_grant_unmapref(
++static XSM_INLINE int cf_check xsm_grant_unmapref(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_grant_setup(
++static XSM_INLINE int cf_check xsm_grant_setup(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_grant_transfer(
++static XSM_INLINE int cf_check xsm_grant_transfer(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_grant_copy(
++static XSM_INLINE int cf_check xsm_grant_copy(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_grant_query_size(
++static XSM_INLINE int cf_check xsm_grant_query_size(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_memory_exchange(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_memory_exchange(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_memory_adjust_reservation(
++static XSM_INLINE int cf_check xsm_memory_adjust_reservation(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_memory_stat_reservation(
++static XSM_INLINE int cf_check xsm_memory_stat_reservation(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_console_io(XSM_DEFAULT_ARG struct domain *d, int cmd)
++static XSM_INLINE int cf_check xsm_console_io(
++    XSM_DEFAULT_ARG struct domain *d, int cmd)
+ {
+     XSM_ASSERT_ACTION(XSM_OTHER);
+     if ( d->is_console )
+@@ -253,26 +257,27 @@ static XSM_INLINE int xsm_console_io(XSM_DEFAULT_ARG struct domain *d, int cmd)
+     return xsm_default_action(XSM_PRIV, d, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_profile(XSM_DEFAULT_ARG struct domain *d, int op)
++static XSM_INLINE int cf_check xsm_profile(
++    XSM_DEFAULT_ARG struct domain *d, int op)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, d, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_kexec(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_kexec(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_schedop_shutdown(
++static XSM_INLINE int cf_check xsm_schedop_shutdown(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_memory_pin_page(
++static XSM_INLINE int cf_check xsm_memory_pin_page(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2,
+     struct page_info *page)
+ {
+@@ -280,20 +285,20 @@ static XSM_INLINE int xsm_memory_pin_page(
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_claim_pages(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_claim_pages(XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_evtchn_unbound(
++static XSM_INLINE int cf_check xsm_evtchn_unbound(
+     XSM_DEFAULT_ARG struct domain *d, struct evtchn *chn, domid_t id2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_evtchn_interdomain(
++static XSM_INLINE int cf_check xsm_evtchn_interdomain(
+     XSM_DEFAULT_ARG struct domain *d1, struct evtchn *chan1, struct domain *d2,
+     struct evtchn *chan2)
+ {
+@@ -301,89 +306,94 @@ static XSM_INLINE int xsm_evtchn_interdomain(
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE void xsm_evtchn_close_post(struct evtchn *chn)
++static XSM_INLINE void cf_check xsm_evtchn_close_post(struct evtchn *chn)
+ {
+     return;
+ }
+ 
+-static XSM_INLINE int xsm_evtchn_send(
++static XSM_INLINE int cf_check xsm_evtchn_send(
+     XSM_DEFAULT_ARG struct domain *d, struct evtchn *chn)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, d, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_evtchn_status(
++static XSM_INLINE int cf_check xsm_evtchn_status(
+     XSM_DEFAULT_ARG struct domain *d, struct evtchn *chn)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_evtchn_reset(
++static XSM_INLINE int cf_check xsm_evtchn_reset(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_alloc_security_evtchns(
++static XSM_INLINE int cf_check xsm_alloc_security_evtchns(
+     struct evtchn chn[], unsigned int nr)
+ {
+     return 0;
+ }
+ 
+-static XSM_INLINE void xsm_free_security_evtchns(
++static XSM_INLINE void cf_check xsm_free_security_evtchns(
+     struct evtchn chn[], unsigned int nr)
+ {
+     return;
+ }
+ 
+-static XSM_INLINE char *xsm_show_security_evtchn(
++static XSM_INLINE char *cf_check xsm_show_security_evtchn(
+     struct domain *d, const struct evtchn *chn)
+ {
+     return NULL;
+ }
+ 
+-static XSM_INLINE int xsm_init_hardware_domain(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_init_hardware_domain(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_get_pod_target(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_get_pod_target(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_set_pod_target(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_set_pod_target(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_get_vnumainfo(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_get_vnumainfo(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+ #if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
+-static XSM_INLINE int xsm_get_device_group(XSM_DEFAULT_ARG uint32_t machine_bdf)
++static XSM_INLINE int cf_check xsm_get_device_group(
++    XSM_DEFAULT_ARG uint32_t machine_bdf)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_assign_device(
++static XSM_INLINE int cf_check xsm_assign_device(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t machine_bdf)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_deassign_device(
++static XSM_INLINE int cf_check xsm_deassign_device(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t machine_bdf)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+@@ -393,14 +403,14 @@ static XSM_INLINE int xsm_deassign_device(
+ #endif /* HAS_PASSTHROUGH && HAS_PCI */
+ 
+ #if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_DEVICE_TREE)
+-static XSM_INLINE int xsm_assign_dtdevice(
++static XSM_INLINE int cf_check xsm_assign_dtdevice(
+     XSM_DEFAULT_ARG struct domain *d, const char *dtpath)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_deassign_dtdevice(
++static XSM_INLINE int cf_check xsm_deassign_dtdevice(
+     XSM_DEFAULT_ARG struct domain *d, const char *dtpath)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+@@ -409,142 +419,144 @@ static XSM_INLINE int xsm_deassign_dtdevice(
+ 
+ #endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE */
+ 
+-static XSM_INLINE int xsm_resource_plug_core(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_resource_plug_core(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_resource_unplug_core(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_resource_unplug_core(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_resource_plug_pci(
++static XSM_INLINE int cf_check xsm_resource_plug_pci(
+     XSM_DEFAULT_ARG uint32_t machine_bdf)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_resource_unplug_pci(
++static XSM_INLINE int cf_check xsm_resource_unplug_pci(
+     XSM_DEFAULT_ARG uint32_t machine_bdf)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_resource_setup_pci(
++static XSM_INLINE int cf_check xsm_resource_setup_pci(
+     XSM_DEFAULT_ARG uint32_t machine_bdf)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_resource_setup_gsi(XSM_DEFAULT_ARG int gsi)
++static XSM_INLINE int cf_check xsm_resource_setup_gsi(XSM_DEFAULT_ARG int gsi)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_resource_setup_misc(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_resource_setup_misc(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_page_offline(XSM_DEFAULT_ARG uint32_t cmd)
++static XSM_INLINE int cf_check xsm_page_offline(XSM_DEFAULT_ARG uint32_t cmd)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_hypfs_op(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_hypfs_op(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE long xsm_do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
++static XSM_INLINE long cf_check xsm_do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
+ {
+     return -ENOSYS;
+ }
+ 
+ #ifdef CONFIG_COMPAT
+-static XSM_INLINE int xsm_do_compat_op(XEN_GUEST_HANDLE_PARAM(void) op)
++static XSM_INLINE int cf_check xsm_do_compat_op(XEN_GUEST_HANDLE_PARAM(void) op)
+ {
+     return -ENOSYS;
+ }
+ #endif
+ 
+-static XSM_INLINE char *xsm_show_irq_sid(int irq)
++static XSM_INLINE char *cf_check xsm_show_irq_sid(int irq)
+ {
+     return NULL;
+ }
+ 
+-static XSM_INLINE int xsm_map_domain_pirq(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_map_domain_pirq(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_map_domain_irq(
++static XSM_INLINE int cf_check xsm_map_domain_irq(
+     XSM_DEFAULT_ARG struct domain *d, int irq, const void *data)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_unmap_domain_pirq(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_unmap_domain_pirq(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_bind_pt_irq(
++static XSM_INLINE int cf_check xsm_bind_pt_irq(
+     XSM_DEFAULT_ARG struct domain *d, struct xen_domctl_bind_pt_irq *bind)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_unbind_pt_irq(
++static XSM_INLINE int cf_check xsm_unbind_pt_irq(
+     XSM_DEFAULT_ARG struct domain *d, struct xen_domctl_bind_pt_irq *bind)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_unmap_domain_irq(
++static XSM_INLINE int cf_check xsm_unmap_domain_irq(
+     XSM_DEFAULT_ARG struct domain *d, int irq, const void *data)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_irq_permission(
++static XSM_INLINE int cf_check xsm_irq_permission(
+     XSM_DEFAULT_ARG struct domain *d, int pirq, uint8_t allow)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_iomem_permission(
++static XSM_INLINE int cf_check xsm_iomem_permission(
+     XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, uint8_t allow)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_iomem_mapping(
++static XSM_INLINE int cf_check xsm_iomem_mapping(
+     XSM_DEFAULT_ARG struct domain *d, uint64_t s, uint64_t e, uint8_t allow)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_pci_config_permission(
++static XSM_INLINE int cf_check xsm_pci_config_permission(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t machine_bdf, uint16_t start,
+     uint16_t end, uint8_t access)
+ {
+@@ -552,41 +564,42 @@ static XSM_INLINE int xsm_pci_config_permission(
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_add_to_physmap(
++static XSM_INLINE int cf_check xsm_add_to_physmap(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_remove_from_physmap(
++static XSM_INLINE int cf_check xsm_remove_from_physmap(
+     XSM_DEFAULT_ARG struct domain *d1, struct domain *d2)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d1, d2);
+ }
+ 
+-static XSM_INLINE int xsm_map_gmfn_foreign(
++static XSM_INLINE int cf_check xsm_map_gmfn_foreign(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *t)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d, t);
+ }
+ 
+-static XSM_INLINE int xsm_hvm_param(
++static XSM_INLINE int cf_check xsm_hvm_param(
+     XSM_DEFAULT_ARG struct domain *d, unsigned long op)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_hvm_param_altp2mhvm(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_hvm_param_altp2mhvm(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_hvm_altp2mhvm_op(
++static XSM_INLINE int cf_check xsm_hvm_altp2mhvm_op(
+     XSM_DEFAULT_ARG struct domain *d, uint64_t mode, uint32_t op)
+ {
+     XSM_ASSERT_ACTION(XSM_OTHER);
+@@ -606,7 +619,7 @@ static XSM_INLINE int xsm_hvm_altp2mhvm_op(
+     }
+ }
+ 
+-static XSM_INLINE int xsm_vm_event_control(
++static XSM_INLINE int cf_check xsm_vm_event_control(
+     XSM_DEFAULT_ARG struct domain *d, int mode, int op)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+@@ -614,7 +627,7 @@ static XSM_INLINE int xsm_vm_event_control(
+ }
+ 
+ #ifdef CONFIG_MEM_ACCESS
+-static XSM_INLINE int xsm_mem_access(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_mem_access(XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+@@ -622,7 +635,7 @@ static XSM_INLINE int xsm_mem_access(XSM_DEFAULT_ARG struct domain *d)
+ #endif
+ 
+ #ifdef CONFIG_MEM_PAGING
+-static XSM_INLINE int xsm_mem_paging(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_mem_paging(XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+@@ -630,59 +643,61 @@ static XSM_INLINE int xsm_mem_paging(XSM_DEFAULT_ARG struct domain *d)
+ #endif
+ 
+ #ifdef CONFIG_MEM_SHARING
+-static XSM_INLINE int xsm_mem_sharing(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_mem_sharing(XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ #endif
+ 
+-static XSM_INLINE int xsm_platform_op(XSM_DEFAULT_ARG uint32_t op)
++static XSM_INLINE int cf_check xsm_platform_op(XSM_DEFAULT_ARG uint32_t op)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+ #ifdef CONFIG_X86
+-static XSM_INLINE int xsm_do_mca(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_do_mca(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_shadow_control(
++static XSM_INLINE int cf_check xsm_shadow_control(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t op)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_mem_sharing_op(
++static XSM_INLINE int cf_check xsm_mem_sharing_op(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *cd, int op)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, cd);
+ }
+ 
+-static XSM_INLINE int xsm_apic(XSM_DEFAULT_ARG struct domain *d, int cmd)
++static XSM_INLINE int cf_check xsm_apic(
++    XSM_DEFAULT_ARG struct domain *d, int cmd)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, d, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_machine_memory_map(XSM_DEFAULT_VOID)
++static XSM_INLINE int cf_check xsm_machine_memory_map(XSM_DEFAULT_VOID)
+ {
+     XSM_ASSERT_ACTION(XSM_PRIV);
+     return xsm_default_action(action, current->domain, NULL);
+ }
+ 
+-static XSM_INLINE int xsm_domain_memory_map(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_domain_memory_map(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_mmu_update(
++static XSM_INLINE int cf_check xsm_mmu_update(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *t, struct domain *f,
+     uint32_t flags)
+ {
+@@ -695,42 +710,42 @@ static XSM_INLINE int xsm_mmu_update(
+     return rc;
+ }
+ 
+-static XSM_INLINE int xsm_mmuext_op(
++static XSM_INLINE int cf_check xsm_mmuext_op(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *f)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d, f);
+ }
+ 
+-static XSM_INLINE int xsm_update_va_mapping(
++static XSM_INLINE int cf_check xsm_update_va_mapping(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *f, l1_pgentry_t pte)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d, f);
+ }
+ 
+-static XSM_INLINE int xsm_priv_mapping(
++static XSM_INLINE int cf_check xsm_priv_mapping(
+     XSM_DEFAULT_ARG struct domain *d, struct domain *t)
+ {
+     XSM_ASSERT_ACTION(XSM_TARGET);
+     return xsm_default_action(action, d, t);
+ }
+ 
+-static XSM_INLINE int xsm_ioport_permission(
++static XSM_INLINE int cf_check xsm_ioport_permission(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t s, uint32_t e, uint8_t allow)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_ioport_mapping(
++static XSM_INLINE int cf_check xsm_ioport_mapping(
+     XSM_DEFAULT_ARG struct domain *d, uint32_t s, uint32_t e, uint8_t allow)
+ {
+     XSM_ASSERT_ACTION(XSM_HOOK);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+-static XSM_INLINE int xsm_pmu_op(
++static XSM_INLINE int cf_check xsm_pmu_op(
+     XSM_DEFAULT_ARG struct domain *d, unsigned int op)
+ {
+     XSM_ASSERT_ACTION(XSM_OTHER);
+@@ -748,30 +763,31 @@ static XSM_INLINE int xsm_pmu_op(
+ 
+ #endif /* CONFIG_X86 */
+ 
+-static XSM_INLINE int xsm_dm_op(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_dm_op(XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+ }
+ 
+ #ifdef CONFIG_ARGO
+-static XSM_INLINE int xsm_argo_enable(const struct domain *d)
++static XSM_INLINE int cf_check xsm_argo_enable(const struct domain *d)
+ {
+     return 0;
+ }
+ 
+-static XSM_INLINE int xsm_argo_register_single_source(
++static XSM_INLINE int cf_check xsm_argo_register_single_source(
+     const struct domain *d, const struct domain *t)
+ {
+     return 0;
+ }
+ 
+-static XSM_INLINE int xsm_argo_register_any_source(const struct domain *d)
++static XSM_INLINE int cf_check xsm_argo_register_any_source(
++    const struct domain *d)
+ {
+     return 0;
+ }
+ 
+-static XSM_INLINE int xsm_argo_send(
++static XSM_INLINE int cf_check xsm_argo_send(
+     const struct domain *d, const struct domain *t)
+ {
+     return 0;
+@@ -780,7 +796,7 @@ static XSM_INLINE int xsm_argo_send(
+ #endif /* CONFIG_ARGO */
+ 
+ #include <public/version.h>
+-static XSM_INLINE int xsm_xen_version(XSM_DEFAULT_ARG uint32_t op)
++static XSM_INLINE int cf_check xsm_xen_version(XSM_DEFAULT_ARG uint32_t op)
+ {
+     XSM_ASSERT_ACTION(XSM_OTHER);
+     switch ( op )
+@@ -804,7 +820,8 @@ static XSM_INLINE int xsm_xen_version(XSM_DEFAULT_ARG uint32_t op)
+     }
+ }
+ 
+-static XSM_INLINE int xsm_domain_resource_map(XSM_DEFAULT_ARG struct domain *d)
++static XSM_INLINE int cf_check xsm_domain_resource_map(
++    XSM_DEFAULT_ARG struct domain *d)
+ {
+     XSM_ASSERT_ACTION(XSM_DM_PRIV);
+     return xsm_default_action(action, current->domain, d);
+diff --git a/xen/xsm/flask/flask_op.c b/xen/xsm/flask/flask_op.c
+index 2d7ca3abaecd..707be72a3b96 100644
+--- a/xen/xsm/flask/flask_op.c
++++ b/xen/xsm/flask/flask_op.c
+@@ -607,7 +607,7 @@ static int flask_relabel_domain(struct xen_flask_relabel *arg)
+ 
+ #endif /* !COMPAT */
+ 
+-ret_t do_flask_op(XEN_GUEST_HANDLE_PARAM(void) u_flask_op)
++ret_t cf_check do_flask_op(XEN_GUEST_HANDLE_PARAM(void) u_flask_op)
+ {
+     xen_flask_op_t op;
+     int rv;
+diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
+index 6ff1be28e4a4..63484e323c09 100644
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -157,7 +157,7 @@ static int avc_unknown_permission(const char *name, int id)
+     return rc;
+ }
+ 
+-static int flask_domain_alloc_security(struct domain *d)
++static int cf_check flask_domain_alloc_security(struct domain *d)
+ {
+     struct domain_security_struct *dsec;
+ 
+@@ -186,7 +186,7 @@ static int flask_domain_alloc_security(struct domain *d)
+     return 0;
+ }
+ 
+-static void flask_domain_free_security(struct domain *d)
++static void cf_check flask_domain_free_security(struct domain *d)
+ {
+     struct domain_security_struct *dsec = d->ssid;
+ 
+@@ -197,8 +197,8 @@ static void flask_domain_free_security(struct domain *d)
+     xfree(dsec);
+ }
+ 
+-static int flask_evtchn_unbound(struct domain *d1, struct evtchn *chn, 
+-                                domid_t id2)
++static int cf_check flask_evtchn_unbound(
++    struct domain *d1, struct evtchn *chn, domid_t id2)
+ {
+     u32 sid1, sid2, newsid;
+     int rc;
+@@ -230,8 +230,9 @@ static int flask_evtchn_unbound(struct domain *d1, struct evtchn *chn,
+     return rc;
+ }
+ 
+-static int flask_evtchn_interdomain(struct domain *d1, struct evtchn *chn1, 
+-                                    struct domain *d2, struct evtchn *chn2)
++static int cf_check flask_evtchn_interdomain(
++    struct domain *d1, struct evtchn *chn1,
++    struct domain *d2, struct evtchn *chn2)
+ {
+     u32 sid1, sid2, newsid, reverse_sid;
+     int rc;
+@@ -273,12 +274,12 @@ static int flask_evtchn_interdomain(struct domain *d1, struct evtchn *chn1,
+     return rc;
+ }
+ 
+-static void flask_evtchn_close_post(struct evtchn *chn)
++static void cf_check flask_evtchn_close_post(struct evtchn *chn)
+ {
+     chn->ssid.flask_sid = SECINITSID_UNLABELED;
+ }
+ 
+-static int flask_evtchn_send(struct domain *d, struct evtchn *chn)
++static int cf_check flask_evtchn_send(struct domain *d, struct evtchn *chn)
+ {
+     int rc;
+ 
+@@ -298,17 +299,18 @@ static int flask_evtchn_send(struct domain *d, struct evtchn *chn)
+     return rc;
+ }
+ 
+-static int flask_evtchn_status(struct domain *d, struct evtchn *chn)
++static int cf_check flask_evtchn_status(struct domain *d, struct evtchn *chn)
+ {
+     return domain_has_evtchn(d, chn, EVENT__STATUS);
+ }
+ 
+-static int flask_evtchn_reset(struct domain *d1, struct domain *d2)
++static int cf_check flask_evtchn_reset(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_EVENT, EVENT__RESET);
+ }
+ 
+-static int flask_alloc_security_evtchns(struct evtchn chn[], unsigned int nr)
++static int cf_check flask_alloc_security_evtchns(
++    struct evtchn chn[], unsigned int nr)
  {
      unsigned int i;
  
-@@ -170,7 +171,8 @@ void dump_execstate(struct cpu_user_regs *regs)
-     watchdog_enable();
+@@ -318,7 +320,8 @@ static int flask_alloc_security_evtchns(struct evtchn chn[], unsigned int nr)
+     return 0;
  }
  
--static void dump_registers(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check dump_registers(
-+    unsigned char key, struct cpu_user_regs *regs)
+-static void flask_free_security_evtchns(struct evtchn chn[], unsigned int nr)
++static void cf_check flask_free_security_evtchns(
++    struct evtchn chn[], unsigned int nr)
  {
-     unsigned int cpu;
+     unsigned int i;
  
-@@ -224,7 +226,7 @@ static void cf_check dump_hwdom_action(void *data)
+@@ -329,7 +332,8 @@ static void flask_free_security_evtchns(struct evtchn chn[], unsigned int nr)
+         chn[i].ssid.flask_sid = SECINITSID_UNLABELED;
+ }
+ 
+-static char *flask_show_security_evtchn(struct domain *d, const struct evtchn *chn)
++static char *cf_check flask_show_security_evtchn(
++    struct domain *d, const struct evtchn *chn)
+ {
+     int irq;
+     u32 sid = 0;
+@@ -355,13 +359,13 @@ static char *flask_show_security_evtchn(struct domain *d, const struct evtchn *c
+     return ctx;
+ }
+ 
+-static int flask_init_hardware_domain(struct domain *d)
++static int cf_check flask_init_hardware_domain(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__CREATE_HARDWARE_DOMAIN);
+ }
+ 
+-static int flask_grant_mapref(struct domain *d1, struct domain *d2, 
+-                              uint32_t flags)
++static int cf_check flask_grant_mapref(
++    struct domain *d1, struct domain *d2, uint32_t flags)
+ {
+     u32 perms = GRANT__MAP_READ;
+ 
+@@ -371,73 +375,75 @@ static int flask_grant_mapref(struct domain *d1, struct domain *d2,
+     return domain_has_perm(d1, d2, SECCLASS_GRANT, perms);
+ }
+ 
+-static int flask_grant_unmapref(struct domain *d1, struct domain *d2)
++static int cf_check flask_grant_unmapref(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_GRANT, GRANT__UNMAP);
+ }
+ 
+-static int flask_grant_setup(struct domain *d1, struct domain *d2)
++static int cf_check flask_grant_setup(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_GRANT, GRANT__SETUP);
+ }
+ 
+-static int flask_grant_transfer(struct domain *d1, struct domain *d2)
++static int cf_check flask_grant_transfer(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_GRANT, GRANT__TRANSFER);
+ }
+ 
+-static int flask_grant_copy(struct domain *d1, struct domain *d2)
++static int cf_check flask_grant_copy(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_GRANT, GRANT__COPY);
+ }
+ 
+-static int flask_grant_query_size(struct domain *d1, struct domain *d2)
++static int cf_check flask_grant_query_size(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_GRANT, GRANT__QUERY);
+ }
+ 
+-static int flask_get_pod_target(struct domain *d)
++static int cf_check flask_get_pod_target(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN, DOMAIN__GETPODTARGET);
+ }
+ 
+-static int flask_set_pod_target(struct domain *d)
++static int cf_check flask_set_pod_target(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN, DOMAIN__SETPODTARGET);
+ }
+ 
+-static int flask_memory_exchange(struct domain *d)
++static int cf_check flask_memory_exchange(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_MMU, MMU__EXCHANGE);
+ }
+ 
+-static int flask_memory_adjust_reservation(struct domain *d1, struct domain *d2)
++static int cf_check flask_memory_adjust_reservation(
++    struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_MMU, MMU__ADJUST);
+ }
+ 
+-static int flask_memory_stat_reservation(struct domain *d1, struct domain *d2)
++static int cf_check flask_memory_stat_reservation(
++    struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_MMU, MMU__STAT);
+ }
+ 
+-static int flask_memory_pin_page(struct domain *d1, struct domain *d2,
+-                                 struct page_info *page)
++static int cf_check flask_memory_pin_page(
++    struct domain *d1, struct domain *d2, struct page_info *page)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_MMU, MMU__PINPAGE);
+ }
+ 
+-static int flask_claim_pages(struct domain *d)
++static int cf_check flask_claim_pages(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__SETCLAIM);
+ }
+ 
+-static int flask_get_vnumainfo(struct domain *d)
++static int cf_check flask_get_vnumainfo(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__GET_VNUMAINFO);
+ }
+ 
+-static int flask_console_io(struct domain *d, int cmd)
++static int cf_check flask_console_io(struct domain *d, int cmd)
+ {
+     u32 perm;
+ 
+@@ -456,7 +462,7 @@ static int flask_console_io(struct domain *d, int cmd)
+     return domain_has_xen(d, perm);
+ }
+ 
+-static int flask_profile(struct domain *d, int op)
++static int cf_check flask_profile(struct domain *d, int op)
+ {
+     u32 perm;
+ 
+@@ -488,23 +494,23 @@ static int flask_profile(struct domain *d, int op)
+     return domain_has_xen(d, perm);
+ }
+ 
+-static int flask_kexec(void)
++static int cf_check flask_kexec(void)
+ {
+     return domain_has_xen(current->domain, XEN__KEXEC);
+ }
+ 
+-static int flask_schedop_shutdown(struct domain *d1, struct domain *d2)
++static int cf_check flask_schedop_shutdown(struct domain *d1, struct domain *d2)
+ {
+     return domain_has_perm(d1, d2, SECCLASS_DOMAIN, DOMAIN__SHUTDOWN);
+ }
+ 
+-static void flask_security_domaininfo(struct domain *d, 
+-                                      struct xen_domctl_getdomaininfo *info)
++static void cf_check flask_security_domaininfo(
++    struct domain *d, struct xen_domctl_getdomaininfo *info)
+ {
+     info->ssidref = domain_sid(d);
+ }
+ 
+-static int flask_domain_create(struct domain *d, u32 ssidref)
++static int cf_check flask_domain_create(struct domain *d, u32 ssidref)
+ {
+     int rc;
+     struct domain_security_struct *dsec = d->ssid;
+@@ -532,12 +538,12 @@ static int flask_domain_create(struct domain *d, u32 ssidref)
+     return rc;
+ }
+ 
+-static int flask_getdomaininfo(struct domain *d)
++static int cf_check flask_getdomaininfo(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN, DOMAIN__GETDOMAININFO);
+ }
+ 
+-static int flask_domctl_scheduler_op(struct domain *d, int op)
++static int cf_check flask_domctl_scheduler_op(struct domain *d, int op)
+ {
+     switch ( op )
+     {
+@@ -554,7 +560,7 @@ static int flask_domctl_scheduler_op(struct domain *d, int op)
      }
  }
  
--static void dump_hwdom_registers(unsigned char key)
-+static void cf_check dump_hwdom_registers(unsigned char key)
+-static int flask_sysctl_scheduler_op(int op)
++static int cf_check flask_sysctl_scheduler_op(int op)
  {
-     struct vcpu *v;
- 
-@@ -246,13 +248,14 @@ static void dump_hwdom_registers(unsigned char key)
+     switch ( op )
+     {
+@@ -569,7 +575,7 @@ static int flask_sysctl_scheduler_op(int op)
      }
  }
  
--static void reboot_machine(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check reboot_machine(
-+    unsigned char key, struct cpu_user_regs *regs)
+-static int flask_set_target(struct domain *d, struct domain *t)
++static int cf_check flask_set_target(struct domain *d, struct domain *t)
  {
-     printk("'%c' pressed -> rebooting machine\n", key);
-     machine_restart(0);
+     int rc;
+     struct domain_security_struct *dsec, *tsec;
+@@ -593,7 +599,7 @@ static int flask_set_target(struct domain *d, struct domain *t)
+     return rc;
  }
  
--static void dump_domains(unsigned char key)
-+static void cf_check dump_domains(unsigned char key)
+-static int flask_domctl(struct domain *d, int cmd)
++static int cf_check flask_domctl(struct domain *d, int cmd)
  {
-     struct domain *d;
-     const struct sched_unit *unit;
-@@ -372,7 +375,7 @@ static void cf_check read_clocks_slave(void *unused)
-     local_irq_enable();
+     switch ( cmd )
+     {
+@@ -757,7 +763,7 @@ static int flask_domctl(struct domain *d, int cmd)
+     }
  }
  
--static void read_clocks(unsigned char key)
-+static void cf_check read_clocks(unsigned char key)
+-static int flask_sysctl(int cmd)
++static int cf_check flask_sysctl(int cmd)
  {
-     unsigned int cpu = smp_processor_id(), min_stime_cpu, max_stime_cpu;
-     unsigned int min_cycles_cpu, max_cycles_cpu;
-@@ -461,7 +464,8 @@ static void cf_check run_all_nonirq_keyhandlers(void *unused)
- static DECLARE_TASKLET(run_all_keyhandlers_tasklet,
-                        run_all_nonirq_keyhandlers, NULL);
- 
--static void run_all_keyhandlers(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check run_all_keyhandlers(
-+    unsigned char key, struct cpu_user_regs *regs)
- {
-     struct keyhandler *h;
-     unsigned int k;
-@@ -494,7 +498,7 @@ static void do_debugger_trap_fatal(struct cpu_user_regs *regs)
-     barrier();
+     switch ( cmd )
+     {
+@@ -835,7 +841,7 @@ static int flask_sysctl(int cmd)
+     }
  }
  
--static void do_debug_key(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check do_debug_key(unsigned char key, struct cpu_user_regs *regs)
+-static int flask_readconsole(uint32_t clear)
++static int cf_check flask_readconsole(uint32_t clear)
  {
-     printk("'%c' pressed -> trapping into debugger\n", key);
-     if ( regs )
-@@ -503,7 +507,8 @@ static void do_debug_key(unsigned char key, struct cpu_user_regs *regs)
-         run_in_exception_handler(do_debugger_trap_fatal);
+     u32 perms = XEN__READCONSOLE;
+ 
+@@ -853,7 +859,7 @@ static inline u32 resource_to_perm(uint8_t access)
+         return RESOURCE__REMOVE;
  }
  
--static void do_toggle_alt_key(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check do_toggle_alt_key(
-+    unsigned char key, struct cpu_user_regs *regs)
+-static char *flask_show_irq_sid (int irq)
++static char *cf_check flask_show_irq_sid(int irq)
  {
-     alt_key_handling = !alt_key_handling;
-     printk("'%c' pressed -> using %s key handling\n", key,
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 4e1c29ab7879..e8714920dc8f 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -2068,7 +2068,7 @@ static const char *state2str(unsigned int state)
-     return names[state];
+     u32 sid, ctx_len;
+     char *ctx;
+@@ -867,7 +873,7 @@ static char *flask_show_irq_sid (int irq)
+     return ctx;
  }
  
--static void livepatch_printall(unsigned char key)
-+static void cf_check livepatch_printall(unsigned char key)
+-static int flask_map_domain_pirq (struct domain *d)
++static int cf_check flask_map_domain_pirq(struct domain *d)
  {
-     struct payload *data;
-     const void *binary_id = NULL;
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index a95dd14f63b4..906bfb6679df 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -2528,7 +2528,7 @@ unsigned long avail_node_heap_pages(unsigned int nodeid)
+     return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__ADD);
+ }
+@@ -907,7 +913,7 @@ static u32 flask_iommu_resource_use_perm(const struct domain *d)
+     return perm;
  }
  
- 
--static void pagealloc_info(unsigned char key)
-+static void cf_check pagealloc_info(unsigned char key)
+-static int flask_map_domain_irq (struct domain *d, int irq, const void *data)
++static int cf_check flask_map_domain_irq(struct domain *d, int irq, const void *data)
  {
-     unsigned int zone = MEMZONE_XEN;
-     unsigned long n, total = 0;
-@@ -2578,7 +2578,7 @@ void scrub_one_page(struct page_info *pg)
+     u32 sid, dsid;
+     int rc = -EPERM;
+@@ -933,7 +939,7 @@ static int flask_map_domain_irq (struct domain *d, int irq, const void *data)
+     return rc;
+ }
+ 
+-static int flask_unmap_domain_pirq (struct domain *d)
++static int cf_check flask_unmap_domain_pirq(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
+ }
+@@ -954,7 +960,8 @@ static int flask_unmap_domain_msi (struct domain *d, int irq, const void *data,
  #endif
  }
  
--static void dump_heap(unsigned char key)
-+static void cf_check dump_heap(unsigned char key)
+-static int flask_unmap_domain_irq (struct domain *d, int irq, const void *data)
++static int cf_check flask_unmap_domain_irq(
++    struct domain *d, int irq, const void *data)
  {
-     s_time_t      now = NOW();
-     int           i, j;
-diff --git a/xen/common/perfc.c b/xen/common/perfc.c
-index 3abe35892a83..7400667bf0c4 100644
---- a/xen/common/perfc.c
-+++ b/xen/common/perfc.c
-@@ -28,7 +28,7 @@ static const struct {
+     u32 sid;
+     int rc = -EPERM;
+@@ -972,7 +979,8 @@ static int flask_unmap_domain_irq (struct domain *d, int irq, const void *data)
+     return rc;
+ }
  
- DEFINE_PER_CPU(perfc_t[NUM_PERFCOUNTERS], perfcounters);
- 
--void perfc_printall(unsigned char key)
-+void cf_check perfc_printall(unsigned char key)
+-static int flask_bind_pt_irq (struct domain *d, struct xen_domctl_bind_pt_irq *bind)
++static int cf_check flask_bind_pt_irq(
++    struct domain *d, struct xen_domctl_bind_pt_irq *bind)
  {
-     unsigned int i, j;
-     s_time_t now = NOW();
-@@ -115,7 +115,7 @@ void perfc_printall(unsigned char key)
+     u32 dsid, rsid;
+     int rc = -EPERM;
+@@ -998,12 +1006,14 @@ static int flask_bind_pt_irq (struct domain *d, struct xen_domctl_bind_pt_irq *b
+     return avc_has_perm(dsid, rsid, SECCLASS_RESOURCE, dperm, &ad);
+ }
+ 
+-static int flask_unbind_pt_irq (struct domain *d, struct xen_domctl_bind_pt_irq *bind)
++static int cf_check flask_unbind_pt_irq(
++    struct domain *d, struct xen_domctl_bind_pt_irq *bind)
+ {
+     return current_has_perm(d, SECCLASS_RESOURCE, RESOURCE__REMOVE);
+ }
+ 
+-static int flask_irq_permission (struct domain *d, int pirq, uint8_t access)
++static int cf_check flask_irq_permission(
++    struct domain *d, int pirq, uint8_t access)
+ {
+     /* the PIRQ number is not useful; real IRQ is checked during mapping */
+     return current_has_perm(d, SECCLASS_RESOURCE, resource_to_perm(access));
+@@ -1016,7 +1026,8 @@ struct iomem_has_perm_data {
+     u32 use_perm;
+ };
+ 
+-static int _iomem_has_perm(void *v, u32 sid, unsigned long start, unsigned long end)
++static int cf_check _iomem_has_perm(
++    void *v, u32 sid, unsigned long start, unsigned long end)
+ {
+     struct iomem_has_perm_data *data = v;
+     struct avc_audit_data ad;
+@@ -1034,7 +1045,8 @@ static int _iomem_has_perm(void *v, u32 sid, unsigned long start, unsigned long
+     return avc_has_perm(data->dsid, sid, SECCLASS_RESOURCE, data->use_perm, &ad);
+ }
+ 
+-static int flask_iomem_permission(struct domain *d, uint64_t start, uint64_t end, uint8_t access)
++static int cf_check flask_iomem_permission(
++    struct domain *d, uint64_t start, uint64_t end, uint8_t access)
+ {
+     struct iomem_has_perm_data data;
+     int rc;
+@@ -1056,12 +1068,14 @@ static int flask_iomem_permission(struct domain *d, uint64_t start, uint64_t end
+     return security_iterate_iomem_sids(start, end, _iomem_has_perm, &data);
+ }
+ 
+-static int flask_iomem_mapping(struct domain *d, uint64_t start, uint64_t end, uint8_t access)
++static int cf_check flask_iomem_mapping(struct domain *d, uint64_t start, uint64_t end, uint8_t access)
+ {
+     return flask_iomem_permission(d, start, end, access);
+ }
+ 
+-static int flask_pci_config_permission(struct domain *d, uint32_t machine_bdf, uint16_t start, uint16_t end, uint8_t access)
++static int cf_check flask_pci_config_permission(
++    struct domain *d, uint32_t machine_bdf, uint16_t start, uint16_t end,
++    uint8_t access)
+ {
+     u32 dsid, rsid;
+     int rc = -EPERM;
+@@ -1085,12 +1099,12 @@ static int flask_pci_config_permission(struct domain *d, uint32_t machine_bdf, u
+ 
+ }
+ 
+-static int flask_resource_plug_core(void)
++static int cf_check flask_resource_plug_core(void)
+ {
+     return avc_current_has_perm(SECINITSID_DOMXEN, SECCLASS_RESOURCE, RESOURCE__PLUG, NULL);
+ }
+ 
+-static int flask_resource_unplug_core(void)
++static int cf_check flask_resource_unplug_core(void)
+ {
+     return avc_current_has_perm(SECINITSID_DOMXEN, SECCLASS_RESOURCE, RESOURCE__UNPLUG, NULL);
+ }
+@@ -1100,7 +1114,7 @@ static int flask_resource_use_core(void)
+     return avc_current_has_perm(SECINITSID_DOMXEN, SECCLASS_RESOURCE, RESOURCE__USE, NULL);
+ }
+ 
+-static int flask_resource_plug_pci(uint32_t machine_bdf)
++static int cf_check flask_resource_plug_pci(uint32_t machine_bdf)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1115,7 +1129,7 @@ static int flask_resource_plug_pci(uint32_t machine_bdf)
+     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__PLUG, &ad);
+ }
+ 
+-static int flask_resource_unplug_pci(uint32_t machine_bdf)
++static int cf_check flask_resource_unplug_pci(uint32_t machine_bdf)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1130,7 +1144,7 @@ static int flask_resource_unplug_pci(uint32_t machine_bdf)
+     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__UNPLUG, &ad);
+ }
+ 
+-static int flask_resource_setup_pci(uint32_t machine_bdf)
++static int cf_check flask_resource_setup_pci(uint32_t machine_bdf)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1145,7 +1159,7 @@ static int flask_resource_setup_pci(uint32_t machine_bdf)
+     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__SETUP, &ad);
+ }
+ 
+-static int flask_resource_setup_gsi(int gsi)
++static int cf_check flask_resource_setup_gsi(int gsi)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1158,12 +1172,12 @@ static int flask_resource_setup_gsi(int gsi)
+     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__SETUP, &ad);
+ }
+ 
+-static int flask_resource_setup_misc(void)
++static int cf_check flask_resource_setup_misc(void)
+ {
+     return avc_current_has_perm(SECINITSID_XEN, SECCLASS_RESOURCE, RESOURCE__SETUP, NULL);
+ }
+ 
+-static inline int flask_page_offline(uint32_t cmd)
++static inline int cf_check flask_page_offline(uint32_t cmd)
+ {
+     switch (cmd) {
+     case sysctl_page_offline:
+@@ -1177,27 +1191,28 @@ static inline int flask_page_offline(uint32_t cmd)
      }
  }
  
--void perfc_reset(unsigned char key)
-+void cf_check perfc_reset(unsigned char key)
+-static inline int flask_hypfs_op(void)
++static inline int cf_check flask_hypfs_op(void)
  {
-     unsigned int i, j;
-     s_time_t now = NOW();
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 07f984a659cd..a6da4970506a 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -956,7 +956,7 @@ const cpumask_t *cpupool_valid_cpus(const struct cpupool *pool)
-     return pool->cpu_valid;
+     return domain_has_xen(current->domain, XEN__HYPFS_OP);
  }
  
--void dump_runq(unsigned char key)
-+void cf_check dump_runq(unsigned char key)
+-static int flask_add_to_physmap(struct domain *d1, struct domain *d2)
++static int cf_check flask_add_to_physmap(struct domain *d1, struct domain *d2)
  {
-     s_time_t         now = NOW();
-     struct cpupool *c;
-diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
-index 5ce7e3363863..25bfbf3c47f7 100644
---- a/xen/common/spinlock.c
-+++ b/xen/common/spinlock.c
-@@ -393,7 +393,7 @@ static void spinlock_profile_print_elem(struct lock_profile *data,
-            data->lock_cnt, data->time_hold, data->block_cnt, data->time_block);
+     return domain_has_perm(d1, d2, SECCLASS_MMU, MMU__PHYSMAP);
  }
  
--void spinlock_profile_printall(unsigned char key)
-+void cf_check spinlock_profile_printall(unsigned char key)
+-static int flask_remove_from_physmap(struct domain *d1, struct domain *d2)
++static int cf_check flask_remove_from_physmap(
++    struct domain *d1, struct domain *d2)
  {
-     s_time_t now = NOW();
-     s_time_t diff;
-@@ -413,7 +413,7 @@ static void spinlock_profile_reset_elem(struct lock_profile *data,
-     data->time_block = 0;
+     return domain_has_perm(d1, d2, SECCLASS_MMU, MMU__PHYSMAP);
  }
  
--void spinlock_profile_reset(unsigned char key)
-+void cf_check spinlock_profile_reset(unsigned char key)
+-static int flask_map_gmfn_foreign(struct domain *d, struct domain *t)
++static int cf_check flask_map_gmfn_foreign(struct domain *d, struct domain *t)
  {
-     s_time_t now = NOW();
- 
-diff --git a/xen/common/timer.c b/xen/common/timer.c
-index 700f191a70b4..9b5016d5ed82 100644
---- a/xen/common/timer.c
-+++ b/xen/common/timer.c
-@@ -546,7 +546,7 @@ static void dump_timer(struct timer *t, s_time_t now)
-            (t->expires - now) / 1000, t, t->function, t->data);
+     return domain_has_perm(d, t, SECCLASS_MMU, MMU__MAP_READ | MMU__MAP_WRITE);
  }
  
--static void dump_timerq(unsigned char key)
-+static void cf_check dump_timerq(unsigned char key)
+-static int flask_hvm_param(struct domain *d, unsigned long op)
++static int cf_check flask_hvm_param(struct domain *d, unsigned long op)
  {
-     struct timer  *t;
-     struct timers *ts;
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index d74b65f6bf23..380765ab02fd 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -280,7 +280,7 @@ static int *__read_mostly upper_thresh_adj = &xenlog_upper_thresh;
- static int *__read_mostly lower_thresh_adj = &xenlog_lower_thresh;
- static const char *__read_mostly thresh_adj = "standard";
+     u32 perm;
  
--static void do_toggle_guest(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check do_toggle_guest(unsigned char key, struct cpu_user_regs *regs)
+@@ -1216,12 +1231,12 @@ static int flask_hvm_param(struct domain *d, unsigned long op)
+     return current_has_perm(d, SECCLASS_HVM, perm);
+ }
+ 
+-static int flask_hvm_param_altp2mhvm(struct domain *d)
++static int cf_check flask_hvm_param_altp2mhvm(struct domain *d)
  {
-     if ( upper_thresh_adj == &xenlog_upper_thresh )
+     return current_has_perm(d, SECCLASS_HVM, HVM__ALTP2MHVM);
+ }
+ 
+-static int flask_hvm_altp2mhvm_op(struct domain *d, uint64_t mode, uint32_t op)
++static int cf_check flask_hvm_altp2mhvm_op(struct domain *d, uint64_t mode, uint32_t op)
+ {
+     /*
+      * Require both mode and XSM to allow the operation. Assume XSM rules
+@@ -1245,34 +1260,34 @@ static int flask_hvm_altp2mhvm_op(struct domain *d, uint64_t mode, uint32_t op)
+     return current_has_perm(d, SECCLASS_HVM, HVM__ALTP2MHVM_OP);
+ }
+ 
+-static int flask_vm_event_control(struct domain *d, int mode, int op)
++static int cf_check flask_vm_event_control(struct domain *d, int mode, int op)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__VM_EVENT);
+ }
+ 
+ #ifdef CONFIG_MEM_ACCESS
+-static int flask_mem_access(struct domain *d)
++static int cf_check flask_mem_access(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__MEM_ACCESS);
+ }
+ #endif
+ 
+ #ifdef CONFIG_MEM_PAGING
+-static int flask_mem_paging(struct domain *d)
++static int cf_check flask_mem_paging(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__MEM_PAGING);
+ }
+ #endif
+ 
+ #ifdef CONFIG_MEM_SHARING
+-static int flask_mem_sharing(struct domain *d)
++static int cf_check flask_mem_sharing(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__MEM_SHARING);
+ }
+ #endif
+ 
+ #if defined(CONFIG_HAS_PASSTHROUGH) && defined(CONFIG_HAS_PCI)
+-static int flask_get_device_group(uint32_t machine_bdf)
++static int cf_check flask_get_device_group(uint32_t machine_bdf)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1296,7 +1311,7 @@ static int flask_test_assign_device(uint32_t machine_bdf)
+     return avc_current_has_perm(rsid, SECCLASS_RESOURCE, RESOURCE__STAT_DEVICE, NULL);
+ }
+ 
+-static int flask_assign_device(struct domain *d, uint32_t machine_bdf)
++static int cf_check flask_assign_device(struct domain *d, uint32_t machine_bdf)
+ {
+     u32 dsid, rsid;
+     int rc = -EPERM;
+@@ -1326,7 +1341,8 @@ static int flask_assign_device(struct domain *d, uint32_t machine_bdf)
+     return avc_has_perm(dsid, rsid, SECCLASS_RESOURCE, dperm, &ad);
+ }
+ 
+-static int flask_deassign_device(struct domain *d, uint32_t machine_bdf)
++static int cf_check flask_deassign_device(
++    struct domain *d, uint32_t machine_bdf)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1357,7 +1373,7 @@ static int flask_test_assign_dtdevice(const char *dtpath)
+                                 NULL);
+ }
+ 
+-static int flask_assign_dtdevice(struct domain *d, const char *dtpath)
++static int cf_check flask_assign_dtdevice(struct domain *d, const char *dtpath)
+ {
+     u32 dsid, rsid;
+     int rc = -EPERM;
+@@ -1387,7 +1403,8 @@ static int flask_assign_dtdevice(struct domain *d, const char *dtpath)
+     return avc_has_perm(dsid, rsid, SECCLASS_RESOURCE, dperm, &ad);
+ }
+ 
+-static int flask_deassign_dtdevice(struct domain *d, const char *dtpath)
++static int cf_check flask_deassign_dtdevice(
++    struct domain *d, const char *dtpath)
+ {
+     u32 rsid;
+     int rc = -EPERM;
+@@ -1405,7 +1422,7 @@ static int flask_deassign_dtdevice(struct domain *d, const char *dtpath)
+ }
+ #endif /* HAS_PASSTHROUGH && HAS_DEVICE_TREE */
+ 
+-static int flask_platform_op(uint32_t op)
++static int cf_check flask_platform_op(uint32_t op)
+ {
+     switch ( op )
      {
-@@ -307,13 +307,13 @@ static void do_adj_thresh(unsigned char key)
-            loglvl_str(*upper_thresh_adj));
+@@ -1474,12 +1491,12 @@ static int flask_platform_op(uint32_t op)
  }
  
--static void do_inc_thresh(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check do_inc_thresh(unsigned char key, struct cpu_user_regs *regs)
+ #ifdef CONFIG_X86
+-static int flask_do_mca(void)
++static int cf_check flask_do_mca(void)
  {
-     ++*lower_thresh_adj;
-     do_adj_thresh(key);
+     return domain_has_xen(current->domain, XEN__MCA_OP);
  }
  
--static void do_dec_thresh(unsigned char key, struct cpu_user_regs *regs)
-+static void cf_check do_dec_thresh(unsigned char key, struct cpu_user_regs *regs)
+-static int flask_shadow_control(struct domain *d, uint32_t op)
++static int cf_check flask_shadow_control(struct domain *d, uint32_t op)
  {
-     if ( *lower_thresh_adj )
-         --*lower_thresh_adj;
-@@ -424,7 +424,7 @@ void console_serial_puts(const char *s, size_t nr)
-     pv_console_puts(s, nr);
- }
+     u32 perm;
  
--static void dump_console_ring_key(unsigned char key)
-+static void cf_check dump_console_ring_key(unsigned char key)
+@@ -1513,7 +1530,8 @@ struct ioport_has_perm_data {
+     u32 use_perm;
+ };
+ 
+-static int _ioport_has_perm(void *v, u32 sid, unsigned long start, unsigned long end)
++static int cf_check _ioport_has_perm(
++    void *v, u32 sid, unsigned long start, unsigned long end)
  {
-     uint32_t idx, len, sofar, c;
-     unsigned int order;
-diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
-index 04517c1a024c..99be9aafcc53 100644
---- a/xen/drivers/passthrough/amd/iommu.h
-+++ b/xen/drivers/passthrough/amd/iommu.h
-@@ -297,7 +297,7 @@ unsigned int amd_iommu_read_ioapic_from_ire(
- int amd_iommu_msi_msg_update_ire(
-     struct msi_desc *msi_desc, struct msi_msg *msg);
- int amd_setup_hpet_msi(struct msi_desc *msi_desc);
--void amd_iommu_dump_intremap_tables(unsigned char key);
-+void cf_check amd_iommu_dump_intremap_tables(unsigned char key);
- 
- extern struct ioapic_sbdf {
-     u16 bdf, seg;
-diff --git a/xen/drivers/passthrough/amd/iommu_intr.c b/xen/drivers/passthrough/amd/iommu_intr.c
-index b166a0466654..e7804413c7f4 100644
---- a/xen/drivers/passthrough/amd/iommu_intr.c
-+++ b/xen/drivers/passthrough/amd/iommu_intr.c
-@@ -844,7 +844,7 @@ static int dump_intremap_mapping(const struct amd_iommu *iommu,
-     return 0;
+     struct ioport_has_perm_data *data = v;
+     struct avc_audit_data ad;
+@@ -1531,7 +1549,8 @@ static int _ioport_has_perm(void *v, u32 sid, unsigned long start, unsigned long
+     return avc_has_perm(data->dsid, sid, SECCLASS_RESOURCE, data->use_perm, &ad);
  }
  
--void amd_iommu_dump_intremap_tables(unsigned char key)
-+void cf_check amd_iommu_dump_intremap_tables(unsigned char key)
+-static int flask_ioport_permission(struct domain *d, uint32_t start, uint32_t end, uint8_t access)
++static int cf_check flask_ioport_permission(
++    struct domain *d, uint32_t start, uint32_t end, uint8_t access)
  {
-     if ( !shared_intremap_table )
-     {
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 4eea296c8c7c..a2fc1969f402 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -22,8 +22,6 @@
- #include <xen/keyhandler.h>
- #include <xsm/xsm.h>
- 
--static void iommu_dump_page_tables(unsigned char key);
--
- unsigned int __read_mostly iommu_dev_iotlb_timeout = 1000;
- integer_param("iommu_dev_iotlb_timeout", iommu_dev_iotlb_timeout);
- 
-@@ -224,6 +222,31 @@ int iommu_domain_init(struct domain *d, unsigned int opts)
-     return 0;
+     int rc;
+     struct ioport_has_perm_data data;
+@@ -1554,12 +1573,14 @@ static int flask_ioport_permission(struct domain *d, uint32_t start, uint32_t en
+     return security_iterate_ioport_sids(start, end, _ioport_has_perm, &data);
  }
  
-+static void cf_check iommu_dump_page_tables(unsigned char key)
-+{
-+    struct domain *d;
-+
-+    ASSERT(iommu_enabled);
-+
-+    rcu_read_lock(&domlist_read_lock);
-+
-+    for_each_domain(d)
-+    {
-+        if ( is_hardware_domain(d) || !is_iommu_enabled(d) )
-+            continue;
-+
-+        if ( iommu_use_hap_pt(d) )
-+        {
-+            printk("%pd sharing page tables\n", d);
-+            continue;
-+        }
-+
-+        dom_iommu(d)->platform_ops->dump_page_tables(d);
-+    }
-+
-+    rcu_read_unlock(&domlist_read_lock);
-+}
-+
- void __hwdom_init iommu_hwdom_init(struct domain *d)
+-static int flask_ioport_mapping(struct domain *d, uint32_t start, uint32_t end, uint8_t access)
++static int cf_check flask_ioport_mapping(
++    struct domain *d, uint32_t start, uint32_t end, uint8_t access)
  {
-     struct domain_iommu *hd = dom_iommu(d);
-@@ -584,31 +607,6 @@ bool_t iommu_has_feature(struct domain *d, enum iommu_feature feature)
-     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
+     return flask_ioport_permission(d, start, end, access);
  }
  
--static void iommu_dump_page_tables(unsigned char key)
--{
--    struct domain *d;
--
--    ASSERT(iommu_enabled);
--
--    rcu_read_lock(&domlist_read_lock);
--
--    for_each_domain(d)
--    {
--        if ( is_hardware_domain(d) || !is_iommu_enabled(d) )
--            continue;
--
--        if ( iommu_use_hap_pt(d) )
--        {
--            printk("%pd sharing page tables\n", d);
--            continue;
--        }
--
--        dom_iommu(d)->platform_ops->dump_page_tables(d);
--    }
--
--    rcu_read_unlock(&domlist_read_lock);
--}
--
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/drivers/passthrough/pci.c b/xen/drivers/passthrough/pci.c
-index e75c82d11bd6..81ab09649cd0 100644
---- a/xen/drivers/passthrough/pci.c
-+++ b/xen/drivers/passthrough/pci.c
-@@ -1282,7 +1282,7 @@ static int _dump_pci_devices(struct pci_seg *pseg, void *arg)
-     return 0;
- }
- 
--static void dump_pci_devices(unsigned char ch)
-+static void cf_check dump_pci_devices(unsigned char ch)
+-static int flask_mem_sharing_op(struct domain *d, struct domain *cd, int op)
++static int cf_check flask_mem_sharing_op(
++    struct domain *d, struct domain *cd, int op)
  {
-     printk("==== PCI devices ====\n");
-     pcidevs_lock();
-diff --git a/xen/drivers/passthrough/vtd/extern.h b/xen/drivers/passthrough/vtd/extern.h
-index 6fb00a25c302..8c5e8397fd7e 100644
---- a/xen/drivers/passthrough/vtd/extern.h
-+++ b/xen/drivers/passthrough/vtd/extern.h
-@@ -31,7 +31,7 @@ extern const struct iommu_init_ops intel_iommu_init_ops;
- 
- void print_iommu_regs(struct acpi_drhd_unit *drhd);
- void print_vtd_entries(struct vtd_iommu *iommu, int bus, int devfn, u64 gmfn);
--keyhandler_fn_t vtd_dump_iommu_info;
-+keyhandler_fn_t cf_check vtd_dump_iommu_info;
- 
- bool intel_iommu_supports_eim(void);
- int intel_iommu_enable_eim(void);
-diff --git a/xen/drivers/passthrough/vtd/utils.c b/xen/drivers/passthrough/vtd/utils.c
-index 56dfdff9bd0d..47922dc8e813 100644
---- a/xen/drivers/passthrough/vtd/utils.c
-+++ b/xen/drivers/passthrough/vtd/utils.c
-@@ -154,7 +154,7 @@ void print_vtd_entries(struct vtd_iommu *iommu, int bus, int devfn, u64 gmfn)
-     } while ( --level );
+     int rc = current_has_perm(cd, SECCLASS_HVM, HVM__MEM_SHARING);
+     if ( rc )
+@@ -1567,7 +1588,7 @@ static int flask_mem_sharing_op(struct domain *d, struct domain *cd, int op)
+     return domain_has_perm(d, cd, SECCLASS_HVM, HVM__SHARE_MEM);
  }
  
--void vtd_dump_iommu_info(unsigned char key)
-+void cf_check vtd_dump_iommu_info(unsigned char key)
+-static int flask_apic(struct domain *d, int cmd)
++static int cf_check flask_apic(struct domain *d, int cmd)
  {
-     struct acpi_drhd_unit *drhd;
-     struct vtd_iommu *iommu;
-diff --git a/xen/include/xen/perfc.h b/xen/include/xen/perfc.h
-index 6846e7119fa3..bb010b0aae93 100644
---- a/xen/include/xen/perfc.h
-+++ b/xen/include/xen/perfc.h
-@@ -96,8 +96,8 @@ DECLARE_PER_CPU(perfc_t[NUM_PERFCOUNTERS], perfcounters);
- struct xen_sysctl_perfc_op;
- int perfc_control(struct xen_sysctl_perfc_op *);
+     u32 perm;
  
--extern void perfc_printall(unsigned char key);
--extern void perfc_reset(unsigned char key);
-+extern void cf_check perfc_printall(unsigned char key);
-+extern void cf_check perfc_reset(unsigned char key);
+@@ -1587,18 +1608,18 @@ static int flask_apic(struct domain *d, int cmd)
+     return domain_has_xen(d, perm);
+ }
  
-     
- #else /* CONFIG_PERF_COUNTERS */
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 37f78cc4c4c9..67b0f6b86853 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -1145,7 +1145,7 @@ int cpupool_move_domain(struct domain *d, struct cpupool *c);
- int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op);
- unsigned int cpupool_get_id(const struct domain *d);
- const cpumask_t *cpupool_valid_cpus(const struct cpupool *pool);
--extern void dump_runq(unsigned char key);
-+extern void cf_check dump_runq(unsigned char key);
+-static int flask_machine_memory_map(void)
++static int cf_check flask_machine_memory_map(void)
+ {
+     return avc_current_has_perm(SECINITSID_XEN, SECCLASS_MMU, MMU__MEMORYMAP, NULL);
+ }
  
- void arch_do_physinfo(struct xen_sysctl_physinfo *pi);
+-static int flask_domain_memory_map(struct domain *d)
++static int cf_check flask_domain_memory_map(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_MMU, MMU__MEMORYMAP);
+ }
  
-diff --git a/xen/include/xen/spinlock.h b/xen/include/xen/spinlock.h
-index 9fa4e600c1f7..961891bea4d5 100644
---- a/xen/include/xen/spinlock.h
-+++ b/xen/include/xen/spinlock.h
-@@ -129,8 +129,8 @@ void _lock_profile_deregister_struct(int32_t, struct lock_profile_qhead *);
-     _lock_profile_deregister_struct(type, &((ptr)->profile_head))
+-static int flask_mmu_update(struct domain *d, struct domain *t,
+-                            struct domain *f, uint32_t flags)
++static int cf_check flask_mmu_update(
++    struct domain *d, struct domain *t, struct domain *f, uint32_t flags)
+ {
+     int rc = 0;
+     u32 map_perms = 0;
+@@ -1620,13 +1641,13 @@ static int flask_mmu_update(struct domain *d, struct domain *t,
+     return rc;
+ }
  
- extern int spinlock_profile_control(struct xen_sysctl_lockprof_op *pc);
--extern void spinlock_profile_printall(unsigned char key);
--extern void spinlock_profile_reset(unsigned char key);
-+extern void cf_check spinlock_profile_printall(unsigned char key);
-+extern void cf_check spinlock_profile_reset(unsigned char key);
+-static int flask_mmuext_op(struct domain *d, struct domain *f)
++static int cf_check flask_mmuext_op(struct domain *d, struct domain *f)
+ {
+     return domain_has_perm(d, f, SECCLASS_MMU, MMU__MMUEXT_OP);
+ }
  
- #else
+-static int flask_update_va_mapping(struct domain *d, struct domain *f,
+-                                   l1_pgentry_t pte)
++static int cf_check flask_update_va_mapping(
++    struct domain *d, struct domain *f, l1_pgentry_t pte)
+ {
+     u32 map_perms = MMU__MAP_READ;
+     if ( !(l1e_get_flags(pte) & _PAGE_PRESENT) )
+@@ -1637,12 +1658,12 @@ static int flask_update_va_mapping(struct domain *d, struct domain *f,
+     return domain_has_perm(d, f, SECCLASS_MMU, map_perms);
+ }
  
+-static int flask_priv_mapping(struct domain *d, struct domain *t)
++static int cf_check flask_priv_mapping(struct domain *d, struct domain *t)
+ {
+     return domain_has_perm(d, t, SECCLASS_MMU, MMU__TARGET_HACK);
+ }
+ 
+-static int flask_pmu_op (struct domain *d, unsigned int op)
++static int cf_check flask_pmu_op(struct domain *d, unsigned int op)
+ {
+     u32 dsid = domain_sid(d);
+ 
+@@ -1666,12 +1687,12 @@ static int flask_pmu_op (struct domain *d, unsigned int op)
+ }
+ #endif /* CONFIG_X86 */
+ 
+-static int flask_dm_op(struct domain *d)
++static int cf_check flask_dm_op(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_HVM, HVM__DM);
+ }
+ 
+-static int flask_xen_version (uint32_t op)
++static int cf_check flask_xen_version(uint32_t op)
+ {
+     u32 dsid = domain_sid(current->domain);
+ 
+@@ -1711,32 +1732,33 @@ static int flask_xen_version (uint32_t op)
+     }
+ }
+ 
+-static int flask_domain_resource_map(struct domain *d)
++static int cf_check flask_domain_resource_map(struct domain *d)
+ {
+     return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__RESOURCE_MAP);
+ }
+ 
+ #ifdef CONFIG_ARGO
+-static int flask_argo_enable(const struct domain *d)
++static int cf_check flask_argo_enable(const struct domain *d)
+ {
+     return avc_has_perm(domain_sid(d), SECINITSID_XEN, SECCLASS_ARGO,
+                         ARGO__ENABLE, NULL);
+ }
+ 
+-static int flask_argo_register_single_source(const struct domain *d,
+-                                             const struct domain *t)
++static int cf_check flask_argo_register_single_source(
++    const struct domain *d, const struct domain *t)
+ {
+     return domain_has_perm(d, t, SECCLASS_ARGO,
+                            ARGO__REGISTER_SINGLE_SOURCE);
+ }
+ 
+-static int flask_argo_register_any_source(const struct domain *d)
++static int cf_check flask_argo_register_any_source(const struct domain *d)
+ {
+     return avc_has_perm(domain_sid(d), SECINITSID_XEN, SECCLASS_ARGO,
+                         ARGO__REGISTER_ANY_SOURCE, NULL);
+ }
+ 
+-static int flask_argo_send(const struct domain *d, const struct domain *t)
++static int cf_check flask_argo_send(
++    const struct domain *d, const struct domain *t)
+ {
+     return domain_has_perm(d, t, SECCLASS_ARGO, ARGO__SEND);
+ }
+diff --git a/xen/xsm/flask/private.h b/xen/xsm/flask/private.h
+index 73b0de87245a..429f213cce74 100644
+--- a/xen/xsm/flask/private.h
++++ b/xen/xsm/flask/private.h
+@@ -3,7 +3,7 @@
+ 
+ #include <public/xen.h>
+ 
+-long do_flask_op(XEN_GUEST_HANDLE_PARAM(void) u_flask_op);
+-int compat_flask_op(XEN_GUEST_HANDLE_PARAM(void) u_flask_op);
++long cf_check do_flask_op(XEN_GUEST_HANDLE_PARAM(void) u_flask_op);
++int cf_check compat_flask_op(XEN_GUEST_HANDLE_PARAM(void) u_flask_op);
+ 
+ #endif /* XSM_FLASK_PRIVATE */
+diff --git a/xen/xsm/silo.c b/xen/xsm/silo.c
+index 3550dded7b4e..4d5fc98e7e54 100644
+--- a/xen/xsm/silo.c
++++ b/xen/xsm/silo.c
+@@ -33,8 +33,8 @@ static bool silo_mode_dom_check(const struct domain *ldom,
+             is_control_domain(rdom) || ldom == rdom);
+ }
+ 
+-static int silo_evtchn_unbound(struct domain *d1, struct evtchn *chn,
+-                               domid_t id2)
++static int cf_check silo_evtchn_unbound(
++    struct domain *d1, struct evtchn *chn, domid_t id2)
+ {
+     int rc = -EPERM;
+     struct domain *d2 = rcu_lock_domain_by_any_id(id2);
+@@ -51,30 +51,31 @@ static int silo_evtchn_unbound(struct domain *d1, struct evtchn *chn,
+     return rc;
+ }
+ 
+-static int silo_evtchn_interdomain(struct domain *d1, struct evtchn *chan1,
+-                                   struct domain *d2, struct evtchn *chan2)
++static int cf_check silo_evtchn_interdomain(
++    struct domain *d1, struct evtchn *chan1,
++    struct domain *d2, struct evtchn *chan2)
+ {
+     if ( silo_mode_dom_check(d1, d2) )
+         return xsm_evtchn_interdomain(d1, chan1, d2, chan2);
+     return -EPERM;
+ }
+ 
+-static int silo_grant_mapref(struct domain *d1, struct domain *d2,
+-                             uint32_t flags)
++static int cf_check silo_grant_mapref(
++    struct domain *d1, struct domain *d2, uint32_t flags)
+ {
+     if ( silo_mode_dom_check(d1, d2) )
+         return xsm_grant_mapref(d1, d2, flags);
+     return -EPERM;
+ }
+ 
+-static int silo_grant_transfer(struct domain *d1, struct domain *d2)
++static int cf_check silo_grant_transfer(struct domain *d1, struct domain *d2)
+ {
+     if ( silo_mode_dom_check(d1, d2) )
+         return xsm_grant_transfer(d1, d2);
+     return -EPERM;
+ }
+ 
+-static int silo_grant_copy(struct domain *d1, struct domain *d2)
++static int cf_check silo_grant_copy(struct domain *d1, struct domain *d2)
+ {
+     if ( silo_mode_dom_check(d1, d2) )
+         return xsm_grant_copy(d1, d2);
+@@ -83,15 +84,16 @@ static int silo_grant_copy(struct domain *d1, struct domain *d2)
+ 
+ #ifdef CONFIG_ARGO
+ 
+-static int silo_argo_register_single_source(const struct domain *d1,
+-                                            const struct domain *d2)
++static int cf_check silo_argo_register_single_source(
++    const struct domain *d1, const struct domain *d2)
+ {
+     if ( silo_mode_dom_check(d1, d2) )
+         return xsm_argo_register_single_source(d1, d2);
+     return -EPERM;
+ }
+ 
+-static int silo_argo_send(const struct domain *d1, const struct domain *d2)
++static int cf_check silo_argo_send(
++    const struct domain *d1, const struct domain *d2)
+ {
+     if ( silo_mode_dom_check(d1, d2) )
+         return xsm_argo_send(d1, d2);
 -- 
 2.11.0
 
