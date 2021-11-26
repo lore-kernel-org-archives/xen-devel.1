@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DACE4C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232843.403987 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C6FC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232845.404004 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqax3-0004NM-7w; Fri, 26 Nov 2021 13:07:41 +0000
+	id 1mqax6-0005Kd-Lm; Fri, 26 Nov 2021 13:07:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232843.403987; Fri, 26 Nov 2021 13:07:41 +0000
+Received: by outflank-mailman (output) from mailman id 232845.404004; Fri, 26 Nov 2021 13:07:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqax2-0004Gd-Bs; Fri, 26 Nov 2021 13:07:40 +0000
-Received: by outflank-mailman (input) for mailman id 232843;
- Fri, 26 Nov 2021 13:07:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqax6-0005Ac-36; Fri, 26 Nov 2021 13:07:44 +0000
+Received: by outflank-mailman (input) for mailman id 232845;
+ Fri, 26 Nov 2021 13:07:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqav6-0002zD-FU
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:40 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8cdd30a3-4eb9-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 14:05:38 +0100 (CET)
+ id 1mqavW-0003W9-4X
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:06 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9c0b457b-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:06:04 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8cdd30a3-4eb9-11ec-9787-a32c541c8605
+X-Inumbo-ID: 9c0b457b-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931938;
+  d=citrix.com; s=securemail; t=1637931964;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=izWgzigFmafOWMX4S5OZ2RAoFVxEuqnImtxUKaeis+Q=;
-  b=ct1fzlr00rr7ybhs/agi/IUQnTLXMAPm2/JyRioVRn7qWRZg75HX2wpW
-   9ipOjelg/KDb4lP/iBmTd342cox+gyGjNHvskBt8QxJ/CUP+YkXiQQ23V
-   QUteiLhM4U7FD6kZPIcwDl+hpOQvo+M2U77FgF9pJi66wWzJGYdkAhmkb
-   8=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Ro8n5ILYxZ/ug8PPdK97TKOMvPeoamB5J066UCLkq97/cuW2cOTxNCHICw//9Z6tuSW4YoQw3V
- LhKOVoDmI1F5tq4HGu4klMIWPcVHCYnH3l2tUiORbVX8AOJuZHzFJBUpWqZgHT6CmGgoUMvPY2
- kqfkvhSBDoZRH2lYkj3MqSjmuAQUYwcxgGcK+1VPHIAE0wE+fTw17R5WXSa1A2+QC+MTYTOP5Z
- vLX3oAoGSXIpceYTmzfClP4CWNnZ52YBBbytMSTRHcmI/7obX9uP8hoXQOL+XZx5LP6PJFNcLy
- LLyVIpoFmoBq6d02pwxz1lVQ
+  bh=hONvnroaH0E3hbObIHELnWwYtV3ug1ZhmACYEbr++xc=;
+  b=CHZdsg2L+iRHfERqQu9SZhvywjaYMQkOXP6zqcyEWuMRIszgOsW+9mcG
+   ti+ojR66TPCnwQM+f+LoB7l2ohojJa4T+QKCMU8KwHVY5mjNkKljGNQCh
+   vdF6PYkn5jWrk07i4dRcc2YEv5XWwv8sOdBXoudoDFC1VfMF8ZI9eqaeq
+   Y=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: fQ25UPOTu+fu01MWoH/vgj3u2zGbsKKD7QCLJWNp0kziqNHAAuOedr34hC0a7jgA23XdznJ+rF
+ cBz0fcKSzLGXI9BuS7KlTBfjBs/+Pzsu8q2eNjD1XAsKIYIdL7KcgkCUw9d0uAZJNQOtoOHfj7
+ C0Qqy83/e0e+fuMRAqYmAi0kCvzm4NEntLz87ennNnd0z1ENb1F7B89xEpuFNZ/ERLET2Vj6k5
+ IgfLFL8VHDR5FvpYR9at5f3YtgIywWSOZapEQy/G5F13WgE2crQCAgvt5bFrdhmM9o1Rc9Iszc
+ DapEFMsz1/4tWt7Q1aasqCdW
 X-SBRS: 5.1
-X-MesageID: 58696015
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 58676436
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:iX9RcaPEV2s+AdHvrR1okMFynXyQoLVcMsEvi/4bfWQNrUoj0jUBy
- TRNW27UbP6NZWXwKY8lPN7l9EsPsZKEy9RqSQto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6bUsxNbVU8En540Eg9w7RRbrNA2rBVPSvc4
- bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
- 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYozWts+pVm
- ZZijoCpFyEtJfbFwOE5bSANRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
- 6VFdnZdNXhvhMrvqF6/YsBqit4uM4/AO4QHt2s75TrYEewnUdbIRKCiCdpwgWdu154WRKu2i
- 8wxdHlgQk7Hbh12BFopIok0s8eRmiH9SmgNwL6SjfVuuDWCpOBr65DyNPLFd9rMQt9a9m66j
- G/b+2XyAjkBKceSjzGC9xqEluLJ2C/2Ro8WPLm57eJxxk2ewHQJDx8bXkf9puO24nNSQPoGd
- RZSoHB36/Fvqgr7FbERQiFUvlaEmjImf4sTPNYm8V+rzrGP6l6cIlY9G2sphMMdiOc6Qjkj1
- 1msltzvBCByvLD9dU9x5ot4vhvpZ3FLcDZqiTssCFJcvoK9+N1bYgfnF447SMaIYsvJ9SYcK
- txghAw3nP0tgMECzM1XFniX0mv39vAlouPYjzg7v15JDCslO+ZJhKTysDA3CMqsyq7CFTFtW
- 1BexqCjABgmV83lqcB0aLxl8EuVz/iEKibAplVkAoMs8T+gk1b6I9sPsG8jexY1bJpfEdMMX
- KM1kVgKjHO0FCH3BZKbnqrrU5h6pUQePYiNug/ogipmPcEqKV7vENBGbk+MxWH9+HXAYolkU
- ap3hf2EVC5AYYw+lWLeb75EjdcDm3BvrUuOFMuT50n2jtKjiIu9FO5t3K2mNbtisstpYWz9r
- r5iCid940kFDbClPHCIqdV7wJJjBSFTOK0aYvd/LoarSjeK0kl4YxMI6b9+KYFjgYpPkeLEo
- iO0VkNCkQKtjnzbMwSaLHtkbeq3D5p4qHs6Ow0qPEqphCd/Mdr+sv9HestlZ6Qj+cxi0eVwE
- 6sPdfKfD6kdUT/A4TkcM8Xw9dQwaBSxiAuSFCO5ezxjLYV4TgnE94a8LAvi/SUDFAStss46r
- +Hy3w/XW8NbFQ9jENzXeLSkyFbo5SoRn+d7Xk3pJNhPeRqzrNg2enKp1vJuepMCMxTOwDeex
- j26OxZAqLmfuZIx/fnImbuA89WjHdxhExcIBGLc97u3a3XXpzLx3Y9aXe+UVjnBT2eoqr66b
- OBYwvygYv0KmFFG79h1H7pxlP9s4tLuo/lRzxh+HWWNZFOuU+syLn6D1MhJl6tM2r4G5lfmB
- hPRooFXaeeTJcfoMF8NPw50PO2M2MYdliTW8flocl7x4zV6/ebfXEhfV/VWZPex8Feh3FsZ/
- Noc
-IronPort-HdrOrdr: A9a23:RiYeTq+aENcMDUYxrpBuk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
- re5cjztCWE7gr5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAtBD4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:aAWv7apRmnzaiiC08hoOrVifxaBeBmLVYhIvgKrLsJaIsI4StFCzt
+ garIBmFafiCM2TyKd8gPdi0/UoB6sTSy9YyHgRlrC89FykR8puZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2ILnW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCncCWFgJ1O4HhpL02fyNxCRlcA51s/ZaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ ppHNmQzN0qojxtnAA5KGJMEl8eUo0LCInpbpWOkgqMJ7D2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
+ 2SA+H72ajk4HtGCzTuO8lq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcVmzl6Ilq/4zjrALUQ+ZyR5SuIWnsofEGlCO
+ kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdQGmom
+ 1i3QD4Ca6L/ZCLh/4Gy5hj5jj2lvfAlpSZlt1yMDgpJAu6UDbNJhrBEC3CHsp6sz67DFzFtW
+ UTofeDFt4ji6rnXyUSwrB0lRu3B2hp8GGS0baRTN5cg7S+x3HWoYJpd5jpzTG8wbJ1bKWG0P
+ x6P518KjHO2AJdMRfQsC25WI553pZUM6Py/DqyEBjawSsQZmPC7ENFGOhfLgjGFfLkEmqAjI
+ 5aLGftA/l5BYZmLOAGeHr9HuZdyn3hW7TqKGfjTkkT2uZLDNSX9YepUbzOzghURsfrsTPP9q
+ I0EaaNnCnx3DYXDX8Ug2dJJcA1RcyFkXcueRg4+XrfrHzeK0VoJU5f5qY7NsaQ890iMvuuXr
+ Hy7RGFCz1/z2S/OJQmQMygxY7LzR5dv63k8OHV0b1qv3nEiZ6ep7bseKMRrLeV2qrQ7wK4mV
+ eQBduWBHu9LFmbN9QMCYMSvt4dlbhmq216DZnL3fDglcpd8bAXV4du4LBD3/SwDA3Pv58szq
+ rGtzC3BRp8HS1gwBcracqv3nViwoWIciKR5WE6Reotff0Dl8Y5LLS3tj6Bof5FQeEubnjbDj
+ lSYGxYVo+XJsrQZytiRiPDWtZqtHst/AlFeQzvR44GpOHSI5WGk24JBDrqFJGiPSGPu9ay+T
+ uxJ1PWgYuYflVNHvocgQbZmyaUyu4nmq7NAl1k2GXzKaxKgC696I2nA1s5K7/UfyrhcsAqwe
+ 0SO5tgFZunZZJK7SAYcdFg/c+CO9fAIgT2Dv/06LXLz6DJz4LfaA15ZOAOBiXAFIbZ4WG//L
+ TzNZCLCB9SDtycX
+IronPort-HdrOrdr: A9a23:bGlimapMfcIEts7cDGVDhYcaV5oTeYIsimQD101hICG8cqSj+f
+ xG+85rrCMc6QxhPk3I9urhBEDtex/hHNtOkOws1NSZLW7bUQmTXeJfBOLZqlWKcUDDH6xmpM
+ NdmsBFeaXN5DNB7PoSjjPWLz9Z+qjkzJyV
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58696015"
+   d="scan'208";a="58676436"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 41/65] x86/cpu: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:22 +0000
-Message-ID: <20211126123446.32324-42-andrew.cooper3@citrix.com>
+Subject: [PATCH 54/65] x86/stack: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:35 +0000
+Message-ID: <20211126123446.32324-55-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,148 +102,212 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
+The function typecheck in switch_stack_and_jump() is incompatible with control
+flow typechecking.  It's ok for reset_stack_and_jump_ind(), but for
+reset_stack_and_jump(), it would force us to ENDBR64 the targets which are
+branched to directly.
+
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/cpu/amd.c      | 6 +++---
- xen/arch/x86/cpu/centaur.c  | 2 +-
- xen/arch/x86/cpu/common.c   | 2 +-
- xen/arch/x86/cpu/cpu.h      | 2 +-
- xen/arch/x86/cpu/hygon.c    | 2 +-
- xen/arch/x86/cpu/intel.c    | 6 +++---
- xen/arch/x86/cpu/shanghai.c | 2 +-
- 7 files changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index f1c32c2787c9..a5f380852b20 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -208,7 +208,7 @@ static void __init noinline probe_masking_msrs(void)
-  * parameter of NULL is used to context switch to the default host state (by
-  * the cpu bringup-code, crash path, etc).
-  */
--static void amd_ctxt_switch_masking(const struct vcpu *next)
-+static void cf_check amd_ctxt_switch_masking(const struct vcpu *next)
- {
- 	struct cpuidmasks *these_masks = &this_cpu(cpuidmasks);
- 	const struct domain *nextd = next ? next->domain : NULL;
-@@ -634,7 +634,7 @@ void amd_log_freq(const struct cpuinfo_x86 *c)
- #undef FREQ
+Honestly, the control flow typechecking is distinctly sub-par, but it's too
+late to do anything now.
+---
+ xen/arch/x86/domain.c             | 6 +++---
+ xen/arch/x86/hvm/svm/svm.c        | 6 +++---
+ xen/arch/x86/hvm/vmx/vmcs.c       | 2 +-
+ xen/arch/x86/hvm/vmx/vmx.c        | 8 ++++----
+ xen/arch/x86/pv/domain.c          | 2 +-
+ xen/arch/x86/x86_64/entry.S       | 1 +
+ xen/include/asm-x86/current.h     | 2 +-
+ xen/include/asm-x86/hvm/vmx/vmx.h | 2 +-
+ xen/include/asm-x86/pv/domain.h   | 4 ++--
+ 9 files changed, 17 insertions(+), 16 deletions(-)
+
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index ae7c88b51af1..afccc1525f8b 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -132,7 +132,7 @@ void play_dead(void)
+         dead_idle();
  }
  
--void early_init_amd(struct cpuinfo_x86 *c)
-+void cf_check early_init_amd(struct cpuinfo_x86 *c)
+-static void noreturn idle_loop(void)
++static void noreturn cf_check idle_loop(void)
  {
- 	if (c == &boot_cpu_data)
- 		amd_init_levelling();
-@@ -744,7 +744,7 @@ void __init detect_zen2_null_seg_behaviour(void)
- 
- }
- 
--static void init_amd(struct cpuinfo_x86 *c)
-+static void cf_check init_amd(struct cpuinfo_x86 *c)
- {
- 	u32 l, h;
- 
-diff --git a/xen/arch/x86/cpu/centaur.c b/xen/arch/x86/cpu/centaur.c
-index 34a5bfcaeef2..eac49d78db62 100644
---- a/xen/arch/x86/cpu/centaur.c
-+++ b/xen/arch/x86/cpu/centaur.c
-@@ -48,7 +48,7 @@ static void init_c3(struct cpuinfo_x86 *c)
- 	display_cacheinfo(c);
- }
- 
--static void init_centaur(struct cpuinfo_x86 *c)
-+static void cf_check init_centaur(struct cpuinfo_x86 *c)
- {
- 	if (c->x86 == 6)
- 		init_c3(c);
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 4a163afbfc7e..7c41a21bf07c 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -104,7 +104,7 @@ bool __init is_forced_cpu_cap(unsigned int cap)
- 	return test_bit(cap, forced_caps);
- }
- 
--static void default_init(struct cpuinfo_x86 * c)
-+static void cf_check default_init(struct cpuinfo_x86 * c)
- {
- 	/* Not much we can do here... */
- 	/* Check if at least it has cpuid */
-diff --git a/xen/arch/x86/cpu/cpu.h b/xen/arch/x86/cpu/cpu.h
-index b593bd85f04f..a228087f9157 100644
---- a/xen/arch/x86/cpu/cpu.h
-+++ b/xen/arch/x86/cpu/cpu.h
-@@ -18,7 +18,7 @@ extern void display_cacheinfo(struct cpuinfo_x86 *c);
- extern void detect_ht(struct cpuinfo_x86 *c);
- extern bool detect_extended_topology(struct cpuinfo_x86 *c);
- 
--void early_init_amd(struct cpuinfo_x86 *c);
-+void cf_check early_init_amd(struct cpuinfo_x86 *c);
- void amd_log_freq(const struct cpuinfo_x86 *c);
- void amd_init_lfence(struct cpuinfo_x86 *c);
- void amd_init_ssbd(const struct cpuinfo_x86 *c);
-diff --git a/xen/arch/x86/cpu/hygon.c b/xen/arch/x86/cpu/hygon.c
-index cdc94130dd2e..3c8516e014c3 100644
---- a/xen/arch/x86/cpu/hygon.c
-+++ b/xen/arch/x86/cpu/hygon.c
-@@ -28,7 +28,7 @@ static void hygon_get_topology(struct cpuinfo_x86 *c)
- 	                        c->phys_proc_id, c->cpu_core_id);
- }
- 
--static void init_hygon(struct cpuinfo_x86 *c)
-+static void cf_check init_hygon(struct cpuinfo_x86 *c)
- {
- 	unsigned long long value;
- 
-diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
-index 9b011c344636..d63e18100698 100644
---- a/xen/arch/x86/cpu/intel.c
-+++ b/xen/arch/x86/cpu/intel.c
-@@ -144,7 +144,7 @@ static void __init probe_masking_msrs(void)
-  * parameter of NULL is used to context switch to the default host state (by
-  * the cpu bringup-code, crash path, etc).
-  */
--static void intel_ctxt_switch_masking(const struct vcpu *next)
-+static void cf_check intel_ctxt_switch_masking(const struct vcpu *next)
- {
- 	struct cpuidmasks *these_masks = &this_cpu(cpuidmasks);
- 	const struct domain *nextd = next ? next->domain : NULL;
-@@ -254,7 +254,7 @@ static void __init noinline intel_init_levelling(void)
- 		ctxt_switch_masking = intel_ctxt_switch_masking;
- }
- 
--static void early_init_intel(struct cpuinfo_x86 *c)
-+static void cf_check early_init_intel(struct cpuinfo_x86 *c)
- {
- 	u64 misc_enable, disable;
- 
-@@ -448,7 +448,7 @@ static void intel_log_freq(const struct cpuinfo_x86 *c)
+     unsigned int cpu = smp_processor_id();
+     /*
+@@ -1790,7 +1790,7 @@ static void save_segments(struct vcpu *v)
      }
  }
  
--static void init_intel(struct cpuinfo_x86 *c)
-+static void cf_check init_intel(struct cpuinfo_x86 *c)
+-void paravirt_ctxt_switch_from(struct vcpu *v)
++void cf_check paravirt_ctxt_switch_from(struct vcpu *v)
  {
- 	/* Detect the extended topology information if available */
- 	detect_extended_topology(c);
-diff --git a/xen/arch/x86/cpu/shanghai.c b/xen/arch/x86/cpu/shanghai.c
-index 08a81f0f0c8e..95ae544f8c54 100644
---- a/xen/arch/x86/cpu/shanghai.c
-+++ b/xen/arch/x86/cpu/shanghai.c
-@@ -3,7 +3,7 @@
- #include <asm/processor.h>
- #include "cpu.h"
+     save_segments(v);
  
--static void init_shanghai(struct cpuinfo_x86 *c)
-+static void cf_check init_shanghai(struct cpuinfo_x86 *c)
+@@ -1804,7 +1804,7 @@ void paravirt_ctxt_switch_from(struct vcpu *v)
+         write_debugreg(7, 0);
+ }
+ 
+-void paravirt_ctxt_switch_to(struct vcpu *v)
++void cf_check paravirt_ctxt_switch_to(struct vcpu *v)
  {
-     if ( cpu_has(c, X86_FEATURE_ITSC) )
-     {
+     root_pgentry_t *root_pgt = this_cpu(root_pgt);
+ 
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index c01477c97c09..2d81e4256455 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -940,7 +940,7 @@ static inline void svm_tsc_ratio_load(struct vcpu *v)
+         wrmsrl(MSR_AMD64_TSC_RATIO, hvm_tsc_scaling_ratio(v->domain));
+ }
+ 
+-static void svm_ctxt_switch_from(struct vcpu *v)
++static void cf_check svm_ctxt_switch_from(struct vcpu *v)
+ {
+     int cpu = smp_processor_id();
+ 
+@@ -965,7 +965,7 @@ static void svm_ctxt_switch_from(struct vcpu *v)
+     enable_each_ist(idt_tables[cpu]);
+ }
+ 
+-static void svm_ctxt_switch_to(struct vcpu *v)
++static void cf_check svm_ctxt_switch_to(struct vcpu *v)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+     int cpu = smp_processor_id();
+@@ -992,7 +992,7 @@ static void svm_ctxt_switch_to(struct vcpu *v)
+         wrmsr_tsc_aux(v->arch.msrs->tsc_aux);
+ }
+ 
+-static void noreturn svm_do_resume(void)
++static void noreturn cf_check svm_do_resume(void)
+ {
+     struct vcpu *v = current;
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 441be8127148..6dc4833aadd2 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -1865,7 +1865,7 @@ void vmx_vmentry_failure(void)
+ 
+ void noreturn vmx_asm_do_vmentry(void);
+ 
+-void vmx_do_resume(void)
++void cf_check vmx_do_resume(void)
+ {
+     struct vcpu *v = current;
+     bool_t debug_state;
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 88a6a5ec824b..594de04568ea 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -63,8 +63,8 @@
+ static bool_t __initdata opt_force_ept;
+ boolean_param("force-ept", opt_force_ept);
+ 
+-static void vmx_ctxt_switch_from(struct vcpu *v);
+-static void vmx_ctxt_switch_to(struct vcpu *v);
++static void cf_check vmx_ctxt_switch_from(struct vcpu *v);
++static void cf_check vmx_ctxt_switch_to(struct vcpu *v);
+ 
+ static int alloc_vlapic_mapping(void);
+ static void vmx_install_vlapic_mapping(struct vcpu *v);
+@@ -885,7 +885,7 @@ static void cf_check vmx_fpu_leave(struct vcpu *v)
+     }
+ }
+ 
+-static void vmx_ctxt_switch_from(struct vcpu *v)
++static void cf_check vmx_ctxt_switch_from(struct vcpu *v)
+ {
+     /*
+      * Return early if trying to do a context switch without VMX enabled,
+@@ -917,7 +917,7 @@ static void vmx_ctxt_switch_from(struct vcpu *v)
+         vmx_pi_switch_from(v);
+ }
+ 
+-static void vmx_ctxt_switch_to(struct vcpu *v)
++static void cf_check vmx_ctxt_switch_to(struct vcpu *v)
+ {
+     vmx_restore_guest_msrs(v);
+     vmx_restore_dr(v);
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 55146c15c853..f94f28c8e271 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -351,7 +351,7 @@ void pv_domain_destroy(struct domain *d)
+     FREE_XENHEAP_PAGE(d->arch.pv.gdt_ldt_l1tab);
+ }
+ 
+-void noreturn continue_pv_domain(void);
++void noreturn cf_check continue_pv_domain(void);
+ 
+ int pv_domain_initialise(struct domain *d)
+ {
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index 3eaf0e67b2b9..8494b97a54a2 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -625,6 +625,7 @@ ENTRY(dom_crash_sync_extable)
+ /* No special register assumptions. */
+ #ifdef CONFIG_PV
+ ENTRY(continue_pv_domain)
++        ENDBR64
+         call  check_wakeup_from_wait
+ ret_from_intr:
+         GET_CURRENT(bx)
+diff --git a/xen/include/asm-x86/current.h b/xen/include/asm-x86/current.h
+index a74ad4bc4c44..d423f2fd82ca 100644
+--- a/xen/include/asm-x86/current.h
++++ b/xen/include/asm-x86/current.h
+@@ -173,7 +173,6 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
+ #define switch_stack_and_jump(fn, instr, constr)                        \
+     ({                                                                  \
+         unsigned int tmp;                                               \
+-        (void)((fn) == (void (*)(void))NULL);                           \
+         BUILD_BUG_ON(!ssaj_has_attr_noreturn(fn));                      \
+         __asm__ __volatile__ (                                          \
+             SHADOW_STACK_WORK                                           \
+@@ -198,6 +197,7 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
+ 
+ /* The constraint may only specify non-call-clobbered registers. */
+ #define reset_stack_and_jump_ind(fn)                                    \
++    (void)((fn) == (void (*)(void))NULL);                               \
+     switch_stack_and_jump(fn, "INDIRECT_JMP %", "b")
+ 
+ /*
+diff --git a/xen/include/asm-x86/hvm/vmx/vmx.h b/xen/include/asm-x86/hvm/vmx/vmx.h
+index 459c84dd9f09..4bb8d08f2ed9 100644
+--- a/xen/include/asm-x86/hvm/vmx/vmx.h
++++ b/xen/include/asm-x86/hvm/vmx/vmx.h
+@@ -93,7 +93,7 @@ typedef enum {
+ 
+ void vmx_asm_vmexit_handler(struct cpu_user_regs);
+ void vmx_intr_assist(void);
+-void noreturn vmx_do_resume(void);
++void noreturn cf_check vmx_do_resume(void);
+ void vmx_vlapic_msr_changed(struct vcpu *v);
+ struct hvm_emulate_ctxt;
+ void vmx_realmode_emulate_one(struct hvm_emulate_ctxt *hvmemul_ctxt);
+diff --git a/xen/include/asm-x86/pv/domain.h b/xen/include/asm-x86/pv/domain.h
+index df9716ff26a8..68aec0b5a3fa 100644
+--- a/xen/include/asm-x86/pv/domain.h
++++ b/xen/include/asm-x86/pv/domain.h
+@@ -104,8 +104,8 @@ static inline unsigned long pv_make_cr4(const struct vcpu *v) { return ~0ul; }
+ 
+ #endif	/* CONFIG_PV */
+ 
+-void paravirt_ctxt_switch_from(struct vcpu *v);
+-void paravirt_ctxt_switch_to(struct vcpu *v);
++void cf_check paravirt_ctxt_switch_from(struct vcpu *v);
++void cf_check paravirt_ctxt_switch_to(struct vcpu *v);
+ 
+ #endif	/* __X86_PV_DOMAIN_H__ */
+ 
 -- 
 2.11.0
 
