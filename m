@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 194C2C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232836.403952 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D06C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232844.403994 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaww-0002az-6x; Fri, 26 Nov 2021 13:07:34 +0000
+	id 1mqax4-0004j2-MP; Fri, 26 Nov 2021 13:07:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232836.403952; Fri, 26 Nov 2021 13:07:34 +0000
+Received: by outflank-mailman (output) from mailman id 232844.403994; Fri, 26 Nov 2021 13:07:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawv-0002Xh-9B; Fri, 26 Nov 2021 13:07:33 +0000
-Received: by outflank-mailman (input) for mailman id 232836;
- Fri, 26 Nov 2021 13:07:30 +0000
+	id 1mqax3-0004dh-RT; Fri, 26 Nov 2021 13:07:41 +0000
+Received: by outflank-mailman (input) for mailman id 232844;
+ Fri, 26 Nov 2021 13:07:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavj-0003W9-LZ
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:19 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a3605815-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:06:17 +0100 (CET)
+ id 1mqaux-0003W9-D8
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:31 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 855b1c0e-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:25 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a3605815-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 855b1c0e-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931977;
+  d=citrix.com; s=securemail; t=1637931926;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=UJ5A9G/AzcOIhdVCJGvCmHSUkDZkQpv6RgU2BBYBZyw=;
-  b=SxTES20FTHjp6aXbB4yxoa30Jc5qsA2tR+eEYJPSzqV0ABNlJy7gPa9k
-   MPJi1Sl3YkQ46NTgtmytKeKvPYxlJQu779WtzyvOPiBlbEpQZjVoKw+lY
-   MGCzJ108sKTenNzmyhOu0wkBJUzElZMmk0oaTzzKF2jj4uLbks/BRQbuf
-   E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: KF1gOr6TbldRrSvVXEjgO5zpAxqCD1SOx5b1qfJMq4qGtq0nXiDC0kEje7R7le/vodhGai4Qo3
- myU48NdSI88Uud5m+mPach0vtRG9VBygXFtDSXNUExvTfksp6ImoF6oUnyfekaCb8LpEFu6DH0
- m4V19HTk1LqtzHe+gR3/PVzsdwmDY3v5pqA2Hnc4CeWJ5WMe/1WLdKk6gYHI4TRGBcW3hddX0k
- q23qkFgywyb+SbrnT4QZB9O5tBThskaERPYphaw//bpGF6JcWJ6Cvvub4tB1ckAu4wpM0JvZX6
- Y/3Ej4+0bJcquas/MkVC9q9x
+  bh=jO+OyPCKEQLuTMUlOqQ6gopRTA925Ji5NSM1T3yoqwY=;
+  b=ObdLe2wZu8uOuaL9AAgDTWTORNdcX+ZGdv949mlOt95n0tMDLj+x7JFM
+   KnDrtTVRJAtf1lCtBZGQKHRCK3l9KmgjfDsbZZvR+Nbw7nPJQTvGhMQMP
+   +Jy4x9n21YmJjCS7ZPtE8wTZp/3PXa75KU8vIFHsl0nNHPLXRmoXe7mhU
+   k=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: iQ0EbjAT+kP/KRVWw/Ea31SAZ+x2zqcw+aSEQQhT8Q7/XUrjt4J8bPnasK+F7yoYWUyIYQeFjR
+ zvOtFSKIcw0IakMq8ANW1DFVR84rUzL6lUmFyNhlIMXIrEBGeRwnhZTGqWbuBpvKs7EcRUM/VB
+ 9i5CqaZTe8eqm75J4/SHzWtq79/kCyokW2iA3WhjAfYa/VMf2bcm5oEelNCnegyEjuU84ZXBUv
+ zQ1GE/zGRPphkK4Evq3kdhvrOKJnBT4W4eI9+yj187vwPL57powQGB+drDwQFEFRuWJjKzN/Xd
+ vEAG+w0gDZC79L8OWe+EvRpw
 X-SBRS: 5.1
-X-MesageID: 58635072
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 59064014
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:7dMC6KhnumFeJs5YkNa1K6gZX161rRcKZh0ujC45NGQN5FlHY01je
- htvXTrUa/eDZmXxf4wiPo6+8R4GsJ6BmNNmTQFprSgxQn8b9cadCdqndUqhZCn6wu8v7a5EA
- 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy34Dja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /19v82JFRUtHJTOv9szWSthCCRjPpZvreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNauOO
- ZFEMWU1BPjGSw1JAW1LUawmpdb2lkTRSnpIqUOwjJNitgA/yyQuieOwYbI5YOeiWsF9jkue4
- GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
- CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4I+dr0V2fzojt4SGmKGI2dyVEdd8dnZpjLdA17
- WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoStQWmY/
- tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtQezARVodt/xory9U
- J4swJP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRkybZZaJGC4P
- BGP4mu9AaO/2lPxNsebhKrrVqwXIVXIT4y5Bpg4kPISCnSOSON31H43PhPBt4wcuEMtjbs+K
- f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
- Ig32grj40g3bdASlQGLq9NOdg5TciBgbX00wuQOHtO+zsNdMDlJI5fsLXkJIeSJRoxZybXF+
- G+TQEhdxAatjHHLM1zSOHtidKnuTdB0qndiZX4gOlOh2n4CZ4ez7fhAK8trLOd/rOEzn+RpS
- /QletmbBqgdQDrw5DlAP4L2q5ZvdUr3iFvWbTalejU2Y7VpWxfNpo3/ZgLq+SRXVni3uMIyr
- qeOzATeRZZfFQ1uANyPMKCkzk+rvGhbk+V3BhOaLt5WcUTq0Y5rNy2u0aNnf5BScU3On2LI2
- RyXDBEUofj2j7U0qNSZ17qZq4qJEvdlGhYIFWfs8rvrZzLR+XCuwNEcXb/QLyzdTm795I6re
- f5Rk6PnKPQCkVtH79h8HrJswf5s7tfjveYHnAFtHXGNZFW3ELJwZHKB2JAX5KFKw7ZYvyqwW
- 16OpYYGaenYZpu9HQ5DPhchY8SCyeoQy2vb4vkCKUnn4DN6oeicWkJIMhjQ0CFQIdOZ6m/+L
- TvNbCLO1zGCtw==
-IronPort-HdrOrdr: A9a23:kgkWcKOlaP3ZkcBcTvujsMiBIKoaSvp037Eqv3oRdfUzSL3hqy
- nOpoVj6faaskdzZJhNo7+90ey7MBfhHP1OkO8s1NWZLWvbUQKTRekIh+aP/9SjIVyYygc079
- YaT0EUMr3N5DZB4/oSmDPIduod/A==
+IronPort-Data: A9a23:f6wbma6QaHTHuQrtNoFmKQxRtPXAchMFZxGqfqrLsTDasY5as4F+v
+ mMbXWDUPfnYYzGhco0iOYjlp0NVvZ/czdNjQAtk/C5kHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdg2NAw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zw
+ ed/jsa9cgcTFfPRieIaehVfVDB6MvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gTTK6AO
+ 5JANVKDajzDcyVAfVQWL6kylbapi1DgUCR+oW+K8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
+ G2u10bTDwweNdef4SGY6X/qjejK9QvrVYRXGLCm+/pChFyI2ndVGBAQTUG8o/Sylgi5Qd03F
+ qAP0nNw9+5orhXtF4SjGU3jyJKZgvICc9NiIdZg5TqN8IGK/hefAUEISXlQbNNz4afaWgcW/
+ lOOmtroAxlmv7uUVW+R+9+okN+iBcQGBTRcPHFZFGPp9/Gm+dhu1UyXEr6PBYbs1oWtcQwc1
+ Qxmu8TXa187qccQn5u28lnc695HjsiYF1Vljuk7s4/M0++YWGJHT9D3gbQ4xawZRGp8crVnl
+ CNf8yR5xLpTZaxhbATXHI0w8EiBvp5pygH0j191BIUG/D+w4XOldo04yGggfxg5bJtbKGO3P
+ BS7VeZtCHl7ZyDCgUhfOd/ZNijX5fK4SYSNug78MrKinaSdhCfYpXozNCZ8LkjmkVQ2kLFXB
+ HtoWZ3EMJruMow+lGDeb75EidcDn3lirUuOFcGT50n2itK2OS/KIYrpxXPTN4jVGovf+16Lm
+ zueXuPXoyhivBrWPnOKrNVNdA9SdhDWx/ne8qRqSwJKGSI+cElJNhMb6elJl1VNk/sHm+HW0
+ Gu6X0MEmlPziWeecVeBa2x5aaOpVpF69CppMSspNFeu+n4ifYfws/tPK8ppJeEqpL550Pp5b
+ /gZYMHcUP5BfSvKpmYGZp7noY08KBny3VCSPzCoaSQUdoJ7Q1Cb4cftewbirXFcDie+ucYkj
+ aen0wfXHcgKSwh4VZ6EY/Oz1VKh+3ManbsqDUfPJ9BSfmTq8ZRrdHOt3qNmfZlUJEyalDWA1
+ guQDRMJnsX3otc4oIvTmKSJj4a1CO8iTEBUKHbWsOStPi7A82v9nYIZCLSUfSrQXX/f8bm5Y
+ bkH1On1NfAKkQoYs4d4FLo3n6sy68G2+u1fxwVgWn7Kc06qGvVrJXzfhZtDsahEx7l4vwqqW
+ x3QpokGaOvRYM61QkQMIAcFb/iY0aBGkzbf2v05PUHm6XIl57GAS0hTY0GBhSE1wGGZ62/5L
+ TPNYPIr1jE=
+IronPort-HdrOrdr: A9a23:hURw5q3dQJfRWkRGY2tgigqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58635072"
+   d="scan'208";a="59064014"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 29/65] x86/hvm: Annotate fnptr targets from device emulation
-Date: Fri, 26 Nov 2021 12:34:10 +0000
-Message-ID: <20211126123446.32324-30-andrew.cooper3@citrix.com>
+Subject: [PATCH 47/65] x86/irq: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:28 +0000
+Message-ID: <20211126123446.32324-48-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -108,636 +108,524 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/emul-i8254.c                 |  8 +++----
- xen/arch/x86/hvm/emulate.c                | 21 ++++++++---------
- xen/arch/x86/hvm/hpet.c                   |  6 ++---
- xen/arch/x86/hvm/hvm.c                    |  2 +-
- xen/arch/x86/hvm/intercept.c              | 28 +++++++++++++----------
- xen/arch/x86/hvm/io.c                     | 38 +++++++++++++++++--------------
- xen/arch/x86/hvm/ioreq.c                  |  2 +-
- xen/arch/x86/hvm/pmtimer.c                |  4 ++--
- xen/arch/x86/hvm/rtc.c                    |  6 ++---
- xen/arch/x86/hvm/stdvga.c                 | 19 ++++++++--------
- xen/arch/x86/hvm/svm/svm.c                |  4 ++--
- xen/arch/x86/hvm/vioapic.c                |  8 +++----
- xen/arch/x86/hvm/vlapic.c                 | 11 +++++----
- xen/arch/x86/hvm/vmsi.c                   | 14 +++++++-----
- xen/arch/x86/hvm/vpic.c                   |  4 ++--
- xen/drivers/passthrough/amd/iommu_guest.c | 10 ++++----
- xen/include/asm-x86/hvm/vioapic.h         |  2 +-
- 17 files changed, 98 insertions(+), 89 deletions(-)
+ xen/arch/x86/hpet.c                      | 11 ++++++-----
+ xen/arch/x86/i8259.c                     | 10 +++++-----
+ xen/arch/x86/io_apic.c                   | 24 ++++++++++++------------
+ xen/arch/x86/irq.c                       |  6 +++---
+ xen/arch/x86/msi.c                       | 14 +++++++-------
+ xen/common/irq.c                         |  6 +++---
+ xen/drivers/passthrough/amd/iommu_init.c | 15 ++++++++-------
+ xen/drivers/passthrough/vtd/iommu.c      | 13 +++++++------
+ xen/include/asm-x86/irq.h                |  8 ++++----
+ xen/include/asm-x86/msi.h                |  8 ++++----
+ xen/include/xen/irq.h                    |  6 +++---
+ 11 files changed, 62 insertions(+), 59 deletions(-)
 
-diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
-index 050c784702af..0e09a173187f 100644
---- a/xen/arch/x86/emul-i8254.c
-+++ b/xen/arch/x86/emul-i8254.c
-@@ -48,9 +48,9 @@
- #define RW_STATE_WORD0 3
- #define RW_STATE_WORD1 4
- 
--static int handle_pit_io(
-+static int cf_check handle_pit_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val);
--static int handle_speaker_io(
-+static int cf_check handle_speaker_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val);
- 
- #define get_guest_time(v) \
-@@ -505,7 +505,7 @@ void pit_deinit(struct domain *d)
+diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
+index 20fca839907c..dcc9e16693e9 100644
+--- a/xen/arch/x86/hpet.c
++++ b/xen/arch/x86/hpet.c
+@@ -256,7 +256,7 @@ static void cf_check hpet_interrupt_handler(
+     ch->event_handler(ch);
  }
  
- /* the intercept action for PIT DM retval:0--not handled; 1--handled */  
--static int handle_pit_io(
-+static int cf_check handle_pit_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
+-static void hpet_msi_unmask(struct irq_desc *desc)
++static void cf_check hpet_msi_unmask(struct irq_desc *desc)
  {
-     struct PITState *vpit = vcpu_vpit(current);
-@@ -548,7 +548,7 @@ static uint32_t speaker_ioport_read(
-             (pit_get_out(pit, 2) << 5) | (refresh_clock << 4));
+     u32 cfg;
+     struct hpet_event_channel *ch = desc->action->dev_id;
+@@ -267,7 +267,7 @@ static void hpet_msi_unmask(struct irq_desc *desc)
+     ch->msi.msi_attrib.host_masked = 0;
  }
  
--static int handle_speaker_io(
-+static int cf_check handle_speaker_io(
-     int dir, unsigned int port, uint32_t bytes, uint32_t *val)
+-static void hpet_msi_mask(struct irq_desc *desc)
++static void cf_check hpet_msi_mask(struct irq_desc *desc)
  {
-     struct PITState *vpit = vcpu_vpit(current);
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 425c8ddd9779..bd4e3ab6456e 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -71,19 +71,17 @@ static void hvmtrace_io_assist(const ioreq_t *p)
-     trace_var(event, 0/*!cycles*/, size, buffer);
+     u32 cfg;
+     struct hpet_event_channel *ch = desc->action->dev_id;
+@@ -296,7 +296,7 @@ static int hpet_msi_write(struct hpet_event_channel *ch, struct msi_msg *msg)
+     return 0;
  }
  
--static int null_read(const struct hvm_io_handler *io_handler,
--                     uint64_t addr,
--                     uint32_t size,
--                     uint64_t *data)
-+static int cf_check null_read(
-+    const struct hvm_io_handler *io_handler, uint64_t addr, uint32_t size,
-+    uint64_t *data)
+-static unsigned int hpet_msi_startup(struct irq_desc *desc)
++static unsigned int cf_check hpet_msi_startup(struct irq_desc *desc)
  {
-     *data = ~0ul;
-     return X86EMUL_OKAY;
+     hpet_msi_unmask(desc);
+     return 0;
+@@ -304,14 +304,15 @@ static unsigned int hpet_msi_startup(struct irq_desc *desc)
+ 
+ #define hpet_msi_shutdown hpet_msi_mask
+ 
+-static void hpet_msi_ack(struct irq_desc *desc)
++static void cf_check hpet_msi_ack(struct irq_desc *desc)
+ {
+     irq_complete_move(desc);
+     move_native_irq(desc);
+     ack_APIC_irq();
  }
  
--static int null_write(const struct hvm_io_handler *handler,
--                      uint64_t addr,
--                      uint32_t size,
--                      uint64_t data)
-+static int cf_check null_write(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t data)
+-static void hpet_msi_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
++static void cf_check hpet_msi_set_affinity(
++    struct irq_desc *desc, const cpumask_t *mask)
  {
-     return X86EMUL_OKAY;
+     struct hpet_event_channel *ch = desc->action->dev_id;
+     struct msi_msg msg = ch->msi.msg;
+diff --git a/xen/arch/x86/i8259.c b/xen/arch/x86/i8259.c
+index b389bb217622..6b35be10f09a 100644
+--- a/xen/arch/x86/i8259.c
++++ b/xen/arch/x86/i8259.c
+@@ -40,18 +40,18 @@ bool bogus_8259A_irq(unsigned int irq)
+     return _mask_and_ack_8259A_irq(irq);
  }
-@@ -114,10 +112,9 @@ static const struct hvm_io_handler null_handler = {
-     .ops = &null_ops
+ 
+-static void mask_and_ack_8259A_irq(struct irq_desc *desc)
++static void cf_check mask_and_ack_8259A_irq(struct irq_desc *desc)
+ {
+     _mask_and_ack_8259A_irq(desc->irq);
+ }
+ 
+-static unsigned int startup_8259A_irq(struct irq_desc *desc)
++static unsigned int cf_check startup_8259A_irq(struct irq_desc *desc)
+ {
+     enable_8259A_irq(desc);
+     return 0; /* never anything pending */
+ }
+ 
+-static void end_8259A_irq(struct irq_desc *desc, u8 vector)
++static void cf_check end_8259A_irq(struct irq_desc *desc, u8 vector)
+ {
+     if (!(desc->status & (IRQ_DISABLED|IRQ_INPROGRESS)))
+         enable_8259A_irq(desc);
+@@ -108,12 +108,12 @@ static void _disable_8259A_irq(unsigned int irq)
+     spin_unlock_irqrestore(&i8259A_lock, flags);
+ }
+ 
+-void disable_8259A_irq(struct irq_desc *desc)
++void cf_check disable_8259A_irq(struct irq_desc *desc)
+ {
+     _disable_8259A_irq(desc->irq);
+ }
+ 
+-void enable_8259A_irq(struct irq_desc *desc)
++void cf_check enable_8259A_irq(struct irq_desc *desc)
+ {
+     unsigned int mask = ~(1 << desc->irq);
+     unsigned long flags;
+diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
+index 4c5eaef86273..c086f40f6314 100644
+--- a/xen/arch/x86/io_apic.c
++++ b/xen/arch/x86/io_apic.c
+@@ -473,7 +473,7 @@ static void __level_IO_APIC_irq (unsigned int irq)
+     modify_IO_APIC_irq(irq, IO_APIC_REDIR_LEVEL_TRIGGER, 0);
+ }
+ 
+-static void mask_IO_APIC_irq(struct irq_desc *desc)
++static void cf_check mask_IO_APIC_irq(struct irq_desc *desc)
+ {
+     unsigned long flags;
+ 
+@@ -482,7 +482,7 @@ static void mask_IO_APIC_irq(struct irq_desc *desc)
+     spin_unlock_irqrestore(&ioapic_lock, flags);
+ }
+ 
+-static void unmask_IO_APIC_irq(struct irq_desc *desc)
++static void cf_check unmask_IO_APIC_irq(struct irq_desc *desc)
+ {
+     unsigned long flags;
+ 
+@@ -567,7 +567,7 @@ static void clear_IO_APIC (void)
+     }
+ }
+ 
+-static void
++static void cf_check
+ set_ioapic_affinity_irq(struct irq_desc *desc, const cpumask_t *mask)
+ {
+     unsigned int dest;
+@@ -1547,7 +1547,7 @@ static int __init timer_irq_works(void)
+  * This is not complete - we should be able to fake
+  * an edge even if it isn't on the 8259A...
+  */
+-static unsigned int startup_edge_ioapic_irq(struct irq_desc *desc)
++static unsigned int cf_check startup_edge_ioapic_irq(struct irq_desc *desc)
+ {
+     int was_pending = 0;
+     unsigned long flags;
+@@ -1569,7 +1569,7 @@ static unsigned int startup_edge_ioapic_irq(struct irq_desc *desc)
+  * interrupt for real. This prevents IRQ storms from unhandled
+  * devices.
+  */
+-static void ack_edge_ioapic_irq(struct irq_desc *desc)
++static void cf_check ack_edge_ioapic_irq(struct irq_desc *desc)
+ {
+     irq_complete_move(desc);
+     move_native_irq(desc);
+@@ -1594,7 +1594,7 @@ static void ack_edge_ioapic_irq(struct irq_desc *desc)
+  * generic IRQ layer and by the fact that an unacked local
+  * APIC does not accept IRQs.
+  */
+-static unsigned int startup_level_ioapic_irq(struct irq_desc *desc)
++static unsigned int cf_check startup_level_ioapic_irq(struct irq_desc *desc)
+ {
+     unmask_IO_APIC_irq(desc);
+ 
+@@ -1652,7 +1652,7 @@ static bool io_apic_level_ack_pending(unsigned int irq)
+     return 0;
+ }
+ 
+-static void mask_and_ack_level_ioapic_irq(struct irq_desc *desc)
++static void cf_check mask_and_ack_level_ioapic_irq(struct irq_desc *desc)
+ {
+     unsigned long v;
+     int i;
+@@ -1702,7 +1702,7 @@ static void mask_and_ack_level_ioapic_irq(struct irq_desc *desc)
+     }
+ }
+ 
+-static void end_level_ioapic_irq_old(struct irq_desc *desc, u8 vector)
++static void cf_check end_level_ioapic_irq_old(struct irq_desc *desc, u8 vector)
+ {
+     if ( directed_eoi_enabled )
+     {
+@@ -1723,7 +1723,7 @@ static void end_level_ioapic_irq_old(struct irq_desc *desc, u8 vector)
+         unmask_IO_APIC_irq(desc);
+ }
+ 
+-static void end_level_ioapic_irq_new(struct irq_desc *desc, u8 vector)
++static void cf_check end_level_ioapic_irq_new(struct irq_desc *desc, u8 vector)
+ {
+ /*
+  * It appears there is an erratum which affects at least version 0x11
+@@ -1807,7 +1807,7 @@ static inline void init_IO_APIC_traps(void)
+             make_8259A_irq(irq);
+ }
+ 
+-static void enable_lapic_irq(struct irq_desc *desc)
++static void cf_check enable_lapic_irq(struct irq_desc *desc)
+ {
+     unsigned long v;
+ 
+@@ -1815,7 +1815,7 @@ static void enable_lapic_irq(struct irq_desc *desc)
+     apic_write(APIC_LVT0, v & ~APIC_LVT_MASKED);
+ }
+ 
+-static void disable_lapic_irq(struct irq_desc *desc)
++static void cf_check disable_lapic_irq(struct irq_desc *desc)
+ {
+     unsigned long v;
+ 
+@@ -1823,7 +1823,7 @@ static void disable_lapic_irq(struct irq_desc *desc)
+     apic_write(APIC_LVT0, v | APIC_LVT_MASKED);
+ }
+ 
+-static void ack_lapic_irq(struct irq_desc *desc)
++static void cf_check ack_lapic_irq(struct irq_desc *desc)
+ {
+     ack_APIC_irq();
+ }
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index 61e09a356f97..285ac399fbfd 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -468,7 +468,7 @@ int __init init_irq_data(void)
+     return 0;
+ }
+ 
+-static void ack_none(struct irq_desc *desc)
++static void cf_check ack_none(struct irq_desc *desc)
+ {
+     ack_bad_irq(desc->irq);
+ }
+@@ -832,7 +832,7 @@ static void send_cleanup_vector(struct irq_desc *desc)
+     desc->arch.move_in_progress = 0;
+ }
+ 
+-void irq_complete_move(struct irq_desc *desc)
++void cf_check irq_complete_move(struct irq_desc *desc)
+ {
+     unsigned vector, me;
+ 
+@@ -1086,7 +1086,7 @@ bool cpu_has_pending_apic_eoi(void)
+     return pending_eoi_sp(this_cpu(pending_eoi)) != 0;
+ }
+ 
+-void end_nonmaskable_irq(struct irq_desc *desc, uint8_t vector)
++void cf_check end_nonmaskable_irq(struct irq_desc *desc, uint8_t vector)
+ {
+     struct pending_eoi *peoi = this_cpu(pending_eoi);
+     unsigned int sp = pending_eoi_sp(peoi);
+diff --git a/xen/arch/x86/msi.c b/xen/arch/x86/msi.c
+index 77a4fbf13f9f..b32b1378f84e 100644
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -241,7 +241,7 @@ static int write_msi_msg(struct msi_desc *entry, struct msi_msg *msg)
+     return 0;
+ }
+ 
+-void set_msi_affinity(struct irq_desc *desc, const cpumask_t *mask)
++void cf_check set_msi_affinity(struct irq_desc *desc, const cpumask_t *mask)
+ {
+     struct msi_msg msg;
+     unsigned int dest;
+@@ -416,14 +416,14 @@ static int msi_get_mask_bit(const struct msi_desc *entry)
+     return -1;
+ }
+ 
+-void mask_msi_irq(struct irq_desc *desc)
++void cf_check mask_msi_irq(struct irq_desc *desc)
+ {
+     if ( unlikely(!msi_set_mask_bit(desc, 1,
+                                     desc->msi_desc->msi_attrib.guest_masked)) )
+         BUG_ON(!(desc->status & IRQ_DISABLED));
+ }
+ 
+-void unmask_msi_irq(struct irq_desc *desc)
++void cf_check unmask_msi_irq(struct irq_desc *desc)
+ {
+     if ( unlikely(!msi_set_mask_bit(desc, 0,
+                                     desc->msi_desc->msi_attrib.guest_masked)) )
+@@ -435,26 +435,26 @@ void guest_mask_msi_irq(struct irq_desc *desc, bool mask)
+     msi_set_mask_bit(desc, desc->msi_desc->msi_attrib.host_masked, mask);
+ }
+ 
+-static unsigned int startup_msi_irq(struct irq_desc *desc)
++static unsigned int cf_check startup_msi_irq(struct irq_desc *desc)
+ {
+     if ( unlikely(!msi_set_mask_bit(desc, 0, !!(desc->status & IRQ_GUEST))) )
+         WARN();
+     return 0;
+ }
+ 
+-static void shutdown_msi_irq(struct irq_desc *desc)
++static void cf_check shutdown_msi_irq(struct irq_desc *desc)
+ {
+     if ( unlikely(!msi_set_mask_bit(desc, 1, 1)) )
+         BUG_ON(!(desc->status & IRQ_DISABLED));
+ }
+ 
+-void ack_nonmaskable_msi_irq(struct irq_desc *desc)
++void cf_check ack_nonmaskable_msi_irq(struct irq_desc *desc)
+ {
+     irq_complete_move(desc);
+     move_native_irq(desc);
+ }
+ 
+-static void ack_maskable_msi_irq(struct irq_desc *desc)
++static void cf_check ack_maskable_msi_irq(struct irq_desc *desc)
+ {
+     ack_nonmaskable_msi_irq(desc);
+     ack_APIC_irq(); /* ACKTYPE_NONE */
+diff --git a/xen/common/irq.c b/xen/common/irq.c
+index f42512db33b7..727cf8bd22da 100644
+--- a/xen/common/irq.c
++++ b/xen/common/irq.c
+@@ -27,15 +27,15 @@ int init_one_irq_desc(struct irq_desc *desc)
+     return err;
+ }
+ 
+-void no_action(int cpl, void *dev_id, struct cpu_user_regs *regs)
++void cf_check no_action(int cpl, void *dev_id, struct cpu_user_regs *regs)
+ {
+ }
+ 
+-void irq_actor_none(struct irq_desc *desc)
++void cf_check irq_actor_none(struct irq_desc *desc)
+ {
+ }
+ 
+-unsigned int irq_startup_none(struct irq_desc *desc)
++unsigned int cf_check irq_startup_none(struct irq_desc *desc)
+ {
+     return 0;
+ }
+diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
+index d2ad282e93d3..657c7f619a51 100644
+--- a/xen/drivers/passthrough/amd/iommu_init.c
++++ b/xen/drivers/passthrough/amd/iommu_init.c
+@@ -410,7 +410,7 @@ static void amd_iommu_msi_enable(struct amd_iommu *iommu, int flag)
+                      PCI_FUNC(iommu->bdf), iommu->msi.msi_attrib.pos, flag);
+ }
+ 
+-static void iommu_msi_unmask(struct irq_desc *desc)
++static void cf_check iommu_msi_unmask(struct irq_desc *desc)
+ {
+     unsigned long flags;
+     struct amd_iommu *iommu = desc->action->dev_id;
+@@ -421,7 +421,7 @@ static void iommu_msi_unmask(struct irq_desc *desc)
+     iommu->msi.msi_attrib.host_masked = 0;
+ }
+ 
+-static void iommu_msi_mask(struct irq_desc *desc)
++static void cf_check iommu_msi_mask(struct irq_desc *desc)
+ {
+     unsigned long flags;
+     struct amd_iommu *iommu = desc->action->dev_id;
+@@ -434,13 +434,13 @@ static void iommu_msi_mask(struct irq_desc *desc)
+     iommu->msi.msi_attrib.host_masked = 1;
+ }
+ 
+-static unsigned int iommu_msi_startup(struct irq_desc *desc)
++static unsigned int cf_check iommu_msi_startup(struct irq_desc *desc)
+ {
+     iommu_msi_unmask(desc);
+     return 0;
+ }
+ 
+-static void iommu_msi_end(struct irq_desc *desc, u8 vector)
++static void cf_check iommu_msi_end(struct irq_desc *desc, u8 vector)
+ {
+     iommu_msi_unmask(desc);
+     end_nonmaskable_irq(desc, vector);
+@@ -458,14 +458,14 @@ static hw_irq_controller iommu_msi_type = {
+     .set_affinity = set_msi_affinity,
  };
  
--static int ioreq_server_read(const struct hvm_io_handler *io_handler,
--                    uint64_t addr,
--                    uint32_t size,
--                    uint64_t *data)
-+static int cf_check ioreq_server_read(
-+    const struct hvm_io_handler *io_handler, uint64_t addr, uint32_t size,
-+    uint64_t *data)
+-static unsigned int iommu_maskable_msi_startup(struct irq_desc *desc)
++static unsigned int cf_check iommu_maskable_msi_startup(struct irq_desc *desc)
  {
-     if ( hvm_copy_from_guest_phys(data, addr, size) != HVMTRANS_okay )
-         return X86EMUL_UNHANDLEABLE;
-diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
-index 8267f0b8a278..7bdb51cfa1c4 100644
---- a/xen/arch/x86/hvm/hpet.c
-+++ b/xen/arch/x86/hvm/hpet.c
-@@ -162,7 +162,7 @@ static inline int hpet_check_access_length(
+     iommu_msi_unmask(desc);
+     unmask_msi_irq(desc);
      return 0;
  }
  
--static int hpet_read(
-+static int cf_check hpet_read(
-     struct vcpu *v, unsigned long addr, unsigned int length,
-     unsigned long *pval)
+-static void iommu_maskable_msi_shutdown(struct irq_desc *desc)
++static void cf_check iommu_maskable_msi_shutdown(struct irq_desc *desc)
  {
-@@ -351,7 +351,7 @@ static void timer_sanitize_int_route(HPETState *h, unsigned int tn)
-                   HPET_TN_ROUTE);
- }
- 
--static int hpet_write(
-+static int cf_check hpet_write(
-     struct vcpu *v, unsigned long addr,
-     unsigned int length, unsigned long val)
- {
-@@ -569,7 +569,7 @@ static int hpet_write(
-     return X86EMUL_OKAY;
- }
- 
--static int hpet_range(struct vcpu *v, unsigned long addr)
-+static int cf_check hpet_range(struct vcpu *v, unsigned long addr)
- {
-     return ( (addr >= HPET_BASE_ADDRESS) &&
-              (addr < (HPET_BASE_ADDRESS + HPET_MMAP_SIZE)) );
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 16e8a32fa768..785add50896a 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -576,7 +576,7 @@ void hvm_do_resume(struct vcpu *v)
-     }
- }
- 
--static int hvm_print_line(
-+static int cf_check hvm_print_line(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct domain *cd = current->domain;
-diff --git a/xen/arch/x86/hvm/intercept.c b/xen/arch/x86/hvm/intercept.c
-index 02ca3b05b05a..ffa31b746716 100644
---- a/xen/arch/x86/hvm/intercept.c
-+++ b/xen/arch/x86/hvm/intercept.c
-@@ -32,8 +32,8 @@
- #include <xen/event.h>
- #include <xen/iommu.h>
- 
--static bool_t hvm_mmio_accept(const struct hvm_io_handler *handler,
--                              const ioreq_t *p)
-+static bool cf_check hvm_mmio_accept(
-+    const struct hvm_io_handler *handler, const ioreq_t *p)
- {
-     paddr_t first = ioreq_mmio_first_byte(p), last;
- 
-@@ -51,16 +51,18 @@ static bool_t hvm_mmio_accept(const struct hvm_io_handler *handler,
-     return 1;
- }
- 
--static int hvm_mmio_read(const struct hvm_io_handler *handler,
--                         uint64_t addr, uint32_t size, uint64_t *data)
-+static int cf_check hvm_mmio_read(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t *data)
- {
-     BUG_ON(handler->type != IOREQ_TYPE_COPY);
- 
-     return handler->mmio.ops->read(current, addr, size, data);
- }
- 
--static int hvm_mmio_write(const struct hvm_io_handler *handler,
--                          uint64_t addr, uint32_t size, uint64_t data)
-+static int cf_check hvm_mmio_write(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t data)
- {
-     BUG_ON(handler->type != IOREQ_TYPE_COPY);
- 
-@@ -73,8 +75,8 @@ static const struct hvm_io_ops mmio_ops = {
-     .write = hvm_mmio_write
+     mask_msi_irq(desc);
+     iommu_msi_mask(desc);
+@@ -489,7 +489,8 @@ static hw_irq_controller iommu_maskable_msi_type = {
+     .set_affinity = set_msi_affinity,
  };
  
--static bool_t hvm_portio_accept(const struct hvm_io_handler *handler,
--                                const ioreq_t *p)
-+static bool cf_check hvm_portio_accept(
-+    const struct hvm_io_handler *handler, const ioreq_t *p)
+-static void set_x2apic_affinity(struct irq_desc *desc, const cpumask_t *mask)
++static void cf_check set_x2apic_affinity(
++    struct irq_desc *desc, const cpumask_t *mask)
  {
-     unsigned int start = handler->portio.port;
-     unsigned int end = start + handler->portio.size;
-@@ -84,8 +86,9 @@ static bool_t hvm_portio_accept(const struct hvm_io_handler *handler,
-     return (p->addr >= start) && ((p->addr + p->size) <= end);
+     struct amd_iommu *iommu = desc->action->dev_id;
+     unsigned int dest = set_desc_affinity(desc, mask);
+diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
+index ad3abdcdacfd..708ba2b31565 100644
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -1096,7 +1096,7 @@ static void cf_check iommu_page_fault(
+     tasklet_schedule(&vtd_fault_tasklet);
  }
  
--static int hvm_portio_read(const struct hvm_io_handler *handler,
--                           uint64_t addr, uint32_t size, uint64_t *data)
-+static int cf_check hvm_portio_read(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t *data)
+-static void dma_msi_unmask(struct irq_desc *desc)
++static void cf_check dma_msi_unmask(struct irq_desc *desc)
  {
-     uint32_t val = ~0u;
-     int rc;
-@@ -98,8 +101,9 @@ static int hvm_portio_read(const struct hvm_io_handler *handler,
-     return rc;
+     struct vtd_iommu *iommu = desc->action->dev_id;
+     unsigned long flags;
+@@ -1111,7 +1111,7 @@ static void dma_msi_unmask(struct irq_desc *desc)
+     iommu->msi.msi_attrib.host_masked = 0;
  }
  
--static int hvm_portio_write(const struct hvm_io_handler *handler,
--                            uint64_t addr, uint32_t size, uint64_t data)
-+static int cf_check hvm_portio_write(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t data)
+-static void dma_msi_mask(struct irq_desc *desc)
++static void cf_check dma_msi_mask(struct irq_desc *desc)
  {
-     uint32_t val = data;
- 
-diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
-index 93f1d1503fa6..f70bfde90143 100644
---- a/xen/arch/x86/hvm/io.c
-+++ b/xen/arch/x86/hvm/io.c
-@@ -156,8 +156,8 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
-     return true;
+     unsigned long flags;
+     struct vtd_iommu *iommu = desc->action->dev_id;
+@@ -1126,26 +1126,27 @@ static void dma_msi_mask(struct irq_desc *desc)
+     iommu->msi.msi_attrib.host_masked = 1;
  }
  
--static bool_t g2m_portio_accept(const struct hvm_io_handler *handler,
--                                const ioreq_t *p)
-+static bool cf_check g2m_portio_accept(
-+    const struct hvm_io_handler *handler, const ioreq_t *p)
+-static unsigned int dma_msi_startup(struct irq_desc *desc)
++static unsigned int cf_check dma_msi_startup(struct irq_desc *desc)
  {
-     struct vcpu *curr = current;
-     const struct hvm_domain *hvm = &curr->domain->arch.hvm;
-@@ -179,8 +179,9 @@ static bool_t g2m_portio_accept(const struct hvm_io_handler *handler,
+     dma_msi_unmask(desc);
      return 0;
  }
  
--static int g2m_portio_read(const struct hvm_io_handler *handler,
--                           uint64_t addr, uint32_t size, uint64_t *data)
-+static int cf_check g2m_portio_read(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t *data)
+-static void dma_msi_ack(struct irq_desc *desc)
++static void cf_check dma_msi_ack(struct irq_desc *desc)
  {
-     struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-     const struct g2m_ioport *g2m_ioport = hvio->g2m_ioport;
-@@ -204,8 +205,9 @@ static int g2m_portio_read(const struct hvm_io_handler *handler,
-     return X86EMUL_OKAY;
+     irq_complete_move(desc);
+     dma_msi_mask(desc);
+     move_masked_irq(desc);
  }
  
--static int g2m_portio_write(const struct hvm_io_handler *handler,
--                            uint64_t addr, uint32_t size, uint64_t data)
-+static int cf_check g2m_portio_write(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t data)
+-static void dma_msi_end(struct irq_desc *desc, u8 vector)
++static void cf_check dma_msi_end(struct irq_desc *desc, u8 vector)
  {
-     struct hvm_vcpu_io *hvio = &current->arch.hvm.hvm_io;
-     const struct g2m_ioport *g2m_ioport = hvio->g2m_ioport;
-@@ -261,14 +263,15 @@ unsigned int hvm_pci_decode_addr(unsigned int cf8, unsigned int addr,
+     dma_msi_unmask(desc);
+     end_nonmaskable_irq(desc, vector);
  }
  
- /* vPCI config space IO ports handlers (0xcf8/0xcfc). */
--static bool vpci_portio_accept(const struct hvm_io_handler *handler,
--                               const ioreq_t *p)
-+static bool cf_check vpci_portio_accept(
-+    const struct hvm_io_handler *handler, const ioreq_t *p)
+-static void dma_msi_set_affinity(struct irq_desc *desc, const cpumask_t *mask)
++static void cf_check dma_msi_set_affinity(
++    struct irq_desc *desc, const cpumask_t *mask)
  {
-     return (p->addr == 0xcf8 && p->size == 4) || (p->addr & ~3) == 0xcfc;
- }
+     struct msi_msg msg;
+     unsigned int dest;
+diff --git a/xen/include/asm-x86/irq.h b/xen/include/asm-x86/irq.h
+index b3f49abc5556..76e6ed6d60aa 100644
+--- a/xen/include/asm-x86/irq.h
++++ b/xen/include/asm-x86/irq.h
+@@ -111,8 +111,8 @@ void alloc_direct_apic_vector(
  
--static int vpci_portio_read(const struct hvm_io_handler *handler,
--                            uint64_t addr, uint32_t size, uint64_t *data)
-+static int cf_check vpci_portio_read(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t *data)
- {
-     const struct domain *d = current->domain;
-     unsigned int reg;
-@@ -299,8 +302,9 @@ static int vpci_portio_read(const struct hvm_io_handler *handler,
-     return X86EMUL_OKAY;
- }
+ void do_IRQ(struct cpu_user_regs *regs);
  
--static int vpci_portio_write(const struct hvm_io_handler *handler,
--                             uint64_t addr, uint32_t size, uint64_t data)
-+static int cf_check vpci_portio_write(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t data)
- {
-     struct domain *d = current->domain;
-     unsigned int reg;
-@@ -387,7 +391,7 @@ static unsigned int vpci_mmcfg_decode_addr(const struct hvm_mmcfg *mmcfg,
-     return addr & (PCI_CFG_SPACE_EXP_SIZE - 1);
- }
+-void disable_8259A_irq(struct irq_desc *);
+-void enable_8259A_irq(struct irq_desc *);
++void cf_check disable_8259A_irq(struct irq_desc *);
++void cf_check enable_8259A_irq(struct irq_desc *);
+ int i8259A_irq_pending(unsigned int irq);
+ void mask_8259A(void);
+ void unmask_8259A(void);
+@@ -173,7 +173,7 @@ int create_irq(nodeid_t node, bool grant_access);
+ void destroy_irq(unsigned int irq);
+ int assign_irq_vector(int irq, const cpumask_t *);
  
--static int vpci_mmcfg_accept(struct vcpu *v, unsigned long addr)
-+static int cf_check vpci_mmcfg_accept(struct vcpu *v, unsigned long addr)
- {
-     struct domain *d = v->domain;
-     bool found;
-@@ -399,8 +403,8 @@ static int vpci_mmcfg_accept(struct vcpu *v, unsigned long addr)
-     return found;
- }
+-extern void irq_complete_move(struct irq_desc *);
++void cf_check irq_complete_move(struct irq_desc *);
  
--static int vpci_mmcfg_read(struct vcpu *v, unsigned long addr,
--                           unsigned int len, unsigned long *data)
-+static int cf_check vpci_mmcfg_read(
-+    struct vcpu *v, unsigned long addr, unsigned int len, unsigned long *data)
- {
-     struct domain *d = v->domain;
-     const struct hvm_mmcfg *mmcfg;
-@@ -426,8 +430,8 @@ static int vpci_mmcfg_read(struct vcpu *v, unsigned long addr,
-     return X86EMUL_OKAY;
- }
+ extern struct irq_desc *irq_desc;
  
--static int vpci_mmcfg_write(struct vcpu *v, unsigned long addr,
--                            unsigned int len, unsigned long data)
-+static int cf_check vpci_mmcfg_write(
-+    struct vcpu *v, unsigned long addr, unsigned int len, unsigned long data)
- {
-     struct domain *d = v->domain;
-     const struct hvm_mmcfg *mmcfg;
-diff --git a/xen/arch/x86/hvm/ioreq.c b/xen/arch/x86/hvm/ioreq.c
-index 02ad9db56523..8409d910d689 100644
---- a/xen/arch/x86/hvm/ioreq.c
-+++ b/xen/arch/x86/hvm/ioreq.c
-@@ -319,7 +319,7 @@ bool arch_ioreq_server_get_type_addr(const struct domain *d,
-     return true;
- }
+@@ -187,7 +187,7 @@ void move_masked_irq(struct irq_desc *);
  
--static int hvm_access_cf8(
-+static int cf_check hvm_access_cf8(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct domain *d = current->domain;
-diff --git a/xen/arch/x86/hvm/pmtimer.c b/xen/arch/x86/hvm/pmtimer.c
-index 808819d1de91..60e3c8de4c6b 100644
---- a/xen/arch/x86/hvm/pmtimer.c
-+++ b/xen/arch/x86/hvm/pmtimer.c
-@@ -152,7 +152,7 @@ static void cf_check pmt_timer_callback(void *opaque)
- }
+ int bind_irq_vector(int irq, int vector, const cpumask_t *);
  
- /* Handle port I/O to the PM1a_STS and PM1a_EN registers */
--static int handle_evt_io(
-+static int cf_check handle_evt_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct vcpu *v = current;
-@@ -216,7 +216,7 @@ static int handle_evt_io(
+-void end_nonmaskable_irq(struct irq_desc *, uint8_t vector);
++void cf_check end_nonmaskable_irq(struct irq_desc *, uint8_t vector);
+ void irq_set_affinity(struct irq_desc *, const cpumask_t *mask);
  
+ int init_domain_irq_mapping(struct domain *);
+diff --git a/xen/include/asm-x86/msi.h b/xen/include/asm-x86/msi.h
+index e228b0f3f344..117379318f2c 100644
+--- a/xen/include/asm-x86/msi.h
++++ b/xen/include/asm-x86/msi.h
+@@ -247,10 +247,10 @@ void early_msi_init(void);
+ void msi_compose_msg(unsigned vector, const cpumask_t *mask,
+                      struct msi_msg *msg);
+ void __msi_set_enable(u16 seg, u8 bus, u8 slot, u8 func, int pos, int enable);
+-void mask_msi_irq(struct irq_desc *);
+-void unmask_msi_irq(struct irq_desc *);
++void cf_check mask_msi_irq(struct irq_desc *);
++void cf_check unmask_msi_irq(struct irq_desc *);
+ void guest_mask_msi_irq(struct irq_desc *, bool mask);
+-void ack_nonmaskable_msi_irq(struct irq_desc *);
+-void set_msi_affinity(struct irq_desc *, const cpumask_t *);
++void cf_check ack_nonmaskable_msi_irq(struct irq_desc *);
++void cf_check set_msi_affinity(struct irq_desc *, const cpumask_t *);
  
- /* Handle port I/O to the TMR_VAL register */
--static int handle_pmt_io(
-+static int cf_check handle_pmt_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct vcpu *v = current;
-diff --git a/xen/arch/x86/hvm/rtc.c b/xen/arch/x86/hvm/rtc.c
-index 09d3501276bc..bdc647e433e9 100644
---- a/xen/arch/x86/hvm/rtc.c
-+++ b/xen/arch/x86/hvm/rtc.c
-@@ -696,7 +696,7 @@ static uint32_t rtc_ioport_read(RTCState *s, uint32_t addr)
-     return ret;
- }
+ #endif /* __ASM_MSI_H */
+diff --git a/xen/include/xen/irq.h b/xen/include/xen/irq.h
+index 43d567fe445c..d8beadd16b9f 100644
+--- a/xen/include/xen/irq.h
++++ b/xen/include/xen/irq.h
+@@ -116,9 +116,9 @@ extern int request_irq(unsigned int irq, unsigned int irqflags,
+                const char * devname, void *dev_id);
  
--static int handle_rtc_io(
-+static int cf_check handle_rtc_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct RTCState *vrtc = vcpu_vrtc(current);
-@@ -809,8 +809,8 @@ void rtc_reset(struct domain *d)
- }
- 
- /* RTC mediator for HVM hardware domain. */
--static int hw_rtc_io(int dir, unsigned int port, unsigned int size,
--                     uint32_t *val)
-+static int cf_check hw_rtc_io(
-+    int dir, unsigned int port, unsigned int size, uint32_t *val)
- {
-     if ( dir == IOREQ_READ )
-         *val = ~0;
-diff --git a/xen/arch/x86/hvm/stdvga.c b/xen/arch/x86/hvm/stdvga.c
-index ab9781d82a55..be8200c8d072 100644
---- a/xen/arch/x86/hvm/stdvga.c
-+++ b/xen/arch/x86/hvm/stdvga.c
-@@ -199,7 +199,7 @@ static void stdvga_out(uint32_t port, uint32_t bytes, uint32_t val)
-     }
- }
- 
--static int stdvga_intercept_pio(
-+static int cf_check stdvga_intercept_pio(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct hvm_hw_stdvga *s = &current->domain->arch.hvm.stdvga;
-@@ -302,8 +302,9 @@ static uint8_t stdvga_mem_readb(uint64_t addr)
-     return ret;
- }
- 
--static int stdvga_mem_read(const struct hvm_io_handler *handler,
--                           uint64_t addr, uint32_t size, uint64_t *p_data)
-+static int cf_check stdvga_mem_read(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t *p_data)
- {
-     uint64_t data = ~0ul;
- 
-@@ -453,9 +454,9 @@ static void stdvga_mem_writeb(uint64_t addr, uint32_t val)
-     }
- }
- 
--static int stdvga_mem_write(const struct hvm_io_handler *handler,
--                            uint64_t addr, uint32_t size,
--                            uint64_t data)
-+static int cf_check stdvga_mem_write(
-+    const struct hvm_io_handler *handler, uint64_t addr, uint32_t size,
-+    uint64_t data)
- {
-     struct hvm_hw_stdvga *s = &current->domain->arch.hvm.stdvga;
-     ioreq_t p = {
-@@ -514,8 +515,8 @@ static int stdvga_mem_write(const struct hvm_io_handler *handler,
-     return ioreq_send(srv, &p, 1);
- }
- 
--static bool_t stdvga_mem_accept(const struct hvm_io_handler *handler,
--                                const ioreq_t *p)
-+static bool cf_check stdvga_mem_accept(
-+    const struct hvm_io_handler *handler, const ioreq_t *p)
- {
-     struct hvm_hw_stdvga *s = &current->domain->arch.hvm.stdvga;
- 
-@@ -558,7 +559,7 @@ static bool_t stdvga_mem_accept(const struct hvm_io_handler *handler,
-     return 0;
- }
- 
--static void stdvga_mem_complete(const struct hvm_io_handler *handler)
-+static void cf_check stdvga_mem_complete(const struct hvm_io_handler *handler)
- {
-     struct hvm_hw_stdvga *s = &current->domain->arch.hvm.stdvga;
- 
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 9c62c0cd80ee..ffa7c51e376f 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1129,8 +1129,8 @@ static void svm_host_osvw_init(void)
-     spin_unlock(&osvw_lock);
- }
- 
--static int acpi_c1e_quirk(int dir, unsigned int port, unsigned int bytes,
--                          uint32_t *val)
-+static int cf_check acpi_c1e_quirk(
-+    int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     ASSERT(bytes == 1 && port == acpi_smi_cmd);
- 
-diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
-index 553c0f76eff8..b56549aa22d1 100644
---- a/xen/arch/x86/hvm/vioapic.c
-+++ b/xen/arch/x86/hvm/vioapic.c
-@@ -135,7 +135,7 @@ static uint32_t vioapic_read_indirect(const struct hvm_vioapic *vioapic)
-     return result;
- }
- 
--static int vioapic_read(
-+static int cf_check vioapic_read(
-     struct vcpu *v, unsigned long addr,
-     unsigned int length, unsigned long *pval)
- {
-@@ -351,7 +351,7 @@ static void vioapic_write_indirect(
-     }
- }
- 
--static int vioapic_write(
-+static int cf_check vioapic_write(
-     struct vcpu *v, unsigned long addr,
-     unsigned int length, unsigned long val)
- {
-@@ -383,7 +383,7 @@ static int vioapic_write(
-     return X86EMUL_OKAY;
- }
- 
--static int vioapic_range(struct vcpu *v, unsigned long addr)
-+static int cf_check vioapic_range(struct vcpu *v, unsigned long addr)
- {
-     return !!addr_vioapic(v->domain, addr);
- }
-@@ -568,7 +568,7 @@ int vioapic_get_mask(const struct domain *d, unsigned int gsi)
-     return vioapic->redirtbl[pin].fields.mask;
- }
- 
--int vioapic_get_vector(const struct domain *d, unsigned int gsi)
-+int cf_check vioapic_get_vector(const struct domain *d, unsigned int gsi)
- {
-     unsigned int pin = 0; /* See gsi_vioapic */
-     const struct hvm_vioapic *vioapic = gsi_vioapic(d, gsi, &pin);
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index fe375912bef1..652e3cb87f12 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -615,8 +615,9 @@ static uint32_t vlapic_read_aligned(const struct vlapic *vlapic,
-     return 0;
- }
- 
--static int vlapic_mmio_read(struct vcpu *v, unsigned long address,
--                            unsigned int len, unsigned long *pval)
-+static int cf_check vlapic_mmio_read(
-+    struct vcpu *v, unsigned long address, unsigned int len,
-+    unsigned long *pval)
- {
-     struct vlapic *vlapic = vcpu_vlapic(v);
-     unsigned int offset = address - vlapic_base_address(vlapic);
-@@ -898,8 +899,8 @@ void vlapic_reg_write(struct vcpu *v, unsigned int reg, uint32_t val)
-     }
- }
- 
--static int vlapic_mmio_write(struct vcpu *v, unsigned long address,
--                             unsigned int len, unsigned long val)
-+static int cf_check vlapic_mmio_write(
-+    struct vcpu *v, unsigned long address, unsigned int len, unsigned long val)
- {
-     struct vlapic *vlapic = vcpu_vlapic(v);
-     unsigned int offset = address - vlapic_base_address(vlapic);
-@@ -1052,7 +1053,7 @@ int guest_wrmsr_x2apic(struct vcpu *v, uint32_t msr, uint64_t msr_content)
-     return X86EMUL_OKAY;
- }
- 
--static int vlapic_range(struct vcpu *v, unsigned long addr)
-+static int cf_check vlapic_range(struct vcpu *v, unsigned long addr)
- {
-     struct vlapic *vlapic = vcpu_vlapic(v);
-     unsigned long offset  = addr - vlapic_base_address(vlapic);
-diff --git a/xen/arch/x86/hvm/vmsi.c b/xen/arch/x86/hvm/vmsi.c
-index 2889575a2035..d4a8c953e23f 100644
---- a/xen/arch/x86/hvm/vmsi.c
-+++ b/xen/arch/x86/hvm/vmsi.c
-@@ -211,8 +211,9 @@ static struct msi_desc *msixtbl_addr_to_desc(
-     return NULL;
- }
- 
--static int msixtbl_read(const struct hvm_io_handler *handler,
--                        uint64_t address, uint32_t len, uint64_t *pval)
-+static int cf_check msixtbl_read(
-+    const struct hvm_io_handler *handler, uint64_t address, uint32_t len,
-+    uint64_t *pval)
- {
-     unsigned long offset;
-     struct msixtbl_entry *entry;
-@@ -350,14 +351,15 @@ static int msixtbl_write(struct vcpu *v, unsigned long address,
-     return r;
- }
- 
--static int _msixtbl_write(const struct hvm_io_handler *handler,
--                          uint64_t address, uint32_t len, uint64_t val)
-+static int cf_check _msixtbl_write(
-+    const struct hvm_io_handler *handler, uint64_t address, uint32_t len,
-+    uint64_t val)
- {
-     return msixtbl_write(current, address, len, val);
- }
- 
--static bool_t msixtbl_range(const struct hvm_io_handler *handler,
--                            const ioreq_t *r)
-+static bool cf_check msixtbl_range(
-+    const struct hvm_io_handler *handler, const ioreq_t *r)
- {
-     struct vcpu *curr = current;
-     unsigned long addr = r->addr;
-diff --git a/xen/arch/x86/hvm/vpic.c b/xen/arch/x86/hvm/vpic.c
-index 91c2c6983393..5d8ef259b710 100644
---- a/xen/arch/x86/hvm/vpic.c
-+++ b/xen/arch/x86/hvm/vpic.c
-@@ -351,7 +351,7 @@ static uint32_t vpic_ioport_read(struct hvm_hw_vpic *vpic, uint32_t addr)
-     return vpic->imr;
- }
- 
--static int vpic_intercept_pic_io(
-+static int cf_check vpic_intercept_pic_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct hvm_hw_vpic *vpic;
-@@ -373,7 +373,7 @@ static int vpic_intercept_pic_io(
-     return X86EMUL_OKAY;
- }
- 
--static int vpic_intercept_elcr_io(
-+static int cf_check vpic_intercept_elcr_io(
-     int dir, unsigned int port, unsigned int bytes, uint32_t *val)
- {
-     struct hvm_hw_vpic *vpic;
-diff --git a/xen/drivers/passthrough/amd/iommu_guest.c b/xen/drivers/passthrough/amd/iommu_guest.c
-index 361ff864d846..80a331f546ed 100644
---- a/xen/drivers/passthrough/amd/iommu_guest.c
-+++ b/xen/drivers/passthrough/amd/iommu_guest.c
-@@ -645,8 +645,8 @@ static uint64_t iommu_mmio_read64(struct guest_iommu *iommu,
-     return val;
- }
- 
--static int guest_iommu_mmio_read(struct vcpu *v, unsigned long addr,
--                                 unsigned int len, unsigned long *pval)
-+static int cf_check guest_iommu_mmio_read(
-+    struct vcpu *v, unsigned long addr, unsigned int len, unsigned long *pval)
- {
-     struct guest_iommu *iommu = vcpu_iommu(v);
-     unsigned long offset;
-@@ -735,8 +735,8 @@ static void guest_iommu_mmio_write64(struct guest_iommu *iommu,
-     }
- }
- 
--static int guest_iommu_mmio_write(struct vcpu *v, unsigned long addr,
--                                  unsigned int len, unsigned long val)
-+static int cf_check guest_iommu_mmio_write(
-+    struct vcpu *v, unsigned long addr, unsigned int len, unsigned long val)
- {
-     struct guest_iommu *iommu = vcpu_iommu(v);
-     unsigned long offset;
-@@ -819,7 +819,7 @@ static void guest_iommu_reg_init(struct guest_iommu *iommu)
-     iommu->reg_ext_feature = ef;
- }
- 
--static int guest_iommu_mmio_range(struct vcpu *v, unsigned long addr)
-+static int cf_check guest_iommu_mmio_range(struct vcpu *v, unsigned long addr)
- {
-     struct guest_iommu *iommu = vcpu_iommu(v);
- 
-diff --git a/xen/include/asm-x86/hvm/vioapic.h b/xen/include/asm-x86/hvm/vioapic.h
-index 36b64d20d60c..2944ec20dd53 100644
---- a/xen/include/asm-x86/hvm/vioapic.h
-+++ b/xen/include/asm-x86/hvm/vioapic.h
-@@ -66,7 +66,7 @@ void vioapic_irq_positive_edge(struct domain *d, unsigned int irq);
- void vioapic_update_EOI(struct domain *d, u8 vector);
- 
- int vioapic_get_mask(const struct domain *d, unsigned int gsi);
--int vioapic_get_vector(const struct domain *d, unsigned int gsi);
-+int cf_check vioapic_get_vector(const struct domain *d, unsigned int gsi);
- int vioapic_get_trigger_mode(const struct domain *d, unsigned int gsi);
- 
- #endif /* __ASM_X86_HVM_VIOAPIC_H__ */
+ extern hw_irq_controller no_irq_type;
+-extern void no_action(int cpl, void *dev_id, struct cpu_user_regs *regs);
+-extern unsigned int irq_startup_none(struct irq_desc *);
+-extern void irq_actor_none(struct irq_desc *);
++void cf_check no_action(int cpl, void *dev_id, struct cpu_user_regs *regs);
++unsigned int cf_check irq_startup_none(struct irq_desc *);
++void cf_check irq_actor_none(struct irq_desc *);
+ #define irq_shutdown_none irq_actor_none
+ #define irq_disable_none irq_actor_none
+ #define irq_enable_none irq_actor_none
 -- 
 2.11.0
 
