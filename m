@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E73C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA7BC433FE
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:05:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232752.403661 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.232754.403665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauP-0004tl-Sd; Fri, 26 Nov 2021 13:04:57 +0000
+	id 1mqauQ-0004yx-Dr; Fri, 26 Nov 2021 13:04:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232752.403661; Fri, 26 Nov 2021 13:04:57 +0000
+Received: by outflank-mailman (output) from mailman id 232754.403665; Fri, 26 Nov 2021 13:04:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauP-0004sZ-M2; Fri, 26 Nov 2021 13:04:57 +0000
-Received: by outflank-mailman (input) for mailman id 232752;
- Fri, 26 Nov 2021 13:04:55 +0000
+	id 1mqauQ-0004xK-56; Fri, 26 Nov 2021 13:04:58 +0000
+Received: by outflank-mailman (input) for mailman id 232754;
+ Fri, 26 Nov 2021 13:04:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqauN-0003W9-E0
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:55 +0000
+ id 1mqauO-0003W9-JE
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:56 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 718cc36b-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:04:54 +0100 (CET)
+ id 73534a72-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:04:55 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 718cc36b-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 73534a72-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931894;
+  d=citrix.com; s=securemail; t=1637931895;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=HcmfBpauAYXuC35jOvSCXt5rS/45eJAP/EQh3RsIuyw=;
-  b=HzqFQ0t33tKuw/7Z/EhqY51lMi7J767xI0E/RpvygcMftgVDjMQ30780
-   1rs/or1bqqEmwWJeVYMqxb8h3mhqCjzScbo53KZB9bc8h/Tc3jF9NPGRe
-   dMorJtgIzzisjQlcu5ZsTgmh2Xo2mvNOxRr/12kG65qVJH2y+hyF2QoN8
-   Y=;
+  bh=Degf477TCtQ3FmowYF+lOZnis5KOFl3+kW7P+vUMuYY=;
+  b=H+XzcUyQaqH+ckcmGQTOqLsup8sn70SJQDL+Y5z6FVYnzqTl9+h0xeDy
+   8DyqmUmJI9kRWWmtQpVTFV37+5LjZmrfiPuapzqw5IzuGU9o/PR89ntrz
+   ixtMjQGAlwWZquwD5vDywx0bDA1UdqXVjDACTkE6MFyPE7rV6ns+MAIji
+   Q=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: EVsLFuAFkDLW+JkrLW9MsUlIohhH3cb3mKa3DRvfjWtMzZ4p2H0dQLac9HgEC8oB9z8k77jkl+
- luFKIHOX0f/AnPAUrrpIO+DjgP2gxtp65MSnU7hxM4fxos0Yv0s/iHVHrk9zHKLc8hJ8pzkjdE
- YKs2BTY9A3KZZaLMC75hyeBFrD+qLtc/Dya+YD4K/9Z3/zHz90wDPtM2CsmaWpgLrSHaMFRkM/
- ndB9S2KBRmf6MserNSewHIPHR0/RpkxwevXohvYBSRRSV2GRO/uh4ByKVB3E6ql9iCy1qQDHit
- 4gniXb7ekmfOxqWxPmxLT16H
+IronPort-SDR: S1H98ih+QfrsJlL1I6ZDXlwgw168vOd0Me5EUfzsKA+uvBpAg7qucL9EQ9wkGXRfWEsnnnBk+3
+ ldVtCfDSNhdFWrQFVzEkJh++lga4vNG+ppaQCeHqucJbPjYQ/WUgUgsvTsO3hN+IyOl98UYbUK
+ aUiLJ5YZ1uvHGHuj+GraK1V1SoeEWb+75XWqVWg9T4JGbrZdUW/7xcBZISFDmfa+bPQt9d4qP1
+ KFQb/qpjZkcHYDaXz38nrvCeooWH9bdGyr8Z5pSG649QvOiiUWd3s01cYu29tMp17DHRHV7p2t
+ mjNErD6SdXLDgMSnFIAZyDFB
 X-SBRS: 5.1
-X-MesageID: 58634951
+X-MesageID: 58634956
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:EY52sa1f1bFNsZqlyfbD5R52kn2cJEfYwER7XKvMYLTBsI5bpzICx
- 2MbD22Cb6nbNjf1fItzYImx9EMBvJ7VyNJrTAU6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es6wbBh2OaEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhg/5wz
- up2mJmMdF0kAv3JnPosCzcBKnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9t1p4VQaeDP
- qL1bxJDTgnbXwBFCGxPK4AMmur5h1WgcTdH/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
- kDs8nn9AxoaHMeC0jfD+XWp7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWZj5EA
- xVKoGx09/F0rRH1CImmN/GlnJKalgIyWtxvKMA/1DzXx5aE5gKHNzAqFwcUPbTKq/QKbTAt0
- 1aImfbgCjpurKCZRBqhy1uEkd+hEXNLdDFfPEfoWSNAuoC++99r0nojW/46SPbt5uAZDw0c1
- NxjQMIWo7wIxfAG2Kyglbwsq2L9/8OZJuLZC+i+Y45E0u+bTNL6D2BLwQKChRqlEGp/ZgLa1
- JTjs5LDhN3i9bnXyESwrBwlRdlFHcqtPjzGmkJIFJI87Tmr8HPLVdkOu24ueho2Y5paJWSBj
- KrvVeV5v8Q70JyCN/IfXm5MI55ykfiI+SrNCpg4keaikrAuLVTarUmClGab3nz3kVhErE3ME
- czzTCpYNl5DUf4P5GPvH481iOZ3rghjlTK7bc2qlHyPjOvBDEN5vJ9YaTNimMhit/jayOgUm
- v4CX/a3J+J3DLejP3KJqNFLdjjn7xETXPjLliCeTcbbSiIOJY3rI6a5LWoJd9M3kqJLuP3P+
- 33hCEZUxECm3S/MKBmQa2AlY7TqBM4toXU+NC0qHFCpx3l8Ptr/sPZBL8M6Les96ehu7f9oV
- P1ZKc+ONetCF2bc8DMHYJij8IE7LEa3hRiDNjaOaSQke8IyXBTA/9LpJ1O99CQHAietm9E5p
- rmsilHSTZYZHlwwB8fKcvO/iVi2uCFFyu51WkLJJPhVeVntr9c2e3Cg0KdvLphVexvZxzac2
- wKHOjsipLHA890v7d3EpaGYtIP1QeFwKVVXQjvA5rGsOCiEomf6md1cUPyFdCz2XX/v/Pnwf
- v1cyvzxPaFVnFtOtIYgQb9nwbhnuonqrr5eiA9lAG/KfxKgDbY5eiuK2sxGt6tswL5FuFTpB
- hLTq4cCYbjZatn4FFMxJRY+arXR3P4ZrTDe8PApLRio/yRw5reGDR1fMhTkZPax91ep3FfJG
- dschfM=
-IronPort-HdrOrdr: A9a23:VV8wGaEyRdChOKgPpLqE0seALOsnbusQ8zAXP0AYc31om6uj5r
- iTdZUgpGbJYVkqKRIdcLy7V5VoBEmskaKdgrNhW4tKPjOW2ldARbsKheCJrlHd8m/Fh4lgPM
- 9bAtND4bbLbWSS4/yV3ODBKadE/OW6
+IronPort-Data: A9a23:bRQitqtRba3EWiS2HQ43Q83e9OfnVKNZMUV32f8akzHdYApBsoF/q
+ tZmKW+BaP+NZ2r9L9BzOti2/B8EscLdzNVjSAtlpC8xRS1D+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ Npl5K2gbxsRJaL2gMsEXT1IKhlMMLIaweqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
+ 5RCNWsyMnwsZTV0Jn4bEsMcrNyplyP/QgMEgmyq9aootj27IAtZj+G2bYu9lsaxbdpRtlaVo
+ CTB5WuRKhMHMN2SzxKV/3TqgfXA9QvgQ54bHrC88v9sgXWQy3YVBRlQUkG0ydGph0j7V99BJ
+ kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c/h6HvA+6QqN4rHJ+AvfDW8BJgOtc/R/6pVwH2Zzk
+ AbUwZW5XlSDrYF5V1rMx6eysQupNhINAnYMQT89dTkI/IXa9dRbYg30cv5vF6u8j9vQED72w
+ iyXoCVWu4j/nfLnxI3gowmZ3mvESozhC1dsu16JBj7NAhZRPdb9P+SVBU7nAeGsxWpzZn2Ip
+ zA6lseX94ji5rndxXXWEI3h8FxEjstp0QEwY3YzQPHNFBz3ohZPmLy8Bhklfy+F1e5eJFfUj
+ Lf741852XOqFCLCgVVLS4ywEd826qPrCM7oUPvZBvIXPMMuJFHao3AyOxLLt4wIrKTKufpkU
+ Xt8WZzxZUv29Iw9lGbmLwvj+eNDKt8CKZP7GsmgkkXPPUu2b3+JU7YVWGZinchihJ5oVD79q
+ o4FX+PTkk03eLSnPkH/rN5CRXhXfCNTLc2n9KRqmhurf1MO9JcJUKSKn9vMuuVNwsxoqws/1
+ i3nBxIDlgOg3SavxMfjQikLVY4DlK1X9RoTVRHA937ys5T6SYrwvqoZabUterwrqL5qwfJuF
+ qFXcMScGPVfDD/A/m1FP5X6qYVjcjWthB6PYHX5MGRuIcY4Slyb4MLgcyvu6DIKUni9u/whr
+ uDyzQjcW5cCGVhvVZ6EdPK1wlqtlnEBg+YuDVDQK9xedRy0oohnIiD8lNEtJMQIJUmRzzeWz
+ V/OUxwZufPMs8k+99yQ3fKIqIKgEu1fGEtGHjaEsebqZHeCpmf6mN1OSueFezzZRVjYwqT6a
+ LUH1ez4Pd0GgE1O79h2HYF0wP9s/NDovbJbkFhpRS2Zc1SxB7p8CXCaxs0T5LZVz7pUtAbqC
+ EKC/t5WZeeANM//SQNDIQMkaqKI1O0OmymU5vMweR2o6Chy9buBcENTIxjT13ANcOoraNsok
+ bU7pcobyw2jkR57YN+Jgxdd+3mIMnFdAb4ssYsXAdOzhwcmor2YjUcw1sMiDEmzVuhx
+IronPort-HdrOrdr: A9a23:rbnQl67AUyJohka1ZAPXwPLXdLJyesId70hD6qhwISY1TiX+rb
+ HXoB17726MtN9/YgBCpTntAsa9qDbnhPpICOoqTNGftWvdyQmVxehZhOOIqVCNJ8S9zJ876U
+ 4JSdkENDSaNzhHZKjBjjVQa+xQpeW6zA==
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58634951"
+   d="scan'208";a="58634956"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 60/65] x86/emul: Update emulation stubs to be CET-IBT compatible
-Date: Fri, 26 Nov 2021 12:34:41 +0000
-Message-ID: <20211126123446.32324-61-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 13/65] xen: Annotate fnptr targets from open_softirq()
+Date: Fri, 26 Nov 2021 12:33:54 +0000
+Message-ID: <20211126123446.32324-14-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,104 +103,188 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-All indirect branches need to land on an endbr64 instruction.
-
-For stub_selftests(), use endbr64 unconditionally for simplicity.  For ioport
-and instruction emulation, add endbr64 conditionally.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/extable.c         | 14 +++++++++-----
- xen/arch/x86/pv/emul-priv-op.c |  5 +++++
- xen/arch/x86/x86_emulate.c     | 12 ++++++++++--
- 3 files changed, 24 insertions(+), 7 deletions(-)
+ xen/arch/x86/cpu/mcheck/mce.c     | 2 +-
+ xen/arch/x86/domain.c             | 2 +-
+ xen/arch/x86/pv/traps.c           | 2 +-
+ xen/arch/x86/smp.c                | 2 +-
+ xen/arch/x86/time.c               | 2 +-
+ xen/common/rcupdate.c             | 2 +-
+ xen/common/sched/core.c           | 6 +++---
+ xen/common/tasklet.c              | 2 +-
+ xen/common/timer.c                | 2 +-
+ xen/drivers/passthrough/x86/hvm.c | 2 +-
+ xen/include/asm-x86/flushtlb.h    | 2 +-
+ 11 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
-index 4aa1ab4b2a45..25c6fda00d28 100644
---- a/xen/arch/x86/extable.c
-+++ b/xen/arch/x86/extable.c
-@@ -129,19 +129,23 @@ search_exception_table(const struct cpu_user_regs *regs)
- static int __init cf_check stub_selftest(void)
+diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
+index 43f6c8471a90..3467e0f1a315 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -1837,7 +1837,7 @@ static int mce_delayed_action(mctelem_cookie_t mctc)
+ }
+ 
+ /* Softirq Handler for this MCE# processing */
+-static void mce_softirq(void)
++static void cf_check mce_softirq(void)
  {
-     static const struct {
--        uint8_t opc[4];
-+        uint8_t opc[8];
-         uint64_t rax;
-         union stub_exception_token res;
-     } tests[] __initconst = {
--        { .opc = { 0x0f, 0xb9, 0xc3, 0xc3 }, /* ud1 */
-+        { .opc = { 0xf3, 0x0f, 0x1e, 0xfa,   /* endbr64 */
-+                   0x0f, 0xb9, 0xc3, 0xc3 }, /* ud1 */
-           .res.fields.trapnr = TRAP_invalid_op },
--        { .opc = { 0x90, 0x02, 0x00, 0xc3 }, /* nop; add (%rax),%al */
-+        { .opc = { 0xf3, 0x0f, 0x1e, 0xfa,   /* endbr64 */
-+                   0x90, 0x02, 0x00, 0xc3 }, /* nop; add (%rax),%al */
-           .rax = 0x0123456789abcdef,
-           .res.fields.trapnr = TRAP_gp_fault },
--        { .opc = { 0x02, 0x04, 0x04, 0xc3 }, /* add (%rsp,%rax),%al */
-+        { .opc = { 0xf3, 0x0f, 0x1e, 0xfa,   /* endbr64 */
-+                   0x02, 0x04, 0x04, 0xc3 }, /* add (%rsp,%rax),%al */
-           .rax = 0xfedcba9876543210,
-           .res.fields.trapnr = TRAP_stack_error },
--        { .opc = { 0xcc, 0xc3, 0xc3, 0xc3 }, /* int3 */
-+        { .opc = { 0xf3, 0x0f, 0x1e, 0xfa,   /* endbr64 */
-+                   0xcc, 0xc3, 0xc3, 0xc3 }, /* int3 */
-           .res.fields.trapnr = TRAP_int3 },
-     };
-     unsigned long addr = this_cpu(stubs.addr) + STUB_BUF_SIZE / 2;
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 808ff1873352..51638c8f7273 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -68,6 +68,9 @@ static io_emul_stub_t *io_emul_stub_setup(struct priv_op_ctxt *ctxt, u8 opcode,
-      * helpers (non-standard ABI), and one of several possible stubs
-      * performing the real I/O.
-      */
-+    static const char endbr64[] = {
-+        0xf3, 0x0f, 0x1e, 0xfa, /* endbr64 */
-+    };
-     static const char prologue[] = {
-         0x53,       /* push %rbx */
-         0x55,       /* push %rbp */
-@@ -111,6 +114,8 @@ static io_emul_stub_t *io_emul_stub_setup(struct priv_op_ctxt *ctxt, u8 opcode,
+     static DEFINE_MCE_BARRIER(mce_inside_bar);
+     static DEFINE_MCE_BARRIER(mce_severity_bar);
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index f943283b2a88..1c3a1ec2a080 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2523,7 +2523,7 @@ void vcpu_mark_events_pending(struct vcpu *v)
+         vcpu_kick(v);
+ }
  
-     p = ctxt->io_emul_stub;
+-static void vcpu_kick_softirq(void)
++static void cf_check vcpu_kick_softirq(void)
+ {
+     /*
+      * Nothing to do here: we merely prevent notifiers from racing with checks
+diff --git a/xen/arch/x86/pv/traps.c b/xen/arch/x86/pv/traps.c
+index 1d1cb0784c98..3e8ca8b6fc15 100644
+--- a/xen/arch/x86/pv/traps.c
++++ b/xen/arch/x86/pv/traps.c
+@@ -130,7 +130,7 @@ bool set_guest_nmi_trapbounce(void)
  
-+    if ( cpu_has_xen_ibt )
-+        APPEND_BUFF(endbr64);
-     APPEND_BUFF(prologue);
-     APPEND_CALL(load_guest_gprs);
+ static DEFINE_PER_CPU(struct vcpu *, softirq_nmi_vcpu);
  
-diff --git a/xen/arch/x86/x86_emulate.c b/xen/arch/x86/x86_emulate.c
-index 60191a94dc18..8ba71a577f09 100644
---- a/xen/arch/x86/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate.c
-@@ -29,11 +29,19 @@
-         cpu_has_amd_erratum(&current_cpu_data, AMD_ERRATUM_##nr)
+-static void nmi_softirq(void)
++static void cf_check nmi_softirq(void)
+ {
+     struct vcpu **v_ptr = &this_cpu(softirq_nmi_vcpu);
  
- #define get_stub(stb) ({                                        \
-+    void *ptr;                                                  \
-     BUILD_BUG_ON(STUB_BUF_SIZE / 2 < MAX_INST_LEN + 1);         \
-     ASSERT(!(stb).ptr);                                         \
-     (stb).addr = this_cpu(stubs.addr) + STUB_BUF_SIZE / 2;      \
--    memset(((stb).ptr = map_domain_page(_mfn(this_cpu(stubs.mfn)))) +  \
--           ((stb).addr & ~PAGE_MASK), 0xcc, STUB_BUF_SIZE / 2);        \
-+    (stb).ptr = map_domain_page(_mfn(this_cpu(stubs.mfn))) +    \
-+        ((stb).addr & ~PAGE_MASK);                              \
-+    ptr = memset((stb).ptr, 0xcc, STUB_BUF_SIZE / 2);           \
-+    if ( cpu_has_xen_ibt )                                      \
-+    {                                                           \
-+        memcpy(ptr, "\xf3\x0f\x1e\xfa", 4); /* endbr64 */       \
-+        ptr += 4;                                               \
-+    }                                                           \
-+    ptr;                                                        \
- })
- #define put_stub(stb) ({                                   \
-     if ( (stb).ptr )                                       \
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index f6fd7f95df58..b9a696f61963 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -290,7 +290,7 @@ void flush_area_mask(const cpumask_t *mask, const void *va, unsigned int flags)
+ }
+ 
+ /* Call with no locks held and interrupts enabled (e.g., softirq context). */
+-void new_tlbflush_clock_period(void)
++void cf_check new_tlbflush_clock_period(void)
+ {
+     cpumask_t allbutself;
+ 
+diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+index ea34b4343c17..1ebf5fca96cc 100644
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -1450,7 +1450,7 @@ int cpu_frequency_change(u64 freq)
+ static DEFINE_PER_CPU(struct cpu_time_stamp, cpu_calibration);
+ 
+ /* Softirq handler for per-CPU time calibration. */
+-static void local_time_calibration(void)
++static void cf_check local_time_calibration(void)
+ {
+     struct cpu_time *t = &this_cpu(cpu_time);
+     const struct cpu_time_stamp *c = &this_cpu(cpu_calibration);
+diff --git a/xen/common/rcupdate.c b/xen/common/rcupdate.c
+index 423d6b1d6d02..212a99acd8c8 100644
+--- a/xen/common/rcupdate.c
++++ b/xen/common/rcupdate.c
+@@ -466,7 +466,7 @@ static void __rcu_process_callbacks(struct rcu_ctrlblk *rcp,
+         rcu_do_batch(rdp);
+ }
+ 
+-static void rcu_process_callbacks(void)
++static void cf_check rcu_process_callbacks(void)
+ {
+     struct rcu_data *rdp = &this_cpu(rcu_data);
+ 
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index 285de9ee2a19..b1836b591c0a 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -2568,7 +2568,7 @@ static struct sched_unit *sched_wait_rendezvous_in(struct sched_unit *prev,
+     return prev->next_task;
+ }
+ 
+-static void sched_slave(void)
++static void cf_check sched_slave(void)
+ {
+     struct vcpu          *v, *vprev = current;
+     struct sched_unit    *prev = vprev->sched_unit, *next;
+@@ -2632,7 +2632,7 @@ static void sched_slave(void)
+  * - deschedule the current domain (scheduler independent).
+  * - pick a new domain (scheduler dependent).
+  */
+-static void schedule(void)
++static void cf_check schedule(void)
+ {
+     struct vcpu          *vnext, *vprev = current;
+     struct sched_unit    *prev = vprev->sched_unit, *next = NULL;
+@@ -2928,7 +2928,7 @@ const cpumask_t *sched_get_opt_cpumask(enum sched_gran opt, unsigned int cpu)
+     return mask;
+ }
+ 
+-static void schedule_dummy(void)
++static void cf_check schedule_dummy(void)
+ {
+     sched_tasklet_check_cpu(smp_processor_id());
+ }
+diff --git a/xen/common/tasklet.c b/xen/common/tasklet.c
+index 1b16bbcdeb0b..3ad67b5c2493 100644
+--- a/xen/common/tasklet.c
++++ b/xen/common/tasklet.c
+@@ -135,7 +135,7 @@ void do_tasklet(void)
+ }
+ 
+ /* Softirq context work */
+-static void tasklet_softirq_action(void)
++static void cf_check tasklet_softirq_action(void)
+ {
+     unsigned int cpu = smp_processor_id();
+     struct list_head *list = &per_cpu(softirq_tasklet_list, cpu);
+diff --git a/xen/common/timer.c b/xen/common/timer.c
+index b788050ea1d8..700f191a70b4 100644
+--- a/xen/common/timer.c
++++ b/xen/common/timer.c
+@@ -450,7 +450,7 @@ static void execute_timer(struct timers *ts, struct timer *t)
+ }
+ 
+ 
+-static void timer_softirq_action(void)
++static void cf_check timer_softirq_action(void)
+ {
+     struct timer  *t, **heap, *next;
+     struct timers *ts;
+diff --git a/xen/drivers/passthrough/x86/hvm.c b/xen/drivers/passthrough/x86/hvm.c
+index fef350ef3a1d..7a6d9ac3d40d 100644
+--- a/xen/drivers/passthrough/x86/hvm.c
++++ b/xen/drivers/passthrough/x86/hvm.c
+@@ -999,7 +999,7 @@ int arch_pci_clean_pirqs(struct domain *d)
+  * Note: 'pt_pirq_softirq_reset' can clear the STATE_SCHED before we get to
+  * doing it. If that is the case we let 'pt_pirq_softirq_reset' do ref-counting.
+  */
+-static void dpci_softirq(void)
++static void cf_check dpci_softirq(void)
+ {
+     unsigned int cpu = smp_processor_id();
+     LIST_HEAD(our_list);
+diff --git a/xen/include/asm-x86/flushtlb.h b/xen/include/asm-x86/flushtlb.h
+index 0be2273387ed..18777f1d4c00 100644
+--- a/xen/include/asm-x86/flushtlb.h
++++ b/xen/include/asm-x86/flushtlb.h
+@@ -87,7 +87,7 @@ static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp)
+             __cpumask_clear_cpu(cpu, mask);
+ }
+ 
+-void new_tlbflush_clock_period(void);
++void cf_check new_tlbflush_clock_period(void);
+ 
+ /* Read pagetable base. */
+ static inline unsigned long read_cr3(void)
 -- 
 2.11.0
 
