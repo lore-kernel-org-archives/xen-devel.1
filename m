@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA5A7C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232856.404024 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB73C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232859.404034 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxD-0006zj-F1; Fri, 26 Nov 2021 13:07:51 +0000
+	id 1mqaxF-0007Ir-CF; Fri, 26 Nov 2021 13:07:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232856.404024; Fri, 26 Nov 2021 13:07:51 +0000
+Received: by outflank-mailman (output) from mailman id 232859.404034; Fri, 26 Nov 2021 13:07:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxD-0006zA-7U; Fri, 26 Nov 2021 13:07:51 +0000
-Received: by outflank-mailman (input) for mailman id 232856;
+	id 1mqaxE-0007H7-Kd; Fri, 26 Nov 2021 13:07:52 +0000
+Received: by outflank-mailman (input) for mailman id 232859;
  Fri, 26 Nov 2021 13:07:50 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqav5-0002zD-FG
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:39 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8c37c52e-4eb9-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 14:05:38 +0100 (CET)
+ id 1mqavg-0002zD-CD
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:16 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9fdb31ff-4eb9-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 14:06:11 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c37c52e-4eb9-11ec-9787-a32c541c8605
+X-Inumbo-ID: 9fdb31ff-4eb9-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931938;
+  d=citrix.com; s=securemail; t=1637931971;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=KUsZ4Kl0u4zBXJbtydzwrtf6/N87hO+1FCFpIszujeQ=;
-  b=VGmH7D7Ci2nS980UzLcHAFSFqXs3P1qbzwaPxMnloIDJb73E9y72moPQ
-   Sbx72gA7rlUCqsfM5pIZFyOS/We96kL2J7Cz6Fl47ZV74xIHOhMyJwTLK
-   INQSFqEi2Yyxu48CrPjAjtL6toRsuBFqZZKgJatfS6yIwYVnbNikl2cyq
-   U=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: xSwBivzb9jPB7vbbjV2BtbjkjML9dS2pq04YAfs1EiIODJSctJUiDYQkoZwatdcvAfYUmgxCKC
- R+7Uw68J4In7FpSPqzqTpuVxC1PJvNU0lNXRyKwv9aZ4wBTfPLayXKOZpRVjhazVL//b+b7zkd
- VlV+A0v2m9JZf1Mjh3X4IL3qL7f+pRRLOdqxGUKCdub3wOefUh2FLNBlHjR7190TyViFAiRor6
- rZYXaSnS4DhYo7yHwCjylgZOM1VHADTXBoIjEX3mKUq9IlRaFMocr6oKXjC0F/avT9ZCWiSD2A
- cdq1uPeeHoKhwgyP4iaBiFPY
+  bh=xnOxh2ouMD9YxuVuQeIQxnQYuJC2T33FETvQlA9/bVY=;
+  b=Ok7bv8A75dtngjor7SrVl41xrKPUl02zyOWNP2xGE2WOT4i71JMwkhN9
+   RK+3Jd73/x/DS8mid/GHic5yyXoili3MCgt8Zr/G+o6x/vVcigMNCNK2t
+   pr//rZ68TdxPJao8fL0ahh0tg06VmlzBSDU9A8HfBHIpdZu2fmCjsXjFm
+   g=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: OZyK3cfFl/Fm6/VFQRlvSPJ8ju/C18rmFwdmN9z+74ENs6E8koK6YiffJE77w3L7mDeT0H0Xab
+ 6hvLhjosfR0bmOSTDofDO5EyBzLadDGsHFFslfIq12Pq/EyQssxVK6WNFqpyM5ja0zuXk6ZrMN
+ qRkGtUGOdpeFaBkBW4IoTc4Vn+cDg3cvAnfMTdAjeSmqB+NOHzIjL3Ctmm1+ElWviGMHDqKvdB
+ xQWzKQz6x7gPqTCbB5WHNKdGV8LHomrkC3afNgM7yhmbRCSqzQc8hkRBrchKrKG7MW8ZKCNh9g
+ NpMsm12s653XIvt08wGoDudO
 X-SBRS: 5.1
-X-MesageID: 58676411
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 60695344
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:KQ1kY6iuAw77EZCm6P8bdSNNX161rRcKZh0ujC45NGQN5FlHY01je
- htvDGGOOfqJazDyLtkkaYu3o04OvJHUzINrSFFrrCk8QSgb9cadCdqndUqhZCn6wu8v7a5EA
- 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy34Dja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /1Mkr6hZVYnPJbRv7VAVjR0PihRNrxZreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNauOO
- ZVHNWM2BPjGS0dVGHdPGdE/pdrynSDybw938E2IhoNitgA/yyQuieOwYbI5YOeiWsF9jkue4
- GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
- CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4EsoY+S3cxKjv/iHIW20pYhNIR9c3q5pjLdA17
- WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoStQWmY/
- tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtQezARVodt/xory9U
- J4swJP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRkybZZaJGC4P
- BGP4mu9AaO/2lPxNsebhKrrVqwXIVXIT4y5Bpg4kPISCnSOSON31H43PhPBt4wcuEMtjbs+K
- f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
- Ig32grj40g3bdASlQGLq9NOdg5TciBgbX00wuQOHtO+zsNdMDlJI5fsLXkJIuSJRoxZybXF+
- G+TQEhdxAatjHHLM1zSOHtidKnuTdB0qndiZX4gOlOh2n4CZ4ez7fhAK8trLOd/rOEzn+RpS
- /QletmbBqgdQDrw5DlAP4L2q5ZvdUr3iFvWbTalejU2Y7VpWxfNpo3/ZgLq+SRXVni3uMIyr
- qeOzATeRZZfFQ1uANyPMKCkzk+rvGhbk+V3BhOaLt5WcUTq0Y5rNy2u0aNnf5BScU3On2LI2
- RyXDBEUofj2j7U0qNSZ17qZq4qJEvdlGhYIFWfs8rvrZzLR+XCuwNEcXb/QLyzdTm795I6re
- f5Rk6PnKPQCkVtH79h8HrJswf5s7tfjveYHnAFtHXGNZFW3ELJwZHKB2JAX5KFKw7ZYvyqwW
- 16OpYYGaenYZpu9HQ5DPhchY8SCyeoQy2vb4vkCKUnn4DN6oeicWkJIMhjQ0CFQIdOZ6m/+L
- TvNbCLO1zGCtw==
-IronPort-HdrOrdr: A9a23:Cv0ix66lSWRrpdSCEwPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-Data: A9a23:rMEQm6/9ga7POMEtV9JlDrUDTXmTJUtcMsCJ2f8bNWPcYEJGY0x3n
+ GZNDTjVbPfcY2WgKdogboiy8hgG7JaByYUxSVNorSo8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdj3NYy6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhIk
+ Oh2lbuVQDsFBaGWh78BVENoTyhHaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4WQ6eDP
+ JZFAdZpRDT5aTFFP14aMqIFobiRgFDQWWVXk3vA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
+ Qru3U70HxUbP9y30iee/zSngeqntTP2XsceGaO18tZugUaP3SoDBRsOT1y5rPKlzEmkVLpix
+ 1c8o3R06/JorQryE4e7D0bQTGO4UgA0YoJtKM0dzQix5pHYuRnCGm9efmJIUYlz3CMpfgAC2
+ liMltLvIDVgtryJVH6QnoupQSOO1Ts9djFbO3JdJecRy5y6+dxo0EqTJjp2OPft1oWdJN3m/
+ 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiGyNO9PABbvzt68owGOlor+p5
+ yNsdy+2tr1mMH11vHbRKNjh5Znwjxp/DBXSgER0A74q/Cm39niocOh4uW8lexc3b5lVJWG1O
+ yc/XD+9ArcIZxNGioctPuqM5zkCl/C8RbwJqNiIBjaxXnSBXFDep3w/DaJh92vsjFItgckC1
+ WSzKq6R4YIhIf0/llKeHr5FuZdyn3xW7T6DFPjTkkX8uZLDNSH9dFvwGAbXBgzPxPjf+1u9H
+ hc2H5bi9iizp8WiOHSKqtBKcghRRZX5bLivw/Fqmie4ClIOMAkc5zX5n9vNoqRpwPZYkPnm5
+ Ha4VhMKwVbznySfew6LdmpiePXkWpMm9SA3OiklPFCJ3Xk/YNnwsPdDJsVvJbR3pvZ+yfNUT
+ uUef5nSCPp4VTmaqS8WaoPwrdI+eU3z1x6OJSesfBM2Y4VkG17S4tbhcwa2rHsOAyO7uNEQu
+ bql0g+HE5MPSx47VJTdae61zkP3tn8YwbogU0zNK9hVWUPt7Ik1dHCh0q5pe5kBcEyRyCGb2
+ gCaBQYjidPM+4JlosPUga2krpuyF7csFERtAGSGv629MjPX/zT/zNYYAvqIZz3USEj95L6mO
+ bdO1/j5PfAKwARKvo57H+o5xK4y/YKy9bpTzwAiF3TXdVW7TLhnJyDej8VIs6RMwJ5fuBe3B
+ R3TqoULZ+3RNZO3CkMVKSokcv+HhKMdlTTl5PgoJFn3uX1s972dXEQOZxSBhUSx9leu3F/JF
+ Qv5hPMr1g==
+IronPort-HdrOrdr: A9a23:dXKQ7anUUmKUK5MHGwI1Dtf0rWTpDfI/3DAbv31ZSRFFG/Fw9v
+ re/8jzuiWftN98YhwdcLO7WJVoI0mzyXcd2+B4VotKOjOLhILCFuBfBOXZrAEJ30bFh4tgPW
+ AKSdkdNOHN
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58676411"
+   d="scan'208";a="60695344"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 61/65] x86/entry: Make syscall/sysenter entrypoints CET-IBT compatible
-Date: Fri, 26 Nov 2021 12:34:42 +0000
-Message-ID: <20211126123446.32324-62-andrew.cooper3@citrix.com>
+Subject: [PATCH 57/65] x86/setup: Read CR4 earlier in __start_xen()
+Date: Fri, 26 Nov 2021 12:34:38 +0000
+Message-ID: <20211126123446.32324-58-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,16 +102,8 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Each of MSR_{L,C}STAR and MSR_SYSENTER_EIP need to land on an endbr64
-instruction.  For sysenter, this is easy.
-
-Unfortunately for syscall, the stubs are already 29 byte long with a limit of
-32.  endbr64 is 4 bytes.  Luckily, there is a 1 byte instruction which can
-move from the stubs into the main handlers.
-
-Move the push %rax out of the stub and into {l,c}star_entry(), allowing room
-for the endbr64 instruction when appropriate.  Update the comment describing
-the entry state.
+This is necessary for read_cr4() to function correctly.  Move the EFER caching
+at the same time.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -119,90 +111,33 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/x86_64/entry.S | 18 +++++++++---------
- xen/arch/x86/x86_64/traps.c | 13 +++++++++----
- 2 files changed, 18 insertions(+), 13 deletions(-)
+ xen/arch/x86/setup.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 8494b97a54a2..9abcf95bd010 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -241,18 +241,17 @@ iret_exit_to_guest:
-  * When entering SYSCALL from user mode:
-  *  Vector directly to the registered arch.syscall_addr.
-  *
-- * Initial work is done by per-CPU trampolines. At this point %rsp has been
-- * initialised to point at the correct Xen stack, %rsp has been saved, and
-- * %rax needs to be restored from the %ss save slot. All other registers are
-- * still to be saved onto the stack, starting with RFLAGS, and an appropriate
-- * %ss must be saved into the space left by the trampoline.
-+ * Initial work is done by per-CPU trampolines.
-+ *  - Guest %rax stored in the %ss slot
-+ *  - Guest %rsp stored in %rax
-+ *  - Xen stack loaded, pointing at the %ss slot
-  */
- ENTRY(lstar_enter)
- #ifdef CONFIG_XEN_SHSTK
-         ALTERNATIVE "", "setssbsy", X86_FEATURE_XEN_SHSTK
- #endif
--        /* sti could live here when we don't switch page tables below. */
--        movq  8(%rsp),%rax /* Restore %rax. */
-+        push  %rax          /* Guest %rsp */
-+        movq  8(%rsp), %rax /* Restore guest %rax */
-         movq  $FLAT_KERNEL_SS,8(%rsp)
-         pushq %r11
-         pushq $FLAT_KERNEL_CS64
-@@ -288,9 +287,9 @@ ENTRY(cstar_enter)
- #ifdef CONFIG_XEN_SHSTK
-         ALTERNATIVE "", "setssbsy", X86_FEATURE_XEN_SHSTK
- #endif
--        /* sti could live here when we don't switch page tables below. */
-+        push  %rax          /* Guest %rsp */
-         CR4_PV32_RESTORE
--        movq  8(%rsp), %rax /* Restore %rax. */
-+        movq  8(%rsp), %rax /* Restore guest %rax. */
-         movq  $FLAT_USER_SS32, 8(%rsp) /* Assume a 64bit domain.  Compat handled lower. */
-         pushq %r11
-         pushq $FLAT_USER_CS32
-@@ -323,6 +322,7 @@ ENTRY(cstar_enter)
-         jmp   switch_to_kernel
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 9bd42a55f94b..141957c9f6a5 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -872,6 +872,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
  
- ENTRY(sysenter_entry)
-+        ENDBR64
- #ifdef CONFIG_XEN_SHSTK
-         ALTERNATIVE "", "setssbsy", X86_FEATURE_XEN_SHSTK
- #endif
-diff --git a/xen/arch/x86/x86_64/traps.c b/xen/arch/x86/x86_64/traps.c
-index 6f3c65bedc7a..3b9a332efb99 100644
---- a/xen/arch/x86/x86_64/traps.c
-+++ b/xen/arch/x86/x86_64/traps.c
-@@ -295,6 +295,15 @@ static unsigned int write_stub_trampoline(
- {
-     unsigned char *p = stub;
+     /* Full exception support from here on in. */
  
-+    if ( cpu_has_xen_ibt )
-+    {
-+        /* endbr64 */
-+        *p++ = 0xf3;
-+        *p++ = 0x0f;
-+        *p++ = 0x1e;
-+        *p++ = 0xfa;
-+    }
++    rdmsrl(MSR_EFER, this_cpu(efer));
++    asm volatile ( "mov %%cr4,%0" : "=r" (get_cpu_info()->cr4) );
 +
-     /* Store guest %rax into %ss slot */
-     /* movabsq %rax, stack_bottom - 8 */
-     *p++ = 0x48;
-@@ -315,10 +324,6 @@ static unsigned int write_stub_trampoline(
-     *(uint64_t *)p = stack_bottom - 8;
-     p += 8;
+     /* Enable NMIs.  Our loader (e.g. Tboot) may have left them disabled. */
+     enable_nmis();
  
--    /* Store guest %rsp into %rsp slot */
--    /* pushq %rax */
--    *p++ = 0x50;
+@@ -918,9 +921,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+ 
+     parse_video_info();
+ 
+-    rdmsrl(MSR_EFER, this_cpu(efer));
+-    asm volatile ( "mov %%cr4,%0" : "=r" (get_cpu_info()->cr4) );
 -
-     /* jmp target_va */
-     *p++ = 0xe9;
-     *(int32_t *)p = target_va - (stub_va + (p - stub) + 4);
+     /* We initialise the serial devices very early so we can get debugging. */
+     ns16550.io_base = 0x3f8;
+     ns16550.irq     = 4;
 -- 
 2.11.0
 
