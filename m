@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F0F7C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232889.404139 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F370C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232890.404149 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxb-0003y9-SZ; Fri, 26 Nov 2021 13:08:15 +0000
+	id 1mqaxe-0004OL-90; Fri, 26 Nov 2021 13:08:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232889.404139; Fri, 26 Nov 2021 13:08:15 +0000
+Received: by outflank-mailman (output) from mailman id 232890.404149; Fri, 26 Nov 2021 13:08:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxa-0003tz-T6; Fri, 26 Nov 2021 13:08:14 +0000
-Received: by outflank-mailman (input) for mailman id 232889;
- Fri, 26 Nov 2021 13:08:11 +0000
+	id 1mqaxc-0004GU-MA; Fri, 26 Nov 2021 13:08:16 +0000
+Received: by outflank-mailman (input) for mailman id 232890;
+ Fri, 26 Nov 2021 13:08:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqav1-0003W9-Dw
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:35 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 872dc6a3-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:30 +0100 (CET)
+ id 1mqav5-0003W9-E8
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:39 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8aa86722-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:35 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 872dc6a3-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 8aa86722-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931930;
+  d=citrix.com; s=securemail; t=1637931935;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=BQp5LAqKi9Mysj7MTKO9IkQnzJYceTwiMMvVtxZlU9w=;
-  b=PaouKdFrjJE5h2uXZxUnIFFL+OhEG+pK6Wn4Zt7M4aFP+skezcpHTQKO
-   4OQaVO/cbiBFqsR52cS5J3TFdNb5XEU5D9RZYSaSoxjCe3vKCd9IVumST
-   dRVdGY8BF3LO+3WYytqb74U/R/MgtrJKIVEwWIXtJ37Cmtfp6J759sMFw
-   M=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: r3rAfdmdu4PgYhns2nMOUSy/qbByDM1l4Opw1udkMe1l6L6GUGLdxGUKwtmdNFt6nJ0Le6i12H
- Zh0YLipD11tOMHFsNSW9Tz6L5fbA9kAKDs4WXxgInWHvFn42XCQSQNcjDCKUCy8AiREoMm3a/t
- YA79EVhM8A3WjxZDOv4HQ7m/9ZfBhn+7Jkd4Ce6wvFLoVRThvgj9JGurOhW6oTMMn5xgIA7e8d
- CiFrsnLZEJrb26LkJuT1h0hjHR45Bcj6KaT4tgyFvw+RoyiE+MHZM4mIcxXiTPi9SKO9D265im
- Z/rL3mVttoswlFDABxZ1CGF1
+  bh=eytoyY1MzG0tl/bk0TOOzujLGnc7vJSPTvWtmGIYixE=;
+  b=ZjNROnfUeYE/cW1nYFrzIvkp9Hs8liQdojrXHJWu9EhasijitfdC74t0
+   lILn9e1fyDw5jPJX8D4hgYVDm3dlGpRASGFKkrBzfWESwKFtYuta49rDX
+   vrhwrTOWGhIwWzMkMdv8gy/sToFwbotm0Yj2VN/Rg2Vokcoi9gMCTh+z0
+   s=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: kWN/RgKQoGE/jGDWqtw6TFykhPetduO7zsGvLarezDqHrxDktXpbGxm3fjA5AjcYCuQ6NkHZLZ
+ ymYXwc7D6QJU7DP8DWNryqW1gdo662GNEIAgzYeFczjtJile9uyWqkBDFDotPXjUMjn8FvlWNQ
+ pf894DprJP/Cmif3Iotl0OV0/NF6+afJZHqCh8BahcZ8RYRphmiaWqxe4eQDFYUlRJBmP1gBdJ
+ UZnI6l2WmS9n5omnE0wYbsq+CnhMQGBHs4G9DxJBZpBl9ZDOyU1jQrNKD7QC/o81j9VFoaPT1Q
+ Zyk6CSsTqjQyAJr7YGpOtO0A
 X-SBRS: 5.1
-X-MesageID: 58676392
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 58193821
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:B2dizKu4EHfxiP0JpdPOvkX+x+fnVJtZMUV32f8akzHdYApBsoF/q
- tZmKWyFbK7eZ2vyeIp/bY+09E5XscDUnIQ3SQdtqH9hH3kV+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- Npli72aZCANF4v3gulaTUR5FwxmFJVU9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
- 5RGN2E+NnwsZTVea3wuJ8x9uN2h3EOiKh0IpgOljrIotj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
- UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO9Mbwiyq7oPy2ByUQXZZbzpscPUepsBjEFTGy
- WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WsQWmoq
- w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSEhRqjBNzAJrVkg
- JTis5PFhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43aZlUJ2K2M
- RON5Vg5CHpv0J2CNvQfj2WZUZlC8EQdPY69CqC8giRmPvCdizNrDAkxPBXNjggBYWAnkL0lO
- IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
- I0BXyZLoj0CONDDjt7/rdROcAtUdCdjXvgbaaV/L4a+H+avI0l5Y9e5/F/rU9YNc319mria8
- 3ejdFVfzVaj13TLJR/TMiJoaa/1XIY5pnU+ZHR+MVGt0nklQICu8KZAKMdnIeh5rLRunaxuU
- v0IW8ScGfATGD7JzCsQMMvmp4t4eRX12Q/XZ3i5YCIydoJLThDS/oO2ZRPm8SQDV3LltcY3r
- 7C6+BncRJ4PG1ZrAMrMMar9xFKtp3kN3ul1WhKQcNVUfUzt9qlsKjDw0aBrc51dd02by2LDh
- QiMABoeqe3cmKMP8YHE1fKesoOkM+piBU4GTWPV2qm7aHvB9W25zI4eDOvRJWLBVHn58bmJb
- PlOy62uK+UOmVtHvtYuE7tvyq5itdLjq6UDk1ZhFXTPKV+qFqlhMj+N2swW7v9BwbpQuA2XX
- EOT+4YFZeXVaZ29SFNBdhA4aumj1O0PnmiA5Ps4F0z2+Str8efVSk5VJRSN1HRQIbYd3FnJG
- gv9VBr6MzCCtyc=
-IronPort-HdrOrdr: A9a23:9e+Kv6PnpClXvsBcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3gqy
- nOpoV86faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrZ
- uIGJIeNDSfNzdHZL7BkWuFL+o=
+IronPort-Data: A9a23:qKW+7qj6R8eNCXYsYWuGSrUsX161rRcKZh0ujC45NGQN5FlHY01je
+ htvX22AP6qPYmH0fIh+Oom/9UsDu5XXytUxSgA9/n03FH4b9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy34Dja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /18jt+SYDYGEZaWp/k5Ax0DFn11JJZJreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNauOP
+ ptCOWA2BPjGSwRAF3VHF54XoMOt3Efdcg9elHi6hoNitgA/yyQuieOwYbI5YOeiWsF9jkue4
+ GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
+ CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4ItZ5yii85YXvuTmEIjgAFTsdY8Udu5pjLdA17
+ WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoStQWmY/
+ tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtQezARVodt/xory9U
+ J4swJP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRkybZZaJGC4P
+ BGP4mu9AaO/2lPxNsebhKrrVqwXIVXIT4y5Bpg4kPISCnSOSON31H43PhPBt4wcuEMtjbs+K
+ f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
+ Ig32grj40g3bdASlQGLq9NOdg5TciBgbX00wuQOHtO+zsNdMDlJI5fsLXkJIeSJRoxZybXF+
+ G+TQEhdxAatjHHLM1zSOHtidKnuTdB0qndiZX4gOlOh2n4CZ4ez7fhAK8trLOd/rOEzn+RpS
+ /QletmbBqgdQDrw5DlAP4L2q5ZvdUr3iFvWbTalejU2Y7VpWxfNpo3/ZgLq+SRXVni3uMIyr
+ qeOzATeRZZfFQ1uANyPMKCkzk+rvGhbk+V3BhOaLt5WcUTq0Y5rNy2u0aNnf5BScU3On2LI2
+ RyXDBEUofj2j7U0qNSZ17qZq4qJEvdlGhYIFWfs8rvrZzLR+XCuwNEcXb/QLyzdTm795I6re
+ f5Rk6PnKPQCkVtH79h8HrJswf5s7tfjveYHnAFtHXGNZFW3ELJwZHKB2JAX5KFKw7ZYvyqwW
+ 16OpYYGaenYZpu9HQ5DPhchY8SCyeoQy2vb4vkCKUnn4DN6oeicWkJIMhjQ0CFQIdOZ6m/+L
+ TvNbCLO1zGCtw==
+IronPort-HdrOrdr: A9a23:kR7Rwq0zy0udtazHlimnjAqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58676392"
+   d="scan'208";a="58193821"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 64/65] x86/efi: Disable CET-IBT around Runtime Services calls
-Date: Fri, 26 Nov 2021 12:34:45 +0000
-Message-ID: <20211126123446.32324-65-andrew.cooper3@citrix.com>
+Subject: [PATCH 39/65] x86/mce: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:20 +0000
+Message-ID: <20211126123446.32324-40-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,117 +102,233 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-At least one TigerLake NUC has UEFI firmware which isn't CET-IBT compatible.
-Read under a function pointer to see whether an endbr64 instruction is
-present, and use this as a heuristic.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-
-This was disappointing to discover.  I've pestered some folk and maybe
-something will improve in due course, but it remains an open question how best
-to discover that Runtime Services are CET-IBT compatible.
 ---
- xen/arch/x86/efi/stub.c  |  2 ++
- xen/common/efi/boot.c    |  6 ++++++
- xen/common/efi/runtime.c | 17 +++++++++++++++++
- xen/include/xen/efi.h    |  1 +
- 4 files changed, 26 insertions(+)
+ xen/arch/x86/cpu/mcheck/mce.c       |  8 ++++----
+ xen/arch/x86/cpu/mcheck/mce.h       |  2 +-
+ xen/arch/x86/cpu/mcheck/mce_amd.c   |  9 ++++----
+ xen/arch/x86/cpu/mcheck/mce_amd.h   |  4 ++--
+ xen/arch/x86/cpu/mcheck/mce_intel.c | 41 +++++++++++++++++--------------------
+ 5 files changed, 31 insertions(+), 33 deletions(-)
 
-diff --git a/xen/arch/x86/efi/stub.c b/xen/arch/x86/efi/stub.c
-index 998493262641..5e44913e52db 100644
---- a/xen/arch/x86/efi/stub.c
-+++ b/xen/arch/x86/efi/stub.c
-@@ -11,6 +11,8 @@
- #include <efi/efidevp.h>
- #include <efi/efiapi.h>
+diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
+index 3467e0f1a315..275c54be7c0f 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -75,7 +75,7 @@ static int __init cf_check mce_set_verbosity(const char *str)
+ custom_param("mce_verbosity", mce_set_verbosity);
  
-+bool __initdata efi_no_cet_ibt;
-+
- /*
-  * Here we are in EFI stub. EFI calls are not supported due to lack
-  * of relevant functionality in compiler and/or linker.
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index f5af71837d5a..2c7f86f4f534 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -735,6 +735,12 @@ static void __init efi_init(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTabl
- 
-     StdOut = SystemTable->ConOut;
-     StdErr = SystemTable->StdErr ?: StdOut;
-+
-+    /*
-+     * Heuristic.  Look under an arbitrary function pointer to see if UEFI was
-+     * compiled with CET-IBT support.  Experimentally some are not.
-+     */
-+    efi_no_cet_ibt = memcmp(efi_rs->GetTime, "\xf3\x0f\x1e\xfa", 4) != 0;
+ /* Handle unconfigured int18 (should never happen) */
+-static void unexpected_machine_check(const struct cpu_user_regs *regs)
++static void cf_check unexpected_machine_check(const struct cpu_user_regs *regs)
+ {
+     console_force_unlock();
+     printk("Unexpected Machine Check Exception\n");
+@@ -469,7 +469,7 @@ static int mce_urgent_action(const struct cpu_user_regs *regs,
  }
  
- static void __init efi_console_set_mode(void)
-diff --git a/xen/common/efi/runtime.c b/xen/common/efi/runtime.c
-index d2fdc28df3e0..ef54863542db 100644
---- a/xen/common/efi/runtime.c
-+++ b/xen/common/efi/runtime.c
-@@ -21,6 +21,7 @@ struct efi_rs_state {
-   * don't strictly need that.
-   */
-  unsigned long __aligned(32) cr3;
-+    unsigned long msr_s_cet;
+ /* Shared #MC handler. */
+-void mcheck_cmn_handler(const struct cpu_user_regs *regs)
++void cf_check mcheck_cmn_handler(const struct cpu_user_regs *regs)
+ {
+     static DEFINE_MCE_BARRIER(mce_trap_bar);
+     static atomic_t severity_cpu = ATOMIC_INIT(-1);
+@@ -1684,7 +1684,7 @@ long cf_check do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
+ }
+ 
+ int mcinfo_dumpped;
+-static int x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
++static int cf_check x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
+ {
+     struct mc_info *mcip = mctelem_dataptr(mctc);
+ 
+@@ -1801,7 +1801,7 @@ static enum mce_result mce_action(const struct cpu_user_regs *regs,
+  * should be committed for dom0 consumption, 0 if it should be
+  * dismissed.
+  */
+-static int mce_delayed_action(mctelem_cookie_t mctc)
++static int cf_check mce_delayed_action(mctelem_cookie_t mctc)
+ {
+     enum mce_result result;
+     int ret = 0;
+diff --git a/xen/arch/x86/cpu/mcheck/mce.h b/xen/arch/x86/cpu/mcheck/mce.h
+index 195362691904..535d0abf8f9b 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.h
++++ b/xen/arch/x86/cpu/mcheck/mce.h
+@@ -70,7 +70,7 @@ extern void x86_mce_vector_register(x86_mce_vector_t);
+  * Common generic MCE handler that implementations may nominate
+  * via x86_mce_vector_register.
+  */
+-extern void mcheck_cmn_handler(const struct cpu_user_regs *regs);
++void cf_check mcheck_cmn_handler(const struct cpu_user_regs *regs);
+ 
+ /* Register a handler for judging whether mce is recoverable. */
+ typedef bool (*mce_recoverable_t)(uint64_t status);
+diff --git a/xen/arch/x86/cpu/mcheck/mce_amd.c b/xen/arch/x86/cpu/mcheck/mce_amd.c
+index 279a8e6f122d..d7ae8919df77 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_amd.c
++++ b/xen/arch/x86/cpu/mcheck/mce_amd.c
+@@ -113,7 +113,7 @@ mc_ec2type(uint16_t errorcode)
+     return 0;
+ }
+ 
+-bool mc_amd_recoverable_scan(uint64_t status)
++bool cf_check mc_amd_recoverable_scan(uint64_t status)
+ {
+     bool ret = false;
+     enum mc_ec_type ectype;
+@@ -143,7 +143,7 @@ bool mc_amd_recoverable_scan(uint64_t status)
+     return ret;
+ }
+ 
+-bool mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype)
++bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype)
+ {
+     enum mc_ec_type ectype;
+     uint16_t errorcode;
+@@ -216,7 +216,7 @@ static void mcequirk_amd_apply(enum mcequirk_amd_flags flags)
+     }
+ }
+ 
+-static struct mcinfo_extended *
++static struct mcinfo_extended *cf_check
+ amd_f10_handler(struct mc_info *mi, uint16_t bank, uint64_t status)
+ {
+     struct mcinfo_extended *mc_ext;
+@@ -252,7 +252,8 @@ amd_f10_handler(struct mc_info *mi, uint16_t bank, uint64_t status)
+     return mc_ext;
+ }
+ 
+-static bool amd_need_clearbank_scan(enum mca_source who, uint64_t status)
++static bool cf_check amd_need_clearbank_scan(
++    enum mca_source who, uint64_t status)
+ {
+     if ( who != MCA_MCE_SCAN )
+         return true;
+diff --git a/xen/arch/x86/cpu/mcheck/mce_amd.h b/xen/arch/x86/cpu/mcheck/mce_amd.h
+index 67c45454707d..c12c25d74567 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_amd.h
++++ b/xen/arch/x86/cpu/mcheck/mce_amd.h
+@@ -1,7 +1,7 @@
+ #ifndef _MCHECK_AMD_H
+ #define _MCHECK_AMD_H
+ 
+-bool mc_amd_recoverable_scan(uint64_t status);
+-bool mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype);
++bool cf_check mc_amd_recoverable_scan(uint64_t status);
++bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype);
+ 
  #endif
+diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
+index f587018cd2d2..9f8b2865c206 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_intel.c
++++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
+@@ -271,12 +271,13 @@ static void intel_memerr_dhandler(
+     mc_memerr_dhandler(binfo, result, regs);
+ }
+ 
+-static bool intel_srar_check(uint64_t status)
++static bool cf_check intel_srar_check(uint64_t status)
+ {
+     return (intel_check_mce_type(status) == intel_mce_ucr_srar);
+ }
+ 
+-static bool intel_checkaddr(uint64_t status, uint64_t misc, int addrtype)
++static bool cf_check intel_checkaddr(
++    uint64_t status, uint64_t misc, int addrtype)
+ {
+     if ( !(status & MCi_STATUS_ADDRV) ||
+          !(status & MCi_STATUS_MISCV) ||
+@@ -287,10 +288,9 @@ static bool intel_checkaddr(uint64_t status, uint64_t misc, int addrtype)
+     return (addrtype == MC_ADDR_PHYSICAL);
+ }
+ 
+-static void intel_srar_dhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs *regs)
++static void cf_check intel_srar_dhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs *regs)
+ {
+     uint64_t status = binfo->mib->mc_status;
+ 
+@@ -306,15 +306,14 @@ static void intel_srar_dhandler(
+     }
+ }
+ 
+-static bool intel_srao_check(uint64_t status)
++static bool cf_check intel_srao_check(uint64_t status)
+ {
+     return (intel_check_mce_type(status) == intel_mce_ucr_srao);
+ }
+ 
+-static void intel_srao_dhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs *regs)
++static void cf_check intel_srao_dhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs *regs)
+ {
+     uint64_t status = binfo->mib->mc_status;
+ 
+@@ -333,15 +332,14 @@ static void intel_srao_dhandler(
+     }
+ }
+ 
+-static bool intel_default_check(uint64_t status)
++static bool cf_check intel_default_check(uint64_t status)
+ {
+     return true;
+ }
+ 
+-static void intel_default_mce_dhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs * regs)
++static void cf_check intel_default_mce_dhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs * regs)
+ {
+     uint64_t status = binfo->mib->mc_status;
+     enum intel_mce_type type;
+@@ -360,10 +358,9 @@ static const struct mca_error_handler intel_mce_dhandlers[] = {
+     {intel_default_check, intel_default_mce_dhandler}
  };
  
-@@ -61,6 +62,7 @@ UINTN __read_mostly efi_apple_properties_len;
+-static void intel_default_mce_uhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs *regs)
++static void cf_check intel_default_mce_uhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs *regs)
+ {
+     uint64_t status = binfo->mib->mc_status;
+     enum intel_mce_type type;
+@@ -396,7 +393,7 @@ static const struct mca_error_handler intel_mce_uhandlers[] = {
+  * 3) ser_support = 1, SRAO, UC = 1, S = 1, AR = 0, [EN = 1]
+  */
  
- /* Bit field representing available EFI features/properties. */
- unsigned int efi_flags;
-+bool __read_mostly efi_no_cet_ibt;
- 
- struct efi __read_mostly efi = {
- 	.acpi   = EFI_INVALID_TABLE_ADDR,
-@@ -113,6 +115,17 @@ struct efi_rs_state efi_rs_enter(void)
- 
-     switch_cr3_cr4(mfn_to_maddr(efi_l4_mfn), read_cr4());
- 
-+    /*
-+     * If UEFI doesn't appear to be CET-IBT compatible, stash and clobber
-+     * ENDBR_EN.  Always read the current CET setting, because CET-SS isn't
-+     * configured until very late on the BSP.
-+     */
-+    if ( cpu_has_xen_ibt && efi_no_cet_ibt )
-+    {
-+        rdmsrl(MSR_S_CET, state.msr_s_cet);
-+        wrmsrl(MSR_S_CET, state.msr_s_cet & ~CET_ENDBR_EN);
-+    }
-+
-     return state;
- }
- 
-@@ -122,6 +135,10 @@ void efi_rs_leave(struct efi_rs_state *state)
- 
-     if ( !state->cr3 )
-         return;
-+
-+    if ( state->msr_s_cet )
-+        wrmsrl(MSR_S_CET, state->msr_s_cet);
-+
-     switch_cr3_cr4(state->cr3, read_cr4());
-     if ( is_pv_vcpu(curr) && !is_idle_vcpu(curr) )
+-static bool intel_need_clearbank_scan(enum mca_source who, u64 status)
++static bool cf_check intel_need_clearbank_scan(enum mca_source who, u64 status)
+ {
+     if ( who == MCA_CMCI_HANDLER )
      {
-diff --git a/xen/include/xen/efi.h b/xen/include/xen/efi.h
-index 94a7e547f97b..8c14f7f18718 100644
---- a/xen/include/xen/efi.h
-+++ b/xen/include/xen/efi.h
-@@ -30,6 +30,7 @@ union compat_pf_efi_info;
+@@ -453,7 +450,7 @@ static bool intel_need_clearbank_scan(enum mca_source who, u64 status)
+  * 4) SRAO ser_support = 1, PCC = 0, S = 1, AR = 0, EN = 1 [UC = 1]
+  * 5) UCNA ser_support = 1, OVER = 0, EN = 1, PCC = 0, S = 0, AR = 0, [UC = 1]
+  */
+-static bool intel_recoverable_scan(uint64_t status)
++static bool cf_check intel_recoverable_scan(uint64_t status)
+ {
  
- struct xenpf_efi_runtime_call;
- struct compat_pf_efi_runtime_call;
-+extern bool efi_no_cet_ibt;
- 
- bool efi_enabled(unsigned int feature);
- void efi_init_memory(void);
+     if ( !(status & MCi_STATUS_UC ) )
 -- 
 2.11.0
 
