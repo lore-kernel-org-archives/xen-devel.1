@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5728C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2BD7C433FE
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:05:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232761.403711 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.232758.403700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauW-0006Wx-UC; Fri, 26 Nov 2021 13:05:04 +0000
+	id 1mqauV-00069F-C4; Fri, 26 Nov 2021 13:05:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232761.403711; Fri, 26 Nov 2021 13:05:04 +0000
+Received: by outflank-mailman (output) from mailman id 232758.403700; Fri, 26 Nov 2021 13:05:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauW-0006UI-Al; Fri, 26 Nov 2021 13:05:04 +0000
-Received: by outflank-mailman (input) for mailman id 232761;
- Fri, 26 Nov 2021 13:05:02 +0000
+	id 1mqauU-00067X-Ni; Fri, 26 Nov 2021 13:05:02 +0000
+Received: by outflank-mailman (input) for mailman id 232758;
+ Fri, 26 Nov 2021 13:04:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqauU-0003W9-Hl
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:02 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 761fdb9a-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:01 +0100 (CET)
+ id 1mqauR-0003W9-Ix
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:04:59 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7473ae67-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:04:58 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 761fdb9a-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 7473ae67-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931901;
+  d=citrix.com; s=securemail; t=1637931898;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=2MB3qO+z9Cw8CtOS8rAbbOlsadBbIGcPOzvcS4Y5AMw=;
-  b=Q8fp2z2QkkCRgJcVfS0aq+7+/2k45A6Pi4rYF0Krb0tvXHkICO1nh2Th
-   E6mWp2nStjpIMUgok7KyeGDn+e8+sSsCRwtNW7hrbRz7JbNPumU58Fw+a
-   WTu6XtFeOeZnM2pUgTnsKVps0g6S1fUwNakdvhuaC4Wjix65useRtVRto
-   s=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: fcaLdGsmvyl8paTutvujKAQ2Sjig0Idrq2+Hw1Hqs/WgsogmQAVCx6mNxqYZHfvs+L4k/+RJHb
- 2/g71yJ8pOJOKZqIedrny2kDrRAxFmn8RVIkpYv4OEQ0GdEfm1CaErA7sjnAGsL7HTuOhY0bYs
- ZQD7O1jKdNHdMaG0Ivk1D5DtOLtIneRRHaI4bgxJDJQFbCpcJJRMkzQZZRw0VP7I1CMBmYLoqu
- aDXwg980SI405pupDGVtY8ykBhg2zo+7RJHZI04S/V16vSU1gt4k0YlVKLEZgl97kdLRx2Kk3E
- 0uw4TzA00ursUuVOtYSVADx3
+  bh=Hp7PZvlLpwuVUaikk4pFAoTgRxWIqAcdM9EjJyWnZJg=;
+  b=dZzm/MGH1Jqk1akeIXrgrGFYozVW/g0fzFW9p7d/ILmzGGAVn2/BuNmL
+   7+R6fim1M0PI/IjlmKi+Jv4JRuc+b1C3r2hXLRdaEdDKbTD/bpc3GNf1K
+   VbefWtBvk3cNGlvMAnaY0wjLC27Zvrac9W+J9joP/BUkmtU6csatpQORj
+   A=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 754iWkJep8g+aBPCoWQR/vX+YgDFkxXAhDT/yLpwpAyIC6+JFXFmqjFuwwEeoAIPigJcjyBvaU
+ uOdUKbi8xZ0qWPZ7r8QkLz3Y4ghp3APc7SLN/Kp0VSCkYrO+H6gAkKwmbFUz9G/FI2HaftZfpb
+ nl47wDu27YTjLSmxsgQWFMyKrmpulgDURSOcyl8elsW4WHNZfdfLjrrs7aRgABcNdcgH8iUyur
+ +TbczlghJvY+UhrEbcm95F2nLLLxwBAnvRdoQXDyV5WWlfJgm204PsaxfL+0O2mhCwvLrIjPtz
+ 0dJdejd92KNut03CEFkqUYm2
 X-SBRS: 5.1
-X-MesageID: 58676339
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 59063951
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:olExu6s4CqaTQcFRX6vhfHOsd+fnVJtZMUV32f8akzHdYApBsoF/q
- tZmKWjSOv+ON2ryKYp+bo/g9UkE75CGn9cyHAo4r31gF3sR+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NplksWpeCIgN+71yeEfThdbAjNfNOpK9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
- 5RGN2E0PXwsZTVCAXkuBK8judyyxUneLAQFqVeFr4sotj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
- UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO8pj8TCow6OX2lecBHUKTS9TSdVhuMBjEFTGy
- WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WsQWmoq
- w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSEhRqjBNzAJrVkg
- JTis5PFhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43aZlUJ2K2M
- RON5Vg5CHpv0J2CNvQfj2WZUZlC8EQdPY69CqC8giRmPvCdizNrDAkxPBXNjggBYWAnkL0lO
- IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
- I0BXyZLoj0CONDDjt7/rdROcAtUdCdjXvgbaaV/L4a+H+avI0l5Y9e5/F/rU9UNc319mria8
- 3ejdFVfzVaj13TLJR/TMiJoaa/1XIY5pnU+ZHR+MVGt0nklQICu8KZAKMdnIeh5rLRunaxuU
- v0IW8ScGfATGD7JzCsQMMvmp4t4eRX12Q/XZ3i5YCIydoJLThDS/oO2ZRPm8SQDV3LltcY3r
- 7C6+BncRJ4PG1ZrAMrMMar9xFKtp3kN3ul1WhKQcNVUfUzt9qlsKjDw0aBrc51dd02by2LDh
- QiMABoeqe3cmKMP8YHE1fKesoOkM+piBU4GTWPV2qm7aHvB9W25zI4eDOvRJWLBVHn58bmJb
- PlOy62uK+UOmVtHvtYuE7tvyq5itdLjq6UDk1ZhFXTPKV+qFqlhMj+N2swW7v9BwbpQuA2XX
- EOT+4YFZeXVaZ29SFNBdhA4aumj1O0PnmiA5Ps4F0z2+Str8efVSk5VJRSN1HRQIbYd3FnJG
- gv9VBr6MzCCtyc=
-IronPort-HdrOrdr: A9a23:y0C4s6t7uZnB5RRmgOL1rklZ7skDTtV00zEX/kB9WHVpmszxra
- 6TdZMgpGbJYVcqKRcdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
- YFT0EXMqyJMbEQt6fHCWeDfOrIuOP3kpyVuQ==
+IronPort-Data: A9a23:N0Whf6jGAEHyjN7/GcMxLQtCX161rRcKZh0ujC45NGQN5FlHY01je
+ htvXGHSO6yJYWugKIhwPoq3/EIEu5aBm9UxHQo4qCxmQSob9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy34Dja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /18jJqITw4jb5H+neAQbBBpQyNAeql/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNauPP
+ 5RCOGc2BPjGSwNhF1YlUc4cpsuThXinbCR2gWqroZNitgA/yyQuieOwYbI5YOeiWsF9jkue4
+ GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
+ CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4ItQ80AeEwPvo0QOdC1cNf25DVpsijZpjLdA17
+ WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoStQWmY/
+ tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtQezARVodt/xory9U
+ J4swJP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRkybZZaJGC4P
+ BGP4mu9AaO/2lPxNsebhKrrVqwXIVXIT4y5Bpg4kPISCnSOSON31H43PhPBt4wcuEMtjbs+K
+ f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
+ Ig32grj40g3bdASlQGLq9NOdg5TciBgbX00wuQOHtO+zsNdMDlJI5fsLXkJIuSJRoxZybXF+
+ G+TQEhdxAatjHHLM1zSOHtidKnuTdB0qndiZX4gOlOh2n4CZ4ez7fhAK8trLOd/rOEzn+RpS
+ /QletmbBqgdQDrw5DlAP4L2q5ZvdUr3iFvWbTalejU2Y7VpWxfNpo3/ZgLq+SRXVni3uMIyr
+ qeOzATeRZZfFQ1uANyPMKCkzk+rvGhbk+V3BhOaLt5WcUTq0Y5rNy2u0aNnf5BScU3On2LI2
+ RyXDBEUofj2j7U0qNSZ17qZq4qJEvdlGhYIFWfs8rvrZzLR+XCuwNEcXb/QLyzdTm795I6re
+ f5Rk6PnKPQCkVtH79h8HrJswf5s7tfjveYHnAFtHXGNZFW3ELJwZHKB2JAX5KFKw7ZYvyqwW
+ 16OpYYGaenYZpu9HQ5DPhchY8SCyeoQy2vb4vkCKUnn4DN6oeicWkJIMhjQ0CFQIdOZ6m/+L
+ TvNbCLO1zGCtw==
+IronPort-HdrOrdr: A9a23:RbVoy6ElWyrGWX9upLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
+ mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YZT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58676339"
+   d="scan'208";a="59063951"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 52/65] x86/time: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:33 +0000
-Message-ID: <20211126123446.32324-53-andrew.cooper3@citrix.com>
+Subject: [PATCH 50/65] x86/dpci: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:31 +0000
+Message-ID: <20211126123446.32324-51-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -108,209 +108,67 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/hpet.c        |  8 ++++----
- xen/arch/x86/time.c        | 33 +++++++++++++++++----------------
- xen/include/asm-x86/hpet.h |  4 ++--
- 3 files changed, 23 insertions(+), 22 deletions(-)
+ xen/arch/x86/hvm/hvm.c                | 4 ++--
+ xen/drivers/passthrough/vtd/x86/hvm.c | 4 ++--
+ xen/drivers/passthrough/x86/hvm.c     | 8 ++++----
+ 3 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
-index dcc9e16693e9..2b00c30d1153 100644
---- a/xen/arch/x86/hpet.c
-+++ b/xen/arch/x86/hpet.c
-@@ -196,7 +196,7 @@ static void evt_do_broadcast(cpumask_t *mask)
-        cpumask_raise_softirq(mask, TIMER_SOFTIRQ);
- }
- 
--static void handle_hpet_broadcast(struct hpet_event_channel *ch)
-+static void cf_check handle_hpet_broadcast(struct hpet_event_channel *ch)
- {
-     cpumask_t mask;
-     s_time_t now, next_event;
-@@ -553,7 +553,7 @@ static void hpet_detach_channel(unsigned int cpu,
- 
- void (*__read_mostly pv_rtc_handler)(uint8_t index, uint8_t value);
- 
--static void handle_rtc_once(uint8_t index, uint8_t value)
-+static void cf_check handle_rtc_once(uint8_t index, uint8_t value)
- {
-     if ( index != RTC_REG_B )
-         return;
-@@ -566,7 +566,7 @@ static void handle_rtc_once(uint8_t index, uint8_t value)
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index d5ca7a1ce636..1fba0efc54d1 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -513,8 +513,8 @@ void hvm_migrate_pirq(struct hvm_pirq_dpci *pirq_dpci, const struct vcpu *v)
      }
  }
  
--void __init hpet_broadcast_init(void)
-+void __init cf_check hpet_broadcast_init(void)
+-static int migrate_pirq(struct domain *d, struct hvm_pirq_dpci *pirq_dpci,
+-                        void *arg)
++static int cf_check migrate_pirq(
++    struct domain *d, struct hvm_pirq_dpci *pirq_dpci, void *arg)
  {
-     u64 hpet_rate = hpet_setup();
-     u32 hpet_id, cfg;
-@@ -637,7 +637,7 @@ void __init hpet_broadcast_init(void)
-         hpet_events->flags = HPET_EVT_LEGACY;
+     hvm_migrate_pirq(pirq_dpci, arg);
+ 
+diff --git a/xen/drivers/passthrough/vtd/x86/hvm.c b/xen/drivers/passthrough/vtd/x86/hvm.c
+index b531fe907a94..132d252d1cca 100644
+--- a/xen/drivers/passthrough/vtd/x86/hvm.c
++++ b/xen/drivers/passthrough/vtd/x86/hvm.c
+@@ -21,8 +21,8 @@
+ #include <xen/irq.h>
+ #include <xen/sched.h>
+ 
+-static int _hvm_dpci_isairq_eoi(struct domain *d,
+-                                struct hvm_pirq_dpci *pirq_dpci, void *arg)
++static int cf_check _hvm_dpci_isairq_eoi(
++    struct domain *d, struct hvm_pirq_dpci *pirq_dpci, void *arg)
+ {
+     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
+     unsigned int isairq = (long)arg;
+diff --git a/xen/drivers/passthrough/x86/hvm.c b/xen/drivers/passthrough/x86/hvm.c
+index 7a6d9ac3d40d..085d47beb44d 100644
+--- a/xen/drivers/passthrough/x86/hvm.c
++++ b/xen/drivers/passthrough/x86/hvm.c
+@@ -773,8 +773,8 @@ static void __msi_pirq_eoi(struct hvm_pirq_dpci *pirq_dpci)
+     }
  }
  
--void hpet_broadcast_resume(void)
-+void cf_check hpet_broadcast_resume(void)
+-static int _hvm_dpci_msi_eoi(struct domain *d,
+-                             struct hvm_pirq_dpci *pirq_dpci, void *arg)
++static int cf_check _hvm_dpci_msi_eoi(
++    struct domain *d, struct hvm_pirq_dpci *pirq_dpci, void *arg)
  {
-     u32 cfg;
-     unsigned int i, n;
-diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index ef036a187415..cce1d56b2ddd 100644
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -292,7 +292,7 @@ static char *freq_string(u64 freq)
-  * PLATFORM TIMER 1: PROGRAMMABLE INTERVAL TIMER (LEGACY PIT)
-  */
+     int vector = (long)arg;
  
--static u64 read_pit_count(void)
-+static u64 cf_check read_pit_count(void)
- {
-     u16 count16;
-     u32 count32;
-@@ -311,7 +311,7 @@ static u64 read_pit_count(void)
-     return count32;
+@@ -943,8 +943,8 @@ void hvm_dpci_eoi(struct domain *d, unsigned int guest_gsi)
+     spin_unlock(&d->event_lock);
  }
  
--static s64 __init init_pit(struct platform_timesource *pts)
-+static s64 __init cf_check init_pit(struct platform_timesource *pts)
+-static int pci_clean_dpci_irq(struct domain *d,
+-                              struct hvm_pirq_dpci *pirq_dpci, void *arg)
++static int cf_check pci_clean_dpci_irq(
++    struct domain *d, struct hvm_pirq_dpci *pirq_dpci, void *arg)
  {
-     u8 portb = inb(0x61);
-     u64 start, end;
-@@ -348,7 +348,7 @@ static s64 __init init_pit(struct platform_timesource *pts)
-     return (end - start) * CALIBRATE_FRAC;
- }
+     struct dev_intx_gsi_link *digl, *tmp;
  
--static void resume_pit(struct platform_timesource *pts)
-+static void cf_check resume_pit(struct platform_timesource *pts)
- {
-     /* Set CTC channel 2 to mode 0 again; initial value does not matter. */
-     outb(0xb0, PIT_MODE); /* binary, mode 0, LSB/MSB, Ch 2 */
-@@ -371,12 +371,12 @@ static struct platform_timesource __initdata plt_pit =
-  * PLATFORM TIMER 2: HIGH PRECISION EVENT TIMER (HPET)
-  */
- 
--static u64 read_hpet_count(void)
-+static u64 cf_check read_hpet_count(void)
- {
-     return hpet_read32(HPET_COUNTER);
- }
- 
--static int64_t __init init_hpet(struct platform_timesource *pts)
-+static int64_t __init cf_check init_hpet(struct platform_timesource *pts)
- {
-     uint64_t hpet_rate, start;
-     uint32_t count, target;
-@@ -462,7 +462,7 @@ static int64_t __init init_hpet(struct platform_timesource *pts)
-     return (rdtsc_ordered() - start) * CALIBRATE_FRAC;
- }
- 
--static void resume_hpet(struct platform_timesource *pts)
-+static void cf_check resume_hpet(struct platform_timesource *pts)
- {
-     hpet_resume(NULL);
- }
-@@ -487,12 +487,12 @@ unsigned int __initdata pmtmr_width;
- /* ACPI PM timer ticks at 3.579545 MHz. */
- #define ACPI_PM_FREQUENCY 3579545
- 
--static u64 read_pmtimer_count(void)
-+static u64 cf_check read_pmtimer_count(void)
- {
-     return inl(pmtmr_ioport);
- }
- 
--static s64 __init init_pmtimer(struct platform_timesource *pts)
-+static s64 __init cf_check init_pmtimer(struct platform_timesource *pts)
- {
-     u64 start;
-     u32 count, target, mask;
-@@ -557,7 +557,7 @@ static unsigned int __initdata tsc_flags;
-  * Called in verify_tsc_reliability() under reliable TSC conditions
-  * thus reusing all the checks already performed there.
-  */
--static s64 __init init_tsc(struct platform_timesource *pts)
-+static s64 __init cf_check init_tsc(struct platform_timesource *pts)
- {
-     u64 ret = pts->frequency;
- 
-@@ -579,7 +579,7 @@ static s64 __init init_tsc(struct platform_timesource *pts)
-     return ret;
- }
- 
--static u64 read_tsc(void)
-+static u64 cf_check read_tsc(void)
- {
-     return rdtsc_ordered();
- }
-@@ -621,7 +621,7 @@ static uint64_t xen_timer_cpu_frequency(void)
-     return freq;
- }
- 
--static int64_t __init init_xen_timer(struct platform_timesource *pts)
-+static int64_t __init cf_check init_xen_timer(struct platform_timesource *pts)
- {
-     if ( !xen_guest )
-         return 0;
-@@ -642,7 +642,7 @@ static always_inline uint64_t read_cycle(const struct vcpu_time_info *info,
-     return info->system_time + offset;
- }
- 
--static uint64_t read_xen_timer(void)
-+static uint64_t cf_check read_xen_timer(void)
- {
-     struct vcpu_time_info *info = &this_cpu(vcpu_info)->time;
-     uint32_t version;
-@@ -671,7 +671,7 @@ static uint64_t read_xen_timer(void)
-     return ret;
- }
- 
--static void resume_xen_timer(struct platform_timesource *pts)
-+static void cf_check resume_xen_timer(struct platform_timesource *pts)
- {
-     write_atomic(&xen_timer_last, 0);
- }
-@@ -697,7 +697,8 @@ static struct platform_timesource __initdata plt_xen_timer =
- static struct ms_hyperv_tsc_page *hyperv_tsc;
- static struct page_info *hyperv_tsc_page;
- 
--static int64_t __init init_hyperv_timer(struct platform_timesource *pts)
-+static int64_t __init cf_check init_hyperv_timer(
-+    struct platform_timesource *pts)
- {
-     paddr_t maddr;
-     uint64_t tsc_msr, freq;
-@@ -740,7 +741,7 @@ static int64_t __init init_hyperv_timer(struct platform_timesource *pts)
-     return freq;
- }
- 
--static uint64_t read_hyperv_timer(void)
-+static uint64_t cf_check read_hyperv_timer(void)
- {
-     uint64_t scale, ret, tsc;
-     int64_t offset;
-@@ -1716,7 +1717,7 @@ time_calibration_rendezvous_tail(const struct calibration_rendezvous *r,
-  * Keep TSCs in sync when they run at the same rate, but may stop in
-  * deep-sleep C states.
-  */
--static void time_calibration_tsc_rendezvous(void *_r)
-+static void cf_check time_calibration_tsc_rendezvous(void *_r)
- {
-     int i;
-     struct calibration_rendezvous *r = _r;
-diff --git a/xen/include/asm-x86/hpet.h b/xen/include/asm-x86/hpet.h
-index f343fe4740f1..9919f7473071 100644
---- a/xen/include/asm-x86/hpet.h
-+++ b/xen/include/asm-x86/hpet.h
-@@ -89,8 +89,8 @@ void hpet_disable_legacy_replacement_mode(void);
-  * Temporarily use an HPET event counter for timer interrupt handling,
-  * rather than using the LAPIC timer. Used for Cx state entry.
-  */
--void hpet_broadcast_init(void);
--void hpet_broadcast_resume(void);
-+void cf_check hpet_broadcast_init(void);
-+void cf_check hpet_broadcast_resume(void);
- void cf_check hpet_broadcast_enter(void);
- void cf_check hpet_broadcast_exit(void);
- int hpet_broadcast_is_available(void);
 -- 
 2.11.0
 
