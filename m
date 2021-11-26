@@ -4,36 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379B6C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 15:01:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233164.404432 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84387C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 15:18:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233177.404466 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqcio-0004RH-Q3; Fri, 26 Nov 2021 15:01:06 +0000
+	id 1mqczB-0006Ly-JL; Fri, 26 Nov 2021 15:18:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233164.404432; Fri, 26 Nov 2021 15:01:06 +0000
+Received: by outflank-mailman (output) from mailman id 233177.404466; Fri, 26 Nov 2021 15:18:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqcio-0004RA-MB; Fri, 26 Nov 2021 15:01:06 +0000
-Received: by outflank-mailman (input) for mailman id 233164;
- Fri, 26 Nov 2021 15:01:06 +0000
+	id 1mqczB-0006Lp-GK; Fri, 26 Nov 2021 15:18:01 +0000
+Received: by outflank-mailman (input) for mailman id 233177;
+ Fri, 26 Nov 2021 15:18:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=skxS=QN=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mqcio-0004R4-1O
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 15:01:06 +0000
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [2a00:1450:4864:20::22d])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ad29a98a-4ec9-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 16:01:04 +0100 (CET)
-Received: by mail-lj1-x22d.google.com with SMTP id k2so19331034lji.4
- for <xen-devel@lists.xenproject.org>; Fri, 26 Nov 2021 07:01:04 -0800 (PST)
-Received: from [192.168.1.7] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id g10sm525847lfv.113.2021.11.26.07.01.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Nov 2021 07:01:03 -0800 (PST)
+ <SRS0=maq7=QN=oracle.com=boris.ostrovsky@srs-se1.protection.inumbo.net>)
+ id 1mqczA-0006LJ-Gl
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 15:18:00 +0000
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 08c4e679-4ecc-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 16:17:58 +0100 (CET)
+Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 1AQF5pUw015226; 
+ Fri, 26 Nov 2021 15:17:51 GMT
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by mx0b-00069f02.pphosted.com with ESMTP id 3ck1x2r2at-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 26 Nov 2021 15:17:51 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 1AQFBQQB027182;
+ Fri, 26 Nov 2021 15:17:50 GMT
+Received: from nam02-sn1-obe.outbound.protection.outlook.com
+ (mail-sn1anam02lp2049.outbound.protection.outlook.com [104.47.57.49])
+ by aserp3030.oracle.com with ESMTP id 3ceq2k2a2x-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 26 Nov 2021 15:17:50 +0000
+Received: from BLAPR10MB5009.namprd10.prod.outlook.com (2603:10b6:208:321::10)
+ by BL0PR10MB3010.namprd10.prod.outlook.com (2603:10b6:208:78::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.20; Fri, 26 Nov
+ 2021 15:17:47 +0000
+Received: from BLAPR10MB5009.namprd10.prod.outlook.com
+ ([fe80::8d84:1f40:881:7b12]) by BLAPR10MB5009.namprd10.prod.outlook.com
+ ([fe80::8d84:1f40:881:7b12%4]) with mapi id 15.20.4734.023; Fri, 26 Nov 2021
+ 15:17:47 +0000
+Received: from [10.74.104.211] (138.3.200.19) by
+ BY5PR20CA0016.namprd20.prod.outlook.com (2603:10b6:a03:1f4::29) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.22 via Frontend
+ Transport; Fri, 26 Nov 2021 15:17:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,124 +67,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad29a98a-4ec9-11ec-9787-a32c541c8605
+X-Inumbo-ID: 08c4e679-4ecc-11ec-9787-a32c541c8605
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=message-id : date :
+ subject : to : cc : references : from : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2021-07-09;
+ bh=T2ytXIl5GrMUq6c8ZZho0Z5HcGnofJ55iECblRsRg44=;
+ b=aao32CasZdhV3VySYyz+LZY/iZOUc2aOJw3tsERgB9a2B4mHrsmQ5er0Q1fNu0K0ygXO
+ 3DXTSgSozgR81uTE1flYkvyCf0QeAsy0hnScGkBuIt2ua9GYPlpF1i/i1uFj5fN8LGTC
+ /puJ0ZZ5V+kgjRy24jHogaqyTKKwAD6X7fjZk0swVeB+/UTAvI39ohFlDW8ExR3OjMIc
+ mSRT6WfUjFkeUpZx49VYXK0TO3uG0UkBd0tLXWnyQ4oPYIzqdOP/TW6lc5PgS4V2mMUd
+ 5w80cfEl1WKmJVSnUw13pBIDN5oHvTg3wb59ZaUDR1tMXaTYaubrR7ikiORFQ20FKSVS Dg== 
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RK6D0TN4L1XS77cLV+uyQMYF9W58aaSBf2DfSa8l9lKyEHMK0cejDTUdooKaxghd6vESw0YI9KmNnYmyXJIQgjUj+yBskqZA6ejV3vYJ0BNFuGQ1UKKCNXcqYBbTZe/7Uzgor8ZWHC1oPDJIBTiVqAFzQJFrfGXFxqr9jmKSq0Two4V/cFL4yzgF0Cy9QufuKvHs9uZ5IP7xLj7JVV849iKFZpMVrvJP7ieaooKzOJmzKUjYaGLXJ3LVpQwB15US9KMTgBk327D3S+8fbYBoiIacdV747DTiIU8ys1xTJoX3UgPdLPad9BRaUs9YsWFqRl2c2mF1DPnEyTsc62meJw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T2ytXIl5GrMUq6c8ZZho0Z5HcGnofJ55iECblRsRg44=;
+ b=faobUnWgl3R6a3CLtelCvrUVVmv+hRnxQ/5IQd1ZhRCmF20TD5+9HMk/RPNA+w/C7tL5IvsLA0qe43brnXA+HKG7tYnW4EiY0S2OPt6mXunX6J+aoIcCyQ1/wsxuEPKMgUiu/Th1IJSVJ69DwhBBHBWK9DRLKkHfcR+ksxKylrtIr4NXMfaT5MVw4vBrvFCnvuoC0B9GFih44gR01tnqFBTqTEyMCyEj5YzI5ngAZiHDgyy2m48JmRiZ+BNbb7ghHyZXPgm9K7la2BjrOGbzHHMP10cbKYjrj3V/rOhA8beJhawmyDg/pCHwR7zIkuxifkMj+VvcFKFPfThLF5crhA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=XYsv7m4z2BAbmpLOqiC9Zw9vuLWj4QpNLQpxzqC2tZ0=;
-        b=kMh9axDkcxiovBOfojtLlG+umvR7zzxnSdV8CUEAvrYH+caKvQcJgr3eacpL2eJW+P
-         thdJlVlCqE+C99Pbyn5H1M7WL5IMSqNrob5LcocVORMIrdtB/LRIVD50qu7r9+ktmWWb
-         PpzRMGcNaNAtWN7jZ5ADA5V6QNfjBvClTGaaGqjhIyAepJX7le3ViDURSr8bsMmXQIj5
-         2+i8iOUWQ8RFa4ukJclPGDvUXsCSKW6Ipg3//4CuWVQsac3LSh52HrAfhFbQ8rKGttWh
-         YRlWY6bzM7SWImnL9Mgsw9zupx1QUmvAq9q1nXfshWW+h3zA2cL6FfUcRVH795AvsvlK
-         8mpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=XYsv7m4z2BAbmpLOqiC9Zw9vuLWj4QpNLQpxzqC2tZ0=;
-        b=iSnjaqk6LIoLjRR561KA6tNVRtkuV/tL3EzTYY1riXUIqwZiYZY1eH0fWeJ+4+EFEw
-         v8/Pm30QYH8Z6rDVOJt3u70jXdMUam/x8ANvtAoP9662pM1Ojj5syNWCLKvOZQgeUQII
-         0y/1SuTSOjmGugqLxwmCWSw0NTqBQ/JUKLIqu2tXY/Pqfp9Xj1nhMAVeySShePp9QMCh
-         uyBjFkXaIVQqcknW+A6EVTWluzbv4v9mbVa+QqscIB5oCB7hnNRt4cNicykf3dsTmawH
-         3b/A105De1wrGZHZjOR4zymMG7QotXz1Vo+Nwv5SBzFoSlTAnzt/f9T94Wg0EZByNL1B
-         6N8Q==
-X-Gm-Message-State: AOAM531Kmf2ax1vthqJFCr/DeLqQ6JjvqKNwT81pY+hdi0khaV/MLqrd
-	SZTP70f7vcLH3zt7F7xVxIe4nFPQb5Q=
-X-Google-Smtp-Source: ABdhPJyP4ZfKUgeeb1RNt2MrBARhenKcuWrh93XrOtT+yLy+1YPeWiEbUuZsXbgxQEOChb//YTMANg==
-X-Received: by 2002:a05:651c:550:: with SMTP id q16mr31726646ljp.371.1637938863757;
-        Fri, 26 Nov 2021 07:01:03 -0800 (PST)
-Subject: Re: [RFC?] xen/arm: memaccess: Pass struct npfec by reference in
- p2m_mem_access_check
-To: Andrew Cooper <amc96@srcf.net>
-Cc: Jan Beulich <jbeulich@suse.com>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Tamas K Lengyel <tamas@tklengyel.com>,
- Alexandru Isaila <aisaila@bitdefender.com>,
- Petre Pircalabu <ppircalabu@bitdefender.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-References: <1637880559-28821-1-git-send-email-olekstysh@gmail.com>
- <b51fd518-6c32-c945-d220-f2092ff2666a@suse.com>
- <5665bac6-4315-dccc-3a36-5910f5624146@srcf.net>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <9a2347b7-f973-bee3-7a95-6d376e3f981c@gmail.com>
-Date: Fri, 26 Nov 2021 17:01:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <5665bac6-4315-dccc-3a36-5910f5624146@srcf.net>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T2ytXIl5GrMUq6c8ZZho0Z5HcGnofJ55iECblRsRg44=;
+ b=SpuftzkR7u1YBw5zEsv+5mapeNDNXeyhWH5srhBmQVkABm8YdbTnj8pEgFvEMCn37mPU+4foqNTc5Q7TEsEGAUCfJh0JC3QwQH9qzHtl/Pcof+Dr3Lexr6Rpnu4AcMrhNFYN5lbrhBEwjMrVXD1xQvPHfh+sobYPC752QVlC7RE=
+Message-ID: <042a46ef-c20f-5cc7-8f9a-75b8731f661f@oracle.com>
+Date: Fri, 26 Nov 2021 10:17:43 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.3.2
+Subject: Re: [PATCH V3 4/6] xen/unpopulated-alloc: Add mechanism to use Xen
+ resource
 Content-Language: en-US
+To: Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org,
+        linux-kernel@vger.kernel.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+        Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini
+ <sstabellini@kernel.org>,
+        Julien Grall <julien@xen.org>
+References: <1637787223-21129-1-git-send-email-olekstysh@gmail.com>
+ <1637787223-21129-5-git-send-email-olekstysh@gmail.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+In-Reply-To: <1637787223-21129-5-git-send-email-olekstysh@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BY5PR20CA0016.namprd20.prod.outlook.com
+ (2603:10b6:a03:1f4::29) To BLAPR10MB5009.namprd10.prod.outlook.com
+ (2603:10b6:208:321::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 5dba044a-e2de-45a0-9172-08d9b0efe746
+X-MS-TrafficTypeDiagnostic: BL0PR10MB3010:
+X-Microsoft-Antispam-PRVS: 
+	<BL0PR10MB30108ECEC0B7666EEB942CE98A639@BL0PR10MB3010.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2150;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	YjWjHbLGWqzQr71ozEAmq07DbJfJYAaMYzUuAFkIifTCjVWeqxiHzVlkaPKUTxXuz3bx1lX/MJpmXLijJLg8UJ+J+dxXj9ARwn/7ufaRf2ChdNeAXZGDWEtsWdHf9vYqM8pIN85zf1AiUTrivyYKBCnmd2RuCg2BGyd/ycgOQ5ZWUtTHGTHxBjOz0L9NBgc44dYexdKke9vF+6n6OGoLaSoHKyLApfi51aexPjm6g3TTjWLyz6TI8+GZWH9FL72Rkbd/t7NjYXRN2Fvoe8iuCP3q3Cp3hMX2gY91eQkXrBXBGu8fbrwarvEQf6lrBEKJHZjd2FTbeFNjh1X1JEQBGl7655vJu/jQ4eo9i/iltWaM3CHwnu2XMbH6xs89WqtBS5vLQFVf8vA1SDB3eu+dSaw2xlASJIjjyQysl8AAnqE7q1wfo85b3COlmnakXZVBcGqLCj4yi8yNmQ+h6qf+VnHp76e3Wse5SvGZ41Khmzgc+6cacSjWswXqSOV7+70xRgb/lHfBaN4af2f6dyr3xOhgMsFt9AIsJQa6diK6DHDC8qGRERWh3mEZ+DZDiB3EqxIv3Y/sv7hc51Kg0mB5pOC4ubAeAIEusst17dmgoMEO8pwe1l+ql4Xup87lt+crcJXKNhTN0mLa8NgFVjxUslNPAT/scvMDq1Cvo4/myb6NH3f35zCDuAxbAyt6HV1DqCgGzU/cexsn5S5isQlP74AsYpQs+IeHy++Fh5NHOIuYp0fE6luRnWrzkfbKwsrU
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BLAPR10MB5009.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(38100700002)(2906002)(2616005)(44832011)(26005)(186003)(31686004)(4326008)(956004)(36756003)(558084003)(66946007)(53546011)(5660300002)(8936002)(8676002)(66476007)(16576012)(54906003)(66556008)(6486002)(508600001)(31696002)(86362001)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?L3NRd0pOUkZkMElSOWlFK3JqMnFCZUtYYWZJaFVNTFFoRldCU3FXcGxrcVBX?=
+ =?utf-8?B?enRGVGdFaUJXc3VQY3N0R3VqNllDZWZuZktQVG9IVkZ0VUROclEvQlh5N1pj?=
+ =?utf-8?B?MXhzbjJINmE2SElaM2ZNNDdjbFcxUTFib1hNSFZ5a0ltWUlOZjRBMkJKVC85?=
+ =?utf-8?B?eHljOS8yZVluUGNCV2FwVllzSUJHZ0NqanNQYWFJVHYzQzNRQ2FuSWkwMzVX?=
+ =?utf-8?B?ODdoQy9LbUNnekJKcmFPdzZuczVrdjVBdGRpT2ZLN21KaEppd1grMEw1Qnpa?=
+ =?utf-8?B?cmo2R29HL0ZNM04wai9BeDhLbUZOWEdrR3MrbDBEUUZBTmVlQTkwc2tDWG9z?=
+ =?utf-8?B?Zmgwd3RTQ3BhVFc4eFgzQkExZWRkcW5MUGRiaDdHaklmdzgvOTd3UWpzdkpX?=
+ =?utf-8?B?TmJyQk9jbVNITjlpZFJMU1VlV2Rlam1WajBVRVBZU2FaSVVEalkwL1Z1SHFy?=
+ =?utf-8?B?WENjTktXN2ZWZ3Ixem4vMVlWM0xZNUhJTFdWamJwMEppQWMraisxNUE3VFdz?=
+ =?utf-8?B?NFR6SG81a2lnZ3duQXI3cEs1ZXd4dzl5WHp1N3NON2RqRVFPdnFFZ2ZRdFF2?=
+ =?utf-8?B?K205NWVZZm5FeHJFTzFCd2Rpc2xSUVFWazhCRjYxS1dsY3FLSWJIUWJuMWZ5?=
+ =?utf-8?B?d21FL2JFcTBvcnZwSnNsVjFXQ21NSmo5WWJrYUF3dDdEYzBDVHViZEMvSmY0?=
+ =?utf-8?B?NVZKdjZoOHVHYU02VVpDT09CZmxSeVYyV0M4WEE1Y3F5ajBBS0lLUEk1R2Fz?=
+ =?utf-8?B?cEQ1VkNDSnNJTnd6S2tDSENJZ1F0ZXk4eXk0THdiZklTcmpKQ0MyQlJRR2Zl?=
+ =?utf-8?B?UDEvNVZaemx2VmFrYW1lTG5wdmpiL2xQMm03ZkROQ3NlWXp2a3pCT2pZRWhy?=
+ =?utf-8?B?Tnoxci9YQkpUakVOTHg4bmpMOUhuMEJSMUJoazk5eXBqMWExeERVdnpoclpm?=
+ =?utf-8?B?MUhMVXNkZlZENjFlYmNoR1haaG9sK2VzRUIvRk9HVWtSalRXcFpQRUxnZUVK?=
+ =?utf-8?B?UDUzWlhRYlhlOHdCcm9KeS8weTZKZWgrV1Y1bGQxcHdZb1VLZzFuOWMxTG5U?=
+ =?utf-8?B?eURHQ3lkbjJmbkZseWhlcE9zbmlteHlreWxVdi85Unc1L1IrRVdkTDk3ZkV5?=
+ =?utf-8?B?THRHRGRuMk91ZVhOZWNFZjMwLzZDRkkwOVdPc05IOFd4MjJGT2NpUUd5TlNa?=
+ =?utf-8?B?eUZaOTJ0QlZHT1o2bTFpazgxQXNpYmxRVHNnZGdhNWQwNE9NRlJOaktVc0tY?=
+ =?utf-8?B?Q2lDdGZhWm9OOFprbGQ1MlBaS1VlRjMwT0d4NEY4M3pPK0tiT1FkTzZOd0dN?=
+ =?utf-8?B?ekVOK25SSS93TmRiaXl2RmNXMDBTa1FvWUpGUXQ4VGJzangySEY5MHNUUnVj?=
+ =?utf-8?B?WUpWR1hlU2ZneEpRVWNLVGVHYjVtcGNYVHJKTVNzbFlEWTNRYUFieHNiWVNs?=
+ =?utf-8?B?aGd4elQybzZ3VVZQWDdlVjF1dXlJTy96UC9RTWdBcFF2a0p5N2Z0VEpGVXBC?=
+ =?utf-8?B?REVyRDNlMUY5VDdpUC9keHllMm5TTFlCcW0wMHhsT3hvZFNMaGJVa2VSK2ZS?=
+ =?utf-8?B?dGhZTWErREdKaFNvaXdUL2hwTVRheUNudmhvWW8wRldHYUQ4RWZjTDRNb2dj?=
+ =?utf-8?B?TkQvN2NCNFBxNGlsV3BLa1NZLzkxUDFQUzU5WG5TQ3p0SXg4NnJPQzZYM0NL?=
+ =?utf-8?B?ZS9tRHlMWVhzeEwzZWN5RjRxR0dMTXNrVGpOV3NEQWw0SXlPc0E3ckc0YlB0?=
+ =?utf-8?B?cktTaUFDMHBpNitCd1dqUmVCNW00cjdab3A5VGV6RkgvbEFxQWF0eWM0YlU4?=
+ =?utf-8?B?MmxzbnRKaTVOcGlQakJRL1RnQWRPbC9wK1AwQ1pIcGprQ1cxeUdSVDhPaHBL?=
+ =?utf-8?B?RjJTcGVIdVlIajhaOTRlL2U3VldFQk5wcTdnNHFIRkZyanVTcktsQlVPU1Fi?=
+ =?utf-8?B?Y0NiekUzaUU3STBEdVNJT3EyTk8raWZtREdHYTJZNzVFSVBPenhOSjR0bFoy?=
+ =?utf-8?B?VE5DNjRid0ROZ3F6MXVIeXIzaWU3aDZ1VndXby9OazQvampLMU1UcU00ZVRq?=
+ =?utf-8?B?aDRLQnZkZVZLOG45WWV2aDhjaGRWQ2ZBbVQrMlBQK2hzQks0ZHZQdzA0bTdB?=
+ =?utf-8?B?VXdjRHROR0xKSlNzcWozQVVBV3Axa0NNU2NWaVJZQTJvQmZoUnpCZFNpWkhT?=
+ =?utf-8?B?NVp2MFE3aHFhTWtlakpaZFpmaVZPdE1SQmp1a3VhSENmOWpBL2VXVUVCRkQ3?=
+ =?utf-8?B?eEhsek9tRXl3eEUrQ1BNSmp0U01nPT0=?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5dba044a-e2de-45a0-9172-08d9b0efe746
+X-MS-Exchange-CrossTenant-AuthSource: BLAPR10MB5009.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2021 15:17:47.5789
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: y2rttfmFHrdEx1qmbfS5FbqF+PmwM+74/7g9tc3GuQOHSlxQyEs/eRNG/HT9QsLtodoFW6VNBf3/85NEAwf2gjWcccyaP1cifbKQiDPwPjE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR10MB3010
+X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10180 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 adultscore=0 spamscore=0
+ bulkscore=0 suspectscore=0 mlxscore=0 mlxlogscore=871 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2110150000
+ definitions=main-2111260089
+X-Proofpoint-GUID: Eb5DnLSgO_MFH5cxYu3dLhUBylrSi9j2
+X-Proofpoint-ORIG-GUID: Eb5DnLSgO_MFH5cxYu3dLhUBylrSi9j2
 
 
-On 26.11.21 13:39, Andrew Cooper wrote:
+On 11/24/21 3:53 PM, Oleksandr Tyshchenko wrote:
+> +	if (target_resource != &iomem_resource) {
+> +		tmp_res = kzalloc(sizeof(*tmp_res), GFP_KERNEL);
+> +		if (!res) {
 
 
-Hi Andrew
-
-> On 26/11/2021 07:46, Jan Beulich wrote:
->> On 25.11.2021 23:49, Oleksandr Tyshchenko wrote:
->>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>>
->>> Today I noticed a "note" when building Xen on Arm64 with
->>> aarch64-poky-linux-gcc (GCC) 9.3.0. It turned out that Andrew Cooper
->>> had alredy reported it before [1]:
->>>
->>> mem_access.c: In function 'p2m_mem_access_check':
->>> mem_access.c:227:6: note: parameter passing for argument of type
->>> 'const struct npfec' changed in GCC 9.1
->>>    227 | bool p2m_mem_access_check(paddr_t gpa, vaddr_t gla,
->>>                                    const struct npfec npfec)
->>>
->>>  From the explanation I understand that nothing bad actually is going
->>> to happen in our case, it is harmless and shown to only draw our
->>> attention that the ABI changed due to bug (with passing bit-fields
->>> by value) fixed in GCC 9.1. This information doesn't mean much for us
->>> as Xen is an embedded project with no external linkage. But, of course,
->>> it would be better to eliminate the note. You can also find related
->>> information about the bug at [2].
->>>
->>> So make the note go away by passing bit-fields by reference.
->>>
->>> [1] https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg87439.html
->>> [2] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=88469
->>>
->>> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
->>> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>> ---
->>> Compile-tested only.
->>> ---
->>>   xen/arch/arm/mem_access.c        | 28 ++++++++++++++--------------
->>>   xen/arch/arm/traps.c             |  2 +-
->>>   xen/include/asm-arm/mem_access.h |  2 +-
->>>   3 files changed, 16 insertions(+), 16 deletions(-)
->> It's all Arm code, so I'm not the one to judge, but I'd like to recommend
->> to live with the note or convince distros to backport the gcc side fix.
->> This definitely was a compiler flaw; see
->> https://gcc.gnu.org/bugzilla/show_bug.cgi?id=91710.
-> I too would recommend just living with the note.  The code change
-> proposed is a backwards step in terms of runtime complexity - you're now
-> passing around a pointer to 7 bits of information, which the compiler
-> cannot pull into a local because of C's aliasing rules.  At a guess, the
-> very best an optimising compiler could do is turn it into only two
-> dereferences of the pointer.
-
-Thank you for the analysis. I don't think, we want to make things worse 
-(less optimal) than they are currently.
+If (!tmp_res)
 
 
->
-> ~Andrew
-
--- 
-Regards,
-
-Oleksandr Tyshchenko
-
+> +			ret = -ENOMEM;
+> +			goto err_insert;
+> +		}
 
