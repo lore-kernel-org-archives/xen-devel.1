@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 313EDC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232831.403941 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62A93C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232834.403947 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawu-0002GJ-7I; Fri, 26 Nov 2021 13:07:32 +0000
+	id 1mqawv-0002Na-61; Fri, 26 Nov 2021 13:07:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232831.403941; Fri, 26 Nov 2021 13:07:32 +0000
+Received: by outflank-mailman (output) from mailman id 232834.403947; Fri, 26 Nov 2021 13:07:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawt-0002EF-MQ; Fri, 26 Nov 2021 13:07:31 +0000
-Received: by outflank-mailman (input) for mailman id 232831;
- Fri, 26 Nov 2021 13:07:29 +0000
+	id 1mqawu-0002K3-90; Fri, 26 Nov 2021 13:07:32 +0000
+Received: by outflank-mailman (input) for mailman id 232834;
+ Fri, 26 Nov 2021 13:07:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavm-0003W9-0I
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:22 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a57716ae-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:06:20 +0100 (CET)
+ id 1mqauz-0003W9-DW
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:33 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 85fddd33-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:26 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a57716ae-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 85fddd33-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931980;
+  d=citrix.com; s=securemail; t=1637931926;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=WTIRJTAjCr7fLAVZPwIgCZwnRELjNRnUT72EuTQsn8A=;
-  b=GTI0ITRoK/KTNMCGL5ikwqvqc5NedEm+4RfZXgNGb8mGYWQ8oMS6mZqD
-   5Hq9+fASZiXWyCFMrBXn61A8bEPO4Hhx+kDziMRYx/HluN+dKKXNKrLlm
-   uumVkC6MmoZtkX0gI0j080+def9aYCq8PYAOc0qc2mXOml2Xucyb1poPh
-   0=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: /9KGlOuy6Tx9M98ey6QNrBzDzYpB52YceVWdKiE4VRJG+h33+wRSnDJeGE3By+kCxjPe50poE4
- EBr90O2Fe3nUR0769x50SUg/TLj1z2CBgGrWkbGqwEP6fF/+uP6Mxl+cbGrr/61qPZiw9QDdFu
- Udm8gTv8bQ6vW+YvjctlMxWhzLzi/miP0m1HDfS3d21y2/BgF+sNcWZYrAqixu6CXMvMGCWt/y
- MqdoVUGNbZzvuv8R+8K8wmCiU9j75Kt0+2zZlNwCWYuZ/Ov4S97RxdXrheT3ltPj+ezcfElveg
- +mxQtNPMwFwgFoB74WrEApfA
+  bh=/bd2B5JZciwzE0+dMFIIH8KGXsdKJbiMpcA3tfgV6qI=;
+  b=SLGI0254T9VpElD45XhyqRsctBGtlclB7XQKXU3d1hpfJCp4hD8iKdJy
+   N+ji/VC2804D0nXk6uzM5frH3NlvqYl1I5SIrhh4aMUAJYWum0FMTDmXG
+   dileimY3NOM0IMDj8TNzDCINfysrTzyE5FFTxadd6G1ZtdfqbvTGb+1LX
+   Y=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 0VJ2VbQS0zNheQg0h9xjkyhHsASv7a5dOFTxhYilSCwNr3j0B1FRaOedFFg/lPGWHzIDGsFF3X
+ oPBzHHrz1karrjowWj8EyjucIMekvPWhhld5b7oiPSNKba5sXrVp2U3AxBQH0nxd1h0yseAXF/
+ xPF5WfHHifL6Xaalc7MiY2DB3CnguJ2Fvy8OLW3QjaHsO9teLD4wrvz6fpPIuv4S7eXnGs+zli
+ O1DWBhSPudphVpaSifwp9s4R8PIIz+yn5EnyPh2l7gvdvn7u5DyrQOFs4+/PXdSEJq0VeEFdlF
+ kQixZx/2ecQKVpAUzS/KYunu
 X-SBRS: 5.1
-X-MesageID: 58696049
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 60695278
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:PHFOvarbvgBxPapGai1UZzw75jleBmLVYhIvgKrLsJaIsI4StFCzt
- garIBmOO/aMNzfzLY0gO4ni9UkFuZbVm9FrGQNkqH9jFnsS9ZuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2ILnW1nlV
- e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
- 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
- DlCnY6VdC04G5fHosYEfV5YPid/Y4RJ1ZaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
- 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
- ppHOGQ3MEWojxtnGUUqOLRgxt+RvWDccj8Jp1iK+YUp7D2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
- 2SA+H72ajk4HtGCzTuO8lq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
- FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcUozTyn24/u6Dy7H0ZDThNHaYIPu+IfEGlCO
- kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdQGmom
- 1i3QD4Ca6L/ZCLh/4Gy5hj5jj2lvfAlpSZlt1yMDgpJAu6UDbNJhrBEC3CHsp6sz67DFzFtW
- UTofeDFt4ji6rnXyUSwrB0lRu3B2hp8GGS0baRTN5cg7S+x3HWoYJpd5jpzTG8wbJ1bKWG0P
- x6P518KjHO2AJdMRfQsC25WI553pZUM6Py/DqyEBjawSsQZmPC7ENFGOhfLgjGFfLkEmqAjI
- 5aLGftA/l5BYZmLOAGeHr9HuZdyn3hW7TqKGfjTkkT2uZLDNSX9YepUbzOzghURsfrsTPP9q
- I0EaaNnCnx3DYXDX8Ug2dJJcA1RcyFkXcueRg4+XrfrHzeK0VoJU5f5qY7NsaQ+90iMvuuXr
- Hy7RGFCz1/z2S/OJQmQMygxY7LzR5dv63k8OHV0b1qv3nEiZ6ep7bseKMRrLeV2qrQ7wK4mV
- eQBduWBHu9LFmbN9QMCYMSvt4dlbhmq216DZnL3fDglcpd8bAXV4du4LBD3/SwDA3Pv58szq
- rGtzC3BRp8HS1gwBcracqv3nViwoWIciKR5WE6Reotff0Dl8Y5LLS3tj6Bof5FQeEubnjbDj
- lSYGxYVo+XJsrQZytiRiPDWtZqtHst/AlFeQzvR44GpOHSI5WGk24JBDrqFJGiPSGPu9ay+T
- uxJ1PWgYuYflVNHvocgQbZmyaUyu4nmq7NAl1k2GXzKaxKgC696I2nA1s5K7/UfyrhcsAqwe
- 0SO5tgFZunZZJK7SAYcdFg/c+CO9fAIgT2Dv/06LXLz6DJz4LfaA15ZOAOBiXAFIbZ4WG//L
- TzNZCLCB9SDtycX
-IronPort-HdrOrdr: A9a23:YLOTgqy3ss8Ye9AVETqxKrPwFL1zdoMgy1knxilNoRw8SKKlfq
- eV7Y0mPH7P+VAssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
- 4JSdkHNDSaNzlHZKjBjzVQa+xQouW6zA==
+IronPort-Data: A9a23:WoulwKATvpnLFBVW/9zkw5YqxClBgxIJ4kV8jS/XYbTApDh0hTBWz
+ mJNW2jQMvfbYGP0L48jOt/g8xsE7J/Sy9JlQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX5400w7wYbVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/jnbOpuxo6
+ ddxtN+rYkQqFajItcY4TEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcGhGlh25oRTZ4yY
+ eI7eQhJMSnFYyFIJw0XCaM3rtWsh3bgJmgwRFW9+vNsvjm7IBZK+KfpGMrYfJqNX8o9tkSFo
+ mPL+UzpDxdcM8aQoRKe6W6ljOLLmSL9WaoRGae++/osh0ecrkQDBRtTWValrP2Rjk+lR8kZO
+ 0ES4jApr6U56AqsVNaVdz+SrWOAvxUcc8FNCOB84waIopc4+C7AWDJCFGQYLoV76olmHlTGy
+ 2NlgfvsRntWjKS0S06ctay/7jCZPCw4D0odMHpsoRQ+3/Hvp4Q6jxTqR9llEbKogtCdJQwc0
+ wxmvwBl2exN0JdjO7GTuAme3mny/sShohsdv12PBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
+ 1BUypHFvIji4Xxg/RFhodnh/pn1uJ5p0xWG2DaD+qXNERz2oBZPmqgKvVlDyL9BaJpsRNMQS
+ Ba7VfltzJFSJmC2SqR8fpi8Dc8npYC5S4+6Bq6JMYsSPMQqHONiwM2ITRXLt4wKuBJx+ZzTx
+ L/BKZr8ZZrkIfgPIMWKqxc1juZwm3FWKZL7TpHn1RW3uYdyl1bOIYrpxGCmN7hjhIvd+V292
+ 48Ga6OilkUOOMWjM3K/2dNCcjg3wY0TWMmeRzp/LbXYfGKL2QgJVpfs/F/WU9A/wvkOyL6Xp
+ irVt40x4AOXuEAr4D6iMhhLAI4Dl74lxZ7iFSBzb1uuxVY5ZoOjsPUWe5ctJOF1/+1/1/9kC
+ fICfpzYUPhITz3G/RUbbIX889M+JEj621rWMnr3eiU7cr5hWxfNpo3ucDzw+XRcFSGwr8Y//
+ eGtj1uJXZoZSg1+J8/Kc/bznUiptH0QlbsqDUvFK9VeYmv2941uJ3Cjh/M7OZhUex7C2iGbx
+ 0CdBhJB/bvBpIo88d/og6GYrtj2T7siTxQCR2SCtOS4LyjX+Gan0LRsaufQcGCPTn7w9YWje
+ f5Rk6P2PsoYkQsYqIF7Cbtqk/4zvoO9u79Aww14N3zXdFD3WKh4K3yL0MQT5K1AwrhV5Vm/V
+ k6Vo4QIPLyIPIXuEUILJRpjZeOGjKlGlj7X5PUzAUP7+C4oo+bXDRQMZ0GB2H5HMb94EII52
+ uNw6scZ5ju2hgcuLtvb3Dtf8H6BLyBYXqgq3n3A7FQHVub/Jol+XKHh
+IronPort-HdrOrdr: A9a23:SwZyDa9XhqFTZsU/0rJuk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
+ re5cjztCWE7gr5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
+ 9bAtBD4bbLbGSS4/yU3ODBKadD/OW6
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58696049"
+   d="scan'208";a="60695278"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 32/65] x86/power: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:13 +0000
-Message-ID: <20211126123446.32324-33-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 25/65] xen/console: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:06 +0000
+Message-ID: <20211126123446.32324-26-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,186 +103,258 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-cpufreq_governor_dbs() has no external callers so make it static.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/acpi/cpufreq/cpufreq.c    | 14 +++++++-------
- xen/arch/x86/acpi/cpufreq/powernow.c   | 15 ++++++++-------
- xen/common/core_parking.c              |  4 ++--
- xen/drivers/cpufreq/cpufreq_ondemand.c |  6 ++++--
- xen/include/acpi/cpufreq/cpufreq.h     |  1 -
- 5 files changed, 21 insertions(+), 19 deletions(-)
+ xen/drivers/char/console.c   |  4 ++--
+ xen/drivers/char/ehci-dbgp.c | 24 +++++++++++++-----------
+ xen/drivers/char/ns16550.c   | 26 +++++++++++++-------------
+ 3 files changed, 28 insertions(+), 26 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index 8133c2dd958c..c27cbb2304f2 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -320,7 +320,7 @@ unsigned int get_measured_perf(unsigned int cpu, unsigned int flag)
-     return policy->cpuinfo.max_freq * perf_percent / 100;
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 380765ab02fd..d9d6556c2293 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -552,7 +552,7 @@ static void __serial_rx(char c, struct cpu_user_regs *regs)
+ #endif
  }
  
--static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
-+static unsigned int cf_check get_cur_freq_on_cpu(unsigned int cpu)
+-static void serial_rx(char c, struct cpu_user_regs *regs)
++static void cf_check serial_rx(char c, struct cpu_user_regs *regs)
  {
-     struct cpufreq_policy *policy;
-     struct acpi_cpufreq_data *data;
-@@ -369,8 +369,9 @@ static unsigned int check_freqs(const cpumask_t *mask, unsigned int freq,
+     static int switch_code_count = 0;
+ 
+@@ -1286,7 +1286,7 @@ void panic(const char *fmt, ...)
+  * **************************************************************
+  */
+ 
+-static void suspend_steal_fn(const char *str, size_t nr) { }
++static void cf_check suspend_steal_fn(const char *str, size_t nr) { }
+ static int suspend_steal_id;
+ 
+ int console_suspend(void)
+diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
+index a6b57fdf2d19..e205c0da6a61 100644
+--- a/xen/drivers/char/ehci-dbgp.c
++++ b/xen/drivers/char/ehci-dbgp.c
+@@ -1000,13 +1000,15 @@ static int ehci_dbgp_external_startup(struct ehci_dbgp *dbgp)
+ 
+ typedef void (*set_debug_port_t)(struct ehci_dbgp *, unsigned int);
+ 
+-static void default_set_debug_port(struct ehci_dbgp *dbgp, unsigned int port)
++static void cf_check default_set_debug_port(
++    struct ehci_dbgp *dbgp, unsigned int port)
+ {
+ }
+ 
+ static set_debug_port_t __read_mostly set_debug_port = default_set_debug_port;
+ 
+-static void nvidia_set_debug_port(struct ehci_dbgp *dbgp, unsigned int port)
++static void cf_check nvidia_set_debug_port(
++    struct ehci_dbgp *dbgp, unsigned int port)
+ {
+     uint32_t dword = pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot,
+                                               dbgp->func), 0x74);
+@@ -1167,7 +1169,7 @@ static inline void _ehci_dbgp_flush(struct ehci_dbgp *dbgp)
+     dbgp->out.chunk = 0;
+ }
+ 
+-static void ehci_dbgp_flush(struct serial_port *port)
++static void cf_check ehci_dbgp_flush(struct serial_port *port)
+ {
+     struct ehci_dbgp *dbgp = port->uart;
+     s_time_t goal;
+@@ -1196,7 +1198,7 @@ static void ehci_dbgp_flush(struct serial_port *port)
+        set_timer(&dbgp->timer, goal);
+ }
+ 
+-static void ehci_dbgp_putc(struct serial_port *port, char c)
++static void cf_check ehci_dbgp_putc(struct serial_port *port, char c)
+ {
+     struct ehci_dbgp *dbgp = port->uart;
+ 
+@@ -1209,7 +1211,7 @@ static void ehci_dbgp_putc(struct serial_port *port, char c)
+         ehci_dbgp_flush(port);
+ }
+ 
+-static int ehci_dbgp_tx_ready(struct serial_port *port)
++static int cf_check ehci_dbgp_tx_ready(struct serial_port *port)
+ {
+     struct ehci_dbgp *dbgp = port->uart;
+ 
+@@ -1228,7 +1230,7 @@ static int ehci_dbgp_tx_ready(struct serial_port *port)
+            (dbgp->state == dbgp_idle) * DBGP_MAX_PACKET;
+ }
+ 
+-static int ehci_dbgp_getc(struct serial_port *port, char *pc)
++static int cf_check ehci_dbgp_getc(struct serial_port *port, char *pc)
+ {
+     struct ehci_dbgp *dbgp = port->uart;
+ 
+@@ -1309,7 +1311,7 @@ static bool_t ehci_dbgp_setup_preirq(struct ehci_dbgp *dbgp)
      return 0;
  }
  
--static int acpi_cpufreq_target(struct cpufreq_policy *policy,
--                               unsigned int target_freq, unsigned int relation)
-+static int cf_check acpi_cpufreq_target(
-+    struct cpufreq_policy *policy,
-+    unsigned int target_freq, unsigned int relation)
+-static void __init ehci_dbgp_init_preirq(struct serial_port *port)
++static void __init cf_check ehci_dbgp_init_preirq(struct serial_port *port)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
-     struct processor_performance *perf;
-@@ -449,7 +450,7 @@ static int acpi_cpufreq_target(struct cpufreq_policy *policy,
-     return result;
+     struct ehci_dbgp *dbgp = port->uart;
+     u32 debug_port, offset;
+@@ -1358,7 +1360,7 @@ static void ehci_dbgp_setup_postirq(struct ehci_dbgp *dbgp)
+     set_timer(&dbgp->timer, NOW() + MILLISECS(1));
  }
  
--static int acpi_cpufreq_verify(struct cpufreq_policy *policy)
-+static int cf_check acpi_cpufreq_verify(struct cpufreq_policy *policy)
+-static void __init ehci_dbgp_init_postirq(struct serial_port *port)
++static void __init cf_check ehci_dbgp_init_postirq(struct serial_port *port)
  {
-     struct acpi_cpufreq_data *data;
-     struct processor_performance *perf;
-@@ -494,8 +495,7 @@ acpi_cpufreq_guess_freq(struct acpi_cpufreq_data *data, unsigned int cpu)
+     struct ehci_dbgp *dbgp = port->uart;
+ 
+@@ -1409,12 +1411,12 @@ static int ehci_dbgp_check_release(struct ehci_dbgp *dbgp)
+     return 0;
+ }
+ 
+-static void __init ehci_dbgp_endboot(struct serial_port *port)
++static void __init cf_check ehci_dbgp_endboot(struct serial_port *port)
+ {
+     ehci_dbgp_check_release(port->uart);
+ }
+ 
+-static void ehci_dbgp_suspend(struct serial_port *port)
++static void cf_check ehci_dbgp_suspend(struct serial_port *port)
+ {
+     struct ehci_dbgp *dbgp = port->uart;
+ 
+@@ -1431,7 +1433,7 @@ static void ehci_dbgp_suspend(struct serial_port *port)
+     dbgp->state = dbgp_unsafe;
+ }
+ 
+-static void ehci_dbgp_resume(struct serial_port *port)
++static void cf_check ehci_dbgp_resume(struct serial_port *port)
+ {
+     struct ehci_dbgp *dbgp = port->uart;
+ 
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 990cad39fe85..8df1ee4d5c2c 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -174,7 +174,7 @@ static void handle_dw_usr_busy_quirk(struct ns16550 *uart)
      }
  }
  
--static int 
--acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
-+static int cf_check acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
+-static void ns16550_interrupt(
++static void cf_check ns16550_interrupt(
+     int irq, void *dev_id, struct cpu_user_regs *regs)
  {
-     unsigned int i;
-     unsigned int valid_states = 0;
-@@ -609,7 +609,7 @@ acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
-     return result;
+     struct serial_port *port = dev_id;
+@@ -239,7 +239,7 @@ static void cf_check ns16550_poll(void *data)
+ #endif
  }
  
--static int acpi_cpufreq_cpu_exit(struct cpufreq_policy *policy)
-+static int cf_check acpi_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+-static int ns16550_tx_ready(struct serial_port *port)
++static int cf_check ns16550_tx_ready(struct serial_port *port)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
+     struct ns16550 *uart = port->uart;
  
-diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
-index ca71ecf72d67..d4c7dcd5d99d 100644
---- a/xen/arch/x86/acpi/cpufreq/powernow.c
-+++ b/xen/arch/x86/acpi/cpufreq/powernow.c
-@@ -67,8 +67,8 @@ static void cf_check update_cpb(void *data)
-     }
+@@ -250,13 +250,13 @@ static int ns16550_tx_ready(struct serial_port *port)
+               uart->lsr_mask ) == uart->lsr_mask ) ? uart->fifo_size : 0;
  }
  
--static int powernow_cpufreq_update (int cpuid,
--				     struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_update(
-+    int cpuid, struct cpufreq_policy *policy)
+-static void ns16550_putc(struct serial_port *port, char c)
++static void cf_check ns16550_putc(struct serial_port *port, char c)
  {
-     if (!cpumask_test_cpu(cpuid, &cpu_online_map))
-         return -EINVAL;
-@@ -78,8 +78,9 @@ static int powernow_cpufreq_update (int cpuid,
-     return 0;
+     struct ns16550 *uart = port->uart;
+     ns_write_reg(uart, UART_THR, c);
  }
  
--static int powernow_cpufreq_target(struct cpufreq_policy *policy,
--                               unsigned int target_freq, unsigned int relation)
-+static int cf_check powernow_cpufreq_target(
-+    struct cpufreq_policy *policy,
-+    unsigned int target_freq, unsigned int relation)
+-static int ns16550_getc(struct serial_port *port, char *pc)
++static int cf_check ns16550_getc(struct serial_port *port, char *pc)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
-     struct processor_performance *perf;
-@@ -180,7 +181,7 @@ static void cf_check get_cpu_data(void *arg)
-         amd_fixup_frequency(&perf->states[i]);
+     struct ns16550 *uart = port->uart;
+ 
+@@ -344,7 +344,7 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
+                  UART_FCR_ENABLE | UART_FCR_CLRX | UART_FCR_CLTX | UART_FCR_TRG14);
  }
  
--static int powernow_cpufreq_verify(struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_verify(struct cpufreq_policy *policy)
+-static void __init ns16550_init_preirq(struct serial_port *port)
++static void __init cf_check ns16550_init_preirq(struct serial_port *port)
  {
-     struct acpi_cpufreq_data *data;
-     struct processor_performance *perf;
-@@ -197,7 +198,7 @@ static int powernow_cpufreq_verify(struct cpufreq_policy *policy)
-     return cpufreq_frequency_table_verify(policy, data->freq_table);
+     struct ns16550 *uart = port->uart;
+ 
+@@ -373,7 +373,7 @@ static void __init ns16550_init_preirq(struct serial_port *port)
+         uart->fifo_size = 16;
  }
  
--static int powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
+-static void __init ns16550_init_irq(struct serial_port *port)
++static void __init cf_check ns16550_init_irq(struct serial_port *port)
  {
-     unsigned int i;
-     unsigned int valid_states = 0;
-@@ -303,7 +304,7 @@ static int powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
-     return result;
+ #ifdef NS16550_PCI
+     struct ns16550 *uart = port->uart;
+@@ -399,7 +399,7 @@ static void ns16550_setup_postirq(struct ns16550 *uart)
+         set_timer(&uart->timer, NOW() + MILLISECS(uart->timeout_ms));
  }
  
--static int powernow_cpufreq_cpu_exit(struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+-static void __init ns16550_init_postirq(struct serial_port *port)
++static void __init cf_check ns16550_init_postirq(struct serial_port *port)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
- 
-diff --git a/xen/common/core_parking.c b/xen/common/core_parking.c
-index 4afad04f2f68..c4f01291c0be 100644
---- a/xen/common/core_parking.c
-+++ b/xen/common/core_parking.c
-@@ -53,7 +53,7 @@ static int __init cf_check setup_core_parking_option(const char *str)
- }
- custom_param("core_parking", setup_core_parking_option);
- 
--static unsigned int core_parking_performance(unsigned int event)
-+static unsigned int cf_check core_parking_performance(unsigned int event)
- {
-     unsigned int cpu = -1;
- 
-@@ -111,7 +111,7 @@ static unsigned int core_parking_performance(unsigned int event)
-     return cpu;
+     struct ns16550 *uart = port->uart;
+     int rc, bits;
+@@ -491,7 +491,7 @@ static void __init ns16550_init_postirq(struct serial_port *port)
+     ns16550_setup_postirq(uart);
  }
  
--static unsigned int core_parking_power(unsigned int event)
-+static unsigned int cf_check core_parking_power(unsigned int event)
+-static void ns16550_suspend(struct serial_port *port)
++static void cf_check ns16550_suspend(struct serial_port *port)
  {
-     unsigned int cpu = -1;
+     struct ns16550 *uart = port->uart;
  
-diff --git a/xen/drivers/cpufreq/cpufreq_ondemand.c b/xen/drivers/cpufreq/cpufreq_ondemand.c
-index ba03eaa2336d..fbcd14d6c32f 100644
---- a/xen/drivers/cpufreq/cpufreq_ondemand.c
-+++ b/xen/drivers/cpufreq/cpufreq_ondemand.c
-@@ -215,7 +215,8 @@ static void dbs_timer_exit(struct cpu_dbs_info_s *dbs_info)
-     kill_timer(&per_cpu(dbs_timer, dbs_info->cpu));
+@@ -543,7 +543,7 @@ static void cf_check ns16550_delayed_resume(void *data)
+         _ns16550_resume(port);
  }
  
--int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event)
-+static int cf_check cpufreq_governor_dbs(
-+    struct cpufreq_policy *policy, unsigned int event)
+-static void ns16550_resume(struct serial_port *port)
++static void cf_check ns16550_resume(struct serial_port *port)
  {
-     unsigned int cpu = policy->cpu;
-     struct cpu_dbs_info_s *this_dbs_info;
-@@ -307,7 +308,8 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event)
-     return 0;
+     struct ns16550 *uart = port->uart;
+ 
+@@ -569,7 +569,7 @@ static void ns16550_resume(struct serial_port *port)
+         _ns16550_resume(port);
  }
  
--static bool_t __init cpufreq_dbs_handle_option(const char *name, const char *val)
-+static bool __init cf_check cpufreq_dbs_handle_option(
-+    const char *name, const char *val)
+-static void __init ns16550_endboot(struct serial_port *port)
++static void __init cf_check ns16550_endboot(struct serial_port *port)
  {
-     if ( !strcmp(name, "rate") && val )
-     {
-diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
-index 4958d3f7d315..e5e58c6c30ea 100644
---- a/xen/include/acpi/cpufreq/cpufreq.h
-+++ b/xen/include/acpi/cpufreq/cpufreq.h
-@@ -227,7 +227,6 @@ struct cpu_dbs_info_s {
-     int8_t stoppable;
- };
+ #ifdef CONFIG_HAS_IOPORTS
+     struct ns16550 *uart = port->uart;
+@@ -583,13 +583,13 @@ static void __init ns16550_endboot(struct serial_port *port)
+ #endif
+ }
  
--int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event);
- int get_cpufreq_ondemand_para(uint32_t *sampling_rate_max,
-                               uint32_t *sampling_rate_min,
-                               uint32_t *sampling_rate,
+-static int __init ns16550_irq(struct serial_port *port)
++static int __init cf_check ns16550_irq(struct serial_port *port)
+ {
+     struct ns16550 *uart = port->uart;
+     return ((uart->irq > 0) ? uart->irq : -1);
+ }
+ 
+-static void ns16550_start_tx(struct serial_port *port)
++static void cf_check ns16550_start_tx(struct serial_port *port)
+ {
+     struct ns16550 *uart = port->uart;
+     u8 ier = ns_read_reg(uart, UART_IER);
+@@ -599,7 +599,7 @@ static void ns16550_start_tx(struct serial_port *port)
+         ns_write_reg(uart, UART_IER, ier | UART_IER_ETHREI);
+ }
+ 
+-static void ns16550_stop_tx(struct serial_port *port)
++static void cf_check ns16550_stop_tx(struct serial_port *port)
+ {
+     struct ns16550 *uart = port->uart;
+     u8 ier = ns_read_reg(uart, UART_IER);
 -- 
 2.11.0
 
