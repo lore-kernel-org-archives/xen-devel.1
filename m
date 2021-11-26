@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93AA0C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232830.403936 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 313EDC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232831.403941 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawt-0002B4-DH; Fri, 26 Nov 2021 13:07:31 +0000
+	id 1mqawu-0002GJ-7I; Fri, 26 Nov 2021 13:07:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232830.403936; Fri, 26 Nov 2021 13:07:31 +0000
+Received: by outflank-mailman (output) from mailman id 232831.403941; Fri, 26 Nov 2021 13:07:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawt-00029P-3a; Fri, 26 Nov 2021 13:07:31 +0000
-Received: by outflank-mailman (input) for mailman id 232830;
- Fri, 26 Nov 2021 13:07:28 +0000
+	id 1mqawt-0002EF-MQ; Fri, 26 Nov 2021 13:07:31 +0000
+Received: by outflank-mailman (input) for mailman id 232831;
+ Fri, 26 Nov 2021 13:07:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavC-0003W9-8c
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:46 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8feca44d-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:44 +0100 (CET)
+ id 1mqavm-0003W9-0I
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:22 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a57716ae-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:06:20 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8feca44d-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: a57716ae-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931944;
+  d=citrix.com; s=securemail; t=1637931980;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=C0fvCAztg5DLCbQmwvTpZ/liPDfc2zf7QofwX/rYxoo=;
-  b=bjn59gQxhJe8w4b+m4YTxSafCP7WAd4gOy3PsT/hXn9UUtyCcw7YIiGE
-   2VGu3g+jajlIngtnfsVAjjY021P+g+e+aVRmAAdGIT3VNVII3qQjKayoS
-   WpZr0uxQiT5C1Bxdx9ipHG3yzkPVSrN8MW7Rq5wo8ZXaVqX+Klz6aLjm0
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: V0Oea6tppHveq4nfNZk7eroUZtBeGaTarmOZyoexrR76Bav50ggoXIfYVJumk9K/qs3x0d3+Zn
- bIk5q/V+btfaFNnBV7cmdY4cswEVEajmn0d7tpgzhVYVVra1bUa6cQzG5Bppfo4QpW69KA6Pn2
- lkW2g9oh3tFFOZMH12w81qCrsjdoun8b0V2KEwzdWpnQUlunKiQXbvRbg4QChL2yWCSgS0NMl0
- A4lz2wyKND4r0tNxcTZsixLebwA3Y6ZZ2VceFEMkizf+SNEKFgAHDsqBrz7QZXQH55buRW4Pu5
- FnGwQvpaWumc8fpT4U1PPtb6
+  bh=WTIRJTAjCr7fLAVZPwIgCZwnRELjNRnUT72EuTQsn8A=;
+  b=GTI0ITRoK/KTNMCGL5ikwqvqc5NedEm+4RfZXgNGb8mGYWQ8oMS6mZqD
+   5Hq9+fASZiXWyCFMrBXn61A8bEPO4Hhx+kDziMRYx/HluN+dKKXNKrLlm
+   uumVkC6MmoZtkX0gI0j080+def9aYCq8PYAOc0qc2mXOml2Xucyb1poPh
+   0=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: /9KGlOuy6Tx9M98ey6QNrBzDzYpB52YceVWdKiE4VRJG+h33+wRSnDJeGE3By+kCxjPe50poE4
+ EBr90O2Fe3nUR0769x50SUg/TLj1z2CBgGrWkbGqwEP6fF/+uP6Mxl+cbGrr/61qPZiw9QDdFu
+ Udm8gTv8bQ6vW+YvjctlMxWhzLzi/miP0m1HDfS3d21y2/BgF+sNcWZYrAqixu6CXMvMGCWt/y
+ MqdoVUGNbZzvuv8R+8K8wmCiU9j75Kt0+2zZlNwCWYuZ/Ov4S97RxdXrheT3ltPj+ezcfElveg
+ +mxQtNPMwFwgFoB74WrEApfA
 X-SBRS: 5.1
-X-MesageID: 60695296
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 58696049
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:DNub8qwT/vDpn5CjxYJ6t+fCwSrEfRIJ4+MujC+fZmUNrF6WrkVSz
- TFMWDvXPvbYYTagKNt1YNzl9B9QvJPUyN5mSAVv/CAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAuLeNYYH1500s6wrRn2tQAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt4Bg4
- 9tdkqWBcCEKZIzSs/4aehZfDggraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JgQTKuEN
- pRxhTxHVFPPSixDOAkuAtEQu+Git2LPYhBDpwfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
- krE4mD4DxcyJNGZjz2f/RqEnfTTlCn2XIYTEryQ9fNwhlCXgGsJB3U+RVa95PW0lEO6c9ZeM
- FAPvDojq7Ao806mRcW7WAe3yFamlBMBX9tbE8Uh9RqAjKHT5m6k6nMsF2AbLoZ87YlvGGJsh
- gThc87V6SJH4Ky+R2K6z4atixDoGDY+N2graigZZF5QizX8m70bghXKR9dlNae6iNzpBD39q
- wy3QDgCa6Y71pBSifjilbzTq3f1/8WSEFZpjunCdjv9tlsRWWKzW2C/BbE3B95kJZ3RcFSOt
- WNsdyO2vLFXVsHleMBgrYww8FCVCxStbGK0bb1HRcBJG9GRF5iLJts4DNZWfhoBDyr8UWW1C
- HI/QCsIjHOpAFOkbLVsf6W6ANkwwK7rGLzND66PMYoQP8cgKFHbp0mCgHJ8OUi2yyDAdollZ
- P+mnTuEVy5GWcyLMhLqLwvi7VPb7n9nnj6CLXwK5x+mzaCfdBaopUQtazOzghQCxPrc+m39q
- o8HX+PTkkk3eLCuM0H/rN9IRXhXfCdTOHwDg5EOHgJ1ClE9Qz9J5j646e5JRrGJaIwJzLqVp
- S/kBRcDoLc97FWeQTi3hrlYQOuHdf5CQbgTZ0TA5H6khCouZ5iB9qAae8dldLUr7rU7n/V1U
- +MEa4OLBfEWEmbL/DEUbJ/cqo1+dUv02VLSbnT9ODVvLYR9QwHp+8P/ele9/ic5ESfq59A1p
- Ket112HTMNbFRhiFsvfdNmm00i14SoGgOt3UkaReotTdUzg/ZJEMSv0ivNrccgAJQ+anmmR1
- hqMAAderu7I+tdn/N7MjKGCjoGoD+ohQRYKQziFte67bHCI8HCizIlMVPezUQrcDG6kqr+/Y
- eh1zu3nNKFVllh9rIchQa1gyrgz5oWzquYCnBhkBnjCc3+iFqhkfiudxcBKu6BAmu1ZtA+xV
- h7d89VWI+zUasbsEVpXLws5dOWTk/oTn2CKv/gyJUz74g5x/aaGDhoOb0Xd1nQFIesnKp4hz
- McgpNUSul62hRcdO9qbijxZqjaXJXsaXqR77pwXDecHUObwJo2utXAENhLL3Q==
-IronPort-HdrOrdr: A9a23:8e4WbqwjbRshkAfMsrBPKrPwFL1zdoMgy1knxilNoRw8SKKlfq
+IronPort-Data: A9a23:PHFOvarbvgBxPapGai1UZzw75jleBmLVYhIvgKrLsJaIsI4StFCzt
+ garIBmOO/aMNzfzLY0gO4ni9UkFuZbVm9FrGQNkqH9jFnsS9ZuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2ILnW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnY6VdC04G5fHosYEfV5YPid/Y4RJ1ZaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ ppHOGQ3MEWojxtnGUUqOLRgxt+RvWDccj8Jp1iK+YUp7D2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
+ 2SA+H72ajk4HtGCzTuO8lq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcUozTyn24/u6Dy7H0ZDThNHaYIPu+IfEGlCO
+ kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdQGmom
+ 1i3QD4Ca6L/ZCLh/4Gy5hj5jj2lvfAlpSZlt1yMDgpJAu6UDbNJhrBEC3CHsp6sz67DFzFtW
+ UTofeDFt4ji6rnXyUSwrB0lRu3B2hp8GGS0baRTN5cg7S+x3HWoYJpd5jpzTG8wbJ1bKWG0P
+ x6P518KjHO2AJdMRfQsC25WI553pZUM6Py/DqyEBjawSsQZmPC7ENFGOhfLgjGFfLkEmqAjI
+ 5aLGftA/l5BYZmLOAGeHr9HuZdyn3hW7TqKGfjTkkT2uZLDNSX9YepUbzOzghURsfrsTPP9q
+ I0EaaNnCnx3DYXDX8Ug2dJJcA1RcyFkXcueRg4+XrfrHzeK0VoJU5f5qY7NsaQ+90iMvuuXr
+ Hy7RGFCz1/z2S/OJQmQMygxY7LzR5dv63k8OHV0b1qv3nEiZ6ep7bseKMRrLeV2qrQ7wK4mV
+ eQBduWBHu9LFmbN9QMCYMSvt4dlbhmq216DZnL3fDglcpd8bAXV4du4LBD3/SwDA3Pv58szq
+ rGtzC3BRp8HS1gwBcracqv3nViwoWIciKR5WE6Reotff0Dl8Y5LLS3tj6Bof5FQeEubnjbDj
+ lSYGxYVo+XJsrQZytiRiPDWtZqtHst/AlFeQzvR44GpOHSI5WGk24JBDrqFJGiPSGPu9ay+T
+ uxJ1PWgYuYflVNHvocgQbZmyaUyu4nmq7NAl1k2GXzKaxKgC696I2nA1s5K7/UfyrhcsAqwe
+ 0SO5tgFZunZZJK7SAYcdFg/c+CO9fAIgT2Dv/06LXLz6DJz4LfaA15ZOAOBiXAFIbZ4WG//L
+ TzNZCLCB9SDtycX
+IronPort-HdrOrdr: A9a23:YLOTgqy3ss8Ye9AVETqxKrPwFL1zdoMgy1knxilNoRw8SKKlfq
  eV7Y0mPH7P+VAssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
  4JSdkHNDSaNzlHZKjBjzVQa+xQouW6zA==
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="60695296"
+   d="scan'208";a="58696049"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 17/65] xen/evtchn: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:33:58 +0000
-Message-ID: <20211126123446.32324-18-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 32/65] x86/power: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:13 +0000
+Message-ID: <20211126123446.32324-33-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -103,191 +102,186 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
+cpufreq_governor_dbs() has no external callers so make it static.
+
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 ---
- xen/common/event_2l.c      | 21 ++++++++++++---------
- xen/common/event_channel.c |  3 ++-
- xen/common/event_fifo.c    | 30 ++++++++++++++++--------------
- 3 files changed, 30 insertions(+), 24 deletions(-)
+ xen/arch/x86/acpi/cpufreq/cpufreq.c    | 14 +++++++-------
+ xen/arch/x86/acpi/cpufreq/powernow.c   | 15 ++++++++-------
+ xen/common/core_parking.c              |  4 ++--
+ xen/drivers/cpufreq/cpufreq_ondemand.c |  6 ++++--
+ xen/include/acpi/cpufreq/cpufreq.h     |  1 -
+ 5 files changed, 21 insertions(+), 19 deletions(-)
 
-diff --git a/xen/common/event_2l.c b/xen/common/event_2l.c
-index 7424320e525a..d40dd51ab555 100644
---- a/xen/common/event_2l.c
-+++ b/xen/common/event_2l.c
-@@ -16,7 +16,8 @@
- 
- #include <asm/guest_atomics.h>
- 
--static void evtchn_2l_set_pending(struct vcpu *v, struct evtchn *evtchn)
-+static void cf_check evtchn_2l_set_pending(
-+    struct vcpu *v, struct evtchn *evtchn)
- {
-     struct domain *d = v->domain;
-     unsigned int port = evtchn->port;
-@@ -41,12 +42,14 @@ static void evtchn_2l_set_pending(struct vcpu *v, struct evtchn *evtchn)
-     evtchn_check_pollers(d, port);
+diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+index 8133c2dd958c..c27cbb2304f2 100644
+--- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
++++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+@@ -320,7 +320,7 @@ unsigned int get_measured_perf(unsigned int cpu, unsigned int flag)
+     return policy->cpuinfo.max_freq * perf_percent / 100;
  }
  
--static void evtchn_2l_clear_pending(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_2l_clear_pending(
-+    struct domain *d, struct evtchn *evtchn)
+-static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
++static unsigned int cf_check get_cur_freq_on_cpu(unsigned int cpu)
  {
-     guest_clear_bit(d, evtchn->port, &shared_info(d, evtchn_pending));
- }
- 
--static void evtchn_2l_unmask(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_2l_unmask(
-+    struct domain *d, struct evtchn *evtchn)
- {
-     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
-     unsigned int port = evtchn->port;
-@@ -64,8 +67,8 @@ static void evtchn_2l_unmask(struct domain *d, struct evtchn *evtchn)
-     }
- }
- 
--static bool evtchn_2l_is_pending(const struct domain *d,
--                                 const struct evtchn *evtchn)
-+static bool cf_check evtchn_2l_is_pending(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     evtchn_port_t port = evtchn->port;
-     unsigned int max_ports = BITS_PER_EVTCHN_WORD(d) * BITS_PER_EVTCHN_WORD(d);
-@@ -75,8 +78,8 @@ static bool evtchn_2l_is_pending(const struct domain *d,
-             guest_test_bit(d, port, &shared_info(d, evtchn_pending)));
- }
- 
--static bool evtchn_2l_is_masked(const struct domain *d,
--                                const struct evtchn *evtchn)
-+static bool cf_check evtchn_2l_is_masked(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     evtchn_port_t port = evtchn->port;
-     unsigned int max_ports = BITS_PER_EVTCHN_WORD(d) * BITS_PER_EVTCHN_WORD(d);
-@@ -86,8 +89,8 @@ static bool evtchn_2l_is_masked(const struct domain *d,
-             guest_test_bit(d, port, &shared_info(d, evtchn_mask)));
- }
- 
--static void evtchn_2l_print_state(struct domain *d,
--                                  const struct evtchn *evtchn)
-+static void cf_check evtchn_2l_print_state(
-+    struct domain *d, const struct evtchn *evtchn)
- {
-     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
- 
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index 67ac4dd15dcf..e26904e7508f 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -99,7 +99,8 @@ static xen_event_channel_notification_t __read_mostly
-     xen_consumers[NR_XEN_CONSUMERS];
- 
- /* Default notification action: wake up from wait_on_xen_event_channel(). */
--static void default_xen_notification_fn(struct vcpu *v, unsigned int port)
-+static void cf_check default_xen_notification_fn(
-+    struct vcpu *v, unsigned int port)
- {
-     /* Consumer needs notification only if blocked. */
-     if ( test_and_clear_bit(_VPF_blocked_in_xen, &v->pause_flags) )
-diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
-index 2fb01b82db84..ed4d3beb10f3 100644
---- a/xen/common/event_fifo.c
-+++ b/xen/common/event_fifo.c
-@@ -78,7 +78,7 @@ static inline event_word_t *evtchn_fifo_word_from_port(const struct domain *d,
-     return d->evtchn_fifo->event_array[p] + w;
- }
- 
--static void evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
- {
-     event_word_t *word;
- 
-@@ -158,7 +158,8 @@ static bool_t evtchn_fifo_set_link(struct domain *d, event_word_t *word,
-     return 1;
- }
- 
--static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_set_pending(
-+    struct vcpu *v, struct evtchn *evtchn)
- {
-     struct domain *d = v->domain;
-     unsigned int port;
-@@ -317,7 +318,8 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-         evtchn_check_pollers(d, port);
- }
- 
--static void evtchn_fifo_clear_pending(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_clear_pending(
-+    struct domain *d, struct evtchn *evtchn)
- {
-     event_word_t *word;
- 
-@@ -334,7 +336,7 @@ static void evtchn_fifo_clear_pending(struct domain *d, struct evtchn *evtchn)
-     guest_clear_bit(d, EVTCHN_FIFO_PENDING, word);
- }
- 
--static void evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
- {
-     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
-     event_word_t *word;
-@@ -350,32 +352,32 @@ static void evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
-         evtchn_fifo_set_pending(v, evtchn);
- }
- 
--static bool evtchn_fifo_is_pending(const struct domain *d,
--                                   const struct evtchn *evtchn)
-+static bool cf_check evtchn_fifo_is_pending(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
- 
-     return word && guest_test_bit(d, EVTCHN_FIFO_PENDING, word);
- }
- 
--static bool_t evtchn_fifo_is_masked(const struct domain *d,
--                                    const struct evtchn *evtchn)
-+static bool cf_check evtchn_fifo_is_masked(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
- 
-     return !word || guest_test_bit(d, EVTCHN_FIFO_MASKED, word);
- }
- 
--static bool_t evtchn_fifo_is_busy(const struct domain *d,
--                                  const struct evtchn *evtchn)
-+static bool cf_check evtchn_fifo_is_busy(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
- 
-     return word && guest_test_bit(d, EVTCHN_FIFO_LINKED, word);
- }
- 
--static int evtchn_fifo_set_priority(struct domain *d, struct evtchn *evtchn,
--                                    unsigned int priority)
-+static int cf_check evtchn_fifo_set_priority(
-+    struct domain *d, struct evtchn *evtchn, unsigned int priority)
- {
-     if ( priority > EVTCHN_FIFO_PRIORITY_MIN )
-         return -EINVAL;
-@@ -390,8 +392,8 @@ static int evtchn_fifo_set_priority(struct domain *d, struct evtchn *evtchn,
+     struct cpufreq_policy *policy;
+     struct acpi_cpufreq_data *data;
+@@ -369,8 +369,9 @@ static unsigned int check_freqs(const cpumask_t *mask, unsigned int freq,
      return 0;
  }
  
--static void evtchn_fifo_print_state(struct domain *d,
--                                    const struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_print_state(
-+    struct domain *d, const struct evtchn *evtchn)
+-static int acpi_cpufreq_target(struct cpufreq_policy *policy,
+-                               unsigned int target_freq, unsigned int relation)
++static int cf_check acpi_cpufreq_target(
++    struct cpufreq_policy *policy,
++    unsigned int target_freq, unsigned int relation)
  {
-     event_word_t *word;
+     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
+     struct processor_performance *perf;
+@@ -449,7 +450,7 @@ static int acpi_cpufreq_target(struct cpufreq_policy *policy,
+     return result;
+ }
  
+-static int acpi_cpufreq_verify(struct cpufreq_policy *policy)
++static int cf_check acpi_cpufreq_verify(struct cpufreq_policy *policy)
+ {
+     struct acpi_cpufreq_data *data;
+     struct processor_performance *perf;
+@@ -494,8 +495,7 @@ acpi_cpufreq_guess_freq(struct acpi_cpufreq_data *data, unsigned int cpu)
+     }
+ }
+ 
+-static int 
+-acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
++static int cf_check acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
+ {
+     unsigned int i;
+     unsigned int valid_states = 0;
+@@ -609,7 +609,7 @@ acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
+     return result;
+ }
+ 
+-static int acpi_cpufreq_cpu_exit(struct cpufreq_policy *policy)
++static int cf_check acpi_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+ {
+     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
+ 
+diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
+index ca71ecf72d67..d4c7dcd5d99d 100644
+--- a/xen/arch/x86/acpi/cpufreq/powernow.c
++++ b/xen/arch/x86/acpi/cpufreq/powernow.c
+@@ -67,8 +67,8 @@ static void cf_check update_cpb(void *data)
+     }
+ }
+ 
+-static int powernow_cpufreq_update (int cpuid,
+-				     struct cpufreq_policy *policy)
++static int cf_check powernow_cpufreq_update(
++    int cpuid, struct cpufreq_policy *policy)
+ {
+     if (!cpumask_test_cpu(cpuid, &cpu_online_map))
+         return -EINVAL;
+@@ -78,8 +78,9 @@ static int powernow_cpufreq_update (int cpuid,
+     return 0;
+ }
+ 
+-static int powernow_cpufreq_target(struct cpufreq_policy *policy,
+-                               unsigned int target_freq, unsigned int relation)
++static int cf_check powernow_cpufreq_target(
++    struct cpufreq_policy *policy,
++    unsigned int target_freq, unsigned int relation)
+ {
+     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
+     struct processor_performance *perf;
+@@ -180,7 +181,7 @@ static void cf_check get_cpu_data(void *arg)
+         amd_fixup_frequency(&perf->states[i]);
+ }
+ 
+-static int powernow_cpufreq_verify(struct cpufreq_policy *policy)
++static int cf_check powernow_cpufreq_verify(struct cpufreq_policy *policy)
+ {
+     struct acpi_cpufreq_data *data;
+     struct processor_performance *perf;
+@@ -197,7 +198,7 @@ static int powernow_cpufreq_verify(struct cpufreq_policy *policy)
+     return cpufreq_frequency_table_verify(policy, data->freq_table);
+ }
+ 
+-static int powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
++static int cf_check powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
+ {
+     unsigned int i;
+     unsigned int valid_states = 0;
+@@ -303,7 +304,7 @@ static int powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
+     return result;
+ }
+ 
+-static int powernow_cpufreq_cpu_exit(struct cpufreq_policy *policy)
++static int cf_check powernow_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+ {
+     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
+ 
+diff --git a/xen/common/core_parking.c b/xen/common/core_parking.c
+index 4afad04f2f68..c4f01291c0be 100644
+--- a/xen/common/core_parking.c
++++ b/xen/common/core_parking.c
+@@ -53,7 +53,7 @@ static int __init cf_check setup_core_parking_option(const char *str)
+ }
+ custom_param("core_parking", setup_core_parking_option);
+ 
+-static unsigned int core_parking_performance(unsigned int event)
++static unsigned int cf_check core_parking_performance(unsigned int event)
+ {
+     unsigned int cpu = -1;
+ 
+@@ -111,7 +111,7 @@ static unsigned int core_parking_performance(unsigned int event)
+     return cpu;
+ }
+ 
+-static unsigned int core_parking_power(unsigned int event)
++static unsigned int cf_check core_parking_power(unsigned int event)
+ {
+     unsigned int cpu = -1;
+ 
+diff --git a/xen/drivers/cpufreq/cpufreq_ondemand.c b/xen/drivers/cpufreq/cpufreq_ondemand.c
+index ba03eaa2336d..fbcd14d6c32f 100644
+--- a/xen/drivers/cpufreq/cpufreq_ondemand.c
++++ b/xen/drivers/cpufreq/cpufreq_ondemand.c
+@@ -215,7 +215,8 @@ static void dbs_timer_exit(struct cpu_dbs_info_s *dbs_info)
+     kill_timer(&per_cpu(dbs_timer, dbs_info->cpu));
+ }
+ 
+-int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event)
++static int cf_check cpufreq_governor_dbs(
++    struct cpufreq_policy *policy, unsigned int event)
+ {
+     unsigned int cpu = policy->cpu;
+     struct cpu_dbs_info_s *this_dbs_info;
+@@ -307,7 +308,8 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event)
+     return 0;
+ }
+ 
+-static bool_t __init cpufreq_dbs_handle_option(const char *name, const char *val)
++static bool __init cf_check cpufreq_dbs_handle_option(
++    const char *name, const char *val)
+ {
+     if ( !strcmp(name, "rate") && val )
+     {
+diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
+index 4958d3f7d315..e5e58c6c30ea 100644
+--- a/xen/include/acpi/cpufreq/cpufreq.h
++++ b/xen/include/acpi/cpufreq/cpufreq.h
+@@ -227,7 +227,6 @@ struct cpu_dbs_info_s {
+     int8_t stoppable;
+ };
+ 
+-int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event);
+ int get_cpufreq_ondemand_para(uint32_t *sampling_rate_max,
+                               uint32_t *sampling_rate_min,
+                               uint32_t *sampling_rate,
 -- 
 2.11.0
 
