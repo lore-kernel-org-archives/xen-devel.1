@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42F3C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232860.404038 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE8BDC433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232864.404053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxF-0007QY-V0; Fri, 26 Nov 2021 13:07:53 +0000
+	id 1mqaxJ-0008Fp-Ao; Fri, 26 Nov 2021 13:07:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232860.404038; Fri, 26 Nov 2021 13:07:53 +0000
+Received: by outflank-mailman (output) from mailman id 232864.404053; Fri, 26 Nov 2021 13:07:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxF-0007Mz-5K; Fri, 26 Nov 2021 13:07:53 +0000
-Received: by outflank-mailman (input) for mailman id 232860;
- Fri, 26 Nov 2021 13:07:51 +0000
+	id 1mqaxI-0008Dp-Oa; Fri, 26 Nov 2021 13:07:56 +0000
+Received: by outflank-mailman (input) for mailman id 232864;
+ Fri, 26 Nov 2021 13:07:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavZ-0003W9-5Y
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:09 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9e6fb575-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:06:07 +0100 (CET)
+ id 1mqauu-0003W9-Cn
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:28 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 846e797f-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:24 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,66 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e6fb575-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 846e797f-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931967;
+  d=citrix.com; s=securemail; t=1637931924;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=jYHmGb285zp19wAOZwPVRqBng1R2DTOnh2y5+lEruAo=;
-  b=eFWIdKg08En0EXpWFrQKbybFrQHq1XyI131FyMmdtcK5G4gmQn2ciBDO
-   q5zDZMmAGmIOCH6EBBweOYkDEyLll1GcA2sZE3UqFqfiGncngewmEGbzv
-   ZqXPv5E/zwxyPU/QtsCdmOyl9DXE1k+SdjtFjRgm0lWC+rETSNZe1IIUd
-   s=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: U4Ug72oaXHFOpynjTFMgYcJ7VtoRUHaNSFIGy/weFoqd02iDgsJNloaZRxwiZT3fqp2M6dOr4a
- TpiitZgWTnpNPbjc4e7TtV6fyHaEKY1DydubLT+R/TtETX6sXZP+LcoF2iy3pN/WKEY3zJHVTr
- p+q0YhRUiQMn6rlg4sFu8+OUEYdZYwX8RImJ83Pzr96RMSa19s0P9081yE4KsrIgV64e2W2gL1
- bW8v+nCjyGsOaXYJugzxS8hYlmzowQJCsL5ao7hh0zPRqYHuuM02yRQBu484Ax3meL42UjD1W6
- BbK2pOEndhtqpG1TLdWq0tnC
+  bh=ZfAMQ5gXNhkyy/7pM7nDOvtvjRuJe/w57bbDaSOyQrI=;
+  b=Xrhqk4IdtcCx7hQ2kuQgiOcp5q9htQRUZeH2QtI2JQQqk2z1XSFWmStm
+   k8c6bIy5H4PhQTh6PO+qyCJObS5VJorR1iT0A232ah6NViqc3aXUtIq37
+   D0RVSnPwOeb6MkRrddbjvzCw2IfMvzaiS0VInXC/hLyzAU/fRZYkPitVw
+   M=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: BQqAQ9/QWNhbiSN8W9Di7v7gSxwhnlTH8wsxI5qXFyyLu8cQ5dyHiscix5irSI4vDRRJAgEvU5
+ Icymn2Za8wlxSt7KMxRJv0+a8Q9c7kzG1tc0/8NMye4rV42rgdre29CnnI9FU2LGsPWf+nj+AR
+ P24nxgELA5P4xnYWV3Ysd9yS8UZwalnH09ft99bmXYHLmgM9QUj7Q62Boh05shRWCjgWFPNeFU
+ b2jyJxSty2JMpAhQQfr48Y0kP+JPfsm/lPkhDKSS9krctkJbMsByK5ZTvsF5KSkJc2pAmEyPHy
+ iN8ywxG8tfP/SaZGtjelHaxR
 X-SBRS: 5.1
-X-MesageID: 58696039
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 59064012
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:10XO0K1deY95f0Kp7PbD5Vd2kn2cJEfYwER7XKvMYLTBsI5bpzQOn
- GdOWTqEbvjZajajetEiao2y9xgEvJHVyt83TQU9pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es6wbBh2OaEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhltBMl
- vNAn5KLbkQAE47BgLkbfylUOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9t1p4fQ66FN
- qL1bxJAZwrGPwB2a20VEbQngeKspiTfYhFH/Qf9Sa0fvDGIkV0ZPKLWGNjIft2HQ+1Fk0Deo
- XjJl0zbKBwHMN2UyRKe72mhwOTImEvTWo0IE6aj3uV3m1DVzWsWYDUGWF3+rfSnh0qWX9NEN
- 1dS6icotbI19kGgUp/6RRLQiGWfohcWVt5UEus7wAKA0KzZ50CeHGdsZiFFQMwrsokxXzNC6
- 7OSt4q3X3o16uTTEC/DsOfPxd+vBcQLBWYCWHEiQCEL2P6giawQgwqSSPpTHIfg27UZBgrM6
- zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4ZdN7BJmRtq
- kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JBVdwPiN2dDB0wWirhRdMPS
- BSI0e+2zMUOVEZGlYctP+qM5z0ClMAM7+jNWPHOdcZpaZNsbgKB9ywGTRfOhD+9zhVzwP1hZ
- czznSOQ4ZAyUv8PIN2eHbp17FPW7npmmTO7qW7Tk3xLLoZylFbKEOxYYTNin8gy7b+eoRW9z
- jqsH5Di9vmra8WnOnO/2ddKdTgidCFnbbir+50/XrPSeWJORTB+Y8I9NJt8IuSJaYwOzbyWl
- px8M2cFoGfCaYrvdV/XNys9Mey3Bv6SbxsTZEQRALph4FB7Ca7H0UvVX8JfkWAP+LMxwPhqY
- eMCfsncUP1DRi6eo2YWbIXnrZwkfxOu3FrcMy2gaTk5XphhWw2WpYO0IlqxrHEDXnitqM8zg
- 7y8zQeHE5ANcBtvUZTNY/W1wlLv4XVEwLBuX1HFK8V4cVn39NQ4MDT4i/I6epleKRjKyjaA+
- RyRBBMU+bvEr4MvqYGbjqGYtYa5VeB5GxMCTWXc6L+3Mwjc/3aintAcALrZI2iFWTqtqqu4Z
- OhTw/XtC9E9nQ5H49hmDrJm7aMi/N+z9bVU+RtpQSfQZFOxB7I+fnTfhZtTtrdAz6NysBetX
- h7d4cFTPLiENZ+3EFMVIwZ5PO2P2etNx2vX5PUxZk77+DV27PyMVkALZ0uAjylULb1UNoI5w
- Lh+5J5KulLn0hd6YMybii109niXKi1SWqoqgZgWHYv3h1d50VpFe5HdVnf77Zznhw+g6aX2z
- ut4XJb/uok=
-IronPort-HdrOrdr: A9a23:edKFH6BSnCfsZlPlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
- xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 9dmsNFaeEYY2IUsS+D2njbL+od
+IronPort-Data: A9a23:aZ/j5qtW/DuLyak5AcGCRRXefOfnVJtZMUV32f8akzHdYApBsoF/q
+ tZmKW6OPfzYMGWkf4h+bY3gp0wG75SEzt41G1E5+Sg2RCoU+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ Nplj769EyFzG6z1mcsTAxRgEBxOF/MB5+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
+ pJHNWI2NnwsZTVDMHpOVpQ8u974g0vDfzYHsg2qpok4tj27IAtZj+G2bYu9lsaxbdpRtlaVo
+ CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
+ UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO9cY5VurkI/V2ge2CDgJdj18WPZ489BjEFTGy
+ WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WsQWmoq
+ w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSEhRqjBNzAJrVkg
+ JTis5PFhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43aZlUJ2K2M
+ RON5Vg5CHpv0J2CNvQfj2WZUZlC8EQdPY69CqC8giRmPvCdizNrDAkxPBXNjggBYWAnkL0lO
+ IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
+ I0BXyZLoj0CONDDjt7/rdROcAtUdCdjXvgbaaV/L4a+H+avI0l5Y9e5/F/rU9YNc319mria8
+ 3ejdFVfzVaj13TLJR/TMiJoaa/1XIY5pnU+ZHR+MVGt0nklQICu8KZAKMdnIeh5rLRunaxuU
+ v0IW8ScGfATGD7JzCsQMMvmp4t4eRX12Q/XZ3i5YCIydoJLThDS/oO2ZRPm8SQDV3LltcY3r
+ 7C6+BncRJ4PG1ZrAMrMMar9xFKtp3kN3ul1WhKQcNVUfUzt9qlsKjDw0aBrc51dd02by2LDh
+ QiMABoeqe3cmKMP8YHE1fKesoOkM+piBU4GTWPV2qm7aHvB9W25zI4eDOvRJWLBVHn58bmJb
+ PlOy62uK+UOmVtHvtYuE7tvyq5itdLjq6UDk1ZhFXTPKV+qFqlhMj+N2swW7v9BwbpQuA2XX
+ EOT+4YFZeXVaZ29SFNBdhA4aumj1O0PnmiA5Ps4F0z2+Str8efVSk5VJRSN1HRQIbYd3FnJG
+ gv9VBr6MzCCtyc=
+IronPort-HdrOrdr: A9a23:L3TuBq0wT24uS1Hjva+F0QqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58696039"
+   d="scan'208";a="59064012"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
-	<jgross@suse.com>
-Subject: [PATCH 18/65] xen/hypfs: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:33:59 +0000
-Message-ID: <20211126123446.32324-19-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 33/65] x86/apic: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:14 +0000
+Message-ID: <20211126123446.32324-34-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -108,314 +105,209 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Juergen Gross <jgross@suse.com>
+CC: Wei Liu <wl@xen.org>
 ---
- xen/common/hypfs.c         | 57 +++++++++++++++++++++++-----------------------
- xen/common/sched/cpupool.c | 25 ++++++++++----------
- xen/include/xen/hypfs.h    | 49 +++++++++++++++++++--------------------
- 3 files changed, 65 insertions(+), 66 deletions(-)
+ xen/arch/x86/genapic/bigsmp.c   |  4 ++--
+ xen/arch/x86/genapic/delivery.c | 12 ++++++------
+ xen/arch/x86/genapic/x2apic.c   | 16 ++++++++++------
+ xen/arch/x86/smp.c              |  6 +++---
+ xen/include/asm-x86/genapic.h   | 18 +++++++++---------
+ 5 files changed, 30 insertions(+), 26 deletions(-)
 
-diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
-index 1526bcc52810..0d22396f5dd7 100644
---- a/xen/common/hypfs.c
-+++ b/xen/common/hypfs.c
-@@ -113,12 +113,13 @@ static void hypfs_unlock(void)
-     }
- }
+diff --git a/xen/arch/x86/genapic/bigsmp.c b/xen/arch/x86/genapic/bigsmp.c
+index b9d976e8abf2..2000383ab0bf 100644
+--- a/xen/arch/x86/genapic/bigsmp.c
++++ b/xen/arch/x86/genapic/bigsmp.c
+@@ -10,7 +10,7 @@
+ #include <xen/dmi.h>
+ #include <asm/io_apic.h>
  
--const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry)
-+const struct hypfs_entry *cf_check hypfs_node_enter(
-+    const struct hypfs_entry *entry)
+-static __init int force_bigsmp(const struct dmi_system_id *d)
++static int __init cf_check force_bigsmp(const struct dmi_system_id *d)
  {
-     return entry;
- }
+ 	printk(KERN_NOTICE "%s detected: force use of apic=bigsmp\n", d->ident);
+ 	def_to_bigsmp = true;
+@@ -27,7 +27,7 @@ static const struct dmi_system_id __initconstrel bigsmp_dmi_table[] = {
+ };
  
--void hypfs_node_exit(const struct hypfs_entry *entry)
-+void cf_check hypfs_node_exit(const struct hypfs_entry *entry)
+ 
+-static __init int probe_bigsmp(void)
++static int __init cf_check probe_bigsmp(void)
+ { 
+ 	/*
+ 	 * We don't implement cluster mode, so force use of
+diff --git a/xen/arch/x86/genapic/delivery.c b/xen/arch/x86/genapic/delivery.c
+index 548c33f282dd..d1f99bf6834a 100644
+--- a/xen/arch/x86/genapic/delivery.c
++++ b/xen/arch/x86/genapic/delivery.c
+@@ -9,7 +9,7 @@
+  * LOGICAL FLAT DELIVERY MODE (multicast via bitmask to <= 8 logical APIC IDs).
+  */
+ 
+-void init_apic_ldr_flat(void)
++void cf_check init_apic_ldr_flat(void)
  {
+ 	unsigned long val;
+ 
+@@ -19,12 +19,12 @@ void init_apic_ldr_flat(void)
+ 	apic_write(APIC_LDR, val);
  }
  
-@@ -289,16 +290,14 @@ static int hypfs_get_path_user(char *buf,
-     return 0;
- }
- 
--struct hypfs_entry *hypfs_leaf_findentry(const struct hypfs_entry_dir *dir,
--                                         const char *name,
--                                         unsigned int name_len)
-+struct hypfs_entry *cf_check hypfs_leaf_findentry(
-+    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
+-const cpumask_t *vector_allocation_cpumask_flat(int cpu)
++const cpumask_t *cf_check vector_allocation_cpumask_flat(int cpu)
  {
-     return ERR_PTR(-ENOTDIR);
- }
+ 	return &cpu_online_map;
+ } 
  
--struct hypfs_entry *hypfs_dir_findentry(const struct hypfs_entry_dir *dir,
--                                        const char *name,
--                                        unsigned int name_len)
-+struct hypfs_entry *cf_check hypfs_dir_findentry(
-+    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
+-unsigned int cpu_mask_to_apicid_flat(const cpumask_t *cpumask)
++unsigned int cf_check cpu_mask_to_apicid_flat(const cpumask_t *cpumask)
  {
-     struct hypfs_entry *entry;
- 
-@@ -360,7 +359,7 @@ static struct hypfs_entry *hypfs_get_entry(const char *path)
-     return hypfs_get_entry_rel(&hypfs_root, path + 1);
+ 	return cpumask_bits(cpumask)[0]&0xFF;
  }
+@@ -33,17 +33,17 @@ unsigned int cpu_mask_to_apicid_flat(const cpumask_t *cpumask)
+  * PHYSICAL DELIVERY MODE (unicast to physical APIC IDs).
+  */
  
--unsigned int hypfs_getsize(const struct hypfs_entry *entry)
-+unsigned int cf_check hypfs_getsize(const struct hypfs_entry *entry)
+-void init_apic_ldr_phys(void)
++void cf_check init_apic_ldr_phys(void)
  {
-     return entry->size;
- }
-@@ -396,7 +395,7 @@ int hypfs_read_dyndir_id_entry(const struct hypfs_entry_dir *template,
-     return 0;
+ 	/* We only deliver in phys mode - no setup needed. */
  }
  
--static const struct hypfs_entry *hypfs_dyndir_enter(
-+static const struct hypfs_entry *cf_check hypfs_dyndir_enter(
-     const struct hypfs_entry *entry)
+-const cpumask_t *vector_allocation_cpumask_phys(int cpu)
++const cpumask_t *cf_check vector_allocation_cpumask_phys(int cpu)
  {
-     const struct hypfs_dyndir_id *data;
-@@ -407,7 +406,7 @@ static const struct hypfs_entry *hypfs_dyndir_enter(
-     return data->template->e.funcs->enter(&data->template->e);
+ 	return cpumask_of(cpu);
  }
  
--static struct hypfs_entry *hypfs_dyndir_findentry(
-+static struct hypfs_entry *cf_check hypfs_dyndir_findentry(
-     const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
+-unsigned int cpu_mask_to_apicid_phys(const cpumask_t *cpumask)
++unsigned int cf_check cpu_mask_to_apicid_phys(const cpumask_t *cpumask)
  {
-     const struct hypfs_dyndir_id *data;
-@@ -418,8 +417,8 @@ static struct hypfs_entry *hypfs_dyndir_findentry(
-     return data->template->e.funcs->findentry(data->template, name, name_len);
+ 	/* As we are using single CPU as destination, pick only one CPU here */
+ 	return cpu_physical_id(cpumask_any(cpumask));
+diff --git a/xen/arch/x86/genapic/x2apic.c b/xen/arch/x86/genapic/x2apic.c
+index bd44bb753995..de5032f2020a 100644
+--- a/xen/arch/x86/genapic/x2apic.c
++++ b/xen/arch/x86/genapic/x2apic.c
+@@ -38,7 +38,7 @@ static inline u32 x2apic_cluster(unsigned int cpu)
+     return per_cpu(cpu_2_logical_apicid, cpu) >> 16;
  }
  
--static int hypfs_read_dyndir(const struct hypfs_entry *entry,
--                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+static int cf_check hypfs_read_dyndir(
-+    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
+-static void init_apic_ldr_x2apic_cluster(void)
++static void cf_check init_apic_ldr_x2apic_cluster(void)
  {
-     const struct hypfs_dyndir_id *data;
+     unsigned int cpu, this_cpu = smp_processor_id();
  
-@@ -463,8 +462,8 @@ unsigned int hypfs_dynid_entry_size(const struct hypfs_entry *template,
-     return DIRENTRY_SIZE(snprintf(NULL, 0, template->name, id));
+@@ -74,12 +74,14 @@ static void init_apic_ldr_x2apic_cluster(void)
+     cpumask_set_cpu(this_cpu, per_cpu(cluster_cpus, this_cpu));
  }
  
--int hypfs_read_dir(const struct hypfs_entry *entry,
--                   XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+int cf_check hypfs_read_dir(const struct hypfs_entry *entry,
-+                            XEN_GUEST_HANDLE_PARAM(void) uaddr)
+-static const cpumask_t *vector_allocation_cpumask_x2apic_cluster(int cpu)
++static const cpumask_t *cf_check vector_allocation_cpumask_x2apic_cluster(
++    int cpu)
  {
-     const struct hypfs_entry_dir *d;
-     const struct hypfs_entry *e;
-@@ -510,8 +509,8 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
-     return 0;
+     return per_cpu(cluster_cpus, cpu);
  }
  
--int hypfs_read_leaf(const struct hypfs_entry *entry,
--                    XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+int cf_check hypfs_read_leaf(
-+    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
+-static unsigned int cpu_mask_to_apicid_x2apic_cluster(const cpumask_t *cpumask)
++static unsigned int cf_check cpu_mask_to_apicid_x2apic_cluster(
++    const cpumask_t *cpumask)
  {
-     const struct hypfs_entry_leaf *l;
-     unsigned int size = entry->funcs->getsize(entry);
-@@ -555,9 +554,9 @@ static int hypfs_read(const struct hypfs_entry *entry,
-     return ret;
+     unsigned int cpu = cpumask_any(cpumask);
+     unsigned int dest = per_cpu(cpu_2_logical_apicid, cpu);
+@@ -92,12 +94,13 @@ static unsigned int cpu_mask_to_apicid_x2apic_cluster(const cpumask_t *cpumask)
+     return dest;
  }
  
--int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
--                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                     unsigned int ulen)
-+int cf_check hypfs_write_leaf(
-+    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+    unsigned int ulen)
+-static void send_IPI_self_x2apic(uint8_t vector)
++static void cf_check send_IPI_self_x2apic(uint8_t vector)
  {
-     char *buf;
-     int ret;
-@@ -596,9 +595,9 @@ int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
-     return ret;
+     apic_wrmsr(APIC_SELF_IPI, vector);
  }
  
--int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
--                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                     unsigned int ulen)
-+int cf_check hypfs_write_bool(
-+    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+    unsigned int ulen)
+-static void send_IPI_mask_x2apic_phys(const cpumask_t *cpumask, int vector)
++static void cf_check send_IPI_mask_x2apic_phys(
++    const cpumask_t *cpumask, int vector)
  {
-     bool buf;
- 
-@@ -618,9 +617,9 @@ int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
-     return 0;
+     unsigned int cpu;
+     unsigned long flags;
+@@ -130,7 +133,8 @@ static void send_IPI_mask_x2apic_phys(const cpumask_t *cpumask, int vector)
+     local_irq_restore(flags);
  }
  
--int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
--                       XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                       unsigned int ulen)
-+int cf_check hypfs_write_custom(
-+    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+    unsigned int ulen)
+-static void send_IPI_mask_x2apic_cluster(const cpumask_t *cpumask, int vector)
++static void cf_check send_IPI_mask_x2apic_cluster(
++    const cpumask_t *cpumask, int vector)
  {
-     struct param_hypfs *p;
-     char *buf;
-@@ -653,9 +652,9 @@ int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
-     return ret;
+     unsigned int cpu = smp_processor_id();
+     cpumask_t *ipimask = per_cpu(scratch_mask, cpu);
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index 33748e629a21..0a02086966c0 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -161,13 +161,13 @@ void send_IPI_self(int vector)
+  * The following functions deal with sending IPIs between CPUs.
+  */
+ 
+-void send_IPI_self_legacy(uint8_t vector)
++void cf_check send_IPI_self_legacy(uint8_t vector)
+ {
+     /* NMI continuation handling relies on using a shorthand here. */
+     send_IPI_shortcut(APIC_DEST_SELF, vector, APIC_DEST_PHYSICAL);
  }
  
--int hypfs_write_deny(struct hypfs_entry_leaf *leaf,
--                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                     unsigned int ulen)
-+int cf_check hypfs_write_deny(
-+    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+    unsigned int ulen)
+-void send_IPI_mask_flat(const cpumask_t *cpumask, int vector)
++void cf_check send_IPI_mask_flat(const cpumask_t *cpumask, int vector)
  {
-     return -EACCES;
- }
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index b9d4babd0d8a..07f984a659cd 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -1026,8 +1026,8 @@ static struct notifier_block cpu_nfb = {
- 
- static HYPFS_DIR_INIT(cpupool_pooldir, "%u");
- 
--static int cpupool_dir_read(const struct hypfs_entry *entry,
--                            XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+static int cf_check cpupool_dir_read(
-+    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
- {
-     int ret = 0;
-     struct cpupool *c;
-@@ -1050,7 +1050,8 @@ static int cpupool_dir_read(const struct hypfs_entry *entry,
-     return ret;
+     unsigned long mask = cpumask_bits(cpumask)[0];
+     unsigned long cfg;
+@@ -204,7 +204,7 @@ void send_IPI_mask_flat(const cpumask_t *cpumask, int vector)
+     local_irq_restore(flags);
  }
  
--static unsigned int cpupool_dir_getsize(const struct hypfs_entry *entry)
-+static unsigned int cf_check cpupool_dir_getsize(
-+    const struct hypfs_entry *entry)
+-void send_IPI_mask_phys(const cpumask_t *mask, int vector)
++void cf_check send_IPI_mask_phys(const cpumask_t *mask, int vector)
  {
-     const struct cpupool *c;
-     unsigned int size = 0;
-@@ -1061,7 +1062,7 @@ static unsigned int cpupool_dir_getsize(const struct hypfs_entry *entry)
-     return size;
- }
+     unsigned long cfg, flags;
+     unsigned int query_cpu;
+diff --git a/xen/include/asm-x86/genapic.h b/xen/include/asm-x86/genapic.h
+index 51a65d3e0f0c..beeaddf19daa 100644
+--- a/xen/include/asm-x86/genapic.h
++++ b/xen/include/asm-x86/genapic.h
+@@ -39,12 +39,12 @@ extern struct genapic genapic;
+ extern const struct genapic apic_default;
+ extern const struct genapic apic_bigsmp;
  
--static const struct hypfs_entry *cpupool_dir_enter(
-+static const struct hypfs_entry *cf_check cpupool_dir_enter(
-     const struct hypfs_entry *entry)
- {
-     struct hypfs_dyndir_id *data;
-@@ -1076,14 +1077,14 @@ static const struct hypfs_entry *cpupool_dir_enter(
-     return entry;
- }
+-void send_IPI_self_legacy(uint8_t vector);
++void cf_check send_IPI_self_legacy(uint8_t vector);
  
--static void cpupool_dir_exit(const struct hypfs_entry *entry)
-+static void cf_check cpupool_dir_exit(const struct hypfs_entry *entry)
- {
-     spin_unlock(&cpupool_lock);
+-void init_apic_ldr_flat(void);
+-unsigned int cpu_mask_to_apicid_flat(const cpumask_t *cpumask);
+-void send_IPI_mask_flat(const cpumask_t *mask, int vector);
+-const cpumask_t *vector_allocation_cpumask_flat(int cpu);
++void cf_check init_apic_ldr_flat(void);
++unsigned int cf_check cpu_mask_to_apicid_flat(const cpumask_t *cpumask);
++void cf_check send_IPI_mask_flat(const cpumask_t *mask, int vector);
++const cpumask_t *cf_check vector_allocation_cpumask_flat(int cpu);
+ #define GENAPIC_FLAT \
+ 	.int_delivery_mode = dest_LowestPrio, \
+ 	.int_dest_mode = 1 /* logical delivery */, \
+@@ -54,10 +54,10 @@ const cpumask_t *vector_allocation_cpumask_flat(int cpu);
+ 	.send_IPI_mask = send_IPI_mask_flat, \
+ 	.send_IPI_self = send_IPI_self_legacy
  
-     hypfs_free_dyndata();
- }
- 
--static struct hypfs_entry *cpupool_dir_findentry(
-+static struct hypfs_entry *cf_check cpupool_dir_findentry(
-     const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
- {
-     unsigned long id;
-@@ -1102,8 +1103,8 @@ static struct hypfs_entry *cpupool_dir_findentry(
-     return hypfs_gen_dyndir_id_entry(&cpupool_pooldir, id, cpupool);
- }
- 
--static int cpupool_gran_read(const struct hypfs_entry *entry,
--                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
-+static int cf_check cpupool_gran_read(
-+    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
- {
-     const struct hypfs_dyndir_id *data;
-     const struct cpupool *cpupool;
-@@ -1121,7 +1122,7 @@ static int cpupool_gran_read(const struct hypfs_entry *entry,
-     return copy_to_guest(uaddr, gran, strlen(gran) + 1) ? -EFAULT : 0;
- }
- 
--static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
-+static unsigned int cf_check hypfs_gran_getsize(const struct hypfs_entry *entry)
- {
-     const struct hypfs_dyndir_id *data;
-     const struct cpupool *cpupool;
-@@ -1136,9 +1137,9 @@ static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
-     return strlen(gran) + 1;
- }
- 
--static int cpupool_gran_write(struct hypfs_entry_leaf *leaf,
--                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                              unsigned int ulen)
-+static int cf_check cpupool_gran_write(
-+    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+    unsigned int ulen)
- {
-     const struct hypfs_dyndir_id *data;
-     struct cpupool *cpupool;
-diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
-index e9d4c2555bd7..1b65a9188c6c 100644
---- a/xen/include/xen/hypfs.h
-+++ b/xen/include/xen/hypfs.h
-@@ -168,31 +168,30 @@ void hypfs_add_dyndir(struct hypfs_entry_dir *parent,
-                       struct hypfs_entry_dir *template);
- int hypfs_add_leaf(struct hypfs_entry_dir *parent,
-                    struct hypfs_entry_leaf *leaf, bool nofault);
--const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry);
--void hypfs_node_exit(const struct hypfs_entry *entry);
--int hypfs_read_dir(const struct hypfs_entry *entry,
--                   XEN_GUEST_HANDLE_PARAM(void) uaddr);
--int hypfs_read_leaf(const struct hypfs_entry *entry,
--                    XEN_GUEST_HANDLE_PARAM(void) uaddr);
--int hypfs_write_deny(struct hypfs_entry_leaf *leaf,
--                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                     unsigned int ulen);
--int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
--                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                     unsigned int ulen);
--int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
--                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                     unsigned int ulen);
--int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
--                       XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
--                       unsigned int ulen);
--unsigned int hypfs_getsize(const struct hypfs_entry *entry);
--struct hypfs_entry *hypfs_leaf_findentry(const struct hypfs_entry_dir *dir,
--                                         const char *name,
--                                         unsigned int name_len);
--struct hypfs_entry *hypfs_dir_findentry(const struct hypfs_entry_dir *dir,
--                                        const char *name,
--                                        unsigned int name_len);
-+const struct hypfs_entry *cf_check hypfs_node_enter(
-+    const struct hypfs_entry *entry);
-+void cf_check hypfs_node_exit(const struct hypfs_entry *entry);
-+int cf_check hypfs_read_dir(const struct hypfs_entry *entry,
-+                            XEN_GUEST_HANDLE_PARAM(void) uaddr);
-+int cf_check hypfs_read_leaf(const struct hypfs_entry *entry,
-+                             XEN_GUEST_HANDLE_PARAM(void) uaddr);
-+int cf_check hypfs_write_deny(struct hypfs_entry_leaf *leaf,
-+                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+                              unsigned int ulen);
-+int cf_check hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
-+                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+                              unsigned int ulen);
-+int cf_check hypfs_write_bool(struct hypfs_entry_leaf *leaf,
-+                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+                              unsigned int ulen);
-+int cf_check hypfs_write_custom(struct hypfs_entry_leaf *leaf,
-+                                XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
-+                                unsigned int ulen);
-+unsigned int cf_check hypfs_getsize(const struct hypfs_entry *entry);
-+struct hypfs_entry *cf_check hypfs_leaf_findentry(
-+    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len);
-+struct hypfs_entry *cf_check hypfs_dir_findentry(
-+    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len);
- void *hypfs_alloc_dyndata(unsigned long size);
- #define hypfs_alloc_dyndata(type) ((type *)hypfs_alloc_dyndata(sizeof(type)))
- void *hypfs_get_dyndata(void);
+-void init_apic_ldr_phys(void);
+-unsigned int cpu_mask_to_apicid_phys(const cpumask_t *cpumask);
+-void send_IPI_mask_phys(const cpumask_t *mask, int vector);
+-const cpumask_t *vector_allocation_cpumask_phys(int cpu);
++void cf_check init_apic_ldr_phys(void);
++unsigned int cf_check cpu_mask_to_apicid_phys(const cpumask_t *cpumask);
++void cf_check send_IPI_mask_phys(const cpumask_t *mask, int vector);
++const cpumask_t *cf_check vector_allocation_cpumask_phys(int cpu);
+ #define GENAPIC_PHYS \
+ 	.int_delivery_mode = dest_Fixed, \
+ 	.int_dest_mode = 0 /* physical delivery */, \
 -- 
 2.11.0
 
