@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A708C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232773.403754 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE45C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232779.403777 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawL-0002g8-CM; Fri, 26 Nov 2021 13:06:57 +0000
+	id 1mqawN-0003EY-D7; Fri, 26 Nov 2021 13:06:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232773.403754; Fri, 26 Nov 2021 13:06:57 +0000
+Received: by outflank-mailman (output) from mailman id 232779.403777; Fri, 26 Nov 2021 13:06:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawL-0002fS-5i; Fri, 26 Nov 2021 13:06:57 +0000
-Received: by outflank-mailman (input) for mailman id 232773;
- Fri, 26 Nov 2021 13:06:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqawN-0003Cx-0q; Fri, 26 Nov 2021 13:06:59 +0000
+Received: by outflank-mailman (input) for mailman id 232779;
+ Fri, 26 Nov 2021 13:06:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavn-0002zD-FE
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:23 +0000
+ id 1mqav2-0003W9-E9
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:36 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a61a7074-4eb9-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 14:06:21 +0100 (CET)
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 888c72f9-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:31 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,316 +38,436 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a61a7074-4eb9-11ec-9787-a32c541c8605
+X-Inumbo-ID: 888c72f9-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931981;
+  d=citrix.com; s=securemail; t=1637931931;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=U/I9hgUec63ZCE74xwerXvfwVJ+965BYzcV6BQ/X/5M=;
-  b=HDJvTva2aFT9lS5HKDei2IOHanRaESWHvH+vB5yAKdHjjWog0Shkym2u
-   gEG1DGThQTNBLUgHLpCs520qPNSYY/NBiQhljoL456ISJ48CLNyO7POHX
-   enQuDr987lm05QnzXTMKoMdI3a6EeqD4qDe8OuF3p9o5rprUEJhDNN2v8
-   M=;
+   references:mime-version;
+  bh=+Yj6D2+acshv1iSbGPrkSTGlvdblgzXw318p1/29CF0=;
+  b=Veah2gKcV38ttBvQmFkLzmkBozBXZCJYU/H9iybJ/WfzNZoPqyKRdRTI
+   gBind72QHZCDhPNAMoCYeJPNb5kI5RptqXOAqyK50A1DGkQVEkuKgBadj
+   v5ysAGPYgD31g2mS2ZRtnrZabVJNnbJJVfG3EKA94sPCkK0UlsZKmOXum
+   8=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: n3wspB8X/1QGbSpyAjzvfuL4qomhOltSGM+0Zm2Q2Pk33Un/TPkkYtjGi6GIMtuUUQoMDEiEMu
- uUmDMfKd7nQ3cyICQ+kV45K3Ic+YNQ5gi8iHZLphelpTm5smDPxg7CjpDZUPJNGPpapHPb/3nu
- mTcxC4//wO/FmBeeI9jXHB11ebNPyGU73LNmM/e42HYe3nmj2Wj+eTrqnkZP8a+iJFq37Tobwi
- jOmqRJabSJ+AT9RFbg61BJdjvk9Pq/MeQVHBxwfhbn8KCB+2U3sRQbMkHKMGW1nUe9WZ8uP+Jv
- 47cFs2Ad4T+vgdlvH4RSYxk+
+IronPort-SDR: ql1grrFxBgNJMIlKfOMQmI/v0TsohdDfaRuX66TyObuz6R0ci13PVAUC+9/GI4Y7hmeLZxTsiH
+ hTj/QXg4hMn7nu8wYpklLkVzarHZHX8BBu3WaLsfKfLOJR9ZlEPVvA0CSfENdztgbkmWN1otEt
+ qwSHKyEfgjIxRyQQ/puLGqkia+MKeRL8IZXXbhrm0l9r9ueP5U5F4Ful4y8M7dof6hbex2aBLR
+ wIqVDTLJBP9ZadpPIRpEySEoDNO46k8WCthDYTXn3VvZI2VIkLsd/9jk5WxWXJ1ni3PaqykWfj
+ tBFJ/sZ6uV09QzcI4maishSf
 X-SBRS: 5.1
-X-MesageID: 58676456
+X-MesageID: 58676398
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:iw27+ayeAyOF5bWx5Oh6t+f6wSrEfRIJ4+MujC+fZmUNrF6WrkUGx
- jEbCmCFPKuONDbwe9hyb4/i8kkG6pfRzNBqTVNppSAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAuLeNYYH1500s6wrRn2tQAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt/4y5
- 9tzlZiodTdzPoGPmbU4QUNgExgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY25AQQqiCO
- pRxhTxHQxrSWCVuHnksEpcQwMSViiHlXSQGkQfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
- krk1WnkBhARNPSE1CGItHmrg4fnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
- GRNpHBo9/JrshX2EJ+tBHVUvUJooDYyGPVeLc0+8D29kKr4oAfII3pedj54PYlOWNANeRQm0
- VqAntXMDDNpsaGIRX/1yop4vQ9eKgBOczZcOHZsoR8tpoC6/dpt1k6nosNLSfbt1rXI9SfML
- ydmRcTUr5EaloY12qqy5jgraBr898GSHmbZCug6N19JDz+Vhqb5OORECnCBtJ6sybp1qHHa5
- xDofODEsYgz4WmlznDlfQn0NOjBCwy5GDPdm0VzOJIq6i6g/XWuFagJvmohdBk0bZdYJ2OyC
- KM2he+3zMQIVJdNRfUqC79d9uxwlfSwfTgbfqy8giVyjmhZK1bcoXAGib+41GHxikk8+ZzTy
- r/AGftA+U0yUPw9pBLvHr91+eZymkgWmDOCLbimnk/P+efPOxaopUItbQLmghYRt/jf/m04M
- r93aqO39vmoeLGkP3SMr9dMdQtiwLpSLcmelvG7v9WremJOcFzNwdeLqV/4U4A6zalTiMnS+
- XSxBh1RxFbl3CWVIgSWcHFzLrjoWM8n/348OCUtO3eu2mQiPtnzvPtOKcNvcOl17vFnwN51U
- +IBJ5eKDMNQR2mV4D8ad5T88tBvLUz5mQKUMiO5SzEjZJo8FRfR89rpc1K3pikDBya6r+Ukp
- Lik2l+JSJYPXV06Xs3XdOiu3xW6un1EwLB+WE7BI99yfkTw8dc1d3yt36Fve8xVcEfN3DqX0
- QqSECw0n+iVrt9n6sTNiICFs5ytT7l0EH1FEjSJ9r2xLyTboDaumNcSTOaScDnBf2ro46H+N
- /5NxvTxPfBbzlZHt41wT+Riwa4kvoa9orZbykJvHWnRbkTtAbRleyHU0c5Kv6xL57lYpQrpB
- R7fpogEYe2EaJH/DVocBAs5deDSh/gblw7b4ekxPEintjR8+6CKUBkKMhSB4MCHwGCZ7G/xL
- T8dhfMr
-IronPort-HdrOrdr: A9a23:dEQ32a4TaXYTBqloTgPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-Data: A9a23:T9W9hKK0V8ul9+ZEFE+RCpIlxSXFcZb7ZxGr2PjKsXjdYENS0D1Rm
+ GUcXWzTaP6JNjfxKIwlbYzno0wC6JDQx4M1SwdlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xbZj6mJVqYPR7z2l6
+ IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB3ZgvtY5
+ vgSsaaaWFwlF/XhlOohbilxRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Gpg2J8QRqeOD
+ yYfQShlUlPCckdUAA9JJp0wrN2lmynlcyIN/Tp5ooJoujOOnWSdyoPFPMLOf92WRe1chkuCu
+ n/d5GP9Hw0bM9qEjzGC9xqEiuDDkCzhUaoOBba48bhsm1TVyWsNYDUGWF3+rfSnh0qWX9NEN
+ 1dS6icotbI19kGgUp/6RRLQnZKflkdCAZwKSbR8sVzTjPqPi+qEOoQaZm5cQ/UImZAyfxY7j
+ VOgx/7lCwBSgJTAHBpx6YyohT+1PCEUK0oLaikFURYJ7rHfnW0jsv7cZo09SfDo17UZDRm1m
+ mnX93Zm293/mOZSj/3jlW0rlQ5AsXQgouQdwgzMFlyo4QpiDGJOT9z5sAOLhRqswWvwc7Vgg
+ JTms5TBhAztJcvU/MBofAnrNOryjxpiGGeB6WOD57F7q1yQF4eLJOi8Gg1WKkZzKdojcjT0e
+ kLVsg45zMYNZyT6M/IoMt7vV59CIU3c+TLNDau8gj1mOMUZSeN61Hs2OR74M57FzCDAbp3Ty
+ b/EKJ3xXB72+IxszSasRvd17FPY7ntW+I8nfriil07P+ePHPBa9EO5ZWHPTPrFRxP7V+239r
+ ocAX/ZmPj0CCYUSlAGMqtVNRb3LRFBmba3LRzt/KrTef1E4QT55UJc8A9oJIuRYokicrc+Ql
+ lnVZ6OS4ACXaaTvJVrYZ3Z9RqnoWJoj/3s3MTZ1ZQSj2mQ5YJbp56AaLsNlcb4i/e1l7Ph1U
+ /haJJnQXqUREmzKq2YHcJ3wjI1+bxD31wiACDWoPWokdJl6Sg2XptK9Jlnz9DMDBzacvNclp
+ +HyzRvSRJcOHlwwDMvfZP+14Um2uHwRxLB7U0fSe4EBc0Tw6ol6bSf2i6Zvcc0LLBzCwBqc1
+ hqXXkhE9bWc/ddt/YCQ166eroqvH+9vJWZgHjHWveSsKC3X3mu/2oscAuyGSi/QCTHv86K4a
+ OQLk/ylaK8bnExHupZXGqpwyf5s/MPmorJXw1g2HHjPaFj3WLpsLmPfgJtKv6xJgLRYpRG3S
+ gSE/dwDYeeFP8bsEVgwIgs5b7vciaFIy2eKtfllcl/n4CJX/aacVRQANhaBvyVRMb9pPd532
+ uwmosMXt1SyhxdC3gxqVcyIG7Bg9kA9bpg=
+IronPort-HdrOrdr: A9a23:tQCXTKBlW822GqzlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
+ xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
+ 9dmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58676456"
+   d="scan'208";a="58676398"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 27/65] x86: Annotate fnptr targets from request_irq()
-Date: Fri, 26 Nov 2021 12:34:08 +0000
-Message-ID: <20211126123446.32324-28-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Daniel De Graaf
+	<dgdegra@tycho.nsa.gov>, Daniel Smith <dpsmith@apertussolutions.com>
+Subject: [PATCH 14/65] xsm/flask:  Annotate fnptr targets in the security server
+Date: Fri, 26 Nov 2021 12:33:55 +0000
+Message-ID: <20211126123446.32324-15-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-
-...and friends; alloc_direct_apic_vector() and set_direct_apic_vector().
+Content-Type: text/plain
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
+CC: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+CC: Daniel Smith <dpsmith@apertussolutions.com>
 ---
- xen/arch/x86/apic.c                      |  8 ++++----
- xen/arch/x86/cpu/mcheck/mce_intel.c      |  4 ++--
- xen/arch/x86/guest/xen/xen.c             |  2 +-
- xen/arch/x86/hpet.c                      |  4 ++--
- xen/arch/x86/hvm/vmx/vmx.c               |  4 ++--
- xen/arch/x86/irq.c                       |  2 +-
- xen/arch/x86/smp.c                       |  6 +++---
- xen/arch/x86/time.c                      |  3 ++-
- xen/drivers/passthrough/amd/iommu_init.c |  4 ++--
- xen/drivers/passthrough/vtd/iommu.c      |  4 ++--
- xen/include/asm-x86/irq.h                | 16 ++++++++--------
- 11 files changed, 29 insertions(+), 28 deletions(-)
+ xen/xsm/flask/ss/avtab.c       |  4 ++--
+ xen/xsm/flask/ss/conditional.c | 10 ++++----
+ xen/xsm/flask/ss/conditional.h |  6 ++---
+ xen/xsm/flask/ss/policydb.c    | 53 ++++++++++++++++++++++--------------------
+ xen/xsm/flask/ss/services.c    |  6 ++---
+ xen/xsm/flask/ss/symtab.c      |  5 ++--
+ 6 files changed, 44 insertions(+), 40 deletions(-)
 
-diff --git a/xen/arch/x86/apic.c b/xen/arch/x86/apic.c
-index dd6cf1529f1e..07611c481b0e 100644
---- a/xen/arch/x86/apic.c
-+++ b/xen/arch/x86/apic.c
-@@ -1365,7 +1365,7 @@ int reprogram_timer(s_time_t timeout)
-     return apic_tmict || !timeout;
+diff --git a/xen/xsm/flask/ss/avtab.c b/xen/xsm/flask/ss/avtab.c
+index bfc91c8b0c2c..55c2b4d8a46d 100644
+--- a/xen/xsm/flask/ss/avtab.c
++++ b/xen/xsm/flask/ss/avtab.c
+@@ -482,8 +482,8 @@ int avtab_read_item(struct avtab *a, void *fp, struct policydb *pol,
+     return insertf(a, &key, &datum, p);
  }
  
--void apic_timer_interrupt(struct cpu_user_regs * regs)
-+void cf_check apic_timer_interrupt(struct cpu_user_regs *regs)
+-static int avtab_insertf(struct avtab *a, struct avtab_key *k,
+-                                                struct avtab_datum *d, void *p)
++static int cf_check avtab_insertf(
++    struct avtab *a, struct avtab_key *k, struct avtab_datum *d, void *p)
  {
-     ack_APIC_irq();
-     perfc_incr(apic_timer);
-@@ -1384,7 +1384,7 @@ void smp_send_state_dump(unsigned int cpu)
- /*
-  * Spurious interrupts should _never_ happen with our APIC/SMP architecture.
-  */
--void spurious_interrupt(struct cpu_user_regs *regs)
-+void cf_check spurious_interrupt(struct cpu_user_regs *regs)
- {
-     /*
-      * Check if this is a vectored interrupt (most likely, as this is probably
-@@ -1415,7 +1415,7 @@ void spurious_interrupt(struct cpu_user_regs *regs)
-  * This interrupt should never happen with our APIC/SMP architecture
-  */
- 
--void error_interrupt(struct cpu_user_regs *regs)
-+void cf_check error_interrupt(struct cpu_user_regs *regs)
- {
-     static const char *const esr_fields[] = {
-         "Send CS error",
-@@ -1448,7 +1448,7 @@ void error_interrupt(struct cpu_user_regs *regs)
-  * This interrupt handles performance counters interrupt
-  */
- 
--void pmu_apic_interrupt(struct cpu_user_regs *regs)
-+void cf_check pmu_apic_interrupt(struct cpu_user_regs *regs)
- {
-     ack_APIC_irq();
-     vpmu_do_interrupt(regs);
-diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
-index 239b0b32327c..f587018cd2d2 100644
---- a/xen/arch/x86/cpu/mcheck/mce_intel.c
-+++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
-@@ -55,7 +55,7 @@ bool __read_mostly lmce_support;
- #define MCE_RING                0x1
- static DEFINE_PER_CPU(int, last_state);
- 
--static void intel_thermal_interrupt(struct cpu_user_regs *regs)
-+static void cf_check intel_thermal_interrupt(struct cpu_user_regs *regs)
- {
-     uint64_t msr_content;
-     unsigned int cpu = smp_processor_id();
-@@ -639,7 +639,7 @@ static void cpu_mcheck_disable(void)
-         clear_cmci();
+     return avtab_insert(a, k, d);
+ }
+diff --git a/xen/xsm/flask/ss/conditional.c b/xen/xsm/flask/ss/conditional.c
+index 3e58aea55147..b4b116666cf7 100644
+--- a/xen/xsm/flask/ss/conditional.c
++++ b/xen/xsm/flask/ss/conditional.c
+@@ -189,14 +189,14 @@ int cond_init_bool_indexes(struct policydb *p)
+     return 0;
  }
  
--static void cmci_interrupt(struct cpu_user_regs *regs)
-+static void cf_check cmci_interrupt(struct cpu_user_regs *regs)
+-int cond_destroy_bool(void *key, void *datum, void *p)
++int cf_check cond_destroy_bool(void *key, void *datum, void *p)
  {
-     mctelem_cookie_t mctc;
-     struct mca_summary bs;
-diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
-index b2aa3a009b4a..17807cdea688 100644
---- a/xen/arch/x86/guest/xen/xen.c
-+++ b/xen/arch/x86/guest/xen/xen.c
-@@ -170,7 +170,7 @@ static void __init init_memmap(void)
-     }
+     xfree(key);
+     xfree(datum);
+     return 0;
  }
  
--static void xen_evtchn_upcall(struct cpu_user_regs *regs)
-+static void cf_check xen_evtchn_upcall(struct cpu_user_regs *regs)
+-int cond_index_bool(void *key, void *datum, void *datap)
++int cf_check cond_index_bool(void *key, void *datum, void *datap)
  {
-     struct vcpu_info *vcpu_info = this_cpu(vcpu_info);
-     unsigned long pending;
-diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
-index 7b009a930498..c31fd97579dc 100644
---- a/xen/arch/x86/hpet.c
-+++ b/xen/arch/x86/hpet.c
-@@ -240,8 +240,8 @@ static void handle_hpet_broadcast(struct hpet_event_channel *ch)
-     }
+     struct policydb *p;
+     struct cond_bool_datum *booldatum;
+@@ -220,7 +220,7 @@ static int bool_isvalid(struct cond_bool_datum *b)
+     return 1;
  }
  
--static void hpet_interrupt_handler(int irq, void *data,
--        struct cpu_user_regs *regs)
-+static void cf_check hpet_interrupt_handler(
-+    int irq, void *data, struct cpu_user_regs *regs)
+-int cond_read_bool(struct policydb *p, struct hashtab *h, void *fp)
++int cf_check cond_read_bool(struct policydb *p, struct hashtab *h, void *fp)
  {
-     struct hpet_event_channel *ch = data;
- 
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 37c31c08b984..b1eee802fde7 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2470,7 +2470,7 @@ static struct hvm_function_table __initdata vmx_function_table = {
+     char *key = NULL;
+     struct cond_bool_datum *booldatum;
+@@ -268,8 +268,8 @@ struct cond_insertf_data
+     struct cond_av_list *tail;
  };
  
- /* Handle VT-d posted-interrupt when VCPU is blocked. */
--static void pi_wakeup_interrupt(struct cpu_user_regs *regs)
-+static void cf_check pi_wakeup_interrupt(struct cpu_user_regs *regs)
+-static int cond_insertf(struct avtab *a, struct avtab_key *k, 
+-                                            struct avtab_datum *d, void *ptr)
++static int cf_check cond_insertf(
++    struct avtab *a, struct avtab_key *k, struct avtab_datum *d, void *ptr)
  {
-     struct vmx_vcpu *vmx, *tmp;
-     spinlock_t *lock = &per_cpu(vmx_pi_blocking, smp_processor_id()).lock;
-@@ -2502,7 +2502,7 @@ static void pi_wakeup_interrupt(struct cpu_user_regs *regs)
+     struct cond_insertf_data *data = ptr;
+     struct policydb *p = data->p;
+diff --git a/xen/xsm/flask/ss/conditional.h b/xen/xsm/flask/ss/conditional.h
+index 59ac6b4b57c1..500fe4305a03 100644
+--- a/xen/xsm/flask/ss/conditional.h
++++ b/xen/xsm/flask/ss/conditional.h
+@@ -63,11 +63,11 @@ int cond_policydb_init(struct policydb* p);
+ void cond_policydb_destroy(struct policydb* p);
+ 
+ int cond_init_bool_indexes(struct policydb* p);
+-int cond_destroy_bool(void *key, void *datum, void *p);
++int cf_check cond_destroy_bool(void *key, void *datum, void *p);
+ 
+-int cond_index_bool(void *key, void *datum, void *datap);
++int cf_check cond_index_bool(void *key, void *datum, void *datap);
+ 
+-int cond_read_bool(struct policydb *p, struct hashtab *h, void *fp);
++int cf_check cond_read_bool(struct policydb *p, struct hashtab *h, void *fp);
+ int cond_read_list(struct policydb *p, void *fp);
+ 
+ void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd);
+diff --git a/xen/xsm/flask/ss/policydb.c b/xen/xsm/flask/ss/policydb.c
+index 94261643532a..ff2103c63eab 100644
+--- a/xen/xsm/flask/ss/policydb.c
++++ b/xen/xsm/flask/ss/policydb.c
+@@ -257,12 +257,12 @@ static int policydb_init(struct policydb *p)
+  * of a class, role, or user are needed.
+  */
+ 
+-static int common_index(void *key, void *datum, void *datap)
++static int cf_check common_index(void *key, void *datum, void *datap)
+ {
+     return 0;
  }
  
- /* Handle VT-d posted-interrupt when VCPU is running. */
--static void pi_notification_interrupt(struct cpu_user_regs *regs)
-+static void cf_check pi_notification_interrupt(struct cpu_user_regs *regs)
+-static int class_index(void *key, void *datum, void *datap)
++static int cf_check class_index(void *key, void *datum, void *datap)
  {
-     ack_APIC_irq();
-     this_cpu(irq_count)++;
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index f43b926ed26b..61e09a356f97 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -744,7 +744,7 @@ void move_native_irq(struct irq_desc *desc)
-     desc->handler->enable(desc);
+     struct policydb *p;
+     struct class_datum *cladatum;
+@@ -276,7 +276,7 @@ static int class_index(void *key, void *datum, void *datap)
+     return 0;
  }
  
--void irq_move_cleanup_interrupt(struct cpu_user_regs *regs)
-+void cf_check irq_move_cleanup_interrupt(struct cpu_user_regs *regs)
+-static int role_index(void *key, void *datum, void *datap)
++static int cf_check role_index(void *key, void *datum, void *datap)
  {
-     unsigned vector, me;
- 
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index b9a696f61963..33748e629a21 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -246,7 +246,7 @@ static cpumask_t flush_cpumask;
- static const void *flush_va;
- static unsigned int flush_flags;
- 
--void invalidate_interrupt(struct cpu_user_regs *regs)
-+void cf_check invalidate_interrupt(struct cpu_user_regs *regs)
- {
-     unsigned int flags = flush_flags;
-     ack_APIC_irq();
-@@ -385,14 +385,14 @@ void smp_send_nmi_allbutself(void)
-     send_IPI_mask(&cpu_online_map, APIC_DM_NMI);
+     struct policydb *p;
+     struct role_datum *role;
+@@ -292,7 +292,7 @@ static int role_index(void *key, void *datum, void *datap)
+     return 0;
  }
  
--void event_check_interrupt(struct cpu_user_regs *regs)
-+void cf_check event_check_interrupt(struct cpu_user_regs *regs)
+-static int type_index(void *key, void *datum, void *datap)
++static int cf_check type_index(void *key, void *datum, void *datap)
  {
-     ack_APIC_irq();
-     perfc_incr(ipis);
-     this_cpu(irq_count)++;
+     struct policydb *p;
+     struct type_datum *typdatum;
+@@ -313,7 +313,7 @@ static int type_index(void *key, void *datum, void *datap)
+     return 0;
  }
  
--void call_function_interrupt(struct cpu_user_regs *regs)
-+void cf_check call_function_interrupt(struct cpu_user_regs *regs)
+-static int user_index(void *key, void *datum, void *datap)
++static int cf_check user_index(void *key, void *datum, void *datap)
  {
-     ack_APIC_irq();
-     perfc_incr(ipis);
-diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index 9f8fdb209041..dda09f0680b3 100644
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -196,7 +196,8 @@ static void smp_send_timer_broadcast_ipi(void)
-     }
+     struct policydb *p;
+     struct user_datum *usrdatum;
+@@ -329,7 +329,7 @@ static int user_index(void *key, void *datum, void *datap)
+     return 0;
  }
  
--static void timer_interrupt(int irq, void *dev_id, struct cpu_user_regs *regs)
-+static void cf_check timer_interrupt(
-+    int irq, void *dev_id, struct cpu_user_regs *regs)
+-static int sens_index(void *key, void *datum, void *datap)
++static int cf_check sens_index(void *key, void *datum, void *datap)
  {
-     ASSERT(local_irq_is_enabled());
- 
-diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index cebcd68a6c04..d2ad282e93d3 100644
---- a/xen/drivers/passthrough/amd/iommu_init.c
-+++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -715,8 +715,8 @@ static void cf_check do_amd_iommu_irq(void *unused)
-     }
+     struct policydb *p;
+     struct level_datum *levdatum;
+@@ -348,7 +348,7 @@ static int sens_index(void *key, void *datum, void *datap)
+     return 0;
  }
  
--static void iommu_interrupt_handler(int irq, void *dev_id,
--                                    struct cpu_user_regs *regs)
-+static void cf_check iommu_interrupt_handler(
-+    int irq, void *dev_id, struct cpu_user_regs *regs)
+-static int cat_index(void *key, void *datum, void *datap)
++static int cf_check cat_index(void *key, void *datum, void *datap)
  {
-     unsigned long flags;
-     struct amd_iommu *iommu = dev_id;
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index 498a9ea9c9c1..ad3abdcdacfd 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1085,8 +1085,8 @@ static void cf_check do_iommu_page_fault(void *unused)
-         __do_iommu_page_fault(drhd->iommu);
+     struct policydb *p;
+     struct cat_datum *catdatum;
+@@ -506,14 +506,14 @@ static int policydb_index_others(struct policydb *p)
+  * symbol data in the policy database.
+  */
+ 
+-static int perm_destroy(void *key, void *datum, void *p)
++static int cf_check perm_destroy(void *key, void *datum, void *p)
+ {
+     xfree(key);
+     xfree(datum);
+     return 0;
  }
  
--static void iommu_page_fault(int irq, void *dev_id,
--                             struct cpu_user_regs *regs)
-+static void cf_check iommu_page_fault(
-+    int irq, void *dev_id, struct cpu_user_regs *regs)
+-static int common_destroy(void *key, void *datum, void *p)
++static int cf_check common_destroy(void *key, void *datum, void *p)
  {
-     /*
-      * Just flag the tasklet as runnable. This is fine, according to VT-d
-diff --git a/xen/include/asm-x86/irq.h b/xen/include/asm-x86/irq.h
-index 7c825e9d9c0a..b3f49abc5556 100644
---- a/xen/include/asm-x86/irq.h
-+++ b/xen/include/asm-x86/irq.h
-@@ -93,14 +93,14 @@ static inline struct cpu_user_regs *set_irq_regs(struct cpu_user_regs *new_regs)
+     struct common_datum *comdatum;
  
- #define platform_legacy_irq(irq)	((irq) < 16)
+@@ -525,7 +525,7 @@ static int common_destroy(void *key, void *datum, void *p)
+     return 0;
+ }
  
--void event_check_interrupt(struct cpu_user_regs *regs);
--void invalidate_interrupt(struct cpu_user_regs *regs);
--void call_function_interrupt(struct cpu_user_regs *regs);
--void apic_timer_interrupt(struct cpu_user_regs *regs);
--void error_interrupt(struct cpu_user_regs *regs);
--void pmu_apic_interrupt(struct cpu_user_regs *regs);
--void spurious_interrupt(struct cpu_user_regs *regs);
--void irq_move_cleanup_interrupt(struct cpu_user_regs *regs);
-+void cf_check event_check_interrupt(struct cpu_user_regs *regs);
-+void cf_check invalidate_interrupt(struct cpu_user_regs *regs);
-+void cf_check call_function_interrupt(struct cpu_user_regs *regs);
-+void cf_check apic_timer_interrupt(struct cpu_user_regs *regs);
-+void cf_check error_interrupt(struct cpu_user_regs *regs);
-+void cf_check pmu_apic_interrupt(struct cpu_user_regs *regs);
-+void cf_check spurious_interrupt(struct cpu_user_regs *regs);
-+void cf_check irq_move_cleanup_interrupt(struct cpu_user_regs *regs);
+-static int class_destroy(void *key, void *datum, void *p)
++static int cf_check class_destroy(void *key, void *datum, void *p)
+ {
+     struct class_datum *cladatum;
+     struct constraint_node *constraint, *ctemp;
+@@ -572,7 +572,7 @@ static int class_destroy(void *key, void *datum, void *p)
+     return 0;
+ }
  
- uint8_t alloc_hipriority_vector(void);
+-static int role_destroy(void *key, void *datum, void *p)
++static int cf_check role_destroy(void *key, void *datum, void *p)
+ {
+     struct role_datum *role;
+ 
+@@ -584,14 +584,14 @@ static int role_destroy(void *key, void *datum, void *p)
+     return 0;
+ }
+ 
+-static int type_destroy(void *key, void *datum, void *p)
++static int cf_check type_destroy(void *key, void *datum, void *p)
+ {
+     xfree(key);
+     xfree(datum);
+     return 0;
+ }
+ 
+-static int user_destroy(void *key, void *datum, void *p)
++static int cf_check user_destroy(void *key, void *datum, void *p)
+ {
+     struct user_datum *usrdatum;
+ 
+@@ -605,7 +605,7 @@ static int user_destroy(void *key, void *datum, void *p)
+     return 0;
+ }
+ 
+-static int sens_destroy(void *key, void *datum, void *p)
++static int cf_check sens_destroy(void *key, void *datum, void *p)
+ {
+     struct level_datum *levdatum;
+ 
+@@ -617,7 +617,7 @@ static int sens_destroy(void *key, void *datum, void *p)
+     return 0;
+ }
+ 
+-static int cat_destroy(void *key, void *datum, void *p)
++static int cf_check cat_destroy(void *key, void *datum, void *p)
+ {
+     xfree(key);
+     xfree(datum);
+@@ -989,7 +989,7 @@ static int perm_read(struct policydb *p, struct hashtab *h, void *fp)
+     goto out;
+ }
+ 
+-static int common_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check common_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct common_datum *comdatum;
+@@ -1151,7 +1151,7 @@ static int read_cons_helper(struct policydb *p, struct constraint_node **nodep,
+     return 0;
+ }
+ 
+-static int class_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check class_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct class_datum *cladatum;
+@@ -1250,7 +1250,7 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
+     goto out;
+ }
+ 
+-static int role_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check role_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct role_datum *role;
+@@ -1321,7 +1321,7 @@ static int role_read(struct policydb *p, struct hashtab *h, void *fp)
+     goto out;
+ }
+ 
+-static int type_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check type_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct type_datum *typdatum;
+@@ -1415,7 +1415,7 @@ static int mls_read_level(struct mls_level *lp, void *fp)
+     return -EINVAL;
+ }
+ 
+-static int user_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check user_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct user_datum *usrdatum;
+@@ -1479,7 +1479,7 @@ static int user_read(struct policydb *p, struct hashtab *h, void *fp)
+     goto out;
+ }
+ 
+-static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check sens_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct level_datum *levdatum;
+@@ -1534,7 +1534,7 @@ static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
+     goto out;
+ }
+ 
+-static int cat_read(struct policydb *p, struct hashtab *h, void *fp)
++static int cf_check cat_read(struct policydb *p, struct hashtab *h, void *fp)
+ {
+     char *key = NULL;
+     struct cat_datum *catdatum;
+@@ -1591,7 +1591,8 @@ static int (*read_f[SYM_NUM]) (struct policydb *p, struct hashtab *h, void *fp)
+     cat_read,
+ };
+ 
+-static int user_bounds_sanity_check(void *key, void *datum, void *datap)
++static int cf_check user_bounds_sanity_check(
++    void *key, void *datum, void *datap)
+ {
+     struct user_datum *upper, *user;
+     struct policydb *p = datap;
+@@ -1631,7 +1632,8 @@ static int user_bounds_sanity_check(void *key, void *datum, void *datap)
+     return 0;
+ }
+ 
+-static int role_bounds_sanity_check(void *key, void *datum, void *datap)
++static int cf_check role_bounds_sanity_check(
++    void *key, void *datum, void *datap)
+ {
+     struct role_datum *upper, *role;
+     struct policydb *p = datap;
+@@ -1671,7 +1673,8 @@ static int role_bounds_sanity_check(void *key, void *datum, void *datap)
+     return 0;
+ }
+ 
+-static int type_bounds_sanity_check(void *key, void *datum, void *datap)
++static int cf_check type_bounds_sanity_check(
++    void *key, void *datum, void *datap)
+ {
+     struct type_datum *upper, *type;
+     struct policydb *p = datap;
+diff --git a/xen/xsm/flask/ss/services.c b/xen/xsm/flask/ss/services.c
+index 42686535f2c4..2f6d3d350d05 100644
+--- a/xen/xsm/flask/ss/services.c
++++ b/xen/xsm/flask/ss/services.c
+@@ -283,7 +283,7 @@ static int constraint_expr_eval(struct context *scontext,
+  * security_dump_masked_av - dumps masked permissions during
+  * security_compute_av due to RBAC, MLS/Constraint and Type bounds.
+  */
+-static int dump_masked_av_helper(void *k, void *d, void *args)
++static int cf_check dump_masked_av_helper(void *k, void *d, void *args)
+ {
+     struct perm_datum *pdatum = d;
+     char **permission_names = args;
+@@ -1240,7 +1240,7 @@ static int validate_classes(struct policydb *p)
+ }
+ 
+ /* Clone the SID into the new SID table. */
+-static int clone_sid(u32 sid, struct context *context, void *arg)
++static int cf_check clone_sid(u32 sid, struct context *context, void *arg)
+ {
+     struct sidtab *s = arg;
+ 
+@@ -1277,7 +1277,7 @@ struct convert_context_args {
+  * in the policy `p->newp'.  Verify that the
+  * context is valid under the new policy.
+  */
+-static int convert_context(u32 key, struct context *c, void *p)
++static int cf_check convert_context(u32 key, struct context *c, void *p)
+ {
+     struct convert_context_args *args;
+     struct context oldc;
+diff --git a/xen/xsm/flask/ss/symtab.c b/xen/xsm/flask/ss/symtab.c
+index d98c116d5b97..0ce7e08c24ea 100644
+--- a/xen/xsm/flask/ss/symtab.c
++++ b/xen/xsm/flask/ss/symtab.c
+@@ -12,7 +12,7 @@
+ #include <xen/errno.h>
+ #include "symtab.h"
+ 
+-static unsigned int symhash(struct hashtab *h, const void *key)
++static unsigned int cf_check symhash(struct hashtab *h, const void *key)
+ {
+     const char *p, *keyp;
+     unsigned int size;
+@@ -26,7 +26,8 @@ static unsigned int symhash(struct hashtab *h, const void *key)
+     return val & (h->size - 1);
+ }
+ 
+-static int symcmp(struct hashtab *h, const void *key1, const void *key2)
++static int cf_check symcmp(
++    struct hashtab *h, const void *key1, const void *key2)
+ {
+     const char *keyp1, *keyp2;
  
 -- 
 2.11.0
