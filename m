@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB73C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232859.404034 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89617C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232861.404041 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxF-0007Ir-CF; Fri, 26 Nov 2021 13:07:53 +0000
+	id 1mqaxG-0007cl-Jw; Fri, 26 Nov 2021 13:07:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232859.404034; Fri, 26 Nov 2021 13:07:52 +0000
+Received: by outflank-mailman (output) from mailman id 232861.404041; Fri, 26 Nov 2021 13:07:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxE-0007H7-Kd; Fri, 26 Nov 2021 13:07:52 +0000
-Received: by outflank-mailman (input) for mailman id 232859;
- Fri, 26 Nov 2021 13:07:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqaxG-0007Yf-4b; Fri, 26 Nov 2021 13:07:54 +0000
+Received: by outflank-mailman (input) for mailman id 232861;
+ Fri, 26 Nov 2021 13:07:52 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavg-0002zD-CD
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:16 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9fdb31ff-4eb9-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 14:06:11 +0100 (CET)
+ id 1mqaui-0003W9-Jl
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:16 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7efb2e6d-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9fdb31ff-4eb9-11ec-9787-a32c541c8605
+X-Inumbo-ID: 7efb2e6d-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931971;
+  d=citrix.com; s=securemail; t=1637931914;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=xnOxh2ouMD9YxuVuQeIQxnQYuJC2T33FETvQlA9/bVY=;
-  b=Ok7bv8A75dtngjor7SrVl41xrKPUl02zyOWNP2xGE2WOT4i71JMwkhN9
-   RK+3Jd73/x/DS8mid/GHic5yyXoili3MCgt8Zr/G+o6x/vVcigMNCNK2t
-   pr//rZ68TdxPJao8fL0ahh0tg06VmlzBSDU9A8HfBHIpdZu2fmCjsXjFm
-   g=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: OZyK3cfFl/Fm6/VFQRlvSPJ8ju/C18rmFwdmN9z+74ENs6E8koK6YiffJE77w3L7mDeT0H0Xab
- 6hvLhjosfR0bmOSTDofDO5EyBzLadDGsHFFslfIq12Pq/EyQssxVK6WNFqpyM5ja0zuXk6ZrMN
- qRkGtUGOdpeFaBkBW4IoTc4Vn+cDg3cvAnfMTdAjeSmqB+NOHzIjL3Ctmm1+ElWviGMHDqKvdB
- xQWzKQz6x7gPqTCbB5WHNKdGV8LHomrkC3afNgM7yhmbRCSqzQc8hkRBrchKrKG7MW8ZKCNh9g
- NpMsm12s653XIvt08wGoDudO
+  bh=AtKkHK4Fn9Tibx+JcfjODOJaD4dj5WX9w5aEerifsuI=;
+  b=Bqi5CYy77kAnfoq3UW9ww0q/T7daq4cURakCvLeNH9pHNPMGT3RtyF2C
+   4GWfCu2VVGNzGNF5vIkc1PMsg0FCgW4mi0eGvXu+OT49P4jmypZO3RIb4
+   1MAW+MIhiiP0WLXjE7nlfj9AlaBYEzD8+IUvNaaOIFCRI0Pce85VdzxAE
+   E=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: pIQJ7FhTgUrM8YBosF6BU8m+O0b8OBTcvCK/9DljwUQNqpG9tdw/V9MsO6XszAgnd+tkHMgnfy
+ 0jn94jvzFviXY1z7iokKWf5XE/pH0ymMXgr8uTyMaPembhSTMTGJTjI6B6A62fUHNy/ELn+nNC
+ HLXtwRtZDQQgRI8mU+U17PdLTkm3m5gkNFgl9uJZ7ZuTqrjLAX4rNaHLcJuvrA/AdQkddp4RPy
+ DkdkW9pI3lFuCETeK9GDdbtD11Lz63U/icDd5RHJiD2QSq00cOfT5ez9f8mme3t61w0uvJZNKo
+ DQUqXwa/m4voj81LharwsjP2
 X-SBRS: 5.1
-X-MesageID: 60695344
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 58193791
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:rMEQm6/9ga7POMEtV9JlDrUDTXmTJUtcMsCJ2f8bNWPcYEJGY0x3n
- GZNDTjVbPfcY2WgKdogboiy8hgG7JaByYUxSVNorSo8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdj3NYy6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhIk
- Oh2lbuVQDsFBaGWh78BVENoTyhHaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4WQ6eDP
- JZFAdZpRDT5aTFFP14aMqIFobiRgFDQWWVXk3vA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru3U70HxUbP9y30iee/zSngeqntTP2XsceGaO18tZugUaP3SoDBRsOT1y5rPKlzEmkVLpix
- 1c8o3R06/JorQryE4e7D0bQTGO4UgA0YoJtKM0dzQix5pHYuRnCGm9efmJIUYlz3CMpfgAC2
- liMltLvIDVgtryJVH6QnoupQSOO1Ts9djFbO3JdJecRy5y6+dxo0EqTJjp2OPft1oWdJN3m/
- 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiGyNO9PABbvzt68owGOlor+p5
- yNsdy+2tr1mMH11vHbRKNjh5Znwjxp/DBXSgER0A74q/Cm39niocOh4uW8lexc3b5lVJWG1O
- yc/XD+9ArcIZxNGioctPuqM5zkCl/C8RbwJqNiIBjaxXnSBXFDep3w/DaJh92vsjFItgckC1
- WSzKq6R4YIhIf0/llKeHr5FuZdyn3xW7T6DFPjTkkX8uZLDNSH9dFvwGAbXBgzPxPjf+1u9H
- hc2H5bi9iizp8WiOHSKqtBKcghRRZX5bLivw/Fqmie4ClIOMAkc5zX5n9vNoqRpwPZYkPnm5
- Ha4VhMKwVbznySfew6LdmpiePXkWpMm9SA3OiklPFCJ3Xk/YNnwsPdDJsVvJbR3pvZ+yfNUT
- uUef5nSCPp4VTmaqS8WaoPwrdI+eU3z1x6OJSesfBM2Y4VkG17S4tbhcwa2rHsOAyO7uNEQu
- bql0g+HE5MPSx47VJTdae61zkP3tn8YwbogU0zNK9hVWUPt7Ik1dHCh0q5pe5kBcEyRyCGb2
- gCaBQYjidPM+4JlosPUga2krpuyF7csFERtAGSGv629MjPX/zT/zNYYAvqIZz3USEj95L6mO
- bdO1/j5PfAKwARKvo57H+o5xK4y/YKy9bpTzwAiF3TXdVW7TLhnJyDej8VIs6RMwJ5fuBe3B
- R3TqoULZ+3RNZO3CkMVKSokcv+HhKMdlTTl5PgoJFn3uX1s972dXEQOZxSBhUSx9leu3F/JF
- Qv5hPMr1g==
-IronPort-HdrOrdr: A9a23:dXKQ7anUUmKUK5MHGwI1Dtf0rWTpDfI/3DAbv31ZSRFFG/Fw9v
- re/8jzuiWftN98YhwdcLO7WJVoI0mzyXcd2+B4VotKOjOLhILCFuBfBOXZrAEJ30bFh4tgPW
- AKSdkdNOHN
+IronPort-Data: A9a23:0JNBl6tYFeKRys/g1YzV9i5MaufnVJtZMUV32f8akzHdYApBsoF/q
+ tZmKWvXOf+DNmb1eYp3aIS080tV7ZKEmN5nGQs+pCs3RHsT+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ NpllLi9UwwXEvD1nssTUkljLyBvJolFweqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
+ 5NIMmU+NXwsZTVsZWZLCpwQx965g0DDKiZkil+H9fEotj27IAtZj+G2bYu9lsaxbdpRtlaVo
+ CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
+ UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO8we5RuG9IaJ2gC2CGlUdQJAeccCt/ZjEFTGy
+ WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WsQWmoq
+ w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSEhRqjBNzAJrVkg
+ JTis5PFhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43aZlUJ2K2M
+ RON5Vg5CHpv0J2CNvQfj2WZUZlC8EQdPY69CqC8giRmPvCdizNrDAkxPBXNjggBYWAnkL0lO
+ IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
+ I0BXyZLoj0CONDDjt7/rdROcAtUdCdjXvgbaaV/L4a+H+avI0l5Y9e5/F/rU9YNc319mria8
+ 3ejdFVfzVaj13TLJR/TMiJoaa/1XIY5pnU+ZHR+MVGt0nklQICu8KZAKMdnIeh5rLRunaxuU
+ v0IW8ScGfATGD7JzCsQMMvmp4t4eRX12Q/XZ3i5YCIydoJLThDS/oO2ZRPm8SQDV3LltcY3r
+ 7C6+BncRJ4PG1ZrAMrMMar9xFKtp3kN3ul1WhKQcNVUfUzt9qlsKjDw0aBrc51dd02by2LDh
+ QiMABoeqe3cmKMP8YHE1fKesoOkM+piBU4GTWPV2qm7aHvB9W25zI4eDOvRJWLBVHn58bmJb
+ PlOy62uK+UOmVtHvtYuE7tvyq5itdLjq6UDk1ZhFXTPKV+qFqlhMj+N2swW7v9BwbpQuA2XX
+ EOT+4YFZeXVaZ29SFNBdhA4aumj1O0PnmiA5Ps4F0z2+Str8efVSk5VJRSN1HRQIbYd3FnJG
+ gv9VBr6MzCCtyc=
+IronPort-HdrOrdr: A9a23:5Bs6uKCqFNqtR3blHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
+ xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
+ 9dmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="60695344"
+   d="scan'208";a="58193791"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 57/65] x86/setup: Read CR4 earlier in __start_xen()
-Date: Fri, 26 Nov 2021 12:34:38 +0000
-Message-ID: <20211126123446.32324-58-andrew.cooper3@citrix.com>
+Subject: [PATCH 48/65] x86/aepi: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:29 +0000
+Message-ID: <20211126123446.32324-49-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,42 +102,272 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This is necessary for read_cr4() to function correctly.  Move the EFER caching
-at the same time.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/setup.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 9bd42a55f94b..141957c9f6a5 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -872,6 +872,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+I was very surprised when encountering this...  AML and EFI are bad enough,
+but why on earth do we need yet another firmware provided arbitrary turning
+machine to be executing in Xen's context.
+---
+ xen/drivers/acpi/apei/apei-base.c     | 32 ++++++++++----------
+ xen/drivers/acpi/apei/apei-internal.h | 20 ++++++------
+ xen/drivers/acpi/apei/erst.c          | 57 +++++++++++++++++------------------
+ 3 files changed, 54 insertions(+), 55 deletions(-)
+
+diff --git a/xen/drivers/acpi/apei/apei-base.c b/xen/drivers/acpi/apei/apei-base.c
+index 6f81e7fa366a..de75c1cef992 100644
+--- a/xen/drivers/acpi/apei/apei-base.c
++++ b/xen/drivers/acpi/apei/apei-base.c
+@@ -80,8 +80,8 @@ int __apei_exec_read_register(struct acpi_whea_header *entry, u64 *val)
+ 	return 0;
+ }
  
-     /* Full exception support from here on in. */
+-int apei_exec_read_register(struct apei_exec_context *ctx,
+-			    struct acpi_whea_header *entry)
++int cf_check apei_exec_read_register(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 	u64 val = 0;
+@@ -94,8 +94,8 @@ int apei_exec_read_register(struct apei_exec_context *ctx,
+ 	return 0;
+ }
  
-+    rdmsrl(MSR_EFER, this_cpu(efer));
-+    asm volatile ( "mov %%cr4,%0" : "=r" (get_cpu_info()->cr4) );
-+
-     /* Enable NMIs.  Our loader (e.g. Tboot) may have left them disabled. */
-     enable_nmis();
+-int apei_exec_read_register_value(struct apei_exec_context *ctx,
+-				  struct acpi_whea_header *entry)
++int cf_check apei_exec_read_register_value(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
  
-@@ -918,9 +921,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+@@ -126,14 +126,14 @@ int __apei_exec_write_register(struct acpi_whea_header *entry, u64 val)
+ 	return rc;
+ }
  
-     parse_video_info();
+-int apei_exec_write_register(struct apei_exec_context *ctx,
+-			     struct acpi_whea_header *entry)
++int cf_check apei_exec_write_register(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return __apei_exec_write_register(entry, ctx->value);
+ }
  
--    rdmsrl(MSR_EFER, this_cpu(efer));
--    asm volatile ( "mov %%cr4,%0" : "=r" (get_cpu_info()->cr4) );
--
-     /* We initialise the serial devices very early so we can get debugging. */
-     ns16550.io_base = 0x3f8;
-     ns16550.irq     = 4;
+-int apei_exec_write_register_value(struct apei_exec_context *ctx,
+-				   struct acpi_whea_header *entry)
++int cf_check apei_exec_write_register_value(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 
+@@ -143,8 +143,8 @@ int apei_exec_write_register_value(struct apei_exec_context *ctx,
+ 	return rc;
+ }
+ 
+-int apei_exec_noop(struct apei_exec_context *ctx,
+-		   struct acpi_whea_header *entry)
++int cf_check apei_exec_noop(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return 0;
+ }
+@@ -230,9 +230,9 @@ static int __init apei_exec_for_each_entry(struct apei_exec_context *ctx,
+ 	return 0;
+ }
+ 
+-static int __init pre_map_gar_callback(struct apei_exec_context *ctx,
+-				       struct acpi_whea_header *entry,
+-				       void *data)
++static int __init cf_check pre_map_gar_callback(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry,
++	void *data)
+ {
+ 	u8 ins = entry->instruction;
+ 
+@@ -259,9 +259,9 @@ int __init apei_exec_pre_map_gars(struct apei_exec_context *ctx)
+ 	return rc;
+ }
+ 
+-static int __init post_unmap_gar_callback(struct apei_exec_context *ctx,
+-					  struct acpi_whea_header *entry,
+-					  void *data)
++static int __init cf_check post_unmap_gar_callback(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry,
++	void *data)
+ {
+ 	u8 ins = entry->instruction;
+ 
+diff --git a/xen/drivers/acpi/apei/apei-internal.h b/xen/drivers/acpi/apei/apei-internal.h
+index b813d55b92a9..360e94b9c877 100644
+--- a/xen/drivers/acpi/apei/apei-internal.h
++++ b/xen/drivers/acpi/apei/apei-internal.h
+@@ -68,16 +68,16 @@ static inline int apei_exec_run_optional(struct apei_exec_context *ctx, u8 actio
+ 
+ int __apei_exec_read_register(struct acpi_whea_header *entry, u64 *val);
+ int __apei_exec_write_register(struct acpi_whea_header *entry, u64 val);
+-int apei_exec_read_register(struct apei_exec_context *ctx,
+-			    struct acpi_whea_header *entry);
+-int apei_exec_read_register_value(struct apei_exec_context *ctx,
+-				  struct acpi_whea_header *entry);
+-int apei_exec_write_register(struct apei_exec_context *ctx,
+-			     struct acpi_whea_header *entry);
+-int apei_exec_write_register_value(struct apei_exec_context *ctx,
+-				   struct acpi_whea_header *entry);
+-int apei_exec_noop(struct apei_exec_context *ctx,
+-		   struct acpi_whea_header *entry);
++int cf_check apei_exec_read_register(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
++int cf_check apei_exec_read_register_value(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
++int cf_check apei_exec_write_register(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
++int cf_check apei_exec_write_register_value(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
++int cf_check apei_exec_noop(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
+ int apei_exec_pre_map_gars(struct apei_exec_context *ctx);
+ int apei_exec_post_unmap_gars(struct apei_exec_context *ctx);
+ 
+diff --git a/xen/drivers/acpi/apei/erst.c b/xen/drivers/acpi/apei/erst.c
+index c5df512b9838..40d8f00270d0 100644
+--- a/xen/drivers/acpi/apei/erst.c
++++ b/xen/drivers/acpi/apei/erst.c
+@@ -114,40 +114,40 @@ static int erst_timedout(u64 *t, u64 spin_unit)
+ 	return 0;
+ }
+ 
+-static int erst_exec_load_var1(struct apei_exec_context *ctx,
+-			       struct acpi_whea_header *entry)
++static int cf_check erst_exec_load_var1(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return __apei_exec_read_register(entry, &ctx->var1);
+ }
+ 
+-static int erst_exec_load_var2(struct apei_exec_context *ctx,
+-			       struct acpi_whea_header *entry)
++static int cf_check erst_exec_load_var2(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return __apei_exec_read_register(entry, &ctx->var2);
+ }
+ 
+-static int erst_exec_store_var1(struct apei_exec_context *ctx,
+-				struct acpi_whea_header *entry)
++static int cf_check erst_exec_store_var1(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return __apei_exec_write_register(entry, ctx->var1);
+ }
+ 
+-static int erst_exec_add(struct apei_exec_context *ctx,
+-			 struct acpi_whea_header *entry)
++static int cf_check erst_exec_add(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	ctx->var1 += ctx->var2;
+ 	return 0;
+ }
+ 
+-static int erst_exec_subtract(struct apei_exec_context *ctx,
+-			      struct acpi_whea_header *entry)
++static int cf_check erst_exec_subtract(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	ctx->var1 -= ctx->var2;
+ 	return 0;
+ }
+ 
+-static int erst_exec_add_value(struct apei_exec_context *ctx,
+-			       struct acpi_whea_header *entry)
++static int cf_check erst_exec_add_value(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 	u64 val;
+@@ -160,8 +160,8 @@ static int erst_exec_add_value(struct apei_exec_context *ctx,
+ 	return rc;
+ }
+ 
+-static int erst_exec_subtract_value(struct apei_exec_context *ctx,
+-				    struct acpi_whea_header *entry)
++static int cf_check erst_exec_subtract_value(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 	u64 val;
+@@ -174,8 +174,8 @@ static int erst_exec_subtract_value(struct apei_exec_context *ctx,
+ 	return rc;
+ }
+ 
+-static int erst_exec_stall(struct apei_exec_context *ctx,
+-			   struct acpi_whea_header *entry)
++static int cf_check erst_exec_stall(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	udelay((ctx->var1 > FIRMWARE_MAX_STALL) ? 
+ 			FIRMWARE_MAX_STALL : 
+@@ -183,8 +183,8 @@ static int erst_exec_stall(struct apei_exec_context *ctx,
+ 	return 0;
+ }
+ 
+-static int erst_exec_stall_while_true(struct apei_exec_context *ctx,
+-				      struct acpi_whea_header *entry)
++static int cf_check erst_exec_stall_while_true(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 	u64 val;
+@@ -205,9 +205,8 @@ static int erst_exec_stall_while_true(struct apei_exec_context *ctx,
+ 	return 0;
+ }
+ 
+-static int erst_exec_skip_next_instruction_if_true(
+-	struct apei_exec_context *ctx,
+-	struct acpi_whea_header *entry)
++static int cf_check erst_exec_skip_next_instruction_if_true(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 	u64 val;
+@@ -223,27 +222,27 @@ static int erst_exec_skip_next_instruction_if_true(
+ 	return 0;
+ }
+ 
+-static int erst_exec_goto(struct apei_exec_context *ctx,
+-			  struct acpi_whea_header *entry)
++static int cf_check erst_exec_goto(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	ctx->ip = ctx->value;
+ 	return APEI_EXEC_SET_IP;
+ }
+ 
+-static int erst_exec_set_src_address_base(struct apei_exec_context *ctx,
+-					  struct acpi_whea_header *entry)
++static int cf_check erst_exec_set_src_address_base(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return __apei_exec_read_register(entry, &ctx->src_base);
+ }
+ 
+-static int erst_exec_set_dst_address_base(struct apei_exec_context *ctx,
+-					  struct acpi_whea_header *entry)
++static int cf_check erst_exec_set_dst_address_base(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	return __apei_exec_read_register(entry, &ctx->dst_base);
+ }
+ 
+-static int erst_exec_move_data(struct apei_exec_context *ctx,
+-			       struct acpi_whea_header *entry)
++static int cf_check erst_exec_move_data(
++	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+ {
+ 	int rc;
+ 	u64 offset;
 -- 
 2.11.0
 
