@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F66C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:05:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232762.403723 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC729C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232772.403749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauY-000738-Um; Fri, 26 Nov 2021 13:05:06 +0000
+	id 1mqawL-0002do-04; Fri, 26 Nov 2021 13:06:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232762.403723; Fri, 26 Nov 2021 13:05:06 +0000
+Received: by outflank-mailman (output) from mailman id 232772.403749; Fri, 26 Nov 2021 13:06:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqauY-00071M-Lu; Fri, 26 Nov 2021 13:05:06 +0000
-Received: by outflank-mailman (input) for mailman id 232762;
- Fri, 26 Nov 2021 13:05:04 +0000
+	id 1mqawK-0002da-SQ; Fri, 26 Nov 2021 13:06:56 +0000
+Received: by outflank-mailman (input) for mailman id 232772;
+ Fri, 26 Nov 2021 13:06:54 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqauV-0003W9-UC
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:04 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7790ee42-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:02 +0100 (CET)
+ id 1mqauw-0003W9-Cz
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:30 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8432bbe3-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:25 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7790ee42-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 8432bbe3-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931902;
+  d=citrix.com; s=securemail; t=1637931924;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=68x0fT4tZlqz9kHnlGXMQc+oz8hTkbs5wEWSP4Ikepk=;
-  b=L2hevmt+OBV/h2oFXjxZk53rZkomfGfTElgO1w1Cvz3/QDRb8my2v6yQ
-   7vGcJX4IMvMcGN2M97xETiv01Q6K8AxGfj3Mn3cpgvU49FGkMTi/JSFwD
-   EEJnvptprbtTBEPGB6YrsQ216aLBS6K2Lkft/vWTfEpwxbPGK2q4dG5D6
-   A=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 7oAFDYuEYgaCKzyUVMpfzCGZeKaLzz0oIodgWpZhGW06SdI24LD3zuOxByjunmQjbb+ySe7W3J
- TumNNC8JrmLf1zGvEJq05WqtE/26F0VyPyVuIEtdmPKxYgCQcTGJqVEQrNm7Crk43MvtCPqnji
- GyjmzVAK3r0L9zImEWftvgsoqKHcnqCE0z1ooATRWTibo+nr6j8zhcUUh+kCXR8Bojj6NhOYk7
- O2LuP2mYoLEqXazuhI9lxC9SV4Viqa8OdXLQqltH9OSkC52uqW53iud/zAz8wiJMu3f8FxC9xN
- 4mOWzZZtRJZdsHHsaoaAYpON
+  bh=SoaVzjnC4k/9FIXMh3yDocr0kLc2Ez0/muzxLvgq4vw=;
+  b=PvMp2EXmQkxpELxTqpXudzECF0fP5Pk8XUpsDbesO0ll1Ik9nO+LvgbK
+   EIg76Sj/fWo8GB1yMtYnheviLFK6fELRCpPJQSVnS1ZU47vpDX3n3chC4
+   bPQ4n0tTn9gTmKzRlcLyW2sIPAzEZDxBjG+WKK1fCNZTCPsZMHiSXlhj/
+   U=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: IPuR6OEJii/cuW4FHwFCAb2Qfs3WRyC9KwpwrtROb2XahnhvNwGGdsDrrZ3eFwChASeqicmiR/
+ 18xq+nx78zAajtR4lLwo1ySPrfG1hVo1Z+3YYHZSpnK18BM8yc/St7/fv2k0ip/WQVfhKY1w3e
+ ArCLQ5GAsaODr0wP1N+lI+ze83h+d5+ChiTlxMLMEDibLn5wbcvrYar6/iW1FzqiJ4Xjvgp37d
+ 7eWZyN1VHa50adIN+pxoeOSxkg8JEEo3ItAtO2C3T80V4tPNeRJEBJzXVnDYFxU9khB1i9UnN/
+ Q7pmY8EEw4XaGYHiI3yon+PM
 X-SBRS: 5.1
-X-MesageID: 58676346
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 60695261
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:RqW/8a5TWXtcczz7n6KgkAxRtM3AchMFZxGqfqrLsTDasY5as4F+v
- mIcWGGFMq6OZ2fzKNF0Ot+08kJXvZHRmtZnSgtsqi8yHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
- +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdg2NAw27BVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z9
- /B2l5mQSVsSZYKdwdwtdhdfM3hkMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gTTaiBO
- ZFFN1KDajzkQC0IEU0GCqkTo+GiqWPlchRWmg2K8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
- G2u12bkBhAXMvSPxDzD9Wij7sfUhj/yUo8WELy+99ZpjUeVy2hVDwcZPXOrrP/8hkOgVtZ3L
- 00P5jFovaU07FasTNT2Q1u/unHsljw2VsdUEuY6wBqQ0aeS6AGcblXoVRYYNoZg7pVvA2V3i
- BnZxLsFGACDrpWqbEm/85eU8QjpFnlMFV8naygkFBEKtoyLTJ4IsjrDSdNqEaiQh9LzGC3tz
- z3ikBXSl4n/nuZQifzloAmvbyaE48GQE1Vrvlm/sneNt1shPOaYi5qUBU83BBqqBKKQVRG/s
- XcNgKByB8heXMjWxERhrAjgdYxFBspp0hWA3jaD/LF7rlxBHkJPm6gLu1mSw28zb645lcfBO
- hO7hO+ozMY70IGWRaF2eZmtLM8h0LLtE9/oPtiNMIERMsYsK17bon01DaJ144wLuBN3+U3YE
- c3GGftA8F5AUfg3pNZIb7t1PUAXKtAWmjqIGMGTI+WP2ruCfn+FIYrpw3PVBt3VGJis+V2Pm
- /4GbpPi40wGDIXWP3mGmaZOfAtiBSVqWvjLRzl/K7frzvxOQzp6VZc8ANoJJuRYokiivruSo
- yzmBBYHkAGXaL+uAVziV02PoYjHBf5XxU/X9wR2Vbpx83R8M4up8okFcJ47Iesu+OB5lKYmR
- PgZYcSQRP9IT22fqTgaaJD8qq1kdQiq2l3Sb3b0PmBncs4yXRHN9//lYhDrqHsEAB2ouJZsu
- LanzA7aH8YOHlwwEMbMZfuz5FqtpnxByvlqVk7FL4ALKkXh+YRnMQLrifozL51eIBnP3GLCh
- Q2XHQ0Zta/GpIpsqIvFgqWNroGIFepiHxUFQzmHvOjubSSDpzit245NVuqMbAvxbmKs9fXwf
- /hRwtH9LOYDwARAvb1jHus51qk5/dbu+eNXl1w2AHXRYl23Ibp8OX3aj9JXv6hAy7IF6wu7X
- kWDpotTNbmTYZ63FVcQIEwub/iZ1OFSkT7XtKxnLEL/7S5x3byGTUQNYEXc1H0DdON4YNE/3
- OMsmM8K8Aju2BMlP+GPgj1Q62nRfGcLVL8qt81CDYLm4ubxJoquvXAI5vfK3ayy
-IronPort-HdrOrdr: A9a23:RzLJtawemZW0Xs9NectoKrPwFL1zdoMgy1knxilNoRw8SKKlfq
+IronPort-Data: A9a23:2qtBeqByL/MynRVW/+Xkw5YqxClBgxIJ4kV8jS/XYbTApDtxhjYDz
+ WYYWWmOaanfNGqjKNh+bd6wp0MB7ZGGn99jQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX5400w7wYbVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/jifUv/JX1
+ N9x8pmXGBcxY5P+xaMaakwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcGhGlh25oQRJ4yY
+ eIHSGIsb0XKfydLeUkXCoslrbmZlnXwJmgwRFW9+vNsvjm7IBZK+KfpGMrYfJqNX8o9tmSyq
+ 3/C/m/5KgoHL9HZwj2Amlq8i+mKkS7lVYY6ELyj6uUskFCV3nYUChAdSR28u/bRt6Klc4sBc
+ QpOoHNo9PVsshzwJjXgY/GmiHuW4z4+fcZaL6o/z1Cd0vfq0VveAVFRG1atd+canMMxQDUr0
+ HqAkNXoGSFjvdWpdJ6NyluHhWjsYHZIdAfucQdBFFJYuIe7/OnfmzqWFo47eJNZmOEZDt0ZL
+ 9qiiCElz4segscQv0lQ1QCW2mn8znQlo+Nc2+k2Yo5Hxl8mDGJGT9bxgbQ+0RqmBN3CJrVml
+ CJZ8/VyFMhUUfmweNWlGY3h5o2B6fefKyH7ilVyBZQn/DnF0yf9Jt8AvmwhdRs3bp1sldrVj
+ Kn74lg5CHh7ZibCUEOKS9jpV5RCIVbISbwJqcw4nvIRO8MsJWdrDQllZFKK3nCFraTfufpXB
+ HtvSu71VSxyIf0+lFKeHr5BuZd2lnFW7T6CHvjTkkX4uYdykVbIEN/pxnPVNbtnhE5FyS2Im
+ +ti2zyil08CDbagO3aPqub+7zkidBAGOHw/kOQPHsbrH+asMDt8YxMI6b9+KYFjgYpPkeLEo
+ iO0VkNCkQKtjnzbMwSaLHtkbeq3D5p4qHs6Ow0qPEqphCd/Mdr+sv9HestlZ6Qj+cxi0eVwE
+ 6sPdfKfD6kdUT/A4TkcM8Xw9dQwaBSxiAuSFCO5ezxjLYV4TgnE94a8LAvi/SUDFAStss46r
+ +Hy3w/XW8NbFQ9jENzXeLSkyFbo5SoRn+d7Xk3pJNhPeRqzrNg2enKp1vJuepMCMxTOwDeex
+ j26OxZAqLmfuZIx/fnImbuA89WjHdxhExcIBGLc97u3a3XXpzLx3Y9aXe+UVjnBT2eoqr66b
+ OBYwvygYv0KmFFG79h1H7pxlP9s4tLuo/lRzxh+HWWNZFOuU+syLn6D1MhJl6tM2r4G5lfmB
+ hPRooFXaeeTJcfoMF8NPw50PO2M2MYdliTW8flocl7x4zV6/ebfXEhfV/VWZPex8Feh3FsZ/
+ Noc
+IronPort-HdrOrdr: A9a23:Lf051KygZks2fppUp5UKKrPwFL1zdoMgy1knxilNoRw8SKKlfq
  eV7Y0mPH7P+VAssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
  4JSdkHNDSaNzlHZKjBjzVQa+xQouW6zA==
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58676346"
+   d="scan'208";a="60695261"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 22/65] xen/decompress: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:03 +0000
-Message-ID: <20211126123446.32324-23-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 31/65] x86/ucode: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:12 +0000
+Message-ID: <20211126123446.32324-32-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -106,107 +105,116 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 ---
- tools/libs/guest/xg_dom_decompress_unsafe.h | 4 ++++
- xen/common/bunzip2.c                        | 2 +-
- xen/common/decompress.c                     | 2 +-
- xen/common/unlzma.c                         | 2 +-
- xen/common/zstd/zstd_common.c               | 4 ++--
- xen/common/zstd/zstd_internal.h             | 4 ++--
- 6 files changed, 11 insertions(+), 7 deletions(-)
+ xen/arch/x86/cpu/microcode/amd.c   |  9 +++++----
+ xen/arch/x86/cpu/microcode/core.c  |  4 ++--
+ xen/arch/x86/cpu/microcode/intel.c | 10 +++++-----
+ 3 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/tools/libs/guest/xg_dom_decompress_unsafe.h b/tools/libs/guest/xg_dom_decompress_unsafe.h
-index 4e0bf23aa587..98b8a8a40971 100644
---- a/tools/libs/guest/xg_dom_decompress_unsafe.h
-+++ b/tools/libs/guest/xg_dom_decompress_unsafe.h
-@@ -8,6 +8,10 @@ typedef int decompress_fn(unsigned char *inbuf, unsigned int len,
-                           void (*error)(const char *x));
- #endif
+diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
+index fe92e594f129..0afa2192bf1d 100644
+--- a/xen/arch/x86/cpu/microcode/amd.c
++++ b/xen/arch/x86/cpu/microcode/amd.c
+@@ -91,7 +91,7 @@ static struct {
+     uint16_t id;
+ } equiv __read_mostly;
  
-+#ifndef cf_check
-+#define cf_check
-+#endif
-+
- int xc_dom_decompress_unsafe(
-     decompress_fn fn, struct xc_dom_image *dom, void **blob, size_t *size)
-     __attribute__((visibility("internal")));
-diff --git a/xen/common/bunzip2.c b/xen/common/bunzip2.c
-index 2087cfbbedc8..782b589a8b01 100644
---- a/xen/common/bunzip2.c
-+++ b/xen/common/bunzip2.c
-@@ -607,7 +607,7 @@ static int __init read_bunzip(struct bunzip_data *bd, unsigned char *outbuf, int
- 	goto decode_next_byte;
- }
- 
--static int __init nofill(void *buf, unsigned int len)
-+static int __init cf_check nofill(void *buf, unsigned int len)
+-static void collect_cpu_info(void)
++static void cf_check collect_cpu_info(void)
  {
- 	return -1;
- }
-diff --git a/xen/common/decompress.c b/xen/common/decompress.c
-index 79e60f4802d5..989336983f61 100644
---- a/xen/common/decompress.c
-+++ b/xen/common/decompress.c
-@@ -3,7 +3,7 @@
- #include <xen/string.h>
- #include <xen/decompress.h>
+     struct cpu_signature *csig = &this_cpu(cpu_sig);
  
--static void __init error(const char *msg)
-+static void __init cf_check error(const char *msg)
+@@ -204,7 +204,7 @@ static enum microcode_match_result compare_header(
+     return compare_revisions(old->patch_id, new->patch_id);
+ }
+ 
+-static enum microcode_match_result compare_patch(
++static enum microcode_match_result cf_check compare_patch(
+     const struct microcode_patch *new, const struct microcode_patch *old)
  {
-     printk("%s\n", msg);
+     /* Both patches to compare are supposed to be applicable to local CPU. */
+@@ -214,7 +214,7 @@ static enum microcode_match_result compare_patch(
+     return compare_header(new, old);
  }
-diff --git a/xen/common/unlzma.c b/xen/common/unlzma.c
-index d0ef78eef0d1..6cd99023adf6 100644
---- a/xen/common/unlzma.c
-+++ b/xen/common/unlzma.c
-@@ -76,7 +76,7 @@ struct rc {
- #define RC_MODEL_TOTAL_BITS 11
  
- 
--static int __init nofill(void *buffer, unsigned int len)
-+static int __init cf_check nofill(void *buffer, unsigned int len)
+-static int apply_microcode(const struct microcode_patch *patch)
++static int cf_check apply_microcode(const struct microcode_patch *patch)
  {
- 	return -1;
- }
-diff --git a/xen/common/zstd/zstd_common.c b/xen/common/zstd/zstd_common.c
-index 9a85e938cdd6..5c44e5db7671 100644
---- a/xen/common/zstd/zstd_common.c
-+++ b/xen/common/zstd/zstd_common.c
-@@ -54,12 +54,12 @@ void *__init ZSTD_stackAllocAll(void *opaque, size_t *size)
- 	return stack_push(stack, *size);
+     int hw_err;
+     unsigned int cpu = smp_processor_id();
+@@ -299,7 +299,8 @@ static int scan_equiv_cpu_table(const struct container_equiv_table *et)
+     return -ESRCH;
  }
  
--void *__init ZSTD_stackAlloc(void *opaque, size_t size)
-+void *__init cf_check ZSTD_stackAlloc(void *opaque, size_t size)
+-static struct microcode_patch *cpu_request_microcode(const void *buf, size_t size)
++static struct microcode_patch *cf_check cpu_request_microcode(
++    const void *buf, size_t size)
  {
- 	ZSTD_stack *stack = (ZSTD_stack *)opaque;
- 	return stack_push(stack, size);
+     const struct microcode_patch *saved = NULL;
+     struct microcode_patch *patch = NULL;
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 841364208053..c07f68ba350e 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -291,12 +291,12 @@ static int wait_for_condition(bool (*func)(unsigned int data),
+     return 0;
  }
--void __init ZSTD_stackFree(void *opaque, void *address)
-+void __init cf_check ZSTD_stackFree(void *opaque, void *address)
+ 
+-static bool wait_cpu_callin(unsigned int nr)
++static bool cf_check wait_cpu_callin(unsigned int nr)
  {
- 	(void)opaque;
- 	(void)address;
-diff --git a/xen/common/zstd/zstd_internal.h b/xen/common/zstd/zstd_internal.h
-index b7dd14f6ce79..94f8c586220e 100644
---- a/xen/common/zstd/zstd_internal.h
-+++ b/xen/common/zstd/zstd_internal.h
-@@ -351,8 +351,8 @@ typedef struct {
- ZSTD_customMem ZSTD_initStack(void *workspace, size_t workspaceSize);
+     return cpumask_weight(&cpu_callin_map) >= nr;
+ }
  
- void *ZSTD_stackAllocAll(void *opaque, size_t *size);
--void *ZSTD_stackAlloc(void *opaque, size_t size);
--void ZSTD_stackFree(void *opaque, void *address);
-+void *cf_check ZSTD_stackAlloc(void *opaque, size_t size);
-+void cf_check ZSTD_stackFree(void *opaque, void *address);
+-static bool wait_cpu_callout(unsigned int nr)
++static bool cf_check wait_cpu_callout(unsigned int nr)
+ {
+     return atomic_read(&cpu_out) >= nr;
+ }
+diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
+index f6d01490e0ab..d3864b5ab03e 100644
+--- a/xen/arch/x86/cpu/microcode/intel.c
++++ b/xen/arch/x86/cpu/microcode/intel.c
+@@ -116,7 +116,7 @@ static bool signature_matches(const struct cpu_signature *cpu_sig,
+     return cpu_sig->pf & ucode_pf;
+ }
  
- /*======  common function  ======*/
+-static void collect_cpu_info(void)
++static void cf_check collect_cpu_info(void)
+ {
+     struct cpu_signature *csig = &this_cpu(cpu_sig);
+     uint64_t msr_content;
+@@ -271,7 +271,7 @@ static enum microcode_match_result microcode_update_match(
+     return compare_revisions(cpu_sig->rev, mc->rev);
+ }
  
+-static enum microcode_match_result compare_patch(
++static enum microcode_match_result cf_check compare_patch(
+     const struct microcode_patch *new, const struct microcode_patch *old)
+ {
+     /*
+@@ -284,7 +284,7 @@ static enum microcode_match_result compare_patch(
+     return compare_revisions(old->rev, new->rev);
+ }
+ 
+-static int apply_microcode(const struct microcode_patch *patch)
++static int cf_check apply_microcode(const struct microcode_patch *patch)
+ {
+     uint64_t msr_content;
+     unsigned int cpu = smp_processor_id();
+@@ -323,8 +323,8 @@ static int apply_microcode(const struct microcode_patch *patch)
+     return 0;
+ }
+ 
+-static struct microcode_patch *cpu_request_microcode(const void *buf,
+-                                                     size_t size)
++static struct microcode_patch *cf_check cpu_request_microcode(
++    const void *buf, size_t size)
+ {
+     int error = 0;
+     const struct microcode_patch *saved = NULL;
 -- 
 2.11.0
 
