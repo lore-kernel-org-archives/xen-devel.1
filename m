@@ -4,46 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3037C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 12:20:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232648.403398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8717FC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 12:35:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232668.403466 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaCs-0007Kg-GJ; Fri, 26 Nov 2021 12:19:58 +0000
+	id 1mqaRU-00024s-LF; Fri, 26 Nov 2021 12:35:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232648.403398; Fri, 26 Nov 2021 12:19:58 +0000
+Received: by outflank-mailman (output) from mailman id 232668.403466; Fri, 26 Nov 2021 12:35:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaCs-0007KZ-D4; Fri, 26 Nov 2021 12:19:58 +0000
-Received: by outflank-mailman (input) for mailman id 232648;
- Fri, 26 Nov 2021 12:19:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqaRU-00024E-CS; Fri, 26 Nov 2021 12:35:04 +0000
+Received: by outflank-mailman (input) for mailman id 232668;
+ Fri, 26 Nov 2021 12:35:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=l8BS=QN=epam.com=prvs=1964012c71=oleksandr_andrushchenko@srs-se1.protection.inumbo.net>)
- id 1mqaCq-00079e-Hi
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 12:19:56 +0000
-Received: from mx0a-0039f301.pphosted.com (mx0a-0039f301.pphosted.com
- [148.163.133.242]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2925b5d3-4eb3-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 13:19:55 +0100 (CET)
-Received: from pps.filterd (m0174677.ppops.net [127.0.0.1])
- by mx0a-0039f301.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 1AQBauFu002728;
- Fri, 26 Nov 2021 12:19:45 GMT
-Received: from eur05-db8-obe.outbound.protection.outlook.com
- (mail-db8eur05lp2111.outbound.protection.outlook.com [104.47.17.111])
- by mx0a-0039f301.pphosted.com (PPS) with ESMTPS id 3cjwtr0cdu-2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 26 Nov 2021 12:19:44 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com (2603:10a6:20b:153::17)
- by AM0PR0302MB3428.eurprd03.prod.outlook.com (2603:10a6:208:c::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23; Fri, 26 Nov
- 2021 12:19:36 +0000
-Received: from AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::c038:e032:595a:651]) by AM0PR03MB6324.eurprd03.prod.outlook.com
- ([fe80::c038:e032:595a:651%9]) with mapi id 15.20.4734.023; Fri, 26 Nov 2021
- 12:19:35 +0000
+ <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1mqaRS-0001V1-I3
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 12:35:02 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 44a49d7c-4eb5-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 13:35:00 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,167 +38,270 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2925b5d3-4eb3-11ec-9787-a32c541c8605
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ORb6+PizVGtoovzi9WJhKaX6voejuoNyKFAtlN3PQMjRwO7Epdzu5iSd5TfrgtESaLR88Pz32nICQZw9ng0/c720WzoORPJGlIlMQy4iAsUvSWzH4QZiAebLiDOIRpIFeOyN680Asx9HEWH1uCdKocXsqVKufD+9KuuaK6Hn7ipBGrMZIKxLPmKMklzQr0XlSrlHb8MkRqb4aDpy2SN1ua5osrqTdHqVYrbA6VqYk7Z2TKltu2jw+aEeyVqOp/Jic3YWHZKMYKbSnKH2lHt+P9QjSbYfhzxQSxu0QxzDcnLEq53kncpe2avGlq3dh169yUIMIomDjmmQZemiEGHF2w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4CJN6twaB/kwiO/2k7M17iV0qjqIB85527pwEKBSqL4=;
- b=OE5NniKjdngx0CB5YQ1o+1cVHjqVz/EEsmyKLUpTbJUPDEO8HPOMLGzoqtqtX6rc03Sl6gzanQWviGRqe3QFdPczV9KCzIGcSzP4oZDG1U/MG4fA/KpZxjSF256ZPVcZwxIvt47yhGjIqWkpMKyQFYHvf+jJXVh3bQ939K6tIZUlfh8AQEwPHDF9cio9gdgHa/Wt/6kMCt9nIGfBxHFLIizvgn3NMjB1opUHYeJAiPANyESPDUZI5qz6UKWKnDeNx2pK0/74ck4gxocYeC1Lu+V3pxnwY68IwqrDViEOsxePVkLS4xQwp+e4yI/+PyYPYDhE86yC0p3AnOocGZac/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4CJN6twaB/kwiO/2k7M17iV0qjqIB85527pwEKBSqL4=;
- b=Bf2IzO9gffoICiz6x+fohKvWs9ylda9UA8W9oIhWx9EHGBZbY9mTmjftUh/Q6bDFKyqmVoVYWth4JZH87T/tOB4oU03AoSVuuCGuls3RqbmlL40u06UjKawqZ3vI7Kc6mC2964EfLzh5g40JwOSi7JJrszK9S8hdYyQ1e7NcmVoUktER7p7Sx28pZZSZfZfYiCi6UurtN441EMGZw9Dz1Ig6xqwH+cS+vqZoi2PO+0Mjb5mkwWYRN1qok2SsRnKuSrKgnXG4C7seaiJQQ3h9Pmwb76KE9ONZKzdIHsKiOBaQPHBOJ/b6FJb5+7suPyS0/mLPNeoJVpG6vnTJQ+Q9Bw==
-From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-To: Bertrand Marquis <bertrand.marquis@arm.com>,
-        "roger.pau@citrix.com"
-	<roger.pau@citrix.com>
-CC: Xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien@xen.org>,
-        "sstabellini@kernel.org" <sstabellini@kernel.org>,
-        Oleksandr Tyshchenko
-	<Oleksandr_Tyshchenko@epam.com>,
-        Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>,
-        Artem Mygaiev <Artem_Mygaiev@epam.com>,
-        "jbeulich@suse.com" <jbeulich@suse.com>,
-        "andrew.cooper3@citrix.com"
-	<andrew.cooper3@citrix.com>,
-        "george.dunlap@citrix.com"
-	<george.dunlap@citrix.com>,
-        "paul@xen.org" <paul@xen.org>, Rahul Singh
-	<rahul.singh@arm.com>,
-        Oleksandr Andrushchenko
-	<Oleksandr_Andrushchenko@epam.com>,
-        Oleksandr Andrushchenko
-	<Oleksandr_Andrushchenko@epam.com>
-Subject: Re: [PATCH v5 06/14] vpci/header: implement guest BAR register
- handlers
-Thread-Topic: [PATCH v5 06/14] vpci/header: implement guest BAR register
- handlers
-Thread-Index: AQHX4ewHyWAyD811HEGp8pIjUuVWNawUby8AgAFMuIA=
-Date: Fri, 26 Nov 2021 12:19:35 +0000
-Message-ID: <a6ee236b-5a00-8116-c744-6c94fcf46ae1@epam.com>
-References: <20211125110251.2877218-1-andr2000@gmail.com>
- <20211125110251.2877218-7-andr2000@gmail.com>
- <34FC3FE6-EBA8-4A5C-A1F3-1E9F98C0337F@arm.com>
-In-Reply-To: <34FC3FE6-EBA8-4A5C-A1F3-1E9F98C0337F@arm.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1af71ed0-bb3b-4311-8abf-08d9b0d702ba
-x-ms-traffictypediagnostic: AM0PR0302MB3428:
-x-ld-processed: b41b72d0-4e9f-4c26-8a69-f949f367c91d,ExtAddr
-x-microsoft-antispam-prvs: 
- <AM0PR0302MB3428CC62BD187FF0FE34E975E7639@AM0PR0302MB3428.eurprd03.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- zmG3WO0jvcheHsiqFAljNe4hPZigfU/ah2YYKYh/HoR/T8S6NY4sQ0LWZTF7AszpTSiTAhlM9oF7oBCtrtYONghNORyXFBVOXsG9YcwOoFWG9wLevG89hrKKrJ0Mp++em1rg/8938+x+d682gxXlLooBGbLUnzF7iHVrpP2IZut9rt6bQ6RJYhOO8oHkLzser6i+lWkK9tdZFnb1spq7rCdQ1MtEOyVp35THzfWczE0GXKg7JAcBzlzhRFsDrf1dHin2rK70GVEeAsp5FaiO146xNsKEagyzsinuzFlYYWrKvprHnE2M+4QIwK1BR1xO5YeVABup9+HaNEhS/yPm33HBFBA45cAl35xe3mVLn3G3j8YVEO3zfIIYpK3BM6gvJiiC9WQv5NZQuMbCRVcKXOGFNyAhBmEhkFMuOT0ol1xRsgkGfEg2BMxU4+KS2WNJSKx6UtxCc8KOBubXJ8Ahf/5KZUiYZHGtpIlutPn3kgcA2M1YfMgnOFabgPIO6L6rxQgWS65KIt6od4p45lX+/76e+V+lD5BipNFWHFaP1aX41tNfWLVnYh0Q/RJdzByQ8KeelVjA182jWqFMam1HXoDuNvhHUkMD+a4hEXhkN6d/Ned9IGViKwPV3aThvq5Q0B5z4EUebqP84lQvF1HSLZsGN+s7pqf76xVVzl3YSesE188F9eTR5LHR/3xle9hdxGxkRA/Pl6e4sAfkPM8gRurrx/VEQR3heNFRGyPiia+zU3ADju4eiOOBZ0A1xfDq
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR03MB6324.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(186003)(38100700002)(2616005)(26005)(38070700005)(71200400001)(36756003)(8936002)(8676002)(122000001)(31696002)(66446008)(508600001)(6486002)(6512007)(66946007)(86362001)(64756008)(66476007)(7416002)(66556008)(107886003)(91956017)(76116006)(5660300002)(4326008)(316002)(54906003)(110136005)(2906002)(6506007)(83380400001)(55236004)(53546011)(31686004)(45980500001);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?utf-8?B?dzJKb293TU5pdEJEOEZLTUQxZ09NdTFIQ052ZG80dzk2a0ZoekRldkkvV1dz?=
- =?utf-8?B?OVF5NXVsWGFwZExMOXRaM0lPZTRSZjE1Q0ZxTXVha1o2ZDVscWFWQTlra2R1?=
- =?utf-8?B?bnBWN3VlM2FtbzkzblNQVDFjR3VxZmFlMHF6bVoydmlJUE42MW5oSFlqaEQ0?=
- =?utf-8?B?UXBjVkpNZGdpSG1EZjBxSmtPR0VHVnlSSEFIb0Z2UXR3dTQwNUQzWnB1NTJt?=
- =?utf-8?B?RDNqQ3VVNnVVd3dweC9DVEJiejJGQ05HSWpnakFNOG9uLzJrUmo4bjk5aVFR?=
- =?utf-8?B?T1ZzNWJsU1A3L251UzF1ZzlvSnVGcE5FR045LzltSUNxRE1lMnpCcEhHWlds?=
- =?utf-8?B?OGs0NmRvQzIzOEpDQ1hFRkMrN1N0c3prZDFTL1c1ZjVwVklSN1FXWS9KWU9I?=
- =?utf-8?B?a2ZyNDZOMEMvZWxlOUxVSWVoK3NhcG93SDRoTENyUUdaWVlCYmw5d2NQY0xt?=
- =?utf-8?B?a3dDbXc4UzBtVWV6TDdTOFc0ZFNJRkIyMlNTcUFncmZ3dEIraDdwd0NVZG9P?=
- =?utf-8?B?RmJjQnpLUEtMeGR4djNLM1ZwVGd0UzN6QnZWSStHZ0tRVU1tdUhIaDB3dThR?=
- =?utf-8?B?dDVOeWpUUHBYaUlzVmRqRjJnR3pqTENCVHFrK1RBT09MRHRQL1Y0TGhVQ2FQ?=
- =?utf-8?B?cDVRUVRpbXlvS0QzSXZvckU0ZWxVZnFJTnkyTTBnZzc1KzZ6ZHRJcE1EbmNj?=
- =?utf-8?B?MHViR3NzeUhSaG95cGRNYzBwNzRuVmlTUjZUcS95YU1aT2dIVUlvS1Y5RUdr?=
- =?utf-8?B?ZXV3dm1EY1RnUnU0U1V1T2lkenNTMTZxVE1QRjUrSnNRQnNFc2FZa0dvWGFL?=
- =?utf-8?B?bXd4b2drVzgwWk85aGFtRkJqZkJtTlFyZEdQcmx6S2w5QS9qQTRkaXBteXNE?=
- =?utf-8?B?enpLVkxVOHJHNVdzQVpoeDBDYk9hT0JCSTNwTCs1aXo2b3Jna1NlNDdXOUR2?=
- =?utf-8?B?WlJZY29wOFFTcjZqNWs4ZWZZRGVpZ041Y2xibWZ3S2xocklXdGxUYXFjbTd6?=
- =?utf-8?B?YjNpSk9tVFVId2U5VVFLbXh6bnpRVHVPdmNCaStMVHhtaEVjMkJXcTBhaExi?=
- =?utf-8?B?MFJBRnBxUW1SdjVUNHFxaVZwek4zSUFvMHk5aVpLSHVGUWFONVA2ZTFJN0tI?=
- =?utf-8?B?dFVvMjhOazVIcEtHOVBLSE9RVEFkb1BNS2NiQnQ3ajQrRVFjYlBxV3JwYzVG?=
- =?utf-8?B?Y1VxUTRZSHZVeUhBMDVNRzlHRDl1QUxJdGpuQ3EzZUliNmw1Y0pkNUdWakhG?=
- =?utf-8?B?NXRzM0VtU2VWZ21GWmtWaCsvUkJxVWFpK1JMZjFtTHQySm1GWnVSWEU1cHdP?=
- =?utf-8?B?VTZBNU0zdzFWQU1WUi81cXB3aURrM3VMQ1RsMXQ5b3hGUWJFdkMwcktZRXpB?=
- =?utf-8?B?MGZwajh2UFMzWFJGK29DU2I5aGtlNmtPbjRiUFVRVmNKQVJVcWFmZkVadE9C?=
- =?utf-8?B?WCtIQkdEM1Z3US9rK3ZmM0l2SDhuOUxHdVluek5PMGx2SGtFTnpSTERvYmZE?=
- =?utf-8?B?Z28vNTFyOWVvV25iL3JaOUsxanRQbXdWR2ZjQ0JudkMvQVZNTmYyYjhIVE1L?=
- =?utf-8?B?UHFReDBFcWdORG1JWG1qRDJCaDhEQ0lFMWVSa0psM0FoellleWczMUJ0TmU4?=
- =?utf-8?B?NUp2Z0dmcFZYOHVXN1V2WHBHbmxTUEZmK3V4dVRldVFDcUZuTTRJTUZ0SWhQ?=
- =?utf-8?B?bzI0QjRvMjJBS3hKejUyL3NncngrallWZ3VreHV2UXRzQlEwSUhoWjdQcHU1?=
- =?utf-8?B?WDlnV283WlpvdkVQOWxnczV5Rmp3S2srQ2ZJVmpwU0FHOW5IWFJnQlo4Tmg1?=
- =?utf-8?B?ckdSemxQTGZmSUxHS0NSV1AwcFFNZzQxanlyRnVOaW9JcGNuMFJmUU5heFNh?=
- =?utf-8?B?cG51bkM3aHRPTlB6K3p3SGVET3JzSmFWQXNnL1JIL2JyM1l3WXdEUFhqVVo0?=
- =?utf-8?B?UFVZK2E4K2ZhM3RjKzJ4NnAxTWVrVjRyckI4OTdCaG0xd3d3RU43MzFiR3Nt?=
- =?utf-8?B?L2RNUnNqem9ENnJ0K01UZUd1NTkrbE1KQ0NWZlc5YWxoVWRHNGtUMFRXZXJK?=
- =?utf-8?B?aVd5bjV1c2d4K2JmcVhkUnpNVWFLd00zcmJTTnIzL2YzRkFyRCtYYkY1bCtK?=
- =?utf-8?B?empPSVB3QzhwT3l6SVBWRGw5dllxUzlkVnhYNENFQVNjczhIWjYrdzBNTnla?=
- =?utf-8?B?REdyOGZNZStIUUgzUGN2RlFzRTBjTlhlUzNrN2NWVzlCRUxwUkU5SXRrTmNI?=
- =?utf-8?B?UnczQnUrV0pMWG5lMFdvaEgzbFFBY3p1YlZYU0VHRFFneW81Z2NYQkdrRXJU?=
- =?utf-8?B?VGdxTjAxWDMzNWpkTlBMS3ArMGdmbkt2N2N0YlVtZytRK3BwR3hpUT09?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <0FC9E477967B5344AA0FCE1A07344634@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+X-Inumbo-ID: 44a49d7c-4eb5-11ec-a9d2-d9f7a1cc8784
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1637930100;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Qgn5PSV9toabG8yFC4pdYZE+HLsve0cHhkGJ4oxeMt0=;
+  b=IyTI4mm882ye1Afo+OJGCfAUevffp5219E0e0qDxNlymhdDJ800J6UYC
+   u/syTskDOYKM18gYTkVx/i6rRWV+1WQrELsncK5kE79IJZ/ZkoR1+SOUl
+   0gUo2kJ9X3C5L7y/VwIET9Gw8P0Wkmi7zi6VNTsmnvYDSerFglDQ3Q7ub
+   E=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: C44HcGRNmC3vEaJB0gXgj+JIfu8isG7iXQMgaBHAr5McDWPs2uK9Zjhv6HW4D6Xxs2DvHCrx26
+ o5NCuGfeUdqNfIEHGKSwTSogj1WjVzWyJbDEHCzcOgv7rqdj82464aVDo2PwygKNQftGTnQPlY
+ uRwJClZgIpmlIvVsbkDNaGKxgRKp+yE9WS75ffQAVEh8//2njLBni8HUAvWLdyhrubcgtOBSQX
+ VihxjB6YVy9HNYrK8lv7w62VNjU8eLe1S0vkMUVEdyHGeE3P9cGyP23kDZ9BXHy5UkG2Eo8d0n
+ Ua0CZDoL/bfD1WFaYpE+SJSe
+X-SBRS: 5.1
+X-MesageID: 58192117
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:yDR/m6nTW3io9q271Y3/6CDo5gx0IURdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJLWmuPbqyIZ2GgKtskOti+phwBsMLWmoAyHgBlpCE0RSMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA187IMsdoUg7wbdg29Q22YHR7z6l4
+ rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
+ s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
+ Ohg766STCAxApLRxPQ5DUFbMREvOLITrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
+ 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQKaHN
+ pBAMGUHgBLoXCdLY0hULq8Fte7ygXryeT5DlQmfqv9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
+ XjJl0z7HxUbOdq32TeDtHW2iYfnhjjnUYgfELm58P9Cg1CJwGEXThoMWjOTsfS/z0KzRd9bA
+ 0gV4TY167g/8lSxSdvwVAH+p2SL1jY+cddNF+wx6CmW17HZpQ2eAwA5oiVpMYJ88pVsHHpzi
+ wHPz4iB6SFTXKO9dF/HxJWRiiuOBjVJPUtcPSwmfVoA/Iy2yG0stS7nQtFmGa+zq9T6HzDs3
+ jyHxBQDa6UvYd0jjPviow2e6964jt2QF1NuuF2LNo6wxlohPNbNWmC+1bTMAR+sxq69R0LJg
+ nULktP2AAsmXcDUz3zlrAng8diUCxe53N/03QEH83oJrW3FF5ufkWZ4u2oWyKBBaJtsRNMRS
+ BWP0T69HbcKVJdQUYd5YpiqF+MhxrX6GNLuW5j8N4QVPcgvKVDWoH8yPiZ8OlwBdmB3ysnT3
+ r/BLK6R4YsyU/w7nFJauc9BuVPU+szO7TyKHs2qp/hW+bGfeGSUWd843KimNYgEAFe/iFyNq
+ b53bpLSoz0GCbGWSnSHoOY7cAFRRVBmVM+eliCiXrPaSuaQMDp6UKG5LHJIU9ENopm5Yc+Up
+ CzgAREBlwKk7ZAFQC3TAk1ehHrUdc4XhRoG0eYEZj5EAlAvPtSi6rkxbZwyceV1/eBv16csH
+ fIEZ9+BErJETTGeo2YRapz0rYpDchW3hF3RY3r5MWZnJ5MwFRbU/tLEfxf08HVcBCSAqsZj8
+ aar0RnWQMRfSl06XtrWcv+m03i4oWMZxLBpR0LNL9QKIBfs/YFmJjbflPgyJ81QexzPyiHDj
+ 1SdAAsCpPmLqIgwqYGbiaeBpoavMu1/AksFQDWLsefobXHXpzPxz5VBXeCEeSHmeFn1oKjyN
+ /9Iy/zcMeEcmAoYuYRLDLs2n7k14MHipuEGw108TmnLdVmiFphpPmKCgZtUrqRIy7JU5Vm2V
+ 0aI9oUIMLmFIpq4QlsYJQ5jZeWfz/AE3DLV6K1tckn94SZ2+puBUFlTYEbQ2HAMcuMtPdN32
+ /olte4X9xe720gjPduxhyxJ83iBcy4bWKI9u5BGWILmh2LHEL2ZjUAw3sMu3KyyVg==
+IronPort-HdrOrdr: A9a23:wFxig6ucoXZIyqTuQjaiR0H47skDTtV00zEX/kB9WHVpmszxra
+ 6TdZMgpGbJYVcqKRcdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
+ YFT0EXMqyJMbEQt6fHCWeDfOrIuOP3kpyVuQ==
+X-IronPort-AV: E=Sophos;i="5.87,265,1631592000"; 
+   d="scan'208";a="58192117"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 09/65] xen: Annotate fnptr targets from continue_hypercall_on_cpu()
+Date: Fri, 26 Nov 2021 12:33:50 +0000
+Message-ID: <20211126123446.32324-10-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
+References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR03MB6324.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1af71ed0-bb3b-4311-8abf-08d9b0d702ba
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Nov 2021 12:19:35.8608
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: UweeIsC2LMWVikAnOamCnCRVLnBpTt3/iXN1216DH2EaGy1lpd9bxydbpfIF+jKzH+KHeTM7Rnrq5jWnVYbh21YIzZn2qa3cREdHTSqI60mCtNjjaC1kDuS3mGixae3J
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0302MB3428
-X-Proofpoint-ORIG-GUID: STJUTReb5n_nCz0qnjvJAZV5PjptMEX2
-X-Proofpoint-GUID: STJUTReb5n_nCz0qnjvJAZV5PjptMEX2
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-11-26_03,2021-11-25_02,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 bulkscore=0
- mlxscore=0 clxscore=1015 priorityscore=1501 adultscore=0
- lowpriorityscore=0 malwarescore=0 impostorscore=0 spamscore=0
- mlxlogscore=388 suspectscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2110150000 definitions=main-2111260073
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-SGksIEJlcnRyYW5kIQ0KDQpPbiAyNS4xMS4yMSAxODoyOCwgQmVydHJhbmQgTWFycXVpcyB3cm90
-ZToNCj4gSGkgT2xla3NhbmRyLA0KPg0KPj4gT24gMjUgTm92IDIwMjEsIGF0IDExOjAyLCBPbGVr
-c2FuZHIgQW5kcnVzaGNoZW5rbyA8YW5kcjIwMDBAZ21haWwuY29tPiB3cm90ZToNCj4+DQo+PiBG
-cm9tOiBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyA8b2xla3NhbmRyX2FuZHJ1c2hjaGVua29AZXBh
-bS5jb20+DQo+Pg0KPj4gQWRkIHJlbGV2YW50IHZwY2kgcmVnaXN0ZXIgaGFuZGxlcnMgd2hlbiBh
-c3NpZ25pbmcgUENJIGRldmljZSB0byBhIGRvbWFpbg0KPj4gYW5kIHJlbW92ZSB0aG9zZSB3aGVu
-IGRlLWFzc2lnbmluZy4gVGhpcyBhbGxvd3MgaGF2aW5nIGRpZmZlcmVudA0KPj4gaGFuZGxlcnMg
-Zm9yIGRpZmZlcmVudCBkb21haW5zLCBlLmcuIGh3ZG9tIGFuZCBvdGhlciBndWVzdHMuDQo+Pg0K
-Pj4gRW11bGF0ZSBndWVzdCBCQVIgcmVnaXN0ZXIgdmFsdWVzOiB0aGlzIGFsbG93cyBjcmVhdGlu
-ZyBhIGd1ZXN0IHZpZXcNCj4+IG9mIHRoZSByZWdpc3RlcnMgYW5kIGVtdWxhdGVzIHNpemUgYW5k
-IHByb3BlcnRpZXMgcHJvYmUgYXMgaXQgaXMgZG9uZQ0KPj4gZHVyaW5nIFBDSSBkZXZpY2UgZW51
-bWVyYXRpb24gYnkgdGhlIGd1ZXN0Lg0KPj4NCj4+IFJPTSBCQVIgaXMgb25seSBoYW5kbGVkIGZv
-ciB0aGUgaGFyZHdhcmUgZG9tYWluIGFuZCBmb3IgZ3Vlc3QgZG9tYWlucw0KPj4gdGhlcmUgaXMg
-YSBzdHViOiBhdCB0aGUgbW9tZW50IFBDSSBleHBhbnNpb24gUk9NIGhhbmRsaW5nIGlzIHN1cHBv
-cnRlZA0KPj4gZm9yIHg4NiBvbmx5IGFuZCBpdCBtaWdodCBub3QgYmUgdXNlZCBieSBvdGhlciBh
-cmNoaXRlY3R1cmVzIHdpdGhvdXQNCj4+IGVtdWxhdGluZyB4ODYuIE90aGVyIHVzZS1jYXNlcyBt
-YXkgaW5jbHVkZSB1c2luZyB0aGF0IGV4cGFuc2lvbiBST00gYmVmb3JlDQo+PiBYZW4gYm9vdHMs
-IGhlbmNlIG5vIGVtdWxhdGlvbiBpcyBuZWVkZWQgaW4gWGVuIGl0c2VsZi4gT3Igd2hlbiBhIGd1
-ZXN0DQo+PiB3YW50cyB0byB1c2UgdGhlIFJPTSBjb2RlIHdoaWNoIHNlZW1zIHRvIGJlIHJhcmUu
-DQo+IEluIHRoZSBnZW5lcmljIGNvZGUsIGJhcnMgZm9yIGlvcG9ydHMgYXJlIGFjdHVhbGx5IHNr
-aXBwZWQgKGNoZWNrIGNvZGUgYmVmb3JlDQo+IGluIGhlYWRlci5jLCBpbiBjYXNlIG9mIGlvcG9y
-dHMgdGhlcmUgaXMgYSBjb250aW51ZSkgYW5kIG5vIGhhbmRsZXIgaXMgcmVnaXN0ZXJlZCBmb3Ig
-dGhlbS4NCj4gVGhlIGNvbnNlcXVlbmNlIHdpbGwgYmUgdGhhdCBhIGd1ZXN0IHdpbGwgYWNjZXNz
-IGhhcmR3YXJlIHdoZW4gcmVhZGluZyB0aG9zZSBCQVJzLg0KWWVzLCB0aGlzIHNlZW1zIHRvIGJl
-IGEgdmFsaWQgcG9pbnQNCj4NCj4gSSB0aGluayB3ZSBzaG91bGQgaW5zdGVhZCBtYWtlIHN1cmUg
-dGhhdCB3ZSBpbnRlcmNlcHQgYWxsIGFjY2Vzc2VzIHRvIEJBUnMgYW5kIHJldHVybg0KPiBzb21l
-dGhpbmcgZW1wdHkgZm9yIElPUE9SVFMgQkFScy4NCkkgd291bGQgbGlrZSB0byBoZWFyIGZyb20g
-Um9nZXIgb24gd2hhdCB3YXMgdGhlIGluaXRpYWwgcGxhbiBmb3IgdGhhdCwgc28NCndlIGFyZSBh
-bGlnbmVkIGJldHdlZW4gdGhlIGRpZmZlcmVudCBhcmNoaXRlY3R1cmVzLCBBcm0gYW5kIHg4NiBo
-ZXJlIGZvciBub3cNCg0KVGhhbmsgeW91LA0KT2xla3NhbmRy
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/acpi/power.c         | 2 +-
+ xen/arch/x86/cpu/microcode/core.c | 2 +-
+ xen/arch/x86/platform_hypercall.c | 4 ++--
+ xen/arch/x86/pv/shim.c            | 4 ++--
+ xen/arch/x86/smp.c                | 4 ++--
+ xen/arch/x86/sysctl.c             | 2 +-
+ xen/common/core_parking.c         | 2 +-
+ xen/common/kexec.c                | 2 +-
+ xen/common/sched/cpupool.c        | 2 +-
+ xen/include/asm-x86/pv/shim.h     | 4 ++--
+ xen/include/asm-x86/smp.h         | 6 +++---
+ 11 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/xen/arch/x86/acpi/power.c b/xen/arch/x86/acpi/power.c
+index 0f2c87c096c7..90328bae1ebe 100644
+--- a/xen/arch/x86/acpi/power.c
++++ b/xen/arch/x86/acpi/power.c
+@@ -323,7 +323,7 @@ static int enter_state(u32 state)
+     return error;
+ }
+ 
+-static long enter_state_helper(void *data)
++static long cf_check enter_state_helper(void *data)
+ {
+     struct acpi_sleep_info *sinfo = (struct acpi_sleep_info *)data;
+     return enter_state(sinfo->sleep_state);
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 46f55fe7f191..9631042190ab 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -558,7 +558,7 @@ struct ucode_buf {
+     char buffer[];
+ };
+ 
+-static long microcode_update_helper(void *data)
++static long cf_check microcode_update_helper(void *data)
+ {
+     int ret;
+     struct ucode_buf *buffer = data;
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index f5457565a560..5e3208862c2f 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -45,7 +45,7 @@ struct resource_access {
+     xenpf_resource_entry_t *entries;
+ };
+ 
+-long cpu_frequency_change_helper(void *);
++long cf_check cpu_frequency_change_helper(void *);
+ void check_resource_access(struct resource_access *);
+ void resource_access(void *);
+ 
+@@ -59,7 +59,7 @@ DEFINE_SPINLOCK(xenpf_lock);
+ # undef guest_from_compat_handle
+ # define guest_from_compat_handle(x,y) ((x)=(y))
+ 
+-long cpu_frequency_change_helper(void *data)
++long cf_check cpu_frequency_change_helper(void *data)
+ {
+     return cpu_frequency_change((uint64_t)data);
+ }
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index ae4d8913faa1..2ee290a3920d 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -845,7 +845,7 @@ int cf_check compat_grant_table_op(
+ #endif
+ #endif
+ 
+-long pv_shim_cpu_up(void *data)
++long cf_check pv_shim_cpu_up(void *data)
+ {
+     struct vcpu *v = data;
+     struct domain *d = v->domain;
+@@ -883,7 +883,7 @@ long pv_shim_cpu_up(void *data)
+     return 0;
+ }
+ 
+-long pv_shim_cpu_down(void *data)
++long cf_check pv_shim_cpu_down(void *data)
+ {
+     struct vcpu *v = data;
+     long rc;
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index eef0f9c6cbf4..f4952a6bf9a5 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -399,7 +399,7 @@ void call_function_interrupt(struct cpu_user_regs *regs)
+     smp_call_function_interrupt();
+ }
+ 
+-long cpu_up_helper(void *data)
++long cf_check cpu_up_helper(void *data)
+ {
+     unsigned int cpu = (unsigned long)data;
+     int ret = cpu_up(cpu);
+@@ -422,7 +422,7 @@ long cpu_up_helper(void *data)
+     return ret;
+ }
+ 
+-long cpu_down_helper(void *data)
++long cf_check cpu_down_helper(void *data)
+ {
+     int cpu = (unsigned long)data;
+     int ret = cpu_down(cpu);
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index aff52a13f373..1772f51f8f6e 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -79,7 +79,7 @@ static void l3_cache_get(void *arg)
+         l3_info->size = info.size / 1024; /* in KB unit */
+ }
+ 
+-static long smt_up_down_helper(void *data)
++static long cf_check smt_up_down_helper(void *data)
+ {
+     bool up = (bool)data;
+     unsigned int cpu, sibling_mask = boot_cpu_data.x86_num_siblings - 1;
+diff --git a/xen/common/core_parking.c b/xen/common/core_parking.c
+index 44a907abfd7f..4afad04f2f68 100644
+--- a/xen/common/core_parking.c
++++ b/xen/common/core_parking.c
+@@ -169,7 +169,7 @@ static unsigned int core_parking_power(unsigned int event)
+     return cpu;
+ }
+ 
+-long core_parking_helper(void *data)
++long cf_check core_parking_helper(void *data)
+ {
+     uint32_t idle_nums = (unsigned long)data;
+     unsigned int cpu;
+diff --git a/xen/common/kexec.c b/xen/common/kexec.c
+index 3b223cd03d75..b222a5fd782e 100644
+--- a/xen/common/kexec.c
++++ b/xen/common/kexec.c
+@@ -395,7 +395,7 @@ void kexec_crash(enum crash_reason reason)
+     BUG();
+ }
+ 
+-static long kexec_reboot(void *_image)
++static long cf_check kexec_reboot(void *_image)
+ {
+     struct kexec_image *image = _image;
+ 
+diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
+index e5cfb03b857e..b9d4babd0d8a 100644
+--- a/xen/common/sched/cpupool.c
++++ b/xen/common/sched/cpupool.c
+@@ -544,7 +544,7 @@ static int cpupool_unassign_cpu_start(struct cpupool *c, unsigned int cpu)
+     return ret;
+ }
+ 
+-static long cpupool_unassign_cpu_helper(void *info)
++static long cf_check cpupool_unassign_cpu_helper(void *info)
+ {
+     struct cpupool *c = info;
+     long ret;
+diff --git a/xen/include/asm-x86/pv/shim.h b/xen/include/asm-x86/pv/shim.h
+index 6415f8068e5c..be4ae4e60bb8 100644
+--- a/xen/include/asm-x86/pv/shim.h
++++ b/xen/include/asm-x86/pv/shim.h
+@@ -38,8 +38,8 @@ void pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
+                        start_info_t *si);
+ int pv_shim_shutdown(uint8_t reason);
+ void pv_shim_inject_evtchn(unsigned int port);
+-long pv_shim_cpu_up(void *data);
+-long pv_shim_cpu_down(void *data);
++long cf_check pv_shim_cpu_up(void *data);
++long cf_check pv_shim_cpu_down(void *data);
+ void pv_shim_online_memory(unsigned int nr, unsigned int order);
+ void pv_shim_offline_memory(unsigned int nr, unsigned int order);
+ domid_t get_initial_domain_id(void);
+diff --git a/xen/include/asm-x86/smp.h b/xen/include/asm-x86/smp.h
+index f7485f602efa..1747772d232e 100644
+--- a/xen/include/asm-x86/smp.h
++++ b/xen/include/asm-x86/smp.h
+@@ -57,10 +57,10 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t pxm);
+ 
+ void __stop_this_cpu(void);
+ 
+-long cpu_up_helper(void *data);
+-long cpu_down_helper(void *data);
++long cf_check cpu_up_helper(void *data);
++long cf_check cpu_down_helper(void *data);
+ 
+-long core_parking_helper(void *data);
++long cf_check core_parking_helper(void *data);
+ bool core_parking_remove(unsigned int cpu);
+ uint32_t get_cur_idle_nums(void);
+ 
+-- 
+2.11.0
+
 
