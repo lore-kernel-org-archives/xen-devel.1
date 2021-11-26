@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD75EC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232792.403853 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B89D3C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232804.403879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawY-0005Xu-P3; Fri, 26 Nov 2021 13:07:10 +0000
+	id 1mqawg-0007Da-4f; Fri, 26 Nov 2021 13:07:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232792.403853; Fri, 26 Nov 2021 13:07:10 +0000
+Received: by outflank-mailman (output) from mailman id 232804.403879; Fri, 26 Nov 2021 13:07:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawX-0005U3-FL; Fri, 26 Nov 2021 13:07:09 +0000
-Received: by outflank-mailman (input) for mailman id 232792;
- Fri, 26 Nov 2021 13:07:06 +0000
+	id 1mqawf-00079D-9c; Fri, 26 Nov 2021 13:07:17 +0000
+Received: by outflank-mailman (input) for mailman id 232804;
+ Fri, 26 Nov 2021 13:07:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavo-0003W9-JO
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:24 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a7af74ef-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:06:23 +0100 (CET)
+ id 1mqaug-0003W9-B4
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:14 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7cd3963a-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:12 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7af74ef-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 7cd3963a-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931983;
+  d=citrix.com; s=securemail; t=1637931912;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=6MkSkTdCAehsaJLlFHgLLk6HFoheo0WWaEyuCz1hHYs=;
-  b=CWU/iHricrdMAINFI+Dg1xmfr+rMna2wLk2Xq5zjN/7V0r5mJmSeDi1h
-   kBRrx6MuZBvnTrqfmFizQ6b+ylr/eeGaGC//EykAwc8RbjinSqpsMnX0F
-   yRWd2cIAya0fuBC11uTsYMhI0uGz8BVfMKQwuBdQ1w6wuocyDHm+OgwXV
-   w=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 6Uj1SgDZB8dlL8kof0Ub0RanFk182/i9EBEkH1wmMSg6aZU5qqTTgAtKW/UV9ePcNSjr2OAAcc
- Bec1Kjz1DUoj7s+yHakh4NGtsGIPGxgU/i3kLDN5a+tNgda1BkNfbJgRGfgdFu5ZYtEJVKvhkr
- slrJeM/LSJ5XbXX2JjjuUt2wvxbOd2TDjChniwwHNFW+BSdH1qjTjhlzYsnO5+uPen/nZufS7r
- 4EOczLmXUXJ7unQnKYcb6U2SuZLpduV1JZ7f0Irh7620oHhiQIaJoElHsm2u68HhYhumIYIm/j
- kZbybqsumRzN4q56AMge7aXu
+  bh=746QsnWin6OQb455qcVFN7IMD2ME3Bl0zmu1yTWBR/k=;
+  b=boJok758E2DbyrfNGsW0K1nD22EK5GW2Bcuw0nD1yPlPRuZpjsf4PIUu
+   HBDjCjuiiKOLt5h8ylvzUeFpJu4z9biPxhqkJKRwVWEhTEp26iTvX9x1S
+   8sld+K90/oocxAWyJeWT076QSejlbdn/JS9nPEZXVSu6mXa6bsSi0M7IQ
+   k=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: RyIhBz+rJqLuLebsns2cQNRKoum3qY911Ub6CMBIynZx3p5kShJvORwI91t6gtehNJ26EdxU03
+ px/lmGMXc+gxRK3BkN6AOEtTbE0pmjZu4R3JBAL/8nMekGs0OHyjZygwW0Xk5w48+Xvs1ze8Ce
+ Lh2A3sTDRyZ14ZsVBEv1hnxVuxo7X06Z1h/836QHxzA/cjiqtPxBGLEnteV2sp+0gjmjQkJiaE
+ koGsWUDo9GSWVaBYUfwtkv1EuM2U3oM10DKeQRlq69OuIwAM++xs+7YjKfzKkm70iq/vfVchhI
+ U8LLK9h6AJNCGf29C68NHG4q
 X-SBRS: 5.1
-X-MesageID: 59064074
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 58193786
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:hQEqaqJwtaVGP1kuFE+RHJIlxSXFcZb7ZxGr2PjKsXjdYENShTcAz
- jMaDW2EafiLYDPzKIhxPtmxoEsEu8fXmNBnTwplqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xbZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2Gpolq9
- 9hSkaW1UD11PLLwnrU4ShdHRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Gph3p4SRamCD
- yYfQRR3aVPRUjNvBk1NGrAVsNnxrXrPLCIN/Tp5ooJoujOOnWSdyoPFL979atGMA8JPkS6wh
- EjL4mD4CREyL8GExHyO9XfErv/Cm2b3VZwfEJW89+V2mxuDy2oLEhoUWFCn5/6jhSaDt8l3c
- hJOvHB09O5rqRLtHoKVswCETGCssSdFQOVdDMkD7Ri3lqjL3wDII3EKUWsUADA5j/MeSTsv3
- 16PutrmAz1zrbGYIU6gGqeoQSCaYnZMczJbDcMQZU5cuoS4/tlv5v7aZo87SPbdszHjJd3nL
- 9lmRgAajq5bs8ME3r7TEbvv02P1/cihouLYC2zqsoOZAuFRONHNi2+AswGzARN8wGCxFQLpU
- J8swZX20Qz2JcvR/BFhuc1UdF1T296LMSfHnXlkFIQ7+jKm9haLJN4Lv2EgeRg4bphYIlcFh
- XM/XysKv/e/21PwMMdKj3+ZUZx2ncAM6/y5PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
- v+mnTKXJS9CU8xPlWPuL89EiOND7n1ulAv7GMGgpzz6gOX2WZJgYepcWLd4Rrtit/3sTcS82
- 4s3CvZmPD0DCrCjOXeOrtZIRb3IRFBiba3LRwVsXrbrCmJb9KsJUpc9GJstJN5ombp7jODN8
- i3vU0NU0gOn13bGNR+LejZob7a2BcRzqncyPCoNO1e02id8PdbzvflHL5ZnL6M68OFDzOJvS
- 6VXccu3HfkSGC/M/C4QbMehodU6Jgirnw+HIwGsfCM7I8x7XwXM99K9Jlnv+SACAzCZr8w7p
- 7H8hArXTYBaH1ZpDdrMaeLpxFS05CBPlOV3VkrOA99SZESzr9Q6d32v1qc6epheJw/Cyz2W0
- xetLS0Z/eSd8ZUo9NTphLyfq9v7GeVJAUcHTXLQ6qy7NHeG8zP7k5NASuuBYRvUSHjwpPe5f
- exQwvzxbK8HkVJNv9YuGrpn1/tjtd7mprscxQV4BnTbKV+sD+o4cHWB2MBOsIxLx6NY5lTqC
- h7epIECNOXbIt7hHX4QOBEhP7aK2vwjkzXP6eg4fRfh7yht8bvbCUhfMnFgUsCGwGeZ5G/9/
- dochQ==
-IronPort-HdrOrdr: A9a23:IWYawK0UWCXXIc7JANKjKwqjBIokLtp133Aq2lEZdPRUGvb3qy
- nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
- uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
+IronPort-Data: A9a23:R5X73qhfWJcu/mk7Z9PhZS6iX161rRcKZh0ujC45NGQN5FlHY01je
+ htvCjyGOPuMMWX8fdl1bN7l9h9X7J7SztBjSAtk/ygzEn4b9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29cy34Dja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /1W9o6wSV8LDJbrv/saWAdmKAF8G5J/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNauOP
+ ptCNmoxBPjGSwVPCH4RAZZkoOCtplDAcGRq9RGL/4NitgA/yyQuieOwYbI5YOeiWsF9jkue4
+ GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
+ CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4CK4o6AHV6JjvxCGGAWMacAVhavoZjZpjLdA17
+ WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoStQWmY/
+ tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtQezARVodt/xory9U
+ J4swJP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRkybZZaJGC4P
+ BGP4mu9AaO/2lPxNsebhKrrVqwXIVXIT4y5Bpg4kPISCnSOSON31H43PhPBt4wcuEMtjbs+K
+ f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
+ Ig32grj40g3bdASlQGLq9NOdg5TciBgbX00wuQOHtO+zsNdMDlJI5fsLXkJIeSJRoxZybXF+
+ G+TQEhdxAatjHHLM1zSOHtidKnuTdB0qndiZX4gOlOh2n4CZ4ez7fhAK8trLOd/rOEzn+RpS
+ /QletmbBqgdQDrw5DlAP4L2q5ZvdUr3iFvWbTalejU2Y7VpWxfNpo3/ZgLq+SRXVni3uMIyr
+ qeOzATeRZZfFQ1uANyPMKCkzk+rvGhbk+V3BhOaLt5WcUTq0Y5rNy2u0aNnf5BScU3On2LI2
+ RyXDBEUofj2j7U0qNSZ17qZq4qJEvdlGhYIFWfs8rvrZzLR+XCuwNEcXb/QLyzdTm795I6re
+ f5Rk6PnKPQCkVtH79h8HrJswf5s7tfjveYHnAFtHXGNZFW3ELJwZHKB2JAX5KFKw7ZYvyqwW
+ 16OpYYGaenYZpu9HQ5DPhchY8SCyeoQy2vb4vkCKUnn4DN6oeicWkJIMhjQ0CFQIdOZ6m/+L
+ TvNbCLO1zGCtw==
+IronPort-HdrOrdr: A9a23:dIgVs6hpd+3gt94YCVDXHWLOD3BQXuIji2hC6mlwRA09TySZ//
+ rBoB19726MtN9xYgBHpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
+ 0QF5SWYOeAdWSS5vya3ODXKbkdKaG8gcKVuds=
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="59064074"
+   d="scan'208";a="58193786"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 43/65] x86/logdirty: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:24 +0000
-Message-ID: <20211126123446.32324-44-andrew.cooper3@citrix.com>
+Subject: [PATCH 65/65] x86: Enable CET Indirect Branch Tracking
+Date: Fri, 26 Nov 2021 12:34:46 +0000
+Message-ID: <20211126123446.32324-66-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,91 +102,158 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
+With all the pieces now in place, turn CET-IBT on when available.
+
+MSR_S_CET, like SMEP/SMAP, controls Ring1 meaning that ENDBR_EN can't be
+enabled for Xen independently of PV32 kernels.  As we already disable PV32 for
+CET-SS, extend this to all CET, adjusting the documentation/comments as
+appropriate.
+
+Introduce a cet=no-ibt command line option to allow the admin to disable IBT
+even when everything else is configured correctly.
+
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/mm/hap/hap.c       |  6 +++---
- xen/arch/x86/mm/shadow/common.c | 12 ++++++------
- 2 files changed, 9 insertions(+), 9 deletions(-)
+ docs/misc/xen-command-line.pandoc | 16 +++++++++++----
+ xen/arch/x86/cpu/common.c         |  1 +
+ xen/arch/x86/setup.c              | 42 ++++++++++++++++++++++++++++++++++-----
+ 3 files changed, 50 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
-index de4b13565ab4..ed5112b00b63 100644
---- a/xen/arch/x86/mm/hap/hap.c
-+++ b/xen/arch/x86/mm/hap/hap.c
-@@ -180,7 +180,7 @@ int hap_track_dirty_vram(struct domain *d,
-  * NB: Domain that having device assigned should not set log_global. Because
-  * there is no way to track the memory updating from device.
-  */
--static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
-+static int cf_check hap_enable_log_dirty(struct domain *d, bool log_global)
- {
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index f7797ea233f9..ea033c1a1d74 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -271,7 +271,7 @@ enough. Setting this to a high value may cause boot failure, particularly if
+ the NMI watchdog is also enabled.
  
-@@ -211,7 +211,7 @@ static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
-     return 0;
- }
+ ### cet
+-    = List of [ shstk=<bool> ]
++    = List of [ shstk=<bool>, ibt=<bool> ]
  
--static int hap_disable_log_dirty(struct domain *d)
-+static int cf_check hap_disable_log_dirty(struct domain *d)
- {
-     paging_lock(d);
-     d->arch.paging.mode &= ~PG_log_dirty;
-@@ -228,7 +228,7 @@ static int hap_disable_log_dirty(struct domain *d)
-     return 0;
- }
+     Applicability: x86
  
--static void hap_clean_dirty_bitmap(struct domain *d)
-+static void cf_check hap_clean_dirty_bitmap(struct domain *d)
+@@ -279,6 +279,10 @@ Controls for the use of Control-flow Enforcement Technology.  CET is group a
+ of hardware features designed to combat Return-oriented Programming (ROP, also
+ call/jmp COP/JOP) attacks.
+ 
++CET is incompatible with 32bit PV guests.  If any CET sub-options are active,
++they will override the `pv=32` boolean to `false`.  Backwards compatibility
++can be maintained with the `pv-shim` mechanism.
++
+ *   The `shstk=` boolean controls whether Xen uses Shadow Stacks for its own
+     protection.
+ 
+@@ -287,9 +291,13 @@ call/jmp COP/JOP) attacks.
+     `cet=no-shstk` will cause Xen not to use Shadow Stacks even when support
+     is available in hardware.
+ 
+-    Shadow Stacks are incompatible with 32bit PV guests.  This option will
+-    override the `pv=32` boolean to false.  Backwards compatibility can be
+-    maintained with the `pv-shim` mechanism.
++*   The `ibt=` boolean controls whether Xen uses Indirect Branch Tracking for
++    its own protection.
++
++    The option is available when `CONFIG_XEN_IBT` is compiled in, and defaults
++    to `true` on hardware supporting CET-IBT.  Specifying `cet=no-ibt` will
++    cause Xen not to use Indirect Branch Tracking even when support is
++    available in hardware.
+ 
+ ### clocksource (x86)
+ > `= pit | hpet | acpi | tsc`
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 7c41a21bf07c..9658c31cab48 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -345,6 +345,7 @@ void __init early_cpu_init(void)
+ 	if (c->cpuid_level >= 7) {
+ 		cpuid_count(7, 0, &eax, &ebx, &ecx, &edx);
+ 		c->x86_capability[cpufeat_word(X86_FEATURE_CET_SS)] = ecx;
++		c->x86_capability[cpufeat_word(X86_FEATURE_CET_IBT)] = edx;
+ 	}
+ 
+ 	eax = cpuid_eax(0x80000000);
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index daaba097d57f..6cec1918f66b 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -102,6 +102,12 @@ static bool __initdata opt_xen_shstk = true;
+ #define opt_xen_shstk false
+ #endif
+ 
++#ifdef CONFIG_XEN_IBT
++static bool __initdata opt_xen_ibt = true;
++#else
++#define opt_xen_ibt false
++#endif
++
+ static int __init cf_check parse_cet(const char *s)
  {
+     const char *ss;
+@@ -120,6 +126,14 @@ static int __init cf_check parse_cet(const char *s)
+             no_config_param("XEN_SHSTK", "cet", s, ss);
+ #endif
+         }
++        else if ( (val = parse_boolean("ibt", s, ss)) >= 0 )
++        {
++#ifdef CONFIG_XEN_IBT
++            opt_xen_ibt = val;
++#else
++            no_config_param("XEN_IBT", "cet", s, ss);
++#endif
++        }
+         else
+             rc = -EINVAL;
+ 
+@@ -1102,11 +1116,33 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         printk("Enabling Supervisor Shadow Stacks\n");
+ 
+         setup_force_cpu_cap(X86_FEATURE_XEN_SHSTK);
++    }
++
++    if ( opt_xen_ibt && boot_cpu_has(X86_FEATURE_CET_IBT) )
++    {
++        printk("Enabling Indirect Branch Tracking\n");
++
++        setup_force_cpu_cap(X86_FEATURE_XEN_IBT);
++
++        if ( efi_no_cet_ibt )
++            printk("  - UEFI Runtime Services not IBT safe\n");
++
++        /*
++         * Enable IBT now.  Only require the ENDBR64 on callees, which is
++         * entirely build-time arrangements.
++         */
++        wrmsrl(MSR_S_CET, CET_ENDBR_EN);
++    }
++
++    if ( cpu_has_xen_shstk || cpu_has_xen_ibt )
++    {
++        set_in_cr4(X86_CR4_CET);
++
+ #ifdef CONFIG_PV32
+         if ( opt_pv32 )
+         {
+             opt_pv32 = 0;
+-            printk("  - Disabling PV32 due to Shadow Stacks\n");
++            printk("  - Disabling PV32 due to CET\n");
+         }
+ #endif
+     }
+@@ -1863,10 +1899,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+ 
+     alternative_branches();
+ 
+-    /* Defer CR4.CET until alternatives have finished playing with CR0.WP */
+-    if ( cpu_has_xen_shstk )
+-        set_in_cr4(X86_CR4_CET);
+-
      /*
-      * Switch to log-dirty mode, either by setting l1e entries of P2M table to
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index 03bcd9518c39..8e51168e61b6 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -40,9 +40,9 @@
- 
- DEFINE_PER_CPU(uint32_t,trace_shadow_path_flags);
- 
--static int sh_enable_log_dirty(struct domain *, bool log_global);
--static int sh_disable_log_dirty(struct domain *);
--static void sh_clean_dirty_bitmap(struct domain *);
-+static int cf_check sh_enable_log_dirty(struct domain *, bool log_global);
-+static int cf_check sh_disable_log_dirty(struct domain *);
-+static void cf_check sh_clean_dirty_bitmap(struct domain *);
- 
- /* Set up the shadow-specific parts of a domain struct at start of day.
-  * Called for every domain from arch_domain_create() */
-@@ -3016,7 +3016,7 @@ static int shadow_test_disable(struct domain *d)
- /* Shadow specific code which is called in paging_log_dirty_enable().
-  * Return 0 if no problem found.
-  */
--static int sh_enable_log_dirty(struct domain *d, bool log_global)
-+static int cf_check sh_enable_log_dirty(struct domain *d, bool log_global)
- {
-     int ret;
- 
-@@ -3044,7 +3044,7 @@ static int sh_enable_log_dirty(struct domain *d, bool log_global)
- }
- 
- /* shadow specfic code which is called in paging_log_dirty_disable() */
--static int sh_disable_log_dirty(struct domain *d)
-+static int cf_check sh_disable_log_dirty(struct domain *d)
- {
-     int ret;
- 
-@@ -3058,7 +3058,7 @@ static int sh_disable_log_dirty(struct domain *d)
- /* This function is called when we CLEAN log dirty bitmap. See
-  * paging_log_dirty_op() for details.
-  */
--static void sh_clean_dirty_bitmap(struct domain *d)
-+static void cf_check sh_clean_dirty_bitmap(struct domain *d)
- {
-     paging_lock(d);
-     /* Need to revoke write access to the domain's pages again.
+      * NB: when running as a PV shim VCPUOP_up/down is wired to the shim
+      * physical cpu_add/remove functions, so launch the guest with only
 -- 
 2.11.0
 
