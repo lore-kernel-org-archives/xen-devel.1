@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E962C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 18:08:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233388.404985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EB8DC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 18:26:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233421.405005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqfdt-0001Z9-Nd; Fri, 26 Nov 2021 18:08:13 +0000
+	id 1mqfvO-0004LC-DO; Fri, 26 Nov 2021 18:26:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233388.404985; Fri, 26 Nov 2021 18:08:13 +0000
+Received: by outflank-mailman (output) from mailman id 233421.405005; Fri, 26 Nov 2021 18:26:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqfdt-0001Z2-KP; Fri, 26 Nov 2021 18:08:13 +0000
-Received: by outflank-mailman (input) for mailman id 233388;
- Fri, 26 Nov 2021 18:08:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=GGcH=QN=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mqfYK-0004LT-F0
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 18:02:28 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 04400f49-4ee3-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 19:02:27 +0100 (CET)
-Received: by mail-lj1-x235.google.com with SMTP id t11so20240016ljh.6
- for <xen-devel@lists.xenproject.org>; Fri, 26 Nov 2021 10:02:27 -0800 (PST)
-Received: from localhost.localdomain (94-29-48-99.dynamic.spd-mgts.ru.
- [94.29.48.99])
- by smtp.gmail.com with ESMTPSA id i32sm553831lfv.295.2021.11.26.10.02.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Nov 2021 10:02:25 -0800 (PST)
+	id 1mqfvO-0004L5-AB; Fri, 26 Nov 2021 18:26:18 +0000
+Received: by outflank-mailman (input) for mailman id 233421;
+ Fri, 26 Nov 2021 18:26:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=oJOc=QN=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1mqfvN-0004Kz-HY
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 18:26:17 +0000
+Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
+ [64.147.123.21]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5617ace9-4ee6-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 19:26:15 +0100 (CET)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.west.internal (Postfix) with ESMTP id 0F6F43201CAE;
+ Fri, 26 Nov 2021 13:26:11 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Fri, 26 Nov 2021 13:26:12 -0500
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 26 Nov 2021 13:26:10 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,132 +45,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 04400f49-4ee3-11ec-a9d2-d9f7a1cc8784
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=032w538UVpeATjNmIAIpxMVbSRQ+KkFSikcjH52Go7E=;
-        b=eevKrPwZ8OfFF7dQWRFG4QtZgXf8H+FxBO4fdQv0J5dJKz+FcIsqrfLDqDJxWbQtzw
-         Rannkbji9yIhh71t3alOhYeFsEEjXcmyLWuCaW9V7BsVA1f8lNz7tKjGdH7PirB3AKHB
-         IL3flLkGtWTeZ8zHUH4p68dALDoMsRSunYqrHM5lkY+nPPnXI44WUInC8tt6QAMxGrW/
-         VOHPLbNu1x6QmQMInswQkbNdy92fIZ+PVBjJ4MCbuGkJUycKlQXbLDzbJenn/bDFhWW4
-         4EH32hyNFhAmOjxhV9Klszb0OlINW1pXNjwXREKtXPh4wreIy86PzwohGRSPMe1Rc/Sj
-         2ATg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=032w538UVpeATjNmIAIpxMVbSRQ+KkFSikcjH52Go7E=;
-        b=AdEzcluI8O9R2T57P1o7N6O8vZl5655zkavUQodzsuycoki4j7gZYNPZyjXlpVfDQB
-         zzRI5onXNLwYZWeX+DvK0YQsWJqjK6oZmyZCi4v9H7VqxvIPtdf1U1Y91CtWw3jhPgk3
-         SYIKxQPwkBVILEAn81qIEuvN7jvfrXgUETMK0yy3dr/u0RziF8WAncNsYX+JCUo8b2Cy
-         Bin9VUyusyJ/l5K9V8V7YCT4SJdByT6FjE0Ijrfvir80Ox2pnrhA/esoKLGp1CZF1Q1s
-         HH4sLFa+ixEGXhHebPA9o39df20Ag/Vc35ZDE+MsdwyAGazY71aGD+Iq8VuNrdCPrTtQ
-         P5KA==
-X-Gm-Message-State: AOAM531spJgXriO6ch4fkFzo9F0Zce7al5NkRuqa+L4+mLWS3maUW5xg
-	zzqeaJpeqh6YHvAPWAvEzRk=
-X-Google-Smtp-Source: ABdhPJxWnZpc53RxISntE8TurKfJq9RlVDiB9gU+CKj56xGgbHqq69VbvXkGBZeLXBBzq19pkH3Pew==
-X-Received: by 2002:a2e:5c04:: with SMTP id q4mr33226839ljb.334.1637949746214;
-        Fri, 26 Nov 2021 10:02:26 -0800 (PST)
-From: Dmitry Osipenko <digetx@gmail.com>
-To: Thierry Reding <thierry.reding@gmail.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
-	Guo Ren <guoren@kernel.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Greg Ungerer <gerg@linux-m68k.org>,
-	Joshua Thompson <funaho@jurai.org>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Sebastian Reichel <sre@kernel.org>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Greentime Hu <green.hu@gmail.com>,
-	Vincent Chen <deanbo422@gmail.com>,
-	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-	Helge Deller <deller@gmx.de>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Paul Mackerras <paulus@samba.org>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Rich Felker <dalias@libc.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Len Brown <lenb@kernel.org>,
-	Santosh Shilimkar <ssantosh@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Pavel Machek <pavel@ucw.cz>,
-	Lee Jones <lee.jones@linaro.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Daniel Lezcano <daniel.lezcano@linaro.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>,
-	alankao@andestech.com,
-	"K . C . Kuen-Chern Lin" <kclin@andestech.com>
-Cc: linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	linux-csky@vger.kernel.org,
-	linux-ia64@vger.kernel.org,
-	linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org,
-	linux-parisc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org,
-	linux-sh@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	linux-acpi@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-tegra@vger.kernel.org
-Subject: [PATCH v4 17/25] sh: Use do_kernel_power_off()
-Date: Fri, 26 Nov 2021 21:00:53 +0300
-Message-Id: <20211126180101.27818-18-digetx@gmail.com>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20211126180101.27818-1-digetx@gmail.com>
-References: <20211126180101.27818-1-digetx@gmail.com>
+X-Inumbo-ID: 5617ace9-4ee6-11ec-9787-a32c541c8605
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=ztJTPm
+	cq0+uFyUQaQJxfPkFH/osFX4ZEqTLP+TwzvyI=; b=gdi0n1oDiuHFh+IGeKUqgg
+	5sDC9QnM9046tpDs+UyE48WWCieFHmTRttU6WasAPprDlrWE/Y/IZvFDChMc7i0b
+	l6rR4f0rzOdMKKWwA02NoaNTSJE3fFO0+PswKNeFyy1Xfzc5sAlE3xZCcTA6gN0b
+	UMhUD5c6v/muQjaCETid/ewfjKRc/24KCzHv+reJp+xkvtponRencJ6sSW8DIjEE
+	Y5e5sGyORECYSvHFX00nos2NAfHL5ylD2Wi9PFvwf2qDLRwGWLunREPsmx/T9YnU
+	VhvGudhISx6ZgKA7we17s0ifAVPrEVL7eNOZGC7CrCO5d+2pnQ8/dklJhPCDDeVg
+	==
+X-ME-Sender: <xms:wyahYQjkR0foBKjZ3tb_8GLbn0J3ch_tm2e6-FzN91abSk96u3pMeA>
+    <xme:wyahYZBj0V_1kJ2PrJvK8HYWnuKWig_4Zd2RVU5mdGbbdkt8pgxCGiMcDgfJK8Q-p
+    I-Zzi-S2ienOA>
+X-ME-Received: <xmr:wyahYYEcu4tsb8NcOF-PwgajvG9by6T9t_wxX35Bbt28Hhl5hEigyegEq8fAT1QndSy647XuZF69vQg-y2Z2LkmSEHnayypQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvuddrhedvgdduuddtucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvffukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
+    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeetveff
+    iefghfekhffggeeffffhgeevieektedthfehveeiheeiiedtudegfeetffenucevlhhush
+    htvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhes
+    ihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
+X-ME-Proxy: <xmx:wyahYRR1FgRtcl2tSCBKkvPYelhE1z76ijQQ5o-jPmH1Bk2-I_EcHQ>
+    <xmx:wyahYdyVc20H3Jw6LC13-mzyYzT4QKXgAaRnJKiTmdgup3PRzu74gw>
+    <xmx:wyahYf4SkeL-220agRAaPUhM9ZOcDw2CGAp0MpcnzptLYGmI912IFQ>
+    <xmx:wyahYY8Cke_C37JMucJj5c70SVPKiVvnJHHxjutqyYWMQiS-GQ5o4w>
+Date: Fri, 26 Nov 2021 19:26:07 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Jan Beulich <JBeulich@suse.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 59.5/65] x86: Introduce helpers/checks for endbr64
+ instructions
+Message-ID: <YaEmv7C4JJtJYe7i@mail-itl>
+References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
+ <20211126163340.26714-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="FwXODrAYaQ1x/RWb"
+Content-Disposition: inline
+In-Reply-To: <20211126163340.26714-1-andrew.cooper3@citrix.com>
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new power-off API.
 
-Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
----
- arch/sh/kernel/reboot.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+--FwXODrAYaQ1x/RWb
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Fri, 26 Nov 2021 19:26:07 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+	Jan Beulich <JBeulich@suse.com>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [PATCH 59.5/65] x86: Introduce helpers/checks for endbr64
+ instructions
 
-diff --git a/arch/sh/kernel/reboot.c b/arch/sh/kernel/reboot.c
-index 5c33f036418b..e8eeedc9b182 100644
---- a/arch/sh/kernel/reboot.c
-+++ b/arch/sh/kernel/reboot.c
-@@ -46,8 +46,7 @@ static void native_machine_shutdown(void)
- 
- static void native_machine_power_off(void)
- {
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
- }
- 
- static void native_machine_halt(void)
--- 
-2.33.1
+On Fri, Nov 26, 2021 at 04:33:40PM +0000, Andrew Cooper wrote:
+> ... to prevent the optimiser creating unsafe code.  See the code comment =
+for
+> full details.
+>=20
+> Also add a build time check for endbr64 embedded in imm32 operands, which
+> catches the obvious cases where the optimiser has done an unsafe thing.
+>=20
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> CC: Wei Liu <wl@xen.org>
+> ---
+>  xen/arch/x86/Makefile       |  4 ++++
+>  xen/include/asm-x86/endbr.h | 55 +++++++++++++++++++++++++++++++++++++++=
+++++++
+>  2 files changed, 59 insertions(+)
+>  create mode 100644 xen/include/asm-x86/endbr.h
+>=20
+> diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+> index 69b6cfaded25..64a5c0d20018 100644
+> --- a/xen/arch/x86/Makefile
+> +++ b/xen/arch/x86/Makefile
+> @@ -190,6 +190,10 @@ $(TARGET)-syms: prelink.o xen.lds
+>  	$(MAKE) -f $(BASEDIR)/Rules.mk efi-y=3D $(@D)/.$(@F).1.o
+>  	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
+>  	    $(@D)/.$(@F).1.o -o $@
+> +ifeq ($(CONFIG_XEN_IBT),y)
+> +	$(OBJDUMP) -d $@ | grep 0xfa1e0ff3 >/dev/null && \
+> +		{ echo "Found embedded endbr64 instructions" >&2; false; } || :
+> +endif
 
+Some more robust check can be done this way (warning, PoC quality bash):
+
+    objcopy -j .text xen-syms xen-syms.text
+    offset=3D$(objdump -h xen-syms -j .text | tail -2|head -1|awk '{printf =
+"%x\n", (strtonum("0x" $4) - strtonum("0x" $6))}')
+    objdump --adjust-vma=3D-0x$offset -d xen-syms.text|grep endbr | cut -f =
+1 -d ':' | tr -d ' ' > valid-addrs
+    grep -aob $'\xf3\x0f\x1e\xfa' xen-syms.text|cut -f 1 -d :|xargs printf =
+'%x\n' > all-addrs
+    join -v 2 <(sort valid-addrs) <(sort all-addrs) | awk '{ printf "%x\n",=
+ 0x'$offset' + strtonum("0x" $1)}' | addr2line -e xen-syms
+
+Currently it finds just one match:
+xen/arch/x86/alternative.c:145
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--FwXODrAYaQ1x/RWb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmGhJr4ACgkQ24/THMrX
+1yxA5wgAjXqRUQdO0qVs33pPUFbGFEvWsreJBdrs68MHMQqs1V9bkGfGhDtIn88G
+Pg5RdVvOhlurkJaplJMkOyNNCCtQfM+mHdvtceZ/jY+JTOD+8p+m+GiKWFPrZgo1
+c0IHoUhwrokdKmWIQZQjDZfCNTwAdr75IkLjWvu/bMWAwyIvYry6FVY+tledGcwM
++4dadCaADeuAO7248pSpj+cG8VoWzo9RHr9bNZVHBaEnDWGhjA4g46pE0KMInn1k
+xP1/U2dytIXAS5LNc7N0mQmNMEmQ4MmftFCUeR4k5udMEryEkc2KbCDPbJ3t8U/H
+L/7Kk8l387NySB1AG+HswJH+aRQTDg==
+=2gCS
+-----END PGP SIGNATURE-----
+
+--FwXODrAYaQ1x/RWb--
 
