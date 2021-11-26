@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E434C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A86BDC4167D
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 12:35:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232666.403443 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.232672.403500 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaRS-0001Yu-OH; Fri, 26 Nov 2021 12:35:02 +0000
+	id 1mqaRX-0002uB-Sj; Fri, 26 Nov 2021 12:35:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232666.403443; Fri, 26 Nov 2021 12:35:02 +0000
+Received: by outflank-mailman (output) from mailman id 232672.403500; Fri, 26 Nov 2021 12:35:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaRS-0001YX-GQ; Fri, 26 Nov 2021 12:35:02 +0000
-Received: by outflank-mailman (input) for mailman id 232666;
- Fri, 26 Nov 2021 12:35:01 +0000
+	id 1mqaRX-0002rN-I3; Fri, 26 Nov 2021 12:35:07 +0000
+Received: by outflank-mailman (input) for mailman id 232672;
+ Fri, 26 Nov 2021 12:35:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqaRR-0001F5-9e
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 12:35:01 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 43b4b394-4eb5-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 13:34:59 +0100 (CET)
+ id 1mqaRV-0001F5-38
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 12:35:05 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 461f8c71-4eb5-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 13:35:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,421 +38,212 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43b4b394-4eb5-11ec-9787-a32c541c8605
+X-Inumbo-ID: 461f8c71-4eb5-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637930098;
+  d=citrix.com; s=securemail; t=1637930101;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=jk0u+NLjbBn13CendvrV78gP6Sc2KoMbuVoCytP69cs=;
-  b=JYW1TivbsqyNb4Ovd5muzYkkxJbZVj9xOB31kO2H00tBYYdzlfuGgWKt
-   9dJzSDxutBL0Yu2imuAPmiTPalTLMsWjfzXFrkJ24pJA/sci49rJcMAq5
-   c5BN+uQLibecOco1NgZYs5WbfjmnZuOCaYIW2XGAsWEEhSiVWS1Hqg6Vy
-   g=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 8H2Jlk0IsMH0cIJfrQUi8LpuJgKbPQ002IlxsT+2w4kw4UmkYpuQkj/EDC5pp0R58PejfjNhb0
- dlVWNi3J5yxzWS1I3223LzcapbaxxR8kannHaex9OXEgybQ8T8qCHbLizt7ATkMV2rLES5CFvB
- QUt1dgrGvuGZSVrK3rVrAdmPPH+fQyXnXrApQ7nVjdRe7MJi5C+YBPtL0V8mRVeI/W675hPA5P
- qsBkUQjasB5KEx1oPpcUUbmjljZN9jwcfVVapK461XdBaAeZ7KbVlU9ZRBGmgSXqDPS+kxZN9t
- RSpbV1y73nU7uPoyGHzzIEBJ
+   references:mime-version;
+  bh=zzYsAAZqVX0Gd/xLEcar4h/Ts5nqFa6lcinkTdOV1C4=;
+  b=WDbbS1q2h98nr0vkGjDjOSZ/GcQOGx+OzYs1pyFBRVXltgJ2yPlZq9dr
+   3XfLc+XsrzbkUlzL4S2eUYuD9MO/3HBEtwancEYm3YUti6XXX0FMd8nQo
+   keUD1DdURvExTwQijxIV44uEvJG/1H/fydbhE4bCjiacNnburicHf9xY0
+   w=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: uUTgDUvTFsbas4FeXJn8l7EQOQJdiwBaOnuS3drF7RqJPozkQHXMLLRiPvkb9JHlaxxUPzXfiP
+ BarZgDZ3HCicMTaJ3jivFNp+LLcsq3GYsrxKrZDRRQDK5yad2IiczJMfzCWZaAAJSc+LfDrZHl
+ xN1XgBILJtyhkpVUuuSlIg3SmXYljylqxBIXCgKq/vsgenkLDdBuQZMxBg2Gi2lk8mzPjLgQj2
+ anOI3UgJ4fnLeLrJ4w8croEmEb0L9O7t/97nkWgxy59dBM8Y48WcLhtJvlYhD8rjcOi8iwRQ5s
+ OUEK+NJtfZvZJts859Is3CvD
 X-SBRS: 5.1
-X-MesageID: 58633364
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 58192118
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:qApO/qqhvOAJv3cQYC6esinx1Q5eBmLtYhIvgKrLsJaIsI4StFCzt
- garIBmDbq2JMDemftEnadiz/UIG7ZWBn9U1QQNkqXoyQXkV9ZuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2ILnW1rlV
- e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
- 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
- DlCnZytbQYuGPOPocRHTDB5LX9nE5MFwZaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
- 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
- ppHMmE0MkiojxtnIGcUEalntrySq2TSdjZStUvWu4cp2j2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
- 2SA+H72ajkYKdiexDyt4n+qwOjVkkvTQ5kOHbe18vprhly7xWEJDhASE1yhrpGRmkO4Ht5SN
- UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JyOeAn7ACGyoLP/h2UQGMDS1Z8hMcO7ZFsA2Zwj
- xnQwo2vVWcHXKCppWy19qqwrDSUZ2ssDTUdTA46ExIr3ZraidRm5v7QdepLHKmwh9zzPDj/x
- TGWsSQz74kuYd43O7aTpg6e3W/1znTdZktsv1iMADr5hu9sTNf9P9TA1LTN0RpXwG91pHGlt
- WNMpcWR5ftm4XqlxH3UG7Vl8F1ECp+43NzgbbxHQ8ZJG9eFoSfLkWVsDNdWfxwB3iEsI2KBX
- aMrkVkNjKK/xVPzBUONX6q/Ct4x0Y/rHsn/W/bfY7JmO8YqK1/ZoX4/ORDMhAgBdXTAd4lkY
- v93lu72UB4n5VlPlmLqF4/xL5d3rszB+Y8jbc+ilEn2uVZvTHWUVa0EIDOzghMRt8u5TPHu2
- 48HbaOikkwHOMWnO3W/2dNDfDgicClgbbir+pM/SwJ2Clc/cI3XI6SKmu1Jlk0Mt/k9q9okC
- VnhABIFkwSm2iWcQehIA1g6AI7SsV9EhSpTFUQR0ZyAgRDPuK6js/UScYUZZ74i+LAxxPJ4V
- aBdKc6BHu5OWnLM/DFENcvxq4lrdRKKgwOSPnX6PGhjLsA4HwGZqMX5egbP9TUVCnblv8UJv
- LD9hBjQRoAORlo+AZ+OOu6v1V64oVMUhPl2AxnTOtBWdUi1qNpqJiX9g+UZOcYJLRmflDKW2
- xzPWUUTpPXXop9z+97M3PjWo4CsGup4P0xbA2iEsurmaXiEpjKumNYSXvyJcDbRUHLP1J+jP
- egFnevhNPAnnUpRt9YuGbhc0q9jtcDkoKVXz1o4ESyTPUirEL5pPlKPwdJL6v9W3rZctAa7B
- hCP991dNenbMc/pCgdMdg8sb+DF3vAIgDjCq/8yJRyitiNw+bOGV2RUPgWN13MBfOckbtt9z
- LdzotMS5iy+lgEuY4SPgS1j/miRKmANDvc8vZYADY630gcmxzmuu3AH5vMaNH1XV+hxDw==
-IronPort-HdrOrdr: A9a23:/oTs6q2E1DxZ1fotO3T4iwqjBIgkLtp133Aq2lEZdPRUGvb4qy
- nIpoVi6faUskdpZJhOo6HiBEDtexzhHNtOkO0s1NSZLW/bUQmTXeNfBOLZqlWKcUCTygce79
- YGT0EXMqyKMbEQt6bHCWeDferIuOP3lZyVuQ==
+IronPort-Data: A9a23:SeVySK5CFGjN2zpEsA9SPwxRtAfAchMFZxGqfqrLsTDasY5as4F+v
+ mccUWzSOq6IYGXyKtAlaNvgpB8Fv5bdztBlTARrqCFgHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdg2NAw2LBVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z+
+ fdM8rDpZS4QHoLyvL49EAEAIyxfFPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gTTa+PP
+ ZNAOVKDajzEOhRICBAcK64Rle6NnkbRf2QEh2Ka8P9fD2/7k1UqjemF3MDuUt6FX8JOhW6Du
+ 3nLuW/+B3kyJNGZjDaI7H+oruvOhj/gHpIfEqWi8fxni0HVwXYcYCD6TnPi/6P/0BTnHYsCd
+ QpEoULCsJTe6mSabNi6c0SUiUekkSA4AfoTC7UK5SCkn/+8DxmiOkAISTtIadoDvcAwRCA32
+ lLho+4FFQCDo5XOFyvDq+78QSeafHFMcDRcPXNsoR4tuoG7+OkOYgTzosGP+UJfpvn8AnnOz
+ j+Dt0DSbJ1D3JdQh81XEb0q6g9AR6QlrCZpuW07vUr/t2uVgbJJgaTzsjA3Ct4ace6koqGp5
+ iRspiRnxLlm4WuxvCKMWv4RO7qi+uyINjbR6XY2QcJ+p2rwpC//I9wLiN2bGKuPGp1fEdMOS
+ BWO0T69GbcJZCf6BUOJS97Z5zsWIVjISo2+C6G8gitmaZltbg6XlByClmbLt10BZHMEyPllU
+ b/CKJ7EJS9DVcxPkWrnL89AgORD7n1vmgvuqWXTkk3PPUy2PyXOF9/o8TKmM4gE0U9ziFmPr
+ osEaZLVk043vS+XSnC/zLP/5GsidRATba0aYeQMHgJaCgY5SmwnFdHLxrYtJ95sk6hPz7+a9
+ XChQE5IjlH4gCSfewmNb3libpLpXIp+8i1nbXB9Yw7w1ihxe5ur4Ycea4AzIest+tt8wKMmV
+ PICYciBXKhCE2yV5zQHYJDhh4V+bxD31xmWNi+obWFnLZ5tTgDE4PH+eQ7r+HVcBya7r5Jm8
+ bahyhnaUdwIQAE7VJTab/emzlWQu3kBmb0tAxuUc4cLIEi1qdpkMS38iPMzMvogExSby2vIz
+ RuSDDcZufLJ/90//u7WiP3WtIyuCeZ/QBZXRjGJ8basOCDG1WO/2oscAv2QdDXQWW6oqqWvY
+ eJZk6P1PPEdxQsYtoN9F/BgzL4k5suprLhfl1w2EHLOZlWtK7VhPnjZgpUf6vwTnudU6VmsR
+ 0aC2thGIrHYasrqHWkYKBchcuneh+ofnSPf7KhtLUj3jMOtEGFrjamG08GwtRFg
+IronPort-HdrOrdr: A9a23:CtGZ2anPmULhRQ6GZcv8I3y1lgjpDfIu3DAbv31ZSRFFG/Fxl6
+ iV8sjztCWE8Qr5N0tBpTntAsW9qDbnhPtICOoqTNGftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
+ 9bAs9D4bbLbGSS4/yU3ODBKadD/OW6
 X-IronPort-AV: E=Sophos;i="5.87,265,1631592000"; 
-   d="scan'208";a="58633364"
+   d="scan'208";a="58192118"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 07/65] xen: Annotate fnptr targets from notifier callbacks
-Date: Fri, 26 Nov 2021 12:33:48 +0000
-Message-ID: <20211126123446.32324-8-andrew.cooper3@citrix.com>
+CC: Juergen Gross <jgross@suse.com>
+Subject: [PATCH 03/65] xen/x86: don't use hypercall table for calling compat hypercalls
+Date: Fri, 26 Nov 2021 12:33:44 +0000
+Message-ID: <20211126123446.32324-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/acpi/cpu_idle.c                 | 2 +-
- xen/arch/x86/cpu/mcheck/mce.c                | 2 +-
- xen/arch/x86/cpu/mcheck/mce_intel.c          | 2 +-
- xen/arch/x86/cpu/mwait-idle.c                | 4 ++--
- xen/arch/x86/cpu/vpmu.c                      | 2 +-
- xen/arch/x86/genapic/x2apic.c                | 2 +-
- xen/arch/x86/hvm/hvm.c                       | 2 +-
- xen/arch/x86/nmi.c                           | 2 +-
- xen/arch/x86/percpu.c                        | 2 +-
- xen/arch/x86/psr.c                           | 2 +-
- xen/arch/x86/smpboot.c                       | 2 +-
- xen/common/debugtrace.c                      | 4 ++--
- xen/common/kexec.c                           | 2 +-
- xen/common/livepatch.c                       | 2 +-
- xen/common/rcupdate.c                        | 2 +-
- xen/common/sched/core.c                      | 2 +-
- xen/common/sched/cpupool.c                   | 2 +-
- xen/common/stop_machine.c                    | 2 +-
- xen/common/tasklet.c                         | 2 +-
- xen/common/timer.c                           | 2 +-
- xen/common/trace.c                           | 2 +-
- xen/drivers/cpufreq/cpufreq.c                | 2 +-
- xen/drivers/cpufreq/cpufreq_misc_governors.c | 2 +-
- xen/drivers/passthrough/x86/hvm.c            | 2 +-
- 24 files changed, 26 insertions(+), 26 deletions(-)
+From: Juergen Gross <jgross@suse.com>
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index 7902ccce6b98..fb47eb9ad68e 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -1622,7 +1622,7 @@ bool cpuidle_using_deep_cstate(void)
-                                                                : ACPI_STATE_C1);
+Today the *_op_compat hypercalls call the modern handler functions by
+using the entries from the hypercall table. This is resulting in a
+not needed indirect function call which can be avoided by using the
+correct handler function directly. This is basically a revert of
+commit 1252e282311734 ("86/pv: Export pv_hypercall_table[] rather
+than working around it in several ways"), which reasoning no longer
+applies, as shim no longer modifies the hypercall table.
+
+The hypercall table can now be made static as there is no external
+reference to it any longer.
+
+Commit 834cb8761051f7 ("x86/PV32: fix physdev_op_compat handling")
+can be reverted, too, as using the direct call of the correct handler
+is already handled fine without that patch.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+ xen/arch/x86/compat.c           | 14 ++++----------
+ xen/arch/x86/pv/hypercall.c     |  9 ++++++++-
+ xen/arch/x86/x86_64/compat.c    |  1 -
+ xen/include/asm-x86/hypercall.h |  8 --------
+ 4 files changed, 12 insertions(+), 20 deletions(-)
+
+diff --git a/xen/arch/x86/compat.c b/xen/arch/x86/compat.c
+index 58b202f701d5..939b449dec29 100644
+--- a/xen/arch/x86/compat.c
++++ b/xen/arch/x86/compat.c
+@@ -17,14 +17,12 @@ typedef long ret_t;
+ /* Legacy hypercall (as of 0x00030202). */
+ ret_t do_physdev_op_compat(XEN_GUEST_HANDLE_PARAM(physdev_op_t) uop)
+ {
+-    typeof(do_physdev_op) *fn =
+-        (void *)pv_hypercall_table[__HYPERVISOR_physdev_op].native;
+     struct physdev_op op;
+ 
+     if ( unlikely(copy_from_guest(&op, uop, 1) != 0) )
+         return -EFAULT;
+ 
+-    return fn(op.cmd, guest_handle_from_ptr(&uop.p->u, void));
++    return do_physdev_op(op.cmd, guest_handle_from_ptr(&uop.p->u, void));
  }
  
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
+ #ifndef COMPAT
+@@ -32,14 +30,11 @@ ret_t do_physdev_op_compat(XEN_GUEST_HANDLE_PARAM(physdev_op_t) uop)
+ /* Legacy hypercall (as of 0x00030101). */
+ long do_sched_op_compat(int cmd, unsigned long arg)
  {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index ea86d84481b2..a449fa0424ce 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -733,7 +733,7 @@ static int cpu_bank_alloc(unsigned int cpu)
-     return 0;
- }
+-    typeof(do_sched_op) *fn =
+-        (void *)pv_hypercall_table[__HYPERVISOR_sched_op].native;
+-
+     switch ( cmd )
+     {
+     case SCHEDOP_yield:
+     case SCHEDOP_block:
+-        return fn(cmd, guest_handle_from_ptr(NULL, void));
++        return do_sched_op(cmd, guest_handle_from_ptr(NULL, void));
  
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
+     case SCHEDOP_shutdown:
+         TRACE_3D(TRC_SCHED_SHUTDOWN,
+@@ -57,8 +52,6 @@ long do_sched_op_compat(int cmd, unsigned long arg)
+ /* Legacy hypercall (as of 0x00030202). */
+ long do_event_channel_op_compat(XEN_GUEST_HANDLE_PARAM(evtchn_op_t) uop)
  {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
-index bb9f3a3ff795..343bdb3a22ef 100644
---- a/xen/arch/x86/cpu/mcheck/mce_intel.c
-+++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
-@@ -921,7 +921,7 @@ static int cpu_mcabank_alloc(unsigned int cpu)
-     return -ENOMEM;
- }
+-    typeof(do_event_channel_op) *fn =
+-        (void *)pv_hypercall_table[__HYPERVISOR_event_channel_op].native;
+     struct evtchn_op op;
  
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
-index d1739f6fc3cf..f2444bcff146 100644
---- a/xen/arch/x86/cpu/mwait-idle.c
-+++ b/xen/arch/x86/cpu/mwait-idle.c
-@@ -1195,8 +1195,8 @@ static int __init mwait_idle_probe(void)
- 	return 0;
- }
+     if ( unlikely(copy_from_guest(&op, uop, 1) != 0) )
+@@ -76,7 +69,8 @@ long do_event_channel_op_compat(XEN_GUEST_HANDLE_PARAM(evtchn_op_t) uop)
+     case EVTCHNOP_bind_ipi:
+     case EVTCHNOP_bind_vcpu:
+     case EVTCHNOP_unmask:
+-        return fn(op.cmd, guest_handle_from_ptr(&uop.p->u, void));
++        return do_event_channel_op(op.cmd,
++                                   guest_handle_from_ptr(&uop.p->u, void));
  
--static int mwait_idle_cpu_init(struct notifier_block *nfb,
--			       unsigned long action, void *hcpu)
-+static int cf_check mwait_idle_cpu_init(
-+    struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
- 	unsigned int cpu = (unsigned long)hcpu, cstate;
- 	struct acpi_processor_power *dev = processor_powers[cpu];
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index c23e66d04c02..fec94a00e9a2 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -841,7 +841,7 @@ long cf_check do_xenpmu_op(
-     return ret;
- }
+     default:
+         return -ENOSYS;
+diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
+index 4744d9f78f01..e2709ff6e9d4 100644
+--- a/xen/arch/x86/pv/hypercall.c
++++ b/xen/arch/x86/pv/hypercall.c
+@@ -27,6 +27,13 @@
+ #include <asm/multicall.h>
+ #include <irq_vectors.h>
  
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/genapic/x2apic.c b/xen/arch/x86/genapic/x2apic.c
-index 9064a0ca4696..bd44bb753995 100644
---- a/xen/arch/x86/genapic/x2apic.c
-+++ b/xen/arch/x86/genapic/x2apic.c
-@@ -187,7 +187,7 @@ static const struct genapic __initconstrel apic_x2apic_cluster = {
-     .send_IPI_self = send_IPI_self_x2apic
- };
++typedef struct {
++    hypercall_fn_t *native;
++#ifdef CONFIG_PV32
++    hypercall_fn_t *compat;
++#endif
++} pv_hypercall_table_t;
++
+ #ifdef CONFIG_PV32
+ #define HYPERCALL(x)                                                \
+     [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x,         \
+@@ -42,7 +49,7 @@
  
--static int update_clusterinfo(
-+static int cf_check update_clusterinfo(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 7af11656dcfd..0e935be1d772 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -117,7 +117,7 @@ static const char __initconst warning_hvm_fep[] =
- static bool_t __initdata opt_altp2m_enabled = 0;
- boolean_param("altp2m", opt_altp2m_enabled);
+ #define do_arch_1             paging_domctl_continuation
  
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
-index 21e947a46f24..5c101a9f97b3 100644
---- a/xen/arch/x86/nmi.c
-+++ b/xen/arch/x86/nmi.c
-@@ -428,7 +428,7 @@ void setup_apic_nmi_watchdog(void)
-     nmi_active = 1;
- }
+-const pv_hypercall_table_t pv_hypercall_table[] = {
++static const pv_hypercall_table_t pv_hypercall_table[] = {
+     COMPAT_CALL(set_trap_table),
+     HYPERCALL(mmu_update),
+     COMPAT_CALL(set_gdt),
+diff --git a/xen/arch/x86/x86_64/compat.c b/xen/arch/x86/x86_64/compat.c
+index fcbc1cc0d780..0e4c71f2aa17 100644
+--- a/xen/arch/x86/x86_64/compat.c
++++ b/xen/arch/x86/x86_64/compat.c
+@@ -12,7 +12,6 @@ EMIT_FILE;
+ #define physdev_op_t                  physdev_op_compat_t
+ #define do_physdev_op                 compat_physdev_op
+ #define do_physdev_op_compat(x)       compat_physdev_op_compat(_##x)
+-#define native                        compat
  
--static int cpu_nmi_callback(
-+static int cf_check cpu_nmi_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/percpu.c b/xen/arch/x86/percpu.c
-index 0e0b6577ca45..eb3ba7bc8874 100644
---- a/xen/arch/x86/percpu.c
-+++ b/xen/arch/x86/percpu.c
-@@ -63,7 +63,7 @@ static void free_percpu_area(unsigned int cpu)
-     call_rcu(&info->rcu, _free_percpu_area);
- }
+ #define COMPAT
+ #define _XEN_GUEST_HANDLE(t) XEN_GUEST_HANDLE(t)
+diff --git a/xen/include/asm-x86/hypercall.h b/xen/include/asm-x86/hypercall.h
+index 45fa987a638f..9caca272eff7 100644
+--- a/xen/include/asm-x86/hypercall.h
++++ b/xen/include/asm-x86/hypercall.h
+@@ -16,13 +16,6 @@ typedef unsigned long hypercall_fn_t(
+     unsigned long, unsigned long, unsigned long);
  
--static int cpu_percpu_callback(
-+static int cf_check cpu_percpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/arch/x86/psr.c b/xen/arch/x86/psr.c
-index 9a3670afc341..5b9991bd5b12 100644
---- a/xen/arch/x86/psr.c
-+++ b/xen/arch/x86/psr.c
-@@ -1642,7 +1642,7 @@ static void psr_cpu_fini(unsigned int cpu)
-         free_socket_resources(socket);
- }
+ typedef struct {
+-    hypercall_fn_t *native;
+-#ifdef CONFIG_PV32
+-    hypercall_fn_t *compat;
+-#endif
+-} pv_hypercall_table_t;
+-
+-typedef struct {
+     uint8_t native;
+ #ifdef CONFIG_COMPAT
+     uint8_t compat;
+@@ -32,7 +25,6 @@ typedef struct {
+ extern const hypercall_args_t hypercall_args_table[NR_hypercalls];
  
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     int rc = 0;
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 329cfdb6c9f6..2b452dab9e75 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -1109,7 +1109,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
-     return rc;
- }
+ #ifdef CONFIG_PV
+-extern const pv_hypercall_table_t pv_hypercall_table[];
+ void pv_hypercall(struct cpu_user_regs *regs);
+ #endif
  
--static int cpu_smpboot_callback(
-+static int cf_check cpu_smpboot_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/debugtrace.c b/xen/common/debugtrace.c
-index f3c0fd8aa17b..160d00b79607 100644
---- a/xen/common/debugtrace.c
-+++ b/xen/common/debugtrace.c
-@@ -263,8 +263,8 @@ static void debugtrace_alloc_buffer(struct debugtrace_data **ptr,
-     *ptr = data;
- }
- 
--static int debugtrace_cpu_callback(struct notifier_block *nfb,
--                                   unsigned long action, void *hcpu)
-+static int cf_check debugtrace_cpu_callback(
-+    struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
- 
-diff --git a/xen/common/kexec.c b/xen/common/kexec.c
-index 36384f782db3..3b223cd03d75 100644
---- a/xen/common/kexec.c
-+++ b/xen/common/kexec.c
-@@ -531,7 +531,7 @@ static int kexec_init_cpu_notes(const unsigned long cpu)
-     return ret;
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned long cpu = (unsigned long)hcpu;
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 33708b4e2388..701efd87a173 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -2124,7 +2124,7 @@ static void livepatch_printall(unsigned char key)
-     spin_unlock(&payload_lock);
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/rcupdate.c b/xen/common/rcupdate.c
-index a5a27af3def0..2ec5606de5dd 100644
---- a/xen/common/rcupdate.c
-+++ b/xen/common/rcupdate.c
-@@ -641,7 +641,7 @@ static void rcu_init_percpu_data(int cpu, struct rcu_ctrlblk *rcp,
-     init_timer(&rdp->idle_timer, rcu_idle_timer_handler, rdp, cpu);
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 0f527024ba2e..4a79971a1d45 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -2839,7 +2839,7 @@ void sched_rm_cpu(unsigned int cpu)
-     cpu_schedule_down(cpu);
- }
- 
--static int cpu_schedule_callback(
-+static int cf_check cpu_schedule_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index f26c7f289539..e5cfb03b857e 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -985,7 +985,7 @@ void dump_runq(unsigned char key)
-     spin_unlock(&cpupool_lock);
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/stop_machine.c b/xen/common/stop_machine.c
-index 8979d553d677..a122bd4afe09 100644
---- a/xen/common/stop_machine.c
-+++ b/xen/common/stop_machine.c
-@@ -182,7 +182,7 @@ static void stopmachine_action(void *data)
-     local_irq_enable();
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/tasklet.c b/xen/common/tasklet.c
-index ac89511a0955..1b16bbcdeb0b 100644
---- a/xen/common/tasklet.c
-+++ b/xen/common/tasklet.c
-@@ -214,7 +214,7 @@ void softirq_tasklet_init(struct tasklet *t, void (*func)(void *), void *data)
-     t->is_softirq = 1;
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/timer.c b/xen/common/timer.c
-index 1bb265ceea0e..b788050ea1d8 100644
---- a/xen/common/timer.c
-+++ b/xen/common/timer.c
-@@ -637,7 +637,7 @@ static void free_percpu_timers(unsigned int cpu)
-         ASSERT(ts->heap == dummy_heap);
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index a2a389a1c7c3..0886be089bea 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -79,7 +79,7 @@ static u32 tb_event_mask = TRC_ALL;
-  * i.e., sizeof(_type) * ans >= _x. */
- #define fit_to_type(_type, _x) (((_x)+sizeof(_type)-1) / sizeof(_type))
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/drivers/cpufreq/cpufreq.c b/xen/drivers/cpufreq/cpufreq.c
-index e55e202d5a18..a94520ee57ac 100644
---- a/xen/drivers/cpufreq/cpufreq.c
-+++ b/xen/drivers/cpufreq/cpufreq.c
-@@ -632,7 +632,7 @@ static int __init cpufreq_cmdline_parse(const char *s)
-     return rc;
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/drivers/cpufreq/cpufreq_misc_governors.c b/xen/drivers/cpufreq/cpufreq_misc_governors.c
-index 8343f491da87..ad79d0f5d246 100644
---- a/xen/drivers/cpufreq/cpufreq_misc_governors.c
-+++ b/xen/drivers/cpufreq/cpufreq_misc_governors.c
-@@ -91,7 +91,7 @@ cpufreq_userspace_handle_option(const char *name, const char *val)
-     return 0;
- }
- 
--static int cpufreq_userspace_cpu_callback(
-+static int cf_check cpufreq_userspace_cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
-diff --git a/xen/drivers/passthrough/x86/hvm.c b/xen/drivers/passthrough/x86/hvm.c
-index ef71c3b92717..fef350ef3a1d 100644
---- a/xen/drivers/passthrough/x86/hvm.c
-+++ b/xen/drivers/passthrough/x86/hvm.c
-@@ -1042,7 +1042,7 @@ static void dpci_softirq(void)
-     }
- }
- 
--static int cpu_callback(
-+static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-     unsigned int cpu = (unsigned long)hcpu;
 -- 
 2.11.0
 
