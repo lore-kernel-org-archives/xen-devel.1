@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C86C4332F
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232788.403829 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F6ADC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232789.403834 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawU-0004fa-89; Fri, 26 Nov 2021 13:07:06 +0000
+	id 1mqawU-0004tK-Rl; Fri, 26 Nov 2021 13:07:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232788.403829; Fri, 26 Nov 2021 13:07:06 +0000
+Received: by outflank-mailman (output) from mailman id 232789.403834; Fri, 26 Nov 2021 13:07:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawT-0004aB-4m; Fri, 26 Nov 2021 13:07:05 +0000
-Received: by outflank-mailman (input) for mailman id 232788;
- Fri, 26 Nov 2021 13:07:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqawU-0004oh-8t; Fri, 26 Nov 2021 13:07:06 +0000
+Received: by outflank-mailman (input) for mailman id 232789;
+ Fri, 26 Nov 2021 13:07:02 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavE-0002zD-Bk
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:48 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9159b3dc-4eb9-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 14:05:47 +0100 (CET)
+ id 1mqavk-0003W9-Lf
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:20 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a4486e1c-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:06:18 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9159b3dc-4eb9-11ec-9787-a32c541c8605
+X-Inumbo-ID: a4486e1c-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931947;
+  d=citrix.com; s=securemail; t=1637931979;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=UegzuZhXXHY5hqqFyS7Iw93YbL6XWSCZlaORkPJB840=;
-  b=fmbPKmOdEx1a0pdUxgRngzqMFtlESNgNq7Wa9bTcjN8qetlQ7Pqn94ZV
-   U93ba9rC3ODKmlCB/dpaP5tXZ65AYAGbltjzk7xSzuPtR2ypI043V63Kf
-   xgOsVqhouqj8iMvslFJUSoaBt860UATHaVVGWLrYdtPWcLIt6u6em6i2H
-   Q=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: IdT3NFWX9Hj68kTd32brC/LgREC0HLKlW7vgt8jFLvL0zEByVHaP7ZDEBTQxPGVQjTVR3JclgH
- PNDH4cUqFWo3iNyQYRX0msWEosxO7IiYeZqW1QLrzwltlP1nFwJQ8rDbb3EhuDwn02oldn74ES
- vW/fR53wk0hHRg9jCBItk2BFp1iBL0XYGef94vIVmT27i4/XUy5Wwg6gWHDi+SolLHZsfZiTbf
- VG9suuoh/J8C9WkmuvB+E0GsIoVPTxYyYailt2gbbUHSzyAonUkv5tdaKd53hl3EgkuPOJDa23
- yUTIlp67WZnQ7Ge8AO6ThD1Y
+  bh=1fjbUCy704jAqvZkS1xr/U+cwmAU8Nf/lqpWXLu6U00=;
+  b=enbaqYIYPy1AuyrHbSPN/4S2Ff7hm1yVe0EAOq1l3qrSFcoWwKiQu32P
+   aXsCzGucRPsGYT3h3KdrqPzjLgEcjNal0S0wxhAw+zArIX/Ria9JE8u+q
+   jv7eeq1gNbPACxzndjaCrKRf+VTZiThxrB//5RqCid/yQm6w9nd+mjJLI
+   c=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: xm5SIC1v00MKbrjx8rAQR840+L9k/+Mfv2qdy50VQrsOaGKOIRk3U1oCXRuZzSD2AtaiVzghH3
+ De4pQeB1yzSeAxCp5CmXdt7lsYumuIdHfMXz2SNbyUrA7qhlU3V0lM14kVn3t8u2UDO+2YfT2N
+ NXl0+Pr1gJtUvkBJBvGaD6fpil/oJ79MyoltluP6t5fFLLJYrJKk0SljDeA/QlYYlbzgN6t9wz
+ 4iqL7FiKKxLpwE0rwfBWTE6qGxHcrUnrzAM3sAZhCeCLdfmuCfbKxSyOdH+NoiEhsIpxY956tP
+ XH2TJxBgDo6bGQZ2ojPDvqbb
 X-SBRS: 5.1
-X-MesageID: 58635033
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 59064069
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:HpbFC69dDI9+AM7d51FEDrUDdXmTJUtcMsCJ2f8bNWPcYEJGY0x3m
- 2pKWG2EOPzZN2P0KIx+PYS/90JT6pfRy4JgSgI+qSs8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdj3NYy6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhz0
- YhLmt+7Qz4jYJbXsrozDRlZGCBXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp0eQ62DP
- 5FCAdZpRBHlXD4QYGg0Mb8ZkcSR2Xr1SWdG72vA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru/Xn9AxwcHMySz3yC6H3ErvTUgSrxVYYWFbu53v1nmluewioUEhJ+fUu2p7y1h1CzX/pbK
- lcI4Ww+oK4q7kupQ9LhGRqirxasnDQRRt5RGO0S8xyWx+zf5APxO4QfZmcfMpp87pZwHGF0k
- A/S9z/0OdBxmL+MFHSytbyelDnsAjM/c0FcZS4PTCJQtrEPv7oPph7IS99iFou8gdv0BSz8z
- li2kcQuu1kApZVVjvvmpDgrlxrp/8GUFVBtum07S0r8tlshDLNJcbBE/rQyARxoCI+CBmeMs
- 3Ef8yR1xLBfVMrd/MBhrQhkIV1I2xpnGGGD6bKMN8N4n9hIx5JFVdsLiN2ZDB00WvvogRezP
- CfuVfp5vfe/xkeCY65teJ6WAM8316XmHtmNfqmKNYUePMUuJVPZoHoGiausM4bFyxNEfUYXY
- 8rzTCpRJSxCVfQPIMSeG4/xLoPHNghhnDiOFPgXPjys0KaEZW79dFv2GADmUwzN14vd+F+92
- 48Gb6OikkwDOMWjMni/2dNCdjgicClkba0aXuQKL4Zv1CI9Qzp/YxIQqJt8E7FYc1N9yr2Vo
- yrjAxAAkzISRxTvcG23V5yqU5u3Nb4XkJ7xFXVE0Y+A1ydxbICxwr0YcpdrL7Ar+PY6lax/T
- uUfetXGCfNKE2yV9zMYZJj7jYpjaBX02l7eY3v7OGAyL8x6WgjE2t74ZQ+zpiMAOTW66Jklq
- Lq62wKFHZdaH1Z+DNzbYe6Exk+quSRPg/p7WkbFe4EBeEjl/IVwBTb2i/s7f5MFJRnZn2PI3
- AeKGxYI4+LKptZtotXOgKmFqaavEvd/QRUGTzWKs+7uOHCDrGS5wIJGXOKZRhznVTv5qPe4e
- OFY7/DgK/lbzlxEhJVxTuRwxqUk6tqx+7IDllZ4HG/GZkiAA697JiXUxtFGs6BAy+MLuQayX
- U7TqNBWNa/QZZHgGV8VYgEkcv6CxbcfnTyLtaY5J0Dz5SlW+rubUBoNY0nQ2XIFdLYlYpk4x
- eoBudIN713tgxUnBd+KkyRI+jneNXcHSagm6skXDYKDZtDHEb2ejUgw0hPL3aw=
-IronPort-HdrOrdr: A9a23:savNVKr5TE5rSQH0xT4iPqwaV5oReYIsimQD101hICG8cqSj9v
- xG+85rrSMc6QxhIU3I9urwW5VoLUmyyXcx2/h0AV7AZniBhILLFvAB0WKK+VSJcEeSmtK1l5
- 0QFJSWYOeAdmSS5vyb3ODXKbgdKaG8gcWVuds=
+IronPort-Data: A9a23:4ewVbaxCsmEb9AO/XLp6t+f6wSrEfRIJ4+MujC+fZmUNrF6WrkUEz
+ 2EcWziHOqvbNmKnf9t1Ptm39R4BvZ7Uz9AwQVNv/yAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAuLeNYYH1500s6wrRn2tQAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt/5By
+ Opnv7afc1c4A4n+3+AmYxVmEAgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY25EWQ6qGO
+ ZtxhTxHZiWYfBkVIxQuLbESrf6CoEb6LhZcgQfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
+ krk1WnkBhARNPSE1CGItHmrg4fnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
+ GRNpHBo9/JrshX2EJ+tBHVUvUJooDYya9pvOecQxzvd25fw0UGdPVgIcD1oPYlOWNANeRQm0
+ VqAntXMDDNpsaGIRX/1yop4vQ9eKgBOczZcOHZsoR8tpoC6/dpt1k6nosNLSfbt1rXI9SfML
+ ydmRcTUr5EaloY12qqy5jgraBr898GSHmbZCug6N19JDz+Vhqb5OORECnCBtJ6sybp1qHHa5
+ xDofODEsYgz4WmlznDlfQn0NOjBCwy5GDPdm0VzOJIq6i6g/XWuFagJvmohdBk0bZdYJ2OyC
+ KM2he+3zMQIVJdNRfUqC79d9uxwlfSwfTgbfqy8giVyjmhZK1bcoXAGib+41GHxikk8+ZzTy
+ r/AGftA+U0yUPw9pBLvHr91+eZymkgWmDOCLbimnk/P+efPOxaopUItbQLmghYRt/jf/m04M
+ r93aqO39vmoeLGkP3SMr9dMdQtiwLpSLcmelvG7v9WremJOcFzNwdeIqV/4U4A6zalTiMnS+
+ XSxBh1RxFbl3CWVIgSWcHFzLrjoWM8n/348OCUtO3eu2mQiPtnzvPtOKcNvcOl17vFnwN51U
+ +IBJ5eKDMNQR2mV4D8ad5T88tBvLUz5mQKUMiO5SzEjZJo8FRfR89rpc1K3pikDBya6r+Ukp
+ Lik2l+JSJYPXV06Xs3XdOiu3xW6un1EwLB+WE7BI99yfkTw8dc1d3yt36Fve8xVcEfN3DqX0
+ QqSECw0n+iVrt9n6sTNiICFs5ytT7l0EH1FEjSJ9r2xLyTboDaumNcSTOaScDnBf2ro46H+N
+ /5NxvTxPfBbzlZHt41wT+Riwa4kvoa9orZbykJvHWnRbkTtAbRleyHU0c5Kv6xL57lYpQrpB
+ R7fpogEYe2EaJH/DVocBAs5deDSh/gblw7b4ekxPEintjR8+6CKUBkKMhSB4MCHwGCZ7G/xL
+ T8dhfMr
+IronPort-HdrOrdr: A9a23:CuJwzKmauO8Uih+XhXSArznhYwnpDfIU3DAbv31ZSRFFG/Fxl6
+ iV8sjzsiWE8Qr5OUtQ/+xoV5PhfZqxz/JICMwqTNKftWrdyQyVxeNZnOjfKlTbckWUnINgPO
+ VbAsxD4bXLfCBHZK3BgTVQfexO/DD+ytHLudvj
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58635033"
+   d="scan'208";a="59064069"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 26/65] xen/misc: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:07 +0000
-Message-ID: <20211126123446.32324-27-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 44/65] x86/shadow: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:25 +0000
+Message-ID: <20211126123446.32324-45-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -106,275 +105,489 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/mm.c                        | 6 ++++--
- xen/arch/x86/setup.c                     | 4 ++--
- xen/common/domain.c                      | 2 +-
- xen/common/gdbstub.c                     | 5 ++---
- xen/common/livepatch.c                   | 7 +++----
- xen/common/memory.c                      | 4 ++--
- xen/common/page_alloc.c                  | 2 +-
- xen/common/radix-tree.c                  | 4 ++--
- xen/common/rangeset.c                    | 2 +-
- xen/common/spinlock.c                    | 6 +++---
- xen/common/vm_event.c                    | 6 +++---
- xen/common/xmalloc_tlsf.c                | 4 ++--
- xen/drivers/passthrough/amd/iommu_init.c | 2 +-
- 13 files changed, 27 insertions(+), 27 deletions(-)
+ xen/arch/x86/mm/shadow/common.c  | 11 +++---
+ xen/arch/x86/mm/shadow/hvm.c     |  8 ++--
+ xen/arch/x86/mm/shadow/multi.c   | 80 ++++++++++++++++++++--------------------
+ xen/arch/x86/mm/shadow/multi.h   | 20 +++++-----
+ xen/arch/x86/mm/shadow/private.h | 12 +++---
+ xen/arch/x86/mm/shadow/pv.c      |  4 +-
+ 6 files changed, 67 insertions(+), 68 deletions(-)
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 35d000921795..5d7acf705fb8 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -811,7 +811,8 @@ struct mmio_emul_range_ctxt {
-     unsigned long mfn;
- };
- 
--static int print_mmio_emul_range(unsigned long s, unsigned long e, void *arg)
-+static int cf_check print_mmio_emul_range(
-+    unsigned long s, unsigned long e, void *arg)
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 8e51168e61b6..7cf6470ae8c3 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -1215,7 +1215,7 @@ void shadow_free(struct domain *d, mfn_t smfn)
+  * This action is irreversible: the p2m mapping only ever grows.
+  * That's OK because the p2m table only exists for translated domains,
+  * and those domains can't ever turn off shadow mode. */
+-static struct page_info *
++static struct page_info *cf_check
+ shadow_alloc_p2m_page(struct domain *d)
  {
-     const struct mmio_emul_range_ctxt *ctxt = arg;
- 
-@@ -4582,7 +4583,8 @@ static int _handle_iomem_range(unsigned long s, unsigned long e,
-     return 0;
+     struct page_info *pg;
+@@ -1251,7 +1251,7 @@ shadow_alloc_p2m_page(struct domain *d)
+     return pg;
  }
- 
--static int handle_iomem_range(unsigned long s, unsigned long e, void *p)
-+static int cf_check handle_iomem_range(
-+    unsigned long s, unsigned long e, void *p)
- {
-     int err = 0;
- 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index f35f3cb899ab..9bd42a55f94b 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -2034,8 +2034,8 @@ int __hwdom_init xen_in_range(unsigned long mfn)
-     return 0;
- }
- 
--static int __hwdom_init io_bitmap_cb(unsigned long s, unsigned long e,
--                                     void *ctx)
-+static int __hwdom_init cf_check io_bitmap_cb(
-+    unsigned long s, unsigned long e, void *ctx)
- {
-     struct domain *d = ctx;
-     unsigned int i;
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 4fcf9e23911f..de8208a6c797 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -370,7 +370,7 @@ static void cf_check _free_pirq_struct(struct rcu_head *head)
-     xfree(container_of(head, struct pirq, rcu_head));
- }
- 
--static void free_pirq_struct(void *ptr)
-+static void cf_check free_pirq_struct(void *ptr)
- {
-     struct pirq *pirq = ptr;
- 
-diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
-index 079c3ca9616a..d6872721dc0d 100644
---- a/xen/common/gdbstub.c
-+++ b/xen/common/gdbstub.c
-@@ -69,7 +69,7 @@ static void gdb_smp_resume(void);
- static char __initdata opt_gdb[30];
- string_param("gdb", opt_gdb);
- 
--static void gdbstub_console_puts(const char *str, size_t nr);
-+static void cf_check gdbstub_console_puts(const char *str, size_t nr);
- 
- /* value <-> char (de)serialzers */
- static char
-@@ -546,8 +546,7 @@ __gdb_ctx = {
- };
- static struct gdb_context *gdb_ctx = &__gdb_ctx;
  
 -static void
--gdbstub_console_puts(const char *str, size_t nr)
-+static void cf_check gdbstub_console_puts(const char *str, size_t nr)
++static void cf_check
+ shadow_free_p2m_page(struct domain *d, struct page_info *pg)
  {
-     const char *p;
- 
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index e8714920dc8f..ec301a9f120c 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -157,10 +157,9 @@ unsigned long livepatch_symbols_lookup_by_name(const char *symname)
+     struct domain *owner = page_get_owner(pg);
+@@ -2290,7 +2290,8 @@ void shadow_prepare_page_type_change(struct domain *d, struct page_info *page,
+ /* Reset the up-pointers of every L3 shadow to 0.
+  * This is called when l3 shadows stop being pinnable, to clear out all
+  * the list-head bits so the up-pointer field is properly inititalised. */
+-static int sh_clear_up_pointer(struct vcpu *v, mfn_t smfn, mfn_t unused)
++static int cf_check sh_clear_up_pointer(
++    struct vcpu *v, mfn_t smfn, mfn_t unused)
+ {
+     mfn_to_page(smfn)->up = 0;
      return 0;
+@@ -2490,7 +2491,7 @@ static void sh_update_paging_modes(struct vcpu *v)
+     v->arch.paging.mode->update_cr3(v, 0, false);
  }
  
--static const char *livepatch_symbols_lookup(unsigned long addr,
--                                            unsigned long *symbolsize,
--                                            unsigned long *offset,
--                                            char *namebuf)
-+static const char *cf_check livepatch_symbols_lookup(
-+    unsigned long addr, unsigned long *symbolsize, unsigned long *offset,
-+    char *namebuf)
+-void shadow_update_paging_modes(struct vcpu *v)
++void cf_check shadow_update_paging_modes(struct vcpu *v)
  {
-     const struct payload *data;
-     unsigned int i, best;
-diff --git a/xen/common/memory.c b/xen/common/memory.c
-index fbd2ebb3ba75..8146e1136a6c 100644
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -1033,8 +1033,8 @@ struct get_reserved_device_memory {
-     unsigned int used_entries;
- };
- 
--static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
--                                      u32 id, void *ctxt)
-+static int cf_check get_reserved_device_memory(
-+    xen_pfn_t start, xen_ulong_t nr, u32 id, void *ctxt)
- {
-     struct get_reserved_device_memory *grdm = ctxt;
-     uint32_t sbdf = PCI_SBDF3(grdm->map.dev.pci.seg, grdm->map.dev.pci.bus,
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 906bfb6679df..f878cd110d1e 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -1238,7 +1238,7 @@ struct scrub_wait_state {
-     bool drop;
- };
- 
--static void scrub_continue(void *data)
-+static void cf_check scrub_continue(void *data)
- {
-     struct scrub_wait_state *st = data;
- 
-diff --git a/xen/common/radix-tree.c b/xen/common/radix-tree.c
-index 33b47748ae49..adc3034222dc 100644
---- a/xen/common/radix-tree.c
-+++ b/xen/common/radix-tree.c
-@@ -52,7 +52,7 @@ struct rcu_node {
- 	struct rcu_head rcu_head;
- };
- 
--static struct radix_tree_node *rcu_node_alloc(void *arg)
-+static struct radix_tree_node *cf_check rcu_node_alloc(void *arg)
- {
- 	struct rcu_node *rcu_node = xmalloc(struct rcu_node);
- 	return rcu_node ? &rcu_node->node : NULL;
-@@ -65,7 +65,7 @@ static void cf_check _rcu_node_free(struct rcu_head *head)
- 	xfree(rcu_node);
+     paging_lock(v->domain);
+     sh_update_paging_modes(v);
+@@ -3075,7 +3076,7 @@ static bool flush_vcpu(const struct vcpu *v, const unsigned long *vcpu_bitmap)
  }
  
--static void rcu_node_free(struct radix_tree_node *node, void *arg)
-+static void cf_check rcu_node_free(struct radix_tree_node *node, void *arg)
+ /* Flush TLB of selected vCPUs.  NULL for all. */
+-bool shadow_flush_tlb(const unsigned long *vcpu_bitmap)
++bool cf_check shadow_flush_tlb(const unsigned long *vcpu_bitmap)
  {
- 	struct rcu_node *rcu_node = container_of(node, struct rcu_node, node);
- 	call_rcu(&rcu_node->rcu_head, _rcu_node_free);
-diff --git a/xen/common/rangeset.c b/xen/common/rangeset.c
-index 885b6b15c229..a6ef2640462a 100644
---- a/xen/common/rangeset.c
-+++ b/xen/common/rangeset.c
-@@ -384,7 +384,7 @@ int rangeset_consume_ranges(struct rangeset *r,
-     return rc;
+     static DEFINE_PER_CPU(cpumask_t, flush_cpumask);
+     cpumask_t *mask = &this_cpu(flush_cpumask);
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index ea99dd714fc3..e99eb3432cce 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -797,9 +797,9 @@ sh_remove_all_shadows_and_parents(struct domain *d, mfn_t gmfn)
+      * It means extra emulated writes and slows down removal of mappings. */
  }
  
--static int merge(unsigned long s, unsigned long e, void *data)
-+static int cf_check merge(unsigned long s, unsigned long e, void *data)
+-static void sh_unshadow_for_p2m_change(struct domain *d, unsigned long gfn,
+-                                       l1_pgentry_t old, l1_pgentry_t new,
+-                                       unsigned int level)
++static void cf_check sh_unshadow_for_p2m_change(
++    struct domain *d, unsigned long gfn, l1_pgentry_t old, l1_pgentry_t new,
++    unsigned int level)
  {
-     struct rangeset *r = data;
- 
-diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
-index 25bfbf3c47f7..62c83aaa6a73 100644
---- a/xen/common/spinlock.c
-+++ b/xen/common/spinlock.c
-@@ -375,7 +375,7 @@ static void spinlock_profile_iterate(lock_profile_subfunc *sub, void *par)
-     spin_unlock(&lock_profile_lock);
+     mfn_t omfn = l1e_get_mfn(old);
+     unsigned int oflags = l1e_get_flags(old);
+@@ -882,7 +882,7 @@ static void sh_unshadow_for_p2m_change(struct domain *d, unsigned long gfn,
  }
  
--static void spinlock_profile_print_elem(struct lock_profile *data,
-+static void cf_check spinlock_profile_print_elem(struct lock_profile *data,
-     int32_t type, int32_t idx, void *par)
+ #if (SHADOW_OPTIMIZATIONS & SHOPT_FAST_FAULT_PATH)
+-static void
++static void cf_check
+ sh_write_p2m_entry_post(struct p2m_domain *p2m, unsigned int oflags)
  {
-     struct spinlock *lock = data->lock;
-@@ -404,7 +404,7 @@ void cf_check spinlock_profile_printall(unsigned char key)
-     spinlock_profile_iterate(spinlock_profile_print_elem, NULL);
+     struct domain *d = p2m->domain;
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 7b8f4dd13b03..c1918e4e1f47 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -369,7 +369,7 @@ static void sh_audit_gw(struct vcpu *v, const walk_t *gw)
+ 
+ #if GUEST_PAGING_LEVELS == 2
+ /* From one page of a multi-page shadow, find the next one */
+-static inline mfn_t sh_next_page(mfn_t smfn)
++static inline mfn_t cf_check sh_next_page(mfn_t smfn)
+ {
+     struct page_info *pg = mfn_to_page(smfn), *next;
+     struct page_list_head h = PAGE_LIST_HEAD_INIT(h);
+@@ -399,8 +399,7 @@ guest_index(void *ptr)
+     return (u32)((unsigned long)ptr & ~PAGE_MASK) / sizeof(guest_l1e_t);
  }
  
--static void spinlock_profile_reset_elem(struct lock_profile *data,
-+static void cf_check spinlock_profile_reset_elem(struct lock_profile *data,
-     int32_t type, int32_t idx, void *par)
+-static u32
+-shadow_l1_index(mfn_t *smfn, u32 guest_index)
++static u32 cf_check shadow_l1_index(mfn_t *smfn, u32 guest_index)
  {
-     data->lock_cnt = 0;
-@@ -428,7 +428,7 @@ typedef struct {
-     int                      rc;
- } spinlock_profile_ucopy_t;
+ #if (GUEST_PAGING_LEVELS == 2)
+     ASSERT(mfn_to_page(*smfn)->u.sh.head);
+@@ -412,8 +411,7 @@ shadow_l1_index(mfn_t *smfn, u32 guest_index)
+ #endif
+ }
  
--static void spinlock_profile_ucopy_elem(struct lock_profile *data,
-+static void cf_check spinlock_profile_ucopy_elem(struct lock_profile *data,
-     int32_t type, int32_t idx, void *par)
+-static u32
+-shadow_l2_index(mfn_t *smfn, u32 guest_index)
++static u32 cf_check shadow_l2_index(mfn_t *smfn, u32 guest_index)
  {
-     spinlock_profile_ucopy_t *p = par;
-diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
-index 70ab3ba406ff..84cf52636bc4 100644
---- a/xen/common/vm_event.c
-+++ b/xen/common/vm_event.c
-@@ -523,21 +523,21 @@ int __vm_event_claim_slot(struct domain *d, struct vm_event_domain *ved,
+ #if (GUEST_PAGING_LEVELS == 2)
+     int i;
+@@ -432,14 +430,12 @@ shadow_l2_index(mfn_t *smfn, u32 guest_index)
  
- #ifdef CONFIG_MEM_PAGING
- /* Registered with Xen-bound event channel for incoming notifications. */
--static void mem_paging_notification(struct vcpu *v, unsigned int port)
-+static void cf_check mem_paging_notification(struct vcpu *v, unsigned int port)
+ #if GUEST_PAGING_LEVELS >= 4
+ 
+-static u32
+-shadow_l3_index(mfn_t *smfn, u32 guest_index)
++static u32 cf_check shadow_l3_index(mfn_t *smfn, u32 guest_index)
  {
-     vm_event_resume(v->domain, v->domain->vm_event_paging);
+     return guest_index;
+ }
+ 
+-static u32
+-shadow_l4_index(mfn_t *smfn, u32 guest_index)
++static u32 cf_check shadow_l4_index(mfn_t *smfn, u32 guest_index)
+ {
+     return guest_index;
+ }
+@@ -922,7 +918,7 @@ do {                                                                    \
+ /**************************************************************************/
+ /* Create a shadow of a given guest page.
+  */
+-static mfn_t
++static mfn_t cf_check
+ sh_make_shadow(struct vcpu *v, mfn_t gmfn, u32 shadow_type)
+ {
+     struct domain *d = v->domain;
+@@ -1457,7 +1453,8 @@ void sh_unhook_64b_mappings(struct domain *d, mfn_t sl4mfn, int user_only)
+  */
+ 
+ #if GUEST_PAGING_LEVELS >= 4
+-static int validate_gl4e(struct vcpu *v, void *new_ge, mfn_t sl4mfn, void *se)
++static int cf_check validate_gl4e(
++    struct vcpu *v, void *new_ge, mfn_t sl4mfn, void *se)
+ {
+     shadow_l4e_t new_sl4e;
+     guest_l4e_t new_gl4e = *(guest_l4e_t *)new_ge;
+@@ -1516,7 +1513,8 @@ static int validate_gl4e(struct vcpu *v, void *new_ge, mfn_t sl4mfn, void *se)
+ }
+ 
+ 
+-static int validate_gl3e(struct vcpu *v, void *new_ge, mfn_t sl3mfn, void *se)
++static int cf_check validate_gl3e(
++    struct vcpu *v, void *new_ge, mfn_t sl3mfn, void *se)
+ {
+     struct domain *d = v->domain;
+     shadow_l3e_t new_sl3e;
+@@ -1550,7 +1548,8 @@ static int validate_gl3e(struct vcpu *v, void *new_ge, mfn_t sl3mfn, void *se)
+ }
+ #endif // GUEST_PAGING_LEVELS >= 4
+ 
+-static int validate_gl2e(struct vcpu *v, void *new_ge, mfn_t sl2mfn, void *se)
++static int cf_check validate_gl2e(
++    struct vcpu *v, void *new_ge, mfn_t sl2mfn, void *se)
+ {
+     struct domain *d = v->domain;
+     shadow_l2e_t new_sl2e;
+@@ -1597,7 +1596,8 @@ static int validate_gl2e(struct vcpu *v, void *new_ge, mfn_t sl2mfn, void *se)
+     return result;
+ }
+ 
+-static int validate_gl1e(struct vcpu *v, void *new_ge, mfn_t sl1mfn, void *se)
++static int cf_check validate_gl1e(
++    struct vcpu *v, void *new_ge, mfn_t sl1mfn, void *se)
+ {
+     struct domain *d = v->domain;
+     shadow_l1e_t new_sl1e;
+@@ -2087,8 +2087,8 @@ static DEFINE_PER_CPU(int,trace_extra_emulation_count);
+ #endif
+ static DEFINE_PER_CPU(guest_pa_t,trace_emulate_write_val);
+ 
+-static void trace_emulate_write_val(const void *ptr, unsigned long vaddr,
+-                                    const void *src, unsigned int bytes)
++static void cf_check trace_emulate_write_val(
++    const void *ptr, unsigned long vaddr, const void *src, unsigned int bytes)
+ {
+ #if GUEST_PAGING_LEVELS == 3
+     if ( vaddr == this_cpu(trace_emulate_initial_va) )
+@@ -2142,9 +2142,8 @@ static inline void trace_shadow_emulate(guest_l1e_t gl1e, unsigned long va)
+  * shadow code (and the guest should retry) or 0 if it is not (and the
+  * fault should be handled elsewhere or passed to the guest). */
+ 
+-static int sh_page_fault(struct vcpu *v,
+-                          unsigned long va,
+-                          struct cpu_user_regs *regs)
++static int cf_check sh_page_fault(
++    struct vcpu *v, unsigned long va, struct cpu_user_regs *regs)
+ {
+     struct domain *d = v->domain;
+     walk_t gw;
+@@ -2896,7 +2895,7 @@ static int sh_page_fault(struct vcpu *v,
+  * instruction should be issued on the hardware, or false if it's safe not
+  * to do so.
+  */
+-static bool sh_invlpg(struct vcpu *v, unsigned long linear)
++static bool cf_check sh_invlpg(struct vcpu *v, unsigned long linear)
+ {
+     mfn_t sl1mfn;
+     shadow_l2e_t sl2e;
+@@ -3028,9 +3027,8 @@ static bool sh_invlpg(struct vcpu *v, unsigned long linear)
+ 
+ #ifdef CONFIG_HVM
+ 
+-static unsigned long
+-sh_gva_to_gfn(struct vcpu *v, struct p2m_domain *p2m,
+-    unsigned long va, uint32_t *pfec)
++static unsigned long cf_check sh_gva_to_gfn(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long va, uint32_t *pfec)
+ /* Called to translate a guest virtual address to what the *guest*
+  * pagetables would map it to. */
+ {
+@@ -3194,8 +3192,7 @@ sh_update_linear_entries(struct vcpu *v)
+  * Removes v->arch.paging.shadow.shadow_table[].
+  * Does all appropriate management/bookkeeping/refcounting/etc...
+  */
+-static void
+-sh_detach_old_tables(struct vcpu *v)
++static void cf_check sh_detach_old_tables(struct vcpu *v)
+ {
+     struct domain *d = v->domain;
+     mfn_t smfn;
+@@ -3214,8 +3211,7 @@ sh_detach_old_tables(struct vcpu *v)
+     }
+ }
+ 
+-static void
+-sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
++static void cf_check sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
+ /* Updates vcpu->arch.cr3 after the guest has changed CR3.
+  * Paravirtual guests should set v->arch.guest_table (and guest_table_user,
+  * if appropriate).
+@@ -3523,7 +3519,8 @@ int sh_rm_write_access_from_sl1p(struct domain *d, mfn_t gmfn,
+ #endif /* OOS */
+ 
+ #if defined(CONFIG_HVM) && (SHADOW_OPTIMIZATIONS & SHOPT_WRITABLE_HEURISTIC)
+-static int sh_guess_wrmap(struct vcpu *v, unsigned long vaddr, mfn_t gmfn)
++static int cf_check sh_guess_wrmap(
++    struct vcpu *v, unsigned long vaddr, mfn_t gmfn)
+ /* Look up this vaddr in the current shadow and see if it's a writeable
+  * mapping of this gmfn.  If so, remove it.  Returns 1 if it worked. */
+ {
+@@ -3587,8 +3584,8 @@ static int sh_guess_wrmap(struct vcpu *v, unsigned long vaddr, mfn_t gmfn)
  }
  #endif
  
- /* Registered with Xen-bound event channel for incoming notifications. */
--static void monitor_notification(struct vcpu *v, unsigned int port)
-+static void cf_check monitor_notification(struct vcpu *v, unsigned int port)
+-int sh_rm_write_access_from_l1(struct domain *d, mfn_t sl1mfn,
+-                               mfn_t readonly_mfn)
++int cf_check sh_rm_write_access_from_l1(
++    struct domain *d, mfn_t sl1mfn, mfn_t readonly_mfn)
+ /* Excises all writeable mappings to readonly_mfn from this l1 shadow table */
  {
-     vm_event_resume(v->domain, v->domain->vm_event_monitor);
+     shadow_l1e_t *sl1e;
+@@ -3624,7 +3621,8 @@ int sh_rm_write_access_from_l1(struct domain *d, mfn_t sl1mfn,
  }
  
- #ifdef CONFIG_MEM_SHARING
- /* Registered with Xen-bound event channel for incoming notifications. */
--static void mem_sharing_notification(struct vcpu *v, unsigned int port)
-+static void cf_check mem_sharing_notification(struct vcpu *v, unsigned int port)
- {
-     vm_event_resume(v->domain, v->domain->vm_event_share);
- }
-diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
-index e3f6886e6b62..d2ad909502d0 100644
---- a/xen/common/xmalloc_tlsf.c
-+++ b/xen/common/xmalloc_tlsf.c
-@@ -512,13 +512,13 @@ int xmem_pool_maxalloc(struct xmem_pool *pool)
  
- static struct xmem_pool *xenpool;
- 
--static void *xmalloc_pool_get(unsigned long size)
-+static void *cf_check xmalloc_pool_get(unsigned long size)
+-int sh_rm_mappings_from_l1(struct domain *d, mfn_t sl1mfn, mfn_t target_mfn)
++int cf_check sh_rm_mappings_from_l1(
++    struct domain *d, mfn_t sl1mfn, mfn_t target_mfn)
+ /* Excises all mappings to guest frame from this shadow l1 table */
  {
-     ASSERT(size == PAGE_SIZE);
-     return alloc_xenheap_page();
+     shadow_l1e_t *sl1e;
+@@ -3675,7 +3673,7 @@ void sh_clear_shadow_entry(struct domain *d, void *ep, mfn_t smfn)
+     }
  }
  
--static void xmalloc_pool_put(void *p)
-+static void cf_check xmalloc_pool_put(void *p)
+-int sh_remove_l1_shadow(struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn)
++int cf_check sh_remove_l1_shadow(struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn)
+ /* Remove all mappings of this l1 shadow from this l2 shadow */
  {
-     free_xenheap_page(p);
+     shadow_l2e_t *sl2e;
+@@ -3698,7 +3696,7 @@ int sh_remove_l1_shadow(struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn)
  }
-diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index 06b4d2b1fea0..cebcd68a6c04 100644
---- a/xen/drivers/passthrough/amd/iommu_init.c
-+++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -1073,7 +1073,7 @@ static void * __init allocate_ppr_log(struct amd_iommu *iommu)
- #define IVRS_MAPPINGS_DEVTAB(m) (m)[ivrs_bdf_entries].intremap_table
  
- /* Gets passed to radix_tree_destroy(), so its param needs to be void *. */
--static void __init free_ivrs_mapping_callback(void *ptr)
-+static void __init cf_check free_ivrs_mapping_callback(void *ptr)
+ #if GUEST_PAGING_LEVELS >= 4
+-int sh_remove_l2_shadow(struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn)
++int cf_check sh_remove_l2_shadow(struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn)
+ /* Remove all mappings of this l2 shadow from this l3 shadow */
  {
-     const struct ivrs_mappings *ivrs_mappings = ptr;
+     shadow_l3e_t *sl3e;
+@@ -3720,7 +3718,7 @@ int sh_remove_l2_shadow(struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn)
+     return done;
+ }
  
+-int sh_remove_l3_shadow(struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn)
++int cf_check sh_remove_l3_shadow(struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn)
+ /* Remove all mappings of this l3 shadow from this l4 shadow */
+ {
+     shadow_l4e_t *sl4e;
+@@ -3750,7 +3748,7 @@ int sh_remove_l3_shadow(struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn)
+  * and in the meantime we unhook its top-level user-mode entries. */
+ 
+ #if GUEST_PAGING_LEVELS == 3
+-static void sh_pagetable_dying(paddr_t gpa)
++static void cf_check sh_pagetable_dying(paddr_t gpa)
+ {
+     struct vcpu *v = current;
+     struct domain *d = v->domain;
+@@ -3831,7 +3829,7 @@ static void sh_pagetable_dying(paddr_t gpa)
+     put_gfn(d, l3gfn);
+ }
+ #else
+-static void sh_pagetable_dying(paddr_t gpa)
++static void cf_check sh_pagetable_dying(paddr_t gpa)
+ {
+     struct vcpu *v = current;
+     struct domain *d = v->domain;
+@@ -3930,7 +3928,7 @@ static const char *sh_audit_flags(struct vcpu *v, int level,
+     return NULL;
+ }
+ 
+-int sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
++int cf_check sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+ {
+     guest_l1e_t *gl1e, *gp;
+     shadow_l1e_t *sl1e;
+@@ -3998,7 +3996,7 @@ int sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+     return done;
+ }
+ 
+-int sh_audit_fl1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
++int cf_check sh_audit_fl1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+ {
+     guest_l1e_t *gl1e, e;
+     shadow_l1e_t *sl1e;
+@@ -4024,7 +4022,7 @@ int sh_audit_fl1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+     return 0;
+ }
+ 
+-int sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
++int cf_check sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
+ {
+     struct domain *d = v->domain;
+     guest_l2e_t *gl2e, *gp;
+@@ -4076,7 +4074,7 @@ int sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
+ }
+ 
+ #if GUEST_PAGING_LEVELS >= 4
+-int sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
++int cf_check sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
+ {
+     struct domain *d = v->domain;
+     guest_l3e_t *gl3e, *gp;
+@@ -4124,7 +4122,7 @@ int sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
+     return 0;
+ }
+ 
+-int sh_audit_l4_table(struct vcpu *v, mfn_t sl4mfn, mfn_t x)
++int cf_check sh_audit_l4_table(struct vcpu *v, mfn_t sl4mfn, mfn_t x)
+ {
+     struct domain *d = v->domain;
+     guest_l4e_t *gl4e, *gp;
+diff --git a/xen/arch/x86/mm/shadow/multi.h b/xen/arch/x86/mm/shadow/multi.h
+index 0bd6a2d5b787..5bcd6ae1a8da 100644
+--- a/xen/arch/x86/mm/shadow/multi.h
++++ b/xen/arch/x86/mm/shadow/multi.h
+@@ -59,10 +59,10 @@ extern void
+ SHADOW_INTERNAL_NAME(sh_unhook_64b_mappings, GUEST_LEVELS)
+     (struct domain *d, mfn_t sl4mfn, int user_only);
+ 
+-extern int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_rm_write_access_from_l1, GUEST_LEVELS)
+     (struct domain *d, mfn_t sl1mfn, mfn_t readonly_mfn);
+-extern int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_rm_mappings_from_l1, GUEST_LEVELS)
+     (struct domain *d, mfn_t sl1mfn, mfn_t target_mfn);
+ 
+@@ -70,30 +70,30 @@ extern void
+ SHADOW_INTERNAL_NAME(sh_clear_shadow_entry, GUEST_LEVELS)
+     (struct domain *d, void *ep, mfn_t smfn);
+ 
+-extern int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_remove_l1_shadow, GUEST_LEVELS)
+     (struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn);
+-extern int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_remove_l2_shadow, GUEST_LEVELS)
+     (struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn);
+-extern int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_remove_l3_shadow, GUEST_LEVELS)
+     (struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn);
+ 
+ #if SHADOW_AUDIT & SHADOW_AUDIT_ENTRIES
+-int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_audit_l1_table, GUEST_LEVELS)
+     (struct vcpu *v, mfn_t sl1mfn, mfn_t x);
+-int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_audit_fl1_table, GUEST_LEVELS)
+     (struct vcpu *v, mfn_t sl1mfn, mfn_t x);
+-int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_audit_l2_table, GUEST_LEVELS)
+     (struct vcpu *v, mfn_t sl2mfn, mfn_t x);
+-int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_audit_l3_table, GUEST_LEVELS)
+     (struct vcpu *v, mfn_t sl3mfn, mfn_t x);
+-int
++int cf_check
+ SHADOW_INTERNAL_NAME(sh_audit_l4_table, GUEST_LEVELS)
+     (struct vcpu *v, mfn_t sl4mfn, mfn_t x);
+ #endif
+diff --git a/xen/arch/x86/mm/shadow/private.h b/xen/arch/x86/mm/shadow/private.h
+index e4db8d32546a..3dc024e30f20 100644
+--- a/xen/arch/x86/mm/shadow/private.h
++++ b/xen/arch/x86/mm/shadow/private.h
+@@ -420,15 +420,15 @@ static inline int sh_remove_write_access(struct domain *d, mfn_t readonly_mfn,
+ #endif
+ 
+ /* Functions that atomically write PV guest PT entries */
+-void sh_write_guest_entry(struct vcpu *v, intpte_t *p, intpte_t new,
+-                          mfn_t gmfn);
+-intpte_t sh_cmpxchg_guest_entry(struct vcpu *v, intpte_t *p, intpte_t old,
+-                                intpte_t new, mfn_t gmfn);
++void cf_check sh_write_guest_entry(
++    struct vcpu *v, intpte_t *p, intpte_t new, mfn_t gmfn);
++intpte_t cf_check sh_cmpxchg_guest_entry(
++    struct vcpu *v, intpte_t *p, intpte_t old, intpte_t new, mfn_t gmfn);
+ 
+ /* Update all the things that are derived from the guest's CR0/CR3/CR4.
+  * Called to initialize paging structures if the paging mode
+  * has changed, and when bringing up a VCPU for the first time. */
+-void shadow_update_paging_modes(struct vcpu *v);
++void cf_check shadow_update_paging_modes(struct vcpu *v);
+ 
+ /* Unhook the non-Xen mappings in this top-level shadow mfn.
+  * With user_only == 1, unhooks only the user-mode mappings. */
+@@ -922,7 +922,7 @@ static inline int sh_check_page_has_no_refs(struct page_info *page)
+ }
+ 
+ /* Flush the TLB of the selected vCPUs. */
+-bool shadow_flush_tlb(const unsigned long *vcpu_bitmap);
++bool cf_check shadow_flush_tlb(const unsigned long *vcpu_bitmap);
+ 
+ #endif /* _XEN_SHADOW_PRIVATE_H */
+ 
+diff --git a/xen/arch/x86/mm/shadow/pv.c b/xen/arch/x86/mm/shadow/pv.c
+index f51f980f2694..ed10d5479c5e 100644
+--- a/xen/arch/x86/mm/shadow/pv.c
++++ b/xen/arch/x86/mm/shadow/pv.c
+@@ -28,7 +28,7 @@
+  * Write a new value into the guest pagetable, and update the shadows
+  * appropriately.
+  */
+-void
++void cf_check
+ sh_write_guest_entry(struct vcpu *v, intpte_t *p, intpte_t new, mfn_t gmfn)
+ {
+     paging_lock(v->domain);
+@@ -42,7 +42,7 @@ sh_write_guest_entry(struct vcpu *v, intpte_t *p, intpte_t new, mfn_t gmfn)
+  * appropriately.  Returns the previous entry found, which the caller is
+  * expected to check to see if the cmpxchg was successful.
+  */
+-intpte_t
++intpte_t cf_check
+ sh_cmpxchg_guest_entry(struct vcpu *v, intpte_t *p, intpte_t old,
+                        intpte_t new, mfn_t gmfn)
+ {
 -- 
 2.11.0
 
