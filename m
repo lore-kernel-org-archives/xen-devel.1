@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE47EC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 18:07:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233338.404872 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF515C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 18:07:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233333.404850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqfcr-0003eI-PU; Fri, 26 Nov 2021 18:07:09 +0000
+	id 1mqfco-00036E-4S; Fri, 26 Nov 2021 18:07:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233338.404872; Fri, 26 Nov 2021 18:07:09 +0000
+Received: by outflank-mailman (output) from mailman id 233333.404850; Fri, 26 Nov 2021 18:07:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqfcr-0003e9-LL; Fri, 26 Nov 2021 18:07:09 +0000
-Received: by outflank-mailman (input) for mailman id 233338;
- Fri, 26 Nov 2021 18:07:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqfco-000363-1N; Fri, 26 Nov 2021 18:07:06 +0000
+Received: by outflank-mailman (input) for mailman id 233333;
+ Fri, 26 Nov 2021 18:07:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=GGcH=QN=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mqfYW-0004Lf-2G
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 18:02:40 +0000
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [2a00:1450:4864:20::22f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0b342e7e-4ee3-11ec-9787-a32c541c8605;
- Fri, 26 Nov 2021 19:02:39 +0100 (CET)
-Received: by mail-lj1-x22f.google.com with SMTP id d11so20204490ljg.8
- for <xen-devel@lists.xenproject.org>; Fri, 26 Nov 2021 10:02:39 -0800 (PST)
+ id 1mqfYE-0004LT-Au
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 18:02:22 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 00995587-4ee3-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 19:02:21 +0100 (CET)
+Received: by mail-lj1-x22e.google.com with SMTP id v15so20357949ljc.0
+ for <xen-devel@lists.xenproject.org>; Fri, 26 Nov 2021 10:02:21 -0800 (PST)
 Received: from localhost.localdomain (94-29-48-99.dynamic.spd-mgts.ru.
  [94.29.48.99])
- by smtp.gmail.com with ESMTPSA id i32sm553831lfv.295.2021.11.26.10.02.35
+ by smtp.gmail.com with ESMTPSA id i32sm553831lfv.295.2021.11.26.10.02.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Nov 2021 10:02:37 -0800 (PST)
+ Fri, 26 Nov 2021 10:02:20 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b342e7e-4ee3-11ec-9787-a32c541c8605
+X-Inumbo-ID: 00995587-4ee3-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=4OWbCpLiTrW70NMTPpPUNVkhVF3RKPzG5GTofMVph+0=;
-        b=U69ILAbrhbxcINYnpRQtUq6JxYWnIXttphxdlME9mX9uCA1JhL5g9P+cnao4IWTUqr
-         9tPjsTZbw0wHPRnIaR2kuXc+6SuT1qdSxK1er9g80is33Nv4fNybvJeDFb+59wZ6/jA9
-         lKnEss0hQGNpzJDmSzIVrPcWrzOYo8XEDeBsPuLSgtY/cdbTAUaYPsMA9QVRSCsMpWjK
-         1CeUN4i4UFobttYFMLMl85bmb+/I+XpEOavkYcgGHHLEq9EDDoV4gjylJLb2WQn+vkHq
-         yNteEWHoeUyiUUjoXV7o0YPYgF/rr0dWmS9D0ywrrfynL0aziDEWAvzpSp7yO/ZE2I4q
-         +yjQ==
+        bh=gu1TeBm+2e/G5RkADOFU3cJrqp3hDioEihnrKvJEWzw=;
+        b=btNqE7qj3gxEiDVofvmyjyd5e7+E6dC5EvozkZ3YONorP6vNKMDK/arxDxAc+ltG7R
+         TI/OKrB+ElUSGJggS6fR+VvabEemoQpP54QSf8icDIcXqsN3cetkl+MJM3Uv83OU/ua5
+         YnrqP6SpxE3RilnmapTLWdFynEqGWoF9UKLd/DifHXHRRJENB4MJ8bZKGXsja5FQh/Ln
+         Gn1mmiKEwmPfkV+5o1Qx1UHHE5Ho0OF5Lv2UTxiT+KLX82V7SYEs1ZWnthM6isYJwRQ9
+         tdU5PDbvVk5b/rhIUQRngDxoQRVVJQlBNfOWOrEip1niZaJKsE7C6PZqI9A924a269T1
+         nFWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=4OWbCpLiTrW70NMTPpPUNVkhVF3RKPzG5GTofMVph+0=;
-        b=rPEWM/YjOCYaPf2O/o/pce+UtPuyf0tb5bUSIgy6KYPLk3BISQpBe3N9m3XX+nPCF/
-         1xz6r9X6GsoybKfAChZLrfRI+jeln0dpudrIbcZygCOr7uAgp1957WTPUvWeApttiBNc
-         gWr6NnMM4+LdxhYMPBOm8Cr+42FmhWjkKu6K4WMsLlbwo2Sqr4ZmyldqQr/pe0rIe/hW
-         g6RPK0LX32d9kxWjHtOtRSsuy5e7IwJ6Np8kgAduwrjnpTc6CZlIOZIcCJBiX1GMn9Pu
-         OT+MaZCe1UVmuPO79T5ro4D/uYKO9TPxmOMO55SXbYAlHv5IOkuSvlL54yyzDCfkyJ7p
-         L57w==
-X-Gm-Message-State: AOAM530JJ6ajFOMRFwMLEZmmmns31IzfNKciRfLAga2Z56U6NPwgLxby
-	6YBwlfczEAv/V+Uog9Dq98Y=
-X-Google-Smtp-Source: ABdhPJz1GbkyYg9nMRW5huA9uUFPfXiNfeSRqTr9xzo7mRAD3m0tvpkkS1ciqVKYkPFDmEUOR5tJqw==
-X-Received: by 2002:a2e:a58d:: with SMTP id m13mr33700861ljp.281.1637949757713;
-        Fri, 26 Nov 2021 10:02:37 -0800 (PST)
+        bh=gu1TeBm+2e/G5RkADOFU3cJrqp3hDioEihnrKvJEWzw=;
+        b=Vw9e1X/i81yW+o/jxH4EVYcDSzMOKzxHNwr2ktp6NKtIToW/YBVJG4LZrZNuGGn6b0
+         c/nYugxGHmUi4wKkAmgG5oEAcIhqxlDEBy7n3roVEzQq4Ec8nBv99DeZAz5GnClhIlHT
+         PMdQyP6KiAOsad6d8NcgcYf7AVoLotxhA3YRzG21rzz7RVE6C76dhnQrSUMDI5m12Q19
+         +MqUD6GIqsiSP6hpsr4ZUxD72cIuIq98oiC64r5MO0QndHi8/HcaH3hHvUr3k54MACEr
+         5ZvmG50UvJYw0QRuhljVYUKO+FdKrphHirrA1Ss9Ci3ybQJ0QReUXjAPONIWjjRKfflt
+         P6aw==
+X-Gm-Message-State: AOAM532bOR0SI2BVavWZ4MwsA9sGtNBK/sFx+ybpTpRozO805hH0y45C
+	FA4hgerQu1QoSJx/lDOAoVk=
+X-Google-Smtp-Source: ABdhPJyqXZVO64K86xv5JIX/t9zYDjx1u3F4bWT4GBdKatrIZNjie6T+K7n3Ac1v1Jvn5JGF+DNcxQ==
+X-Received: by 2002:a2e:7d0a:: with SMTP id y10mr33852017ljc.259.1637949741369;
+        Fri, 26 Nov 2021 10:02:21 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -138,36 +138,56 @@ Cc: linux-arm-kernel@lists.infradead.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v4 22/25] memory: emif: Use kernel_can_power_off()
-Date: Fri, 26 Nov 2021 21:00:58 +0300
-Message-Id: <20211126180101.27818-23-digetx@gmail.com>
+Subject: [PATCH v4 15/25] powerpc: Use do_kernel_power_off()
+Date: Fri, 26 Nov 2021 21:00:51 +0300
+Message-Id: <20211126180101.27818-16-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211126180101.27818-1-digetx@gmail.com>
 References: <20211126180101.27818-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Replace legacy pm_power_off with kernel_can_power_off() helper that
-is aware about chained power-off handlers.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
+Acked-by: Michael Ellerman <mpe@ellerman.id.au>
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- drivers/memory/emif.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/powerpc/kernel/setup-common.c | 4 +---
+ arch/powerpc/xmon/xmon.c           | 3 +--
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/memory/emif.c b/drivers/memory/emif.c
-index 762d0c0f0716..cab10d5274a0 100644
---- a/drivers/memory/emif.c
-+++ b/drivers/memory/emif.c
-@@ -630,7 +630,7 @@ static irqreturn_t emif_threaded_isr(int irq, void *dev_id)
- 		dev_emerg(emif->dev, "SDRAM temperature exceeds operating limit.. Needs shut down!!!\n");
+diff --git a/arch/powerpc/kernel/setup-common.c b/arch/powerpc/kernel/setup-common.c
+index 4f1322b65760..71c4ccd9bbb1 100644
+--- a/arch/powerpc/kernel/setup-common.c
++++ b/arch/powerpc/kernel/setup-common.c
+@@ -161,9 +161,7 @@ void machine_restart(char *cmd)
+ void machine_power_off(void)
+ {
+ 	machine_shutdown();
+-	if (pm_power_off)
+-		pm_power_off();
+-
++	do_kernel_power_off();
+ 	smp_send_stop();
+ 	machine_hang();
+ }
+diff --git a/arch/powerpc/xmon/xmon.c b/arch/powerpc/xmon/xmon.c
+index 83100c6524cc..759e167704e6 100644
+--- a/arch/powerpc/xmon/xmon.c
++++ b/arch/powerpc/xmon/xmon.c
+@@ -1243,8 +1243,7 @@ static void bootcmds(void)
+ 	} else if (cmd == 'h') {
+ 		ppc_md.halt();
+ 	} else if (cmd == 'p') {
+-		if (pm_power_off)
+-			pm_power_off();
++		do_kernel_power_off();
+ 	}
+ }
  
- 		/* If we have Power OFF ability, use it, else try restarting */
--		if (pm_power_off) {
-+		if (kernel_can_power_off()) {
- 			kernel_power_off();
- 		} else {
- 			WARN(1, "FIXME: NO pm_power_off!!! trying restart\n");
 -- 
 2.33.1
 
