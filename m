@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE45C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232779.403777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7871C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232780.403783 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawN-0003EY-D7; Fri, 26 Nov 2021 13:06:59 +0000
+	id 1mqawN-0003NQ-V8; Fri, 26 Nov 2021 13:06:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232779.403777; Fri, 26 Nov 2021 13:06:59 +0000
+Received: by outflank-mailman (output) from mailman id 232780.403783; Fri, 26 Nov 2021 13:06:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawN-0003Cx-0q; Fri, 26 Nov 2021 13:06:59 +0000
-Received: by outflank-mailman (input) for mailman id 232779;
+	id 1mqawN-0003KB-Ia; Fri, 26 Nov 2021 13:06:59 +0000
+Received: by outflank-mailman (input) for mailman id 232780;
  Fri, 26 Nov 2021 13:06:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqav2-0003W9-E9
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:36 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 888c72f9-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:31 +0100 (CET)
+ id 1mqavh-0003W9-L7
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:17 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a2b13141-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:06:16 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,437 +38,385 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 888c72f9-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: a2b13141-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931931;
+  d=citrix.com; s=securemail; t=1637931976;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=+Yj6D2+acshv1iSbGPrkSTGlvdblgzXw318p1/29CF0=;
-  b=Veah2gKcV38ttBvQmFkLzmkBozBXZCJYU/H9iybJ/WfzNZoPqyKRdRTI
-   gBind72QHZCDhPNAMoCYeJPNb5kI5RptqXOAqyK50A1DGkQVEkuKgBadj
-   v5ysAGPYgD31g2mS2ZRtnrZabVJNnbJJVfG3EKA94sPCkK0UlsZKmOXum
-   8=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: ql1grrFxBgNJMIlKfOMQmI/v0TsohdDfaRuX66TyObuz6R0ci13PVAUC+9/GI4Y7hmeLZxTsiH
- hTj/QXg4hMn7nu8wYpklLkVzarHZHX8BBu3WaLsfKfLOJR9ZlEPVvA0CSfENdztgbkmWN1otEt
- qwSHKyEfgjIxRyQQ/puLGqkia+MKeRL8IZXXbhrm0l9r9ueP5U5F4Ful4y8M7dof6hbex2aBLR
- wIqVDTLJBP9ZadpPIRpEySEoDNO46k8WCthDYTXn3VvZI2VIkLsd/9jk5WxWXJ1ni3PaqykWfj
- tBFJ/sZ6uV09QzcI4maishSf
+   references:mime-version:content-transfer-encoding;
+  bh=Or7hnmv/3zwwTutpx5mxBrC73JF1NuKmpQ2hWXjITFk=;
+  b=WwlgTmIrMqDklSCfrAWUAxuMIjgc1k2ylcDKe446b05ddgQah7HPmXAL
+   XfmZ3JHr5qrJ++z1esZlB62L7yQl8melDDoBea5+wEL+/5qlZzZQ2Le4E
+   lu37Eoe8FDoPDjqWr4iDuXlCsdLoUo/EUH2WGBn1+J27uWHQp5LTitfe1
+   o=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 23k4lIiUYExCJAh8+kPkeaWlutL67lof2RrJj6EJMlCPthy+uEZkRTCvzfGjFOts2a0Jtq182H
+ ViJiGHxlcUmW7kbznEed6LchSEEQzuidpW0TxAOtuvr1kvF3WEIO3OpEbhg/v+fEfpx17ksiXt
+ 9nDNx4wbAzpA7Z73uuV0BPWJhx0EG/U1M/8iKbalhNwhYznNCsz5YpLjSn+I9AZkMmwp2Gs2Jq
+ 7VPAbnW6EfbphkwmkSigxGpOaDZIPmRGwt1SNH/HwVezoeLefYCkRaTJqTrBZ57JPfGYVE9PjE
+ 36ExQSQp1Z1jwhC4gEzPrmXr
 X-SBRS: 5.1
-X-MesageID: 58676398
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 58635067
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:T9W9hKK0V8ul9+ZEFE+RCpIlxSXFcZb7ZxGr2PjKsXjdYENS0D1Rm
- GUcXWzTaP6JNjfxKIwlbYzno0wC6JDQx4M1SwdlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es5xbZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB3ZgvtY5
- vgSsaaaWFwlF/XhlOohbilxRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Gpg2J8QRqeOD
- yYfQShlUlPCckdUAA9JJp0wrN2lmynlcyIN/Tp5ooJoujOOnWSdyoPFPMLOf92WRe1chkuCu
- n/d5GP9Hw0bM9qEjzGC9xqEiuDDkCzhUaoOBba48bhsm1TVyWsNYDUGWF3+rfSnh0qWX9NEN
- 1dS6icotbI19kGgUp/6RRLQnZKflkdCAZwKSbR8sVzTjPqPi+qEOoQaZm5cQ/UImZAyfxY7j
- VOgx/7lCwBSgJTAHBpx6YyohT+1PCEUK0oLaikFURYJ7rHfnW0jsv7cZo09SfDo17UZDRm1m
- mnX93Zm293/mOZSj/3jlW0rlQ5AsXQgouQdwgzMFlyo4QpiDGJOT9z5sAOLhRqswWvwc7Vgg
- JTms5TBhAztJcvU/MBofAnrNOryjxpiGGeB6WOD57F7q1yQF4eLJOi8Gg1WKkZzKdojcjT0e
- kLVsg45zMYNZyT6M/IoMt7vV59CIU3c+TLNDau8gj1mOMUZSeN61Hs2OR74M57FzCDAbp3Ty
- b/EKJ3xXB72+IxszSasRvd17FPY7ntW+I8nfriil07P+ePHPBa9EO5ZWHPTPrFRxP7V+239r
- ocAX/ZmPj0CCYUSlAGMqtVNRb3LRFBmba3LRzt/KrTef1E4QT55UJc8A9oJIuRYokicrc+Ql
- lnVZ6OS4ACXaaTvJVrYZ3Z9RqnoWJoj/3s3MTZ1ZQSj2mQ5YJbp56AaLsNlcb4i/e1l7Ph1U
- /haJJnQXqUREmzKq2YHcJ3wjI1+bxD31wiACDWoPWokdJl6Sg2XptK9Jlnz9DMDBzacvNclp
- +HyzRvSRJcOHlwwDMvfZP+14Um2uHwRxLB7U0fSe4EBc0Tw6ol6bSf2i6Zvcc0LLBzCwBqc1
- hqXXkhE9bWc/ddt/YCQ166eroqvH+9vJWZgHjHWveSsKC3X3mu/2oscAuyGSi/QCTHv86K4a
- OQLk/ylaK8bnExHupZXGqpwyf5s/MPmorJXw1g2HHjPaFj3WLpsLmPfgJtKv6xJgLRYpRG3S
- gSE/dwDYeeFP8bsEVgwIgs5b7vciaFIy2eKtfllcl/n4CJX/aacVRQANhaBvyVRMb9pPd532
- uwmosMXt1SyhxdC3gxqVcyIG7Bg9kA9bpg=
-IronPort-HdrOrdr: A9a23:tQCXTKBlW822GqzlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
- xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 9dmsNFaeEYY2IUsS+D2njbL+od
+IronPort-Data: A9a23:olcMO6xfdXs1XaBCFe56t+fCwSrEfRIJ4+MujC+fZmUNrF6WrkUCy
+ TRKCmzQO/aOYTb2KYsibIuz/B9S65PVmIdrQVZsrSAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAuLeNYYH1500s6wrRn2tQAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt/Zol
+ ZZHp5e0cCA0HajtnfsFSTt+LRgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY25AQRquGO
+ ZVxhTxHaibvUxBSO3crBZtho8yMh13ETmRapwfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
+ krE4mD4DxcyJNGZjz2f/RqEnfTTlCn2XIYTEryQ9fNwhlCXgGsJB3U+RVa95PW0lEO6c9ZeM
+ FAPvDojq7Ao806mRcW7WAe3yFamlBMBX9tbE8Uh9RqAjKHT5m6k6nMsF2AbLoZ87YlvGGJsh
+ gThc87V6SJHlqTICniP/bOtii6RPAkQMncYRwk6dF5QizX8m70bghXKR9dlNae6iNzpBD39q
+ wy3QDgCa6Y71pBSifjilbzTq3f1/8WSEFZpjunCdjv9tlsRWWKzW2C/BbE3B95kJZ3RcFSOt
+ WNsdyO2vLFXVsHleMBgrYww8FCVCxStbGK0bb1HRcBJG9GRF5iLJts4DNZWfhoBDyr8UWW1C
+ HI/QCsIjHOpAFOkbLVsf6W6ANkwwK7rGLzND66PMYoQP8cgKFHbp0mCgHJ8OUi2yyDAdollZ
+ P+mnTuEVy5GWcyLMhLqLwvi7VPb7n9nnj6CLXwK5x+mzaCfdBaopUQtazOzghQCxPrc+m39q
+ o8HX+PTkkk3eLCuM0H/rN9IRXhXfCdTOHwDg5EOHgJ1ClE9Qz9J5j646e5JRrGJaIwJzLqVp
+ S/kBRcDoLc97FWeQTi3hrlYQOuHdf5CQbgTZkTA5H6khCouZ5iB9qAae8dldLUr7rU7n/V1U
+ +MEa4OLBfEWEmbL/DEUbJ/cqo1+dUv02VLSbnT9ODVvLYR9QwHp+8P/ele9/ic5ESfq59A1p
+ Ket112HTMNbFRhiFsvfdNmm00i14SoGgOt3UkaReotTdUzg/ZJEMSv0ivNrccgAJQ+anmmR1
+ hqMAAderu7I+tdn/N7MjKGCjoGoD+ohQRYKQziFte67bHCI8HCizIlMVPezUQrcDG6kqr+/Y
+ eh1zu3nNKFVllh9rIchQa1gyrgz5oWzquYCnBhkBnjCc3+iFqhkfiudxcBKu6BAmu1ZtA+xV
+ h7d89VWI+zUasbsEVpXLws5dOWTk/oTn2CKv/gyJUz74g5x/aaGDhoOb0Xd1nQFIesnKp4hz
+ McgpNUSul62hRcdO9qbijxZqjaXJXsaXqR77pwXDecHUObwJo2utXAENhLL3Q==
+IronPort-HdrOrdr: A9a23:3XVoCaBQSPyF5+flHemW55DYdb4zR+YMi2TC1yhKKCC9Ffbo7/
+ xG/c5rrCMc5wxhO03I9eruBEDEewK5yXcX2/h2AV7BZniFhILAFugLhuGOrwEIWReOkdK1vZ
+ 0QCJSWY+eRMbEVt6jHCXGDYrMd/OU=
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58676398"
+   d="scan'208";a="58635067"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Daniel De Graaf
-	<dgdegra@tycho.nsa.gov>, Daniel Smith <dpsmith@apertussolutions.com>
-Subject: [PATCH 14/65] xsm/flask:  Annotate fnptr targets in the security server
-Date: Fri, 26 Nov 2021 12:33:55 +0000
-Message-ID: <20211126123446.32324-15-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 21/65] xen/vpci: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:02 +0000
+Message-ID: <20211126123446.32324-22-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-CC: Daniel Smith <dpsmith@apertussolutions.com>
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Wei Liu <wl@xen.org>
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/xsm/flask/ss/avtab.c       |  4 ++--
- xen/xsm/flask/ss/conditional.c | 10 ++++----
- xen/xsm/flask/ss/conditional.h |  6 ++---
- xen/xsm/flask/ss/policydb.c    | 53 ++++++++++++++++++++++--------------------
- xen/xsm/flask/ss/services.c    |  6 ++---
- xen/xsm/flask/ss/symtab.c      |  5 ++--
- 6 files changed, 44 insertions(+), 40 deletions(-)
+ xen/drivers/vpci/header.c | 18 +++++++++---------
+ xen/drivers/vpci/msi.c    | 42 +++++++++++++++++++++---------------------
+ xen/drivers/vpci/msix.c   | 20 ++++++++++----------
+ xen/drivers/vpci/vpci.c   | 16 ++++++++--------
+ xen/include/xen/vpci.h    |  8 ++++----
+ 5 files changed, 52 insertions(+), 52 deletions(-)
 
-diff --git a/xen/xsm/flask/ss/avtab.c b/xen/xsm/flask/ss/avtab.c
-index bfc91c8b0c2c..55c2b4d8a46d 100644
---- a/xen/xsm/flask/ss/avtab.c
-+++ b/xen/xsm/flask/ss/avtab.c
-@@ -482,8 +482,8 @@ int avtab_read_item(struct avtab *a, void *fp, struct policydb *pol,
-     return insertf(a, &key, &datum, p);
- }
- 
--static int avtab_insertf(struct avtab *a, struct avtab_key *k,
--                                                struct avtab_datum *d, void *p)
-+static int cf_check avtab_insertf(
-+    struct avtab *a, struct avtab_key *k, struct avtab_datum *d, void *p)
- {
-     return avtab_insert(a, k, d);
- }
-diff --git a/xen/xsm/flask/ss/conditional.c b/xen/xsm/flask/ss/conditional.c
-index 3e58aea55147..b4b116666cf7 100644
---- a/xen/xsm/flask/ss/conditional.c
-+++ b/xen/xsm/flask/ss/conditional.c
-@@ -189,14 +189,14 @@ int cond_init_bool_indexes(struct policydb *p)
-     return 0;
- }
- 
--int cond_destroy_bool(void *key, void *datum, void *p)
-+int cf_check cond_destroy_bool(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-     return 0;
- }
- 
--int cond_index_bool(void *key, void *datum, void *datap)
-+int cf_check cond_index_bool(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct cond_bool_datum *booldatum;
-@@ -220,7 +220,7 @@ static int bool_isvalid(struct cond_bool_datum *b)
-     return 1;
- }
- 
--int cond_read_bool(struct policydb *p, struct hashtab *h, void *fp)
-+int cf_check cond_read_bool(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct cond_bool_datum *booldatum;
-@@ -268,8 +268,8 @@ struct cond_insertf_data
-     struct cond_av_list *tail;
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index 40ff79c33f8f..a1c928a0d26f 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -33,8 +33,8 @@ struct map_data {
+     bool map;
  };
  
--static int cond_insertf(struct avtab *a, struct avtab_key *k, 
--                                            struct avtab_datum *d, void *ptr)
-+static int cf_check cond_insertf(
-+    struct avtab *a, struct avtab_key *k, struct avtab_datum *d, void *ptr)
+-static int map_range(unsigned long s, unsigned long e, void *data,
+-                     unsigned long *c)
++static int cf_check map_range(
++    unsigned long s, unsigned long e, void *data, unsigned long *c)
  {
-     struct cond_insertf_data *data = ptr;
-     struct policydb *p = data->p;
-diff --git a/xen/xsm/flask/ss/conditional.h b/xen/xsm/flask/ss/conditional.h
-index 59ac6b4b57c1..500fe4305a03 100644
---- a/xen/xsm/flask/ss/conditional.h
-+++ b/xen/xsm/flask/ss/conditional.h
-@@ -63,11 +63,11 @@ int cond_policydb_init(struct policydb* p);
- void cond_policydb_destroy(struct policydb* p);
- 
- int cond_init_bool_indexes(struct policydb* p);
--int cond_destroy_bool(void *key, void *datum, void *p);
-+int cf_check cond_destroy_bool(void *key, void *datum, void *p);
- 
--int cond_index_bool(void *key, void *datum, void *datap);
-+int cf_check cond_index_bool(void *key, void *datum, void *datap);
- 
--int cond_read_bool(struct policydb *p, struct hashtab *h, void *fp);
-+int cf_check cond_read_bool(struct policydb *p, struct hashtab *h, void *fp);
- int cond_read_list(struct policydb *p, void *fp);
- 
- void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd);
-diff --git a/xen/xsm/flask/ss/policydb.c b/xen/xsm/flask/ss/policydb.c
-index 94261643532a..ff2103c63eab 100644
---- a/xen/xsm/flask/ss/policydb.c
-+++ b/xen/xsm/flask/ss/policydb.c
-@@ -257,12 +257,12 @@ static int policydb_init(struct policydb *p)
-  * of a class, role, or user are needed.
-  */
- 
--static int common_index(void *key, void *datum, void *datap)
-+static int cf_check common_index(void *key, void *datum, void *datap)
- {
+     const struct map_data *map = data;
+     int rc;
+@@ -332,8 +332,8 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
      return 0;
  }
  
--static int class_index(void *key, void *datum, void *datap)
-+static int cf_check class_index(void *key, void *datum, void *datap)
+-static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
+-                      uint32_t cmd, void *data)
++static void cf_check cmd_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t cmd, void *data)
  {
-     struct policydb *p;
-     struct class_datum *cladatum;
-@@ -276,7 +276,7 @@ static int class_index(void *key, void *datum, void *datap)
+     uint16_t current_cmd = pci_conf_read16(pdev->sbdf, reg);
+ 
+@@ -353,8 +353,8 @@ static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
+         pci_conf_write16(pdev->sbdf, reg, cmd);
+ }
+ 
+-static void bar_write(const struct pci_dev *pdev, unsigned int reg,
+-                      uint32_t val, void *data)
++static void cf_check bar_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_bar *bar = data;
+     bool hi = false;
+@@ -397,8 +397,8 @@ static void bar_write(const struct pci_dev *pdev, unsigned int reg,
+     pci_conf_write32(pdev->sbdf, reg, val);
+ }
+ 
+-static void rom_write(const struct pci_dev *pdev, unsigned int reg,
+-                      uint32_t val, void *data)
++static void cf_check rom_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_header *header = &pdev->vpci->header;
+     struct vpci_bar *rom = data;
+@@ -445,7 +445,7 @@ static void rom_write(const struct pci_dev *pdev, unsigned int reg,
+         rom->addr = val & PCI_ROM_ADDRESS_MASK;
+ }
+ 
+-static int init_bars(struct pci_dev *pdev)
++static int cf_check init_bars(struct pci_dev *pdev)
+ {
+     uint16_t cmd;
+     uint64_t addr, size;
+diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
+index 5757a7aed20f..8f2b59e61aa4 100644
+--- a/xen/drivers/vpci/msi.c
++++ b/xen/drivers/vpci/msi.c
+@@ -22,8 +22,8 @@
+ 
+ #include <asm/msi.h>
+ 
+-static uint32_t control_read(const struct pci_dev *pdev, unsigned int reg,
+-                             void *data)
++static uint32_t cf_check control_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
+ {
+     const struct vpci_msi *msi = data;
+ 
+@@ -34,8 +34,8 @@ static uint32_t control_read(const struct pci_dev *pdev, unsigned int reg,
+            (msi->address64 ? PCI_MSI_FLAGS_64BIT : 0);
+ }
+ 
+-static void control_write(const struct pci_dev *pdev, unsigned int reg,
+-                          uint32_t val, void *data)
++static void cf_check control_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_msi *msi = data;
+     unsigned int vectors = min_t(uint8_t,
+@@ -89,16 +89,16 @@ static void update_msi(const struct pci_dev *pdev, struct vpci_msi *msi)
+ }
+ 
+ /* Handlers for the address field (32bit or low part of a 64bit address). */
+-static uint32_t address_read(const struct pci_dev *pdev, unsigned int reg,
+-                             void *data)
++static uint32_t cf_check address_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
+ {
+     const struct vpci_msi *msi = data;
+ 
+     return msi->address;
+ }
+ 
+-static void address_write(const struct pci_dev *pdev, unsigned int reg,
+-                          uint32_t val, void *data)
++static void cf_check address_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_msi *msi = data;
+ 
+@@ -110,16 +110,16 @@ static void address_write(const struct pci_dev *pdev, unsigned int reg,
+ }
+ 
+ /* Handlers for the high part of a 64bit address field. */
+-static uint32_t address_hi_read(const struct pci_dev *pdev, unsigned int reg,
+-                                void *data)
++static uint32_t cf_check address_hi_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
+ {
+     const struct vpci_msi *msi = data;
+ 
+     return msi->address >> 32;
+ }
+ 
+-static void address_hi_write(const struct pci_dev *pdev, unsigned int reg,
+-                             uint32_t val, void *data)
++static void cf_check address_hi_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_msi *msi = data;
+ 
+@@ -131,16 +131,16 @@ static void address_hi_write(const struct pci_dev *pdev, unsigned int reg,
+ }
+ 
+ /* Handlers for the data field. */
+-static uint32_t data_read(const struct pci_dev *pdev, unsigned int reg,
+-                          void *data)
++static uint32_t cf_check data_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
+ {
+     const struct vpci_msi *msi = data;
+ 
+     return msi->data;
+ }
+ 
+-static void data_write(const struct pci_dev *pdev, unsigned int reg,
+-                       uint32_t val, void *data)
++static void cf_check data_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_msi *msi = data;
+ 
+@@ -150,16 +150,16 @@ static void data_write(const struct pci_dev *pdev, unsigned int reg,
+ }
+ 
+ /* Handlers for the MSI mask bits. */
+-static uint32_t mask_read(const struct pci_dev *pdev, unsigned int reg,
+-                          void *data)
++static uint32_t cf_check mask_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
+ {
+     const struct vpci_msi *msi = data;
+ 
+     return msi->mask;
+ }
+ 
+-static void mask_write(const struct pci_dev *pdev, unsigned int reg,
+-                       uint32_t val, void *data)
++static void cf_check mask_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_msi *msi = data;
+     uint32_t dmask = msi->mask ^ val;
+@@ -182,7 +182,7 @@ static void mask_write(const struct pci_dev *pdev, unsigned int reg,
+     msi->mask = val;
+ }
+ 
+-static int init_msi(struct pci_dev *pdev)
++static int cf_check init_msi(struct pci_dev *pdev)
+ {
+     uint8_t slot = PCI_SLOT(pdev->devfn), func = PCI_FUNC(pdev->devfn);
+     unsigned int pos = pci_find_cap_offset(pdev->seg, pdev->bus, slot, func,
+diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
+index 846f1b8d7038..2ab4079412f2 100644
+--- a/xen/drivers/vpci/msix.c
++++ b/xen/drivers/vpci/msix.c
+@@ -27,8 +27,8 @@
+     ((addr) >= vmsix_table_addr(vpci, nr) &&                              \
+      (addr) < vmsix_table_addr(vpci, nr) + vmsix_table_size(vpci, nr))
+ 
+-static uint32_t control_read(const struct pci_dev *pdev, unsigned int reg,
+-                             void *data)
++static uint32_t cf_check control_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
+ {
+     const struct vpci_msix *msix = data;
+ 
+@@ -65,8 +65,8 @@ static void update_entry(struct vpci_msix_entry *entry,
+     entry->updated = false;
+ }
+ 
+-static void control_write(const struct pci_dev *pdev, unsigned int reg,
+-                          uint32_t val, void *data)
++static void cf_check control_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
+ {
+     struct vpci_msix *msix = data;
+     bool new_masked = val & PCI_MSIX_FLAGS_MASKALL;
+@@ -156,7 +156,7 @@ static struct vpci_msix *msix_find(const struct domain *d, unsigned long addr)
+     return NULL;
+ }
+ 
+-static int msix_accept(struct vcpu *v, unsigned long addr)
++static int cf_check msix_accept(struct vcpu *v, unsigned long addr)
+ {
+     return !!msix_find(v->domain, addr);
+ }
+@@ -182,8 +182,8 @@ static struct vpci_msix_entry *get_entry(struct vpci_msix *msix,
+     return &msix->entries[(addr - start) / PCI_MSIX_ENTRY_SIZE];
+ }
+ 
+-static int msix_read(struct vcpu *v, unsigned long addr, unsigned int len,
+-                     unsigned long *data)
++static int cf_check msix_read(
++    struct vcpu *v, unsigned long addr, unsigned int len, unsigned long *data)
+ {
+     const struct domain *d = v->domain;
+     struct vpci_msix *msix = msix_find(d, addr);
+@@ -259,8 +259,8 @@ static int msix_read(struct vcpu *v, unsigned long addr, unsigned int len,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int msix_write(struct vcpu *v, unsigned long addr, unsigned int len,
+-                      unsigned long data)
++static int cf_check msix_write(
++    struct vcpu *v, unsigned long addr, unsigned int len, unsigned long data)
+ {
+     const struct domain *d = v->domain;
+     struct vpci_msix *msix = msix_find(d, addr);
+@@ -428,7 +428,7 @@ int vpci_make_msix_hole(const struct pci_dev *pdev)
      return 0;
  }
  
--static int role_index(void *key, void *datum, void *datap)
-+static int cf_check role_index(void *key, void *datum, void *datap)
+-static int init_msix(struct pci_dev *pdev)
++static int cf_check init_msix(struct pci_dev *pdev)
  {
-     struct policydb *p;
-     struct role_datum *role;
-@@ -292,7 +292,7 @@ static int role_index(void *key, void *datum, void *datap)
-     return 0;
+     struct domain *d = pdev->domain;
+     uint8_t slot = PCI_SLOT(pdev->devfn), func = PCI_FUNC(pdev->devfn);
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index 657697fe3406..d21264e34edc 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -106,25 +106,25 @@ static int vpci_register_cmp(const struct vpci_register *r1,
  }
  
--static int type_index(void *key, void *datum, void *datap)
-+static int cf_check type_index(void *key, void *datum, void *datap)
+ /* Dummy hooks, writes are ignored, reads return 1's */
+-static uint32_t vpci_ignored_read(const struct pci_dev *pdev, unsigned int reg,
+-                                  void *data)
++static uint32_t cf_check vpci_ignored_read(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
  {
-     struct policydb *p;
-     struct type_datum *typdatum;
-@@ -313,7 +313,7 @@ static int type_index(void *key, void *datum, void *datap)
-     return 0;
+     return ~(uint32_t)0;
  }
  
--static int user_index(void *key, void *datum, void *datap)
-+static int cf_check user_index(void *key, void *datum, void *datap)
+-static void vpci_ignored_write(const struct pci_dev *pdev, unsigned int reg,
+-                               uint32_t val, void *data)
++static void cf_check vpci_ignored_write(
++    const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
  {
-     struct policydb *p;
-     struct user_datum *usrdatum;
-@@ -329,7 +329,7 @@ static int user_index(void *key, void *datum, void *datap)
-     return 0;
  }
  
--static int sens_index(void *key, void *datum, void *datap)
-+static int cf_check sens_index(void *key, void *datum, void *datap)
+-uint32_t vpci_hw_read16(const struct pci_dev *pdev, unsigned int reg,
+-                        void *data)
++uint32_t cf_check vpci_hw_read16(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
  {
-     struct policydb *p;
-     struct level_datum *levdatum;
-@@ -348,7 +348,7 @@ static int sens_index(void *key, void *datum, void *datap)
-     return 0;
+     return pci_conf_read16(pdev->sbdf, reg);
  }
  
--static int cat_index(void *key, void *datum, void *datap)
-+static int cf_check cat_index(void *key, void *datum, void *datap)
+-uint32_t vpci_hw_read32(const struct pci_dev *pdev, unsigned int reg,
+-                        void *data)
++uint32_t cf_check vpci_hw_read32(
++    const struct pci_dev *pdev, unsigned int reg, void *data)
  {
-     struct policydb *p;
-     struct cat_datum *catdatum;
-@@ -506,14 +506,14 @@ static int policydb_index_others(struct policydb *p)
-  * symbol data in the policy database.
-  */
- 
--static int perm_destroy(void *key, void *datum, void *p)
-+static int cf_check perm_destroy(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-     return 0;
+     return pci_conf_read32(pdev->sbdf, reg);
  }
+diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
+index 9ea66e033f11..68ae06067031 100644
+--- a/xen/include/xen/vpci.h
++++ b/xen/include/xen/vpci.h
+@@ -46,10 +46,10 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+                 uint32_t data);
  
--static int common_destroy(void *key, void *datum, void *p)
-+static int cf_check common_destroy(void *key, void *datum, void *p)
- {
-     struct common_datum *comdatum;
+ /* Passthrough handlers. */
+-uint32_t vpci_hw_read16(const struct pci_dev *pdev, unsigned int reg,
+-                        void *data);
+-uint32_t vpci_hw_read32(const struct pci_dev *pdev, unsigned int reg,
+-                        void *data);
++uint32_t cf_check vpci_hw_read16(
++    const struct pci_dev *pdev, unsigned int reg, void *data);
++uint32_t cf_check vpci_hw_read32(
++    const struct pci_dev *pdev, unsigned int reg, void *data);
  
-@@ -525,7 +525,7 @@ static int common_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int class_destroy(void *key, void *datum, void *p)
-+static int cf_check class_destroy(void *key, void *datum, void *p)
- {
-     struct class_datum *cladatum;
-     struct constraint_node *constraint, *ctemp;
-@@ -572,7 +572,7 @@ static int class_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int role_destroy(void *key, void *datum, void *p)
-+static int cf_check role_destroy(void *key, void *datum, void *p)
- {
-     struct role_datum *role;
- 
-@@ -584,14 +584,14 @@ static int role_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int type_destroy(void *key, void *datum, void *p)
-+static int cf_check type_destroy(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-     return 0;
- }
- 
--static int user_destroy(void *key, void *datum, void *p)
-+static int cf_check user_destroy(void *key, void *datum, void *p)
- {
-     struct user_datum *usrdatum;
- 
-@@ -605,7 +605,7 @@ static int user_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int sens_destroy(void *key, void *datum, void *p)
-+static int cf_check sens_destroy(void *key, void *datum, void *p)
- {
-     struct level_datum *levdatum;
- 
-@@ -617,7 +617,7 @@ static int sens_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int cat_destroy(void *key, void *datum, void *p)
-+static int cf_check cat_destroy(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-@@ -989,7 +989,7 @@ static int perm_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int common_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check common_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct common_datum *comdatum;
-@@ -1151,7 +1151,7 @@ static int read_cons_helper(struct policydb *p, struct constraint_node **nodep,
-     return 0;
- }
- 
--static int class_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check class_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct class_datum *cladatum;
-@@ -1250,7 +1250,7 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int role_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check role_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct role_datum *role;
-@@ -1321,7 +1321,7 @@ static int role_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int type_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check type_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct type_datum *typdatum;
-@@ -1415,7 +1415,7 @@ static int mls_read_level(struct mls_level *lp, void *fp)
-     return -EINVAL;
- }
- 
--static int user_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check user_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct user_datum *usrdatum;
-@@ -1479,7 +1479,7 @@ static int user_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check sens_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct level_datum *levdatum;
-@@ -1534,7 +1534,7 @@ static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int cat_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check cat_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct cat_datum *catdatum;
-@@ -1591,7 +1591,8 @@ static int (*read_f[SYM_NUM]) (struct policydb *p, struct hashtab *h, void *fp)
-     cat_read,
- };
- 
--static int user_bounds_sanity_check(void *key, void *datum, void *datap)
-+static int cf_check user_bounds_sanity_check(
-+    void *key, void *datum, void *datap)
- {
-     struct user_datum *upper, *user;
-     struct policydb *p = datap;
-@@ -1631,7 +1632,8 @@ static int user_bounds_sanity_check(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int role_bounds_sanity_check(void *key, void *datum, void *datap)
-+static int cf_check role_bounds_sanity_check(
-+    void *key, void *datum, void *datap)
- {
-     struct role_datum *upper, *role;
-     struct policydb *p = datap;
-@@ -1671,7 +1673,8 @@ static int role_bounds_sanity_check(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int type_bounds_sanity_check(void *key, void *datum, void *datap)
-+static int cf_check type_bounds_sanity_check(
-+    void *key, void *datum, void *datap)
- {
-     struct type_datum *upper, *type;
-     struct policydb *p = datap;
-diff --git a/xen/xsm/flask/ss/services.c b/xen/xsm/flask/ss/services.c
-index 42686535f2c4..2f6d3d350d05 100644
---- a/xen/xsm/flask/ss/services.c
-+++ b/xen/xsm/flask/ss/services.c
-@@ -283,7 +283,7 @@ static int constraint_expr_eval(struct context *scontext,
-  * security_dump_masked_av - dumps masked permissions during
-  * security_compute_av due to RBAC, MLS/Constraint and Type bounds.
-  */
--static int dump_masked_av_helper(void *k, void *d, void *args)
-+static int cf_check dump_masked_av_helper(void *k, void *d, void *args)
- {
-     struct perm_datum *pdatum = d;
-     char **permission_names = args;
-@@ -1240,7 +1240,7 @@ static int validate_classes(struct policydb *p)
- }
- 
- /* Clone the SID into the new SID table. */
--static int clone_sid(u32 sid, struct context *context, void *arg)
-+static int cf_check clone_sid(u32 sid, struct context *context, void *arg)
- {
-     struct sidtab *s = arg;
- 
-@@ -1277,7 +1277,7 @@ struct convert_context_args {
-  * in the policy `p->newp'.  Verify that the
-  * context is valid under the new policy.
-  */
--static int convert_context(u32 key, struct context *c, void *p)
-+static int cf_check convert_context(u32 key, struct context *c, void *p)
- {
-     struct convert_context_args *args;
-     struct context oldc;
-diff --git a/xen/xsm/flask/ss/symtab.c b/xen/xsm/flask/ss/symtab.c
-index d98c116d5b97..0ce7e08c24ea 100644
---- a/xen/xsm/flask/ss/symtab.c
-+++ b/xen/xsm/flask/ss/symtab.c
-@@ -12,7 +12,7 @@
- #include <xen/errno.h>
- #include "symtab.h"
- 
--static unsigned int symhash(struct hashtab *h, const void *key)
-+static unsigned int cf_check symhash(struct hashtab *h, const void *key)
- {
-     const char *p, *keyp;
-     unsigned int size;
-@@ -26,7 +26,8 @@ static unsigned int symhash(struct hashtab *h, const void *key)
-     return val & (h->size - 1);
- }
- 
--static int symcmp(struct hashtab *h, const void *key1, const void *key2)
-+static int cf_check symcmp(
-+    struct hashtab *h, const void *key1, const void *key2)
- {
-     const char *keyp1, *keyp2;
- 
+ /*
+  * Check for pending vPCI operations on this vcpu. Returns true if the vcpu
 -- 
 2.11.0
 
