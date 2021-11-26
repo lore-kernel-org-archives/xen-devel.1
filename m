@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B797C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232875.404087 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C0FC433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.232877.404094 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxR-0001ca-9o; Fri, 26 Nov 2021 13:08:05 +0000
+	id 1mqaxS-0001qx-Hn; Fri, 26 Nov 2021 13:08:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232875.404087; Fri, 26 Nov 2021 13:08:05 +0000
+Received: by outflank-mailman (output) from mailman id 232877.404094; Fri, 26 Nov 2021 13:08:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxQ-0001XF-EP; Fri, 26 Nov 2021 13:08:04 +0000
-Received: by outflank-mailman (input) for mailman id 232875;
- Fri, 26 Nov 2021 13:08:01 +0000
+	id 1mqaxR-0001lo-Et; Fri, 26 Nov 2021 13:08:05 +0000
+Received: by outflank-mailman (input) for mailman id 232877;
+ Fri, 26 Nov 2021 13:08:02 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqaum-0003W9-BU
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:20 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 801a3d48-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:18 +0100 (CET)
+ id 1mqaup-0003W9-CM
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:23 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 80e7cff7-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:05:19 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 801a3d48-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 80e7cff7-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931918;
+  d=citrix.com; s=securemail; t=1637931919;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=xjn85GMBbIR9P9hSa/8Sl+mZVJ+id4k3kzCvHV3KSWQ=;
-  b=RzAu9bkg2cHhdT05XVLR8+obe2uz78zqqx5zt/JFaKxbwTwxfi9oJ05H
-   05Vlbil39d+aWIxGIF8cwV7h2BgIxcrljqB5afSnxXaXCmOl7knJrM0QO
-   9xAmTSHHe5zXmM0WG/N3s6iQJtcVuTY9LHwbpa4wWkqf73zx9qzcYVSsY
-   4=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QY8y04f07OZwnNF+0vjbYUv51UZ2G1BAr2Q4JGd//Xqzbjcz0R9cUFzGjXr19xkOFOe0ZyJAFg
- NH1qLab9PG00lcH1EVHQn6O36oALuGxAPp+kwIkOjOvgasew1y2/BPM7UhhnuOGn33W6FAbW0H
- LewJU/1p3Lxc6QF3AF2A4HEBwM/QLAQ1tpjReUWSW79TwKQlggZcoDQBzwAvczknPkffQ6eUVa
- toxGis/MNsKUpfz6TD9KWdhPIO+WviVBqfbDEndWFG7HW6J+hr7TztFN8OGxkEdtn8YUi4w0tM
- HWO+F+HwaU1s7XaqgqTjiX4P
+  bh=GwkeJYr8tdjhFymC30/jfquVKzBuwYOcbZ/CTHFhz7Q=;
+  b=hzvaSuq8yNpGpNvy+6BACf5Q2JNwFfyBSbbOlEb64z1a2jt6B3AfQe9N
+   H9ltfbgYAcu70gM+UK7/NCoAG/VE+jOgqd0K/THg6E7gH5jXS2d2iGqs/
+   38d1FXHF4LXqN9QXGQYBeoDLE1ddgOrXSCKj4bP+PLqXOuaX284eceKQQ
+   g=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: G73dUSdqFY5hj4RbPyMaRn5jPx9fz3c3PnXHH5bNm30qmm6XUogzgr6bBtdUxFA1bPowJc4/ak
+ HdXetXBDwH5EAocz1cEmgXKzU6Zv15beqzeoGZkV/7XYadKkr0dVvL4FAsytj9ythCv9SfRKr2
+ VP0aCC5OZlHYVdB1JQohBLObN/HXILliU/hufyIWsEHqlXA3FvLCuBrUzCdlH2U4CWk9MRkFPA
+ QoIDs7Oa2E++stT38C/UX8uBVBjfY+xftB59LY0vb9LvuJ9L9kgfBsLls46lsCVOfK2Lch9ArA
+ 5jfI/OOKk2kOdNV1HCtdTJ7t
 X-SBRS: 5.1
-X-MesageID: 59064000
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 58635005
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:fk4yu6/Va7Flx3bS9FLADrUDTXmTJUtcMsCJ2f8bNWPcYEJGY0x3y
- DQbDWGPOffcNmumc94nOtvi800FsZaBy9cxT1drqCo8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdj3NYy6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPh25
- IwS5Y3tFj4LAY3QkfUSDylGFz5HaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp0fRaiCP
- 5JBAdZpRArYWCVSIQoXMoAjlbj2oVzTQTx5sXvA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru3U70HxUbP9y30iee/zSngeqntTP2XsceGaO18tZugUaP3SoDBRsOT1y5rPKlzEmkVLpix
- 1c8o3R06/JorQryE4e7D0bQTGO4UgA0XPYJTL0rtV606JX0/w+ICTQ0UDpeUYlz3CMpfgAC2
- liMltLvIDVgtryJVH6QnoupQSOO1Ts9djFbO3JdJecRy5y6+dxo0EqTJjp2OPft1oWdJN3m/
- 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiGyNO9PABbvzt68owGOlor+p5
- yNsdy+2tr1mMH11vHbRKNjh5Znwjxp/DBXSgER0A74q/Cm39niocOh4uW8lexc3b5lVJWG1O
- yc/XD+9ArcIZxNGioctPuqM5zkCl/C8RbwJqNiIBjaxXnSBXFDep3w/DaJh92vsjFItgckC1
- WSzKq6R4YIhIf0/llKeHr5FuZdyn3xW7T6DFPjTkkX8uZLDNSH9dFvwGAbXBgzPxPjf+1u9H
- hc2H5bi9iizp8WiOHSKqtBKcghRRZX5bLivw/Fqmie4ClIOMAkc5zX5m9vNoqRpwPZYkPnm5
- Ha4VhMKwVbznySfew6LdmpiePXkWpMm9SA3OiklPFCJ3Xk/YNnwsPdDJsVvJbR3pvZ+yfNUT
- uUef5nSCPp4VTmaqS8WaoPwrdI+eU3z1x6OJSesfBM2Y4VkG17S4tbhcwa2rHsOAyO7uNEQu
- bql0g+HE5MPSx47VJTdae61zkP3tn8YwbogU0zNK9hVWUPt7Ik1dHCh0q5pe5kBcEyRyCGb2
- gCaBQYjidPM+4JlosPUga2krpuyF7csFERtAGSGv629MjPX/zT/zNYYAvqIZz3USEj95L6mO
- bdO1/j5PfAKwARKvo57H+o5xK4y/YKy9bpTzwAiF3TXdVW7TLhnJyDej8VIs6RMwJ5fuBe3B
- R3TqoULZ+3RNZO3CkMVKSokcv+HhKMdlTTl5PgoJFn3uX1s972dXEQOZxSBhUSx9leu3F/JF
- Qv5hPMr1g==
-IronPort-HdrOrdr: A9a23:y0Gu9a4VCkWPJCL01wPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-Data: A9a23:LRKa7q670gJK77AFL/h2dQxRtPXAchMFZxGqfqrLsTDasY5as4F+v
+ mEcWmjXOazbN2ShKtF1aoqwoBkA6JWGmtA2Twpq/nxnHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdg2NAw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zw
+ 9pErYSVFEQVLvPvps5DSD9IOBl1BPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gTTaiFO
+ pJBNFKDajz8fBhOOFQRJagagfXzll/AejhnhUma8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
+ G2u10bTDwweNdef4SGY6X/qjejK9QvrVYRXGLCm+/pChFyI2ndVGBAQTUG8o/Sylgi5Qd03F
+ qAP0nNw9+5orhXtF4SjGU3jyJKZgvICc9FfGvUizVzO9rqKwDizWHMiXhV5Y+Vz4afaWgcW/
+ lOOmtroAxlmv7uUVW+R+9+okN+iBcQGBTRcPHFZFGPp9/Gm+dhu1UyXEr6PBYbs1oWtcQwc1
+ Qxmu8TXa187qccQn5u28lnc695HjsiYF1Vljuk7s4/M0++YWGJHT9D3gbQ4xawZRGp8crVnl
+ CNf8yR5xLpTZaxhbATXHI0w8EiBvp5pygH0j191BIUG/D+w4XOldo04yGggfxg5bJtbKGO3P
+ BS7VeZtCHl7ZyDCgUhfOd/ZNijX5fK4SYSNug78MrKinaSdhCfYpXozNCZ8LkjmkVQ2kLFXB
+ HtoWZ3EMJruMow+lGDeb75EidcDn3lirUuOFcGT50n2itK2OS/KIYrpxXPTN4jVGovf+16Lm
+ zueXuPXoyhivBrWPnOKrNVNdA9SdhDWx/ne8qRqSwJKGSI+cElJNhMb6elJl1VNk/sHm+HW0
+ Gu6X0MEmlPziWeecVeBa2x5aaOpVpF69CppMSspNFeu+n4ifYfws/tPK8ppJeEqpL550Pp5b
+ /gZYMHcUP5BfSvKpmYGZp7noY08KBny3VCSPzCoaSQUdoJ7Q1Cb4cftewbirXFcDie+ucYkj
+ aen0wfXHcgKSwh4VZ6EY/Oz1VKh+3ManbsqDUfPJ9BSfmTq8ZRrdHOt3qNmfZlUJEyalDWA1
+ guQDRMJnsX3otc4oIvTmKSJj4a1CO8iTEBUKHbWsOStPi7A82v9nYIZCLSUfSrQXX/f8bm5Y
+ bkH1On1NfAKkQoYs4d4FLo3n6sy68G2+u1fxwVgWn7Kc06qGvVrJXzfhZtDsahEx7l4vwqqW
+ x3QpokGaOvRYM61QkQMIAcFb/iY0aBGkzbf2v05PUHm6XIl57GAS0hTY0GBhSE1wGGZ62/5L
+ TPNYPIr1jE=
+IronPort-HdrOrdr: A9a23:ZYdUMqFNKZSgoFG6pLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
+ mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YZT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="59064000"
+   d="scan'208";a="58635005"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 63/65] x86/setup: Rework MSR_S_CET handling for CET-IBT
-Date: Fri, 26 Nov 2021 12:34:44 +0000
-Message-ID: <20211126123446.32324-64-andrew.cooper3@citrix.com>
+Subject: [PATCH 40/65] x86/pmu: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:21 +0000
+Message-ID: <20211126123446.32324-41-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -102,228 +102,372 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-CET-SS and CET-IBT can be independently controlled, so the configuration of
-MSR_S_CET can't be constants any more.
-
-Introduce xen_msr_s_cet_value(), mostly because I don't fancy
-writing/maintaining that logic in assembly.  Use this in the 3 paths which
-alter MSR_S_CET when both features are potentially active.
-
-To active CET-IBT, we only need CR4.CET and MSR_S_CET.ENDBR_EN.  This is
-common with the CET-SS setup, so reorder the operations to set up CR4 and
-MSR_S_CET for any nonzero result from xen_msr_s_cet_value(), and set up
-MSR_PL0_SSP and SSP if SHSTK_EN was also set.
-
-Adjust the crash path to disable CET-IBT too.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-
-It is quite possible that the S3 path is dead code.  CET-IBT only exist on
-Intel systems from TigerLake onwards, and TGL kills S3 in favour of the newer
-S0ix power state.
-
-AMD Ryzen platforms (Zen3 onwards) support S3 and CET-SS, so partial testing
-will occur there.
 ---
- xen/arch/x86/acpi/wakeup_prot.S | 37 ++++++++++++++++++++++---------------
- xen/arch/x86/boot/x86_64.S      | 29 ++++++++++++++++++-----------
- xen/arch/x86/crash.c            |  4 ++--
- xen/arch/x86/setup.c            | 17 ++++++++++++++++-
- xen/include/asm-x86/msr-index.h |  1 +
- 5 files changed, 59 insertions(+), 29 deletions(-)
+ xen/arch/x86/cpu/vpmu_amd.c             | 16 ++++++++--------
+ xen/arch/x86/cpu/vpmu_intel.c           | 16 ++++++++--------
+ xen/arch/x86/oprofile/op_model_athlon.c | 16 ++++++++--------
+ xen/arch/x86/oprofile/op_model_p4.c     | 14 +++++++-------
+ xen/arch/x86/oprofile/op_model_ppro.c   | 26 ++++++++++++++------------
+ 5 files changed, 45 insertions(+), 43 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
-index 15052c300fa1..01eb26ed0769 100644
---- a/xen/arch/x86/acpi/wakeup_prot.S
-+++ b/xen/arch/x86/acpi/wakeup_prot.S
-@@ -63,7 +63,24 @@ ENTRY(s3_resume)
-         pushq   %rax
-         lretq
- 1:
--#ifdef CONFIG_XEN_SHSTK
-+#if defined(CONFIG_XEN_SHSTK) || defined(CONFIG_XEN_IBT)
-+        call    xen_msr_s_cet_value
-+        test    %eax, %eax
-+        je      .L_cet_done
-+
-+        /* Set up MSR_S_CET. */
-+        mov     $MSR_S_CET, %ecx
-+        xor     %edx, %edx
-+        wrmsr
-+
-+        /* Enable CR4.CET. */
-+        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ecx
-+        mov     %rcx, %cr4
-+
-+#if defined(CONFIG_XEN_SHSTK)
-+        test    $CET_SHSTK_EN, %eax
-+        je      .L_cet_done
-+
-         /*
-          * Restoring SSP is a little complicated, because we are intercepting
-          * an in-use shadow stack.  Write a temporary token under the stack,
-@@ -71,14 +88,6 @@ ENTRY(s3_resume)
-          * reset MSR_PL0_SSP to its usual value and pop the temporary token.
-          */
-         mov     saved_ssp(%rip), %rdi
--        cmpq    $1, %rdi
--        je      .L_shstk_done
--
--        /* Set up MSR_S_CET. */
--        mov     $MSR_S_CET, %ecx
--        xor     %edx, %edx
--        mov     $CET_SHSTK_EN | CET_WRSS_EN, %eax
--        wrmsr
- 
-         /* Construct the temporary supervisor token under SSP. */
-         sub     $8, %rdi
-@@ -90,12 +99,9 @@ ENTRY(s3_resume)
-         mov     %edi, %eax
-         wrmsr
- 
--        /* Enable CET.  MSR_INTERRUPT_SSP_TABLE is set up later in load_system_tables(). */
--        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ebx
--        mov     %rbx, %cr4
--
-         /* Write the temporary token onto the shadow stack, and activate it. */
-         wrssq   %rdi, (%rdi)
-+        /* MSR_INTERRUPT_SSP_TABLE is set up later in load_system_tables(). */
-         setssbsy
- 
-         /* Reset MSR_PL0_SSP back to its normal value. */
-@@ -106,8 +112,9 @@ ENTRY(s3_resume)
-         /* Pop the temporary token off the stack. */
-         mov     $2, %eax
-         incsspd %eax
--.L_shstk_done:
--#endif
-+#endif /* CONFIG_XEN_SHSTK */
-+.L_cet_done:
-+#endif /* CONFIG_XEN_SHSTK || CONFIG_XEN_IBT */
- 
-         call    load_system_tables
- 
-diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
-index d61048c583b3..c05c69f9fa59 100644
---- a/xen/arch/x86/boot/x86_64.S
-+++ b/xen/arch/x86/boot/x86_64.S
-@@ -30,18 +30,25 @@ ENTRY(__high_start)
-         test    %ebx,%ebx
-         jz      .L_bsp
- 
--        /* APs.  Set up shadow stacks before entering C. */
--#ifdef CONFIG_XEN_SHSTK
--        testl   $cpufeat_mask(X86_FEATURE_XEN_SHSTK), \
--                CPUINFO_FEATURE_OFFSET(X86_FEATURE_XEN_SHSTK) + boot_cpu_data(%rip)
--        je      .L_ap_shstk_done
-+        /* APs.  Set up CET before entering C properly. */
-+#if defined(CONFIG_XEN_SHSTK) || defined(CONFIG_XEN_IBT)
-+        call    xen_msr_s_cet_value
-+        test    %eax, %eax
-+        je      .L_ap_cet_done
- 
-         /* Set up MSR_S_CET. */
-         mov     $MSR_S_CET, %ecx
-         xor     %edx, %edx
--        mov     $CET_SHSTK_EN | CET_WRSS_EN, %eax
-         wrmsr
- 
-+        /* Enable CR4.CET. */
-+        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ecx
-+        mov     %rcx, %cr4
-+
-+#if defined(CONFIG_XEN_SHSTK)
-+        test    $CET_SHSTK_EN, %eax
-+        je      .L_ap_cet_done
-+
-         /* Derive MSR_PL0_SSP from %rsp (token written when stack is allocated). */
-         mov     $MSR_PL0_SSP, %ecx
-         mov     %rsp, %rdx
-@@ -51,13 +58,13 @@ ENTRY(__high_start)
-         or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %eax
-         wrmsr
- 
--        /* Enable CET.  MSR_INTERRUPT_SSP_TABLE is set up later in load_system_tables(). */
--        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ecx
--        mov     %rcx, %cr4
-+        /* MSR_INTERRUPT_SSP_TABLE is set up later in load_system_tables(). */
-         setssbsy
--#endif
- 
--.L_ap_shstk_done:
-+#endif /* CONFIG_XEN_SHSTK */
-+.L_ap_cet_done:
-+#endif /* CONFIG_XEN_SHSTK || CONFIG_XEN_IBT */
-+
-         call    start_secondary
-         BUG     /* start_secondary() shouldn't return. */
- 
-diff --git a/xen/arch/x86/crash.c b/xen/arch/x86/crash.c
-index c383f718f5bd..003222c0f1ac 100644
---- a/xen/arch/x86/crash.c
-+++ b/xen/arch/x86/crash.c
-@@ -190,8 +190,8 @@ void machine_crash_shutdown(void)
-     /* Reset CPUID masking and faulting to the host's default. */
-     ctxt_switch_levelling(NULL);
- 
--    /* Disable shadow stacks. */
--    if ( cpu_has_xen_shstk )
-+    /* Disable CET. */
-+    if ( cpu_has_xen_shstk || cpu_has_xen_ibt )
-     {
-         wrmsrl(MSR_S_CET, 0);
-         write_cr4(read_cr4() & ~X86_CR4_CET);
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 141957c9f6a5..daaba097d57f 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -661,6 +661,21 @@ static void noreturn init_done(void)
-     startup_cpu_idle_loop();
+diff --git a/xen/arch/x86/cpu/vpmu_amd.c b/xen/arch/x86/cpu/vpmu_amd.c
+index 38972089ab42..a5487143f77e 100644
+--- a/xen/arch/x86/cpu/vpmu_amd.c
++++ b/xen/arch/x86/cpu/vpmu_amd.c
+@@ -186,7 +186,7 @@ static void amd_vpmu_unset_msr_bitmap(struct vcpu *v)
+     msr_bitmap_off(vpmu);
  }
  
-+#if defined(CONFIG_XEN_SHSTK) || defined(CONFIG_XEN_IBT)
-+/*
-+ * Used by AP and S3 asm code to calcualte the appropriate MSR_S_CET setting.
-+ * Do not use on the BSP before reinit_bsp_stack(), or it may turn SHSTK on
-+ * too early.
-+ */
-+unsigned int xen_msr_s_cet_value(void)
-+{
-+    return ((cpu_has_xen_shstk ? CET_SHSTK_EN | CET_WRSS_EN : 0) |
-+            (cpu_has_xen_ibt   ? CET_ENDBR_EN : 0));
-+}
-+#else
-+unsigned int xen_msr_s_cet_value(void); /* To avoid ifdefary */
-+#endif
-+
- /* Reinitalise all state referring to the old virtual address of the stack. */
- static void __init noreturn reinit_bsp_stack(void)
+-static int amd_vpmu_do_interrupt(struct cpu_user_regs *regs)
++static int cf_check amd_vpmu_do_interrupt(struct cpu_user_regs *regs)
  {
-@@ -684,7 +699,7 @@ static void __init noreturn reinit_bsp_stack(void)
-     {
-         wrmsrl(MSR_PL0_SSP,
-                (unsigned long)stack + (PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8);
--        wrmsrl(MSR_S_CET, CET_SHSTK_EN | CET_WRSS_EN);
-+        wrmsrl(MSR_S_CET, xen_msr_s_cet_value());
-         asm volatile ("setssbsy" ::: "memory");
+     return 1;
+ }
+@@ -206,7 +206,7 @@ static inline void context_load(struct vcpu *v)
      }
+ }
  
-diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
-index ab68ef2681a9..627508233d19 100644
---- a/xen/include/asm-x86/msr-index.h
-+++ b/xen/include/asm-x86/msr-index.h
-@@ -115,6 +115,7 @@
- #define MSR_S_CET                           0x000006a2
- #define  CET_SHSTK_EN                       (_AC(1, ULL) <<  0)
- #define  CET_WRSS_EN                        (_AC(1, ULL) <<  1)
-+#define  CET_ENDBR_EN                       (_AC(1, ULL) <<  2)
+-static int amd_vpmu_load(struct vcpu *v, bool_t from_guest)
++static int cf_check amd_vpmu_load(struct vcpu *v, bool from_guest)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     struct xen_pmu_amd_ctxt *ctxt;
+@@ -280,7 +280,7 @@ static inline void context_save(struct vcpu *v)
+         rdmsrl(counters[i], counter_regs[i]);
+ }
  
- #define MSR_PL0_SSP                         0x000006a4
- #define MSR_PL1_SSP                         0x000006a5
+-static int amd_vpmu_save(struct vcpu *v,  bool_t to_guest)
++static int cf_check amd_vpmu_save(struct vcpu *v,  bool to_guest)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     unsigned int i;
+@@ -348,8 +348,8 @@ static void context_update(unsigned int msr, u64 msr_content)
+     }
+ }
+ 
+-static int amd_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content,
+-                             uint64_t supported)
++static int cf_check amd_vpmu_do_wrmsr(
++    unsigned int msr, uint64_t msr_content, uint64_t supported)
+ {
+     struct vcpu *v = current;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+@@ -407,7 +407,7 @@ static int amd_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content,
+     return 0;
+ }
+ 
+-static int amd_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
++static int cf_check amd_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+ {
+     struct vcpu *v = current;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+@@ -425,7 +425,7 @@ static int amd_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+     return 0;
+ }
+ 
+-static void amd_vpmu_destroy(struct vcpu *v)
++static void cf_check amd_vpmu_destroy(struct vcpu *v)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -443,7 +443,7 @@ static void amd_vpmu_destroy(struct vcpu *v)
+ }
+ 
+ /* VPMU part of the 'q' keyhandler */
+-static void amd_vpmu_dump(const struct vcpu *v)
++static void cf_check amd_vpmu_dump(const struct vcpu *v)
+ {
+     const struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     const struct xen_pmu_amd_ctxt *ctxt = vpmu->context;
+diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
+index f59cae543868..8b450ec8a8aa 100644
+--- a/xen/arch/x86/cpu/vpmu_intel.c
++++ b/xen/arch/x86/cpu/vpmu_intel.c
+@@ -288,7 +288,7 @@ static inline void __core2_vpmu_save(struct vcpu *v)
+         rdmsrl(MSR_CORE_PERF_GLOBAL_STATUS, core2_vpmu_cxt->global_status);
+ }
+ 
+-static int core2_vpmu_save(struct vcpu *v, bool_t to_guest)
++static int cf_check core2_vpmu_save(struct vcpu *v, bool to_guest)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -407,7 +407,7 @@ static int core2_vpmu_verify(struct vcpu *v)
+     return 0;
+ }
+ 
+-static int core2_vpmu_load(struct vcpu *v, bool_t from_guest)
++static int cf_check core2_vpmu_load(struct vcpu *v, bool from_guest)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -522,8 +522,8 @@ static int core2_vpmu_msr_common_check(u32 msr_index, int *type, int *index)
+     return 1;
+ }
+ 
+-static int core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content,
+-                               uint64_t supported)
++static int cf_check core2_vpmu_do_wrmsr(
++    unsigned int msr, uint64_t msr_content, uint64_t supported)
+ {
+     int i, tmp;
+     int type = -1, index = -1;
+@@ -693,7 +693,7 @@ static int core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content,
+     return 0;
+ }
+ 
+-static int core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
++static int cf_check core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+ {
+     int type = -1, index = -1;
+     struct vcpu *v = current;
+@@ -733,7 +733,7 @@ static int core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+ }
+ 
+ /* Dump vpmu info on console, called in the context of keyhandler 'q'. */
+-static void core2_vpmu_dump(const struct vcpu *v)
++static void cf_check core2_vpmu_dump(const struct vcpu *v)
+ {
+     const struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     unsigned int i;
+@@ -778,7 +778,7 @@ static void core2_vpmu_dump(const struct vcpu *v)
+     }
+ }
+ 
+-static int core2_vpmu_do_interrupt(struct cpu_user_regs *regs)
++static int cf_check core2_vpmu_do_interrupt(struct cpu_user_regs *regs)
+ {
+     struct vcpu *v = current;
+     u64 msr_content;
+@@ -805,7 +805,7 @@ static int core2_vpmu_do_interrupt(struct cpu_user_regs *regs)
+     return 1;
+ }
+ 
+-static void core2_vpmu_destroy(struct vcpu *v)
++static void cf_check core2_vpmu_destroy(struct vcpu *v)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+diff --git a/xen/arch/x86/oprofile/op_model_athlon.c b/xen/arch/x86/oprofile/op_model_athlon.c
+index 2177f02946e2..7bc5853a6c23 100644
+--- a/xen/arch/x86/oprofile/op_model_athlon.c
++++ b/xen/arch/x86/oprofile/op_model_athlon.c
+@@ -164,7 +164,7 @@ static inline u64 op_amd_randomize_ibs_op(u64 val)
+     return val;
+ }
+ 
+-static void athlon_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check athlon_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	msrs->counters[0].addr = MSR_K7_PERFCTR0;
+ 	msrs->counters[1].addr = MSR_K7_PERFCTR1;
+@@ -177,7 +177,7 @@ static void athlon_fill_in_addresses(struct op_msrs * const msrs)
+ 	msrs->controls[3].addr = MSR_K7_EVNTSEL3;
+ }
+ 
+-static void fam15h_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check fam15h_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	msrs->counters[0].addr = MSR_AMD_FAM15H_PERFCTR0;
+ 	msrs->counters[1].addr = MSR_AMD_FAM15H_PERFCTR1;
+@@ -194,7 +194,7 @@ static void fam15h_fill_in_addresses(struct op_msrs * const msrs)
+ 	msrs->controls[5].addr = MSR_AMD_FAM15H_EVNTSEL5;
+ }
+ 
+-static void athlon_setup_ctrs(struct op_msrs const * const msrs)
++static void cf_check athlon_setup_ctrs(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -308,9 +308,9 @@ static inline int handle_ibs(int mode, struct cpu_user_regs const * const regs)
+     return 1;
+ }
+ 
+-static int athlon_check_ctrs(unsigned int const cpu,
+-			     struct op_msrs const * const msrs,
+-			     struct cpu_user_regs const * const regs)
++static int cf_check athlon_check_ctrs(
++	unsigned int const cpu, struct op_msrs const * const msrs,
++	struct cpu_user_regs const * const regs)
+ 
+ {
+ 	uint64_t msr_content;
+@@ -386,7 +386,7 @@ static inline void start_ibs(void)
+ 	}
+ }
+  
+-static void athlon_start(struct op_msrs const * const msrs)
++static void cf_check athlon_start(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -415,7 +415,7 @@ static void stop_ibs(void)
+ 		wrmsrl(MSR_AMD64_IBSOPCTL, 0);
+ }
+ 
+-static void athlon_stop(struct op_msrs const * const msrs)
++static void cf_check athlon_stop(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+diff --git a/xen/arch/x86/oprofile/op_model_p4.c b/xen/arch/x86/oprofile/op_model_p4.c
+index b08ba53cbd39..d047258644db 100644
+--- a/xen/arch/x86/oprofile/op_model_p4.c
++++ b/xen/arch/x86/oprofile/op_model_p4.c
+@@ -390,7 +390,7 @@ static unsigned int get_stagger(void)
+ static unsigned long reset_value[NUM_COUNTERS_NON_HT];
+ 
+ 
+-static void p4_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check p4_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	unsigned int i;
+ 	unsigned int addr, stag;
+@@ -530,7 +530,7 @@ static void pmc_setup_one_p4_counter(unsigned int ctr)
+ }
+ 
+ 
+-static void p4_setup_ctrs(struct op_msrs const * const msrs)
++static void cf_check p4_setup_ctrs(struct op_msrs const * const msrs)
+ {
+ 	unsigned int i;
+ 	uint64_t msr_content;
+@@ -609,9 +609,9 @@ static void p4_setup_ctrs(struct op_msrs const * const msrs)
+ 	}
+ }
+ 
+-static int p4_check_ctrs(unsigned int const cpu,
+-                         struct op_msrs const * const msrs,
+-                         struct cpu_user_regs const * const regs)
++static int cf_check p4_check_ctrs(
++	unsigned int const cpu, struct op_msrs const * const msrs,
++	struct cpu_user_regs const * const regs)
+ {
+ 	unsigned long ctr, stag, real;
+ 	uint64_t msr_content;
+@@ -665,7 +665,7 @@ static int p4_check_ctrs(unsigned int const cpu,
+ }
+ 
+ 
+-static void p4_start(struct op_msrs const * const msrs)
++static void cf_check p4_start(struct op_msrs const * const msrs)
+ {
+ 	unsigned int stag;
+ 	uint64_t msr_content;
+@@ -683,7 +683,7 @@ static void p4_start(struct op_msrs const * const msrs)
+ }
+ 
+ 
+-static void p4_stop(struct op_msrs const * const msrs)
++static void cf_check p4_stop(struct op_msrs const * const msrs)
+ {
+ 	unsigned int stag;
+ 	uint64_t msr_content;
+diff --git a/xen/arch/x86/oprofile/op_model_ppro.c b/xen/arch/x86/oprofile/op_model_ppro.c
+index 72c504a10216..8d7e13ea8777 100644
+--- a/xen/arch/x86/oprofile/op_model_ppro.c
++++ b/xen/arch/x86/oprofile/op_model_ppro.c
+@@ -63,7 +63,7 @@ static int counter_width = 32;
+ static unsigned long reset_value[OP_MAX_COUNTER];
+ int ppro_has_global_ctrl = 0;
+ 
+-static void ppro_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check ppro_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	int i;
+ 
+@@ -74,7 +74,7 @@ static void ppro_fill_in_addresses(struct op_msrs * const msrs)
+ }
+ 
+ 
+-static void ppro_setup_ctrs(struct op_msrs const * const msrs)
++static void cf_check ppro_setup_ctrs(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -128,9 +128,9 @@ static void ppro_setup_ctrs(struct op_msrs const * const msrs)
+ 	}
+ }
+ 
+-static int ppro_check_ctrs(unsigned int const cpu,
+-                           struct op_msrs const * const msrs,
+-                           struct cpu_user_regs const * const regs)
++static int cf_check ppro_check_ctrs(
++	unsigned int const cpu, struct op_msrs const * const msrs,
++	struct cpu_user_regs const * const regs)
+ {
+ 	u64 val;
+ 	int i;
+@@ -170,7 +170,7 @@ static int ppro_check_ctrs(unsigned int const cpu,
+ }
+ 
+ 
+-static void ppro_start(struct op_msrs const * const msrs)
++static void cf_check ppro_start(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -190,7 +190,7 @@ static void ppro_start(struct op_msrs const * const msrs)
+ }
+ 
+ 
+-static void ppro_stop(struct op_msrs const * const msrs)
++static void cf_check ppro_stop(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -206,7 +206,7 @@ static void ppro_stop(struct op_msrs const * const msrs)
+         wrmsrl(MSR_CORE_PERF_GLOBAL_CTRL, 0x0ULL);
+ }
+ 
+-static int ppro_is_arch_pmu_msr(u64 msr_index, int *type, int *index)
++static int cf_check ppro_is_arch_pmu_msr(u64 msr_index, int *type, int *index)
+ {
+ 	if ( (msr_index >= MSR_IA32_PERFCTR0) &&
+             (msr_index < (MSR_IA32_PERFCTR0 + num_counters)) )
+@@ -226,7 +226,7 @@ static int ppro_is_arch_pmu_msr(u64 msr_index, int *type, int *index)
+         return 0;
+ }
+ 
+-static int ppro_allocate_msr(struct vcpu *v)
++static int cf_check ppro_allocate_msr(struct vcpu *v)
+ {
+ 	struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 	struct arch_msr_pair *msr_content;
+@@ -245,7 +245,7 @@ static int ppro_allocate_msr(struct vcpu *v)
+ 	return 0;
+ }
+ 
+-static void ppro_free_msr(struct vcpu *v)
++static void cf_check ppro_free_msr(struct vcpu *v)
+ {
+ 	struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -255,7 +255,8 @@ static void ppro_free_msr(struct vcpu *v)
+ 	vpmu_reset(vpmu, VPMU_PASSIVE_DOMAIN_ALLOCATED);
+ }
+ 
+-static void ppro_load_msr(struct vcpu *v, int type, int index, u64 *msr_content)
++static void cf_check ppro_load_msr(
++	struct vcpu *v, int type, int index, u64 *msr_content)
+ {
+ 	struct arch_msr_pair *msrs = vcpu_vpmu(v)->context;
+ 	switch ( type )
+@@ -269,7 +270,8 @@ static void ppro_load_msr(struct vcpu *v, int type, int index, u64 *msr_content)
+ 	}
+ }
+ 
+-static void ppro_save_msr(struct vcpu *v, int type, int index, u64 msr_content)
++static void cf_check ppro_save_msr(
++	struct vcpu *v, int type, int index, u64 msr_content)
+ {
+ 	struct arch_msr_pair *msrs = vcpu_vpmu(v)->context;
+ 
 -- 
 2.11.0
 
