@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89617C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42F3C433FE
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:08:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232861.404041 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.232860.404038 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxG-0007cl-Jw; Fri, 26 Nov 2021 13:07:54 +0000
+	id 1mqaxF-0007QY-V0; Fri, 26 Nov 2021 13:07:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232861.404041; Fri, 26 Nov 2021 13:07:54 +0000
+Received: by outflank-mailman (output) from mailman id 232860.404038; Fri, 26 Nov 2021 13:07:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqaxG-0007Yf-4b; Fri, 26 Nov 2021 13:07:54 +0000
-Received: by outflank-mailman (input) for mailman id 232861;
- Fri, 26 Nov 2021 13:07:52 +0000
+	id 1mqaxF-0007Mz-5K; Fri, 26 Nov 2021 13:07:53 +0000
+Received: by outflank-mailman (input) for mailman id 232860;
+ Fri, 26 Nov 2021 13:07:51 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqaui-0003W9-Jl
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:16 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7efb2e6d-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:05:15 +0100 (CET)
+ id 1mqavZ-0003W9-5Y
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:09 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9e6fb575-4eb9-11ec-a9d2-d9f7a1cc8784;
+ Fri, 26 Nov 2021 14:06:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7efb2e6d-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 9e6fb575-4eb9-11ec-a9d2-d9f7a1cc8784
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931914;
+  d=citrix.com; s=securemail; t=1637931967;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=AtKkHK4Fn9Tibx+JcfjODOJaD4dj5WX9w5aEerifsuI=;
-  b=Bqi5CYy77kAnfoq3UW9ww0q/T7daq4cURakCvLeNH9pHNPMGT3RtyF2C
-   4GWfCu2VVGNzGNF5vIkc1PMsg0FCgW4mi0eGvXu+OT49P4jmypZO3RIb4
-   1MAW+MIhiiP0WLXjE7nlfj9AlaBYEzD8+IUvNaaOIFCRI0Pce85VdzxAE
-   E=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: pIQJ7FhTgUrM8YBosF6BU8m+O0b8OBTcvCK/9DljwUQNqpG9tdw/V9MsO6XszAgnd+tkHMgnfy
- 0jn94jvzFviXY1z7iokKWf5XE/pH0ymMXgr8uTyMaPembhSTMTGJTjI6B6A62fUHNy/ELn+nNC
- HLXtwRtZDQQgRI8mU+U17PdLTkm3m5gkNFgl9uJZ7ZuTqrjLAX4rNaHLcJuvrA/AdQkddp4RPy
- DkdkW9pI3lFuCETeK9GDdbtD11Lz63U/icDd5RHJiD2QSq00cOfT5ez9f8mme3t61w0uvJZNKo
- DQUqXwa/m4voj81LharwsjP2
+  bh=jYHmGb285zp19wAOZwPVRqBng1R2DTOnh2y5+lEruAo=;
+  b=eFWIdKg08En0EXpWFrQKbybFrQHq1XyI131FyMmdtcK5G4gmQn2ciBDO
+   q5zDZMmAGmIOCH6EBBweOYkDEyLll1GcA2sZE3UqFqfiGncngewmEGbzv
+   ZqXPv5E/zwxyPU/QtsCdmOyl9DXE1k+SdjtFjRgm0lWC+rETSNZe1IIUd
+   s=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: U4Ug72oaXHFOpynjTFMgYcJ7VtoRUHaNSFIGy/weFoqd02iDgsJNloaZRxwiZT3fqp2M6dOr4a
+ TpiitZgWTnpNPbjc4e7TtV6fyHaEKY1DydubLT+R/TtETX6sXZP+LcoF2iy3pN/WKEY3zJHVTr
+ p+q0YhRUiQMn6rlg4sFu8+OUEYdZYwX8RImJ83Pzr96RMSa19s0P9081yE4KsrIgV64e2W2gL1
+ bW8v+nCjyGsOaXYJugzxS8hYlmzowQJCsL5ao7hh0zPRqYHuuM02yRQBu484Ax3meL42UjD1W6
+ BbK2pOEndhtqpG1TLdWq0tnC
 X-SBRS: 5.1
-X-MesageID: 58193791
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 58696039
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:0JNBl6tYFeKRys/g1YzV9i5MaufnVJtZMUV32f8akzHdYApBsoF/q
- tZmKWvXOf+DNmb1eYp3aIS080tV7ZKEmN5nGQs+pCs3RHsT+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cx24bhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NpllLi9UwwXEvD1nssTUkljLyBvJolFweqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6DN
- 5NIMmU+NXwsZTVsZWZLCpwQx965g0DDKiZkil+H9fEotj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
- UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO8we5RuG9IaJ2gC2CGlUdQJAeccCt/ZjEFTGy
- WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WsQWmoq
- w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSEhRqjBNzAJrVkg
- JTis5PFhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43aZlUJ2K2M
- RON5Vg5CHpv0J2CNvQfj2WZUZlC8EQdPY69CqC8giRmPvCdizNrDAkxPBXNjggBYWAnkL0lO
- IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
- I0BXyZLoj0CONDDjt7/rdROcAtUdCdjXvgbaaV/L4a+H+avI0l5Y9e5/F/rU9YNc319mria8
- 3ejdFVfzVaj13TLJR/TMiJoaa/1XIY5pnU+ZHR+MVGt0nklQICu8KZAKMdnIeh5rLRunaxuU
- v0IW8ScGfATGD7JzCsQMMvmp4t4eRX12Q/XZ3i5YCIydoJLThDS/oO2ZRPm8SQDV3LltcY3r
- 7C6+BncRJ4PG1ZrAMrMMar9xFKtp3kN3ul1WhKQcNVUfUzt9qlsKjDw0aBrc51dd02by2LDh
- QiMABoeqe3cmKMP8YHE1fKesoOkM+piBU4GTWPV2qm7aHvB9W25zI4eDOvRJWLBVHn58bmJb
- PlOy62uK+UOmVtHvtYuE7tvyq5itdLjq6UDk1ZhFXTPKV+qFqlhMj+N2swW7v9BwbpQuA2XX
- EOT+4YFZeXVaZ29SFNBdhA4aumj1O0PnmiA5Ps4F0z2+Str8efVSk5VJRSN1HRQIbYd3FnJG
- gv9VBr6MzCCtyc=
-IronPort-HdrOrdr: A9a23:5Bs6uKCqFNqtR3blHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
+IronPort-Data: A9a23:10XO0K1deY95f0Kp7PbD5Vd2kn2cJEfYwER7XKvMYLTBsI5bpzQOn
+ GdOWTqEbvjZajajetEiao2y9xgEvJHVyt83TQU9pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es6wbBh2OaEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhltBMl
+ vNAn5KLbkQAE47BgLkbfylUOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9t1p4fQ66FN
+ qL1bxJAZwrGPwB2a20VEbQngeKspiTfYhFH/Qf9Sa0fvDGIkV0ZPKLWGNjIft2HQ+1Fk0Deo
+ XjJl0zbKBwHMN2UyRKe72mhwOTImEvTWo0IE6aj3uV3m1DVzWsWYDUGWF3+rfSnh0qWX9NEN
+ 1dS6icotbI19kGgUp/6RRLQiGWfohcWVt5UEus7wAKA0KzZ50CeHGdsZiFFQMwrsokxXzNC6
+ 7OSt4q3X3o16uTTEC/DsOfPxd+vBcQLBWYCWHEiQCEL2P6giawQgwqSSPpTHIfg27UZBgrM6
+ zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4ZdN7BJmRtq
+ kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JBVdwPiN2dDB0wWirhRdMPS
+ BSI0e+2zMUOVEZGlYctP+qM5z0ClMAM7+jNWPHOdcZpaZNsbgKB9ywGTRfOhD+9zhVzwP1hZ
+ czznSOQ4ZAyUv8PIN2eHbp17FPW7npmmTO7qW7Tk3xLLoZylFbKEOxYYTNin8gy7b+eoRW9z
+ jqsH5Di9vmra8WnOnO/2ddKdTgidCFnbbir+50/XrPSeWJORTB+Y8I9NJt8IuSJaYwOzbyWl
+ px8M2cFoGfCaYrvdV/XNys9Mey3Bv6SbxsTZEQRALph4FB7Ca7H0UvVX8JfkWAP+LMxwPhqY
+ eMCfsncUP1DRi6eo2YWbIXnrZwkfxOu3FrcMy2gaTk5XphhWw2WpYO0IlqxrHEDXnitqM8zg
+ 7y8zQeHE5ANcBtvUZTNY/W1wlLv4XVEwLBuX1HFK8V4cVn39NQ4MDT4i/I6epleKRjKyjaA+
+ RyRBBMU+bvEr4MvqYGbjqGYtYa5VeB5GxMCTWXc6L+3Mwjc/3aintAcALrZI2iFWTqtqqu4Z
+ OhTw/XtC9E9nQ5H49hmDrJm7aMi/N+z9bVU+RtpQSfQZFOxB7I+fnTfhZtTtrdAz6NysBetX
+ h7d4cFTPLiENZ+3EFMVIwZ5PO2P2etNx2vX5PUxZk77+DV27PyMVkALZ0uAjylULb1UNoI5w
+ Lh+5J5KulLn0hd6YMybii109niXKi1SWqoqgZgWHYv3h1d50VpFe5HdVnf77Zznhw+g6aX2z
+ ut4XJb/uok=
+IronPort-HdrOrdr: A9a23:edKFH6BSnCfsZlPlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
  xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
  9dmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58193791"
+   d="scan'208";a="58696039"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 48/65] x86/aepi: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:29 +0000
-Message-ID: <20211126123446.32324-49-andrew.cooper3@citrix.com>
+	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
+	<wl@xen.org>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
+	<jgross@suse.com>
+Subject: [PATCH 18/65] xen/hypfs: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:33:59 +0000
+Message-ID: <20211126123446.32324-19-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
@@ -105,269 +108,314 @@ Content-Transfer-Encoding: 8bit
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
 CC: Wei Liu <wl@xen.org>
-
-I was very surprised when encountering this...  AML and EFI are bad enough,
-but why on earth do we need yet another firmware provided arbitrary turning
-machine to be executing in Xen's context.
+CC: Julien Grall <julien@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Juergen Gross <jgross@suse.com>
 ---
- xen/drivers/acpi/apei/apei-base.c     | 32 ++++++++++----------
- xen/drivers/acpi/apei/apei-internal.h | 20 ++++++------
- xen/drivers/acpi/apei/erst.c          | 57 +++++++++++++++++------------------
- 3 files changed, 54 insertions(+), 55 deletions(-)
+ xen/common/hypfs.c         | 57 +++++++++++++++++++++++-----------------------
+ xen/common/sched/cpupool.c | 25 ++++++++++----------
+ xen/include/xen/hypfs.h    | 49 +++++++++++++++++++--------------------
+ 3 files changed, 65 insertions(+), 66 deletions(-)
 
-diff --git a/xen/drivers/acpi/apei/apei-base.c b/xen/drivers/acpi/apei/apei-base.c
-index 6f81e7fa366a..de75c1cef992 100644
---- a/xen/drivers/acpi/apei/apei-base.c
-+++ b/xen/drivers/acpi/apei/apei-base.c
-@@ -80,8 +80,8 @@ int __apei_exec_read_register(struct acpi_whea_header *entry, u64 *val)
- 	return 0;
+diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
+index 1526bcc52810..0d22396f5dd7 100644
+--- a/xen/common/hypfs.c
++++ b/xen/common/hypfs.c
+@@ -113,12 +113,13 @@ static void hypfs_unlock(void)
+     }
  }
  
--int apei_exec_read_register(struct apei_exec_context *ctx,
--			    struct acpi_whea_header *entry)
-+int cf_check apei_exec_read_register(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry)
++const struct hypfs_entry *cf_check hypfs_node_enter(
++    const struct hypfs_entry *entry)
  {
- 	int rc;
- 	u64 val = 0;
-@@ -94,8 +94,8 @@ int apei_exec_read_register(struct apei_exec_context *ctx,
- 	return 0;
+     return entry;
  }
  
--int apei_exec_read_register_value(struct apei_exec_context *ctx,
--				  struct acpi_whea_header *entry)
-+int cf_check apei_exec_read_register_value(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-void hypfs_node_exit(const struct hypfs_entry *entry)
++void cf_check hypfs_node_exit(const struct hypfs_entry *entry)
  {
- 	int rc;
- 
-@@ -126,14 +126,14 @@ int __apei_exec_write_register(struct acpi_whea_header *entry, u64 val)
- 	return rc;
  }
  
--int apei_exec_write_register(struct apei_exec_context *ctx,
--			     struct acpi_whea_header *entry)
-+int cf_check apei_exec_write_register(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+@@ -289,16 +290,14 @@ static int hypfs_get_path_user(char *buf,
+     return 0;
+ }
+ 
+-struct hypfs_entry *hypfs_leaf_findentry(const struct hypfs_entry_dir *dir,
+-                                         const char *name,
+-                                         unsigned int name_len)
++struct hypfs_entry *cf_check hypfs_leaf_findentry(
++    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
  {
- 	return __apei_exec_write_register(entry, ctx->value);
+     return ERR_PTR(-ENOTDIR);
  }
  
--int apei_exec_write_register_value(struct apei_exec_context *ctx,
--				   struct acpi_whea_header *entry)
-+int cf_check apei_exec_write_register_value(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-struct hypfs_entry *hypfs_dir_findentry(const struct hypfs_entry_dir *dir,
+-                                        const char *name,
+-                                        unsigned int name_len)
++struct hypfs_entry *cf_check hypfs_dir_findentry(
++    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
  {
- 	int rc;
+     struct hypfs_entry *entry;
  
-@@ -143,8 +143,8 @@ int apei_exec_write_register_value(struct apei_exec_context *ctx,
- 	return rc;
+@@ -360,7 +359,7 @@ static struct hypfs_entry *hypfs_get_entry(const char *path)
+     return hypfs_get_entry_rel(&hypfs_root, path + 1);
  }
  
--int apei_exec_noop(struct apei_exec_context *ctx,
--		   struct acpi_whea_header *entry)
-+int cf_check apei_exec_noop(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-unsigned int hypfs_getsize(const struct hypfs_entry *entry)
++unsigned int cf_check hypfs_getsize(const struct hypfs_entry *entry)
  {
- 	return 0;
+     return entry->size;
  }
-@@ -230,9 +230,9 @@ static int __init apei_exec_for_each_entry(struct apei_exec_context *ctx,
- 	return 0;
+@@ -396,7 +395,7 @@ int hypfs_read_dyndir_id_entry(const struct hypfs_entry_dir *template,
+     return 0;
  }
  
--static int __init pre_map_gar_callback(struct apei_exec_context *ctx,
--				       struct acpi_whea_header *entry,
--				       void *data)
-+static int __init cf_check pre_map_gar_callback(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry,
-+	void *data)
+-static const struct hypfs_entry *hypfs_dyndir_enter(
++static const struct hypfs_entry *cf_check hypfs_dyndir_enter(
+     const struct hypfs_entry *entry)
  {
- 	u8 ins = entry->instruction;
- 
-@@ -259,9 +259,9 @@ int __init apei_exec_pre_map_gars(struct apei_exec_context *ctx)
- 	return rc;
+     const struct hypfs_dyndir_id *data;
+@@ -407,7 +406,7 @@ static const struct hypfs_entry *hypfs_dyndir_enter(
+     return data->template->e.funcs->enter(&data->template->e);
  }
  
--static int __init post_unmap_gar_callback(struct apei_exec_context *ctx,
--					  struct acpi_whea_header *entry,
--					  void *data)
-+static int __init cf_check post_unmap_gar_callback(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry,
-+	void *data)
+-static struct hypfs_entry *hypfs_dyndir_findentry(
++static struct hypfs_entry *cf_check hypfs_dyndir_findentry(
+     const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
  {
- 	u8 ins = entry->instruction;
- 
-diff --git a/xen/drivers/acpi/apei/apei-internal.h b/xen/drivers/acpi/apei/apei-internal.h
-index b813d55b92a9..360e94b9c877 100644
---- a/xen/drivers/acpi/apei/apei-internal.h
-+++ b/xen/drivers/acpi/apei/apei-internal.h
-@@ -68,16 +68,16 @@ static inline int apei_exec_run_optional(struct apei_exec_context *ctx, u8 actio
- 
- int __apei_exec_read_register(struct acpi_whea_header *entry, u64 *val);
- int __apei_exec_write_register(struct acpi_whea_header *entry, u64 val);
--int apei_exec_read_register(struct apei_exec_context *ctx,
--			    struct acpi_whea_header *entry);
--int apei_exec_read_register_value(struct apei_exec_context *ctx,
--				  struct acpi_whea_header *entry);
--int apei_exec_write_register(struct apei_exec_context *ctx,
--			     struct acpi_whea_header *entry);
--int apei_exec_write_register_value(struct apei_exec_context *ctx,
--				   struct acpi_whea_header *entry);
--int apei_exec_noop(struct apei_exec_context *ctx,
--		   struct acpi_whea_header *entry);
-+int cf_check apei_exec_read_register(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
-+int cf_check apei_exec_read_register_value(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
-+int cf_check apei_exec_write_register(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
-+int cf_check apei_exec_write_register_value(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
-+int cf_check apei_exec_noop(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry);
- int apei_exec_pre_map_gars(struct apei_exec_context *ctx);
- int apei_exec_post_unmap_gars(struct apei_exec_context *ctx);
- 
-diff --git a/xen/drivers/acpi/apei/erst.c b/xen/drivers/acpi/apei/erst.c
-index c5df512b9838..40d8f00270d0 100644
---- a/xen/drivers/acpi/apei/erst.c
-+++ b/xen/drivers/acpi/apei/erst.c
-@@ -114,40 +114,40 @@ static int erst_timedout(u64 *t, u64 spin_unit)
- 	return 0;
+     const struct hypfs_dyndir_id *data;
+@@ -418,8 +417,8 @@ static struct hypfs_entry *hypfs_dyndir_findentry(
+     return data->template->e.funcs->findentry(data->template, name, name_len);
  }
  
--static int erst_exec_load_var1(struct apei_exec_context *ctx,
--			       struct acpi_whea_header *entry)
-+static int cf_check erst_exec_load_var1(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static int hypfs_read_dyndir(const struct hypfs_entry *entry,
+-                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
++static int cf_check hypfs_read_dyndir(
++    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
  {
- 	return __apei_exec_read_register(entry, &ctx->var1);
+     const struct hypfs_dyndir_id *data;
+ 
+@@ -463,8 +462,8 @@ unsigned int hypfs_dynid_entry_size(const struct hypfs_entry *template,
+     return DIRENTRY_SIZE(snprintf(NULL, 0, template->name, id));
  }
  
--static int erst_exec_load_var2(struct apei_exec_context *ctx,
--			       struct acpi_whea_header *entry)
-+static int cf_check erst_exec_load_var2(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-int hypfs_read_dir(const struct hypfs_entry *entry,
+-                   XEN_GUEST_HANDLE_PARAM(void) uaddr)
++int cf_check hypfs_read_dir(const struct hypfs_entry *entry,
++                            XEN_GUEST_HANDLE_PARAM(void) uaddr)
  {
- 	return __apei_exec_read_register(entry, &ctx->var2);
+     const struct hypfs_entry_dir *d;
+     const struct hypfs_entry *e;
+@@ -510,8 +509,8 @@ int hypfs_read_dir(const struct hypfs_entry *entry,
+     return 0;
  }
  
--static int erst_exec_store_var1(struct apei_exec_context *ctx,
--				struct acpi_whea_header *entry)
-+static int cf_check erst_exec_store_var1(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-int hypfs_read_leaf(const struct hypfs_entry *entry,
+-                    XEN_GUEST_HANDLE_PARAM(void) uaddr)
++int cf_check hypfs_read_leaf(
++    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
  {
- 	return __apei_exec_write_register(entry, ctx->var1);
+     const struct hypfs_entry_leaf *l;
+     unsigned int size = entry->funcs->getsize(entry);
+@@ -555,9 +554,9 @@ static int hypfs_read(const struct hypfs_entry *entry,
+     return ret;
  }
  
--static int erst_exec_add(struct apei_exec_context *ctx,
--			 struct acpi_whea_header *entry)
-+static int cf_check erst_exec_add(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
+-                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                     unsigned int ulen)
++int cf_check hypfs_write_leaf(
++    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++    unsigned int ulen)
  {
- 	ctx->var1 += ctx->var2;
- 	return 0;
+     char *buf;
+     int ret;
+@@ -596,9 +595,9 @@ int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
+     return ret;
  }
  
--static int erst_exec_subtract(struct apei_exec_context *ctx,
--			      struct acpi_whea_header *entry)
-+static int cf_check erst_exec_subtract(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
+-                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                     unsigned int ulen)
++int cf_check hypfs_write_bool(
++    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++    unsigned int ulen)
  {
- 	ctx->var1 -= ctx->var2;
- 	return 0;
+     bool buf;
+ 
+@@ -618,9 +617,9 @@ int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
+     return 0;
  }
  
--static int erst_exec_add_value(struct apei_exec_context *ctx,
--			       struct acpi_whea_header *entry)
-+static int cf_check erst_exec_add_value(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
+-                       XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                       unsigned int ulen)
++int cf_check hypfs_write_custom(
++    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++    unsigned int ulen)
  {
- 	int rc;
- 	u64 val;
-@@ -160,8 +160,8 @@ static int erst_exec_add_value(struct apei_exec_context *ctx,
- 	return rc;
+     struct param_hypfs *p;
+     char *buf;
+@@ -653,9 +652,9 @@ int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
+     return ret;
  }
  
--static int erst_exec_subtract_value(struct apei_exec_context *ctx,
--				    struct acpi_whea_header *entry)
-+static int cf_check erst_exec_subtract_value(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-int hypfs_write_deny(struct hypfs_entry_leaf *leaf,
+-                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                     unsigned int ulen)
++int cf_check hypfs_write_deny(
++    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++    unsigned int ulen)
  {
- 	int rc;
- 	u64 val;
-@@ -174,8 +174,8 @@ static int erst_exec_subtract_value(struct apei_exec_context *ctx,
- 	return rc;
+     return -EACCES;
+ }
+diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
+index b9d4babd0d8a..07f984a659cd 100644
+--- a/xen/common/sched/cpupool.c
++++ b/xen/common/sched/cpupool.c
+@@ -1026,8 +1026,8 @@ static struct notifier_block cpu_nfb = {
+ 
+ static HYPFS_DIR_INIT(cpupool_pooldir, "%u");
+ 
+-static int cpupool_dir_read(const struct hypfs_entry *entry,
+-                            XEN_GUEST_HANDLE_PARAM(void) uaddr)
++static int cf_check cpupool_dir_read(
++    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
+ {
+     int ret = 0;
+     struct cpupool *c;
+@@ -1050,7 +1050,8 @@ static int cpupool_dir_read(const struct hypfs_entry *entry,
+     return ret;
  }
  
--static int erst_exec_stall(struct apei_exec_context *ctx,
--			   struct acpi_whea_header *entry)
-+static int cf_check erst_exec_stall(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static unsigned int cpupool_dir_getsize(const struct hypfs_entry *entry)
++static unsigned int cf_check cpupool_dir_getsize(
++    const struct hypfs_entry *entry)
  {
- 	udelay((ctx->var1 > FIRMWARE_MAX_STALL) ? 
- 			FIRMWARE_MAX_STALL : 
-@@ -183,8 +183,8 @@ static int erst_exec_stall(struct apei_exec_context *ctx,
- 	return 0;
+     const struct cpupool *c;
+     unsigned int size = 0;
+@@ -1061,7 +1062,7 @@ static unsigned int cpupool_dir_getsize(const struct hypfs_entry *entry)
+     return size;
  }
  
--static int erst_exec_stall_while_true(struct apei_exec_context *ctx,
--				      struct acpi_whea_header *entry)
-+static int cf_check erst_exec_stall_while_true(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static const struct hypfs_entry *cpupool_dir_enter(
++static const struct hypfs_entry *cf_check cpupool_dir_enter(
+     const struct hypfs_entry *entry)
  {
- 	int rc;
- 	u64 val;
-@@ -205,9 +205,8 @@ static int erst_exec_stall_while_true(struct apei_exec_context *ctx,
- 	return 0;
+     struct hypfs_dyndir_id *data;
+@@ -1076,14 +1077,14 @@ static const struct hypfs_entry *cpupool_dir_enter(
+     return entry;
  }
  
--static int erst_exec_skip_next_instruction_if_true(
--	struct apei_exec_context *ctx,
--	struct acpi_whea_header *entry)
-+static int cf_check erst_exec_skip_next_instruction_if_true(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static void cpupool_dir_exit(const struct hypfs_entry *entry)
++static void cf_check cpupool_dir_exit(const struct hypfs_entry *entry)
  {
- 	int rc;
- 	u64 val;
-@@ -223,27 +222,27 @@ static int erst_exec_skip_next_instruction_if_true(
- 	return 0;
+     spin_unlock(&cpupool_lock);
+ 
+     hypfs_free_dyndata();
  }
  
--static int erst_exec_goto(struct apei_exec_context *ctx,
--			  struct acpi_whea_header *entry)
-+static int cf_check erst_exec_goto(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static struct hypfs_entry *cpupool_dir_findentry(
++static struct hypfs_entry *cf_check cpupool_dir_findentry(
+     const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len)
  {
- 	ctx->ip = ctx->value;
- 	return APEI_EXEC_SET_IP;
+     unsigned long id;
+@@ -1102,8 +1103,8 @@ static struct hypfs_entry *cpupool_dir_findentry(
+     return hypfs_gen_dyndir_id_entry(&cpupool_pooldir, id, cpupool);
  }
  
--static int erst_exec_set_src_address_base(struct apei_exec_context *ctx,
--					  struct acpi_whea_header *entry)
-+static int cf_check erst_exec_set_src_address_base(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static int cpupool_gran_read(const struct hypfs_entry *entry,
+-                             XEN_GUEST_HANDLE_PARAM(void) uaddr)
++static int cf_check cpupool_gran_read(
++    const struct hypfs_entry *entry, XEN_GUEST_HANDLE_PARAM(void) uaddr)
  {
- 	return __apei_exec_read_register(entry, &ctx->src_base);
+     const struct hypfs_dyndir_id *data;
+     const struct cpupool *cpupool;
+@@ -1121,7 +1122,7 @@ static int cpupool_gran_read(const struct hypfs_entry *entry,
+     return copy_to_guest(uaddr, gran, strlen(gran) + 1) ? -EFAULT : 0;
  }
  
--static int erst_exec_set_dst_address_base(struct apei_exec_context *ctx,
--					  struct acpi_whea_header *entry)
-+static int cf_check erst_exec_set_dst_address_base(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
++static unsigned int cf_check hypfs_gran_getsize(const struct hypfs_entry *entry)
  {
- 	return __apei_exec_read_register(entry, &ctx->dst_base);
+     const struct hypfs_dyndir_id *data;
+     const struct cpupool *cpupool;
+@@ -1136,9 +1137,9 @@ static unsigned int hypfs_gran_getsize(const struct hypfs_entry *entry)
+     return strlen(gran) + 1;
  }
  
--static int erst_exec_move_data(struct apei_exec_context *ctx,
--			       struct acpi_whea_header *entry)
-+static int cf_check erst_exec_move_data(
-+	struct apei_exec_context *ctx, struct acpi_whea_header *entry)
+-static int cpupool_gran_write(struct hypfs_entry_leaf *leaf,
+-                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                              unsigned int ulen)
++static int cf_check cpupool_gran_write(
++    struct hypfs_entry_leaf *leaf, XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++    unsigned int ulen)
  {
- 	int rc;
- 	u64 offset;
+     const struct hypfs_dyndir_id *data;
+     struct cpupool *cpupool;
+diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
+index e9d4c2555bd7..1b65a9188c6c 100644
+--- a/xen/include/xen/hypfs.h
++++ b/xen/include/xen/hypfs.h
+@@ -168,31 +168,30 @@ void hypfs_add_dyndir(struct hypfs_entry_dir *parent,
+                       struct hypfs_entry_dir *template);
+ int hypfs_add_leaf(struct hypfs_entry_dir *parent,
+                    struct hypfs_entry_leaf *leaf, bool nofault);
+-const struct hypfs_entry *hypfs_node_enter(const struct hypfs_entry *entry);
+-void hypfs_node_exit(const struct hypfs_entry *entry);
+-int hypfs_read_dir(const struct hypfs_entry *entry,
+-                   XEN_GUEST_HANDLE_PARAM(void) uaddr);
+-int hypfs_read_leaf(const struct hypfs_entry *entry,
+-                    XEN_GUEST_HANDLE_PARAM(void) uaddr);
+-int hypfs_write_deny(struct hypfs_entry_leaf *leaf,
+-                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                     unsigned int ulen);
+-int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
+-                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                     unsigned int ulen);
+-int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
+-                     XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                     unsigned int ulen);
+-int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
+-                       XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
+-                       unsigned int ulen);
+-unsigned int hypfs_getsize(const struct hypfs_entry *entry);
+-struct hypfs_entry *hypfs_leaf_findentry(const struct hypfs_entry_dir *dir,
+-                                         const char *name,
+-                                         unsigned int name_len);
+-struct hypfs_entry *hypfs_dir_findentry(const struct hypfs_entry_dir *dir,
+-                                        const char *name,
+-                                        unsigned int name_len);
++const struct hypfs_entry *cf_check hypfs_node_enter(
++    const struct hypfs_entry *entry);
++void cf_check hypfs_node_exit(const struct hypfs_entry *entry);
++int cf_check hypfs_read_dir(const struct hypfs_entry *entry,
++                            XEN_GUEST_HANDLE_PARAM(void) uaddr);
++int cf_check hypfs_read_leaf(const struct hypfs_entry *entry,
++                             XEN_GUEST_HANDLE_PARAM(void) uaddr);
++int cf_check hypfs_write_deny(struct hypfs_entry_leaf *leaf,
++                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++                              unsigned int ulen);
++int cf_check hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
++                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++                              unsigned int ulen);
++int cf_check hypfs_write_bool(struct hypfs_entry_leaf *leaf,
++                              XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++                              unsigned int ulen);
++int cf_check hypfs_write_custom(struct hypfs_entry_leaf *leaf,
++                                XEN_GUEST_HANDLE_PARAM(const_void) uaddr,
++                                unsigned int ulen);
++unsigned int cf_check hypfs_getsize(const struct hypfs_entry *entry);
++struct hypfs_entry *cf_check hypfs_leaf_findentry(
++    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len);
++struct hypfs_entry *cf_check hypfs_dir_findentry(
++    const struct hypfs_entry_dir *dir, const char *name, unsigned int name_len);
+ void *hypfs_alloc_dyndata(unsigned long size);
+ #define hypfs_alloc_dyndata(type) ((type *)hypfs_alloc_dyndata(sizeof(type)))
+ void *hypfs_get_dyndata(void);
 -- 
 2.11.0
 
