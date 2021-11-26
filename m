@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A35DDC433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C86C4332F
 	for <xen-devel@archiver.kernel.org>; Fri, 26 Nov 2021 13:07:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.232786.403820 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.232788.403829 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawS-0004Pv-Qq; Fri, 26 Nov 2021 13:07:04 +0000
+	id 1mqawU-0004fa-89; Fri, 26 Nov 2021 13:07:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 232786.403820; Fri, 26 Nov 2021 13:07:04 +0000
+Received: by outflank-mailman (output) from mailman id 232788.403829; Fri, 26 Nov 2021 13:07:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqawS-0004OW-47; Fri, 26 Nov 2021 13:07:04 +0000
-Received: by outflank-mailman (input) for mailman id 232786;
- Fri, 26 Nov 2021 13:07:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqawT-0004aB-4m; Fri, 26 Nov 2021 13:07:05 +0000
+Received: by outflank-mailman (input) for mailman id 232788;
+ Fri, 26 Nov 2021 13:07:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k+gV=QN=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mqavX-0003W9-Lx
- for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:06:07 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9ce993e1-4eb9-11ec-a9d2-d9f7a1cc8784;
- Fri, 26 Nov 2021 14:06:06 +0100 (CET)
+ id 1mqavE-0002zD-Bk
+ for xen-devel@lists.xenproject.org; Fri, 26 Nov 2021 13:05:48 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9159b3dc-4eb9-11ec-9787-a32c541c8605;
+ Fri, 26 Nov 2021 14:05:47 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +38,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ce993e1-4eb9-11ec-a9d2-d9f7a1cc8784
+X-Inumbo-ID: 9159b3dc-4eb9-11ec-9787-a32c541c8605
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1637931966;
+  d=citrix.com; s=securemail; t=1637931947;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=2fDXaXazfQXnz7/03KLLc3+HD6+G8OCzegB9VcGT+sI=;
-  b=WovLxch8km54ezVS+a9dQ6Q7/ObjK2lERKNO/Idq2EndtfXzU5PI34XK
-   VSrSsB+RAHTK03jgnNrHgV+q2nLjBUW9fLaGQICBuH5Z6ujeI+uTU8ddA
-   nuDGWdtpUA30U5OHjlyxA6YOOPiscbGywAchY2JP1MvfGx65oun+AZZNU
-   0=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: H7eJka3pBj2/5aSyGooWyhODYdOVTBX01pBZ5HMUYXzwrHQw4N6Zdx1JYCRe50dDcV/mKhyJ2o
- LdYbbBeM/1MTbhnLwBzgvKOn1s+jxIj/stEL2Gui/z8TpKvY1XES7C9b4sISxBbZSqMWx3cDxD
- ar8pSf/w0TiYno9nnU/Son6DixDzgk6lyk6q0agLrYieBwnq3o30EX+qMQ2uRLo9fPLGFC7Ejq
- dsyMnngAVpHjObqjzBrS/AA7EzjtU2nWqur3/+nG5c1xfjAhBCpUPOF7dOtinOBXOjdpWnR5x3
- KjnjhwXYY5YH/SFeVWULJ23M
+  bh=UegzuZhXXHY5hqqFyS7Iw93YbL6XWSCZlaORkPJB840=;
+  b=fmbPKmOdEx1a0pdUxgRngzqMFtlESNgNq7Wa9bTcjN8qetlQ7Pqn94ZV
+   U93ba9rC3ODKmlCB/dpaP5tXZ65AYAGbltjzk7xSzuPtR2ypI043V63Kf
+   xgOsVqhouqj8iMvslFJUSoaBt860UATHaVVGWLrYdtPWcLIt6u6em6i2H
+   Q=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: IdT3NFWX9Hj68kTd32brC/LgREC0HLKlW7vgt8jFLvL0zEByVHaP7ZDEBTQxPGVQjTVR3JclgH
+ PNDH4cUqFWo3iNyQYRX0msWEosxO7IiYeZqW1QLrzwltlP1nFwJQ8rDbb3EhuDwn02oldn74ES
+ vW/fR53wk0hHRg9jCBItk2BFp1iBL0XYGef94vIVmT27i4/XUy5Wwg6gWHDi+SolLHZsfZiTbf
+ VG9suuoh/J8C9WkmuvB+E0GsIoVPTxYyYailt2gbbUHSzyAonUkv5tdaKd53hl3EgkuPOJDa23
+ yUTIlp67WZnQ7Ge8AO6ThD1Y
 X-SBRS: 5.1
-X-MesageID: 58696036
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 58635033
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:n1cAIqDBJfxo0xVW/9zkw5YqxClBgxIJ4kV8jS/XYbTApDMr0TFVy
- DcbW2uPafncZjH1c40jbduw8R9TsJPSxoRmQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX5400w7wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/kG+qh+Fhy
- 4R0qcKgRj53OrPlhrg6XEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcFjGlh2JgVQ54yY
- eIXMmdpaSnrZyZxYFRPM7U8n7ezjWfWJmgwRFW9+vNsvjm7IBZK+KfpGMrYfJqNX8o9tkSFo
- mPL+UzpDxdcM8aQoRKe6W6ljOLLmSL9WaoRGae++/osh0ecrkQDBRtTWValrP2Rjk+lR8kZO
- 0ES4jApr6U56AqsVNaVdz+SrWOAvxUcc8FNCOB84waIopc4+C7AWDJCFGQYLoV76olmHlTGy
- 2NlgfvyXx93ga2WGEuBqKeblG22JwELcUgNMHpsoRQ+3/Hvp4Q6jxTqR9llEbKogtCdJQwc0
- wxmvwBl2exN0JdjO7GTuAme3mny/sShohsdv12PBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
- 1BUypHFvIji4Xxg/RFhodnh/pn1uJ5p0xWG2DaD+qXNERz2oBZPmqgKvVlDyL9BaJpsRNMQS
- Ba7VfltzJFSJmC2SqR8fpi8Dc8npYC5S4+6Bq6JMYsSPMQqHONiwM2ITRXLt4wKuBJx+ZzTx
- L/BKZr8ZZrkIfgPIMWKqxc1juZwm3FWKZL7TpHn1RW3uYdyl1bOIYrpxGCmN7hjhIvd+V292
- 48Ga6OilkUOOMWjM3K/2dNCcjg3wY0TWMmeRzp/LbXYfGKL2QgJVpfs/F/WU9A/wvkOyL6Xp
- irVt40x4AOXuEAr4D6iMhhLAI4Dl74mxZ7iFSBzb1uuxVY5ZoOjsPUWe5ctJOF1/+1/1/9kC
- fICfpzYUPhITz3G/RUbbIX889M+JEj621rWMnr3eiU7cr5hWxfNpo3ucDzw+XRcFSGwr8Y//
- eGtj1uJXZoZSg1+J8/Kc/bznUiptH0QlbsqDUvFK9VeYmv2941uJ3Cjh/M7OZhUex7C2iGbx
- 0CdBhJB/bvBpIo88d/og6GYrtj2T7siTxQCR2SCtOS4LyjX+Gan0LRsaufQcGCPTn7w9YWje
- f5Rk6P2PsoYkQsYqIF7Cbtqk/4zvoO9u79Aww14N3zXdFD3WKh4K3yL0MQT5K1AwrhV5Vm/V
- k6Vo4QIPLyIPIXuEUILJRpjZeOGjKlGlj7X5PUzAUP7+C4oo+bXDRQMZ0GB2H5HMb94EII52
- uNw6scZ5ju2hgcuLtvb3Dtf8H6BLyBYXqgq3n3A7FQHVub/Jol+XKHh
-IronPort-HdrOrdr: A9a23:iinLz6GjHL60mLg8pLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
- mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YZT0EUMrzN5DZB4voSmDPIceod/A==
+IronPort-Data: A9a23:HpbFC69dDI9+AM7d51FEDrUDdXmTJUtcMsCJ2f8bNWPcYEJGY0x3m
+ 2pKWG2EOPzZN2P0KIx+PYS/90JT6pfRy4JgSgI+qSs8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdj3NYy6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhz0
+ YhLmt+7Qz4jYJbXsrozDRlZGCBXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp0eQ62DP
+ 5FCAdZpRBHlXD4QYGg0Mb8ZkcSR2Xr1SWdG72vA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
+ Qru/Xn9AxwcHMySz3yC6H3ErvTUgSrxVYYWFbu53v1nmluewioUEhJ+fUu2p7y1h1CzX/pbK
+ lcI4Ww+oK4q7kupQ9LhGRqirxasnDQRRt5RGO0S8xyWx+zf5APxO4QfZmcfMpp87pZwHGF0k
+ A/S9z/0OdBxmL+MFHSytbyelDnsAjM/c0FcZS4PTCJQtrEPv7oPph7IS99iFou8gdv0BSz8z
+ li2kcQuu1kApZVVjvvmpDgrlxrp/8GUFVBtum07S0r8tlshDLNJcbBE/rQyARxoCI+CBmeMs
+ 3Ef8yR1xLBfVMrd/MBhrQhkIV1I2xpnGGGD6bKMN8N4n9hIx5JFVdsLiN2ZDB00WvvogRezP
+ CfuVfp5vfe/xkeCY65teJ6WAM8316XmHtmNfqmKNYUePMUuJVPZoHoGiausM4bFyxNEfUYXY
+ 8rzTCpRJSxCVfQPIMSeG4/xLoPHNghhnDiOFPgXPjys0KaEZW79dFv2GADmUwzN14vd+F+92
+ 48Gb6OikkwDOMWjMni/2dNCdjgicClkba0aXuQKL4Zv1CI9Qzp/YxIQqJt8E7FYc1N9yr2Vo
+ yrjAxAAkzISRxTvcG23V5yqU5u3Nb4XkJ7xFXVE0Y+A1ydxbICxwr0YcpdrL7Ar+PY6lax/T
+ uUfetXGCfNKE2yV9zMYZJj7jYpjaBX02l7eY3v7OGAyL8x6WgjE2t74ZQ+zpiMAOTW66Jklq
+ Lq62wKFHZdaH1Z+DNzbYe6Exk+quSRPg/p7WkbFe4EBeEjl/IVwBTb2i/s7f5MFJRnZn2PI3
+ AeKGxYI4+LKptZtotXOgKmFqaavEvd/QRUGTzWKs+7uOHCDrGS5wIJGXOKZRhznVTv5qPe4e
+ OFY7/DgK/lbzlxEhJVxTuRwxqUk6tqx+7IDllZ4HG/GZkiAA697JiXUxtFGs6BAy+MLuQayX
+ U7TqNBWNa/QZZHgGV8VYgEkcv6CxbcfnTyLtaY5J0Dz5SlW+rubUBoNY0nQ2XIFdLYlYpk4x
+ eoBudIN713tgxUnBd+KkyRI+jneNXcHSagm6skXDYKDZtDHEb2ejUgw0hPL3aw=
+IronPort-HdrOrdr: A9a23:savNVKr5TE5rSQH0xT4iPqwaV5oReYIsimQD101hICG8cqSj9v
+ xG+85rrSMc6QxhIU3I9urwW5VoLUmyyXcx2/h0AV7AZniBhILLFvAB0WKK+VSJcEeSmtK1l5
+ 0QFJSWYOeAdmSS5vyb3ODXKbgdKaG8gcWVuds=
 X-IronPort-AV: E=Sophos;i="5.87,266,1631592000"; 
-   d="scan'208";a="58696036"
+   d="scan'208";a="58635033"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
 	<wl@xen.org>, Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH 19/65] xen/tasklet: Annotate fnptr targets
-Date: Fri, 26 Nov 2021 12:34:00 +0000
-Message-ID: <20211126123446.32324-20-andrew.cooper3@citrix.com>
+Subject: [PATCH 26/65] xen/misc: Annotate fnptr targets
+Date: Fri, 26 Nov 2021 12:34:07 +0000
+Message-ID: <20211126123446.32324-27-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 References: <20211126123446.32324-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-
-The function pointer cast in hvm_vcpu_initialise() is undefined behaviour.
-
-While it happens to function correctly before this point, it is not
-incompatible with control flow typechecking, so introduce a new
-hvm_assert_evtchn_irq_tasklet() to handle the parameter type conversion in a
-legal way.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -118,261 +111,270 @@ CC: Wei Liu <wl@xen.org>
 CC: Julien Grall <julien@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/hvm/hvm.c                    | 7 ++++++-
- xen/arch/x86/hvm/vlapic.c                 | 2 +-
- xen/arch/x86/mm/shadow/common.c           | 2 +-
- xen/common/domain.c                       | 2 +-
- xen/common/keyhandler.c                   | 6 +++---
- xen/common/livepatch.c                    | 2 +-
- xen/common/stop_machine.c                 | 2 +-
- xen/common/trace.c                        | 2 +-
- xen/drivers/char/console.c                | 2 +-
- xen/drivers/passthrough/amd/iommu_guest.c | 2 +-
- xen/drivers/passthrough/amd/iommu_init.c  | 4 ++--
- xen/drivers/passthrough/arm/smmu-v3.c     | 6 +++---
- xen/drivers/passthrough/vtd/iommu.c       | 2 +-
- xen/include/asm-x86/shadow.h              | 2 +-
- 14 files changed, 24 insertions(+), 19 deletions(-)
+ xen/arch/x86/mm.c                        | 6 ++++--
+ xen/arch/x86/setup.c                     | 4 ++--
+ xen/common/domain.c                      | 2 +-
+ xen/common/gdbstub.c                     | 5 ++---
+ xen/common/livepatch.c                   | 7 +++----
+ xen/common/memory.c                      | 4 ++--
+ xen/common/page_alloc.c                  | 2 +-
+ xen/common/radix-tree.c                  | 4 ++--
+ xen/common/rangeset.c                    | 2 +-
+ xen/common/spinlock.c                    | 6 +++---
+ xen/common/vm_event.c                    | 6 +++---
+ xen/common/xmalloc_tlsf.c                | 4 ++--
+ xen/drivers/passthrough/amd/iommu_init.c | 2 +-
+ 13 files changed, 27 insertions(+), 27 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 0e935be1d772..16e8a32fa768 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1540,6 +1540,11 @@ static int __init cf_check hvm_register_CPU_save_and_restore(void)
- }
- __initcall(hvm_register_CPU_save_and_restore);
- 
-+static void cf_check hvm_assert_evtchn_irq_tasklet(void *v)
-+{
-+    hvm_assert_evtchn_irq(v);
-+}
-+
- int hvm_vcpu_initialise(struct vcpu *v)
- {
-     int rc;
-@@ -1563,7 +1568,7 @@ int hvm_vcpu_initialise(struct vcpu *v)
-         goto fail3;
- 
-     softirq_tasklet_init(&v->arch.hvm.assert_evtchn_irq_tasklet,
--                         (void (*)(void *))hvm_assert_evtchn_irq, v);
-+                         hvm_assert_evtchn_irq_tasklet, v);
- 
-     v->arch.hvm.inject_event.vector = HVM_EVENT_VECTOR_UNSET;
- 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index b8c84458ffdc..fe375912bef1 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -312,7 +312,7 @@ static void vlapic_init_sipi_one(struct vcpu *target, uint32_t icr)
-     vcpu_unpause(target);
- }
- 
--static void vlapic_init_sipi_action(void *data)
-+static void cf_check vlapic_init_sipi_action(void *data)
- {
-     struct vcpu *origin = data;
-     uint32_t icr = vcpu_vlapic(origin)->init_sipi.icr;
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index 1e4ee50771f5..b8cacbefef5f 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -3242,7 +3242,7 @@ void shadow_audit_tables(struct vcpu *v)
- 
- #ifdef CONFIG_PV
- 
--void pv_l1tf_tasklet(void *data)
-+void cf_check pv_l1tf_tasklet(void *data)
- {
-     struct domain *d = data;
- 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index a8b6ee59587c..4fcf9e23911f 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1833,7 +1833,7 @@ struct migrate_info {
- 
- static DEFINE_PER_CPU(struct migrate_info *, continue_info);
- 
--static void continue_hypercall_tasklet_handler(void *data)
-+static void cf_check continue_hypercall_tasklet_handler(void *data)
- {
-     struct migrate_info *info = data;
-     struct vcpu *v = info->vcpu;
-diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-index 2c916d528ab2..b568484ca62c 100644
---- a/xen/common/keyhandler.c
-+++ b/xen/common/keyhandler.c
-@@ -73,7 +73,7 @@ static struct keyhandler {
- #undef KEYHANDLER
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 35d000921795..5d7acf705fb8 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -811,7 +811,8 @@ struct mmio_emul_range_ctxt {
+     unsigned long mfn;
  };
  
--static void keypress_action(void *unused)
-+static void cf_check keypress_action(void *unused)
+-static int print_mmio_emul_range(unsigned long s, unsigned long e, void *arg)
++static int cf_check print_mmio_emul_range(
++    unsigned long s, unsigned long e, void *arg)
  {
-     handle_keypress(keypress_key, NULL);
- }
-@@ -206,7 +206,7 @@ static void dump_registers(unsigned char key, struct cpu_user_regs *regs)
+     const struct mmio_emul_range_ctxt *ctxt = arg;
  
- static DECLARE_TASKLET(dump_hwdom_tasklet, NULL, NULL);
- 
--static void dump_hwdom_action(void *data)
-+static void cf_check dump_hwdom_action(void *data)
- {
-     struct vcpu *v = data;
- 
-@@ -437,7 +437,7 @@ static void read_clocks(unsigned char key)
-            maxdif_cycles, sumdif_cycles/count, count, dif_cycles);
+@@ -4582,7 +4583,8 @@ static int _handle_iomem_range(unsigned long s, unsigned long e,
+     return 0;
  }
  
--static void run_all_nonirq_keyhandlers(void *unused)
-+static void cf_check run_all_nonirq_keyhandlers(void *unused)
+-static int handle_iomem_range(unsigned long s, unsigned long e, void *p)
++static int cf_check handle_iomem_range(
++    unsigned long s, unsigned long e, void *p)
  {
-     /* Fire all the non-IRQ-context diagnostic keyhandlers */
-     struct keyhandler *h;
+     int err = 0;
+ 
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index f35f3cb899ab..9bd42a55f94b 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2034,8 +2034,8 @@ int __hwdom_init xen_in_range(unsigned long mfn)
+     return 0;
+ }
+ 
+-static int __hwdom_init io_bitmap_cb(unsigned long s, unsigned long e,
+-                                     void *ctx)
++static int __hwdom_init cf_check io_bitmap_cb(
++    unsigned long s, unsigned long e, void *ctx)
+ {
+     struct domain *d = ctx;
+     unsigned int i;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 4fcf9e23911f..de8208a6c797 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -370,7 +370,7 @@ static void cf_check _free_pirq_struct(struct rcu_head *head)
+     xfree(container_of(head, struct pirq, rcu_head));
+ }
+ 
+-static void free_pirq_struct(void *ptr)
++static void cf_check free_pirq_struct(void *ptr)
+ {
+     struct pirq *pirq = ptr;
+ 
+diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
+index 079c3ca9616a..d6872721dc0d 100644
+--- a/xen/common/gdbstub.c
++++ b/xen/common/gdbstub.c
+@@ -69,7 +69,7 @@ static void gdb_smp_resume(void);
+ static char __initdata opt_gdb[30];
+ string_param("gdb", opt_gdb);
+ 
+-static void gdbstub_console_puts(const char *str, size_t nr);
++static void cf_check gdbstub_console_puts(const char *str, size_t nr);
+ 
+ /* value <-> char (de)serialzers */
+ static char
+@@ -546,8 +546,7 @@ __gdb_ctx = {
+ };
+ static struct gdb_context *gdb_ctx = &__gdb_ctx;
+ 
+-static void
+-gdbstub_console_puts(const char *str, size_t nr)
++static void cf_check gdbstub_console_puts(const char *str, size_t nr)
+ {
+     const char *p;
+ 
 diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 701efd87a173..4e1c29ab7879 100644
+index e8714920dc8f..ec301a9f120c 100644
 --- a/xen/common/livepatch.c
 +++ b/xen/common/livepatch.c
-@@ -1591,7 +1591,7 @@ static int schedule_work(struct payload *data, uint32_t cmd, uint32_t timeout)
+@@ -157,10 +157,9 @@ unsigned long livepatch_symbols_lookup_by_name(const char *symname)
      return 0;
  }
  
--static void tasklet_fn(void *unused)
-+static void cf_check tasklet_fn(void *unused)
+-static const char *livepatch_symbols_lookup(unsigned long addr,
+-                                            unsigned long *symbolsize,
+-                                            unsigned long *offset,
+-                                            char *namebuf)
++static const char *cf_check livepatch_symbols_lookup(
++    unsigned long addr, unsigned long *symbolsize, unsigned long *offset,
++    char *namebuf)
  {
-     this_cpu(work_to_do) = 1;
- }
-diff --git a/xen/common/stop_machine.c b/xen/common/stop_machine.c
-index a122bd4afe09..3adbe380de96 100644
---- a/xen/common/stop_machine.c
-+++ b/xen/common/stop_machine.c
-@@ -141,7 +141,7 @@ int stop_machine_run(int (*fn)(void *), void *data, unsigned int cpu)
-     return ret;
+     const struct payload *data;
+     unsigned int i, best;
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index fbd2ebb3ba75..8146e1136a6c 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1033,8 +1033,8 @@ struct get_reserved_device_memory {
+     unsigned int used_entries;
+ };
+ 
+-static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
+-                                      u32 id, void *ctxt)
++static int cf_check get_reserved_device_memory(
++    xen_pfn_t start, xen_ulong_t nr, u32 id, void *ctxt)
+ {
+     struct get_reserved_device_memory *grdm = ctxt;
+     uint32_t sbdf = PCI_SBDF3(grdm->map.dev.pci.seg, grdm->map.dev.pci.bus,
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 906bfb6679df..f878cd110d1e 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1238,7 +1238,7 @@ struct scrub_wait_state {
+     bool drop;
+ };
+ 
+-static void scrub_continue(void *data)
++static void cf_check scrub_continue(void *data)
+ {
+     struct scrub_wait_state *st = data;
+ 
+diff --git a/xen/common/radix-tree.c b/xen/common/radix-tree.c
+index 33b47748ae49..adc3034222dc 100644
+--- a/xen/common/radix-tree.c
++++ b/xen/common/radix-tree.c
+@@ -52,7 +52,7 @@ struct rcu_node {
+ 	struct rcu_head rcu_head;
+ };
+ 
+-static struct radix_tree_node *rcu_node_alloc(void *arg)
++static struct radix_tree_node *cf_check rcu_node_alloc(void *arg)
+ {
+ 	struct rcu_node *rcu_node = xmalloc(struct rcu_node);
+ 	return rcu_node ? &rcu_node->node : NULL;
+@@ -65,7 +65,7 @@ static void cf_check _rcu_node_free(struct rcu_head *head)
+ 	xfree(rcu_node);
  }
  
--static void stopmachine_action(void *data)
-+static void cf_check stopmachine_action(void *data)
+-static void rcu_node_free(struct radix_tree_node *node, void *arg)
++static void cf_check rcu_node_free(struct radix_tree_node *node, void *arg)
  {
-     unsigned int cpu = (unsigned long)data;
-     enum stopmachine_state state = STOPMACHINE_START;
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index 0886be089bea..53978466cf92 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -663,7 +663,7 @@ static inline void insert_lost_records(struct t_buf *buf)
-  * Notification is performed in qtasklet to avoid deadlocks with contexts
-  * which __trace_var() may be called from (e.g., scheduler critical regions).
-  */
--static void trace_notify_dom0(void *unused)
-+static void cf_check trace_notify_dom0(void *unused)
- {
-     send_global_virq(VIRQ_TBUF);
- }
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 4694be83db45..d74b65f6bf23 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -574,7 +574,7 @@ static void serial_rx(char c, struct cpu_user_regs *regs)
-     __serial_rx(c, regs);
+ 	struct rcu_node *rcu_node = container_of(node, struct rcu_node, node);
+ 	call_rcu(&rcu_node->rcu_head, _rcu_node_free);
+diff --git a/xen/common/rangeset.c b/xen/common/rangeset.c
+index 885b6b15c229..a6ef2640462a 100644
+--- a/xen/common/rangeset.c
++++ b/xen/common/rangeset.c
+@@ -384,7 +384,7 @@ int rangeset_consume_ranges(struct rangeset *r,
+     return rc;
  }
  
--static void notify_dom0_con_ring(void *unused)
-+static void cf_check notify_dom0_con_ring(void *unused)
+-static int merge(unsigned long s, unsigned long e, void *data)
++static int cf_check merge(unsigned long s, unsigned long e, void *data)
  {
-     send_global_virq(VIRQ_CON_RING);
- }
-diff --git a/xen/drivers/passthrough/amd/iommu_guest.c b/xen/drivers/passthrough/amd/iommu_guest.c
-index 85828490ffee..361ff864d846 100644
---- a/xen/drivers/passthrough/amd/iommu_guest.c
-+++ b/xen/drivers/passthrough/amd/iommu_guest.c
-@@ -456,7 +456,7 @@ static int do_invalidate_dte(struct domain *d, cmd_entry_t *cmd)
-     return 0;
+     struct rangeset *r = data;
+ 
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index 25bfbf3c47f7..62c83aaa6a73 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -375,7 +375,7 @@ static void spinlock_profile_iterate(lock_profile_subfunc *sub, void *par)
+     spin_unlock(&lock_profile_lock);
  }
  
--static void guest_iommu_process_command(void *data)
-+static void cf_check guest_iommu_process_command(void *data)
+-static void spinlock_profile_print_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_print_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
  {
-     unsigned long opcode, tail, head, cmd_mfn;
-     cmd_entry_t *cmd;
+     struct spinlock *lock = data->lock;
+@@ -404,7 +404,7 @@ void cf_check spinlock_profile_printall(unsigned char key)
+     spinlock_profile_iterate(spinlock_profile_print_elem, NULL);
+ }
+ 
+-static void spinlock_profile_reset_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_reset_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
+ {
+     data->lock_cnt = 0;
+@@ -428,7 +428,7 @@ typedef struct {
+     int                      rc;
+ } spinlock_profile_ucopy_t;
+ 
+-static void spinlock_profile_ucopy_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_ucopy_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
+ {
+     spinlock_profile_ucopy_t *p = par;
+diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
+index 70ab3ba406ff..84cf52636bc4 100644
+--- a/xen/common/vm_event.c
++++ b/xen/common/vm_event.c
+@@ -523,21 +523,21 @@ int __vm_event_claim_slot(struct domain *d, struct vm_event_domain *ved,
+ 
+ #ifdef CONFIG_MEM_PAGING
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void mem_paging_notification(struct vcpu *v, unsigned int port)
++static void cf_check mem_paging_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_paging);
+ }
+ #endif
+ 
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void monitor_notification(struct vcpu *v, unsigned int port)
++static void cf_check monitor_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_monitor);
+ }
+ 
+ #ifdef CONFIG_MEM_SHARING
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void mem_sharing_notification(struct vcpu *v, unsigned int port)
++static void cf_check mem_sharing_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_share);
+ }
+diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
+index e3f6886e6b62..d2ad909502d0 100644
+--- a/xen/common/xmalloc_tlsf.c
++++ b/xen/common/xmalloc_tlsf.c
+@@ -512,13 +512,13 @@ int xmem_pool_maxalloc(struct xmem_pool *pool)
+ 
+ static struct xmem_pool *xenpool;
+ 
+-static void *xmalloc_pool_get(unsigned long size)
++static void *cf_check xmalloc_pool_get(unsigned long size)
+ {
+     ASSERT(size == PAGE_SIZE);
+     return alloc_xenheap_page();
+ }
+ 
+-static void xmalloc_pool_put(void *p)
++static void cf_check xmalloc_pool_put(void *p)
+ {
+     free_xenheap_page(p);
+ }
 diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index f1ed75558227..34a9e49f1c5a 100644
+index 06b4d2b1fea0..cebcd68a6c04 100644
 --- a/xen/drivers/passthrough/amd/iommu_init.c
 +++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -26,7 +26,7 @@
- static int __initdata nr_amd_iommus;
- static bool __initdata pci_init;
+@@ -1073,7 +1073,7 @@ static void * __init allocate_ppr_log(struct amd_iommu *iommu)
+ #define IVRS_MAPPINGS_DEVTAB(m) (m)[ivrs_bdf_entries].intremap_table
  
--static void do_amd_iommu_irq(void *data);
-+static void cf_check do_amd_iommu_irq(void *data);
- static DECLARE_SOFTIRQ_TASKLET(amd_iommu_irq_tasklet, do_amd_iommu_irq, NULL);
- 
- unsigned int __read_mostly amd_iommu_acpi_info;
-@@ -692,7 +692,7 @@ static void iommu_check_ppr_log(struct amd_iommu *iommu)
-     spin_unlock_irqrestore(&iommu->lock, flags);
- }
- 
--static void do_amd_iommu_irq(void *unused)
-+static void cf_check do_amd_iommu_irq(void *unused)
+ /* Gets passed to radix_tree_destroy(), so its param needs to be void *. */
+-static void __init free_ivrs_mapping_callback(void *ptr)
++static void __init cf_check free_ivrs_mapping_callback(void *ptr)
  {
-     struct amd_iommu *iommu;
+     const struct ivrs_mappings *ivrs_mappings = ptr;
  
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-index d115df732016..5e74266da21e 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -1475,7 +1475,7 @@ static int arm_smmu_init_l2_strtab(struct arm_smmu_device *smmu, u32 sid)
- }
- 
- /* IRQ and event handlers */
--static void arm_smmu_evtq_tasklet(void *dev)
-+static void cf_check arm_smmu_evtq_tasklet(void *dev)
- {
- 	int i;
- 	struct arm_smmu_device *smmu = dev;
-@@ -1545,7 +1545,7 @@ static void arm_smmu_handle_ppr(struct arm_smmu_device *smmu, u64 *evt)
- 	}
- }
- 
--static void arm_smmu_priq_tasklet(void *dev)
-+static void cf_check arm_smmu_priq_tasklet(void *dev)
- {
- 	struct arm_smmu_device *smmu = dev;
- 	struct arm_smmu_queue *q = &smmu->priq.q;
-@@ -1624,7 +1624,7 @@ static void arm_smmu_combined_irq_handler(int irq, void *dev,
- 	tasklet_schedule(&(smmu->combined_irq_tasklet));
- }
- 
--static void arm_smmu_combined_irq_tasklet(void *dev)
-+static void cf_check arm_smmu_combined_irq_tasklet(void *dev)
- {
- 	struct arm_smmu_device *smmu = dev;
- 
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index ba1ed5761d23..23519f2081bb 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1065,7 +1065,7 @@ static void __do_iommu_page_fault(struct vtd_iommu *iommu)
-     }
- }
- 
--static void do_iommu_page_fault(void *unused)
-+static void cf_check do_iommu_page_fault(void *unused)
- {
-     struct acpi_drhd_unit *drhd;
- 
-diff --git a/xen/include/asm-x86/shadow.h b/xen/include/asm-x86/shadow.h
-index e25f9604d896..7ef76cc0635b 100644
---- a/xen/include/asm-x86/shadow.h
-+++ b/xen/include/asm-x86/shadow.h
-@@ -233,7 +233,7 @@ static inline bool pv_l1tf_check_l4e(struct domain *d, l4_pgentry_t l4e)
-     return pv_l1tf_check_pte(d, 4, l4e.l4);
- }
- 
--void pv_l1tf_tasklet(void *data);
-+void cf_check pv_l1tf_tasklet(void *data);
- 
- static inline void pv_l1tf_domain_init(struct domain *d)
- {
 -- 
 2.11.0
 
