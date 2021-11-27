@@ -4,35 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B12C433F5
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:07:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233575.405266 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77A0DC433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:18:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233587.405334 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmB9-0000SP-Ui; Sat, 27 Nov 2021 01:06:59 +0000
+	id 1mqmMZ-0003PI-JQ; Sat, 27 Nov 2021 01:18:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233575.405266; Sat, 27 Nov 2021 01:06:59 +0000
+Received: by outflank-mailman (output) from mailman id 233587.405334; Sat, 27 Nov 2021 01:18:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmB9-0000SI-Qz; Sat, 27 Nov 2021 01:06:59 +0000
-Received: by outflank-mailman (input) for mailman id 233575;
- Sat, 27 Nov 2021 01:06:58 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mqmB7-0000S8-Vx; Sat, 27 Nov 2021 01:06:57 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mqmB7-0006Hv-NG; Sat, 27 Nov 2021 01:06:57 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mqmB7-0004eh-Df; Sat, 27 Nov 2021 01:06:57 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mqmB7-0007Dc-D9; Sat, 27 Nov 2021 01:06:57 +0000
+	id 1mqmMZ-0003Oa-EG; Sat, 27 Nov 2021 01:18:47 +0000
+Received: by outflank-mailman (input) for mailman id 233587;
+ Sat, 27 Nov 2021 01:18:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
+ id 1mqmMY-00020H-10
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:18:46 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f6fa9b51-4f1f-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:18:44 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,75 +38,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=+eNFG75oGXnFKPGtnayCuYEMW0oKhKbp6c8+P/wzZls=; b=S6ifaEu3tLZJheKC6n8uMP23Dz
-	oR/0nEhpaid/skLcfxnaeJbeiPxx7Bx6qX0vNRt8V2hqI6NPr2xvPwr8NRx3JWlTDuH1f+qXw1mAF
-	j5kLOcA+fOdr8YfruGhFJbK+EQoU2i2g/BjMUUKLfH6gawe6+dilZyRfVGq6hX0RwHQ8=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-166826-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: f6fa9b51-4f1f-11ec-9787-a32c541c8605
+Message-ID: <20211126223824.441771859@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1637975924;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=EjQK06gGut8wpWxb3xXf7TaaLrkIbQLhpXZXlXqI+1E=;
+	b=eeGX81542dq+sYH7ESmSoDpusjpXmGwZ5uzc6HQtoZnKCuS4K/guuZW1jA24z34Luwy1u2
+	UoyJLLDTEbjG1mWVGhimeiGDQ4GO+YER3XWm6Rq65w2m06j2WyJu3KC7Q4daPErrjOc2m5
+	t7ZnP9RWK/MGdDqy+s4CyQeBzBEYKGEutpivREEkOR8o9Admqct7oIE3li6FXCsI8/xnab
+	nsSIKCZtsl6R4hj2IH3TLhbji/ivuNINmj9LHKOJyb3InVgAW01axfoK7Xc26J2g96I3+0
+	yYelATKYapulhlXULFSMGmMl5Ou0atTEdo4JBDeXppHg9OLpb13O+VkE9z9QsQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1637975924;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=EjQK06gGut8wpWxb3xXf7TaaLrkIbQLhpXZXlXqI+1E=;
+	b=My4pAOvYAQSL+ZCd2xtuUvRpdvSLUlBGqh2EuD8EvOsTnwX4Iyk+C+TZrGGmKB0XpXROFh
+	k6c+Lym+Eb4h6RAQ==
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: Bjorn Helgaas <helgaas@kernel.org>,
+ Marc Zygnier <maz@kernel.org>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Kevin Tian <kevin.tian@intel.com>,
+ Jason Gunthorpe <jgg@nvidia.com>,
+ Megha Dey <megha.dey@intel.com>,
+ Ashok Raj <ashok.raj@intel.com>,
+ linux-pci@vger.kernel.org,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Paul Mackerras <paulus@samba.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ linuxppc-dev@lists.ozlabs.org,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-mips@vger.kernel.org,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ sparclinux@vger.kernel.org,
+ x86@kernel.org,
+ xen-devel@lists.xenproject.org,
+ ath11k@lists.infradead.org,
+ Wei Liu <wei.liu@kernel.org>,
+ linux-hyperv@vger.kernel.org,
+ Juergen Gross <jgross@suse.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Heiko Carstens <hca@linux.ibm.com>
+Subject: [patch 06/22] PCI/MSI: Make pci_msi_domain_write_msg() static
+References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
-Subject: [ovmf test] 166826: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=bb1bba3d776733c41dbfa2d1dc0fe234819a79f2
-X-Osstest-Versions-That:
-    ovmf=4c7ce0d285bc7fd593718fd5dec02e136cbfad8e
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 27 Nov 2021 01:06:57 +0000
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 27 Nov 2021 02:18:44 +0100 (CET)
 
-flight 166826 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/166826/
+There is no point to have this function public as it is set by the PCI core
+anyway when a PCI/MSI irqdomain is created.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 bb1bba3d776733c41dbfa2d1dc0fe234819a79f2
-baseline version:
- ovmf                 4c7ce0d285bc7fd593718fd5dec02e136cbfad8e
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+---
+ drivers/irqchip/irq-gic-v2m.c            |    1 -
+ drivers/irqchip/irq-gic-v3-its-pci-msi.c |    1 -
+ drivers/irqchip/irq-gic-v3-mbi.c         |    1 -
+ drivers/pci/msi.c                        |    2 +-
+ include/linux/msi.h                      |    1 -
+ 5 files changed, 1 insertion(+), 5 deletions(-)
 
-Last test of basis   166360  2021-11-24 15:41:50 Z    2 days
-Testing same since   166826  2021-11-26 09:11:08 Z    0 days    1 attempts
+--- a/drivers/irqchip/irq-gic-v2m.c
++++ b/drivers/irqchip/irq-gic-v2m.c
+@@ -88,7 +88,6 @@ static struct irq_chip gicv2m_msi_irq_ch
+ 	.irq_mask		= gicv2m_mask_msi_irq,
+ 	.irq_unmask		= gicv2m_unmask_msi_irq,
+ 	.irq_eoi		= irq_chip_eoi_parent,
+-	.irq_write_msi_msg	= pci_msi_domain_write_msg,
+ };
+ 
+ static struct msi_domain_info gicv2m_msi_domain_info = {
+--- a/drivers/irqchip/irq-gic-v3-its-pci-msi.c
++++ b/drivers/irqchip/irq-gic-v3-its-pci-msi.c
+@@ -28,7 +28,6 @@ static struct irq_chip its_msi_irq_chip
+ 	.irq_unmask		= its_unmask_msi_irq,
+ 	.irq_mask		= its_mask_msi_irq,
+ 	.irq_eoi		= irq_chip_eoi_parent,
+-	.irq_write_msi_msg	= pci_msi_domain_write_msg,
+ };
+ 
+ static int its_pci_msi_vec_count(struct pci_dev *pdev, void *data)
+--- a/drivers/irqchip/irq-gic-v3-mbi.c
++++ b/drivers/irqchip/irq-gic-v3-mbi.c
+@@ -171,7 +171,6 @@ static struct irq_chip mbi_msi_irq_chip
+ 	.irq_unmask		= mbi_unmask_msi_irq,
+ 	.irq_eoi		= irq_chip_eoi_parent,
+ 	.irq_compose_msi_msg	= mbi_compose_msi_msg,
+-	.irq_write_msi_msg	= pci_msi_domain_write_msg,
+ };
+ 
+ static struct msi_domain_info mbi_msi_domain_info = {
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1267,7 +1267,7 @@ EXPORT_SYMBOL_GPL(msi_desc_to_pci_sysdat
+  * @irq_data:	Pointer to interrupt data of the MSI interrupt
+  * @msg:	Pointer to the message
+  */
+-void pci_msi_domain_write_msg(struct irq_data *irq_data, struct msi_msg *msg)
++static void pci_msi_domain_write_msg(struct irq_data *irq_data, struct msi_msg *msg)
+ {
+ 	struct msi_desc *desc = irq_data_get_msi_desc(irq_data);
+ 
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -454,7 +454,6 @@ void *platform_msi_get_host_data(struct
+ #endif /* CONFIG_GENERIC_MSI_IRQ_DOMAIN */
+ 
+ #ifdef CONFIG_PCI_MSI_IRQ_DOMAIN
+-void pci_msi_domain_write_msg(struct irq_data *irq_data, struct msi_msg *msg);
+ struct irq_domain *pci_msi_create_irq_domain(struct fwnode_handle *fwnode,
+ 					     struct msi_domain_info *info,
+ 					     struct irq_domain *parent);
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Baraneedharan Anbazhagan <anbazhagan@hp.com>
-  Liming Gao <gaoliming@byosoft.com.cn>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   4c7ce0d285..bb1bba3d77  bb1bba3d776733c41dbfa2d1dc0fe234819a79f2 -> xen-tested-master
 
