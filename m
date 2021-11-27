@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC953C433F5
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:28:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233754.405933 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF7DEC433EF
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:28:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233752.405928 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmVt-0003Py-GV; Sat, 27 Nov 2021 01:28:25 +0000
+	id 1mqmVt-0003Nb-22; Sat, 27 Nov 2021 01:28:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233754.405933; Sat, 27 Nov 2021 01:28:25 +0000
+Received: by outflank-mailman (output) from mailman id 233752.405928; Sat, 27 Nov 2021 01:28:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmVt-0003Os-7x; Sat, 27 Nov 2021 01:28:25 +0000
-Received: by outflank-mailman (input) for mailman id 233754;
- Sat, 27 Nov 2021 01:28:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqmVs-0003Mv-Tp; Sat, 27 Nov 2021 01:28:24 +0000
+Received: by outflank-mailman (input) for mailman id 233752;
+ Sat, 27 Nov 2021 01:28:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmNX-0002cc-6m
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:47 +0000
+ id 1mqmNA-00020H-47
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:24 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1bba25e7-4f20-11ec-b941-1df2895da90e;
- Sat, 27 Nov 2021 02:19:46 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0dc60b7f-4f20-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:19:23 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1bba25e7-4f20-11ec-b941-1df2895da90e
-Message-ID: <20211126223825.034426787@linutronix.de>
+X-Inumbo-ID: 0dc60b7f-4f20-11ec-9787-a32c541c8605
+Message-ID: <20211126223824.144593498@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975986;
+	s=2020; t=1637975962;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=/hUtpZoje77D8jXpCF4dVmu6dIuQVzxr12Tf8gEZrmw=;
-	b=kiIa3WnklR7w/ZeDbikmw6N61xfDMfnL6ZU/pOOseNiVV+omr9Aa6z+0BVgtzFMBCu6iMQ
-	zKsikuo1zFVGhoKSmUIEASSuBkvEd3ptUL2iOJdMyQ3DpnQuo+VIo5ifVixMvFUEzvNoNu
-	3f2nitVyliW8P6TzXAaFW55/Jm1WCxDf99/Fz3p6iH3FrRJBfIjc+FJfNcFSu5JrTV/hOF
-	5vLWCzkgjOJjajXnssaIYKp5J8LS4aL6X2YpJXn2eqN0373MUkl/B9A8NvGWVAer6wN7Qg
-	Q3WpDV96QQDz3VHeQEjDnHcYO8c9rPbBEjBtYtLeg990OTmzjYCl3GKUZdmhyA==
+	 references:references; bh=SP+dKeNJM2hwdIJDgcQ1U3/N14UrjfZzM9fREkCbB+Y=;
+	b=OLgQ/+qNPhyeiGuH7dTwFmaDA3RHOQcBGejXBnEIgK9SPjRkMk+ihcj0rY/hfSzUaXkrTq
+	U1oUl+iy9zK0MOrVnbU72ybCc3YYo4LfcJm2aAtzFpmAhYZB8llRjIj/glz115YZOrLSjb
+	knI+uQpZcoka/C1g2NHkieXzJhU5QO6e/5vzylnNBcgc/U6QP4/lndHc+g1cA/oa/wTjbB
+	VobVFEWYJ5SWEylsLFt9/wGHTbAufBL2vfOsGUgPW1pVrt7X4JyaeUTIzHkTitP5H5PqXv
+	WekM1o8eW5xEQerR/P2vzTcUGutNVguF6Lz+a9RtWYaFNbC36dI2sqYALffTRA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975986;
+	s=2020e; t=1637975962;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=/hUtpZoje77D8jXpCF4dVmu6dIuQVzxr12Tf8gEZrmw=;
-	b=8oE5dILfIppEOM4uSmv1UhhF+8V1aTl25VsmBDW8Y6mgtC2SCQ+c3AwBH+9jTQgu7f5Oe3
-	TgJGtWPMxxBhbTDQ==
+	 references:references; bh=SP+dKeNJM2hwdIJDgcQ1U3/N14UrjfZzM9fREkCbB+Y=;
+	b=5sUajdGIlpeb1zGGLIu5csmNb4vbxcFCRA+Hdk8g0Ih21FojANjb2tXsQW+3FPyaCaTYFy
+	eaJgtAh/jSMOCNDg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -83,129 +83,358 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Juergen Gross <jgross@suse.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 16/22] PCI/MSI: Split out CONFIG_PCI_MSI independent part
+Subject: [patch 01/22] powerpc/4xx: Remove MSI support which never worked
 References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:45 +0100 (CET)
-Message-ID: <20211127011945.aXvy772-gH7v9SHMvk26h0yhRyfYQ6HQgqSNkG2v1gs@z>
+Date: Sat, 27 Nov 2021 02:19:22 +0100 (CET)
+Message-ID: <20211127011922.MM9dRfu4_bCS57gkLw3DL7HhoMSqfixFsI1XcyEQW3M@z>
 
-These functions are required even when CONFIG_PCI_MSI is not set. Move them
-to their own file.
+This code is broken since day one. ppc4xx_setup_msi_irqs() has the
+following gems:
 
+ 1) The handling of the result of msi_bitmap_alloc_hwirqs() is completely
+    broken:
+    
+    When the result is greater than or equal 0 (bitmap allocation
+    successful) then the loop terminates and the function returns 0
+    (success) despite not having installed an interrupt.
+
+    When the result is less than 0 (bitmap allocation fails), it prints an
+    error message and continues to "work" with that error code which would
+    eventually end up in the MSI message data.
+
+ 2) On every invocation the file global pp4xx_msi::msi_virqs bitmap is
+    allocated thereby leaking the previous one.
+
+IOW, this has never worked and for more than 10 years nobody cared. Remove
+the gunk.
+
+Fixes: 3fb7933850fa ("powerpc/4xx: Adding PCIe MSI support")
+Fixes: 247540b03bfc ("powerpc/44x: Fix PCI MSI support for Maui APM821xx SoC and Bluestone board")
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Paul Mackerras <paulus@samba.org>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Cc: linuxppc-dev@lists.ozlabs.org
 ---
- drivers/pci/msi/Makefile     |    3 ++-
- drivers/pci/msi/msi.c        |   39 ---------------------------------------
- drivers/pci/msi/pcidev_msi.c |   43 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 45 insertions(+), 40 deletions(-)
+ arch/powerpc/platforms/4xx/Makefile |    1 
+ arch/powerpc/platforms/4xx/msi.c    |  281 ------------------------------------
+ arch/powerpc/sysdev/Kconfig         |    6 
+ 3 files changed, 288 deletions(-)
 
---- a/drivers/pci/msi/Makefile
-+++ b/drivers/pci/msi/Makefile
-@@ -1,4 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0
- #
- # Makefile for the PCI/MSI
--obj-$(CONFIG_PCI)		+= msi.o
-+obj-$(CONFIG_PCI)		+= pcidev_msi.o
-+obj-$(CONFIG_PCI_MSI)		+= msi.o
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -18,8 +18,6 @@
- 
- #include "../pci.h"
- 
--#ifdef CONFIG_PCI_MSI
+--- a/arch/powerpc/platforms/4xx/Makefile
++++ b/arch/powerpc/platforms/4xx/Makefile
+@@ -3,6 +3,5 @@ obj-y				+= uic.o machine_check.o
+ obj-$(CONFIG_4xx_SOC)		+= soc.o
+ obj-$(CONFIG_PCI)		+= pci.o
+ obj-$(CONFIG_PPC4xx_HSTA_MSI)	+= hsta_msi.o
+-obj-$(CONFIG_PPC4xx_MSI)	+= msi.o
+ obj-$(CONFIG_PPC4xx_CPM)	+= cpm.o
+ obj-$(CONFIG_PPC4xx_GPIO)	+= gpio.o
+--- a/arch/powerpc/platforms/4xx/msi.c
++++ /dev/null
+@@ -1,281 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-or-later
+-/*
+- * Adding PCI-E MSI support for PPC4XX SoCs.
+- *
+- * Copyright (c) 2010, Applied Micro Circuits Corporation
+- * Authors:	Tirumala R Marri <tmarri@apm.com>
+- *		Feng Kan <fkan@apm.com>
+- */
 -
- static int pci_msi_enable = 1;
- int pci_msi_ignore_mask;
- 
-@@ -1479,40 +1477,3 @@ bool pci_dev_has_special_msi_domain(stru
- }
- 
- #endif /* CONFIG_PCI_MSI_IRQ_DOMAIN */
--#endif /* CONFIG_PCI_MSI */
+-#include <linux/irq.h>
+-#include <linux/pci.h>
+-#include <linux/msi.h>
+-#include <linux/of_platform.h>
+-#include <linux/interrupt.h>
+-#include <linux/export.h>
+-#include <linux/kernel.h>
+-#include <asm/prom.h>
+-#include <asm/hw_irq.h>
+-#include <asm/ppc-pci.h>
+-#include <asm/dcr.h>
+-#include <asm/dcr-regs.h>
+-#include <asm/msi_bitmap.h>
 -
--void pci_msi_init(struct pci_dev *dev)
+-#define PEIH_TERMADH	0x00
+-#define PEIH_TERMADL	0x08
+-#define PEIH_MSIED	0x10
+-#define PEIH_MSIMK	0x18
+-#define PEIH_MSIASS	0x20
+-#define PEIH_FLUSH0	0x30
+-#define PEIH_FLUSH1	0x38
+-#define PEIH_CNTRST	0x48
+-
+-static int msi_irqs;
+-
+-struct ppc4xx_msi {
+-	u32 msi_addr_lo;
+-	u32 msi_addr_hi;
+-	void __iomem *msi_regs;
+-	int *msi_virqs;
+-	struct msi_bitmap bitmap;
+-	struct device_node *msi_dev;
+-};
+-
+-static struct ppc4xx_msi ppc4xx_msi;
+-
+-static int ppc4xx_msi_init_allocator(struct platform_device *dev,
+-		struct ppc4xx_msi *msi_data)
 -{
--	u16 ctrl;
+-	int err;
 -
--	/*
--	 * Disable the MSI hardware to avoid screaming interrupts
--	 * during boot.  This is the power on reset default so
--	 * usually this should be a noop.
--	 */
--	dev->msi_cap = pci_find_capability(dev, PCI_CAP_ID_MSI);
--	if (!dev->msi_cap)
--		return;
+-	err = msi_bitmap_alloc(&msi_data->bitmap, msi_irqs,
+-			      dev->dev.of_node);
+-	if (err)
+-		return err;
 -
--	pci_read_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS, &ctrl);
--	if (ctrl & PCI_MSI_FLAGS_ENABLE)
--		pci_write_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS,
--				      ctrl & ~PCI_MSI_FLAGS_ENABLE);
+-	err = msi_bitmap_reserve_dt_hwirqs(&msi_data->bitmap);
+-	if (err < 0) {
+-		msi_bitmap_free(&msi_data->bitmap);
+-		return err;
+-	}
 -
--	if (!(ctrl & PCI_MSI_FLAGS_64BIT))
--		dev->no_64bit_msi = 1;
+-	return 0;
 -}
 -
--void pci_msix_init(struct pci_dev *dev)
+-static int ppc4xx_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
 -{
--	u16 ctrl;
+-	int int_no = -ENOMEM;
+-	unsigned int virq;
+-	struct msi_msg msg;
+-	struct msi_desc *entry;
+-	struct ppc4xx_msi *msi_data = &ppc4xx_msi;
 -
--	dev->msix_cap = pci_find_capability(dev, PCI_CAP_ID_MSIX);
--	if (!dev->msix_cap)
--		return;
+-	dev_dbg(&dev->dev, "PCIE-MSI:%s called. vec %x type %d\n",
+-		__func__, nvec, type);
+-	if (type == PCI_CAP_ID_MSIX)
+-		pr_debug("ppc4xx msi: MSI-X untested, trying anyway.\n");
 -
--	pci_read_config_word(dev, dev->msix_cap + PCI_MSIX_FLAGS, &ctrl);
--	if (ctrl & PCI_MSIX_FLAGS_ENABLE)
--		pci_write_config_word(dev, dev->msix_cap + PCI_MSIX_FLAGS,
--				      ctrl & ~PCI_MSIX_FLAGS_ENABLE);
+-	msi_data->msi_virqs = kmalloc_array(msi_irqs, sizeof(int), GFP_KERNEL);
+-	if (!msi_data->msi_virqs)
+-		return -ENOMEM;
+-
+-	for_each_pci_msi_entry(entry, dev) {
+-		int_no = msi_bitmap_alloc_hwirqs(&msi_data->bitmap, 1);
+-		if (int_no >= 0)
+-			break;
+-		if (int_no < 0) {
+-			pr_debug("%s: fail allocating msi interrupt\n",
+-					__func__);
+-		}
+-		virq = irq_of_parse_and_map(msi_data->msi_dev, int_no);
+-		if (!virq) {
+-			dev_err(&dev->dev, "%s: fail mapping irq\n", __func__);
+-			msi_bitmap_free_hwirqs(&msi_data->bitmap, int_no, 1);
+-			return -ENOSPC;
+-		}
+-		dev_dbg(&dev->dev, "%s: virq = %d\n", __func__, virq);
+-
+-		/* Setup msi address space */
+-		msg.address_hi = msi_data->msi_addr_hi;
+-		msg.address_lo = msi_data->msi_addr_lo;
+-
+-		irq_set_msi_desc(virq, entry);
+-		msg.data = int_no;
+-		pci_write_msi_msg(virq, &msg);
+-	}
+-	return 0;
 -}
---- /dev/null
-+++ b/drivers/pci/msi/pcidev_msi.c
-@@ -0,0 +1,43 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * MSI[X} related functions which are available unconditionally.
-+ */
-+#include "../pci.h"
-+
-+/*
-+ * Disable the MSI[X] hardware to avoid screaming interrupts during boot.
-+ * This is the power on reset default so usually this should be a noop.
-+ */
-+
-+void pci_msi_init(struct pci_dev *dev)
-+{
-+	u16 ctrl;
-+
-+	dev->msi_cap = pci_find_capability(dev, PCI_CAP_ID_MSI);
-+	if (!dev->msi_cap)
-+		return;
-+
-+	pci_read_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS, &ctrl);
-+	if (ctrl & PCI_MSI_FLAGS_ENABLE) {
-+		pci_write_config_word(dev, dev->msi_cap + PCI_MSI_FLAGS,
-+				      ctrl & ~PCI_MSI_FLAGS_ENABLE);
-+	}
-+
-+	if (!(ctrl & PCI_MSI_FLAGS_64BIT))
-+		dev->no_64bit_msi = 1;
-+}
-+
-+void pci_msix_init(struct pci_dev *dev)
-+{
-+	u16 ctrl;
-+
-+	dev->msix_cap = pci_find_capability(dev, PCI_CAP_ID_MSIX);
-+	if (!dev->msix_cap)
-+		return;
-+
-+	pci_read_config_word(dev, dev->msix_cap + PCI_MSIX_FLAGS, &ctrl);
-+	if (ctrl & PCI_MSIX_FLAGS_ENABLE) {
-+		pci_write_config_word(dev, dev->msix_cap + PCI_MSIX_FLAGS,
-+				      ctrl & ~PCI_MSIX_FLAGS_ENABLE);
-+	}
-+}
+-
+-void ppc4xx_teardown_msi_irqs(struct pci_dev *dev)
+-{
+-	struct msi_desc *entry;
+-	struct ppc4xx_msi *msi_data = &ppc4xx_msi;
+-	irq_hw_number_t hwirq;
+-
+-	dev_dbg(&dev->dev, "PCIE-MSI: tearing down msi irqs\n");
+-
+-	for_each_pci_msi_entry(entry, dev) {
+-		if (!entry->irq)
+-			continue;
+-		hwirq = virq_to_hw(entry->irq);
+-		irq_set_msi_desc(entry->irq, NULL);
+-		irq_dispose_mapping(entry->irq);
+-		msi_bitmap_free_hwirqs(&msi_data->bitmap, hwirq, 1);
+-	}
+-}
+-
+-static int ppc4xx_setup_pcieh_hw(struct platform_device *dev,
+-				 struct resource res, struct ppc4xx_msi *msi)
+-{
+-	const u32 *msi_data;
+-	const u32 *msi_mask;
+-	const u32 *sdr_addr;
+-	dma_addr_t msi_phys;
+-	void *msi_virt;
+-	int err;
+-
+-	sdr_addr = of_get_property(dev->dev.of_node, "sdr-base", NULL);
+-	if (!sdr_addr)
+-		return -EINVAL;
+-
+-	msi_data = of_get_property(dev->dev.of_node, "msi-data", NULL);
+-	if (!msi_data)
+-		return -EINVAL;
+-
+-	msi_mask = of_get_property(dev->dev.of_node, "msi-mask", NULL);
+-	if (!msi_mask)
+-		return -EINVAL;
+-
+-	msi->msi_dev = of_find_node_by_name(NULL, "ppc4xx-msi");
+-	if (!msi->msi_dev)
+-		return -ENODEV;
+-
+-	msi->msi_regs = of_iomap(msi->msi_dev, 0);
+-	if (!msi->msi_regs) {
+-		dev_err(&dev->dev, "of_iomap failed\n");
+-		err = -ENOMEM;
+-		goto node_put;
+-	}
+-	dev_dbg(&dev->dev, "PCIE-MSI: msi register mapped 0x%x 0x%x\n",
+-		(u32) (msi->msi_regs + PEIH_TERMADH), (u32) (msi->msi_regs));
+-
+-	msi_virt = dma_alloc_coherent(&dev->dev, 64, &msi_phys, GFP_KERNEL);
+-	if (!msi_virt) {
+-		err = -ENOMEM;
+-		goto iounmap;
+-	}
+-	msi->msi_addr_hi = upper_32_bits(msi_phys);
+-	msi->msi_addr_lo = lower_32_bits(msi_phys & 0xffffffff);
+-	dev_dbg(&dev->dev, "PCIE-MSI: msi address high 0x%x, low 0x%x\n",
+-		msi->msi_addr_hi, msi->msi_addr_lo);
+-
+-	mtdcri(SDR0, *sdr_addr, upper_32_bits(res.start));	/*HIGH addr */
+-	mtdcri(SDR0, *sdr_addr + 1, lower_32_bits(res.start));	/* Low addr */
+-
+-	/* Progam the Interrupt handler Termination addr registers */
+-	out_be32(msi->msi_regs + PEIH_TERMADH, msi->msi_addr_hi);
+-	out_be32(msi->msi_regs + PEIH_TERMADL, msi->msi_addr_lo);
+-
+-	/* Program MSI Expected data and Mask bits */
+-	out_be32(msi->msi_regs + PEIH_MSIED, *msi_data);
+-	out_be32(msi->msi_regs + PEIH_MSIMK, *msi_mask);
+-
+-	dma_free_coherent(&dev->dev, 64, msi_virt, msi_phys);
+-
+-	return 0;
+-
+-iounmap:
+-	iounmap(msi->msi_regs);
+-node_put:
+-	of_node_put(msi->msi_dev);
+-	return err;
+-}
+-
+-static int ppc4xx_of_msi_remove(struct platform_device *dev)
+-{
+-	struct ppc4xx_msi *msi = dev->dev.platform_data;
+-	int i;
+-	int virq;
+-
+-	for (i = 0; i < msi_irqs; i++) {
+-		virq = msi->msi_virqs[i];
+-		if (virq)
+-			irq_dispose_mapping(virq);
+-	}
+-
+-	if (msi->bitmap.bitmap)
+-		msi_bitmap_free(&msi->bitmap);
+-	iounmap(msi->msi_regs);
+-	of_node_put(msi->msi_dev);
+-
+-	return 0;
+-}
+-
+-static int ppc4xx_msi_probe(struct platform_device *dev)
+-{
+-	struct ppc4xx_msi *msi;
+-	struct resource res;
+-	int err = 0;
+-	struct pci_controller *phb;
+-
+-	dev_dbg(&dev->dev, "PCIE-MSI: Setting up MSI support...\n");
+-
+-	msi = devm_kzalloc(&dev->dev, sizeof(*msi), GFP_KERNEL);
+-	if (!msi)
+-		return -ENOMEM;
+-	dev->dev.platform_data = msi;
+-
+-	/* Get MSI ranges */
+-	err = of_address_to_resource(dev->dev.of_node, 0, &res);
+-	if (err) {
+-		dev_err(&dev->dev, "%pOF resource error!\n", dev->dev.of_node);
+-		return err;
+-	}
+-
+-	msi_irqs = of_irq_count(dev->dev.of_node);
+-	if (!msi_irqs)
+-		return -ENODEV;
+-
+-	err = ppc4xx_setup_pcieh_hw(dev, res, msi);
+-	if (err)
+-		return err;
+-
+-	err = ppc4xx_msi_init_allocator(dev, msi);
+-	if (err) {
+-		dev_err(&dev->dev, "Error allocating MSI bitmap\n");
+-		goto error_out;
+-	}
+-	ppc4xx_msi = *msi;
+-
+-	list_for_each_entry(phb, &hose_list, list_node) {
+-		phb->controller_ops.setup_msi_irqs = ppc4xx_setup_msi_irqs;
+-		phb->controller_ops.teardown_msi_irqs = ppc4xx_teardown_msi_irqs;
+-	}
+-	return 0;
+-
+-error_out:
+-	ppc4xx_of_msi_remove(dev);
+-	return err;
+-}
+-static const struct of_device_id ppc4xx_msi_ids[] = {
+-	{
+-		.compatible = "amcc,ppc4xx-msi",
+-	},
+-	{}
+-};
+-static struct platform_driver ppc4xx_msi_driver = {
+-	.probe = ppc4xx_msi_probe,
+-	.remove = ppc4xx_of_msi_remove,
+-	.driver = {
+-		   .name = "ppc4xx-msi",
+-		   .of_match_table = ppc4xx_msi_ids,
+-		   },
+-
+-};
+-
+-static __init int ppc4xx_msi_init(void)
+-{
+-	return platform_driver_register(&ppc4xx_msi_driver);
+-}
+-
+-subsys_initcall(ppc4xx_msi_init);
+--- a/arch/powerpc/sysdev/Kconfig
++++ b/arch/powerpc/sysdev/Kconfig
+@@ -12,17 +12,11 @@ config PPC4xx_HSTA_MSI
+ 	depends on PCI_MSI
+ 	depends on PCI && 4xx
+ 
+-config PPC4xx_MSI
+-	bool
+-	depends on PCI_MSI
+-	depends on PCI && 4xx
+-
+ config PPC_MSI_BITMAP
+ 	bool
+ 	depends on PCI_MSI
+ 	default y if MPIC
+ 	default y if FSL_PCI
+-	default y if PPC4xx_MSI
+ 	default y if PPC_POWERNV
+ 
+ source "arch/powerpc/sysdev/xics/Kconfig"
 
 
