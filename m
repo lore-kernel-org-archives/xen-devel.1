@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F17A3C4332F
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:28:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233722.405874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66DFCC43219
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:28:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233726.405892 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmVQ-0007jf-3d; Sat, 27 Nov 2021 01:27:56 +0000
+	id 1mqmVT-0008UI-2N; Sat, 27 Nov 2021 01:27:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233722.405874; Sat, 27 Nov 2021 01:27:55 +0000
+Received: by outflank-mailman (output) from mailman id 233726.405892; Sat, 27 Nov 2021 01:27:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmVP-0007fy-J1; Sat, 27 Nov 2021 01:27:55 +0000
-Received: by outflank-mailman (input) for mailman id 233722;
- Sat, 27 Nov 2021 01:27:53 +0000
+	id 1mqmVS-0008SA-8r; Sat, 27 Nov 2021 01:27:58 +0000
+Received: by outflank-mailman (input) for mailman id 233726;
+ Sat, 27 Nov 2021 01:27:56 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmSY-0004gG-Ms
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:24:58 +0000
+ id 1mqmNB-0002cc-BI
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:25 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d5665c5b-4f20-11ec-b941-1df2895da90e;
- Sat, 27 Nov 2021 02:24:58 +0100 (CET)
+ id 0eae9d3a-4f20-11ec-b941-1df2895da90e;
+ Sat, 27 Nov 2021 02:19:24 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,27 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5665c5b-4f20-11ec-b941-1df2895da90e
-Message-ID: <20211126233124.618283684@linutronix.de>
+X-Inumbo-ID: 0eae9d3a-4f20-11ec-b941-1df2895da90e
+Message-ID: <20211126223824.204004845@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637976297;
+	s=2020; t=1637975964;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=db+bEd42/odCLFRuWnqbyMqKNP8CPK8Qgl6k8EnxiD4=;
-	b=1JlpTSX4Oy1wxfkRGfi3MFe15urC2p2+OrjfJgRh8RUL+84OSGSciJke659tDU3sGZWAPK
-	kl9oaW52ONLaQ3HdTC/tL2eZb0dBKAlCTOBLxqnsHzvTkHnb2zmWh2mf67D0QDpvGh+PDN
-	HYafcSl5dWtgEzn6jQ4MFoQ1CykTAYxLJzPL3dhreYF90toQe1lMo8dPAx8l/oXk/4Oe4R
-	kAsJxgjoMqD641Zs66b3plcM9681VXaFP2G4W9DXXHvZegFqWPMRjXsdkuu/B4mAqmGsHL
-	+nMcmL4XP8tl2H/u4Jfcrn2L2H6APZ9shAZy/iqsDKIBWqfUN22XWDpbzNMYFw==
+	 references:references; bh=yyhtvslqP4HLRieVFfAZFU9HV4/e0iOdDJgsQQb4EZc=;
+	b=2CGwSzv8GJU60xQIlfgVOaRi5g9Fn+D0hzWIX0d0pUqtFU4hdxgFID5ZAs4YMb4G+S5Wrv
+	avqCKVkAif5q5QbFxS7cEQhGnCY2S+6e28XQmeCnJRn2T0XoJ4u7U8UnVhTwn9fv4Dn0xB
+	SA+5dfMbSTbKf+A7DDFaxOGfTXkGGQ5SBh1bG9k//gWsSsiprWcstpFZ2e8h6B/VM2UFUJ
+	LdQV8C7hFqrZUfOS72q/yy+isOPS0nsKpb9++fl/GOil+WjZl8BRrzcF7WdwhFoz2N2PGF
+	3ivKoXc4RUormXF6RJNnnNMFOrPUmNhdaGzXzR1mfZQva9D/gVP49O9y4DcYJw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637976297;
+	s=2020e; t=1637975964;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=db+bEd42/odCLFRuWnqbyMqKNP8CPK8Qgl6k8EnxiD4=;
-	b=aqqfLHlqslFm90N1E+AAibzpkiPNtQQ0MsJBpzh2OzQqLTRDn821RvKr0rjBDdb4IhJ4XQ
-	RhGdp4ZZeW3Q1bBQ==
+	 references:references; bh=yyhtvslqP4HLRieVFfAZFU9HV4/e0iOdDJgsQQb4EZc=;
+	b=0XCFh3K4IrRNY6L0MyY+vUemfrvkZlIFY/qYHFr3mYxeMx0ngocRG4o0KW8jALmJLkbbXC
+	ZNYbsj1qUqXZJQCw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -68,58 +66,107 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jason Gunthorpe <jgg@nvidia.com>,
  Megha Dey <megha.dey@intel.com>,
  Ashok Raj <ashok.raj@intel.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Andrew Cooper <amc96@cam.ac.uk>,
- Juergen Gross <jgross@suse.com>,
  linux-pci@vger.kernel.org,
- xen-devel@lists.xenproject.org
-Subject: [patch 00/10] genirq/msi, PCI/MSI: Support for dynamic MSI-X vector
- expansion - Part 4
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Paul Mackerras <paulus@samba.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ linuxppc-dev@lists.ozlabs.org,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-mips@vger.kernel.org,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ sparclinux@vger.kernel.org,
+ x86@kernel.org,
+ xen-devel@lists.xenproject.org,
+ ath11k@lists.infradead.org,
+ Wei Liu <wei.liu@kernel.org>,
+ linux-hyperv@vger.kernel.org,
+ Juergen Gross <jgross@suse.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Heiko Carstens <hca@linux.ibm.com>
+Subject: [patch 02/22] PCI/MSI: Fix pci_irq_vector()/pci_irq_get_attinity()
+References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Date: Sat, 27 Nov 2021 02:24:57 +0100 (CET)
-Message-ID: <20211127012457.r6xYh-TuqB2phIkYdJAhJeWPz0HzlPOQNBl_UKa9LqY@z>
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 27 Nov 2021 02:19:23 +0100 (CET)
+Message-ID: <20211127011923.bBhaxlw0omtwpo7jofenNTEJClmXPplwHoFmjvHSwzA@z>
 
-VGhpcyBpcyBmaW5hbGx5IHRoZSBwb2ludCB3aGVyZSBkeW5hbWljYWxseSBleHBhbmRpbmcgTVNJ
-LVggdmVjdG9ycyBhZnRlcgplbmFibGluZyBNU0ktWCBpcyBpbXBsZW1lbnRlZC4KClRoZSBmaXJz
-dCB0aHJlZSBwYXJ0cyBvZiB0aGlzIHdvcmsgY2FuIGJlIGZvdW5kIGhlcmU6CgogICAgaHR0cHM6
-Ly9sb3JlLmtlcm5lbC5vcmcvci8yMDIxMTEyNjIyMjcwMC44NjI0MDc5NzdAbGludXRyb25peC5k
-ZQogICAgaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvci8yMDIxMTEyNjIyNDEwMC4zMDMwNDY3NDlA
-bGludXRyb25peC5kZQogICAgaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvci8yMDIxMTEyNjIzMDk1
-Ny4yMzkzOTE3OTlAbGludXRyb25peC5kZQoKVGhpcyBsYXN0IGFuZCBzbWFsbGVzdCBwYXJ0IG9m
-IHRoZSBvdmVyYWxsIHNlcmllcyBjb250YWlucyB0aGUgZm9sbG93aW5nCmNoYW5nZXM6CgogICAx
-KSBQcmVwYXJlIHRoZSBjb3JlIE1TSSBpcnEgZG9tYWluIGNvZGUgdG8gaGFuZGxlIHJhbmdlIGJh
-c2VkIGFsbG9jYXRpb24KICAgICAgYW5kIGZyZWUKCiAgIDIpIFByZXBhcmUgdGhlIFBDSS9NU0kg
-Y29kZSB0byBoYW5kbGUgcmFuZ2UgYmFzZWQgYWxsb2NhdGlvbiBhbmQgZnJlZQogIAogICAzKSBJ
-bXBsZW1lbnQgYSBuZXcgaW50ZXJmYWNlIHdoaWNoIGFsbG93cyB0byBleHBhbmQgdGhlIE1TSS1Y
-IHZlY3RvcgogICAgICBzcGFjZSBhZnRlciBpbml0aWFsaXphdGlvbgoKICAgNCkgRW5hYmxlIHN1
-cHBvcnQgZm9yIHRoZSBYODYgUENJL01TSSBpcnEgZG9tYWlucwoKICAgICAgVGhpcyBpcyB1bmZv
-cnR1bmF0ZSwgYnV0IHNvbWUgUENJL01TSSBpcnEgZG9tYWluIGltcGxlbWVudGF0aW9ucywKICAg
-ICAgZS5nLiBwb3dlcnBjIGFuZCB0aGUgeDg2L1hFTiBpcnFkb21haW4gd3JhcHBlcnMgYXJlIG5v
-dCByZWFsbHkgcmVhZHkKICAgICAgdG8gc3VwcG9ydCB0aGlzIG91dCBvZiB0aGUgYm94LgoKICAg
-ICAgSSBsb29rZWQgYXQgdGhlIDMwIHBsYWNlcyB3aGljaCBpbXBsZW1lbnQgUENJL01TSSBpcnEg
-ZG9tYWlucyBhbmQKICAgICAgbWFueSBvZiB0aGVtIGxvb2sgbGlrZSB0aGV5IGNvdWxkIHN1cHBv
-cnQgaXQgb3V0IG9mIHRoZSBib3gsIGJ1dCBhcwogICAgICB3ZSBoYXZlIHR3byB3aGljaCBkZWZp
-bml0ZWx5IGRvbid0LCBtYWtpbmcgdGhpcyBvcHQtaW4gaXMgdGhlIG9ubHkKICAgICAgc2FmZSBv
-cHRpb24uCgpJJ3ZlIHRlc3RlZCB0aGlzIGJ5IGhhY2tpbmcgdXAgdGhlIFhIQ0kgZHJpdmVyIGFu
-ZCBpdCB3b3JrcyBsaWtlIGEgY2hhcm0uCgpUaGVyZSBpcyBjZXJ0YWlubHkgc29tZSBtb3JlIHJv
-b20gZm9yIGNvbnNvbGlkYXRpbmcgdGhlIFBDSS9NU0ktWCB1c2FnZSBpbgpkcml2ZXJzLCBpLmUu
-IGdldHRpbmcgcmlkIG9mIHBjaV9lbmFibGVfbXNpeCooKSwgYnV0IHRoaXMgd291bGQgaGF2ZSBt
-YWRlCnRoaXMgc2VyaWVzIGV2ZW4gbGFyZ2VyIGFuZCBpcyBhbiBvcnRob2dvbmFsIGlzc3VlLgoK
-VGhlIHNlcmllcyBpcyBiYXNlZCBvbjoKCiAgICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3Nj
-bS9saW51eC9rZXJuZWwvZ2l0L3RnbHgvZGV2ZWwuZ2l0IG1zaS12MS1wYXJ0LTMKCmFuZCBhbHNv
-IGF2YWlsYWJsZSBmcm9tIGdpdDoKCiAgICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9s
-aW51eC9rZXJuZWwvZ2l0L3RnbHgvZGV2ZWwuZ2l0IG1zaS12MS1wYXJ0LTQKClRoYW5rcywKCgl0
-Z2x4Ci0tLQogYXJjaC9wb3dlcnBjL3BsYXRmb3Jtcy9wc2VyaWVzL21zaS5jIHwgICAgNiArLQog
-YXJjaC94ODYva2VybmVsL2FwaWMvbXNpLmMgICAgICAgICAgIHwgICAgNCAtCiBhcmNoL3g4Ni9w
-Y2kveGVuLmMgICAgICAgICAgICAgICAgICAgfCAgIDEwICstLQogZHJpdmVycy9iYXNlL3BsYXRm
-b3JtLW1zaS5jICAgICAgICAgIHwgICAgMyAtCiBkcml2ZXJzL3BjaS9tc2kvaXJxZG9tYWluLmMg
-ICAgICAgICAgfCAgIDM5ICsrKysrKysrKystLS0tCiBkcml2ZXJzL3BjaS9tc2kvbXNpLmMgICAg
-ICAgICAgICAgICAgfCAgIDk3ICsrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tCiBk
-cml2ZXJzL3BjaS9tc2kvbXNpLmggICAgICAgICAgICAgICAgfCAgICA0IC0KIGluY2x1ZGUvbGlu
-dXgvbXNpLmggICAgICAgICAgICAgICAgICB8ICAgNDYgKysrKysrKysrKystLS0tLQogaW5jbHVk
-ZS9saW51eC9wY2kuaCAgICAgICAgICAgICAgICAgIHwgICAxMyArKysrCiBrZXJuZWwvaXJxL21z
-aS5jICAgICAgICAgICAgICAgICAgICAgfCAgIDc1ICsrKysrKysrKysrKysrKy0tLS0tLS0tLS0t
-LQogMTAgZmlsZXMgY2hhbmdlZCwgMjA4IGluc2VydGlvbnMoKyksIDg5IGRlbGV0aW9ucygtKQo=
+pci_irq_vector() and pci_irq_get_affinity() use the list position to find the
+MSI-X descriptor at a given index. That's correct for the normal case where
+the entry number is the same as the list position.
+
+But it's wrong for cases where MSI-X was allocated with an entries array
+describing sparse entry numbers into the hardware message descriptor
+table. That's inconsistent at best.
+
+Make it always check the entry number because that's what the zero base
+index really means. This change won't break existing users which use a
+sparse entries array for allocation because these users retrieve the Linux
+interrupt number from the entries array after allocation and none of them
+uses pci_irq_vector() or pci_irq_get_affinity().
+
+Fixes: aff171641d18 ("PCI: Provide sensible IRQ vector alloc/free routines")
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+---
+ drivers/pci/msi.c |   26 ++++++++++++++++++--------
+ 1 file changed, 18 insertions(+), 8 deletions(-)
+
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1187,19 +1187,24 @@ EXPORT_SYMBOL(pci_free_irq_vectors);
+ 
+ /**
+  * pci_irq_vector - return Linux IRQ number of a device vector
+- * @dev: PCI device to operate on
+- * @nr: device-relative interrupt vector index (0-based).
++ * @dev:	PCI device to operate on
++ * @nr:		Interrupt vector index (0-based)
++ *
++ * @nr has the following meanings depending on the interrupt mode:
++ *   MSI-X:	The index in the MSI-X vector table
++ *   MSI:	The index of the enabled MSI vectors
++ *   INTx:	Must be 0
++ *
++ * Return: The Linux interrupt number or -EINVAl if @nr is out of range.
+  */
+ int pci_irq_vector(struct pci_dev *dev, unsigned int nr)
+ {
+ 	if (dev->msix_enabled) {
+ 		struct msi_desc *entry;
+-		int i = 0;
+ 
+ 		for_each_pci_msi_entry(entry, dev) {
+-			if (i == nr)
++			if (entry->msi_attrib.entry_nr == nr)
+ 				return entry->irq;
+-			i++;
+ 		}
+ 		WARN_ON_ONCE(1);
+ 		return -EINVAL;
+@@ -1223,17 +1228,22 @@ EXPORT_SYMBOL(pci_irq_vector);
+  * pci_irq_get_affinity - return the affinity of a particular MSI vector
+  * @dev:	PCI device to operate on
+  * @nr:		device-relative interrupt vector index (0-based).
++ *
++ * @nr has the following meanings depending on the interrupt mode:
++ *   MSI-X:	The index in the MSI-X vector table
++ *   MSI:	The index of the enabled MSI vectors
++ *   INTx:	Must be 0
++ *
++ * Return: A cpumask pointer or NULL if @nr is out of range
+  */
+ const struct cpumask *pci_irq_get_affinity(struct pci_dev *dev, int nr)
+ {
+ 	if (dev->msix_enabled) {
+ 		struct msi_desc *entry;
+-		int i = 0;
+ 
+ 		for_each_pci_msi_entry(entry, dev) {
+-			if (i == nr)
++			if (entry->msi_attrib.entry_nr == nr)
+ 				return &entry->affinity->mask;
+-			i++;
+ 		}
+ 		WARN_ON_ONCE(1);
+ 		return NULL;
+
 
