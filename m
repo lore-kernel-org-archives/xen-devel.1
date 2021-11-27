@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61764C4332F
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233652.405658 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AD81C433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233655.405665 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUd-0004gS-DO; Sat, 27 Nov 2021 01:27:07 +0000
+	id 1mqmUe-0004sI-Fx; Sat, 27 Nov 2021 01:27:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233652.405658; Sat, 27 Nov 2021 01:27:07 +0000
+Received: by outflank-mailman (output) from mailman id 233655.405665; Sat, 27 Nov 2021 01:27:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUd-0004fD-3Z; Sat, 27 Nov 2021 01:27:07 +0000
-Received: by outflank-mailman (input) for mailman id 233652;
- Sat, 27 Nov 2021 01:27:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqmUd-0004oW-RF; Sat, 27 Nov 2021 01:27:07 +0000
+Received: by outflank-mailman (input) for mailman id 233655;
+ Sat, 27 Nov 2021 01:27:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmSm-0003uw-8J
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:25:12 +0000
+ id 1mqmNL-0002cc-2a
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:35 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id da2e3de3-4f20-11ec-9787-a32c541c8605;
- Sat, 27 Nov 2021 02:25:06 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1445290e-4f20-11ec-b941-1df2895da90e;
+ Sat, 27 Nov 2021 02:19:34 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: da2e3de3-4f20-11ec-9787-a32c541c8605
-Message-ID: <20211127000918.779751933@linutronix.de>
+X-Inumbo-ID: 1445290e-4f20-11ec-b941-1df2895da90e
+Message-ID: <20211126223824.558746009@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637976305;
+	s=2020; t=1637975973;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=CFmm+AWRwXcJQSLL7VY9/FlDxYE98PyZd7GrvqHxiD8=;
-	b=jPDSHQYSdxJlKUo1m9F9w8gw8R2TMDWPPxDRazvUWAKO2OAqttDQmAKiiB0cHxtncw0LoP
-	I0nGS3ipmEFxCJjXQCspGZYqDLzYgAoHAzN8IALfV/R/UU8HnLONKw15r9QLBWIOy2tuBo
-	v9UWh+uBu1gxtuVFZyC/oeYLLr7fsy2iBobG7WdjyJrjG53L08Qf0qS3j4Lea61UvUlvc7
-	FlpqePyPni277I+e5Ve/tq90mOGCGQlu+ToYDaGLhxtuIL86QQHHHN2/nYRSDe2FLpzekY
-	c4FjwvUSwWt/aSE1XxP6zVLeTmHWkEXcbwea6utFdTTv8Pecmzc4qo2LW6T26Q==
+	 references:references; bh=t8fdQf5v0Re3s6aU2w+RDhHEUcAYg2OEvsShj+q+pN4=;
+	b=k3LK6nDtbjd4YGl8vOmrIZ02BVXh9ZMWUHEM7ttmKyvlCHnca06fC+l+4jF5F+hBFDP8GJ
+	DeFLPG5Xm8Bc4Hhc7h+t7TuaBGGeCCNzAQY1fycjhbU3S1JJSNFBZ/B+hMI9UeXnGhlu5e
+	s9r9oMIkbB8PwKngQi9dz5DWNT9SzXlJnBGen0GkHcDk9mxX6//4DR69MfrvwLonMK2RyY
+	Ri1QyvHxQPYj4iggM4CCqYBaXNV5935b9NWGlpqQNUWOFSmYwugOsdnBaNR8HB68mMOGgp
+	Q1CNhqjsN5RzNJqIYolTS3TdSOTjQbch31LUaXLFkpINATuH8IwjIXPeqJuyTg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637976305;
+	s=2020e; t=1637975973;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=CFmm+AWRwXcJQSLL7VY9/FlDxYE98PyZd7GrvqHxiD8=;
-	b=YpvVGHpsYjY8WLBK+/d3v25qrNDG94vLX8P5K9v/o3GbLxhwTttsJXuyACy8VlvKBn+N9c
-	5C2HM/JCLaf7F2Cw==
+	 references:references; bh=t8fdQf5v0Re3s6aU2w+RDhHEUcAYg2OEvsShj+q+pN4=;
+	b=x0q81IPAGM3E7Z9Q/NsuMzv2IhRo7nqzgjSuf3p2DFzivVtMHfHdpjxs9cJDYLObc3Ebzg
+	CVyOdwAICSw7CIAQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -66,36 +66,52 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jason Gunthorpe <jgg@nvidia.com>,
  Megha Dey <megha.dey@intel.com>,
  Ashok Raj <ashok.raj@intel.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Andrew Cooper <amc96@cam.ac.uk>,
- Juergen Gross <jgross@suse.com>,
  linux-pci@vger.kernel.org,
- xen-devel@lists.xenproject.org
-Subject: [patch 05/10] genirq/msi: Add domain info flag MSI_FLAG_CAN_EXPAND
-References: <20211126233124.618283684@linutronix.de>
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Paul Mackerras <paulus@samba.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ linuxppc-dev@lists.ozlabs.org,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ linux-mips@vger.kernel.org,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ sparclinux@vger.kernel.org,
+ x86@kernel.org,
+ xen-devel@lists.xenproject.org,
+ ath11k@lists.infradead.org,
+ Wei Liu <wei.liu@kernel.org>,
+ linux-hyperv@vger.kernel.org,
+ Juergen Gross <jgross@suse.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Heiko Carstens <hca@linux.ibm.com>
+Subject: [patch 08/22] PCI/sysfs: Use pci_irq_vector()
+References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:25:05 +0100 (CET)
-Message-ID: <20211127012505.D8bttXM4Os-TSBreBKr1ggCUFfNmTutGSK8BPR1AJ6o@z>
+Date: Sat, 27 Nov 2021 02:19:33 +0100 (CET)
+Message-ID: <20211127011933.g4UrBunj6AH6ULK6nFQ03ZkDoNzdmKWxzh6DszOZbOc@z>
 
-Not all MSI domains support runtime expansions of PCI/MSI-X vectors. Add a
-domain flag so implementations can opt in.
+instead of fiddling with msi descriptors.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- include/linux/msi.h |    2 ++
- 1 file changed, 2 insertions(+)
+ drivers/pci/pci-sysfs.c |    7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -494,6 +494,8 @@ enum {
- 	MSI_FLAG_ALLOC_SIMPLE_MSI_DESCS	= (1 << 9),
- 	/* Free MSI descriptors */
- 	MSI_FLAG_FREE_MSI_DESCS		= (1 << 10),
-+	/* MSI vectors can be expanded after initial setup */
-+	MSI_FLAG_CAN_EXPAND		= (1 << 11),
- };
+--- a/drivers/pci/pci-sysfs.c
++++ b/drivers/pci/pci-sysfs.c
+@@ -62,11 +62,8 @@ static ssize_t irq_show(struct device *d
+ 	 * For MSI, show the first MSI IRQ; for all other cases including
+ 	 * MSI-X, show the legacy INTx IRQ.
+ 	 */
+-	if (pdev->msi_enabled) {
+-		struct msi_desc *desc = first_pci_msi_entry(pdev);
+-
+-		return sysfs_emit(buf, "%u\n", desc->irq);
+-	}
++	if (pdev->msi_enabled)
++		return sysfs_emit(buf, "%u\n", pci_irq_vector(pdev, 0));
+ #endif
  
- int msi_domain_set_affinity(struct irq_data *data, const struct cpumask *mask,
+ 	return sysfs_emit(buf, "%u\n", pdev->irq);
 
 
