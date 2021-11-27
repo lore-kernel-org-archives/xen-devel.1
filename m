@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFAA9C4167B
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 17:52:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234023.406230 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 876BAC433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 18:07:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.234078.406292 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mr1rk-0005Np-Te; Sat, 27 Nov 2021 17:52:00 +0000
+	id 1mr26S-0003bP-Fp; Sat, 27 Nov 2021 18:07:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234023.406230; Sat, 27 Nov 2021 17:52:00 +0000
+Received: by outflank-mailman (output) from mailman id 234078.406292; Sat, 27 Nov 2021 18:07:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mr1rk-0005L7-G9; Sat, 27 Nov 2021 17:52:00 +0000
-Received: by outflank-mailman (input) for mailman id 234023;
- Sat, 27 Nov 2021 17:51:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BaOL=QO=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mr1ri-0004Ih-I1
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 17:51:58 +0000
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [2a00:1450:4864:20::135])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b70fe854-4faa-11ec-976b-d102b41d0961;
- Sat, 27 Nov 2021 18:51:57 +0100 (CET)
-Received: by mail-lf1-x135.google.com with SMTP id u3so32562717lfl.2
- for <xen-devel@lists.xenproject.org>; Sat, 27 Nov 2021 09:51:57 -0800 (PST)
-Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id f18sm827075ljc.104.2021.11.27.09.51.56
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 27 Nov 2021 09:51:56 -0800 (PST)
+	id 1mr26S-0003bI-Cr; Sat, 27 Nov 2021 18:07:12 +0000
+Received: by outflank-mailman (input) for mailman id 234078;
+ Sat, 27 Nov 2021 18:07:11 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mr26R-0003b8-8P; Sat, 27 Nov 2021 18:07:11 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mr26Q-0000bB-RI; Sat, 27 Nov 2021 18:07:10 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mr26Q-0007Ac-FS; Sat, 27 Nov 2021 18:07:10 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mr26Q-0005w2-Ek; Sat, 27 Nov 2021 18:07:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,307 +44,358 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b70fe854-4faa-11ec-976b-d102b41d0961
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=6dW0OZmNRebStbQFMM32RwjBwDJFFmt3LTZQMfVizWw=;
-        b=jh3p8yv6Z9HWUYrl8v0MV5RoXvgJriZ2SQ2qUyEfV8MJudGYyjYZBc0LdjhjSL1KaZ
-         o51oKlE9EwthkSnIoTFUL0o93rFZCfUMART9dX3OVg02SjdVZIpOpot0LHUlVPl4K5Sp
-         TdeKGLW2ad186m7TUrnHpRR4ECAThtY9iQqR7NRQIVCvSxgr1LFTpnatN9njbwLY+L9z
-         11o31+2JvQxupWl8nRXzJjz2YIA+AE9sqCO0riZx10KMtG/O9Z0dStqNiHReyQo+gTRI
-         /O4i+Y2d4khjyg+2jOM05RDiai99QIaHpaKH1K0uTLd6LkVh30LR/GNW2JrJSjPO/T+W
-         F0Sg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6dW0OZmNRebStbQFMM32RwjBwDJFFmt3LTZQMfVizWw=;
-        b=fza3qQHP9TeWsxHCy6kvCfCTnkBx+x3uHsMSrPcCdL67xQUPJbr414e0cGlrbys2SV
-         nLIJVqUPX3/4jBEOeLwMktcw1L96tAgcM8bEzZT/tnqpw3BYL/BdFx5VaWt4fjraOIS9
-         i7WerYdCwDwV2qlIhdWW2U1RI2YkDO49UcBf3BZSPy+gHMzHn0yzVHdeovqyHbY4jmTd
-         ijL4ESESrSY+mpB1RRiwK0qJM9oSxnn5T350ZceFd2ZKehWIAIHPI2q+F0ph6b2bzHBC
-         2Vbf0OVk1cDWUCCGPXh0cnxR3vuY8yb5L4g8+yRv/9B/0dCMG2xKmAEUHdaMXov8saXd
-         vbFQ==
-X-Gm-Message-State: AOAM5309c2/PdOju1A701HHCfzyIlm4R/PffDnJTdTVaxCGw9wEPlgIO
-	xZT7QaFBJP7BLdL+gmaniXHvE/YSLXM=
-X-Google-Smtp-Source: ABdhPJw/TZIsXkeZbL/imr/4eb3AnmQ0TJreSbrco2NPGdcPdHSUB5wq92oMDcimEGE0Ps3+nKgwaQ==
-X-Received: by 2002:ac2:4c0b:: with SMTP id t11mr37847197lfq.520.1638035517101;
-        Sat, 27 Nov 2021 09:51:57 -0800 (PST)
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH 07/10] iommu/ipmmu-vmsa: Add Renesas R8A779F0 (R-Car S4) support
-Date: Sat, 27 Nov 2021 19:51:42 +0200
-Message-Id: <1638035505-16931-8-git-send-email-olekstysh@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1638035505-16931-1-git-send-email-olekstysh@gmail.com>
-References: <1638035505-16931-1-git-send-email-olekstysh@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=RjJvhmfxLaDCXxv6UAJAhfX2Tl2N4jHmTEW5h9tORK8=; b=kBftsEmLSxexTnBSKTnt8p9aqc
+	FYTpKQVuNiIMLpcrQgJ9R62uAeqqXhI3tj3qXvPVLfnpqc1k9RtuvCOaQZQalTWxhkvpq9FA+p+0z
+	tUgkxS7CcUDnF/jW2ZoGxEYxxWUGlXCchBcoykhM4rK5YrBY7s5GeDyLrXwoqc3It9Wk=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-166922-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 166922: tolerable FAIL - PUSHED
+X-Osstest-Failures:
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+    linux-linus:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=1bff7d7e8c487b9b0ceab70b43b781f1d45f55eb
+X-Osstest-Versions-That:
+    linux=5f53fa508db098c9d372423a6dac31c8a5679cdf
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Sat, 27 Nov 2021 18:07:10 +0000
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+flight 166922 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/166922/
 
-Based on the following commit from the Renesas BSP:
-7003b9f732cffdc778fceb4bffb05ebb4540f726
-located at:
-https://github.com/renesas-rcar/linux-bsp/tree/v5.10.41/rcar-5.1.3.rc5
+Failures :-/ but no regressions.
 
-Original commit message:
- commit 7003b9f732cffdc778fceb4bffb05ebb4540f726
- Author: Nam Nguyen <nam.nguyen.yh@renesas.com>
- Date:   Thu Feb 4 11:05:37 2021 +0700
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 166380
+ test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 166380
+ test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 166380
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 166380
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 166380
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 166380
+ test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 166380
+ test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 166380
+ test-arm64-arm64-xl-seattle  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-seattle  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
+ test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
+ test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
+ test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
+ test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
+ test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
+ test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
+ test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+ test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
 
-  iommu/ipmmu-vmsa: Add Renesas R8A779F0 (R-Car S4) support
+version targeted for testing:
+ linux                1bff7d7e8c487b9b0ceab70b43b781f1d45f55eb
+baseline version:
+ linux                5f53fa508db098c9d372423a6dac31c8a5679cdf
 
-  Adding IPMMU support for Renesas R8A779F0 R-Car S4.
+Last test of basis   166380  2021-11-25 06:37:51 Z    2 days
+Testing same since   166922  2021-11-26 19:30:09 Z    0 days    1 attempts
 
-  Suggested by: Hai Pham <hai.pham.ud@renesas.com>
-  Signed-off-by: Nam Nguyen <nam.nguyen.yh@renesas.com>
+------------------------------------------------------------
+People who touched revisions under test:
+  Abel Vesa <abel.vesa@nxp.com>
+  Adrian Hunter <adrian.hunter@intel.com>
+  Albert Wang <albertccwang@google.com>
+  Alex Deucher <alexander.deucher@amd.com>
+  André Almeida <andrealmeid@collabora.com>
+  Arnd Bergmann <arnd@arndb.de>
+  Ben Skeggs <bskeggs@redhat.com>
+  Bokun Zhang <bokun.zhang@amd.com>
+  Boris Ostrovsky <boris.ostrovsky@oracle.com>
+  Chanho Park <chanho61.park@samsung.com>
+  Christian Brauner <christian.brauner@ubuntu.com>
+  Christian König <christian.koenig@amd.com>
+  Christian Lamparter <chunkeey@gmail.com>
+  Christoph Hellwig <hch@lst.de>
+  Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+  Cristian Marussi <cristian.marussi@arm.com>
+  Dan Carpenter <dan.carpenter@oracle.com>
+  Daniel Wheeler <daniel.wheeler@amd.com>
+  Daniele Ceraolo Spurio <daniele.ceraolospurio@intel.com>
+  Daniele Palmas <dnlplm@gmail.com>
+  Dave Airlie <airlied@redhat.com>
+  Deepak Rawat <drawat.floss@gmail.com>
+  Dinh Nguyen <dinguyen@kernel.org>
+  Dmitry Osipenko <digetx@gmail.com>
+  Enzo Matsumiya <ematsumiya@suse.de>
+  Evan Quan <evan.quan@amd.com>
+  Fabio Aiuto <fabioaiuto83@gmail.com>
+  Fabio M. De Francesco <fmdefrancesco@gmail.com>
+  Felix Kuehling <Felix.Kuehling@amd.com>
+  Florian Fainelli <f.fainelli@gmail.com>
+  Geert Uytterhoeven <geert@linux-m68k.org>
+  Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+  Hans de Goede <hdegoede@redhat.com>
+  Hector Martin <marcan@marcan.st>
+  Heikki Krogerus <heikki.krogerus@linux.intel.com>
+  Jarkko Nikula <jarkko.nikula@linux.intel.com>
+  Jean Delvare <jdelvare@suse.de>
+  Jens Axboe <axboe@kernel.dk>
+  Jens Wiklander <jens.wiklander@linaro.org>
+  Jie Deng <jie.deng@intel.com>
+  Joel Stanley <joel@jms.id.au>
+  Johan Hovold <johan@kernel.org>
+  Jon Hunter <jonathanh@nvidia.com>
+  Juergen Gross <jgross@suse.com>
+  Kamal Mostafa <kamal@canonical.com>
+  Karol Herbst <kherbst@redhat.com>
+  Klaus Jensen <k.jensen@samsung.com>
+  Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>
+  Larry Finger <Larry.Finger@lwfinger.net>
+  Lijo Lazar <lijo.lazar@amd.com>
+  Linus Torvalds <torvalds@linux-foundation.org>
+  Luben Tuikov <luben.tuikov@amd.com>
+  Lv Ruyi <lv.ruyi@zte.com.cn>
+  Marek Szyprowski <m.szyprowski@samsung.com>
+  Mark Rutland <mark.rutland@arm.com>
+  Mathias Nyman <mathias.nyman@linux.intel.com>
+  Matthew Wilcox (Oracle) <willy@infradead.org>
+  Maurizio Lombardi <mlombard@redhat.com>
+  Max Filippov <jcmvbkbc@gmail.com>
+  Maxime Ripard <maxime@cerno.tech>
+  Michael Ellerman <mpe@ellerman.id.au> (powerpc)
+  Michael Kelley <mikelley@microsoft.com>
+  Michael S. Tsirkin <mst@redhat.com>
+  Michael Straube <straube.linux@gmail.com>
+  Minas Harutyunyan <Minas.Harutyunyan@synopsys.com>
+  Ming Lei <ming.lei@redhat.com>
+  Mingjie Zhang <superzmj@fibocom.com>
+  Miquel Raynal <miquel.raynal@bootlin.com>
+  Mohammed Gamal <mgamal@redhat.com>
+  Nathan Chancellor <nathan@kernel.org>
+  Nicholas Kazlauskas <nicholas.kazlauskas@amd.com>
+  Nicolas Chauvet <kwizart@gmail.com> # T124 TK1
+  Nishanth Menon <nm@ti.com>
+  Noralf Trønnes <noralf@tronnes.org>
+  Ondrej Jirman <megous@megous.com>
+  Oskar Senft <osk@google.com>
+  Pavel Begunkov <asml.silence@gmail.com>
+  Peng Fan <peng.fan@nxp.com>
+  Philip Yang <Philip.Yang@amd.com>
+  Pingfan Liu <kernelfans@gmail.com>
+  Qingqing Zhuo <qingqing.zhuo@amd.com>
+  Rob Herring <robh@kernel.org>
+  Rodrigo Vivi <rodrigo.vivi@intel.com>
+  Sam Ravnborg <sam@ravnborg.org>
+  Santosh Shilimkar <ssantosh@kernel.org>
+  shaoyunl <shaoyun.liu@amd.com>
+  Shyam Prasad N <sprasad@microsoft.com>
+  Stefano Stabellini <stefano.stabellini@xilinx.com>
+  Steve French <stfrench@microsoft.com>
+  Sudeep Holla <sudeep.holla@arm.com>
+  Sugaya Taichi <sugaya.taichi@socionext.com>
+  Takashi Iwai <tiwai@suse.de>
+  Tejas Upadhyay <tejaskumarx.surendrakumar.upadhyay@intel.com>
+  Thierry Reding <treding@nvidia.com>
+  Thierry Reding <treding@nvidia.com> # Tegra CI
+  Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+  Thomas Graichen <thomas.graichen@gmail.com> # T124 Nyan Big
+  Tim Harvey <tharvey@gateworks.com>
+  Todd Kjos <tkjos@google.com>
+  Ulf Hansson <ulf.hansson@linaro.org>
+  Varun Prakash <varun@chelsio.com>
+  Vincent Guittot <vincent.guittot@linaro.org>
+  Vincent Whitchurch <vincent.whitchurch@axis.com>
+  Will Deacon <will@kernel.org>
+  Wolfram Sang <wsa@kernel.org>
+  xinhui pan <xinhui.pan@amd.com>
+  Yang Guang <yang.guang5@zte.com.cn>
+  Yang Wang <KevinYang.Wang@amd.com>
+  Yi-Ling Chen <Yi-Ling.Chen2@amd.com>
+  Yong Wu <yong.wu@mediatek.com>
 
-**********
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          pass    
+ test-amd64-coresched-amd64-xl                                pass    
+ test-arm64-arm64-xl                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        pass    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
+ test-amd64-amd64-libvirt-xsm                                 pass    
+ test-arm64-arm64-libvirt-xsm                                 pass    
+ test-amd64-amd64-xl-xsm                                      pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                pass    
+ test-amd64-amd64-dom0pvh-xl-amd                              pass    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-freebsd11-amd64                             pass    
+ test-amd64-amd64-freebsd12-amd64                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  pass    
+ test-amd64-amd64-xl-credit1                                  pass    
+ test-arm64-arm64-xl-credit1                                  pass    
+ test-armhf-armhf-xl-credit1                                  pass    
+ test-amd64-amd64-xl-credit2                                  pass    
+ test-arm64-arm64-xl-credit2                                  pass    
+ test-armhf-armhf-xl-credit2                                  pass    
+ test-armhf-armhf-xl-cubietruck                               pass    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-amd64-qemuu-nested-intel                          pass    
+ test-amd64-amd64-xl-pvhv2-intel                              pass    
+ test-amd64-amd64-dom0pvh-xl-intel                            pass    
+ test-amd64-amd64-libvirt                                     pass    
+ test-armhf-armhf-libvirt                                     pass    
+ test-amd64-amd64-xl-multivcpu                                pass    
+ test-armhf-armhf-xl-multivcpu                                pass    
+ test-amd64-amd64-pair                                        pass    
+ test-amd64-amd64-libvirt-pair                                pass    
+ test-amd64-amd64-xl-pvshim                                   pass    
+ test-amd64-amd64-pygrub                                      pass    
+ test-amd64-amd64-libvirt-qcow2                               pass    
+ test-armhf-armhf-libvirt-qcow2                               pass    
+ test-amd64-amd64-libvirt-raw                                 pass    
+ test-arm64-arm64-libvirt-raw                                 pass    
+ test-armhf-armhf-libvirt-raw                                 pass    
+ test-amd64-amd64-xl-rtds                                     pass    
+ test-armhf-armhf-xl-rtds                                     pass    
+ test-arm64-arm64-xl-seattle                                  pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
+ test-amd64-amd64-xl-shadow                                   pass    
+ test-arm64-arm64-xl-thunderx                                 pass    
+ test-amd64-amd64-xl-vhd                                      pass    
+ test-arm64-arm64-xl-vhd                                      pass    
+ test-armhf-armhf-xl-vhd                                      pass    
 
-The R-Car S4 is an automotive System-on-Chip (SoC) for Car
-Server/Communication Gateway and is one of the first products
-in Renesas’ 4th-generation R-Car Family.
 
-The integrated IOMMU HW is also VMSA-compatible and supports
-stage 2 translation table format, therefore can be used with
-current driver with slight modifications (thanks to the prereq
-work).
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-In the context of Xen driver the main differences between Gen3
-and S4 are the following:
-- HW capacity was enlarged to support up to 16 IPMMU contexts
-  (sets of page table) and up to 64 micro-TLBs per IPMMU device
-- the memory mapped registers have different bases and offsets
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- xen/drivers/passthrough/Kconfig          |  6 +--
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 74 +++++++++++++++++++++++++-------
- 2 files changed, 61 insertions(+), 19 deletions(-)
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-diff --git a/xen/drivers/passthrough/Kconfig b/xen/drivers/passthrough/Kconfig
-index 09505aa..e1cb678 100644
---- a/xen/drivers/passthrough/Kconfig
-+++ b/xen/drivers/passthrough/Kconfig
-@@ -25,14 +25,14 @@ config ARM_SMMU_V3
- 	 the ARM SMMUv3 architecture.
- 
- config IPMMU_VMSA
--	bool "Renesas IPMMU-VMSA found in R-Car Gen3 SoCs"
-+	bool "Renesas IPMMU-VMSA found in R-Car Gen3/S4 SoCs"
- 	depends on ARM_64
- 	---help---
- 	  Support for implementations of the Renesas IPMMU-VMSA found
--	  in R-Car Gen3 SoCs.
-+	  in R-Car Gen3/S4 SoCs.
- 
- 	  Say Y here if you are using newest R-Car Gen3 SoCs revisions
--	  (H3 ES3.0, M3-W+, etc) which IPMMU hardware supports stage 2
-+	  (H3 ES3.0, M3-W+, etc) or S4 SoCs which IPMMU hardware supports stage 2
- 	  translation table format and is able to use CPU's P2M table as is.
- 
- endif
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index d8f96fc..8dfdae8 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -1,15 +1,15 @@
- /*
-  * xen/drivers/passthrough/arm/ipmmu-vmsa.c
-  *
-- * Driver for the Renesas IPMMU-VMSA found in R-Car Gen3 SoCs.
-+ * Driver for the Renesas IPMMU-VMSA found in R-Car Gen3/S4 SoCs.
-  *
-  * The IPMMU-VMSA is VMSA-compatible I/O Memory Management Unit (IOMMU)
-  * which provides address translation and access protection functionalities
-  * to processing units and interconnect networks.
-  *
-  * Please note, current driver is supposed to work only with newest
-- * R-Car Gen3 SoCs revisions which IPMMU hardware supports stage 2 translation
-- * table format and is able to use CPU's P2M table as is.
-+ * R-Car Gen3/S4 SoCs revisions which IPMMU hardware supports stage 2
-+ * translation table format and is able to use CPU's P2M table as is.
-  *
-  * Based on Linux's IPMMU-VMSA driver from Renesas BSP:
-  *    drivers/iommu/ipmmu-vmsa.c
-@@ -20,9 +20,9 @@
-  * and Xen's SMMU driver:
-  *    xen/drivers/passthrough/arm/smmu.c
-  *
-- * Copyright (C) 2014-2019 Renesas Electronics Corporation
-+ * Copyright (C) 2014-2021 Renesas Electronics Corporation
-  *
-- * Copyright (C) 2016-2019 EPAM Systems Inc.
-+ * Copyright (C) 2016-2021 EPAM Systems Inc.
-  *
-  * This program is free software; you can redistribute it and/or
-  * modify it under the terms and conditions of the GNU General Public
-@@ -68,12 +68,18 @@
-     dev_print(dev, XENLOG_ERR, fmt, ## __VA_ARGS__)
- 
- /*
-- * R-Car Gen3 SoCs make use of up to 8 IPMMU contexts (sets of page table) and
-- * these can be managed independently. Each context is mapped to one Xen domain.
-+ * R-Car Gen3/S4 SoCs make use of up to 16 IPMMU contexts (sets of page table)
-+ * and these can be managed independently. Each context is mapped to one Xen
-+ * domain.
-  */
--#define IPMMU_CTX_MAX     8U
--/* R-Car Gen3 SoCs make use of up to 48 micro-TLBs per IPMMU device. */
--#define IPMMU_UTLB_MAX    48U
-+#define IPMMU_CTX_MAX     16U
-+/* R-Car Gen3/S4 SoCs make use of up to 64 micro-TLBs per IPMMU device. */
-+#define IPMMU_UTLB_MAX    64U
-+
-+enum ipmmu_reg_layout {
-+    IPMMU_REG_LAYOUT_RCAR_GEN3 = 0,
-+    IPMMU_REG_LAYOUT_RCAR_S4,
-+};
- 
- /* IPMMU context supports IPA size up to 40 bit. */
- #define IPMMU_MAX_P2M_IPA_BITS    40
-@@ -110,8 +116,12 @@ struct ipmmu_features {
-     unsigned int number_of_contexts;
-     unsigned int num_utlbs;
-     unsigned int ctx_offset_base;
-+    unsigned int ctx_offset_base_2;
-     unsigned int ctx_offset_stride;
-+    unsigned int ctx_offset_stride_adj;
-     unsigned int utlb_offset_base;
-+    unsigned int imuctr_ttsel_mask;
-+    enum ipmmu_reg_layout reg_layout;
- };
- 
- /* Root/Cache IPMMU device's information */
-@@ -211,7 +221,6 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
- #define IMUCTR0(n)             (0x0300 + ((n) * 16))
- #define IMUCTR32(n)            (0x0600 + (((n) - 32) * 16))
- #define IMUCTR_TTSEL_MMU(n)    ((n) << 4)
--#define IMUCTR_TTSEL_MASK      (15 << 4)
- #define IMUCTR_TTSEL_SHIFT     4
- #define IMUCTR_FLUSH           (1 << 1)
- #define IMUCTR_MMUEN           (1 << 0)
-@@ -316,8 +325,15 @@ static void ipmmu_write(struct ipmmu_vmsa_device *mmu, uint32_t offset,
- static unsigned int ipmmu_ctx_reg(struct ipmmu_vmsa_device *mmu,
-                                   unsigned int context_id, uint32_t reg)
- {
-+    if ( mmu->features->reg_layout == IPMMU_REG_LAYOUT_RCAR_S4 &&
-+         context_id >= 8 )
-+        return mmu->features->ctx_offset_base_2 +
-+            (context_id - 8) * mmu->features->ctx_offset_stride +
-+            context_id * mmu->features->ctx_offset_stride_adj + reg;
-+
-     return mmu->features->ctx_offset_base +
--        context_id * mmu->features->ctx_offset_stride + reg;
-+        context_id * mmu->features->ctx_offset_stride +
-+        context_id * mmu->features->ctx_offset_stride_adj + reg;
- }
- 
- static uint32_t ipmmu_ctx_read(struct ipmmu_vmsa_device *mmu,
-@@ -448,7 +464,8 @@ static int ipmmu_utlb_enable(struct ipmmu_vmsa_domain *domain,
-     {
-         unsigned int context_id;
- 
--        context_id = (imuctr & IMUCTR_TTSEL_MASK) >> IMUCTR_TTSEL_SHIFT;
-+        context_id = (imuctr & mmu->features->imuctr_ttsel_mask) >>
-+            IMUCTR_TTSEL_SHIFT;
-         if ( domain->context_id != context_id )
-         {
-             dev_err(mmu->dev, "Micro-TLB %u already assigned to IPMMU context %u\n",
-@@ -738,8 +755,23 @@ static const struct ipmmu_features ipmmu_features_rcar_gen3 = {
-     .number_of_contexts = 8,
-     .num_utlbs = 48,
-     .ctx_offset_base = 0,
-+    .ctx_offset_base_2 = 0,
-     .ctx_offset_stride = 0x40,
-+    .ctx_offset_stride_adj = 0,
-     .utlb_offset_base = 0,
-+    .imuctr_ttsel_mask = (15 << 4),
-+};
-+
-+static const struct ipmmu_features ipmmu_features_rcar_s4 = {
-+    .number_of_contexts = 16,
-+    .num_utlbs = 64,
-+    .ctx_offset_base = 0x10000,
-+    .ctx_offset_base_2 = 0x10800,
-+    .ctx_offset_stride = 0x40,
-+    .ctx_offset_stride_adj = 0x1000,
-+    .utlb_offset_base = 0x3000,
-+    .imuctr_ttsel_mask = (31 << 4),
-+    .reg_layout = IPMMU_REG_LAYOUT_RCAR_S4,
- };
- 
- static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
-@@ -751,11 +783,12 @@ static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
-         ipmmu_ctx_write(mmu, i, IMCTR, 0);
- }
- 
--/* R-Car Gen3 SoCs product and cut information. */
-+/* R-Car Gen3/S4 SoCs product and cut information. */
- #define RCAR_PRODUCT_MASK    0x00007F00
- #define RCAR_PRODUCT_H3      0x00004F00
- #define RCAR_PRODUCT_M3W     0x00005200
- #define RCAR_PRODUCT_M3N     0x00005500
-+#define RCAR_PRODUCT_S4      0x00005A00
- #define RCAR_CUT_MASK        0x000000FF
- #define RCAR_CUT_VER30       0x00000020
- 
-@@ -803,6 +836,10 @@ static __init bool ipmmu_stage2_supported(void)
-         stage2_supported = true;
-         break;
- 
-+    case RCAR_PRODUCT_S4:
-+        stage2_supported = true;
-+        break;
-+
-     default:
-         printk(XENLOG_ERR "ipmmu: Unsupported SoC version\n");
-         break;
-@@ -831,6 +868,10 @@ static const struct dt_device_match ipmmu_dt_match[] __initconst =
-         .compatible = "renesas,ipmmu-r8a77961",
-         .data = &ipmmu_features_rcar_gen3,
-     },
-+    {
-+        .compatible = "renesas,ipmmu-r8a779f0",
-+        .data = &ipmmu_features_rcar_s4,
-+    },
-     { /* sentinel */ },
- };
- 
-@@ -845,6 +886,7 @@ static int ipmmu_probe(struct dt_device_node *node)
-     const struct dt_device_match *match;
-     struct ipmmu_vmsa_device *mmu;
-     uint64_t addr, size;
-+    uint32_t reg;
-     int irq, ret;
- 
-     mmu = xzalloc(struct ipmmu_vmsa_device);
-@@ -930,8 +972,8 @@ static int ipmmu_probe(struct dt_device_node *node)
-          * Use stage 2 translation table format when stage 2 translation
-          * enabled.
-          */
--        ipmmu_write(mmu, IMSAUXCTLR,
--                    ipmmu_read(mmu, IMSAUXCTLR) | IMSAUXCTLR_S2PTE);
-+        reg = IMSAUXCTLR + mmu->features->ctx_offset_stride_adj;
-+        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
- 
-         dev_info(&node->dev, "IPMMU context 0 is reserved\n");
-         set_bit(0, mmu->ctx);
--- 
-2.7.4
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
+
+Pushing revision :
+
+hint: The 'hooks/update' hook was ignored because it's not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.
+hint: The 'hooks/post-receive' hook was ignored because it's not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.
+hint: The 'hooks/post-update' hook was ignored because it's not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.
+To xenbits.xen.org:/home/xen/git/linux-pvops.git
+   5f53fa508db0..1bff7d7e8c48  1bff7d7e8c487b9b0ceab70b43b781f1d45f55eb -> tested/linux-linus
 
