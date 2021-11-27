@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E40C4167B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFACAC4332F
 	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233631.405599 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.233632.405605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUR-0002rg-FM; Sat, 27 Nov 2021 01:26:55 +0000
+	id 1mqmUR-0002vZ-RS; Sat, 27 Nov 2021 01:26:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233631.405599; Sat, 27 Nov 2021 01:26:55 +0000
+Received: by outflank-mailman (output) from mailman id 233632.405605; Sat, 27 Nov 2021 01:26:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUR-0002rZ-BQ; Sat, 27 Nov 2021 01:26:55 +0000
-Received: by outflank-mailman (input) for mailman id 233631;
+	id 1mqmUR-0002ua-KE; Sat, 27 Nov 2021 01:26:55 +0000
+Received: by outflank-mailman (input) for mailman id 233632;
  Sat, 27 Nov 2021 01:26:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmN3-00020H-0E
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:17 +0000
+ id 1mqmNH-00020H-Ii
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:31 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 06807858-4f20-11ec-9787-a32c541c8605;
- Sat, 27 Nov 2021 02:19:11 +0100 (CET)
+ id 126a8d67-4f20-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:19:30 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 06807858-4f20-11ec-9787-a32c541c8605
-Message-ID: <20211126223825.375987680@linutronix.de>
+X-Inumbo-ID: 126a8d67-4f20-11ec-9787-a32c541c8605
+Message-ID: <20211126223824.441771859@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975949;
+	s=2020; t=1637975970;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=b2AUMZ8n+35cpll0aGngdLAswuTgfFiNP2Zkn1C/x7I=;
-	b=fsdIqbUOIaAnFmVkuNTj6ejI9ns7C879J/Fo1xIz/PNtNCHjJhRdz0rNzjbItLztP9P1IK
-	mWmnsdwH3JTcCTznzPi2l9RdKLo/NfdG9LE2dYtoY4TDlaNzaVakNx7vkKLH3jg3xk9jtM
-	ova4z3kEoVnNdcdtuo3KdA3X2ALd7N4gjp2HkBLecxPT9n+D3JSPHN8nHu9logLN9F0KWs
-	iEYu4dnoAvqL9kYA5FOrWzzKV55Fd/UU8K7yuqOuYWuuZicxeDHQ+4ro7gbELSsdMxnFW8
-	y5cIpnNGyNxc61RmVfsSJiLfxrVsLj3XILBX1DumXbhQZxoyHBdx0TKa7k0zHg==
+	 references:references; bh=EjQK06gGut8wpWxb3xXf7TaaLrkIbQLhpXZXlXqI+1E=;
+	b=3IN7G2Z+0trEJeykGv7kUnMltcrJgw6/YiiYZT8QXhspQzKvcIJW3i6gR+n0r+g0hsjZAO
+	6Y9KrK5zYseTHHVb7+c8IptjiFQeVXBeJDPflWUfULp3GtFjmbp9XFuGtmX1U+/q2euX+7
+	jbyTLqyRLHFcvAPwlksKJBmoQq5tScd89MT6QeCRCoLuq+1hECPKCcrJEwZqd6tTMvJfgo
+	omFGhCP0pUYeNAhfPERNfI16sLmeF3+3CoWsyDCxxVlEIkwnejxyxNkkc5/OsucKZ6M2Wz
+	9b3BXGVs3dTsq0Elas1wdnxn4Qa5k8MRI/8VEocHf7LWeYN/GB276k0tmU8dkg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975949;
+	s=2020e; t=1637975970;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=b2AUMZ8n+35cpll0aGngdLAswuTgfFiNP2Zkn1C/x7I=;
-	b=yJ4bC6FzSZhZ57Dfe4VQHsKYJLvpCmquiodhwvBRqDB4P43BJGGRiDdxGDwERjB0S8UxyG
-	a75kiEgGaYqDk2AQ==
+	 references:references; bh=EjQK06gGut8wpWxb3xXf7TaaLrkIbQLhpXZXlXqI+1E=;
+	b=tNxaZsUisx8qmcOuXzPTbk9OTikfV8u0CcSvhiEBov4PNCxknl15jCdw3kB2y8lH62s1JS
+	bmCvi3+Z0sDU1eBw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -83,87 +83,75 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Juergen Gross <jgross@suse.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 22/22] PCI/MSI: Move descriptor counting on allocation fail to
- the legacy code
+Subject: [patch 06/22] PCI/MSI: Make pci_msi_domain_write_msg() static
 References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:09 +0100 (CET)
+Date: Sat, 27 Nov 2021 02:19:30 +0100 (CET)
+Message-ID: <20211127011930.0v_dDbC_Z3YrKkC8u_H2m8Cg4vp_qBjl6afvh_HuPdg@z>
 
-The irqdomain code already returns the information. Move the loop to the
-legacy code.
+There is no point to have this function public as it is set by the PCI core
+anyway when a PCI/MSI irqdomain is created.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- drivers/pci/msi/legacy.c |   20 +++++++++++++++++++-
- drivers/pci/msi/msi.c    |   19 +------------------
- 2 files changed, 20 insertions(+), 19 deletions(-)
+ drivers/irqchip/irq-gic-v2m.c            |    1 -
+ drivers/irqchip/irq-gic-v3-its-pci-msi.c |    1 -
+ drivers/irqchip/irq-gic-v3-mbi.c         |    1 -
+ drivers/pci/msi.c                        |    2 +-
+ include/linux/msi.h                      |    1 -
+ 5 files changed, 1 insertion(+), 5 deletions(-)
 
---- a/drivers/pci/msi/legacy.c
-+++ b/drivers/pci/msi/legacy.c
-@@ -50,9 +50,27 @@ void __weak arch_teardown_msi_irqs(struc
- 	}
- }
+--- a/drivers/irqchip/irq-gic-v2m.c
++++ b/drivers/irqchip/irq-gic-v2m.c
+@@ -88,7 +88,6 @@ static struct irq_chip gicv2m_msi_irq_ch
+ 	.irq_mask		= gicv2m_mask_msi_irq,
+ 	.irq_unmask		= gicv2m_unmask_msi_irq,
+ 	.irq_eoi		= irq_chip_eoi_parent,
+-	.irq_write_msi_msg	= pci_msi_domain_write_msg,
+ };
  
-+static int pci_msi_setup_check_result(struct pci_dev *dev, int type, int ret)
-+{
-+	struct msi_desc *entry;
-+	int avail = 0;
-+
-+	if (type != PCI_CAP_ID_MSIX || ret >= 0)
-+		return ret;
-+
-+	/* Scan the MSI descriptors for successfully allocated ones. */
-+	for_each_pci_msi_entry(entry, dev) {
-+		if (entry->irq != 0)
-+			avail++;
-+	}
-+	return avail ? avail : ret;
-+}
-+
- int pci_msi_legacy_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+ static struct msi_domain_info gicv2m_msi_domain_info = {
+--- a/drivers/irqchip/irq-gic-v3-its-pci-msi.c
++++ b/drivers/irqchip/irq-gic-v3-its-pci-msi.c
+@@ -28,7 +28,6 @@ static struct irq_chip its_msi_irq_chip
+ 	.irq_unmask		= its_unmask_msi_irq,
+ 	.irq_mask		= its_mask_msi_irq,
+ 	.irq_eoi		= irq_chip_eoi_parent,
+-	.irq_write_msi_msg	= pci_msi_domain_write_msg,
+ };
+ 
+ static int its_pci_msi_vec_count(struct pci_dev *pdev, void *data)
+--- a/drivers/irqchip/irq-gic-v3-mbi.c
++++ b/drivers/irqchip/irq-gic-v3-mbi.c
+@@ -171,7 +171,6 @@ static struct irq_chip mbi_msi_irq_chip
+ 	.irq_unmask		= mbi_unmask_msi_irq,
+ 	.irq_eoi		= irq_chip_eoi_parent,
+ 	.irq_compose_msi_msg	= mbi_compose_msi_msg,
+-	.irq_write_msi_msg	= pci_msi_domain_write_msg,
+ };
+ 
+ static struct msi_domain_info mbi_msi_domain_info = {
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1267,7 +1267,7 @@ EXPORT_SYMBOL_GPL(msi_desc_to_pci_sysdat
+  * @irq_data:	Pointer to interrupt data of the MSI interrupt
+  * @msg:	Pointer to the message
+  */
+-void pci_msi_domain_write_msg(struct irq_data *irq_data, struct msi_msg *msg)
++static void pci_msi_domain_write_msg(struct irq_data *irq_data, struct msi_msg *msg)
  {
--	return arch_setup_msi_irqs(dev, nvec, type);
-+	int ret = arch_setup_msi_irqs(dev, nvec, type);
-+
-+	return pci_msi_setup_check_result(dev, type, ret);
- }
+ 	struct msi_desc *desc = irq_data_get_msi_desc(irq_data);
  
- void pci_msi_legacy_teardown_msi_irqs(struct pci_dev *dev)
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -609,7 +609,7 @@ static int msix_capability_init(struct p
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -454,7 +454,6 @@ void *platform_msi_get_host_data(struct
+ #endif /* CONFIG_GENERIC_MSI_IRQ_DOMAIN */
  
- 	ret = pci_msi_setup_msi_irqs(dev, nvec, PCI_CAP_ID_MSIX);
- 	if (ret)
--		goto out_avail;
-+		goto out_free;
- 
- 	/* Check if all MSI entries honor device restrictions */
- 	ret = msi_verify_entries(dev);
-@@ -634,23 +634,6 @@ static int msix_capability_init(struct p
- 	pcibios_free_irq(dev);
- 	return 0;
- 
--out_avail:
--	if (ret < 0) {
--		/*
--		 * If we had some success, report the number of IRQs
--		 * we succeeded in setting up.
--		 */
--		struct msi_desc *entry;
--		int avail = 0;
--
--		for_each_pci_msi_entry(entry, dev) {
--			if (entry->irq != 0)
--				avail++;
--		}
--		if (avail != 0)
--			ret = avail;
--	}
--
- out_free:
- 	free_msi_irqs(dev);
- 
+ #ifdef CONFIG_PCI_MSI_IRQ_DOMAIN
+-void pci_msi_domain_write_msg(struct irq_data *irq_data, struct msi_msg *msg);
+ struct irq_domain *pci_msi_create_irq_domain(struct fwnode_handle *fwnode,
+ 					     struct msi_domain_info *info,
+ 					     struct irq_domain *parent);
 
 
