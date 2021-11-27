@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06C5DC433F5
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233651.405652 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61764C4332F
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233652.405658 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUc-0004bb-PS; Sat, 27 Nov 2021 01:27:06 +0000
+	id 1mqmUd-0004gS-DO; Sat, 27 Nov 2021 01:27:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233651.405652; Sat, 27 Nov 2021 01:27:06 +0000
+Received: by outflank-mailman (output) from mailman id 233652.405658; Sat, 27 Nov 2021 01:27:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUc-0004am-Iu; Sat, 27 Nov 2021 01:27:06 +0000
-Received: by outflank-mailman (input) for mailman id 233651;
+	id 1mqmUd-0004fD-3Z; Sat, 27 Nov 2021 01:27:07 +0000
+Received: by outflank-mailman (input) for mailman id 233652;
  Sat, 27 Nov 2021 01:27:05 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmNE-00020H-Gd
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:28 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1mqmSm-0003uw-8J
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:25:12 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 108a0739-4f20-11ec-9787-a32c541c8605;
- Sat, 27 Nov 2021 02:19:27 +0100 (CET)
+ id da2e3de3-4f20-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:25:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 108a0739-4f20-11ec-9787-a32c541c8605
-Message-ID: <20211126223824.322987915@linutronix.de>
+X-Inumbo-ID: da2e3de3-4f20-11ec-9787-a32c541c8605
+Message-ID: <20211127000918.779751933@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975967;
+	s=2020; t=1637976305;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=AwO21SR5HwD8yhhWfgGPPa41s/dLuMAByqtyG5X5FJI=;
-	b=a0ZgqAHm77/GoyZRX88BCacRbvb4M6WP36nYKI7gIcYYAKt3D9nyCPRPeG87pRtO8eo1mx
-	puA7H603KGaOG4JQAsGiG7EdKjI6mwrMOJWOZLc8fV3kTCSnAOb0vR2ovfpPyPv8k6Ofef
-	MVKcT2ksaDYJHAD86iT0ZYdHE759EuvI/4E1+q+f9uqjvJ7TMebnhRia2W8E4C3X5S+Lfh
-	XBzD/IzDC1STXdWAUj8w+xp1ZA8g0F0qEGTSEA90gvt6VES8n0rrYTNctomxUY1s4mOj8c
-	ZCHHM8qX3RwLSn0y8IkHydQ89SBOZNGoWe5dt67n3ReBbUDg79RJqUnbR9NPUg==
+	 references:references; bh=CFmm+AWRwXcJQSLL7VY9/FlDxYE98PyZd7GrvqHxiD8=;
+	b=jPDSHQYSdxJlKUo1m9F9w8gw8R2TMDWPPxDRazvUWAKO2OAqttDQmAKiiB0cHxtncw0LoP
+	I0nGS3ipmEFxCJjXQCspGZYqDLzYgAoHAzN8IALfV/R/UU8HnLONKw15r9QLBWIOy2tuBo
+	v9UWh+uBu1gxtuVFZyC/oeYLLr7fsy2iBobG7WdjyJrjG53L08Qf0qS3j4Lea61UvUlvc7
+	FlpqePyPni277I+e5Ve/tq90mOGCGQlu+ToYDaGLhxtuIL86QQHHHN2/nYRSDe2FLpzekY
+	c4FjwvUSwWt/aSE1XxP6zVLeTmHWkEXcbwea6utFdTTv8Pecmzc4qo2LW6T26Q==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975967;
+	s=2020e; t=1637976305;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=AwO21SR5HwD8yhhWfgGPPa41s/dLuMAByqtyG5X5FJI=;
-	b=HqZAKurVXyG8LQD7fjFChyTlTaw4FgkiDsL9W5YdV8HfGuPbwUxwUBvoS7mZEC0e8sOaKi
-	D1lr9yb3Cez1UvBw==
+	 references:references; bh=CFmm+AWRwXcJQSLL7VY9/FlDxYE98PyZd7GrvqHxiD8=;
+	b=YpvVGHpsYjY8WLBK+/d3v25qrNDG94vLX8P5K9v/o3GbLxhwTttsJXuyACy8VlvKBn+N9c
+	5C2HM/JCLaf7F2Cw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -67,93 +66,36 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jason Gunthorpe <jgg@nvidia.com>,
  Megha Dey <megha.dey@intel.com>,
  Ashok Raj <ashok.raj@intel.com>,
- linux-pci@vger.kernel.org,
  Michael Ellerman <mpe@ellerman.id.au>,
- Paul Mackerras <paulus@samba.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- linuxppc-dev@lists.ozlabs.org,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- linux-mips@vger.kernel.org,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- sparclinux@vger.kernel.org,
- x86@kernel.org,
- xen-devel@lists.xenproject.org,
- ath11k@lists.infradead.org,
- Wei Liu <wei.liu@kernel.org>,
- linux-hyperv@vger.kernel.org,
+ Andrew Cooper <amc96@cam.ac.uk>,
  Juergen Gross <jgross@suse.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 04/22] genirq/msi: Remove unused domain callbacks
-References: <20211126222700.862407977@linutronix.de>
+ linux-pci@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: [patch 05/10] genirq/msi: Add domain info flag MSI_FLAG_CAN_EXPAND
+References: <20211126233124.618283684@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:26 +0100 (CET)
-Message-ID: <20211127011926.Lxav1P1u8EH64U2pFCHVWMqEGXvb3TWVwScmjwatQPY@z>
+Date: Sat, 27 Nov 2021 02:25:05 +0100 (CET)
+Message-ID: <20211127012505.D8bttXM4Os-TSBreBKr1ggCUFfNmTutGSK8BPR1AJ6o@z>
 
-No users and there is no need to grow them.
+Not all MSI domains support runtime expansions of PCI/MSI-X vectors. Add a
+domain flag so implementations can opt in.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- include/linux/msi.h |   11 ++++-------
- kernel/irq/msi.c    |    5 -----
- 2 files changed, 4 insertions(+), 12 deletions(-)
+ include/linux/msi.h |    2 ++
+ 1 file changed, 2 insertions(+)
 
 --- a/include/linux/msi.h
 +++ b/include/linux/msi.h
-@@ -304,7 +304,6 @@ struct msi_domain_info;
-  * @msi_free:		Domain specific function to free a MSI interrupts
-  * @msi_check:		Callback for verification of the domain/info/dev data
-  * @msi_prepare:	Prepare the allocation of the interrupts in the domain
-- * @msi_finish:		Optional callback to finalize the allocation
-  * @set_desc:		Set the msi descriptor for an interrupt
-  * @handle_error:	Optional error handler if the allocation fails
-  * @domain_alloc_irqs:	Optional function to override the default allocation
-@@ -312,12 +311,11 @@ struct msi_domain_info;
-  * @domain_free_irqs:	Optional function to override the default free
-  *			function.
-  *
-- * @get_hwirq, @msi_init and @msi_free are callbacks used by
-- * msi_create_irq_domain() and related interfaces
-+ * @get_hwirq, @msi_init and @msi_free are callbacks used by the underlying
-+ * irqdomain.
-  *
-- * @msi_check, @msi_prepare, @msi_finish, @set_desc and @handle_error
-- * are callbacks used by msi_domain_alloc_irqs() and related
-- * interfaces which are based on msi_desc.
-+ * @msi_check, @msi_prepare, @handle_error and @set_desc are callbacks used by
-+ * msi_domain_alloc/free_irqs().
-  *
-  * @domain_alloc_irqs, @domain_free_irqs can be used to override the
-  * default allocation/free functions (__msi_domain_alloc/free_irqs). This
-@@ -351,7 +349,6 @@ struct msi_domain_ops {
- 	int		(*msi_prepare)(struct irq_domain *domain,
- 				       struct device *dev, int nvec,
- 				       msi_alloc_info_t *arg);
--	void		(*msi_finish)(msi_alloc_info_t *arg, int retval);
- 	void		(*set_desc)(msi_alloc_info_t *arg,
- 				    struct msi_desc *desc);
- 	int		(*handle_error)(struct irq_domain *domain,
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -562,8 +562,6 @@ int __msi_domain_alloc_irqs(struct irq_d
- 			ret = -ENOSPC;
- 			if (ops->handle_error)
- 				ret = ops->handle_error(domain, desc, ret);
--			if (ops->msi_finish)
--				ops->msi_finish(&arg, ret);
- 			return ret;
- 		}
+@@ -494,6 +494,8 @@ enum {
+ 	MSI_FLAG_ALLOC_SIMPLE_MSI_DESCS	= (1 << 9),
+ 	/* Free MSI descriptors */
+ 	MSI_FLAG_FREE_MSI_DESCS		= (1 << 10),
++	/* MSI vectors can be expanded after initial setup */
++	MSI_FLAG_CAN_EXPAND		= (1 << 11),
+ };
  
-@@ -573,9 +571,6 @@ int __msi_domain_alloc_irqs(struct irq_d
- 		}
- 	}
- 
--	if (ops->msi_finish)
--		ops->msi_finish(&arg, 0);
--
- 	can_reserve = msi_check_reservation_mode(domain, info, dev);
- 
- 	/*
+ int msi_domain_set_affinity(struct irq_data *data, const struct cpumask *mask,
 
 
