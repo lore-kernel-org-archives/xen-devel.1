@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9F0C4321E
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:18:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233588.405345 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1784C43217
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:18:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233589.405351 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmMa-0003jf-VC; Sat, 27 Nov 2021 01:18:48 +0000
+	id 1mqmMb-0003oE-Jt; Sat, 27 Nov 2021 01:18:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233588.405345; Sat, 27 Nov 2021 01:18:48 +0000
+Received: by outflank-mailman (output) from mailman id 233589.405351; Sat, 27 Nov 2021 01:18:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmMa-0003iZ-Qe; Sat, 27 Nov 2021 01:18:48 +0000
-Received: by outflank-mailman (input) for mailman id 233588;
- Sat, 27 Nov 2021 01:18:47 +0000
+	id 1mqmMb-0003nE-9y; Sat, 27 Nov 2021 01:18:49 +0000
+Received: by outflank-mailman (input) for mailman id 233589;
+ Sat, 27 Nov 2021 01:18:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmMZ-00020H-13
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:18:47 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1mqmMa-00020H-1Y
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:18:48 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f6a0c8d7-4f1f-11ec-9787-a32c541c8605;
- Sat, 27 Nov 2021 02:18:45 +0100 (CET)
+ id f7d083cc-4f1f-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:18:46 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f6a0c8d7-4f1f-11ec-9787-a32c541c8605
-Message-ID: <20211126223824.382273262@linutronix.de>
+X-Inumbo-ID: f7d083cc-4f1f-11ec-9787-a32c541c8605
+Message-ID: <20211126223824.499448912@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975923;
+	s=2020; t=1637975926;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=w7GncdwHZHkuO6107A0BMJdTfScXy8O2W/1Ze2L1KBI=;
-	b=hRvcWzJWtpS9cJpn6ec5XsiwdSt3GIjNt8ayewjD/eh9hwlgb1/xvVV4/GfDBq35j1JSY6
-	gNTVVLRFiWOl7Q6g2U0XspYHK1Xz1zZq1uR0LfL+QCvBgAeGrkjmRzOPsB9pZC5q8eBLWi
-	Miu93VAKW6OCnVvlthatKyfHJOAczWW28Jui0oK0HjaKvI8jyb2hTX5R3UwIS9y70AJTKu
-	ksrfsAxNB2Jfxd1CcyojtkmzQjXjSymAoG5tn8yNmv84aIU9DMLljzKenOliB09zgVb8U6
-	D7jbg1L0Rx8OI4T4ciQzpXUtVYdwdBkots+z+IuOV1rReP32BLWXVPUxWjzJiw==
+	 references:references; bh=+rP3SiVoHOK5Hyn2EAGrDg54y7+IEHUse42w3xFRuo4=;
+	b=en2BVqplFMhJlJ/67iu0Edu2NrGl2YoL7tfUkBXuWGzeU2hxeKRsBezk52+o99rxhr3938
+	TRs0SQYeEY0XTWyetTmz5VEY4LyU/pCwOfsvgmIpv0evVB0njacCp5HZd95Lk6yEtPp2qC
+	d1p1yOFMjNpOmU2EZz/humF1AL+c2gchzbmiK8fKoyFQFRNZr0ge/HjuNEWf7dAqZ3u/dl
+	ZGfz8C379X5x+ikPMgYdarUXfu9tN65dbvfK9I1hJFDQrDXnn2iLf1UCuWBh5HtK4Sw7VS
+	fwKOlxrXeck+pJ2IkumMPe/8tucPvP0pUZ/lUZw7GXQSElER8i5i2Fkh/6Q4mA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975923;
+	s=2020e; t=1637975926;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=w7GncdwHZHkuO6107A0BMJdTfScXy8O2W/1Ze2L1KBI=;
-	b=g1chgF1PPE1Vu9aoCMCQV96amhB0EJgwXDPy4IycnPsMua9xAiLx9zn0a6p/WZmfDz106b
-	yo4Vc3VfVsFX/VCw==
+	 references:references; bh=+rP3SiVoHOK5Hyn2EAGrDg54y7+IEHUse42w3xFRuo4=;
+	b=4hUVGqAr7Jj3KAwcapzMWVWkLocnYS1dwMuxMKLswtqj7uo9lVzO01+ZZON8j5/GAbX8Ix
+	yWVdyyLvdQ59eaCw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -84,40 +83,52 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Juergen Gross <jgross@suse.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 05/22] genirq/msi: Fixup includes
+Subject: [patch 07/22] PCI/MSI: Remove msi_desc_to_pci_sysdata()
 References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:18:42 +0100 (CET)
+Date: Sat, 27 Nov 2021 02:18:45 +0100 (CET)
 
-Remove the kobject.h include from msi.h as it's not required and add a
-sysfs.h include to the core code instead.
+Last user is gone long ago.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- include/linux/msi.h |    1 -
- kernel/irq/msi.c    |    1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ drivers/pci/msi.c   |    8 --------
+ include/linux/msi.h |    5 -----
+ 2 files changed, 13 deletions(-)
 
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1253,14 +1253,6 @@ struct pci_dev *msi_desc_to_pci_dev(stru
+ }
+ EXPORT_SYMBOL(msi_desc_to_pci_dev);
+ 
+-void *msi_desc_to_pci_sysdata(struct msi_desc *desc)
+-{
+-	struct pci_dev *dev = msi_desc_to_pci_dev(desc);
+-
+-	return dev->bus->sysdata;
+-}
+-EXPORT_SYMBOL_GPL(msi_desc_to_pci_sysdata);
+-
+ #ifdef CONFIG_PCI_MSI_IRQ_DOMAIN
+ /**
+  * pci_msi_domain_write_msg - Helper to write MSI message to PCI config space
 --- a/include/linux/msi.h
 +++ b/include/linux/msi.h
-@@ -2,7 +2,6 @@
- #ifndef LINUX_MSI_H
- #define LINUX_MSI_H
+@@ -217,13 +217,8 @@ static inline void msi_desc_set_iommu_co
+ 	for_each_msi_entry((desc), &(pdev)->dev)
  
--#include <linux/kobject.h>
- #include <linux/list.h>
- #include <asm/msi.h>
- 
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -14,6 +14,7 @@
- #include <linux/irqdomain.h>
- #include <linux/msi.h>
- #include <linux/slab.h>
-+#include <linux/sysfs.h>
- #include <linux/pci.h>
- 
- #include "internals.h"
+ struct pci_dev *msi_desc_to_pci_dev(struct msi_desc *desc);
+-void *msi_desc_to_pci_sysdata(struct msi_desc *desc);
+ void pci_write_msi_msg(unsigned int irq, struct msi_msg *msg);
+ #else /* CONFIG_PCI_MSI */
+-static inline void *msi_desc_to_pci_sysdata(struct msi_desc *desc)
+-{
+-	return NULL;
+-}
+ static inline void pci_write_msi_msg(unsigned int irq, struct msi_msg *msg)
+ {
+ }
 
 
