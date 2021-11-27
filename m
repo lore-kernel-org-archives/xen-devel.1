@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0ABAC433EF
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:28:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233768.405998 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD60C433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:28:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233774.406016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmW6-00064p-A7; Sat, 27 Nov 2021 01:28:38 +0000
+	id 1mqmWA-00070T-5I; Sat, 27 Nov 2021 01:28:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233768.405998; Sat, 27 Nov 2021 01:28:38 +0000
+Received: by outflank-mailman (output) from mailman id 233774.406016; Sat, 27 Nov 2021 01:28:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmW5-00061v-W2; Sat, 27 Nov 2021 01:28:38 +0000
-Received: by outflank-mailman (input) for mailman id 233768;
- Sat, 27 Nov 2021 01:28:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqmW9-0006yn-L7; Sat, 27 Nov 2021 01:28:41 +0000
+Received: by outflank-mailman (input) for mailman id 233774;
+ Sat, 27 Nov 2021 01:28:40 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmNS-00020H-FG
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:42 +0000
+ id 1mqmNh-0002cc-Td
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:58 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 18ec3ed7-4f20-11ec-9787-a32c541c8605;
- Sat, 27 Nov 2021 02:19:41 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 215dd179-4f20-11ec-b941-1df2895da90e;
+ Sat, 27 Nov 2021 02:19:56 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 18ec3ed7-4f20-11ec-9787-a32c541c8605
-Message-ID: <20211126223824.855947162@linutronix.de>
+X-Inumbo-ID: 215dd179-4f20-11ec-b941-1df2895da90e
+Message-ID: <20211126223825.375987680@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975981;
+	s=2020; t=1637975995;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=lhIUE61Y2ARmaAA3RG1h6L7zHDs4cKgQsOndAjR5STU=;
-	b=3I27l9siS6/oWE1JVUleWaLVyIqltkA2MLPegdLeuNH4xABPDw/VJVaN4/5xZwR/ZGDZ/X
-	z+Yu7BvVlI1Y8bjNWoik91+y02TV4O1ndMArqPpxXOjDKZc7tlfYU+IDvy9/QevhvUBSSe
-	nyPwZJhyvMtFooayQnVqCf1qlIROsanIGmDDCCtFBXia2UMjMfl/6bOUpWxdL7U7K8o12E
-	JDsMmY+UavmvHDtkNDK/mVPz680wKGlII+yHcirzIllt9Z7FWCJTiaD8RGfRwVR8wCXrIw
-	Fm3H9jm1jwNh8R+ZVC5kx7Gidr5VdZYHXIY0uS6MsgUEApx3IIaeb7WLJgRlLA==
+	 references:references; bh=b2AUMZ8n+35cpll0aGngdLAswuTgfFiNP2Zkn1C/x7I=;
+	b=ey9VYVwJMRVwcfksR95/YBZo1QlvbZYZfkgR7eb1Bag9qzNXJVS4jhzTRW9yLHvexEKDVG
+	NdZfvT2UsBn5RL0J1M+rpZkuXtbS5nqVETijSbR74gN4IMGuh2X3TA+zCERUnJLGu6r7QS
+	xejJUwLGFdc68/9VQGrA+Irdjq4KBqDAprh9jYxhOBi5rbMrlRWDhET/p4bI3lf3w6YD4h
+	E9/b6kmGP1Gy0ecl+kxuinGZvO3BSkQDIvqLkXs3Q4djlmfg3lY4IS8xh0nFZuCKSVYsOi
+	TM8bL2+caOtSm9X4D68tGdAABZpJEayGt8Qun72Z1DAX05A5ADO4k3hxbtYqrQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975981;
+	s=2020e; t=1637975995;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=lhIUE61Y2ARmaAA3RG1h6L7zHDs4cKgQsOndAjR5STU=;
-	b=cSljuXSfhLC27NoLNfSXkLMLt2p1DhSlr0Y1CawLWxZ6xSqD3SbIMB5YfCzJcABWyjJgHj
-	cjBENAHWPOx02EDA==
+	 references:references; bh=b2AUMZ8n+35cpll0aGngdLAswuTgfFiNP2Zkn1C/x7I=;
+	b=esFpcWNsvZJ3Th+y6sturNxS1eWHYEkG46onG7uJo3BAZF4nhSHejJp0haubUPknhdF5iT
+	ic49rCWGRUTIKJBw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -83,48 +83,88 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Juergen Gross <jgross@suse.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 13/22] PCI/MSI: Cleanup include zoo
+Subject: [patch 22/22] PCI/MSI: Move descriptor counting on allocation fail to
+ the legacy code
 References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:41 +0100 (CET)
-Message-ID: <20211127011941.bASBqTYci2dNWkRt0OtUGchArVsbU6rhDhsESdgLC2o@z>
+Date: Sat, 27 Nov 2021 02:19:55 +0100 (CET)
+Message-ID: <20211127011955.keeMfxsZIUxoi4WlGMTb9fL2J4bBe-XVv0sjwm1expk@z>
 
-Get rid of the pile of unneeded includes which accumulated over time.
+The irqdomain code already returns the information. Move the loop to the
+legacy code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- drivers/pci/msi.c |   16 ++++------------
- 1 file changed, 4 insertions(+), 12 deletions(-)
+ drivers/pci/msi/legacy.c |   20 +++++++++++++++++++-
+ drivers/pci/msi/msi.c    |   19 +------------------
+ 2 files changed, 20 insertions(+), 19 deletions(-)
 
---- a/drivers/pci/msi.c
-+++ b/drivers/pci/msi.c
-@@ -7,22 +7,14 @@
-  * Copyright (C) 2016 Christoph Hellwig.
-  */
+--- a/drivers/pci/msi/legacy.c
++++ b/drivers/pci/msi/legacy.c
+@@ -50,9 +50,27 @@ void __weak arch_teardown_msi_irqs(struc
+ 	}
+ }
  
-+#include <linux/acpi_iort.h>
- #include <linux/err.h>
--#include <linux/mm.h>
--#include <linux/irq.h>
--#include <linux/interrupt.h>
- #include <linux/export.h>
--#include <linux/ioport.h>
--#include <linux/pci.h>
--#include <linux/proc_fs.h>
--#include <linux/msi.h>
--#include <linux/smp.h>
--#include <linux/errno.h>
--#include <linux/io.h>
--#include <linux/acpi_iort.h>
--#include <linux/slab.h>
-+#include <linux/irq.h>
- #include <linux/irqdomain.h>
-+#include <linux/msi.h>
- #include <linux/of_irq.h>
-+#include <linux/pci.h>
++static int pci_msi_setup_check_result(struct pci_dev *dev, int type, int ret)
++{
++	struct msi_desc *entry;
++	int avail = 0;
++
++	if (type != PCI_CAP_ID_MSIX || ret >= 0)
++		return ret;
++
++	/* Scan the MSI descriptors for successfully allocated ones. */
++	for_each_pci_msi_entry(entry, dev) {
++		if (entry->irq != 0)
++			avail++;
++	}
++	return avail ? avail : ret;
++}
++
+ int pci_msi_legacy_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+ {
+-	return arch_setup_msi_irqs(dev, nvec, type);
++	int ret = arch_setup_msi_irqs(dev, nvec, type);
++
++	return pci_msi_setup_check_result(dev, type, ret);
+ }
  
- #include "pci.h"
+ void pci_msi_legacy_teardown_msi_irqs(struct pci_dev *dev)
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -609,7 +609,7 @@ static int msix_capability_init(struct p
+ 
+ 	ret = pci_msi_setup_msi_irqs(dev, nvec, PCI_CAP_ID_MSIX);
+ 	if (ret)
+-		goto out_avail;
++		goto out_free;
+ 
+ 	/* Check if all MSI entries honor device restrictions */
+ 	ret = msi_verify_entries(dev);
+@@ -634,23 +634,6 @@ static int msix_capability_init(struct p
+ 	pcibios_free_irq(dev);
+ 	return 0;
+ 
+-out_avail:
+-	if (ret < 0) {
+-		/*
+-		 * If we had some success, report the number of IRQs
+-		 * we succeeded in setting up.
+-		 */
+-		struct msi_desc *entry;
+-		int avail = 0;
+-
+-		for_each_pci_msi_entry(entry, dev) {
+-			if (entry->irq != 0)
+-				avail++;
+-		}
+-		if (avail != 0)
+-			ret = avail;
+-	}
+-
+ out_free:
+ 	free_msi_irqs(dev);
  
 
 
