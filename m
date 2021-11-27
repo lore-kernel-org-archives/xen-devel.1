@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43EEBC433EF
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233687.405750 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93BD6C433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233689.405756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUv-0000fe-IH; Sat, 27 Nov 2021 01:27:25 +0000
+	id 1mqmUx-00013H-2L; Sat, 27 Nov 2021 01:27:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233687.405750; Sat, 27 Nov 2021 01:27:25 +0000
+Received: by outflank-mailman (output) from mailman id 233689.405756; Sat, 27 Nov 2021 01:27:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUu-0000cE-Sk; Sat, 27 Nov 2021 01:27:24 +0000
-Received: by outflank-mailman (input) for mailman id 233687;
- Sat, 27 Nov 2021 01:27:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqmUw-0000yu-HD; Sat, 27 Nov 2021 01:27:26 +0000
+Received: by outflank-mailman (input) for mailman id 233689;
+ Sat, 27 Nov 2021 01:27:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmNY-0002cc-Ue
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:49 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1cb781fb-4f20-11ec-b941-1df2895da90e;
- Sat, 27 Nov 2021 02:19:48 +0100 (CET)
+ id 1mqmSo-0003uw-8Y
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:25:14 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dbe815d7-4f20-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:25:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1cb781fb-4f20-11ec-b941-1df2895da90e
-Message-ID: <20211126223825.093887718@linutronix.de>
+X-Inumbo-ID: dbe815d7-4f20-11ec-9787-a32c541c8605
+Message-ID: <20211127000918.892733246@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975987;
+	s=2020; t=1637976308;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Fm5t3j//2ZJWIAwQC/lUTYq1h7igaXJ6yKKmISA8BnE=;
-	b=XewWMxW5OXAStB0a9VBLtnJFYMcyg2xjonhAMfou6065fbYQjfHi8Lit1HZBQyqQR/DwAG
-	AwiCmSKB1q6Lr6nKj7wU20vZFduCOoVx0VbByG6OY0h00lNOZQhxvSwMuWdcFJXAmB8cfg
-	+7/g89QG+yr4AVj2jdOh6hqABN0N3084KlzXsDKwc0qPDNpytYYmYCfIk9qNoboQ87IiZk
-	sbLzMNeDCVjvhFz+QWxGbYx5STnHWlXZxQAeMopOaJhHalb7kQdDHgdwZOcrsif7RgT5TZ
-	B56dtCmWetc6Z8ZH8LlG56HbbscyTZghWaS14wSjTSdZ9jG1gcJlz4dBE/gGEw==
+	 references:references; bh=1qj+ON8bFgIPks8keDU/08NOHxNWcizsMPwkJuRGMrI=;
+	b=Eb7F85yxU2/GXtXpV1Sbb34yCwETsFbXL6M7KB9gCsOrYAe6tvU0vngeF/GvrxkU48lja3
+	F2zgIqZSQKLmhH4uMq3X7em//nMRXmU/jZfkb/wa14gNatb0Eli/rAD5NP2uW4bG1SCAGT
+	daORTovBU6EUrncvhpHjbL86mNf4uuVU8GDe9SLJ6YHFAwpj/WqqO6Qc8e4Yag5TmqcKSn
+	DGX39oD0FUT7ul4zvXZzOUfffaSI9QoWqGTO4a4QAba7gVl6kbxBmdQVUxhvoGu1hwhhfi
+	DXhZ97otf5O1h336e4rygoy6F8az9re0LGekPc8fp0UpHFu3ANwAV7cnDpEkNw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975987;
+	s=2020e; t=1637976308;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Fm5t3j//2ZJWIAwQC/lUTYq1h7igaXJ6yKKmISA8BnE=;
-	b=2kvzmjSCRTIwQTLiZ9EP0jBkv9lEpqmZpcE4KzPVxgkd40dev6IU63cDMgceYYfHXEdk3z
-	cvOO1KoLp1BLPQBg==
+	 references:references; bh=1qj+ON8bFgIPks8keDU/08NOHxNWcizsMPwkJuRGMrI=;
+	b=EDFk1OiAUgj/RtChZZpnV6C9dpDJ9EJQvgRHe6OJnzHUx7c1LOTjhWgYmcXwQPmh8R+ML8
+	cAasvyhML01ZIfDQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -66,158 +67,144 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jason Gunthorpe <jgg@nvidia.com>,
  Megha Dey <megha.dey@intel.com>,
  Ashok Raj <ashok.raj@intel.com>,
- linux-pci@vger.kernel.org,
  Michael Ellerman <mpe@ellerman.id.au>,
- Paul Mackerras <paulus@samba.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- linuxppc-dev@lists.ozlabs.org,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- linux-mips@vger.kernel.org,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- sparclinux@vger.kernel.org,
- x86@kernel.org,
- xen-devel@lists.xenproject.org,
- ath11k@lists.infradead.org,
- Wei Liu <wei.liu@kernel.org>,
- linux-hyperv@vger.kernel.org,
+ Andrew Cooper <amc96@cam.ac.uk>,
  Juergen Gross <jgross@suse.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 17/22] PCI/MSI: Split out !IRQDOMAIN code
-References: <20211126222700.862407977@linutronix.de>
+ linux-pci@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: [patch 07/10] PCI/MSI: Make free related functions range based
+References: <20211126233124.618283684@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:47 +0100 (CET)
-Message-ID: <20211127011947.Vyzc0eg_ayNp0Sf47EJZUkYZcQyRjmnjer2hvhEbn2I@z>
+Date: Sat, 27 Nov 2021 02:25:08 +0100 (CET)
+Message-ID: <20211127012508.T9yLj1wlQkl0TzvM4Ph5Zv1eUexBEEMHlUkcBrWJbD0@z>
 
-Split out the non irqdomain code into its own file.
+In preparation of runtime expandable PCI/MSI-X vectors convert the related
+free functions to take ranges instead of assuming a zero based vector
+space.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- drivers/pci/msi/Makefile |    5 ++--
- drivers/pci/msi/legacy.c |   51 +++++++++++++++++++++++++++++++++++++++++++++++
- drivers/pci/msi/msi.c    |   46 ------------------------------------------
- 3 files changed, 54 insertions(+), 48 deletions(-)
+ drivers/pci/msi/irqdomain.c |    5 ++---
+ drivers/pci/msi/msi.c       |   24 ++++++++++++++++--------
+ drivers/pci/msi/msi.h       |    2 +-
+ 3 files changed, 19 insertions(+), 12 deletions(-)
 
---- a/drivers/pci/msi/Makefile
-+++ b/drivers/pci/msi/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0
- #
- # Makefile for the PCI/MSI
--obj-$(CONFIG_PCI)		+= pcidev_msi.o
--obj-$(CONFIG_PCI_MSI)		+= msi.o
-+obj-$(CONFIG_PCI)			+= pcidev_msi.o
-+obj-$(CONFIG_PCI_MSI)			+= msi.o
-+obj-$(CONFIG_PCI_MSI_ARCH_FALLBACKS)	+= legacy.o
---- /dev/null
-+++ b/drivers/pci/msi/legacy.c
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * PCI Message Signaled Interrupt (MSI).
-+ *
-+ * Legacy architecture specific setup and teardown mechanism.
-+ */
-+#include "msi.h"
-+
-+/* Arch hooks */
-+int __weak arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
-+{
-+	return -EINVAL;
-+}
-+
-+void __weak arch_teardown_msi_irq(unsigned int irq)
-+{
-+}
-+
-+int __weak arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
-+{
-+	struct msi_desc *desc;
-+	int ret;
-+
-+	/*
-+	 * If an architecture wants to support multiple MSI, it needs to
-+	 * override arch_setup_msi_irqs()
-+	 */
-+	if (type == PCI_CAP_ID_MSI && nvec > 1)
-+		return 1;
-+
-+	for_each_pci_msi_entry(desc, dev) {
-+		ret = arch_setup_msi_irq(dev, desc);
-+		if (ret)
-+			return ret < 0 ? ret : -ENOSPC;
-+	}
-+
-+	return 0;
-+}
-+
-+void __weak arch_teardown_msi_irqs(struct pci_dev *dev)
-+{
-+	struct msi_desc *desc;
-+	int i;
-+
-+	for_each_pci_msi_entry(desc, dev) {
-+		if (desc->irq) {
-+			for (i = 0; i < entry->nvec_used; i++)
-+				arch_teardown_msi_irq(desc->irq + i);
-+		}
-+	}
-+}
+--- a/drivers/pci/msi/irqdomain.c
++++ b/drivers/pci/msi/irqdomain.c
+@@ -19,14 +19,13 @@ int pci_msi_setup_msi_irqs(struct pci_de
+ 	return pci_msi_legacy_setup_msi_irqs(dev, range->ndesc, type);
+ }
+ 
+-void pci_msi_teardown_msi_irqs(struct pci_dev *dev)
++void pci_msi_teardown_msi_irqs(struct pci_dev *dev, struct msi_range *range)
+ {
+-	struct msi_range range = { .first = 0, .last = UINT_MAX, };
+ 	struct irq_domain *domain;
+ 
+ 	domain = dev_get_msi_domain(&dev->dev);
+ 	if (domain && irq_domain_is_hierarchy(domain))
+-		msi_domain_free_irqs_descs_locked(domain, &dev->dev, &range);
++		msi_domain_free_irqs_descs_locked(domain, &dev->dev, range);
+ 	else
+ 		pci_msi_legacy_teardown_msi_irqs(dev);
+ }
 --- a/drivers/pci/msi/msi.c
 +++ b/drivers/pci/msi/msi.c
-@@ -50,52 +50,6 @@ static void pci_msi_teardown_msi_irqs(st
- #define pci_msi_teardown_msi_irqs	arch_teardown_msi_irqs
- #endif
+@@ -222,9 +222,12 @@ void pci_write_msi_msg(unsigned int irq,
+ }
+ EXPORT_SYMBOL_GPL(pci_write_msi_msg);
  
--#ifdef CONFIG_PCI_MSI_ARCH_FALLBACKS
--/* Arch hooks */
--int __weak arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
--{
--	return -EINVAL;
--}
--
--void __weak arch_teardown_msi_irq(unsigned int irq)
--{
--}
--
--int __weak arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
--{
--	struct msi_desc *entry;
--	int ret;
--
--	/*
--	 * If an architecture wants to support multiple MSI, it needs to
--	 * override arch_setup_msi_irqs()
--	 */
--	if (type == PCI_CAP_ID_MSI && nvec > 1)
--		return 1;
--
--	for_each_pci_msi_entry(entry, dev) {
--		ret = arch_setup_msi_irq(dev, entry);
--		if (ret < 0)
--			return ret;
--		if (ret > 0)
--			return -ENOSPC;
--	}
--
--	return 0;
--}
--
--void __weak arch_teardown_msi_irqs(struct pci_dev *dev)
--{
--	int i;
--	struct msi_desc *entry;
--
--	for_each_pci_msi_entry(entry, dev)
--		if (entry->irq)
--			for (i = 0; i < entry->nvec_used; i++)
--				arch_teardown_msi_irq(entry->irq + i);
--}
--#endif /* CONFIG_PCI_MSI_ARCH_FALLBACKS */
--
- /*
-  * PCI 2.3 does not specify mask bits for each MSI interrupt.  Attempting to
-  * mask all MSI interrupts by clearing the MSI enable bit does not work
+-static void free_msi_irqs(struct pci_dev *dev)
++static void free_msi_irqs(struct pci_dev *dev, struct msi_range *range, bool shutdown)
+ {
+-	pci_msi_teardown_msi_irqs(dev);
++	pci_msi_teardown_msi_irqs(dev, range);
++
++	if (!shutdown)
++		return;
+ 
+ 	if (dev->msix_base) {
+ 		iounmap(dev->msix_base);
+@@ -443,7 +446,7 @@ static int msi_capability_init(struct pc
+ 
+ err:
+ 	pci_msi_unmask(entry, msi_multi_mask(entry));
+-	free_msi_irqs(dev);
++	free_msi_irqs(dev, &range, true);
+ unlock:
+ 	msi_unlock_descs(&dev->dev);
+ 	kfree(masks);
+@@ -538,7 +541,7 @@ static void msix_mask_all(void __iomem *
+ 
+ static int msix_setup_interrupts(struct pci_dev *dev, void __iomem *base,
+ 				 struct msi_range *range, struct msix_entry *entries,
+-				 struct irq_affinity *affd)
++				 struct irq_affinity *affd, bool expand)
+ {
+ 	struct irq_affinity_desc *masks = NULL;
+ 	int ret;
+@@ -566,7 +569,8 @@ static int msix_setup_interrupts(struct
+ 	goto out_unlock;
+ 
+ out_free:
+-	free_msi_irqs(dev);
++	free_msi_irqs(dev, range, !expand);
++
+ out_unlock:
+ 	msi_unlock_descs(&dev->dev);
+ 	kfree(masks);
+@@ -614,7 +618,7 @@ static int msix_capability_init(struct p
+ 	/* Ensure that all table entries are masked. */
+ 	msix_mask_all(base, tsize);
+ 
+-	ret = msix_setup_interrupts(dev, base, &range, entries, affd);
++	ret = msix_setup_interrupts(dev, base, &range, entries, affd, false);
+ 	if (ret)
+ 		goto out_disable;
+ 
+@@ -728,12 +732,14 @@ static void pci_msi_shutdown(struct pci_
+ 
+ void pci_disable_msi(struct pci_dev *dev)
+ {
++	struct msi_range range = { .first = 0, .last = 0, };
++
+ 	if (!pci_msi_enable || !dev || !dev->msi_enabled)
+ 		return;
+ 
+ 	msi_lock_descs(&dev->dev);
+ 	pci_msi_shutdown(dev);
+-	free_msi_irqs(dev);
++	free_msi_irqs(dev, &range, true);
+ 	msi_unlock_descs(&dev->dev);
+ }
+ EXPORT_SYMBOL(pci_disable_msi);
+@@ -817,12 +823,14 @@ static void pci_msix_shutdown(struct pci
+ 
+ void pci_disable_msix(struct pci_dev *dev)
+ {
++	struct msi_range range = { .first = 0, .last = UINT_MAX, };
++
+ 	if (!pci_msi_enable || !dev || !dev->msix_enabled)
+ 		return;
+ 
+ 	msi_lock_descs(&dev->dev);
+ 	pci_msix_shutdown(dev);
+-	free_msi_irqs(dev);
++	free_msi_irqs(dev, &range, true);
+ 	msi_unlock_descs(&dev->dev);
+ }
+ EXPORT_SYMBOL(pci_disable_msix);
+--- a/drivers/pci/msi/msi.h
++++ b/drivers/pci/msi/msi.h
+@@ -6,7 +6,7 @@
+ #define msix_table_size(flags)	((flags & PCI_MSIX_FLAGS_QSIZE) + 1)
+ 
+ extern int pci_msi_setup_msi_irqs(struct pci_dev *dev, struct msi_range *range, int type);
+-extern void pci_msi_teardown_msi_irqs(struct pci_dev *dev);
++extern void pci_msi_teardown_msi_irqs(struct pci_dev *dev, struct msi_range *range);
+ 
+ #ifdef CONFIG_PCI_MSI_ARCH_FALLBACKS
+ extern int pci_msi_legacy_setup_msi_irqs(struct pci_dev *dev, int nvec, int type);
 
 
