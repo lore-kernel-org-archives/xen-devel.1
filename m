@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AD81C433F5
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233655.405665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C849C4321E
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233659.405685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUe-0004sI-Fx; Sat, 27 Nov 2021 01:27:08 +0000
+	id 1mqmUh-0005sL-VW; Sat, 27 Nov 2021 01:27:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233655.405665; Sat, 27 Nov 2021 01:27:08 +0000
+Received: by outflank-mailman (output) from mailman id 233659.405685; Sat, 27 Nov 2021 01:27:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUd-0004oW-RF; Sat, 27 Nov 2021 01:27:07 +0000
-Received: by outflank-mailman (input) for mailman id 233655;
- Sat, 27 Nov 2021 01:27:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqmUh-0005pV-HM; Sat, 27 Nov 2021 01:27:11 +0000
+Received: by outflank-mailman (input) for mailman id 233659;
+ Sat, 27 Nov 2021 01:27:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmNL-0002cc-2a
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:35 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1445290e-4f20-11ec-b941-1df2895da90e;
- Sat, 27 Nov 2021 02:19:34 +0100 (CET)
+ id 1mqmNc-00020H-9T
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:52 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1e7da7c0-4f20-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:19:51 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1445290e-4f20-11ec-b941-1df2895da90e
-Message-ID: <20211126223824.558746009@linutronix.de>
+X-Inumbo-ID: 1e7da7c0-4f20-11ec-9787-a32c541c8605
+Message-ID: <20211126223825.205369150@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975973;
+	s=2020; t=1637975990;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=t8fdQf5v0Re3s6aU2w+RDhHEUcAYg2OEvsShj+q+pN4=;
-	b=k3LK6nDtbjd4YGl8vOmrIZ02BVXh9ZMWUHEM7ttmKyvlCHnca06fC+l+4jF5F+hBFDP8GJ
-	DeFLPG5Xm8Bc4Hhc7h+t7TuaBGGeCCNzAQY1fycjhbU3S1JJSNFBZ/B+hMI9UeXnGhlu5e
-	s9r9oMIkbB8PwKngQi9dz5DWNT9SzXlJnBGen0GkHcDk9mxX6//4DR69MfrvwLonMK2RyY
-	Ri1QyvHxQPYj4iggM4CCqYBaXNV5935b9NWGlpqQNUWOFSmYwugOsdnBaNR8HB68mMOGgp
-	Q1CNhqjsN5RzNJqIYolTS3TdSOTjQbch31LUaXLFkpINATuH8IwjIXPeqJuyTg==
+	 references:references; bh=nFqFw10FNB3YOwALwDw82lvlHKuNVaj2KNOVAS+AX+k=;
+	b=XxApkOzom8INqALAoCZXnrM4Gnfq0P5GFuHbGcbsFfXChmsBjBRR8Zre+TuXWv4z5oHF/D
+	27C5TK24a23MOmJBeYVaW9cCplXJLITNdKg10JEBz8oTehDPyyfs3FciGiHEms5WL8JDag
+	52S+Frofyun05kxZ+YWSxvjUyOIel0FxMfLXiEs3TDVLbwr55wPMh/3rPSf2nT/i2JzwLL
+	zftakULTHTxPert40kEEFdjOny39idUZcd25undSrm5WMAU87UNDGUGbSd6C5shoMJVpZk
+	a/+xgaOEsYDt53mm6tVNNHcfadUk2EMQ02Z8BgKKcXGB4JY6BzIjRA3g4H6V/A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975973;
+	s=2020e; t=1637975990;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=t8fdQf5v0Re3s6aU2w+RDhHEUcAYg2OEvsShj+q+pN4=;
-	b=x0q81IPAGM3E7Z9Q/NsuMzv2IhRo7nqzgjSuf3p2DFzivVtMHfHdpjxs9cJDYLObc3Ebzg
-	CVyOdwAICSw7CIAQ==
+	 references:references; bh=nFqFw10FNB3YOwALwDw82lvlHKuNVaj2KNOVAS+AX+k=;
+	b=Vi13o2zcshu0Zxixi8TKOXGvkRDXe53XxUuH+PoNwGcyMUye1tI4Lhz4L+Jh6z/xJGTC6x
+	SgID9tLyCfbnS1CQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -83,35 +84,83 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Juergen Gross <jgross@suse.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 08/22] PCI/sysfs: Use pci_irq_vector()
+Subject: [patch 19/22] PCI/MSI: Sanitize MSIX table map handling
 References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:33 +0100 (CET)
-Message-ID: <20211127011933.g4UrBunj6AH6ULK6nFQ03ZkDoNzdmKWxzh6DszOZbOc@z>
+Date: Sat, 27 Nov 2021 02:19:50 +0100 (CET)
 
-instead of fiddling with msi descriptors.
+Unmapping the MSIX base mapping in the loops which allocate/free MSI
+desciptors is daft and in the way of allowing runtime expansion of MSI-X
+descriptors.
+
+Store the mapping in struct pci_dev and free it after freeing the MSI-X
+descriptors.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- drivers/pci/pci-sysfs.c |    7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ drivers/pci/msi/msi.c |   18 ++++++++----------
+ include/linux/pci.h   |    1 +
+ 2 files changed, 9 insertions(+), 10 deletions(-)
 
---- a/drivers/pci/pci-sysfs.c
-+++ b/drivers/pci/pci-sysfs.c
-@@ -62,11 +62,8 @@ static ssize_t irq_show(struct device *d
- 	 * For MSI, show the first MSI IRQ; for all other cases including
- 	 * MSI-X, show the legacy INTx IRQ.
- 	 */
--	if (pdev->msi_enabled) {
--		struct msi_desc *desc = first_pci_msi_entry(pdev);
--
--		return sysfs_emit(buf, "%u\n", desc->irq);
--	}
-+	if (pdev->msi_enabled)
-+		return sysfs_emit(buf, "%u\n", pci_irq_vector(pdev, 0));
- #endif
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -241,14 +241,14 @@ static void free_msi_irqs(struct pci_dev
+ 	pci_msi_teardown_msi_irqs(dev);
  
- 	return sysfs_emit(buf, "%u\n", pdev->irq);
+ 	list_for_each_entry_safe(entry, tmp, msi_list, list) {
+-		if (entry->pci.msi_attrib.is_msix) {
+-			if (list_is_last(&entry->list, msi_list))
+-				iounmap(entry->pci.mask_base);
+-		}
+-
+ 		list_del(&entry->list);
+ 		free_msi_entry(entry);
+ 	}
++
++	if (dev->msix_base) {
++		iounmap(dev->msix_base);
++		dev->msix_base = NULL;
++	}
+ }
+ 
+ static void pci_intx_for_msi(struct pci_dev *dev, int enable)
+@@ -501,10 +501,6 @@ static int msix_setup_entries(struct pci
+ 	for (i = 0, curmsk = masks; i < nvec; i++) {
+ 		entry = alloc_msi_entry(&dev->dev, 1, curmsk);
+ 		if (!entry) {
+-			if (!i)
+-				iounmap(base);
+-			else
+-				free_msi_irqs(dev);
+ 			/* No enough memory. Don't try again */
+ 			ret = -ENOMEM;
+ 			goto out;
+@@ -602,12 +598,14 @@ static int msix_capability_init(struct p
+ 		goto out_disable;
+ 	}
+ 
++	dev->msix_base = base;
++
+ 	/* Ensure that all table entries are masked. */
+ 	msix_mask_all(base, tsize);
+ 
+ 	ret = msix_setup_entries(dev, base, entries, nvec, affd);
+ 	if (ret)
+-		goto out_disable;
++		goto out_free;
+ 
+ 	ret = pci_msi_setup_msi_irqs(dev, nvec, PCI_CAP_ID_MSIX);
+ 	if (ret)
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -473,6 +473,7 @@ struct pci_dev {
+ 	u8		ptm_granularity;
+ #endif
+ #ifdef CONFIG_PCI_MSI
++	void __iomem	*msix_base;
+ 	const struct attribute_group **msi_irq_groups;
+ #endif
+ 	struct pci_vpd	vpd;
 
 
