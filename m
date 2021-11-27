@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25B8C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25EBC433FE
 	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233676.405724 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.233678.405727 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUp-0007WF-Mp; Sat, 27 Nov 2021 01:27:19 +0000
+	id 1mqmUq-0007hD-AA; Sat, 27 Nov 2021 01:27:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233676.405724; Sat, 27 Nov 2021 01:27:19 +0000
+Received: by outflank-mailman (output) from mailman id 233678.405727; Sat, 27 Nov 2021 01:27:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUo-0007Qi-O9; Sat, 27 Nov 2021 01:27:18 +0000
-Received: by outflank-mailman (input) for mailman id 233676;
- Sat, 27 Nov 2021 01:27:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mqmUp-0007bl-JQ; Sat, 27 Nov 2021 01:27:19 +0000
+Received: by outflank-mailman (input) for mailman id 233678;
+ Sat, 27 Nov 2021 01:27:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmNF-0002cc-Ux
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:29 +0000
+ id 1mqmNP-00020H-Gk
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:39 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1176140c-4f20-11ec-b941-1df2895da90e;
- Sat, 27 Nov 2021 02:19:29 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 171c77a7-4f20-11ec-9787-a32c541c8605;
+ Sat, 27 Nov 2021 02:19:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1176140c-4f20-11ec-b941-1df2895da90e
-Message-ID: <20211126223824.382273262@linutronix.de>
+X-Inumbo-ID: 171c77a7-4f20-11ec-9787-a32c541c8605
+Message-ID: <20211126223824.737214551@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975969;
+	s=2020; t=1637975978;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=w7GncdwHZHkuO6107A0BMJdTfScXy8O2W/1Ze2L1KBI=;
-	b=3QE1kwAZSn0AOk+bavNZ+1QGzKQwtdZggp/2QupSoLnSv4hgBf0i5NYSQk1Xh3Te7r2lj2
-	RIKrJ8nRt+yOUSqgv/raaaEzi4g7iUcBuN551YDz6Xaov3UfHqH8KbAZc91CzVW9+qGr+5
-	0K2kZCbaxqFIj4mFhtFNSEu+KAhUE1WDPPYhMsX8N8ff3xkHmUekaAo3u4T7A66BSLqhYp
-	4XGys/cw7iBRHVdNQTa9QVZRKfJojBV6cCn4mN7axCrfi968z4S8U7K2yEJOsKQLwWgo1n
-	EZ7cAGoXHBM1b+VijVozl6thH/vIF8O3zDUH6vXm2+A/d3lLLGdu2F4xFTZCEg==
+	 references:references; bh=aZOv1txgfOaOUbPFrZO+dbMPb9SLUMuv6lc2RMuyFjg=;
+	b=gLteyA8nzze5GVNCuntT+mDm6BaDWteqvktrkoi4ASYzPXrlz4HKz0bxicobR9/2app1it
+	5Jy9qIWqgXn1Yj3OnnnOAvfU3H1kJ2vIi2IgMpIOPf3Tbg+hwPdIQAMRBQMKMqsPyJSKCA
+	wKej5OsKAZizHqGwChrYLE1YONAQ8ZADKZ/fhlTu0TWHLuld7oQdv/UKLaQWm/gl5ZetSr
+	yRIutEfTCLBZ7jzkBcIGoANQ1a7tyhNoqABO43Tmkk667izRZp/2B6vZyjNMgGaUpCFWwm
+	uK+aQVNlYDtOZW5StTeczSND/gp8vKFzi0ncw1BQWiiVIPNjOWmse1DqR/W8Hw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975969;
+	s=2020e; t=1637975978;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=w7GncdwHZHkuO6107A0BMJdTfScXy8O2W/1Ze2L1KBI=;
-	b=/+krVhSSUWDZcKzVa8Z7DFG7rRo3Xw/7JdSU0e8eVBPs+Rs+2BYhA4S+6BpELmkd/ZqXPd
-	OxLK/KydpitaftBQ==
+	 references:references; bh=aZOv1txgfOaOUbPFrZO+dbMPb9SLUMuv6lc2RMuyFjg=;
+	b=8887gmXcOxR2mcE3VZwOWRnobHxN5JTQvSyxaMwj/RCiewHrEtBePVsZfuQUe9gZwQtKvb
+	qBx5Exc3k7997lBQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -66,6 +66,9 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jason Gunthorpe <jgg@nvidia.com>,
  Megha Dey <megha.dey@intel.com>,
  Ashok Raj <ashok.raj@intel.com>,
+ Wei Liu <wei.liu@kernel.org>,
+ x86@kernel.org,
+ linux-hyperv@vger.kernel.org,
  linux-pci@vger.kernel.org,
  Michael Ellerman <mpe@ellerman.id.au>,
  Paul Mackerras <paulus@samba.org>,
@@ -75,49 +78,122 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-mips@vger.kernel.org,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  sparclinux@vger.kernel.org,
- x86@kernel.org,
  xen-devel@lists.xenproject.org,
  ath11k@lists.infradead.org,
- Wei Liu <wei.liu@kernel.org>,
- linux-hyperv@vger.kernel.org,
  Juergen Gross <jgross@suse.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 05/22] genirq/msi: Fixup includes
+Subject: [patch 11/22] x86/hyperv: Refactor hv_msi_domain_free_irqs()
 References: <20211126222700.862407977@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:28 +0100 (CET)
-Message-ID: <20211127011928.f9pg1g6GkFGV8FAoh1YIysmDGZdc9pHbTekvnireK8A@z>
+Date: Sat, 27 Nov 2021 02:19:37 +0100 (CET)
+Message-ID: <20211127011937.-JRUNkn-RovFuaDg5Ot-gTRPT-wnu707wEkieo7-saw@z>
 
-Remove the kobject.h include from msi.h as it's not required and add a
-sysfs.h include to the core code instead.
+No point in looking up things over and over. Just look up the associated
+irq data and work from there.
+
+No functional change.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Wei Liu <wei.liu@kernel.org>
+Cc: x86@kernel.org
+Cc: linux-hyperv@vger.kernel.org
 ---
- include/linux/msi.h |    1 -
- kernel/irq/msi.c    |    1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/hyperv/irqdomain.c |   55 +++++++++++++-------------------------------
+ 1 file changed, 17 insertions(+), 38 deletions(-)
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -2,7 +2,6 @@
- #ifndef LINUX_MSI_H
- #define LINUX_MSI_H
+--- a/arch/x86/hyperv/irqdomain.c
++++ b/arch/x86/hyperv/irqdomain.c
+@@ -253,64 +253,43 @@ static int hv_unmap_msi_interrupt(struct
+ 	return hv_unmap_interrupt(hv_build_pci_dev_id(dev).as_uint64, old_entry);
+ }
  
--#include <linux/kobject.h>
- #include <linux/list.h>
- #include <asm/msi.h>
+-static void hv_teardown_msi_irq_common(struct pci_dev *dev, struct msi_desc *msidesc, int irq)
++static void hv_teardown_msi_irq(struct pci_dev *dev, struct irq_data *irqd)
+ {
+-	u64 status;
+ 	struct hv_interrupt_entry old_entry;
+-	struct irq_desc *desc;
+-	struct irq_data *data;
+ 	struct msi_msg msg;
++	u64 status;
  
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -14,6 +14,7 @@
- #include <linux/irqdomain.h>
- #include <linux/msi.h>
- #include <linux/slab.h>
-+#include <linux/sysfs.h>
- #include <linux/pci.h>
+-	desc = irq_to_desc(irq);
+-	if (!desc) {
+-		pr_debug("%s: no irq desc\n", __func__);
+-		return;
+-	}
+-
+-	data = &desc->irq_data;
+-	if (!data) {
+-		pr_debug("%s: no irq data\n", __func__);
+-		return;
+-	}
+-
+-	if (!data->chip_data) {
++	if (!irqd->chip_data) {
+ 		pr_debug("%s: no chip data\n!", __func__);
+ 		return;
+ 	}
  
- #include "internals.h"
+-	old_entry = *(struct hv_interrupt_entry *)data->chip_data;
++	old_entry = *(struct hv_interrupt_entry *)irqd->chip_data;
+ 	entry_to_msi_msg(&old_entry, &msg);
+ 
+-	kfree(data->chip_data);
+-	data->chip_data = NULL;
++	kfree(irqd->chip_data);
++	irqd->chip_data = NULL;
+ 
+ 	status = hv_unmap_msi_interrupt(dev, &old_entry);
+ 
+-	if (status != HV_STATUS_SUCCESS) {
++	if (status != HV_STATUS_SUCCESS)
+ 		pr_err("%s: hypercall failed, status %lld\n", __func__, status);
+-		return;
+-	}
+ }
+ 
+-static void hv_msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
++static void hv_msi_free_irq(struct irq_domain *domain,
++			    struct msi_domain_info *info, unsigned int virq)
+ {
+-	int i;
+-	struct msi_desc *entry;
+-	struct pci_dev *pdev;
++	struct irq_data *irqd = irq_get_irq_data(virq);
++	struct msi_desc *desc;
+ 
+-	if (WARN_ON_ONCE(!dev_is_pci(dev)))
++	if (!irqd)
+ 		return;
+ 
+-	pdev = to_pci_dev(dev);
++	desc = irq_data_get_msi_desc(irqd);
++	if (!desc || !desc->irq || WARN_ON_ONCE(!dev_is_pci(desc->dev)))
++		return;
+ 
+-	for_each_pci_msi_entry(entry, pdev) {
+-		if (entry->irq) {
+-			for (i = 0; i < entry->nvec_used; i++) {
+-				hv_teardown_msi_irq_common(pdev, entry, entry->irq + i);
+-				irq_domain_free_irqs(entry->irq + i, 1);
+-			}
+-		}
+-	}
++	hv_teardown_msi_irq(to_pci_dev(desc->dev), irqd);
+ }
+ 
+ /*
+@@ -329,7 +308,7 @@ static struct irq_chip hv_pci_msi_contro
+ };
+ 
+ static struct msi_domain_ops pci_msi_domain_ops = {
+-	.domain_free_irqs	= hv_msi_domain_free_irqs,
++	.msi_free		= hv_msi_free_irq,
+ 	.msi_prepare		= pci_msi_prepare,
+ };
+ 
 
 
