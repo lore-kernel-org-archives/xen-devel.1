@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A503DC4321E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79039C43217
 	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 17:52:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234021.406211 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.234026.406263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mr1rj-0004xr-LB; Sat, 27 Nov 2021 17:51:59 +0000
+	id 1mr1ro-0006JF-Mq; Sat, 27 Nov 2021 17:52:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234021.406211; Sat, 27 Nov 2021 17:51:59 +0000
+Received: by outflank-mailman (output) from mailman id 234026.406263; Sat, 27 Nov 2021 17:52:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mr1rj-0004w9-1j; Sat, 27 Nov 2021 17:51:59 +0000
-Received: by outflank-mailman (input) for mailman id 234021;
- Sat, 27 Nov 2021 17:51:57 +0000
+	id 1mr1rn-0006FF-Vj; Sat, 27 Nov 2021 17:52:04 +0000
+Received: by outflank-mailman (input) for mailman id 234026;
+ Sat, 27 Nov 2021 17:52:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BaOL=QO=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mr1rh-0004Ih-CJ
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 17:51:57 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
+ id 1mr1rk-0004Ih-Rn
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 17:52:00 +0000
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [2a00:1450:4864:20::231])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b680862a-4faa-11ec-976b-d102b41d0961;
- Sat, 27 Nov 2021 18:51:56 +0100 (CET)
-Received: by mail-lf1-x131.google.com with SMTP id k37so32613100lfv.3
- for <xen-devel@lists.xenproject.org>; Sat, 27 Nov 2021 09:51:56 -0800 (PST)
+ id b877781f-4faa-11ec-976b-d102b41d0961;
+ Sat, 27 Nov 2021 18:52:00 +0100 (CET)
+Received: by mail-lj1-x231.google.com with SMTP id i63so25447941lji.3
+ for <xen-devel@lists.xenproject.org>; Sat, 27 Nov 2021 09:52:00 -0800 (PST)
 Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id f18sm827075ljc.104.2021.11.27.09.51.55
+ by smtp.gmail.com with ESMTPSA id f18sm827075ljc.104.2021.11.27.09.51.58
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 27 Nov 2021 09:51:55 -0800 (PST)
+ Sat, 27 Nov 2021 09:51:59 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b680862a-4faa-11ec-976b-d102b41d0961
+X-Inumbo-ID: b877781f-4faa-11ec-976b-d102b41d0961
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=dtfeyRHebMlcl10xVwWyfn47FIgKMBc9tKO7DdPGuNk=;
-        b=Kuoy10M2GVMPc/DLyV92XhRBKu1oetKKHZouKB4xhmG22hJ8XRv1Y3F+tWbUlaCQYB
-         /QYEADs698QECXWxg1hchlVSOBP1yUNvEjnhdFPC6QD5Axs3kCUR0acovI0L1d3UXQsC
-         Zqyvl6vtQrmY+rbsB076LkUUbeHCjR7RlAAgpokibB+UYQW8RAZJhBFWOVgiMrjLKOvM
-         3mVlQxV36iAjZJazDL3i7K5dHBaYcsaWL/k5AfEs754euLyLkP/gr1BLFSj4qvzMkAMy
-         vveR2/mkuOmUtfdpLSTfRPICp21xIzA9PqDi8LTu/+bRnZB9o5yON46cDNj90HVHfvr/
-         X9eQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=FyIIWAAFmJxixgOyTM6dxQSE4aN0oIOcdU1AbmFPmek=;
+        b=GHsGKs1gXcGqMfXG6bbH/OmtpfRJ6f2IBuERRrno5etnJdsPQLsI7Zs6gb00nQb9Wd
+         XaMJpZi9bTfkDhrSfhB/PG+F8dXHayOi2JOp7GNHOamHCd/UofJg44rdM0MapglzdlnF
+         UT+akpTYovZ/8ECMghVsw9rP0YIekBJjNETH0T0VpcfAKSWmHKVr6cCTMERyVtFXZhGN
+         BIEqBwwWOYGzQqHHvIfEmzI1tQrdCkt+SguEBW0VVHonIvzTZW8vaYdniC8kmCvBTkKp
+         Bn0asH/tij+CiphOUhMsuEeiPNTYrUJGLVpdw+2YlxHZM3msFn4M8Z2PX7viB001V+Kp
+         xemw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=dtfeyRHebMlcl10xVwWyfn47FIgKMBc9tKO7DdPGuNk=;
-        b=s3cPKb7nnElYRpwOozmJuJoMlZVSQLvRI1jdNkK7PpRGpKQwYmQRsbS8aC5bpWxzJ/
-         z9HKxdYXamXLQcqMkk2bDD4Sdb4WnG8YrUE4uTfkoZ7y7B4FbRPrzP3qfFJuRTP6682m
-         56bxcHF5QxcB1wR3OBQjcCdXZ6uKH2rOBh2YhrxXeAESFxZUfcvSPKe9IJu3G/GwFn9R
-         M3BGa8zR3EvZnL4x3AR9rWLRg3W0Ft9trl1Oe6Yp5pRm2aBqGrLA10IA/tnLXUCLlKrn
-         N9dffAPQnIcWkKwtrxbCMMlQ41yq0rQqpPahrwCW3j4/nDE4k7Is3RR1uxiUSpEfCyJA
-         jHNQ==
-X-Gm-Message-State: AOAM530ZYWv3WSNJUlqwiMZtqlphNEIMvnQL6dOY4LMTquELh2D5TSZt
-	ftKbx1j35dAltJpoEGcoYqBrfwclrFo=
-X-Google-Smtp-Source: ABdhPJzMWLvRMudm97ubcULlgNgZHOkIpC398jyRErsvnGV1oHhEM+JhWsbw84Zdot73uTkXhqOi4w==
-X-Received: by 2002:a05:6512:3d8c:: with SMTP id k12mr38698652lfv.365.1638035516219;
-        Sat, 27 Nov 2021 09:51:56 -0800 (PST)
+         :references;
+        bh=FyIIWAAFmJxixgOyTM6dxQSE4aN0oIOcdU1AbmFPmek=;
+        b=mMHhlfhJq7wjk3wX+zB7ZaEftrlzZP2nZoLcN+8OJ4RvU4DzaQ9SyAD8le8duWLuQ7
+         JnRmz3X0fHG5L9cqGdompJgUJaBhPSy7yJgoRoaLcR9R+GRGxlkwR2UdjO6TU0zs2Kmb
+         T6oS0v5aQr6QJUKc4ukJko/KzUmJPQnD/5OoB3KW3jebg1asebW+DiPiKAtQ1vOMdpV8
+         erpWa2aZ79MdDUN2r8/eWiAKfWNElILiTj5YPpNl4FmZ9IHOXMOE0WYOB+SjRnEWQ3R/
+         Y8YBdnhoL2DbSsn0cH7PJJkEC2A4SHI4T/FBv6EnQcKK5yqeZtcd3pSv4bXAiptUzJjM
+         7A7Q==
+X-Gm-Message-State: AOAM530eNFzAlB2Zltmq9pS1UABtA2DPgKSrYf9QVUj9J0HTdmSwCRJW
+	xCNG+tmnXzMVwQ3yGVxO4HZtGeg9fxQ=
+X-Google-Smtp-Source: ABdhPJzjMZrfxBLx7Z7zAyGCtcqtbrTb3ahQJT7JKt23e9NahIdg8jbACgJGDRuhTOvxmSfSnkckbQ==
+X-Received: by 2002:a2e:bb98:: with SMTP id y24mr10661874lje.315.1638035519303;
+        Sat, 27 Nov 2021 09:51:59 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
@@ -80,82 +79,108 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Rahul Singh <rahul.singh@arm.com>,
 	Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Subject: [PATCH 06/10] iommu/ipmmu-vmsa: Add utlb_offset_base
-Date: Sat, 27 Nov 2021 19:51:41 +0200
-Message-Id: <1638035505-16931-7-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH 10/10] iommu/arm: Remove code duplication in all IOMMU drivers
+Date: Sat, 27 Nov 2021 19:51:45 +0200
+Message-Id: <1638035505-16931-11-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1638035505-16931-1-git-send-email-olekstysh@gmail.com>
 References: <1638035505-16931-1-git-send-email-olekstysh@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-This is a non-verbatim port of corresponding Linux upsteam commit:
-1289f7f15001c7ed36be6d23cb145c1d5feacdc8
-
-Original commit message:
- commit 1289f7f15001c7ed36be6d23cb145c1d5feacdc8
- Author: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
- Date:   Wed Nov 6 11:35:50 2019 +0900
-
-  iommu/ipmmu-vmsa: Add utlb_offset_base
-
-  Since we will have changed memory mapping of the IPMMU in the future,
-  this patch adds a utlb_offset_base into struct ipmmu_features
-  for IMUCTR and IMUASID registers. No behavior change.
-
-  Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-  Reviewed-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
-  Signed-off-by: Joerg Roedel <jroedel@suse.de>
-
-**********
-
-This is a prereq work needed to add support for S4 series easily
-in the future.
-
-Almost the same change as original commit makes, but without updating
-struct ipmmu_features_default which Xen driver doesn't have (there is
-no support of old Arm32 based Gen2 SoCs).
-
-No change in behavior.
+All IOMMU drivers on Arm perform almost the same generic actions in
+hwdom_init callback. Move this code to common arch_iommu_hwdom_init()
+in order to get rid of code duplication.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 ---
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ xen/drivers/passthrough/arm/iommu.c      |  7 +++++++
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c |  8 --------
+ xen/drivers/passthrough/arm/smmu-v3.c    | 10 ----------
+ xen/drivers/passthrough/arm/smmu.c       | 10 ----------
+ 4 files changed, 7 insertions(+), 28 deletions(-)
 
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index ca33456..d8f96fc 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -111,6 +111,7 @@ struct ipmmu_features {
-     unsigned int num_utlbs;
-     unsigned int ctx_offset_base;
-     unsigned int ctx_offset_stride;
-+    unsigned int utlb_offset_base;
- };
+diff --git a/xen/drivers/passthrough/arm/iommu.c b/xen/drivers/passthrough/arm/iommu.c
+index ee653a9..fc45318 100644
+--- a/xen/drivers/passthrough/arm/iommu.c
++++ b/xen/drivers/passthrough/arm/iommu.c
+@@ -134,6 +134,13 @@ void arch_iommu_domain_destroy(struct domain *d)
  
- /* Root/Cache IPMMU device's information */
-@@ -374,7 +375,7 @@ static void ipmmu_ctx_write_all(struct ipmmu_vmsa_domain *domain,
- 
- static uint32_t ipmmu_utlb_reg(struct ipmmu_vmsa_device *mmu, uint32_t reg)
+ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
  {
--    return reg;
-+    return mmu->features->utlb_offset_base + reg;
++    /* Set to false options not supported on ARM. */
++    if ( iommu_hwdom_inclusive )
++        printk(XENLOG_WARNING "map-inclusive dom0-iommu option is not supported on ARM\n");
++    iommu_hwdom_inclusive = false;
++    if ( iommu_hwdom_reserved == 1 )
++        printk(XENLOG_WARNING "map-reserved dom0-iommu option is not supported on ARM\n");
++    iommu_hwdom_reserved = 0;
  }
  
- static void ipmmu_imuasid_write(struct ipmmu_vmsa_device *mmu,
-@@ -738,6 +739,7 @@ static const struct ipmmu_features ipmmu_features_rcar_gen3 = {
-     .num_utlbs = 48,
-     .ctx_offset_base = 0,
-     .ctx_offset_stride = 0x40,
-+    .utlb_offset_base = 0,
- };
+ /*
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index 32609f8..451fc21 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -1336,14 +1336,6 @@ static int ipmmu_iommu_domain_init(struct domain *d)
  
- static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
+ static void __hwdom_init ipmmu_iommu_hwdom_init(struct domain *d)
+ {
+-    /* Set to false options not supported on ARM. */
+-    if ( iommu_hwdom_inclusive )
+-        printk(XENLOG_WARNING "ipmmu: map-inclusive dom0-iommu option is not supported on ARM\n");
+-    iommu_hwdom_inclusive = false;
+-    if ( iommu_hwdom_reserved == 1 )
+-        printk(XENLOG_WARNING "ipmmu: map-reserved dom0-iommu option is not supported on ARM\n");
+-    iommu_hwdom_reserved = 0;
+-
+     arch_iommu_hwdom_init(d);
+ }
+ 
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index d115df7..ca8b5c7 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -3404,16 +3404,6 @@ static int arm_smmu_iommu_xen_domain_init(struct domain *d)
+ 
+ static void __hwdom_init arm_smmu_iommu_hwdom_init(struct domain *d)
+ {
+-	/* Set to false options not supported on ARM. */
+-	if (iommu_hwdom_inclusive)
+-		printk(XENLOG_WARNING
+-		"map-inclusive dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_inclusive = false;
+-	if (iommu_hwdom_reserved == 1)
+-		printk(XENLOG_WARNING
+-		"map-reserved dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_reserved = 0;
+-
+ 	arch_iommu_hwdom_init(d);
+ }
+ 
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index c9dfc4c..ec18df7 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -2851,16 +2851,6 @@ static int arm_smmu_iommu_domain_init(struct domain *d)
+ 
+ static void __hwdom_init arm_smmu_iommu_hwdom_init(struct domain *d)
+ {
+-	/* Set to false options not supported on ARM. */
+-	if ( iommu_hwdom_inclusive )
+-		printk(XENLOG_WARNING
+-		"map-inclusive dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_inclusive = false;
+-	if ( iommu_hwdom_reserved == 1 )
+-		printk(XENLOG_WARNING
+-		"map-reserved dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_reserved = 0;
+-
+ 	arch_iommu_hwdom_init(d);
+ }
+ 
 -- 
 2.7.4
 
