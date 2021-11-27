@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546C5C433EF
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:24:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233610.405500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF686C433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:24:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233612.405522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmSF-000520-FE; Sat, 27 Nov 2021 01:24:39 +0000
+	id 1mqmSJ-0005fp-5X; Sat, 27 Nov 2021 01:24:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233610.405500; Sat, 27 Nov 2021 01:24:39 +0000
+Received: by outflank-mailman (output) from mailman id 233612.405522; Sat, 27 Nov 2021 01:24:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmSF-00050t-A6; Sat, 27 Nov 2021 01:24:39 +0000
-Received: by outflank-mailman (input) for mailman id 233610;
- Sat, 27 Nov 2021 01:24:38 +0000
+	id 1mqmSI-0005fe-W4; Sat, 27 Nov 2021 01:24:42 +0000
+Received: by outflank-mailman (input) for mailman id 233612;
+ Sat, 27 Nov 2021 01:24:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmSE-0004gG-2S
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:24:38 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ id 1mqmSH-0004gG-2y
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:24:41 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c8ef161c-4f20-11ec-b941-1df2895da90e;
- Sat, 27 Nov 2021 02:24:37 +0100 (CET)
+ id caccf37b-4f20-11ec-b941-1df2895da90e;
+ Sat, 27 Nov 2021 02:24:40 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c8ef161c-4f20-11ec-b941-1df2895da90e
-Message-ID: <20211127000918.723637256@linutronix.de>
+X-Inumbo-ID: caccf37b-4f20-11ec-b941-1df2895da90e
+Message-ID: <20211127000918.836550402@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637976276;
+	s=2020; t=1637976280;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=wAZLS4DVWG/31wPrjnVkWgrCpcsyPlNJgofX29BhKpw=;
-	b=ACnXSfNOqewTY1/+Ig8VGJiP7Eq/Hu3Mv+SGL6FsmDIQqkFvprL4HbnwzMigRxHJsUCQvX
-	HYkIGqFfPnBUVK2Gp7ida8axPvoyCJrV5eUDwLgcQ+4I3ZmFIlXQq+B2eKHdf/fcE1U1kz
-	nsJU3n6d/XTfa5q6bmvRi8fkPmovjaBqt6w9idFgxeAybfsJaqycBHPeVheTi6QyrV5Psx
-	KOVZkP2bvoI2OhezNabehmrvAH9DGlp9mLePq4eOKWdL5Z4w8GKb6RlfsGS1+ycA+No2jo
-	M8NZR22qHu1LYfXAVJz7WDPCBDty/gbpCOtMDvTOca33CRTlhogVdVU/Bm1JEw==
+	 references:references; bh=QyFkdnL3oY21jCwm7LMhiRAQpgzR7HBWMPckiZs+cZQ=;
+	b=GBjn+b8QrsutedncAZPAURSSsA4cAXX/k7rT1hR+oC058LdbCYvWngK4orYIZgTSd/uxwl
+	Aa+UcI+mivU7IjeRpqO9KD1764v9FRykg9zl00tSY4UcIHx67r0Udm9yLYeRLWYyvQlAY6
+	3tnrDvlJ/tZEiowTqvphP2SenTauFkT8SnCUF1cB4tGasAweDA0p5ZZ58RCgRgZPFI8Umg
+	3P+G9THTmbwcT+pPPNufVw7efW/jGCbDtTlJsig9IzdDZBTC8T1dqdMjTApAGPtcoC3fG2
+	NLsuG3m+9Q1T5nNk6Bf1DIVl7xUvdlctpWZxI9N7809o4lW5h5sTyHaJN9pQmA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637976276;
+	s=2020e; t=1637976280;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=wAZLS4DVWG/31wPrjnVkWgrCpcsyPlNJgofX29BhKpw=;
-	b=vw0tiCuP5ldLG61m2bCrJEknO6vxY4QAx1hiFFMZvgHkZRCNmVTavfIu2AmwcqvFT1i30V
-	Q2Dw304vuVxzBZDw==
+	 references:references; bh=QyFkdnL3oY21jCwm7LMhiRAQpgzR7HBWMPckiZs+cZQ=;
+	b=qbNWScsKoX9jhoddvCDdBjSKrocguh1IQ5ezIZ/W0XajOCHwP+R6ptVU1LrhlXA7w6l1L3
+	qq8DHdqoSrxdHCDw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,57 +72,179 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Juergen Gross <jgross@suse.com>,
  linux-pci@vger.kernel.org,
  xen-devel@lists.xenproject.org
-Subject: [patch 04/10] genirq/msi: Prepare MSI domain alloc/free for range irq
- allocation
+Subject: [patch 06/10] PCI/MSI: Use range in allocation path
 References: <20211126233124.618283684@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:24:36 +0100 (CET)
+Date: Sat, 27 Nov 2021 02:24:39 +0100 (CET)
 
-Make the iterators in the allocation and free functions range based.
+Make the allocation path range based to prepare for runtime expansion of
+MSI-X vectors.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- kernel/irq/msi.c |   12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ drivers/pci/msi/irqdomain.c |    7 +++----
+ drivers/pci/msi/msi.c       |   34 +++++++++++++++++++++-------------
+ drivers/pci/msi/msi.h       |    2 +-
+ 3 files changed, 25 insertions(+), 18 deletions(-)
 
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -877,6 +877,7 @@ int __msi_domain_alloc_irqs(struct irq_d
- 	msi_alloc_info_t arg = { };
- 	unsigned int vflags = 0;
- 	struct msi_desc *desc;
-+	unsigned long idx;
- 	int allocated = 0;
- 	int i, ret, virq;
+--- a/drivers/pci/msi/irqdomain.c
++++ b/drivers/pci/msi/irqdomain.c
+@@ -8,16 +8,15 @@
  
-@@ -906,7 +907,10 @@ int __msi_domain_alloc_irqs(struct irq_d
- 			vflags |= VIRQ_NOMASK_QUIRK;
+ #include "msi.h"
+ 
+-int pci_msi_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
++int pci_msi_setup_msi_irqs(struct pci_dev *dev, struct msi_range *range, int type)
+ {
+-	struct msi_range range = { .first = 0, .last = UINT_MAX, .ndesc = nvec};
+ 	struct irq_domain *domain;
+ 
+ 	domain = dev_get_msi_domain(&dev->dev);
+ 	if (domain && irq_domain_is_hierarchy(domain))
+-		return msi_domain_alloc_irqs_descs_locked(domain, &dev->dev, &range);
++		return msi_domain_alloc_irqs_descs_locked(domain, &dev->dev, range);
+ 
+-	return pci_msi_legacy_setup_msi_irqs(dev, nvec, type);
++	return pci_msi_legacy_setup_msi_irqs(dev, range->ndesc, type);
+ }
+ 
+ void pci_msi_teardown_msi_irqs(struct pci_dev *dev)
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -370,14 +370,16 @@ static int msi_setup_msi_desc(struct pci
+ 	return ret;
+ }
+ 
+-static int msi_verify_entries(struct pci_dev *dev)
++static int msi_verify_entries(struct pci_dev *dev, struct msi_range *range)
+ {
+ 	struct msi_desc *entry;
+ 
+ 	if (!dev->no_64bit_msi)
+ 		return 0;
+ 
+-	msi_for_each_desc(entry, &dev->dev, MSI_DESC_ALL) {
++	msi_for_each_desc_from(entry, &dev->dev, MSI_DESC_ALL, range->first) {
++		if (entry->msi_index > range->last)
++			return 0;
+ 		if (entry->msg.address_hi) {
+ 			pci_err(dev, "arch assigned 64-bit MSI address %#x%08x but device only supports 32 bits\n",
+ 				entry->msg.address_hi, entry->msg.address_lo);
+@@ -402,6 +404,7 @@ static int msi_verify_entries(struct pci
+ static int msi_capability_init(struct pci_dev *dev, int nvec,
+ 			       struct irq_affinity *affd)
+ {
++	struct msi_range range = { .first = 0, .last = 0, .ndesc = nvec, };
+ 	struct irq_affinity_desc *masks = NULL;
+ 	struct msi_desc *entry;
+ 	int ret;
+@@ -421,11 +424,11 @@ static int msi_capability_init(struct pc
+ 	pci_msi_mask(entry, msi_multi_mask(entry));
+ 
+ 	/* Configure MSI capability structure */
+-	ret = pci_msi_setup_msi_irqs(dev, nvec, PCI_CAP_ID_MSI);
++	ret = pci_msi_setup_msi_irqs(dev, &range, PCI_CAP_ID_MSI);
+ 	if (ret)
+ 		goto err;
+ 
+-	ret = msi_verify_entries(dev);
++	ret = msi_verify_entries(dev, &range);
+ 	if (ret)
+ 		goto err;
+ 
+@@ -469,7 +472,8 @@ static void __iomem *msix_map_region(str
+ }
+ 
+ static int msix_setup_msi_descs(struct pci_dev *dev, void __iomem *base,
+-				struct msix_entry *entries, int nvec,
++				struct msi_range *range,
++				struct msix_entry *entries,
+ 				struct irq_affinity_desc *masks)
+ {
+ 	int ret, i, vec_count = pci_msix_vec_count(dev);
+@@ -485,8 +489,8 @@ static int msix_setup_msi_descs(struct p
+ 	desc.pci.msi_attrib.default_irq	= dev->irq;
+ 	desc.pci.mask_base		= base;
+ 
+-	for (i = 0, curmsk = masks; i < nvec; i++, curmsk++) {
+-		desc.msi_index = entries ? entries[i].entry : i;
++	for (i = 0, curmsk = masks; i < range->ndesc; i++, curmsk++) {
++		desc.msi_index = entries ? entries[i].entry : range->first + i;
+ 		desc.affinity = masks ? curmsk : NULL;
+ 		desc.pci.msi_attrib.is_virtual = desc.msi_index >= vec_count;
+ 		desc.pci.msi_attrib.can_mask = !pci_msi_ignore_mask &&
+@@ -500,6 +504,9 @@ static int msix_setup_msi_descs(struct p
+ 		ret = msi_add_msi_desc(&dev->dev, &desc);
+ 		if (ret)
+ 			break;
++
++		if (desc.msi_index > range->last)
++			range->last = desc.msi_index;
  	}
  
--	msi_for_each_desc(desc, dev, MSI_DESC_NOTASSOCIATED) {
-+	xa_for_each_range(&dev->msi.data->store, idx, desc, range->first, range->last) {
-+		if (!msi_desc_match(desc, MSI_DESC_NOTASSOCIATED))
-+			continue;
-+
- 		ops->set_desc(&arg, desc);
+ 	return ret;
+@@ -530,28 +537,28 @@ static void msix_mask_all(void __iomem *
+ }
  
- 		virq = __irq_domain_alloc_irqs(domain, -1, desc->nvec_used,
-@@ -999,10 +1003,14 @@ void __msi_domain_free_irqs(struct irq_d
- 	struct msi_domain_info *info = domain->host_data;
- 	struct irq_data *irqd;
- 	struct msi_desc *desc;
-+	unsigned long idx;
- 	int i;
+ static int msix_setup_interrupts(struct pci_dev *dev, void __iomem *base,
+-				 struct msix_entry *entries, int nvec,
++				 struct msi_range *range, struct msix_entry *entries,
+ 				 struct irq_affinity *affd)
+ {
+ 	struct irq_affinity_desc *masks = NULL;
+ 	int ret;
  
- 	/* Only handle MSI entries which have an interrupt associated */
--	msi_for_each_desc(desc, dev, MSI_DESC_ASSOCIATED) {
-+	xa_for_each_range(&dev->msi.data->store, idx, desc, range->first, range->last) {
-+		if (!msi_desc_match(desc, MSI_DESC_ASSOCIATED))
-+			continue;
-+
- 		/* Make sure all interrupts are deactivated */
- 		for (i = 0; i < desc->nvec_used; i++) {
- 			irqd = irq_domain_get_irq_data(domain, desc->irq + i);
+ 	if (affd)
+-		masks = irq_create_affinity_masks(nvec, affd);
++		masks = irq_create_affinity_masks(range->ndesc, affd);
+ 
+ 	msi_lock_descs(&dev->dev);
+-	ret = msix_setup_msi_descs(dev, base, entries, nvec, masks);
++	ret = msix_setup_msi_descs(dev, base, range, entries, masks);
+ 	if (ret)
+ 		goto out_free;
+ 
+ 	dev->dev.msi.data->properties = MSI_PROP_PCI_MSIX | MSI_PROP_64BIT;
+ 
+-	ret = pci_msi_setup_msi_irqs(dev, nvec, PCI_CAP_ID_MSIX);
++	ret = pci_msi_setup_msi_irqs(dev, range, PCI_CAP_ID_MSIX);
+ 	if (ret)
+ 		goto out_free;
+ 
+ 	/* Check if all MSI entries honor device restrictions */
+-	ret = msi_verify_entries(dev);
++	ret = msi_verify_entries(dev, range);
+ 	if (ret)
+ 		goto out_free;
+ 
+@@ -580,6 +587,7 @@ static int msix_setup_interrupts(struct
+ static int msix_capability_init(struct pci_dev *dev, struct msix_entry *entries,
+ 				int nvec, struct irq_affinity *affd)
+ {
++	struct msi_range range = { .first = 0, .last = 0, .ndesc = nvec, };
+ 	void __iomem *base;
+ 	int ret, tsize;
+ 	u16 control;
+@@ -606,7 +614,7 @@ static int msix_capability_init(struct p
+ 	/* Ensure that all table entries are masked. */
+ 	msix_mask_all(base, tsize);
+ 
+-	ret = msix_setup_interrupts(dev, base, entries, nvec, affd);
++	ret = msix_setup_interrupts(dev, base, &range, entries, affd);
+ 	if (ret)
+ 		goto out_disable;
+ 
+--- a/drivers/pci/msi/msi.h
++++ b/drivers/pci/msi/msi.h
+@@ -5,7 +5,7 @@
+ 
+ #define msix_table_size(flags)	((flags & PCI_MSIX_FLAGS_QSIZE) + 1)
+ 
+-extern int pci_msi_setup_msi_irqs(struct pci_dev *dev, int nvec, int type);
++extern int pci_msi_setup_msi_irqs(struct pci_dev *dev, struct msi_range *range, int type);
+ extern void pci_msi_teardown_msi_irqs(struct pci_dev *dev);
+ 
+ #ifdef CONFIG_PCI_MSI_ARCH_FALLBACKS
 
 
