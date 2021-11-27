@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63932C433F5
-	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.233668.405703 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 955DCC433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 27 Nov 2021 01:27:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.233674.405716 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUl-0006XH-Kb; Sat, 27 Nov 2021 01:27:15 +0000
+	id 1mqmUo-0007Lc-7U; Sat, 27 Nov 2021 01:27:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 233668.405703; Sat, 27 Nov 2021 01:27:15 +0000
+Received: by outflank-mailman (output) from mailman id 233674.405716; Sat, 27 Nov 2021 01:27:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mqmUk-0006Ua-P3; Sat, 27 Nov 2021 01:27:14 +0000
-Received: by outflank-mailman (input) for mailman id 233668;
- Sat, 27 Nov 2021 01:27:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mqmUn-0007L0-Ut; Sat, 27 Nov 2021 01:27:17 +0000
+Received: by outflank-mailman (input) for mailman id 233674;
+ Sat, 27 Nov 2021 01:27:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Erow=QO=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mqmMt-00020H-Vk
- for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:19:07 +0000
+ id 1mqmSf-0004gG-O5
+ for xen-devel@lists.xenproject.org; Sat, 27 Nov 2021 01:25:05 +0000
 Received: from galois.linutronix.de (galois.linutronix.de
  [2a0a:51c0:0:12e:550::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 01874d72-4f20-11ec-9787-a32c541c8605;
- Sat, 27 Nov 2021 02:19:02 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d84567e6-4f20-11ec-b941-1df2895da90e;
+ Sat, 27 Nov 2021 02:25:02 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 01874d72-4f20-11ec-9787-a32c541c8605
-Message-ID: <20211126223825.093887718@linutronix.de>
+X-Inumbo-ID: d84567e6-4f20-11ec-b941-1df2895da90e
+Message-ID: <20211127000918.664542907@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1637975941;
+	s=2020; t=1637976302;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Fm5t3j//2ZJWIAwQC/lUTYq1h7igaXJ6yKKmISA8BnE=;
-	b=YXrvDdjinCV1yBjHyHLHh4kbucu2LHURHR+t0zVJv5Iwe67q0LFuruaQh3vkwbzQtPwio7
-	pprtMrfRvledbc2Kp38dfn11v4y5Inu453zNnn62UbDXbEMDnzTVB2lG+F7/o751ne62V0
-	wuLwIsQnEtadtEUUBTR+POd7nVjDpAaMG5nsqWghfqGryom7R0YB/K06iimvmxsJ5KiFpB
-	JPV3B+r8CqqTRE3oo30uaAVzGJqzMsu2Bz/vPrVyNZToyYv3yqNeZE81QSacrNZkpZTNFS
-	XGAAgWOht7wVhoHHI0patyvWHbhFxyJn+zFlcFj6JBZ8L2lsCdtihTsPXR9eTg==
+	 references:references; bh=rrdNHJUyUgKyNz6Pbn0ws4hWiMPwwbNMnZ1F31AYBD0=;
+	b=rk8tLqrH/jwlZPWTi5ZYoJtV8IerLp8c1pN+oY2nqoQ75mRhq9dXTfvsQHLDkrZZap9/pk
+	jjc0JTIlL54D/GYfllh6yrnQBNwJLwvHcvBQihZlvTJGCvKojQxfy7q6iehck4kLQgWCIL
+	COCB4MxLmzhjwQH7VrDvt8TVObtKFVG8/E48BhCvg8jQUlIWL451I1FRIi1WhOAwkJHXfb
+	J3aYDkXnel/Geaa8cij+IP+JMldsWgKE1HsrSoWb8Cbf0x8sY2k5BCGVREuzIwO3pNATCZ
+	kyIApnD73sro4h+FSbg4A3GwGkjBLYmfN7iOaxzm+jT7nSncj2KRccMfaSJx5w==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1637975941;
+	s=2020e; t=1637976302;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Fm5t3j//2ZJWIAwQC/lUTYq1h7igaXJ6yKKmISA8BnE=;
-	b=RvZm8oUXbruNEue8m0QI5IgMFXDCNY3ru8yRX0pyG3paqWiHR2a2l+sKosxSZ9wf0ryS/Q
-	OiKV6WwXAMjbYnDg==
+	 references:references; bh=rrdNHJUyUgKyNz6Pbn0ws4hWiMPwwbNMnZ1F31AYBD0=;
+	b=Ui/C++sWuyQrA07lP+61EhKbtD5roY4pyOnAVFQ1cNzvOD/A43y3dx3h5sUDRRnJd/OmmF
+	mVhzTLHOb3zddqAw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -67,157 +67,200 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jason Gunthorpe <jgg@nvidia.com>,
  Megha Dey <megha.dey@intel.com>,
  Ashok Raj <ashok.raj@intel.com>,
- linux-pci@vger.kernel.org,
  Michael Ellerman <mpe@ellerman.id.au>,
- Paul Mackerras <paulus@samba.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- linuxppc-dev@lists.ozlabs.org,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- linux-mips@vger.kernel.org,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- sparclinux@vger.kernel.org,
- x86@kernel.org,
- xen-devel@lists.xenproject.org,
- ath11k@lists.infradead.org,
- Wei Liu <wei.liu@kernel.org>,
- linux-hyperv@vger.kernel.org,
+ Andrew Cooper <amc96@cam.ac.uk>,
  Juergen Gross <jgross@suse.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch 17/22] PCI/MSI: Split out !IRQDOMAIN code
-References: <20211126222700.862407977@linutronix.de>
+ linux-pci@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: [patch 03/10] genirq/msi: Make MSI descriptor alloc/free ready for
+ range allocations
+References: <20211126233124.618283684@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Sat, 27 Nov 2021 02:19:01 +0100 (CET)
+Date: Sat, 27 Nov 2021 02:25:01 +0100 (CET)
+Message-ID: <20211127012501.QRnSehctA2tB_rArkn_H1CXNugBIRMXgoEifEZe4onU@z>
 
-Split out the non irqdomain code into its own file.
+Convert the MSI descriptor related functions to ranges and fixup the call
+sites.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- drivers/pci/msi/Makefile |    5 ++--
- drivers/pci/msi/legacy.c |   51 +++++++++++++++++++++++++++++++++++++++++++++++
- drivers/pci/msi/msi.c    |   46 ------------------------------------------
- 3 files changed, 54 insertions(+), 48 deletions(-)
+ drivers/base/platform-msi.c |    3 ++-
+ include/linux/msi.h         |    7 ++++---
+ kernel/irq/msi.c            |   38 +++++++++++++++++++-------------------
+ 3 files changed, 25 insertions(+), 23 deletions(-)
 
---- a/drivers/pci/msi/Makefile
-+++ b/drivers/pci/msi/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0
- #
- # Makefile for the PCI/MSI
--obj-$(CONFIG_PCI)		+= pcidev_msi.o
--obj-$(CONFIG_PCI_MSI)		+= msi.o
-+obj-$(CONFIG_PCI)			+= pcidev_msi.o
-+obj-$(CONFIG_PCI_MSI)			+= msi.o
-+obj-$(CONFIG_PCI_MSI_ARCH_FALLBACKS)	+= legacy.o
---- /dev/null
-+++ b/drivers/pci/msi/legacy.c
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * PCI Message Signaled Interrupt (MSI).
-+ *
-+ * Legacy architecture specific setup and teardown mechanism.
-+ */
-+#include "msi.h"
-+
-+/* Arch hooks */
-+int __weak arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
-+{
-+	return -EINVAL;
-+}
-+
-+void __weak arch_teardown_msi_irq(unsigned int irq)
-+{
-+}
-+
-+int __weak arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
-+{
-+	struct msi_desc *desc;
-+	int ret;
-+
-+	/*
-+	 * If an architecture wants to support multiple MSI, it needs to
-+	 * override arch_setup_msi_irqs()
-+	 */
-+	if (type == PCI_CAP_ID_MSI && nvec > 1)
-+		return 1;
-+
-+	for_each_pci_msi_entry(desc, dev) {
-+		ret = arch_setup_msi_irq(dev, desc);
-+		if (ret)
-+			return ret < 0 ? ret : -ENOSPC;
-+	}
-+
-+	return 0;
-+}
-+
-+void __weak arch_teardown_msi_irqs(struct pci_dev *dev)
-+{
-+	struct msi_desc *desc;
-+	int i;
-+
-+	for_each_pci_msi_entry(desc, dev) {
-+		if (desc->irq) {
-+			for (i = 0; i < entry->nvec_used; i++)
-+				arch_teardown_msi_irq(desc->irq + i);
-+		}
-+	}
-+}
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -50,52 +50,6 @@ static void pci_msi_teardown_msi_irqs(st
- #define pci_msi_teardown_msi_irqs	arch_teardown_msi_irqs
- #endif
+--- a/drivers/base/platform-msi.c
++++ b/drivers/base/platform-msi.c
+@@ -320,11 +320,12 @@ struct irq_domain *
+ void platform_msi_device_domain_free(struct irq_domain *domain, unsigned int virq,
+ 				     unsigned int nr_irqs)
+ {
++	struct msi_range range = { .first = virq, .last = virq + nr_irqs - 1, };
+ 	struct platform_msi_priv_data *data = domain->host_data;
  
--#ifdef CONFIG_PCI_MSI_ARCH_FALLBACKS
--/* Arch hooks */
--int __weak arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
--{
--	return -EINVAL;
--}
--
--void __weak arch_teardown_msi_irq(unsigned int irq)
--{
--}
--
--int __weak arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
--{
--	struct msi_desc *entry;
--	int ret;
--
--	/*
--	 * If an architecture wants to support multiple MSI, it needs to
--	 * override arch_setup_msi_irqs()
--	 */
--	if (type == PCI_CAP_ID_MSI && nvec > 1)
--		return 1;
--
--	for_each_pci_msi_entry(entry, dev) {
--		ret = arch_setup_msi_irq(dev, entry);
--		if (ret < 0)
--			return ret;
--		if (ret > 0)
--			return -ENOSPC;
--	}
--
--	return 0;
--}
--
--void __weak arch_teardown_msi_irqs(struct pci_dev *dev)
--{
--	int i;
--	struct msi_desc *entry;
--
--	for_each_pci_msi_entry(entry, dev)
--		if (entry->irq)
--			for (i = 0; i < entry->nvec_used; i++)
--				arch_teardown_msi_irq(entry->irq + i);
--}
--#endif /* CONFIG_PCI_MSI_ARCH_FALLBACKS */
--
- /*
-  * PCI 2.3 does not specify mask bits for each MSI interrupt.  Attempting to
-  * mask all MSI interrupts by clearing the MSI enable bit does not work
+ 	msi_lock_descs(data->dev);
+ 	irq_domain_free_irqs_common(domain, virq, nr_irqs);
+-	msi_free_msi_descs_range(data->dev, MSI_DESC_ALL, virq, nr_irqs);
++	msi_free_msi_descs_range(data->dev, MSI_DESC_ALL, &range);
+ 	msi_unlock_descs(data->dev);
+ }
+ 
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -321,8 +321,7 @@ static inline void pci_write_msi_msg(uns
+ #endif /* CONFIG_PCI_MSI */
+ 
+ int msi_add_msi_desc(struct device *dev, struct msi_desc *init_desc);
+-void msi_free_msi_descs_range(struct device *dev, enum msi_desc_filter filter,
+-			      unsigned int base_index, unsigned int ndesc);
++void msi_free_msi_descs_range(struct device *dev, enum msi_desc_filter filter, struct msi_range *range);
+ 
+ /**
+  * msi_free_msi_descs - Free MSI descriptors of a device
+@@ -330,7 +329,9 @@ void msi_free_msi_descs_range(struct dev
+  */
+ static inline void msi_free_msi_descs(struct device *dev)
+ {
+-	msi_free_msi_descs_range(dev, MSI_DESC_ALL, 0, UINT_MAX);
++	struct msi_range range = { .first = 0, .last = UINT_MAX, };
++
++	msi_free_msi_descs_range(dev, MSI_DESC_ALL, &range);
+ }
+ 
+ void __pci_read_msi_msg(struct msi_desc *entry, struct msi_msg *msg);
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -101,19 +101,19 @@ int msi_add_msi_desc(struct device *dev,
+  *
+  * Return: 0 on success or an appropriate failure code.
+  */
+-static int msi_add_simple_msi_descs(struct device *dev, unsigned int index, unsigned int ndesc)
++static int msi_add_simple_msi_descs(struct device *dev, struct msi_range *range)
+ {
+ 	struct msi_desc *desc;
+-	unsigned long i;
++	unsigned long idx;
+ 	int ret;
+ 
+ 	lockdep_assert_held(&dev->msi.data->mutex);
+ 
+-	for (i = 0; i < ndesc; i++) {
++	for (idx = range->first; idx <= range->last; idx++) {
+ 		desc = msi_alloc_desc(dev, 1, NULL);
+ 		if (!desc)
+ 			goto fail_mem;
+-		ret = msi_insert_desc(dev->msi.data, desc, index + i);
++		ret = msi_insert_desc(dev->msi.data, desc, idx);
+ 		if (ret)
+ 			goto fail;
+ 	}
+@@ -122,7 +122,7 @@ static int msi_add_simple_msi_descs(stru
+ fail_mem:
+ 	ret = -ENOMEM;
+ fail:
+-	msi_free_msi_descs_range(dev, MSI_DESC_NOTASSOCIATED, index, ndesc);
++	msi_free_msi_descs_range(dev, MSI_DESC_NOTASSOCIATED, range);
+ 	return ret;
+ }
+ 
+@@ -148,14 +148,14 @@ static bool msi_desc_match(struct msi_de
+  * @ndesc:	Number of descriptors to free
+  */
+ void msi_free_msi_descs_range(struct device *dev, enum msi_desc_filter filter,
+-			      unsigned int base_index, unsigned int ndesc)
++			      struct msi_range *range)
+ {
+ 	struct msi_desc *desc;
+ 	unsigned long idx;
+ 
+ 	lockdep_assert_held(&dev->msi.data->mutex);
+ 
+-	xa_for_each_range(&dev->msi.data->store, idx, desc, base_index, base_index + ndesc - 1) {
++	xa_for_each_range(&dev->msi.data->store, idx, desc, range->first, range->last) {
+ 		if (msi_desc_match(desc, filter)) {
+ 			xa_erase(&dev->msi.data->store, idx);
+ 			msi_free_desc(desc);
+@@ -746,17 +746,18 @@ int msi_domain_prepare_irqs(struct irq_d
+ int msi_domain_populate_irqs(struct irq_domain *domain, struct device *dev,
+ 			     int virq_base, int nvec, msi_alloc_info_t *arg)
+ {
++	struct msi_range range = { .first = virq_base, .last = virq_base + nvec - 1 };
+ 	struct msi_domain_info *info = domain->host_data;
+ 	struct msi_domain_ops *ops = info->ops;
+ 	struct msi_desc *desc;
+ 	int ret, virq;
+ 
+ 	msi_lock_descs(dev);
+-	ret = msi_add_simple_msi_descs(dev, virq_base, nvec);
++	ret = msi_add_simple_msi_descs(dev, &range);
+ 	if (ret)
+ 		goto unlock;
+ 
+-	for (virq = virq_base; virq < virq_base + nvec; virq++) {
++	for (virq = range.first; virq <= range.last; virq++) {
+ 		desc = xa_load(&dev->msi.data->store, virq);
+ 		desc->irq = virq;
+ 
+@@ -773,7 +774,7 @@ int msi_domain_populate_irqs(struct irq_
+ fail:
+ 	for (--virq; virq >= virq_base; virq--)
+ 		irq_domain_free_irqs_common(domain, virq, 1);
+-	msi_free_msi_descs_range(dev, MSI_DESC_ALL, virq_base, nvec);
++	msi_free_msi_descs_range(dev, MSI_DESC_ALL, &range);
+ unlock:
+ 	msi_unlock_descs(dev);
+ 	return ret;
+@@ -932,14 +933,13 @@ int __msi_domain_alloc_irqs(struct irq_d
+ 	return 0;
+ }
+ 
+-static int msi_domain_add_simple_msi_descs(struct msi_domain_info *info,
+-					   struct device *dev,
+-					   unsigned int num_descs)
++static int msi_domain_add_simple_msi_descs(struct msi_domain_info *info, struct device *dev,
++					   struct msi_range *range)
+ {
+ 	if (!(info->flags & MSI_FLAG_ALLOC_SIMPLE_MSI_DESCS))
+ 		return 0;
+ 
+-	return msi_add_simple_msi_descs(dev, 0, num_descs);
++	return msi_add_simple_msi_descs(dev, range);
+ }
+ 
+ /**
+@@ -964,7 +964,7 @@ int msi_domain_alloc_irqs_descs_locked(s
+ 
+ 	lockdep_assert_held(&dev->msi.data->mutex);
+ 
+-	ret = msi_domain_add_simple_msi_descs(info, dev, range->ndesc);
++	ret = msi_domain_add_simple_msi_descs(info, dev, range);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -1017,11 +1017,11 @@ void __msi_domain_free_irqs(struct irq_d
+ 	}
+ }
+ 
+-static void msi_domain_free_msi_descs(struct msi_domain_info *info,
+-				      struct device *dev)
++static void msi_domain_free_msi_descs(struct msi_domain_info *info, struct device *dev,
++				      struct msi_range *range)
+ {
+ 	if (info->flags & MSI_FLAG_FREE_MSI_DESCS)
+-		msi_free_msi_descs(dev);
++		msi_free_msi_descs_range(dev, MSI_DESC_ALL, range);
+ }
+ 
+ /**
+@@ -1043,7 +1043,7 @@ void msi_domain_free_irqs_descs_locked(s
+ 	lockdep_assert_held(&dev->msi.data->mutex);
+ 
+ 	ops->domain_free_irqs(domain, dev, range);
+-	msi_domain_free_msi_descs(info, dev);
++	msi_domain_free_msi_descs(info, dev, range);
+ }
+ 
+ /**
 
 
