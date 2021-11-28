@@ -4,47 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D96C433F5
-	for <xen-devel@archiver.kernel.org>; Sun, 28 Nov 2021 00:09:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234099.406310 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98A7DC433EF
+	for <xen-devel@archiver.kernel.org>; Sun, 28 Nov 2021 00:43:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.234106.406320 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mr7k1-0002Ci-IO; Sun, 28 Nov 2021 00:08:25 +0000
+	id 1mr8I2-0006CL-Ic; Sun, 28 Nov 2021 00:43:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234099.406310; Sun, 28 Nov 2021 00:08:25 +0000
+Received: by outflank-mailman (output) from mailman id 234106.406320; Sun, 28 Nov 2021 00:43:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mr7k1-0002Cb-EE; Sun, 28 Nov 2021 00:08:25 +0000
-Received: by outflank-mailman (input) for mailman id 234099;
- Sun, 28 Nov 2021 00:08:24 +0000
+	id 1mr8I2-0006CE-Ez; Sun, 28 Nov 2021 00:43:34 +0000
+Received: by outflank-mailman (input) for mailman id 234106;
+ Sun, 28 Nov 2021 00:43:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=CKfp=QP=nvidia.com=jgg@srs-se1.protection.inumbo.net>)
- id 1mr7jz-0002CV-Qv
- for xen-devel@lists.xenproject.org; Sun, 28 Nov 2021 00:08:24 +0000
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2060c.outbound.protection.outlook.com
- [2a01:111:f400:7e88::60c])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=LJYX=QP=rere.qmqm.pl=mirq-linux@srs-se1.protection.inumbo.net>)
+ id 1mr8I0-0006C8-7a
+ for xen-devel@lists.xenproject.org; Sun, 28 Nov 2021 00:43:32 +0000
+Received: from rere.qmqm.pl (rere.qmqm.pl [91.227.64.183])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4a735617-4fdf-11ec-976b-d102b41d0961;
- Sun, 28 Nov 2021 01:08:21 +0100 (CET)
-Received: from BL0PR12MB5506.namprd12.prod.outlook.com (2603:10b6:208:1cb::22)
- by BL1PR12MB5080.namprd12.prod.outlook.com (2603:10b6:208:30a::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23; Sun, 28 Nov
- 2021 00:08:15 +0000
-Received: from BL0PR12MB5506.namprd12.prod.outlook.com
- ([fe80::5897:83b2:a704:7909]) by BL0PR12MB5506.namprd12.prod.outlook.com
- ([fe80::5897:83b2:a704:7909%8]) with mapi id 15.20.4734.023; Sun, 28 Nov 2021
- 00:08:15 +0000
-Received: from mlx.ziepe.ca (142.162.113.129) by
- MN2PR11CA0016.namprd11.prod.outlook.com (2603:10b6:208:23b::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.22 via Frontend
- Transport; Sun, 28 Nov 2021 00:08:14 +0000
-Received: from jgg by mlx with local (Exim 4.94)	(envelope-from
- <jgg@nvidia.com>)	id 1mr7jp-003n9O-MC; Sat, 27 Nov 2021 20:08:13 -0400
+ id 34cb207b-4fe4-11ec-976b-d102b41d0961;
+ Sun, 28 Nov 2021 01:43:30 +0100 (CET)
+Received: from remote.user (localhost [127.0.0.1])
+ by rere.qmqm.pl (Postfix) with ESMTPSA id 4J1qTm1DhtzNL;
+ Sun, 28 Nov 2021 01:43:24 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,152 +41,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4a735617-4fdf-11ec-976b-d102b41d0961
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OwWXat6A8f77a1be4zN8r/W7UCTCFCivHEsJTo2KzaMI43ALhEoG9APFH+uJenG7WRkOUCKy5rGKKgl4B6owou6LoukxjO+IAnq5x3V6C6oz34LjeUY6MClO689f00Jh03HajKPXQ3Tb+cQcpL7eDEZyU/1Ao9O1rb69YRvwY5wYn4kIGOP+kvobg5Zgkqry9ND3RVWKsb9t0RoNb9qBFMeu763nkTU1CcCrB7QG+9EM0g9oDidPHKgiUFD5/jYxfPdTdA/6v8Q8aHcZ/LQZ2DdBk73CkJ68PawicBBFZWkvAf1vmKFSX/VVM5rOwO1zsZwBQIJApHredUcfyrnOdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/pVvssknBhQqmkjfnAH5n58/RZ+BO9TWp89tWLupnzQ=;
- b=P/hkSjwfJGBTpTJXufoHTH7AtR2UVP7ItmyXw5kSPTC0iTP4VwSGnKtS4bvo4LhSHGdFfoaMhTgqZTh3+ZISzPc+XtsTuetK6jp5XpLAXfUIE/hYPQXcPYroK2ysamuO6nliyy0g40MGQSzu6AmnU2KZkSHwHnxfbmFWfKbn/twMd13edddm14tDnxgEfwYbIum275bEiO7gtU/bsa+it2LvS9h00GNaRNP4kvBHQVRBVxYvHKqQdRqpXo2MYVFL0fPCy+w2c6U0SyYhb8BgC3d95nFiqdMU6v3zEBzTsfGoemvTHaZNC+2WzCIM79db8vDmvTIF2e/U7yWj4kBtjQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/pVvssknBhQqmkjfnAH5n58/RZ+BO9TWp89tWLupnzQ=;
- b=RVDBhQIJLpb/y3N2LbOgQo7eiW0h6ojygnfnOpizZ2NyZmxrVovkV7yJuJbE/Ahsq7bTG4Peu/BfoSgEq9A5WvGqFT0yJNzeEEEfDqHn6dPUAPfSOu7Bnq5DtAllCXDidCMPESU2Vo+stMR8f6yqnz3tk8QF08xSRLRCyA43RdvGT0BhxgjiipAkme3i+qCDmfFOQxZa344PBHduNACryrSAkB9tX1+zwtFiF3dUo94flyVCe67w8nvAQ53oCx0yMs6h1E6qzvBSTZtqr4bayHTJFWAIraIAhv/PVP5/JYlWMU69JAhm71rIy4ECQJGE6VyT4VJ6UNG0tyB1XsYXjA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Date: Sat, 27 Nov 2021 20:08:13 -0400
-From: Jason Gunthorpe <jgg@nvidia.com>
-To: Thomas Gleixner <tglx@linutronix.de>
-Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>,
-	Marc Zygnier <maz@kernel.org>,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Kevin Tian <kevin.tian@intel.com>, Megha Dey <megha.dey@intel.com>,
-	Ashok Raj <ashok.raj@intel.com>, linux-pci@vger.kernel.org,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Paul Mackerras <paulus@samba.org>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	linuxppc-dev@lists.ozlabs.org,
+X-Inumbo-ID: 34cb207b-4fe4-11ec-976b-d102b41d0961
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rere.qmqm.pl; s=1;
+	t=1638060207; bh=ymi2rjesYlmYsrxY12X8vblXPJWiCK3o6T/SGnAjDZo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=C6SfBZOFpiANlfwmDvX4OuIMVOJSlYKPAQ7cePS7VCRqQvRDRXyoU4e1HDyFW5286
+	 aMp77cXaWF2QuMJ//PO7Wx9adwPHxvzWlhsVptz1Bv8pKTYitnPzWsGYgxjQNrOvV7
+	 Uk484prqIxJAORTEmmGB3fc8u4Kn87uEVHmrPcrNw+TikFuKmaRxmZpfI/D7x9DxOR
+	 HEK/DHm3KCkqlnpSbmB87Uzzanvh59D/q1WHxqRBbTNokUG7ZgWXQQKaJ+DCHFVboG
+	 CiQGnas3tcMmGH5URTeE0feIhbti0vtOii+M7lKOB+wnpM9RCc3cCyDZ3xGFva1jKa
+	 oHCSKPMXxlqVw==
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.103.3 at mail
+Date: Sun, 28 Nov 2021 01:43:22 +0100
+From: =?iso-8859-2?Q?Micha=B3_Miros=B3aw?= <mirq-linux@rere.qmqm.pl>
+To: Dmitry Osipenko <digetx@gmail.com>
+Cc: Thierry Reding <thierry.reding@gmail.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Greg Ungerer <gerg@linux-m68k.org>,
+	Joshua Thompson <funaho@jurai.org>,
 	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	linux-mips@vger.kernel.org,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	sparclinux@vger.kernel.org, x86@kernel.org,
-	xen-devel@lists.xenproject.org, ath11k@lists.infradead.org,
-	Wei Liu <wei.liu@kernel.org>, linux-hyperv@vger.kernel.org,
+	Sebastian Reichel <sre@kernel.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Greentime Hu <green.hu@gmail.com>,
+	Vincent Chen <deanbo422@gmail.com>,
+	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+	Helge Deller <deller@gmx.de>, Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Rich Felker <dalias@libc.org>, Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Juergen Gross <jgross@suse.com>,
-	Christian Borntraeger <borntraeger@de.ibm.com>,
-	Heiko Carstens <hca@linux.ibm.com>
-Subject: Re: [patch 00/22] genirq/msi, PCI/MSI: Spring cleaning - Part 1
-Message-ID: <20211128000813.GS4670@nvidia.com>
-References: <20211126222700.862407977@linutronix.de>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20211126222700.862407977@linutronix.de>
-X-ClientProxiedBy: MN2PR11CA0016.namprd11.prod.outlook.com
- (2603:10b6:208:23b::21) To BL0PR12MB5506.namprd12.prod.outlook.com
- (2603:10b6:208:1cb::22)
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>,
+	Santosh Shilimkar <ssantosh@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, Pavel Machek <pavel@ucw.cz>,
+	Lee Jones <lee.jones@linaro.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Ulf Hansson <ulf.hansson@linaro.org>, alankao@andestech.com,
+	"K . C . Kuen-Chern Lin" <kclin@andestech.com>,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-csky@vger.kernel.org, linux-ia64@vger.kernel.org,
+	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org, linux-sh@vger.kernel.org,
+	xen-devel@lists.xenproject.org, linux-acpi@vger.kernel.org,
+	linux-pm@vger.kernel.org, linux-tegra@vger.kernel.org
+Subject: Re: [PATCH v4 08/25] kernel: Add combined power-off+restart handler
+ call chain API
+Message-ID: <YaLQqks8cB0vWp6Q@qmqm.qmqm.pl>
+References: <20211126180101.27818-1-digetx@gmail.com>
+ <20211126180101.27818-9-digetx@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 50ccafd9-0d25-48b3-c9df-08d9b2032c60
-X-MS-TrafficTypeDiagnostic: BL1PR12MB5080:
-X-Microsoft-Antispam-PRVS:
- <BL1PR12MB5080742C64AE7A468452A1C9C2659@BL1PR12MB5080.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	MCH67MnKWwoeJ0tJBUuCQtLpOse7q2gKhtHcZ9w4HVT9WLdyV6PDyjjzhRxGHcn1YhsXHnEm38E01Izt9ff6llf8Q3/ZVS3SHbOy1QUg7ZXp5IHSr6m4OiE7Iip6xKIF6BP6fLwGT9b3DbdiSv+JPtjKP6GknFIZP09Cf3qirh9eRARcpKThk4zj8bU7FcG1z6rxPoaNvLiuFGXUyJBSjB9D3VvsAk9gFNDRatiB2lsUu5XrFAFQwKDCXI3ZDPsyncKCILtridE0wmFzwksd59bDSy2IiZfO13XX82Tr/Bygxfl41gHHEEaweudYBMPx9VBvhRRjShfP9I4AlxYrDm1qpl2p3w9lPaZq/aMhJxX4uHcr5PR3La/0TsecikyEZvlAjXHGRt8sraUonrazIKOp1dVQ9omcSvL+gowlW2l37OX+aVgrR9jn5fw3svsbtQ7yZysn1CX9wvmC0Fm0XvfITmM3GrceITHiuXzzRIRnVIV1c/+0ntPNBh20S9GU0spzIBkpgEItTX1eiWgGIF501zcTvDigMeEAYaj1376VEzgzcvICDse+mpfI2wggPhiVYJ8Rg9eZYr/KjN2YRajKKOAKPCStk7LtAKEWfaIB+0+xz2hCmzan8KIWw46Hm6gSJN04AFB19Uvnv0RMHQ==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB5506.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(316002)(6916009)(1076003)(36756003)(8676002)(2616005)(2906002)(426003)(9746002)(5660300002)(508600001)(7416002)(83380400001)(9786002)(8936002)(4326008)(33656002)(86362001)(186003)(38100700002)(66556008)(66476007)(26005)(54906003)(66946007);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?vUZwGTckNFwtDHLpp8y68okFCMHSSqDEP2vmNjrr6VWsoONo5iK+BFLRuK/+?=
- =?us-ascii?Q?zc+UsCbFZfwgHkdDYCBbzdLpod8RhooTjzyuiPFGIU/B9JAx42nsQOURYYF0?=
- =?us-ascii?Q?/7H+3j0qC6XIzfP+CTH8rYFge05Tm9GZKaP2bYd9A+MnFRZCHkzwkxhcen76?=
- =?us-ascii?Q?0rdbS8rmAOzS0NbkdtifZdRszQCFPAwxhyRGrPFUKnfdOzvwHj8j9LxDCXrg?=
- =?us-ascii?Q?6pVWQFZNjb2bLR8DAd0JJK0HQEdDpLBkeGTplFqYpdHV10rFQiSNOMZ1iOa/?=
- =?us-ascii?Q?oPjSlchM4dbFODya1Lb8TwYrpfsE5nr9rqY8CfGPn5YULdvG9iM8EnMZ1obq?=
- =?us-ascii?Q?dk5+6YBl2wcudgAi49Dx4m+1lL1rnHewAxGLL3G0vu1bKBqFCubFDN12yQg8?=
- =?us-ascii?Q?FNvVaueuWrA+qSYKx8edbOuIzsRcNDET0yQHWs/SywnR3iRvOf690ukf8qP/?=
- =?us-ascii?Q?Mm+NUCHkpN9CM4wJX0wgpKbfKbsQzNrf8IfDZ7rIv0MGEg+VtBfAaKPR95KJ?=
- =?us-ascii?Q?lEhk3decDeRZB5Bjs1a2IFq/IhrmSpd/Anf6Q4+UDpJvFCZE4vRQ7QNOZIcw?=
- =?us-ascii?Q?9PqPupphnqEVTXzDRuR+MScsy66X6qDHLUM0omg2xVSWGlyq/JCRKBw6rgyu?=
- =?us-ascii?Q?8sMSL5L4VyHW4P6yZ/iTeb+5FmtEQBaOH3tMaUZz0zbdcLodmfyJ/LYBokmk?=
- =?us-ascii?Q?K2dHFvr19g1Lvpvc4mHrjcUJxzDCdbJNmuk25u/EN2648vfc5IHmkRNOu0/0?=
- =?us-ascii?Q?Fo6yRikSczn+NlItKqDK2aLoY3AysUZ8sG0P4J92yV1g4KRPs8WxulK6htDP?=
- =?us-ascii?Q?zgcQEn+AA8XIe1JGGPTcZSNrcePOPEorVEDIvv1YzY55RvFVzjQUYxId+T0o?=
- =?us-ascii?Q?KAuTccqXq6prZYKFp/7P/ncx9XRAKwchMBu8iux+Goe8mKn742tkuItafklG?=
- =?us-ascii?Q?Z7pyi4d8uvY8Whq4O4L+gdYYd22QxMMSggA+fgiSIVwnmvrCnbCkygYwZBPJ?=
- =?us-ascii?Q?QaqDZjdm9j/me2mASEp7tPHNkasRfGJ0Uf7VEb8C2ixA01TZB2RdeGQwbxnM?=
- =?us-ascii?Q?CaA66SHSrILKwav0Spi2AzIxDo3aul4UKSnTL3K/twUV6S7NsNCTvu/Qko8Y?=
- =?us-ascii?Q?VXgMe6mV82/WeHoKS0S+ssocDdytgZ8G4ZwySJxpKuFtY/IJCql0PKSw3KAG?=
- =?us-ascii?Q?PAmC+eS4YH+lvSiPOdChM+w5ICxWz+in6BGZnGO0JzUrBEBhcH4ufQm3pLkC?=
- =?us-ascii?Q?vkZkobKtuHhO5owViup90DzMJC6jFx+dZMLzivhW7XgkLkpk7Kt+k8csozzv?=
- =?us-ascii?Q?TtB4dlRwnelTePkLTn1AAJ3Lkk5DCtuq+bHwjZ5gfU84NAQvxkhUMNUGnXXC?=
- =?us-ascii?Q?0XgYbp7gPW8MwZvXEWYWYUbanV6lYCrtKD+8gIK4lqt3JUrJJSQCHw8VzZ79?=
- =?us-ascii?Q?Dfp0nf+Qvn24AqVjh/ZC/t0yQ3e0jzoW/BrGYETnMjfp6B0sbVDBwbRasjXw?=
- =?us-ascii?Q?sYmd9E32yVQ5+xW//CLD7cYgUEyPwH5Zukdhk8ZNYyDWrFTftgPmgtyIfcgK?=
- =?us-ascii?Q?/3Z6HeQPURCRkqBr+Rw=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 50ccafd9-0d25-48b3-c9df-08d9b2032c60
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB5506.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Nov 2021 00:08:15.0505
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /J4TPudRgMIfuhU0HwQ/2RR9GYPr9SHY8H5kT0rLiX1UHTG8TZiZUz4yF4x9T+FI
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5080
+Content-Type: text/plain; charset=iso-8859-2
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211126180101.27818-9-digetx@gmail.com>
 
-On Sat, Nov 27, 2021 at 02:18:34AM +0100, Thomas Gleixner wrote:
-> The [PCI] MSI code has gained quite some warts over time. A recent
-> discussion unearthed a shortcoming: the lack of support for expanding
-> PCI/MSI-X vectors after initialization of MSI-X.
+On Fri, Nov 26, 2021 at 09:00:44PM +0300, Dmitry Osipenko wrote:
+> SoC platforms often have multiple ways of how to perform system's
+> power-off and restart operations. Meanwhile today's kernel is limited to
+> a single option. Add combined power-off+restart handler call chain API,
+> which is inspired by the restart API. The new API provides both power-off
+> and restart functionality.
 > 
-> PCI/MSI-X has no requirement to setup all vectors when MSI-X is enabled in
-> the device. The non-used vectors have just to be masked in the vector
-> table. For PCI/MSI this is not possible because the number of vectors
-> cannot be changed after initialization.
+> The old pm_power_off method will be kept around till all users are
+> converted to the new API.
 > 
-> The PCI/MSI code, but also the core MSI irq domain code are built around
-> the assumption that all required vectors are installed at initialization
-> time and freed when the device is shut down by the driver.
+> Current restart API will be replaced by the new unified API since
+> new API is its superset. The restart functionality of the sys-off handler
+> API is built upon the existing restart-notifier APIs.
 > 
-> Supporting dynamic expansion at least for MSI-X is important for VFIO so
-> that the host side interrupts for passthrough devices can be installed on
-> demand.
-> 
-> This is the first part of a large (total 101 patches) series which
-> refactors the [PCI]MSI infrastructure to make runtime expansion of MSI-X
-> vectors possible. The last part (10 patches) provide this functionality.
-> 
-> The first part is mostly a cleanup which consolidates code, moves the PCI
-> MSI code into a separate directory and splits it up into several parts.
-> 
-> No functional change intended except for patch 2/N which changes the
-> behaviour of pci_get_vector()/affinity() to get rid of the assumption that
-> the provided index is the "index" into the descriptor list instead of using
-> it as the actual MSI[X] index as seen by the hardware. This would break
-> users of sparse allocated MSI-X entries, but non of them use these
-> functions.
+> In order to ease conversion to the new API, convenient helpers are added
+> for the common use-cases. They will reduce amount of boilerplate code and
+> remove global variables. These helpers preserve old behaviour for cases
+> where only one power-off handler is expected, this is what all existing
+> drivers want, and thus, they could be easily converted to the new API.
+> Users of the new API should explicitly enable power-off chaining by
+> setting corresponding flag of the power_handler structure.
+[...]
 
-I don't know all the irqdomain stuff all that well anymore, but I read
-through all the patches and only noticed a small spello
+Hi,
 
-[patch 02/22] PCI/MSI: Fix pci_irq_vector()/pci_irq_get_attinity()
-                                                         ^^^^ ff
+A general question: do we really need three distinct chains for this?
+Can't there be only one that chain of callbacks that get a stage
+(RESTART_PREPARE, RESTART, POWER_OFF_PREPARE, POWER_OFF) and can ignore
+them at will? Calling through POWER_OFF_PREPARE would also return
+whether that POWER_OFF is possible (for kernel_can_power_off()).
 
-It all seems good, I especially like the splitting of msi.c and
-removal of ops..
+I would also split this patch into preparation cleanups (like wrapping
+pm_power_off call with a function) and adding the notifier-based
+implementation.
 
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-
-Thanks,
-Jason
+Best Regards
+Micha³ Miros³aw
 
