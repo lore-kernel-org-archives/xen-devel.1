@@ -4,44 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2D98C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Nov 2021 07:20:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234296.406623 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE1BC433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Nov 2021 07:33:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.234304.406648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mrawd-0001NO-Ep; Mon, 29 Nov 2021 07:19:23 +0000
+	id 1mrbAS-0003vH-4b; Mon, 29 Nov 2021 07:33:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234296.406623; Mon, 29 Nov 2021 07:19:23 +0000
+Received: by outflank-mailman (output) from mailman id 234304.406648; Mon, 29 Nov 2021 07:33:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mrawd-0001NH-BO; Mon, 29 Nov 2021 07:19:23 +0000
-Received: by outflank-mailman (input) for mailman id 234296;
- Mon, 29 Nov 2021 07:19:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mrbAS-0003vA-1Z; Mon, 29 Nov 2021 07:33:40 +0000
+Received: by outflank-mailman (input) for mailman id 234304;
+ Mon, 29 Nov 2021 07:33:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=z1eq=QQ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mrawb-0001NB-R1
- for xen-devel@lists.xenproject.org; Mon, 29 Nov 2021 07:19:21 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aac302b4-50e4-11ec-b941-1df2895da90e;
- Mon, 29 Nov 2021 08:19:20 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 52BAA1FCA1;
- Mon, 29 Nov 2021 07:19:19 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 30D0C133FE;
- Mon, 29 Nov 2021 07:19:19 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id VfokCvd+pGHPGQAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 29 Nov 2021 07:19:19 +0000
+ (envelope-from <SRS0=KK+l=QQ=kaod.org=clg@srs-se1.protection.inumbo.net>)
+ id 1mrbAR-0003u7-Aw
+ for xen-devel@lists.xenproject.org; Mon, 29 Nov 2021 07:33:39 +0000
+Received: from 8.mo548.mail-out.ovh.net (8.mo548.mail-out.ovh.net
+ [46.105.45.231]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id aa7a3c39-50e6-11ec-976b-d102b41d0961;
+ Mon, 29 Nov 2021 08:33:37 +0100 (CET)
+Received: from mxplan5.mail.ovh.net (unknown [10.108.20.7])
+ by mo548.mail-out.ovh.net (Postfix) with ESMTPS id D10AB2064C;
+ Mon, 29 Nov 2021 07:33:34 +0000 (UTC)
+Received: from kaod.org (37.59.142.103) by DAG4EX1.mxp5.local (172.16.2.31)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Mon, 29 Nov
+ 2021 08:33:33 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,191 +45,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aac302b4-50e4-11ec-b941-1df2895da90e
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1638170359; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type;
-	bh=SYwXW/2pvGjEC+A3oUqLRQRnOe6kCH8gfjkqGE/npIo=;
-	b=MUNAoVjiHDT0uGW66GJxJEvqBFf7MXGJJr561fX3DjoAB0AY9l5aWE0I4GlBd6dLJIcQ27
-	0NGrCDd+5lSKfBxlwvs/WZk7zDAYLNWvYI81q/ulM5EsU6ek6grcxRcnsYihP0C5jRu784
-	KqZ98ZP59f8JPWmFynj2gONZY+aTl14=
-To: "stable@vger.kernel.org" <stable@vger.kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-From: Juergen Gross <jgross@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Patches for stable 5.10 kernel
-Message-ID: <59ff38c4-8355-ecf6-040d-1234320a806b@suse.com>
-Date: Mon, 29 Nov 2021 08:19:18 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+X-Inumbo-ID: aa7a3c39-50e6-11ec-976b-d102b41d0961
+Authentication-Results: garm.ovh; auth=pass (GARM-103G0058ffb0110-7673-40ee-a51a-c9a65a45fa89,
+                    3279756C2EB34864E332BB908A933B747C53BE44) smtp.auth=clg@kaod.org
+X-OVh-ClientIp: 82.64.250.170
+Message-ID: <b1a6d267-c7b4-c4b9-ab0e-f5cc32bfe9bf@kaod.org>
+Date: Mon, 29 Nov 2021 08:33:33 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="wpUMVDKHee1Hkri6ANmGTicGwGLHyCjqB"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---wpUMVDKHee1Hkri6ANmGTicGwGLHyCjqB
-Content-Type: multipart/mixed; boundary="xhbnUF2toUKD6zqO2hFC27BzFtPuF8q0E";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: "stable@vger.kernel.org" <stable@vger.kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Message-ID: <59ff38c4-8355-ecf6-040d-1234320a806b@suse.com>
-Subject: Patches for stable 5.10 kernel
-
---xhbnUF2toUKD6zqO2hFC27BzFtPuF8q0E
-Content-Type: multipart/mixed;
- boundary="------------BB97D6599586F986C0DB6E08"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
+Subject: Re: [patch 05/22] genirq/msi: Fixup includes
 Content-Language: en-US
+To: Thomas Gleixner <tglx@linutronix.de>, LKML <linux-kernel@vger.kernel.org>
+CC: <linux-hyperv@vger.kernel.org>, Paul Mackerras <paulus@samba.org>,
+	<sparclinux@vger.kernel.org>, Wei Liu <wei.liu@kernel.org>, Ashok Raj
+	<ashok.raj@intel.com>, Marc Zygnier <maz@kernel.org>, <x86@kernel.org>,
+	Christian Borntraeger <borntraeger@de.ibm.com>, Bjorn Helgaas
+	<helgaas@kernel.org>, Jason Gunthorpe <jgg@nvidia.com>,
+	<linux-pci@vger.kernel.org>, <xen-devel@lists.xenproject.org>,
+	<ath11k@lists.infradead.org>, Kevin Tian <kevin.tian@intel.com>, Heiko
+ Carstens <hca@linux.ibm.com>, Alex Williamson <alex.williamson@redhat.com>,
+	Megha Dey <megha.dey@intel.com>, Juergen Gross <jgross@suse.com>, Thomas
+ Bogendoerfer <tsbogend@alpha.franken.de>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, <linux-mips@vger.kernel.org>,
+	<linuxppc-dev@lists.ozlabs.org>
+References: <20211126222700.862407977@linutronix.de>
+ <20211126223824.382273262@linutronix.de>
+From: =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>
+In-Reply-To: <20211126223824.382273262@linutronix.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [37.59.142.103]
+X-ClientProxiedBy: DAG1EX2.mxp5.local (172.16.2.2) To DAG4EX1.mxp5.local
+ (172.16.2.31)
+X-Ovh-Tracer-GUID: 67cb6c92-6833-4394-901b-34c8b386eb6d
+X-Ovh-Tracer-Id: 9389442276353674140
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvuddrheekgdegjecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfhfhfgjtgfgihesthekredttdefjeenucfhrhhomhepveorughrihgtpgfnvggpifhorghtvghruceotghlgheskhgrohgurdhorhhgqeenucggtffrrghtthgvrhhnpeeigedvffekgeeftedutddttdevudeihfegudffkeeitdekkeetkefhffelveelleenucfkpheptddrtddrtddrtddpfeejrdehledrudegvddruddtfeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphhouhhtpdhhvghlohepmhigphhlrghnhedrmhgrihhlrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpegtlhhgsehkrghougdrohhrghdprhgtphhtthhopehlihhnuhigphhptgdquggvvheslhhishhtshdrohiilhgrsghsrdhorhhg
 
-This is a multi-part message in MIME format.
---------------BB97D6599586F986C0DB6E08
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+On 11/27/21 02:18, Thomas Gleixner wrote:
+> Remove the kobject.h include from msi.h as it's not required and add a
+> sysfs.h include to the core code instead.
+> 
+> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 
-Hi Greg,
 
-could you please add the following upstream patches to the stable 5.10
-kernel (I'll send separate mails for the older stable kernels as some
-of the patches don't apply for those)? They are hardening Xen PV
-frontends against attacks from related backends.
+This patch breaks compile on powerpc :
 
-Qubes-OS has asked for those patches to be added to stable, too.
+   CC      arch/powerpc/kernel/msi.o
+In file included from ../arch/powerpc/kernel/msi.c:7:
+../include/linux/msi.h:410:65: error: ‘struct cpumask’ declared inside parameter list will not be visible outside of this definition or declaration [-Werror]
+   410 | int msi_domain_set_affinity(struct irq_data *data, const struct cpumask *mask,
+       |                                                                 ^~~~~~~
+cc1: all warnings being treated as errors
 
-629a5d87e26fe96b ("xen: sync include/xen/interface/io/ring.h with Xen's=20
-newest version")
-71b66243f9898d0e ("xen/blkfront: read response from backend only once")
-8f5a695d99000fc3 ("xen/blkfront: don't take local copy of a request from =
-
-the ring page")
-b94e4b147fd1992a ("xen/blkfront: don't trust the backend response data=20
-blindly")
-8446066bf8c1f9f7 ("xen/netfront: read response from backend only once")
-162081ec33c2686a ("xen/netfront: don't read data from request on the=20
-ring page")
-21631d2d741a64a0 ("xen/netfront: disentangle tx_skb_freelist")
-a884daa61a7d9165 ("xen/netfront: don't trust the backend response data=20
-blindly")
-e679004dec37566f ("tty: hvc: replace BUG_ON() with negative return value"=
-)
-
+Below is fix you can merge in patch 5.
 
 Thanks,
 
-Juergen
+C.
 
---------------BB97D6599586F986C0DB6E08
-Content-Type: application/pgp-keys;
- name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Transfer-Encoding: quoted-printable
-Content-Description: OpenPGP public key
-Content-Disposition: attachment;
- filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -2,6 +2,7 @@
+  #ifndef LINUX_MSI_H
+  #define LINUX_MSI_H
+  
++#include <linux/cpumask.h>
+  #include <linux/list.h>
+  #include <asm/msi.h>
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+> ---
+>   include/linux/msi.h |    1 -
+>   kernel/irq/msi.c    |    1 +
+>   2 files changed, 1 insertion(+), 1 deletion(-)
+> 
+> --- a/include/linux/msi.h
+> +++ b/include/linux/msi.h
+> @@ -2,7 +2,6 @@
+>   #ifndef LINUX_MSI_H
+>   #define LINUX_MSI_H
+>   
+> -#include <linux/kobject.h>
+>   #include <linux/list.h>
+>   #include <asm/msi.h>
+>   
+> --- a/kernel/irq/msi.c
+> +++ b/kernel/irq/msi.c
+> @@ -14,6 +14,7 @@
+>   #include <linux/irqdomain.h>
+>   #include <linux/msi.h>
+>   #include <linux/slab.h>
+> +#include <linux/sysfs.h>
+>   #include <linux/pci.h>
+>   
+>   #include "internals.h"
+> 
 
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
-cWx
-w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
-f8Z
-d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
-9bf
-IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
-G7/
-377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
-3Jv
-c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
-QIe
-AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
-hpw
-dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
-MbD
-1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
-oPH
-Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
-5QL
-+qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
-2Vu
-IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
-QoL
-BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
-Wf0
-teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
-/nu
-AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
-ITT
-d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
-XBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
-80h
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
-AcD
-AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
-FOX
-gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
-jnD
-kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
-N51
-N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
-otu
-fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
-tqS
-EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
-hsD
-BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
-g3O
-ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
-dM7
-wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
-D+j
-LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
-V2x
-AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
-Eaw
-QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
-nHI
-s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
-wgn
-BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
-bVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
-pEd
-IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
-QAB
-wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
-Tbe
-8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
-vJz
-Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
-VGi
-wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
-svi
-uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
-zXs
-ZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
-
---------------BB97D6599586F986C0DB6E08--
-
---xhbnUF2toUKD6zqO2hFC27BzFtPuF8q0E--
-
---wpUMVDKHee1Hkri6ANmGTicGwGLHyCjqB
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmGkfvYFAwAAAAAACgkQsN6d1ii/Ey96
-SQf+IMSByLeqzJc6+rE5sugQzWzB12wORVXoQfOGprVrqIcIdIVJTDYlC9KwHEGQ22k8P1939WGT
-0hUiz39M+6nJ+8zSspLU0Il/C8/3llyyN638tE7+Oe19ZgbjUA0BtlvX5lE6TAPhEsI1WRZ37ekY
-/+jVbODeo++XqU0haveyOa3i9K54SW4dSOQtDU9gcQcueReT1tDjpOc47xPD/T4H1w+vYXIp4s3D
-p50Zt/9jIGbSwcMJfdplcNdB/m8QRrbelXrBOC3bBL7KkyKBClvxcVvIGiU/r813wA2W/6q7pQWe
-ELDw+QwOO0EYHFgun8I9ZyEcXbk9ObvpFlx3eiWatQ==
-=nQoU
------END PGP SIGNATURE-----
-
---wpUMVDKHee1Hkri6ANmGTicGwGLHyCjqB--
 
