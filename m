@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6E7AC43219
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 10:05:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234955.407716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB11C4321E
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 10:05:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.234950.407666 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms00f-0008TP-4B; Tue, 30 Nov 2021 10:05:13 +0000
+	id 1ms00b-0007R1-Pe; Tue, 30 Nov 2021 10:05:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234955.407716; Tue, 30 Nov 2021 10:05:13 +0000
+Received: by outflank-mailman (output) from mailman id 234950.407666; Tue, 30 Nov 2021 10:05:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms00e-0008SE-PR; Tue, 30 Nov 2021 10:05:12 +0000
-Received: by outflank-mailman (input) for mailman id 234955;
- Tue, 30 Nov 2021 10:05:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ms00b-0007Qu-Mh; Tue, 30 Nov 2021 10:05:09 +0000
+Received: by outflank-mailman (input) for mailman id 234950;
+ Tue, 30 Nov 2021 10:05:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1hFC=QR=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1ms00c-0007QZ-GH
- for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 10:05:10 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ffefa7a9-51c4-11ec-976b-d102b41d0961;
- Tue, 30 Nov 2021 11:05:09 +0100 (CET)
+ id 1ms00a-0007QY-Cw
+ for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 10:05:08 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fd5d471c-51c4-11ec-b941-1df2895da90e;
+ Tue, 30 Nov 2021 11:05:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ffefa7a9-51c4-11ec-976b-d102b41d0961
+X-Inumbo-ID: fd5d471c-51c4-11ec-b941-1df2895da90e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638266709;
+  d=citrix.com; s=securemail; t=1638266706;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=tDRmWPYoenWIe1ospZDKOXn6f22HabGgSyG7x1uHVLQ=;
-  b=HOTjMiJzZM2RqgBtEvSzKyR2tFY4xmRvrrfc21+QAhJXp9UFthDlnbGX
-   dKgBWdfpPm9qB3c2qS6I4S/yjNujs5XNAMKNBJA6wr3SgKvDRPK9nZ/2y
-   lerCQo/xPvkBb+yyuiclP/CLszC3QgVTXWZ8SmmoYUQQhl9Qejp/fexhe
-   g=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: pNoiC8DWjaVXj+ZVau4jBv68Xw8eyiwlnTRDO0KtZp8bMCBworqDPGk0Wr93geebcBw3ElyX0H
- Gh3u06hhYtvos8oDj+SMYFN94rPbRV+JVbscZ4JrHZl787aUG0VGcwDgmOaZQ3LucKcw24GrET
- UDf/I97/w7P999fYaBsltS+7rnqwBy7m5lyBxjZp0S85a7d315mInvHCJfCKl4xDwjoYEy6Nh1
- 5SPZMDUrLhA5NWsRucJ9SOXgYnkWNTLjO8pcJ1cG/knlHDjpY73lxCkFwlODePBZ753sMp07x5
- aFqDmo9QxGSIF5cTqqeVAUjT
+  bh=cT97y0C7d9fsmdvUf53cmo5D+BKq2IWrRAFvHOURbtA=;
+  b=hpp+eLLgTal2PTLlXyc7TR7Tnq44xohu9e8vNBjqki/TEibk1+xTJV5q
+   tD2G3e8CGg3b53TTKvzkQOWfKu6lPF5tJBKhLpA8ER5tHzBSx7GV7k61C
+   Tee8gD/tfJd0ls4MEmxuUE/BMzo+eEYiZ5YWONlH6V1js6FPFJi/MmgcF
+   8=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 1ugllMO8PACqbb9Lma/II4lkYp/RsDyYscBFOmcML4AU9ZeFkCV0AV5YfdJByw1zWBlMy17lSZ
+ lbRxY2zera0Z1MCkuNdxJeJMxXbKa4OL3TyPHq5sg/rrrsvjHl1Yl7IJ6A9ymXoHiofA1cGbFO
+ IfYURyrmSLNDd5+pGCJfc9KkVBAcDaTdcS9kp2DRbw/8OWTweyHgKpKUVfHO/nuQZTSIygT4Zd
+ ebiJJd2JkkrxQerWNEHr9CKICXQnwoI+gRVR5vpj7kTzQcwkod38dSwlCSsS8RjpR85uGhMaxD
+ Fr0+vqdI74r2UuzTFEC1xFlB
 X-SBRS: 5.1
-X-MesageID: 59281588
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 58889161
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:qtG/UK+IEdbO4Ug3R/vqDrUDTXmTJUtcMsCJ2f8bNWPcYEJGY0x3n
- TEfCj3QOveKZmSnKdt3b4qy/U9T75eAytQ1TgRvqCA8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhGmeIdA970Ug6wrdi2tYx6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPgum
- c5zp62KRj0tN72LkcE/VTcBPXBXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp0fR6aHO
- ppJAdZpRDPxRF5WYUg3MpgZkvikgymjUgRfml3A8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru3U70HxUbP9y30iee/zSngeqntTP2XsceGaO18tZugUaP3SoDBRsOT1y5rPKlzEmkVLpix
- 1c8o3R06/JorQryE4e7D0bQTGO4UgA0BItLLf8L0g63zqPEpA+8JG4qFxAQQYlz3CMpfgAC2
- liMltLvIDVgtryJVH6QnoupQSOO1Ts9djFbO3JdJecRy5y6+dxo0EqTJjp2OPft1oWdJN3m/
- 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiGyNO9zABbvzt68owGOlor+p5
- yNsdy+2tr1mMH11vHbRKNjh5Znwjxp/DBXSgER0A74q/Cm39niocOh4uW8ldB0wa51fJ2W1O
- ic/XD+9ArcIZxNGioctPuqM5zkCl/C8RbwJqNiKBjaxXnSBXFDep3w/DaJh92vsjFItgckC1
- WSzKq6R4YIhIf0/llKeHr5FuZdyn3xW7T6DFPjTkkX8uZLDNSH9dFvwGAbXBgzPxPjf+1u9H
- hc2H5bi9iizp8WiOHSKqtBKcghRRZX5bLivw/Fqmie4ClIOMAkc5zX5m9vNoqRpwPZYkPnm5
- Ha4VhMKwVbznySfew6LdmpiePXkWpMm9SA3OiklPFCJ3Xk/YNnwsPdDJsVvJbR3pvZ+yfNUT
- uUef5nSCPp4VTmaqS8WaoPwrdI+eU3z1x6OJSesfBM2Y4VkG17S4tbhcwa2rHsOAyO7uNEQu
- bql0g+HE5MPSx47VJTdae61zkP3tn8YwbogU0zNK9hVWUPt7Ik1dHCh0q5pe5kBcEyRyCGb2
- gCaBQYjidPM+4JlosPUga2krpuyF7csFERtAGSGv629MjPX/zT/zNYYAvqIZz3USEj95L6mO
- bdO1/j5PfAKwARKvo57H+o5xK4y/YKy9bpTzwAiF3TXdVW7TLhnJyDej8VIs6RMwJ5fuBe3B
- R3TqoULZ+3RNZO3CkMVKSokcv+HhKMdlTTl5PgoJFn3uX1s972dXEQOZxSBhUSx9leu3F/JF
- Qv5hPMr1g==
-IronPort-HdrOrdr: A9a23:bE+UWKy+d6y3eswqWlWYKrPw1r1zdoMgy1knxilNoHxuH/BwWf
- rPoB17726RtN91YhsdcL+7V5VoLUmzyXcX2/h1AV7BZniEhILAFugLgbcKqweKJ8SUzJ8+6U
- 4PSclD4N2bNykGsS75ijPIb+rJFrO8gd+VbeS19QYScelzAZsQiDuQkmygYzZLrA8tP+teKL
- OsovBpihCHYnotYsGyFhA+LpL+T42iruOeXfYebSRXkDWzsQ==
+IronPort-Data: A9a23:FBNkiqDhRAqCJBVW/+Tkw5YqxClBgxIJ4kV8jS/XYbTApD4i0DUBz
+ 2IeW27TO6mOYGCkeN92aoTip05X6JTRmIA2QQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX540ko7wobVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/tDySstZX8
+ It364W1aDt1PO7Ip8NCTEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcFjGdg15kQRJ4yY
+ eI2Vytkbh7PTiQeHQ4pMrZnley3iF7GJmgwRFW9+vNsvjm7IBZK+KfpGMrYfJqNX8o9tmSyq
+ 3/C/m/5KgoHL9HZwj2Amlq8i+mKkS7lVYY6ELyj6uUskFCV3nYUChAdSR28u/bRt6Klc4sBc
+ QpOoHNo9PVsshzwJjXgY/GmiEGNpTMafeIOKbMj7SCxlqiX5zm+WXdRG1atd+canMMxQDUr0
+ HqAkNXoGSFjvdWpdJ6NyluHhWjsYHZIdAfucQdBFFJYuIe7/OnfmzqWFo47eJNZmOEZDt0ZL
+ 9qiiCElz4segscQv0lQ1QCW2mn8znQlo+Nc2+k2Yo5Hxl8pDGJGT9bxgbQ+0RqmBN3CJrVml
+ CJZ8/VyFMhUUfmweNWlGY3h5o2B6fefKyH7ilVyBZQn/DnF0yf9JtAKuWglfxkzbpxsldrVj
+ Kn74lg5CHh7ZibCUEOKS9jpV5RCIVbIS7wJqcw4nvIRO8MsJWdrDQllZFKK3nCFraTfufpXB
+ HtvSu71VSxyIf0+lFKeHr5BuZd2lnFW7T6CHvjTkkX4uYdykVbIEN/pxnPVNbtnhE5FyS2Im
+ +ti2zyil08CDbagO3aPqub+7zkidBAGOHw/kOQPHsbrH+asMDtJ5yb5zexzdop7sb5Sk+uUr
+ HixVlUBkAj0hGHdKBXMYXdmMeu9UZF6pHM9HCotIVf3hCRzPdfxtP8SJ8ktYL0q1O1/1vooH
+ fMLTNqNX6ZUQTPd9jVDMZSk9N5+dA6mjB6lNja+ZGRtZIZpQgHEo4e2fgbm+CQUIDCwsM8y/
+ ++p2g/BGMJRTAV+FsfGLvmoygrp73QanetzWWrOI8VSJxqwoNQ7dXSpg6Zucc8WKBjFyj+L7
+ CqsAE8V9bvXvos40NjVnqTY/Y2nJPRzQxhBFG7B4LfoaSSDpji/wZVNWfqjdCzGUD+m472rY
+ OhYwq2uMPADm1oW4YNwH6wykPA77trr4bRb0h5lDDPAaFHyUuFsJXyP3M9usKxRx+AG5VvqC
+ xzXotQKa6+UPM7FEUIKIFt3Z+uO4vgYhz3O4KlnO079/iJ2oOKKXEg608NgU8CBwG+Z6L8Y/
+ No=
+IronPort-HdrOrdr: A9a23:W9aCnKMKfG708sBcTvmjsMiBIKoaSvp037Eqv3oedfUzSL3gqy
+ nOpoV86faaslYssR0b9exofZPwJE80lqQFhrX5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtrZ
+ uIGJIeNDSfNzdHZL7BkWuFL+o=
 X-IronPort-AV: E=Sophos;i="5.87,275,1631592000"; 
-   d="scan'208";a="59281588"
+   d="scan'208";a="58889161"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 7/8] x86/boot: Support __ro_after_init
-Date: Tue, 30 Nov 2021 10:04:44 +0000
-Message-ID: <20211130100445.31156-8-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/8] x86/boot: Fix data placement around __high_start()
+Date: Tue, 30 Nov 2021 10:04:40 +0000
+Message-ID: <20211130100445.31156-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211130100445.31156-1-andrew.cooper3@citrix.com>
 References: <20211130100445.31156-1-andrew.cooper3@citrix.com>
@@ -103,15 +102,13 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-For security hardening reasons, it advantageous to make setup-once data
-immutable after boot.  Borrow __ro_after_init from Linux.
+multiboot_ptr should be in __initdata - it is only used on the BSP path.
+Furthermore, the .align 8 then .long means that stack_start is misaligned.
 
-On x86, place .data.ro_after_init at the start of .rodata, excluding it from
-the early permission restrictions.  Re-apply RO restrictions to the whole of
-.rodata in init_done(), attempting to reform the superpage if possible.
+Move both into setup.c, which lets the compiler handle the details correctly,
+as well as providling proper debug information for them.
 
-For architectures which don't implement __ro_after_init explicitly, variables
-merges into .data.
+Declare stack_start in setup.h and avoid extern-ing it locally in smpboot.c.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -119,83 +116,82 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/setup.c        | 12 +++++++++++-
- xen/arch/x86/xen.lds.S      |  6 ++++++
- xen/include/asm-x86/setup.h |  1 +
- xen/include/xen/cache.h     |  2 ++
- 4 files changed, 20 insertions(+), 1 deletion(-)
+ xen/arch/x86/boot/x86_64.S  | 8 --------
+ xen/arch/x86/setup.c        | 6 ++++++
+ xen/arch/x86/smpboot.c      | 3 +--
+ xen/include/asm-x86/setup.h | 2 ++
+ 4 files changed, 9 insertions(+), 10 deletions(-)
 
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index d61048c583b3..27f52e7a7708 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -67,14 +67,6 @@ ENTRY(__high_start)
+         call    __start_xen
+         BUG     /* __start_xen() shouldn't return. */
+ 
+-        .data
+-        .align 8
+-multiboot_ptr:
+-        .long   0
+-
+-GLOBAL(stack_start)
+-        .quad   cpu0_stack + STACK_SIZE - CPUINFO_sizeof
+-
+         .section .data.page_aligned, "aw", @progbits
+         .align PAGE_SIZE, 0
+ /*
 diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 8329263430ed..3bbc46f244b9 100644
+index 495b4b7d51fb..6613e56a2184 100644
 --- a/xen/arch/x86/setup.c
 +++ b/xen/arch/x86/setup.c
-@@ -663,6 +663,11 @@ static void noreturn init_done(void)
-     init_xenheap_pages(__pa(start), __pa(end));
-     printk("Freed %lukB init memory\n", (end - start) >> 10);
+@@ -141,6 +141,12 @@ unsigned long __read_mostly xen_virt_end;
+ char __section(".bss.stack_aligned") __aligned(STACK_SIZE)
+     cpu0_stack[STACK_SIZE];
  
-+    /* Mark .rodata/ro_after_init as RO.  Maybe reform the superpage. */
-+    modify_xen_mappings((unsigned long)&__2M_rodata_start,
-+                        (unsigned long)&__2M_rodata_end,
-+                        PAGE_HYPERVISOR_RO);
++/* Used by the BSP/AP paths to find the higher half stack mapping to use. */
++void *stack_start = cpu0_stack + STACK_SIZE - sizeof(struct cpu_info);
 +
++/* Used by the boot asm to stash the relocated multiboot info pointer. */
++unsigned int __initdata multiboot_ptr;
++
+ struct cpuinfo_x86 __read_mostly boot_cpu_data = { 0, 0, 0, 0, -1 };
+ 
+ unsigned long __read_mostly mmu_cr4_features = XEN_MINIMAL_CR4;
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 329cfdb6c9f6..08c0f2d9df04 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -42,6 +42,7 @@
+ #include <asm/microcode.h>
+ #include <asm/msr.h>
+ #include <asm/mtrr.h>
++#include <asm/setup.h>
+ #include <asm/spec_ctrl.h>
+ #include <asm/time.h>
+ #include <asm/tboot.h>
+@@ -419,8 +420,6 @@ void start_secondary(void *unused)
      startup_cpu_idle_loop();
  }
  
-@@ -1541,8 +1546,13 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-                         (unsigned long)&__2M_text_end,
-                         PAGE_HYPERVISOR_RX);
- 
-+    /* Mark .data.ro_after_init as RW.  Maybe shatters the .rodata superpage. */
-+    modify_xen_mappings((unsigned long)&__ro_after_init_start,
-+                        (unsigned long)&__ro_after_init_end,
-+                        PAGE_HYPERVISOR_RW);
-+
-     /* Mark .rodata as RO. */
--    modify_xen_mappings((unsigned long)&__2M_rodata_start,
-+    modify_xen_mappings((unsigned long)&__ro_after_init_end,
-                         (unsigned long)&__2M_rodata_end,
-                         PAGE_HYPERVISOR_RO);
- 
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index 87e344d4dd97..4db5b404e073 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -97,6 +97,12 @@ SECTIONS
-   __2M_rodata_start = .;       /* Start of 2M superpages, mapped RO. */
-   DECL_SECTION(.rodata) {
-        _srodata = .;
-+
-+       __ro_after_init_start = .;
-+       *(.data.ro_after_init)
-+       . = ALIGN(PAGE_SIZE);
-+       __ro_after_init_end = .;
-+
-        /* Bug frames table */
-        __start_bug_frames = .;
-        *(.bug_frames.0)
+-extern void *stack_start;
+-
+ static int wakeup_secondary_cpu(int phys_apicid, unsigned long start_eip)
+ {
+     unsigned long send_status = 0, accept_status = 0;
 diff --git a/xen/include/asm-x86/setup.h b/xen/include/asm-x86/setup.h
-index eb9d7b433c13..34edea405f85 100644
+index 24be46115df2..eb9d7b433c13 100644
 --- a/xen/include/asm-x86/setup.h
 +++ b/xen/include/asm-x86/setup.h
-@@ -6,6 +6,7 @@
+@@ -12,6 +12,8 @@ extern char __2M_rwdata_start[], __2M_rwdata_end[];
+ extern unsigned long xenheap_initial_phys_start;
+ extern uint64_t boot_tsc_stamp;
  
- extern const char __2M_text_start[], __2M_text_end[];
- extern const char __2M_rodata_start[], __2M_rodata_end[];
-+extern const char __ro_after_init_start[], __ro_after_init_end[];
- extern char __2M_init_start[], __2M_init_end[];
- extern char __2M_rwdata_start[], __2M_rwdata_end[];
- 
-diff --git a/xen/include/xen/cache.h b/xen/include/xen/cache.h
-index 6ee174efa439..f52a0aedf768 100644
---- a/xen/include/xen/cache.h
-+++ b/xen/include/xen/cache.h
-@@ -15,4 +15,6 @@
- #define __cacheline_aligned __attribute__((__aligned__(SMP_CACHE_BYTES)))
- #endif
- 
-+#define __ro_after_init __section(".data.ro_after_init")
++extern void *stack_start;
 +
- #endif /* __LINUX_CACHE_H */
+ void early_cpu_init(void);
+ void early_time_init(void);
+ 
 -- 
 2.11.0
 
