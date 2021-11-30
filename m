@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB918C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 14:51:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.235207.408097 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1AD1C4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 14:53:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.235210.408109 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms4TC-0006M3-Gj; Tue, 30 Nov 2021 14:50:58 +0000
+	id 1ms4V6-00075e-3y; Tue, 30 Nov 2021 14:52:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 235207.408097; Tue, 30 Nov 2021 14:50:58 +0000
+Received: by outflank-mailman (output) from mailman id 235210.408109; Tue, 30 Nov 2021 14:52:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms4TC-0006Lw-Dc; Tue, 30 Nov 2021 14:50:58 +0000
-Received: by outflank-mailman (input) for mailman id 235207;
- Tue, 30 Nov 2021 14:50:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ms4V5-00075X-VQ; Tue, 30 Nov 2021 14:52:55 +0000
+Received: by outflank-mailman (input) for mailman id 235210;
+ Tue, 30 Nov 2021 14:52:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=fRDO=QR=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1ms4TA-0003Jn-Tj
- for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 14:50:56 +0000
+ id 1ms4V5-00074e-Bl
+ for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 14:52:55 +0000
 Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ec16c7bb-51ec-11ec-976b-d102b41d0961;
- Tue, 30 Nov 2021 15:50:56 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 32ab10d1-51ed-11ec-b941-1df2895da90e;
+ Tue, 30 Nov 2021 15:52:54 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 780B5B81A4A;
- Tue, 30 Nov 2021 14:50:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6542FC53FC1;
- Tue, 30 Nov 2021 14:50:54 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id DAEA6B81A46;
+ Tue, 30 Nov 2021 14:52:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9E30C53FCF;
+ Tue, 30 Nov 2021 14:52:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec16c7bb-51ec-11ec-976b-d102b41d0961
+X-Inumbo-ID: 32ab10d1-51ed-11ec-b941-1df2895da90e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1638283855;
-	bh=4OtE2dM98jInvKHYbv2vgmbGTZc8pVzG0y2HACN8IIk=;
+	s=k20201202; t=1638283972;
+	bh=JsgGG7B/KqUw9wC6FuWxsYS1GzJZsMvRNcihS8b7emg=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=VvsjJAPpdx4OQNhgM6cwY+asKgHZBuw8Vy3CCWIe2gj+b7wIzennnYYofKDU/fXuN
-	 Kr5JI8MIsl0R+60RGxo5X73yZ/L3kLhu5Q/keTyZzq6BvkvpVraRQTtcTKSB8uL05f
-	 KbAqelGmMbzKVmS8+mJGfkR0v2eo5Tclu2MFlwCsPDq5iJhD4ui7w9QZ4NFF+wvkP0
-	 sCXtsBZ3vqyape+3shRE3RSCYdo9wTz6LAfE7b93DjfK2/c7KtLmBYjaYt8s6HFsDA
-	 ATqPJJ5rljmzC+lhuzlTQb/i79dEcACGK57o9glbslhZN4ws+6Qehl/SfmLUFKC7Tb
-	 TEq4mu4rzZktg==
+	b=ps6YoDk9Malc2RTmPV8tiInFK6roUOEao7cv6ORRWMZ34IbwT+ByvKsOnzhbEmltV
+	 gZ+ye2yaViIXwz8kWm1Vo31sZlvg0DAr/BoXQLqIXQ3YxUpIdslW8Kos0JWW9J0w18
+	 LDcf+MkcuFZIzFYq3est6yUM992IiuZhCmJY5/rNaWyWuwKMIAT2T5h3kuXXsety5z
+	 Nin0msv+YGP/2gYtJavQtzVrzjZzupenjft8pcwYIUUHaItE+L+yz1JMODilgwoqe+
+	 3ba+NhXCslRxnvGn/aJ+fmvlxiFrazh3vFLgr7x/6iu7hycdnvUqhgv1MTtfLDQYet
+	 cOl0OrUB1pxGw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -65,12 +65,12 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Sasha Levin <sashal@kernel.org>,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH AUTOSEL 5.10 11/43] xen/privcmd: make option visible in Kconfig
-Date: Tue, 30 Nov 2021 09:49:48 -0500
-Message-Id: <20211130145022.945517-11-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 04/17] xen/privcmd: make option visible in Kconfig
+Date: Tue, 30 Nov 2021 09:52:28 -0500
+Message-Id: <20211130145243.946407-4-sashal@kernel.org>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211130145022.945517-1-sashal@kernel.org>
-References: <20211130145022.945517-1-sashal@kernel.org>
+In-Reply-To: <20211130145243.946407-1-sashal@kernel.org>
+References: <20211130145243.946407-1-sashal@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 X-stable: review
@@ -103,10 +103,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index ea0efd290c372..98a3b702373aa 100644
+index 0505eeb593b5c..8e4fff3cbaf0e 100644
 --- a/drivers/xen/Kconfig
 +++ b/drivers/xen/Kconfig
-@@ -234,9 +234,15 @@ config XEN_SCSI_BACKEND
+@@ -258,9 +258,15 @@ config XEN_SCSI_BACKEND
  	  if guests need generic access to SCSI devices.
  
  config XEN_PRIVCMD
