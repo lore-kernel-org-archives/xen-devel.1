@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63464C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38907C433F5
 	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 10:05:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234952.407679 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.234956.407724 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms00c-0007ae-Iw; Tue, 30 Nov 2021 10:05:10 +0000
+	id 1ms00f-0000Eh-Qa; Tue, 30 Nov 2021 10:05:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234952.407679; Tue, 30 Nov 2021 10:05:10 +0000
+Received: by outflank-mailman (output) from mailman id 234956.407724; Tue, 30 Nov 2021 10:05:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms00c-0007ZU-9L; Tue, 30 Nov 2021 10:05:10 +0000
-Received: by outflank-mailman (input) for mailman id 234952;
- Tue, 30 Nov 2021 10:05:09 +0000
+	id 1ms00f-00006I-Cc; Tue, 30 Nov 2021 10:05:13 +0000
+Received: by outflank-mailman (input) for mailman id 234956;
+ Tue, 30 Nov 2021 10:05:11 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1hFC=QR=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1ms00b-0007QY-4G
- for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 10:05:09 +0000
+ id 1ms00d-0007QY-4k
+ for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 10:05:11 +0000
 Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
  [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fdd99465-51c4-11ec-b941-1df2895da90e;
- Tue, 30 Nov 2021 11:05:07 +0100 (CET)
+ id ff574a4e-51c4-11ec-b941-1df2895da90e;
+ Tue, 30 Nov 2021 11:05:08 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,92 +38,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fdd99465-51c4-11ec-b941-1df2895da90e
+X-Inumbo-ID: ff574a4e-51c4-11ec-b941-1df2895da90e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638266707;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=IRor6soBhEeE5vF+GbxAtTh3CvJGNcaQtLYm2WQQtGk=;
-  b=AcyQw7UUPh+K6JqJyDnJ/flBU1Hqtne82mhmQ4H/24uOjKRIAnWd7iAJ
-   TSDbySNKdPZfCo5YTE/gdjLCuX7zgEkly70HwYl9zXnVhjc4IWL8p86ce
-   saGY9xxBOteRG/O1KUX8wwEiF0pBr2kWNH5nNYSa4RewGlMI+xQfzyIks
-   I=;
+  d=citrix.com; s=securemail; t=1638266708;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=5YA8FSFJ+Ido7sPF/P6KhMxMTP806Xj8+bqrXWoCKI4=;
+  b=DjSmmfZbOWAu5hVXi41U8OPipsYG+vFjaE2ceAjCm2q6aZ1eq51BSqFH
+   qQ78hfCg/zp/UNMjZq4xcjAY4aj8vpGM3Y2zgP6sMBAr5Sny8JgXDMyiq
+   41tKPEhrlsUTajj0jeqEDcl4RggVMG10zmEmjL9Ap3aHnYZ4ia0f+o5Tt
+   E=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: Quo82sqQqaS/+Qj5hxr5spjUTWJFtsz6cNMthjL+lgMeY7OeCCWO91vZRIYU+YT++nDhEeWw0I
- jRV8J6vcU4irN1b+dlbqwi//Dcz9J2mCLjW3W8vsKtm07JL3GN/QSIhOY1FyTxGb7tIy4leri/
- SlCVxFUmKYUFcCaLq6tYcAX/DeMiFgE7F1O31UAq/BhAlO4w0GDPZ1oOLitEdU6T+oS0Xhy7Hk
- S1oYzK14/DgDty3TcyT0K+Rnr9dgEekUJxKusN/raM5ZLKpqXr1ewAJ6tEDPtfxAMToRfRqUOI
- zzzAj7VeL6v547W9J4l2X/dJ
+IronPort-SDR: bIHWVeQHUXz6r0nX5evBqeKl860UzVSAtORugFtAuD+4PLq48heLcB0V0uUAJMeqnVVDT2y1ad
+ 2Ba/HXs9KvulHtTLbnADi4SIZqTkW2HIFrwRi+tvkul9mff3uvmmAj2nRqUTyBzlFP8MwK5Ohg
+ ArfF+iSNjCz+m8fV4YqjnjJ5RpZxmdvHFeRDkUg7vKjAhxDclB016CjO2KCu6Tjxsm5c2qCv/j
+ LrJO0UHNGzxABd1qIsKEG/7Zdb4Z9Y6SHoUY+oE6qqx1m1qZ3Y+C4EKpst16zWhBpka9kclLEk
+ /VZHCW37IvnFn7sWwAZAALK1
 X-SBRS: 5.1
-X-MesageID: 58406782
+X-MesageID: 58406783
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:ZBDTKaKr96KYStS0FE+RHZIlxSXFcZb7ZxGr2PjKsXjdYENS02AAx
- jNKXDvVMvePN2Cmf4p3bY20o09U7MPdz9JhSQJlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Es4w7Zg6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB23pcJY1
- /scmaaNRCIXOLeSsslAa0FhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Gpg2pgQQqaED
- yYfQRZtYi2ceiVdAVlUOMoQhsWInXihYQQN/Tp5ooJoujOOnWSdyoPFL979atGMA8JPkS6wh
- EjL4mD4CREyL8GExHyO9XfErv/Cm2b3VZwfEJW89+V2mxuDy2oLEhoUWFCn5/6jhSaDt8l3c
- hJOvHB09O5rqRLtHoKVswCETGCsgCQOcsV+QsEA1Qyo9KzOvSy0W1Bcd2sUADA5j/MeSTsv3
- 16PutrmAz1zrbGYIU6gGqeoQSCaYnZMczJbDcMQZU5cuoS4/tlv5v7aZo87SPbdszHjJd3nL
- 9lmRgAajq5bs8ME3r7TEbvv02P1/cihouLYC2zqsoOZAuFRON7Ni2+AswGzARN8wGCxFQLpU
- J8swZX20Qz2JcvR/BFhuc1UdF1T296LMSfHnXlkFIQ7+jKm9haLJN4LsGsnfRwybJxYI1cFh
- XM/XysKv/e/21PwMMdKj3+ZUZx2ncAM6/y7PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
- v+mnTKXJS9CU8xPlWPuL89EiOND7n1ulAv7GMGgpzz6gOX2WZJgYepcWLd4Rrtit/3sTcS82
- 4s3CvZmPD0DCrCjOXeOrtZIRb3IRFBiba3LRwVsXrbrCmJb9KsJUqG5LWoJd9M3kqJLuP3P+
- 33hCEZUxECm3S/MKBmQa2AlY7TqBM4toXU+NC0qHFCpx3l8Ptr/sPZBL8M6Les96ehu7f9oV
- P1ZKc+ONetCF2bc8DMHYJij8IE7LEa3hRiDNjaOaSQke8IyXBTA/9LpJ1O99CQHAietm9E5p
- rmsilHSTZYZHlwwB8fKcvO/iVi2uCFFyu51WkLJJPhVeVntr9c2e3Cg0KdvLphVexvZxzac2
- wKHOjsipLHA890v7d3EpaGYtIP1QeFwKVVXQjvA5rGsOCiEomf6md1cUPyFdCz2XX/v/Pnwf
- v1cyvzxPaFVnFtOtIYgQb9nwbhnuonqrr5eiA9lAG/KfxKgDbY5eiuK2sxGt6tswL5FuFTpB
- hLTq4cCYbjZatn4FFMxJRY+arXR3P4ZrTDe8PApLRio/yRw5reGDR1fMhTkZPax91ep3FfJG
- dschfM=
-IronPort-HdrOrdr: A9a23:gNv03KHx7d4inocspLqE5seALOsnbusQ8zAXP0AYc31om6uj5q
- aTdZUgpHjJYVkqKRIdcLy7V5VoIkmskaKdg7NhX4tKNTOO0ADDQe1fBOPZskTd8kbFltK1u5
- 0PT0EHMqyUMWRH
+IronPort-Data: A9a23:p61006rlp9t786N76YX40JrEMR9eBmLUYhIvgKrLsJaIsI4StFCzt
+ garIBmCP63bMDSmLd9zYdm0pENVsJTcmtBgSgBtqSEzHnkR85uZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dnd+4f5fs7Rh2Ncx2IPhW1rlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnaKKWy42EPzgotkQdideCX9UEPB+oIaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ ppFMWQwPE+ojxtnZ2kzJJ8Ao+WRj1reLn4Ah3mkhLAv/D2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
+ 2SA+H72ajk4HtGCzTuO8lq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcUE0hOk1YSFzzykC006SCQfQvF7jJcPEGlCO
+ kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdQGmom
+ 1i3QD4Ca6L/ZCLh/4Gy5hj5jj2lvfAlpSZlt1yMDgpJAu6UDbNJhrBEC3CHvZ6sz67DFzFtW
+ UTofeDFt4ji6rnXyUSwrB0lRu3B2hp8GGS0baRTN5cg7S+x3HWoYJpd5jpzTG8wbJ1UI2awO
+ xSN418LjHO2AJdMRfQsC25WI553pZUM6Py/DqyEBjawSsYZmPC7ENFGOhfLgjGFfLkEmqAjI
+ 5aLGftA/l5BYZmLOAGeHr9HuZdyn3hW7TqKGfjTkkT2uZLDNSX9YepUbzOzghURsfrsTPP9q
+ I0EaaNnCnx3DYXDX8Ug2dJJcA1RcyFkXcueRg4+XrfrHzeK0VoJU5f5qY7NsaQ8w8y5T8/Eo
+ SOwXFF20l36iSGVIAmGcCk7OrjuQYx+vTQwOil1ZQSk3H0qYICO6qYDdsRoIel7pbI7lfMkH
+ eMYf8igA+hUTmiV8ToqcpSg/pdpcw6mhFzSMnP9MiQ/ZZNpWyfA5sTgIln07CALAyfu7Zk+r
+ rSs2xn1W50GQwg+Xs/aZOj2lwG6vGQHmfI0VEzNe4EBdELp+YlsCirwkv5ofJ1cdUSdnmOXj
+ l/EDw0ZqO/Bp54O3OPI3a3U/Z20F+ZeH1ZBGzWJ57iBKiSHrHGoxpVNUbjUcGmFBn/04qire
+ c5c0+r4bK8chF9PvodxT+RrwKY564e9rrNW1F05TnDCblDtAbJ8OHiWm8JIs/QVlLNevAK3X
+ GOJ+8VbZurVaJ+0TgZJKVp3dPmH2NEVhiLWvKY8L0jN7SNq+KaKDBdJNB6WhS0BdLZ4PevJG
+ wv6VBL6P+BnticXDw==
+IronPort-HdrOrdr: A9a23:5+a6Vahb7SmeiIsQBBZfEEUNrHBQXuAji2hC6mlwRA09TySZ//
+ rOoB19726NtN9xYgBYpTnuAtjifZqxz/FICMwqTNOftWrdyQ2VxeNZnOnfKlTbckWUnIMw6U
+ 4jSdkYNDSZNykAsS+Q2mmF+rgbruVviJrY4Nvj8w==
 X-IronPort-AV: E=Sophos;i="5.87,275,1631592000"; 
-   d="scan'208";a="58406782"
+   d="scan'208";a="58406783"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 0/8] x86: Support for __ro_after_init
-Date: Tue, 30 Nov 2021 10:04:37 +0000
-Message-ID: <20211130100445.31156-1-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/8] x86/boot: Drop xen_virt_end
+Date: Tue, 30 Nov 2021 10:04:42 +0000
+Message-ID: <20211130100445.31156-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20211130100445.31156-1-andrew.cooper3@citrix.com>
+References: <20211130100445.31156-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Also some prep cleanup, because the boot time pagetable handling is seemingly
-impossible to edit without finding more skeletons lying around...
+The calculation in __start_xen() for xen_virt_end is an opencoding of
+ROUNDUP(_end, 2M).  This is __2M_rwdata_end as provided by the linker script.
 
-Andrew Cooper (8):
-  x86/boot: Drop incorrect mapping at l2_xenmap[0]
-  x86/boot: Better describe the pagetable relocation loops
-  x86/boot: Fix data placement around __high_start()
-  x86/mm: Drop bogus cacheability logic in update_xen_mappings()
-  x86/boot: Drop xen_virt_end
-  x86/boot: Adjust .text/.rodata/etc permissions in one place
-  x86/boot: Support __ro_after_init
-  x86/boot: Check that permission restrictions have taken effect
+This corrects the bound calculations in arch_livepatch_init() and
+update_xen_mappings() to not enforce 2M alignment when Xen is not compiled
+with CONFIG_XEN_ALIGN_2M
 
- xen/arch/x86/boot/x86_64.S        |   8 --
- xen/arch/x86/livepatch.c          |   3 +-
- xen/arch/x86/mm.c                 |  24 +++---
- xen/arch/x86/setup.c              | 153 +++++++++++++++++++-------------------
- xen/arch/x86/smpboot.c            |   3 +-
- xen/arch/x86/xen.lds.S            |   6 ++
- xen/include/asm-x86/setup.h       |   3 +
- xen/include/asm-x86/x86_64/page.h |   2 -
- xen/include/xen/cache.h           |   2 +
- 9 files changed, 103 insertions(+), 101 deletions(-)
+Furthermore, since 52975142d154 ("x86/boot: Create the l2_xenmap[] mappings
+dynamically"), there have not been extraneous mappings to delete, meaning that
+the call to destroy_xen_mappings() has been a no-op.
 
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+
+This effectively reverts d0ae97d4136e ("x86-64: properly handle alias mappings
+beyond _end"), because the preconditions for the change are no longer valid.
+---
+ xen/arch/x86/livepatch.c          | 3 ++-
+ xen/arch/x86/mm.c                 | 3 ++-
+ xen/arch/x86/setup.c              | 6 ------
+ xen/include/asm-x86/x86_64/page.h | 2 --
+ 4 files changed, 4 insertions(+), 10 deletions(-)
+
+diff --git a/xen/arch/x86/livepatch.c b/xen/arch/x86/livepatch.c
+index 49f0d902e5bb..d056b1ed8b41 100644
+--- a/xen/arch/x86/livepatch.c
++++ b/xen/arch/x86/livepatch.c
+@@ -17,6 +17,7 @@
+ #include <asm/fixmap.h>
+ #include <asm/nmi.h>
+ #include <asm/livepatch.h>
++#include <asm/setup.h>
+ 
+ static bool has_active_waitqueue(const struct vm_event_domain *ved)
+ {
+@@ -343,7 +344,7 @@ void __init arch_livepatch_init(void)
+ {
+     void *start, *end;
+ 
+-    start = (void *)xen_virt_end;
++    start = (void *)__2M_rwdata_end;
+     end = (void *)(XEN_VIRT_END - FIXADDR_X_SIZE - NR_CPUS * PAGE_SIZE);
+ 
+     BUG_ON(end <= start);
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 9bd4e5cc1d2f..fdc548a9cb4a 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -786,7 +786,8 @@ bool is_iomem_page(mfn_t mfn)
+ static int update_xen_mappings(unsigned long mfn, unsigned int cacheattr)
+ {
+     bool alias = mfn >= PFN_DOWN(xen_phys_start) &&
+-         mfn < PFN_UP(xen_phys_start + xen_virt_end - XEN_VIRT_START);
++        mfn < PFN_UP(xen_phys_start + (unsigned long)__2M_rwdata_end -
++                     XEN_VIRT_START);
+ 
+     /*
+      * Something is catastrophically broken if someone is trying to change the
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 6613e56a2184..0e0e706404a3 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -136,8 +136,6 @@ cpumask_t __read_mostly cpu_present_map;
+ 
+ unsigned long __read_mostly xen_phys_start;
+ 
+-unsigned long __read_mostly xen_virt_end;
+-
+ char __section(".bss.stack_aligned") __aligned(STACK_SIZE)
+     cpu0_stack[STACK_SIZE];
+ 
+@@ -1573,10 +1571,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+     }
+ #endif
+ 
+-    xen_virt_end = ((unsigned long)_end + (1UL << L2_PAGETABLE_SHIFT) - 1) &
+-                   ~((1UL << L2_PAGETABLE_SHIFT) - 1);
+-    destroy_xen_mappings(xen_virt_end, XEN_VIRT_START + BOOTSTRAP_MAP_BASE);
+-
+     /*
+      * If not using 2M mappings to gain suitable pagetable permissions
+      * directly from the relocation above, remap the code/data
+diff --git a/xen/include/asm-x86/x86_64/page.h b/xen/include/asm-x86/x86_64/page.h
+index f9faf7f38348..cb1db107c424 100644
+--- a/xen/include/asm-x86/x86_64/page.h
++++ b/xen/include/asm-x86/x86_64/page.h
+@@ -23,8 +23,6 @@ static inline unsigned long canonicalise_addr(unsigned long addr)
+ 
+ #include <xen/pdx.h>
+ 
+-extern unsigned long xen_virt_end;
+-
+ /*
+  * Note: These are solely for the use by page_{get,set}_owner(), and
+  *       therefore don't need to handle the XEN_VIRT_{START,END} range.
 -- 
 2.11.0
 
