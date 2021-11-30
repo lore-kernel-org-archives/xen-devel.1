@@ -4,29 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF81FC433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 10:07:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.234984.407744 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE2EC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Nov 2021 10:31:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.235005.407768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms02a-0003E8-DS; Tue, 30 Nov 2021 10:07:12 +0000
+	id 1ms0QA-0007C3-KM; Tue, 30 Nov 2021 10:31:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 234984.407744; Tue, 30 Nov 2021 10:07:12 +0000
+Received: by outflank-mailman (output) from mailman id 235005.407768; Tue, 30 Nov 2021 10:31:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ms02a-0003Dv-9f; Tue, 30 Nov 2021 10:07:12 +0000
-Received: by outflank-mailman (input) for mailman id 234984;
- Tue, 30 Nov 2021 10:07:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=1hFC=QR=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1ms010-0007QZ-0D
- for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 10:05:34 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0cf75c0e-51c5-11ec-976b-d102b41d0961;
- Tue, 30 Nov 2021 11:05:32 +0100 (CET)
+	id 1ms0QA-0007Bw-HD; Tue, 30 Nov 2021 10:31:34 +0000
+Received: by outflank-mailman (input) for mailman id 235005;
+ Tue, 30 Nov 2021 10:31:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=AOGb=QR=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1ms0Q8-0007Bq-Eu
+ for xen-devel@lists.xenproject.org; Tue, 30 Nov 2021 10:31:32 +0000
+Received: from de-smtp-delivery-102.mimecast.com
+ (de-smtp-delivery-102.mimecast.com [194.104.111.102])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id aeeb2895-51c8-11ec-b941-1df2895da90e;
+ Tue, 30 Nov 2021 11:31:31 +0100 (CET)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04lp2050.outbound.protection.outlook.com [104.47.12.50]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-16-aEJL0MoPOHOEgZ8-xZFHZQ-1; Tue, 30 Nov 2021 11:31:29 +0100
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR04MB7037.eurprd04.prod.outlook.com (2603:10a6:800:125::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23; Tue, 30 Nov
+ 2021 10:31:26 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe%5]) with mapi id 15.20.4734.024; Tue, 30 Nov 2021
+ 10:31:26 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AS9PR06CA0083.eurprd06.prod.outlook.com (2603:10a6:20b:464::27) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23 via Frontend
+ Transport; Tue, 30 Nov 2021 10:31:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,198 +58,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0cf75c0e-51c5-11ec-976b-d102b41d0961
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638266732;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=GLNFdCsQo1lgG4rFh7qYYZT9z5k1wotugxCu0CDIj2s=;
-  b=au9ftoYXWPShCl21mh2jFu9YImyBLso6I3S2cwg3PbAbiYbKOJFWxkgV
-   n2KTfqL2lJ9sWDc+Lmc0eNdt955lz3Gi8+7lI9YJJPJQQ2MGGMLFv4Xl8
-   pMjxwb9/Qjssk6/NtRz0YkVH6WNn22ohOjzF26DDCGexuzmdcwQEsbWRJ
-   c=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: WGrmbQzjO3MmuKrT0AMqwfj83nx9+CdYXBIbqgbe5G9McsoLsuhJ+vYTDxsQ7U0x1dB53n6jBy
- RT+44sToPcTG+G9KwABZSsa2SojLVPVZN55ele5RX6EyiLqg6T8l3apV44dBfbTVHiLtMdbucN
- Viz25uBp8d5mz0dKkOzZagx8E45pvJuuNKKVHfIl1nClWAT2FvzCz22qnjbFL9+1EGYL/mM0YF
- EXH43GwPGLLHp03h6WTnpfJRF5q9lNlyVdAIuZSHHEFRXprttJnqp6u0zfIkXapLXmDwNrnNWb
- f3cUgc6H37p7vf3+z58ZJ8SZ
-X-SBRS: 5.1
-X-MesageID: 58910850
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:hm929aCI0l5plBVW/+Tkw5YqxClBgxIJ4kV8jS/XYbTApD5w1z1Wy
- WEZCmjVOquPMGL3eYxxPdixo0IPsJXXx9E1QQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX540ko7wobVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/px6Zlo5oi
- +93q8aMGBcWG+7+oaNMekwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcFjGZp3pATRZ4yY
- eImQ2d0Uw7dRyFVGWsxGLw7p9/3nCjGJmgwRFW9+vNsvjm7IBZK+KfpGMrYfJqNX8o9tmSyq
- 3/C/m/5KgoHL9HZwj2Amlq8i+mKkS7lVYY6ELyj6uUskFCV3nYUChAdSR28u/bRt6Klc4sBc
- QpOoHNo9PVsshzwJjXgY/GmiFKvrhdCQplqKfNg1FCd9Y+X0T/eV0FRG1atd+canMMxQDUr0
- HqAkNXoGSFjvdWpdJ6NyluHhWjsYHZIdAfucQdBFFJYuIe7/OnfmzqWFo47eJNZmOEZDt0ZL
- 9qiiCElz4segscQv0lQ1QCW2mn8znQlo+Nc2+k2Yo5Hxl8pDGJGT9bxgbQ+0RqmBN3CJrVml
- CJZ8/VyFMhUUfmweNWlGY3h5o2B6fefKyH7ilVyBZQn/DnF0yf9JtAKuWglfxkzbpxsldrVj
- Kn74lg5CHh7ZibCUEOKS9jpV5RCIVbIS7wJqcw4nvIRO8MsJWdrDQllZFKK3nCFraTfufpXB
- HtvSu71VSxyIf0+lFKeHr5BuZd2lnFW7T6CHvjTkkX4uYdykVbIEN/pxnPVNbtnhE5FyS2Im
- +ti2zyil08CDbagO3aPqub+7zkidBAGOHw/kOQPHsbrH+asMDpJ5yb5zexzdop7sb5Sk+uUr
- HixVlUBkAj0hGHdKBXMYXdmMeu9UZF6pHM9HCotIVf3hCRzPdfxtP8SJ8ktYL0q1O1/1vooH
- fMLTNqNX6ZUQTPd9jVDMZSk9N5+dA6mjB6lNja+ZGRtZIZpQgHEo4e2fgbm+CQUIDCwsM8y/
- ++p2g/BGMJRTAV+FsfGLvmoygrp73QanetzWWrOI8VSJxqwoNQ7dXSpg6Zucc8WKBjFyj+L7
- CqsAE8V9bvXvos40NjVnqTY/Y2nJPRzQxhBFG7B4LfoaSSDpji/wZVNWfqjdCzGUD+m472rY
- OhYwq2uMPADm1oW4YNwH6wykPA77trr4bRb0h5lDDPAaFHyUuFsJXyP3M9usKxRx+AG5VvqC
- xzXotQKa6+UPM7FEUIKIFt3Z+uO4vgYhz3O4KlnO079/iJ2oOKKXEg608NgU8CBwG+Z6L8Y/
- No=
-IronPort-HdrOrdr: A9a23:nkvmQatjFWvrgaJba5S4Sd9s7skDTNV00zEX/kB9WHVpmszxra
- GTdZMgpGfJYVcqKQgdcL+7Scq9qB/nmqKdpLNhWYtKPzOW3ldATrsSj7cKqgeIc0aVm4JgPO
- VbAs9D4bXLfCNHZK3BgDVQfexP/DD+ytHMudvj
-X-IronPort-AV: E=Sophos;i="5.87,275,1631592000"; 
-   d="scan'208";a="58910850"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 6/8] x86/boot: Adjust .text/.rodata/etc permissions in one place
-Date: Tue, 30 Nov 2021 10:04:43 +0000
-Message-ID: <20211130100445.31156-7-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20211130100445.31156-1-andrew.cooper3@citrix.com>
-References: <20211130100445.31156-1-andrew.cooper3@citrix.com>
+X-Inumbo-ID: aeeb2895-51c8-11ec-b941-1df2895da90e
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1638268291;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=7LUGUM1Y9rAeuOw/zM11YUQqIE0RZ8MLtrD32zeIdro=;
+	b=UBOc7D3lcIusX4MfNS1Voih5pK159aVlPIM5zk9Sy3FQ3jtUwGllLKbnasQMUjSnOvctyB
+	CGa+LRpp9+2EYcbdHik5VUkPl6194s5HDcsWL0toqNk0ae0GVlRJrH+hqrnfWbW0D+oHCf
+	kw3mgqCZ/Tq9Aftl9UBYNkUvHgiQAu4=
+X-MC-Unique: aEJL0MoPOHOEgZ8-xZFHZQ-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TYG1lJSkvd0I2ZfTeY4R6ls1DuXpyClnLutK+NzsVLepoK3UUIltSLSPkfxQBlILPP8wWZ82sg60ZJQ66VyhTVxRjqNmyqY7wvGt99zt1N6BXRskv2SyyOCgrTbo+CB2DWs/C0dq6Gj0cVVLIB+UNln8K0xUHp2rYXQcJjAS/5351UemGb8yzgwAUorS2LxVZS7wpMoMCyUJaMj2q1mlnZevv1Vhp81uVhtP2D1sdmHjAMLUuvIzExF6ne0zCN+Q7SnAV7ycYZbGQt5X2D0UC2qN6MY38/Y7ix1WeU/++aNfjDZr3d9uF+DzGOEOq8RADJFoqDBkmzyYoD87/L987Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7LUGUM1Y9rAeuOw/zM11YUQqIE0RZ8MLtrD32zeIdro=;
+ b=AWXIHpLcVwHkhjEueC0HS4T+hde/u8VtSdIHXam+/E6QslKmzp0g8KjWnbzqwKLnRQR4Sjzy/TgL79854SngmZKlmFNIq/Wx4WXDwjzeCZMBVFeV42990C24sTGmVn66LHQ1PuBPY44OEqNOncsmwwvmfUwe3lxQVNNsMcDbu5q4BXraVAoRoTqfuotAzwmTWBjhA034g8mJ8+7od1jW2/G+SrUpiq1hG/KpeFuTfI48JI2d9BwOyIdTOuawZoBjW65HDYCfb5NcGUzmaCeaP1I8aJibvrj+c4g56vMJOYxhkMtPcxgokSF1oAULooMP3M2lQfbIwGuqu5E27kLxzg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <a8135634-d5f3-c377-3426-5307327cd1cc@suse.com>
+Date: Tue, 30 Nov 2021 11:31:24 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+Subject: Re: [PATCH] Fixed an incorrect value
+Content-Language: en-US
+To: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
+Cc: sstabellini@kernel.org, stefanos@xilinx.com, julien@xen.org,
+ Volodymyr_Babchuk@epam.com, bertrand.marquis@arm.com,
+ xen-devel@lists.xenproject.org
+References: <20211129194450.62467-1-ayankuma@xilinx.com>
+ <3f0230f3-79d2-d40e-f3f3-33201c2792b0@suse.com>
+ <bf77c97c-df14-b6f9-cd8c-b3d86568037d@xilinx.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <bf77c97c-df14-b6f9-cd8c-b3d86568037d@xilinx.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AS9PR06CA0083.eurprd06.prod.outlook.com
+ (2603:10a6:20b:464::27) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 23bc4a46-e81d-4ecc-b448-08d9b3ec9030
+X-MS-TrafficTypeDiagnostic: VI1PR04MB7037:
+X-Microsoft-Antispam-PRVS:
+	<VI1PR04MB703743CADC508A4024A0C797B3679@VI1PR04MB7037.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	n1THYGLjMPrc71aThhAlSWBtFavqUPat6+df00s/CoaxmURBf3lSrT5PIaR0KEQPTxDZOGBGPg9aexMFqU06Z+Jju0DYTzxte1wbehHBTBykUdt3b/C1t+oVw8lSRNUvPs5WVjxgKUqhsZYcVuZYPCOsb3c9Ev3/PIaj2lZN9ZWAcW13NgByXOovtS3M9Ux0PALjd73uZh1LgPSRDNkocpiOIkGtEAn3pDEeEMRAD4tnZIaP9hAUhm3F/WK7uCNV9bdLZJZovGXGMSv/Zgil7HKemM3b7WZ0s/MOd3OE54tcqELfIaw68m1RbR+hqRoIMyDC2zU0ieGAB/WUh4RK4jQPl5FmoV2tyxa/aLc2e5GIn8wfz1JlTSkiwpivnNYVsnR2oPR9mOu55XFEYimrKL6pH5YWpMewuT24RGfLLQ+PU0c8/yfuPmvI+K6aXFDxWif56VbmM3F1AtcpyxZgz7KhnSfVeuI3n7yBIiJsDqyGmIEdoQa2AkEYqhRf1a8DLpIWKezKhHmBFSHq4EbI2adUuuO001KXh+Y2qDFOudOxCijA4S0WcJIfg5zmHC1Jioot7REN92kTXtm88XlLYykAeIjPGogCquE7+zKRXDxJDVlmJkuIZspl7CI+ZaksD5BCCv6OEKUViOib3nFkc5ntRqwZ/RxNLnX5yr6YJVDi3H1euj+2IrLUUoxKLa/K3jF4lZxamgUMdu53nWLGoZwBMHG8qBnyJcxujxQpE8I=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(31696002)(5660300002)(31686004)(38100700002)(66946007)(8936002)(4326008)(66476007)(508600001)(6486002)(8676002)(186003)(66556008)(316002)(53546011)(16576012)(36756003)(6916009)(4744005)(2616005)(26005)(956004)(2906002)(86362001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?NmdWVE53TUZ4TmNSNWRveDl0OW85Vi9xZm5qT0JQSEtjclovWVViL21qMnp0?=
+ =?utf-8?B?cWZQQXduV2RDRnRWRW40c2Z0dmIwbWtlZmtScG10cEVVQlZDQUE0cWFMcVBX?=
+ =?utf-8?B?SnUxbzgrYkVmeHRudTR5L1VzZ3RvdCs0RGNzNWRaZlBsMDM2anJBWWZGTUxS?=
+ =?utf-8?B?dXlONmcrbnh1cGd4L0N1QkdXamFGdG1lWmozdnJ0UVVWZGJjWUhROEVPcDhP?=
+ =?utf-8?B?NGpITklUZEJFM3BjY3lTazZrQ1cwR3haY2M0NXMyWlVBVHVRRmNCYVczeHlD?=
+ =?utf-8?B?NEptakJCUlQzSzM0RU1qWG40dmJ5V29ORVhEeGFyalByV1lUQWVrRHF5QU1X?=
+ =?utf-8?B?UU9HdDR2eTBrbDdFeWR4WnY0M2sxMG9BR2RTczZBdnkrRmx3V2RCVkNzbnFY?=
+ =?utf-8?B?RFdBbXE2MlErb0R4S1FPTjFoeU0wUFRSbUt5MnVKS1VLbEZZVzJQOTZxdk5w?=
+ =?utf-8?B?WkdBb0N1QWRpT2pTWDBuTnFhMFZrTGhsMkhZSGZseGh6Nk5zR2xIVng1U29I?=
+ =?utf-8?B?T3M4NURxakdNd3cyaGJDcEg1QkxKNmE4QUw5UHRwdkFENkdpbW5RNy9iT1FO?=
+ =?utf-8?B?TlVPZWtEVE1SOEJaNXpBd0Y4ZGZhTEU3Ujkxb0V4VEZSWXhxVGUwaFNHRWtC?=
+ =?utf-8?B?bytYeHdWaDN5c1JlRlNPK0hWTFQvTDlNME9UU29WL2VOcy96RTN0VC9SSnFV?=
+ =?utf-8?B?ejBqcC9VeHQ3Z1gzYTQ3ODU0VExhcm5uMjR5d1FPUWE4K0dUNWwyYVQyYzNn?=
+ =?utf-8?B?R0xFd3ZUcjJ3ZnMxbGdQRkw2ekhRdkdLbmRTY3Y1T3U5UkdHUVprUU9hWmJt?=
+ =?utf-8?B?ZmFId3lCeG1oYzQ4MUR3UXFLbGRLcG14eDJlemtHOU1vckZEQTgzbTVJQ2R5?=
+ =?utf-8?B?WFAvOS9IWWM5YXhOcWNGamlmOVZEOGczMzV1bG9kSWxOdHE1S2t3YXpjNjhM?=
+ =?utf-8?B?WExiNXB5YWRaVVZ5NEVCdU1pOExJaHFJaGtYbjJMNXJMTFpwY1J3RCtlbjRM?=
+ =?utf-8?B?bmVFVmFEUVdlQ0ZCRlVERTVFVFJaR1ljUUhRMTMzQ1dPa1FsQnNNY0JOaTh3?=
+ =?utf-8?B?NUhySVhqaHh5UkpxNERWS21vK0xPSmZCMlJmaDFLSEk3eml5QUROQjh4NXRm?=
+ =?utf-8?B?MXNmemZ1NnR2TWRodnBVbVZ5Rmx4eGo3d3RwU0JtQjNLUk94aTM5QTRXWVZj?=
+ =?utf-8?B?OE9BRi9uTEFIaXZWWVh6TDVMc3FkK0RXbE5abFpEa2RJRU9WVjR4cXRvKzc1?=
+ =?utf-8?B?Q0JIQmNZZ3NZbml1QXQ3TC9PNWRoNm8rWUNpV09iaUhUR1docjBMTVl4NTU4?=
+ =?utf-8?B?TCtIelFSdnFmL1RJbkVOaFBZLzV6YjE3VHQ0YWNqeUNKbjVCa0QvS0RSVDFm?=
+ =?utf-8?B?ZC9RNXBFaW5KRzdUc0NyTjBaTW9wd254WWd4cDB4ckRhYUY0bWJ3eUlVb0Qw?=
+ =?utf-8?B?d1hqMmxRWHE0RDVTR2NhVzl0dFBJdWpsM2tBdW1XQW0xbElXVjJDZElWdXc1?=
+ =?utf-8?B?b3gvSXJTM3pMNk90Y1Y3MHBPb3pVcFBxM3F5MndDT0RMeXRXVklKelRGQmxl?=
+ =?utf-8?B?QTFMU0ZudXFwRUIrRG51VUp5bmRNQUVka3Bid1k1c1hCRnhLbys2Zm9hK1Jx?=
+ =?utf-8?B?UVhSN2ROMVdsbVhrenpYenFCbkhsKy82WlkvOEpBWjdkQUZ3VDRVMWpVYkcz?=
+ =?utf-8?B?QnBnMVQ4WkNsRmR3ck42LytURzRyb05MVWtDQ1NOZWZJRHNiNGNENHE2ZWJh?=
+ =?utf-8?B?T0tGNTFBRTBlTEtzd0ZZTytaZFJBWGd1b0Z2VDk5YkxST2R3S0FQNGV1T3E0?=
+ =?utf-8?B?dE1aSFBwTGVyazJpQnVKVGtocHhLMzFDWmYzWnlYeWp3VmRId2V5VVNsQ3Ro?=
+ =?utf-8?B?V1V1NUlOREhqUTNFUGVxZ0xlN0t1ZHltTFA5VU9WU3NQcmFzWGEwbGVVbWhM?=
+ =?utf-8?B?NnFaT3hBQ2w3ODU5dkl1eFJPUytmeDE2Y3JoSXp1ME9rYjE1KzNaK0dZSFZO?=
+ =?utf-8?B?cU42b0lTZGJHeW5TRm5LdC85NWN1YkVBVGZkbzl0N1MzSGFTN1JZVHFET0h2?=
+ =?utf-8?B?YXJQTnRldlNycEtRYTJNS3VDWVZqVCtGNk9vUTRXME52TE9LY3ZJOVNuYTdD?=
+ =?utf-8?B?V3FkSkVUM1dZWTFSaGlnUHlMUmRxczF2TVRaVHgrUDQ4amFEVk1CTWM3QUI3?=
+ =?utf-8?Q?5ITG8lZhUyHecA4C486auO0=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 23bc4a46-e81d-4ecc-b448-08d9b3ec9030
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Nov 2021 10:31:26.4659
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: GI6HRRsSj4icCUI20wfqfozSJnvrg9K0CbwvVj5KCYC3MTYjQ5Qy2S3kUurv88K9eKLlwty9etbxy0862WVOTA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB7037
 
-At the moment, we have two locations selecting restricted permissions, not
-very far apart on boot, dependent on opposite answers from using_2M_mapping().
-The later location however can shatter superpages if needed, while the former
-cannot.
+On 30.11.2021 10:37, Ayan Kumar Halder wrote:
+> On 30/11/2021 07:18, Jan Beulich wrote:
+>> On 29.11.2021 20:44, Ayan Kumar Halder wrote:
+>>> GENMASK(30, 21) should be 0x07fe00000
+>>
+>> Please can this have a meaningful title? E.g. "bitops: fix incorrect
+>> value in comment"?
+>>
+>>> --- a/xen/include/xen/bitops.h
+>>> +++ b/xen/include/xen/bitops.h
+>>> @@ -5,7 +5,7 @@
+>>>   /*
+>>>    * Create a contiguous bitmask starting at bit position @l and ending at
+>>>    * position @h. For example
+>>> - * GENMASK(30, 21) gives us the 32bit vector 0x01fe00000.
+>>> + * GENMASK(30, 21) gives us the 32bit vector 0x07fe00000.
+>>
+>> Once at it I think you also want to
+>> - replace the word "vector",
+> Should I replace "vector" with "value" ?
 
-Collect together all the permission adjustments at the slightly later point in
-boot, as we're may need to shatter a superpage to support __ro_after_init.
+Perhaps, yes.
 
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/setup.c | 74 ++++++++++++----------------------------------------
- 1 file changed, 16 insertions(+), 58 deletions(-)
-
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 0e0e706404a3..8329263430ed 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1281,55 +1281,16 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-                 }
-             }
- 
--            BUG_ON(using_2M_mapping() &&
--                   l2_table_offset((unsigned long)_erodata) ==
--                   l2_table_offset((unsigned long)_stext));
--
-             /* Walk l2_xenmap[], relocating 2M superpage leaves. */
-             pl2e = __va(__pa(l2_xenmap));
-             for ( i = 0; i < L2_PAGETABLE_ENTRIES; i++, pl2e++ )
-             {
--                unsigned int flags;
--
-                 if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) ||
-                      !(l2e_get_flags(*pl2e) & _PAGE_PSE) ||
-                      (l2e_get_pfn(*pl2e) >= pte_update_limit) )
-                     continue;
- 
--                if ( !using_2M_mapping() )
--                {
--                    *pl2e = l2e_from_intpte(l2e_get_intpte(*pl2e) +
--                                            xen_phys_start);
--                    continue;
--                }
--
--                if ( i < l2_table_offset((unsigned long)&__2M_text_end) )
--                {
--                    flags = PAGE_HYPERVISOR_RX | _PAGE_PSE;
--                }
--                else if ( i >= l2_table_offset((unsigned long)&__2M_rodata_start) &&
--                          i <  l2_table_offset((unsigned long)&__2M_rodata_end) )
--                {
--                    flags = PAGE_HYPERVISOR_RO | _PAGE_PSE;
--                }
--                else if ( i >= l2_table_offset((unsigned long)&__2M_init_start) &&
--                          i <  l2_table_offset((unsigned long)&__2M_init_end) )
--                {
--                    flags = PAGE_HYPERVISOR_RWX | _PAGE_PSE;
--                }
--                else if ( (i >= l2_table_offset((unsigned long)&__2M_rwdata_start) &&
--                           i <  l2_table_offset((unsigned long)&__2M_rwdata_end)) )
--                {
--                    flags = PAGE_HYPERVISOR_RW | _PAGE_PSE;
--                }
--                else
--                {
--                    *pl2e = l2e_empty();
--                    continue;
--                }
--
--                *pl2e = l2e_from_paddr(
--                    l2e_get_paddr(*pl2e) + xen_phys_start, flags);
-+                *pl2e = l2e_from_intpte(l2e_get_intpte(*pl2e) + xen_phys_start);
-             }
- 
-             /* Re-sync the stack and then switch to relocated pagetables. */
-@@ -1572,31 +1533,28 @@ void __init noreturn __start_xen(unsigned long mbi_p)
- #endif
- 
-     /*
--     * If not using 2M mappings to gain suitable pagetable permissions
--     * directly from the relocation above, remap the code/data
--     * sections with decreased permissions.
-+     * Restrict permissions on the Xen code/data.
-+     *
-+     * Mark .text as RX.
-      */
--    if ( !using_2M_mapping() )
--    {
--        /* Mark .text as RX (avoiding the first 2M superpage). */
--        modify_xen_mappings(XEN_VIRT_START + MB(2),
--                            (unsigned long)&__2M_text_end,
--                            PAGE_HYPERVISOR_RX);
-+    modify_xen_mappings((unsigned long)&_start,
-+                        (unsigned long)&__2M_text_end,
-+                        PAGE_HYPERVISOR_RX);
- 
--        /* Mark .rodata as RO. */
--        modify_xen_mappings((unsigned long)&__2M_rodata_start,
--                            (unsigned long)&__2M_rodata_end,
--                            PAGE_HYPERVISOR_RO);
-+    /* Mark .rodata as RO. */
-+    modify_xen_mappings((unsigned long)&__2M_rodata_start,
-+                        (unsigned long)&__2M_rodata_end,
-+                        PAGE_HYPERVISOR_RO);
- 
--        /* Mark .data and .bss as RW. */
--        modify_xen_mappings((unsigned long)&__2M_rwdata_start,
--                            (unsigned long)&__2M_rwdata_end,
--                            PAGE_HYPERVISOR_RW);
-+    /* Mark .data and .bss as RW. */
-+    modify_xen_mappings((unsigned long)&__2M_rwdata_start,
-+                        (unsigned long)&__2M_rwdata_end,
-+                        PAGE_HYPERVISOR_RW);
- 
-+    if ( !IS_ALIGNED((unsigned long)&__2M_rwdata_end, MB(2)) )
-         /* Drop the remaining mappings in the shattered superpage. */
-         destroy_xen_mappings((unsigned long)&__2M_rwdata_end,
-                              ROUNDUP((unsigned long)&__2M_rwdata_end, MB(2)));
--    }
- 
-     nr_pages = 0;
-     for ( i = 0; i < e820.nr_map; i++ )
--- 
-2.11.0
+Jan
 
 
