@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F024EC433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Dec 2021 11:16:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.235900.409195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 559F9C433F5
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Dec 2021 11:16:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.235899.409177 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1msNau-0008Ty-VQ; Wed, 01 Dec 2021 11:16:12 +0000
+	id 1msNas-00080T-Mv; Wed, 01 Dec 2021 11:16:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 235900.409195; Wed, 01 Dec 2021 11:16:12 +0000
+Received: by outflank-mailman (output) from mailman id 235899.409177; Wed, 01 Dec 2021 11:16:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1msNau-0008Tn-SM; Wed, 01 Dec 2021 11:16:12 +0000
-Received: by outflank-mailman (input) for mailman id 235900;
- Wed, 01 Dec 2021 11:16:10 +0000
+	id 1msNas-0007zF-I9; Wed, 01 Dec 2021 11:16:10 +0000
+Received: by outflank-mailman (input) for mailman id 235899;
+ Wed, 01 Dec 2021 11:16:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=kNZg=QS=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1msNas-0007wa-O9
- for xen-devel@lists.xenproject.org; Wed, 01 Dec 2021 11:16:10 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 88f671dd-5296-11ec-b945-1df2895da90e;
- Wed, 01 Dec 2021 12:05:04 +0100 (CET)
+ id 1msNar-0007wa-Nz
+ for xen-devel@lists.xenproject.org; Wed, 01 Dec 2021 11:16:09 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 86ba35b6-5296-11ec-b945-1df2895da90e;
+ Wed, 01 Dec 2021 12:05:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,96 +38,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88f671dd-5296-11ec-b945-1df2895da90e
+X-Inumbo-ID: 86ba35b6-5296-11ec-b945-1df2895da90e
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638357368;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=YkekjYG04jbiZH/kfWiElK2zEy91zRt0qThwJ4BT3/4=;
-  b=LDRcKFp6HTq9GDeKER75zQZm3REMZ7JiLRZD8mbmry763Iqx6vZyJuo8
-   p7W1eHornc1cbUlr+8J/xCtQt27fSrOK8tFJ0Z7VVM27xLDWfcxPM99//
-   UndGreTdpJob4CQt6TgvXxJxOrQuQLfTnvUp7CehS4RjGEdOnjxGYmrn3
-   I=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: wI3yVvBLs5CHucLgP7kmdipbf3Bg7n908gjuMSJ3OitN9eVntiRfUan5P+wszZvYIQtiPOmVJB
- 0lxl66dN3aVuWXOoLN17kBq2H81T0IshCRTw8M0BL6i4sqso+Mpr389AmA1dzpMxDquRSxLwaF
- /ZV23Ky34YAmunXGO2LWfnpJNCwBrbe+UMJWwzf0o4SEZHWYG+QLhTroxFU+hwWkN/nD5xvANS
- jcCEWTwB9HzUQIBYjPoq1aWtiA/WQwM1N9v2hwUrL1cUknRLHCb21679F8xJfOYVLOHh8c2iuH
- 7tMLYdDPt/8ohOPBorVIAWVk
+  d=citrix.com; s=securemail; t=1638357366;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=3RCqUydL4JguIyYAIyTL4Uj9P2EGIVPmIXBDM4AOIhI=;
+  b=hWgavtj9+EnJv+lymB7yCPkXEE59NOvofX+/p9930FeGLC9XRqkGzjsI
+   obLJ9H7Ro2ZqYMaUiLMMIceBhMhCIubHyDsHL0QsqGz/mMtCFarjDZm6z
+   fHQly8Ua9KSfWIbmAfi/KIrDogHJG1yvfc7CGUby8LGm8rqpu4h8a+/vH
+   M=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: /iOujOQrYzOQvVZDdP1AztiG/29ayHSdM+M6iiKJip8IWqsLwR4ZduRw3k9qBacCqTH37oOw4l
+ mhaXiyZsMk4dzNWVDn/4B6uxOl42jqMQ8LjxE0ZmDrjyzdz5jxz7/Z7dHqkViJBHdqb5gJZS7Y
+ U6dtdzXclou84AomwRJCJumszN+mI0nmTm2E/yzXo0dGpvN4ilNQzlWWA1/Hz/i+qOR2D4ivxu
+ cYjS1vSVERo2DDskG26MTAOyk+O/jNHa4diZyfPxCA8UWcBoLhTuQv80eaj74bYOc5Ey+EFd7/
+ vj2XTT5jP1j3uigNnPbWUiAA
 X-SBRS: 5.1
-X-MesageID: 58996274
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 58511687
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:uXljoK3JDKtuppUu3PbD5Qh2kn2cJEfYwER7XKvMYLTBsI5bpzAEn
- GEdCDuBPKnZNmWjLtx1bou+8UIAvceAy4RkTVA5pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es5w7dh2+aEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhvsFpk
- /RdqKGKTzgwE/Dzif0HYjQCOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9t1pEfQ6yBO
- 6L1bxJvYBSeOCB2JmwGM6oRpb7xl1jGKRth/Qf9Sa0fvDGIkV0ZPKLWGNbNYdmLWcV9l16Vv
- H7b5H/+BgwGNduZ0nyO9XfEruPAkS70Qos6CKyz9vkshkaagGMUFnU+RVa95PW0lEO6c9ZeM
- FAPvDojq7Ao806mRcW7WAe3yENopTZFBYAWSbdjrljQlOyEuG51G1ToUBZgecR9ld8reAYs6
- Uakwuz4HCZenee8HCf1GqivkRu+Pi0cLGknbCACTBcY79SLnLzfni4jXf44Tvfr04Sd9SXYh
- mnT8XNg3+l7Ydsjjv3jpTj6bySQSo8lp+LfziHeRSqb4wxwf+ZJjKT4uAGAvZ6swGt0J2RtX
- UToeeDCvIji7rnXzURhpdnh+pnyvJ5p1xWG3DZS82EJrWjFxpJaVdk4DMtCDEloKN0YXjTif
- VXevwhcjLcKYiD6N/4oO9LsV5l3pUQFKTgDfquPBjapSsIsHDJrAQk0PRLAt4wTuBZEfV4D1
- WezLp/3UCdy5VVPxzuqXeYNuYLHNQhlrV4/savTlkz9uZLHPSb9Ye5cbDOmM7BohIvZ8V692
- 4sOaKO3J+B3DbSWjt//qtVIczjn7BETWPjLliCgXrLZf1c9Rjh+U6S5LHFIU9UNopm5X9zgp
- hmVMnK0AnKm7ZEeAQnVOH1ldp31WpNz8SAyMSA2ZA760Hk/e4e/qqwYcsJvL7Ug8eViy99yT
- uUEJJrcUqgeFGyf9mRPd4T5oaxjaA+v2VCEMR26bWVtZJVnXQHIpIPpJ1O96CkUAyOrnsIiu
- Ln8hBjDSJ8OSl06XsbbYf6i1X2run0ZlL4gVkfEOIALKk7t7JJrO2r6ifpue5MALhDKxz270
- QeKAEhH+bmR8tFtqNSQ3PKKtYakFed6D3F2JWiD4ObkLzTe80qi3ZREDLSCcwfCWT6m466lf
- +hUka3xaaVVgFZQvoNgOL931qZitcD3rrpXwwk4TnXGa1OnVuFpLnWchJQds6RMwvlSuBesW
- 1LJ8d5fYO3bNMTgGV8XBQwkcuXciq1ExmiMtaw4cBfg+St63LubSkEDbRCDhRtUIKZxLI54k
- /wqv9Qb6lDnhxcnWjpcYvu4K4hYwqQ8bpga
-IronPort-HdrOrdr: A9a23:NlpJ0agrL/klote791TZpKzQfnBQXtgji2hC6mlwRA09TySZ//
- rBoB17726MtN9/YhEdcLy7VJVoBEmskKKdgrNhW4tKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QFJSWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-Data: A9a23:MmornKB0tf8HlxVW//Lkw5YqxClBgxIJ4kV8jS/XYbTApDkk0DUHz
+ 2UfC2DUOv7bN2b9e9h0a9m29xxTvZeGx981QQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX570Us7wobVv6Yz6TSHK1LV0
+ T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
+ Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/1BvZofVO0
+ tN0upGQeAQLN4H3uOkjXEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
+ KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcFjGpp354eQp4yY
+ eIQayVGYjeYPiQMM0pHB4A4o/uonkTgJmgwRFW9+vNsvjm7IBZK+LT1K9/UZtyiTN1YhFqFv
+ XnB+3nlAxYcL5qUzj/t2n6jiuLAhyrTRJMZFLr+8OVjxlKU2AQ7GBAQEFe2v/S9okq/QM5Eb
+ VwZ/DI0qqo//1DtScPyNyBUu1bd4ERaAYAJVbRntkfdkcI4/jp1GEBbYG5/TeM8svY5SBwb1
+ X2As+jJCAJg5ej9pW2myp+Yqja7OC4wJGAEZDMZQQZt3+QPsL3fnTqUEI89TffdYsndXGipn
+ mvU9HRWa6A71JZTj82GEUb7byVAT3QjZio8/U3pU22s9WuVj6b1NtXzuTA3ARutRbt1r2VtX
+ lBYy6ByD8hUVPlhcRBhps1WR9lFAN7fbVXhbaZHRcVJythU0yfLkXpsyD9/Plx1Fc0PZCXkZ
+ kTe0SsIusQDZir1Nf8qP9/sYyjP8UQGPY++PhwzRoATCqWdiSfdpH0+DaJu9z6FfLcQfVEXZ
+ s7ALJfE4YcyAqV71jumL9rxIpdwrh3SMVj7HMihpzz+iOL2TCfMFd8tbQvfBshkvfjsiFiEr
+ L5i2z6ilkw3vBvWOXKMr+b+7DkicBAGOHwBg5ANK7PYfFM5QDpJ5j246epJRrGJVp99zo/gl
+ kxRkGcBoLYmrXGYewiMdF55b7bjAcR2oX4hZHR+Nle0wXkzJ42o6f5HJZcweLAm8s1lzOJ1E
+ KZZK5nRXKwXR2SV4SkZYLn8sJdmKEahizWRMnf3ezM4ZZNhGVDEo4e2Ygv1+SASJSOrrs9i8
+ aa43wbWTMNbFQRvBcrbcty1yFa1sSRPke5+RRKQcNJSZF/t4M5hLCmo1q07JMQFKBPiwDqG1
+ lnJXUdE9LeV+4JsqYvHn6GJqYutAtBSJEsCEjmJ96uyOAnb4nGnnd1KXtGXcG2PT2jz4qijO
+ 7lYlqmuLP0dkV9WmINgCLI3n7km7t7iqrIGnARpGHLHMwaiBr96eyTU2MBOsutGx6NDuBvwU
+ UWKo4EINbKMMcLjMVgQOAt6MbjTiaBKwmHfvaYvPUH3xC5r577WA0xdMi6FhDFZMLYoYpgux
+ v0suZJO5gGy4vbw3g1qUsyAG7ywE0E9
+IronPort-HdrOrdr: A9a23:PMOlUa3P/ux+WCoHEbVAYAqjBKQkLtp133Aq2lEZdPRUGvb3qy
+ nOpoV96faaslYssR0b9exoW5PwJU80l6QFgrX5VI3KNGKN1VdARLsSiLcKqAeAJ8SRzIFgPN
+ 9bAspDNOE=
 X-IronPort-AV: E=Sophos;i="5.87,278,1631592000"; 
-   d="scan'208";a="58996274"
+   d="scan'208";a="58511687"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Daniel De Graaf
 	<dgdegra@tycho.nsa.gov>, Daniel Smith <dpsmith@apertussolutions.com>
-Subject: [PATCH 2/2] xsm: Drop extern of non-existent variable
-Date: Wed, 1 Dec 2021 11:15:55 +0000
-Message-ID: <20211201111555.16408-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/2] xsm: Further fixes
+Date: Wed, 1 Dec 2021 11:15:53 +0000
+Message-ID: <20211201111555.16408-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20211201111555.16408-1-andrew.cooper3@citrix.com>
-References: <20211201111555.16408-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-dummy_xsm_ops was dropped as part of organising XSM to be altcall compatible,
-but the extern was accidentally left around.
+Andrew Cooper (2):
+  xsm: Switch xsm_ops to __alt_call_maybe_initdata
+  xsm: Drop extern of non-existent variable
 
-A later change reintroduced dummy_ops which is logically the same thing, but
-is private to xsm/dummy.c
-
-Fixes: 164a0b9653f4 ("xsm: refactor xsm_ops handling")
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Daniel De Graaf <dgdegra@tycho.nsa.gov>
-CC: Daniel Smith <dpsmith@apertussolutions.com>
----
  xen/include/xsm/xsm.h | 2 --
- 1 file changed, 2 deletions(-)
+ xen/xsm/xsm_core.c    | 2 +-
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/xen/include/xsm/xsm.h b/xen/include/xsm/xsm.h
-index 5aa4dd588d17..3e2b7fe3dbb3 100644
---- a/xen/include/xsm/xsm.h
-+++ b/xen/include/xsm/xsm.h
-@@ -789,8 +789,6 @@ int xsm_dt_policy_init(void **policy_buffer, size_t *policy_size);
- bool has_xsm_magic(paddr_t);
- #endif
- 
--extern struct xsm_ops dummy_xsm_ops;
--
- void xsm_fixup_ops(struct xsm_ops *ops);
- 
- #ifdef CONFIG_XSM_FLASK
 -- 
 2.11.0
 
