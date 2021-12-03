@@ -4,56 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 943C8C433F5
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Dec 2021 11:27:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.237415.411793 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598A3C433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Dec 2021 11:27:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.237421.411804 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mt6iO-00028y-MQ; Fri, 03 Dec 2021 11:26:56 +0000
+	id 1mt6ie-0002iu-Us; Fri, 03 Dec 2021 11:27:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 237415.411793; Fri, 03 Dec 2021 11:26:56 +0000
+Received: by outflank-mailman (output) from mailman id 237421.411804; Fri, 03 Dec 2021 11:27:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mt6iO-00028r-Ia; Fri, 03 Dec 2021 11:26:56 +0000
-Received: by outflank-mailman (input) for mailman id 237415;
- Fri, 03 Dec 2021 11:26:55 +0000
+	id 1mt6ie-0002in-Rb; Fri, 03 Dec 2021 11:27:12 +0000
+Received: by outflank-mailman (input) for mailman id 237421;
+ Fri, 03 Dec 2021 11:27:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=V//U=QU=xilinx.com=ayankuma@srs-se1.protection.inumbo.net>)
- id 1mt6fI-00064Q-Im
- for xen-devel@lists.xenproject.org; Fri, 03 Dec 2021 11:23:44 +0000
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [2a01:111:f400:7e89::600])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=EuM9=QU=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1mt6f3-00064Q-7F
+ for xen-devel@lists.xenproject.org; Fri, 03 Dec 2021 11:23:29 +0000
+Received: from de-smtp-delivery-102.mimecast.com
+ (de-smtp-delivery-102.mimecast.com [194.104.109.102])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 77923883-542b-11ec-976b-d102b41d0961;
- Fri, 03 Dec 2021 12:23:43 +0100 (CET)
-Received: from SA0PR11CA0179.namprd11.prod.outlook.com (2603:10b6:806:1bb::34)
- by DM6PR02MB5307.namprd02.prod.outlook.com (2603:10b6:5:45::16) with
+ id 6fda1e7c-542b-11ec-976b-d102b41d0961;
+ Fri, 03 Dec 2021 12:23:28 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05lp2112.outbound.protection.outlook.com [104.47.17.112]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-25-UPImK2diOhqP9Q_ZdHKf0g-1; Fri, 03 Dec 2021 12:23:26 +0100
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VE1PR04MB7375.eurprd04.prod.outlook.com (2603:10a6:800:1a8::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.11; Fri, 3 Dec
+ 2021 11:23:24 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe%5]) with mapi id 15.20.4734.028; Fri, 3 Dec 2021
+ 11:23:25 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AS9PR05CA0025.eurprd05.prod.outlook.com (2603:10a6:20b:488::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.22; Fri, 3 Dec
- 2021 11:23:39 +0000
-Received: from SN1NAM02FT0055.eop-nam02.prod.protection.outlook.com
- (2603:10b6:806:1bb:cafe::2d) by SA0PR11CA0179.outlook.office365.com
- (2603:10b6:806:1bb::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.16 via Frontend
- Transport; Fri, 3 Dec 2021 11:23:39 +0000
-Received: from xir-pvapexch02.xlnx.xilinx.com (149.199.80.198) by
- SN1NAM02FT0055.mail.protection.outlook.com (10.97.5.78) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4755.13 via Frontend Transport; Fri, 3 Dec 2021 11:23:38 +0000
-Received: from xir-pvapexch01.xlnx.xilinx.com (172.21.17.15) by
- xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Fri, 3 Dec 2021 11:23:37 +0000
-Received: from smtp.xilinx.com (172.21.105.198) by
- xir-pvapexch01.xlnx.xilinx.com (172.21.17.15) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Fri, 3 Dec 2021 11:23:37 +0000
-Received: from [10.71.119.136] (port=64457)
- by smtp.xilinx.com with esmtp (Exim 4.90)
- (envelope-from <ayan.kumar.halder@xilinx.com>)
- id 1mt6fB-0001wq-9p; Fri, 03 Dec 2021 11:23:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.23 via Frontend
+ Transport; Fri, 3 Dec 2021 11:23:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,118 +58,443 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 77923883-542b-11ec-976b-d102b41d0961
+X-Inumbo-ID: 6fda1e7c-542b-11ec-976b-d102b41d0961
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1638530607;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=HFvGg2AyKiCL3CXNR/7f8T5X0LRpA3l3GkYroFgY/v8=;
+	b=NIL2SB0goXbkvd8J+knD6SIM4UOupXp0+TJ01ARU4mkX68sxM11ncjL278rZOnqSStSWWE
+	keOnUGMSd0hQ6/zRf1DN6w6KrTvM4EQ/JriELWJ5RIIdu9yxrmRml3u0oKPkVMCYjfJATN
+	67Qvt5OcvSrWj49qFATTGbtYwnhzETs=
+X-MC-Unique: UPImK2diOhqP9Q_ZdHKf0g-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CbJiamsWfrhX0amJuPVVirEfbbEGCLJ3/6sIoL4RkRKrHR98Ez9u2RjcBivGBhuFlJZmD9jW967LTL4H6GwQUJQCjF8TdjkFNA5Vm63DJOzOJuVrq5zky8ttWEDuwzw9y5SxRzThcHXvQVJhDmqPgbWX/2XTijHQJoaMJjxwsaOW0qjyMW9DtrOF6k8dysbuXYCvU+j42fzqf9LVYBSvhmt2kqrN1fkOWpyNL7TEsvi5n50xmGlpLF6mt77A+L75t5xo1rpf36WcOY7re5/U1E5Z8ja1FgM1NANV8W9J2Cqo3woMplsNZw4/oAjQ7WiguQ9V7FuxHNxjnL00C4jFqA==
+ b=ZI8uQOflQKFH/uNIokRfzmeVuCktWAEgbxdfHmV+/+NA1HSN9PiYMQpfOeROCADM0aGIok6tXQthyczOGrjiZ6u9DzubYNZ3R52EerYWsK1BuJfIjLzw6BRMRG1JK9ZYn1HLDDX6vQoaj4zS8q3cwGQAx7eQPNhO1BmHSM6JGl+QzaMNWbRm4H8V3VpsBup75Hdn1Nx9nyNslx8dldDiSsH0QfhO/bXXLTGcFSBGdKv31tNJhv1NxRpHVLCEGeGGlxMiL37CNU9++nYg08EvUCzEEeJKH+lsOfLgrlvIWwGNsWbRORXwNfK9LCwVrJsaG2WpDktPVTSaqB4SBeWUBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mvlwS1dvBlnlZTr3CCWS9Qgh2Tyhuiho/pCIHihSSno=;
- b=eDG/Z82nmRPO8bcehmmxdfobV6L+Vf3GlmIf1z5ikERR02pDCPB8de5wQVNXxuWvusPxcs4kXGYr1rjMqYUyZIGgo7lTS7srKiIh+X771NnPxkMHM1TCFpTYnLp0j/vWNxgfFsoKBWkixoZieWWrvk7KkcTwq+vKorXecFn7U54q+RNGuIfZ8jHAK20Nv7RauG/dbYclYW97BNA3Yu4XirrcL5tCOmhGSouOvjfiB27GEBVj8DldkJe0vUB8dxRI6Xgh78i+3yA4usH6B8zA+OdNoNcP/l7To8PEWneHrTrZZUEh2heHUziOR6cDKBhChYqRrGWVDN5AloX/UJcXuA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.199.80.198) smtp.rcpttodomain=arm.com smtp.mailfrom=xilinx.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=xilinx.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mvlwS1dvBlnlZTr3CCWS9Qgh2Tyhuiho/pCIHihSSno=;
- b=Uo6kgS0BeIECj0liZiXxM8KrYmGJLAto4beg8HGR0vEFGAs33NxIItuKlp+P2niBbXmAGJzbLR5WXjsNr3M2qhwAYU2Qip4qztteEA1fQEcbqglyIevyhOsMrSX0jAUI/5ud7LNoCZP/uWsWezKosoa1eJei9XcrRQ8YxHk2V2k=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.80.198)
- smtp.mailfrom=xilinx.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=xilinx.com;
-Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
- 149.199.80.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.80.198; helo=xir-pvapexch02.xlnx.xilinx.com;
-Message-ID: <fa4c0e20-3640-e948-a39d-42c80aa40e9b@xilinx.com>
-Date: Fri, 3 Dec 2021 11:23:36 +0000
-MIME-Version: 1.0
+ bh=HFvGg2AyKiCL3CXNR/7f8T5X0LRpA3l3GkYroFgY/v8=;
+ b=AZeXxxs70HsmgRDNJ2lh9BhZ0VFwK9JwsNNFraXpPA3dtyvwUEU3o0GE5gAySMLcrSyRU4sW0fNYCnm1flehhKl2cZrbMNc/zxdArbqjP/kDiDK5IeNy85SOlv6SFbXHqfsbkVHlEpM3PDoTImmBYl3m8MFcr5mYTRDPig+EExvQC//7drwICQ/7/0VpSIEJGdBEw0YmnX7spnD+EhHDRdr6U0COBMfHyf4LtRdaIIuPYxtT5J7acl7lZnPct1TdEeD0iqsPt9GuKdI06hss66LyayFKW88EKSCJuTH6Pq+1RaHm7KfWkR7tfVBWkPevIyBiZZnxrOIs7lrEk4OUTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <53cf0492-e197-d3e6-8898-9e199bbc5399@suse.com>
+Date: Fri, 3 Dec 2021 12:23:23 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.3.2
-Subject: Re: [PATCH] arm/vgic: Fix reference to a non-existing function
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel
-	<Michal.Orzel@arm.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20211203095837.20394-1-michal.orzel@arm.com>
- <B3D7A1CC-6CEB-45C9-914C-6BF5540EA1BE@arm.com>
-From: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
-In-Reply-To: <B3D7A1CC-6CEB-45C9-914C-6BF5540EA1BE@arm.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Subject: [PATCH 3/3] x86emul: drop "seg" parameter from insn_fetch() hook
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Paul Durrant <paul@xen.org>
+References: <10c7b3c0-c64f-3d12-06d3-8c408f7c9f4c@suse.com>
+In-Reply-To: <10c7b3c0-c64f-3d12-06d3-8c408f7c9f4c@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: AS9PR05CA0025.eurprd05.prod.outlook.com
+ (2603:10a6:20b:488::20) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e2737c03-3740-4ed7-34d8-08d9b64f5aa0
-X-MS-TrafficTypeDiagnostic: DM6PR02MB5307:
+X-MS-Office365-Filtering-Correlation-Id: 979c54f3-86d8-413d-5d59-08d9b64f5278
+X-MS-TrafficTypeDiagnostic: VE1PR04MB7375:
 X-Microsoft-Antispam-PRVS:
-	<DM6PR02MB5307FE7FDE2F531D9ABC5FA1B26A9@DM6PR02MB5307.namprd02.prod.outlook.com>
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+	<VE1PR04MB73753E0426978088A92D1DFBB36A9@VE1PR04MB7375.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2150;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	gvS1Stq7dYgwmzbBiy1MtrvE2ku1vAra0AVriHpH06HHy7zME1fr1RgFag7AGHTsXzu6m8gqJz0Oum5U9sSgjtCwXd8lPdym7XsAKSUjnYqugR1WowBF9Pv6GZrKICM1OC3kyLpdb2qYxdIyh2vc1IzkOJaKx0V+7ic9v5h08M9qBnWzTJ0oCeOgge/wTDzfZS4N5UCEke9qpycXv0NyoKB+fmDL8VQ37naBcLXN/+sdQvEDcv/LrIYm/iHBOkN8ozHuRee3DMS/t1Mwsmbjft9b9up2VhhYddhSZE21xo1ulIYblK+wXuJqX2TAdMscEbOH+SGZjC/xxwNVwaB31DiKsZh4Uhhg8rchKbXasidLOmMSTS9t2vwqzJS/mQutjgVFfdP9zZBD50jo31Z9wqf1grb6qbT2LWrdHkjWn6cUF62vd8tckhGiZG2ZkJbMRCDSQmF7LSY8RNhOnSYjSqjqutGm1B+dntdkTTBjSqjMuVlW1CEdHroHu/ph+/rs3lTpCh9JrNSVmRR0/VpAz2B9uEJAwDysijfAURghiLqlwgRJUjON8iEMsx5gvSfaw+WZL/QJFBvjaBp5RCM58k8TZDwzqScgjtg/AZ3/WDV0NZN7LsnotQsFpaydQos5SJouvCrCqGuI2IEd8DefAhjkrd7kgHijUncx6APVVzVFQMt19ECgKsqUtZfXL3sTC7r+iOljDfAN7fMJgPEPe+Eh2ZKwAEHcOHgUhM6uhC67y3voAZCiZlYBVq5YT8V+AeCVDwjkRlG4eKA7n1nqeg==
+	YXvBS01+dT4U/cy00IGBI6NziOyeaC10JbhIijIIaXRiNJ2Kj3WifcDf732zylaBc0cGI4IfIP8tu3NjnBv5EB6BfoswdM0M/5sN9PoRzX/m/ZYuC0UKtJTXTAulOJKUPfvLrkibyECO1Yd6x/LydY527+7//TiBgpCePBjqzfXS6DQ0JfcBca/btnXqlrM7yojC17LPLcocgiePxI/SMqKr+AMpvEw6NCvpUCVjPkEGLcgmr8sp32Ggbe1lAmN3NVxTHgRf8AWU81eVdNptkUv8zYqRihx49ibEX8cuIG5OVW+XyoVXnwtp8iUWRlWzE/7aQm99eJdTTXgyejZNM8Vya4rmrMtdb20H70XH/ok7thYXhV5C2Va/HWHEH18D/8jcG802L0+HJk35f3Wx18hjCF3Bfky7yoFLS4CduIG6HMgyQDBOO4Dhpq1CQDGE+ZHw+aRHAL6ieIRQ9GVtDy2Zgl4+dz+6R44KpFJdnMgWzjPJd15HZo7ySjM5cDAPcOSWjd48HFAr11LIpkg+/Loml3GV7+qNKLKE5UKpsc3qFHN4nr0EGzaXlFSMQZyBS5RQdbLTvl/ORudwZvYh5EdLuLgLe44blzwVztZtxU+e7Cgd7vogDgR6AwxQERnDAlN79afsleiooKKedi7JvHWF2l8EPQhR6uYWt+RKLgjNIFjq6Uf8830ls5yHBq5CmuJjLa+4JHDwYN67XeljZ7O5QYVG66PdtkVuycUySoM5WKo0yvOFLYDwg0P5KGaPikDon4evodkfDxXjAnpRWW4ngXnYu0zixWLeyv+l7mU2BXEngDu4JUvEdJM0Vqq+
 X-Forefront-Antispam-Report:
-	CIP:149.199.80.198;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:xir-pvapexch02.xlnx.xilinx.com;PTR:unknown-80-198.xilinx.com;CAT:NONE;SFS:(46966006)(36840700001)(2616005)(508600001)(316002)(7636003)(186003)(36860700001)(31696002)(70586007)(8676002)(4326008)(54906003)(426003)(70206006)(336012)(356005)(5660300002)(36756003)(110136005)(82310400004)(9786002)(83380400001)(53546011)(26005)(8936002)(2906002)(47076005)(31686004)(50156003)(43740500002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2021 11:23:38.6100
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(186003)(36756003)(16576012)(26005)(66556008)(2906002)(30864003)(956004)(6916009)(54906003)(66476007)(31696002)(2616005)(316002)(66946007)(4326008)(508600001)(38100700002)(8676002)(83380400001)(5660300002)(86362001)(6486002)(8936002)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?bnF1MnNxbkpoaUVhbmVvNmVDVHdSMHFYOVJ4QkxTREhJZW4rcnhqaEhuNGJt?=
+ =?utf-8?B?cHNmK29NRmhIdEVmNXVvOXpBbzBXdDJPSkpyTEtUSTlKODMrN09pWUN1ZlIx?=
+ =?utf-8?B?MDNmSFM2em05dzY1Q3dNM0xDVGc3YUkxd2UxbG9LMm45VU41SjllN0JpeUFn?=
+ =?utf-8?B?NE1qYklaNExUZExUdGsxbjRZc0FTcGlPVjk4Nyt2ZWFwZFFxRXUvcWF4WVA2?=
+ =?utf-8?B?aFVOQmlyRCtkd3dqZlhsVE0wTFZzWWtnZk1nenJrcm43Nk1QdlNob0Q2U25J?=
+ =?utf-8?B?RjV2R040RW5GQjU0MGROa0kvemV0UmZNL2gxY05Td3dxdmFvK2NpQUZITlJK?=
+ =?utf-8?B?NUJob0EreHZ6a1BQdVBadkN0SVZBdHYrVlZaWUdFNUZJRFRZMVAxdDZraHhz?=
+ =?utf-8?B?K0F5dnp3QmYwZEwwUWo2ejEzSE1GZEN5bWhSUzczNnRFczRWVEhLcU9GMXhI?=
+ =?utf-8?B?Ly83SE9EUnhjb0FIQ29Pd0tMdjFpRE5jK21UUXFCMmt2YkM1YjRDZjF4Y3Uv?=
+ =?utf-8?B?Rm9ZM09VZlAyT0lRVTNrcmo4bU9namRPcFVWQ1l6Wm1BTEVtWjVKREFFOUtW?=
+ =?utf-8?B?VjNydlU3ZEJ1WVJRTzc0ekZMTGhDTU11SlZMMU1PQ2h2NGJDQ0JaKzB5eklZ?=
+ =?utf-8?B?WDVjclJva3ZKai9PVGFuWGVia3ZLOG15aFRONUJTZVlVRzFCL0thTTljOVZB?=
+ =?utf-8?B?NnVtNXdpVkpYRkFqUDdnTkdiOFZuYTR0WmNsYy9HVE1IWHFaV2VNR2VlYmo0?=
+ =?utf-8?B?LzR6dW1TUWpCSFNhdjFTQ0oxbnBLYjBYN3lwNXRaNW5EUlJWY3J0VmUyNWcz?=
+ =?utf-8?B?eGFpTlk5LzFQT1pXN0ZzeUhXN3hnTVVoOFBaTHBNUnRPbFRHMVFySG1UTkYz?=
+ =?utf-8?B?bi9wdWF3dTVzZkZCRllFRkhCSEcrTlNSVmtpTTBCYXZ5MkdXZlNzM251L1NW?=
+ =?utf-8?B?d01PZGw0TGhlMlRCam83dUVFVWZnYTZrT05UTXF2TTl5djFaT2ZUN1ppYlRH?=
+ =?utf-8?B?MWY5Y3crQ2tyUXEvaW9BTHJpYWduUTN6Y1Q2L09MbVJUWHFvSDNLaUFNQXdW?=
+ =?utf-8?B?NFF0alZYam1nQWVPZEhQbG4rWlJ3aFZLbEVEcE4zaFZaL24rUVZmb2ExWlNF?=
+ =?utf-8?B?dmV4THNTWk92YVIyNjcwOUY3cElKRGVlNEpLSGpKTkYwc01yRDVaeXBaUXQv?=
+ =?utf-8?B?UU1JWXhNTGRscHVocVFLQm13cm5wcUdMcXEvd3grK01jUEU4ZHJiNWZIT3VD?=
+ =?utf-8?B?aElvMmI5S29YVWEzN1hpRzhnNDBPYWFvZFduMC8xamlXc2RsZVdtQVlYeGV1?=
+ =?utf-8?B?LzN3NGNoRGFWY1NVM0Z6dC8vemtBa1Y5ZFVldlh0ZHIveHZ1dTB0VkhhZWt5?=
+ =?utf-8?B?aFB1elVzZE54WkVaOHUwZGN1U0Y2bThtak5VeXJyZ29sT3pQMGQrOHVQZ0g2?=
+ =?utf-8?B?aVQrQ1JoME55SnBsQ2hBbVZ2WXM2SG95cUU0VDBjLzAxMFIzMFdrRk53ZTRZ?=
+ =?utf-8?B?MXpoRUFNMmsycGJjZStOVC9SYmpkZVFIRXJEZno3WXdZRnZXb0VaZ3pReHlX?=
+ =?utf-8?B?azJCV3liaGlKZHh3WS8vWStxWm83ZVdmdS9PYjl2bFB2Z3I2WU5uelFJWXZy?=
+ =?utf-8?B?cTF5Mm5qT25TekUrbEVVcThJcmh1ZzN4cjVwcmg3NWhGdzN1aDhlVEt6NklX?=
+ =?utf-8?B?aEJlTnVnU0VQSXRaS0RPeFdQWStBNFJVYUY2QjRUNmlGOVQxYitIVjBRa0FB?=
+ =?utf-8?B?TEVabVZOcktGYVBEeW5OSHkyVkpLcjdjaGVGOGNid2pnMm1kaXFkd0Nid0dO?=
+ =?utf-8?B?RGN0Ti9ORURQN3dvK20xTEl2TGZtUnN5V3Jsb1A1MWtReEpyVnJmWU1mbnVU?=
+ =?utf-8?B?TmtWV1F4VUZ1RkxSbStqeUpXWTFmVWk3RmdIZ2c5U3NOcmkzMXpOOHZ5dGwz?=
+ =?utf-8?B?akpPWW1NcEhWRUQ5OXdjeTAwSlJ5TytCRi9kNk1zSXMzVXJoNCtCeFdxcWxC?=
+ =?utf-8?B?UXJPZDlDU2Y3NE9sT1hwRk45Q0ticW13L0tzTXFuMUVUUnhUT0tjZU1nd0ZE?=
+ =?utf-8?B?VUxJT3g3VEtPM3BaSjJYZ1dra3VreWtMdjZFWTdyVWlGYXJKZU5LbitudlRV?=
+ =?utf-8?B?VjBwNTgyL0xWeGFpYzZaZEM4N0xNNnFVVFFYN2Z2bDFRdno2cjRRMGFzaEJl?=
+ =?utf-8?Q?TPgXsnCqADNIHiGTg/BHrjw=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 979c54f3-86d8-413d-5d59-08d9b64f5278
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Dec 2021 11:23:25.3286
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e2737c03-3740-4ed7-34d8-08d9b64f5aa0
-X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.80.198];Helo=[xir-pvapexch02.xlnx.xilinx.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1NAM02FT0055.eop-nam02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR02MB5307
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kFrKd2f9rVxbEXrdUPzgeKaODOG8yHCXBRvlbMuP44mTp5qwCoZZOHQmh6qfqlC5zDJ5Q68mQFXfSOmPvB7cDQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7375
 
+This is specified (and asserted for in a number of places) to always be
+CS. Passing this as an argument in various places is therefore
+pointless. The price to pay is two simple new functions, with the
+benefit of the PTWR case now gaining a more appropriate error code.
 
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+In principle in the PTWR case I think we ought to set PFEC_insn_fetch in
+the error code only when NX is seen as available by the guest. Otoh I'd
+kind of expect x86_emul_pagefault() to abstract away this detail.
+Thoughts?
 
-On 03/12/2021 10:19, Bertrand Marquis wrote:
-> Hi Michal,
-> 
->> On 3 Dec 2021, at 09:58, Michal Orzel <Michal.Orzel@arm.com> wrote:
->>
->> Commit 68dcdf942326ad90ca527831afbee9cd4a867f84
->> (xen/arm: s/gic_set_guest_irq/gic_raise_guest_irq)
->> forgot to modify a comment about lr_pending list,
->> referring to a function that has been renamed.
->> Fix that.
->>
->> Fixes: 68dcdf942326ad90ca527831afbee9cd4a867f84
->> Signed-off-by: Michal Orzel <michal.orzel@arm.com>
-> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Note: While probably trivial to re-base ahead, for now this depends on
+      "x86emul: a few small steps towards disintegration"
+      (https://lists.xen.org/archives/html/xen-devel/2021-08/msg00367.html).
 
-Bertrand is very fast. :D.
-I wanted to check if it is ok to add my R-b.
-> 
-> Thanks for that
-> 
-> Cheers
-> Bertrand
-> 
->> ---
->> xen/include/asm-arm/vgic.h | 2 +-
->> 1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/xen/include/asm-arm/vgic.h b/xen/include/asm-arm/vgic.h
->> index e69a59063a..ade427a808 100644
->> --- a/xen/include/asm-arm/vgic.h
->> +++ b/xen/include/asm-arm/vgic.h
->> @@ -195,7 +195,7 @@ struct vgic_cpu {
->>       * corresponding LR it is also removed from this list. */
->>      struct list_head inflight_irqs;
->>      /* lr_pending is used to queue IRQs (struct pending_irq) that the
->> -     * vgic tried to inject in the guest (calling gic_set_guest_irq) but
->> +     * vgic tried to inject in the guest (calling gic_raise_guest_irq) but
->>       * no LRs were available at the time.
->>       * As soon as an LR is freed we remove the first IRQ from this
->>       * list and write it to the LR register.
->> -- 
->> 2.29.0
->>
-> 
-> 
+--- a/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
++++ b/tools/fuzz/x86_instruction_emulator/fuzz-emul.c
+@@ -197,14 +197,11 @@ static int fuzz_read_io(
+ }
+ 
+ static int fuzz_insn_fetch(
+-    enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+     unsigned int bytes,
+     struct x86_emulate_ctxt *ctxt)
+ {
+-    assert(seg == x86_seg_cs);
+-
+     /* Minimal segment limit checking, until full one is being put in place. */
+     if ( ctxt->addr_size < 64 && (offset >> 32) )
+     {
+@@ -222,7 +219,7 @@ static int fuzz_insn_fetch(
+         return maybe_fail(ctxt, "insn_fetch", true);
+     }
+ 
+-    return data_read(ctxt, seg, "insn_fetch", p_data, bytes);
++    return data_read(ctxt, x86_seg_cs, "insn_fetch", p_data, bytes);
+ }
+ 
+ static int _fuzz_rep_read(struct x86_emulate_ctxt *ctxt,
+--- a/tools/tests/x86_emulator/predicates.c
++++ b/tools/tests/x86_emulator/predicates.c
+@@ -2049,8 +2049,7 @@ static void print_insn(const uint8_t *in
+ 
+ void do_test(uint8_t *instr, unsigned int len, unsigned int modrm,
+              enum mem_access mem, struct x86_emulate_ctxt *ctxt,
+-             int (*fetch)(enum x86_segment seg,
+-                          unsigned long offset,
++             int (*fetch)(unsigned long offset,
+                           void *p_data,
+                           unsigned int bytes,
+                           struct x86_emulate_ctxt *ctxt))
+@@ -2110,8 +2109,7 @@ void do_test(uint8_t *instr, unsigned in
+ }
+ 
+ void predicates_test(void *instr, struct x86_emulate_ctxt *ctxt,
+-                     int (*fetch)(enum x86_segment seg,
+-                                  unsigned long offset,
++                     int (*fetch)(unsigned long offset,
+                                   void *p_data,
+                                   unsigned int bytes,
+                                   struct x86_emulate_ctxt *ctxt))
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -594,14 +594,13 @@ static int read(
+ }
+ 
+ static int fetch(
+-    enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+     unsigned int bytes,
+     struct x86_emulate_ctxt *ctxt)
+ {
+     if ( verbose )
+-        printf("** %s(%u, %p,, %u,)\n", __func__, seg, (void *)offset, bytes);
++        printf("** %s(CS:%p,, %u,)\n", __func__, (void *)offset, bytes);
+ 
+     memcpy(p_data, (void *)offset, bytes);
+     return X86EMUL_OKAY;
+--- a/tools/tests/x86_emulator/x86-emulate.h
++++ b/tools/tests/x86_emulator/x86-emulate.h
+@@ -113,8 +113,7 @@ WRAP(puts);
+ void evex_disp8_test(void *instr, struct x86_emulate_ctxt *ctxt,
+                      const struct x86_emulate_ops *ops);
+ void predicates_test(void *instr, struct x86_emulate_ctxt *ctxt,
+-                     int (*fetch)(enum x86_segment seg,
+-                                  unsigned long offset,
++                     int (*fetch)(unsigned long offset,
+                                   void *p_data,
+                                   unsigned int bytes,
+                                   struct x86_emulate_ctxt *ctxt));
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -1294,7 +1294,6 @@ static int hvmemul_read(
+ }
+ 
+ int hvmemul_insn_fetch(
+-    enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+     unsigned int bytes,
+@@ -1312,7 +1311,7 @@ int hvmemul_insn_fetch(
+     if ( !bytes ||
+          unlikely((insn_off + bytes) > hvmemul_ctxt->insn_buf_bytes) )
+     {
+-        int rc = __hvmemul_read(seg, offset, p_data, bytes,
++        int rc = __hvmemul_read(x86_seg_cs, offset, p_data, bytes,
+                                 hvm_access_insn_fetch, hvmemul_ctxt);
+ 
+         if ( rc == X86EMUL_OKAY && bytes )
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -162,8 +162,7 @@ hvm_emulate_read(enum x86_segment seg,
+ }
+ 
+ static int
+-hvm_emulate_insn_fetch(enum x86_segment seg,
+-                       unsigned long offset,
++hvm_emulate_insn_fetch(unsigned long offset,
+                        void *p_data,
+                        unsigned int bytes,
+                        struct x86_emulate_ctxt *ctxt)
+@@ -172,11 +171,9 @@ hvm_emulate_insn_fetch(enum x86_segment
+         container_of(ctxt, struct sh_emulate_ctxt, ctxt);
+     unsigned int insn_off = offset - sh_ctxt->insn_buf_eip;
+ 
+-    ASSERT(seg == x86_seg_cs);
+-
+     /* Fall back if requested bytes are not in the prefetch cache. */
+     if ( unlikely((insn_off + bytes) > sh_ctxt->insn_buf_bytes) )
+-        return hvm_read(seg, offset, p_data, bytes,
++        return hvm_read(x86_seg_cs, offset, p_data, bytes,
+                         hvm_access_insn_fetch, sh_ctxt);
+ 
+     /* Hit the cache. Simple memcpy. */
+--- a/xen/arch/x86/pv/emul-gate-op.c
++++ b/xen/arch/x86/pv/emul-gate-op.c
+@@ -163,6 +163,12 @@ static int read_mem(enum x86_segment seg
+     return X86EMUL_OKAY;
+ }
+ 
++static int fetch(unsigned long offset, void *p_data,
++                 unsigned int bytes, struct x86_emulate_ctxt *ctxt)
++{
++    return read_mem(x86_seg_cs, offset, p_data, bytes, ctxt);
++}
++
+ void pv_emulate_gate_op(struct cpu_user_regs *regs)
+ {
+     struct vcpu *v = current;
+@@ -205,7 +211,7 @@ void pv_emulate_gate_op(struct cpu_user_
+ 
+     ctxt.ctxt.addr_size = ar & _SEGMENT_DB ? 32 : 16;
+     /* Leave zero in ctxt.ctxt.sp_size, as it's not needed for decoding. */
+-    state = x86_decode_insn(&ctxt.ctxt, read_mem);
++    state = x86_decode_insn(&ctxt.ctxt, fetch);
+     ctxt.insn_fetch = false;
+     if ( IS_ERR_OR_NULL(state) )
+     {
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -1258,8 +1258,7 @@ static int validate(const struct x86_emu
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
+-static int insn_fetch(enum x86_segment seg,
+-                      unsigned long offset,
++static int insn_fetch(unsigned long offset,
+                       void *p_data,
+                       unsigned int bytes,
+                       struct x86_emulate_ctxt *ctxt)
+@@ -1269,8 +1268,6 @@ static int insn_fetch(enum x86_segment s
+     unsigned int rc;
+     unsigned long addr = poc->cs.base + offset;
+ 
+-    ASSERT(seg == x86_seg_cs);
+-
+     /* We don't mean to emulate any branches. */
+     if ( !bytes )
+         return X86EMUL_UNHANDLEABLE;
+--- a/xen/arch/x86/pv/ro-page-fault.c
++++ b/xen/arch/x86/pv/ro-page-fault.c
+@@ -52,6 +52,21 @@ static int ptwr_emulated_read(enum x86_s
+     return X86EMUL_OKAY;
+ }
+ 
++static int ptwr_emulated_insn_fetch(unsigned long offset,
++                                    void *p_data, unsigned int bytes,
++                                    struct x86_emulate_ctxt *ctxt)
++{
++    unsigned int rc = copy_from_guest_pv(p_data, (void *)offset, bytes);
++
++    if ( rc )
++    {
++        x86_emul_pagefault(PFEC_insn_fetch, offset + bytes - rc, ctxt);
++        return X86EMUL_EXCEPTION;
++    }
++
++    return X86EMUL_OKAY;
++}
++
+ /*
+  * p_old being NULL indicates a plain write to occur, while a non-NULL
+  * input requests a CMPXCHG-based update.
+@@ -247,7 +262,7 @@ static int ptwr_emulated_cmpxchg(enum x8
+ 
+ static const struct x86_emulate_ops ptwr_emulate_ops = {
+     .read       = ptwr_emulated_read,
+-    .insn_fetch = ptwr_emulated_read,
++    .insn_fetch = ptwr_emulated_insn_fetch,
+     .write      = ptwr_emulated_write,
+     .cmpxchg    = ptwr_emulated_cmpxchg,
+     .validate   = pv_emul_is_mem_write,
+@@ -290,14 +305,14 @@ static int ptwr_do_page_fault(struct x86
+ 
+ static const struct x86_emulate_ops mmio_ro_emulate_ops = {
+     .read       = x86emul_unhandleable_rw,
+-    .insn_fetch = ptwr_emulated_read,
++    .insn_fetch = ptwr_emulated_insn_fetch,
+     .write      = mmio_ro_emulated_write,
+     .validate   = pv_emul_is_mem_write,
+ };
+ 
+ static const struct x86_emulate_ops mmcfg_intercept_ops = {
+     .read       = x86emul_unhandleable_rw,
+-    .insn_fetch = ptwr_emulated_read,
++    .insn_fetch = ptwr_emulated_insn_fetch,
+     .write      = mmcfg_intercept_write,
+     .validate   = pv_emul_is_mem_write,
+ };
+--- a/xen/arch/x86/x86_emulate/decode.c
++++ b/xen/arch/x86/x86_emulate/decode.c
+@@ -34,8 +34,7 @@ struct x86_emulate_state *
+ x86_decode_insn(
+     struct x86_emulate_ctxt *ctxt,
+     int (*insn_fetch)(
+-        enum x86_segment seg, unsigned long offset,
+-        void *p_data, unsigned int bytes,
++        unsigned long offset, void *p_data, unsigned int bytes,
+         struct x86_emulate_ctxt *ctxt))
+ {
+     static DEFINE_PER_CPU(struct x86_emulate_state, state);
+@@ -618,7 +617,7 @@ static unsigned int decode_disp8scale(en
+    generate_exception_if((uint8_t)(s->ip -                            \
+                                    ctxt->regs->r(ip)) > MAX_INST_LEN, \
+                          X86_EXC_GP, 0);                              \
+-   rc = ops->insn_fetch(x86_seg_cs, _ip, &_x, _size, ctxt);           \
++   rc = ops->insn_fetch(_ip, &_x, _size, ctxt);                       \
+    if ( rc ) goto done;                                               \
+    _x;                                                                \
+ })
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -357,7 +357,7 @@ do {
+         ip = (uint16_t)ip;                                              \
+     else if ( !mode_64bit() )                                           \
+         ip = (uint32_t)ip;                                              \
+-    rc = ops->insn_fetch(x86_seg_cs, ip, NULL, 0, ctxt);                \
++    rc = ops->insn_fetch(ip, NULL, 0, ctxt);                            \
+     if ( rc ) goto done;                                                \
+     _regs.r(ip) = ip;                                                   \
+     singlestep = _regs.eflags & X86_EFLAGS_TF;                          \
+@@ -2301,7 +2301,7 @@ x86_emulate(
+                    ? 8 : op_bytes;
+         if ( (rc = read_ulong(x86_seg_ss, sp_post_inc(op_bytes + src.val),
+                               &dst.val, op_bytes, ctxt, ops)) != 0 ||
+-             (rc = ops->insn_fetch(x86_seg_cs, dst.val, NULL, 0, ctxt)) )
++             (rc = ops->insn_fetch(dst.val, NULL, 0, ctxt)) )
+             goto done;
+         _regs.r(ip) = dst.val;
+         adjust_bnd(ctxt, ops, vex.pfx);
+@@ -2822,14 +2822,14 @@ x86_emulate(
+             break;
+         case 2: /* call (near) */
+             dst.val = _regs.r(ip);
+-            if ( (rc = ops->insn_fetch(x86_seg_cs, src.val, NULL, 0, ctxt)) )
++            if ( (rc = ops->insn_fetch(src.val, NULL, 0, ctxt)) )
+                 goto done;
+             _regs.r(ip) = src.val;
+             src.val = dst.val;
+             adjust_bnd(ctxt, ops, vex.pfx);
+             goto push;
+         case 4: /* jmp (near) */
+-            if ( (rc = ops->insn_fetch(x86_seg_cs, src.val, NULL, 0, ctxt)) )
++            if ( (rc = ops->insn_fetch(src.val, NULL, 0, ctxt)) )
+                 goto done;
+             _regs.r(ip) = src.val;
+             dst.type = OP_NONE;
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -254,13 +254,12 @@ struct x86_emulate_ops
+ 
+     /*
+      * insn_fetch: Emulate fetch from instruction byte stream.
+-     *  Except for @bytes, all parameters are the same as for 'read'.
++     *  Except for @bytes and missing @seg, all parameters are the same as for
++     *  'read'.
+      *  @bytes: Access length (0 <= @bytes < 16, with zero meaning
+      *  "validate address only").
+-     *  @seg is always x86_seg_cs.
+      */
+     int (*insn_fetch)(
+-        enum x86_segment seg,
+         unsigned long offset,
+         void *p_data,
+         unsigned int bytes,
+@@ -750,8 +749,7 @@ struct x86_emulate_state *
+ x86_decode_insn(
+     struct x86_emulate_ctxt *ctxt,
+     int (*insn_fetch)(
+-        enum x86_segment seg, unsigned long offset,
+-        void *p_data, unsigned int bytes,
++        unsigned long offset, void *p_data, unsigned int bytes,
+         struct x86_emulate_ctxt *ctxt));
+ 
+ unsigned int
+--- a/xen/include/asm-x86/hvm/emulate.h
++++ b/xen/include/asm-x86/hvm/emulate.h
+@@ -92,8 +92,7 @@ static inline bool handle_mmio(void)
+     return hvm_emulate_one_insn(x86_insn_is_mem_access, "MMIO");
+ }
+ 
+-int hvmemul_insn_fetch(enum x86_segment seg,
+-                       unsigned long offset,
++int hvmemul_insn_fetch(unsigned long offset,
+                        void *p_data,
+                        unsigned int bytes,
+                        struct x86_emulate_ctxt *ctxt);
+
 
