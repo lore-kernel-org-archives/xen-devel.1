@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8642DC43219
-	for <xen-devel@archiver.kernel.org>; Sun,  5 Dec 2021 08:18:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.238264.412990 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81696C433EF
+	for <xen-devel@archiver.kernel.org>; Sun,  5 Dec 2021 08:35:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.238297.413050 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mtmj2-0006X2-41; Sun, 05 Dec 2021 08:18:24 +0000
+	id 1mtmyn-0003Xf-5V; Sun, 05 Dec 2021 08:34:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 238264.412990; Sun, 05 Dec 2021 08:18:24 +0000
+Received: by outflank-mailman (output) from mailman id 238297.413050; Sun, 05 Dec 2021 08:34:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mtmj1-0006Wj-VH; Sun, 05 Dec 2021 08:18:23 +0000
-Received: by outflank-mailman (input) for mailman id 238264;
- Sun, 05 Dec 2021 08:18:23 +0000
+	id 1mtmyn-0003XY-2O; Sun, 05 Dec 2021 08:34:41 +0000
+Received: by outflank-mailman (input) for mailman id 238297;
+ Sun, 05 Dec 2021 08:34:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=p5+j=QW=gmail.com=ltykernel@srs-se1.protection.inumbo.net>)
- id 1mtmj1-0006TA-2Q
- for xen-devel@lists.xenproject.org; Sun, 05 Dec 2021 08:18:23 +0000
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [2607:f8b0:4864:20::62a])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=LI7m=QW=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1mtmyl-0003XS-F1
+ for xen-devel@lists.xenproject.org; Sun, 05 Dec 2021 08:34:39 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e80c604f-55a3-11ec-8a4d-196798b21f7b;
- Sun, 05 Dec 2021 09:18:21 +0100 (CET)
-Received: by mail-pl1-x62a.google.com with SMTP id p18so5009251plf.13
- for <xen-devel@lists.xenproject.org>; Sun, 05 Dec 2021 00:18:21 -0800 (PST)
-Received: from ubuntu-Virtual-Machine.corp.microsoft.com
- ([2001:4898:80e8:7:87aa:e334:f070:ebca])
- by smtp.gmail.com with ESMTPSA id s8sm6439905pgl.77.2021.12.05.00.18.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Dec 2021 00:18:19 -0800 (PST)
+ id 2ec7f18b-55a6-11ec-8a4d-196798b21f7b;
+ Sun, 05 Dec 2021 09:34:38 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5930C1FDF1;
+ Sun,  5 Dec 2021 08:34:37 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 20BC2139DB;
+ Sun,  5 Dec 2021 08:34:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id uegnBpt5rGE3MgAAMHmgww
+ (envelope-from <jgross@suse.com>); Sun, 05 Dec 2021 08:34:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,241 +53,223 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e80c604f-55a3-11ec-8a4d-196798b21f7b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=cx8DmDucAVd/dOxMJIWoV1500es0laNWH4pwuIs0A1I=;
-        b=J9unkTMUHekG+nABUZyTJ0X6rMpuoJDQCrzyx8KcNnCmhLA9uf7j+JFT8N8nBXx1I3
-         bPMxAe29BAcVjyDyUiex3xQtEDYRVZvtkgiLG5XywwOAdzEe6jOtQNlb5aYzkGoXQVcc
-         WCgb2HNGKw6hZ3CYJ3s4I254Nmy777zDKyjc+ihnoRF9RnoWxtCAo0ABZ2UdyYtrpoR7
-         imgQlRsfiX8tucfrcxXByhFEhwr4Tn+l9WlB3BXfnPRKJxivf+4D9LmBRTNlkBT5hKaU
-         ZcMe91ws2Pkx3hJNuPzCWWAk+wpQzKKSR3DmIpZme3+OawdRrr+VnqykrehE/QugktXj
-         Fpnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=cx8DmDucAVd/dOxMJIWoV1500es0laNWH4pwuIs0A1I=;
-        b=AjYBYVyHJpom8xuikdBcDjX9YqSllMX6bDNSiIonB9WzD4vcWHZ7QQOa1ZGRjOsGBm
-         mATX/s/RswysaqSfX6jeXmWqlV57ALVnHnFgdhuC66GzMokWYjJZSd8Nz8mGfZ+HoL//
-         xZhaVYaYtyWH20SJAINvWJV18VaTO+Gd2GtgpQy/hXupU6n/K2BP+U6RJra08kbQTG+/
-         OyE2UyzSXLt7tKT1kt15sKIDPgXRNRG2LXJ5i04g1fwyzYDYuF3IihvEn9TupyQO8C4C
-         2Oae2FjVAuT1vw+lTfFxcr8NM0BhRf9TWKZtcXMxAYPVqK2WoCWnM38T692q6S+n7+Vc
-         dmcQ==
-X-Gm-Message-State: AOAM531yTgxhqlqz3Idv5oEvtWum3qsDYu6j8Jx6WP0qRnu3UWWA4ZLE
-	W/kSxJAnVJheIZhoABGqsd4=
-X-Google-Smtp-Source: ABdhPJw0sC++Y7ylQvcvWJ3gyPwvm3vBrUAwZo7z4zD8IOAhoofY0ZRb4CSQlUCNF7xqVz6XNKnpgQ==
-X-Received: by 2002:a17:903:408c:b0:142:45a9:672c with SMTP id z12-20020a170903408c00b0014245a9672cmr35466353plc.7.1638692299698;
-        Sun, 05 Dec 2021 00:18:19 -0800 (PST)
-From: Tianyu Lan <ltykernel@gmail.com>
-To: kys@microsoft.com,
-	haiyangz@microsoft.com,
-	sthemmin@microsoft.com,
-	wei.liu@kernel.org,
-	decui@microsoft.com,
-	tglx@linutronix.de,
-	mingo@redhat.com,
-	bp@alien8.de,
-	dave.hansen@linux.intel.com,
-	x86@kernel.org,
-	hpa@zytor.com,
-	jgross@suse.com,
-	sstabellini@kernel.org,
-	boris.ostrovsky@oracle.com,
-	joro@8bytes.org,
-	will@kernel.org,
-	davem@davemloft.net,
-	kuba@kernel.org,
-	jejb@linux.ibm.com,
-	martin.petersen@oracle.com,
-	arnd@arndb.de,
-	hch@infradead.org,
-	m.szyprowski@samsung.com,
-	robin.murphy@arm.com,
-	thomas.lendacky@amd.com,
-	Tianyu.Lan@microsoft.com,
-	xen-devel@lists.xenproject.org,
-	michael.h.kelley@microsoft.com
-Cc: iommu@lists.linux-foundation.org,
-	linux-arch@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	netdev@vger.kernel.org,
-	vkuznets@redhat.com,
-	brijesh.singh@amd.com,
-	konrad.wilk@oracle.com,
-	hch@lst.de,
-	parri.andrea@gmail.com,
-	dave.hansen@intel.com
-Subject: [PATCH V4 1/5] Swiotlb: Add Swiotlb bounce buffer remap function for HV IVM
-Date: Sun,  5 Dec 2021 03:18:09 -0500
-Message-Id: <20211205081815.129276-2-ltykernel@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211205081815.129276-1-ltykernel@gmail.com>
+X-Inumbo-ID: 2ec7f18b-55a6-11ec-8a4d-196798b21f7b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1638693277; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=KEMzzd75tVTlzS/yF7YeuRBeMsa+nqRCS/y7F4rsJUM=;
+	b=ZLDXNQcz0VwuP3iA6JpzBV1gBxlRehA5Wyhl2CSlKPFR1mCFjFd2xh0TRBhxdrPWFDPK+r
+	jIrLD+0SrXq7gF3b/YUziPl9vPuZJBqYF+yBkXnXPZvfp00fCHkbcRiZON0I2rw6ozmQK0
+	+Xswh5pD67z5fMmvDGEM3E0Z6vs+wj0=
+To: Tianyu Lan <ltykernel@gmail.com>, kys@microsoft.com,
+ haiyangz@microsoft.com, sthemmin@microsoft.com, wei.liu@kernel.org,
+ decui@microsoft.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+ sstabellini@kernel.org, boris.ostrovsky@oracle.com, joro@8bytes.org,
+ will@kernel.org, davem@davemloft.net, kuba@kernel.org, jejb@linux.ibm.com,
+ martin.petersen@oracle.com, arnd@arndb.de, hch@infradead.org,
+ m.szyprowski@samsung.com, robin.murphy@arm.com, thomas.lendacky@amd.com,
+ Tianyu.Lan@microsoft.com, xen-devel@lists.xenproject.org,
+ michael.h.kelley@microsoft.com
+Cc: iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-scsi@vger.kernel.org, netdev@vger.kernel.org, vkuznets@redhat.com,
+ brijesh.singh@amd.com, konrad.wilk@oracle.com, hch@lst.de,
+ parri.andrea@gmail.com, dave.hansen@intel.com
 References: <20211205081815.129276-1-ltykernel@gmail.com>
+ <20211205081815.129276-4-ltykernel@gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH V4 3/5] hyperv/IOMMU: Enable swiotlb bounce buffer for
+ Isolation VM
+Message-ID: <a5943893-510a-3fc8-cbb7-8742369bf36b@suse.com>
+Date: Sun, 5 Dec 2021 09:34:34 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211205081815.129276-4-ltykernel@gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="ugcej3gKaigLQ3omKQ5Ra0cQpqisQwDQs"
 
-From: Tianyu Lan <Tianyu.Lan@microsoft.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--ugcej3gKaigLQ3omKQ5Ra0cQpqisQwDQs
+Content-Type: multipart/mixed; boundary="y3W2WyKJKK59IlhYplQoWEexoVy2cBgl7";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Tianyu Lan <ltykernel@gmail.com>, kys@microsoft.com,
+ haiyangz@microsoft.com, sthemmin@microsoft.com, wei.liu@kernel.org,
+ decui@microsoft.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+ sstabellini@kernel.org, boris.ostrovsky@oracle.com, joro@8bytes.org,
+ will@kernel.org, davem@davemloft.net, kuba@kernel.org, jejb@linux.ibm.com,
+ martin.petersen@oracle.com, arnd@arndb.de, hch@infradead.org,
+ m.szyprowski@samsung.com, robin.murphy@arm.com, thomas.lendacky@amd.com,
+ Tianyu.Lan@microsoft.com, xen-devel@lists.xenproject.org,
+ michael.h.kelley@microsoft.com
+Cc: iommu@lists.linux-foundation.org, linux-arch@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-scsi@vger.kernel.org, netdev@vger.kernel.org, vkuznets@redhat.com,
+ brijesh.singh@amd.com, konrad.wilk@oracle.com, hch@lst.de,
+ parri.andrea@gmail.com, dave.hansen@intel.com
+Message-ID: <a5943893-510a-3fc8-cbb7-8742369bf36b@suse.com>
+Subject: Re: [PATCH V4 3/5] hyperv/IOMMU: Enable swiotlb bounce buffer for
+ Isolation VM
+References: <20211205081815.129276-1-ltykernel@gmail.com>
+ <20211205081815.129276-4-ltykernel@gmail.com>
+In-Reply-To: <20211205081815.129276-4-ltykernel@gmail.com>
 
-In Isolation VM with AMD SEV, bounce buffer needs to be accessed via
-extra address space which is above shared_gpa_boundary (E.G 39 bit
-address line) reported by Hyper-V CPUID ISOLATION_CONFIG. The access
-physical address will be original physical address + shared_gpa_boundary.
-The shared_gpa_boundary in the AMD SEV SNP spec is called virtual top of
-memory(vTOM). Memory addresses below vTOM are automatically treated as
-private while memory above vTOM is treated as shared.
+--y3W2WyKJKK59IlhYplQoWEexoVy2cBgl7
+Content-Type: multipart/mixed;
+ boundary="------------701B30531DDB67673841A1BC"
+Content-Language: en-US
 
-Expose swiotlb_unencrypted_base for platforms to set unencrypted
-memory base offset and platform calls swiotlb_update_mem_attributes()
-to remap swiotlb mem to unencrypted address space. memremap() can
-not be called in the early stage and so put remapping code into
-swiotlb_update_mem_attributes(). Store remap address and use it to copy
-data from/to swiotlb bounce buffer.
+This is a multi-part message in MIME format.
+--------------701B30531DDB67673841A1BC
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Tianyu Lan <Tianyu.Lan@microsoft.com>
----
-Change since v3:
-	* Fix boot up failure on the host with mem_encrypt=on.
-	  Move calloing of set_memory_decrypted() back from
-	  swiotlb_init_io_tlb_mem to swiotlb_late_init_with_tbl()
-	  and rmem_swiotlb_device_init().
+On 05.12.21 09:18, Tianyu Lan wrote:
+> From: Tianyu Lan <Tianyu.Lan@microsoft.com>
+>=20
+> hyperv Isolation VM requires bounce buffer support to copy
+> data from/to encrypted memory and so enable swiotlb force
+> mode to use swiotlb bounce buffer for DMA transaction.
+>=20
+> In Isolation VM with AMD SEV, the bounce buffer needs to be
+> accessed via extra address space which is above shared_gpa_boundary
+> (E.G 39 bit address line) reported by Hyper-V CPUID ISOLATION_CONFIG.
+> The access physical address will be original physical address +
+> shared_gpa_boundary. The shared_gpa_boundary in the AMD SEV SNP
+> spec is called virtual top of memory(vTOM). Memory addresses below
+> vTOM are automatically treated as private while memory above
+> vTOM is treated as shared.
+>=20
+> Hyper-V initalizes swiotlb bounce buffer and default swiotlb
+> needs to be disabled. pci_swiotlb_detect_override() and
+> pci_swiotlb_detect_4gb() enable the default one. To override
+> the setting, hyperv_swiotlb_detect() needs to run before
+> these detect functions which depends on the pci_xen_swiotlb_
+> init(). Make pci_xen_swiotlb_init() depends on the hyperv_swiotlb
+> _detect() to keep the order.
 
-Change since v2:
-	* Leave mem->vaddr with phys_to_virt(mem->start) when fail
-	  to remap swiotlb memory.
+Why? Does Hyper-V plan to support Xen PV guests? If not, I don't see
+the need for adding this change.
 
-Change since v1:
-	* Rework comment in the swiotlb_init_io_tlb_mem()
-	* Make swiotlb_init_io_tlb_mem() back to return void.
----
- include/linux/swiotlb.h |  6 ++++++
- kernel/dma/swiotlb.c    | 43 +++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 47 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 569272871375..f6c3638255d5 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -73,6 +73,9 @@ extern enum swiotlb_force swiotlb_force;
-  * @end:	The end address of the swiotlb memory pool. Used to do a quick
-  *		range check to see if the memory was in fact allocated by this
-  *		API.
-+ * @vaddr:	The vaddr of the swiotlb memory pool. The swiotlb memory pool
-+ *		may be remapped in the memory encrypted case and store virtual
-+ *		address for bounce buffer operation.
-  * @nslabs:	The number of IO TLB blocks (in groups of 64) between @start and
-  *		@end. For default swiotlb, this is command line adjustable via
-  *		setup_io_tlb_npages.
-@@ -92,6 +95,7 @@ extern enum swiotlb_force swiotlb_force;
- struct io_tlb_mem {
- 	phys_addr_t start;
- 	phys_addr_t end;
-+	void *vaddr;
- 	unsigned long nslabs;
- 	unsigned long used;
- 	unsigned int index;
-@@ -186,4 +190,6 @@ static inline bool is_swiotlb_for_alloc(struct device *dev)
- }
- #endif /* CONFIG_DMA_RESTRICTED_POOL */
- 
-+extern phys_addr_t swiotlb_unencrypted_base;
-+
- #endif /* __LINUX_SWIOTLB_H */
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 8e840fbbed7c..34e6ade4f73c 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -50,6 +50,7 @@
- #include <asm/io.h>
- #include <asm/dma.h>
- 
-+#include <linux/io.h>
- #include <linux/init.h>
- #include <linux/memblock.h>
- #include <linux/iommu-helper.h>
-@@ -72,6 +73,8 @@ enum swiotlb_force swiotlb_force;
- 
- struct io_tlb_mem io_tlb_default_mem;
- 
-+phys_addr_t swiotlb_unencrypted_base;
-+
- /*
-  * Max segment that we can provide which (if pages are contingous) will
-  * not be bounced (unless SWIOTLB_FORCE is set).
-@@ -155,6 +158,27 @@ static inline unsigned long nr_slots(u64 val)
- 	return DIV_ROUND_UP(val, IO_TLB_SIZE);
- }
- 
-+/*
-+ * Remap swioltb memory in the unencrypted physical address space
-+ * when swiotlb_unencrypted_base is set. (e.g. for Hyper-V AMD SEV-SNP
-+ * Isolation VMs).
-+ */
-+void *swiotlb_mem_remap(struct io_tlb_mem *mem, unsigned long bytes)
-+{
-+	void *vaddr = NULL;
-+
-+	if (swiotlb_unencrypted_base) {
-+		phys_addr_t paddr = mem->start + swiotlb_unencrypted_base;
-+
-+		vaddr = memremap(paddr, bytes, MEMREMAP_WB);
-+		if (!vaddr)
-+			pr_err("Failed to map the unencrypted memory %llx size %lx.\n",
-+			       paddr, bytes);
-+	}
-+
-+	return vaddr;
-+}
-+
- /*
-  * Early SWIOTLB allocation may be too early to allow an architecture to
-  * perform the desired operations.  This function allows the architecture to
-@@ -172,7 +196,12 @@ void __init swiotlb_update_mem_attributes(void)
- 	vaddr = phys_to_virt(mem->start);
- 	bytes = PAGE_ALIGN(mem->nslabs << IO_TLB_SHIFT);
- 	set_memory_decrypted((unsigned long)vaddr, bytes >> PAGE_SHIFT);
--	memset(vaddr, 0, bytes);
-+
-+	mem->vaddr = swiotlb_mem_remap(mem, bytes);
-+	if (!mem->vaddr)
-+		mem->vaddr = vaddr;
-+
-+	memset(mem->vaddr, 0, bytes);
- }
- 
- static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
-@@ -196,7 +225,17 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 		mem->slots[i].orig_addr = INVALID_PHYS_ADDR;
- 		mem->slots[i].alloc_size = 0;
- 	}
-+
-+	/*
-+	 * If swiotlb_unencrypted_base is set, the bounce buffer memory will
-+	 * be remapped and cleared in swiotlb_update_mem_attributes.
-+	 */
-+	if (swiotlb_unencrypted_base)
-+		return;
-+
- 	memset(vaddr, 0, bytes);
-+	mem->vaddr = vaddr;
-+	return;
- }
- 
- int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
-@@ -371,7 +410,7 @@ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size
- 	phys_addr_t orig_addr = mem->slots[index].orig_addr;
- 	size_t alloc_size = mem->slots[index].alloc_size;
- 	unsigned long pfn = PFN_DOWN(orig_addr);
--	unsigned char *vaddr = phys_to_virt(tlb_addr);
-+	unsigned char *vaddr = mem->vaddr + tlb_addr - mem->start;
- 	unsigned int tlb_offset, orig_addr_offset;
- 
- 	if (orig_addr == INVALID_PHYS_ADDR)
--- 
-2.25.1
+Juergen
 
+--------------701B30531DDB67673841A1BC
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------701B30531DDB67673841A1BC--
+
+--y3W2WyKJKK59IlhYplQoWEexoVy2cBgl7--
+
+--ugcej3gKaigLQ3omKQ5Ra0cQpqisQwDQs
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmGseZoFAwAAAAAACgkQsN6d1ii/Ey/H
+vwf/bVcz0h71VPNyyHBiTM8U3L7spNMl6dKPxsu7MuBqatDouQsTGFEgVSpMK/UQkfzHwBmHRQJd
++0LM3/Ya8/G2v5VFKzS15AtUOgzzm73xoO8knoPHpkidw4ZKF5WFzn4UuYrGqluWauMlXb3sZuo1
+0uMhZlqxfUG5RbOb38dR+Lv0aCsadCC23K0zT29bcDjgkqg8Y/U4BZddMujvXozlfh2rIwTdpXUZ
+/iPXhL+SBnPI/xmmHRWI41yY/7/F3ClHmdV4d6dmxpneaI9jr56IWkSKzxSaIvhPpdsqr0ikywSI
+fxV566qv5mppOytgoA3tf5wQhplYQ6bga7F/7+VXrw==
+=3cnJ
+-----END PGP SIGNATURE-----
+
+--ugcej3gKaigLQ3omKQ5Ra0cQpqisQwDQs--
 
