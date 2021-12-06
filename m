@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13F59C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A957C433FE
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240054.416328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.240055.416333 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmB-0003CZ-A2; Mon, 06 Dec 2021 22:48:03 +0000
+	id 1muMmB-0003Ht-On; Mon, 06 Dec 2021 22:48:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240054.416328; Mon, 06 Dec 2021 22:48:03 +0000
+Received: by outflank-mailman (output) from mailman id 240055.416333; Mon, 06 Dec 2021 22:48:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmB-0003Bk-1n; Mon, 06 Dec 2021 22:48:03 +0000
-Received: by outflank-mailman (input) for mailman id 240054;
+	id 1muMmB-0003Fk-Fx; Mon, 06 Dec 2021 22:48:03 +0000
+Received: by outflank-mailman (input) for mailman id 240055;
  Mon, 06 Dec 2021 22:48:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdU-0004dp-2i
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:04 +0000
+ id 1muMeD-0004dp-1f
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:49 +0000
 Received: from galois.linutronix.de (galois.linutronix.de
  [2a0a:51c0:0:12e:550::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 501f4bbd-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:03 +0100 (CET)
+ id 6aec87b3-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:48 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 501f4bbd-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210437.875316747@linutronix.de>
+X-Inumbo-ID: 6aec87b3-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210439.400844376@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830343;
+	s=2020; t=1638830388;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=hFdKqxRH3cfzgioYGe6Wt7w61YxBjqbdkXo6merCrrA=;
-	b=OMnExLFiyr2l3DaeHBZpbFl2M24cvNzxDNL/9aYSNE94q++59kEmfVGKa5ZlhAe07Fl3uU
-	Za2x9mlRaEoMlFL5FR1Yt9/sqLPoYXCMPjqQw4WwMtRTKofDpynBiY6Jl0rxHJOkcMX9dw
-	AKh+hNeiRoS63cA7VuiUq+1N62xSAWLbXP1hCjtAIoq1LsEYItH7wAY5tc4nfMbGGtYDuF
-	fJU/wntmrOV0pnsKdqs0t3j9Fcc8XuBSCnFkFMGRffuHbe8KbWxBhE+GGbocWvfNjKYz6q
-	jHzrIsyfG/fs3wIXw7Tss35KZPRoYyc8DlL6z8BcWhdY+ZDIBEv4mQdQig+Tog==
+	 references:references; bh=lGS+IkXmE+9GAo5xc0vZ9k4XzYRWim7AXuJ3Yf4prmo=;
+	b=1rdh0uBIjRFPVJb0NRyQpQptlV/IqltLenr45mOonGb1VHJ/Kb/bZxEHCMdNY6i8Rsl3lU
+	3LeqeuR5+/TelAqjf8r4Ks6XK/KIFolBHpOGsdFI5iWQZCh4EyUbbBQRP/UsEqSSd34PqQ
+	CGWYXx1l3Ha6SI6sGKdzCI+pjUM3G9v435Md6e0/lLQECkoMsR/nFZ+ZQi1wRTh82GNKIa
+	VkCD8Ru4e1/yyGWEO+6kuMDv7hVYoHw87sh+R9wOR482T4v06q6RFEL7LzlekMOKFNQ0af
+	GGFaLu61fEzOgmHosPLGbKXOzPYbBO79MG2SX62W7byRtHXl19o2mfrKF/oTmA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830343;
+	s=2020e; t=1638830388;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=hFdKqxRH3cfzgioYGe6Wt7w61YxBjqbdkXo6merCrrA=;
-	b=Wmw1TW9VtGF7GmA2M1BkXP4IXVGQeS/AtXBgcY5867Qr3359clTNz15RIffmYLeD26efTT
-	Tn7VoBQPW9R2PTDw==
+	 references:references; bh=lGS+IkXmE+9GAo5xc0vZ9k4XzYRWim7AXuJ3Yf4prmo=;
+	b=ePEtkTTGN09IiG05GytAFMd60ZI7x21kGECcBweiIwUP3OufMZOiTYfQXaXuKmiMIqGKKl
+	Sec95JNvjvlYv9Bg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,6 +71,7 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Cedric Le Goater <clg@kaod.org>,
  xen-devel@lists.xenproject.org,
  Juergen Gross <jgross@suse.com>,
+ Robin Murphy <robin.murphy@arm.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Will Deacon <will@kernel.org>,
  Santosh Shilimkar <ssantosh@kernel.org>,
@@ -83,54 +84,57 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-arm-kernel@lists.infradead.org,
  Vinod Koul <vkoul@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
- Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 04/36] platform-msi: Allocate MSI device data on first use
+Subject: [patch V2 32/36] iommu/arm-smmu-v3: Use msi_get_virq()
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:02 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:47 +0100 (CET)
 
-Allocate the MSI device data on first invocation of the allocation function
-for platform MSI private data.
+Let the core code fiddle with the MSI descriptor retrieval.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Tested-by: Robin Murphy <robin.murphy@arm.com>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
- drivers/base/platform-msi.c |    8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |   19 +++----------------
+ 1 file changed, 3 insertions(+), 16 deletions(-)
 
---- a/drivers/base/platform-msi.c
-+++ b/drivers/base/platform-msi.c
-@@ -204,6 +204,8 @@ platform_msi_alloc_priv_data(struct devi
- 			     irq_write_msi_msg_t write_msi_msg)
+--- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
++++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+@@ -3154,7 +3154,6 @@ static void arm_smmu_write_msi_msg(struc
+ 
+ static void arm_smmu_setup_msis(struct arm_smmu_device *smmu)
  {
- 	struct platform_msi_priv_data *datap;
-+	int err;
-+
- 	/*
- 	 * Limit the number of interrupts to 2048 per device. Should we
- 	 * need to bump this up, DEV_ID_SHIFT should be adjusted
-@@ -218,6 +220,10 @@ platform_msi_alloc_priv_data(struct devi
- 		return ERR_PTR(-EINVAL);
+-	struct msi_desc *desc;
+ 	int ret, nvec = ARM_SMMU_MAX_MSIS;
+ 	struct device *dev = smmu->dev;
+ 
+@@ -3182,21 +3181,9 @@ static void arm_smmu_setup_msis(struct a
+ 		return;
  	}
  
-+	err = msi_setup_device_data(dev);
-+	if (err)
-+		return ERR_PTR(err);
-+
- 	/* Already had a helping of MSI? Greed... */
- 	if (!list_empty(dev_to_msi_list(dev)))
- 		return ERR_PTR(-EBUSY);
-@@ -229,7 +235,7 @@ platform_msi_alloc_priv_data(struct devi
- 	datap->devid = ida_simple_get(&platform_msi_devid_ida,
- 				      0, 1 << DEV_ID_SHIFT, GFP_KERNEL);
- 	if (datap->devid < 0) {
--		int err = datap->devid;
-+		err = datap->devid;
- 		kfree(datap);
- 		return ERR_PTR(err);
- 	}
+-	for_each_msi_entry(desc, dev) {
+-		switch (desc->msi_index) {
+-		case EVTQ_MSI_INDEX:
+-			smmu->evtq.q.irq = desc->irq;
+-			break;
+-		case GERROR_MSI_INDEX:
+-			smmu->gerr_irq = desc->irq;
+-			break;
+-		case PRIQ_MSI_INDEX:
+-			smmu->priq.q.irq = desc->irq;
+-			break;
+-		default:	/* Unknown */
+-			continue;
+-		}
+-	}
++	smmu->evtq.q.irq = msi_get_virq(dev, EVTQ_MSI_INDEX);
++	smmu->gerr_irq = msi_get_virq(dev, GERROR_MSI_INDEX);
++	smmu->priq.q.irq = msi_get_virq(dev, PRIQ_MSI_INDEX);
+ 
+ 	/* Add callback to free MSIs on teardown */
+ 	devm_add_action(dev, arm_smmu_free_msis, dev);
 
 
