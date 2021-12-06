@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6170C433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240045.416264 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17292C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240048.416295 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMls-0007qk-AF; Mon, 06 Dec 2021 22:47:44 +0000
+	id 1muMm1-0001Be-Pc; Mon, 06 Dec 2021 22:47:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240045.416264; Mon, 06 Dec 2021 22:47:44 +0000
+Received: by outflank-mailman (output) from mailman id 240048.416295; Mon, 06 Dec 2021 22:47:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMlr-0007nF-Pn; Mon, 06 Dec 2021 22:47:43 +0000
-Received: by outflank-mailman (input) for mailman id 240045;
- Mon, 06 Dec 2021 22:47:41 +0000
+	id 1muMm1-0001BN-HW; Mon, 06 Dec 2021 22:47:53 +0000
+Received: by outflank-mailman (input) for mailman id 240048;
+ Mon, 06 Dec 2021 22:47:52 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdt-0004dp-Jk
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:29 +0000
+ id 1muMdY-0004dp-Rl
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:08 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5f5eef9d-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:29 +0100 (CET)
+ id 52ed6044-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:08 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f5eef9d-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210438.742297272@linutronix.de>
+X-Inumbo-ID: 52ed6044-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210438.038137622@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830368;
+	s=2020; t=1638830347;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=W2lCRcP9RIug8p7Jz6C0/K2R924e9P+4OVHLDtbDEY4=;
-	b=NAItHuLmL2ZcCfnzc7fXrckrfGRBHJLTQ6z+8GQi+pDtw3TJzWlrZdzM68dhy4eE1OUrN4
-	WQpDNI30CiepjXFq3GVRqOgL6lbHugqbiK1cgKeYZQQlmp0QNv6K3/G1f9qICr1H7udj02
-	IL3YCTHnXu0Nc9n7X5/vnjZpUzoBt0BVJmug9p6XoFHASymZZCX8NBeLxW7a+KomP2zscN
-	Yw4oyjCuV9LJAUYax/vCmkxmlobmILYr9Kaz4DUGkfdOhTY2fy7moleVn4aZ55FimhJjry
-	KhYtaopElknezT4DQ1+BGYb8QpKLSmpd8RvSeJ/uyfPSLa3v/+iGr3ib39VvMg==
+	 references:references; bh=SYbFcr5c7KUWSHju+5I0IZIliBz6/Q8qUXyaiieHdzI=;
+	b=QvCNlsxjJjFZJgdde3bGSosu1Zdk5YzAknkSMOft0kqiy9khbJfX0meWwgcleEXmkDpA6Q
+	pG/Gt8h3frgjkaLd3ivOghbKjLxFmVn7ZXBj/mBWPosAprC3e9ZHf2CQd0vU4uQ0IX2bE3
+	DIcgOht4L7EcSFUc1y8KcKQOXCGCoLvR8+gBUOfdkCyyDoD2dk/RibJIph/TJLoLZ7f837
+	ZaxpD6IoMjaAa3AZwL6mF/gFVnlia7coMdHC/mzGWQ3H+AQZsfBC4WUoKRYdhOXhOCt3so
+	5Zuawua4YMWcs7mWRz8XfmGZQAu6rLWJuZkYFq9LaGCnoqpDI0WCTFWoz6TTeA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830368;
+	s=2020e; t=1638830347;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=W2lCRcP9RIug8p7Jz6C0/K2R924e9P+4OVHLDtbDEY4=;
-	b=1Bo7ypMWpOuT+BmW7TSVzw6bj18E4LKNZBSZWEJqZFWNgSmXB22SiYHDMtnKsfQTyHA/Yy
-	OLurUGAL5gX1tZAQ==
+	 references:references; bh=SYbFcr5c7KUWSHju+5I0IZIliBz6/Q8qUXyaiieHdzI=;
+	b=PCtebedJJL6H3PzvHb4O9yvA3iLADUQUECYtjroor4l+G6aeGCknrkbTtlePQLRiYJQoK7
+	PSwmm0rD4obkidBw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -84,42 +84,119 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 20/36] x86/pci/XEN: Use device MSI properties
+Subject:
+ [patch V2 07/36] genirq/msi: Provide msi_device_populate/destroy_sysfs()
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:28 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:07 +0100 (CET)
 
-instead of fiddling with MSI descriptors.
+Add new allocation functions which can be activated by domain info
+flags. They store the groups pointer in struct msi_device_data.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
- arch/x86/pci/xen.c |    6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ include/linux/msi.h |    4 ++++
+ kernel/irq/msi.c    |   42 ++++++++++++++++++++++++++++++++++++++++--
+ 2 files changed, 44 insertions(+), 2 deletions(-)
 
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -399,9 +399,7 @@ static void xen_teardown_msi_irqs(struct
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -56,6 +56,8 @@ struct irq_data;
+ struct msi_desc;
+ struct pci_dev;
+ struct platform_msi_priv_data;
++struct attribute_group;
++
+ void __get_cached_msi_msg(struct msi_desc *entry, struct msi_msg *msg);
+ #ifdef CONFIG_GENERIC_MSI_IRQ
+ void get_cached_msi_msg(unsigned int irq, struct msi_msg *msg);
+@@ -174,9 +176,11 @@ struct msi_desc {
+ /**
+  * msi_device_data - MSI per device data
+  * @properties:		MSI properties which are interesting to drivers
++ * @attrs:		Pointer to the sysfs attribute group
+  */
+ struct msi_device_data {
+ 	unsigned long			properties;
++	const struct attribute_group    **attrs;
+ };
  
- static void xen_pv_teardown_msi_irqs(struct pci_dev *dev)
+ int msi_setup_device_data(struct device *dev);
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -213,6 +213,20 @@ const struct attribute_group **msi_popul
+ }
+ 
+ /**
++ * msi_device_populate_sysfs - Populate msi_irqs sysfs entries for a device
++ * @dev:	The device (PCI, platform etc) which will get sysfs entries
++ */
++int msi_device_populate_sysfs(struct device *dev)
++{
++	const struct attribute_group **group = msi_populate_sysfs(dev);
++
++	if (IS_ERR(group))
++		return PTR_ERR(group);
++	dev->msi.data->attrs = group;
++	return 0;
++}
++
++/**
+  * msi_destroy_sysfs - Destroy msi_irqs sysfs entries for devices
+  * @dev:		The device(PCI, platform etc) who will remove sysfs entries
+  * @msi_irq_groups:	attribute_group for device msi_irqs entries
+@@ -238,6 +252,17 @@ void msi_destroy_sysfs(struct device *de
+ 		kfree(msi_irq_groups);
+ 	}
+ }
++
++/**
++ * msi_device_destroy_sysfs - Destroy msi_irqs sysfs entries for a device
++ * @dev:		The device (PCI, platform etc) for which to remove
++ *			sysfs entries
++ */
++void msi_device_destroy_sysfs(struct device *dev)
++{
++	msi_destroy_sysfs(dev, dev->msi.data->attrs);
++	dev->msi.data->attrs = NULL;
++}
+ #endif
+ 
+ #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
+@@ -685,8 +710,19 @@ int msi_domain_alloc_irqs(struct irq_dom
  {
--	struct msi_desc *msidesc = first_pci_msi_entry(dev);
--
--	if (msidesc->pci.msi_attrib.is_msix)
-+	if (msi_device_has_property(&dev->dev, MSI_PROP_PCI_MSIX))
- 		xen_pci_frontend_disable_msix(dev);
- 	else
- 		xen_pci_frontend_disable_msi(dev);
-@@ -417,7 +415,7 @@ static int xen_msi_domain_alloc_irqs(str
- 	if (WARN_ON_ONCE(!dev_is_pci(dev)))
- 		return -EINVAL;
+ 	struct msi_domain_info *info = domain->host_data;
+ 	struct msi_domain_ops *ops = info->ops;
++	int ret;
  
--	if (first_msi_entry(dev)->pci.msi_attrib.is_msix)
-+	if (msi_device_has_property(dev, MSI_PROP_PCI_MSIX))
- 		type = PCI_CAP_ID_MSIX;
- 	else
- 		type = PCI_CAP_ID_MSI;
+-	return ops->domain_alloc_irqs(domain, dev, nvec);
++	ret = ops->domain_alloc_irqs(domain, dev, nvec);
++	if (ret)
++		return ret;
++
++	if (!(info->flags & MSI_FLAG_DEV_SYSFS))
++		return 0;
++
++	ret = msi_device_populate_sysfs(dev);
++	if (ret)
++		msi_domain_free_irqs(domain, dev);
++	return ret;
+ }
+ 
+ void __msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
+@@ -725,7 +761,9 @@ void msi_domain_free_irqs(struct irq_dom
+ 	struct msi_domain_info *info = domain->host_data;
+ 	struct msi_domain_ops *ops = info->ops;
+ 
+-	return ops->domain_free_irqs(domain, dev);
++	if (info->flags & MSI_FLAG_DEV_SYSFS)
++		msi_device_destroy_sysfs(dev);
++	ops->domain_free_irqs(domain, dev);
+ }
+ 
+ /**
 
 
