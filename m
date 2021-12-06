@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C68AC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:07:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239474.415182 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C403C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:07:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239477.415193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSi-0000nc-Pp; Mon, 06 Dec 2021 17:07:36 +0000
+	id 1muHSk-0000zd-3t; Mon, 06 Dec 2021 17:07:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239474.415182; Mon, 06 Dec 2021 17:07:36 +0000
+Received: by outflank-mailman (output) from mailman id 239477.415193; Mon, 06 Dec 2021 17:07:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSi-0000nJ-Ki; Mon, 06 Dec 2021 17:07:36 +0000
-Received: by outflank-mailman (input) for mailman id 239474;
+	id 1muHSj-0000ws-I2; Mon, 06 Dec 2021 17:07:37 +0000
+Received: by outflank-mailman (input) for mailman id 239477;
  Mon, 06 Dec 2021 17:07:35 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHPj-0005ti-Pj
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:31 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 93194e60-56b6-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 18:04:30 +0100 (CET)
+ id 1muHPN-0005ti-8r
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:09 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 863b6834-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:04:08 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93194e60-56b6-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 863b6834-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810270;
+  d=citrix.com; s=securemail; t=1638810247;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=p5aAroINdY0XxstjIhOll7B4+KbnIHxusYrnLiZlbAY=;
-  b=Pqr2cvAxtlIySiaJWHrtWXJOLgJFVDinliXRFLIJczfsqZLSMQKJ7jn+
-   F5Ocly2PXPSP2GrJs/D0c7olTh/NAcxf5hLlMUFFAlsbXmLb9v6GB3h0r
-   gsSveEpt6fjzwhFNllFgO0XayXI5+ZHwaY98Pb84AMuRCfRg0/Gy+GROs
-   w=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: HBQFEQ+Y1u8kQ2/rCy/yYli3LDSL6ypUwUk7RO+01grHlWf6UQ/ZmXkXODPK73GhJsz/hPT65x
- lszt5Za7VFGBZ9rQR6qQYRCE2QQ6pKwZslXlC3CzIG3PGTqE8itXD1jyuUNTbxNjnJT6OdHDXT
- AwepTnXXDdrBelbcIKrytpl2sDp7GqQ1jiXL+WyWNMPH5QBL7mb4j+UjhfA67AtgVelfHLzfkp
- ZJu2UsIqVMstvwjSo46qF92JYoGVUr8f8g9ioEE6rgGij8jXxmhV2ByvFsSVqluDfid5P1NAKz
- 7srUcgCrRnB+lvJuNloc51IC
+  bh=Qi8ktRfGxKz6TVNBfNc+szyw4+rNfchyhf2q4Nw7GMs=;
+  b=bfXvX2kvt3XeFh/G1829Dt/y4fs8KMMlPWqYYhQnz5g4fvKUT5FCJs0b
+   vaJQ7OSZiZ3IDf5CeQDVMRLRC/WnVpNae+prvQlB+A7VOjYuRzUOehcej
+   QEExhX26tpHWBdGfvE+JP7JnlCCWUGCwhxZR/kAjRSg7xhj+UK4YjOMsn
+   g=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: qpV4d4+1FPX+nHxG7J9nJXYwjDyegjkOgLVYA1UFwoOXpRRtyx1G+7iEWpMl33LJiMrqZ6/g6m
+ gjqr/1HkC77E1Ma0jS766dfiGeSzrzXiS1ODIpN5+h8pOllVk77qFtnl0QIyeD/ksPX9Bteea4
+ vN0rzMrHGSQM7xfny9VE7n1XEWUY2Zbl4fmIvogBKAMHjL0A5N24xc5EZlYUew2I+jlRVJb4Cl
+ kg+7XkvHTVgQpaLTCP2exdSnZUo61IH+X1vzcgl+QxvZkrcDN5fFQnQSGv7yMPtlHTZ5XI70b8
+ JRk2bRZcs4o54cWIqJ4Kc1mh
 X-SBRS: 5.1
-X-MesageID: 59324146
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 59387915
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:ZiC+katT2BP3OfOz8s5ve02bpefnVKdZMUV32f8akzHdYApBsoF/q
- tZmKW/SMviDYDP1LYwjO4+woUpUup6HmN9jQAM6+S8zEy4S+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHhJZS5LwbZj29cy2YbhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NplurXpbQoQHZT2qronekIIIzkvB/F50eqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DNYUDunZm3HfBAOwvW5zrSKTW/95Imjw3g6iiGN6DN
- pFDNWMzMnwsZTVhIF0NGct9t920h2XfUHp9kH67r60etj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKhMVLtuE0hKe72mhwOTImEvTWZ0QPK218OZwh1+ezXBVDwcZPXOrrP/8hkOgVtZ3L
- 00P5jFovaU07FasTNT2Q1u/unHslhcaR9pXFfx88AyXw7DYywmcD2kACDVGbbQbWNQeHGJwk
- AXTxpWwWGIp4Ob9pW+hGqm8ohrrHSUsDlY4V3E+ZFBV08Gymt0Mp0eaJjp8K5KdgtrwEDD25
- jmFqikimrke5fI2O7WHEUPv2Gz1+MWQJuIhzkCOBz/+sFslDGKwT9XwsQCz0BpWEGqOorBtV
- lAgktPW0u0BBIrleMelELRUR+HBCxpo3VThbb9T83sJqm3FF52LJ9k4DNRCyKFBaJxsldjBO
- hC7hO+pzMUPVEZGlIcuC25LN+wkzLL7CfPuXe3OY9xFb/BZLVHcrH40NBPKhT6ywCDAdJ3T3
- 7/BK65A6l5AVsxaIMeeHb9BgdfHOAhgrY8seXwL50v+iufPDJJkYbwELEGPfogEAFCs+23oH
- yJkH5LSkX13CbSmCgGOqNJ7BQ1afBATWMGtw+QKJ7HrH+aTMDx4YxMn6eh6ININcmU8vrqgw
- 0xRrWcEkgei3iOedl3RAp2hAZu2NatCQbsAFXREFT6VN7ILOO5DNY8TKMk6e6cJ7utmwaImR
- vUJYZzYUP9OVi7G63IWapyk9N5ucxGihASvOSu5YWdgI848FlKRotK0LBHy8CQuDzassZdsq
- bOXyQ6GE4EIQB5vDZiKZav3nU+xp3UUhMl7Q1DMfotIYEzp/YUzc37xg/Y7LtsiMxLGwjfGh
- Q+aDQ1B/bvGopMv8cmPjqeB9t/7H+x7F0tcPm/a8bfpanWKojv9mddNCb/acyrcWWX4/LSZS
- d9Ul/ysYucamFtqspZnF+o5x6wJ+Nay9aRRyR5pHSuXYg3zWK9gOHSPweJGqrZJmu1CoQKzV
- 0+CpotaNLGONJ+3GVIdPlN4POGK1PVSkTjO9/UlZk794XYvrraAVExTOTiKiTBcc+QpYN90n
- 795tZ5E8RG7hzorLs2C33Jd+Gm7J3AdV7kq68MBC4jxhwt3klxPbPQw0MMtDE1jvzmUDnQXH
- w==
-IronPort-HdrOrdr: A9a23:kNp2CaxHh+WItbtFnv2GKrPwAr1zdoMgy1knxilNoERuA6ilfr
- OV7ZMmPH7P+U0ssR4b+exoVJPsfZqYz+8R3WBzB8bZYOCFghrKEGgK1+KLqFfd8m/Fh4xgPM
- xbHJSWfeeQMbEMt6jHCWeDf+rJHLG8gd2VbKzlvhFQpElRGthdBilCe36mLnE=
+IronPort-Data: A9a23:0tYB5K1oaEDJErUU//bD5TJ2kn2cJEfYwER7XKvMYLTBsI5bpzFWz
+ WRMCmuOOviMN2aje9l2PoW08ksCvJLTmoJlGVBspC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es5w7Bh2OaEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhuvE2y
+ sRdt9uLaTw5fYL0x8U9CitEOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Ej8I/LM7tLcUHt2tp1z3xBvc6W5HTBa7N4Le02R9t15seQqeHO
+ qL1bxIwXBXQJDZgP2sVVrUblduvhHXwTm1x/Qf9Sa0fvDGIkV0ZPKLWGNvKePSaSMNNhEGaq
+ 2nauWPjDXkyK9i32TeDtHW2iYfnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM/pWL
+ VAU/Sw/67A/7kWxQvHyWhS5pDiPuRt0ZjZLO7RkskfXkPOSulvHQDhfJtJcVDA4nOoXAj47x
+ l3OpPPSFX9AiOK0aSuv6p7B+FteJhMpBWMFYCYFSy4M7N/ivJw/g3rzczpzLEKmpoarQG+tm
+ lhmuAB73uxO1pBTi81X6Hie22r0zqUlWDLZ8ek+soiNygpiLLCoaIWzgbQwxaYRdd3JJrVtU
+ ZVtpiR/0AzsJczU/MBuaL9UdF1M2xpjGGeG6bKIN8N+nwlBA1b5IehtDMhWfS+FyPosdz7ze
+ 1P0sghM/pJVN3bCRfYpONLuUZV3l/K+SoSNuhXogjxmOMIZmOivpn4GWKJt9zq1zBhEfV8XZ
+ /93jvpA/V5FUP86nVJats8W0KMxxzBW+I8gbcuT8vhT6pLHPCT9Ye5caDOmN7llhIvZ8FS92
+ 4sObKOilkQAONASlwGKqOb/23hRdiNlbX03wuQKHtO+zv1ORDt8VqSPmOx5IOSIXc19z4/1w
+ 510YWcAoHKXuJENAVzbApy6QL+wD5t5s1whOikgYQSh13Q5ON7956YDbZonO7Ig8bU7n/JzS
+ vAEfeSGA+hOFWubq2hMM8GlodwwbgmviCKPIzGhPGo1cal/SlGb4dTjZAbuqnUDV3Llqcskr
+ rS8/QrHWp5fFR96BcPbZav3nVO8tHQQgsxoWE7MLoUBcUng6tEyeSfwkuU2M4cHLhCanmmW0
+ AOfABE5o+jRotBqrImV1P7c94rwSrlwBEtXGWXf/I2aDyiC8zrx25JEXcaJYSvZCDH+9pK9a
+ LgH1Pr7KvAGwgpH6tIuD7ZxwKsizNLzvLsGnB98FXDGYln3WLNtJn6KgZtGuqFXn+ILvAK3X
+ gSE+8VAOKXPM8TgSQZDKA0gZ+WF9PcVhjiNsqhlfBSkvHd6rOidTEFfHxiQkygMfrJ6PbQsz
+ folpMNLuRe0jQAnM4regy1Zn4hWwqfsj0nzWkkmPbLW
+IronPort-HdrOrdr: A9a23:Vg+O/aDxGI9vsczlHemq55DYdb4zR+YMi2TC1yhKJiC9Ffbo8P
+ xG/c5rrCMc5wxxZJhNo7290ey7MBHhHP1OkO0s1NWZPDUO0VHAROoJ0WKh+UyEJ8SXzJ866U
+ 4KScZD4bPLYWSS9fyKgzWFLw==
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59324146"
+   d="scan'208";a="59387915"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
-	<wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH 47/57] libs/stat: Fix and rework python-bindings build
-Date: Mon, 6 Dec 2021 17:02:30 +0000
-Message-ID: <20211206170241.13165-48-anthony.perard@citrix.com>
+	<wl@xen.org>
+Subject: [XEN PATCH 35/57] tools/xenpaging: Rework makefile
+Date: Mon, 6 Dec 2021 17:02:18 +0000
+Message-ID: <20211206170241.13165-36-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -103,94 +102,72 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Fix the dependency on the library, $(SHLIB) variable doesn't exist
-anymore.
-
-Rework dependency on the include file, we can let `swig` generate the
-dependency for us with the use of "-M*" flags.
-
-The xenstat.h file has moved so we need to fix the include location.
-
-Rather than relaying on the VCS to create an empty directory for us,
-we can create one before generating the *.c file for the bindings.
-
-Make use of generic variable names to build a shared library from a
-source file: CFLAGS, LDFLAGS, and LDLIBS.
-
-Fix python's specific *flags by using python-config, and add them to
-generic flags variables: CFLAGS, LDLIBS.
-
-To build a shared library, we need to build the source file with
-"-fPIC", which was drop by 6d0ec05390 (tools: split libxenstat into
-new tools/libs/stat directory).
-
-The source file generated by swig seems to be missing a prototype for
-the "init" function, so we need "-Wno-missing-prototypes" in order to
-build it.
-
-Add some targets to .PHONY.
+- Rename $(SRCS) to $(OBJS-y), we don't need to collect sources.
+- Rename $(IBINS) to $(TARGETS)
+- Stop cleaning "xen" and non-set variable $(LIB).
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/stat/Makefile                    | 27 +++++++++++++++------
- tools/libs/stat/bindings/swig/python/.empty |  1 -
- 2 files changed, 19 insertions(+), 9 deletions(-)
- delete mode 100644 tools/libs/stat/bindings/swig/python/.empty
+ tools/xenpaging/Makefile | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
-index e39fe29bd1..d5d9cb3659 100644
---- a/tools/libs/stat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -49,23 +49,34 @@ install-bindings: install-perl-bindings install-python-bindings
- .PHONY: uninstall-bindings
- uninstall-bindings: uninstall-perl-bindings uninstall-python-bindings
+diff --git a/tools/xenpaging/Makefile b/tools/xenpaging/Makefile
+index 04743b335c..e2ed9eaa3f 100644
+--- a/tools/xenpaging/Makefile
++++ b/tools/xenpaging/Makefile
+@@ -5,33 +5,33 @@ CFLAGS += $(CFLAGS_libxentoollog) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(
+ LDLIBS += $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenstore) $(PTHREAD_LIBS)
+ LDFLAGS += $(PTHREAD_LDFLAGS)
  
--$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) include/xenstat.h
-+$(BINDINGS): libxenstat.so
+-POLICY    = default
++POLICY   := default
  
--SWIG_FLAGS=-module xenstat -Iinclude -I.
-+SWIG_FLAGS = -module xenstat -I$(XEN_INCLUDE)
-+SWIG_FLAGS += -MMD -MP -MF .$(if $(filter-out .,$(@D)),$(subst /,@,$(@D))@)$(@F).d
+-SRC      :=
+-SRCS     += file_ops.c xenpaging.c policy_$(POLICY).c
+-SRCS     += pagein.c
++OBJS-y   := file_ops.o
++OBJS-y   += xenpaging.o
++OBJS-y   += policy_$(POLICY).o
++OBJS-y   += pagein.o
  
- # Python bindings
--PYTHON_VERSION=$(PYTHON:python%=%)
--PYTHON_FLAGS=-I/usr/include/python$(PYTHON_VERSION) -lpython$(PYTHON_VERSION)
- $(PYMOD): $(PYSRC)
- $(PYSRC): bindings/swig/xenstat.i
--	swig -python $(SWIG_FLAGS) -outdir $(@D) -o $(PYSRC) $<
--
-+	mkdir -p $(@D)
-+	swig -python $(SWIG_FLAGS) -outdir $(@D) -o $@ $<
-+
-+$(PYLIB): CFLAGS += $(shell $(PYTHON)-config --includes)
-+$(PYLIB): CFLAGS += -fPIC
-+$(PYLIB): CFLAGS += -Wno-missing-prototypes
-+$(PYLIB): LDFLAGS += $(SHLIB_LDFLAGS)
-+$(PYLIB): LDLIBS := $(shell $(PYTHON)-config --libs)
-+$(PYLIB): LDLIBS += $(LDLIBS_libxenstat)
- $(PYLIB): $(PYSRC)
--	$(CC) $(CFLAGS) $(LDFLAGS) $(PYTHON_FLAGS) $(SHLIB_LDFLAGS) -lxenstat -o $@ $< $(APPEND_LDFLAGS)
-+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
+ CFLAGS   += -Werror
+ CFLAGS   += -Wno-unused
  
-+.PHONY: python-bindings
- python-bindings: $(PYLIB) $(PYMOD)
+-OBJS     = $(SRCS:.c=.o)
+-IBINS    = xenpaging
++TARGETS := xenpaging
  
--pythonlibdir=$(prefix)/lib/python$(PYTHON_VERSION)/site-packages
-+pythonlibdir = $(shell $(PYTHON) -c \
-+	       'import distutils.sysconfig as cfg; \
-+	        print(cfg.get_python_lib(False, False, prefix="$(prefix)"))')
-+
-+.PHONY: install-python-bindings
- install-python-bindings: $(PYLIB) $(PYMOD)
- 	$(INSTALL_PROG) $(PYLIB) $(DESTDIR)$(pythonlibdir)/_xenstat.so
- 	$(INSTALL_PROG) $(PYMOD) $(DESTDIR)$(pythonlibdir)/xenstat.py
-diff --git a/tools/libs/stat/bindings/swig/python/.empty b/tools/libs/stat/bindings/swig/python/.empty
-deleted file mode 100644
-index 2a8dd4274d..0000000000
---- a/tools/libs/stat/bindings/swig/python/.empty
-+++ /dev/null
-@@ -1 +0,0 @@
--This directory is empty; this file is included to prevent version control systems from removing the directory.
+-all: $(IBINS)
++all: $(TARGETS)
+ 
+-xenpaging: $(OBJS)
++xenpaging: $(OBJS-y)
+ 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(APPEND_LDFLAGS)
+ 
+ install: all
+ 	$(INSTALL_DIR) -m 0700 $(DESTDIR)$(XEN_PAGING_DIR)
+ 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+-	$(INSTALL_PROG) $(IBINS) $(DESTDIR)$(LIBEXEC_BIN)
++	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC_BIN)
+ 
+ uninstall:
+-	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(IBINS))
++	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(TARGETS))
+ 
+ clean:
+-	rm -f *.o *~ $(DEPS_RM) xen TAGS $(IBINS) $(LIB)
++	rm -f *.o *~ $(DEPS_RM) TAGS $(TARGETS)
+ 
+ distclean: clean
+ 
+@@ -39,6 +39,6 @@ distclean: clean
+ 
+ .PHONY: TAGS
+ TAGS:
+-	etags -t $(SRCS) *.h
++	etags -t *.c *.h
+ 
+ -include $(DEPS_INCLUDE)
 -- 
 Anthony PERARD
 
