@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B34BC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:51:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240125.416537 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50075C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:51:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240128.416569 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMp9-0000CQ-HW; Mon, 06 Dec 2021 22:51:07 +0000
+	id 1muMpE-000163-D9; Mon, 06 Dec 2021 22:51:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240125.416537; Mon, 06 Dec 2021 22:51:07 +0000
+Received: by outflank-mailman (output) from mailman id 240128.416569; Mon, 06 Dec 2021 22:51:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMp9-0000CH-EF; Mon, 06 Dec 2021 22:51:07 +0000
-Received: by outflank-mailman (input) for mailman id 240125;
- Mon, 06 Dec 2021 22:51:05 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muMpE-00015o-8M; Mon, 06 Dec 2021 22:51:12 +0000
+Received: by outflank-mailman (input) for mailman id 240128;
+ Mon, 06 Dec 2021 22:51:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMp7-0008NM-P5
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:05 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fe202d97-56e6-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:51:04 +0100 (CET)
+ id 1muMpC-0000Tb-CR
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:10 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 00fb6e63-56e7-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:51:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fe202d97-56e6-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210747.650487479@linutronix.de>
+X-Inumbo-ID: 00fb6e63-56e7-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210747.818635078@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638831064;
+	s=2020; t=1638831069;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=oGMiasuEUP4gSPR4Np59QOd3p0f+7TdfKQ+z0X714rk=;
-	b=AeE2TL7t3Fs/zk2b8u7XU/RPKp0PKDcHb6o1LQsk6FQYiqMSSE2yPSahkMyfBPRnVqIfZl
-	vlXmcYajjDHevBFb9P6jtevmccnnf014R8N+Br8323yG4RME1FG5B8OXNPkb1U/20+QWBi
-	MaD/0yfxInZIGS33CdbvaP/FEd/zDBH8mYlQUkoJwV4LIIMmboj0jXyeqlIhlhdYqHzgyA
-	vpd1JHqPyHhHyzNfAd6nPsuKqh1eAuoQZ1hbeuEGs65xlV0b8bnpNP9n2aJJZq+cxLDR08
-	VkIDMxRTkV7+hys3okCFBDhxPdPsZuwT9bJIHx7LO8tRhX4inH48nx/hSou73A==
+	 references:references; bh=UjZZfvKoc2kPhNBVngaTWsrbW8D3zdRcer4hfxKTjzc=;
+	b=rS/EO8twB21iAAUVFAIpH4nGQPEdNtwYlw6G9MjkYhHuxtKNmbK5ZMJX9TRttcLwrXj7z1
+	gFEEBwAvXwGUVxq990vVhV7201ZUV1+2BC2R072OqkPznC2WyQVV0xgDlo38VOw7MfpLKm
+	Oz2XNssURig/w/DV52O8Lcsd7JbIGQQss/zKlbMePJ3ICfY2gjYXlaeRrh2dTOvZL/UqSQ
+	KZ4RDgRcQDGoIuJ8VQpufBpK+eeaPdHAUgmyMkmHOuZU/yDj1/rl9QvTrw+vTipYPCZp3J
+	QmAkei2UAmR7iJSCHTcjv3zfu0x2l2brukh3G3nUpOrYg+0ErvUAJEIdjErJYA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638831064;
+	s=2020e; t=1638831069;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=oGMiasuEUP4gSPR4Np59QOd3p0f+7TdfKQ+z0X714rk=;
-	b=iSZa0c73v4SUkG5gpASXm733/ynX/JyyTEfp92Iferxo/T2tJ4od/37IXabjVXcVUp6/gC
-	+/2dhH8Ss0W/NBAA==
+	 references:references; bh=UjZZfvKoc2kPhNBVngaTWsrbW8D3zdRcer4hfxKTjzc=;
+	b=wArRHQ+4In2wjoh0ByMPAoexjt0dXwgKpf3J9EL8KthNeOwtDUqYFIdIZPG+AfcP91w7v6
+	kNNdIG6InADKKFBQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -81,101 +80,195 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Dave Jiang <dave.jiang@intel.com>,
  Allen Hubbe <allenbh@gmail.com>,
  linux-ntb@googlegroups.com
-Subject:
- [patch V2 01/31] genirq/msi: Move descriptor list to struct msi_device_data
+Subject: [patch V2 04/31] genirq/msi: Provide a set of advanced MSI accessors
+ and iterators
 References: <20211206210600.123171746@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:51:04 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:51:08 +0100 (CET)
 
-It's only required when MSI is in use.
+In preparation for dynamic handling of MSI-X interrupts provide a new set
+of MSI descriptor accessor functions and iterators. They are benefitial per
+se as they allow to cleanup quite some code in various MSI domain
+implementations.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 ---
- drivers/base/core.c    |    3 ---
- include/linux/device.h |    4 ----
- include/linux/msi.h    |    4 +++-
- kernel/irq/msi.c       |    5 ++++-
- 4 files changed, 7 insertions(+), 9 deletions(-)
+ include/linux/msi.h |   33 +++++++++++++++++
+ kernel/irq/msi.c    |   96 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 129 insertions(+)
 
---- a/drivers/base/core.c
-+++ b/drivers/base/core.c
-@@ -2874,9 +2874,6 @@ void device_initialize(struct device *de
- 	INIT_LIST_HEAD(&dev->devres_head);
- 	device_pm_init(dev);
- 	set_dev_node(dev, NUMA_NO_NODE);
--#ifdef CONFIG_GENERIC_MSI_IRQ
--	INIT_LIST_HEAD(&dev->msi_list);
--#endif
- 	INIT_LIST_HEAD(&dev->links.consumers);
- 	INIT_LIST_HEAD(&dev->links.suppliers);
- 	INIT_LIST_HEAD(&dev->links.defer_sync);
---- a/include/linux/device.h
-+++ b/include/linux/device.h
-@@ -423,7 +423,6 @@ struct dev_msi_info {
-  * @pins:	For device pin management.
-  *		See Documentation/driver-api/pin-control.rst for details.
-  * @msi:	MSI related data
-- * @msi_list:	Hosts MSI descriptors
-  * @numa_node:	NUMA node this device is close to.
-  * @dma_ops:    DMA mapping operations for this device.
-  * @dma_mask:	Dma mask (if dma'ble device).
-@@ -519,9 +518,6 @@ struct device {
- 	struct dev_pin_info	*pins;
- #endif
- 	struct dev_msi_info	msi;
--#ifdef CONFIG_GENERIC_MSI_IRQ
--	struct list_head	msi_list;
--#endif
- #ifdef CONFIG_DMA_OPS
- 	const struct dma_map_ops *dma_ops;
- #endif
 --- a/include/linux/msi.h
 +++ b/include/linux/msi.h
-@@ -145,11 +145,13 @@ struct msi_desc {
+@@ -141,6 +141,18 @@ struct msi_desc {
+ 	struct pci_msi_desc		pci;
+ };
+ 
++/*
++ * Filter values for the MSI descriptor iterators and accessor functions.
++ */
++enum msi_desc_filter {
++	/* All descriptors */
++	MSI_DESC_ALL,
++	/* Descriptors which have no interrupt associated */
++	MSI_DESC_NOTASSOCIATED,
++	/* Descriptors which have an interrupt associated */
++	MSI_DESC_ASSOCIATED,
++};
++
+ /**
+  * msi_device_data - MSI per device data
   * @properties:		MSI properties which are interesting to drivers
-  * @attrs:		Pointer to the sysfs attribute group
+@@ -148,6 +160,7 @@ struct msi_desc {
   * @platform_data:	Platform-MSI specific data
-+ * @list:		List of MSI descriptors associated to the device
+  * @list:		List of MSI descriptors associated to the device
+  * @mutex:		Mutex protecting the MSI list
++ * @__next:		Cached pointer to the next entry for iterators
   */
  struct msi_device_data {
  	unsigned long			properties;
- 	const struct attribute_group    **attrs;
+@@ -155,6 +168,7 @@ struct msi_device_data {
  	struct platform_msi_priv_data	*platform_data;
-+	struct list_head		list;
+ 	struct list_head		list;
+ 	struct mutex			mutex;
++	struct msi_desc			*__next;
  };
  
  int msi_setup_device_data(struct device *dev);
-@@ -174,7 +176,7 @@ unsigned int msi_get_virq(struct device
+@@ -177,6 +191,25 @@ unsigned int msi_get_virq(struct device
+ void msi_lock_descs(struct device *dev);
+ void msi_unlock_descs(struct device *dev);
  
++struct msi_desc *msi_first_desc(struct device *dev, enum msi_desc_filter filter);
++struct msi_desc *msi_next_desc(struct device *dev, enum msi_desc_filter filter);
++
++/**
++ * msi_for_each_desc - Iterate the MSI descriptors
++ *
++ * @desc:	struct msi_desc pointer used as iterator
++ * @dev:	struct device pointer - device to iterate
++ * @filter:	Filter for descriptor selection
++ *
++ * Notes:
++ *  - The loop must be protected with a msi_lock_descs()/msi_unlock_descs()
++ *    pair.
++ *  - It is safe to remove a retrieved MSI descriptor in the loop.
++ */
++#define msi_for_each_desc(desc, dev, filter)			\
++	for ((desc) = msi_first_desc((dev), (filter)); (desc);	\
++	     (desc) = msi_next_desc((dev), (filter)))
++
  /* Helpers to hide struct msi_desc implementation details */
  #define msi_desc_to_dev(desc)		((desc)->dev)
--#define dev_to_msi_list(dev)		(&(dev)->msi_list)
-+#define dev_to_msi_list(dev)		(&(dev)->msi.data->list)
- #define first_msi_entry(dev)		\
- 	list_first_entry(dev_to_msi_list((dev)), struct msi_desc, list)
- #define for_each_msi_entry(desc, dev)	\
+ #define dev_to_msi_list(dev)		(&(dev)->msi.data->list)
 --- a/kernel/irq/msi.c
 +++ b/kernel/irq/msi.c
-@@ -99,7 +99,9 @@ EXPORT_SYMBOL_GPL(get_cached_msi_msg);
- 
- static void msi_device_data_release(struct device *dev, void *res)
+@@ -142,10 +142,106 @@ void msi_unlock_descs(struct device *dev
  {
--	WARN_ON_ONCE(!list_empty(&dev->msi_list));
-+	struct msi_device_data *md = res;
-+
-+	WARN_ON_ONCE(!list_empty(&md->list));
- 	dev->msi.data = NULL;
+ 	if (WARN_ON_ONCE(!dev->msi.data))
+ 		return;
++	/* Clear the next pointer which was cached by the iterator */
++	dev->msi.data->__next = NULL;
+ 	mutex_unlock(&dev->msi.data->mutex);
  }
+ EXPORT_SYMBOL_GPL(msi_unlock_descs);
  
-@@ -124,6 +126,7 @@ int msi_setup_device_data(struct device
- 	if (!md)
- 		return -ENOMEM;
- 
-+	INIT_LIST_HEAD(&md->list);
- 	dev->msi.data = md;
- 	devres_add(dev, md);
- 	return 0;
++static bool msi_desc_match(struct msi_desc *desc, enum msi_desc_filter filter)
++{
++	switch (filter) {
++	case MSI_DESC_ALL:
++		return true;
++	case MSI_DESC_NOTASSOCIATED:
++		return !desc->irq;
++	case MSI_DESC_ASSOCIATED:
++		return !!desc->irq;
++	}
++	WARN_ON_ONCE(1);
++	return false;
++}
++
++static struct msi_desc *msi_find_first_desc(struct device *dev, enum msi_desc_filter filter)
++{
++	struct msi_desc *desc;
++
++	list_for_each_entry(desc, dev_to_msi_list(dev), list) {
++		if (msi_desc_match(desc, filter))
++			return desc;
++	}
++	return NULL;
++}
++
++/**
++ * msi_first_desc - Get the first MSI descriptor of a device
++ * @dev:	Device to operate on
++ * @filter:	Descriptor state filter
++ *
++ * Must be called with the MSI descriptor mutex held, i.e. msi_lock_descs()
++ * must be invoked before the call.
++ *
++ * Return: Pointer to the first MSI descriptor matching the search
++ *	   criteria, NULL if none found.
++ */
++struct msi_desc *msi_first_desc(struct device *dev, enum msi_desc_filter filter)
++{
++	struct msi_desc *desc;
++
++	if (WARN_ON_ONCE(!dev->msi.data))
++		return NULL;
++
++	lockdep_assert_held(&dev->msi.data->mutex);
++
++	desc = msi_find_first_desc(dev, filter);
++	dev->msi.data->__next = desc ? list_next_entry(desc, list) : NULL;
++	return desc;
++}
++EXPORT_SYMBOL_GPL(msi_first_desc);
++
++static struct msi_desc *__msi_next_desc(struct device *dev, enum msi_desc_filter filter,
++					struct msi_desc *from)
++{
++	struct msi_desc *desc = from;
++
++	list_for_each_entry_from(desc, dev_to_msi_list(dev), list) {
++		if (msi_desc_match(desc, filter))
++			return desc;
++	}
++	return NULL;
++}
++
++/**
++ * msi_next_desc - Get the next MSI descriptor of a device
++ * @dev:	Device to operate on
++ *
++ * The first invocation of msi_next_desc() has to be preceeded by a
++ * successful incovation of __msi_first_desc(). Consecutive invocations are
++ * only valid if the previous one was successful. All these operations have
++ * to be done within the same MSI mutex held region.
++ *
++ * Return: Pointer to the next MSI descriptor matching the search
++ *	   criteria, NULL if none found.
++ */
++struct msi_desc *msi_next_desc(struct device *dev, enum msi_desc_filter filter)
++{
++	struct msi_device_data *data = dev->msi.data;
++	struct msi_desc *desc;
++
++	if (WARN_ON_ONCE(!data))
++		return NULL;
++
++	lockdep_assert_held(&data->mutex);
++
++	if (!data->__next)
++		return NULL;
++
++	desc = __msi_next_desc(dev, filter, data->__next);
++	dev->msi.data->__next = desc ? list_next_entry(desc, list) : NULL;
++	return desc;
++}
++EXPORT_SYMBOL_GPL(msi_next_desc);
++
+ /**
+  * msi_get_virq - Return Linux interrupt number of a MSI interrupt
+  * @dev:	Device to operate on
 
 
