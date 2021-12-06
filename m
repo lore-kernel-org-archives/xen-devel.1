@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E00C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240066.416382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CE62C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240068.416393 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmJ-0005IV-2Q; Mon, 06 Dec 2021 22:48:11 +0000
+	id 1muMmP-0006Nz-CT; Mon, 06 Dec 2021 22:48:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240066.416382; Mon, 06 Dec 2021 22:48:10 +0000
+Received: by outflank-mailman (output) from mailman id 240068.416393; Mon, 06 Dec 2021 22:48:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmI-0005Gr-Jj; Mon, 06 Dec 2021 22:48:10 +0000
-Received: by outflank-mailman (input) for mailman id 240066;
- Mon, 06 Dec 2021 22:48:08 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muMmP-0006NF-88; Mon, 06 Dec 2021 22:48:17 +0000
+Received: by outflank-mailman (input) for mailman id 240068;
+ Mon, 06 Dec 2021 22:48:16 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdS-0004dp-E9
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:02 +0000
+ id 1muMe3-0004ul-A0
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:39 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4f268673-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:01 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 65269bd2-56e5-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:39:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4f268673-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210437.821900680@linutronix.de>
+X-Inumbo-ID: 65269bd2-56e5-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210439.074795958@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830341;
+	s=2020; t=1638830378;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=0YY6FKU+qkJtNIjBHFuT3gGg88xsiW4iB6UKl0AmwtI=;
-	b=gtLyx1uI4U5VlfG4MyQBVx6ekZVpiz/hJtSDGpgc8fcJ7gILFMYCCiR3EJjX0IZuhmYVAb
-	BmqVgvOEI/y3Ed/3/UBUV5K5RTOB3ECpcaneiJcP0rxT9MeNN5rIyUEo1Pv3PtSgLgUYNU
-	dnq47rZGpN2i2WVB6wI9J/C4sxH5DafOFwNhkSyVSLCKzFcjVLCFGVYCd9f3Fs7jeRn/uZ
-	aVr2TQH5m9zO7I0AdAJWxXmpqPbrRxHd0TfUKtx3xuAHbr+qFO44ASkG7T7Sr3YEDi7Tfx
-	kuTvLv6LTfhAjG2IhnSIRqieTkKEzepT2+1+TsS9Tt+jmrn09EVsc/uIx7spEA==
+	 references:references; bh=cOZ0U3ouey82JJdJiPY/OdjPVZlxKAZBH84jVxEoqTU=;
+	b=wz3TzWYBvl04aCerKYeWR58lfzMKGU0iQIuBeqOL+QMp3fzox5TmpoLeGGdAyjIdRF9we0
+	u9yR0O7Qw/bXjizcycQ1gt+G/WeBK/oTI1LUwf2kX7mBg7E4BLQU+LhtJn98G1rHyhAeXN
+	uZibzflizAgUufHizJH6rsQmehdTaX7twbvYr5V+KethG1Scbt8X2tNbTw+IA0tYplWXos
+	ZwOGv2nZnU5zW+yHNbttX2IEcKFWRwLT0XfzLzZMFn7NfGrUzA3FstQug2ylwpcRUwc/5i
+	kvFiRVvXUUkrTAhTuq9cCrdEEKtF1I+UAps11N3QhGaOgS9dJJn2kcoxCDkHWQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830341;
+	s=2020e; t=1638830378;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=0YY6FKU+qkJtNIjBHFuT3gGg88xsiW4iB6UKl0AmwtI=;
-	b=PDX2NcH6oMutIhm4blppHnJIu3p645PCE5S/fYPtzhtyjwQnto1muPhBbSVhrwl/rgluuU
-	I6amPjh+RiNE+XDw==
+	 references:references; bh=cOZ0U3ouey82JJdJiPY/OdjPVZlxKAZBH84jVxEoqTU=;
+	b=hWRF+jAuLUmdTtCJbsFelzhT8GqoJCFIgM9B0HzB2yZ+yr1G/1kR55tWj9RhnBzNSOA67w
+	E7/UVXYkvpVaIZCQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -84,66 +84,79 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 03/36] PCI/MSI: Allocate MSI device data on first use
+Subject: [patch V2 26/36] powerpc/pseries/msi: Let core code check for
+ contiguous entries
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:00 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:37 +0100 (CET)
 
-Allocate MSI device data on first use, i.e. when a PCI driver invokes one
-of the PCI/MSI enablement functions.
+Set the domain info flag and remove the check.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
- drivers/pci/msi/msi.c |   20 +++++++++++++++-----
- 1 file changed, 15 insertions(+), 5 deletions(-)
+V2: Remove it completely - Cedric
+---
+ arch/powerpc/platforms/pseries/msi.c |   33 ++++++++-------------------------
+ 1 file changed, 8 insertions(+), 25 deletions(-)
 
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -889,10 +889,12 @@ static int __pci_enable_msi_range(struct
- /* deprecated, don't use */
- int pci_enable_msi(struct pci_dev *dev)
- {
--	int rc = __pci_enable_msi_range(dev, 1, 1, NULL);
--	if (rc < 0)
--		return rc;
+--- a/arch/powerpc/platforms/pseries/msi.c
++++ b/arch/powerpc/platforms/pseries/msi.c
+@@ -321,27 +321,6 @@ static int msi_quota_for_device(struct p
+ 	return request;
+ }
+ 
+-static int check_msix_entries(struct pci_dev *pdev)
+-{
+-	struct msi_desc *entry;
+-	int expected;
+-
+-	/* There's no way for us to express to firmware that we want
+-	 * a discontiguous, or non-zero based, range of MSI-X entries.
+-	 * So we must reject such requests. */
+-
+-	expected = 0;
+-	for_each_pci_msi_entry(entry, pdev) {
+-		if (entry->msi_index != expected) {
+-			pr_debug("rtas_msi: bad MSI-X entries.\n");
+-			return -EINVAL;
+-		}
+-		expected++;
+-	}
+-
 -	return 0;
-+	int rc = msi_setup_device_data(&dev->dev);
-+
-+	if (!rc)
-+		rc = __pci_enable_msi_range(dev, 1, 1, NULL);
-+
-+	return rc < 0 ? rc : 0;
- }
- EXPORT_SYMBOL(pci_enable_msi);
- 
-@@ -947,7 +949,11 @@ static int __pci_enable_msix_range(struc
- int pci_enable_msix_range(struct pci_dev *dev, struct msix_entry *entries,
- 		int minvec, int maxvec)
+-}
+-
+ static void rtas_hack_32bit_msi_gen2(struct pci_dev *pdev)
  {
--	return __pci_enable_msix_range(dev, entries, minvec, maxvec, NULL, 0);
-+	int ret = msi_setup_device_data(&dev->dev);
-+
-+	if (!ret)
-+		ret = __pci_enable_msix_range(dev, entries, minvec, maxvec, NULL, 0);
-+	return ret;
- }
- EXPORT_SYMBOL(pci_enable_msix_range);
+ 	u32 addr_hi, addr_lo;
+@@ -380,9 +359,6 @@ static int rtas_prepare_msi_irqs(struct
+ 	if (quota && quota < nvec)
+ 		return quota;
  
-@@ -974,8 +980,12 @@ int pci_alloc_irq_vectors_affinity(struc
- 				   struct irq_affinity *affd)
- {
- 	struct irq_affinity msi_default_affd = {0};
-+	int ret = msi_setup_device_data(&dev->dev);
- 	int nvecs = -ENOSPC;
+-	if (type == PCI_CAP_ID_MSIX && check_msix_entries(pdev))
+-		return -EINVAL;
+-
+ 	/*
+ 	 * Firmware currently refuse any non power of two allocation
+ 	 * so we round up if the quota will allow it.
+@@ -530,9 +506,16 @@ static struct irq_chip pseries_pci_msi_i
+ 	.irq_write_msi_msg	= pseries_msi_write_msg,
+ };
  
-+	if (ret)
-+		return ret;
 +
- 	if (flags & PCI_IRQ_AFFINITY) {
- 		if (!affd)
- 			affd = &msi_default_affd;
++/*
++ * Set MSI_FLAG_MSIX_CONTIGUOUS as there is no way to express to
++ * firmware to request a discontiguous or non-zero based range of
++ * MSI-X entries. Core code will reject such setup attempts.
++ */
+ static struct msi_domain_info pseries_msi_domain_info = {
+ 	.flags = (MSI_FLAG_USE_DEF_DOM_OPS | MSI_FLAG_USE_DEF_CHIP_OPS |
+-		  MSI_FLAG_MULTI_PCI_MSI  | MSI_FLAG_PCI_MSIX),
++		  MSI_FLAG_MULTI_PCI_MSI  | MSI_FLAG_PCI_MSIX |
++		  MSI_FLAG_MSIX_CONTIGUOUS),
+ 	.ops   = &pseries_pci_msi_domain_ops,
+ 	.chip  = &pseries_pci_msi_irq_chip,
+ };
 
 
