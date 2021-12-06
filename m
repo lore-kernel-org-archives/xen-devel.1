@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D329DC43217
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:07:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239482.415223 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B06FC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:07:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239481.415216 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSn-0001qP-3l; Mon, 06 Dec 2021 17:07:41 +0000
+	id 1muHSm-0001dq-Ho; Mon, 06 Dec 2021 17:07:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239482.415223; Mon, 06 Dec 2021 17:07:40 +0000
+Received: by outflank-mailman (output) from mailman id 239481.415216; Mon, 06 Dec 2021 17:07:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSm-0001lR-HQ; Mon, 06 Dec 2021 17:07:40 +0000
-Received: by outflank-mailman (input) for mailman id 239482;
+	id 1muHSl-0001Zt-T3; Mon, 06 Dec 2021 17:07:39 +0000
+Received: by outflank-mailman (input) for mailman id 239481;
  Mon, 06 Dec 2021 17:07:36 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHPo-0005ta-Kr
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:36 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 95c7e7e0-56b6-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 18:04:35 +0100 (CET)
+ id 1muHOj-0005ta-Vz
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:03:30 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6efd5052-56b6-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 18:03:29 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95c7e7e0-56b6-11ec-a5e1-b9374ead2679
+X-Inumbo-ID: 6efd5052-56b6-11ec-a5e1-b9374ead2679
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810275;
+  d=citrix.com; s=securemail; t=1638810208;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=e1NkHAQPfUnAtHDePdITPlx+ldg10pRV4o24t5c0gJk=;
-  b=O3f6icxWvYVrM0z4Wa29/2DAIPr9tWzzBhN5nxJr/wQTbIL2bCLW/oy4
-   PdH8VLCD3Dzdp8gm0LHUn/iL9GoKwscHYNWAQLByw7CG9Ghx7LtlLv7Kx
-   qGx690gjq6bsk9z2fSOuI5G0NQRE+RNLaZb2/yONvrO+3VzVtywlKOyfl
-   k=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: YdG7wedAVNPucWIF4lx8DrQU/DiJl0Mh2wZ06U+Eud91fHe24OImndvWB4o7ou1i+MQLJiWHpx
- QRrJ661YgHjG2u/Nn349JE77F5HGHXN+AByoZGY8hIrKQs8/M6CQGCdTEcN1Obx+hEEJIaATMF
- hpKEb88BfzPv8VQehCniew98sW2E7uhAonnxPdLbrpmpKSY2E3C6xMZEPGNmat4wPBfSf4hFft
- 8CdlkXXFgTk0VT8xWGLXXHFLc0gb95C6Yp+MOu5T7zao+qIWZkiE+Cj8DVXkIu/7+D8Wimjtbv
- ySny5v8Wflm252tJ6klHBA6Z
+  bh=xZ8A4jgJ4Y38L4d9figc1Ddx9Yxc2qvFPaFW8MGy500=;
+  b=HnkWPBaHObDBKQwgG5LZ6gF08fvqp4yXg/JWzUjs0elW+cWrkaEbTFFM
+   lRnVjHUeBlqPm7ynSX6hTYLRZ2WS8mowd0T2NIrLPqr81bMM5OYR5GO3v
+   T1M6aQZDqOVYNmRUK//BkZ9HqC0aSfq7PEajrbbZNxY3VlKSK9w8szB5l
+   4=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: repNzCQmembTuxtYYe4kLpCJIOHAMIBVWfcZn6aJyjwy5jPOmG9aQICne92kvFmNGgFtXLKp3n
+ J0k6mD2z5fwGo2FZiB5SOJtEy0jwpEpEqbmBJLHgzazVhg73dwAxy9WdFEeHnVv8xAa2iPwp47
+ NFC9lTisWdhTLf5T7wMRr8z93+0fDD8T18a2OaYh6Wg/3hrqV2nav42XO+SgKlmcviVV2yQuCo
+ AdsAwb7LMuUmKbv95RgPzBVDkIdTPXyAH4mKnvinjCIzksaOgCbbQ1PVy0kgUoK8gqUIiRoJtn
+ V9sY3/Bpepaie9d3RCe9Vi98
 X-SBRS: 5.1
-X-MesageID: 59388021
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 61420633
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:OBHA4KKSBFpFt4b6FE+RIJIlxSXFcZb7ZxGr2PjKsXjdYENS1TcPx
- 2EbCzqBa63eNmD3eNl/YIS//U1U65GBnIIxG1RlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Eg7xbZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2Og4lu4
- ttdmaDscjUwBPbSm9kkSUBxRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Gph3ZAeRayHD
- yYfQTxfVhicSQZhBhQeLJ0+wtqi2Sf7LSIN/Tp5ooJoujOOnWSdyoPFL979atGMA8JPkS6wp
- G3c+H/iKgoHL9HZwj2Amlqtme3njS79QJgVFrCz6rhtmlL77nweDlgaWEW2pdG9i1WiQJRPJ
- koM4C0soKMuskuxQbHVVhukoHmCr1gEVsBZCeES5wSEy66S6AGcblXoVRYYNoZg7pVvA2V3i
- BnZxLsFGACDrpWSVSuC3LmEgQ/uAhoMFzQcZhI9V1IstoyLTJ4IsjrDSdNqEaiQh9LzGC3tz
- z3ikBXSl4n/nuZQifzloAmvbyaE48GQE1Vrvlm/sneNt1shPOaYi5qUBU83BBqqBKKQVRG/s
- XcNgKByB8heXMjWxERhrAjgdYxFBspp0hWB2DaD/LF7rlxBHkJPm6gKulmSw28zba45lcfBO
- hO7hO+ozMY70IGWRaF2eZmtLM8h0LLtE9/oPtiNMIEePcIgKVXdon4+DaJ144wLuBJ2+U3YE
- c3EGftA8F5AUfg3pNZIb7l1PUAXKtAWmjqIGMGTI+WP2ruCfn+FIYrpw3PVBt3VGJis+V2Pm
- /4GbpPi40wGDIXWP3mGmaZOfAtiBSVqWvjLRzl/K7frzvxOQzp6VZc8ANoJJuRYokiivruSo
- yzmBBYHkAGXaL+uAVziV02PoYjHBf5XxU/X9wRwVbpx83R8M4up8okFcJ47Iesu+OB5lKYmR
- PgZYcSQRP9IT22fqTgaaJD8qq1kdQiq2l3Sb3b0PmBncs4yXRHN9//lYhDrqHsEAB2ouJZsu
- LanzA7aH8YOHlwwEMbMZfuz5FqtpnxByvlqVk7FL4ALKkXh+YRnMQLrifozL51eIBnP3GLCh
- Q2XHQ0Zta/GpIpsqIvFgqWNroGIFepiHxUFQzmHvOjubSSDpzit245NVuqMbAvxbmKs9fXwf
- /hRwtH9LOYDwARAvb1jHus51qk5/dbu+eNXl1w2AHXRYl23Ibp8OX3aj9JXv6hAy7IF6wu7X
- kWDpotTNbmTYZ63FVcQIEwub/iZ1OFSkT7XtKxnLEL/7S5x3byGTUQNYEXc1H0DdON4YNE/3
- OMsmM8K8Aju2BMlP+GPgj1Q62nRfGcLVL8qt81CDYLm4ubxJoquvXAI5vfK3ayy
-IronPort-HdrOrdr: A9a23:6IJ9mKMWWMMOQMBcTsejsMiBIKoaSvp037Eqv3ofdfUzSL3+qy
- nOpoVj6faaslcssR0b9OxofZPwI080lqQFhbX5X43DYOCOggLBR+tfBMnZsljd8kXFh4hgPM
- xbHZSWZuedMbEDt7eY3DWF
+IronPort-Data: A9a23:OZlPaa6fPS2ASOrKJYN37wxRtN7AchMFZxGqfqrLsTDasY5as4F+v
+ mAWW2+DPqmNa2LxeYglati3oBwF68DWnNJqHVZrpCFhHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdj2tAw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zl
+ NFVhbq8WwITLqT0xOAtAkdADAUvBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gQRKqEP
+ 5RCMlKDajzwbgEIP21ULqkOs7qi3GvAI2FIonmK8P9fD2/7k1UqjemF3MDuUt2VR+1Fk0CAv
+ GXE8m/lRBYAO7S31j6t4n+qwOjVkkvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
+ 2Qd/DYuqq4jslSmVNDnUzW3pXeFulgXXN84LgEhwFjTkOyOuV/fXzVaCG4aADA7iCMobWAuz
+ m+vk8HsPyxmiOGReSPD7qiw/ArnbED5MlQ+TSMDSAIE5fzqr4cykg/DQ75fLUKlsjHmMWqum
+ m7X9UDSk51W1JdWjPvjoTgrlhr1/sCRJjPZ8Dk7SY5MAulRQIe+L7Kl5lHAhRqrBNbIFwLR1
+ JTodiX30QzvMX1vvHHUKAnuNOvwjxpgDNE6qQQ1d3XG327yk0NPhagKvFlDyL5Ba67ogwPBb
+ k7Joh9275ROJnasZqIfS9vvUJR1l/m9T467CaC8gj9yjn5ZLlXvEMZGPxH44owQuBJ0zfFX1
+ WmzL65A8kr2+Yw4lWHrFo/xIJcgxzwkxHO7eHwI50/P7FZqX1bMEe1tGALXNogRtfrYyC2Io
+ 4c3H5bbkH13DbyhChQ7BKZOdDjm21BgXsuowyGWH8beSjdb9JYJV6WMnOh/ItM9xMy4VI7gp
+ xmAZ6OR83Kn7VWvFOlAQioLhGrHUcktoHQlEzYrOFr0iXEvbZz2tPUUdoctfKlh/+tmlKYmQ
+ /4AcsSGI/JOVjWYpGhNMcij9NRvJEaxmAaDHyu5ezxjLZRucBPEp43/dQz1+ShQUifu7Zkio
+ 6et3x/wSIYYQ1gwF97fbf+ilgvjvXUUlO9ocVHPJ91fJBfl/IRwcnSjhf4rOcAcbx7Ew2LCh
+ QqRBB4Zo8jLopM0r4aV1fzV8d/xHrInTERAHmTd4bKnDgXg/zKukd1aTeKFXTHBT2eoqq+sU
+ vpYkqPnO/odkVcU74clS+R3zbgz7sfErqNBylg2B23CalmmB+8yInSC2sUT5KRByqUA5FmzU
+ 0OLvNJbJa+IKIXuF1tIfFgpaeGK1Pc1nDjO7KtqfBWmtXEvpLfXA19POxSsiTBGKOonOYwo9
+ u4tpcoK5lHtkREtKNuH0nhZ+mnkwqbsiEn7WkX22LPWtzc=
+IronPort-HdrOrdr: A9a23:WoN1567+X5EqBYCxqQPXwMLXdLJyesId70hD6qhwISY7TiX+rb
+ HKoB17726StN9/YhAdcLy7VZVoIkmsl6Kdg7NwAV7KZmCP0wGVxelZnO/fKlbbdREWmNQw6U
+ 4ZSdkcNOHN
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59388021"
+   d="scan'208";a="61420633"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
-	<wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH 49/57] libs/toolcore: don't install xentoolcore_internal.h anymore
-Date: Mon, 6 Dec 2021 17:02:32 +0000
-Message-ID: <20211206170241.13165-50-anthony.perard@citrix.com>
+	<wl@xen.org>
+Subject: [XEN PATCH 17/57] tools/xl: Remove unnecessary -I. from CFLAGS
+Date: Mon, 6 Dec 2021 17:02:00 +0000
+Message-ID: <20211206170241.13165-18-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,31 +102,27 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-With "xentoolcore_internal.h" been in LIBHEADER, it was installed. But
-its dependency "_xentoolcore_list.h" wasn't installed so the header
-couldn't be used anyway.
-
-This patch also mean that the rule "headers.chk" doesn't check it
-anymore as well.
+GCC will search the directory where the source file is for
+quote-includes.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/toolcore/Makefile | 2 +-
+ tools/xl/Makefile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/libs/toolcore/Makefile b/tools/libs/toolcore/Makefile
-index 632048c899..360a10e5da 100644
---- a/tools/libs/toolcore/Makefile
-+++ b/tools/libs/toolcore/Makefile
-@@ -5,7 +5,7 @@ MAJOR	= 1
- MINOR	= 0
- AUTOINCS := $(XEN_INCLUDE)/_xentoolcore_list.h
+diff --git a/tools/xl/Makefile b/tools/xl/Makefile
+index 656b21c7da..2e129f00e1 100644
+--- a/tools/xl/Makefile
++++ b/tools/xl/Makefile
+@@ -7,7 +7,7 @@ include $(XEN_ROOT)/tools/Rules.mk
  
--LIBHEADER := xentoolcore.h xentoolcore_internal.h
-+LIBHEADER := xentoolcore.h
+ CFLAGS += -Werror -Wno-format-zero-length -Wmissing-declarations \
+ 	-Wno-declaration-after-statement -Wformat-nonliteral
+-CFLAGS += -I. -fPIC
++CFLAGS += -fPIC
  
- OBJS-y	+= handlereg.o
- 
+ CFLAGS += $(PTHREAD_CFLAGS)
+ LDFLAGS += $(PTHREAD_LDFLAGS)
 -- 
 Anthony PERARD
 
