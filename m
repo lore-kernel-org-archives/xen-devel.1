@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 293D4C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:09:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239546.415584 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF5AC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:09:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239553.415600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHUR-0004yz-U9; Mon, 06 Dec 2021 17:09:23 +0000
+	id 1muHUa-0006Fo-Oq; Mon, 06 Dec 2021 17:09:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239546.415584; Mon, 06 Dec 2021 17:09:23 +0000
+Received: by outflank-mailman (output) from mailman id 239553.415600; Mon, 06 Dec 2021 17:09:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHUR-0004xI-K8; Mon, 06 Dec 2021 17:09:23 +0000
-Received: by outflank-mailman (input) for mailman id 239546;
- Mon, 06 Dec 2021 17:09:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muHUa-0006FE-Gu; Mon, 06 Dec 2021 17:09:32 +0000
+Received: by outflank-mailman (input) for mailman id 239553;
+ Mon, 06 Dec 2021 17:09:30 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHPI-0005ta-2K
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:04 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 81e9c64e-56b6-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 18:04:02 +0100 (CET)
+ id 1muHP8-0005ti-TQ
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:03:55 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7d14dfc1-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:03:53 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 81e9c64e-56b6-11ec-a5e1-b9374ead2679
+X-Inumbo-ID: 7d14dfc1-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810242;
+  d=citrix.com; s=securemail; t=1638810233;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=lpc84js2a7j5ldQO1A3ja4tbuLNhFUTRDx1cJp21TZ8=;
-  b=eOPBwlimQoYdiwIenV0vriJLN4D6h/+/KeJjTn8CqHBc2gELjOyNRi8R
-   JKIP83lSSNK8IG0bmzCqKmcQ96+Romg8x+JerCfvDi+jstMCPAu7VpeOt
-   oMcKMt0fY2dqLeZ2EiHez3cLvI15Hjk3oXqWZdnQF17U2gCLVKd3V6ebH
-   k=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: j0KG2gvRPE/D7iuQvUkz21OplqOlk31EUGpuyIOfhrP17do5sM7CQ/I8VUgf8lL8oRL/Xw1Nl2
- FwopbUsdB6ioUrMph607yshOEgEiMRkNNvbvF+gcH1Q7Jgqb2CMBuqgHEX75V9BdC2RYEDnUTD
- KZ55tUQ+QxjG9J6Sky3VCBp4kxzF6yBQ5H24KvpubIWuWkv8ZZfh6x8npSb6b8Ob55fREwXPDS
- GazovbgsOKuhilHVXC4O9uz5UY1JR8gK6zqy+Tb03ekiz9J6qG8vonl/da9La4UXM8ijNgWJ8j
- kM0TG6xeOo1RXX5kWAuZb5J5
+  bh=fz7iB4/hMl48cBu22uue0tUZKrebFs2DyNDqcnDK2Iw=;
+  b=ROxuHnGSlcrATfWsflv6fhHKkdpgAY4sXEMp0yo9UfA6xPu762IPO69V
+   wE2nas5k2pr2q5tFe7gyHIb6xQkeuKTm8XQ96CW/bz5gc4BqDM4/DbHiK
+   dbNHm6U8Yo4xjfmYUw5UQhOyAXZbEQnuwUBL/esgHGpu81zvwzaxV12Y9
+   g=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: rirpVZty3j+bOOjV58EewuXvHGh72oMfFIzE1grCdfzyyFYMI0I0jfwqx1uVIrPgNyZsu4/GBn
+ bDPg8yO86RRGlotZjf08VliKBcOa8+0ykg+tp0tPpW5mvcZ2Udcgm4lzilnDDs9HKtelc9dkvT
+ +9qg5Rfg3/FrbE3IUd5rNnqx+bELznVHN/LEiIBRslWLovavcfRAIrTXYd/FfKMLqcpP3zPwez
+ Yzjilyz6uyCODfBOSniUCc5In7jNYbDPIEY5Mmr3ijRckKuDS3l1//xTG77Ji9vk0C4MGyx4Fa
+ Oj9cfJTMT1h7HwhIgB8pLFjn
 X-SBRS: 5.1
-X-MesageID: 59370662
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 59766481
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:eLD++6DMLgMZFRVW/8/kw5YqxClBgxIJ4kV8jS/XYbTApGwlgmBVy
- GdJUGDSOaqLZmSne4onb4u+oUIOsMeHzt9qQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX570Uw7wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/0BmquPN7k
- vR0qbu7RSdwAIeUp8EtekwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTQ+9whsMlPY/zMZkWoH1IxjDFF/c2B5vERs0m4PcFjWxv3p4QR54yY
- eIEajZpMkjnTCF3AQ83A455gsuugljWJmgwRFW9+vNsvjm7IBZK+LnyMvLFd9qSX8JXk02E4
- GXc8AzRHRUyJNGZjz2f/RqEluLJ2C/2Ro8WPLm57eJxxk2ewHQJDx8bXkf9puO24ma3Xc5fL
- EoFvDIjt6Eo+GSkS9D8W1uzp3vsg/IHc4MOSatgsljLk/eKpVbCboQZctJfQIcKl+gVT2YL7
- 0OulN/JXAJF6IKweVvIo994sgiOESQSKGYDYwoNQg0E/8TvrekPs/7fcjpwOPXr14OoQFkc1
- xjP9XFj3OtL0abnwo3ipQif6w9AsKQlWeLcCu//emu+pj10a4e+D2BDwQiKtK0QRGp1o7Tog
- ZTlpyR8xL1XZX1uvHbUKAnoIF1Pz6zfWNE7qQQwd6TNDxz3pxaekXl4uVmS3ntBPMceYiPOa
- 0TOow5X75I7FCL0Nv8oOdPsUZ50kviI+THZuhb8NIAmjn9ZLlDvwc2TTRTIgzCFfLYEz8nTx
- qt3ge7zVC1HWMyLPRK9RvsH0K9D+8zN7Ti7eHwP9Dz+ieD2TCfMEd8taQLSBshkvPLsiFiEq
- L53aprVoyizpcWjO0E7B6ZIdgtURZX6bLirw/FqmhmrflA7RTp/UqCJmtvMueVNxsxoqwsBx
- VnlMmcw9bY1rSavxdyiZi8xZbXxc4x4qH5nbyUgMUzxgyooYJq17bdZfJwyJOF1+OtmxP9yb
- v8EZ8TfXagfFmWZo2wQPcvnsYhvVBW3ngbSbSCrVycyIsx7TAvT9966Iga2rHsSDjC6vNcVq
- qG70l+JWoIKQglvVZ6EaP+mw16rk2IaneZ+AxnBLtVJIR2++4l2MS3hyPQwJphUexnEwzKb0
- SeQAAsZ+raR89NkroGRiPnd/YmzEuZ4Ek5LJEXh7O67ZXvA426u4Y5cS+LULzrTY3z5pfe5b
- uJPwvCibPBexARWs5BxGqpAxL4l44e9vKdTywlpESmZb1mvDb88cHCK0dMW6/9Iz75d/wC3R
- liO6p9RPrDQYJHpF1sYJQwEaOWf1K5LxmmOvKpteEiqtjVq+LenUFlJO0jegSNQG7J5LYc5z
- Lpzo8UR8QG+1kInP9vuYvq4LIhQwqjsi5kai6w=
-IronPort-HdrOrdr: A9a23:0n9VZ676BiLXgfkzbAPXwPDXdLJyesId70hD6qhwISY6TiX+rb
- HJoB17726NtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QCpSWY+eQMbEVt6nHCXGDYrQd/OU=
+IronPort-Data: A9a23:1pHFnKmo4M32J74P2aZkctfo5gwaIURdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIeC23UbPaJYDD9L9gkOYXl9h8Av8fTytYyTVBtriEwRCMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA187IMsdoUg7wbdg2NY22YLR7z6l4
+ rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
+ s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
+ NtmnJKfVA0mBZ3dqMoMVkllOhhlEKITrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
+ 6ZecmpUKEne2aTmm9pXScE17ignBMDtIIMYvGAm1TzDBOwqaZvCX7/L9ZlT2zJYasVmQKeBO
+ ZRFOWMHgBLoZydXBXEpVLwEo+7xgkb2axMb9kzOqv9ii4TU5FMoi+W8WDbPQfSIWMFUk0Cwt
+ m/AuWPjDXkyL8eDwDCI9natgO7nni7hXo8WUrqi+ZZCn1m71mEVThoMWjOTo/O0l0q/UNJ3M
+ FEP92wlqq1a3FymSJzxUgO1pFaAvwUAQJxAHusi8gaPx6HIpQGDCQAsRzhdaNsgpYkuSCYjz
+ FOhkNbgBDgpu7qQIVqc6bW8vT60ITISL2IJeWkDVwRt3jX4iNht1FSVFI8lSfPryI2ucd3t/
+ 9yUhCYVrrs8kMQE7JWqzX7WhmKRj6HSYwFgs207QVmZxg9+YYekYamh5l7a8etMIe6lc7WRg
+ JQXs5PAtb5TVPlhgATIGbxQR+/xu55pJRWF2QY3d6TN4QhB7JJKkWp4xDhlbHlkPc8fEdMCS
+ B+C4FgBjHO/0ZbDUEOWX25TI5lzpUQDPY68PhwxUjaoSsIrHONg1HsxDXN8J0i3zCARfVgXY
+ P93i/qEA3cAErhAxzGrXeob2rJD7nlgnjOMH8GmlU75jur2iJuppVEtagHmggcRtvzsneko2
+ 4wHa5viJ+t3DoUSnRU7AaZMdAtXfBDX9Lj9qtBNd/7rH+aVMDpJNhMl+pt4I9YNt/0Mzo/gp
+ yjhMmcFmAuXrSCWcm2iNyE8AI4DqL4i9BrXywR3Zg32s5XiCK7yhJoim2wfIeN6qbc9lKEsF
+ JHouayoW5xyd9gOwBxFBbGVkWCoXE3DadumM3X3bT4hUYRnQgCVqNbochG2rHsFDzattNt4q
+ Lqlj1uJTZ0GTgVkLcDXdPPwkA/h4SlDwLp/DxnSP91eWETw64w2eSb/ueA6fpMXIhLZyzrEi
+ wvPWUUEpfPAqpMe+cXSgfzWtJ+gFuZzRxIIH2TS4busGzPd+26vnd1JXOqSJGiPX2Lo4qSyI
+ +5SyqikYvEAmV9Ltat6Eqpqkv1it4e++ecCw109TnvRblmtBrdxGVW83JFC5v9X27tUmQqqQ
+ UbTqNNUDqqEZZH+G1kLKQt7MunajaMImiPf5OgeKVnh4HMl56KOVEhfMkXeiCFZK7cpYoopz
+ f145ZwT4g27zBErLsyHnmZf8GHVdi4MVKAut5c7Bo73i1V0lgEeMMKEUiKmsouSb9hsM1UxJ
+ m7GjaXPsL1Q207efidhDnPKx+dc2cwDtR0iIIXu/LhVdg4pXsMK4SA=
+IronPort-HdrOrdr: A9a23:tpesOqnjWiLHPUrUxexJ662u7cbpDfIq3DAbv31ZSRFFG/Fxl6
+ iV88jzsiWE7wr5OUtQ4OxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
+ YET0EXMqyXMbEQt6jHCWeDf+rIuOP3k5yVuQ==
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59370662"
+   d="scan'208";a="59766481"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH 33/57] tools/vchan: Collect targets in TARGETS
-Date: Mon, 6 Dec 2021 17:02:16 +0000
-Message-ID: <20211206170241.13165-34-anthony.perard@citrix.com>
+	<anthony.perard@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>, Ian Jackson <iwj@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [XEN PATCH 28/57] tools/fuzz/x86_instruction_emulator: rework makefile
+Date: Mon, 6 Dec 2021 17:02:11 +0000
+Message-ID: <20211206170241.13165-29-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,41 +106,104 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-And use the new TARGETS to clean them. Now "clean" will remove
-"vchan-socket-proxy".
+Rework dependencies of all objects. We don't need to add dependencies
+for headers that $(CC) is capable of generating, we only need to
+include $(DEPS_INCLUDE). Some dependencies are still needed so make
+knows to generate symlinks for them.
 
-$(RM) already have the "-f" flags, so remove the second one.
+We remove the use of "vpath" for cpuid.c. While it works fine for now,
+when we will convert this makefile to subdirmk, vpath will not be
+usable. Also, "-iquote" is now needed to build "cpuid.o".
+
+Replace "-I." by "-iquote .", so it applies to double-quote includes
+only.
+
+Rather than checking if a symlink exist, always regenerate the
+symlink. So if the source tree changed location, the symlink is
+updated.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/vchan/Makefile | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .gitignore                                   |  1 +
+ tools/fuzz/x86_instruction_emulator/Makefile | 32 +++++++++-----------
+ 2 files changed, 15 insertions(+), 18 deletions(-)
 
-diff --git a/tools/vchan/Makefile b/tools/vchan/Makefile
-index a731e0e073..c886c22e12 100644
---- a/tools/vchan/Makefile
-+++ b/tools/vchan/Makefile
-@@ -11,8 +11,10 @@ NODE2_OBJS = node-select.o
- $(NODE_OBJS) $(NODE2_OBJS): CFLAGS += $(CFLAGS_libxenvchan) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
- vchan-socket-proxy.o: CFLAGS += $(CFLAGS_libxenvchan) $(CFLAGS_libxenstore) $(CFLAGS_libxenctrl) $(CFLAGS_libxengnttab) $(CFLAGS_libxenevtchn)
+diff --git a/.gitignore b/.gitignore
+index 4267bb4dee..8fb74a4c94 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -201,6 +201,7 @@ tools/fuzz/libelf/libelf-*.c
+ tools/fuzz/x86_instruction_emulator/asm
+ tools/fuzz/x86_instruction_emulator/afl-harness
+ tools/fuzz/x86_instruction_emulator/afl-harness-cov
++tools/fuzz/x86_instruction_emulator/cpuid.c
+ tools/fuzz/x86_instruction_emulator/wrappers.c
+ tools/fuzz/x86_instruction_emulator/x86_emulate
+ tools/fuzz/x86_instruction_emulator/x86-emulate.[ch]
+diff --git a/tools/fuzz/x86_instruction_emulator/Makefile b/tools/fuzz/x86_instruction_emulator/Makefile
+index 1a6dbf94e1..f11437e6a2 100644
+--- a/tools/fuzz/x86_instruction_emulator/Makefile
++++ b/tools/fuzz/x86_instruction_emulator/Makefile
+@@ -8,33 +8,27 @@ else
+ x86-insn-fuzz-all:
+ endif
  
-+TARGETS := vchan-node1 vchan-node2 vchan-socket-proxy
-+
- .PHONY: all
--all: vchan-node1 vchan-node2 vchan-socket-proxy
-+all: $(TARGETS)
+-# Add libx86 to the build
+-vpath %.c $(XEN_ROOT)/xen/lib/x86
++cpuid.c: %: $(XEN_ROOT)/xen/lib/x86/% FORCE
++	ln -nsf $< $@
  
- vchan-node1: $(NODE_OBJS)
- 	$(CC) $(LDFLAGS) -o $@ $(NODE_OBJS) $(LDLIBS_libxenvchan) $(APPEND_LDFLAGS)
-@@ -30,7 +32,7 @@ install: all
+-x86_emulate:
+-	[ -L $@ ] || ln -sf $(XEN_ROOT)/xen/arch/x86/$@
++x86_emulate: FORCE
++	ln -nsf $(XEN_ROOT)/xen/arch/x86/$@
+ 
+ x86_emulate/%: x86_emulate ;
+ 
+-x86-emulate.c x86-emulate.h wrappers.c: %:
+-	[ -L $* ] || ln -sf $(XEN_ROOT)/tools/tests/x86_emulator/$*
++x86-emulate.c x86-emulate.h wrappers.c: %: $(XEN_ROOT)/tools/tests/x86_emulator/% FORCE
++	ln -nsf $< $@
+ 
+-CFLAGS += $(CFLAGS_xeninclude) -D__XEN_TOOLS__ -I.
++CFLAGS += $(CFLAGS_xeninclude) -D__XEN_TOOLS__ -iquote .
++cpuid.o: CFLAGS += -iquote $(XEN_ROOT)/xen/lib/x86
+ 
+ GCOV_FLAGS := --coverage
+ %-cov.o: %.c
+ 	$(CC) -c $(CFLAGS) $(GCOV_FLAGS) $< -o $@
+ 
+-x86.h := $(addprefix $(XEN_ROOT)/tools/include/xen/asm/,\
+-                     x86-vendors.h x86-defns.h msr-index.h) \
+-         $(addprefix $(XEN_ROOT)/tools/include/xen/lib/x86/, \
+-                     cpuid.h cpuid-autogen.h)
+-x86_emulate.h := x86-emulate.h x86_emulate/x86_emulate.h $(x86.h)
+-
+-# x86-emulate.c will be implicit for both
+-x86-emulate.o x86-emulate-cov.o: x86_emulate/x86_emulate.c $(x86_emulate.h)
+-
+-fuzz-emul.o fuzz-emulate-cov.o cpuid.o wrappers.o: $(x86_emulate.h)
++x86-emulate.h: x86_emulate/x86_emulate.h
++x86-emulate.o x86-emulate-cov.o: x86-emulate.h x86_emulate/x86_emulate.c
++fuzz-emul.o fuzz-emul-cov.o wrappers.o: x86-emulate.h
+ 
+ x86-insn-fuzzer.a: fuzz-emul.o x86-emulate.o cpuid.o
+ 	$(AR) rc $@ $^
+@@ -51,7 +45,7 @@ all: x86-insn-fuzz-all
+ 
+ .PHONY: distclean
+ distclean: clean
+-	rm -f x86_emulate x86-emulate.c x86-emulate.h
++	rm -f x86_emulate x86-emulate.c x86-emulate.h wrappers.c cpuid.c
  
  .PHONY: clean
  clean:
--	$(RM) -f *.o vchan-node1 vchan-node2 $(DEPS_RM)
-+	$(RM) *.o $(TARGETS) $(DEPS_RM)
+@@ -67,3 +61,5 @@ afl: afl-harness
  
- distclean: clean
- 
+ .PHONY: afl-cov
+ afl-cov: afl-harness-cov
++
++-include $(DEPS_INCLUDE)
 -- 
 Anthony PERARD
 
