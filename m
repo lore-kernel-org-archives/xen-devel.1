@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8344C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9DDEC4167B
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 07:24:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.238653.413697 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.238647.413655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mu8Lq-00024f-By; Mon, 06 Dec 2021 07:23:54 +0000
+	id 1mu8Ll-000120-8z; Mon, 06 Dec 2021 07:23:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 238653.413697; Mon, 06 Dec 2021 07:23:54 +0000
+Received: by outflank-mailman (output) from mailman id 238647.413655; Mon, 06 Dec 2021 07:23:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mu8Lp-00022P-PT; Mon, 06 Dec 2021 07:23:53 +0000
-Received: by outflank-mailman (input) for mailman id 238653;
- Mon, 06 Dec 2021 07:23:50 +0000
+	id 1mu8Lk-0000zi-QB; Mon, 06 Dec 2021 07:23:48 +0000
+Received: by outflank-mailman (input) for mailman id 238647;
+ Mon, 06 Dec 2021 07:23:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=9VqD=QX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mu8Lm-0008Mw-GE
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 07:23:50 +0000
+ id 1mu8Lj-0008Mw-Ff
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 07:23:47 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6f396786-5665-11ec-a5e1-b9374ead2679;
+ id 7022dedf-5665-11ec-a5e1-b9374ead2679;
  Mon, 06 Dec 2021 08:23:42 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CA4D61FD59;
- Mon,  6 Dec 2021 07:23:39 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0823F1FE04;
+ Mon,  6 Dec 2021 07:23:41 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9EF421330B;
- Mon,  6 Dec 2021 07:23:39 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D21C21330B;
+ Mon,  6 Dec 2021 07:23:40 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id KKGEJXu6rWHVdAAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 06 Dec 2021 07:23:39 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id YC8CMny6rWHVdAAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 06 Dec 2021 07:23:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,184 +53,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6f396786-5665-11ec-a5e1-b9374ead2679
+X-Inumbo-ID: 7022dedf-5665-11ec-a5e1-b9374ead2679
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1638775419; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1638775421; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ghs7dH81d+PxzOXZve6mJ+XqQ2rbDs2GA2Tqi5wpJxo=;
-	b=OKwKoUrehXPVJyeGD0q7h6PTVg1vpJY4V3WRj8a0M5nmGD2nhxvxM0zF1W8AXCkJDP8y3d
-	oipMt3+qVet8MOZX0Swjma4RTLCZ4YGo8jAHf+Dd6ZZzreBpv8tC4xV8TwFfeh6fVsif42
-	caXHqF6dCnlRbxGY2ZEk+0wFANnkF0I=
+	bh=jJ0RmLtKB8UkcvX+Y3JuijTbu6nHqV/hpfXxOIuN+R4=;
+	b=dNA4rT4w7GOiBlM5Kmz8jsutTtW4O/BdSr4y396zKhGKNlRRf6sRGYOoPEhT9pubzIaxgV
+	vUNVo9O8b28ePqjllYVqkYx5QLJLa+NLpclGZLvUJHx6m1m/s2KjJbR4625rUfKAMVbAHh
+	hh/ji8MQP/L/ZsLI+F2z3eDzE5ZiHW0=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 01/10] mini-os: split e820 map handling into new source file
-Date: Mon,  6 Dec 2021 08:23:28 +0100
-Message-Id: <20211206072337.9517-2-jgross@suse.com>
+Subject: [PATCH 07/10] mini-os: move x86 specific gnttab coding into arch/x86/gnttab.c
+Date: Mon,  6 Dec 2021 08:23:34 +0100
+Message-Id: <20211206072337.9517-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211206072337.9517-1-jgross@suse.com>
 References: <20211206072337.9517-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Introduce e820.c containing all the E820 memory map handling.
+Having grant table code in arch/x86/mm.c seems wrong. Move it to the
+new file arch/x86/gnttab.c, especially as the amount of code is
+expected to grow further.
 
 No functional change.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- Makefile       |   1 +
- arch/arm/mm.c  |   8 ----
- arch/x86/mm.c  |  70 +----------------------------
- e820.c         | 119 +++++++++++++++++++++++++++++++++++++++++++++++++
- include/e820.h |   6 +++
- 5 files changed, 128 insertions(+), 76 deletions(-)
- create mode 100644 e820.c
+ arch/x86/gnttab.c | 78 +++++++++++++++++++++++++++++++++++++++++++++++
+ arch/x86/mm.c     | 47 ----------------------------
+ 2 files changed, 78 insertions(+), 47 deletions(-)
+ create mode 100644 arch/x86/gnttab.c
 
-diff --git a/Makefile b/Makefile
-index 4b76b55..06b60fc 100644
---- a/Makefile
-+++ b/Makefile
-@@ -41,6 +41,7 @@ src-$(CONFIG_TPMFRONT) += tpmfront.c
- src-$(CONFIG_TPM_TIS) += tpm_tis.c
- src-$(CONFIG_TPMBACK) += tpmback.c
- src-y += daytime.c
-+src-y += e820.c
- src-y += events.c
- src-$(CONFIG_FBFRONT) += fbfront.c
- src-y += gntmap.c
-diff --git a/arch/arm/mm.c b/arch/arm/mm.c
-index f806c9f..9068166 100644
---- a/arch/arm/mm.c
-+++ b/arch/arm/mm.c
-@@ -7,14 +7,6 @@
- #include <lib.h>
- 
- uint32_t physical_address_offset;
--struct e820entry e820_map[1] = {
--    {
--        .addr = 0,
--        .size = ULONG_MAX - 1,
--        .type = E820_RAM
--    }
--};
--unsigned e820_entries = 1;
- 
- unsigned long allocate_ondemand(unsigned long n, unsigned long alignment)
- {
-diff --git a/arch/x86/mm.c b/arch/x86/mm.c
-index 8ba14a5..8df93da 100644
---- a/arch/x86/mm.c
-+++ b/arch/x86/mm.c
-@@ -64,15 +64,6 @@ extern char stack[];
- extern void page_walk(unsigned long va);
- 
- #ifdef CONFIG_PARAVIRT
--struct e820entry e820_map[1] = {
--    {
--        .addr = 0,
--        .size = ULONG_MAX - 1,
--        .type = E820_RAM
--    }
--};
--unsigned e820_entries = 1;
--
- void arch_mm_preinit(void *p)
- {
-     start_info_t *si = p;
-@@ -112,25 +103,11 @@ desc_ptr idt_ptr =
-     .base = (unsigned long)&idt,
- };
- 
--struct e820entry e820_map[E820_MAX];
--unsigned e820_entries;
--
--static char *e820_types[E820_TYPES] = {
--    [E820_RAM]      = "RAM",
--    [E820_RESERVED] = "Reserved",
--    [E820_ACPI]     = "ACPI",
--    [E820_NVS]      = "NVS",
--    [E820_UNUSABLE] = "Unusable",
--    [E820_PMEM]     = "PMEM"
--};
--
- void arch_mm_preinit(void *p)
- {
-     long ret;
-     domid_t domid = DOMID_SELF;
--    struct xen_memory_map memmap;
--    int i;
--    unsigned long pfn, max = 0;
-+    unsigned long max;
- 
-     pt_base = page_table_base;
-     first_free_pfn = PFN_UP(to_phys(&_end));
-@@ -142,53 +119,10 @@ void arch_mm_preinit(void *p)
-     }
-     last_free_pfn = ret;
- 
--    memmap.nr_entries = E820_MAX;
--    set_xen_guest_handle(memmap.buffer, e820_map);
--    ret = HYPERVISOR_memory_op(XENMEM_memory_map, &memmap);
--    if ( ret < 0 )
--    {
--        xprintk("could not get memory map\n");
--        do_exit();
--    }
--    e820_entries = memmap.nr_entries;
--
--    for ( i = 0; i < e820_entries; i++ )
--    {
--        if ( e820_map[i].type != E820_RAM )
--            continue;
--        pfn = (e820_map[i].addr + e820_map[i].size) >> PAGE_SHIFT;
--        if ( pfn > max )
--            max = pfn;
--    }
--
-+    max = e820_get_maxpfn();
-     if ( max < last_free_pfn )
-         last_free_pfn = max;
- }
--
--void arch_print_memmap(void)
--{
--    int i;
--    unsigned long from, to;
--    char *type;
--    char buf[12];
--
--    printk("Memory map:\n");
--    for ( i = 0; i < e820_entries; i++ )
--    {
--        if ( e820_map[i].type >= E820_TYPES || !e820_types[e820_map[i].type] )
--        {
--            snprintf(buf, sizeof(buf), "%8x", e820_map[i].type);
--            type = buf;
--        }
--        else
--        {
--            type = e820_types[e820_map[i].type];
--        }
--        from = e820_map[i].addr;
--        to = from + e820_map[i].size - 1;
--        printk("%012lx-%012lx: %s\n", from, to, type);
--    }
--}
- #endif
- 
- /*
-diff --git a/e820.c b/e820.c
+diff --git a/arch/x86/gnttab.c b/arch/x86/gnttab.c
 new file mode 100644
-index 0000000..2165280
+index 0000000..56e59d7
 --- /dev/null
-+++ b/e820.c
-@@ -0,0 +1,119 @@
++++ b/arch/x86/gnttab.c
+@@ -0,0 +1,78 @@
 +/* -*-  Mode:C; c-basic-offset:4; tab-width:4 -*-
 + *
 + * (C) 2021 - Juergen Gross, SUSE Software Solutions Germany GmbH
@@ -254,124 +120,119 @@ index 0000000..2165280
 + * DEALINGS IN THE SOFTWARE.
 + */
 +
-+#include <mini-os/types.h>
-+#include <mini-os/lib.h>
-+#include <mini-os/console.h>
 +#include <mini-os/os.h>
-+#include <mini-os/posix/limits.h>
-+#include <mini-os/e820.h>
-+#include <xen/memory.h>
++#include <mini-os/hypervisor.h>
++#include <mini-os/gnttab.h>
++#include <mini-os/mm.h>
++#include <mini-os/types.h>
 +
-+#ifdef CONFIG_E820_TRIVIAL
-+struct e820entry e820_map[1] = {
-+    {
-+        .addr = 0,
-+        .size = ULONG_MAX - 1,
-+        .type = E820_RAM
-+    }
-+};
-+
-+unsigned e820_entries = 1;
-+
-+static void e820_get_memmap(void)
++grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
 +{
++    struct gnttab_setup_table setup;
++    unsigned long frames[nr_grant_frames];
++
++    setup.dom = DOMID_SELF;
++    setup.nr_frames = nr_grant_frames;
++    set_xen_guest_handle(setup.frame_list, frames);
++
++    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
++    return map_frames(frames, nr_grant_frames);
 +}
 +
-+#else
-+struct e820entry e820_map[E820_MAX];
-+unsigned e820_entries;
-+
-+static char *e820_types[E820_TYPES] = {
-+    [E820_RAM]      = "RAM",
-+    [E820_RESERVED] = "Reserved",
-+    [E820_ACPI]     = "ACPI",
-+    [E820_NVS]      = "NVS",
-+    [E820_UNUSABLE] = "Unusable",
-+    [E820_PMEM]     = "PMEM"
-+};
-+
-+static void e820_get_memmap(void)
++void arch_suspend_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
 +{
-+    long ret;
-+    struct xen_memory_map memmap;
-+
-+    memmap.nr_entries = E820_MAX;
-+    set_xen_guest_handle(memmap.buffer, e820_map);
-+    ret = HYPERVISOR_memory_op(XENMEM_memory_map, &memmap);
-+    if ( ret < 0 )
-+    {
-+        xprintk("could not get memory map\n");
-+        do_exit();
-+    }
-+    e820_entries = memmap.nr_entries;
-+}
-+
-+void arch_print_memmap(void)
-+{
++#ifdef CONFIG_PARAVIRT
 +    int i;
-+    unsigned long from, to;
-+    char *type;
-+    char buf[12];
 +
-+    printk("Memory map:\n");
-+    for ( i = 0; i < e820_entries; i++ )
++    for ( i = 0; i < nr_grant_frames; i++ )
 +    {
-+        if ( e820_map[i].type >= E820_TYPES || !e820_types[e820_map[i].type] )
-+        {
-+            snprintf(buf, sizeof(buf), "%8x", e820_map[i].type);
-+            type = buf;
-+        }
-+        else
-+        {
-+            type = e820_types[e820_map[i].type];
-+        }
-+        from = e820_map[i].addr;
-+        to = from + e820_map[i].size - 1;
-+        printk("%012lx-%012lx: %s\n", from, to, type);
++        HYPERVISOR_update_va_mapping((unsigned long)gnttab_table + PAGE_SIZE * i,
++                __pte(0x0 << PAGE_SHIFT), UVMF_INVLPG);
 +    }
++#endif
++    return;
 +}
++
++void arch_resume_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
++{
++    struct gnttab_setup_table setup;
++    unsigned long frames[nr_grant_frames];
++#ifdef CONFIG_PARAVIRT
++    int i;
 +#endif
 +
-+unsigned long e820_get_maxpfn(void)
-+{
-+    int i;
-+    unsigned long pfn, max = 0;
++    setup.dom = DOMID_SELF;
++    setup.nr_frames = nr_grant_frames;
++    set_xen_guest_handle(setup.frame_list, frames);
 +
-+    e820_get_memmap();
++    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
 +
-+    for ( i = 0; i < e820_entries; i++ )
++#ifdef CONFIG_PARAVIRT
++    for ( i = 0; i < nr_grant_frames; i++ )
 +    {
-+        if ( e820_map[i].type != E820_RAM )
-+            continue;
-+        pfn = (e820_map[i].addr + e820_map[i].size) >> PAGE_SHIFT;
-+        if ( pfn > max )
-+            max = pfn;
++        HYPERVISOR_update_va_mapping((unsigned long)gnttab_table + PAGE_SIZE * i,
++                __pte((frames[i] << PAGE_SHIFT) | L1_PROT), UVMF_INVLPG);
 +    }
-+
-+    return max;
-+}
-diff --git a/include/e820.h b/include/e820.h
-index 920551c..af2129f 100644
---- a/include/e820.h
-+++ b/include/e820.h
-@@ -24,6 +24,10 @@
- #ifndef __E820_HEADER
- #define __E820_HEADER
- 
-+#if defined(__arm__) || defined(__aarch64__) || defined(CONFIG_PARAVIRT)
-+#define CONFIG_E820_TRIVIAL
 +#endif
-+
- /* PC BIOS standard E820 types and structure. */
- #define E820_RAM          1
- #define E820_RESERVED     2
-@@ -45,4 +49,6 @@ struct __packed e820entry {
- extern struct e820entry e820_map[];
- extern unsigned e820_entries;
++}
+diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+index c30d8bc..220c0b4 100644
+--- a/arch/x86/mm.c
++++ b/arch/x86/mm.c
+@@ -837,53 +837,6 @@ void arch_init_mm(unsigned long* start_pfn_p, unsigned long* max_pfn_p)
+ #endif
+ }
  
-+unsigned long e820_get_maxpfn(void);
-+
- #endif /*__E820_HEADER*/
+-grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
+-{
+-    struct gnttab_setup_table setup;
+-    unsigned long frames[nr_grant_frames];
+-
+-    setup.dom = DOMID_SELF;
+-    setup.nr_frames = nr_grant_frames;
+-    set_xen_guest_handle(setup.frame_list, frames);
+-
+-    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
+-    return map_frames(frames, nr_grant_frames);
+-}
+-
+-void arch_suspend_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
+-{
+-#ifdef CONFIG_PARAVIRT
+-    int i;
+-
+-    for (i = 0; i < nr_grant_frames; i++) {
+-        HYPERVISOR_update_va_mapping((unsigned long)(((char *)gnttab_table) + PAGE_SIZE * i),
+-                (pte_t){0x0<<PAGE_SHIFT}, UVMF_INVLPG);
+-    }
+-#endif
+-    return;
+-}
+-
+-void arch_resume_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
+-{
+-    struct gnttab_setup_table setup;
+-    unsigned long frames[nr_grant_frames];
+-#ifdef CONFIG_PARAVIRT
+-    int i;
+-#endif
+-    setup.dom = DOMID_SELF;
+-    setup.nr_frames = nr_grant_frames;
+-    set_xen_guest_handle(setup.frame_list, frames);
+-
+-    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
+-
+-#ifdef CONFIG_PARAVIRT
+-    for (i = 0; i < nr_grant_frames; i++) {
+-        HYPERVISOR_update_va_mapping((unsigned long)(((char *)gnttab_table) + PAGE_SIZE * i),
+-                (pte_t){(frames[i] << PAGE_SHIFT) | L1_PROT}, UVMF_INVLPG);
+-    }
+-#endif
+-}
+-
+ unsigned long alloc_virt_kernel(unsigned n_pages)
+ {
+     unsigned long addr;
 -- 
 2.26.2
 
