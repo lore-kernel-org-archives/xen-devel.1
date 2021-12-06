@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB011C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:49:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240094.416514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4BA0C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:51:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240124.416525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmw-00053z-JS; Mon, 06 Dec 2021 22:48:50 +0000
+	id 1muMp8-0008Ne-8x; Mon, 06 Dec 2021 22:51:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240094.416514; Mon, 06 Dec 2021 22:48:50 +0000
+Received: by outflank-mailman (output) from mailman id 240124.416525; Mon, 06 Dec 2021 22:51:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmw-00053n-Es; Mon, 06 Dec 2021 22:48:50 +0000
-Received: by outflank-mailman (input) for mailman id 240094;
- Mon, 06 Dec 2021 22:48:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muMp8-0008NX-60; Mon, 06 Dec 2021 22:51:06 +0000
+Received: by outflank-mailman (input) for mailman id 240124;
+ Mon, 06 Dec 2021 22:51:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdf-0004ul-Db
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:15 +0000
+ id 1muMp6-0008NM-Vp
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:04 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 56c96027-56e5-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:39:14 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fd976516-56e6-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:51:04 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 56c96027-56e5-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210438.256361987@linutronix.de>
+X-Inumbo-ID: fd976516-56e6-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210600.123171746@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830354;
+	s=2020; t=1638831063;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=8HVYS8zfOFoFasYqyhj4ReqJ6AOUBtsErT7gsuMSP4E=;
-	b=nUS2bp6KPZUGO4190qFZaxxBE5h7oZyCRZ4EdGJrg/SlwMsYkbIVKQQ1P11gWr0HhFDNpU
-	HnkqhrRf9ECCYnDNr+vAbf/2HQV5S66+yuQb2VvbMfZl2Bd5w10mV5TyXakoeuHqnLeecG
-	+7FG4hZbMKYGST9TTrwWoXGDs0Sc6fLixnABW8FDUy0vi61WLgVNPaASOJyVU5vRjgmo4H
-	RuiRfz3cXnDQ4n2/3ssR2nnjOpKQ19EDQ7c8fef96PzaE3356/HFx9Nryn9dfHj/zrec5v
-	fqLEhe8hxmxCj6qn9esYjwvQzQNrKeIbNxU7Nyo9s34Tp4DLcRDgEsSY3NtEiA==
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=zuaVjYRhYaXSnxhOlTO3/+R1NRokr9z15QjTY7nAlqg=;
+	b=g/R4QSH9IT1htMarbLNdxFDavRX6bJv4OUQ/T0gt4OQTqWZXzTnEFGfVNGY6u3WarVEX0M
+	fO4dKL3Nm1idJ1EHNtMX9r3gv7Aa9o3YXnLoyDUhkVhTcL9wyzfCwA4mRP43jrVG1lBrvk
+	ufNL0788SoAA7ns5LdioDLX/09NweJXy7JmQK0sepafvaSdQB0dkUuy9APy8Z+ZZpZRmtZ
+	UyO27tAZTKgZE/UHN5p4OPkUXcwgOWtBGytrfD/kqC5Kq+IksH7RiH5qUuZ9fR60c7jrom
+	Il+EusOQlF4egTWzDwPjnoc5PCnLeWjJc6hprAFpEnNdSv7BoTX/aaA5Ro+wcA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830354;
+	s=2020e; t=1638831063;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=8HVYS8zfOFoFasYqyhj4ReqJ6AOUBtsErT7gsuMSP4E=;
-	b=U4Ngne/RH8HTWfWVsWRrbmtfbEDTspGYTScOjm8Th7IzSHbUcSKQCiJJRlEv7zwqKgGBuQ
-	jpRr3FP2K0fJJSAA==
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=zuaVjYRhYaXSnxhOlTO3/+R1NRokr9z15QjTY7nAlqg=;
+	b=EiJLBZ0I2k31uIESwAuf3JVleODzfA1PUF4FPIFRUFMUdHiPUHwv8yQK8cFPw5MnxUJoi2
+	tEyzCBesXZg681CA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,200 +73,94 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  xen-devel@lists.xenproject.org,
  Juergen Gross <jgross@suse.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Will Deacon <will@kernel.org>,
- Santosh Shilimkar <ssantosh@kernel.org>,
- iommu@lists.linux-foundation.org,
- dmaengine@vger.kernel.org,
- Stuart Yoder <stuyoder@gmail.com>,
- Laurentiu Tudor <laurentiu.tudor@nxp.com>,
- Nishanth Menon <nm@ti.com>,
- Tero Kristo <kristo@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- Vinod Koul <vkoul@kernel.org>,
- Mark Rutland <mark.rutland@arm.com>,
- Robin Murphy <robin.murphy@arm.com>,
- Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 11/36] platform-msi: Rename functions and clarify comments
-References: <20211206210307.625116253@linutronix.de>
+ Niklas Schnelle <schnelle@linux.ibm.com>,
+ linux-s390@vger.kernel.org,
+ Heiko Carstens <hca@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>,
+ Logan Gunthorpe <logang@deltatee.com>,
+ Jon Mason <jdmason@kudzu.us>,
+ Dave Jiang <dave.jiang@intel.com>,
+ Allen Hubbe <allenbh@gmail.com>,
+ linux-ntb@googlegroups.com
+Subject: [patch V2 00/31] genirq/msi, PCI/MSI: Spring cleaning - Part 3
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:13 +0100 (CET)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Date: Mon,  6 Dec 2021 23:51:02 +0100 (CET)
 
-It's hard to distinguish what platform_msi_domain_alloc() and
-platform_msi_domain_alloc_irqs() are about. Make the distinction more
-explicit and add comments which explain the use cases properly.
-
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/base/platform-msi.c     |   36 +++++++++++++++++++++---------------
- drivers/irqchip/irq-mbigen.c    |    4 ++--
- drivers/irqchip/irq-mvebu-icu.c |    6 +++---
- include/linux/msi.h             |    8 ++++----
- 4 files changed, 30 insertions(+), 24 deletions(-)
-
---- a/drivers/base/platform-msi.c
-+++ b/drivers/base/platform-msi.c
-@@ -313,17 +313,18 @@ EXPORT_SYMBOL_GPL(platform_msi_domain_fr
-  *                              a platform-msi domain
-  * @domain:	The platform-msi domain
-  *
-- * Returns the private data provided when calling
-- * platform_msi_create_device_domain.
-+ * Return: The private data provided when calling
-+ * platform_msi_create_device_domain().
-  */
- void *platform_msi_get_host_data(struct irq_domain *domain)
- {
- 	struct platform_msi_priv_data *data = domain->host_data;
-+
- 	return data->host_data;
- }
- 
- /**
-- * __platform_msi_create_device_domain - Create a platform-msi domain
-+ * __platform_msi_create_device_domain - Create a platform-msi device domain
-  *
-  * @dev:		The device generating the MSIs
-  * @nvec:		The number of MSIs that need to be allocated
-@@ -332,7 +333,11 @@ void *platform_msi_get_host_data(struct
-  * @ops:		The hierarchy domain operations to use
-  * @host_data:		Private data associated to this domain
-  *
-- * Returns an irqdomain for @nvec interrupts
-+ * Return: An irqdomain for @nvec interrupts on success, NULL in case of error.
-+ *
-+ * This is for interrupt domains which stack on a platform-msi domain
-+ * created by platform_msi_create_irq_domain(). @dev->msi.domain points to
-+ * that platform-msi domain which is the parent for the new domain.
-  */
- struct irq_domain *
- __platform_msi_create_device_domain(struct device *dev,
-@@ -372,18 +377,19 @@ struct irq_domain *
- }
- 
- /**
-- * platform_msi_domain_free - Free interrupts associated with a platform-msi
-- *                            domain
-+ * platform_msi_device_domain_free - Free interrupts associated with a platform-msi
-+ *				     device domain
-  *
-- * @domain:	The platform-msi domain
-+ * @domain:	The platform-msi device domain
-  * @virq:	The base irq from which to perform the free operation
-  * @nvec:	How many interrupts to free from @virq
-  */
--void platform_msi_domain_free(struct irq_domain *domain, unsigned int virq,
--			      unsigned int nvec)
-+void platform_msi_device_domain_free(struct irq_domain *domain, unsigned int virq,
-+				     unsigned int nvec)
- {
- 	struct platform_msi_priv_data *data = domain->host_data;
- 	struct msi_desc *desc, *tmp;
-+
- 	for_each_msi_entry_safe(desc, tmp, data->dev) {
- 		if (WARN_ON(!desc->irq || desc->nvec_used != 1))
- 			return;
-@@ -397,10 +403,10 @@ void platform_msi_domain_free(struct irq
- }
- 
- /**
-- * platform_msi_domain_alloc - Allocate interrupts associated with
-- *			       a platform-msi domain
-+ * platform_msi_device_domain_alloc - Allocate interrupts associated with
-+ *				      a platform-msi device domain
-  *
-- * @domain:	The platform-msi domain
-+ * @domain:	The platform-msi device domain
-  * @virq:	The base irq from which to perform the allocate operation
-  * @nr_irqs:	How many interrupts to free from @virq
-  *
-@@ -408,8 +414,8 @@ void platform_msi_domain_free(struct irq
-  * with irq_domain_mutex held (which can only be done as part of a
-  * top-level interrupt allocation).
-  */
--int platform_msi_domain_alloc(struct irq_domain *domain, unsigned int virq,
--			      unsigned int nr_irqs)
-+int platform_msi_device_domain_alloc(struct irq_domain *domain, unsigned int virq,
-+				     unsigned int nr_irqs)
- {
- 	struct platform_msi_priv_data *data = domain->host_data;
- 	int err;
-@@ -421,7 +427,7 @@ int platform_msi_domain_alloc(struct irq
- 	err = msi_domain_populate_irqs(domain->parent, data->dev,
- 				       virq, nr_irqs, &data->arg);
- 	if (err)
--		platform_msi_domain_free(domain, virq, nr_irqs);
-+		platform_msi_device_domain_free(domain, virq, nr_irqs);
- 
- 	return err;
- }
---- a/drivers/irqchip/irq-mbigen.c
-+++ b/drivers/irqchip/irq-mbigen.c
-@@ -207,7 +207,7 @@ static int mbigen_irq_domain_alloc(struc
- 	if (err)
- 		return err;
- 
--	err = platform_msi_domain_alloc(domain, virq, nr_irqs);
-+	err = platform_msi_device_domain_alloc(domain, virq, nr_irqs);
- 	if (err)
- 		return err;
- 
-@@ -223,7 +223,7 @@ static int mbigen_irq_domain_alloc(struc
- static void mbigen_irq_domain_free(struct irq_domain *domain, unsigned int virq,
- 				   unsigned int nr_irqs)
- {
--	platform_msi_domain_free(domain, virq, nr_irqs);
-+	platform_msi_device_domain_free(domain, virq, nr_irqs);
- }
- 
- static const struct irq_domain_ops mbigen_domain_ops = {
---- a/drivers/irqchip/irq-mvebu-icu.c
-+++ b/drivers/irqchip/irq-mvebu-icu.c
-@@ -221,7 +221,7 @@ mvebu_icu_irq_domain_alloc(struct irq_do
- 		icu_irqd->icu_group = msi_data->subset_data->icu_group;
- 	icu_irqd->icu = icu;
- 
--	err = platform_msi_domain_alloc(domain, virq, nr_irqs);
-+	err = platform_msi_device_domain_alloc(domain, virq, nr_irqs);
- 	if (err) {
- 		dev_err(icu->dev, "failed to allocate ICU interrupt in parent domain\n");
- 		goto free_irqd;
-@@ -245,7 +245,7 @@ mvebu_icu_irq_domain_alloc(struct irq_do
- 	return 0;
- 
- free_msi:
--	platform_msi_domain_free(domain, virq, nr_irqs);
-+	platform_msi_device_domain_free(domain, virq, nr_irqs);
- free_irqd:
- 	kfree(icu_irqd);
- 	return err;
-@@ -260,7 +260,7 @@ mvebu_icu_irq_domain_free(struct irq_dom
- 
- 	kfree(icu_irqd);
- 
--	platform_msi_domain_free(domain, virq, nr_irqs);
-+	platform_msi_device_domain_free(domain, virq, nr_irqs);
- }
- 
- static const struct irq_domain_ops mvebu_icu_domain_ops = {
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -434,10 +434,10 @@ struct irq_domain *
- #define platform_msi_create_device_tree_domain(dev, nvec, write, ops, data) \
- 	__platform_msi_create_device_domain(dev, nvec, true, write, ops, data)
- 
--int platform_msi_domain_alloc(struct irq_domain *domain, unsigned int virq,
--			      unsigned int nr_irqs);
--void platform_msi_domain_free(struct irq_domain *domain, unsigned int virq,
--			      unsigned int nvec);
-+int platform_msi_device_domain_alloc(struct irq_domain *domain, unsigned int virq,
-+				     unsigned int nr_irqs);
-+void platform_msi_device_domain_free(struct irq_domain *domain, unsigned int virq,
-+				     unsigned int nvec);
- void *platform_msi_get_host_data(struct irq_domain *domain);
- #endif /* CONFIG_GENERIC_MSI_IRQ_DOMAIN */
- 
-
+VGhpcyBpcyB0aGUgdGhpcmQgcGFydCBvZiBbUENJXU1TSSByZWZhY3RvcmluZyB3aGljaCBhaW1z
+IHRvIHByb3ZpZGUgdGhlCmFiaWxpdHkgb2YgZXhwYW5kaW5nIE1TSS1YIHZlY3RvcnMgYWZ0ZXIg
+ZW5hYmxpbmcgTVNJLVguCgpUaGUgZmlyc3QgdHdvIHBhcnRzIG9mIHRoaXMgd29yayBjYW4gYmUg
+Zm91bmQgaGVyZToKCiAgICBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjExMjA2MjEwMTQ3
+Ljg3Mjg2NTgyM0BsaW51dHJvbml4LmRlCiAgICBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIw
+MjExMjA2MjEwMzA3LjYyNTExNjI1M0BsaW51dHJvbml4LmRlCgpUaGlzIHRoaXJkIHBhcnQgaGFz
+IHRoZSBmb2xsb3dpbmcgaW1wb3J0YW50IGNoYW5nZXM6CgogICAxKSBBZGQgbG9ja2luZyB0byBw
+cm90ZWN0IHRoZSBNU0kgZGVzY3JpcHRvciBzdG9yYWdlCgogICAgICBSaWdodCBub3cgdGhlIE1T
+SSBkZXNjcmlwdG9yIHN0b3JhZ2UgKGxpbmtlZCBsaXN0KSBpcyBub3QgcHJvdGVjdGVkCiAgICAg
+IGJ5IGFueXRoaW5nIHVuZGVyIHRoZSBhc3N1bXB0aW9uIHRoYXQgdGhlIGxpc3QgaXMgaW5zdGFs
+bGVkIGJlZm9yZQogICAgICB1c2UgYW5kIGRlc3Ryb3llZCBhZnRlciB1c2UuIEFzIHRoaXMgaXMg
+YWJvdXQgdG8gY2hhbmdlIHRoZXJlIGhhcyB0bwogICAgICBiZSBwcm90ZWN0aW9uCgogICAyKSBB
+IG5ldyBzZXQgb2YgaXRlcmF0b3JzIHdoaWNoIGFsbG93IGZpbHRlcmluZyBvbiB0aGUgc3RhdGUg
+b2YgdGhlCiAgICAgIGRlc2NyaXB0b3JzIG5hbWVseSB3aGV0aGVyIGEgZGVzY3JpcHRvciBpcyBh
+c3NvY2lhdGVkIHRvIGEgTGludXgKICAgICAgaW50ZXJydXB0IG9yIG5vdC4KCiAgICAgIFRoaXMg
+Y2xlYW5zIHVwIGEgbG90IG9mIHVzZSBjYXNlcyB3aGljaCBoYXZlIHRvIGRvIHRoaXMgZmlsdGVy
+aW5nCiAgICAgIG1hbnVhbGx5LgoKICAgMykgQSBuZXcgc2V0IG9mIE1TSSBkZXNjcmlwdG9yIGFs
+bG9jYXRpb24gZnVuY3Rpb25zIHdoaWNoIG1ha2UgdGhlIHVzYWdlCiAgICAgIHNpdGVzIHNpbXBs
+ZXIgYW5kIGNvbmZpbmUgdGhlIHN0b3JhZ2UgaGFuZGxpbmcgdG8gdGhlIGNvcmUgY29kZS4KCiAg
+ICAgIFRyaXZpYWwgTVNJIGRlc2NyaXB0b3JzIChub24gUENJKSBhcmUgbm93IGFsbG9jYXRlZCBi
+eSB0aGUgY29yZSBjb2RlCiAgICAgIGF1dG9tYXRpY2FsbHkgd2hlbiB0aGUgdW5kZXJseWluZyBp
+cnEgZG9tYWluIHJlcXVlc3RzIHRoYXQuCgogICA0KSBSZXdvcmsgb2Ygc3lzZnMgaGFuZGxpbmcg
+dG8gcHJlcGFyZSBmb3IgZHluYW1pYyBleHRlbnNpb24gb2YgTVNJLVgKCiAgICAgIFRoZSBjdXJy
+ZW50IG1lY2hhbmlzbSB3aGljaCBjcmVhdGVzIHRoZSBkaXJlY3RvcnkgYW5kIHRoZSBhdHRyaWJ1
+dGVzCiAgICAgIGZvciBhbGwgTVNJIGRlc2NyaXB0b3JzIGluIG9uZSBnbyBpcyBvYnZpb3VzbHkg
+bm90IHN1aXRhYmxlIGZvcgogICAgICBkeW5hbWljIGV4dGVuc2lvbi4gVGhlIHJld29yayBzcGxp
+dHMgdGhlIGRpcmVjdG9yeSBjcmVhdGlvbiBvdXQgYW5kCiAgICAgIGxldHMgdGhlIE1TSSBpbnRl
+cnJ1cHQgYWxsb2NhdGlvbiBjcmVhdGUgdGhlIHBlciBkZXNjcmlwdG9yCiAgICAgIGF0dHJpYnV0
+ZXMuCgogICA1KSBDb252ZXJzaW9uIG9mIHRoZSBNU0kgZGVzY3JpcHRvciBzdG9yYWdlIHRvIHhh
+cnJheQoKICAgICAgVGhlIGxpbmtlZCBsaXN0IGJhc2VkIHN0b3JhZ2UgaXMgc3Vib3B0aW1hbCBl
+dmVuIHdpdGhvdXQgZHluYW1pYwogICAgICBleHBhbnNpb24gYXMgaXQgcmVxdWlyZXMgZnVsbCBs
+aXN0IHdhbGtzIHRvIGdldCB0byBhIHNwZWNpZmljCiAgICAgIGRlc2NyaXB0b3IuIFdpdGggZHlu
+YW1pYyBleHBhbnNpb24gdGhpcyBnZXRzIGV2ZW4gbW9yZQogICAgICBjb252b2x1dGVkLiBYYXJy
+YXkgaXMgd2F5IG1vcmUgc3VpdGFibGUgYW5kIHNpbXBsaWZpZXMgdGhlCiAgICAgIGZpbmFsIGdv
+YWwgb2YgZHluYW1pYyBleHBhbnNpb24gb2YgdGhlIE1TSS1YIHNwYWNlLgoKVGhpcyB0aGlyZCBz
+ZXJpZXMgaXMgYmFzZWQgb246CgogICAgIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGlu
+dXgva2VybmVsL2dpdC90Z2x4L2RldmVsLmdpdCBtc2ktdjItcGFydC0yCgphbmQgYWxzbyBhdmFp
+bGFibGUgZnJvbSBnaXQ6CgogICAgIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgv
+a2VybmVsL2dpdC90Z2x4L2RldmVsLmdpdCBtc2ktdjItcGFydC0zCgpWMSBvZiB0aGlzIHNlcmll
+cyBjYW4gYmUgZm91bmQgaGVyZToKCiAgICBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjEx
+MTI2MjI0MTAwLjMwMzA0Njc0OUBsaW51dHJvbml4LmRlCgpDaGFuZ2VzIHZlcnN1cyBWMToKCiAg
+LSBSZW1vdmUgdGhlIGFsbG9jYXRpb24gY291bnRlciBwYXRjaCBhcyBpdCBpcyBub3QgcmVxdWly
+ZWQKCiAgLSBGaXggdGhlIHBvd2VycGMgZmFsbG91dCAtIENlZHJpYwoKICAtIEZpeCB0aGUgQ09O
+RklHIHR5cG8gLSBOaWtsYXMKCiAgLSBQaWNrZWQgdXAgUmV2aWV3ZWQvVGVzdGVkL0Fja2VkLWJ5
+IHRhZ3MgYXMgYXBwcm9wcmlhdGUKCkFzIGEgY29uc2VxdWVuY2Ugb2YgdGhlIGRpc2N1c3Npb24g
+dnMuIHRoZSBnZW5lcmFsIGRpcmVjdGlvbiBvZiB0aGVzZQpwYXRjaGVzLCBwYXJ0IDQgaXMgbm90
+IGdvaW5nIHRvIGJlIHVwZGF0ZWQgaW4gaXQncyBjdXJyZW50IGZvcm0uCgpUaGUgYXNzdW1wdGlv
+biB0aGF0IE1TSVtYXSBhbmQgSU1TIGFyZSBtdXR1YWxseSBleGNsdXNpdmUgYW5kIHRoYXQgSU1T
+IGlzCmJhc2ljYWxseSBhbiBleHRlbnNpb24gZm9yIGZpbmVyIGdyYWluZWQgc3BsaXR1cCBvZiB0
+aGUgUENJIGRldmljZSBkb2VzIG5vdApob2xkLgoKVGhlcmUgaXMgYSBwbGFuIHRvIHJlZmFjdG9y
+IHRoZSBjb2RlIGZ1cnRoZXIgaW4gb3JkZXIgdG8gcHJvdmlkZSB0aGUKZGVzaXJlZCBmdW5jdGlv
+bmFsaXR5IG9mIE1TSVtYXS9JTVMgd2hpY2ggd2lsbCBhbHNvIGdhaW4gdGhlIGR5bmFtaWMKZXh0
+ZW5zaW9uIG9mIE1TSS1YIHZlY3RvcnM6CgogICAgICBodHRwczovL2xvcmUua2VybmVsLm9yZy9y
+Lzg3bzg1djN6bmIuZmZzQHRnbHgKClRoYW5rcywKCgl0Z2x4Ci0tLQogLmNsYW5nLWZvcm1hdCAg
+ICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAxIAogYXJjaC9wb3dlcnBjL3BsYXRmb3Jtcy80
+eHgvaHN0YV9tc2kuYyAgfCAgICA3IAogYXJjaC9wb3dlcnBjL3BsYXRmb3Jtcy9jZWxsL2F4b25f
+bXNpLmMgfCAgICA3IAogYXJjaC9wb3dlcnBjL3BsYXRmb3Jtcy9wYXNlbWkvbXNpLmMgICAgfCAg
+ICA5IAogYXJjaC9wb3dlcnBjL3N5c2Rldi9mc2xfbXNpLmMgICAgICAgICAgfCAgICA4IAogYXJj
+aC9wb3dlcnBjL3N5c2Rldi9tcGljX3UzbXNpLmMgICAgICAgfCAgICA5IAogYXJjaC9zMzkwL3Bj
+aS9wY2lfaXJxLmMgICAgICAgICAgICAgICAgfCAgICA2IAogYXJjaC94ODYvcGNpL3hlbi5jICAg
+ICAgICAgICAgICAgICAgICAgfCAgIDE0IAogZHJpdmVycy9iYXNlL2NvcmUuYyAgICAgICAgICAg
+ICAgICAgICAgfCAgICAzIAogZHJpdmVycy9iYXNlL3BsYXRmb3JtLW1zaS5jICAgICAgICAgICAg
+fCAgMTEwIC0tLS0tCiBkcml2ZXJzL2J1cy9mc2wtbWMvZnNsLW1jLW1zaS5jICAgICAgICB8ICAg
+NjEgLS0KIGRyaXZlcnMvbnRiL21zaS5jICAgICAgICAgICAgICAgICAgICAgIHwgICAxOSAKIGRy
+aXZlcnMvcGNpL2NvbnRyb2xsZXIvcGNpLWh5cGVydi5jICAgIHwgICAxNSAKIGRyaXZlcnMvcGNp
+L21zaS9pcnFkb21haW4uYyAgICAgICAgICAgIHwgICAxMSAKIGRyaXZlcnMvcGNpL21zaS9sZWdh
+Y3kuYyAgICAgICAgICAgICAgIHwgICAyMCAKIGRyaXZlcnMvcGNpL21zaS9tc2kuYyAgICAgICAg
+ICAgICAgICAgIHwgIDI1OCArKysrKystLS0tLS0KIGRyaXZlcnMvcGNpL3hlbi1wY2lmcm9udC5j
+ICAgICAgICAgICAgIHwgICAgMiAKIGRyaXZlcnMvc29jL3RpL3RpX3NjaV9pbnRhX21zaS5jICAg
+ICAgIHwgICA3NyArLS0KIGluY2x1ZGUvbGludXgvZGV2aWNlLmggICAgICAgICAgICAgICAgIHwg
+ICAgNCAKIGluY2x1ZGUvbGludXgvbXNpLmggICAgICAgICAgICAgICAgICAgIHwgIDEwNyArKyst
+LQogaW5jbHVkZS9saW51eC9zb2MvdGkvdGlfc2NpX2ludGFfbXNpLmggfCAgICAxIAoga2VybmVs
+L2lycS9tc2kuYyAgICAgICAgICAgICAgICAgICAgICAgfCAgNzAwICsrKysrKysrKysrKysrKysr
+KysrKystLS0tLS0tLS0tLQogMjIgZmlsZXMgY2hhbmdlZCwgNzk0IGluc2VydGlvbnMoKyksIDY1
+NSBkZWxldGlvbnMoLSkK
 
