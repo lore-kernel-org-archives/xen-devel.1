@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A29DC433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:08:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239522.415422 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12237C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:08:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239523.415434 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHTi-00044A-Nn; Mon, 06 Dec 2021 17:08:38 +0000
+	id 1muHTl-0004eA-KR; Mon, 06 Dec 2021 17:08:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239522.415422; Mon, 06 Dec 2021 17:08:38 +0000
+Received: by outflank-mailman (output) from mailman id 239523.415434; Mon, 06 Dec 2021 17:08:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHTi-00042d-E0; Mon, 06 Dec 2021 17:08:38 +0000
-Received: by outflank-mailman (input) for mailman id 239522;
- Mon, 06 Dec 2021 17:08:37 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muHTl-0004cr-2B; Mon, 06 Dec 2021 17:08:41 +0000
+Received: by outflank-mailman (input) for mailman id 239523;
+ Mon, 06 Dec 2021 17:08:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHQ3-0005ta-1G
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:51 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9dfbc2af-56b6-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 18:04:49 +0100 (CET)
+ id 1muHQI-0005ti-Sw
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:05:07 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a7d97e8c-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:05:05 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9dfbc2af-56b6-11ec-a5e1-b9374ead2679
+X-Inumbo-ID: a7d97e8c-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810288;
+  d=citrix.com; s=securemail; t=1638810305;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=gMyekfXDcNGsX/CAW1bRg9GKSv3KBjGtY1LOz0Cm4h8=;
-  b=XZDnVTNGfvU0yHyLfSFnHg3kJhwyBz0/FrVDHR0671U7CSBF0P6F8al1
-   SVWXh3Jk9LjDAJ9DqGrWDLwNtQ8QeWgfM43UGXqyL7dqZMCICNtyKAMvH
-   NVAPQT8rxJhm8xVTGjniswl9VypA/wCxKdJ0IYHHXyGjFZhhcoAQWm9hC
-   E=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: ugtc2Lghlgyvw+rhhLlTfiB9+xuEkNj3nNyDf6h/3r+8Jt0zdMzq0hqm5gt+q9edMT8tzqeOKc
- xKbZo3AteLb6eQae8rcjZhLjOJPJ/v1OvLYRP+vy5kL2eOYuO22FB/y23Kw5YfkSvyCTl8uiJz
- q+Lo55CZaY4uRHDNyy4cCPfAsh05eVPXkDtfVtBuYTWPPwymD4t3M1whOpYsF8E52CVybJJlN1
- keynlX72wBfcdUMStaZF/x659LKdtEjXFgjSszAA+Lm+jAmGHwWR9bTyLz5E/N4UGbnWEPMgIf
- T8z8YN0xqZFzkyvtIlQvJEvt
+  bh=YMeuk4EyZtrq5dKLGLHEQrPw6+SmC/P2I22RLaT9xR0=;
+  b=KG4g3iqiEiPHqkIZjm0b9afwU6Xl3XHjC3EGNhDrfGxo089cQzf3v2nj
+   JiLI9FfkLY1nBgR5lKksl3I3UkfNt7RSxkVtIYyTlwWdXTJ5LMnWLFtsf
+   Mtwyqd2CPZHNwdOs633aRf1t3Qfir7SMmT4uhmh9NkXYZNAGrV6sfZHor
+   M=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: cZS7i5NppI0ZKBWbjhuZdXUvxBO/n20vAk5qiRBhcoYZGSRAFnU8YMVx7THk7K+kyvTv8nQzUJ
+ YmhYF7xk3sUjKNWkf4a0ja6nQPm3CaLTBoZhXCVABD4XPuoeSwz5sZtZEUyB/XLQ7QmPC0s86K
+ wWYG66gocSEaWB+rm7xD+Xnt33ofQKWP3pDGrf18eR2FMhmejZQn7vFben4y4E0t9SgQoPxWsD
+ iL+OgYvGJZfykaRZIXzcTSIT/cJcf71YHxmWDFmJE/36YpxYg+KuZkgq4En2qtpVOZu9toliJi
+ XWPfPJ0R/3KSfKo1UYOGLYry
 X-SBRS: 5.1
-X-MesageID: 59388058
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 59324170
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:9vOAfK3CqD9bG5ysQPbD5Vd2kn2cJEfYwER7XKvMYLTBsI5bp2APn
- GQWWmyDb/3eYzb0L4ojPdyx/B5XuZaHyoBnTgFrpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es5w7Bh2OaEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhoN1j2
- N8X6ZOJeTwyEoOVwsgZSyRFHHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Ej8I/LM7tLcUHt2tp1z3xBvc6W5HTBa7N4Le02R9t15seTa6DN
- 6L1bxJmN0XkUxxkeWwqAYkOpMijwUCgUCZh/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
- nnP+nn0BlcGNN2VwCeB7lqhgPSKmTL8XsQVDrLQ3v91gnWDy2oLEhoUWFCn5/6jhSaWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8Uz7h2NzazFpR6UHGEeQhZObdUnsIk9QjlC6
- 7OSt4q3X3o16uTTEC/DsOfPxd+vBcQLBVAPdz8OF1cK2unYu60d10jjSs5eDaHg27UZBgrM6
- zyNqSE/gZAagsgKy7i38Dj7vt68mnTaZlVrv1uKBwpJ+is8Pdf4PNLwtTA3+N4ZdN7BJmRtq
- kTojCR3AAomKZiW3BKAT+wWdF1Cz6bUaWaM6bKD8nRIythMx5JBVd0JiN2dDB0wWirhRdMPS
- BWJ0e+2zMUMVEZGlYctP+qM5z0ClMAM7+jNWPHOdcZpaZNsbgKB9ywGTRfOhDCyyhlxy/thZ
- sfznSOQ4ZAyU/4PIN2eHbh17FPW7npmmTO7qW7TkXxLLoZylFbKEOxYYTNin8gy7b+eoRW9z
- jqsH5Di9vmra8WnOnO/2ddKdTgidCFnbbir+50/XrPSeWJORTB+Y8I9NJt8IuSJaYwOzbyWl
- px8M2cFoGfCaYrvdV/XNys9Mey3Bv6SbxsTZEQRALph4FB7Ca7H0UvVX8FfkWAP+LMxwPhqY
- eMCfsncUP1DRi6eo2YWbIXnrZwkfxOu3FrcMy2gaTk5XphhWw2WpYO0IlqxrHEDXnitqM8zg
- 7y8zQeHE5ANcBtvUZTNY/W1wlLv4XVEwLBuX1HFK8V4cVn39NQ4MDT4i/I6epleKRjKyjaA+
- RyRBBMU+bvEr4MvqYGbjqGYtYa5VeB5GxMCTWXc6L+3Mwjc/3aintAcALrZI2iFWTqtqqu4Z
- OhTw/XtC9E9nQ5H49hmDrJm7aMi/N+z9bVU+RtpQSfQZFOxB7I+fnTfhZtTtrdAz6NysBetX
- h7d4cFTPLiENZ+3EFMVIwZ5PO2P2etNx2vX5PUxZk77+DV27PyMVkALZ0uAjylULb1UNoI5w
- Lh+5J5KulLn0hd6YMybii109niXKi1SWqoqgZgWHYv3h1d50VpFe5HdVnf77Zznhw+g6aX2z
- ut4XJb/uok=
-IronPort-HdrOrdr: A9a23:hiF2la1wElSBYvc6naLsFwqjBIokLtp133Aq2lEZdPRUGvb3qy
- nIpoV86faUskdoZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
- uIG5IOceEYZmIasS+V2maF+q4bsbu6zJw=
+IronPort-Data: A9a23:g6ctca702jhmC5dxa2011gxRtL/AchMFZxGqfqrLsTDasY5as4F+v
+ jYcCDiCP62Iamf3fIx2bdix/EgGvcCAyYNlGwZtri80Hi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdj2tAw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zx
+ cUQioGpcC4TboaLiM4DDxtoQjFmMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gTTK2EO
+ 5NGMVKDajzMcRpMfWkQAqllt8C2nVfCb3oArQia8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
+ G2u13/wBwwXMJqDyTuP+2+omsfCmzi+XJMVEvu/7PECqFyMxEQDBRsOT1y5rPKlzEmkVLp3O
+ 0ESvyYjs6U23EiqVcXmGQ21pmaeuRwRUMYWFPc1gCmEzLbU5ACIQHAJVDdbZPQpscY3QXoh0
+ Vrhoj/yLWUx6vvPEyvbr+rK62PpUcQIEYMcTSIUEDQY+uDKmtEYyQLlUIphIP+lltKgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7AFgHZ1
+ EXojfRy+wzn4XulsCWWCNsAE7iyjxpuGG2N2AU/d3XNGtnExpJCQWyyyGwnTKuKGpxdEdMMX
+ KM1kVkLjHO0FCH1BZKbm6rrV6wXIVHITLwJrMz8YNtUeYRWfwSa5ixobkP49zmzyxhzy/BiY
+ 83FLpbE4ZMm5UJPlmDeqwA1i+BD+8zD7TmLGcCTI+qPj9Jym0J5uZ9aaQDTP4jVHYuPoRnP8
+ sY3Cid54043bQEKWQGOqdR7BQlTdRATXMmqw+QKJr/rClc3QwkJVq6OqY7NjqQ4xsy5YM+Tp
+ SrjMqKZoXKi7UD6xfKiNio+NeixBMkn9hrW/0UEZD6V5pTqWq73hI93Snf9VeB5nAC65fIrH
+ fQDZeuaBfFDFmbO9zgHNMGvp41+bhW7wwmJOnP9MjQ4epdhQS3P+8PlIVSzpHVfUHLvuJtsu
+ aCk2yPaXYEHG1ZoAvHJZa/91Fi2p3Ucxr5/BhOaPtlJdUzw24F2MCit3OQvKsQBJEyblDuX3
+ gqbGzkCouzJr9Nn+dXFn/nc/YyoD/F/DgxRGGyCteS6MizT/2yCx45cUbnXIWCBBT2soKj7P
+ Ldb1fDxNvEDjW1miYskHuY517866vvuu6ReklZuEkLUYgn5EbhnOHSHg5VC7/Uf2r9DtAKqc
+ UuT4d0Ga66RMcboHVNNdgooauOPiaMdljXItKlnJUz74Gl8/aadUFUUNB6J0XQPILxwOYIj4
+ OEgpM9JtFDv1kt0ao6L3nJO6mCBDn0cSKF25JgVDbjihhcv1lwfM4fXDTX74c3XZthBWqXwz
+ uR4WEYWa2xg+3f/
+IronPort-HdrOrdr: A9a23:k09PNqk6F+yEXIqagw+YTEKu2FnpDfIq3DAbv31ZSRFFG/Fxl6
+ iV88jzsiWE7wr5OUtQ4OxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
+ YET0EXMqyXMbEQt6jHCWeDf+rIuOP3k5yVuQ==
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59388058"
+   d="scan'208";a="59324170"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
 	<wl@xen.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>
-Subject: [XEN PATCH 56/57] stubdom: build xenstore*-stubdom using new Makefile.common
-Date: Mon, 6 Dec 2021 17:02:39 +0000
-Message-ID: <20211206170241.13165-57-anthony.perard@citrix.com>
+Subject: [XEN PATCH 53/57] stubdom: introduce xenlibs.mk
+Date: Mon, 6 Dec 2021 17:02:36 +0000
+Message-ID: <20211206170241.13165-54-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -103,75 +103,76 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Makefile.common have everything needed by stubdom, when used with
-xenlibs.mk, so we don't need "Makefile" anymore.
+This new makefile will be used to build libraries that provides
+"Makefile.common".
 
-Also, remove DESTDIR for "xenstore" related targets, "xenlibs.mk"
-doesn't use DESTDIR so its value doesn't matter.
+At some point, we will be converting Makefile in tools/ to "subdirmk"
+and stubdom build will not be able to use those new makefiles, so we
+will put the necessary information for stubdom to build the xen
+libraries into a new Makefile.common and xenlibs.mk will use it.
+We only need to build static libraries and don't need anything else.
+
+The check for the presence of "Makefile.common" will go aways once
+there is one for all libraries used by stubdom build.
+
+Also remove DESTDIR= from "clean" targets, we don't do installation in
+this recipe so the value of DESTDIR doesn't matter.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- stubdom/Makefile | 15 ++++++---------
- 1 file changed, 6 insertions(+), 9 deletions(-)
+ stubdom/xenlibs.mk | 13 +++++++++++++
+ stubdom/Makefile   |  9 +++++++--
+ 2 files changed, 20 insertions(+), 2 deletions(-)
+ create mode 100644 stubdom/xenlibs.mk
 
+diff --git a/stubdom/xenlibs.mk b/stubdom/xenlibs.mk
+new file mode 100644
+index 0000000000..5c8742ccf9
+--- /dev/null
++++ b/stubdom/xenlibs.mk
+@@ -0,0 +1,13 @@
++include $(XEN_ROOT)/tools/Rules.mk
++
++include Makefile.common
++
++LIBNAME := $(notdir $(CURDIR))
++FILENAME_$(LIBNAME) ?= xen$(LIBNAME)
++LIB_FILE_NAME = $(FILENAME_$(LIBNAME))
++
++lib$(LIB_FILE_NAME).a: $(OBJS-y)
++	$(AR) rc $@ $^
++
++clean::
++	rm -f $(OBJS-y) lib$(LIB_FILE_NAME).a
 diff --git a/stubdom/Makefile b/stubdom/Makefile
-index 6b804824ba..1fa075b9ad 100644
+index 5fb5dbc341..fba4c977ef 100644
 --- a/stubdom/Makefile
 +++ b/stubdom/Makefile
-@@ -346,8 +346,7 @@ define do_links
+@@ -346,6 +346,7 @@ define do_links
    cd $(dir $@); \
    ln -sf $(dir $<)include/*.h include/; \
    ln -sf $(dir $<)*.[ch] .; \
--  [ -e $(dir $<)Makefile.common ] && ln -sf $(dir $<)Makefile.common . ||:; \
--  ln -sf $(dir $<)Makefile .
-+  ln -sf $(dir $<)Makefile.common .
++  [ -e $(dir $<)Makefile.common ] && ln -sf $(dir $<)Makefile.common . ||:; \
+   ln -sf $(dir $<)Makefile .
    touch $@
  endef
- 
-@@ -356,13 +355,11 @@ define BUILD_lib
+@@ -355,10 +356,14 @@ define BUILD_lib
   libxen$(1): libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a
   libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a: $$(LIBDEPS_$(1)) $$(LIBDEP_$(1))
   libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a: mk-headers-$$(XEN_TARGET_ARCH) $$(NEWLIB_STAMPFILE) .phony
--	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) CONFIG_LIBXC_MINIOS=y $$(if $$(wildcard $$(@D)/Makefile.common),-f $(CURDIR)/xenlibs.mk) -C $$(@D) $$(@F)
-+	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) CONFIG_LIBXC_MINIOS=y -f $(CURDIR)/xenlibs.mk -C $$(@D) $$(@F)
+-	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) CONFIG_LIBXC_MINIOS=y -C $$(@D) $$(@F)
++	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) CONFIG_LIBXC_MINIOS=y $$(if $$(wildcard $$(@D)/Makefile.common),-f $(CURDIR)/xenlibs.mk) -C $$(@D) $$(@F)
  
   clean-libxen$(1):
- 	if [ -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile.common ]; then \
- 	    $$(MAKE) -f $(CURDIR)/xenlibs.mk -C libs-$$(XEN_TARGET_ARCH)/$(1) clean; \
--	elif [ -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile ]; then \
--	    $$(MAKE) -C libs-$$(XEN_TARGET_ARCH)/$(1) clean; \
- 	fi
+-	[ ! -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile ] || $$(MAKE) DESTDIR= -C libs-$$(XEN_TARGET_ARCH)/$(1) clean
++	if [ -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile.common ]; then \
++	    $$(MAKE) -f $(CURDIR)/xenlibs.mk -C libs-$$(XEN_TARGET_ARCH)/$(1) clean; \
++	elif [ -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile ]; then \
++	    $$(MAKE) -C libs-$$(XEN_TARGET_ARCH)/$(1) clean; \
++	fi
  
-  libs-$$(XEN_TARGET_ARCH)/$(1)/stamp: $$(XEN_ROOT)/tools/libs/$(1)/Makefile.common
-@@ -494,7 +491,7 @@ xenstore-minios-config.mk: $(CURDIR)/xenstore-minios.cfg
- 
- .PHONY: xenstore
- xenstore: $(CROSS_ROOT) xenstore-minios-config.mk
--	CPPFLAGS="$(TARGET_CPPFLAGS) $(shell cat xenstore-minios-config.mk)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C $@ xenstored.a CONFIG_STUBDOM=y
-+	CPPFLAGS="$(TARGET_CPPFLAGS) $(shell cat xenstore-minios-config.mk)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) -f $(CURDIR)/xenlibs.mk -C $@ xenstored.a CONFIG_STUBDOM=y
- 
- #############
- # xenstorepvh
-@@ -505,7 +502,7 @@ xenstorepvh-minios-config.mk: $(CURDIR)/xenstorepvh-minios.cfg
- 
- .PHONY: xenstorepvh
- xenstorepvh: $(CROSS_ROOT) xenstorepvh-minios-config.mk
--	CPPFLAGS="$(TARGET_CPPFLAGS) $(shell cat xenstorepvh-minios-config.mk)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) DESTDIR= -C $@ xenstored.a CONFIG_STUBDOM=y
-+	CPPFLAGS="$(TARGET_CPPFLAGS) $(shell cat xenstorepvh-minios-config.mk)" CFLAGS="$(TARGET_CFLAGS)" $(MAKE) -f $(CURDIR)/xenlibs.mk -C $@ xenstored.a CONFIG_STUBDOM=y
- 
- ########
- # minios
-@@ -657,8 +654,8 @@ clean:
- 	rm -f *-minios-config.mk
- 	rm -fr pkg-config
- 	-[ ! -d ioemu ] || $(MAKE) DESTDIR= -C ioemu clean
--	-[ ! -d xenstore ] || $(MAKE) DESTDIR= -C xenstore clean
--	-[ ! -d xenstorepvh ] || $(MAKE) DESTDIR= -C xenstorepvh clean
-+	-[ ! -d xenstore ] || $(MAKE) -f $(CURDIR)/xenlibs.mk -C xenstore clean
-+	-[ ! -d xenstorepvh ] || $(MAKE) -f $(CURDIR)/xenlibs.mk -C xenstorepvh clean
- 
- # clean the cross-compilation result
- .PHONY: crossclean
+  libs-$$(XEN_TARGET_ARCH)/$(1)/stamp: $$(XEN_ROOT)/tools/libs/$(1)/Makefile
+ 	$$(do_links)
 -- 
 Anthony PERARD
 
