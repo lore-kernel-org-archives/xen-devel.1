@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82E0FC4167B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 18:19:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239727.415680 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0D79C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 18:19:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239729.415719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muIa0-0002of-AV; Mon, 06 Dec 2021 18:19:12 +0000
+	id 1muIa7-0004GR-AQ; Mon, 06 Dec 2021 18:19:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239727.415680; Mon, 06 Dec 2021 18:19:12 +0000
+Received: by outflank-mailman (output) from mailman id 239729.415719; Mon, 06 Dec 2021 18:19:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muIZz-0002lw-S2; Mon, 06 Dec 2021 18:19:11 +0000
-Received: by outflank-mailman (input) for mailman id 239727;
- Mon, 06 Dec 2021 18:19:10 +0000
+	id 1muIa6-0004Et-Om; Mon, 06 Dec 2021 18:19:18 +0000
+Received: by outflank-mailman (input) for mailman id 239729;
+ Mon, 06 Dec 2021 18:19:16 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1muIZy-0002N6-Fz
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 18:19:10 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1muIa4-00043i-Hi
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 18:19:16 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1muIZy-000421-Ew
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 18:19:10 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1muIa4-00042s-GY
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 18:19:16 +0000
 Received: from iwj (helo=mariner.uk.xensource.com)
  by xenbits.xenproject.org with local-bsmtp (Exim 4.92)
- (envelope-from <ijackson@chiark.greenend.org.uk>) id 1muIZy-0004UY-EB
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 18:19:10 +0000
+ (envelope-from <ijackson@chiark.greenend.org.uk>) id 1muIa4-0004XN-Fh
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 18:19:16 +0000
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by mariner.uk.xensource.com with esmtp (Exim 4.89)
  (envelope-from <ijackson@chiark.greenend.org.uk>)
- id 1muIZc-0001ab-M2; Mon, 06 Dec 2021 18:18:48 +0000
+ id 1muIZa-0001ab-Qq; Mon, 06 Dec 2021 18:18:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,41 +47,39 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=gGu0w5xm335ZO+mQt5bBh31RANCZN/xrtBOK2vpeXWI=; b=fBJVNz5JogQeGjob2UH724w5gv
-	fD+bUVRBCkw20NnLoQZrwNF+518fmozZVd3YES0WdKVA4frRZzDrDIVDPnqDP8vejfasvmRCLqyYJ
-	IRYkyI12/trEihCrlY3S/WOKWGoiPApMLjV+ottWbJDaSuXyisvDabzjC3Fw2/lDFe4E=;
+	bh=icR62vyDL1qMkaGEnJxyTT6ACzd2sPw3zE4q96m+q6E=; b=L0/0P/lHruNEaIO6/xmH1bcBIs
+	1mgMpVUBmvhz5g9fRUKuPv/Gqm6rO0uHLy+r7OnankmHDdYIytx71tjYhPBu1oG9ilyZv5OtWnwx4
+	wEU+jA0f+tw/ytr9fIzenvOTx8fwQYUdpxt0Z6IYNACcLhS0TQWvukv6Xx1zk9XzKiys=;
 From: Ian Jackson <iwj@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <iwj@xenproject.org>
-Subject: [OSSTEST PATCH 09/13] TestSupport: sub broken: Add a newline
-Date: Mon,  6 Dec 2021 18:18:35 +0000
-Message-Id: <20211206181839.23463-10-iwj@xenproject.org>
+Subject: [OSSTEST PATCH 03/13] ts-memdisk-try-append: Enable perl warnings
+Date: Mon,  6 Dec 2021 18:18:29 +0000
+Message-Id: <20211206181839.23463-4-iwj@xenproject.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20211206181839.23463-1-iwj@xenproject.org>
 References: <20211206181839.23463-1-iwj@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This suppresses printing of the the line number, which is not useful.
-
 Signed-off-by: Ian Jackson <iwj@xenproject.org>
+Release-Acked-by: Ian Jackson <iwj@xenproject.org>
 ---
- Osstest/TestSupport.pm | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ ts-memdisk-try-append | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index b17bf08a6..ff890f96c 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -283,7 +283,8 @@ END
-     });
-     my $msg = uc($newst).": $m; ".
-       ($affected>0 ? "marked $flight.$job $newst"
--                   : "($flight.$job not marked $newst)");
-+                   : "($flight.$job not marked $newst)").
-+		     "\n";
-     die $msg;
- }
+diff --git a/ts-memdisk-try-append b/ts-memdisk-try-append
+index a35751eb3..bfb36caf7 100755
+--- a/ts-memdisk-try-append
++++ b/ts-memdisk-try-append
+@@ -18,7 +18,7 @@
+ 
+ set -xe -o posix
+ 
+-arch=`perl -I. -e '
++arch=`perl -I. -we '
+     use Osstest;
+     use Osstest::TestSupport;
  
 -- 
 2.20.1
