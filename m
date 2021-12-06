@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F748C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 23:00:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240280.416756 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA24C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 23:00:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240282.416768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMyF-0005Xf-Pv; Mon, 06 Dec 2021 23:00:31 +0000
+	id 1muMyO-0005uT-2e; Mon, 06 Dec 2021 23:00:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240280.416756; Mon, 06 Dec 2021 23:00:31 +0000
+Received: by outflank-mailman (output) from mailman id 240282.416768; Mon, 06 Dec 2021 23:00:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMyF-0005XT-MZ; Mon, 06 Dec 2021 23:00:31 +0000
-Received: by outflank-mailman (input) for mailman id 240280;
- Mon, 06 Dec 2021 23:00:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muMyN-0005uM-Vm; Mon, 06 Dec 2021 23:00:39 +0000
+Received: by outflank-mailman (input) for mailman id 240282;
+ Mon, 06 Dec 2021 23:00:38 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMpU-0000Tb-0G
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:28 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0b985621-56e7-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:51:27 +0100 (CET)
+ id 1muMpc-0008NM-4Y
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:36 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 10654d0b-56e7-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:51:35 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b985621-56e7-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210748.414712173@linutronix.de>
+X-Inumbo-ID: 10654d0b-56e7-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210748.683004012@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638831087;
+	s=2020; t=1638831095;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=doaEN4PngPF6b3Ms4+nCLub9WRL+cYqg2iUonunceVg=;
-	b=mDVbOZFMq2r0fFSal6nGytKiR9N0dKq5PqwK3juP1cFnlgmQUuw4LpkD1Hpm/hkbKZm+u7
-	Yea4cNfID7VRix/TmSW0sPFLvyDtgOlkMm7w8ymCcbMXlPLtwak2/32g8dpHmlOP3O/F6G
-	jdU4NlHvekujXArGpsBa5yUjWwJ1eEzk2cniYcCq3kZdS9WskWSkWr65L4WuQjer6xqU1f
-	Ul5hlmIH9G0tFTvOrZ6TNqwpU2DDuWudK+A/4sOQoKvCebsyPKW3/F+OiN3j2Uvb53neJ1
-	tJE6RPkzzdtCxeELmNPrSmNWxRMUlB41D5TaNxMfPsoV84Jl5DW5WZfsZ5VwLQ==
+	 references:references; bh=s/VOVQMyDYcB6+dcIQa54u5N9xLv27CFi4i5YMxXHXY=;
+	b=4smyVig+0kG3Mj5Ff5573pxp5MUbsQE22Dot8kdArwx554E4qvBjgUNwsUFirP6FIXpq/2
+	jLneA+N6EazSPge6uWP1/APnqcC/TEJttmN3r4EXFJG0zTQRnbXFshy/BKu3cMk8DYT4TI
+	a1LWuN2gtGyLccsm080S5fJ3L4OIiaLJNWRl9xqpeK6tqEuWTOBTcjH6mXifIaF3tB799u
+	ykw64cq3FSqDk3968loa4xhNN2kfvB5Ow9lKi8cAP09S0tlG4eZsgu09LMzUDXCW+QStem
+	T6+4q+ZhI9z4g6e+lVp0DHz4KnOAJBpwgHEJba+DAXSr453HDRrdudBJq9DUbQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638831087;
+	s=2020e; t=1638831095;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=doaEN4PngPF6b3Ms4+nCLub9WRL+cYqg2iUonunceVg=;
-	b=edZkzp0cQopCCOVDx2I8Wc5M/D97TZhEVVbeeZnpase12JmLW+w6pTojHaCFf7vSYnKATQ
-	gAtXqukltBF2IkBw==
+	 references:references; bh=s/VOVQMyDYcB6+dcIQa54u5N9xLv27CFi4i5YMxXHXY=;
+	b=/dhk0ATnFXvIqHsCnqzQC/b2Yp0LVMLjufNEI55WRSEferFEbY3QW5BRA9ipZqGQCt/Tv0
+	yttXqgSSg8GY1rAA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,51 +70,88 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Cedric Le Goater <clg@kaod.org>,
  xen-devel@lists.xenproject.org,
  Juergen Gross <jgross@suse.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Niklas Schnelle <schnelle@linux.ibm.com>,
- linux-s390@vger.kernel.org,
- Heiko Carstens <hca@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
  Logan Gunthorpe <logang@deltatee.com>,
  Jon Mason <jdmason@kudzu.us>,
  Dave Jiang <dave.jiang@intel.com>,
  Allen Hubbe <allenbh@gmail.com>,
- linux-ntb@googlegroups.com
-Subject: [patch V2 15/31] powerpc/cell/axon_msi: Convert to msi_on_each_desc()
+ linux-ntb@googlegroups.com,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Niklas Schnelle <schnelle@linux.ibm.com>,
+ linux-s390@vger.kernel.org,
+ Heiko Carstens <hca@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>
+Subject: [patch V2 20/31] NTB/msi: Convert to msi_on_each_desc()
 References: <20211206210600.123171746@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:51:26 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:51:34 +0100 (CET)
 
-Replace the about to vanish iterators and make use of the filtering.
+Replace the about to vanish iterators, make use of the filtering and take
+the descriptor lock around the iteration.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
+Cc: Logan Gunthorpe <logang@deltatee.com>
+Cc: Jon Mason <jdmason@kudzu.us>
+Cc: Dave Jiang <dave.jiang@intel.com>
+Cc: Allen Hubbe <allenbh@gmail.com>
+Cc: linux-ntb@googlegroups.com
 ---
- arch/powerpc/platforms/cell/axon_msi.c |    7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ drivers/ntb/msi.c |   19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
 
---- a/arch/powerpc/platforms/cell/axon_msi.c
-+++ b/arch/powerpc/platforms/cell/axon_msi.c
-@@ -265,7 +265,7 @@ static int axon_msi_setup_msi_irqs(struc
- 	if (rc)
- 		return rc;
+--- a/drivers/ntb/msi.c
++++ b/drivers/ntb/msi.c
+@@ -108,8 +108,10 @@ int ntb_msi_setup_mws(struct ntb_dev *nt
+ 	if (!ntb->msi)
+ 		return -EINVAL;
  
--	for_each_pci_msi_entry(entry, dev) {
-+	msi_for_each_desc(entry, &dev->dev, MSI_DESC_NOTASSOCIATED) {
- 		virq = irq_create_direct_mapping(msic->irq_domain);
- 		if (!virq) {
- 			dev_warn(&dev->dev,
-@@ -288,10 +288,7 @@ static void axon_msi_teardown_msi_irqs(s
+-	desc = first_msi_entry(&ntb->pdev->dev);
++	msi_lock_descs(&ntb->pdev->dev);
++	desc = msi_first_desc(&ntb->pdev->dev, MSI_DESC_ASSOCIATED);
+ 	addr = desc->msg.address_lo + ((uint64_t)desc->msg.address_hi << 32);
++	msi_unlock_descs(&ntb->pdev->dev);
  
- 	dev_dbg(&dev->dev, "axon_msi: tearing down msi irqs\n");
+ 	for (peer = 0; peer < ntb_peer_port_count(ntb); peer++) {
+ 		peer_widx = ntb_peer_highest_mw_idx(ntb, peer);
+@@ -281,13 +283,15 @@ int ntbm_msi_request_threaded_irq(struct
+ 				  const char *name, void *dev_id,
+ 				  struct ntb_msi_desc *msi_desc)
+ {
++	struct device *dev = &ntb->pdev->dev;
+ 	struct msi_desc *entry;
+ 	int ret;
  
--	for_each_pci_msi_entry(entry, dev) {
--		if (!entry->irq)
--			continue;
+ 	if (!ntb->msi)
+ 		return -EINVAL;
+ 
+-	for_each_pci_msi_entry(entry, ntb->pdev) {
++	msi_lock_descs(dev);
++	msi_for_each_desc(entry, dev, MSI_DESC_ASSOCIATED) {
+ 		if (irq_has_action(entry->irq))
+ 			continue;
+ 
+@@ -304,14 +308,17 @@ int ntbm_msi_request_threaded_irq(struct
+ 		ret = ntbm_msi_setup_callback(ntb, entry, msi_desc);
+ 		if (ret) {
+ 			devm_free_irq(&ntb->dev, entry->irq, dev_id);
+-			return ret;
++			goto unlock;
+ 		}
+ 
 -
-+	msi_for_each_desc(entry, &dev->dev, MSI_DESC_ASSOCIATED) {
- 		irq_set_msi_desc(entry->irq, NULL);
- 		irq_dispose_mapping(entry->irq);
+-		return entry->irq;
++		ret = entry->irq;
++		goto unlock;
  	}
++	ret = -ENODEV;
+ 
+-	return -ENODEV;
++unlock:
++	msi_unlock_descs(dev);
++	return ret;
+ }
+ EXPORT_SYMBOL(ntbm_msi_request_threaded_irq);
+ 
 
 
