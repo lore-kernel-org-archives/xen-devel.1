@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90409C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DF20C433EF
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 07:24:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.238638.413595 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.238645.413643 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mu8Lg-0008PG-SQ; Mon, 06 Dec 2021 07:23:44 +0000
+	id 1mu8Lk-0000pl-8e; Mon, 06 Dec 2021 07:23:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 238638.413595; Mon, 06 Dec 2021 07:23:44 +0000
+Received: by outflank-mailman (output) from mailman id 238645.413643; Mon, 06 Dec 2021 07:23:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mu8Lg-0008P9-OU; Mon, 06 Dec 2021 07:23:44 +0000
-Received: by outflank-mailman (input) for mailman id 238638;
- Mon, 06 Dec 2021 07:23:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mu8Lj-0000ol-Tt; Mon, 06 Dec 2021 07:23:47 +0000
+Received: by outflank-mailman (input) for mailman id 238645;
+ Mon, 06 Dec 2021 07:23:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=9VqD=QX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mu8Le-0008Mk-Ov
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 07:23:42 +0000
+ id 1mu8Li-0008Mw-Fb
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 07:23:46 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6fb54773-5665-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 08:23:41 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6f37a3df-5665-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 08:23:42 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9BC782192D;
- Mon,  6 Dec 2021 07:23:40 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 970A8212BF;
+ Mon,  6 Dec 2021 07:23:39 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7136C1330B;
- Mon,  6 Dec 2021 07:23:40 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 66A981330B;
+ Mon,  6 Dec 2021 07:23:39 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id CIJWGny6rWHVdAAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 06 Dec 2021 07:23:40 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id V+avF3u6rWHVdAAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 06 Dec 2021 07:23:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,65 +53,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6fb54773-5665-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 6f37a3df-5665-11ec-a5e1-b9374ead2679
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1638775420; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=d8/sEf5zxip/z6wrXT3urxSeGPiRIv+pRBh5TUEPjPg=;
-	b=sLHRlJRgHai3r+90pA2coKYs9ibAH4mCtD76N9qGrGMXaMr3rg9LAALP04EJ7vL1KjMQrA
-	kFV9HwUesSh0/l0lhyBYOvNpt+LqYKWDwjPly9BqLThPvPNQ+5lVxcKVj1yhHCi+qBaQDM
-	CgomOAfJe0Nf/fJuEJ7vKIgHiGcOuY8=
+	t=1638775419; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=YTvNTjnUOIGBj3YdpCPw4zpcXKpaBuF0gzLw707mgsE=;
+	b=tmk7+wFY10jFTOB9Ko3FAHrAoEIsfCMGn3XfYgI99dBVTXqEVi/13y8voc+0MyZa/uu3Np
+	KRLLLYL0AwST/uuAfRVsYtWo1D792Nenvpfc+RMBkAtFxFGkqJYS2VEfQwgJX9mWU7HjXH
+	kc9BtSYyKCefIUGLD45/hTSaqDSomFY=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 05/10] mini-os: don't repeat definition available via header file
-Date: Mon,  6 Dec 2021 08:23:32 +0100
-Message-Id: <20211206072337.9517-6-jgross@suse.com>
+Subject: [PATCH 00/10] mini-os: add missing PVH features
+Date: Mon,  6 Dec 2021 08:23:27 +0100
+Message-Id: <20211206072337.9517-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211206072337.9517-1-jgross@suse.com>
-References: <20211206072337.9517-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-arch/x86/setup.c is repeating the definition of __pte() instead using
-the appropriate header. Fix that.
+Mini-OS in PVH mode is missing some features, especially in the areas
+of ballooning and grant tables.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/setup.c | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+With this series I am able to run Xenstore stubdom in PVH mode.
 
-diff --git a/arch/x86/setup.c b/arch/x86/setup.c
-index 1ec68d3..b27bbed 100644
---- a/arch/x86/setup.c
-+++ b/arch/x86/setup.c
-@@ -29,6 +29,7 @@
- #include <mini-os/os.h>
- #include <mini-os/lib.h> /* for printk, memcpy */
- #include <mini-os/kernel.h>
-+#include <mini-os/hypervisor.h>
- #include <xen/xen.h>
- #include <xen/arch-x86/cpuid.h>
- #include <xen/arch-x86/hvm/start_info.h>
-@@ -61,13 +62,6 @@ char stack[2*STACK_SIZE];
- 
- extern char shared_info[PAGE_SIZE];
- 
--#if defined(__x86_64__)
--#define __pte(x) ((pte_t) { (x) } )
--#else
--#define __pte(x) ({ unsigned long long _x = (x);        \
--    ((pte_t) {(unsigned long)(_x), (unsigned long)(_x>>32)}); })
--#endif
--
- static inline void fpu_init(void) {
- 	asm volatile("fninit");
- }
+Juergen Gross (10):
+  mini-os: split e820 map handling into new source file
+  mini-os: sort and sanitize e820 memory map
+  mini-os: don't assume contiguous RAM when initializing in PVH mode
+  mini-os: respect memory map when ballooning up
+  mini-os: don't repeat definition available via header file
+  mini-os: add memory map service functions
+  mini-os: move x86 specific gnttab coding into arch/x86/gnttab.c
+  mini-os: add proper pvh grant table handling
+  mini-os: prepare grantmap entry interface for use by PVH mode
+  mini-os: modify grant mappings to work in PVH mode
+
+ Makefile           |   1 +
+ arch/arm/mm.c      |  11 +-
+ arch/x86/balloon.c |   4 +-
+ arch/x86/gnttab.c  | 109 ++++++++++++++++++
+ arch/x86/mm.c      | 121 +-------------------
+ arch/x86/setup.c   |   8 +-
+ balloon.c          |  33 ++++--
+ e820.c             | 269 +++++++++++++++++++++++++++++++++++++++++++++
+ gntmap.c           | 125 +++++++++++++--------
+ include/balloon.h  |   5 +-
+ include/e820.h     |  11 ++
+ include/gntmap.h   |   1 +
+ mm.c               |   7 +-
+ 13 files changed, 508 insertions(+), 197 deletions(-)
+ create mode 100644 arch/x86/gnttab.c
+ create mode 100644 e820.c
+
 -- 
 2.26.2
 
