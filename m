@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0901C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:47:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240040.416234 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17F7EC433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:47:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240039.416228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMlp-00079c-Pr; Mon, 06 Dec 2021 22:47:41 +0000
+	id 1muMlp-00076b-AY; Mon, 06 Dec 2021 22:47:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240040.416234; Mon, 06 Dec 2021 22:47:41 +0000
+Received: by outflank-mailman (output) from mailman id 240039.416228; Mon, 06 Dec 2021 22:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMlp-00078k-HG; Mon, 06 Dec 2021 22:47:41 +0000
-Received: by outflank-mailman (input) for mailman id 240040;
+	id 1muMlp-00076N-6p; Mon, 06 Dec 2021 22:47:41 +0000
+Received: by outflank-mailman (input) for mailman id 240039;
  Mon, 06 Dec 2021 22:47:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMe6-0004dp-KE
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:42 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ id 1muMe9-0004dp-QF
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:45 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 671ac30f-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:42 +0100 (CET)
+ id 68fbe46e-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 671ac30f-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210439.181331216@linutronix.de>
+X-Inumbo-ID: 68fbe46e-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210439.289194020@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830381;
+	s=2020; t=1638830384;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=VrULNCMH+O8xsmxJgHu1VunM7q/HyFmEpUljbWBlO+M=;
-	b=1WyUya3l8fZi6fy1zbrOKQrTo97M/mFRNLJk70qGOPb0JPRgzFKQUP3Ap98oq2yIU+W79y
-	WmvByYmwToUfcQdjSAd5N46svh0Lkih1RSbg6furNRI0+XUMr1pOBKIX+irSBkIRN609j/
-	jgDcnPD7jjQZ/ZAEDMijZa34I3oXKq99mGxdyY7uvZ2xHboD3lTKRVNV1ahRc0v6NJpUyd
-	2djS86MgaRG75KvoijVeoRbChYP6OBHa4h+jnI5iBX5I8xLG5cijyFLO/hLr8BePuB5G8D
-	EXG5Csvz4BostgHD1hbblseyHYWXy7KyZk0QJOjUNO2iPqUZZX60PIldxOiaQQ==
+	 references:references; bh=jjYpKlfviGkOs8GJ86qqUCf8iCclgx/MvIgVwsbGrI8=;
+	b=CWfcJ/iBUYjrpon8kS2pojeizMcv7c60QxvaLAU5LI7KfIMvLSxmIM/m6bfUaFi/gGyxAb
+	PdqO0v+VPjjzILOgrIY49OVkafA0iReKzvL8PY9tzXeT2OhfpAJ4GW6YLu65K/Ld7nLIG0
+	dbzZwwZ742NgY9QLmrAZqlDg1SC6c+Vxj66hiQWNzv4d8TaTEE4oqgYxP5G8UX+MQMw73e
+	+b6nz9F4GAlHfDc5dR9qnGxMEdL//gXdSMYdGOcVIGZyzLatX6atJs5gbWAUqCzw+Ld7RN
+	hETb0rVdGgYiZNsPAYhQE+wSINXC0JxDMrNyubVTne/6jVvmGPHY/Mo/UsX8LQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830381;
+	s=2020e; t=1638830384;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=VrULNCMH+O8xsmxJgHu1VunM7q/HyFmEpUljbWBlO+M=;
-	b=4SHbAktYMF4p3JfEkG2RuP8fQBgK7GPTe1sN6CDnwn2pN1kMTUy4TffqwybjaftPt18Fji
-	W4koD0rufC6aGiCQ==
+	 references:references; bh=jjYpKlfviGkOs8GJ86qqUCf8iCclgx/MvIgVwsbGrI8=;
+	b=wbBVA5z+1RlpKAaa5w62yohCfb98XisYXj6A57jf4CV6E6TSRwWAqsQRcXyzzVkM5x3Dtz
+	DSeIPQrauDdTp2AA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,71 +72,90 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  xen-devel@lists.xenproject.org,
  Juergen Gross <jgross@suse.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ dmaengine@vger.kernel.org,
+ Vinod Koul <vkoul@kernel.org>,
  Will Deacon <will@kernel.org>,
  Santosh Shilimkar <ssantosh@kernel.org>,
  iommu@lists.linux-foundation.org,
- dmaengine@vger.kernel.org,
  Stuart Yoder <stuyoder@gmail.com>,
  Laurentiu Tudor <laurentiu.tudor@nxp.com>,
  Nishanth Menon <nm@ti.com>,
  Tero Kristo <kristo@kernel.org>,
  linux-arm-kernel@lists.infradead.org,
- Vinod Koul <vkoul@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 28/36] PCI/MSI: Use __msi_get_virq() in pci_get_vector()
+Subject: [patch V2 30/36] dmaengine: mv_xor_v2: Get rid of msi_desc abuse
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:41 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:44 +0100 (CET)
 
-Use msi_get_vector() and handle the return value to be compatible.
-
-No functional change intended.
+Storing a pointer to the MSI descriptor just to keep track of the Linux
+interrupt number is daft. Use msi_get_virq() instead.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Cc: dmaengine@vger.kernel.org
+Cc: Vinod Koul <vkoul@kernel.org>
 ---
-V2: Handle the INTx case directly instead of trying to be overly smart - Marc
----
- drivers/pci/msi/msi.c |   25 +++++--------------------
- 1 file changed, 5 insertions(+), 20 deletions(-)
+ drivers/dma/mv_xor_v2.c |   16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
 
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -1032,28 +1032,13 @@ EXPORT_SYMBOL(pci_free_irq_vectors);
+--- a/drivers/dma/mv_xor_v2.c
++++ b/drivers/dma/mv_xor_v2.c
+@@ -149,7 +149,7 @@ struct mv_xor_v2_descriptor {
+  * @desc_size: HW descriptor size
+  * @npendings: number of pending descriptors (for which tx_submit has
+  * @hw_queue_idx: HW queue index
+- * @msi_desc: local interrupt descriptor information
++ * @irq: The Linux interrupt number
+  * been called, but not yet issue_pending)
   */
- int pci_irq_vector(struct pci_dev *dev, unsigned int nr)
- {
--	if (dev->msix_enabled) {
--		struct msi_desc *entry;
+ struct mv_xor_v2_device {
+@@ -168,7 +168,7 @@ struct mv_xor_v2_device {
+ 	int desc_size;
+ 	unsigned int npendings;
+ 	unsigned int hw_queue_idx;
+-	struct msi_desc *msi_desc;
 +	unsigned int irq;
+ };
  
--		for_each_pci_msi_entry(entry, dev) {
--			if (entry->msi_index == nr)
--				return entry->irq;
--		}
--		WARN_ON_ONCE(1);
--		return -EINVAL;
--	}
-+	if (!dev->msi_enabled && !dev->msix_enabled)
-+		return !nr ? dev->irq : -EINVAL;
+ /**
+@@ -718,7 +718,6 @@ static int mv_xor_v2_probe(struct platfo
+ 	int i, ret = 0;
+ 	struct dma_device *dma_dev;
+ 	struct mv_xor_v2_sw_desc *sw_desc;
+-	struct msi_desc *msi_desc;
  
--	if (dev->msi_enabled) {
--		struct msi_desc *entry = first_pci_msi_entry(dev);
--
--		if (WARN_ON_ONCE(nr >= entry->nvec_used))
--			return -EINVAL;
--	} else {
--		if (WARN_ON_ONCE(nr > 0))
--			return -EINVAL;
+ 	BUILD_BUG_ON(sizeof(struct mv_xor_v2_descriptor) !=
+ 		     MV_XOR_V2_EXT_DESC_SIZE);
+@@ -770,14 +769,9 @@ static int mv_xor_v2_probe(struct platfo
+ 	if (ret)
+ 		goto disable_clk;
+ 
+-	msi_desc = first_msi_entry(&pdev->dev);
+-	if (!msi_desc) {
+-		ret = -ENODEV;
+-		goto free_msi_irqs;
 -	}
--
--	return dev->irq + nr;
-+	irq = msi_get_virq(&dev->dev, nr);
-+	return irq ? irq : -EINVAL;
- }
- EXPORT_SYMBOL(pci_irq_vector);
+-	xor_dev->msi_desc = msi_desc;
++	xor_dev->irq = msi_get_virq(&pdev->dev, 0);
+ 
+-	ret = devm_request_irq(&pdev->dev, msi_desc->irq,
++	ret = devm_request_irq(&pdev->dev, xor_dev->irq,
+ 			       mv_xor_v2_interrupt_handler, 0,
+ 			       dev_name(&pdev->dev), xor_dev);
+ 	if (ret)
+@@ -892,7 +886,7 @@ static int mv_xor_v2_remove(struct platf
+ 			  xor_dev->desc_size * MV_XOR_V2_DESC_NUM,
+ 			  xor_dev->hw_desq_virt, xor_dev->hw_desq);
+ 
+-	devm_free_irq(&pdev->dev, xor_dev->msi_desc->irq, xor_dev);
++	devm_free_irq(&pdev->dev, xor_dev->irq, xor_dev);
+ 
+ 	platform_msi_domain_free_irqs(&pdev->dev);
  
 
 
