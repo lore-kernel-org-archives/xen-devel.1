@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029D0C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:08:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239514.415358 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC0DDC4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:08:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239516.415380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHTW-0001QL-QL; Mon, 06 Dec 2021 17:08:26 +0000
+	id 1muHTZ-00029u-Ql; Mon, 06 Dec 2021 17:08:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239514.415358; Mon, 06 Dec 2021 17:08:26 +0000
+Received: by outflank-mailman (output) from mailman id 239516.415380; Mon, 06 Dec 2021 17:08:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHTW-0001Q6-Le; Mon, 06 Dec 2021 17:08:26 +0000
-Received: by outflank-mailman (input) for mailman id 239514;
- Mon, 06 Dec 2021 17:08:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muHTZ-00029W-Lw; Mon, 06 Dec 2021 17:08:29 +0000
+Received: by outflank-mailman (input) for mailman id 239516;
+ Mon, 06 Dec 2021 17:08:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHPg-0005ta-7S
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:28 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90c3a7a2-56b6-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 18:04:27 +0100 (CET)
+ id 1muHOt-0005ti-I1
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:03:39 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7392cda0-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:03:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90c3a7a2-56b6-11ec-a5e1-b9374ead2679
+X-Inumbo-ID: 7392cda0-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810267;
+  d=citrix.com; s=securemail; t=1638810216;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=1nH3DERE1JlMh8VwtbIndoxT3Z56m8Z/3wBuefLC+Yw=;
-  b=XV9s3SIefE0kF/n7YJUfCBGvChX1OviAHpE8ALt/VPcPgL6LYtR8pqoP
-   8rJGH9m0sCrSZPzOQ0boDl/dr2PJBqcxQ5fBX1obo4ZNNCHXh73bM2xZj
-   IEkyYNI0DxdG+bc5W8jZsPs5rpGyz4PzmedFnDh9MOTyZ4E0gux0BuWji
-   8=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: aDd2dpyJ7gRfSVbxV4+9/bzhPrf3mPz4foNM8gwZeG9SEPtXKtb3t64tf6/AXampwdzjPdLOoM
- sA7Uexx3oSwZwtLqp5Emnz+oBUSIqPdKLY9hn3X0FkZvVgrwMt3Led8LAnCIx9TRUen14VD3XM
- C3AOgMF+1UMgm++3gfJzPvP7AvZ409pZVDDPbkAeYXN0vSbG3f/v6eeukk0sJ36eJw3ONatVrj
- fA67+69DtiNidWjHJmVvGuB5uD9JBlXwgXTr+Xh12Nq9BcLPuv61rU7M+z0Xz2/6NPaHzIA+Y6
- BYLgJDC5GvOZ14VJakOWh/DJ
+  bh=ncr3lIi38E0siWJzJi6btExaNaeaiEW2/teWOIwBcPA=;
+  b=XqLP5lf+8ZGqBKikfTLLnVMx2N3n96+HxSjcir0iQ2bzAtZkLyiAtXCK
+   6VfT+cfGlmYaWi6VyfKVCWBNRgqeT1QqtQJUfdJm5Bo1yVfyFaRnjCI3r
+   zLunzSnnE3NtdsZo9+lHhVqO8dlfTnY6KvHibjJVnPAvjN10A48CaL/0A
+   k=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: Ek1RNuKqMkEJMUikv7DTFzl70J0nrxT6CuQdemUffhBIDJ/a2TxQgpNwYzDSS6JqcForF07C74
+ v4oydXezartqG+ofeCK+cnAIBcboagjErP50ngRKTFP7UFtqlWksPNivnrR3M6eDmKtSlXtKD5
+ a4HTmQ/cFWlN2uebgNLTG6R5SVgWefVQ3VYjs5RWXBjmweHw5JtmhX/0zx2OZqOoeHC6OFSvL2
+ 8d8i6MTgM3lFjhPtXti64qljJ/JsICkQaxkmKzrxh81WaGhjITsugSIE8TgqmG53eeBP0fho7D
+ sbjJH/LOwzqSa1YSho6KvOqq
 X-SBRS: 5.1
-X-MesageID: 59766550
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 61420662
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:kA42gqKMdy6/d3K4FE+RIJIlxSXFcZb7ZxGr2PjKsXjdYENS1jcPy
- GUcUGiPMv6DZmb1e4oiPIS+o00F6pLUndBmGQBlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Eg7xbZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2nsspjk
- +RLk6C2Cj0SL/zsl84FdCJhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Gph2Z4QQKuGD
- yYfQWM2cxKHXxpWBmwSN4oSrfqmnWjxLxQN/Tp5ooJoujOOnWSdyoPFL979atGMA8JPkS6wp
- G3c+H/iKgoHL9HZwj2Amlqtme3njS79QJgVFrCz6rhtmlL77nweDlgaWEW2pdG9i1WiQJRPJ
- koM4C0soKMuskuxQbHVVhukoHmCr1gEVsBZCeES5wSEy66S6AGcblXoVRYYNoZg7pVvA2V3i
- BnZxLsFGACDrpW7ZGiPrYaSiw+0ehIuPD4iagUcajA8toyLTJ4IsjrDSdNqEaiQh9LzGC3tz
- z3ikBXSl4n/nuZQifzloAmvbyaE48GQE1Vrvlm/sneNt1shPOaYi5qUBU83BBqqBKKQVRG/s
- XcNgKByB8heXMjWxERhrAjgdYxFBspp0hWB2DaD/LF7rlxBHkJPm6gKulmSw28zba45lcfBO
- hO7hO+ozMY70IGWRaF2eZmtLM8h0LLtE9/oPtiNMIEePcIgKVXdon4+DaJ144wLuBJ2+U3YE
- c3EGftA8F5AUfg3pNZIb7l1PUAXKtAWmjqIGMGTI+WP2ruCfn+FIYrpw3PVBt3VGJis+V2Pm
- /4GbpPi40wGDIXWP3mGmaZOfAtiBSVqWvjLRzl/K7frzvxOQzp6VZc8ANoJJuRYokiivruSo
- yzmBBYHkAGXaL+uAVziV02PoYjHBf5XxU/X9wR1Vbpx83R8M4up8okFcJ47Iesu+OB5lKYmR
- PgZYcSQRP9IT22fqTgaaJD8qq1kdQiq2l3Sb3b0PmBncs4yXRHN9//lYhDrqHsEAB2ouJZsu
- LanzA7aH8YOHlwwEMbMZfuz5FqtpnxByvlqVk7FL4ALKkXh+YRnMQLrifozL51eIBnP3GLCh
- Q2XHQ0Zta/GpIpsqIvFgqWNroGIFepiHxUFQzmHvOjubSSDpzit245NVuqMbAvxbmKs9fXwf
- /hRwtH9LOYDwARAvb1jHus51qk5/dbu+eNXl1w2AHXRYl23Ibp8OX3aj9JXv6hAy7IF6wu7X
- kWDpotTNbmTYZ63FVcQIEwub/iZ1OFSkT7XtKxnLEL/7S5x3byGTUQNYEXc1H0DdON4YNE/3
- OMsmM8K8Aju2BMlP+GPgj1Q62nRfGcLVL8qt81CDYLm4ubxJoquvXAI5vfK3ayy
-IronPort-HdrOrdr: A9a23:bIKx8K3LAnLHUrfS1DC0ewqjBLgkLtp133Aq2lEZdPRUGvb2qy
- nIpoV/6faUskd3ZJhOo7G90cW7LE80lqQFg7X5X43DYOCOggLBR+tfBOPZslnd8kbFmNK1u5
- 0NT0EHMqySMWRH
+IronPort-Data: A9a23:b9u3z67Cnf4KxuhWL6cLkAxRtN7AchMFZxGqfqrLsTDasY5as4F+v
+ mEbWTqEM/+PajH1Ltxya9u+8EhX7JCBzIJqGVRl+H1gHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdj2tAw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zx
+ tJDlcGVZBcVEo7AoOYMbT1UGConIvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gQRKqEP
+ 5RHM1KDajz9chBmAmoIUakvlcmyoHKvKWZYhnOK8P9fD2/7k1UqjemF3MDuUt2VR+1Fk0CAv
+ GXE8m/lRBYAO7S31j6t4n+qwOjVkkvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
+ 2Qd/DYuqq4jslSmVNDnUzW3pXeFulgXXN84LgEhwFjTkOyOuV/fXzVaCG4aADA7iCMobTIt2
+ H/Uuv75ORBMvIWXWEy5+ryf9CznbED5MlQ+TSMDSAIE5fzqr4cykg/DQ75fLUKlsjHmMWqum
+ m7X9UDSk51W1JdWjPvjoTgrlhr1/sCRJjPZ8Dk7SY5MAulRQIe+L7Kl5lHAhRqrBNbIFwLR1
+ JTodiX30QzvMX1vvHHUKAnuNOvwjxpgDNE6qQQ1d3XG327yk0NPhagKvFlDyL5Ba67ogwPBb
+ k7Joh9275ROJnasZqIfS9vvUJR1l/m9T467CaC8gj9yjn5ZLlXvEMZGPxH44owQuBJ0zfFX1
+ WmzL65A8kr2+Yw4lWHrFo/xIJcgxzwkxHO7eHwI50/P7FZqX1bMEe1tGALXNogRtfrYyC2Io
+ 4c3H5bbkH13DbyhChQ7BKZOdDjm21BgXsuowyGWH8beSjdb9JYJV6WMnOh/ItM9xMy4VI7gp
+ xmAZ6OR83Kn7VWvFOlAQisLhGrHUcktoHQlEzYrOFr0iXEvbZz2tPUUdoctfKlh/+tmlKYmQ
+ /4AcsSGI/JOVjWYpGhNMcij9NRvJEaxmAaDHyu5ezxjLZRucBPEp43/dQz1+ShQUifu7Zkio
+ 6et3x/wSIYYQ1gwF97fbf+ilgvjvXUUlO9ocVHPJ91fJBfl/IRwcnSjhf4rOcAcbx7Ew2LCh
+ QqRBB4Zo8jLopM0r4aV1fzV8d/xHrInTERAHmTd4bKnDgXg/zKukd1aTeKFXTHBT2eoqq+sU
+ vpYkqPnO/odkVcU74clS+R3zbgz7sfErqNBylg2B23CalmmB+8yInSC2sUT5KRByqUA5FmzU
+ 0OLvNJbJa+IKIXuF1tIfFgpaeGK1Pc1nDjO7KtqfBWmtXEvpLfXA19POxSsiTBGKOonOYwo9
+ u4tpcoK5lHtkREtKNuH0nhZ+mnkwqbsiEn7WkX22LPWtzc=
+IronPort-HdrOrdr: A9a23:Ap5ncKG7vr5hDYJHpLqE4seALOsnbusQ8zAXP0AYc3Nom6uj5q
+ WTdZUgpHjJYVkqOU3I9ersBEDiewK/yXcW2+ks1N6ZNWGM0ldARLsSibcKqAePJ8SRzIJgPN
+ 9bAstDNOE=
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59766550"
+   d="scan'208";a="61420662"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
-	<wl@xen.org>, Juergen Gross <jgross@suse.com>
-Subject: [XEN PATCH 45/57] libs/guest: rework CFLAGS
-Date: Mon, 6 Dec 2021 17:02:28 +0000
-Message-ID: <20211206170241.13165-46-anthony.perard@citrix.com>
+	<wl@xen.org>
+Subject: [XEN PATCH 21/57] tools/include/xen-foreign: avoid to rely on default .SUFFIXES
+Date: Mon, 6 Dec 2021 17:02:04 +0000
+Message-ID: <20211206170241.13165-22-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,88 +102,56 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Remove '-Werror -Wmissing-progress -I./include $(CFLAGS_xeninclude)',
-those flags are already added via "libs.mk".
+When a rule isn't a pattern rule, and thus don't have a %, the
+value of the automatic variable stem $* depends on .SUFFIXES. GNU make
+manual explain that it is better to avoid this "bizarre" behavior
+which exist for compatibility.
 
-Flag "-I." isn't needed, we just need to fix the #include of
-"xg_core.h" as this header isn't expected to be installed.
-
-Make use of "-iquote" instead of '-I' for double-quote included
-headers.
-
-Also, regroup the CFLAGS into the same place in the makefile.
+Use $(basename ) instead. So we can one day avoid make's build-in
+rules and variables.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libs/guest/Makefile          | 20 +++++++++-----------
- tools/libs/guest/xg_offline_page.c |  2 +-
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ tools/include/xen-foreign/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
-index 770b9a7ef1..62b8fead86 100644
---- a/tools/libs/guest/Makefile
-+++ b/tools/libs/guest/Makefile
-@@ -28,18 +28,13 @@ OBJS-y       += xg_core.o
- OBJS-$(CONFIG_X86) += xg_core_x86.o
- OBJS-$(CONFIG_ARM) += xg_core_arm.o
+diff --git a/tools/include/xen-foreign/Makefile b/tools/include/xen-foreign/Makefile
+index e395011fdd..6ce51daf5e 100644
+--- a/tools/include/xen-foreign/Makefile
++++ b/tools/include/xen-foreign/Makefile
+@@ -25,28 +25,28 @@ check-headers: checker
+ 	rm tmp.size
  
--CFLAGS += -I$(XEN_libxenctrl)
--
- vpath %.c ../../../xen/common/libelf
--CFLAGS += -I../../../xen/common/libelf
+ arm32.h: mkheader.py structs.py $(ROOT)/arch-arm.h $(ROOT)/xen.h
+-	$(PYTHON) $< $* $@.tmp $(filter %.h,$^)
++	$(PYTHON) $< $(basename $@) $@.tmp $(filter %.h,$^)
+ 	#Avoid mixing an alignment directive with a uint64_t cast or sizeof expression
+ 	sed 's/(__align8__ \(uint64_t\))/(\1)/g' < $@.tmp > $@.tmp2
+ 	rm $@.tmp
+ 	$(call move-if-changed,$@.tmp2,$@)
  
- LIBELF_OBJS += libelf-tools.o libelf-loader.o
- LIBELF_OBJS += libelf-dominfo.o
+ arm64.h: mkheader.py structs.py $(ROOT)/arch-arm.h $(ROOT)/xen.h
+-	$(PYTHON) $< $* $@.tmp $(filter %.h,$^)
++	$(PYTHON) $< $(basename $@) $@.tmp $(filter %.h,$^)
+ 	#Avoid mixing an alignment directive with a uint64_t cast or sizeof expression
+ 	sed 's/(__align8__ \(uint64_t\))/(\1)/g' < $@.tmp > $@.tmp2
+ 	rm $@.tmp
+ 	$(call move-if-changed,$@.tmp2,$@)
  
- OBJS-y += $(LIBELF_OBJS)
+ x86_32.h: mkheader.py structs.py $(ROOT)/arch-x86/xen-x86_32.h $(ROOT)/arch-x86/xen.h $(ROOT)/xen.h
+-	$(PYTHON) $< $* $@.tmp $(filter %.h,$^)
++	$(PYTHON) $< $(basename $@) $@.tmp $(filter %.h,$^)
+ 	#Avoid mixing an alignment directive with a uint64_t cast or sizeof expression
+ 	sed 's/(__align8__ \(uint64_t\))/(\1)/g' < $@.tmp > $@.tmp2
+ 	rm $@.tmp
+ 	$(call move-if-changed,$@.tmp2,$@)
  
--$(LIBELF_OBJS) $(LIBELF_OBJS:.o=.opic): CFLAGS += -Wno-pointer-sign
--
- ifeq ($(CONFIG_X86),y) # Add libx86 to the build
- vpath %.c ../../../xen/lib/x86
- 
-@@ -70,10 +65,12 @@ OBJS-y                 += xg_dom_decompress_unsafe_xz.o
- OBJS-y                 += xg_dom_decompress_unsafe_zstd.o
- endif
- 
--CFLAGS   += -Werror -Wmissing-prototypes
--CFLAGS   += -I. -I./include $(CFLAGS_xeninclude)
--CFLAGS   += -D__XEN_TOOLS__
--CFLAGS   += -include $(XEN_ROOT)/tools/config.h
-+CFLAGS += -D__XEN_TOOLS__
-+CFLAGS += -include $(XEN_ROOT)/tools/config.h
-+CFLAGS += -iquote ../../../xen/common/libelf
-+
-+# To be able to include xc_private.h
-+CFLAGS += -iquote $(XEN_libxenctrl)
- 
- # Needed for posix_fadvise64() in xc_linux.c
- CFLAGS-$(CONFIG_Linux) += -D_GNU_SOURCE
-@@ -92,8 +89,9 @@ ZLIB_CFLAGS :=
- ZLIB_LIBS :=
- endif
- 
--xg_dom_bzimageloader.o: CFLAGS += $(ZLIB_CFLAGS)
--xg_dom_bzimageloader.opic: CFLAGS += $(ZLIB_CFLAGS)
-+xg_dom_bzimageloader.o xg_dom_bzimageloader.opic: CFLAGS += $(ZLIB_CFLAGS)
-+
-+$(LIBELF_OBJS) $(LIBELF_OBJS:.o=.opic): CFLAGS += -Wno-pointer-sign
- 
- LIBHEADER := xenguest.h
- 
-diff --git a/tools/libs/guest/xg_offline_page.c b/tools/libs/guest/xg_offline_page.c
-index cfe0e2d537..c594fdba41 100644
---- a/tools/libs/guest/xg_offline_page.c
-+++ b/tools/libs/guest/xg_offline_page.c
-@@ -25,7 +25,7 @@
- #include <stdlib.h>
- #include <unistd.h>
- #include <sys/time.h>
--#include <xg_core.h>
-+#include "xg_core.h"
- 
- #include "xc_private.h"
- #include "xg_private.h"
+ x86_64.h: mkheader.py structs.py $(ROOT)/arch-x86/xen-x86_64.h $(ROOT)/arch-x86/xen.h $(ROOT)/xen.h
+-	$(PYTHON) $< $* $@.tmp $(filter %.h,$^)
++	$(PYTHON) $< $(basename $@) $@.tmp $(filter %.h,$^)
+ 	#Avoid mixing an alignment directive with a uint64_t cast or sizeof expression
+ 	sed 's/(__align8__ \(uint64_t\))/(\1)/g' < $@.tmp > $@.tmp2
+ 	rm $@.tmp
 -- 
 Anthony PERARD
 
