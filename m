@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD4BC433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240062.416354 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49E00C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240066.416382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmE-00045T-Ul; Mon, 06 Dec 2021 22:48:06 +0000
+	id 1muMmJ-0005IV-2Q; Mon, 06 Dec 2021 22:48:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240062.416354; Mon, 06 Dec 2021 22:48:06 +0000
+Received: by outflank-mailman (output) from mailman id 240066.416382; Mon, 06 Dec 2021 22:48:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmE-00040S-GR; Mon, 06 Dec 2021 22:48:06 +0000
-Received: by outflank-mailman (input) for mailman id 240062;
- Mon, 06 Dec 2021 22:48:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muMmI-0005Gr-Jj; Mon, 06 Dec 2021 22:48:10 +0000
+Received: by outflank-mailman (input) for mailman id 240066;
+ Mon, 06 Dec 2021 22:48:08 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdj-0004ul-02
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:19 +0000
+ id 1muMdS-0004dp-E9
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:02 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 590abf77-56e5-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:39:18 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4f268673-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 590abf77-56e5-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210438.364897376@linutronix.de>
+X-Inumbo-ID: 4f268673-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210437.821900680@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830357;
+	s=2020; t=1638830341;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=lfwGVAEBcyklXLRbPUy5y5GselbZO14/n/aq+dgdtbc=;
-	b=j5c3qESX9iBdKToldLXBE4mBiWWAKKPkYIDGM4CivqyqRgWtM2cKGyevuhXVf4+HIOVj8Q
-	uFcTY3R24ZImom1z6RqeCXCb6yWXrMHG+qyZ+eZqau2JrqWTtlLIKZuaLDpk5+6fWXaVkN
-	zlJdKJEEHNFGXgVT+uAychPQsmGEDwINyyH7moxf9SQkQwQT0+n/dnCqgd5Jk3uI4XxsNa
-	lVL4PW2MBwfna8zZ7jo8QaeSVwu128+xqM7vH7CSpqxqPyWgl6PBq3bDqOLBbr+/I7iyDD
-	DT11PndTjBvCPLPvVluOl7MWdNjWcKhSTv3uGUyJqmuE4tWaIf6I9k52Vih+PQ==
+	 references:references; bh=0YY6FKU+qkJtNIjBHFuT3gGg88xsiW4iB6UKl0AmwtI=;
+	b=gtLyx1uI4U5VlfG4MyQBVx6ekZVpiz/hJtSDGpgc8fcJ7gILFMYCCiR3EJjX0IZuhmYVAb
+	BmqVgvOEI/y3Ed/3/UBUV5K5RTOB3ECpcaneiJcP0rxT9MeNN5rIyUEo1Pv3PtSgLgUYNU
+	dnq47rZGpN2i2WVB6wI9J/C4sxH5DafOFwNhkSyVSLCKzFcjVLCFGVYCd9f3Fs7jeRn/uZ
+	aVr2TQH5m9zO7I0AdAJWxXmpqPbrRxHd0TfUKtx3xuAHbr+qFO44ASkG7T7Sr3YEDi7Tfx
+	kuTvLv6LTfhAjG2IhnSIRqieTkKEzepT2+1+TsS9Tt+jmrn09EVsc/uIx7spEA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830357;
+	s=2020e; t=1638830341;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=lfwGVAEBcyklXLRbPUy5y5GselbZO14/n/aq+dgdtbc=;
-	b=JSs01xY7YCRCdnomelvSKAC22yikmnenmgcpV5rsCfrz12HIIi3qNeX/mh2zqXJLNltFEQ
-	nnWFosI79rPNqfBw==
+	 references:references; bh=0YY6FKU+qkJtNIjBHFuT3gGg88xsiW4iB6UKl0AmwtI=;
+	b=PDX2NcH6oMutIhm4blppHnJIu3p645PCE5S/fYPtzhtyjwQnto1muPhBbSVhrwl/rgluuU
+	I6amPjh+RiNE+XDw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -84,42 +84,66 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 13/36] genirq/msi: Consolidate MSI descriptor data
+Subject: [patch V2 03/36] PCI/MSI: Allocate MSI device data on first use
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:17 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:00 +0100 (CET)
 
-All non PCI/MSI usage variants have data structures in struct msi_desc with
-only one member: xxx_index. PCI/MSI has a entry_nr member.
-
-Add a common msi_index member to struct msi_desc so all implementations can
-share it which allows further consolidation.
+Allocate MSI device data on first use, i.e. when a PCI driver invokes one
+of the PCI/MSI enablement functions.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
- include/linux/msi.h |    2 ++
- 1 file changed, 2 insertions(+)
+ drivers/pci/msi/msi.c |   20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -142,6 +142,7 @@ struct ti_sci_inta_msi_desc {
-  *			address or data changes
-  * @write_msi_msg_data:	Data parameter for the callback.
-  *
-+ * @msi_index:	Index of the msi descriptor
-  * @pci:	[PCI]	    PCI speficic msi descriptor data
-  * @platform:	[platform]  Platform device specific msi descriptor data
-  * @fsl_mc:	[fsl-mc]    FSL MC device specific msi descriptor data
-@@ -162,6 +163,7 @@ struct msi_desc {
- 	void (*write_msi_msg)(struct msi_desc *entry, void *data);
- 	void *write_msi_msg_data;
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -889,10 +889,12 @@ static int __pci_enable_msi_range(struct
+ /* deprecated, don't use */
+ int pci_enable_msi(struct pci_dev *dev)
+ {
+-	int rc = __pci_enable_msi_range(dev, 1, 1, NULL);
+-	if (rc < 0)
+-		return rc;
+-	return 0;
++	int rc = msi_setup_device_data(&dev->dev);
++
++	if (!rc)
++		rc = __pci_enable_msi_range(dev, 1, 1, NULL);
++
++	return rc < 0 ? rc : 0;
+ }
+ EXPORT_SYMBOL(pci_enable_msi);
  
-+	u16				msi_index;
- 	union {
- 		struct pci_msi_desc		pci;
- 		struct platform_msi_desc	platform;
+@@ -947,7 +949,11 @@ static int __pci_enable_msix_range(struc
+ int pci_enable_msix_range(struct pci_dev *dev, struct msix_entry *entries,
+ 		int minvec, int maxvec)
+ {
+-	return __pci_enable_msix_range(dev, entries, minvec, maxvec, NULL, 0);
++	int ret = msi_setup_device_data(&dev->dev);
++
++	if (!ret)
++		ret = __pci_enable_msix_range(dev, entries, minvec, maxvec, NULL, 0);
++	return ret;
+ }
+ EXPORT_SYMBOL(pci_enable_msix_range);
+ 
+@@ -974,8 +980,12 @@ int pci_alloc_irq_vectors_affinity(struc
+ 				   struct irq_affinity *affd)
+ {
+ 	struct irq_affinity msi_default_affd = {0};
++	int ret = msi_setup_device_data(&dev->dev);
+ 	int nvecs = -ENOSPC;
+ 
++	if (ret)
++		return ret;
++
+ 	if (flags & PCI_IRQ_AFFINITY) {
+ 		if (!affd)
+ 			affd = &msi_default_affd;
 
 
