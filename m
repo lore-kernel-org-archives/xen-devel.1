@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D473AC433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240070.416416 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF0EAC433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240071.416422 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmU-0007Xk-8X; Mon, 06 Dec 2021 22:48:22 +0000
+	id 1muMmV-0007eU-0W; Mon, 06 Dec 2021 22:48:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240070.416416; Mon, 06 Dec 2021 22:48:22 +0000
+Received: by outflank-mailman (output) from mailman id 240071.416422; Mon, 06 Dec 2021 22:48:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmT-0007XL-W4; Mon, 06 Dec 2021 22:48:21 +0000
-Received: by outflank-mailman (input) for mailman id 240070;
- Mon, 06 Dec 2021 22:48:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muMmU-0007bN-GK; Mon, 06 Dec 2021 22:48:22 +0000
+Received: by outflank-mailman (input) for mailman id 240071;
+ Mon, 06 Dec 2021 22:48:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdy-0004dp-En
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:34 +0000
+ id 1muMds-0004ul-2m
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:28 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 623c8baa-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:33 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5e790e71-56e5-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:39:27 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 623c8baa-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210438.913603962@linutronix.de>
+X-Inumbo-ID: 5e790e71-56e5-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210438.688216619@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830373;
+	s=2020; t=1638830367;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Ep5zFYMr2dpuKFMI1pf/izOHx/wmIORxQk2vil3OoJI=;
-	b=nfZZ3sBOutSvGHqk1sS290DDgjFJGXEhzG9mKo8h3KNUTS21yvque0kvoe6kdy44X6ihqJ
-	rlecPnSuBE8kWWqzbTh8ZfS2t/6i87b9mxuCdiQdAWfWgv/FXfDMxOB4hPcENaQevz8X1t
-	sfoi2d3W+glPX+uizuVT258ABJFrCCoKMbU990PZvSPJbq47uN//h7RBBdikCbG4VbXTMa
-	uzPGLlJ6oqG4Ba1T/Qi10UeHj0+DdaJ0BuryMFaEruZB4DB4ufEmaO0gHVQmA6rDjulOYP
-	4odcYLKYN6S0ZLHgH8AU1siZXSl2RCWz6Zdbj85yUeDpTNP4mcveuhP4LXFExg==
+	 references:references; bh=rDy+I3ErSIwPbhu7X1CCkhe4PGVkrX5FRQ61OeZYbi0=;
+	b=rdxELXqqCUvF6w5maDZkJ1DUVcE8xtOFQuqB//kVE8LutIsp9x7oY88xYjjcJZGehvl20I
+	R+i6TJmT/vTW79Nv4ctZJYRheEWHSoWoguFGJMgyW+Y78A4gZheDTRjB7MKWo1i1SNciQv
+	MAkGYA8bGBoVVnZcIEV3q2C/xmLuWz4pSytUusJpxR9xdD6KElclS1+2OYVVTkq2CTV5v0
+	K7Qk55Cr9KK7t23ybVmifYXu8ldnDmpJ27OX5lTB0ymWjBlgUMjTEseTLZ8Qod83UjgC9D
+	tbU/slR0lNW5luPAEZ2uA0pSeOSKTDgFQBd2KUoEvNi5EWLt9sMAqB45SFUrIA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830373;
+	s=2020e; t=1638830367;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=Ep5zFYMr2dpuKFMI1pf/izOHx/wmIORxQk2vil3OoJI=;
-	b=zIv8vjiKX+sZKy9gbTJ2X4+XfGOmD/O04fsKImX/MjjZGQEs9MDTD7XhFu7ricmc2LeLAj
-	jEryKJg6XslL1KCw==
+	 references:references; bh=rDy+I3ErSIwPbhu7X1CCkhe4PGVkrX5FRQ61OeZYbi0=;
+	b=tGgA6BqJjARLsTeCWAn17BXxaUG282LmcuxVJy035n8FdUpejfTN0J30/E3k5C2sIwZD1h
+	pHsGs8TzGh+VOpBg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -84,44 +84,59 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 23/36] powerpc/cell/axon_msi: Use MSI device properties
+Subject: [patch V2 19/36] PCI/MSI: Store properties in device::msi::data
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:33 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:26 +0100 (CET)
 
-instead of fiddling with MSI descriptors.
+Store the properties which are interesting for various places so the MSI
+descriptor fiddling can be removed.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
-V2: Invoke the function with the correct number of arguments - Andy
+V2: Use the setter function
 ---
- arch/powerpc/platforms/cell/axon_msi.c |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/pci/msi/msi.c |    8 ++++++++
+ 1 file changed, 8 insertions(+)
 
---- a/arch/powerpc/platforms/cell/axon_msi.c
-+++ b/arch/powerpc/platforms/cell/axon_msi.c
-@@ -199,7 +199,7 @@ static struct axon_msic *find_msi_transl
- static int setup_msi_msg_address(struct pci_dev *dev, struct msi_msg *msg)
- {
- 	struct device_node *dn;
--	struct msi_desc *entry;
-+	bool is_64bit;
- 	int len;
- 	const u32 *prop;
- 
-@@ -209,10 +209,10 @@ static int setup_msi_msg_address(struct
- 		return -ENODEV;
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -244,6 +244,8 @@ static void free_msi_irqs(struct pci_dev
+ 		iounmap(dev->msix_base);
+ 		dev->msix_base = NULL;
  	}
++
++	msi_device_set_properties(&dev->dev, 0);
+ }
  
--	entry = first_pci_msi_entry(dev);
-+	is_64bit = msi_device_has_property(&dev->dev, MSI_PROP_64BIT);
+ static void pci_intx_for_msi(struct pci_dev *dev, int enable)
+@@ -341,6 +343,7 @@ msi_setup_entry(struct pci_dev *dev, int
+ {
+ 	struct irq_affinity_desc *masks = NULL;
+ 	struct msi_desc *entry;
++	unsigned long prop;
+ 	u16 control;
  
- 	for (; dn; dn = of_get_next_parent(dn)) {
--		if (entry->pci.msi_attrib.is_64) {
-+		if (is_64bit) {
- 			prop = of_get_property(dn, "msi-address-64", &len);
- 			if (prop)
- 				break;
+ 	if (affd)
+@@ -372,6 +375,10 @@ msi_setup_entry(struct pci_dev *dev, int
+ 	if (entry->pci.msi_attrib.can_mask)
+ 		pci_read_config_dword(dev, entry->pci.mask_pos, &entry->pci.msi_mask);
+ 
++	prop = MSI_PROP_PCI_MSI;
++	if (entry->pci.msi_attrib.is_64)
++		prop |= MSI_PROP_64BIT;
++	msi_device_set_properties(&dev->dev, prop);
+ out:
+ 	kfree(masks);
+ 	return entry;
+@@ -514,6 +521,7 @@ static int msix_setup_entries(struct pci
+ 		if (masks)
+ 			curmsk++;
+ 	}
++	msi_device_set_properties(&dev->dev, MSI_PROP_PCI_MSIX | MSI_PROP_64BIT);
+ 	ret = 0;
+ out:
+ 	kfree(masks);
 
 
