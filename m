@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C57CAC43219
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE0D8C43217
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 07:24:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.238652.413692 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.238642.413624 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mu8Lp-0001uJ-AP; Mon, 06 Dec 2021 07:23:53 +0000
+	id 1mu8Li-0000Uz-N3; Mon, 06 Dec 2021 07:23:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 238652.413692; Mon, 06 Dec 2021 07:23:53 +0000
+Received: by outflank-mailman (output) from mailman id 238642.413624; Mon, 06 Dec 2021 07:23:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mu8Lo-0001sz-TC; Mon, 06 Dec 2021 07:23:52 +0000
-Received: by outflank-mailman (input) for mailman id 238652;
- Mon, 06 Dec 2021 07:23:50 +0000
+	id 1mu8Li-0000U6-EV; Mon, 06 Dec 2021 07:23:46 +0000
+Received: by outflank-mailman (input) for mailman id 238642;
+ Mon, 06 Dec 2021 07:23:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=9VqD=QX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mu8Ll-0008Mk-PV
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 07:23:49 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1mu8Lg-0008Mk-P7
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 07:23:44 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 702d5e8a-5665-11ec-8a4d-196798b21f7b;
+ id 6f7d7449-5665-11ec-8a4d-196798b21f7b;
  Mon, 06 Dec 2021 08:23:41 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 67E9A21940;
- Mon,  6 Dec 2021 07:23:41 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 395151FDF2;
+ Mon,  6 Dec 2021 07:23:40 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3F43413A9C;
- Mon,  6 Dec 2021 07:23:41 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0E8A01330B;
+ Mon,  6 Dec 2021 07:23:40 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id eKQ0Dn26rWHVdAAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 06 Dec 2021 07:23:41 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 8D9LAny6rWHVdAAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 06 Dec 2021 07:23:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,180 +53,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 702d5e8a-5665-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 6f7d7449-5665-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1638775421; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1638775420; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6ZwIQ/iqw4tJOJDbjhXNjxEyNK1FoP/fIru8GNLpj3E=;
-	b=Dx4H9mkwe6zA3efQNNiTwU8kUNk9Ej8hkMBKut7osjyQ2cr7rnD6CpIA0Nj0RHtFNQgcyg
-	TXfAw58DejxvNQ7ZkIyHrNSxZegZP9MrQRcqoeaTzRwkxZaq5qsws8rpYRbWhG91FY5ejP
-	Q0+4ad5Lmp4I657Xw5k2xxfGMqbAuks=
+	bh=2T/0NcFBUay+umzcIVeBLzt93p/NF1ROTt/i4aaQWm8=;
+	b=Efh8bL88xHn6VBERl0JJiPtNHp4+hYDaguiD7BajgSnsl1zjovl6LdewERRMNpnIvJ+zAg
+	+N/0Aw1awnndKXgPYBx7VqGyfzGegxatcKxZnM2tdUBUNqmw4p+gSU/wEyCxlNpAKvf6GH
+	9sxgiwDdn7genYuvrgcOIKLeZ0DmU8k=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 09/10] mini-os: prepare grantmap entry interface for use by PVH mode
-Date: Mon,  6 Dec 2021 08:23:36 +0100
-Message-Id: <20211206072337.9517-10-jgross@suse.com>
+Subject: [PATCH 03/10] mini-os: don't assume contiguous RAM when initializing in PVH mode
+Date: Mon,  6 Dec 2021 08:23:30 +0100
+Message-Id: <20211206072337.9517-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211206072337.9517-1-jgross@suse.com>
 References: <20211206072337.9517-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of passing the pointer of a grantmap entry to the
-_gntmap_[un]map_grant_ref() sub-functions use the map pointer and the
-entry index instead. This will be needed for PVH mode usage.
+Sizing the available memory should respect memory holes, so look at
+the memory map when setting the boundary for the memory allocator.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- gntmap.c | 48 +++++++++++++++++++++++-------------------------
- 1 file changed, 23 insertions(+), 25 deletions(-)
+ arch/x86/mm.c  |  6 +-----
+ e820.c         | 13 ++++++++-----
+ include/e820.h |  2 +-
+ 3 files changed, 10 insertions(+), 11 deletions(-)
 
-diff --git a/gntmap.c b/gntmap.c
-index f6ab3ad..7ae8fe6 100644
---- a/gntmap.c
-+++ b/gntmap.c
-@@ -55,36 +55,34 @@ struct gntmap_entry {
- };
- 
- static inline int
--gntmap_entry_used(struct gntmap_entry *entry)
-+gntmap_entry_used(struct gntmap *map, int idx)
+diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+index 8df93da..3bf6170 100644
+--- a/arch/x86/mm.c
++++ b/arch/x86/mm.c
+@@ -107,7 +107,6 @@ void arch_mm_preinit(void *p)
  {
--    return entry->host_addr != 0;
-+    return map->entries[idx].host_addr != 0;
- }
+     long ret;
+     domid_t domid = DOMID_SELF;
+-    unsigned long max;
  
--static struct gntmap_entry*
--gntmap_find_free_entry(struct gntmap *map)
-+static int gntmap_find_free_entry(struct gntmap *map)
+     pt_base = page_table_base;
+     first_free_pfn = PFN_UP(to_phys(&_end));
+@@ -117,11 +116,8 @@ void arch_mm_preinit(void *p)
+         xprintk("could not get memory size\n");
+         do_exit();
+     }
+-    last_free_pfn = ret;
+ 
+-    max = e820_get_maxpfn();
+-    if ( max < last_free_pfn )
+-        last_free_pfn = max;
++    last_free_pfn = e820_get_maxpfn(ret);
+ }
+ #endif
+ 
+diff --git a/e820.c b/e820.c
+index 336a8b8..14fd3cd 100644
+--- a/e820.c
++++ b/e820.c
+@@ -155,10 +155,10 @@ void arch_print_memmap(void)
+ }
+ #endif
+ 
+-unsigned long e820_get_maxpfn(void)
++unsigned long e820_get_maxpfn(unsigned long pages)
  {
      int i;
+-    unsigned long pfn, max = 0;
++    unsigned long pfns, max = 0;
  
-     for (i = 0; i < map->nentries; i++) {
--        if (!gntmap_entry_used(&map->entries[i]))
--            return &map->entries[i];
-+        if (!gntmap_entry_used(map, i))
-+            return i;
+     e820_get_memmap();
+ 
+@@ -166,9 +166,12 @@ unsigned long e820_get_maxpfn(void)
+     {
+         if ( e820_map[i].type != E820_RAM )
+             continue;
+-        pfn = (e820_map[i].addr + e820_map[i].size) >> PAGE_SHIFT;
+-        if ( pfn > max )
+-            max = pfn;
++        pfns = e820_map[i].size >> PAGE_SHIFT;
++        max = e820_map[i].addr >> PAGE_SHIFT;
++        if ( pages <= pfns )
++            return max + pages;
++        pages -= pfns;
++        max += pfns;
      }
  
-     DEBUG("(map=%p): all %d entries full",
-            map, map->nentries);
--    return NULL;
-+    return -1;
- }
+     return max;
+diff --git a/include/e820.h b/include/e820.h
+index af2129f..6a57f05 100644
+--- a/include/e820.h
++++ b/include/e820.h
+@@ -49,6 +49,6 @@ struct __packed e820entry {
+ extern struct e820entry e820_map[];
+ extern unsigned e820_entries;
  
--static struct gntmap_entry*
--gntmap_find_entry(struct gntmap *map, unsigned long addr)
-+static int gntmap_find_entry(struct gntmap *map, unsigned long addr)
- {
-     int i;
+-unsigned long e820_get_maxpfn(void);
++unsigned long e820_get_maxpfn(unsigned long pages);
  
-     for (i = 0; i < map->nentries; i++) {
-         if (map->entries[i].host_addr == addr)
--            return &map->entries[i];
-+            return i;
-     }
--    return NULL;
-+    return -1;
- }
- 
- int
-@@ -105,12 +103,13 @@ gntmap_set_max_grants(struct gntmap *map, int count)
- }
- 
- static int
--_gntmap_map_grant_ref(struct gntmap_entry *entry, 
-+_gntmap_map_grant_ref(struct gntmap *map, int idx,
-                       unsigned long host_addr,
-                       uint32_t domid,
-                       uint32_t ref,
-                       int writable)
- {
-+    struct gntmap_entry *entry = map->entries + idx;
-     struct gnttab_map_grant_ref op;
-     int rc;
- 
-@@ -135,8 +134,9 @@ _gntmap_map_grant_ref(struct gntmap_entry *entry,
- }
- 
- static int
--_gntmap_unmap_grant_ref(struct gntmap_entry *entry)
-+_gntmap_unmap_grant_ref(struct gntmap *map, int idx)
- {
-+    struct gntmap_entry *entry = map->entries + idx;
-     struct gnttab_unmap_grant_ref op;
-     int rc;
- 
-@@ -160,19 +160,19 @@ int
- gntmap_munmap(struct gntmap *map, unsigned long start_address, int count)
- {
-     int i, rc;
--    struct gntmap_entry *ent;
-+    int idx;
- 
-     DEBUG("(map=%p, start_address=%lx, count=%d)",
-            map, start_address, count);
- 
-     for (i = 0; i < count; i++) {
--        ent = gntmap_find_entry(map, start_address + PAGE_SIZE * i);
--        if (ent == NULL) {
-+        idx = gntmap_find_entry(map, start_address + PAGE_SIZE * i);
-+        if (idx < 0) {
-             printk("gntmap: tried to munmap unknown page\n");
-             return -EINVAL;
-         }
- 
--        rc = _gntmap_unmap_grant_ref(ent);
-+        rc = _gntmap_unmap_grant_ref(map, idx);
-         if (rc != 0)
-             return rc;
-     }
-@@ -189,7 +189,7 @@ gntmap_map_grant_refs(struct gntmap *map,
-                       int writable)
- {
-     unsigned long addr;
--    struct gntmap_entry *ent;
-+    int idx;
-     int i;
- 
-     DEBUG("(map=%p, count=%" PRIu32 ", "
-@@ -206,9 +206,9 @@ gntmap_map_grant_refs(struct gntmap *map,
-         return NULL;
- 
-     for (i = 0; i < count; i++) {
--        ent = gntmap_find_free_entry(map);
--        if (ent == NULL ||
--            _gntmap_map_grant_ref(ent,
-+        idx = gntmap_find_free_entry(map);
-+        if (idx < 0 ||
-+            _gntmap_map_grant_ref(map, idx,
-                                   addr + PAGE_SIZE * i,
-                                   domids[i * domids_stride],
-                                   refs[i],
-@@ -233,15 +233,13 @@ gntmap_init(struct gntmap *map)
- void
- gntmap_fini(struct gntmap *map)
- {
--    struct gntmap_entry *ent;
-     int i;
- 
-     DEBUG("(map=%p)", map);
- 
-     for (i = 0; i < map->nentries; i++) {
--        ent = &map->entries[i];
--        if (gntmap_entry_used(ent))
--            (void) _gntmap_unmap_grant_ref(ent);
-+        if (gntmap_entry_used(map, i))
-+            (void) _gntmap_unmap_grant_ref(map, i);
-     }
- 
-     xfree(map->entries);
+ #endif /*__E820_HEADER*/
 -- 
 2.26.2
 
