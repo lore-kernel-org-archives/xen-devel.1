@@ -4,29 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49508C433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:39:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240003.416108 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6211FC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:42:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240007.416118 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMdR-0000N2-5T; Mon, 06 Dec 2021 22:39:01 +0000
+	id 1muMgD-0001pR-Ke; Mon, 06 Dec 2021 22:41:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240003.416108; Mon, 06 Dec 2021 22:39:01 +0000
+Received: by outflank-mailman (output) from mailman id 240007.416118; Mon, 06 Dec 2021 22:41:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMdR-0000Mv-2O; Mon, 06 Dec 2021 22:39:01 +0000
-Received: by outflank-mailman (input) for mailman id 240003;
- Mon, 06 Dec 2021 22:38:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muMgD-0001pK-Ha; Mon, 06 Dec 2021 22:41:53 +0000
+Received: by outflank-mailman (input) for mailman id 240007;
+ Mon, 06 Dec 2021 22:41:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMdP-0004ul-Bx
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:38:59 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4d3392bf-56e5-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:38:58 +0100 (CET)
+ <SRS0=nYkR=QX=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1muMgC-0001pE-0t
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:41:52 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [2604:1380:4601:e00::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b397eaa1-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:41:50 +0100 (CET)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 77B0CB815B0;
+ Mon,  6 Dec 2021 22:41:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E588FC341C6;
+ Mon,  6 Dec 2021 22:41:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,259 +46,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4d3392bf-56e5-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210437.708862278@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830338;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=E+U4wBNO821PczyA58GFB83d3mrDArDJk9rmH8AmF2s=;
-	b=XgzGfONAvccQTF6y8RU+V8re1pgjfR0lBoT/9VUgclQ3JM43YF+JGXabuLcuE1jBlZUbxZ
-	r5gKwI4COnVuL+LVNpp1XS8npZu4/QNJr9VKtynI10/IbTRuCAQkQXUebw6D9pyukMNGIO
-	65TH/YU0UJ2QhkfOOhzGm4mxl10x80CcYKA+nWGjLBdsH+DHpB1MpfsHDWPgFMzV/cq099
-	PCZ+8deN75cxusBqHvU26pqvpvbc7n39A11+hGZnQMhZBMvksO089n4M4L4pcWmOUNvH3y
-	KILPk7eSvemFD7lfDWUFwWHw6eDo1wYUFhqaUKtwmztro+ZWYAIPSyWpNdokfA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830338;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=E+U4wBNO821PczyA58GFB83d3mrDArDJk9rmH8AmF2s=;
-	b=Asgi9ojEK9C/QpFeOZitUkdaLt+mGz7mKxEdN/+qlo7HJoCr0R42jfwDjz72tdmcwVwwsH
-	eQjniczuWGPANGAA==
-From: Thomas Gleixner <tglx@linutronix.de>
-To: LKML <linux-kernel@vger.kernel.org>
-Cc: Bjorn Helgaas <helgaas@kernel.org>,
- Marc Zygnier <maz@kernel.org>,
- Alex Williamson <alex.williamson@redhat.com>,
- Kevin Tian <kevin.tian@intel.com>,
- Jason Gunthorpe <jgg@nvidia.com>,
- Megha Dey <megha.dey@intel.com>,
- Ashok Raj <ashok.raj@intel.com>,
- linux-pci@vger.kernel.org,
- Cedric Le Goater <clg@kaod.org>,
- xen-devel@lists.xenproject.org,
- Juergen Gross <jgross@suse.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Will Deacon <will@kernel.org>,
- Santosh Shilimkar <ssantosh@kernel.org>,
- iommu@lists.linux-foundation.org,
- dmaengine@vger.kernel.org,
- Stuart Yoder <stuyoder@gmail.com>,
- Laurentiu Tudor <laurentiu.tudor@nxp.com>,
- Nishanth Menon <nm@ti.com>,
- Tero Kristo <kristo@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- Vinod Koul <vkoul@kernel.org>,
- Mark Rutland <mark.rutland@arm.com>,
- Robin Murphy <robin.murphy@arm.com>,
- Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 01/36] device: Move MSI related data into a struct
-References: <20211206210307.625116253@linutronix.de>
+X-Inumbo-ID: b397eaa1-56e5-11ec-a5e1-b9374ead2679
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1638830508;
+	bh=ybxb1Cs1iC1zy+8FjGpNML/IjtZYDAOJfwLd5cIiNM4=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=sUPQLM+WjPb3DqLvk0wYZmzffZail/VBHfWBCIxTaABkGAir4iou/JeXlSzWCPzGl
+	 GJJHjKPhyh94cDbJoRJnLIzGaZn4JN9m2JrqVPI4Oj82nHR7CJeeG66nTLi60a2rao
+	 hLusu2s8jRbIqjGLpIV50pKuS9qZubVmwvEWg5pCbgDMMfU6Y9W4A4P0zl+I6/WZP/
+	 R6zBBUs4rgZF3FI7Ik8k7aQso2aaiJtrsQFo5Sukk951hFKTQN2wJtUeuvd3JDwahH
+	 hxaoGNLyMsvIs7ij6/cMvXr/meSvujGGdHI63j1v6U9D5Tb1b6k6QCHPSuU9X5l8E/
+	 XbAs6QoQxsMcQ==
+Date: Mon, 6 Dec 2021 14:41:46 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Julien Grall <julien@xen.org>
+cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, 
+    Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>, 
+    Andre Przywara <Andre.Przywara@arm.com>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    "sstabellini@kernel.org" <sstabellini@kernel.org>, 
+    "stefanos@xilinx.com" <stefanos@xilinx.com>, 
+    "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>, 
+    "jbeulich@suse.com" <jbeulich@suse.com>
+Subject: Re: [XEN v2] xen/arm64: io: Decode 32-bit ldr/str post-indexing
+ instructions
+In-Reply-To: <4315f3f8-4431-3257-dc95-a3089532237b@xen.org>
+Message-ID: <alpine.DEB.2.22.394.2112061438300.4091490@ubuntu-linux-20-04-desktop>
+References: <20211129191638.19877-1-ayankuma@xilinx.com> <20211130094950.1bf368d6@donnerap.cambridge.arm.com> <a69d41f1-7b57-c127-ae73-2de5a581dddd@xilinx.com> <D8811539-65F2-4D40-BFEF-CE72EA8E902A@arm.com> <4315f3f8-4431-3257-dc95-a3089532237b@xen.org>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:38:57 +0100 (CET)
+Content-Type: text/plain; charset=US-ASCII
 
-The only unconditional part of MSI data in struct device is the irqdomain
-pointer. Everything else can be allocated on demand. Create a data
-structure and move the irqdomain pointer into it. The other MSI specific
-parts are going to be removed from struct device in later steps.
+On Mon, 6 Dec 2021, Julien Grall wrote:
+> On 01/12/2021 08:41, Bertrand Marquis wrote:
+> > Hi Ayan,
+> > 
+> > > On 30 Nov 2021, at 19:13, Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
+> > > wrote:
+> > > 
+> > > Hi Andre,
+> > > 
+> > > Thanks for your comments. They are useful.
+> > > 
+> > > On 30/11/2021 09:49, Andre Przywara wrote:
+> > > > On Mon, 29 Nov 2021 19:16:38 +0000
+> > > > Ayan Kumar Halder <ayan.kumar.halder@xilinx.com> wrote:
+> > > > Hi,
+> > > > > At the moment, Xen is only handling data abort with valid syndrome
+> > > > > (i.e.
+> > > > > ISV=0). Unfortunately, this doesn't cover all the instructions a
+> > > > > domain
+> > > > > could use to access MMIO regions.
+> > > > > 
+> > > > > For instance, Xilinx baremetal OS will use:
+> > > > > 
+> > > > >          volatile u32 *LocalAddr = (volatile u32 *)Addr;
+> > > > >          *LocalAddr = Value;
+> > > > > 
+> > > > > This leave the compiler to decide which store instructions to use.
+> > > > As mentioned in the other email, this is wrong, if this points to MMIO:
+> > > > don't let the compiler do MMIO accesses. If a stage 2 fault isn't in
+> > > > an MMIO area, you should not see traps that you cannot handle already.
+> > > > So I don't think it's a good idea to use that as an example. And since
+> > > > this patch only seems to address this use case, I would doubt its
+> > > > usefulness in general.
+> > > Yes, I should have fixed the comment.
+> > > 
+> > > Currently, I am testing with baremetal app which uses inline assembly code
+> > > with post indexing instructions, to access the MMIO.
+> > > 
+> > > ATM, I am testing with 32 bit MMIO only.
+> > > 
+> > > On the usefulness, I am kind of torn as it is legitimate for post indexing
+> > > instructions to be used in an inline-assembly code for accessing MMIO.
+> > > However, that may not be something commonly seen.
+> > > 
+> > > @Stefano/Bertrand/Julien/Volodymyr :- As you are the Arm mantainers, can
+> > > you comment if we should have decoding logic or not ?
+> > 
+> > Andre gave you the official statement from Arm and there is nothing more I
+> > can say.
+> 
+> I think this would be handy for other hypervisor and OS developper to know
+> what they can expect when running in a virtualized environment. So would it be
+> possible to update the Arm Arm reflecting this statement?
+> 
+> > I will leave this decision to Stefano and Julien.
+> 
+> I have had a chat on IRC with Stefano about this. I think the main sticking
+> point is the Arm Arm doesn't clearly state those instructions should not be
+> used by a virtualized OS on MMIO regions.
+> 
+> To me, this topic looks similar to the set/way instruction dilemma. They are a
+> pain to virtualize (and the Arm Arm clearly hint it) but we had to do it
+> because some OSes relied on them.
+> 
+> I think the main difference is the Arm Arm doesn't hint they should not be
+> used (it only says a valid syndrome is not provided) and the implementation
+> should hopefully be smaller and self-contained.
+> 
+> So I would be inclined to allow Xen to decode post-indexing instructions
+> (pending the review).
 
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Santosh Shilimkar <ssantosh@kernel.org>
-Cc: iommu@lists.linux-foundation.org
-Cc: dmaengine@vger.kernel.org
----
- drivers/base/platform-msi.c                 |   12 ++++++------
- drivers/dma/ti/k3-udma.c                    |    4 ++--
- drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |    2 +-
- drivers/irqchip/irq-mvebu-icu.c             |    6 +++---
- drivers/soc/ti/k3-ringacc.c                 |    4 ++--
- drivers/soc/ti/ti_sci_inta_msi.c            |    2 +-
- include/linux/device.h                      |   20 ++++++++++++++------
- 7 files changed, 29 insertions(+), 21 deletions(-)
+I am of the same opinion.
 
---- a/drivers/base/platform-msi.c
-+++ b/drivers/base/platform-msi.c
-@@ -210,10 +210,10 @@ platform_msi_alloc_priv_data(struct devi
- 	 * accordingly (which would impact the max number of MSI
- 	 * capable devices).
- 	 */
--	if (!dev->msi_domain || !write_msi_msg || !nvec || nvec > MAX_DEV_MSIS)
-+	if (!dev->msi.domain || !write_msi_msg || !nvec || nvec > MAX_DEV_MSIS)
- 		return ERR_PTR(-EINVAL);
- 
--	if (dev->msi_domain->bus_token != DOMAIN_BUS_PLATFORM_MSI) {
-+	if (dev->msi.domain->bus_token != DOMAIN_BUS_PLATFORM_MSI) {
- 		dev_err(dev, "Incompatible msi_domain, giving up\n");
- 		return ERR_PTR(-EINVAL);
- 	}
-@@ -269,7 +269,7 @@ int platform_msi_domain_alloc_irqs(struc
- 	if (err)
- 		goto out_free_priv_data;
- 
--	err = msi_domain_alloc_irqs(dev->msi_domain, dev, nvec);
-+	err = msi_domain_alloc_irqs(dev->msi.domain, dev, nvec);
- 	if (err)
- 		goto out_free_desc;
- 
-@@ -282,7 +282,7 @@ int platform_msi_domain_alloc_irqs(struc
- 	return 0;
- 
- out_free_irqs:
--	msi_domain_free_irqs(dev->msi_domain, dev);
-+	msi_domain_free_irqs(dev->msi.domain, dev);
- out_free_desc:
- 	platform_msi_free_descs(dev, 0, nvec);
- out_free_priv_data:
-@@ -306,7 +306,7 @@ void platform_msi_domain_free_irqs(struc
- 		platform_msi_free_priv_data(desc->platform.msi_priv_data);
- 	}
- 
--	msi_domain_free_irqs(dev->msi_domain, dev);
-+	msi_domain_free_irqs(dev->msi.domain, dev);
- 	platform_msi_free_descs(dev, 0, MAX_DEV_MSIS);
- }
- EXPORT_SYMBOL_GPL(platform_msi_domain_free_irqs);
-@@ -354,7 +354,7 @@ struct irq_domain *
- 		return NULL;
- 
- 	data->host_data = host_data;
--	domain = irq_domain_create_hierarchy(dev->msi_domain, 0,
-+	domain = irq_domain_create_hierarchy(dev->msi.domain, 0,
- 					     is_tree ? 0 : nvec,
- 					     dev->fwnode, ops, data);
- 	if (!domain)
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -5279,9 +5279,9 @@ static int udma_probe(struct platform_de
- 	if (IS_ERR(ud->ringacc))
- 		return PTR_ERR(ud->ringacc);
- 
--	dev->msi_domain = of_msi_get_domain(dev, dev->of_node,
-+	dev->msi.domain = of_msi_get_domain(dev, dev->of_node,
- 					    DOMAIN_BUS_TI_SCI_INTA_MSI);
--	if (!dev->msi_domain) {
-+	if (!dev->msi.domain) {
- 		dev_err(dev, "Failed to get MSI domain\n");
- 		return -EPROBE_DEFER;
- 	}
---- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
-+++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
-@@ -3170,7 +3170,7 @@ static void arm_smmu_setup_msis(struct a
- 	if (!(smmu->features & ARM_SMMU_FEAT_MSI))
- 		return;
- 
--	if (!dev->msi_domain) {
-+	if (!dev->msi.domain) {
- 		dev_info(smmu->dev, "msi_domain absent - falling back to wired irqs\n");
- 		return;
- 	}
---- a/drivers/irqchip/irq-mvebu-icu.c
-+++ b/drivers/irqchip/irq-mvebu-icu.c
-@@ -314,12 +314,12 @@ static int mvebu_icu_subset_probe(struct
- 		msi_data->subset_data = of_device_get_match_data(dev);
- 	}
- 
--	dev->msi_domain = of_msi_get_domain(dev, dev->of_node,
-+	dev->msi.domain = of_msi_get_domain(dev, dev->of_node,
- 					    DOMAIN_BUS_PLATFORM_MSI);
--	if (!dev->msi_domain)
-+	if (!dev->msi.domain)
- 		return -EPROBE_DEFER;
- 
--	msi_parent_dn = irq_domain_get_of_node(dev->msi_domain);
-+	msi_parent_dn = irq_domain_get_of_node(dev->msi.domain);
- 	if (!msi_parent_dn)
- 		return -ENODEV;
- 
---- a/drivers/soc/ti/k3-ringacc.c
-+++ b/drivers/soc/ti/k3-ringacc.c
-@@ -1356,9 +1356,9 @@ static int k3_ringacc_init(struct platfo
- 	struct resource *res;
- 	int ret, i;
- 
--	dev->msi_domain = of_msi_get_domain(dev, dev->of_node,
-+	dev->msi.domain = of_msi_get_domain(dev, dev->of_node,
- 					    DOMAIN_BUS_TI_SCI_INTA_MSI);
--	if (!dev->msi_domain) {
-+	if (!dev->msi.domain) {
- 		dev_err(dev, "Failed to get MSI domain\n");
- 		return -EPROBE_DEFER;
- 	}
---- a/drivers/soc/ti/ti_sci_inta_msi.c
-+++ b/drivers/soc/ti/ti_sci_inta_msi.c
-@@ -140,7 +140,7 @@ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain
- 
- void ti_sci_inta_msi_domain_free_irqs(struct device *dev)
- {
--	msi_domain_free_irqs(dev->msi_domain, dev);
-+	msi_domain_free_irqs(dev->msi.domain, dev);
- 	ti_sci_inta_msi_free_descs(dev);
- }
- EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain_free_irqs);
---- a/include/linux/device.h
-+++ b/include/linux/device.h
-@@ -372,6 +372,16 @@ struct dev_links_info {
- };
- 
- /**
-+ * struct dev_msi_info - Device data related to MSI
-+ * @domain:	The MSI interrupt domain associated to the device
-+ */
-+struct dev_msi_info {
-+#ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
-+	struct irq_domain	*domain;
-+#endif
-+};
-+
-+/**
-  * struct device - The basic device structure
-  * @parent:	The device's "parent" device, the device to which it is attached.
-  * 		In most cases, a parent device is some sort of bus or host
-@@ -407,8 +417,8 @@ struct dev_links_info {
-  * @em_pd:	device's energy model performance domain
-  * @pins:	For device pin management.
-  *		See Documentation/driver-api/pin-control.rst for details.
-+ * @msi:	MSI related data
-  * @msi_list:	Hosts MSI descriptors
-- * @msi_domain: The generic MSI domain this device is using.
-  * @numa_node:	NUMA node this device is close to.
-  * @dma_ops:    DMA mapping operations for this device.
-  * @dma_mask:	Dma mask (if dma'ble device).
-@@ -500,12 +510,10 @@ struct device {
- 	struct em_perf_domain	*em_pd;
- #endif
- 
--#ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
--	struct irq_domain	*msi_domain;
--#endif
- #ifdef CONFIG_PINCTRL
- 	struct dev_pin_info	*pins;
- #endif
-+	struct dev_msi_info	msi;
- #ifdef CONFIG_GENERIC_MSI_IRQ
- 	struct list_head	msi_list;
- #endif
-@@ -666,7 +674,7 @@ static inline void set_dev_node(struct d
- static inline struct irq_domain *dev_get_msi_domain(const struct device *dev)
- {
- #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
--	return dev->msi_domain;
-+	return dev->msi.domain;
- #else
- 	return NULL;
- #endif
-@@ -675,7 +683,7 @@ static inline struct irq_domain *dev_get
- static inline void dev_set_msi_domain(struct device *dev, struct irq_domain *d)
- {
- #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
--	dev->msi_domain = d;
-+	dev->msi.domain = d;
- #endif
- }
- 
-
+(FYI in any case we'll also work internally to improve Xilinx baremetal.)
 
