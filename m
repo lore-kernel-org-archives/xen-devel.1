@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9195DC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91933C433EF
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:07:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239492.415252 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.239493.415259 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSr-0002yP-Lh; Mon, 06 Dec 2021 17:07:45 +0000
+	id 1muHSs-00037f-UR; Mon, 06 Dec 2021 17:07:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239492.415252; Mon, 06 Dec 2021 17:07:45 +0000
+Received: by outflank-mailman (output) from mailman id 239493.415259; Mon, 06 Dec 2021 17:07:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSr-0002wC-29; Mon, 06 Dec 2021 17:07:45 +0000
-Received: by outflank-mailman (input) for mailman id 239492;
- Mon, 06 Dec 2021 17:07:43 +0000
+	id 1muHSr-00034S-QU; Mon, 06 Dec 2021 17:07:45 +0000
+Received: by outflank-mailman (input) for mailman id 239493;
+ Mon, 06 Dec 2021 17:07:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHOa-0005ti-Li
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:03:20 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 689c9f84-56b6-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 18:03:19 +0100 (CET)
+ id 1muHPP-0005ti-0k
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:11 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8684aff7-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:04:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 689c9f84-56b6-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 8684aff7-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810199;
+  d=citrix.com; s=securemail; t=1638810249;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=o+VIkl7f43OW2o365l1olvv7vAkXSoY1AlwWimrAG00=;
-  b=THkylvUyJ5DCfhEqb6RvhlFWZay+kQisAdmvxQvS+giF4tH/D13Cob/n
-   BXOXXVMDL6hJ58W81RgkQasX3nUwpQEz4Gnu7ojGdoTmozwuXWTXdCLpn
-   34ZHaW6fouxbRc5Wc1D4e+/TMUsK9hwwyH6+VL/J5L6cRfxdb/E5Caok8
-   k=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 0u3+9w6TGNhrEv6BTnCAmsn0lu//TRr+GLUBiUyj5sWVevqLmlzTFlq60tqodiJ4DpEl4WBbVD
- mBSA/JV/bsdIHKk8KmvM+AH4BsGEYCUjMRhizOEECYvPUM7UmOj1nFAR/IoUOUcuFj3fezBwoN
- kPb/MYMaAA+UwUPBhJjAIPq5v48XlOP0Bz1k70HePCxfVQj4D41yWnzisQ3eJp4/TqZ0I/WFxu
- sOs7snehAiFw2E40cZY6HNh0kVrvX6pBQxnfqYLEzmifHJ/nk0dYtf5JnNJb+K2ywYfsyhKu8h
- 9tijHoiQOyz2cTa8VMoWX5/V
+  bh=HYzxa9IJ0gs1g2ZQBPATfpRkikT39MPJWLs4P8HFYcY=;
+  b=RaWmFIHpTc4H59/E6Q1dMIU1PaQZmh1v41GwfSd1VaIK4BmzwInlVtot
+   eNSDNeaoY8jFW/bvdELpxoOnBY5ZIDbHavizOWf5S5lHuz5e26phP7jna
+   Aaz+ncRTQBiDBLLoLi9Gs7UtHoPAOvkxNA9b1M55KOVgax7jjeqDh1nY5
+   c=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: PMFEPc+L8bkSjMM1BsImfIQ/8HRwMqQdH5O+591xy3I2KyxaSv59Y3B/fEAZqVJOsHufkVvtZo
+ 9IxObt2WtsY2qFYZ6TZYMhI5sHUZzuX+S3Zy3CIE03FdM6MPUIsoPDEgDSWLqeg/f5Mh3yArCm
+ qKe67eEpZ9DvkE4VMU8RvC+vDdSUQ6p2byrW/k7qUAvRHrA++PPfN3y5tNMGVwQanE0iAQdnAA
+ UH7sL84CMfG9fASDgSrsyrB22fLgkPh750njAnvHRlpewf7hb+9bbjQdIObYEiv4s1SXvAnOt1
+ 6ZHC1rebJ9FUWTJF6Ahiod54
 X-SBRS: 5.1
-X-MesageID: 59387780
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 61420789
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:0tTLJKBZwyv3zhVW/8/kw5YqxClBgxIJ4kV8jS/XYbTApDh00WYGy
- 2AaDzrSOKmPZjD2c9Fxa4rj9EoB7ZCEyIBqQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WLGs1hxZH1c+EX570Uw7wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/lQvSjfNsw
- oV3tI2MSSYTPvySieU3akwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTQ+9whsMlPY/zMZkWoH1IxjDFF/c2B5vERs0m4PcFjWxg2Z8eRZ4yY
- eIEUwJTNzLcQiZTBWkHU6t5oOSFqkLGJmgwRFW9+vNsvjm7IBZK+LnyMvLFd9qSX8JXk02E4
- GXc8AzRHRUyJNGZjz2f/RqEluLJ2C/2Ro8WPLm57eJxxk2ewHQJDx8bXkf9puO24ma3Xc5fL
- EoFvDIjt6Eo+GSkS9D8W1uzp3vsg/IHc4MOSatgsljLk/eKpVbCboQZctJfQMIY790VWDZ67
- F6Yo9PIPzw+7qyUY0vIo994sgiOESQSKGYDYwoNQg0E/8TvrekPs/7fcjpwOPXr14OoQFkc1
- xjP9XFj3OtL0abnwo3ipQif6w9AsKQlWeLcCu//emu+pj10a4e+D2BDwQiKtK0QRGp1o7Tog
- ZTlpyR8xL1XZX1uvHbUKAnoIF1Pz6zfWNE7qQQwd6TNDxz3pxaekXl4uVmS3ntBPMceYiPOa
- 0TOow5X75I7FCL0Nv8oOdPsUZ50kviI+THZuhb8NIAmjn9ZLlDvwc2TTRTIgzCFfLYEz8nTx
- qt3ge7zVC1HWMyLPRK9RvsH0K9D+8zN7Ti7eHwP9Dz+ieD2TCfMEd8taQLSBshkvPLsiFiEq
- L53aprVoyizpcWjO0E7B6ZIdgtURZX6bLirw/FqmhmrflA7RTp/UqCJmtvMueVNxsxoqwsBx
- VnlMmcw9bY1rSavxdyiZi8xZbXxc4x4qH5nbyUgMUzxgyooYJq17bdZfJwyJOF1+OtmxP9yb
- v8EZ8TfXagfFmWZo2wQPcvnsYhvVBW3ngbSbSCrVycyIsx7TAvT9966Iga2rHsSDjC6vNcVq
- qG70l+JWoIKQglvVZ6EaP+mw16rk2IaneZ+AxnBLtVJIR2++4l2MS3hyPQwJphUexnEwzKb0
- SeQAAsZ+raR89NkroGRiPnd/YmzEuZ4Ek5LJEXh7O67ZXvA426u4Y5cS+LULzrTY3z5pfe5b
- uJPwvCibPBexARWs5BxGqpAxL4l44e9vKdTywlpESmZb1mvDb88cHCK0dMW6/9Iz75d/wC3R
- liO6p9RPrDQYJHpF1sYJQwEaOWf1K5LxmmOvKpteEiqtjVq+LenUFlJO0jegSNQG7J5LYc5z
- Lpzo8UR8QG+1kInP9vuYvq4LIhQwqjsi5kai6w=
-IronPort-HdrOrdr: A9a23:p5n6PK3LpLGMJROv8H3UUAqjBLQkLtp133Aq2lEZdPRUGvb2qy
- nIpoV96faUskdpZJhOo7G90cW7LE80sKQFg7X5Xo3SODUO2lHJEGgK1+KLqFfd8m/Fh4tgPM
- 9bAs5D4bbLY2SS4/yX3ODBKadC/OW6
+IronPort-Data: A9a23:+sF+Z6Oe3UH/4cnvrR1DkMFynXyQoLVcMsEvi/4bfWQNrUon0jEGn
+ WQXXT2BOPnbYzH8ed1xPoXj9UtXuMPdnN9rGgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6bUsxNbVU8En5400o9w7RRbrNA2rBVPSvc4
+ bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
+ 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYo2Wrg9l7w
+ ttzjrjucAEkb/KPkbVaSgYNRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
+ 6VFdnZdNXhvhMrvqF6/YuBqmsQkKtitJI4Fs2ts5TrYEewnUdbIRKCiCdpwgm5s3JgRTae2i
+ 8wxYCFyVSjmXQV0H3wuKo4inb6ln2X2bGgNwL6SjfVuuDWCpOBr65DsL9j9atGMXd9SnEuTu
+ iTB5WuRKg4eHMySz3yC6H3Erv/Cm2b3VZwfEJW89+V2mxuDy2oLEhoUWFCn5/6jhSaWUtRDK
+ 0sS62w2oLI77kCDQdz0Xhn+q3mB1iPwQPIJTbd8slvUjPOJvUDJXQDoUwKtdvR2ltM/TzYk6
+ GStwervCG0w87TEDmuCo+L8QSyJBQAZKmoLZCkhRAQD4sX+rIxbsi8jXuqPA4bu0ISrRGiYL
+ ySi6XFn2u5N1ZJjO7CTpAif21qRSo71ohnZD+k9dkas9UtHaYGsfOREAnCLvK8bfO51orRs1
+ UXoevRyDshTVPlhdwTXGY3h+Y1FAd7falUwZnY1QPEcG8yFoSLLQGypyGgWyL1VGsgFYyT1R
+ 0TYpBlc4pReVFPzM/QnPNjgVp5wk/ewfTgAahwyRoAUCnSWXFXYlByCmGbKhzy9+KTSuf9X1
+ WinnTaEUi9BVPUPIMueTOYBy747rh3SNkuILa0XOy+PiOLEDFbMEO9tGALXMogRsfPVyC2Io
+ o03H5bblH1ivBjWP3C/HXg7dgtRcxDWxPne9qRqSwJ0ClY8RTx6VaaOmehJlk4Mt/09q9okN
+ 0qVAidwoGcTT1WdQelTQnw8Or7pQ7hlqnc3YX4lMVqygiBxaoez9qYPMZAweOB/puBkyPd1S
+ dgDetmBXasTGmiWpWxFYMmvtpFmeTSqmRmKY3ivbg8gcsMyXAfO4NLlIFfirXFcEiqtuMIii
+ LS8zQeHE4EbTgFvAZ+OOvKixl+8p1YHn+d2UxeaK9VfYhy0ooNrNzbwnrk8JMRVcUfPwT6T1
+ gC3BxYEpLaS/99poYeR3a3d9tWnCepzGEZeDlL317fuOHmI5HenzK9BTP2MIWLXWlTr9fjwf
+ u5S1fz9bqEKxQ4Yr4pmHr935qsi/N+z9aRCxwFpEXiXPVSmDrRsfiuP0cVV7/Afw7ZYvU29W
+ 16V+8kcMrKMYZu3HFkULQsjT+KCyfBLxWWCsaVreB33tH1t4b6KcUROJB3d2iVSIYx8PJ4h3
+ ep86tUd7Bayi0ZyP9uL5syOG79g8pDUv30bi6wn
+IronPort-HdrOrdr: A9a23:Od3UPKqI97AP6oVSHMwMHv8aV5oteYIsimQD101hICG8cqSj+P
+ xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
+ 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59387780"
+   d="scan'208";a="61420789"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
 	<wl@xen.org>
-Subject: [XEN PATCH 12/57] tools: remove some unneeded subdir-distclean-* targets
-Date: Mon, 6 Dec 2021 17:01:55 +0000
-Message-ID: <20211206170241.13165-13-anthony.perard@citrix.com>
+Subject: [XEN PATCH 37/57] tools/xentop: rework makefile
+Date: Mon, 6 Dec 2021 17:02:20 +0000
+Message-ID: <20211206170241.13165-38-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,43 +102,85 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Those two are already covered by subdir-distclean-% target in
-Rules.mk.
+Add "xentop" to "TARGETS" because this variable will be useful later.
+
+Always define all the targets, even when configured with
+--disable-monitor, instead don't visit the subdirectory.
+This mean xentop/ isn't visited anymore during "make clean" that's how
+most other subdirs in the tools/ works.
+
+Also add missing "xentop" rules. It only works without it because we
+still have make's built-ins rules and variables, but fix this to not
+have to rely on them.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/Makefile          | 3 ---
- tools/firmware/Makefile | 3 ---
- 2 files changed, 6 deletions(-)
+ tools/Makefile        |  2 +-
+ tools/xentop/Makefile | 19 ++++++++-----------
+ 2 files changed, 9 insertions(+), 12 deletions(-)
 
 diff --git a/tools/Makefile b/tools/Makefile
-index 757a560be0..8936b754c8 100644
+index 79b4c7e3de..0c1d8b64a4 100644
 --- a/tools/Makefile
 +++ b/tools/Makefile
-@@ -296,9 +296,6 @@ subdir-uninstall-debugger/kdd: .phony
- subdir-all-debugger/kdd: .phony
- 	$(MAKE) -C debugger/kdd all
+@@ -17,7 +17,7 @@ SUBDIRS-$(CONFIG_XCUTILS) += xcutils
+ SUBDIRS-$(CONFIG_X86) += firmware
+ SUBDIRS-y += console
+ SUBDIRS-y += xenmon
+-SUBDIRS-y += xentop
++SUBDIRS-$(XENSTAT_XENTOP) += xentop
+ SUBDIRS-y += libfsimage
+ SUBDIRS-$(CONFIG_Linux) += vchan
  
--subdir-distclean-firmware: .phony
--	$(MAKE) -C firmware distclean
+diff --git a/tools/xentop/Makefile b/tools/xentop/Makefile
+index 0034114684..1e52b29b37 100644
+--- a/tools/xentop/Makefile
++++ b/tools/xentop/Makefile
+@@ -13,24 +13,23 @@
+ XEN_ROOT=$(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-ifneq ($(XENSTAT_XENTOP),y)
+-.PHONY: all install xentop uninstall
+-all install xentop uninstall:
+-else
 -
- subtree-force-update:
- ifeq ($(CONFIG_QEMU_XEN),y)
- 	$(MAKE) qemu-xen-dir-force-update
-diff --git a/tools/firmware/Makefile b/tools/firmware/Makefile
-index 1f27117794..345037b93b 100644
---- a/tools/firmware/Makefile
-+++ b/tools/firmware/Makefile
-@@ -85,9 +85,6 @@ clean: subdirs-clean
+ CFLAGS += -DGCC_PRINTF -Werror $(CFLAGS_libxenstat)
+ LDLIBS += $(LDLIBS_libxenstat) $(CURSES_LIBS) $(TINFO_LIBS) $(SOCKET_LIBS) -lm
+ CFLAGS += -DHOST_$(XEN_OS)
+ 
+ # Include configure output (config.h)
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-LDFLAGS += $(APPEND_LDFLAGS)
++
++TARGETS := xentop
+ 
+ .PHONY: all
+-all: xentop
++all: $(TARGETS)
++
++xentop: xentop.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
+ 
+ .PHONY: install
+-install: xentop
++install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
+ 	$(INSTALL_PROG) xentop $(DESTDIR)$(sbindir)/xentop
+ 
+@@ -38,11 +37,9 @@ install: xentop
+ uninstall:
+ 	rm -f $(DESTDIR)$(sbindir)/xentop
+ 
+-endif
+-
+ .PHONY: clean
+ clean:
+-	rm -f xentop xentop.o $(DEPS_RM)
++	rm -f $(TARGETS) xentop.o $(DEPS_RM)
+ 
  .PHONY: distclean
- distclean: subdirs-distclean
- 
--subdir-distclean-etherboot: .phony
--	$(MAKE) -C etherboot distclean
--
- subdir-distclean-ovmf-dir: .phony
- 	rm -rf ovmf-dir ovmf-dir-remote
- 
+ distclean: clean
 -- 
 Anthony PERARD
 
