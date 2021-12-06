@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F30BC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:37:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239927.416042 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 063A6C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:37:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239929.416053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMbZ-0004El-Re; Mon, 06 Dec 2021 22:37:05 +0000
+	id 1muMbj-0004w8-6E; Mon, 06 Dec 2021 22:37:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239927.416042; Mon, 06 Dec 2021 22:37:05 +0000
+Received: by outflank-mailman (output) from mailman id 239929.416053; Mon, 06 Dec 2021 22:37:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMbZ-0004Ee-OR; Mon, 06 Dec 2021 22:37:05 +0000
-Received: by outflank-mailman (input) for mailman id 239927;
- Mon, 06 Dec 2021 22:37:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muMbj-0004vy-0n; Mon, 06 Dec 2021 22:37:15 +0000
+Received: by outflank-mailman (input) for mailman id 239929;
+ Mon, 06 Dec 2021 22:37:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMSh-0001Vt-EF
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:55 +0000
+ id 1muMSk-0001m5-4Q
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:58 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c027f916-56e3-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:27:52 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c2dcfdd6-56e3-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:27:56 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c027f916-56e3-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210224.763574089@linutronix.de>
+X-Inumbo-ID: c2dcfdd6-56e3-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210224.925241961@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638829671;
+	s=2020; t=1638829676;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=yrY1ZB0NumM3iY3b+dL6tdvji5YdLo8YZzow0Pc98K0=;
-	b=yogWCLClZ5HawXr86pUvSu27UdiujY09fLCr9qODZ6WHG6tdy1jo4R5oUed+NZBlb4D+aL
-	7QpxacnGafJnNFuGA3Qr4uuaCUoNpqcC0RQIn/nv2i/ZqqOPRpDk41N3evYyZcNUIORUqQ
-	RmyJmVXQ4SgC9OEaoFrfssQoJ8Xwn+4ZyexyySLnXH1jXW3w7H7gjCvNcp6z/9YZb3iZef
-	SnjRI8A4v1jtxW1cvkAQLxfhlEO0mCCMG5y3BXvNH9MRSgIaMFqX4JKVHvpx5vMHBoS0Bb
-	XHborQKOUtJXUnqPXT77WiZSbh3UWDmLFWdvo+NEVEOm05/Ol4MBGoFkTWQRhw==
+	 references:references; bh=FXX41Qfq2rmX4Pnl0ZDgGggJiyIMhnsIgHBe+OGHmI0=;
+	b=XU5P0R3+ZvbfRzdT7eITdUZpVffQhu3mwMQxHIuYgaoigDHKPoocQDa8qE3Uaf7sAC1A9a
+	Js9g6cNcn6mG5wi/DOPiYiYl3E8Zz14cSLHuVeGnH6q1kq55XyN9gRmcVHSh5M702eeuzS
+	bamXvbJtwYpQ7EnWUWKX/KSbvsAjwKbfyZz1Ddew/kluJQEYrt+sgElwsfwUoFZGHB3SW5
+	JWhsk59n5A4ddQt8nalxZK/oiN+HIb+DfnIB5bCE/+7f4xAhtXvdT/dZztFeYnEkP4j9ik
+	qGpniZKbYB7qVDkE7feBPxpsBYMFmfBZX4PgA2J+mwXW3+TPFkwcsLvleDUFdw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638829671;
+	s=2020e; t=1638829676;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=yrY1ZB0NumM3iY3b+dL6tdvji5YdLo8YZzow0Pc98K0=;
-	b=xWk0QhW9rvUKaVhvOUrP23TOY6t2RbQv3eb8/ILfXzb+qQTtu1Dgw8jDLlkSfce65pUPAy
-	AUFj7t7KeK1aKUCQ==
+	 references:references; bh=FXX41Qfq2rmX4Pnl0ZDgGggJiyIMhnsIgHBe+OGHmI0=;
+	b=5xLy8ejXtHWFxftIt7uUy/JNMg6lFP0zokUkUY/UbBvVYESVtltZxcFPpywZO0EAeM6axN
+	GP3uFRXwCiRvoiAg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -68,11 +68,11 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Ashok Raj <ashok.raj@intel.com>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
- Juergen Gross <jgross@suse.com>,
  Michael Ellerman <mpe@ellerman.id.au>,
  Paul Mackerras <paulus@samba.org>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linuxppc-dev@lists.ozlabs.org,
+ Juergen Gross <jgross@suse.com>,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
  linux-mips@vger.kernel.org,
  Kalle Valo <kvalo@codeaurora.org>,
@@ -85,145 +85,87 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-hyperv@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch V2 17/23] PCI/MSI: Split out !IRQDOMAIN code
+Subject: [patch V2 20/23] PCI/MSI: Move msi_lock to struct pci_dev
 References: <20211206210147.872865823@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:27:51 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:27:56 +0100 (CET)
 
-Split out the non irqdomain code into its own file.
+It's only required for PCI/MSI. So no point in having it in every struct
+device.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Tested-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
-V2: Add proper includes and fix variable name - Cedric
+V2: New patch
 ---
- drivers/pci/msi/Makefile |    5 ++--
- drivers/pci/msi/legacy.c |   52 +++++++++++++++++++++++++++++++++++++++++++++++
- drivers/pci/msi/msi.c    |   46 -----------------------------------------
- 3 files changed, 55 insertions(+), 48 deletions(-)
+ drivers/base/core.c    |    1 -
+ drivers/pci/msi/msi.c  |    2 +-
+ drivers/pci/probe.c    |    4 +++-
+ include/linux/device.h |    2 --
+ include/linux/pci.h    |    1 +
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
---- a/drivers/pci/msi/Makefile
-+++ b/drivers/pci/msi/Makefile
-@@ -1,5 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0
- #
- # Makefile for the PCI/MSI
--obj-$(CONFIG_PCI)		+= pcidev_msi.o
--obj-$(CONFIG_PCI_MSI)		+= msi.o
-+obj-$(CONFIG_PCI)			+= pcidev_msi.o
-+obj-$(CONFIG_PCI_MSI)			+= msi.o
-+obj-$(CONFIG_PCI_MSI_ARCH_FALLBACKS)	+= legacy.o
---- /dev/null
-+++ b/drivers/pci/msi/legacy.c
-@@ -0,0 +1,52 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * PCI Message Signaled Interrupt (MSI).
-+ *
-+ * Legacy architecture specific setup and teardown mechanism.
-+ */
-+#include <linux/msi.h>
-+#include <linux/pci.h>
-+
-+/* Arch hooks */
-+int __weak arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
-+{
-+	return -EINVAL;
-+}
-+
-+void __weak arch_teardown_msi_irq(unsigned int irq)
-+{
-+}
-+
-+int __weak arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
-+{
-+	struct msi_desc *desc;
-+	int ret;
-+
-+	/*
-+	 * If an architecture wants to support multiple MSI, it needs to
-+	 * override arch_setup_msi_irqs()
-+	 */
-+	if (type == PCI_CAP_ID_MSI && nvec > 1)
-+		return 1;
-+
-+	for_each_pci_msi_entry(desc, dev) {
-+		ret = arch_setup_msi_irq(dev, desc);
-+		if (ret)
-+			return ret < 0 ? ret : -ENOSPC;
-+	}
-+
-+	return 0;
-+}
-+
-+void __weak arch_teardown_msi_irqs(struct pci_dev *dev)
-+{
-+	struct msi_desc *desc;
-+	int i;
-+
-+	for_each_pci_msi_entry(desc, dev) {
-+		if (desc->irq) {
-+			for (i = 0; i < desc->nvec_used; i++)
-+				arch_teardown_msi_irq(desc->irq + i);
-+		}
-+	}
-+}
+--- a/drivers/base/core.c
++++ b/drivers/base/core.c
+@@ -2875,7 +2875,6 @@ void device_initialize(struct device *de
+ 	device_pm_init(dev);
+ 	set_dev_node(dev, NUMA_NO_NODE);
+ #ifdef CONFIG_GENERIC_MSI_IRQ
+-	raw_spin_lock_init(&dev->msi_lock);
+ 	INIT_LIST_HEAD(&dev->msi_list);
+ #endif
+ 	INIT_LIST_HEAD(&dev->links.consumers);
 --- a/drivers/pci/msi/msi.c
 +++ b/drivers/pci/msi/msi.c
-@@ -50,52 +50,6 @@ static void pci_msi_teardown_msi_irqs(st
- #define pci_msi_teardown_msi_irqs	arch_teardown_msi_irqs
- #endif
+@@ -18,7 +18,7 @@ int pci_msi_ignore_mask;
  
--#ifdef CONFIG_PCI_MSI_ARCH_FALLBACKS
--/* Arch hooks */
--int __weak arch_setup_msi_irq(struct pci_dev *dev, struct msi_desc *desc)
--{
--	return -EINVAL;
--}
+ static noinline void pci_msi_update_mask(struct msi_desc *desc, u32 clear, u32 set)
+ {
+-	raw_spinlock_t *lock = &desc->dev->msi_lock;
++	raw_spinlock_t *lock = &to_pci_dev(desc->dev)->msi_lock;
+ 	unsigned long flags;
+ 
+ 	if (!desc->pci.msi_attrib.can_mask)
+--- a/drivers/pci/probe.c
++++ b/drivers/pci/probe.c
+@@ -2311,7 +2311,9 @@ struct pci_dev *pci_alloc_dev(struct pci
+ 	INIT_LIST_HEAD(&dev->bus_list);
+ 	dev->dev.type = &pci_dev_type;
+ 	dev->bus = pci_bus_get(bus);
 -
--void __weak arch_teardown_msi_irq(unsigned int irq)
--{
--}
--
--int __weak arch_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
--{
--	struct msi_desc *entry;
--	int ret;
--
--	/*
--	 * If an architecture wants to support multiple MSI, it needs to
--	 * override arch_setup_msi_irqs()
--	 */
--	if (type == PCI_CAP_ID_MSI && nvec > 1)
--		return 1;
--
--	for_each_pci_msi_entry(entry, dev) {
--		ret = arch_setup_msi_irq(dev, entry);
--		if (ret < 0)
--			return ret;
--		if (ret > 0)
--			return -ENOSPC;
--	}
--
--	return 0;
--}
--
--void __weak arch_teardown_msi_irqs(struct pci_dev *dev)
--{
--	int i;
--	struct msi_desc *entry;
--
--	for_each_pci_msi_entry(entry, dev)
--		if (entry->irq)
--			for (i = 0; i < entry->nvec_used; i++)
--				arch_teardown_msi_irq(entry->irq + i);
--}
--#endif /* CONFIG_PCI_MSI_ARCH_FALLBACKS */
--
- /*
-  * PCI 2.3 does not specify mask bits for each MSI interrupt.  Attempting to
-  * mask all MSI interrupts by clearing the MSI enable bit does not work
++#ifdef CONFIG_PCI_MSI
++	raw_spin_lock_init(&dev->msi_lock);
++#endif
+ 	return dev;
+ }
+ EXPORT_SYMBOL(pci_alloc_dev);
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -407,7 +407,6 @@ struct dev_links_info {
+  * @em_pd:	device's energy model performance domain
+  * @pins:	For device pin management.
+  *		See Documentation/driver-api/pin-control.rst for details.
+- * @msi_lock:	Lock to protect MSI mask cache and mask register
+  * @msi_list:	Hosts MSI descriptors
+  * @msi_domain: The generic MSI domain this device is using.
+  * @numa_node:	NUMA node this device is close to.
+@@ -508,7 +507,6 @@ struct device {
+ 	struct dev_pin_info	*pins;
+ #endif
+ #ifdef CONFIG_GENERIC_MSI_IRQ
+-	raw_spinlock_t		msi_lock;
+ 	struct list_head	msi_list;
+ #endif
+ #ifdef CONFIG_DMA_OPS
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -474,6 +474,7 @@ struct pci_dev {
+ #endif
+ #ifdef CONFIG_PCI_MSI
+ 	void __iomem	*msix_base;
++	raw_spinlock_t	msi_lock;
+ 	const struct attribute_group **msi_irq_groups;
+ #endif
+ 	struct pci_vpd	vpd;
 
 
