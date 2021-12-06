@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11EBEC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 487F2C4332F
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:07:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239451.415125 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.239449.415116 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSI-0005yj-R0; Mon, 06 Dec 2021 17:07:10 +0000
+	id 1muHSI-0005of-1J; Mon, 06 Dec 2021 17:07:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239451.415125; Mon, 06 Dec 2021 17:07:10 +0000
+Received: by outflank-mailman (output) from mailman id 239449.415116; Mon, 06 Dec 2021 17:07:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHSI-0005xV-Iy; Mon, 06 Dec 2021 17:07:10 +0000
-Received: by outflank-mailman (input) for mailman id 239451;
+	id 1muHSH-0005oW-TK; Mon, 06 Dec 2021 17:07:09 +0000
+Received: by outflank-mailman (input) for mailman id 239449;
  Mon, 06 Dec 2021 17:07:09 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHPD-0005ti-Ht
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:03:59 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8036e85b-56b6-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 18:03:58 +0100 (CET)
+ id 1muHPL-0005ti-G6
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:07 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8461dcdc-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:04:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8036e85b-56b6-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 8461dcdc-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810237;
+  d=citrix.com; s=securemail; t=1638810246;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=dj/c4lZoChrbctTMjaQaIy2bS8KFSLyGQmK8KBYSLbU=;
-  b=K4NhiaaUXXvl7nDrfbjCeTpp+X3PcqLQRUXFF78E765mDlFSpGMqhWwq
-   HkdMvNf0MOg8I3FDO4rOt1mlhXlJypuRO+2Y5qAAMMrfjaX/nLf7tikBR
-   8rb8ift+mUXCQlw+Sd7fvJItE0/w8LwOzaHindzUZi2mgZGAC9GF2dOxp
-   0=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: KaZPQnglizzoDd4Bpo4yhDDtljZTC28JsQTJSgHbvz6kwXgzGRWLJ0SP51Tjm4WvvtE+Ww9n3X
- bdwmUISl7ck8k8cbPgeWcvyqZvZLebj7Z0v3oOpHD2zNoCSJr75Ar25J1bm1ushuqRb940YkFA
- MRqKfypBtaUWWbZA1NP0BQzEnKkR92Rv/lH2u2VY8LAozY7jyFYZnFYthXEmY0fFvNBD168iuK
- 2AqKlaE6peajvgagSUYMyXkYJNuLaonR9Xg4oC+G4olt3Y2mYOEKhxyrGzuTUt2QAw/OcJrRcb
- c8rK3IXkvM76s2MOrUBIQpgG
+  bh=SYJTJIKxHEFQcMKNpvz4kHz4LT/E8ZyffBaU/35UM+o=;
+  b=SZpZIlN/a17Ht6GaXvXX8/7SyBd3Pp2dTxLfhp7yRWDcgEMHZ9E4rZRi
+   7rTWRxC+oRNoPbUoDjMaJbXUz/Dd1Fw+EB2JyRBGsbAICc9S/ptJ609+o
+   molDybIW1BCryY0UNuuxS50EkR4doQccRDH/wQyhfotnzr7biwB1Mfw+6
+   Y=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: VCdhQLflCCIZyRDomZsky6KSMXnle3oGtqd3o5o8N7VxYOorQ/qkUU4iNNAzQcdffkS21AIJlM
+ gjy7VQ1ZNkfstePOqeQz9jCWEGCmsmIgPuQxysZk6bxRWtWiOC/eUdbHseV8hXQs6u+kM7oren
+ PuEWLFXSw/BosuoSlvze/WY/Ghk4McC4ekghT9eaICt8yd2pKILl2RtEIr8+AJV6myEICKQOrl
+ 7l+4ouN8vfjx09W+Ht9XEoR+i4Bjjf5XXCh9PH/Hrxs5ic4iTxyUC+YU2ioEU+Z6jsoEAbqPq3
+ AHXvs4FrJVgDM+kwDSDm51q8
 X-SBRS: 5.1
-X-MesageID: 59766494
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 59387870
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:LkCESKgMl2n5C3b+KNANPQmGX161iRcKZh0ujC45NGQN5FlHY01je
- htvXWjSPKnYYzenfNxyPo21/UlQvMLdyIBiHgdsriw1QSIb9cadCdqndUqhZCn6wu8v7a5EA
+IronPort-Data: A9a23:otoXGKiBxFDXDfpOgfhSP/JAX161khcKZh0ujC45NGQN5FlHY01je
+ htvXGDSOanZN2qme4xyYI+z8UpSvMLczYc3QQVsryA8E38b9cadCdqndUqhZCn6wu8v7a5EA
  2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0F0/NtTo5w7Rg29Qw34Dja++wk
  YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
  9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /1ts7uzTT5yNZfcs+pGWRNmEhsmBfZ/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNauPO
- JRHNWszBPjGSx5EHAYaOJAYoMaXoCTebDJ/rAiNipNitgA/yyQuieOwYbI5YOeiRNpXtlaVo
- Hrc+Gb0CQ1cM8aQoRKa9lq8i+mJmjn0MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
- UN80iMosag18l3tVtTnVge0iHGBtx8YHdFXFoUHBBqlk/SOpVzDXy5dE2AHOIdOWNIKqSIC9
- lmunNfQXjdVoJabEniXyLau9QvpAH1ARYMdXhMsQQwA6tjlhYg8iBPTU9pueJKIYs3J9SLYm
- G7T8nVn71kHpYtSjvjgowib6965jsGRFlZd2+nBYo6yAuqVjqaBbpfg11XU5O0owG2xHgjY5
- yhsdyRzAYkz4XCxeM6lHbxl8FKBva/t3NjgbbhHRcNJG9OFoSHLQGyoyGsiTHqFyPosdz7ze
- 1P0sghM/pJVN3bCRfYpONLuUZV3l/K+SoSNuhXogjxmOMIZmOivpn4GWKJt9zq1zBhEfV8XZ
- /93jvpA/V5FUP86nVJats8W0KMxxzBW+I8gbcuT8vhT6pLHPCT9Ye5caDOmN7llhIvZ8FS92
- 4sObKOilkQAONASlwGKqOY7N04RF3EnCPje8ooPHgJ1ClE9Qz9J5j646e5JRrGJaIwJzLqVp
- S/kBRcDoLc97FWeQTi3hrlYQOuHdf5CQbgTZ0TA5H6khCouZ5iB9qAae8dldLUr7rU7n/V1U
- +MEa4OLBfEWEmbL/DEUbJ/cqo1+dUv02VLSbnT9ODVvLYR9QwHp+8P/ele9/ic5ESfq59A1p
- Ket112HTMNbFRhiFsvfdNmm00i14SoGgOt3UkaReotTdUzg/ZJEMSv0ivNrccgAJQ+anmmR1
- hqMAAderu7I+tdn/N7MjKGCjoGoD+ohQRYKQziFte67bHCI8HCizIlMVPezUQrcDG6kqr+/Y
- eh1zu3nNKFVllh9rIchQa1gyrgz5oWzquYCnBhkBnjCc3+iFqhkfiudxcBKu6BAmu1ZtA+xV
- h7d89VWI+zUasbsEVpXLws5dOWTk/oTn2CKv/gyJUz74g5x/aaGDhoOb0Xd1nQFIesnKp4hz
- McgpNUSul62hRcdO9qbijxZqjaXJXsaXqR77pwXDecHUObwJo2utXAENhLL3Q==
-IronPort-HdrOrdr: A9a23:Kwg196mntGwb9VibjlMtLfNmkObpDfIm3DAbv31ZSRFFG/Fxl6
- iV88jzsiWE7Qr5OUtQ/uxoV5PgfZqxz/NICOoqTNWftWvd2FdARbsKheCJ/9SJIVybygc378
- ldmsZFZOEYdWIK7vrH3A==
+ /136cCxYg0DM5HDhbw6dTgbThByIY9/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNauPP
+ JpGOWU3BPjGSxIICGg0N6gFpc6HljrQcjNGrnCL9INitgA/yyQuieOwYbI5YOeiWsF9jkue4
+ GXc8AzRAw4YHMySzyKf9XChjfOJmjn0MKoQHrCl8v9hgHWI23ceThYRUDOTsfS/z0KzRd9bA
+ 0gV4TY167g/8lSxSdvwVAH+p2SL1jYVXcZQFOsrrhmA0KPO7y6WA2EFSnhKb9lOiSMtbWV0j
+ BnTxYqvXGEx9u3OIZ6AyluKhQnuZSk+J0UPWSAZFSwjwpq+kY0vrCuaG76PD5WJptHyHDjxx
+ RWDoy4/m6gfgKY36kmrwbzUq2ny/8aUF2bZ8i2SBzv4tV0hOOZJcqTxsQCDhcusOrp1WbVoU
+ JIsv8GFpN4DApiW/MBmaLVcRer5jxpp3dC1vLKOI3XD32n0k5JAVdoJiN2bGKuPGpxeEdMOS
+ BWM0T69HLcJYBOXgVZfOupd8fgCw6n6DsjCXfvJdNdIaZUZXFbZp3ExPx/NhTqzzxhEfUQD1
+ XGzK5zE4ZEyU/sP8dZLb71Fje9DKt4Wmws/uqwXPzz4iOHDNRZ5uJ8OMUeUb/BR0U93iF69z
+ jqrDOPTk083eLSnOkH/qNdPRXhXfSlTLc2n8KR/K7/cSjeK7Ul8Upc9N5t6INc790mU/8+Vl
+ kyAtrhwlACi2CaZcFrSMRiOqtrHBP5CkJ7yBgR0VX7A5pTpSdv0hEvGX5doL7Qh6sJ5yvt4E
+ 6sMd8maW6wdQTXb4TUNK5L6qdU6JhisgAuPOQujYSQ+IME8F1CYpIe8c1u97jQKAwq2qdA6/
+ ++q2DTETMdRXA9lFsvXNq6ilgvjoXgHletudELUOd0PKl70+Y1nJnWp3P86Ks0BMzvZwT6e2
+ 1rECBsUv7CV8YQ07MPIleaPqILwS7lyGU9THm/667eqNHaFojr/kNEYCOvRJGLTTmL5/qmmd
+ N559fCkPa1VhktOvqp9D61vkfA06ezwquII1Q9jBnjKMQimU+syPnmc0MBTnaRR3bsF6xCuU
+ 0eC99QGa7WEPMTpTAwYKAY/N7nR0PgVnn/Z7OgvIVW87yhypeLVXUJXNhiKqSpcMLoqb991n
+ bZ/4JYbu16llx4nEtealSQFpW2DI0sJX7gjqpxHUpTgjRAmyw0abJHRYsMsDEpjtzmY3pEWH
+ wKp
+IronPort-HdrOrdr: A9a23:2jT6tqsanajhhILcCJNg4BUy7skDfNV00zEX/kB9WHVpmszxra
+ +TdZMgpHrJYVcqKRYdcL+7WZVoLUmwyXcX2/hyAV7BZmnbUQKTRekIh7cKqweQfxEWndQy6U
+ 4PScRD4aXLfDtHsfo=
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59766494"
+   d="scan'208";a="59387870"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
-	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH 31/57] tools/libfsimage: Cleanup makefiles
-Date: Mon, 6 Dec 2021 17:02:14 +0000
-Message-ID: <20211206170241.13165-32-anthony.perard@citrix.com>
+	<anthony.perard@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Ian Jackson
+	<iwj@xenproject.org>
+Subject: [XEN PATCH 26/57] tools/firmware/hvmloader: rework Makefile
+Date: Mon, 6 Dec 2021 17:02:09 +0000
+Message-ID: <20211206170241.13165-27-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,283 +105,79 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Remove the need for "fs-*" targets by creating a "common.mk" which
-have flags that are common to libfsimage/common/ and the other
-libfsimages/*/ directories.
+Setup proper dependencies with libacpi so we don't need to run "make
+hvmloader" in the "all" target. ("build.o" new prerequisite isn't
+exactly proper but a side effect of building the $(DSDT_FILES) is to
+generate the "ssdt_*.h" needed by "build.o".)
 
-In common.mk, make $(PIC_OBJS) a recursively expanded variable so it
-doesn't matter where $(LIB_SRCS-y) is defined, and remove the extra
-$(PIC_OBJS) from libfsimage/common/Makefile.
+Make use if "-iquote" instead of a plain "-I".
 
-Use a $(TARGETS) variable to list things to be built. And $(TARGETS)
-can be use in the clean target in common.mk.
-
-iso9660/:
-    Remove the explicit dependency between fsys_iso9660.c and
-    iso9660.h, this is handled automaticaly by the .*.d dependency files,
-    and iso9660.h already exist.
+For "roms.inc" target, use "$(SHELL)" instead of plain "sh". And use
+full path to "mkhex" instead of a relative one. Lastly, add "-f" flag
+to "mv", in case the target already exist.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/libfsimage/Rules.mk            | 26 ++++++++------------------
- tools/libfsimage/common.mk           | 11 +++++++++++
- tools/libfsimage/common/Makefile     | 11 +++--------
- tools/libfsimage/ext2fs-lib/Makefile |  9 ---------
- tools/libfsimage/ext2fs/Makefile     |  9 ---------
- tools/libfsimage/fat/Makefile        |  9 ---------
- tools/libfsimage/iso9660/Makefile    | 11 -----------
- tools/libfsimage/reiserfs/Makefile   |  9 ---------
- tools/libfsimage/ufs/Makefile        |  9 ---------
- tools/libfsimage/xfs/Makefile        |  9 ---------
- tools/libfsimage/zfs/Makefile        |  9 ---------
- 11 files changed, 22 insertions(+), 100 deletions(-)
- create mode 100644 tools/libfsimage/common.mk
+ tools/firmware/hvmloader/Makefile | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/tools/libfsimage/Rules.mk b/tools/libfsimage/Rules.mk
-index bb6d42abb4..cf37d6cb0d 100644
---- a/tools/libfsimage/Rules.mk
-+++ b/tools/libfsimage/Rules.mk
-@@ -1,25 +1,18 @@
--include $(XEN_ROOT)/tools/Rules.mk
--
--CFLAGS += -Wno-unknown-pragmas -I$(XEN_ROOT)/tools/libfsimage/common/ -DFSIMAGE_FSDIR=\"$(FSDIR)\"
--CFLAGS += -Werror -D_GNU_SOURCE
--LDFLAGS += -L../common/
--
--PIC_OBJS := $(patsubst %.c,%.opic,$(LIB_SRCS-y))
--
--FSDIR = $(libdir)/xenfsimage
-+include $(XEN_ROOT)/tools/libfsimage/common.mk
- 
- FSLIB = fsimage.so
-+TARGETS += $(FSLIB)
- 
--.PHONY: fs-all
--fs-all: $(FSLIB)
-+.PHONY: all
-+all: $(TARGETS)
- 
--.PHONY: fs-install
--fs-install: fs-all
-+.PHONY: install
-+install: all
- 	$(INSTALL_DIR) $(DESTDIR)$(FSDIR)/$(FS)
- 	$(INSTALL_PROG) $(FSLIB) $(DESTDIR)$(FSDIR)/$(FS)
- 
--.PHONY: fs-uninstall
--fs-uninstall:
-+.PHONY: uninstall
-+uninstall:
- 	rm -f $(addprefix $(DESTDIR)$(FSDIR)/$(FS)/, $(FSLIB))
- 	if [ -d $(DESTDIR)$(FSDIR)/$(FS) ]; then \
- 		rmdir $(DESTDIR)$(FSDIR)/$(FS); \
-@@ -28,7 +21,4 @@ fs-uninstall:
- $(FSLIB): $(PIC_OBJS)
- 	$(CC) $(LDFLAGS) $(SHLIB_LDFLAGS) -o $@ $^ -lxenfsimage $(FS_LIBDEPS) $(APPEND_LDFLAGS)
- 
--clean distclean::
--	rm -f $(PIC_OBJS) $(FSLIB) $(DEPS_RM)
--
- -include $(DEPS_INCLUDE)
-diff --git a/tools/libfsimage/common.mk b/tools/libfsimage/common.mk
-new file mode 100644
-index 0000000000..77bc957f27
---- /dev/null
-+++ b/tools/libfsimage/common.mk
-@@ -0,0 +1,11 @@
-+include $(XEN_ROOT)/tools/Rules.mk
-+
-+FSDIR := $(libdir)/xenfsimage
-+CFLAGS += -Wno-unknown-pragmas -I$(XEN_ROOT)/tools/libfsimage/common/ -DFSIMAGE_FSDIR=\"$(FSDIR)\"
-+CFLAGS += -Werror -D_GNU_SOURCE
-+LDFLAGS += -L../common/
-+
-+PIC_OBJS = $(patsubst %.c,%.opic,$(LIB_SRCS-y))
-+
-+clean distclean::
-+	rm -f $(PIC_OBJS) $(TARGETS) $(DEPS_RM)
-diff --git a/tools/libfsimage/common/Makefile b/tools/libfsimage/common/Makefile
-index 24bc90e73e..bcda86d754 100644
---- a/tools/libfsimage/common/Makefile
-+++ b/tools/libfsimage/common/Makefile
-@@ -1,5 +1,5 @@
- XEN_ROOT = $(CURDIR)/../../..
--include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-+include $(XEN_ROOT)/tools/libfsimage/common.mk
- 
- MAJOR = 4.16
- MINOR = 0
-@@ -13,12 +13,10 @@ LDFLAGS += $(PTHREAD_LDFLAGS)
- 
- LIB_SRCS-y = fsimage.c fsimage_plugin.c fsimage_grub.c
- 
--PIC_OBJS := $(patsubst %.c,%.opic,$(LIB_SRCS-y))
--
--LIB = libxenfsimage.so libxenfsimage.so.$(MAJOR) libxenfsimage.so.$(MAJOR).$(MINOR)
-+TARGETS = libxenfsimage.so libxenfsimage.so.$(MAJOR) libxenfsimage.so.$(MAJOR).$(MINOR)
+diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
+index b754220839..fc20932110 100644
+--- a/tools/firmware/hvmloader/Makefile
++++ b/tools/firmware/hvmloader/Makefile
+@@ -60,8 +60,7 @@ ROMS += $(ROMBIOS_ROM) $(STDVGA_ROM) $(CIRRUSVGA_ROM)
+ endif
  
  .PHONY: all
--all: $(LIB)
-+all: $(TARGETS)
+-all: acpi
+-	$(MAKE) hvmloader
++all: hvmloader
  
- .PHONY: install
- install: all
-@@ -40,9 +38,6 @@ uninstall:
- 	rm -f $(DESTDIR)$(libdir)/libxenfsimage.so.$(MAJOR)
- 	rm -f $(DESTDIR)$(libdir)/libxenfsimage.so.$(MAJOR).$(MINOR)
+ .PHONY: acpi
+ acpi:
+@@ -73,12 +72,15 @@ smbios.o: CFLAGS += -D__SMBIOS_DATE__="\"$(SMBIOS_REL_DATE)\""
+ ACPI_PATH = ../../libacpi
+ DSDT_FILES = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c
+ ACPI_OBJS = $(patsubst %.c,%.o,$(DSDT_FILES)) build.o static_tables.o
+-$(ACPI_OBJS): CFLAGS += -I. -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
++$(ACPI_OBJS): CFLAGS += -iquote . -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
+ CFLAGS += -I$(ACPI_PATH)
+ vpath build.c $(ACPI_PATH)
+ vpath static_tables.c $(ACPI_PATH)
+ OBJS += $(ACPI_OBJS)
  
--clean distclean::
--	rm -f $(LIB)
--
- libxenfsimage.so: libxenfsimage.so.$(MAJOR)
- 	ln -sf $< $@
- libxenfsimage.so.$(MAJOR): libxenfsimage.so.$(MAJOR).$(MINOR)
-diff --git a/tools/libfsimage/ext2fs-lib/Makefile b/tools/libfsimage/ext2fs-lib/Makefile
-index 431a79068e..b9b560df75 100644
---- a/tools/libfsimage/ext2fs-lib/Makefile
-+++ b/tools/libfsimage/ext2fs-lib/Makefile
-@@ -9,13 +9,4 @@ FS_LIBDEPS = $(EXTFS_LIBS)
- # Include configure output (config.h)
- CFLAGS += -include $(XEN_ROOT)/tools/config.h
++$(DSDT_FILES): acpi
++build.o: $(DSDT_FILES)
++
+ hvmloader: $(OBJS) hvmloader.lds
+ 	$(LD) $(LDFLAGS_DIRECT) -N -T hvmloader.lds -o $@ $(OBJS)
  
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/ext2fs/Makefile b/tools/libfsimage/ext2fs/Makefile
-index c62ae359ac..fe01f98148 100644
---- a/tools/libfsimage/ext2fs/Makefile
-+++ b/tools/libfsimage/ext2fs/Makefile
-@@ -4,13 +4,4 @@ LIB_SRCS-y = fsys_ext2fs.c
+@@ -87,21 +89,21 @@ roms.inc: $(ROMS)
  
- FS = ext2fs
+ ifneq ($(ROMBIOS_ROM),)
+ 	echo "#ifdef ROM_INCLUDE_ROMBIOS" >> $@.new
+-	sh ../../misc/mkhex rombios $(ROMBIOS_ROM) >> $@.new
++	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex rombios $(ROMBIOS_ROM) >> $@.new
+ 	echo "#endif" >> $@.new
+ endif
  
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/fat/Makefile b/tools/libfsimage/fat/Makefile
-index 7ee5e7588d..58bcc0751d 100644
---- a/tools/libfsimage/fat/Makefile
-+++ b/tools/libfsimage/fat/Makefile
-@@ -4,13 +4,4 @@ LIB_SRCS-y = fsys_fat.c
+ ifneq ($(STDVGA_ROM),)
+ 	echo "#ifdef ROM_INCLUDE_VGABIOS" >> $@.new
+-	sh ../../misc/mkhex vgabios_stdvga $(STDVGA_ROM) >> $@.new
++	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex vgabios_stdvga $(STDVGA_ROM) >> $@.new
+ 	echo "#endif" >> $@.new
+ endif
+ ifneq ($(CIRRUSVGA_ROM),)
+ 	echo "#ifdef ROM_INCLUDE_VGABIOS" >> $@.new
+-	sh ../../misc/mkhex vgabios_cirrusvga $(CIRRUSVGA_ROM) >> $@.new
++	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex vgabios_cirrusvga $(CIRRUSVGA_ROM) >> $@.new
+ 	echo "#endif" >> $@.new
+ endif
+-	mv $@.new $@
++	mv -f $@.new $@
  
- FS = fat
- 
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/iso9660/Makefile b/tools/libfsimage/iso9660/Makefile
-index bc86baf2c0..acf3164046 100644
---- a/tools/libfsimage/iso9660/Makefile
-+++ b/tools/libfsimage/iso9660/Makefile
-@@ -4,15 +4,4 @@ LIB_SRCS-y = fsys_iso9660.c
- 
- FS = iso9660
- 
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
--fsys_iso9660.c: iso9660.h
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/reiserfs/Makefile b/tools/libfsimage/reiserfs/Makefile
-index 5acfedf25e..42b751e007 100644
---- a/tools/libfsimage/reiserfs/Makefile
-+++ b/tools/libfsimage/reiserfs/Makefile
-@@ -4,13 +4,4 @@ LIB_SRCS-y = fsys_reiserfs.c
- 
- FS = reiserfs
- 
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/ufs/Makefile b/tools/libfsimage/ufs/Makefile
-index f32b9178bd..cca4f0a588 100644
---- a/tools/libfsimage/ufs/Makefile
-+++ b/tools/libfsimage/ufs/Makefile
-@@ -4,13 +4,4 @@ LIB_SRCS-y = fsys_ufs.c
- 
- FS = ufs
- 
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/xfs/Makefile b/tools/libfsimage/xfs/Makefile
-index 54eeb6e35e..ebac7baf14 100644
---- a/tools/libfsimage/xfs/Makefile
-+++ b/tools/libfsimage/xfs/Makefile
-@@ -4,13 +4,4 @@ LIB_SRCS-y = fsys_xfs.c
- 
- FS = xfs
- 
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
-diff --git a/tools/libfsimage/zfs/Makefile b/tools/libfsimage/zfs/Makefile
-index 084e5ec08d..434a9c3580 100644
---- a/tools/libfsimage/zfs/Makefile
-+++ b/tools/libfsimage/zfs/Makefile
-@@ -28,13 +28,4 @@ LIB_SRCS-y = zfs_lzjb.c zfs_sha256.c zfs_fletcher.c fsi_zfs.c fsys_zfs.c
- 
- FS = zfs
- 
--.PHONY: all
--all: fs-all
--
--.PHONY: install
--install: fs-install
--
--.PHONY: uninstall
--uninstall: fs-uninstall
--
- include $(XEN_ROOT)/tools/libfsimage/Rules.mk
+ .PHONY: clean
+ clean:
 -- 
 Anthony PERARD
 
