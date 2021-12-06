@@ -4,48 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF56C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 13:37:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.238951.414169 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E661C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 13:37:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.238958.414181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muEAv-0008BC-ER; Mon, 06 Dec 2021 13:37:01 +0000
+	id 1muEB0-0000FS-US; Mon, 06 Dec 2021 13:37:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 238951.414169; Mon, 06 Dec 2021 13:37:01 +0000
+Received: by outflank-mailman (output) from mailman id 238958.414181; Mon, 06 Dec 2021 13:37:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muEAv-0008Ad-9m; Mon, 06 Dec 2021 13:37:01 +0000
-Received: by outflank-mailman (input) for mailman id 238951;
- Mon, 06 Dec 2021 13:36:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muEB0-0000FE-QS; Mon, 06 Dec 2021 13:37:06 +0000
+Received: by outflank-mailman (input) for mailman id 238958;
+ Mon, 06 Dec 2021 13:37:06 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=0GdR=QX=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1muE6t-0002vN-DM
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 13:32:51 +0000
+ id 1muE68-0001ky-E1
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 13:32:04 +0000
 Received: from de-smtp-delivery-102.mimecast.com
  (de-smtp-delivery-102.mimecast.com [194.104.109.102])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 019b8d4a-5699-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 14:32:50 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05lp2105.outbound.protection.outlook.com [104.47.18.105]) by
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e5ee144e-5698-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 14:32:03 +0100 (CET)
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur02lp2050.outbound.protection.outlook.com [104.47.6.50]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-1-ckVGP_caOFCRqsyow_THQw-1; Mon, 06 Dec 2021 14:32:48 +0100
+ de-mta-33-C6k-nKTgP8C1J_jTnYD5Qw-1; Mon, 06 Dec 2021 14:32:02 +0100
 Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by VI1PR04MB5741.eurprd04.prod.outlook.com (2603:10a6:803:df::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.21; Mon, 6 Dec
- 2021 13:32:48 +0000
+ by VI1PR04MB2957.eurprd04.prod.outlook.com (2603:10a6:802:4::28) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.16; Mon, 6 Dec
+ 2021 13:32:00 +0000
 Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
  ([fe80::5951:a489:1cf0:19fe]) by VI1PR04MB5600.eurprd04.prod.outlook.com
  ([fe80::5951:a489:1cf0:19fe%6]) with mapi id 15.20.4755.021; Mon, 6 Dec 2021
- 13:32:48 +0000
+ 13:32:00 +0000
 Received: from [10.156.60.236] (37.24.206.209) by
- AS8PR07CA0020.eurprd07.prod.outlook.com (2603:10a6:20b:451::13) with
- Microsoft SMTP Server (version=TLS1_2, cipher=) via Frontend Transport;
- Mon, 6 Dec 2021 13:32:47 +0000
+ AS9PR06CA0164.eurprd06.prod.outlook.com (2603:10a6:20b:45c::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.11 via Frontend
+ Transport; Mon, 6 Dec 2021 13:31:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,36 +58,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 019b8d4a-5699-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: e5ee144e-5698-11ec-a5e1-b9374ead2679
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1638797569;
+	t=1638797523;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=0H0YRL04KECEnhSZHc0txOpsgQMjHkGgxeFv8W2+jqE=;
-	b=D/6tE1R+cawc9hyHcLOvREHYrRaKQ8BjnPYIpTkogf+uEDfh8GBaE9HsyAMiJ/7viitO9g
-	oVGTFU22erumMurarkVebqnnLzrB2slo/QBJMcMeYdzuaBSSBfrJ99j3wqdUwMwF4+30iY
-	AsPHxz/r7/Agy45IKXfp8B1zJeo4b50=
-X-MC-Unique: ckVGP_caOFCRqsyow_THQw-1
+	bh=dWQiEscHMitckPtyowVTpPJHsuAivRldTvGBRFOefis=;
+	b=ajxz1CLmt/FHzTqXjAthCwCKhp9jHcLu1ldwV5FHSo+vY23iXkL4FZUOLsFo6lerdtqBSE
+	opwPHH+rUV6U5+UXv9+ytScqeQLVv2LEcJRTDl4G/Lt56F019e2rSCkIxifAh1FLL9rH+E
+	Bc0xRPqn15m264KCKNOklEgAvX5qQjE=
+X-MC-Unique: C6k-nKTgP8C1J_jTnYD5Qw-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=UuusALwaYDo70rTqtwEigMhnhMGU3Vvh3d7lBVjX9Q10tZrOn1xr+9RL9BCE9toUlvKXSZWOwC6+wI1sbgW5T4OhalDG9woYMDTF7Qoo0E/V5oB6CVeortBtMXvyX+VNA2NVGYQ4fm69UXIgmkFzz8XIMr1U82Nkn2LfVWuiDydvJwsbz3vAiR4OXL7FdtH0ClKT+qBN/8cS7RZejGqajArztcncoOySBc3OXehbgqevhS/ArdlyM15JW1K81BmplCs98v1u4yWmzZNoj6eHIGzNVqv7Qqj8YYvAOQcc7eKta/ibKe9HJnmMZlT+YgVrTBV8nhKlRGEB0JoC2uw5Vw==
+ b=H+zX6MH6j8KzjVL8+V2jneBYcmEqAH55NfIQ1Z0VUdO8VWSOAwdaWXa47EtMCwRb294F8V1hjIJvGCvMvCRI5ZBCq4CEaqTRVwJFYl4canveTG3ByhkYnZB0zhXlL5ao/gGtiaxAq3NLRDHRKD50qQBXkD7Pq9FjTISYK0fP3gChrKr45kLHnF5B98n1hUMKZ6S1esmCZn+WcCwhWXnzoWJqLxuT86O1axsjz6etWIUh3AaGQrce02v4GzGfRATkHm9WLlhmAFWNIIZBG8jUBXmyfp35CjXoISZ7tiWVLalX85lLwAy4XvNmyvlEkZ/T5vDVp8Zv6EGOJJxDicQqsQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0H0YRL04KECEnhSZHc0txOpsgQMjHkGgxeFv8W2+jqE=;
- b=f0uVbyaYbJzew4awXtkAUJB/GXEP+g7qkTYFwiZLvhuV2a0R9OyOGEuaZs94USVdMAkaCUrFIg8xzQ80C9ajShp1i4JKNb2nbR8HsCjFQ8ZNjEsSFq2kO64JOUIaXCjEPxKQ7NUL8wdKMlNKYitl5PK4Rcx7kQ1wamDHUCjnHPopD+uaH1HTPdM9+pKXHEwcu9YAfbsIAoANv3EBuie+fMP4ZwPC3makoJSD/d2MUvU9ejepeRD35mLDqTCurwspfDhgfZJ+dVfnbdpW0X60rmNcMdkzL8Vsiicu5emVCsGteHec1v7p5GtcTBnVnmeRATRMpxovlYXqhEV3G7Y0QA==
+ bh=dWQiEscHMitckPtyowVTpPJHsuAivRldTvGBRFOefis=;
+ b=C4lYfd5u8+rfYb4FiJJApHqJFt84lnEdLzquapTlmZmG5u+anwYt8vpLogNOGwp0LHxuHC1coFytqjZ1Sd2/9Qi1s5b8S58F1sVR9NAf/cX9BA/H48lPlU/bbNtpXO3QF34dfhSPQxnsWU6lujkICWMrMjiCCwqHEFHOOOcz8F+3Pe/abeFQMTjriXkDeTUn3OAN2K9ExlSJpgcwV5rmMrAyTWArluGZjI1rgpv22TydE6OprDSqhmlk3HFJr9R0Mmo7Xcr+XDqsxqy9Cn49tyQCeg/9OPYq/EBfODmWC1NtqsJ/jWm4xc9ThDI4nyDLCGDypXQT0U7tfk/6jXuLdw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <1fdbf442-ad2c-7348-06a1-9efa47443ce4@suse.com>
-Date: Mon, 6 Dec 2021 14:32:46 +0100
+Message-ID: <2f04d5ea-e0ef-6750-1552-3783cbcc0125@suse.com>
+Date: Mon, 6 Dec 2021 14:31:58 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.3.2
-Subject: [PATCH v2 6/7] xz: move s->lzma.len = 0 initialization to
- lzma_reset()
+Subject: [PATCH v2 4/7] xz: avoid overlapping memcpy() with invalid input with
+ in-place decompression
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -98,107 +99,149 @@ References: <adba1753-4d6b-0ee4-a7c0-42c5ef520b67@suse.com>
 In-Reply-To: <adba1753-4d6b-0ee4-a7c0-42c5ef520b67@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS8PR07CA0020.eurprd07.prod.outlook.com
- (2603:10a6:20b:451::13) To VI1PR04MB5600.eurprd04.prod.outlook.com
+X-ClientProxiedBy: AS9PR06CA0164.eurprd06.prod.outlook.com
+ (2603:10a6:20b:45c::15) To VI1PR04MB5600.eurprd04.prod.outlook.com
  (2603:10a6:803:e7::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 7b9101cb-262b-4af4-b7a1-08d9b8bce490
-X-MS-TrafficTypeDiagnostic: VI1PR04MB5741:EE_
+X-MS-Office365-Filtering-Correlation-Id: af54db1c-8ed9-4f69-1620-08d9b8bcc851
+X-MS-TrafficTypeDiagnostic: VI1PR04MB2957:EE_
 X-Microsoft-Antispam-PRVS:
-	<VI1PR04MB57413B42A037B8ABB9EC757BB36D9@VI1PR04MB5741.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:113;
+	<VI1PR04MB295741F595E653930EF660DAB36D9@VI1PR04MB2957.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	mjgz4oKlgb+prCkFWc30aspYNaqSwXNJvTpbRq+eKsoBQMz/4jPlp3uX7dpEF96IrsfrbVL/WnpXNPUQSNCUYTWpHmxMAvXA05bHtlZ5RZYtSU1KS8B9Fbzd2/ubxfdXWruUu0bVfDQBfWaqPFmb4pAA6QDkvSBQ1EOxkYdmyTjX1g/BWrIrmHqGbKoex0K9yvLlZvilGnhhuuGDgZkFaVb65de4QAj59z7SeH9oiZPpI9EFrcyP8p3D8Usn1NVwKDkH63WNV8h2gAZOo9cxmLvK8aIn080bVdcYVKt8DCZAnaJszOKrJF1DPFIaGM42GCDvUsRJ/uEXdRp1q5TgeGscXd/do+EczNZgH6nwDZXvnP49mRExJMNRHHjYXp0pmcUqlYRFAA715BXERUcFaHuO8gm9M5YK7NYw73bBwxFzsPL4N4khfWLGh1JiiaHz0rqsAuAMnLqXMbeyn4JZ3f+fJXJom+BpYHQGw06TMeeA16drBRFU+RO0bjsCeKoZq3lJimZpGQByndCCxOGgvGIXtM8ZQ6QFvB5CY3qGsY4iErC2LMicK7n/F/05tEs4qt+ZKF5RJ8wQAaDeLwFDiZK+Zwzd7XsIC96jseB2ArVoCNqlkLgpt0hGHE9KWdPO2AXn54PU/o8hudfw8hGx5CA32V6IGipArjx7GL5LUBUjsLqXFmX8Mv3lT8+BteAqkTZMqsDv7WZ4PIlDm0rl+i8B9dzRfgqoEwRiZ6KZWlVoodDVTCIQRZY6tNHwDcwTIxSLh6Fw3kO/IlC8/jDfvD2+4F5ZjJb7tAD16ercUbBc/bS1Xi3AGtia9jRLB74y
+	fJK7mQ8UQQz0ACv8kLYabRXWpjpgfAN8FidIxTcMKEa4Dg3faDcChbhSdIRNR/QNfUFHwpDc6+kq7df4hTASHV/IZHTfx7sMPepSdx1bucVu9dyOQr33hgnldnhd/UtfVvOOfdIlGfnqcy5xIngib5D4b1ehIR4vH/rpFUrh1ldph68r3b3rz0SQ0aMGHCRVNP6nsSECSx5NgDL7+1wamU3+ZR0q6yanxpLSgnRNBZTBzttyrIv7li2+6GyATI3sBcRE1gsW5nve6/DxyUg7UYQDeQirHOpAjjxD+vS9nV08i4ymYwlh0lSopY3Vs5n6a4xgBwXDX4YULsG3YTE+3js5x4sd3wN6KMKwobwRie3jFL5+Bv4H4DEPiTU2nV6GkoOINv4WG0eIh627z5c1339uBmkUY9/fe3BS5eHLBE98IxTxE+7zMD/ZVntUPgGjfawisOXBA9bfgfrG4J2nsbqkw3dft2nlT0u3zxhNP8FYq0qpaIEHpSd12W44W2veXtAWKlTMc+opjobUfyVMv19FJTVfFaK95b0hpAsHX8s57p5FDVB1WEh5Znip5prGyh9CS1q8Rke+1laKR7+Jb1mzRftRcPkPKr9i0ZLavHnLhANJE+mIG+IPox6uOM902NQ7iugFT/nL5FxQDwahu/IGSNhUj46mWpgeI4OnfWf89ii8gFN6jesG2MsUqqkZ3L5CJo1wtSOguH84az6pRaXWMisii+vmLIyvmSTB2Jf+dmec44xbo/rcdJZzRghhYwoWAQneT7ADoUC+v6IDC22l8prJX/Bo70uhcdEHuD8AZP0lVUYa0QJLiYvN1Wdi
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(31686004)(6486002)(8676002)(956004)(186003)(26005)(4326008)(2616005)(38100700002)(86362001)(31696002)(36756003)(8936002)(66946007)(66476007)(66556008)(508600001)(316002)(2906002)(5660300002)(6916009)(54906003)(16576012)(966005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(316002)(8676002)(36756003)(31696002)(16576012)(6916009)(54906003)(5660300002)(956004)(966005)(2616005)(2906002)(508600001)(4326008)(31686004)(86362001)(6486002)(26005)(8936002)(186003)(66946007)(38100700002)(66476007)(66556008)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?b0hvVFhXNjJiZ1VhSGIrMHBiWVpKOXgzZUVBa3M3Ui9yaHAyMHNIdTVueDRs?=
- =?utf-8?B?dmkyMGY1OVlYeS84NG9YaFRQbjdTd05ZdHJNWjRQUGtSMngwNFpRem9sakNv?=
- =?utf-8?B?MFRJT3J2dllWZEUyRkNzNVRMYlg4THNXcnMzRmxDZEFucXRhYjdCckNqaWFu?=
- =?utf-8?B?NkVuQktzYmhJNUFPZ05rckdGSlJpNytLazZuWjR4Mk1FYVE3UXVUN1ZVWUpU?=
- =?utf-8?B?TXpVdmNlTDlHRnMyY1p5RHlTTXNTMUMyQmV3ckcyT1pydFJXVUVqankyN3ox?=
- =?utf-8?B?L2pSNXp3OGJKbmY5YndJcmdOOG5yb2RjVk5OUS9jdi9kc0ZDalFZUWloQ0VK?=
- =?utf-8?B?ZTJzaitDYVo3N1BaMTBlN3JhclQ4RHU5RVBoOTdjZ3dlN09vbkdGSGFKNHp2?=
- =?utf-8?B?Uk1xbHVQcjNxYmROaWs4LzhIRUZQbCtHVHJwblVZWXNXY2NiYmVzVXE5S3l4?=
- =?utf-8?B?TTliMitySHZhTUdER0FBRzUyUGxMOVpzM0tjWDl2cUc1cWdnamtKekx4aUVx?=
- =?utf-8?B?aGpPMy9zYWpGbEVtbFlXMlFkb1dBYVJRbWVxVU9lOU5WNmpVbnJHUmlsQTB0?=
- =?utf-8?B?L1FGSjhHaitWMndYckNMNEoxemdLTEcwQXVKM1hzV29VeWlsNkNaOHM0Q3A3?=
- =?utf-8?B?azFYVjVha2xVM21yY28ycm1DRUFQV2FVaW1telRpRmRyTCtKd2VRRmYxcHVC?=
- =?utf-8?B?ZjUxZjJXRGNvcDZ3S04wc2toTldKSEVnZTUwK3Y5SDg5VXFhbmJiWU9PUE9s?=
- =?utf-8?B?M3dkeXpaQW8wc1NIRTlxSk1rTkdibzd2Q3JFT1VRaVhHcmpROUc3WjJPYk9C?=
- =?utf-8?B?UnZWMzB6TnJIdlhvZHRGTEVTSTI3czNGNVdGZ0x1cWNwRHJXdUFJOEN2dEls?=
- =?utf-8?B?bjJHVTByWkF0dlBhenI0dEhRMkdGZE9lMnkzVnJMbEJsdzJEM001aE1rU1A0?=
- =?utf-8?B?eU1ia1E2NTNsRVh6NWhQRGgyVm9vYm1MMWNaVUpWREhZZ08wZ1RjZks0K001?=
- =?utf-8?B?enZ0U3hjYVRSSXQ1R0NYZ1UrU3FxQW9TNlBSUHJQaVFPS0NmVllVZHNjcWFs?=
- =?utf-8?B?NTJUOStNbVQ3NHFacGF5NHBKbkhXYmpuWkdmaUQ3SGxUYTNmbXBWSUEwZkJa?=
- =?utf-8?B?YWZsdHY2aHNiUU0xR3ZkWEJvQVg4Z0owNnA1OTRuK3dvWUpzTW9KbTVZbG9z?=
- =?utf-8?B?TE9NODhrcEpQdDFQSEhEaTIzZHlTV0t1eTJJcHhjYzM1ckJyVHIrWWV5dGFG?=
- =?utf-8?B?b1RwWmFkaEk0anJTZ1dDTnpVQUlnQVFtZStjMm9yYjFtZm5NZkVrcWU1MUNo?=
- =?utf-8?B?RGI5S3N6T3VLV290bnRMWkNTOXpHRHRoRE8xbGNQZnlMN2FPY203MzVCVWxu?=
- =?utf-8?B?OTNMVlFkZEZrbUlSMlUvbHQ0UWpSNWIvVllIRkFEbjV1MFBHSjRxc1llZmM3?=
- =?utf-8?B?NUJxMlFLbk55T3RveU1URXg0SExhMS9kVk1wTjIzdk0rL25RTFJBUStFQVZK?=
- =?utf-8?B?MDRFajQ3QnNNbDVINWg5Rmx1RG9FNEpsMlB6eDdrc3ZORlpTNUxmVHovMzVR?=
- =?utf-8?B?VCtCT0JCazZpTVhSTXQzZEhiQVZNcG53SytqQm9Jam4zUEpPMzJtQVFVK3Rn?=
- =?utf-8?B?d0ZlY25kWldMZkJKWURxNVBWSUpNY09MUElDZytPL2d5U3laRlR5bnVnb2lG?=
- =?utf-8?B?SXBoeTI3WWd0Nkx4ckp0dUVDU2J6bVNZeDVUaU9wT3J4WWFSTGh2d0J4S21a?=
- =?utf-8?B?TFdtOS9GdG1pOFQ5Wk8ycW0xUUpEK3VnRXZYNlRrZXJCUGlIcDZNa3IxNmJo?=
- =?utf-8?B?bzZhbVpoQXZpTzJySHFvcUZyTlQyWjF6NUxwNjVpdWZMSGYwOWx0VWN2QktQ?=
- =?utf-8?B?OTd6a1Z6V3VhZjNML2kyKzdLZk9yU2xrOWhBeVh4SlFHV2d4ZjFxYko1VThN?=
- =?utf-8?B?a2x6TGtNcE1FNGtVdmV0RjhmZGpxUDZkdnk1NzIrRzA5U0VveGd4cVdIY0s1?=
- =?utf-8?B?YTNPMUh5NGQ2MFRaR3FuVUsyNE0ydFNHNzgvclBJOG11UVdlMm11YXptWDRF?=
- =?utf-8?B?NTNuQ292NE9DV1RDWStDMXB4SUN5Z3JHRG1jODEyRXExSHhCM1RlN3hOa1hI?=
- =?utf-8?B?OWtjUGRjdFhUUkVWN1I5N2JlRHlkNGg3M1VTQ0k0UnZ0a2NvbjF4ejhtNzBE?=
- =?utf-8?Q?uUpcRBEdbMbH1y05WaxaQNc=3D?=
+	=?utf-8?B?YTF4cENrOExkZnRTblluSFZLK2hFV2E4VDlTUGFCK1VhYW8ySmtLeit2ek56?=
+ =?utf-8?B?SUlFbjNTTlRTRFZacGN1dmRtTzF5VTczRVBxZTBHNkc2em9oa0hUL0J3d21T?=
+ =?utf-8?B?T0hhN1B6cDJQR1dCTGVTVlloSUoycllLa3dlVEkxYUh0QXcwNUxMVVZPWHFO?=
+ =?utf-8?B?WFpMRkpZUGF2Q0QySEdQN3NRTnFEMFdRMkkybzNJY3ltRkdhM3RPUisySXNX?=
+ =?utf-8?B?Y01PV3JLOWZDcWc3b3JvQ0VNYmRDYzBLTmx2NFIzeEdUWUJOTFduMUxxVG1t?=
+ =?utf-8?B?bSsvVDhOTGkxZ0I2eDZrMlJ1c1hzV3ptWjdjalJIWm9SMkRmdktadTQ3UDk5?=
+ =?utf-8?B?NEFsSXVUWHp6M0wzcnQ1OVZVZ0dUcDdVMXoyemRlL0Q2MUJ2L1hkeEtTTXd4?=
+ =?utf-8?B?TWUyMzlRUVd0MnVyVit1TWVwU0drYkVkRVBVMk1YeTZReEdhOEt2WnVmOGVN?=
+ =?utf-8?B?MUtwQkQ0a3JJejZQMk5lODhIMXFyK0hlMkZabHBuRnFaei9rcUZweGFJaHoz?=
+ =?utf-8?B?OXR3VG9oaFZwWWxLMVFLdmNEZ2lrbEs3bm5xK2tKZWp5a2pZamJpUS9UaW94?=
+ =?utf-8?B?MXBNWjhQUnoyancyQmp0SDl0SERpUkVqUDJCUEd3RDN3b2RjZDRRY09FWUth?=
+ =?utf-8?B?ZXVpRFg3c2oxRFpwZ1pRWmlhbW5DWGlJdVIraHRqbFMzS2w0ajhURUluZkpa?=
+ =?utf-8?B?OGxVcWFPRHZRcVZIWndVUDU0MHVoY3RLSFRoNkorTjZMMVd0cVYxei9iWFBF?=
+ =?utf-8?B?ZkxnbFl5N1I1bXBiU0xFSFdZWUtjSFFsc2ZRUzNIQmNsS3VZYS8rb2p0dlU2?=
+ =?utf-8?B?aHRMODVFUHdUdTI3R3pQZmIxMElMWWdoQnBWMDdEaTljdzdEbXJtT1V2T0Ex?=
+ =?utf-8?B?emZrQko5NGY5S21DeU5GYnJ2V05hSUNsc1I0c2xTRERXYWlWZE1VcW9mS0RL?=
+ =?utf-8?B?eDNMdVluV2RVNTU4KytKbVI1cHI5Tk5SdjBQZVZUcnUzL3pOd1lMQUs2NEhy?=
+ =?utf-8?B?aE5uUzJqNUJ0ZXBTMTVOcWRxMC9vY0g0dmNLRDJveHFaRStNOFBveGc0VmVY?=
+ =?utf-8?B?aDJab1ZNenNpTTNQVnErY3IrVVZaeWJxTlE4bW1Zeld6OUdJWWJoSm1kVHVJ?=
+ =?utf-8?B?eVFjeE91OWs4K0lpeDRhMlpFRUdaOXIzeE1pRkJVKzVOV2ZpbU8yN052dG9B?=
+ =?utf-8?B?cUJad0hEVWxyV3g3RFZGSVl2YU9KYjgyd0ZxK1B6U3BBYXdzUkhxeHZ4S2g1?=
+ =?utf-8?B?cGdEdFF3UnVnN016bDZFbnh2cloweXRxNElKRkFsbkFMOUM1d0I1b20xaUg0?=
+ =?utf-8?B?UU9OVEtSNElSajhsNlNGS041VnZMZVgxWUdzMGdIVjNGSFoyK2s1RnoyL0ZI?=
+ =?utf-8?B?OStXcVg5bk5KRUo2SXV4VExVd2ZGWHpCQVUybktrTEg4MUNFR2t4SWNFcEFx?=
+ =?utf-8?B?N1pKUkpZNlY1MmI3OE5UaUlHdHRQNlg5WHYycEI0ZzhHakh6N2REdTdqT0Rz?=
+ =?utf-8?B?cEEya2lpbW5kTDIzNkhxUmdFVTI5SzVwRCs0WjJpTjBRZmQvZjcxWlJ4UnJR?=
+ =?utf-8?B?M3hhNURrRFZNNVlTYXZWVEM0NEpsQ0pDY1BiSDhUcndrQkVVKy83ZHhBZGpO?=
+ =?utf-8?B?OUVoRU52aUp6cEUwZm8yOGI1d1JFbVU4a0NyeG80L1hSU2tFRDVJMHJHNVRQ?=
+ =?utf-8?B?ZUVWQ0NNSmdBWkJ1Tm9JcEpLQWJTd1V4S2xXUmlSNGV6K3ZCeUxjMVdaN0t0?=
+ =?utf-8?B?aWRlZ1lTOFd4cEZyVUsySGM0RjVQN1poMkI4L3NKVjBNNWUxRTM4OCtjcU1F?=
+ =?utf-8?B?WjlDcEVheDllVkpDZjFIS0tXYkFmYUlteVdsdVE0YjNOaGpuM3VuWkxTZGVn?=
+ =?utf-8?B?SkRjZHdVY0lqNUNBRndKdEJIZ1o0ZHE0cTM3K0F0RjcvU3FRV2VIeC9XeXl1?=
+ =?utf-8?B?SlpkQjdNTUlxZTJYZy9Cald0d3duVnFFU01NYmZ6TkNXam1QNmtBdG1ROUwv?=
+ =?utf-8?B?T0N4eE9pNEkrTks3V1NkSldVdHRUL0l5eU1JK1dNTWpVeWpwOWRSQTVMWURQ?=
+ =?utf-8?B?RklqVmVkb0pZRERQVzJ3U3o3bTh5Y3hTb04zVWR0QkoyRjMzM0pZU3YzdnFQ?=
+ =?utf-8?B?ZGVTdmxZZTZRVUtZOWhDTFNsSVdBWWNvRWROUzE4VFZ1U2RJQ2E2aENaTEJk?=
+ =?utf-8?Q?DTwsdw7q236ELH6WjP46y8Q=3D?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7b9101cb-262b-4af4-b7a1-08d9b8bce490
+X-MS-Exchange-CrossTenant-Network-Message-Id: af54db1c-8ed9-4f69-1620-08d9b8bcc851
 X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2021 13:32:47.9206
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2021 13:32:00.5844
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hrqb7I+fJYfinTvMr48BzkjUJNEpRAYF+uyCKIxI1nBYRgI+BoPqaA3wyEVY36hT90nVyCeuys/H8+UQ8jBI/g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB5741
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8ieVMLoUdiuiDtRBYs+EVO47IX1iz50Qs6LPJepkHPETjfG/dPgBcZ7U62vb4oNXtLusmGsp9WipPy7eI7FLfg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB2957
 
 From: Lasse Collin <lasse.collin@tukaani.org>
 
-It's a more logical place even if the resetting needs to be done
-only once per LZMA2 stream (if lzma_reset() called in the middle
-of an LZMA2 stream, .len will already be 0).
+With valid files, the safety margin described in lib/decompress_unxz.c
+ensures that these buffers cannot overlap. But if the uncompressed size
+of the input is larger than the caller thought, which is possible when
+the input file is invalid/corrupt, the buffers can overlap. Obviously
+the result will then be garbage (and usually the decoder will return
+an error too) but no other harm will happen when such an over-run occurs.
 
-Link: https://lore.kernel.org/r/20211010213145.17462-4-xiang@kernel.org
+This change only affects uncompressed LZMA2 chunks and so this
+should have no effect on performance.
+
+Link: https://lore.kernel.org/r/20211010213145.17462-2-xiang@kernel.org
 Signed-off-by: Lasse Collin <lasse.collin@tukaani.org>
 Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
-[Linux commit: a98a25408b0e9b0264abcc3dabfafd9ff2ea1046]
+[Linux commit: 83d3c4f22a36d005b55f44628f46cc0d319a75e8]
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
 v2: Retain one more S-o-b.
 
+--- a/xen/common/unxz.c
++++ b/xen/common/unxz.c
+@@ -127,7 +127,7 @@
+  * memeq and memzero are not used much and any remotely sane implementation
+  * is fast enough. memcpy/memmove speed matters in multi-call mode, but
+  * the kernel image is decompressed in single-call mode, in which only
+- * memcpy speed can matter and only if there is a lot of uncompressible data
++ * memmove speed can matter and only if there is a lot of uncompressible data
+  * (LZMA2 stores uncompressible chunks in uncompressed form). Thus, the
+  * functions below should just be kept small; it's probably not worth
+  * optimizing for speed.
 --- a/xen/common/xz/dec_lzma2.c
 +++ b/xen/common/xz/dec_lzma2.c
-@@ -791,6 +791,7 @@ static void __init lzma_reset(struct xz_
- 	s->lzma.rep1 = 0;
- 	s->lzma.rep2 = 0;
- 	s->lzma.rep3 = 0;
-+	s->lzma.len = 0;
+@@ -387,7 +387,14 @@ static void __init dict_uncompressed(str
  
- 	/*
- 	 * All probabilities are initialized to the same value. This hack
-@@ -1174,8 +1175,6 @@ XZ_EXTERN enum xz_ret __init xz_dec_lzma
+ 		*left -= copy_size;
+ 
+-		memcpy(dict->buf + dict->pos, b->in + b->in_pos, copy_size);
++		/*
++		 * If doing in-place decompression in single-call mode and the
++		 * uncompressed size of the file is larger than the caller
++		 * thought (i.e. it is invalid input!), the buffers below may
++		 * overlap and cause undefined behavior with memcpy().
++		 * With valid inputs memcpy() would be fine here.
++		 */
++		memmove(dict->buf + dict->pos, b->in + b->in_pos, copy_size);
+ 		dict->pos += copy_size;
+ 
+ 		if (dict->full < dict->pos)
+@@ -397,7 +404,11 @@ static void __init dict_uncompressed(str
+ 			if (dict->pos == dict->end)
+ 				dict->pos = 0;
+ 
+-			memcpy(b->out + b->out_pos, b->in + b->in_pos,
++			/*
++			 * Like above but for multi-call mode: use memmove()
++			 * to avoid undefined behavior with invalid input.
++			 */
++			memmove(b->out + b->out_pos, b->in + b->in_pos,
+ 					copy_size);
  		}
+ 
+@@ -421,6 +432,12 @@ static uint32_t __init dict_flush(struct
+ 		if (dict->pos == dict->end)
+ 			dict->pos = 0;
+ 
++		/*
++		 * These buffers cannot overlap even if doing in-place
++		 * decompression because in multi-call mode dict->buf
++		 * has been allocated by us in this file; it's not
++		 * provided by the caller like in single-call mode.
++		 */
+ 		memcpy(b->out + b->out_pos, dict->buf + dict->start,
+ 				copy_size);
  	}
- 
--	s->lzma.len = 0;
--
- 	s->lzma2.sequence = SEQ_CONTROL;
- 	s->lzma2.need_dict_reset = true;
- 
 
 
