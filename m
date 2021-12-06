@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16609C41535
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:28:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239879.415840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16539C2BA4C
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:28:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239884.415896 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSG-0001WW-Vv; Mon, 06 Dec 2021 22:27:28 +0000
+	id 1muMSM-0002pp-IC; Mon, 06 Dec 2021 22:27:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239879.415840; Mon, 06 Dec 2021 22:27:28 +0000
+Received: by outflank-mailman (output) from mailman id 239884.415896; Mon, 06 Dec 2021 22:27:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSG-0001WP-Sw; Mon, 06 Dec 2021 22:27:28 +0000
-Received: by outflank-mailman (input) for mailman id 239879;
- Mon, 06 Dec 2021 22:27:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muMSM-0002pf-Bf; Mon, 06 Dec 2021 22:27:34 +0000
+Received: by outflank-mailman (input) for mailman id 239884;
+ Mon, 06 Dec 2021 22:27:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMSF-0001Vt-FB
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:27 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id afc47430-56e3-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:27:26 +0100 (CET)
+ id 1muMSK-0001m5-Qf
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:32 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b426d3e1-56e3-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:27:32 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,27 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: afc47430-56e3-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210147.872865823@linutronix.de>
+X-Inumbo-ID: b426d3e1-56e3-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210224.103502021@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638829644;
+	s=2020; t=1638829652;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=TvVbtaLszVomfbTSaDkZ3Si83Q0PTUXmzyd/sxp3aOQ=;
-	b=2PszHZiuiUTEj+gbLOwH5J07JyOXMbPmbCF5/f0ECB+TDx6fg7HRqd/7nSafRiLEh/tB2J
-	I89obIOz4EfihV8wPu6DVbEqAjw/vu0lG3MVaBJQOCX84dIVCgJcpP/4YaTYj0DWyUOU+p
-	QY7yu7nySNOGDJllJoRD8mO5pRKX6dZ+TpEE7VtehF+zj9YNKxWJrbFRJPs4IpnpV7iPLb
-	eXidnoRUF/iI20Q4u50DI+RHcaKyBY/xpS4sXM1RqwV+zb/rkRAS11jus+lRlFQbQ+/IC4
-	zfPKJkcA3/LscOUNOfG7uESwv6dj4mHkFlfcsQphYvz9RbwoDVZGHnz96iSF7w==
+	 references:references; bh=aL/VIL4bKAOk4G3UXRaDbYDCQCUHomOCFOLYCw7n0T4=;
+	b=tdR1Yo1b4L979PReLtRwSr9KoFKCjaxkig8tEe2FBIPXHXjOv7Mc2jnpFy5d5ujcRG9zf2
+	YANt+QuUbpnUYaWhnBtSHaKqGvAj3EA/vWxXcC93VD/psiez55uaqQuMXahn3k2wcp7TIs
+	dzvgsa3MguKW/H/7qISbFdepvIsonMp+pcJQTxLy0Tq8xqNv4AzIHYrBlQjpabukLMoAQH
+	+8WoxFZhtgRRZ0BM+5uKEmfxHrc+cg3hLFITAABCGn+9ztS/P7IusvhBD0BzMAiM5V91it
+	NZB9Ix02RBqpBYkaQPqR4J0ny70Kpv7PWUnkultE1cGpFyC/CxWO/mhIGaySJg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638829644;
+	s=2020e; t=1638829652;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=TvVbtaLszVomfbTSaDkZ3Si83Q0PTUXmzyd/sxp3aOQ=;
-	b=dTYY6yq8X+q85zEA0MFqc5lmEol5cxwjMuFVu15JeS/3f+qTFpB+7//Ug3/O6D2uzzNFJo
-	H/Ml5sGXok1eYqCQ==
+	 references:references; bh=aL/VIL4bKAOk4G3UXRaDbYDCQCUHomOCFOLYCw7n0T4=;
+	b=rM6g+Z9DTE4BADbMORMbZP61UuPqp6XkB7syFu8ZEotroMrF5V2TzTS9qjDZR3MfVEmuj2
+	pW0Kwnn6e9i/AjBg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,11 +68,11 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Ashok Raj <ashok.raj@intel.com>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
+ Juergen Gross <jgross@suse.com>,
  Michael Ellerman <mpe@ellerman.id.au>,
  Paul Mackerras <paulus@samba.org>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linuxppc-dev@lists.ozlabs.org,
- Juergen Gross <jgross@suse.com>,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
  linux-mips@vger.kernel.org,
  Kalle Valo <kvalo@codeaurora.org>,
@@ -88,87 +85,43 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-hyperv@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch V2 00/23] genirq/msi, PCI/MSI: Spring cleaning - Part 1
+Subject: [patch V2 05/23] genirq/msi: Fixup includes
+References: <20211206210147.872865823@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Date: Mon,  6 Dec 2021 23:27:23 +0100 (CET)
+Content-Type: text/plain; charset=UTF-8
+Date: Mon,  6 Dec 2021 23:27:31 +0100 (CET)
 
-VGhlIFtQQ0ldIE1TSSBjb2RlIGhhcyBnYWluZWQgcXVpdGUgc29tZSB3YXJ0cyBvdmVyIHRpbWUu
-IEEgcmVjZW50CmRpc2N1c3Npb24gdW5lYXJ0aGVkIGEgc2hvcnRjb21pbmc6IHRoZSBsYWNrIG9m
-IHN1cHBvcnQgZm9yIGV4cGFuZGluZwpQQ0kvTVNJLVggdmVjdG9ycyBhZnRlciBpbml0aWFsaXph
-dGlvbiBvZiBNU0ktWC4KClBDSS9NU0ktWCBoYXMgbm8gcmVxdWlyZW1lbnQgdG8gc2V0dXAgYWxs
-IHZlY3RvcnMgd2hlbiBNU0ktWCBpcyBlbmFibGVkIGluCnRoZSBkZXZpY2UuIFRoZSBub24tdXNl
-ZCB2ZWN0b3JzIGhhdmUganVzdCB0byBiZSBtYXNrZWQgaW4gdGhlIHZlY3Rvcgp0YWJsZS4gRm9y
-IFBDSS9NU0kgdGhpcyBpcyBub3QgcG9zc2libGUgYmVjYXVzZSB0aGUgbnVtYmVyIG9mIHZlY3Rv
-cnMKY2Fubm90IGJlIGNoYW5nZWQgYWZ0ZXIgaW5pdGlhbGl6YXRpb24uCgpUaGUgUENJL01TSSBj
-b2RlLCBidXQgYWxzbyB0aGUgY29yZSBNU0kgaXJxIGRvbWFpbiBjb2RlIGFyZSBidWlsdCBhcm91
-bmQKdGhlIGFzc3VtcHRpb24gdGhhdCBhbGwgcmVxdWlyZWQgdmVjdG9ycyBhcmUgaW5zdGFsbGVk
-IGF0IGluaXRpYWxpemF0aW9uCnRpbWUgYW5kIGZyZWVkIHdoZW4gdGhlIGRldmljZSBpcyBzaHV0
-IGRvd24gYnkgdGhlIGRyaXZlci4KClN1cHBvcnRpbmcgZHluYW1pYyBleHBhbnNpb24gYXQgbGVh
-c3QgZm9yIE1TSS1YIGlzIGltcG9ydGFudCBmb3IgVkZJTyBzbwp0aGF0IHRoZSBob3N0IHNpZGUg
-aW50ZXJydXB0cyBmb3IgcGFzc3Rocm91Z2ggZGV2aWNlcyBjYW4gYmUgaW5zdGFsbGVkIG9uCmRl
-bWFuZC4KClRoaXMgaXMgdGhlIGZpcnN0IHBhcnQgb2YgYSBsYXJnZSAodG90YWwgMTAxIHBhdGNo
-ZXMpIHNlcmllcyB3aGljaApyZWZhY3RvcnMgdGhlIFtQQ0ldTVNJIGluZnJhc3RydWN0dXJlIHRv
-IG1ha2UgcnVudGltZSBleHBhbnNpb24gb2YgTVNJLVgKdmVjdG9ycyBwb3NzaWJsZS4gVGhlIGxh
-c3QgcGFydCAoMTAgcGF0Y2hlcykgcHJvdmlkZSB0aGlzIGZ1bmN0aW9uYWxpdHkuCgpUaGUgZmly
-c3QgcGFydCBpcyBtb3N0bHkgYSBjbGVhbnVwIHdoaWNoIGNvbnNvbGlkYXRlcyBjb2RlLCBtb3Zl
-cyB0aGUgUENJCk1TSSBjb2RlIGludG8gYSBzZXBhcmF0ZSBkaXJlY3RvcnkgYW5kIHNwbGl0cyBp
-dCB1cCBpbnRvIHNldmVyYWwgcGFydHMuCgpObyBmdW5jdGlvbmFsIGNoYW5nZSBpbnRlbmRlZCBl
-eGNlcHQgZm9yIHBhdGNoIDIvTiB3aGljaCBjaGFuZ2VzIHRoZQpiZWhhdmlvdXIgb2YgcGNpX2dl
-dF92ZWN0b3IoKS9hZmZpbml0eSgpIHRvIGdldCByaWQgb2YgdGhlIGFzc3VtcHRpb24gdGhhdAp0
-aGUgcHJvdmlkZWQgaW5kZXggaXMgdGhlICJpbmRleCIgaW50byB0aGUgZGVzY3JpcHRvciBsaXN0
-IGluc3RlYWQgb2YgdXNpbmcKaXQgYXMgdGhlIGFjdHVhbCBNU0lbWF0gaW5kZXggYXMgc2VlbiBi
-eSB0aGUgaGFyZHdhcmUuIFRoaXMgd291bGQgYnJlYWsKdXNlcnMgb2Ygc3BhcnNlIGFsbG9jYXRl
-ZCBNU0ktWCBlbnRyaWVzLCBidXQgbm9uIG9mIHRoZW0gdXNlIHRoZXNlCmZ1bmN0aW9ucy4KClRo
-aXMgc2VyaWVzIGlzIGJhc2VkIG9uIDUuMTYtcmMyIGFuZCBhbHNvIGF2YWlsYWJsZSB2aWEgZ2l0
-OgoKICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3RnbHgv
-ZGV2ZWwuZ2l0IG1zaS12Mi1wYXJ0LTEKCkZvciB0aGUgY3VyaW91cyB3aG8gY2FuJ3Qgd2FpdCBm
-b3IgdGhlIG5leHQgcGFydCB0byBhcnJpdmUgdGhlIGZ1bGwgc2VyaWVzCmlzIGF2YWlsYWJsZSB2
-aWE6CgogICBnaXQ6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvdGds
-eC9kZXZlbC5naXQgbXNpLXYyLXBhcnQtMwoKVjEgb2YgdGhpcyBzZXJpZXMgY2FuIGJlIGZvdW5k
-IGhlcmU6CgogICBodHRwczovL2xvcmUua2VybmVsLm9yZy9yLzIwMjExMTI2MjIyNzAwLjg2MjQw
-Nzk3N0BsaW51dHJvbml4LmRlCgpDaGFuZ2VzIHZlcnN1cyBWMToKCiAgLSBBZGQgbWlzc2luZyBp
-bmNsdWRlcyBhbmQgdXNlIGNvcnJlY3QgdmFyaWFibGUgbmFtZSBpbiBsZWdhY3kgY29kZSAtIENl
-ZHJpYwoKICAtIE1vdmVkIHRoZSBNU0kgbG9jayBmcm9tIHN0cnVjdCBkZXZpY2UgdG8gc3RydWN0
-IHBjaV9kZXYgLSBOZXcgcGF0Y2gKCiAgICBUaGlzIGlzIHJlYWxseSBQQ0kvTVNJIHNwZWNpZmlj
-IGFuZCB0aGVyZSBpcyBubyBwb2ludCB0byBoYXZlIGl0CiAgICBpbiBldmVyeSBzdHJ1Y3QgZGV2
-aWNlLiBOZWl0aGVyIGRvZXMgaXQgbWFrZSBzZW5zZSB0byBoaWRlIGl0CiAgICBpbiBtc2lfZGV2
-aWNlX2RhdGEgYXMgdGhlIFYxIHNlcmllcyBwYXJ0IDIgZGlkLgoKICAtIFBpY2tlZCB1cCBSZXZp
-ZXdlZC9UZXN0ZWQvQWNrZWQtYnkgdGFncyBhcyBhcHByb3ByaWF0ZQoKVGhhbmtzLAoKCXRnbHgK
-LS0tCiBhcmNoL3Bvd2VycGMvcGxhdGZvcm1zLzR4eC9tc2kuYyAgICAgICAgICAgIHwgIDI4MSAt
-LS0tLS0tLS0tLS0KIGIvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL3BjaS9wY2kucnN0ICAgICAg
-fCAgICAyIAogYi9hcmNoL21pcHMvcGNpL21zaS1vY3Rlb24uYyAgICAgICAgICAgICAgICB8ICAg
-MzIgLQogYi9hcmNoL3Bvd2VycGMvcGxhdGZvcm1zLzR4eC9NYWtlZmlsZSAgICAgICB8ICAgIDEg
-CiBiL2FyY2gvcG93ZXJwYy9wbGF0Zm9ybXMvY2VsbC9heG9uX21zaS5jICAgIHwgICAgMiAKIGIv
-YXJjaC9wb3dlcnBjL3BsYXRmb3Jtcy9wb3dlcm52L3BjaS1pb2RhLmMgfCAgICA0IAogYi9hcmNo
-L3Bvd2VycGMvcGxhdGZvcm1zL3BzZXJpZXMvbXNpLmMgICAgICB8ICAgIDYgCiBiL2FyY2gvcG93
-ZXJwYy9zeXNkZXYvS2NvbmZpZyAgICAgICAgICAgICAgIHwgICAgNiAKIGIvYXJjaC9zMzkwL3Bj
-aS9wY2lfaXJxLmMgICAgICAgICAgICAgICAgICAgfCAgICA0IAogYi9hcmNoL3NwYXJjL2tlcm5l
-bC9wY2lfbXNpLmMgICAgICAgICAgICAgICB8ICAgIDQgCiBiL2FyY2gveDg2L2h5cGVydi9pcnFk
-b21haW4uYyAgICAgICAgICAgICAgIHwgICA1NSAtLQogYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS94
-ODZfaW5pdC5oICAgICAgICAgICB8ICAgIDYgCiBiL2FyY2gveDg2L2luY2x1ZGUvYXNtL3hlbi9o
-eXBlcnZpc29yLmggICAgIHwgICAgOCAKIGIvYXJjaC94ODYva2VybmVsL2FwaWMvbXNpLmMgICAg
-ICAgICAgICAgICAgfCAgICA4IAogYi9hcmNoL3g4Ni9rZXJuZWwveDg2X2luaXQuYyAgICAgICAg
-ICAgICAgICB8ICAgMTIgCiBiL2FyY2gveDg2L3BjaS94ZW4uYyAgICAgICAgICAgICAgICAgICAg
-ICAgIHwgICAxOSAKIGIvZHJpdmVycy9iYXNlL2NvcmUuYyAgICAgICAgICAgICAgICAgICAgICAg
-fCAgICAxIAogYi9kcml2ZXJzL2lycWNoaXAvaXJxLWdpYy12Mm0uYyAgICAgICAgICAgICB8ICAg
-IDEgCiBiL2RyaXZlcnMvaXJxY2hpcC9pcnEtZ2ljLXYzLWl0cy1wY2ktbXNpLmMgIHwgICAgMSAK
-IGIvZHJpdmVycy9pcnFjaGlwL2lycS1naWMtdjMtbWJpLmMgICAgICAgICAgfCAgICAxIAogYi9k
-cml2ZXJzL25ldC93aXJlbGVzcy9hdGgvYXRoMTFrL3BjaS5jICAgICB8ICAgIDIgCiBiL2RyaXZl
-cnMvcGNpL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAgIHwgICAgMyAKIGIvZHJpdmVycy9w
-Y2kvbXNpL01ha2VmaWxlICAgICAgICAgICAgICAgICAgfCAgICA3IAogYi9kcml2ZXJzL3BjaS9t
-c2kvaXJxZG9tYWluLmMgICAgICAgICAgICAgICB8ICAyNjcgKysrKysrKysrKysKIGIvZHJpdmVy
-cy9wY2kvbXNpL2xlZ2FjeS5jICAgICAgICAgICAgICAgICAgfCAgIDc5ICsrKwogYi9kcml2ZXJz
-L3BjaS9tc2kvbXNpLmMgICAgICAgICAgICAgICAgICAgICB8ICA2NDcgKysrKy0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQogYi9kcml2ZXJzL3BjaS9tc2kvbXNpLmggICAgICAgICAgICAgICAgICAg
-ICB8ICAgMzkgKwogYi9kcml2ZXJzL3BjaS9tc2kvcGNpZGV2X21zaS5jICAgICAgICAgICAgICB8
-ICAgNDMgKwogYi9kcml2ZXJzL3BjaS9wY2ktc3lzZnMuYyAgICAgICAgICAgICAgICAgICB8ICAg
-IDcgCiBiL2RyaXZlcnMvcGNpL3Byb2JlLmMgICAgICAgICAgICAgICAgICAgICAgIHwgICAgNCAK
-IGIvZHJpdmVycy9wY2kveGVuLXBjaWZyb250LmMgICAgICAgICAgICAgICAgfCAgICAyIAogYi9p
-bmNsdWRlL2xpbnV4L2RldmljZS5oICAgICAgICAgICAgICAgICAgICB8ICAgIDIgCiBiL2luY2x1
-ZGUvbGludXgvbXNpLmggICAgICAgICAgICAgICAgICAgICAgIHwgIDEzNiArKy0tLQogYi9pbmNs
-dWRlL2xpbnV4L3BjaS5oICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDIgCiBiL2tlcm5lbC9p
-cnEvbXNpLmMgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA0MSArCiAzNSBmaWxlcyBjaGFu
-Z2VkLCA3MDIgaW5zZXJ0aW9ucygrKSwgMTAzMyBkZWxldGlvbnMoLSkKCg==
+Remove the kobject.h include from msi.h as it's not required and add a
+sysfs.h include to the core code instead.
+
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Tested-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+---
+ include/linux/msi.h |    2 +-
+ kernel/irq/msi.c    |    1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -2,7 +2,7 @@
+ #ifndef LINUX_MSI_H
+ #define LINUX_MSI_H
+ 
+-#include <linux/kobject.h>
++#include <linux/cpumask.h>
+ #include <linux/list.h>
+ #include <asm/msi.h>
+ 
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -14,6 +14,7 @@
+ #include <linux/irqdomain.h>
+ #include <linux/msi.h>
+ #include <linux/slab.h>
++#include <linux/sysfs.h>
+ #include <linux/pci.h>
+ 
+ #include "internals.h"
+
 
