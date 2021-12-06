@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95964C43219
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:58:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240230.416724 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E614C4321E
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:59:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240239.416735 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMwd-0002Yf-Oq; Mon, 06 Dec 2021 22:58:51 +0000
+	id 1muMwv-00036x-0N; Mon, 06 Dec 2021 22:59:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240230.416724; Mon, 06 Dec 2021 22:58:51 +0000
+Received: by outflank-mailman (output) from mailman id 240239.416735; Mon, 06 Dec 2021 22:59:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMwd-0002YY-KK; Mon, 06 Dec 2021 22:58:51 +0000
-Received: by outflank-mailman (input) for mailman id 240230;
- Mon, 06 Dec 2021 22:58:50 +0000
+	id 1muMwu-00036q-TQ; Mon, 06 Dec 2021 22:59:08 +0000
+Received: by outflank-mailman (input) for mailman id 240239;
+ Mon, 06 Dec 2021 22:59:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMpp-0008NM-5b
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:49 +0000
+ id 1muMpe-0008NM-4q
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:51:38 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 180a1712-56e7-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:51:48 +0100 (CET)
+ id 115b7660-56e7-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:51:37 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 180a1712-56e7-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210749.117395027@linutronix.de>
+X-Inumbo-ID: 115b7660-56e7-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210748.737904583@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638831108;
+	s=2020; t=1638831096;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=UQMeiJXeYiF947FjCPAG7vmRPuGlZ4RmWN1aFBAPWbY=;
-	b=j8YDzfjTOVUtw2G4OjF5y06/jFdlYtyKLnuhNrK/bpkLkaTnn4AGZv/jRnvqge83ewT9EZ
-	Nwz09wQ3vuJDAxrxrxHq97EhX5xlkbEy8l7ZqB2CE52Smd2nR5hauYUPb70AJfEYW+2m28
-	/Ri3ke8al8TQjGRnjGB/dm2AsxUZ9EfKd2HMejOjmKccTj9QrHC9peKnbe8+CVti8ouwJ3
-	C1AwktksJnEpHS9BCJsw0vfnuwSS4osKJV69d2y3ByoF2epRfOLHWZBcaL6uLbdG70krcL
-	T7hUqEEbHU38REpT8x5KxoTUwUAdy96NvUeCCHoSiy01OTTa4eKEcs4uOXnqKQ==
+	 references:references; bh=CzqGTYDUie5SurN5/gfV37QSqlTZtJhIqYh57XXY9vc=;
+	b=1RPNxtfr5VOlwanCXHzzCGA5Okk7iWaKRIecmxZqcQ6GJ0N+TtqkJB4YBgKir4DpaFIby2
+	TRL5d8Yy6CPk4zvOP3IAjf8rBmhgoTlm/L1kch6yeBRZBqQv1tnis78DJISBVkWqedG7kW
+	+UF+HoUE+QXVYx2FHqbtaf8jvVW1CIcSK0Lt9gdkhNLog4N5iX/+i0lCCEkRdUsCAH5BS+
+	M8Ui7QxFmKA/zA6UsxNXXH9SHexJzn01o7N0bxnreZcIW5uaSDvXRX6Db6sRqabEbx7TII
+	t2IyHWZfEGz8M5lT0y6GzRbyCNuKzYCId/ZxJxgQ9wg+WoVlQuVF7cJLPCN54g==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638831108;
+	s=2020e; t=1638831096;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=UQMeiJXeYiF947FjCPAG7vmRPuGlZ4RmWN1aFBAPWbY=;
-	b=D+mlv+y+61yJoVZdD/rMHCJo6H0xkNc8ovcUZeqWP8Mth8m+KK95tAht+2fHEV6BMo8mIr
-	+btOYd7SZwaNFAAA==
+	 references:references; bh=CzqGTYDUie5SurN5/gfV37QSqlTZtJhIqYh57XXY9vc=;
+	b=Jct3bSAMJvPsNwVF2TBaEtc50EznqpM+HcoTb5h9bKmrJfg+EG2SWo9/6tVTtRKQrwReAU
+	pte3E9Jf8LXGmsBA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -80,160 +80,135 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Dave Jiang <dave.jiang@intel.com>,
  Allen Hubbe <allenbh@gmail.com>,
  linux-ntb@googlegroups.com
-Subject: [patch V2 28/31] genirq/msi: Mop up old interfaces
+Subject:
+ [patch V2 21/31] soc: ti: ti_sci_inta_msi: Rework MSI descriptor allocation
 References: <20211206210600.123171746@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:51:47 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:51:36 +0100 (CET)
 
-Get rid of the old iterators, alloc/free functions and adjust the core code
-accordingly.
+Protect the allocation properly and use the core allocation and free
+mechanism.
+
+No functional change intended.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 ---
- include/linux/msi.h |   15 ---------------
- kernel/irq/msi.c    |   31 +++++++++++++++----------------
- 2 files changed, 15 insertions(+), 31 deletions(-)
+ drivers/soc/ti/ti_sci_inta_msi.c |   71 +++++++++++++--------------------------
+ 1 file changed, 25 insertions(+), 46 deletions(-)
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -214,15 +214,7 @@ struct msi_desc *msi_next_desc(struct de
- 	for ((desc) = msi_first_desc((dev), (filter)); (desc);	\
- 	     (desc) = msi_next_desc((dev), (filter)))
+--- a/drivers/soc/ti/ti_sci_inta_msi.c
++++ b/drivers/soc/ti/ti_sci_inta_msi.c
+@@ -51,6 +51,7 @@ struct irq_domain *ti_sci_inta_msi_creat
+ 	struct irq_domain *domain;
  
--/* Helpers to hide struct msi_desc implementation details */
- #define msi_desc_to_dev(desc)		((desc)->dev)
--#define dev_to_msi_list(dev)		(&(dev)->msi.data->list)
--#define first_msi_entry(dev)		\
--	list_first_entry(dev_to_msi_list((dev)), struct msi_desc, list)
--#define for_each_msi_entry(desc, dev)	\
--	list_for_each_entry((desc), dev_to_msi_list((dev)), list)
--#define for_each_msi_entry_safe(desc, tmp, dev)	\
--	list_for_each_entry_safe((desc), (tmp), dev_to_msi_list((dev)), list)
+ 	ti_sci_inta_msi_update_chip_ops(info);
++	info->flags |= MSI_FLAG_FREE_MSI_DESCS;
  
- #ifdef CONFIG_IRQ_MSI_IOMMU
- static inline const void *msi_desc_get_iommu_cookie(struct msi_desc *desc)
-@@ -248,10 +240,6 @@ static inline void msi_desc_set_iommu_co
- #endif
- 
- #ifdef CONFIG_PCI_MSI
--#define first_pci_msi_entry(pdev)	first_msi_entry(&(pdev)->dev)
--#define for_each_pci_msi_entry(desc, pdev)	\
--	for_each_msi_entry((desc), &(pdev)->dev)
--
- struct pci_dev *msi_desc_to_pci_dev(struct msi_desc *desc);
- void pci_write_msi_msg(unsigned int irq, struct msi_msg *msg);
- #else /* CONFIG_PCI_MSI */
-@@ -273,9 +261,6 @@ static inline void msi_free_msi_descs(st
- 	msi_free_msi_descs_range(dev, MSI_DESC_ALL, 0, MSI_MAX_INDEX);
+ 	domain = msi_create_irq_domain(fwnode, info, parent);
+ 	if (domain)
+@@ -60,50 +61,31 @@ struct irq_domain *ti_sci_inta_msi_creat
  }
+ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_create_irq_domain);
  
--struct msi_desc *alloc_msi_entry(struct device *dev, int nvec,
--				 const struct irq_affinity_desc *affinity);
--void free_msi_entry(struct msi_desc *entry);
- void __pci_read_msi_msg(struct msi_desc *entry, struct msi_msg *msg);
- void __pci_write_msi_msg(struct msi_desc *entry, struct msi_msg *msg);
- 
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -19,8 +19,10 @@
- 
- #include "internals.h"
- 
-+#define dev_to_msi_list(dev)	(&(dev)->msi.data->list)
-+
- /**
-- * alloc_msi_entry - Allocate an initialized msi_desc
-+ * msi_alloc_desc - Allocate an initialized msi_desc
-  * @dev:	Pointer to the device for which this is allocated
-  * @nvec:	The number of vectors used in this entry
-  * @affinity:	Optional pointer to an affinity mask array size of @nvec
-@@ -30,12 +32,11 @@
-  *
-  * Return: pointer to allocated &msi_desc on success or %NULL on failure
-  */
--struct msi_desc *alloc_msi_entry(struct device *dev, int nvec,
--				 const struct irq_affinity_desc *affinity)
-+static struct msi_desc *msi_alloc_desc(struct device *dev, int nvec,
-+					const struct irq_affinity_desc *affinity)
+-static void ti_sci_inta_msi_free_descs(struct device *dev)
+-{
+-	struct msi_desc *desc, *tmp;
+-
+-	list_for_each_entry_safe(desc, tmp, dev_to_msi_list(dev), list) {
+-		list_del(&desc->list);
+-		free_msi_entry(desc);
+-	}
+-}
+-
+ static int ti_sci_inta_msi_alloc_descs(struct device *dev,
+ 				       struct ti_sci_resource *res)
  {
--	struct msi_desc *desc;
-+	struct msi_desc *desc = kzalloc(sizeof(*desc), GFP_KERNEL);
+-	struct msi_desc *msi_desc;
++	struct msi_desc msi_desc;
+ 	int set, i, count = 0;
  
--	desc = kzalloc(sizeof(*desc), GFP_KERNEL);
- 	if (!desc)
- 		return NULL;
- 
-@@ -43,21 +44,19 @@ struct msi_desc *alloc_msi_entry(struct
- 	desc->dev = dev;
- 	desc->nvec_used = nvec;
- 	if (affinity) {
--		desc->affinity = kmemdup(affinity,
--			nvec * sizeof(*desc->affinity), GFP_KERNEL);
-+		desc->affinity = kmemdup(affinity, nvec * sizeof(*desc->affinity), GFP_KERNEL);
- 		if (!desc->affinity) {
- 			kfree(desc);
- 			return NULL;
++	memset(&msi_desc, 0, sizeof(msi_desc));
++
+ 	for (set = 0; set < res->sets; set++) {
+-		for (i = 0; i < res->desc[set].num; i++) {
+-			msi_desc = alloc_msi_entry(dev, 1, NULL);
+-			if (!msi_desc) {
+-				ti_sci_inta_msi_free_descs(dev);
+-				return -ENOMEM;
+-			}
+-
+-			msi_desc->msi_index = res->desc[set].start + i;
+-			INIT_LIST_HEAD(&msi_desc->list);
+-			list_add_tail(&msi_desc->list, dev_to_msi_list(dev));
+-			count++;
++		for (i = 0; i < res->desc[set].num; i++, count++) {
++			msi_desc.msi_index = res->desc[set].start + i;
++			if (msi_add_msi_desc(dev, &msi_desc))
++				goto fail;
+ 		}
+-		for (i = 0; i < res->desc[set].num_sec; i++) {
+-			msi_desc = alloc_msi_entry(dev, 1, NULL);
+-			if (!msi_desc) {
+-				ti_sci_inta_msi_free_descs(dev);
+-				return -ENOMEM;
+-			}
+-
+-			msi_desc->msi_index = res->desc[set].start_sec + i;
+-			INIT_LIST_HEAD(&msi_desc->list);
+-			list_add_tail(&msi_desc->list, dev_to_msi_list(dev));
+-			count++;
++
++		for (i = 0; i < res->desc[set].num_sec; i++, count++) {
++			msi_desc.msi_index = res->desc[set].start_sec + i;
++			if (msi_add_msi_desc(dev, &msi_desc))
++				goto fail;
  		}
  	}
 -
- 	return desc;
+ 	return count;
++fail:
++	msi_free_msi_descs(dev);
++	return -ENOMEM;
  }
  
--void free_msi_entry(struct msi_desc *entry)
-+static void msi_free_desc(struct msi_desc *desc)
+ int ti_sci_inta_msi_domain_alloc_irqs(struct device *dev,
+@@ -124,20 +106,18 @@ int ti_sci_inta_msi_domain_alloc_irqs(st
+ 	if (ret)
+ 		return ret;
+ 
++	msi_lock_descs(dev);
+ 	nvec = ti_sci_inta_msi_alloc_descs(dev, res);
+-	if (nvec <= 0)
+-		return nvec;
+-
+-	ret = msi_domain_alloc_irqs(msi_domain, dev, nvec);
+-	if (ret) {
+-		dev_err(dev, "Failed to allocate IRQs %d\n", ret);
+-		goto cleanup;
++	if (nvec <= 0) {
++		ret = nvec;
++		goto unlock;
+ 	}
+ 
+-	return 0;
+-
+-cleanup:
+-	ti_sci_inta_msi_free_descs(&pdev->dev);
++	ret = msi_domain_alloc_irqs_descs_locked(msi_domain, dev, nvec);
++	if (ret)
++		dev_err(dev, "Failed to allocate IRQs %d\n", ret);
++unlock:
++	msi_unlock_descs(dev);
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain_alloc_irqs);
+@@ -145,6 +125,5 @@ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain
+ void ti_sci_inta_msi_domain_free_irqs(struct device *dev)
  {
--	kfree(entry->affinity);
--	kfree(entry);
-+	kfree(desc->affinity);
-+	kfree(desc);
+ 	msi_domain_free_irqs(dev->msi.domain, dev);
+-	ti_sci_inta_msi_free_descs(dev);
  }
- 
- /**
-@@ -73,7 +72,7 @@ int msi_add_msi_desc(struct device *dev,
- 
- 	lockdep_assert_held(&dev->msi.data->mutex);
- 
--	desc = alloc_msi_entry(dev, init_desc->nvec_used, init_desc->affinity);
-+	desc = msi_alloc_desc(dev, init_desc->nvec_used, init_desc->affinity);
- 	if (!desc)
- 		return -ENOMEM;
- 
-@@ -102,7 +101,7 @@ static int msi_add_simple_msi_descs(stru
- 	lockdep_assert_held(&dev->msi.data->mutex);
- 
- 	for (i = 0; i < ndesc; i++) {
--		desc = alloc_msi_entry(dev, 1, NULL);
-+		desc = msi_alloc_desc(dev, 1, NULL);
- 		if (!desc)
- 			goto fail;
- 		desc->msi_index = index + i;
-@@ -114,7 +113,7 @@ static int msi_add_simple_msi_descs(stru
- fail:
- 	list_for_each_entry_safe(desc, tmp, &list, list) {
- 		list_del(&desc->list);
--		free_msi_entry(desc);
-+		msi_free_desc(desc);
- 	}
- 	return -ENOMEM;
- }
-@@ -141,7 +140,7 @@ void msi_free_msi_descs_range(struct dev
- 		if (desc->msi_index < first_index || desc->msi_index > last_index)
- 			continue;
- 		list_del(&desc->list);
--		free_msi_entry(desc);
-+		msi_free_desc(desc);
- 	}
- }
- 
-@@ -762,7 +761,7 @@ int msi_domain_populate_irqs(struct irq_
- 
- 	msi_lock_descs(dev);
- 	for (virq = virq_base; virq < virq_base + nvec; virq++) {
--		desc = alloc_msi_entry(dev, 1, NULL);
-+		desc = msi_alloc_desc(dev, 1, NULL);
- 		if (!desc) {
- 			ret = -ENOMEM;
- 			goto fail;
+ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain_free_irqs);
 
 
