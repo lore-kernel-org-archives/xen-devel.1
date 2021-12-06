@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2876C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9387C433FE
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:09:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239535.415516 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.239534.415509 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHU4-0000D9-O0; Mon, 06 Dec 2021 17:09:00 +0000
+	id 1muHU3-0008H1-3l; Mon, 06 Dec 2021 17:08:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239535.415516; Mon, 06 Dec 2021 17:09:00 +0000
+Received: by outflank-mailman (output) from mailman id 239534.415509; Mon, 06 Dec 2021 17:08:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHU3-00009C-JE; Mon, 06 Dec 2021 17:08:59 +0000
-Received: by outflank-mailman (input) for mailman id 239535;
- Mon, 06 Dec 2021 17:08:57 +0000
+	id 1muHU1-0008Bn-Ux; Mon, 06 Dec 2021 17:08:57 +0000
+Received: by outflank-mailman (input) for mailman id 239534;
+ Mon, 06 Dec 2021 17:08:55 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHPp-0005ti-GG
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:37 +0000
+ id 1muHPO-0005ti-Fh
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:10 +0000
 Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
  [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 96699ceb-56b6-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 18:04:36 +0100 (CET)
+ id 870083b8-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:04:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96699ceb-56b6-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 870083b8-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810276;
+  d=citrix.com; s=securemail; t=1638810249;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=zPznA+ybTAJl3D8zcQnhTs5UDGVeYxfDltfmGygnLGQ=;
-  b=STIgGQTNlh9jB0/IGPm8JuavQoMZ/tfLLm998++yJRPOYM5rsWUUqf3k
-   m/MOplJNeY0OGxD9GZTCnatGeOwfE3RhSg9Sjj0laJX0RuTH4QZgQasNp
-   poLuEFAf2juiEYddGz6xHvdwV4+Eh/jY56nclM2cN4cr9HYII0sPcsSiX
+  bh=0MivWbgo/dLtJel8lLkqzy+izVyO5ow6ugdRMsmNQz0=;
+  b=EOySLkNTKVERhcqzMXigBnfPDtTn5pAR8B6Ypw68AYeQfFYORdRc7mhh
+   N+yM0E36fha1MAm5a21u2VQyk9fjr9pPweDs+KHAojSHDzy3uksIyPCH9
+   kLe7q0C3WZw8HGT7O1bnzY0ydItym3U3ndDhcY69AV8xuSgHA+hPEPKp5
    0=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: gZwrIIIs3fLrpeQ+GGmDbXU+P58vuCi5Hayev4yJSne9H5ciXanMGjY0fP3svhoj80aZfncUS2
- WCBeQCInyhrPO8+SJKNNSG0P0FIhMMxYHyXzjocvEyOpvqbV9Mgin3kKEhhoZZf9gHUNNBXlpO
- /TYODsuZhpcdc3Bq3h27Zt6FM7+f48BW2C8g9TLFteRjHfOCvX9XmpIhkloprMQK21Y6YuPTqU
- z4SdBaN6pURXCI1svNLy4X6oPeHR200PIvc19ZBQmcRgCyl+h2Dh/62EWcBmWz4Tvxh4JgNIR5
- 3dep41H4LxF6zQ+SvphuvSX+
+IronPort-SDR: rveRkO69cS5gYtM8H32HobqBjT2KVOUK5TVZeI+5UwQqioiB+OXKu5w7jiSiiCfFnAEKNDq5rJ
+ g0lz0xDT/NW4GnU6DRrHx0fjMwYA40k2Nf1LMHVLA1o5xxhshiRkmZoI3KdTvIfoY213EoNyhx
+ pBaKM57RKF/Vl404T+3Wiuhf8Ak/l2ZcuZS93NNT9Pw0ndw8E8zZxOYilJc98R5e/MN6Pggtkh
+ dshOn3RjUwMrxzvmv8CMoEyEjg7ZzLclaC6Wa3MpmcN5Iamsx/sD5W07Khx5fPWEdvun7X8rB0
+ e/hWg+j3Wi5eYf6QFmI2Rs2W
 X-SBRS: 5.1
-X-MesageID: 59388028
+X-MesageID: 59387924
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:dn+4VqLhcPaplsttFE+RN5IlxSXFcZb7ZxGr2PjKsXjdYENS12MGz
- zAdDGHQaaqJamHyeN92Odiy9EIAv5eGy9NiTAJlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Eg7xbZj6mJVqYPR7z2l6
- IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB3OsOtew
- 9IWj6aiEyUtFK+Px9QRDStXRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Gph3ZAeRayOD
- yYfQSpUaUuZWx9LBls0MpYavNuGhnXteSIN/Tp5ooJoujOOnWSdyoPFMcXXUsyHQ91PmUSVr
- X6A+H72ajkFMPSPxDzD9Wij7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWc9tZN
- 0wT/DtotaUo/VanZtb4Vhy85nWDu3Yht8F4SrNgrlvXk+yNvljfVjNsoiN9hMIO8+ANajctj
- WWzjYnLARZt8+KlRSyv+eLBxd+tAhQ9IWgHbC4CaAIK5dj/vY0+5i7yosZf/L2d1YOsR2ypq
- 9yehG1n3uhI05ZXv0mu1Qmf22rEm3TfcuIiCuw7tEqB5xgxWoOqbpfABbPzvacZd9bxorVsU
- RE5dymiAAImUMjleM+lGrxl8FSVCxCtame0bblHRcZJythV0yT/Fb28GRknTKuTDu4KeCXyf
- GjYsh5L6ZlYMROCNPEsM93rWplwl/a/RbwJs8w4iPIUOPCdkyfdo0lTibO4hTixwCDAb4lhU
- XtkTSpcJSlDUvk2pNZHb+wczaUq1kgDKZD7HvjGI+Cc+ePGPha9EO5dWHPXN7xRxP7U8W39r
- ocEX+PXmko3bQELSnSOmWLlBQtRdiZT6FGfg5E/S9Nv1SI6Qjx8UKGInut6E2Gn9owM/tr1E
- riGchcw4DLCabfvcG1ms1hvN+HiW4hRt3U+MXB+NFqkwSF7M42u8L0eZ908erx+rL5vyvt9T
- v8kfcScA6sQFmSbqmpFNZSt/pZ/cBmLhB6VO3b3ajYIYJM9FRfC/cXpf1Wz+XBWXDa3r8Y3v
- 5apyhjfHcgYXw1nAcuPMKCvwlq9sGIzguV3W0eUcNBfdF+1qNphKjDrj+9xKMYJcE2Ryjyf3
- geQIBEZueiS/NNlrIiX3fiJ9t77HfF/E0xWG3jgwYy3bSSKrHC+xYJgUfqTeWyPXm3D56j/N
- /5eyOvxMaNbkQ8S4ZZ8Cbti0Yk3+8Dr++1B1g1hEXjGMwarB7dnLiXU1MVDrPQQlLpQuA/wU
- UOT4NhKf76OPZq9QlIWIQMkaMWF1O0VxWaOvahkfh2i6X8l5qeDXGVTIwKI2X5UI7ZCOY84x
- fss5ZwN4Aulhxt2atuLg0i4LYhXwqDsh0n/iqwnPQ==
-IronPort-HdrOrdr: A9a23:UVriIqyDW1TiTI9jG0rwKrPwKr1zdoMgy1knxilNoRw8SKOlfq
- eV7ZMmPH7P+U8ssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCFgguVxehZhOOIqQEIWReOk9K1vZ
- 0QFZSWY+efMbEVt6rHCXGDYrUd/OU=
+IronPort-Data: A9a23:unO4M62HfnKd/mC98PbD5Vh2kn2cJEfYwER7XKvMYLTBsI5bpzZTn
+ 2ZNDTiBaamOMzDzKNl1PIi0p01T6sPXnIJgGQZqpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCan8ZqTNMEn970Es5w7Bh2OaEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhu/R65
+ OcR5JaJRVk7bo7lobsFWR0GHHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Ej8I/LM7tLcUHt2tp1z3xBvc6W5HTBa7N4Le02R9t15seQqeEO
+ 6L1bxJWZUTwMzIQFm0dVtE7mbyHiWTeQixh/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
+ mDJ5WPiGTkBKceSjzGC9xqEhPLLnC79cJIfEvu/7PECqE2ewCkfBQMbUXO/oOKlkQiuVtRHM
+ UsW9yEy668o+ySDR9/hXxq+sTicswQVQdZ4HOgz6QXLwa3Riy6YGWosXjNHcMYhtsI9WXotz
+ FDhoj/yLWUx6vvPEyvbr+rK62PpUcQIEYMcTQsgRic3v4jpmY1tnELsZ+88CKSx0NKgTFkc3
+ Au2hCQ5grwSi+sC2KO64U3LjlqQm3TZcuImzl6JBzz4t2uVcKbgPtX1sgaDsZ6sOa7AFgHZ1
+ EXojfRy+wzn4XulsCWWCNsAE7iyjxpuGG2N2AU/d3XNGtnExpJCQWyyyGwnTKuKGpxdEdMMX
+ KM1kVkLjHO0FCH1BZKbm6rrV6wXIVLcPdrkTOvISdFFf4J8cgSKlAk3OxXAgDq8zRJ2z/5vU
+ Xt+TSpKJSxAYUiA5GDpL9rxLJdxnnxurY8tbc6TI+ubPUq2OyfOFOZt3KqmZeEl9qKUyDg5A
+ P4EX/ZmPy53CbWkCgGOqNZ7BQlTcRATWMCnw+QKJ7XrClc3Rwkc5wr5nOpJU5Z7hJ5ciuqg1
+ ij7Aie0PnKk3iaZQehLA1g+AI7SsWFX8ShmYHdyZAnwgBDOo++Htc8iSnf+RpF/nMQL8BK+Z
+ 6NdEylZKvgQGDnB5RoHapzx8N5reBix3FrcNCu5ejkvOZVnQlWRqNPjewLu8ggIDza26pRi8
+ +HxiFuDTMpRXRlmAebXdOmrkwG7s08Clb8gREDPONRSJhnhqdA4Nyzrg/YrCMgQMhGflCCC3
+ gObDE5A9+nAqoM46vfTgqWAo9v7GudyBBMCTWLa8ay3JW/R+W/6md1MV+OBfDb8UmLo+fr9O
+ bUJnq+kaPBexQREqYtxFbpv3JkS3dq3qu8I1BlgEVXKc0+vVuFqLE6Z0JQdraZK3LJY51e7A
+ xrd5tlANLyVE8r5C1pNdhE9Z+GO2PxIyDnf6fM5fBfz6CNtpefVVExTO1+HiTBHLaszO4Qgm
+ L9ztMkT4g25qxwrLtfZ0XwEqzXSdiQNA/c9q5UXII73kQ56mFhNbKvVBjLy/JzSOc5HNVMnI
+ 2PMiafP71iGKpEur5bn+aDx4Ndg
+IronPort-HdrOrdr: A9a23:HShvlaqm77F9uaY9dR+79q0aV5oteYIsimQD101hICG8cqSj+P
+ xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
+ 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59388028"
+   d="scan'208";a="59387924"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH 50/57] tools/Rules.mk: Cleanup %.pc rules
-Date: Mon, 6 Dec 2021 17:02:33 +0000
-Message-ID: <20211206170241.13165-51-anthony.perard@citrix.com>
+	<wl@xen.org>, Juergen Gross <jgross@suse.com>, Julien Grall <julien@xen.org>
+Subject: [XEN PATCH 36/57] tools/xenstore: Cleanup makefile
+Date: Mon, 6 Dec 2021 17:02:19 +0000
+Message-ID: <20211206170241.13165-37-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,42 +103,167 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-PKG_CONFIG_VARS isn't used anymore.
-For "local" pkg-config file, we only have one headers directory now,
-"tools/include", so there is no need to specify it twice. So remove
-$(CFLAGS_xeninclude) from "Cflags:".
+Regroup *FLAGS together, use $(LDLIBS).
+
+Remove $(LDLIBS_xenstored) which was the wrong name name as it doesn't
+decribe how to link to a potential libxenstored.so, instead add the
+value to $(LDLIBS) of xenstored.
+
+Add SYSTEMD_LIBS into $(LDLIBS) instead of $(LDFLAGS).
+
+Remove the "-I." from $(CFLAGS), it shouldn't be needed.
+
+Removed $(CFLAGS-y) and $(LDFLAGS-y). $(CFLAGS-y) is already included
+in $(CFLAGS) and both aren't used anyway.
+
+Rename ALL_TARGETS to TARGETS.
+Only add programmes we want to build in $(TARGETS), not phony-targets
+(replace "clients").
+
+Store all `xenstored` objs into $(XENSTORED_OBJS-y).
+
+Replace one $< by $^ even if there's only one dependency,
+(xenstore-control).
+
+clean: "init-xenstore-domain" isn't built here, so stop trying to
+remove it, remove $(TARGETS).
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/Rules.mk | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ tools/xenstore/Makefile | 81 ++++++++++++++++++++++-------------------
+ 1 file changed, 44 insertions(+), 37 deletions(-)
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 0d3febfbb6..47424935ba 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -184,12 +184,11 @@ $(PKG_CONFIG_DIR)/%.pc: Makefile $(XEN_ROOT)/tools/Rules.mk $(PKG_CONFIG_DIR)
- 	echo "prefix=$(PKG_CONFIG_PREFIX)"; \
- 	echo "includedir=$(PKG_CONFIG_INCDIR)"; \
- 	echo "libdir=$(PKG_CONFIG_LIBDIR)"; \
--	$(foreach var,$(PKG_CONFIG_VARS),echo $(var);) \
- 	echo ""; \
- 	echo "Name: $(PKG_CONFIG_NAME)"; \
- 	echo "Description: $(PKG_CONFIG_DESC)"; \
- 	echo "Version: $(PKG_CONFIG_VERSION)"; \
--	echo "Cflags: -I\$${includedir} $(CFLAGS_xeninclude)"; \
-+	echo "Cflags: -I\$${includedir}"; \
- 	echo "Libs: -L\$${libdir} $(PKG_CONFIG_USELIBS) -l$(PKG_CONFIG_LIB)"; \
- 	echo "Libs.private: $(PKG_CONFIG_LIBSPRIV)"; \
- 	echo "Requires.private: $(PKG_CONFIG_REQPRIV)"; \
-@@ -200,7 +199,6 @@ $(PKG_CONFIG_DIR)/%.pc: Makefile $(XEN_ROOT)/tools/Rules.mk $(PKG_CONFIG_DIR)
- 	echo "prefix=$(PKG_CONFIG_PREFIX)"; \
- 	echo "includedir=$(PKG_CONFIG_INCDIR)"; \
- 	echo "libdir=$(PKG_CONFIG_LIBDIR)"; \
--	$(foreach var,$(PKG_CONFIG_VARS),echo $(var);) \
- 	echo ""; \
- 	echo "Name: $(PKG_CONFIG_NAME)"; \
- 	echo "Description: $(PKG_CONFIG_DESC)"; \
+diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
+index 292b478fa1..7fe1d9c1e2 100644
+--- a/tools/xenstore/Makefile
++++ b/tools/xenstore/Makefile
+@@ -5,7 +5,6 @@ MAJOR = 3.0
+ MINOR = 3
+ 
+ CFLAGS += -Werror
+-CFLAGS += -I.
+ # Include configure output (config.h)
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+ CFLAGS += -I./include
+@@ -16,36 +15,53 @@ CFLAGS += $(CFLAGS_libxentoolcore)
+ CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
+ CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
+ 
+-CFLAGS  += $(CFLAGS-y)
+-LDFLAGS += $(LDFLAGS-y)
++ifdef CONFIG_STUBDOM
++CFLAGS += -DNO_SOCKETS=1
++endif
+ 
+-CLIENTS := xenstore-exists xenstore-list xenstore-read xenstore-rm xenstore-chmod
+-CLIENTS += xenstore-write xenstore-ls xenstore-watch
++XENSTORED_OBJS-y := xenstored_core.o xenstored_watch.o xenstored_domain.o
++XENSTORED_OBJS-y += xenstored_transaction.o xenstored_control.o
++XENSTORED_OBJS-y += xs_lib.o talloc.o utils.o tdb.o hashtable.o
+ 
+-XENSTORED_OBJS = xenstored_core.o xenstored_watch.o xenstored_domain.o
+-XENSTORED_OBJS += xenstored_transaction.o xenstored_control.o
+-XENSTORED_OBJS += xs_lib.o talloc.o utils.o tdb.o hashtable.o
++XENSTORED_OBJS-$(CONFIG_Linux) += xenstored_posix.o
++XENSTORED_OBJS-$(CONFIG_SunOS) += xenstored_solaris.o xenstored_posix.o xenstored_probes.o
++XENSTORED_OBJS-$(CONFIG_NetBSD) += xenstored_posix.o
++XENSTORED_OBJS-$(CONFIG_FreeBSD) += xenstored_posix.o
++XENSTORED_OBJS-$(CONFIG_MiniOS) += xenstored_minios.o
+ 
+-XENSTORED_OBJS_$(CONFIG_Linux) = xenstored_posix.o
+-XENSTORED_OBJS_$(CONFIG_SunOS) = xenstored_solaris.o xenstored_posix.o xenstored_probes.o
+-XENSTORED_OBJS_$(CONFIG_NetBSD) = xenstored_posix.o
+-XENSTORED_OBJS_$(CONFIG_FreeBSD) = xenstored_posix.o
+-XENSTORED_OBJS_$(CONFIG_MiniOS) = xenstored_minios.o
++$(XENSTORED_OBJS-y): CFLAGS += $(CFLAGS_libxengnttab)
+ 
+-XENSTORED_OBJS += $(XENSTORED_OBJS_y)
+-LDLIBS_xenstored += -lrt
++xenstored: LDLIBS += $(LDLIBS_libxenevtchn)
++xenstored: LDLIBS += $(LDLIBS_libxengnttab)
++xenstored: LDLIBS += $(LDLIBS_libxenctrl)
++xenstored: LDLIBS += -lrt
++xenstored: LDLIBS += $(SOCKET_LIBS)
+ 
+-ALL_TARGETS = clients
+-ifeq ($(XENSTORE_XENSTORED),y)
+-ALL_TARGETS += xs_tdb_dump xenstored
++ifeq ($(CONFIG_SYSTEMD),y)
++$(XENSTORED_OBJS-y): CFLAGS += $(SYSTEMD_CFLAGS)
++xenstored: LDLIBS += $(SYSTEMD_LIBS)
+ endif
+ 
+-ifdef CONFIG_STUBDOM
+-CFLAGS += -DNO_SOCKETS=1
++xenstore: LDLIBS += $(LDLIBS_libxenstore)
++xenstore: LDLIBS += $(LDLIBS_libxentoolcore)
++xenstore: LDLIBS += $(SOCKET_LIBS)
++
++xenstore-control: LDLIBS += $(LDLIBS_libxenstore)
++xenstore-control: LDLIBS += $(LDLIBS_libxenctrl)
++xenstore-control: LDLIBS += $(LDLIBS_libxenguest)
++xenstore-control: LDLIBS += $(LDLIBS_libxentoolcore)
++xenstore-control: LDLIBS += $(SOCKET_LIBS)
++
++CLIENTS := xenstore-exists xenstore-list xenstore-read xenstore-rm xenstore-chmod
++CLIENTS += xenstore-write xenstore-ls xenstore-watch
++
++TARGETS := xenstore $(CLIENTS) xenstore-control
++ifeq ($(XENSTORE_XENSTORED),y)
++TARGETS += xs_tdb_dump xenstored
+ endif
+ 
+ .PHONY: all
+-all: $(ALL_TARGETS)
++all: $(TARGETS)
+ 
+ .PHONY: clients
+ clients: xenstore $(CLIENTS) xenstore-control
+@@ -62,37 +78,28 @@ xenstored_probes.o: xenstored_solaris.o
+ CFLAGS += -DHAVE_DTRACE=1
+ endif
+ 
+-ifeq ($(CONFIG_SYSTEMD),y)
+-$(XENSTORED_OBJS): CFLAGS += $(SYSTEMD_CFLAGS)
+-xenstored: LDFLAGS += $(SYSTEMD_LIBS)
+-endif
+-
+-$(XENSTORED_OBJS): CFLAGS += $(CFLAGS_libxengnttab)
+-
+-xenstored: $(XENSTORED_OBJS)
+-	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxenctrl) $(LDLIBS_xenstored) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
++xenstored: $(XENSTORED_OBJS-y)
++	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
+ 
+-xenstored.a: $(XENSTORED_OBJS)
++xenstored.a: $(XENSTORED_OBJS-y)
+ 	$(AR) cr $@ $^
+ 
+ $(CLIENTS): xenstore
+ 	ln -f xenstore $@
+ 
+ xenstore: xenstore_client.o xs_lib.o
+-	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
+ 
+ xenstore-control: xenstore_control.o
+-	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
+ 
+ xs_tdb_dump: xs_tdb_dump.o utils.o tdb.o talloc.o
+-	$(CC) $^ $(LDFLAGS) -o $@ $(APPEND_LDFLAGS)
++	$(CC) $(LDFLAGS) $^ -o $@ $(APPEND_LDFLAGS)
+ 
+ .PHONY: clean
+ clean:
+ 	rm -f *.a *.o xenstored_probes.h
+-	rm -f xenstored
+-	rm -f xs_tdb_dump xenstore-control init-xenstore-domain
+-	rm -f xenstore $(CLIENTS)
++	rm -f $(TARGETS)
+ 	$(RM) $(DEPS_RM)
+ 
+ .PHONY: distclean
 -- 
 Anthony PERARD
 
