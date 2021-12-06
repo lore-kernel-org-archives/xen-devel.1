@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55DFEC433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240069.416400 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D473AC433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240070.416416 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmQ-0006Wy-8z; Mon, 06 Dec 2021 22:48:18 +0000
+	id 1muMmU-0007Xk-8X; Mon, 06 Dec 2021 22:48:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240069.416400; Mon, 06 Dec 2021 22:48:18 +0000
+Received: by outflank-mailman (output) from mailman id 240070.416416; Mon, 06 Dec 2021 22:48:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMmP-0006UK-Oz; Mon, 06 Dec 2021 22:48:17 +0000
-Received: by outflank-mailman (input) for mailman id 240069;
- Mon, 06 Dec 2021 22:48:16 +0000
+	id 1muMmT-0007XL-W4; Mon, 06 Dec 2021 22:48:21 +0000
+Received: by outflank-mailman (input) for mailman id 240070;
+ Mon, 06 Dec 2021 22:48:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMeJ-0004dp-Fr
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:55 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1muMdy-0004dp-En
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:34 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6ebe2982-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:54 +0100 (CET)
+ id 623c8baa-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:33 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6ebe2982-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210439.616608151@linutronix.de>
+X-Inumbo-ID: 623c8baa-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210438.913603962@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830394;
+	s=2020; t=1638830373;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=LQ/fEdCb15XlPMORiCBx0zVLCBalBxQN731AvqWpOBo=;
-	b=3Tr/OwgWIjMrczL8k1Y7KpZrpQnBzbzk9jNn+YVhicF0q1/EBaWLJA5EQBnAdsN1D0Wulq
-	fAFu1JfAhDg12kjnKrY2feAVfczr4B+D+aUKxqRZIoJXfcp1b/l9lDzmvNTqF83GMPtmNg
-	O0L6lFFrGJsZpIUFf96nNzXT4R0YcnNglyNnCKK28eg5CfoXrplM1E/O55dg7JVrhTT4Ku
-	8OKWXgKy/6DEHxFU+DSvrITn94Q+Iw/VdTagX65qE9U6P1e6EDxwHz+zW2M2yl46BHw3XE
-	y5F6c4xy7ygjQQk0fTm74ujfKrEoV6cO6elD5cK86MxFI4yGcgRgty/GSG5jgw==
+	 references:references; bh=Ep5zFYMr2dpuKFMI1pf/izOHx/wmIORxQk2vil3OoJI=;
+	b=nfZZ3sBOutSvGHqk1sS290DDgjFJGXEhzG9mKo8h3KNUTS21yvque0kvoe6kdy44X6ihqJ
+	rlecPnSuBE8kWWqzbTh8ZfS2t/6i87b9mxuCdiQdAWfWgv/FXfDMxOB4hPcENaQevz8X1t
+	sfoi2d3W+glPX+uizuVT258ABJFrCCoKMbU990PZvSPJbq47uN//h7RBBdikCbG4VbXTMa
+	uzPGLlJ6oqG4Ba1T/Qi10UeHj0+DdaJ0BuryMFaEruZB4DB4ufEmaO0gHVQmA6rDjulOYP
+	4odcYLKYN6S0ZLHgH8AU1siZXSl2RCWz6Zdbj85yUeDpTNP4mcveuhP4LXFExg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830394;
+	s=2020e; t=1638830373;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=LQ/fEdCb15XlPMORiCBx0zVLCBalBxQN731AvqWpOBo=;
-	b=MVm0lNeB+aCsPEoi2uRKK0tL8KdeGC0UXyY+t/l2SKc/6bvFzzrRpVEcjpjs9glSsWZ1fc
-	khvHgThvvOwd8zBA==
+	 references:references; bh=Ep5zFYMr2dpuKFMI1pf/izOHx/wmIORxQk2vil3OoJI=;
+	b=zIv8vjiKX+sZKy9gbTJ2X4+XfGOmD/O04fsKImX/MjjZGQEs9MDTD7XhFu7ricmc2LeLAj
+	jEryKJg6XslL1KCw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -72,11 +71,10 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  xen-devel@lists.xenproject.org,
  Juergen Gross <jgross@suse.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Sinan Kaya <okaya@kernel.org>,
- dmaengine@vger.kernel.org,
  Will Deacon <will@kernel.org>,
  Santosh Shilimkar <ssantosh@kernel.org>,
  iommu@lists.linux-foundation.org,
+ dmaengine@vger.kernel.org,
  Stuart Yoder <stuyoder@gmail.com>,
  Laurentiu Tudor <laurentiu.tudor@nxp.com>,
  Nishanth Menon <nm@ti.com>,
@@ -84,102 +82,46 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-arm-kernel@lists.infradead.org,
  Vinod Koul <vkoul@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
- Robin Murphy <robin.murphy@arm.com>
-Subject: [patch V2 36/36] dmaengine: qcom_hidma: Cleanup MSI handling
+ Robin Murphy <robin.murphy@arm.com>,
+ Sinan Kaya <okaya@kernel.org>
+Subject: [patch V2 23/36] powerpc/cell/axon_msi: Use MSI device properties
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:54 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:33 +0100 (CET)
 
-There is no reason to walk the MSI descriptors to retrieve the interrupt
-number for a device. Use msi_get_virq() instead.
+instead of fiddling with MSI descriptors.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-Acked-by: Sinan Kaya <okaya@kernel.org>
-Cc: dmaengine@vger.kernel.org
 ---
- drivers/dma/qcom/hidma.c |   42 ++++++++++++++++++------------------------
- 1 file changed, 18 insertions(+), 24 deletions(-)
+V2: Invoke the function with the correct number of arguments - Andy
+---
+ arch/powerpc/platforms/cell/axon_msi.c |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
---- a/drivers/dma/qcom/hidma.c
-+++ b/drivers/dma/qcom/hidma.c
-@@ -678,11 +678,13 @@ static void hidma_free_msis(struct hidma
+--- a/arch/powerpc/platforms/cell/axon_msi.c
++++ b/arch/powerpc/platforms/cell/axon_msi.c
+@@ -199,7 +199,7 @@ static struct axon_msic *find_msi_transl
+ static int setup_msi_msg_address(struct pci_dev *dev, struct msi_msg *msg)
  {
- #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
- 	struct device *dev = dmadev->ddev.dev;
--	struct msi_desc *desc;
-+	int i, virq;
+ 	struct device_node *dn;
+-	struct msi_desc *entry;
++	bool is_64bit;
+ 	int len;
+ 	const u32 *prop;
  
--	/* free allocated MSI interrupts above */
--	for_each_msi_entry(desc, dev)
--		devm_free_irq(dev, desc->irq, &dmadev->lldev);
-+	for (i = 0; i < HIDMA_MSI_INTS; i++) {
-+		virq = msi_get_virq(dev, i);
-+		if (virq)
-+			devm_free_irq(dev, virq, &dmadev->lldev);
-+	}
- 
- 	platform_msi_domain_free_irqs(dev);
- #endif
-@@ -692,45 +694,37 @@ static int hidma_request_msi(struct hidm
- 			     struct platform_device *pdev)
- {
- #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
--	int rc;
--	struct msi_desc *desc;
--	struct msi_desc *failed_desc = NULL;
-+	int rc, i, virq;
- 
- 	rc = platform_msi_domain_alloc_irqs(&pdev->dev, HIDMA_MSI_INTS,
- 					    hidma_write_msi_msg);
- 	if (rc)
- 		return rc;
- 
--	for_each_msi_entry(desc, &pdev->dev) {
--		if (!desc->msi_index)
--			dmadev->msi_virqbase = desc->irq;
--
--		rc = devm_request_irq(&pdev->dev, desc->irq,
-+	for (i = 0; i < HIDMA_MSI_INTS; i++) {
-+		virq = msi_get_virq(&pdev->dev, i);
-+		rc = devm_request_irq(&pdev->dev, virq,
- 				       hidma_chirq_handler_msi,
- 				       0, "qcom-hidma-msi",
- 				       &dmadev->lldev);
--		if (rc) {
--			failed_desc = desc;
-+		if (rc)
- 			break;
--		}
-+		if (!i)
-+			dmadev->msi_virqbase = virq;
+@@ -209,10 +209,10 @@ static int setup_msi_msg_address(struct
+ 		return -ENODEV;
  	}
  
- 	if (rc) {
- 		/* free allocated MSI interrupts above */
--		for_each_msi_entry(desc, &pdev->dev) {
--			if (desc == failed_desc)
--				break;
--			devm_free_irq(&pdev->dev, desc->irq,
--				      &dmadev->lldev);
-+		for (--i; i >= 0; i--) {
-+			virq = msi_get_virq(&pdev->dev, i);
-+			devm_free_irq(&pdev->dev, virq, &dmadev->lldev);
- 		}
-+		dev_warn(&pdev->dev,
-+			 "failed to request MSI irq, falling back to wired IRQ\n");
- 	} else {
- 		/* Add callback to free MSIs on teardown */
- 		hidma_ll_setup_irq(dmadev->lldev, true);
--
- 	}
--	if (rc)
--		dev_warn(&pdev->dev,
--			 "failed to request MSI irq, falling back to wired IRQ\n");
- 	return rc;
- #else
- 	return -EINVAL;
+-	entry = first_pci_msi_entry(dev);
++	is_64bit = msi_device_has_property(&dev->dev, MSI_PROP_64BIT);
+ 
+ 	for (; dn; dn = of_get_next_parent(dn)) {
+-		if (entry->pci.msi_attrib.is_64) {
++		if (is_64bit) {
+ 			prop = of_get_property(dn, "msi-address-64", &len);
+ 			if (prop)
+ 				break;
 
 
