@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9411FC43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E44C5C433F5
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:48:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240042.416248 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.240043.416254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMlq-0007T6-V3; Mon, 06 Dec 2021 22:47:42 +0000
+	id 1muMlr-0007dM-FU; Mon, 06 Dec 2021 22:47:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240042.416248; Mon, 06 Dec 2021 22:47:42 +0000
+Received: by outflank-mailman (output) from mailman id 240043.416254; Mon, 06 Dec 2021 22:47:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMlq-0007RE-HR; Mon, 06 Dec 2021 22:47:42 +0000
-Received: by outflank-mailman (input) for mailman id 240042;
+	id 1muMlr-0007Z2-5H; Mon, 06 Dec 2021 22:47:43 +0000
+Received: by outflank-mailman (input) for mailman id 240043;
  Mon, 06 Dec 2021 22:47:40 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMe0-0004dp-2N
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:36 +0000
+ id 1muMdX-0004dp-5k
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:07 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 63391f34-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:39:35 +0100 (CET)
+ id 51ff35cb-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 63391f34-56e5-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210438.967630948@linutronix.de>
+X-Inumbo-ID: 51ff35cb-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210437.984321429@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638830375;
+	s=2020; t=1638830346;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=d9Kmjjh/l2UsbXBaFOpNStl1Xv+nLaUCFqLfxPXo1aU=;
-	b=I////PKLH9o1EDmwZHCLir1VYzr7pMRrvKfwrj6/sS1RC/sdwMyhGsRmFNUzSjZKOgIMpc
-	VuDsl2yS6Ws4hfoyOmeknB/JxMlXVeaa0NqZ95AAgghhBhdjN4FlW0c1g+csVgtA3fWrV2
-	0z0AJ2MhOcSyN1lh/bEWW2f4/Fnzp7391CjPfdN7QKcJV8re5bwovln9v5A9x5IVqN9dZu
-	+KxgCyciGG6WjKS91laJQv0xqwFi/Vzr/5mDWBV7Szozjeo04YI0ztWH5F/WSflOvd1MN5
-	Qh8s2JiJi8LtYXIr6WLsuyGc4NOos6lvsJnEJd/u4laPT49BgQpCcWza6iNv+A==
+	 references:references; bh=wtPMGV5PTpz1yqWy70m2nhuRZOAE9ffD5q8PvX2HIIo=;
+	b=FWpnEY9/Zjn8PcmvL5gy8OQMtSAgOf2w5Kf3cMg51UELgoNnReATs8yuuH/ZN3gPg+8scB
+	cwvQH9VUFWLlCbLQ6PInp2mwIO9QT0iNFBgnt5onIeLiEqkEFBOgdZAz+8cwUWuNKnQJXa
+	N5TO8eSKXeP/bhU8bRF6BIcanMCqXhld7Ah/J7ZPfieGVDvzYhRUv9Y1Au4prmsH1nGOaI
+	L67Zrex05IDgdCfyf+Te40MDuirDyGTTT8f7/Pbz9AoruyGC+5CDL6LOU9GL2V+Ucf1Vn1
+	W+uptRcO9Dq4pewx8SE1u8QdnFhSbUhLofZvB1Y6DUEEB3qtSVgzRPmv/dHMaA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638830375;
+	s=2020e; t=1638830346;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=d9Kmjjh/l2UsbXBaFOpNStl1Xv+nLaUCFqLfxPXo1aU=;
-	b=ko5ujZLeGAKWmq36MQLxqwIEfx3oa0Eho33ca+wdmkjf4VHoT4ARnE0v9JtdIIR3XsdSb+
-	xkZQTZQMwaNiZQCA==
+	 references:references; bh=wtPMGV5PTpz1yqWy70m2nhuRZOAE9ffD5q8PvX2HIIo=;
+	b=3iJ1sRdxnOfhMeFz/of0Hh7n9fP3JPzTifzOUTZle2NbTuTSk9CyV+KPnDIDd6tDt73mL5
+	s3SenUGZDykxIpDw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,47 +71,51 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  xen-devel@lists.xenproject.org,
  Juergen Gross <jgross@suse.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Will Deacon <will@kernel.org>,
+ Nishanth Menon <nm@ti.com>,
+ Tero Kristo <kristo@kernel.org>,
  Santosh Shilimkar <ssantosh@kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
+ Will Deacon <will@kernel.org>,
  iommu@lists.linux-foundation.org,
  dmaengine@vger.kernel.org,
  Stuart Yoder <stuyoder@gmail.com>,
  Laurentiu Tudor <laurentiu.tudor@nxp.com>,
- Nishanth Menon <nm@ti.com>,
- Tero Kristo <kristo@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
  Vinod Koul <vkoul@kernel.org>,
  Mark Rutland <mark.rutland@arm.com>,
  Robin Murphy <robin.murphy@arm.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V2 24/36] powerpc/pseries/msi: Use MSI device properties
+Subject: [patch V2 06/36] soc: ti: ti_sci_inta_msi: Allocate MSI device data
+ on first use
 References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:39:34 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:39:05 +0100 (CET)
 
-instead of fiddling with MSI descriptors.
+Allocate the MSI device data on first invocation of the allocation function.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Nishanth Menon <nm@ti.com>
+Cc: Tero Kristo <kristo@kernel.org>
+Cc: Santosh Shilimkar <ssantosh@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org
 ---
- arch/powerpc/platforms/pseries/msi.c |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/soc/ti/ti_sci_inta_msi.c |    4 ++++
+ 1 file changed, 4 insertions(+)
 
---- a/arch/powerpc/platforms/pseries/msi.c
-+++ b/arch/powerpc/platforms/pseries/msi.c
-@@ -447,9 +447,9 @@ static int rtas_prepare_msi_irqs(struct
- static int pseries_msi_ops_prepare(struct irq_domain *domain, struct device *dev,
- 				   int nvec, msi_alloc_info_t *arg)
- {
-+	bool is_msix = msi_device_has_property(dev, MSI_PROP_PCI_MSIX);
-+	int type = is_msix ? PCI_CAP_ID_MSIX : PCI_CAP_ID_MSI;
- 	struct pci_dev *pdev = to_pci_dev(dev);
--	struct msi_desc *desc = first_pci_msi_entry(pdev);
--	int type = desc->pci.msi_attrib.is_msix ? PCI_CAP_ID_MSIX : PCI_CAP_ID_MSI;
+--- a/drivers/soc/ti/ti_sci_inta_msi.c
++++ b/drivers/soc/ti/ti_sci_inta_msi.c
+@@ -120,6 +120,10 @@ int ti_sci_inta_msi_domain_alloc_irqs(st
+ 	if (pdev->id < 0)
+ 		return -ENODEV;
  
- 	return rtas_prepare_msi_irqs(pdev, nvec, type, arg);
- }
++	ret = msi_setup_device_data(dev);
++	if (ret)
++		return ret;
++
+ 	nvec = ti_sci_inta_msi_alloc_descs(dev, res);
+ 	if (nvec <= 0)
+ 		return nvec;
 
 
