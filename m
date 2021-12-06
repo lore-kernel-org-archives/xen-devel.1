@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5052FC3525C
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:28:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239881.415862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BC78C4332F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:28:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239892.415974 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSJ-00022L-J0; Mon, 06 Dec 2021 22:27:31 +0000
+	id 1muMSZ-0005Ol-Rp; Mon, 06 Dec 2021 22:27:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239881.415862; Mon, 06 Dec 2021 22:27:31 +0000
+Received: by outflank-mailman (output) from mailman id 239892.415974; Mon, 06 Dec 2021 22:27:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSJ-00022A-F9; Mon, 06 Dec 2021 22:27:31 +0000
-Received: by outflank-mailman (input) for mailman id 239881;
- Mon, 06 Dec 2021 22:27:29 +0000
+	id 1muMSZ-0005M5-Es; Mon, 06 Dec 2021 22:27:47 +0000
+Received: by outflank-mailman (input) for mailman id 239892;
+ Mon, 06 Dec 2021 22:27:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMSH-0001Vt-6u
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:29 +0000
+ id 1muMSX-0001Vt-U0
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:45 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b1504199-56e3-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:27:27 +0100 (CET)
+ id bbebaa4c-56e3-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:27:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1504199-56e3-11ec-a5e1-b9374ead2679
-Message-ID: <20211206210223.929792157@linutronix.de>
+X-Inumbo-ID: bbebaa4c-56e3-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210224.539281124@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638829647;
+	s=2020; t=1638829665;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=wYOapsewmvCjRKNhvhV0vpzUO9z80CJEqQBEg5ZWMSo=;
-	b=cLSzakHMaYNtI4aJ6BLkP0Y1ckKByNqQRdbeialjjHb7VsdJKr1LXNnGFwD5jPorL/dB3X
-	r8LL7BBEXT9ttMDduYesmAWnKu89MMUh+WbP//3UR9Oqi8u6Ke9f0j6kvDzk55pgKJlLw8
-	pXM/pbZ+DKZAxpGnovR5d0BXBdradoJwITrMoZLhwgv5vAP0K0ZMzZys/cJmxk0kAoxLqB
-	9HeDnDnYxU3SNfvQbR+KwVpjQ6g9EPn1CLChmqViSe3oPCpxc2+ZyZ9945UmAuQkVFQb/B
-	Ms+5OGgiP91cMgej9Fb+5+mTuU/pnBqgmKdO+oCNOau73VDp3kwOD/z+rrVPrQ==
+	 references:references; bh=fpyg7awX8dijQzBRp+WIS78Jmos3C/8mTMn+TSrhxD8=;
+	b=pnGIDteYP84F0igC2k+ACUhibYQ3881OhRiiuaVIOBjTshXhjGeVdgZAA/lcK5sjvLEMoj
+	ROvDFYYNJX0JhR2QOKUEjXyWb04lLq7PP9xV81Z0D1FytvGg8OABck9JmC/ylB+YU2AvRJ
+	PZVaY5Ia3WuXqX49dyC//GQiLcA+5A6GZy5/1+M3d4XVPgxEHo1T/dGhvFuUZ1a4SJvQjn
+	ICbirvZcyT0c9k1KJC4jGdKAhnGZprc4Xqsi6XNBDU2/0hwWf55EV2aY3VwLmgUvxv9n/d
+	Nfe/m+FudbplubW4O/Khqp8m6T0J7JnGYcrRL/PejELQssL7PtUMHvHQVkjmhA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638829647;
+	s=2020e; t=1638829665;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=wYOapsewmvCjRKNhvhV0vpzUO9z80CJEqQBEg5ZWMSo=;
-	b=AC1UyRei3djvmFCd8sCxirgN9BF19ZHUhoSg/ujiTsv7YGfDjxkFl5ncJxZvQt8R7ZWn4X
-	QnYXgZVa/LFvUdBg==
+	 references:references; bh=fpyg7awX8dijQzBRp+WIS78Jmos3C/8mTMn+TSrhxD8=;
+	b=RuOHGkoAA1Vj7KuipSnVapOZhwsUvKElxjyliNOso5sc0g+RXjuUG8oJb8SOmIunMIh0Pt
+	uWzxF181jxyPh3AQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -85,93 +85,51 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-hyperv@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch V2 02/23] PCI/MSI: Fix pci_irq_vector()/pci_irq_get_affinity()
+Subject: [patch V2 13/23] PCI/MSI: Cleanup include zoo
 References: <20211206210147.872865823@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:27:26 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:27:44 +0100 (CET)
 
-pci_irq_vector() and pci_irq_get_affinity() use the list position to find the
-MSI-X descriptor at a given index. That's correct for the normal case where
-the entry number is the same as the list position.
+Get rid of the pile of unneeded includes which accumulated over time.
 
-But it's wrong for cases where MSI-X was allocated with an entries array
-describing sparse entry numbers into the hardware message descriptor
-table. That's inconsistent at best.
-
-Make it always check the entry number because that's what the zero base
-index really means. This change won't break existing users which use a
-sparse entries array for allocation because these users retrieve the Linux
-interrupt number from the entries array after allocation and none of them
-uses pci_irq_vector() or pci_irq_get_affinity().
-
-Fixes: aff171641d18 ("PCI: Provide sensible IRQ vector alloc/free routines")
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
-V2: Fix typo in subject - Jason
+V2: Address build fail on powerpc - Cedric
 ---
- drivers/pci/msi.c |   26 ++++++++++++++++++--------
- 1 file changed, 18 insertions(+), 8 deletions(-)
+ drivers/pci/msi.c |   16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
 
 --- a/drivers/pci/msi.c
 +++ b/drivers/pci/msi.c
-@@ -1187,19 +1187,24 @@ EXPORT_SYMBOL(pci_free_irq_vectors);
- 
- /**
-  * pci_irq_vector - return Linux IRQ number of a device vector
-- * @dev: PCI device to operate on
-- * @nr: device-relative interrupt vector index (0-based).
-+ * @dev:	PCI device to operate on
-+ * @nr:		Interrupt vector index (0-based)
-+ *
-+ * @nr has the following meanings depending on the interrupt mode:
-+ *   MSI-X:	The index in the MSI-X vector table
-+ *   MSI:	The index of the enabled MSI vectors
-+ *   INTx:	Must be 0
-+ *
-+ * Return: The Linux interrupt number or -EINVAl if @nr is out of range.
+@@ -7,22 +7,14 @@
+  * Copyright (C) 2016 Christoph Hellwig.
   */
- int pci_irq_vector(struct pci_dev *dev, unsigned int nr)
- {
- 	if (dev->msix_enabled) {
- 		struct msi_desc *entry;
--		int i = 0;
  
- 		for_each_pci_msi_entry(entry, dev) {
--			if (i == nr)
-+			if (entry->msi_attrib.entry_nr == nr)
- 				return entry->irq;
--			i++;
- 		}
- 		WARN_ON_ONCE(1);
- 		return -EINVAL;
-@@ -1223,17 +1228,22 @@ EXPORT_SYMBOL(pci_irq_vector);
-  * pci_irq_get_affinity - return the affinity of a particular MSI vector
-  * @dev:	PCI device to operate on
-  * @nr:		device-relative interrupt vector index (0-based).
-+ *
-+ * @nr has the following meanings depending on the interrupt mode:
-+ *   MSI-X:	The index in the MSI-X vector table
-+ *   MSI:	The index of the enabled MSI vectors
-+ *   INTx:	Must be 0
-+ *
-+ * Return: A cpumask pointer or NULL if @nr is out of range
-  */
- const struct cpumask *pci_irq_get_affinity(struct pci_dev *dev, int nr)
- {
- 	if (dev->msix_enabled) {
- 		struct msi_desc *entry;
--		int i = 0;
++#include <linux/acpi_iort.h>
+ #include <linux/err.h>
+-#include <linux/mm.h>
+-#include <linux/irq.h>
+-#include <linux/interrupt.h>
+ #include <linux/export.h>
+-#include <linux/ioport.h>
+-#include <linux/pci.h>
+-#include <linux/proc_fs.h>
+-#include <linux/msi.h>
+-#include <linux/smp.h>
+-#include <linux/errno.h>
+-#include <linux/io.h>
+-#include <linux/acpi_iort.h>
+-#include <linux/slab.h>
++#include <linux/irq.h>
+ #include <linux/irqdomain.h>
++#include <linux/msi.h>
+ #include <linux/of_irq.h>
++#include <linux/pci.h>
  
- 		for_each_pci_msi_entry(entry, dev) {
--			if (i == nr)
-+			if (entry->msi_attrib.entry_nr == nr)
- 				return &entry->affinity->mask;
--			i++;
- 		}
- 		WARN_ON_ONCE(1);
- 		return NULL;
+ #include "pci.h"
+ 
 
 
