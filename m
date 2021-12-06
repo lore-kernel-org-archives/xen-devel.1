@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5158AC4707A
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5052FC3525C
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:28:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239890.415953 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.239881.415862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSX-0004nW-8u; Mon, 06 Dec 2021 22:27:45 +0000
+	id 1muMSJ-00022L-J0; Mon, 06 Dec 2021 22:27:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239890.415953; Mon, 06 Dec 2021 22:27:45 +0000
+Received: by outflank-mailman (output) from mailman id 239881.415862; Mon, 06 Dec 2021 22:27:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSX-0004lH-1l; Mon, 06 Dec 2021 22:27:45 +0000
-Received: by outflank-mailman (input) for mailman id 239890;
- Mon, 06 Dec 2021 22:27:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muMSJ-00022A-F9; Mon, 06 Dec 2021 22:27:31 +0000
+Received: by outflank-mailman (input) for mailman id 239881;
+ Mon, 06 Dec 2021 22:27:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMSU-0001m5-L7
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:42 +0000
+ id 1muMSH-0001Vt-6u
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:29 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b9f97979-56e3-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:27:42 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b1504199-56e3-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:27:27 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9f97979-56e3-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210224.429625690@linutronix.de>
+X-Inumbo-ID: b1504199-56e3-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210223.929792157@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638829661;
+	s=2020; t=1638829647;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=0nldqX+BIdCQSZe/qG73eGbIrco+/ubuHfsykwvcOLw=;
-	b=hq7ndPqCIkYDSqc3aknpP0229cYCDRhoC9zQSCdYk5vM3i10WTZ7av+6rlEAZ6u05mIkbr
-	XQDS6b4vGsXFqVoC8oP4KMoWd1eM06kWded8LIrvh6OjRqXQSape8awI79GsZVK8u9eX85
-	aD0FDvGiqwvqK/Cp05pH8gDNLFxywYdDcwRzqFrfA9dJF6ZcS2GW43vxTzQkYENzlCGZky
-	BY7obUIDVSkFmUZxkFtoCauQiQu+i1InDE5QQr8JmsWmr3vI1aYNQ3VOuIyKzaHGlqfRLM
-	9QjgPuj7fL5uEDouHN+Uw0zGzemm1NJG4B4f588z9m3byoVyCwYZWW8vxb8wOA==
+	 references:references; bh=wYOapsewmvCjRKNhvhV0vpzUO9z80CJEqQBEg5ZWMSo=;
+	b=cLSzakHMaYNtI4aJ6BLkP0Y1ckKByNqQRdbeialjjHb7VsdJKr1LXNnGFwD5jPorL/dB3X
+	r8LL7BBEXT9ttMDduYesmAWnKu89MMUh+WbP//3UR9Oqi8u6Ke9f0j6kvDzk55pgKJlLw8
+	pXM/pbZ+DKZAxpGnovR5d0BXBdradoJwITrMoZLhwgv5vAP0K0ZMzZys/cJmxk0kAoxLqB
+	9HeDnDnYxU3SNfvQbR+KwVpjQ6g9EPn1CLChmqViSe3oPCpxc2+ZyZ9945UmAuQkVFQb/B
+	Ms+5OGgiP91cMgej9Fb+5+mTuU/pnBqgmKdO+oCNOau73VDp3kwOD/z+rrVPrQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638829661;
+	s=2020e; t=1638829647;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=0nldqX+BIdCQSZe/qG73eGbIrco+/ubuHfsykwvcOLw=;
-	b=QKsxVt2/sl1syiew/XZKhTW9zsEcW7PxttjhPWSCOKgIZScBCrlr47vPlSJl0Ltkx0XjvV
-	If8/ySJn0kVVjADg==
+	 references:references; bh=wYOapsewmvCjRKNhvhV0vpzUO9z80CJEqQBEg5ZWMSo=;
+	b=AC1UyRei3djvmFCd8sCxirgN9BF19ZHUhoSg/ujiTsv7YGfDjxkFl5ncJxZvQt8R7ZWn4X
+	QnYXgZVa/LFvUdBg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -68,134 +68,110 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Ashok Raj <ashok.raj@intel.com>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
- Wei Liu <wei.liu@kernel.org>,
- x86@kernel.org,
- linux-hyperv@vger.kernel.org,
+ Juergen Gross <jgross@suse.com>,
  Michael Ellerman <mpe@ellerman.id.au>,
  Paul Mackerras <paulus@samba.org>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linuxppc-dev@lists.ozlabs.org,
- Juergen Gross <jgross@suse.com>,
  Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
  linux-mips@vger.kernel.org,
  Kalle Valo <kvalo@codeaurora.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  sparclinux@vger.kernel.org,
+ x86@kernel.org,
  xen-devel@lists.xenproject.org,
  ath11k@lists.infradead.org,
+ Wei Liu <wei.liu@kernel.org>,
+ linux-hyperv@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch V2 11/23] x86/hyperv: Refactor hv_msi_domain_free_irqs()
+Subject: [patch V2 02/23] PCI/MSI: Fix pci_irq_vector()/pci_irq_get_affinity()
 References: <20211206210147.872865823@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:27:41 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:27:26 +0100 (CET)
 
-No point in looking up things over and over. Just look up the associated
-irq data and work from there.
+pci_irq_vector() and pci_irq_get_affinity() use the list position to find the
+MSI-X descriptor at a given index. That's correct for the normal case where
+the entry number is the same as the list position.
 
-No functional change.
+But it's wrong for cases where MSI-X was allocated with an entries array
+describing sparse entry numbers into the hardware message descriptor
+table. That's inconsistent at best.
 
+Make it always check the entry number because that's what the zero base
+index really means. This change won't break existing users which use a
+sparse entries array for allocation because these users retrieve the Linux
+interrupt number from the entries array after allocation and none of them
+uses pci_irq_vector() or pci_irq_get_affinity().
+
+Fixes: aff171641d18 ("PCI: Provide sensible IRQ vector alloc/free routines")
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Tested-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-Acked-by: Wei Liu <wei.liu@kernel.org>
-Cc: x86@kernel.org
-Cc: linux-hyperv@vger.kernel.org
 ---
- arch/x86/hyperv/irqdomain.c |   55 +++++++++++++-------------------------------
- 1 file changed, 17 insertions(+), 38 deletions(-)
+V2: Fix typo in subject - Jason
+---
+ drivers/pci/msi.c |   26 ++++++++++++++++++--------
+ 1 file changed, 18 insertions(+), 8 deletions(-)
 
---- a/arch/x86/hyperv/irqdomain.c
-+++ b/arch/x86/hyperv/irqdomain.c
-@@ -253,64 +253,43 @@ static int hv_unmap_msi_interrupt(struct
- 	return hv_unmap_interrupt(hv_build_pci_dev_id(dev).as_uint64, old_entry);
- }
+--- a/drivers/pci/msi.c
++++ b/drivers/pci/msi.c
+@@ -1187,19 +1187,24 @@ EXPORT_SYMBOL(pci_free_irq_vectors);
  
--static void hv_teardown_msi_irq_common(struct pci_dev *dev, struct msi_desc *msidesc, int irq)
-+static void hv_teardown_msi_irq(struct pci_dev *dev, struct irq_data *irqd)
+ /**
+  * pci_irq_vector - return Linux IRQ number of a device vector
+- * @dev: PCI device to operate on
+- * @nr: device-relative interrupt vector index (0-based).
++ * @dev:	PCI device to operate on
++ * @nr:		Interrupt vector index (0-based)
++ *
++ * @nr has the following meanings depending on the interrupt mode:
++ *   MSI-X:	The index in the MSI-X vector table
++ *   MSI:	The index of the enabled MSI vectors
++ *   INTx:	Must be 0
++ *
++ * Return: The Linux interrupt number or -EINVAl if @nr is out of range.
+  */
+ int pci_irq_vector(struct pci_dev *dev, unsigned int nr)
  {
--	u64 status;
- 	struct hv_interrupt_entry old_entry;
--	struct irq_desc *desc;
--	struct irq_data *data;
- 	struct msi_msg msg;
-+	u64 status;
+ 	if (dev->msix_enabled) {
+ 		struct msi_desc *entry;
+-		int i = 0;
  
--	desc = irq_to_desc(irq);
--	if (!desc) {
--		pr_debug("%s: no irq desc\n", __func__);
--		return;
--	}
--
--	data = &desc->irq_data;
--	if (!data) {
--		pr_debug("%s: no irq data\n", __func__);
--		return;
--	}
--
--	if (!data->chip_data) {
-+	if (!irqd->chip_data) {
- 		pr_debug("%s: no chip data\n!", __func__);
- 		return;
- 	}
- 
--	old_entry = *(struct hv_interrupt_entry *)data->chip_data;
-+	old_entry = *(struct hv_interrupt_entry *)irqd->chip_data;
- 	entry_to_msi_msg(&old_entry, &msg);
- 
--	kfree(data->chip_data);
--	data->chip_data = NULL;
-+	kfree(irqd->chip_data);
-+	irqd->chip_data = NULL;
- 
- 	status = hv_unmap_msi_interrupt(dev, &old_entry);
- 
--	if (status != HV_STATUS_SUCCESS) {
-+	if (status != HV_STATUS_SUCCESS)
- 		pr_err("%s: hypercall failed, status %lld\n", __func__, status);
--		return;
--	}
- }
- 
--static void hv_msi_domain_free_irqs(struct irq_domain *domain, struct device *dev)
-+static void hv_msi_free_irq(struct irq_domain *domain,
-+			    struct msi_domain_info *info, unsigned int virq)
+ 		for_each_pci_msi_entry(entry, dev) {
+-			if (i == nr)
++			if (entry->msi_attrib.entry_nr == nr)
+ 				return entry->irq;
+-			i++;
+ 		}
+ 		WARN_ON_ONCE(1);
+ 		return -EINVAL;
+@@ -1223,17 +1228,22 @@ EXPORT_SYMBOL(pci_irq_vector);
+  * pci_irq_get_affinity - return the affinity of a particular MSI vector
+  * @dev:	PCI device to operate on
+  * @nr:		device-relative interrupt vector index (0-based).
++ *
++ * @nr has the following meanings depending on the interrupt mode:
++ *   MSI-X:	The index in the MSI-X vector table
++ *   MSI:	The index of the enabled MSI vectors
++ *   INTx:	Must be 0
++ *
++ * Return: A cpumask pointer or NULL if @nr is out of range
+  */
+ const struct cpumask *pci_irq_get_affinity(struct pci_dev *dev, int nr)
  {
--	int i;
--	struct msi_desc *entry;
--	struct pci_dev *pdev;
-+	struct irq_data *irqd = irq_get_irq_data(virq);
-+	struct msi_desc *desc;
+ 	if (dev->msix_enabled) {
+ 		struct msi_desc *entry;
+-		int i = 0;
  
--	if (WARN_ON_ONCE(!dev_is_pci(dev)))
-+	if (!irqd)
- 		return;
- 
--	pdev = to_pci_dev(dev);
-+	desc = irq_data_get_msi_desc(irqd);
-+	if (!desc || !desc->irq || WARN_ON_ONCE(!dev_is_pci(desc->dev)))
-+		return;
- 
--	for_each_pci_msi_entry(entry, pdev) {
--		if (entry->irq) {
--			for (i = 0; i < entry->nvec_used; i++) {
--				hv_teardown_msi_irq_common(pdev, entry, entry->irq + i);
--				irq_domain_free_irqs(entry->irq + i, 1);
--			}
--		}
--	}
-+	hv_teardown_msi_irq(to_pci_dev(desc->dev), irqd);
- }
- 
- /*
-@@ -329,7 +308,7 @@ static struct irq_chip hv_pci_msi_contro
- };
- 
- static struct msi_domain_ops pci_msi_domain_ops = {
--	.domain_free_irqs	= hv_msi_domain_free_irqs,
-+	.msi_free		= hv_msi_free_irq,
- 	.msi_prepare		= pci_msi_prepare,
- };
- 
+ 		for_each_pci_msi_entry(entry, dev) {
+-			if (i == nr)
++			if (entry->msi_attrib.entry_nr == nr)
+ 				return &entry->affinity->mask;
+-			i++;
+ 		}
+ 		WARN_ON_ONCE(1);
+ 		return NULL;
 
 
