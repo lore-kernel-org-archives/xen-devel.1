@@ -4,37 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6211FC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:42:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240007.416118 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C752EC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:47:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240018.416140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMgD-0001pR-Ke; Mon, 06 Dec 2021 22:41:53 +0000
+	id 1muMl7-0002fb-SH; Mon, 06 Dec 2021 22:46:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240007.416118; Mon, 06 Dec 2021 22:41:53 +0000
+Received: by outflank-mailman (output) from mailman id 240018.416140; Mon, 06 Dec 2021 22:46:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMgD-0001pK-Ha; Mon, 06 Dec 2021 22:41:53 +0000
-Received: by outflank-mailman (input) for mailman id 240007;
- Mon, 06 Dec 2021 22:41:52 +0000
+	id 1muMl7-0002dh-MV; Mon, 06 Dec 2021 22:46:57 +0000
+Received: by outflank-mailman (input) for mailman id 240018;
+ Mon, 06 Dec 2021 22:46:56 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nYkR=QX=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1muMgC-0001pE-0t
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:41:52 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [2604:1380:4601:e00::1])
+ <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
+ id 1muMdh-0004dp-3I
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:39:17 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b397eaa1-56e5-11ec-a5e1-b9374ead2679;
- Mon, 06 Dec 2021 23:41:50 +0100 (CET)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 77B0CB815B0;
- Mon,  6 Dec 2021 22:41:49 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E588FC341C6;
- Mon,  6 Dec 2021 22:41:47 +0000 (UTC)
+ id 57bd4e38-56e5-11ec-a5e1-b9374ead2679;
+ Mon, 06 Dec 2021 23:39:16 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,110 +38,302 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b397eaa1-56e5-11ec-a5e1-b9374ead2679
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1638830508;
-	bh=ybxb1Cs1iC1zy+8FjGpNML/IjtZYDAOJfwLd5cIiNM4=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=sUPQLM+WjPb3DqLvk0wYZmzffZail/VBHfWBCIxTaABkGAir4iou/JeXlSzWCPzGl
-	 GJJHjKPhyh94cDbJoRJnLIzGaZn4JN9m2JrqVPI4Oj82nHR7CJeeG66nTLi60a2rao
-	 hLusu2s8jRbIqjGLpIV50pKuS9qZubVmwvEWg5pCbgDMMfU6Y9W4A4P0zl+I6/WZP/
-	 R6zBBUs4rgZF3FI7Ik8k7aQso2aaiJtrsQFo5Sukk951hFKTQN2wJtUeuvd3JDwahH
-	 hxaoGNLyMsvIs7ij6/cMvXr/meSvujGGdHI63j1v6U9D5Tb1b6k6QCHPSuU9X5l8E/
-	 XbAs6QoQxsMcQ==
-Date: Mon, 6 Dec 2021 14:41:46 -0800 (PST)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Julien Grall <julien@xen.org>
-cc: Bertrand Marquis <Bertrand.Marquis@arm.com>, 
-    Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>, 
-    Andre Przywara <Andre.Przywara@arm.com>, 
-    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-    "sstabellini@kernel.org" <sstabellini@kernel.org>, 
-    "stefanos@xilinx.com" <stefanos@xilinx.com>, 
-    "Volodymyr_Babchuk@epam.com" <Volodymyr_Babchuk@epam.com>, 
-    "jbeulich@suse.com" <jbeulich@suse.com>
-Subject: Re: [XEN v2] xen/arm64: io: Decode 32-bit ldr/str post-indexing
- instructions
-In-Reply-To: <4315f3f8-4431-3257-dc95-a3089532237b@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2112061438300.4091490@ubuntu-linux-20-04-desktop>
-References: <20211129191638.19877-1-ayankuma@xilinx.com> <20211130094950.1bf368d6@donnerap.cambridge.arm.com> <a69d41f1-7b57-c127-ae73-2de5a581dddd@xilinx.com> <D8811539-65F2-4D40-BFEF-CE72EA8E902A@arm.com> <4315f3f8-4431-3257-dc95-a3089532237b@xen.org>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 57bd4e38-56e5-11ec-a5e1-b9374ead2679
+Message-ID: <20211206210438.310445889@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1638830356;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=ZBun+BNrncmDCLhUClKwPbgoMa6P/CUfRD8LwyZQrQo=;
+	b=VUWn2yBE6rVGlxwZIKOEifvfL36dFtKjNljMPglfHKN+xxitQBAMtTAtm0n/fMScBraHiY
+	/kn0cMLirGCtpjHtlNu6I8c5KOnEwnH8uE5F1LUSus/SuXtaxvg5nqovVbrIsFCCMNPulE
+	/n2C420oBzql78ADdW2D3ZEOkx3tfhh/UXfQYuWNVZyFQXRhEbFeQQL0kisZ2OX2Idd1zj
+	S07xiK3DBX2wJavNmZkz2zbr81t3CwKXgtYv2hSsTo7f/wG5/u/XwsA+eR8dAEzJN78VQQ
+	KciOOQf7xq6cUWFDwDnYmpXqJXzgOJtvQ8JpaCynLP2dVHSQGz67KND8VbOd0g==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1638830356;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 references:references; bh=ZBun+BNrncmDCLhUClKwPbgoMa6P/CUfRD8LwyZQrQo=;
+	b=t91sG1vrq5IdTONAWnwCE4d78ykskp/XkoupImVqefTn4q8kXJhdDPsvKRrvYXAgmHRVtB
+	ffnB+1ueiPPN+tAA==
+From: Thomas Gleixner <tglx@linutronix.de>
+To: LKML <linux-kernel@vger.kernel.org>
+Cc: Bjorn Helgaas <helgaas@kernel.org>,
+ Marc Zygnier <maz@kernel.org>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Kevin Tian <kevin.tian@intel.com>,
+ Jason Gunthorpe <jgg@nvidia.com>,
+ Megha Dey <megha.dey@intel.com>,
+ Ashok Raj <ashok.raj@intel.com>,
+ linux-pci@vger.kernel.org,
+ Cedric Le Goater <clg@kaod.org>,
+ xen-devel@lists.xenproject.org,
+ Juergen Gross <jgross@suse.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Will Deacon <will@kernel.org>,
+ Santosh Shilimkar <ssantosh@kernel.org>,
+ iommu@lists.linux-foundation.org,
+ dmaengine@vger.kernel.org,
+ Stuart Yoder <stuyoder@gmail.com>,
+ Laurentiu Tudor <laurentiu.tudor@nxp.com>,
+ Nishanth Menon <nm@ti.com>,
+ Tero Kristo <kristo@kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
+ Vinod Koul <vkoul@kernel.org>,
+ Mark Rutland <mark.rutland@arm.com>,
+ Robin Murphy <robin.murphy@arm.com>,
+ Sinan Kaya <okaya@kernel.org>
+Subject: [patch V2 12/36] platform-msi: Store platform private data pointer in
+ msi_device_data
+References: <20211206210307.625116253@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=UTF-8
+Date: Mon,  6 Dec 2021 23:39:15 +0100 (CET)
 
-On Mon, 6 Dec 2021, Julien Grall wrote:
-> On 01/12/2021 08:41, Bertrand Marquis wrote:
-> > Hi Ayan,
-> > 
-> > > On 30 Nov 2021, at 19:13, Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
-> > > wrote:
-> > > 
-> > > Hi Andre,
-> > > 
-> > > Thanks for your comments. They are useful.
-> > > 
-> > > On 30/11/2021 09:49, Andre Przywara wrote:
-> > > > On Mon, 29 Nov 2021 19:16:38 +0000
-> > > > Ayan Kumar Halder <ayan.kumar.halder@xilinx.com> wrote:
-> > > > Hi,
-> > > > > At the moment, Xen is only handling data abort with valid syndrome
-> > > > > (i.e.
-> > > > > ISV=0). Unfortunately, this doesn't cover all the instructions a
-> > > > > domain
-> > > > > could use to access MMIO regions.
-> > > > > 
-> > > > > For instance, Xilinx baremetal OS will use:
-> > > > > 
-> > > > >          volatile u32 *LocalAddr = (volatile u32 *)Addr;
-> > > > >          *LocalAddr = Value;
-> > > > > 
-> > > > > This leave the compiler to decide which store instructions to use.
-> > > > As mentioned in the other email, this is wrong, if this points to MMIO:
-> > > > don't let the compiler do MMIO accesses. If a stage 2 fault isn't in
-> > > > an MMIO area, you should not see traps that you cannot handle already.
-> > > > So I don't think it's a good idea to use that as an example. And since
-> > > > this patch only seems to address this use case, I would doubt its
-> > > > usefulness in general.
-> > > Yes, I should have fixed the comment.
-> > > 
-> > > Currently, I am testing with baremetal app which uses inline assembly code
-> > > with post indexing instructions, to access the MMIO.
-> > > 
-> > > ATM, I am testing with 32 bit MMIO only.
-> > > 
-> > > On the usefulness, I am kind of torn as it is legitimate for post indexing
-> > > instructions to be used in an inline-assembly code for accessing MMIO.
-> > > However, that may not be something commonly seen.
-> > > 
-> > > @Stefano/Bertrand/Julien/Volodymyr :- As you are the Arm mantainers, can
-> > > you comment if we should have decoding logic or not ?
-> > 
-> > Andre gave you the official statement from Arm and there is nothing more I
-> > can say.
-> 
-> I think this would be handy for other hypervisor and OS developper to know
-> what they can expect when running in a virtualized environment. So would it be
-> possible to update the Arm Arm reflecting this statement?
-> 
-> > I will leave this decision to Stefano and Julien.
-> 
-> I have had a chat on IRC with Stefano about this. I think the main sticking
-> point is the Arm Arm doesn't clearly state those instructions should not be
-> used by a virtualized OS on MMIO regions.
-> 
-> To me, this topic looks similar to the set/way instruction dilemma. They are a
-> pain to virtualize (and the Arm Arm clearly hint it) but we had to do it
-> because some OSes relied on them.
-> 
-> I think the main difference is the Arm Arm doesn't hint they should not be
-> used (it only says a valid syndrome is not provided) and the implementation
-> should hopefully be smaller and self-contained.
-> 
-> So I would be inclined to allow Xen to decode post-indexing instructions
-> (pending the review).
+Storing the platform private data in a MSI descriptor is sloppy at
+best. The data belongs to the device and not to the descriptor.
+Add a pointer to struct msi_device_data and store the pointer there.
 
-I am of the same opinion.
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+---
+ drivers/base/platform-msi.c |   79 +++++++++++++++++---------------------------
+ include/linux/msi.h         |    4 +-
+ 2 files changed, 34 insertions(+), 49 deletions(-)
 
-(FYI in any case we'll also work internally to improve Xilinx baremetal.)
+--- a/drivers/base/platform-msi.c
++++ b/drivers/base/platform-msi.c
+@@ -38,9 +38,7 @@ static DEFINE_IDA(platform_msi_devid_ida
+  */
+ static irq_hw_number_t platform_msi_calc_hwirq(struct msi_desc *desc)
+ {
+-	u32 devid;
+-
+-	devid = desc->platform.msi_priv_data->devid;
++	u32 devid = desc->dev->msi.data->platform_data->devid;
+ 
+ 	return (devid << (32 - DEV_ID_SHIFT)) | desc->platform.msi_index;
+ }
+@@ -85,11 +83,8 @@ static void platform_msi_update_dom_ops(
+ static void platform_msi_write_msg(struct irq_data *data, struct msi_msg *msg)
+ {
+ 	struct msi_desc *desc = irq_data_get_msi_desc(data);
+-	struct platform_msi_priv_data *priv_data;
+-
+-	priv_data = desc->platform.msi_priv_data;
+ 
+-	priv_data->write_msg(desc, msg);
++	desc->dev->msi.data->platform_data->write_msg(desc, msg);
+ }
+ 
+ static void platform_msi_update_chip_ops(struct msi_domain_info *info)
+@@ -126,9 +121,7 @@ static void platform_msi_free_descs(stru
+ }
+ 
+ static int platform_msi_alloc_descs_with_irq(struct device *dev, int virq,
+-					     int nvec,
+-					     struct platform_msi_priv_data *data)
+-
++					     int nvec)
+ {
+ 	struct msi_desc *desc;
+ 	int i, base = 0;
+@@ -144,7 +137,6 @@ static int platform_msi_alloc_descs_with
+ 		if (!desc)
+ 			break;
+ 
+-		desc->platform.msi_priv_data = data;
+ 		desc->platform.msi_index = base + i;
+ 		desc->irq = virq ? virq + i : 0;
+ 
+@@ -161,11 +153,9 @@ static int platform_msi_alloc_descs_with
+ 	return 0;
+ }
+ 
+-static int platform_msi_alloc_descs(struct device *dev, int nvec,
+-				    struct platform_msi_priv_data *data)
+-
++static int platform_msi_alloc_descs(struct device *dev, int nvec)
+ {
+-	return platform_msi_alloc_descs_with_irq(dev, 0, nvec, data);
++	return platform_msi_alloc_descs_with_irq(dev, 0, nvec);
+ }
+ 
+ /**
+@@ -199,9 +189,8 @@ struct irq_domain *platform_msi_create_i
+ 	return domain;
+ }
+ 
+-static struct platform_msi_priv_data *
+-platform_msi_alloc_priv_data(struct device *dev, unsigned int nvec,
+-			     irq_write_msi_msg_t write_msi_msg)
++static int platform_msi_alloc_priv_data(struct device *dev, unsigned int nvec,
++					irq_write_msi_msg_t write_msi_msg)
+ {
+ 	struct platform_msi_priv_data *datap;
+ 	int err;
+@@ -213,41 +202,44 @@ platform_msi_alloc_priv_data(struct devi
+ 	 * capable devices).
+ 	 */
+ 	if (!dev->msi.domain || !write_msi_msg || !nvec || nvec > MAX_DEV_MSIS)
+-		return ERR_PTR(-EINVAL);
++		return -EINVAL;
+ 
+ 	if (dev->msi.domain->bus_token != DOMAIN_BUS_PLATFORM_MSI) {
+ 		dev_err(dev, "Incompatible msi_domain, giving up\n");
+-		return ERR_PTR(-EINVAL);
++		return -EINVAL;
+ 	}
+ 
+ 	err = msi_setup_device_data(dev);
+ 	if (err)
+-		return ERR_PTR(err);
++		return err;
+ 
+-	/* Already had a helping of MSI? Greed... */
+-	if (!list_empty(dev_to_msi_list(dev)))
+-		return ERR_PTR(-EBUSY);
++	/* Already initialized? */
++	if (dev->msi.data->platform_data)
++		return -EBUSY;
+ 
+ 	datap = kzalloc(sizeof(*datap), GFP_KERNEL);
+ 	if (!datap)
+-		return ERR_PTR(-ENOMEM);
++		return -ENOMEM;
+ 
+ 	datap->devid = ida_simple_get(&platform_msi_devid_ida,
+ 				      0, 1 << DEV_ID_SHIFT, GFP_KERNEL);
+ 	if (datap->devid < 0) {
+ 		err = datap->devid;
+ 		kfree(datap);
+-		return ERR_PTR(err);
++		return err;
+ 	}
+ 
+ 	datap->write_msg = write_msi_msg;
+ 	datap->dev = dev;
+-
+-	return datap;
++	dev->msi.data->platform_data = datap;
++	return 0;
+ }
+ 
+-static void platform_msi_free_priv_data(struct platform_msi_priv_data *data)
++static void platform_msi_free_priv_data(struct device *dev)
+ {
++	struct platform_msi_priv_data *data = dev->msi.data->platform_data;
++
++	dev->msi.data->platform_data = NULL;
+ 	ida_simple_remove(&platform_msi_devid_ida, data->devid);
+ 	kfree(data);
+ }
+@@ -264,14 +256,13 @@ static void platform_msi_free_priv_data(
+ int platform_msi_domain_alloc_irqs(struct device *dev, unsigned int nvec,
+ 				   irq_write_msi_msg_t write_msi_msg)
+ {
+-	struct platform_msi_priv_data *priv_data;
+ 	int err;
+ 
+-	priv_data = platform_msi_alloc_priv_data(dev, nvec, write_msi_msg);
+-	if (IS_ERR(priv_data))
+-		return PTR_ERR(priv_data);
++	err = platform_msi_alloc_priv_data(dev, nvec, write_msi_msg);
++	if (err)
++		return err;
+ 
+-	err = platform_msi_alloc_descs(dev, nvec, priv_data);
++	err = platform_msi_alloc_descs(dev, nvec);
+ 	if (err)
+ 		goto out_free_priv_data;
+ 
+@@ -284,8 +275,7 @@ int platform_msi_domain_alloc_irqs(struc
+ out_free_desc:
+ 	platform_msi_free_descs(dev, 0, nvec);
+ out_free_priv_data:
+-	platform_msi_free_priv_data(priv_data);
+-
++	platform_msi_free_priv_data(dev);
+ 	return err;
+ }
+ EXPORT_SYMBOL_GPL(platform_msi_domain_alloc_irqs);
+@@ -296,15 +286,9 @@ EXPORT_SYMBOL_GPL(platform_msi_domain_al
+  */
+ void platform_msi_domain_free_irqs(struct device *dev)
+ {
+-	if (!list_empty(dev_to_msi_list(dev))) {
+-		struct msi_desc *desc;
+-
+-		desc = first_msi_entry(dev);
+-		platform_msi_free_priv_data(desc->platform.msi_priv_data);
+-	}
+-
+ 	msi_domain_free_irqs(dev->msi.domain, dev);
+ 	platform_msi_free_descs(dev, 0, MAX_DEV_MSIS);
++	platform_msi_free_priv_data(dev);
+ }
+ EXPORT_SYMBOL_GPL(platform_msi_domain_free_irqs);
+ 
+@@ -351,10 +335,11 @@ struct irq_domain *
+ 	struct irq_domain *domain;
+ 	int err;
+ 
+-	data = platform_msi_alloc_priv_data(dev, nvec, write_msi_msg);
+-	if (IS_ERR(data))
++	err = platform_msi_alloc_priv_data(dev, nvec, write_msi_msg);
++	if (err)
+ 		return NULL;
+ 
++	data = dev->msi.data->platform_data;
+ 	data->host_data = host_data;
+ 	domain = irq_domain_create_hierarchy(dev->msi.domain, 0,
+ 					     is_tree ? 0 : nvec,
+@@ -372,7 +357,7 @@ struct irq_domain *
+ free_domain:
+ 	irq_domain_remove(domain);
+ free_priv:
+-	platform_msi_free_priv_data(data);
++	platform_msi_free_priv_data(dev);
+ 	return NULL;
+ }
+ 
+@@ -420,7 +405,7 @@ int platform_msi_device_domain_alloc(str
+ 	struct platform_msi_priv_data *data = domain->host_data;
+ 	int err;
+ 
+-	err = platform_msi_alloc_descs_with_irq(data->dev, virq, nr_irqs, data);
++	err = platform_msi_alloc_descs_with_irq(data->dev, virq, nr_irqs);
+ 	if (err)
+ 		return err;
+ 
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -108,11 +108,9 @@ struct pci_msi_desc {
+ 
+ /**
+  * platform_msi_desc - Platform device specific msi descriptor data
+- * @msi_priv_data:	Pointer to platform private data
+  * @msi_index:		The index of the MSI descriptor for multi MSI
+  */
+ struct platform_msi_desc {
+-	struct platform_msi_priv_data	*msi_priv_data;
+ 	u16				msi_index;
+ };
+ 
+@@ -177,10 +175,12 @@ struct msi_desc {
+  * msi_device_data - MSI per device data
+  * @properties:		MSI properties which are interesting to drivers
+  * @attrs:		Pointer to the sysfs attribute group
++ * @platform_data:	Platform-MSI specific data
+  */
+ struct msi_device_data {
+ 	unsigned long			properties;
+ 	const struct attribute_group    **attrs;
++	struct platform_msi_priv_data	*platform_data;
+ };
+ 
+ int msi_setup_device_data(struct device *dev);
+
 
