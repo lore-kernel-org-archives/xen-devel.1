@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6476BC3525B
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C83A6C35263
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:28:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239886.415918 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.239882.415868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSR-0003aA-8j; Mon, 06 Dec 2021 22:27:39 +0000
+	id 1muMSJ-00024J-Tq; Mon, 06 Dec 2021 22:27:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239886.415918; Mon, 06 Dec 2021 22:27:39 +0000
+Received: by outflank-mailman (output) from mailman id 239882.415868; Mon, 06 Dec 2021 22:27:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMSR-0003Zy-3v; Mon, 06 Dec 2021 22:27:39 +0000
-Received: by outflank-mailman (input) for mailman id 239886;
- Mon, 06 Dec 2021 22:27:38 +0000
+	id 1muMSJ-00023r-NL; Mon, 06 Dec 2021 22:27:31 +0000
+Received: by outflank-mailman (input) for mailman id 239882;
+ Mon, 06 Dec 2021 22:27:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMSQ-0001m5-Ee
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:38 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
+ id 1muMSI-0001m5-Eq
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:30 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b7824a62-56e3-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:27:37 +0100 (CET)
+ id b2384895-56e3-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:27:29 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7824a62-56e3-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210224.265589103@linutronix.de>
+X-Inumbo-ID: b2384895-56e3-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210223.985907940@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638829657;
+	s=2020; t=1638829648;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OKsXQmZewVMh9C4veaPA025YU+pW4cMZqzIAn23b/9c=;
-	b=vZzNCRO+uOrMt1rLYUlSjWHvY3GnOwXQ/odIk4OnimL55yM4E7H9Z+gKxR4cdWzJuc9jJT
-	M0aZip9AGf/BRov7wd4DUsRP6NuHKtBNXayKEfTNAPYWG4mlPDCTJXpLfq+Eq2Q7uel0c0
-	GCYlxK1amEskkZn0CPcuIPlwQANt3pdUSVU0mXb6Dh6glegghN2NwscVEl8RJS6xJpYmzr
-	0oSjRQ0h7Lm4xi7TTTOAuPFvY1F1jeW22TqUuxURSvBD6YjS5m5HOdgSgSZmuNW7/hljHH
-	0p6i/mhLMFw2u59Zr1gi+Goyq9OYh0ugIdb202nzF0CcX0f/aD/i2jlLaPiQJw==
+	 references:references; bh=id3JgIbjZgRZL0ofCnsEvlAPkFN569FAc5JY13SwTCA=;
+	b=dtv/3kpiYCPMOT1Cw9v7Go2jJd37JGwlcLZUvP4q4CZcykY4ErTRRN6blBqFVnD+UMlUBq
+	IbSPQ6DvtU6NnokqTJsz/cifnF9TB+UGigT98bUbP9QgHqbfvg52eg506MBfCI6r0vmnKg
+	MjmihgmNqzycJJpD74maNXj+PIYFNlMBjC2jDqEuC5sJzApTh0mV0k/vM21wv4lw/G5jbY
+	c+q6mtr7VmBYGvYZ1YxwZqR2FwhcE+UxV1sory9IQr1hjBCtnqVHcLm1yLHb4mf4LwL7lv
+	6hxQ11J1Pdt/jtTptuAe42u7/7PQhmsoi6nY65ueu367lfi5FaYMMDOataiBBg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638829657;
+	s=2020e; t=1638829648;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OKsXQmZewVMh9C4veaPA025YU+pW4cMZqzIAn23b/9c=;
-	b=M/NxrnxGKVPLqAlsqI5UQ6dl9IZUEhUwGcQJKRyC/Ho89KfJQzOP0MU4EFQc7/B84xAAnW
-	7QekxbEDbxz2NvAA==
+	 references:references; bh=id3JgIbjZgRZL0ofCnsEvlAPkFN569FAc5JY13SwTCA=;
+	b=ezCUc6zchqpEga5Qcxe/swEQdw1F2Cr+alSEzDGugyM3PP2DlRV+GaFXioXu01RmdcdePb
+	sl3sBReGfGtugoBQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -86,36 +85,61 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-hyperv@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch V2 08/23] PCI/sysfs: Use pci_irq_vector()
+Subject: [patch V2 03/23] genirq/msi: Guard sysfs code
 References: <20211206210147.872865823@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:27:36 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:27:28 +0100 (CET)
 
-instead of fiddling with msi descriptors.
+No point in building unused code when CONFIG_SYSFS=n.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
- drivers/pci/pci-sysfs.c |    7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ include/linux/msi.h |   10 ++++++++++
+ kernel/irq/msi.c    |    2 ++
+ 2 files changed, 12 insertions(+)
 
---- a/drivers/pci/pci-sysfs.c
-+++ b/drivers/pci/pci-sysfs.c
-@@ -62,11 +62,8 @@ static ssize_t irq_show(struct device *d
- 	 * For MSI, show the first MSI IRQ; for all other cases including
- 	 * MSI-X, show the legacy INTx IRQ.
- 	 */
--	if (pdev->msi_enabled) {
--		struct msi_desc *desc = first_pci_msi_entry(pdev);
--
--		return sysfs_emit(buf, "%u\n", desc->irq);
--	}
-+	if (pdev->msi_enabled)
-+		return sysfs_emit(buf, "%u\n", pci_irq_vector(pdev, 0));
- #endif
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -239,9 +239,19 @@ void __pci_write_msi_msg(struct msi_desc
+ void pci_msi_mask_irq(struct irq_data *data);
+ void pci_msi_unmask_irq(struct irq_data *data);
  
- 	return sysfs_emit(buf, "%u\n", pdev->irq);
++#ifdef CONFIG_SYSFS
+ const struct attribute_group **msi_populate_sysfs(struct device *dev);
+ void msi_destroy_sysfs(struct device *dev,
+ 		       const struct attribute_group **msi_irq_groups);
++#else
++static inline const struct attribute_group **msi_populate_sysfs(struct device *dev)
++{
++	return NULL;
++}
++static inline void msi_destroy_sysfs(struct device *dev, const struct attribute_group **msi_irq_groups)
++{
++}
++#endif
+ 
+ /*
+  * The arch hooks to setup up msi irqs. Default functions are implemented
+--- a/kernel/irq/msi.c
++++ b/kernel/irq/msi.c
+@@ -72,6 +72,7 @@ void get_cached_msi_msg(unsigned int irq
+ }
+ EXPORT_SYMBOL_GPL(get_cached_msi_msg);
+ 
++#ifdef CONFIG_SYSFS
+ static ssize_t msi_mode_show(struct device *dev, struct device_attribute *attr,
+ 			     char *buf)
+ {
+@@ -204,6 +205,7 @@ void msi_destroy_sysfs(struct device *de
+ 		kfree(msi_irq_groups);
+ 	}
+ }
++#endif
+ 
+ #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
+ static inline void irq_chip_write_msi_msg(struct irq_data *data,
 
 
