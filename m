@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE20BC433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:09:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239533.415500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2876C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 17:09:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.239535.415516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHU1-00080l-EB; Mon, 06 Dec 2021 17:08:57 +0000
+	id 1muHU4-0000D9-O0; Mon, 06 Dec 2021 17:09:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239533.415500; Mon, 06 Dec 2021 17:08:57 +0000
+Received: by outflank-mailman (output) from mailman id 239535.415516; Mon, 06 Dec 2021 17:09:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muHU0-0007vE-E9; Mon, 06 Dec 2021 17:08:56 +0000
-Received: by outflank-mailman (input) for mailman id 239533;
- Mon, 06 Dec 2021 17:08:53 +0000
+	id 1muHU3-00009C-JE; Mon, 06 Dec 2021 17:08:59 +0000
+Received: by outflank-mailman (input) for mailman id 239535;
+ Mon, 06 Dec 2021 17:08:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+yl1=QX=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1muHP0-0005ti-J6
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:03:46 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 76fafa5b-56b6-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 18:03:44 +0100 (CET)
+ id 1muHPp-0005ti-GG
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 17:04:37 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 96699ceb-56b6-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 18:04:36 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 76fafa5b-56b6-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 96699ceb-56b6-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1638810224;
+  d=citrix.com; s=securemail; t=1638810276;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Ix7uXYCPxugAAtLthbMjrkXsWY6ZoE/GgEwLTETP25c=;
-  b=HkuGhOiQBrLNYJa4UIkLEKTPPtJUsvjCuMKRN80MengjAkbJQP3vt0j0
-   6Bhd6+WI0qBTim5Z2LISx6bNS/9fYMLqQUAF9EeZM1Otxt0P8YJiqifFF
-   wk7Bz8qLhTcNebpBRasxGqBs3DMMh2PtTSPXr8E4qEuY+Hnv/FolyhSdO
-   Q=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: W+6FDTCdqCvWJA91+Gi73joeTWqDf7MYYkzAqMOaROaKbqtY4oGOrlJaoLwkdkhkjx9LCLRdY6
- /yhNcqoBH5dyxVqiUkM8e/6ilOJv11Zk7h/U8Rj5S0gB6S5ogZuiert7E486DpnXZF0wG0Ep2g
- DIsjyLrXsjdd8ai2RPdYwnJ7bW5F25bnp6CoxhO1wAnz8PplF21Tl8aKPBWLQfXYwXzivpIzzf
- 8+8Nglt8SK8xnTXr8yVGKPh1jcAcw8OlzcFEJTGyXQipi/FWRo9hHgi3ABt9ht3RJOy+IbSrYe
- VG1CGlsFL9cOnNQcQFsTL/w6
+  bh=zPznA+ybTAJl3D8zcQnhTs5UDGVeYxfDltfmGygnLGQ=;
+  b=STIgGQTNlh9jB0/IGPm8JuavQoMZ/tfLLm998++yJRPOYM5rsWUUqf3k
+   m/MOplJNeY0OGxD9GZTCnatGeOwfE3RhSg9Sjj0laJX0RuTH4QZgQasNp
+   poLuEFAf2juiEYddGz6xHvdwV4+Eh/jY56nclM2cN4cr9HYII0sPcsSiX
+   0=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: gZwrIIIs3fLrpeQ+GGmDbXU+P58vuCi5Hayev4yJSne9H5ciXanMGjY0fP3svhoj80aZfncUS2
+ WCBeQCInyhrPO8+SJKNNSG0P0FIhMMxYHyXzjocvEyOpvqbV9Mgin3kKEhhoZZf9gHUNNBXlpO
+ /TYODsuZhpcdc3Bq3h27Zt6FM7+f48BW2C8g9TLFteRjHfOCvX9XmpIhkloprMQK21Y6YuPTqU
+ z4SdBaN6pURXCI1svNLy4X6oPeHR200PIvc19ZBQmcRgCyl+h2Dh/62EWcBmWz4Tvxh4JgNIR5
+ 3dep41H4LxF6zQ+SvphuvSX+
 X-SBRS: 5.1
-X-MesageID: 59370634
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 59388028
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:sdDexa7J3WzLRb1HIZpuEQxRtN7AchMFZxGqfqrLsTDasY5as4F+v
- mROWm+CM/eDM2emc9l1PNzlpksH7JfUndNlGQA5qC5nHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
- +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FVAMpBsJ00o5wrdj2tAw27BVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zy
- cgWk6bzcCwVLvPIvedMSiYIHhFFBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gTTK2BP
- 5RCNVKDajzwIEEeGlIHJK4Mjby6tlvkWRRSqlK88P9fD2/7k1UqjemF3MDuUt2VR+1Fk0CAv
- GXE8m/lRBYAO7S31j6t4n+qwOjVkkvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
- 2Qd/DYuqq4jslSmVNDnUzW3pXeFulgXXN84LgEhwFjTkOyOuV/fXzVaCG4aADA7iCMobT03j
- Xmz3OrCOSwxtJiWGGuiprqklgrnbED5MlQ+TSMDSAIE5fzqr4cykg/DQ75fLUKlsjHmMWqum
- m7X9UDSk51W1JdWjPvjoTgrlhr1/sCRJjPZ8Dk7SY5MAulRQIe+L7Kl5lHAhRqrBNbIFwLR1
- JTodiX30QzvMX1vvHHUKAnuNOvwjxpgDNE6qQQ1d3XG327yk0NPhagKvFlDyL5Ba67ogwPBb
- k7Joh9275ROJnasZqIfS9vvUJR1l/m9T467CaC8gj9yjn5ZLlXvEMZGPxH44owQuBJ0zfFX1
- WmzL65A8kr2+Yw4lWHrFo/xIJcgxzwkxHO7eHwI50/P7FZqX1bMEe1tGALXNogRtfrYyC2Io
- 4c3H5bbkH13DbyhChQ7BKZOdDjm21BgXsuowyGWH8beSjdb9JYJV6WMnOh/ItM9xMy4VI7gp
- xmAZ6OR83Kn7VWvFOlAQikLhGrHUcktoHQlEzYrOFr0iXEvbZz2tPUUdoctfKlh/+tmlKYmQ
- /4AcsSGI/JOVjWYpGhNMcij9NRvJEaxmAaDHyu5ezxjLZRucBPEp43/dQz1+ShQUifu7Zkio
- 6et3x/wSIYYQ1gwF97fbf+ilgvjvXUUlO9ocVHPJ91fJBfl/IRwcnSjhf4rOcAcbx7Ew2LCh
- QqRBB4Zo8jLopM0r4aV1fzV8d/xHrInTERAHmTd4bKnDgXg/zKukd1aTeKFXTHBT2eoqq+sU
- vpYkqPnO/odkVcU74clS+R3zbgz7sfErqNBylg2B23CalmmB+8yInSC2sUT5KRByqUA5FmzU
- 0OLvNJbJa+IKIXuF1tIfFgpaeGK1Pc1nDjO7KtqfBWmtXEvpLfXA19POxSsiTBGKOonOYwo9
- u4tpcoK5lHtkREtKNuH0nhZ+mnkwqbsiEn7WkX22LPWtzc=
-IronPort-HdrOrdr: A9a23:gyIN6KDA4wJph53lHemq55DYdb4zR+YMi2TC1yhKJiC9Ffbo8P
- xG/c5rrCMc5wxxZJhNo7290ey7MBHhHP1OkO0s1NWZPDUO0VHAROoJ0WKh+UyEJ8SXzJ866U
- 4KScZD4bPLYWSS9fyKgzWFLw==
+IronPort-Data: A9a23:dn+4VqLhcPaplsttFE+RN5IlxSXFcZb7ZxGr2PjKsXjdYENS12MGz
+ zAdDGHQaaqJamHyeN92Odiy9EIAv5eGy9NiTAJlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUZUideSc+EH140Eg7xbZj6mJVqYPR7z2l6
+ IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB3OsOtew
+ 9IWj6aiEyUtFK+Px9QRDStXRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFlgNgjK8/6epsSoHh6wRnSDOo8QICFSKLPjTNd9Gph3ZAeRayOD
+ yYfQSpUaUuZWx9LBls0MpYavNuGhnXteSIN/Tp5ooJoujOOnWSdyoPFMcXXUsyHQ91PmUSVr
+ X6A+H72ajkFMPSPxDzD9Wij7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWc9tZN
+ 0wT/DtotaUo/VanZtb4Vhy85nWDu3Yht8F4SrNgrlvXk+yNvljfVjNsoiN9hMIO8+ANajctj
+ WWzjYnLARZt8+KlRSyv+eLBxd+tAhQ9IWgHbC4CaAIK5dj/vY0+5i7yosZf/L2d1YOsR2ypq
+ 9yehG1n3uhI05ZXv0mu1Qmf22rEm3TfcuIiCuw7tEqB5xgxWoOqbpfABbPzvacZd9bxorVsU
+ RE5dymiAAImUMjleM+lGrxl8FSVCxCtame0bblHRcZJythV0yT/Fb28GRknTKuTDu4KeCXyf
+ GjYsh5L6ZlYMROCNPEsM93rWplwl/a/RbwJs8w4iPIUOPCdkyfdo0lTibO4hTixwCDAb4lhU
+ XtkTSpcJSlDUvk2pNZHb+wczaUq1kgDKZD7HvjGI+Cc+ePGPha9EO5dWHPXN7xRxP7U8W39r
+ ocEX+PXmko3bQELSnSOmWLlBQtRdiZT6FGfg5E/S9Nv1SI6Qjx8UKGInut6E2Gn9owM/tr1E
+ riGchcw4DLCabfvcG1ms1hvN+HiW4hRt3U+MXB+NFqkwSF7M42u8L0eZ908erx+rL5vyvt9T
+ v8kfcScA6sQFmSbqmpFNZSt/pZ/cBmLhB6VO3b3ajYIYJM9FRfC/cXpf1Wz+XBWXDa3r8Y3v
+ 5apyhjfHcgYXw1nAcuPMKCvwlq9sGIzguV3W0eUcNBfdF+1qNphKjDrj+9xKMYJcE2Ryjyf3
+ geQIBEZueiS/NNlrIiX3fiJ9t77HfF/E0xWG3jgwYy3bSSKrHC+xYJgUfqTeWyPXm3D56j/N
+ /5eyOvxMaNbkQ8S4ZZ8Cbti0Yk3+8Dr++1B1g1hEXjGMwarB7dnLiXU1MVDrPQQlLpQuA/wU
+ UOT4NhKf76OPZq9QlIWIQMkaMWF1O0VxWaOvahkfh2i6X8l5qeDXGVTIwKI2X5UI7ZCOY84x
+ fss5ZwN4Aulhxt2atuLg0i4LYhXwqDsh0n/iqwnPQ==
+IronPort-HdrOrdr: A9a23:UVriIqyDW1TiTI9jG0rwKrPwKr1zdoMgy1knxilNoRw8SKOlfq
+ eV7ZMmPH7P+U8ssR4b+OxoVJPsfZqYz+8W3WBzB8bHYOCFgguVxehZhOOIqQEIWReOk9K1vZ
+ 0QFZSWY+efMbEVt6rHCXGDYrUd/OU=
 X-IronPort-AV: E=Sophos;i="5.87,292,1631592000"; 
-   d="scan'208";a="59370634"
+   d="scan'208";a="59388028"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@gmail.com>, Anthony PERARD
 	<anthony.perard@citrix.com>, Ian Jackson <iwj@xenproject.org>, Wei Liu
 	<wl@xen.org>
-Subject: [XEN PATCH 25/57] tools/examples: cleanup Makefile
-Date: Mon, 6 Dec 2021 17:02:08 +0000
-Message-ID: <20211206170241.13165-26-anthony.perard@citrix.com>
+Subject: [XEN PATCH 50/57] tools/Rules.mk: Cleanup %.pc rules
+Date: Mon, 6 Dec 2021 17:02:33 +0000
+Message-ID: <20211206170241.13165-51-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211206170241.13165-1-anthony.perard@citrix.com>
 References: <20211206170241.13165-1-anthony.perard@citrix.com>
@@ -102,78 +102,42 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Don't check if a target exist before installing it. For directory,
-install doesn't complain, and for file it would prevent from updating
-them.
-
-Remove XEN_CONFIGS-y which isn't used.
-
-Remove "build" target.
-
-Add an empty line after the first comment. The comment isn't about
-$(XEN_READMES), it is about the makefile as a whole.
+PKG_CONFIG_VARS isn't used anymore.
+For "local" pkg-config file, we only have one headers directory now,
+"tools/include", so there is no need to specify it twice. So remove
+$(CFLAGS_xeninclude) from "Cflags:".
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/examples/Makefile | 21 ++++++---------------
- 1 file changed, 6 insertions(+), 15 deletions(-)
+ tools/Rules.mk | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/tools/examples/Makefile b/tools/examples/Makefile
-index 14e24f4cb3..48b520e133 100644
---- a/tools/examples/Makefile
-+++ b/tools/examples/Makefile
-@@ -2,6 +2,7 @@ XEN_ROOT = $(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
- # Xen configuration dir and configs to go there.
-+
- XEN_READMES = README
- 
- XEN_CONFIGS += xlexample.hvm
-@@ -10,14 +11,9 @@ XEN_CONFIGS += xlexample.pvhlinux
- XEN_CONFIGS += xl.conf
- XEN_CONFIGS += cpupool
- 
--XEN_CONFIGS += $(XEN_CONFIGS-y)
--
- .PHONY: all
- all:
- 
--.PHONY: build
--build:
--
- .PHONY: install
- install: all install-readmes install-configs
- 
-@@ -26,10 +22,8 @@ uninstall: uninstall-readmes uninstall-configs
- 
- .PHONY: install-readmes
- install-readmes:
--	[ -d $(DESTDIR)$(XEN_CONFIG_DIR) ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
--	set -e; for i in $(XEN_READMES); \
--	    do [ -e $(DESTDIR)$(XEN_CONFIG_DIR)/$$i ] || \
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
-+	set -e; for i in $(XEN_READMES); do \
- 	    $(INSTALL_DATA) $$i $(DESTDIR)$(XEN_CONFIG_DIR); \
- 	done
- 
-@@ -39,12 +33,9 @@ uninstall-readmes:
- 
- .PHONY: install-configs
- install-configs: $(XEN_CONFIGS)
--	[ -d $(DESTDIR)$(XEN_CONFIG_DIR) ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
--	[ -d $(DESTDIR)$(XEN_CONFIG_DIR)/auto ] || \
--		$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)/auto
--	set -e; for i in $(XEN_CONFIGS); \
--	    do [ -e $(DESTDIR)$(XEN_CONFIG_DIR)/$$i ] || \
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
-+	$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)/auto
-+	set -e; for i in $(XEN_CONFIGS); do \
- 	    $(INSTALL_DATA) $$i $(DESTDIR)$(XEN_CONFIG_DIR); \
- 	done
- 
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 0d3febfbb6..47424935ba 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -184,12 +184,11 @@ $(PKG_CONFIG_DIR)/%.pc: Makefile $(XEN_ROOT)/tools/Rules.mk $(PKG_CONFIG_DIR)
+ 	echo "prefix=$(PKG_CONFIG_PREFIX)"; \
+ 	echo "includedir=$(PKG_CONFIG_INCDIR)"; \
+ 	echo "libdir=$(PKG_CONFIG_LIBDIR)"; \
+-	$(foreach var,$(PKG_CONFIG_VARS),echo $(var);) \
+ 	echo ""; \
+ 	echo "Name: $(PKG_CONFIG_NAME)"; \
+ 	echo "Description: $(PKG_CONFIG_DESC)"; \
+ 	echo "Version: $(PKG_CONFIG_VERSION)"; \
+-	echo "Cflags: -I\$${includedir} $(CFLAGS_xeninclude)"; \
++	echo "Cflags: -I\$${includedir}"; \
+ 	echo "Libs: -L\$${libdir} $(PKG_CONFIG_USELIBS) -l$(PKG_CONFIG_LIB)"; \
+ 	echo "Libs.private: $(PKG_CONFIG_LIBSPRIV)"; \
+ 	echo "Requires.private: $(PKG_CONFIG_REQPRIV)"; \
+@@ -200,7 +199,6 @@ $(PKG_CONFIG_DIR)/%.pc: Makefile $(XEN_ROOT)/tools/Rules.mk $(PKG_CONFIG_DIR)
+ 	echo "prefix=$(PKG_CONFIG_PREFIX)"; \
+ 	echo "includedir=$(PKG_CONFIG_INCDIR)"; \
+ 	echo "libdir=$(PKG_CONFIG_LIBDIR)"; \
+-	$(foreach var,$(PKG_CONFIG_VARS),echo $(var);) \
+ 	echo ""; \
+ 	echo "Name: $(PKG_CONFIG_NAME)"; \
+ 	echo "Description: $(PKG_CONFIG_DESC)"; \
 -- 
 Anthony PERARD
 
