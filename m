@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E867C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F33BC4332F
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Dec 2021 22:37:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.239924.416023 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.239922.416019 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMbS-0003cE-Kc; Mon, 06 Dec 2021 22:36:58 +0000
+	id 1muMbS-0003Zg-BN; Mon, 06 Dec 2021 22:36:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 239924.416023; Mon, 06 Dec 2021 22:36:58 +0000
+Received: by outflank-mailman (output) from mailman id 239922.416019; Mon, 06 Dec 2021 22:36:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muMbS-0003bW-G6; Mon, 06 Dec 2021 22:36:58 +0000
-Received: by outflank-mailman (input) for mailman id 239924;
+	id 1muMbS-0003ZZ-8J; Mon, 06 Dec 2021 22:36:58 +0000
+Received: by outflank-mailman (input) for mailman id 239922;
  Mon, 06 Dec 2021 22:36:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5qlu=QX=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1muMSh-0001m5-SA
- for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:27:55 +0000
+ id 1muMSu-0001m5-9V
+ for xen-devel@lists.xenproject.org; Mon, 06 Dec 2021 22:28:08 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c1d4999a-56e3-11ec-8a4d-196798b21f7b;
- Mon, 06 Dec 2021 23:27:55 +0100 (CET)
+ id c5a5259c-56e3-11ec-8a4d-196798b21f7b;
+ Mon, 06 Dec 2021 23:28:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c1d4999a-56e3-11ec-8a4d-196798b21f7b
-Message-ID: <20211206210224.871651518@linutronix.de>
+X-Inumbo-ID: c5a5259c-56e3-11ec-8a4d-196798b21f7b
+Message-ID: <20211206210225.101336873@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1638829675;
+	s=2020; t=1638829681;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=S+W1Q0LZK9qA36CwaGMZKKV+Y38NSAQ6cljplijOq1c=;
-	b=Ir8wMJVOR0vRWYRtvVvvwdh8vk+hNLZauyW7VLWKrRT++IgOgmGu+iffTCxfxNnPnp/eUL
-	rTyGHuAWLoqtYLFd0zuaiTQla2JtOb0eBIYhLEtEk9jZ3FXwQz4l6Rl7X4EP2BZT/nLmZG
-	gB4XgEyUu0cKAWYBqXdGzv1j+4khf3rt8PXLnTT7HslbLMvlblRWmeFO493rPXuzAQNQvD
-	pdevv23YcY11nJ5sRpy9ritQyb0MV8xDifB3U1aMs4fGqJo2CjNucLCPr7Kd6QZ00kkwLx
-	CpF8pwB2sHyy6TwKDjA1aIW9IsWvP1KTSYgKnNKZ+NMAS6BpK3f7cHa0u/cYAQ==
+	 references:references; bh=DA21nVmLDiBI7abTCMjgj20KY6xV+oZ7nL3Tb95GpzU=;
+	b=tUgqDZDZ/EiCdKplAETvDx9zP2J7lXVbAOyLOoBuYDH6TGhvuPG60E8xxxj2easlDQNPkn
+	zTUdmJbnIRjdW2jZn22BV2YC4f0v6JUg4B85PNY0gmnqpQ/sN1zmKIaFOZKwqGTNC8Cwta
+	Zuzg0fNd26HEMDHArMjtG0lzJFq888jFDvle1JTBYdcc+inM3sPjBJytAfcyCtrn23O2UA
+	KEo+a2AtJrT7M4ZyZw3GWFzmCrk8w7SJ8if/eriSWmpCeXjmWpgB3652GOnCNeZesHt7bK
+	srYzZDxpjI6VQFY1vaT/mjtrbyNnxnAjKtFj8+UQL1Hs+wIUbfpLlFZD9d5QMQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1638829675;
+	s=2020e; t=1638829681;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=S+W1Q0LZK9qA36CwaGMZKKV+Y38NSAQ6cljplijOq1c=;
-	b=YM/Nr8za192FA3caYGvQ8jFv+3Zicdz432O3rHkigtDdu6sexgOdl0L4qhS98KEbr6kSi1
-	mc4fbpLRQSX5C0DA==
+	 references:references; bh=DA21nVmLDiBI7abTCMjgj20KY6xV+oZ7nL3Tb95GpzU=;
+	b=MCrfZbg73639x4t4CYmepEMeEst8qlRnGzxNB/5IvDcEPSsvluAaurSvCLQW1KB8HRZ02F
+	1dXwMChHv9TjP5Cw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -85,85 +85,89 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-hyperv@vger.kernel.org,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Heiko Carstens <hca@linux.ibm.com>
-Subject: [patch V2 19/23] PCI/MSI: Sanitize MSIX table map handling
+Subject: [patch V2 23/23] PCI/MSI: Move descriptor counting on allocation fail
+ to the legacy code
 References: <20211206210147.872865823@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Mon,  6 Dec 2021 23:27:54 +0100 (CET)
+Date: Mon,  6 Dec 2021 23:28:00 +0100 (CET)
 
-Unmapping the MSIX base mapping in the loops which allocate/free MSI
-desciptors is daft and in the way of allowing runtime expansion of MSI-X
-descriptors.
-
-Store the mapping in struct pci_dev and free it after freeing the MSI-X
-descriptors.
+The irqdomain code already returns the information. Move the loop to the
+legacy code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Tested-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 ---
- drivers/pci/msi/msi.c |   18 ++++++++----------
- include/linux/pci.h   |    1 +
- 2 files changed, 9 insertions(+), 10 deletions(-)
+ drivers/pci/msi/legacy.c |   20 +++++++++++++++++++-
+ drivers/pci/msi/msi.c    |   19 +------------------
+ 2 files changed, 20 insertions(+), 19 deletions(-)
 
---- a/drivers/pci/msi/msi.c
-+++ b/drivers/pci/msi/msi.c
-@@ -241,14 +241,14 @@ static void free_msi_irqs(struct pci_dev
- 	pci_msi_teardown_msi_irqs(dev);
- 
- 	list_for_each_entry_safe(entry, tmp, msi_list, list) {
--		if (entry->pci.msi_attrib.is_msix) {
--			if (list_is_last(&entry->list, msi_list))
--				iounmap(entry->pci.mask_base);
--		}
--
- 		list_del(&entry->list);
- 		free_msi_entry(entry);
+--- a/drivers/pci/msi/legacy.c
++++ b/drivers/pci/msi/legacy.c
+@@ -50,9 +50,27 @@ void __weak arch_teardown_msi_irqs(struc
  	}
-+
-+	if (dev->msix_base) {
-+		iounmap(dev->msix_base);
-+		dev->msix_base = NULL;
-+	}
  }
  
- static void pci_intx_for_msi(struct pci_dev *dev, int enable)
-@@ -501,10 +501,6 @@ static int msix_setup_entries(struct pci
- 	for (i = 0, curmsk = masks; i < nvec; i++) {
- 		entry = alloc_msi_entry(&dev->dev, 1, curmsk);
- 		if (!entry) {
--			if (!i)
--				iounmap(base);
--			else
--				free_msi_irqs(dev);
- 			/* No enough memory. Don't try again */
- 			ret = -ENOMEM;
- 			goto out;
-@@ -602,12 +598,14 @@ static int msix_capability_init(struct p
- 		goto out_disable;
- 	}
- 
-+	dev->msix_base = base;
++static int pci_msi_setup_check_result(struct pci_dev *dev, int type, int ret)
++{
++	struct msi_desc *entry;
++	int avail = 0;
 +
- 	/* Ensure that all table entries are masked. */
- 	msix_mask_all(base, tsize);
++	if (type != PCI_CAP_ID_MSIX || ret >= 0)
++		return ret;
++
++	/* Scan the MSI descriptors for successfully allocated ones. */
++	for_each_pci_msi_entry(entry, dev) {
++		if (entry->irq != 0)
++			avail++;
++	}
++	return avail ? avail : ret;
++}
++
+ int pci_msi_legacy_setup_msi_irqs(struct pci_dev *dev, int nvec, int type)
+ {
+-	return arch_setup_msi_irqs(dev, nvec, type);
++	int ret = arch_setup_msi_irqs(dev, nvec, type);
++
++	return pci_msi_setup_check_result(dev, type, ret);
+ }
  
- 	ret = msix_setup_entries(dev, base, entries, nvec, affd);
- 	if (ret)
--		goto out_disable;
-+		goto out_free;
+ void pci_msi_legacy_teardown_msi_irqs(struct pci_dev *dev)
+--- a/drivers/pci/msi/msi.c
++++ b/drivers/pci/msi/msi.c
+@@ -609,7 +609,7 @@ static int msix_capability_init(struct p
  
  	ret = pci_msi_setup_msi_irqs(dev, nvec, PCI_CAP_ID_MSIX);
  	if (ret)
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -473,6 +473,7 @@ struct pci_dev {
- 	u8		ptm_granularity;
- #endif
- #ifdef CONFIG_PCI_MSI
-+	void __iomem	*msix_base;
- 	const struct attribute_group **msi_irq_groups;
- #endif
- 	struct pci_vpd	vpd;
+-		goto out_avail;
++		goto out_free;
+ 
+ 	/* Check if all MSI entries honor device restrictions */
+ 	ret = msi_verify_entries(dev);
+@@ -634,23 +634,6 @@ static int msix_capability_init(struct p
+ 	pcibios_free_irq(dev);
+ 	return 0;
+ 
+-out_avail:
+-	if (ret < 0) {
+-		/*
+-		 * If we had some success, report the number of IRQs
+-		 * we succeeded in setting up.
+-		 */
+-		struct msi_desc *entry;
+-		int avail = 0;
+-
+-		for_each_pci_msi_entry(entry, dev) {
+-			if (entry->irq != 0)
+-				avail++;
+-		}
+-		if (avail != 0)
+-			ret = avail;
+-	}
+-
+ out_free:
+ 	free_msi_irqs(dev);
+ 
 
 
