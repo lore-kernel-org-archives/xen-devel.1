@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92252C4332F
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Dec 2021 07:43:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240547.417102 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128BDC433EF
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Dec 2021 07:43:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240550.417123 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muV7y-0001hj-EI; Tue, 07 Dec 2021 07:43:06 +0000
+	id 1muV8M-0002ac-Vh; Tue, 07 Dec 2021 07:43:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240547.417102; Tue, 07 Dec 2021 07:43:06 +0000
+Received: by outflank-mailman (output) from mailman id 240550.417123; Tue, 07 Dec 2021 07:43:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muV7y-0001hc-As; Tue, 07 Dec 2021 07:43:06 +0000
-Received: by outflank-mailman (input) for mailman id 240547;
- Tue, 07 Dec 2021 07:43:04 +0000
+	id 1muV8M-0002aV-SN; Tue, 07 Dec 2021 07:43:30 +0000
+Received: by outflank-mailman (input) for mailman id 240550;
+ Tue, 07 Dec 2021 07:43:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3MF5=QY=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
- id 1muV7w-0001hW-RF
- for xen-devel@lists.xenproject.org; Tue, 07 Dec 2021 07:43:04 +0000
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 1muV8L-0001hW-5L
+ for xen-devel@lists.xenproject.org; Tue, 07 Dec 2021 07:43:29 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4daba908-5731-11ec-8a4d-196798b21f7b;
- Tue, 07 Dec 2021 08:43:02 +0100 (CET)
+ id 5df52a75-5731-11ec-8a4d-196798b21f7b;
+ Tue, 07 Dec 2021 08:43:28 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id DBD2CCE19EC;
- Tue,  7 Dec 2021 07:42:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D81AC341C1;
- Tue,  7 Dec 2021 07:42:53 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 197DDB8168A;
+ Tue,  7 Dec 2021 07:43:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2BEA8C341C3;
+ Tue,  7 Dec 2021 07:43:25 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,15 +45,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4daba908-5731-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: 5df52a75-5731-11ec-8a4d-196798b21f7b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1638862974;
-	bh=2qIgL0JBG4vV/MINd0ETzL6k1r509RSkk45xSKKLJ7I=;
+	s=korg; t=1638863005;
+	bh=hZ6r5RT8PuAvjxr9hFBTJ7OFksPKVnHZGwrS2FMUegk=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=rEqXyxtMWZFlcF8r3yxH1/TtAEbDHBaUwIDAPsv9sHOOC0Rmzi+lrDEkr6FW8lcZr
-	 /vMFQ/81Tv7pxgdvjTeFJkR4e1RX4olYyYFOA3hLqZw2/Xn7l2GFzYB4NYCzFkanis
-	 14vBaVGOTC4Y8SHo20NGaCX7CBAe2IriKWHo0K/0=
-Date: Tue, 7 Dec 2021 08:42:51 +0100
+	b=aETC4sd7x+h4lI1cwVylig9GmsgU3qpCcUcVwYuTAKDA0yAzfbGTIBItteAOnTGEW
+	 zitWvMW09C4KG6fcaLgFeyX4kuVVlu+TwIsyPWkTvkljIe5oZtNN5XPpHkNfbIFXSF
+	 qMiniC2oUeuK0/Qf28kg20mXvkLt/BGabUq82pj8=
+Date: Tue, 7 Dec 2021 08:43:23 +0100
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: Thomas Gleixner <tglx@linutronix.de>
 Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>,
@@ -74,17 +74,17 @@ Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>,
 	Wei Liu <wei.liu@kernel.org>, linux-hyperv@vger.kernel.org,
 	Christian Borntraeger <borntraeger@de.ibm.com>,
 	Heiko Carstens <hca@linux.ibm.com>
-Subject: Re: [patch V2 03/23] genirq/msi: Guard sysfs code
-Message-ID: <Ya8Qe7Mol8STLvkd@kroah.com>
+Subject: Re: [patch V2 08/23] PCI/sysfs: Use pci_irq_vector()
+Message-ID: <Ya8Qm8zwHa78SrBK@kroah.com>
 References: <20211206210147.872865823@linutronix.de>
- <20211206210223.985907940@linutronix.de>
+ <20211206210224.265589103@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20211206210223.985907940@linutronix.de>
+In-Reply-To: <20211206210224.265589103@linutronix.de>
 
-On Mon, Dec 06, 2021 at 11:27:28PM +0100, Thomas Gleixner wrote:
-> No point in building unused code when CONFIG_SYSFS=n.
+On Mon, Dec 06, 2021 at 11:27:36PM +0100, Thomas Gleixner wrote:
+> instead of fiddling with msi descriptors.
 > 
 > Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 > Tested-by: Juergen Gross <jgross@suse.com>
