@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C4D6C433EF
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Dec 2021 07:45:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.240577.417168 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C47C433EF
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Dec 2021 07:46:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.240583.417179 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muV9v-00056V-6o; Tue, 07 Dec 2021 07:45:07 +0000
+	id 1muVAl-0005ow-Hn; Tue, 07 Dec 2021 07:45:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 240577.417168; Tue, 07 Dec 2021 07:45:07 +0000
+Received: by outflank-mailman (output) from mailman id 240583.417179; Tue, 07 Dec 2021 07:45:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muV9v-00056O-3T; Tue, 07 Dec 2021 07:45:07 +0000
-Received: by outflank-mailman (input) for mailman id 240577;
- Tue, 07 Dec 2021 07:45:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1muVAl-0005op-Co; Tue, 07 Dec 2021 07:45:59 +0000
+Received: by outflank-mailman (input) for mailman id 240583;
+ Tue, 07 Dec 2021 07:45:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3MF5=QY=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
- id 1muV9t-0004OI-QY
- for xen-devel@lists.xenproject.org; Tue, 07 Dec 2021 07:45:05 +0000
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 96ed034d-5731-11ec-8a4d-196798b21f7b;
- Tue, 07 Dec 2021 08:45:05 +0100 (CET)
+ id 1muVAk-0005oY-0E
+ for xen-devel@lists.xenproject.org; Tue, 07 Dec 2021 07:45:58 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b6513276-5731-11ec-a5e1-b9374ead2679;
+ Tue, 07 Dec 2021 08:45:57 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 2DAF9CE19DD;
- Tue,  7 Dec 2021 07:45:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A401C341C3;
- Tue,  7 Dec 2021 07:44:59 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 57B9CB816A7;
+ Tue,  7 Dec 2021 07:45:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71F0FC341C3;
+ Tue,  7 Dec 2021 07:45:54 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,15 +45,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96ed034d-5731-11ec-8a4d-196798b21f7b
+X-Inumbo-ID: b6513276-5731-11ec-a5e1-b9374ead2679
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1638863100;
-	bh=1r1X+ZHiffheVJg5Mf7nrvakcpVQqQbwTurW2S7fT/s=;
+	s=korg; t=1638863155;
+	bh=gRy6TW9oSvfP7dg3zhkuzychOXyAHsIOP80ZNfLYfos=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=l1/QgBFwqoXc2OAqrPg8mXMQvF5rv5z/fNqAHcshOCZgD5tN6DsYDVMKyMum5XpbR
-	 tTUmjHxCYxJdHEeYzATtISF27T8l5whlPASeO5DQut4iaiHRSBKvqJ9dh18fp3h8CK
-	 xuOWK2ssrIqlzWKMqvooAc5l1otA0m+pE8ZKIdZ4=
-Date: Tue, 7 Dec 2021 08:44:57 +0100
+	b=SiqDsJQkbNZ0TkHVyhqD8eHIjknQi5V0JuRjw6ygTj9D2zKPOwQURIy7jo57+w2du
+	 ZMCTZHvOwWB7jQV72lXakTsB1GLsVP+TrRykUHY6K5a3U3G0G39PJ3woVfTktTJ7Iv
+	 JNlX2AYmusSMwGbHuVxEc8Oqqs3RKuuhG7eHXMdI=
+Date: Tue, 7 Dec 2021 08:45:52 +0100
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: Thomas Gleixner <tglx@linutronix.de>
 Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>,
@@ -74,22 +74,22 @@ Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>,
 	Wei Liu <wei.liu@kernel.org>, linux-hyperv@vger.kernel.org,
 	Christian Borntraeger <borntraeger@de.ibm.com>,
 	Heiko Carstens <hca@linux.ibm.com>
-Subject: Re: [patch V2 14/23] PCI/MSI: Make msix_update_entries() smarter
-Message-ID: <Ya8Q+Q8OnrovJGET@kroah.com>
+Subject: Re: [patch V2 17/23] PCI/MSI: Split out !IRQDOMAIN code
+Message-ID: <Ya8RME4tz+LZD7+h@kroah.com>
 References: <20211206210147.872865823@linutronix.de>
- <20211206210224.600351129@linutronix.de>
+ <20211206210224.763574089@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20211206210224.600351129@linutronix.de>
+In-Reply-To: <20211206210224.763574089@linutronix.de>
 
-On Mon, Dec 06, 2021 at 11:27:46PM +0100, Thomas Gleixner wrote:
-> No need to walk the descriptors and check for each one whether the entries
-> pointer function argument is NULL. Do it once.
+On Mon, Dec 06, 2021 at 11:27:51PM +0100, Thomas Gleixner wrote:
+> Split out the non irqdomain code into its own file.
 > 
 > Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 > Tested-by: Juergen Gross <jgross@suse.com>
 > Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
 
