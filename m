@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D338DC433F5
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Dec 2021 08:42:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.242072.418722 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02BB5C433F5
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Dec 2021 08:48:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.242082.418758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1musX4-0000J1-Qp; Wed, 08 Dec 2021 08:42:34 +0000
+	id 1muscC-0001q9-1X; Wed, 08 Dec 2021 08:47:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 242072.418722; Wed, 08 Dec 2021 08:42:34 +0000
+Received: by outflank-mailman (output) from mailman id 242082.418758; Wed, 08 Dec 2021 08:47:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1musX4-0000Iu-Np; Wed, 08 Dec 2021 08:42:34 +0000
-Received: by outflank-mailman (input) for mailman id 242072;
- Wed, 08 Dec 2021 08:42:33 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1muscB-0001po-TU; Wed, 08 Dec 2021 08:47:51 +0000
+Received: by outflank-mailman (input) for mailman id 242082;
+ Wed, 08 Dec 2021 08:47:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1musX3-0000Ik-Jx; Wed, 08 Dec 2021 08:42:33 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1musX3-00019D-Cp; Wed, 08 Dec 2021 08:42:33 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1musX2-0003oN-Iz; Wed, 08 Dec 2021 08:42:32 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1musX2-000681-IV; Wed, 08 Dec 2021 08:42:32 +0000
+ (envelope-from <SRS0=J2Or=QZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1muscA-0001K1-7I
+ for xen-devel@lists.xenproject.org; Wed, 08 Dec 2021 08:47:50 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8503115e-5803-11ec-a831-37629979565c;
+ Wed, 08 Dec 2021 09:47:48 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0B6352191A;
+ Wed,  8 Dec 2021 08:47:48 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D68F813F3B;
+ Wed,  8 Dec 2021 08:47:47 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id AOoeMzNxsGGzdQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 08 Dec 2021 08:47:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,75 +53,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=W5Gv22lpteJhmF8Fk/ewlsVCUwYPbR9GScnlHmN7BTA=; b=aIPTfPFcZ7YH703cLJyPhG8wot
-	KCpw5OWDK1/2zAWkL/t3nI0Oeh4oInHcJZeapXqTGqKmzg+Hcxj5+IPdAKWBM28tNWlkl2iNqOQyc
-	wO8xxbGViFf4DfjiW608G3P2ITAe/V7AiYjbsmKBZGsKawCr/s687KKQ1Wp+5kf23ZHM=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-167225-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 8503115e-5803-11ec-a831-37629979565c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1638953268; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=nT3PojRsjaFLQH8p/xAS/Bo0Edytu7k5yswmTd3p+WU=;
+	b=UvBlVWL1x0/G7DJ4GahBrQIUwzTNp7P6vYBL61uj9csWpmzLvAgjU6q1K2PEqq5F7jKpjk
+	oeSQqU35zbMmC3i4UhtxsDczk7qjozkgZIJyVfe9Ts6ej+AACj+iJiD6W7ODW0+jds/IH5
+	g7UcKdnXiarpssq735mbcS1rfVXJW/Y=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Ian Jackson <iwj@xenproject.org>,
+	Wei Liu <wl@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v3 1/2] tools/helpers: fix PVH xenstore-stubdom console parameters
+Date: Wed,  8 Dec 2021 09:47:44 +0100
+Message-Id: <20211208084745.31082-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20211208084745.31082-1-jgross@suse.com>
+References: <20211208084745.31082-1-jgross@suse.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 167225: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=7c0ad2c33810ead45b7919f8f8d0e282dae52e71
-X-Osstest-Versions-That:
-    ovmf=dfafa8e45382939fb5dc78e9d37b97b500a43613
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 08 Dec 2021 08:42:32 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 167225 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/167225/
+When using a PVH mode xenstore-stubdom the frame number of the console
+should be a PFN instead of a MFN.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 7c0ad2c33810ead45b7919f8f8d0e282dae52e71
-baseline version:
- ovmf                 dfafa8e45382939fb5dc78e9d37b97b500a43613
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+V2:
+- rename variable (Andrew Cooper)
+---
+ tools/helpers/init-xenstore-domain.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-Last test of basis   167122  2021-12-04 23:14:58 Z    3 days
-Testing same since   167225  2021-12-07 17:43:21 Z    0 days    1 attempts
+diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
+index b205a79ee6..9457d0251b 100644
+--- a/tools/helpers/init-xenstore-domain.c
++++ b/tools/helpers/init-xenstore-domain.c
+@@ -30,7 +30,7 @@ static char *param;
+ static char *name = "Xenstore";
+ static int memory;
+ static int maxmem;
+-static xen_pfn_t console_mfn;
++static xen_pfn_t console_gfn;
+ static xc_evtchn_port_or_error_t console_evtchn;
+ 
+ static struct option options[] = {
+@@ -283,7 +283,9 @@ static int build(xc_interface *xch)
+     }
+ 
+     rv = 0;
+-    console_mfn = xc_dom_p2m(dom, dom->console_pfn);
++    console_gfn = (dom->container_type == XC_DOM_PV_CONTAINER)
++                  ? xc_dom_p2m(dom, dom->console_pfn)
++                  : dom->console_pfn;
+ 
+ err:
+     if ( dom )
+@@ -528,7 +530,7 @@ int main(int argc, char** argv)
+     do_xs_write_dir_node(xsh, fe_path, "tty", "");
+     snprintf(buf, 16, "%d", console_evtchn);
+     do_xs_write_dir_node(xsh, fe_path, "port", buf);
+-    snprintf(buf, 16, "%ld", console_mfn);
++    snprintf(buf, 16, "%ld", console_gfn);
+     do_xs_write_dir_node(xsh, fe_path, "ring-ref", buf);
+     xs_close(xsh);
+ 
+-- 
+2.26.2
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Michael D Kinney <michael.d.kinney@intel.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   dfafa8e453..7c0ad2c338  7c0ad2c33810ead45b7919f8f8d0e282dae52e71 -> xen-tested-master
 
