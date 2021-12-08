@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89085C4321E
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Dec 2021 15:56:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.242356.419200 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B09C4167D
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Dec 2021 15:56:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.242360.419236 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muzIj-0001cQ-I1; Wed, 08 Dec 2021 15:56:13 +0000
+	id 1muzIm-0002OA-Kz; Wed, 08 Dec 2021 15:56:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 242356.419200; Wed, 08 Dec 2021 15:56:13 +0000
+Received: by outflank-mailman (output) from mailman id 242360.419236; Wed, 08 Dec 2021 15:56:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muzIj-0001ZZ-88; Wed, 08 Dec 2021 15:56:13 +0000
-Received: by outflank-mailman (input) for mailman id 242356;
- Wed, 08 Dec 2021 15:56:12 +0000
+	id 1muzIm-0002Ki-7K; Wed, 08 Dec 2021 15:56:16 +0000
+Received: by outflank-mailman (input) for mailman id 242360;
+ Wed, 08 Dec 2021 15:56:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=J2Or=QZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1muzIi-0001LM-8H
- for xen-devel@lists.xenproject.org; Wed, 08 Dec 2021 15:56:12 +0000
+ id 1muzIk-0001LM-6Y
+ for xen-devel@lists.xenproject.org; Wed, 08 Dec 2021 15:56:14 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5cf46439-583f-11ec-a831-37629979565c;
- Wed, 08 Dec 2021 16:56:10 +0100 (CET)
+ id 5db621af-583f-11ec-a831-37629979565c;
+ Wed, 08 Dec 2021 16:56:12 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 85A881FD56;
- Wed,  8 Dec 2021 15:56:10 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E0C781FD5B;
+ Wed,  8 Dec 2021 15:56:11 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2694F13C8E;
- Wed,  8 Dec 2021 15:56:10 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A8B8413C8E;
+ Wed,  8 Dec 2021 15:56:11 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id oNRBCJrVsGHIXwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 08 Dec 2021 15:56:10 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4DkdKJvVsGHIXwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 08 Dec 2021 15:56:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,629 +53,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5cf46439-583f-11ec-a831-37629979565c
+X-Inumbo-ID: 5db621af-583f-11ec-a831-37629979565c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1638978970; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1638978971; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5RvWk4roYW8A4zrziOmqX0VjX+cRK9Rbg79f3SbZ5HQ=;
-	b=aYWl+u2THaZ1bA1oeNVptIpjGPkv1tO5nATYVwVTEG1SwLAL0l1D8mtiM3e78+b/ipZSj8
-	QyoyBun/SFXY7t5WlzOeYi2LauyEooS5xmrI/Ms8zvI5s+Dlunm0rQg40Cij8lpBRPTL3G
-	gxDpnDZFrHnd+RRAFRx/laevCEYqUM4=
+	bh=nEFyO5REy98yyXsf4CZGnr9ARPg0xXVeuhj3Ow7aEFk=;
+	b=LTGeeP9QCTW2+cX+mEPR9joCgQvdR6Blyo2yOC9blPOIQxB2Q3CcgDsBZw7zGzuNrrGbQG
+	7+Lgh4j5cJWlpgMYIR944ZV03lxi99EwTOBlgpQOySZ0QgBQa2aWH6JikTNOriff7sLrJl
+	ivjLi5ue6NxKgZgFJYX0plwdguR7F0I=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Christopher Clark <christopher.w.clark@gmail.com>
-Subject: [PATCH v3 02/13] xen: harmonize return types of hypercall handlers
-Date: Wed,  8 Dec 2021 16:55:55 +0100
-Message-Id: <20211208155606.20029-3-jgross@suse.com>
+	Wei Liu <wl@xen.org>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 07/13] x86/pv-shim: don't modify hypercall table
+Date: Wed,  8 Dec 2021 16:56:00 +0100
+Message-Id: <20211208155606.20029-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211208155606.20029-1-jgross@suse.com>
 References: <20211208155606.20029-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Today most hypercall handlers have a return type of long, while the
-compat ones return an int. There are a few exceptions from that rule,
-however.
+When running as pv-shim the hypercall is modified today in order to
+replace the functions for __HYPERVISOR_event_channel_op and
+__HYPERVISOR_grant_table_op hypercalls.
 
-Get rid of the exceptions by letting compat handlers always return int
-and others always return long.
+Change this to call the related functions from the normal handlers
+instead when running as shim. The performance implications are not
+really relevant, as a normal production hypervisor will not be
+configured to support shim mode, so the related calls will be dropped
+due to optimization of the compiler.
 
-For the compat hvm case use eax instead of rax for the stored result as
-it should have been from the beginning.
-
-Additionally move some prototypes to include/asm-x86/hypercall.h
-as they are x86 specific. Move the do_physdev_op() prototype from both
-architecture dependant headers to the common one. Move the
-compat_platform_op() prototype to the common header.
-
-Switch some non style compliant types (u32, s32, s64) to style compliant
-ones.
-
-Rename paging_domctl_continuation() to do_paging_domctl_cont() and add
-a matching define for the associated hypercall.
-
-Make do_callback_op() and compat_callback_op() more similar by adding
-the const attribute to compat_callback_op()'s 2nd parameter.
-
-Change the type of the cmd parameter for [do|compat]_kexec_op() to
-unsigned int, as this is more appropriate for the compat case.
+Note that for the CONFIG_PV_SHIM_EXCLUSIVE case there is a dummy
+wrapper do_grant_table_op() needed, as in this case grant_table.c
+isn't being built.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 V2:
-- rework platform_op compat handling (Jan Beulich)
+- add test for pv_shim to wrappers (Jan Beulich)
+- add grant_table_op to hypercall table if CONFIG_PV_SHIM (Jan Beulich)
 V3:
-- remove include of types.h (Jan Beulich)
+- add [un]likely() to pv_shim tests (Jan Beulich)
 ---
- xen/arch/arm/physdev.c                   |  2 +-
- xen/arch/x86/domctl.c                    |  4 +--
- xen/arch/x86/hvm/hypercall.c             |  8 ++---
- xen/arch/x86/hypercall.c                 |  2 +-
- xen/arch/x86/mm/paging.c                 |  3 +-
- xen/arch/x86/pv/callback.c               | 20 +++++------
- xen/arch/x86/pv/emul-priv-op.c           |  2 +-
- xen/arch/x86/pv/hypercall.c              |  5 +--
- xen/arch/x86/pv/iret.c                   |  4 +--
- xen/arch/x86/pv/misc-hypercalls.c        | 14 +++++---
- xen/arch/x86/x86_64/platform_hypercall.c |  2 +-
- xen/common/argo.c                        | 12 +++----
- xen/common/kexec.c                       |  6 ++--
- xen/include/asm-arm/hypercall.h          |  1 -
- xen/include/asm-x86/hypercall.h          | 43 +++++++++++-------------
- xen/include/asm-x86/paging.h             |  3 --
- xen/include/xen/hypercall.h              | 26 +++++++-------
- 17 files changed, 74 insertions(+), 83 deletions(-)
+ xen/arch/x86/pv/hypercall.c   |  2 +-
+ xen/arch/x86/pv/shim.c        | 54 +++++++++++++++++------------------
+ xen/common/event_channel.c    |  9 ++++++
+ xen/common/grant_table.c      |  9 ++++++
+ xen/include/asm-x86/pv/shim.h |  3 ++
+ 5 files changed, 49 insertions(+), 28 deletions(-)
 
-diff --git a/xen/arch/arm/physdev.c b/xen/arch/arm/physdev.c
-index f9aa274dda..5a7593fa8f 100644
---- a/xen/arch/arm/physdev.c
-+++ b/xen/arch/arm/physdev.c
-@@ -11,7 +11,7 @@
- #include <xen/hypercall.h>
- 
- 
--int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-+long do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
- #ifdef CONFIG_HAS_PCI
-     return pci_physdev_op(cmd, arg);
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index 7d102e0647..b01ea81373 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -221,8 +221,8 @@ long arch_do_domctl(
-     case XEN_DOMCTL_shadow_op:
-         ret = paging_domctl(d, &domctl->u.shadow_op, u_domctl, 0);
-         if ( ret == -ERESTART )
--            return hypercall_create_continuation(__HYPERVISOR_arch_1,
--                                                 "h", u_domctl);
-+            return hypercall_create_continuation(
-+                       __HYPERVISOR_paging_domctl_cont, "h", u_domctl);
-         copyback = true;
-         break;
- 
-diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
-index 1f04ffb272..9d3b193bad 100644
---- a/xen/arch/x86/hvm/hypercall.c
-+++ b/xen/arch/x86/hvm/hypercall.c
-@@ -120,8 +120,6 @@ static long hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-     [ __HYPERVISOR_ ## x ] = { (hypercall_fn_t *) do_ ## x,  \
-                                (hypercall_fn_t *) compat_ ## x }
- 
--#define do_arch_1             paging_domctl_continuation
--
- static const struct {
-     hypercall_fn_t *native, *compat;
- } hvm_hypercall_table[] = {
-@@ -154,11 +152,9 @@ static const struct {
- #ifdef CONFIG_HYPFS
-     HYPERCALL(hypfs_op),
- #endif
--    HYPERCALL(arch_1)
-+    HYPERCALL(paging_domctl_cont)
- };
- 
--#undef do_arch_1
--
- #undef HYPERCALL
- #undef HVM_CALL
- #undef COMPAT_CALL
-@@ -296,7 +292,7 @@ int hvm_hypercall(struct cpu_user_regs *regs)
- #endif
- 
-         curr->hcall_compat = true;
--        regs->rax = hvm_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi);
-+        regs->eax = hvm_hypercall_table[eax].compat(ebx, ecx, edx, esi, edi);
-         curr->hcall_compat = false;
- 
- #ifndef NDEBUG
-diff --git a/xen/arch/x86/hypercall.c b/xen/arch/x86/hypercall.c
-index 2370d31d3f..07e1a45ef5 100644
---- a/xen/arch/x86/hypercall.c
-+++ b/xen/arch/x86/hypercall.c
-@@ -75,7 +75,7 @@ const hypercall_args_t hypercall_args_table[NR_hypercalls] =
-     ARGS(dm_op, 3),
-     ARGS(hypfs_op, 5),
-     ARGS(mca, 1),
--    ARGS(arch_1, 1),
-+    ARGS(paging_domctl_cont, 1),
- };
- 
- #undef COMP
-diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
-index dd6b2bdf6f..6cc2636bf4 100644
---- a/xen/arch/x86/mm/paging.c
-+++ b/xen/arch/x86/mm/paging.c
-@@ -21,6 +21,7 @@
- 
- #include <xen/init.h>
- #include <xen/guest_access.h>
-+#include <xen/hypercall.h>
- #include <asm/paging.h>
- #include <asm/shadow.h>
- #include <asm/p2m.h>
-@@ -756,7 +757,7 @@ int paging_domctl(struct domain *d, struct xen_domctl_shadow_op *sc,
-         return shadow_domctl(d, sc, u_domctl);
- }
- 
--long paging_domctl_continuation(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-+long do_paging_domctl_cont(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
- {
-     struct xen_domctl op;
-     struct domain *d;
-diff --git a/xen/arch/x86/pv/callback.c b/xen/arch/x86/pv/callback.c
-index 42a6aa0831..6d60263dbc 100644
---- a/xen/arch/x86/pv/callback.c
-+++ b/xen/arch/x86/pv/callback.c
-@@ -207,9 +207,9 @@ long do_set_callbacks(unsigned long event_address,
- #include <compat/callback.h>
- #include <compat/nmi.h>
- 
--static long compat_register_guest_callback(struct compat_callback_register *reg)
-+static int compat_register_guest_callback(struct compat_callback_register *reg)
- {
--    long ret = 0;
-+    int ret = 0;
-     struct vcpu *curr = current;
- 
-     fixup_guest_code_selector(curr->domain, reg->address.cs);
-@@ -256,10 +256,10 @@ static long compat_register_guest_callback(struct compat_callback_register *reg)
-     return ret;
- }
- 
--static long compat_unregister_guest_callback(
-+static int compat_unregister_guest_callback(
-     struct compat_callback_unregister *unreg)
- {
--    long ret;
-+    int ret;
- 
-     switch ( unreg->type )
-     {
-@@ -283,9 +283,9 @@ static long compat_unregister_guest_callback(
-     return ret;
- }
- 
--long compat_callback_op(int cmd, XEN_GUEST_HANDLE(void) arg)
-+int compat_callback_op(int cmd, XEN_GUEST_HANDLE(const_void) arg)
- {
--    long ret;
-+    int ret;
- 
-     switch ( cmd )
-     {
-@@ -321,10 +321,10 @@ long compat_callback_op(int cmd, XEN_GUEST_HANDLE(void) arg)
-     return ret;
- }
- 
--long compat_set_callbacks(unsigned long event_selector,
--                          unsigned long event_address,
--                          unsigned long failsafe_selector,
--                          unsigned long failsafe_address)
-+int compat_set_callbacks(unsigned long event_selector,
-+                         unsigned long event_address,
-+                         unsigned long failsafe_selector,
-+                         unsigned long failsafe_address)
- {
-     struct compat_callback_register event = {
-         .type = CALLBACKTYPE_event,
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index 8ba65178e9..e0d74365f2 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -22,12 +22,12 @@
- #include <xen/domain_page.h>
- #include <xen/event.h>
- #include <xen/guest_access.h>
-+#include <xen/hypercall.h>
- #include <xen/iocap.h>
- 
- #include <asm/amd.h>
- #include <asm/debugreg.h>
- #include <asm/hpet.h>
--#include <asm/hypercall.h>
- #include <asm/mc146818rtc.h>
- #include <asm/pv/domain.h>
- #include <asm/pv/trace.h>
 diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
-index 16a77e3a35..7e99dbda34 100644
+index 7e99dbda34..abe4dd7839 100644
 --- a/xen/arch/x86/pv/hypercall.c
 +++ b/xen/arch/x86/pv/hypercall.c
-@@ -40,8 +40,6 @@
- #define COMPAT_CALL(x) HYPERCALL(x)
+@@ -62,7 +62,7 @@ const pv_hypercall_table_t pv_hypercall_table[] = {
+     COMPAT_CALL(xen_version),
+     HYPERCALL(console_io),
+     COMPAT_CALL(physdev_op_compat),
+-#ifdef CONFIG_GRANT_TABLE
++#if defined(CONFIG_GRANT_TABLE) || defined(CONFIG_PV_SHIM)
+     COMPAT_CALL(grant_table_op),
  #endif
+     HYPERCALL(vm_assist),
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index d9704121a7..9a4a257d4c 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -56,11 +56,6 @@ static DEFINE_SPINLOCK(balloon_lock);
  
--#define do_arch_1             paging_domctl_continuation
+ static struct platform_bad_page __initdata reserved_pages[2];
+ 
+-static long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-static long pv_shim_grant_table_op(unsigned int cmd,
+-                                   XEN_GUEST_HANDLE_PARAM(void) uop,
+-                                   unsigned int count);
 -
- const pv_hypercall_table_t pv_hypercall_table[] = {
-     COMPAT_CALL(set_trap_table),
-     HYPERCALL(mmu_update),
-@@ -102,11 +100,10 @@ const pv_hypercall_table_t pv_hypercall_table[] = {
- #endif
-     HYPERCALL(mca),
- #ifndef CONFIG_PV_SHIM_EXCLUSIVE
--    HYPERCALL(arch_1),
-+    HYPERCALL(paging_domctl_cont),
- #endif
- };
- 
--#undef do_arch_1
- #undef COMPAT_CALL
- #undef HYPERCALL
- 
-diff --git a/xen/arch/x86/pv/iret.c b/xen/arch/x86/pv/iret.c
-index 29a2f7cc45..90946c4629 100644
---- a/xen/arch/x86/pv/iret.c
-+++ b/xen/arch/x86/pv/iret.c
-@@ -48,7 +48,7 @@ static void async_exception_cleanup(struct vcpu *curr)
-         curr->arch.async_exception_state(trap).old_mask;
- }
- 
--unsigned long do_iret(void)
-+long do_iret(void)
+ /*
+  * By default give the shim 1MB of free memory slack. Some users may wish to
+  * tune this constants for better memory utilization. This can be achieved
+@@ -203,7 +198,6 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
+                               start_info_t *si)
  {
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-     struct iret_context iret_saved;
-@@ -105,7 +105,7 @@ unsigned long do_iret(void)
- }
+     bool compat = is_pv_32bit_domain(d);
+-    pv_hypercall_table_t *rw_pv_hypercall_table;
+     uint64_t param = 0;
+     long rc;
  
- #ifdef CONFIG_PV32
--unsigned int compat_iret(void)
-+int compat_iret(void)
- {
-     struct cpu_user_regs *regs = guest_cpu_user_regs();
-     struct vcpu *v = current;
-diff --git a/xen/arch/x86/pv/misc-hypercalls.c b/xen/arch/x86/pv/misc-hypercalls.c
-index 5dade24726..aaaf70eb63 100644
---- a/xen/arch/x86/pv/misc-hypercalls.c
-+++ b/xen/arch/x86/pv/misc-hypercalls.c
-@@ -28,12 +28,16 @@ long do_set_debugreg(int reg, unsigned long value)
-     return set_debugreg(current, reg, value);
- }
+@@ -249,23 +243,6 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
+         consoled_set_ring_addr(page);
+     }
  
--unsigned long do_get_debugreg(int reg)
-+long do_get_debugreg(int reg)
- {
--    unsigned long val;
--    int res = x86emul_read_dr(reg, &val, NULL);
+-    /*
+-     * Locate pv_hypercall_table[] (usually .rodata) in the directmap (which
+-     * is writeable) and insert some shim-specific hypercall handlers.
+-     */
+-    rw_pv_hypercall_table = __va(__pa(pv_hypercall_table));
+-    rw_pv_hypercall_table[__HYPERVISOR_event_channel_op].native =
+-        (hypercall_fn_t *)pv_shim_event_channel_op;
+-    rw_pv_hypercall_table[__HYPERVISOR_grant_table_op].native =
+-        (hypercall_fn_t *)pv_shim_grant_table_op;
 -
--    return res == X86EMUL_OKAY ? val : -ENODEV;
-+    /* Avoid implementation defined behavior casting unsigned long to long. */
-+    union {
-+        unsigned long val;
-+        long ret;
-+    } u;
-+    int res = x86emul_read_dr(reg, &u.val, NULL);
-+
-+    return res == X86EMUL_OKAY ? u.ret : -ENODEV;
+-#ifdef CONFIG_PV32
+-    rw_pv_hypercall_table[__HYPERVISOR_event_channel_op].compat =
+-        (hypercall_fn_t *)pv_shim_event_channel_op;
+-    rw_pv_hypercall_table[__HYPERVISOR_grant_table_op].compat =
+-        (hypercall_fn_t *)pv_shim_grant_table_op;
+-#endif
+-
+     guest = d;
+ 
+     /*
+@@ -435,7 +412,7 @@ int pv_shim_shutdown(uint8_t reason)
+     return 0;
  }
  
- long do_fpu_taskswitch(int set)
-diff --git a/xen/arch/x86/x86_64/platform_hypercall.c b/xen/arch/x86/x86_64/platform_hypercall.c
-index fbba893a47..f84252bac6 100644
---- a/xen/arch/x86/x86_64/platform_hypercall.c
-+++ b/xen/arch/x86/x86_64/platform_hypercall.c
-@@ -4,10 +4,10 @@
- 
- EMIT_FILE;
- 
-+#include <xen/hypercall.h>
- #include <xen/lib.h>
- #include <compat/platform.h>
- 
--DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
- #define xen_platform_op     compat_platform_op
- #define xen_platform_op_t   compat_platform_op_t
- #define do_platform_op(x)   compat_platform_op(_##x)
-diff --git a/xen/common/argo.c b/xen/common/argo.c
-index eaea7ba888..bf6aac7655 100644
---- a/xen/common/argo.c
-+++ b/xen/common/argo.c
-@@ -2207,13 +2207,13 @@ do_argo_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg1,
- }
- 
- #ifdef CONFIG_COMPAT
--long
--compat_argo_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg1,
--               XEN_GUEST_HANDLE_PARAM(void) arg2, unsigned long arg3,
--               unsigned long arg4)
-+int compat_argo_op(unsigned int cmd,
-+                   XEN_GUEST_HANDLE_PARAM(void) arg1,
-+                   XEN_GUEST_HANDLE_PARAM(void) arg2,
-+                   unsigned long arg3, unsigned long arg4)
+-static long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  {
-     struct domain *currd = current->domain;
--    long rc;
-+    int rc;
-     xen_argo_send_addr_t send_addr;
-     xen_argo_iov_t iovs[XEN_ARGO_MAXIOV];
-     compat_argo_iov_t compat_iovs[XEN_ARGO_MAXIOV];
-@@ -2267,7 +2267,7 @@ compat_argo_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg1,
+     struct domain *d = current->domain;
+     struct evtchn_close close;
+@@ -683,9 +660,9 @@ void pv_shim_inject_evtchn(unsigned int port)
+ # define compat_handle_okay guest_handle_okay
+ #endif
  
-     rc = sendv(currd, &send_addr.src, &send_addr.dst, iovs, niov, arg4);
-  out:
--    argo_dprintk("<-compat_argo_op(%u)=%ld\n", cmd, rc);
-+    argo_dprintk("<-compat_argo_op(%u)=%d\n", cmd, rc);
- 
+-static long pv_shim_grant_table_op(unsigned int cmd,
+-                                   XEN_GUEST_HANDLE_PARAM(void) uop,
+-                                   unsigned int count)
++long pv_shim_grant_table_op(unsigned int cmd,
++                            XEN_GUEST_HANDLE_PARAM(void) uop,
++                            unsigned int count)
+ {
+     struct domain *d = current->domain;
+     long rc = 0;
+@@ -845,6 +822,29 @@ static long pv_shim_grant_table_op(unsigned int cmd,
      return rc;
  }
-diff --git a/xen/common/kexec.c b/xen/common/kexec.c
-index c63db618a7..d7373233e1 100644
---- a/xen/common/kexec.c
-+++ b/xen/common/kexec.c
-@@ -1213,7 +1213,7 @@ static int kexec_status(XEN_GUEST_HANDLE_PARAM(void) uarg)
-     return !!test_bit(bit, &kexec_flags);
- }
  
--static int do_kexec_op_internal(unsigned long op,
-+static int do_kexec_op_internal(unsigned int op,
-                                 XEN_GUEST_HANDLE_PARAM(void) uarg,
-                                 bool_t compat)
++#ifndef CONFIG_GRANT_TABLE
++/* Thin wrapper(s) needed. */
++long do_grant_table_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop,
++                       unsigned int count)
++{
++    if ( likely(!pv_shim) )
++        return -ENOSYS;
++
++    return pv_shim_grant_table_op(cmd, uop, count);
++}
++
++#ifdef CONFIG_PV32
++int compat_grant_table_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop,
++                          unsigned int count)
++{
++    if ( likely(!pv_shim) )
++        return -ENOSYS;
++
++    return pv_shim_grant_table_op(cmd, uop, count);
++}
++#endif
++#endif
++
+ long pv_shim_cpu_up(void *data)
  {
-@@ -1265,13 +1265,13 @@ static int do_kexec_op_internal(unsigned long op,
-     return ret;
- }
+     struct vcpu *v = data;
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index 12006f592e..0e4973f800 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -32,6 +32,10 @@
+ #include <public/event_channel.h>
+ #include <xsm/xsm.h>
  
--long do_kexec_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) uarg)
-+long do_kexec_op(unsigned int op, XEN_GUEST_HANDLE_PARAM(void) uarg)
++#ifdef CONFIG_PV_SHIM
++#include <asm/guest.h>
++#endif
++
+ #define ERROR_EXIT(_errno)                                          \
+     do {                                                            \
+         gdprintk(XENLOG_WARNING,                                    \
+@@ -1190,6 +1194,11 @@ long do_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
  {
-     return do_kexec_op_internal(op, uarg, 0);
- }
+     int rc;
  
- #ifdef CONFIG_COMPAT
--int compat_kexec_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) uarg)
-+int compat_kexec_op(unsigned int op, XEN_GUEST_HANDLE_PARAM(void) uarg)
- {
-     return do_kexec_op_internal(op, uarg, 1);
- }
-diff --git a/xen/include/asm-arm/hypercall.h b/xen/include/asm-arm/hypercall.h
-index 9fd13c6b2c..cadafd76c7 100644
---- a/xen/include/asm-arm/hypercall.h
-+++ b/xen/include/asm-arm/hypercall.h
-@@ -2,7 +2,6 @@
- #define __ASM_ARM_HYPERCALL_H__
- 
- #include <public/domctl.h> /* for arch_do_domctl */
--int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- 
- long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
-                        XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
-diff --git a/xen/include/asm-x86/hypercall.h b/xen/include/asm-x86/hypercall.h
-index e614f7c78c..9c0981defd 100644
---- a/xen/include/asm-x86/hypercall.h
-+++ b/xen/include/asm-x86/hypercall.h
-@@ -11,6 +11,8 @@
- #include <public/arch-x86/xen-mca.h> /* for do_mca */
- #include <asm/paging.h>
- 
-+#define __HYPERVISOR_paging_domctl_cont __HYPERVISOR_arch_1
++#ifdef CONFIG_PV_SHIM
++    if ( unlikely(pv_shim) )
++        return pv_shim_event_channel_op(cmd, arg);
++#endif
 +
- typedef unsigned long hypercall_fn_t(
-     unsigned long, unsigned long, unsigned long,
-     unsigned long, unsigned long);
-@@ -88,7 +90,7 @@ do_set_debugreg(
-     int reg,
-     unsigned long value);
+     switch ( cmd )
+     {
+     case EVTCHNOP_alloc_unbound: {
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 4d8adf7faa..e5641608ad 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -45,6 +45,10 @@
+ #include <asm/flushtlb.h>
+ #include <asm/guest_atomics.h>
  
--extern unsigned long
-+extern long
- do_get_debugreg(
-     int reg);
- 
-@@ -102,17 +104,13 @@ do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc);
- extern long
- do_update_va_mapping(
-     unsigned long va,
--    u64 val64,
-+    uint64_t val64,
-     unsigned long flags);
- 
--extern long
--do_physdev_op(
--    int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
--
- extern long
- do_update_va_mapping_otherdomain(
-     unsigned long va,
--    u64 val64,
-+    uint64_t val64,
-     unsigned long flags,
-     domid_t domid);
- 
-@@ -126,7 +124,7 @@ do_mmuext_op(
- extern long do_callback_op(
-     int cmd, XEN_GUEST_HANDLE_PARAM(const_void) arg);
- 
--extern unsigned long
-+extern long
- do_iret(
-     void);
- 
-@@ -141,16 +139,18 @@ do_set_segment_base(
-     unsigned int which,
-     unsigned long base);
- 
-+long do_nmi_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
++#ifdef CONFIG_PV_SHIM
++#include <asm/guest.h>
++#endif
 +
-+long do_xenpmu_op(unsigned int op,
-+                  XEN_GUEST_HANDLE_PARAM(xen_pmu_params_t) arg);
+ /* Per-domain grant information. */
+ struct grant_table {
+     /*
+@@ -3543,6 +3547,11 @@ do_grant_table_op(
+     long rc;
+     unsigned int opaque_in = cmd & GNTTABOP_ARG_MASK, opaque_out = 0;
+ 
++#ifdef CONFIG_PV_SHIM
++    if ( unlikely(pv_shim) )
++        return pv_shim_grant_table_op(cmd, uop, count);
++#endif
 +
-+long do_paging_domctl_cont(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
-+
- #ifdef CONFIG_COMPAT
+     if ( (int)count < 0 )
+         return -EINVAL;
  
- #include <compat/arch-x86/xen.h>
- #include <compat/physdev.h>
+diff --git a/xen/include/asm-x86/pv/shim.h b/xen/include/asm-x86/pv/shim.h
+index 8a91f4f9df..6415f8068e 100644
+--- a/xen/include/asm-x86/pv/shim.h
++++ b/xen/include/asm-x86/pv/shim.h
+@@ -19,6 +19,7 @@
+ #ifndef __X86_PV_SHIM_H__
+ #define __X86_PV_SHIM_H__
  
--extern int
--compat_physdev_op(
--    int cmd,
--    XEN_GUEST_HANDLE_PARAM(void) arg);
--
- extern int
- compat_common_vcpu_op(
-     int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg);
-@@ -161,17 +161,14 @@ extern int compat_mmuext_op(
-     XEN_GUEST_HANDLE_PARAM(uint) pdone,
-     unsigned int foreigndom);
++#include <xen/hypercall.h>
+ #include <xen/types.h>
  
--extern int compat_platform_op(
--    XEN_GUEST_HANDLE_PARAM(void) u_xenpf_op);
--
--extern long compat_callback_op(
--    int cmd, XEN_GUEST_HANDLE(void) arg);
-+extern int compat_callback_op(
-+    int cmd, XEN_GUEST_HANDLE(const_void) arg);
+ #if defined(CONFIG_PV_SHIM_EXCLUSIVE)
+@@ -45,6 +46,8 @@ domid_t get_initial_domain_id(void);
+ uint64_t pv_shim_mem(uint64_t avail);
+ void pv_shim_fixup_e820(struct e820map *e820);
+ const struct platform_bad_page *pv_shim_reserved_pages(unsigned int *size);
++typeof(do_event_channel_op) pv_shim_event_channel_op;
++typeof(do_grant_table_op) pv_shim_grant_table_op;
  
- extern int compat_update_va_mapping(
--    unsigned int va, u32 lo, u32 hi, unsigned int flags);
-+    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags);
+ #else
  
- extern int compat_update_va_mapping_otherdomain(
--    unsigned int va, u32 lo, u32 hi, unsigned int flags, domid_t domid);
-+    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags, domid_t domid);
- 
- DEFINE_XEN_GUEST_HANDLE(trap_info_compat_t);
- extern int compat_set_trap_table(XEN_GUEST_HANDLE(trap_info_compat_t) traps);
-@@ -180,13 +177,13 @@ extern int compat_set_gdt(
-     XEN_GUEST_HANDLE_PARAM(uint) frame_list, unsigned int entries);
- 
- extern int compat_update_descriptor(
--    u32 pa_lo, u32 pa_hi, u32 desc_lo, u32 desc_hi);
-+    uint32_t pa_lo, uint32_t pa_hi, uint32_t desc_lo, uint32_t desc_hi);
- 
--extern unsigned int compat_iret(void);
-+extern int compat_iret(void);
- 
- extern int compat_nmi_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- 
--extern long compat_set_callbacks(
-+extern int compat_set_callbacks(
-     unsigned long event_selector, unsigned long event_address,
-     unsigned long failsafe_selector, unsigned long failsafe_address);
- 
-diff --git a/xen/include/asm-x86/paging.h b/xen/include/asm-x86/paging.h
-index 308f1115dd..9cc5d383a4 100644
---- a/xen/include/asm-x86/paging.h
-+++ b/xen/include/asm-x86/paging.h
-@@ -234,9 +234,6 @@ int paging_domctl(struct domain *d, struct xen_domctl_shadow_op *sc,
-                   XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl,
-                   bool_t resuming);
- 
--/* Helper hypercall for dealing with continuations. */
--long paging_domctl_continuation(XEN_GUEST_HANDLE_PARAM(xen_domctl_t));
--
- /* Call when destroying a vcpu/domain */
- void paging_vcpu_teardown(struct vcpu *v);
- int paging_teardown(struct domain *d);
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index 30558d3c61..9266bc86e9 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -114,11 +114,6 @@ common_vcpu_op(int cmd,
-     struct vcpu *v,
-     XEN_GUEST_HANDLE_PARAM(void) arg);
- 
--extern long
--do_nmi_op(
--    unsigned int cmd,
--    XEN_GUEST_HANDLE_PARAM(void) arg);
--
- extern long
- do_hvm_op(
-     unsigned long op,
-@@ -126,13 +121,15 @@ do_hvm_op(
- 
- extern long
- do_kexec_op(
--    unsigned long op,
-+    unsigned int op,
-     XEN_GUEST_HANDLE_PARAM(void) uarg);
- 
- extern long
- do_xsm_op(
-     XEN_GUEST_HANDLE_PARAM(void) u_xsm_op);
- 
-+long do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
-+
- #ifdef CONFIG_ARGO
- extern long do_argo_op(
-     unsigned int cmd,
-@@ -145,9 +142,6 @@ extern long do_argo_op(
- extern long
- do_xenoprof_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
- 
--extern long
--do_xenpmu_op(unsigned int op, XEN_GUEST_HANDLE_PARAM(xen_pmu_params_t) arg);
--
- extern long
- do_dm_op(
-     domid_t domid,
-@@ -198,21 +192,27 @@ compat_sched_op(
- 
- extern int
- compat_set_timer_op(
--    u32 lo,
--    s32 hi);
-+    uint32_t lo,
-+    int32_t hi);
- 
- extern int compat_xsm_op(
-     XEN_GUEST_HANDLE_PARAM(void) op);
- 
--extern int compat_kexec_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) uarg);
-+extern int compat_kexec_op(unsigned int op, XEN_GUEST_HANDLE_PARAM(void) uarg);
- 
- DEFINE_XEN_GUEST_HANDLE(multicall_entry_compat_t);
- extern int compat_multicall(
-     XEN_GUEST_HANDLE_PARAM(multicall_entry_compat_t) call_list,
-     uint32_t nr_calls);
- 
-+int compat_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
-+
-+typedef struct compat_platform_op compat_platform_op_t;
-+DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
-+int compat_platform_op(XEN_GUEST_HANDLE_PARAM(compat_platform_op_t) u_xenpf_op);
-+
- #ifdef CONFIG_ARGO
--extern long compat_argo_op(
-+extern int compat_argo_op(
-     unsigned int cmd,
-     XEN_GUEST_HANDLE_PARAM(void) arg1,
-     XEN_GUEST_HANDLE_PARAM(void) arg2,
 -- 
 2.26.2
 
