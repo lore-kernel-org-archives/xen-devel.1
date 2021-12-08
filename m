@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11911C43217
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Dec 2021 15:56:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.242357.419208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B50C4332F
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Dec 2021 15:56:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.242362.419257 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muzIk-0001iP-3q; Wed, 08 Dec 2021 15:56:14 +0000
+	id 1muzIo-0002p0-Np; Wed, 08 Dec 2021 15:56:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 242357.419208; Wed, 08 Dec 2021 15:56:13 +0000
+Received: by outflank-mailman (output) from mailman id 242362.419257; Wed, 08 Dec 2021 15:56:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1muzIj-0001gA-Md; Wed, 08 Dec 2021 15:56:13 +0000
-Received: by outflank-mailman (input) for mailman id 242357;
- Wed, 08 Dec 2021 15:56:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1muzIn-0002mW-Rh; Wed, 08 Dec 2021 15:56:17 +0000
+Received: by outflank-mailman (input) for mailman id 242362;
+ Wed, 08 Dec 2021 15:56:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=J2Or=QZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1muzIi-0001Lz-Ga
- for xen-devel@lists.xenproject.org; Wed, 08 Dec 2021 15:56:12 +0000
+ id 1muzIl-0001LM-6n
+ for xen-devel@lists.xenproject.org; Wed, 08 Dec 2021 15:56:15 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5d38a5f9-583f-11ec-9d12-4777fae47e2b;
- Wed, 08 Dec 2021 16:56:11 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5e4440f7-583f-11ec-a831-37629979565c;
+ Wed, 08 Dec 2021 16:56:13 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1519A218A4;
- Wed,  8 Dec 2021 15:56:11 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D24A3218B5;
+ Wed,  8 Dec 2021 15:56:12 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CCF3213C8E;
- Wed,  8 Dec 2021 15:56:10 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A411713C8E;
+ Wed,  8 Dec 2021 15:56:12 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id QFTgMJrVsGHIXwAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 08 Dec 2021 15:56:10 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id KEngJpzVsGHIXwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 08 Dec 2021 15:56:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,85 +53,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d38a5f9-583f-11ec-9d12-4777fae47e2b
+X-Inumbo-ID: 5e4440f7-583f-11ec-a831-37629979565c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1638978971; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1638978972; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=uDgmq3e5kxnaWyOpwcnlt0BHxsMjaRjGQqbPnSZ9GF0=;
-	b=stH2mzWlG4CKR9NjdwiHUBQ+EoTU9Vz5DsGuKvtdNthKTam502EsC7Qd8vhmE0ECMBaWE9
-	k8+DFhFUVj3fuO0TX0m41q9aap2m4w2qSi8UfMHvZubYPGTjAdbxzvJ6wsEoyqflim+GZl
-	7lcaMyXhxFlZddaLyWpTP8tMTFmvapE=
+	bh=dJr8Fztf5T8hrG+mezGu/5MmsW11cX9HygUkaO7iFT0=;
+	b=MxPCuDts/lw/W3BQmkzM22HUXyY30mCR7tGlzT6OvNhK+v32RBcn/XQ5fxaD7NNgltGK68
+	Rs2Sr2CF6djMdkWUUZGU78oOxgPyKyOkQocT0+4Z9R77TfCFYoCEXCFvwdIz6QfTwxc2Yl
+	LiLWg+d2Bmf3Jv4Bj3bSSU9FS13T2aw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 04/13] xen: include compat/platform.h from hypercall.h
-Date: Wed,  8 Dec 2021 16:55:57 +0100
-Message-Id: <20211208155606.20029-5-jgross@suse.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 11/13] xen/x86: add hypercall performance counters for hvm, correct pv
+Date: Wed,  8 Dec 2021 16:56:04 +0100
+Message-Id: <20211208155606.20029-12-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211208155606.20029-1-jgross@suse.com>
 References: <20211208155606.20029-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The definition of compat_platform_op_t is in compat/platform.h
-already, so include that file from hypercall.h instead of repeating
-the typedef.
+The HVM hypercall handler is missing incrementing the per hypercall
+counters. Add that.
 
-This allows to remove the related include statement from
-arch/x86/x86_64/platform_hypercall.c.
+The counters for PV are handled wrong, as they are not using
+perf_incra() with the number of the hypercall as index, but are
+incrementing the first hypercall entry (set_trap_table) for each
+hypercall. Fix that.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V3:
-- new patch
----
- xen/arch/x86/x86_64/platform_hypercall.c | 1 -
- xen/include/xen/hypercall.h              | 4 +++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ xen/arch/x86/hvm/hypercall.c | 2 ++
+ xen/arch/x86/pv/hypercall.c  | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/x86_64/platform_hypercall.c b/xen/arch/x86/x86_64/platform_hypercall.c
-index f84252bac6..7631058cce 100644
---- a/xen/arch/x86/x86_64/platform_hypercall.c
-+++ b/xen/arch/x86/x86_64/platform_hypercall.c
-@@ -6,7 +6,6 @@ EMIT_FILE;
+diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
+index 5952172476..37f60238d2 100644
+--- a/xen/arch/x86/hvm/hypercall.c
++++ b/xen/arch/x86/hvm/hypercall.c
+@@ -200,6 +200,8 @@ int hvm_hypercall(struct cpu_user_regs *regs)
+         ioreq_signal_mapcache_invalidate();
+     }
  
- #include <xen/hypercall.h>
- #include <xen/lib.h>
--#include <compat/platform.h>
++    perfc_incra(hypercalls, eax);
++
+     return curr->hcall_preempted ? HVM_HCALL_preempted : HVM_HCALL_completed;
+ }
  
- #define xen_platform_op     compat_platform_op
- #define xen_platform_op_t   compat_platform_op_t
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index 9266bc86e9..459172f6a5 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -15,6 +15,9 @@
- #include <public/version.h>
- #include <public/pmu.h>
- #include <public/hvm/dm_op.h>
-+#ifdef CONFIG_COMPAT
-+#include <compat/platform.h>
-+#endif
- #include <asm/hypercall.h>
- #include <xsm/xsm.h>
+diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
+index ef92266620..bf64bb41bb 100644
+--- a/xen/arch/x86/pv/hypercall.c
++++ b/xen/arch/x86/pv/hypercall.c
+@@ -102,7 +102,7 @@ _pv_hypercall(struct cpu_user_regs *regs, bool compat)
+     if ( curr->hcall_preempted )
+         regs->rip -= 2;
  
-@@ -207,7 +210,6 @@ extern int compat_multicall(
+-    perfc_incr(hypercalls);
++    perfc_incra(hypercalls, eax);
+ }
  
- int compat_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- 
--typedef struct compat_platform_op compat_platform_op_t;
- DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
- int compat_platform_op(XEN_GUEST_HANDLE_PARAM(compat_platform_op_t) u_xenpf_op);
- 
+ enum mc_disposition pv_do_multicall_call(struct mc_state *state)
 -- 
 2.26.2
 
