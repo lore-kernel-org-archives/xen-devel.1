@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8663C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5750C4332F
 	for <xen-devel@archiver.kernel.org>; Thu,  9 Dec 2021 07:29:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.242714.419761 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.242717.419794 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvDrn-0006rb-5l; Thu, 09 Dec 2021 07:29:23 +0000
+	id 1mvDrr-0007et-5f; Thu, 09 Dec 2021 07:29:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 242714.419761; Thu, 09 Dec 2021 07:29:23 +0000
+Received: by outflank-mailman (output) from mailman id 242717.419794; Thu, 09 Dec 2021 07:29:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvDrn-0006rU-2l; Thu, 09 Dec 2021 07:29:23 +0000
-Received: by outflank-mailman (input) for mailman id 242714;
- Thu, 09 Dec 2021 07:29:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mvDrr-0007em-1e; Thu, 09 Dec 2021 07:29:27 +0000
+Received: by outflank-mailman (input) for mailman id 242717;
+ Thu, 09 Dec 2021 07:29:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5bTN=Q2=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1mvDrm-0006rO-AU
- for xen-devel@lists.xenproject.org; Thu, 09 Dec 2021 07:29:22 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b9e8389a-58c1-11ec-a831-37629979565c;
- Thu, 09 Dec 2021 08:29:21 +0100 (CET)
-Received: by mail-lj1-x22c.google.com with SMTP id i63so7603961lji.3
- for <xen-devel@lists.xenproject.org>; Wed, 08 Dec 2021 23:29:21 -0800 (PST)
+ id 1mvDrp-00075S-7C
+ for xen-devel@lists.xenproject.org; Thu, 09 Dec 2021 07:29:25 +0000
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [2a00:1450:4864:20::22d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bbcbace7-58c1-11ec-9d12-4777fae47e2b;
+ Thu, 09 Dec 2021 08:29:24 +0100 (CET)
+Received: by mail-lj1-x22d.google.com with SMTP id u22so7572069lju.7
+ for <xen-devel@lists.xenproject.org>; Wed, 08 Dec 2021 23:29:24 -0800 (PST)
 Received: from localhost.localdomain (host-176-36-245-220.b024.la.net.ua.
  [176.36.245.220])
- by smtp.gmail.com with ESMTPSA id f13sm445069lfe.297.2021.12.08.23.29.19
+ by smtp.gmail.com with ESMTPSA id f13sm445069lfe.297.2021.12.08.23.29.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Dec 2021 23:29:19 -0800 (PST)
+ Wed, 08 Dec 2021 23:29:23 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b9e8389a-58c1-11ec-a831-37629979565c
+X-Inumbo-ID: bbcbace7-58c1-11ec-9d12-4777fae47e2b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=71jnf3En8LBFx/Mef4yf4b2O8F4/RnDy3EDB+YBJx/w=;
-        b=SMBybiqofbMs4uiT2mldWlze+jvmjC2yl52/MxGjk4NyT+Imh2v0CtMoDpRwq/RqgZ
-         psz3Kg9u+ArhWH4xUnxSObdTBoBK7rEBbD3kMIQ36g5htdt1pBqr9KLW4B2wueKDWq+K
-         8o2/V3Ggn1jjB2w0p0skJtX6yx8Gv9EZNIAjRbnc4fjoLejVTtGj0jH2U+aT+Oz7v+53
-         br2ANBZieUhmad+8dZSH+5rPu4ghmCHQVcji6byCBKVaFSAQk8xKBVc0NlhK9dS3BmQC
-         oyfdtJboQ/856Bu0BkBCcJWXsLsWsGl2ksNxNW4TA/2pFHz3dKzC8dYm2wDzXXR22NtO
-         /6+Q==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=5zMEfsrDMgGvbxJE8yizewP5LPSer3MoFR6+sMloccU=;
+        b=nwSZwsWRKgJcOzhiHDaN4norjoJ1YzrXrGfYBPtNd/KBeTeU55r2WkRIY7FcwfkxEl
+         3OdVmMtxVg5KGNCEiLnMMnFY8VPF3fwNuPnrxOLOWS8XTL4Wf14v2uo8XQhwS6aqzD/2
+         GDOa8B7wR6BHtyyF7syfE7V0VW0VrR3RdjMd81J9XarQOE49cL4eHleMJgegOwmDO3vJ
+         QYCV3mF0yAAg/+rn6bZsllA5vmMEF/ev0MggvvLTGMO2FhZt2eYqouG6sCuclbN5sKIq
+         4DpEWLsl8kB/trlQ0zgMTPJN45daqmiY1prZ9pAA4PJuZWw9zqYvG28YCmVaC3PBxmVD
+         DZRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=71jnf3En8LBFx/Mef4yf4b2O8F4/RnDy3EDB+YBJx/w=;
-        b=TlxGXHLYgWkhYsW45r+s7RWSvUFOoHmHa3qCXEIIaQHFZN/8jijw2CagVgC8mkX6QU
-         hUBka2to9hceZDkMuWRBBiSxjb6k6dCOY/Z3L8t90Br2Xta7ZD9DhmMB1uq+aqoN5Smw
-         QwLIHmeI6ykXfnA44u750ja4+qX9leL0kR2vGF2VQvDbqBK8hYpZFaCtusJYqOwaG0rl
-         ztX1IvPX0LyWy0NLcHS0mOwCxlw2H5+rHQpI7DWZSFMaD36wlr28VyERrkHn7stWb19X
-         5ZIrtkz3OW2cWU5U7zDYeczPQ9BiAhGlHQca/uRoUw66EehqK50+96qdmCkqTcqgPKPh
-         RMWg==
-X-Gm-Message-State: AOAM533xdorIh7uaRUGQ6hgkf2TYdujc7+KMArghn9sgIdC37LL2BGkm
-	7G2a9wAWceoRvVnGOzyVbFBSKOYIjMwJmw==
-X-Google-Smtp-Source: ABdhPJzXKTAVRsqmGQ3QvIJ4KNgTMRLe5PkFOuhVD/atU6CNXHYal7E+fvMGdNQvIYupefRmI7jx1g==
-X-Received: by 2002:a2e:5c5:: with SMTP id 188mr4592336ljf.257.1639034960580;
-        Wed, 08 Dec 2021 23:29:20 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=5zMEfsrDMgGvbxJE8yizewP5LPSer3MoFR6+sMloccU=;
+        b=KHze6+SPyXlB4YIyB5o/jn10wj2X5M2Ub8l6X9aA1nWoi1cBxochsenX/N/U7Ui/5i
+         GruRuDikLs9nbv2xbDcRcZnrUOUamicMrTKZX9z24EHCuzx3niO03Dd/+gEEtIL6HQmw
+         6q6/NmXVDq0oegQrYQSBb98XbT4v3X0ZVsAYXeEJFO8aoa7E6085zCTAkcjHauyTeI2z
+         bLKwVwEmwidSvu8/g/nHdxmUyt1epVQD+PB3R5wUbnMnIHJ0OFfSEl+qfRhH71gWo5Ml
+         vKn+eVRDkFSRFxIrblNc34H9ylS1wbuW/YbXDC3x6SMwhPItmYMr8IKMUOSRK11vlznU
+         5YMQ==
+X-Gm-Message-State: AOAM533Jit4jLC5xiNhyBJ+XZAo/cUWMyjGA2WS0jADkmkHawiVttnyj
+	adz2JFrnPC8nCxTxsAryxzkVpOKBl+0eHg==
+X-Google-Smtp-Source: ABdhPJzJNMSzJKdK5Un4XS19D0FwAW7BsnV1snLB/1oEAMUDNtrotAwvFJyvrKGJFjYrYJoKKgtucg==
+X-Received: by 2002:a2e:b528:: with SMTP id z8mr4648866ljm.178.1639034963970;
+        Wed, 08 Dec 2021 23:29:23 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -83,61 +83,55 @@ Cc: julien@xen.org,
 	artem_mygaiev@epam.com,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v8 0/4] PCI devices passthrough on Arm, part 2
-Date: Thu,  9 Dec 2021 09:29:14 +0200
-Message-Id: <20211209072918.460902-1-andr2000@gmail.com>
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v8 3/4] xen/arm: account IO handler for emulated PCI host bridge
+Date: Thu,  9 Dec 2021 09:29:17 +0200
+Message-Id: <20211209072918.460902-4-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211209072918.460902-1-andr2000@gmail.com>
+References: <20211209072918.460902-1-andr2000@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Hi, all!
+At the moment, we always allocate an extra 16 slots for IO handlers
+(see MAX_IO_HANDLER). So while adding an IO trap handler for the emulated
+PCI host bridge we are not breaking anything, but we have a latent bug
+as the maximum number of IOs may be exceeded.
+Fix this by explicitly telling that we have an additional IO handler, so it is
+accounted.
 
-This is an assorted series of patches which aim is to make some further
-basis for PCI passthrough on Arm support. The series continues the work
-published earlier by Arm [1] and adds new helpers and clears the way for
-vPCI changes which will follow.
+Fixes: d59168dc05a5 ("xen/arm: Enable the existing x86 virtual PCI support for ARM")
 
-RFC is at [2], [3]. Design presentation can be found at [4].
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
+---
+Since v7:
+- updated comment
+New in v7
+---
+ xen/arch/arm/vpci.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-I have removed patch
-[PATCH v6 5/7] xen/arm: do not map IRQs and memory for disabled devices
-as it seems that this needs more time for decision on how to achive
-that.
-
-I have also added a new patch
-[PATCH v7 4/7] xen/arm: account IO handler for emulated PCI host bridge
-with a tiny latent bug fix.
-
-This series contains all the patches which are left un-committed yet.
-
-Thank you,
-Oleksandr
-
-[1] https://patchwork.kernel.org/project/xen-devel/list/?series=558681
-[2] https://lists.xenproject.org/archives/html/xen-devel/2020-07/msg01184.html
-[3] https://lists.xenproject.org/archives/html/xen-devel/2020-07/threads.html#01184
-[4] https://static.sched.com/hosted_files/xen2021/e4/PCI_Device_Passthrough_On_Arm.pdf
-
-Oleksandr Andrushchenko (4):
-  xen/arm: add pci-domain for disabled devices
-  xen/arm: setup MMIO range trap handlers for hardware domain
-  xen/arm: account IO handler for emulated PCI host bridge
-  xen/arm: do not map PCI ECAM and MMIO space to Domain-0's p2m
-
- xen/arch/arm/domain.c              |   2 +
- xen/arch/arm/domain_build.c        | 132 ++++++++++++++++++++---------
- xen/arch/arm/pci/ecam.c            |  14 +++
- xen/arch/arm/pci/pci-host-common.c |  77 ++++++++++++++++-
- xen/arch/arm/pci/pci-host-zynqmp.c |   1 +
- xen/arch/arm/vpci.c                |  85 ++++++++++++++++---
- xen/arch/arm/vpci.h                |   6 ++
- xen/include/asm-arm/pci.h          |  22 +++++
- xen/include/asm-arm/setup.h        |  13 +++
- 9 files changed, 298 insertions(+), 54 deletions(-)
-
+diff --git a/xen/arch/arm/vpci.c b/xen/arch/arm/vpci.c
+index 1564448c6c8d..84aaaaebd69d 100644
+--- a/xen/arch/arm/vpci.c
++++ b/xen/arch/arm/vpci.c
+@@ -124,7 +124,11 @@ unsigned int domain_vpci_get_num_mmio_handlers(struct domain *d)
+         return ret < 0 ? 0 : ret;
+     }
+ 
+-    return 0;
++    /*
++     * For guests each host bridge requires one region to cover the
++     * configuration space. At the moment, we only expose a single host bridge.
++     */
++    return 1;
+ }
+ 
+ /*
 -- 
 2.25.1
 
