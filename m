@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82CCFC4332F
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Dec 2021 20:06:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.243309.420884 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA38C43219
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Dec 2021 20:06:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.243312.420922 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvPfl-0004bR-32; Thu, 09 Dec 2021 20:05:45 +0000
+	id 1mvPfo-0005cN-V5; Thu, 09 Dec 2021 20:05:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 243309.420884; Thu, 09 Dec 2021 20:05:45 +0000
+Received: by outflank-mailman (output) from mailman id 243312.420922; Thu, 09 Dec 2021 20:05:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvPfk-0004aK-TZ; Thu, 09 Dec 2021 20:05:44 +0000
-Received: by outflank-mailman (input) for mailman id 243309;
- Thu, 09 Dec 2021 20:05:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mvPfo-0005bT-Ny; Thu, 09 Dec 2021 20:05:48 +0000
+Received: by outflank-mailman (input) for mailman id 243312;
+ Thu, 09 Dec 2021 20:05:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=3OcP=Q2=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mvPfj-0004Xd-Kc
- for xen-devel@lists.xenproject.org; Thu, 09 Dec 2021 20:05:43 +0000
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [2a00:1450:4864:20::12c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 630f33d4-592b-11ec-a831-37629979565c;
- Thu, 09 Dec 2021 21:05:42 +0100 (CET)
-Received: by mail-lf1-x12c.google.com with SMTP id k37so14217604lfv.3
- for <xen-devel@lists.xenproject.org>; Thu, 09 Dec 2021 12:05:42 -0800 (PST)
+ id 1mvPfm-0004Xc-PU
+ for xen-devel@lists.xenproject.org; Thu, 09 Dec 2021 20:05:46 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 653c11a9-592b-11ec-9d12-4777fae47e2b;
+ Thu, 09 Dec 2021 21:05:45 +0100 (CET)
+Received: by mail-lf1-x133.google.com with SMTP id cf39so2064278lfb.8
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Dec 2021 12:05:45 -0800 (PST)
 Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id o12sm87371lft.134.2021.12.09.12.05.41
+ by smtp.gmail.com with ESMTPSA id o12sm87371lft.134.2021.12.09.12.05.44
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 09 Dec 2021 12:05:41 -0800 (PST)
+ Thu, 09 Dec 2021 12:05:45 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,33 +45,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 630f33d4-592b-11ec-a831-37629979565c
+X-Inumbo-ID: 653c11a9-592b-11ec-9d12-4777fae47e2b
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=CS9aK8CojMqdb/AcA3jHRSI+mrWqH9RveIgOpizvY9U=;
-        b=nJ6YIRKoVQppvpal4aj4p6po8BZEoe2W0v2EiJOt2lz9DD/MZQz4YOGAFga6byn+PS
-         bpoNN7jJzU6n+1ymG3q5nkDMcZyj6qh8VLD5qe9Y82B5S10kXdLAgf8PzlZT01cHKuhA
-         JXaYSWqP6JLSTiUSi3EyD3xZ+LiV/d/6rJhFyPL5A2n9Qlamzj6EkCbfiO7uXKvO0fDC
-         dDKM/bTNoo7nV/iChOSyPjaEfVz8kw6VsAW++5dxIl2Ed/EHaOmZKJK0QgUPBpIFINJw
-         0i+XdqKk7zJC+3HWynXOo7JID118X95q9twABJWbrjnKOuX9i34ZaQ8aTIjd0bmhB/4Y
-         F9XA==
+        bh=wUGrgrAhSp00M+b8z9JNtCABbdhrenjEQ9qiU7Kp+fE=;
+        b=jWc9wxTYHdqYtFuA3EuCo7h3BpGS363+/BKxA5rQ3cK7v9JSmq+KDfWhMZ5nxffD78
+         O+IAzxYsXqzcb4CpKQY3zvXEk3wabMycLoHM9HUVF0hv4sKedWBrOhTj4sxrjCk6OJLh
+         2+5G4UMZ/DjD3K/ziMUEaEqkRprnYXh3SXr2zvFaOq/i6MZFzIWUFiC1if1dSuQsK3cB
+         CsXMX7/5EaA5BLRTg+uda1C7EO5EitsbsN0mrbjVq2jH/IFyO6W/DXUNmA4Onw0OfyXl
+         apoUCgdr6WTP+ko9G865vRawOTkNbQD4tDoeuqB+jjE5fERhUWBrFAtoGThXNyt0eDR1
+         UUTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=CS9aK8CojMqdb/AcA3jHRSI+mrWqH9RveIgOpizvY9U=;
-        b=umZOmpncV5DvbBxEb6oHOlz9kOa+EJ59snXEfx5Oy291ItQ2SyfpA4uv77TgZwEYSy
-         oIEQMnMakZNaEpl8r62MUXf88K8gTGBHVWCO/OoT235i7fmmzqmJmPXNyrNSJsLAFwyJ
-         UUXiT3D5qA9Lpevd7tg9YwG6yTpv1PXK8BIcfcrLTqEq/vAJmyE2lUp8IUFvQ3UyYP/x
-         MSqx+3NQ9OowqNvEkRhE3kboMCLfYs3/gfETBU5qREEQ8VDikS3ohNv7AaSr9YfesIVF
-         S+/eF1KCXHHbSc3fNVIZj1JPf/fw30/YMs+WupmVeOHOyeiVbUUagxejl1BBvtz99CAh
-         YdhA==
-X-Gm-Message-State: AOAM531GgODPNySFrr8+i1Qh1byPDdkoJ+9YYe+nAb/zIIXYplTOdTVv
-	ohlsDRll3ak3kB0IxTBnh2C9f9oJS+7u4Q==
-X-Google-Smtp-Source: ABdhPJxerwr28Tg8c06W+QUK8C5H1O0rKZUkku9U1Odi1NykdsC2f8brvhJBN6XBJ2EuJVFZAjwx2Q==
-X-Received: by 2002:a05:6512:2312:: with SMTP id o18mr8160079lfu.333.1639080342265;
-        Thu, 09 Dec 2021 12:05:42 -0800 (PST)
+        bh=wUGrgrAhSp00M+b8z9JNtCABbdhrenjEQ9qiU7Kp+fE=;
+        b=IIF4EkZoxbUILk72XBhG9B0mUWQHNUk4th2p5gtXgu3+JA92hjn5YA8/nV1VQEtr5N
+         oKAc+7pzZQ5hZ92/P2YjEzypWnxcTJ9vkpUlr4oXwDd1BaPuZS+ZQVmRVDxsIZJvIDu0
+         J5Fe8Bm//bfsPdYfYDFDlPjobk8kzN0PZvD0Jff1hvY2ZKTeQb3GA0El1bannE/ctkCP
+         zIHvzCD8YJDk/czFZo3/Kx2LC9sGFWQDrSHLydC31RNsK5u8T8QbhwcJ8dooPZAbEeBq
+         gT5Wmry+I5B/xoo/bK3FwIj47WR5HbrTGRB1urk0dgRMNZwEYrFUQi5Aa3iip/skdzvH
+         nyQQ==
+X-Gm-Message-State: AOAM530wZ59Cv7cGiN/1m57t8tDVa+Wow2NfNIvJrbH2Z/vC4FZSwRYa
+	mumV6G7eAUjgSqLD5kDToOQN1HNLQOPcAA==
+X-Google-Smtp-Source: ABdhPJwxNCCMm538u0QAdLmoN2XRwAivi00DvNgNn4UUQkZeWmYpD/N/YdNzX3nmLM69YRGUxPGnEw==
+X-Received: by 2002:a05:6512:3d16:: with SMTP id d22mr7845851lfv.523.1639080345433;
+        Thu, 09 Dec 2021 12:05:45 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org
@@ -80,46 +80,245 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH V4 1/6] xen/unpopulated-alloc: Drop check for virt_addr_valid() in fill_list()
-Date: Thu,  9 Dec 2021 22:05:31 +0200
-Message-Id: <1639080336-26573-2-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V4 4/6] xen/unpopulated-alloc: Add mechanism to use Xen resource
+Date: Thu,  9 Dec 2021 22:05:34 +0200
+Message-Id: <1639080336-26573-5-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1639080336-26573-1-git-send-email-olekstysh@gmail.com>
 References: <1639080336-26573-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-If memremap_pages() succeeds the range is guaranteed to have proper page
-table, there is no need for an additional virt_addr_valid() check.
+The main reason of this change is that unpopulated-alloc
+code cannot be used in its current form on Arm, but there
+is a desire to reuse it to avoid wasting real RAM pages
+for the grant/foreign mappings.
+
+The problem is that system "iomem_resource" is used for
+the address space allocation, but the really unallocated
+space can't be figured out precisely by the domain on Arm
+without hypervisor involvement. For example, not all device
+I/O regions are known by the time domain starts creating
+grant/foreign mappings. And following the advise from
+"iomem_resource" we might end up reusing these regions by
+a mistake. So, the hypervisor which maintains the P2M for
+the domain is in the best position to provide unused regions
+of guest physical address space which could be safely used
+to create grant/foreign mappings.
+
+Introduce new helper arch_xen_unpopulated_init() which purpose
+is to create specific Xen resource based on the memory regions
+provided by the hypervisor to be used as unused space for Xen
+scratch pages. If arch doesn't define arch_xen_unpopulated_init()
+the default "iomem_resource" will be used.
+
+Update the arguments list of allocate_resource() in fill_list()
+to always allocate a region from the hotpluggable range
+(maximum possible addressable physical memory range for which
+the linear mapping could be created). If arch doesn't define
+arch_get_mappable_range() the default range (0,-1) will be used.
+
+The behaviour on x86 won't be changed by current patch as both
+arch_xen_unpopulated_init() and arch_get_mappable_range()
+are not implemented for it.
+
+Also fallback to allocate xenballooned pages (balloon out RAM
+pages) if we do not have any suitable resource to work with
+(target_resource is invalid) and as the result we won't be able
+to provide unpopulated pages on a request.
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes RFC -> V2:
    - new patch, instead of
-     "[RFC PATCH 1/2] arm64: mm: Make virt_addr_valid to check for pfn_valid again"
+    "[RFC PATCH 2/2] xen/unpopulated-alloc: Query hypervisor to provide unallocated space"
 
 Changes V2 -> V3:
-   - add Boris' R-b
+   - update patch description and comments in code
+   - modify arch_xen_unpopulated_init() to pass target_resource as an argument
+     and update default helper to assign iomem_resource to it, also drop
+     xen_resource as it will be located in arch code in the future
+   - allocate region from hotpluggable range instead of hardcoded range (0,-1)
+     in fill_list()
+   - use %pR specifier in error message
+   - do not call unpopulated_init() at runtime from xen_alloc_unpopulated_pages(),
+     drop an extra helper and call arch_xen_unpopulated_init() directly from __init()
+   - include linux/ioport.h instead of forward declaration of struct resource
+   - replace insert_resource() with request_resource() in fill_list()
+   - add __init specifier to arch_xen_unpopulated_init()
 
 Changes V3 -> V4:
-   - no changes
+   - add Stefano's R-b
+   - fix copy-paste error in fill_list(), must be "if (!tmp_res)" instead of
+     "if (!res)" in string 66
+   - add unpopulated_init() with early initcall level specifically to call
+     arch_xen_unpopulated_init()
 ---
- drivers/xen/unpopulated-alloc.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/xen/unpopulated-alloc.c | 86 +++++++++++++++++++++++++++++++++++++++--
+ include/xen/xen.h               |  2 +
+ 2 files changed, 84 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/xen/unpopulated-alloc.c b/drivers/xen/unpopulated-alloc.c
-index 87e6b7d..a03dc5b 100644
+index a03dc5b..a8b4105 100644
 --- a/drivers/xen/unpopulated-alloc.c
 +++ b/drivers/xen/unpopulated-alloc.c
-@@ -85,7 +85,6 @@ static int fill_list(unsigned int nr_pages)
- 	for (i = 0; i < alloc_pages; i++) {
- 		struct page *pg = virt_to_page(vaddr + PAGE_SIZE * i);
+@@ -8,6 +8,7 @@
  
--		BUG_ON(!virt_addr_valid(vaddr + PAGE_SIZE * i));
- 		pg->zone_device_data = page_list;
- 		page_list = pg;
- 		list_count++;
+ #include <asm/page.h>
+ 
++#include <xen/balloon.h>
+ #include <xen/page.h>
+ #include <xen/xen.h>
+ 
+@@ -15,13 +16,29 @@ static DEFINE_MUTEX(list_lock);
+ static struct page *page_list;
+ static unsigned int list_count;
+ 
++static struct resource *target_resource;
++
++/*
++ * If arch is not happy with system "iomem_resource" being used for
++ * the region allocation it can provide it's own view by creating specific
++ * Xen resource with unused regions of guest physical address space provided
++ * by the hypervisor.
++ */
++int __weak __init arch_xen_unpopulated_init(struct resource **res)
++{
++	*res = &iomem_resource;
++
++	return 0;
++}
++
+ static int fill_list(unsigned int nr_pages)
+ {
+ 	struct dev_pagemap *pgmap;
+-	struct resource *res;
++	struct resource *res, *tmp_res = NULL;
+ 	void *vaddr;
+ 	unsigned int i, alloc_pages = round_up(nr_pages, PAGES_PER_SECTION);
+-	int ret = -ENOMEM;
++	struct range mhp_range;
++	int ret;
+ 
+ 	res = kzalloc(sizeof(*res), GFP_KERNEL);
+ 	if (!res)
+@@ -30,14 +47,40 @@ static int fill_list(unsigned int nr_pages)
+ 	res->name = "Xen scratch";
+ 	res->flags = IORESOURCE_MEM | IORESOURCE_BUSY;
+ 
+-	ret = allocate_resource(&iomem_resource, res,
+-				alloc_pages * PAGE_SIZE, 0, -1,
++	mhp_range = mhp_get_pluggable_range(true);
++
++	ret = allocate_resource(target_resource, res,
++				alloc_pages * PAGE_SIZE, mhp_range.start, mhp_range.end,
+ 				PAGES_PER_SECTION * PAGE_SIZE, NULL, NULL);
+ 	if (ret < 0) {
+ 		pr_err("Cannot allocate new IOMEM resource\n");
+ 		goto err_resource;
+ 	}
+ 
++	/*
++	 * Reserve the region previously allocated from Xen resource to avoid
++	 * re-using it by someone else.
++	 */
++	if (target_resource != &iomem_resource) {
++		tmp_res = kzalloc(sizeof(*tmp_res), GFP_KERNEL);
++		if (!tmp_res) {
++			ret = -ENOMEM;
++			goto err_insert;
++		}
++
++		tmp_res->name = res->name;
++		tmp_res->start = res->start;
++		tmp_res->end = res->end;
++		tmp_res->flags = res->flags;
++
++		ret = request_resource(&iomem_resource, tmp_res);
++		if (ret < 0) {
++			pr_err("Cannot request resource %pR (%d)\n", tmp_res, ret);
++			kfree(tmp_res);
++			goto err_insert;
++		}
++	}
++
+ 	pgmap = kzalloc(sizeof(*pgmap), GFP_KERNEL);
+ 	if (!pgmap) {
+ 		ret = -ENOMEM;
+@@ -95,6 +138,11 @@ static int fill_list(unsigned int nr_pages)
+ err_memremap:
+ 	kfree(pgmap);
+ err_pgmap:
++	if (tmp_res) {
++		release_resource(tmp_res);
++		kfree(tmp_res);
++	}
++err_insert:
+ 	release_resource(res);
+ err_resource:
+ 	kfree(res);
+@@ -112,6 +160,14 @@ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages)
+ 	unsigned int i;
+ 	int ret = 0;
+ 
++	/*
++	 * Fallback to default behavior if we do not have any suitable resource
++	 * to allocate required region from and as the result we won't be able to
++	 * construct pages.
++	 */
++	if (!target_resource)
++		return xen_alloc_ballooned_pages(nr_pages, pages);
++
+ 	mutex_lock(&list_lock);
+ 	if (list_count < nr_pages) {
+ 		ret = fill_list(nr_pages - list_count);
+@@ -159,6 +215,11 @@ void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages)
+ {
+ 	unsigned int i;
+ 
++	if (!target_resource) {
++		xen_free_ballooned_pages(nr_pages, pages);
++		return;
++	}
++
+ 	mutex_lock(&list_lock);
+ 	for (i = 0; i < nr_pages; i++) {
+ 		pages[i]->zone_device_data = page_list;
+@@ -201,3 +262,20 @@ static int __init init(void)
+ }
+ subsys_initcall(init);
+ #endif
++
++static int __init unpopulated_init(void)
++{
++	int ret;
++
++	if (!xen_domain())
++		return -ENODEV;
++
++	ret = arch_xen_unpopulated_init(&target_resource);
++	if (ret) {
++		pr_err("xen:unpopulated: Cannot initialize target resource\n");
++		target_resource = NULL;
++	}
++
++	return ret;
++}
++early_initcall(unpopulated_init);
+diff --git a/include/xen/xen.h b/include/xen/xen.h
+index 86c5b37..a99bab8 100644
+--- a/include/xen/xen.h
++++ b/include/xen/xen.h
+@@ -55,6 +55,8 @@ extern u64 xen_saved_max_mem_size;
+ #ifdef CONFIG_XEN_UNPOPULATED_ALLOC
+ int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages);
+ void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages);
++#include <linux/ioport.h>
++int arch_xen_unpopulated_init(struct resource **res);
+ #else
+ #include <xen/balloon.h>
+ static inline int xen_alloc_unpopulated_pages(unsigned int nr_pages,
 -- 
 2.7.4
 
