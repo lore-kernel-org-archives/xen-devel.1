@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9747BC4167E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A17C4332F
 	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:19:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244357.422696 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.244356.422686 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoEB-0006yD-Nk; Fri, 10 Dec 2021 22:18:55 +0000
+	id 1mvoEA-0006fo-9n; Fri, 10 Dec 2021 22:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244357.422696; Fri, 10 Dec 2021 22:18:55 +0000
+Received: by outflank-mailman (output) from mailman id 244356.422686; Fri, 10 Dec 2021 22:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoEB-0006wY-H8; Fri, 10 Dec 2021 22:18:55 +0000
-Received: by outflank-mailman (input) for mailman id 244357;
- Fri, 10 Dec 2021 22:18:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mvoEA-0006eW-20; Fri, 10 Dec 2021 22:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 244356;
+ Fri, 10 Dec 2021 22:18:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoE9-0005LR-Ui
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:18:53 +0000
+ id 1mvoE8-0005LK-GE
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:18:52 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2884b7df-5a07-11ec-ad7a-b7ef48004f0a;
- Fri, 10 Dec 2021 23:18:53 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 279d666a-5a07-11ec-a74f-db008197e53d;
+ Fri, 10 Dec 2021 23:18:51 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2884b7df-5a07-11ec-ad7a-b7ef48004f0a
-Message-ID: <20211210221813.556202506@linutronix.de>
+X-Inumbo-ID: 279d666a-5a07-11ec-a74f-db008197e53d
+Message-ID: <20211210221813.493922179@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174733;
+	s=2020; t=1639174731;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=4RBIpMLSx9fo7S3MVLgbPP6cYR3euRHVRt1vIjvLV4U=;
-	b=eFwbxZ19sBwXOtZfaU9b68cRvDQr8Sc+5tFM8f+F85TqivDCre0VEP725UcXl+uCQNVwKg
-	th5/P6pSHGU17/a07xZLVPs/inK96YGN0P8AVWusIBfugZ1VzOQwzILhbCMtpONvc2WXfS
-	7tC0gKf8ggCcvGX0cZsFURAzOnX4SWiSiWBvq0yugB0Urkr1RzoMtfW4UBhLOolAcHMWEq
-	8H9bNQmYEImVfPDpv7nBqpZqvmsgnsh02b/+ZEunwO9Rs+JWgiGZd954VBu+PM2tDQZVj6
-	8gav38VhnHP0iMod6jbXLJ3KUM93DcPae/bJJ76Y8Igr1sJLMglnyFtpTjhkSQ==
+	 references:references; bh=cKJHJ5pvxdQcbJzsUJMGqgFGoQj9I03QbSL7vU1xGJs=;
+	b=1jYFlR/s4Fj8fK94IM8CGV2VaLN70VTxWOKgzd9JP93YsuiSkhZnYFY06GM/ck1LqQztP1
+	MLFaGOIeCqYoexBgXapeoyYhkU0pOjGlXAPId/ebxaePxjkxMr+yK8v+0hb5X4+5ZG7B1H
+	+va0VUPX0Xv4Yu86zDErk4wKNgJjI/W705RdoDtPXV+TGIU1/gfVAaxPimBu0jir0PtNCO
+	fOlCra2fXDQuTRaSAH0ZtTlPuz+4kAZXETO59wFrYfdqVEy+3UT6OV5Rro3KejHz+49vks
+	CFqN18s6k1HR1ibmPHBMCiufu6FCMC8wl1bZC8BEvjjvQ7GzWILhEocUSrICGA==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174733;
+	s=2020e; t=1639174731;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=4RBIpMLSx9fo7S3MVLgbPP6cYR3euRHVRt1vIjvLV4U=;
-	b=WYa+NdWlWzJ03zg9xAtS1+YMoE5TJHwS2b+RN+noddeR78xU6q7+ZPKxIZRkWf4y7NHAji
-	EqHm91dbXa6KWXAg==
+	 references:references; bh=cKJHJ5pvxdQcbJzsUJMGqgFGoQj9I03QbSL7vU1xGJs=;
+	b=CKltebaN9sJb+/12aypx+vxMoPzMz+hKX+LQCpakacpcX5G/L+sQu6V9DoCJj9DznHwv8C
+	jZHW+tYr3PY7biBA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -68,12 +68,12 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Ashok Raj <ashok.raj@intel.com>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
+ Arnd Bergmann <arnd@arndb.de>,
  Michael Ellerman <mpe@ellerman.id.au>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linuxppc-dev@lists.ozlabs.org,
  Juergen Gross <jgross@suse.com>,
  xen-devel@lists.xenproject.org,
- Arnd Bergmann <arnd@arndb.de>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Bjorn Helgaas <bhelgaas@google.com>,
  Stuart Yoder <stuyoder@gmail.com>,
@@ -92,36 +92,49 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 06/35] powerpc/pseries/msi: Use PCI device properties
+Subject: [patch V3 05/35] powerpc/cell/axon_msi: Use PCI device property
 References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Dec 2021 23:18:52 +0100 (CET)
+Date: Fri, 10 Dec 2021 23:18:51 +0100 (CET)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
 instead of fiddling with MSI descriptors.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Arnd Bergmann <arnd@arndb.de>
 Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
 Cc: linuxppc-dev@lists.ozlabs.org
 ---
-V3: Use pci_dev->msix_enabled - Jason
+V3: Use pci_dev property - Jason
+V2: Invoke the function with the correct number of arguments - Andy
 ---
- arch/powerpc/platforms/pseries/msi.c |    3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ arch/powerpc/platforms/cell/axon_msi.c |    5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
---- a/arch/powerpc/platforms/pseries/msi.c
-+++ b/arch/powerpc/platforms/pseries/msi.c
-@@ -448,8 +448,7 @@ static int pseries_msi_ops_prepare(struc
- 				   int nvec, msi_alloc_info_t *arg)
+--- a/arch/powerpc/platforms/cell/axon_msi.c
++++ b/arch/powerpc/platforms/cell/axon_msi.c
+@@ -199,7 +199,6 @@ static struct axon_msic *find_msi_transl
+ static int setup_msi_msg_address(struct pci_dev *dev, struct msi_msg *msg)
  {
- 	struct pci_dev *pdev = to_pci_dev(dev);
--	struct msi_desc *desc = first_pci_msi_entry(pdev);
--	int type = desc->pci.msi_attrib.is_msix ? PCI_CAP_ID_MSIX : PCI_CAP_ID_MSI;
-+	int type = pdev->msix_enabled ? PCI_CAP_ID_MSIX : PCI_CAP_ID_MSI;
+ 	struct device_node *dn;
+-	struct msi_desc *entry;
+ 	int len;
+ 	const u32 *prop;
  
- 	return rtas_prepare_msi_irqs(pdev, nvec, type, arg);
- }
+@@ -209,10 +208,8 @@ static int setup_msi_msg_address(struct
+ 		return -ENODEV;
+ 	}
+ 
+-	entry = first_pci_msi_entry(dev);
+-
+ 	for (; dn; dn = of_get_next_parent(dn)) {
+-		if (entry->pci.msi_attrib.is_64) {
++		if (!dev->no_64bit_msi) {
+ 			prop = of_get_property(dn, "msi-address-64", &len);
+ 			if (prop)
+ 				break;
 
 
