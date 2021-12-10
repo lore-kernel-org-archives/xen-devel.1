@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B21C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244389.422796 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 672E8C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244391.422809 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoLv-0006iX-Pw; Fri, 10 Dec 2021 22:26:55 +0000
+	id 1mvoLw-0006vN-Ht; Fri, 10 Dec 2021 22:26:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244389.422796; Fri, 10 Dec 2021 22:26:55 +0000
+Received: by outflank-mailman (output) from mailman id 244391.422809; Fri, 10 Dec 2021 22:26:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoLv-0006iQ-LW; Fri, 10 Dec 2021 22:26:55 +0000
-Received: by outflank-mailman (input) for mailman id 244389;
+	id 1mvoLw-0006ts-Bf; Fri, 10 Dec 2021 22:26:56 +0000
+Received: by outflank-mailman (input) for mailman id 244391;
  Fri, 10 Dec 2021 22:26:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoEP-0005LR-22
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:09 +0000
+ id 1mvoEo-0005LK-CB
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:34 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 30e6d20e-5a07-11ec-ad7a-b7ef48004f0a;
- Fri, 10 Dec 2021 23:19:07 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 408a4894-5a07-11ec-a74f-db008197e53d;
+ Fri, 10 Dec 2021 23:19:33 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 30e6d20e-5a07-11ec-ad7a-b7ef48004f0a
-Message-ID: <20211210221814.109408832@linutronix.de>
+X-Inumbo-ID: 408a4894-5a07-11ec-a74f-db008197e53d
+Message-ID: <20211210221815.148331680@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174747;
+	s=2020; t=1639174773;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=/T/lIugtjOnyOk0TOzZkPoZByXefF1LfjuDkNv8axwo=;
-	b=2rQSESBNbhKDe4DIdH7ra10NH5N/JvzQQX+r3nrmLIoKqrr9kZeroIW0ldFyNTmeGJFloC
-	ISsswuI9KpOlM49GqMXH1uDQDqjLlmAlQoCaIdP7ARZeSM4ju5lyK7EP81ugww1ZARaI0U
-	gs8iQLYx9ZSJzL1t8RYEPf2MxfBf9s3ISeJpYwzJfbY1LP66IiQlEYyWZX7TWUuOhSSd+j
-	QHxdKtWvMywJW5kM8KxC3ozfxn1n0BTwgqRspa0SYdoFjxiNskgkH3+l7apaPtovsFTCir
-	/eDE+8+FyfScKQW4ZXlPNkEBA8QbEEVsBNZpySv69uV9FsqHgFVMgDuCMRqbdQ==
+	 references:references; bh=1mcUFIyf9ySwp0yGA9BXrnZ9ta7jfneNSCIqf6wYVGk=;
+	b=oKS80X/kJKLB8GB+c0SIKmguD/kevr7iZutS3fVTQ+rGCeSum9bn5Q+v1Est6NyleDXcvj
+	C2TzfgyjVUEpqtu5aaWZcLjJlLFf0vRy+2ceD1IEYbC6SY7NiYO3pa/K3tveERBEi2lJ+W
+	LrV7kcXBnYzWCcxOpkhXAviCnM6+blWD3RE5ejV9PjRrOFaNsJDbWBAt4YGwG4M9YMgqFp
+	ixEY9UW4+wZWMAyVzTPe7Ms2nyLA/mEG6RCm8A0SFpOGFd1HIpzokfKB41UHXnSURcCa5O
+	ptjXGZ9/US9gmPa1yw0KaJD2RG+xIPdfx7ti5vbGRnDGULGvRIPGUkdJ9s5kLQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174747;
+	s=2020e; t=1639174773;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=/T/lIugtjOnyOk0TOzZkPoZByXefF1LfjuDkNv8axwo=;
-	b=LGRIOOkKk9uMR58nBNuiyz1GmYXNgyyKXlS10xIQmOgbQ/Jkk7kTacYFZo0PvPLyf49QPl
-	HjCMGi+rlPtSyrDA==
+	 references:references; bh=1mcUFIyf9ySwp0yGA9BXrnZ9ta7jfneNSCIqf6wYVGk=;
+	b=7Nl66lpVGonXIzUJuEqPSV3MziV+dwsh1VZ137uXNOy+N9tDDG/1eW2YpLYeL3y+xjSQjH
+	DDQUDmuZmfQw0OCw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -69,6 +69,7 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Jassi Brar <jassisinghbrar@gmail.com>,
  Juergen Gross <jgross@suse.com>,
  xen-devel@lists.xenproject.org,
  Arnd Bergmann <arnd@arndb.de>,
@@ -89,68 +90,51 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Robin Murphy <robin.murphy@arm.com>,
  Joerg Roedel <joro@8bytes.org>,
  iommu@lists.linux-foundation.org,
- Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 15/35] platform-msi: Let the core code handle sysfs groups
+Subject:
+ [patch V3 32/35] mailbox: bcm-flexrm-mailbox: Rework MSI interrupt handling
 References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Dec 2021 23:19:06 +0100 (CET)
+Date: Fri, 10 Dec 2021 23:19:32 +0100 (CET)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Set the domain info flag and remove the local sysfs code.
+No point in retrieving the MSI descriptors. Just query the Linux interrupt
+number.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
----
- drivers/base/platform-msi.c |   11 +----------
- 1 file changed, 1 insertion(+), 10 deletions(-)
+Cc: Jassi Brar <jassisinghbrar@gmail.com>
 
---- a/drivers/base/platform-msi.c
-+++ b/drivers/base/platform-msi.c
-@@ -23,7 +23,6 @@
- struct platform_msi_priv_data {
- 	struct device			*dev;
- 	void				*host_data;
--	const struct attribute_group    **msi_irq_groups;
- 	msi_alloc_info_t		arg;
- 	irq_write_msi_msg_t		write_msg;
- 	int				devid;
-@@ -191,6 +190,7 @@ struct irq_domain *platform_msi_create_i
- 		platform_msi_update_dom_ops(info);
- 	if (info->flags & MSI_FLAG_USE_DEF_CHIP_OPS)
- 		platform_msi_update_chip_ops(info);
-+	info->flags |= MSI_FLAG_DEV_SYSFS;
+---
+ drivers/mailbox/bcm-flexrm-mailbox.c |    7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+--- a/drivers/mailbox/bcm-flexrm-mailbox.c
++++ b/drivers/mailbox/bcm-flexrm-mailbox.c
+@@ -1497,7 +1497,6 @@ static int flexrm_mbox_probe(struct plat
+ 	int index, ret = 0;
+ 	void __iomem *regs;
+ 	void __iomem *regs_end;
+-	struct msi_desc *desc;
+ 	struct resource *iomem;
+ 	struct flexrm_ring *ring;
+ 	struct flexrm_mbox *mbox;
+@@ -1608,10 +1607,8 @@ static int flexrm_mbox_probe(struct plat
+ 		goto fail_destroy_cmpl_pool;
  
- 	domain = msi_create_irq_domain(fwnode, info, parent);
- 	if (domain)
-@@ -279,16 +279,8 @@ int platform_msi_domain_alloc_irqs(struc
- 	if (err)
- 		goto out_free_desc;
- 
--	priv_data->msi_irq_groups = msi_populate_sysfs(dev);
--	if (IS_ERR(priv_data->msi_irq_groups)) {
--		err = PTR_ERR(priv_data->msi_irq_groups);
--		goto out_free_irqs;
+ 	/* Save alloced IRQ numbers for each ring */
+-	for_each_msi_entry(desc, dev) {
+-		ring = &mbox->rings[desc->msi_index];
+-		ring->irq = desc->irq;
 -	}
--
- 	return 0;
++	for (index = 0; index < mbox->num_rings; index++)
++		mbox->rings[index].irq = msi_get_virq(dev, index);
  
--out_free_irqs:
--	msi_domain_free_irqs(dev->msi.domain, dev);
- out_free_desc:
- 	platform_msi_free_descs(dev, 0, nvec);
- out_free_priv_data:
-@@ -308,7 +300,6 @@ void platform_msi_domain_free_irqs(struc
- 		struct msi_desc *desc;
- 
- 		desc = first_msi_entry(dev);
--		msi_destroy_sysfs(dev, desc->platform.msi_priv_data->msi_irq_groups);
- 		platform_msi_free_priv_data(desc->platform.msi_priv_data);
- 	}
- 
+ 	/* Check availability of debugfs */
+ 	if (!debugfs_initialized())
 
 
