@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52964C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244426.422940 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A5D2C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244427.422960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMR-0004bt-Kp; Fri, 10 Dec 2021 22:27:27 +0000
+	id 1mvoMW-0005jF-4U; Fri, 10 Dec 2021 22:27:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244426.422940; Fri, 10 Dec 2021 22:27:27 +0000
+Received: by outflank-mailman (output) from mailman id 244427.422960; Fri, 10 Dec 2021 22:27:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMR-0004Zl-Ee; Fri, 10 Dec 2021 22:27:27 +0000
-Received: by outflank-mailman (input) for mailman id 244426;
- Fri, 10 Dec 2021 22:27:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mvoMV-0005i8-U8; Fri, 10 Dec 2021 22:27:31 +0000
+Received: by outflank-mailman (input) for mailman id 244427;
+ Fri, 10 Dec 2021 22:27:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoEd-0005LR-HP
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:23 +0000
+ id 1mvoEX-0005LK-7I
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:17 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a1474a6-5a07-11ec-ad7a-b7ef48004f0a;
- Fri, 10 Dec 2021 23:19:22 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 35f551b7-5a07-11ec-a74f-db008197e53d;
+ Fri, 10 Dec 2021 23:19:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,27 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a1474a6-5a07-11ec-ad7a-b7ef48004f0a
-Message-ID: <20211210221814.720998720@linutronix.de>
+X-Inumbo-ID: 35f551b7-5a07-11ec-a74f-db008197e53d
+Message-ID: <20211210221814.413638645@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174762;
+	s=2020; t=1639174755;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=Y/E/KkLUpd9rNPfDA/zqSwkvkNwtu0uG/q7moMbC6t8=;
-	b=Q1loFyA5IlQ3aytzC+w8agXNpV+7qVzWLLt7gFAxD1uipRckq4A63ZDFlRGCLHiD1WXBCo
-	w0KWYnAWbGzEZr/4SWaOTeEwWKw1e6hopGrKVSpqVp8bGWUD/cv86yFjYBjUcnEWdvHY3D
-	rgx+tAv/GXM3Dr6QCsae7PjKT265v4cKhrWCbRIUXyRZCJMPv6JLxGPJrWrAjiLYk/CNRO
-	jYnVtNkau0JyAHELKfNmrLSzDJz7ygURO1IyC5xhunTeJMWngrOu1RR1+HfWrbASO2qYnr
-	hwv0O1X8uqWQklUq1DIP73U0V3zNDPJE2TlYjxuEWKoOXEF+hR4iuFZes26TAQ==
+	 references:references; bh=BJ+aqs3JuUQKsO3BctVmpLd9eqalaNFkDGZVaSssIBc=;
+	b=k/FA321vEFQTINsiDiktMyGPAyhH0HOHkZCclSezrG6bfDxcSWJw0pc09HhkATrVcTQ6ri
+	hnJjId+gly+fkrlDn4DuEhi3WKCGyjqiHTOcCpB52ZRAbAlk8habGeq2T/0GeNVFzgwAUX
+	gBYdqBwe05ZWKm3yEV/1OxDlUqa0cigus0DWgFdbJPJ3vmGOLYue6+Yu0syUb0lGxp8xak
+	nCGKDUWTtT6OhnSQVJaIIJbUTVpVhD0RKT+dIybCA5QzlH4gkNx1aOI/cQQwg1kIu/Xa68
+	3n73qNCpmi67D9qbeVEYTKMdvPJ/PoUE6K25W1WCB/0MML/YeRi7L9UO6zR/BQ==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174762;
+	s=2020e; t=1639174755;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:  references:references;
-	bh=Y/E/KkLUpd9rNPfDA/zqSwkvkNwtu0uG/q7moMbC6t8=;
-	b=6NW6+PSI7SpPEo0Bw1CpABwRumr4UbWMvCiNUQ1PxVZXboG1DTempdK99XRytho0lXor9m
-	bf7Awa33UAb9FuCg==
+	 references:references; bh=BJ+aqs3JuUQKsO3BctVmpLd9eqalaNFkDGZVaSssIBc=;
+	b=NFgEqEdfXbDDPrssrqajhRF703gPYTQxCVwQC4iBxAZurkrpMLpoBqiXkuwb3ZKXaHsc93
+	9WV1M1CndmpxrRBA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,12 +69,12 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- linuxppc-dev@lists.ozlabs.org,
  Juergen Gross <jgross@suse.com>,
  xen-devel@lists.xenproject.org,
  Arnd Bergmann <arnd@arndb.de>,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ linuxppc-dev@lists.ozlabs.org,
  Bjorn Helgaas <bhelgaas@google.com>,
  Stuart Yoder <stuyoder@gmail.com>,
  Laurentiu Tudor <laurentiu.tudor@nxp.com>,
@@ -94,52 +92,159 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 25/35] powerpc/pseries/msi: Let core code check for
- contiguous entries
+Subject: [patch V3 20/35] platform-msi: Use msi_desc::msi_index
 References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Date: Fri, 10 Dec 2021 23:19:22 +0100 (CET)
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 10 Dec 2021 23:19:14 +0100 (CET)
 
-RnJvbTogVGhvbWFzIEdsZWl4bmVyIDx0Z2x4QGxpbnV0cm9uaXguZGU+CgpTZXQgdGhlIGRvbWFp
-biBpbmZvIGZsYWcgYW5kIHJlbW92ZSB0aGUgY2hlY2suCgpTaWduZWQtb2ZmLWJ5OiBUaG9tYXMg
-R2xlaXhuZXIgPHRnbHhAbGludXRyb25peC5kZT4KUmV2aWV3ZWQtYnk6IEdyZWcgS3JvYWgtSGFy
-dG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5vcmc+CkNjOiBNaWNoYWVsIEVsbGVybWFuIDxt
-cGVAZWxsZXJtYW4uaWQuYXU+CkNjOiBCZW5qYW1pbiBIZXJyZW5zY2htaWR0IDxiZW5oQGtlcm5l
-bC5jcmFzaGluZy5vcmc+CkNjOiAiQ8OpZHJpYyBMZSBHb2F0ZXIiIDxjbGdAa2FvZC5vcmc+CkNj
-OiBsaW51eHBwYy1kZXZAbGlzdHMub3psYWJzLm9yZwoKLS0tClYyOiBSZW1vdmUgaXQgY29tcGxl
-dGVseSAtIENlZHJpYwotLS0KIGFyY2gvcG93ZXJwYy9wbGF0Zm9ybXMvcHNlcmllcy9tc2kuYyB8
-ICAgMzMgKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwg
-OCBpbnNlcnRpb25zKCspLCAyNSBkZWxldGlvbnMoLSkKCi0tLSBhL2FyY2gvcG93ZXJwYy9wbGF0
-Zm9ybXMvcHNlcmllcy9tc2kuYworKysgYi9hcmNoL3Bvd2VycGMvcGxhdGZvcm1zL3BzZXJpZXMv
-bXNpLmMKQEAgLTMyMSwyNyArMzIxLDYgQEAgc3RhdGljIGludCBtc2lfcXVvdGFfZm9yX2Rldmlj
-ZShzdHJ1Y3QgcAogCXJldHVybiByZXF1ZXN0OwogfQogCi1zdGF0aWMgaW50IGNoZWNrX21zaXhf
-ZW50cmllcyhzdHJ1Y3QgcGNpX2RldiAqcGRldikKLXsKLQlzdHJ1Y3QgbXNpX2Rlc2MgKmVudHJ5
-OwotCWludCBleHBlY3RlZDsKLQotCS8qIFRoZXJlJ3Mgbm8gd2F5IGZvciB1cyB0byBleHByZXNz
-IHRvIGZpcm13YXJlIHRoYXQgd2Ugd2FudAotCSAqIGEgZGlzY29udGlndW91cywgb3Igbm9uLXpl
-cm8gYmFzZWQsIHJhbmdlIG9mIE1TSS1YIGVudHJpZXMuCi0JICogU28gd2UgbXVzdCByZWplY3Qg
-c3VjaCByZXF1ZXN0cy4gKi8KLQotCWV4cGVjdGVkID0gMDsKLQlmb3JfZWFjaF9wY2lfbXNpX2Vu
-dHJ5KGVudHJ5LCBwZGV2KSB7Ci0JCWlmIChlbnRyeS0+bXNpX2luZGV4ICE9IGV4cGVjdGVkKSB7
-Ci0JCQlwcl9kZWJ1ZygicnRhc19tc2k6IGJhZCBNU0ktWCBlbnRyaWVzLlxuIik7Ci0JCQlyZXR1
-cm4gLUVJTlZBTDsKLQkJfQotCQlleHBlY3RlZCsrOwotCX0KLQotCXJldHVybiAwOwotfQotCiBz
-dGF0aWMgdm9pZCBydGFzX2hhY2tfMzJiaXRfbXNpX2dlbjIoc3RydWN0IHBjaV9kZXYgKnBkZXYp
-CiB7CiAJdTMyIGFkZHJfaGksIGFkZHJfbG87CkBAIC0zODAsOSArMzU5LDYgQEAgc3RhdGljIGlu
-dCBydGFzX3ByZXBhcmVfbXNpX2lycXMoc3RydWN0CiAJaWYgKHF1b3RhICYmIHF1b3RhIDwgbnZl
-YykKIAkJcmV0dXJuIHF1b3RhOwogCi0JaWYgKHR5cGUgPT0gUENJX0NBUF9JRF9NU0lYICYmIGNo
-ZWNrX21zaXhfZW50cmllcyhwZGV2KSkKLQkJcmV0dXJuIC1FSU5WQUw7Ci0KIAkvKgogCSAqIEZp
-cm13YXJlIGN1cnJlbnRseSByZWZ1c2UgYW55IG5vbiBwb3dlciBvZiB0d28gYWxsb2NhdGlvbgog
-CSAqIHNvIHdlIHJvdW5kIHVwIGlmIHRoZSBxdW90YSB3aWxsIGFsbG93IGl0LgpAQCAtNTI5LDkg
-KzUwNSwxNiBAQCBzdGF0aWMgc3RydWN0IGlycV9jaGlwIHBzZXJpZXNfcGNpX21zaV9pCiAJLmly
-cV93cml0ZV9tc2lfbXNnCT0gcHNlcmllc19tc2lfd3JpdGVfbXNnLAogfTsKIAorCisvKgorICog
-U2V0IE1TSV9GTEFHX01TSVhfQ09OVElHVU9VUyBhcyB0aGVyZSBpcyBubyB3YXkgdG8gZXhwcmVz
-cyB0bworICogZmlybXdhcmUgdG8gcmVxdWVzdCBhIGRpc2NvbnRpZ3VvdXMgb3Igbm9uLXplcm8g
-YmFzZWQgcmFuZ2Ugb2YKKyAqIE1TSS1YIGVudHJpZXMuIENvcmUgY29kZSB3aWxsIHJlamVjdCBz
-dWNoIHNldHVwIGF0dGVtcHRzLgorICovCiBzdGF0aWMgc3RydWN0IG1zaV9kb21haW5faW5mbyBw
-c2VyaWVzX21zaV9kb21haW5faW5mbyA9IHsKIAkuZmxhZ3MgPSAoTVNJX0ZMQUdfVVNFX0RFRl9E
-T01fT1BTIHwgTVNJX0ZMQUdfVVNFX0RFRl9DSElQX09QUyB8Ci0JCSAgTVNJX0ZMQUdfTVVMVElf
-UENJX01TSSAgfCBNU0lfRkxBR19QQ0lfTVNJWCksCisJCSAgTVNJX0ZMQUdfTVVMVElfUENJX01T
-SSAgfCBNU0lfRkxBR19QQ0lfTVNJWCB8CisJCSAgTVNJX0ZMQUdfTVNJWF9DT05USUdVT1VTKSwK
-IAkub3BzICAgPSAmcHNlcmllc19wY2lfbXNpX2RvbWFpbl9vcHMsCiAJLmNoaXAgID0gJnBzZXJp
-ZXNfcGNpX21zaV9pcnFfY2hpcCwKIH07Cgo=
+From: Thomas Gleixner <tglx@linutronix.de>
+
+Use the common msi_index member and get rid of the pointless wrapper struct.
+
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+---
+ drivers/base/platform-msi.c                 |   10 +++++-----
+ drivers/dma/qcom/hidma.c                    |    4 ++--
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |    4 ++--
+ drivers/mailbox/bcm-flexrm-mailbox.c        |    4 ++--
+ include/linux/msi.h                         |   10 ----------
+ 5 files changed, 11 insertions(+), 21 deletions(-)
+
+--- a/drivers/base/platform-msi.c
++++ b/drivers/base/platform-msi.c
+@@ -40,7 +40,7 @@ static irq_hw_number_t platform_msi_calc
+ {
+ 	u32 devid = desc->dev->msi.data->platform_data->devid;
+ 
+-	return (devid << (32 - DEV_ID_SHIFT)) | desc->platform.msi_index;
++	return (devid << (32 - DEV_ID_SHIFT)) | desc->msi_index;
+ }
+ 
+ static void platform_msi_set_desc(msi_alloc_info_t *arg, struct msi_desc *desc)
+@@ -112,8 +112,8 @@ static void platform_msi_free_descs(stru
+ 	struct msi_desc *desc, *tmp;
+ 
+ 	list_for_each_entry_safe(desc, tmp, dev_to_msi_list(dev), list) {
+-		if (desc->platform.msi_index >= base &&
+-		    desc->platform.msi_index < (base + nvec)) {
++		if (desc->msi_index >= base &&
++		    desc->msi_index < (base + nvec)) {
+ 			list_del(&desc->list);
+ 			free_msi_entry(desc);
+ 		}
+@@ -129,7 +129,7 @@ static int platform_msi_alloc_descs_with
+ 	if (!list_empty(dev_to_msi_list(dev))) {
+ 		desc = list_last_entry(dev_to_msi_list(dev),
+ 				       struct msi_desc, list);
+-		base = desc->platform.msi_index + 1;
++		base = desc->msi_index + 1;
+ 	}
+ 
+ 	for (i = 0; i < nvec; i++) {
+@@ -137,7 +137,7 @@ static int platform_msi_alloc_descs_with
+ 		if (!desc)
+ 			break;
+ 
+-		desc->platform.msi_index = base + i;
++		desc->msi_index = base + i;
+ 		desc->irq = virq ? virq + i : 0;
+ 
+ 		list_add_tail(&desc->list, dev_to_msi_list(dev));
+--- a/drivers/dma/qcom/hidma.c
++++ b/drivers/dma/qcom/hidma.c
+@@ -666,7 +666,7 @@ static void hidma_write_msi_msg(struct m
+ 	struct device *dev = msi_desc_to_dev(desc);
+ 	struct hidma_dev *dmadev = dev_get_drvdata(dev);
+ 
+-	if (!desc->platform.msi_index) {
++	if (!desc->msi_index) {
+ 		writel(msg->address_lo, dmadev->dev_evca + 0x118);
+ 		writel(msg->address_hi, dmadev->dev_evca + 0x11C);
+ 		writel(msg->data, dmadev->dev_evca + 0x120);
+@@ -702,7 +702,7 @@ static int hidma_request_msi(struct hidm
+ 		return rc;
+ 
+ 	for_each_msi_entry(desc, &pdev->dev) {
+-		if (!desc->platform.msi_index)
++		if (!desc->msi_index)
+ 			dmadev->msi_virqbase = desc->irq;
+ 
+ 		rc = devm_request_irq(&pdev->dev, desc->irq,
+--- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
++++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+@@ -3142,7 +3142,7 @@ static void arm_smmu_write_msi_msg(struc
+ 	phys_addr_t doorbell;
+ 	struct device *dev = msi_desc_to_dev(desc);
+ 	struct arm_smmu_device *smmu = dev_get_drvdata(dev);
+-	phys_addr_t *cfg = arm_smmu_msi_cfg[desc->platform.msi_index];
++	phys_addr_t *cfg = arm_smmu_msi_cfg[desc->msi_index];
+ 
+ 	doorbell = (((u64)msg->address_hi) << 32) | msg->address_lo;
+ 	doorbell &= MSI_CFG0_ADDR_MASK;
+@@ -3183,7 +3183,7 @@ static void arm_smmu_setup_msis(struct a
+ 	}
+ 
+ 	for_each_msi_entry(desc, dev) {
+-		switch (desc->platform.msi_index) {
++		switch (desc->msi_index) {
+ 		case EVTQ_MSI_INDEX:
+ 			smmu->evtq.q.irq = desc->irq;
+ 			break;
+--- a/drivers/mailbox/bcm-flexrm-mailbox.c
++++ b/drivers/mailbox/bcm-flexrm-mailbox.c
+@@ -1484,7 +1484,7 @@ static void flexrm_mbox_msi_write(struct
+ {
+ 	struct device *dev = msi_desc_to_dev(desc);
+ 	struct flexrm_mbox *mbox = dev_get_drvdata(dev);
+-	struct flexrm_ring *ring = &mbox->rings[desc->platform.msi_index];
++	struct flexrm_ring *ring = &mbox->rings[desc->msi_index];
+ 
+ 	/* Configure per-Ring MSI registers */
+ 	writel_relaxed(msg->address_lo, ring->regs + RING_MSI_ADDR_LS);
+@@ -1609,7 +1609,7 @@ static int flexrm_mbox_probe(struct plat
+ 
+ 	/* Save alloced IRQ numbers for each ring */
+ 	for_each_msi_entry(desc, dev) {
+-		ring = &mbox->rings[desc->platform.msi_index];
++		ring = &mbox->rings[desc->msi_index];
+ 		ring->irq = desc->irq;
+ 	}
+ 
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -107,14 +107,6 @@ struct pci_msi_desc {
+ };
+ 
+ /**
+- * platform_msi_desc - Platform device specific msi descriptor data
+- * @msi_index:		The index of the MSI descriptor for multi MSI
+- */
+-struct platform_msi_desc {
+-	u16				msi_index;
+-};
+-
+-/**
+  * fsl_mc_msi_desc - FSL-MC device specific msi descriptor data
+  * @msi_index:		The index of the MSI descriptor
+  */
+@@ -145,7 +137,6 @@ struct ti_sci_inta_msi_desc {
+  *
+  * @msi_index:	Index of the msi descriptor
+  * @pci:	[PCI]	    PCI speficic msi descriptor data
+- * @platform:	[platform]  Platform device specific msi descriptor data
+  * @fsl_mc:	[fsl-mc]    FSL MC device specific msi descriptor data
+  * @inta:	[INTA]	    TISCI based INTA specific msi descriptor data
+  */
+@@ -167,7 +158,6 @@ struct msi_desc {
+ 	u16				msi_index;
+ 	union {
+ 		struct pci_msi_desc		pci;
+-		struct platform_msi_desc	platform;
+ 		struct fsl_mc_msi_desc		fsl_mc;
+ 		struct ti_sci_inta_msi_desc	inta;
+ 	};
+
 
