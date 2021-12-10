@@ -4,30 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D10B7C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:19:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244352.422637 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06AE8C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:19:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244358.422707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoE5-0005OL-PP; Fri, 10 Dec 2021 22:18:49 +0000
+	id 1mvoED-0007KM-Me; Fri, 10 Dec 2021 22:18:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244352.422637; Fri, 10 Dec 2021 22:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 244358.422707; Fri, 10 Dec 2021 22:18:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoE5-0005Ny-H6; Fri, 10 Dec 2021 22:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 244352;
- Fri, 10 Dec 2021 22:18:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mvoED-0007Ji-Eh; Fri, 10 Dec 2021 22:18:57 +0000
+Received: by outflank-mailman (input) for mailman id 244358;
+ Fri, 10 Dec 2021 22:18:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoE4-0005LK-5k
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:18:48 +0000
-Received: from galois.linutronix.de (galois.linutronix.de
- [2a0a:51c0:0:12e:550::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 238aab9a-5a07-11ec-a74f-db008197e53d;
- Fri, 10 Dec 2021 23:18:46 +0100 (CET)
+ id 1mvoEB-0005LR-SC
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:18:56 +0000
+Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2980cb44-5a07-11ec-ad7a-b7ef48004f0a;
+ Fri, 10 Dec 2021 23:18:55 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -39,27 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 238aab9a-5a07-11ec-a74f-db008197e53d
-Message-ID: <20211210221642.869015045@linutronix.de>
+X-Inumbo-ID: 2980cb44-5a07-11ec-ad7a-b7ef48004f0a
+Message-ID: <20211210221813.617178827@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174723;
+	s=2020; t=1639174734;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=IBbfy8DUMmeX2/DxJ4bxtqprC0vLuk1jWkG3suZ0PZw=;
-	b=qC+ywncigd88uX881G7drnWnPitC8LQEDjIxWICRbmx1CnZuuhH2HOM78Mj73Xd+ZCv0Kb
-	ncvkjbnzAtbd+ixrpTmp/mZ4pThJranbywfqMLopOdcOEGpsPc6uk3V8xaldwObLZfsa/F
-	EQ9V2dZmFKR1bqfNssiazFt8n3Mf+7q1vPMaTRADEfAyYuxcvDch8l/qTyx/UZYaRnEdfG
-	107k2ftTZl52fiKXc5XfVwoW5s/CdJw8zCMdv0ss6LKqyYgeRXX/LiA2+XXHlrLhd7JdKS
-	+inOsrufS8ZmeqDmP1k3/yTr0mCeJApmaMV52ZYaBfM4TpXhGFC+GjjHRExr/A==
+	 references:references; bh=c/XqPp4te0pGFEO121hhae+RVpBGIyhacVujKOuJMfc=;
+	b=c9kLrkEE4SZLzTdO73+YczGJvawG4Gf3p3TUiTiMwo54SU/QEOeY2nx7mZLN9uN6JdMrva
+	rjs/bftb9qpy6W5cncJBSTQQzH57vMtE2RJs/pOQte/5cAgqpv801V+Tk5+ZKjxDBWSPka
+	aU966ak4VZQfVbIHcgDfWLfkiY5iiJno0fGYqzsPNazKyDctL82sOMpo79N6Hsn4CZByDM
+	EC8LIrUHzK2NzKTpO7du4uU4vQTrEuwaK3AAC5Acp1jCxge80UiPnPbkSGjXnORjX63pGO
+	DJMHiZOr3/B6zDq6uxlq0XYpf6ESjVsWEEvFs1wQ6cty7jHTVWuos4fJy1e1Qg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174723;
+	s=2020e; t=1639174734;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=IBbfy8DUMmeX2/DxJ4bxtqprC0vLuk1jWkG3suZ0PZw=;
-	b=5lxdmWfE59j3yHf4IXX2tpXuGGPaN2BKbOiQcB9ippOtvBNy75YsOs7y6x5FiIbDSi4ZaA
-	+C6w+xOR5nRMXFBA==
+	 references:references; bh=c/XqPp4te0pGFEO121hhae+RVpBGIyhacVujKOuJMfc=;
+	b=r0mvGgHyMEnHD4S+QN87CZIaHBk1HZRFCOJ4fgFQslfgfSFuxSwl3fgnaESHLdEse+PmeN
+	wm9h29SwPoz5xODg==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -71,13 +68,13 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Ashok Raj <ashok.raj@intel.com>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Juergen Gross <jgross@suse.com>,
  xen-devel@lists.xenproject.org,
  Arnd Bergmann <arnd@arndb.de>,
  Michael Ellerman <mpe@ellerman.id.au>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linuxppc-dev@lists.ozlabs.org,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Bjorn Helgaas <bhelgaas@google.com>,
  Stuart Yoder <stuyoder@gmail.com>,
  Laurentiu Tudor <laurentiu.tudor@nxp.com>,
@@ -95,83 +92,212 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 00/35] genirq/msi, PCI/MSI: Spring cleaning - Part 2
+Subject: [patch V3 07/35] device: Move MSI related data into a struct
+References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-Date: Fri, 10 Dec 2021 23:18:43 +0100 (CET)
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 10 Dec 2021 23:18:54 +0100 (CET)
 
-VGhpcyBpcyB0aGUgc2Vjb25kIHBhcnQgb2YgW1BDSV1NU0kgcmVmYWN0b3Jpbmcgd2hpY2ggYWlt
-cyB0byBwcm92aWRlIHRoZQphYmlsaXR5IG9mIGV4cGFuZGluZyBNU0ktWCB2ZWN0b3JzIGFmdGVy
-IGVuYWJsaW5nIE1TSS1YLgoKVGhpcyBpcyBiYXNlZCBvbiB0aGUgZmlyc3QgcGFydCBvZiB0aGlz
-IHdvcmsgd2hpY2ggY2FuIGJlIGZvdW5kIGhlcmU6CgogICAgaHR0cHM6Ly9sb3JlLmtlcm5lbC5v
-cmcvci8yMDIxMTIwNjIxMDE0Ny44NzI4NjU4MjNAbGludXRyb25peC5kZQoKYW5kIGhhcyBiZWVu
-IGFwcGxpZWQgdG86CgogICAgIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2Vy
-bmVsL2dpdC90aXAvdGlwLmdpdCBpcnEvbXNpCgoKVGhpcyBzZWNvbmQgcGFydCBoYXMgdGhlIGZv
-bGxvd2luZyBpbXBvcnRhbnQgY2hhbmdlczoKCiAgIDEpIENsZWFudXAgb2YgdGhlIE1TSSByZWxh
-dGVkIGRhdGEgaW4gc3RydWN0IGRldmljZQoKICAgICAgc3RydWN0IGRldmljZSBjb250YWlucyBh
-dCB0aGUgbW9tZW50IHZhcmlvdXMgTVNJIHJlbGF0ZWQgcGFydHMuIFNvbWUKICAgICAgb2YgdGhl
-bSAodGhlIGlycSBkb21haW4gcG9pbnRlcikgY2Fubm90IGJlIG1vdmVkIG91dCwgYnV0IHRoZSBy
-ZXN0CiAgICAgIGNhbiBiZSBhbGxvY2F0ZWQgb24gZmlyc3QgdXNlLiBUaGlzIGlzIGluIHByZXBh
-cmF0aW9uIG9mIGFkZGluZyBtb3JlCiAgICAgIHBlciBkZXZpY2UgTVNJIGRhdGEgbGF0ZXIgb24u
-CgogICAyKSBDb25zb2xpZGF0aW9uIG9mIHN5c2ZzIGhhbmRsaW5nCgogICAgICBBcyBhIGZpcnN0
-IHN0ZXAgdGhpcyBtb3ZlcyB0aGUgc3lzZnMgcG9pbnRlciBmcm9tIHN0cnVjdCBtc2lfZGVzYwog
-ICAgICBpbnRvIHRoZSBuZXcgcGVyIGRldmljZSBNU0kgZGF0YSBzdHJ1Y3R1cmUgd2hlcmUgaXQg
-YmVsb25ncy4KCiAgICAgIExhdGVyIGNoYW5nZXMgd2lsbCBjbGVhbnVwIHRoaXMgY29kZSBmdXJ0
-aGVyLCBidXQgdGhhdCdzIG5vdCBwb3NzaWJsZQogICAgICBhdCB0aGlzIHBvaW50LgoKICAgMykg
-VXNlIFBDSSBkZXZpY2UgcHJvcGVydGllcyBpbnN0ZWFkIG9mIGxvb2tpbmcgdXAgTVNJIGRlc2Ny
-aXB0b3JzIGFuZAogICAgICBhbmFseXNpbmcgdGhlaXIgZGF0YS4KCiAgIDQpIFByb3ZpZGUgYSBm
-dW5jdGlvbiB0byByZXRyaWV2ZSB0aGUgTGludXggaW50ZXJydXB0IG51bWJlciBmb3IgYSBnaXZl
-bgogICAgICBNU0kgaW5kZXggc2ltaWxhciB0byBwY2lfaXJxX3ZlY3RvcigpIGFuZCBjbGVhbnVw
-IGFsbCBvcGVuIGNvZGVkCiAgICAgIHZhcmlhbnRzLgoKSXQncyBhbHNvIGF2YWlsYWJsZSBmcm9t
-IGdpdDoKCiAgICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0
-L3RnbHgvZGV2ZWwuZ2l0IG1zaS12My1wYXJ0LTIKClBhcnQgMyBvZiB0aGlzIGVmZm9ydCBpcyBh
-dmFpbGFibGUgb24gdG9wCgogICAgIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgv
-a2VybmVsL2dpdC90Z2x4L2RldmVsLmdpdCBtc2ktdjMtcGFydC0zCgogICAgIFBhcnQgMyBpcyBu
-b3QgZ29pbmcgdG8gYmUgcmVwb3N0ZWQgYXMgdGhlcmUgaXMgbm8gY2hhbmdlIHZzLiBWMi4KClYy
-IG9mIHBhcnQgMiBjYW4gYmUgZm91bmQgaGVyZToKCiAgICBodHRwczovL2xvcmUua2VybmVsLm9y
-Zy9yLzIwMjExMjA2MjEwMzA3LjYyNTExNjI1M0BsaW51dHJvbml4LmRlCgpDaGFuZ2VzIHZlcnN1
-cyBWMjoKCiAgLSBVc2UgUENJIGRldmljZSBwcm9wZXJ0aWVzIGluc3RlYWQgb2YgY3JlYXRpbmcg
-YSBuZXcgc2V0IC0gSmFzb24KCiAgLSBQaWNrZWQgdXAgUmV2aWV3ZWQvVGVzdGVkL0Fja2VkLWJ5
-IHRhZ3MgYXMgYXBwcm9wcmlhdGUKClRoYW5rcywKCgl0Z2x4Ci0tLQogYXJjaC9wb3dlcnBjL3Bs
-YXRmb3Jtcy9jZWxsL2F4b25fbXNpLmMgICAgICAgICAgICAgIHwgICAgNSAKIGFyY2gvcG93ZXJw
-Yy9wbGF0Zm9ybXMvcHNlcmllcy9tc2kuYyAgICAgICAgICAgICAgICB8ICAgMzggKy0tLQogYXJj
-aC94ODYva2VybmVsL2FwaWMvbXNpLmMgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAgNSAK
-IGFyY2gveDg2L3BjaS94ZW4uYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAg
-MTEgLQogZHJpdmVycy9iYXNlL3BsYXRmb3JtLW1zaS5jICAgICAgICAgICAgICAgICAgICAgICAg
-IHwgIDE1MiArKysrKysrKy0tLS0tLS0tLS0tCiBkcml2ZXJzL2J1cy9mc2wtbWMvZHByYy1kcml2
-ZXIuYyAgICAgICAgICAgICAgICAgICAgfCAgICA4IC0KIGRyaXZlcnMvYnVzL2ZzbC1tYy9mc2wt
-bWMtYWxsb2NhdG9yLmMgICAgICAgICAgICAgICB8ICAgIDkgLQogZHJpdmVycy9idXMvZnNsLW1j
-L2ZzbC1tYy1tc2kuYyAgICAgICAgICAgICAgICAgICAgIHwgICAyNiArLS0KIGRyaXZlcnMvZG1h
-L212X3hvcl92Mi5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMTYgLS0KIGRyaXZl
-cnMvZG1hL3Fjb20vaGlkbWEuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgNDQgKyst
-LS0KIGRyaXZlcnMvZG1hL3RpL2szLXVkbWEtcHJpdmF0ZS5jICAgICAgICAgICAgICAgICAgICB8
-ICAgIDYgCiBkcml2ZXJzL2RtYS90aS9rMy11ZG1hLmMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgfCAgIDE0IC0KIGRyaXZlcnMvaW9tbXUvYXJtL2FybS1zbW11LXYzL2FybS1zbW11LXYzLmMg
-ICAgICAgICB8ICAgMjMgLS0KIGRyaXZlcnMvaXJxY2hpcC9pcnEtbWJpZ2VuLmMgICAgICAgICAg
-ICAgICAgICAgICAgICB8ICAgIDQgCiBkcml2ZXJzL2lycWNoaXAvaXJxLW12ZWJ1LWljdS5jICAg
-ICAgICAgICAgICAgICAgICAgfCAgIDEyIC0KIGRyaXZlcnMvaXJxY2hpcC9pcnEtdGktc2NpLWlu
-dGEuYyAgICAgICAgICAgICAgICAgICB8ICAgIDIgCiBkcml2ZXJzL21haWxib3gvYmNtLWZsZXhy
-bS1tYWlsYm94LmMgICAgICAgICAgICAgICAgfCAgICA5IC0KIGRyaXZlcnMvbmV0L2V0aGVybmV0
-L2ZyZWVzY2FsZS9kcGFhMi9kcGFhMi1ldGguYyAgICB8ICAgIDQgCiBkcml2ZXJzL25ldC9ldGhl
-cm5ldC9mcmVlc2NhbGUvZHBhYTIvZHBhYTItcHRwLmMgICAgfCAgICA0IAogZHJpdmVycy9uZXQv
-ZXRoZXJuZXQvZnJlZXNjYWxlL2RwYWEyL2RwYWEyLXN3aXRjaC5jIHwgICAgNSAKIGRyaXZlcnMv
-cGNpL21zaS9pcnFkb21haW4uYyAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMjAgKysKIGRy
-aXZlcnMvcGNpL21zaS9sZWdhY3kuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDYg
-CiBkcml2ZXJzL3BjaS9tc2kvbXNpLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAg
-MTMzICsrKysrKy0tLS0tLS0tLS0KIGRyaXZlcnMvcGNpL3hlbi1wY2lmcm9udC5jICAgICAgICAg
-ICAgICAgICAgICAgICAgICB8ICAgIDIgCiBkcml2ZXJzL3BlcmYvYXJtX3NtbXV2M19wbXUuYyAg
-ICAgICAgICAgICAgICAgICAgICAgfCAgICA1IAogZHJpdmVycy9zb2MvZnNsL2RwaW8vZHBpby1k
-cml2ZXIuYyAgICAgICAgICAgICAgICAgIHwgICAgOCAtCiBkcml2ZXJzL3NvYy90aS9rMy1yaW5n
-YWNjLmMgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA2IAogZHJpdmVycy9zb2MvdGkvdGlf
-c2NpX2ludGFfbXNpLmMgICAgICAgICAgICAgICAgICAgIHwgICAyMiAtLQogZHJpdmVycy92Zmlv
-L2ZzbC1tYy92ZmlvX2ZzbF9tY19pbnRyLmMgICAgICAgICAgICAgIHwgICAgNCAKIGluY2x1ZGUv
-bGludXgvZGV2aWNlLmggICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMjUgKystCiBp
-bmNsdWRlL2xpbnV4L2ZzbC9tYy5oICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA0
-IAogaW5jbHVkZS9saW51eC9tc2kuaCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwg
-ICA5NSArKysrLS0tLS0tLS0KIGluY2x1ZGUvbGludXgvcGNpLmggICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICB8ICAgIDEgCiBpbmNsdWRlL2xpbnV4L3NvYy90aS90aV9zY2lfaW50YV9t
-c2kuaCAgICAgICAgICAgICAgfCAgICAxIAoga2VybmVsL2lycS9tc2kuYyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHwgIDE1OCArKysrKysrKysrKysrKystLS0tLQogMzUgZmls
-ZXMgY2hhbmdlZCwgNDI5IGluc2VydGlvbnMoKyksIDQ1OCBkZWxldGlvbnMoLSkKCg==
+From: Thomas Gleixner <tglx@linutronix.de>
+
+The only unconditional part of MSI data in struct device is the irqdomain
+pointer. Everything else can be allocated on demand. Create a data
+structure and move the irqdomain pointer into it. The other MSI specific
+parts are going to be removed from struct device in later steps.
+
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+
+---
+ drivers/base/platform-msi.c                 |   12 ++++++------
+ drivers/dma/ti/k3-udma.c                    |    4 ++--
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |    2 +-
+ drivers/irqchip/irq-mvebu-icu.c             |    6 +++---
+ drivers/soc/ti/k3-ringacc.c                 |    4 ++--
+ drivers/soc/ti/ti_sci_inta_msi.c            |    2 +-
+ include/linux/device.h                      |   20 ++++++++++++++------
+ 7 files changed, 29 insertions(+), 21 deletions(-)
+
+--- a/drivers/base/platform-msi.c
++++ b/drivers/base/platform-msi.c
+@@ -210,10 +210,10 @@ platform_msi_alloc_priv_data(struct devi
+ 	 * accordingly (which would impact the max number of MSI
+ 	 * capable devices).
+ 	 */
+-	if (!dev->msi_domain || !write_msi_msg || !nvec || nvec > MAX_DEV_MSIS)
++	if (!dev->msi.domain || !write_msi_msg || !nvec || nvec > MAX_DEV_MSIS)
+ 		return ERR_PTR(-EINVAL);
+ 
+-	if (dev->msi_domain->bus_token != DOMAIN_BUS_PLATFORM_MSI) {
++	if (dev->msi.domain->bus_token != DOMAIN_BUS_PLATFORM_MSI) {
+ 		dev_err(dev, "Incompatible msi_domain, giving up\n");
+ 		return ERR_PTR(-EINVAL);
+ 	}
+@@ -269,7 +269,7 @@ int platform_msi_domain_alloc_irqs(struc
+ 	if (err)
+ 		goto out_free_priv_data;
+ 
+-	err = msi_domain_alloc_irqs(dev->msi_domain, dev, nvec);
++	err = msi_domain_alloc_irqs(dev->msi.domain, dev, nvec);
+ 	if (err)
+ 		goto out_free_desc;
+ 
+@@ -282,7 +282,7 @@ int platform_msi_domain_alloc_irqs(struc
+ 	return 0;
+ 
+ out_free_irqs:
+-	msi_domain_free_irqs(dev->msi_domain, dev);
++	msi_domain_free_irqs(dev->msi.domain, dev);
+ out_free_desc:
+ 	platform_msi_free_descs(dev, 0, nvec);
+ out_free_priv_data:
+@@ -306,7 +306,7 @@ void platform_msi_domain_free_irqs(struc
+ 		platform_msi_free_priv_data(desc->platform.msi_priv_data);
+ 	}
+ 
+-	msi_domain_free_irqs(dev->msi_domain, dev);
++	msi_domain_free_irqs(dev->msi.domain, dev);
+ 	platform_msi_free_descs(dev, 0, MAX_DEV_MSIS);
+ }
+ EXPORT_SYMBOL_GPL(platform_msi_domain_free_irqs);
+@@ -354,7 +354,7 @@ struct irq_domain *
+ 		return NULL;
+ 
+ 	data->host_data = host_data;
+-	domain = irq_domain_create_hierarchy(dev->msi_domain, 0,
++	domain = irq_domain_create_hierarchy(dev->msi.domain, 0,
+ 					     is_tree ? 0 : nvec,
+ 					     dev->fwnode, ops, data);
+ 	if (!domain)
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -5279,9 +5279,9 @@ static int udma_probe(struct platform_de
+ 	if (IS_ERR(ud->ringacc))
+ 		return PTR_ERR(ud->ringacc);
+ 
+-	dev->msi_domain = of_msi_get_domain(dev, dev->of_node,
++	dev->msi.domain = of_msi_get_domain(dev, dev->of_node,
+ 					    DOMAIN_BUS_TI_SCI_INTA_MSI);
+-	if (!dev->msi_domain) {
++	if (!dev->msi.domain) {
+ 		dev_err(dev, "Failed to get MSI domain\n");
+ 		return -EPROBE_DEFER;
+ 	}
+--- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
++++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+@@ -3170,7 +3170,7 @@ static void arm_smmu_setup_msis(struct a
+ 	if (!(smmu->features & ARM_SMMU_FEAT_MSI))
+ 		return;
+ 
+-	if (!dev->msi_domain) {
++	if (!dev->msi.domain) {
+ 		dev_info(smmu->dev, "msi_domain absent - falling back to wired irqs\n");
+ 		return;
+ 	}
+--- a/drivers/irqchip/irq-mvebu-icu.c
++++ b/drivers/irqchip/irq-mvebu-icu.c
+@@ -314,12 +314,12 @@ static int mvebu_icu_subset_probe(struct
+ 		msi_data->subset_data = of_device_get_match_data(dev);
+ 	}
+ 
+-	dev->msi_domain = of_msi_get_domain(dev, dev->of_node,
++	dev->msi.domain = of_msi_get_domain(dev, dev->of_node,
+ 					    DOMAIN_BUS_PLATFORM_MSI);
+-	if (!dev->msi_domain)
++	if (!dev->msi.domain)
+ 		return -EPROBE_DEFER;
+ 
+-	msi_parent_dn = irq_domain_get_of_node(dev->msi_domain);
++	msi_parent_dn = irq_domain_get_of_node(dev->msi.domain);
+ 	if (!msi_parent_dn)
+ 		return -ENODEV;
+ 
+--- a/drivers/soc/ti/k3-ringacc.c
++++ b/drivers/soc/ti/k3-ringacc.c
+@@ -1356,9 +1356,9 @@ static int k3_ringacc_init(struct platfo
+ 	struct resource *res;
+ 	int ret, i;
+ 
+-	dev->msi_domain = of_msi_get_domain(dev, dev->of_node,
++	dev->msi.domain = of_msi_get_domain(dev, dev->of_node,
+ 					    DOMAIN_BUS_TI_SCI_INTA_MSI);
+-	if (!dev->msi_domain) {
++	if (!dev->msi.domain) {
+ 		dev_err(dev, "Failed to get MSI domain\n");
+ 		return -EPROBE_DEFER;
+ 	}
+--- a/drivers/soc/ti/ti_sci_inta_msi.c
++++ b/drivers/soc/ti/ti_sci_inta_msi.c
+@@ -140,7 +140,7 @@ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain
+ 
+ void ti_sci_inta_msi_domain_free_irqs(struct device *dev)
+ {
+-	msi_domain_free_irqs(dev->msi_domain, dev);
++	msi_domain_free_irqs(dev->msi.domain, dev);
+ 	ti_sci_inta_msi_free_descs(dev);
+ }
+ EXPORT_SYMBOL_GPL(ti_sci_inta_msi_domain_free_irqs);
+--- a/include/linux/device.h
++++ b/include/linux/device.h
+@@ -372,6 +372,16 @@ struct dev_links_info {
+ };
+ 
+ /**
++ * struct dev_msi_info - Device data related to MSI
++ * @domain:	The MSI interrupt domain associated to the device
++ */
++struct dev_msi_info {
++#ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
++	struct irq_domain	*domain;
++#endif
++};
++
++/**
+  * struct device - The basic device structure
+  * @parent:	The device's "parent" device, the device to which it is attached.
+  * 		In most cases, a parent device is some sort of bus or host
+@@ -407,8 +417,8 @@ struct dev_links_info {
+  * @em_pd:	device's energy model performance domain
+  * @pins:	For device pin management.
+  *		See Documentation/driver-api/pin-control.rst for details.
++ * @msi:	MSI related data
+  * @msi_list:	Hosts MSI descriptors
+- * @msi_domain: The generic MSI domain this device is using.
+  * @numa_node:	NUMA node this device is close to.
+  * @dma_ops:    DMA mapping operations for this device.
+  * @dma_mask:	Dma mask (if dma'ble device).
+@@ -500,12 +510,10 @@ struct device {
+ 	struct em_perf_domain	*em_pd;
+ #endif
+ 
+-#ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
+-	struct irq_domain	*msi_domain;
+-#endif
+ #ifdef CONFIG_PINCTRL
+ 	struct dev_pin_info	*pins;
+ #endif
++	struct dev_msi_info	msi;
+ #ifdef CONFIG_GENERIC_MSI_IRQ
+ 	struct list_head	msi_list;
+ #endif
+@@ -666,7 +674,7 @@ static inline void set_dev_node(struct d
+ static inline struct irq_domain *dev_get_msi_domain(const struct device *dev)
+ {
+ #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
+-	return dev->msi_domain;
++	return dev->msi.domain;
+ #else
+ 	return NULL;
+ #endif
+@@ -675,7 +683,7 @@ static inline struct irq_domain *dev_get
+ static inline void dev_set_msi_domain(struct device *dev, struct irq_domain *d)
+ {
+ #ifdef CONFIG_GENERIC_MSI_IRQ_DOMAIN
+-	dev->msi_domain = d;
++	dev->msi.domain = d;
+ #endif
+ }
+ 
+
 
