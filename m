@@ -4,36 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1930EC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 09:33:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.243652.421525 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D1FC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 09:38:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.243661.421545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvcHF-0006M0-7V; Fri, 10 Dec 2021 09:33:17 +0000
+	id 1mvcM3-0007m4-Ua; Fri, 10 Dec 2021 09:38:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 243652.421525; Fri, 10 Dec 2021 09:33:17 +0000
+Received: by outflank-mailman (output) from mailman id 243661.421545; Fri, 10 Dec 2021 09:38:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvcHF-0006Ls-4I; Fri, 10 Dec 2021 09:33:17 +0000
-Received: by outflank-mailman (input) for mailman id 243652;
- Fri, 10 Dec 2021 09:33:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dYg4=Q3=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mvcHD-0006Fk-2C
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 09:33:15 +0000
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [2a00:1450:4864:20::12f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 328c840b-599c-11ec-9d12-4777fae47e2b;
- Fri, 10 Dec 2021 10:33:14 +0100 (CET)
-Received: by mail-lf1-x12f.google.com with SMTP id k37so17012947lfv.3
- for <xen-devel@lists.xenproject.org>; Fri, 10 Dec 2021 01:33:14 -0800 (PST)
-Received: from [192.168.1.7] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id c13sm254687lfv.293.2021.12.10.01.33.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Dec 2021 01:33:13 -0800 (PST)
+	id 1mvcM3-0007lx-Qw; Fri, 10 Dec 2021 09:38:15 +0000
+Received: by outflank-mailman (input) for mailman id 243661;
+ Fri, 10 Dec 2021 09:38:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=aCrA=Q3=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1mvcM3-0007lr-9y
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 09:38:15 +0000
+Received: from de-smtp-delivery-102.mimecast.com
+ (de-smtp-delivery-102.mimecast.com [194.104.109.102])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e593dc40-599c-11ec-a831-37629979565c;
+ Fri, 10 Dec 2021 10:38:14 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05lp2107.outbound.protection.outlook.com [104.47.18.107]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-7-IeUw9UEGPbqqlOVPqBCscA-1; Fri, 10 Dec 2021 10:38:13 +0100
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR0402MB3934.eurprd04.prod.outlook.com (2603:10a6:803:1b::29)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.22; Fri, 10 Dec
+ 2021 09:38:12 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe%6]) with mapi id 15.20.4755.024; Fri, 10 Dec 2021
+ 09:38:12 +0000
+Received: from [10.156.60.236] (37.24.206.209) by
+ AM5PR0701CA0006.eurprd07.prod.outlook.com (2603:10a6:203:51::16) with
+ Microsoft SMTP Server (version=TLS1_2, cipher=) via Frontend Transport;
+ Fri, 10 Dec 2021 09:38:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,101 +57,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 328c840b-599c-11ec-9d12-4777fae47e2b
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=1sKsqu13f1fJ8ZVjtTiFIs7M6/v2yiKCto4Y2goIhtY=;
-        b=gegr37rT1wvk5/wIHoT3HG7CbFisDJJ4qe7XzDTdtRmUZejW6aDzDd79UpHl8InFNC
-         Aav2ZhWN7fwu3X0v/aE89Aw3XSuHOBWjTUXuS08G6a53BhERGxk+ge/9uOOtbkqHNmgb
-         MoJZlh7AwjhHDayjdbsuG/3Q0h1neeOtb+eNY+EgK6GT9rHBwt8YAyq6IvVCDr3pO26l
-         HAnOi+dsKwsTag1DeO8AbaabSQ2CLSMuvxJeKT04xZCkvOu+Z3PXKa6G9dWDMSK8DId3
-         4B3MJliyAYL16Dmvpz/AGxNLYDhl40rwyQIQcyt7MD1w5vB8GcKk1scbGe0WZI0ZOvzP
-         XpBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=1sKsqu13f1fJ8ZVjtTiFIs7M6/v2yiKCto4Y2goIhtY=;
-        b=w+0fmlsE7AZeVSIM+NECfumoMcz3B5DeJK1iD22n2QGgWEicbgjg5CHClEr7LbeLif
-         SSsn79HaP7ktCgj3dlPQavPRk4JQGZPUTR3KClwf3kOIT1Z/lkT9GTRikKUr6eZU3Aa6
-         kmYFawGi4++YwWeBuktcA6NPG8rtxkKQmH/HY6iGpT7H5PISeaBB9DC4Lpv/KJ7Yuvqs
-         HCGIenSrrbbXj8u4CygJf5e0k/x94qzEFQ8r1HpJP+b58X5qPgLmrCGnnCiH3HaImZsJ
-         s6eoPc6VIaNhxWL0FkTTX0nmkIGmYo0aTZLRtgfGsngyAEUDQi9KkRQiuF/+fzxAyMGT
-         8ZtA==
-X-Gm-Message-State: AOAM53354qkiE2UGx9SLK+UPiGIjBgmNsV9826i41jzzFVrrAcXfK3mJ
-	+WkSuMtkID1F/CMWCpJgnFY=
-X-Google-Smtp-Source: ABdhPJy0jBvkn2hW116jh/1FKkNOWkwWVSWrraWcHOTZPFv9s8mfwd+5sJqH2upmSWbUncVjhxEwpQ==
-X-Received: by 2002:a05:6512:1047:: with SMTP id c7mr11615784lfb.26.1639128794039;
-        Fri, 10 Dec 2021 01:33:14 -0800 (PST)
-Subject: Re: [PATCH V4 6/6] dt-bindings: xen: Clarify "reg" purpose
-To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Rob Herring <robh+dt@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <1639080336-26573-1-git-send-email-olekstysh@gmail.com>
- <1639080336-26573-7-git-send-email-olekstysh@gmail.com>
- <669d3f56-13b8-f159-2053-b39f1ba4222f@xen.org>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <35ee3534-9e24-5a11-0bf1-a5dd0b640186@gmail.com>
-Date: Fri, 10 Dec 2021 11:33:12 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <669d3f56-13b8-f159-2053-b39f1ba4222f@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Inumbo-ID: e593dc40-599c-11ec-a831-37629979565c
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1639129094;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=Zvq73y0dJLjSz+MQ+lx2g5w/pq8BC6asLbuC1uXR9cY=;
+	b=O22RN3p97ZihWpX27w97+r8Go33wmLE6O7H13SWAI3o+FXtX5ePOmgSBm41EAXGeO2Uh4+
+	S8x3QtdXqyFu7gjqkGtGZSUl2k3yxsNnk1DxL3ti46OyJumoIBPEgtGi2sLrF8JD/zNx2T
+	WG47uyt0DGRUJlYpKhx3uFl5oMHsz80=
+X-MC-Unique: IeUw9UEGPbqqlOVPqBCscA-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZPzIagmE/NK+BgtQwGrLOIsH5skGQxoXlflQySowyJSankJKjKMj5nY3f2uQKyZi4AGPh6lHYSRXcbh1UneuUZX/u8WL+/yL17ow8T8vIuGhf5WR0fsDz9ZUrangchFjA/L75pGevoKBcsBPWhDaFho65Xof8OJH2Eqg98kyEaAif6stwsFyEHBe5h1jQoTPMdv4zKaFN5MSFeGo3ZBhFXRaCfgLCI/g2YILKx9uU5jlGASQ4cvydeDz0JRn3PXkDzP3SihSJxHnad1p9+5op8k5NvbDhVyWnfaqXxhchjFuuSu5HMGIfZw0/8zFgIzWbIDJdKEOP0JClJDHUwuWPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Zvq73y0dJLjSz+MQ+lx2g5w/pq8BC6asLbuC1uXR9cY=;
+ b=ZTMni/wNr5Nd39m6YkP2ONrTGRNM2kbylOuIkNPFp4KCRyG29meEWqSXm7yUFt5ePN6DCsSfFkHUAw1JzX35MH+2g3JN5X9LAD44MSgU9ZBgerki4CK6EI7/vODTusXPqWdpF3F4RNe023oKyQdEaO6LIMIf8vbzskVHAVCZBTijG9kr8ZZeflIkY1SFCN+Y1j/iGYslk3Onh2fkNg1sGu87F2ZQhwbbBltuL76TprrsTr8zd/jcaqsbL205HsfnXeKSE7JxnaAWvMtiguFmhabzoQ2Jm+d+IZmiBckZ2xm9UC61+fYukNuxkYvhUXtf9SrrG62pTGyPExaUBjqxWQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <9725c93e-c227-f29f-07a4-65e383bb7858@suse.com>
+Date: Fri, 10 Dec 2021 10:38:09 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2 0/2] grant table and add-to-physmap adjustments on top of
+ XSAs 379 and 384
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
 Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM5PR0701CA0006.eurprd07.prod.outlook.com
+ (2603:10a6:203:51::16) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: fce81fcf-261d-456a-e03b-08d9bbc0c864
+X-MS-TrafficTypeDiagnostic: VI1PR0402MB3934:EE_
+X-Microsoft-Antispam-PRVS:
+	<VI1PR0402MB3934621F37F49DFC24D9D2F2B3719@VI1PR0402MB3934.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5516;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	o5fJCN+wYEqhNBCacxGtfNGvIS8CUfMadmuHodem3fYgl+CVKqgEtbhkwTlGn7Ge+rbDXnH8ERTTViMqIVgmNVClqpiSRUDBa6V4E+T/HmXil2t5BYFgsncS3dZr9pGTksK2rRv7YRB4PjKqE8XDei95K5w8/ipZyGlI5pm+ghVo3iYy5LDd81IwIP9YGsRDhoZGWk40TrA6lT9a438x03sRyLpL/9JD7Gq4DCFDJOvUTeIOxk2xDRItd6VV8HMSj7IpRDmZtoAB8SwziChogq3OMi2j+qexnl++9QXwIVYjCe1ZoQdHSi+VgBUie4rW2vq8gauJa9huz4ScEv6854PzoYs7OrjtIzJnqeXnXFGnHAo80fg6hbmb/XddErIQSlYgjF0bI3itiVyjx/0hs5sLs1F5LWiavF1k3lJ+Qh05Ll4QvSx9YuJCTt0Xw4bLzrQLP6bVvRvM34/AJqsJGHgFuKeIYRcaP2uv9qC/IfXuaj3ZB3QW+yXcxBazo4EWSQ7F7VBTPOd+PEVQFDWU8YV73ojri0471fAAK3KWNWYimjB0kgFNTmtLXNPg0XhCEpUawmQs67vnhDZmjls9rNpwcM6ijmetkXBEp7JYtwqpDDxyc7381BpJiiK9PxZ8dDOriwsp6ncImXhJwIUPj3OvsVT1YCC45eKde8yKGYCgXTnMbznGdjGzkFAn8uUuE0gU3eZ+Whm/1YL/sKF7d8cMuXKHbSzwC6P4w6xtk/msFHUNIQ8VWMhMrV9SWyZ9
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(83380400001)(186003)(4326008)(54906003)(86362001)(36756003)(956004)(5660300002)(16576012)(8936002)(508600001)(31686004)(2616005)(2906002)(31696002)(26005)(66946007)(316002)(8676002)(6916009)(38100700002)(6486002)(66476007)(66556008)(558084003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?aEovMDRwR0VoQ2FRRjRpRUZPSWdUYUlINklwaUFHK0hiSjViMzJCNy91Unpi?=
+ =?utf-8?B?U0U5Qm5SYXQ1Ri9mYkJEVUpJRjk3aHJ3OVZUODJqaWl4alRienZVaFdvM25v?=
+ =?utf-8?B?b3NRYlh5Z1UwWGJLbUphQzBLdDlVVHdaNEZrcjlEVU0zYU9jVFl6cGEraEtK?=
+ =?utf-8?B?NkRzRmt4cGF1ckREVS9rMEtpdnhhbmNsTEtneUZkc1hGQnBvM1ZhVUw2QzQ4?=
+ =?utf-8?B?R3RoVEdaNGhCbWlNZm0rTmMwcER4UllxU21VYTRoeDhEYkk2V0dnaEpZRFNu?=
+ =?utf-8?B?OW9VMlVSSTlBV2xITWJ4VXhBWTBUUHBqSndZemE2T2pzMUV2Y2xyRklIQXFh?=
+ =?utf-8?B?b0hkNllhV1FQVXprUzQ3VGZDczI1c0xuMk1LN0FnNzBZNlVpd2hsTGkwWTJ0?=
+ =?utf-8?B?VGd6Y002V2krNEhmR3l0dWpQVE9YSDlOSis5cFUwbkU0Umk1Y08zaC9yRDZr?=
+ =?utf-8?B?bzYweWRpaFk0Yks0SXhPZlR6STVsaDhMQUlGUG1LeHQxdW8rZU1IUGdhMitq?=
+ =?utf-8?B?cXFPTnp2My82NlBLUG40WWVXQWNFQXhaVXNHdFRNUStyR0dqTVdUR01ocE90?=
+ =?utf-8?B?dzJCQVhzSEVtSllwbDZaRzRsdW5PcWNNaEtYSmo0M0szaSszdndzTkx3c3BO?=
+ =?utf-8?B?KzFXT2tpU3FLU1pWSE4rbGxHSFhkL1BSbGZaM25jQTZ5Vm1UWktQRnUvZGRh?=
+ =?utf-8?B?SzRhN1c3NFhwalZRQTJDN2xidW43Q0Y2Q3BDRW1acTJjeDd4akE3ZjNPZElO?=
+ =?utf-8?B?ZThDZGhnY3BBVS9Wc045NnlFYm1HbVBWN3FUTVVEZEM1K1BJQ1ZsM3BMUEpI?=
+ =?utf-8?B?dnZOSVFZdHA0L0w5elNMdmRhYXZCM3lUbmdoeERMRVY2MEUyS0RtU1VBYm5I?=
+ =?utf-8?B?c0FLM240WUdyRHFqQjREb0JWV0tiM05sTnNGS1ZPRnRFd3JKMGJrNnlhUTNQ?=
+ =?utf-8?B?cU1XaXFYdGpldTBRalNoNTQ3NCt0QVNBWFZ4MUdOVEZqelJmQ3BjN2ExeHdk?=
+ =?utf-8?B?THhLWWdkZkZLS01nTk5BVkMvdGhQWDdUODQ3VVM2bmVoclA3b0ZTa08vM0lR?=
+ =?utf-8?B?MWNEemVxSTJJMWdGMjh3bnI3VWVXeW1PUzAvdHZUQ09rTVlIbUVTcjFwbS94?=
+ =?utf-8?B?ZC9ibGlORk10RzlsZjNKOUV2RTdXSWh5ZDhGMHB4RkN0UDhacWhnOXZNRHkw?=
+ =?utf-8?B?TnN2emZoWFdMYlpqUk4yTTBOM3B3bkdha08rbkR4V1NuU2M5YnE4QXpLeStQ?=
+ =?utf-8?B?RFh0aGJTOHhSSFVYcS9CbHNXTWRrTEFKOGJ5VDdwcyt5Qmw2cTN5L1YrdVJV?=
+ =?utf-8?B?STZjWkEyTFczclBtSUw1QjdDTTkvSGl4eWs4cWRaU1hYbXlLdmptSmZHcUJt?=
+ =?utf-8?B?TDRWbW5tSE8wQ2xycElrdFFraDd0UXRZdmVZMFNIa2M4UHFYZUFzVTZxbWdI?=
+ =?utf-8?B?TFNObGRsWER6UEpUTlprOU5VbjcxRHk1UndLUFNBVExLZTNXek9BQ3pZc3lk?=
+ =?utf-8?B?VEpsMVhZMWhCa3ZKTDRpaEF4dTJwYVhjYjBXZHhJNXJnd096Y2l6S2pGWW02?=
+ =?utf-8?B?S2FaejA5WVhmNVdoYXNkZ0xrTW5XT1NsZFpkbDAyRTVBdHVwbit2L24rM3FD?=
+ =?utf-8?B?V0dnQ3ZsYnluSHdKUTRBUVRMM0w1MTVGaHpmUzVnbFp3clZ3c2pEMUp1cEJ2?=
+ =?utf-8?B?RGtScVNPQUVqaDA5bjJaSGR5cy9nbW9VOE5rRVQvNFQ1OU8rWkZsb3Z0amhR?=
+ =?utf-8?B?WHNtZzhjenZhVW84TkF2NW5pYy96OGdOTmhuL1ZTYnA3VVNLeTdTVlBJaHRi?=
+ =?utf-8?B?UlhDS3REajNtUjRxd2kySm1HUXBiNEZHQncxZjhBM0NIYmFHUE90RUtsd201?=
+ =?utf-8?B?T2I1ekRiekdHVG51V3FQQVdYREszdHh0MkJTNUVJZXZMWHdkeFkrRjl1VHVq?=
+ =?utf-8?B?RHE3ZkpNbTAydHJiR2hKNlRnK2crb25sc1ltWjlkOEVGbUpJV0xxc3ZFT2di?=
+ =?utf-8?B?TUlNSXlhdUl4bTd3ZFNpYlJJVnRrNVRxblhVU1NzRXhoTG9aSmRYS0hQQnNz?=
+ =?utf-8?B?R3R0SkRsT0tlRGp0RXQzTDdtbWdya3BCWVhSZ2RnMVVabEx6ZFZKMUtOS1hI?=
+ =?utf-8?B?Q09TRFQ5QTE4VHdZNzh3TWZEZnNLNU0wR3Z0a3p5T09rRFo3bmJram1kRDRN?=
+ =?utf-8?Q?2yjS0aX4oV4GJTccrSveCO8=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fce81fcf-261d-456a-e03b-08d9bbc0c864
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Dec 2021 09:38:12.1703
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UV8+QIa8NPIE4Qty81jx5e/9Jt/+gf2zFp5C8VRhk3TfdGbTKz9pF6Duz8RLDap9+7Hsubc8BWIUfn7FmI9DBA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB3934
 
+The original 1st patch has meanwhile gone in, but the adjustment requested
+for patch 2 required a new prereq patch.
 
-On 10.12.21 11:09, Julien Grall wrote:
-> Hi Oleksandr,
+1: mm: introduce INVALID_{G,M}FN_RAW
+2: memory: XENMEM_add_to_physmap (almost) wrapping checks
 
-
-Hi Julien
-
-
->
-> On 09/12/2021 20:05, Oleksandr Tyshchenko wrote:
->> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->>
->> Xen on Arm has gained new support recently to calculate and report
->> extended regions (unused address space) safe to use for external
->> mappings. These regions are reported via "reg" property under
->> "hypervisor" node in the guest device-tree. As region 0 is reserved
->> for grant table space (always present), the indexes for extended
->> regions are 1...N.
->>
->> No device-tree bindings update is needed (except clarifying the text)
->> as guest infers the presence of extended regions from the number
->> of regions in "reg" property.
->>
->> While at it, remove the following sentence:
->> "This property is unnecessary when booting Dom0 using ACPI."
->> for "reg" and "interrupts" properties as the initialization is not
->> done via device-tree "hypervisor" node in that case anyway.
-> You sent a similar patch for Xen and have already commented there [1] 
-> . In short, the OS will be using the node to discover whether it is 
-> running on Xen for both ACPI and DT. The hypervisor node also contain 
-> the UEFI information for dom0.
-
-I agree with your comments. The sentence should remain in this case. 
-Thank you for pointing this out.
-
-
->
->
-> Cheers,
->
-> [1] 
-> https://lore.kernel.org/xen-devel/9602b019-6c20-cdc7-23f3-9e4f8fd720f6@xen.org/T/#t
->
--- 
-Regards,
-
-Oleksandr Tyshchenko
+Jan
 
 
