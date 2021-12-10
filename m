@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56E1AC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:28:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244452.423016 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0E6EC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 23:03:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244586.423026 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMv-0001Bu-Qc; Fri, 10 Dec 2021 22:27:57 +0000
+	id 1mvovC-0000IH-Gf; Fri, 10 Dec 2021 23:03:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244452.423016; Fri, 10 Dec 2021 22:27:57 +0000
+Received: by outflank-mailman (output) from mailman id 244586.423026; Fri, 10 Dec 2021 23:03:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMv-0001Bc-Ma; Fri, 10 Dec 2021 22:27:57 +0000
-Received: by outflank-mailman (input) for mailman id 244452;
- Fri, 10 Dec 2021 22:27:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoEV-0005LK-14
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:15 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3497537f-5a07-11ec-a74f-db008197e53d;
- Fri, 10 Dec 2021 23:19:13 +0100 (CET)
+	id 1mvovC-0000IA-DT; Fri, 10 Dec 2021 23:03:22 +0000
+Received: by outflank-mailman (input) for mailman id 244586;
+ Fri, 10 Dec 2021 23:03:21 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mvovB-0000Hz-O8; Fri, 10 Dec 2021 23:03:21 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mvovB-0000QS-Jf; Fri, 10 Dec 2021 23:03:21 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1mvovB-0004R1-Bg; Fri, 10 Dec 2021 23:03:21 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1mvovB-0007v4-BC; Fri, 10 Dec 2021 23:03:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,98 +44,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3497537f-5a07-11ec-a74f-db008197e53d
-Message-ID: <20211210221814.350967317@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174753;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OiOpnus/jgb4RvtQJgk+f5PDfD1lWJHYgR9yAXQeu2I=;
-	b=GqNHND5vQFfn8YzyhGofKZeaI5YQY13nUcIcEAnApVoYxde41u4gvkSMQaoDkklgWgL6Zk
-	wHK3PJ2ZfWbYxMme7FaxL39snJIf0wZL5rHbzsTnJnEy6rOrqOZLuFMip60nKRVfr+lj/W
-	BHXCzw1n2FEVbVuPbkWSyTdPAv+7+HaOx4FixB2V+JT0YpatDIYYDU4l+QGR4JfC9ST/QQ
-	ngLKa+qq7x59ird4H3MCqjWV28aq/HayJ/tjTE/75JamD316Ym4S0uX+2lXQI9IZaj0SWh
-	AKr8ZMfxglw+5yokSrUK5V9ferJK273x0+5I6KMvkrEpEnp1TSxk47w6CwmNQA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174753;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=OiOpnus/jgb4RvtQJgk+f5PDfD1lWJHYgR9yAXQeu2I=;
-	b=HkiV41WymK0ae47Xnth9tBZ2L/9zjtZHSoLnNC/O478xU6oHNx8HK4b2wxQ3RzFd2wVYMW
-	SUUWu6Lvp/P2vTDQ==
-From: Thomas Gleixner <tglx@linutronix.de>
-To: LKML <linux-kernel@vger.kernel.org>
-Cc: Bjorn Helgaas <helgaas@kernel.org>,
- Marc Zygnier <maz@kernel.org>,
- Alex Williamson <alex.williamson@redhat.com>,
- Kevin Tian <kevin.tian@intel.com>,
- Jason Gunthorpe <jgg@nvidia.com>,
- Megha Dey <megha.dey@intel.com>,
- Ashok Raj <ashok.raj@intel.com>,
- linux-pci@vger.kernel.org,
- Cedric Le Goater <clg@kaod.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Juergen Gross <jgross@suse.com>,
- xen-devel@lists.xenproject.org,
- Arnd Bergmann <arnd@arndb.de>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- linuxppc-dev@lists.ozlabs.org,
- Bjorn Helgaas <bhelgaas@google.com>,
- Stuart Yoder <stuyoder@gmail.com>,
- Laurentiu Tudor <laurentiu.tudor@nxp.com>,
- Nishanth Menon <nm@ti.com>,
- Tero Kristo <kristo@kernel.org>,
- Santosh Shilimkar <ssantosh@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
- Vinod Koul <vkoul@kernel.org>,
- dmaengine@vger.kernel.org,
- Mark Rutland <mark.rutland@arm.com>,
- Will Deacon <will@kernel.org>,
- Robin Murphy <robin.murphy@arm.com>,
- Joerg Roedel <joro@8bytes.org>,
- iommu@lists.linux-foundation.org,
- Jassi Brar <jassisinghbrar@gmail.com>,
- Peter Ujfalusi <peter.ujfalusi@gmail.com>,
- Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 19/35] genirq/msi: Consolidate MSI descriptor data
-References: <20211210221642.869015045@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=WX0B+CvY0zY/cUo5mLLyv5xVO6pLkNrBBdhEJFeQdB0=; b=WkEFzhtJi5hNQ4nFICQbKeFUXu
+	Ua0YNQlsIGobSB+pSmiH1g+TIkXbURgQe4Bg6fBa/D9HU5FUF1Do0n0OuoSPTCcC8uKmjGBogx62N
+	0IJWLZCIfpQdvfkrud3zAgB1378JItsS3yoSosf9NKsYT3ovFvTqjlOLIaSPntES0I5Q=;
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-167353-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Dec 2021 23:19:12 +0100 (CET)
+Subject: [ovmf test] 167353: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=e81a81e5846edcc4c2e91cf3a39d0ba8c31b687a
+X-Osstest-Versions-That:
+    ovmf=c82ab4d8c148c4009e0b31d1dd2ea6f7d4aea80d
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 10 Dec 2021 23:03:21 +0000
 
-From: Thomas Gleixner <tglx@linutronix.de>
+flight 167353 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/167353/
 
-All non PCI/MSI usage variants have data structures in struct msi_desc with
-only one member: xxx_index. PCI/MSI has a entry_nr member.
+Regressions :-(
 
-Add a common msi_index member to struct msi_desc so all implementations can
-share it which allows further consolidation.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 167239
+ build-i386-xsm                6 xen-build                fail REGR. vs. 167239
+ build-i386                    6 xen-build                fail REGR. vs. 167239
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 167239
 
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
----
- include/linux/msi.h |    2 ++
- 1 file changed, 2 insertions(+)
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -143,6 +143,7 @@ struct ti_sci_inta_msi_desc {
-  *			address or data changes
-  * @write_msi_msg_data:	Data parameter for the callback.
-  *
-+ * @msi_index:	Index of the msi descriptor
-  * @pci:	[PCI]	    PCI speficic msi descriptor data
-  * @platform:	[platform]  Platform device specific msi descriptor data
-  * @fsl_mc:	[fsl-mc]    FSL MC device specific msi descriptor data
-@@ -163,6 +164,7 @@ struct msi_desc {
- 	void (*write_msi_msg)(struct msi_desc *entry, void *data);
- 	void *write_msi_msg_data;
- 
-+	u16				msi_index;
- 	union {
- 		struct pci_msi_desc		pci;
- 		struct platform_msi_desc	platform;
+version targeted for testing:
+ ovmf                 e81a81e5846edcc4c2e91cf3a39d0ba8c31b687a
+baseline version:
+ ovmf                 c82ab4d8c148c4009e0b31d1dd2ea6f7d4aea80d
 
+Last test of basis   167239  2021-12-09 06:23:17 Z    1 days
+Failing since        167240  2021-12-09 08:42:46 Z    1 days   39 attempts
+Testing same since   167352  2021-12-10 20:11:48 Z    0 days    2 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Brijesh Singh <brijesh.singh@amd.com>
+  Brijesh Singh via groups.io <brijesh.singh=amd.com@groups.io>
+  Chris Jones <christopher.jones@arm.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Jiewen Yao <Jiewen.yao@intel.com>
+  Michael Roth <michael.roth@amd.com>
+  Philippe Mathieu-Daude <philmd@redhat.com>
+  Ray Ni <ray.ni@intel.com>
+  Tom Lendacky <thomas.lendacky@amd.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 1185 lines long.)
 
