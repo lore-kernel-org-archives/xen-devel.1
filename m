@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59193C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244424.422926 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C6FC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244425.422937 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMP-00042E-Gq; Fri, 10 Dec 2021 22:27:25 +0000
+	id 1mvoMR-0004Ta-2p; Fri, 10 Dec 2021 22:27:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244424.422926; Fri, 10 Dec 2021 22:27:25 +0000
+Received: by outflank-mailman (output) from mailman id 244425.422937; Fri, 10 Dec 2021 22:27:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMP-00041L-B5; Fri, 10 Dec 2021 22:27:25 +0000
-Received: by outflank-mailman (input) for mailman id 244424;
+	id 1mvoMQ-0004Ss-TM; Fri, 10 Dec 2021 22:27:26 +0000
+Received: by outflank-mailman (input) for mailman id 244425;
  Fri, 10 Dec 2021 22:27:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoEY-0005LK-1S
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:18 +0000
+ id 1mvoER-0005LR-FU
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:11 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 36690daa-5a07-11ec-a74f-db008197e53d;
- Fri, 10 Dec 2021 23:19:16 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 32cf2fd8-5a07-11ec-ad7a-b7ef48004f0a;
+ Fri, 10 Dec 2021 23:19:10 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36690daa-5a07-11ec-a74f-db008197e53d
-Message-ID: <20211210221814.477386185@linutronix.de>
+X-Inumbo-ID: 32cf2fd8-5a07-11ec-ad7a-b7ef48004f0a
+Message-ID: <20211210221814.228706214@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174756;
+	s=2020; t=1639174750;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=dh2RlNUmAwoYjA9eTFF60aCLEohqcxOki/Se5jBNtvk=;
-	b=q/pBw8LlYFFFU88TeeIJvEppe38MJYUOaegEt/6+kHbknlFz4hqC28pzkrcpz+rdZBH7Ct
-	cpIao/Ojr+R6AhAU4S+g3dU9sxTrWInVNawKyo/5M0hDBcPOzYmXMGvoNYb/E/BRYK8AbE
-	Jd5fBAThZII1tD00/tV2qPSz7ri4loVPKk5zdok3KSWYmtyvpbXduRDfB9WvyMuyy2kSKS
-	YBUFmgpMtUuwAt8ClNM4DiGIjFsZPR5MwdIozMRpGbXOjm768Nd5uNtLBB7XFbQCr9VMYN
-	v44+6amAej3NWNewWJB+7MJ66zDGM2lzzpqGH6JFmH6f765owfcCx2bXaseS0A==
+	 references:references; bh=FY9MZMWsXlGRWGpD4j0ndw3rUmZHrgdx/qnJrYogpAU=;
+	b=crLRwjpnFmL9vMNtYINDNn4+8OCsKUZw52CQiHwIVumoubywFORkfBtVSxdUwDOiyGUIps
+	SdPbjYumbRS7Dk0Tgi6Y/2GEaoHyNf3xM1ST45hNpPG8I++VRH/Xfyu5M6k0jaiAe1DD/j
+	kSWc3pDKfWBD5VYIOD6/b3OT2/vGnA+ynRtfJErlglQ56u3evX1lNm6SY5e5ESQpnC06kx
+	rO0rwjrjup3yPCpzY0hbURoWkLwMbwYM4SDBwawx9Oq3kMe6iQYCe3zJnMa+fJfxJQperJ
+	mHwXN3+qpbrRWvV5MauCMj8j3vkrSrndxScpReORwflYKATV8Hy8vzh3NpTffg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174756;
+	s=2020e; t=1639174750;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=dh2RlNUmAwoYjA9eTFF60aCLEohqcxOki/Se5jBNtvk=;
-	b=6IVODbVD2gQWqrMzoxlyFeT/FyksUxmc33xNNKlBBReHQFt0yfS0alvLSk8dq213HdtOYU
-	U81rzfIpvPjBIhBA==
+	 references:references; bh=FY9MZMWsXlGRWGpD4j0ndw3rUmZHrgdx/qnJrYogpAU=;
+	b=KyrVeJ0G9MOl8qF99M67WEg99zQMMH+5HSv5GJnHZovMto8RmqfPLbkbG09zVhDJ2hpCNg
+	8MnOzpWo1zDzWXBQ==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -69,8 +69,6 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Stuart Yoder <stuyoder@gmail.com>,
- Laurentiu Tudor <laurentiu.tudor@nxp.com>,
  Juergen Gross <jgross@suse.com>,
  xen-devel@lists.xenproject.org,
  Arnd Bergmann <arnd@arndb.de>,
@@ -78,6 +76,8 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Benjamin Herrenschmidt <benh@kernel.crashing.org>,
  linuxppc-dev@lists.ozlabs.org,
  Bjorn Helgaas <bhelgaas@google.com>,
+ Stuart Yoder <stuyoder@gmail.com>,
+ Laurentiu Tudor <laurentiu.tudor@nxp.com>,
  Nishanth Menon <nm@ti.com>,
  Tero Kristo <kristo@kernel.org>,
  Santosh Shilimkar <ssantosh@kernel.org>,
@@ -92,99 +92,189 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 21/35] bus: fsl-mc-msi: Use msi_desc::msi_index
+Subject: [patch V3 17/35] platform-msi: Rename functions and clarify comments
 References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Dec 2021 23:19:15 +0100 (CET)
+Date: Fri, 10 Dec 2021 23:19:09 +0100 (CET)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-Use the common msi_index member and get rid of the pointless wrapper struct.
+It's hard to distinguish what platform_msi_domain_alloc() and
+platform_msi_domain_alloc_irqs() are about. Make the distinction more
+explicit and add comments which explain the use cases properly.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
-Cc: Stuart Yoder <stuyoder@gmail.com>
-Cc: Laurentiu Tudor <laurentiu.tudor@nxp.com>
 ---
- drivers/bus/fsl-mc/fsl-mc-allocator.c |    2 +-
- drivers/bus/fsl-mc/fsl-mc-msi.c       |    6 +++---
- include/linux/msi.h                   |   10 ----------
- 3 files changed, 4 insertions(+), 14 deletions(-)
+ drivers/base/platform-msi.c     |   36 +++++++++++++++++++++---------------
+ drivers/irqchip/irq-mbigen.c    |    4 ++--
+ drivers/irqchip/irq-mvebu-icu.c |    6 +++---
+ include/linux/msi.h             |    8 ++++----
+ 4 files changed, 30 insertions(+), 24 deletions(-)
 
---- a/drivers/bus/fsl-mc/fsl-mc-allocator.c
-+++ b/drivers/bus/fsl-mc/fsl-mc-allocator.c
-@@ -393,7 +393,7 @@ int fsl_mc_populate_irq_pool(struct fsl_
- 	}
- 
- 	for_each_msi_entry(msi_desc, &mc_bus_dev->dev) {
--		mc_dev_irq = &irq_resources[msi_desc->fsl_mc.msi_index];
-+		mc_dev_irq = &irq_resources[msi_desc->msi_index];
- 		mc_dev_irq->msi_desc = msi_desc;
- 		mc_dev_irq->resource.id = msi_desc->irq;
- 	}
---- a/drivers/bus/fsl-mc/fsl-mc-msi.c
-+++ b/drivers/bus/fsl-mc/fsl-mc-msi.c
-@@ -29,7 +29,7 @@ static irq_hw_number_t fsl_mc_domain_cal
- 	 * Make the base hwirq value for ICID*10000 so it is readable
- 	 * as a decimal value in /proc/interrupts.
- 	 */
--	return (irq_hw_number_t)(desc->fsl_mc.msi_index + (dev->icid * 10000));
-+	return (irq_hw_number_t)(desc->msi_index + (dev->icid * 10000));
+--- a/drivers/base/platform-msi.c
++++ b/drivers/base/platform-msi.c
+@@ -313,17 +313,18 @@ EXPORT_SYMBOL_GPL(platform_msi_domain_fr
+  *                              a platform-msi domain
+  * @domain:	The platform-msi domain
+  *
+- * Returns the private data provided when calling
+- * platform_msi_create_device_domain.
++ * Return: The private data provided when calling
++ * platform_msi_create_device_domain().
+  */
+ void *platform_msi_get_host_data(struct irq_domain *domain)
+ {
+ 	struct platform_msi_priv_data *data = domain->host_data;
++
+ 	return data->host_data;
  }
  
- static void fsl_mc_msi_set_desc(msi_alloc_info_t *arg,
-@@ -122,7 +122,7 @@ static void fsl_mc_msi_write_msg(struct
- 	struct fsl_mc_device *mc_bus_dev = to_fsl_mc_device(msi_desc->dev);
- 	struct fsl_mc_bus *mc_bus = to_fsl_mc_bus(mc_bus_dev);
- 	struct fsl_mc_device_irq *mc_dev_irq =
--		&mc_bus->irq_resources[msi_desc->fsl_mc.msi_index];
-+		&mc_bus->irq_resources[msi_desc->msi_index];
- 
- 	msi_desc->msg = *msg;
- 
-@@ -235,7 +235,7 @@ static int fsl_mc_msi_alloc_descs(struct
- 			goto cleanup_msi_descs;
- 		}
- 
--		msi_desc->fsl_mc.msi_index = i;
-+		msi_desc->msi_index = i;
- 		INIT_LIST_HEAD(&msi_desc->list);
- 		list_add_tail(&msi_desc->list, dev_to_msi_list(dev));
- 	}
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -107,14 +107,6 @@ struct pci_msi_desc {
- };
+ /**
+- * __platform_msi_create_device_domain - Create a platform-msi domain
++ * __platform_msi_create_device_domain - Create a platform-msi device domain
+  *
+  * @dev:		The device generating the MSIs
+  * @nvec:		The number of MSIs that need to be allocated
+@@ -332,7 +333,11 @@ void *platform_msi_get_host_data(struct
+  * @ops:		The hierarchy domain operations to use
+  * @host_data:		Private data associated to this domain
+  *
+- * Returns an irqdomain for @nvec interrupts
++ * Return: An irqdomain for @nvec interrupts on success, NULL in case of error.
++ *
++ * This is for interrupt domains which stack on a platform-msi domain
++ * created by platform_msi_create_irq_domain(). @dev->msi.domain points to
++ * that platform-msi domain which is the parent for the new domain.
+  */
+ struct irq_domain *
+ __platform_msi_create_device_domain(struct device *dev,
+@@ -372,18 +377,19 @@ struct irq_domain *
+ }
  
  /**
-- * fsl_mc_msi_desc - FSL-MC device specific msi descriptor data
-- * @msi_index:		The index of the MSI descriptor
-- */
--struct fsl_mc_msi_desc {
--	u16				msi_index;
--};
--
--/**
-  * ti_sci_inta_msi_desc - TISCI based INTA specific msi descriptor data
-  * @dev_index: TISCI device index
-  */
-@@ -137,7 +129,6 @@ struct ti_sci_inta_msi_desc {
+- * platform_msi_domain_free - Free interrupts associated with a platform-msi
+- *                            domain
++ * platform_msi_device_domain_free - Free interrupts associated with a platform-msi
++ *				     device domain
   *
-  * @msi_index:	Index of the msi descriptor
-  * @pci:	[PCI]	    PCI speficic msi descriptor data
-- * @fsl_mc:	[fsl-mc]    FSL MC device specific msi descriptor data
-  * @inta:	[INTA]	    TISCI based INTA specific msi descriptor data
+- * @domain:	The platform-msi domain
++ * @domain:	The platform-msi device domain
+  * @virq:	The base irq from which to perform the free operation
+  * @nvec:	How many interrupts to free from @virq
   */
- struct msi_desc {
-@@ -158,7 +149,6 @@ struct msi_desc {
- 	u16				msi_index;
- 	union {
- 		struct pci_msi_desc		pci;
--		struct fsl_mc_msi_desc		fsl_mc;
- 		struct ti_sci_inta_msi_desc	inta;
- 	};
- };
+-void platform_msi_domain_free(struct irq_domain *domain, unsigned int virq,
+-			      unsigned int nvec)
++void platform_msi_device_domain_free(struct irq_domain *domain, unsigned int virq,
++				     unsigned int nvec)
+ {
+ 	struct platform_msi_priv_data *data = domain->host_data;
+ 	struct msi_desc *desc, *tmp;
++
+ 	for_each_msi_entry_safe(desc, tmp, data->dev) {
+ 		if (WARN_ON(!desc->irq || desc->nvec_used != 1))
+ 			return;
+@@ -397,10 +403,10 @@ void platform_msi_domain_free(struct irq
+ }
+ 
+ /**
+- * platform_msi_domain_alloc - Allocate interrupts associated with
+- *			       a platform-msi domain
++ * platform_msi_device_domain_alloc - Allocate interrupts associated with
++ *				      a platform-msi device domain
+  *
+- * @domain:	The platform-msi domain
++ * @domain:	The platform-msi device domain
+  * @virq:	The base irq from which to perform the allocate operation
+  * @nr_irqs:	How many interrupts to free from @virq
+  *
+@@ -408,8 +414,8 @@ void platform_msi_domain_free(struct irq
+  * with irq_domain_mutex held (which can only be done as part of a
+  * top-level interrupt allocation).
+  */
+-int platform_msi_domain_alloc(struct irq_domain *domain, unsigned int virq,
+-			      unsigned int nr_irqs)
++int platform_msi_device_domain_alloc(struct irq_domain *domain, unsigned int virq,
++				     unsigned int nr_irqs)
+ {
+ 	struct platform_msi_priv_data *data = domain->host_data;
+ 	int err;
+@@ -421,7 +427,7 @@ int platform_msi_domain_alloc(struct irq
+ 	err = msi_domain_populate_irqs(domain->parent, data->dev,
+ 				       virq, nr_irqs, &data->arg);
+ 	if (err)
+-		platform_msi_domain_free(domain, virq, nr_irqs);
++		platform_msi_device_domain_free(domain, virq, nr_irqs);
+ 
+ 	return err;
+ }
+--- a/drivers/irqchip/irq-mbigen.c
++++ b/drivers/irqchip/irq-mbigen.c
+@@ -207,7 +207,7 @@ static int mbigen_irq_domain_alloc(struc
+ 	if (err)
+ 		return err;
+ 
+-	err = platform_msi_domain_alloc(domain, virq, nr_irqs);
++	err = platform_msi_device_domain_alloc(domain, virq, nr_irqs);
+ 	if (err)
+ 		return err;
+ 
+@@ -223,7 +223,7 @@ static int mbigen_irq_domain_alloc(struc
+ static void mbigen_irq_domain_free(struct irq_domain *domain, unsigned int virq,
+ 				   unsigned int nr_irqs)
+ {
+-	platform_msi_domain_free(domain, virq, nr_irqs);
++	platform_msi_device_domain_free(domain, virq, nr_irqs);
+ }
+ 
+ static const struct irq_domain_ops mbigen_domain_ops = {
+--- a/drivers/irqchip/irq-mvebu-icu.c
++++ b/drivers/irqchip/irq-mvebu-icu.c
+@@ -221,7 +221,7 @@ mvebu_icu_irq_domain_alloc(struct irq_do
+ 		icu_irqd->icu_group = msi_data->subset_data->icu_group;
+ 	icu_irqd->icu = icu;
+ 
+-	err = platform_msi_domain_alloc(domain, virq, nr_irqs);
++	err = platform_msi_device_domain_alloc(domain, virq, nr_irqs);
+ 	if (err) {
+ 		dev_err(icu->dev, "failed to allocate ICU interrupt in parent domain\n");
+ 		goto free_irqd;
+@@ -245,7 +245,7 @@ mvebu_icu_irq_domain_alloc(struct irq_do
+ 	return 0;
+ 
+ free_msi:
+-	platform_msi_domain_free(domain, virq, nr_irqs);
++	platform_msi_device_domain_free(domain, virq, nr_irqs);
+ free_irqd:
+ 	kfree(icu_irqd);
+ 	return err;
+@@ -260,7 +260,7 @@ mvebu_icu_irq_domain_free(struct irq_dom
+ 
+ 	kfree(icu_irqd);
+ 
+-	platform_msi_domain_free(domain, virq, nr_irqs);
++	platform_msi_device_domain_free(domain, virq, nr_irqs);
+ }
+ 
+ static const struct irq_domain_ops mvebu_icu_domain_ops = {
+--- a/include/linux/msi.h
++++ b/include/linux/msi.h
+@@ -434,10 +434,10 @@ struct irq_domain *
+ #define platform_msi_create_device_tree_domain(dev, nvec, write, ops, data) \
+ 	__platform_msi_create_device_domain(dev, nvec, true, write, ops, data)
+ 
+-int platform_msi_domain_alloc(struct irq_domain *domain, unsigned int virq,
+-			      unsigned int nr_irqs);
+-void platform_msi_domain_free(struct irq_domain *domain, unsigned int virq,
+-			      unsigned int nvec);
++int platform_msi_device_domain_alloc(struct irq_domain *domain, unsigned int virq,
++				     unsigned int nr_irqs);
++void platform_msi_device_domain_free(struct irq_domain *domain, unsigned int virq,
++				     unsigned int nvec);
+ void *platform_msi_get_host_data(struct irq_domain *domain);
+ #endif /* CONFIG_GENERIC_MSI_IRQ_DOMAIN */
+ 
 
 
