@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E08C1C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244406.422873 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C50C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244410.422888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoM9-0000kh-Em; Fri, 10 Dec 2021 22:27:09 +0000
+	id 1mvoME-0001df-Ef; Fri, 10 Dec 2021 22:27:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244406.422873; Fri, 10 Dec 2021 22:27:09 +0000
+Received: by outflank-mailman (output) from mailman id 244410.422888; Fri, 10 Dec 2021 22:27:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoM9-0000kM-9j; Fri, 10 Dec 2021 22:27:09 +0000
-Received: by outflank-mailman (input) for mailman id 244406;
- Fri, 10 Dec 2021 22:27:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mvoME-0001bc-6u; Fri, 10 Dec 2021 22:27:14 +0000
+Received: by outflank-mailman (input) for mailman id 244410;
+ Fri, 10 Dec 2021 22:27:12 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoEf-0005LK-2j
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:25 +0000
+ id 1mvoEl-0005LR-6A
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:31 +0000
 Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3b035812-5a07-11ec-a74f-db008197e53d;
- Fri, 10 Dec 2021 23:19:24 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3eb4e063-5a07-11ec-ad7a-b7ef48004f0a;
+ Fri, 10 Dec 2021 23:19:30 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +38,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b035812-5a07-11ec-a74f-db008197e53d
-Message-ID: <20211210221814.780824745@linutronix.de>
+X-Inumbo-ID: 3eb4e063-5a07-11ec-ad7a-b7ef48004f0a
+Message-ID: <20211210221815.029143589@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174764;
+	s=2020; t=1639174770;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=ZEIc+hYHtGZ+R8Y42PTVzHWVlXMSBVtNMJGsH152424=;
-	b=ZnOdjYsyWWWPA45DX/sEP1Hz7/N21g6u4UZdn8c1qyQRQwctj1a4i6BAp20kDLoVrj6D2s
-	MbD+ZTo1q9CByKhQo2XRoN4WdhbqsWP8IhvQmO5n4QjDLb4bQeMj+tjt/r7iv7ulqjYgof
-	F4ISSFlfQwvH4mj7rI3COb7fhYfIaOuZZwt6hdi7/i1KgHhxe1miuwBC9ALPHJWSgBGtAq
-	Hm9GThVygPLyQUzGEUG99ih95uj7Ifn3w+/L6+ojF2urlcLuEKAYpMauAHf1+Mdai5rTl4
-	6N8IRoupzCe+vvFuCq6MovD0Voro2Z7OmtZqPzl66KvGCxnWY1NqHMI0nV1/OA==
+	 references:references; bh=CMaNPxPUtZNOsnEqJOn3U6U1kdxY+NtpTLVPr27+/WY=;
+	b=EvqlUpO3T7X8KMNp3XgG+e3yhF82NAZ2M5y6A12MWgoIyrud3KHV79CLaa8A1W/w2fMrsQ
+	LYeCWIzrB2PJ3nkHOUu99+gQNjYZJ2nFFzgkmK9M5kbS8EACcrcJA5nvulgwqlHBSj67I9
+	7YmwEsMKo88h/lp98iq/wfXL323gMi+kAz0R0urtlkaiJW/zIz8Ce8trpP3NPO1/2PY+lX
+	62ssC5yso1LV4qheLUYQWhunj7PWO1yoQ9P8kcfNwViTrSnqyFbZ582iS61x+lp+RUbxzA
+	au4eXWrrM+ypnyPoZhxSChX9cVpDJ9CjG5TdED8Lqs9M3xLa8OxGU2KQXQHX6g==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174764;
+	s=2020e; t=1639174770;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=ZEIc+hYHtGZ+R8Y42PTVzHWVlXMSBVtNMJGsH152424=;
-	b=IxahGrtxRlopXsWUYNpTNdhCUtnqonpOEodZ3IuQBz/DFc/KxGCheju7XzPFrWnx3hqpKg
-	Kcg6g5cSFSWCRQCA==
+	 references:references; bh=CMaNPxPUtZNOsnEqJOn3U6U1kdxY+NtpTLVPr27+/WY=;
+	b=9yuWBpO3xKR5Wa0Z1Ej6Z030dWItOHliibhKuSikOya/v81orWbYN+DXKj1sCuZggh9Ds3
+	JoHcOuQq4cA8d/Aw==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -69,6 +69,9 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  linux-pci@vger.kernel.org,
  Cedric Le Goater <clg@kaod.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Mark Rutland <mark.rutland@arm.com>,
+ Will Deacon <will@kernel.org>,
+ linux-arm-kernel@lists.infradead.org,
  Juergen Gross <jgross@suse.com>,
  xen-devel@lists.xenproject.org,
  Arnd Bergmann <arnd@arndb.de>,
@@ -81,96 +84,54 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Nishanth Menon <nm@ti.com>,
  Tero Kristo <kristo@kernel.org>,
  Santosh Shilimkar <ssantosh@kernel.org>,
- linux-arm-kernel@lists.infradead.org,
  Vinod Koul <vkoul@kernel.org>,
  dmaengine@vger.kernel.org,
- Mark Rutland <mark.rutland@arm.com>,
- Will Deacon <will@kernel.org>,
  Robin Murphy <robin.murphy@arm.com>,
  Joerg Roedel <joro@8bytes.org>,
  iommu@lists.linux-foundation.org,
  Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 26/35] genirq/msi: Provide interface to retrieve Linux
- interrupt number
+Subject: [patch V3 30/35] perf/smmuv3: Use msi_get_virq()
 References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Dec 2021 23:19:23 +0100 (CET)
+Date: Fri, 10 Dec 2021 23:19:29 +0100 (CET)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-This allows drivers to retrieve the Linux interrupt number instead of
-fiddling with MSI descriptors.
-
-msi_get_virq() returns the Linux interrupt number or 0 in case that there
-is no entry for the given MSI index.
+Let the core code fiddle with the MSI descriptor retrieval.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: Will Deacon <will@kernel.org>
+Cc: linux-arm-kernel@lists.infradead.org
 ---
-V2: Simplify the implementation and let PCI deal with the PCI specialities - Marc
----
- include/linux/msi.h |    2 ++
- kernel/irq/msi.c    |   36 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 38 insertions(+)
+ drivers/perf/arm_smmuv3_pmu.c |    5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -153,6 +153,8 @@ struct msi_device_data {
+--- a/drivers/perf/arm_smmuv3_pmu.c
++++ b/drivers/perf/arm_smmuv3_pmu.c
+@@ -684,7 +684,6 @@ static void smmu_pmu_write_msi_msg(struc
  
- int msi_setup_device_data(struct device *dev);
+ static void smmu_pmu_setup_msi(struct smmu_pmu *pmu)
+ {
+-	struct msi_desc *desc;
+ 	struct device *dev = pmu->dev;
+ 	int ret;
  
-+unsigned int msi_get_virq(struct device *dev, unsigned int index);
-+
- /* Helpers to hide struct msi_desc implementation details */
- #define msi_desc_to_dev(desc)		((desc)->dev)
- #define dev_to_msi_list(dev)		(&(dev)->msi_list)
---- a/kernel/irq/msi.c
-+++ b/kernel/irq/msi.c
-@@ -105,6 +105,42 @@ int msi_setup_device_data(struct device
- 	return 0;
- }
+@@ -701,9 +700,7 @@ static void smmu_pmu_setup_msi(struct sm
+ 		return;
+ 	}
  
-+/**
-+ * msi_get_virq - Return Linux interrupt number of a MSI interrupt
-+ * @dev:	Device to operate on
-+ * @index:	MSI interrupt index to look for (0-based)
-+ *
-+ * Return: The Linux interrupt number on success (> 0), 0 if not found
-+ */
-+unsigned int msi_get_virq(struct device *dev, unsigned int index)
-+{
-+	struct msi_desc *desc;
-+	bool pcimsi;
-+
-+	if (!dev->msi.data)
-+		return 0;
-+
-+	pcimsi = dev_is_pci(dev) ? to_pci_dev(dev)->msi_enabled : false;
-+
-+	for_each_msi_entry(desc, dev) {
-+		/* PCI-MSI has only one descriptor for multiple interrupts. */
-+		if (pcimsi) {
-+			if (desc->irq && index < desc->nvec_used)
-+				return desc->irq + index;
-+			break;
-+		}
-+
-+		/*
-+		 * PCI-MSIX and platform MSI use a descriptor per
-+		 * interrupt.
-+		 */
-+		if (desc->msi_index == index)
-+			return desc->irq;
-+	}
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(msi_get_virq);
-+
- #ifdef CONFIG_SYSFS
- static ssize_t msi_mode_show(struct device *dev, struct device_attribute *attr,
- 			     char *buf)
+-	desc = first_msi_entry(dev);
+-	if (desc)
+-		pmu->irq = desc->irq;
++	pmu->irq = msi_get_virq(dev, 0);
+ 
+ 	/* Add callback to free MSIs on teardown */
+ 	devm_add_action(dev, smmu_pmu_free_msis, dev);
 
 
