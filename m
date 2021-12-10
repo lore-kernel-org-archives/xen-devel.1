@@ -4,29 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A97DC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.244409.422884 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DBA5C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Dec 2021 22:27:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.244412.422894 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMD-0001ZZ-Uy; Fri, 10 Dec 2021 22:27:13 +0000
+	id 1mvoMF-0001rO-G1; Fri, 10 Dec 2021 22:27:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 244409.422884; Fri, 10 Dec 2021 22:27:13 +0000
+Received: by outflank-mailman (output) from mailman id 244412.422894; Fri, 10 Dec 2021 22:27:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mvoMD-0001Yw-Nc; Fri, 10 Dec 2021 22:27:13 +0000
-Received: by outflank-mailman (input) for mailman id 244409;
- Fri, 10 Dec 2021 22:27:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mvoMF-0001pa-44; Fri, 10 Dec 2021 22:27:15 +0000
+Received: by outflank-mailman (input) for mailman id 244412;
+ Fri, 10 Dec 2021 22:27:13 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nm8/=Q3=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
- id 1mvoEa-0005LK-Mb
- for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:20 +0000
-Received: from galois.linutronix.de (galois.linutronix.de [193.142.43.55])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3843ad53-5a07-11ec-a74f-db008197e53d;
- Fri, 10 Dec 2021 23:19:19 +0100 (CET)
+ id 1mvoEO-0005LR-20
+ for xen-devel@lists.xenproject.org; Fri, 10 Dec 2021 22:19:08 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2ffc22eb-5a07-11ec-ad7a-b7ef48004f0a;
+ Fri, 10 Dec 2021 23:19:06 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,25 +39,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3843ad53-5a07-11ec-a74f-db008197e53d
-Message-ID: <20211210221814.602911509@linutronix.de>
+X-Inumbo-ID: 2ffc22eb-5a07-11ec-ad7a-b7ef48004f0a
+Message-ID: <20211210221814.048612053@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020; t=1639174759;
+	s=2020; t=1639174745;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=b+8XtuxyybZ0KA3VgHyfihDMNTV0zUMbTk9/Irfc6hY=;
-	b=gtlARjzibFYuz9U6kOioIdZU3H2gGpSp0kPlWLZ+kd24cAed+DeClKuntlG4JsCk8zY07y
-	q4OBakPfcKBb37uTsVpdl+kZVXjGOM+WiX4QdL4/u+lA1Y9y4dKrhkgw6Uh/7GO9oYoIeQ
-	hBP/MraULd3ZVo1Z1K+epp4dalnjedctH041vEGdy4nfhXCKfiR+ROymaThUnkMKuz3NNm
-	+JxVPoN3XjujZ5ewmGt2GsfcPEocK7u3J2vLaJA/0r9VgzNM5Jdeq19scuH1VS8ZuEjJ+m
-	oWuWlGsHLJmOx4SsTtznS8VRLvxx0mMiiyfP6T1q4JfNvKbl2zPiXclTsVXprA==
+	 references:references; bh=TChehWVkaCDXWslfOqt9SsdG5fg+7v6o6aA6KtRbeHM=;
+	b=Z11uvvxgirAW72rICp0vfbanS84UF82Nhb6VQydo25+LJ6YqYAbpXkmM7xdJXeTdznCw1s
+	erlLzvS3f8S8X3MqKG6FWkDbzvp7PQ01OSu3pmt6X/fqLdRuw+xf/tSng+pQE/QA3EVuJa
+	JvpnsrGVQpSL/3nyMTJIBfAiiT+kUUJ3ssX8tU5sGnGPYjGGWGGM83LFKfBPbHkqRu8STR
+	ghiqR/QIHyPv2LwcuKChQWwCEtBFQEHKUTL6+PT9gOax11YdzEWoTVht9qcQ8QqZBnEz6n
+	JMmNdgKrS9iGoaCLMEB/xcBcfHGnMd7m6HmEh/Jj9qHhvvs3t2TqzewDPQIdXg==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-	s=2020e; t=1639174759;
+	s=2020e; t=1639174745;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 references:references; bh=b+8XtuxyybZ0KA3VgHyfihDMNTV0zUMbTk9/Irfc6hY=;
-	b=KjbXc7grgijN+0eh8P50UqVENbOnRsxgSHL8UOCByDa/XkHCvECRNHYwFOKg0KvZdAMfCs
-	a3nFb07yNOEsfEDA==
+	 references:references; bh=TChehWVkaCDXWslfOqt9SsdG5fg+7v6o6aA6KtRbeHM=;
+	b=KlfpjkCvcrQosgJ4ChgS7lGyZYuQ96QJI/yz5x/JhIyB7M0oc7AC8htzC3Lr6XT++gnAIE
+	k/pOg57H/xU1JEBA==
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
 Cc: Bjorn Helgaas <helgaas@kernel.org>,
@@ -92,165 +93,126 @@ Cc: Bjorn Helgaas <helgaas@kernel.org>,
  Jassi Brar <jassisinghbrar@gmail.com>,
  Peter Ujfalusi <peter.ujfalusi@gmail.com>,
  Sinan Kaya <okaya@kernel.org>
-Subject: [patch V3 23/35] PCI/MSI: Use msi_desc::msi_index
+Subject: [patch V3 14/35] PCI/MSI: Let the irq code handle sysfs groups
 References: <20211210221642.869015045@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
-Date: Fri, 10 Dec 2021 23:19:18 +0100 (CET)
+Date: Fri, 10 Dec 2021 23:19:05 +0100 (CET)
 
 From: Thomas Gleixner <tglx@linutronix.de>
 
-The usage of msi_desc::pci::entry_nr is confusing at best. It's the index
-into the MSI[X] descriptor table.
-
-Use msi_desc::msi_index which is shared between all MSI incarnations
-instead of having a PCI specific storage for no value.
+Set the domain info flag which makes the core code handle sysfs groups and
+put an explicit invocation into the legacy code.
 
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
 Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 Acked-by: Bjorn Helgaas <bhelgaas@google.com>
-
 ---
- arch/powerpc/platforms/pseries/msi.c |    4 ++--
- arch/x86/pci/xen.c                   |    2 +-
- drivers/pci/msi/irqdomain.c          |    2 +-
- drivers/pci/msi/msi.c                |   20 ++++++++------------
- drivers/pci/xen-pcifront.c           |    2 +-
- include/linux/msi.h                  |    2 --
- 6 files changed, 13 insertions(+), 19 deletions(-)
+ drivers/pci/msi/irqdomain.c |    2 +-
+ drivers/pci/msi/legacy.c    |    6 +++++-
+ drivers/pci/msi/msi.c       |   23 -----------------------
+ include/linux/pci.h         |    1 -
+ 4 files changed, 6 insertions(+), 26 deletions(-)
 
---- a/arch/powerpc/platforms/pseries/msi.c
-+++ b/arch/powerpc/platforms/pseries/msi.c
-@@ -332,7 +332,7 @@ static int check_msix_entries(struct pci
- 
- 	expected = 0;
- 	for_each_pci_msi_entry(entry, pdev) {
--		if (entry->pci.msi_attrib.entry_nr != expected) {
-+		if (entry->msi_index != expected) {
- 			pr_debug("rtas_msi: bad MSI-X entries.\n");
- 			return -EINVAL;
- 		}
-@@ -579,7 +579,7 @@ static int pseries_irq_domain_alloc(stru
- 	int hwirq;
- 	int i, ret;
- 
--	hwirq = rtas_query_irq_number(pci_get_pdn(pdev), desc->pci.msi_attrib.entry_nr);
-+	hwirq = rtas_query_irq_number(pci_get_pdn(pdev), desc->msi_index);
- 	if (hwirq < 0) {
- 		dev_err(&pdev->dev, "Failed to query HW IRQ: %d\n", hwirq);
- 		return hwirq;
---- a/arch/x86/pci/xen.c
-+++ b/arch/x86/pci/xen.c
-@@ -306,7 +306,7 @@ static int xen_initdom_setup_msi_irqs(st
- 				return -EINVAL;
- 
- 			map_irq.table_base = pci_resource_start(dev, bir);
--			map_irq.entry_nr = msidesc->pci.msi_attrib.entry_nr;
-+			map_irq.entry_nr = msidesc->msi_index;
- 		}
- 
- 		ret = -EINVAL;
 --- a/drivers/pci/msi/irqdomain.c
 +++ b/drivers/pci/msi/irqdomain.c
-@@ -57,7 +57,7 @@ static irq_hw_number_t pci_msi_domain_ca
- {
- 	struct pci_dev *dev = msi_desc_to_pci_dev(desc);
+@@ -159,7 +159,7 @@ struct irq_domain *pci_msi_create_irq_do
+ 	if (info->flags & MSI_FLAG_USE_DEF_CHIP_OPS)
+ 		pci_msi_domain_update_chip_ops(info);
  
--	return (irq_hw_number_t)desc->pci.msi_attrib.entry_nr |
-+	return (irq_hw_number_t)desc->msi_index |
- 		pci_dev_id(dev) << 11 |
- 		(pci_domain_nr(dev->bus) & 0xFFFFFFFF) << 27;
+-	info->flags |= MSI_FLAG_ACTIVATE_EARLY;
++	info->flags |= MSI_FLAG_ACTIVATE_EARLY | MSI_FLAG_DEV_SYSFS;
+ 	if (IS_ENABLED(CONFIG_GENERIC_IRQ_RESERVATION_MODE))
+ 		info->flags |= MSI_FLAG_MUST_REACTIVATE;
+ 
+--- a/drivers/pci/msi/legacy.c
++++ b/drivers/pci/msi/legacy.c
+@@ -70,10 +70,14 @@ int pci_msi_legacy_setup_msi_irqs(struct
+ {
+ 	int ret = arch_setup_msi_irqs(dev, nvec, type);
+ 
+-	return pci_msi_setup_check_result(dev, type, ret);
++	ret = pci_msi_setup_check_result(dev, type, ret);
++	if (!ret)
++		ret = msi_device_populate_sysfs(&dev->dev);
++	return ret;
+ }
+ 
+ void pci_msi_legacy_teardown_msi_irqs(struct pci_dev *dev)
+ {
++	msi_device_destroy_sysfs(&dev->dev);
+ 	arch_teardown_msi_irqs(dev);
  }
 --- a/drivers/pci/msi/msi.c
 +++ b/drivers/pci/msi/msi.c
-@@ -44,7 +44,7 @@ static inline void pci_msi_unmask(struct
+@@ -233,11 +233,6 @@ static void free_msi_irqs(struct pci_dev
+ 			for (i = 0; i < entry->nvec_used; i++)
+ 				BUG_ON(irq_has_action(entry->irq + i));
  
- static inline void __iomem *pci_msix_desc_addr(struct msi_desc *desc)
+-	if (dev->msi_irq_groups) {
+-		msi_destroy_sysfs(&dev->dev, dev->msi_irq_groups);
+-		dev->msi_irq_groups = NULL;
+-	}
+-
+ 	pci_msi_teardown_msi_irqs(dev);
+ 
+ 	list_for_each_entry_safe(entry, tmp, msi_list, list) {
+@@ -417,7 +412,6 @@ static int msi_verify_entries(struct pci
+ static int msi_capability_init(struct pci_dev *dev, int nvec,
+ 			       struct irq_affinity *affd)
  {
--	return desc->pci.mask_base + desc->pci.msi_attrib.entry_nr * PCI_MSIX_ENTRY_SIZE;
-+	return desc->pci.mask_base + desc->msi_index * PCI_MSIX_ENTRY_SIZE;
- }
+-	const struct attribute_group **groups;
+ 	struct msi_desc *entry;
+ 	int ret;
  
- /*
-@@ -356,13 +356,10 @@ msi_setup_entry(struct pci_dev *dev, int
- 	if (dev->dev_flags & PCI_DEV_FLAGS_HAS_MSI_MASKING)
- 		control |= PCI_MSI_FLAGS_MASKBIT;
+@@ -448,14 +442,6 @@ static int msi_capability_init(struct pc
+ 	if (ret)
+ 		goto err;
  
--	entry->pci.msi_attrib.is_msix	= 0;
--	entry->pci.msi_attrib.is_64		= !!(control & PCI_MSI_FLAGS_64BIT);
--	entry->pci.msi_attrib.is_virtual    = 0;
--	entry->pci.msi_attrib.entry_nr	= 0;
-+	entry->pci.msi_attrib.is_64	= !!(control & PCI_MSI_FLAGS_64BIT);
- 	entry->pci.msi_attrib.can_mask	= !pci_msi_ignore_mask &&
- 					  !!(control & PCI_MSI_FLAGS_MASKBIT);
--	entry->pci.msi_attrib.default_irq	= dev->irq;	/* Save IOAPIC IRQ */
-+	entry->pci.msi_attrib.default_irq = dev->irq;
- 	entry->pci.msi_attrib.multi_cap	= (control & PCI_MSI_FLAGS_QMASK) >> 1;
- 	entry->pci.msi_attrib.multiple	= ilog2(__roundup_pow_of_two(nvec));
+-	groups = msi_populate_sysfs(&dev->dev);
+-	if (IS_ERR(groups)) {
+-		ret = PTR_ERR(groups);
+-		goto err;
+-	}
+-
+-	dev->msi_irq_groups = groups;
+-
+ 	/* Set MSI enabled bits	*/
+ 	pci_intx_for_msi(dev, 0);
+ 	pci_msi_set_enable(dev, 1);
+@@ -584,7 +570,6 @@ static void msix_mask_all(void __iomem *
+ static int msix_capability_init(struct pci_dev *dev, struct msix_entry *entries,
+ 				int nvec, struct irq_affinity *affd)
+ {
+-	const struct attribute_group **groups;
+ 	void __iomem *base;
+ 	int ret, tsize;
+ 	u16 control;
+@@ -629,14 +614,6 @@ static int msix_capability_init(struct p
  
-@@ -504,12 +501,11 @@ static int msix_setup_entries(struct pci
- 		entry->pci.msi_attrib.is_64	= 1;
+ 	msix_update_entries(dev, entries);
  
- 		if (entries)
--			entry->pci.msi_attrib.entry_nr = entries[i].entry;
-+			entry->msi_index = entries[i].entry;
- 		else
--			entry->pci.msi_attrib.entry_nr = i;
-+			entry->msi_index = i;
- 
--		entry->pci.msi_attrib.is_virtual =
--			entry->pci.msi_attrib.entry_nr >= vec_count;
-+		entry->pci.msi_attrib.is_virtual = entry->msi_index >= vec_count;
- 
- 		entry->pci.msi_attrib.can_mask	= !pci_msi_ignore_mask &&
- 						  !entry->pci.msi_attrib.is_virtual;
-@@ -1045,7 +1041,7 @@ int pci_irq_vector(struct pci_dev *dev,
- 		struct msi_desc *entry;
- 
- 		for_each_pci_msi_entry(entry, dev) {
--			if (entry->pci.msi_attrib.entry_nr == nr)
-+			if (entry->msi_index == nr)
- 				return entry->irq;
- 		}
- 		WARN_ON_ONCE(1);
-@@ -1084,7 +1080,7 @@ const struct cpumask *pci_irq_get_affini
- 		struct msi_desc *entry;
- 
- 		for_each_pci_msi_entry(entry, dev) {
--			if (entry->pci.msi_attrib.entry_nr == nr)
-+			if (entry->msi_index == nr)
- 				return &entry->affinity->mask;
- 		}
- 		WARN_ON_ONCE(1);
---- a/drivers/pci/xen-pcifront.c
-+++ b/drivers/pci/xen-pcifront.c
-@@ -263,7 +263,7 @@ static int pci_frontend_enable_msix(stru
- 
- 	i = 0;
- 	for_each_pci_msi_entry(entry, dev) {
--		op.msix_entries[i].entry = entry->pci.msi_attrib.entry_nr;
-+		op.msix_entries[i].entry = entry->msi_index;
- 		/* Vector is useless at this point. */
- 		op.msix_entries[i].vector = -1;
- 		i++;
---- a/include/linux/msi.h
-+++ b/include/linux/msi.h
-@@ -80,7 +80,6 @@ typedef void (*irq_write_msi_msg_t)(stru
-  * @multi_cap:	[PCI MSI/X] log2 num of messages supported
-  * @can_mask:	[PCI MSI/X] Masking supported?
-  * @is_64:	[PCI MSI/X] Address size: 0=32bit 1=64bit
-- * @entry_nr:	[PCI MSI/X] Entry which is described by this descriptor
-  * @default_irq:[PCI MSI/X] The default pre-assigned non-MSI irq
-  * @mask_pos:	[PCI MSI]   Mask register position
-  * @mask_base:	[PCI MSI-X] Mask register base address
-@@ -97,7 +96,6 @@ struct pci_msi_desc {
- 		u8	can_mask	: 1;
- 		u8	is_64		: 1;
- 		u8	is_virtual	: 1;
--		u16	entry_nr;
- 		unsigned default_irq;
- 	} msi_attrib;
- 	union {
+-	groups = msi_populate_sysfs(&dev->dev);
+-	if (IS_ERR(groups)) {
+-		ret = PTR_ERR(groups);
+-		goto out_free;
+-	}
+-
+-	dev->msi_irq_groups = groups;
+-
+ 	/* Disable INTX and unmask MSI-X */
+ 	pci_intx_for_msi(dev, 0);
+ 	pci_msix_clear_and_set_ctrl(dev, PCI_MSIX_FLAGS_MASKALL, 0);
+--- a/include/linux/pci.h
++++ b/include/linux/pci.h
+@@ -475,7 +475,6 @@ struct pci_dev {
+ #ifdef CONFIG_PCI_MSI
+ 	void __iomem	*msix_base;
+ 	raw_spinlock_t	msi_lock;
+-	const struct attribute_group **msi_irq_groups;
+ #endif
+ 	struct pci_vpd	vpd;
+ #ifdef CONFIG_PCIE_DPC
 
 
