@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3875CC433EF
-	for <xen-devel@archiver.kernel.org>; Sat, 11 Dec 2021 17:41:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.245409.423464 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAADDC433EF
+	for <xen-devel@archiver.kernel.org>; Sat, 11 Dec 2021 17:57:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.245417.423478 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mw6N6-0005Vj-Bj; Sat, 11 Dec 2021 17:41:20 +0000
+	id 1mw6cP-0007R2-Lo; Sat, 11 Dec 2021 17:57:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 245409.423464; Sat, 11 Dec 2021 17:41:20 +0000
+Received: by outflank-mailman (output) from mailman id 245417.423478; Sat, 11 Dec 2021 17:57:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mw6N6-0005Vc-8m; Sat, 11 Dec 2021 17:41:20 +0000
-Received: by outflank-mailman (input) for mailman id 245409;
- Sat, 11 Dec 2021 17:41:19 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1mw6cP-0007Qv-Ia; Sat, 11 Dec 2021 17:57:09 +0000
+Received: by outflank-mailman (input) for mailman id 245417;
+ Sat, 11 Dec 2021 17:57:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mw6N5-0005VS-Ak; Sat, 11 Dec 2021 17:41:19 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mw6N5-0006Ea-2E; Sat, 11 Dec 2021 17:41:19 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mw6N4-0006iH-Nc; Sat, 11 Dec 2021 17:41:18 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mw6N4-0001Mw-NB; Sat, 11 Dec 2021 17:41:18 +0000
+ (envelope-from <SRS0=koyS=Q4=arndb.de=arnd@srs-se1.protection.inumbo.net>)
+ id 1mw6cO-0007Qp-Gw
+ for xen-devel@lists.xenproject.org; Sat, 11 Dec 2021 17:57:08 +0000
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.75])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c13d36fa-5aab-11ec-bf02-3911bdbc85ab;
+ Sat, 11 Dec 2021 18:57:07 +0100 (CET)
+Received: from mail-wm1-f44.google.com ([209.85.128.44]) by
+ mrelayeu.kundenserver.de (mreue106 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1MD9Gh-1mnY1r2A8P-0098CQ for <xen-devel@lists.xenproject.org>; Sat, 11 Dec
+ 2021 18:57:06 +0100
+Received: by mail-wm1-f44.google.com with SMTP id 137so9084321wma.1
+ for <xen-devel@lists.xenproject.org>; Sat, 11 Dec 2021 09:57:06 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,86 +44,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=DgK76rNs0bZAEOoEhy//Fm0Z+qWhLFN9xrHoTrzU8mU=; b=utoegIClBefXPxtNzP6xP4hnjv
-	sgaYGQzCFRaDr9/Mf4xlIV3ktNFXn9T8/GDFzyurPmptTKZgvVzBIt5QmMoo4PN8zM9Aoxn4iTABO
-	XwgRfwLQeBR0fhJEbG+TLEfc+cbRVWyNhU/TxaGEKmMDZ1KWLZCWTUlpw8dEf2ByjWtc=;
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-167377-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: c13d36fa-5aab-11ec-bf02-3911bdbc85ab
+X-Gm-Message-State: AOAM5329O5eKDI1lZZVzT42mTBuzIhh1IBtSsY90nYIjcSo36t9Ohw8I
+	eYavIq0J/5eFiyRYyuYue/cQO7chtBB7H3ZDvwI=
+X-Google-Smtp-Source: ABdhPJz9JqWJLeTUfS5IahRcetLl+JbMiIvXpgsv1eGAXoUb1XDPjjtJEfoNcEXB+cjjosPGuUvpUWQic5X/F+X6I8s=
+X-Received: by 2002:a1c:1c1:: with SMTP id 184mr24672882wmb.1.1639236184421;
+ Sat, 11 Dec 2021 07:23:04 -0800 (PST)
 MIME-Version: 1.0
-Subject: [ovmf test] 167377: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=f6df289a1c43f60143bba530a823d3fd2eba6223
-X-Osstest-Versions-That:
-    ovmf=c82ab4d8c148c4009e0b31d1dd2ea6f7d4aea80d
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 11 Dec 2021 17:41:18 +0000
+References: <20211210221642.869015045@linutronix.de> <20211210221813.928842960@linutronix.de>
+In-Reply-To: <20211210221813.928842960@linutronix.de>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Sat, 11 Dec 2021 16:22:48 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a00M1MGPEwMQpgGJ9-g9-P6e9wo8G1frfVMqJ4bRp1Okg@mail.gmail.com>
+Message-ID: <CAK8P3a00M1MGPEwMQpgGJ9-g9-P6e9wo8G1frfVMqJ4bRp1Okg@mail.gmail.com>
+Subject: Re: [patch V3 12/35] soc: ti: ti_sci_inta_msi: Allocate MSI device
+ data on first use
+To: Thomas Gleixner <tglx@linutronix.de>
+Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>, 
+	Marc Zygnier <maz@kernel.org>, Alex Williamson <alex.williamson@redhat.com>, 
+	Kevin Tian <kevin.tian@intel.com>, Jason Gunthorpe <jgg@nvidia.com>, Megha Dey <megha.dey@intel.com>, 
+	Ashok Raj <ashok.raj@intel.com>, linux-pci <linux-pci@vger.kernel.org>, 
+	Cedric Le Goater <clg@kaod.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nishanth Menon <nm@ti.com>, 
+	Tero Kristo <kristo@kernel.org>, Santosh Shilimkar <ssantosh@kernel.org>, 
+	Linux ARM <linux-arm-kernel@lists.infradead.org>, Juergen Gross <jgross@suse.com>, 
+	xen-devel <xen-devel@lists.xenproject.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Michael Ellerman <mpe@ellerman.id.au>, Benjamin Herrenschmidt <benh@kernel.crashing.org>, 
+	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>, Bjorn Helgaas <bhelgaas@google.com>, 
+	Stuart Yoder <stuyoder@gmail.com>, Laurentiu Tudor <laurentiu.tudor@nxp.com>, 
+	Vinod Koul <vkoul@kernel.org>, dmaengine@vger.kernel.org, 
+	Mark Rutland <mark.rutland@arm.com>, Will Deacon <will@kernel.org>, 
+	Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>, 
+	"open list:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, Jassi Brar <jassisinghbrar@gmail.com>, 
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Sinan Kaya <okaya@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Provags-ID: V03:K1:ZVbHhN8Os/J46LP4oq57eP7yrPDdhaOA7qwEEi7F/tylCI7rxe5
+ EnrK83Pq/2e+GfflNwl/VOCRLw7mOMYww9oe06hVExSTLYH2jsNl4T5sUdNZsh81EnacClx
+ poYTlx7t0lj23OT6zknjsV1nBG/0RQfis7S8e4R0KYeM2UzkLz6T5GKijrft7UYDpY13BqG
+ 2ThEjopVjTwq1rDps9ZJQ==
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Wpe/1opoQi0=:jZ3Np3vGor0F52HpFaYOAV
+ QJGJf3gjoYQ11Dnfk6PmIr04Xjm5+M3/YiJF1MJMLycueKVP0Z0ktrOHZaLVatmN/FMUyasYO
+ 0o+8F7H35NDTp5R3XZNYPLQ+5HNnAiydS+vs+2Xj0mudtoZ1xeZGuuZYJXc6btyCmXXWBy600
+ JaethuIz4bbD3uS3mftahzSh0n8XENT2g792W5cxM2PKe8qvPtQsk/fs1sk6c+yVKxG3JphEw
+ hIw20XDXPl8y1OLqJlTqMo/S6S03nBxSF2s9BidTDtHFvcxDiXtPGvpAEtMOvBJrktQhxkdW7
+ yNptEh3xgef1oflbx7owlOvSK68bsWL4RuKh+Vlj/E3/IMwARjlKJ0Liev3LHzplgs8cHCjOD
+ Eas5LaYlvX256nCAEUPOLPqfXvZRvaIykHShbXYsBFnt+0n+nPp+FRV8zU8FP+rdztClm7b4O
+ 8DvZcBXrIsiYL2Lu/6v2tL/hwPUFvhFgbB3YeMEX9l2r8icJas0NXK+wxbvXjJ9mrzxHjZ/jN
+ /Vzd6FJji1BBBkM2VKk1ulaFoM3P2SLy2F66INRBnWrfOgO/znQfD7kFv/+j7A3bLE+vop3wb
+ /ovJOJBopE15UhsxY0U9QVVQhWUlQ5+NtJm3xqTqoeGsmfobyiSxNtJ26lVhTYFZaxUhmuxQ8
+ IVSUJhy5KoVHea5R+0oB+jeTAVZLBaifljNN1LdybI8x+qWg9El9QHvVJmQo3EatMt2MjsqpY
+ /cmag10O3wQeRtkBIgqYv6DRzrw7HlYq+YOaNFdrX95VCgnZykvJm3BCn730Mye28UL22vxmP
+ zc9l6rtvdNhP4G/5jH9R5o0Xyosar/UHFxN/iuPd0XjxkjnRyQ=
 
-flight 167377 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/167377/
+On Fri, Dec 10, 2021 at 11:19 PM Thomas Gleixner <tglx@linutronix.de> wrote:
+>
+> From: Thomas Gleixner <tglx@linutronix.de>
+>
+> Allocate the MSI device data on first invocation of the allocation function.
+>
+> Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+> Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+> Cc: Nishanth Menon <nm@ti.com>
+> Cc: Tero Kristo <kristo@kernel.org>
+> Cc: Santosh Shilimkar <ssantosh@kernel.org>
+> Cc: linux-arm-kernel@lists.infradead.org
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 f6df289a1c43f60143bba530a823d3fd2eba6223
-baseline version:
- ovmf                 c82ab4d8c148c4009e0b31d1dd2ea6f7d4aea80d
-
-Last test of basis   167239  2021-12-09 06:23:17 Z    2 days
-Failing since        167240  2021-12-09 08:42:46 Z    2 days   58 attempts
-Testing same since   167377  2021-12-11 16:10:19 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Brijesh Singh <brijesh.singh@amd.com>
-  Brijesh Singh via groups.io <brijesh.singh=amd.com@groups.io>
-  Chris Jones <christopher.jones@arm.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Jason Andryuk <jandryuk@gmail.com>
-  Jiewen Yao <Jiewen.yao@intel.com>
-  Michael Roth <michael.roth@amd.com>
-  Philippe Mathieu-Daude <philmd@redhat.com>
-  Ray Ni <ray.ni@intel.com>
-  Rob Bradford <robert.bradford@intel.com>
-  Sebastien Boeuf <sebastien.boeuf@intel.com>
-  Tom Lendacky <thomas.lendacky@amd.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   c82ab4d8c1..f6df289a1c  f6df289a1c43f60143bba530a823d3fd2eba6223 -> xen-tested-master
+Acked-by: Arnd Bergmann <arnd@arndb.de>
 
