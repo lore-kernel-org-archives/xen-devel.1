@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FB4C433EF
-	for <xen-devel@archiver.kernel.org>; Sun, 12 Dec 2021 21:07:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.245741.423957 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D233C433F5
+	for <xen-devel@archiver.kernel.org>; Sun, 12 Dec 2021 21:07:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.245745.423967 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mwW3f-0004pn-FM; Sun, 12 Dec 2021 21:06:59 +0000
+	id 1mwW3v-0005Ij-Nq; Sun, 12 Dec 2021 21:07:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 245741.423957; Sun, 12 Dec 2021 21:06:59 +0000
+Received: by outflank-mailman (output) from mailman id 245745.423967; Sun, 12 Dec 2021 21:07:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mwW3f-0004pg-CG; Sun, 12 Dec 2021 21:06:59 +0000
-Received: by outflank-mailman (input) for mailman id 245741;
- Sun, 12 Dec 2021 21:06:58 +0000
+	id 1mwW3v-0005Ic-Kk; Sun, 12 Dec 2021 21:07:15 +0000
+Received: by outflank-mailman (input) for mailman id 245745;
+ Sun, 12 Dec 2021 21:07:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=lDYB=Q5=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1mwW13-0004MP-Tq
- for xen-devel@lists.xenproject.org; Sun, 12 Dec 2021 21:04:18 +0000
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [2a00:1450:4864:20::131])
+ id 1mwW0w-0004MP-Ra
+ for xen-devel@lists.xenproject.org; Sun, 12 Dec 2021 21:04:10 +0000
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [2a00:1450:4864:20::231])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 115e7a09-5b8f-11ec-bf02-3911bdbc85ab;
- Sun, 12 Dec 2021 22:04:17 +0100 (CET)
-Received: by mail-lf1-x131.google.com with SMTP id b40so27417593lfv.10
- for <xen-devel@lists.xenproject.org>; Sun, 12 Dec 2021 13:04:17 -0800 (PST)
+ id 0c8b9814-5b8f-11ec-bf02-3911bdbc85ab;
+ Sun, 12 Dec 2021 22:04:09 +0100 (CET)
+Received: by mail-lj1-x231.google.com with SMTP id u22so21071342lju.7
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Dec 2021 13:04:09 -0800 (PST)
 Received: from localhost.localdomain (94-29-46-111.dynamic.spd-mgts.ru.
  [94.29.46.111])
- by smtp.gmail.com with ESMTPSA id y4sm1197172ljp.16.2021.12.12.13.04.14
+ by smtp.gmail.com with ESMTPSA id y4sm1197172ljp.16.2021.12.12.13.04.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Dec 2021 13:04:16 -0800 (PST)
+ Sun, 12 Dec 2021 13:04:08 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 115e7a09-5b8f-11ec-bf02-3911bdbc85ab
+X-Inumbo-ID: 0c8b9814-5b8f-11ec-bf02-3911bdbc85ab
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=LnM2oqI/P3qkpx3c1EWtD4sLNI6B6gG/+oTBL+kWCNQ=;
-        b=Ti+UtGG8XV6c0zOWqrHGbE59RojWkw4ydpgjMyPnKydCS+/MWggp7Pc9vXP3/dSIcd
-         3jnWTMBd8zv/qBtjyyIl9yIZVhT8x6fyMjQXI7luWmrCTc61AVDnaWwsG+mIfuPQO9dB
-         vcqOllWLO88CRGpuT6+xXO8ZmzEOzeGTj/s4L1fT4s6+Ybm6rqbTcVdA4UXyNrivjGv5
-         UJ6UviXyCjmc4b8nSyi1dpErcal2pEnmBKVfp4o/3mh7A8Qp+zHAUZCcABQgpQssHyoG
-         UiW2FFO7QpKrXAOmKzFmfqtuBRyQuxNiF7hVzSScTIX4m9O5uZ05fsLoNM2XxAyyofSA
-         atBQ==
+        bh=IgdEY3brdUGAcbkVUTuopyRaDKQjmT9IOiG4donLZPs=;
+        b=pRjCeelZEbxaZGwO+A2aL0XPV/VaH02YaHpKAd9wdI9JEveM57sE60GJ6XNHSn3X7R
+         3k3prwg00aYmbn6qrs0hvCC/Qu+NXBudxBQ11zdQ8NwOHe1318/leMZcgjGjBHY51gwa
+         7soXg88k1YVhJkGc+TTtq+bVpeCDRCSSMfOlkqSinKAC0bda9LJdWsfx6/W5MHM5/jd9
+         DvPUXfjXzCMkaPG3Qy81MLfolhXJsYt+NP13KnN+kkNkRrGfJb6pVBACzy9He8+wQu/l
+         eGVwkctUMedEHbT7ecy6K+YGcbliElewyWmMiaaA91DPydKzN7z1nc6/16QB5Y1JZoWn
+         FbWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=LnM2oqI/P3qkpx3c1EWtD4sLNI6B6gG/+oTBL+kWCNQ=;
-        b=LMFRYoIWTDpTUWtdDv/uvo8Eg4mVOvEoEMZREIqN9vuFxhbRt9r2Gc9292gOb4GxHp
-         AydJwCwvAYilfieFA+HbV5fHunl/xINKGKNyYnuMxBCvESewnCaxxsrCS97s3qoSCjoj
-         RBpR4GmIuPTMVcZtS2JTmtIKp2ctRDx9LIIYHLK+vxha83MKR15vhPb2uOXTeOz2eBuS
-         CQi2ER0yljR/taSCGvKK9X3wf7dp8etrUlEXWpzXb9MDXRe/HPl+KqLeKbyhxb4EZ30X
-         rGfb4xlA2fnpZVzIJZhsOtN2WE0SQsHyoj2MN7Y7daOz2oDT0Qeb4uMfrZiiGok+QMd8
-         NwxQ==
-X-Gm-Message-State: AOAM531GJkMWc+gu11TjVYHF363mYAIwp6E1Fcml+dI8ZZPPdyP62d7Q
-	XT8LeHJHDtdQbz9zB6OOVOc=
-X-Google-Smtp-Source: ABdhPJzqEv9dTDNrIB5aKtlnsJyeHcmVeske90TevqdWeeks/wIjllK9zuSKBLKrf6g7j5l1fLZDZQ==
-X-Received: by 2002:a05:6512:3c9e:: with SMTP id h30mr24792667lfv.212.1639343056911;
-        Sun, 12 Dec 2021 13:04:16 -0800 (PST)
+        bh=IgdEY3brdUGAcbkVUTuopyRaDKQjmT9IOiG4donLZPs=;
+        b=DYvQGhKQEqZlMwqs8+FBeL8W24XZWBHOp3Ug14gJD4LMevqbw5Ko32A5SW5eb2gPPN
+         1IWBx0Iy9Hsvq5CGRBu6whjeP0gWDN6aHZDAIjYuWcA+xSHaeUmzrjD25tPUGxVN8aFX
+         5/yib/FS72Gbml6rrVUX4gJkOY0uLh1wAb/+VlvpYvP506enWnXNEO5r6kEZ0ppBUjoz
+         UtK9+C8S015bEHPS+nNEXyU1r05e6ZQST5pkfwYFEC1pevWRQyvbySBSXGcPj9ZSDr4r
+         DbfGMGpWrw7oG2v7feLF6ZwD4hI0GENYVq22evsclbVPK1OTHlSLgaB4GjG0q8FML/VI
+         1zrg==
+X-Gm-Message-State: AOAM530FAR88qYC7BQlcfTnRWhXe+PVcrweJ+GU7OPK9a7y+mX+zdXK1
+	+9lC/AfJxToO6zA0skD+lEo=
+X-Google-Smtp-Source: ABdhPJxNW1DwCShpX2NDWOWr5vcKraTuFYIWDWgUXB6EPWJrHuuBITafm/NNerVkSN6nEKqLT69IWQ==
+X-Received: by 2002:a05:651c:1548:: with SMTP id y8mr25360872ljp.458.1639343048830;
+        Sun, 12 Dec 2021 13:04:08 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -138,65 +138,39 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v5 21/21] reboot: Remove pm_power_off_prepare()
-Date: Mon, 13 Dec 2021 00:03:09 +0300
-Message-Id: <20211212210309.9851-22-digetx@gmail.com>
+Subject: [PATCH v5 17/21] nds32: Use do_kernel_power_off()
+Date: Mon, 13 Dec 2021 00:03:05 +0300
+Message-Id: <20211212210309.9851-18-digetx@gmail.com>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211212210309.9851-1-digetx@gmail.com>
 References: <20211212210309.9851-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-All pm_power_off_prepare() users were converted to sys-off handler API.
-Remove the obsolete callback.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- include/linux/pm.h |  1 -
- kernel/reboot.c    | 11 -----------
- 2 files changed, 12 deletions(-)
+ arch/nds32/kernel/process.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/include/linux/pm.h b/include/linux/pm.h
-index 1d8209c09686..d9bf1426f81e 100644
---- a/include/linux/pm.h
-+++ b/include/linux/pm.h
-@@ -20,7 +20,6 @@
-  * Callbacks for platform drivers to implement.
-  */
- extern void (*pm_power_off)(void);
--extern void (*pm_power_off_prepare)(void);
+diff --git a/arch/nds32/kernel/process.c b/arch/nds32/kernel/process.c
+index 49fab9e39cbf..0936dcd7db1b 100644
+--- a/arch/nds32/kernel/process.c
++++ b/arch/nds32/kernel/process.c
+@@ -54,8 +54,7 @@ EXPORT_SYMBOL(machine_halt);
  
- struct device; /* we have a circular dep with device.h */
- #ifdef CONFIG_VT_CONSOLE_SLEEP
-diff --git a/kernel/reboot.c b/kernel/reboot.c
-index 3085873a876f..2f79d4f7cfaa 100644
---- a/kernel/reboot.c
-+++ b/kernel/reboot.c
-@@ -48,13 +48,6 @@ int reboot_cpu;
- enum reboot_type reboot_type = BOOT_ACPI;
- int reboot_force;
- 
--/*
-- * If set, this is used for preparing the system to power off.
-- */
--
--void (*pm_power_off_prepare)(void);
--EXPORT_SYMBOL_GPL(pm_power_off_prepare);
--
- /**
-  *	emergency_restart - reboot the system
-  *
-@@ -829,10 +822,6 @@ void do_kernel_power_off(void)
- 
- static void do_kernel_power_off_prepare(void)
+ void machine_power_off(void)
  {
--	/* legacy pm_power_off_prepare() is unchained and has highest priority */
--	if (pm_power_off_prepare)
--		return pm_power_off_prepare();
--
- 	blocking_notifier_call_chain(&power_off_handler_list, POWEROFF_PREPARE,
- 				     NULL);
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
  }
+ 
+ EXPORT_SYMBOL(machine_power_off);
 -- 
 2.33.1
 
