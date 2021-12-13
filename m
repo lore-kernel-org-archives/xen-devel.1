@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00555C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Dec 2021 11:39:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.245991.424323 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADE0EC433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Dec 2021 11:49:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.246000.424333 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mwjfC-0006Sz-FB; Mon, 13 Dec 2021 11:38:38 +0000
+	id 1mwjoy-0008OL-Bk; Mon, 13 Dec 2021 11:48:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 245991.424323; Mon, 13 Dec 2021 11:38:38 +0000
+Received: by outflank-mailman (output) from mailman id 246000.424333; Mon, 13 Dec 2021 11:48:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mwjfC-0006Sq-Bb; Mon, 13 Dec 2021 11:38:38 +0000
-Received: by outflank-mailman (input) for mailman id 245991;
- Mon, 13 Dec 2021 11:38:36 +0000
+	id 1mwjoy-0008OE-8H; Mon, 13 Dec 2021 11:48:44 +0000
+Received: by outflank-mailman (input) for mailman id 246000;
+ Mon, 13 Dec 2021 11:48:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EN0M=Q6=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mwjfA-0006Dq-T2
- for xen-devel@lists.xenproject.org; Mon, 13 Dec 2021 11:38:36 +0000
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [2a00:1450:4864:20::22e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 33c19d5f-5c09-11ec-b1ef-a74572bcbcad;
- Mon, 13 Dec 2021 12:38:35 +0100 (CET)
-Received: by mail-lj1-x22e.google.com with SMTP id k23so23292459lje.1
- for <xen-devel@lists.xenproject.org>; Mon, 13 Dec 2021 03:38:33 -0800 (PST)
-Received: from [192.168.1.7] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id f23sm1475635ljg.90.2021.12.13.03.38.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 13 Dec 2021 03:38:32 -0800 (PST)
+ <SRS0=nKfH=Q6=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
+ id 1mwjox-0008O8-A9
+ for xen-devel@lists.xenproject.org; Mon, 13 Dec 2021 11:48:43 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 9dda2c1a-5c0a-11ec-b1ef-a74572bcbcad;
+ Mon, 13 Dec 2021 12:48:41 +0100 (CET)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 79E0B6D;
+ Mon, 13 Dec 2021 03:48:40 -0800 (PST)
+Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
+ [10.1.195.16])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 932103F793;
+ Mon, 13 Dec 2021 03:48:39 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,92 +45,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 33c19d5f-5c09-11ec-b1ef-a74572bcbcad
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=sXvHapjS93NaUhHhbE5XKq63oc/+VGXWe8vklnnWKOw=;
-        b=ma0UjKKQZNxqT0R1RFKcxJmF7lzJwRJ2/pJMWBUdbs5yTKFTMiQX0WXiDpDTCqyP79
-         MO8gShyIYtdiBa0xSxddJg8JbvBd9vsbMt6ZowpOtfIafF5ysCWjPeNNhywZOKCCQwi4
-         gYJVN3tGSQEdQ6FS+IgjkB2lEZev9iIAjVXB65XshDD1QBoPitYXkb6Hx94iB9X7klaR
-         c3VcSMEvtplsFrJ5LUKhyCN+OqwVeSXhsxD0S+m/PjKMukcEKpw7lEuejtohl++PGlt6
-         wUEiL2Ojy4dAC3XY8rPYxTpCKVEpk9H0jKJTpo/2ZrTzBvzBJLOW2O391lo/2eMhBaln
-         ebgg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=sXvHapjS93NaUhHhbE5XKq63oc/+VGXWe8vklnnWKOw=;
-        b=qFcQr0iJ1Z0eTIeoazWPElX9rP8fjp3DrTGbvc2lEB/KXlcmHWlussTwf5ptX1uagb
-         oL1L+wo6991/Lt8Ap+/JoO7WH3azhrZoUrLC/WOCALgLAR8bSlMblepbjW7/zIq9RNzd
-         HGpY02m5ILVDnZc9QPlQWujxyrJkghT38ErGD+ywyk2kCQiKOlV7SknxmSyYDrnqIByc
-         Muxecrn0C7kuSbYU/2kpPOm4pXKMsrXaYnfHNFF9pB6mYuCpJqDLn+Dk+9P+1zapsPSy
-         Ao9OVJLPMTOJCq536uXbeRVw1IOeBd8dSTXnafuqGi+eRx/iBKwnTfIGYVeYi2cEAHZp
-         lNpA==
-X-Gm-Message-State: AOAM530SA545ELIaSaJ33GSM2KC7jRCzs8nzEwj9tJ7uJPUEsux8sryW
-	cj6uYEu6JtqG5LQ++oXvhQ4=
-X-Google-Smtp-Source: ABdhPJz/Oyo75Ua15PdhYlpInpjGBIMPv9h0sawBBeyuqvqsMSZ/MpPh4L4AXLbaoyHdbBsKQ8MgyA==
-X-Received: by 2002:a2e:b8cc:: with SMTP id s12mr28317095ljp.489.1639395513097;
-        Mon, 13 Dec 2021 03:38:33 -0800 (PST)
-Subject: Re: [PATCH 00/10] Add support for Renesas R-Car S4 IPMMU and other
- misc changes
-To: Julien Grall <julien@xen.org>
-Cc: xen-devel@lists.xenproject.org,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>, Jan Beulich
- <jbeulich@suse.com>, Paul Durrant <paul@xen.org>,
- Rahul Singh <rahul.singh@arm.com>,
- Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-References: <1638035505-16931-1-git-send-email-olekstysh@gmail.com>
- <3c3c8641-05f5-56b6-b7b1-6942d6bb5a3d@gmail.com>
- <0024265c-e485-8354-361b-9faa36c50a3d@xen.org>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <4377a72c-8e6f-9412-59ee-a46bd6648a73@gmail.com>
-Date: Mon, 13 Dec 2021 13:38:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <0024265c-e485-8354-361b-9faa36c50a3d@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-Inumbo-ID: 9dda2c1a-5c0a-11ec-b1ef-a74572bcbcad
+From: Luca Fancellu <luca.fancellu@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	wei.chen@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH] xen/arm: increase memory banks number define value
+Date: Mon, 13 Dec 2021 11:48:23 +0000
+Message-Id: <20211213114823.25570-1-luca.fancellu@arm.com>
+X-Mailer: git-send-email 2.17.1
 
+Currently the maximum number of memory banks (NR_MEM_BANKS define)
+is fixed to 128, but on some new platforms that have a large amount
+of memory, this value is not enough and prevents Xen from booting.
 
-On 13.12.21 12:11, Julien Grall wrote:
-> Hi,
+Increase the value to 256.
 
+Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+---
+ xen/include/asm-arm/setup.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Hi Julien
-
-
->
-> On 13/12/2021 10:05, Oleksandr wrote:
->>
->> On 27.11.21 19:51, Oleksandr Tyshchenko wrote:
->>
->>
->> Hello all.
->>
->> Gentle reminder.
->
-> This is in my queue of 50+ patches to review. EPAM is the main 
-> contributor for the IPMMU patches, so can one of your colleagues help 
-> to review it?
-
-I think, yes, it is possible.
-
-
->
->
-> Cheers,
->
+diff --git a/xen/include/asm-arm/setup.h b/xen/include/asm-arm/setup.h
+index 95da0b7ab9cd..07daf160dc57 100644
+--- a/xen/include/asm-arm/setup.h
++++ b/xen/include/asm-arm/setup.h
+@@ -6,7 +6,7 @@
+ #define MIN_FDT_ALIGN 8
+ #define MAX_FDT_SIZE SZ_2M
+ 
+-#define NR_MEM_BANKS 128
++#define NR_MEM_BANKS 256
+ 
+ #define MAX_MODULES 32 /* Current maximum useful modules */
+ 
 -- 
-Regards,
-
-Oleksandr Tyshchenko
+2.17.1
 
 
