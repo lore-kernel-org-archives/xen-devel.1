@@ -4,36 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DC4AC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Dec 2021 16:09:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.247440.426672 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37836C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Dec 2021 16:14:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.247454.426699 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mxWCv-0005Fz-Ij; Wed, 15 Dec 2021 15:28:41 +0000
+	id 1mxWfT-0001CV-Bt; Wed, 15 Dec 2021 15:58:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 247440.426672; Wed, 15 Dec 2021 15:28:41 +0000
+Received: by outflank-mailman (output) from mailman id 247454.426699; Wed, 15 Dec 2021 15:58:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mxWCv-0005Fs-Fe; Wed, 15 Dec 2021 15:28:41 +0000
-Received: by outflank-mailman (input) for mailman id 247440;
- Wed, 15 Dec 2021 15:28:39 +0000
+	id 1mxWfT-0001CO-97; Wed, 15 Dec 2021 15:58:11 +0000
+Received: by outflank-mailman (input) for mailman id 247454;
+ Wed, 15 Dec 2021 15:58:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uCzL=RA=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mxWCt-0005Fm-OZ
- for xen-devel@lists.xenproject.org; Wed, 15 Dec 2021 15:28:39 +0000
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [2a00:1450:4864:20::235])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=kH8z=RA=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1mxWfR-0001CI-HW
+ for xen-devel@lists.xenproject.org; Wed, 15 Dec 2021 15:58:09 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ac7fdbfa-5dbb-11ec-9e60-abaf8a552007;
- Wed, 15 Dec 2021 16:28:37 +0100 (CET)
-Received: by mail-lj1-x235.google.com with SMTP id b19so32083415ljr.12
- for <xen-devel@lists.xenproject.org>; Wed, 15 Dec 2021 07:28:38 -0800 (PST)
-Received: from [192.168.1.7] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id l22sm365963lfc.307.2021.12.15.07.28.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 15 Dec 2021 07:28:37 -0800 (PST)
+ id cb3d14ad-5dbf-11ec-9e60-abaf8a552007;
+ Wed, 15 Dec 2021 16:58:07 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 51FDF210E8;
+ Wed, 15 Dec 2021 15:58:07 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0AAE313B75;
+ Wed, 15 Dec 2021 15:58:07 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id r4ZwAY8QumHrEwAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 15 Dec 2021 15:58:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,347 +53,307 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ac7fdbfa-5dbb-11ec-9e60-abaf8a552007
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=vg7Dm1smVZxgfGUzJHFPwHjldCpWgF79YZo3lBpnGu0=;
-        b=fhnDyo38zsMz7KcqM4yslSLJnY47Q7bjQq2mvRKIMiE2veBFjmyDDZO8zklfMcUM+y
-         kRoMuPhcPubBBiNyHtzMdmByBl5cfgn4pLjfovRpVmM475wMM9X/K70+4bMi0qje1of7
-         Fi3VSjOhChqAegPMuoMEA4IfINUzzFEHDh4Nzf7w6jDqSLNJ8ytHn7yo1I/UG9Wud6tL
-         5xZicaNX8p5vqymYsbPkEz4YXy1VzoNp6xDADDabSd1E7WaExk7D4TF9w2bdTVgrjHe3
-         w8v14jnwrOw3Sjgy8jWdzI2pmV3YYSVZZpkinNTbAYtFAFvxqz/FWvW8NjFOSCOCyKE3
-         mGHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=vg7Dm1smVZxgfGUzJHFPwHjldCpWgF79YZo3lBpnGu0=;
-        b=6U8/+echeVccU5KF+G3RKGkFLmz8zYTKZyoRlYcnRyuiUMAkg9KdRO/CYIqa1wt7CL
-         kONXJ82IfvcXwYFrz7MIKP4cq/T4eQmdYHxA4Ra0QlZgjRNSKM89/P8pqxBkb9reWXal
-         RoQ88zvC5u6tWOPrFjN47vUeITZkDOIpv3/XvjFEu+IEb7d+4l+JAgv0kwM8wq7Rib8/
-         mVg+/AZ/OuC5Ooyd7yqe3TtaqXEu2M+Ws6eeZ0bzHdIFqXbAu4xFZEVoQCL/cqkd0NCx
-         /PaJvHjn7bvjCPpFllv1aoSHD8RQgz0w6urfiXzphx4ZFsfKZsN2Hy2GKeTmxqiEX6Tq
-         QMXg==
-X-Gm-Message-State: AOAM5321zuxf7Dcyim3J781rqAeMDhY+WrAgqajFNRXuhu8X4WEpM0Ag
-	0ogvQXetG2geyPI7GrUdO9s=
-X-Google-Smtp-Source: ABdhPJxBAMtsVJBtGLdn2yBjtpbNB6tqfiQV2JkGF0h7zh8wXGQbCQzYKVBRvHXA0Amo5a9h0+vZfQ==
-X-Received: by 2002:a2e:bc1b:: with SMTP id b27mr10701166ljf.91.1639582117624;
-        Wed, 15 Dec 2021 07:28:37 -0800 (PST)
-Subject: Re: [PATCH v2 14/18] IOMMU: fold flush-all hook into "flush one"
-To: Jan Beulich <jbeulich@suse.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>,
- Kevin Tian <kevin.tian@intel.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Rahul Singh <Rahul.Singh@arm.com>
-References: <957f067b-9fe1-2350-4266-51982f09d3a9@suse.com>
- <e40ee980-9151-101a-1484-b1710aaeafb0@suse.com>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <d0c860ea-2134-d8dd-9bf8-87cd9c1a9305@gmail.com>
-Date: Wed, 15 Dec 2021 17:28:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+X-Inumbo-ID: cb3d14ad-5dbf-11ec-9e60-abaf8a552007
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1639583887; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=jYr7j45kf3CVDPqQWgTjhGPwDBfSwHjT7cvkuVL6Pgo=;
+	b=XkNGnL7pZZ6w5cs1CV0CkgjhW7kMGYW9/U7FUJq0XX4TsEjdsbCcvt4eNIJ6zvQZNGLA4P
+	q3zMpTsGB8XmhtTvG4awnMzW1T9fVlmQ06+yo50Ibq/nqvky1ex2JldNS1Fgs6vWXZ06Kf
+	M83cePallsEmJobaH8c/omnEN96oPYM=
+To: Oleksandr <olekstysh@gmail.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ xen-devel@lists.xenproject.org,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Wei Liu <wl@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>
+References: <1638982784-14390-1-git-send-email-olekstysh@gmail.com>
+ <1638982784-14390-2-git-send-email-olekstysh@gmail.com>
+ <YbjANCjAUGe4BAar@perard> <bce10079-abd6-c033-6273-ac0ea9f51668@gmail.com>
+ <4c89e55d-4bf1-506e-d620-4a0ff18ef308@suse.com>
+ <dc1b70ac-079d-5de8-cb13-6be4944cef0a@gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH V6 1/2] libxl: Add support for Virtio disk configuration
+Message-ID: <813684b0-df71-c18b-cf4c-106cc286c035@suse.com>
+Date: Wed, 15 Dec 2021 16:58:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-In-Reply-To: <e40ee980-9151-101a-1484-b1710aaeafb0@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <dc1b70ac-079d-5de8-cb13-6be4944cef0a@gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="VeOjrmomgssEjMMOywE0wIhp0gRv3Sn8d"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--VeOjrmomgssEjMMOywE0wIhp0gRv3Sn8d
+Content-Type: multipart/mixed; boundary="xxLXFWYBRL1QSwkGyBQNnNYre2XMJP89u";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Oleksandr <olekstysh@gmail.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ xen-devel@lists.xenproject.org,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Wei Liu <wl@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>
+Message-ID: <813684b0-df71-c18b-cf4c-106cc286c035@suse.com>
+Subject: Re: [PATCH V6 1/2] libxl: Add support for Virtio disk configuration
+References: <1638982784-14390-1-git-send-email-olekstysh@gmail.com>
+ <1638982784-14390-2-git-send-email-olekstysh@gmail.com>
+ <YbjANCjAUGe4BAar@perard> <bce10079-abd6-c033-6273-ac0ea9f51668@gmail.com>
+ <4c89e55d-4bf1-506e-d620-4a0ff18ef308@suse.com>
+ <dc1b70ac-079d-5de8-cb13-6be4944cef0a@gmail.com>
+In-Reply-To: <dc1b70ac-079d-5de8-cb13-6be4944cef0a@gmail.com>
+
+--xxLXFWYBRL1QSwkGyBQNnNYre2XMJP89u
+Content-Type: multipart/mixed;
+ boundary="------------A23C7142272FCC8AC239F321"
 Content-Language: en-US
 
+This is a multi-part message in MIME format.
+--------------A23C7142272FCC8AC239F321
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-On 24.09.21 12:53, Jan Beulich wrote:
+On 15.12.21 16:02, Oleksandr wrote:
+>=20
+> On 15.12.21 08:08, Juergen Gross wrote:
+>=20
+> Hi Juergen
+>=20
+>> On 14.12.21 18:44, Oleksandr wrote:
+>>>
+>>> On 14.12.21 18:03, Anthony PERARD wrote:
+>>>
+>>> Hi Anthony
+>>>
+>>>
+>>>> On Wed, Dec 08, 2021 at 06:59:43PM +0200, Oleksandr Tyshchenko wrote=
+:
+>>>>> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>>>>>
+>>>>> This patch adds basic support for configuring and assisting=20
+>>>>> virtio-disk
+>>>>> backend (emualator) which is intended to run out of Qemu and could =
+be
+>>>>> run in any domain.
+>>>>> Although the Virtio block device is quite different from traditiona=
+l
+>>>>> Xen PV block device (vbd) from the toolstack point of view:
+>>>>> =C2=A0 - as the frontend is virtio-blk which is not a Xenbus driver=
+,=20
+>>>>> nothing
+>>>>> =C2=A0=C2=A0=C2=A0 written to Xenstore are fetched by the frontend =
+(the vdev is not
+>>>>> =C2=A0=C2=A0=C2=A0 passed to the frontend)
+>>>>> =C2=A0 - the ring-ref/event-channel are not used for the backend<->=
+frontend
+>>>>> =C2=A0=C2=A0=C2=A0 communication, the proposed IPC for Virtio is IO=
+REQ/DM
+>>>>> it is still a "block device" and ought to be integrated in existing=
 
-Hi Jan
+>>>>> "disk" handling. So, re-use (and adapt) "disk" parsing/configuratio=
+n
+>>>>> logic to deal with Virtio devices as well.
+>>>> How backend are intended to be created? Is there something listening=
+ on
+>>>> xenstore?
+>>>>
+>>>> You mention QEMU as been the backend, do you intend to have QEMU
+>>>> listening on xenstore to create a virtio backend? Or maybe it is on =
+the
+>>>> command line? There is QMP as well, but it's probably a lot more
+>>>> complicated as I think libxl needs refactoring for that.
+>>>
+>>>
+>>> No, QEMU is not involved there. The backend is a standalone applicati=
+on,
+>>> it is launched from the command line. The backend reads the Xenstore =
 
-> Having a separate flush-all hook has always been puzzling me some. We
-> will want to be able to force a full flush via accumulated flush flags
-> from the map/unmap functions. Introduce a respective new flag and fold
-> all flush handling to use the single remaining hook.
->
-> Note that because of the respective comments in SMMU and IPMMU-VMSA
-> code, I've folded the two prior hook functions into one.
+>>> to get
+>>> the configuration and to detect when guest with the frontend is=20
+>>> created/destroyed.
+>>
+>> I think this should be reflected somehow in the configuration, as I
+>> expect qemu might gain this functionality in the future.
+>=20
+> I understand this and agree in general (however I am wondering whether =
 
-Changes to IPMMU-VMSA lgtm, for SMMU-v2 I think the same.
+> this can be postponed until it is actually needed), but ...
+
+This might lead to the need to support some "legacy" options in future.
+I think we should at least think whether these scheme will cover (or
+prohibit) extensions which are already on the horizon.
+
+>> I'm wondering whether we shouldn't split the backend from the protocol=
+
+>> (or specification?). Something like "protocol=3Dvirtio" (default would=
+ be
+>> e.g. "xen") and then you could add "backend=3Dexternal" for your use c=
+ase?
+>=20
+> ... I am afraid, I didn't get the idea. Are we speaking about the (new?=
+)=20
+> disk configuration options
+> here or these are not disk specific things at all and to be applicable =
+
+> for all possible backends?
+
+I was talking of a general approach using the disk as an example. For
+disks it is just rather obvious.
+
+> If the former, then could the new backendtype simply do the job? For=20
+> example, "backendtype=3Dvirtio_external" for our current use-case and=20
+> "backendtype=3Dvirtio_qemu"
+> for the possible future use-cases? Could you please clarify the idea.
+
+I want to avoid overloading the backendtype with information which is
+in general not really related by the backend. You can have a qemu based
+qdisk backend serving a Xen PV-disk (like today) or a virtio disk.
+
+A similar approach has been chosen for the disk format: it is not part
+of the backend, but a parameter of its own. This way e.g. the qdisk
+backend can use the original qdisk format, or the qcow format.
+
+In practice we are having something like the "protocol" already today:
+the disk device name is encoding that ("xvd*" is a Xen PV disk, while
+"sd*" is an emulated SCSI disk, which happens to be presented to the
+guest as "xvd*", too). And this is an additional information not
+related to the backendtype.
+
+So we have basically the following configuration items, which are
+orthogonal to each other (some combinations might not make sense,
+but in theory most would be possible):
+
+1. protocol: emulated (not PV), Xen (like today), virtio
+
+2. backendtype: phy (blkback), qdisk (qemu), other (e.g. a daemon)
+
+3. format: raw, qcow, qcow2, vhd, qed
+
+The combination virtio+phy would be equivalent to vhost, BTW. And
+virtio+other might even use vhost-user, depending on the daemon.
 
 
-> For SMMU-v3,
-> which lacks a comment towards incapable hardware, I've left both
-> functions in place on the assumption that selective and full flushes
-> will eventually want separating.
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> TBD: What we really are going to need is for the map/unmap functions to
->       specify that a wider region needs flushing than just the one
->       covered by the present set of (un)maps. This may still be less than
->       a full flush, but at least as a first step it seemed better to me
->       to keep things simple and go the flush-all route.
-> ---
-> v2: New.
->
-> --- a/xen/drivers/passthrough/amd/iommu.h
-> +++ b/xen/drivers/passthrough/amd/iommu.h
-> @@ -242,7 +242,6 @@ int amd_iommu_get_reserved_device_memory
->   int __must_check amd_iommu_flush_iotlb_pages(struct domain *d, dfn_t dfn,
->                                                unsigned long page_count,
->                                                unsigned int flush_flags);
-> -int __must_check amd_iommu_flush_iotlb_all(struct domain *d);
->   void amd_iommu_print_entries(const struct amd_iommu *iommu, unsigned int dev_id,
->                                dfn_t dfn);
->   
-> --- a/xen/drivers/passthrough/amd/iommu_map.c
-> +++ b/xen/drivers/passthrough/amd/iommu_map.c
-> @@ -475,15 +475,18 @@ int amd_iommu_flush_iotlb_pages(struct d
->   {
->       unsigned long dfn_l = dfn_x(dfn);
->   
-> -    ASSERT(page_count && !dfn_eq(dfn, INVALID_DFN));
-> -    ASSERT(flush_flags);
-> +    if ( !(flush_flags & IOMMU_FLUSHF_all) )
-> +    {
-> +        ASSERT(page_count && !dfn_eq(dfn, INVALID_DFN));
-> +        ASSERT(flush_flags);
-> +    }
->   
->       /* Unless a PTE was modified, no flush is required */
->       if ( !(flush_flags & IOMMU_FLUSHF_modified) )
->           return 0;
->   
-> -    /* If the range wraps then just flush everything */
-> -    if ( dfn_l + page_count < dfn_l )
-> +    /* If so requested or if the range wraps then just flush everything. */
-> +    if ( (flush_flags & IOMMU_FLUSHF_all) || dfn_l + page_count < dfn_l )
->       {
->           amd_iommu_flush_all_pages(d);
->           return 0;
-> @@ -508,13 +511,6 @@ int amd_iommu_flush_iotlb_pages(struct d
->   
->       return 0;
->   }
-> -
-> -int amd_iommu_flush_iotlb_all(struct domain *d)
-> -{
-> -    amd_iommu_flush_all_pages(d);
-> -
-> -    return 0;
-> -}
->   
->   int amd_iommu_reserve_domain_unity_map(struct domain *d,
->                                          const struct ivrs_unity_map *map,
-> --- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-> +++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-> @@ -642,7 +642,6 @@ static const struct iommu_ops __initcons
->       .map_page = amd_iommu_map_page,
->       .unmap_page = amd_iommu_unmap_page,
->       .iotlb_flush = amd_iommu_flush_iotlb_pages,
-> -    .iotlb_flush_all = amd_iommu_flush_iotlb_all,
->       .reassign_device = reassign_device,
->       .get_device_group_id = amd_iommu_group_id,
->       .enable_x2apic = iov_enable_xt,
-> --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> @@ -930,13 +930,19 @@ out:
->   }
->   
->   /* Xen IOMMU ops */
-> -static int __must_check ipmmu_iotlb_flush_all(struct domain *d)
-> +static int __must_check ipmmu_iotlb_flush(struct domain *d, dfn_t dfn,
-> +                                          unsigned long page_count,
-> +                                          unsigned int flush_flags)
->   {
->       struct ipmmu_vmsa_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
->   
-> +    ASSERT(flush_flags);
-> +
->       if ( !xen_domain || !xen_domain->root_domain )
->           return 0;
->   
-> +    /* The hardware doesn't support selective TLB flush. */
-> +
->       spin_lock(&xen_domain->lock);
->       ipmmu_tlb_invalidate(xen_domain->root_domain);
->       spin_unlock(&xen_domain->lock);
-> @@ -944,16 +950,6 @@ static int __must_check ipmmu_iotlb_flus
->       return 0;
->   }
->   
-> -static int __must_check ipmmu_iotlb_flush(struct domain *d, dfn_t dfn,
-> -                                          unsigned long page_count,
-> -                                          unsigned int flush_flags)
-> -{
-> -    ASSERT(flush_flags);
-> -
-> -    /* The hardware doesn't support selective TLB flush. */
-> -    return ipmmu_iotlb_flush_all(d);
-> -}
-> -
->   static struct ipmmu_vmsa_domain *ipmmu_get_cache_domain(struct domain *d,
->                                                           struct device *dev)
->   {
-> @@ -1303,7 +1299,6 @@ static const struct iommu_ops ipmmu_iomm
->       .hwdom_init      = ipmmu_iommu_hwdom_init,
->       .teardown        = ipmmu_iommu_domain_teardown,
->       .iotlb_flush     = ipmmu_iotlb_flush,
-> -    .iotlb_flush_all = ipmmu_iotlb_flush_all,
->       .assign_device   = ipmmu_assign_device,
->       .reassign_device = ipmmu_reassign_device,
->       .map_page        = arm_iommu_map_page,
-> --- a/xen/drivers/passthrough/arm/smmu.c
-> +++ b/xen/drivers/passthrough/arm/smmu.c
-> @@ -2649,11 +2649,17 @@ static int force_stage = 2;
->    */
->   static u32 platform_features = ARM_SMMU_FEAT_COHERENT_WALK;
->   
-> -static int __must_check arm_smmu_iotlb_flush_all(struct domain *d)
-> +static int __must_check arm_smmu_iotlb_flush(struct domain *d, dfn_t dfn,
-> +					     unsigned long page_count,
-> +					     unsigned int flush_flags)
->   {
->   	struct arm_smmu_xen_domain *smmu_domain = dom_iommu(d)->arch.priv;
->   	struct iommu_domain *cfg;
->   
-> +	ASSERT(flush_flags);
-> +
-> +	/* ARM SMMU v1 doesn't have flush by VMA and VMID */
-> +
->   	spin_lock(&smmu_domain->lock);
->   	list_for_each_entry(cfg, &smmu_domain->contexts, list) {
->   		/*
-> @@ -2670,16 +2676,6 @@ static int __must_check arm_smmu_iotlb_f
->   	return 0;
->   }
->   
-> -static int __must_check arm_smmu_iotlb_flush(struct domain *d, dfn_t dfn,
-> -					     unsigned long page_count,
-> -					     unsigned int flush_flags)
-> -{
-> -	ASSERT(flush_flags);
-> -
-> -	/* ARM SMMU v1 doesn't have flush by VMA and VMID */
-> -	return arm_smmu_iotlb_flush_all(d);
-> -}
-> -
->   static struct iommu_domain *arm_smmu_get_domain(struct domain *d,
->   						struct device *dev)
->   {
-> @@ -2879,7 +2875,6 @@ static const struct iommu_ops arm_smmu_i
->       .add_device = arm_smmu_dt_add_device_generic,
->       .teardown = arm_smmu_iommu_domain_teardown,
->       .iotlb_flush = arm_smmu_iotlb_flush,
-> -    .iotlb_flush_all = arm_smmu_iotlb_flush_all,
->       .assign_device = arm_smmu_assign_dev,
->       .reassign_device = arm_smmu_reassign_dev,
->       .map_page = arm_iommu_map_page,
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -3431,7 +3431,6 @@ static const struct iommu_ops arm_smmu_i
->   	.hwdom_init		= arm_smmu_iommu_hwdom_init,
->   	.teardown		= arm_smmu_iommu_xen_domain_teardown,
->   	.iotlb_flush		= arm_smmu_iotlb_flush,
-> -	.iotlb_flush_all	= arm_smmu_iotlb_flush_all,
->   	.assign_device		= arm_smmu_assign_dev,
->   	.reassign_device	= arm_smmu_reassign_dev,
->   	.map_page		= arm_iommu_map_page,
-> --- a/xen/drivers/passthrough/iommu.c
-> +++ b/xen/drivers/passthrough/iommu.c
-> @@ -463,15 +463,12 @@ int iommu_iotlb_flush_all(struct domain
->       const struct domain_iommu *hd = dom_iommu(d);
->       int rc;
->   
-> -    if ( !is_iommu_enabled(d) || !hd->platform_ops->iotlb_flush_all ||
-> +    if ( !is_iommu_enabled(d) || !hd->platform_ops->iotlb_flush ||
->            !flush_flags )
->           return 0;
->   
-> -    /*
-> -     * The operation does a full flush so we don't need to pass the
-> -     * flush_flags in.
-> -     */
-> -    rc = iommu_call(hd->platform_ops, iotlb_flush_all, d);
-> +    rc = iommu_call(hd->platform_ops, iotlb_flush, d, INVALID_DFN, 0,
-> +                    flush_flags | IOMMU_FLUSHF_all);
->       if ( unlikely(rc) )
->       {
->           if ( !d->is_shutting_down && printk_ratelimit() )
-> --- a/xen/drivers/passthrough/vtd/iommu.c
-> +++ b/xen/drivers/passthrough/vtd/iommu.c
-> @@ -731,18 +731,21 @@ static int __must_check iommu_flush_iotl
->                                                   unsigned long page_count,
->                                                   unsigned int flush_flags)
->   {
-> -    ASSERT(page_count && !dfn_eq(dfn, INVALID_DFN));
-> -    ASSERT(flush_flags);
-> +    if ( flush_flags & IOMMU_FLUSHF_all )
-> +    {
-> +        dfn = INVALID_DFN;
-> +        page_count = 0;
-> +    }
-> +    else
-> +    {
-> +        ASSERT(page_count && !dfn_eq(dfn, INVALID_DFN));
-> +        ASSERT(flush_flags);
-> +    }
->   
->       return iommu_flush_iotlb(d, dfn, flush_flags & IOMMU_FLUSHF_modified,
->                                page_count);
->   }
->   
-> -static int __must_check iommu_flush_iotlb_all(struct domain *d)
-> -{
-> -    return iommu_flush_iotlb(d, INVALID_DFN, 0, 0);
-> -}
-> -
->   static void queue_free_pt(struct domain *d, mfn_t mfn, unsigned int next_level)
->   {
->       if ( next_level > 1 )
-> @@ -2841,7 +2844,7 @@ static int __init intel_iommu_quarantine
->       spin_unlock(&hd->arch.mapping_lock);
->   
->       if ( !rc )
-> -        rc = iommu_flush_iotlb_all(d);
-> +        rc = iommu_flush_iotlb(d, INVALID_DFN, 0, 0);
->   
->       /* Pages may be leaked in failure case */
->       return rc;
-> @@ -2874,7 +2877,6 @@ static struct iommu_ops __initdata vtd_o
->       .resume = vtd_resume,
->       .crash_shutdown = vtd_crash_shutdown,
->       .iotlb_flush = iommu_flush_iotlb_pages,
-> -    .iotlb_flush_all = iommu_flush_iotlb_all,
->       .get_reserved_device_memory = intel_iommu_get_reserved_device_memory,
->       .dump_page_tables = vtd_dump_page_tables,
->   };
-> --- a/xen/include/xen/iommu.h
-> +++ b/xen/include/xen/iommu.h
-> @@ -147,9 +147,11 @@ enum
->   {
->       _IOMMU_FLUSHF_added,
->       _IOMMU_FLUSHF_modified,
-> +    _IOMMU_FLUSHF_all,
->   };
->   #define IOMMU_FLUSHF_added (1u << _IOMMU_FLUSHF_added)
->   #define IOMMU_FLUSHF_modified (1u << _IOMMU_FLUSHF_modified)
-> +#define IOMMU_FLUSHF_all (1u << _IOMMU_FLUSHF_all)
->   
->   int __must_check iommu_map(struct domain *d, dfn_t dfn, mfn_t mfn,
->                              unsigned long page_count, unsigned int flags,
-> @@ -282,7 +284,6 @@ struct iommu_ops {
->       int __must_check (*iotlb_flush)(struct domain *d, dfn_t dfn,
->                                       unsigned long page_count,
->                                       unsigned int flush_flags);
-> -    int __must_check (*iotlb_flush_all)(struct domain *d);
->       int (*get_reserved_device_memory)(iommu_grdm_t *, void *);
->       void (*dump_page_tables)(struct domain *d);
->   
->
->
--- 
-Regards,
+Juergen
 
-Oleksandr Tyshchenko
+--------------A23C7142272FCC8AC239F321
+Content-Type: application/pgp-keys;
+ name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: OpenPGP public key
+Content-Disposition: attachment;
+ filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOBy=
+cWx
+w3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJvedYm8O=
+f8Z
+d621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y=
+9bf
+IhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xq=
+G7/
+377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR=
+3Jv
+c3MgPGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsEFgIDA=
+QIe
+AQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4FUGNQH2lvWAUy+dnyT=
+hpw
+dtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3TyevpB0CA3dbBQp0OW0fgCetToGIQrg0=
+MbD
+1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbv=
+oPH
+Z8SlM4KWm8rG+lIkGurqqu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v=
+5QL
++qHI3EIPtyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVyZ=
+2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJCAcDAgEGFQgCC=
+QoL
+BBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4RF7HoZhPVPogNVbC4YA6lW7Dr=
+Wf0
+teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz78X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC=
+/nu
+AFVGy+67q2DH8As3KPu0344TBDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0Lh=
+ITT
+d9jLzdDad1pQSToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLm=
+XBK
+7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkMnQfvUewRz=
+80h
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMBAgAjBQJTjHDXAhsDBwsJC=
+AcD
+AgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJn=
+FOX
+gMLdBQgBlVPO3/D9R8LtF9DBAFPNhlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1=
+jnD
+kfJZr6jrbjgyoZHiw/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0=
+N51
+N5JfVRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwPOoE+l=
+otu
+fe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK/1xMI3/+8jbO0tsn1=
+tqS
+EUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuZGU+wsB5BBMBAgAjBQJTjHDrA=
+hsD
+BwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3=
+g3O
+ZUEBmDHVVbqMtzwlmNC4k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5=
+dM7
+wRqzgJpJwK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu5=
+D+j
+LRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzBTNh30FVKK1Evm=
+V2x
+AKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37IoN1EblHI//x/e2AaIHpzK5h88N=
+Eaw
+QsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpW=
+nHI
+s98ndPUDpnoxWQugJ6MpMncr0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZR=
+wgn
+BC5mVM6JjQ5xDk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNV=
+bVF
+LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mmwe0icXKLk=
+pEd
+IXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0Iv3OOImwTEe4co3c1mwARA=
+QAB
+wsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMvQ/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEw=
+Tbe
+8YFsw2V/Buv6Z4Mysln3nQK5ZadD534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1=
+vJz
+Q1fOU8lYFpZXTXIHb+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8=
+VGi
+wXvTyJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqcsuylW=
+svi
+uGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5BjR/i1DG86lem3iBDX=
+zXs
+ZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------A23C7142272FCC8AC239F321--
+
+--xxLXFWYBRL1QSwkGyBQNnNYre2XMJP89u--
+
+--VeOjrmomgssEjMMOywE0wIhp0gRv3Sn8d
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmG6EI4FAwAAAAAACgkQsN6d1ii/Ey8I
+twgAlw6MP7MLov3vc6X+VCcVcW63Bg2ubPBgVO4gISFh+dRob2YBuZed2EymBz5DIExvIcJd5M63
+3xPMzWjOQyhxysyv3or37O0SfUFTGYf2jPwSercPtwi0aDBIjzVUvIo3YGlCD1Tz+f3bQUa0pLlo
+rCHIwG1P6Crx78+R+EgH+5v5Au9XC35WCtzpUKRJFQ1bA2JpA27blK4It4H67ndeBgePGZar6cvN
+wHbrI0WIGXNrRbscM6P5vFNWuckWwgst56xYn2Q5XydOwAJ/EUCMpPQN9UjZPFVv9DtHO4rjEKs+
+Ko5ur4SbVs1B2OaNGB1uKvjSDFgoTH3qZuKdGoHr+g==
+=DcRg
+-----END PGP SIGNATURE-----
+
+--VeOjrmomgssEjMMOywE0wIhp0gRv3Sn8d--
 
