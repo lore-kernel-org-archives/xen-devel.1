@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6419DC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E422FC4321E
 	for <xen-devel@archiver.kernel.org>; Thu, 16 Dec 2021 09:54:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.247797.427340 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.247799.427350 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mxnTN-000631-Ah; Thu, 16 Dec 2021 09:54:49 +0000
+	id 1mxnTO-0006GT-9b; Thu, 16 Dec 2021 09:54:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 247797.427340; Thu, 16 Dec 2021 09:54:49 +0000
+Received: by outflank-mailman (output) from mailman id 247799.427350; Thu, 16 Dec 2021 09:54:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mxnTN-00062k-5c; Thu, 16 Dec 2021 09:54:49 +0000
-Received: by outflank-mailman (input) for mailman id 247797;
- Thu, 16 Dec 2021 09:54:45 +0000
+	id 1mxnTO-0006Cb-1i; Thu, 16 Dec 2021 09:54:50 +0000
+Received: by outflank-mailman (input) for mailman id 247799;
+ Thu, 16 Dec 2021 09:54:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VCpR=RB=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1mxnTJ-0004jJ-PA
- for xen-devel@lists.xenproject.org; Thu, 16 Dec 2021 09:54:45 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 31040c06-5e56-11ec-9e60-abaf8a552007;
+ id 1mxnTK-0004jJ-PG
+ for xen-devel@lists.xenproject.org; Thu, 16 Dec 2021 09:54:46 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 324ce813-5e56-11ec-9e60-abaf8a552007;
  Thu, 16 Dec 2021 10:54:44 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,64 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31040c06-5e56-11ec-9e60-abaf8a552007
+X-Inumbo-ID: 324ce813-5e56-11ec-9e60-abaf8a552007
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1639648483;
+  d=citrix.com; s=securemail; t=1639648484;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=v9bw6OTYe4GMK9r+ci/619JzYrUtHb0Orn0SUhf+1FU=;
-  b=MridvwzDq9A4Syj+4pxI06L4DOjmlPSaDXdeUJWlwha2gVYYUcuOrTu2
-   8ZNraDKSKXAmUUu3hxWEGNgY4IZJAYWihmuYuG6dpfzHO9GrDystvnYwy
-   wbi1OpRbYlXnhZMyf7m0Vnn65HTIZUbzdMAOd+z4T9nFACtrN5Sua6Y8u
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: C4+7FJeYr4zePLeQRlSaazB/lvsCFpm+foHbA2xrM+AIlHCh1mUUbEx0AN9MxdsD7bVMQEgSnt
- x6831LE3SJtYJmoxXmmoiYG2koTMGKtku+o88WXt/FGS9kiGZsdLeE1LKFnk9KgrVJaO0uRxy6
- 0IMLQpLDcKi2pj03rhr+0Fd44S/SFfLBIObo+cVdVR1635qX7576hW4kpWSOyO+nD+yyrMcCdz
- SZWk8z/qzex2eAu0EMbBFU5/uH+C8gof15WtAS+DujlEKHJSr1m7aLMXrjMX8o+Bh2zEpIvUVD
- EPaf+baT0JiMaBlxGnsWl9P0
+  bh=xtRI3BLk7ZWqiz6X+MMatMX66rJ6BEiGCj6erUpx/jo=;
+  b=Z9XJ/wjxf5YLR9MvDJ/GwAsKeFocdRWCCeueVBuigLNHsNL9zZQhT67j
+   KctgfL/9WXsFHF8L9GE7+KUVw0wQOeqZb1QnYgOaO+A9JK2icJ5QMPOqe
+   tPWl6qOKUcr8yU9UFdWFjsQDuiUJbQ2UGIm+vArwyqHewC7WJ7g/K29Ky
+   8=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 488ouJ4q8rmljPTJrBrg+TTe2yYP5NDrzKwZf1W36Q3wNYaakrD6Oew+sxZQTeP2WQsLjR5Yz9
+ jEnQOaCzVj/ZS2Lp79cqscwyNwnQmdxIhhFvit4+PsO0DTPiiVuRr6vAAqyK3tx0K73AzDOeVx
+ QXg6IY5Jk5PHIa2zDNaXqPpOxj4LtetyBZfATxXtJ5mmsagevylpsYam1sRltcYlDtGAGqAQMW
+ D0GH9PsHmIQ1ceRbx2ei0wjhrAEUh2iVT9oYapNsyRNs9TxaALQNaVvZdUy7CmxV2Pv/xrcsjg
+ s5WGHp4lbl3nT4M59HyV9m58
 X-SBRS: 5.1
-X-MesageID: 62240014
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 60560088
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:MpXo06kaIxkJOppWx7QvUBLo5gxaIURdPkR7XQ2eYbSJt1+Wr1Gzt
- xIaDWuPPPfeajPxfo9yOt7n9h9Sv5OGzoBnTQNl+Co2ESMWpZLJC+rCIxarNUt+DCFioGGLT
+IronPort-Data: A9a23:JZgV7anz8PgCRWCkYKjQBv/o5gxMIURdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIdXTvQb/jfM2GnLtggbtvg8R5SuJ+AyoIxQVBr+y5jFSMWpZLJC+rCIxarNUt+DCFioGGLT
  Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA180IMsdoUg7wbdg2Nc22YLR7z6l4
  rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
  s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- NJH9puIY1lyBJP3od5adhpELBpGB5QTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQ6yEO
- 5JBMGYHgBLoR0JhZ30GAq8Hv8DxtHXUfDtolgiQqv9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
- XjJl0z6Dw8bMpqDyDOD2nOqmuLL2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
- FYbkgIMh6Uv8E2gTvHmQga15nWDu3Yht8F4SrNgrlvXk+yNvljfVjNsoiN9hMIOs8V1QgQAi
- ASzoejQP3tKs6Gqckqnz+LBxd+tAhQ9IWgHbC4CaAIK5dj/vY0+5i7yosZf/L2d1YOsR2ypq
- 9yehG1n3uhI05ZXv0mu1Qmf22rEm3TfcuIiCuw7tEqB5xgxWoOqbpfABbPzvacZd9bxorVsU
- RE5dymiAAImUcHleM+lGrxl8FSVCxCtame0bblHRcZJythV0yT/Fb28GRknTKuTDu4KeCXyf
- GjYsh5L6ZlYMROCNPEsMt/gUJt6kPK4TrwJs8w4iPIUOPCdkyfdo0lTibO4hTixwCDAb4lhU
- XtkTSpcJSlDUvk2pNZHb+wczaUq1kgDKZD7HvjGI+Cc+ePGPha9EO5dWHPXN7xRxP7U8W39r
- ocEX+PXmko3bQELSnSOmWLlBQtRdiZT6FGfg5E/S9Nv1SI6Qjx8UKGInut6E2Gn9owM/tr1E
- riGchcw4DLCabfvcm1ms1hvN+HiW4hRt3U+MXB+NFqkwSF7M42u8L0eZ908erx+rL5vyvt9T
- v8kfcScA6sQFmSbqmpFNZSt/pZ/cBmLhB6VO3b3ajYIYJM9FRfC/cXpf1Wz+XBWXDa3r8Y3v
- 5apyhjfHcgYXw1nAcuPMKCvwlq9sGIzguV3W0eUcNBfdF+1qNphKjDrj+9xKMYJcE2Ryjyf3
- geQIBEZueiS/NNlrIiX3fiJ9t77HfF/E0xWG3jgwYy3bSSKrHC+xYJgUfqTeWyPXm3D56j/N
- /5eyOvxMaNbkQ8S4ZZ8Cbti0Yk3+8Dr++1B1g1hEXjGMwarB7dnLiXU1MVDrPQQlLpQuA/wU
- UOT4NhKf76OPZq9QlIWIQMkaMWF1O0VxWaOvahkfh2i6X8l5qeDXGVTIwKI2X5UI7ZCOY84x
- fss5ZwN4Aulhxt2atuLg0i4LYhXwqDsh0n/iqwnPQ==
-IronPort-HdrOrdr: A9a23:lTYAJq6hEAuCDw6D0gPXwPLXdLJyesId70hD6qhwISY1TiX+rb
- HXoB17726MtN9/YgBCpTntAsa9qDbnhPpICOoqTNGftWvdyQmVxehZhOOIqVCNJ8S9zJ876U
- 4JSdkENDSaNzhHZKjBjjVQa+xQpeW6zA==
+ NZzi5rzd1l2BaGPo8k8YgdILQUnZ5QTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
+ 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQ66DO
+ ZJBOWoHgBLoZxx1FBRPV7QCo9iFpUXcfRNR9EiMnP9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
+ XjJl0zbKBwHMN2UyRKe72mhwOTImEvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
+ 3H44QJ38/J0rhbyCICgAVvo+xZooyLwRfJTLdM8qz/TlZHYoD20J1kaXgBlMYYf4ZpeqSMR6
+ neFmNbgBDpKubKTSG6A+rr8kQ5eKRT5PkdZO3ZaEFJtD83L5dhq00mRFooL/Lud14WtQVnNL
+ ya2QD/Sbln5peoCzO2F8F/OmFpATbCZH1dutm07so9Ihz6VhbJJhaT0uTA3Dt4ade51q2VtW
+ lBewaByC8hUUvmweNSlGrllIV1Qz6/t3MfgqVBuBYI90D+m5mSue4tdiBknehw4b5dfJm+0O
+ heI0e+02HO1FCHwBUOQS9juY/nGMIC6TYi1PhwqRoQmjmdNmP+vo3g1OB/4M5HFm0kwi6AvU
+ ap3gu73ZUv2/Z9PlWLsL89EiOdD7nlnmQv7GMCqpzz6gOH2TCPEFt843K6mM7lRAFWs+16Or
+ b6y9qKiln1ibQEJSnWNrNNIcwlVdSNT6FKfg5U/S9Nv6zFOQAkJY8I9C5t7E2C8t6gKxOrO4
+ F+nXUpUlAj2iXHdcF3YYXF/crL/G514qCtjbyArOF+p3VklYJqus/hDJ8dmI+F/+bwx1+NwQ
+ tkEZ96EXqZFRAPY9mlPdpL6toFjKkim3FrcIyq/bTEjVJd8XAiVqMT8dw7i+XBWXCq6vMczu
+ ZO60QbfTcZRTghuFp+OOvmu00mwrT4Wn+crBxnEJdxaeUPN9ol2KnOu0q9rcp9UcRian2mUz
+ QebBxsctNLhmY5t/Ymbn72AoqeoD/B6QhhQEV7E4OvkLiLd5Gein9NNCb7aYTDHWWro06y+f
+ uEJnerkOfgKkVsW4YpxF7FnkfA369f1/uIIyw1lGDPAbkixC6MmKX6DhJEduqpIz75fmA23R
+ kPQpYUKZeTXYJvoQAwLOQ4oTuWfzvVFyDDd4MM8LFj++CIqrqGMVl9fPkXUhSFQRFev3FjJH
+ Qv1VBYq1jGC
+IronPort-HdrOrdr: A9a23:4C42k637vEXiIF7oVo7hDQqjBIIkLtp133Aq2lEZdPUMSL39qy
+ ncpoV96faUskdrZJhOo6HjBEDtexzhHP1OkPMs1NWZLWzbUQKTRekIh+aP/9SKIUzDH5tmpM
+ Rdmt9FaOEYY2IVsS+w2njfLz9p+qj/zEiC7d2ut0tQcQ==
 X-IronPort-AV: E=Sophos;i="5.88,211,1635220800"; 
-   d="scan'208";a="62240014"
+   d="scan'208";a="60560088"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Kevin Tian
-	<kevin.tian@intel.com>
-Subject: [PATCH 3/6] x86/hvm: Context switch MSR_PKRS
-Date: Thu, 16 Dec 2021 09:54:18 +0000
-Message-ID: <20211216095421.12871-4-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 5/6] x86/pagewalk: Support PKS
+Date: Thu, 16 Dec 2021 09:54:20 +0000
+Message-ID: <20211216095421.12871-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20211216095421.12871-1-andrew.cooper3@citrix.com>
 References: <20211216095421.12871-1-andrew.cooper3@citrix.com>
@@ -103,178 +102,83 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Under PKS, MSR_PKRS is available and based on the CPUID policy alone, and
-usable independently of CR4.PKS.  See the large comment in prot-key.h for
-details of the context switching arrangement.
+PKS is incredibly similar to the existing PKU behaviour, operating on
+pagewalks for any supervisor mapping.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Kevin Tian <kevin.tian@intel.com>
-
-At a guess, we're likely to see PKS on AMD eventually, hence not putting the
-DEFINE_PER_CPU() in vmx.c, but I'm at a total loss to find anywhere better to
-put it than hvm.c.  Suggestions welcome.
 ---
- xen/arch/x86/hvm/hvm.c              |  3 +++
- xen/arch/x86/hvm/vmx/vmx.c          |  9 +++++++
- xen/arch/x86/include/asm/msr.h      |  8 +++++++
- xen/arch/x86/include/asm/prot-key.h | 48 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 68 insertions(+)
+ xen/arch/x86/include/asm/guest_pt.h | 5 +++++
+ xen/arch/x86/include/asm/hvm/hvm.h  | 3 +++
+ xen/arch/x86/mm/guest_walk.c        | 9 +++++----
+ 3 files changed, 13 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 350dc396e37c..63eaa3c5a66b 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -69,6 +69,7 @@
- #include <asm/hvm/vm_event.h>
- #include <asm/altp2m.h>
- #include <asm/mtrr.h>
-+#include <asm/prot-key.h>
- #include <asm/apic.h>
- #include <asm/vm_event.h>
- #include <public/sched.h>
-@@ -117,6 +118,8 @@ static const char __initconst warning_hvm_fep[] =
- static bool_t __initdata opt_altp2m_enabled = 0;
- boolean_param("altp2m", opt_altp2m_enabled);
+diff --git a/xen/arch/x86/include/asm/guest_pt.h b/xen/arch/x86/include/asm/guest_pt.h
+index 6647ccfb8520..6802db2a415a 100644
+--- a/xen/arch/x86/include/asm/guest_pt.h
++++ b/xen/arch/x86/include/asm/guest_pt.h
+@@ -282,6 +282,11 @@ static always_inline bool guest_pku_enabled(const struct vcpu *v)
+     return !is_pv_vcpu(v) && hvm_pku_enabled(v);
+ }
  
-+DEFINE_PER_CPU(uint32_t, pkrs);
++static always_inline bool guest_pks_enabled(const struct vcpu *v)
++{
++    return !is_pv_vcpu(v) && hvm_pks_enabled(v);
++}
 +
- static int cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index a7a0d662342a..2e6af1e1c033 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -58,6 +58,7 @@
- #include <asm/event.h>
- #include <asm/mce.h>
- #include <asm/monitor.h>
-+#include <asm/prot-key.h>
- #include <public/arch-x86/cpuid.h>
+ /* Helpers for identifying whether guest entries have reserved bits set. */
  
- static bool_t __initdata opt_force_ept;
-@@ -525,6 +526,7 @@ static void vmx_restore_host_msrs(void)
+ /* Bits reserved because of maxphysaddr, and (lack of) EFER.NX */
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+index bd2cbb0e7baf..ffef7ed075a7 100644
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -394,6 +394,8 @@ int hvm_get_param(struct domain *d, uint32_t index, uint64_t *value);
+     ((v)->arch.hvm.guest_efer & EFER_NXE)
+ #define hvm_pku_enabled(v) \
+     (hvm_paging_enabled(v) && ((v)->arch.hvm.guest_cr[4] & X86_CR4_PKE))
++#define hvm_pks_enabled(v) \
++    (hvm_paging_enabled(v) && ((v)->arch.hvm.guest_cr[4] & X86_CR4_PKS))
  
- static void vmx_save_guest_msrs(struct vcpu *v)
- {
-+    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-     struct vcpu_msrs *msrs = v->arch.msrs;
+ /* Can we use superpages in the HAP p2m table? */
+ #define hap_has_1gb (!!(hvm_funcs.hap_capabilities & HVM_HAP_SUPERPAGE_1GB))
+@@ -868,6 +870,7 @@ static inline int hvm_vmtrace_get_option(
+ #define hvm_smap_enabled(v) ((void)(v), false)
+ #define hvm_nx_enabled(v) ((void)(v), false)
+ #define hvm_pku_enabled(v) ((void)(v), false)
++#define hvm_pks_enabled(v) ((void)(v), false)
  
+ #define arch_vcpu_block(v) ((void)(v))
+ 
+diff --git a/xen/arch/x86/mm/guest_walk.c b/xen/arch/x86/mm/guest_walk.c
+index dc8fdde0212e..8670d4990a11 100644
+--- a/xen/arch/x86/mm/guest_walk.c
++++ b/xen/arch/x86/mm/guest_walk.c
+@@ -406,16 +406,17 @@ guest_walk_tables(const struct vcpu *v, struct p2m_domain *p2m,
+ #if GUEST_PAGING_LEVELS >= 4 /* 64-bit only... */
      /*
-@@ -538,10 +540,14 @@ static void vmx_save_guest_msrs(struct vcpu *v)
-         rdmsrl(MSR_RTIT_OUTPUT_MASK, msrs->rtit.output_mask);
-         rdmsrl(MSR_RTIT_STATUS, msrs->rtit.status);
-     }
-+
-+    if ( cp->feat.pks )
-+        msrs->pkrs = rdpkrs_and_cache();
- }
+      * If all access checks are thus far ok, check Protection Key for 64bit
+-     * data accesses to user mappings.
++     * data accesses.
+      *
+      * N.B. In the case that the walk ended with a superpage, the fabricated
+      * gw->l1e contains the appropriate leaf pkey.
+      */
+-    if ( (ar & _PAGE_USER) && !(walk & PFEC_insn_fetch) &&
+-         guest_pku_enabled(v) )
++    if ( !(walk & PFEC_insn_fetch) &&
++         ((ar & _PAGE_USER) ? guest_pku_enabled(v)
++                            : guest_pks_enabled(v)) )
+     {
+         unsigned int pkey = guest_l1e_get_pkey(gw->l1e);
+-        unsigned int pkr = rdpkru();
++        unsigned int pkr = (ar & _PAGE_USER) ? rdpkru() : rdpkrs();
+         unsigned int pk_ar = pkr >> (pkey * PKEY_WIDTH);
  
- static void vmx_restore_guest_msrs(struct vcpu *v)
- {
-+    const struct cpuid_policy *cp = v->domain->arch.cpuid;
-     const struct vcpu_msrs *msrs = v->arch.msrs;
- 
-     write_gs_shadow(v->arch.hvm.vmx.shadow_gs);
-@@ -558,6 +564,9 @@ static void vmx_restore_guest_msrs(struct vcpu *v)
-         wrmsrl(MSR_RTIT_OUTPUT_MASK, msrs->rtit.output_mask);
-         wrmsrl(MSR_RTIT_STATUS, msrs->rtit.status);
-     }
-+
-+    if ( cp->feat.pks )
-+        wrpkrs(msrs->pkrs);
- }
- 
- void vmx_update_cpu_exec_control(struct vcpu *v)
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 1d3eca9063a2..2ee0b68100c9 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -338,6 +338,14 @@ struct vcpu_msrs
-         };
-     } rtit;
- 
-+    /*
-+     * 0x000006e1 - MSR_PKRS - Protection Key Supervisor.
-+     *
-+     * Exposed R/W to guests.  Xen doesn't use PKS yet, so only context
-+     * switched per vcpu.  When in current context, live value is in hardware.
-+     */
-+    uint32_t pkrs;
-+
-     /* 0x00000da0 - MSR_IA32_XSS */
-     struct {
-         uint64_t raw;
-diff --git a/xen/arch/x86/include/asm/prot-key.h b/xen/arch/x86/include/asm/prot-key.h
-index 084b248d81a5..4387c27b7ec5 100644
---- a/xen/arch/x86/include/asm/prot-key.h
-+++ b/xen/arch/x86/include/asm/prot-key.h
-@@ -19,8 +19,11 @@
- #ifndef ASM_PROT_KEY_H
- #define ASM_PROT_KEY_H
- 
-+#include <xen/percpu.h>
- #include <xen/types.h>
- 
-+#include <asm/msr.h>
-+
- #define PKEY_AD 1 /* Access Disable */
- #define PKEY_WD 2 /* Write Disable */
- 
-@@ -42,4 +45,49 @@ static inline void wrpkru(uint32_t pkru)
-                    :: "a" (pkru), "d" (0), "c" (0) );
- }
- 
-+/*
-+ * Xen does not use PKS.
-+ *
-+ * Guest kernel use is expected to be one default key, except for tiny windows
-+ * with a double write to switch to a non-default key in a permitted critical
-+ * section.
-+ *
-+ * As such, we want MSR_PKRS un-intercepted.  Furthermore, as we only need it
-+ * in Xen for emulation or migration purposes (i.e. possibly never in a
-+ * domain's lifetime), we don't want to re-sync the hardware value on every
-+ * vmexit.
-+ *
-+ * Therefore, we read and cache the guest value in ctxt_switch_from(), in the
-+ * expectation that we can short-circuit the write in ctxt_switch_to().
-+ * During regular operations in current context, the guest value is in
-+ * hardware and the per-cpu cache is stale.
-+ */
-+DECLARE_PER_CPU(uint32_t, pkrs);
-+
-+static inline uint32_t rdpkrs(void)
-+{
-+    uint32_t pkrs, tmp;
-+
-+    rdmsr(MSR_PKRS, pkrs, tmp);
-+
-+    return pkrs;
-+}
-+
-+static inline uint32_t rdpkrs_and_cache(void)
-+{
-+    return this_cpu(pkrs) = rdpkrs();
-+}
-+
-+static inline void wrpkrs(uint32_t pkrs)
-+{
-+    uint32_t *this_pkrs = &this_cpu(pkrs);
-+
-+    if ( *this_pkrs != pkrs )
-+    {
-+        *this_pkrs = pkrs;
-+
-+        wrmsr(MSR_PKRS, pkrs, 0);
-+    }
-+}
-+
- #endif /* ASM_PROT_KEY_H */
+         if ( (pk_ar & PKEY_AD) ||
 -- 
 2.11.0
 
