@@ -4,38 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D6DC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Dec 2021 19:50:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.248911.429330 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96D1EC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Dec 2021 21:40:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.248918.429342 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1myJFL-0007gY-A4; Fri, 17 Dec 2021 19:50:27 +0000
+	id 1myKxY-0003Cj-6M; Fri, 17 Dec 2021 21:40:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 248911.429330; Fri, 17 Dec 2021 19:50:27 +0000
+Received: by outflank-mailman (output) from mailman id 248918.429342; Fri, 17 Dec 2021 21:40:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1myJFL-0007gR-75; Fri, 17 Dec 2021 19:50:27 +0000
-Received: by outflank-mailman (input) for mailman id 248911;
- Fri, 17 Dec 2021 19:50:25 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1myKxY-0003Cc-2Z; Fri, 17 Dec 2021 21:40:12 +0000
+Received: by outflank-mailman (input) for mailman id 248918;
+ Fri, 17 Dec 2021 21:40:11 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=6k1w=RC=srcf.net=amc96@srs-se1.protection.inumbo.net>)
- id 1myJFJ-0007gL-R2
- for xen-devel@lists.xenproject.org; Fri, 17 Dec 2021 19:50:25 +0000
-Received: from ppsw-33.csi.cam.ac.uk (ppsw-33.csi.cam.ac.uk [131.111.8.133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9270bec2-5f72-11ec-9e60-abaf8a552007;
- Fri, 17 Dec 2021 20:50:23 +0100 (CET)
-Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:44372)
- by ppsw-33.csi.cam.ac.uk (ppsw.cam.ac.uk [131.111.8.137]:25)
- with esmtps (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- id 1myJF9-000y9u-h4 (Exim 4.95) (return-path <amc96@srcf.net>);
- Fri, 17 Dec 2021 19:50:15 +0000
-Received: from [192.168.1.10] (host-92-12-61-86.as13285.net [92.12.61.86])
- (Authenticated sender: amc96)
- by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id 089D41FC34;
- Fri, 17 Dec 2021 19:50:14 +0000 (GMT)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1myKxX-0003CS-FT; Fri, 17 Dec 2021 21:40:11 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1myKxX-0004VV-9s; Fri, 17 Dec 2021 21:40:11 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1myKxW-0006Kw-V9; Fri, 17 Dec 2021 21:40:11 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1myKxW-0006GP-Ug; Fri, 17 Dec 2021 21:40:10 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,88 +44,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9270bec2-5f72-11ec-9e60-abaf8a552007
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: https://help.uis.cam.ac.uk/email-scanner-virus
-Message-ID: <4382c02a-4207-729b-67b8-c9a8bf65b921@srcf.net>
-Date: Fri, 17 Dec 2021 19:50:14 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Content-Language: en-GB
-To: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-Cc: Christopher Clark <christopher.w.clark@gmail.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Dario Faggioli <dfaggioli@suse.com>
-References: <20211217233437.13791-1-dpsmith@apertussolutions.com>
- <20211217233437.13791-3-dpsmith@apertussolutions.com>
-From: Andrew Cooper <amc96@srcf.net>
-Subject: Re: [RFC 02/10] is_system_domain: replace open-coded instances
-In-Reply-To: <20211217233437.13791-3-dpsmith@apertussolutions.com>
-Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=384vxr4878ntAZfzG1r5FZS+y52Jp6WM+U+1U3AchNA=; b=XKCeKbmUXnF8QfU/18JPH17Cgu
+	4Pkevt4LKU3t/TjrFigGPM+SFC++o9W1ms5lH9ozaJvEfGIeILDZ1g8HzdS9YkEZ3rmAMUdkVJ4rY
+	btU0ucLMqsUD7DmhU49UKKybOL55B7yPMlRZfbflwafywKAn97st6xJkYFbsh65DabFk=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-167465-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 167465: all pass - PUSHED
+X-Osstest-Versions-This:
+    ovmf=ee1f8262b83dd88b30091e6e81221ff299796099
+X-Osstest-Versions-That:
+    ovmf=ab5ab2f60348138a4b7b1c95ad6f5d0954fb96f1
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 17 Dec 2021 21:40:10 +0000
 
-On 17/12/2021 23:34, Daniel P. Smith wrote:
-> From: Christopher Clark <christopher.w.clark@gmail.com>
->
-> There were several instances of open-coded domid range checking. This commit
-> replaces those with the is_system_domain inline function.
->
-> Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
-> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+flight 167465 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/167465/
 
-Ah - probably my fault.  When I added is_system_domain(), I didn't think
-to scan for other opencodes - I was guts deep in the domain creation logic.
+Perfect :-)
+All tests in this flight passed as required
+version targeted for testing:
+ ovmf                 ee1f8262b83dd88b30091e6e81221ff299796099
+baseline version:
+ ovmf                 ab5ab2f60348138a4b7b1c95ad6f5d0954fb96f1
 
-In addition to the ones you've got here...
+Last test of basis   167463  2021-12-17 15:10:34 Z    0 days
+Testing same since   167465  2021-12-17 17:41:43 Z    0 days    1 attempts
 
-xen/arch/x86/cpu/mcheck/mce.c:1521
-xen/common/domain.c:586
-common/domctl.c:55, 411 and 421
+------------------------------------------------------------
+People who touched revisions under test:
+  Gerd Hoffmann <kraxel@redhat.com>
+  Jiewen Yao <jiewen.yao@intel.com>
+  Leif Lindholm <leif@nuviainc.com>
+  Nhi Pham <nhi@os.amperecomputing.com>
+  Shivanshu Goyal <shivanshu3@gmail.com>
+  Stefan Berger <stefanb@linux.ibm.com>
 
-according to `git grep DOMID_FIRST_RESERVED`
+jobs:
+ build-amd64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
 
-> diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-> index 8ec4547bed..179f3dcc5a 100644
-> --- a/xen/arch/x86/cpu/vpmu.c
-> +++ b/xen/arch/x86/cpu/vpmu.c
-> @@ -188,7 +188,7 @@ void vpmu_do_interrupt(struct cpu_user_regs *regs)
->       * in XENPMU_MODE_ALL, for everyone.
->       */
->      if ( (vpmu_mode & XENPMU_MODE_ALL) ||
-> -         (sampled->domain->domain_id >= DOMID_FIRST_RESERVED) )
-> +         (is_system_domain(sampled->domain)) )
 
-Can drop one set of brackets now.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-> index 28146ee404..1df09bcb77 100644
-> --- a/xen/include/xen/sched.h
-> +++ b/xen/include/xen/sched.h
-> @@ -613,6 +613,11 @@ extern struct vcpu *idle_vcpu[NR_CPUS];
->  #define is_idle_domain(d) ((d)->domain_id == DOMID_IDLE)
->  #define is_idle_vcpu(v)   (is_idle_domain((v)->domain))
->  
-> +static inline bool is_system_domain_id(domid_t id)
-> +{
-> +    return (id >= DOMID_FIRST_RESERVED);
-> +}
-> +
->  static inline bool is_system_domain(const struct domain *d)
->  {
->      return d->domain_id >= DOMID_FIRST_RESERVED;
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-is_system_domain() wants implementing in terms of is_system_domain_id().
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-That said, could I talk you into is_system_domid() as a better name?
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
-This is all sufficiently trivial that I'm tempted to fix on commit if
-you'd like.  This patch is cleanup that stands on its own merit, and
-isn't tied to hyperlaunch specifically.
 
-~Andrew
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
+   ab5ab2f603..ee1f8262b8  ee1f8262b83dd88b30091e6e81221ff299796099 -> xen-tested-master
 
