@@ -4,33 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AA6FC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 11:48:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.249582.430004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84866C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 11:56:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.249591.430016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzH9H-0006pv-0w; Mon, 20 Dec 2021 11:48:11 +0000
+	id 1mzHGo-0008Q9-TX; Mon, 20 Dec 2021 11:55:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 249582.430004; Mon, 20 Dec 2021 11:48:10 +0000
+Received: by outflank-mailman (output) from mailman id 249591.430016; Mon, 20 Dec 2021 11:55:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzH9G-0006po-UG; Mon, 20 Dec 2021 11:48:10 +0000
-Received: by outflank-mailman (input) for mailman id 249582;
- Mon, 20 Dec 2021 11:48:10 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mzHGo-0008Q2-QR; Mon, 20 Dec 2021 11:55:58 +0000
+Received: by outflank-mailman (input) for mailman id 249591;
+ Mon, 20 Dec 2021 11:55:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hnIC=RF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1mzH9G-0006pi-3H
- for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 11:48:10 +0000
-Received: from sender3-of-o50.zoho.com (sender3-of-o50.zoho.com
- [136.143.184.50]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b208fefa-618a-11ec-85d3-df6b77346a89;
- Mon, 20 Dec 2021 12:48:07 +0100 (CET)
-Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1640000861742943.2120228389215;
- Mon, 20 Dec 2021 03:47:41 -0800 (PST)
+ <SRS0=efIU=RF=linutronix.de=tglx@srs-se1.protection.inumbo.net>)
+ id 1mzHGn-0008Pv-0b
+ for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 11:55:57 +0000
+Received: from galois.linutronix.de (galois.linutronix.de
+ [2a0a:51c0:0:12e:550::1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c8674213-618b-11ec-9e60-abaf8a552007;
+ Mon, 20 Dec 2021 12:55:55 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,397 +39,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b208fefa-618a-11ec-85d3-df6b77346a89
-ARC-Seal: i=1; a=rsa-sha256; t=1640000885; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=VF3CXsJj54wbz6wP+KNz4JHAZKcptCyEV8xfNWQx6YF962I5rerxpS2gZ3s3lQo4fB2rxvX/Ca8oOBy2bnK5Oy5hv1YibFcX4VXjqczstJahlMYt2Hzkv5RDkVh2itVtlxx5wPhhcqTPNR65ifitvQ7sYXPx6/PsAhErSHPUtV8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1640000885; h=Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
-	bh=0s4Vuqs7ufyKC/tb7lLUJ5CNxSzJesKBdHhoKh0EG+M=; 
-	b=OHttxzaARGkIPM6solDNMq05QrdMJ+9R67r4l5C3OK0SnOMytJvMPOUsyFTZ/3+RSKJypbmYIGh+oG1AWKSnlpoa7sUoYel0fYwQRwaPsM0n74pZAuW3N/fx2UWHwgViF8IBwsT2N7PA2+B+yOy/miDf1aHAO7xhhZthS9l44Rg=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1640000885;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding;
-	bh=0s4Vuqs7ufyKC/tb7lLUJ5CNxSzJesKBdHhoKh0EG+M=;
-	b=MXB7F3T7pPjCNBQcbPmtE33pzItAH26nIDESMlw4cks5Gh8t6D2EDI3eGAmcNIuG
-	VYwIjZ8UqFtTw0xA6OyIx/jkAGgfYyNH5A00NFc++Wfi3+PWJaZrQeN8s8fvMsHImtj
-	5qiVZK/zUFT4Q+b3/bP8AxtqDOx7lcXw1r8lSkJw=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: Wei Liu <wl@xen.org>,
-	xen-devel@lists.xenproject.org
-Cc: Christopher Clark <christopher.w.clark@gmail.com>,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH V2] is_system_domain: replace open-coded instances
-Date: Mon, 20 Dec 2021 10:50:13 -0500
-Message-Id: <20211220155013.28896-1-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.20.1
+X-Inumbo-ID: c8674213-618b-11ec-9e60-abaf8a552007
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020; t=1640001352;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/CUTvkF0ZJD/0bUX2KphRLF8+ED9CK1uoT06irTMlA8=;
+	b=HSeZ4MSHoOtA7+F6FETI6mp8k3+faOYIGAz2lfvwDy1sSASh6hTd2VQBM/xtD9dWQ6/+it
+	Xx1QiktSyrVJW+s/MoE14UBVxgCvvz4QKIShLntOLlYBJxOVA077qH2vgT/zKoawye+Uqx
+	snVV6hWDoQFRr82vrxuTiQA6fWGNWW8AQwrmHtXAqARcz5dCEF253M2O/8L7qxll49Y14E
+	5fSXcstjpAFKPqGx7Ea82OtzbwbxPCD/3HPgDpfoxqEWUh14UdrFA6upqctLwnFjwYbD3a
+	oi0s+ejfwagnJisgRBLJVVnUWCRjx+V6vSjMsZE6J9vLkzoXsCRI261DIG6qXg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+	s=2020e; t=1640001352;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=/CUTvkF0ZJD/0bUX2KphRLF8+ED9CK1uoT06irTMlA8=;
+	b=xrSZ1J5EcwueXFBw2+PxkXfD7FQuFpsVSXWU/APxdJHshmEM2RfAp9OAgcYlk78X64Avva
+	QQ/LsT2krF+p+kDg==
+To: =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>, Nathan Chancellor
+ <nathan@kernel.org>
+Cc: LKML <linux-kernel@vger.kernel.org>, Bjorn Helgaas <helgaas@kernel.org>,
+ Marc Zygnier <maz@kernel.org>, Alex Williamson
+ <alex.williamson@redhat.com>, Kevin Tian <kevin.tian@intel.com>, Jason
+ Gunthorpe <jgg@nvidia.com>, Megha Dey <megha.dey@intel.com>, Ashok Raj
+ <ashok.raj@intel.com>, linux-pci@vger.kernel.org, Greg Kroah-Hartman
+ <gregkh@linuxfoundation.org>, Juergen Gross <jgross@suse.com>,
+ xen-devel@lists.xenproject.org, Arnd Bergmann <arnd@arndb.de>, Michael
+ Ellerman <mpe@ellerman.id.au>, Benjamin Herrenschmidt
+ <benh@kernel.crashing.org>, linuxppc-dev@lists.ozlabs.org, Bjorn Helgaas
+ <bhelgaas@google.com>, Stuart Yoder <stuyoder@gmail.com>, Laurentiu Tudor
+ <laurentiu.tudor@nxp.com>, Nishanth Menon <nm@ti.com>, Tero Kristo
+ <kristo@kernel.org>, Santosh Shilimkar <ssantosh@kernel.org>,
+ linux-arm-kernel@lists.infradead.org, Vinod Koul <vkoul@kernel.org>,
+ dmaengine@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, Will
+ Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Joerg
+ Roedel <joro@8bytes.org>, iommu@lists.linux-foundation.org, Jassi Brar
+ <jassisinghbrar@gmail.com>, Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+ Sinan Kaya <okaya@kernel.org>
+Subject: Re: [patch V3 28/35] PCI/MSI: Simplify pci_irq_get_affinity()
+In-Reply-To: <ee5db32f-c21e-287f-2a19-94c1ba6e8217@kaod.org>
+References: <20211210221642.869015045@linutronix.de>
+ <20211210221814.900929381@linutronix.de>
+ <Yb0PaCyo/6z3XOlf@archlinux-ax161> <87v8zm9pmd.ffs@tglx>
+ <ee5db32f-c21e-287f-2a19-94c1ba6e8217@kaod.org>
+Date: Mon, 20 Dec 2021 12:55:51 +0100
+Message-ID: <87pmpra3so.ffs@tglx>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Christopher Clark <christopher.w.clark@gmail.com>
+On Sat, Dec 18 2021 at 21:25, C=C3=A9dric Le Goater wrote:
 
-This is a split out of the hyperlaunch dom0 series.
+> On 12/18/21 11:25, Thomas Gleixner wrote:
+>> On Fri, Dec 17 2021 at 15:30, Nathan Chancellor wrote:
+>>> On Fri, Dec 10, 2021 at 11:19:26PM +0100, Thomas Gleixner wrote:
+>>> I just bisected a boot failure on my AMD test desktop to this patch as
+>>> commit f48235900182 ("PCI/MSI: Simplify pci_irq_get_affinity()") in
+>>> -next. It looks like there is a problem with the NVMe drive after this
+>>> change according to the logs. Given that the hard drive is not getting
+>>> mounted for journald to write logs to, I am not really sure how to get
+>>> them from the machine so I have at least taken a picture of what I see
+>>> on my screen; open to ideas on that front!
+>>=20
+>> Bah. Fix below.
+>
+> That's a fix for the issue I was seeing on pseries with NVMe.
+>
+> Tested-by: C=C3=A9dric Le Goater <clg@kaod.org>
 
-There were several instances of open-coded domid range checking. This commit
-replaces those with the is_system_domain or is_system_domid inline function.
+I had a faint memory that I've seen that issue before, but couldn't find
+the mail in those massive threads.
 
-Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Acked-by: Dario Faggioli <dfaggioli@suse.com>
----
- xen/arch/x86/cpu/mcheck/mce.c     |   2 +-
- xen/arch/x86/cpu/vpmu.c           |   2 +-
- xen/common/domain.c               |   2 +-
- xen/common/domctl.c               |   4 +-
- xen/common/sched/core.c           |   4 +-
- xen/include/asm-x86/asm-macros.h  |  86 ++++++++++++++++++++
- xen/include/asm-x86/asm-offsets.h | 127 ++++++++++++++++++++++++++++++
- xen/include/xen/sched.h           |   7 +-
- 8 files changed, 226 insertions(+), 8 deletions(-)
- create mode 100644 xen/include/asm-x86/asm-macros.h
- create mode 100644 xen/include/asm-x86/asm-offsets.h
+Thanks for confirming!
 
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 7f433343bc..5c1df39075 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1518,7 +1518,7 @@ long do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
-             d = rcu_lock_domain_by_any_id(mc_msrinject->mcinj_domid);
-             if ( d == NULL )
-             {
--                if ( mc_msrinject->mcinj_domid >= DOMID_FIRST_RESERVED )
-+                if ( is_system_domid(mc_msrinject->mcinj_domid) )
-                     return x86_mcerr("do_mca inject: incompatible flag "
-                                      "MC_MSRINJ_F_GPADDR with domain %d",
-                                      -EINVAL, domid);
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index 8ec4547bed..c6bfa5a00e 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -188,7 +188,7 @@ void vpmu_do_interrupt(struct cpu_user_regs *regs)
-      * in XENPMU_MODE_ALL, for everyone.
-      */
-     if ( (vpmu_mode & XENPMU_MODE_ALL) ||
--         (sampled->domain->domain_id >= DOMID_FIRST_RESERVED) )
-+         is_system_domain(sampled->domain) )
-     {
-         sampling = choose_hwdom_vcpu();
-         if ( !sampling )
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 093bb4403f..347cc073aa 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -583,7 +583,7 @@ struct domain *domain_create(domid_t domid,
-     /* Sort out our idea of is_hardware_domain(). */
-     if ( domid == 0 || domid == hardware_domid )
-     {
--        if ( hardware_domid < 0 || hardware_domid >= DOMID_FIRST_RESERVED )
-+        if ( hardware_domid < 0 || is_system_domid(hardware_domid) )
-             panic("The value of hardware_dom must be a valid domain ID\n");
- 
-         old_hwdom = hardware_domain;
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 879a2adcbe..a3ad1f62b6 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -52,7 +52,7 @@ static inline int is_free_domid(domid_t dom)
- {
-     struct domain *d;
- 
--    if ( dom >= DOMID_FIRST_RESERVED )
-+    if ( is_system_domid(dom) )
-         return 0;
- 
-     if ( (d = rcu_lock_domain_by_id(dom)) == NULL )
-@@ -536,7 +536,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-         if ( !d )
-         {
-             ret = -EINVAL;
--            if ( op->domain >= DOMID_FIRST_RESERVED )
-+            if ( is_system_domid(op->domain) )
-                 break;
- 
-             rcu_read_lock(&domlist_read_lock);
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 8f4b1ca10d..6ea8bcf62f 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -821,7 +821,7 @@ int sched_init_domain(struct domain *d, unsigned int poolid)
-     int ret;
- 
-     ASSERT(d->cpupool == NULL);
--    ASSERT(d->domain_id < DOMID_FIRST_RESERVED);
-+    ASSERT(!is_system_domain(d));
- 
-     if ( (ret = cpupool_add_domain(d, poolid)) )
-         return ret;
-@@ -845,7 +845,7 @@ int sched_init_domain(struct domain *d, unsigned int poolid)
- 
- void sched_destroy_domain(struct domain *d)
- {
--    ASSERT(d->domain_id < DOMID_FIRST_RESERVED);
-+    ASSERT(!is_system_domain(d));
- 
-     if ( d->cpupool )
-     {
-diff --git a/xen/include/asm-x86/asm-macros.h b/xen/include/asm-x86/asm-macros.h
-new file mode 100644
-index 0000000000..0c3d538b5c
---- /dev/null
-+++ b/xen/include/asm-x86/asm-macros.h
-@@ -0,0 +1,86 @@
-+#if 0
-+.if 0
-+#endif
-+#ifndef __ASM_MACROS_H__
-+#define __ASM_MACROS_H__
-+asm ( ".include \"/home/build/projects/starlab/xen-private/xen/include/asm-x86/asm-macros.h\"" );
-+#endif /* __ASM_MACROS_H__ */
-+#if 0
-+.endif
-+.macro vmrun
-+    .byte 0x0f, 0x01, 0xd8
-+.endm
-+.macro stgi
-+    .byte 0x0f, 0x01, 0xdc
-+.endm
-+.macro clgi
-+    .byte 0x0f, 0x01, 0xdd
-+.endm
-+.macro INDIRECT_BRANCH insn:req arg:req
-+    .if 1 == 1
-+        $done = 0
-+        .irp reg, ax, cx, dx, bx, bp, si, di, 8, 9, 10, 11, 12, 13, 14, 15
-+        .ifeqs "\arg", "%r\reg"
-+            \insn __x86_indirect_thunk_r\reg
-+            $done = 1
-+           .exitm
-+        .endif
-+        .endr
-+        .if $done != 1
-+            .error "Bad register arg \arg"
-+        .endif
-+    .else
-+        \insn *\arg
-+    .endif
-+.endm
-+.macro INDIRECT_CALL arg:req
-+    INDIRECT_BRANCH call \arg
-+.endm
-+.macro INDIRECT_JMP arg:req
-+    INDIRECT_BRANCH jmp \arg
-+.endm
-+.macro guest_access_mask_ptr ptr:req, scratch1:req, scratch2:req
-+    mov $((((((256 >> 8) * 0xffff000000000000) | (256 << 39))) + (1 << 39)*16) - 1), \scratch1
-+    mov $~0, \scratch2
-+    cmp \ptr, \scratch1
-+    rcr $1, \scratch2
-+    and \scratch2, \ptr
-+.endm
-+.macro altinstruction_entry orig repl feature orig_len repl_len pad_len
-+    .long \orig - .
-+    .long \repl - .
-+    .word \feature
-+    .byte \orig_len
-+    .byte \repl_len
-+    .byte \pad_len
-+    .byte 0
-+.endm
-+.macro mknops nr_bytes
-+    .nops \nr_bytes, 9
-+.endm
-+.macro ALTERNATIVE oldinstr, newinstr, feature
-+    .L\@_orig_s: \oldinstr; .L\@_orig_e: .L\@_diff = (.L\@_repl_e\()1 - .L\@_repl_s\()1) - (.L\@_orig_e - .L\@_orig_s); mknops ((-(.L\@_diff > 0)) * .L\@_diff); .L\@_orig_p:
-+    .pushsection .altinstructions, "a", @progbits
-+    altinstruction_entry .L\@_orig_s, .L\@_repl_s1, \feature, (.L\@_orig_e - .L\@_orig_s), (.L\@_repl_e\()1 - .L\@_repl_s\()1), (.L\@_orig_p - .L\@_orig_e)
-+    .section .discard, "a", @progbits
-+    .byte (.L\@_orig_p - .L\@_orig_s)
-+    .byte 0xff + (.L\@_repl_e\()1 - .L\@_repl_s\()1) - (.L\@_orig_p - .L\@_orig_s)
-+    .section .altinstr_replacement, "ax", @progbits
-+    .L\@_repl_s\()1: \newinstr; .L\@_repl_e\()1:
-+    .popsection
-+.endm
-+.macro ALTERNATIVE_2 oldinstr, newinstr1, feature1, newinstr2, feature2
-+    .L\@_orig_s: \oldinstr; .L\@_orig_e: .L\@_diff = (((.L\@_repl_e\()1 - .L\@_repl_s\()1)) ^ ((((.L\@_repl_e\()1 - .L\@_repl_s\()1)) ^ ((.L\@_repl_e\()2 - .L\@_repl_s\()2))) & -(-(((.L\@_repl_e\()1 - .L\@_repl_s\()1)) < ((.L\@_repl_e\()2 - .L\@_repl_s\()2)))))) - (.L\@_orig_e - .L\@_orig_s); mknops ((-(.L\@_diff > 0)) * .L\@_diff); .L\@_orig_p:
-+    .pushsection .altinstructions, "a", @progbits
-+    altinstruction_entry .L\@_orig_s, .L\@_repl_s1, \feature1, (.L\@_orig_e - .L\@_orig_s), (.L\@_repl_e\()1 - .L\@_repl_s\()1), (.L\@_orig_p - .L\@_orig_e)
-+    altinstruction_entry .L\@_orig_s, .L\@_repl_s2, \feature2, (.L\@_orig_e - .L\@_orig_s), (.L\@_repl_e\()2 - .L\@_repl_s\()2), (.L\@_orig_p - .L\@_orig_e)
-+    .section .discard, "a", @progbits
-+    .byte (.L\@_orig_p - .L\@_orig_s)
-+    .byte 0xff + (.L\@_repl_e\()1 - .L\@_repl_s\()1) - (.L\@_orig_p - .L\@_orig_s)
-+    .byte 0xff + (.L\@_repl_e\()2 - .L\@_repl_s\()2) - (.L\@_orig_p - .L\@_orig_s)
-+    .section .altinstr_replacement, "ax", @progbits
-+    .L\@_repl_s\()1: \newinstr1; .L\@_repl_e\()1:
-+    .L\@_repl_s\()2: \newinstr2; .L\@_repl_e\()2:
-+    .popsection
-+.endm
-+#endif
-diff --git a/xen/include/asm-x86/asm-offsets.h b/xen/include/asm-x86/asm-offsets.h
-new file mode 100644
-index 0000000000..5eeced15ec
---- /dev/null
-+++ b/xen/include/asm-x86/asm-offsets.h
-@@ -0,0 +1,127 @@
-+/*
-+ * DO NOT MODIFY.
-+ *
-+ * This file was auto-generated from asm-offsets.s
-+ *
-+ */
-+
-+#ifndef __ASM_OFFSETS_H__
-+#define __ASM_OFFSETS_H__
-+
-+#define UREGS_r15 0 /* offsetof(struct cpu_user_regs, r15) */
-+#define UREGS_r14 8 /* offsetof(struct cpu_user_regs, r14) */
-+#define UREGS_r13 16 /* offsetof(struct cpu_user_regs, r13) */
-+#define UREGS_r12 24 /* offsetof(struct cpu_user_regs, r12) */
-+#define UREGS_rbp 32 /* offsetof(struct cpu_user_regs, rbp) */
-+#define UREGS_rbx 40 /* offsetof(struct cpu_user_regs, rbx) */
-+#define UREGS_r11 48 /* offsetof(struct cpu_user_regs, r11) */
-+#define UREGS_r10 56 /* offsetof(struct cpu_user_regs, r10) */
-+#define UREGS_r9 64 /* offsetof(struct cpu_user_regs, r9) */
-+#define UREGS_r8 72 /* offsetof(struct cpu_user_regs, r8) */
-+#define UREGS_rax 80 /* offsetof(struct cpu_user_regs, rax) */
-+#define UREGS_rcx 88 /* offsetof(struct cpu_user_regs, rcx) */
-+#define UREGS_rdx 96 /* offsetof(struct cpu_user_regs, rdx) */
-+#define UREGS_rsi 104 /* offsetof(struct cpu_user_regs, rsi) */
-+#define UREGS_rdi 112 /* offsetof(struct cpu_user_regs, rdi) */
-+#define UREGS_error_code 120 /* offsetof(struct cpu_user_regs, error_code) */
-+#define UREGS_entry_vector 124 /* offsetof(struct cpu_user_regs, entry_vector) */
-+#define UREGS_rip 128 /* offsetof(struct cpu_user_regs, rip) */
-+#define UREGS_cs 136 /* offsetof(struct cpu_user_regs, cs) */
-+#define UREGS_eflags 144 /* offsetof(struct cpu_user_regs, rflags) */
-+#define UREGS_rsp 152 /* offsetof(struct cpu_user_regs, rsp) */
-+#define UREGS_ss 160 /* offsetof(struct cpu_user_regs, ss) */
-+#define UREGS_kernel_sizeof 168 /* offsetof(struct cpu_user_regs, es) */
-+
-+#define VCPU_processor 4 /* offsetof(struct vcpu, processor) */
-+#define VCPU_domain 16 /* offsetof(struct vcpu, domain) */
-+#define VCPU_vcpu_info 8 /* offsetof(struct vcpu, vcpu_info) */
-+#define VCPU_trap_bounce 1456 /* offsetof(struct vcpu, arch.pv.trap_bounce) */
-+#define VCPU_thread_flags 896 /* offsetof(struct vcpu, arch.flags) */
-+#define VCPU_event_addr 1384 /* offsetof(struct vcpu, arch.pv.event_callback_eip) */
-+#define VCPU_event_sel 1400 /* offsetof(struct vcpu, arch.pv.event_callback_cs) */
-+#define VCPU_syscall_addr 1400 /* offsetof(struct vcpu, arch.pv.syscall_callback_eip) */
-+#define VCPU_syscall32_addr 1408 /* offsetof(struct vcpu, arch.pv.syscall32_callback_eip) */
-+#define VCPU_syscall32_sel 1424 /* offsetof(struct vcpu, arch.pv.syscall32_callback_cs) */
-+#define VCPU_syscall32_disables_events 1428 /* offsetof(struct vcpu, arch.pv.syscall32_disables_events) */
-+#define VCPU_sysenter_addr 1416 /* offsetof(struct vcpu, arch.pv.sysenter_callback_eip) */
-+#define VCPU_sysenter_sel 1426 /* offsetof(struct vcpu, arch.pv.sysenter_callback_cs) */
-+#define VCPU_sysenter_disables_events 1429 /* offsetof(struct vcpu, arch.pv.sysenter_disables_events) */
-+#define VCPU_trap_ctxt 1168 /* offsetof(struct vcpu, arch.pv.trap_ctxt) */
-+#define VCPU_kernel_sp 1312 /* offsetof(struct vcpu, arch.pv.kernel_sp) */
-+#define VCPU_kernel_ss 1304 /* offsetof(struct vcpu, arch.pv.kernel_ss) */
-+#define VCPU_iopl 1484 /* offsetof(struct vcpu, arch.pv.iopl) */
-+#define VCPU_guest_context_flags 1160 /* offsetof(struct vcpu, arch.pv.vgc_flags) */
-+#define VCPU_cr3 2856 /* offsetof(struct vcpu, arch.cr3) */
-+#define VCPU_arch_msrs 3416 /* offsetof(struct vcpu, arch.msrs) */
-+#define VCPU_nmi_pending 960 /* offsetof(struct vcpu, arch.async_exception_state[(1)-1].pending) */
-+#define VCPU_mce_pending 962 /* offsetof(struct vcpu, arch.async_exception_state[(2)-1].pending) */
-+#define VCPU_nmi_old_mask 961 /* offsetof(struct vcpu, arch.async_exception_state[(1)-1].old_mask) */
-+#define VCPU_mce_old_mask 963 /* offsetof(struct vcpu, arch.async_exception_state[(2)-1].old_mask) */
-+#define VCPU_async_exception_mask 964 /* offsetof(struct vcpu, arch.async_exception_mask) */
-+#define VCPU_TRAP_NMI 1 /* VCPU_TRAP_NMI */
-+#define VCPU_TRAP_MCE 2 /* VCPU_TRAP_MCE */
-+#define _VGCF_syscall_disables_events 4 /* _VGCF_syscall_disables_events */
-+
-+#define VCPU_svm_vmcb_pa 1480 /* offsetof(struct vcpu, arch.hvm.svm.vmcb_pa) */
-+#define VCPU_svm_vmcb 1472 /* offsetof(struct vcpu, arch.hvm.svm.vmcb) */
-+
-+#define VCPU_vmx_launched 1516 /* offsetof(struct vcpu, arch.hvm.vmx.launched) */
-+#define VCPU_vmx_realmode 1738 /* offsetof(struct vcpu, arch.hvm.vmx.vmx_realmode) */
-+#define VCPU_vmx_emulate 1739 /* offsetof(struct vcpu, arch.hvm.vmx.vmx_emulate) */
-+#define VCPU_vm86_seg_mask 1742 /* offsetof(struct vcpu, arch.hvm.vmx.vm86_segment_mask) */
-+#define VCPU_hvm_guest_cr2 1040 /* offsetof(struct vcpu, arch.hvm.guest_cr[2]) */
-+
-+#define VCPU_nhvm_guestmode 1960 /* offsetof(struct vcpu, arch.hvm.nvcpu.nv_guestmode) */
-+#define VCPU_nhvm_p2m 2192 /* offsetof(struct vcpu, arch.hvm.nvcpu.nv_p2m) */
-+#define VCPU_nsvm_hap_enabled 2148 /* offsetof(struct vcpu, arch.hvm.nvcpu.u.nsvm.ns_hap_enabled) */
-+
-+#define VCPUINFO_upcall_pending 0 /* offsetof(struct vcpu_info, evtchn_upcall_pending) */
-+#define VCPUINFO_upcall_mask 1 /* offsetof(struct vcpu_info, evtchn_upcall_mask) */
-+
-+#define CPUINFO_guest_cpu_user_regs 0 /* offsetof(struct cpu_info, guest_cpu_user_regs) */
-+#define CPUINFO_verw_sel 204 /* offsetof(struct cpu_info, verw_sel) */
-+#define CPUINFO_current_vcpu 208 /* offsetof(struct cpu_info, current_vcpu) */
-+#define CPUINFO_per_cpu_offset 216 /* offsetof(struct cpu_info, per_cpu_offset) */
-+#define CPUINFO_cr4 224 /* offsetof(struct cpu_info, cr4) */
-+#define CPUINFO_xen_cr3 232 /* offsetof(struct cpu_info, xen_cr3) */
-+#define CPUINFO_pv_cr3 240 /* offsetof(struct cpu_info, pv_cr3) */
-+#define CPUINFO_shadow_spec_ctrl 248 /* offsetof(struct cpu_info, shadow_spec_ctrl) */
-+#define CPUINFO_xen_spec_ctrl 252 /* offsetof(struct cpu_info, xen_spec_ctrl) */
-+#define CPUINFO_spec_ctrl_flags 253 /* offsetof(struct cpu_info, spec_ctrl_flags) */
-+#define CPUINFO_root_pgt_changed 254 /* offsetof(struct cpu_info, root_pgt_changed) */
-+#define CPUINFO_use_pv_cr3 255 /* offsetof(struct cpu_info, use_pv_cr3) */
-+#define CPUINFO_sizeof 264 /* sizeof(struct cpu_info) */
-+
-+#define TRAPINFO_eip 8 /* offsetof(struct trap_info, address) */
-+#define TRAPINFO_cs 2 /* offsetof(struct trap_info, cs) */
-+#define TRAPINFO_flags 1 /* offsetof(struct trap_info, flags) */
-+#define TRAPINFO_sizeof 16 /* sizeof(struct trap_info) */
-+
-+#define TRAPBOUNCE_error_code 0 /* offsetof(struct trap_bounce, error_code) */
-+#define TRAPBOUNCE_flags 4 /* offsetof(struct trap_bounce, flags) */
-+#define TRAPBOUNCE_cs 6 /* offsetof(struct trap_bounce, cs) */
-+#define TRAPBOUNCE_eip 8 /* offsetof(struct trap_bounce, eip) */
-+
-+#define VCPUMSR_spec_ctrl_raw 0 /* offsetof(struct vcpu_msrs, spec_ctrl.raw) */
-+
-+#define IRQSTAT_shift 7 /* ilog2(sizeof(irq_cpustat_t)) */
-+#define IRQSTAT_softirq_pending 0 /* offsetof(irq_cpustat_t, __softirq_pending) */
-+
-+#define CPUINFO_features 12 /* offsetof(struct cpuinfo_x86, x86_capability) */
-+
-+#define MB_flags 0 /* offsetof(multiboot_info_t, flags) */
-+#define MB_cmdline 16 /* offsetof(multiboot_info_t, cmdline) */
-+#define MB_mem_lower 4 /* offsetof(multiboot_info_t, mem_lower) */
-+
-+#define MB2_fixed_sizeof 8 /* sizeof(multiboot2_fixed_t) */
-+#define MB2_fixed_total_size 0 /* offsetof(multiboot2_fixed_t, total_size) */
-+#define MB2_tag_type 0 /* offsetof(multiboot2_tag_t, type) */
-+#define MB2_tag_size 4 /* offsetof(multiboot2_tag_t, size) */
-+#define MB2_load_base_addr 8 /* offsetof(multiboot2_tag_load_base_addr_t, load_base_addr) */
-+#define MB2_mem_lower 8 /* offsetof(multiboot2_tag_basic_meminfo_t, mem_lower) */
-+#define MB2_efi64_st 8 /* offsetof(multiboot2_tag_efi64_t, pointer) */
-+#define MB2_efi64_ih 8 /* offsetof(multiboot2_tag_efi64_ih_t, pointer) */
-+
-+#define DOMAIN_vm_assist 544 /* offsetof(struct domain, vm_assist) */
-+
-+#endif
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 28146ee404..0df72baf2e 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -613,9 +613,14 @@ extern struct vcpu *idle_vcpu[NR_CPUS];
- #define is_idle_domain(d) ((d)->domain_id == DOMID_IDLE)
- #define is_idle_vcpu(v)   (is_idle_domain((v)->domain))
- 
-+static inline bool is_system_domid(domid_t id)
-+{
-+    return (id >= DOMID_FIRST_RESERVED);
-+}
-+
- static inline bool is_system_domain(const struct domain *d)
- {
--    return d->domain_id >= DOMID_FIRST_RESERVED;
-+    return is_system_domid(d->domain_id);
- }
- 
- #define DOMAIN_DESTROYED (1u << 31) /* assumes atomic_t is >= 32 bits */
--- 
-2.20.1
-
+       tglx
 
