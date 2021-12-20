@@ -4,36 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2B4C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 21:16:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.249999.430553 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5528C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 23:18:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.250045.430601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzQ1A-0006wV-EP; Mon, 20 Dec 2021 21:16:24 +0000
+	id 1mzRuT-0006xz-M9; Mon, 20 Dec 2021 23:17:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 249999.430553; Mon, 20 Dec 2021 21:16:24 +0000
+Received: by outflank-mailman (output) from mailman id 250045.430601; Mon, 20 Dec 2021 23:17:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzQ19-0006sE-UQ; Mon, 20 Dec 2021 21:16:23 +0000
-Received: by outflank-mailman (input) for mailman id 249999;
- Mon, 20 Dec 2021 21:16:22 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mzRuT-0006xr-JC; Mon, 20 Dec 2021 23:17:37 +0000
+Received: by outflank-mailman (input) for mailman id 250045;
+ Mon, 20 Dec 2021 23:17:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6gYK=RF=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mzQ17-0005IB-KY
- for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 21:16:21 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 13d17607-61da-11ec-85d3-df6b77346a89;
- Mon, 20 Dec 2021 22:16:20 +0100 (CET)
-Received: by mail-lj1-x22c.google.com with SMTP id a37so18017962ljq.13
- for <xen-devel@lists.xenproject.org>; Mon, 20 Dec 2021 13:16:20 -0800 (PST)
-Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id b35sm635132lfv.209.2021.12.20.13.16.19
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 20 Dec 2021 13:16:19 -0800 (PST)
+ <SRS0=8lA0=RF=ens-lyon.org=samuel.thibault@srs-se1.protection.inumbo.net>)
+ id 1mzRuT-0006xl-2x
+ for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 23:17:37 +0000
+Received: from hera.aquilenet.fr (hera.aquilenet.fr [185.233.100.1])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0328e659-61eb-11ec-9e60-abaf8a552007;
+ Tue, 21 Dec 2021 00:17:34 +0100 (CET)
+Received: from localhost (localhost [127.0.0.1])
+ by hera.aquilenet.fr (Postfix) with ESMTP id 31D4E4EC;
+ Tue, 21 Dec 2021 00:17:33 +0100 (CET)
+Received: from hera.aquilenet.fr ([127.0.0.1])
+ by localhost (hera.aquilenet.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id xn2FJjRoLvxK; Tue, 21 Dec 2021 00:17:32 +0100 (CET)
+Received: from begin.home (2a01cb0088600700de41a9fffe47ec49.ipv6.abo.wanadoo.fr
+ [IPv6:2a01:cb00:8860:700:de41:a9ff:fe47:ec49])
+ by hera.aquilenet.fr (Postfix) with ESMTPSA id 7BB4E63;
+ Tue, 21 Dec 2021 00:17:32 +0100 (CET)
+Received: from samy by begin.home with local (Exim 4.95)
+ (envelope-from <samuel.thibault@ens-lyon.org>) id 1mzRuN-00065d-0B;
+ Tue, 21 Dec 2021 00:17:31 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,306 +51,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 13d17607-61da-11ec-85d3-df6b77346a89
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=qvpXNTLTS2Ou2xoiYRMuZM4a44G4SigTrlNi3wejEhU=;
-        b=f4oJF2gkVGsK6/9ewRqi+f5aAOA1Nb1HZ8Q04mKakwVTxo62yuJLYRYDebhnjBSZcx
-         GIlAslICYpPvlevexgjuP4Ar64EhJZ7U+pIeHTQDvR1m7i0Dmv/R3AV26YqzjvPLdAt0
-         Dl8gdT6iXKtLSVIwlAKH9YXHIzc9b61vZrPC5hEQPO2KXk26Ix7KtRMJS0q6HVZIHB1q
-         98lNyRZXUK0y23oqhTOJXN8t5p8mEL5tQN9Ms3SfqFpZMTI3XCqvQug5kQOxPyfBXRao
-         VYyJVi7hR/BXOausPApKYjuWxS+Dq+Ka+yIrUM32SDTKj8ofNhqRZtDPiREKFc/9jSk/
-         +RJA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=qvpXNTLTS2Ou2xoiYRMuZM4a44G4SigTrlNi3wejEhU=;
-        b=pNvYMXpecA7F+ll9zstPr48ra3OEGE6CCYoS5LS178ufaUo49mDl0ljOis4FXPUR2o
-         9xdlmM2k6c8kfHKelopr0aWZAje942LHsHzPOzJVSvp0TQPkMwc+Pioga61mc0h00oB8
-         +w8cnXtZVaCn31ZLtBYNHiYHmTXOvQPrcMQhrSGMwoFTl3gtANI+gDo/heJYSszXWO+K
-         7csa1uCvnNAI9siQDPAIryHtzz1JBzyzO2uY7cBOPkZrZKCmKnYnSEXanNaJxHPH4+DV
-         LROdNwTmi9cLfds4g3LytzHrdkXK6fj6h9nqP2BiAh/ZgpBeASDPZGWGTzPYuKSBo//D
-         CUBw==
-X-Gm-Message-State: AOAM5329SApkWWV4hfDd0flPlFxT8qx3ZI8einM4BrueFRUmhSFUtqJb
-	XN6wU0GLlHDYnK8/VeufR0LsXep3+gA=
-X-Google-Smtp-Source: ABdhPJxWPezQF6NbeQ18VRNYks8+OCfDkLbPeHBRDUAWe/GGifNO9f82mjeawDjmJjCu/EpwKVrHsQ==
-X-Received: by 2002:a2e:a482:: with SMTP id h2mr15951927lji.87.1640034979903;
-        Mon, 20 Dec 2021 13:16:19 -0800 (PST)
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH V2 07/10] iommu/ipmmu-vmsa: Add Renesas R8A779F0 (R-Car S4) support
-Date: Mon, 20 Dec 2021 23:15:54 +0200
-Message-Id: <1640034957-19764-8-git-send-email-olekstysh@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1640034957-19764-1-git-send-email-olekstysh@gmail.com>
-References: <1640034957-19764-1-git-send-email-olekstysh@gmail.com>
+X-Inumbo-ID: 0328e659-61eb-11ec-9e60-abaf8a552007
+X-Virus-Scanned: Debian amavisd-new at aquilenet.fr
+Date: Tue, 21 Dec 2021 00:17:30 +0100
+From: Samuel Thibault <samuel.thibault@ens-lyon.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: minios-devel@lists.xenproject.org, xen-devel@lists.xenproject.org,
+	wl@xen.org
+Subject: Re: [PATCH v2 02/10] mini-os: sort and sanitize e820 memory map
+Message-ID: <20211220231730.nivaq6vgtlyfqhng@begin>
+Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+	Juergen Gross <jgross@suse.com>, minios-devel@lists.xenproject.org,
+	xen-devel@lists.xenproject.org, wl@xen.org
+References: <20211220160716.4159-1-jgross@suse.com>
+ <20211220160716.4159-3-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20211220160716.4159-3-jgross@suse.com>
+Organization: I am not organized
+User-Agent: NeoMutt/20170609 (1.8.3)
+X-Spamd-Bar: /
+Authentication-Results: hera.aquilenet.fr;
+	none
+X-Rspamd-Server: hera
+X-Rspamd-Queue-Id: 31D4E4EC
+X-Spamd-Result: default: False [0.40 / 15.00];
+	 ARC_NA(0.00)[];
+	 RCVD_VIA_SMTP_AUTH(0.00)[];
+	 FROM_HAS_DN(0.00)[];
+	 RCPT_COUNT_THREE(0.00)[4];
+	 TO_DN_SOME(0.00)[];
+	 TO_MATCH_ENVRCPT_ALL(0.00)[];
+	 MIME_GOOD(-0.10)[text/plain];
+	 HAS_ORG_HEADER(0.00)[];
+	 RCVD_COUNT_THREE(0.00)[3];
+	 FROM_EQ_ENVFROM(0.00)[];
+	 MIME_TRACE(0.00)[0:+];
+	 RCVD_TLS_LAST(0.00)[];
+	 MID_RHS_NOT_FQDN(0.50)[]
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Juergen Gross, le lun. 20 déc. 2021 17:07:08 +0100, a ecrit:
+> +static void e820_sanitize(void)
+> +{
+> +    int i;
+> +    unsigned long end, start;
+> +
+> +    /* Sanitize memory map in current form. */
+> +    e820_process_entries();
+> +
+> +    /* Adjust map entries to page boundaries. */
+> +    for ( i = 0; i < e820_entries; i++ )
+> +    {
+> +        start = e820_map[i].addr;
+> +        end = start + e820_map[i].size;
+> +        if ( (1U << e820_map[i].type) & E820_NARROW )
+> +        {
+> +            if ( start & (PAGE_SIZE - 1) )
+> +            {
+> +                start = round_pgup(start);
+> +                e820_insert_entry_at(i, start - PAGE_SIZE, PAGE_SIZE,
+> +                                     E820_TMP_RESERVED);
+> +                i++;
+> +            }
+> +            if ( end & (PAGE_SIZE - 1) )
+> +            {
+> +                end = round_pgdown(end);
+> +                e820_insert_entry_at(i, end, PAGE_SIZE, E820_TMP_RESERVED);
 
-Based on the following Linux upsteam commit:
-7a62ced8ebd0e1b692c9dc4781a8d4ddb0f74792
+Rather i+1 so it's most probably already sorted?
 
-Original commit message:
- commit 7a62ced8ebd0e1b692c9dc4781a8d4ddb0f74792
- Author: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
- Date:   Tue Sep 7 17:30:20 2021 +0900
+Apart from that,
 
-  iommu/ipmmu-vmsa: Add support for r8a779a0
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 
-  Add support for r8a779a0 (R-Car V3U). The IPMMU hardware design
-  of this SoC differs than others. So, add a new ipmmu_features for it.
-
-  Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-  Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-  Link: https://lore.kernel.org/r/20210907083020.907648-3-yoshihiro.shimoda.uh@renesas.com
-  Signed-off-by: Joerg Roedel <jroedel@suse.de>
-
-**********
-
-The R-Car S4 is an automotive System-on-Chip (SoC) for Car
-Server/Communication Gateway and is one of the first products
-in Renesas’ 4th-generation R-Car Family.
-
-The integrated IOMMU HW is also VMSA-compatible and supports
-stage 2 translation table format, therefore can be used with
-current driver with slight modifications (thanks to the prereq
-work).
-
-In the context of Xen driver the main differences between Gen3
-and Gen4 are the following:
-- HW capacity was enlarged to support up to 16 IPMMU contexts
-  (sets of page table) and up to 64 micro-TLBs per IPMMU device
-- the memory mapped registers have different bases and offsets
-
-Please note that Linux upstream doesn't support R-Car S4 SoC
-yet unlike Renesas BSP [1], but it was decided to reuse upstream
-patch for R-Car V3U anyway as the IPMMU HW settings are similar.
-
-[1]
-7003b9f732cf iommu/ipmmu-vmsa: Add Renesas R8A779F0 (R-Car S4) support
-https://github.com/renesas-rcar/linux-bsp/tree/v5.10.41/rcar-5.1.3.rc5
-
-Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
-Changes V1 -> V2:
-   - base on the Linux upsteam patch instead of BSP's one
-   - update patch description and comments in code
-   - replace ipmmu_features_rcar_s4 with ipmmu_features_rcar_gen4
-   - introduce control_offset_base field
----
- xen/drivers/passthrough/Kconfig          |  6 +--
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 63 +++++++++++++++++++++++---------
- 2 files changed, 49 insertions(+), 20 deletions(-)
-
-diff --git a/xen/drivers/passthrough/Kconfig b/xen/drivers/passthrough/Kconfig
-index 09505aa..479d7de 100644
---- a/xen/drivers/passthrough/Kconfig
-+++ b/xen/drivers/passthrough/Kconfig
-@@ -25,14 +25,14 @@ config ARM_SMMU_V3
- 	 the ARM SMMUv3 architecture.
- 
- config IPMMU_VMSA
--	bool "Renesas IPMMU-VMSA found in R-Car Gen3 SoCs"
-+	bool "Renesas IPMMU-VMSA found in R-Car Gen3/Gen4 SoCs"
- 	depends on ARM_64
- 	---help---
- 	  Support for implementations of the Renesas IPMMU-VMSA found
--	  in R-Car Gen3 SoCs.
-+	  in R-Car Gen3/Gen4 SoCs.
- 
- 	  Say Y here if you are using newest R-Car Gen3 SoCs revisions
--	  (H3 ES3.0, M3-W+, etc) which IPMMU hardware supports stage 2
-+	  (H3 ES3.0, M3-W+, etc) or Gen4 SoCs which IPMMU hardware supports stage 2
- 	  translation table format and is able to use CPU's P2M table as is.
- 
- endif
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index d8f96fc..14848ce 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -1,15 +1,15 @@
- /*
-  * xen/drivers/passthrough/arm/ipmmu-vmsa.c
-  *
-- * Driver for the Renesas IPMMU-VMSA found in R-Car Gen3 SoCs.
-+ * Driver for the Renesas IPMMU-VMSA found in R-Car Gen3/Gen4 SoCs.
-  *
-  * The IPMMU-VMSA is VMSA-compatible I/O Memory Management Unit (IOMMU)
-  * which provides address translation and access protection functionalities
-  * to processing units and interconnect networks.
-  *
-  * Please note, current driver is supposed to work only with newest
-- * R-Car Gen3 SoCs revisions which IPMMU hardware supports stage 2 translation
-- * table format and is able to use CPU's P2M table as is.
-+ * R-Car Gen3/Gen4 SoCs revisions which IPMMU hardware supports stage 2
-+ * translation table format and is able to use CPU's P2M table as is.
-  *
-  * Based on Linux's IPMMU-VMSA driver from Renesas BSP:
-  *    drivers/iommu/ipmmu-vmsa.c
-@@ -20,9 +20,9 @@
-  * and Xen's SMMU driver:
-  *    xen/drivers/passthrough/arm/smmu.c
-  *
-- * Copyright (C) 2014-2019 Renesas Electronics Corporation
-+ * Copyright (C) 2014-2021 Renesas Electronics Corporation
-  *
-- * Copyright (C) 2016-2019 EPAM Systems Inc.
-+ * Copyright (C) 2016-2021 EPAM Systems Inc.
-  *
-  * This program is free software; you can redistribute it and/or
-  * modify it under the terms and conditions of the GNU General Public
-@@ -68,12 +68,13 @@
-     dev_print(dev, XENLOG_ERR, fmt, ## __VA_ARGS__)
- 
- /*
-- * R-Car Gen3 SoCs make use of up to 8 IPMMU contexts (sets of page table) and
-- * these can be managed independently. Each context is mapped to one Xen domain.
-+ * R-Car Gen3/Gen4 SoCs make use of up to 16 IPMMU contexts (sets of page table)
-+ * and these can be managed independently. Each context is mapped to one Xen
-+ * domain.
-  */
--#define IPMMU_CTX_MAX     8U
--/* R-Car Gen3 SoCs make use of up to 48 micro-TLBs per IPMMU device. */
--#define IPMMU_UTLB_MAX    48U
-+#define IPMMU_CTX_MAX     16U
-+/* R-Car Gen3/Gen4 SoCs make use of up to 64 micro-TLBs per IPMMU device. */
-+#define IPMMU_UTLB_MAX    64U
- 
- /* IPMMU context supports IPA size up to 40 bit. */
- #define IPMMU_MAX_P2M_IPA_BITS    40
-@@ -112,6 +113,8 @@ struct ipmmu_features {
-     unsigned int ctx_offset_base;
-     unsigned int ctx_offset_stride;
-     unsigned int utlb_offset_base;
-+    unsigned int control_offset_base;
-+    unsigned int imuctr_ttsel_mask;
- };
- 
- /* Root/Cache IPMMU device's information */
-@@ -211,7 +214,6 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
- #define IMUCTR0(n)             (0x0300 + ((n) * 16))
- #define IMUCTR32(n)            (0x0600 + (((n) - 32) * 16))
- #define IMUCTR_TTSEL_MMU(n)    ((n) << 4)
--#define IMUCTR_TTSEL_MASK      (15 << 4)
- #define IMUCTR_TTSEL_SHIFT     4
- #define IMUCTR_FLUSH           (1 << 1)
- #define IMUCTR_MMUEN           (1 << 0)
-@@ -316,8 +318,12 @@ static void ipmmu_write(struct ipmmu_vmsa_device *mmu, uint32_t offset,
- static unsigned int ipmmu_ctx_reg(struct ipmmu_vmsa_device *mmu,
-                                   unsigned int context_id, uint32_t reg)
- {
--    return mmu->features->ctx_offset_base +
--        context_id * mmu->features->ctx_offset_stride + reg;
-+    unsigned int base = mmu->features->ctx_offset_base;
-+
-+    if ( context_id > 7 )
-+        base += 0x800 - 8 * 0x40;
-+
-+    return base + context_id * mmu->features->ctx_offset_stride + reg;
- }
- 
- static uint32_t ipmmu_ctx_read(struct ipmmu_vmsa_device *mmu,
-@@ -448,7 +454,8 @@ static int ipmmu_utlb_enable(struct ipmmu_vmsa_domain *domain,
-     {
-         unsigned int context_id;
- 
--        context_id = (imuctr & IMUCTR_TTSEL_MASK) >> IMUCTR_TTSEL_SHIFT;
-+        context_id = (imuctr & mmu->features->imuctr_ttsel_mask) >>
-+            IMUCTR_TTSEL_SHIFT;
-         if ( domain->context_id != context_id )
-         {
-             dev_err(mmu->dev, "Micro-TLB %u already assigned to IPMMU context %u\n",
-@@ -740,6 +747,18 @@ static const struct ipmmu_features ipmmu_features_rcar_gen3 = {
-     .ctx_offset_base = 0,
-     .ctx_offset_stride = 0x40,
-     .utlb_offset_base = 0,
-+    .control_offset_base = 0,
-+    .imuctr_ttsel_mask = (15 << 4),
-+};
-+
-+static const struct ipmmu_features ipmmu_features_rcar_gen4 = {
-+    .number_of_contexts = 16,
-+    .num_utlbs = 64,
-+    .ctx_offset_base = 0x10000,
-+    .ctx_offset_stride = 0x1040,
-+    .utlb_offset_base = 0x3000,
-+    .control_offset_base = 0x1000,
-+    .imuctr_ttsel_mask = (31 << 4),
- };
- 
- static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
-@@ -751,11 +770,12 @@ static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
-         ipmmu_ctx_write(mmu, i, IMCTR, 0);
- }
- 
--/* R-Car Gen3 SoCs product and cut information. */
-+/* R-Car Gen3/Gen4 SoCs product and cut information. */
- #define RCAR_PRODUCT_MASK    0x00007F00
- #define RCAR_PRODUCT_H3      0x00004F00
- #define RCAR_PRODUCT_M3W     0x00005200
- #define RCAR_PRODUCT_M3N     0x00005500
-+#define RCAR_PRODUCT_S4      0x00005A00
- #define RCAR_CUT_MASK        0x000000FF
- #define RCAR_CUT_VER30       0x00000020
- 
-@@ -803,6 +823,10 @@ static __init bool ipmmu_stage2_supported(void)
-         stage2_supported = true;
-         break;
- 
-+    case RCAR_PRODUCT_S4:
-+        stage2_supported = true;
-+        break;
-+
-     default:
-         printk(XENLOG_ERR "ipmmu: Unsupported SoC version\n");
-         break;
-@@ -831,6 +855,10 @@ static const struct dt_device_match ipmmu_dt_match[] __initconst =
-         .compatible = "renesas,ipmmu-r8a77961",
-         .data = &ipmmu_features_rcar_gen3,
-     },
-+    {
-+        .compatible = "renesas,ipmmu-r8a779f0",
-+        .data = &ipmmu_features_rcar_gen4,
-+    },
-     { /* sentinel */ },
- };
- 
-@@ -845,6 +873,7 @@ static int ipmmu_probe(struct dt_device_node *node)
-     const struct dt_device_match *match;
-     struct ipmmu_vmsa_device *mmu;
-     uint64_t addr, size;
-+    uint32_t reg;
-     int irq, ret;
- 
-     mmu = xzalloc(struct ipmmu_vmsa_device);
-@@ -930,8 +959,8 @@ static int ipmmu_probe(struct dt_device_node *node)
-          * Use stage 2 translation table format when stage 2 translation
-          * enabled.
-          */
--        ipmmu_write(mmu, IMSAUXCTLR,
--                    ipmmu_read(mmu, IMSAUXCTLR) | IMSAUXCTLR_S2PTE);
-+        reg = IMSAUXCTLR + mmu->features->control_offset_base;
-+        ipmmu_write(mmu, reg, ipmmu_read(mmu, reg) | IMSAUXCTLR_S2PTE);
- 
-         dev_info(&node->dev, "IPMMU context 0 is reserved\n");
-         set_bit(0, mmu->ctx);
--- 
-2.7.4
-
+Samuel
 
