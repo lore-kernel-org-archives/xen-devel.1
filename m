@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC473C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 20:40:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.249983.430468 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9946C433FE
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 21:16:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.249998.430539 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzPRE-0000yH-0h; Mon, 20 Dec 2021 20:39:16 +0000
+	id 1mzQ18-0006eA-U9; Mon, 20 Dec 2021 21:16:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 249983.430468; Mon, 20 Dec 2021 20:39:15 +0000
+Received: by outflank-mailman (output) from mailman id 249998.430539; Mon, 20 Dec 2021 21:16:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzPRD-0000yA-Tq; Mon, 20 Dec 2021 20:39:15 +0000
-Received: by outflank-mailman (input) for mailman id 249983;
- Mon, 20 Dec 2021 20:39:14 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mzPRC-0000y0-0w; Mon, 20 Dec 2021 20:39:14 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mzPRB-00057N-SS; Mon, 20 Dec 2021 20:39:13 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1mzPRB-0003JM-Gx; Mon, 20 Dec 2021 20:39:13 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1mzPRB-0005A6-GS; Mon, 20 Dec 2021 20:39:13 +0000
+	id 1mzQ18-0006aW-LE; Mon, 20 Dec 2021 21:16:22 +0000
+Received: by outflank-mailman (input) for mailman id 249998;
+ Mon, 20 Dec 2021 21:16:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=6gYK=RF=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1mzQ16-0005IB-Dq
+ for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 21:16:20 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 13523567-61da-11ec-85d3-df6b77346a89;
+ Mon, 20 Dec 2021 22:16:19 +0100 (CET)
+Received: by mail-lf1-x130.google.com with SMTP id x7so63029lfu.8
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Dec 2021 13:16:19 -0800 (PST)
+Received: from otyshchenko.router ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id b35sm635132lfv.209.2021.12.20.13.16.18
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 20 Dec 2021 13:16:18 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,386 +45,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=hTXOrJhqREJ8L1NKY6DFn+DufbU51+yISQR0V1fi3Yw=; b=lFQ8gMRCJpfrGhf7IJf1ZfrqAU
-	TfUjQmBWgvYmAIjuJ2Dw8CJ9YMB9MM8r85H57rP5SX/hC1TNazBGKkKxOMVEnDmnaTbszTJ2LYxkH
-	WmElD/aQvAF1eDAZ3vWLSK7uI6XMTEk0p2wd7GAurjiWzwxeCTukEtno8yGZwsJzYbGs=;
+X-Inumbo-ID: 13523567-61da-11ec-85d3-df6b77346a89
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=87T9wZal9/PpckvFihuEE4uSOyOrETTBOP9Ojac4rmQ=;
+        b=lm/UwovJiZ2A0shy8on5i1ls/8SdPLOeJgsONiV+OnXuTRDbCHZSaTi1SVmXyF3DC5
+         bHHt7lF3q1aAfQSuuGe0OH9IGb5m+X3iinBjYBihd2XqsxftqKzWTHFS2KBwBWGWtVWQ
+         U85NZU+PmJeqBJY1fAGUkb0UVuQ3AImVOCSe5hv3VhiIF9yTH9bXI48A7lWcTk/NuNjg
+         nDEg001M6hMYrGFoUiEz4YQ3m5kp7E9tMgE5RB6XgExlJN0X3ArrP6vIu7nQZKupAdzN
+         hBNmtkgA6mY8X72r122WfilD7nY+iVCVsR2EDN6CdF1+jqmLKXJgH0MngZw2+WpxOZg3
+         SG7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=87T9wZal9/PpckvFihuEE4uSOyOrETTBOP9Ojac4rmQ=;
+        b=Mihs2RE0gY8g7PSsRHPtICEqdlGfoa6eXBTbaVbRtoiBYtScyTyDz+snQPz4ZJ0F/b
+         bG6BMH/0JFrn/NGQWVDrz2/FTND3Khtt77XDey6oJ2FGgwMVu/mGpql7+YJaK6YRW8UD
+         KULVibL+7rslLxRORxY80HCdz6cLP51IOyl5ZS3awUnYBWox1tRhn7NyRYgUsycilTBD
+         m1j8dzYSPfVnePXRlubaxi23PZNc7U7k6//PjCJ4dSliyZM4s0wRzlBQf9UFIZErSADG
+         SBeJoWuJH30+A0ObSAuzhn0Uh+xZtcuqcp6LTawB07nfVeMYulqpC3XFKfSWkw7npXJv
+         tI0w==
+X-Gm-Message-State: AOAM530WtNLeSjAukE4PRcFZbLoQH6EWv9iQrQV88TJ9HX14adzz1+Wt
+	qDJRFzPotfGONd5wHqIFTKeXC5PzH5Y=
+X-Google-Smtp-Source: ABdhPJwCNkbhTcm5bsmmqZ29yWpUf5zoMFKKU17b6heYFWrAoMSYvi/3Cd/DsQK+ZG+g3LKFDRzqNg==
+X-Received: by 2002:a05:6512:695:: with SMTP id t21mr6375lfe.390.1640034979130;
+        Mon, 20 Dec 2021 13:16:19 -0800 (PST)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-167492-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Subject: [PATCH V2 06/10] iommu/ipmmu-vmsa: Add utlb_offset_base
+Date: Mon, 20 Dec 2021 23:15:53 +0200
+Message-Id: <1640034957-19764-7-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1640034957-19764-1-git-send-email-olekstysh@gmail.com>
+References: <1640034957-19764-1-git-send-email-olekstysh@gmail.com>
 MIME-Version: 1.0
-Subject: [linux-linus test] 167492: regressions - FAIL
-X-Osstest-Failures:
-    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-i386-xsm:debian-hvm-install:fail:regression
-    linux-linus:test-armhf-armhf-libvirt:xen-boot:fail:heisenbug
-    linux-linus:test-amd64-amd64-xl-rtds:guest-localmigrate:fail:heisenbug
-    linux-linus:test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm:guest-localmigrate/x10:fail:heisenbug
-    linux-linus:test-amd64-amd64-freebsd11-amd64:guest-start/freebsd.repeat:fail:heisenbug
-    linux-linus:test-amd64-amd64-xl-rtds:guest-localmigrate/x10:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-qcow2:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    linux-linus:test-amd64-amd64-libvirt-raw:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-raw:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-raw:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-vhd:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-vhd:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
-    linux-linus:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-qcow2:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
-    linux-linus:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    linux=a7904a538933c525096ca2ccde1e60d0ee62c08e
-X-Osstest-Versions-That:
-    linux=a76c3d035872bf390d2fd92d8e5badc5ee28b17d
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 20 Dec 2021 20:39:13 +0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-flight 167492 linux-linus real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/167492/
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Regressions :-(
+This is a non-verbatim port of corresponding Linux upsteam commit:
+1289f7f15001c7ed36be6d23cb145c1d5feacdc8
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm 12 debian-hvm-install fail REGR. vs. 167484
+Original commit message:
+ commit 1289f7f15001c7ed36be6d23cb145c1d5feacdc8
+ Author: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+ Date:   Wed Nov 6 11:35:50 2019 +0900
 
-Tests which are failing intermittently (not blocking):
- test-armhf-armhf-libvirt      8 xen-boot         fail in 167486 pass in 167492
- test-amd64-amd64-xl-rtds     18 guest-localmigrate         fail pass in 167486
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm 18 guest-localmigrate/x10 fail pass in 167486
- test-amd64-amd64-freebsd11-amd64 21 guest-start/freebsd.repeat fail pass in 167486
+  iommu/ipmmu-vmsa: Add utlb_offset_base
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-xl-rtds  20 guest-localmigrate/x10 fail in 167486 like 167484
- test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 167484
- test-amd64-amd64-qemuu-nested-amd 20 debian-hvm-install/l1/l2 fail like 167484
- test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 167484
- test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 167484
- test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 167484
- test-armhf-armhf-libvirt-qcow2 15 saverestore-support-check   fail like 167484
- test-armhf-armhf-libvirt     16 saverestore-support-check    fail  like 167484
- test-armhf-armhf-libvirt-raw 15 saverestore-support-check    fail  like 167484
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-amd64-amd64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-seattle  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-seattle  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl          15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl          16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit2  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-thunderx 15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-thunderx 16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-credit2  16 saverestore-support-check    fail   never pass
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 13 migrate-support-check fail never pass
- test-amd64-amd64-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-amd64-amd64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 14 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-raw 15 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
- test-arm64-arm64-xl-vhd      14 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-vhd      15 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-rtds     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-rtds     16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-credit2  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-credit2  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-cubietruck 15 migrate-support-check        fail never pass
- test-armhf-armhf-xl-cubietruck 16 saverestore-support-check    fail never pass
- test-armhf-armhf-xl-credit1  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-multivcpu 15 migrate-support-check        fail  never pass
- test-armhf-armhf-xl-credit1  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-multivcpu 16 saverestore-support-check    fail  never pass
- test-arm64-arm64-xl-credit1  15 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-credit1  16 saverestore-support-check    fail   never pass
- test-arm64-arm64-libvirt-xsm 15 migrate-support-check        fail   never pass
- test-arm64-arm64-libvirt-xsm 16 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl-vhd      14 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-vhd      15 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt-qcow2 14 migrate-support-check        fail never pass
- test-armhf-armhf-xl-arndale  15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl-arndale  16 saverestore-support-check    fail   never pass
- test-armhf-armhf-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-libvirt-raw 14 migrate-support-check        fail   never pass
+  Since we will have changed memory mapping of the IPMMU in the future,
+  this patch adds a utlb_offset_base into struct ipmmu_features
+  for IMUCTR and IMUASID registers. No behavior change.
 
-version targeted for testing:
- linux                a7904a538933c525096ca2ccde1e60d0ee62c08e
-baseline version:
- linux                a76c3d035872bf390d2fd92d8e5badc5ee28b17d
+  Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+  Reviewed-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
+  Signed-off-by: Joerg Roedel <jroedel@suse.de>
 
-Last test of basis   167484  2021-12-19 20:40:59 Z    0 days
-Testing same since   167486  2021-12-20 02:31:29 Z    0 days    2 attempts
+**********
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Jens Axboe <axboe@kernel.dk>
-  Linus Torvalds <torvalds@linux-foundation.org>
-  Paolo Bonzini <pbonzini@redhat.com>
-  Sean Christopherson <seanjc@google.com>
-  Vitaly Kuznetsov <vkuznets@redhat.com>
+This is a prereq work needed to add support for S4 series easily
+in the future.
 
-jobs:
- build-amd64-xsm                                              pass    
- build-arm64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-arm64                                                  pass    
- build-armhf                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-arm64-libvirt                                          pass    
- build-armhf-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-arm64-pvops                                            pass    
- build-armhf-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl                                          pass    
- test-amd64-coresched-amd64-xl                                pass    
- test-arm64-arm64-xl                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           pass    
- test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        fail    
- test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 fail    
- test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 pass    
- test-amd64-amd64-libvirt-xsm                                 pass    
- test-arm64-arm64-libvirt-xsm                                 pass    
- test-amd64-amd64-xl-xsm                                      pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-qemuu-nested-amd                            fail    
- test-amd64-amd64-xl-pvhv2-amd                                pass    
- test-amd64-amd64-dom0pvh-xl-amd                              pass    
- test-amd64-amd64-xl-qemut-debianhvm-amd64                    pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-freebsd11-amd64                             fail    
- test-amd64-amd64-freebsd12-amd64                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-amd64-xl-qemut-win7-amd64                         fail    
- test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
- test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
- test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
- test-armhf-armhf-xl-arndale                                  pass    
- test-amd64-amd64-examine-bios                                pass    
- test-amd64-amd64-xl-credit1                                  pass    
- test-arm64-arm64-xl-credit1                                  pass    
- test-armhf-armhf-xl-credit1                                  pass    
- test-amd64-amd64-xl-credit2                                  pass    
- test-arm64-arm64-xl-credit2                                  pass    
- test-armhf-armhf-xl-credit2                                  pass    
- test-armhf-armhf-xl-cubietruck                               pass    
- test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        pass    
- test-amd64-amd64-examine                                     pass    
- test-arm64-arm64-examine                                     pass    
- test-armhf-armhf-examine                                     pass    
- test-amd64-amd64-qemuu-nested-intel                          pass    
- test-amd64-amd64-xl-pvhv2-intel                              pass    
- test-amd64-amd64-dom0pvh-xl-intel                            pass    
- test-amd64-amd64-libvirt                                     pass    
- test-armhf-armhf-libvirt                                     pass    
- test-amd64-amd64-xl-multivcpu                                pass    
- test-armhf-armhf-xl-multivcpu                                pass    
- test-amd64-amd64-pair                                        pass    
- test-amd64-amd64-libvirt-pair                                pass    
- test-amd64-amd64-xl-pvshim                                   pass    
- test-amd64-amd64-pygrub                                      pass    
- test-amd64-amd64-libvirt-qcow2                               pass    
- test-armhf-armhf-libvirt-qcow2                               pass    
- test-amd64-amd64-libvirt-raw                                 pass    
- test-arm64-arm64-libvirt-raw                                 pass    
- test-armhf-armhf-libvirt-raw                                 pass    
- test-amd64-amd64-xl-rtds                                     fail    
- test-armhf-armhf-xl-rtds                                     pass    
- test-arm64-arm64-xl-seattle                                  pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             pass    
- test-amd64-amd64-xl-shadow                                   pass    
- test-arm64-arm64-xl-thunderx                                 pass    
- test-amd64-amd64-examine-uefi                                pass    
- test-amd64-amd64-xl-vhd                                      pass    
- test-arm64-arm64-xl-vhd                                      pass    
- test-armhf-armhf-xl-vhd                                      pass    
+Almost the same change as original commit makes, but without updating
+struct ipmmu_features_default which Xen driver doesn't have (there is
+no support of old Arm32 based Gen2 SoCs).
 
+No change in behavior.
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Reviewed-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+---
+Changes V1 -> V2:
+   - add R-b
+---
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index ca33456..d8f96fc 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -111,6 +111,7 @@ struct ipmmu_features {
+     unsigned int num_utlbs;
+     unsigned int ctx_offset_base;
+     unsigned int ctx_offset_stride;
++    unsigned int utlb_offset_base;
+ };
+ 
+ /* Root/Cache IPMMU device's information */
+@@ -374,7 +375,7 @@ static void ipmmu_ctx_write_all(struct ipmmu_vmsa_domain *domain,
+ 
+ static uint32_t ipmmu_utlb_reg(struct ipmmu_vmsa_device *mmu, uint32_t reg)
+ {
+-    return reg;
++    return mmu->features->utlb_offset_base + reg;
+ }
+ 
+ static void ipmmu_imuasid_write(struct ipmmu_vmsa_device *mmu,
+@@ -738,6 +739,7 @@ static const struct ipmmu_features ipmmu_features_rcar_gen3 = {
+     .num_utlbs = 48,
+     .ctx_offset_base = 0,
+     .ctx_offset_stride = 0x40,
++    .utlb_offset_base = 0,
+ };
+ 
+ static void ipmmu_device_reset(struct ipmmu_vmsa_device *mmu)
+-- 
+2.7.4
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-------------------------------------------------------------
-commit a7904a538933c525096ca2ccde1e60d0ee62c08e
-Author: Linus Torvalds <torvalds@linux-foundation.org>
-Date:   Sun Dec 19 14:14:33 2021 -0800
-
-    Linux 5.16-rc6
-
-commit f291e2d899d120880bfe8e0fa6fe22a97a54e054
-Merge: 2da09da4ae5e 18c841e1f411
-Author: Linus Torvalds <torvalds@linux-foundation.org>
-Date:   Sun Dec 19 12:44:03 2021 -0800
-
-    Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
-    
-    Pull kvm fixes from Paolo Bonzini:
-     "Two small fixes, one of which was being worked around in selftests"
-    
-    * tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm:
-      KVM: x86: Retry page fault if MMU reload is pending and root has no sp
-      KVM: selftests: vmx_pmu_msrs_test: Drop tests mangling guest visible CPUIDs
-      KVM: x86: Drop guest CPUID check for host initiated writes to MSR_IA32_PERF_CAPABILITIES
-
-commit 2da09da4ae5e1714606668bdb145806b0afe9c90
-Merge: a76c3d035872 87959fa16cfb
-Author: Linus Torvalds <torvalds@linux-foundation.org>
-Date:   Sun Dec 19 12:38:53 2021 -0800
-
-    Merge tag 'block-5.16-2021-12-19' of git://git.kernel.dk/linux-block
-    
-    Pull block revert from Jens Axboe:
-     "It turns out that the fix for not hammering on the delayed work timer
-      too much caused a performance regression for BFQ, so let's revert the
-      change for now.
-    
-      I've got some ideas on how to fix it appropriately, but they should
-      wait for 5.17"
-    
-    * tag 'block-5.16-2021-12-19' of git://git.kernel.dk/linux-block:
-      Revert "block: reduce kblockd_mod_delayed_work_on() CPU consumption"
-
-commit 18c841e1f4112d3fb742aca3429e84117fcb1e1c
-Author: Sean Christopherson <seanjc@google.com>
-Date:   Thu Dec 9 06:05:46 2021 +0000
-
-    KVM: x86: Retry page fault if MMU reload is pending and root has no sp
-    
-    Play nice with a NULL shadow page when checking for an obsolete root in
-    the page fault handler by flagging the page fault as stale if there's no
-    shadow page associated with the root and KVM_REQ_MMU_RELOAD is pending.
-    Invalidating memslots, which is the only case where _all_ roots need to
-    be reloaded, requests all vCPUs to reload their MMUs while holding
-    mmu_lock for lock.
-    
-    The "special" roots, e.g. pae_root when KVM uses PAE paging, are not
-    backed by a shadow page.  Running with TDP disabled or with nested NPT
-    explodes spectaculary due to dereferencing a NULL shadow page pointer.
-    
-    Skip the KVM_REQ_MMU_RELOAD check if there is a valid shadow page for the
-    root.  Zapping shadow pages in response to guest activity, e.g. when the
-    guest frees a PGD, can trigger KVM_REQ_MMU_RELOAD even if the current
-    vCPU isn't using the affected root.  I.e. KVM_REQ_MMU_RELOAD can be seen
-    with a completely valid root shadow page.  This is a bit of a moot point
-    as KVM currently unloads all roots on KVM_REQ_MMU_RELOAD, but that will
-    be cleaned up in the future.
-    
-    Fixes: a955cad84cda ("KVM: x86/mmu: Retry page fault if root is invalidated by memslot update")
-    Cc: stable@vger.kernel.org
-    Cc: Maxim Levitsky <mlevitsk@redhat.com>
-    Signed-off-by: Sean Christopherson <seanjc@google.com>
-    Message-Id: <20211209060552.2956723-2-seanjc@google.com>
-    Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-
-commit 0b091a43d704997789c6d812b02167c8f5f9f061
-Author: Vitaly Kuznetsov <vkuznets@redhat.com>
-Date:   Thu Dec 16 17:52:12 2021 +0100
-
-    KVM: selftests: vmx_pmu_msrs_test: Drop tests mangling guest visible CPUIDs
-    
-    Host initiated writes to MSR_IA32_PERF_CAPABILITIES should not depend
-    on guest visible CPUIDs and (incorrect) KVM logic implementing it is
-    about to change. Also, KVM_SET_CPUID{,2} after KVM_RUN is now forbidden
-    and causes test to fail.
-    
-    Reported-by: kernel test robot <oliver.sang@intel.com>
-    Fixes: feb627e8d6f6 ("KVM: x86: Forbid KVM_SET_CPUID{,2} after KVM_RUN")
-    Signed-off-by: Vitaly Kuznetsov <vkuznets@redhat.com>
-    Message-Id: <20211216165213.338923-2-vkuznets@redhat.com>
-    Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-
-commit 1aa2abb33a419090c7c87d4ae842a6347078ee12
-Author: Vitaly Kuznetsov <vkuznets@redhat.com>
-Date:   Thu Dec 16 17:52:13 2021 +0100
-
-    KVM: x86: Drop guest CPUID check for host initiated writes to MSR_IA32_PERF_CAPABILITIES
-    
-    The ability to write to MSR_IA32_PERF_CAPABILITIES from the host should
-    not depend on guest visible CPUID entries, even if just to allow
-    creating/restoring guest MSRs and CPUIDs in any sequence.
-    
-    Fixes: 27461da31089 ("KVM: x86/pmu: Support full width counting")
-    Suggested-by: Sean Christopherson <seanjc@google.com>
-    Signed-off-by: Vitaly Kuznetsov <vkuznets@redhat.com>
-    Message-Id: <20211216165213.338923-3-vkuznets@redhat.com>
-    Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
-
-commit 87959fa16cfbcf76245c11559db1940069621274
-Author: Jens Axboe <axboe@kernel.dk>
-Date:   Sun Dec 19 07:58:44 2021 -0700
-
-    Revert "block: reduce kblockd_mod_delayed_work_on() CPU consumption"
-    
-    This reverts commit cb2ac2912a9ca7d3d26291c511939a41361d2d83.
-    
-    Alex and the kernel test robot report that this causes a significant
-    performance regression with BFQ. I can reproduce that result, so let's
-    revert this one as we're close to -rc6 and we there's no point in trying
-    to rush a fix.
-    
-    Link: https://lore.kernel.org/linux-block/1639853092.524jxfaem2.none@localhost/
-    Link: https://lore.kernel.org/lkml/20211219141852.GH14057@xsang-OptiPlex-9020/
-    Reported-by: Alex Xu (Hello71) <alex_y_xu@yahoo.ca>
-    Reported-by: kernel test robot <oliver.sang@intel.com>
-    Signed-off-by: Jens Axboe <axboe@kernel.dk>
 
