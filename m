@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A84DBC4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D658CC4167E
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 16:07:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.249867.430351 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.249868.430361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzLCH-0007Ed-1F; Mon, 20 Dec 2021 16:07:33 +0000
+	id 1mzLCI-0007SP-7F; Mon, 20 Dec 2021 16:07:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 249867.430351; Mon, 20 Dec 2021 16:07:32 +0000
+Received: by outflank-mailman (output) from mailman id 249868.430361; Mon, 20 Dec 2021 16:07:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzLCG-0007AI-Au; Mon, 20 Dec 2021 16:07:32 +0000
-Received: by outflank-mailman (input) for mailman id 249867;
+	id 1mzLCH-0007OY-9u; Mon, 20 Dec 2021 16:07:33 +0000
+Received: by outflank-mailman (input) for mailman id 249868;
  Mon, 20 Dec 2021 16:07:30 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=DqEV=RF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mzLCD-00055x-MC
- for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 16:07:29 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e994c24c-61ae-11ec-9e60-abaf8a552007;
+ id 1mzLCE-00055w-9y
+ for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 16:07:30 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e95ea199-61ae-11ec-85d3-df6b77346a89;
  Mon, 20 Dec 2021 17:07:21 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 64E341F3B1;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id C9E35218FD;
  Mon, 20 Dec 2021 16:07:20 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3632913D6B;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9D6D913D6B;
  Mon, 20 Dec 2021 16:07:20 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id OOncCziqwGEUTAAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id IBMRJTiqwGEUTAAAMHmgww
  (envelope-from <jgross@suse.com>); Mon, 20 Dec 2021 16:07:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,190 +53,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e994c24c-61ae-11ec-9e60-abaf8a552007
+X-Inumbo-ID: e95ea199-61ae-11ec-85d3-df6b77346a89
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1640016440; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Ce+N1zGKQYy8hCldpOth9Bm5wXCCEJvD9D9LhUj9MqQ=;
-	b=cWUUXYQwUV2VTvC9d9SQ9id2mBJZNdCT3LP25oCPV00TvQZE9kaOz3Azd9AskgY4CNA0Dv
-	dQ28BZ8n0gQWEnarVEmdCAcJclsluUIV7kvfpR8bfO4/Xo2sXSbzGgYq2GLpQiTKSeqcsK
-	bA1PDGndrRJ8nQviz8883vQuZGuk4nc=
+	bh=VFqq/QNK2D+xIQFRd42TWwa5OQ2iSim/015QEF+tkx0=;
+	b=raxQRDTsz+PEwKz8cqE8gFusgSjw7umtA/NC6kZo3TyDhlKqnpxL3RkcIr1m58M8RLw3YL
+	PAcwPavo0qZmknQsfDyg2XHWqUZqn5Xep6xznNY/lWZtnYQTpCWx9Wm437zz9DpC5ybOAq
+	8Cfty8nb4eVMNMfMPZPvaNpG73hzk6U=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 07/10] mini-os: move x86 specific gnttab coding into arch/x86/gnttab.c
-Date: Mon, 20 Dec 2021 17:07:13 +0100
-Message-Id: <20211220160716.4159-8-jgross@suse.com>
+Subject: [PATCH v2 09/10] mini-os: prepare grantmap entry interface for use by PVH mode
+Date: Mon, 20 Dec 2021 17:07:15 +0100
+Message-Id: <20211220160716.4159-10-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211220160716.4159-1-jgross@suse.com>
 References: <20211220160716.4159-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Having grant table code in arch/x86/mm.c seems wrong. Move it to the
-new file arch/x86/gnttab.c, especially as the amount of code is
-expected to grow further.
-
-While doing that replace  type casts to pte_t with the more appropriate
-__pte() macro.
-
-No functional change.
+Instead of passing the pointer of a grantmap entry to the
+_gntmap_[un]map_grant_ref() sub-functions use the map pointer and the
+entry index instead. This will be needed for PVH mode usage.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
- arch/x86/gnttab.c | 78 +++++++++++++++++++++++++++++++++++++++++++++++
- arch/x86/mm.c     | 47 ----------------------------
- 2 files changed, 78 insertions(+), 47 deletions(-)
- create mode 100644 arch/x86/gnttab.c
+ gntmap.c | 48 +++++++++++++++++++++++-------------------------
+ 1 file changed, 23 insertions(+), 25 deletions(-)
 
-diff --git a/arch/x86/gnttab.c b/arch/x86/gnttab.c
-new file mode 100644
-index 0000000..56e59d7
---- /dev/null
-+++ b/arch/x86/gnttab.c
-@@ -0,0 +1,78 @@
-+/* -*-  Mode:C; c-basic-offset:4; tab-width:4 -*-
-+ *
-+ * (C) 2021 - Juergen Gross, SUSE Software Solutions Germany GmbH
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to
-+ * deal in the Software without restriction, including without limitation the
-+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-+ * sell copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+
-+#include <mini-os/os.h>
-+#include <mini-os/hypervisor.h>
-+#include <mini-os/gnttab.h>
-+#include <mini-os/mm.h>
-+#include <mini-os/types.h>
-+
-+grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
-+{
-+    struct gnttab_setup_table setup;
-+    unsigned long frames[nr_grant_frames];
-+
-+    setup.dom = DOMID_SELF;
-+    setup.nr_frames = nr_grant_frames;
-+    set_xen_guest_handle(setup.frame_list, frames);
-+
-+    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
-+    return map_frames(frames, nr_grant_frames);
-+}
-+
-+void arch_suspend_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
-+{
-+#ifdef CONFIG_PARAVIRT
-+    int i;
-+
-+    for ( i = 0; i < nr_grant_frames; i++ )
-+    {
-+        HYPERVISOR_update_va_mapping((unsigned long)gnttab_table + PAGE_SIZE * i,
-+                __pte(0x0 << PAGE_SHIFT), UVMF_INVLPG);
-+    }
-+#endif
-+    return;
-+}
-+
-+void arch_resume_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
-+{
-+    struct gnttab_setup_table setup;
-+    unsigned long frames[nr_grant_frames];
-+#ifdef CONFIG_PARAVIRT
-+    int i;
-+#endif
-+
-+    setup.dom = DOMID_SELF;
-+    setup.nr_frames = nr_grant_frames;
-+    set_xen_guest_handle(setup.frame_list, frames);
-+
-+    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
-+
-+#ifdef CONFIG_PARAVIRT
-+    for ( i = 0; i < nr_grant_frames; i++ )
-+    {
-+        HYPERVISOR_update_va_mapping((unsigned long)gnttab_table + PAGE_SIZE * i,
-+                __pte((frames[i] << PAGE_SHIFT) | L1_PROT), UVMF_INVLPG);
-+    }
-+#endif
-+}
-diff --git a/arch/x86/mm.c b/arch/x86/mm.c
-index c30d8bc..220c0b4 100644
---- a/arch/x86/mm.c
-+++ b/arch/x86/mm.c
-@@ -837,53 +837,6 @@ void arch_init_mm(unsigned long* start_pfn_p, unsigned long* max_pfn_p)
- #endif
+diff --git a/gntmap.c b/gntmap.c
+index f6ab3ad..7ae8fe6 100644
+--- a/gntmap.c
++++ b/gntmap.c
+@@ -55,36 +55,34 @@ struct gntmap_entry {
+ };
+ 
+ static inline int
+-gntmap_entry_used(struct gntmap_entry *entry)
++gntmap_entry_used(struct gntmap *map, int idx)
+ {
+-    return entry->host_addr != 0;
++    return map->entries[idx].host_addr != 0;
  }
  
--grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
--{
--    struct gnttab_setup_table setup;
--    unsigned long frames[nr_grant_frames];
--
--    setup.dom = DOMID_SELF;
--    setup.nr_frames = nr_grant_frames;
--    set_xen_guest_handle(setup.frame_list, frames);
--
--    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
--    return map_frames(frames, nr_grant_frames);
--}
--
--void arch_suspend_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
--{
--#ifdef CONFIG_PARAVIRT
--    int i;
--
--    for (i = 0; i < nr_grant_frames; i++) {
--        HYPERVISOR_update_va_mapping((unsigned long)(((char *)gnttab_table) + PAGE_SIZE * i),
--                (pte_t){0x0<<PAGE_SHIFT}, UVMF_INVLPG);
--    }
--#endif
--    return;
--}
--
--void arch_resume_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
--{
--    struct gnttab_setup_table setup;
--    unsigned long frames[nr_grant_frames];
--#ifdef CONFIG_PARAVIRT
--    int i;
--#endif
--    setup.dom = DOMID_SELF;
--    setup.nr_frames = nr_grant_frames;
--    set_xen_guest_handle(setup.frame_list, frames);
--
--    HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
--
--#ifdef CONFIG_PARAVIRT
--    for (i = 0; i < nr_grant_frames; i++) {
--        HYPERVISOR_update_va_mapping((unsigned long)(((char *)gnttab_table) + PAGE_SIZE * i),
--                (pte_t){(frames[i] << PAGE_SHIFT) | L1_PROT}, UVMF_INVLPG);
--    }
--#endif
--}
--
- unsigned long alloc_virt_kernel(unsigned n_pages)
+-static struct gntmap_entry*
+-gntmap_find_free_entry(struct gntmap *map)
++static int gntmap_find_free_entry(struct gntmap *map)
+ {
+     int i;
+ 
+     for (i = 0; i < map->nentries; i++) {
+-        if (!gntmap_entry_used(&map->entries[i]))
+-            return &map->entries[i];
++        if (!gntmap_entry_used(map, i))
++            return i;
+     }
+ 
+     DEBUG("(map=%p): all %d entries full",
+            map, map->nentries);
+-    return NULL;
++    return -1;
+ }
+ 
+-static struct gntmap_entry*
+-gntmap_find_entry(struct gntmap *map, unsigned long addr)
++static int gntmap_find_entry(struct gntmap *map, unsigned long addr)
+ {
+     int i;
+ 
+     for (i = 0; i < map->nentries; i++) {
+         if (map->entries[i].host_addr == addr)
+-            return &map->entries[i];
++            return i;
+     }
+-    return NULL;
++    return -1;
+ }
+ 
+ int
+@@ -105,12 +103,13 @@ gntmap_set_max_grants(struct gntmap *map, int count)
+ }
+ 
+ static int
+-_gntmap_map_grant_ref(struct gntmap_entry *entry, 
++_gntmap_map_grant_ref(struct gntmap *map, int idx,
+                       unsigned long host_addr,
+                       uint32_t domid,
+                       uint32_t ref,
+                       int writable)
+ {
++    struct gntmap_entry *entry = map->entries + idx;
+     struct gnttab_map_grant_ref op;
+     int rc;
+ 
+@@ -135,8 +134,9 @@ _gntmap_map_grant_ref(struct gntmap_entry *entry,
+ }
+ 
+ static int
+-_gntmap_unmap_grant_ref(struct gntmap_entry *entry)
++_gntmap_unmap_grant_ref(struct gntmap *map, int idx)
+ {
++    struct gntmap_entry *entry = map->entries + idx;
+     struct gnttab_unmap_grant_ref op;
+     int rc;
+ 
+@@ -160,19 +160,19 @@ int
+ gntmap_munmap(struct gntmap *map, unsigned long start_address, int count)
+ {
+     int i, rc;
+-    struct gntmap_entry *ent;
++    int idx;
+ 
+     DEBUG("(map=%p, start_address=%lx, count=%d)",
+            map, start_address, count);
+ 
+     for (i = 0; i < count; i++) {
+-        ent = gntmap_find_entry(map, start_address + PAGE_SIZE * i);
+-        if (ent == NULL) {
++        idx = gntmap_find_entry(map, start_address + PAGE_SIZE * i);
++        if (idx < 0) {
+             printk("gntmap: tried to munmap unknown page\n");
+             return -EINVAL;
+         }
+ 
+-        rc = _gntmap_unmap_grant_ref(ent);
++        rc = _gntmap_unmap_grant_ref(map, idx);
+         if (rc != 0)
+             return rc;
+     }
+@@ -189,7 +189,7 @@ gntmap_map_grant_refs(struct gntmap *map,
+                       int writable)
  {
      unsigned long addr;
+-    struct gntmap_entry *ent;
++    int idx;
+     int i;
+ 
+     DEBUG("(map=%p, count=%" PRIu32 ", "
+@@ -206,9 +206,9 @@ gntmap_map_grant_refs(struct gntmap *map,
+         return NULL;
+ 
+     for (i = 0; i < count; i++) {
+-        ent = gntmap_find_free_entry(map);
+-        if (ent == NULL ||
+-            _gntmap_map_grant_ref(ent,
++        idx = gntmap_find_free_entry(map);
++        if (idx < 0 ||
++            _gntmap_map_grant_ref(map, idx,
+                                   addr + PAGE_SIZE * i,
+                                   domids[i * domids_stride],
+                                   refs[i],
+@@ -233,15 +233,13 @@ gntmap_init(struct gntmap *map)
+ void
+ gntmap_fini(struct gntmap *map)
+ {
+-    struct gntmap_entry *ent;
+     int i;
+ 
+     DEBUG("(map=%p)", map);
+ 
+     for (i = 0; i < map->nentries; i++) {
+-        ent = &map->entries[i];
+-        if (gntmap_entry_used(ent))
+-            (void) _gntmap_unmap_grant_ref(ent);
++        if (gntmap_entry_used(map, i))
++            (void) _gntmap_unmap_grant_ref(map, i);
+     }
+ 
+     xfree(map->entries);
 -- 
 2.26.2
 
