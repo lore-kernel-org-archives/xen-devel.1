@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51088C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E5FBC43219
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Dec 2021 21:16:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.249995.430502 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.249993.430485 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzQ16-0005gn-7I; Mon, 20 Dec 2021 21:16:20 +0000
+	id 1mzQ15-0005LD-Bx; Mon, 20 Dec 2021 21:16:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 249995.430502; Mon, 20 Dec 2021 21:16:20 +0000
+Received: by outflank-mailman (output) from mailman id 249993.430485; Mon, 20 Dec 2021 21:16:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzQ15-0005eI-VZ; Mon, 20 Dec 2021 21:16:19 +0000
-Received: by outflank-mailman (input) for mailman id 249995;
- Mon, 20 Dec 2021 21:16:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mzQ15-0005Kp-59; Mon, 20 Dec 2021 21:16:19 +0000
+Received: by outflank-mailman (input) for mailman id 249993;
+ Mon, 20 Dec 2021 21:16:17 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6gYK=RF=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1mzQ14-0005IB-EW
- for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 21:16:18 +0000
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [2a00:1450:4864:20::12b])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 11ee8156-61da-11ec-85d3-df6b77346a89;
- Mon, 20 Dec 2021 22:16:17 +0100 (CET)
-Received: by mail-lf1-x12b.google.com with SMTP id bt1so24502703lfb.13
- for <xen-devel@lists.xenproject.org>; Mon, 20 Dec 2021 13:16:17 -0800 (PST)
+ id 1mzQ13-0005IG-AV
+ for xen-devel@lists.xenproject.org; Mon, 20 Dec 2021 21:16:17 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 1119e5da-61da-11ec-9e60-abaf8a552007;
+ Mon, 20 Dec 2021 22:16:16 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id x21so16375186lfa.5
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Dec 2021 13:16:15 -0800 (PST)
 Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id b35sm635132lfv.209.2021.12.20.13.16.16
+ by smtp.gmail.com with ESMTPSA id b35sm635132lfv.209.2021.12.20.13.16.14
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 20 Dec 2021 13:16:16 -0800 (PST)
+ Mon, 20 Dec 2021 13:16:15 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 11ee8156-61da-11ec-85d3-df6b77346a89
+X-Inumbo-ID: 1119e5da-61da-11ec-9e60-abaf8a552007
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=hajm4OA2mR1rqKBWo1oPRyQ75UieT0Vx1ZnO7YitzIM=;
-        b=qIXmN3ldE/ZN74+4YThza4AYid4jpygjX+xdmfkD6EAA5y37CvzdUbPtTSqP+1hezy
-         FbateqQKdPFMOjjVuW3VU6Std4HufcBhyTDj+OTVAdRyBwkZNr0k/MHwOk9aYF+ijU1z
-         50fNGe+Ij8QFC6URM0g//2mLElYzbjnUFC4cs4myBgUpaHWUG9fB3EfSmWFmWIlCqG/R
-         e4uCVxbL6WrKLuyi/hgXa5dpUx1cVncs8xDJoil1jpJPbOdHZiQEuTIpBnDUonl6P6kI
-         Pweo79tXZ5V1g8p0e8nexsWb8XlHgeuno1/k/jxl3Sp9RBn9Su9HDg01r8kaK3EVMhWF
-         v9FQ==
+        bh=5gytA2pLllrFj6CH99Xdk/Opt3jWfGlT8ShBqhaNetg=;
+        b=Cdq4GjJ/2iK2iIIDzgHUFWhpcJBt2NTM2SeUjG+PuWAccmKfbquvFCKrO8Ez+FFwHY
+         j111WBq0jRNFONhvtOulyEGsd1uE8GrmfipXT25rC/jzrCa/2mWJxkbPiNiNFvtwYjts
+         GGa0E43hrhogNSeQPjJhaorFWWucTU2cQtt1RbtbkyzjF9wjvM0c5XxbMs8TJxBxcIK9
+         UuGDvoU+OfsP7bPu8VX5JmKNzsOxXb+US2eNpRCaEtd/6WHXFfa2XK7GToLiBlQGvOX8
+         JHwdxdmuFUmDT5SQm/OzzoKiDS8kJVoCL7P9GjMK2l4CrMaEb9O9qu2+EE7ZVSa1AmYD
+         Q1dA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=hajm4OA2mR1rqKBWo1oPRyQ75UieT0Vx1ZnO7YitzIM=;
-        b=z70XkiH2NGmtAtHattaH6UB4GV+988PBJwoQYJkJ/iftam1D068s1rOKIH2QzwNclj
-         f2aFUt11kE1nijbcMIwGi3Nq7FHIfHkTY8VmHbYtMaxV+jjhsQ0snJjQudsvwsCosidR
-         BVoC7jzgkBS1YXBugV3SSBKKveizofBmaa3fvTYICxLbXnVfWWkeedP6dVdoITEyHo+L
-         00fg8A2H+jSqIq0cHjf1tR7lf6hUFWwW1otP+WaD6d1Zz3CYvqtERFmcJJikhBULr13f
-         aylHy1la0tACvfplAoDUeIGZMs7mDNQfh88GzO6UpamNjEptV6Z5X5ob/eWWEmFQ5qcv
-         tpSQ==
-X-Gm-Message-State: AOAM531Lbzhh+U4WQqfkTdGpUmznGyNfrAK73Ufvjd1m2gzZrjoNzB9h
-	A9sBooliReySq1WWltcpt5+QucRfkOY=
-X-Google-Smtp-Source: ABdhPJxzTfRun3YkUwibQaiDMstuUa+taVcJp9VRWabBxAHUy/4zPZawhc2OjDWcR5BYP0Abgva61g==
-X-Received: by 2002:a05:6512:3054:: with SMTP id b20mr2857353lfb.359.1640034976971;
-        Mon, 20 Dec 2021 13:16:16 -0800 (PST)
+        bh=5gytA2pLllrFj6CH99Xdk/Opt3jWfGlT8ShBqhaNetg=;
+        b=KNQUR3+RpFwnnt8fZ/R+g94yd7NWIM+7jeWnVkgMiVVcPR/YoLdjwdANn+cZiCjA73
+         PyAk6iobzS2ITOFvmUPV9NwRasuUfClNtQUPoTJS9cH4g/th8kNOTJS+3+UcbQhoTEnC
+         NnFacY9BzGeOSW4l5yPlR+yxZ9qqz2VNvMkYUtp6xal7ITPfYYt3/eSj5BHOiimn2M/D
+         DGcoeB1Ww+WY+MLQkaTyyfs12ZsLY72+U1Uc5TkrvM8lS0mYGFTT3azhHdLTVUOAgJez
+         /ux2Nr+cts4jPM6tc7X6JbaxNhrCs/3FItaSVLdYqgor7XF/LOEoP2FzsOS7zayWOTPd
+         8mGw==
+X-Gm-Message-State: AOAM531ZW/1jAxzCTefvA8eYem2CtNUh+zU28J+ro/ptbKZ5Pu55iRkn
+	as1eTakfBbL10jhYapxquavUcqonBoE=
+X-Google-Smtp-Source: ABdhPJxaDOs+TBKah+ukRAfspi33bXHs6F6TXrKYX+7z3geOaurnZi1gkTrB2n7oqg3+F9pCzFg0Wg==
+X-Received: by 2002:a05:6512:3054:: with SMTP id b20mr2857265lfb.359.1640034975570;
+        Mon, 20 Dec 2021 13:16:15 -0800 (PST)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
@@ -82,9 +82,9 @@ Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH V2 03/10] iommu/ipmmu-vmsa: Add helper functions for "uTLB" registers
-Date: Mon, 20 Dec 2021 23:15:50 +0200
-Message-Id: <1640034957-19764-4-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V2 01/10] iommu/ipmmu-vmsa: Remove all unused register definitions
+Date: Mon, 20 Dec 2021 23:15:48 +0200
+Message-Id: <1640034957-19764-2-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1640034957-19764-1-git-send-email-olekstysh@gmail.com>
 References: <1640034957-19764-1-git-send-email-olekstysh@gmail.com>
@@ -95,21 +95,20 @@ Content-Transfer-Encoding: 8bit
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
 This is a non-verbatim port of corresponding Linux upsteam commit:
-3667c9978b2911dc1ded77f5971df477885409c4
+77cf983892b2e0d40dc256b784930a9ffaad4fc8
 
 Original commit message:
- commit 3667c9978b2911dc1ded77f5971df477885409c4
+ commit 77cf983892b2e0d40dc256b784930a9ffaad4fc8
  Author: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
- Date:   Wed Nov 6 11:35:49 2019 +0900
+ Date:   Wed Nov 6 11:35:45 2019 +0900
 
-  iommu/ipmmu-vmsa: Add helper functions for "uTLB" registers
+  iommu/ipmmu-vmsa: Remove all unused register definitions
 
-  Since we will have changed memory mapping of the IPMMU in the future,
-  This patch adds helper functions ipmmu_utlb_reg() and
-  ipmmu_imu{asid,ctr}_write() for "uTLB" registers. No behavior change.
+  To support different registers memory mapping hardware easily
+  in the future, this patch removes all unused register
+  definitions.
 
   Signed-off-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-  Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
   Reviewed-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
   Signed-off-by: Joerg Roedel <jroedel@suse.de>
 
@@ -118,10 +117,10 @@ Original commit message:
 This is a prereq work needed to add support for S4 series easily
 in the future.
 
-Besides changes done in the original commit, we also need to introduce
-ipmmu_imuctr_read() since Xen driver contains an additional logic in
-ipmmu_utlb_enable() to prevent the use cases where devices which use
-the same micro-TLB are assigned to different Xen domains.
+Although Linux and Xen drivers have a lot in common, the main
+differences are in translation stages (table formats), VMSAv8 modes,
+supported SoC generations, etc, therefore that's why there is
+a slight difference in registers/bits each driver considers unused.
 
 No change in behavior.
 
@@ -131,74 +130,116 @@ Reviewed-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 Changes V1 -> V2:
    - add R-b
 ---
- xen/drivers/passthrough/arm/ipmmu-vmsa.c | 33 +++++++++++++++++++++++++++-----
- 1 file changed, 28 insertions(+), 5 deletions(-)
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 59 ++------------------------------
+ 1 file changed, 2 insertions(+), 57 deletions(-)
 
 diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-index ce5c3bc..1b94af2 100644
+index 1255b0d..4a8a974 100644
 --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
 +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -366,6 +366,29 @@ static void ipmmu_ctx_write_all(struct ipmmu_vmsa_domain *domain,
-     ipmmu_ctx_write_root(domain, reg, data);
- }
+@@ -166,15 +166,11 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
  
-+static uint32_t ipmmu_utlb_reg(struct ipmmu_vmsa_device *mmu, uint32_t reg)
-+{
-+    return reg;
-+}
+ #define IMCTR                0x0000
+ /*
+- * These fields are implemented in IPMMU-MM only. So, can be set for
++ * This field is implemented in IPMMU-MM only. So, can be set for
+  * Root IPMMU only.
+  */
+ #define IMCTR_VA64           (1 << 29)
+-#define IMCTR_TRE            (1 << 17)
+-#define IMCTR_AFE            (1 << 16)
+-#define IMCTR_RTSEL_MASK     (3 << 4)
+-#define IMCTR_RTSEL_SHIFT    4
+-#define IMCTR_TREN           (1 << 3)
 +
-+static void ipmmu_imuasid_write(struct ipmmu_vmsa_device *mmu,
-+                                unsigned int utlb, uint32_t data)
-+{
-+    ipmmu_write(mmu, ipmmu_utlb_reg(mmu, IMUASID(utlb)), data);
-+}
-+
-+static void ipmmu_imuctr_write(struct ipmmu_vmsa_device *mmu,
-+                               unsigned int utlb, uint32_t data)
-+{
-+    ipmmu_write(mmu, ipmmu_utlb_reg(mmu, IMUCTR(utlb)), data);
-+}
-+
-+static uint32_t ipmmu_imuctr_read(struct ipmmu_vmsa_device *mmu,
-+                                  unsigned int utlb)
-+{
-+    return ipmmu_read(mmu, ipmmu_utlb_reg(mmu, IMUCTR(utlb)));
-+}
-+
- /* TLB and micro-TLB Management */
+ /*
+  * These fields are common for all IPMMU devices. So, can be set for
+  * Cache IPMMUs as well.
+@@ -184,42 +180,9 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
+ #define IMCTR_MMUEN          (1 << 0)
+ #define IMCTR_COMMON_MASK    (7 << 0)
  
- /* Wait for any pending TLB invalidations to complete. */
-@@ -413,7 +436,7 @@ static int ipmmu_utlb_enable(struct ipmmu_vmsa_domain *domain,
-      * context_id for already enabled micro-TLB and prevent different context
-      * bank from being set.
-      */
--    imuctr = ipmmu_read(mmu, IMUCTR(utlb));
-+    imuctr = ipmmu_imuctr_read(mmu, utlb);
-     if ( imuctr & IMUCTR_MMUEN )
-     {
-         unsigned int context_id;
-@@ -431,9 +454,9 @@ static int ipmmu_utlb_enable(struct ipmmu_vmsa_domain *domain,
-      * TODO: Reference-count the micro-TLB as several bus masters can be
-      * connected to the same micro-TLB.
-      */
--    ipmmu_write(mmu, IMUASID(utlb), 0);
--    ipmmu_write(mmu, IMUCTR(utlb), imuctr |
--                IMUCTR_TTSEL_MMU(domain->context_id) | IMUCTR_MMUEN);
-+    ipmmu_imuasid_write(mmu, utlb, 0);
-+    ipmmu_imuctr_write(mmu, utlb, imuctr |
-+                       IMUCTR_TTSEL_MMU(domain->context_id) | IMUCTR_MMUEN);
+-#define IMCAAR               0x0004
+-
+ #define IMTTBCR                        0x0008
+ #define IMTTBCR_EAE                    (1U << 31)
+ #define IMTTBCR_PMB                    (1 << 30)
+-#define IMTTBCR_SH1_NON_SHAREABLE      (0 << 28)
+-#define IMTTBCR_SH1_OUTER_SHAREABLE    (2 << 28)
+-#define IMTTBCR_SH1_INNER_SHAREABLE    (3 << 28)
+-#define IMTTBCR_SH1_MASK               (3 << 28)
+-#define IMTTBCR_ORGN1_NC               (0 << 26)
+-#define IMTTBCR_ORGN1_WB_WA            (1 << 26)
+-#define IMTTBCR_ORGN1_WT               (2 << 26)
+-#define IMTTBCR_ORGN1_WB               (3 << 26)
+-#define IMTTBCR_ORGN1_MASK             (3 << 26)
+-#define IMTTBCR_IRGN1_NC               (0 << 24)
+-#define IMTTBCR_IRGN1_WB_WA            (1 << 24)
+-#define IMTTBCR_IRGN1_WT               (2 << 24)
+-#define IMTTBCR_IRGN1_WB               (3 << 24)
+-#define IMTTBCR_IRGN1_MASK             (3 << 24)
+-#define IMTTBCR_TSZ1_MASK              (0x1f << 16)
+-#define IMTTBCR_TSZ1_SHIFT             16
+-#define IMTTBCR_SH0_NON_SHAREABLE      (0 << 12)
+-#define IMTTBCR_SH0_OUTER_SHAREABLE    (2 << 12)
+-#define IMTTBCR_SH0_INNER_SHAREABLE    (3 << 12)
+-#define IMTTBCR_SH0_MASK               (3 << 12)
+-#define IMTTBCR_ORGN0_NC               (0 << 10)
+-#define IMTTBCR_ORGN0_WB_WA            (1 << 10)
+-#define IMTTBCR_ORGN0_WT               (2 << 10)
+-#define IMTTBCR_ORGN0_WB               (3 << 10)
+-#define IMTTBCR_ORGN0_MASK             (3 << 10)
+-#define IMTTBCR_IRGN0_NC               (0 << 8)
+-#define IMTTBCR_IRGN0_WB_WA            (1 << 8)
+-#define IMTTBCR_IRGN0_WT               (2 << 8)
+-#define IMTTBCR_IRGN0_WB               (3 << 8)
+-#define IMTTBCR_IRGN0_MASK             (3 << 8)
+-#define IMTTBCR_SL0_LVL_2              (0 << 6)
+ #define IMTTBCR_SL0_LVL_1              (1 << 6)
+ #define IMTTBCR_TSZ0_MASK              (0x1f << 0)
+ #define IMTTBCR_TSZ0_SHIFT             0
+@@ -228,18 +191,8 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
+ #define IMTTLBR0_TTBR_MASK    (0xfffff << 12)
+ #define IMTTUBR0              0x0014
+ #define IMTTUBR0_TTBR_MASK    (0xff << 0)
+-#define IMTTLBR1              0x0018
+-#define IMTTLBR1_TTBR_MASK    (0xfffff << 12)
+-#define IMTTUBR1              0x001c
+-#define IMTTUBR1_TTBR_MASK    (0xff << 0)
  
-     return 0;
- }
-@@ -444,7 +467,7 @@ static void ipmmu_utlb_disable(struct ipmmu_vmsa_domain *domain,
- {
-     struct ipmmu_vmsa_device *mmu = domain->mmu;
+ #define IMSTR                          0x0020
+-#define IMSTR_ERRLVL_MASK              (3 << 12)
+-#define IMSTR_ERRLVL_SHIFT             12
+-#define IMSTR_ERRCODE_TLB_FORMAT       (1 << 8)
+-#define IMSTR_ERRCODE_ACCESS_PERM      (4 << 8)
+-#define IMSTR_ERRCODE_SECURE_ACCESS    (5 << 8)
+-#define IMSTR_ERRCODE_MASK             (7 << 8)
+ #define IMSTR_MHIT                     (1 << 4)
+ #define IMSTR_ABORT                    (1 << 2)
+ #define IMSTR_PF                       (1 << 1)
+@@ -251,11 +204,7 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
+ #define IMUCTR(n)              ((n) < 32 ? IMUCTR0(n) : IMUCTR32(n))
+ #define IMUCTR0(n)             (0x0300 + ((n) * 16))
+ #define IMUCTR32(n)            (0x0600 + (((n) - 32) * 16))
+-#define IMUCTR_FIXADDEN        (1U << 31)
+-#define IMUCTR_FIXADD_MASK     (0xff << 16)
+-#define IMUCTR_FIXADD_SHIFT    16
+ #define IMUCTR_TTSEL_MMU(n)    ((n) << 4)
+-#define IMUCTR_TTSEL_PMB       (8 << 4)
+ #define IMUCTR_TTSEL_MASK      (15 << 4)
+ #define IMUCTR_TTSEL_SHIFT     4
+ #define IMUCTR_FLUSH           (1 << 1)
+@@ -264,10 +213,6 @@ static DEFINE_SPINLOCK(ipmmu_devices_lock);
+ #define IMUASID(n)             ((n) < 32 ? IMUASID0(n) : IMUASID32(n))
+ #define IMUASID0(n)            (0x0308 + ((n) * 16))
+ #define IMUASID32(n)           (0x0608 + (((n) - 32) * 16))
+-#define IMUASID_ASID8_MASK     (0xff << 8)
+-#define IMUASID_ASID8_SHIFT    8
+-#define IMUASID_ASID0_MASK     (0xff << 0)
+-#define IMUASID_ASID0_SHIFT    0
  
--    ipmmu_write(mmu, IMUCTR(utlb), 0);
-+    ipmmu_imuctr_write(mmu, utlb, 0);
- }
- 
- /* Domain/Context Management */
+ #define IMSAUXCTLR          0x0504
+ #define IMSAUXCTLR_S2PTE    (1 << 3)
 -- 
 2.7.4
 
