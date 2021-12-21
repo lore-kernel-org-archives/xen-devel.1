@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A71C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 08:47:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.250184.430883 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF99C433FE
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 08:47:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.250177.430841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzanS-0003gV-OH; Tue, 21 Dec 2021 08:46:58 +0000
+	id 1mzanP-000309-7J; Tue, 21 Dec 2021 08:46:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 250184.430883; Tue, 21 Dec 2021 08:46:58 +0000
+Received: by outflank-mailman (output) from mailman id 250177.430841; Tue, 21 Dec 2021 08:46:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzanS-0003fM-Dj; Tue, 21 Dec 2021 08:46:58 +0000
-Received: by outflank-mailman (input) for mailman id 250184;
- Tue, 21 Dec 2021 08:46:57 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1mzanP-000302-3a; Tue, 21 Dec 2021 08:46:55 +0000
+Received: by outflank-mailman (input) for mailman id 250177;
+ Tue, 21 Dec 2021 08:46:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rEWG=RG=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mzanR-0002z5-5G
- for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 08:46:57 +0000
+ id 1mzanN-0002yE-GE
+ for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 08:46:53 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8be91413-623a-11ec-8d39-b1a4ed000e3e;
- Tue, 21 Dec 2021 09:46:53 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 8b18b320-623a-11ec-9e60-abaf8a552007;
+ Tue, 21 Dec 2021 09:46:52 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9AABA210FE;
- Tue, 21 Dec 2021 08:46:53 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1B4F8210FE;
+ Tue, 21 Dec 2021 08:46:52 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 727C513BEC;
- Tue, 21 Dec 2021 08:46:53 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DE35313BEC;
+ Tue, 21 Dec 2021 08:46:51 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id mCPKGn2UwWFHMAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 21 Dec 2021 08:46:53 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id ndZENHuUwWFHMAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 21 Dec 2021 08:46:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,94 +53,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8be91413-623a-11ec-8d39-b1a4ed000e3e
+X-Inumbo-ID: 8b18b320-623a-11ec-9e60-abaf8a552007
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1640076413; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=NwQ4mRiosEanvExB6LuAnyU1/Dqqja/tWJzhJY5Y3Ms=;
-	b=toWR3hQZog096RnIYPQ1YgpGL+3XJJxAKXFR7/u0lBiMX8IQz65YmqikDO2VThhMo2Tr3m
-	QGM+C2XHhFTEbmPyMPCNWoSGauQPn5SGNIQF/NQb6AZvt55hcNQR2AXv5iD2Q63LhjqSzl
-	Ssb+a4Zou4T5AnVmYfO6lj2lQbaarsg=
+	t=1640076412; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=U+uOMy8syfFhtMitypXYhn09cP895ccPVKrqjYHL+gw=;
+	b=SQHIEkusJZx7ayncKT4nh3fqdmklpAZ3y6UU5v3MZBl0r9RCNU7oDVH3wz5MQ94QMGWiUp
+	4g8Tzg/jNUIEjSvlUAAFX66jlMTVgG5YZKzegmsu316ZO7UK/IKcS282MiedasHna/7wyI
+	03JCAUr3+Bt/KyZ6XvMazbPW5nQhiw4=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 08/10] mini-os: add proper pvh grant table handling
-Date: Tue, 21 Dec 2021 09:46:34 +0100
-Message-Id: <20211221084636.6987-9-jgross@suse.com>
+Subject: [PATCH v3 00/10] mini-os: add missing PVH features
+Date: Tue, 21 Dec 2021 09:46:26 +0100
+Message-Id: <20211221084636.6987-1-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20211221084636.6987-1-jgross@suse.com>
-References: <20211221084636.6987-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Grant table initialization for PVH requires some additional actions
-compared to PV mode. Add those.
+Mini-OS in PVH mode is missing some features, especially in the areas
+of ballooning and grant tables.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
----
- arch/x86/gnttab.c | 31 +++++++++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
+With this series I am able to run Xenstore stubdom in PVH mode.
 
-diff --git a/arch/x86/gnttab.c b/arch/x86/gnttab.c
-index 56e59d7..281c207 100644
---- a/arch/x86/gnttab.c
-+++ b/arch/x86/gnttab.c
-@@ -22,11 +22,15 @@
-  */
- 
- #include <mini-os/os.h>
-+#include <mini-os/console.h>
-+#include <mini-os/e820.h>
- #include <mini-os/hypervisor.h>
- #include <mini-os/gnttab.h>
- #include <mini-os/mm.h>
- #include <mini-os/types.h>
-+#include <xen/memory.h>
- 
-+#ifdef CONFIG_PARAVIRT
- grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
- {
-     struct gnttab_setup_table setup;
-@@ -39,6 +43,33 @@ grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
-     HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
-     return map_frames(frames, nr_grant_frames);
- }
-+#else
-+grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
-+{
-+    int i, rc;
-+    struct xen_add_to_physmap xatp;
-+    unsigned long pfn;
-+    unsigned long frames[nr_grant_frames];
-+
-+    pfn = e820_get_reserved_pfns(nr_grant_frames);
-+    for ( i = 0; i < nr_grant_frames; i++ )
-+    {
-+        xatp.domid = DOMID_SELF;
-+        xatp.idx = i;
-+        xatp.space = XENMAPSPACE_grant_table;
-+        xatp.gpfn = pfn + i;
-+        rc = HYPERVISOR_memory_op(XENMEM_add_to_physmap, &xatp);
-+        if ( rc )
-+        {
-+            xprintk("could not init grant table\n");
-+            do_exit();
-+        }
-+        frames[i] = pfn + i;
-+    }
-+
-+    return map_frames(frames, nr_grant_frames);
-+}
-+#endif
- 
- void arch_suspend_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
- {
+Changes in V3:
+- two minor fixes
+
+Changes in V2:
+- multiple comments addressed
+
+Juergen Gross (10):
+  mini-os: split e820 map handling into new source file
+  mini-os: sort and sanitize e820 memory map
+  mini-os: don't assume contiguous RAM when initializing in PVH mode
+  mini-os: respect memory map when ballooning up
+  mini-os: don't repeat definition available via header file
+  mini-os: add memory map service functions
+  mini-os: move x86 specific gnttab coding into arch/x86/gnttab.c
+  mini-os: add proper pvh grant table handling
+  mini-os: prepare grantmap entry interface for use by PVH mode
+  mini-os: modify grant mappings to work in PVH mode
+
+ Makefile           |   1 +
+ arch/arm/mm.c      |  11 +-
+ arch/x86/balloon.c |   4 +-
+ arch/x86/gnttab.c  | 109 +++++++++++++
+ arch/x86/mm.c      | 121 +--------------
+ arch/x86/setup.c   |   8 +-
+ balloon.c          |  33 ++--
+ e820.c             | 376 +++++++++++++++++++++++++++++++++++++++++++++
+ gntmap.c           | 125 +++++++++------
+ include/balloon.h  |   5 +-
+ include/e820.h     |  11 ++
+ include/gntmap.h   |   1 +
+ mm.c               |   7 +-
+ 13 files changed, 615 insertions(+), 197 deletions(-)
+ create mode 100644 arch/x86/gnttab.c
+ create mode 100644 e820.c
+
 -- 
 2.26.2
 
