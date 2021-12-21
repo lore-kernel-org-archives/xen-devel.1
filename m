@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52341C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A71C433F5
 	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 08:47:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.250179.430855 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.250184.430883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzanQ-0003GF-GN; Tue, 21 Dec 2021 08:46:56 +0000
+	id 1mzanS-0003gV-OH; Tue, 21 Dec 2021 08:46:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 250179.430855; Tue, 21 Dec 2021 08:46:56 +0000
+Received: by outflank-mailman (output) from mailman id 250184.430883; Tue, 21 Dec 2021 08:46:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzanQ-0003G1-C3; Tue, 21 Dec 2021 08:46:56 +0000
-Received: by outflank-mailman (input) for mailman id 250179;
- Tue, 21 Dec 2021 08:46:54 +0000
+	id 1mzanS-0003fM-Dj; Tue, 21 Dec 2021 08:46:58 +0000
+Received: by outflank-mailman (input) for mailman id 250184;
+ Tue, 21 Dec 2021 08:46:57 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rEWG=RG=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mzanO-0002z5-BS
- for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 08:46:54 +0000
+ id 1mzanR-0002z5-5G
+ for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 08:46:57 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8b55e180-623a-11ec-8d39-b1a4ed000e3e;
+ id 8be91413-623a-11ec-8d39-b1a4ed000e3e;
  Tue, 21 Dec 2021 09:46:53 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A534421106;
- Tue, 21 Dec 2021 08:46:52 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 9AABA210FE;
+ Tue, 21 Dec 2021 08:46:53 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7BA5513BEC;
- Tue, 21 Dec 2021 08:46:52 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 727C513BEC;
+ Tue, 21 Dec 2021 08:46:53 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id mNnzHHyUwWFHMAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 21 Dec 2021 08:46:52 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id mCPKGn2UwWFHMAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 21 Dec 2021 08:46:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,116 +53,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b55e180-623a-11ec-8d39-b1a4ed000e3e
+X-Inumbo-ID: 8be91413-623a-11ec-8d39-b1a4ed000e3e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1640076412; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1640076413; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=UOETZh2f6WeeCiugBSdED352ymyLb1Vp+v99fCDGOVo=;
-	b=K+hcy7x1iKb9VYzLkL4sA69QZvp0PvKxySYlmloAtVeZRTMhdSj8eVGQS04N0xJ+Ld7obm
-	xRv7sZHBRokmzx5i3PO8qJ0bp9IJUmQ/87QIPz+vC6v2CaiLk/dX/EaUc2p4yh96L/uWiF
-	icnbrFHADIeXyOG/2SKNSaTodzd0VJQ=
+	bh=NwQ4mRiosEanvExB6LuAnyU1/Dqqja/tWJzhJY5Y3Ms=;
+	b=toWR3hQZog096RnIYPQ1YgpGL+3XJJxAKXFR7/u0lBiMX8IQz65YmqikDO2VThhMo2Tr3m
+	QGM+C2XHhFTEbmPyMPCNWoSGauQPn5SGNIQF/NQb6AZvt55hcNQR2AXv5iD2Q63LhjqSzl
+	Ssb+a4Zou4T5AnVmYfO6lj2lQbaarsg=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 03/10] mini-os: don't assume contiguous RAM when initializing in PVH mode
-Date: Tue, 21 Dec 2021 09:46:29 +0100
-Message-Id: <20211221084636.6987-4-jgross@suse.com>
+Subject: [PATCH v3 08/10] mini-os: add proper pvh grant table handling
+Date: Tue, 21 Dec 2021 09:46:34 +0100
+Message-Id: <20211221084636.6987-9-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211221084636.6987-1-jgross@suse.com>
 References: <20211221084636.6987-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Sizing the available memory should respect memory holes, so look at
-the memory map when setting the boundary for the memory allocator.
+Grant table initialization for PVH requires some additional actions
+compared to PV mode. Add those.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
-V2:
-- rename "max" to "start" (Samuel Thibault)
----
- arch/x86/mm.c  |  6 +-----
- e820.c         | 14 ++++++++------
- include/e820.h |  2 +-
- 3 files changed, 10 insertions(+), 12 deletions(-)
+ arch/x86/gnttab.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/arch/x86/mm.c b/arch/x86/mm.c
-index 8df93da..3bf6170 100644
---- a/arch/x86/mm.c
-+++ b/arch/x86/mm.c
-@@ -107,7 +107,6 @@ void arch_mm_preinit(void *p)
+diff --git a/arch/x86/gnttab.c b/arch/x86/gnttab.c
+index 56e59d7..281c207 100644
+--- a/arch/x86/gnttab.c
++++ b/arch/x86/gnttab.c
+@@ -22,11 +22,15 @@
+  */
+ 
+ #include <mini-os/os.h>
++#include <mini-os/console.h>
++#include <mini-os/e820.h>
+ #include <mini-os/hypervisor.h>
+ #include <mini-os/gnttab.h>
+ #include <mini-os/mm.h>
+ #include <mini-os/types.h>
++#include <xen/memory.h>
+ 
++#ifdef CONFIG_PARAVIRT
+ grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
  {
-     long ret;
-     domid_t domid = DOMID_SELF;
--    unsigned long max;
- 
-     pt_base = page_table_base;
-     first_free_pfn = PFN_UP(to_phys(&_end));
-@@ -117,11 +116,8 @@ void arch_mm_preinit(void *p)
-         xprintk("could not get memory size\n");
-         do_exit();
-     }
--    last_free_pfn = ret;
- 
--    max = e820_get_maxpfn();
--    if ( max < last_free_pfn )
--        last_free_pfn = max;
-+    last_free_pfn = e820_get_maxpfn(ret);
+     struct gnttab_setup_table setup;
+@@ -39,6 +43,33 @@ grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
+     HYPERVISOR_grant_table_op(GNTTABOP_setup_table, &setup, 1);
+     return map_frames(frames, nr_grant_frames);
  }
- #endif
++#else
++grant_entry_v1_t *arch_init_gnttab(int nr_grant_frames)
++{
++    int i, rc;
++    struct xen_add_to_physmap xatp;
++    unsigned long pfn;
++    unsigned long frames[nr_grant_frames];
++
++    pfn = e820_get_reserved_pfns(nr_grant_frames);
++    for ( i = 0; i < nr_grant_frames; i++ )
++    {
++        xatp.domid = DOMID_SELF;
++        xatp.idx = i;
++        xatp.space = XENMAPSPACE_grant_table;
++        xatp.gpfn = pfn + i;
++        rc = HYPERVISOR_memory_op(XENMEM_add_to_physmap, &xatp);
++        if ( rc )
++        {
++            xprintk("could not init grant table\n");
++            do_exit();
++        }
++        frames[i] = pfn + i;
++    }
++
++    return map_frames(frames, nr_grant_frames);
++}
++#endif
  
-diff --git a/e820.c b/e820.c
-index 70286cb..8030f43 100644
---- a/e820.c
-+++ b/e820.c
-@@ -285,10 +285,10 @@ void arch_print_memmap(void)
- }
- #endif
- 
--unsigned long e820_get_maxpfn(void)
-+unsigned long e820_get_maxpfn(unsigned long pages)
+ void arch_suspend_gnttab(grant_entry_v1_t *gnttab_table, int nr_grant_frames)
  {
-     int i;
--    unsigned long pfn, max = 0;
-+    unsigned long pfns, start = 0;
- 
-     e820_get_memmap();
- 
-@@ -296,10 +296,12 @@ unsigned long e820_get_maxpfn(void)
-     {
-         if ( e820_map[i].type != E820_RAM )
-             continue;
--        pfn = (e820_map[i].addr + e820_map[i].size) >> PAGE_SHIFT;
--        if ( pfn > max )
--            max = pfn;
-+        pfns = e820_map[i].size >> PAGE_SHIFT;
-+        start = e820_map[i].addr >> PAGE_SHIFT;
-+        if ( pages <= pfns )
-+            return start + pages;
-+        pages -= pfns;
-     }
- 
--    return max;
-+    return start + pfns;
- }
-diff --git a/include/e820.h b/include/e820.h
-index af2129f..6a57f05 100644
---- a/include/e820.h
-+++ b/include/e820.h
-@@ -49,6 +49,6 @@ struct __packed e820entry {
- extern struct e820entry e820_map[];
- extern unsigned e820_entries;
- 
--unsigned long e820_get_maxpfn(void);
-+unsigned long e820_get_maxpfn(unsigned long pages);
- 
- #endif /*__E820_HEADER*/
 -- 
 2.26.2
 
