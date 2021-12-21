@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 343B4C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 08:47:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.250183.430879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF71C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 08:47:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.250192.430933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzanS-0003bI-BB; Tue, 21 Dec 2021 08:46:58 +0000
+	id 1mzanX-0004mw-Pr; Tue, 21 Dec 2021 08:47:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 250183.430879; Tue, 21 Dec 2021 08:46:58 +0000
+Received: by outflank-mailman (output) from mailman id 250192.430933; Tue, 21 Dec 2021 08:47:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzanS-0003Zh-15; Tue, 21 Dec 2021 08:46:58 +0000
-Received: by outflank-mailman (input) for mailman id 250183;
- Tue, 21 Dec 2021 08:46:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1mzanX-0004id-Ak; Tue, 21 Dec 2021 08:47:03 +0000
+Received: by outflank-mailman (input) for mailman id 250192;
+ Tue, 21 Dec 2021 08:47:01 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=rEWG=RG=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1mzanQ-0002yE-8g
- for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 08:46:56 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8b3e5efb-623a-11ec-9e60-abaf8a552007;
- Tue, 21 Dec 2021 09:46:52 +0100 (CET)
+ id 1mzanV-0002z5-5i
+ for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 08:47:01 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8c2aae34-623a-11ec-8d39-b1a4ed000e3e;
+ Tue, 21 Dec 2021 09:46:54 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 75C921F3B6;
- Tue, 21 Dec 2021 08:46:52 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1143521106;
+ Tue, 21 Dec 2021 08:46:54 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4B40013BEC;
- Tue, 21 Dec 2021 08:46:52 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CFBDF13BEC;
+ Tue, 21 Dec 2021 08:46:53 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id kKs1EXyUwWFHMAAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 21 Dec 2021 08:46:52 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id wAh0MX2UwWFHMAAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 21 Dec 2021 08:46:53 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,256 +53,192 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b3e5efb-623a-11ec-9e60-abaf8a552007
+X-Inumbo-ID: 8c2aae34-623a-11ec-8d39-b1a4ed000e3e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1640076412; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1640076414; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=cWXSsRb7aAVsvcWbgBY23t6rGMkd9cnCIBDGNyaoF64=;
-	b=irEHSRRpWz7T4cfCEBeCvZnHmHhIhSwu2Q6XuAxDuRJkO4E8/+tswxDUV4Kmbjqezrdxh/
-	RTssKq/iFE2QHg+cTsC3kvgyUH+WtXXtZLkgrbcIMVK4ZYxHmn3zHHkoSS/6twrBC012mP
-	SjScZVuWvOMoFJLFRNHe19R2YaVlJ3c=
+	bh=2zdQgzlV0Lz7UQXRFdnEwu37UxJwIePFbmpJgrcmrrs=;
+	b=km1hd/hcAwn5S/3yJHlr/WcnHQ4YQD+O7shAA5ihsxw4YOGkaPUqTnFZ+crwtIwm/pa0a+
+	wZwgjA2zKOf8MpBk9VB+H26114WblOoZrvPI2Bo7fc5+B0xU5hQHNpjYxzeSXnBlMqMlAh
+	PVCkjUpQN5ip2Bc6vGMUabWVz7ESYXk=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 02/10] mini-os: sort and sanitize e820 memory map
-Date: Tue, 21 Dec 2021 09:46:28 +0100
-Message-Id: <20211221084636.6987-3-jgross@suse.com>
+Subject: [PATCH v3 10/10] mini-os: modify grant mappings to work in PVH mode
+Date: Tue, 21 Dec 2021 09:46:36 +0100
+Message-Id: <20211221084636.6987-11-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211221084636.6987-1-jgross@suse.com>
 References: <20211221084636.6987-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Do some processing of the E820 memory map obtained from the hypervisor:
-
-- align the entries to page boundaries
-- sort the entries by their start address
-- merge adjacent entries of same type
-
-This is relevant for PVH mode only.
+For being able to use the grant mapping interface in PVH mode some
+changes are required, as the guest needs to specify a physical address
+in the hypercall interface.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
-V2:
-- correct page boundary rounding
-- handle overlaps after rounding (Samuel Thibault)
-- improve sorting (Samuel Thibault)
-V3:
-- small optimization in e820_sanitize() (Samuel Thibault)
----
- e820.c | 186 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 186 insertions(+)
+ gntmap.c         | 81 ++++++++++++++++++++++++++++++++++--------------
+ include/gntmap.h |  1 +
+ 2 files changed, 59 insertions(+), 23 deletions(-)
 
-diff --git a/e820.c b/e820.c
-index 2165280..70286cb 100644
---- a/e820.c
-+++ b/e820.c
-@@ -57,6 +57,190 @@ static char *e820_types[E820_TYPES] = {
-     [E820_PMEM]     = "PMEM"
- };
+diff --git a/gntmap.c b/gntmap.c
+index 7ae8fe6..126b04f 100644
+--- a/gntmap.c
++++ b/gntmap.c
+@@ -32,6 +32,7 @@
  
-+/*
-+ * E820 type based bitmask for deciding how to round entries to page
-+ * boundaries: A set bit means the type relates to a resource managed by
-+ * Mini-OS (e.g. RAM), so rounding needs to be done to only include pages
-+ * completely of the related type (narrowing). All other types need to be
-+ * rounded to include all pages with parts of that type (widening).
-+ */
-+#define E820_NARROW ((1U << E820_RAM) | (1U << E820_NVS) | (1 << E820_PMEM))
+ #include <mini-os/os.h>
+ #include <mini-os/lib.h>
++#include <mini-os/e820.h>
+ #include <mini-os/xmalloc.h>
+ #include <errno.h>
+ #include <xen/grant_table.h>
+@@ -97,11 +98,42 @@ gntmap_set_max_grants(struct gntmap *map, int count)
+     if (map->entries == NULL)
+         return -ENOMEM;
+ 
++#ifndef CONFIG_PARAVIRT
++    map->start_pfn = e820_get_reserved_pfns(count);
++#endif
 +
-+/* Private type used to mark a range temporarily as reserved (lowest prio). */
-+#define E820_TMP_RESERVED    0
-+
-+static void e820_remove_entry(int idx)
-+{
-+    int i;
-+
-+    e820_entries--;
-+    for ( i = idx; i < e820_entries; i++ )
-+        e820_map[i] = e820_map[i + 1];
-+}
-+
-+static void e820_insert_entry_at(int idx, unsigned long addr,
-+                                 unsigned long size, unsigned int type)
-+{
-+    int i;
-+
-+    if ( e820_entries == E820_MAX )
-+    {
-+        xprintk("E820 memory map overflow\n");
-+        do_exit();
-+    }
-+
-+    e820_entries++;
-+    for ( i = e820_entries - 1; i > idx; i-- )
-+        e820_map[i] = e820_map[i - 1];
-+
-+    e820_map[idx].addr = addr;
-+    e820_map[idx].size = size;
-+    e820_map[idx].type = type;
-+}
-+
-+static void e820_insert_entry(unsigned long addr, unsigned long size,
-+                              unsigned int type)
-+{
-+    int i;
-+
-+    for ( i = 0; i < e820_entries && addr > e820_map[i].addr; i++ );
-+
-+    e820_insert_entry_at(i, addr, size, type);
-+}
-+
-+static void e820_swap_entries(int idx1, int idx2)
-+{
-+    struct e820entry entry;
-+
-+    entry = e820_map[idx1];
-+    e820_map[idx1] = e820_map[idx2];
-+    e820_map[idx2] = entry;
-+}
-+
-+/*
-+ * Do a memory map sanitizing sweep:
-+ * - sort the entries by start address
-+ * - remove overlaps of entries (higher type value wins)
-+ * - merge adjacent entries of same type
-+ */
-+static void e820_process_entries(void)
-+{
-+    int i, j;
-+    unsigned long end, start;
-+    unsigned int type;
-+
-+    /* Sort entries. */
-+    for ( i = 1; i < e820_entries; i++ )
-+        for ( j = i; j > 0 && e820_map[j - 1].addr > e820_map[j].addr; j-- )
-+            e820_swap_entries(j - 1, j);
-+
-+    /* Handle overlapping entries (higher type values win). */
-+    for ( i = 1; i < e820_entries; i++ )
-+    {
-+        if ( e820_map[i - 1].addr + e820_map[i - 1].size <= e820_map[i].addr )
-+            continue;
-+        if ( e820_map[i - 1].addr < e820_map[i].addr )
-+        {
-+            e820_insert_entry_at(i - 1, e820_map[i - 1].addr,
-+                                 e820_map[i].addr - e820_map[i - 1].addr,
-+                                 e820_map[i - 1].type);
-+            e820_map[i].addr += e820_map[i - 1].size;
-+            e820_map[i].size -= e820_map[i - 1].size;
-+            i++;
-+        }
-+        if ( e820_map[i - 1].type < e820_map[i].type )
-+            e820_swap_entries(i - 1, i);
-+        if ( e820_map[i - 1].size >= e820_map[i].size )
-+        {
-+            e820_remove_entry(i);
-+            i--;
-+        }
-+        else
-+        {
-+            start = e820_map[i].addr + e820_map[i - 1].size;
-+            end = e820_map[i].addr + e820_map[i].size;
-+            type = e820_map[i].type;
-+            e820_remove_entry(i);
-+            e820_insert_entry(start, end - start, type);
-+        }
-+    }
-+
-+    /* Merge adjacent entries. */
-+    for ( i = 0; i < e820_entries - 1; i++ )
-+    {
-+        if ( e820_map[i].type == e820_map[i + 1].type &&
-+             e820_map[i].addr + e820_map[i].size >= e820_map[i + 1].addr )
-+        {
-+            if ( e820_map[i].addr + e820_map[i].size <
-+                 e820_map[i + 1].addr + e820_map[i + 1].size )
-+            {
-+                e820_map[i].size = e820_map[i + 1].addr - e820_map[i].addr +
-+                                   e820_map[i + 1].size;
-+            }
-+            e820_remove_entry(i + 1);
-+            i--;
-+        }
-+    }
-+}
-+
-+/*
-+ * Transform memory map into a well sorted map without any overlaps.
-+ * - sort map entries by start address
-+ * - handle overlaps
-+ * - merge adjacent entries of same type (possibly removing boundary in the
-+ *   middle of a page)
-+ * - trim entries to page boundaries (depending on type either expanding
-+ *   the entry or narrowing it down)
-+ * - repeat first 3 sanitizing steps
-+ * - make remaining temporarily reserved entries permanently reserved
-+ */
-+static void e820_sanitize(void)
-+{
-+    int i;
-+    unsigned long end, start;
-+
-+    /* Sanitize memory map in current form. */
-+    e820_process_entries();
-+
-+    /* Adjust map entries to page boundaries. */
-+    for ( i = 0; i < e820_entries; i++ )
-+    {
-+        start = e820_map[i].addr;
-+        end = start + e820_map[i].size;
-+        if ( (1U << e820_map[i].type) & E820_NARROW )
-+        {
-+            if ( start & (PAGE_SIZE - 1) )
-+            {
-+                start = round_pgup(start);
-+                e820_insert_entry_at(i, start - PAGE_SIZE, PAGE_SIZE,
-+                                     E820_TMP_RESERVED);
-+                i++;
-+            }
-+            if ( end & (PAGE_SIZE - 1) )
-+            {
-+                end = round_pgdown(end);
-+                e820_insert_entry_at(i + 1, end, PAGE_SIZE, E820_TMP_RESERVED);
-+                i++;
-+            }
-+        }
-+        else
-+        {
-+            start = round_pgdown(start);
-+            end = round_pgup(end);
-+        }
-+        e820_map[i].addr = start;
-+        e820_map[i].size = end - start;
-+    }
-+
-+    /* Sanitize memory map (again). */
-+    e820_process_entries();
-+
-+    /* Make remaining temporarily reserved entries permanently reserved. */
-+    for ( i = 0; i < e820_entries; i++ )
-+        if ( e820_map[i].type == E820_TMP_RESERVED )
-+            e820_map[i].type = E820_RESERVED;
-+}
-+
- static void e820_get_memmap(void)
- {
-     long ret;
-@@ -71,6 +255,8 @@ static void e820_get_memmap(void)
-         do_exit();
-     }
-     e820_entries = memmap.nr_entries;
-+
-+    e820_sanitize();
+     memset(map->entries, 0, sizeof(struct gntmap_entry) * count);
+     map->nentries = count;
+     return 0;
  }
  
- void arch_print_memmap(void)
++static int
++_gntmap_unmap_grant_ref(struct gntmap *map, int idx)
++{
++    struct gntmap_entry *entry = map->entries + idx;
++    struct gnttab_unmap_grant_ref op;
++    int rc;
++
++#ifdef CONFIG_PARAVIRT
++    op.host_addr    = (uint64_t) entry->host_addr;
++#else
++    op.host_addr    = (uint64_t)(map->start_pfn + idx) << PAGE_SHIFT;
++#endif
++    op.dev_bus_addr = 0;
++    op.handle       = entry->handle;
++
++    rc = HYPERVISOR_grant_table_op(GNTTABOP_unmap_grant_ref, &op, 1);
++    if (rc != 0 || op.status != GNTST_okay) {
++        printk("GNTTABOP_unmap_grant_ref failed: "
++               "returned %d, status %" PRId16 "\n",
++               rc, op.status);
++        return rc != 0 ? rc : op.status;
++    }
++
++    entry->host_addr = 0;
++    return 0;
++}
++
+ static int
+ _gntmap_map_grant_ref(struct gntmap *map, int idx,
+                       unsigned long host_addr,
+@@ -112,10 +144,17 @@ _gntmap_map_grant_ref(struct gntmap *map, int idx,
+     struct gntmap_entry *entry = map->entries + idx;
+     struct gnttab_map_grant_ref op;
+     int rc;
++#ifndef CONFIG_PARAVIRT
++    unsigned long pfn = map->start_pfn + idx;
++#endif
+ 
+     op.ref = (grant_ref_t) ref;
+     op.dom = (domid_t) domid;
++#ifdef CONFIG_PARAVIRT
+     op.host_addr = (uint64_t) host_addr;
++#else
++    op.host_addr = (uint64_t)pfn << PAGE_SHIFT; 
++#endif
+     op.flags = GNTMAP_host_map;
+     if (!writable)
+         op.flags |= GNTMAP_readonly;
+@@ -128,31 +167,18 @@ _gntmap_map_grant_ref(struct gntmap *map, int idx,
+         return rc != 0 ? rc : op.status;
+     }
+ 
+-    entry->host_addr = host_addr;
+-    entry->handle = op.handle;
+-    return 0;
+-}
+-
+-static int
+-_gntmap_unmap_grant_ref(struct gntmap *map, int idx)
+-{
+-    struct gntmap_entry *entry = map->entries + idx;
+-    struct gnttab_unmap_grant_ref op;
+-    int rc;
+-
+-    op.host_addr    = (uint64_t) entry->host_addr;
+-    op.dev_bus_addr = 0;
+-    op.handle       = entry->handle;
+-
+-    rc = HYPERVISOR_grant_table_op(GNTTABOP_unmap_grant_ref, &op, 1);
+-    if (rc != 0 || op.status != GNTST_okay) {
+-        printk("GNTTABOP_unmap_grant_ref failed: "
+-               "returned %d, status %" PRId16 "\n",
+-               rc, op.status);
+-        return rc != 0 ? rc : op.status;
++#ifndef CONFIG_PARAVIRT
++    rc = do_map_frames(host_addr, &pfn, 1, 0, 0, DOMID_SELF, NULL,
++                       writable ? L1_PROT : L1_PROT_RO);
++    if ( rc )
++    {
++        _gntmap_unmap_grant_ref(map, idx);
++        return rc;
+     }
++#endif
+ 
+-    entry->host_addr = 0;
++    entry->host_addr = host_addr;
++    entry->handle = op.handle;
+     return 0;
+ }
+ 
+@@ -165,6 +191,10 @@ gntmap_munmap(struct gntmap *map, unsigned long start_address, int count)
+     DEBUG("(map=%p, start_address=%lx, count=%d)",
+            map, start_address, count);
+ 
++#ifndef CONFIG_PARAVIRT
++    unmap_frames(start_address, count);
++#endif
++
+     for (i = 0; i < count; i++) {
+         idx = gntmap_find_entry(map, start_address + PAGE_SIZE * i);
+         if (idx < 0) {
+@@ -242,6 +272,11 @@ gntmap_fini(struct gntmap *map)
+             (void) _gntmap_unmap_grant_ref(map, i);
+     }
+ 
++#ifndef CONFIG_PARAVIRT
++    e820_put_reserved_pfns(map->start_pfn, map->nentries);
++    map->start_pfn = 0;
++#endif
++
+     xfree(map->entries);
+     map->entries = NULL;
+     map->nentries = 0;
+diff --git a/include/gntmap.h b/include/gntmap.h
+index fde53f3..d3d7e88 100644
+--- a/include/gntmap.h
++++ b/include/gntmap.h
+@@ -10,6 +10,7 @@
+ struct gntmap {
+     int nentries;
+     struct gntmap_entry *entries;
++    unsigned long start_pfn;
+ };
+ 
+ int
 -- 
 2.26.2
 
