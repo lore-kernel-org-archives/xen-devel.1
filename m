@@ -4,33 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5A5C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 12:02:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.250357.431233 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F954C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Dec 2021 12:07:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.250374.431244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzdqN-00076v-6m; Tue, 21 Dec 2021 12:02:11 +0000
+	id 1mzdvK-000821-Rf; Tue, 21 Dec 2021 12:07:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 250357.431233; Tue, 21 Dec 2021 12:02:11 +0000
+Received: by outflank-mailman (output) from mailman id 250374.431244; Tue, 21 Dec 2021 12:07:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1mzdqN-00076k-36; Tue, 21 Dec 2021 12:02:11 +0000
-Received: by outflank-mailman (input) for mailman id 250357;
- Tue, 21 Dec 2021 12:02:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RAAn=RG=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1mzdqL-0006Z5-Ns
- for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 12:02:09 +0000
-Received: from sender3-of-o52.zoho.com (sender3-of-o52.zoho.com
- [136.143.184.52]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d19ab600-6255-11ec-9e60-abaf8a552007;
- Tue, 21 Dec 2021 13:02:08 +0100 (CET)
-Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1640088122395554.9994111950763;
- Tue, 21 Dec 2021 04:02:02 -0800 (PST)
+	id 1mzdvK-00081s-OU; Tue, 21 Dec 2021 12:07:18 +0000
+Received: by outflank-mailman (input) for mailman id 250374;
+ Tue, 21 Dec 2021 12:07:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=GYHQ=RG=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1mzdvJ-00081m-DR
+ for xen-devel@lists.xenproject.org; Tue, 21 Dec 2021 12:07:17 +0000
+Received: from de-smtp-delivery-102.mimecast.com
+ (de-smtp-delivery-102.mimecast.com [194.104.109.102])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 89ef0107-6256-11ec-bb0b-79c175774b5d;
+ Tue, 21 Dec 2021 13:07:16 +0100 (CET)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04lp2059.outbound.protection.outlook.com [104.47.12.59]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-13-6YgIRr7fPmWGGrGG3GPwWQ-1; Tue, 21 Dec 2021 13:07:14 +0100
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
+ by VI1PR0401MB2445.eurprd04.prod.outlook.com (2603:10a6:800:55::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4801.14; Tue, 21 Dec
+ 2021 12:07:12 +0000
+Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe]) by VI1PR04MB5600.eurprd04.prod.outlook.com
+ ([fe80::5951:a489:1cf0:19fe%6]) with mapi id 15.20.4801.022; Tue, 21 Dec 2021
+ 12:07:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,168 +53,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d19ab600-6255-11ec-9e60-abaf8a552007
-ARC-Seal: i=1; a=rsa-sha256; t=1640088125; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=bVQHV84+eEbxqyAIAi5E57ct7F3UVov5ISNnKujLkWO/EqTZg/6uPhYFvyYIiirH6thLIPmT1JFTc/g0SisjnR59u8Rh7LIykYGTMEJLa36TwBdyRK5AFZFJMlSwtFYkKQnypc/+u5ZDoisisXJEovKXybGSgIMJQ0vZXhOeA+8=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1640088125; h=Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
-	bh=fi3gGm7Y+029vmS8qO8YIbyW9eyKb6e7iEZI773KNyA=; 
-	b=dbvGVXsXEZkA25Nom95g+WqnbZ4VT4KFZpNc+o92W+sVJJu7m8kz4ZbkIuckqi+QA+BDxba74EGcFe/qVNGZACwjQ/XigrgV4g71Omk+b5/yUHFGII8XWx1Jjc9wFzNk/zigT9qhno0QunmF3xK//pXsgMbGMuooZlRfGmpeFD8=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1640088125;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding;
-	bh=fi3gGm7Y+029vmS8qO8YIbyW9eyKb6e7iEZI773KNyA=;
-	b=FBMIhF0lb+76Zt5HHkT6nBKo66GD6g7uXCxOed6Uv117XxNpNNboY88i1wVHVGsM
-	Qn2nslNm80dFmgyXq1+axZ9NZEDfuuiSDP2DZUV4NMaeWMpoQlb0AQvkrtb+8Y80ZCi
-	dXpM1I17xEwNeQY9RlUR4YuChmwIO3EpeKOvZ3lw=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: Wei Liu <wl@xen.org>,
-	xen-devel@lists.xenproject.org
-Cc: Christopher Clark <christopher.w.clark@gmail.com>,
-	"Daniel P . Smith" <dpsmith@apertussolutions.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4] is_system_domain: replace open-coded instances
-Date: Tue, 21 Dec 2021 11:04:44 -0500
-Message-Id: <20211221160444.30890-1-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.20.1
+X-Inumbo-ID: 89ef0107-6256-11ec-bb0b-79c175774b5d
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1640088436;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=mfZxYsWRRdlYuHi+05rZkRMBmpXtwZWL4iHppnN0jwk=;
+	b=cKysdO14tZq9OaIc4clhbx5j3zG3l2LTl5QzTmFbbXmq1qyYg2eElfkVlTjfmrNCJSX5Nq
+	8KyigkEzpwHYwxTgXQE/WXw/oMkLXdgJXU6jPTVDm/YWHJF77iA+Oo3oX7FOXVFfLZbVuQ
+	hPTByfRP2fYy1DTvvfhf11uYHzx8I3w=
+X-MC-Unique: 6YgIRr7fPmWGGrGG3GPwWQ-1
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Y/OPWsT2x0b5Pe/iram4YChU0HWxlVSXL/GjtS8gdY9QRbIR6Fze6DX0QDQ1i2ApKPF+4qsjQCUhzcsVesxMSZJxkBIyFGW1h2x4JjMFisEcHC9pRQlF+ivUCfd/dg0HizfnusbSOH99kwPeYH26xrgsq2UEVp7dvo6es+s+MDCHJCon27qxTxfMCV26MmBy/ais7pU5mT/+iq6ZwP2n6RpTk+Am51yBSru51zWpoZbtX0dYiTJkEcj+OUYF9ggQn9TtJKYnwB8HRVP06OC5zGcN3RiowxyhR4Y4WV93b2Uzz6b6FsCk3g4/maGsakfhqVlcUWSApK4ZVyZrxvDE4g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mfZxYsWRRdlYuHi+05rZkRMBmpXtwZWL4iHppnN0jwk=;
+ b=hPsxeetZjIEqxZwucspTEAZWlhmY+dDzHh+JjbFEaRnzA3Di3ZBrvNGTxWEnFGjVG3ZGFkvBCNwjxvHl/gbbWYvRPVTXQHSecrVcaz+LYd5Laypw8YgKUWRhpehkb4dCBzMjtZWndQyhkENo8PcFDFrjJSrIrKeEqRQSixhqGRsnOjESopyAfMPD8wpl4YML/VpMwqMStlCjkjiRo/GHvdfsrbIo2gW0mkuUh8s208s7aZ9tC+DjZF2q0deDTeJixd1R9rWGgI3hhOJi17yR05VmBajcsjWWWF266pncG86tYb6T19m+6RCQDtIDtw6DVEgfUGdREpNMEOx36iVHMQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <61a75382-eaf1-0e3d-fdcb-c9fa570cc735@suse.com>
+Date: Tue, 21 Dec 2021 13:07:10 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.4.0
+Subject: Re: [PATCH 5/6] x86/pagewalk: Support PKS
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Wei Liu <wl@xen.org>, Xen-devel <xen-devel@lists.xenproject.org>
+References: <20211216095421.12871-1-andrew.cooper3@citrix.com>
+ <20211216095421.12871-6-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <20211216095421.12871-6-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM5PR0301CA0016.eurprd03.prod.outlook.com
+ (2603:10a6:206:14::29) To VI1PR04MB5600.eurprd04.prod.outlook.com
+ (2603:10a6:803:e7::16)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 855c3618-57aa-40c4-58e3-08d9c47a6bc1
+X-MS-TrafficTypeDiagnostic: VI1PR0401MB2445:EE_
+X-Microsoft-Antispam-PRVS:
+	<VI1PR0401MB24454A5505D382B5C4FD4A26B37C9@VI1PR0401MB2445.eurprd04.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4303;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	98+W0hr4Jc6GsWg093T6JT2NHVU9w1OFsoGfVenfcsa+UIX+4FFlXKSsKJTJxFhMyP2P53hIR8xbIOxkgRFRY4wdnA5NQ2HDZ1DI4q/VptJbyJy7IOWZh1DrjruoOkMMSCeSrBH2JmKN+Aiw6jLGgRfJP1rb7TmIxuowA37YJG502HOkXY9x9lTIjyrTd8q6a8dbyj7Q7PrAN+qKzIAgFlFmKKw8/hOPmMcWy4qIN+yi5fC+WZbGxQGtSONzPpg+UiC3MmL/wkhx+YFv5S8NDnSFC8I36We4v4msA8b1Wa5qXYPQ2oOvyoSOCcnh4MecsX+Af3dsCEUkQKgUyKlUWXyV+M7mHWl/Rdmuv+betyt2uBrnitYbtiIr2zq+v/uqAo7sF4ycp/5oa6+sVtTJTQIg1z4POX0KcJhbnu1bAsFay+rBbSikmdUlNWQ6o7zhvhnJied51/MrAUkV/26qpBzAL67sU2gw1SAYeepzML2/Wxqw4nSxGRFOAwtFt6Qc8YxIojmD7xyBh61V4EvM10/oOOAXme/pwr7jP4OySiIietWC10MrtlZjWviTTm41VqY3cwDJWhOkaaa23kLIjPwo8eDMb78p+GfI1RzgKYJD/qeDhZq4b/zs8IdnaYQkcXbkGJDt5vjr5d6uQ8wAIiOAwls/ou5XaeLmBoEAAfZDtrq7seEfl6SUyzQCSGu0XSfQXFLqNzU/Q+qu9hy95a28S8JkA1aNHh0/f9MY8YaAES7onbKzm2byZxn87klw
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(366004)(2616005)(54906003)(2906002)(558084003)(4326008)(186003)(53546011)(8676002)(8936002)(6506007)(316002)(26005)(31696002)(31686004)(5660300002)(86362001)(36756003)(38100700002)(508600001)(6512007)(66476007)(6486002)(66946007)(66556008)(6916009)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?NGFDVVZzZHJ3cThUdFVQVU5BYnZqcGJZUWxzRzh0TExrOHV5N3dUTUFWcUht?=
+ =?utf-8?B?TjlXNEN5MUxYVXlwcWlGSFNjOHRDMVhCYVhKQmg3VmVKNS9xNkcydzFJZmow?=
+ =?utf-8?B?S2NseHlmK204VStjZ0MxN2dUQXp2WFluVVBRWVpKVjdGTndyUFdxUlRBbWlE?=
+ =?utf-8?B?SlFoNSs0cStGMGRTTmUzelVYY0dnbDdoV1JKazFyZ2lhWU02QTRNSU5qcTVO?=
+ =?utf-8?B?UVlKK1BIdnhZTVVGQjVvcWZpTVN6ZEp5Q01KZEpuYUhNSWtqM2podVJSN0Jh?=
+ =?utf-8?B?MkVEWVRJS1l3RHVOQW1pbEtIb1hZMVNEYXNEOHpwZFB4NHJNZGdxVFpkZDlS?=
+ =?utf-8?B?NWZBcWVNR2t2cWdkam5mVEd2YlBJc2dNUmFGdWxET2EyRzVLL2U3WTZBT1Fm?=
+ =?utf-8?B?YzFXWGNsNW5EZG1QeGJyd01YVURmQ3VCdktMeFNkU3hLWGxCWmpqNFQ1bkdS?=
+ =?utf-8?B?dWMrQzRScm5pd1Q2eW5YSnFBWTBMZm9KbmNPejc0OGpwSUMxK05zb2FvQnNH?=
+ =?utf-8?B?YkRZTmplNStYY0c0Zy9mS012YnBPakZVdGZaUlJXR2x5bFJsS2hNcEpCMUMr?=
+ =?utf-8?B?OVdtQXAxc1AzcUFDa3JpT3JvaldTQnY3eVZxZGpFQTlvQVhEV3daaWZhcjVt?=
+ =?utf-8?B?RXEvQnQrc0pOejAxSllSVHh0SHdQWUU0dWg5WWtTemp6Nmh4QW85WU8vYlZJ?=
+ =?utf-8?B?YU1wOURJS1RCd1BOcGJQTHovRHVmN2lYMTZKdHhpbWI3WnpweHFuRFZPN2Rl?=
+ =?utf-8?B?R0doalA4LzJGUGswTjI4Qm03ZlRwUnZ5M2ZUNjB0OTNtbDFSR1luZ1VZNTBa?=
+ =?utf-8?B?VWljSURIUmlBMzQrNTdGQk5XYlVuMDR2dUp1cWtZbDg1Q0c3ZHgvekVMVDUw?=
+ =?utf-8?B?b1F0eXFFZGdIWVZJdGduU29nVFBob1orRnNTR2RlSGVNeHE3cjg0TUNaaXpn?=
+ =?utf-8?B?TVZvWFFBL1BwSWpiNVhzaUhCSHlidEZSUXNjK0lWZm9wSi9LMnIrVlNCd3RP?=
+ =?utf-8?B?Qm5ZS0I0SnNpV2dPaVB4S2V6TytvcGdWcGVYYkNvM21Lbk9sM3pMOTBjbm5I?=
+ =?utf-8?B?Z21iUWlpcUVpZzZWUWVTSTlTakNoakFXcFhDNFl4Y1VTOWc1RUpSeWtQMzR5?=
+ =?utf-8?B?SXQzR3YrU3JZV1J1ZGczdm1NdlBUS29pRzhQSThPV044elJ5MjAzRmYrdzBZ?=
+ =?utf-8?B?VHB2bktHcG9CdTBtR3dHV2h3NWVScDdrb1Zld2R4Z2dqRktadE9BUUhBSDRL?=
+ =?utf-8?B?V2p4UEdjemZTV0tXVHRuVFg5c2JuM3ZwL0JGOVNtMVNHenFrT3h3bTdnQzgy?=
+ =?utf-8?B?emJ4YTdyZE5ONVpING1rMFI2SlhvKzZ2dXkvMzlDRzMvTEFIck45Y09MTUkw?=
+ =?utf-8?B?c1VBelllbTdJWkZmNEZWN3FWT1I1eTR2dkZCdjN6QXZ4djdDTGtFTDFnWVA3?=
+ =?utf-8?B?Mzk2WmtmN2RLeHBQKzhzdXljVDdCaVVxWndlREMrT2tmL3gwYXdFRjErNXBl?=
+ =?utf-8?B?NVJhcURtTWFNaHY2Zzk5MWdlMnJPbjJnVU1OSEhnMUVpVEZiQjJLY01adTE0?=
+ =?utf-8?B?SGlxcE5kdVhzUUN3azgzZ21EREZJc1pGb05lS3ByQkxVZW9HVml3NE1Sdmgw?=
+ =?utf-8?B?KzMwdVZQRkJGZjkyOThmOXlPS2RUSkNWZVcrQ3R6VHJaa1BBaWZXbi9saG93?=
+ =?utf-8?B?RXFrSm5za1A2QTN1OVZWOHpxV2hiS3FHT0JHakM5OE1tc0l1WU9LNmJ5aUc0?=
+ =?utf-8?B?cVlmK1MzcjV4VVdpb1I1YlRJUTVKb1JqT1BCZm1KcUVZZEtoMFI2WWZ5Z1pT?=
+ =?utf-8?B?STRuanpzRG1RQWNpaDhnMFZqajJGMlhiWkhaSnZMMUJOVU1KNjZnaUJBMzJv?=
+ =?utf-8?B?c3R2OVZtWU02TUtrMHBWaW1XVzMxVjNMbGtDbjZyeUpkTFltRVlOQnM4YlZS?=
+ =?utf-8?B?T00yZ0dWVExyeVRCeHRyYU5KVFR6ZnFxRm9JeE5qN1NZWkFhaDZOSVlFOGhn?=
+ =?utf-8?B?QWVUcm9lRGFha3FhYWkrVHlUa3RSZXo3NVZhRGV0RnRFQStSU2g0cWtKRzNL?=
+ =?utf-8?B?RkM0cnRSYXhkMGpyQjBJSlJzV3oyNm1sdUd5c29QQ2xUdGpMeGhzcThuSmpW?=
+ =?utf-8?B?Qkl0QnNMRkRvVVFBMU1Ub2k2amUyZmVXalhDZ29KNzBXTEVYeVVSTGJoektq?=
+ =?utf-8?Q?OVkfEnYglmhe6Hdwz3breBQ=3D?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 855c3618-57aa-40c4-58e3-08d9c47a6bc1
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Dec 2021 12:07:12.4252
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qPooapoWt19IEJlphpyWzHj37Ka3otPNiAjVVl8q0o/q7oTe8HABCU9ZvX5AhgchC+qsN3wUd94hRNVvJsIkfg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0401MB2445
 
-From: Christopher Clark <christopher.w.clark@gmail.com>
+On 16.12.2021 10:54, Andrew Cooper wrote:
+> PKS is incredibly similar to the existing PKU behaviour, operating on
+> pagewalks for any supervisor mapping.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-This is a split out of the hyperlaunch dom0 series.
-
-There were several instances of open-coded domid range checking. This commit
-replaces those with the is_system_domain or is_system_domid inline function.
-
-Signed-off-by: Christopher Clark <christopher.w.clark@gmail.com>
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Acked-by: Dario Faggioli <dfaggioli@suse.com>
----
- xen/arch/x86/cpu/mcheck/mce.c | 2 +-
- xen/arch/x86/cpu/vpmu.c       | 2 +-
- xen/common/domain.c           | 2 +-
- xen/common/domctl.c           | 4 ++--
- xen/common/sched/core.c       | 4 ++--
- xen/include/xen/sched.h       | 7 ++++++-
- 6 files changed, 13 insertions(+), 8 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index 7f433343bc..5c1df39075 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -1518,7 +1518,7 @@ long do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
-             d = rcu_lock_domain_by_any_id(mc_msrinject->mcinj_domid);
-             if ( d == NULL )
-             {
--                if ( mc_msrinject->mcinj_domid >= DOMID_FIRST_RESERVED )
-+                if ( is_system_domid(mc_msrinject->mcinj_domid) )
-                     return x86_mcerr("do_mca inject: incompatible flag "
-                                      "MC_MSRINJ_F_GPADDR with domain %d",
-                                      -EINVAL, domid);
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index 8ec4547bed..c6bfa5a00e 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -188,7 +188,7 @@ void vpmu_do_interrupt(struct cpu_user_regs *regs)
-      * in XENPMU_MODE_ALL, for everyone.
-      */
-     if ( (vpmu_mode & XENPMU_MODE_ALL) ||
--         (sampled->domain->domain_id >= DOMID_FIRST_RESERVED) )
-+         is_system_domain(sampled->domain) )
-     {
-         sampling = choose_hwdom_vcpu();
-         if ( !sampling )
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 093bb4403f..347cc073aa 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -583,7 +583,7 @@ struct domain *domain_create(domid_t domid,
-     /* Sort out our idea of is_hardware_domain(). */
-     if ( domid == 0 || domid == hardware_domid )
-     {
--        if ( hardware_domid < 0 || hardware_domid >= DOMID_FIRST_RESERVED )
-+        if ( hardware_domid < 0 || is_system_domid(hardware_domid) )
-             panic("The value of hardware_dom must be a valid domain ID\n");
- 
-         old_hwdom = hardware_domain;
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index 879a2adcbe..a3ad1f62b6 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -52,7 +52,7 @@ static inline int is_free_domid(domid_t dom)
- {
-     struct domain *d;
- 
--    if ( dom >= DOMID_FIRST_RESERVED )
-+    if ( is_system_domid(dom) )
-         return 0;
- 
-     if ( (d = rcu_lock_domain_by_id(dom)) == NULL )
-@@ -536,7 +536,7 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-         if ( !d )
-         {
-             ret = -EINVAL;
--            if ( op->domain >= DOMID_FIRST_RESERVED )
-+            if ( is_system_domid(op->domain) )
-                 break;
- 
-             rcu_read_lock(&domlist_read_lock);
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 8f4b1ca10d..6ea8bcf62f 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -821,7 +821,7 @@ int sched_init_domain(struct domain *d, unsigned int poolid)
-     int ret;
- 
-     ASSERT(d->cpupool == NULL);
--    ASSERT(d->domain_id < DOMID_FIRST_RESERVED);
-+    ASSERT(!is_system_domain(d));
- 
-     if ( (ret = cpupool_add_domain(d, poolid)) )
-         return ret;
-@@ -845,7 +845,7 @@ int sched_init_domain(struct domain *d, unsigned int poolid)
- 
- void sched_destroy_domain(struct domain *d)
- {
--    ASSERT(d->domain_id < DOMID_FIRST_RESERVED);
-+    ASSERT(!is_system_domain(d));
- 
-     if ( d->cpupool )
-     {
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 28146ee404..cd575d01cf 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -613,9 +613,14 @@ extern struct vcpu *idle_vcpu[NR_CPUS];
- #define is_idle_domain(d) ((d)->domain_id == DOMID_IDLE)
- #define is_idle_vcpu(v)   (is_idle_domain((v)->domain))
- 
-+static inline bool is_system_domid(domid_t id)
-+{
-+    return id >= DOMID_FIRST_RESERVED;
-+}
-+
- static inline bool is_system_domain(const struct domain *d)
- {
--    return d->domain_id >= DOMID_FIRST_RESERVED;
-+    return is_system_domid(d->domain_id);
- }
- 
- #define DOMAIN_DESTROYED (1u << 31) /* assumes atomic_t is >= 32 bits */
--- 
-2.20.1
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 
