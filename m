@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46CAAC433EF
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Jan 2022 10:34:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.253143.434218 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10033C433EF
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Jan 2022 10:41:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.253154.434230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n4h9E-0002vI-9V; Tue, 04 Jan 2022 10:34:32 +0000
+	id 1n4hFe-0004L6-0z; Tue, 04 Jan 2022 10:41:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 253143.434218; Tue, 04 Jan 2022 10:34:32 +0000
+Received: by outflank-mailman (output) from mailman id 253154.434230; Tue, 04 Jan 2022 10:41:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n4h9E-0002vB-6c; Tue, 04 Jan 2022 10:34:32 +0000
-Received: by outflank-mailman (input) for mailman id 253143;
- Tue, 04 Jan 2022 10:34:31 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1n4h9D-0002v1-1g; Tue, 04 Jan 2022 10:34:31 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1n4h9C-0000mF-Us; Tue, 04 Jan 2022 10:34:30 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1n4h9C-0005dj-OO; Tue, 04 Jan 2022 10:34:30 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1n4h9C-0004OX-O0; Tue, 04 Jan 2022 10:34:30 +0000
+	id 1n4hFd-0004Kz-TI; Tue, 04 Jan 2022 10:41:09 +0000
+Received: by outflank-mailman (input) for mailman id 253154;
+ Tue, 04 Jan 2022 10:41:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=FUAt=RU=chiark.greenend.org.uk=ijackson@srs-se1.protection.inumbo.net>)
+ id 1n4hFc-0004Kt-N2
+ for xen-devel@lists.xenproject.org; Tue, 04 Jan 2022 10:41:08 +0000
+Received: from chiark.greenend.org.uk (v6.chiark.greenend.org.uk
+ [2001:ba8:1e3::]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id d03827cd-6d4a-11ec-81c0-a30af7de8005;
+ Tue, 04 Jan 2022 11:41:06 +0100 (CET)
+Received: by chiark.greenend.org.uk (Debian Exim 4.89 #1) with local
+ (return-path ijackson@chiark.greenend.org.uk)
+ id 1n4hFX-0003g0-AT; Tue, 04 Jan 2022 10:41:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,75 +41,41 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=lxPSM4InMaKAIjkF5qP4tqEk2xf6kUtdslh0FMhrO/Q=; b=WQqy+cmM8N5IdD2BmjCOkuamiV
-	tNm7Y3hrqIqFdY1ro3x0ZyhZiaIXWt+gqLstngDvZzm34b7TNowZuoKEI+54X5ijt2EAyjrcEvYxk
-	gjSi+0otTSff2mYcWyBhdfZUEtVRk88571zX2er0oZHQTQhfEqu7A/BIy9EJgyMf4IQc=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-167601-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: d03827cd-6d4a-11ec-81c0-a30af7de8005
+From: Ian Jackson <ijackson@chiark.greenend.org.uk>
 MIME-Version: 1.0
-Subject: [ovmf test] 167601: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=079a58276b98dc97ca363e3bc8b35cc7baa56d76
-X-Osstest-Versions-That:
-    ovmf=13d9e8ec98ee3f9f14a45471b38a22b9fd66d1ce
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 04 Jan 2022 10:34:30 +0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Message-ID: <25044.9279.250794.5712@chiark.greenend.org.uk>
+Date: Tue, 4 Jan 2022 10:41:03 +0000
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>,
+    Andrew Cooper <andrew.cooper3@citrix.com>,
+    George Dunlap <george.dunlap@citrix.com>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    Wei Liu <wl@xen.org>,
+    xen-devel@lists.xenproject.org,
+    Ian Jackson <iwj@xenproject.org>
+Subject: Re: [PATCH] SUPPORT.md, MAINTAINERS: De-support qemu-xen-traditional
+In-Reply-To: <e9e984f3-fc98-9179-1958-0330c828fbda@suse.com>
+References: <20211209142640.24437-1-iwj@xenproject.org>
+	<4ed5073e-8083-ac72-6477-676eaf2e2eb8@xen.org>
+	<e9e984f3-fc98-9179-1958-0330c828fbda@suse.com>
+X-Mailer: VM 8.2.0b under 24.4.1 (i586-pc-linux-gnu)
 
-flight 167601 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/167601/
+Jan Beulich writes ("Re: [PATCH] SUPPORT.md, MAINTAINERS: De-support qemu-xen-traditional"):
+> FWIW I agree that this needs updating at the same time or in a prereq
+> change. I guess it'll need to be someone other than Ian now to pick
+> up and progress this patch, though.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 079a58276b98dc97ca363e3bc8b35cc7baa56d76
-baseline version:
- ovmf                 13d9e8ec98ee3f9f14a45471b38a22b9fd66d1ce
+Yes, I'm afraid so.
 
-Last test of basis   167598  2022-01-04 02:41:30 Z    0 days
-Testing same since   167601  2022-01-04 08:42:53 Z    0 days    1 attempts
+Regards,
+Ian.
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Dov Murik <dovmurik@linux.ibm.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Jiewen Yao <Jiewen.Yao@intel.com>
+-- 
+Ian Jackson <ijackson@chiark.greenend.org.uk>   These opinions are my own.  
 
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   13d9e8ec98..079a58276b  079a58276b98dc97ca363e3bc8b35cc7baa56d76 -> xen-tested-master
+Pronouns: they/he.  If I emailed you from @fyvzl.net or @evade.org.uk,
+that is a private address which bypasses my fierce spamfilter.
 
