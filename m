@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12FD7C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21CBBC433FE
 	for <xen-devel@archiver.kernel.org>; Sat,  8 Jan 2022 00:49:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.254712.436522 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.254714.436535 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n5zv7-0007Bp-7u; Sat, 08 Jan 2022 00:49:21 +0000
+	id 1n5zv8-0007SO-AW; Sat, 08 Jan 2022 00:49:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 254712.436522; Sat, 08 Jan 2022 00:49:21 +0000
+Received: by outflank-mailman (output) from mailman id 254714.436535; Sat, 08 Jan 2022 00:49:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n5zv7-0007Ap-1r; Sat, 08 Jan 2022 00:49:21 +0000
-Received: by outflank-mailman (input) for mailman id 254712;
- Sat, 08 Jan 2022 00:49:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1n5zv7-0007Nl-UE; Sat, 08 Jan 2022 00:49:21 +0000
+Received: by outflank-mailman (input) for mailman id 254714;
+ Sat, 08 Jan 2022 00:49:20 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CE0l=RY=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1n5zv5-0006ZD-8T
- for xen-devel@lists.xenproject.org; Sat, 08 Jan 2022 00:49:19 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ce942e4f-701c-11ec-9ce5-af14b9085ebd;
+ id 1n5zv6-000706-1v
+ for xen-devel@lists.xenproject.org; Sat, 08 Jan 2022 00:49:20 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ce8f032a-701c-11ec-81c1-a30af7de8005;
  Sat, 08 Jan 2022 01:49:17 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 952C362051;
+ by ams.source.kernel.org (Postfix) with ESMTPS id 3C23DB827C0;
  Sat,  8 Jan 2022 00:49:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21B41C36AE5;
- Sat,  8 Jan 2022 00:49:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82219C36AEF;
+ Sat,  8 Jan 2022 00:49:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ce942e4f-701c-11ec-9ce5-af14b9085ebd
+X-Inumbo-ID: ce8f032a-701c-11ec-81c1-a30af7de8005
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1641602956;
-	bh=EGPEVLXhWQH12aVdIUkqLBGXZpzA81egp2OEZ8dJ6zc=;
+	s=k20201202; t=1641602955;
+	bh=5gqnkAJOfXnqVGXZ1qlNwhP+taPqzRbwoAe4Pxn2FBM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=HxHAQ4ErTsDgZTJVOsdvzFyply9bIp/SE/doo34v6kN8UKl56zqHxHibiShim1DCc
-	 eBQpyhrRJuJm/gUm9SMcDbT/A3js3eECbvhVfFRyrBwm5OV6VEqH6U7XDuCP5Qo2kT
-	 wBua1BMGnNrlpJPtWqlRm1IzynYf2bC0S7Zkx+VxVvgi3DRzO2iozqOoLgq/hqRceA
-	 zgA4XAQ1R0Vs++rCzsX5KEj34miWSUbjdZGdqLVGvjNSQibghoVj9Sf7Z1/U77Z8Pa
-	 29ZcCso8tfkE1QFCrRxpQpYHHc25J1bsnR+30DiIvnIodDTESBNRkQMlgEXqP55qyE
-	 F3huguX6N8eKA==
+	b=OyHNvkvda/IppfmN5ffOApPiggGKdA6fHkKcxGtbEGfmCurNqL9cCKuEdWr40fJDA
+	 4oC9SKxj8Ik2xh0JVoU3jItm0cwkfAtmPxE94JyN5/hR0INnezaoHoSj44UoDiCxBa
+	 ilacuOy5whBIAbd1PbBP6MByN/c+Bvg92LcxBKpwsYxfDoHmi8TUgrKar2wKndw+Mm
+	 eaI2MT5baBcnxq/rxkOJhS60EZMOs1kK4sHnwdWzOZ6CQw+HXjnXmAYfwYPTQle30n
+	 bU8I4dUnMqpKdqLfhIckxGT4nfCCw6HZTiZK0TomvlNBzq7MgsZjCG1nLLFIU1oZNa
+	 wxR6k7hYry/Vw==
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -64,10 +64,14 @@ Cc: sstabellini@kernel.org,
 	Luca Miccio <lucmiccio@gmail.com>,
 	Stefano Stabellini <stefano.stabellini@xilinx.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH 5/7] xen/arm: configure dom0less domain for enabling xenstore after boot
-Date: Fri,  7 Jan 2022 16:49:10 -0800
-Message-Id: <20220108004912.3820176-5-sstabellini@kernel.org>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH 2/7] xen: introduce _evtchn_alloc_unbound
+Date: Fri,  7 Jan 2022 16:49:07 -0800
+Message-Id: <20220108004912.3820176-2-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <alpine.DEB.2.22.394.2201071614090.2060010@ubuntu-linux-20-04-desktop>
 References: <alpine.DEB.2.22.394.2201071614090.2060010@ubuntu-linux-20-04-desktop>
@@ -76,104 +80,127 @@ Content-Transfer-Encoding: 8bit
 
 From: Luca Miccio <lucmiccio@gmail.com>
 
-If "xen,enhanced" is enabled, then add to dom0less domains:
+The xenstore event channel will be allocated for dom0less domains. It is
+necessary to have access to the evtchn_alloc_unbound function to do
+that.
 
-- the hypervisor node in device tree
-- the xenstore event channel
-
-The xenstore event channel is also used for the first notification to
-let the guest know that xenstore has become available.
+Factor out the part that actually allocates the event channel from
+evtchn_alloc_unbound and introduce this new function as
+_evtchn_alloc_unbound. (xsm_evtchn_unbound wouldn't work for a call
+originated from Xen.)
 
 Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 CC: Julien Grall <julien@xen.org>
 CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 CC: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: George Dunlap <george.dunlap@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/arm/domain_build.c | 34 ++++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
+ xen/common/event_channel.c | 49 +++++++++++++++++++++++++-------------
+ xen/include/xen/event.h    |  3 +++
+ 2 files changed, 36 insertions(+), 16 deletions(-)
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 96a94fa434..fafa921aa8 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -27,6 +27,7 @@
- #include <asm/setup.h>
- #include <asm/cpufeature.h>
- #include <asm/domain_build.h>
-+#include <xen/event.h>
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index da88ad141a..8a19bbf7ae 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -18,6 +18,7 @@
  
+ #include <xen/init.h>
+ #include <xen/lib.h>
++#include <xen/err.h>
+ #include <xen/errno.h>
+ #include <xen/sched.h>
  #include <xen/irq.h>
- #include <xen/grant_table.h>
-@@ -2619,6 +2620,8 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     int ret;
- 
-     kinfo->phandle_gic = GUEST_PHANDLE_GIC;
-+    kinfo->gnttab_start = GUEST_GNTTAB_BASE;
-+    kinfo->gnttab_size = GUEST_GNTTAB_SIZE;
- 
-     addrcells = GUEST_ROOT_ADDRESS_CELLS;
-     sizecells = GUEST_ROOT_SIZE_CELLS;
-@@ -2693,6 +2696,13 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-             goto err;
-     }
- 
-+    if ( kinfo->enhanced )
-+    {
-+        ret = make_hypervisor_node(d, kinfo, addrcells, sizecells);
-+        if ( ret )
-+            goto err;
-+    }
-+
-     ret = fdt_end_node(kinfo->fdt);
-     if ( ret < 0 )
-         goto err;
-@@ -2959,6 +2969,22 @@ static int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
-     return 0;
+@@ -284,11 +285,32 @@ void evtchn_free(struct domain *d, struct evtchn *chn)
+     xsm_evtchn_close_post(chn);
  }
  
-+static int alloc_xenstore_evtchn(struct domain *d)
-+{
-+    struct evtchn *chn;
+-static int evtchn_alloc_unbound(evtchn_alloc_unbound_t *alloc)
++struct evtchn *_evtchn_alloc_unbound(struct domain *d, domid_t remote_dom)
+ {
+     struct evtchn *chn;
++    int port;
 +
-+    chn = _evtchn_alloc_unbound(d, hardware_domain->domain_id);
-+    if ( !chn )
-+    {
-+        printk("Failed allocating event channel for domain\n");
-+        return -ENOMEM;
-+    }
++    if ( (port = get_free_port(d)) < 0 )
++        return ERR_PTR(port);
++    chn = evtchn_from_port(d, port);
 +
-+    d->arch.hvm.params[HVM_PARAM_STORE_EVTCHN] = chn->port;
++    evtchn_write_lock(chn);
 +
-+    return 0;
++    chn->state = ECS_UNBOUND;
++    if ( (chn->u.unbound.remote_domid = remote_dom) == DOMID_SELF )
++        chn->u.unbound.remote_domid = current->domain->domain_id;
++    evtchn_port_init(d, chn);
++
++    evtchn_write_unlock(chn);
++
++    return chn;
 +}
 +
- static int __init construct_domU(struct domain *d,
-                                  const struct dt_device_node *node)
- {
-@@ -3012,7 +3038,14 @@ static int __init construct_domU(struct domain *d,
-         return rc;
++static int evtchn_alloc_unbound(evtchn_alloc_unbound_t *alloc)
++{
++    struct evtchn *chn = NULL;
+     struct domain *d;
+-    int            port, rc;
++    int            rc;
+     domid_t        dom = alloc->dom;
  
-     if ( kinfo.vpl011 )
+     d = rcu_lock_domain_by_any_id(dom);
+@@ -297,27 +319,22 @@ static int evtchn_alloc_unbound(evtchn_alloc_unbound_t *alloc)
+ 
+     spin_lock(&d->event_lock);
+ 
+-    if ( (port = get_free_port(d)) < 0 )
+-        ERROR_EXIT_DOM(port, d);
+-    chn = evtchn_from_port(d, port);
++    chn = _evtchn_alloc_unbound(d, alloc->remote_dom);
++    if ( IS_ERR(chn) )
 +    {
-         rc = domain_vpl011_init(d, NULL);
-+        if ( rc < 0 )
-+            return rc;
++        rc = PTR_ERR(chn);
++        ERROR_EXIT_DOM(rc, d);
 +    }
+ 
+     rc = xsm_evtchn_unbound(XSM_TARGET, d, chn, alloc->remote_dom);
+     if ( rc )
+         goto out;
+ 
+-    evtchn_write_lock(chn);
+-
+-    chn->state = ECS_UNBOUND;
+-    if ( (chn->u.unbound.remote_domid = alloc->remote_dom) == DOMID_SELF )
+-        chn->u.unbound.remote_domid = current->domain->domain_id;
+-    evtchn_port_init(d, chn);
+-
+-    evtchn_write_unlock(chn);
+-
+-    alloc->port = port;
++    alloc->port = chn->port;
+ 
+  out:
+-    check_free_port(d, port);
++    if ( chn != NULL )
++        check_free_port(d, chn->port);
+     spin_unlock(&d->event_lock);
+     rcu_unlock_domain(d);
+ 
+diff --git a/xen/include/xen/event.h b/xen/include/xen/event.h
+index 21c95e14fd..6aedbccbf1 100644
+--- a/xen/include/xen/event.h
++++ b/xen/include/xen/event.h
+@@ -68,6 +68,9 @@ int evtchn_close(struct domain *d1, int port1, bool guest);
+ /* Free an event channel. */
+ void evtchn_free(struct domain *d, struct evtchn *chn);
+ 
++/* Create a new event channel port */
++struct evtchn *_evtchn_alloc_unbound(struct domain *d, domid_t remote_dom);
 +
-+    if ( kinfo.enhanced )
-+        rc = alloc_xenstore_evtchn(d);
+ /* Allocate a specific event channel port. */
+ int evtchn_allocate_port(struct domain *d, unsigned int port);
  
-     return rc;
- }
-@@ -3068,6 +3101,7 @@ void __init create_domUs(void)
-             panic("Error creating domain %s\n", dt_node_name(node));
- 
-         d->is_console = true;
-+        d->arch.is_dom0less = true;
- 
-         if ( construct_domU(d, node) != 0 )
-             panic("Could not set up domain %s\n", dt_node_name(node));
 -- 
 2.25.1
 
