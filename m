@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9174C4167E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 14:58:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255781.438497 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51642C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:03:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.255792.438521 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7Ibd-0004un-Fo; Tue, 11 Jan 2022 14:58:37 +0000
+	id 1n7IgF-0001QI-Nz; Tue, 11 Jan 2022 15:03:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255781.438497; Tue, 11 Jan 2022 14:58:37 +0000
+Received: by outflank-mailman (output) from mailman id 255792.438521; Tue, 11 Jan 2022 15:03:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7Ibc-0004qm-KJ; Tue, 11 Jan 2022 14:58:36 +0000
-Received: by outflank-mailman (input) for mailman id 255781;
- Tue, 11 Jan 2022 14:58:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1n7IgF-0001QB-Iy; Tue, 11 Jan 2022 15:03:23 +0000
+Received: by outflank-mailman (input) for mailman id 255792;
+ Tue, 11 Jan 2022 15:03:22 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zHlr=R3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1n7IbY-0002Oa-DR
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 14:58:32 +0000
+ id 1n7IgE-0001Pl-J8
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 15:03:22 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eaa6c309-72ee-11ec-9ce5-af14b9085ebd;
- Tue, 11 Jan 2022 15:58:22 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9dcbdf25-72ef-11ec-81c1-a30af7de8005;
+ Tue, 11 Jan 2022 16:03:21 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 8B1AB212C5;
- Tue, 11 Jan 2022 14:58:20 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 23F7A212C5;
+ Tue, 11 Jan 2022 15:03:21 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 63AD313DDD;
- Tue, 11 Jan 2022 14:58:20 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 014C913DDD;
+ Tue, 11 Jan 2022 15:03:20 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id mNItFwyb3WH9eQAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 14:58:20 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id kKTMOjic3WFCfQAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 15:03:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,263 +53,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eaa6c309-72ee-11ec-9ce5-af14b9085ebd
+X-Inumbo-ID: 9dcbdf25-72ef-11ec-81c1-a30af7de8005
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1641913100; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1641913401; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=B1qIgvUq07hNrHG3qYVz9ZnwoNPkdqDFYkWrq9AIUhQ=;
-	b=Hm+0JCHE/qFCO0PSAk6d7BkNGhNjVFHbFcBonMcRxLYHDPJf9AuEnTDIGW4d+8Glr7g2hn
-	FH4Z2mIWkoOvxwp8LcedDRrPQeaej4OqKw+A/bVxTpdFbfenwQqcizECq/SLYRMGHXyC19
-	lFAXftWBn3Ac8Cic1GjyT3P3igyPKVk=
+	bh=FkeH3cfFFVMIE3XajBHPWxcpnP57bP6Oa1K/USAaIVA=;
+	b=pkP45NirCD81TT9ZA5BUr/E8TvnTSdufQhqI6Zp+1qu30xx48D2t02qp/78ie6Ota7ed+2
+	WORVu1Q6c4R3spidoqY26eYut7ZAOFrrtuZzQFvmt+G592JCuEbg7ZgnbFPrhSjfUq1ZB3
+	kFVP5Am669GxR+8bFpn0ik4SPHrEeHs=
 From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	wl@xen.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 03/18] mini-os: make offset a common struct file member for all types
-Date: Tue, 11 Jan 2022 15:58:02 +0100
-Message-Id: <20220111145817.22170-4-jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 2/3] tools/libs/gnttab: decouple more from mini-os
+Date: Tue, 11 Jan 2022 16:03:17 +0100
+Message-Id: <20220111150318.22570-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20220111145817.22170-1-jgross@suse.com>
-References: <20220111145817.22170-1-jgross@suse.com>
+In-Reply-To: <20220111150318.22570-1-jgross@suse.com>
+References: <20220111150318.22570-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently 4 file types have an offset member in their private struct
-file part. Make offset a common struct member shared by all file types.
+libgnttab is using implementation details of Mini-OS. Change that by
+letting libgnttab use the new alloc_file_type() and get_file_from_fd()
+functions and the generic dev pointer of struct file from Mini-OS.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
- blkfront.c    |  5 ++---
- include/lib.h |  5 +----
- lib/sys.c     | 14 +++++---------
- tpm_tis.c     | 11 +++++------
- tpmfront.c    | 11 +++++------
- 5 files changed, 18 insertions(+), 28 deletions(-)
+V2:
+- add alloc_file_type() support
+---
+ tools/libs/gnttab/minios.c | 68 +++++++++++++++++++++++++++-----------
+ 1 file changed, 48 insertions(+), 20 deletions(-)
 
-diff --git a/blkfront.c b/blkfront.c
-index 7c8eb74..8137106 100644
---- a/blkfront.c
-+++ b/blkfront.c
-@@ -563,14 +563,13 @@ int blkfront_open(struct blkfront_dev *dev)
-     dev->fd = alloc_fd(FTYPE_BLK);
-     printk("blk_open(%s) -> %d\n", dev->nodename, dev->fd);
-     files[dev->fd].blk.dev = dev;
--    files[dev->fd].blk.offset = 0;
-     return dev->fd;
+diff --git a/tools/libs/gnttab/minios.c b/tools/libs/gnttab/minios.c
+index f78caadd30..c19f339c8c 100644
+--- a/tools/libs/gnttab/minios.c
++++ b/tools/libs/gnttab/minios.c
+@@ -28,18 +28,53 @@
+ #include <sys/mman.h>
+ 
+ #include <errno.h>
++#include <malloc.h>
+ #include <unistd.h>
+ 
+ #include "private.h"
+ 
+-void minios_gnttab_close_fd(int fd);
++int minios_gnttab_close_fd(int fd);
++
++int minios_gnttab_close_fd(int fd)
++{
++    struct file *file = get_file_from_fd(fd);
++
++    gntmap_fini(file->dev);
++    free(file->dev);
++
++    return 0;
++}
++
++static struct file_ops gnttab_ops = {
++    .name = "gnttab",
++    .close = minios_gnttab_close_fd,
++};
+ 
+ int osdep_gnttab_open(xengnttab_handle *xgt)
+ {
+-    int fd = alloc_fd(FTYPE_GNTMAP);
+-    if ( fd == -1 )
++    int fd;
++    struct file *file;
++    struct gntmap *gntmap;
++    static unsigned int ftype_gnttab;
++
++    if ( !ftype_gnttab )
++        ftype_gnttab = alloc_file_type(&gnttab_ops);
++
++    gntmap = malloc(sizeof(*gntmap));
++    if ( !gntmap )
++        return -1;
++
++    fd = alloc_fd(ftype_gnttab);
++    file = get_file_from_fd(fd);
++
++    if ( !file )
++    {
++        free(gntmap);
+         return -1;
+-    gntmap_init(&files[fd].gntmap);
++    }
++
++    file->dev = gntmap;
++    gntmap_init(gntmap);
+     xgt->fd = fd;
+     return 0;
+ }
+@@ -52,28 +87,22 @@ int osdep_gnttab_close(xengnttab_handle *xgt)
+     return close(xgt->fd);
  }
  
- int blkfront_posix_rwop(int fd, uint8_t* buf, size_t count, int write)
+-void minios_gnttab_close_fd(int fd)
+-{
+-    gntmap_fini(&files[fd].gntmap);
+-    files[fd].type = FTYPE_NONE;
+-}
+-
+ void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
+                              uint32_t count, int flags, int prot,
+                              uint32_t *domids, uint32_t *refs,
+                              uint32_t notify_offset,
+                              evtchn_port_t notify_port)
  {
-    struct blkfront_dev* dev = files[fd].blk.dev;
--   off_t offset = files[fd].blk.offset;
-+   off_t offset = files[fd].offset;
-    struct blkfront_aiocb aiocb;
-    unsigned long long disksize = dev->info.sectors * dev->info.sector_size;
-    unsigned int blocksize = dev->info.sector_size;
-@@ -712,7 +711,7 @@ int blkfront_posix_rwop(int fd, uint8_t* buf, size_t count, int write)
-    }
- 
-    free(copybuf);
--   files[fd].blk.offset += rc;
-+   files[fd].offset += rc;
-    return rc;
- 
- }
-diff --git a/include/lib.h b/include/lib.h
-index df2de9e..4d9b14b 100644
---- a/include/lib.h
-+++ b/include/lib.h
-@@ -185,6 +185,7 @@ struct evtchn_port_info {
- struct file {
-     enum fd_type type;
-     bool read;	/* maybe available for read */
-+    off_t offset;
-     union {
- 	struct {
-             /* lwIP fd */
-@@ -193,7 +194,6 @@ struct file {
- 	struct {
-             /* FS import fd */
- 	    int fd;
--	    off_t offset;
- 	} file;
- 	struct {
- 	    struct evtchn_port_list ports;
-@@ -204,7 +204,6 @@ struct file {
- 	} tap;
- 	struct {
- 	    struct blkfront_dev *dev;
--            off_t offset;
- 	} blk;
- 	struct {
- 	    struct kbdfront_dev *dev;
-@@ -219,14 +218,12 @@ struct file {
- 	struct {
- 	   struct tpmfront_dev *dev;
- 	   int respgot;
--	   off_t offset;
- 	} tpmfront;
- #endif
- #ifdef CONFIG_TPM_TIS
- 	struct {
- 	   struct tpm_chip *dev;
- 	   int respgot;
--	   off_t offset;
- 	} tpm_tis;
- #endif
- #ifdef CONFIG_XENBUS
-diff --git a/lib/sys.c b/lib/sys.c
-index e8d5eb2..e1cea70 100644
---- a/lib/sys.c
-+++ b/lib/sys.c
-@@ -107,6 +107,7 @@ int alloc_fd(enum fd_type type)
-     for (i=0; i<NOFILE; i++) {
- 	if (files[i].type == FTYPE_NONE) {
- 	    files[i].type = type;
-+            files[i].offset = 0;
- 	    pthread_mutex_unlock(&fd_lock);
- 	    return i;
- 	}
-@@ -363,25 +364,20 @@ int write(int fd, const void *buf, size_t nbytes)
- 
- off_t lseek(int fd, off_t offset, int whence)
- {
--    off_t* target = NULL;
-     switch(files[fd].type) {
- #ifdef CONFIG_BLKFRONT
-        case FTYPE_BLK:
--          target = &files[fd].blk.offset;
-           break;
- #endif
- #ifdef CONFIG_TPMFRONT
-        case FTYPE_TPMFRONT:
--          target = &files[fd].tpmfront.offset;
-           break;
- #endif
- #ifdef CONFIG_TPM_TIS
-        case FTYPE_TPM_TIS:
--          target = &files[fd].tpm_tis.offset;
-           break;
- #endif
-        case FTYPE_FILE:
--          target = &files[fd].file.offset;
-           break;
-        default:
-           /* Not implemented for this filetype */
-@@ -391,10 +387,10 @@ off_t lseek(int fd, off_t offset, int whence)
- 
-     switch (whence) {
-        case SEEK_SET:
--          *target = offset;
-+          files[fd].offset = offset;
-           break;
-        case SEEK_CUR:
--          *target += offset;
-+          files[fd].offset += offset;
-           break;
-        case SEEK_END:
-           {
-@@ -403,14 +399,14 @@ off_t lseek(int fd, off_t offset, int whence)
-              ret = fstat(fd, &st);
-              if (ret)
-                 return -1;
--             *target = st.st_size + offset;
-+             files[fd].offset = st.st_size + offset;
-              break;
-           }
-        default:
-           errno = EINVAL;
-           return -1;
+-    int fd = xgt->fd;
++    struct file *file = get_file_from_fd(xgt->fd);
+     int stride = 1;
++
+     if (flags & XENGNTTAB_GRANT_MAP_SINGLE_DOMAIN)
+         stride = 0;
+     if (notify_offset != -1 || notify_port != -1) {
+         errno = ENOSYS;
+         return NULL;
      }
--    return *target;
-+    return files[fd].offset;
+-    return gntmap_map_grant_refs(&files[fd].gntmap,
+-                                 count, domids, stride,
++    return gntmap_map_grant_refs(file->dev, count, domids, stride,
+                                  refs, prot & PROT_WRITE);
  }
  
- int fsync(int fd) {
-diff --git a/tpm_tis.c b/tpm_tis.c
-index 4a51027..8a632b1 100644
---- a/tpm_tis.c
-+++ b/tpm_tis.c
-@@ -847,7 +847,7 @@ int tpm_tis_send(struct tpm_chip* tpm, uint8_t* buf, size_t len) {
-    if(tpm->fd >= 0) {
-       files[tpm->fd].read = false;
-       files[tpm->fd].tpm_tis.respgot = 0;
--      files[tpm->fd].tpm_tis.offset = 0;
-+      files[tpm->fd].offset = 0;
-    }
- #endif
-    return len;
-@@ -1290,7 +1290,6 @@ int tpm_tis_open(struct tpm_chip* tpm)
-    tpm->fd = alloc_fd(FTYPE_TPM_TIS);
-    printk("tpm_tis_open() -> %d\n", tpm->fd);
-    files[tpm->fd].tpm_tis.dev = tpm;
--   files[tpm->fd].tpm_tis.offset = 0;
-    files[tpm->fd].tpm_tis.respgot = 0;
-    return tpm->fd;
- }
-@@ -1340,13 +1339,13 @@ int tpm_tis_posix_read(int fd, uint8_t* buf, size_t count)
+@@ -81,11 +110,10 @@ int osdep_gnttab_unmap(xengnttab_handle *xgt,
+                        void *start_address,
+                        uint32_t count)
+ {
+-    int fd = xgt->fd;
++    struct file *file = get_file_from_fd(xgt->fd);
+     int ret;
+-    ret = gntmap_munmap(&files[fd].gntmap,
+-                        (unsigned long) start_address,
+-                        count);
++
++    ret = gntmap_munmap(file->dev, (unsigned long) start_address, count);
+     if (ret < 0) {
+         errno = -ret;
+         return -1;
+@@ -95,10 +123,10 @@ int osdep_gnttab_unmap(xengnttab_handle *xgt,
  
- 
-    /* Handle EOF case */
--   if(files[fd].tpm_tis.offset >= tpm->data_len) {
-+   if(files[fd].offset >= tpm->data_len) {
-       rc = 0;
-    } else {
--      rc = min(tpm->data_len - files[fd].tpm_tis.offset, count);
--      memcpy(buf, tpm->data_buffer + files[fd].tpm_tis.offset, rc);
-+      rc = min(tpm->data_len - files[fd].offset, count);
-+      memcpy(buf, tpm->data_buffer + files[fd].offset, rc);
-    }
--   files[fd].tpm_tis.offset += rc;
-+   files[fd].offset += rc;
-    /* Reset the data pending flag */
-    return rc;
- }
-diff --git a/tpmfront.c b/tpmfront.c
-index d825b49..8b2a910 100644
---- a/tpmfront.c
-+++ b/tpmfront.c
-@@ -440,7 +440,7 @@ int tpmfront_send(struct tpmfront_dev* dev, const uint8_t* msg, size_t length)
-    if(dev->fd >= 0) {
-       files[dev->fd].read = false;
-       files[dev->fd].tpmfront.respgot = 0;
--      files[dev->fd].tpmfront.offset = 0;
-+      files[dev->fd].offset = 0;
-    }
- #endif
-    wmb();
-@@ -539,7 +539,6 @@ int tpmfront_open(struct tpmfront_dev* dev)
-    dev->fd = alloc_fd(FTYPE_TPMFRONT);
-    printk("tpmfront_open(%s) -> %d\n", dev->nodename, dev->fd);
-    files[dev->fd].tpmfront.dev = dev;
--   files[dev->fd].tpmfront.offset = 0;
-    files[dev->fd].tpmfront.respgot = 0;
-    return dev->fd;
- }
-@@ -589,14 +588,14 @@ int tpmfront_posix_read(int fd, uint8_t* buf, size_t count)
-    }
- 
-    /* handle EOF case */
--   if(files[dev->fd].tpmfront.offset >= dev->resplen) {
-+   if(files[dev->fd].offset >= dev->resplen) {
-       return 0;
-    }
- 
-    /* Compute the number of bytes and do the copy operation */
--   if((rc = min(count, dev->resplen - files[dev->fd].tpmfront.offset)) != 0) {
--      memcpy(buf, dev->respbuf + files[dev->fd].tpmfront.offset, rc);
--      files[dev->fd].tpmfront.offset += rc;
-+   if((rc = min(count, dev->resplen - files[dev->fd].offset)) != 0) {
-+      memcpy(buf, dev->respbuf + files[dev->fd].offset, rc);
-+      files[dev->fd].offset += rc;
-    }
- 
-    return rc;
+ int osdep_gnttab_set_max_grants(xengnttab_handle *xgt, uint32_t count)
+ {
+-    int fd = xgt->fd;
++    struct file *file = get_file_from_fd(xgt->fd);
+     int ret;
+-    ret = gntmap_set_max_grants(&files[fd].gntmap,
+-                                count);
++
++    ret = gntmap_set_max_grants(file->dev, count);
+     if (ret < 0) {
+         errno = -ret;
+         return -1;
 -- 
 2.26.2
 
