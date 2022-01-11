@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C03C7C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:09:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255845.438674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE036C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:10:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.255851.438689 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7ImQ-0007qc-1W; Tue, 11 Jan 2022 15:09:46 +0000
+	id 1n7Imi-0000sP-Ap; Tue, 11 Jan 2022 15:10:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255845.438674; Tue, 11 Jan 2022 15:09:46 +0000
+Received: by outflank-mailman (output) from mailman id 255851.438689; Tue, 11 Jan 2022 15:10:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7ImP-0007pl-R3; Tue, 11 Jan 2022 15:09:45 +0000
-Received: by outflank-mailman (input) for mailman id 255845;
- Tue, 11 Jan 2022 15:09:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1n7Imi-0000rj-6q; Tue, 11 Jan 2022 15:10:04 +0000
+Received: by outflank-mailman (input) for mailman id 255851;
+ Tue, 11 Jan 2022 15:10:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zHlr=R3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1n7Ibc-0002Oa-Dd
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 14:58:36 +0000
+ id 1n7Ibb-0002OZ-EE
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 14:58:35 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ec17fb13-72ee-11ec-9ce5-af14b9085ebd;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ec1fdd83-72ee-11ec-81c1-a30af7de8005;
  Tue, 11 Jan 2022 15:58:23 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 8B8721F3BF;
- Tue, 11 Jan 2022 14:58:21 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 140D51F3B1;
+ Tue, 11 Jan 2022 14:58:23 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 60D931403F;
- Tue, 11 Jan 2022 14:58:21 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E0D4013DDD;
+ Tue, 11 Jan 2022 14:58:22 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id cCpeFg2b3WH9eQAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 14:58:21 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id sJu6NQ6b3WH9eQAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 14:58:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,91 +53,175 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec17fb13-72ee-11ec-9ce5-af14b9085ebd
+X-Inumbo-ID: ec1fdd83-72ee-11ec-81c1-a30af7de8005
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1641913101; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1641913103; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=TCkN47zI3SYm+mHMLDmij+4Y00VWhhcxxyZlFlzzdgc=;
-	b=OUTHaG7Za4OLcRVER+k9rsHzA3tJlldnWMM3DF4J9ecUKfFu3136R9mIRg4FghLkU13SvK
-	uzc8EpFlxNG/8ZCXTvffr6d1eGq/uWfwpHHKPTcQLAuUO/910sYhoQSv4j9XwZ5PKLNP7i
-	LfwrwgrT9OKljA6xK+yV5nNXDk3W3WA=
+	bh=knuLUyCcfoEXY1jmZHvU06lOttBFfXuiA3Ntm0yi0WI=;
+	b=EFpQEMzDRCsLhCQBXwK2k2H3BhcEPZ6mVmlXCvtDA/t5hqCYWRSifDDghM0bRqeB/Qviyh
+	226/HA9B/EhvS77A5nxG4pPc5UV+IDGh3+e2NK89RF4Bd1b3r8ng47I4kh+vQxhzdzkNbt
+	nPZY+aEIcM6SVKcxKbIOD8iDXcpP6Ks=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 08/18] mini-os: eliminate fbfront union member in struct file
-Date: Tue, 11 Jan 2022 15:58:07 +0100
-Message-Id: <20220111145817.22170-9-jgross@suse.com>
+Subject: [PATCH v2 16/18] mini-os: reset file type in close() in one place only
+Date: Tue, 11 Jan 2022 15:58:15 +0100
+Message-Id: <20220111145817.22170-17-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20220111145817.22170-1-jgross@suse.com>
 References: <20220111145817.22170-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Replace the fbfront specific union member in struct file with the
-common dev pointer.
+Today the file type in struct file is set to FTYPE_NONE for each
+file type individually. Do that at the end of close() handling for
+all types.
+
+While at it wipe the complete struct file, too, in order to avoid
+old data creeping into a new allocated struct file.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
- fbfront.c     | 2 +-
- include/lib.h | 3 ---
- lib/sys.c     | 4 ++--
- 3 files changed, 3 insertions(+), 6 deletions(-)
+V2:
+- new patch
+---
+ lib/sys.c | 53 ++++++++++++++++++++++++-----------------------------
+ lib/xs.c  |  1 -
+ 2 files changed, 24 insertions(+), 30 deletions(-)
 
-diff --git a/fbfront.c b/fbfront.c
-index 6725da1..c8410af 100644
---- a/fbfront.c
-+++ b/fbfront.c
-@@ -703,7 +703,7 @@ int fbfront_open(struct fbfront_dev *dev)
- {
-     dev->fd = alloc_fd(FTYPE_FB);
-     printk("fb_open(%s) -> %d\n", dev->nodename, dev->fd);
--    files[dev->fd].fb.dev = dev;
-+    files[dev->fd].dev = dev;
-     return dev->fd;
- }
- #endif
-diff --git a/include/lib.h b/include/lib.h
-index 0cedae6..2a9a01c 100644
---- a/include/lib.h
-+++ b/include/lib.h
-@@ -199,9 +199,6 @@ struct file {
- 	struct {
- 	    struct kbdfront_dev *dev;
- 	} kbd;
--	struct {
--	    struct fbfront_dev *dev;
--	} fb;
- #ifdef CONFIG_TPMFRONT
- 	struct {
- 	   struct tpmfront_dev *dev;
 diff --git a/lib/sys.c b/lib/sys.c
-index 62c2020..2d48657 100644
+index 0e6fe5d..323a7cd 100644
 --- a/lib/sys.c
 +++ b/lib/sys.c
-@@ -287,7 +287,7 @@ int read(int fd, void *buf, size_t nbytes)
-         case FTYPE_FB: {
-             int ret, n;
-             n = nbytes / sizeof(union xenfb_in_event);
--            ret = fbfront_receive(files[fd].fb.dev, buf, n);
-+            ret = fbfront_receive(files[fd].dev, buf, n);
- 	    if (ret <= 0) {
- 		errno = EAGAIN;
- 		return -1;
-@@ -480,7 +480,7 @@ int close(int fd)
+@@ -424,87 +424,82 @@ int fsync(int fd) {
+ 
+ int close(int fd)
+ {
++    int res = 0;
++
+     printk("close(%d)\n", fd);
+     switch (files[fd].type) {
+         default:
+-	    files[fd].type = FTYPE_NONE;
+-	    return 0;
++            break;
+ #ifdef CONFIG_XENBUS
+ 	case FTYPE_XENBUS:
+             xs_daemon_close((void*)(intptr_t) fd);
+-            return 0;
++            break;
+ #endif
+ #ifdef HAVE_LWIP
+-	case FTYPE_SOCKET: {
+-	    int res = lwip_close(files[fd].fd);
+-	    files[fd].type = FTYPE_NONE;
+-	    return res;
+-	}
++	case FTYPE_SOCKET:
++	    res = lwip_close(files[fd].fd);
++            break;
+ #endif
+ #ifdef CONFIG_LIBXENCTRL
+ 	case FTYPE_XC:
+ 	    minios_interface_close_fd(fd);
+-	    return 0;
++            break;
+ #endif
+ #ifdef CONFIG_LIBXENEVTCHN
+ 	case FTYPE_EVTCHN:
+ 	    minios_evtchn_close_fd(fd);
+-            return 0;
++            break;
+ #endif
+ #ifdef CONFIG_LIBXENGNTTAB
+ 	case FTYPE_GNTMAP:
+ 	    minios_gnttab_close_fd(fd);
+-	    return 0;
++            break;
+ #endif
+ #ifdef CONFIG_NETFRONT
+ 	case FTYPE_TAP:
+ 	    shutdown_netfront(files[fd].dev);
+-	    files[fd].type = FTYPE_NONE;
+-	    return 0;
++            break;
+ #endif
+ #ifdef CONFIG_BLKFRONT
+ 	case FTYPE_BLK:
+             shutdown_blkfront(files[fd].dev);
+-	    files[fd].type = FTYPE_NONE;
+-	    return 0;
++            break;
+ #endif
+ #ifdef CONFIG_TPMFRONT
+ 	case FTYPE_TPMFRONT:
+             shutdown_tpmfront(files[fd].dev);
+-	    files[fd].type = FTYPE_NONE;
+-	    return 0;
++            break;
+ #endif
+ #ifdef CONFIG_TPM_TIS
+ 	case FTYPE_TPM_TIS:
+             shutdown_tpm_tis(files[fd].dev);
+-	    files[fd].type = FTYPE_NONE;
+-	    return 0;
++            break;
+ #endif
+ #ifdef CONFIG_KBDFRONT
+ 	case FTYPE_KBD:
+             shutdown_kbdfront(files[fd].dev);
+-            files[fd].type = FTYPE_NONE;
+-            return 0;
++            break;
  #endif
  #ifdef CONFIG_FBFRONT
  	case FTYPE_FB:
--            shutdown_fbfront(files[fd].fb.dev);
-+            shutdown_fbfront(files[fd].dev);
-             files[fd].type = FTYPE_NONE;
-             return 0;
+             shutdown_fbfront(files[fd].dev);
+-            files[fd].type = FTYPE_NONE;
+-            return 0;
++            break;
  #endif
+ #ifdef CONFIG_CONSFRONT
+         case FTYPE_SAVEFILE:
+         case FTYPE_CONSOLE:
+             fini_consfront(files[fd].dev);
+-            files[fd].type = FTYPE_NONE;
+-            return 0;
++            break;
+ #endif
+ 	case FTYPE_NONE:
+-	    break;
++            printk("close(%d): Bad descriptor\n", fd);
++            errno = EBADF;
++            return -1;
+     }
+-    printk("close(%d): Bad descriptor\n", fd);
+-    errno = EBADF;
+-    return -1;
++
++    memset(files + fd, 0, sizeof(struct file));
++    files[fd].type = FTYPE_NONE;
++    return res;
+ }
+ 
+ static void init_stat(struct stat *buf)
+diff --git a/lib/xs.c b/lib/xs.c
+index 0459f52..4af0f96 100644
+--- a/lib/xs.c
++++ b/lib/xs.c
+@@ -35,7 +35,6 @@ void xs_daemon_close(struct xs_handle *h)
+         next = event->next;
+         free(event);
+     }
+-    files[fd].type = FTYPE_NONE;
+ }
+ 
+ int xs_fileno(struct xs_handle *h)
 -- 
 2.26.2
 
