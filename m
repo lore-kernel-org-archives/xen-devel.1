@@ -4,43 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD288C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 11:26:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255689.438195 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24FD5C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 11:41:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.255697.438217 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7FIJ-00082q-In; Tue, 11 Jan 2022 11:26:27 +0000
+	id 1n7FWo-0002W5-A4; Tue, 11 Jan 2022 11:41:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255689.438195; Tue, 11 Jan 2022 11:26:27 +0000
+Received: by outflank-mailman (output) from mailman id 255697.438217; Tue, 11 Jan 2022 11:41:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7FIJ-00082j-Ex; Tue, 11 Jan 2022 11:26:27 +0000
-Received: by outflank-mailman (input) for mailman id 255689;
- Tue, 11 Jan 2022 11:26:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1n7FWo-0002Vy-5C; Tue, 11 Jan 2022 11:41:26 +0000
+Received: by outflank-mailman (input) for mailman id 255697;
+ Tue, 11 Jan 2022 11:41:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZWkq=R3=darkstar.site=sakib@srs-se1.protection.inumbo.net>)
- id 1n7FII-00082d-AB
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 11:26:26 +0000
-Received: from pb-smtp20.pobox.com (pb-smtp20.pobox.com [173.228.157.52])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4c9b9ffb-72d1-11ec-9ce5-af14b9085ebd;
- Tue, 11 Jan 2022 12:26:23 +0100 (CET)
-Received: from pb-smtp20.pobox.com (unknown [127.0.0.1])
- by pb-smtp20.pobox.com (Postfix) with ESMTP id 4EA38182890;
- Tue, 11 Jan 2022 06:26:19 -0500 (EST)
- (envelope-from sakib@darkstar.site)
-Received: from pb-smtp20.sea.icgroup.com (unknown [127.0.0.1])
- by pb-smtp20.pobox.com (Postfix) with ESMTP id 46EAF18288F;
- Tue, 11 Jan 2022 06:26:19 -0500 (EST)
- (envelope-from sakib@darkstar.site)
-Received: from localhost (unknown [95.67.114.216])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by pb-smtp20.pobox.com (Postfix) with ESMTPSA id B5BC018288E;
- Tue, 11 Jan 2022 06:26:16 -0500 (EST)
- (envelope-from sakib@darkstar.site)
+ <SRS0=1Jw/=R3=citrix.com=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1n7FWm-0002Vs-H9
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 11:41:24 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 633b11f1-72d3-11ec-81c1-a30af7de8005;
+ Tue, 11 Jan 2022 12:41:18 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,152 +38,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4c9b9ffb-72d1-11ec-9ce5-af14b9085ebd
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=pobox.com; h=from:to:cc
-	:subject:date:message-id:mime-version:content-transfer-encoding;
-	 s=sasl; bh=C2gvrDaIP/qIIMWdeVG2fXwCMoogfeMZMUj8caL6/l8=; b=pjEl
-	bL8/+TTOrtN6Z/BNTTAXrVoMJ2SHbD+3yy6vPTqn3V7EobzOGPaT7Q2UlvGUxb6p
-	z5cIfStOZdcLKDZd/QXw/v/7/KkksghjeRv3BNH0SU2JxDU9ksgHBUeZussX+tgy
-	8uPeYsHVC+v1sbVs3vJnaUrENeEb/N04xeb22Lw=
-From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
-To: xen-devel@lists.xenproject.org
-Cc: Sergiy Kibrik <Sergiy_Kibrik@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Oleksandr Tyshchenko <olekstysh@gmail.com>,
-	Andrii Anisov <Andrii_Anisov@epam.com>
-Subject: [XEN PATCH v3] xen/arm: introduce dummy iommu node for dom0
-Date: Tue, 11 Jan 2022 11:26:11 +0000
-Message-Id: <20220111112611.90508-1-Sergiy_Kibrik@epam.com>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: 633b11f1-72d3-11ec-81c1-a30af7de8005
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1641901281;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=HBAeyB6pBf2zzgmjH4/b19PdHZ7UWw5tkWqitFhy9CI=;
+  b=RuMQ44LMkSNine/Y70BD+vQdyG/Uc3uzMqwKD8e6JIcCDB286lTNZJxN
+   ChtUr2TaMajVeNfq5ZK+ev3fv+N3O+ZEoG+zi5Mayn9t9oBwxxqlbHQlx
+   oqEH2QQgjhHNypfLsV19daxpFLn7NJerTUsC2uGhLooz6NSf2sbcukyGY
+   8=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: huc5QjMXPplabH5vi8Noa7x2WYChMmG8Hk52vF+pLXKC4yzun3f2OFUZekowkb/KP6OlNeBep3
+ NThlLmOgGXt85utF8Jo9R++MhDqyOIOefYSAzlmRzqwREa5G5gGXnP/vIGLNU+NWUGSELzUmi8
+ gz20TTjUqHbiMRY9SBm+7sqkzlbf8RjMv3m9Z7D2PYI41h450RAkSwPRsvOLyDHfociqVB2s89
+ onDxSvJbY97KgaVn3TUyhF/qwMnRnC1XEQmE5LFn5j+WyT+eVoSv/0WiNCk74t+eBaQ2hPkmxJ
+ pcVpDCw5Rr05Bg0Znnh6OXXl
+X-SBRS: 5.2
+X-MesageID: 63848580
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:+4N3FKq31LJYyTdfonj+qQ1/20BeBmLqYhIvgKrLsJaIsI4StFCzt
+ garIBmCP//eYjD9fN8kOoni8hwCuJeDytA2HFRp/309EClA9JuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dndx4f5fs7Rh2NQw2IHgW1rlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnZC1SV0gBZbQpL4ibUNcGAFzAohe4ZaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFJkYtXx6iynQEN4tQIzZQrWM7thdtNs1rp4VTaqOO
+ ppBAdZpRDbETQZyEAoPMYsdoOGnoVjRXQJFtHvA8MLb5ECMlVcsgdABKuH9e8OIbdVYmF6Co
+ WDL9Hi/BQsVXPSPxDzA/n+yi+vnmSLgRJlUBLC+7uRtglCY2ioUEhJ+fVmxrOS9i0W+c8lCM
+ EFS8S0rxYAt8GS7Q9+7WAe3yENopTZFBYAWSbdjrljQlOyEuG51G1ToUBZNbdx8vfQNWQBw6
+ WHTm9jJCANKqKS8HCf1GqivkRu+Pi0cLGknbCACTBcY79SLnLzfni4jXf44Tvfr04Sd9SXYh
+ mnT8XNg3+l7Ydsjiv3jlW0rlQ5AsXQgouQdwgzMFlyo4QpiDGJOT9z5sAOLhRqswWvwc7Vgg
+ JTms5XGhAztJcvU/MBofAnrNOvyjxpiGGeN6WOD57F7q1yQF4eLJOi8Gg1WKkZzKdojcjT0e
+ kLVsg45zMYNYCL6MfcuMtrqVpxCIU3c+TLNDKu8gj1mOMkZSeN61Hs2OR74M57FzSDAbp3Ty
+ b/EKJ3xXB72+IxszSasRvd17FPY7ntW+I8nfriil07P+ePHPBa9EO5ZWHPTMLxRxP7a8W39r
+ oYOX+PXmk43eLCvPUHqHXs7cApiwY4TX86m8qS6t4erf2JbJY3WI6SAnuN6Jd00xvQ9eyWh1
+ ijVZ3K0AWHX3BXvAQ6LdmpiePXoW5N+pmg8JisiIRCj3H1LXGplxP13m0IfceZ1+ep94+RzS
+ vVZKcyMDu4WEmbM+igHbIm7p4tnLUz5iQWLNiujQT4+Y58/GFCZpo66JlPipHsUEy66lcoiu
+ Ln8hAnVdoUOGlZ5B8HMZfPxk17o5SoBmPh/VlfjK8VIfBm+65BjLiH816dlI8wFJRjZ6CGd0
+ gKaXUURqeXX+tdn+9jVn6GU6YyuFrImTEZdGmDa65ewNDXboTX/kdMRDr7QcGmEBm3u+aika
+ eFE9N3GMaUKzARQro5xM7d31qZitdHhkKBXk1Z/F3LRYlX1Vr45eiua3dNCv7Fmz6NCvVfkQ
+ VqG/9RXNOnbOM7hF1JNdgMpYv7aiKMRkzjWq/80PF/79Gl8+7/eCRdeOByFiSp8KrppMdx6n
+ bd96ZBOswHv2AA3NtumjzxP8zXeJ3MNZKwrq5UGDdK5kQEs0FxDPcTRByKeDEtjsDmQ3p3G+
+ gOpuZc=
+IronPort-HdrOrdr: A9a23:OraXE6wZDKVN+DIzLjexKrPw1r1zdoMgy1knxilNoHxuH/BwWf
+ rPoB17726RtN91YhsdcL+7V5VoLUmzyXcX2/h1AV7BZniEhILAFugLgbcKqweKJ8SUzJ8+6U
+ 4PSclD4N2bNykGsS75ijPIb+rJFrO8gd+VbeS19QYScelzAZsQiDuQkmygYzZLrA8tP+teKL
+ OsovBpihCHYnotYsGyFhA+LpL+T42iruOeXfYebSRXkDWzsQ==
+X-IronPort-AV: E=Sophos;i="5.88,279,1635220800"; 
+   d="scan'208";a="63848580"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HiA98JMe2igvD92OX9r+7TIeecBTX5MdnfUIK35VHRTUa4HqVeeqTG9sjS2WaKSlgviw4LWwfXefLWlg58INnByOIHaO7vT46kpOejk/T68tEdIVszOQKGlQ2MFkZkht5SI67qQroZhdgsquWZQLG/z89R+V2xVx9K+PvQCjpIYXao7siIiwkVKS7s97JVysS/+JxYW7UlLHLgZG/1np0Ib/EUwgR3o/XEb+JLX5HHriaWQfmX40pcj1AUEowE92kWf7DPwtFlD19LcLnjJkirHNCAH/BebbfXtXdLVLxjLWrgIoZ5F9m0VwNIU5xXFbUF5aaFsi0qUNnr+1ztOz0Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MKifjQwupusyRFhelBISVhrtOo/r3bJGYOlLYLiNANs=;
+ b=oDw2Q1dUcQuPmxFkROAhwmGUIXOWLslTb2FK8PxCsKKxrk9ND4HcByqY8ZmadUzP3rW31to/WeeWehaPeo/w3O49N/t2nwTvmpdh6f+ETKCkClbbGNGZOSUVS7vqFmwCpbXOOI6eCQg1MRA2RQbQcophERDp3RKIDiJniKLv0xDtCD/mAvcXoXPmKN7AOESPoMLdUSjzA3VN31XXFx36T3VzYLD5F22VCXCA/TdpP+Zsnoy6uNnTnD6pn+AhF9BoN6GoljvkNLcM3emJiq5AkT4L6Lql4mAGk1jv6pLgmE7x16HuqfhJoHeLIu7hKOZWCl6R8LUX1V296cv9J7vwXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MKifjQwupusyRFhelBISVhrtOo/r3bJGYOlLYLiNANs=;
+ b=WX5kHLPMUCW3sPvhCW4vVjLhxoT+gjeMfpyMmei1u71nJ30T24iGL7orhmz81OFlsw+Hqk3SLWabBwvQXT3wfWmtF4p/zpkzSZGUOmNPrvabQ/slUZKqR6CislLubBQbpeg5gVhDuKs6YQ2zBc3G1lfn4LYADieyC/uzkLsqFCI=
+Date: Tue, 11 Jan 2022 12:41:10 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>, Ian
+ Jackson <iwj@xenproject.org>, <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v5 04/12] libx86: introduce helper to fetch msr entry
+Message-ID: <Yd1s1p1DNN0doPIs@Air-de-Roger>
+References: <20211129153355.60338-1-roger.pau@citrix.com>
+ <20211129153355.60338-5-roger.pau@citrix.com>
+ <545f5185-9cd0-63cb-3519-470d587e12ea@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <545f5185-9cd0-63cb-3519-470d587e12ea@suse.com>
+X-ClientProxiedBy: MR1P264CA0048.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:3e::17) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-X-Pobox-Relay-ID:
- 4AA3904A-72D1-11EC-ADAA-C85A9F429DF0-90055647!pb-smtp20.pobox.com
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: e3a8edd7-b0bd-4fc0-530b-08d9d4f74701
+X-MS-TrafficTypeDiagnostic: DM5PR03MB3371:EE_
+X-Microsoft-Antispam-PRVS: <DM5PR03MB3371930C424BD2433A96A77E8F519@DM5PR03MB3371.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2331;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: AbeRoAPybdO0r5UcpHojd9kFTlZ6nIgbrcQQH52jxw6Zgh329DIDKL1ZpgMw4eTi59iV99YsbdIfmQl3cmjelTQU99CJldqaikF6i8CIZDY/AiinchEmIgzQWw9RcrXCwuBqgUMZfUHqwVczeMkGQZuSa+njXjkw+XfETS9uQkYl+XlXnJqvewKKqc3f0hUgsWrlXOrWHYBnlYMrkS8tRqmHkUzvtA78idWXEtPPkGDy1Gi2HMikuPfq7DulGFp0ZAubz3ZnHgYSkTL45Q3C30t3N5SvFqZdYEM2CKgXNHD5WjAkVvxb9Ltq3tGxjIz9rPQzn8kW0ZMAZPbbzhMHvezFFbm4h/++jeMVuPKFma7lx8jqwhfuvVMaiTOwbxFUde/1X3AZ7heTL4uu8WGcr0Sd6qGvES3e5482vUxzIyqs7DaWEMrtmBDLGORbvATpO0Qpeq8BJrw4IXNTYXK+hxwWc1CIQzwYL+LW7Oc4KKowLMnE/AiJdYiRMkZX1IvcHQeNVCl4t9GMT2aa1SapwgpdNOJyJC7fXq0euvHjS96Fnj8TFjxywwQ1wkvNYC5dxiCJkAxKa5GYJzLw3QT8NA0eUxmlzZDnxSJr1TzNUwA0B7j4dbKNYyIJsczpqWMxAu3eRZRy5ZNyNcXyQzbfow==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(7916004)(366004)(316002)(66946007)(6512007)(53546011)(6506007)(66476007)(9686003)(5660300002)(6916009)(6486002)(66556008)(8936002)(54906003)(186003)(26005)(508600001)(4326008)(83380400001)(8676002)(86362001)(85182001)(82960400001)(38100700002)(2906002)(33716001)(6666004);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dDNMWktEQndMVHhDNS94Y29oUThibUtSYSsxVk1saGp5LzFGS2t6QjlzMk1Q?=
+ =?utf-8?B?dEhCYlRRTmM5T1g0eHU1UXdkdzNOaDFqb01VcnRxMkliYXoxWGV5djVERC85?=
+ =?utf-8?B?UURpYStHa1l6SG1jME5VRkM0N3FmSjNKQjdUTlZsYVZNNFZjd3pQUVE4bi9m?=
+ =?utf-8?B?WC9QQWVCSjFpVUZPYzA0aXJFcHczVjJZQ2xuUDRzUncwWmtWaE1xSUtZaWhm?=
+ =?utf-8?B?Sm5Bc0hyZXVNMGlrcEdvOVlTQ3J4S2creXB6TkhSdnhENWY4UzBYK3JtWkc3?=
+ =?utf-8?B?VGtpem1WTE9rWUxzS0p0bVV6UUNrcUpRTWFDRjJrY2lSTzFlSFB0L1RETGgx?=
+ =?utf-8?B?Sk9lWlVhQTI5NTJGODZRVlY1NDEyQlgyTE9nNEt6dEFqRDM4VDk0MnBCMVhN?=
+ =?utf-8?B?QmxsME1HZktlQkU2alpoQnpPYU45U215ZWFvNkNXS09hSjdGZDh2L1BXNFdh?=
+ =?utf-8?B?SUd6QnFjRjFjd2x2WVhkY1B3eEliZWtlaXhtL3hqemhKcy9UR3ErdHM0VVI1?=
+ =?utf-8?B?RDhjSGJ2Wkt2bXEyZW9TeXNZUzA0NTlCMEl6OVREdVJ4RVFWdHJpU0djbW9o?=
+ =?utf-8?B?WU1qYnZMVjl3bGxwVHlhNUdXMjU3UFBEQjQvaFZocWNiYUR0MzdGSitrQWc5?=
+ =?utf-8?B?WGxXSVAvdUNyOXFPZjI3Z1M1SFRPVmlnRGM2ZVp4NUxPWEJFTDRxby9DT2E4?=
+ =?utf-8?B?cHIvQ1RDRUZPQUsrbGdCZ01Rcy83OXZ1SkQ5N0ZwUjczVFhVY1JpeWEyMTFC?=
+ =?utf-8?B?ajllZXpGc0s4aTBIRHNhakExajhVSGJmVnNVdWFSckx1ZWoxQ21lRUhFNW9w?=
+ =?utf-8?B?M3IrTWVhRU9YeSthQU91MUdOeFBVMlZsYklCZkg2ZXZJOGNhRTlCdFBQS2R6?=
+ =?utf-8?B?cVkwY0FrckRrbDFROEpzOHBCcklPZVhFVy9HemcwazExQVBIdVpJb1RJU3Z1?=
+ =?utf-8?B?LzI1cUtIUkpyYWFYNmd3cWdva1FjOVcrc3NleHJJenpnNXV2dUEzTVBNek5V?=
+ =?utf-8?B?THV0clRlcmY4UTk2dFhpWUlhQjV6UU1zczVwRkxLdTB5bHZvNlBBVm5UallL?=
+ =?utf-8?B?TWFGS0wvanprd21HYVBKbXpMUVYzTVdoL01EM0VZaEgzaVBBRk5Nd2syVm9a?=
+ =?utf-8?B?WUtQeVJhaVk3RHdqZEpZSlludU83K0NrblJjL0Fnam16QlVJK01JU1U1cmd4?=
+ =?utf-8?B?eEhoYUN0a1dLSitJWnBmWE9iNURwMVF0eFdVdzdKK3JOa0w1cThLNm1kU1d4?=
+ =?utf-8?B?Q1RlM2JzZmVOWUNiVWxhb0gyNzF1aU1FTksvWWpZWDhKMHhIS1ZER3YrdjNk?=
+ =?utf-8?B?SG9nWWYra29DRWpkTXpVbFdPRWVHWU0wQ2hyRE14TVk4dDFNTWVzc3NSc1Ni?=
+ =?utf-8?B?b0xuUWR0bUVnVGRmUGxUOWxkQVFjSktCQ05SemNZTHQwM3U0QWhrYzBxbVhN?=
+ =?utf-8?B?dGpDYkFjVFhzbFFmRWpnVlc4KzNCQWU2MTUyMmd0VU95b05qYTM2U2Zuekkz?=
+ =?utf-8?B?ZkhiTkd1VnB5WmxHRDBwcUtkdC8weHZ1UHZKR2xhVFd1dUJldEs3aEMxc0J4?=
+ =?utf-8?B?QjZEVDh4MFdBek16eWNONjB1K2ZDZkRveFBlMEhzUzRJQlpMTWhLY1JTbk5t?=
+ =?utf-8?B?aDFDU08wUmFZZGZKbGd6ZHBRVlBWWm1OWTRxSVZWTVd3K0I1eE9ORkZ3RzFj?=
+ =?utf-8?B?TWFjMzVTdHpSNzEwU3c5Y0lUWTFxK2g0YW9ZdXdUa2szelZVVWU4WXFFMGwx?=
+ =?utf-8?B?K05pVjVWaXF6bmtlUTdETXdHWHo1QzlNallZQjVhTUFHVW1hSmp3bFZiTmtm?=
+ =?utf-8?B?akJ6NG5TMS9nQTAxUWdCa0VJeHV0R0UzN2FiSnZuaEJMM0IraXhISGlNbDhL?=
+ =?utf-8?B?aVVjTEE2emFBZ2ovSFZmUmFFTWliSXNaVzBFYkIrdWJ4SlZBSGhYbXdROGdv?=
+ =?utf-8?B?amRxNFNwMzdQT05WRkVIVVZqeUMwTXpMbFV2Zk40MnMrbnowT3ptUVdndmto?=
+ =?utf-8?B?OGI5VXd5aDNySDNybVN6ZUdjRE9wdURGd0hNV0I5VTZBTlgwR3FISUhwMlNN?=
+ =?utf-8?B?Zzc5L0t4Tk5oWkNqdU03R2pFRkdUZFdSOWYyMVFmZm5SYmdpeHhNTVU2NHJQ?=
+ =?utf-8?B?OGFGSndYVUNDdVB6L2cvOERhVDhDZVNZbVRFaCtJM0E2c3VYRjczaXVSSHNw?=
+ =?utf-8?Q?M6Matv0sKkr68uak/oP92uw=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3a8edd7-b0bd-4fc0-530b-08d9d4f74701
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jan 2022 11:41:16.5258
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TtDnBz0RwEcLoUEBb87SjGzHQ2w+R8o6v40NRrTo8wkmRpDQFrOTQsqpTj8I3iLSngmvdHc4s7hiyM845agwDQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR03MB3371
+X-OriginatorOrg: citrix.com
 
-Currently no IOMMU properties are exposed to dom0, thus kernel by default
-assumes no protection and enables swiotlb-xen, which leads to costly and
-unnecessary buffers bouncing.
+On Mon, Dec 06, 2021 at 03:34:18PM +0100, Jan Beulich wrote:
+> On 29.11.2021 16:33, Roger Pau Monne wrote:
+> > --- a/tools/tests/cpu-policy/test-cpu-policy.c
+> > +++ b/tools/tests/cpu-policy/test-cpu-policy.c
+> > @@ -386,16 +386,6 @@ static void test_msr_deserialise_failure(void)
+> >              .msr = { .idx = 0xce, .flags = 1 },
+> >              .rc = -EINVAL,
+> >          },
+> > -        {
+> > -            .name = "truncated val",
+> > -            .msr = { .idx = 0xce, .val = ~0ull },
+> > -            .rc = -EOVERFLOW,
+> > -        },
+> > -        {
+> > -            .name = "truncated val",
+> > -            .msr = { .idx = 0x10a, .val = ~0ull },
+> > -            .rc = -EOVERFLOW,
+> > -        },
+> >      };
+> 
+> Why is this removal necessary? I don't think any of the additions further
+> down actually replaces these.
 
-To let kernel know which device is behing IOMMU and hence needs no swiotl=
-b
-services we introduce dummy xen-iommu node in FDT and link protected devi=
-ce
-nodes to it, using here device tree iommu bindings.
+There are no longer overflow errors, since the field in msr_policy for
+both MSRs is now 64bits after this change. I've tried to explain this
+in the commit message:
 
-Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
----
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Julien Grall <julien@xen.org>
-Cc: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Cc: Andrii Anisov <Andrii_Anisov@epam.com>
+"Note this requires making the raw fields uint64_t so that it can
+accommodate the maximum size of MSRs values, and in turn removing the
+truncation tests."
 
-
-Changelog:
-
-v3: rebased over staging & remove redundand phandle_iommu attribute, disc=
-ussion:
-	https://lists.xenproject.org/archives/html/xen-devel/2021-12/msg01753.ht=
-ml
-
-v2: re-use common iommu dt bindings to let guests know which devices are =
-protected:
-	https://lists.xenproject.org/archives/html/xen-devel/2021-10/msg00073.ht=
-ml
-
- xen/arch/arm/domain_build.c           | 42 +++++++++++++++++++++++++++
- xen/include/public/device_tree_defs.h |  1 +
- 2 files changed, 43 insertions(+)
-
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 6931c022a2..b82ba72fac 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -845,6 +845,12 @@ static int __init write_properties(struct domain *d,=
- struct kernel_info *kinfo,
-         }
-     }
-=20
-+    if ( iommu_node && is_iommu_enabled(d) && dt_device_is_protected(nod=
-e) )
-+    {
-+        res =3D fdt_property_cell(kinfo->fdt, "iommus", GUEST_PHANDLE_IO=
-MMU);
-+        if ( res )
-+            return res;
-+    }
-     return 0;
- }
-=20
-@@ -1479,6 +1485,38 @@ static int __init make_cpus_node(const struct doma=
-in *d, void *fdt)
-     return res;
- }
-=20
-+static int __init make_iommu_node(const struct domain *d,
-+                                  const struct kernel_info *kinfo)
-+{
-+    const char compat[] =3D "xen,iommu-el2-v1";
-+    int res;
-+
-+    if ( !is_iommu_enabled(d) )
-+        return 0;
-+
-+    dt_dprintk("Create iommu node\n");
-+
-+    res =3D fdt_begin_node(kinfo->fdt, "xen-iommu");
-+    if ( res )
-+        return res;
-+
-+    res =3D fdt_property(kinfo->fdt, "compatible", compat, sizeof(compat=
-));
-+    if ( res )
-+        return res;
-+
-+    res =3D fdt_property_cell(kinfo->fdt, "#iommu-cells", 0);
-+    if ( res )
-+        return res;
-+
-+    res =3D fdt_property_cell(kinfo->fdt, "phandle", GUEST_PHANDLE_IOMMU=
-);
-+
-+    res =3D fdt_end_node(kinfo->fdt);
-+    if ( res )
-+        return res;
-+
-+    return res;
-+}
-+
- static int __init make_gic_node(const struct domain *d, void *fdt,
-                                 const struct dt_device_node *node)
- {
-@@ -2127,6 +2165,10 @@ static int __init handle_node(struct domain *d, st=
-ruct kernel_info *kinfo,
-         if ( res )
-             return res;
-=20
-+        res =3D make_iommu_node(d, kinfo);
-+        if ( res )
-+            return res;
-+
-         res =3D make_memory_node(d, kinfo->fdt, addrcells, sizecells, &k=
-info->mem);
-         if ( res )
-             return res;
-diff --git a/xen/include/public/device_tree_defs.h b/xen/include/public/d=
-evice_tree_defs.h
-index 209d43de3f..df58944bd0 100644
---- a/xen/include/public/device_tree_defs.h
-+++ b/xen/include/public/device_tree_defs.h
-@@ -7,6 +7,7 @@
-  * onwards. Reserve a high value for the GIC phandle.
-  */
- #define GUEST_PHANDLE_GIC (65000)
-+#define GUEST_PHANDLE_IOMMU (GUEST_PHANDLE_GIC + 1)
-=20
- #define GUEST_ROOT_ADDRESS_CELLS 2
- #define GUEST_ROOT_SIZE_CELLS 2
---=20
-2.25.1
-
+Thanks, Roger.
 
