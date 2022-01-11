@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 821DEC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551CBC433FE
 	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:12:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255864.438718 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.255871.438763 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7Iou-0002XO-Ed; Tue, 11 Jan 2022 15:12:20 +0000
+	id 1n7Ioz-0003SH-4C; Tue, 11 Jan 2022 15:12:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255864.438718; Tue, 11 Jan 2022 15:12:20 +0000
+Received: by outflank-mailman (output) from mailman id 255871.438763; Tue, 11 Jan 2022 15:12:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7Iou-0002Wr-7K; Tue, 11 Jan 2022 15:12:20 +0000
-Received: by outflank-mailman (input) for mailman id 255864;
- Tue, 11 Jan 2022 15:12:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1n7Ioy-0003RD-Qw; Tue, 11 Jan 2022 15:12:24 +0000
+Received: by outflank-mailman (input) for mailman id 255871;
+ Tue, 11 Jan 2022 15:12:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zHlr=R3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1n7Iot-0002Fw-CB
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 15:12:19 +0000
+ id 1n7Iow-0002Fv-VQ
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 15:12:23 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dd43726e-72f0-11ec-81c1-a30af7de8005;
- Tue, 11 Jan 2022 16:12:17 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ddbbbb2d-72f0-11ec-9ce5-af14b9085ebd;
+ Tue, 11 Jan 2022 16:12:18 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 258AF212C2;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id D9E20212C5;
  Tue, 11 Jan 2022 15:12:17 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F1B0F1404B;
- Tue, 11 Jan 2022 15:12:16 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B24D913DDD;
+ Tue, 11 Jan 2022 15:12:17 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id QOfQOVCe3WG8AwAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 15:12:16 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4LNQKlGe3WG8AwAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 15:12:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,170 +53,334 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dd43726e-72f0-11ec-81c1-a30af7de8005
+X-Inumbo-ID: ddbbbb2d-72f0-11ec-9ce5-af14b9085ebd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1641913937; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=DjsZaSOIcJ6iFahsf84mXvc0XkEk+3Mf01A/EmIC1Ic=;
-	b=SunZVRlMBMQ3pF24OyRoCstzJwKxSJCyqCjGXv45rBsLO5hncikrQd1hFjeYQYTbe65f1b
-	j7YVDhEm4/KrPjfX5hXdCXlxftCzURRb4u6dYwLVS9XUGgcpmowd7zp4zR7njak382zbOJ
-	m9iIHn/cRS6SIi26mR9kVwyOPi5SfBA=
+	bh=HfQh4OZ9az0A9qjPS5wm3iwxm7DBwhvFq6/vq3hHx4c=;
+	b=d+2fCrxpZ86Dc+7cN3OiQiG9EGz1BKXAhrYJF71rPwQ8i4kjMPvAVxGZPTUl9n/L3qsiRc
+	wTEby7tMgtDOedTFArOZVMMsYt9vYyotw7EhP2R9SzKXvUrXb54IPu2U/kIppdSeUkwYlQ
+	Lj19uGCFkMYW8wXcigeeSEVUDLbad6Y=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 01/12] mini-os: remove event channel specific struct file definitions
-Date: Tue, 11 Jan 2022 16:12:04 +0100
-Message-Id: <20220111151215.22955-2-jgross@suse.com>
+Subject: [PATCH v2 05/12] mini-os: use alloc_file_type() and get_file_from_fd() in tpmfront
+Date: Tue, 11 Jan 2022 16:12:08 +0100
+Message-Id: <20220111151215.22955-6-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20220111151215.22955-1-jgross@suse.com>
 References: <20220111151215.22955-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The event channel specific union member in struct file is no longer
-needed, so remove it together with the associated structure
-definitions.
+Allocate a file type dynamically via alloc_file_type().
 
-The event channel file type and its associated handling can be removed,
-too, as libxenevtchn is now supplying a struct file_ops via a call of
-alloc_file_type().
-
-This removes all contents of CONFIG_LIBXENEVTCHN guarded sections, so
-this config option can be removed.
+Instead of directly accessing the files[] array use get_file_from_fd().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- Config.mk                     |  1 -
- arch/x86/testbuild/all-no     |  1 -
- arch/x86/testbuild/all-yes    |  1 -
- arch/x86/testbuild/newxen-yes |  1 -
- include/lib.h                 | 15 +--------------
- lib/sys.c                     |  7 -------
- 6 files changed, 1 insertion(+), 25 deletions(-)
+ include/lib.h      |   3 +-
+ include/tpmfront.h |   5 ---
+ lib/sys.c          |  23 -----------
+ tpmfront.c         | 100 ++++++++++++++++++++++++++++++++-------------
+ 4 files changed, 72 insertions(+), 59 deletions(-)
 
-diff --git a/Config.mk b/Config.mk
-index 1e08388..c244adc 100644
---- a/Config.mk
-+++ b/Config.mk
-@@ -197,7 +197,6 @@ CONFIG-n += CONFIG_PARAVIRT
- endif
- # Support legacy CONFIG_XC value
- CONFIG_XC ?= $(libc)
--CONFIG-$(CONFIG_XC) += CONFIG_LIBXENEVTCHN
- CONFIG-$(CONFIG_XC) += CONFIG_LIBXENGNTTAB
- 
- CONFIG-$(lwip) += CONFIG_LWIP
-diff --git a/arch/x86/testbuild/all-no b/arch/x86/testbuild/all-no
-index d6fc260..202c317 100644
---- a/arch/x86/testbuild/all-no
-+++ b/arch/x86/testbuild/all-no
-@@ -13,7 +13,6 @@ CONFIG_FBFRONT = n
- CONFIG_KBDFRONT = n
- CONFIG_CONSFRONT = n
- CONFIG_XENBUS = n
--CONFIG_LIBXENEVTCHN = n
- CONFIG_LIBXENGNTTAB = n
- CONFIG_LWIP = n
- CONFIG_BALLOON = n
-diff --git a/arch/x86/testbuild/all-yes b/arch/x86/testbuild/all-yes
-index 98bbfeb..eb495a4 100644
---- a/arch/x86/testbuild/all-yes
-+++ b/arch/x86/testbuild/all-yes
-@@ -16,6 +16,5 @@ CONFIG_XENBUS = y
- CONFIG_BALLOON = y
- CONFIG_USE_XEN_CONSOLE = y
- # The following are special: they need support from outside
--CONFIG_LIBXENEVTCHN = n
- CONFIG_LIBXENGNTTAB = n
- CONFIG_LWIP = n
-diff --git a/arch/x86/testbuild/newxen-yes b/arch/x86/testbuild/newxen-yes
-index 0603200..bf25ace 100644
---- a/arch/x86/testbuild/newxen-yes
-+++ b/arch/x86/testbuild/newxen-yes
-@@ -17,6 +17,5 @@ CONFIG_BALLOON = y
- CONFIG_USE_XEN_CONSOLE = y
- XEN_INTERFACE_VERSION=__XEN_LATEST_INTERFACE_VERSION__
- # The following are special: they need support from outside
--CONFIG_LIBXENEVTCHN = n
- CONFIG_LIBXENGNTTAB = n
- CONFIG_LWIP = n
 diff --git a/include/lib.h b/include/lib.h
-index 4892320..df972ef 100644
+index d94d142..f6478de 100644
 --- a/include/lib.h
 +++ b/include/lib.h
-@@ -169,8 +169,7 @@ void sanity_check(void);
- #define FTYPE_TPM_TIS   11
- #define FTYPE_XENBUS    12
- #define FTYPE_GNTMAP    13
--#define FTYPE_EVTCHN    14
--#define FTYPE_N         15
-+#define FTYPE_N         14
+@@ -165,8 +165,7 @@ void sanity_check(void);
+ #define FTYPE_KBD        7
+ #define FTYPE_TAP        8
+ #define FTYPE_BLK        9
+-#define FTYPE_TPMFRONT  10
+-#define FTYPE_N         11
++#define FTYPE_N         10
  #define FTYPE_SPARE     16
  
  typedef int file_read_func(int fd, void *buf, size_t nbytes);
-@@ -199,15 +198,6 @@ off_t lseek_default(int fd, off_t offset, int whence);
- bool select_yes(int fd);
- bool select_read_flag(int fd);
+diff --git a/include/tpmfront.h b/include/tpmfront.h
+index b7da50e..a527371 100644
+--- a/include/tpmfront.h
++++ b/include/tpmfront.h
+@@ -81,7 +81,6 @@ int tpmfront_cmd(struct tpmfront_dev* dev, uint8_t* req, size_t reqlen, uint8_t*
+ int tpmfront_set_locality(struct tpmfront_dev* dev, int locality);
  
--LIST_HEAD(evtchn_port_list, evtchn_port_info);
+ #ifdef HAVE_LIBC
+-#include <sys/stat.h>
+ /* POSIX IO functions:
+  * use tpmfront_open() to get a file descriptor to the tpm device
+  * use write() on the fd to send a command to the backend. You must
+@@ -90,10 +89,6 @@ int tpmfront_set_locality(struct tpmfront_dev* dev, int locality);
+  * fstat() to get the size of the response and lseek() to seek on it.
+  */
+ int tpmfront_open(struct tpmfront_dev* dev);
+-int tpmfront_posix_read(int fd, uint8_t* buf, size_t count);
+-int tpmfront_posix_write(int fd, const uint8_t* buf, size_t count);
+-int tpmfront_posix_fstat(int fd, struct stat* buf);
+ #endif
+ 
 -
--struct evtchn_port_info {
--        LIST_ENTRY(evtchn_port_info) list;
--        evtchn_port_t port;
--        unsigned long pending;
--        int bound;
--};
--
- struct file {
-     unsigned int type;
-     bool read;	/* maybe available for read */
-@@ -215,9 +205,6 @@ struct file {
-     union {
-         int fd; /* Any fd from an upper layer. */
-         void *dev;
--	struct {
--	    struct evtchn_port_list ports;
--	} evtchn;
- 	struct gntmap gntmap;
-     };
- };
+ #endif
 diff --git a/lib/sys.c b/lib/sys.c
-index 52876e0..8fa1fee 100644
+index 4060b42..ff6be52 100644
 --- a/lib/sys.c
 +++ b/lib/sys.c
-@@ -505,11 +505,6 @@ int close(int fd)
- 	    res = lwip_close(files[fd].fd);
+@@ -28,7 +28,6 @@
+ #include <netfront.h>
+ #include <blkfront.h>
+ #include <fbfront.h>
+-#include <tpmfront.h>
+ #include <xenbus.h>
+ #include <xenstore.h>
+ #include <poll.h>
+@@ -343,11 +342,6 @@ int read(int fd, void *buf, size_t nbytes)
+         case FTYPE_BLK: {
+ 	    return blkfront_posix_read(fd, buf, nbytes);
+         }
+-#endif
+-#ifdef CONFIG_TPMFRONT
+-        case FTYPE_TPMFRONT: {
+-	    return tpmfront_posix_read(fd, buf, nbytes);
+-        }
+ #endif
+ 	default:
+ 	    break;
+@@ -389,10 +383,6 @@ int write(int fd, const void *buf, size_t nbytes)
+ #ifdef CONFIG_BLKFRONT
+ 	case FTYPE_BLK:
+ 	    return blkfront_posix_write(fd, buf, nbytes);
+-#endif
+-#ifdef CONFIG_TPMFRONT
+-	case FTYPE_TPMFRONT:
+-	    return tpmfront_posix_write(fd, buf, nbytes);
+ #endif
+ 	default:
+ 	    break;
+@@ -445,10 +435,6 @@ off_t lseek(int fd, off_t offset, int whence)
+ #ifdef CONFIG_BLKFRONT
+        case FTYPE_BLK:
+           break;
+-#endif
+-#ifdef CONFIG_TPMFRONT
+-       case FTYPE_TPMFRONT:
+-          break;
+ #endif
+        case FTYPE_FILE:
+           break;
+@@ -496,11 +482,6 @@ int close(int fd)
+             shutdown_blkfront(files[fd].dev);
              break;
  #endif
--#ifdef CONFIG_LIBXENEVTCHN
--	case FTYPE_EVTCHN:
--	    minios_evtchn_close_fd(fd);
+-#ifdef CONFIG_TPMFRONT
+-	case FTYPE_TPMFRONT:
+-            shutdown_tpmfront(files[fd].dev);
 -            break;
 -#endif
- #ifdef CONFIG_LIBXENGNTTAB
- 	case FTYPE_GNTMAP:
- 	    minios_gnttab_close_fd(fd);
-@@ -723,7 +718,6 @@ static const char *file_types[] = {
-     [FTYPE_NONE]    = "none",
-     [FTYPE_CONSOLE] = "console",
-     [FTYPE_XENBUS]  = "xenbus",
--    [FTYPE_EVTCHN]  = "evtchn",
-     [FTYPE_SOCKET]  = "socket",
-     [FTYPE_TAP]     = "net",
-     [FTYPE_BLK]     = "blk",
-@@ -915,7 +909,6 @@ static int select_poll(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exce
- 	    FD_CLR(i, exceptfds);
- 	    break;
- #endif
--	case FTYPE_EVTCHN:
- 	case FTYPE_TAP:
- 	case FTYPE_BLK:
+ #ifdef CONFIG_KBDFRONT
  	case FTYPE_KBD:
+             shutdown_kbdfront(files[fd].dev);
+@@ -576,10 +557,6 @@ int fstat(int fd, struct stat *buf)
+ #ifdef CONFIG_BLKFRONT
+ 	case FTYPE_BLK:
+ 	   return blkfront_posix_fstat(fd, buf);
+-#endif
+-#ifdef CONFIG_TPMFRONT
+-	case FTYPE_TPMFRONT:
+-	   return tpmfront_posix_fstat(fd, buf);
+ #endif
+ 	default:
+ 	    break;
+diff --git a/tpmfront.c b/tpmfront.c
+index 0a2fefc..a19a052 100644
+--- a/tpmfront.c
++++ b/tpmfront.c
+@@ -49,6 +49,10 @@
+ void tpmfront_handler(evtchn_port_t port, struct pt_regs *regs, void *data) {
+    struct tpmfront_dev* dev = (struct tpmfront_dev*) data;
+    tpmif_shared_page_t *shr = dev->page;
++#ifdef HAVE_LIBC
++    struct file *file = get_file_from_fd(dev->fd);
++#endif
++
+    /*If we get a response when we didnt make a request, just ignore it */
+    if(!dev->waiting) {
+       return;
+@@ -65,8 +69,9 @@ void tpmfront_handler(evtchn_port_t port, struct pt_regs *regs, void *data) {
+ 
+    dev->waiting = 0;
+ #ifdef HAVE_LIBC
+-   if(dev->fd >= 0) {
+-      files[dev->fd].read = true;
++   if ( file )
++   {
++      file->read = true;
+    }
+ #endif
+    wake_up(&dev->waitq);
+@@ -405,6 +410,10 @@ int tpmfront_send(struct tpmfront_dev* dev, const uint8_t* msg, size_t length)
+ #ifdef TPMFRONT_PRINT_DEBUG
+    int i;
+ #endif
++#ifdef HAVE_LIBC
++    struct file *file = dev ? get_file_from_fd(dev->fd) : NULL;
++#endif
++
+    /* Error Checking */
+    if(dev == NULL || dev->state != XenbusStateConnected) {
+       TPMFRONT_ERR("Tried to send message through disconnected frontend\n");
+@@ -437,9 +446,10 @@ int tpmfront_send(struct tpmfront_dev* dev, const uint8_t* msg, size_t length)
+    dev->waiting = 1;
+    dev->resplen = 0;
+ #ifdef HAVE_LIBC
+-   if(dev->fd >= 0) {
+-      files[dev->fd].read = false;
+-      files[dev->fd].offset = 0;
++   if ( file )
++   {
++      file->read = false;
++      file->offset = 0;
+       dev->respgot = false;
+    }
+ #endif
+@@ -529,25 +539,14 @@ int tpmfront_set_locality(struct tpmfront_dev* dev, int locality)
+ 
+ #ifdef HAVE_LIBC
+ #include <errno.h>
+-int tpmfront_open(struct tpmfront_dev* dev)
+-{
+-   /* Silently prevent multiple opens */
+-   if(dev->fd != -1) {
+-      return dev->fd;
+-   }
+ 
+-   dev->fd = alloc_fd(FTYPE_TPMFRONT);
+-   printk("tpmfront_open(%s) -> %d\n", dev->nodename, dev->fd);
+-   files[dev->fd].dev = dev;
+-   dev->respgot = false;
+-   return dev->fd;
+-}
+-
+-int tpmfront_posix_write(int fd, const uint8_t* buf, size_t count)
++static int tpmfront_posix_write(int fd, const void *buf, size_t count)
+ {
+    int rc;
+    struct tpmfront_dev* dev;
+-   dev = files[fd].dev;
++   struct file *file = get_file_from_fd(fd);
++
++   dev = file->dev;
+ 
+    if(count == 0) {
+       return 0;
+@@ -566,14 +565,15 @@ int tpmfront_posix_write(int fd, const uint8_t* buf, size_t count)
+    return count;
+ }
+ 
+-int tpmfront_posix_read(int fd, uint8_t* buf, size_t count)
++static int tpmfront_posix_read(int fd, void *buf, size_t count)
+ {
+    int rc;
+    uint8_t* dummybuf;
+    size_t dummysz;
+    struct tpmfront_dev* dev;
++   struct file *file = get_file_from_fd(fd);
+ 
+-   dev = files[fd].dev;
++   dev = file->dev;
+ 
+    if(count == 0) {
+       return 0;
+@@ -588,29 +588,33 @@ int tpmfront_posix_read(int fd, uint8_t* buf, size_t count)
+    }
+ 
+    /* handle EOF case */
+-   if(files[dev->fd].offset >= dev->resplen) {
++   if ( file->offset >= dev->resplen )
++   {
+       return 0;
+    }
+ 
+    /* Compute the number of bytes and do the copy operation */
+-   if((rc = min(count, dev->resplen - files[dev->fd].offset)) != 0) {
+-      memcpy(buf, dev->respbuf + files[dev->fd].offset, rc);
+-      files[dev->fd].offset += rc;
++   if ( (rc = min(count, dev->resplen - file->offset)) != 0 )
++   {
++      memcpy(buf, dev->respbuf + file->offset, rc);
++      file->offset += rc;
+    }
+ 
+    return rc;
+ }
+ 
+-int tpmfront_posix_fstat(int fd, struct stat* buf)
++static int tpmfront_posix_fstat(int fd, struct stat *buf)
+ {
+    uint8_t* dummybuf;
+    size_t dummysz;
+    int rc;
+-   struct tpmfront_dev* dev = files[fd].dev;
++   struct file *file = get_file_from_fd(fd);
++   struct tpmfront_dev* dev = file->dev;
+ 
+    /* If we have a response waiting, then read it now from the backend
+     * so we can get its length*/
+-   if(dev->waiting || (files[dev->fd].read && !dev->respgot)) {
++   if ( dev->waiting || (file->read && !dev->respgot) )
++   {
+       if ((rc = tpmfront_recv(dev, &dummybuf, &dummysz)) != 0) {
+ 	 errno = EIO;
+ 	 return -1;
+@@ -626,5 +630,43 @@ int tpmfront_posix_fstat(int fd, struct stat* buf)
+    return 0;
+ }
+ 
++static int tpmfront_close_fd(int fd)
++{
++    struct file *file = get_file_from_fd(fd);
++
++    shutdown_tpmfront(file->dev);
++
++    return 0;
++}
++
++static struct file_ops tpmfront_ops = {
++    .name = "tpmfront",
++    .read = tpmfront_posix_read,
++    .write = tpmfront_posix_write,
++    .lseek = lseek_default,
++    .close = tpmfront_close_fd,
++    .fstat = tpmfront_posix_fstat,
++};
++
++int tpmfront_open(struct tpmfront_dev* dev)
++{
++   struct file *file;
++   static unsigned int ftype_tpmfront;
++
++   /* Silently prevent multiple opens */
++   if(dev->fd != -1) {
++      return dev->fd;
++   }
++
++   if ( !ftype_tpmfront )
++       ftype_tpmfront = alloc_file_type(&tpmfront_ops);
++
++   dev->fd = alloc_fd(ftype_tpmfront);
++   printk("tpmfront_open(%s) -> %d\n", dev->nodename, dev->fd);
++   file = get_file_from_fd(dev->fd);
++   file->dev = dev;
++   dev->respgot = false;
++   return dev->fd;
++}
+ 
+ #endif
 -- 
 2.26.2
 
