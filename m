@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07CEFC433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBF18C433EF
 	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:07:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255816.438588 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.255815.438577 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7IkO-0004KW-T5; Tue, 11 Jan 2022 15:07:40 +0000
+	id 1n7IkN-00043a-L4; Tue, 11 Jan 2022 15:07:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255816.438588; Tue, 11 Jan 2022 15:07:40 +0000
+Received: by outflank-mailman (output) from mailman id 255815.438577; Tue, 11 Jan 2022 15:07:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7IkO-0004KP-Pi; Tue, 11 Jan 2022 15:07:40 +0000
-Received: by outflank-mailman (input) for mailman id 255816;
- Tue, 11 Jan 2022 15:07:39 +0000
+	id 1n7IkN-00043T-Hd; Tue, 11 Jan 2022 15:07:39 +0000
+Received: by outflank-mailman (input) for mailman id 255815;
+ Tue, 11 Jan 2022 15:07:38 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zHlr=R3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1n7Ibe-0002OZ-F3
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 14:58:38 +0000
+ id 1n7Ibg-0002OZ-FQ
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 14:58:40 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ec38fac3-72ee-11ec-81c1-a30af7de8005;
+ id ec5ddb25-72ee-11ec-81c1-a30af7de8005;
  Tue, 11 Jan 2022 15:58:23 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id ADCAD21637;
- Tue, 11 Jan 2022 14:58:22 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 75CCC212C3;
+ Tue, 11 Jan 2022 14:58:23 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8537013DDD;
- Tue, 11 Jan 2022 14:58:22 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4E6D313DDD;
+ Tue, 11 Jan 2022 14:58:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 4OZLHw6b3WH9eQAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 14:58:22 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id cBnnEQ+b3WH9eQAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 14:58:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,117 +53,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec38fac3-72ee-11ec-81c1-a30af7de8005
+X-Inumbo-ID: ec5ddb25-72ee-11ec-81c1-a30af7de8005
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1641913102; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1641913103; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=n40BkLdnJT4X941oqOUKglJdlkxVA0w5hYfz6J0OaY8=;
-	b=ZjfrY70i0Pbr4czUKwgXjbY1iNrCDw3Vx6pB0YdsaGN7XkJEQRb6KDvlppTR00fiMkgicg
-	b96gcYYWqzLUeAJWntujpY/xohdNP0T70OPGYx0tVAzuIvA29EQPP9efelRGjtJfBy8EA8
-	R3CGUCNryEYA3V2yaKv5C6rJtjM1OBk=
+	bh=3MRu1fvGvRxSYETAwaGXHjdx6AuZiPRv8J9xLv9qXpA=;
+	b=cE07+p9X7+a1mj4Yq/WttMObovohhvxLc1iNnnT+9yGsXpv/JCEv5uPOVrQkkzW+GVDEFD
+	hHF+ZUGCyNqcCpqZuTDGXeowTB3PdeAJ6YPJvhD5e/ldwx7SRGZ5efDmP0zugqxIC+1crm
+	4ANsHXOr9LvGgFLPD49G9lNF3CLgF48=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 14/18] mini-os: eliminate xenbus union member in struct file
-Date: Tue, 11 Jan 2022 15:58:13 +0100
-Message-Id: <20220111145817.22170-15-jgross@suse.com>
+Subject: [PATCH v2 18/18] mini-os: remove file type FTYPE_XC
+Date: Tue, 11 Jan 2022 15:58:17 +0100
+Message-Id: <20220111145817.22170-19-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20220111145817.22170-1-jgross@suse.com>
 References: <20220111145817.22170-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Replace the xenbus specific union member in struct file with the
-common dev pointer.
+The only reason for the file type FTYPE_XC has been gone long time
+ago: it was needed for xc_map_foreign_bulk(), which has been switched
+to use libxenforeignmemory and doesn't need this special file any
+more.
+
+So remove everything related to FTYPE_XC.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
- include/lib.h |  7 -------
- lib/sys.c     |  2 +-
- lib/xs.c      | 13 +++++++------
- 3 files changed, 8 insertions(+), 14 deletions(-)
+V2:
+- new patch
+---
+ Config.mk                     |  1 -
+ arch/x86/testbuild/all-no     |  1 -
+ arch/x86/testbuild/all-yes    |  1 -
+ arch/x86/testbuild/newxen-yes |  1 -
+ include/lib.h                 |  3 +--
+ lib/sys.c                     | 13 -------------
+ 6 files changed, 1 insertion(+), 19 deletions(-)
 
+diff --git a/Config.mk b/Config.mk
+index 5e66089..1e08388 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -197,7 +197,6 @@ CONFIG-n += CONFIG_PARAVIRT
+ endif
+ # Support legacy CONFIG_XC value
+ CONFIG_XC ?= $(libc)
+-CONFIG-$(CONFIG_XC) += CONFIG_LIBXENCTRL
+ CONFIG-$(CONFIG_XC) += CONFIG_LIBXENEVTCHN
+ CONFIG-$(CONFIG_XC) += CONFIG_LIBXENGNTTAB
+ 
+diff --git a/arch/x86/testbuild/all-no b/arch/x86/testbuild/all-no
+index 7972ecd..d6fc260 100644
+--- a/arch/x86/testbuild/all-no
++++ b/arch/x86/testbuild/all-no
+@@ -13,7 +13,6 @@ CONFIG_FBFRONT = n
+ CONFIG_KBDFRONT = n
+ CONFIG_CONSFRONT = n
+ CONFIG_XENBUS = n
+-CONFIG_LIBXENCTRL = n
+ CONFIG_LIBXENEVTCHN = n
+ CONFIG_LIBXENGNTTAB = n
+ CONFIG_LWIP = n
+diff --git a/arch/x86/testbuild/all-yes b/arch/x86/testbuild/all-yes
+index bc8eea5..98bbfeb 100644
+--- a/arch/x86/testbuild/all-yes
++++ b/arch/x86/testbuild/all-yes
+@@ -16,7 +16,6 @@ CONFIG_XENBUS = y
+ CONFIG_BALLOON = y
+ CONFIG_USE_XEN_CONSOLE = y
+ # The following are special: they need support from outside
+-CONFIG_LIBXENCTRL = n
+ CONFIG_LIBXENEVTCHN = n
+ CONFIG_LIBXENGNTTAB = n
+ CONFIG_LWIP = n
+diff --git a/arch/x86/testbuild/newxen-yes b/arch/x86/testbuild/newxen-yes
+index f72123b..0603200 100644
+--- a/arch/x86/testbuild/newxen-yes
++++ b/arch/x86/testbuild/newxen-yes
+@@ -17,7 +17,6 @@ CONFIG_BALLOON = y
+ CONFIG_USE_XEN_CONSOLE = y
+ XEN_INTERFACE_VERSION=__XEN_LATEST_INTERFACE_VERSION__
+ # The following are special: they need support from outside
+-CONFIG_LIBXENCTRL = n
+ CONFIG_LIBXENEVTCHN = n
+ CONFIG_LIBXENGNTTAB = n
+ CONFIG_LWIP = n
 diff --git a/include/lib.h b/include/lib.h
-index d6a29ba..91364ba 100644
+index b40e213..4892320 100644
 --- a/include/lib.h
 +++ b/include/lib.h
-@@ -193,13 +193,6 @@ struct file {
- 	    struct evtchn_port_list ports;
- 	} evtchn;
- 	struct gntmap gntmap;
--#ifdef CONFIG_XENBUS
--        struct {
--            /* To each xenbus FD is associated a queue of watch events for this
--             * FD.  */
--            xenbus_event_queue events;
--        } xenbus;
--#endif
-     };
- };
+@@ -170,8 +170,7 @@ void sanity_check(void);
+ #define FTYPE_XENBUS    12
+ #define FTYPE_GNTMAP    13
+ #define FTYPE_EVTCHN    14
+-#define FTYPE_XC        15
+-#define FTYPE_N         16
++#define FTYPE_N         15
+ #define FTYPE_SPARE     16
  
+ typedef int file_read_func(int fd, void *buf, size_t nbytes);
 diff --git a/lib/sys.c b/lib/sys.c
-index 96fc769..6f2b026 100644
+index c327247..52876e0 100644
 --- a/lib/sys.c
 +++ b/lib/sys.c
-@@ -776,7 +776,7 @@ static int select_poll(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exce
- #ifdef CONFIG_XENBUS
- 	case FTYPE_XENBUS:
- 	    if (FD_ISSET(i, readfds)) {
--                if (files[i].xenbus.events)
-+                if (files[i].dev)
- 		    n++;
- 		else
- 		    FD_CLR(i, readfds);
-diff --git a/lib/xs.c b/lib/xs.c
-index 324bd05..0459f52 100644
---- a/lib/xs.c
-+++ b/lib/xs.c
-@@ -21,8 +21,8 @@ static inline int _xs_fileno(struct xs_handle *h) {
- struct xs_handle *xs_daemon_open()
- {
-     int fd = alloc_fd(FTYPE_XENBUS);
--    files[fd].xenbus.events = NULL;
--    printk("xs_daemon_open -> %d, %p\n", fd, &files[fd].xenbus.events);
-+    files[fd].dev = NULL;
-+    printk("xs_daemon_open -> %d, %p\n", fd, &files[fd].dev);
-     return (void*)(intptr_t) fd;
- }
+@@ -87,7 +87,6 @@
+     }
  
-@@ -30,7 +30,7 @@ void xs_daemon_close(struct xs_handle *h)
- {
-     int fd = _xs_fileno(h);
-     struct xenbus_event *event, *next;
--    for (event = files[fd].xenbus.events; event; event = next)
-+    for (event = files[fd].dev; event; event = next)
-     {
-         next = event->next;
-         free(event);
-@@ -172,15 +172,16 @@ bool xs_watch(struct xs_handle *h, const char *path, const char *token)
- {
-     int fd = _xs_fileno(h);
-     printk("xs_watch(%s, %s)\n", path, token);
--    return xs_bool(xenbus_watch_path_token(XBT_NULL, path, token, &files[fd].xenbus.events));
-+    return xs_bool(xenbus_watch_path_token(XBT_NULL, path, token,
-+                   (xenbus_event_queue *)&files[fd].dev));
- }
+ #define NOFILE 32
+-extern void minios_interface_close_fd(int fd);
+ extern void minios_evtchn_close_fd(int fd);
+ extern void minios_gnttab_close_fd(int fd);
  
- char **xs_read_watch(struct xs_handle *h, unsigned int *num)
- {
-     int fd = _xs_fileno(h);
-     struct xenbus_event *event;
--    event = files[fd].xenbus.events;
--    files[fd].xenbus.events = event->next;
-+    event = files[fd].dev;
-+    files[fd].dev = event->next;
-     printk("xs_read_watch() -> %s %s\n", event->path, event->token);
-     *num = 2;
-     return (char **) &event->path;
+@@ -506,11 +505,6 @@ int close(int fd)
+ 	    res = lwip_close(files[fd].fd);
+             break;
+ #endif
+-#ifdef CONFIG_LIBXENCTRL
+-	case FTYPE_XC:
+-	    minios_interface_close_fd(fd);
+-            break;
+-#endif
+ #ifdef CONFIG_LIBXENEVTCHN
+ 	case FTYPE_EVTCHN:
+ 	    minios_evtchn_close_fd(fd);
+@@ -729,7 +723,6 @@ static const char *file_types[] = {
+     [FTYPE_NONE]    = "none",
+     [FTYPE_CONSOLE] = "console",
+     [FTYPE_XENBUS]  = "xenbus",
+-    [FTYPE_XC]      = "ctrl",
+     [FTYPE_EVTCHN]  = "evtchn",
+     [FTYPE_SOCKET]  = "socket",
+     [FTYPE_TAP]     = "net",
+@@ -1510,12 +1503,6 @@ void *mmap(void *start, size_t length, int prot, int flags, int fd, off_t offset
+ 
+     if (fd == -1)
+         return map_zero(n, 1);
+-#ifdef CONFIG_LIBXENCTRL
+-    else if (files[fd].type == FTYPE_XC) {
+-        unsigned long zero = 0;
+-        return map_frames_ex(&zero, n, 0, 0, 1, DOMID_SELF, NULL, 0);
+-    }
+-#endif
+     else if (files[fd].type == FTYPE_MEM) {
+         unsigned long first_mfn = offset >> PAGE_SHIFT;
+         return map_frames_ex(&first_mfn, n, 0, 1, 1, DOMID_IO, NULL, _PAGE_PRESENT|_PAGE_RW);
 -- 
 2.26.2
 
