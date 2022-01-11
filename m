@@ -4,38 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D26C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 17:00:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255972.438997 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24945C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 17:18:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.255979.439008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7KUz-0000Wq-1J; Tue, 11 Jan 2022 16:59:53 +0000
+	id 1n7Kme-00030M-Lt; Tue, 11 Jan 2022 17:18:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255972.438997; Tue, 11 Jan 2022 16:59:53 +0000
+Received: by outflank-mailman (output) from mailman id 255979.439008; Tue, 11 Jan 2022 17:18:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7KUy-0000Wh-UX; Tue, 11 Jan 2022 16:59:52 +0000
-Received: by outflank-mailman (input) for mailman id 255972;
- Tue, 11 Jan 2022 16:59:52 +0000
+	id 1n7Kme-00030F-Ij; Tue, 11 Jan 2022 17:18:08 +0000
+Received: by outflank-mailman (input) for mailman id 255979;
+ Tue, 11 Jan 2022 17:18:07 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=JwWh=R3=srcf.net=amc96@srs-se1.protection.inumbo.net>)
- id 1n7KUy-0008OS-3P
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 16:59:52 +0000
-Received: from ppsw-43.csi.cam.ac.uk (ppsw-43.csi.cam.ac.uk [131.111.8.143])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e3b76313-72ff-11ec-9ce5-af14b9085ebd;
- Tue, 11 Jan 2022 17:59:51 +0100 (CET)
-Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:50650)
- by ppsw-43.csi.cam.ac.uk (ppsw.cam.ac.uk [131.111.8.139]:25)
- with esmtps (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- id 1n7KUw-000VZe-ml (Exim 4.95) (return-path <amc96@srcf.net>);
- Tue, 11 Jan 2022 16:59:50 +0000
-Received: from [192.168.1.10] (host-92-12-61-86.as13285.net [92.12.61.86])
- (Authenticated sender: amc96)
- by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id E0D9C1FB3A;
- Tue, 11 Jan 2022 16:59:49 +0000 (GMT)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=KamR=R3=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1n7Kmd-000309-AL
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 17:18:07 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6f44c7b2-7302-11ec-9ce5-af14b9085ebd;
+ Tue, 11 Jan 2022 18:18:05 +0100 (CET)
+Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
+ [72.81.132.2]) by mx.zohomail.com
+ with SMTPS id 1641921481347592.0753134066362;
+ Tue, 11 Jan 2022 09:18:01 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,36 +42,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3b76313-72ff-11ec-9ce5-af14b9085ebd
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: https://help.uis.cam.ac.uk/email-scanner-virus
-Message-ID: <624ec4dc-e03d-35ab-ab6b-5cfe4b9b5c55@srcf.net>
-Date: Tue, 11 Jan 2022 16:59:49 +0000
+X-Inumbo-ID: 6f44c7b2-7302-11ec-9ce5-af14b9085ebd
+ARC-Seal: i=1; a=rsa-sha256; t=1641921481; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=JdDKhRhAwZQIrkkRJ9wcQODbo/DI+MLFUAzR83Vr89JPkLi8/KO9cuHGcCh39t6bvQsh15lZS9F8XRxdDxXMW37DpDL0bbscfkgyGkXhIOPuWoiWm9yRkEdffXxvxzW+iCRB9tf09tzbsd7BE+OPT/pKa3amfQppKZ4YE6h/ijg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1641921481; h=Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
+	bh=qsTQc3SfLcU/uIGx1/188+JBMWG8NHVrBgLTSOosXpE=; 
+	b=lt0GZd5XBdhBG0Pk0T9yaFHmdLIrrUPzDPPrY0Fj0aovhJeDAGPmuT+GuMus7dXt5wy3rCBpyRj+Nf8c9bsZd3kR5ny/Hq7K/Axf3JA/ss4NK3G6GVB23CxbQZvcpVBtRYVQt67daWTzZzeHcVoQtaq8Vy/iOJcLYbAqG0VScYY=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1641921481;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding;
+	bh=qsTQc3SfLcU/uIGx1/188+JBMWG8NHVrBgLTSOosXpE=;
+	b=rxCAJPbmLVpZ93ePkIbhXd4n+SJZUARNUruTKacv2rrfkQwJgU5yao8j3KInivxb
+	r3opYYloj/QUIDEdKOunbhax4+SPKHFLuu4IZ8ajbBJLQJpqS5MnsD3UO60mA+saxgV
+	ZatkLoelT1KdWh5q9SiVkcNw0Br0jN84rbRT4NTA=
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+To: xen-devel@lists.xenproject.org
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH] MAINTAINERS: requesting to be txt reviewer
+Date: Tue, 11 Jan 2022 16:21:14 -0500
+Message-Id: <20220111212114.16273-1-dpsmith@apertussolutions.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.4.0
-Subject: Re: [PATCH v2 2/2] x86/paging: replace most mfn_valid() in log-dirty
- handling
-Content-Language: en-GB
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>
-References: <61c1d38c-65a6-e150-ed53-b565d30c18c9@suse.com>
- <fe8a690e-9305-c512-9d2f-4256c5c9b910@suse.com>
-From: Andrew Cooper <amc96@srcf.net>
-In-Reply-To: <fe8a690e-9305-c512-9d2f-4256c5c9b910@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
-On 06/12/2021 13:25, Jan Beulich wrote:
-> Top level table and intermediate table entries get explicitly set to
-> INVALID_MFN when un-allocated. There's therefore no need to use the more
-> expensive mfn_valid() when checking for that sentinel.
->
-> Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+I would like to submit myself, Daniel P. Smith, as a reviewer of TXT support in
+Xen.
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+---
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 6e84a05760..4a2884dfa7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -317,6 +317,7 @@ F:	xen/include/xen/hypfs.h
+ 
+ INTEL(R) TRUSTED EXECUTION TECHNOLOGY (TXT)
+ R:	Lukasz Hawrylko <lukasz.hawrylko@linux.intel.com>
++R:	Daniel P. Smith <dpsmith@apertussolutions.com>
+ S:	Odd Fixes
+ F:	xen/arch/x86/include/asm/tboot.h
+ F:	xen/arch/x86/tboot.c
+-- 
+2.20.1
+
 
