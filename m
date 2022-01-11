@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551CBC433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:12:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.255871.438763 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE92EC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jan 2022 15:12:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.255867.438738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7Ioz-0003SH-4C; Tue, 11 Jan 2022 15:12:25 +0000
+	id 1n7Iow-0002yC-T3; Tue, 11 Jan 2022 15:12:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 255871.438763; Tue, 11 Jan 2022 15:12:25 +0000
+Received: by outflank-mailman (output) from mailman id 255867.438738; Tue, 11 Jan 2022 15:12:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7Ioy-0003RD-Qw; Tue, 11 Jan 2022 15:12:24 +0000
-Received: by outflank-mailman (input) for mailman id 255871;
- Tue, 11 Jan 2022 15:12:23 +0000
+	id 1n7Iow-0002y3-P5; Tue, 11 Jan 2022 15:12:22 +0000
+Received: by outflank-mailman (input) for mailman id 255867;
+ Tue, 11 Jan 2022 15:12:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zHlr=R3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1n7Iow-0002Fv-VQ
- for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 15:12:23 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1n7Iou-0002Fv-VK
+ for xen-devel@lists.xenproject.org; Tue, 11 Jan 2022 15:12:21 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ddbbbb2d-72f0-11ec-9ce5-af14b9085ebd;
- Tue, 11 Jan 2022 16:12:18 +0100 (CET)
+ id dd8042dd-72f0-11ec-9ce5-af14b9085ebd;
+ Tue, 11 Jan 2022 16:12:17 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D9E20212C5;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 7BC961F3B8;
  Tue, 11 Jan 2022 15:12:17 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B24D913DDD;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5665A13DDD;
  Tue, 11 Jan 2022 15:12:17 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 4LNQKlGe3WG8AwAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id UNUCFFGe3WG8AwAAMHmgww
  (envelope-from <jgross@suse.com>); Tue, 11 Jan 2022 15:12:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,334 +53,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ddbbbb2d-72f0-11ec-9ce5-af14b9085ebd
+X-Inumbo-ID: dd8042dd-72f0-11ec-9ce5-af14b9085ebd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1641913937; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=HfQh4OZ9az0A9qjPS5wm3iwxm7DBwhvFq6/vq3hHx4c=;
-	b=d+2fCrxpZ86Dc+7cN3OiQiG9EGz1BKXAhrYJF71rPwQ8i4kjMPvAVxGZPTUl9n/L3qsiRc
-	wTEby7tMgtDOedTFArOZVMMsYt9vYyotw7EhP2R9SzKXvUrXb54IPu2U/kIppdSeUkwYlQ
-	Lj19uGCFkMYW8wXcigeeSEVUDLbad6Y=
+	bh=gTPeNHy0AVh7duIevs+xqjLxKhkGSrZIz5TiPB1taxY=;
+	b=IRkL3v6k2KUYC2e1crbEs0Lw5Izu4d+fHlophfX9cPw76G/pbv0YqXKfbEwbqEysaBI8xa
+	Q3Fo82RyLoSralVP088j9JE1wfo/qBNlvFtKyVN6d2H2Bhtkk/28Xo3pLB6EP57ilJhV0p
+	4p7xRiGRrlwFAt+8mBeLO3eHtsG1gLM=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 05/12] mini-os: use alloc_file_type() and get_file_from_fd() in tpmfront
-Date: Tue, 11 Jan 2022 16:12:08 +0100
-Message-Id: <20220111151215.22955-6-jgross@suse.com>
+Subject: [PATCH v2 03/12] mini-os: use alloc_file_type() and get_file_from_fd() in xs
+Date: Tue, 11 Jan 2022 16:12:06 +0100
+Message-Id: <20220111151215.22955-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20220111151215.22955-1-jgross@suse.com>
 References: <20220111151215.22955-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Allocate a file type dynamically via alloc_file_type().
+Allocate the needed file type via alloc_file_type().
 
 Instead of directly accessing the files[] array use get_file_from_fd().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- include/lib.h      |   3 +-
- include/tpmfront.h |   5 ---
- lib/sys.c          |  23 -----------
- tpmfront.c         | 100 ++++++++++++++++++++++++++++++++-------------
- 4 files changed, 72 insertions(+), 59 deletions(-)
+ include/lib.h   |  3 +--
+ lib/sys.c       | 18 --------------
+ lib/xs.c        | 64 +++++++++++++++++++++++++++++++++++++------------
+ xenbus/xenbus.c |  1 +
+ 4 files changed, 51 insertions(+), 35 deletions(-)
 
 diff --git a/include/lib.h b/include/lib.h
-index d94d142..f6478de 100644
+index 283abb8..05c7de5 100644
 --- a/include/lib.h
 +++ b/include/lib.h
-@@ -165,8 +165,7 @@ void sanity_check(void);
- #define FTYPE_KBD        7
- #define FTYPE_TAP        8
+@@ -167,8 +167,7 @@ void sanity_check(void);
  #define FTYPE_BLK        9
--#define FTYPE_TPMFRONT  10
--#define FTYPE_N         11
-+#define FTYPE_N         10
+ #define FTYPE_TPMFRONT  10
+ #define FTYPE_TPM_TIS   11
+-#define FTYPE_XENBUS    12
+-#define FTYPE_N         13
++#define FTYPE_N         12
  #define FTYPE_SPARE     16
  
  typedef int file_read_func(int fd, void *buf, size_t nbytes);
-diff --git a/include/tpmfront.h b/include/tpmfront.h
-index b7da50e..a527371 100644
---- a/include/tpmfront.h
-+++ b/include/tpmfront.h
-@@ -81,7 +81,6 @@ int tpmfront_cmd(struct tpmfront_dev* dev, uint8_t* req, size_t reqlen, uint8_t*
- int tpmfront_set_locality(struct tpmfront_dev* dev, int locality);
- 
- #ifdef HAVE_LIBC
--#include <sys/stat.h>
- /* POSIX IO functions:
-  * use tpmfront_open() to get a file descriptor to the tpm device
-  * use write() on the fd to send a command to the backend. You must
-@@ -90,10 +89,6 @@ int tpmfront_set_locality(struct tpmfront_dev* dev, int locality);
-  * fstat() to get the size of the response and lseek() to seek on it.
-  */
- int tpmfront_open(struct tpmfront_dev* dev);
--int tpmfront_posix_read(int fd, uint8_t* buf, size_t count);
--int tpmfront_posix_write(int fd, const uint8_t* buf, size_t count);
--int tpmfront_posix_fstat(int fd, struct stat* buf);
- #endif
- 
--
- #endif
 diff --git a/lib/sys.c b/lib/sys.c
-index 4060b42..ff6be52 100644
+index 9540410..d213ae5 100644
 --- a/lib/sys.c
 +++ b/lib/sys.c
-@@ -28,7 +28,6 @@
- #include <netfront.h>
- #include <blkfront.h>
- #include <fbfront.h>
--#include <tpmfront.h>
- #include <xenbus.h>
- #include <xenstore.h>
- #include <poll.h>
-@@ -343,11 +342,6 @@ int read(int fd, void *buf, size_t nbytes)
-         case FTYPE_BLK: {
- 	    return blkfront_posix_read(fd, buf, nbytes);
-         }
--#endif
--#ifdef CONFIG_TPMFRONT
--        case FTYPE_TPMFRONT: {
--	    return tpmfront_posix_read(fd, buf, nbytes);
--        }
- #endif
- 	default:
- 	    break;
-@@ -389,10 +383,6 @@ int write(int fd, const void *buf, size_t nbytes)
- #ifdef CONFIG_BLKFRONT
- 	case FTYPE_BLK:
- 	    return blkfront_posix_write(fd, buf, nbytes);
--#endif
--#ifdef CONFIG_TPMFRONT
--	case FTYPE_TPMFRONT:
--	    return tpmfront_posix_write(fd, buf, nbytes);
- #endif
- 	default:
- 	    break;
-@@ -445,10 +435,6 @@ off_t lseek(int fd, off_t offset, int whence)
- #ifdef CONFIG_BLKFRONT
-        case FTYPE_BLK:
-           break;
--#endif
--#ifdef CONFIG_TPMFRONT
--       case FTYPE_TPMFRONT:
--          break;
- #endif
-        case FTYPE_FILE:
-           break;
-@@ -496,11 +482,6 @@ int close(int fd)
-             shutdown_blkfront(files[fd].dev);
+@@ -495,11 +495,6 @@ int close(int fd)
+     switch (files[fd].type) {
+         default:
              break;
- #endif
--#ifdef CONFIG_TPMFRONT
--	case FTYPE_TPMFRONT:
--            shutdown_tpmfront(files[fd].dev);
+-#ifdef CONFIG_XENBUS
+-	case FTYPE_XENBUS:
+-            xs_daemon_close((void*)(intptr_t) fd);
 -            break;
 -#endif
- #ifdef CONFIG_KBDFRONT
- 	case FTYPE_KBD:
-             shutdown_kbdfront(files[fd].dev);
-@@ -576,10 +557,6 @@ int fstat(int fd, struct stat *buf)
- #ifdef CONFIG_BLKFRONT
- 	case FTYPE_BLK:
- 	   return blkfront_posix_fstat(fd, buf);
--#endif
--#ifdef CONFIG_TPMFRONT
--	case FTYPE_TPMFRONT:
--	   return tpmfront_posix_fstat(fd, buf);
- #endif
- 	default:
+ #ifdef HAVE_LWIP
+ 	case FTYPE_SOCKET:
+ 	    res = lwip_close(files[fd].fd);
+@@ -712,7 +707,6 @@ int closedir(DIR *dir)
+ static const char *file_types[] = {
+     [FTYPE_NONE]    = "none",
+     [FTYPE_CONSOLE] = "console",
+-    [FTYPE_XENBUS]  = "xenbus",
+     [FTYPE_SOCKET]  = "socket",
+     [FTYPE_TAP]     = "net",
+     [FTYPE_BLK]     = "blk",
+@@ -892,18 +886,6 @@ static int select_poll(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exce
+                 n++;
+ 	    FD_CLR(i, exceptfds);
  	    break;
-diff --git a/tpmfront.c b/tpmfront.c
-index 0a2fefc..a19a052 100644
---- a/tpmfront.c
-+++ b/tpmfront.c
-@@ -49,6 +49,10 @@
- void tpmfront_handler(evtchn_port_t port, struct pt_regs *regs, void *data) {
-    struct tpmfront_dev* dev = (struct tpmfront_dev*) data;
-    tpmif_shared_page_t *shr = dev->page;
-+#ifdef HAVE_LIBC
-+    struct file *file = get_file_from_fd(dev->fd);
-+#endif
-+
-    /*If we get a response when we didnt make a request, just ignore it */
-    if(!dev->waiting) {
-       return;
-@@ -65,8 +69,9 @@ void tpmfront_handler(evtchn_port_t port, struct pt_regs *regs, void *data) {
- 
-    dev->waiting = 0;
- #ifdef HAVE_LIBC
--   if(dev->fd >= 0) {
--      files[dev->fd].read = true;
-+   if ( file )
-+   {
-+      file->read = true;
-    }
- #endif
-    wake_up(&dev->waitq);
-@@ -405,6 +410,10 @@ int tpmfront_send(struct tpmfront_dev* dev, const uint8_t* msg, size_t length)
- #ifdef TPMFRONT_PRINT_DEBUG
-    int i;
- #endif
-+#ifdef HAVE_LIBC
-+    struct file *file = dev ? get_file_from_fd(dev->fd) : NULL;
-+#endif
-+
-    /* Error Checking */
-    if(dev == NULL || dev->state != XenbusStateConnected) {
-       TPMFRONT_ERR("Tried to send message through disconnected frontend\n");
-@@ -437,9 +446,10 @@ int tpmfront_send(struct tpmfront_dev* dev, const uint8_t* msg, size_t length)
-    dev->waiting = 1;
-    dev->resplen = 0;
- #ifdef HAVE_LIBC
--   if(dev->fd >= 0) {
--      files[dev->fd].read = false;
--      files[dev->fd].offset = 0;
-+   if ( file )
-+   {
-+      file->read = false;
-+      file->offset = 0;
-       dev->respgot = false;
-    }
- #endif
-@@ -529,25 +539,14 @@ int tpmfront_set_locality(struct tpmfront_dev* dev, int locality)
- 
- #ifdef HAVE_LIBC
- #include <errno.h>
--int tpmfront_open(struct tpmfront_dev* dev)
--{
--   /* Silently prevent multiple opens */
--   if(dev->fd != -1) {
--      return dev->fd;
--   }
- 
--   dev->fd = alloc_fd(FTYPE_TPMFRONT);
--   printk("tpmfront_open(%s) -> %d\n", dev->nodename, dev->fd);
--   files[dev->fd].dev = dev;
--   dev->respgot = false;
--   return dev->fd;
--}
--
--int tpmfront_posix_write(int fd, const uint8_t* buf, size_t count)
-+static int tpmfront_posix_write(int fd, const void *buf, size_t count)
- {
-    int rc;
-    struct tpmfront_dev* dev;
--   dev = files[fd].dev;
-+   struct file *file = get_file_from_fd(fd);
-+
-+   dev = file->dev;
- 
-    if(count == 0) {
-       return 0;
-@@ -566,14 +565,15 @@ int tpmfront_posix_write(int fd, const uint8_t* buf, size_t count)
-    return count;
+-#ifdef CONFIG_XENBUS
+-	case FTYPE_XENBUS:
+-	    if (FD_ISSET(i, readfds)) {
+-                if (files[i].dev)
+-		    n++;
+-		else
+-		    FD_CLR(i, readfds);
+-	    }
+-	    FD_CLR(i, writefds);
+-	    FD_CLR(i, exceptfds);
+-	    break;
+-#endif
+ 	case FTYPE_TAP:
+ 	case FTYPE_BLK:
+ 	case FTYPE_KBD:
+diff --git a/lib/xs.c b/lib/xs.c
+index 4af0f96..ac830d2 100644
+--- a/lib/xs.c
++++ b/lib/xs.c
+@@ -18,23 +18,55 @@ static inline int _xs_fileno(struct xs_handle *h) {
+     return (intptr_t) h;
  }
  
--int tpmfront_posix_read(int fd, uint8_t* buf, size_t count)
-+static int tpmfront_posix_read(int fd, void *buf, size_t count)
- {
-    int rc;
-    uint8_t* dummybuf;
-    size_t dummysz;
-    struct tpmfront_dev* dev;
-+   struct file *file = get_file_from_fd(fd);
- 
--   dev = files[fd].dev;
-+   dev = file->dev;
- 
-    if(count == 0) {
-       return 0;
-@@ -588,29 +588,33 @@ int tpmfront_posix_read(int fd, uint8_t* buf, size_t count)
-    }
- 
-    /* handle EOF case */
--   if(files[dev->fd].offset >= dev->resplen) {
-+   if ( file->offset >= dev->resplen )
-+   {
-       return 0;
-    }
- 
-    /* Compute the number of bytes and do the copy operation */
--   if((rc = min(count, dev->resplen - files[dev->fd].offset)) != 0) {
--      memcpy(buf, dev->respbuf + files[dev->fd].offset, rc);
--      files[dev->fd].offset += rc;
-+   if ( (rc = min(count, dev->resplen - file->offset)) != 0 )
-+   {
-+      memcpy(buf, dev->respbuf + file->offset, rc);
-+      file->offset += rc;
-    }
- 
-    return rc;
- }
- 
--int tpmfront_posix_fstat(int fd, struct stat* buf)
-+static int tpmfront_posix_fstat(int fd, struct stat *buf)
- {
-    uint8_t* dummybuf;
-    size_t dummysz;
-    int rc;
--   struct tpmfront_dev* dev = files[fd].dev;
-+   struct file *file = get_file_from_fd(fd);
-+   struct tpmfront_dev* dev = file->dev;
- 
-    /* If we have a response waiting, then read it now from the backend
-     * so we can get its length*/
--   if(dev->waiting || (files[dev->fd].read && !dev->respgot)) {
-+   if ( dev->waiting || (file->read && !dev->respgot) )
-+   {
-       if ((rc = tpmfront_recv(dev, &dummybuf, &dummysz)) != 0) {
- 	 errno = EIO;
- 	 return -1;
-@@ -626,5 +630,43 @@ int tpmfront_posix_fstat(int fd, struct stat* buf)
-    return 0;
- }
- 
-+static int tpmfront_close_fd(int fd)
++static int xs_close_fd(int fd)
 +{
++    struct xenbus_event *event, *next;
 +    struct file *file = get_file_from_fd(fd);
 +
-+    shutdown_tpmfront(file->dev);
++    for (event = file->dev; event; event = next)
++    {
++        next = event->next;
++        free(event);
++    }
 +
 +    return 0;
 +}
 +
-+static struct file_ops tpmfront_ops = {
-+    .name = "tpmfront",
-+    .read = tpmfront_posix_read,
-+    .write = tpmfront_posix_write,
-+    .lseek = lseek_default,
-+    .close = tpmfront_close_fd,
-+    .fstat = tpmfront_posix_fstat,
++static bool xs_can_read(int fd)
++{
++    struct file *file = get_file_from_fd(fd);
++
++    return file && file->dev;
++}
++
++static struct file_ops xenbus_ops = {
++    .name = "xenbus",
++    .close = xs_close_fd,
++    .select_rd = xs_can_read,
 +};
 +
-+int tpmfront_open(struct tpmfront_dev* dev)
-+{
-+   struct file *file;
-+   static unsigned int ftype_tpmfront;
+ struct xs_handle *xs_daemon_open()
+ {
+-    int fd = alloc_fd(FTYPE_XENBUS);
+-    files[fd].dev = NULL;
+-    printk("xs_daemon_open -> %d, %p\n", fd, &files[fd].dev);
++    int fd;
++    struct file *file;
++    static unsigned int ftype_xenbus;
 +
-+   /* Silently prevent multiple opens */
-+   if(dev->fd != -1) {
-+      return dev->fd;
-+   }
++    if ( !ftype_xenbus )
++        ftype_xenbus = alloc_file_type(&xenbus_ops);
 +
-+   if ( !ftype_tpmfront )
-+       ftype_tpmfront = alloc_file_type(&tpmfront_ops);
++    fd = alloc_fd(ftype_xenbus);
++    file = get_file_from_fd(fd);
++    if ( !file )
++        return NULL;
 +
-+   dev->fd = alloc_fd(ftype_tpmfront);
-+   printk("tpmfront_open(%s) -> %d\n", dev->nodename, dev->fd);
-+   file = get_file_from_fd(dev->fd);
-+   file->dev = dev;
-+   dev->respgot = false;
-+   return dev->fd;
-+}
++    file->dev = NULL;
++    printk("xs_daemon_open -> %d, %p\n", fd, &file->dev);
+     return (void*)(intptr_t) fd;
+ }
  
- #endif
+ void xs_daemon_close(struct xs_handle *h)
+ {
+-    int fd = _xs_fileno(h);
+-    struct xenbus_event *event, *next;
+-    for (event = files[fd].dev; event; event = next)
+-    {
+-        next = event->next;
+-        free(event);
+-    }
++    close(_xs_fileno(h));
+ }
+ 
+ int xs_fileno(struct xs_handle *h)
+@@ -169,18 +201,20 @@ char **xs_directory(struct xs_handle *h, xs_transaction_t t,
+ 
+ bool xs_watch(struct xs_handle *h, const char *path, const char *token)
+ {
+-    int fd = _xs_fileno(h);
++    struct file *file = get_file_from_fd(_xs_fileno(h));
++
+     printk("xs_watch(%s, %s)\n", path, token);
+     return xs_bool(xenbus_watch_path_token(XBT_NULL, path, token,
+-                   (xenbus_event_queue *)&files[fd].dev));
++                   (xenbus_event_queue *)&file->dev));
+ }
+ 
+ char **xs_read_watch(struct xs_handle *h, unsigned int *num)
+ {
+-    int fd = _xs_fileno(h);
+     struct xenbus_event *event;
+-    event = files[fd].dev;
+-    files[fd].dev = event->next;
++    struct file *file = get_file_from_fd(_xs_fileno(h));
++
++    event = file->dev;
++    file->dev = event->next;
+     printk("xs_read_watch() -> %s %s\n", event->path, event->token);
+     *num = 2;
+     return (char **) &event->path;
+diff --git a/xenbus/xenbus.c b/xenbus/xenbus.c
+index b687678..785389f 100644
+--- a/xenbus/xenbus.c
++++ b/xenbus/xenbus.c
+@@ -393,6 +393,7 @@ static int allocate_xenbus_id(void)
+ void init_xenbus(void)
+ {
+     int err;
++
+     DEBUG("init_xenbus called.\n");
+     create_thread("xenstore", xenbus_thread_func, NULL);
+     DEBUG("buf at %p.\n", xenstore_buf);
 -- 
 2.26.2
 
