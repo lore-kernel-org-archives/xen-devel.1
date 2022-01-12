@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14AA8C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Jan 2022 17:17:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.256788.440866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 811BCC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Jan 2022 17:22:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.256798.440878 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7hFl-0006uW-8z; Wed, 12 Jan 2022 17:17:41 +0000
+	id 1n7hJg-0000Gg-V5; Wed, 12 Jan 2022 17:21:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 256788.440866; Wed, 12 Jan 2022 17:17:41 +0000
+Received: by outflank-mailman (output) from mailman id 256798.440878; Wed, 12 Jan 2022 17:21:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7hFl-0006uP-5L; Wed, 12 Jan 2022 17:17:41 +0000
-Received: by outflank-mailman (input) for mailman id 256788;
- Wed, 12 Jan 2022 17:17:39 +0000
+	id 1n7hJg-0000GZ-RU; Wed, 12 Jan 2022 17:21:44 +0000
+Received: by outflank-mailman (input) for mailman id 256798;
+ Wed, 12 Jan 2022 17:21:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cmOE=R4=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1n7hFj-0005v6-9w
- for xen-devel@lists.xenproject.org; Wed, 12 Jan 2022 17:17:39 +0000
+ id 1n7hJf-0000GR-8T
+ for xen-devel@lists.xenproject.org; Wed, 12 Jan 2022 17:21:43 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8a0f3fa5-73cb-11ec-9c70-5536b2d1e4e1;
- Wed, 12 Jan 2022 18:17:38 +0100 (CET)
+ id 18ae4c1d-73cc-11ec-9c70-5536b2d1e4e1;
+ Wed, 12 Jan 2022 18:21:41 +0100 (CET)
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-348-_kXwFZIdOviwuCE4l7lEkA-1; Wed, 12 Jan 2022 12:17:33 -0500
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-433-VJYu9YkOM2CA6tra9T3WQg-1; Wed, 12 Jan 2022 12:17:35 -0500
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1406F101F001;
- Wed, 12 Jan 2022 17:17:32 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3651883DD2D;
+ Wed, 12 Jan 2022 17:16:21 +0000 (UTC)
 Received: from localhost (unknown [10.39.195.79])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9CF0A7F81A;
- Wed, 12 Jan 2022 17:17:31 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id B2181105C89A;
+ Wed, 12 Jan 2022 17:16:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,18 +52,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8a0f3fa5-73cb-11ec-9c70-5536b2d1e4e1
+X-Inumbo-ID: 18ae4c1d-73cc-11ec-9c70-5536b2d1e4e1
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1642007857;
+	s=mimecast20190719; t=1642008096;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=js5bkbA3MR3Yyy5XstjOhtqjgRh3bMz19gvkW1lmJoU=;
-	b=FdspTRLkLeQSY1ZWy7OQkmmw72pMkR/Z4FGH+39JCvJXMpDJPrUZCU+B9rPAn5W8ZBISx4
-	nO8jjZoXp0hHAzrNOQX1dQqyZ9dxBmFbtrdvzErigwiXR28pjNXhGTB4J+BH5f/RoV8k07
-	tcjui87s/0I++/s8R5DRpMNSn+Ca/a0=
-X-MC-Unique: _kXwFZIdOviwuCE4l7lEkA-1
+	bh=yjHInqzmPrCv4N46YVTfuK0G8vvJKHp5wvZGRJen2mw=;
+	b=doRjbsuEp2jJqjz9AkB3zOmFo84ureQih+mfg84hHDbvtXoxb0wvQhiH0naCoM3Uy2rtPI
+	djIAasvMXGX1LPVG6hrGh4Ohu0979RgWCLCfryF+ZymohAutqn8QK7EPeoJII/D/SK6kn/
+	ce9NXcG2O3zLBVmEaHsvgGiqR+uP+kk=
+X-MC-Unique: VJYu9YkOM2CA6tra9T3WQg-1
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: qemu-devel@nongnu.org,
 	Peter Maydell <peter.maydell@linaro.org>
@@ -90,13 +90,13 @@ Cc: Coiby Xu <Coiby.Xu@gmail.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Hanna Reitz <hreitz@redhat.com>
-Subject: [PULL 6/6] virtio: unify dataplane and non-dataplane ->handle_output()
-Date: Wed, 12 Jan 2022 17:14:02 +0000
-Message-Id: <20220112171402.112183-7-stefanha@redhat.com>
+Subject: [PULL 2/6] virtio: get rid of VirtIOHandleAIOOutput
+Date: Wed, 12 Jan 2022 17:13:58 +0000
+Message-Id: <20220112171402.112183-3-stefanha@redhat.com>
 In-Reply-To: <20220112171402.112183-1-stefanha@redhat.com>
 References: <20220112171402.112183-1-stefanha@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Authentication-Results: relay.mimecast.com;
 	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=stefanha@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -104,202 +104,181 @@ X-Mimecast-Originator: redhat.com
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset="US-ASCII"
 
-Now that virtio-blk and virtio-scsi are ready, get rid of
-the handle_aio_output() callback. It's no longer needed.
+The virtqueue host notifier API
+virtio_queue_aio_set_host_notifier_handler() polls the virtqueue for new
+buffers. AioContext previously required a bool progress return value
+indicating whether an event was handled or not. This is no longer
+necessary because the AioContext polling API has been split into a poll
+check function and an event handler function. The event handler is only
+run when we know there is work to do, so it doesn't return bool.
+
+The VirtIOHandleAIOOutput function signature is now the same as
+VirtIOHandleOutput. Get rid of the bool return value.
+
+Further simplifications will be made for virtio-blk and virtio-scsi in
+the next patch.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
-Message-id: 20211207132336.36627-7-stefanha@redhat.com
+Message-id: 20211207132336.36627-3-stefanha@redhat.com
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/hw/virtio/virtio.h      |  4 +--
- hw/block/dataplane/virtio-blk.c | 16 ++--------
- hw/scsi/virtio-scsi-dataplane.c | 54 ++++-----------------------------
- hw/virtio/virtio.c              | 32 +++++++++----------
- 4 files changed, 26 insertions(+), 80 deletions(-)
+ include/hw/virtio/virtio.h      |  3 +--
+ hw/block/dataplane/virtio-blk.c |  4 ++--
+ hw/scsi/virtio-scsi-dataplane.c | 18 ++++++------------
+ hw/virtio/virtio.c              | 12 ++++--------
+ 4 files changed, 13 insertions(+), 24 deletions(-)
 
 diff --git a/include/hw/virtio/virtio.h b/include/hw/virtio/virtio.h
-index b90095628f..f095637058 100644
+index 8bab9cfb75..b90095628f 100644
 --- a/include/hw/virtio/virtio.h
 +++ b/include/hw/virtio/virtio.h
-@@ -316,8 +316,8 @@ bool virtio_device_ioeventfd_enabled(VirtIODevice *vdev);
- EventNotifier *virtio_queue_get_host_notifier(VirtQueue *vq);
+@@ -175,7 +175,6 @@ void virtio_error(VirtIODevice *vdev, const char *fmt, ...) GCC_FMT_ATTR(2, 3);
+ void virtio_device_set_child_bus_name(VirtIODevice *vdev, char *bus_name);
+ 
+ typedef void (*VirtIOHandleOutput)(VirtIODevice *, VirtQueue *);
+-typedef bool (*VirtIOHandleAIOOutput)(VirtIODevice *, VirtQueue *);
+ 
+ VirtQueue *virtio_add_queue(VirtIODevice *vdev, int queue_size,
+                             VirtIOHandleOutput handle_output);
+@@ -318,7 +317,7 @@ EventNotifier *virtio_queue_get_host_notifier(VirtQueue *vq);
  void virtio_queue_set_host_notifier_enabled(VirtQueue *vq, bool enabled);
  void virtio_queue_host_notifier_read(EventNotifier *n);
--void virtio_queue_aio_set_host_notifier_handler(VirtQueue *vq, AioContext *ctx,
--        VirtIOHandleOutput handle_output);
-+void virtio_queue_aio_attach_host_notifier(VirtQueue *vq, AioContext *ctx);
-+void virtio_queue_aio_detach_host_notifier(VirtQueue *vq, AioContext *ctx);
+ void virtio_queue_aio_set_host_notifier_handler(VirtQueue *vq, AioContext *ctx,
+-                                                VirtIOHandleAIOOutput handle_output);
++        VirtIOHandleOutput handle_output);
  VirtQueue *virtio_vector_first_queue(VirtIODevice *vdev, uint16_t vector);
  VirtQueue *virtio_vector_next_queue(VirtQueue *vq);
  
 diff --git a/hw/block/dataplane/virtio-blk.c b/hw/block/dataplane/virtio-blk.c
-index a2fa407b98..49276e46f2 100644
+index ee5a5352dc..a2fa407b98 100644
 --- a/hw/block/dataplane/virtio-blk.c
 +++ b/hw/block/dataplane/virtio-blk.c
-@@ -154,17 +154,6 @@ void virtio_blk_data_plane_destroy(VirtIOBlockDataPlane *s)
+@@ -154,7 +154,7 @@ void virtio_blk_data_plane_destroy(VirtIOBlockDataPlane *s)
      g_free(s);
  }
  
--static void virtio_blk_data_plane_handle_output(VirtIODevice *vdev,
--                                                VirtQueue *vq)
--{
--    VirtIOBlock *s = (VirtIOBlock *)vdev;
--
--    assert(s->dataplane);
--    assert(s->dataplane_started);
--
--    virtio_blk_handle_vq(s, vq);
--}
--
- /* Context: QEMU global mutex held */
- int virtio_blk_data_plane_start(VirtIODevice *vdev)
+-static bool virtio_blk_data_plane_handle_output(VirtIODevice *vdev,
++static void virtio_blk_data_plane_handle_output(VirtIODevice *vdev,
+                                                 VirtQueue *vq)
  {
-@@ -258,8 +247,7 @@ int virtio_blk_data_plane_start(VirtIODevice *vdev)
-     for (i = 0; i < nvqs; i++) {
-         VirtQueue *vq = virtio_get_queue(s->vdev, i);
+     VirtIOBlock *s = (VirtIOBlock *)vdev;
+@@ -162,7 +162,7 @@ static bool virtio_blk_data_plane_handle_output(VirtIODevice *vdev,
+     assert(s->dataplane);
+     assert(s->dataplane_started);
  
--        virtio_queue_aio_set_host_notifier_handler(vq, s->ctx,
--                virtio_blk_data_plane_handle_output);
-+        virtio_queue_aio_attach_host_notifier(vq, s->ctx);
-     }
-     aio_context_release(s->ctx);
-     return 0;
-@@ -302,7 +290,7 @@ static void virtio_blk_data_plane_stop_bh(void *opaque)
-     for (i = 0; i < s->conf->num_queues; i++) {
-         VirtQueue *vq = virtio_get_queue(s->vdev, i);
- 
--        virtio_queue_aio_set_host_notifier_handler(vq, s->ctx, NULL);
-+        virtio_queue_aio_detach_host_notifier(vq, s->ctx);
-     }
+-    return virtio_blk_handle_vq(s, vq);
++    virtio_blk_handle_vq(s, vq);
  }
  
+ /* Context: QEMU global mutex held */
 diff --git a/hw/scsi/virtio-scsi-dataplane.c b/hw/scsi/virtio-scsi-dataplane.c
-index 76137de67f..29575cbaf6 100644
+index 18eb824c97..76137de67f 100644
 --- a/hw/scsi/virtio-scsi-dataplane.c
 +++ b/hw/scsi/virtio-scsi-dataplane.c
-@@ -49,45 +49,6 @@ void virtio_scsi_dataplane_setup(VirtIOSCSI *s, Error **errp)
+@@ -49,49 +49,43 @@ void virtio_scsi_dataplane_setup(VirtIOSCSI *s, Error **errp)
      }
  }
  
--static void virtio_scsi_data_plane_handle_cmd(VirtIODevice *vdev,
--                                              VirtQueue *vq)
--{
--    VirtIOSCSI *s = VIRTIO_SCSI(vdev);
--
--    virtio_scsi_acquire(s);
--    if (!s->dataplane_fenced) {
--        assert(s->ctx && s->dataplane_started);
--        virtio_scsi_handle_cmd_vq(s, vq);
--    }
--    virtio_scsi_release(s);
--}
--
--static void virtio_scsi_data_plane_handle_ctrl(VirtIODevice *vdev,
--                                               VirtQueue *vq)
--{
--    VirtIOSCSI *s = VIRTIO_SCSI(vdev);
--
--    virtio_scsi_acquire(s);
--    if (!s->dataplane_fenced) {
--        assert(s->ctx && s->dataplane_started);
--        virtio_scsi_handle_ctrl_vq(s, vq);
--    }
--    virtio_scsi_release(s);
--}
--
--static void virtio_scsi_data_plane_handle_event(VirtIODevice *vdev,
--                                                VirtQueue *vq)
--{
--    VirtIOSCSI *s = VIRTIO_SCSI(vdev);
--
--    virtio_scsi_acquire(s);
--    if (!s->dataplane_fenced) {
--        assert(s->ctx && s->dataplane_started);
--        virtio_scsi_handle_event_vq(s, vq);
--    }
--    virtio_scsi_release(s);
--}
--
- static int virtio_scsi_set_host_notifier(VirtIOSCSI *s, VirtQueue *vq, int n)
+-static bool virtio_scsi_data_plane_handle_cmd(VirtIODevice *vdev,
++static void virtio_scsi_data_plane_handle_cmd(VirtIODevice *vdev,
+                                               VirtQueue *vq)
  {
-     BusState *qbus = BUS(qdev_get_parent_bus(DEVICE(s)));
-@@ -112,10 +73,10 @@ static void virtio_scsi_dataplane_stop_bh(void *opaque)
-     VirtIOSCSICommon *vs = VIRTIO_SCSI_COMMON(s);
-     int i;
+-    bool progress = false;
+     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
  
--    virtio_queue_aio_set_host_notifier_handler(vs->ctrl_vq, s->ctx, NULL);
--    virtio_queue_aio_set_host_notifier_handler(vs->event_vq, s->ctx, NULL);
-+    virtio_queue_aio_detach_host_notifier(vs->ctrl_vq, s->ctx);
-+    virtio_queue_aio_detach_host_notifier(vs->event_vq, s->ctx);
-     for (i = 0; i < vs->conf.num_queues; i++) {
--        virtio_queue_aio_set_host_notifier_handler(vs->cmd_vqs[i], s->ctx, NULL);
-+        virtio_queue_aio_detach_host_notifier(vs->cmd_vqs[i], s->ctx);
+     virtio_scsi_acquire(s);
+     if (!s->dataplane_fenced) {
+         assert(s->ctx && s->dataplane_started);
+-        progress = virtio_scsi_handle_cmd_vq(s, vq);
++        virtio_scsi_handle_cmd_vq(s, vq);
      }
+     virtio_scsi_release(s);
+-    return progress;
  }
  
-@@ -176,14 +137,11 @@ int virtio_scsi_dataplane_start(VirtIODevice *vdev)
-     memory_region_transaction_commit();
+-static bool virtio_scsi_data_plane_handle_ctrl(VirtIODevice *vdev,
++static void virtio_scsi_data_plane_handle_ctrl(VirtIODevice *vdev,
+                                                VirtQueue *vq)
+ {
+-    bool progress = false;
+     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
  
-     aio_context_acquire(s->ctx);
--    virtio_queue_aio_set_host_notifier_handler(vs->ctrl_vq, s->ctx,
--                                            virtio_scsi_data_plane_handle_ctrl);
--    virtio_queue_aio_set_host_notifier_handler(vs->event_vq, s->ctx,
--                                           virtio_scsi_data_plane_handle_event);
-+    virtio_queue_aio_attach_host_notifier(vs->ctrl_vq, s->ctx);
-+    virtio_queue_aio_attach_host_notifier(vs->event_vq, s->ctx);
- 
-     for (i = 0; i < vs->conf.num_queues; i++) {
--        virtio_queue_aio_set_host_notifier_handler(vs->cmd_vqs[i], s->ctx,
--                                             virtio_scsi_data_plane_handle_cmd);
-+        virtio_queue_aio_attach_host_notifier(vs->cmd_vqs[i], s->ctx);
+     virtio_scsi_acquire(s);
+     if (!s->dataplane_fenced) {
+         assert(s->ctx && s->dataplane_started);
+-        progress = virtio_scsi_handle_ctrl_vq(s, vq);
++        virtio_scsi_handle_ctrl_vq(s, vq);
      }
+     virtio_scsi_release(s);
+-    return progress;
+ }
  
-     s->dataplane_starting = false;
+-static bool virtio_scsi_data_plane_handle_event(VirtIODevice *vdev,
++static void virtio_scsi_data_plane_handle_event(VirtIODevice *vdev,
+                                                 VirtQueue *vq)
+ {
+-    bool progress = false;
+     VirtIOSCSI *s = VIRTIO_SCSI(vdev);
+ 
+     virtio_scsi_acquire(s);
+     if (!s->dataplane_fenced) {
+         assert(s->ctx && s->dataplane_started);
+-        progress = virtio_scsi_handle_event_vq(s, vq);
++        virtio_scsi_handle_event_vq(s, vq);
+     }
+     virtio_scsi_release(s);
+-    return progress;
+ }
+ 
+ static int virtio_scsi_set_host_notifier(VirtIOSCSI *s, VirtQueue *vq, int n)
 diff --git a/hw/virtio/virtio.c b/hw/virtio/virtio.c
-index e938e6513b..aae72fb8b7 100644
+index 5db7f69237..323f549aad 100644
 --- a/hw/virtio/virtio.c
 +++ b/hw/virtio/virtio.c
-@@ -3525,23 +3525,23 @@ static void virtio_queue_host_notifier_aio_poll_end(EventNotifier *n)
-     virtio_queue_set_notification(vq, 1);
+@@ -125,7 +125,7 @@ struct VirtQueue
+ 
+     uint16_t vector;
+     VirtIOHandleOutput handle_output;
+-    VirtIOHandleAIOOutput handle_aio_output;
++    VirtIOHandleOutput handle_aio_output;
+     VirtIODevice *vdev;
+     EventNotifier guest_notifier;
+     EventNotifier host_notifier;
+@@ -2303,22 +2303,18 @@ void virtio_queue_set_align(VirtIODevice *vdev, int n, int align)
+     }
  }
  
--void virtio_queue_aio_set_host_notifier_handler(VirtQueue *vq, AioContext *ctx,
--        VirtIOHandleOutput handle_output)
-+void virtio_queue_aio_attach_host_notifier(VirtQueue *vq, AioContext *ctx)
+-static bool virtio_queue_notify_aio_vq(VirtQueue *vq)
++static void virtio_queue_notify_aio_vq(VirtQueue *vq)
  {
--    if (handle_output) {
--        aio_set_event_notifier(ctx, &vq->host_notifier, true,
--                               virtio_queue_host_notifier_read,
--                               virtio_queue_host_notifier_aio_poll,
--                               virtio_queue_host_notifier_aio_poll_ready);
--        aio_set_event_notifier_poll(ctx, &vq->host_notifier,
--                                    virtio_queue_host_notifier_aio_poll_begin,
--                                    virtio_queue_host_notifier_aio_poll_end);
--    } else {
--        aio_set_event_notifier(ctx, &vq->host_notifier, true, NULL, NULL, NULL);
--        /* Test and clear notifier before after disabling event,
--         * in case poll callback didn't have time to run. */
--        virtio_queue_host_notifier_read(&vq->host_notifier);
--    }
-+    aio_set_event_notifier(ctx, &vq->host_notifier, true,
-+                           virtio_queue_host_notifier_read,
-+                           virtio_queue_host_notifier_aio_poll,
-+                           virtio_queue_host_notifier_aio_poll_ready);
-+    aio_set_event_notifier_poll(ctx, &vq->host_notifier,
-+                                virtio_queue_host_notifier_aio_poll_begin,
-+                                virtio_queue_host_notifier_aio_poll_end);
-+}
-+
-+void virtio_queue_aio_detach_host_notifier(VirtQueue *vq, AioContext *ctx)
-+{
-+    aio_set_event_notifier(ctx, &vq->host_notifier, true, NULL, NULL, NULL);
-+    /* Test and clear notifier before after disabling event,
-+     * in case poll callback didn't have time to run. */
-+    virtio_queue_host_notifier_read(&vq->host_notifier);
+-    bool ret = false;
+-
+     if (vq->vring.desc && vq->handle_aio_output) {
+         VirtIODevice *vdev = vq->vdev;
+ 
+         trace_virtio_queue_notify(vdev, vq - vdev->vq, vq);
+-        ret = vq->handle_aio_output(vdev, vq);
++        vq->handle_aio_output(vdev, vq);
+ 
+         if (unlikely(vdev->start_on_kick)) {
+             virtio_set_started(vdev, true);
+         }
+     }
+-
+-    return ret;
  }
  
- void virtio_queue_host_notifier_read(EventNotifier *n)
+ static void virtio_queue_notify_vq(VirtQueue *vq)
+@@ -3555,7 +3551,7 @@ static void virtio_queue_host_notifier_aio_poll_end(EventNotifier *n)
+ }
+ 
+ void virtio_queue_aio_set_host_notifier_handler(VirtQueue *vq, AioContext *ctx,
+-                                                VirtIOHandleAIOOutput handle_output)
++        VirtIOHandleOutput handle_output)
+ {
+     if (handle_output) {
+         vq->handle_aio_output = handle_output;
 -- 
 2.34.1
 
