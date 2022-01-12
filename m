@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E63BC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Jan 2022 16:42:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.256745.440746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8F40C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Jan 2022 16:42:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.256747.440768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7ggo-0006Jb-K8; Wed, 12 Jan 2022 16:41:34 +0000
+	id 1n7gh0-0006tx-4i; Wed, 12 Jan 2022 16:41:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 256745.440746; Wed, 12 Jan 2022 16:41:34 +0000
+Received: by outflank-mailman (output) from mailman id 256747.440768; Wed, 12 Jan 2022 16:41:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7ggo-0006JU-Gt; Wed, 12 Jan 2022 16:41:34 +0000
-Received: by outflank-mailman (input) for mailman id 256745;
- Wed, 12 Jan 2022 16:41:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1n7gh0-0006to-12; Wed, 12 Jan 2022 16:41:46 +0000
+Received: by outflank-mailman (input) for mailman id 256747;
+ Wed, 12 Jan 2022 16:41:45 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ytoJ=R4=suse.com=dfaggioli@srs-se1.protection.inumbo.net>)
- id 1n7ggn-0006JO-Aq
- for xen-devel@lists.xenproject.org; Wed, 12 Jan 2022 16:41:33 +0000
+ id 1n7ggz-0006Zx-1p
+ for xen-devel@lists.xenproject.org; Wed, 12 Jan 2022 16:41:45 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7f2d64e2-73c6-11ec-9c70-5536b2d1e4e1;
- Wed, 12 Jan 2022 17:41:31 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 86aa41ae-73c6-11ec-bd6f-bfb69f65cdc7;
+ Wed, 12 Jan 2022 17:41:44 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3803D1F39B;
- Wed, 12 Jan 2022 16:41:31 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 17D161F3A3;
+ Wed, 12 Jan 2022 16:41:44 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DD09513BE6;
- Wed, 12 Jan 2022 16:41:30 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CDBB813BE6;
+ Wed, 12 Jan 2022 16:41:43 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id P8h4M7oE32GmTAAAMHmgww
- (envelope-from <dfaggioli@suse.com>); Wed, 12 Jan 2022 16:41:30 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id FLEHMMcE32HATAAAMHmgww
+ (envelope-from <dfaggioli@suse.com>); Wed, 12 Jan 2022 16:41:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,73 +53,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7f2d64e2-73c6-11ec-9c70-5536b2d1e4e1
+X-Inumbo-ID: 86aa41ae-73c6-11ec-bd6f-bfb69f65cdc7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1642005691; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1642005704; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=xnkW0qyBAqv0IYt/Ys6pBbBfCTc4R0r4m+OvdFVhX3o=;
-	b=AGcJNGNQr8tZXp4bvci2AzrkmrQEVVg+MDL4XB+5QqDkyJpqRzHKE5qYdLHLUhzL2YsyQX
-	dmhspyTriFRruOEvSV9ULsIXLOsajOuFj1GK8Xb7Vidf0rwFTDJlvNfoloyWryH6xKvLz4
-	37TKCIUbA9WuMbUIKuaSo8gBOeVV5sc=
-Subject: [PATCH 0/2] libs/light: fix a race when domain are destroied and
- created concurrently
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=oqPxnpqVpg7+ZYnFXNDLlT5wDVvRC/DohNLeViPfz9I=;
+	b=o7UjMZMAn2RHLUfPI7b6G/Phj+NqEBug1EBKWEpZqDAukpIwTKmIC0Q8X9NPgz4DwevFIW
+	yZgHuKNFEkkGSlFyej1THoCNs/NVFXV+RdhdNIYl7X63T1WisCwfrzv9kP5GivIGYWz3DI
+	E0rhY8HZaqdnpONpYnkeKux48PuUWwU=
+Subject: [PATCH 2/2] tools/libs/light: don't touch nr_vcpus_out if listing
+ vcpus and returning NULL
 From: Dario Faggioli <dfaggioli@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>,
- Juergen Gross <jgross@suse.com>, James Fehlig <jfehlig@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>,
- Juergen Gross <jgross@suse.com>, James Fehlig <jfehlig@suse.com>
-Date: Wed, 12 Jan 2022 17:41:29 +0100
-Message-ID: <164200566223.24755.262723784847161301.stgit@work>
+Cc: James Fehlig <jfehlig@suse.com>, Wei Liu <wl@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>
+Date: Wed, 12 Jan 2022 17:41:42 +0100
+Message-ID: <164200570276.24755.1849386285622380597.stgit@work>
+In-Reply-To: <164200566223.24755.262723784847161301.stgit@work>
+References: <164200566223.24755.262723784847161301.stgit@work>
 User-Agent: StGit/0.23
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 
-It is possible to encounter a segfault in libxl during concurrent domain
-create and destroy operations.
+If we are in libvxl_list_vcpu() and we are returning NULL, let's avoid
+touching the output parameter *nr_vcpus_out (which should contain the
+number of vcpus in the list). Ideally, the caller initialized it to 0,
+which is therefore consistent with us returning NULL (or, as an alternative,
+we can explicitly set it to 0 if we're returning null... But just not
+touching it seems the best behavior).
 
-This is because Placement of existing domains on the host's CPUs is examined
-when creating a new domain, but the existing logic does not tolerate well a
-domain disappearing during the examination.
+In fact, the current behavior is especially problematic if, for
+instance, a domain is destroyed after we have done some steps of the
+for() loop. In which case, calls like xc_vcpu_getinfo() or
+xc_vcpu_getaffinity() will start to fail, and we return back to the
+caller inconsistent information, such as a NULL list of vcpus, but a
+modified and not 0 any longer, number of vcpus in the list.
 
-The race is quite difficult to trigger. Whan that happens, this is an
-example of a backtrace:
-
-#0  libxl_bitmap_dispose (map=map@entry=0x50) at libxl_utils.c:626
-#1  0x00007fe72c993a32 in libxl_vcpuinfo_dispose (p=p@entry=0x38) at _libxl_types.c:692
-#2  0x00007fe72c94e3c4 in libxl_vcpuinfo_list_free (list=0x0, nr=<optimized out>) at libxl_utils.c:1059
-#3  0x00007fe72c9528bf in nr_vcpus_on_nodes (vcpus_on_node=0x7fe71000eb60, suitable_cpumap=0x7fe721df0d38, tinfo_elements=48, tinfo=0x7fe7101b3900, gc=0x7fe7101bbfa0) at libxl_numa.c:258
-#4  libxl__get_numa_candidate (gc=gc@entry=0x7fe7100033a0, min_free_memkb=4233216, min_cpus=4, min_nodes=min_nodes@entry=0, max_nodes=max_nodes@entry=0, suitable_cpumap=suitable_cpumap@entry=0x7fe721df0d38, numa_cmpf=0x7fe72c940110 <numa_cmpf>, cndt_out=0x7fe721df0cf0, cndt_found=0x7fe721df0cb4) at libxl_numa.c:394
-#5  0x00007fe72c94152b in numa_place_domain (d_config=0x7fe721df11b0, domid=975, gc=0x7fe7100033a0) at libxl_dom.c:209
-#6  libxl__build_pre (gc=gc@entry=0x7fe7100033a0, domid=domid@entry=975, d_config=d_config@entry=0x7fe721df11b0, state=state@entry=0x7fe710077700) at libxl_dom.c:436
-#7  0x00007fe72c92c4a5 in libxl__domain_build (gc=0x7fe7100033a0, d_config=d_config@entry=0x7fe721df11b0, domid=975, state=0x7fe710077700) at libxl_create.c:444
-#8  0x00007fe72c92de8b in domcreate_bootloader_done (egc=0x7fe721df0f60, bl=0x7fe7100778c0, rc=<optimized out>) at libxl_create.c:1222
-#9  0x00007fe72c980425 in libxl__bootloader_run (egc=egc@entry=0x7fe721df0f60, bl=bl@entry=0x7fe7100778c0) at libxl_bootloader.c:403
-#10 0x00007fe72c92f281 in initiate_domain_create (egc=egc@entry=0x7fe721df0f60, dcs=dcs@entry=0x7fe7100771b0) at libxl_create.c:1159
-#11 0x00007fe72c92f456 in do_domain_create (ctx=ctx@entry=0x7fe71001c840, d_config=d_config@entry=0x7fe721df11b0, domid=domid@entry=0x7fe721df10a8, restore_fd=restore_fd@entry=-1, send_back_fd=send_back_fd@entry=-1, params=params@entry=0x0, ao_how=0x0, aop_console_how=0x7fe721df10f0) at libxl_create.c:1856
-#12 0x00007fe72c92f776 in libxl_domain_create_new (ctx=0x7fe71001c840, d_config=d_config@entry=0x7fe721df11b0, domid=domid@entry=0x7fe721df10a8, ao_how=ao_how@entry=0x0, aop_console_how=aop_console_how@entry=0x7fe721df10f0) at libxl_create.c:2075
-
-Luckily, it is easy to close the race, by just making sure that
-libvxl_list_vcpu() returns 0 as the number of vCPUs of the domain, when
-it also returns NULL as the list of them.
-
-Regards
+Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
+Tested-by: James Fehlig <jfehlig@suse.com>
 ---
-Dario Faggioli (2):
-      tools/libs/light: numa placement: don't try to free a NULL list of vcpus
-      tools/libs/light: don't touch nr_vcpus_out if listing vcpus and returning NULL
-
- tools/libs/light/libxl_domain.c | 14 ++++++++------
- tools/libs/light/libxl_numa.c   |  4 +++-
+Cc: Wei Liu <wl@xen.org>
+Cc: Anthony PERARD <anthony.perard@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>
+---
+ tools/libs/light/libxl_domain.c |   14 ++++++++------
+ tools/libs/light/libxl_numa.c   |    4 +++-
  2 files changed, 11 insertions(+), 7 deletions(-)
---
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+diff --git a/tools/libs/light/libxl_domain.c b/tools/libs/light/libxl_domain.c
+index 544a9bf59d..aabc264e16 100644
+--- a/tools/libs/light/libxl_domain.c
++++ b/tools/libs/light/libxl_domain.c
+@@ -1661,6 +1661,7 @@ libxl_vcpuinfo *libxl_list_vcpu(libxl_ctx *ctx, uint32_t domid,
+     libxl_vcpuinfo *ptr, *ret;
+     xc_domaininfo_t domaininfo;
+     xc_vcpuinfo_t vcpuinfo;
++    int nr_vcpus;
+ 
+     if (xc_domain_getinfolist(ctx->xch, domid, 1, &domaininfo) != 1) {
+         LOGED(ERROR, domid, "Getting infolist");
+@@ -1677,27 +1678,27 @@ libxl_vcpuinfo *libxl_list_vcpu(libxl_ctx *ctx, uint32_t domid,
+     ret = ptr = libxl__calloc(NOGC, domaininfo.max_vcpu_id + 1,
+                               sizeof(libxl_vcpuinfo));
+ 
+-    for (*nr_vcpus_out = 0;
+-         *nr_vcpus_out <= domaininfo.max_vcpu_id;
+-         ++*nr_vcpus_out, ++ptr) {
++    for (nr_vcpus = 0;
++         nr_vcpus <= domaininfo.max_vcpu_id;
++         ++nr_vcpus, ++ptr) {
+         libxl_bitmap_init(&ptr->cpumap);
+         if (libxl_cpu_bitmap_alloc(ctx, &ptr->cpumap, 0))
+             goto err;
+         libxl_bitmap_init(&ptr->cpumap_soft);
+         if (libxl_cpu_bitmap_alloc(ctx, &ptr->cpumap_soft, 0))
+             goto err;
+-        if (xc_vcpu_getinfo(ctx->xch, domid, *nr_vcpus_out, &vcpuinfo) == -1) {
++        if (xc_vcpu_getinfo(ctx->xch, domid, nr_vcpus, &vcpuinfo) == -1) {
+             LOGED(ERROR, domid, "Getting vcpu info");
+             goto err;
+         }
+ 
+-        if (xc_vcpu_getaffinity(ctx->xch, domid, *nr_vcpus_out,
++        if (xc_vcpu_getaffinity(ctx->xch, domid, nr_vcpus,
+                                 ptr->cpumap.map, ptr->cpumap_soft.map,
+                                 XEN_VCPUAFFINITY_SOFT|XEN_VCPUAFFINITY_HARD) == -1) {
+             LOGED(ERROR, domid, "Getting vcpu affinity");
+             goto err;
+         }
+-        ptr->vcpuid = *nr_vcpus_out;
++        ptr->vcpuid = nr_vcpus;
+         ptr->cpu = vcpuinfo.cpu;
+         ptr->online = !!vcpuinfo.online;
+         ptr->blocked = !!vcpuinfo.blocked;
+@@ -1705,6 +1706,7 @@ libxl_vcpuinfo *libxl_list_vcpu(libxl_ctx *ctx, uint32_t domid,
+         ptr->vcpu_time = vcpuinfo.cpu_time;
+     }
+     GC_FREE;
++    *nr_vcpus_out = nr_vcpus;
+     return ret;
+ 
+ err:
+diff --git a/tools/libs/light/libxl_numa.c b/tools/libs/light/libxl_numa.c
+index 3679028c79..b04e3917a0 100644
+--- a/tools/libs/light/libxl_numa.c
++++ b/tools/libs/light/libxl_numa.c
+@@ -219,8 +219,10 @@ static int nr_vcpus_on_nodes(libxl__gc *gc, libxl_cputopology *tinfo,
+             goto next;
+ 
+         vinfo = libxl_list_vcpu(CTX, dinfo[i].domid, &nr_dom_vcpus, &nr_cpus);
+-        if (vinfo == NULL)
++        if (vinfo == NULL) {
++            assert(nr_dom_vcpus == 0);
+             goto next;
++        }
+ 
+         /* Retrieve the domain's node-affinity map */
+         libxl_domain_get_nodeaffinity(CTX, dinfo[i].domid, &dom_nodemap);
+
 
 
