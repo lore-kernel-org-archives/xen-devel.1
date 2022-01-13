@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8114C43219
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D10C433EF
 	for <xen-devel@archiver.kernel.org>; Thu, 13 Jan 2022 00:59:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.256935.441229 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.256936.441235 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7oSE-0001Gn-C5; Thu, 13 Jan 2022 00:59:02 +0000
+	id 1n7oSE-0001Lm-PO; Thu, 13 Jan 2022 00:59:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 256935.441229; Thu, 13 Jan 2022 00:59:02 +0000
+Received: by outflank-mailman (output) from mailman id 256936.441235; Thu, 13 Jan 2022 00:59:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n7oSE-0001Gb-87; Thu, 13 Jan 2022 00:59:02 +0000
-Received: by outflank-mailman (input) for mailman id 256935;
+	id 1n7oSE-0001Jl-IZ; Thu, 13 Jan 2022 00:59:02 +0000
+Received: by outflank-mailman (input) for mailman id 256936;
  Thu, 13 Jan 2022 00:59:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4cYr=R5=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1n7oSC-0000yd-SI
- for xen-devel@lists.xenproject.org; Thu, 13 Jan 2022 00:59:00 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fd7ffc1e-740b-11ec-bd6f-bfb69f65cdc7;
+ id 1n7oSD-0000Zm-3C
+ for xen-devel@lists.xenproject.org; Thu, 13 Jan 2022 00:59:01 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fdb55d7c-740b-11ec-a563-1748fde96b53;
  Thu, 13 Jan 2022 01:58:59 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 37171B82013;
+ by dfw.source.kernel.org (Postfix) with ESMTPS id C784961BD1;
  Thu, 13 Jan 2022 00:58:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADD42C36AE9;
- Thu, 13 Jan 2022 00:58:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 54EABC36AF2;
+ Thu, 13 Jan 2022 00:58:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +45,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd7ffc1e-740b-11ec-bd6f-bfb69f65cdc7
+X-Inumbo-ID: fdb55d7c-740b-11ec-a563-1748fde96b53
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1642035537;
-	bh=sZFmedX5/wiNDC+oEIvQz6ME9nvU8F4fvaLjZQa8j68=;
+	s=k20201202; t=1642035538;
+	bh=fAM5YKlaoqXNElpxV8cs5t9a0K94TnXBpqeWzHX/YLs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=LEP34n4m3IODU9NwNk+AMi9EnvYMktVOs+LH8vx7x9XGUX8mQhdN4GsNUPP2+Ek8g
-	 h0X/G+FOgoSdAe/tQL9f75gKBE6GMmHOgzRpnIPCy/A2a9SVZf4HmvQVlek77w8UcD
-	 NTLFSaxhcaErvw7APZOOLjMI5SNPquYuoTh1SYSXQQcE+5kLN7d4vdVATbWFFgEuZj
-	 7yBgniaXu1EC/b4YGN4AxzxZ6YNBp5zWxv6xezoVbGixXwfpZUTdSS3TLpB/IClbtu
-	 H1ZMSSsLthvJxAakkjiDD40hFWDfjSXM8Azes/yzR+C0nKJrt2Nq25jb4i4YpQxZGh
-	 3tpAXnnrHGOZw==
+	b=MrtQLDgTxeYWiHqJ+w1RK29ndLFljUIZHfVsMXu5qIrpLhozntotpH0aLP7PCT3EK
+	 fOrbC3BoP9dow/a6fUEojg5yNpk+XQFoKu8lVQuCNXEZoa0S9H+gANZ81tjwEuXXmg
+	 45m+83bvEJb3qilWZ47C1O/NqB8lGJuQFLcGhdtUmSnjlQ3+FwrhQ4fGCoeKJPdNe7
+	 q3+frVU1C/jjPhv63JEWAnvkPZS4X0qqkyQLkuzlkdtK3H3/tkRqH0X7kCY2ba2Vmk
+	 kf05bfkOHFtyghID0DvFP2xQNYKvI90bwdgJB17IeCPYD2gI4Fmb6RbuMvsc1Tvk1c
+	 iz0Bm65PE6bmA==
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
 Cc: sstabellini@kernel.org,
@@ -63,118 +63,48 @@ Cc: sstabellini@kernel.org,
 	Bertrand.Marquis@arm.com,
 	julien@xen.org,
 	Volodymyr_Babchuk@epam.com,
-	Stefano Stabellini <stefano.stabellini@xilinx.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [XEN PATCH v2 1/5] xen: introduce xen,enhanced dom0less property
-Date: Wed, 12 Jan 2022 16:58:51 -0800
-Message-Id: <20220113005855.1180101-1-sstabellini@kernel.org>
+	Luca Miccio <lucmiccio@gmail.com>,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [XEN PATCH v2 4/5] xenstored: send an evtchn notification on introduce_domain
+Date: Wed, 12 Jan 2022 16:58:54 -0800
+Message-Id: <20220113005855.1180101-4-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <alpine.DEB.2.22.394.2201121646290.19362@ubuntu-linux-20-04-desktop>
 References: <alpine.DEB.2.22.394.2201121646290.19362@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+From: Luca Miccio <lucmiccio@gmail.com>
 
-Introduce a new "xen,enhanced" dom0less property to enable/disable PV
-driver interfaces for dom0less guests. Currently only "enabled" and
-"disabled" are supported property values (and empty). Leave the option
-open to implement further possible values in the future (e.g.
-"xenstore" to enable only xenstore.)
+When xs_introduce_domain is called, send out a notification on the
+xenstore event channel so that any (dom0less) domain waiting for the
+xenstore interface to be ready can continue with the initialization.
 
-This patch only parses the property. Next patches will make use of it.
+The extra notification is harmless for domains that don't require it.
 
+Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-CC: Julien Grall <julien@xen.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
 ---
 Changes in v2:
-- rename kinfo.enhanced to kinfo.dom0less_enhanced
-- set kinfo.dom0less_enhanced to true for dom0
-- handle -ENODATA in addition to -EILSEQ
+- drop the new late_init parameter
 ---
- docs/misc/arm/device-tree/booting.txt | 18 ++++++++++++++++++
- xen/arch/arm/domain_build.c           |  8 ++++++++
- xen/arch/arm/include/asm/kernel.h     |  3 +++
- 3 files changed, 29 insertions(+)
+ tools/xenstore/xenstored_domain.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 71895663a4..38c29fb3d8 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -169,6 +169,24 @@ with the following properties:
-     Please note that the SPI used for the virtual pl011 could clash with the
-     physical SPI of a physical device assigned to the guest.
+diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
+index d03c7d93a9..7487129e47 100644
+--- a/tools/xenstore/xenstored_domain.c
++++ b/tools/xenstore/xenstored_domain.c
+@@ -461,6 +461,9 @@ static struct domain *introduce_domain(const void *ctx,
+ 		/* Now domain belongs to its connection. */
+ 		talloc_steal(domain->conn, domain);
  
-+- xen,enhanced
++		/* Notify the domain that xenstore is available */
++		xenevtchn_notify(xce_handle, domain->port);
 +
-+    A string property. Possible property values are:
-+
-+    - "enabled" (or missing property value)
-+    Xen PV interfaces, including grant-table and xenstore, will be
-+    enabled for the VM.
-+
-+    - "disabled"
-+    Xen PV interfaces are disabled.
-+
-+    If the xen,enhanced property is present with no value, it defaults
-+    to "enabled". If the xen,enhanced property is not present, PV
-+    interfaces are disabled.
-+
-+    In the future other possible property values might be added to
-+    enable only selected interfaces.
-+
- - nr_spis
- 
-     Optional. A 32-bit integer specifying the number of SPIs (Shared
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 6931c022a2..9144d6c0b6 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -2963,6 +2963,7 @@ static int __init construct_domU(struct domain *d,
-                                  const struct dt_device_node *node)
- {
-     struct kernel_info kinfo = {};
-+    const char *dom0less_enhanced;
-     int rc;
-     u64 mem;
- 
-@@ -2978,6 +2979,12 @@ static int __init construct_domU(struct domain *d,
- 
-     kinfo.vpl011 = dt_property_read_bool(node, "vpl011");
- 
-+    rc = dt_property_read_string(node, "xen,enhanced", &dom0less_enhanced);
-+    if ( rc == -EILSEQ ||
-+         rc == -ENODATA ||
-+         (rc == 0 && !strcmp(dom0less_enhanced, "enabled")) )
-+        kinfo.dom0less_enhanced = true;
-+
-     if ( vcpu_create(d, 0) == NULL )
-         return -ENOMEM;
- 
-@@ -3095,6 +3102,7 @@ static int __init construct_dom0(struct domain *d)
- 
-     kinfo.unassigned_mem = dom0_mem;
-     kinfo.d = d;
-+    kinfo.dom0less_enhanced = true;
- 
-     rc = kernel_probe(&kinfo, NULL);
-     if ( rc < 0 )
-diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
-index 874aa108a7..c4dc039b54 100644
---- a/xen/arch/arm/include/asm/kernel.h
-+++ b/xen/arch/arm/include/asm/kernel.h
-@@ -36,6 +36,9 @@ struct kernel_info {
-     /* Enable pl011 emulation */
-     bool vpl011;
- 
-+    /* Enable PV drivers */
-+    bool dom0less_enhanced;
-+
-     /* GIC phandle */
-     uint32_t phandle_gic;
- 
+ 		if (!is_master_domain && !restore)
+ 			fire_watches(NULL, ctx, "@introduceDomain", NULL,
+ 				     false, NULL);
 -- 
 2.25.1
 
