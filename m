@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCB02C433FE
-	for <xen-devel@archiver.kernel.org>; Sun, 16 Jan 2022 08:33:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.257832.443254 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECE63C433F5
+	for <xen-devel@archiver.kernel.org>; Sun, 16 Jan 2022 08:33:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.257835.443268 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n90yr-0001V0-Th; Sun, 16 Jan 2022 08:33:41 +0000
+	id 1n90yt-0001sG-Nv; Sun, 16 Jan 2022 08:33:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 257832.443254; Sun, 16 Jan 2022 08:33:41 +0000
+Received: by outflank-mailman (output) from mailman id 257835.443268; Sun, 16 Jan 2022 08:33:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n90yr-0001Sh-7c; Sun, 16 Jan 2022 08:33:41 +0000
-Received: by outflank-mailman (input) for mailman id 257832;
- Sun, 16 Jan 2022 08:33:39 +0000
+	id 1n90yt-0001oe-8s; Sun, 16 Jan 2022 08:33:43 +0000
+Received: by outflank-mailman (input) for mailman id 257835;
+ Sun, 16 Jan 2022 08:33:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=APY9=SA=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1n90yo-0008IP-PG
- for xen-devel@lists.xenproject.org; Sun, 16 Jan 2022 08:33:38 +0000
+ id 1n90yp-0008IP-PN
+ for xen-devel@lists.xenproject.org; Sun, 16 Jan 2022 08:33:39 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fc7d0c98-76a6-11ec-a115-11989b9578b4;
- Sun, 16 Jan 2022 09:33:31 +0100 (CET)
+ id fcddc162-76a6-11ec-a115-11989b9578b4;
+ Sun, 16 Jan 2022 09:33:32 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 575631F3B4;
- Sun, 16 Jan 2022 08:33:31 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 00A211F3B2;
+ Sun, 16 Jan 2022 08:33:32 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2AF791346A;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C14431346A;
  Sun, 16 Jan 2022 08:33:31 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 0Dc/CVvY42HyFQAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id SBf1LVvY42HyFQAAMHmgww
  (envelope-from <jgross@suse.com>); Sun, 16 Jan 2022 08:33:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -53,37 +53,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fc7d0c98-76a6-11ec-a115-11989b9578b4
+X-Inumbo-ID: fcddc162-76a6-11ec-a115-11989b9578b4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1642322011; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1642322012; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=z5ZEOSnl4Zm8BpIud/3/sxMgQuEGzQWgZcmgMQmThgA=;
-	b=ta1KHt3mzpfTtqE/kK0s7Nq6GcCZ9DhxscohOKSJKKR4HZGpCUC5gtscn6x05/+MQfLiOr
-	noUHikursRXc+lnUIl1rLfXai2fiBhdO82FHfX0VTD4MzDW3GF7tKvc1K4Ps5ZB0yn9oCb
-	sGx7gjigrhbi4xQJEcIlnh3lr3PGzgY=
+	bh=V/vC7tx78nDm4GqTKex/CmQNpmhFP/CrwSTFfFKDiV0=;
+	b=GNbSZjwy7POyyXYRYjJBwE0+AievuggavYIBPtCINlJ6RJj6rMv5rduHp2JCvUN/g40k/l
+	msxIrrAuYJr2WFo75sNf6pGbDdMSyQgpvjV1YvM8k32Zl8rZ+P/7xJETUIZ8Dqe07LobjF
+	C/1ZOSGWsyRMhepceTlQyAyubIgnM6s=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [MINIOS PATCH v3 04/12] use alloc_file_type() and get_file_from_fd() in tpm_tis
-Date: Sun, 16 Jan 2022 09:33:20 +0100
-Message-Id: <20220116083328.26524-5-jgross@suse.com>
+Subject: [MINIOS PATCH v3 07/12] use alloc_file_type() and get_file_from_fd() in netfront
+Date: Sun, 16 Jan 2022 09:33:23 +0100
+Message-Id: <20220116083328.26524-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20220116083328.26524-1-jgross@suse.com>
 References: <20220116083328.26524-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Allocate a file type dynamically via alloc_file_type().
+Allocate the file type dynamically via alloc_file_type().
 
 Instead of directly accessing the files[] array use get_file_from_fd().
-
-Make some now local functions static and modify their prototypes to
-match the file_ops requirements.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
@@ -91,319 +88,222 @@ V3:
 - switch to struct file * parameter for callbacks
 - use __attribute__((constructor))
 ---
- include/lib.h     |   3 +-
- include/tpm_tis.h |   6 ---
- lib/sys.c         |  23 ---------
- tpm_tis.c         | 121 +++++++++++++++++++++++++++++-----------------
- 4 files changed, 78 insertions(+), 75 deletions(-)
+ include/lib.h      |  3 +--
+ include/netfront.h |  3 ++-
+ lib/sys.c          | 23 ----------------
+ netfront.c         | 65 +++++++++++++++++++++++++++++++++++++++-------
+ 4 files changed, 59 insertions(+), 35 deletions(-)
 
 diff --git a/include/lib.h b/include/lib.h
-index c5e47786..9dfb4689 100644
+index 2f472b00..b0d08807 100644
 --- a/include/lib.h
 +++ b/include/lib.h
-@@ -168,8 +168,7 @@ extern struct wait_queue_head event_queue;
- #define FTYPE_TAP        8
- #define FTYPE_BLK        9
- #define FTYPE_TPMFRONT  10
--#define FTYPE_TPM_TIS   11
--#define FTYPE_N         12
-+#define FTYPE_N         11
+@@ -165,8 +165,7 @@ extern struct wait_queue_head event_queue;
+ #define FTYPE_SAVEFILE   5
+ #define FTYPE_FB         6
+ #define FTYPE_KBD        7
+-#define FTYPE_TAP        8
+-#define FTYPE_N          9
++#define FTYPE_N          8
  #define FTYPE_SPARE     16
  
  struct file {
-diff --git a/include/tpm_tis.h b/include/tpm_tis.h
-index 86e83f13..2af974db 100644
---- a/include/tpm_tis.h
-+++ b/include/tpm_tis.h
-@@ -37,14 +37,11 @@ struct tpm_chip;
- 
- struct tpm_chip* init_tpm_tis(unsigned long baseaddr, int localities, unsigned int irq);
- struct tpm_chip* init_tpm2_tis(unsigned long baseaddr, int localities, unsigned int irq);
--void shutdown_tpm_tis(struct tpm_chip* tpm);
- 
- int tpm_tis_request_locality(struct tpm_chip* tpm, int locality);
- int tpm_tis_cmd(struct tpm_chip* tpm, uint8_t* req, size_t reqlen, uint8_t** resp, size_t* resplen);
- 
- #ifdef HAVE_LIBC
--#include <sys/stat.h>
--#include <fcntl.h>
- /* POSIX IO functions:
-  * use tpm_tis_open() to get a file descriptor to the tpm device
-  * use write() on the fd to send a command to the backend. You must
-@@ -53,9 +50,6 @@ int tpm_tis_cmd(struct tpm_chip* tpm, uint8_t* req, size_t reqlen, uint8_t** res
-  * fstat() to get the size of the response and lseek() to seek on it.
-  */
- int tpm_tis_open(struct tpm_chip* tpm);
--int tpm_tis_posix_read(int fd, uint8_t* buf, size_t count);
--int tpm_tis_posix_write(int fd, const uint8_t* buf, size_t count);
--int tpm_tis_posix_fstat(int fd, struct stat* buf);
- #endif
- 
- #endif
+diff --git a/include/netfront.h b/include/netfront.h
+index ec641c80..75080c26 100644
+--- a/include/netfront.h
++++ b/include/netfront.h
+@@ -10,7 +10,8 @@ struct netfront_dev *init_netfront(char *nodename,
+                                    char **ip);
+ char *netfront_get_netmask(struct netfront_dev *dev);
+ char *netfront_get_gateway(struct netfront_dev *dev);
+-void netfront_xmit(struct netfront_dev *dev, unsigned char* data,int len);
++void netfront_xmit(struct netfront_dev *dev, const unsigned char *data,
++                   int len);
+ void shutdown_netfront(struct netfront_dev *dev);
+ void suspend_netfront(void);
+ void resume_netfront(void);
 diff --git a/lib/sys.c b/lib/sys.c
-index 53870aa4..2fc81f20 100644
+index 90684335..44fe848c 100644
 --- a/lib/sys.c
 +++ b/lib/sys.c
-@@ -29,7 +29,6 @@
- #include <blkfront.h>
- #include <fbfront.h>
- #include <tpmfront.h>
--#include <tpm_tis.h>
- #include <xenbus.h>
- #include <xenstore.h>
- #include <poll.h>
-@@ -355,11 +354,6 @@ int read(int fd, void *buf, size_t nbytes)
-         case FTYPE_TPMFRONT: {
- 	    return tpmfront_posix_read(fd, buf, nbytes);
-         }
+@@ -309,17 +309,6 @@ int read(int fd, void *buf, size_t nbytes)
+         case FTYPE_SOCKET:
+ 	    return lwip_read(files[fd].fd, buf, nbytes);
+ #endif
+-#ifdef CONFIG_NETFRONT
+-	case FTYPE_TAP: {
+-	    ssize_t ret;
+-	    ret = netfront_receive(files[fd].dev, buf, nbytes);
+-	    if (ret <= 0) {
+-		errno = EAGAIN;
+-		return -1;
+-	    }
+-	    return ret;
+-	}
 -#endif
--#ifdef CONFIG_TPM_TIS
--        case FTYPE_TPM_TIS: {
--	    return tpm_tis_posix_read(fd, buf, nbytes);
--        }
+ #ifdef CONFIG_KBDFRONT
+         case FTYPE_KBD: {
+             int ret, n;
+@@ -382,11 +371,6 @@ int write(int fd, const void *buf, size_t nbytes)
+ #ifdef HAVE_LWIP
+ 	case FTYPE_SOCKET:
+ 	    return lwip_write(files[fd].fd, (void*) buf, nbytes);
+-#endif
+-#ifdef CONFIG_NETFRONT
+-	case FTYPE_TAP:
+-	    netfront_xmit(files[fd].dev, (void*) buf, nbytes);
+-	    return nbytes;
  #endif
  	default:
  	    break;
-@@ -412,10 +406,6 @@ int write(int fd, const void *buf, size_t nbytes)
- #ifdef CONFIG_TPMFRONT
- 	case FTYPE_TPMFRONT:
- 	    return tpmfront_posix_write(fd, buf, nbytes);
--#endif
--#ifdef CONFIG_TPM_TIS
--	case FTYPE_TPM_TIS:
--	    return tpm_tis_posix_write(fd, buf, nbytes);
- #endif
- 	default:
- 	    break;
-@@ -482,10 +472,6 @@ off_t lseek(int fd, off_t offset, int whence)
- #ifdef CONFIG_TPMFRONT
-        case FTYPE_TPMFRONT:
-           break;
--#endif
--#ifdef CONFIG_TPM_TIS
--       case FTYPE_TPM_TIS:
--          break;
- #endif
-        case FTYPE_FILE:
-           break;
-@@ -543,11 +529,6 @@ int close(int fd)
-             shutdown_tpmfront(files[fd].dev);
+@@ -487,11 +471,6 @@ int close(int fd)
+             res = lwip_close(files[fd].fd);
              break;
  #endif
--#ifdef CONFIG_TPM_TIS
--	case FTYPE_TPM_TIS:
--            shutdown_tpm_tis(files[fd].dev);
+-#ifdef CONFIG_NETFRONT
+-	case FTYPE_TAP:
+-	    shutdown_netfront(files[fd].dev);
 -            break;
 -#endif
  #ifdef CONFIG_KBDFRONT
  	case FTYPE_KBD:
              shutdown_kbdfront(files[fd].dev);
-@@ -636,10 +617,6 @@ int fstat(int fd, struct stat *buf)
- #ifdef CONFIG_TPMFRONT
- 	case FTYPE_TPMFRONT:
- 	   return tpmfront_posix_fstat(fd, buf);
--#endif
--#ifdef CONFIG_TPM_TIS
--	case FTYPE_TPM_TIS:
--	   return tpm_tis_posix_fstat(fd, buf);
- #endif
- 	default:
+@@ -687,7 +666,6 @@ static const char *const file_types[] = {
+     [FTYPE_NONE]    = "none",
+     [FTYPE_CONSOLE] = "console",
+     [FTYPE_SOCKET]  = "socket",
+-    [FTYPE_TAP]     = "net",
+     [FTYPE_KBD]     = "kbd",
+     [FTYPE_FB]      = "fb",
+ };
+@@ -872,7 +850,6 @@ static int select_poll(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exce
+                 n++;
+ 	    FD_CLR(i, exceptfds);
  	    break;
-diff --git a/tpm_tis.c b/tpm_tis.c
-index 477f5550..b88ec874 100644
---- a/tpm_tis.c
-+++ b/tpm_tis.c
-@@ -792,6 +792,9 @@ int tpm_tis_send(struct tpm_chip* tpm, uint8_t* buf, size_t len) {
-    int status, burstcnt = 0;
-    int count = 0;
-    uint32_t ordinal;
-+#ifdef HAVE_LIBC
-+   struct file *file = get_file_from_fd(tpm->fd);
-+#endif
+-	case FTYPE_TAP:
+ 	case FTYPE_KBD:
+ 	case FTYPE_FB:
+ 	    if (FD_ISSET(i, readfds)) {
+diff --git a/netfront.c b/netfront.c
+index 76964514..164fdc66 100644
+--- a/netfront.c
++++ b/netfront.c
+@@ -248,14 +248,14 @@ void netfront_select_handler(evtchn_port_t port, struct pt_regs *regs, void *dat
+ {
+     int flags;
+     struct netfront_dev *dev = data;
+-    int fd = dev->fd;
++    struct file *file = get_file_from_fd(dev->fd);
  
-    if(tpm_tis_request_locality(tpm, tpm->locality) < 0) {
-       return -EBUSY;
-@@ -844,9 +847,10 @@ int tpm_tis_send(struct tpm_chip* tpm, uint8_t* buf, size_t len) {
-       }
-    }
- #ifdef HAVE_LIBC
--   if(tpm->fd >= 0) {
--      files[tpm->fd].read = false;
--      files[tpm->fd].offset = 0;
-+   if ( file )
-+   {
-+      file->read = false;
-+      file->offset = 0;
-    }
+     local_irq_save(flags);
+     network_tx_buf_gc(dev);
+     local_irq_restore(flags);
+ 
+-    if (fd != -1)
+-        files[fd].read = true;
++    if ( file )
++        file->read = true;
+     wake_up(&netfront_queue);
+ }
  #endif
-    return len;
-@@ -1093,6 +1097,26 @@ ssize_t tpm_getcap(struct tpm_chip *chip, uint32_t subcap_id, cap_t *cap,
-         return rc;
- }
- 
-+static void shutdown_tpm_tis(struct tpm_chip *tpm)
-+{
-+    int i;
-+
-+    printk("Shutting down tpm_tis device\n");
-+
-+    iowrite32(TPM_INT_ENABLE(tpm, tpm->locality), ~TPM_GLOBAL_INT_ENABLE);
-+
-+    /* Unmap all of the mmio pages */
-+    for ( i = 0; i < 5; ++i )
-+    {
-+        if ( tpm->pages[i] != NULL )
-+        {
-+            iounmap(tpm->pages[i], PAGE_SIZE);
-+            tpm->pages[i] = NULL;
-+        }
-+    }
-+    free(tpm);
-+    return;
-+}
- 
- struct tpm_chip* init_tpm_tis(unsigned long baseaddr, int localities, unsigned int irq)
- {
-@@ -1242,25 +1266,6 @@ abort_egress:
-    return NULL;
- }
- 
--void shutdown_tpm_tis(struct tpm_chip* tpm){
--   int i;
--
--   printk("Shutting down tpm_tis device\n");
--
--   iowrite32(TPM_INT_ENABLE(tpm, tpm->locality), ~TPM_GLOBAL_INT_ENABLE);
--
--   /*Unmap all of the mmio pages */
--   for(i = 0; i < 5; ++i) {
--      if(tpm->pages[i] != NULL) {
--	 iounmap(tpm->pages[i], PAGE_SIZE);
--	 tpm->pages[i] = NULL;
--      }
--   }
--   free(tpm);
--   return;
--}
--
--
- int tpm_tis_cmd(struct tpm_chip* tpm, uint8_t* req, size_t reqlen, uint8_t** resp, size_t* resplen)
- {
-    if(tpm->locality < 0) {
-@@ -1279,23 +1284,19 @@ int tpm_tis_cmd(struct tpm_chip* tpm, uint8_t* req, size_t reqlen, uint8_t** res
+@@ -565,8 +565,53 @@ error:
  }
  
  #ifdef HAVE_LIBC
--int tpm_tis_open(struct tpm_chip* tpm)
-+#include <sys/stat.h>
-+#include <fcntl.h>
++static int netfront_read(struct file *file, void *buf, size_t nbytes)
++{
++    ssize_t ret;
 +
-+static int tpm_tis_close(struct file *file)
- {
--   /* Silently prevent multiple opens */
--   if(tpm->fd != -1) {
--      return tpm->fd;
--   }
-+    shutdown_tpm_tis(file->dev);
- 
--   tpm->fd = alloc_fd(FTYPE_TPM_TIS);
--   printk("tpm_tis_open() -> %d\n", tpm->fd);
--   files[tpm->fd].dev = tpm;
--   return tpm->fd;
++    ret = netfront_receive(file->dev, buf, nbytes);
++    if ( ret <= 0 )
++    {
++        errno = EAGAIN;
++        return -1;
++    }
++
++    return ret;
++}
++
++static int netfront_write(struct file *file, const void *buf, size_t nbytes)
++{
++    netfront_xmit(file->dev, buf, nbytes);
++
++    return nbytes;
++}
++
++static int netfront_close_fd(struct file *file)
++{
++    shutdown_netfront(file->dev);
++
 +    return 0;
- }
- 
--int tpm_tis_posix_write(int fd, const uint8_t* buf, size_t count)
-+static int tpm_tis_posix_write(struct file *file, const void *buf, size_t count)
- {
--   struct tpm_chip* tpm;
--   tpm = files[fd].dev;
-+   struct tpm_chip *tpm = file->dev;
- 
-    if(tpm->locality < 0) {
-       printk("tpm_tis_posix_write() failed! locality not set!\n");
-@@ -1319,11 +1320,10 @@ int tpm_tis_posix_write(int fd, const uint8_t* buf, size_t count)
-    return count;
- }
- 
--int tpm_tis_posix_read(int fd, uint8_t* buf, size_t count)
-+static int tpm_tis_posix_read(struct file *file, void *buf, size_t count)
- {
-    int rc;
--   struct tpm_chip* tpm;
--   tpm = files[fd].dev;
-+   struct tpm_chip *tpm = file->dev;
- 
-    if(count == 0) {
-       return 0;
-@@ -1337,20 +1337,21 @@ int tpm_tis_posix_read(int fd, uint8_t* buf, size_t count)
- 
- 
-    /* Handle EOF case */
--   if(files[fd].offset >= tpm->data_len) {
-+   if ( file->offset >= tpm->data_len )
-+   {
-       rc = 0;
-    } else {
--      rc = min(tpm->data_len - files[fd].offset, count);
--      memcpy(buf, tpm->data_buffer + files[fd].offset, rc);
-+      rc = min(tpm->data_len - file->offset, count);
-+      memcpy(buf, tpm->data_buffer + file->offset, rc);
-    }
--   files[fd].offset += rc;
-+   file->offset += rc;
-    /* Reset the data pending flag */
-    return rc;
- }
--int tpm_tis_posix_fstat(int fd, struct stat* buf)
++}
 +
-+static int tpm_tis_posix_fstat(struct file *file, struct stat *buf)
- {
--   struct tpm_chip* tpm;
--   tpm = files[fd].dev;
-+   struct tpm_chip *tpm = file->dev;
- 
-    buf->st_mode = O_RDWR;
-    buf->st_uid = 0;
-@@ -1360,6 +1361,38 @@ int tpm_tis_posix_fstat(int fd, struct stat* buf)
-    return 0;
- }
- 
-+static const struct file_ops tpm_tis_ops = {
-+    .name = "tpm_tis",
-+    .read = tpm_tis_posix_read,
-+    .write = tpm_tis_posix_write,
-+    .lseek = lseek_default,
-+    .close = tpm_tis_close,
-+    .fstat = tpm_tis_posix_fstat,
++static const struct file_ops netfront_ops = {
++    .name = "net",
++    .read = netfront_read,
++    .write = netfront_write,
++    .close = netfront_close_fd,
++    .select_rd = select_read_flag,
 +};
 +
-+static unsigned int ftype_tis;
++static unsigned int ftype_netfront;
 +
 +__attribute__((constructor))
-+static void tpm_tis_initialize(void)
++static void netfront_initialize(void)
 +{
-+    ftype_tis = alloc_file_type(&tpm_tis_ops);
++    ftype_netfront = alloc_file_type(&netfront_ops);
 +}
 +
-+int tpm_tis_open(struct tpm_chip *tpm)
-+{
+ int netfront_tap_open(char *nodename) {
+     struct netfront_dev *dev;
 +    struct file *file;
-+
-+    /* Silently prevent multiple opens */
-+    if ( tpm->fd != -1 )
-+        return tpm->fd;
-+
-+    tpm->fd = alloc_fd(ftype_tis);
-+    printk("tpm_tis_open() -> %d\n", tpm->fd);
-+    file = get_file_from_fd(tpm->fd);
-+    file->dev = tpm;
-+    return tpm->fd;
-+}
-+
- /* TPM 2.0 */
  
- /*TPM2.0 Selftest*/
+     dev = init_netfront(nodename, NETIF_SELECT_RX, NULL, NULL);
+     if (!dev) {
+@@ -574,9 +619,10 @@ int netfront_tap_open(char *nodename) {
+ 	errno = EIO;
+ 	return -1;
+     }
+-    dev->fd = alloc_fd(FTYPE_TAP);
++    dev->fd = alloc_fd(ftype_netfront);
+     printk("tap_open(%s) -> %d\n", nodename, dev->fd);
+-    files[dev->fd].dev = dev;
++    file = get_file_from_fd(dev->fd);
++    file->dev = dev;
+     return dev->fd;
+ }
+ #endif
+@@ -720,7 +766,7 @@ void init_rx_buffers(struct netfront_dev *dev)
+ }
+ 
+ 
+-void netfront_xmit(struct netfront_dev *dev, unsigned char* data,int len)
++void netfront_xmit(struct netfront_dev *dev, const unsigned char *data, int len)
+ {
+     int flags;
+     struct netif_tx_request *tx;
+@@ -772,7 +818,8 @@ void netfront_xmit(struct netfront_dev *dev, unsigned char* data,int len)
+ ssize_t netfront_receive(struct netfront_dev *dev, unsigned char *data, size_t len)
+ {
+     unsigned long flags;
+-    int fd = dev->fd;
++    struct file *file = get_file_from_fd(dev->fd);
++
+     ASSERT(current == main_thread);
+ 
+     dev->rlen = 0;
+@@ -781,9 +828,9 @@ ssize_t netfront_receive(struct netfront_dev *dev, unsigned char *data, size_t l
+ 
+     local_irq_save(flags);
+     network_rx(dev);
+-    if (!dev->rlen && fd != -1)
++    if ( !dev->rlen && file )
+         /* No data for us, make select stop returning */
+-        files[fd].read = false;
++        file->read = false;
+     /* Before re-enabling the interrupts, in case a packet just arrived in the
+      * meanwhile. */
+     local_irq_restore(flags);
 -- 
 2.26.2
 
