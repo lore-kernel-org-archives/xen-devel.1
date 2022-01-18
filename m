@@ -4,33 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA45C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Jan 2022 07:28:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.258365.444839 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08260C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Jan 2022 07:51:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.258370.444850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n9iuJ-00034S-EM; Tue, 18 Jan 2022 07:27:55 +0000
+	id 1n9jH6-0006zk-K5; Tue, 18 Jan 2022 07:51:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 258365.444839; Tue, 18 Jan 2022 07:27:55 +0000
+Received: by outflank-mailman (output) from mailman id 258370.444850; Tue, 18 Jan 2022 07:51:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n9iuJ-00034J-AM; Tue, 18 Jan 2022 07:27:55 +0000
-Received: by outflank-mailman (input) for mailman id 258365;
- Tue, 18 Jan 2022 07:27:53 +0000
+	id 1n9jH6-0006zd-Gs; Tue, 18 Jan 2022 07:51:28 +0000
+Received: by outflank-mailman (input) for mailman id 258370;
+ Tue, 18 Jan 2022 07:51:27 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lOsy=SC=bombadil.srs.infradead.org=BATV+4fe6c3c60fc7db690b35+6722+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1n9inV-0000yV-Og
- for xen-devel@lists.xenproject.org; Tue, 18 Jan 2022 07:20:53 +0000
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [2607:7c80:54:e::133])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=K2lf=SC=arm.com=Wei.Chen@srs-se1.protection.inumbo.net>)
+ id 1n9jH4-0006zX-Qw
+ for xen-devel@lists.xenproject.org; Tue, 18 Jan 2022 07:51:27 +0000
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on062b.outbound.protection.outlook.com
+ [2a01:111:f400:fe0c::62b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 29edb380-782f-11ec-a115-11989b9578b4;
- Tue, 18 Jan 2022 08:20:51 +0100 (CET)
-Received: from [2001:4bb8:184:72a4:a4a9:19c0:5242:7768] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1n9inE-000Zg8-Lu; Tue, 18 Jan 2022 07:20:37 +0000
+ id 6f30000a-7833-11ec-a115-11989b9578b4;
+ Tue, 18 Jan 2022 08:51:25 +0100 (CET)
+Received: from AS9PR06CA0061.eurprd06.prod.outlook.com (2603:10a6:20b:464::35)
+ by VI1PR08MB3678.eurprd08.prod.outlook.com (2603:10a6:803:89::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4888.11; Tue, 18 Jan
+ 2022 07:51:21 +0000
+Received: from VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:464:cafe::7a) by AS9PR06CA0061.outlook.office365.com
+ (2603:10a6:20b:464::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4888.10 via Frontend
+ Transport; Tue, 18 Jan 2022 07:51:21 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT035.mail.protection.outlook.com (10.152.18.110) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4888.9 via Frontend Transport; Tue, 18 Jan 2022 07:51:21 +0000
+Received: ("Tessian outbound 157533e214a9:v110");
+ Tue, 18 Jan 2022 07:51:20 +0000
+Received: from b2ee4554d203.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ C6850EAC-B0BF-48D0-9011-E36760215C18.1; 
+ Tue, 18 Jan 2022 07:51:10 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b2ee4554d203.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Tue, 18 Jan 2022 07:51:10 +0000
+Received: from PAXPR08MB7420.eurprd08.prod.outlook.com (2603:10a6:102:2b9::9)
+ by PAXPR08MB7185.eurprd08.prod.outlook.com (2603:10a6:102:207::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4867.7; Tue, 18 Jan
+ 2022 07:51:09 +0000
+Received: from PAXPR08MB7420.eurprd08.prod.outlook.com
+ ([fe80::4463:2795:6645:5dd0]) by PAXPR08MB7420.eurprd08.prod.outlook.com
+ ([fe80::4463:2795:6645:5dd0%6]) with mapi id 15.20.4888.013; Tue, 18 Jan 2022
+ 07:51:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,640 +74,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29edb380-782f-11ec-a115-11989b9578b4
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=2tJLPdED4SGW7vJ+FwaWFHXC0m4BTaKxi6F9pfd4VTw=; b=Iyoh+Rz2uIOTM/jdoHtisuE4MS
-	1lMaLS2Gx18JfZpvcTj6vRtv8q0hizPNrgXSN4AeLB632Naqe/uHKRAzP+ft0o4tRmGx7WnA7zovL
-	uvfA8fZG7T/OM2S0se5fT6ySrM4db6TLCqncJKE1zfD9Gi4Uxa9Dr4ODgkf33zu0zb94/NCHtUHU3
-	aqx42oON5Unsqj6PvSH+7AkFJQR6XHPnV0Q7WQr/1eibQAw3c877Hpb/7xp6f4h7+nyAuKGQE/dxF
-	6rUG/MSeN1Ydc5mjbpl18/4yxnBnoZJrRG1MmFbdfcxBIvxdujM/Ch6/YT+fuBG8gNSnu4QYt3dp1
-	Ua1CpJDw==;
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Cc: Pavel Begunkov <asml.silence@gmail.com>,
-	Mike Snitzer <snitzer@redhat.com>,
-	Ryusuke Konishi <konishi.ryusuke@gmail.com>,
-	Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	"Md . Haris Iqbal " <haris.iqbal@ionos.com>,
-	Jack Wang <jinpu.wang@ionos.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.co>,
-	Philipp Reisner <philipp.reisner@linbit.com>,
-	Lars Ellenberg <lars.ellenberg@linbit.com>,
-	linux-block@vger.kernel.org,
-	dm-devel@redhat.com,
-	linux-fsdevel@vger.kernel.org,
-	linux-nfs@vger.kernel.org,
-	linux-nilfs@vger.kernel.org,
-	ntfs3@lists.linux.dev,
-	xen-devel@lists.xenproject.org,
-	drbd-dev@lists.linbit.com
-Subject: [PATCH 15/19] block: pass a block_device and opf to bio_alloc_bioset
-Date: Tue, 18 Jan 2022 08:19:48 +0100
-Message-Id: <20220118071952.1243143-16-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220118071952.1243143-1-hch@lst.de>
-References: <20220118071952.1243143-1-hch@lst.de>
+X-Inumbo-ID: 6f30000a-7833-11ec-a115-11989b9578b4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mICl6khP2BfVYkr4LeNqE1HhE/4I6l1fCFrCf0qZ4MI=;
+ b=wAi35VbZdiXXIQXoRXRNtZuBd1s+jIBm2e33QdOcJRVQFYYcTAYQ/zqkTAJ3Y00S5FW25CazTucU2wFCsk4rJ5Q/3UHj3LCykafqJ655Qyqi93BPgM3areqLBIPTrPP2PzP6EtEt14LUcnzSlxGo24Y/L1VH49PpRyaODm6VTFg=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=I47DiDbUX7t/q9wWaaJyfWuuwvUzLm+08LfHlMckizvegRk7x4NtqtqQbrbxkZzwxBV6Z/oaAqrJ2bmmUGRoLUxBVchk5VkRrS8fz+CE6i4Qh53QgBpfyCxJtUe3IN5ekEjecRERJOl3jGDGvdnMXzuk58dsdAnzv3CCq79RmnhKqs021kOO+yKs/zZHGidwlT1fsqclDbSyc6QXpgH8pYP+wCMvR9xO4xA6PKRbvaChvj/wqN80XLhkFVwfkfQ5/+7lGgfNJvTfRp3QqCdANSJuK7rHZemVonAaL/EpaMNUlWY0vqRelKnNyAaLFZaSdzzbM+dOiVPVospBix9ENg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=mICl6khP2BfVYkr4LeNqE1HhE/4I6l1fCFrCf0qZ4MI=;
+ b=QPMXqvutuR7Rkk5+qAZ8Sy0PrZF8O8ov7i6h2Y/R9SnEdN9alf4ucHMQq4gqnvTuNojtadfXDkAxxQnISjXjVHo4qHm6TX25ADRHyND9fegukx/KeZlmMiBCS5eBhetJs0mJogYQCQxkXcVX5LQD89CCNAgb0OCI8of7DGAZmTfT1EMZp9rCGmyD9Oe7iB+3sXegywrI+tfyuNcbOpCj1CIOlwfWabwB1zHg1aSzGaFcx9iJAfLXHwE5tcpC2ao4dRlBFEv16U4h7Zz+D1GcdkARTOjXeF2jPmvHDAcC2eVHIgKNNkvUwrqg/nvYQa9HAFHNn4Z56lmXkigBD7DV9w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=mICl6khP2BfVYkr4LeNqE1HhE/4I6l1fCFrCf0qZ4MI=;
+ b=wAi35VbZdiXXIQXoRXRNtZuBd1s+jIBm2e33QdOcJRVQFYYcTAYQ/zqkTAJ3Y00S5FW25CazTucU2wFCsk4rJ5Q/3UHj3LCykafqJ655Qyqi93BPgM3areqLBIPTrPP2PzP6EtEt14LUcnzSlxGo24Y/L1VH49PpRyaODm6VTFg=
+From: Wei Chen <Wei.Chen@arm.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"sstabellini@kernel.org" <sstabellini@kernel.org>, "julien@xen.org"
+	<julien@xen.org>
+Subject: RE: [PATCH 04/37] xen: introduce an arch helper for default dma zone
+ status
+Thread-Topic: [PATCH 04/37] xen: introduce an arch helper for default dma zone
+ status
+Thread-Index: AQHXsHMGx8xGhif/FUCDSa9NS/fSLqxoGKiAgAD49HA=
+Date: Tue, 18 Jan 2022 07:51:08 +0000
+Message-ID:
+ <PAXPR08MB7420CD3B7CFB4D2D81019F479E589@PAXPR08MB7420.eurprd08.prod.outlook.com>
+References: <20210923120236.3692135-1-wei.chen@arm.com>
+ <20210923120236.3692135-5-wei.chen@arm.com>
+ <345944c4-78dd-8009-6f64-f9c7901a5497@suse.com>
+In-Reply-To: <345944c4-78dd-8009-6f64-f9c7901a5497@suse.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ts-tracking-id: 2865EEDF098CA2409B9E848F555144EC.0
+x-checkrecipientchecked: true
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-MS-Office365-Filtering-Correlation-Id: 7a18d88d-f88d-487e-6b83-08d9da57515a
+x-ms-traffictypediagnostic:
+	PAXPR08MB7185:EE_|VE1EUR03FT035:EE_|VI1PR08MB3678:EE_
+X-Microsoft-Antispam-PRVS:
+	<VI1PR08MB367884D1B414D26B343A904B9E589@VI1PR08MB3678.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ Ci/N20RXzuDnkcmlimV9ywmbMA/vDkmnLMkLkwHbkTxzayiQAiGB1NHHGaV8VdtwQnWJdxpNcoGaXzTJ7GxA86kMV4NaS6EWmYPLDdneB/j7WPUP+rv2Km+oz7w/7BN/JoOw+2J7so61x6xWe6rT0ZbQ49ZDPaoMvnTpom/20P6J7y/7eJnJcvfrnDQdWZjnDmj/8saNid/Bv8IMyLTDwUDYQm0DCbEIInJrtmi28isijqXMQFB6950xiyJiEv7bIc6FEWI/t/Y429GFzPJnRBrvqYNbiLgQEYDcbnO4rE/yBO0ew/fxyzirPfb7qDLLLpVZYsfQ9TWGxukNOFZora0GMhYlrk7ErzXNmofWSDSsZDq46sKiXKhS8xLsg2VU6U50wLb/W87jgskvvFZehgqjSLBRAvRovY4OCykixWhP+cQJtRmnNETIUJea5eAcLuAb1Ys2yo2FdgWAxWUwe7Mg3dYETk40xWRR/CfPG4OztBzLc6lNrjH6Af+lq9PqZqJXRQkc9qdRBkX7Q4qHLp8UPg3DrLCJWEQtYN/d3Du0V/Duvrtxw9F9EQ28y1R8nrtrLcFQAO+95cqqFs14q0j0boVyOc33CNvvubDXhWp6xbgeLPn5rf5BSJxIuhnzvVnXMgIARenhjuB8nMA8bnWPS52QlzGXW4JU6vGrn3McB/cu1O+zlWO+QkmsA7M1ZLO0MTVTWmG0WR8PYEeNCHRcuIfRa3+BHaiB8em/XWOiDjUqzw1VQUa6zV53E6k/FgpwJ4iqRWQP6/U3gXde/MaasJGQwFlEA9SjR1bWrIw=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR08MB7420.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(64756008)(6506007)(26005)(66476007)(2906002)(76116006)(66556008)(86362001)(38100700002)(66446008)(316002)(71200400001)(6916009)(5660300002)(33656002)(8936002)(508600001)(9686003)(55016003)(122000001)(54906003)(186003)(53546011)(7696005)(38070700005)(52536014)(4326008)(966005)(83380400001)(8676002)(66946007);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7185
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	1980e29b-e1bf-497f-6fca-08d9da574a0a
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	k6otgLqftYZXhK25uVA9z8cpVNkM1lV4uvDTlayBIu1BUSgyfDiAtLksX/t80vrjYc8GCWrQZzPZCIE6jmGnrIS+NJaTRxyDpoutWIseOOb4rOGFRlvF1TDzdVHwmGISJVpwEBLzTrangdtV8MJjt2NQRpv/TedwX4ywgLJ5fP7tmkdwBuBIz378R9OMU/WOysPAz68bKSLV2o8tPLTu9Je4gqwZgVBUeXyAHbdqf/gt7d+CDMgmCCqjgvkVLWD5QFzItD0g33w7CjmqaYHXE2m4Gu5O1FZL4x72NF7GOiKuGzjtzA5uiGkJmtJy1MHeOWcamf5MyfIOyP0tY+CoAfGTdLMkqKtHcvaLWpU5dYJfuWPCfrj5y0oSwt74U4zwSpxKwJCsq10d6XoBuNtVzpigA7erg1IoUB7psgNd3um4vATPD4eIiZQE14U4nS8bZOHkOy29krPWW/cCc1F9zxsikKf9ELKbSvfIetcyuMd9z4uBAamhlOg2zp8q+i59/fIKIYRGPe/fxEKTb7jXgaljBmUgeaVrUxUI68KEMfYQ+OcyEvQ3+KMpMRuMdttK6RPxiD8X527hZmfmmwLICuzZ/wZ0qelVYNOQR/f94c+Zz5P+3xlRAOodHJkgxRGymUTVKtit6lgw7LYiPKWCS7tU1xbySwRc7VH6E/ye/K23uK2cOyYsaa1OquuCSzi8g0VtIp0evazSWEjDjJblAQvOyMZ20zwq629I2dcsqw6DsAnJqfF9ZPz0+rmkWoNgPJVsSv0xpXVOW2hZrylcnxcZ3m8QPFmVCh14dIf72W8=
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(8936002)(47076005)(83380400001)(6506007)(53546011)(86362001)(966005)(7696005)(508600001)(4326008)(26005)(33656002)(36860700001)(70586007)(2906002)(186003)(55016003)(54906003)(336012)(70206006)(356005)(8676002)(6862004)(81166007)(5660300002)(9686003)(82310400004)(316002)(52536014);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jan 2022 07:51:21.0119
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a18d88d-f88d-487e-6b83-08d9da57515a
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	VE1EUR03FT035.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB3678
 
-Pass the block_device and operation that we plan to use this bio for to
-bio_alloc_bioset to optimize the assigment.  NULL/0 can be passed, both
-for the passthrough case on a raw request_queue and to temporarily avoid
-refactoring some nasty code.
-
-Also move the gfp_mask argument after the nr_vecs argument for a much
-more logical calling convention matching what most of the kernel does.
-
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- block/bio.c                         | 29 +++++++++++++++++------------
- block/bounce.c                      |  6 ++----
- drivers/block/drbd/drbd_actlog.c    |  5 ++---
- drivers/block/drbd/drbd_bitmap.c    |  7 +++----
- drivers/md/bcache/request.c         | 12 +++++-------
- drivers/md/dm-crypt.c               |  5 ++---
- drivers/md/dm-io.c                  |  5 ++---
- drivers/md/dm-writecache.c          |  7 ++++---
- drivers/md/dm.c                     |  5 +++--
- drivers/md/md.c                     | 16 ++++++++--------
- drivers/md/raid1.c                  |  3 ++-
- drivers/md/raid10.c                 |  6 ++----
- drivers/md/raid5-cache.c            |  8 ++++----
- drivers/md/raid5-ppl.c              | 11 +++++------
- drivers/target/target_core_iblock.c |  6 ++----
- fs/btrfs/extent_io.c                |  2 +-
- fs/f2fs/data.c                      |  7 +++----
- fs/iomap/buffered-io.c              |  6 +++---
- include/linux/bio.h                 |  7 ++++---
- 19 files changed, 74 insertions(+), 79 deletions(-)
-
-diff --git a/block/bio.c b/block/bio.c
-index 52c99bfa8008d..a58bc82d3c85f 100644
---- a/block/bio.c
-+++ b/block/bio.c
-@@ -417,8 +417,10 @@ static void punt_bios_to_rescuer(struct bio_set *bs)
- 
- /**
-  * bio_alloc_bioset - allocate a bio for I/O
-+ * @bdev:	block device to allocate the bio for (can be %NULL)
-+ * @nr_vecs:	number of bvecs to pre-allocate
-+ * @opf:	operation and flags for bio
-  * @gfp_mask:   the GFP_* mask given to the slab allocator
-- * @nr_iovecs:	number of iovecs to pre-allocate
-  * @bs:		the bio_set to allocate from.
-  *
-  * Allocate a bio from the mempools in @bs.
-@@ -447,15 +449,16 @@ static void punt_bios_to_rescuer(struct bio_set *bs)
-  *
-  * Returns: Pointer to new bio on success, NULL on failure.
-  */
--struct bio *bio_alloc_bioset(gfp_t gfp_mask, unsigned short nr_iovecs,
-+struct bio *bio_alloc_bioset(struct block_device *bdev, unsigned short nr_vecs,
-+			     unsigned int opf, gfp_t gfp_mask,
- 			     struct bio_set *bs)
- {
- 	gfp_t saved_gfp = gfp_mask;
- 	struct bio *bio;
- 	void *p;
- 
--	/* should not use nobvec bioset for nr_iovecs > 0 */
--	if (WARN_ON_ONCE(!mempool_initialized(&bs->bvec_pool) && nr_iovecs > 0))
-+	/* should not use nobvec bioset for nr_vecs > 0 */
-+	if (WARN_ON_ONCE(!mempool_initialized(&bs->bvec_pool) && nr_vecs > 0))
- 		return NULL;
- 
- 	/*
-@@ -492,26 +495,28 @@ struct bio *bio_alloc_bioset(gfp_t gfp_mask, unsigned short nr_iovecs,
- 		return NULL;
- 
- 	bio = p + bs->front_pad;
--	if (nr_iovecs > BIO_INLINE_VECS) {
-+	if (nr_vecs > BIO_INLINE_VECS) {
- 		struct bio_vec *bvl = NULL;
- 
--		bvl = bvec_alloc(&bs->bvec_pool, &nr_iovecs, gfp_mask);
-+		bvl = bvec_alloc(&bs->bvec_pool, &nr_vecs, gfp_mask);
- 		if (!bvl && gfp_mask != saved_gfp) {
- 			punt_bios_to_rescuer(bs);
- 			gfp_mask = saved_gfp;
--			bvl = bvec_alloc(&bs->bvec_pool, &nr_iovecs, gfp_mask);
-+			bvl = bvec_alloc(&bs->bvec_pool, &nr_vecs, gfp_mask);
- 		}
- 		if (unlikely(!bvl))
- 			goto err_free;
- 
--		bio_init(bio, bvl, nr_iovecs);
--	} else if (nr_iovecs) {
-+		bio_init(bio, bvl, nr_vecs);
-+	} else if (nr_vecs) {
- 		bio_init(bio, bio->bi_inline_vecs, BIO_INLINE_VECS);
- 	} else {
- 		bio_init(bio, NULL, 0);
- 	}
- 
- 	bio->bi_pool = bs;
-+	bio_set_dev(bio, bdev);
-+	bio->bi_opf = opf;
- 	return bio;
- 
- err_free:
-@@ -766,7 +771,7 @@ struct bio *bio_clone_fast(struct bio *bio, gfp_t gfp_mask, struct bio_set *bs)
- {
- 	struct bio *b;
- 
--	b = bio_alloc_bioset(gfp_mask, 0, bs);
-+	b = bio_alloc_bioset(NULL, 0, 0, gfp_mask, bs);
- 	if (!b)
- 		return NULL;
- 
-@@ -1742,7 +1747,7 @@ struct bio *bio_alloc_kiocb(struct kiocb *kiocb, unsigned short nr_vecs,
- 	struct bio *bio;
- 
- 	if (!(kiocb->ki_flags & IOCB_ALLOC_CACHE) || nr_vecs > BIO_INLINE_VECS)
--		return bio_alloc_bioset(GFP_KERNEL, nr_vecs, bs);
-+		return bio_alloc_bioset(NULL, nr_vecs, 0, GFP_KERNEL, bs);
- 
- 	cache = per_cpu_ptr(bs->cache, get_cpu());
- 	if (cache->free_list) {
-@@ -1756,7 +1761,7 @@ struct bio *bio_alloc_kiocb(struct kiocb *kiocb, unsigned short nr_vecs,
- 		return bio;
- 	}
- 	put_cpu();
--	bio = bio_alloc_bioset(GFP_KERNEL, nr_vecs, bs);
-+	bio = bio_alloc_bioset(NULL, nr_vecs, 0, GFP_KERNEL, bs);
- 	bio_set_flag(bio, BIO_PERCPU_CACHE);
- 	return bio;
- }
-diff --git a/block/bounce.c b/block/bounce.c
-index 7af1a72835b99..330ddde25b460 100644
---- a/block/bounce.c
-+++ b/block/bounce.c
-@@ -165,12 +165,10 @@ static struct bio *bounce_clone_bio(struct bio *bio_src)
- 	 *    asking for trouble and would force extra work on
- 	 *    __bio_clone_fast() anyways.
- 	 */
--	bio = bio_alloc_bioset(GFP_NOIO, bio_segments(bio_src),
--			       &bounce_bio_set);
--	bio->bi_bdev		= bio_src->bi_bdev;
-+	bio = bio_alloc_bioset(bio_src->bi_bdev, bio_segments(bio_src),
-+			       bio_src->bi_opf, GFP_NOIO, &bounce_bio_set);
- 	if (bio_flagged(bio_src, BIO_REMAPPED))
- 		bio_set_flag(bio, BIO_REMAPPED);
--	bio->bi_opf		= bio_src->bi_opf;
- 	bio->bi_ioprio		= bio_src->bi_ioprio;
- 	bio->bi_write_hint	= bio_src->bi_write_hint;
- 	bio->bi_iter.bi_sector	= bio_src->bi_iter.bi_sector;
-diff --git a/drivers/block/drbd/drbd_actlog.c b/drivers/block/drbd/drbd_actlog.c
-index 72cf7603d51fc..f5bcded3640da 100644
---- a/drivers/block/drbd/drbd_actlog.c
-+++ b/drivers/block/drbd/drbd_actlog.c
-@@ -138,15 +138,14 @@ static int _drbd_md_sync_page_io(struct drbd_device *device,
- 		op_flags |= REQ_FUA | REQ_PREFLUSH;
- 	op_flags |= REQ_SYNC;
- 
--	bio = bio_alloc_bioset(GFP_NOIO, 1, &drbd_md_io_bio_set);
--	bio_set_dev(bio, bdev->md_bdev);
-+	bio = bio_alloc_bioset(bdev->md_bdev, 1, op | op_flags, GFP_NOIO,
-+			       &drbd_md_io_bio_set);
- 	bio->bi_iter.bi_sector = sector;
- 	err = -EIO;
- 	if (bio_add_page(bio, device->md_io.page, size, 0) != size)
- 		goto out;
- 	bio->bi_private = device;
- 	bio->bi_end_io = drbd_md_endio;
--	bio_set_op_attrs(bio, op, op_flags);
- 
- 	if (op != REQ_OP_WRITE && device->state.disk == D_DISKLESS && device->ldev == NULL)
- 		/* special case, drbd_md_read() during drbd_adm_attach(): no get_ldev */
-diff --git a/drivers/block/drbd/drbd_bitmap.c b/drivers/block/drbd/drbd_bitmap.c
-index c1f816f896a89..df25eecf80af0 100644
---- a/drivers/block/drbd/drbd_bitmap.c
-+++ b/drivers/block/drbd/drbd_bitmap.c
-@@ -976,12 +976,13 @@ static void drbd_bm_endio(struct bio *bio)
- 
- static void bm_page_io_async(struct drbd_bm_aio_ctx *ctx, int page_nr) __must_hold(local)
- {
--	struct bio *bio = bio_alloc_bioset(GFP_NOIO, 1, &drbd_md_io_bio_set);
- 	struct drbd_device *device = ctx->device;
-+	unsigned int op = (ctx->flags & BM_AIO_READ) ? REQ_OP_READ : REQ_OP_WRITE;
-+	struct bio *bio = bio_alloc_bioset(device->ldev->md_bdev, 1, op,
-+					   GFP_NOIO, &drbd_md_io_bio_set);
- 	struct drbd_bitmap *b = device->bitmap;
- 	struct page *page;
- 	unsigned int len;
--	unsigned int op = (ctx->flags & BM_AIO_READ) ? REQ_OP_READ : REQ_OP_WRITE;
- 
- 	sector_t on_disk_sector =
- 		device->ldev->md.md_offset + device->ldev->md.bm_offset;
-@@ -1006,14 +1007,12 @@ static void bm_page_io_async(struct drbd_bm_aio_ctx *ctx, int page_nr) __must_ho
- 		bm_store_page_idx(page, page_nr);
- 	} else
- 		page = b->bm_pages[page_nr];
--	bio_set_dev(bio, device->ldev->md_bdev);
- 	bio->bi_iter.bi_sector = on_disk_sector;
- 	/* bio_add_page of a single page to an empty bio will always succeed,
- 	 * according to api.  Do we want to assert that? */
- 	bio_add_page(bio, page, len, 0);
- 	bio->bi_private = ctx;
- 	bio->bi_end_io = drbd_bm_endio;
--	bio_set_op_attrs(bio, op, 0);
- 
- 	if (drbd_insert_fault(device, (op == REQ_OP_WRITE) ? DRBD_FAULT_MD_WR : DRBD_FAULT_MD_RD)) {
- 		bio_io_error(bio);
-diff --git a/drivers/md/bcache/request.c b/drivers/md/bcache/request.c
-index d15aae6c51c13..c4b7e434de8ac 100644
---- a/drivers/md/bcache/request.c
-+++ b/drivers/md/bcache/request.c
-@@ -913,14 +913,13 @@ static int cached_dev_cache_miss(struct btree *b, struct search *s,
- 	/* btree_search_recurse()'s btree iterator is no good anymore */
- 	ret = miss == bio ? MAP_DONE : -EINTR;
- 
--	cache_bio = bio_alloc_bioset(GFP_NOWAIT,
-+	cache_bio = bio_alloc_bioset(miss->bi_bdev,
- 			DIV_ROUND_UP(s->insert_bio_sectors, PAGE_SECTORS),
--			&dc->disk.bio_split);
-+			0, GFP_NOWAIT, &dc->disk.bio_split);
- 	if (!cache_bio)
- 		goto out_submit;
- 
- 	cache_bio->bi_iter.bi_sector	= miss->bi_iter.bi_sector;
--	bio_copy_dev(cache_bio, miss);
- 	cache_bio->bi_iter.bi_size	= s->insert_bio_sectors << 9;
- 
- 	cache_bio->bi_end_io	= backing_request_endio;
-@@ -1025,16 +1024,15 @@ static void cached_dev_write(struct cached_dev *dc, struct search *s)
- 			 */
- 			struct bio *flush;
- 
--			flush = bio_alloc_bioset(GFP_NOIO, 0,
--						 &dc->disk.bio_split);
-+			flush = bio_alloc_bioset(bio->bi_bdev, 0,
-+						 REQ_OP_WRITE | REQ_PREFLUSH,
-+						 GFP_NOIO, &dc->disk.bio_split);
- 			if (!flush) {
- 				s->iop.status = BLK_STS_RESOURCE;
- 				goto insert_data;
- 			}
--			bio_copy_dev(flush, bio);
- 			flush->bi_end_io = backing_request_endio;
- 			flush->bi_private = cl;
--			flush->bi_opf = REQ_OP_WRITE | REQ_PREFLUSH;
- 			/* I/O request sent to backing device */
- 			closure_bio_submit(s->iop.c, flush, cl);
- 		}
-diff --git a/drivers/md/dm-crypt.c b/drivers/md/dm-crypt.c
-index 3c5ecd35d3483..f7e4435b7439a 100644
---- a/drivers/md/dm-crypt.c
-+++ b/drivers/md/dm-crypt.c
-@@ -1672,11 +1672,10 @@ static struct bio *crypt_alloc_buffer(struct dm_crypt_io *io, unsigned size)
- 	if (unlikely(gfp_mask & __GFP_DIRECT_RECLAIM))
- 		mutex_lock(&cc->bio_alloc_lock);
- 
--	clone = bio_alloc_bioset(GFP_NOIO, nr_iovecs, &cc->bs);
-+	clone = bio_alloc_bioset(cc->dev->bdev, nr_iovecs, io->base_bio->bi_opf,
-+				 GFP_NOIO, &cc->bs);
- 	clone->bi_private = io;
- 	clone->bi_end_io = crypt_endio;
--	bio_set_dev(clone, cc->dev->bdev);
--	clone->bi_opf = io->base_bio->bi_opf;
- 
- 	remaining_size = size;
- 
-diff --git a/drivers/md/dm-io.c b/drivers/md/dm-io.c
-index 2d3cda0acacb6..23e038f8dc845 100644
---- a/drivers/md/dm-io.c
-+++ b/drivers/md/dm-io.c
-@@ -345,11 +345,10 @@ static void do_region(int op, int op_flags, unsigned region,
- 						(PAGE_SIZE >> SECTOR_SHIFT)));
- 		}
- 
--		bio = bio_alloc_bioset(GFP_NOIO, num_bvecs, &io->client->bios);
-+		bio = bio_alloc_bioset(where->bdev, num_bvecs, op | op_flags,
-+				       GFP_NOIO, &io->client->bios);
- 		bio->bi_iter.bi_sector = where->sector + (where->count - remaining);
--		bio_set_dev(bio, where->bdev);
- 		bio->bi_end_io = endio;
--		bio_set_op_attrs(bio, op, op_flags);
- 		store_io_and_region_in_bio(bio, io, region);
- 
- 		if (op == REQ_OP_DISCARD || op == REQ_OP_WRITE_ZEROES) {
-diff --git a/drivers/md/dm-writecache.c b/drivers/md/dm-writecache.c
-index 4f31591d2d25e..5630b470ba429 100644
---- a/drivers/md/dm-writecache.c
-+++ b/drivers/md/dm-writecache.c
-@@ -1821,11 +1821,11 @@ static void __writecache_writeback_pmem(struct dm_writecache *wc, struct writeba
- 
- 		max_pages = e->wc_list_contiguous;
- 
--		bio = bio_alloc_bioset(GFP_NOIO, max_pages, &wc->bio_set);
-+		bio = bio_alloc_bioset(wc->dev->bdev, max_pages, REQ_OP_WRITE,
-+				       GFP_NOIO, &wc->bio_set);
- 		wb = container_of(bio, struct writeback_struct, bio);
- 		wb->wc = wc;
- 		bio->bi_end_io = writecache_writeback_endio;
--		bio_set_dev(bio, wc->dev->bdev);
- 		bio->bi_iter.bi_sector = read_original_sector(wc, e);
- 		if (max_pages <= WB_LIST_INLINE ||
- 		    unlikely(!(wb->wc_list = kmalloc_array(max_pages, sizeof(struct wc_entry *),
-@@ -1852,7 +1852,8 @@ static void __writecache_writeback_pmem(struct dm_writecache *wc, struct writeba
- 			wb->wc_list[wb->wc_list_n++] = f;
- 			e = f;
- 		}
--		bio_set_op_attrs(bio, REQ_OP_WRITE, WC_MODE_FUA(wc) * REQ_FUA);
-+		if (WC_MODE_FUA(wc))
-+			bio->bi_opf |= REQ_FUA;
- 		if (writecache_has_error(wc)) {
- 			bio->bi_status = BLK_STS_IOERR;
- 			bio_endio(bio);
-diff --git a/drivers/md/dm.c b/drivers/md/dm.c
-index 81449cbdafa81..84f3dd58d1a16 100644
---- a/drivers/md/dm.c
-+++ b/drivers/md/dm.c
-@@ -519,7 +519,7 @@ static struct dm_io *alloc_io(struct mapped_device *md, struct bio *bio)
- 	struct dm_target_io *tio;
- 	struct bio *clone;
- 
--	clone = bio_alloc_bioset(GFP_NOIO, 0, &md->io_bs);
-+	clone = bio_alloc_bioset(NULL, 0, 0, GFP_NOIO, &md->io_bs);
- 
- 	tio = container_of(clone, struct dm_target_io, clone);
- 	tio->inside_dm_io = true;
-@@ -552,7 +552,8 @@ static struct dm_target_io *alloc_tio(struct clone_info *ci, struct dm_target *t
- 		/* the dm_target_io embedded in ci->io is available */
- 		tio = &ci->io->tio;
- 	} else {
--		struct bio *clone = bio_alloc_bioset(gfp_mask, 0, &ci->io->md->bs);
-+		struct bio *clone = bio_alloc_bioset(NULL, 0, 0, gfp_mask,
-+						     &ci->io->md->bs);
- 		if (!clone)
- 			return NULL;
- 
-diff --git a/drivers/md/md.c b/drivers/md/md.c
-index 5881d05a76ebc..40fc1f7e65c5d 100644
---- a/drivers/md/md.c
-+++ b/drivers/md/md.c
-@@ -562,11 +562,11 @@ static void submit_flushes(struct work_struct *ws)
- 			atomic_inc(&rdev->nr_pending);
- 			atomic_inc(&rdev->nr_pending);
- 			rcu_read_unlock();
--			bi = bio_alloc_bioset(GFP_NOIO, 0, &mddev->bio_set);
-+			bi = bio_alloc_bioset(rdev->bdev, 0,
-+					      REQ_OP_WRITE | REQ_PREFLUSH,
-+					      GFP_NOIO, &mddev->bio_set);
- 			bi->bi_end_io = md_end_flush;
- 			bi->bi_private = rdev;
--			bio_set_dev(bi, rdev->bdev);
--			bi->bi_opf = REQ_OP_WRITE | REQ_PREFLUSH;
- 			atomic_inc(&mddev->flush_pending);
- 			submit_bio(bi);
- 			rcu_read_lock();
-@@ -955,7 +955,6 @@ void md_super_write(struct mddev *mddev, struct md_rdev *rdev,
- 	 * If an error occurred, call md_error
- 	 */
- 	struct bio *bio;
--	int ff = 0;
- 
- 	if (!page)
- 		return;
-@@ -963,11 +962,13 @@ void md_super_write(struct mddev *mddev, struct md_rdev *rdev,
- 	if (test_bit(Faulty, &rdev->flags))
- 		return;
- 
--	bio = bio_alloc_bioset(GFP_NOIO, 1, &mddev->sync_set);
-+	bio = bio_alloc_bioset(rdev->meta_bdev ? rdev->meta_bdev : rdev->bdev,
-+			       1,
-+			       REQ_OP_WRITE | REQ_SYNC | REQ_PREFLUSH | REQ_FUA,
-+			       GFP_NOIO, &mddev->sync_set);
- 
- 	atomic_inc(&rdev->nr_pending);
- 
--	bio_set_dev(bio, rdev->meta_bdev ? rdev->meta_bdev : rdev->bdev);
- 	bio->bi_iter.bi_sector = sector;
- 	bio_add_page(bio, page, size, 0);
- 	bio->bi_private = rdev;
-@@ -976,8 +977,7 @@ void md_super_write(struct mddev *mddev, struct md_rdev *rdev,
- 	if (test_bit(MD_FAILFAST_SUPPORTED, &mddev->flags) &&
- 	    test_bit(FailFast, &rdev->flags) &&
- 	    !test_bit(LastDev, &rdev->flags))
--		ff = MD_FAILFAST;
--	bio->bi_opf = REQ_OP_WRITE | REQ_SYNC | REQ_PREFLUSH | REQ_FUA | ff;
-+		bio->bi_opf |= MD_FAILFAST;
- 
- 	atomic_inc(&mddev->pending_writes);
- 	submit_bio(bio);
-diff --git a/drivers/md/raid1.c b/drivers/md/raid1.c
-index e2d8acb1e9881..43276f8fdc815 100644
---- a/drivers/md/raid1.c
-+++ b/drivers/md/raid1.c
-@@ -1126,7 +1126,8 @@ static void alloc_behind_master_bio(struct r1bio *r1_bio,
- 	int i = 0;
- 	struct bio *behind_bio = NULL;
- 
--	behind_bio = bio_alloc_bioset(GFP_NOIO, vcnt, &r1_bio->mddev->bio_set);
-+	behind_bio = bio_alloc_bioset(NULL, vcnt, 0, GFP_NOIO,
-+				      &r1_bio->mddev->bio_set);
- 	if (!behind_bio)
- 		return;
- 
-diff --git a/drivers/md/raid10.c b/drivers/md/raid10.c
-index 2b969f70a31fb..cb7c58050708e 100644
---- a/drivers/md/raid10.c
-+++ b/drivers/md/raid10.c
-@@ -4892,14 +4892,12 @@ static sector_t reshape_request(struct mddev *mddev, sector_t sector_nr,
- 		return sectors_done;
- 	}
- 
--	read_bio = bio_alloc_bioset(GFP_KERNEL, RESYNC_PAGES, &mddev->bio_set);
--
--	bio_set_dev(read_bio, rdev->bdev);
-+	read_bio = bio_alloc_bioset(rdev->bdev, RESYNC_PAGES, REQ_OP_READ,
-+				    GFP_KERNEL, &mddev->bio_set);
- 	read_bio->bi_iter.bi_sector = (r10_bio->devs[r10_bio->read_slot].addr
- 			       + rdev->data_offset);
- 	read_bio->bi_private = r10_bio;
- 	read_bio->bi_end_io = end_reshape_read;
--	bio_set_op_attrs(read_bio, REQ_OP_READ, 0);
- 	r10_bio->master_bio = read_bio;
- 	r10_bio->read_slot = r10_bio->devs[r10_bio->read_slot].devnum;
- 
-diff --git a/drivers/md/raid5-cache.c b/drivers/md/raid5-cache.c
-index 0b5dcaabbc155..66313adf99875 100644
---- a/drivers/md/raid5-cache.c
-+++ b/drivers/md/raid5-cache.c
-@@ -735,10 +735,9 @@ static void r5l_submit_current_io(struct r5l_log *log)
- 
- static struct bio *r5l_bio_alloc(struct r5l_log *log)
- {
--	struct bio *bio = bio_alloc_bioset(GFP_NOIO, BIO_MAX_VECS, &log->bs);
-+	struct bio *bio = bio_alloc_bioset(log->rdev->bdev, BIO_MAX_VECS,
-+					   REQ_OP_WRITE, GFP_NOIO, &log->bs);
- 
--	bio_set_op_attrs(bio, REQ_OP_WRITE, 0);
--	bio_set_dev(bio, log->rdev->bdev);
- 	bio->bi_iter.bi_sector = log->rdev->data_offset + log->log_start;
- 
- 	return bio;
-@@ -1634,7 +1633,8 @@ static int r5l_recovery_allocate_ra_pool(struct r5l_log *log,
- {
- 	struct page *page;
- 
--	ctx->ra_bio = bio_alloc_bioset(GFP_KERNEL, BIO_MAX_VECS, &log->bs);
-+	ctx->ra_bio = bio_alloc_bioset(NULL, BIO_MAX_VECS, 0, GFP_KERNEL,
-+				       &log->bs);
- 	if (!ctx->ra_bio)
- 		return -ENOMEM;
- 
-diff --git a/drivers/md/raid5-ppl.c b/drivers/md/raid5-ppl.c
-index 4ab417915d7f1..054d3bb252d48 100644
---- a/drivers/md/raid5-ppl.c
-+++ b/drivers/md/raid5-ppl.c
-@@ -496,11 +496,10 @@ static void ppl_submit_iounit(struct ppl_io_unit *io)
- 		if (!bio_add_page(bio, sh->ppl_page, PAGE_SIZE, 0)) {
- 			struct bio *prev = bio;
- 
--			bio = bio_alloc_bioset(GFP_NOIO, BIO_MAX_VECS,
-+			bio = bio_alloc_bioset(prev->bi_bdev, BIO_MAX_VECS,
-+					       prev->bi_opf, GFP_NOIO,
- 					       &ppl_conf->bs);
--			bio->bi_opf = prev->bi_opf;
- 			bio->bi_write_hint = prev->bi_write_hint;
--			bio_copy_dev(bio, prev);
- 			bio->bi_iter.bi_sector = bio_end_sector(prev);
- 			bio_add_page(bio, sh->ppl_page, PAGE_SIZE, 0);
- 
-@@ -637,10 +636,10 @@ static void ppl_do_flush(struct ppl_io_unit *io)
- 			struct bio *bio;
- 			char b[BDEVNAME_SIZE];
- 
--			bio = bio_alloc_bioset(GFP_NOIO, 0, &ppl_conf->flush_bs);
--			bio_set_dev(bio, bdev);
-+			bio = bio_alloc_bioset(bdev, 0, GFP_NOIO,
-+					       REQ_OP_WRITE | REQ_PREFLUSH,
-+					       &ppl_conf->flush_bs);
- 			bio->bi_private = io;
--			bio->bi_opf = REQ_OP_WRITE | REQ_PREFLUSH;
- 			bio->bi_end_io = ppl_flush_endio;
- 
- 			pr_debug("%s: dev: %s\n", __func__,
-diff --git a/drivers/target/target_core_iblock.c b/drivers/target/target_core_iblock.c
-index bf8ae4825a06e..f7c6e822f345a 100644
---- a/drivers/target/target_core_iblock.c
-+++ b/drivers/target/target_core_iblock.c
-@@ -353,18 +353,16 @@ static struct bio *iblock_get_bio(struct se_cmd *cmd, sector_t lba, u32 sg_num,
- 	 * Only allocate as many vector entries as the bio code allows us to,
- 	 * we'll loop later on until we have handled the whole request.
- 	 */
--	bio = bio_alloc_bioset(GFP_NOIO, bio_max_segs(sg_num),
--				&ib_dev->ibd_bio_set);
-+	bio = bio_alloc_bioset(ib_dev->ibd_bd, bio_max_segs(sg_num), opf,
-+			       GFP_NOIO, &ib_dev->ibd_bio_set);
- 	if (!bio) {
- 		pr_err("Unable to allocate memory for bio\n");
- 		return NULL;
- 	}
- 
--	bio_set_dev(bio, ib_dev->ibd_bd);
- 	bio->bi_private = cmd;
- 	bio->bi_end_io = &iblock_bio_done;
- 	bio->bi_iter.bi_sector = lba;
--	bio->bi_opf = opf;
- 
- 	return bio;
- }
-diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
-index d6d48ecf823c9..f982687c5b00d 100644
---- a/fs/btrfs/extent_io.c
-+++ b/fs/btrfs/extent_io.c
-@@ -3144,7 +3144,7 @@ struct bio *btrfs_bio_alloc(unsigned int nr_iovecs)
- 	struct bio *bio;
- 
- 	ASSERT(0 < nr_iovecs && nr_iovecs <= BIO_MAX_VECS);
--	bio = bio_alloc_bioset(GFP_NOFS, nr_iovecs, &btrfs_bioset);
-+	bio = bio_alloc_bioset(NULL, nr_iovecs, 0, GFP_NOFS, &btrfs_bioset);
- 	btrfs_bio_init(btrfs_bio(bio));
- 	return bio;
- }
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index aacf5e4dcc576..5cb07ca7c4f52 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -394,7 +394,7 @@ static struct bio *__bio_alloc(struct f2fs_io_info *fio, int npages)
- 	struct f2fs_sb_info *sbi = fio->sbi;
- 	struct bio *bio;
- 
--	bio = bio_alloc_bioset(GFP_NOIO, npages, &f2fs_bioset);
-+	bio = bio_alloc_bioset(NULL, npages, 0, GFP_NOIO, &f2fs_bioset);
- 
- 	f2fs_target_device(sbi, fio->new_blkaddr, bio);
- 	if (is_read_io(fio->op)) {
-@@ -985,8 +985,8 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 	struct bio_post_read_ctx *ctx = NULL;
- 	unsigned int post_read_steps = 0;
- 
--	bio = bio_alloc_bioset(for_write ? GFP_NOIO : GFP_KERNEL,
--			       bio_max_segs(nr_pages), &f2fs_bioset);
-+	bio = bio_alloc_bioset(NULL, bio_max_segs(nr_pages), REQ_OP_READ,
-+			       for_write ? GFP_NOIO : GFP_KERNEL, &f2fs_bioset);
- 	if (!bio)
- 		return ERR_PTR(-ENOMEM);
- 
-@@ -994,7 +994,6 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode, block_t blkaddr,
- 
- 	f2fs_target_device(sbi, blkaddr, bio);
- 	bio->bi_end_io = f2fs_read_end_io;
--	bio_set_op_attrs(bio, REQ_OP_READ, op_flag);
- 
- 	if (fscrypt_inode_uses_fs_layer_crypto(inode))
- 		post_read_steps |= STEP_DECRYPT;
-diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index c938bbad075e1..340d373cb1bf9 100644
---- a/fs/iomap/buffered-io.c
-+++ b/fs/iomap/buffered-io.c
-@@ -1196,10 +1196,10 @@ iomap_alloc_ioend(struct inode *inode, struct iomap_writepage_ctx *wpc,
- 	struct iomap_ioend *ioend;
- 	struct bio *bio;
- 
--	bio = bio_alloc_bioset(GFP_NOFS, BIO_MAX_VECS, &iomap_ioend_bioset);
--	bio_set_dev(bio, wpc->iomap.bdev);
-+	bio = bio_alloc_bioset(wpc->iomap.bdev, BIO_MAX_VECS,
-+			       REQ_OP_WRITE | wbc_to_write_flags(wbc),
-+			       GFP_NOFS, &iomap_ioend_bioset);
- 	bio->bi_iter.bi_sector = sector;
--	bio->bi_opf = REQ_OP_WRITE | wbc_to_write_flags(wbc);
- 	bio->bi_write_hint = inode->i_write_hint;
- 	wbc_init_bio(wbc, bio);
- 
-diff --git a/include/linux/bio.h b/include/linux/bio.h
-index edeae54074ede..2f63ae9a71e1a 100644
---- a/include/linux/bio.h
-+++ b/include/linux/bio.h
-@@ -405,8 +405,9 @@ extern void bioset_exit(struct bio_set *);
- extern int biovec_init_pool(mempool_t *pool, int pool_entries);
- extern int bioset_init_from_src(struct bio_set *bs, struct bio_set *src);
- 
--struct bio *bio_alloc_bioset(gfp_t gfp, unsigned short nr_iovecs,
--		struct bio_set *bs);
-+struct bio *bio_alloc_bioset(struct block_device *bdev, unsigned short nr_vecs,
-+			     unsigned int opf, gfp_t gfp_mask,
-+			     struct bio_set *bs);
- struct bio *bio_alloc_kiocb(struct kiocb *kiocb, unsigned short nr_vecs,
- 		struct bio_set *bs);
- struct bio *bio_kmalloc(gfp_t gfp_mask, unsigned short nr_iovecs);
-@@ -419,7 +420,7 @@ extern struct bio_set fs_bio_set;
- 
- static inline struct bio *bio_alloc(gfp_t gfp_mask, unsigned short nr_iovecs)
- {
--	return bio_alloc_bioset(gfp_mask, nr_iovecs, &fs_bio_set);
-+	return bio_alloc_bioset(NULL, nr_iovecs, 0, gfp_mask, &fs_bio_set);
- }
- 
- void submit_bio(struct bio *bio);
--- 
-2.30.2
-
+SGkgSmFuLA0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEphbiBCZXVs
+aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCj4gU2VudDogMjAyMuW5tDHmnIgxOOaXpSAwOjExDQo+
+IFRvOiBXZWkgQ2hlbiA8V2VpLkNoZW5AYXJtLmNvbT4NCj4gQ2M6IEJlcnRyYW5kIE1hcnF1aXMg
+PEJlcnRyYW5kLk1hcnF1aXNAYXJtLmNvbT47IHhlbi0NCj4gZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmc7IHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc7IGp1bGllbkB4ZW4ub3JnDQo+IFN1YmplY3Q6
+IFJlOiBbUEFUQ0ggMDQvMzddIHhlbjogaW50cm9kdWNlIGFuIGFyY2ggaGVscGVyIGZvciBkZWZh
+dWx0IGRtYQ0KPiB6b25lIHN0YXR1cw0KPiANCj4gSSByZWFsaXplIHRoaXMgc2VyaWVzIGhhcyBi
+ZWVuIHBlbmRpbmcgZm9yIGEgbG9uZyB0aW1lLCBidXQgSSBkb24ndA0KPiByZWNhbGwgYW55IGlu
+ZGljYXRpb24gdGhhdCBpdCB3b3VsZCBoYXZlIGJlZW4gZHJvcHBlZC4gSGVuY2UgYXMgYQ0KPiBm
+aXJzdCB0cnksIGEgZmV3IGNvbW1lbnRzIG9uIHRoaXMgcmVsYXRpdmVseSBzaW1wbGUgY2hhbmdl
+LiBJJ20NCj4gc29ycnkgaXQgdG8gaGF2ZSB0YWtlbiBzbyBsb25nIHRvIGdldCB0byBpdC4NCj4g
+DQoNClRoYW5rcyBmb3IgcmV2aWV3aW5nIHRoaXMgc2VyaWVzIGFuZCBsaWZ0IGl0IHVwLiBXZSBh
+cmUgc3RpbGwNCndvcmtpbmcgb24gdGhpcyBzZXJpZXMgYW5kIHdpbGwgc2VuZCBhIG5ldyB2ZXJz
+aW9uIHNvb24uDQoNCj4gT24gMjMuMDkuMjAyMSAxNDowMiwgV2VpIENoZW4gd3JvdGU6DQo+ID4g
+SW4gY3VycmVudCBjb2RlLCB3aGVuIFhlbiBpcyBydW5uaW5nIGluIGEgbXVsdGlwbGUgbm9kZXMg
+TlVNQQ0KPiA+IHN5c3RlbSwgaXQgd2lsbCBzZXQgZG1hX2JpdHNpemUgaW4gZW5kX2Jvb3RfYWxs
+b2NhdG9yIHRvIHJlc2VydmUNCj4gPiBzb21lIGxvdyBhZGRyZXNzIG1lbW9yeSBmb3IgRE1BLg0K
+PiA+DQo+ID4gVGhlcmUgYXJlIHNvbWUgeDg2IGltcGxpY2F0aW9ucyBpbiBjdXJyZW50IGltcGxl
+bWVudGF0aW9uLiBCZWN1YXNlDQo+ID4gb24geDg2LCBtZW1vcnkgc3RhcnRzIGZyb20gMC4gT24g
+YSBtdWx0aXBsZSBub2RlcyBOVU1BIHN5c3RlbSwgaWYNCj4gPiBhIHNpbmdsZSBub2RlIGNvbnRh
+aW5zIHRoZSBtYWpvcml0eSBvciBhbGwgb2YgdGhlIERNQSBtZW1vcnkuIHg4Ng0KPiA+IHByZWZl
+ciB0byBnaXZlIG91dCBtZW1vcnkgZnJvbSBub24tbG9jYWwgYWxsb2NhdGlvbnMgcmF0aGVyIHRo
+YW4NCj4gPiBleGhhdXN0aW5nIHRoZSBETUEgbWVtb3J5IHJhbmdlcy4gSGVuY2UgeDg2IHVzZSBk
+bWFfYml0c2l6ZSB0byBzZXQNCj4gPiBhc2lkZSBzb21lIGxhcmdlbHkgYXJiaXRyYXJ5IGFtb3Vu
+dCBtZW1vcnkgZm9yIERNQSBtZW1vcnkgcmFuZ2VzLg0KPiA+IFRoZSBhbGxvY2F0aW9ucyBmcm9t
+IHRoZXNlIG1lbW9yeSByYW5nZXMgd291bGQgaGFwcGVuIG9ubHkgYWZ0ZXINCj4gPiBleGhhdXN0
+aW5nIGFsbCBvdGhlciBub2RlcycgbWVtb3J5Lg0KPiA+DQo+ID4gQnV0IHRoZSBpbXBsaWNhdGlv
+bnMgYXJlIG5vdCBzaGFyZWQgYWNyb3NzIGFsbCBhcmNoaXRlY3R1cmVzLiBGb3INCj4gPiBleGFt
+cGxlLCBBcm0gZG9lc24ndCBoYXZlIHRoZXNlIGltcGxpY2F0aW9ucy4gU28gaW4gdGhpcyBwYXRj
+aCwgd2UNCj4gPiBpbnRyb2R1Y2UgYW4gYXJjaF9oYXZlX2RlZmF1bHRfZG1hem9uZSBoZWxwZXIg
+Zm9yIGFyY2ggdG8gZGV0ZXJtaW5lDQo+ID4gdGhhdCBpdCBuZWVkIHRvIHNldCBkbWFfYml0c2l6
+ZSBmb3IgcmVzZXJ2ZSBETUEgYWxsb2NhdGlvbnMgb3Igbm90Lg0KPiANCj4gSG93IHdvdWxkIEFy
+bSBndWFyYW50ZWUgYXZhaWxhYmlsaXR5IG9mIG1lbW9yeSBiZWxvdyBhIGNlcnRhaW4NCj4gYm91
+bmRhcnkgZm9yIGxpbWl0ZWQtY2FwYWJpbGl0eSBkZXZpY2VzPyBPciBpcyB0aGVyZSBubyBuZWVk
+DQo+IGJlY2F1c2UgdGhlcmUncyBhbiBhc3N1bXB0aW9uIHRoYXQgSS9PIGZvciBzdWNoIGRldmlj
+ZXMgd291bGQNCj4gYWx3YXlzIHBhc3MgdGhyb3VnaCBhbiBJT01NVSwgbGlmdGluZyBhZGRyZXNz
+IHNpemUgcmVzdHJpY3Rpb25zPw0KPiAoSSBndWVzcyBpbiBhICFQViBidWlsZCBvbiB4ODYgd2Ug
+Y291bGQgYWxzbyBnZXQgcmlkIG9mIHN1Y2ggYQ0KPiByZXNlcnZhdGlvbi4pDQoNCk9uIEFybSwg
+d2Ugc3RpbGwgY2FuIGhhdmUgc29tZSBkZXZpY2VzIHdpdGggbGltaXRlZCBETUEgY2FwYWJpbGl0
+eS4NCkFuZCB3ZSBhbHNvIGRvbid0IGZvcmNlIGFsbCBzdWNoIGRldmljZXMgdG8gdXNlIElPTU1V
+LiBUaGlzIGRldmljZXMNCndpbGwgYWZmZWN0IHRoZSBkbWFfYml0c2l6ZS4gTGlrZSBSUGkgcGxh
+dGZvcm0sIGl0IHNldHMgaXRzIGRtYV9iaXRzaXplDQp0byAzMC4gQnV0IGluIG11bHRpcGxlIE5V
+TUEgbm9kZXMgc3lzdGVtLCBBcm0gZG9lc24ndCBoYXZlIGEgZGVmYXVsdA0KRE1BIHpvbmUuIE11
+bHRpcGxlIG5vZGVzIGlzIG5vdCBhIGNvbnN0cmFpbnQgb24gZG1hX2JpdHNpemUuIEFuZCBzb21l
+DQpwcmV2aW91cyBkaXNjdXNzaW9ucyBhcmUgcGxhY2VkIGhlcmUgWzFdLg0KDQo+IA0KPiA+IC0t
+LSBhL3hlbi9hcmNoL3g4Ni9udW1hLmMNCj4gPiArKysgYi94ZW4vYXJjaC94ODYvbnVtYS5jDQo+
+ID4gQEAgLTM3MSw2ICszNzEsMTEgQEAgdW5zaWduZWQgaW50IF9faW5pdCBhcmNoX2dldF9kbWFf
+Yml0c2l6ZSh2b2lkKQ0KPiA+ICAgICAgICAgICAgICAgICAgICsgUEFHRV9TSElGVCwgMzIpOw0K
+PiA+ICB9DQo+ID4NCj4gPiArdW5zaWduZWQgaW50IGFyY2hfaGF2ZV9kZWZhdWx0X2RtYXpvbmUo
+dm9pZCkNCj4gPiArew0KPiA+ICsgICAgcmV0dXJuICggbnVtX29ubGluZV9ub2RlcygpID4gMSAp
+ID8gMSA6IDA7DQo+ID4gK30NCj4gDQo+IEFjY29yZGluZyB0byB0aGUgZXhwcmVzc2lvbiBhbmQg
+Li4uDQo+IA0KPiA+IC0tLSBhL3hlbi9jb21tb24vcGFnZV9hbGxvYy5jDQo+ID4gKysrIGIveGVu
+L2NvbW1vbi9wYWdlX2FsbG9jLmMNCj4gPiBAQCAtMTg4OSw3ICsxODg5LDcgQEAgdm9pZCBfX2lu
+aXQgZW5kX2Jvb3RfYWxsb2NhdG9yKHZvaWQpDQo+ID4gICAgICB9DQo+ID4gICAgICBucl9ib290
+bWVtX3JlZ2lvbnMgPSAwOw0KPiA+DQo+ID4gLSAgICBpZiAoICFkbWFfYml0c2l6ZSAmJiAobnVt
+X29ubGluZV9ub2RlcygpID4gMSkgKQ0KPiA+ICsgICAgaWYgKCAhZG1hX2JpdHNpemUgJiYgYXJj
+aF9oYXZlX2RlZmF1bHRfZG1hem9uZSgpICkNCj4gPiAgICAgICAgICBkbWFfYml0c2l6ZSA9IGFy
+Y2hfZ2V0X2RtYV9iaXRzaXplKCk7DQo+IA0KPiAuLi4gdGhlIHVzZSBzaXRlLCB5b3UgbWVhbiB0
+aGUgZnVuY3Rpb24gdG8gcmV0dXJuIGJvb2xlYW4uIFBsZWFzZQ0KPiBpbmRpY2F0ZSBzbyBieSBt
+YWtpbmcgaXQgaGF2ZSBhIHJldHVybiB0eXBlIG9mICJib29sIi4gSW5kZXBlbmRlbnQNCj4gb2Yg
+dGhhdCB5b3UgZG9uJ3QgbmVlZCBhIGNvbmRpdGlvbmFsIGV4cHJlc3Npb24gYWJvdmUsIG5vcg0K
+PiAobWFsZm9ybWVkKSB1c2Ugb2YgcGFyZW50aGVzZXMuIEkgZnVydGhlciB3b25kZXIgd2hldGhl
+ciAuLi4NCj4gDQoNCkkgd2lsbCBmaXggdGhlbSBpbiBuZXh0IHZlcnNpb24uIEJ1dCBJIGFtIG5v
+dCB2ZXJ5IGNsZWFyIGFib3V0DQp0aGlzIGNvbW1lbnQgIm9mIHRoYXQgeW91IGRvbid0IG5lZWQg
+YSBjb25kaXRpb25hbCBleHByZXNzaW9uIGFib3ZlIiwNClRoZSAiYWJvdmUiIGluZGljYXRlcyB0
+aGlzIGxpbmU6DQoicmV0dXJuICggbnVtX29ubGluZV9ub2RlcygpID4gMSApID8gMSA6IDA7Ij8N
+Cg0KPiA+IC0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vbnVtYS5oDQo+ID4gKysrIGIveGVuL2lu
+Y2x1ZGUvYXNtLWFybS9udW1hLmgNCj4gPiBAQCAtMjUsNiArMjUsMTEgQEAgZXh0ZXJuIG1mbl90
+IGZpcnN0X3ZhbGlkX21mbjsNCj4gPiAgI2RlZmluZSBub2RlX3N0YXJ0X3BmbihuaWQpIChtZm5f
+eChmaXJzdF92YWxpZF9tZm4pKQ0KPiA+ICAjZGVmaW5lIF9fbm9kZV9kaXN0YW5jZShhLCBiKSAo
+MjApDQo+ID4NCj4gPiArc3RhdGljIGlubGluZSB1bnNpZ25lZCBpbnQgYXJjaF9oYXZlX2RlZmF1
+bHRfZG1hem9uZSh2b2lkKQ0KPiA+ICt7DQo+ID4gKyAgICByZXR1cm4gMDsNCj4gPiArfQ0KPiAN
+Cj4gLi4uIGxpa2UgdGhpcyBvbmUsIHg4NidlcyBjb3VsZG4ndCBiZSBpbmxpbmUgYXMgd2VsbC4g
+SWYgaW5kZWVkDQo+IGl0IGNhbid0IGJlLCBtYWtpbmcgaXQgYSBtYWNybyBtYXkgc3RpbGwgYmUg
+YmV0dGVyIChhbmQgYXZvaWQgYQ0KPiBmdXJ0aGVyIGNvbW1lbnQgcmVnYXJkaW5nIHRoZSBsYWNr
+IG9mIF9faW5pdCkuDQoNCk9rLCB0aGF0IHdvdWxkIGJlIGJldHRlciwgSSB3aWxsIGRvIGl0IGlu
+IG5leHQgdmVyc2lvbi4NCg0KPiANCj4gSmFuDQoNClsxXSBodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMjEtMDgvbXNnMDA3NzIuaHRtbA0KDQoN
+Cg==
 
