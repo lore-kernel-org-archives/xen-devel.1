@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3751EC43219
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Jan 2022 07:20:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.258342.444743 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB597C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Jan 2022 07:20:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.258348.444762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n9inG-0004DD-Gx; Tue, 18 Jan 2022 07:20:38 +0000
+	id 1n9inL-00058o-Bn; Tue, 18 Jan 2022 07:20:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 258342.444743; Tue, 18 Jan 2022 07:20:38 +0000
+Received: by outflank-mailman (output) from mailman id 258348.444762; Tue, 18 Jan 2022 07:20:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n9inG-0004BX-8A; Tue, 18 Jan 2022 07:20:38 +0000
-Received: by outflank-mailman (input) for mailman id 258342;
- Tue, 18 Jan 2022 07:20:37 +0000
+	id 1n9inL-00057z-2y; Tue, 18 Jan 2022 07:20:43 +0000
+Received: by outflank-mailman (input) for mailman id 258348;
+ Tue, 18 Jan 2022 07:20:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lOsy=SC=bombadil.srs.infradead.org=BATV+4fe6c3c60fc7db690b35+6722+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1n9inE-0000yV-T4
- for xen-devel@lists.xenproject.org; Tue, 18 Jan 2022 07:20:37 +0000
+ id 1n9inJ-0000yV-QP
+ for xen-devel@lists.xenproject.org; Tue, 18 Jan 2022 07:20:41 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1ffd9e23-782f-11ec-a115-11989b9578b4;
- Tue, 18 Jan 2022 08:20:34 +0100 (CET)
+ id 23e91074-782f-11ec-a115-11989b9578b4;
+ Tue, 18 Jan 2022 08:20:41 +0100 (CET)
 Received: from [2001:4bb8:184:72a4:a4a9:19c0:5242:7768] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1n9in0-000ZXZ-GY; Tue, 18 Jan 2022 07:20:23 +0000
+ id 1n9in9-000Zd8-0E; Tue, 18 Jan 2022 07:20:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1ffd9e23-782f-11ec-a115-11989b9578b4
+X-Inumbo-ID: 23e91074-782f-11ec-a115-11989b9578b4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=f2brK3c1r//byFNtb7H+AigJJebcgGaABpKjDxFp+eg=; b=u24yUmqxGf8p+pGDi/NFrHE6oM
-	tiw9ctFdhfoYibfXwKUv3fIcDXOsDIFrGfOv4Px/yVVx5O3fJemb3jHK0ChVy2Zxxdw2O6vKLCjAu
-	vWPIJnLQVQWOcBFRlCPyeoMNOO+Q4CVRU5MshJ99sGKuBHaPT4SgFnhjNMaD7dJRzew884XXg2d9u
-	Z3KM/jwMW5XPRrVcvPhZ9TybnvF7+PrdUAiM57Ba/ijIX/UdOixiz9iNq2ll6gZU0zcT5QK/+NTDA
-	13wiEXXo+DkO28tZczO8n6Z7sN3wC80auX/loORY0ucWpLjKoQNWoO0hfZJinRZxFQ+vnhVO9NB8D
-	+pBCOQ6A==;
+	bh=RX0A67Z5lXd5GUygO0wrcZQvzaCMySR9CjBx906FeWo=; b=IsOgWQqM0RaGunI1SaCITwAnqb
+	RpbPQlarkaevYy0aX2Swx1quQ9t8AB62WCRMZjYW6SuVsikXkDcnaDhEznC8sI388BOxrjs8GsLT/
+	GW9QloSqKj0ccXbh/KCZlmgwRTGnnRlCqSWn/+IlPXwlbgxMN6IE2hAJYG4tJa2OchZm/pxRxKeTo
+	3jkIwzknvQl02ek9uCzvqJSMxXp00ch06L74ynIJH1rh1keoTo/OJzKhPWXhQZCCZq1ebVWSu4bV5
+	aH8Q/y0znAaQGAjAWmFBZBhOXDRxGBcw+wkD+OFf/TEeM34PxhIsl8SIssCM2WQaa8ZjDST8ZWZwe
+	Y2IzxOhQ==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Pavel Begunkov <asml.silence@gmail.com>,
@@ -73,9 +73,9 @@ Cc: Pavel Begunkov <asml.silence@gmail.com>,
 	ntfs3@lists.linux.dev,
 	xen-devel@lists.xenproject.org,
 	drbd-dev@lists.linbit.com
-Subject: [PATCH 10/19] rnbd-srv: simplify bio mapping in process_rdma
-Date: Tue, 18 Jan 2022 08:19:43 +0100
-Message-Id: <20220118071952.1243143-11-hch@lst.de>
+Subject: [PATCH 13/19] block: move blk_next_bio to bio.c
+Date: Tue, 18 Jan 2022 08:19:46 +0100
+Message-Id: <20220118071952.1243143-14-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220118071952.1243143-1-hch@lst.de>
 References: <20220118071952.1243143-1-hch@lst.de>
@@ -83,143 +83,62 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-The memory mapped in process_rdma is contiguous, so there is no need
-to loop over bio_add_page.  Remove rnbd_bio_map_kern and just open code
-the bio allocation and mapping in the caller.
+Keep blk_next_bio next to the core bio infrastructure.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/block/rnbd/rnbd-srv-dev.c | 57 -------------------------------
- drivers/block/rnbd/rnbd-srv-dev.h |  5 ---
- drivers/block/rnbd/rnbd-srv.c     | 20 ++++++++---
- 3 files changed, 15 insertions(+), 67 deletions(-)
+ block/bio.c     | 13 +++++++++++++
+ block/blk-lib.c | 13 -------------
+ 2 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/block/rnbd/rnbd-srv-dev.c b/drivers/block/rnbd/rnbd-srv-dev.c
-index b241a099aeae2..98d3e591a0885 100644
---- a/drivers/block/rnbd/rnbd-srv-dev.c
-+++ b/drivers/block/rnbd/rnbd-srv-dev.c
-@@ -44,60 +44,3 @@ void rnbd_dev_close(struct rnbd_dev *dev)
- 	blkdev_put(dev->bdev, dev->blk_open_flags);
- 	kfree(dev);
+diff --git a/block/bio.c b/block/bio.c
+index 0d400ba2dbd18..43fb28ac6b44e 100644
+--- a/block/bio.c
++++ b/block/bio.c
+@@ -344,6 +344,19 @@ void bio_chain(struct bio *bio, struct bio *parent)
  }
--
--void rnbd_dev_bi_end_io(struct bio *bio)
+ EXPORT_SYMBOL(bio_chain);
+ 
++struct bio *blk_next_bio(struct bio *bio, unsigned int nr_pages, gfp_t gfp)
++{
++	struct bio *new = bio_alloc(gfp, nr_pages);
++
++	if (bio) {
++		bio_chain(bio, new);
++		submit_bio(bio);
++	}
++
++	return new;
++}
++EXPORT_SYMBOL_GPL(blk_next_bio);
++
+ static void bio_alloc_rescue(struct work_struct *work)
+ {
+ 	struct bio_set *bs = container_of(work, struct bio_set, rescue_work);
+diff --git a/block/blk-lib.c b/block/blk-lib.c
+index 9f09beadcbe30..9245b300ef73e 100644
+--- a/block/blk-lib.c
++++ b/block/blk-lib.c
+@@ -10,19 +10,6 @@
+ 
+ #include "blk.h"
+ 
+-struct bio *blk_next_bio(struct bio *bio, unsigned int nr_pages, gfp_t gfp)
 -{
--	struct rnbd_dev_blk_io *io = bio->bi_private;
+-	struct bio *new = bio_alloc(gfp, nr_pages);
 -
--	rnbd_endio(io->priv, blk_status_to_errno(bio->bi_status));
--	bio_put(bio);
--}
--
--/**
-- *	rnbd_bio_map_kern	-	map kernel address into bio
-- *	@data: pointer to buffer to map
-- *	@bs: bio_set to use.
-- *	@len: length in bytes
-- *	@gfp_mask: allocation flags for bio allocation
-- *
-- *	Map the kernel address into a bio suitable for io to a block
-- *	device. Returns an error pointer in case of error.
-- */
--struct bio *rnbd_bio_map_kern(void *data, struct bio_set *bs,
--			      unsigned int len, gfp_t gfp_mask)
--{
--	unsigned long kaddr = (unsigned long)data;
--	unsigned long end = (kaddr + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
--	unsigned long start = kaddr >> PAGE_SHIFT;
--	const int nr_pages = end - start;
--	int offset, i;
--	struct bio *bio;
--
--	bio = bio_alloc_bioset(gfp_mask, nr_pages, bs);
--	if (!bio)
--		return ERR_PTR(-ENOMEM);
--
--	offset = offset_in_page(kaddr);
--	for (i = 0; i < nr_pages; i++) {
--		unsigned int bytes = PAGE_SIZE - offset;
--
--		if (len <= 0)
--			break;
--
--		if (bytes > len)
--			bytes = len;
--
--		if (bio_add_page(bio, virt_to_page(data), bytes,
--				    offset) < bytes) {
--			/* we don't support partial mappings */
--			bio_put(bio);
--			return ERR_PTR(-EINVAL);
--		}
--
--		data += bytes;
--		len -= bytes;
--		offset = 0;
+-	if (bio) {
+-		bio_chain(bio, new);
+-		submit_bio(bio);
 -	}
 -
--	return bio;
+-	return new;
 -}
-diff --git a/drivers/block/rnbd/rnbd-srv-dev.h b/drivers/block/rnbd/rnbd-srv-dev.h
-index 0eb23850afb95..1a14ece0be726 100644
---- a/drivers/block/rnbd/rnbd-srv-dev.h
-+++ b/drivers/block/rnbd/rnbd-srv-dev.h
-@@ -41,11 +41,6 @@ void rnbd_dev_close(struct rnbd_dev *dev);
- 
- void rnbd_endio(void *priv, int error);
- 
--void rnbd_dev_bi_end_io(struct bio *bio);
+-EXPORT_SYMBOL_GPL(blk_next_bio);
 -
--struct bio *rnbd_bio_map_kern(void *data, struct bio_set *bs,
--			      unsigned int len, gfp_t gfp_mask);
--
- static inline int rnbd_dev_get_max_segs(const struct rnbd_dev *dev)
- {
- 	return queue_max_segments(bdev_get_queue(dev->bdev));
-diff --git a/drivers/block/rnbd/rnbd-srv.c b/drivers/block/rnbd/rnbd-srv.c
-index 1ee808fc600cf..65c670e96075b 100644
---- a/drivers/block/rnbd/rnbd-srv.c
-+++ b/drivers/block/rnbd/rnbd-srv.c
-@@ -114,6 +114,14 @@ rnbd_get_sess_dev(int dev_id, struct rnbd_srv_session *srv_sess)
- 	return sess_dev;
- }
- 
-+static void rnbd_dev_bi_end_io(struct bio *bio)
-+{
-+	struct rnbd_dev_blk_io *io = bio->bi_private;
-+
-+	rnbd_endio(io->priv, blk_status_to_errno(bio->bi_status));
-+	bio_put(bio);
-+}
-+
- static int process_rdma(struct rnbd_srv_session *srv_sess,
- 			struct rtrs_srv_op *id, void *data, u32 datalen,
- 			const void *usr, size_t usrlen)
-@@ -144,11 +152,11 @@ static int process_rdma(struct rnbd_srv_session *srv_sess,
- 	priv->sess_dev = sess_dev;
- 	priv->id = id;
- 
--	/* Generate bio with pages pointing to the rdma buffer */
--	bio = rnbd_bio_map_kern(data, sess_dev->rnbd_dev->ibd_bio_set, datalen, GFP_KERNEL);
--	if (IS_ERR(bio)) {
--		err = PTR_ERR(bio);
--		rnbd_srv_err(sess_dev, "Failed to generate bio, err: %d\n", err);
-+	bio = bio_alloc_bioset(GFP_KERNEL, 1, sess_dev->rnbd_dev->ibd_bio_set);
-+	if (bio_add_page(bio, virt_to_page(data), datalen,
-+			offset_in_page(data))) {
-+		rnbd_srv_err(sess_dev, "Failed to map data to bio\n");
-+		err = -EINVAL;
- 		goto sess_dev_put;
- 	}
- 
-@@ -170,6 +178,8 @@ static int process_rdma(struct rnbd_srv_session *srv_sess,
- 
- 	return 0;
- 
-+bio_put:
-+	bio_put(bio);
- sess_dev_put:
- 	rnbd_put_sess_dev(sess_dev);
- err:
+ int __blkdev_issue_discard(struct block_device *bdev, sector_t sector,
+ 		sector_t nr_sects, gfp_t gfp_mask, int flags,
+ 		struct bio **biop)
 -- 
 2.30.2
 
