@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B02C41535
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Jan 2022 07:20:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.258331.444652 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8482DC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Jan 2022 07:20:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.258330.444641 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n9imz-0001FP-MI; Tue, 18 Jan 2022 07:20:21 +0000
+	id 1n9imy-0000yv-DE; Tue, 18 Jan 2022 07:20:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 258331.444652; Tue, 18 Jan 2022 07:20:21 +0000
+Received: by outflank-mailman (output) from mailman id 258330.444641; Tue, 18 Jan 2022 07:20:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1n9imz-0001FI-It; Tue, 18 Jan 2022 07:20:21 +0000
-Received: by outflank-mailman (input) for mailman id 258331;
+	id 1n9imy-0000yo-9k; Tue, 18 Jan 2022 07:20:20 +0000
+Received: by outflank-mailman (input) for mailman id 258330;
  Tue, 18 Jan 2022 07:20:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lOsy=SC=bombadil.srs.infradead.org=BATV+4fe6c3c60fc7db690b35+6722+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1n9imx-0000yV-Pk
+ id 1n9imx-0000yV-Bu
  for xen-devel@lists.xenproject.org; Tue, 18 Jan 2022 07:20:19 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 12eb9183-782f-11ec-a115-11989b9578b4;
+ id 151d6247-782f-11ec-a115-11989b9578b4;
  Tue, 18 Jan 2022 08:20:16 +0100 (CET)
 Received: from [2001:4bb8:184:72a4:a4a9:19c0:5242:7768] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1n9ime-000ZNW-EE; Tue, 18 Jan 2022 07:20:01 +0000
+ id 1n9imk-000ZPF-0i; Tue, 18 Jan 2022 07:20:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12eb9183-782f-11ec-a115-11989b9578b4
+X-Inumbo-ID: 151d6247-782f-11ec-a115-11989b9578b4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=7QPyuzOR2N2LqXuXA08GkKhJ7fsHc2fxZXqTeovi8aQ=; b=mwLo7/0/BOPnfEnPa3xkh1wtp3
-	15wY0VF1l5wgNEmlmFx9qahgWnFhyJl6myyHdYnnzRUVdOqVBkw7UQ2s8GiXprR+T/gsvB/2g/F5v
-	UCaXHspI+nVqVsB58mvQw0HRJkvSn89DW90IDAfE05lkscu3Lf/H7fIN1bqOWBihdD4Tp5Ut6juFU
-	WNJ1skjZ7Xkx6wUi1wozYtRk77Q0Gy2FFrBE57k2vN/cSiZKuWEEa/FwDkaLAeAptVbMHq6BGRtqX
-	s60rfzBqA3qtv2QplYalZU7PGOtQaONd/6YhcyxH1JxZ9Vqhkoc/TOJtrX45PcQTGjUSplXja4jev
-	6N8KX46Q==;
+	bh=EcXfe+QJLbyEaBSYcI8IdLx+VpwVU+Twsx7L0heUO1Q=; b=Crht+UUgONjGH1v8HmgHBuR0Pw
+	3+FhXNSZnyjRNWPG58Wm2G5KNvvpy1aGmBMUIrUK1u4m17TdekCh3eo0S2wKQYJJCbvDqXQsRo2wK
+	voVwIithhKd6AwW1XgXVCGDM2qY6luEVdRs+f8pN0VmiQubGiTFrLb9HST+OMYWI2ooLOR0H3H2W4
+	vveuXxxHUHwA+40YbvmOhhsxe1wU4IgQ9dJEnKgPFvwGnegPrJbbGgCJPHOwX/k9PMvLPupdzEJoQ
+	dshYui2V9dLVx8Ag4GNgYySKuflXOClHoN9+HnAX1vSgCn5EnBRDfedOUMh6tHzNLJ5kJKsxDwFUO
+	XkKnK+AQ==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Pavel Begunkov <asml.silence@gmail.com>,
@@ -73,9 +73,9 @@ Cc: Pavel Begunkov <asml.silence@gmail.com>,
 	ntfs3@lists.linux.dev,
 	xen-devel@lists.xenproject.org,
 	drbd-dev@lists.linbit.com
-Subject: [PATCH 02/19] nilfs2: remove nilfs_alloc_seg_bio
-Date: Tue, 18 Jan 2022 08:19:35 +0100
-Message-Id: <20220118071952.1243143-3-hch@lst.de>
+Subject: [PATCH 04/19] ntfs3: remove ntfs_alloc_bio
+Date: Tue, 18 Jan 2022 08:19:37 +0100
+Message-Id: <20220118071952.1243143-5-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220118071952.1243143-1-hch@lst.de>
 References: <20220118071952.1243143-1-hch@lst.de>
@@ -83,63 +83,63 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-bio_alloc will never fail when it can sleep.  Remove the now simple
-nilfs_alloc_seg_bio helper and open code it in the only caller.
+bio_alloc will never fail if it is allowed to sleep, so there is no
+need for this loop.  Also remove the __GFP_HIGH specifier as it doesn't
+make sense here given that we'll always fall back to the mempool anyway.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/nilfs2/segbuf.c | 31 ++++---------------------------
- 1 file changed, 4 insertions(+), 27 deletions(-)
+ fs/ntfs3/fsntfs.c | 23 ++---------------------
+ 1 file changed, 2 insertions(+), 21 deletions(-)
 
-diff --git a/fs/nilfs2/segbuf.c b/fs/nilfs2/segbuf.c
-index 43287b0d3e9b6..53b7c6d21cdd8 100644
---- a/fs/nilfs2/segbuf.c
-+++ b/fs/nilfs2/segbuf.c
-@@ -371,29 +371,6 @@ static int nilfs_segbuf_submit_bio(struct nilfs_segment_buffer *segbuf,
+diff --git a/fs/ntfs3/fsntfs.c b/fs/ntfs3/fsntfs.c
+index 4de9acb169689..4a255e21ecf5f 100644
+--- a/fs/ntfs3/fsntfs.c
++++ b/fs/ntfs3/fsntfs.c
+@@ -1443,17 +1443,6 @@ int ntfs_write_bh(struct ntfs_sb_info *sbi, struct NTFS_RECORD_HEADER *rhdr,
  	return err;
  }
  
--/**
-- * nilfs_alloc_seg_bio - allocate a new bio for writing log
-- * @nilfs: nilfs object
-- * @start: start block number of the bio
-- * @nr_vecs: request size of page vector.
-- *
-- * Return Value: On success, pointer to the struct bio is returned.
-- * On error, NULL is returned.
-- */
--static struct bio *nilfs_alloc_seg_bio(struct the_nilfs *nilfs, sector_t start,
--				       int nr_vecs)
+-static inline struct bio *ntfs_alloc_bio(u32 nr_vecs)
 -{
--	struct bio *bio;
+-	struct bio *bio = bio_alloc(GFP_NOFS | __GFP_HIGH, nr_vecs);
 -
--	bio = bio_alloc(GFP_NOIO, nr_vecs);
--	if (likely(bio)) {
--		bio_set_dev(bio, nilfs->ns_bdev);
--		bio->bi_iter.bi_sector =
--			start << (nilfs->ns_blocksize_bits - 9);
+-	if (!bio && (current->flags & PF_MEMALLOC)) {
+-		while (!bio && (nr_vecs /= 2))
+-			bio = bio_alloc(GFP_NOFS | __GFP_HIGH, nr_vecs);
 -	}
 -	return bio;
 -}
 -
- static void nilfs_segbuf_prepare_write(struct nilfs_segment_buffer *segbuf,
- 				       struct nilfs_write_info *wi)
- {
-@@ -414,10 +391,10 @@ static int nilfs_segbuf_submit_bh(struct nilfs_segment_buffer *segbuf,
- 	BUG_ON(wi->nr_vecs <= 0);
-  repeat:
- 	if (!wi->bio) {
--		wi->bio = nilfs_alloc_seg_bio(wi->nilfs, wi->blocknr + wi->end,
--					      wi->nr_vecs);
--		if (unlikely(!wi->bio))
--			return -ENOMEM;
-+		wi->bio = bio_alloc(GFP_NOIO, wi->nr_vecs);
-+		bio_set_dev(wi->bio, wi->nilfs->ns_bdev);
-+		wi->bio->bi_iter.bi_sector = (wi->blocknr + wi->end) <<
-+			(wi->nilfs->ns_blocksize_bits - 9);
- 	}
- 
- 	len = bio_add_page(wi->bio, bh->b_page, bh->b_size, bh_offset(bh));
+ /*
+  * ntfs_bio_pages - Read/write pages from/to disk.
+  */
+@@ -1496,11 +1485,7 @@ int ntfs_bio_pages(struct ntfs_sb_info *sbi, const struct runs_tree *run,
+ 		lbo = ((u64)lcn << cluster_bits) + off;
+ 		len = ((u64)clen << cluster_bits) - off;
+ new_bio:
+-		new = ntfs_alloc_bio(nr_pages - page_idx);
+-		if (!new) {
+-			err = -ENOMEM;
+-			goto out;
+-		}
++		new = bio_alloc(GFP_NOFS, nr_pages - page_idx);
+ 		if (bio) {
+ 			bio_chain(bio, new);
+ 			submit_bio(bio);
+@@ -1599,11 +1584,7 @@ int ntfs_bio_fill_1(struct ntfs_sb_info *sbi, const struct runs_tree *run)
+ 		lbo = (u64)lcn << cluster_bits;
+ 		len = (u64)clen << cluster_bits;
+ new_bio:
+-		new = ntfs_alloc_bio(BIO_MAX_VECS);
+-		if (!new) {
+-			err = -ENOMEM;
+-			break;
+-		}
++		new = bio_alloc(GFP_NOFS, BIO_MAX_VECS);
+ 		if (bio) {
+ 			bio_chain(bio, new);
+ 			submit_bio(bio);
 -- 
 2.30.2
 
