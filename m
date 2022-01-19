@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1E6C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Jan 2022 07:28:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.258728.445932 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 139E9C433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Jan 2022 07:28:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.258725.445911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nA5OZ-0003tG-5Z; Wed, 19 Jan 2022 07:28:39 +0000
+	id 1nA5OX-0003YZ-Uw; Wed, 19 Jan 2022 07:28:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 258728.445932; Wed, 19 Jan 2022 07:28:39 +0000
+Received: by outflank-mailman (output) from mailman id 258725.445911; Wed, 19 Jan 2022 07:28:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nA5OY-0003rx-TK; Wed, 19 Jan 2022 07:28:38 +0000
-Received: by outflank-mailman (input) for mailman id 258728;
- Wed, 19 Jan 2022 07:28:37 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nA5OX-0003YS-Rc; Wed, 19 Jan 2022 07:28:37 +0000
+Received: by outflank-mailman (input) for mailman id 258725;
+ Wed, 19 Jan 2022 07:28:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7l/E=SD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nA5OX-0003Y7-54
- for xen-devel@lists.xenproject.org; Wed, 19 Jan 2022 07:28:37 +0000
+ id 1nA5OW-0003Y6-5M
+ for xen-devel@lists.xenproject.org; Wed, 19 Jan 2022 07:28:36 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 69112513-78f9-11ec-a115-11989b9578b4;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 68db0e19-78f9-11ec-9bbc-9dff3e4ee8c5;
  Wed, 19 Jan 2022 08:28:35 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 831B4218B1;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 365D02170E;
  Wed, 19 Jan 2022 07:28:34 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6344413B28;
- Wed, 19 Jan 2022 07:28:34 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EA62213B6D;
+ Wed, 19 Jan 2022 07:28:33 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id wDcjF6K952EyZQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 19 Jan 2022 07:28:34 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id QKglOKG952EyZQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 19 Jan 2022 07:28:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,67 +53,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 69112513-78f9-11ec-a115-11989b9578b4
+X-Inumbo-ID: 68db0e19-78f9-11ec-9bbc-9dff3e4ee8c5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1642577314; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5Q8/hUXGqsnYkvw1oVYpCRHGGrTKxx6BfGMzSIWuIkk=;
-	b=tPl30SlYFSZSWhgQFeaYYbXXz67N4URWouXDF1+5GpYXsugscg4DmYIVI7QVy9xPdeLQHz
-	devaCFqz+Em7u0pzm0OMNk4RYmQckWr5sXfF48LOzAY9BslLNJzKCbDMutWY0GCgo4rk/a
-	Lujhcorw5vyXBwmwbVAUGCJssmomqIQ=
+	bh=KYSZ4YoetIiNwYERXNj7SwMwS/sdGLv5NUxQ/ovPRA8=;
+	b=GvDWzdFZ8sDfCnuZWedXJS0PWIjZ7l4Z+uwcLhm0U2x2yEuqB1nYbOtZ/uCW3f+R5nfPBD
+	yu9MTRMm0KOWd6gRCie/WlEVONXNpBjqL4huk3cdYz8j9wVtJWu3o+FVI7U+PTlNk3uayx
+	qcBXLj4bW1/LmTAKGKAwj7qoOgIFgPk=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 3/3] tools/libs/gnttab: remove old mini-os callback
-Date: Wed, 19 Jan 2022 08:28:23 +0100
-Message-Id: <20220119072823.21025-4-jgross@suse.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v2 1/3] config: use more recent mini-os commit
+Date: Wed, 19 Jan 2022 08:28:21 +0100
+Message-Id: <20220119072823.21025-2-jgross@suse.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220119072823.21025-1-jgross@suse.com>
 References: <20220119072823.21025-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-It is possible now to delete minios_gnttab_close_fd().
+In order to be able to use the recent Mini-OS features switch to the
+most recent commit.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V2:
-- rebase
----
- tools/libs/gnttab/minios.c | 9 ---------
- 1 file changed, 9 deletions(-)
+ Config.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/libs/gnttab/minios.c b/tools/libs/gnttab/minios.c
-index f59fad3577..cac89f0ba6 100644
---- a/tools/libs/gnttab/minios.c
-+++ b/tools/libs/gnttab/minios.c
-@@ -33,8 +33,6 @@
+diff --git a/Config.mk b/Config.mk
+index 5c8c737fe4..168273e157 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -231,7 +231,7 @@ MINIOS_UPSTREAM_URL ?= git://xenbits.xen.org/mini-os.git
+ endif
+ OVMF_UPSTREAM_REVISION ?= 7b4a99be8a39c12d3a7fc4b8db9f0eab4ac688d5
+ QEMU_UPSTREAM_REVISION ?= master
+-MINIOS_UPSTREAM_REVISION ?= a91161eb0f92dac4ad6d41f91117268bc23ef28d
++MINIOS_UPSTREAM_REVISION ?= 83ff43bff4bdd6879539fcb2b3d6ba5e61a64135
  
- #include "private.h"
+ SEABIOS_UPSTREAM_REVISION ?= rel-1.14.0
  
--void minios_gnttab_close_fd(int fd);
--
- static int gnttab_close_fd(struct file *file)
- {
-     gntmap_fini(file->dev);
-@@ -89,13 +87,6 @@ int osdep_gnttab_close(xengnttab_handle *xgt)
-     return close(xgt->fd);
- }
- 
--void minios_gnttab_close_fd(int fd)
--{
--    struct file *file = get_file_from_fd(fd);
--
--    gnttab_close_fd(file);
--}
--
- void *osdep_gnttab_grant_map(xengnttab_handle *xgt,
-                              uint32_t count, int flags, int prot,
-                              uint32_t *domids, uint32_t *refs,
 -- 
 2.31.1
 
