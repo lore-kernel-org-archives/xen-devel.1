@@ -4,29 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B7FC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 21 Jan 2022 15:13:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.259385.447673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59E7CC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 21 Jan 2022 15:21:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.259389.447690 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nAvbS-0001sq-IL; Fri, 21 Jan 2022 15:13:26 +0000
+	id 1nAvjC-0003MG-NU; Fri, 21 Jan 2022 15:21:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 259385.447673; Fri, 21 Jan 2022 15:13:26 +0000
+Received: by outflank-mailman (output) from mailman id 259389.447690; Fri, 21 Jan 2022 15:21:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nAvbS-0001sj-F7; Fri, 21 Jan 2022 15:13:26 +0000
-Received: by outflank-mailman (input) for mailman id 259385;
- Fri, 21 Jan 2022 15:13:24 +0000
+	id 1nAvjC-0003La-GH; Fri, 21 Jan 2022 15:21:26 +0000
+Received: by outflank-mailman (input) for mailman id 259389;
+ Fri, 21 Jan 2022 15:21:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QdbK=SF=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nAvbQ-0001sd-OW
- for xen-devel@lists.xenproject.org; Fri, 21 Jan 2022 15:13:24 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id abcac533-7acc-11ec-8fa7-f31e035a9116;
- Fri, 21 Jan 2022 16:13:23 +0100 (CET)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=CqVI=SF=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1nAvjA-0003JT-OQ
+ for xen-devel@lists.xenproject.org; Fri, 21 Jan 2022 15:21:24 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id cac561d0-7acd-11ec-8fa7-f31e035a9116;
+ Fri, 21 Jan 2022 16:21:23 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 0250F212C9;
+ Fri, 21 Jan 2022 15:21:23 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CD54313D44;
+ Fri, 21 Jan 2022 15:21:22 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id KMniMHLP6mFpAgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 21 Jan 2022 15:21:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,82 +53,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: abcac533-7acc-11ec-8fa7-f31e035a9116
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1642778003;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=wwD2cD1MXelD4ZY0eWiPIT8rbg8F8/3Cm62N3gbEFeE=;
-  b=RfqxuJSSdH+9p0r2am9A7o+mY+9hAnU2EKtxTpxC44JFHYUOeFqHOGX7
-   p+tagbmyN7UiEXnJpI6QdaE2+Eg2LQliYHeYHsvViPJoeFhuSCTQCzwGv
-   Rau8M5+kmO3v1+HImb53+l2G6CbxdbRqMcmn/0/p8FRhsrobqm8I5c+D5
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QEdJUKUN8ELEYNvSs+6ChGmgd7cjfDjeDQQG+Lt6/j0s2TPLmFbUtol2rwxcTyv7AvDm4y5/Fc
- 1FlY5rx6AEkIgmmBhXar6dUjWR965lsVMBXnY+oVNeNRdoGf2WSFyuYiJ26xQm8zidm09bl/bm
- TTFSkMEikATSOU63Xr3n9teaHHd9qm5HZV5C6YoyI5MiFX1popR55g7xExwlxE5a0G5fH64Vu5
- 4rlIqtLBJPWoZqR61h14epbhOpAsZ4psAWzFU/ZzQf6gkaFOhQvBWwtwPumyEtY18qn+cmoCwv
- a6rP8iAeQcPI9EEto59AmhYq
-X-SBRS: 5.2
-X-MesageID: 62497026
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:PXgX4q88AEF89FQNZ9mlDrUDZXmTJUtcMsCJ2f8bNWPcYEJGY0x3x
- jQbCG2Ab/aKM2XyeYxxbIqy8hsHuMDTzYBhSVdpris8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7dj29Yy6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPggk
- stXjL7tWD4WL7He3+QcVDZYHWJhaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwqKtXrO4UO/Glt1zjDAd4tQIzZQrWM7thdtNs1rp4UQaeBP
- 5BHAdZpRDP5QhkIGFkLMY4Vmv+thCjUUTZx+WvA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru/Xn9AxwcHMySz3yC6H3Eru3AhyTgQ6oJCaa1sPVthTW71mEVTREbS1a/if24kVKlHcJSL
- VQO/SgjprR081akJuQRRDXh/iTC5ERFHYMNTatqs2lh15Y4/S7IXHYedxwceeUZpdMkAjwr0
- XCJkZD2UGkHXKKudVqR8bKdrDWXMCcTLHMfaSJscTbp8+UPs6lo0EuRE48L/Lqdy4SsRGqum
- 2ziQD0W3u1L1aY2O7OHEUcrat5GjrzAVUYL6wreRQpJBSspNdf+N+REBbU2hMuszbp1rHHc5
- BDoeODEtYji6K1hcgTXEY3h+5nztp643MX02wIHInXY323FF4SfVY5R+ipiA0xiL9wJfzTkC
- GeK518Lu8cIbSrzMfEvC25UNyjM5fO4fTgCfquMBuein7ArLFPXlM2QTRP4M5/RfLgEzvhkZ
- MbznTeEBncGE6V3pAdatM9GuYLHMhsWnDuJLbiilkzP+ePHOBa9FOlZWHPTMLFRxP7U8W39r
- ocEX+PXmko3bQELSnSNmWLlBQpUfSFT6FGfg5E/S9Nv1SI/SDh+UKeAmO14E2Gn9owM/tr1E
- riGchcw4DLCabfvcG1ms1hvN+HiW4hRt3U+MXB+NFqkwSF7M42u8L0eZ908erx+rL5vyvt9T
- v8kfcScA6sQFmSbqmpFNZSt/pZ/cBmLhB6VO3b3ajYIYJM9FRfC/cXpf1Wz+XBWXDa3r8Y3v
- 5apyhjfHcgYXw1nAcuPMKCvwlq9sGIzguV3W0eUcNBfdF+1qNphKjDrj+9xKMYJcE2Ryjyf3
- geQIBEZueiS/NNlrIiX3fiJ9t77HfF/E0xWG3jgwYy3bSSKrHC+xYJgUfqTeWyPXm3D56j/N
- /5eyOvxMaNbkQ8S4ZZ8Cbti0Yk3+8Dr++1B1g1hEXjGMwarB7dnLiXU1MVDrPQQlLpQuA/wU
- UOT4NhKf76OPZq9QlIWIQMkaMWF1O0VxWaOvahkfh2i6X8l5qeDXGVTIwKI2X5UI7ZCOY84x
- fss5ZwN4Aulhxt2atuLg0i4LYhXwqDsh0n/iqwnPQ==
-IronPort-HdrOrdr: A9a23:lP5ZN6k8nz8YWV+/cJ+dg0W00wnpDfIo3DAbv31ZSRFFG/Fw8P
- re+8jztCWE7Ar5PUtKpTnuAsW9qB/nmqKdgrNwAV7BZmfbUQKTRekJgLcKqAeAJwTOssJbyK
- d8Y+xfJbTLfD1HZB/BkWqF+gAbsbu6zJw=
-X-IronPort-AV: E=Sophos;i="5.88,304,1635220800"; 
-   d="scan'208";a="62497026"
-Date: Fri, 21 Jan 2022 15:13:16 +0000
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Juergen Gross <jgross@suse.com>
-CC: <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>, Julien Grall
-	<julien@xen.org>
-Subject: Re: [PATCH 3/3] tools/xenstore: drop DEFINE_HASHTABLE_* macros and
- usage intro
-Message-ID: <YerNjEld2pe9hSoI@perard>
-References: <20220120120236.13826-1-jgross@suse.com>
- <20220120120236.13826-4-jgross@suse.com>
+X-Inumbo-ID: cac561d0-7acd-11ec-8fa7-f31e035a9116
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1642778483; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ZBetHUzsVCOLsWp+Bkz8oxjPdadRJFJdO1+aPzoPric=;
+	b=U39AAEV9UwCi/N4edg8P8B8vwoIgUeRLsR2vaOzDuqGKUaV/IKq+XTOd4OejfohCg+b0/6
+	LOUT4IjUcOrzCpY6ggnzjtRQVJuaFedqVg4mjCMGHV2uPWUuUT1Q3zG5RPiO1FsRzJuAjJ
+	4vJv36wUjyqWEH/sBhmUtEgTjpHTUb0=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Julien Grall <julien@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v2 1/3] tools/xenstore: merge hashtable_private.h into hashtable.c
+Date: Fri, 21 Jan 2022 16:21:18 +0100
+Message-Id: <20220121152120.23160-2-jgross@suse.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220121152120.23160-1-jgross@suse.com>
+References: <20220121152120.23160-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20220120120236.13826-4-jgross@suse.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 20, 2022 at 01:02:36PM +0100, Juergen Gross wrote:
-> The DEFINE_HASHTABLE_* macros are used nowhere, so drop them. The usage
-> intro isn't needed either with those macros dropped.
+hashtable_private.h is used in hashtable.c only.
 
-The first part of the intro "Example of use:" doesn't speak about the
-macro, so removing the macro part doesn't mean that the first part
-should be removed. But it is probably not necessary as the documentation
-for the functions are probably good enough to figure out how to use
-hashtable. Can you reword that last sentence?
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/xenstore/hashtable.c         | 31 +++++++++--
+ tools/xenstore/hashtable_private.h | 85 ------------------------------
+ 2 files changed, 27 insertions(+), 89 deletions(-)
+ delete mode 100644 tools/xenstore/hashtable_private.h
 
-Thanks,
-
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index 394b1cf9d0..39fb3ed338 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -1,13 +1,29 @@
+ /* Copyright (C) 2004 Christopher Clark <firstname.lastname@cl.cam.ac.uk> */
+ 
+ #include "hashtable.h"
+-#include "hashtable_private.h"
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <math.h>
+ #include <stdint.h>
+ 
++struct entry
++{
++    void *k, *v;
++    unsigned int h;
++    struct entry *next;
++};
++
++struct hashtable {
++    unsigned int tablelength;
++    struct entry **table;
++    unsigned int entrycount;
++    unsigned int loadlimit;
++    unsigned int primeindex;
++    unsigned int (*hashfn) (void *k);
++    int (*eqfn) (void *k1, void *k2);
++};
++
+ /*
+ Credit for primes table: Aaron Krowne
+  http://br.endernet.org/~akrowne/
+@@ -25,6 +41,13 @@ static const unsigned int primes[] = {
+ const unsigned int prime_table_length = sizeof(primes)/sizeof(primes[0]);
+ const unsigned int max_load_factor = 65; /* percentage */
+ 
++/*****************************************************************************/
++/* indexFor */
++static inline unsigned int
++indexFor(unsigned int tablelength, unsigned int hashvalue) {
++    return (hashvalue % tablelength);
++}
++
+ /*****************************************************************************/
+ struct hashtable *
+ create_hashtable(unsigned int minsize,
+@@ -211,7 +234,7 @@ hashtable_remove(struct hashtable *h, void *k)
+             *pE = e->next;
+             h->entrycount--;
+             v = e->v;
+-            freekey(e->k);
++            free(e->k);
+             free(e);
+             return v;
+         }
+@@ -235,7 +258,7 @@ hashtable_destroy(struct hashtable *h, int free_values)
+         {
+             e = table[i];
+             while (NULL != e)
+-            { f = e; e = e->next; freekey(f->k); free(f->v); free(f); }
++            { f = e; e = e->next; free(f->k); free(f->v); free(f); }
+         }
+     }
+     else
+@@ -244,7 +267,7 @@ hashtable_destroy(struct hashtable *h, int free_values)
+         {
+             e = table[i];
+             while (NULL != e)
+-            { f = e; e = e->next; freekey(f->k); free(f); }
++            { f = e; e = e->next; free(f->k); free(f); }
+         }
+     }
+     free(h->table);
+diff --git a/tools/xenstore/hashtable_private.h b/tools/xenstore/hashtable_private.h
+deleted file mode 100644
+index 3e95f60057..0000000000
+--- a/tools/xenstore/hashtable_private.h
++++ /dev/null
+@@ -1,85 +0,0 @@
+-/* Copyright (C) 2002, 2004 Christopher Clark <firstname.lastname@cl.cam.ac.uk> */
+-
+-#ifndef __HASHTABLE_PRIVATE_CWC22_H__
+-#define __HASHTABLE_PRIVATE_CWC22_H__
+-
+-#include "hashtable.h"
+-
+-/*****************************************************************************/
+-struct entry
+-{
+-    void *k, *v;
+-    unsigned int h;
+-    struct entry *next;
+-};
+-
+-struct hashtable {
+-    unsigned int tablelength;
+-    struct entry **table;
+-    unsigned int entrycount;
+-    unsigned int loadlimit;
+-    unsigned int primeindex;
+-    unsigned int (*hashfn) (void *k);
+-    int (*eqfn) (void *k1, void *k2);
+-};
+-
+-/*****************************************************************************/
+-unsigned int
+-hash(struct hashtable *h, void *k);
+-
+-/*****************************************************************************/
+-/* indexFor */
+-static inline unsigned int
+-indexFor(unsigned int tablelength, unsigned int hashvalue) {
+-    return (hashvalue % tablelength);
+-};
+-
+-/* Only works if tablelength == 2^N */
+-/*static inline unsigned int
+-indexFor(unsigned int tablelength, unsigned int hashvalue)
+-{
+-    return (hashvalue & (tablelength - 1u));
+-}
+-*/
+-
+-/*****************************************************************************/
+-#define freekey(X) free(X)
+-/*define freekey(X) ; */
+-
+-
+-/*****************************************************************************/
+-
+-#endif /* __HASHTABLE_PRIVATE_CWC22_H__*/
+-
+-/*
+- * Copyright (c) 2002, Christopher Clark
+- * All rights reserved.
+- * 
+- * Redistribution and use in source and binary forms, with or without
+- * modification, are permitted provided that the following conditions
+- * are met:
+- * 
+- * * Redistributions of source code must retain the above copyright
+- * notice, this list of conditions and the following disclaimer.
+- * 
+- * * Redistributions in binary form must reproduce the above copyright
+- * notice, this list of conditions and the following disclaimer in the
+- * documentation and/or other materials provided with the distribution.
+- * 
+- * * Neither the name of the original author; nor the names of any contributors
+- * may be used to endorse or promote products derived from this software
+- * without specific prior written permission.
+- * 
+- * 
+- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+- * A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER
+- * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-*/
 -- 
-Anthony PERARD
+2.31.1
+
 
