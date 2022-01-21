@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32DB3C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 617A8C43219
 	for <xen-devel@archiver.kernel.org>; Fri, 21 Jan 2022 15:21:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.259390.447696 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.259388.447685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nAvjD-0003PS-0Z; Fri, 21 Jan 2022 15:21:27 +0000
+	id 1nAvjC-0003Jq-Bd; Fri, 21 Jan 2022 15:21:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 259390.447696; Fri, 21 Jan 2022 15:21:26 +0000
+Received: by outflank-mailman (output) from mailman id 259388.447685; Fri, 21 Jan 2022 15:21:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nAvjC-0003NW-Oe; Fri, 21 Jan 2022 15:21:26 +0000
-Received: by outflank-mailman (input) for mailman id 259390;
- Fri, 21 Jan 2022 15:21:25 +0000
+	id 1nAvjC-0003Jj-8H; Fri, 21 Jan 2022 15:21:26 +0000
+Received: by outflank-mailman (input) for mailman id 259388;
+ Fri, 21 Jan 2022 15:21:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=CqVI=SF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nAvjB-0003JS-Ac
- for xen-devel@lists.xenproject.org; Fri, 21 Jan 2022 15:21:25 +0000
+ id 1nAvjA-0003JS-I1
+ for xen-devel@lists.xenproject.org; Fri, 21 Jan 2022 15:21:24 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cacafca7-7acd-11ec-bc18-3156f6d857e4;
+ id cae5fff1-7acd-11ec-bc18-3156f6d857e4;
  Fri, 21 Jan 2022 16:21:23 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id D2AF61F3AF;
- Fri, 21 Jan 2022 15:21:22 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 32F521F3CA;
+ Fri, 21 Jan 2022 15:21:23 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8F971139FE;
- Fri, 21 Jan 2022 15:21:22 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 07C1E139FE;
+ Fri, 21 Jan 2022 15:21:23 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id PxigIXLP6mFpAgAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 21 Jan 2022 15:21:22 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id UOyLAHPP6mFpAgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 21 Jan 2022 15:21:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,41 +53,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cacafca7-7acd-11ec-bc18-3156f6d857e4
+X-Inumbo-ID: cae5fff1-7acd-11ec-bc18-3156f6d857e4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1642778482; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=pu+D+XCV5vakBgyLlB2J5yNghvXJQ9cT+8my8T+L11k=;
-	b=Bu7Skq5TmnupxfKDph4EDSNRAYMfEOCNB3P7GfQHqMFLsH/lF39t8nbXbP6j9JWP+vDnrI
-	4BUwrlFuQvYYOD3VoCP8I69W4X0KS1WAmF0v46qaSJ8b12LdYbyBMC9IW5LHZJR6g5qqmK
-	xmIfAPVmzXhlHyyDeCI7qzGwoaVGLwU=
+	t=1642778483; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=VXZ4prMIpVFrrFMIWdWQrhRMeB3VhjvcCXF+R1jtDDI=;
+	b=K0RVKNNxDd6j45+dZrVhb2dnyL5frrMrFuBynomw1azt35e1z2ocyBv2UiBzfA05hQZnwC
+	Y0fTJuMM8o/WBI2tzl5uVdOLkVfY58oZXALVpbi98B5xWYeFignI4JiBQbzobXm6Zm2ALL
+	fWa49cqpclhC9Gwsrw2//JT2GQWtAyU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	Julien Grall <julien@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH v2 0/3] tools/xenstore: simplify hashtable implementation
-Date: Fri, 21 Jan 2022 16:21:17 +0100
-Message-Id: <20220121152120.23160-1-jgross@suse.com>
+Subject: [PATCH v2 2/3] tools/xenstore: fix hashtable_expand() zeroing new area
+Date: Fri, 21 Jan 2022 16:21:19 +0100
+Message-Id: <20220121152120.23160-3-jgross@suse.com>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220121152120.23160-1-jgross@suse.com>
+References: <20220121152120.23160-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Do some simplifications in the hashtable implementation not touching
-the hashtable interfaces.
+When realloc()ing the hashtable for expanding it, zero out all the new
+bytes at the end of the table, not only one byte for each new element.
 
-Juergen Gross (3):
-  tools/xenstore: merge hashtable_private.h into hashtable.c
-  tools/xenstore: fix hashtable_expand() zeroing new area
-  tools/xenstore: drop DEFINE_HASHTABLE_* macros and usage intro
+Fixes: 186f0e02a1c ("Added hashtable implementation")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+This might be a backport candidate
+---
+ tools/xenstore/hashtable.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- tools/xenstore/hashtable.c         | 34 ++++++++++--
- tools/xenstore/hashtable.h         | 76 --------------------------
- tools/xenstore/hashtable_private.h | 85 ------------------------------
- 3 files changed, 29 insertions(+), 166 deletions(-)
- delete mode 100644 tools/xenstore/hashtable_private.h
-
+diff --git a/tools/xenstore/hashtable.c b/tools/xenstore/hashtable.c
+index 39fb3ed338..6ac336eff1 100644
+--- a/tools/xenstore/hashtable.c
++++ b/tools/xenstore/hashtable.c
+@@ -136,7 +136,8 @@ hashtable_expand(struct hashtable *h)
+                    realloc(h->table, newsize * sizeof(struct entry *));
+         if (NULL == newtable) { (h->primeindex)--; return 0; }
+         h->table = newtable;
+-        memset(newtable[h->tablelength], 0, newsize - h->tablelength);
++        memset(newtable + h->tablelength, 0,
++               (newsize - h->tablelength) * sizeof(*newtable));
+         for (i = 0; i < h->tablelength; i++) {
+             for (pE = &(newtable[i]), e = *pE; e != NULL; e = *pE) {
+                 index = indexFor(newsize,e->h);
 -- 
 2.31.1
 
