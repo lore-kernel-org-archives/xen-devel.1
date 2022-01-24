@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05645C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jan 2022 09:12:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.259776.448399 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09B02C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jan 2022 09:12:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.259772.448378 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nBvOA-0004Gu-S3; Mon, 24 Jan 2022 09:11:50 +0000
+	id 1nBvO5-0003DA-Of; Mon, 24 Jan 2022 09:11:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 259776.448399; Mon, 24 Jan 2022 09:11:50 +0000
+Received: by outflank-mailman (output) from mailman id 259772.448378; Mon, 24 Jan 2022 09:11:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nBvOA-0004Ey-Ff; Mon, 24 Jan 2022 09:11:50 +0000
-Received: by outflank-mailman (input) for mailman id 259776;
- Mon, 24 Jan 2022 09:11:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nBvO5-0003Cp-JR; Mon, 24 Jan 2022 09:11:45 +0000
+Received: by outflank-mailman (input) for mailman id 259772;
+ Mon, 24 Jan 2022 09:11:44 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4uJJ=SI=bombadil.srs.infradead.org=BATV+b18af077b488c69bdec9+6728+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nBvO8-0000Il-Lr
- for xen-devel@lists.xenproject.org; Mon, 24 Jan 2022 09:11:48 +0000
+ id 1nBvO4-0000If-L3
+ for xen-devel@lists.xenproject.org; Mon, 24 Jan 2022 09:11:44 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a7fa8ae5-7cf5-11ec-8fa7-f31e035a9116;
- Mon, 24 Jan 2022 10:11:47 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a5551c61-7cf5-11ec-bc18-3156f6d857e4;
+ Mon, 24 Jan 2022 10:11:43 +0100 (CET)
 Received: from [2001:4bb8:184:72a4:a337:a75f:a24e:7e39] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nBvNx-002kCs-4t; Mon, 24 Jan 2022 09:11:37 +0000
+ id 1nBvNr-002kA4-JE; Mon, 24 Jan 2022 09:11:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a7fa8ae5-7cf5-11ec-8fa7-f31e035a9116
+X-Inumbo-ID: a5551c61-7cf5-11ec-bc18-3156f6d857e4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=zTiOqFQyhHqguPQ678Zaf9btDaCC9p/oqBHpvCY61VM=; b=DLsazqu1zmz3g/ZUEQDTQ2VMur
-	poc51f3+HV2y+P4Uu24nVRS8tSMYoAm0DDJM1GqOyqbQ5OvqtD5jzYX6TWeohojJ31J+PhTLBj7kP
-	I7ExgXt+TwpSuiufrxi3XK8FXJJ31LbbT1wxYW6K/RQKAHhscZtCiiUF3X5E5yG0uS4sim2kDFkqQ
-	VkaOcFhxuEUDFEkQCQn3jyAq5xJJUq9RvpI7XdVgDOAJfonm1JdXofbZEOPPThlerJSHMD3vBAu7N
-	MXEwm4MA3sSOZ7xheQb489RCslkMFty7jdqqkSilh68MAG/wk6sJ+lDEjFLtZ9lIgY/ock1JVgfVf
-	9uGID8dg==;
+	bh=Mjlg0k+4PavheCjtECQRQWUa0Hx79sA/tX844Pch6ns=; b=Cq0TPNTknrpMgSPyE0DO6o8Qzt
+	f/iZoR0ubS3Fi0mNYFhpPl8fPbwxg/xP1Xsb9wAVH+J7Xi2rGTgLxSNRU/sh9E8Pausv23uDyD8GM
+	MPk203cd/Z1rnUElKzw1r/Wzqi37FWlZ4t6koT8hF+Sk7/ozar/Vdkeh4G40FH4h4j7SnokgW8dXc
+	a8PQHEniFdLS0v2JKyUDqyV7VP5MGaEeYidHKzzT+aNgHNjiPVUSS9tU+PDOLnMLPzkME51Qb/3uf
+	n61njfRrtW/q1yUlOOM1gMmXqSOJ8tw+YUWV8V80IP6LcwNj92/3FhKy5mGr4hvrynh0ZMAvkwguX
+	MwVYB/7Q==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Pavel Begunkov <asml.silence@gmail.com>,
@@ -72,11 +72,10 @@ Cc: Pavel Begunkov <asml.silence@gmail.com>,
 	linux-nilfs@vger.kernel.org,
 	ntfs3@lists.linux.dev,
 	xen-devel@lists.xenproject.org,
-	drbd-dev@lists.linbit.com,
-	Jack Wang <jinpu.wang@ionons.com>
-Subject: [PATCH 10/19] rnbd-srv: simplify bio mapping in process_rdma
-Date: Mon, 24 Jan 2022 10:10:58 +0100
-Message-Id: <20220124091107.642561-11-hch@lst.de>
+	drbd-dev@lists.linbit.com
+Subject: [PATCH 08/19] dm-thin: use blkdev_issue_flush instead of open coding it
+Date: Mon, 24 Jan 2022 10:10:56 +0100
+Message-Id: <20220124091107.642561-9-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220124091107.642561-1-hch@lst.de>
 References: <20220124091107.642561-1-hch@lst.de>
@@ -84,148 +83,58 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-The memory mapped in process_rdma is contiguous, so there is no need
-to loop over bio_add_page.  Remove rnbd_bio_map_kern and just open code
-the bio allocation and mapping in the caller.
+Use blkdev_issue_flush, which uses an on-stack bio instead of an
+opencoded version with a bio embedded into struct pool.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Jack Wang <jinpu.wang@ionons.com>
-Tested-by: Jack Wang <jinpu.wang@ionos.com>
 ---
- drivers/block/rnbd/rnbd-srv-dev.c | 57 -------------------------------
- drivers/block/rnbd/rnbd-srv-dev.h |  5 ---
- drivers/block/rnbd/rnbd-srv.c     | 23 +++++++++----
- 3 files changed, 16 insertions(+), 69 deletions(-)
+ drivers/md/dm-thin.c | 11 +----------
+ 1 file changed, 1 insertion(+), 10 deletions(-)
 
-diff --git a/drivers/block/rnbd/rnbd-srv-dev.c b/drivers/block/rnbd/rnbd-srv-dev.c
-index b241a099aeae2..98d3e591a0885 100644
---- a/drivers/block/rnbd/rnbd-srv-dev.c
-+++ b/drivers/block/rnbd/rnbd-srv-dev.c
-@@ -44,60 +44,3 @@ void rnbd_dev_close(struct rnbd_dev *dev)
- 	blkdev_put(dev->bdev, dev->blk_open_flags);
- 	kfree(dev);
- }
--
--void rnbd_dev_bi_end_io(struct bio *bio)
--{
--	struct rnbd_dev_blk_io *io = bio->bi_private;
--
--	rnbd_endio(io->priv, blk_status_to_errno(bio->bi_status));
--	bio_put(bio);
--}
--
--/**
-- *	rnbd_bio_map_kern	-	map kernel address into bio
-- *	@data: pointer to buffer to map
-- *	@bs: bio_set to use.
-- *	@len: length in bytes
-- *	@gfp_mask: allocation flags for bio allocation
-- *
-- *	Map the kernel address into a bio suitable for io to a block
-- *	device. Returns an error pointer in case of error.
-- */
--struct bio *rnbd_bio_map_kern(void *data, struct bio_set *bs,
--			      unsigned int len, gfp_t gfp_mask)
--{
--	unsigned long kaddr = (unsigned long)data;
--	unsigned long end = (kaddr + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
--	unsigned long start = kaddr >> PAGE_SHIFT;
--	const int nr_pages = end - start;
--	int offset, i;
--	struct bio *bio;
--
--	bio = bio_alloc_bioset(gfp_mask, nr_pages, bs);
--	if (!bio)
--		return ERR_PTR(-ENOMEM);
--
--	offset = offset_in_page(kaddr);
--	for (i = 0; i < nr_pages; i++) {
--		unsigned int bytes = PAGE_SIZE - offset;
--
--		if (len <= 0)
--			break;
--
--		if (bytes > len)
--			bytes = len;
--
--		if (bio_add_page(bio, virt_to_page(data), bytes,
--				    offset) < bytes) {
--			/* we don't support partial mappings */
--			bio_put(bio);
--			return ERR_PTR(-EINVAL);
--		}
--
--		data += bytes;
--		len -= bytes;
--		offset = 0;
--	}
--
--	return bio;
--}
-diff --git a/drivers/block/rnbd/rnbd-srv-dev.h b/drivers/block/rnbd/rnbd-srv-dev.h
-index 0eb23850afb95..1a14ece0be726 100644
---- a/drivers/block/rnbd/rnbd-srv-dev.h
-+++ b/drivers/block/rnbd/rnbd-srv-dev.h
-@@ -41,11 +41,6 @@ void rnbd_dev_close(struct rnbd_dev *dev);
+diff --git a/drivers/md/dm-thin.c b/drivers/md/dm-thin.c
+index 76a9c2e9aeeea..411a3f56ed90c 100644
+--- a/drivers/md/dm-thin.c
++++ b/drivers/md/dm-thin.c
+@@ -282,8 +282,6 @@ struct pool {
+ 	struct dm_bio_prison_cell **cell_sort_array;
  
- void rnbd_endio(void *priv, int error);
+ 	mempool_t mapping_pool;
+-
+-	struct bio flush_bio;
+ };
  
--void rnbd_dev_bi_end_io(struct bio *bio);
--
--struct bio *rnbd_bio_map_kern(void *data, struct bio_set *bs,
--			      unsigned int len, gfp_t gfp_mask);
--
- static inline int rnbd_dev_get_max_segs(const struct rnbd_dev *dev)
+ static void metadata_operation_failed(struct pool *pool, const char *op, int r);
+@@ -2906,7 +2904,6 @@ static void __pool_destroy(struct pool *pool)
+ 	if (pool->next_mapping)
+ 		mempool_free(pool->next_mapping, &pool->mapping_pool);
+ 	mempool_exit(&pool->mapping_pool);
+-	bio_uninit(&pool->flush_bio);
+ 	dm_deferred_set_destroy(pool->shared_read_ds);
+ 	dm_deferred_set_destroy(pool->all_io_ds);
+ 	kfree(pool);
+@@ -2987,7 +2984,6 @@ static struct pool *pool_create(struct mapped_device *pool_md,
+ 	pool->low_water_triggered = false;
+ 	pool->suspended = true;
+ 	pool->out_of_data_space = false;
+-	bio_init(&pool->flush_bio, NULL, 0);
+ 
+ 	pool->shared_read_ds = dm_deferred_set_create();
+ 	if (!pool->shared_read_ds) {
+@@ -3194,13 +3190,8 @@ static void metadata_low_callback(void *context)
+ static int metadata_pre_commit_callback(void *context)
  {
- 	return queue_max_segments(bdev_get_queue(dev->bdev));
-diff --git a/drivers/block/rnbd/rnbd-srv.c b/drivers/block/rnbd/rnbd-srv.c
-index 1ee808fc600cf..6d228af1dcc35 100644
---- a/drivers/block/rnbd/rnbd-srv.c
-+++ b/drivers/block/rnbd/rnbd-srv.c
-@@ -114,6 +114,14 @@ rnbd_get_sess_dev(int dev_id, struct rnbd_srv_session *srv_sess)
- 	return sess_dev;
+ 	struct pool *pool = context;
+-	struct bio *flush_bio = &pool->flush_bio;
+-
+-	bio_reset(flush_bio);
+-	bio_set_dev(flush_bio, pool->data_dev);
+-	flush_bio->bi_opf = REQ_OP_WRITE | REQ_PREFLUSH;
+ 
+-	return submit_bio_wait(flush_bio);
++	return blkdev_issue_flush(pool->data_dev);
  }
  
-+static void rnbd_dev_bi_end_io(struct bio *bio)
-+{
-+	struct rnbd_dev_blk_io *io = bio->bi_private;
-+
-+	rnbd_endio(io->priv, blk_status_to_errno(bio->bi_status));
-+	bio_put(bio);
-+}
-+
- static int process_rdma(struct rnbd_srv_session *srv_sess,
- 			struct rtrs_srv_op *id, void *data, u32 datalen,
- 			const void *usr, size_t usrlen)
-@@ -144,12 +152,12 @@ static int process_rdma(struct rnbd_srv_session *srv_sess,
- 	priv->sess_dev = sess_dev;
- 	priv->id = id;
- 
--	/* Generate bio with pages pointing to the rdma buffer */
--	bio = rnbd_bio_map_kern(data, sess_dev->rnbd_dev->ibd_bio_set, datalen, GFP_KERNEL);
--	if (IS_ERR(bio)) {
--		err = PTR_ERR(bio);
--		rnbd_srv_err(sess_dev, "Failed to generate bio, err: %d\n", err);
--		goto sess_dev_put;
-+	bio = bio_alloc_bioset(GFP_KERNEL, 1, sess_dev->rnbd_dev->ibd_bio_set);
-+	if (bio_add_page(bio, virt_to_page(data), datalen,
-+			offset_in_page(data)) != datalen) {
-+		rnbd_srv_err(sess_dev, "Failed to map data to bio\n");
-+		err = -EINVAL;
-+		goto bio_put;
- 	}
- 
- 	io = container_of(bio, struct rnbd_dev_blk_io, bio);
-@@ -170,7 +178,8 @@ static int process_rdma(struct rnbd_srv_session *srv_sess,
- 
- 	return 0;
- 
--sess_dev_put:
-+bio_put:
-+	bio_put(bio);
- 	rnbd_put_sess_dev(sess_dev);
- err:
- 	kfree(priv);
+ static sector_t get_dev_size(struct block_device *bdev)
 -- 
 2.30.2
 
