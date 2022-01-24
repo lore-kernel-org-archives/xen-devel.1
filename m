@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48AB8C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 24 Jan 2022 09:11:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.259769.448367 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ACFBC43219
+	for <xen-devel@archiver.kernel.org>; Mon, 24 Jan 2022 09:11:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.259774.448389 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nBvO3-0002iw-Bx; Mon, 24 Jan 2022 09:11:43 +0000
+	id 1nBvO9-0003uA-4u; Mon, 24 Jan 2022 09:11:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 259769.448367; Mon, 24 Jan 2022 09:11:43 +0000
+Received: by outflank-mailman (output) from mailman id 259774.448389; Mon, 24 Jan 2022 09:11:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nBvO3-0002ik-7A; Mon, 24 Jan 2022 09:11:43 +0000
-Received: by outflank-mailman (input) for mailman id 259769;
- Mon, 24 Jan 2022 09:11:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nBvO8-0003tj-WB; Mon, 24 Jan 2022 09:11:48 +0000
+Received: by outflank-mailman (input) for mailman id 259774;
+ Mon, 24 Jan 2022 09:11:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4uJJ=SI=bombadil.srs.infradead.org=BATV+b18af077b488c69bdec9+6728+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nBvO1-0000Il-Db
- for xen-devel@lists.xenproject.org; Mon, 24 Jan 2022 09:11:41 +0000
+ id 1nBvO7-0000If-D3
+ for xen-devel@lists.xenproject.org; Mon, 24 Jan 2022 09:11:47 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a3c98c22-7cf5-11ec-8fa7-f31e035a9116;
- Mon, 24 Jan 2022 10:11:40 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a75d4a2f-7cf5-11ec-bc18-3156f6d857e4;
+ Mon, 24 Jan 2022 10:11:46 +0100 (CET)
 Received: from [2001:4bb8:184:72a4:a337:a75f:a24e:7e39] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nBvNo-002k7w-Qx; Mon, 24 Jan 2022 09:11:29 +0000
+ id 1nBvNu-002kBG-B5; Mon, 24 Jan 2022 09:11:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a3c98c22-7cf5-11ec-8fa7-f31e035a9116
+X-Inumbo-ID: a75d4a2f-7cf5-11ec-bc18-3156f6d857e4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=cyA51tgTzJ0oURPYTTRoUDyOePKkV9xxN4Hqcjy0whE=; b=24POPMuL96/As8aG9GXRe4flkw
-	PU2voX+TtVVlvvdQoBbajVZWFUX5Dxw0G62WsA11q+Z8rRjH+LEx651hKp3XtfjI7gXtHN4ZzkX/+
-	zbZ+tlG5Y0PtCwK4dK1YvN9MT7GYMmhUZbx6oA7tclLFQqB/Hk6HGXGms/H0HPQsHLOdwunOcJ2He
-	Z/XTdU7e0f03aHpCO6hyntFD+lSqUwmcuScLWrUHjNVwxSomsOA9gkK7UTP2pkv+Rq271Q+ptnz5u
-	RQQj2WoPvjf4xtnwoz0FDtxL394f4gkw9/czqcZnSk+qNyA0Xz4vOPLIi9B+cPZ8PvyvkOOGVnRjM
-	+yBS+85g==;
+	bh=zt4z0CCqxTu0ALe3IrRHpwIG3ETXoc3mZtIYo6QdQDM=; b=s3e61xH669mdB88dsM0ako/6hm
+	YsdPOFv/+9bUrCprVe09zHwO1lKRo1xqZckfy+k3aI4O7evk+RiB0/o5y50HMgqybj6V8nydnHaqX
+	mtMq31ULR3tuFniaKuzrkBKWQ9GLcEOIxcmh7CseGdVBvrlGNE+yQfMA1Ozavs6cDairUaII9NR8y
+	ph4Ax4aY8fmmukVLpqEVBHr+JV24FvfuqKG6PehkdijYQ2882QgOVHZuvUklnkTyQ1NRkwXensI+H
+	fb2buJqmJs6jYMIPQO5OmkHhgR28rV4GqNdGzaVKM7k+in5ebCQTHOLDzcJGZZNvSIJF2PMIzPxhK
+	4yVDZYeA==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Pavel Begunkov <asml.silence@gmail.com>,
@@ -73,9 +73,9 @@ Cc: Pavel Begunkov <asml.silence@gmail.com>,
 	ntfs3@lists.linux.dev,
 	xen-devel@lists.xenproject.org,
 	drbd-dev@lists.linbit.com
-Subject: [PATCH 07/19] dm-snap: use blkdev_issue_flush instead of open coding it
-Date: Mon, 24 Jan 2022 10:10:55 +0100
-Message-Id: <20220124091107.642561-8-hch@lst.de>
+Subject: [PATCH 09/19] drbd: bio_alloc can't fail if it is allow to sleep
+Date: Mon, 24 Jan 2022 10:10:57 +0100
+Message-Id: <20220124091107.642561-10-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220124091107.642561-1-hch@lst.de>
 References: <20220124091107.642561-1-hch@lst.de>
@@ -83,74 +83,71 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use blkdev_issue_flush, which uses an on-stack bio instead of an
-opencoded version with a bio embedded into struct dm_snapshot.
+Remove handling of NULL returns from sleeping bio_alloc calls given that
+those can't fail.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/md/dm-snap.c | 21 +--------------------
- 1 file changed, 1 insertion(+), 20 deletions(-)
+ drivers/block/drbd/drbd_receiver.c | 22 ++++------------------
+ 1 file changed, 4 insertions(+), 18 deletions(-)
 
-diff --git a/drivers/md/dm-snap.c b/drivers/md/dm-snap.c
-index dcf34c6b05ad3..0d336b5ec5714 100644
---- a/drivers/md/dm-snap.c
-+++ b/drivers/md/dm-snap.c
-@@ -141,11 +141,6 @@ struct dm_snapshot {
- 	 * for them to be committed.
- 	 */
- 	struct bio_list bios_queued_during_merge;
--
--	/*
--	 * Flush data after merge.
--	 */
--	struct bio flush_bio;
- };
- 
- /*
-@@ -1127,17 +1122,6 @@ static void snapshot_merge_next_chunks(struct dm_snapshot *s)
- 
- static void error_bios(struct bio *bio);
- 
--static int flush_data(struct dm_snapshot *s)
--{
--	struct bio *flush_bio = &s->flush_bio;
--
--	bio_reset(flush_bio);
--	bio_set_dev(flush_bio, s->origin->bdev);
--	flush_bio->bi_opf = REQ_OP_WRITE | REQ_PREFLUSH;
--
--	return submit_bio_wait(flush_bio);
--}
--
- static void merge_callback(int read_err, unsigned long write_err, void *context)
+diff --git a/drivers/block/drbd/drbd_receiver.c b/drivers/block/drbd/drbd_receiver.c
+index 6df2539e215ba..fb59b263deeef 100644
+--- a/drivers/block/drbd/drbd_receiver.c
++++ b/drivers/block/drbd/drbd_receiver.c
+@@ -1281,14 +1281,13 @@ static void submit_one_flush(struct drbd_device *device, struct issue_flush_cont
  {
- 	struct dm_snapshot *s = context;
-@@ -1151,7 +1135,7 @@ static void merge_callback(int read_err, unsigned long write_err, void *context)
- 		goto shut;
- 	}
+ 	struct bio *bio = bio_alloc(GFP_NOIO, 0);
+ 	struct one_flush_context *octx = kmalloc(sizeof(*octx), GFP_NOIO);
+-	if (!bio || !octx) {
+-		drbd_warn(device, "Could not allocate a bio, CANNOT ISSUE FLUSH\n");
++
++	if (!octx) {
++		drbd_warn(device, "Could not allocate a octx, CANNOT ISSUE FLUSH\n");
+ 		/* FIXME: what else can I do now?  disconnecting or detaching
+ 		 * really does not help to improve the state of the world, either.
+ 		 */
+-		kfree(octx);
+-		if (bio)
+-			bio_put(bio);
++		bio_put(bio);
  
--	if (flush_data(s) < 0) {
-+	if (blkdev_issue_flush(s->origin->bdev) < 0) {
- 		DMERR("Flush after merge failed: shutting down merge");
- 		goto shut;
- 	}
-@@ -1340,7 +1324,6 @@ static int snapshot_ctr(struct dm_target *ti, unsigned int argc, char **argv)
- 	s->first_merging_chunk = 0;
- 	s->num_merging_chunks = 0;
- 	bio_list_init(&s->bios_queued_during_merge);
--	bio_init(&s->flush_bio, NULL, 0);
+ 		ctx->error = -ENOMEM;
+ 		put_ldev(device);
+@@ -1646,7 +1645,6 @@ int drbd_submit_peer_request(struct drbd_device *device,
+ 	unsigned data_size = peer_req->i.size;
+ 	unsigned n_bios = 0;
+ 	unsigned nr_pages = (data_size + PAGE_SIZE -1) >> PAGE_SHIFT;
+-	int err = -ENOMEM;
  
- 	/* Allocate hash table for COW data */
- 	if (init_hash_tables(s)) {
-@@ -1528,8 +1511,6 @@ static void snapshot_dtr(struct dm_target *ti)
- 
- 	dm_exception_store_destroy(s->store);
- 
--	bio_uninit(&s->flush_bio);
+ 	/* TRIM/DISCARD: for now, always use the helper function
+ 	 * blkdev_issue_zeroout(..., discard=true).
+@@ -1688,10 +1686,6 @@ int drbd_submit_peer_request(struct drbd_device *device,
+ 	 */
+ next_bio:
+ 	bio = bio_alloc(GFP_NOIO, nr_pages);
+-	if (!bio) {
+-		drbd_err(device, "submit_ee: Allocation of a bio failed (nr_pages=%u)\n", nr_pages);
+-		goto fail;
+-	}
+ 	/* > peer_req->i.sector, unless this is the first bio */
+ 	bio->bi_iter.bi_sector = sector;
+ 	bio_set_dev(bio, device->ldev->backing_bdev);
+@@ -1726,14 +1720,6 @@ int drbd_submit_peer_request(struct drbd_device *device,
+ 		drbd_submit_bio_noacct(device, fault_type, bio);
+ 	} while (bios);
+ 	return 0;
 -
- 	dm_put_device(ti, s->cow);
+-fail:
+-	while (bios) {
+-		bio = bios;
+-		bios = bios->bi_next;
+-		bio_put(bio);
+-	}
+-	return err;
+ }
  
- 	dm_put_device(ti, s->origin);
+ static void drbd_remove_epoch_entry_interval(struct drbd_device *device,
 -- 
 2.30.2
 
