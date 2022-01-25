@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D16C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A50B8C433FE
 	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:07:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260085.449206 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.260082.449195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJf9-0004v0-EA; Tue, 25 Jan 2022 11:06:59 +0000
+	id 1nCJf8-0004f7-8b; Tue, 25 Jan 2022 11:06:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260085.449206; Tue, 25 Jan 2022 11:06:59 +0000
+Received: by outflank-mailman (output) from mailman id 260082.449195; Tue, 25 Jan 2022 11:06:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJf9-0004ut-B8; Tue, 25 Jan 2022 11:06:59 +0000
-Received: by outflank-mailman (input) for mailman id 260085;
- Tue, 25 Jan 2022 11:06:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nCJf8-0004eq-2X; Tue, 25 Jan 2022 11:06:58 +0000
+Received: by outflank-mailman (input) for mailman id 260082;
+ Tue, 25 Jan 2022 11:06:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rP4T=SJ=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nCJaS-0006Mn-7O
- for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:02:08 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3b8c4e4f-7dce-11ec-8fa7-f31e035a9116;
- Tue, 25 Jan 2022 12:02:07 +0100 (CET)
+ id 1nCJag-0006t5-8M
+ for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:02:22 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 444d922d-7dce-11ec-bc18-3156f6d857e4;
+ Tue, 25 Jan 2022 12:02:20 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,64 +38,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b8c4e4f-7dce-11ec-8fa7-f31e035a9116
+X-Inumbo-ID: 444d922d-7dce-11ec-bc18-3156f6d857e4
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643108527;
+  d=citrix.com; s=securemail; t=1643108541;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=JPbHo9Jo8aOfD2/lllmxqNTLME6igV4FyqbCCTnSPrY=;
-  b=C9SKhZlRNGdRKrIf2rLfHEP43Jah2yddpri85dYJn5W+MdZJHR3+Bz5P
-   dy+UKgE0dWdTBEYTt/f7yDnURHV2UQnUPvlrdZKMJZ58rIXiw1jJ5CpCn
-   5+IrH68Jm1anKYY663RnLLit/XXjsZ5X6bdN6Tz9HvbiWIW73oj+zXetm
-   g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QWUz9YK1cap7V4Zd2e7r/gMgMbdEYXpIYHj+3ypl/iTdiOBv93LahrLDbp7riKnu69FijRq9W4
- ZuW9kwh4vKMZYKw9OqtNFyrfUA5AwmXrB4iEKq/1WjDT9gIl89NL9ZhLIoM4j2yZzGWAEAElC2
- e0Oy7VqcfZabkNB720an1yfBBNr1KrySHqPnVMEzMfk63WOjYc8XW7iF8WH/2Ug6HKOVpsfVzl
- lcAZ5x04DmnF5yimbojQBeq0dcD2sI1pLN14MYniSRhtfWiZeNVcLdAmtIzGZGr0I3aofV1iGd
- B7X/H34N4+G9sbsIuTHUehFy
+  bh=ac3CMa3JiNPSALH1tsW+ORkYr5Fox9jaFSrR+mvf3sc=;
+  b=QRv0m6REMRmc8/AMr5OLnXK2nebIRoaHYVNu5wocw37VueE3jydDIsMC
+   iYtF3F6wFMaZ8UYrdiRoA7kebKP0aaP9WIohGyNQ3Utbgsi24ycO3vbJ5
+   ApUfs0JDAeNWyy3jTakbpnr/dgHsoJojZ9VVztaOUruS8cR0iVwAlwwvq
+   k=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: ZoBp4P9N8hPoC2SJFdHK3nzxTSdbwJ1PTJgK6E8HV0uc4WYyRfgfhFsxStXLAnHfSyDZhwG20O
+ hOsHCZyVGRB31ydyfIz0oyhl09dGV9mRoWjKs84lMFS2ITwvMcsy4CW0fD+8u9zdrra+yEFRGd
+ HcLrjZNM2T4Pw1pBPHefQs7wijpPSS4gf/ua9pPl/u3I5wpN2Tv6BeZgIF7NsvXsWFEKA20mC7
+ GkML4M9KOAtz1pmx3/IxkgMiakkvPSYSXdSit3ItrzagGNFoKZlHd/fbg/a1jyZNeIENmmXHit
+ 9czjN1y+QIQ/5W90ULCDJM8g
 X-SBRS: 5.2
-X-MesageID: 62170391
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 62699833
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:cWLiyq3XWSWLQNEXyPbD5S92kn2cJEfYwER7XKvMYLTBsI5bp2YDm
- zAdWmCBOaqPMzbzLtx+a4u/8RgFsJfQy9UxSAc6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o6wbNh2+aEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhh9Ug1
- 4VvrY2LTiAUB5Odsd4tcShDOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Ej8I/LM7tLcUHt2tp1z3xBvc6W5HTBa7N4Le02R9u3JkRRa2PP
- qL1bxIoVBXySE1RZW0vJ440lrvwhlDtXgxX/Qf9Sa0fvDGIkV0ZPKLWGMHOZtWASMFRn0CZj
- mHL5WL0BlcdLtP34SWB2mKhgKnIhyyTcIAPELy18NZ6jVvVwXYcYDUGWF3+rfSnh0qWX9NEN
- 1dS6icotbI19kGgUp/6RRLQiHyOswMYWtFQO/Yn8wzLwa3Rizt1HUBdEGQHMoZ/8pZrG3p6j
- Tdlgu8FGxR3teyKGVCF54yTig6LB3k8F18gVDQtGF5tD8bYnKk/iRfGT9BGGaGzj8HoFTyY/
- w1mvBTSlJ1I05dVivzTEUTvxmv1+8OXFlJdChD/Azr9hj6VcrJJcGBBBbLzyf9bZLiUQVCa1
- JTvs5jPtbteZX1hecHkfQnsIF1Lz6vdWNE/qQQ2d3XEy9hL0yT/FWy3yGomTHqFyu5eJVfUj
- Lb74Gu9HqN7MnqwdrNQaImsEcksxqWIPY27CquMMosRPcYgJVfvEMRSiai4hTyFfK8EyvlXB
- HtmWZz0USZy5VpPklJauNvxIZd0n3tjlAs/tLjwzgi90Kr2WZJmYextDbd6VchgtPnsiFyMq
- 753bpLWoz0CDrGWSnSJoOY7cABbRVBmVMueg5EGKYa+zv9ORTtJ5wn5m+1xIuSIXs19y4/1w
- 51KchYIkQWk3Syed1zih7IKQOqHYKuTZEkTZUQEVWtEEVB6CWp2xKtAJZYxY5c98+lvkax9Q
- /UfIp3SCfVTUDXXvT8aaMCl/oBlcR2qgyOIPjakP2djL8IxGVSR94+2ZBbr+QkPEjGz6Zk0r
- Yq/216JWpEEXQljUprbMar901OrsHEBs+tuRE+UcMJLcUDh/dEyeSz8h/M6Oe8WLhDHymfI3
- gqaG05A9+LMv5U04J/CgqXd99WlFO53H0x7GWjH7OnpaXmGrzT7mYIZCbSGZzHQUm/w6Z6OX
- +QNwqGuKuADkXZLr5F4T+Rhw5Uh6oa9vLRd1AllQinGNgz5FrN6L3Ca9sBTrakRlKRBsA67V
- 0/TqNlXPbKFZJHsHFILfVd3a+2C0bcfmyXI7ORzK0L/vXcl8L2CWERUHh+NlC0Cc+clbNJ7m
- b8s6JwM9giyqhs2KdLX3Clb+lOFImEET6h65IoRB5Xmi1Zzx1xPCXAG5vQaPH1bhw1wD3QX
-IronPort-HdrOrdr: A9a23:Ll6cZaGeAc3uC1BppLqE7seALOsnbusQ8zAXP0AYc3Nom6uj5q
- eTdZUgpGbJYVkqOU3I9ersBEDEewK/yXcX2/h0AV7BZmnbUQKTRekIh7cKgQeQfhEWntQts5
- uIGJIRNDSfNzRHZL7BkWqFL+o=
+IronPort-Data: A9a23:FQYEQ6kddNM/P4U/zXR3B8fo5gx9IURdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIeCGrVO/6LamX1KdklOoSzpEsD757dmoc3HgZo+303HiMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA180IMsdoUg7wbRh29Q12YHR7z6l4
+ rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
+ s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
+ OpHroSabR5wB7SPhvgfSVpBNQRnEIQTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
+ 6ZecmpUKEne2aTmm9pXScE17ignBMDtIIMYvGAm1TzDBOwqaZvCX7/L9ZlT2zJYasVmQ6yAN
+ ptJMmEHgBLoYBhSCwcSWbACruajq3yiWjB3606ajP9ii4TU5FMoi+W8WDbPQfSRXtlclEuco
+ mPA/kz6DwscOdjZziCKmlqzgsffkCW9X5gdfJW66/prjVu71mEVThoMWjOTsfS/z0KzRd9bA
+ 0gV4TY167g/8lSxSdvwVAH+p2SL1jYeUddNF+wx6CmW17HZpQ2eAwA5oiVpMYJ88pVsHHpzi
+ wHPz4iB6SFTXKO9dniG7p2wtGqLIGsLMW0YJjYiaBIoyoy2yG0stS7nQtFmGa+zq9T6HzDs3
+ jyHxBQDa6UvYd0jjPviow2e6964jt2QF1NuuF2LNo6wxl4hPOaYi5qUBU83BBqqBKKQVRG/s
+ XcNgKByB8heXMjWxERhrAjgdYxFBspp0hWB2TaD/LF7rlxBHkJPm6gKvFmSw28yaq45lcfBO
+ hO7hO+ozMY70IGWRaF2eZmtLM8h0LLtE9/oPtiNMIYVOsQgK1DZrXA2DaJ144wLuBJw+U3YE
+ czDGftA8F5AUfg3pNZIb7l1PUAXKtAWmjqIGMGTI+WP2ruCfn+FIYrpw3PVBt3VGJis+V2Pm
+ /4GbpPi40wGDIXWP3eLmaZOcwFiBSVrVPje9p0MHsbec1UOJY3UI6KLqV/XU9Y7z/09eyah1
+ izVZ3K0P3Km1SSYcl3bMy46AF4tNL4mxU8G0eUXFQ7A8xAejUyHsM/zrrM7Iusq8vJN1/lxQ
+ 6VXcsmMGK0XGD/G5y4cfd/2q4k7LEanggeHPiyEZjkjfsE/G1yVq4G8Jga/pjMTCieXtNclp
+ +Hy3A3sXpdeFR9pC9zbaazzwgrp72Qdgu97Q2DBPsJXJBf36IFvJiGo1q03LsgAJA/t3Dyf0
+ wrKUx4UqfOU+90+8cXThLDCpICsSrMsEk1fFmjdzLC3KSiFoTbznd4eCL6FJGmPWnn19aOuY
+ fRu48v9aPBXzkxXt4dcEqpwyf5s7dXYuLIHnB9vG2/Gbgr3B+o4cGWGx8RGqoZE2qRd5VmtQ
+ kuK99RXZeeJNcfiHAJDLQYpdL3eh/Qdmz2U5vUpOkTqoiRw+ePfA0lVOhCNjg1bLad0b9x5k
+ btw5pZO5lztkAcuP/aHkjtQpjaFIXE3Wqk6so0XXd3wgQ0xx1AeOZHRB0caOn1Uhwmg5qXyH
+ gKpuQ==
+IronPort-HdrOrdr: A9a23:POpugaBoAYz6pQblHemq55DYdb4zR+YMi2TC1yhKJiC9Ffbo8P
+ xG/c5rrCMc5wxxZJhNo7290ey7MBHhHP1OkO0s1NWZPDUO0VHAROoJ0WKh+UyEJ8SXzJ866U
+ 4KScZD4bPLYWSS9fyKgzWFLw==
 X-IronPort-AV: E=Sophos;i="5.88,314,1635220800"; 
-   d="scan'208";a="62170391"
+   d="scan'208";a="62699833"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v9 22/30] build: rework coverage and ubsan CFLAGS handling
-Date: Tue, 25 Jan 2022 11:00:55 +0000
-Message-ID: <20220125110103.3527686-23-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v9 28/30] build: specify source tree in include/ for prerequisite
+Date: Tue, 25 Jan 2022 11:01:01 +0000
+Message-ID: <20220125110103.3527686-29-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220125110103.3527686-1-anthony.perard@citrix.com>
 References: <20220125110103.3527686-1-anthony.perard@citrix.com>
@@ -103,75 +104,104 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-When assigning a value a target-specific variable, that also affect
-prerequisite of the target. This is mostly fine, but there is one case
-where we will not want the COV_FLAGS added to the CFLAGS.
+When doing an out-of-tree build, and thus setting VPATH,
+GNU Make 3.81 on Ubuntu Trusty complains about Circular dependency of
+include/Makefile and include/xlat.lst and drop them. The build fails
+later due to headers malformed.
 
-In arch/x86/boot, we have "head.o" with "cmdline.S" as prerequisite
-and ultimately "cmdline.o", we don't want COV_FLAGS to that last one.
+This might be due to bug #13529
+    "Incorrect circular dependancy"
+    https://savannah.gnu.org/bugs/?13529
+which was fixed in 3.82.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
+    v9:
+    - add potential bug report link in commit message
+    
     v8:
-    - reorder target-specific assignments
-    - fix typo in comment
-    - reviewed
+    - make use of the new "$(srcdir)" shortcut
+    - move the patch ahead of the problematic patch:
+        build: adding out-of-tree support to the xen build
 
- xen/Rules.mk | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+ xen/include/Makefile | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 5f2368805b36..abeba1ab7494 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -126,19 +126,31 @@ targets += $(targets-for-builtin)
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index fddf5a575bf6..c8c4bcd93bd3 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -45,19 +45,19 @@ public-$(CONFIG_ARM) := $(wildcard $(srcdir)/public/arch-arm/*.h $(srcdir)/publi
+ .PHONY: all
+ all: $(addprefix $(obj)/,$(headers-y))
  
- $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += -DINIT_SECTIONS_ONLY
+-$(obj)/compat/%.h: $(obj)/compat/%.i $(src)/Makefile $(srctree)/tools/compat-build-header.py
++$(obj)/compat/%.h: $(obj)/compat/%.i $(srcdir)/Makefile $(srctree)/tools/compat-build-header.py
+ 	$(PYTHON) $(srctree)/tools/compat-build-header.py <$< $(patsubst $(obj)/%,%,$@) >>$@.new; \
+ 	mv -f $@.new $@
  
-+non-init-objects = $(filter-out %.init.o, $(obj-y) $(obj-bin-y) $(extra-y))
-+
- ifeq ($(CONFIG_COVERAGE),y)
- ifeq ($(CONFIG_CC_IS_CLANG),y)
-     COV_FLAGS := -fprofile-instr-generate -fcoverage-mapping
- else
-     COV_FLAGS := -fprofile-arcs -ftest-coverage
- endif
--$(filter-out %.init.o $(nocov-y),$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += $(COV_FLAGS)
-+
-+# Reset COV_FLAGS in cases where an objects has another one as prerequisite
-+$(nocov-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
-+    COV_FLAGS :=
-+
-+$(non-init-objects): _c_flags += $(COV_FLAGS)
- endif
+-$(obj)/compat/%.i: $(obj)/compat/%.c $(src)/Makefile
++$(obj)/compat/%.i: $(obj)/compat/%.c $(srcdir)/Makefile
+ 	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(XEN_CFLAGS)) $(cppflags-y) -o $@ $<
  
- ifeq ($(CONFIG_UBSAN),y)
- # Any -fno-sanitize= options need to come after any -fsanitize= options
--$(filter-out %.init.o $(noubsan-y),$(obj-y) $(obj-bin-y) $(extra-y)): \
--CFLAGS-y += $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
-+UBSAN_FLAGS := $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
-+
-+# Reset UBSAN_FLAGS in cases where an objects has another one as prerequisite
-+$(noubsan-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
-+    UBSAN_FLAGS :=
-+
-+$(non-init-objects): _c_flags += $(UBSAN_FLAGS)
- endif
+-$(obj)/compat/%.c: $(src)/public/%.h $(src)/xlat.lst $(src)/Makefile $(srctree)/tools/compat-build-source.py
++$(obj)/compat/%.c: $(src)/public/%.h $(srcdir)/xlat.lst $(srcdir)/Makefile $(srctree)/tools/compat-build-source.py
+ 	mkdir -p $(@D)
+ 	$(PYTHON) $(srctree)/tools/compat-build-source.py $(srcdir)/xlat.lst <$< >$@.new
+ 	mv -f $@.new $@
  
- ifeq ($(CONFIG_LTO),y)
-@@ -167,6 +179,9 @@ a_flags = -MMD -MP -MF $(depfile) $(XEN_AFLAGS)
+-$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/get-fields.sh $(src)/Makefile
++$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/get-fields.sh $(srcdir)/Makefile
+ 	export PYTHON=$(PYTHON); \
+ 	while read what name; do \
+ 		$(SHELL) $(srctree)/tools/get-fields.sh "$$what" compat_$$name $< || exit $$?; \
+@@ -65,7 +65,7 @@ $(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/
+ 	mv -f $@.new $@
  
- include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
+ .PRECIOUS: $(obj)/compat/.xlat/%.lst
+-$(obj)/compat/.xlat/%.lst: $(src)/xlat.lst $(src)/Makefile
++$(obj)/compat/.xlat/%.lst: $(srcdir)/xlat.lst $(srcdir)/Makefile
+ 	mkdir -p $(@D)
+ 	grep -v '^[[:blank:]]*#' $< | sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,[[:blank:]]+$*\.h[[:blank:]]*$$,,p' >$@.new
+ 	$(call move-if-changed,$@.new,$@)
+@@ -73,7 +73,7 @@ $(obj)/compat/.xlat/%.lst: $(src)/xlat.lst $(src)/Makefile
+ xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(srcdir)/xlat.lst | uniq)
+ xlat-y := $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
  
-+c_flags += $(_c_flags)
-+a_flags += $(_c_flags)
-+
- c_flags += $(CFLAGS-y)
- a_flags += $(CFLAGS-y) $(AFLAGS-y)
+-$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/auto.conf $(src)/Makefile
++$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/auto.conf $(srcdir)/Makefile
+ 	cat $(filter %.h,$^) >$@.new
+ 	mv -f $@.new $@
  
+@@ -102,7 +102,7 @@ PUBLIC_C99_HEADERS := $(call public-filter-headers,public-c99-headers)
+ $(src)/public/io/9pfs.h-prereq := string
+ $(src)/public/io/pvcalls.h-prereq := string
+ 
+-$(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(src)/Makefile
++$(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(srcdir)/Makefile
+ 	for i in $(filter %.h,$^); do \
+ 	    $(CC) -x c -ansi -Wall -Werror -include stdint.h \
+ 	          -S -o /dev/null $$i || exit 1; \
+@@ -110,7 +110,7 @@ $(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(src)/Makefile
+ 	done >$@.new
+ 	mv $@.new $@
+ 
+-$(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(src)/Makefile
++$(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(srcdir)/Makefile
+ 	rm -f $@.new
+ 	$(foreach i, $(filter %.h,$^),                                        \
+ 	    echo "#include "\"$(i)\"                                          \
+@@ -120,7 +120,7 @@ $(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(src)/Makefile
+ 	    || exit $$?; echo $(i) >> $@.new;)
+ 	mv $@.new $@
+ 
+-$(obj)/headers++.chk: $(PUBLIC_HEADERS) $(src)/Makefile
++$(obj)/headers++.chk: $(PUBLIC_HEADERS) $(srcdir)/Makefile
+ 	rm -f $@.new
+ 	if ! $(CXX) -v >/dev/null 2>&1; then                                  \
+ 	    touch $@.new;                                                     \
 -- 
 Anthony PERARD
 
