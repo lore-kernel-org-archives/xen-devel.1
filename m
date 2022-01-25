@@ -4,56 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55F2C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 10:57:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260056.449055 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC17C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:01:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260064.449107 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJVZ-0004sG-IM; Tue, 25 Jan 2022 10:57:05 +0000
+	id 1nCJZf-0007As-7f; Tue, 25 Jan 2022 11:01:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260056.449055; Tue, 25 Jan 2022 10:57:05 +0000
+Received: by outflank-mailman (output) from mailman id 260064.449107; Tue, 25 Jan 2022 11:01:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJVZ-0004s9-ET; Tue, 25 Jan 2022 10:57:05 +0000
-Received: by outflank-mailman (input) for mailman id 260056;
- Tue, 25 Jan 2022 10:57:04 +0000
+	id 1nCJZf-0007Af-1o; Tue, 25 Jan 2022 11:01:19 +0000
+Received: by outflank-mailman (input) for mailman id 260064;
+ Tue, 25 Jan 2022 11:01:17 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=B39K=SJ=xilinx.com=ayankuma@srs-se1.protection.inumbo.net>)
- id 1nCJVX-0004s3-RN
- for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 10:57:04 +0000
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2062d.outbound.protection.outlook.com
- [2a01:111:f400:7eab::62d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 856ef957-7dcd-11ec-bc18-3156f6d857e4;
- Tue, 25 Jan 2022 11:57:00 +0100 (CET)
-Received: from DM5PR07CA0050.namprd07.prod.outlook.com (2603:10b6:4:ad::15) by
- PH0PR02MB8520.namprd02.prod.outlook.com (2603:10b6:510:10d::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4909.10; Tue, 25 Jan 2022 10:56:57 +0000
-Received: from DM3NAM02FT027.eop-nam02.prod.protection.outlook.com
- (2603:10b6:4:ad:cafe::8a) by DM5PR07CA0050.outlook.office365.com
- (2603:10b6:4:ad::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4909.10 via Frontend
- Transport; Tue, 25 Jan 2022 10:56:56 +0000
-Received: from xir-pvapexch02.xlnx.xilinx.com (149.199.80.198) by
- DM3NAM02FT027.mail.protection.outlook.com (10.13.5.130) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4909.8 via Frontend Transport; Tue, 25 Jan 2022 10:56:56 +0000
-Received: from xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) by
- xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Tue, 25 Jan 2022 10:56:55 +0000
-Received: from smtp.xilinx.com (172.21.105.198) by
- xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Tue, 25 Jan 2022 10:56:55 +0000
-Received: from [10.71.118.123] (port=51814)
- by smtp.xilinx.com with esmtp (Exim 4.90)
- (envelope-from <ayan.kumar.halder@xilinx.com>)
- id 1nCJVN-00054N-Vs; Tue, 25 Jan 2022 10:56:54 +0000
+ <SRS0=rP4T=SJ=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1nCJZd-0006t5-Gh
+ for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:01:17 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1c8b9c15-7dce-11ec-bc18-3156f6d857e4;
+ Tue, 25 Jan 2022 12:01:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,158 +38,308 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 856ef957-7dcd-11ec-bc18-3156f6d857e4
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RbTincjohojwxS6r+PX5GBvrNQKmnesizKbK9jY8q7jDWHUNl6MgANcoy0YK0odKGi6gWAP3PQVGaQ2ze2avjuFBEN66QCVPCsdBJ/hEmjKUF2zF44UvrWTYsEFfkRUsGT/mWvJ61hiyiYVJrOWLGnswHx3RpTUVIglN5QXVasbw1rX5WrUB9C61pqXGr0JOp3qmUTnv9bwFh5MGzRdCcullSPTgDIW4mp2S3LrZdxvxuNpXjGwEKoB9A4d5vTCzR2A7YnmS4eHnP0E3tJTIhu8RmbbNQUsTous5qhi0FWLmVDHfitWfBwP5j/KD8wvy0Y4vgilLndBhr4MPgKre6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=icF+imYJpg5Gvlb+9QtQvCSbOGEJRz5Z67Vwa0rdAwg=;
- b=P0c1koHZfHGNH8tg7t/g7LKRRZS9B9eMy4KiTMET3PU0KC2j1m7Bf035JtqM68rh66N2L9yGRMKA+NAdw7SPCnY8j5r7kjuNETVtZvnpXGb6Cp9HfZiFkWKuAVHHIqPoRk8a/yqhPm08rpMpIhnRZTfKJiRm/3/0JWfZd7JFRZ/x/FimGsZ6v0rVEsua0BVfaqYyYU6M02jwuUyVUjKqQJdH0WB41qQdr5FLmW4QK9+VfmKZXDunmEvYmG0Hhe4BZ5Y8dit0BhmS4dC5c0NgWzJbR5d6EweMDo8Kv0Yti3iGuSpIzSYJRT3PwkZWxzOyQnV06DD25ywz4GYdpIZzsg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 149.199.80.198) smtp.rcpttodomain=suse.com smtp.mailfrom=xilinx.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=xilinx.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=icF+imYJpg5Gvlb+9QtQvCSbOGEJRz5Z67Vwa0rdAwg=;
- b=FQMPaesUdCVF8nprWVN/tN3XXKfxgMtTOLFoIDzOZ87jf44CfDpvJCMCCTZM0rzXGl4GLds+aX5qp4hSr1lTc767HtTqfFr8h/9bQU4XD3OFpsAAiLOeGXhiY99VRN8yZLadfxuaQBPVQKCVIYKXfQUMcY/sd1EUq6Qe3O78CrU=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.80.198)
- smtp.mailfrom=xilinx.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=xilinx.com;
-Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
- 149.199.80.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.80.198; helo=xir-pvapexch02.xlnx.xilinx.com;
-Message-ID: <dd186204-250a-bc40-29cc-242a613e340b@xilinx.com>
-Date: Tue, 25 Jan 2022 10:56:53 +0000
+X-Inumbo-ID: 1c8b9c15-7dce-11ec-bc18-3156f6d857e4
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1643108475;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=8Odm0lfZwBUy94eq9s5SCq6XGFQedtmpRs+w27Wx2GA=;
+  b=HNnczxAOKMU1jIcZwnyAiNlUrv2gffDFHyJ10wcEmWDYEZ2+Lp6NWgri
+   1QpIL8gvHuEyiHW/Xv8FKxPkiw/6FkeCJmvaptzv1Tlaj7cCoNclOvWJ1
+   FpZz99dSjdPcmX8WiPBDaonFjgV2LalQ7zuOya1dTXObKCjtA2UkLuidy
+   U=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: SYAv1syzqTicgirW53x02EjUY/SzyZ/HnsrTslbcGhtU3REhJDrcvryrB18JClFArmKX+qLNWY
+ 522hByYfEgZjwo+VbLbMP+Qz/lTSyV7JhnJ0NwCND4g6U1Ki2LQXiAPfU3eqppjxfJSdpziz19
+ r8kvApXvpoBHIVNDn3kwHcBLqxxcX8ohy1BqGt34KAgCtweA0kFBs/23R4Dctn0FH2Yic5yLRJ
+ GKGkQ+2NtP57gVoyijTzkt4PhM8BH0FwJQqYNyyE5bHpcfA7jFWvbHJ9QRDprO8azVZpNkEX3g
+ 8GXPX9nHvH3dh2YI/uWL3f10
+X-SBRS: 5.2
+X-MesageID: 62699709
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:VdYf7a7UOwh31LiZ+LzRXAxRtMTAchMFZxGqfqrLsTDasY5as4F+v
+ moeDW6GMqzYZ2ryfdwgaYSx/EwOsJKEzYdjG1c5+CwzHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZg2NMw2LBVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z8
+ 4hpscS0aD8VD4L8m7wTcgVKDBEuMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gQR6iPN
+ pVBOFKDajyZQwBCHUwOCKkMxti3nH/YKWVjgX+a8P9fD2/7k1UqjemF3MDuUseRWcxfk0Kcp
+ 2TH12f0GBcXMJqY0zXt2m2orv/Cm2X8Qo16PL+l8v9nhnWDy2pVDwcZPXOrrP/8hkOgVtZ3L
+ 00P5jFovaU07FasTNT2Q1u/unHslhwWVsdUEuY6wBqQ0aeS6AGcblXoVRYYNoZg7pVvA2V3i
+ BnZxLsFGACDrpWuFFaZrrO1lQ+DFhgWdWEjeT0bfVsKtoyLTJ4IsjrDSdNqEaiQh9LzGC3tz
+ z3ikBXSl4n/nuZQifzloAmvbyaE48GQE1Vrvlm/sneNs1shDLNJcbBE/rQyARxoCI+CBmeMs
+ 3Ef8yR1xLBfVMrd/MBhrQhkIV1I2xpnGGCE6bKMN8N4n9hIx5JFVdoMiN2ZDBwxWvvogRezP
+ CfuVfp5vfe/xkeCY65teJ6WAM8316XmHtmNfqmKMoEWPskuK1HWrXkGiausM4bFyhREfUYXY
+ s/zTCpRJSxCVfQPIMSeGY/xLoPHNghhnDiOFPgXPjys0KaEZW79dFv2GADmUwzN14vd+F+92
+ 48Gb6OikkwDOMWjPHW/2dNNfDgicChqbbir+pc/XrPSfWJb9JQJVqW5LUUJIdI1xsy4V47go
+ xmAZ6Ov4AOv3CKccVTTNCkLhXGGdc8XkE/X9BcEZT6As0XPq671hEvGX5doL7Qh6sJ5yvt4E
+ 6sMd8maW6wdQTXb4TUNK5L6qdU6JhisgAuPOQujYSQ+IME8F1CYpIe8c1u97jQKAwq2qdA6/
+ ++q2DTETMdRXA9lFsvXNq6ilgvjoXgHletudELUOd0PKl70+Y1nJnWp3P86Ks0BMzvZwT6e2
+ 1rECBsUv7CV8YQ07MPIleaPqILwS7lyGU9THm/667eqNHaFojr/kNEYCOvRJGLTTmL5/qmmd
+ N559fCkPa1VhktOvqp9D61vkfA06ezwquII1Q9jBnjKMQimU+syPnmc0MBTnaRR3bsF6xCuU
+ 0eC99QGa7WEPMTpTAwYKAY/N7nR0PgVnn/Z7OgvIVW87yhypeLVXUJXNhiKqSpcMLoqb991n
+ bZ/4JYbu16llx4nEtealSQFpW2DI0sJX7gjqpxHUpTgjRAmyw0abJHRYsMsDEpjtzmY3pEWH
+ wKp
+IronPort-HdrOrdr: A9a23:GpNp26FPZfC91CaPpLqE1MeALOsnbusQ8zAXPidKOHhom62j5q
+ WTdZsgpHzJYVoqOU3I+urvBEDjewK6yXcd2+B4V9qftWHdyQ2VxepZnOnfKlPbexEW39QtrJ
+ uJLMNFY+EYd2IUsS9R2njBLz9a+rW6zJw=
+X-IronPort-AV: E=Sophos;i="5.88,314,1635220800"; 
+   d="scan'208";a="62699709"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v9 02/30] build: avoid re-executing the main Makefile by introducing build.mk
+Date: Tue, 25 Jan 2022 11:00:35 +0000
+Message-ID: <20220125110103.3527686-3-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220125110103.3527686-1-anthony.perard@citrix.com>
+References: <20220125110103.3527686-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.5.0
-Subject: Re: [XEN v3] xen/arm64: io: Decode ldr/str post-indexing instructions
-To: Jan Beulich <jbeulich@suse.com>, Stefano Stabellini
-	<sstabellini@kernel.org>
-CC: Andre Przywara <andre.przywara@arm.com>, <xen-devel@lists.xenproject.org>,
-	<stefanos@xilinx.com>, <julien@xen.org>, <Volodymyr_Babchuk@epam.com>,
-	<bertrand.marquis@arm.com>, <wei.chen@arm.com>, Ayan Kumar Halder
-	<ayan.kumar.halder@xilinx.com>
-References: <20220120215527.28138-1-ayankuma@xilinx.com>
- <20220122013046.6a786d3f@slackpad.fritz.box>
- <18e715ae-111d-58e6-55f9-a48a521e99b3@xilinx.com>
- <20220124143601.3e2ac6ac@donnerap.cambridge.arm.com>
- <bae9a35f-be42-2ebe-5ce0-30e08001ae97@xilinx.com>
- <alpine.DEB.2.22.394.2201240941310.27308@ubuntu-linux-20-04-desktop>
- <e6c217ba-2723-45ca-bb60-1c181359d261@suse.com>
-From: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
-In-Reply-To: <e6c217ba-2723-45ca-bb60-1c181359d261@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e3ffac53-4e46-4d40-f887-08d9dff16794
-X-MS-TrafficTypeDiagnostic: PH0PR02MB8520:EE_
-X-Microsoft-Antispam-PRVS:
-	<PH0PR02MB8520F0CB7337ED9AA53D333AB25F9@PH0PR02MB8520.namprd02.prod.outlook.com>
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	WVFFEZ2y3iFIcQk8Dn/cOQNVfw/FM94pvBtaFsidh9cYyouSoncBJcgycwAnORrRJIWWJxHvLfmyFbWU/cMyhfo55Bh7JE4SztW/082INoj6qkusQem7xp4CsrTMbwxaKhahCh88ClI02LOineyNcI3dJyqBrKEyX5QALie7Fbut3JrWvWOK6hdsKvj4yqw7t2uVKQS+14EtZnRnxP6VQz5PMlM6RHKwaEI5PZyF1BG1eyVSANs99qlpKE/yx7bqPr/krICujGPfNLOBvty302Z9IpPNU4cAJ6yrZdFuU61hxs5C0VP6bivBeNvyeZLJh+pZr3c+DXCy9n9TdQYDOMw4zFspsOH7gPBPeCRzKt7CjPhxMbBlM0sSfXN4PR7u30jNrtL8nweiLQywxcMf+D0Z9tLPH3Ykpe6UU0+BPdoT74nWzE0hp+TDDaDKEbjlugvektB2ZCyq0lEJhoTW47wf5Ar4ZgrJaytb1bcTpQJ7YejgKImrjif9GggZXDDB1aIjLN9UHN/T5n/cTezgRkKqCo20LWOBlKMvs7vMyAz5p0g+ke/YZWuQ6LgrRW5pkeZKYSv+cuOHI2wZLW3EMsnTpnAjWWjjkW8NDjZCrZblV7gWcw076rhzd1m7aXVHUYpj6SHMCARVN8Zb4SrXooXWlmkqP/Mgh1GubLKFtLcxkRlWBc18rZMkPgQ0+nBDnzlzHPI/+pryfvJdbgaoMqXxGbPm/9hHEBAF4eV5EZ1dt+QaPbuUqFocr+wLCr2uBIt6mC3O39yqPmHwzuz2+RwH514yuZVzpMrVs/nS8X7mIYextLBnbAPoz95LmbeEZL8EX37O05jaWduCscPAgQ==
-X-Forefront-Antispam-Report:
-	CIP:149.199.80.198;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:xir-pvapexch02.xlnx.xilinx.com;PTR:unknown-80-198.xilinx.com;CAT:NONE;SFS:(4636009)(46966006)(36840700001)(40470700004)(107886003)(26005)(9786002)(316002)(8936002)(356005)(426003)(53546011)(36756003)(47076005)(2616005)(82310400004)(40460700003)(36860700001)(31696002)(336012)(70206006)(2906002)(508600001)(110136005)(54906003)(83380400001)(5660300002)(4326008)(186003)(7636003)(70586007)(31686004)(8676002)(50156003)(43740500002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Jan 2022 10:56:56.5377
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3ffac53-4e46-4d40-f887-08d9dff16794
-X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.80.198];Helo=[xir-pvapexch02.xlnx.xilinx.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DM3NAM02FT027.eop-nam02.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR02MB8520
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hi Jan/All,
+Currently, the xen/Makefile is re-parsed several times: once to start
+the build process, and several more time with Rules.mk including it.
+This makes it difficult to work with a Makefile used for several
+purpose, and it actually slow down the build process.
 
-On 25/01/2022 08:55, Jan Beulich wrote:
-> On 24.01.2022 19:41, Stefano Stabellini wrote:
->> On Mon, 24 Jan 2022, Ayan Kumar Halder wrote:
->>> As for the patch, I will mention this issue (as a comment in the code) where
->>> we are loading the instruction from PC. Stefano/Julien/Bertrand/Volodymyr:-
->>> Does it look fine with you ?
->> As this issue could happen on any architecture (the guest could change
->> the instruction from another vcpu while the other is trapping in Xen)
->> and given that we do quite a bit of emulation on x86 I asked Jan on IRC
->> how do we handle this kind of things on x86 today. He had a good answer:
->> "By not making any assumptions on what we're going to find."
->>
->> In other words, don't assume you are going to find a store or a load
->> instruction at the memory location pointed by the PC. You could find
->> total garbage (because it was changed in between). Make sure to check
->> everything is as expected before taking any actions.
->>
->> And I think you are already doing that in decode_loadstore_postindexing.
->>
->> These are the fields:
->>
->> + * 31 30 29  27 26 25  23   21 20              11   9         4       0
->> + * ___________________________________________________________________
->> + * |size|1 1 1 |V |0 0 |opc |0 |      imm9     |0 1 |  Rn     |  Rt   |
->> + * |____|______|__|____|____|__|_______________|____|_________|_______|
->> + */
->> +union ldr_str_instr_class {
->> +    uint32_t value;
->> +    struct ldr_str {
->> +        unsigned int rt:5;     /* Rt register */
->> +        unsigned int rn:5;     /* Rn register */
->> +        unsigned int fixed1:2; /* value == 01b */
->> +        signed int imm9:9;            /* imm9 */
->> +        unsigned int fixed2:1; /* value == 0b */
->> +        unsigned int opc:2;    /* opc */
->> +        unsigned int fixed3:2; /* value == 00b */
->> +        unsigned int v:1;      /* vector */
->> +        unsigned int fixed4:3; /* value == 111b */
->> +        unsigned int size:2;   /* size */
->> +    } code;
->> +};
->>
->>
->> This patch already checks for:
->> - the fixed values
->> - v
->> - opc
->> - some special rt and rn values
->>
->> Considering that:
->> - size is fine either way
->> - as rt and rn are 5 bits wide, all values are acceptable (x0->x31)
->>
->> It doesn't look like we are missing anything, unless imm9 is restricted
->> to some ranges only.
-> Beyond decoding there's at least one further assumption one may
-> mistakenly make: The address may not be suitably aligned and it may
-> not reference MMIO (or, should that matter, not the specific region
-> of MMIO that other trap-provided info my hint at).
+So this patch introduce "build.mk" which Rules.mk will use when
+present instead of the "Makefile" of a directory. (Linux's Kbuild
+named that file "Kbuild".)
 
-As I see, Xen will read/write to the MMIO address provided either by 
-gva_to_ipa_pa() or HPFAR_EL2.
+We have a few targets to move to "build.mk" identified by them been
+build via "make -f Rules.mk" without changing directory.
 
-However, (you are correct), that the address pointed by Rn might not 
-point to the same address (assuming that the instruction was changed 
-after being loaded in I cache). In any case, Xen will simply increment 
-(or decrement) Rn. The guest will find this new value of Rn (and that 
-should be fine it was the guest who had changed the instruction).
+As for the main targets like "build", we can have them depends on
+there underscore-prefix targets like "_build" without having to use
+"Rules.mk" while still retaining the check for unsupported
+architecture. (Those main rules are changed to be single-colon as
+there should only be a single recipe for them.)
 
-In any case, I don't see Xen doing something erroneous.
+With nearly everything needed to move to "build.mk" moved, there is a
+single dependency left from "Rules.mk": the variable $(TARGET), so its
+assignement is moved to the main Makefile.
 
-I will send out a v4 patch addressing the issues pointed by Stefano and 
-Andre (commit message).
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
 
-- Ayan
+Notes:
+    v9:
+    - reviewed
+    
+    v8:
+    - for $(main-targets) rules, use ; on a single line instead of adding a
+      recipe with only @:
+    - To include build.mk instead of Makefile, use a simpler expresion with
+      $(firstword) and remove the use of $(mk-dir) var
+    - removed an extra blank line, and one when updating $(targets)
+    - reword patch description
+    
+    v7:
+    - new patch
 
->
-> Jan
->
+ xen/Makefile | 70 +++++-----------------------------------------------
+ xen/Rules.mk |  6 ++---
+ xen/build.mk | 61 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 69 insertions(+), 68 deletions(-)
+ create mode 100644 xen/build.mk
+
+diff --git a/xen/Makefile b/xen/Makefile
+index f3ff03a7170e..fb37043d08e0 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -47,6 +47,8 @@ export KCONFIG_CONFIG ?= .config
+ 
+ export CC CXX LD
+ 
++export TARGET := $(BASEDIR)/xen
++
+ .PHONY: default
+ default: build
+ 
+@@ -293,11 +295,12 @@ export CFLAGS_UBSAN
+ 
+ endif # need-config
+ 
+-.PHONY: build install uninstall clean distclean MAP
+-build install uninstall debug clean distclean MAP::
++main-targets := build install uninstall clean distclean MAP
++.PHONY: $(main-targets)
+ ifneq ($(XEN_TARGET_ARCH),x86_32)
+-	$(MAKE) -f Rules.mk MKRELOC=$(MKRELOC) _$@
++$(main-targets): %: _% ;
+ else
++$(main-targets):
+ 	echo "*** Xen x86/32 target no longer supported!"
+ endif
+ 
+@@ -406,67 +409,6 @@ $(TARGET): FORCE
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk -C arch/$(TARGET_ARCH) MKRELOC=$(MKRELOC) $@
+ 
+-quiet_cmd_banner = BANNER  $@
+-define cmd_banner
+-    if which figlet >/dev/null 2>&1 ; then \
+-	echo " Xen $(XEN_FULLVERSION)" | figlet -f $< > $@.tmp; \
+-    else \
+-	echo " Xen $(XEN_FULLVERSION)" > $@.tmp; \
+-    fi; \
+-    mv -f $@.tmp $@
+-endef
+-
+-.banner: tools/xen.flf FORCE
+-	$(call if_changed,banner)
+-targets += .banner
+-
+-# Don't refresh this files during e.g., 'sudo make install'
+-quiet_cmd_compile.h = UPD     $@
+-define cmd_compile.h
+-    if [ ! -r $@ -o -O $@ ]; then \
+-	cat .banner; \
+-	sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
+-	    -e 's/@@time@@/$(XEN_BUILD_TIME)/g' \
+-	    -e 's/@@whoami@@/$(XEN_WHOAMI)/g' \
+-	    -e 's/@@domain@@/$(XEN_DOMAIN)/g' \
+-	    -e 's/@@hostname@@/$(XEN_BUILD_HOST)/g' \
+-	    -e 's!@@compiler@@!$(shell $(CC) $(CFLAGS) --version 2>&1 | head -1)!g' \
+-	    -e 's/@@version@@/$(XEN_VERSION)/g' \
+-	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
+-	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
+-	    -e 's!@@changeset@@!$(shell tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
+-	    < $< > $(dot-target).tmp; \
+-	sed -rf tools/process-banner.sed < .banner >> $(dot-target).tmp; \
+-	mv -f $(dot-target).tmp $@; \
+-    fi
+-endef
+-
+-include/xen/compile.h: include/xen/compile.h.in .banner FORCE
+-	$(if $(filter-out FORCE,$?),$(Q)rm -fv $@)
+-	$(call if_changed,compile.h)
+-
+-targets += include/xen/compile.h
+-
+-asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
+-	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
+-	$(call move-if-changed,$@.new,$@)
+-
+-arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: asm-offsets.s
+-	@(set -e; \
+-	  echo "/*"; \
+-	  echo " * DO NOT MODIFY."; \
+-	  echo " *"; \
+-	  echo " * This file was auto-generated from $<"; \
+-	  echo " *"; \
+-	  echo " */"; \
+-	  echo ""; \
+-	  echo "#ifndef __ASM_OFFSETS_H__"; \
+-	  echo "#define __ASM_OFFSETS_H__"; \
+-	  echo ""; \
+-	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}"; \
+-	  echo ""; \
+-	  echo "#endif") <$< >$@
+-
+ SUBDIRS = xsm arch/$(TARGET_ARCH) common drivers lib test
+ define all_sources
+     ( find include -type f -name '*.h' -print; \
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index d21930a7bf71..7b8b9047cfd5 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -8,9 +8,6 @@
+ include $(XEN_ROOT)/Config.mk
+ include $(BASEDIR)/scripts/Kbuild.include
+ 
+-
+-TARGET := $(BASEDIR)/xen
+-
+ # Note that link order matters!
+ ALL_OBJS-y               += $(BASEDIR)/common/built_in.o
+ ALL_OBJS-y               += $(BASEDIR)/drivers/built_in.o
+@@ -36,7 +33,8 @@ SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
+                                             rodata.cst$(a)) \
+                          $(foreach r,rel rel.ro,data.$(r).local)
+ 
+-include Makefile
++# The filename build.mk has precedence over Makefile
++include $(firstword $(wildcard build.mk) Makefile)
+ 
+ # Linking
+ # ---------------------------------------------------------------------------
+diff --git a/xen/build.mk b/xen/build.mk
+new file mode 100644
+index 000000000000..3d7a91df22d1
+--- /dev/null
++++ b/xen/build.mk
+@@ -0,0 +1,61 @@
++quiet_cmd_banner = BANNER  $@
++define cmd_banner
++    if which figlet >/dev/null 2>&1 ; then \
++	echo " Xen $(XEN_FULLVERSION)" | figlet -f $< > $@.tmp; \
++    else \
++	echo " Xen $(XEN_FULLVERSION)" > $@.tmp; \
++    fi; \
++    mv -f $@.tmp $@
++endef
++
++.banner: tools/xen.flf FORCE
++	$(call if_changed,banner)
++
++targets += .banner
++
++# Don't refresh this files during e.g., 'sudo make install'
++quiet_cmd_compile.h = UPD     $@
++define cmd_compile.h
++    if [ ! -r $@ -o -O $@ ]; then \
++	cat .banner; \
++	sed -e 's/@@date@@/$(XEN_BUILD_DATE)/g' \
++	    -e 's/@@time@@/$(XEN_BUILD_TIME)/g' \
++	    -e 's/@@whoami@@/$(XEN_WHOAMI)/g' \
++	    -e 's/@@domain@@/$(XEN_DOMAIN)/g' \
++	    -e 's/@@hostname@@/$(XEN_BUILD_HOST)/g' \
++	    -e 's!@@compiler@@!$(shell $(CC) $(CFLAGS) --version 2>&1 | head -1)!g' \
++	    -e 's/@@version@@/$(XEN_VERSION)/g' \
++	    -e 's/@@subversion@@/$(XEN_SUBVERSION)/g' \
++	    -e 's/@@extraversion@@/$(XEN_EXTRAVERSION)/g' \
++	    -e 's!@@changeset@@!$(shell tools/scmversion $(XEN_ROOT) || echo "unavailable")!g' \
++	    < $< > $(dot-target).tmp; \
++	sed -rf tools/process-banner.sed < .banner >> $(dot-target).tmp; \
++	mv -f $(dot-target).tmp $@; \
++    fi
++endef
++
++include/xen/compile.h: include/xen/compile.h.in .banner FORCE
++	$(if $(filter-out FORCE,$?),$(Q)rm -fv $@)
++	$(call if_changed,compile.h)
++
++targets += include/xen/compile.h
++
++asm-offsets.s: arch/$(TARGET_ARCH)/$(TARGET_SUBARCH)/asm-offsets.c
++	$(CC) $(call cpp_flags,$(c_flags)) -S -g0 -o $@.new -MQ $@ $<
++	$(call move-if-changed,$@.new,$@)
++
++arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: asm-offsets.s
++	@(set -e; \
++	  echo "/*"; \
++	  echo " * DO NOT MODIFY."; \
++	  echo " *"; \
++	  echo " * This file was auto-generated from $<"; \
++	  echo " *"; \
++	  echo " */"; \
++	  echo ""; \
++	  echo "#ifndef __ASM_OFFSETS_H__"; \
++	  echo "#define __ASM_OFFSETS_H__"; \
++	  echo ""; \
++	  sed -rne "/^[^#].*==>/{s:.*==>(.*)<==.*:\1:; s: [\$$#]: :; p;}"; \
++	  echo ""; \
++	  echo "#endif") <$< >$@
+-- 
+Anthony PERARD
+
 
