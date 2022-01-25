@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B33C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:07:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260102.449301 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0890C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:07:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260105.449319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJfo-00085n-II; Tue, 25 Jan 2022 11:07:40 +0000
+	id 1nCJfr-0000Bb-He; Tue, 25 Jan 2022 11:07:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260102.449301; Tue, 25 Jan 2022 11:07:40 +0000
+Received: by outflank-mailman (output) from mailman id 260105.449319; Tue, 25 Jan 2022 11:07:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJfn-000828-LB; Tue, 25 Jan 2022 11:07:39 +0000
-Received: by outflank-mailman (input) for mailman id 260102;
- Tue, 25 Jan 2022 11:07:36 +0000
+	id 1nCJfq-00005N-34; Tue, 25 Jan 2022 11:07:42 +0000
+Received: by outflank-mailman (input) for mailman id 260105;
+ Tue, 25 Jan 2022 11:07:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rP4T=SJ=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nCJa0-0006Mn-Su
- for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:01:41 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 29dac2ae-7dce-11ec-8fa7-f31e035a9116;
- Tue, 25 Jan 2022 12:01:37 +0100 (CET)
+ id 1nCJa8-0006Mn-KJ
+ for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:01:48 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2e54dec3-7dce-11ec-8fa7-f31e035a9116;
+ Tue, 25 Jan 2022 12:01:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,76 +38,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29dac2ae-7dce-11ec-8fa7-f31e035a9116
+X-Inumbo-ID: 2e54dec3-7dce-11ec-8fa7-f31e035a9116
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643108497;
+  d=citrix.com; s=securemail; t=1643108505;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=y9Sbmh9sSFdUQIMS7iecs4Bg8Gd3vQzmMWvzrk0nedI=;
-  b=KlTxLlv7JI48Hi4jwmRHTaFl3pMPyR5PyTCuiCaXkK16MwOHEyF9+1kc
-   vXa3d70cqxr3dUyPRFVO17NrJi5IVDTZzMzzC22MB2h/snJRIFg57Zzek
-   VYwLWdNt0lkmd9vyWymmOaH38fhUmcrh6wjxUuTiXekrzqUdvNnaSFF6T
-   Y=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: A7kqu2pIXg7mV3RPVBE3kaTC5YEmkvQEnMDSAwZJVKifn9gVNdv7mbxXbvgouVx5fz9X9nnM1m
- w4YDmUjWtyjP1U5YauxQnnflkqMpoh8x3QbgdKV157HliAfHRfyROH9qdsaGh81ffPxUti/fre
- CyVfdBn45DGrVVjetgpbbok9FQZrTJDlHGiF01NxNale8esF1N6Vi0FnWeJNlj6V43xtXK64fB
- jGiNMppcYxaxSa+dRRT+Do5IvF2wKSvV+LreByX4yBJVW5I176Ro313b3xZCmOROQJS+kyWxyJ
- QqEzIqpch3U6NeDYGyGso4am
+  bh=sxCVIENXL7U4uJ6PAJaPF/nE5SLDBzALYwkN0k1BGWI=;
+  b=G34dYyxAmOvPscub6HIVmNp4MRhbxMbh58A1b1F3dT7LGcJm+o4JGlme
+   FRB8u8jhT/xxBbLL/6EFctepz47i4BzK3Ar7FgRFiHDAEeKEF1krrBae3
+   3B2aVHQYNyAbCYvHQK34kvaHH/Mm1iscQw+1REjYapen0oPbeU7uOFGQN
+   M=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: jYtfUwYAyD11jI1O9Q6jMpLDyo3cMN+utrBBigaPmaXPFMMH843yAFqhvnVq6fP6En3+NIONg0
+ wsCtB+MyX2bwKcL21k3/PUo+DN3GBbqywQVc616DnydXrZ0hk3wIKWk+Y2TD2oT6yqCmVdJ7TD
+ ZLtMGZO7acVg0MJ5xme9YNdl2AR+Rk1LmwWD0HK3mGTKOBD95qexYVHhz/Ka5I7yZk8yHY1HBR
+ suPMf1Wsxxtd3UIJhSE1G4RbBqIfMvJjxGIj7vDc4Nbh4ANeJ8Pzdc0piDXZcNXVQXes1nLGz7
+ iRviqRwTZROSZkbCFOtbAYyi
 X-SBRS: 5.2
-X-MesageID: 64860835
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 63106969
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23: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
- /BTG/8=
-IronPort-HdrOrdr: A9a23:mr6Pgqi1ggiDCiJoSkEY4TVXj3BQXuYji2hC6mlwRA09TyX+rb
- HLoB17726QtN9/YgBCpTntAsi9qBDnm6Kdg7NhWotKNTOO0AHEEGgL1/qF/9SKIVydygcy78
- ddmoFFeaTN5QcQt63HCXODfOrIauP3iJxA/t2z80tQ
+IronPort-Data: A9a23:XMuavaghgLsXxQaTbFxIR8cQX161nBcKZh0ujC45NGQN5FlHY01je
+ htvXGuDaPbYMzTxeNFza9ji8RtVuMTQmIRlHQY/rnwwFnsb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0GE/NtTo5w7Rj2tcy3IDga++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /10ksSydBUxJZbjv/88SjgHCg9SN6N/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNaiFP
+ pJHOGQ+BPjGSxpqGFozNrMGp8z2p1vQYgBYqUKEpZNitgA/yyQuieOwYbI5YOeiXt5Jl0yVo
+ mbH+WXRARwAMtGbjz2f/RqEmevnjS79HoUIG9WQ9ONugVCV7nweDlsRT1TTiem0jAuyVsxSL
+ 2QQ+zEytu4i+UqzVN7/Uhak5nmesXY0WdBdDuk74wGl0bfP7kCSAW1sc9JaQIV47olsH2Vsj
+ wLX2YOybdByjFGLYUu6rrWpvyupAgcyNk4bRHAdYycP7eC29enfkSnzZtpkFae0iPj8Fjfx3
+ y2GoUACulkDsSIY//7lpA6a2lpAsrCMF1dovVuPAgpJ+yskPNbNWmC+1bTMAR+sxq69R0LJg
+ nULktP2AAsmXcDUz3zlrAng8diUCxe53N/03AYH83oJrW3FF5ufkWZ4um0WyKBBaZ5sRNMRS
+ BWP0T69HbcKVJdQUYd5YpiqF+MhxrX6GNLuW5j8N4QSOcAtJVDYonA/PSZ8OlwBdmB2zcnT3
+ r/AKa6R4YsyU/w7nFJauc9DuVPU+szO7TyKHs2qp/hW+bGfeGSUWd843KimNYgEAFe/iFyNq
+ b53bpLSoz0GCbGWSnSJreY7cA5bRVBmVcGeg5EGLYarf1s5cFzN/teMm9vNjaQ/wfQM/goJl
+ 1ngMnJlJK3X3C2edl7SOyk9MdsCn/9X9BoGAMDlBn7ws1BLXGplxP13m0IfceZ1+ep94+RzS
+ vVZKcyMDu4WEmbM+igHbIm7p4tnLUz5iQWLNiujQT4+Y58/GFCZpo66JlPipHsUEy66lcoiu
+ Ln8hAnVdoUOGlZ5B8HMZfPxk17o5SoBmPh/VlfjK8VIfBm+65BjLiH816dlI8wFJRjZ6CGd0
+ gKaXUURqeXX+tdn+9jVn6GU6YyuFrImTEZdGmDa65ewNDXboTX/kdMRDr7QcGmEBm3u+aika
+ eFE9N3GMaUKzARQro5xM7d31qZitdHhkKBXk1Z/F3LRYlX1Vr45eiua3dNCv7Fmz6NCvVfkQ
+ VqG/9RXNOnbOM7hF1JNdgMpYv7aiKMRkzjWq/80PF/79Gl8+7/eCRdeOByFiSp8KrppMdx6n
+ bd96ZBOswHv2AA3NtumjzxP8zXeJ3MNZKwrq5UGDdK5kQEs0FxDPcTRByKeDEtjsDmQ3p3G+
+ gOpuZc=
+IronPort-HdrOrdr: A9a23:VEFAiKB0aIsnSPrlHemQ55DYdb4zR+YMi2TDsHoBLSC9E/bo8v
+ xG885rtiMc5AxxZJhCo7690cu7MBThHPdOiOF6UItKNDOW3ldAR7sSj7cKrQeBJ8TWzJ8l6U
+ 8+GJIUNDSLNzdHZGzBkXGF+q0brOW6zA==
 X-IronPort-AV: E=Sophos;i="5.88,314,1635220800"; 
-   d="scan'208";a="64860835"
+   d="scan'208";a="63106969"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Bob Eshleman
-	<bobbyeshleman@gmail.com>, Julien Grall <jgrall@amazon.com>, Jan Beulich
+CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
 	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis
-	<connojdavis@gmail.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, "Ross
- Lagerwall" <ross.lagerwall@citrix.com>, Daniel De Graaf
-	<dgdegra@tycho.nsa.gov>, "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [XEN PATCH v9 09/30] build: build everything from the root dir, use obj=$subdir
-Date: Tue, 25 Jan 2022 11:00:42 +0000
-Message-ID: <20220125110103.3527686-10-anthony.perard@citrix.com>
+	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v9 14/30] build: remove KBUILD_ specific from Makefile.host
+Date: Tue, 25 Jan 2022 11:00:47 +0000
+Message-ID: <20220125110103.3527686-15-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220125110103.3527686-1-anthony.perard@citrix.com>
 References: <20220125110103.3527686-1-anthony.perard@citrix.com>
@@ -115,761 +104,103 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-A subdirectory is now built by setting "$(obj)" instead of changing
-directory. "$(obj)" should always be set when using "Rules.mk" and
-thus a shortcut "$(build)" is introduced and should be used.
+This will allow $(HOSTCFLAGS) to actually be used when building
+programmes for the build-host.
 
-A new variable "$(need-builtin)" is introduce. It is to be used
-whenever a "built_in.o" is wanted from a subdirectory. "built_in.o"
-isn't the main target anymore, and thus only needs to depends on the
-objects that should be part of "built_in.o".
+The other variable don't exist in our build system.
 
-Introduce $(srctree) and $(objtree) to replace $(BASEDIR) in cases a
-relative path is better, and $(abs_srctree) and $(abs_objtree) which
-have an absolute path.
-
-DEPS is updated as the existing macro to deal with it doesn't know
-about $(obj).
-
-There's some changes in "Rules.mk" which in addition to deal with
-"$(obj)" also make it's looks more like "Makefile.build" from Linux
-v5.12.
-
-test/Makefile doesn't need special handling in order to build
-everything under test/, Rules.mk will visit test/livepatch via
-$(subdir-y), thus "tests" "all" and "build" target are removed.
-"subtree-force-update" target isn't useful so it is removed as well.
-
-test/livepatch/Makefile doesn't need default target anymore, Rules.mk
-will build everything in $(extra-y) and thus all *.livepatch.
-
-Adjust cloc recipe: dependency files generated by CC will now have the
-full path to the source file, so we don't need to prepend the
-subdirectory. This fix some issue with source not been parsed by cloc
-before. Also source from tools/kconfig would be listed with changes in
-this patch so adjust the find command to stop listing the "tools"
-directory and thus kconfig. With a default build of Xen on X86, they
-are a few new files parsed by cloc:
-    arch/x86/x86_64/compat/mm.c
-    arch/x86/x86_64/mm.c
-    common/compat/domain.c
-    common/compat/memory.c
-    common/compat/xlat.c
+Also remove $(KBUILD_EXTMOD) since it should always be empty.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Acked-by: Bob Eshleman <bobbyeshleman@gmail.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
+ xen/scripts/Makefile.host | 26 ++++++++++++--------------
+ 1 file changed, 12 insertions(+), 14 deletions(-)
 
-Notes:
-    v9:
-    - reviewed
-    
-    v8:
-    - rebased
-    - move check for $(obj) in Rules.mk earlier
-    - use $(sort ) when adding directories in $(subdir-y)
-    - fix missing space between "DEPS" and ":="
-    - use -iquote when adding '.' for xen/arch/x86/usercopy.o
-    - introduce also abs_srctree and abs_objtree
-      those were in patch "build: replace $(BASEDIR) by $(objtree)"
-    - reworked cmd_objcopy_fix_sym, we don't need to do anything for old
-      version of clang, and for recent version of clang the change is the
-      same a for gcc.
-    - adjust "cloc" recipe
-    - add some more $(Q) to silent $(MAKE) $(build)=...
-    
-    v7:
-    - Spell "Makefile.build" as "Rules.mk" in the warning in Rules.mk about
-      undefined $(obj).
-    - use $(srctree) for include/xen/config.h
-    - handle $(nocov-y) and $(noubsan-y), needed to add $(obj)/
-
- xen/Makefile                |  36 ++++++----
- xen/Rules.mk                | 138 ++++++++++++++++++++++++------------
- xen/arch/arm/Makefile       |   4 +-
- xen/arch/arm/Rules.mk       |   4 --
- xen/arch/arm/arch.mk        |   4 +-
- xen/arch/riscv/arch.mk      |   4 +-
- xen/arch/x86/Makefile       |  11 +--
- xen/arch/x86/Rules.mk       |   4 +-
- xen/arch/x86/arch.mk        |  12 ++--
- xen/arch/x86/boot/Makefile  |   8 +--
- xen/build.mk                |  12 +++-
- xen/include/Makefile        |   6 +-
- xen/scripts/Kbuild.include  |   6 ++
- xen/test/Makefile           |   7 +-
- xen/test/livepatch/Makefile |   6 --
- xen/xsm/flask/Makefile      |   2 +-
- xen/xsm/flask/ss/Makefile   |   2 +-
- 17 files changed, 162 insertions(+), 104 deletions(-)
-
-diff --git a/xen/Makefile b/xen/Makefile
-index ec24856a5d46..780d555e8620 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -22,6 +22,15 @@ export CHECKPOLICY	?= checkpolicy
- export BASEDIR := $(CURDIR)
- export XEN_ROOT := $(BASEDIR)/..
+diff --git a/xen/scripts/Makefile.host b/xen/scripts/Makefile.host
+index 8a85f94316bc..d6c358095ee8 100644
+--- a/xen/scripts/Makefile.host
++++ b/xen/scripts/Makefile.host
+@@ -82,18 +82,16 @@ host-cxxshobjs	:= $(addprefix $(obj)/,$(host-cxxshobjs))
+ #####
+ # Handle options to gcc. Support building with separate output directory
  
-+abs_objtree := $(CURDIR)
-+abs_srctree := $(CURDIR)
-+
-+export abs_srctree abs_objtree
-+
-+srctree := .
-+objtree := .
-+export srctree objtree
-+
- # Do not use make's built-in rules and variables
- MAKEFLAGS += -rR
+-_hostc_flags   = $(KBUILD_HOSTCFLAGS)   $(HOST_EXTRACFLAGS)   \
++_hostc_flags   = $(HOSTCFLAGS)   $(HOST_EXTRACFLAGS)   \
+                  $(HOSTCFLAGS_$(target-stem).o)
+-_hostcxx_flags = $(KBUILD_HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \
++_hostcxx_flags = $(HOSTCXXFLAGS) $(HOST_EXTRACXXFLAGS) \
+                  $(HOSTCXXFLAGS_$(target-stem).o)
  
-@@ -47,7 +56,7 @@ export KCONFIG_CONFIG ?= .config
- 
- export CC CXX LD
- 
--export TARGET := $(BASEDIR)/xen
-+export TARGET := xen
- 
- .PHONY: default
- default: build
-@@ -250,7 +259,7 @@ endif
- CFLAGS += -nostdinc -fno-builtin -fno-common
- CFLAGS += -Werror -Wredundant-decls -Wno-pointer-arith
- $(call cc-option-add,CFLAGS,CC,-Wvla)
--CFLAGS += -pipe -D__XEN__ -include $(BASEDIR)/include/xen/config.h
-+CFLAGS += -pipe -D__XEN__ -include $(srctree)/include/xen/config.h
- CFLAGS-$(CONFIG_DEBUG_INFO) += -g
- 
- ifneq ($(CONFIG_CC_IS_CLANG),y)
-@@ -349,10 +358,10 @@ _install: $(TARGET)$(CONFIG_XEN_INSTALL_SUFFIX)
- 
- .PHONY: tests
- tests:
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C test tests
-+	$(Q)$(MAKE) $(build)=test
- .PHONY: install-tests
- install-tests:
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C test install
-+	$(Q)$(MAKE) $(build)=test install
- 
- .PHONY: _uninstall
- _uninstall: D=$(DESTDIR)
-@@ -408,16 +417,16 @@ $(TARGET).gz: $(TARGET)
- 
- $(TARGET): FORCE
- 	$(MAKE) -C tools
--	$(MAKE) -f $(BASEDIR)/Rules.mk include/xen/compile.h
-+	$(Q)$(MAKE) $(build)=. include/xen/compile.h
- 	[ -e arch/$(TARGET_ARCH)/efi ] && for f in $$(cd common/efi; echo *.[ch]); \
- 		do test -r arch/$(TARGET_ARCH)/efi/$$f || \
- 		   ln -nsf ../../../common/efi/$$f arch/$(TARGET_ARCH)/efi/; \
- 		done; \
- 		true
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C include
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C arch/$(TARGET_ARCH) include
--	$(MAKE) -f $(BASEDIR)/Rules.mk arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
--	$(MAKE) -f $(BASEDIR)/Rules.mk MKRELOC=$(MKRELOC) "ALL_OBJS=$(ALL_OBJS-y)" "ALL_LIBS=$(ALL_LIBS-y)" $@
-+	$(Q)$(MAKE) $(build)=include all
-+	$(Q)$(MAKE) $(build)=arch/$(TARGET_ARCH) include
-+	$(Q)$(MAKE) $(build)=. arch/$(TARGET_ARCH)/include/asm/asm-offsets.h
-+	$(Q)$(MAKE) $(build)=. MKRELOC=$(MKRELOC) "ALL_OBJS=$(ALL_OBJS-y)" "ALL_LIBS=$(ALL_LIBS-y)" $@
- 
- SUBDIRS = xsm arch/$(TARGET_ARCH) common drivers lib test
- define all_sources
-@@ -463,19 +472,18 @@ _MAP:
- 	$(NM) -n $(TARGET)-syms | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aUw] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)' > System.map
- 
- %.o %.i %.s: %.c FORCE
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C $(*D) $(@F)
-+	$(Q)$(MAKE) $(build)=$(*D) $(*D)/$(@F)
- 
- %.o %.s: %.S FORCE
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C $(*D) $(@F)
-+	$(Q)$(MAKE) $(build)=$(*D) $(*D)/$(@F)
- 
- %/: FORCE
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in.o built_in_bin.o
-+	$(Q)$(MAKE) $(build)=$* need-builtin=1
- 
- .PHONY: cloc
- cloc:
--	find . -name '*.o.d' | while read f; do \
-+	find . -name tools -prune -o -name '*.o.d' -print | while read f; do \
- 	    for sf in $$(grep -o "[a-zA-Z0-9_/-]*\.[cS]" $$f); do \
--		sf="$$(dirname $$f)/$$sf"; \
- 		test -f "$$sf" && echo "$$sf"; \
- 	    done; \
- 	done | cloc --list-file=-
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 1e7f47a3d8a8..67112e00773f 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -3,19 +3,29 @@
- # Makefile and are consumed by Rules.mk
- #
- 
--obj := .
-+ifndef obj
-+$(warning kbuild: Rules.mk is included improperly)
-+endif
-+
- src := $(obj)
- 
-+PHONY := __build
-+__build:
-+
- -include $(BASEDIR)/include/config/auto.conf
- 
- include $(XEN_ROOT)/Config.mk
- include $(BASEDIR)/scripts/Kbuild.include
- 
- # Initialise some variables
-+obj-y :=
- lib-y :=
- targets :=
-+subdir-y :=
- CFLAGS-y :=
- AFLAGS-y :=
-+nocov-y :=
-+noubsan-y :=
- 
- SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
-                                             $(foreach w,1 2 4, \
-@@ -50,27 +60,54 @@ cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
- quiet_cmd_binfile = BINFILE $@
- cmd_binfile = $(SHELL) $(BASEDIR)/tools/binfile $(BINFILE_FLAGS) $@ $(2)
- 
--define gendep
--    ifneq ($(1),$(subst /,:,$(1)))
--        DEPS += $(dir $(1)).$(notdir $(1)).d
--    endif
--endef
--$(foreach o,$(filter-out %/,$(obj-y) $(obj-bin-y) $(extra-y)),$(eval $(call gendep,$(o))))
-+# Figure out what we need to build from the various variables
-+# ===========================================================================
-+
-+# Libraries are always collected in one lib file.
-+# Filter out objects already built-in
-+lib-y := $(filter-out $(obj-y), $(sort $(lib-y)))
-+
-+# Subdirectories we need to descend into
-+subdir-y := $(sort $(subdir-y) $(patsubst %/,%,$(filter %/, $(obj-y))))
- 
- # Handle objects in subdirs
--# ---------------------------------------------------------------------------
--# o if we encounter foo/ in $(obj-y), replace it by foo/built_in.o
--#   and add the directory to the list of dirs to descend into: $(subdir-y)
--subdir-y := $(subdir-y) $(filter %/, $(obj-y))
-+# - if we encounter foo/ in $(obj-y), replace it by foo/built_in.o
-+ifdef need-builtin
- obj-y    := $(patsubst %/, %/built_in.o, $(obj-y))
-+else
-+obj-y    := $(filter-out %/, $(obj-y))
-+endif
- 
--# $(subdir-obj-y) is the list of objects in $(obj-y) which uses dir/ to
--# tell kbuild to descend
--subdir-obj-y := $(filter %/built_in.o, $(obj-y))
-+# Add subdir path
- 
--# Libraries are always collected in one lib file.
--# Filter out objects already built-in
--lib-y := $(filter-out $(obj-y), $(sort $(lib-y)))
-+extra-y         := $(addprefix $(obj)/,$(extra-y))
-+targets         := $(addprefix $(obj)/,$(targets))
-+lib-y           := $(addprefix $(obj)/,$(lib-y))
-+obj-y           := $(addprefix $(obj)/,$(obj-y))
-+obj-bin-y       := $(addprefix $(obj)/,$(obj-bin-y))
-+subdir-y        := $(addprefix $(obj)/,$(subdir-y))
-+nocov-y         := $(addprefix $(obj)/,$(nocov-y))
-+noubsan-y       := $(addprefix $(obj)/,$(noubsan-y))
-+
-+# subdir-builtin may contain duplications. Use $(sort ...)
-+subdir-builtin := $(sort $(filter %/built_in.o, $(obj-y)))
-+
-+targets-for-builtin := $(extra-y)
-+
-+ifneq ($(strip $(lib-y)),)
-+    targets-for-builtin += $(obj)/lib.a
-+endif
-+
-+ifdef need-builtin
-+    targets-for-builtin += $(obj)/built_in.o
-+    ifneq ($(strip $(obj-bin-y)),)
-+        ifeq ($(CONFIG_LTO),y)
-+            targets-for-builtin += $(obj)/built_in_bin.o
-+        endif
-+    endif
-+endif
-+
-+targets += $(targets-for-builtin)
- 
- $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += -DINIT_SECTIONS_ONLY
- 
-@@ -122,29 +159,28 @@ quiet_cmd_cc_builtin = CC      $@
- cmd_cc_builtin = \
-     $(CC) $(XEN_CFLAGS) -c -x c /dev/null -o $@
- 
-+# To build objects in subdirs, we need to descend into the directories
-+$(subdir-builtin): $(obj)/%/built_in.o: $(obj)/% ;
-+
- quiet_cmd_ld_builtin = LD      $@
- ifeq ($(CONFIG_LTO),y)
- cmd_ld_builtin = \
--    $(LD_LTO) -r -o $@ $(filter $(obj-y),$(real-prereqs))
-+    $(LD_LTO) -r -o $@ $(real-prereqs)
- else
- cmd_ld_builtin = \
--    $(LD) $(XEN_LDFLAGS) -r -o $@ $(filter $(obj-y),$(real-prereqs))
-+    $(LD) $(XEN_LDFLAGS) -r -o $@ $(real-prereqs)
+ # $(objtree)/$(obj) for including generated headers from checkin source files
+-ifeq ($(KBUILD_EXTMOD),)
+ ifdef building_out_of_srctree
+ _hostc_flags   += -I $(objtree)/$(obj)
+ _hostcxx_flags += -I $(objtree)/$(obj)
  endif
- 
--built_in.o: $(obj-y) $(if $(strip $(lib-y)),lib.a) $(extra-y) FORCE
-+$(obj)/built_in.o: $(obj-y) FORCE
- 	$(call if_changed,$(if $(strip $(obj-y)),ld_builtin,cc_builtin))
- 
--lib.a: $(lib-y) FORCE
-+$(obj)/lib.a: $(lib-y) FORCE
- 	$(call if_changed,ar)
- 
--targets += built_in.o
--ifneq ($(strip $(lib-y)),)
--targets += lib.a
 -endif
--targets += $(filter-out $(subdir-obj-y), $(obj-y) $(lib-y)) $(extra-y)
--targets += $(MAKECMDGOALS)
-+targets += $(filter-out $(subdir-builtin), $(obj-y))
-+targets += $(lib-y) $(MAKECMDGOALS)
  
--built_in_bin.o: $(obj-bin-y) $(extra-y)
-+$(obj)/built_in_bin.o: $(obj-bin-y)
- ifeq ($(strip $(obj-bin-y)),)
- 	$(CC) $(a_flags) -c -x assembler /dev/null -o $@
- else
-@@ -155,23 +191,15 @@ endif
- PHONY += FORCE
- FORCE:
+ hostc_flags    = -Wp,-MD,$(depfile) $(_hostc_flags)
+ hostcxx_flags  = -Wp,-MD,$(depfile) $(_hostcxx_flags)
+@@ -104,17 +102,17 @@ hostcxx_flags  = -Wp,-MD,$(depfile) $(_hostcxx_flags)
+ # Create executable from a single .c file
+ # host-csingle -> Executable
+ quiet_cmd_host-csingle 	= HOSTCC  $@
+-      cmd_host-csingle	= $(HOSTCC) $(hostc_flags) $(KBUILD_HOSTLDFLAGS) -o $@ $< \
+-		$(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
++      cmd_host-csingle	= $(HOSTCC) $(hostc_flags) $(HOSTLDFLAGS) -o $@ $< \
++		$(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
+ $(host-csingle): $(obj)/%: $(src)/%.c FORCE
+ 	$(call if_changed_dep,host-csingle)
  
--%/built_in.o %/lib.a: FORCE
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in.o
--
--%/built_in_bin.o: FORCE
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C $* built_in_bin.o
--
--SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
--
- quiet_cmd_cc_o_c = CC      $@
- ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
-     cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $(dot-target).tmp -MQ $@
--    ifeq ($(CONFIG_CC_IS_CLANG)$(call clang-ifversion,-lt,600,y),yy)
--        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(dot-target).tmp $@
-+    ifneq ($(CONFIG_CC_IS_CLANG)$(call clang-ifversion,-lt,600,y),yy)
-+        cmd_objcopy_fix_sym = \
-+	    $(OBJCOPY) --redefine-sym $(<F)=$< $(dot-target).tmp $@ && rm -f $(dot-target).tmp
-     else
--        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(dot-target).tmp $@
-+        cmd_objcopy_fix_sym = mv -f $(dot-target).tmp $@
-     endif
--    cmd_objcopy_fix_sym += && rm -f $(dot-target).tmp
- else
-     cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $@
- endif
-@@ -181,13 +209,13 @@ define rule_cc_o_c
-     $(call cmd,objcopy_fix_sym)
- endef
- 
--%.o: %.c FORCE
-+$(obj)/%.o: $(src)/%.c FORCE
- 	$(call if_changed_rule,cc_o_c)
- 
- quiet_cmd_cc_o_S = CC      $@
- cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
- 
--%.o: %.S FORCE
-+$(obj)/%.o: $(src)/%.S FORCE
- 	$(call if_changed,cc_o_S)
- 
- 
-@@ -205,7 +233,7 @@ define cmd_obj_init_o
-     $(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
- endef
- 
--$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o FORCE
-+$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): $(obj)/%.init.o: $(obj)/%.o FORCE
- 	$(call if_changed,obj_init_o)
- 
- quiet_cmd_cpp_i_c = CPP     $@
-@@ -217,19 +245,21 @@ cmd_cc_s_c = $(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
- quiet_cmd_cpp_s_S = CPP     $@
- cmd_cpp_s_S = $(CPP) $(call cpp_flags,$(a_flags)) -MQ $@ -o $@ $<
- 
--%.i: %.c FORCE
-+$(obj)/%.i: $(src)/%.c FORCE
- 	$(call if_changed,cpp_i_c)
- 
--%.s: %.c FORCE
-+$(obj)/%.s: $(src)/%.c FORCE
- 	$(call if_changed,cc_s_c)
- 
--%.s: %.S FORCE
-+$(obj)/%.s: $(src)/%.S FORCE
- 	$(call if_changed,cpp_s_S)
- 
- # Linker scripts, .lds.S -> .lds
- quiet_cmd_cpp_lds_S = LDS     $@
- cmd_cpp_lds_S = $(CPP) -P $(call cpp_flags,$(a_flags)) -D__LINKER__ -MQ $@ -o $@ $<
- 
-+targets := $(filter-out $(PHONY), $(targets))
-+
- # Add intermediate targets:
- # When building objects with specific suffix patterns, add intermediate
- # targets that the final targets are derived from.
-@@ -239,7 +269,18 @@ intermediate_targets = $(foreach sfx, $(2), \
- # %.init.o <- %.o
- targets += $(call intermediate_targets, .init.o, .o)
- 
---include $(DEPS_INCLUDE)
-+# Build
-+# ---------------------------------------------------------------------------
-+
-+__build: $(targets-for-builtin) $(subdir-y)
-+	@:
-+
-+# Descending
-+# ---------------------------------------------------------------------------
-+
-+PHONY += $(subdir-y)
-+$(subdir-y):
-+	$(Q)$(MAKE) $(build)=$@ need-builtin=$(if $(filter $@/built_in.o, $(subdir-builtin)),1)
- 
- # Read all saved command lines and dependencies for the $(targets) we
- # may be building above, using $(if_changed{,_dep}). As an
-@@ -250,6 +291,9 @@ existing-targets := $(wildcard $(sort $(targets)))
- 
- -include $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
- 
-+DEPS := $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).d)
-+-include $(DEPS_INCLUDE)
-+
- # Declare the contents of the PHONY variable as phony.  We keep that
- # information in a variable so we can use it in if_changed and friends.
- .PHONY: $(PHONY)
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index c993ce72a341..fd24f0212ffa 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -95,12 +95,12 @@ $(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
- 	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
- 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
--	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).0.o
-+	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< \
- 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
- 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
--	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).1.o
-+	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
- 	    $(@D)/.$(@F).1.o -o $@
- 	$(NM) -pa --format=sysv $(@D)/$(@F) \
-diff --git a/xen/arch/arm/Rules.mk b/xen/arch/arm/Rules.mk
-index c6463a433efd..e69de29bb2d1 100644
---- a/xen/arch/arm/Rules.mk
-+++ b/xen/arch/arm/Rules.mk
-@@ -1,4 +0,0 @@
--# head.o is built by descending into arch/arm/$(TARGET_SUBARCH), depends on the
--# part of $(ALL_OBJS) that will eventually recurse into $(TARGET_SUBARCH)/ and
--# build head.o
--arch/arm/$(TARGET_SUBARCH)/head.o: arch/arm/built_in.o ;
-diff --git a/xen/arch/arm/arch.mk b/xen/arch/arm/arch.mk
-index ba3f140e2ea7..4e3f7014305e 100644
---- a/xen/arch/arm/arch.mk
-+++ b/xen/arch/arm/arch.mk
-@@ -1,8 +1,8 @@
- ########################################
- # arm-specific definitions
- 
--CFLAGS += -I$(BASEDIR)/include
--CFLAGS += -I$(BASEDIR)/arch/$(TARGET_ARCH)/include
-+CFLAGS += -I$(srctree)/include
-+CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
- 
- $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
- $(call cc-option-add,CFLAGS,CC,-Wnested-externs)
-diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
-index 39ae6ffea94d..694ba053ceab 100644
---- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -11,5 +11,5 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
- # -mcmodel=medlow would force Xen into the lower half.
- 
- CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
--CFLAGS += -I$(BASEDIR)/include
--CFLAGS += -I$(BASEDIR)/arch/$(TARGET_ARCH)/include
-+CFLAGS += -I$(srctree)/include
-+CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index db97ae8c07f0..8fe54ba137ca 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -80,6 +80,9 @@ endif
- extra-y += asm-macros.i
- extra-y += xen.lds
- 
-+# Allows usercopy.c to include itself
-+$(obj)/usercopy.o: CFLAGS-y += -iquote .
-+
- ifneq ($(CONFIG_HVM),y)
- $(obj)/x86_emulate.o: CFLAGS-y += -Wno-unused-label
- endif
-@@ -129,13 +132,13 @@ $(TARGET)-syms: $(BASEDIR)/prelink.o $(obj)/xen.lds
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
- 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort \
- 		>$(@D)/.$(@F).0.S
--	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).0.o
-+	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).0.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
- 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
- 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
- 		>$(@D)/.$(@F).1.S
--	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).1.o
-+	$(MAKE) $(build)=$(@D) $(@D)/.$(@F).1.o
- 	$(LD) $(XEN_LDFLAGS) -T $(obj)/xen.lds -N $< $(build_id_linker) \
- 	    $(@D)/.$(@F).1.o -o $@
- 	$(NM) -pa --format=sysv $(@D)/$(@F) \
-@@ -199,14 +202,14 @@ endif
- 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).0) >$(@D)/.$(@F).0r.S
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).0 \
- 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0s.S
--	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).0r.o $(@D)/.$(@F).0s.o
-+	$(MAKE) $(build)=$(@D) .$(@F).0r.o .$(@F).0s.o
- 	$(foreach base, $(VIRT_BASE) $(ALT_BASE), \
- 	          $(LD) $(call EFI_LDFLAGS,$(base)) -T $(obj)/efi.lds -N $< \
- 	                $(@D)/.$(@F).0r.o $(@D)/.$(@F).0s.o $(note_file_option) -o $(@D)/.$(@F).$(base).1 &&) :
- 	$(MKRELOC) $(foreach base,$(VIRT_BASE) $(ALT_BASE),$(@D)/.$(@F).$(base).1) >$(@D)/.$(@F).1r.S
- 	$(NM) -pa --format=sysv $(@D)/.$(@F).$(VIRT_BASE).1 \
- 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1s.S
--	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).1r.o $(@D)/.$(@F).1s.o
-+	$(MAKE) $(build)=$(@D) .$(@F).1r.o .$(@F).1s.o
- 	$(LD) $(call EFI_LDFLAGS,$(VIRT_BASE)) -T $(obj)/efi.lds -N $< \
- 	                $(@D)/.$(@F).1r.o $(@D)/.$(@F).1s.o $(note_file_option) -o $@
- 	$(NM) -pa --format=sysv $(@D)/$(@F) \
-diff --git a/xen/arch/x86/Rules.mk b/xen/arch/x86/Rules.mk
-index 7aef93f5f3a0..ff7c7dd68ad7 100644
---- a/xen/arch/x86/Rules.mk
-+++ b/xen/arch/x86/Rules.mk
-@@ -2,9 +2,9 @@
- # x86-specific definitions
- 
- ifneq ($(filter -DHAVE_AS_QUOTED_SYM,$(XEN_CFLAGS)),)
--object_label_flags = '-D__OBJECT_LABEL__=$(subst $(BASEDIR)/,,$(CURDIR))/$@'
-+object_label_flags = '-D__OBJECT_LABEL__=$@'
- else
--object_label_flags = '-D__OBJECT_LABEL__=$(subst /,$$,$(subst -,_,$(subst $(BASEDIR)/,,$(CURDIR))/$@))'
-+object_label_flags = '-D__OBJECT_LABEL__=$(subst /,$$,$(subst -,_,$@))'
- endif
- c_flags += $(object_label_flags) $(CFLAGS_stack_boundary)
- a_flags += $(object_label_flags) $(CFLAGS_stack_boundary)
-diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
-index bfd5eaa35f25..e39fa15be7e3 100644
---- a/xen/arch/x86/arch.mk
-+++ b/xen/arch/x86/arch.mk
-@@ -3,10 +3,10 @@
- 
- export XEN_IMG_OFFSET := 0x200000
- 
--CFLAGS += -I$(BASEDIR)/include
--CFLAGS += -I$(BASEDIR)/arch/$(TARGET_ARCH)/include
--CFLAGS += -I$(BASEDIR)/arch/x86/include/asm/mach-generic
--CFLAGS += -I$(BASEDIR)/arch/x86/include/asm/mach-default
-+CFLAGS += -I$(srctree)/include
-+CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
-+CFLAGS += -I$(srctree)/arch/x86/include/asm/mach-generic
-+CFLAGS += -I$(srctree)/arch/x86/include/asm/mach-default
- CFLAGS += -DXEN_IMG_OFFSET=$(XEN_IMG_OFFSET)
- 
- # Prevent floating-point variables from creeping into Xen.
-@@ -87,7 +87,7 @@ efi-nr-fixups := $(shell $(OBJDUMP) -p $(efi-check).efi | grep '^[[:blank:]]*rel
- ifeq ($(efi-nr-fixups),2)
- MKRELOC := :
- else
--MKRELOC := efi/mkreloc
-+MKRELOC := arch/x86/efi/mkreloc
- # If the linker produced fixups but not precisely two of them, we need to
- # disable it doing so.  But if it didn't produce any fixups, it also wouldn't
- # recognize the option.
-@@ -103,6 +103,6 @@ export EFI_LDFLAGS
- endif
- 
- # Set up the assembler include path properly for older toolchains.
--CFLAGS += -Wa,-I$(BASEDIR)/include
-+CFLAGS += -Wa,-I$(srctree)/include
- 
- ALL_OBJS-y := arch/x86/boot/built_in.o arch/x86/efi/built_in.o $(ALL_OBJS-y)
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index 0aec8a464364..ba732e4a88c3 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -1,8 +1,8 @@
- obj-bin-y += head.o
- 
--DEFS_H_DEPS = $(src)/defs.h $(BASEDIR)/include/xen/stdbool.h
-+DEFS_H_DEPS = $(abs_srctree)/$(src)/defs.h $(abs_srctree)/include/xen/stdbool.h
- 
--CMDLINE_DEPS = $(DEFS_H_DEPS) $(src)/video.h \
-+CMDLINE_DEPS = $(DEFS_H_DEPS) $(abs_srctree)/$(src)/video.h \
- 	       $(BASEDIR)/include/xen/kconfig.h \
- 	       $(BASEDIR)/include/generated/autoconf.h
- 
-@@ -17,7 +17,7 @@ RELOC_DEPS = $(DEFS_H_DEPS) \
- $(obj)/head.o: $(obj)/cmdline.S $(obj)/reloc.S
- 
- $(obj)/cmdline.S: $(src)/cmdline.c $(CMDLINE_DEPS) $(src)/build32.lds
--	$(MAKE) -f build32.mk -C $(obj) $(@F) CMDLINE_DEPS="$(CMDLINE_DEPS)"
-+	$(MAKE) -f $(abs_srctree)/$(src)/build32.mk -C $(obj) $(@F) CMDLINE_DEPS="$(CMDLINE_DEPS)"
- 
- $(obj)/reloc.S: $(src)/reloc.c $(RELOC_DEPS) $(src)/build32.lds
--	$(MAKE) -f build32.mk -C $(obj) $(@F) RELOC_DEPS="$(RELOC_DEPS)"
-+	$(MAKE) -f $(abs_srctree)/$(src)/build32.mk -C $(obj) $(@F) RELOC_DEPS="$(RELOC_DEPS)"
-diff --git a/xen/build.mk b/xen/build.mk
-index af1b28311393..487db14c5884 100644
---- a/xen/build.mk
-+++ b/xen/build.mk
-@@ -60,6 +60,16 @@ arch/$(TARGET_ARCH)/include/asm/asm-offsets.h: asm-offsets.s
- 	  echo ""; \
- 	  echo "#endif") <$< >$@
- 
-+build-dirs := $(patsubst %/built_in.o,%,$(filter %/built_in.o,$(ALL_OBJS) $(ALL_LIBS)))
-+
-+# The actual objects are generated when descending,
-+# make sure no implicit rule kicks in
-+$(sort $(ALL_OBJS) $(ALL_LIBS)): $(build-dirs) ;
-+
-+PHONY += $(build-dirs)
-+$(build-dirs): FORCE
-+	$(Q)$(MAKE) $(build)=$@ need-builtin=1
-+
- ifeq ($(CONFIG_LTO),y)
- # Gather all LTO objects together
- prelink_lto.o: $(ALL_OBJS) $(ALL_LIBS)
-@@ -76,4 +86,4 @@ endif
- targets += prelink.o
- 
- $(TARGET): prelink.o FORCE
--	$(MAKE) -f $(BASEDIR)/Rules.mk -C arch/$(TARGET_ARCH) $@
-+	$(Q)$(MAKE) $(build)=arch/$(TARGET_ARCH) $@
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index d2f5a956a11a..cd40d5b4c923 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -61,7 +61,7 @@ $(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(BASEDIR)/
- 	export PYTHON=$(PYTHON); \
- 	while read what name; do \
- 		$(SHELL) $(BASEDIR)/tools/get-fields.sh "$$what" compat_$$name $< || exit $$?; \
--	done <$(patsubst compat/%,compat/.xlat/%,$(basename $<)).lst >$@.new
-+	done <$(patsubst $(obj)/compat/%,$(obj)/compat/.xlat/%,$(basename $<)).lst >$@.new
- 	mv -f $@.new $@
- 
- .PRECIOUS: $(obj)/compat/.xlat/%.lst
-@@ -86,8 +86,8 @@ PUBLIC_HEADERS := $(filter-out $(src)/public/arch-% $(src)/public/dom0_ops.h, $(
- PUBLIC_C99_HEADERS := $(src)/public/io/9pfs.h $(src)/public/io/pvcalls.h
- PUBLIC_ANSI_HEADERS := $(filter-out $(src)/public/%ctl.h $(src)/public/xsm/% $(src)/public/%hvm/save.h $(PUBLIC_C99_HEADERS), $(PUBLIC_HEADERS))
- 
--public/io/9pfs.h-prereq := string
--public/io/pvcalls.h-prereq := string
-+$(src)/public/io/9pfs.h-prereq := string
-+$(src)/public/io/pvcalls.h-prereq := string
- 
- $(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(src)/Makefile
- 	for i in $(filter %.h,$^); do \
-diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
-index 4875bb28c282..c159136adb20 100644
---- a/xen/scripts/Kbuild.include
-+++ b/xen/scripts/Kbuild.include
-@@ -61,6 +61,12 @@ cc-ifversion = $(shell [ $(CONFIG_GCC_VERSION)0 $(1) $(2)000 ] && echo $(3) || e
- 
- clang-ifversion = $(shell [ $(CONFIG_CLANG_VERSION)0 $(1) $(2)000 ] && echo $(3) || echo $(4))
- 
-+###
-+# Shorthand for $(Q)$(MAKE) -f scripts/Makefile.build obj=
-+# Usage:
-+# $(Q)$(MAKE) $(build)=dir
-+build := -f $(srctree)/Rules.mk obj
-+
- # Shorthand for $(MAKE) clean
- # Usage:
- # $(MAKE) $(clean) dir
-diff --git a/xen/test/Makefile b/xen/test/Makefile
-index 41e4d7bdb78b..080763c80766 100644
---- a/xen/test/Makefile
-+++ b/xen/test/Makefile
-@@ -1,13 +1,10 @@
- 
--tests all: build
--
--
- ifneq ($(XEN_TARGET_ARCH),x86_32)
- # Xen 32-bit x86 hypervisor no longer supported, so has no test livepatches
- subdir-y += livepatch
- endif
- 
--install build subtree-force-update uninstall: %:
-+install uninstall: %:
- 	set -e; for s in $(subdir-y); do \
--		$(MAKE) -f $(BASEDIR)/Rules.mk -C $$s $*; \
-+		$(MAKE) $(build)=$$s $*; \
- 	done
-diff --git a/xen/test/livepatch/Makefile b/xen/test/livepatch/Makefile
-index 69fadccd01ea..afb8d589ecae 100644
---- a/xen/test/livepatch/Makefile
-+++ b/xen/test/livepatch/Makefile
-@@ -11,9 +11,6 @@ endif
- CODE_ADDR=$(shell nm --defined $(1) | grep $(2) | awk '{print "0x"$$1}')
- CODE_SZ=$(shell nm --defined -S $(1) | grep $(2) | awk '{ print "0x"$$2}')
- 
--.PHONY: default
--build default: livepatch
--
- extra-y += xen_hello_world.livepatch
- xen_hello_world-objs := xen_hello_world_func.o xen_hello_world.o note.o xen_note.o modinfo.o
- $(obj)/xen_hello_world.o: $(obj)/config.h
-@@ -156,9 +153,6 @@ LIVEPATCHES := $(filter %.livepatch,$(extra-y))
- 
- LIVEPATCH_DEBUG_DIR ?= $(DEBUG_DIR)/xen-livepatch
- 
--.PHONY: livepatch
--livepatch: $(LIVEPATCHES)
--
- install: $(addprefix $(obj)/,$(LIVEPATCHES))
- 	$(INSTALL_DIR) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
- 	$(INSTALL_DATA) $(addprefix $(obj)/,$(LIVEPATCHES)) $(DESTDIR)$(LIVEPATCH_DEBUG_DIR)
-diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
-index 51fd37f6c4d5..49cf730cf098 100644
---- a/xen/xsm/flask/Makefile
-+++ b/xen/xsm/flask/Makefile
-@@ -40,7 +40,7 @@ $(obj)/flask-policy.S: $(BASEDIR)/tools/binfile FORCE
- 	$(call if_changed,binfile,$(obj)/policy.bin xsm_flask_init_policy)
- targets += flask-policy.S
- 
--FLASK_BUILD_DIR := $(CURDIR)
-+FLASK_BUILD_DIR := $(abs_objtree)/$(obj)
- POLICY_SRC := $(FLASK_BUILD_DIR)/xenpolicy-$(XEN_FULLVERSION)
- 
- $(obj)/policy.bin: FORCE
-diff --git a/xen/xsm/flask/ss/Makefile b/xen/xsm/flask/ss/Makefile
-index d32b9e07138e..aba1339f3808 100644
---- a/xen/xsm/flask/ss/Makefile
-+++ b/xen/xsm/flask/ss/Makefile
-@@ -8,4 +8,4 @@ obj-y += services.o
- obj-y += conditional.o
- obj-y += mls.o
- 
--CFLAGS-y += -I../include
-+CFLAGS-y += -I$(srctree)/xsm/flask/include
+ # Link an executable based on list of .o files, all plain c
+ # host-cmulti -> executable
+ quiet_cmd_host-cmulti	= HOSTLD  $@
+-      cmd_host-cmulti	= $(HOSTCC) $(KBUILD_HOSTLDFLAGS) -o $@ \
++      cmd_host-cmulti	= $(HOSTCC) $(HOSTLDFLAGS) -o $@ \
+ 			  $(addprefix $(obj)/, $($(target-stem)-objs)) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
+ $(host-cmulti): FORCE
+ 	$(call if_changed,host-cmulti)
+ $(call multi-depend, $(host-cmulti), , -objs)
+@@ -129,10 +127,10 @@ $(host-cobjs): $(obj)/%.o: $(src)/%.c FORCE
+ # Link an executable based on list of .o files, a mixture of .c and .cc
+ # host-cxxmulti -> executable
+ quiet_cmd_host-cxxmulti	= HOSTLD  $@
+-      cmd_host-cxxmulti	= $(HOSTCXX) $(KBUILD_HOSTLDFLAGS) -o $@ \
++      cmd_host-cxxmulti	= $(HOSTCXX) $(HOSTLDFLAGS) -o $@ \
+ 			  $(foreach o,objs cxxobjs,\
+ 			  $(addprefix $(obj)/, $($(target-stem)-$(o)))) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem))
+ $(host-cxxmulti): FORCE
+ 	$(call if_changed,host-cxxmulti)
+ $(call multi-depend, $(host-cxxmulti), , -objs -cxxobjs)
+@@ -163,9 +161,9 @@ $(host-cxxshobjs): $(obj)/%.o: $(src)/%.c FORCE
+ # Link a shared library, based on position independent .o files
+ # *.o -> .so shared library (host-cshlib)
+ quiet_cmd_host-cshlib	= HOSTLLD -shared $@
+-      cmd_host-cshlib	= $(HOSTCC) $(KBUILD_HOSTLDFLAGS) -shared -o $@ \
++      cmd_host-cshlib	= $(HOSTCC) $(HOSTLDFLAGS) -shared -o $@ \
+ 			  $(addprefix $(obj)/, $($(target-stem)-objs)) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
+ $(host-cshlib): FORCE
+ 	$(call if_changed,host-cshlib)
+ $(call multi-depend, $(host-cshlib), .so, -objs)
+@@ -173,9 +171,9 @@ $(call multi-depend, $(host-cshlib), .so, -objs)
+ # Link a shared library, based on position independent .o files
+ # *.o -> .so shared library (host-cxxshlib)
+ quiet_cmd_host-cxxshlib	= HOSTLLD -shared $@
+-      cmd_host-cxxshlib	= $(HOSTCXX) $(KBUILD_HOSTLDFLAGS) -shared -o $@ \
++      cmd_host-cxxshlib	= $(HOSTCXX) $(HOSTLDFLAGS) -shared -o $@ \
+ 			  $(addprefix $(obj)/, $($(target-stem)-objs)) \
+-			  $(KBUILD_HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
++			  $(HOSTLDLIBS) $(HOSTLDLIBS_$(target-stem).so)
+ $(host-cxxshlib): FORCE
+ 	$(call if_changed,host-cxxshlib)
+ $(call multi-depend, $(host-cxxshlib), .so, -objs)
 -- 
 Anthony PERARD
 
