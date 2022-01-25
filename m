@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D42BCC433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:07:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260106.449326 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD4EDC433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:07:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260107.449336 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJft-0000fo-P9; Tue, 25 Jan 2022 11:07:45 +0000
+	id 1nCJfv-0000y8-Mz; Tue, 25 Jan 2022 11:07:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260106.449326; Tue, 25 Jan 2022 11:07:45 +0000
+Received: by outflank-mailman (output) from mailman id 260107.449336; Tue, 25 Jan 2022 11:07:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJfs-0000ZJ-Ai; Tue, 25 Jan 2022 11:07:44 +0000
-Received: by outflank-mailman (input) for mailman id 260106;
+	id 1nCJft-0000sC-Uy; Tue, 25 Jan 2022 11:07:45 +0000
+Received: by outflank-mailman (input) for mailman id 260107;
  Tue, 25 Jan 2022 11:07:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rP4T=SJ=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nCJaj-0006Mn-J5
- for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:02:25 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 45dd9e5b-7dce-11ec-8fa7-f31e035a9116;
- Tue, 25 Jan 2022 12:02:24 +0100 (CET)
+ id 1nCJag-0006Mn-2r
+ for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:02:22 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 438d330b-7dce-11ec-8fa7-f31e035a9116;
+ Tue, 25 Jan 2022 12:02:20 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,65 +38,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 45dd9e5b-7dce-11ec-8fa7-f31e035a9116
+X-Inumbo-ID: 438d330b-7dce-11ec-8fa7-f31e035a9116
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643108544;
+  d=citrix.com; s=securemail; t=1643108541;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=7Qro/yaNm//kAbsXtl6h430tMQIH8P57DTIHDTlToVE=;
-  b=Ov5l6Uu0ihTQBSevPbYWBzZQMW9UyWDP6dm1vGBW43L/cA4eFq4n3BCn
-   SFccgZih2i1liNOSd7XjXwJOvP7sB6DpV3M+sqsABHV1AS2ThwP2lcuZn
-   A8B4uEd81WBlC46Dq/s4UVEMrOBJ5lsqJJPUMWFJWjbQjuHm9Fe2uQoyz
-   A=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: GfGsplmdULk3yuLHXRLvR/WC56go2Hm23nz1NA5CSJxTBKxyfx+P74uZPkisnyUb1uO7eOQs9c
- Ha/8jKd5eJZqnwc5x+uhGnk2C/Zl1eeVV3fmFMXBRNAdFMy/4vY1ye3VI+gLkk2BnA8YwZ8av4
- By+DdncgLeeoZvjJy/Lw1/9d/GVIHWZSMzuInzipr+tQdl1iYPsjpNU9WSDMef9xh2GJtlmIWA
- o1Uw3/8TVlszzjV2tALXRH4vxff+E31wpnzIPrd1f2RhQib5EGo6ygG4mYNfO4vWzsErwKcyzg
- B+XJzFWg4aSdHPUVnRzvr33I
+  bh=Psez3OYaVE5bX/QmUtAs61cVLP5HRuMSgeTcQjtWt8A=;
+  b=MIWakkhlTvQexKEyd6d18zVg1C6dCOMOZnlyugEbEnmw3IN0Hs7rYLts
+   Wt7svjCG5rMV8G5tjyvpKdI0UeAV89FzyxrB9LzPqOH+Cvoiz6eQVrWGa
+   Os4uXDQno3fU/0cyN5nP6WftFGoeLuvF/U+miwP/Q/2ixtTodYohOLQSn
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: FT/MaR0d5YmCjuauTWaoIIUU+cluer4T1hor8eDjOVcxBoGECRlKvZ1Gi4guz8oKtLyVLJCAJJ
+ jrmLDYDrjewyXTJIM9HzHKwu9j0u1ff4ysIfC9OpctfiNUnHuywov6+Re63KN8ZBI2mfzL110d
+ 2w9lIT3fLwAG7QLv7Ejy3w+eXrxa1L3YiyENeyOIHeLp92EQMZdWJI+uDiE5H5s47IcEIqnwbL
+ rpHKkxcH7H5fn4aIhWus2awVl59BeGIdtOSClXERhAkMw/mRG0ObJEHUcMdj2y2zex0z+ZygIq
+ dJPVmXy+FrIM/MmJ3UkSRZs8
 X-SBRS: 5.2
-X-MesageID: 62699926
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 62699813
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:BeBE0KxaGDo4JBzFvi16t+fLwSrEfRIJ4+MujC+fZmUNrF6WrkVRm
- DQeDT/TPPaLM2Gje99+bIS/oRgCvsDUmt9gTgtorCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wrRk2tcAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt9FS0
- Yl2ibKqcAQKMorNwPoabjsGDT4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVors0lMMnsOpJZonx6xCvVJf0nXYrCU+PB4towMDIY2JoQTKePP
- ZRxhTxHXBfLWy9MBmcsE7k1ubyXpXulbS96twfAzUYwyzeKl1EguFT3C/LOYcCDT8hRmkeep
- 0rF8n7/DxVcM8aQoRKa9lq8i+mJmjn0MKoQCbm5+/hCkFCVgGsJB3U+RVa95PW0lEO6c9ZeM
- FAPvDojq7Ao806mRcW7WAe3yFaGtBMBX9tbE8Uh9RqAjKHT5m6k6nMsF2AbLoZ87YlvGGJsh
- gThc87V6SJHsZ6MFUmh2K2trhC+HilNM2g/R3EaUl5QizX8m70bghXKR9dlNae6iNzpBD39q
- wy3QDgCa6Y71pBSifjilbzTq3f1/8WSEFZpjunCdj/9tmtEiJiZi5tEALQxxdJJN86nQ1aIp
- xDocODOvblVXflheMFgKdjh/Y1FBd7YaFUwYnY1RvHNEghBHVb5Iei8BxklfC9U3j4sI2OBX
- aMqkVo5CGVvFHWrd7RrRIm6Ft4ny6Ptffy8CKyPNoYfPccvJV7flM2LWaJ29zqx+KTLufpnU
- ap3jO72VSpKYUiZ5GTeqxghPU8DmXllmDK7qWHTxBW7y7uODEN5up9eWGZimtsRtfveyC2Mq
- o43H5LTl313DbOiCgGKr997BQ1afBATWMGtw+QKJ7HrH+aTMDx7YxMn6el/K9UNcmU8vrqgw
- 0xRrWcBmAOg3iWWcFvTAp2hAZu2NatCQbsAFXREFT6VN7ILPu5DNY8TKMk6e6cJ7utmwaImR
- vUJYZzYUP9OVi7G63IWapyk9N5ucxGihASvOSu5YWdgI848FlKRotK0LBHy8CQuDzassZdsq
- bOXyQ6GE4EIQB5vDZiKZav3nU+xp3UUhMl7Q1DMfotIYEzp/YUzc37xg/Y7LtsiMxLGwjfGh
- Q+aDQ1B/bvGopMv8cmPjqeB9t/7H+x7F0tcPm/a8bfpanWKojv9mddNCb/acyrcWWX4/LSZS
- d9Ul/ysYucamFtqspZnF+o5x6wJ+Nay9aRRyR5pHSuXYg3zWK9gOHSPweJGqrZJmu1CoQKzV
- 0+CpotaNLGONJ+3GVIdPlN4POGK1PVSkTjO9/UlZk794XYvrraAVExTOTiKiTBcc+QpYN90n
- 795tZ5E8RG7hzorLs2C33Jd+Gm7J3AdV7kq68MBC4jxhwt3klxPbPQw0MMtDE1jvzmUDnQXH
- w==
-IronPort-HdrOrdr: A9a23:Xjk10q9B3A4rROifnqtuk+DeI+orL9Y04lQ7vn2YSXRuHfBw8P
- re+8jztCWE8Qr5N0tApTntAsS9qDbnhPxICOoqTNOftWvd2FdARbsKheCJ/9SjIVyaygc079
- YHT0EUMrPN5DZB4foSmDPIcOod/A==
+IronPort-Data: A9a23:MTBWR6om2+vA3pITA76fUCqbo8FeBmLnYhIvgKrLsJaIsI4StFCzt
+ garIBmGPP6JZmLweYp2bNy3p0lQ7Jfdy9RhSAA/pH8wEylD+JuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dndx4f5fs7Rh2NQw2ILkW1rlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnZ+5Ulp5EZKPpNUiAxV+UB0vBpZ68rCSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFIoZpnFnyyCfFfs8SIrPa67L+cVZzHE7gcUm8fP2O
+ ZBHOGs/NU+ojxtnA04ULJ8Uw+KT22CkSTN3gUOx+LIV7D2GpOB2+Oe0a4eEEjCQfu1OhVqRr
+ G/C+2X/AzkZOcaZxD7D9Wij7sfQmQvrVYRUE6e3ntZonVmSy2o7GBAQE1yhrpGRmkO4Ht5SN
+ UEQ0i4vtrQpslymSMHnWB+1q2LCuQQTM/JSGeAn7ACGyoLP/h2UQGMDS1Z8hMcO7ZFsA2Zwj
+ xnQwo2vVWcHXKCppWy19b6P8GOdBmspHFBSaQlHcVo+2OXpr9Rm5v7QdepLHKmwh9zzPDj/x
+ TGWsSQz74kuYd43O7aTpg6e3W/1znTdZktsv1iMADr5hu9sTNP9P+SVBU7nAeGsxWpzZn2Ip
+ zA6lseX94ji5rndxXXWEI3h8FxEjstp0QEwY3YyR/HNFBz3ohZPmLy8BhkkeC+F1e5fIVfUj
+ Lf741852XOqFCLCgVVLS4ywEd826qPrCM7oUPvZBvIXPMQqLFPWo34wNB/It4wIrKTKuftjU
+ Xt8WZ30ZUv29Iw9lGbmLwvj+eFDKt8CKZP7GsmgkkXPPUu2b3+JU7YVWGZinchihJ5oVD79q
+ o4FX+PTkk03eLSnPkH/rNBPRXhXcylTLc2m+qR/K7/YSiI7ST5JNhMk6e57E2CTt/4Lxr6gE
+ 7DUchIw9WcTclWeeVzVMSgyMe22NXu9xFpiVRER0Z+T8yBLSe6SAG03LsNfkWAP+LMxwPhqY
+ eMCfsncUP1DRi6eo2YWbIXnrZwkfxOu3FrcMy2gaTk5XphhWw2WpYO0IlqxrHEDXnitqM8zg
+ 7y8zQeHE5ANcBtvUZTNY/W1wlLv4XVEwLBuX1HFK8V4cVn39NQ4MDT4i/I6epleKRjKyjaA+
+ RyRBBMU+bvEr4MvqYGbjqGYtYa5VeB5GxMCTWXc6L+3Mwjc/3aintAcALrZI2iFWTqtqqu4Z
+ OhTw/XtC9E9nQ5H49hmDrJm7aMi/N+z9bVU+RtpQSfQZFOxB7I+fnTfhZtTtrdAz6NysBetX
+ h7d4cFTPLiENZ+3EFMVIwZ5PO2P2etNx2vX5PUxZk77+DV27PyMVkALZ0uAjylULb1UNoI5w
+ Lh+5J5KulLn0hd6YMybii109niXKi1SWqoqgZgWHYv3h1d50VpFe5HdVnf77Zznhw+g6aX2z
+ ut4XJb/uok=
+IronPort-HdrOrdr: A9a23:snmHZaknWmw6mQuXbKbQo9rVVWDpDfIq3DAbv31ZSRFFG/Fxl6
+ iV88jzsiWE7wr5OUtQ4OxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
+ YET0EXMqyXMbEQt6jHCWeDf+rIuOP3k5yVuQ==
 X-IronPort-AV: E=Sophos;i="5.88,314,1635220800"; 
-   d="scan'208";a="62699926"
+   d="scan'208";a="62699813"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
  Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
  Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v9 29/30] build: shuffle main Makefile
-Date: Tue, 25 Jan 2022 11:01:02 +0000
-Message-ID: <20220125110103.3527686-30-anthony.perard@citrix.com>
+Subject: [XEN PATCH v9 27/30] build: rework "headers*.chk" prerequisite in include/
+Date: Tue, 25 Jan 2022 11:01:00 +0000
+Message-ID: <20220125110103.3527686-28-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220125110103.3527686-1-anthony.perard@citrix.com>
 References: <20220125110103.3527686-1-anthony.perard@citrix.com>
@@ -104,121 +104,74 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Reorganize a bit the Makefile ahead of patch
-"build: adding out-of-tree support to the xen build"
+Listing public headers when out-of-tree build are involved becomes
+more annoying where every path to every headers needs to start with
+"$(srctree)/$(src)", or $(wildcard ) will not work. This means more
+repetition. ( "$(srcdir)" is a shortcut for "$(srctree)/$(src)" )
 
-We are going to want to calculate all the $(*srctree) and $(*objtree)
-once, when we can calculate them. This can happen within the
-"$(root-make-done)" guard, in an out-of-tree build scenario, so move
-those variable there.
-
-$(XEN_ROOT) is going to depends on the value of $(abs_srctree) so
-needs to move as well. "Kbuild.include" also depends on $(srctree).
-
-Next, "Config.mk" depends on $(XEN_ROOT) and $(TARGET_*ARCH) depends
-on "Config.mk" so those needs to move as well.
-
-This should only be code movement without functional changes.
+This patch attempt to reduce the amount of duplication and make better
+use of make's meta programming capability. The filters are now listed
+in a variable and don't have to repeat the path to the headers files
+as this is added later as needed.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
 
 Notes:
     v9:
-    - add some explanation in the commit message about why the code movement
-      is needed.
+    - reorder *-headers variables
+    - call public-filter-headers on $(public-c99-headers) as well, for this I
+      needed to rework $(public-c99-headers) and $(public-ansi-headers-filter)
     
     v8:
-    - new patch
+    - add prefix "public-" to newly introduced macros.
+    - make use of the new "$(srcdir)" shortcut.
 
- xen/Makefile | 46 +++++++++++++++++++++++-----------------------
- 1 file changed, 23 insertions(+), 23 deletions(-)
+ xen/include/Makefile | 23 ++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index c39c1699966f..08114b3fef1e 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -19,17 +19,6 @@ export PYTHON		?= $(PYTHON_INTERPRETER)
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index 5a2b4c9f65fa..fddf5a575bf6 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -39,8 +39,8 @@ cppflags-$(CONFIG_X86)    += -m32
  
- export CHECKPOLICY	?= checkpolicy
- 
--export XEN_ROOT := $(CURDIR)/..
--
--abs_objtree := $(CURDIR)
--abs_srctree := $(CURDIR)
--
--export abs_srctree abs_objtree
--
--srctree := .
--objtree := .
--export srctree objtree
--
- # Do not use make's built-in rules and variables
- MAKEFLAGS += -rR
- 
-@@ -41,16 +30,6 @@ SRCARCH=$(shell echo $(ARCH) | \
-               -e s'/riscv.*/riscv/g')
- export ARCH SRCARCH
- 
--# Don't break if the build process wasn't called from the top level
--# we need XEN_TARGET_ARCH to generate the proper config
--include $(XEN_ROOT)/Config.mk
--
--# Set ARCH/SUBARCH appropriately.
--export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
--export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
--                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
--                                -e s'/riscv.*/riscv/g')
--
- # Allow someone to change their config file
- export KCONFIG_CONFIG ?= .config
- 
-@@ -64,8 +43,6 @@ default: build
- .PHONY: dist
- dist: install
- 
--include scripts/Kbuild.include
--
- ifneq ($(root-make-done),y)
- # section to run before calling Rules.mk, but only once.
- 
-@@ -141,6 +118,17 @@ endif
- 
- export quiet Q KBUILD_VERBOSE
- 
-+abs_objtree := $(CURDIR)
-+abs_srctree := $(CURDIR)
-+
-+export abs_srctree abs_objtree
-+
-+srctree := .
-+objtree := .
-+export srctree objtree
-+
-+export XEN_ROOT := $(CURDIR)/..
-+
- # To make sure we do not include .config for any of the *config targets
- # catch them early, and hand them over to tools/kconfig/Makefile
- 
-@@ -163,6 +151,18 @@ ifneq ($(filter %config,$(MAKECMDGOALS)),)
-     config-build := y
  endif
  
-+include scripts/Kbuild.include
+-public-$(CONFIG_X86) := $(wildcard $(src)/public/arch-x86/*.h $(src)/public/arch-x86/*/*.h)
+-public-$(CONFIG_ARM) := $(wildcard $(src)/public/arch-arm/*.h $(src)/public/arch-arm/*/*.h)
++public-$(CONFIG_X86) := $(wildcard $(srcdir)/public/arch-x86/*.h $(srcdir)/public/arch-x86/*/*.h)
++public-$(CONFIG_ARM) := $(wildcard $(srcdir)/public/arch-arm/*.h $(srcdir)/public/arch-arm/*/*.h)
+ 
+ .PHONY: all
+ all: $(addprefix $(obj)/,$(headers-y))
+@@ -81,10 +81,23 @@ ifeq ($(XEN_TARGET_ARCH),$(XEN_COMPILE_ARCH))
+ 
+ all: $(obj)/headers.chk $(obj)/headers99.chk $(obj)/headers++.chk
+ 
+-PUBLIC_HEADERS := $(filter-out $(src)/public/arch-% $(src)/public/dom0_ops.h, $(wildcard $(src)/public/*.h $(src)/public/*/*.h) $(public-y))
++public-hdrs-path := $(srcdir)/public
+ 
+-PUBLIC_C99_HEADERS := $(src)/public/io/9pfs.h $(src)/public/io/pvcalls.h
+-PUBLIC_ANSI_HEADERS := $(filter-out $(src)/public/%ctl.h $(src)/public/xsm/% $(src)/public/%hvm/save.h $(PUBLIC_C99_HEADERS), $(PUBLIC_HEADERS))
++public-list-headers = $(wildcard $1/*.h $1/*/*.h)
++public-filter-headers = $(filter-out $(addprefix $(public-hdrs-path)/, $($1-filter)), $($1))
 +
-+# Don't break if the build process wasn't called from the top level
-+# we need XEN_TARGET_ARCH to generate the proper config
-+include $(XEN_ROOT)/Config.mk
++public-headers := $(call public-list-headers, $(public-hdrs-path)) $(public-y)
++public-ansi-headers := $(public-headers)
++public-c99-headers := $(addprefix $(public-hdrs-path)/, io/9pfs.h io/pvcalls.h)
 +
-+# Set ARCH/SUBARCH appropriately.
-+export TARGET_SUBARCH  := $(XEN_TARGET_ARCH)
-+export TARGET_ARCH     := $(shell echo $(XEN_TARGET_ARCH) | \
-+                            sed -e 's/x86.*/x86/' -e s'/arm\(32\|64\)/arm/g' \
-+                                -e s'/riscv.*/riscv/g')
++public-headers-filter := dom0_ops.h arch-%
++public-ansi-headers-filter := %ctl.h xsm/% %hvm/save.h $(public-headers-filter) \
++    $(patsubst $(public-hdrs-path)/%,%,$(public-c99-headers))
++public-c99-headers-filter :=
 +
- export CONFIG_SHELL := $(SHELL)
- export YACC = $(if $(BISON),$(BISON),bison)
- export LEX = $(if $(FLEX),$(FLEX),flex)
++PUBLIC_HEADERS := $(call public-filter-headers,public-headers)
++PUBLIC_ANSI_HEADERS := $(call public-filter-headers,public-ansi-headers)
++PUBLIC_C99_HEADERS := $(call public-filter-headers,public-c99-headers)
+ 
+ $(src)/public/io/9pfs.h-prereq := string
+ $(src)/public/io/pvcalls.h-prereq := string
 -- 
 Anthony PERARD
 
