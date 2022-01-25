@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C86C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:02:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260080.449184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69D16C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jan 2022 11:07:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260085.449206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJaG-00033n-HT; Tue, 25 Jan 2022 11:01:56 +0000
+	id 1nCJf9-0004v0-EA; Tue, 25 Jan 2022 11:06:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260080.449184; Tue, 25 Jan 2022 11:01:56 +0000
+Received: by outflank-mailman (output) from mailman id 260085.449206; Tue, 25 Jan 2022 11:06:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCJaG-00033W-Cz; Tue, 25 Jan 2022 11:01:56 +0000
-Received: by outflank-mailman (input) for mailman id 260080;
- Tue, 25 Jan 2022 11:01:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nCJf9-0004ut-B8; Tue, 25 Jan 2022 11:06:59 +0000
+Received: by outflank-mailman (input) for mailman id 260085;
+ Tue, 25 Jan 2022 11:06:58 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rP4T=SJ=citrix.com=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nCJaE-0006t5-9Y
- for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:01:54 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 330f2d7b-7dce-11ec-bc18-3156f6d857e4;
- Tue, 25 Jan 2022 12:01:52 +0100 (CET)
+ id 1nCJaS-0006Mn-7O
+ for xen-devel@lists.xenproject.org; Tue, 25 Jan 2022 11:02:08 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 3b8c4e4f-7dce-11ec-8fa7-f31e035a9116;
+ Tue, 25 Jan 2022 12:02:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,72 +38,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 330f2d7b-7dce-11ec-bc18-3156f6d857e4
+X-Inumbo-ID: 3b8c4e4f-7dce-11ec-8fa7-f31e035a9116
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643108513;
+  d=citrix.com; s=securemail; t=1643108527;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=UTtvWGWnsc4Kfk8uqbFvH6lyw4/Lc7jsKNMziS1Unkw=;
-  b=Pw4XOPmqNx0g5Tx4JaDBtCEMYxEVxv1j4c9pSiSlGfZsKiX0jNe4Mz/g
-   o0TmibnBzItdnhHFxnz/SzCSaNi+xXV5+8yzIpGbNNrJbiejnIpQU/K39
-   xhreuSfeuXCWZtz/bZcb6JHPX0jVwBWHtqenzGyBm3OhYCQdVIZxhD+Dr
-   8=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: fnPv028Dv8hxYFLvrtDw7flu2U67JvA+YF9uzrD8YmhIvPRreOqdNY5nfqPV6gOaM7kGusQTuU
- cZt4fTObB4XtYlCNMNb1PdwDB6oaKqDFkOHli6HAOrDg/U6nHCzSON5Ow0YW7AEc9MGofiLjbl
- CwhQlUj/8KB45ZBsFec4Q3+vRIlBzIct8NyGnzNe+BmTk+DoTdzgn7aC44A7sV960eAIsFhnb5
- zeR2tuDDaHKf8bvsyUaKlqi5+BBusVdzfL5WlW4zSQ0AAPoSkhYheSMsEUzH2fHh/wW67ocrTX
- /Cy0U7Tk7X430j6Kr4nf8h/a
+  bh=JPbHo9Jo8aOfD2/lllmxqNTLME6igV4FyqbCCTnSPrY=;
+  b=C9SKhZlRNGdRKrIf2rLfHEP43Jah2yddpri85dYJn5W+MdZJHR3+Bz5P
+   dy+UKgE0dWdTBEYTt/f7yDnURHV2UQnUPvlrdZKMJZ58rIXiw1jJ5CpCn
+   5+IrH68Jm1anKYY663RnLLit/XXjsZ5X6bdN6Tz9HvbiWIW73oj+zXetm
+   g=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: QWUz9YK1cap7V4Zd2e7r/gMgMbdEYXpIYHj+3ypl/iTdiOBv93LahrLDbp7riKnu69FijRq9W4
+ ZuW9kwh4vKMZYKw9OqtNFyrfUA5AwmXrB4iEKq/1WjDT9gIl89NL9ZhLIoM4j2yZzGWAEAElC2
+ e0Oy7VqcfZabkNB720an1yfBBNr1KrySHqPnVMEzMfk63WOjYc8XW7iF8WH/2Ug6HKOVpsfVzl
+ lcAZ5x04DmnF5yimbojQBeq0dcD2sI1pLN14MYniSRhtfWiZeNVcLdAmtIzGZGr0I3aofV1iGd
+ B7X/H34N4+G9sbsIuTHUehFy
 X-SBRS: 5.2
-X-MesageID: 64860857
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 62170391
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Q3iuzaw5/N4AiDkvpQF6t+c+wCrEfRIJ4+MujC+fZmUNrF6WrkVTy
- WIYXmuDMqvfNjHwfY90YdjkoR9TscWBmNVhTANrrCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wrRk2tcAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt+5By
- fUStZWBcCIKGoGLo78tAz9+AggraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVors0lMMnsOpJZonx6xCvVJf0nXYrCU+PB4towMDIY2JweQ66OO
- pVxhTxHcz3GeDREIXUtOb0vg9uE3mf2VThppwfAzUYwyzeKl1EguFT3C/Lfd8aWX8xTkgCdr
- 3jf4mXiKhgAMZqUzj/t2kyrgujDjCbqQrU4Hbez9uNpqFCLz2lVAxoTPXOxpvOzm0OlW9ZSL
- kUS0iUrpKk2skesS7HVVBq+pnmGshcCWsF4HOgz6QXLwa3Riy6QAmkfUjdAcpoorsYwTj0x/
- kCFlJXiAjkHmKKRYWKQ8PGTtzzaESofIHIGZCQEZRAY+NSlq4Y25jrfQ9AmHKOrg9ndHTDr3
- yvMvCU4n68Uj8MAy+O851+vqzCjvJHNSiY84wzFWWTj5QR8DKa+fJCh41Xf6fdGLa6aQ0OHs
- XxCnNKRhMgMEJWMmSqlUOgLWraz6J643Cb02AA1WcN7rnL0piDlLds4DCxCyFlBDPYFWWDpa
- X7qnCB1yNhoZ0v6S4lmStfkYyg19pTIGdPgX/HSS9NBZJltaQOKlB1TiV6sM3PFyxZ1z/xmU
- XuPWYP1VCtBV/w7pNajb7pFidcWKjYCKXQ/rHwR5zCuyvKgaXGcUt/p23PeP7livMtoTOg4m
- uuz1vdmKT0CCIUSgQGNqOb/yGzmy1BhWfgaTOQMLoa+zvJOQj1JNhMo6epJl3ZZt6pUjPzU2
- Xq2R1VVzlHy7VWed1nRMiwyN+yxDMcnxZ7eAcDKFQz0s5TESd33hJrzirNtJeV3nACd5aAco
- wY5lzWoXa0UF2WvF8U1Zpjhto1yHClHdirVVxdJlAMXJsY6LySQo4eMVlK2qEEmU3Tr3eNj/
- ezI/l6LEPIrGlU5ZO6LOa3H8r9ElSVH8A6EdxGWcoA7lYSF2NUCFhEdedduc5hTck2Sn2XDv
- +tUaD9BzdTwT0YO2IGhrci5Q02BSIOSx2JWQDvW66iYLy7f8jbxyINMSr/QLzvcSHn16OOpY
- uAMl6PwN/gOnVBrtYtgEuk0kfJitoW3/7IKnB55GHjrbkiwDu8yKHexwsQS5LZGwaVUuFXqV
- xvXqMVaI7iAJOjsDEUVeFg+du2G2PxNwmvS4P05LV/U/ihy+LbbA0xeMwPV0H5WLadvMZNjy
- uAk4ZZE5wu6gxssE9CHkiELqDjcci1eC/0q78hIDpXqhwwnzkB5TabdUiKmsouSb9hsM1UxJ
- mPGjqT1mLkBlFHJdGA+FCaR0LMF14gOoh1D0HQLO0+NxojenvYy0RBcrWY3QwBSwkkV2u5/I
- DE2ZUh8JKHI9DZ0nslTGWurHlgZVhGe/0XwzXoPlXHYEBb0BjCccjVlNLbf5l0d/kJdYiNfr
- eORx2vSWDr3eN38g3kpUkl/pv2/FdF8+2UuQix88xhpy3XiXQfYvw==
-IronPort-HdrOrdr: A9a23:GRDRuqvO9fbScbBbzpG153FT7skDcNV00zEX/kB9WHVpmszxra
- +TdZMgpHjJYVcqKQgdcL+7WZVoLUmwyXcx2/hyAV7AZniDhILLFuFfBOLZqlWKcREWtNQtsJ
- uIG5IObuEYZmIVsS+V2mWF+q4bsbq6zJw=
+IronPort-Data: A9a23:cWLiyq3XWSWLQNEXyPbD5S92kn2cJEfYwER7XKvMYLTBsI5bp2YDm
+ zAdWmCBOaqPMzbzLtx+a4u/8RgFsJfQy9UxSAc6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o6wbNh2+aEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhh9Ug1
+ 4VvrY2LTiAUB5Odsd4tcShDOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Ej8I/LM7tLcUHt2tp1z3xBvc6W5HTBa7N4Le02R9u3JkRRa2PP
+ qL1bxIoVBXySE1RZW0vJ440lrvwhlDtXgxX/Qf9Sa0fvDGIkV0ZPKLWGMHOZtWASMFRn0CZj
+ mHL5WL0BlcdLtP34SWB2mKhgKnIhyyTcIAPELy18NZ6jVvVwXYcYDUGWF3+rfSnh0qWX9NEN
+ 1dS6icotbI19kGgUp/6RRLQiHyOswMYWtFQO/Yn8wzLwa3Rizt1HUBdEGQHMoZ/8pZrG3p6j
+ Tdlgu8FGxR3teyKGVCF54yTig6LB3k8F18gVDQtGF5tD8bYnKk/iRfGT9BGGaGzj8HoFTyY/
+ w1mvBTSlJ1I05dVivzTEUTvxmv1+8OXFlJdChD/Azr9hj6VcrJJcGBBBbLzyf9bZLiUQVCa1
+ JTvs5jPtbteZX1hecHkfQnsIF1Lz6vdWNE/qQQ2d3XEy9hL0yT/FWy3yGomTHqFyu5eJVfUj
+ Lb74Gu9HqN7MnqwdrNQaImsEcksxqWIPY27CquMMosRPcYgJVfvEMRSiai4hTyFfK8EyvlXB
+ HtmWZz0USZy5VpPklJauNvxIZd0n3tjlAs/tLjwzgi90Kr2WZJmYextDbd6VchgtPnsiFyMq
+ 753bpLWoz0CDrGWSnSJoOY7cABbRVBmVMueg5EGKYa+zv9ORTtJ5wn5m+1xIuSIXs19y4/1w
+ 51KchYIkQWk3Syed1zih7IKQOqHYKuTZEkTZUQEVWtEEVB6CWp2xKtAJZYxY5c98+lvkax9Q
+ /UfIp3SCfVTUDXXvT8aaMCl/oBlcR2qgyOIPjakP2djL8IxGVSR94+2ZBbr+QkPEjGz6Zk0r
+ Yq/216JWpEEXQljUprbMar901OrsHEBs+tuRE+UcMJLcUDh/dEyeSz8h/M6Oe8WLhDHymfI3
+ gqaG05A9+LMv5U04J/CgqXd99WlFO53H0x7GWjH7OnpaXmGrzT7mYIZCbSGZzHQUm/w6Z6OX
+ +QNwqGuKuADkXZLr5F4T+Rhw5Uh6oa9vLRd1AllQinGNgz5FrN6L3Ca9sBTrakRlKRBsA67V
+ 0/TqNlXPbKFZJHsHFILfVd3a+2C0bcfmyXI7ORzK0L/vXcl8L2CWERUHh+NlC0Cc+clbNJ7m
+ b8s6JwM9giyqhs2KdLX3Clb+lOFImEET6h65IoRB5Xmi1Zzx1xPCXAG5vQaPH1bhw1wD3QX
+IronPort-HdrOrdr: A9a23:Ll6cZaGeAc3uC1BppLqE7seALOsnbusQ8zAXP0AYc3Nom6uj5q
+ eTdZUgpGbJYVkqOU3I9ersBEDEewK/yXcX2/h0AV7BZmnbUQKTRekIh7cKgQeQfhEWntQts5
+ uIGJIRNDSfNzRHZL7BkWqFL+o=
 X-IronPort-AV: E=Sophos;i="5.88,314,1635220800"; 
-   d="scan'208";a="64860857"
+   d="scan'208";a="62170391"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Julien Grall <jgrall@amazon.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
-	"Julien Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	"Bertrand Marquis" <bertrand.marquis@arm.com>, Bob Eshleman
-	<bobbyeshleman@gmail.com>, Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>
-Subject: [XEN PATCH v9 17/30] build: add headers path to CFLAGS once for all archs
-Date: Tue, 25 Jan 2022 11:00:50 +0000
-Message-ID: <20220125110103.3527686-18-anthony.perard@citrix.com>
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v9 22/30] build: rework coverage and ubsan CFLAGS handling
+Date: Tue, 25 Jan 2022 11:00:55 +0000
+Message-ID: <20220125110103.3527686-23-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220125110103.3527686-1-anthony.perard@citrix.com>
 References: <20220125110103.3527686-1-anthony.perard@citrix.com>
@@ -111,69 +103,75 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This just remove duplication.
+When assigning a value a target-specific variable, that also affect
+prerequisite of the target. This is mostly fine, but there is one case
+where we will not want the COV_FLAGS added to the CFLAGS.
+
+In arch/x86/boot, we have "head.o" with "cmdline.S" as prerequisite
+and ultimately "cmdline.o", we don't want COV_FLAGS to that last one.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/Makefile           | 3 +++
- xen/arch/arm/arch.mk   | 3 ---
- xen/arch/riscv/arch.mk | 2 --
- xen/arch/x86/arch.mk   | 2 --
- 4 files changed, 3 insertions(+), 7 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 6c5c69d2e19b..65b09c20a599 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -312,6 +312,9 @@ CFLAGS += -flto
- LDFLAGS-$(CONFIG_CC_IS_CLANG) += -plugin LLVMgold.so
+Notes:
+    v8:
+    - reorder target-specific assignments
+    - fix typo in comment
+    - reviewed
+
+ xen/Rules.mk | 21 ++++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
+
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index 5f2368805b36..abeba1ab7494 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -126,19 +126,31 @@ targets += $(targets-for-builtin)
+ 
+ $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += -DINIT_SECTIONS_ONLY
+ 
++non-init-objects = $(filter-out %.init.o, $(obj-y) $(obj-bin-y) $(extra-y))
++
+ ifeq ($(CONFIG_COVERAGE),y)
+ ifeq ($(CONFIG_CC_IS_CLANG),y)
+     COV_FLAGS := -fprofile-instr-generate -fcoverage-mapping
+ else
+     COV_FLAGS := -fprofile-arcs -ftest-coverage
+ endif
+-$(filter-out %.init.o $(nocov-y),$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += $(COV_FLAGS)
++
++# Reset COV_FLAGS in cases where an objects has another one as prerequisite
++$(nocov-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
++    COV_FLAGS :=
++
++$(non-init-objects): _c_flags += $(COV_FLAGS)
  endif
  
-+CFLAGS += -I$(srctree)/include
-+CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
+ ifeq ($(CONFIG_UBSAN),y)
+ # Any -fno-sanitize= options need to come after any -fsanitize= options
+-$(filter-out %.init.o $(noubsan-y),$(obj-y) $(obj-bin-y) $(extra-y)): \
+-CFLAGS-y += $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
++UBSAN_FLAGS := $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
 +
- # Note that link order matters!
- ALL_OBJS-y                := common/built_in.o
- ALL_OBJS-y                += drivers/built_in.o
-diff --git a/xen/arch/arm/arch.mk b/xen/arch/arm/arch.mk
-index 4e3f7014305e..094b67072304 100644
---- a/xen/arch/arm/arch.mk
-+++ b/xen/arch/arm/arch.mk
-@@ -1,9 +1,6 @@
- ########################################
- # arm-specific definitions
++# Reset UBSAN_FLAGS in cases where an objects has another one as prerequisite
++$(noubsan-y) $(filter %.init.o, $(obj-y) $(obj-bin-y) $(extra-y)): \
++    UBSAN_FLAGS :=
++
++$(non-init-objects): _c_flags += $(UBSAN_FLAGS)
+ endif
  
--CFLAGS += -I$(srctree)/include
--CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
--
- $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
- $(call cc-option-add,CFLAGS,CC,-Wnested-externs)
+ ifeq ($(CONFIG_LTO),y)
+@@ -167,6 +179,9 @@ a_flags = -MMD -MP -MF $(depfile) $(XEN_AFLAGS)
  
-diff --git a/xen/arch/riscv/arch.mk b/xen/arch/riscv/arch.mk
-index 694ba053ceab..ae8fe9dec730 100644
---- a/xen/arch/riscv/arch.mk
-+++ b/xen/arch/riscv/arch.mk
-@@ -11,5 +11,3 @@ riscv-march-$(CONFIG_RISCV_ISA_C)       := $(riscv-march-y)c
- # -mcmodel=medlow would force Xen into the lower half.
+ include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
  
- CFLAGS += -march=$(riscv-march-y) -mstrict-align -mcmodel=medany
--CFLAGS += -I$(srctree)/include
--CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
-diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
-index e39fa15be7e3..8bc0e01ceb2b 100644
---- a/xen/arch/x86/arch.mk
-+++ b/xen/arch/x86/arch.mk
-@@ -3,8 +3,6 @@
++c_flags += $(_c_flags)
++a_flags += $(_c_flags)
++
+ c_flags += $(CFLAGS-y)
+ a_flags += $(CFLAGS-y) $(AFLAGS-y)
  
- export XEN_IMG_OFFSET := 0x200000
- 
--CFLAGS += -I$(srctree)/include
--CFLAGS += -I$(srctree)/arch/$(TARGET_ARCH)/include
- CFLAGS += -I$(srctree)/arch/x86/include/asm/mach-generic
- CFLAGS += -I$(srctree)/arch/x86/include/asm/mach-default
- CFLAGS += -DXEN_IMG_OFFSET=$(XEN_IMG_OFFSET)
 -- 
 Anthony PERARD
 
