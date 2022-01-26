@@ -4,29 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C06E0C63682
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 08:45:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260722.450741 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC0EC28CF5
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 09:45:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260754.450787 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCdvd-0002Dh-80; Wed, 26 Jan 2022 08:45:21 +0000
+	id 1nCer5-0003DR-QC; Wed, 26 Jan 2022 09:44:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260722.450741; Wed, 26 Jan 2022 08:45:21 +0000
+Received: by outflank-mailman (output) from mailman id 260754.450787; Wed, 26 Jan 2022 09:44:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCdvc-0002CY-Lr; Wed, 26 Jan 2022 08:45:20 +0000
-Received: by outflank-mailman (input) for mailman id 260722;
- Wed, 26 Jan 2022 08:45:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DU/T=SK=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nCdva-000088-BN
- for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 08:45:18 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 46e3417d-7e84-11ec-8eb8-a37418f5ba1a;
- Wed, 26 Jan 2022 09:45:15 +0100 (CET)
+	id 1nCer5-0003DK-N6; Wed, 26 Jan 2022 09:44:43 +0000
+Received: by outflank-mailman (input) for mailman id 260754;
+ Wed, 26 Jan 2022 09:44:42 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1nCer4-0003DE-Hn
+ for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 09:44:42 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nCer4-00074r-2u; Wed, 26 Jan 2022 09:44:42 +0000
+Received: from 54-240-197-224.amazon.com ([54.240.197.224] helo=[10.95.98.192])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nCer3-0007lR-T9; Wed, 26 Jan 2022 09:44:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,162 +41,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46e3417d-7e84-11ec-8eb8-a37418f5ba1a
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643186715;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=DMIani3bgij8H8/jeaN9V9MoninPkgoxwrQXOevq9nM=;
-  b=BLyv/L4VLcFDrAzfGQbGmL/qHyh+hn0NzYKIiEvAxRX6lccMzVG/iBuN
-   GbxWcitROtT6Cc5giPkVJUCrLTjHkLtZNZYKHIIXL+Fpg/C9zuSEBS+x7
-   asAI7hj4fMbUJcv898nIDKwdiatnlb7nk2HPCcB09SUuyFHq+uTKCTjCK
-   0=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: tc9ZHDIppsRfMIg6eDk+iTqJGswfDGiDJsHK6jtcrYUUSRBHnyUR1kCsvrymg77jmnYisBzkS4
- TYkYm6AKS7ZNd+YxgmI6gnXlXioYALghjpubMZ8sA7hJossqZK0pt+Fl88tvg+sCcJc1UuJ6e0
- YD/iJddiyGOmeeNV4C26D0yvUjY5+cbWjzQNAECO4IGvjG56dnIqdj5UASYB6KO44N6RWpX0WT
- 8HLTjqwZCCTzdRcUHn5W/SZmKoqug5Bb9772tgqpW1f0rGnpGPLF4nt0fpOigIpkylyD4ZtqAB
- 17p0S2vSrueJY91bMkQpT2Ry
-X-SBRS: 5.2
-X-MesageID: 62781736
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:99fEeaxhJC0wHToEKi16t+fjwSrEfRIJ4+MujC+fZmUNrF6WrkUGn
- 2cWWDvUOqyLZGvwfY0iPNu1908GucfUn4M1GlRsqCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wrRn2tcAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt8BLk
- 98VubzzcwcwB4/opvUHED9SUD4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JoRTa+BP
- JRxhTxHdC/SWQ10Bn4uLrk5s8ChoHDlYRd5gQfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
- krk1WnkBhARNPSE1CGItHmrg4fnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
- GRNpHBo9/JrshX2EJ+tBHVUvUJooDYMYYFaS+EaqzuN05P2xziIHCsiRH1ePYlOWNANeRQm0
- VqAntXMDDNpsaGIRX/1yop4vQ9eKgBOczZcOHZsoR8tpoC6/dpt1k6nosNLTfbt5uAZDw0c1
- NxjQMIWo7wIxfAG2Kyglbwsq2L9/8OZJuLZC+i+Y45E0u+bTNL0D2BLwQKChRqlEGp/ZgPQ1
- JTjs5PGhN3i9bnXyESwrBwlRdlFHcqtPjzGmkJIFJI87Tmr8HPLVdkOvGonfxo3bppZKWCBj
- KrvVeV5vs470JyCNvcfXm5MI55ykfiI+SrNC5g4keaikrAuLVTarUmClGab3nz3kVhErE3ME
- czzTCpYNl5DUf4P5GPvH481iOZ3rghjmz+7bc2lnnyPjOrPDFbIGOxtGAbfMYgEAFas/V+9H
- yB3bZXakn2ykYTWP0HqzGLkBQladCdgXcGv9ZU/myzqClMOJVzNwsT5mdsJE7GJVYwP/gsR1
- n3iCEJe1nTlgnjLdVeDZnx5Meu9Vpdjt3MreycrOA/wiXQkZI+u6oYZdoc2IuZ7pLAyk6YsQ
- qlXYdiED9ROVi/Dp2YXY67iodEwbx+snw+PYXaoOWBtY556SgXV0db4ZQ+zpjIWBy+6uJJm8
- b2t3w/WW7QZQAFmAJqEYf6j1Qrp73MchPhzTw3DJdwKIBfg941jKirQiP4rIp5TdUWfl2XCj
- wvPWEUWv+jApYMx4eLlv6Hcotf7CfZ6E2pbA3LfseS8Ox7F8zfx2oRHSuuJI2zQDTum5KW4a
- OxJ5PjgK/lbzk1Suo9xHrs3n6Iz49zj++1Twgh+RSiZal2qDvVrI2Wc3NkJvapIn+cLtQyzU
- 0OJ299bJbTWZ5+1TA9PfFIoPraZyPUZujjO9vBkckz16Rh+8KeDTUgPbQKHjzZQLectPY4oq
- Qv7VBX6N+BrZsIWD+u7
-IronPort-HdrOrdr: A9a23:vpH336DhchpZ3EDlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
- xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 9dmsNFaeEYY2IUsS+D2njbL+od
-X-IronPort-AV: E=Sophos;i="5.88,317,1635220800"; 
-   d="scan'208";a="62781736"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 5/8] x86/spec-ctrl: Introduce new has_spec_ctrl boolean
-Date: Wed, 26 Jan 2022 08:44:49 +0000
-Message-ID: <20220126084452.28975-6-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220126084452.28975-1-andrew.cooper3@citrix.com>
-References: <20220126084452.28975-1-andrew.cooper3@citrix.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=/1k0ls0duDmH7JNtDh/Pp5kADAmxetgGMMjYePbknc4=; b=b6GeXGnZl9xJ4jiH6LnlG4vYw5
+	Sn7amNhAz9iaxQahd7+XqWaD2GfJmGkj/RR8jkX+98Jvn4o3Jb8EyVJlDjYKVSBSB4NAneTUjC/WA
+	tF1GFMao8S0F3d8I7rPs5AriBscxbhsSAEwyXeEaJixhRynPkH7THPoc5TyBHTRjnGQI=;
+Message-ID: <b28ca89c-290d-2c56-1bf7-a5be3dacc55a@xen.org>
+Date: Wed, 26 Jan 2022 09:44:39 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.5.1
+Subject: Re: [XEN v4] xen/arm64: io: Decode ldr/str post-indexing instructions
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>,
+ xen-devel@lists.xenproject.org, stefanos@xilinx.com,
+ Volodymyr_Babchuk@epam.com, bertrand.marquis@arm.com,
+ andre.przywara@arm.com, jbeulich@suse.com, wei.chen@arm.com,
+ Ayan Kumar Halder <ayankuma@xilinx.com>
+References: <20220125211808.23810-1-ayankuma@xilinx.com>
+ <8eb4949c-aa9f-38fd-682e-7620b5f9e03c@xen.org>
+ <alpine.DEB.2.22.394.2201251519120.27308@ubuntu-linux-20-04-desktop>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <alpine.DEB.2.22.394.2201251519120.27308@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Most MSR_SPEC_CTRL setup will be common between Intel and AMD.  Instead of
-opencoding an OR of two features everywhere, introduce has_spec_ctrl instead.
+Hi,
 
-Reword the comment above the Intel specific alternatives block to highlight
-that it is Intel specific, and pull the setting of default_xen_spec_ctrl.IBRS
-out because it will want to be common.
+On 26/01/2022 01:45, Stefano Stabellini wrote:
+> On Tue, 25 Jan 2022, Julien Grall wrote:
+>>> +
+>>>        /* TODO: Handle ARM instruction */
+>>>        gprintk(XENLOG_ERR, "unhandled ARM instruction\n");
+>>>          return 1;
+>>>    }
+>>>    +#if CONFIG_ARM_64
+>>> +void post_increment_register(union ldr_str_instr_class *instr)
+>>
+>> instr should not be modified, so please use const. Also, it would be
+>> preferrable to pass the regs in parameter. So the none of the decoding code
+>> relies on the current regs.
+>>
+>> Furthermore, decode.c should only contain code to update the syndrome and in
+>> theory Arm could decide to provide an valid syndrome in future revision. So I
+>> would move this code in io.c (or maybe traps.c).
+> 
+> I was the one to suggest moving it to decode.c to keep it closer to the
+> decoding function it is related to, and also because it felt a bit out
+> of place in io.c.
 
-No functional change.
+How about traps.c? This is where we also take care of incrementing pc 
+after we handle a MMIO trap.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/spec_ctrl.c | 22 +++++++++++-----------
- 1 file changed, 11 insertions(+), 11 deletions(-)
+>>> +{
+>>> +    struct cpu_user_regs *regs = guest_cpu_user_regs();
+>>> +    register_t val;
+>>> +
+>>> +    /* handle when rn = SP */
+>>> +    if ( instr->code.rn == 31 )
+>>> +        val = regs->sp_el1;
+>>> +    else
+>>> +        val = get_user_reg(regs, instr->code.rn);
+>>> +
+>>> +    val += instr->code.imm9;
+>>> +
+>>> +    if ( instr->code.rn == 31 )
+>>> +        regs->sp_el1 = val;
+>>> +    else
+>>> +        set_user_reg(regs, instr->code.rn, val);
+>>> +}
+>>> +#endif
+>>> +
+>>>    /*
+>>>     * Local variables:
+>>>     * mode: C
+>>> diff --git a/xen/arch/arm/decode.h b/xen/arch/arm/decode.h
+>>> index 4613763bdb..511cd4a05f 100644
+>>> --- a/xen/arch/arm/decode.h
+>>> +++ b/xen/arch/arm/decode.h
+>>> @@ -23,6 +23,35 @@
+>>>    #include <asm/regs.h>
+>>>    #include <asm/processor.h>
+>>>    +/*
+>>> + * Refer to the ARMv8 ARM (DDI 0487G.b), Section C4.1.4 Loads and Stores
+>>> + * Page 318 specifies the following bit pattern for
+>>> + * "load/store register (immediate post-indexed)".
+>>> + *
+>>> + * 31 30 29  27 26 25  23   21 20              11   9         4       0
+>>> + * ___________________________________________________________________
+>>> + * |size|1 1 1 |V |0 0 |opc |0 |      imm9     |0 1 |  Rn     |  Rt   |
+>>> + * |____|______|__|____|____|__|_______________|____|_________|_______|
+>>> + */
+>>> +union ldr_str_instr_class {
+>>> +    uint32_t value;
+>>> +    struct ldr_str {
 
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 8a550d0a0902..2072daf66245 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -927,7 +927,7 @@ static __init void mds_calculations(uint64_t caps)
- void __init init_speculation_mitigations(void)
- {
-     enum ind_thunk thunk = THUNK_DEFAULT;
--    bool ibrs = false, hw_smt_enabled;
-+    bool has_spec_ctrl, ibrs = false, hw_smt_enabled;
-     bool cpu_has_bug_taa;
-     uint64_t caps = 0;
- 
-@@ -936,6 +936,8 @@ void __init init_speculation_mitigations(void)
- 
-     hw_smt_enabled = check_smt_enabled();
- 
-+    has_spec_ctrl = boot_cpu_has(X86_FEATURE_IBRSB);
-+
-     /*
-      * First, disable the use of retpolines if Xen is using shadow stacks, as
-      * they are incompatible.
-@@ -973,11 +975,11 @@ void __init init_speculation_mitigations(void)
-              */
-             else if ( retpoline_safe(caps) )
-                 thunk = THUNK_RETPOLINE;
--            else if ( boot_cpu_has(X86_FEATURE_IBRSB) )
-+            else if ( has_spec_ctrl )
-                 ibrs = true;
-         }
-         /* Without compiler thunk support, use IBRS if available. */
--        else if ( boot_cpu_has(X86_FEATURE_IBRSB) )
-+        else if ( has_spec_ctrl )
-             ibrs = true;
-     }
- 
-@@ -1008,10 +1010,7 @@ void __init init_speculation_mitigations(void)
-     else if ( thunk == THUNK_JMP )
-         setup_force_cpu_cap(X86_FEATURE_IND_THUNK_JMP);
- 
--    /*
--     * If we are on hardware supporting MSR_SPEC_CTRL, see about setting up
--     * the alternatives blocks so we can virtualise support for guests.
--     */
-+    /* Intel hardware: MSR_SPEC_CTRL alternatives setup. */
-     if ( boot_cpu_has(X86_FEATURE_IBRSB) )
-     {
-         if ( opt_msr_sc_pv )
-@@ -1030,11 +1029,12 @@ void __init init_speculation_mitigations(void)
-             default_spec_ctrl_flags |= SCF_ist_wrmsr;
-             setup_force_cpu_cap(X86_FEATURE_SC_MSR_HVM);
-         }
--
--        if ( ibrs )
--            default_xen_spec_ctrl |= SPEC_CTRL_IBRS;
-     }
- 
-+    /* If we have IBRS available, see whether we should use it. */
-+    if ( has_spec_ctrl && ibrs )
-+        default_xen_spec_ctrl |= SPEC_CTRL_IBRS;
-+
-     /* If we have SSBD available, see whether we should use it. */
-     if ( boot_cpu_has(X86_FEATURE_SSBD) && opt_ssbd )
-         default_xen_spec_ctrl |= SPEC_CTRL_SSBD;
-@@ -1268,7 +1268,7 @@ void __init init_speculation_mitigations(void)
-      * boot won't have any other code running in a position to mount an
-      * attack.
-      */
--    if ( boot_cpu_has(X86_FEATURE_IBRSB) )
-+    if ( has_spec_ctrl )
-     {
-         bsp_delay_spec_ctrl = !cpu_has_hypervisor && default_xen_spec_ctrl;
- 
+No need to name the struct here.
+
+>>> +        unsigned int rt:5;     /* Rt register */
+>>> +        unsigned int rn:5;     /* Rn register */
+>>> +        unsigned int fixed1:2; /* value == 01b */
+>>> +        signed int imm9:9;            /* imm9 */
+>>> +        unsigned int fixed2:1; /* value == 0b */
+>>> +        unsigned int opc:2;    /* opc */
+>>> +        unsigned int fixed3:2; /* value == 00b */
+>>> +        unsigned int v:1;      /* vector */
+>>> +        unsigned int fixed4:3; /* value == 111b */
+>>> +        unsigned int size:2;   /* size */
+>>> +    } code;
+
+It would be best to name it ldr_str so this can be easily extended (e.g. 
+no renaming) for other instructions in the future.
+
+>>> +};
+>>
+>> Looking at the code, post_increment_register() only care about 'rn' and
+>> 'imm9'. So rather than exposing the full instruction, could we instead provide
+>> the strict minimum? I.e something like:
+>>
+>> struct
+>> {
+>>       enum instr_type; /* Unknown, ldr/str post increment */
+>>       union
+>>       {
+>>           struct
+>>           {
+>>             register; /* Register to increment */
+>>             imm;      /* Immediate to add */
+>>           } ldr_str;
+>>       }
+>>       uint64_t register;
+>> }
+>   
+> The full description helped a lot during review. I would prefer to keep
+> it if you don't feel strongly about it.
+
+I haven't suggested to drop the union. Instead, I am suggesting to keep 
+it internally to decode.c and expose something different to the external 
+the user. The idea is the caller doesn't care about the full 
+instruction, it only cares about what action to do.
+
+Basically, what I am asking is an augmented dabt. So all the information 
+are in one place rather than having to carry two structure (struct 
+hsr_dabt and union ldr_str_instr_class) which contain mostly redundant 
+information.
+
+Cheers,
+
 -- 
-2.11.0
-
+Julien Grall
 
