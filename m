@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2A54C2BA4C
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 13:43:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260909.451162 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BA32C63684
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 13:47:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260915.451181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCiaO-0008Pk-Cr; Wed, 26 Jan 2022 13:43:44 +0000
+	id 1nCidx-0000of-88; Wed, 26 Jan 2022 13:47:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260909.451162; Wed, 26 Jan 2022 13:43:44 +0000
+Received: by outflank-mailman (output) from mailman id 260915.451181; Wed, 26 Jan 2022 13:47:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCiaO-0008Pd-9p; Wed, 26 Jan 2022 13:43:44 +0000
-Received: by outflank-mailman (input) for mailman id 260909;
- Wed, 26 Jan 2022 13:43:43 +0000
+	id 1nCidx-0000nn-2X; Wed, 26 Jan 2022 13:47:25 +0000
+Received: by outflank-mailman (input) for mailman id 260915;
+ Wed, 26 Jan 2022 13:47:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GKVh=SK=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1nCiaN-0008PW-7h
- for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 13:43:43 +0000
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [2a00:1450:4864:20::230])
+ <SRS0=xtl2=SK=gmail.com=xadimgnik@srs-se1.protection.inumbo.net>)
+ id 1nCidv-0000mK-OR
+ for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 13:47:23 +0000
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [2a00:1450:4864:20::336])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f982dc07-7ead-11ec-8f75-fffcc8bd4f1a;
- Wed, 26 Jan 2022 14:43:42 +0100 (CET)
-Received: by mail-lj1-x230.google.com with SMTP id e9so9235571ljq.1
- for <xen-devel@lists.xenproject.org>; Wed, 26 Jan 2022 05:43:42 -0800 (PST)
+ id 7ce8618c-7eae-11ec-8f75-fffcc8bd4f1a;
+ Wed, 26 Jan 2022 14:47:22 +0100 (CET)
+Received: by mail-wm1-x336.google.com with SMTP id
+ n12-20020a05600c3b8c00b0034eb13edb8eso1917953wms.0
+ for <xen-devel@lists.xenproject.org>; Wed, 26 Jan 2022 05:47:22 -0800 (PST)
+Received: from [10.7.237.6] (54-240-197-230.amazon.com. [54.240.197.230])
+ by smtp.gmail.com with ESMTPSA id p8sm3873089wrr.16.2022.01.26.05.47.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Jan 2022 05:47:21 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,76 +46,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f982dc07-7ead-11ec-8f75-fffcc8bd4f1a
+X-Inumbo-ID: 7ce8618c-7eae-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gMni9wn2lI5Ay+Ji6nDoLzcxqxpYyMWJcG/nvWMzgec=;
-        b=bK37PTttXv4jaPZFDghvL5yZRHV1HKeDh+hXrHE6+P2MKRtM2aJAnxNQlu3tJ0inqv
-         Vhj56HIU4kBYTudwKYY98HwtCxOCnGxnqR2a8wnYktNlInmtLM26ewY9P2uEEiRvXeJL
-         gq8aGcLnEZFhk+HJvITKq7s7U3J9EuYuqTpwk47pTn0K1IESMsy6STDjiXUCAfFEUKsU
-         UmysZeqI7jbKETSTQMwH1c9Z/cPVDhUAIqSvKrs3gyfGOxcn/zvHbj2dm65kfqsv4Z0/
-         wwynxO6eblSxARqrcAqEddDjh+CeuQhB9zhimzjbsYPVE8qSb6gaQQkzNh6BREATZ2M0
-         U8UA==
+        h=message-id:date:mime-version:user-agent:reply-to:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=4VWrmponanBoZjuBiqM+aKR3MrRMA0UiGhMwRZriHI0=;
+        b=JCXrVw5w8jmMfAHuQXyfZWeBFVP+FfRIIwA/nHcX4GH6GeLxKlZR6B4Oq/4IU8fhhB
+         w5U/MwDVapNuCxttoSQIiVeqbQbPAGyt0jKJLjGDHNeKX8Qswfkt6l6iMsnuMqb4vot8
+         HDpO1CwmmYiBaNA3/bBtfV3N+ixi5q+SiqaZHImKVcNKQWXKFeoA1H7H0RH1hRE7d/n2
+         ZKGcrCZ2h6bm8s9kWePYdkrj3lUiaBkfhSXP5xyS8pQP9rqft1od306SPGNciA7MRSu4
+         gpo554ksHPUu0fpj4LSkzTjQYKRaSzuPCTx9cCF4cF9UjuD0VlXSL9fPjoF9cm6ZnIDM
+         HX9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gMni9wn2lI5Ay+Ji6nDoLzcxqxpYyMWJcG/nvWMzgec=;
-        b=WbpJug/DldhUcqHj2onZGm9hVuB8RdA4HVit8F7ZbGLYqt5HztQArNlGuGrT1AJwl5
-         kwbHKArLMlmx2Xvvsa+iIl/zE3eitvG+Lks16o6Pa61H10oCjzKs6/zRmDHYvaUohfpf
-         zGY3gl7lOwpj5o7KsuFXoaWF86Gv+y8dqMeafzv+swLfXacSJPmkNZFgHZ5+v7iGkWTm
-         zb8vnZAuQeM5rhReiKebAFch+oFDpjHGmNBdqHF/8oa9qTKVP9PoAOsrde08PUdA3tDF
-         q1Dv/Ke+4KYbjc+IcYsznURzkA/SY6/zQMrKxyzksVME7h/G6W0Ol+hK6r3NknmPiQga
-         /5og==
-X-Gm-Message-State: AOAM531XbRTSgpagRLJuqJAImSUT6c8PcX7rPl+DpbAAic6gTM2VcpZS
-	Hy4f0FLaQarB7g+YkGtH1g2b2t8s5inDo0+HbsY=
-X-Google-Smtp-Source: ABdhPJx//VB5lloxzuc+JaSBuwksC5FZfWbpvzfPHPGA+tJE0rT0Vfw5y5CD72i7G5Vxu1w6RvfeqhVzfViG6JiUVoA=
-X-Received: by 2002:a05:651c:1241:: with SMTP id h1mr18260308ljh.459.1643204621863;
- Wed, 26 Jan 2022 05:43:41 -0800 (PST)
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:reply-to
+         :subject:content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=4VWrmponanBoZjuBiqM+aKR3MrRMA0UiGhMwRZriHI0=;
+        b=qurjscOCrDaX3N0iYwrOxZIwPHcMO1l79/jabhDwg7U6Pu1fMBwNfd0HYS/EsW0n8e
+         8C3faGPoKs9o14r8axX7gdyTNLj+/mMwmsSHXn3wXhtpdIqg1DjhKxJZlGFNKV/ATwCE
+         jnNOlwIUXjZ8TZb+Qj14eF1CBxd0aOlOA+UTAKDgwiYXT0qFkTR+cL1PlkUcaZkYnu9K
+         UXLDWrBCN8gikynHDsGHhpR9T1bqIcpYTSxjjSJS4BPCNfF1DSbRcXu9/4fFQAdNfNQb
+         /9b90WpBKcq2s4vw6sleyN0PkgnmOH4OjY+PCdrynkEGRZIF3kGd6rH8+M7y9y0DFFHH
+         4iBA==
+X-Gm-Message-State: AOAM532gJDjpqeMXM9VSGzKRRx964vOMTbVDUahglqaxG0b4+WOAONDN
+	a7V/PgOA9sffnv8ttDYU1kE=
+X-Google-Smtp-Source: ABdhPJz6bCth0FuLHkr3FlcNdgVZJzrqlzHciCO36Yn2SuiNT64swHO+PdQ5i81QyfsYsH4Q5yvUlw==
+X-Received: by 2002:a05:600c:4ec7:: with SMTP id g7mr7480705wmq.171.1643204842294;
+        Wed, 26 Jan 2022 05:47:22 -0800 (PST)
+Message-ID: <2ebaf0d6-a84a-e929-5ac2-597c81d40230@gmail.com>
+Date: Wed, 26 Jan 2022 13:47:20 +0000
 MIME-Version: 1.0
-References: <20211210193434.75566-1-jandryuk@gmail.com> <adfe1c14-f773-0592-e304-d80da8380cc0@gmail.com>
-In-Reply-To: <adfe1c14-f773-0592-e304-d80da8380cc0@gmail.com>
-From: Jason Andryuk <jandryuk@gmail.com>
-Date: Wed, 26 Jan 2022 08:43:30 -0500
-Message-ID: <CAKf6xpv0=ex+OrFb1z4TpaULsmMaPQqmmsxoY_d4yJRt6Zx3sw@mail.gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Reply-To: paul@xen.org
 Subject: Re: [PATCH] xen-hvm: Allow disabling buffer_io_timer
-To: Paul Durrant <paul@xen.org>
-Cc: QEMU <qemu-devel@nongnu.org>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Anthony Perard <anthony.perard@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, 
-	Richard Henderson <richard.henderson@linaro.org>, Eduardo Habkost <eduardo@habkost.net>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, 
-	"open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Language: en-US
+To: Jason Andryuk <jandryuk@gmail.com>, Paul Durrant <paul@xen.org>,
+ Anthony Perard <anthony.perard@citrix.com>
+Cc: QEMU <qemu-devel@nongnu.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Eduardo Habkost <eduardo@habkost.net>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ "open list:X86 Xen CPUs" <xen-devel@lists.xenproject.org>
+References: <20211210193434.75566-1-jandryuk@gmail.com>
+ <adfe1c14-f773-0592-e304-d80da8380cc0@gmail.com>
+ <CAKf6xpv0=ex+OrFb1z4TpaULsmMaPQqmmsxoY_d4yJRt6Zx3sw@mail.gmail.com>
+From: "Durrant, Paul" <xadimgnik@gmail.com>
+In-Reply-To: <CAKf6xpv0=ex+OrFb1z4TpaULsmMaPQqmmsxoY_d4yJRt6Zx3sw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Dec 14, 2021 at 8:40 AM Durrant, Paul <xadimgnik@gmail.com> wrote:
->
-> On 10/12/2021 11:34, Jason Andryuk wrote:
-> > commit f37f29d31488 "xen: slightly simplify bufioreq handling" hard
-> > coded setting req.count = 1 during initial field setup before the main
-> > loop.  This missed a subtlety that an early exit from the loop when
-> > there are no ioreqs to process, would have req.count == 0 for the return
-> > value.  handle_buffered_io() would then remove state->buffered_io_timer.
-> > Instead handle_buffered_iopage() is basically always returning true and
-> > handle_buffered_io() always re-setting the timer.
-> >
-> > Restore the disabling of the timer by introducing a new handled_ioreq
-> > boolean and use as the return value.  The named variable will more
-> > clearly show the intent of the code.
-> >
-> > Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
->
-> Reviewed-by: Paul Durrant <paul@xen.org>
+On 26/01/2022 13:43, Jason Andryuk wrote:
+> On Tue, Dec 14, 2021 at 8:40 AM Durrant, Paul <xadimgnik@gmail.com> wrote:
+>>
+>> On 10/12/2021 11:34, Jason Andryuk wrote:
+>>> commit f37f29d31488 "xen: slightly simplify bufioreq handling" hard
+>>> coded setting req.count = 1 during initial field setup before the main
+>>> loop.  This missed a subtlety that an early exit from the loop when
+>>> there are no ioreqs to process, would have req.count == 0 for the return
+>>> value.  handle_buffered_io() would then remove state->buffered_io_timer.
+>>> Instead handle_buffered_iopage() is basically always returning true and
+>>> handle_buffered_io() always re-setting the timer.
+>>>
+>>> Restore the disabling of the timer by introducing a new handled_ioreq
+>>> boolean and use as the return value.  The named variable will more
+>>> clearly show the intent of the code.
+>>>
+>>> Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+>>
+>> Reviewed-by: Paul Durrant <paul@xen.org>
+> 
+> Thanks, Paul.
+> 
+> What is the next step for getting this into QEMU?
+> 
 
-Thanks, Paul.
+Anthony, can you queue this?
 
-What is the next step for getting this into QEMU?
+   Paul
 
-To re-state more plainly, this patch fixes a bug to let QEMU go idle
-for longer stretches of time.  Without it, buffer_io_timer continues
-to re-arm and fire every 100ms even if there is nothing to do.
+> To re-state more plainly, this patch fixes a bug to let QEMU go idle
+> for longer stretches of time.  Without it, buffer_io_timer continues
+> to re-arm and fire every 100ms even if there is nothing to do.
+> 
+> Regards,
+> Jason
 
-Regards,
-Jason
 
