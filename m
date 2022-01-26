@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A1EC63684
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 08:45:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260716.450671 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C68C63682
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 08:45:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260717.450689 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCdvW-0000Lm-9j; Wed, 26 Jan 2022 08:45:14 +0000
+	id 1nCdvX-0000oJ-G8; Wed, 26 Jan 2022 08:45:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260716.450671; Wed, 26 Jan 2022 08:45:14 +0000
+Received: by outflank-mailman (output) from mailman id 260717.450689; Wed, 26 Jan 2022 08:45:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCdvW-0000KQ-2u; Wed, 26 Jan 2022 08:45:14 +0000
-Received: by outflank-mailman (input) for mailman id 260716;
+	id 1nCdvX-0000na-BS; Wed, 26 Jan 2022 08:45:15 +0000
+Received: by outflank-mailman (input) for mailman id 260717;
  Wed, 26 Jan 2022 08:45:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DU/T=SK=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nCdvV-000088-0k
+ id 1nCdvV-000083-9f
  for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 08:45:13 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 460c27e0-7e84-11ec-8eb8-a37418f5ba1a;
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 45b76c89-7e84-11ec-8f75-fffcc8bd4f1a;
  Wed, 26 Jan 2022 09:45:12 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 460c27e0-7e84-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 45b76c89-7e84-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643186711;
+  d=citrix.com; s=securemail; t=1643186712;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=GrQTjmANh8UZabUWhSSvNr7vTaRzKEVUsBsn2eUeX+c=;
-  b=g1t9akpiaCWMezcCR19Q/Qq7EgkDkyLBX9BMLHUzQaw4DAlZZPcwc+E2
-   46mFmaaxO4rX+MiTAaMQ4TSPkO+6jKWjvzZIjqZA3iaW6r2fo7znCAjNx
-   ni7FgHOHG83NwOYSrh7QPbyXKIQpx8Glfu1T6HU4y80GvZbKC3lGfmgl3
-   c=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: URKlWtNEx2vmIBHwWfZSPJeolnlGSKon28GiMVExP3rFLkBqi4vykSppC3LFyYm23Rsnas6ABP
- dskmSwvfJtDSIkdF1FokylUyo/t/Ne7RevIfgTdo2taSSWKR2hB/DU2btYLGdbaVsP0jA6oXP8
- 05gr4Ecsl8AV0zYs8SIur6jdi4GCokpTXfTeESRc/aL5kP+fRq4+dwED4MnWJz1EEeQucAofXx
- zSV9KupVFmB2TmERhWQhyW63w9TYYOEo0GaaMyIfCUCnQ8PzQRxqu3qWTbgvocK0kSZmUGpHuA
- lpQq7aDZK6Y5oyAh2n93Q7jP
+  bh=ONLVEqHnbgp799JnDqNCBRCPun777vrD7UMW5XXrOH8=;
+  b=OXSZpAScPqkuvwoyjiQvVuw/YPwFN844jcTff8VMLmkyemHv96PjLV2Y
+   xTNLTjwUwzUQJIPSPMsAurtakjaDJ4gLzjqXWrDPPPKjWxQ3UkyWi1K9w
+   DBhalxZ4SwWKvX2dV1rIWBx+4lBN8Ump91Q7Sl+VuNaHcYgF7i578FAwv
+   s=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: qP7Kef6/+gv76kvjcmIFVlT4IQsxjG+soe5DzEoaiAWePJDr0VWauilPfYtCERBVMzRHaCipMz
+ R1GmXpyve/ulyEMfG4OibwHX0MNyUQAeJIFovRWAClT3clPA8h7HMC3+cyI6jHeHMGYbPW4vOU
+ Jn1OMzoemkNsmGZlFCRbmZV8OJlu85nu/ool/xxDURJ9dtHyDJOGkQaQZue403TK68KYyBD6GG
+ 8+B6rgrWXqI7O7Xaqfzln3cQZ4wfk6g6sXF7btpLuYfN92ZDbry64+GIIS8skpp8MOEDd5Lzfd
+ mpkHRWd2ixGRIpEW01W6rTvV
 X-SBRS: 5.2
-X-MesageID: 62700208
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 63189675
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:ZiU0k6yFeHWYO12CxWF6t+fjwSrEfRIJ4+MujC+fZmUNrF6WrkUDx
- zBKWGmCP/qIYWH1eYxxOt/l8U4H7MPTydNlGQE6pCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wrRn2tcAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt9Yu9
- 4hOqrX3cCY0NajQveE6fiREGj4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JoRRa6EP
- 5pxhTxHaDDDYjJJAA4uL60TzKD5qHD/cjNXpwfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
- krk1WnkBhARNPSE1CGItHmrg4fnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
- GRNpHBo9/JrshX2EJ+tBHVUvUJooDYaBOUNEPITrzis16HR/yOcIUU5UjdePYlOWNANeRQm0
- VqAntXMDDNpsaGIRX/1yop4vQ9eKgBOczZcOHZsoR8tpoC6/dpt1k6nosNLTfbt5uAZDw0c1
- NxjQMIWo7wIxfAG2Kyglbwsq2L9/8OZJuLZC+i+Y45E0u+bTNL0D2BLwQKChRqlEGp/ZgPQ1
- JTjs5PGhN3i9bnXyESwrBwlRdlFHcqtPjzGmkJIFJI87Tmr8HPLVdkOvGonfxo3bppZKWCBj
- KrvVeV5vs470JyCNvcfXm5MI55ykfiI+SrNC5g4keaikrAuLVTarUmClGab3nz3kVhErE3ME
- czzTCpYNl5DUf4P5GPvH481iOZ3rghjmz+7bc2lnnyPjOrPDFbIGOxtGAbfMYgEAFas/V+9H
- yB3bZXakn2ykYTWP0HqzGLkBQladCdgXcGv9ZU/myzqClMOJVzNwsT5mdsJE7GJVYwL/gsR1
- n3iCEJe1nTlgnjLdVeDZnx5Meu9Vpdjt3MreycrOA/wiXQkZI+u6oYZdoc2IuZ7pLAyk6YsQ
- qlXYdiED9ROVi/Dp2YXY67iodEwbx+snw+PYXaoOWBtY556SgXV0db4ZQ+zpjIWBy+6uJJm8
- b2t3w/WW7QZQAFmAJqEYf6j1Qrp73MchPhzTw3DJdwKIBfg941jKirQiP4rIp5TdUWfl2XCj
- wvPWEUWv+jApYMx4eLlv6Hcotf7CfZ6E2pbA3LfseS8Ox7F8zfx2oRHSuuJI2zQDTum5KW4a
- OxJ5PjgK/lbzk1Suo9xHrs3n6Iz49zj++1Twgh+RSiZal2qDvVrI2Wc3NkJvapIn+cLtQyzU
- 0OJ299bJbTWZ5+1TA9PfFIoPraZyPUZujjO9vBkckz16Rh+8KeDTUgPbQKHjzZQLectPY4oq
- Qv7VBX6N+BrZsIWD+u7
-IronPort-HdrOrdr: A9a23:Fc++0qjx9an3AlvQHX9JtfF1l3BQXuIji2hC6mlwRA09TySZ//
- rBoB19726MtN9xYgBHpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
- 0QF5SWYOeAdWSS5vya3ODXKbkdKaG8gcKVuds=
+IronPort-Data: A9a23:ETtkSK1D0Y/zn6pjgvbD5Qd2kn2cJEfYwER7XKvMYLTBsI5bpzIOz
+ zQeXmiAa6qLZDbxct4iPtvk9R4Ev8TTnN5rHgQ+pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o6wbBh2+aEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhwNdhy
+ vZ8kqeJeBYyPazSu9tNDitYKnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u3ZkeTKiBO
+ qL1bxJ+PD3jOU1tB24aFaB9gMOG22XFQjdx/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
+ kDs8nn9AxoaHMeC0jfD+XWp7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWZj5EA
+ xVKoGx09/F0rRH1CImmN/GlnJKalkEbS9hzIsoB0TCc0anV/SWmVjU2TgcUPbTKq/QKbTAt0
+ 1aImfbgCjpurKCZRBqhy1uEkd+hEXNLdDFfPEfoWSNAuoC++99r0nojW/4+SPbdszHjJd3nL
+ 9lmRgAajq5bs8ME3r7TEbvv02P1/cihouLYC2zqsoOZAuFRON/Ni2+AswGzARN8wGCxFAjpU
+ J8swJD20Qz2JcvR/BFhuc1UdF1T296LMSfHnXlkFIQ7+jKm9haLJN4Mu2gleRk1bptUJlcFh
+ XM/XysLtfe/21PxNcdKj3+ZUZx2ncAM6/y4PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
+ v+mnTKXJS9CU8xPlWPuL89EiOND7n1gmQv7GM6qpzz6gev2TCPEEt8tbQrRBt3VGYvZ+m05B
+ f4FaZvTo/ieOcWjChTqHXk7dABTciNjVMmo8qS6tIere2JbJY3oMNeJqZtJRmCvt/49ej7g8
+ i7vV0lG5kD4gHGbewyGZmo6MOHkXIplrGJ9NispZA76138maIepzaEea5poIuV3qL09laZ5H
+ 6sfZsGNIvVTUTCbqT4TWobw8d55fxOxiAPQYyf8OGojf4RtThDi88P/ele97zEHCye67JNso
+ 7Cp2g7Bb4AEQgBuUJTfZP61lgvjtnkBguNiGUDPJ4ALKknr9YFrLQ33j+M2fJ5QeUmSmGPC2
+ l/PUxkCpOTLr4sky/XzhPiJ/9WzDu9zPktGBG2Hv7y4AjbXozi4yohaXefWIT2EDDHo+L+vb
+ Pl+xu3nNKFVh05DtodxHuo5za864Nez9bZWwh49QSfOZlWvTLhhPmOHzY9EsagUnu1Vvg6/W
+ 0Su/NhGOOrWZJO5QQBJfAd1PP6e0fw0myXJ6aVnKUr30yZ74b6bXBgAJBKLkiFccON4PY5NL
+ T3NYyLKB9hTUiYXD+s=
+IronPort-HdrOrdr: A9a23:xAEMQKiUI7teXLXGssQZqFcjsHBQXuAji2hC6mlwRA09TySZ//
+ rOoB19726NtN9xYgBYpTnuAtjifZqxz/FICMwqTNOftWrdyQ2VxeNZnOnfKlTbckWUnIMw6U
+ 4jSdkYNDSZNykAsS+Q2mmF+rgbruVviJrY4Nvj8w==
 X-IronPort-AV: E=Sophos;i="5.88,317,1635220800"; 
-   d="scan'208";a="62700208"
+   d="scan'208";a="63189675"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 2/8] x86/boot: Collect AMD speculative features earlier during boot
-Date: Wed, 26 Jan 2022 08:44:46 +0000
-Message-ID: <20220126084452.28975-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 4/8] x86/spec-ctrl: Drop use_spec_ctrl boolean
+Date: Wed, 26 Jan 2022 08:44:48 +0000
+Message-ID: <20220126084452.28975-5-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220126084452.28975-1-andrew.cooper3@citrix.com>
 References: <20220126084452.28975-1-andrew.cooper3@citrix.com>
@@ -102,12 +102,15 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-All AMD IBRS-related features are in CPUID.0x80000008.ebx.  Collect them in
-early_cpu_init() so init_speculative_mitigations() can use them.
+Several bugfixes have reduced the utility of this variable from it's original
+purpose, and now all it does is aid in the setup of SCF_ist_wrmsr.
 
-Rework the existing logic structure to fill in c->extended_cpuid_level and
-separate out the ambiguous use of ebx in an otherwise 0x80000008-specific
-logic block.
+Simplify the logic by drop the variable, and doubling up the setting of
+SCF_ist_wrmsr for the PV and HVM blocks, which will make the AMD SPEC_CTRL
+support easier to follow.  Leave a comment explaining why SCF_ist_wrmsr is
+still necessary for the VMExit case.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -115,44 +118,49 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 ---
- xen/arch/x86/cpu/common.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+ xen/arch/x86/spec_ctrl.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 4a163afbfc7e..866f1a516447 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -348,9 +348,13 @@ void __init early_cpu_init(void)
- 	}
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index c18cc8aa493a..8a550d0a0902 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -927,7 +927,7 @@ static __init void mds_calculations(uint64_t caps)
+ void __init init_speculation_mitigations(void)
+ {
+     enum ind_thunk thunk = THUNK_DEFAULT;
+-    bool use_spec_ctrl = false, ibrs = false, hw_smt_enabled;
++    bool ibrs = false, hw_smt_enabled;
+     bool cpu_has_bug_taa;
+     uint64_t caps = 0;
  
- 	eax = cpuid_eax(0x80000000);
--	if ((eax >> 16) == 0x8000 && eax >= 0x80000008) {
--		ebx = eax >= 0x8000001f ? cpuid_ebx(0x8000001f) : 0;
--		eax = cpuid_eax(0x80000008);
-+	if ((eax >> 16) == 0x8000)
-+		c->extended_cpuid_level = eax;
-+
-+	if (c->extended_cpuid_level >= 0x80000008) {
-+		cpuid(0x80000008, &eax,
-+		      &c->x86_capability[cpufeat_word(X86_FEATURE_CLZERO)],
-+		      &ecx, &edx);
+@@ -1016,19 +1016,21 @@ void __init init_speculation_mitigations(void)
+     {
+         if ( opt_msr_sc_pv )
+         {
+-            use_spec_ctrl = true;
++            default_spec_ctrl_flags |= SCF_ist_wrmsr;
+             setup_force_cpu_cap(X86_FEATURE_SC_MSR_PV);
+         }
  
- 		paddr_bits = eax & 0xff;
- 		if (paddr_bits > PADDR_BITS)
-@@ -363,10 +367,11 @@ void __init early_cpu_init(void)
- 		hap_paddr_bits = ((eax >> 16) & 0xff) ?: paddr_bits;
- 		if (hap_paddr_bits > PADDR_BITS)
- 			hap_paddr_bits = PADDR_BITS;
-+	}
+         if ( opt_msr_sc_hvm )
+         {
+-            use_spec_ctrl = true;
++            /*
++             * While the guest MSR_SPEC_CTRL value is loaded/saved atomically,
++             * Xen's value is not restored atomically.  An early NMI hitting
++             * the VMExit path needs to restore Xen's value for safety.
++             */
++            default_spec_ctrl_flags |= SCF_ist_wrmsr;
+             setup_force_cpu_cap(X86_FEATURE_SC_MSR_HVM);
+         }
  
-+	if (c->extended_cpuid_level >= 0x8000001f)
- 		/* Account for SME's physical address space reduction. */
--		paddr_bits -= (ebx >> 6) & 0x3f;
--	}
-+		paddr_bits -= (cpuid_ebx(0x8000001f) >> 6) & 0x3f;
- 
- 	if (!(c->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)))
- 		park_offline_cpus = opt_mce;
+-        if ( use_spec_ctrl )
+-            default_spec_ctrl_flags |= SCF_ist_wrmsr;
+-
+         if ( ibrs )
+             default_xen_spec_ctrl |= SPEC_CTRL_IBRS;
+     }
 -- 
 2.11.0
 
