@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE20AC28CF5
-	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 08:45:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.260721.450735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C06E0C63682
+	for <xen-devel@archiver.kernel.org>; Wed, 26 Jan 2022 08:45:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.260722.450741 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCdvc-000279-FH; Wed, 26 Jan 2022 08:45:20 +0000
+	id 1nCdvd-0002Dh-80; Wed, 26 Jan 2022 08:45:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 260721.450735; Wed, 26 Jan 2022 08:45:20 +0000
+Received: by outflank-mailman (output) from mailman id 260722.450741; Wed, 26 Jan 2022 08:45:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCdvc-00025r-6A; Wed, 26 Jan 2022 08:45:20 +0000
-Received: by outflank-mailman (input) for mailman id 260721;
- Wed, 26 Jan 2022 08:45:17 +0000
+	id 1nCdvc-0002CY-Lr; Wed, 26 Jan 2022 08:45:20 +0000
+Received: by outflank-mailman (input) for mailman id 260722;
+ Wed, 26 Jan 2022 08:45:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=DU/T=SK=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nCdvZ-000088-BG
- for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 08:45:17 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 47079ba9-7e84-11ec-8eb8-a37418f5ba1a;
+ id 1nCdva-000088-BN
+ for xen-devel@lists.xenproject.org; Wed, 26 Jan 2022 08:45:18 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 46e3417d-7e84-11ec-8eb8-a37418f5ba1a;
  Wed, 26 Jan 2022 09:45:15 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 47079ba9-7e84-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 46e3417d-7e84-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1643186715;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=a0Fglvy67xpQkp55jOY0hwXLJAWEyKSc9I0P5NSH1Gg=;
-  b=MiDEGdMiSm69EHxI/5uqfAybdhoq+h5m31NK7T2cH3JFVga8fFCEWNrs
-   xFQZLm93jivBv/kP+vDbme1uBvlkFJdcUeSAdg1z6Dvd1Qdm1Fxee2+cW
-   nLoRgX3ZTQzH2NyGrvEY8q54qLrXsi8S5Ui+J2igf5S5dmUJXJ1SYMQAD
-   w=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: MJqODNEkvyfIXTBXrx+8YsdhBhbrtmynfikPZc8PZB1bPzf5VIotscMwrVN4zJx329A90fWNsz
- cIBnCK1uGLu+RSifgiQ1/WOeOEwGW45exdk4IJTq3ytZrdn0gRsDpjZagOPKwjk+0zGqK6VKMj
- qqP9NkqrtARUy535/x2vXwhpODd9K6UMlhnT5d9zIt6LslgegTpWCxapJRl3sHvnVmV1NDiiRg
- VLYoziFp0PdZ6qNvbluMVfmC9v2DI6efvRgkws+6NyG7gI44RKTxnf7gN26FQ6wJyz5xayUVCE
- 1+2Fc/4sM7jFLCX7Hs7ezwMw
+  bh=DMIani3bgij8H8/jeaN9V9MoninPkgoxwrQXOevq9nM=;
+  b=BLyv/L4VLcFDrAzfGQbGmL/qHyh+hn0NzYKIiEvAxRX6lccMzVG/iBuN
+   GbxWcitROtT6Cc5giPkVJUCrLTjHkLtZNZYKHIIXL+Fpg/C9zuSEBS+x7
+   asAI7hj4fMbUJcv898nIDKwdiatnlb7nk2HPCcB09SUuyFHq+uTKCTjCK
+   0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: tc9ZHDIppsRfMIg6eDk+iTqJGswfDGiDJsHK6jtcrYUUSRBHnyUR1kCsvrymg77jmnYisBzkS4
+ TYkYm6AKS7ZNd+YxgmI6gnXlXioYALghjpubMZ8sA7hJossqZK0pt+Fl88tvg+sCcJc1UuJ6e0
+ YD/iJddiyGOmeeNV4C26D0yvUjY5+cbWjzQNAECO4IGvjG56dnIqdj5UASYB6KO44N6RWpX0WT
+ 8HLTjqwZCCTzdRcUHn5W/SZmKoqug5Bb9772tgqpW1f0rGnpGPLF4nt0fpOigIpkylyD4ZtqAB
+ 17p0S2vSrueJY91bMkQpT2Ry
 X-SBRS: 5.2
-X-MesageID: 63189687
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 62781736
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:gMS+5aMLOp0Tk+fvrR1xkMFynXyQoLVcMsEvi/4bfWQNrUol0jcGx
- mEaXm3TPvzZZWWheYxyadu+/EIA6JOAmNBnHQto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6UUsxNbVU8En150Eg9w7dRbrNA2rBVPSvc4
- bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
- 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYo3aJkdxU0
- tphj8ShZCwAYLTQ2+8lfgYNRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
- 6VFdnZdNXhvhMrvqF6/YsBqit4uM4/AO4QHt2s75TrYEewnUdbIRKCiCdpwgmxp1pEQTam2i
- 8wxOCtwTDPCeBdzJWgwENEbkMyTj36vfGgNwL6SjfVuuDWCpOBr65DyNPLFd9rMQt9a9m66j
- G/b+2XyAjkBKceSjzGC9xqEluLJ2C/2Ro8WPLm57eJxxk2ewHQJDx8bXkf9puO24nNSQPoGd
- RZSoHB36/Fvqgr7FbERQiFUvlbHvhAQfsBfP9di+Sym4/TN/0WSPkUbG2sphMMdiOc6Qjkj1
- 1msltzvBCByvLD9dU9x5ot4vhvpZ3FLcDZqiTssCFJcvoK9+N1bYgfnE447eJNZmOEZDt0ZL
- 9qiiCElz4segscQv0lQ1QCW2mn8znQlo+Nc2+k2Yo5Hxl8oDGJGT9bxgbQ+0RqmBNzIJrVml
- CNc8/VyFMhUUfmweNWlGY3h5o2B6fefKyH7ilVyBZQn/DnF0yf9IdsJu2wgeBs0YplsldrVj
- Kn741I5CHh7ZyPCUEOKS9jpV5RCIVbISLwJqcw4nvIRO8MsJWdrDQllZFKK3nCFraTfufpXB
- HtvSu71VSxyIf0+lFKeHr5BuZd2mHxW7T6NFPjTkkT2uZLDNSX9YepUbzOzghURsfnsTPP9q
- YgPbqNnCnx3DYXDX8Ug2ddDdA9RdSliW8meRg4+XrfrHzeK0VoJU5f5qY7NsaQ/90iMvuuXr
- Hy7RGFCz1/z2S/OJQmQMygxY7LzR5dv63k8OHV0b1qv3nEiZ6ep7bseKMRrLeV2qrQ7wK4mV
- eQBduWBHu9LFmbN9QMCYMSvt4dlbhmq216DZnL3fDglcpd8bAXV4du4LBD3/SwDA3Pv58szq
- rGtzC3BRp8HS1gwBcracqv3nViwoWIciKR5WE6Reotff0Dl8Y5LLS3tj6Bof5FQeEubnjbDj
- lSYGxYVo+XJsrQZytiRiPDWtZqtHst/AlFeQzvR44GpOHSI5WGk24JBDrqFJGiPSGPu9ay+T
- uxJ1PWgYuYflVNHvocgQbZmyaUyu4nmq7NAl1k2GXzKaxKgC696I2nA1s5K7/UfyrhcsAqwe
- 0SO5tgFZunZZJK7SAYcdFg/c+CO9fAIgT2Dv/06LXLz6DJz4LfaA15ZOAOBiXAFIbZ4WG//L
- TzNZCLCB9SDtycX
-IronPort-HdrOrdr: A9a23:UjvXPquNl1N0tKkqP9KLD+eN7skDTNV00zEX/kB9WHVpmszxra
- GTdZMgpGfJYVcqKQgdcL+7Scq9qB/nmqKdpLNhWYtKPzOW3ldATrsSj7cKqgeIc0aVm4JgPO
- VbAs9D4bXLfCNHZK3BgDVQfexP/DD+ytHMudvj
+IronPort-Data: A9a23:99fEeaxhJC0wHToEKi16t+fjwSrEfRIJ4+MujC+fZmUNrF6WrkUGn
+ 2cWWDvUOqyLZGvwfY0iPNu1908GucfUn4M1GlRsqCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wrRn2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt8BLk
+ 98VubzzcwcwB4/opvUHED9SUD4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JoRTa+BP
+ JRxhTxHdC/SWQ10Bn4uLrk5s8ChoHDlYRd5gQfAzUYwyzeKl1EguFT3C/LKfvSaSMMTmVyXz
+ krk1WnkBhARNPSE1CGItHmrg4fnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
+ GRNpHBo9/JrshX2EJ+tBHVUvUJooDYMYYFaS+EaqzuN05P2xziIHCsiRH1ePYlOWNANeRQm0
+ VqAntXMDDNpsaGIRX/1yop4vQ9eKgBOczZcOHZsoR8tpoC6/dpt1k6nosNLTfbt5uAZDw0c1
+ NxjQMIWo7wIxfAG2Kyglbwsq2L9/8OZJuLZC+i+Y45E0u+bTNL0D2BLwQKChRqlEGp/ZgPQ1
+ JTjs5PGhN3i9bnXyESwrBwlRdlFHcqtPjzGmkJIFJI87Tmr8HPLVdkOvGonfxo3bppZKWCBj
+ KrvVeV5vs470JyCNvcfXm5MI55ykfiI+SrNC5g4keaikrAuLVTarUmClGab3nz3kVhErE3ME
+ czzTCpYNl5DUf4P5GPvH481iOZ3rghjmz+7bc2lnnyPjOrPDFbIGOxtGAbfMYgEAFas/V+9H
+ yB3bZXakn2ykYTWP0HqzGLkBQladCdgXcGv9ZU/myzqClMOJVzNwsT5mdsJE7GJVYwP/gsR1
+ n3iCEJe1nTlgnjLdVeDZnx5Meu9Vpdjt3MreycrOA/wiXQkZI+u6oYZdoc2IuZ7pLAyk6YsQ
+ qlXYdiED9ROVi/Dp2YXY67iodEwbx+snw+PYXaoOWBtY556SgXV0db4ZQ+zpjIWBy+6uJJm8
+ b2t3w/WW7QZQAFmAJqEYf6j1Qrp73MchPhzTw3DJdwKIBfg941jKirQiP4rIp5TdUWfl2XCj
+ wvPWEUWv+jApYMx4eLlv6Hcotf7CfZ6E2pbA3LfseS8Ox7F8zfx2oRHSuuJI2zQDTum5KW4a
+ OxJ5PjgK/lbzk1Suo9xHrs3n6Iz49zj++1Twgh+RSiZal2qDvVrI2Wc3NkJvapIn+cLtQyzU
+ 0OJ299bJbTWZ5+1TA9PfFIoPraZyPUZujjO9vBkckz16Rh+8KeDTUgPbQKHjzZQLectPY4oq
+ Qv7VBX6N+BrZsIWD+u7
+IronPort-HdrOrdr: A9a23:vpH336DhchpZ3EDlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo7v
+ xG/c5rsyMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
+ 9dmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.88,317,1635220800"; 
-   d="scan'208";a="63189687"
+   d="scan'208";a="62781736"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 8/8] x86/cpuid: Enable MSR_SPEC_CTRL in SVM guests by default
-Date: Wed, 26 Jan 2022 08:44:52 +0000
-Message-ID: <20220126084452.28975-9-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/8] x86/spec-ctrl: Introduce new has_spec_ctrl boolean
+Date: Wed, 26 Jan 2022 08:44:49 +0000
+Message-ID: <20220126084452.28975-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220126084452.28975-1-andrew.cooper3@citrix.com>
 References: <20220126084452.28975-1-andrew.cooper3@citrix.com>
@@ -102,122 +102,97 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-With all other pieces in place, MSR_SPEC_CTRL is fully working for HVM guests.
+Most MSR_SPEC_CTRL setup will be common between Intel and AMD.  Instead of
+opencoding an OR of two features everywhere, introduce has_spec_ctrl instead.
 
-Update the CPUID derivation logic (both PV and HVM to avoid losing subtle
-changes), and explicitly enable the CPUID bits for HVM guests.
+Reword the comment above the Intel specific alternatives block to highlight
+that it is Intel specific, and pull the setting of default_xen_spec_ctrl.IBRS
+out because it will want to be common.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
-
-Given the adjustment to calculate_pv_max_policy(), we could use 'A' rather
-than 'S' which would avoid a second same-sized diff to cpufeatureset.h, but
-it's also a bit misleading to say 'A' when the PV side won't engage at all
-yet.
 ---
- xen/arch/x86/cpuid.c                        | 16 ++++++++++++----
- xen/include/public/arch-x86/cpufeatureset.h | 18 +++++++++---------
- xen/tools/gen-cpuid.py                      |  5 +++++
- 3 files changed, 26 insertions(+), 13 deletions(-)
+ xen/arch/x86/spec_ctrl.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index b5af48324aef..64570148c165 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -433,6 +433,8 @@ static void __init guest_common_feature_adjustments(uint32_t *fs)
-      */
-     if ( test_bit(X86_FEATURE_IBRSB, fs) )
-         __set_bit(X86_FEATURE_STIBP, fs);
-+    if ( test_bit(X86_FEATURE_IBRS, fs) )
-+        __set_bit(X86_FEATURE_AMD_STIBP, fs);
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 8a550d0a0902..2072daf66245 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -927,7 +927,7 @@ static __init void mds_calculations(uint64_t caps)
+ void __init init_speculation_mitigations(void)
+ {
+     enum ind_thunk thunk = THUNK_DEFAULT;
+-    bool ibrs = false, hw_smt_enabled;
++    bool has_spec_ctrl, ibrs = false, hw_smt_enabled;
+     bool cpu_has_bug_taa;
+     uint64_t caps = 0;
  
-     /*
-      * On hardware which supports IBRS/IBPB, we can offer IBPB independently
-@@ -456,11 +458,14 @@ static void __init calculate_pv_max_policy(void)
-         pv_featureset[i] &= pv_max_featuremask[i];
+@@ -936,6 +936,8 @@ void __init init_speculation_mitigations(void)
  
-     /*
--     * If Xen isn't virtualising MSR_SPEC_CTRL for PV guests because of
--     * administrator choice, hide the feature.
-+     * If Xen isn't virtualising MSR_SPEC_CTRL for HVM guests (functional
-+     * availability, or admin choice), hide the feature.
-      */
-     if ( !boot_cpu_has(X86_FEATURE_SC_MSR_PV) )
-+    {
-         __clear_bit(X86_FEATURE_IBRSB, pv_featureset);
-+        __clear_bit(X86_FEATURE_IBRS, pv_featureset);
-+    }
+     hw_smt_enabled = check_smt_enabled();
  
-     guest_common_feature_adjustments(pv_featureset);
- 
-@@ -530,11 +535,14 @@ static void __init calculate_hvm_max_policy(void)
-         __set_bit(X86_FEATURE_SEP, hvm_featureset);
- 
-     /*
--     * If Xen isn't virtualising MSR_SPEC_CTRL for HVM guests because of
--     * administrator choice, hide the feature.
-+     * If Xen isn't virtualising MSR_SPEC_CTRL for HVM guests (functional
-+     * availability, or admin choice), hide the feature.
-      */
-     if ( !boot_cpu_has(X86_FEATURE_SC_MSR_HVM) )
-+    {
-         __clear_bit(X86_FEATURE_IBRSB, hvm_featureset);
-+        __clear_bit(X86_FEATURE_IBRS, hvm_featureset);
-+    }
- 
-     /*
-      * With VT-x, some features are only supported by Xen if dedicated
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 0b399375566f..dfbf25b9acb3 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -256,18 +256,18 @@ XEN_CPUFEATURE(CLZERO,        8*32+ 0) /*A  CLZERO instruction */
- XEN_CPUFEATURE(RSTR_FP_ERR_PTRS, 8*32+ 2) /*A  (F)X{SAVE,RSTOR} always saves/restores FPU Error pointers */
- XEN_CPUFEATURE(WBNOINVD,      8*32+ 9) /*   WBNOINVD instruction */
- XEN_CPUFEATURE(IBPB,          8*32+12) /*A  IBPB support only (no IBRS, used by AMD) */
--XEN_CPUFEATURE(IBRS,          8*32+14) /*   MSR_SPEC_CTRL.IBRS */
--XEN_CPUFEATURE(AMD_STIBP,     8*32+15) /*   MSR_SPEC_CTRL.STIBP */
--XEN_CPUFEATURE(IBRS_ALWAYS,   8*32+16) /*   IBRS preferred always on */
--XEN_CPUFEATURE(STIBP_ALWAYS,  8*32+17) /*   STIBP preferred always on */
--XEN_CPUFEATURE(IBRS_FAST,     8*32+18) /*   IBRS preferred over software options */
--XEN_CPUFEATURE(IBRS_SAME_MODE, 8*32+19) /*   IBRS provides same-mode protection */
-+XEN_CPUFEATURE(IBRS,          8*32+14) /*S  MSR_SPEC_CTRL.IBRS */
-+XEN_CPUFEATURE(AMD_STIBP,     8*32+15) /*S  MSR_SPEC_CTRL.STIBP */
-+XEN_CPUFEATURE(IBRS_ALWAYS,   8*32+16) /*S  IBRS preferred always on */
-+XEN_CPUFEATURE(STIBP_ALWAYS,  8*32+17) /*S  STIBP preferred always on */
-+XEN_CPUFEATURE(IBRS_FAST,     8*32+18) /*S  IBRS preferred over software options */
-+XEN_CPUFEATURE(IBRS_SAME_MODE, 8*32+19) /*S  IBRS provides same-mode protection */
- XEN_CPUFEATURE(NO_LMSL,       8*32+20) /*S  EFER.LMSLE no longer supported. */
- XEN_CPUFEATURE(AMD_PPIN,      8*32+23) /*   Protected Processor Inventory Number */
--XEN_CPUFEATURE(AMD_SSBD,      8*32+24) /*   MSR_SPEC_CTRL.SSBD available */
-+XEN_CPUFEATURE(AMD_SSBD,      8*32+24) /*S  MSR_SPEC_CTRL.SSBD available */
- XEN_CPUFEATURE(VIRT_SSBD,     8*32+25) /*   MSR_VIRT_SPEC_CTRL.SSBD */
--XEN_CPUFEATURE(SSB_NO,        8*32+26) /*   Hardware not vulnerable to SSB */
--XEN_CPUFEATURE(PSFD,          8*32+28) /*   MSR_SPEC_CTRL.PSFD */
-+XEN_CPUFEATURE(SSB_NO,        8*32+26) /*S  Hardware not vulnerable to SSB */
-+XEN_CPUFEATURE(PSFD,          8*32+28) /*S  MSR_SPEC_CTRL.PSFD */
- 
- /* Intel-defined CPU features, CPUID level 0x00000007:0.edx, word 9 */
- XEN_CPUFEATURE(AVX512_4VNNIW, 9*32+ 2) /*A  AVX512 Neural Network Instructions */
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index b953648b6572..e4915b5961aa 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -290,6 +290,11 @@ def crunch_numbers(state):
- 
-         # In principle the TSXLDTRK insns could also be considered independent.
-         RTM: [TSXLDTRK],
++    has_spec_ctrl = boot_cpu_has(X86_FEATURE_IBRSB);
 +
-+        # AMD speculative controls
-+        IBRS: [AMD_STIBP, AMD_SSBD, PSFD,
-+               IBRS_ALWAYS, IBRS_FAST, IBRS_SAME_MODE],
-+        AMD_STIBP: [STIBP_ALWAYS],
+     /*
+      * First, disable the use of retpolines if Xen is using shadow stacks, as
+      * they are incompatible.
+@@ -973,11 +975,11 @@ void __init init_speculation_mitigations(void)
+              */
+             else if ( retpoline_safe(caps) )
+                 thunk = THUNK_RETPOLINE;
+-            else if ( boot_cpu_has(X86_FEATURE_IBRSB) )
++            else if ( has_spec_ctrl )
+                 ibrs = true;
+         }
+         /* Without compiler thunk support, use IBRS if available. */
+-        else if ( boot_cpu_has(X86_FEATURE_IBRSB) )
++        else if ( has_spec_ctrl )
+             ibrs = true;
      }
  
-     deep_features = tuple(sorted(deps.keys()))
+@@ -1008,10 +1010,7 @@ void __init init_speculation_mitigations(void)
+     else if ( thunk == THUNK_JMP )
+         setup_force_cpu_cap(X86_FEATURE_IND_THUNK_JMP);
+ 
+-    /*
+-     * If we are on hardware supporting MSR_SPEC_CTRL, see about setting up
+-     * the alternatives blocks so we can virtualise support for guests.
+-     */
++    /* Intel hardware: MSR_SPEC_CTRL alternatives setup. */
+     if ( boot_cpu_has(X86_FEATURE_IBRSB) )
+     {
+         if ( opt_msr_sc_pv )
+@@ -1030,11 +1029,12 @@ void __init init_speculation_mitigations(void)
+             default_spec_ctrl_flags |= SCF_ist_wrmsr;
+             setup_force_cpu_cap(X86_FEATURE_SC_MSR_HVM);
+         }
+-
+-        if ( ibrs )
+-            default_xen_spec_ctrl |= SPEC_CTRL_IBRS;
+     }
+ 
++    /* If we have IBRS available, see whether we should use it. */
++    if ( has_spec_ctrl && ibrs )
++        default_xen_spec_ctrl |= SPEC_CTRL_IBRS;
++
+     /* If we have SSBD available, see whether we should use it. */
+     if ( boot_cpu_has(X86_FEATURE_SSBD) && opt_ssbd )
+         default_xen_spec_ctrl |= SPEC_CTRL_SSBD;
+@@ -1268,7 +1268,7 @@ void __init init_speculation_mitigations(void)
+      * boot won't have any other code running in a position to mount an
+      * attack.
+      */
+-    if ( boot_cpu_has(X86_FEATURE_IBRSB) )
++    if ( has_spec_ctrl )
+     {
+         bsp_delay_spec_ctrl = !cpu_has_hypervisor && default_xen_spec_ctrl;
+ 
 -- 
 2.11.0
 
