@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B28C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jan 2022 19:24:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.261714.453368 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF65C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jan 2022 19:56:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.261721.453401 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDANg-0006n6-3O; Thu, 27 Jan 2022 19:24:28 +0000
+	id 1nDAsi-0002M5-57; Thu, 27 Jan 2022 19:56:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 261714.453368; Thu, 27 Jan 2022 19:24:28 +0000
+Received: by outflank-mailman (output) from mailman id 261721.453401; Thu, 27 Jan 2022 19:56:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDANf-0006mz-VX; Thu, 27 Jan 2022 19:24:27 +0000
-Received: by outflank-mailman (input) for mailman id 261714;
- Thu, 27 Jan 2022 19:24:27 +0000
+	id 1nDAsi-0002Lu-1d; Thu, 27 Jan 2022 19:56:32 +0000
+Received: by outflank-mailman (input) for mailman id 261721;
+ Thu, 27 Jan 2022 19:56:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=NFuB=SL=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1nDANf-0006mt-3r
- for xen-devel@lists.xenproject.org; Thu, 27 Jan 2022 19:24:27 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ id 1nDAsf-0001qN-Tx
+ for xen-devel@lists.xenproject.org; Thu, 27 Jan 2022 19:56:30 +0000
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [2a00:1450:4864:20::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bd4f4f66-7fa6-11ec-8eb8-a37418f5ba1a;
- Thu, 27 Jan 2022 20:24:26 +0100 (CET)
-Received: by mail-lf1-x130.google.com with SMTP id x23so7439449lfc.0
- for <xen-devel@lists.xenproject.org>; Thu, 27 Jan 2022 11:24:25 -0800 (PST)
-Received: from [192.168.1.7] ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id v29sm1708667ljv.72.2022.01.27.11.24.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Jan 2022 11:24:24 -0800 (PST)
+ id 379aabe7-7fab-11ec-8eb8-a37418f5ba1a;
+ Thu, 27 Jan 2022 20:56:29 +0100 (CET)
+Received: by mail-lf1-x133.google.com with SMTP id u6so7420582lfm.10
+ for <xen-devel@lists.xenproject.org>; Thu, 27 Jan 2022 11:56:29 -0800 (PST)
+Received: from otyshchenko.router ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id j18sm897631lja.26.2022.01.27.11.56.27
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Thu, 27 Jan 2022 11:56:28 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,128 +45,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bd4f4f66-7fa6-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 379aabe7-7fab-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=subject:to:references:cc:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=HjUKTB0LO38Oq7kA6GWyOqES6oITlEIqKghOGUitPmM=;
-        b=If5IjESYuCuDd6wvxK2q2J5tVPPswjhZBJX9HKoDQ4enB/Y531drShAKaVsogMPI98
-         R41Xc2dEcoWjMdOjL4mpwPfkIPID0EGelNW63bc6SHpkNHlBdYXM9kdkYQ0vHcwhxYoA
-         vvSsPKTO2d1Z/I0kCU8D4t7d+Rjz3gesdUjqLFX1hpzjzIzGeUrNCsrG5rcJi+odWp+W
-         TkR+PEBK+G01u/jZVgVoLFc7yuSLwHFOYWX77J8c/rzkxlQKkjp1uQiDf6XIexo40uFQ
-         jYZkvfflVn/XXzD8JXIFUF5ZN73C9Vz7XD8vGRuiI6edCqbUwGqPCvIke5dSI/h65i//
-         oJZQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=9x3Unk7KT3XMe8edi/04ny0Op6Yqm01LPkdhOdEqFH8=;
+        b=nItGuj/k8uxRgN8VTCw9s0qR1Fbpu7B1F7RuxhrBsjHIryfVgsBTWu9hCspadqILtT
+         3N+ijPeqKmSLiZqJVIMVOPU2Ut9cgG8fQZ9PG5ZW7bUkHtc6P86L1IJOKEPOMdxBzdbH
+         R9VxIEFSdFnuhzEoYw8A49N1qOwYp7hYEj+vGwXMNEOW1S3qxfQ+gQj5GNVECYGhWYfb
+         E7koa63MAAG3EOs5moEoV8afkX1IQTpReZQSyhuX8gWfPI2LnwrGXnikvceUUFRZnliI
+         IL+F06aCyzk19Ko0PkvEEZZYL2xsAsGDf5eZf5W54hnhQZtHSxz+2c0Szr4GY0iS1f/5
+         Eh/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=HjUKTB0LO38Oq7kA6GWyOqES6oITlEIqKghOGUitPmM=;
-        b=QIeMjgiiwdu5pQaYtzIECJniosR/l7nsQ+skW1onfPmmQ/6iZ3Ndwf4V8hqE5ACVj/
-         jBkLy6MCVzZT8+y/J29dpHJGg6AG4AA9rNFSJjENLVqOwpPObp5iAvCgQ39zmY3b2n/k
-         QdLN+cK7+ARRw8x2N+BsJGYbYjRijwQshpugO5dfqNBnCw7h+Il1AlqLvlEflhFpTI2z
-         yY0LqMQ8uMkOokhzu9xL7FeJclitm6aXRxz/M9NkZRlXxSaU7G/EaOHsx26L9k/JIKey
-         9qj7fQjvf3tlZrrV5YDuEH8rEARPFhnXAPMb3I4Nsf9pYRV7M0mgarnGn9Cm5B0YMMf9
-         icBA==
-X-Gm-Message-State: AOAM531gIWFgM4O9kruA1w7mWE+UVqI1q8ALNyCXyVxK77Ja2Obt8Fw6
-	KAxxzofgYV0/hlJKWyE3S2E=
-X-Google-Smtp-Source: ABdhPJzFqGceXuqeuVWeqtX4kYiufTB1c5cw1KhmqEwJtl/Tgye5Lh/6zJsJgQyskC2Ypef6jjrMdQ==
-X-Received: by 2002:a05:6512:3184:: with SMTP id i4mr3743519lfe.275.1643311465258;
-        Thu, 27 Jan 2022 11:24:25 -0800 (PST)
-Subject: Re: [PATCH] xen/serial: scif: add support for HSCIF
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
-References: <20220127170008.271723-1-volodymyr_babchuk@epam.com>
- <87ee4tgkr3.fsf@epam.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-From: Oleksandr <olekstysh@gmail.com>
-Message-ID: <9b2091c6-8749-98a9-3d57-650d7045c2e5@gmail.com>
-Date: Thu, 27 Jan 2022 21:24:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <87ee4tgkr3.fsf@epam.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=9x3Unk7KT3XMe8edi/04ny0Op6Yqm01LPkdhOdEqFH8=;
+        b=WXre7v3PHXCGSh15G9QtjdZoKjoUAzXd93lherOmPZQWN2U3ixVkdyfYnxwefryKsE
+         95c+ycePP+5xSx0waH8R+PpW2KnOkWySnOiq1h/DsPbdHwQdjYtT1lSjpDkv/OlFIJlJ
+         ivuFE7jJupPreZVI4uU5h0yHnj9H/sNIqN3OdApNFY+p1FMw3xXNot7TMxGhpAgyUbjB
+         BEZWcl1diShWmwwBIP2jOS4vC+SuNJUw2YDaYX9Q7flaxQBw5YlHrkWSsQCESfGt+Eym
+         bYn/rV/qtDI4TGHv4H+pqhRsN404/DL8wdTWHj+aospZTSx6QpWc1tWgKi1cIAl838mt
+         YYjQ==
+X-Gm-Message-State: AOAM532dshYAbIVJeB6nn9U0DgNN0wiDDUJe63mB0jL044to9mcrCVXJ
+	1vO8BCLjqmmeTHeVHBtb8fwFpDw1SKw=
+X-Google-Smtp-Source: ABdhPJwvCtFrFAerya6ye4MW9mbvSwPBeHBGZp6QwFtTmX3fBdWqDyVFbVqQNr6c+go6DbE3Ik1ffA==
+X-Received: by 2002:a19:4f4a:: with SMTP id a10mr3726025lfk.397.1643313388555;
+        Thu, 27 Jan 2022 11:56:28 -0800 (PST)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Rahul Singh <rahul.singh@arm.com>,
+	Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Subject: [PATCH V3 2/2] iommu/arm: Remove code duplication in all IOMMU drivers
+Date: Thu, 27 Jan 2022 21:55:52 +0200
+Message-Id: <1643313352-29940-3-git-send-email-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1643313352-29940-1-git-send-email-olekstysh@gmail.com>
+References: <1643313352-29940-1-git-send-email-olekstysh@gmail.com>
 
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-On 27.01.22 19:18, Volodymyr Babchuk wrote:
+All IOMMU drivers on Arm perform almost the same generic actions in
+hwdom_init callback. Move this code to common arch_iommu_hwdom_init()
+in order to get rid of code duplication.
 
-Hi Volodymyr
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Reviewed-by: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+---
+Changes V1 -> V2:
+   - add R-b
 
-> Hi Julien, Bertrand,
->
-> Sorry, I messed up with your e-mail addresses in the previous
-> email. Adding you correctly.
->
-> Volodymyr Babchuk <volodymyr_babchuk@epam.com> writes:
->
->> HSCIF is a high-speed variant of Renesas SCIF serial interface. From
->> Xen point of view, they almost the same, only difference is in FIFO
->> size.
->>
->> Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
->> ---
->>   xen/drivers/char/scif-uart.c | 13 +++++++++++++
->>   1 file changed, 13 insertions(+)
->>
->> diff --git a/xen/drivers/char/scif-uart.c b/xen/drivers/char/scif-uart.c
->> index ee204a11a4..8f4485bdfc 100644
->> --- a/xen/drivers/char/scif-uart.c
->> +++ b/xen/drivers/char/scif-uart.c
->> @@ -47,6 +47,7 @@ enum port_types
->>   {
->>       SCIF_PORT,
->>       SCIFA_PORT,
->> +    HSCIF_PORT,
->>       NR_PORTS,
->>   };
->>   
->> @@ -88,6 +89,17 @@ static const struct port_params port_params[NR_PORTS] =
->>                           SCASCR_BRIE,
->>           .fifo_size    = 64,
->>       },
->> +    [HSCIF_PORT] =
->> +    {
->> +        .status_reg   = SCIF_SCFSR,
->> +        .tx_fifo_reg  = SCIF_SCFTDR,
->> +        .rx_fifo_reg  = SCIF_SCFRDR,
->> +        .overrun_reg  = SCIF_SCLSR,
->> +        .overrun_mask = SCLSR_ORER,
->> +        .error_mask   = SCFSR_PER | SCFSR_FER | SCFSR_BRK | SCFSR_ER,
->> +        .irq_flags    = SCSCR_RIE | SCSCR_TIE | SCSCR_REIE,
->> +        .fifo_size    = 128,
->> +    },
->>   };
->>   
->>   static void scif_uart_interrupt(int irq, void *data, struct cpu_user_regs *regs)
->> @@ -288,6 +300,7 @@ static const struct dt_device_match scif_uart_dt_match[] __initconst =
->>   {
->>       { .compatible = "renesas,scif",  .data = &port_params[SCIF_PORT] },
->>       { .compatible = "renesas,scifa", .data = &port_params[SCIFA_PORT] },
->> +    { .compatible = "renesas,hscif", .data = &port_params[HSCIF_PORT] },
->>       { /* sentinel */ },
->>   };
+Changes V2 -> V3:
+   - drop platform specific *_iommu_hwdom_init(), make .hwdom_init
+     to directly point to the common arch_iommu_hwdom_init()
+---
+ xen/drivers/passthrough/arm/iommu.c      |  7 +++++++
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c | 15 +--------------
+ xen/drivers/passthrough/arm/smmu-v3.c    | 17 +----------------
+ xen/drivers/passthrough/arm/smmu.c       | 17 +----------------
+ 4 files changed, 10 insertions(+), 46 deletions(-)
 
-
-nit: I would also update description string at the beginning of that file.
-
-  Driver for SCIF(A) ... ---> Driver for (H)SCIF(A) ...
-
-
-With or without that change:
-
-Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-
-
->
+diff --git a/xen/drivers/passthrough/arm/iommu.c b/xen/drivers/passthrough/arm/iommu.c
+index ee653a9..fc45318 100644
+--- a/xen/drivers/passthrough/arm/iommu.c
++++ b/xen/drivers/passthrough/arm/iommu.c
+@@ -134,6 +134,13 @@ void arch_iommu_domain_destroy(struct domain *d)
+ 
+ void __hwdom_init arch_iommu_hwdom_init(struct domain *d)
+ {
++    /* Set to false options not supported on ARM. */
++    if ( iommu_hwdom_inclusive )
++        printk(XENLOG_WARNING "map-inclusive dom0-iommu option is not supported on ARM\n");
++    iommu_hwdom_inclusive = false;
++    if ( iommu_hwdom_reserved == 1 )
++        printk(XENLOG_WARNING "map-reserved dom0-iommu option is not supported on ARM\n");
++    iommu_hwdom_reserved = 0;
+ }
+ 
+ /*
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+index c912120..d2572bc 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -1329,19 +1329,6 @@ static int ipmmu_iommu_domain_init(struct domain *d)
+     return 0;
+ }
+ 
+-static void __hwdom_init ipmmu_iommu_hwdom_init(struct domain *d)
+-{
+-    /* Set to false options not supported on ARM. */
+-    if ( iommu_hwdom_inclusive )
+-        printk(XENLOG_WARNING "ipmmu: map-inclusive dom0-iommu option is not supported on ARM\n");
+-    iommu_hwdom_inclusive = false;
+-    if ( iommu_hwdom_reserved == 1 )
+-        printk(XENLOG_WARNING "ipmmu: map-reserved dom0-iommu option is not supported on ARM\n");
+-    iommu_hwdom_reserved = 0;
+-
+-    arch_iommu_hwdom_init(d);
+-}
+-
+ static void ipmmu_iommu_domain_teardown(struct domain *d)
+ {
+     struct ipmmu_vmsa_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
+@@ -1369,7 +1356,7 @@ static void ipmmu_iommu_domain_teardown(struct domain *d)
+ static const struct iommu_ops ipmmu_iommu_ops =
+ {
+     .init            = ipmmu_iommu_domain_init,
+-    .hwdom_init      = ipmmu_iommu_hwdom_init,
++    .hwdom_init      = arch_iommu_hwdom_init,
+     .teardown        = ipmmu_iommu_domain_teardown,
+     .iotlb_flush     = ipmmu_iotlb_flush,
+     .iotlb_flush_all = ipmmu_iotlb_flush_all,
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index d115df7..71b022f 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -3402,21 +3402,6 @@ static int arm_smmu_iommu_xen_domain_init(struct domain *d)
+ 
+ }
+ 
+-static void __hwdom_init arm_smmu_iommu_hwdom_init(struct domain *d)
+-{
+-	/* Set to false options not supported on ARM. */
+-	if (iommu_hwdom_inclusive)
+-		printk(XENLOG_WARNING
+-		"map-inclusive dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_inclusive = false;
+-	if (iommu_hwdom_reserved == 1)
+-		printk(XENLOG_WARNING
+-		"map-reserved dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_reserved = 0;
+-
+-	arch_iommu_hwdom_init(d);
+-}
+-
+ static void arm_smmu_iommu_xen_domain_teardown(struct domain *d)
+ {
+ 	struct arm_smmu_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
+@@ -3427,7 +3412,7 @@ static void arm_smmu_iommu_xen_domain_teardown(struct domain *d)
+ 
+ static const struct iommu_ops arm_smmu_iommu_ops = {
+ 	.init		= arm_smmu_iommu_xen_domain_init,
+-	.hwdom_init		= arm_smmu_iommu_hwdom_init,
++	.hwdom_init		= arch_iommu_hwdom_init,
+ 	.teardown		= arm_smmu_iommu_xen_domain_teardown,
+ 	.iotlb_flush		= arm_smmu_iotlb_flush,
+ 	.iotlb_flush_all	= arm_smmu_iotlb_flush_all,
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index c9dfc4c..b186c28 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -2849,21 +2849,6 @@ static int arm_smmu_iommu_domain_init(struct domain *d)
+ 	return 0;
+ }
+ 
+-static void __hwdom_init arm_smmu_iommu_hwdom_init(struct domain *d)
+-{
+-	/* Set to false options not supported on ARM. */
+-	if ( iommu_hwdom_inclusive )
+-		printk(XENLOG_WARNING
+-		"map-inclusive dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_inclusive = false;
+-	if ( iommu_hwdom_reserved == 1 )
+-		printk(XENLOG_WARNING
+-		"map-reserved dom0-iommu option is not supported on ARM\n");
+-	iommu_hwdom_reserved = 0;
+-
+-	arch_iommu_hwdom_init(d);
+-}
+-
+ static void arm_smmu_iommu_domain_teardown(struct domain *d)
+ {
+ 	struct arm_smmu_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
+@@ -2874,7 +2859,7 @@ static void arm_smmu_iommu_domain_teardown(struct domain *d)
+ 
+ static const struct iommu_ops arm_smmu_iommu_ops = {
+     .init = arm_smmu_iommu_domain_init,
+-    .hwdom_init = arm_smmu_iommu_hwdom_init,
++    .hwdom_init = arch_iommu_hwdom_init,
+     .add_device = arm_smmu_dt_add_device_generic,
+     .teardown = arm_smmu_iommu_domain_teardown,
+     .iotlb_flush = arm_smmu_iotlb_flush,
 -- 
-Regards,
-
-Oleksandr Tyshchenko
+2.7.4
 
 
