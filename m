@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD1F1C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jan 2022 16:10:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.261604.453115 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A4DC433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jan 2022 16:10:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.261605.453126 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nD7LR-0000WC-Ug; Thu, 27 Jan 2022 16:09:57 +0000
+	id 1nD7La-0001SB-9X; Thu, 27 Jan 2022 16:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 261604.453115; Thu, 27 Jan 2022 16:09:57 +0000
+Received: by outflank-mailman (output) from mailman id 261605.453126; Thu, 27 Jan 2022 16:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nD7LR-0000W3-Rd; Thu, 27 Jan 2022 16:09:57 +0000
-Received: by outflank-mailman (input) for mailman id 261604;
- Thu, 27 Jan 2022 16:09:56 +0000
+	id 1nD7La-0001Rc-4E; Thu, 27 Jan 2022 16:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 261605;
+ Thu, 27 Jan 2022 16:10:04 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=P5DO=SL=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nD7LP-0000Fm-Vu
- for xen-devel@lists.xenproject.org; Thu, 27 Jan 2022 16:09:56 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ed35694-7f8b-11ec-8eb8-a37418f5ba1a;
- Thu, 27 Jan 2022 17:09:53 +0100 (CET)
+ id 1nD7LY-0000Fm-GK
+ for xen-devel@lists.xenproject.org; Thu, 27 Jan 2022 16:10:04 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 94ecaa62-7f8b-11ec-8eb8-a37418f5ba1a;
+ Thu, 27 Jan 2022 17:10:03 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,63 +38,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ed35694-7f8b-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 94ecaa62-7f8b-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643299793;
+  d=citrix.com; s=securemail; t=1643299803;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=cqDDNo9XQo+p+6wfnK3QCWiQ2Uhfmwi7vpbD69d9GwM=;
-  b=NWzYDmhw8DJAO3UmrNQx8TfhQft1AxMrNyC4gJ7xwpYSyHVoMsXlOIUX
-   YQ+5rf1aBEbeSsa6hyRbXnu5C156OWcyEfb8sPkMXeOtXdn79izxruSUG
-   GdbNoo5XwJuCN1FvvirrB0FSadbHYpMRwpODP2S6bYvdFt1qltj3zdRuO
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: IFj/TZilgoV/a5sUEyNk8b5YQVsqKHEcaT7+kCO5ldO5aEMbOXSAo/P+jfVHduehIgM8iyXhMI
- QWM78daELv5M1mWtT8SY6Sk7/FIuahDQGusy8Va03V9hmJLulUKRQvobphE3Rl0v1MAA+bNegn
- GqFU2DWWOYi7khmc3MmG62G0IxfVjAdBgHjrH7OLb+AhAHKMBUrW4rXkqWjRVuu91so5MEwoLd
- oYtyTh+kRp0ugsZ6ftWbG8jwHEgsMotUKmhRItH/WYi/d2tI6y1Xgsn81N5YPJNBXZ+UbQ18pL
- qfL1r6cdhodIJvVS0GysNFLn
+  bh=NAfZmENFvpFC+4N9PTwRI2r2MLloqo5ssnUKxL6VWnc=;
+  b=RddqtLab8749RRKKnS8y+LNio1ANfYgcp1GSo0hE34p9PLJtyqju61kf
+   /EVTUR2230T2+mNgGX17dJX+vvRASWchYTE6c/nKyByPOuHTXzjQmEojk
+   muBEfbh0q1YNzXEcWtCF/CSeKUgj3V7J+eQ7wRCme3oTsw5WoI1zqmnCq
+   M=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: e1c40uzr/oj2qR6DsQsTx9mHdwXqQE45ey0pEAKnxMVolmDq0f7Dx2NBsL9u5qsHBbyPmWXzOB
+ CrKIdrKKebQUxSM8e+PcYKpTlFo1F+8yshzUr+KZYGcFyEg9/P5VxUEK6xPvV2+imZG1/LUAyk
+ RiGanZ6dbEbRS8W7qE0JZM3Az+aCsGy+ukdW/gP1Y6n3SqNPOZsnWkqhkTBGroie7LTytcmw7a
+ MhDWnV2Qk//pzF4PA7rG/rDt0ujupV5uwi8mlqO/SQgV5rwT3X9DqHf4CRHUTDr1ysjfRM7SX+
+ xb59jPk0NBe0BpaAFCKO4baR
 X-SBRS: 5.2
-X-MesageID: 62906692
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 62827787
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:FEXvoqkfCCFXMZiQ9ie4v5no5gxVIURdPkR7XQ2eYbSJt1+Wr1Gzt
- xIdXDvQa/zYMGSheYgiPYqw9B4H75Tdy9NjTAQ/qC81EyMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA180IMsdoUg7wbRh29Q32YLR7z6l4
- rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
- s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- OxhnoSWbTsvApfJub4kWjxlMmZ/HrITrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQ6yPP
- 5RHOGAHgBLoM1piJGlHMM8Fper0nHKvdzBT826KnP9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
- XjJl0zbKBwHMN2UyRKe72mhwOTImEvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
- 3H44QJ38/J0rhbyCICgAVvo+xZooyLwRfJpP8YiziWxzJbu5ifDP2Ehcx8Gaf854ZpeqSMR6
- neFmNbgBDpKubKTSG6A+rr8kQ5eKRT5PkdZO3ZaEFJtD83L5dhq00mRFooL/Lud04WtcQwc1
- Qxmu8TXa187qccQn5u28lnc695HjsiYF1Vljuk7s4/M0++YWGJHT9HwgbQ4xawZRGp8crVnl
- CJZ8yR5xLtWZaxhbATXHI0w8EiBvp5pygH0j191BIUG/D+w4XOldo04yGggeBwzaZ5fJ2KxP
- R67VeZtCHl7ZiXCgUhfONrZNijX5fK4SYSNug78MLKinaSdhCfYpXozNCZ8LkjmkVQ2kLFXB
- HtoWZ3EMJruMow+lGDeb75EidcDn3lirUuOG8yT50n5gNK2OS7EIZ9YYQDmRr1os8u5TPD9r
- ow32z2ikUsPCYUTo0D/rOYuELz9BSFrXM+t850OKLfrz8gPMDhJNsI9CIgJI+RN95m5XM+Rl
- p1kckMHmlf5m1PdLgCGNiJqZL/1BM4tpnMnJy08e12v3iF7M4qo6a4ecboxfKUmq7M/naIlE
- aFddpXSGOlLRxTG5y8ZMcv3ort9eUn5ngmJJSekPmQyJsYyWwzT99b4VQLz7y1SXDGvvM4zr
- uT4hAPWSJYOXSp4C8PSZK79xl+9pyFFyulzQ1HJMp9Yf0C1qNpmLCn4j/kWJcAQKEqcmmvGh
- ljOWRpB/LvDuY449tXNlJuolYbxHrssBFdeEkna8a2yaXvQ8F28zNISS+2PZz3cCj/5of3we
- eVPwvjgG/Qbh1IW4ZFkGrNmwK9itdvio7hWklZtEHnRNgn5D7phJj+N3NVVt70Lzbhc4FPkV
- kWK89hcGLOIJMK6TwJBeFt7NryOhaMOhz3fzfUpO0GrtiZ48Y2OXVhWIxTR2jdWK6F4Md99z
- Oos0CLMB9dTVvb+3g66sx1p
-IronPort-HdrOrdr: A9a23:Jf/qKKlADTwTNAPb36Gq304BkXjpDfIS3DAbv31ZSRFFG/Fw8P
- re+8jztCWE7Ar5N0tQ++xoVJPhfZq+z/9ICOsqTNGftWDd0QPDQe1fBOPZskTd8kbFh4tgPM
- lbAstD4fTLfCBHZZmQ2mKF+qwbruVvWprY/ts2tE0DcT1X
+IronPort-Data: A9a23:bm3dLarlaczQZ1FPtiWbG0OO1aleBmLMYhIvgKrLsJaIsI4StFCzt
+ garIBnUMvyNNmCgfIokaN+1oBkDvJHXxt9iQQJtqXg2QSgbpZuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dndx4f5fs7Rh2NQw2ILmW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnZyAVyYyD/SRocoyfRleSXxsLKMf/aCSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ ZBJM2UwPEuojxtnAVpIJZQw3+WRp2TnQWZV+AvIhoMo7D2GpOB2+Oe0a4eEEjCQfu1Kmm6Iq
+ 2SA+H72ajkYPtGCzTuO8lq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcU62B+s0ZuNvj+3KUYESGQces0o7copEGlCO
+ kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdRGmoq
+ w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQWDhRqjBNzAJrVkg
+ JTis5LDhAzpJcrV/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43bp1eImeyP
+ hKL5FI5CHpv0J2CN/Efj2WZUJxC8EQdPY69CqC8giRmPPCdizNrDAkxPBXNjggBYWAnkL0lO
+ IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimkUjP+efANRa9FOdUWHPTP7tRxP7V/23oH
+ yN3apHiJ+N3CrOuO0E6MOc7cDg3EJTMLcmm8pMMLr/afFMO9aNII6a5/I7NsrdNx8x9/tokN
+ FnkMqOB4Fag13DBNyuQbXVvNOHmUZpl9CppNi0wJ1e4nXMkZN/3vqsYcpI2e5gh9fBikqEoH
+ 6VUJZ3YD6QdUCnD9hQccYL58N5oeiO0iF/cJCGiejU+IcJtHlSb5t/+cwLz3yASFS7r59Amq
+ rit21qDE5oOTghvFujMb/erww/jtHQRgrsqDUDJPsNSaAPn940zc379ifo+IsctLxTfx2TFi
+ 1bKUElA/eSU+t076tjEg6yAvryFKeomExoIBXTf4Ja3KTLeojipz7hfXbvaZjvaTm71pvmvP
+ L0H0/HmPfQbt19WqI4gQa1zxKcz6taz9b9XygNoQCfCY1ixU+4yJ3CH2Y9Et7FXx68fsgyzA
+ xrd9t5fMLSPGcXkDF9Oe1Z1MrXdjakZymvI8PA4AETm/ysmrrOIXHJbMwSIlCEAfqB+N5kow
+ Lt5tcMbg+BlZsHG7jpSYvhoylmx
+IronPort-HdrOrdr: A9a23:nICjt68mR6jx/nf8M5luk+DWI+orL9Y04lQ7vn2YSXRuE/Bw8P
+ re+sjztCWE7wr5N0tQ+uxoVJPufZq+z+8Q3WByB8bBYOCOggLBR+sOgbcKqweQYhEWndQ86U
+ 4PScZD4aXLfD1Hsfo=
 X-IronPort-AV: E=Sophos;i="5.88,321,1635220800"; 
-   d="scan'208";a="62906692"
+   d="scan'208";a="62827787"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH 1/3] x86/cpuid: Disentangle logic for new feature leaves
-Date: Thu, 27 Jan 2022 16:09:38 +0000
-Message-ID: <20220127160940.19469-2-andrew.cooper3@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>, Jan Beulich <JBeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [PATCH 3/3] x86/Intel: use CPUID bit to determine PPIN availability
+Date: Thu, 27 Jan 2022 16:09:40 +0000
+Message-ID: <20220127160940.19469-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220127160940.19469-1-andrew.cooper3@citrix.com>
 References: <20220127160940.19469-1-andrew.cooper3@citrix.com>
@@ -102,164 +102,74 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Adding a new feature leaf is a reasonable amount of boilerplate and for the
-patch to build, at least one feature from the new leaf needs defining.  This
-typically causes two non-trivial changes to be merged together.
+From: Jan Beulich <jbeulich@suse.com>
 
-First, have gen-cpuid.py write out some extra placeholder defines:
+As of SDM revision 076 there is a CPUID bit for this functionality. Use
+it to amend the existing model-based logic.
 
-  #define CPUID_BITFIELD_11 bool :1, :1, lfence_dispatch:1, ...
-  #define CPUID_BITFIELD_12 uint32_t :32 /* placeholder */
-  #define CPUID_BITFIELD_13 uint32_t :32 /* placeholder */
-  #define CPUID_BITFIELD_14 uint32_t :32 /* placeholder */
-  #define CPUID_BITFIELD_15 uint32_t :32 /* placeholder */
-
-This allows DECL_BITFIELD() to be added to struct cpuid_policy without
-requiring a XEN_CPUFEATURE() declared for the leaf.  The choice of 4 is
-arbitrary, and allows us to add more than one leaf at a time if necessary.
-
-Second, rework generic_identify() to not use feature leaf names.
-
-The choice of deriving the index from a feature was to avoid mismatches, but
-its correctness depends on bugs like c/s 249e0f1d8f20 ("x86/cpuid: Fix
-TSXLDTRK definition") not happening.
-
-Switch to using FEATURESET_* just like the policy/featureset helpers.  This
-breaks the cognitive complexity of needing to know which leaf a specifically
-named feature should reside in, and is shorter to write.  It is also far
-easier to identify as correct at a glance, given the correlation with the
-CPUID leaf being read.
-
-In addition, tidy up some other bits of generic_identify()
- * Drop leading zeros from leaf numbers.
- * Don't use a locked update for X86_FEATURE_APERFMPERF.
- * Rework extended_cpuid_level calculation to avoid setting it twice.
- * Use "leaf >= $N" consistently so $N matches with the CPUID input.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
----
- xen/arch/x86/cpu/common.c | 54 +++++++++++++++++++++++------------------------
- xen/tools/gen-cpuid.py    |  2 ++
- 2 files changed, 29 insertions(+), 27 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 4a163afbfc7e..c6773c85fd3e 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -379,7 +379,7 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 	u32 eax, ebx, ecx, edx, tmp;
+Split in two.
+---
+ tools/misc/xen-cpuid.c                      |  1 +
+ xen/arch/x86/cpu/mcheck/mce_intel.c         | 10 +++++++++-
+ xen/include/public/arch-x86/cpufeatureset.h |  1 +
+ 3 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index 17e67e379fa4..3c8f3ed1bad1 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -197,6 +197,7 @@ static const char *const str_e21a[32] =
  
- 	/* Get vendor name */
--	cpuid(0x00000000, &c->cpuid_level, &ebx, &ecx, &edx);
-+	cpuid(0, &c->cpuid_level, &ebx, &ecx, &edx);
- 	*(u32 *)&c->x86_vendor_id[0] = ebx;
- 	*(u32 *)&c->x86_vendor_id[8] = ecx;
- 	*(u32 *)&c->x86_vendor_id[4] = edx;
-@@ -394,7 +394,7 @@ static void generic_identify(struct cpuinfo_x86 *c)
- 	/* Note that the vendor-specific code below might override */
+ static const char *const str_7b1[32] =
+ {
++    [ 0] = "ppin",
+ };
  
- 	/* Model and family information. */
--	cpuid(0x00000001, &eax, &ebx, &ecx, &edx);
-+	cpuid(1, &eax, &ebx, &ecx, &edx);
- 	c->x86 = get_cpu_family(eax, &c->x86_model, &c->x86_mask);
- 	c->apicid = phys_pkg_id((ebx >> 24) & 0xFF, 0);
- 	c->phys_proc_id = c->apicid;
-@@ -404,53 +404,53 @@ static void generic_identify(struct cpuinfo_x86 *c)
+ static const struct {
+diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
+index d0161e9d4daa..d63d6083d3a7 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_intel.c
++++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
+@@ -859,12 +859,20 @@ static void intel_init_ppin(const struct cpuinfo_x86 *c)
+     /*
+      * Even if testing the presence of the MSR would be enough, we don't
+      * want to risk the situation where other models reuse this MSR for
+-     * other purposes.
++     * other purposes.  Despite the late addition of a CPUID bit (rendering
++     * the MSR architectural), keep using the same detection logic there.
+      */
+     switch ( c->x86_model )
+     {
+         uint64_t val;
  
- 	/* c_early_init() may have adjusted cpuid levels/features.  Reread. */
- 	c->cpuid_level = cpuid_eax(0);
--	cpuid(0x00000001, &eax, &ebx, &ecx, &edx);
--	c->x86_capability[cpufeat_word(X86_FEATURE_FPU)] = edx;
--	c->x86_capability[cpufeat_word(X86_FEATURE_SSE3)] = ecx;
-+	cpuid(1, &eax, &ebx,
-+	      &c->x86_capability[FEATURESET_1c],
-+	      &c->x86_capability[FEATURESET_1d]);
++    default:
++        if ( !cpu_has(c, X86_FEATURE_INTEL_PPIN) )
++        {
++            ppin_msr = 0;
++            return;
++        }
++        fallthrough;
+     case 0x3e: /* IvyBridge X */
+     case 0x3f: /* Haswell X */
+     case 0x4f: /* Broadwell X */
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 588f924de59e..6e44148a0901 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -300,6 +300,7 @@ XEN_CPUFEATURE(LFENCE_DISPATCH,    11*32+ 2) /*A  LFENCE always serializing */
+ XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and limit too) */
  
- 	if ( cpu_has(c, X86_FEATURE_CLFLUSH) )
- 		c->x86_clflush_size = ((ebx >> 8) & 0xff) * 8;
+ /* Intel-defined CPU features, CPUID level 0x00000007:1.ebx, word 12 */
++XEN_CPUFEATURE(INTEL_PPIN,         12*32+ 0) /*   Protected Processor Inventory Number */
  
- 	if ( (c->cpuid_level >= CPUID_PM_LEAF) &&
- 	     (cpuid_ecx(CPUID_PM_LEAF) & CPUID6_ECX_APERFMPERF_CAPABILITY) )
--		set_bit(X86_FEATURE_APERFMPERF, c->x86_capability);
-+		__set_bit(X86_FEATURE_APERFMPERF, c->x86_capability);
-+
-+	eax = cpuid_eax(0x80000000);
-+	if ((eax >> 16) == 0x8000)
-+		c->extended_cpuid_level = eax;
+ #endif /* XEN_CPUFEATURE */
  
- 	/* AMD-defined flags: level 0x80000001 */
--	c->extended_cpuid_level = cpuid_eax(0x80000000);
--	if ((c->extended_cpuid_level >> 16) != 0x8000)
--		c->extended_cpuid_level = 0;
--	if (c->extended_cpuid_level > 0x80000000)
-+	if (c->extended_cpuid_level >= 0x80000001)
- 		cpuid(0x80000001, &tmp, &tmp,
--		      &c->x86_capability[cpufeat_word(X86_FEATURE_LAHF_LM)],
--		      &c->x86_capability[cpufeat_word(X86_FEATURE_SYSCALL)]);
-+		      &c->x86_capability[FEATURESET_e1c],
-+		      &c->x86_capability[FEATURESET_e1d]);
- 
- 	if (c->extended_cpuid_level >= 0x80000004)
- 		get_model_name(c); /* Default name */
- 	if (c->extended_cpuid_level >= 0x80000007)
--		c->x86_capability[cpufeat_word(X86_FEATURE_ITSC)]
--			= cpuid_edx(0x80000007);
-+		c->x86_capability[FEATURESET_e7d] = cpuid_edx(0x80000007);
- 	if (c->extended_cpuid_level >= 0x80000008)
--		c->x86_capability[cpufeat_word(X86_FEATURE_CLZERO)]
--			= cpuid_ebx(0x80000008);
-+		c->x86_capability[FEATURESET_e8b] = cpuid_ebx(0x80000008);
- 	if (c->extended_cpuid_level >= 0x80000021)
--		c->x86_capability[cpufeat_word(X86_FEATURE_LFENCE_DISPATCH)]
--			= cpuid_eax(0x80000021);
-+		c->x86_capability[FEATURESET_e21a] = cpuid_eax(0x80000021);
- 
- 	/* Intel-defined flags: level 0x00000007 */
--	if ( c->cpuid_level >= 0x00000007 ) {
--		cpuid_count(0x00000007, 0, &eax,
--			    &c->x86_capability[cpufeat_word(X86_FEATURE_FSGSBASE)],
--			    &c->x86_capability[cpufeat_word(X86_FEATURE_PKU)],
--			    &c->x86_capability[cpufeat_word(X86_FEATURE_AVX512_4VNNIW)]);
--		if (eax > 0)
--			cpuid_count(0x00000007, 1,
--				    &c->x86_capability[cpufeat_word(X86_FEATURE_AVX512_BF16)],
-+	if (c->cpuid_level >= 7) {
-+		uint32_t max_subleaf;
-+
-+		cpuid_count(7, 0, &max_subleaf,
-+			    &c->x86_capability[FEATURESET_7b0],
-+			    &c->x86_capability[FEATURESET_7c0],
-+			    &c->x86_capability[FEATURESET_7d0]);
-+		if (max_subleaf >= 1)
-+			cpuid_count(7, 1,
-+				    &c->x86_capability[FEATURESET_7a1],
- 				    &tmp, &tmp, &tmp);
- 	}
- 
- 	if (c->cpuid_level >= 0xd)
- 		cpuid_count(0xd, 1,
--			    &c->x86_capability[cpufeat_word(X86_FEATURE_XSAVEOPT)],
-+			    &c->x86_capability[FEATURESET_Da1],
- 			    &tmp, &tmp, &tmp);
- }
- 
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index b953648b6572..470cd76d1c52 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -423,6 +423,8 @@ def write_results(state):
- 
- """)
- 
-+    state.bitfields += ["uint32_t :32 /* placeholder */"] * 4
-+
-     for idx, text in enumerate(state.bitfields):
-         state.output.write(
-             "#define CPUID_BITFIELD_%d \\\n    %s\n\n"
 -- 
 2.11.0
 
