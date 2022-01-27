@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61316C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 27 Jan 2022 07:51:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.261221.452092 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65ED3C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 27 Jan 2022 07:51:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.261222.452103 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCzYd-0002Ca-FN; Thu, 27 Jan 2022 07:51:03 +0000
+	id 1nCzYf-0002W7-3w; Thu, 27 Jan 2022 07:51:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 261221.452092; Thu, 27 Jan 2022 07:51:03 +0000
+Received: by outflank-mailman (output) from mailman id 261222.452103; Thu, 27 Jan 2022 07:51:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nCzYd-0002CP-9u; Thu, 27 Jan 2022 07:51:03 +0000
-Received: by outflank-mailman (input) for mailman id 261221;
- Thu, 27 Jan 2022 07:51:01 +0000
+	id 1nCzYe-0002Vd-Se; Thu, 27 Jan 2022 07:51:04 +0000
+Received: by outflank-mailman (input) for mailman id 261222;
+ Thu, 27 Jan 2022 07:51:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=h4dm=SL=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1nCzYb-0000Xj-DZ
- for xen-devel@lists.xenproject.org; Thu, 27 Jan 2022 07:51:01 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0621.outbound.protection.outlook.com
- [2a01:111:f400:fe0c::621])
+ id 1nCzYd-0000Xj-6Y
+ for xen-devel@lists.xenproject.org; Thu, 27 Jan 2022 07:51:03 +0000
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on2060c.outbound.protection.outlook.com
+ [2a01:111:f400:7e1b::60c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ddff6367-7f45-11ec-8eb8-a37418f5ba1a;
- Thu, 27 Jan 2022 08:51:00 +0100 (CET)
-Received: from DB6PR0301CA0079.eurprd03.prod.outlook.com (2603:10a6:6:30::26)
- by DBAPR08MB5672.eurprd08.prod.outlook.com (2603:10a6:10:1ad::22)
+ id df22b873-7f45-11ec-8eb8-a37418f5ba1a;
+ Thu, 27 Jan 2022 08:51:02 +0100 (CET)
+Received: from AS9PR04CA0039.eurprd04.prod.outlook.com (2603:10a6:20b:46a::33)
+ by VI1PR08MB3693.eurprd08.prod.outlook.com (2603:10a6:803:ba::25)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.15; Thu, 27 Jan
- 2022 07:50:54 +0000
-Received: from DB5EUR03FT049.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:6:30:cafe::68) by DB6PR0301CA0079.outlook.office365.com
- (2603:10a6:6:30::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.15 via Frontend
- Transport; Thu, 27 Jan 2022 07:50:54 +0000
+ 2022 07:50:57 +0000
+Received: from AM5EUR03FT023.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:46a:cafe::9e) by AS9PR04CA0039.outlook.office365.com
+ (2603:10a6:20b:46a::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.17 via Frontend
+ Transport; Thu, 27 Jan 2022 07:50:57 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT049.mail.protection.outlook.com (10.152.20.191) with
+ AM5EUR03FT023.mail.protection.outlook.com (10.152.16.169) with
  Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4930.15 via Frontend Transport; Thu, 27 Jan 2022 07:50:54 +0000
+ 15.20.4930.15 via Frontend Transport; Thu, 27 Jan 2022 07:50:57 +0000
 Received: ("Tessian outbound 341d209a0e52:v113");
- Thu, 27 Jan 2022 07:50:54 +0000
-Received: from 1d318a173880.1
+ Thu, 27 Jan 2022 07:50:57 +0000
+Received: from 64383953ffce.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 5EF2D08F-F751-4B8F-B3F8-AB26A3B854F7.1; 
- Thu, 27 Jan 2022 07:50:47 +0000
+ AE18489E-133D-4068-9C1D-E88C7A94542E.1; 
+ Thu, 27 Jan 2022 07:50:50 +0000
 Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 1d318a173880.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 64383953ffce.1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 27 Jan 2022 07:50:47 +0000
-Received: from AS9PR06CA0406.eurprd06.prod.outlook.com (2603:10a6:20b:461::16)
- by VI1PR08MB2973.eurprd08.prod.outlook.com (2603:10a6:803:4d::16)
+ Thu, 27 Jan 2022 07:50:50 +0000
+Received: from AS9PR06CA0022.eurprd06.prod.outlook.com (2603:10a6:20b:462::14)
+ by AM0PR08MB5284.eurprd08.prod.outlook.com (2603:10a6:208:12a::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.17; Thu, 27 Jan
- 2022 07:50:41 +0000
-Received: from AM5EUR03FT012.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:461:cafe::cd) by AS9PR06CA0406.outlook.office365.com
- (2603:10a6:20b:461::16) with Microsoft SMTP Server (version=TLS1_2,
+ 2022 07:50:49 +0000
+Received: from AM5EUR03FT018.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:462:cafe::4a) by AS9PR06CA0022.outlook.office365.com
+ (2603:10a6:20b:462::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4930.15 via Frontend
- Transport; Thu, 27 Jan 2022 07:50:41 +0000
+ Transport; Thu, 27 Jan 2022 07:50:49 +0000
 Received: from nebula.arm.com (40.67.248.234) by
- AM5EUR03FT012.mail.protection.outlook.com (10.152.16.161) with Microsoft SMTP
+ AM5EUR03FT018.mail.protection.outlook.com (10.152.16.114) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.4930.15 via Frontend Transport; Thu, 27 Jan 2022 07:50:41 +0000
+ 15.20.4930.15 via Frontend Transport; Thu, 27 Jan 2022 07:50:49 +0000
 Received: from AZ-NEU-EX03.Arm.com (10.251.24.31) by AZ-NEU-EX03.Arm.com
  (10.251.24.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.20; Thu, 27 Jan
- 2022 07:50:40 +0000
+ 2022 07:50:47 +0000
 Received: from penny.shanghai.arm.com (10.169.188.91) by mail.arm.com
  (10.251.24.31) with Microsoft SMTP Server id 15.1.2308.20 via Frontend
- Transport; Thu, 27 Jan 2022 07:50:38 +0000
+ Transport; Thu, 27 Jan 2022 07:50:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -86,12 +86,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ddff6367-7f45-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: df22b873-7f45-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=92c4thxXtm2R15izEYnn+8igZY9iFkc7Fk+R9NtSz44=;
- b=ucYr5ThdxMW4w6n1FZ4ZNboL1NZNo5AjIZF8bbU/LaxyWETDTyy82/9sDgkIWezcjJdEujDHmxssAhlKOE0QytCK5n4aJMtu49hM3ugDG5v8NaVyswfC/JE/IM41zwX7t73swbfkDKK40ArwzvzCF7P3FGUgzBgyENTKkxfp2uc=
+ bh=k8CtSJ23GsJakIevRnNKBt0vBQ8CUngOOT5AcDXX548=;
+ b=MUWYoiRlmLlGeKcBomXuCxRIRI0rJ9n1X8NHwTEFB5uo6gMXOBk2wctW/JB1MPitV3ru8dhKhQtv+bcrv9VYPzER2FZPoaeLhQHdQiA7pppRE709Kgq1iOydI0UkEl/H6mYx5z6TpxsQYoGiFEROCftXZM9uTtJjemN0Zptgrgg=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
@@ -99,15 +99,15 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  63.35.35.123 as permitted sender) receiver=protection.outlook.com;
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: b91a6021e0fab8e2
+X-CR-MTA-CID: 3a3dd52fa7e5f5e0
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TPiwNwHhPVs8Xke09dN2hh1lZhyQ+O43EHePUjxJWpyfeG4xOpY8Zo2aeOWk1pU5LS17R6W6PhAMtpOeGWTWp0YsM5aJ7FjpHkDwY5dhPLqrB044A5pLBSlmacdUu/klMPW6FDCjMyYE4BX/icbUSyD5F5jHhQhxmA5Jpcv5FrBOCXx2MnIQXG+HyHG6wz4E+JU909T2iLZMK7fwYGFYtcIcQQgrmh5J46Q0uOk8mmPYjh3uQr0DeCvYas08qTLRbKNc6tpwXgLMDS/LXmrYN1e13PR/XaiREOtSD4dL7MakDJbAjKWkJ3hagicWzpJcceBKHnRIX9/Rj359fyn2ig==
+ b=KtlDUKZCSdazox97n0JYFSKN8IDFf9Rw6Ds8BBHbwG6JoXrsP6KS1SQ8rPVnV+EJHgirz3tEr7vZCkbXIuQFZ8RHYItknTns3/KK21xRV9NofofQGDAUhUbveRdjy8iaIhyJQ/Ab2Q9hU3COXV8GfoSG7IA2yy6Uczajagt0nCEZs7j0DII+oS7dM1CawzsweotiWwrvOEW9/MM0CHl9f6RnNLBUOd4KfLkI2+9xC8Xa4jAkpVUZuqMdyEXXFFeGWeKDvEXB6QzSUmDF1YkbXajwJryL/OHBePNPTW8R7e4s+ranuuRYq3S2N6JiVvzXKnj5CyjjbmEojwgWAfNtcA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=92c4thxXtm2R15izEYnn+8igZY9iFkc7Fk+R9NtSz44=;
- b=NH4gKpne+VjEh/RCto+oQ38bGOodF7cCLiDvzccDRF1EVVCe5HEcCnAWHOuvW2+78x/xDGFcSJsQo3pL8bTFjIPuaKw6AgvRwxtuVcS03b20kuswRddTY6mZiaNdyT0aVniDEyTP3SeU8rWg20pACL1s4bLu/M9uxLsyuILs1dsC4jCd+xzOBHGWqAIBWmy16d1zk2/nQkQMi6RLXxA/XnaeoPohoxdp4BTQI/MR+EP9vrTIq4p3Y4AwtIYLNFTuS2QG3dIVqRp4yW5X/aLxktSnKaGOC6BN1p8sJ6hEa81D6rNVnrSK6CbDvAv+Rme9+5cAoXM4u4A6qQ9jpJM7Cg==
+ bh=k8CtSJ23GsJakIevRnNKBt0vBQ8CUngOOT5AcDXX548=;
+ b=f0icKa2Et5sF6boMTWRyKWqdExipo2uW6PX/GEwpNii3bpOCEF+DBFKsYrBhUELooRc5osHjQTB8A6G4z0KcQjaqd8OGXXe6VUMPGeN8pFIkc88Dt6MfVnPhakiLQ9/ziSAkG5NVXjqCCndOeEjpBZ/GUa6UOcctLDr+7VKOsLScT1Sy216eaOAjDosx4kUXXm1aTv9weFi3RAGQOD+UevA75oe8XPJ1lbCZBDrBKX2/SdplHLF9hPvlmmehf0ZY4eNfiZn0fDqbUpDiJyEq7wIxNf34PnZKC8U0nwLJ5495yQrC6mAtRB1kpHJBAD6FfSU0TThl0N+P4BfkRj8yOg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -115,8 +115,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=92c4thxXtm2R15izEYnn+8igZY9iFkc7Fk+R9NtSz44=;
- b=ucYr5ThdxMW4w6n1FZ4ZNboL1NZNo5AjIZF8bbU/LaxyWETDTyy82/9sDgkIWezcjJdEujDHmxssAhlKOE0QytCK5n4aJMtu49hM3ugDG5v8NaVyswfC/JE/IM41zwX7t73swbfkDKK40ArwzvzCF7P3FGUgzBgyENTKkxfp2uc=
+ bh=k8CtSJ23GsJakIevRnNKBt0vBQ8CUngOOT5AcDXX548=;
+ b=MUWYoiRlmLlGeKcBomXuCxRIRI0rJ9n1X8NHwTEFB5uo6gMXOBk2wctW/JB1MPitV3ru8dhKhQtv+bcrv9VYPzER2FZPoaeLhQHdQiA7pppRE709Kgq1iOydI0UkEl/H6mYx5z6TpxsQYoGiFEROCftXZM9uTtJjemN0Zptgrgg=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
  smtp.mailfrom=arm.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=arm.com;
@@ -127,9 +127,9 @@ From: Penny Zheng <penny.zheng@arm.com>
 To: <xen-devel@lists.xenproject.org>, <sstabellini@kernel.org>,
 	<julien@xen.org>
 CC: <Bertrand.Marquis@arm.com>, <Wei.Chen@arm.com>
-Subject: [PATCH v5 07/11] xen/arm: if direct-map domain use native addresses for GICv2
-Date: Thu, 27 Jan 2022 07:49:25 +0000
-Message-ID: <20220127074929.502885-8-penny.zheng@arm.com>
+Subject: [PATCH v5 10/11] xen/arm: if direct-map domain use native UART address and IRQ number for vPL011
+Date: Thu, 27 Jan 2022 07:49:28 +0000
+Message-ID: <20220127074929.502885-11-penny.zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220127074929.502885-1-penny.zheng@arm.com>
 References: <20220127074929.502885-1-penny.zheng@arm.com>
@@ -137,309 +137,319 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 1
-X-MS-Office365-Filtering-Correlation-Id: 0634c7f6-cb23-43d0-eac3-08d9e169bf18
+X-MS-Office365-Filtering-Correlation-Id: daccd649-5a00-4051-036a-08d9e169c108
 X-MS-TrafficTypeDiagnostic:
-	VI1PR08MB2973:EE_|DB5EUR03FT049:EE_|DBAPR08MB5672:EE_
+	AM0PR08MB5284:EE_|AM5EUR03FT023:EE_|VI1PR08MB3693:EE_
 X-Microsoft-Antispam-PRVS:
-	<DBAPR08MB56720E6053873A94A625AA18F7219@DBAPR08MB5672.eurprd08.prod.outlook.com>
+	<VI1PR08MB3693F6E054A3E014B723B2A2F7219@VI1PR08MB3693.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 NoDisclaimer: true
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;OLM:9508;
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;OLM:10000;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- bsTBQiZBPJw7Vh9hHaUPZGlr11VdhvUroyKLq1Ui8orAUT2XEUe6Z/nsEtbd7uGxvGWg5dzRAP6P3876Oy8FU1oDW9UP0D001g8SNYIr5hmDx3uHCWyPPUei8QcRAlDl2Qcj5J0vVzyq6QDx3aVFLIeZ7pJ8NTWyPTZTfbjTXQi5stBUz1V+hCWV/91UvvnodbRjYPB9MZT2EUmksixlVmunBXVhMpKvtWzkfCqUFIYN3ETk1mVaQ/ml3YIQxhZv716Ff0fO4CMoIKfaps53QkBj8tSQUEJUtT1EBPRwm8+cbZWwk3hHBVYzmwgdz8d0f6nWNNyVnCxo+KgabLA1m6ucgYiUVQui1FmpsOddnF3m0xdhG8LqBLGWoCO5gItGtCPi4ReLmjwjaU6anx9LLC0R3aSUOz+qEdWXrdN7rAqQgKllqnyhi55x6MmQFYoiMlmoeFWQuob5dSTllk82Khw4tSKn1E9hjKN1gOo0GXA+z6Vfr4KlE6YaWAA5BR3QAgX6093BrR5uDmx6VObYUmYhCi08W91V+UsyjBNHKHahthHU2kVe4OUfH8l3xJBv7lBq3Arww++5DkIWyYJNJlwo1itvpGwv/dJClaRb5ddstEEoPq2MTGYjgOFFJuQZ7l3nTKjqBXbNAkQp+HjzC0W0FyhcxsHyUK7grYdS1sQBP7zU0XycMzf7+u/kd4cZMGZTl+RSmFZNFtIEVfrBmA==
+ ini/MalvR427+EcTDQvf8NVgUWbWdQqp6aiadtzQRcuTIf1pIaLU2vhoOHNMHb74f1UDbcTt7/0W3KFWk1apnhrNhLq6F6cJ2w6qcJW8bBtuut4dEP8HhEup6fTf7i9zbsTQ90sZgGd6aEWVGjGn3C5SST4NMCFXKChOfLrTueSvGPXhykliM2aXBJmYYcfGRA+P8u030oKbONVX/+WCRS7BbOuka4Lsv8mwERkISBcvqIW/RPAwT2yojPzZMqWoaT/nWPWI4jyvPEWZ9Fl/9A4t5nInJHK3itSJGXt1eOQaYrTojIjl9MnPZCwSTylQKEHpIMYg4EztK2rBuyRLVSUmx86hA4MiGRTf3kPCkoPzJHsUbpT9f+nxO8vurYQsmrE8+HHZNgqeYncuc/EhUunALsOD7casEsIeQLHj293xJZAIT6NVWTH/hcgzhpqj/jzI6RcOU+l5wwXzqVdUWA9kdK5V/Kylb4HaxSJ2yDUeHdb/PtC3ijYBOdmGYmD4pecDFXSYEkSfhgTZI5nvt76X29pJmXS610SnW7Wt3NbXwpmQNOyCCWYA45i7GmsM6rAVNk+PlDuoCewjIUNS7PAEd3SzOAiFyZJHxiaa0PYUX/+u+DxBktWYghqh3/c0iakfVjYqgdEt/NDFfwDUX32TyyKOeXw7t9QdF7BcHkHxXbDmhCEgRTdvrPM3vr43+DUbj6fJuzeWicSS9lUdhg==
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(46966006)(40470700004)(70206006)(70586007)(336012)(426003)(8676002)(8936002)(86362001)(4326008)(83380400001)(82310400004)(44832011)(5660300002)(356005)(47076005)(81166007)(54906003)(6666004)(36860700001)(2906002)(40460700003)(36756003)(110136005)(2616005)(508600001)(316002)(7696005)(186003)(26005)(1076003)(36900700001)(20210929001);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB2973
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(36756003)(6666004)(70586007)(70206006)(426003)(336012)(8676002)(8936002)(5660300002)(4326008)(7696005)(508600001)(86362001)(316002)(54906003)(40460700003)(110136005)(356005)(44832011)(2906002)(81166007)(2616005)(1076003)(26005)(186003)(47076005)(82310400004)(36860700001)(83380400001)(36900700001)(20210929001);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB5284
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT049.eop-EUR03.prod.protection.outlook.com
+ AM5EUR03FT023.eop-EUR03.prod.protection.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	9c634ab6-6b37-42a8-8455-08d9e169b74f
+	0aaa8d1c-3a95-47ca-4149-08d9e169bc1b
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	WRSJHTXCd0yr3GYIyqd4mnnjLTIe6rONgv5Yv1EPxNLZKGH2+fdJb/26XT54EzJ5Nund0nOV2tFRp4Yzm12kYUoAkSoCkfMoPxoEUT2Fptjx70ZNiTEnoG5w2DS5FC2O/e5oABh7qv/r/C6ZKSB8sRjFUFGFeW/olHhuiMLIJM/zmPnhazWmePOcuNRx/WCSSe5FS5YV6B6j+uDuBqWYrBlsFPhV31axQCOtUNzaJUlpcxUrRYKWjsriehMczW0x1Xy13fk14yYr1yKBMkJ3q2U+7xbBHv9xPdhLGFKtNNfhzcgXvts8XwH3D2w0gWWaicHaS3+mtte+3HzQdrPWXk//eRsn8EAizK4grrzv6UYQoyFZJ2ixNtZsAMFdnfcetIqXZhUTuWQeeGSeFGk+5WobWktAZIOG3wM+mi1gDZ4T0fxP/ec7F2YOAiofvwJ89UJF8cyQGumb2MbkuR8o26ZpLaBy6yVdLx5BSUvTIPpmBlShsiXCJIEMAzlG6mNhD4ofvpRxb5W/sTaq/qlL9LBr+WlciMKsKPjBpZ5ejwkdXaRGz2eJo5JKTFOAlPa2ty9PNcZDlgbABQxG8POYLHCDxq4NbolGztyF5rMZbTLp3Q0ZCjuuibJ9qB4p5u4kVmrXxmMA5sAOgcQJKKTEptXUJ6l1rB17oHH0wqPJ0Jf1EHT+MKR0RWibA12TaNs+
+	QzCHNVuQV6uzGxJSnVf2wn6H2kqcsiYMLgiaqW/P7xdyV25D5hcGK2TKgaW4zyJ3djgo4fO7RoQryCF76BKLhG4JZzkhLmDqEmPUOO3NVUfmqH5lXsJuW4EBbifhFZBSJfAeKJ1m2e/JPVcuB+UJuVOuPlca/0Jwvugw6SuH3P+40H/LFYT1kGCJ4U2kswVHyt9ny7EZumT1Xs2PfnGXG7BUwlXhnrpcEkI2KjpitvzyTf8A1oQ+PMxcyPR1NaoAi11cgdeGqlLbZsDtCg6xqMUJe7OEC1pziseXf7VVG8SOECKZ2qyes5OPfv0bbi0wlwNL0ySDlGA2uSHt5oe16luFBUpl1TzyLbO8bGbraFOWmNdk7RHMbjtgZ4kicb/gWzC03je4smBrjKoJpfDBzeSXkUmFBODujAW1OE/AA8c1N59HFokW1DjElG6unBqZUP8haWoT2Zb2NSHFsaCtqWSDzTH1YBHw3oE7d1X/jtpuQWB7EAP1mDgsw53/zl19AHYVejVSPY2wRd+SyduxEUioLD7RcoCNBdw8bPMgNQkFnrHmyRlX6/fshjAD0N4wfVEpQjFYgjOctLl6ftA5BMDowUGcsQTz1k01hkOv4rk8FYCQqyG7nt1Qx1LzlfOycjzk7Lh32sv/GxVYQDnhngy0KqARrU+8MRxG6/uNwgx30753B2GP+P8Nh7qCplB3
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(46966006)(36840700001)(40470700004)(70206006)(70586007)(110136005)(5660300002)(8936002)(8676002)(36756003)(44832011)(82310400004)(54906003)(2906002)(316002)(4326008)(81166007)(7696005)(40460700003)(2616005)(36860700001)(6666004)(47076005)(26005)(83380400001)(426003)(336012)(1076003)(508600001)(186003)(86362001)(20210929001);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(46966006)(36840700001)(54906003)(36756003)(186003)(86362001)(1076003)(6666004)(26005)(2616005)(40460700003)(110136005)(316002)(47076005)(508600001)(44832011)(36860700001)(81166007)(5660300002)(336012)(70586007)(70206006)(8936002)(8676002)(4326008)(82310400004)(426003)(7696005)(2906002)(83380400001)(20210929001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2022 07:50:54.3532
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jan 2022 07:50:57.5354
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0634c7f6-cb23-43d0-eac3-08d9e169bf18
+X-MS-Exchange-CrossTenant-Network-Message-Id: daccd649-5a00-4051-036a-08d9e169c108
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT049.eop-EUR03.prod.protection.outlook.com
+	AM5EUR03FT023.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR08MB5672
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB3693
 
 From: Stefano Stabellini <sstabellini@kernel.org>
 
-Today we use native addresses to map the GICv2 for Dom0 and fixed
-addresses for DomUs.
+We always use a fix address to map the vPL011 to domains. The address
+could be a problem for direct-map domains.
 
-This patch changes the behavior so that native addresses are used for
-all domains that are direct-mapped.
+So, for domains that are directly mapped, reuse the address of the
+physical UART on the platform to avoid potential clashes.
 
-NEW VGIC has different naming schemes, like referring distributor base
-address as vgic_dist_base, other than the dbase. So this patch also introduces
-vgic_dist_base/vgic_cpu_base accessor to access correct distributor base
-address/cpu interface base address on varied scenarios,
+Do the same for the virtual IRQ number: instead of always using
+GUEST_VPL011_SPI, try to reuse the physical SPI number if possible.
 
 Signed-off-by: Stefano Stabellini <sstabellini@kernel.org>
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Tested-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-v2 changes
-- combine all changes in patch 4-6 here
+v2 changes:
+- explain why vpl011 initialization before creating its device tree node
+- error out if the domain is direct-mapped and the IRQ is not found
+- harden the code and add a check/comment when the hardware UART region
+is smaller than GUEST_VPL011_SIZE.
 ---
-v3 changes
+v3 changes:
+- explain how the '27' was found for 'buf'
+- fix checking before dereferencing
 - refine comment message
-- add a comment explaining how the 38 was found of "char buf[38]"
-- simply map the CPU interface at the GPA vgic_v2_hw.cbase
-- remove a spurious change
 ---
 v4 changes:
-- refine comment to let it be a summary of the if/else if/else.
+- refine comment message
 ---
 v5 changes:
 - nothing changed
 ---
- xen/arch/arm/domain_build.c         | 11 +++++++---
- xen/arch/arm/include/asm/new_vgic.h | 10 +++++++++
- xen/arch/arm/include/asm/vgic.h     | 11 ++++++++++
- xen/arch/arm/vgic-v2.c              | 34 +++++++++++++++++++++++------
- xen/arch/arm/vgic/vgic-v2.c         | 34 +++++++++++++++++++++++------
- 5 files changed, 83 insertions(+), 17 deletions(-)
+ xen/arch/arm/domain_build.c       | 44 +++++++++++++++++++----
+ xen/arch/arm/include/asm/vpl011.h |  2 ++
+ xen/arch/arm/vpl011.c             | 60 +++++++++++++++++++++++++++----
+ 3 files changed, 92 insertions(+), 14 deletions(-)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 52f256de9c..87391adde6 100644
+index cff2cb93cc..8be01678de 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -2273,8 +2273,13 @@ static int __init make_gicv2_domU_node(struct kernel_info *kinfo)
-     int res = 0;
-     __be32 reg[(GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS) * 2];
-     __be32 *cells;
-+    const struct domain *d = kinfo->d;
-+    /* Placeholder for interrupt-controller@ + a 64-bit number + \0 */
-+    char buf[38];
+@@ -30,6 +30,7 @@
  
--    res = fdt_begin_node(fdt, "interrupt-controller@"__stringify(GUEST_GICD_BASE));
-+    snprintf(buf, sizeof(buf), "interrupt-controller@%"PRIx64,
-+             vgic_dist_base(&d->arch.vgic));
+ #include <xen/irq.h>
+ #include <xen/grant_table.h>
++#include <xen/serial.h>
+ 
+ static unsigned int __initdata opt_dom0_max_vcpus;
+ integer_param("dom0_max_vcpus", opt_dom0_max_vcpus);
+@@ -2415,8 +2416,12 @@ static int __init make_vpl011_uart_node(struct kernel_info *kinfo)
+     gic_interrupt_t intr;
+     __be32 reg[GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS];
+     __be32 *cells;
++    struct domain *d = kinfo->d;
++    /* Placeholder for sbsa-uart@ + a 64-bit number + \0 */
++    char buf[27];
+ 
+-    res = fdt_begin_node(fdt, "sbsa-uart@"__stringify(GUEST_PL011_BASE));
++    snprintf(buf, sizeof(buf), "sbsa-uart@%"PRIx64, d->arch.vpl011.base_addr);
 +    res = fdt_begin_node(fdt, buf);
      if ( res )
          return res;
  
-@@ -2296,9 +2301,9 @@ static int __init make_gicv2_domU_node(struct kernel_info *kinfo)
+@@ -2426,14 +2431,14 @@ static int __init make_vpl011_uart_node(struct kernel_info *kinfo)
  
      cells = &reg[0];
-     dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
--                       GUEST_GICD_BASE, GUEST_GICD_SIZE);
-+                       vgic_dist_base(&d->arch.vgic), GUEST_GICD_SIZE);
-     dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
--                       GUEST_GICC_BASE, GUEST_GICC_SIZE);
-+                       vgic_cpu_base(&d->arch.vgic), GUEST_GICC_SIZE);
+     dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS,
+-                       GUEST_ROOT_SIZE_CELLS, GUEST_PL011_BASE,
++                       GUEST_ROOT_SIZE_CELLS, d->arch.vpl011.base_addr,
+                        GUEST_PL011_SIZE);
  
      res = fdt_property(fdt, "reg", reg, sizeof(reg));
-     if (res)
-diff --git a/xen/arch/arm/include/asm/new_vgic.h b/xen/arch/arm/include/asm/new_vgic.h
-index 97d622bff6..ab57fcd91d 100644
---- a/xen/arch/arm/include/asm/new_vgic.h
-+++ b/xen/arch/arm/include/asm/new_vgic.h
-@@ -186,6 +186,16 @@ struct vgic_cpu {
-     uint32_t num_id_bits;
+     if ( res )
+         return res;
+ 
+-    set_interrupt(intr, GUEST_VPL011_SPI, 0xf, DT_IRQ_TYPE_LEVEL_HIGH);
++    set_interrupt(intr, d->arch.vpl011.virq, 0xf, DT_IRQ_TYPE_LEVEL_HIGH);
+ 
+     res = fdt_property(fdt, "interrupts", intr, sizeof (intr));
+     if ( res )
+@@ -3145,6 +3150,14 @@ static int __init construct_domU(struct domain *d,
+     else
+         assign_static_memory_11(d, &kinfo, node);
+ 
++    /*
++     * Base address and irq number are needed when creating vpl011 device
++     * tree node in prepare_dtb_domU, so initialization on related variables
++     * shall be done first.
++     */
++    if ( kinfo.vpl011 )
++        rc = domain_vpl011_init(d, NULL);
++
+     rc = prepare_dtb_domU(d, &kinfo);
+     if ( rc < 0 )
+         return rc;
+@@ -3153,9 +3166,6 @@ static int __init construct_domU(struct domain *d,
+     if ( rc < 0 )
+         return rc;
+ 
+-    if ( kinfo.vpl011 )
+-        rc = domain_vpl011_init(d, NULL);
+-
+     return rc;
+ }
+ 
+@@ -3200,15 +3210,35 @@ void __init create_domUs(void)
+ 
+         if ( !dt_property_read_u32(node, "nr_spis", &d_cfg.arch.nr_spis) )
+         {
++            unsigned int vpl011_virq = GUEST_VPL011_SPI;
++
+             d_cfg.arch.nr_spis = gic_number_lines() - 32;
+ 
++            /*
++             * The VPL011 virq is GUEST_VPL011_SPI, unless direct-map is
++             * set, in which case it'll match the hardware.
++             *
++             * Since the domain is not yet created, we can't use
++             * d->arch.vpl011.irq. So the logic to find the vIRQ has to
++             * be hardcoded.
++             * The logic here shall be consistent with the one in
++             * domain_vpl011_init().
++             */
++            if ( flags & CDF_directmap )
++            {
++                vpl011_virq = serial_irq(SERHND_DTUART);
++                if ( vpl011_virq < 0 )
++                    panic("Error getting IRQ number for this serial port %d\n",
++                          SERHND_DTUART);
++            }
++
+             /*
+              * vpl011 uses one emulated SPI. If vpl011 is requested, make
+              * sure that we allocate enough SPIs for it.
+              */
+             if ( dt_property_read_bool(node, "vpl011") )
+                 d_cfg.arch.nr_spis = MAX(d_cfg.arch.nr_spis,
+-                                         GUEST_VPL011_SPI - 32 + 1);
++                                         vpl011_virq - 32 + 1);
+         }
+ 
+         /*
+diff --git a/xen/arch/arm/include/asm/vpl011.h b/xen/arch/arm/include/asm/vpl011.h
+index e6c7ab7381..c09abcd7a9 100644
+--- a/xen/arch/arm/include/asm/vpl011.h
++++ b/xen/arch/arm/include/asm/vpl011.h
+@@ -53,6 +53,8 @@ struct vpl011 {
+     uint32_t    uarticr;        /* Interrupt clear register */
+     uint32_t    uartris;        /* Raw interrupt status register */
+     uint32_t    shadow_uartmis; /* shadow masked interrupt register */
++    paddr_t     base_addr;
++    unsigned int virq;
+     spinlock_t  lock;
+     evtchn_port_t evtchn;
  };
+diff --git a/xen/arch/arm/vpl011.c b/xen/arch/arm/vpl011.c
+index 895f436cc4..43522d48fd 100644
+--- a/xen/arch/arm/vpl011.c
++++ b/xen/arch/arm/vpl011.c
+@@ -29,6 +29,7 @@
+ #include <xen/mm.h>
+ #include <xen/sched.h>
+ #include <xen/console.h>
++#include <xen/serial.h>
+ #include <public/domctl.h>
+ #include <public/io/console.h>
+ #include <asm/pl011-uart.h>
+@@ -71,11 +72,11 @@ static void vpl011_update_interrupt_status(struct domain *d)
+      * status bit has been set since the last time.
+      */
+     if ( uartmis & ~vpl011->shadow_uartmis )
+-        vgic_inject_irq(d, NULL, GUEST_VPL011_SPI, true);
++        vgic_inject_irq(d, NULL, vpl011->virq, true);
  
-+static inline paddr_t vgic_cpu_base(const struct vgic_dist *vgic)
-+{
-+    return vgic->vgic_cpu_base;
-+}
-+
-+static inline paddr_t vgic_dist_base(const struct vgic_dist *vgic)
-+{
-+    return vgic->vgic_dist_base;
-+}
-+
- #endif /* __ASM_ARM_NEW_VGIC_H */
+     vpl011->shadow_uartmis = uartmis;
+ #else
+-    vgic_inject_irq(d, NULL, GUEST_VPL011_SPI, uartmis);
++    vgic_inject_irq(d, NULL, vpl011->virq, uartmis);
+ #endif
+ }
  
- /*
-diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
-index ade427a808..d2a9fc7d83 100644
---- a/xen/arch/arm/include/asm/vgic.h
-+++ b/xen/arch/arm/include/asm/vgic.h
-@@ -152,6 +152,7 @@ struct vgic_dist {
-     struct pending_irq *pending_irqs;
-     /* Base address for guest GIC */
-     paddr_t dbase; /* Distributor base address */
-+    paddr_t cbase; /* CPU interface base address */
- #ifdef CONFIG_GICV3
-     /* GIC V3 addressing */
-     /* List of contiguous occupied by the redistributors */
-@@ -271,6 +272,16 @@ static inline int REG_RANK_NR(int b, uint32_t n)
- 
- enum gic_sgi_mode;
- 
-+static inline paddr_t vgic_cpu_base(const struct vgic_dist *vgic)
-+{
-+    return vgic->cbase;
-+}
-+
-+static inline paddr_t vgic_dist_base(const struct vgic_dist *vgic)
-+{
-+    return vgic->dbase;
-+}
-+
- /*
-  * Offset of GICD_<FOO><n> with its rank, for GICD_<FOO> size <s> with
-  * <b>-bits-per-interrupt.
-diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
-index 589c033eda..b1bd7a46ad 100644
---- a/xen/arch/arm/vgic-v2.c
-+++ b/xen/arch/arm/vgic-v2.c
-@@ -654,12 +654,16 @@ static int vgic_v2_vcpu_init(struct vcpu *v)
- static int vgic_v2_domain_init(struct domain *d)
+@@ -347,7 +348,8 @@ static int vpl011_mmio_read(struct vcpu *v,
+                             void *priv)
  {
-     int ret;
--    paddr_t cbase, csize;
-+    paddr_t csize;
-     paddr_t vbase;
- 
-     /*
--     * The hardware domain gets the hardware address.
--     * Guests get the virtual platform layout.
-+     * The hardware domain and direct-mapped domain both get the hardware
-+     * address.
-+     * We have to handle them separately because the hwdom is re-using the
-+     * same Device-Tree as the host (see more details below).
-+     *
-+     * Other domains get the virtual platform layout.
-      */
-     if ( is_hardware_domain(d) )
-     {
-@@ -671,10 +675,26 @@ static int vgic_v2_domain_init(struct domain *d)
-          * Note that we assume the size of the CPU interface is always
-          * aligned to PAGE_SIZE.
-          */
--        cbase = vgic_v2_hw.cbase;
-+        d->arch.vgic.cbase = vgic_v2_hw.cbase;
-         csize = vgic_v2_hw.csize;
-         vbase = vgic_v2_hw.vbase;
-     }
-+    else if ( is_domain_direct_mapped(d) )
-+    {
-+        /*
-+         * For all the direct-mapped domain other than the hardware domain,
-+         * we only map a 8kB CPU interface but we make sure it is at a
-+         * location occupied by the physical GIC in the host device tree.
-+         *
-+         * We need to add an offset to the virtual CPU interface base
-+         * address when the GIC is aliased to get a 8kB contiguous
-+         * region.
-+         */
-+        d->arch.vgic.dbase = vgic_v2_hw.dbase;
-+        d->arch.vgic.cbase = vgic_v2_hw.cbase;
-+        csize = GUEST_GICC_SIZE;
-+        vbase = vgic_v2_hw.vbase + vgic_v2_hw.aliased_offset;
-+    }
-     else
-     {
-         d->arch.vgic.dbase = GUEST_GICD_BASE;
-@@ -685,7 +705,7 @@ static int vgic_v2_domain_init(struct domain *d)
-          * region.
-          */
-         BUILD_BUG_ON(GUEST_GICC_SIZE != SZ_8K);
--        cbase = GUEST_GICC_BASE;
-+        d->arch.vgic.cbase = GUEST_GICC_BASE;
-         csize = GUEST_GICC_SIZE;
-         vbase = vgic_v2_hw.vbase + vgic_v2_hw.aliased_offset;
-     }
-@@ -694,8 +714,8 @@ static int vgic_v2_domain_init(struct domain *d)
-      * Map the gic virtual cpu interface in the gic cpu interface
-      * region of the guest.
-      */
--    ret = map_mmio_regions(d, gaddr_to_gfn(cbase), csize / PAGE_SIZE,
--                           maddr_to_mfn(vbase));
-+    ret = map_mmio_regions(d, gaddr_to_gfn(d->arch.vgic.cbase),
-+                           csize / PAGE_SIZE, maddr_to_mfn(vbase));
-     if ( ret )
-         return ret;
- 
-diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
-index b5ba4ace87..1a99d3a8b4 100644
---- a/xen/arch/arm/vgic/vgic-v2.c
-+++ b/xen/arch/arm/vgic/vgic-v2.c
-@@ -258,13 +258,17 @@ void vgic_v2_enable(struct vcpu *vcpu)
- int vgic_v2_map_resources(struct domain *d)
+     struct hsr_dabt dabt = info->dabt;
+-    uint32_t vpl011_reg = (uint32_t)(info->gpa - GUEST_PL011_BASE);
++    uint32_t vpl011_reg = (uint32_t)(info->gpa -
++                                     v->domain->arch.vpl011.base_addr);
+     struct vpl011 *vpl011 = &v->domain->arch.vpl011;
+     struct domain *d = v->domain;
+     unsigned long flags;
+@@ -430,7 +432,8 @@ static int vpl011_mmio_write(struct vcpu *v,
+                              void *priv)
  {
-     struct vgic_dist *dist = &d->arch.vgic;
--    paddr_t cbase, csize;
-+    paddr_t csize;
-     paddr_t vbase;
-     int ret;
+     struct hsr_dabt dabt = info->dabt;
+-    uint32_t vpl011_reg = (uint32_t)(info->gpa - GUEST_PL011_BASE);
++    uint32_t vpl011_reg = (uint32_t)(info->gpa -
++                                     v->domain->arch.vpl011.base_addr);
+     struct vpl011 *vpl011 = &v->domain->arch.vpl011;
+     struct domain *d = v->domain;
+     unsigned long flags;
+@@ -626,6 +629,49 @@ int domain_vpl011_init(struct domain *d, struct vpl011_init_info *info)
+     if ( vpl011->backend.dom.ring_buf )
+         return -EINVAL;
  
-     /*
--     * The hardware domain gets the hardware address.
--     * Guests get the virtual platform layout.
-+     * The hardware domain and direct-mapped domain both get the hardware
-+     * address.
-+     * We have to handle them separately because the hwdom is re-using the
-+     * same Device-Tree as the host (see more details below).
-+     *
-+     * Other domains get the virtual platform layout.
-      */
-     if ( is_hardware_domain(d) )
-     {
-@@ -276,10 +280,26 @@ int vgic_v2_map_resources(struct domain *d)
-          * Note that we assume the size of the CPU interface is always
-          * aligned to PAGE_SIZE.
-          */
--        cbase = gic_v2_hw_data.cbase;
-+        d->arch.vgic.vgic_cpu_base = gic_v2_hw_data.cbase;
-         csize = gic_v2_hw_data.csize;
-         vbase = gic_v2_hw_data.vbase;
-     }
-+    else if ( is_domain_direct_mapped(d) )
++    /*
++     * The VPL011 virq is GUEST_VPL011_SPI, except for direct-map domains
++     * where the hardware value shall be used.
++     * The logic here should stay in sync with the one in
++     * create_domUs().
++     */
++    if ( is_domain_direct_mapped(d) )
 +    {
-+        d->arch.vgic.vgic_dist_base = gic_v2_hw_data.dbase;
++        const struct vuart_info *uart = serial_vuart_info(SERHND_DTUART);
++        int vpl011_irq = serial_irq(SERHND_DTUART);
++
++        if ( (uart != NULL) && (vpl011_irq > 0) )
++        {
++            vpl011->base_addr = uart->base_addr;
++            vpl011->virq = vpl011_irq;
++        }
++        else
++        {
++            printk(XENLOG_ERR
++                   "vpl011: Unable to re-use the Xen UART information.\n");
++            return -EINVAL;
++        }
++
 +        /*
-+         * For all the direct-mapped domain other than the hardware domain,
-+         * we only map a 8kB CPU interface but we make sure it is at a location
-+         * occupied by the physical GIC in the host device tree.
-+         *
-+         * We need to add an offset to the virtual CPU interface base
-+         * address when the GIC is aliased to get a 8kB contiguous
-+         * region.
++         * Since the PL011 we emulate for the guest requires a 4KB region,
++         * and on some Hardware (e.g. on some sunxi SoC), the UART MMIO
++         * region is less than 4KB, in which case, there may exist multiple
++         * devices within the same 4KB region, here adds the following check to
++         * prevent potential known pitfalls
 +         */
-+        d->arch.vgic.vgic_cpu_base = gic_v2_hw_data.cbase;
-+        csize = GUEST_GICC_SIZE;
-+        vbase = gic_v2_hw_data.vbase + gic_v2_hw_data.aliased_offset;
++        if ( uart->size < GUEST_PL011_SIZE )
++        {
++            printk(XENLOG_ERR
++                   "vpl011: Can't re-use the Xen UART MMIO region as it is too small.\n");
++            return -EINVAL;
++        }
 +    }
-     else
-     {
-         d->arch.vgic.vgic_dist_base = GUEST_GICD_BASE;
-@@ -290,7 +310,7 @@ int vgic_v2_map_resources(struct domain *d)
-          * region.
-          */
-         BUILD_BUG_ON(GUEST_GICC_SIZE != SZ_8K);
--        cbase = GUEST_GICC_BASE;
-+        d->arch.vgic.vgic_cpu_base = GUEST_GICC_BASE;
-         csize = GUEST_GICC_SIZE;
-         vbase = gic_v2_hw_data.vbase + gic_v2_hw_data.aliased_offset;
++    else
++    {
++        vpl011->base_addr = GUEST_PL011_BASE;
++        vpl011->virq = GUEST_VPL011_SPI;
++    }
++
+     /*
+      * info is NULL when the backend is in Xen.
+      * info is != NULL when the backend is in a domain.
+@@ -661,7 +707,7 @@ int domain_vpl011_init(struct domain *d, struct vpl011_init_info *info)
+         }
      }
-@@ -308,8 +328,8 @@ int vgic_v2_map_resources(struct domain *d)
-      * Map the gic virtual cpu interface in the gic cpu interface
-      * region of the guest.
-      */
--    ret = map_mmio_regions(d, gaddr_to_gfn(cbase), csize / PAGE_SIZE,
--                           maddr_to_mfn(vbase));
-+    ret = map_mmio_regions(d, gaddr_to_gfn(d->arch.vgic.vgic_cpu_base),
-+                           csize / PAGE_SIZE, maddr_to_mfn(vbase));
-     if ( ret )
+ 
+-    rc = vgic_reserve_virq(d, GUEST_VPL011_SPI);
++    rc = vgic_reserve_virq(d, vpl011->virq);
+     if ( !rc )
      {
-         gdprintk(XENLOG_ERR, "Unable to remap VGIC CPU to VCPU\n");
+         rc = -EINVAL;
+@@ -673,12 +719,12 @@ int domain_vpl011_init(struct domain *d, struct vpl011_init_info *info)
+     spin_lock_init(&vpl011->lock);
+ 
+     register_mmio_handler(d, &vpl011_mmio_handler,
+-                          GUEST_PL011_BASE, GUEST_PL011_SIZE, NULL);
++                          vpl011->base_addr, GUEST_PL011_SIZE, NULL);
+ 
+     return 0;
+ 
+ out2:
+-    vgic_free_virq(d, GUEST_VPL011_SPI);
++    vgic_free_virq(d, vpl011->virq);
+ 
+ out1:
+     if ( vpl011->backend_in_domain )
 -- 
 2.25.1
 
