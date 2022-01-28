@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4CEC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE84FC4332F
 	for <xen-devel@archiver.kernel.org>; Fri, 28 Jan 2022 21:33:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.262149.454322 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.262145.454279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDYrt-0002Mm-JI; Fri, 28 Jan 2022 21:33:17 +0000
+	id 1nDYrh-0001MM-So; Fri, 28 Jan 2022 21:33:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 262149.454322; Fri, 28 Jan 2022 21:33:17 +0000
+Received: by outflank-mailman (output) from mailman id 262145.454279; Fri, 28 Jan 2022 21:33:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDYrt-0002K1-9V; Fri, 28 Jan 2022 21:33:17 +0000
-Received: by outflank-mailman (input) for mailman id 262149;
- Fri, 28 Jan 2022 21:33:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nDYrh-0001MF-PT; Fri, 28 Jan 2022 21:33:05 +0000
+Received: by outflank-mailman (input) for mailman id 262145;
+ Fri, 28 Jan 2022 21:33:04 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wh6+=SM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1nDYrr-0001cx-6y
- for xen-devel@lists.xenproject.org; Fri, 28 Jan 2022 21:33:15 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [2604:1380:4601:e00::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e61555c2-8081-11ec-8eb8-a37418f5ba1a;
- Fri, 28 Jan 2022 22:33:14 +0100 (CET)
+ id 1nDYrg-0001M8-TQ
+ for xen-devel@lists.xenproject.org; Fri, 28 Jan 2022 21:33:04 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id de4c123f-8081-11ec-8f75-fffcc8bd4f1a;
+ Fri, 28 Jan 2022 22:33:02 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id C32B7B82712;
- Fri, 28 Jan 2022 21:33:13 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1A333C340EE;
- Fri, 28 Jan 2022 21:33:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 8FC6F61E9A;
+ Fri, 28 Jan 2022 21:33:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E1245C340EC;
+ Fri, 28 Jan 2022 21:32:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,69 +45,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e61555c2-8081-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: de4c123f-8081-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1643405592;
-	bh=uo5SD5LknaPvjJ9o9KYAlXFMnGBluvR70SgtsEcJmPc=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=qS5bRtf9dV22ICIT+x5QZ2noHh8He9luIbktKoCmhY5OGZngy+eTM7I49jDQ/13Aw
-	 yXcedtKzNAUUf6WosIsKmjXl8mZZtIDpGOBra2mhp6cunv2m58uCxxqCg8rPF42gZ/
-	 sUig1fxB3dN3HycV8EfnhlxpUNWL8iaTMUWsNJSSf6fC6eYPAKCzA1W3U+IOR1zEWJ
-	 w+XXBEs+MXyZFOSLft9ec/HAMer96h+tGmCNVTouhPrmkoLp0Ea5toXDAzgjcg0ze4
-	 iNrV0Tr9ZiROtZis07SaK37Lq7dJXDtOEYT64hxqLI4WSQzMgCsfpf2NU4vEVkVKVh
-	 He/BWwNTfYoIw==
+	s=k20201202; t=1643405580;
+	bh=DVSVQE2+B4BrH2Gb3Fiu+UcJh3jXsRSt4BAmn6YYQMc=;
+	h=Date:From:To:cc:Subject:From;
+	b=bt5ZjhrZL5AMzy1XGcXe0zYVbDMWZt+kqcn9jj+dGfpuPUsszANM5yHdx2+pXW/MC
+	 ifsmoLv0xQQGxBBPVOtvd+WpqodBfyJFZomt9Zmj2b43327Aa7SEdfdJbig8wHKDdG
+	 jv+bcg/OqIj72StE0tL7Hw0uho9eTw0aYBwFAvdtpXEB53Oyot4RWu/iI8GNe2Ydap
+	 J9vfsu2VjQo0jGqPfYDFOXmGJmPv4UVeLUdzjfFIiMMyWnR1c7PLKaPUzRS5e2C9Ik
+	 KbHDnaMfoTgATbzQ8h0VxqcW85zcT7tNPo4qNP8pSU8LOuCReLdUJRBavtfMu07TBl
+	 MGMpNhjwr0MdQ==
+Date: Fri, 28 Jan 2022 13:32:59 -0800 (PST)
 From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	jgross@suse.com,
-	Bertrand.Marquis@arm.com,
-	julien@xen.org,
-	Volodymyr_Babchuk@epam.com,
-	Luca Miccio <lucmiccio@gmail.com>,
-	Stefano Stabellini <stefano.stabellini@xilinx.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: [PATCH v3 4/5] xenstored: send an evtchn notification on introduce_domain
-Date: Fri, 28 Jan 2022 13:33:05 -0800
-Message-Id: <20220128213307.2822078-4-sstabellini@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <alpine.DEB.2.22.394.2201281330520.27308@ubuntu-linux-20-04-desktop>
-References: <alpine.DEB.2.22.394.2201281330520.27308@ubuntu-linux-20-04-desktop>
+cc: sstabellini@kernel.org, jgross@suse.com, Bertrand.Marquis@arm.com, 
+    julien@xen.org, Volodymyr_Babchuk@epam.com
+Subject: [PATCH v3 0/5] dom0less PV drivers
+Message-ID: <alpine.DEB.2.22.394.2201281330520.27308@ubuntu-linux-20-04-desktop>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 
-From: Luca Miccio <lucmiccio@gmail.com>
+Hi all,
 
-When xs_introduce_domain is called, send out a notification on the
-xenstore event channel so that any (dom0less) domain waiting for the
-xenstore interface to be ready can continue with the initialization.
+Currently dom0less guests cannot use PV drivers because they don't have
+access to xenstore. Also, the hypervisor node in device tree is missing
+so they don't detect that they are running on Xen (thus, they don't try
+to enable PV interfaces.)
 
-The extra notification is harmless for domains that don't require it.
+This patch series enables dom0less guests (on ARM) to use PV drivers.
 
-Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
-Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
-Changes in v2:
-- drop the new late_init parameter
----
- tools/xenstore/xenstored_domain.c | 3 +++
- 1 file changed, 3 insertions(+)
+Instead of initializing xenstore immediately at boot, dom0less guests
+get access to xenstore later. They delay the initialization until they
+receive a notification via the xenstore event channel (which is
+available at boot.)
 
-diff --git a/tools/xenstore/xenstored_domain.c b/tools/xenstore/xenstored_domain.c
-index d03c7d93a9..7487129e47 100644
---- a/tools/xenstore/xenstored_domain.c
-+++ b/tools/xenstore/xenstored_domain.c
-@@ -461,6 +461,9 @@ static struct domain *introduce_domain(const void *ctx,
- 		/* Now domain belongs to its connection. */
- 		talloc_steal(domain->conn, domain);
- 
-+		/* Notify the domain that xenstore is available */
-+		xenevtchn_notify(xce_handle, domain->port);
-+
- 		if (!is_master_domain && !restore)
- 			fire_watches(NULL, ctx, "@introduceDomain", NULL,
- 				     false, NULL);
--- 
-2.25.1
+An example workflow is as follows:
+- all domains start in parallel, dom0less guests are immediately running
+- when dom0 is up and running, the init-dom0less application is called
+- dom0less guests receive the notification and initialize xenstore
+- now xl network-attach/disk-attach works as expected for dom0less domUs
 
+The patch series introduces a new dom0less device tree option
+"xen,enhanced" (in the Xen device tree) to specify whether PV interfaces
+should be enabled/disabled for the dom0less guest.
+
+Cheers,
+
+Stefano
+
+
+Luca Miccio (4):
+      xen: make evtchn_alloc_unbound public
+      xen/arm: configure dom0less domain for enabling xenstore after boot
+      xenstored: send an evtchn notification on introduce_domain
+      tools: add example application to initialize dom0less PV drivers
+
+Stefano Stabellini (1):
+      xen: introduce xen,enhanced dom0less property
+
+ docs/misc/arm/device-tree/booting.txt |  18 +++
+ tools/helpers/Makefile                |  13 ++
+ tools/helpers/init-dom0less.c         | 269 ++++++++++++++++++++++++++++++++++
+ tools/xenstore/xenstored_domain.c     |   3 +
+ xen/arch/arm/domain_build.c           |  49 +++++++
+ xen/arch/arm/include/asm/kernel.h     |   3 +
+ xen/common/event_channel.c            |  13 +-
+ xen/include/xen/event.h               |   3 +
+ 8 files changed, 366 insertions(+), 5 deletions(-)
+ create mode 100644 tools/helpers/init-dom0less.c
 
