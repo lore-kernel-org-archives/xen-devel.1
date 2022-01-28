@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 447B3C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Jan 2022 20:30:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.262141.454268 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C144BC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Jan 2022 21:33:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.262146.454290 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDXsl-0003hy-C8; Fri, 28 Jan 2022 20:30:07 +0000
+	id 1nDYrr-0001eL-5f; Fri, 28 Jan 2022 21:33:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 262141.454268; Fri, 28 Jan 2022 20:30:07 +0000
+Received: by outflank-mailman (output) from mailman id 262146.454290; Fri, 28 Jan 2022 21:33:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDXsl-0003hr-8b; Fri, 28 Jan 2022 20:30:07 +0000
-Received: by outflank-mailman (input) for mailman id 262141;
- Fri, 28 Jan 2022 20:30:06 +0000
+	id 1nDYrr-0001e9-1o; Fri, 28 Jan 2022 21:33:15 +0000
+Received: by outflank-mailman (input) for mailman id 262146;
+ Fri, 28 Jan 2022 21:33:13 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wh6+=SM=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1nDXsk-0003dh-1v
- for xen-devel@lists.xenproject.org; Fri, 28 Jan 2022 20:30:06 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ id 1nDYrp-0001cx-ME
+ for xen-devel@lists.xenproject.org; Fri, 28 Jan 2022 21:33:13 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 120d823b-8079-11ec-8eb8-a37418f5ba1a;
- Fri, 28 Jan 2022 21:30:04 +0100 (CET)
+ id e45ac956-8081-11ec-8eb8-a37418f5ba1a;
+ Fri, 28 Jan 2022 22:33:12 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id DD72A61DE6;
- Fri, 28 Jan 2022 20:30:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E781CC340E7;
- Fri, 28 Jan 2022 20:30:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id D0C6961EA2;
+ Fri, 28 Jan 2022 21:33:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48118C340E7;
+ Fri, 28 Jan 2022 21:33:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,247 +45,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 120d823b-8079-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: e45ac956-8081-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1643401801;
-	bh=RKV20mcs0YQ9ZC7KBpf+XAcxdeRT8EKhtQvq5kUUK+8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=sbGLy2nKEEIhkv54P/gr8hp4m3phf1ze92FAdZEfCI16D+QmArj3V5+rrKYa0Pd40
-	 wBWeqJrjs+S7UhNrG8Ujg/6bIRA4O2HoIUrJsopuv1uPLKyct36YL68xSxkxzVHfv0
-	 Dc9HP5eETeKN+JipfQHH+FakgFXxviX2LNs9rGZOlZHY1hZqAfiDQs04yNedm3Dcb+
-	 4dI+sSKLVp3LPt07CZGAMqVAl9zpRLB88pRxwhdC5FRiGKqAUJQmLSILQwE9vS1Je7
-	 mbU7h2t+U95ny/mKnIRL/mU3eZ2sxOujXO9DOJXxVq+8q2auJrX51LRGOnqDKZG+XA
-	 WZR8jSG7q1WmA==
-Date: Fri, 28 Jan 2022 12:30:00 -0800 (PST)
+	s=k20201202; t=1643405590;
+	bh=YK3fmTEfi9K2Ficig+PWAtwXSeRhCCBhmIzpGhNdTvY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=kALIBh445OYoredSX29fwx2QMuUsON3Ykd9WBMP0xTv1jPh3BzHc4tnLGjAOOx35z
+	 6KAEEMhg2+lYywXJpZZeI0kty2+R6Qaq6JpLNnrOZ87oTeRhCR8mWmWUzQ3pvG2rGb
+	 UAIc4jiqOz9HHjqkj9WSeQegqi6JUOkqArsdXAiJlujQxFrKITAjMwUENaF1MQ1kR9
+	 bnMn/Rw71iHRJJBknYr30eJYYn4XuejGTrKUlO/aQxMlbHjYMxTs3JC8B3yLhvitji
+	 a0Z46GLIOM3Au1C0XKjIyXNa03IHHQwIdXeLldTyoMNiVOuvFf/Vq4jPy9ABJutkuc
+	 UzfgDxHz+DyCg==
 From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
-cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
-    Julien Grall <julien.grall.oss@gmail.com>, 
-    xen-devel <xen-devel@lists.xenproject.org>, stefanos@xilinx.com, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: Re: [XEN v1] xen/arm: io: Check ESR_EL2.ISV != 0 before searching
- for a MMIO handler
-In-Reply-To: <95944225-6642-b41c-c496-d735826e3c93@xilinx.com>
-Message-ID: <alpine.DEB.2.22.394.2201281224230.27308@ubuntu-linux-20-04-desktop>
-References: <20220126165827.61168-1-ayankuma@xilinx.com> <CAJ=z9a1KjOAeR4vpRQGA_sYSvx1h331NKim2bgG8jyru94Beow@mail.gmail.com> <eeedbb72-d881-363d-c862-234b705eaec7@xilinx.com> <CAJ=z9a0VEqr_ODQZvdsO82PiOpHt5-TVc4JWE5pJCeNYPh+XHg@mail.gmail.com>
- <bee7ea7a-6d3d-bf3c-4b5f-d40deb601867@xilinx.com> <2064878e-4ef1-f0a3-1476-7175c2c8d29e@xen.org> <bcd28a18-80ea-0987-6867-5c6fc634a8a5@xilinx.com> <f6853134-8b65-5ffb-b39a-62ed26b3f499@xen.org> <alpine.DEB.2.22.394.2201271327430.27308@ubuntu-linux-20-04-desktop>
- <CAJ=z9a2Sp6w0b21p96YHx4w_m0jAbYJ4v=cVar-1nPeL7SotZw@mail.gmail.com> <CAJ=z9a1HML30aGn52GY34g-QbvLPHep7j=H-UDxsH1+B0CEb3Q@mail.gmail.com> <alpine.DEB.2.22.394.2201271513330.27308@ubuntu-linux-20-04-desktop> <9880cf7c-962f-8a32-483c-2bf5889d3273@xen.org>
- <95944225-6642-b41c-c496-d735826e3c93@xilinx.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org,
+	jgross@suse.com,
+	Bertrand.Marquis@arm.com,
+	julien@xen.org,
+	Volodymyr_Babchuk@epam.com,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH v3 1/5] xen: introduce xen,enhanced dom0less property
+Date: Fri, 28 Jan 2022 13:33:02 -0800
+Message-Id: <20220128213307.2822078-1-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <alpine.DEB.2.22.394.2201281330520.27308@ubuntu-linux-20-04-desktop>
+References: <alpine.DEB.2.22.394.2201281330520.27308@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-140742879-1643401618=:27308"
-Content-ID: <alpine.DEB.2.22.394.2201281227040.27308@ubuntu-linux-20-04-desktop>
+Content-Transfer-Encoding: 8bit
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
---8323329-140742879-1643401618=:27308
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.22.394.2201281227041.27308@ubuntu-linux-20-04-desktop>
+Introduce a new "xen,enhanced" dom0less property to enable/disable PV
+driver interfaces for dom0less guests. Currently only "enabled" and
+"disabled" are supported property values (and empty). Leave the option
+open to implement further possible values in the future (e.g.
+"xenstore" to enable only xenstore.)
 
-On Fri, 28 Jan 2022, Ayan Kumar Halder wrote:
-> Hi Julien/Stefano,
-> 
-> Good discussion to learn about Xen (from a newbie's perspective). :)
-> 
-> I am trying to clarify my understanding. Some queries as below :-
-> 
-> On 28/01/2022 09:46, Julien Grall wrote:
-> > 
-> > 
-> > On 28/01/2022 01:20, Stefano Stabellini wrote:
-> > > On Thu, 27 Jan 2022, Julien Grall wrote:
-> > > > On Thu, 27 Jan 2022 at 23:05, Julien Grall <julien.grall.oss@gmail.com>
-> > > > wrote:
-> > > > > 
-> > > > > On Thu, 27 Jan 2022 at 22:40, Stefano Stabellini
-> > > > > <sstabellini@kernel.org> wrote:
-> > > > > > I am with you on both points.
-> > > > > > 
-> > > > > > One thing I noticed is that the code today is not able to deal with
-> > > > > > IO_UNHANDLED for MMIO regions handled by IOREQ servers or Xen MMIO
-> > > > > > emulator handlers. p2m_resolve_translation_fault and try_map_mmio
-> > > > > > are
-> > > > > > called after try_handle_mmio returns IO_UNHANDLED but
-> > > > > > try_handle_mmio is
-> > > > > > not called a second time (or am I mistaken?)
-> > > > > 
-> > > > > Why would you need it? If try_mmio_fault() doesn't work the first
-> > > > > time, then
-> > > > 
-> > > > Sorry I meant try_handle_mmio().
-> > > > 
-> > > > > it will not work the second it.
-> > > 
-> > > I think I explained myself badly, I'll try again below.
-> > > 
-> > > 
-> > > > > > Another thing I noticed is that currently find_mmio_handler and
-> > > > > > try_fwd_ioserv expect dabt to be already populated and valid so it
-> > > > > > would
-> > > > > > be better if we could get there only when dabt.valid.
-> > > > > > 
-> > > > > > With these two things in mind, I think maybe the best thing to do is
-> > > > > > to
-> > > > > > change the code in do_trap_stage2_abort_guest slightly so that
-> > > > > > p2m_resolve_translation_fault and try_map_mmio are called first when
-> > > > > > !dabt.valid.
-> > > > > 
-> > > > > An abort will mostly likely happen because of emulated I/O. If we call
-> > > > > p2m_resolve_translation_fault() and try_map_mmio() first, then it
-> > > > > means
-> > > > > the processing will take longer than necessary for the common case.
-> > > > > 
-> > > > > So I think we want to keep the order as it is. I.e first trying the
-> > > > > MMIO
-> > > > > and then falling back to the less likely reason for a trap.
-> > > 
-> > > Yeah I thought about it as well. The idea would be that if dabt.valid is
-> > > set then we leave things as they are (we call try_handle_mmio first) but
-> > > if dabt.valid is not set (it is not valid) then we skip the
-> > > try_handle_mmio() call because it wouldn't succeed anyway and go
-> > > directly to p2m_resolve_translation_fault() and try_map_mmio().
-> > > 
-> > > If either of them work (also reading what you wrote about it) then we
-> > > return immediately.
-> > 
-> > Ok. So the assumption is data abort with invalid syndrome would mostly
-> > likely be because of a fault handled by p2m_resolve_translation_fault().
-> > 
-> > I think this makes sense. However, I am not convinced we can currently
-> > safely call try_map_mmio() before try_handle_mmio(). This is because the
-> > logic in try_map_mmio() is quite fragile and we may mistakenly map an
-> > emulated region.
-> 
-> By emulated region, you mean vgic.dbase (Refer
-> https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/arch/arm/vgic-v2.c;h=589c033eda8f5e11af33c868eae2c159f985eac9;hb=0bdc43c8dec993258e930b34855853c22b917519#l702,
-> which has not been mapped to the guest) and thus requires an MMIO handler.
-> 
-> Is my understanding correcr ?
+The configurable option is for domUs only. For dom0 we always set the
+corresponding property in the Xen code to true (PV interfaces enabled.)
+
+This patch only parses the property. Next patches will make use of it.
+
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
+---
+Changes in v3:
+- improve commit message
+
+Changes in v2:
+- rename kinfo.enhanced to kinfo.dom0less_enhanced
+- set kinfo.dom0less_enhanced to true for dom0
+- handle -ENODATA in addition to -EILSEQ
+---
+ docs/misc/arm/device-tree/booting.txt | 18 ++++++++++++++++++
+ xen/arch/arm/domain_build.c           |  8 ++++++++
+ xen/arch/arm/include/asm/kernel.h     |  3 +++
+ 3 files changed, 29 insertions(+)
+
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index 71895663a4..38c29fb3d8 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -169,6 +169,24 @@ with the following properties:
+     Please note that the SPI used for the virtual pl011 could clash with the
+     physical SPI of a physical device assigned to the guest.
  
-I'll try to answer for Julien but yes.
-
-
-> If so, can Xen mantain a table of such emulated regions ? I am guessing that
-> all emulated regions will have a mmio_handler. Then, before invoking
-> try_map_mmio(), it can check the table.
-
-Today we keep those as a list, see find_mmio_handler (for regions
-emulated in Xen) and also ioreq_server_select (for regions emulated by
-QEMU or other external emulators.)
-
-But I think there might be a simpler way: if you look at try_map_mmio,
-you'll notice that there is iomem_access_permitted check. I don't think
-that check can succeed for an emulated region. (I'd love for Julien and
-others to confirm this observation though.)
-
++- xen,enhanced
++
++    A string property. Possible property values are:
++
++    - "enabled" (or missing property value)
++    Xen PV interfaces, including grant-table and xenstore, will be
++    enabled for the VM.
++
++    - "disabled"
++    Xen PV interfaces are disabled.
++
++    If the xen,enhanced property is present with no value, it defaults
++    to "enabled". If the xen,enhanced property is not present, PV
++    interfaces are disabled.
++
++    In the future other possible property values might be added to
++    enable only selected interfaces.
++
+ - nr_spis
  
-> > Similarly, we can't call try_map_mmio() before
-> > p2m_resolve_translation_fault() because a transient fault may be
-> > misinterpreted.
-> > 
-> > I think we may be able to harden try_map_mmio() by checking if the I/O
-> > region is emulated. But this will need to be fully thought through first.
-> > 
-> > > 
-> > > If not, then we call decode_instruction from do_trap_stage2_abort_guest
-> > > and try again. The second time dabt.valid is set so we end up calling
-> > > try_handle_mmio() as usual.
-> > 
-> > With the approach below, you will also end up to call
-> > p2m_resolve_translation_fault() and try_map_mmio() a second time if
-> > try_handle_mmio() fails.
-> > 
-> > > 
-> > > Just for clarity let me copy/paste the relevant code, apologies if it
-> > > was already obvious to you -- I got the impression my suggestion wasn't
-> > > very clear.
-> > > 
-> > > 
-> > > 
-> > > +again:
-> > > +        if ( is_data && hsr.dabt.valid )
-> > >          {
-> > >              enum io_state state = try_handle_mmio(regs, hsr, gpa);
-> > > 
-> > >              switch ( state )
-> > >              {
-> > >              case IO_ABORT:
-> > >                  goto inject_abt;
-> > >              case IO_HANDLED:
-> > >                  advance_pc(regs, hsr);
-> > >                  return;
-> > >              case IO_RETRY:
-> > >                  /* finish later */
-> > >                  return;
-> > >              case IO_UNHANDLED:
-> > >                  /* IO unhandled, try another way to handle it. */
-> > >                  break;
-> > >              }
-> > >          }
-> > > 
-> > >          /*
-> > >           * First check if the translation fault can be resolved by the
-> > >           * P2M subsystem. If that's the case nothing else to do.
-> > >           */
-> > >          if ( p2m_resolve_translation_fault(current->domain,
-> > >                                             gaddr_to_gfn(gpa)) )
-> > >              return;
-> > > 
-> > >          if ( is_data && try_map_mmio(gaddr_to_gfn(gpa)) )
-> > >              return;
-> > > 
-> > > +        if ( !hsr.dabt.valid )
-> > One more thing I noticed, a stage 2 fault can also happen on an access made
-> > for a stage 1 translation walk. In this case, I think we don't want to
-> > decode the instruction.
-> > 
-> > So this would need to be !hsr.dabt.valid && !hsr.dabt.s1ptw. Depending on
-> > which patch we go with, this would also need to be adjusted in the other one
-> > as well.
-> 
-> This triggered me to check for the remaining bits as well. Refer DDI 0487G.b
-> Armv8 Arm, "ISS encoding for an exception from a Data Abort", Page D13-3219
-> 
-> I guess we need to check the following :-
-> 
-> 1. !hsr.dabt.valid
-> 
-> 2. !hsr.dabt.s1ptw - Abort may be due to stage 1 translation table walk
-> 
-> 3. !hsr.dabt.cache - Abort is due to cache maintenance or address translation
-> instructions. We do not decode these instructions.
-> 
-> 4. !hsr.dabt.eat - Abort is external
-
-Yes, makes sense to me
-
+     Optional. A 32-bit integer specifying the number of SPIs (Shared
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 6931c022a2..9144d6c0b6 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2963,6 +2963,7 @@ static int __init construct_domU(struct domain *d,
+                                  const struct dt_device_node *node)
+ {
+     struct kernel_info kinfo = {};
++    const char *dom0less_enhanced;
+     int rc;
+     u64 mem;
  
-> There is no need to check the following due to the reasons mentioned :-
-> 
-> 1. hsr.dabt.dfsc - no need as we have already determined that it is a
-> translation fault from EL0/EL1.
-> 
-> 2. hsr.dabt.write - no need as the fault can be caused due to both read or
-> write
-> 
-> 3. hsr.dabt.fnv - no use for this in instruction decoding
+@@ -2978,6 +2979,12 @@ static int __init construct_domU(struct domain *d,
+ 
+     kinfo.vpl011 = dt_property_read_bool(node, "vpl011");
+ 
++    rc = dt_property_read_string(node, "xen,enhanced", &dom0less_enhanced);
++    if ( rc == -EILSEQ ||
++         rc == -ENODATA ||
++         (rc == 0 && !strcmp(dom0less_enhanced, "enabled")) )
++        kinfo.dom0less_enhanced = true;
++
+     if ( vcpu_create(d, 0) == NULL )
+         return -ENOMEM;
+ 
+@@ -3095,6 +3102,7 @@ static int __init construct_dom0(struct domain *d)
+ 
+     kinfo.unassigned_mem = dom0_mem;
+     kinfo.d = d;
++    kinfo.dom0less_enhanced = true;
+ 
+     rc = kernel_probe(&kinfo, NULL);
+     if ( rc < 0 )
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index 874aa108a7..c4dc039b54 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -36,6 +36,9 @@ struct kernel_info {
+     /* Enable pl011 emulation */
+     bool vpl011;
+ 
++    /* Enable PV drivers */
++    bool dom0less_enhanced;
++
+     /* GIC phandle */
+     uint32_t phandle_gic;
+ 
+-- 
+2.25.1
 
-These also makes sense to me
-
-
-> 4. hsr.dabt.sbzp0 - Bits[12:11] - We know that DFSC cannot be 0b010000
-> (FEAT_RAS), We may not check for FEAT_LS64 as from the instruction opcode, we
-> can make out that it is not ST64BV, LD64B, ST64B or ST64BV0
-> 
->                          Bit[13] - VCNR - The instruction opcode will tell us
-> that it is not MRS/MSR instruction.
-
-Yeah this check could be useful in the future but it would be redundant
-at the moment. I am fine either way, I'll let other comment.
-
---8323329-140742879-1643401618=:27308--
 
