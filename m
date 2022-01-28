@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED6DBC4167B
-	for <xen-devel@archiver.kernel.org>; Fri, 28 Jan 2022 13:30:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.261996.453969 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46045C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 28 Jan 2022 13:30:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.262004.454046 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDRK7-0003an-4W; Fri, 28 Jan 2022 13:29:55 +0000
+	id 1nDRKH-0005eT-Fs; Fri, 28 Jan 2022 13:30:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 261996.453969; Fri, 28 Jan 2022 13:29:55 +0000
+Received: by outflank-mailman (output) from mailman id 262004.454046; Fri, 28 Jan 2022 13:30:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nDRK7-0003ag-1U; Fri, 28 Jan 2022 13:29:55 +0000
-Received: by outflank-mailman (input) for mailman id 261996;
- Fri, 28 Jan 2022 13:29:53 +0000
+	id 1nDRKH-0005Zt-4c; Fri, 28 Jan 2022 13:30:05 +0000
+Received: by outflank-mailman (input) for mailman id 262004;
+ Fri, 28 Jan 2022 13:30:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5Vxm=SM=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nDRK5-0003aP-69
- for xen-devel@lists.xenproject.org; Fri, 28 Jan 2022 13:29:53 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5d225354-803e-11ec-8f75-fffcc8bd4f1a;
- Fri, 28 Jan 2022 14:29:49 +0100 (CET)
+ id 1nDRKF-0003aP-1i
+ for xen-devel@lists.xenproject.org; Fri, 28 Jan 2022 13:30:03 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 64c5d369-803e-11ec-8f75-fffcc8bd4f1a;
+ Fri, 28 Jan 2022 14:30:01 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,230 +38,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5d225354-803e-11ec-8f75-fffcc8bd4f1a
+X-Inumbo-ID: 64c5d369-803e-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1643376589;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=1M4Vs3hW9Vi1gMrvvAtCAVzuVssJwllF6xsNbufR8lA=;
-  b=a2ueQnQGDAenJHwjZfr2P/PeKoztuCYStPTMkY3SBboZkGinKTnv89Ef
-   jlmz99dvTY2S5pYJa7p3JW/an5qy3c31Gm7Fnx0rinNwB/o1A1bJbqhRo
-   KAZp2a7VzPQN+JTQSkcHyAL+GZ0jtAnbJqPlFCB+uyEhC/T+of8cj4Hz1
-   8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: SPPmJcLovjZDcJyCVO+NcGfbD4l7jXxKk+deKFReQce1ZqEVGZMihLxhmskFZHOsq/ZL8q5Ull
- CqRFt7uCFikgYnCBEfNNH3v3kghY664GY3Oa30vRgZDCSGW+eNiztFoRk+he7IAttkRUsc/vHK
- ljENliwGyYNqUVHvSGYrWz9B+mpVQ8XlYta+p/GsG8ebuWC9o60xvY0zx980QlICmV521fxVC4
- ls/lnkrDlls3TIMuktKcO9tpmIZQ/WZ452bwRpv4KF7UDCMPuQ5Ulhz06B1jzt0OqtvOfQfiyg
- muS1jhjx45fJG7FVciFDrxA/
+  d=citrix.com; s=securemail; t=1643376601;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=6XFzfWwACy8HBslJifmIBor59KoqvIUElcwNprhZhXM=;
+  b=Ov72tRGdsNQHi6wO9MKxt0gDyB4g70nYcf2kKqBxJZV9Ona61w3gk9zY
+   Z0h5oWHak2iCZ6MhZWJz/ntwIf0eH10ImHr4TGiJWfozhlGdaeTzzur45
+   9mHy7h/T4GiX71PSTMoZhGAndoMQ8IRtcpgez6RBRR9H3Kn0wOlS1gg4T
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: piDLzOU5VEiQ3+JIHjzXHS/8OU/Vg2LGWyleCFplUSAavkOdDdXOG1mKvwBI/Zve0YorWJWkyw
+ 39Xxr9U02x0D9XoWC+cFLQO0LATY2XtLesgnDeP4i0/F7LIOpT8PHMpOJnLXVczgUJQmsZH6IA
+ uxA4YfwmJdHwA8wnnWGK7WTgMkoxVHwwKRfxSL5z7//VYfkdpegV/6jUJG3u/ad5QX7B+cp9x7
+ 2wQhAmri11SITSsHB1N0hsEySLfpCtEY76oWMKGHxEyBkAcjeGoUKVgShdRXStzhF7EWr5+t47
+ dUVRqtEzowHwXJEjlOs7cqsy
 X-SBRS: 5.2
-X-MesageID: 62450234
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 62981613
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:2pdZ/K3CtyCFIp8LaPbD5Qd2kn2cJEfYwER7XKvMYLTBsI5bpzVUm
- mYbDGDXPvjcamKkLt12bYqzph9TucTRxoRhHFBtpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o6wb5h3uaEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhhPcy1
- IUK6qyJT1kXboHwo6MfUTJZHHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u3JwTRayFO
- 6L1bxJhQCT6WxlVCGw2BZcBkbeO3lzRaSJH/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
- kDs8nn9AxoaHMeC0jfD+XWp7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWZj5EA
- xVKoGx09/F0rRH1CImmN/GlnJKalgU7GMYAVLIK0QfT9Pr43z3eBGovTzEUPbTKq/QKbTAt0
- 1aImfbgCjpurKCZRBqhy1uEkd+hEXNLdDFfPEfoWSNAuoC++99r0nojW/4+SPbdszHjJd3nL
- 9lmRgAajq5bs8ME3r7TEbvv02P1/cihouLYC2zqsoOZAuFROdbNi2+AswGzARN8wGCxFATpU
- J8swJD20Qz2JcvR/BFhuc1UdF1T296LMSfHnXlkFIQ7+jKm9haLJN4Mu2slfBw3b55ZKFcFh
- XM/XysLuve/21PxNcdKj3+ZUZx2ncAM6/y7PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
- v+mnTKXJS9CU8xPlWPuL89EiOND7n1gmQv7GM6qpzz6gev2TCPEEt8tbQrRBt3VGYvZ+m05B
- f4FaZvTo/ieOcWjChTqHXk7dABTciNjVMmo8qS6tIere2JbJY3oMNeJqZtJRmCvt/49ej7g8
- i7vV0lG5kD4gHGbewyGZmo6MOHkXIplrGJ9NispZA76138maIepzaEea5poIuV3qL09laZ5H
- 6sfZsGNIvVTUTCbqT4TWobw8d55fxOxiAPQYyf8OGojf4RtThDi88P/ele97zEHCye67JNso
- 7Cp2g7Bb4AEQgBuUJTfZP61lgvjtnkBguNiGUDPJ4ALKknr9YFrLQ33j+M2fJ5QeUmSmGPC2
- l/PUxkCpOTLr4sky/XzhPiJ/9WzDu9zPktGBG2Hv7y4AjbXozi4yohaXefWIT2EDDHo+L+vb
- Pl+xu3nNKFVh05DtodxHuo5za864Nez9bZWwh49QSfOZlWvTLhhPmOHzY9EsagUnu1Vvg6/W
- 0Su/NhGOOrWZJO5QQBJfAd1PP6e0fw0myXJ6aVnKUr30yZ74b6bXBgAJBKLkiFccON4PY5NL
- T3NYyLKB9hTUiYXD+s=
-IronPort-HdrOrdr: A9a23:w/Nat6+LrB+eLhKykcZuk+GVdr1zdoMgy1knxilNoENuHfBwxv
- rDoB1E73LJYW4qKQsdcKO7SdS9qBLnhNRICOwqU4tKMzOW3ldAQLsSjrcKhgeQYBEWldQtmJ
- uIEZIOceEYZGIS5a2RgWmF+pQbsaG6GcuT9ILjJgJWPGZXgtZbnmNE42igYy9LbTgDIaB8OI
- uX58JBqTblU28QdN6HCn4MWPWGj8HXlbr9CCR2SCIP2U2rt3eF+bT6Gx+X0lM1SDVU24ov9m
- DDjkjQ+rijifem0RXRvlWjoai+2eGRi+erNvb8yfT9GQ+cyDpAo74RHoFqiQpF4N1HLmxa1O
- Uk7S1QePiboEmhAl1d6SGdpDUIlgxep0PK+Bugmn3krtX+RDUmT+R8pa8xSGqe12MQ+Ohm1q
- RFxmSYsIcSKyjhsmDS2/jkPisaz3ZdhxIZ4LUuZrhkINMjQa4UoooF8ExPFpAcWCr89YA8Ce
- FrSNrR/fBMbDqhHjnkV0RUsauRt04Ib2G7q4k5y7+o+ikTmGo8w1oTxcQZkHtF/JUhS4Nc7+
- CBNqhzjrlBQsIfcKo4XY46MICKI32IRQiJPHOZIFzhGq1CM3XRq4Tv6LFw4O2xYpQHwJY7hZ
- yEWlJFsmw5fV7oFKS1rdV22wGIRH/4USXmy8lY6ZQ8srrgRKDzOSnGU1wqm9vImYRqPiQaYY
- fHBHt7OY6TEYLeI/c64+SlYegtFZA3arxkhuoG
+IronPort-Data: A9a23:btyenKKJMayEXwgMFE+RBZIlxSXFcZb7ZxGr2PjKsXjdYENSgjICn
+ zQeUGmAaPyCa2r1ft4kPY7g8UtS68XUztRnSQJlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUakideSc+EH170Us5y7Zl6mJVqYPR7z2l6
+ IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB25nOAqz
+ egOvqbpRA4NYKPotu0tdzhhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Glq15AXQ6+FD
+ yYfQSNCZk/PbhFPAHw4T4s1lfuJxV3gTTIN/Tp5ooJoujOOnWSdyoPFL979atGMA8JPkS6wh
+ EjL4mD4CREyL8GExHyO9XfErv/Cm2b3VZwfEJW89+V2mxuDy2oLEhoUWFCn5/6jhSaDt8l3c
+ hJOvHB09O5rqRLtHoKVswCETGCsjh0sAN9tUOYAsQyE7vTaxyiQNkwld2sUADA5j/MeSTsv3
+ 16PutrmAz1zrbGYIU6gGqeoQSCaYnZMczJbDcMQZU5cuoS4/tlv5v7aZos7SMaIYsvJ9SYcK
+ txghAw3nP0tgMECzM1XFniX0mv39vAlouPYjzg7v15JDCskPOZJhKTysDA3CMqsyq7DEzFtW
+ 1Bfw6CjABgmV83lqcB0aLxl8EuVz/iEKibAplVkAoMs8T+gk1b6I9wLumomfxk0aptVEdMMX
+ KM1kVkPjHO0FCDyBZKbnqrrU5h6pUQePYqNug/ogipmPcEqKV7vENBGbk+MxWH9+HXAYolkU
+ ap3hf2EVC5AYYw+lWLeb75EjdcDm35irUuOG8GT50n3gNK2OS/OIZ9YYQTmUwzMxP7eyOkj2
+ 4wBZ5LiJtQ2eLCWXxQ7BqZKfQlVdiBqXM6vwyGVH8baSjdb9KgaI6e56dscl0ZNxsy5T8/Eo
+ SOwXFF20l36iSGVIAmGcCk7OrjuQYx+vTQwOil1ZQSk3H0qYICO6qYDdsRoIel7pbI7lfMkH
+ eMYf8igA+hUTmiV8ToqcpSg/pdpcw6mhFzSMnP9MiQ/ZZNpWyfA5sTgIln07CALAyfu7Zk+r
+ rSs2xn1W50GQwg+Xs/aZOj2lwG6vGQHmfI0VEzNe4EBdELp+YlsCirwkv5ofJ1cdUSdnmOXj
+ l/EDw0ZqO/Bp54O3OPI3a3U/Z20F+ZeH1ZBGzWJ57iBKiSHrHGoxpVNUbjUcGmFBn/04qire
+ c5c0+r4bK8chF9PvodxT+RrwKY564e9rrNW1F05TnDCblDtAbJ8OHiWm8JIs/QVlLNevAK3X
+ GOJ+8VbZurVaJ+0TgZJKVp3dPmH2NEVhiLWvKY8L0jN7SNq+KaKDBdJNB6WhS0BdLZ4PevJG
+ wv6VBL6P+BnticXDw==
+IronPort-HdrOrdr: A9a23:BOMmJKDd9ms45MzlHejhsseALOsnbusQ8zAXPh9KJiC9I/b1qy
+ nxppkmPEfP+UwssQIb6K290ci7MDnhHPtOj7X5Uo3SOjUO1FHYT72KqLGSuAEIeBeOu9K1t5
+ 0QCpSWYeeYZTMR7KbHCUuDYq4dKbK8gcWVbJLlvhBQpHZRGsVdBmlCe2SmO3wzYDMDKYsyFZ
+ Ka6MYCjSGnY24rYsOyAWRAd/TfpvXQ/aiWLiIuNloC0k2jnDmo4Ln1H1yzxREFSQ5Cxr8k7C
+ zsjxH53KO+qPu2oyWsmVM7rq4m2ecJ+OEzR/BkufJlaAkETTzYIbiJbofy/AzdZtvfrGrC3u
+ O85CvIdP4Dl085NlvF3icFnTOQnAoG2jva0lmfjmLkocvlABwHK+cpv/MeTjLpr3M6utdyya
+ RK2H/ckaF2I1fvoATRjuK4Di2DsCKP0CEfeCoo/iRieJpbZ7lLoYMF+kRJVJ8GASLh8YgiVP
+ JjFcfG+Z9tABqnhl3izx5SKeaXLwIO99a9Mzs/k93Q1yITkGFyzkMeysBalnAc9IglQ50B4+
+ jfKKxnmLxHU8dTNMtGdaw8aNryDnaITQPHMWqUL1iiHKYbO2jVo5qy5Lku/umldJEB0ZN3kp
+ XcV1FTs3I0ZivVeIWz9YwO9gqITHS2XDzrxM0b759luqfkTL6uKiGHQEBGqbrVnxzeOLyvZx
+ +eAuMmPxbTFxqdJW8S5XyBZ3B7EwhvbPEo
 X-IronPort-AV: E=Sophos;i="5.88,324,1635220800"; 
-   d="scan'208";a="62450234"
+   d="scan'208";a="62981613"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 7/9] x86/svm: VMEntry/Exit logic for MSR_SPEC_CTRL
-Date: Fri, 28 Jan 2022 13:29:25 +0000
-Message-ID: <20220128132927.14997-8-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 0/9] x86: MSR_SPEC_CTRL support for SVM guests
+Date: Fri, 28 Jan 2022 13:29:18 +0000
+Message-ID: <20220128132927.14997-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220128132927.14997-1-andrew.cooper3@citrix.com>
-References: <20220128132927.14997-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Hardware maintains both host and guest versions of MSR_SPEC_CTRL, but guests
-run with the logical OR of both values.  Therefore, in principle we want to
-clear Xen's value before entering the guest.  However, for migration
-compatibility, and for performance reasons with SEV-SNP guests, we want the
-ability to use a nonzero value behind the guest's back.  Use vcpu_msrs to hold
-this value, with the guest value in the VMCB.
+Fixes/extensions to allow HVM guests to use AMD hardware MSR_SPEC_CTRL
+facilities.
 
-On the VMEntry path, adjusting MSR_SPEC_CTRL must be done after CLGI so as to
-be atomic with respect to NMIs/etc.  The loading of spec_ctrl_raw into %eax
-was also stale from the unused old code, so can be dropped too.
+No PV support yet - that will require some substantially more careful
+unpicking of the PV entry/exit asm.
 
-Implement both pieces of logic as small pieces of C, and alternative the call
-to get there based on X86_FEATURE_SC_MSR_HVM.  The use of double alternative
-blocks is due to a quirk of the current infrastructure, where call
-displacements only get fixed up for the first replacement instruction.  While
-adjusting the clobber lists, drop the stale requirements on the VMExit side.
+Andrew Cooper (9):
+  x86/cpuid: Advertise SSB_NO to guests by default
+  x86/spec-ctrl: Drop use_spec_ctrl boolean
+  x86/spec-ctrl: Introduce new has_spec_ctrl boolean
+  x86/spec-ctrl: Don't use spec_ctrl_{enter,exit}_idle() for S3
+  x86/spec-ctrl: Record the last write to MSR_SPEC_CTRL
+  x86/spec-ctrl: Use common MSR_SPEC_CTRL logic for AMD
+  x86/svm: VMEntry/Exit logic for MSR_SPEC_CTRL
+  x86/msr: AMD MSR_SPEC_CTRL infrastructure
+  x86/cpuid: Enable MSR_SPEC_CTRL in SVM guests by default
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
+ xen/arch/x86/acpi/power.c                   |  8 +++-
+ xen/arch/x86/cpu/amd.c                      |  2 +-
+ xen/arch/x86/cpuid.c                        | 16 +++++--
+ xen/arch/x86/hvm/svm/entry.S                | 12 +++---
+ xen/arch/x86/hvm/svm/svm.c                  | 40 +++++++++++++++++
+ xen/arch/x86/include/asm/current.h          |  2 +-
+ xen/arch/x86/include/asm/hvm/svm/svm.h      |  3 ++
+ xen/arch/x86/include/asm/msr.h              |  9 ++++
+ xen/arch/x86/include/asm/spec_ctrl_asm.h    |  7 +++
+ xen/arch/x86/msr.c                          |  8 ++--
+ xen/arch/x86/setup.c                        |  5 ++-
+ xen/arch/x86/smpboot.c                      |  7 ++-
+ xen/arch/x86/spec_ctrl.c                    | 66 ++++++++++++++++++++---------
+ xen/include/public/arch-x86/cpufeatureset.h | 18 ++++----
+ xen/tools/gen-cpuid.py                      | 14 +++---
+ 15 files changed, 166 insertions(+), 51 deletions(-)
 
-The RAS[:32] flushing side effect is under reconsideration.  It is actually a
-very awkward side effect in practice, and not applicable to any
-implementations (that I'm aware of), but for now, it's the documented safe
-action to take.  Furthermore, it avoids complicating the logic with an lfence
-in the else case for Spectre v1 safety.
-
-v2:
- * Split last_spec_ctrl introduction into earlier patch.
- * Use STR() rather than __stringify() for brevity.
- * Use double alt blocks in order to pass function parameters.
----
- xen/arch/x86/hvm/svm/entry.S             | 12 +++++++-----
- xen/arch/x86/hvm/svm/svm.c               | 27 +++++++++++++++++++++++++++
- xen/arch/x86/include/asm/msr.h           |  9 +++++++++
- xen/arch/x86/include/asm/spec_ctrl_asm.h |  3 +++
- 4 files changed, 46 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/hvm/svm/entry.S b/xen/arch/x86/hvm/svm/entry.S
-index 276215d36aff..190f7095c65c 100644
---- a/xen/arch/x86/hvm/svm/entry.S
-+++ b/xen/arch/x86/hvm/svm/entry.S
-@@ -55,11 +55,12 @@ __UNLIKELY_END(nsvm_hap)
-         mov  %rsp, %rdi
-         call svm_vmenter_helper
- 
--        mov VCPU_arch_msrs(%rbx), %rax
--        mov VCPUMSR_spec_ctrl_raw(%rax), %eax
-+        clgi
- 
-         /* WARNING! `ret`, `call *`, `jmp *` not safe beyond this point. */
--        /* SPEC_CTRL_EXIT_TO_SVM   (nothing currently) */
-+        /* SPEC_CTRL_EXIT_TO_SVM       Req:                           Clob: C   */
-+        ALTERNATIVE "", STR(mov %rbx, %rdi; mov %rsp, %rsi), X86_FEATURE_SC_MSR_HVM
-+        ALTERNATIVE "", STR(call vmentry_spec_ctrl), X86_FEATURE_SC_MSR_HVM
- 
-         pop  %r15
-         pop  %r14
-@@ -78,7 +79,6 @@ __UNLIKELY_END(nsvm_hap)
-         pop  %rsi
-         pop  %rdi
- 
--        clgi
-         sti
-         vmrun
- 
-@@ -86,8 +86,10 @@ __UNLIKELY_END(nsvm_hap)
- 
-         GET_CURRENT(bx)
- 
--        /* SPEC_CTRL_ENTRY_FROM_SVM    Req: b=curr %rsp=regs/cpuinfo, Clob: ac  */
-+        /* SPEC_CTRL_ENTRY_FROM_SVM    Req:                           Clob: C   */
-         ALTERNATIVE "", DO_OVERWRITE_RSB, X86_FEATURE_SC_RSB_HVM
-+        ALTERNATIVE "", STR(mov %rsp, %rdi), X86_FEATURE_SC_MSR_HVM
-+        ALTERNATIVE "", STR(call vmexit_spec_ctrl), X86_FEATURE_SC_MSR_HVM
-         /* WARNING! `ret`, `call *`, `jmp *` not safe before this point. */
- 
-         stgi
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index bb6b8e560a9f..f753bf48c252 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -3086,6 +3086,33 @@ void svm_vmexit_handler(struct cpu_user_regs *regs)
-     vmcb_set_vintr(vmcb, intr);
- }
- 
-+/* Called with GIF=0. */
-+void vmexit_spec_ctrl(struct cpu_info *info)
-+{
-+    unsigned int val = info->xen_spec_ctrl;
-+
-+    /*
-+     * Write to MSR_SPEC_CTRL unconditionally, for the RAS[:32] flushing side
-+     * effect.
-+     */
-+    wrmsr(MSR_SPEC_CTRL, val, 0);
-+    info->last_spec_ctrl = val;
-+}
-+
-+/* Called with GIF=0. */
-+void vmentry_spec_ctrl(const struct vcpu *curr, struct cpu_info *info)
-+{
-+    unsigned int val = curr->arch.msrs->spec_ctrl.raw;
-+
-+    if ( val != info->last_spec_ctrl )
-+    {
-+        wrmsr(MSR_SPEC_CTRL, val, 0);
-+        info->last_spec_ctrl = val;
-+    }
-+
-+    /* No Spectre v1 concerns.  Execution is going to hit VMRUN imminently. */
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/include/asm/msr.h b/xen/arch/x86/include/asm/msr.h
-index 657a3295613d..ce4fe51afe54 100644
---- a/xen/arch/x86/include/asm/msr.h
-+++ b/xen/arch/x86/include/asm/msr.h
-@@ -297,6 +297,15 @@ struct vcpu_msrs
-      *
-      * For VT-x guests, the guest value is held in the MSR guest load/save
-      * list.
-+     *
-+     * For SVM, the guest value lives in the VMCB, and hardware saves/restores
-+     * the host value automatically.  However, guests run with the OR of the
-+     * host and guest value, which allows Xen to set protections behind the
-+     * guest's back.
-+     *
-+     * We must clear/restore Xen's value before/after VMRUN to avoid unduly
-+     * influencing the guest.  In order to support "behind the guest's back"
-+     * protections, we load this value (commonly 0) before VMRUN.
-      */
-     struct {
-         uint32_t raw;
-diff --git a/xen/arch/x86/include/asm/spec_ctrl_asm.h b/xen/arch/x86/include/asm/spec_ctrl_asm.h
-index 9c0c7622c41f..02b3b18ce69f 100644
---- a/xen/arch/x86/include/asm/spec_ctrl_asm.h
-+++ b/xen/arch/x86/include/asm/spec_ctrl_asm.h
-@@ -46,6 +46,9 @@
-  *   - On VMX by using MSR load/save lists to have vmentry/exit atomically
-  *     load/save the guest value.  Xen's value is loaded in regular code, and
-  *     there is no need to use the shadow logic (below).
-+ *   - On SVM by altering MSR_SPEC_CTRL inside the CLGI/STGI region.  This
-+ *     makes the changes atomic with respect to NMIs/etc, so no need for
-+ *     shadowing logic.
-  *
-  * Factor 2 is harder.  We maintain a shadow_spec_ctrl value, and a use_shadow
-  * boolean in the per cpu spec_ctrl_flags.  The synchronous use is:
 -- 
 2.11.0
 
