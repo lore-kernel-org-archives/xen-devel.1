@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B82C433EF
-	for <xen-devel@archiver.kernel.org>; Sun, 30 Jan 2022 19:23:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.262547.454790 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA8A1C4167E
+	for <xen-devel@archiver.kernel.org>; Sun, 30 Jan 2022 23:37:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.262559.454845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nEFnB-0005ag-Aa; Sun, 30 Jan 2022 19:23:17 +0000
+	id 1nEJlI-0004sc-NE; Sun, 30 Jan 2022 23:37:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 262547.454790; Sun, 30 Jan 2022 19:23:17 +0000
+Received: by outflank-mailman (output) from mailman id 262559.454845; Sun, 30 Jan 2022 23:37:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nEFnB-0005aZ-7R; Sun, 30 Jan 2022 19:23:17 +0000
-Received: by outflank-mailman (input) for mailman id 262547;
- Sun, 30 Jan 2022 19:23:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QEBh=SO=infradead.org=rdunlap@srs-se1.protection.inumbo.net>)
- id 1nEFnA-0005aR-F2
- for xen-devel@lists.xenproject.org; Sun, 30 Jan 2022 19:23:16 +0000
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [2607:7c80:54:e::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 10e8e1f6-8202-11ec-8f75-fffcc8bd4f1a;
- Sun, 30 Jan 2022 20:23:13 +0100 (CET)
-Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nEFn0-007IEV-FQ; Sun, 30 Jan 2022 19:23:06 +0000
+	id 1nEJlI-0004sN-Hs; Sun, 30 Jan 2022 23:37:36 +0000
+Received: by outflank-mailman (input) for mailman id 262559;
+ Sun, 30 Jan 2022 23:37:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=imrt=SO=gmail.com=digetx@srs-se1.protection.inumbo.net>)
+ id 1nEJlH-0003lI-Cs
+ for xen-devel@lists.xenproject.org; Sun, 30 Jan 2022 23:37:35 +0000
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [2a00:1450:4864:20::22e])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 99c795f6-8225-11ec-8eb8-a37418f5ba1a;
+ Mon, 31 Jan 2022 00:37:34 +0100 (CET)
+Received: by mail-lj1-x22e.google.com with SMTP id c15so17066184ljf.11
+ for <xen-devel@lists.xenproject.org>; Sun, 30 Jan 2022 15:37:34 -0800 (PST)
+Received: from localhost.localdomain (109-252-138-126.dynamic.spd-mgts.ru.
+ [109.252.138.126])
+ by smtp.gmail.com with ESMTPSA id a24sm1262950ljp.112.2022.01.30.15.37.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Jan 2022 15:37:34 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,67 +46,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10e8e1f6-8202-11ec-8f75-fffcc8bd4f1a
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=6JCRszUXCuHkWzFCeUDmfWFeE8dA8Y++bCAg/sv5fgM=; b=QA0Eo4Vc8aruhtBHUOjuqPrwd9
-	N9UKhLv8lJCOxIPI8/XYa4azFIF0ccqJ8PV83rSxGf+WUK8JrY2VrTNRFljCG/ncr1PGmehq6SRuB
-	VSvuFR7bFdXFhXcT2f786K7OLItdnLtbmOYy9PxB0bS54iHsaPGNnYy6sFa2ThSI+IrhX7LodlKTO
-	wqe4lSBCWZ7GLn8jE2o/+IiLZG720SaxWVHsT6iNg1fOtlPX33IaKztWlrOFlEWOTsx7FoTJFpRJu
-	XrZJiYiyztcrdhgVhpg6JdKmE29dH9JyOY0GUWeBtueRGA7ezWspIzs0CZgfkelGkOdBbsRvdkfZe
-	0m9Ti9eQ==;
-From: Randy Dunlap <rdunlap@infradead.org>
-To: patches@lists.linux.dev
-Cc: Randy Dunlap <rdunlap@infradead.org>,
+X-Inumbo-ID: 99c795f6-8225-11ec-8eb8-a37418f5ba1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=330E/wQDWGl4ulxyuRNdR1rr3T8TzXfUiE06Vh/nJ/4=;
+        b=cg3oMBxQjVviL/NNGojcXm2zIQdA1knh2bjCFHcWisBrm24Ky2GZxKJ3rws8Te7/gs
+         gKmhuSiy3i3YAnHFoGCZNUdNK8mgFrgHD+dxBwbG4yZhgFFN7+/vK4MkGE5qXYuXmMVs
+         bUYXaFsNJIzGbHLL09HMWCh53ba9YsZpoLFHMsubj4f9OdgATDVSFw5EXTDeZNrJ+YwD
+         4i3hO0RlUhqkX+D7hyG57IC2hHmNZLq5o5iowEWUxtxxuAtbxm76BsZH9fLeaXdkEFeP
+         spgNrmHN/fUhCBM448V1raIkNHUkI0ImPa7nT8ODh8UXU57uCGiJ333W57c8FPVtKEon
+         c6Zw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=330E/wQDWGl4ulxyuRNdR1rr3T8TzXfUiE06Vh/nJ/4=;
+        b=1ly6CiIEPsGOkAW3X8Y3tYdsfcUkytNZ8ayZTyKPpD3VsvmOEqcokyHktEA8I+54Jg
+         yK6bbnZRT1mUDw8vXFYDihEs+lvTd/fqfEzr2BZM1w91TpLrEwHmf0nor4ld4RzvYtY1
+         J/czaHeWwKUNodT/FGIOqeeYujSNNa+jVENfo+iQ+muvKZsKWDgxI/l4pTH8KAux2dMM
+         Qb2SGgGrj8+PkdcjPvCZ/jJxNhtWWYxWxcNUG7VpqsRFIiBWUei0KUlQulTcAkPLSbU8
+         wXZ0v+21ILPCsB2OimhwqTEqNkPX0voB/USM6OrMDlht1JsubJmgyWQbZ8hwfCj8YnXU
+         SmYw==
+X-Gm-Message-State: AOAM533wyJFPJBcSz2vSs+50V85cNKQ1zhefAzCE2sW2VsjleTcpJph/
+	fjQUUQ6OGPMaWkoAvZuu7w4=
+X-Google-Smtp-Source: ABdhPJz+BlMXTarUclVIq8qzXV3P6s1WQdhrNGC7YQJ1I4ADKuUOv1DDvqkqis31Xyrq/C6PgvOyzw==
+X-Received: by 2002:a2e:9cc4:: with SMTP id g4mr12328016ljj.264.1643585854485;
+        Sun, 30 Jan 2022 15:37:34 -0800 (PST)
+From: Dmitry Osipenko <digetx@gmail.com>
+To: Thierry Reding <thierry.reding@gmail.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Guo Ren <guoren@kernel.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Greg Ungerer <gerg@linux-m68k.org>,
+	Joshua Thompson <funaho@jurai.org>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Sebastian Reichel <sre@kernel.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Greentime Hu <green.hu@gmail.com>,
+	Vincent Chen <deanbo422@gmail.com>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Rich Felker <dalias@libc.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH] xen: update missing ioctl magic numers documentation
-Date: Sun, 30 Jan 2022 11:23:05 -0800
-Message-Id: <20220130192305.14523-1-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.31.1
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>,
+	Santosh Shilimkar <ssantosh@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Pavel Machek <pavel@ucw.cz>,
+	Lee Jones <lee.jones@linaro.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Ulf Hansson <ulf.hansson@linaro.org>,
+	alankao@andestech.com,
+	"K . C . Kuen-Chern Lin" <kclin@andestech.com>,
+	=?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>
+Cc: linux-kernel@vger.kernel.org,
+	linux-csky@vger.kernel.org,
+	linux-ia64@vger.kernel.org,
+	linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	linux-sh@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-acpi@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-tegra@vger.kernel.org
+Subject: [PATCH v6 05/21] ARM: Use do_kernel_power_off()
+Date: Mon, 31 Jan 2022 02:37:02 +0300
+Message-Id: <20220130233718.21544-6-digetx@gmail.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220130233718.21544-1-digetx@gmail.com>
+References: <20220130233718.21544-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add missing ioctl "magic numbers" for various Xen interfaces
-(xenbus_dev.h, gntalloc.h, gntdev.h, and privcmd.h).
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new power-off API.
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+Reviewed-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
+Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- Documentation/userspace-api/ioctl/ioctl-number.rst |    3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/kernel/reboot.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
---- linux-next-20220128.orig/Documentation/userspace-api/ioctl/ioctl-number.rst
-+++ linux-next-20220128/Documentation/userspace-api/ioctl/ioctl-number.rst
-@@ -115,6 +115,7 @@ Code  Seq#    Include File
- 'B'   00-1F  linux/cciss_ioctl.h                                     conflict!
- 'B'   00-0F  include/linux/pmu.h                                     conflict!
- 'B'   C0-FF  advanced bbus                                           <mailto:maassen@uni-freiburg.de>
-+'B'   00-0F  xen/xenbus_dev.h                                        conflict!
- 'C'   all    linux/soundcard.h                                       conflict!
- 'C'   01-2F  linux/capi.h                                            conflict!
- 'C'   F0-FF  drivers/net/wan/cosa.h                                  conflict!
-@@ -134,6 +135,7 @@ Code  Seq#    Include File
- 'F'   80-8F  linux/arcfb.h                                           conflict!
- 'F'   DD     video/sstfb.h                                           conflict!
- 'G'   00-3F  drivers/misc/sgi-gru/grulib.h                           conflict!
-+'E'   00-0F  xen/gntalloc.h, xen/gntdev.h                            conflict!
- 'H'   00-7F  linux/hiddev.h                                          conflict!
- 'H'   00-0F  linux/hidraw.h                                          conflict!
- 'H'   01     linux/mei.h                                             conflict!
-@@ -176,6 +178,7 @@ Code  Seq#    Include File
- 'P'   60-6F  sound/sscape_ioctl.h                                    conflict!
- 'P'   00-0F  drivers/usb/class/usblp.c                               conflict!
- 'P'   01-09  drivers/misc/pci_endpoint_test.c                        conflict!
-+'P'   00-0F  xen/privcmd.h                                           conflict!
- 'Q'   all    linux/soundcard.h
- 'R'   00-1F  linux/random.h                                          conflict!
- 'R'   01     linux/rfkill.h                                          conflict!
+diff --git a/arch/arm/kernel/reboot.c b/arch/arm/kernel/reboot.c
+index 3044fcb8d073..2cb943422554 100644
+--- a/arch/arm/kernel/reboot.c
++++ b/arch/arm/kernel/reboot.c
+@@ -116,9 +116,7 @@ void machine_power_off(void)
+ {
+ 	local_irq_disable();
+ 	smp_send_stop();
+-
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
+ }
+ 
+ /*
+-- 
+2.34.1
+
 
