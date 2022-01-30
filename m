@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF051C35296
-	for <xen-devel@archiver.kernel.org>; Sun, 30 Jan 2022 23:38:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.262578.454953 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6265C433F5
+	for <xen-devel@archiver.kernel.org>; Sun, 30 Jan 2022 23:47:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.262624.454976 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nEJld-0000sp-0b; Sun, 30 Jan 2022 23:37:57 +0000
+	id 1nEJuQ-0005r4-6o; Sun, 30 Jan 2022 23:47:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 262578.454953; Sun, 30 Jan 2022 23:37:56 +0000
+Received: by outflank-mailman (output) from mailman id 262624.454976; Sun, 30 Jan 2022 23:47:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nEJlc-0000n1-Fo; Sun, 30 Jan 2022 23:37:56 +0000
-Received: by outflank-mailman (input) for mailman id 262578;
- Sun, 30 Jan 2022 23:37:54 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nEJuQ-0005qx-3p; Sun, 30 Jan 2022 23:47:02 +0000
+Received: by outflank-mailman (input) for mailman id 262624;
+ Sun, 30 Jan 2022 23:47:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=imrt=SO=gmail.com=digetx@srs-se1.protection.inumbo.net>)
- id 1nEJlZ-0003lI-Jv
- for xen-devel@lists.xenproject.org; Sun, 30 Jan 2022 23:37:53 +0000
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [2a00:1450:4864:20::135])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a4a52ba0-8225-11ec-8eb8-a37418f5ba1a;
- Mon, 31 Jan 2022 00:37:53 +0100 (CET)
-Received: by mail-lf1-x135.google.com with SMTP id p27so23343385lfa.1
- for <xen-devel@lists.xenproject.org>; Sun, 30 Jan 2022 15:37:53 -0800 (PST)
+ id 1nEJlg-0003l1-40
+ for xen-devel@lists.xenproject.org; Sun, 30 Jan 2022 23:38:00 +0000
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [2a00:1450:4864:20::134])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a7ccc007-8225-11ec-8f75-fffcc8bd4f1a;
+ Mon, 31 Jan 2022 00:37:58 +0100 (CET)
+Received: by mail-lf1-x134.google.com with SMTP id x23so23420527lfc.0
+ for <xen-devel@lists.xenproject.org>; Sun, 30 Jan 2022 15:37:58 -0800 (PST)
 Received: from localhost.localdomain (109-252-138-126.dynamic.spd-mgts.ru.
  [109.252.138.126])
- by smtp.gmail.com with ESMTPSA id a24sm1262950ljp.112.2022.01.30.15.37.50
+ by smtp.gmail.com with ESMTPSA id a24sm1262950ljp.112.2022.01.30.15.37.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 30 Jan 2022 15:37:52 -0800 (PST)
+ Sun, 30 Jan 2022 15:37:57 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4a52ba0-8225-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: a7ccc007-8225-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=onbjYH+GRuJ1H+aKPIQ3zfVzcOAEVYGJovL5WFpgYzE=;
-        b=UH1XcKU9Gn1SSFj/c6UF13MQ0Jk4L0iTHT84SKL6CKoxP6s+KdtFoXyH/BcfyYDpHy
-         loZc76siXQCxc0BEyl6FoScWMfzkuy0+stkGcZcwGW2GEdy+KMmBYv7TWditUzAcwMzy
-         Tt6+cvIqwyyrufTRsRpGGLkldJ9LCj0ohCU13mN/KWIDXPq7wGpxAM7zRuw3yc8XG/sX
-         kB5V6sSPdbwBeQeNfwWdQOiHlVD0cbXl/3KN+Taw7rwJQ9btmTdGH9V7WkpieowAbyRI
-         LCnnw5FiTCZdg9w/dnOXicsOkOVxD4dBkbYZp5w48IHi/dsTV0RcMVW6iF0qd1ahO1Hj
-         Vr0A==
+        bh=6m8P3WoXpjmgm4wPv3Z7h5cBjPxfBSCYucbGZeGzChw=;
+        b=pw0lvBk+dTz3ObiHx+Tziue58w6zUuZQVNJvU9S7GB+pTzwAHhgcj/iJlwXXxw2erP
+         SjJaIXCKqSP4ZUdeywJtZKFLRYiUBBH6flK45216wEu+kAKbGqsUiHPKIi82YM1bz/wq
+         bMKu0rK0969KEuxg/PSMaDE+zRgG2hxtPkS3M1mFIZPAgYW4ktfU2t1MzGq6fvtQ0WCp
+         Y+7PFXh6gcLp4xF5Q6p6cFH24zY5vWjbmW+bewwmKwBTNzJ37xEIcDLIFgNsMgKiVVBl
+         Kl81Cxsay4XTPckhsJ1WeXkyEjcWdoSjNX8wa8Lm2Ykdw2ly2wOfBD20u+sG0elmdIGM
+         o1xg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=onbjYH+GRuJ1H+aKPIQ3zfVzcOAEVYGJovL5WFpgYzE=;
-        b=5W1v7ZZm4R2mvA78rMCzxqhSJ06L7Wlh98JZ4oLjhtjisI5V85pmGA/UVVooG0AYT2
-         T24VOEbOeICWZr19LbcHbXE2cn2GZFIdNXgkVhwOxmgQotRt3ymEghk1PFeZiURFteX1
-         83WJxoLrmnNfauO12Ks4523+8eIbZx160EkJ73xhStFTWwjdQGQ3hx83g0QH81DWCotJ
-         UKyKTL2n9nwYgbwZjpX1F3cJrAXc0tVP5xoAfp3MuFz5uVLDi6Ghsy3xydtF0AUyYciz
-         Q6ZvebcZBmh/p21a70O+1GZXIWRiFKEkWErOQRscKzmOITr/FwOxT6vlRFcDfvDZHkXy
-         pR7g==
-X-Gm-Message-State: AOAM532I/YdTUXDq5p4I8zElkyE58B/OKlZ79hVljx8p/75FyH2OHiAc
-	J08vbrXmG9UksVYmWYXxcSg=
-X-Google-Smtp-Source: ABdhPJzNx9wknKIs7vHNlQS9Ch9++IYsC8MJz1WUWotZ0fgIzeDZMu0xSzBho+J/7CYm9WmVvjoXbA==
-X-Received: by 2002:a05:6512:31cd:: with SMTP id j13mr13576351lfe.369.1643585872718;
-        Sun, 30 Jan 2022 15:37:52 -0800 (PST)
+        bh=6m8P3WoXpjmgm4wPv3Z7h5cBjPxfBSCYucbGZeGzChw=;
+        b=jkEs2njEW84gNVPpCYG8+2LP1CDUpWpwSgeBeIGL+pDZ4iPRxVKQRKJHXuCfzlI3+2
+         GFYyttjKRIx6JYAEJc7wiz7pOwkMyVfFCQxKPJd5ipYthx1apxBNnHyN42hkuL/JU+S9
+         fyUzF37g0cdJmzOKAeB+Ca8GamqCl33+LdAqljEL6nPtwS35Mw1vayMgz+G1p1J3rmDP
+         pTRMzWHVy8vja6KUZI9UK3GYGgZRNZrJ6ua5SM6cMRfwPb3x7Oz9YAzgGnbkTDiGo5wK
+         XsFw/tnNrqdIOtSZtZetjmHV/7+77zv/UM6MVlrdMampmidoasR+DmfcFHlxUZM1xB99
+         Bd+g==
+X-Gm-Message-State: AOAM532tSX1ZFWBJbT3vDiSbHQ+FTQqcqa72AgrpQV7yq3wFOXnuJnea
+	rjmohBJLHgDlrXi2dgrXfvk=
+X-Google-Smtp-Source: ABdhPJym+9e+qz3b9Eox6rk6EROG58IYAq1gwBJQdx3IJq9mRqA6OUoE67/3HvdiOb6Vb5OIHzS4jw==
+X-Received: by 2002:a05:6512:10c4:: with SMTP id k4mr13546209lfg.63.1643585878009;
+        Sun, 30 Jan 2022 15:37:58 -0800 (PST)
 From: Dmitry Osipenko <digetx@gmail.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -137,47 +137,36 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v6 15/21] ia64: Use do_kernel_power_off()
-Date: Mon, 31 Jan 2022 02:37:12 +0300
-Message-Id: <20220130233718.21544-16-digetx@gmail.com>
+Subject: [PATCH v6 18/21] memory: emif: Use kernel_can_power_off()
+Date: Mon, 31 Jan 2022 02:37:15 +0300
+Message-Id: <20220130233718.21544-19-digetx@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220130233718.21544-1-digetx@gmail.com>
 References: <20220130233718.21544-1-digetx@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new power-off API.
+Replace legacy pm_power_off with kernel_can_power_off() helper that
+is aware about chained power-off handlers.
 
 Signed-off-by: Dmitry Osipenko <digetx@gmail.com>
 ---
- arch/ia64/kernel/process.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/memory/emif.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/ia64/kernel/process.c b/arch/ia64/kernel/process.c
-index 834df24a88f1..cee4d7db2143 100644
---- a/arch/ia64/kernel/process.c
-+++ b/arch/ia64/kernel/process.c
-@@ -19,6 +19,7 @@
- #include <linux/module.h>
- #include <linux/notifier.h>
- #include <linux/personality.h>
-+#include <linux/reboot.h>
- #include <linux/sched.h>
- #include <linux/sched/debug.h>
- #include <linux/sched/hotplug.h>
-@@ -599,8 +600,7 @@ machine_halt (void)
- void
- machine_power_off (void)
- {
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
- 	machine_halt();
- }
+diff --git a/drivers/memory/emif.c b/drivers/memory/emif.c
+index 762d0c0f0716..cab10d5274a0 100644
+--- a/drivers/memory/emif.c
++++ b/drivers/memory/emif.c
+@@ -630,7 +630,7 @@ static irqreturn_t emif_threaded_isr(int irq, void *dev_id)
+ 		dev_emerg(emif->dev, "SDRAM temperature exceeds operating limit.. Needs shut down!!!\n");
  
+ 		/* If we have Power OFF ability, use it, else try restarting */
+-		if (pm_power_off) {
++		if (kernel_can_power_off()) {
+ 			kernel_power_off();
+ 		} else {
+ 			WARN(1, "FIXME: NO pm_power_off!!! trying restart\n");
 -- 
 2.34.1
 
