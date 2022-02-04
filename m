@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54F9C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5AB7C43217
 	for <xen-devel@archiver.kernel.org>; Fri,  4 Feb 2022 06:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.265013.458362 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.265003.458260 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nFsBg-0002K8-Bx; Fri, 04 Feb 2022 06:35:16 +0000
+	id 1nFsBW-0008Du-8W; Fri, 04 Feb 2022 06:35:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 265013.458362; Fri, 04 Feb 2022 06:35:16 +0000
+Received: by outflank-mailman (output) from mailman id 265003.458260; Fri, 04 Feb 2022 06:35:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nFsBf-0002Gc-DU; Fri, 04 Feb 2022 06:35:15 +0000
-Received: by outflank-mailman (input) for mailman id 265013;
- Fri, 04 Feb 2022 06:35:14 +0000
+	id 1nFsBW-0008Dn-5U; Fri, 04 Feb 2022 06:35:06 +0000
+Received: by outflank-mailman (input) for mailman id 265003;
+ Fri, 04 Feb 2022 06:35:04 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Tguk=ST=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1nFsBd-0008DW-QM
- for xen-devel@lists.xenproject.org; Fri, 04 Feb 2022 06:35:13 +0000
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [2a00:1450:4864:20::130])
+ id 1nFsBU-0008DW-BO
+ for xen-devel@lists.xenproject.org; Fri, 04 Feb 2022 06:35:04 +0000
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [2a00:1450:4864:20::132])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9b59e52f-8584-11ec-8f75-fffcc8bd4f1a;
- Fri, 04 Feb 2022 07:35:13 +0100 (CET)
-Received: by mail-lf1-x130.google.com with SMTP id z19so10659451lfq.13
- for <xen-devel@lists.xenproject.org>; Thu, 03 Feb 2022 22:35:13 -0800 (PST)
+ id 94951977-8584-11ec-8f75-fffcc8bd4f1a;
+ Fri, 04 Feb 2022 07:35:01 +0100 (CET)
+Received: by mail-lf1-x132.google.com with SMTP id bu18so10750523lfb.5
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Feb 2022 22:35:01 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id f34sm163027lfv.165.2022.02.03.22.35.11
+ by smtp.gmail.com with ESMTPSA id f34sm163027lfv.165.2022.02.03.22.34.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Feb 2022 22:35:12 -0800 (PST)
+ Thu, 03 Feb 2022 22:35:00 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9b59e52f-8584-11ec-8f75-fffcc8bd4f1a
+X-Inumbo-ID: 94951977-8584-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=FX99xFROYnnqXaxsrJbKwTBFYrf06bSi150/1Wew964=;
-        b=cfEcGqDRT0H+u76W/kO7xJphKRiV6ogCbh4ol7qeJnPisV7JGCgkiVR1sSNGS4CRyM
-         mh8fidCB4ulKXq5h9Smv+lSr4tSwufdbBKxBOxJcPOTv2tF3ohaLs5FRYsAZdqp/QwGU
-         REu1w4eB5e1E3XbosGxE+NjRBsKrwEngfwtIf+UM+sTF2kwFk1mri4BqUPaT8yW/CgwY
-         wLUctjH9xQn93iUyRBgB6cYJTIQC+GW/4RUPonIRmQDjYfRYEFd04iwKj2rr3TRN0hxF
-         P6XUv5qj5Tv+x6thu/brLBbh6YBahufDoBOWqApfgdyuLFuffR4Tc94uaQ8eiDyUEQfX
-         9OJA==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZtTP0vCKvp+IYYxFasqhvmaqt9iKhL0NT56BNAzsirA=;
+        b=QRuFvihoVYidWIZ4bw9oCMJgOve+jackLzUmJ5jUw0pQNniIwsKgOA+oUOPRhgKHPw
+         C6vA0NdUuOkfRBKTtWsq7ZV2ASMy+wfTdJBJKtukSkXjpfhHGXLGHCgggN/G/14PhmGx
+         9hUg1Rx0O5LVqYWcaxxBb0KMi4mf2Hg+3ogGIKsrrw5fWFp/yThpxG1Q4oBvb2vOc2gb
+         ylfMs/QhLr28xz91RHiwsEtfiwJ5BYZAj4aaqiMCOZyE/luUh2NjkkYP7+X+Kb+aPYZk
+         FbA/4tTXRzt5p4QhIG/XnhQiAIgVvCL0DlPVy3oWD8CC85c3t4rlJ7eaeokLcmppVehh
+         ATRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=FX99xFROYnnqXaxsrJbKwTBFYrf06bSi150/1Wew964=;
-        b=Cjez70YkqzDjVsQK8Msb0C4Am3DQ2qpnAuwFVOTpzBIQSa6FTWpCU9DUsi0ZHcu/XK
-         tbzMPBMFeVhQ9ZyGKjhu4/K6cFyJh9DFojCqYHMQnC00uGXnL5dBumqXXX1vS0XNFgS9
-         OwsuvmRhTbebroJN5z2CCeJPabLD/TNlMgT4ioqS1S8De9AhDF6uPHhXGTiuFU0FRjQQ
-         XJM9ZCSs0GTOJANL/nCnFo5ONcEOvCcAC6XtHl1SpGuY+jpXoIlbdI791HrQMmOo1uI+
-         2W1hHPkhwJxTe8aqHJAIa7tnLSFJWvOiCqxHCFWO2VZhphMXMgSS9LLUFn7fLGOxyacp
-         FDig==
-X-Gm-Message-State: AOAM531tcuQp3moQqirUboK3mf56If3i32UNdnvRxeFhmMdvKFW0tVyr
-	0Af1W6h/iD9hcXBhCXJLozp1Q3syffY=
-X-Google-Smtp-Source: ABdhPJwon9dynpKYpjG0DMccYwOaOzKCe/ToTI783e4Ajn2KtH8i/5XPF0PCpVRt0DG4lKESp5cs0g==
-X-Received: by 2002:a05:6512:1082:: with SMTP id j2mr1237420lfg.371.1643956512552;
-        Thu, 03 Feb 2022 22:35:12 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ZtTP0vCKvp+IYYxFasqhvmaqt9iKhL0NT56BNAzsirA=;
+        b=GzICe0hJGbQQ6RYn5LerMaY0acu4qTF5/yr4f3/V+HGckwJ/mABGELGAZ83ThbkuCW
+         pyIbbR95WjfcL10TX9oJj/U3i+XEBYswZhF6WAlibm4Sl5LsfD/gaLOWjOOEiNWGndPt
+         tLxBAu3k6pX3ln9UbkZCQ8VIy1Rthl2R9ohgkqFdf9b1jg4/kcNhnR5sWH0Ca4WyvT32
+         6IO3XO83BiIhUxPNLE4NlXPTapDNW6h/BpeblXngDUo3ei/pdzswXSB7K3TrvI9cv1jB
+         GDTFBQcUM7k6HMDCg8+QZ9pcAb9qmgzlCS4WpNSmNc7UCQKERMr2leXRB5f+I6p4VDnA
+         sCxA==
+X-Gm-Message-State: AOAM531Ewkx8ZTLezUJ/ln0y2kTlb/CIN/ULOeV5840fbnQJ5JWQPcZD
+	kg6mRx3bAiEWuCL+IvUlLVtWN2O9SGk=
+X-Google-Smtp-Source: ABdhPJzTYRa1imZc1Halu4szk4xYwY4WPYb6taPvwofWEBnmAOcXNAjTHC1EpxQheJivPrNGgeMznw==
+X-Received: by 2002:a05:6512:3a91:: with SMTP id q17mr1308919lfu.628.1643956501075;
+        Thu, 03 Feb 2022 22:35:01 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -88,71 +88,111 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v6 10/13] vpci/header: reset the command register when adding devices
-Date: Fri,  4 Feb 2022 08:34:56 +0200
-Message-Id: <20220204063459.680961-11-andr2000@gmail.com>
+Subject: [PATCH v6 00/13] PCI devices passthrough on Arm, part 3
+Date: Fri,  4 Feb 2022 08:34:46 +0200
+Message-Id: <20220204063459.680961-1-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220204063459.680961-1-andr2000@gmail.com>
-References: <20220204063459.680961-1-andr2000@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Reset the command register when assigning a PCI device to a guest:
-according to the PCI spec the PCI_COMMAND register is typically all 0's
-after reset.
+Hi, all!
 
-Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
-Since v5:
-- updated commit message
-Since v1:
- - do not write 0 to the command register, but respect host settings.
----
- xen/drivers/vpci/header.c | 15 ++++++++++++---
- 1 file changed, 12 insertions(+), 3 deletions(-)
+1. This patch series is focusing on vPCI and adds support for non-identity
+PCI BAR mappings which is required while passing through a PCI device to
+a guest. The highlights are:
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 33d8c15ae6e8..407fa2fc4749 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -454,8 +454,7 @@ static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
-         pci_conf_write16(pdev->sbdf, reg, cmd);
- }
- 
--static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
--                            uint32_t cmd, void *data)
-+static uint32_t emulate_cmd_reg(const struct pci_dev *pdev, uint32_t cmd)
- {
-     /* TODO: Add proper emulation for all bits of the command register. */
- 
-@@ -467,7 +466,13 @@ static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
-     }
- #endif
- 
--    cmd_write(pdev, reg, cmd, data);
-+    return cmd;
-+}
-+
-+static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
-+                            uint32_t cmd, void *data)
-+{
-+    cmd_write(pdev, reg, emulate_cmd_reg(pdev, cmd), data);
- }
- 
- static void bar_write(const struct pci_dev *pdev, unsigned int reg,
-@@ -676,6 +681,10 @@ static int init_bars(struct pci_dev *pdev)
-         return -EOPNOTSUPP;
-     }
- 
-+    /* Reset the command register for the guest. */
-+    if ( !is_hwdom )
-+        pci_conf_write16(pdev->sbdf, PCI_COMMAND, emulate_cmd_reg(pdev, 0));
-+
-     /* Setup a handler for the command register. */
-     rc = vpci_add_register(pdev->vpci, vpci_hw_read16,
-                            is_hwdom ? cmd_write : guest_cmd_write,
+- Add relevant vpci register handlers when assigning PCI device to a domain
+  and remove those when de-assigning. This allows having different
+  handlers for different domains, e.g. hwdom and other guests.
+
+- Emulate guest BAR register values based on physical BAR values.
+  This allows creating a guest view of the registers and emulates
+  size and properties probe as it is done during PCI device enumeration by
+  the guest.
+
+- Instead of handling a single range set, that contains all the memory
+  regions of all the BARs and ROM, have them per BAR.
+
+- Take into account guest's BAR view and program its p2m accordingly:
+  gfn is guest's view of the BAR and mfn is the physical BAR value as set
+  up by the host bridge in the hardware domain.
+  This way hardware doamin sees physical BAR values and guest sees
+  emulated ones.
+
+2. The series also adds support for virtual PCI bus topology for guests:
+ - We emulate a single host bridge for the guest, so segment is always 0.
+ - The implementation is limited to 32 devices which are allowed on
+   a single PCI bus.
+ - The virtual bus number is set to 0, so virtual devices are seen
+   as embedded endpoints behind the root complex.
+
+3. The series has complete re-work of the locking scheme used/absent before with
+the help of the work started by Roger [1]:
+[PATCH v6 03/13] vpci: move lock outside of struct vpci
+
+This way the lock can be used to check whether vpci is present, and
+removal can be performed while holding the lock, in order to make
+sure there are no accesses to the contents of the vpci struct.
+Previously removal could race with vpci_read for example, since the
+lock was dropped prior to freeing pdev->vpci.
+This also solves synchronization issues between all vPCI code entities
+which could run in parallel.
+
+4. For unprivileged guests vpci_{read|write} has been re-worked
+to not passthrough accesses to the registers not explicitly handled
+by the corresponding vPCI handlers: without that passthrough
+to guests is completely unsafe as Xen allows them full access to
+the registers.
+During development this can be reverted for debugging purposes.
+
+5. The series was also tested on:
+ - x86 PVH Dom0 and doesn't break it.
+ - x86 HVM with PCI passthrough to DomU and doesn't break it.
+ - Arm
+
+Thank you,
+Oleksandr
+
+[1] https://lore.kernel.org/xen-devel/20180717094830.54806-2-roger.pau@citrix.com/
+
+Oleksandr Andrushchenko (12):
+  xen/pci: arm: add stub for is_memory_hole
+  rangeset: add RANGESETF_no_print flag
+  vpci: restrict unhandled read/write operations for guests
+  vpci: add hooks for PCI device assign/de-assign
+  vpci/header: implement guest BAR register handlers
+  vpci/header: handle p2m range sets per BAR
+  vpci/header: program p2m with guest BAR view
+  vpci/header: emulate PCI_COMMAND register for guests
+  vpci/header: reset the command register when adding devices
+  vpci: add initial support for virtual PCI bus topology
+  xen/arm: translate virtual PCI bus topology for guests
+  xen/arm: account IO handlers for emulated PCI MSI-X
+
+Roger Pau Monné (1):
+  vpci: move lock outside of struct vpci
+
+ tools/tests/vpci/emul.h       |   5 +-
+ tools/tests/vpci/main.c       |   3 +-
+ xen/arch/arm/mm.c             |   6 +
+ xen/arch/arm/vpci.c           |  31 ++-
+ xen/arch/x86/hvm/vmsi.c       |   8 +-
+ xen/common/rangeset.c         |   5 +-
+ xen/drivers/Kconfig           |   4 +
+ xen/drivers/passthrough/pci.c |   7 +
+ xen/drivers/vpci/header.c     | 407 +++++++++++++++++++++++++++-------
+ xen/drivers/vpci/msi.c        |  15 +-
+ xen/drivers/vpci/msix.c       |  43 +++-
+ xen/drivers/vpci/vpci.c       | 232 ++++++++++++++++---
+ xen/include/xen/pci.h         |   1 +
+ xen/include/xen/rangeset.h    |   5 +-
+ xen/include/xen/sched.h       |   8 +
+ xen/include/xen/vpci.h        |  43 +++-
+ 16 files changed, 688 insertions(+), 135 deletions(-)
+
 -- 
 2.25.1
 
