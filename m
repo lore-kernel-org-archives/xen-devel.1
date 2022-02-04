@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FC1EC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54F9C4332F
 	for <xen-devel@archiver.kernel.org>; Fri,  4 Feb 2022 06:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.265011.458347 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.265013.458362 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nFsBe-0001xn-7F; Fri, 04 Feb 2022 06:35:14 +0000
+	id 1nFsBg-0002K8-Bx; Fri, 04 Feb 2022 06:35:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 265011.458347; Fri, 04 Feb 2022 06:35:14 +0000
+Received: by outflank-mailman (output) from mailman id 265013.458362; Fri, 04 Feb 2022 06:35:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nFsBd-0001vu-Ru; Fri, 04 Feb 2022 06:35:13 +0000
-Received: by outflank-mailman (input) for mailman id 265011;
- Fri, 04 Feb 2022 06:35:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nFsBf-0002Gc-DU; Fri, 04 Feb 2022 06:35:15 +0000
+Received: by outflank-mailman (input) for mailman id 265013;
+ Fri, 04 Feb 2022 06:35:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Tguk=ST=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1nFsBb-0008DX-OD
- for xen-devel@lists.xenproject.org; Fri, 04 Feb 2022 06:35:11 +0000
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [2a00:1450:4864:20::236])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 99ffe2d3-8584-11ec-8eb8-a37418f5ba1a;
- Fri, 04 Feb 2022 07:35:10 +0100 (CET)
-Received: by mail-lj1-x236.google.com with SMTP id q22so7161844ljh.7
- for <xen-devel@lists.xenproject.org>; Thu, 03 Feb 2022 22:35:10 -0800 (PST)
+ id 1nFsBd-0008DW-QM
+ for xen-devel@lists.xenproject.org; Fri, 04 Feb 2022 06:35:13 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9b59e52f-8584-11ec-8f75-fffcc8bd4f1a;
+ Fri, 04 Feb 2022 07:35:13 +0100 (CET)
+Received: by mail-lf1-x130.google.com with SMTP id z19so10659451lfq.13
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Feb 2022 22:35:13 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id f34sm163027lfv.165.2022.02.03.22.35.09
+ by smtp.gmail.com with ESMTPSA id f34sm163027lfv.165.2022.02.03.22.35.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Feb 2022 22:35:09 -0800 (PST)
+ Thu, 03 Feb 2022 22:35:12 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99ffe2d3-8584-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 9b59e52f-8584-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=qtkK/j8pu6kupq3RbAcpqc3jfOmxqW4/nLCIHyxmPhw=;
-        b=LcavmegIjsn1jtf8L7reZvcGqNqvIimlLW1FC6Ke96AWMS6A1lu/GmYLd/9I1A7eOw
-         jPIME4KoFaZrtnuk6in1pPcQT5stbkymritBMZsl10FZgWzoZTCXcMxagp84DfsZihPO
-         RGHQ6aJu9q5yYUUc8Qwq1qITZw9XC9KqwLeO0nqJU9/MdYb4p4qLnWVVbCeoOb9I/hII
-         Vg3reIRVkq4BiSLDhBh/LZekJM9WKWvbbrreZwgvowYHpG5iDUpcB4hlJHFtciVWbF+k
-         cSiUsa8gnlvcsBaOxRu//oTbG897/xj+hDT9fih5k9WgdSxNR6SZxcByWKamdK0yQ+MJ
-         ZKyw==
+        bh=FX99xFROYnnqXaxsrJbKwTBFYrf06bSi150/1Wew964=;
+        b=cfEcGqDRT0H+u76W/kO7xJphKRiV6ogCbh4ol7qeJnPisV7JGCgkiVR1sSNGS4CRyM
+         mh8fidCB4ulKXq5h9Smv+lSr4tSwufdbBKxBOxJcPOTv2tF3ohaLs5FRYsAZdqp/QwGU
+         REu1w4eB5e1E3XbosGxE+NjRBsKrwEngfwtIf+UM+sTF2kwFk1mri4BqUPaT8yW/CgwY
+         wLUctjH9xQn93iUyRBgB6cYJTIQC+GW/4RUPonIRmQDjYfRYEFd04iwKj2rr3TRN0hxF
+         P6XUv5qj5Tv+x6thu/brLBbh6YBahufDoBOWqApfgdyuLFuffR4Tc94uaQ8eiDyUEQfX
+         9OJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=qtkK/j8pu6kupq3RbAcpqc3jfOmxqW4/nLCIHyxmPhw=;
-        b=krTo55hg/qcIHx41WTWoZt7hP9NsAKZMFtlrsVKMnuntoAJt/SBKh89r7BXIwGnspl
-         ej1QcDRJWTZ4Ka7ySxPSMMJ7b7KcsTnOWu19Lz3mTgEDrRYV7alJyDFd7f0YDTEg/SdK
-         IyyMdhX0McVPh2rCDvwwMcd6zGwRjjn52jo/DT4vDxz2m23xHwVm1dbw2iGoX4JqUijR
-         oP3qF/FTnHncgFxpkSFm6CLPJhdP+dZCEYB02tvvckYTitkplsL1XLCBfdj6KjozDuVH
-         aATIxqQK71FLpYs0v50KNtj0HRslrF7OtL7pZxeKyIHRABMz18f/yZdHzrokNzESG+Pj
-         F/Rg==
-X-Gm-Message-State: AOAM5315kovfUAmtwPGswe5OzrrnAydL11URkgEWGXeEBOCS0yH4Q3ED
-	eafc/+FSPEZ4bfCHvN84WyzRN+XyiZ0=
-X-Google-Smtp-Source: ABdhPJxTXPZEdj2jvQlmavhyN/FVUW2Ujue3KbH3gBqvpnm6iioAFpcnFab7qHHhSkjZUArvQ7YeEw==
-X-Received: by 2002:a2e:a607:: with SMTP id v7mr936685ljp.248.1643956510257;
-        Thu, 03 Feb 2022 22:35:10 -0800 (PST)
+        bh=FX99xFROYnnqXaxsrJbKwTBFYrf06bSi150/1Wew964=;
+        b=Cjez70YkqzDjVsQK8Msb0C4Am3DQ2qpnAuwFVOTpzBIQSa6FTWpCU9DUsi0ZHcu/XK
+         tbzMPBMFeVhQ9ZyGKjhu4/K6cFyJh9DFojCqYHMQnC00uGXnL5dBumqXXX1vS0XNFgS9
+         OwsuvmRhTbebroJN5z2CCeJPabLD/TNlMgT4ioqS1S8De9AhDF6uPHhXGTiuFU0FRjQQ
+         XJM9ZCSs0GTOJANL/nCnFo5ONcEOvCcAC6XtHl1SpGuY+jpXoIlbdI791HrQMmOo1uI+
+         2W1hHPkhwJxTe8aqHJAIa7tnLSFJWvOiCqxHCFWO2VZhphMXMgSS9LLUFn7fLGOxyacp
+         FDig==
+X-Gm-Message-State: AOAM531tcuQp3moQqirUboK3mf56If3i32UNdnvRxeFhmMdvKFW0tVyr
+	0Af1W6h/iD9hcXBhCXJLozp1Q3syffY=
+X-Google-Smtp-Source: ABdhPJwon9dynpKYpjG0DMccYwOaOzKCe/ToTI783e4Ajn2KtH8i/5XPF0PCpVRt0DG4lKESp5cs0g==
+X-Received: by 2002:a05:6512:1082:: with SMTP id j2mr1237420lfg.371.1643956512552;
+        Thu, 03 Feb 2022 22:35:12 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -88,9 +88,9 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v6 08/13] vpci/header: program p2m with guest BAR view
-Date: Fri,  4 Feb 2022 08:34:54 +0200
-Message-Id: <20220204063459.680961-9-andr2000@gmail.com>
+Subject: [PATCH v6 10/13] vpci/header: reset the command register when adding devices
+Date: Fri,  4 Feb 2022 08:34:56 +0200
+Message-Id: <20220204063459.680961-11-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220204063459.680961-1-andr2000@gmail.com>
 References: <20220204063459.680961-1-andr2000@gmail.com>
@@ -99,108 +99,60 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Take into account guest's BAR view and program its p2m accordingly:
-gfn is guest's view of the BAR and mfn is the physical BAR value as set
-up by the PCI bus driver in the hardware domain.
-This way hardware domain sees physical BAR values and guest sees
-emulated ones.
+Reset the command register when assigning a PCI device to a guest:
+according to the PCI spec the PCI_COMMAND register is typically all 0's
+after reset.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
 Since v5:
-- remove debug print in map_range callback
-- remove "identity" from the debug print
-Since v4:
-- moved start_{gfn|mfn} calculation into map_range
-- pass vpci_bar in the map_data instead of start_{gfn|mfn}
-- s/guest_addr/guest_reg
-Since v3:
-- updated comment (Roger)
-- removed gfn_add(map->start_gfn, rc); which is wrong
-- use v->domain instead of v->vpci.pdev->domain
-- removed odd e.g. in comment
-- s/d%d/%pd in altered code
-- use gdprintk for map/unmap logs
-Since v2:
-- improve readability for data.start_gfn and restructure ?: construct
+- updated commit message
 Since v1:
- - s/MSI/MSI-X in comments
+ - do not write 0 to the command register, but respect host settings.
 ---
- xen/drivers/vpci/header.c | 24 ++++++++++++++++++++----
- 1 file changed, 20 insertions(+), 4 deletions(-)
+ xen/drivers/vpci/header.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 0c94504b87d8..88ca1ad8211d 100644
+index 33d8c15ae6e8..407fa2fc4749 100644
 --- a/xen/drivers/vpci/header.c
 +++ b/xen/drivers/vpci/header.c
-@@ -30,6 +30,7 @@
+@@ -454,8 +454,7 @@ static void cmd_write(const struct pci_dev *pdev, unsigned int reg,
+         pci_conf_write16(pdev->sbdf, reg, cmd);
+ }
  
- struct map_data {
-     struct domain *d;
-+    const struct vpci_bar *bar;
-     bool map;
- };
+-static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
+-                            uint32_t cmd, void *data)
++static uint32_t emulate_cmd_reg(const struct pci_dev *pdev, uint32_t cmd)
+ {
+     /* TODO: Add proper emulation for all bits of the command register. */
  
-@@ -41,8 +42,21 @@ static int map_range(unsigned long s, unsigned long e, void *data,
+@@ -467,7 +466,13 @@ static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
+     }
+ #endif
  
-     for ( ; ; )
-     {
-+        /* Start address of the BAR as seen by the guest. */
-+        gfn_t start_gfn = _gfn(PFN_DOWN(is_hardware_domain(map->d)
-+                                        ? map->bar->addr
-+                                        : map->bar->guest_reg));
-+        /* Physical start address of the BAR. */
-+        mfn_t start_mfn = _mfn(PFN_DOWN(map->bar->addr));
-         unsigned long size = e - s + 1;
- 
-+        /*
-+         * Ranges to be mapped don't always start at the BAR start address, as
-+         * there can be holes or partially consumed ranges. Account for the
-+         * offset of the current address from the BAR start.
-+         */
-+        start_gfn = gfn_add(start_gfn, s - mfn_x(start_mfn));
+-    cmd_write(pdev, reg, cmd, data);
++    return cmd;
++}
 +
-         /*
-          * ARM TODOs:
-          * - On ARM whether the memory is prefetchable or not should be passed
-@@ -52,8 +66,8 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-          * - {un}map_mmio_regions doesn't support preemption.
-          */
++static void guest_cmd_write(const struct pci_dev *pdev, unsigned int reg,
++                            uint32_t cmd, void *data)
++{
++    cmd_write(pdev, reg, emulate_cmd_reg(pdev, cmd), data);
+ }
  
--        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(s))
--                      : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(s));
-+        rc = map->map ? map_mmio_regions(map->d, start_gfn, size, _mfn(s))
-+                      : unmap_mmio_regions(map->d, start_gfn, size, _mfn(s));
-         if ( rc == 0 )
-         {
-             *c += size;
-@@ -62,8 +76,8 @@ static int map_range(unsigned long s, unsigned long e, void *data,
-         if ( rc < 0 )
-         {
-             printk(XENLOG_G_WARNING
--                   "Failed to identity %smap [%lx, %lx] for d%d: %d\n",
--                   map->map ? "" : "un", s, e, map->d->domain_id, rc);
-+                   "Failed to %smap [%lx, %lx] for %pd: %d\n",
-+                   map->map ? "" : "un", s, e, map->d, rc);
-             break;
-         }
-         ASSERT(rc < size);
-@@ -154,6 +168,7 @@ bool vpci_process_pending(struct vcpu *v)
-             if ( rangeset_is_empty(bar->mem) )
-                 continue;
+ static void bar_write(const struct pci_dev *pdev, unsigned int reg,
+@@ -676,6 +681,10 @@ static int init_bars(struct pci_dev *pdev)
+         return -EOPNOTSUPP;
+     }
  
-+            data.bar = bar;
-             rc = rangeset_consume_ranges(bar->mem, map_range, &data);
- 
-             if ( rc == -ERESTART )
-@@ -206,6 +221,7 @@ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
-         if ( rangeset_is_empty(bar->mem) )
-             continue;
- 
-+        data.bar = bar;
-         while ( (rc = rangeset_consume_ranges(bar->mem, map_range,
-                                               &data)) == -ERESTART )
-             process_pending_softirqs();
++    /* Reset the command register for the guest. */
++    if ( !is_hwdom )
++        pci_conf_write16(pdev->sbdf, PCI_COMMAND, emulate_cmd_reg(pdev, 0));
++
+     /* Setup a handler for the command register. */
+     rc = vpci_add_register(pdev->vpci, vpci_hw_read16,
+                            is_hwdom ? cmd_write : guest_cmd_write,
 -- 
 2.25.1
 
