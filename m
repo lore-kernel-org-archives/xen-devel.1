@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5AB7C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03F2AC433F5
 	for <xen-devel@archiver.kernel.org>; Fri,  4 Feb 2022 06:35:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.265003.458260 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.265007.458299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nFsBW-0008Du-8W; Fri, 04 Feb 2022 06:35:06 +0000
+	id 1nFsBY-0000Zp-Qn; Fri, 04 Feb 2022 06:35:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 265003.458260; Fri, 04 Feb 2022 06:35:06 +0000
+Received: by outflank-mailman (output) from mailman id 265007.458299; Fri, 04 Feb 2022 06:35:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nFsBW-0008Dn-5U; Fri, 04 Feb 2022 06:35:06 +0000
-Received: by outflank-mailman (input) for mailman id 265003;
- Fri, 04 Feb 2022 06:35:04 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nFsBY-0000Xs-GL; Fri, 04 Feb 2022 06:35:08 +0000
+Received: by outflank-mailman (input) for mailman id 265007;
+ Fri, 04 Feb 2022 06:35:07 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Tguk=ST=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1nFsBU-0008DW-BO
- for xen-devel@lists.xenproject.org; Fri, 04 Feb 2022 06:35:04 +0000
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [2a00:1450:4864:20::132])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 94951977-8584-11ec-8f75-fffcc8bd4f1a;
- Fri, 04 Feb 2022 07:35:01 +0100 (CET)
-Received: by mail-lf1-x132.google.com with SMTP id bu18so10750523lfb.5
- for <xen-devel@lists.xenproject.org>; Thu, 03 Feb 2022 22:35:01 -0800 (PST)
+ id 1nFsBX-0008DX-0q
+ for xen-devel@lists.xenproject.org; Fri, 04 Feb 2022 06:35:07 +0000
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [2a00:1450:4864:20::135])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 973fa44c-8584-11ec-8eb8-a37418f5ba1a;
+ Fri, 04 Feb 2022 07:35:06 +0100 (CET)
+Received: by mail-lf1-x135.google.com with SMTP id z4so10781574lft.3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Feb 2022 22:35:06 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id f34sm163027lfv.165.2022.02.03.22.34.59
+ by smtp.gmail.com with ESMTPSA id f34sm163027lfv.165.2022.02.03.22.35.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 03 Feb 2022 22:35:00 -0800 (PST)
+ Thu, 03 Feb 2022 22:35:05 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 94951977-8584-11ec-8f75-fffcc8bd4f1a
+X-Inumbo-ID: 973fa44c-8584-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZtTP0vCKvp+IYYxFasqhvmaqt9iKhL0NT56BNAzsirA=;
-        b=QRuFvihoVYidWIZ4bw9oCMJgOve+jackLzUmJ5jUw0pQNniIwsKgOA+oUOPRhgKHPw
-         C6vA0NdUuOkfRBKTtWsq7ZV2ASMy+wfTdJBJKtukSkXjpfhHGXLGHCgggN/G/14PhmGx
-         9hUg1Rx0O5LVqYWcaxxBb0KMi4mf2Hg+3ogGIKsrrw5fWFp/yThpxG1Q4oBvb2vOc2gb
-         ylfMs/QhLr28xz91RHiwsEtfiwJ5BYZAj4aaqiMCOZyE/luUh2NjkkYP7+X+Kb+aPYZk
-         FbA/4tTXRzt5p4QhIG/XnhQiAIgVvCL0DlPVy3oWD8CC85c3t4rlJ7eaeokLcmppVehh
-         ATRw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=7lOljSwfVLv7O1Qu1kbWEhEP6CpP7dXjj0XKQulfe6E=;
+        b=Ck6BoSlnQgRISD6huKxphsjKoG7Euj2TC16HbLrf+oVTvsu+WKBI1c3kt8icPCERIB
+         tkkWe/KesrqTP/q7HDoal4nGgy9m/6Ew9lCh7TrJWuYslrgjYmgtc6Ea5jRCMjJNj4LC
+         kg7zdt2/kaKGbAzTDzeW0NoyYPbUHwutKjT6erIRJQAcUqAXsOSafT3+eODU1ugAQHtz
+         Zgn5ZYMrhi45XL/tNMKmf75EiXt2FD+8gRN2p/FUE/n+37KE3I7BSLgLtjIB4Cz6vru+
+         uXnAwU2XEzrjw0ZZYFZ7eJC2wBKSU2sap05DLurc4bQbHXDNegwVdVDrrSHmvXwPuWv7
+         4RDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZtTP0vCKvp+IYYxFasqhvmaqt9iKhL0NT56BNAzsirA=;
-        b=GzICe0hJGbQQ6RYn5LerMaY0acu4qTF5/yr4f3/V+HGckwJ/mABGELGAZ83ThbkuCW
-         pyIbbR95WjfcL10TX9oJj/U3i+XEBYswZhF6WAlibm4Sl5LsfD/gaLOWjOOEiNWGndPt
-         tLxBAu3k6pX3ln9UbkZCQ8VIy1Rthl2R9ohgkqFdf9b1jg4/kcNhnR5sWH0Ca4WyvT32
-         6IO3XO83BiIhUxPNLE4NlXPTapDNW6h/BpeblXngDUo3ei/pdzswXSB7K3TrvI9cv1jB
-         GDTFBQcUM7k6HMDCg8+QZ9pcAb9qmgzlCS4WpNSmNc7UCQKERMr2leXRB5f+I6p4VDnA
-         sCxA==
-X-Gm-Message-State: AOAM531Ewkx8ZTLezUJ/ln0y2kTlb/CIN/ULOeV5840fbnQJ5JWQPcZD
-	kg6mRx3bAiEWuCL+IvUlLVtWN2O9SGk=
-X-Google-Smtp-Source: ABdhPJzTYRa1imZc1Halu4szk4xYwY4WPYb6taPvwofWEBnmAOcXNAjTHC1EpxQheJivPrNGgeMznw==
-X-Received: by 2002:a05:6512:3a91:: with SMTP id q17mr1308919lfu.628.1643956501075;
-        Thu, 03 Feb 2022 22:35:01 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=7lOljSwfVLv7O1Qu1kbWEhEP6CpP7dXjj0XKQulfe6E=;
+        b=HBEiXgxoYa/kRj88N8yBGQgrz1YZXomxYTsTsW6YrvaVSI+DeYCHx6Um8vQuQp8BaB
+         AN5IixKLuTiuC++5veHVRQQCPOxiW+cnl+26EXl+RHBSznp9gZuLs+HNLtG7PWoPlMSh
+         QL72+Aq90rnz68+Sj2FR8oB/gRIbnV3g5qNCkTIZ/JfqPc5yidUqeZ/Z6JYQkTu37SiG
+         93rKPSDtgcpUdZbvS8fHRjVuYYEwXpW9h8ZlI76fTJNs0zTJWCtgQQPcC2AgVHvzhReU
+         9HuoIYdOmXdP5izkbAEkL3mDKPeZadBoh4RyP5Kwp1yex3zGpOl8mm89n7J6Ui+y1c3i
+         WQeg==
+X-Gm-Message-State: AOAM532NeogFBNrBMnfGXjBRheB1JCTN9TYaYGl1vEmpIKCUFE3GXMbH
+	YQfzxkilMjbejVimjC/GsMVWnoVXSM8=
+X-Google-Smtp-Source: ABdhPJyB6MQ7eonV8Yqfxf8f3gGfIt7kmJS1oIR+juotmd4GDOq+j/gxIoib7IA3nxTTvs39ppLLBg==
+X-Received: by 2002:ac2:5186:: with SMTP id u6mr1392098lfi.519.1643956505619;
+        Thu, 03 Feb 2022 22:35:05 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -88,111 +88,156 @@ Cc: julien@xen.org,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH v6 00/13] PCI devices passthrough on Arm, part 3
-Date: Fri,  4 Feb 2022 08:34:46 +0200
-Message-Id: <20220204063459.680961-1-andr2000@gmail.com>
+Subject: [PATCH v6 04/13] vpci: restrict unhandled read/write operations for guests
+Date: Fri,  4 Feb 2022 08:34:50 +0200
+Message-Id: <20220204063459.680961-5-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220204063459.680961-1-andr2000@gmail.com>
+References: <20220204063459.680961-1-andr2000@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Hi, all!
+A guest can read and write those registers which are not emulated and
+have no respective vPCI handlers, so it can access the HW directly.
+In order to prevent a guest from reads and writes from/to the unhandled
+registers make sure only hardware domain can access HW directly and restrict
+guests from doing so.
 
-1. This patch series is focusing on vPCI and adds support for non-identity
-PCI BAR mappings which is required while passing through a PCI device to
-a guest. The highlights are:
+Suggested-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-- Add relevant vpci register handlers when assigning PCI device to a domain
-  and remove those when de-assigning. This allows having different
-  handlers for different domains, e.g. hwdom and other guests.
+---
+New in v6
+---
+ xen/drivers/vpci/vpci.c | 32 +++++++++++++++++++++-----------
+ 1 file changed, 21 insertions(+), 11 deletions(-)
 
-- Emulate guest BAR register values based on physical BAR values.
-  This allows creating a guest view of the registers and emulates
-  size and properties probe as it is done during PCI device enumeration by
-  the guest.
-
-- Instead of handling a single range set, that contains all the memory
-  regions of all the BARs and ROM, have them per BAR.
-
-- Take into account guest's BAR view and program its p2m accordingly:
-  gfn is guest's view of the BAR and mfn is the physical BAR value as set
-  up by the host bridge in the hardware domain.
-  This way hardware doamin sees physical BAR values and guest sees
-  emulated ones.
-
-2. The series also adds support for virtual PCI bus topology for guests:
- - We emulate a single host bridge for the guest, so segment is always 0.
- - The implementation is limited to 32 devices which are allowed on
-   a single PCI bus.
- - The virtual bus number is set to 0, so virtual devices are seen
-   as embedded endpoints behind the root complex.
-
-3. The series has complete re-work of the locking scheme used/absent before with
-the help of the work started by Roger [1]:
-[PATCH v6 03/13] vpci: move lock outside of struct vpci
-
-This way the lock can be used to check whether vpci is present, and
-removal can be performed while holding the lock, in order to make
-sure there are no accesses to the contents of the vpci struct.
-Previously removal could race with vpci_read for example, since the
-lock was dropped prior to freeing pdev->vpci.
-This also solves synchronization issues between all vPCI code entities
-which could run in parallel.
-
-4. For unprivileged guests vpci_{read|write} has been re-worked
-to not passthrough accesses to the registers not explicitly handled
-by the corresponding vPCI handlers: without that passthrough
-to guests is completely unsafe as Xen allows them full access to
-the registers.
-During development this can be reverted for debugging purposes.
-
-5. The series was also tested on:
- - x86 PVH Dom0 and doesn't break it.
- - x86 HVM with PCI passthrough to DomU and doesn't break it.
- - Arm
-
-Thank you,
-Oleksandr
-
-[1] https://lore.kernel.org/xen-devel/20180717094830.54806-2-roger.pau@citrix.com/
-
-Oleksandr Andrushchenko (12):
-  xen/pci: arm: add stub for is_memory_hole
-  rangeset: add RANGESETF_no_print flag
-  vpci: restrict unhandled read/write operations for guests
-  vpci: add hooks for PCI device assign/de-assign
-  vpci/header: implement guest BAR register handlers
-  vpci/header: handle p2m range sets per BAR
-  vpci/header: program p2m with guest BAR view
-  vpci/header: emulate PCI_COMMAND register for guests
-  vpci/header: reset the command register when adding devices
-  vpci: add initial support for virtual PCI bus topology
-  xen/arm: translate virtual PCI bus topology for guests
-  xen/arm: account IO handlers for emulated PCI MSI-X
-
-Roger Pau Monné (1):
-  vpci: move lock outside of struct vpci
-
- tools/tests/vpci/emul.h       |   5 +-
- tools/tests/vpci/main.c       |   3 +-
- xen/arch/arm/mm.c             |   6 +
- xen/arch/arm/vpci.c           |  31 ++-
- xen/arch/x86/hvm/vmsi.c       |   8 +-
- xen/common/rangeset.c         |   5 +-
- xen/drivers/Kconfig           |   4 +
- xen/drivers/passthrough/pci.c |   7 +
- xen/drivers/vpci/header.c     | 407 +++++++++++++++++++++++++++-------
- xen/drivers/vpci/msi.c        |  15 +-
- xen/drivers/vpci/msix.c       |  43 +++-
- xen/drivers/vpci/vpci.c       | 232 ++++++++++++++++---
- xen/include/xen/pci.h         |   1 +
- xen/include/xen/rangeset.h    |   5 +-
- xen/include/xen/sched.h       |   8 +
- xen/include/xen/vpci.h        |  43 +++-
- 16 files changed, 688 insertions(+), 135 deletions(-)
-
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index cb2ababa28e3..f8a93e61c08f 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -215,11 +215,15 @@ int vpci_remove_register(struct vpci *vpci, unsigned int offset,
+ }
+ 
+ /* Wrappers for performing reads/writes to the underlying hardware. */
+-static uint32_t vpci_read_hw(pci_sbdf_t sbdf, unsigned int reg,
++static uint32_t vpci_read_hw(bool is_hwdom, pci_sbdf_t sbdf, unsigned int reg,
+                              unsigned int size)
+ {
+     uint32_t data;
+ 
++    /* Guest domains are not allowed to read real hardware. */
++    if ( !is_hwdom )
++        return ~(uint32_t)0;
++
+     switch ( size )
+     {
+     case 4:
+@@ -260,9 +264,13 @@ static uint32_t vpci_read_hw(pci_sbdf_t sbdf, unsigned int reg,
+     return data;
+ }
+ 
+-static void vpci_write_hw(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+-                          uint32_t data)
++static void vpci_write_hw(bool is_hwdom, pci_sbdf_t sbdf, unsigned int reg,
++                          unsigned int size, uint32_t data)
+ {
++    /* Guest domains are not allowed to write real hardware. */
++    if ( !is_hwdom )
++        return;
++
+     switch ( size )
+     {
+     case 4:
+@@ -322,6 +330,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+     const struct vpci_register *r;
+     unsigned int data_offset = 0;
+     uint32_t data = ~(uint32_t)0;
++    bool is_hwdom = is_hardware_domain(d);
+ 
+     if ( !size )
+     {
+@@ -332,13 +341,13 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+     /* Find the PCI dev matching the address. */
+     pdev = pci_get_pdev_by_domain(d, sbdf.seg, sbdf.bus, sbdf.devfn);
+     if ( !pdev )
+-        return vpci_read_hw(sbdf, reg, size);
++        return vpci_read_hw(is_hwdom, sbdf, reg, size);
+ 
+     spin_lock(&pdev->vpci_lock);
+     if ( !pdev->vpci )
+     {
+         spin_unlock(&pdev->vpci_lock);
+-        return vpci_read_hw(sbdf, reg, size);
++        return vpci_read_hw(is_hwdom, sbdf, reg, size);
+     }
+ 
+     /* Read from the hardware or the emulated register handlers. */
+@@ -361,7 +370,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+         {
+             /* Heading gap, read partial content from hardware. */
+             read_size = r->offset - emu.offset;
+-            val = vpci_read_hw(sbdf, emu.offset, read_size);
++            val = vpci_read_hw(is_hwdom, sbdf, emu.offset, read_size);
+             data = merge_result(data, val, read_size, data_offset);
+             data_offset += read_size;
+         }
+@@ -387,7 +396,7 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
+     if ( data_offset < size )
+     {
+         /* Tailing gap, read the remaining. */
+-        uint32_t tmp_data = vpci_read_hw(sbdf, reg + data_offset,
++        uint32_t tmp_data = vpci_read_hw(is_hwdom, sbdf, reg + data_offset,
+                                          size - data_offset);
+ 
+         data = merge_result(data, tmp_data, size - data_offset, data_offset);
+@@ -430,6 +439,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+     const struct vpci_register *r;
+     unsigned int data_offset = 0;
+     const unsigned long *ro_map = pci_get_ro_map(sbdf.seg);
++    bool is_hwdom = is_hardware_domain(d);
+ 
+     if ( !size )
+     {
+@@ -448,7 +458,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+     pdev = pci_get_pdev_by_domain(d, sbdf.seg, sbdf.bus, sbdf.devfn);
+     if ( !pdev )
+     {
+-        vpci_write_hw(sbdf, reg, size, data);
++        vpci_write_hw(is_hwdom, sbdf, reg, size, data);
+         return;
+     }
+ 
+@@ -456,7 +466,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+     if ( !pdev->vpci )
+     {
+         spin_unlock(&pdev->vpci_lock);
+-        vpci_write_hw(sbdf, reg, size, data);
++        vpci_write_hw(is_hwdom, sbdf, reg, size, data);
+         return;
+     }
+ 
+@@ -479,7 +489,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+         if ( emu.offset < r->offset )
+         {
+             /* Heading gap, write partial content to hardware. */
+-            vpci_write_hw(sbdf, emu.offset, r->offset - emu.offset,
++            vpci_write_hw(is_hwdom, sbdf, emu.offset, r->offset - emu.offset,
+                           data >> (data_offset * 8));
+             data_offset += r->offset - emu.offset;
+         }
+@@ -498,7 +508,7 @@ void vpci_write(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+ 
+     if ( data_offset < size )
+         /* Tailing gap, write the remaining. */
+-        vpci_write_hw(sbdf, reg + data_offset, size - data_offset,
++        vpci_write_hw(is_hwdom, sbdf, reg + data_offset, size - data_offset,
+                       data >> (data_offset * 8));
+ }
+ 
 -- 
 2.25.1
 
