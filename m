@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E564BC433EF
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Feb 2022 19:29:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.266313.459984 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5488AC433F5
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Feb 2022 19:29:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.266315.460006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nGnDJ-0001XN-7A; Sun, 06 Feb 2022 19:28:45 +0000
+	id 1nGnDN-00023b-Mu; Sun, 06 Feb 2022 19:28:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 266313.459984; Sun, 06 Feb 2022 19:28:45 +0000
+Received: by outflank-mailman (output) from mailman id 266315.460006; Sun, 06 Feb 2022 19:28:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nGnDJ-0001XG-4B; Sun, 06 Feb 2022 19:28:45 +0000
-Received: by outflank-mailman (input) for mailman id 266313;
- Sun, 06 Feb 2022 19:28:44 +0000
+	id 1nGnDN-00023R-Iu; Sun, 06 Feb 2022 19:28:49 +0000
+Received: by outflank-mailman (input) for mailman id 266315;
+ Sun, 06 Feb 2022 19:28:47 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nGnDI-0001XA-6a
- for xen-devel@lists.xenproject.org; Sun, 06 Feb 2022 19:28:44 +0000
+ (envelope-from <julien@xen.org>) id 1nGnDL-00022Q-QV
+ for xen-devel@lists.xenproject.org; Sun, 06 Feb 2022 19:28:47 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nGnDH-0005se-Ah; Sun, 06 Feb 2022 19:28:43 +0000
+ id 1nGnDK-0005sy-RB; Sun, 06 Feb 2022 19:28:46 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nGnDH-0007Ok-0w; Sun, 06 Feb 2022 19:28:43 +0000
+ id 1nGnDK-0007Ok-FF; Sun, 06 Feb 2022 19:28:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,91 +43,291 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
-	Subject:Cc:To:From; bh=/H8pFttg2YhVccQhF2eKBXnyu08W1Blzbzg94oHYGZE=; b=dbLT13
-	zvRYgytuSSGw4njvzoHeMF/vCt94opKMqDIv7vQRnoyzFjoLnFs5tAi0Tft2nHej37TrN3sSkTd0H
-	eU/0M5caSh5IwP1xBl8yJU3gDAOABBZTOcFJqCpmCRG6OYHaVKvzsyBmWoaAruCGOTUX2MUQaN5+K
-	zbXefrgKI0Y=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=At0G3eg7j5P+J2/OwNksy7nZbwWKktpJk5zKue+aCUs=; b=ubR3d92i9BDoPIkoIXp2mhYIb+
+	OBGSxCNFxlOWArOHyLQStiLI8orDDJLe7W6wH2VaGjZTPh+GKndo7thAHa/ONpx42PpiFkxPfRzHM
+	QPKZ8bfPIEYszy/WgqPggHewJbd7npapB6sb9Pqprmztr/xL2FLSohFz8x5NyRaTfsjI=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: ehem+xen@m5p.com,
 	Julien Grall <jgrall@amazon.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH RFC 0/3] xen/arm: Allow dom0 to use the EFI framebuffer
-Date: Sun,  6 Feb 2022 19:28:36 +0000
-Message-Id: <20220206192839.75711-1-julien@xen.org>
+Subject: [PATCH RFC 2/3] xen/arm: efi: Introduce and fill the vga_console_info
+Date: Sun,  6 Feb 2022 19:28:38 +0000
+Message-Id: <20220206192839.75711-3-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20220206192839.75711-1-julien@xen.org>
+References: <20220206192839.75711-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+In a follow-up patch will we want to add support for EFI framebuffer
+in dom0. Yet, Xen may not use the framebuffer, so it would be ideal
+to not have to enable CONFIG_VIDEO/CONFIG_VGA.
 
-This is a follow-up of the discussion [1].
+Introduce vga_console_info in a hacky way and move the code
+to fill it up from x86 to common.
 
-When booting using EFI on Raspberry Pi 4, the graphical output will
-be using the EFI framebuffer.
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-On baremetal, the information for the graphic output is retrieved
-using the boot services. However, under Xen, dom0 has no access
-to the EFI boot services. So we need to a different way to inform Dom0.
+----
 
-For x86 PV dom0, this is using the start_info. On Arm we have no such
-thing, so this patch will introduce a new hypercall. This will
-require a change in Linux [2] (Based on the 5.17-rc2) to issue the
-hypercall and fill-up screen info.
+This is a bit of a hack. Sent early to gather opinion on whether
+we should enable allow Dom0 to use the EFI Framebuffer even
+if Xen is built with CONFIG_VIDEO=n on Arm.
+---
+ xen/arch/arm/efi/efi-boot.h |  6 ---
+ xen/arch/arm/setup.c        |  4 ++
+ xen/arch/x86/efi/efi-boot.h | 72 ------------------------------------
+ xen/common/efi/boot.c       | 74 ++++++++++++++++++++++++++++++++++++-
+ xen/include/xen/vga.h       |  2 +-
+ 5 files changed, 78 insertions(+), 80 deletions(-)
 
-I will properly send the Linux patch once we agree on the interface
-between Xen and dom0.
-
-With this series + Linux, I am able to use XFCE in dom0 on the
-RPi 4 when booting using UEFI + ACPI.
-
-Looking through the dmesg, there are still a few TODOs to handle:
-    - Linux is not able to use the BGRT (Invalid address). This is
-      because the driver checks the Image address is part of the UEFI
-      Boot Services Area. Such area is not exposed to dom0 (yet).
-      By-passing the check doesn't much help because all the EFI Boot
-      Services area are given to the normal allocator. So we would
-      need to reserve them.
-    - The Wifi driver is crashing because it is dereferencing a NULL
-      pointer (only seem to happen on Xen).
-    - There are error messages of drivers trying to access the EFI
-      runtime services (e.g. to fetch firmware for a device) but fails.
-      This is expected as Xen doesn't yet expose the EFI runtimes
-      services yet.
-
-/!\ This has only been tested on Arm. I will sanity test x86 for the
-next version.
-
-Cheers,
-
-[1] https://lore.kernel.org/xen-devel/YY3tSAFTCR4r2FaI@mattapan.m5p.com/
-[2] https://pastebin.com/ztUm9Bf3
-
-Julien Grall (3):
-  xen/efi: Always query the console information and get GOP
-  xen/arm: efi: Introduce and fill the vga_console_info
-  xen: Introduce a platform sub-op to retrieve the VGA information
-
- xen/arch/arm/efi/efi-boot.h       |  6 --
- xen/arch/arm/platform_hypercall.c | 15 +++++
- xen/arch/arm/setup.c              |  4 ++
- xen/arch/x86/efi/efi-boot.h       | 72 -----------------------
- xen/common/efi/boot.c             | 96 +++++++++++++++++++++++++++----
- xen/include/public/platform.h     |  2 +
- xen/include/xen/vga.h             |  2 +-
- 7 files changed, 106 insertions(+), 91 deletions(-)
-
+diff --git a/xen/arch/arm/efi/efi-boot.h b/xen/arch/arm/efi/efi-boot.h
+index ae8627134e5a..17a3d46c59ae 100644
+--- a/xen/arch/arm/efi/efi-boot.h
++++ b/xen/arch/arm/efi/efi-boot.h
+@@ -1000,12 +1000,6 @@ static void __init efi_arch_console_init(UINTN cols, UINTN rows)
+ {
+ }
+ 
+-static void __init efi_arch_video_init(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop,
+-                                       UINTN info_size,
+-                                       EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info)
+-{
+-}
+-
+ static void __init efi_arch_flush_dcache_area(const void *vaddr, UINTN size)
+ {
+     __flush_dcache_area(vaddr, size);
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index d5d0792ed48a..a336ee58179c 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -71,6 +71,10 @@ static unsigned long opt_xenheap_megabytes __initdata;
+ integer_param("xenheap_megabytes", opt_xenheap_megabytes);
+ #endif
+ 
++#ifndef CONFIG_VIDEO
++struct xen_vga_console_info vga_console_info;
++#endif
++
+ domid_t __read_mostly max_init_domid;
+ 
+ static __used void init_done(void)
+diff --git a/xen/arch/x86/efi/efi-boot.h b/xen/arch/x86/efi/efi-boot.h
+index f69509a2103a..cba3fa75a475 100644
+--- a/xen/arch/x86/efi/efi-boot.h
++++ b/xen/arch/x86/efi/efi-boot.h
+@@ -3,7 +3,6 @@
+  * is intended to be included by common/efi/boot.c _only_, and
+  * therefore can define arch specific global variables.
+  */
+-#include <xen/vga.h>
+ #include <asm/e820.h>
+ #include <asm/edd.h>
+ #include <asm/microcode.h>
+@@ -497,77 +496,6 @@ static void __init efi_arch_console_init(UINTN cols, UINTN rows)
+ #endif
+ }
+ 
+-static void __init efi_arch_video_init(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop,
+-                                       UINTN info_size,
+-                                       EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info)
+-{
+-#ifdef CONFIG_VIDEO
+-    int bpp = 0;
+-
+-    switch ( mode_info->PixelFormat )
+-    {
+-    case PixelRedGreenBlueReserved8BitPerColor:
+-        vga_console_info.u.vesa_lfb.red_pos = 0;
+-        vga_console_info.u.vesa_lfb.red_size = 8;
+-        vga_console_info.u.vesa_lfb.green_pos = 8;
+-        vga_console_info.u.vesa_lfb.green_size = 8;
+-        vga_console_info.u.vesa_lfb.blue_pos = 16;
+-        vga_console_info.u.vesa_lfb.blue_size = 8;
+-        vga_console_info.u.vesa_lfb.rsvd_pos = 24;
+-        vga_console_info.u.vesa_lfb.rsvd_size = 8;
+-        bpp = 32;
+-        break;
+-    case PixelBlueGreenRedReserved8BitPerColor:
+-        vga_console_info.u.vesa_lfb.red_pos = 16;
+-        vga_console_info.u.vesa_lfb.red_size = 8;
+-        vga_console_info.u.vesa_lfb.green_pos = 8;
+-        vga_console_info.u.vesa_lfb.green_size = 8;
+-        vga_console_info.u.vesa_lfb.blue_pos = 0;
+-        vga_console_info.u.vesa_lfb.blue_size = 8;
+-        vga_console_info.u.vesa_lfb.rsvd_pos = 24;
+-        vga_console_info.u.vesa_lfb.rsvd_size = 8;
+-        bpp = 32;
+-        break;
+-    case PixelBitMask:
+-        bpp = set_color(mode_info->PixelInformation.RedMask, bpp,
+-                        &vga_console_info.u.vesa_lfb.red_pos,
+-                        &vga_console_info.u.vesa_lfb.red_size);
+-        bpp = set_color(mode_info->PixelInformation.GreenMask, bpp,
+-                        &vga_console_info.u.vesa_lfb.green_pos,
+-                        &vga_console_info.u.vesa_lfb.green_size);
+-        bpp = set_color(mode_info->PixelInformation.BlueMask, bpp,
+-                        &vga_console_info.u.vesa_lfb.blue_pos,
+-                        &vga_console_info.u.vesa_lfb.blue_size);
+-        if ( mode_info->PixelInformation.ReservedMask )
+-            bpp = set_color(mode_info->PixelInformation.ReservedMask, bpp,
+-                            &vga_console_info.u.vesa_lfb.rsvd_pos,
+-                            &vga_console_info.u.vesa_lfb.rsvd_size);
+-        if ( bpp > 0 )
+-            break;
+-        /* fall through */
+-    default:
+-        PrintErr(L"Current graphics mode is unsupported!\r\n");
+-        bpp  = 0;
+-        break;
+-    }
+-    if ( bpp > 0 )
+-    {
+-        vga_console_info.video_type = XEN_VGATYPE_EFI_LFB;
+-        vga_console_info.u.vesa_lfb.gbl_caps = 2; /* possibly non-VGA */
+-        vga_console_info.u.vesa_lfb.width =
+-            mode_info->HorizontalResolution;
+-        vga_console_info.u.vesa_lfb.height = mode_info->VerticalResolution;
+-        vga_console_info.u.vesa_lfb.bits_per_pixel = bpp;
+-        vga_console_info.u.vesa_lfb.bytes_per_line =
+-            (mode_info->PixelsPerScanLine * bpp + 7) >> 3;
+-        vga_console_info.u.vesa_lfb.lfb_base = gop->Mode->FrameBufferBase;
+-        vga_console_info.u.vesa_lfb.ext_lfb_base = gop->Mode->FrameBufferBase >> 32;
+-        vga_console_info.u.vesa_lfb.lfb_size =
+-            (gop->Mode->FrameBufferSize + 0xffff) >> 16;
+-    }
+-#endif
+-}
+-
+ static void __init efi_arch_memory_setup(void)
+ {
+     unsigned int i;
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 80e4e32623c4..2bc38ae40fff 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -20,6 +20,7 @@
+ #endif
+ #include <xen/string.h>
+ #include <xen/stringify.h>
++#include <xen/vga.h>
+ #ifdef CONFIG_X86
+ /*
+  * Keep this arch-specific modified include in the common file, as moving
+@@ -1025,6 +1026,77 @@ static void __init efi_get_apple_properties(void)
+     }
+ }
+ 
++static void __init efi_video_init(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop,
++                                  UINTN info_size,
++                                  EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info)
++{
++#if defined(CONFIG_VIDEO) || defined(CONFIG_ARM)
++    int bpp = 0;
++
++    switch ( mode_info->PixelFormat )
++    {
++    case PixelRedGreenBlueReserved8BitPerColor:
++        vga_console_info.u.vesa_lfb.red_pos = 0;
++        vga_console_info.u.vesa_lfb.red_size = 8;
++        vga_console_info.u.vesa_lfb.green_pos = 8;
++        vga_console_info.u.vesa_lfb.green_size = 8;
++        vga_console_info.u.vesa_lfb.blue_pos = 16;
++        vga_console_info.u.vesa_lfb.blue_size = 8;
++        vga_console_info.u.vesa_lfb.rsvd_pos = 24;
++        vga_console_info.u.vesa_lfb.rsvd_size = 8;
++        bpp = 32;
++        break;
++    case PixelBlueGreenRedReserved8BitPerColor:
++        vga_console_info.u.vesa_lfb.red_pos = 16;
++        vga_console_info.u.vesa_lfb.red_size = 8;
++        vga_console_info.u.vesa_lfb.green_pos = 8;
++        vga_console_info.u.vesa_lfb.green_size = 8;
++        vga_console_info.u.vesa_lfb.blue_pos = 0;
++        vga_console_info.u.vesa_lfb.blue_size = 8;
++        vga_console_info.u.vesa_lfb.rsvd_pos = 24;
++        vga_console_info.u.vesa_lfb.rsvd_size = 8;
++        bpp = 32;
++        break;
++    case PixelBitMask:
++        bpp = set_color(mode_info->PixelInformation.RedMask, bpp,
++                        &vga_console_info.u.vesa_lfb.red_pos,
++                        &vga_console_info.u.vesa_lfb.red_size);
++        bpp = set_color(mode_info->PixelInformation.GreenMask, bpp,
++                        &vga_console_info.u.vesa_lfb.green_pos,
++                        &vga_console_info.u.vesa_lfb.green_size);
++        bpp = set_color(mode_info->PixelInformation.BlueMask, bpp,
++                        &vga_console_info.u.vesa_lfb.blue_pos,
++                        &vga_console_info.u.vesa_lfb.blue_size);
++        if ( mode_info->PixelInformation.ReservedMask )
++            bpp = set_color(mode_info->PixelInformation.ReservedMask, bpp,
++                            &vga_console_info.u.vesa_lfb.rsvd_pos,
++                            &vga_console_info.u.vesa_lfb.rsvd_size);
++        if ( bpp > 0 )
++            break;
++        /* fall through */
++    default:
++        PrintErr(L"Current graphics mode is unsupported!\r\n");
++        bpp  = 0;
++        break;
++    }
++    if ( bpp > 0 )
++    {
++        vga_console_info.video_type = XEN_VGATYPE_EFI_LFB;
++        vga_console_info.u.vesa_lfb.gbl_caps = 2; /* possibly non-VGA */
++        vga_console_info.u.vesa_lfb.width =
++            mode_info->HorizontalResolution;
++        vga_console_info.u.vesa_lfb.height = mode_info->VerticalResolution;
++        vga_console_info.u.vesa_lfb.bits_per_pixel = bpp;
++        vga_console_info.u.vesa_lfb.bytes_per_line =
++            (mode_info->PixelsPerScanLine * bpp + 7) >> 3;
++        vga_console_info.u.vesa_lfb.lfb_base = gop->Mode->FrameBufferBase;
++        vga_console_info.u.vesa_lfb.ext_lfb_base = gop->Mode->FrameBufferBase >> 32;
++        vga_console_info.u.vesa_lfb.lfb_size =
++            (gop->Mode->FrameBufferSize + 0xffff) >> 16;
++    }
++#endif
++}
++
+ static void __init efi_set_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop, UINTN gop_mode)
+ {
+     EFI_GRAPHICS_OUTPUT_MODE_INFORMATION *mode_info;
+@@ -1042,7 +1114,7 @@ static void __init efi_set_gop_mode(EFI_GRAPHICS_OUTPUT_PROTOCOL *gop, UINTN gop
+     /* Get graphics and frame buffer info. */
+     status = gop->QueryMode(gop, gop->Mode->Mode, &info_size, &mode_info);
+     if ( !EFI_ERROR(status) )
+-        efi_arch_video_init(gop, info_size, mode_info);
++        efi_video_init(gop, info_size, mode_info);
+ }
+ 
+ #define INVALID_VIRTUAL_ADDRESS (0xBAAADUL << \
+diff --git a/xen/include/xen/vga.h b/xen/include/xen/vga.h
+index f72b63d446b1..39b4c2eae198 100644
+--- a/xen/include/xen/vga.h
++++ b/xen/include/xen/vga.h
+@@ -11,7 +11,7 @@
+ 
+ #include <xen/video.h>
+ 
+-#ifdef CONFIG_VGA
++#if defined(CONFIG_VGA) || defined(CONFIG_ARM)
+ extern struct xen_vga_console_info vga_console_info;
+ #endif
+ 
 -- 
 2.32.0
 
