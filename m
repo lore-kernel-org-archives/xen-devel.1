@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E90C433FE
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Feb 2022 19:29:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.266316.460017 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EAD2C4332F
+	for <xen-devel@archiver.kernel.org>; Sun,  6 Feb 2022 19:29:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.266314.459994 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nGnDP-0002Lo-V2; Sun, 06 Feb 2022 19:28:51 +0000
+	id 1nGnDK-0001mv-Em; Sun, 06 Feb 2022 19:28:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 266316.460017; Sun, 06 Feb 2022 19:28:51 +0000
+Received: by outflank-mailman (output) from mailman id 266314.459994; Sun, 06 Feb 2022 19:28:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nGnDP-0002Lf-Qg; Sun, 06 Feb 2022 19:28:51 +0000
-Received: by outflank-mailman (input) for mailman id 266316;
- Sun, 06 Feb 2022 19:28:50 +0000
+	id 1nGnDK-0001mo-Bo; Sun, 06 Feb 2022 19:28:46 +0000
+Received: by outflank-mailman (input) for mailman id 266314;
+ Sun, 06 Feb 2022 19:28:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nGnDO-0002J7-OM
- for xen-devel@lists.xenproject.org; Sun, 06 Feb 2022 19:28:50 +0000
+ (envelope-from <julien@xen.org>) id 1nGnDJ-0001Yz-9u
+ for xen-devel@lists.xenproject.org; Sun, 06 Feb 2022 19:28:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nGnDM-0005t8-Ch; Sun, 06 Feb 2022 19:28:48 +0000
+ id 1nGnDJ-0005sk-2e; Sun, 06 Feb 2022 19:28:45 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nGnDM-0007Ok-4h; Sun, 06 Feb 2022 19:28:48 +0000
+ id 1nGnDI-0007Ok-Pk; Sun, 06 Feb 2022 19:28:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,24 +45,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=dwa+CM0UGV4Uyu3tQxS0S6kaMZiyK2FzF7bR+EHTABc=; b=ppyd+fukvMObK1Y2M4+VtmDg6w
-	3E8oAypWDgoe7HSHp252yR2ftQtXhjHOYNlRTy4MoqwvT51uHuVZLl9dB/ukzZCJH1NS+SvloMmQd
-	Ptj9JPP1BFMPwyEdx/+W+vz5LmL8AvDtspb/bndh37q80j1sTFckn+2CWLZiMNoCFwdU=;
+	bh=afEtY43khqyixlLlQcgO+P5/SZzjDhtwscVQfHzNp6w=; b=3VtDXi3lemG7IAYf+DmdTdw7XG
+	49nHZrGfVfH6KIvICROvXnt8LH95v6Sej6Sy7FnViBrQXDiaJJb1l+o+QRrc1ldMXYFjpYQAv1eYJ
+	X3NDNAzLRWK5CGxby0CF8bXGWhzQaeQ333HMRgF785hVqYEJTA4e9biey1Mb5SmPPmyI=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: ehem+xen@m5p.com,
 	Julien Grall <jgrall@amazon.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH RFC 3/3] xen: Introduce a platform sub-op to retrieve the VGA information
-Date: Sun,  6 Feb 2022 19:28:39 +0000
-Message-Id: <20220206192839.75711-4-julien@xen.org>
+	Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH RFC 1/3] xen/efi: Always query the console information and get GOP
+Date: Sun,  6 Feb 2022 19:28:37 +0000
+Message-Id: <20220206192839.75711-2-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220206192839.75711-1-julien@xen.org>
 References: <20220206192839.75711-1-julien@xen.org>
@@ -71,83 +64,81 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-When using EFI, the VGA information is fetched using the EFI
-boot services. However, Xen will have exited the boot services.
-Therefore, we need to find a different way to pass the information
-to dom0.
+Currently, the EFI stub will only query the console information and
+get the GOP when using the configuration file.
 
-For PV dom0, they are part of the start_info. But this is not
-something that exists on Arm. So the best way would to be to
-use a hypercall.
+However, GRUB is never providing the a configuration file. So the
+EFI framebuffer will not be usable at least on Arm (support will
+be added in a follow-up patch).
 
-For now the structure layout is based on dom0_vga_console_info
-for convenience. I am open on another proposal.
+Move out the code outside of the configuration file section.
+
+Take the opportunity to remove the variable 'size' which was
+set but never used (interestingly GCC is only complaining if it is
+initialization when declaring the variable).
+
+With this change, GCC 8.3 will complain of argc potentially been
+used unitiatlized. I suspect this is because the argc will
+be iniitalized and used in a different if code-blocks. Yet they
+are using the same check.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ----
 
-TODO:
-    - Check the structure size has not changed (I would like to
-      avoid bumping the platform interface).
----
- xen/arch/arm/platform_hypercall.c | 15 +++++++++++++++
- xen/include/public/platform.h     |  2 ++
- 2 files changed, 17 insertions(+)
+It is not entirely clear to me why the GOP was only fetched when
+the configuration file is used.
 
-diff --git a/xen/arch/arm/platform_hypercall.c b/xen/arch/arm/platform_hypercall.c
-index 8efac7ee602a..78ad328e2ab8 100644
---- a/xen/arch/arm/platform_hypercall.c
-+++ b/xen/arch/arm/platform_hypercall.c
-@@ -10,6 +10,7 @@
- #include <xen/sched.h>
- #include <xen/guest_access.h>
- #include <xen/spinlock.h>
-+#include <xen/vga.h>
- #include <public/platform.h>
- #include <xsm/xsm.h>
- #include <asm/current.h>
-@@ -58,6 +59,20 @@ long do_platform_op(XEN_GUEST_HANDLE_PARAM(xen_platform_op_t) u_xenpf_op)
-             ret = -EINVAL;
-         break;
- 
-+    case XENPF_firmware_info:
-+        switch ( op->u.firmware_info.type )
-+        {
-+        case XEN_FW_VGA_INFO:
-+            BUILD_BUG_ON(sizeof(op->u.firmware_info.u.vga) !=
-+                         sizeof(vga_console_info));
-+            memcpy(&op->u.firmware_info.u.vga, &vga_console_info,
-+                   sizeof(vga_console_info));
-+            if ( __copy_to_guest(u_xenpf_op, op, 1) )
-+                ret = -EFAULT;
-+            break;
-+        }
-+        break;
+I have tested this on RPI4 and it seems to work. Any chance this
+was done to workaround an x86 platform?
+---
+ xen/common/efi/boot.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
+index 12fd0844bd55..80e4e32623c4 100644
+--- a/xen/common/efi/boot.c
++++ b/xen/common/efi/boot.c
+@@ -1129,9 +1129,11 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
+     static EFI_GUID __initdata shim_lock_guid = SHIM_LOCK_PROTOCOL_GUID;
+     EFI_LOADED_IMAGE *loaded_image;
+     EFI_STATUS status;
+-    unsigned int i, argc;
++    /* Initialize argc to stop GCC complaining */
++    unsigned int i, argc = 0;
+     CHAR16 **argv, *file_name, *cfg_file_name = NULL, *options = NULL;
+-    UINTN gop_mode = ~0;
++    UINTN gop_mode = ~0, cols = 0, rows = 0;
 +
-     default:
-         ret = -ENOSYS;
-         break;
-diff --git a/xen/include/public/platform.h b/xen/include/public/platform.h
-index a4c0eb62249a..4de42ce6cbc5 100644
---- a/xen/include/public/platform.h
-+++ b/xen/include/public/platform.h
-@@ -244,6 +244,7 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_efi_runtime_call_t);
- #define  XEN_FW_EFI_PCI_ROM        5
- #define  XEN_FW_EFI_APPLE_PROPERTIES 6
- #define XEN_FW_KBD_SHIFT_FLAGS    5
-+#define XEN_FW_VGA_INFO           6
- struct xenpf_firmware_info {
-     /* IN variables. */
-     uint32_t type;
-@@ -311,6 +312,7 @@ struct xenpf_firmware_info {
+     EFI_SHIM_LOCK_PROTOCOL *shim_lock;
+     EFI_GRAPHICS_OUTPUT_PROTOCOL *gop = NULL;
+     union string section = { NULL }, name;
+@@ -1219,18 +1221,16 @@ efi_start(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable)
  
-         /* Int16, Fn02: Get keyboard shift flags. */
-         uint8_t kbd_shift_flags; /* XEN_FW_KBD_SHIFT_FLAGS */
-+        struct dom0_vga_console_info vga;
-     } u;
- };
- typedef struct xenpf_firmware_info xenpf_firmware_info_t;
+     efi_arch_relocate_image(0);
+ 
++    if ( StdOut->QueryMode(StdOut, StdOut->Mode->Mode,
++                           &cols, &rows) == EFI_SUCCESS )
++        efi_arch_console_init(cols, rows);
++
++    gop = efi_get_gop();
++
+     if ( use_cfg_file )
+     {
+         EFI_FILE_HANDLE dir_handle;
+-        UINTN depth, cols, rows, size;
+-
+-        size = cols = rows = depth = 0;
+-
+-        if ( StdOut->QueryMode(StdOut, StdOut->Mode->Mode,
+-                               &cols, &rows) == EFI_SUCCESS )
+-            efi_arch_console_init(cols, rows);
+-
+-        gop = efi_get_gop();
++        UINTN depth = 0;
+ 
+         /* Get the file system interface. */
+         dir_handle = get_parent_handle(loaded_image, &file_name);
 -- 
 2.32.0
 
