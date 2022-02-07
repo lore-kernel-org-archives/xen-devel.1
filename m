@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24204C433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Feb 2022 10:47:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.266704.460401 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92EB9C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Feb 2022 10:57:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.266713.460413 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nH1Xh-0000OJ-7t; Mon, 07 Feb 2022 10:46:45 +0000
+	id 1nH1hb-0001t8-7M; Mon, 07 Feb 2022 10:56:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 266704.460401; Mon, 07 Feb 2022 10:46:45 +0000
+Received: by outflank-mailman (output) from mailman id 266713.460413; Mon, 07 Feb 2022 10:56:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nH1Xh-0000OC-4r; Mon, 07 Feb 2022 10:46:45 +0000
-Received: by outflank-mailman (input) for mailman id 266704;
- Mon, 07 Feb 2022 10:46:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=owYM=SW=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1nH1Xf-0000O6-Ca
- for xen-devel@lists.xenproject.org; Mon, 07 Feb 2022 10:46:43 +0000
-Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.111.102])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3c05cb7e-8803-11ec-8f75-fffcc8bd4f1a;
- Mon, 07 Feb 2022 11:46:41 +0100 (CET)
-Received: from EUR03-AM5-obe.outbound.protection.outlook.com
- (mail-am5eur03lp2053.outbound.protection.outlook.com [104.47.8.53]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-32-tFyAzUNQPNOKZNEvDkpQQA-1; Mon, 07 Feb 2022 11:46:40 +0100
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by DU0PR04MB9444.eurprd04.prod.outlook.com (2603:10a6:10:35c::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.18; Mon, 7 Feb
- 2022 10:46:39 +0000
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::5160:9fd7:9627:cb11]) by VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::5160:9fd7:9627:cb11%5]) with mapi id 15.20.4951.018; Mon, 7 Feb 2022
- 10:46:39 +0000
+	id 1nH1hb-0001t1-3z; Mon, 07 Feb 2022 10:56:59 +0000
+Received: by outflank-mailman (input) for mailman id 266713;
+ Mon, 07 Feb 2022 10:56:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=H0qh=SW=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
+ id 1nH1hZ-0001sl-1m
+ for xen-devel@lists.xenproject.org; Mon, 07 Feb 2022 10:56:57 +0000
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [2a00:1450:4864:20::536])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a9ff72c3-8804-11ec-8eb8-a37418f5ba1a;
+ Mon, 07 Feb 2022 11:56:55 +0100 (CET)
+Received: by mail-ed1-x536.google.com with SMTP id w14so29120157edd.10
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Feb 2022 02:56:55 -0800 (PST)
+Received: from zen.linaroharston ([51.148.130.216])
+ by smtp.gmail.com with ESMTPSA id e10sm1298608ejx.53.2022.02.07.02.56.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Feb 2022 02:56:53 -0800 (PST)
+Received: from zen (localhost [127.0.0.1])
+ by zen.linaroharston (Postfix) with ESMTP id 5DE631FFB7;
+ Mon,  7 Feb 2022 10:56:53 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,165 +48,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c05cb7e-8803-11ec-8f75-fffcc8bd4f1a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1644230801;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cUjpp8UpJffA04V3EbdopeSNBUXOJLg4fXPA0jqT3xk=;
-	b=lZGMRdr3Epp03aFk1MTSrsQVQnyxeAA6ewZYBvM+/eXJOqgjdiOEoVQOGonVMUw4PP+GkK
-	fghZnO59fK1Nydvmwr/H5FXUOdyeka4h/D/JLwYBLOFYkm0oxPZLFfzJBoCzvrwnQzxV/f
-	arhlar39YHBawfxMR1Y2vuCUYtEfHDc=
-X-MC-Unique: tFyAzUNQPNOKZNEvDkpQQA-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fR7y2og+GQNLkB6bF6Njb+baSoGekstzngIqby7smq5sgZWo7tpGx5Vfn0DyHAkk8zNGFEEV6hhsAgo0ZBkvYoJK1kXrZUi2ZmTSDd39XrWqWKXjSd78ngz/2UxqbQG/UzVrhljsHM97paaYwIGAY+cywonp6+0ciuqjYOtmdRKWgQ3BzGiPWEH+Xsr6YwpYtNVkq2cypepZ/gjMZOaDuOfHGTMOkdDjyQdhgZla64N3sWMjJIL98gLMg+FhaZtYRFl1kAvHVHnA77VXJ1Y4+rTX59YjdrURMcWIshRuMA/ZVsFvy8SRQ8mWE5w361wS+vLIP6yD9Dw9M40SZo/uMw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cUjpp8UpJffA04V3EbdopeSNBUXOJLg4fXPA0jqT3xk=;
- b=Ze9NZYzWFvuBtWlyBYt4iPD+swc0x2XSAiXM04SK7yK5Fpq51nfnCdBwGB4DHz4KHFBLfsksi6s8DvwW3+iKHbHIJwd0RWIJqBN5cqx/Ng9Adohx/B1zX0NXWCHCyid//Lg6abN0USLwKh9WnQjw6I5S3vJ4ZWatO+rx0WmMGcI4o+JIrSP5U45Y3Q2GSixkinuFpd3AI3DkNWe4DQpiCQ4U1hf+rxaVA3jPjn/IYPc2kl8xCXmJQKjb33ULgPmDwy3IAbDqV9RPOV/exm3GyrMpx1MkR0Isn6pktxH/pvWWIoFLLWui91GNGMoJT6jtmUFm9SVxOP/EQtMwHIGXQg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <c2c185cb-2368-cd61-df72-7792b075746e@suse.com>
-Date: Mon, 7 Feb 2022 11:46:36 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Subject: Re: [PATCH] xen/public: partially revert commit 7c7f7e8fba01
-Content-Language: en-US
-To: Juergen Gross <jgross@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <20220207103613.32260-1-jgross@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20220207103613.32260-1-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS9PR06CA0346.eurprd06.prod.outlook.com
- (2603:10a6:20b:466::21) To VI1PR04MB5600.eurprd04.prod.outlook.com
- (2603:10a6:803:e7::16)
+X-Inumbo-ID: a9ff72c3-8804-11ec-8eb8-a37418f5ba1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=user-agent:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=DYQAeF5GF08SrkAlmINB1uRvHTmAMikhM34e6HF23rU=;
+        b=j+a4GsF1L5bMH9MhCVgPtvDz//jf68ODPuhV+N3oSsFIR2maaZouWsPgO3Ag8he94s
+         2Q2khjCkLe9rrZwcng5+sMORzsg9HkNkS/H/fr3S4NfKQj3+/VuhAgdTpeGoDtNwX5jC
+         1C1nTw/Azv9gXb8GdH5vlmb7fgVovmwoQK/N3SFDKSJ1fJzEuJ/tEdnQSVARPFyp+nuf
+         mgJ6cPoXKNTke7xcA7fEB6tTbd60VeqpUQ2+uzmO1isJb1TI0kxGwhyQnuu4siRuD5L6
+         x/iuToRqvGQ1pd3ZpGGUdy8AbmknkTLYPi8OXRw6TGL4qW2mmi451We/9IagJtAE2Akk
+         AylQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:user-agent:from:to:cc:subject:date:message-id
+         :mime-version:content-transfer-encoding;
+        bh=DYQAeF5GF08SrkAlmINB1uRvHTmAMikhM34e6HF23rU=;
+        b=zz7rrOk+00UvNk6tQGnGFWFuimm7fLoZlZqzRnGG/cAXOGBIOXYpwZoj6VBpqsUBmZ
+         3xXh0hyKw/QOu5ZZJsJi8qPI2qn5P5ZrU7CG5yZ62LsRFr6lOJZVKvq6ZGl00algARig
+         ozOu63EU+GPaMi+0uEDvaJ1XOydyLXsJwcS93xe+/kTjhN1DlzsgLSfU63xj3ksCK/1Y
+         +m8I7V0fZ6Fmy7w96JQVuU3b+406Q385JHsxyR8y2L8J5pf+zDgHm0KEgfMH2sHDe1Bs
+         5Y2mCqleaEnruzLLqgWTmx5GoDRqK6RoW3zfD16VzChaKKyeDGPREPFsWiKJXhI25qtt
+         Stdw==
+X-Gm-Message-State: AOAM533BcXQlghrY7QLfnY/jDA9tS60ACrDanWTy7Cv/ymqhJU72IPHz
+	OPDKMP829S+7Jzg2Njw6Bqm2yw==
+X-Google-Smtp-Source: ABdhPJwcmRzFt4vbaC5A6qq6GvCXeou2Trroty8hockxfYbDxVusmIg9JoKbVn/d5PvLy9ofuC60WA==
+X-Received: by 2002:a05:6402:1d8b:: with SMTP id dk11mr7576789edb.246.1644231414809;
+        Mon, 07 Feb 2022 02:56:54 -0800 (PST)
+User-agent: mu4e 1.7.7; emacs 28.0.91
+From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: Stefano Stabellini <stefano.stabellini@xilinx.com>, Vincent Guittot
+ <vincent.guittot@linaro.org>
+Cc: stratos-dev@op-lists.linaro.org, xen-devel@lists.xenproject.org, AKASHI
+ Takahiro <takahiro.akashi@linaro.org>, Arnd Bergmann
+ <arnd.bergmann@linaro.org>, Christopher Clark
+ <christopher.w.clark@gmail.com>, Dmytro Firsov <dmytro_firsov@epam.com>,
+ Julien Grall <julien@xen.org>, Volodymyr Babchuk
+ <Volodymyr_Babchuk@epam.com>
+Subject: Metadata and signalling channels for Zephyr virtio-backends on Xen
+Date: Mon, 07 Feb 2022 10:20:49 +0000
+Message-ID: <87h79bgd1m.fsf@linaro.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3308b0f8-e465-4ccc-8a7c-08d9ea271eb4
-X-MS-TrafficTypeDiagnostic: DU0PR04MB9444:EE_
-X-LD-Processed: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba,ExtFwd
-X-Microsoft-Antispam-PRVS:
-	<DU0PR04MB9444ABAB934ACCB90AF8A10EB32C9@DU0PR04MB9444.eurprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	FKBg1Y1MognvSzW0Q4rkJmhaWJxxwOUbYYMXzJeOrvCZzho7mQjV+VT+Yqjive50sPr7aqE6gz715M1iu97865sPsdOZTpEBMRamDLQEbPv94637yyCGLB07RK89FIvfSVXUgw7ifDpq6pnGZ8U8us8GsnrgKQq8x85x+CbCyOYhXQfo4WRs7pzRcmnQYzc68AlUILujNWCDfV7VXXX9TS0nJ05UFLsxRvwUpoxKtJFDFeCG9lFe80SVstDAs1MrIggysD2t22O47d301miEaUOdt67MSpSFR/eMLPFyg8w+E7fUKxLPELMiIGSrov8ExKiCd0he6pJk/OxOupBAxg1OdA3XsQtWI0d1AV4DKb1cfajprCksnPYDVFbvkXGhpxbs343oePlCJryhvTEQqVdOGippNagaZURC8mfPCq1LK96lZ53zWgwCujxOn+WhMW7G/yCh/LfUfOJLkazQI4nzHBkT6qwu3Qz8u5cCJLR7DIUoqNLKuhMaRxG7Vs6hSTrFg6OV9dNuTMsOQGoScecilIKmk/V8Tcfwb6eRMqtili+SqaBq6BRDrRwBt17MOiOjFNOhAit9Eef4UgvqgcXBQS2wpGWtg31uCG8PqyyTl1yE+1c4rQ3/XVgOy8MT1FWWJyX24OBoVGkgb8Nf5DWl22bjBUPCSsNb+oUcOvdiYO2fmeNH+Nvag9obtY5RV9fBy0JBenuRNWnStbz/SGZDqC/couIV8Ds3ZCIWCCbrTWrJWaAKSTwiAYY5cPjUhH7ntt+6L4e7p2FPQeOwjQ==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(2906002)(86362001)(2616005)(26005)(6636002)(316002)(186003)(37006003)(54906003)(508600001)(38100700002)(6512007)(6862004)(4326008)(6506007)(8676002)(66556008)(6666004)(5660300002)(66476007)(31696002)(8936002)(66946007)(53546011)(31686004)(6486002)(36756003)(83380400001)(98903001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SDJsS2NqRTgxd0gybWpXQWR5bXhtOUUxTDE4Uzl3QTlaME41YWQ1eEsrQzdy?=
- =?utf-8?B?ZkFlQUhKckFxL1RQRTl1RzhGRmpYU0lJdnVaVytob0lzR1hwUHpyTWd5Wnd1?=
- =?utf-8?B?dmlsVmkrVG81czhtaEVHdjErR0xvMmNHZFN3bUdlQ3lLQitERmJGTXlUZDVK?=
- =?utf-8?B?VXhsbmdydzB4SnJlRFpuVXBSc09QSFVpbU54RW9SNHdBQjhkQ0VwWDdOaHhv?=
- =?utf-8?B?N1ZWSzRHdVJ1dWZrTlhqeStwbVoxYWdFT1dnVnlVZEpyU2pQcUhXc0JWeXhF?=
- =?utf-8?B?ajNlTFltRnpzU0lGaXQrYkp0OXBQaHU2MTZZMkhxK1RrL3dSdVMwUnJzVUVK?=
- =?utf-8?B?cmxrVzk4aDg0RktUQ29ESUJFUVZ5WHk3YWRETUcxV0NIMXlEL1ZVQzVzMEE5?=
- =?utf-8?B?MVNJYjdQNkFjU2FZZU1LU0U4Z2hCYnRZRm5QOWp5Mm5QN0lPbVp3SEc0VUZC?=
- =?utf-8?B?c1dZQzlwbEFGOVFkaTJxRmdza09vV0FjK0ZYd0NVUUJpYUJiQzAxQm5LZ1Vz?=
- =?utf-8?B?cXhqSTZoRU1OTkpzMDRvVjBhNDJTd0NKQWhseHh5ZGoyb1plTVg2RVU4a0pp?=
- =?utf-8?B?Q2NYY3NvZzhseFBFZ1QzYStlTWVsb1lYSVhWenZwanE5YlpHOFRBL05LN0VS?=
- =?utf-8?B?L0NLcUxBMmVZVGlqbXJzZTArelowL2x4b05KcU9kMTZkL00wZEF4Rlh5Mlkv?=
- =?utf-8?B?cFk1V3V5SHNNRWlrYldnUFphUXlpdENrSlFYT2ZmeXpEcjM3RHBMYWVJTG5W?=
- =?utf-8?B?Q1N4eTdSK01GaTFNeW5uaWx3VTV1MHh2TzlzQ3VFVzlSMytZZ21mdTBBYms2?=
- =?utf-8?B?TkR0M3Ava3N3N1IxdTJuWUZ5SXk0bk1ueU1yRzVzMXl4ZVhpY1BCcnI3T2E3?=
- =?utf-8?B?Y25udzhVTGdHOUpWVlBHMFhVeHB5cGp4cEE5SzNVWGFrOWtxcDRxUnhHU2d6?=
- =?utf-8?B?MnphV2ZRWFg5RVcwU1VmRlhuRmZFcmg1OHFnSVdlSXZacStTa0V2UnJ1UjdT?=
- =?utf-8?B?L3JSSVoxOVdDak84OG1lalR5TkR2VGFWekR0eHdjeGhEMWZIUkZ4MkJxc1hK?=
- =?utf-8?B?bnZ0TGJUT1AwT25NeUU0SjNVY1BJdnMwbzBOemN6c1ZuSDJieGRBOEVtS0sr?=
- =?utf-8?B?OVVhajZPRkl6YW8rVHdDVnFBRUxhMHpMZjZkMjc2U25CY0FnYWhOSmJvUHc0?=
- =?utf-8?B?ZTdQWHFYY0NmTHZSZWY1dDZoclBzVVNHNEJRd2E1MEdBNW1VeEdBYU1md1F2?=
- =?utf-8?B?K25BS0dhSk14WVdFVFZVYURSbUIzeHBicVJacW5OekliVjdjN3Zqc3htUmFt?=
- =?utf-8?B?RlVqY0VNSm40Rmszc2pxeHhCaXZpTjdUM2RWR3A5cktIUU04cDRZOHorMkJ0?=
- =?utf-8?B?OEdNYitYQ0w3RjF4RUJRU1RBVExESXFDN1VRSldMSnVKd0ZoN3h4TUJKZXF2?=
- =?utf-8?B?WTVLL2VseWdtcWxVcStzbUFIWFY1SldZZjNJVk80VWZZb2Q2bWFhYVEwTFFk?=
- =?utf-8?B?QnAyM2FJYjdNMHphMUYvd0VrOU1IQVhMZGNUaVFFS20wN1NUck10TEFsUGJ2?=
- =?utf-8?B?UEVjaU5aWWMwWjhPaS9EUGpGaVA2TnI0YWZXZWxsQ0pIdEhHZFRCYk5mSjhE?=
- =?utf-8?B?QkNTNmxtWkhGN0ZUOXVPa0NVWVBZQ2lhbUt3Q3hYNjJ6eVRkT3RCQ3lTSStp?=
- =?utf-8?B?ekFjQVFvckJZUGs0REZ1bzl6STFONy9Ra2tDOTVqZDJRMlU5WGtQSEo1QXZa?=
- =?utf-8?B?ZXhQMkFDVGYyWk0vWW9tWDBCNzB6MFNoZHlUZEpJKy90a2syMm5jL04yRHlC?=
- =?utf-8?B?NTRVL0FBeEhaVVhJTENMdUNvNzQ2aGlVRW9Sbmw5clRnTXI5OS9FMW1FSFNW?=
- =?utf-8?B?NmUyVytNUHpFUzdaODBwTEh1L0tCWmZSTHhNLzEyaEtxWnhjVGs3RUphU3ha?=
- =?utf-8?B?RTJMSnVkdmFmSW8xNkgwRm9FaHF6amwvaHZwbDZQMUpxcFpkd0NXS09YSjdB?=
- =?utf-8?B?YUQwQ1hCMUtFdnJwVzZwOHVhb3JsTjUwV2tFTld0akdLYW16cGEwdDBvMVhU?=
- =?utf-8?B?ZzBOQUtyS3U3UHBRQnJpbjdGbVE2MDVDMGtOcUFjQTZES1FyRTN2UHpQeU1r?=
- =?utf-8?B?akp6YlhHY1NmMDBQcS93b2kzTjEwMGtQdGJDOUJycFg2SXl1RTlENGJxRUZF?=
- =?utf-8?Q?s5lIzOtZ7NKtVBbcm1QGHhQ=3D?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3308b0f8-e465-4ccc-8a7c-08d9ea271eb4
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2022 10:46:39.1751
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z07LEEl9N9vR+VwZ6gKU5Gy7fdWI2hlFrlHyaYymYQFAkSWzjuJKKDp1CpeVhKMkLJOv7yAPJTWPQ3eAUdJ+MA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9444
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On 07.02.2022 11:36, Juergen Gross wrote:
-> Commit 7c7f7e8fba01 changed xen/include/public/memory.h in an incompatible
-> way. Unfortunately the changed parts were already in use in the Linux
-> kernel, so an update of the header in the kernel would result in a build
-> breakage.
-> 
-> Even when removing its usage from the kernel the used flag bit should be
-> marked as reserved in order to avoid to give it a different semantic in
-> the future.
-> 
-> Do a partial revert of said commit in order to enable the kernel to take
-> an updated version of memory.h.
 
-I don't think it should be a partial revert, and as said on irc I'm of
-the opinion that ...
+Hi Stefano,
 
-> Fixes: 7c7f7e8fba01 ("include/public/memory.h: remove the XENMEM_rsrc_acq_caller_owned flag")
+Vincent gave an update on his virtio-scmi work at the last Stratos sync
+call and the discussion moved onto next steps. Currently the demo setup
+is intermediated by a double-ended vhost-user daemon running on the
+devbox acting as a go between a number of QEMU instances representing
+the front and back-ends. You can view the architecture with Vincents
+diagram here:
 
-... it's 0e2e54966af5 which should have taken measures to protect
-against re-use of the flag as an output.
+  https://docs.google.com/drawings/d/1YSuJUSjEdTi2oEUq4oG4A9pBKSEJTAp6hhcHK=
+KhmYHs/edit?usp=3Dsharing
 
-> --- a/xen/include/public/memory.h
-> +++ b/xen/include/public/memory.h
-> @@ -662,7 +662,17 @@ struct xen_mem_acquire_resource {
->       * two calls.
->       */
->      uint32_t nr_frames;
-> -    uint32_t pad;
-> +
-> +    /*
-> +     * OUT - Must be zero on entry. On return this may contain a bitwise
-> +     *       OR of the following values.
-> +     */
-> +    uint32_t flags;
-> +
-> +    /* No longer supported - will be never set */
-> +#define _XENMEM_rsrc_acq_caller_owned 0
-> +#define XENMEM_rsrc_acq_caller_owned (1u << _XENMEM_rsrc_acq_caller_owned)
+The key virtq handling is done over the special carve outs of shared
+memory between the front end and guest. However the signalling is
+currently over a virtio device on the backend. This is useful for the
+PoC but obviously in a real system we don't have a hidden POSIX system
+acting as a go between not to mention the additional latency it causes
+with all those context switches.
 
-I think this goes too far: Neither do we want to re-introduce the
-#define-s, nor should we re-fix the purpose of the padding field
-to be OUT (only). All we need to make sure is that the field
-coming in as zero won't get responded to by setting bit 0 of it.
-Imo this can only reasonably be done by way of adding a comment.
-This comment may, in turn, mention XENMEM_rsrc_acq_caller_owned
-of course.
+I was hoping we could get some more of the Xen experts to the next
+Stratos sync (17th Feb) to go over approaches for a properly hosted on
+Xen approach. From my recollection (Vincent please correct me if I'm
+wrong) of last week the issues that need solving are:
 
-Btw., if the field was to become OUT-only again, I think you'd
-also need to revert the change to xen/common/compat/memory.c. At
-least to not leave a trap for someone to later fall into.
+ * How to handle configuration steps as FE guests come up
 
-Jan
+The SCMI server will be a long running persistent backend because it is
+managing real HW resources. However the guests may be ephemeral (or just
+restarted) so we can't just hard-code everything in a DTB. While the
+virtio-negotiation in the config space covers most things we still need
+information like where in the guests address space the shared memory
+lives and at what offset into that the queues are created. As far as I'm
+aware the canonical source of domain information is XenStore
+(https://wiki.xenproject.org/wiki/XenStore) but this relies on a Dom0
+type approach. Is there an alternative for dom0less systems or do we
+need a dom0-light approach, for example using STR-21 (Ensure Zephyr can
+run cleanly as a Dom0 guest) providing just enough services for FE's to
+register metadata and BE's to read it?
 
+ * How to handle mapping of memory
+
+AIUI the Xen model is the FE guest explicitly makes grant table requests
+to expose portions of it's memory to other domains. Can the BE query the
+hypervisor itself to discover the available grants or does it require
+coordination with Dom0/XenStore for that information to be available to
+the BE domain?
+
+ * How to handle signalling
+
+I guess this requires a minimal implementation of the IOREQ calls for
+Zephyr so we can register the handler in the backend? Does the IOREQ API
+allow for a IPI style notifications using the global GIC IRQs?
+
+Forgive the incomplete notes from the Stratos sync, I was trying to type
+while participating in the discussion so hopefully this email captures
+what was missed:
+
+  https://linaro.atlassian.net/wiki/spaces/STR/pages/28682518685/2022-02-03=
++Project+Stratos+Sync+Meeting+Notes
+
+Vincent, anything to add?
+
+--=20
+Alex Benn=C3=A9e
 
