@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00295C433EF
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Feb 2022 07:07:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.267538.461277 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14576C433FE
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Feb 2022 07:07:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.267540.461293 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHKaK-0008B3-8y; Tue, 08 Feb 2022 07:06:44 +0000
+	id 1nHKaL-000068-W7; Tue, 08 Feb 2022 07:06:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 267538.461277; Tue, 08 Feb 2022 07:06:44 +0000
+Received: by outflank-mailman (output) from mailman id 267540.461293; Tue, 08 Feb 2022 07:06:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHKaK-0008Aw-5g; Tue, 08 Feb 2022 07:06:44 +0000
-Received: by outflank-mailman (input) for mailman id 267538;
- Tue, 08 Feb 2022 07:06:42 +0000
+	id 1nHKaL-0008Vx-Rq; Tue, 08 Feb 2022 07:06:45 +0000
+Received: by outflank-mailman (input) for mailman id 267540;
+ Tue, 08 Feb 2022 07:06:44 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=co3W=SX=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nHKaI-0008AS-SC
- for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 07:06:42 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ id 1nHKaK-0008AS-Jw
+ for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 07:06:44 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id aaa26fdb-88ad-11ec-8f75-fffcc8bd4f1a;
- Tue, 08 Feb 2022 08:06:41 +0100 (CET)
+ id ab265d4d-88ad-11ec-8f75-fffcc8bd4f1a;
+ Tue, 08 Feb 2022 08:06:42 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 494FC1F37C;
- Tue,  8 Feb 2022 07:06:41 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 3D4EB21107;
+ Tue,  8 Feb 2022 07:06:42 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 03C7113483;
- Tue,  8 Feb 2022 07:06:40 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 153E113483;
+ Tue,  8 Feb 2022 07:06:42 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id xVo3O4AWAmKxHgAAMHmgww
- (envelope-from <jgross@suse.com>); Tue, 08 Feb 2022 07:06:40 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 2JryA4IWAmKxHgAAMHmgww
+ (envelope-from <jgross@suse.com>); Tue, 08 Feb 2022 07:06:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,80 +53,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aaa26fdb-88ad-11ec-8f75-fffcc8bd4f1a
+X-Inumbo-ID: ab265d4d-88ad-11ec-8f75-fffcc8bd4f1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1644304001; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=S+1TdT4Amyy2uLXf8W6qeb6Ha8uG8anpXDpgcCtj+m4=;
-	b=MeTOp3SvXw9MkS0s+HP7jVqGivqLoGj8YnSpKwW54X/mixkwqfqqqIZ8ziu8aOfQ8fGgse
-	lJ9MCP/njHGm2yfDmK/FxWR0zgIrP73dl1/DJShWFEWaNtzjFZqQcVhpwXm/r5dRxkXJaq
-	Rg5MvJsVSqsl8GqEvBCmYNbxPjGk4iw=
+	t=1644304002; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=O9L5VCHqoZDN85JbspHZhwKfGz0YeeeAr6knmmOSjvM=;
+	b=pFucpYKdrfeC2ykt7q9s1nWnrqV9sAt2QBSB7t8ntYAIrAVTwHTjybqR5qsz4S4axFwM0c
+	I3lTx8sVoDDqvpJrj+v2WwBEYcCNynb/JSFyNGONSn9qt+eJkoHzm8058dHyjHkkwSLTOQ
+	uVQaVMTC5a+vK4a39m9Btnset4Z+ZJY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 0/5] tools: remove include/xen-external directory
-Date: Tue,  8 Feb 2022 08:06:33 +0100
-Message-Id: <20220208070638.5909-1-jgross@suse.com>
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v3 4/5] tools/libs/evtchn: use _xen_list.h
+Date: Tue,  8 Feb 2022 08:06:37 +0100
+Message-Id: <20220208070638.5909-5-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220208070638.5909-1-jgross@suse.com>
+References: <20220208070638.5909-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The tools/include/xen-external directory contains a header file from
-FreeBSD used to generate Xen header files. This series is replacing the
-complete directory by a single header with the same semantics.
+Instead of including xen-external/bsd-sys-queue.h use the header
+_xen_list.h in minios.c.
 
-Changes in V3:
-- fix patch 3
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/libs/evtchn/minios.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-Changes in V2:
-- remove stale comment in patch 1
-
-Juergen Gross (5):
-  tools/include: generate a _xen_list.h file
-  tools/libs/light: replace _libxl_list.h with _xen_list.h
-  tools/libs/toolcore: replace _xentoolcore_list.h with _xen_list.h
-  tools/libs/evtchn: use _xen_list.h
-  tools/include: remove xen-external directory
-
- .gitignore                                    |    1 -
- tools/include/Makefile                        |    2 +
- tools/include/_xen_list.h                     |  509 ++++++++
- tools/include/libxl.h                         |    4 +-
- tools/include/xen-external/README             |   24 -
- tools/include/xen-external/bsd-COPYRIGHT      |  126 --
- tools/include/xen-external/bsd-queue.3        | 1044 -----------------
- .../xen-external/bsd-sys-queue-h-seddery      |   74 --
- tools/include/xen-external/bsd-sys-queue.h    |  637 ----------
- tools/include/xentoolcore_internal.h          |    4 +-
- tools/libs/evtchn/minios.c                    |   20 +-
- tools/libs/light/Makefile                     |   10 +-
- tools/libs/light/libxl.c                      |   40 +-
- tools/libs/light/libxl_aoutils.c              |   20 +-
- tools/libs/light/libxl_device.c               |   27 +-
- tools/libs/light/libxl_disk.c                 |    4 +-
- tools/libs/light/libxl_domain.c               |   18 +-
- tools/libs/light/libxl_event.c                |  128 +-
- tools/libs/light/libxl_fork.c                 |   44 +-
- tools/libs/light/libxl_internal.h             |   86 +-
- tools/libs/light/libxl_qmp.c                  |   19 +-
- tools/libs/light/libxl_stream_read.c          |   20 +-
- tools/libs/toolcore/Makefile                  |    8 -
- tools/libs/toolcore/handlereg.c               |    8 +-
- 24 files changed, 733 insertions(+), 2144 deletions(-)
- create mode 100644 tools/include/_xen_list.h
- delete mode 100644 tools/include/xen-external/README
- delete mode 100644 tools/include/xen-external/bsd-COPYRIGHT
- delete mode 100644 tools/include/xen-external/bsd-queue.3
- delete mode 100755 tools/include/xen-external/bsd-sys-queue-h-seddery
- delete mode 100644 tools/include/xen-external/bsd-sys-queue.h
-
+diff --git a/tools/libs/evtchn/minios.c b/tools/libs/evtchn/minios.c
+index 30f98bc7e4..65cfccfd09 100644
+--- a/tools/libs/evtchn/minios.c
++++ b/tools/libs/evtchn/minios.c
+@@ -20,7 +20,7 @@
+  * Split off from xc_minios.c
+  */
+ 
+-#include "xen-external/bsd-sys-queue.h"
++#include "_xen_list.h"
+ #include <mini-os/types.h>
+ #include <mini-os/os.h>
+ #include <mini-os/lib.h>
+@@ -38,10 +38,10 @@
+ 
+ #include "private.h"
+ 
+-LIST_HEAD(port_list, port_info);
++XEN_LIST_HEAD(port_list, struct port_info);
+ 
+ struct port_info {
+-    LIST_ENTRY(port_info) list;
++    XEN_LIST_ENTRY(struct port_info) list;
+     evtchn_port_t port;
+     bool pending;
+     bool bound;
+@@ -62,7 +62,7 @@ static struct port_info *port_alloc(xenevtchn_handle *xce)
+     port_info->port = -1;
+     port_info->bound = false;
+ 
+-    LIST_INSERT_HEAD(port_list, port_info, list);
++    XEN_LIST_INSERT_HEAD(port_list, port_info, list);
+ 
+     return port_info;
+ }
+@@ -72,7 +72,7 @@ static void port_dealloc(struct port_info *port_info)
+     if ( port_info->bound )
+         unbind_evtchn(port_info->port);
+ 
+-    LIST_REMOVE(port_info, list);
++    XEN_LIST_REMOVE(port_info, list);
+     free(port_info);
+ }
+ 
+@@ -81,7 +81,7 @@ static int evtchn_close_fd(struct file *file)
+     struct port_info *port_info, *tmp;
+     struct port_list *port_list = file->dev;
+ 
+-    LIST_FOREACH_SAFE(port_info, port_list, list, tmp)
++    XEN_LIST_FOREACH_SAFE(port_info, port_list, list, tmp)
+         port_dealloc(port_info);
+     free(port_list);
+ 
+@@ -126,7 +126,7 @@ int osdep_evtchn_open(xenevtchn_handle *xce, unsigned int flags)
+     }
+ 
+     file->dev = list;
+-    LIST_INIT(list);
++    XEN_LIST_INIT(list);
+     xce->fd = fd;
+     printf("evtchn_open() -> %d\n", fd);
+ 
+@@ -173,7 +173,7 @@ static void evtchn_handler(evtchn_port_t port, struct pt_regs *regs, void *data)
+     assert(file);
+     port_list = file->dev;
+     mask_evtchn(port);
+-    LIST_FOREACH(port_info, port_list, list)
++    XEN_LIST_FOREACH(port_info, port_list, list)
+     {
+         if ( port_info->port == port )
+             goto found;
+@@ -257,7 +257,7 @@ int xenevtchn_unbind(xenevtchn_handle *xce, evtchn_port_t port)
+     struct port_info *port_info;
+     struct port_list *port_list = file->dev;
+ 
+-    LIST_FOREACH(port_info, port_list, list)
++    XEN_LIST_FOREACH(port_info, port_list, list)
+     {
+         if ( port_info->port == port )
+         {
+@@ -314,7 +314,7 @@ xenevtchn_port_or_error_t xenevtchn_pending(xenevtchn_handle *xce)
+ 
+     file->read = false;
+ 
+-    LIST_FOREACH(port_info, port_list, list)
++    XEN_LIST_FOREACH(port_info, port_list, list)
+     {
+         if ( port_info->port != -1 && port_info->pending )
+         {
 -- 
 2.34.1
 
