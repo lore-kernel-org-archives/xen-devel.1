@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7AFC43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F9EC43219
 	for <xen-devel@archiver.kernel.org>; Tue,  8 Feb 2022 18:10:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.268587.462483 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.268583.462435 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHUwI-0004xB-OJ; Tue, 08 Feb 2022 18:10:06 +0000
+	id 1nHUwE-0003YB-Hs; Tue, 08 Feb 2022 18:10:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 268587.462483; Tue, 08 Feb 2022 18:10:06 +0000
+Received: by outflank-mailman (output) from mailman id 268583.462435; Tue, 08 Feb 2022 18:10:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHUwI-0004vQ-IE; Tue, 08 Feb 2022 18:10:06 +0000
-Received: by outflank-mailman (input) for mailman id 268587;
- Tue, 08 Feb 2022 18:10:04 +0000
+	id 1nHUwE-0003Xf-Dz; Tue, 08 Feb 2022 18:10:02 +0000
+Received: by outflank-mailman (input) for mailman id 268583;
+ Tue, 08 Feb 2022 18:10:01 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1rHF=SX=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nHUwG-0003Sy-94
- for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 18:10:04 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5558c99a-890a-11ec-8eb8-a37418f5ba1a;
- Tue, 08 Feb 2022 19:10:03 +0100 (CET)
+ id 1nHUwD-0003Sy-6C
+ for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 18:10:01 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 52deec30-890a-11ec-8eb8-a37418f5ba1a;
+ Tue, 08 Feb 2022 19:09:59 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,173 +38,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5558c99a-890a-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 52deec30-890a-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644343802;
+  d=citrix.com; s=securemail; t=1644343799;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=2Tu+0ZH5IK1WnPkeaZM/73l9bKZI3OnKw4WhQyYT/iw=;
-  b=edVmEVSq38VzxZihXdBhC4u4BW2aNtdmsnfMMxLxnP0vrfzREo2EX/Qe
-   o1Kd3I49lyQ1+pfRb+DtBDOjXWZYI5/f3xLn3xtJsRxI6ljeGzzx3oOWr
-   KM0zfwm9lBdiDbLlQQ4qnVW9/JJ6KnFRtD6bTYbq2NvYo6qX14mt//u6R
-   4=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: f2B6KjaCFSB7Z04T9jYgUSa845KXeJRfQlW5XJ+OGlfBSnpBcniU+oSFTQt4RAL7WomC+ZvBOG
- bzFZARTO8hGTAf7+9CqtungXvLkbObngdLDWBOiH0RwdEb+WONWKo3R4nsfOuC/GYElp0aqSD5
- pjigXSnHAOxq46GhCRNHw1JOEVOidoAcKyoZeItmxEce/bCrbxPBZmxDlHysVm3eo8JrPC4/tm
- MS3LtNNNEI6B0uMDwn1R3izm6KH3Gy+1frFe56hFCxY3KC2QQRP02XDDbf6LTd9OvybCIUjucK
- PWh3C3jBVeKC00f8CsbXDPCx
+  bh=0oObUQpZAUPYFZpIBW0xewUnMdr0+AaT7RXg0NpNwug=;
+  b=BnWdPMNtyl3c4JcNm/zrgdDwQ+CtQmSylqEassSeZeHDeVoNsLM/Cln5
+   k2I0HX320JKLM6Y1JwQZie129ruMjwEucZlx9ZTc4n3yv+ilPNjIRytyM
+   rQUf1JCQCD4fDmqwfd3f/tjGHUpF+czosKgFWyw6QUWdXhOEoB3qL6vco
+   Q=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: vykE8PlYTPcHxHdlWU41j30bG1djZdD9FKl08Kygc/jOWjGP5y4OSQ63ydDpAiOGuDHflUFPQ6
+ o3CuappdhSkLGUSNmTnGz4KgrYBQJfTdGA9Lvp/FXgSIxzQkCwLRrwNTSX9Ke6XbwzUJjuO1JT
+ p4XBpWFGF6eLm2zct6DNHhEEzD6jDsGsX4PEVZfm0ycePsU0ntbCyw1giNrSbaNWLR4Z3ubmTo
+ 7syMOeCw0R9Qn6VbYQv1eC8LmXr3dCcswNWq1Ja0qo556ioJxLfgdR1Nq1ZYDI4SGbG6Bcqy+E
+ nEWdXbLHWpw+CFaj22nGBD6r
 X-SBRS: 5.1
-X-MesageID: 63217625
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 64166858
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:2t5viKw+GI5e9/tR3Lx6t+cUwSrEfRIJ4+MujC+fZmUNrF6WrkUOz
- DZKUG+CM/6LNjT2c41/b47loB8H75fTn4RgGgVkpCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wbZp2tQAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt9826
- NQW6K2tcgd3P6+WpfgxWiRITT4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JsURKmAP
- ZdxhTxHbk6QbUFUPG4uA7EOwvyTjWGnTX5zkQfAzUYwyzeKl1EguFT3C/LFd9rPSchLk0Kwo
- mPd43+/EhwcLMaYyzeO7jSrnOCnoM/gcNtMTvvirKcs2QDNgDxIYPELabelifb+qk/lBuNCE
- ExK+yh0kLQe/XG7EMaoCnVUv0W4lhIbXtNRFcgz5weM1rfY7m6lO4QUctJSQId47ZFrHFTGw
- nfMxoq0XmI37NV5XFrAru/8kN+kBcQCwYbujwcgRBBN3dTsqZpbYvnnHoc6S/7dYjEY9FjNL
- 9G2QMoW2u97YS0jjfzTEbX7b9WE/Mmhc+LNzl+LNl9JFysgDGJfW6Sm6ELA8dFLJ5uDQ1+Ks
- RAswpbCsLlfVMjTxXbUG43h+Y1FAN7fYVXhbaNHRcF9p1xBBVb/FWyv3N2ODBgwaZtVEdMYS
- ETSpRlQ9Pdu0IiCNsdKj3aKI51yl8DITI29PtiNN4YmSsUhJWevoXA1DWbNjj+FuBZ3y8kXZ
- 8zEGftA+F5HUMyLOhLtHLxDuVLqrwhjrV7uqWfTlUz4iOHDPy7MEt/o8jKmN4gE0U9Nmy2Nm
- /43CidA40k3vDTWbnaF/IgNA0oNKHRnV5n6p9YOLryIIxZ8GXFnAPjUmOtzd4tglqVTt+HJ4
- nDiBRMIlAuh3SXKeVeQd3RuSLLzRpIj/3g1CjMhYASz0H85bIfxsKpGL8krfaMq/fBIxOJvS
- 6VXYN2JB/lCE2yV+zkUYZTngpZlcRCn2VCHMya/OWBtdJ98XQ3ZvNTje1K3piUJCyO2s+o4o
- qGhiVyHEcZSGVw6AZ+POvy1zl63sXwMo85IXhPFcotJZUHh0Il2MCit3PU5FN4BdEfYzTyA2
- gfIXRpB/bvRo5U4+cXijLyfq9v7CPN3G0dXEjWJ7buyMiWGrGOvzZUZDbSNdDHZEmj15L+jd
- aNeyPSlaK8Lm1NDsoxdFbd3zP1hu4uz9uEClgk0Tm/Wa1mLC697JijU1MZCgaRB27tFtFbkQ
- UmI4NRbZe2ENc6N/IT9/+b5gjBvDc0ppwQ=
-IronPort-HdrOrdr: A9a23:rtFV0KHYTyU1by84pLqE7MeALOsnbusQ8zAXP0AYc31om62j5r
- iTdZsgpHzJYVoqN03I3OrwXJVoIkmsjKKdg7NhX4tKNTOO0ADDQe1fBMnZslrd8kXFh4hgPM
- xbE5SWZuefMbEDt7ee3DWF
+IronPort-Data: A9a23:rM9HU6NtXoVGVBnvrR2GkMFynXyQoLVcMsEvi/4bfWQNrUp21zcOy
+ TBJWjvQbvuPNjTwed10Poy+8xgG7JGGnYA3Hgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6UUsxNbVU8En1500ozw7RRbrNA2rBVPSvc4
+ bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
+ 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYoxSqgtNYk
+ 8UQjLGhEgcwFKHFscowAjANRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
+ 6VFdnZdNXhvhMrvqF6/YsBqit4uM4/AO4QHt2s75TrYEewnUdbIRKCiCdpwgmtp2J4eQKa2i
+ 8wxSjNpaS3bPzZ1BQk8Lqozkc2F2HP9SmgNwL6SjfVuuDWCpOBr65D9PdyQdtGUSMF9mkeDu
+ nmA72n/GgsdNtGU1XyC6H3EuwPUtXqlAsRITuT+r6M0xg3IroAONPEIfXqYvPqQ0V7jYv9Oc
+ EwN0CYnhIYfpWX+G7ERQCaEiHKDuxcdXf9ZHOs79ByBx8Lo3uqJOoQXZmUfMYJ77afaURRvj
+ wbUxI2xWVSDpZXIESr1y1uCkd+l1cH5x0cmbDRMcwYK6sKLTGob3kOWFYYL/EJYY7TI9dDML
+ 9Ki8XJWa1Y715djO0CHEbfv2WPEm3QxZlRpjjg7p0r8hu+DWKarZpaz9X/Q5utaIYCSQzGp5
+ SZYx5HPtblQXMvUz0Rhpdnh+5nztp643MD02wYzT/HNCRzxk5JcQWygyG4nfxo4Wir1UTTof
+ FXSqWtsCGx7ZxOXgVtMS9vpUawClPG4ffy8D6y8RoceM/BZKV7clAkzNBH49z62yiAEz/pgU
+ ap3hO7xVB72/4w8l2HoLwrcuJd2rh0DKZT7H8iklk/6iurHPxZ4i94taTOzUwzw14vcyC29z
+ jqVH5LiJ8x3XLKsby/J35QUKFxWf3E3CYqv855cd/KZIxogE2YkUqeDzbQkco1jvqJUiuaXo
+ S3tBh4GkALy1S/dNAGHSnF/c7ezD5xxmm02YH43NlGy1nl9PYv2tPUDd4E6dKUM/fB4yaImV
+ OEMfsiNW6wdSjnO9zkHQ4P6qYhuKEaiiQ6UZnL3azkjZZ9wAQfO/4a8LAfo8SAPCAuxtNc//
+ OL8hl+KH8JbSl07XsjMaf+pw1eghlQnmbp/DxnSP91eWETw64w2eSb/ueA6fpMXIhLZyzrEi
+ wvPWUUEpfPAqpMe+cXSgfzWtJ+gFuZzExYIH2Tf6rrqZyDW8nD6nN1FWeeMOzvcSHn16OOpY
+ uAMl6PwN/gOnVBrtYtgEuk0kfJitoW3/7IKnB55GHjrbkiwDuIyK3aL6sBDq6lRy+ILogCxQ
+ E+OpoFXNLjh1BkJy7LNyN7Jtti+6Mw=
+IronPort-HdrOrdr: A9a23:aABuLK9REeYKrKiB8QJuk+DaI+orL9Y04lQ7vn2YSXRuHPBw9v
+ re5cjzuiWVtN98Yh0dcJW7Scy9qBDnhPhICOsqTNSftWDd0QPCRuxfBMnZslnd8kXFh4lgPM
+ xbEpSWZueeMbEDt7eZ3DWF
 X-IronPort-AV: E=Sophos;i="5.88,353,1635220800"; 
-   d="scan'208";a="63217625"
+   d="scan'208";a="64166858"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 6/6] x86/spec-ctrl: Support Intel PSFD for guests
-Date: Tue, 8 Feb 2022 18:09:42 +0000
-Message-ID: <20220208180942.14871-7-andrew.cooper3@citrix.com>
+Subject: [PATCH 1/6] x86/spec-ctrl: Clean up MSR_MCU_OPT_CTRL handling
+Date: Tue, 8 Feb 2022 18:09:37 +0000
+Message-ID: <20220208180942.14871-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220208180942.14871-1-andrew.cooper3@citrix.com>
 References: <20220208180942.14871-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-The Feb 2022 microcode from Intel retrofits AMD's MSR_SPEC_CTRL.PSFD interface
-to Sunny Cove (IceLake) and later cores.
+Introduce cpu_has_srbds_ctrl as more users are going to appear shortly.
 
-Update the MSR_SPEC_CTRL emulation, and expose it to guests.
+MSR_MCU_OPT_CTRL is gaining extra functionality, meaning that the current
+default_xen_mcu_opt_ctrl is no longer a good fit.
+
+Introduce two new helpers, update_mcu_opt_ctrl() which does a full RMW cycle
+on the MSR, and set_in_mcu_opt_ctrl() which lets callers configure specific
+bits at a time without clobbering each others settings.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- tools/libs/light/libxl_cpuid.c              | 2 ++
- tools/misc/xen-cpuid.c                      | 1 +
- xen/arch/x86/msr.c                          | 2 +-
- xen/arch/x86/spec_ctrl.c                    | 7 +++++--
- xen/include/public/arch-x86/cpufeatureset.h | 1 +
- xen/tools/gen-cpuid.py                      | 2 +-
- 6 files changed, 11 insertions(+), 4 deletions(-)
+ xen/arch/x86/acpi/power.c             |  3 +--
+ xen/arch/x86/cpu/intel.c              | 32 +++++++++++++++++++++++++++++
+ xen/arch/x86/include/asm/cpufeature.h |  1 +
+ xen/arch/x86/include/asm/processor.h  |  3 +++
+ xen/arch/x86/include/asm/spec_ctrl.h  |  2 --
+ xen/arch/x86/smpboot.c                |  3 +--
+ xen/arch/x86/spec_ctrl.c              | 38 ++++++++++++-----------------------
+ 7 files changed, 51 insertions(+), 31 deletions(-)
 
-diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
-index e1acf6648db4..d462f9e421ed 100644
---- a/tools/libs/light/libxl_cpuid.c
-+++ b/tools/libs/light/libxl_cpuid.c
-@@ -234,6 +234,8 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
-         {"fsrs",         0x00000007,  1, CPUID_REG_EAX, 11,  1},
-         {"fsrcs",        0x00000007,  1, CPUID_REG_EAX, 12,  1},
+diff --git a/xen/arch/x86/acpi/power.c b/xen/arch/x86/acpi/power.c
+index d4bdc3e7df42..5eaa77f66a28 100644
+--- a/xen/arch/x86/acpi/power.c
++++ b/xen/arch/x86/acpi/power.c
+@@ -301,8 +301,7 @@ static int enter_state(u32 state)
+         ci->last_spec_ctrl = default_xen_spec_ctrl;
+     }
  
-+        {"intel-psfd",   0x00000007,  2, CPUID_REG_EDX,  0,  1},
+-    if ( boot_cpu_has(X86_FEATURE_SRBDS_CTRL) )
+-        wrmsrl(MSR_MCU_OPT_CTRL, default_xen_mcu_opt_ctrl);
++    update_mcu_opt_ctrl();
+ 
+     /* (re)initialise SYSCALL/SYSENTER state, amongst other things. */
+     percpu_traps_init();
+diff --git a/xen/arch/x86/cpu/intel.c b/xen/arch/x86/cpu/intel.c
+index 9b011c344636..e7d4dd652f9f 100644
+--- a/xen/arch/x86/cpu/intel.c
++++ b/xen/arch/x86/cpu/intel.c
+@@ -15,6 +15,38 @@
+ #include "cpu.h"
+ 
+ /*
++ * MSR_MCU_OPT_CTRL is a collection of unrelated functionality, with separate
++ * enablement requirements, but which want to be consistent across the system.
++ */
++static uint32_t __read_mostly mcu_opt_ctrl_mask;
++static uint32_t __read_mostly mcu_opt_ctrl_val;
 +
-         {"lahfsahf",     0x80000001, NA, CPUID_REG_ECX,  0,  1},
-         {"cmplegacy",    0x80000001, NA, CPUID_REG_ECX,  1,  1},
-         {"svm",          0x80000001, NA, CPUID_REG_ECX,  2,  1},
-diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
-index 40626296984b..0b1b3333fe71 100644
---- a/tools/misc/xen-cpuid.c
-+++ b/tools/misc/xen-cpuid.c
-@@ -202,6 +202,7 @@ static const char *const str_7b1[32] =
++void update_mcu_opt_ctrl(void)
++{
++    uint32_t mask = mcu_opt_ctrl_mask, lo, hi;
++
++    if ( !mask )
++        return;
++
++    rdmsr(MSR_MCU_OPT_CTRL, lo, hi);
++
++    lo &= ~mask;
++    lo |= mcu_opt_ctrl_val;
++
++    wrmsr(MSR_MCU_OPT_CTRL, lo, hi);
++}
++
++void __init set_in_mcu_opt_ctrl(uint32_t mask, uint32_t val)
++{
++    mcu_opt_ctrl_mask |= mask;
++
++    mcu_opt_ctrl_val &= ~mask;
++    mcu_opt_ctrl_val |= (val & mask);
++
++    update_mcu_opt_ctrl();
++}
++
++/*
+  * Processors which have self-snooping capability can handle conflicting
+  * memory type across CPUs by snooping its own cache. However, there exists
+  * CPU models in which having conflicting memory types still leads to
+diff --git a/xen/arch/x86/include/asm/cpufeature.h b/xen/arch/x86/include/asm/cpufeature.h
+index 4754940e23f3..a0ab6d7d78ea 100644
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -134,6 +134,7 @@
+ #define cpu_has_avx512_4vnniw   boot_cpu_has(X86_FEATURE_AVX512_4VNNIW)
+ #define cpu_has_avx512_4fmaps   boot_cpu_has(X86_FEATURE_AVX512_4FMAPS)
+ #define cpu_has_avx512_vp2intersect boot_cpu_has(X86_FEATURE_AVX512_VP2INTERSECT)
++#define cpu_has_srbds_ctrl      boot_cpu_has(X86_FEATURE_SRBDS_CTRL)
+ #define cpu_has_rtm_always_abort boot_cpu_has(X86_FEATURE_RTM_ALWAYS_ABORT)
+ #define cpu_has_tsx_force_abort boot_cpu_has(X86_FEATURE_TSX_FORCE_ABORT)
+ #define cpu_has_serialize       boot_cpu_has(X86_FEATURE_SERIALIZE)
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index e2e1eaf5bd0d..23639d5479a3 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -626,6 +626,9 @@ extern int8_t opt_tsx, cpu_has_tsx_ctrl;
+ extern bool rtm_disabled;
+ void tsx_init(void);
  
- static const char *const str_7d2[32] =
++void update_mcu_opt_ctrl(void);
++void set_in_mcu_opt_ctrl(uint32_t mask, uint32_t val);
++
+ enum ap_boot_method {
+     AP_BOOT_NORMAL,
+     AP_BOOT_SKINIT,
+diff --git a/xen/arch/x86/include/asm/spec_ctrl.h b/xen/arch/x86/include/asm/spec_ctrl.h
+index a803d16f9065..f76029523610 100644
+--- a/xen/arch/x86/include/asm/spec_ctrl.h
++++ b/xen/arch/x86/include/asm/spec_ctrl.h
+@@ -54,8 +54,6 @@ extern int8_t opt_pv_l1tf_hwdom, opt_pv_l1tf_domu;
+  */
+ extern paddr_t l1tf_addr_mask, l1tf_safe_maddr;
+ 
+-extern uint64_t default_xen_mcu_opt_ctrl;
+-
+ static inline void init_shadow_spec_ctrl_state(void)
  {
-+    [ 0] = "intel-psfd",
- };
+     struct cpu_info *info = get_cpu_info();
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 22ae4c1b2de9..335129a0104d 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -385,8 +385,7 @@ void start_secondary(void *unused)
+         wrmsrl(MSR_SPEC_CTRL, default_xen_spec_ctrl);
+         info->last_spec_ctrl = default_xen_spec_ctrl;
+     }
+-    if ( boot_cpu_has(X86_FEATURE_SRBDS_CTRL) )
+-        wrmsrl(MSR_MCU_OPT_CTRL, default_xen_mcu_opt_ctrl);
++    update_mcu_opt_ctrl();
  
- static const struct {
-diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
-index 4ac5b5a048eb..01a15857b740 100644
---- a/xen/arch/x86/msr.c
-+++ b/xen/arch/x86/msr.c
-@@ -443,7 +443,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
- uint64_t msr_spec_ctrl_valid_bits(const struct cpuid_policy *cp)
- {
-     bool ssbd = cp->feat.ssbd || cp->extd.amd_ssbd;
--    bool psfd = cp->extd.psfd;
-+    bool psfd = cp->feat.intel_psfd || cp->extd.psfd;
+     tsx_init(); /* Needs microcode.  May change HLE/RTM feature bits. */
  
-     /*
-      * Note: SPEC_CTRL_STIBP is specified as safe to use (i.e. ignored)
 diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 2b93468d396e..cbeeb199037e 100644
+index ee862089b7f6..3628b4b4154f 100644
 --- a/xen/arch/x86/spec_ctrl.c
 +++ b/xen/arch/x86/spec_ctrl.c
-@@ -307,11 +307,13 @@ custom_param("pv-l1tf", parse_pv_l1tf);
+@@ -67,7 +67,6 @@ static bool __initdata cpu_has_bug_msbds_only; /* => minimal HT impact. */
+ static bool __initdata cpu_has_bug_mds; /* Any other M{LP,SB,FB}DS combination. */
  
- static void __init print_details(enum ind_thunk thunk, uint64_t caps)
+ static int8_t __initdata opt_srb_lock = -1;
+-uint64_t __read_mostly default_xen_mcu_opt_ctrl;
+ 
+ static int __init parse_spec_ctrl(const char *s)
  {
--    unsigned int _7d0 = 0, e8b = 0, tmp;
-+    unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, max = 0, tmp;
+@@ -376,7 +375,7 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
+            (default_xen_spec_ctrl & SPEC_CTRL_SSBD)  ? " SSBD+" : " SSBD-",
+            !(caps & ARCH_CAPS_TSX_CTRL)              ? "" :
+            (opt_tsx & 1)                             ? " TSX+" : " TSX-",
+-           !boot_cpu_has(X86_FEATURE_SRBDS_CTRL)     ? "" :
++           !cpu_has_srbds_ctrl                       ? "" :
+            opt_srb_lock                              ? " SRB_LOCK+" : " SRB_LOCK-",
+            opt_ibpb                                  ? " IBPB"  : "",
+            opt_l1d_flush                             ? " L1D_FLUSH" : "",
+@@ -1251,32 +1250,24 @@ void __init init_speculation_mitigations(void)
+         tsx_init();
+     }
  
-     /* Collect diagnostics about available mitigations. */
-     if ( boot_cpu_data.cpuid_level >= 7 )
--        cpuid_count(7, 0, &tmp, &tmp, &tmp, &_7d0);
-+        cpuid_count(7, 0, &max, &tmp, &tmp, &_7d0);
-+    if ( max >= 2 )
-+        cpuid_count(7, 2, &tmp, &tmp, &tmp, &_7d2);
-     if ( boot_cpu_data.extended_cpuid_level >= 0x80000008 )
-         cpuid(0x80000008, &tmp, &e8b, &tmp, &tmp);
+-    /* Calculate suitable defaults for MSR_MCU_OPT_CTRL */
+-    if ( boot_cpu_has(X86_FEATURE_SRBDS_CTRL) )
++    /*
++     * On some SRBDS-affected hardware, it may be safe to relax srb-lock by
++     * default.
++     *
++     * On parts which enumerate MDS_NO and not TAA_NO, TSX is the only known
++     * way to access the Fill Buffer.  If TSX isn't available (inc. SKU
++     * reasons on some models), or TSX is explicitly disabled, then there is
++     * no need for the extra overhead to protect RDRAND/RDSEED.
++     */
++    if ( cpu_has_srbds_ctrl )
+     {
+-        uint64_t val;
+-
+-        rdmsrl(MSR_MCU_OPT_CTRL, val);
+-
+-        /*
+-         * On some SRBDS-affected hardware, it may be safe to relax srb-lock
+-         * by default.
+-         *
+-         * On parts which enumerate MDS_NO and not TAA_NO, TSX is the only way
+-         * to access the Fill Buffer.  If TSX isn't available (inc. SKU
+-         * reasons on some models), or TSX is explicitly disabled, then there
+-         * is no need for the extra overhead to protect RDRAND/RDSEED.
+-         */
+         if ( opt_srb_lock == -1 &&
+              (caps & (ARCH_CAPS_MDS_NO|ARCH_CAPS_TAA_NO)) == ARCH_CAPS_MDS_NO &&
+              (!cpu_has_hle || ((caps & ARCH_CAPS_TSX_CTRL) && rtm_disabled)) )
+             opt_srb_lock = 0;
  
-@@ -345,6 +347,7 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
-            (_7d0 & cpufeat_mask(X86_FEATURE_STIBP))          ? " STIBP"          : "",
-            (e8b  & cpufeat_mask(X86_FEATURE_AMD_SSBD)) ||
-            (_7d0 & cpufeat_mask(X86_FEATURE_SSBD))           ? " SSBD"           : "",
-+           (_7d2 & cpufeat_mask(X86_FEATURE_INTEL_PSFD)) ||
-            (e8b  & cpufeat_mask(X86_FEATURE_PSFD))           ? " PSFD"           : "",
-            (_7d0 & cpufeat_mask(X86_FEATURE_L1D_FLUSH))      ? " L1D_FLUSH"      : "",
-            (_7d0 & cpufeat_mask(X86_FEATURE_MD_CLEAR))       ? " MD_CLEAR"       : "",
-diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
-index 81b0f5e0aad3..9cee4b439e9f 100644
---- a/xen/include/public/arch-x86/cpufeatureset.h
-+++ b/xen/include/public/arch-x86/cpufeatureset.h
-@@ -303,6 +303,7 @@ XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and
- XEN_CPUFEATURE(INTEL_PPIN,         12*32+ 0) /*   Protected Processor Inventory Number */
+-        val &= ~MCU_OPT_CTRL_RNGDS_MITG_DIS;
+-        if ( !opt_srb_lock )
+-            val |= MCU_OPT_CTRL_RNGDS_MITG_DIS;
+-
+-        default_xen_mcu_opt_ctrl = val;
++        set_in_mcu_opt_ctrl(MCU_OPT_CTRL_RNGDS_MITG_DIS,
++                            opt_srb_lock ? 0 : MCU_OPT_CTRL_RNGDS_MITG_DIS);
+     }
  
- /* Intel-defined CPU features, CPUID level 0x00000007:2.edx, word 13 */
-+XEN_CPUFEATURE(INTEL_PSFD,         13*32+ 0) /*A  MSR_SPEC_CTRL.PSFD */
+     print_details(thunk, caps);
+@@ -1314,9 +1305,6 @@ void __init init_speculation_mitigations(void)
+         wrmsrl(MSR_SPEC_CTRL, val);
+         info->last_spec_ctrl = val;
+     }
+-
+-    if ( boot_cpu_has(X86_FEATURE_SRBDS_CTRL) )
+-        wrmsrl(MSR_MCU_OPT_CTRL, default_xen_mcu_opt_ctrl);
+ }
  
- #endif /* XEN_CPUFEATURE */
- 
-diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
-index 39c8b0c77465..e0e3f2f46386 100755
---- a/xen/tools/gen-cpuid.py
-+++ b/xen/tools/gen-cpuid.py
-@@ -287,7 +287,7 @@ def crunch_numbers(state):
-         # IBRSB/IBRS, and we pass this MSR directly to guests.  Treating them
-         # as dependent features simplifies Xen's logic, and prevents the guest
-         # from seeing implausible configurations.
--        IBRSB: [STIBP, SSBD],
-+        IBRSB: [STIBP, SSBD, INTEL_PSFD],
-         IBRS: [AMD_STIBP, AMD_SSBD, PSFD,
-                IBRS_ALWAYS, IBRS_FAST, IBRS_SAME_MODE],
-         AMD_STIBP: [STIBP_ALWAYS],
+ static void __init __maybe_unused build_assertions(void)
 -- 
 2.11.0
 
