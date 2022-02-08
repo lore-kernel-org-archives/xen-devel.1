@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71383C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7AFC43217
 	for <xen-devel@archiver.kernel.org>; Tue,  8 Feb 2022 18:10:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.268588.462491 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.268587.462483 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHUwJ-00054U-EH; Tue, 08 Feb 2022 18:10:07 +0000
+	id 1nHUwI-0004xB-OJ; Tue, 08 Feb 2022 18:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 268588.462491; Tue, 08 Feb 2022 18:10:07 +0000
+Received: by outflank-mailman (output) from mailman id 268587.462483; Tue, 08 Feb 2022 18:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHUwJ-00052h-1z; Tue, 08 Feb 2022 18:10:07 +0000
-Received: by outflank-mailman (input) for mailman id 268588;
- Tue, 08 Feb 2022 18:10:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nHUwI-0004vQ-IE; Tue, 08 Feb 2022 18:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 268587;
+ Tue, 08 Feb 2022 18:10:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1rHF=SX=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nHUwG-0004K6-S5
+ id 1nHUwG-0003Sy-94
  for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 18:10:04 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5517281e-890a-11ec-8f75-fffcc8bd4f1a;
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5558c99a-890a-11ec-8eb8-a37418f5ba1a;
  Tue, 08 Feb 2022 19:10:03 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,132 +38,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5517281e-890a-11ec-8f75-fffcc8bd4f1a
+X-Inumbo-ID: 5558c99a-890a-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1644343802;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=r07JJ+ieARO/h3VHmKJxMVxJpW20MqnhjuvAZQdZY/U=;
-  b=B7gEWGsSsNMDvWw8VTKL0bonmAQpLR/Ec0GRTC7AX6775JrcuM7Iyou1
-   I81yf6HWrZdGN+H3V/ksi6tP9MX44ufCcO/UZRn8IdBqJ8ETUM+3mzvq0
-   9QiK6TvQAMs9LEPoJD1okAVNLP0S+u0TvupCffPZzRduCLnwblXQy91AP
-   U=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: e98P7T2EfM9xyRizm7aIx+aYydt5/N/+qk/Kcxe45UvTVtMEneIMHkXf94hK82WlTXtqq3DObr
- jICYC3tZAViHzEjjUCqCJj46VMtoz55SrKGvRfpIggD2WvF5qeukmpx4lSzDvr+ya8P0hCpBAf
- 87gfsQFvWeM64LboY7rZ4D3wSWcEIDoR2AihW30UGRB9Dvokm0n1vj5a9wvKTk8ExOLX8tRmFt
- L/++81aHT950omrtEQKUipCmYiZ49nTlrHobD5EEHISObEwlz3i5rHIkwx8rXJSkgVnbkU0gfk
- E+X1lsz+gpJMRofX+9Z/lblb
+  bh=2Tu+0ZH5IK1WnPkeaZM/73l9bKZI3OnKw4WhQyYT/iw=;
+  b=edVmEVSq38VzxZihXdBhC4u4BW2aNtdmsnfMMxLxnP0vrfzREo2EX/Qe
+   o1Kd3I49lyQ1+pfRb+DtBDOjXWZYI5/f3xLn3xtJsRxI6ljeGzzx3oOWr
+   KM0zfwm9lBdiDbLlQQ4qnVW9/JJ6KnFRtD6bTYbq2NvYo6qX14mt//u6R
+   4=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: f2B6KjaCFSB7Z04T9jYgUSa845KXeJRfQlW5XJ+OGlfBSnpBcniU+oSFTQt4RAL7WomC+ZvBOG
+ bzFZARTO8hGTAf7+9CqtungXvLkbObngdLDWBOiH0RwdEb+WONWKo3R4nsfOuC/GYElp0aqSD5
+ pjigXSnHAOxq46GhCRNHw1JOEVOidoAcKyoZeItmxEce/bCrbxPBZmxDlHysVm3eo8JrPC4/tm
+ MS3LtNNNEI6B0uMDwn1R3izm6KH3Gy+1frFe56hFCxY3KC2QQRP02XDDbf6LTd9OvybCIUjucK
+ PWh3C3jBVeKC00f8CsbXDPCx
 X-SBRS: 5.1
-X-MesageID: 65977667
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 63217625
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:zdfhNKBDFULg6hVW/wvkw5YqxClBgxIJ4kV8jS/XYbTApGlwgjQCn
- GJJXG3UOqvcZWbwfotxaYi18h8EvpGEmN5jQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WL6s1hxZH1c+En970UI7wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/iAXUsu8o6
- eV27bOrTCsSIL+Rx+RFekwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcGgWZv2Z4QQp4yY
- eIjchNPRUjiMyFxM08rK6IFseWEimDwJmgwRFW9+vNsvjm7IBZK+KjgNp/Zd8KHQe1Rn12Ev
- STW8mLhGBYYOdeDjz2f/RqRavTnxH2hHthITfvhq6As0Ab7KnEv5AM+VmvmjMbgq36FA/1EL
- mAv5Dhz8qhq3Rn+JjXiZCGQrHmBtx8aftNfFewm9Q2AopbpDxal6nssFWAYNoF/3CMibXlzj
- wLSwYu1bdB6mODNERqgGqGoQSRe0MT/BUsLfmc6QAQM+LEPS6lj30uUHr6P/ENY5+AZ+A0cI
- RjX9kDSZJ1J1KbnMplXGnid0lqRSmDhFFJd2+kudjvNAvlFTICkfZe0zlPQ8OxNKo2UJnHY4
- iRYwpnHtb5fV8jW/MBofAnqNOv4j8tpzRWG2QI/d3Xf32jFF4GfkXB4v2gleRYB3jcscj71e
- k7D0T69F7cIVEZGmZRfOtrrY+xzlPCIPY28Cpj8M4ofCrAsJVTv1Hw/Oia4gTu3+GByyv5XB
- HtuWZv1ZZrsIf88l2TeqiZ0+eJD+x3SMkuJHc+ilEn8gePFDJNXIJ9cWGazgikCxPvsiG3oH
- xx3bpbiJ8x3XLKsby/J35QUKFxWf3E3CYqv855cd/KZIxogE2YkUqeDzbQkco1jvqJUiuaXo
- S3tBh4GkALy1S/dNAGHSnF/c7ezD5xxmm02YH43NlGy1nl9PYv2tPUDd4E6dKUM/fB4yaImV
- OEMfsiNW6wdSjnO9zkHQ4P6qYhuKEaiiQ6UZnL3azkjZZ9wAQfO/4a8LAfo8SAPCAuxtNc//
- OL8hl+KH8JbSl07XsjMaf+pw1eghlQnmbp/DxnSP91eWETw64w2eSb/ueA6fpMXIhLZyzrEi
- wvPWUUEpfPAqpMe+cXSgfzWtJ+gFuZzExYIH2Tf6rrqZyDW8nD6nN1FWeeMOzvcSHn16OOpY
- uAMl6PwN/gOnVBrtYtgEuk0kfJitoW3/7IKnB55GHjrbkiwDuIyK3aL6sBDq6lRy+ILogCxQ
- E+OpoFXNLjh1BkJy7LNyN7Jtti+6Mw=
-IronPort-HdrOrdr: A9a23:Hqhdeq26/AmlVD1o0YPFTQqjBLYkLtp133Aq2lEZdPRUGvb4qy
- nOpoVi6faaskdzZJhNo7+90ey7MBfhHP1OkPAs1NWZLWvbUQKTRekIh+aP/9SjIVyYygc079
- YHT0EUMr3N5DZB4/oSmDPIduod/A==
+IronPort-Data: A9a23:2t5viKw+GI5e9/tR3Lx6t+cUwSrEfRIJ4+MujC+fZmUNrF6WrkUOz
+ DZKUG+CM/6LNjT2c41/b47loB8H75fTn4RgGgVkpCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wbZp2tQAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt9826
+ NQW6K2tcgd3P6+WpfgxWiRITT4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JsURKmAP
+ ZdxhTxHbk6QbUFUPG4uA7EOwvyTjWGnTX5zkQfAzUYwyzeKl1EguFT3C/LFd9rPSchLk0Kwo
+ mPd43+/EhwcLMaYyzeO7jSrnOCnoM/gcNtMTvvirKcs2QDNgDxIYPELabelifb+qk/lBuNCE
+ ExK+yh0kLQe/XG7EMaoCnVUv0W4lhIbXtNRFcgz5weM1rfY7m6lO4QUctJSQId47ZFrHFTGw
+ nfMxoq0XmI37NV5XFrAru/8kN+kBcQCwYbujwcgRBBN3dTsqZpbYvnnHoc6S/7dYjEY9FjNL
+ 9G2QMoW2u97YS0jjfzTEbX7b9WE/Mmhc+LNzl+LNl9JFysgDGJfW6Sm6ELA8dFLJ5uDQ1+Ks
+ RAswpbCsLlfVMjTxXbUG43h+Y1FAN7fYVXhbaNHRcF9p1xBBVb/FWyv3N2ODBgwaZtVEdMYS
+ ETSpRlQ9Pdu0IiCNsdKj3aKI51yl8DITI29PtiNN4YmSsUhJWevoXA1DWbNjj+FuBZ3y8kXZ
+ 8zEGftA+F5HUMyLOhLtHLxDuVLqrwhjrV7uqWfTlUz4iOHDPy7MEt/o8jKmN4gE0U9Nmy2Nm
+ /43CidA40k3vDTWbnaF/IgNA0oNKHRnV5n6p9YOLryIIxZ8GXFnAPjUmOtzd4tglqVTt+HJ4
+ nDiBRMIlAuh3SXKeVeQd3RuSLLzRpIj/3g1CjMhYASz0H85bIfxsKpGL8krfaMq/fBIxOJvS
+ 6VXYN2JB/lCE2yV+zkUYZTngpZlcRCn2VCHMya/OWBtdJ98XQ3ZvNTje1K3piUJCyO2s+o4o
+ qGhiVyHEcZSGVw6AZ+POvy1zl63sXwMo85IXhPFcotJZUHh0Il2MCit3PU5FN4BdEfYzTyA2
+ gfIXRpB/bvRo5U4+cXijLyfq9v7CPN3G0dXEjWJ7buyMiWGrGOvzZUZDbSNdDHZEmj15L+jd
+ aNeyPSlaK8Lm1NDsoxdFbd3zP1hu4uz9uEClgk0Tm/Wa1mLC697JijU1MZCgaRB27tFtFbkQ
+ UmI4NRbZe2ENc6N/IT9/+b5gjBvDc0ppwQ=
+IronPort-HdrOrdr: A9a23:rtFV0KHYTyU1by84pLqE7MeALOsnbusQ8zAXP0AYc31om62j5r
+ iTdZsgpHzJYVoqN03I3OrwXJVoIkmsjKKdg7NhX4tKNTOO0ADDQe1fBMnZslrd8kXFh4hgPM
+ xbE5SWZuefMbEDt7ee3DWF
 X-IronPort-AV: E=Sophos;i="5.88,353,1635220800"; 
-   d="scan'208";a="65977667"
+   d="scan'208";a="63217625"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 4/6] tests/tsx: Extend test-tsx to check MSR_MCU_OPT_CTRL
-Date: Tue, 8 Feb 2022 18:09:40 +0000
-Message-ID: <20220208180942.14871-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 6/6] x86/spec-ctrl: Support Intel PSFD for guests
+Date: Tue, 8 Feb 2022 18:09:42 +0000
+Message-ID: <20220208180942.14871-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220208180942.14871-1-andrew.cooper3@citrix.com>
 References: <20220208180942.14871-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-This MSR needs to be identical across the system for TSX to have identical
-behaviour everywhere.  Furthermore, its CPUID bit (SRBDS_CTRL) shouldn't be
-visible to guests.
+The Feb 2022 microcode from Intel retrofits AMD's MSR_SPEC_CTRL.PSFD interface
+to Sunny Cove (IceLake) and later cores.
+
+Update the MSR_SPEC_CTRL emulation, and expose it to guests.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- tools/tests/tsx/test-tsx.c        | 9 ++++++++-
- xen/arch/x86/platform_hypercall.c | 3 +++
- 2 files changed, 11 insertions(+), 1 deletion(-)
+ tools/libs/light/libxl_cpuid.c              | 2 ++
+ tools/misc/xen-cpuid.c                      | 1 +
+ xen/arch/x86/msr.c                          | 2 +-
+ xen/arch/x86/spec_ctrl.c                    | 7 +++++--
+ xen/include/public/arch-x86/cpufeatureset.h | 1 +
+ xen/tools/gen-cpuid.py                      | 2 +-
+ 6 files changed, 11 insertions(+), 4 deletions(-)
 
-diff --git a/tools/tests/tsx/test-tsx.c b/tools/tests/tsx/test-tsx.c
-index a3d987b6d2ce..f11e8c54e0de 100644
---- a/tools/tests/tsx/test-tsx.c
-+++ b/tools/tests/tsx/test-tsx.c
-@@ -42,6 +42,7 @@ enum {
- #define  ARCH_CAPS_TSX_CTRL                 (1 <<  7)
- #define MSR_TSX_FORCE_ABORT                 0x0000010f
- #define MSR_TSX_CTRL                        0x00000122
-+#define MSR_MCU_OPT_CTRL                    0x00000123
+diff --git a/tools/libs/light/libxl_cpuid.c b/tools/libs/light/libxl_cpuid.c
+index e1acf6648db4..d462f9e421ed 100644
+--- a/tools/libs/light/libxl_cpuid.c
++++ b/tools/libs/light/libxl_cpuid.c
+@@ -234,6 +234,8 @@ int libxl_cpuid_parse_config(libxl_cpuid_policy_list *cpuid, const char* str)
+         {"fsrs",         0x00000007,  1, CPUID_REG_EAX, 11,  1},
+         {"fsrcs",        0x00000007,  1, CPUID_REG_EAX, 12,  1},
  
- static unsigned int nr_failures;
- #define fail(fmt, ...)                          \
-@@ -155,6 +156,10 @@ static void test_tsx_msrs(void)
-     printf("Testing MSR_TSX_CTRL consistency\n");
-     test_tsx_msr_consistency(
-         MSR_TSX_CTRL, host.msr.arch_caps.tsx_ctrl);
++        {"intel-psfd",   0x00000007,  2, CPUID_REG_EDX,  0,  1},
 +
-+    printf("Testing MSR_MCU_OPT_CTRL consistency\n");
-+    test_tsx_msr_consistency(
-+        MSR_MCU_OPT_CTRL, host.cpuid.feat.srbds_ctrl);
- }
+         {"lahfsahf",     0x80000001, NA, CPUID_REG_ECX,  0,  1},
+         {"cmplegacy",    0x80000001, NA, CPUID_REG_ECX,  1,  1},
+         {"svm",          0x80000001, NA, CPUID_REG_ECX,  2,  1},
+diff --git a/tools/misc/xen-cpuid.c b/tools/misc/xen-cpuid.c
+index 40626296984b..0b1b3333fe71 100644
+--- a/tools/misc/xen-cpuid.c
++++ b/tools/misc/xen-cpuid.c
+@@ -202,6 +202,7 @@ static const char *const str_7b1[32] =
  
- /*
-@@ -313,7 +318,8 @@ static void test_guest_policies(const struct xc_cpu_policy *max,
+ static const char *const str_7d2[32] =
+ {
++    [ 0] = "intel-psfd",
+ };
  
-     if ( ((cm->feat.raw[0].d | cd->feat.raw[0].d) &
-           (bitmaskof(X86_FEATURE_TSX_FORCE_ABORT) |
--           bitmaskof(X86_FEATURE_RTM_ALWAYS_ABORT))) ||
-+           bitmaskof(X86_FEATURE_RTM_ALWAYS_ABORT) |
-+           bitmaskof(X86_FEATURE_SRBDS_CTRL))) ||
-          ((mm->arch_caps.raw | md->arch_caps.raw) & ARCH_CAPS_TSX_CTRL) )
-         fail("  Xen-only TSX controls offered to guest\n");
+ static const struct {
+diff --git a/xen/arch/x86/msr.c b/xen/arch/x86/msr.c
+index 4ac5b5a048eb..01a15857b740 100644
+--- a/xen/arch/x86/msr.c
++++ b/xen/arch/x86/msr.c
+@@ -443,7 +443,7 @@ int guest_rdmsr(struct vcpu *v, uint32_t msr, uint64_t *val)
+ uint64_t msr_spec_ctrl_valid_bits(const struct cpuid_policy *cp)
+ {
+     bool ssbd = cp->feat.ssbd || cp->extd.amd_ssbd;
+-    bool psfd = cp->extd.psfd;
++    bool psfd = cp->feat.intel_psfd || cp->extd.psfd;
  
-@@ -388,6 +394,7 @@ static void test_guest(struct xen_domctl_createdomain *c)
-     if ( guest_policy.cpuid.feat.hle ||
-          guest_policy.cpuid.feat.tsx_force_abort ||
-          guest_policy.cpuid.feat.rtm_always_abort ||
-+         guest_policy.cpuid.feat.srbds_ctrl ||
-          guest_policy.msr.arch_caps.tsx_ctrl )
-         fail("  Unexpected features advertised\n");
+     /*
+      * Note: SPEC_CTRL_STIBP is specified as safe to use (i.e. ignored)
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 2b93468d396e..cbeeb199037e 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -307,11 +307,13 @@ custom_param("pv-l1tf", parse_pv_l1tf);
  
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 284c2dfb9efe..bf4090c94201 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -80,6 +80,9 @@ static bool msr_read_allowed(unsigned int msr)
+ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
+ {
+-    unsigned int _7d0 = 0, e8b = 0, tmp;
++    unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, max = 0, tmp;
  
-     case MSR_TSX_CTRL:
-         return cpu_has_tsx_ctrl;
-+
-+    case MSR_MCU_OPT_CTRL:
-+        return cpu_has_srbds_ctrl;
-     }
+     /* Collect diagnostics about available mitigations. */
+     if ( boot_cpu_data.cpuid_level >= 7 )
+-        cpuid_count(7, 0, &tmp, &tmp, &tmp, &_7d0);
++        cpuid_count(7, 0, &max, &tmp, &tmp, &_7d0);
++    if ( max >= 2 )
++        cpuid_count(7, 2, &tmp, &tmp, &tmp, &_7d2);
+     if ( boot_cpu_data.extended_cpuid_level >= 0x80000008 )
+         cpuid(0x80000008, &tmp, &e8b, &tmp, &tmp);
  
-     if ( ppin_msr && msr == ppin_msr )
+@@ -345,6 +347,7 @@ static void __init print_details(enum ind_thunk thunk, uint64_t caps)
+            (_7d0 & cpufeat_mask(X86_FEATURE_STIBP))          ? " STIBP"          : "",
+            (e8b  & cpufeat_mask(X86_FEATURE_AMD_SSBD)) ||
+            (_7d0 & cpufeat_mask(X86_FEATURE_SSBD))           ? " SSBD"           : "",
++           (_7d2 & cpufeat_mask(X86_FEATURE_INTEL_PSFD)) ||
+            (e8b  & cpufeat_mask(X86_FEATURE_PSFD))           ? " PSFD"           : "",
+            (_7d0 & cpufeat_mask(X86_FEATURE_L1D_FLUSH))      ? " L1D_FLUSH"      : "",
+            (_7d0 & cpufeat_mask(X86_FEATURE_MD_CLEAR))       ? " MD_CLEAR"       : "",
+diff --git a/xen/include/public/arch-x86/cpufeatureset.h b/xen/include/public/arch-x86/cpufeatureset.h
+index 81b0f5e0aad3..9cee4b439e9f 100644
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -303,6 +303,7 @@ XEN_CPUFEATURE(NSCB,               11*32+ 6) /*A  Null Selector Clears Base (and
+ XEN_CPUFEATURE(INTEL_PPIN,         12*32+ 0) /*   Protected Processor Inventory Number */
+ 
+ /* Intel-defined CPU features, CPUID level 0x00000007:2.edx, word 13 */
++XEN_CPUFEATURE(INTEL_PSFD,         13*32+ 0) /*A  MSR_SPEC_CTRL.PSFD */
+ 
+ #endif /* XEN_CPUFEATURE */
+ 
+diff --git a/xen/tools/gen-cpuid.py b/xen/tools/gen-cpuid.py
+index 39c8b0c77465..e0e3f2f46386 100755
+--- a/xen/tools/gen-cpuid.py
++++ b/xen/tools/gen-cpuid.py
+@@ -287,7 +287,7 @@ def crunch_numbers(state):
+         # IBRSB/IBRS, and we pass this MSR directly to guests.  Treating them
+         # as dependent features simplifies Xen's logic, and prevents the guest
+         # from seeing implausible configurations.
+-        IBRSB: [STIBP, SSBD],
++        IBRSB: [STIBP, SSBD, INTEL_PSFD],
+         IBRS: [AMD_STIBP, AMD_SSBD, PSFD,
+                IBRS_ALWAYS, IBRS_FAST, IBRS_SAME_MODE],
+         AMD_STIBP: [STIBP_ALWAYS],
 -- 
 2.11.0
 
