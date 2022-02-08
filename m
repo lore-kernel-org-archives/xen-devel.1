@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B17C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5FD8C4321E
 	for <xen-devel@archiver.kernel.org>; Tue,  8 Feb 2022 18:10:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.268585.462461 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.268582.462430 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHUwG-0004IY-E7; Tue, 08 Feb 2022 18:10:04 +0000
+	id 1nHUwE-0003Va-9M; Tue, 08 Feb 2022 18:10:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 268585.462461; Tue, 08 Feb 2022 18:10:04 +0000
+Received: by outflank-mailman (output) from mailman id 268582.462430; Tue, 08 Feb 2022 18:10:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nHUwG-0004H0-9L; Tue, 08 Feb 2022 18:10:04 +0000
-Received: by outflank-mailman (input) for mailman id 268585;
- Tue, 08 Feb 2022 18:10:02 +0000
+	id 1nHUwE-0003VA-5S; Tue, 08 Feb 2022 18:10:02 +0000
+Received: by outflank-mailman (input) for mailman id 268582;
+ Tue, 08 Feb 2022 18:10:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1rHF=SX=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nHUwE-0003Sy-8I
- for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 18:10:02 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 536fc97b-890a-11ec-8eb8-a37418f5ba1a;
- Tue, 08 Feb 2022 19:10:00 +0100 (CET)
+ id 1nHUwC-0003Sy-Kk
+ for xen-devel@lists.xenproject.org; Tue, 08 Feb 2022 18:10:00 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5231fbd7-890a-11ec-8eb8-a37418f5ba1a;
+ Tue, 08 Feb 2022 19:09:57 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,146 +38,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 536fc97b-890a-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 5231fbd7-890a-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644343800;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=DN+j1b19UntwqTcT4SnsDIhwfs0fbGijJq0oTfhrAtY=;
-  b=bqITvqfJtZPORMHkKN4c7jTZEJ4olXNAtMZR1SguSfiTSx4vIH7rJWhL
-   6UdVY+e/5au+Nod4P17HxE17bqfYeGDGYytTif50aXIJmhRFAge7FfEox
-   DX304aQxRQhs6icnknSoCb704CYl6V+pYVbGM/LjlZkRumBVEaYtcSMJV
-   A=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: xPKKKpj7P7kS3oyR+8rIrgQ1Sc20KcOIGGUP5uirGnRu78F1sR2pzl+MjFtrgil/R+dECnK4rW
- G5kCu4BuCIrPTfCAesYGMEB+nFc/8ZDyrZWROPHHf+aygX5e374xqpc0GqhNyyuctlJoqI8mKY
- O9lkQsEDihH+78M7CNrfm3mgkHgBgQkYOkU0c+/X+cQZr50zmJZz71nYEIp91K9WQA/6ZPkqw8
- Tn1M72/D5iKpOkHeFKqYAKBsiEnhDrD+4/XZXpMMZ7svobc1lhEy5F2n3bitKSas29RIu37Bbq
- cjqr7inWzzDqRphcFpa2GFb6
+  d=citrix.com; s=securemail; t=1644343798;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=pViVV2hWeibhQaOV7IR6ioT+MotoxNWQ6k6CH/wQXjM=;
+  b=RRI8/GZBrwavs3yKjbJ+G0FugcDWpaV3NAL5Uu8s0/e9H4UEV/1Vdhbd
+   S5b3Huc5EPUEdduPbGq0icqScuHMks+8GvxNAumhx/7GUiKVMYoChZMi6
+   /mwcucRChY+cfW99vXUL3kKvzhJiSSzpfZHOukErQ7t6BA+Q3T9PObg5B
+   Q=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: IRLRDnSqC0pCtb6uu4IVpteITDI4nwXYX5AkdbXNQ/wuz82hdM8xq3oUVsAD9BVgslIO8LGutt
+ 0cClFkIFjNjenMB/YBlKqQeHU1HptXXjj6KlWeBTa1uq5srMh4wAMnv43JSuqTZ6qSjjE9zXNh
+ ONdhvTrO/06qLraeHMpZzftQHXXQ6RWm28lCroRqHNBluGlc/LyjxDIZ33jbEP86QDpxeYoaNW
+ RFSkYxUHqL09TjyZWucC+rLAYZ/0DthbqV7bsqxNZWBeEnaPJn4HWFfO989qiCoMFmaRjqLbpO
+ gGen/8GkEUucBFznZ3O+NORD
 X-SBRS: 5.1
-X-MesageID: 63762631
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 63762669
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:pxkam6CRNaqJCRVW/wPkw5YqxClBgxIJ4kV8jS/XYbTApDon1jwAy
- mEdUWqHPqqDNDCgfox1a4Tno01SvJLUz98wQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WL6s1hxZH1c+En970UI7wYbVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/oSSEu81D6
- u93r5G1ezgDAqrFt/o5XEwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcGh2hu3J4VRJ4yY
- eIkNQQsTQ2RQCRFBXcyA6ADnbqVtHPWJmgwRFW9+vNsvjm7IBZK+KjgNp/Zd8KHQe1Rn12Ev
- STW8mLhGBYYOdeDjz2f/RqRavTnxH2hHthITfvhq6As0Ab7KnEv5AM+f0q2heSLqHSEQd9aG
- XM+xi0ngrYW+xn+JjXiZCGQrHmBtx8aftNfFewm9Q2AopbpDxal6nssFWAYNoF/3CMibXlzj
- wLSwYu1bdB6mODNERqgGqGoQSRe0MT/BUsLfmc6QAQM+LEPS6lj30uUHr6P/ENY5+AZ+A0cI
- RjX9kDSZJ1J1KbnMplXGnid0lqRSmDhFFJd2+ktYkqr7xlieKmubJGy5F7Q4J5oddjFEgDQ5
- SFaypLHt4ji6K1hcwTXEY0w8EyBva7ZYFUwf3Yzd3Xey9hd0yH6Jt0BiN2PDExoLtwFaVfUj
- Lz74mtsCGtoFCLyN8dfOtvpY+xzlPSIPYm1B5j8M4sVCrAsJVDv1H81Pya4gTuy+HXAZIliY
- P+za9i3N38GBMxPlXzuLwvr+eRwnX5WKKK6bc2T8ilLJpLEPCHMEupeYALVBg37hYvdyDjoH
- x9kH5Pi431ivCfWP0E7KKYfcgIHK2YVH5fzp5AFf+KPOFM+SmogF+XQ0fUqfIk8x/ZZkeLB/
- 3ecXE5EyQWg2S2beFvSMn0zOqnyWZtfrG4gOXB+N1ifxHV+M52k670SdsVrcOB/pvBj1/N9U
- 9IMZ96EXqZUUj3C9jlENcv9oYVueQ6FnwWLOyb5MjEzc4Q5H17C+8P+fxup/y4LV3Llucw7q
- rym9wXaXZtcGFgyUJeIMKqilgrjs2IcleR+W1rzDuNSIEi8opJ3LyHRj+MsJ51eIxv02TbHh
- R2dBg0VpLeRrtZtosXJn62Ns6ygD/B6QhhBB2De4Lu7aXva826kzdMSWeqEZ2mABmb9+aHkb
- uRJ1fDsdvYAmQ8S4YZ7Fr9qy4M45sfu+OAGnlg1Qi2TYgT5EK5kL1mHwdJL5/9EybJusAerX
- l6Cp4tBMrKTNcK5SFMcKWLJtAhYOS34TtUK0ckIHQ==
-IronPort-HdrOrdr: A9a23:Cta2y6/Nu9P6t7CZKUpuk+DaI+orL9Y04lQ7vn2YSXRuHPBw9v
- re5cjzuiWVtN98Yh0dcJW7Scy9qBDnhPhICOsqTNSftWDd0QPCRuxfBMnZslnd8kXFh4lgPM
- xbEpSWZueeMbEDt7eZ3DWF
+IronPort-Data: A9a23:iy86/K8Epf0eTHqGQ3bUDrUDo3mTJUtcMsCJ2f8bNWPcYEJGY0x3y
+ 2EfWjrSPa2OMDCkf4p1YNu+9xwEusCHzd4wGgJr+3s8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7Rh0tYy6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhQk
+ tt1kK6+Zjw2L7Xps/UgWBJcQ2JhaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4VQqiEO
+ ZRIAdZpRD7bR0F/Nlk3NJUjuLeXu2TtSzxUkV3A8MLb5ECMlVcsgdABKuH9atGMAMlYgEucj
+ mbH5HjiRAEXMsSFzjiI+W7qgfXA9R4XQ6pLSuf+rKQzxgTOmCpDU3X6SGdXv9GY0ECGfuBRB
+ HcL6zILhrkP/0evHpriCkjQTGG/gjYQXN9ZEusf4Q6Ly7bJ7wvxOlXoXgKte/R96pZoGGVCO
+ kuh2oqwWGcx6OH9pWe1q+/MxQ5eLxT5OoPricUsaQIeq+fur4go5v4kZoYySfXl5jEZ9NyZ/
+ txrkMTcr+hJ5SLo///ilbwiv95LjsKYJjPZHi2NAgqYAvpRPeZJnbCA51nB9upnJ42EVFSHt
+ 3Vss5HAsLxXXMjUyn3XGb5l8FSVCxGtamy0vLKSN8N5q2TFF4CLIei8Hw2S1G82a51ZKFcFk
+ WfYuB9L5Y87AZdZRfQfXm5FMOxzlfKIPY28Dpj8N4MSCrAsJF7v1Hw/Pia4gjGy+GByyvtXE
+ cnALq6R4YMyVP0PIMyeHLxGj9fGB0kWmAvueHwM507/juPFOSXFEOxt3ZnnRrlR0Z5oaT79q
+ 753X/ZmAT0GOAEnSiWIo4MVM34QKn03WcL/p8BNL7bRKQt6AmAxTfTWxOp5KYBimq1UkMbO/
+ 228BRAEmAau2yWfJFXYcG1nZZPuQY178SAxMxszMAv6wHMke4uusvsSLsNlYbk9+eV/5vdoV
+ P1ZKd6YC/FCR22fqTQQZJXwtqJ4cxGviV7cNiapemFnLZVhWxbI6pnveQ62rHsCCS++tM0fp
+ by811yEHcpfFlo6VMuPMaCh1VK8u3QZidleZUqQL4kBYljo/ahrNzf10q09LfYTJEiR3TCdz
+ QuXX0sV/LGfv48v/dDVrqmYtIP1QfBmF09XEmSHv7a7MS7WojiqzYNaCbvaeDncUCX/+bm4Z
+ PUTxPb5aaVVkFFPuot6MrBq0aNhuIe/++4EllxpTCfRclCmKrJ8OX3Xj8BAu5pEyqJdpQbrC
+ FmE/cNXOOnRNc7oeLLLyNHJsghXOSkopwTv
+IronPort-HdrOrdr: A9a23:8s2yjqDe3thWNRDlHem655DYdb4zR+YMi2TC1yhKJyC9E/bo8P
+ xG88566faZslossRIb6LS90cu7MBDhHPdOiOF7V9qftWHdyQ6VxepZjLcKrQeOJ8SHzJ8+6Z
+ td
 X-IronPort-AV: E=Sophos;i="5.88,353,1635220800"; 
-   d="scan'208";a="63762631"
+   d="scan'208";a="63762669"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 2/6] x86/tsx: Move has_rtm_always_abort to an outer scope
-Date: Tue, 8 Feb 2022 18:09:38 +0000
-Message-ID: <20220208180942.14871-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 0/6] x86: Changes for Intel Feb 2022 microcode
+Date: Tue, 8 Feb 2022 18:09:36 +0000
+Message-ID: <20220208180942.14871-1-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220208180942.14871-1-andrew.cooper3@citrix.com>
-References: <20220208180942.14871-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-We are about to introduce a second path which needs to conditionally force the
-presence of RTM_ALWAYS_ABORT.
+Changes for two software visible changes in the Intel Feb 2022 microcode drop.
+1) Deprecation of TSX on more client parts
+2) Retrofitting of AMD's MSR_SPEC_CTRL.PSFD to various CPUs
 
-No functional change.
+These patches have been committed and backported to 4.14 and later.
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
- xen/arch/x86/tsx.c | 26 ++++++++++++--------------
- 1 file changed, 12 insertions(+), 14 deletions(-)
+Andrew Cooper (6):
+  x86/spec-ctrl: Clean up MSR_MCU_OPT_CTRL handling
+  x86/tsx: Move has_rtm_always_abort to an outer scope
+  x86/tsx: Cope with TSX deprecation on WHL-R/CFL-R
+  tests/tsx: Extend test-tsx to check MSR_MCU_OPT_CTRL
+  x86/cpuid: Infrastructure for cpuid word 7:2.edx
+  x86/spec-ctrl: Support Intel PSFD for guests
 
-diff --git a/xen/arch/x86/tsx.c b/xen/arch/x86/tsx.c
-index 88adf08c4973..c3b8a7ec0076 100644
---- a/xen/arch/x86/tsx.c
-+++ b/xen/arch/x86/tsx.c
-@@ -42,6 +42,7 @@ void tsx_init(void)
-     if ( unlikely(cpu_has_tsx_ctrl < 0) )
-     {
-         uint64_t caps = 0;
-+        bool has_rtm_always_abort;
- 
-         if ( boot_cpu_data.cpuid_level >= 7 )
-             boot_cpu_data.x86_capability[cpufeat_word(X86_FEATURE_ARCH_CAPS)]
-@@ -51,6 +52,7 @@ void tsx_init(void)
-             rdmsrl(MSR_ARCH_CAPABILITIES, caps);
- 
-         cpu_has_tsx_ctrl = !!(caps & ARCH_CAPS_TSX_CTRL);
-+        has_rtm_always_abort = cpu_has_rtm_always_abort;
- 
-         if ( cpu_has_tsx_force_abort )
-         {
-@@ -67,11 +69,7 @@ void tsx_init(void)
-              * RTM_ALWAYS_ABORT enumerates the new functionality, but is also
-              * read as zero if TSX_FORCE_ABORT.ENABLE_RTM has been set before
-              * we run.
--             *
--             * Undo this behaviour in Xen's view of the world.
-              */
--            bool has_rtm_always_abort = cpu_has_rtm_always_abort;
--
-             if ( !has_rtm_always_abort )
-             {
-                 uint64_t val;
-@@ -83,15 +81,6 @@ void tsx_init(void)
-             }
- 
-             /*
--             * Always force RTM_ALWAYS_ABORT, even if it currently visible.
--             * If the user explicitly opts to enable TSX, we'll set
--             * TSX_FORCE_ABORT.ENABLE_RTM and cause RTM_ALWAYS_ABORT to be
--             * hidden from the general CPUID scan later.
--             */
--            if ( has_rtm_always_abort )
--                setup_force_cpu_cap(X86_FEATURE_RTM_ALWAYS_ABORT);
--
--            /*
-              * If no explicit tsx= option is provided, pick a default.
-              *
-              * This deliberately overrides the implicit opt_tsx=-3 from
-@@ -108,10 +97,19 @@ void tsx_init(void)
-              * With RTM_ALWAYS_ABORT, disable TSX.
-              */
-             if ( opt_tsx < 0 )
--                opt_tsx = !cpu_has_rtm_always_abort;
-+                opt_tsx = !has_rtm_always_abort;
-         }
- 
-         /*
-+         * Always force RTM_ALWAYS_ABORT, even if it currently visible.  If
-+         * the user explicitly opts to enable TSX, we'll set the appropriate
-+         * RTM_ENABLE bit and cause RTM_ALWAYS_ABORT to be hidden from the
-+         * general CPUID scan later.
-+         */
-+        if ( has_rtm_always_abort )
-+            setup_force_cpu_cap(X86_FEATURE_RTM_ALWAYS_ABORT);
-+
-+        /*
-          * The TSX features (HLE/RTM) are handled specially.  They both
-          * enumerate features but, on certain parts, have mechanisms to be
-          * hidden without disrupting running software.
+ docs/misc/xen-command-line.pandoc           |  25 +++++--
+ tools/libs/light/libxl_cpuid.c              |   2 +
+ tools/misc/xen-cpuid.c                      |   6 ++
+ tools/tests/tsx/test-tsx.c                  |   9 ++-
+ xen/arch/x86/acpi/power.c                   |   3 +-
+ xen/arch/x86/cpu/common.c                   |   4 ++
+ xen/arch/x86/cpu/intel.c                    |  32 +++++++++
+ xen/arch/x86/include/asm/cpufeature.h       |   1 +
+ xen/arch/x86/include/asm/msr-index.h        |   2 +
+ xen/arch/x86/include/asm/processor.h        |   3 +
+ xen/arch/x86/include/asm/spec_ctrl.h        |   2 -
+ xen/arch/x86/msr.c                          |   2 +-
+ xen/arch/x86/platform_hypercall.c           |   3 +
+ xen/arch/x86/smpboot.c                      |   3 +-
+ xen/arch/x86/spec_ctrl.c                    |  52 +++++++-------
+ xen/arch/x86/tsx.c                          | 102 ++++++++++++++++++++++++----
+ xen/include/public/arch-x86/cpufeatureset.h |   3 +
+ xen/include/xen/lib/x86/cpuid.h             |  13 +++-
+ xen/tools/gen-cpuid.py                      |   2 +-
+ 19 files changed, 211 insertions(+), 58 deletions(-)
+
 -- 
 2.11.0
 
