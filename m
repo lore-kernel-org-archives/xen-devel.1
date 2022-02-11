@@ -4,42 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DCBC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Feb 2022 15:26:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.270550.464872 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 637A2C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Feb 2022 15:28:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.270565.464889 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nIXof-0001j5-I3; Fri, 11 Feb 2022 15:26:33 +0000
+	id 1nIXqF-0002wX-3X; Fri, 11 Feb 2022 15:28:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 270550.464872; Fri, 11 Feb 2022 15:26:33 +0000
+Received: by outflank-mailman (output) from mailman id 270565.464889; Fri, 11 Feb 2022 15:28:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nIXof-0001hm-Bo; Fri, 11 Feb 2022 15:26:33 +0000
-Received: by outflank-mailman (input) for mailman id 270550;
- Fri, 11 Feb 2022 15:26:31 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WJSo=S2=amazon.de=prvs=034f27e45=nmanthey@srs-se1.protection.inumbo.net>)
- id 1nIXoc-0001fo-WA
- for xen-devel@lists.xenproject.org; Fri, 11 Feb 2022 15:26:31 +0000
-Received: from smtp-fw-9103.amazon.com (smtp-fw-9103.amazon.com
- [207.171.188.200]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id faa00943-8b4e-11ec-8f75-fffcc8bd4f1a;
- Fri, 11 Feb 2022 16:26:29 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2a-92ba9394.us-west-2.amazon.com) ([10.25.36.210])
- by smtp-border-fw-9103.sea19.amazon.com with ESMTP; 11 Feb 2022 15:26:12 +0000
-Received: from EX13D02EUB001.ant.amazon.com
- (pdx1-ws-svc-p6-lb9-vlan3.pdx.amazon.com [10.236.137.198])
- by email-inbound-relay-pdx-2a-92ba9394.us-west-2.amazon.com (Postfix) with
- ESMTPS id 1811141887; Fri, 11 Feb 2022 15:26:12 +0000 (UTC)
-Received: from EX13MTAUEE002.ant.amazon.com (10.43.62.24) by
- EX13D02EUB001.ant.amazon.com (10.43.166.150) with Microsoft SMTP Server (TLS)
- id 15.0.1497.28; Fri, 11 Feb 2022 15:26:09 +0000
-Received: from u6fc700a6f3c650.ant.amazon.com (10.1.212.14) by
- mail-relay.amazon.com (10.43.62.224) with Microsoft SMTP Server id
- 15.0.1497.28 via Frontend Transport; Fri, 11 Feb 2022 15:26:08 +0000
+	id 1nIXqF-0002wQ-0Z; Fri, 11 Feb 2022 15:28:11 +0000
+Received: by outflank-mailman (input) for mailman id 270565;
+ Fri, 11 Feb 2022 15:28:09 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1nIXqD-0002wI-LZ
+ for xen-devel@lists.xenproject.org; Fri, 11 Feb 2022 15:28:09 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nIXqC-0002GZ-Lo; Fri, 11 Feb 2022 15:28:08 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=[192.168.30.126]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nIXqC-0001hU-FZ; Fri, 11 Feb 2022 15:28:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,98 +39,51 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: faa00943-8b4e-11ec-8f75-fffcc8bd4f1a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
-  t=1644593189; x=1676129189;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=TT+qw2jJTN+YB51Wk3Q538yOVcAVuWNCzpcJJfEh1m0=;
-  b=ft1j6k2N2FSCn8qZVPC5uxad4fk713vSA1IWAp5hhEhjQZCCgsAdNp9I
-   GYcASWFiFgLu/1pjR5hHSma5JKtQtyxnCfnAFMfsEX/g3L1kXPUqbVNlg
-   pij95dQt4HyGJy4orQ7fUHmtg1qIP4xDc29EMAcgiRGAkuTqrVPzWV/PZ
-   g=;
-X-IronPort-AV: E=Sophos;i="5.88,361,1635206400"; 
-   d="scan'208";a="991414143"
-From: Norbert Manthey <nmanthey@amazon.de>
-To: <xen-devel@lists.xenproject.org>
-CC: Norbert Manthey <nmanthey@amazon.de>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>
-Subject: [PATCH CPU v2] cpuid: initialize cpuinfo with boot_cpu_data
-Date: Fri, 11 Feb 2022 16:25:59 +0100
-Message-ID: <20220211152559.27862-1-nmanthey@amazon.de>
-X-Mailer: git-send-email 2.17.1
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=07OLUu5EaiN7izujrTb3pRsmPF4oJCmfCQr7UHmVJ7s=; b=ivVihV/5VTvamBlCIwQd+zEzaq
+	C2rzSGJurOSyLuP9vJBOX20F56mIMponNcar2gegbi8wqNITgb434dB4DTu5G4z/FEQd9TiUjDULY
+	csUYS3N7Er66ZU02OaQD3N1wmpoKG+a2Pv92mb1zuruWrkXX6t39PGvmQVN7AQoTZS8I=;
+Message-ID: <49b3abe8-39e7-5b74-0471-8b65aa234ee3@xen.org>
+Date: Fri, 11 Feb 2022 15:28:05 +0000
 MIME-Version: 1.0
-Content-Type: text/plain
-Precedence: Bulk
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.5.1
+Subject: Re: [PATCH v6 13/13] xen/arm: account IO handlers for emulated PCI
+ MSI-X
+To: Oleksandr Andrushchenko <andr2000@gmail.com>,
+ xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
+ volodymyr_babchuk@epam.com, artem_mygaiev@epam.com, roger.pau@citrix.com,
+ jbeulich@suse.com, andrew.cooper3@citrix.com, george.dunlap@citrix.com,
+ paul@xen.org, bertrand.marquis@arm.com, rahul.singh@arm.com,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+References: <20220204063459.680961-1-andr2000@gmail.com>
+ <20220204063459.680961-14-andr2000@gmail.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20220204063459.680961-14-andr2000@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-When re-identifying CPU data, we might use uninitialized data when
-checking for the cache line property to adapt the cache
-alignment. The data that depends on this uninitialized read is
-currently not forwarded.
+Hi Oleksandr,
 
-To avoid problems in the future, initialize the data cpuinfo
-structure before re-identifying the CPU again.
+On 04/02/2022 06:34, Oleksandr Andrushchenko wrote:
+> From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> 
+> At the moment, we always allocate an extra 16 slots for IO handlers
+> (see MAX_IO_HANDLER). So while adding IO trap handlers for the emulated
+> MSI-X registers we need to explicitly tell that we have additional IO
+> handlers, so those are accounted.
+> 
+> Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-The trace to hit the uninitialized read reported by Coverity is:
+Acked-by: Julien Grall <jgrall@amazon.com>
 
-bool recheck_cpu_features(unsigned int cpu)
-...
-    struct cpuinfo_x86 c;
-    ...
-    identify_cpu(&c);
+Cheers,
 
-void identify_cpu(struct cpuinfo_x86 *c)
-...
-    generic_identify(c)
-
-static void generic_identify(struct cpuinfo_x86 *c)
-...
-        if (this_cpu->c_early_init)
-                this_cpu->c_early_init(c); // which is early_init_intel
-
-static void early_init_intel(struct cpuinfo_x86 *c)
-...
-    if (c->x86 == 15 && c->x86_cache_alignment == 64)
-        c->x86_cache_alignment = 128;
-
-This bug was discovered and resolved using Coverity Static Analysis
-Security Testing (SAST) by Synopsys, Inc.
-
-Signed-off-by: Norbert Manthey <nmanthey@amazon.de>
-
----
- xen/arch/x86/cpuid.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -609,7 +609,7 @@ void __init init_guest_cpuid(void)
- bool recheck_cpu_features(unsigned int cpu)
- {
-     bool okay = true;
--    struct cpuinfo_x86 c;
-+    struct cpuinfo_x86 c = {0};
-     const struct cpuinfo_x86 *bsp = &boot_cpu_data;
-     unsigned int i;
- 
 -- 
-2.17.1
-
-
-
-
-Amazon Development Center Germany GmbH
-Krausenstr. 38
-10117 Berlin
-Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-Sitz: Berlin
-Ust-ID: DE 289 237 879
-
-
-
+Julien Grall
 
