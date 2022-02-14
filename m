@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA457C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:17:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271957.466731 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6744C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:17:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271967.466742 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDu-0005LI-6C; Mon, 14 Feb 2022 13:16:58 +0000
+	id 1nJbDx-0005rX-Fs; Mon, 14 Feb 2022 13:17:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271957.466731; Mon, 14 Feb 2022 13:16:58 +0000
+Received: by outflank-mailman (output) from mailman id 271967.466742; Mon, 14 Feb 2022 13:17:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDu-0005L3-1a; Mon, 14 Feb 2022 13:16:58 +0000
-Received: by outflank-mailman (input) for mailman id 271957;
- Mon, 14 Feb 2022 13:16:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nJbDx-0005rK-Aw; Mon, 14 Feb 2022 13:17:01 +0000
+Received: by outflank-mailman (input) for mailman id 271967;
+ Mon, 14 Feb 2022 13:16:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb3b-0008IH-7q
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:19 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e5622eb6-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:06:17 +0100 (CET)
+ id 1nJb3X-00023t-Jd
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:15 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e1f7365e-8d96-11ec-b215-9bbe72dcb22c;
+ Mon, 14 Feb 2022 14:06:13 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5622eb6-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: e1f7365e-8d96-11ec-b215-9bbe72dcb22c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843977;
+  d=citrix.com; s=securemail; t=1644843973;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=lw78qzzzuiYAtb4DaXkKqrMnrmW0OepdLJjLyhv/BGI=;
-  b=W9n8TYnjPjjYwOzqjane4XyVrnSWiI/J32ZALF4kLtTR4fno/J6EzjxR
-   L5wXZQ76dYH1hv22eqrDnZof/g2b8nN8KUqgd7TlZAMRag05o0GRjGNtG
-   7SHbhu2EaK6k7f4SlQnCine7MTFP00nEI5hjLH2n5QXbkscNXlEXBnroV
-   Y=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: GiZ73pqCSnaQswr4ErlANhPRz8vWxZokQs4C0FBQcFZXfCidf60HFdYdTd2usiV/4U3k7KkZj0
- ZgqndL5rtOQOTlLuIhZY2QgsYcO5ZKhsO+7sAoXzTqD8M+AiC05Nb1xzhjaNqL9sLm6F613k5p
- EutSoSYZ0Jn6/SJNiwdLvkFPKhywz3hQ0iQbUeaXNzQimGc7Z0oO9fFNmqYfIjGokplOGfNcgZ
- E7snI3yZJ3Atgy0EZf1Z+uL61s1RG2QibSY94225E2N1x369piJQhUsORPDztGDywMupsc9WXH
- U+db3yoTiU8ThmrKHa8ySRA1
+  bh=DvkxBtgSCdVebD4VLLY7NY7aTsNOKJgA8KGiz3D+sSg=;
+  b=eJhUdTZvvPYd/WrwQI3bWhTwZ10S20HPK3m9Goxbd4liaygh3v0UwdSm
+   /N9g1sH+xQLRNT0/105XjBkOpOKWCwC4H7+P2Sg1qUL6B5MdEmS4+3+ms
+   vM8ACionfM6LtMxR1SQD7953sQKAgG0uruCjutHUDIFL+VlQlzuOgtBno
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: uFd/8GjHXGZn2dw6P4h4cbueAJDEKi1MZmt9mLEP8k+l6RAKBQXr1MzE9QmMnkkpeDWJ08xksG
+ yLK8BxkUldtzrwIthLtrOkRgAhmiwhnLDMysXkT69oarGUuU5/keO05v1LUZNnQd8bg8iwEoN5
+ otcgzdMBjBAbDbXOqdEExE8U5R9n6XDqLbbA8bVsQZLWFV8x/TUmFdu5+2GEcS696Ui2MhiGdV
+ 5vIm+buc0r/Wg9VbRODd1gE7wAP+cKnaFQT3olvbo5a1EFOhvdqnvT0gNNSPQef70cd5gQ6T5U
+ 412AOROA4hzc2UKKK6WgToDp
 X-SBRS: 5.1
-X-MesageID: 64149893
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 66374944
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:fa50kqLNV0ODhaYOFE+Rz5IlxSXFcZb7ZxGr2PjKsXjdYENS1jcOz
- jQeXW7UO/aMajf0LdBxbo6+pxsPvsXWyIBgGgdlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+IronPort-Data: A9a23:UsFTTKKx31Cik8p2FE+RzpIlxSXFcZb7ZxGr2PjKsXjdYENS1WMDn
+ WdLD26FPKuCYjegLY8ga4Wy8hhTv8TQyIBqSlZlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
  q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUakideSc+EH170Ug6x7Zg6mJVqYPR7z2l6
  IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2th45q8
- 8xGtKfsEyYQY7H2t/QBaANXRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Gls35wfTaeFD
- yYfQX00LwrHSg9qAAgwOoswk9+ZjHXjShQN/Tp5ooJoujOOnWSdyoPFINfTP9CHW8hRtkKZv
- X7duXT0BAkAM96SwibD9Wij7tIjhguiBthUTufhsKc33hvDnQT/FSH6S3OfuaeisVe1WukDc
- W0tpzYUgrguz1akG4yVswKDnFaIuRsVWtx1GuI86R2Qxqe83zt1FlToXRYaNoV46ZZeqSgCk
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2Hn9J1l
+ e1G5aC9SAYJHpXNvOo5egFxRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Glu3Z8STKqCD
+ yYfQRQ+PRXKfiFBAUoKK40Smuisoyb4YxQN/Tp5ooJoujOOnWSdyoPFINfTP9CHW8hRtkKZv
+ X7duXT0BAkAM96SwibD9Wij7tIjhguiBthUTufhsKc33hvDnQT/FSH6S3O1ofu913a1C+5SK
+ k002hIviaYW3VSCG4yVswKDnFaIuRsVWtx1GuI86R2Qxqe83zt1FlToXRYaNoV46ZZeqSgCk
  wbQwoi3XWAHXKi9FCrFnop4uw9eLsT8wYUqQSYfBTUI7ND4yG3YpkKeF40zeEJZYzCcJN0R/
  9xohHVk71nwpZRSv0lewbwgq2jyzqUltiZvum3qspuNt2uVnrKNaY2y8kT85v1dNoufRVTpl
  CFax5TBvLBTUMnUz3blrAAx8FaBvajtDdEhqQQ3Q8lJG8qFpxZPgry8EBkhfRw0Y67oiBfiY
  VPJuBM52XOgFCDCUEODWKroU55C5fG5TbzND6mIBvITMskZXFLWp0lGOB/Pt10BZWBxyMnTz
- 7/AKp3yZZvbYIw6pAeLqxA1j+N6mHBmnTmLLX05pjz+uYejiLeuYe9tGDOzgioRsctoeS3Zr
- IRSMdWk0RJaXLGsayXb69dLf1sLMWI6Fdb9rMkOLryPJQ9vGWcADf7NwOx+J9w5zvoNzuqYr
- GugXkJ4yUbkgSGVIwu9dX0+OqjkWoxyrCxnMHV0b0qowXUqfa2m8LwbK8ksZbAi+eE6lax0Q
- vAJdt+uGPNKTjibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz+
- uTy2BnaTJwPQxVZIPzXMP//nUmsuXU9mf5pWxeaKNdkZ0ixopNhLDb8j6FrLphUewnD3DaTy
- y2fHQwc+bvWu4Yw/dTE2fKEooOuH7csF0ZWBTCGv7O/NC2c9Wu/245QFu2PeGmFBm/z/ayjY
- 8RTzu39b6JbzAob7dIkHuY517866vvuu6Ren1ZtE3j8Zli2Dq9tfyud1s5Vu6wRnrJUtGNag
- K5UFgW27VlRBP7YLQ==
-IronPort-HdrOrdr: A9a23:Qef3WKgwrG4UduGeoQJ/ya/4nnBQXtgji2hC6mlwRA09TySZ//
- rBoB17726MtN9/YhEdcLy7VJVoBEmskKKdgrNhW4tKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QFJSWY+eQMbEVt6nHCXGDYrQd/OU=
+ 7/AKp3yZZvbYIw6pAeLqxA1j+N1mHBkmD+7qFKS503P7IdyrUW9Ed8tWGZipMhghE9diAmKo
+ dtZKeWQzBBTDL/3biXNqNZBJlEWN3krQ5vxrpUPJOKEJwNnHkAnCuPQnux9K9A0wfwNm7ea5
+ Gy5V29Z1EH72S/NJzKVZy0xc7joR5t+8y42ZHR+IVay1nE/So+z96NDJYAvdLwq+bU7n/55R
+ vUIYeuaBfFLRmiV8jgRd8Cl/odjaA6qlUSFOC/8OGozeJtpRgro/N74f1SwqHlSX3Tv7cZn+
+ u+uzALWR5YHVj9ONseOZaL91U61sFgchPl2AxnCLO5MdRi+64NtMSHw0KM6epleNRXZyzKG/
+ A+KGhNE9/LVqoo4/dSV16CJq4ClT7l3EkZARjSJ6L+3MW/R/3a5wJ8GW+GNJGiPWGTx8aSkR
+ ONU0/Cjb6FXwAcU69JxQ+Rx0KYzx9rzvLsLnA1rEULCY0mvFr49cGKN2tNCt/EVy7JU0edst
+ pljJjWO1W21Bf7Y
+IronPort-HdrOrdr: A9a23:wU3Gn6DZKqzyMFblHemo55DYdb4zR+YMi2TC1yhKKCC9E/bo7/
+ xG885rtiMc5Ax/ZJhko6HlBEDiewKkyXcW2/hyAV7KZmCP0wHEQL2Kr7GSpAEIcxeOkNK1vp
+ 0BT0ERMrPN5CBB/KPH3DU=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149893"
+   d="scan'208";a="66374944"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 29/70] xen/console: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:46 +0000
-Message-ID: <20220214125127.17985-30-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 40/70] x86/idle: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:57 +0000
+Message-ID: <20220214125127.17985-41-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,250 +106,298 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/drivers/char/console.c   |  4 ++--
- xen/drivers/char/ehci-dbgp.c | 24 +++++++++++++-----------
- xen/drivers/char/ns16550.c   | 26 +++++++++++++-------------
- 3 files changed, 28 insertions(+), 26 deletions(-)
+ xen/arch/x86/acpi/cpu_idle.c                 | 31 +++++++++++++++++++++-------
+ xen/arch/x86/acpi/cpuidle_menu.c             |  6 +++---
+ xen/arch/x86/cpu/mwait-idle.c                |  2 +-
+ xen/arch/x86/domain.c                        |  6 +++---
+ xen/arch/x86/hpet.c                          |  4 ++--
+ xen/arch/x86/include/asm/cpuidle.h           |  4 ++--
+ xen/arch/x86/include/asm/hpet.h              |  4 ++--
+ xen/arch/x86/include/asm/time.h              |  6 +++---
+ xen/arch/x86/time.c                          |  6 +++---
+ xen/drivers/cpufreq/cpufreq_misc_governors.c | 14 ++++++-------
+ 10 files changed, 49 insertions(+), 34 deletions(-)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 380765ab02fd..d9d6556c2293 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -552,7 +552,7 @@ static void __serial_rx(char c, struct cpu_user_regs *regs)
- #endif
+diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
+index 0142671bb836..557bc6ef8642 100644
+--- a/xen/arch/x86/acpi/cpu_idle.c
++++ b/xen/arch/x86/acpi/cpu_idle.c
+@@ -75,7 +75,7 @@
+ #define GET_CC7_RES(val)  GET_HW_RES_IN_NS(0x3FE, val) /* SNB onwards */
+ #define PHI_CC6_RES(val)  GET_HW_RES_IN_NS(0x3FF, val) /* Xeon Phi only */
+ 
+-static void lapic_timer_nop(void) { }
++static void cf_check lapic_timer_nop(void) { }
+ void (*__read_mostly lapic_timer_off)(void);
+ void (*__read_mostly lapic_timer_on)(void);
+ 
+@@ -310,12 +310,27 @@ static char* acpi_cstate_method_name[] =
+     "HALT"
+ };
+ 
+-static uint64_t get_stime_tick(void) { return (uint64_t)NOW(); }
+-static uint64_t stime_ticks_elapsed(uint64_t t1, uint64_t t2) { return t2 - t1; }
+-static uint64_t stime_tick_to_ns(uint64_t ticks) { return ticks; }
++static uint64_t cf_check get_stime_tick(void)
++{
++    return NOW();
++}
++
++static uint64_t cf_check stime_ticks_elapsed(uint64_t t1, uint64_t t2)
++{
++    return t2 - t1;
++}
++
++static uint64_t cf_check stime_tick_to_ns(uint64_t ticks)
++{
++    return ticks;
++}
++
++static uint64_t cf_check get_acpi_pm_tick(void)
++{
++    return inl(pmtmr_ioport);
++}
+ 
+-static uint64_t get_acpi_pm_tick(void) { return (uint64_t)inl(pmtmr_ioport); }
+-static uint64_t acpi_pm_ticks_elapsed(uint64_t t1, uint64_t t2)
++static uint64_t cf_check acpi_pm_ticks_elapsed(uint64_t t1, uint64_t t2)
+ {
+     if ( t2 >= t1 )
+         return (t2 - t1);
+@@ -664,7 +679,7 @@ void update_idle_stats(struct acpi_processor_power *power,
+     spin_unlock(&power->stat_lock);
  }
  
--static void serial_rx(char c, struct cpu_user_regs *regs)
-+static void cf_check serial_rx(char c, struct cpu_user_regs *regs)
+-static void acpi_processor_idle(void)
++static void cf_check acpi_processor_idle(void)
  {
-     static int switch_code_count = 0;
+     unsigned int cpu = smp_processor_id();
+     struct acpi_processor_power *power = processor_powers[cpu];
+@@ -869,7 +884,7 @@ static void acpi_processor_idle(void)
+         cpuidle_current_governor->reflect(power);
+ }
  
-@@ -1286,7 +1286,7 @@ void panic(const char *fmt, ...)
-  * **************************************************************
+-void acpi_dead_idle(void)
++void cf_check acpi_dead_idle(void)
+ {
+     struct acpi_processor_power *power;
+     struct acpi_processor_cx *cx;
+diff --git a/xen/arch/x86/acpi/cpuidle_menu.c b/xen/arch/x86/acpi/cpuidle_menu.c
+index 6ff5fb8ff215..a275436d799c 100644
+--- a/xen/arch/x86/acpi/cpuidle_menu.c
++++ b/xen/arch/x86/acpi/cpuidle_menu.c
+@@ -185,7 +185,7 @@ static unsigned int get_sleep_length_us(void)
+     return (us >> 32) ? (unsigned int)-2000 : (unsigned int)us;
+ }
+ 
+-static int menu_select(struct acpi_processor_power *power)
++static int cf_check menu_select(struct acpi_processor_power *power)
+ {
+     struct menu_device *data = &this_cpu(menu_devices);
+     int i;
+@@ -237,7 +237,7 @@ static int menu_select(struct acpi_processor_power *power)
+     return data->last_state_idx;
+ }
+ 
+-static void menu_reflect(struct acpi_processor_power *power)
++static void cf_check menu_reflect(struct acpi_processor_power *power)
+ {
+     struct menu_device *data = &this_cpu(menu_devices);
+     u64 new_factor;
+@@ -275,7 +275,7 @@ static void menu_reflect(struct acpi_processor_power *power)
+     data->correction_factor[data->bucket] = new_factor;
+ }
+ 
+-static int menu_enable_device(struct acpi_processor_power *power)
++static int cf_check menu_enable_device(struct acpi_processor_power *power)
+ {
+     memset(&per_cpu(menu_devices, power->cpu), 0, sizeof(struct menu_device));
+ 
+diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
+index 927ce1b67aa5..f76c64e04b20 100644
+--- a/xen/arch/x86/cpu/mwait-idle.c
++++ b/xen/arch/x86/cpu/mwait-idle.c
+@@ -773,7 +773,7 @@ static const struct cpuidle_state snr_cstates[] = {
+ 	{}
+ };
+ 
+-static void mwait_idle(void)
++static void cf_check mwait_idle(void)
+ {
+ 	unsigned int cpu = smp_processor_id();
+ 	struct acpi_processor_power *power = processor_powers[cpu];
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 1c3a1ec2a080..ae7c88b51af1 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -74,11 +74,11 @@
+ 
+ DEFINE_PER_CPU(struct vcpu *, curr_vcpu);
+ 
+-static void default_idle(void);
++static void cf_check default_idle(void);
+ void (*pm_idle) (void) __read_mostly = default_idle;
+ void (*dead_idle) (void) __read_mostly = default_dead_idle;
+ 
+-static void default_idle(void)
++static void cf_check default_idle(void)
+ {
+     struct cpu_info *info = get_cpu_info();
+ 
+@@ -93,7 +93,7 @@ static void default_idle(void)
+         local_irq_enable();
+ }
+ 
+-void default_dead_idle(void)
++void cf_check default_dead_idle(void)
+ {
+     /*
+      * When going into S3, without flushing caches modified data may be
+diff --git a/xen/arch/x86/hpet.c b/xen/arch/x86/hpet.c
+index c31fd97579dc..20fca839907c 100644
+--- a/xen/arch/x86/hpet.c
++++ b/xen/arch/x86/hpet.c
+@@ -709,7 +709,7 @@ void hpet_disable_legacy_broadcast(void)
+     smp_send_event_check_mask(&cpu_online_map);
+ }
+ 
+-void hpet_broadcast_enter(void)
++void cf_check hpet_broadcast_enter(void)
+ {
+     unsigned int cpu = smp_processor_id();
+     struct hpet_event_channel *ch = per_cpu(cpu_bc_channel, cpu);
+@@ -740,7 +740,7 @@ void hpet_broadcast_enter(void)
+     spin_unlock(&ch->lock);
+ }
+ 
+-void hpet_broadcast_exit(void)
++void cf_check hpet_broadcast_exit(void)
+ {
+     unsigned int cpu = smp_processor_id();
+     struct hpet_event_channel *ch = per_cpu(cpu_bc_channel, cpu);
+diff --git a/xen/arch/x86/include/asm/cpuidle.h b/xen/arch/x86/include/asm/cpuidle.h
+index 0981a8fd6417..3edd7a75d2ef 100644
+--- a/xen/arch/x86/include/asm/cpuidle.h
++++ b/xen/arch/x86/include/asm/cpuidle.h
+@@ -17,8 +17,8 @@ extern uint64_t (*cpuidle_get_tick)(void);
+ 
+ int mwait_idle_init(struct notifier_block *);
+ int cpuidle_init_cpu(unsigned int cpu);
+-void default_dead_idle(void);
+-void acpi_dead_idle(void);
++void cf_check default_dead_idle(void);
++void cf_check acpi_dead_idle(void);
+ void play_dead(void);
+ void trace_exit_reason(u32 *irq_traced);
+ void update_idle_stats(struct acpi_processor_power *,
+diff --git a/xen/arch/x86/include/asm/hpet.h b/xen/arch/x86/include/asm/hpet.h
+index 8f9725a95e21..f343fe4740f1 100644
+--- a/xen/arch/x86/include/asm/hpet.h
++++ b/xen/arch/x86/include/asm/hpet.h
+@@ -91,8 +91,8 @@ void hpet_disable_legacy_replacement_mode(void);
   */
+ void hpet_broadcast_init(void);
+ void hpet_broadcast_resume(void);
+-void hpet_broadcast_enter(void);
+-void hpet_broadcast_exit(void);
++void cf_check hpet_broadcast_enter(void);
++void cf_check hpet_broadcast_exit(void);
+ int hpet_broadcast_is_available(void);
+ void hpet_disable_legacy_broadcast(void);
  
--static void suspend_steal_fn(const char *str, size_t nr) { }
-+static void cf_check suspend_steal_fn(const char *str, size_t nr) { }
- static int suspend_steal_id;
+diff --git a/xen/arch/x86/include/asm/time.h b/xen/arch/x86/include/asm/time.h
+index f06f2bfd8b8f..2a57d930ef30 100644
+--- a/xen/arch/x86/include/asm/time.h
++++ b/xen/arch/x86/include/asm/time.h
+@@ -43,11 +43,11 @@ int hwdom_pit_access(struct ioreq *ioreq);
  
- int console_suspend(void)
-diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
-index a6b57fdf2d19..e205c0da6a61 100644
---- a/xen/drivers/char/ehci-dbgp.c
-+++ b/xen/drivers/char/ehci-dbgp.c
-@@ -1000,13 +1000,15 @@ static int ehci_dbgp_external_startup(struct ehci_dbgp *dbgp)
+ int cpu_frequency_change(u64 freq);
  
- typedef void (*set_debug_port_t)(struct ehci_dbgp *, unsigned int);
+-void pit_broadcast_enter(void);
+-void pit_broadcast_exit(void);
++void cf_check pit_broadcast_enter(void);
++void cf_check pit_broadcast_exit(void);
+ int pit_broadcast_is_available(void);
  
--static void default_set_debug_port(struct ehci_dbgp *dbgp, unsigned int port)
-+static void cf_check default_set_debug_port(
-+    struct ehci_dbgp *dbgp, unsigned int port)
+-uint64_t acpi_pm_tick_to_ns(uint64_t ticks);
++uint64_t cf_check acpi_pm_tick_to_ns(uint64_t ticks);
+ 
+ uint64_t tsc_ticks2ns(uint64_t ticks);
+ 
+diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+index b6e690b76fab..043be2a8ec1a 100644
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -545,7 +545,7 @@ static __init int cf_check init_pmtmr_scale(void)
+ }
+ __initcall(init_pmtmr_scale);
+ 
+-uint64_t acpi_pm_tick_to_ns(uint64_t ticks)
++uint64_t cf_check acpi_pm_tick_to_ns(uint64_t ticks)
  {
+     return scale_delta(ticks, &pmt_scale);
+ }
+@@ -2237,12 +2237,12 @@ static int __init cf_check disable_pit_irq(void)
+ }
+ __initcall(disable_pit_irq);
+ 
+-void pit_broadcast_enter(void)
++void cf_check pit_broadcast_enter(void)
+ {
+     cpumask_set_cpu(smp_processor_id(), &pit_broadcast_mask);
  }
  
- static set_debug_port_t __read_mostly set_debug_port = default_set_debug_port;
- 
--static void nvidia_set_debug_port(struct ehci_dbgp *dbgp, unsigned int port)
-+static void cf_check nvidia_set_debug_port(
-+    struct ehci_dbgp *dbgp, unsigned int port)
+-void pit_broadcast_exit(void)
++void cf_check pit_broadcast_exit(void)
  {
-     uint32_t dword = pci_conf_read32(PCI_SBDF(0, dbgp->bus, dbgp->slot,
-                                               dbgp->func), 0x74);
-@@ -1167,7 +1169,7 @@ static inline void _ehci_dbgp_flush(struct ehci_dbgp *dbgp)
-     dbgp->out.chunk = 0;
+     int cpu = smp_processor_id();
+ 
+diff --git a/xen/drivers/cpufreq/cpufreq_misc_governors.c b/xen/drivers/cpufreq/cpufreq_misc_governors.c
+index ad79d0f5d246..f5571f5486ab 100644
+--- a/xen/drivers/cpufreq/cpufreq_misc_governors.c
++++ b/xen/drivers/cpufreq/cpufreq_misc_governors.c
+@@ -26,8 +26,8 @@
+ static unsigned int __read_mostly userspace_cmdline_freq;
+ static DEFINE_PER_CPU(unsigned int, cpu_set_freq);
+ 
+-static int cpufreq_governor_userspace(struct cpufreq_policy *policy,
+-                                      unsigned int event)
++static int cf_check cpufreq_governor_userspace(
++    struct cpufreq_policy *policy, unsigned int event)
+ {
+     int ret = 0;
+     unsigned int cpu;
+@@ -81,7 +81,7 @@ int write_userspace_scaling_setspeed(unsigned int cpu, unsigned int freq)
+     return __cpufreq_driver_target(policy, freq, CPUFREQ_RELATION_L);
  }
  
--static void ehci_dbgp_flush(struct serial_port *port)
-+static void cf_check ehci_dbgp_flush(struct serial_port *port)
+-static bool_t __init
++static bool __init cf_check
+ cpufreq_userspace_handle_option(const char *name, const char *val)
  {
-     struct ehci_dbgp *dbgp = port->uart;
-     s_time_t goal;
-@@ -1196,7 +1198,7 @@ static void ehci_dbgp_flush(struct serial_port *port)
-        set_timer(&dbgp->timer, goal);
- }
- 
--static void ehci_dbgp_putc(struct serial_port *port, char c)
-+static void cf_check ehci_dbgp_putc(struct serial_port *port, char c)
+     if (!strcmp(name, "speed") && val) {
+@@ -131,8 +131,8 @@ __initcall(cpufreq_gov_userspace_init);
+ /*
+  * cpufreq performance governor
+  */
+-static int cpufreq_governor_performance(struct cpufreq_policy *policy,
+-                                      unsigned int event)
++static int cf_check cpufreq_governor_performance(
++    struct cpufreq_policy *policy, unsigned int event)
  {
-     struct ehci_dbgp *dbgp = port->uart;
+     int ret = 0;
  
-@@ -1209,7 +1211,7 @@ static void ehci_dbgp_putc(struct serial_port *port, char c)
-         ehci_dbgp_flush(port);
- }
- 
--static int ehci_dbgp_tx_ready(struct serial_port *port)
-+static int cf_check ehci_dbgp_tx_ready(struct serial_port *port)
+@@ -170,8 +170,8 @@ __initcall(cpufreq_gov_performance_init);
+ /*
+  * cpufreq powersave governor
+  */
+-static int cpufreq_governor_powersave(struct cpufreq_policy *policy,
+-                                      unsigned int event)
++static int cf_check cpufreq_governor_powersave(
++    struct cpufreq_policy *policy, unsigned int event)
  {
-     struct ehci_dbgp *dbgp = port->uart;
+     int ret = 0;
  
-@@ -1228,7 +1230,7 @@ static int ehci_dbgp_tx_ready(struct serial_port *port)
-            (dbgp->state == dbgp_idle) * DBGP_MAX_PACKET;
- }
- 
--static int ehci_dbgp_getc(struct serial_port *port, char *pc)
-+static int cf_check ehci_dbgp_getc(struct serial_port *port, char *pc)
- {
-     struct ehci_dbgp *dbgp = port->uart;
- 
-@@ -1309,7 +1311,7 @@ static bool_t ehci_dbgp_setup_preirq(struct ehci_dbgp *dbgp)
-     return 0;
- }
- 
--static void __init ehci_dbgp_init_preirq(struct serial_port *port)
-+static void __init cf_check ehci_dbgp_init_preirq(struct serial_port *port)
- {
-     struct ehci_dbgp *dbgp = port->uart;
-     u32 debug_port, offset;
-@@ -1358,7 +1360,7 @@ static void ehci_dbgp_setup_postirq(struct ehci_dbgp *dbgp)
-     set_timer(&dbgp->timer, NOW() + MILLISECS(1));
- }
- 
--static void __init ehci_dbgp_init_postirq(struct serial_port *port)
-+static void __init cf_check ehci_dbgp_init_postirq(struct serial_port *port)
- {
-     struct ehci_dbgp *dbgp = port->uart;
- 
-@@ -1409,12 +1411,12 @@ static int ehci_dbgp_check_release(struct ehci_dbgp *dbgp)
-     return 0;
- }
- 
--static void __init ehci_dbgp_endboot(struct serial_port *port)
-+static void __init cf_check ehci_dbgp_endboot(struct serial_port *port)
- {
-     ehci_dbgp_check_release(port->uart);
- }
- 
--static void ehci_dbgp_suspend(struct serial_port *port)
-+static void cf_check ehci_dbgp_suspend(struct serial_port *port)
- {
-     struct ehci_dbgp *dbgp = port->uart;
- 
-@@ -1431,7 +1433,7 @@ static void ehci_dbgp_suspend(struct serial_port *port)
-     dbgp->state = dbgp_unsafe;
- }
- 
--static void ehci_dbgp_resume(struct serial_port *port)
-+static void cf_check ehci_dbgp_resume(struct serial_port *port)
- {
-     struct ehci_dbgp *dbgp = port->uart;
- 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 990cad39fe85..8df1ee4d5c2c 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -174,7 +174,7 @@ static void handle_dw_usr_busy_quirk(struct ns16550 *uart)
-     }
- }
- 
--static void ns16550_interrupt(
-+static void cf_check ns16550_interrupt(
-     int irq, void *dev_id, struct cpu_user_regs *regs)
- {
-     struct serial_port *port = dev_id;
-@@ -239,7 +239,7 @@ static void cf_check ns16550_poll(void *data)
- #endif
- }
- 
--static int ns16550_tx_ready(struct serial_port *port)
-+static int cf_check ns16550_tx_ready(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
- 
-@@ -250,13 +250,13 @@ static int ns16550_tx_ready(struct serial_port *port)
-               uart->lsr_mask ) == uart->lsr_mask ) ? uart->fifo_size : 0;
- }
- 
--static void ns16550_putc(struct serial_port *port, char c)
-+static void cf_check ns16550_putc(struct serial_port *port, char c)
- {
-     struct ns16550 *uart = port->uart;
-     ns_write_reg(uart, UART_THR, c);
- }
- 
--static int ns16550_getc(struct serial_port *port, char *pc)
-+static int cf_check ns16550_getc(struct serial_port *port, char *pc)
- {
-     struct ns16550 *uart = port->uart;
- 
-@@ -344,7 +344,7 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
-                  UART_FCR_ENABLE | UART_FCR_CLRX | UART_FCR_CLTX | UART_FCR_TRG14);
- }
- 
--static void __init ns16550_init_preirq(struct serial_port *port)
-+static void __init cf_check ns16550_init_preirq(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
- 
-@@ -373,7 +373,7 @@ static void __init ns16550_init_preirq(struct serial_port *port)
-         uart->fifo_size = 16;
- }
- 
--static void __init ns16550_init_irq(struct serial_port *port)
-+static void __init cf_check ns16550_init_irq(struct serial_port *port)
- {
- #ifdef NS16550_PCI
-     struct ns16550 *uart = port->uart;
-@@ -399,7 +399,7 @@ static void ns16550_setup_postirq(struct ns16550 *uart)
-         set_timer(&uart->timer, NOW() + MILLISECS(uart->timeout_ms));
- }
- 
--static void __init ns16550_init_postirq(struct serial_port *port)
-+static void __init cf_check ns16550_init_postirq(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
-     int rc, bits;
-@@ -491,7 +491,7 @@ static void __init ns16550_init_postirq(struct serial_port *port)
-     ns16550_setup_postirq(uart);
- }
- 
--static void ns16550_suspend(struct serial_port *port)
-+static void cf_check ns16550_suspend(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
- 
-@@ -543,7 +543,7 @@ static void cf_check ns16550_delayed_resume(void *data)
-         _ns16550_resume(port);
- }
- 
--static void ns16550_resume(struct serial_port *port)
-+static void cf_check ns16550_resume(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
- 
-@@ -569,7 +569,7 @@ static void ns16550_resume(struct serial_port *port)
-         _ns16550_resume(port);
- }
- 
--static void __init ns16550_endboot(struct serial_port *port)
-+static void __init cf_check ns16550_endboot(struct serial_port *port)
- {
- #ifdef CONFIG_HAS_IOPORTS
-     struct ns16550 *uart = port->uart;
-@@ -583,13 +583,13 @@ static void __init ns16550_endboot(struct serial_port *port)
- #endif
- }
- 
--static int __init ns16550_irq(struct serial_port *port)
-+static int __init cf_check ns16550_irq(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
-     return ((uart->irq > 0) ? uart->irq : -1);
- }
- 
--static void ns16550_start_tx(struct serial_port *port)
-+static void cf_check ns16550_start_tx(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
-     u8 ier = ns_read_reg(uart, UART_IER);
-@@ -599,7 +599,7 @@ static void ns16550_start_tx(struct serial_port *port)
-         ns_write_reg(uart, UART_IER, ier | UART_IER_ETHREI);
- }
- 
--static void ns16550_stop_tx(struct serial_port *port)
-+static void cf_check ns16550_stop_tx(struct serial_port *port)
- {
-     struct ns16550 *uart = port->uart;
-     u8 ier = ns_read_reg(uart, UART_IER);
 -- 
 2.11.0
 
