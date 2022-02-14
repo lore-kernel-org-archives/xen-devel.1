@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90FF1C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:18:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.272051.466852 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D87AAC433FE
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:18:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.272055.466863 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbEs-0003V0-4j; Mon, 14 Feb 2022 13:17:58 +0000
+	id 1nJbEu-0003xt-C8; Mon, 14 Feb 2022 13:18:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 272051.466852; Mon, 14 Feb 2022 13:17:58 +0000
+Received: by outflank-mailman (output) from mailman id 272055.466863; Mon, 14 Feb 2022 13:18:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbEr-0003UY-UI; Mon, 14 Feb 2022 13:17:57 +0000
-Received: by outflank-mailman (input) for mailman id 272051;
- Mon, 14 Feb 2022 13:17:56 +0000
+	id 1nJbEu-0003xZ-7a; Mon, 14 Feb 2022 13:18:00 +0000
+Received: by outflank-mailman (input) for mailman id 272055;
+ Mon, 14 Feb 2022 13:17:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb4m-00023t-9Y
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:07:32 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 0f868522-8d97-11ec-b215-9bbe72dcb22c;
- Mon, 14 Feb 2022 14:07:30 +0100 (CET)
+ id 1nJb3o-00023t-R9
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:32 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ec7c1354-8d96-11ec-b215-9bbe72dcb22c;
+ Mon, 14 Feb 2022 14:06:30 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,251 +38,225 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0f868522-8d97-11ec-b215-9bbe72dcb22c
+X-Inumbo-ID: ec7c1354-8d96-11ec-b215-9bbe72dcb22c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644844050;
+  d=citrix.com; s=securemail; t=1644843991;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=s+Jt3kVFT6FeqRAFMyblKx1FZnX0D4ErdxbQ4UUEYAQ=;
-  b=VHarnlgKoEuz+T/DcNbffAC3R15cP7vxCHcVh7ZMZzg9D1UNXKbnYH2Z
-   DMPp3d4KVFy7W+nCbPf/kl1k5p2qmF5tq5Z0zQrXIvrLrwu4z2lExFH9R
-   RyFz497djkvC/QkT44p/z+M1JsJ2MBxvBesfvZhBqmL3mXF77BF7LGO2h
-   Q=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: sOXmjbQ9kP//HyRdi956wfUOuNX9Kjm/Wd+sZjKDp0SuqOAg0z0HsOt9ixom5wnyM8vkYkojxm
- bg1bRlH/iLWZwTl44lZzjUIM6HaSSyZtddniFaqScqOJ9q+pS0zonjOqRsxGmGyOOy/aNSFPgP
- vkIB70wKB6zyczGx+P3uqUU9k7EqyhxP16qRJ8HTuNYx7Rvp5TEgL0YWP4vl0PpalA09LiA4Lo
- eLtdmwn/rHgPR2gbceQ3xtzVZUEwAGn9ydpe/7O2873JfJRWjA+1r7aBT04ziTi8XziETD20BK
- E4+Fl/YUTZEBoeFHBoN22mqm
+   references:mime-version:content-transfer-encoding;
+  bh=Fi1axB5uLDN6sum8D3QAzPbry9w69HfPZE5bf+cwyeI=;
+  b=PQQq7X46NRbXGvmVSBPosFHLgyw90NQKIivGXJkLPESi1dKWbHlOsYuO
+   Ut7xsWEMdh/okBNM+wT8/klBZBIVkiS2MYur/JvsRLiSaAuS2bAWC9HhH
+   +ybA+W3OZ4fCcHej6awBoIOEIb3T74M4qlNluPnOlGH3N5v6wJtMahQEI
+   I=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: QN9REi7sea3NQjbnfqcCbTAgxLnQRXYY7nAJdw3CZLM2hEi06ARdRAbUibAOeWSUqe7/XDV3pH
+ vqpyXkGofxjgc+6Y6lMZfrTB9dhuq1YqbFxAGpfmpJnOsv1HFwVJZ4S0ZBgfjYxZ14XyM6H/dz
+ Hr/WHjh4kGddGmmpwhxMlEZ8SZ+X2mfRGJvysY5ZS+W8IKLDA2xprjL6iZU8eOjNAsB3Q9zBus
+ 2qzEUPciw2yKqK1+mweDSqkr1AkSI+tdxgDN9JKVGiLWt/5nFS5aWNY3AE/06RzuNoRpDjk1sZ
+ 2apg6rjJs6nTsXaJueJHjUkK
 X-SBRS: 5.1
-X-MesageID: 64554519
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 64149496
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:758jf61bnZxSwly59/bD5cp2kn2cJEfYwER7XKvMYLTBsI5bpzdSz
- mBJXTzVbP6JYWOhc951OYvjoUwC6pHTnNBjSAU6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+IronPort-Data: A9a23:g4kxga3gJS4tdbjDWvbD5ex2kn2cJEfYwER7XKvMYLTBsI5bpzFVm
+ jBMCj3QaancYDCmfYp3Oouw9BwO65WHmNNhHAs6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
  Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o5wrJh2+aEvPDia++zk
  YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhktBD7
- vlHt5OJGAIQMP3939Y/CyBzHHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u2p0TQauHN
- qL1bxJrYjXlYhB1fW1PBY8Ykd6xt36nfi9h/Qf9Sa0fvDGIkV0ZPKLWGMrYfJmGSNtYmm6cp
- 3na5CLpDxcCLtudxDGZtHW2iYfycTjTAdxIUufir7gz3QPVljd75AAquUWTrPmLrGK0Wd1me
- kkt9Hof6poQrHWAQYyoN/Gnm0KsshkZUttWNuQ17gCR16bZizqk6ng4oi1pM4J/6pJvLdA+/
- hrQxo6yW2Qz2FGAYS/Frt+pQSWO1T/5xIPoTQsNVkM77tbqu+nfZTqfH484QMZZYjAYcAwcI
- gxmTgBj3d3/buZRjs1XGGwrZBr2+PD0ovYdvFm/Y45cxloRiHSZT4Kp80PHyv1LMZyUSFKM1
- FBdxZTCs7BeUMzVzXfXKAnoIF1Oz6zbWAAwfHY1R8Vxn9hT0yLLkX9sDMFWex4yb5dslc7Ba
- 07PowJBjKK/z1PxBZKbl7mZUpxwpYC5TIyNfqmNMrJmP8ggHCfarXoGTRPBgAjQfL0EzPhX1
- WGzKp33Ux73yM1PkVKLegvq+eF3mH5unz6PLX05pjz+uYejiLeuYe9tGDOzgioRtfvYyOkM2
- 9oAZcaM1TtFV+jyPnve/YIJdAhYJnknH5Hm7cdQc7fbcAZhHWggDd7XwK8gJNM5z/gEyL+Q8
- yHvQFJcxXr+mWbDdVeAZEd8Ze69Rp14t386Y3AhZA76x3g5bI+zx64DbJ9rL6I//eluwKcsH
- fkIcsmNGNpVTTHD92hPZJXxttU6Jh+qmRiPL2yuZz1mJ8xsQAnA+9nFeArz9XZRUnrr5JVm+
- 7D5j1HVW5sOQQhmHf36UvP3wgPjp2UZlcJzQ1DMfotZdnLz/dU4MCf2lPI2fZ0BcE2R2juA2
- g+KKh4Evu2R8ZQt+dzEiK3Y/YekF+xyQhhTE2XBtOvkMCDb+iyowJNaUfbOdjfYDTum9KKnb
- ORT7vf9LPxYwwoa79siS+5mnfAk+t/ih75G1QA1TnzEYmOiBq5kPnTbj9JEsbdAx+MBtAa7M
- q5VFgK25Vld1BvZLWMs
-IronPort-HdrOrdr: A9a23:y/CNiai7vN8Zi7SlCLHi2MtuB3BQXtgji2hC6mlwRA09TySZ//
- rBoB17726MtN9/YhEdcLy7VJVoBEmskKKdgrNhW4tKPjOW21dARbsKheCJrgEIWReOktK1vZ
- 0QFJSWY+eQMbEVt6nHCXGDYrQd/OU=
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhuPBB5
+ tVxrpCMURYWAa7et8MQVz1RHHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u2pkSTKqPO
+ aL1bxJJURfFTScXIG0TJ7Aj28GugX3zV2FH/Qf9Sa0fvDGIkV0ZPKLWGMXRUsyHQ4NShEnwj
+ kDs8nn9AxoaHMeC0jfD+XWp7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWZj5EA
+ xVKoGx09/F0rRH1CImmN/GlnJKaljk8a/RQL/Y21Bmc9ZXX8Sm+C2wgRzEUPbTKq/QKbTAt0
+ 1aImfbgCjpurKCZRBqhy1uEkd+hEXNLdDFfPEfoWSNAuoC++99r0nojW/4+SPbdszHjJd3nL
+ 9lmRgAajq5bs8ME3r7TEbvv02P1/cihouLYC2zqsoOZAuFROdTNi2+AswGzARN8wGGxFAfpg
+ ZT8s5LChN3i9LnU/MB3fM0DHauy+9GOOyDGjFhkEvEJrmrxpyHzLd0NuGglfi+F1/ronhezP
+ ifuVf55vscPbBNGk4crC25ONyja5fe5Tom0PhwlRtFPfoJwZGe6ENJGPiatM5TWuBF0y8kXY
+ M7DGe71VCpyIfk3nVKeGrZGuZd2l39W+I8mbc2ip/hR+eHFPyD9pHZsGAbmU93VG4va/FSLo
+ 44HbZPiJtc2eLSWXxQ7OLU7dTgiRUXXz7iqwyCOXuLccAdgBk87DPrdneEod4B/xvwHnebU5
+ HCtHERfzQOn13HALAyLbFFlaa/uAskj/S5qY3R0MAb6wWUnbKau8LwbK8k9c444+bEx1vVzV
+ fQEJZmNW6wdVjTd9j0BRpDht4g+Jg+zjAeDMnP9MjgydpJtXSLT/drgcle9/SUCFHPv58A/v
+ 6ehxkXQRp9aH1ZuC8PfafSOyVKtvCdCxLIuDhWQetQKIRfi6olnLSD1n8QbGcBUJEWR3Cae2
+ iaXHQwc+bvHrbgq/YSbnquDtYqoTbdzRxIIA2nB4L+qHiDG5W7/k5RYWeOFcD2BBmP5/KKuO
+ bdcw/3maaBVmV9Lt8x3EqpxzLJ47Nzq/ucIwgNhFXTNTlKqFrI/fSXWgZgR7vVAlu1DpA+7e
+ kOT4d0La7yGNfTsHEMVOAd4PP+I0usZm2WK4Pk4SKkgCPSbIFZTvZ1uAiSx
+IronPort-HdrOrdr: A9a23:6y10gKrvUIhlEuZ8Jo6yMIkaV5opeYIsimQD101hICG8cqSj+f
+ xG/c5rrCMc5wxwZJhNo7y90ey7MBbhHP1OkO8s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpM
+ BdmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64554519"
+   d="scan'208";a="64149496"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 21/70] xen/evtchn: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:38 +0000
-Message-ID: <20220214125127.17985-22-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 70/70] x86: Enable CET Indirect Branch Tracking
+Date: Mon, 14 Feb 2022 12:51:27 +0000
+Message-ID: <20220214125127.17985-71-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Control Flow Integrity schemes use toolchain and optionally hardware support
-to help protect against call/jump/return oriented programming attacks.
+With all the pieces now in place, turn CET-IBT on when available.
 
-Use cf_check to annotate function pointer targets for the toolchain.
+MSR_S_CET, like SMEP/SMAP, controls Ring1 meaning that ENDBR_EN can't be
+enabled for Xen independently of PV32 kernels.  As we already disable PV32 for
+CET-SS, extend this to all CET, adjusting the documentation/comments as
+appropriate.
+
+Introduce a cet=no-ibt command line option to allow the admin to disable IBT
+even when everything else is configured correctly.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/common/event_2l.c      | 21 ++++++++++++---------
- xen/common/event_channel.c |  3 ++-
- xen/common/event_fifo.c    | 30 ++++++++++++++++--------------
- 3 files changed, 30 insertions(+), 24 deletions(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-diff --git a/xen/common/event_2l.c b/xen/common/event_2l.c
-index 7424320e525a..d40dd51ab555 100644
---- a/xen/common/event_2l.c
-+++ b/xen/common/event_2l.c
-@@ -16,7 +16,8 @@
+v2:
+ * Rebase over change to UEFI RS handling
+---
+ docs/misc/xen-command-line.pandoc | 16 +++++++++++----
+ xen/arch/x86/cpu/common.c         |  1 +
+ xen/arch/x86/setup.c              | 42 ++++++++++++++++++++++++++++++++++-----
+ 3 files changed, 50 insertions(+), 9 deletions(-)
+
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 1ca817f5e1b9..92891a856971 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -271,7 +271,7 @@ enough. Setting this to a high value may cause boot failure, particularly if
+ the NMI watchdog is also enabled.
  
- #include <asm/guest_atomics.h>
+ ### cet
+-    = List of [ shstk=<bool> ]
++    = List of [ shstk=<bool>, ibt=<bool> ]
  
--static void evtchn_2l_set_pending(struct vcpu *v, struct evtchn *evtchn)
-+static void cf_check evtchn_2l_set_pending(
-+    struct vcpu *v, struct evtchn *evtchn)
+     Applicability: x86
+ 
+@@ -279,6 +279,10 @@ Controls for the use of Control-flow Enforcement Technology.  CET is group a
+ of hardware features designed to combat Return-oriented Programming (ROP, also
+ call/jmp COP/JOP) attacks.
+ 
++CET is incompatible with 32bit PV guests.  If any CET sub-options are active,
++they will override the `pv=32` boolean to `false`.  Backwards compatibility
++can be maintained with the pv-shim mechanism.
++
+ *   The `shstk=` boolean controls whether Xen uses Shadow Stacks for its own
+     protection.
+ 
+@@ -287,9 +291,13 @@ call/jmp COP/JOP) attacks.
+     `cet=no-shstk` will cause Xen not to use Shadow Stacks even when support
+     is available in hardware.
+ 
+-    Shadow Stacks are incompatible with 32bit PV guests.  This option will
+-    override the `pv=32` boolean to false.  Backwards compatibility can be
+-    maintained with the `pv-shim` mechanism.
++*   The `ibt=` boolean controls whether Xen uses Indirect Branch Tracking for
++    its own protection.
++
++    The option is available when `CONFIG_XEN_IBT` is compiled in, and defaults
++    to `true` on hardware supporting CET-IBT.  Specifying `cet=no-ibt` will
++    cause Xen not to use Indirect Branch Tracking even when support is
++    available in hardware.
+ 
+ ### clocksource (x86)
+ > `= pit | hpet | acpi | tsc`
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 6b674bf15e8b..bfb8cf9f100b 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -345,6 +345,7 @@ void __init early_cpu_init(void)
+ 	if (c->cpuid_level >= 7) {
+ 		cpuid_count(7, 0, &eax, &ebx, &ecx, &edx);
+ 		c->x86_capability[cpufeat_word(X86_FEATURE_CET_SS)] = ecx;
++		c->x86_capability[cpufeat_word(X86_FEATURE_CET_IBT)] = edx;
+ 	}
+ 
+ 	eax = cpuid_eax(0x80000000);
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index f6a59d5f0412..f5449c972825 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -102,6 +102,12 @@ static bool __initdata opt_xen_shstk = true;
+ #define opt_xen_shstk false
+ #endif
+ 
++#ifdef CONFIG_XEN_IBT
++static bool __initdata opt_xen_ibt = true;
++#else
++#define opt_xen_ibt false
++#endif
++
+ static int __init cf_check parse_cet(const char *s)
  {
-     struct domain *d = v->domain;
-     unsigned int port = evtchn->port;
-@@ -41,12 +42,14 @@ static void evtchn_2l_set_pending(struct vcpu *v, struct evtchn *evtchn)
-     evtchn_check_pollers(d, port);
- }
+     const char *ss;
+@@ -120,6 +126,14 @@ static int __init cf_check parse_cet(const char *s)
+             no_config_param("XEN_SHSTK", "cet", s, ss);
+ #endif
+         }
++        else if ( (val = parse_boolean("ibt", s, ss)) >= 0 )
++        {
++#ifdef CONFIG_XEN_IBT
++            opt_xen_ibt = val;
++#else
++            no_config_param("XEN_IBT", "cet", s, ss);
++#endif
++        }
+         else
+             rc = -EINVAL;
  
--static void evtchn_2l_clear_pending(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_2l_clear_pending(
-+    struct domain *d, struct evtchn *evtchn)
- {
-     guest_clear_bit(d, evtchn->port, &shared_info(d, evtchn_pending));
- }
+@@ -1118,11 +1132,33 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+         printk("Enabling Supervisor Shadow Stacks\n");
  
--static void evtchn_2l_unmask(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_2l_unmask(
-+    struct domain *d, struct evtchn *evtchn)
- {
-     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
-     unsigned int port = evtchn->port;
-@@ -64,8 +67,8 @@ static void evtchn_2l_unmask(struct domain *d, struct evtchn *evtchn)
+         setup_force_cpu_cap(X86_FEATURE_XEN_SHSTK);
++    }
++
++    if ( opt_xen_ibt && boot_cpu_has(X86_FEATURE_CET_IBT) )
++    {
++        printk("Enabling Indirect Branch Tracking\n");
++
++        setup_force_cpu_cap(X86_FEATURE_XEN_IBT);
++
++        if ( efi_enabled(EFI_RS) )
++            printk("  - IBT disabled in UEFI Runtime Services\n");
++
++        /*
++         * Enable IBT now.  Only require the endbr64 on callees, which is
++         * entirely build-time arrangements.
++         */
++        wrmsrl(MSR_S_CET, CET_ENDBR_EN);
++    }
++
++    if ( cpu_has_xen_shstk || cpu_has_xen_ibt )
++    {
++        set_in_cr4(X86_CR4_CET);
++
+ #ifdef CONFIG_PV32
+         if ( opt_pv32 )
+         {
+             opt_pv32 = 0;
+-            printk("  - Disabling PV32 due to Shadow Stacks\n");
++            printk("  - Disabling PV32 due to CET\n");
+         }
+ #endif
      }
- }
+@@ -1849,10 +1885,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
  
--static bool evtchn_2l_is_pending(const struct domain *d,
--                                 const struct evtchn *evtchn)
-+static bool cf_check evtchn_2l_is_pending(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     evtchn_port_t port = evtchn->port;
-     unsigned int max_ports = BITS_PER_EVTCHN_WORD(d) * BITS_PER_EVTCHN_WORD(d);
-@@ -75,8 +78,8 @@ static bool evtchn_2l_is_pending(const struct domain *d,
-             guest_test_bit(d, port, &shared_info(d, evtchn_pending)));
- }
+     alternative_branches();
  
--static bool evtchn_2l_is_masked(const struct domain *d,
--                                const struct evtchn *evtchn)
-+static bool cf_check evtchn_2l_is_masked(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     evtchn_port_t port = evtchn->port;
-     unsigned int max_ports = BITS_PER_EVTCHN_WORD(d) * BITS_PER_EVTCHN_WORD(d);
-@@ -86,8 +89,8 @@ static bool evtchn_2l_is_masked(const struct domain *d,
-             guest_test_bit(d, port, &shared_info(d, evtchn_mask)));
- }
- 
--static void evtchn_2l_print_state(struct domain *d,
--                                  const struct evtchn *evtchn)
-+static void cf_check evtchn_2l_print_state(
-+    struct domain *d, const struct evtchn *evtchn)
- {
-     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
- 
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index 2026bc30dc95..183e78ac17f1 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -99,7 +99,8 @@ static xen_event_channel_notification_t __read_mostly
-     xen_consumers[NR_XEN_CONSUMERS];
- 
- /* Default notification action: wake up from wait_on_xen_event_channel(). */
--static void default_xen_notification_fn(struct vcpu *v, unsigned int port)
-+static void cf_check default_xen_notification_fn(
-+    struct vcpu *v, unsigned int port)
- {
-     /* Consumer needs notification only if blocked. */
-     if ( test_and_clear_bit(_VPF_blocked_in_xen, &v->pause_flags) )
-diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
-index 2fb01b82db84..ed4d3beb10f3 100644
---- a/xen/common/event_fifo.c
-+++ b/xen/common/event_fifo.c
-@@ -78,7 +78,7 @@ static inline event_word_t *evtchn_fifo_word_from_port(const struct domain *d,
-     return d->evtchn_fifo->event_array[p] + w;
- }
- 
--static void evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
- {
-     event_word_t *word;
- 
-@@ -158,7 +158,8 @@ static bool_t evtchn_fifo_set_link(struct domain *d, event_word_t *word,
-     return 1;
- }
- 
--static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_set_pending(
-+    struct vcpu *v, struct evtchn *evtchn)
- {
-     struct domain *d = v->domain;
-     unsigned int port;
-@@ -317,7 +318,8 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
-         evtchn_check_pollers(d, port);
- }
- 
--static void evtchn_fifo_clear_pending(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_clear_pending(
-+    struct domain *d, struct evtchn *evtchn)
- {
-     event_word_t *word;
- 
-@@ -334,7 +336,7 @@ static void evtchn_fifo_clear_pending(struct domain *d, struct evtchn *evtchn)
-     guest_clear_bit(d, EVTCHN_FIFO_PENDING, word);
- }
- 
--static void evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
- {
-     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
-     event_word_t *word;
-@@ -350,32 +352,32 @@ static void evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
-         evtchn_fifo_set_pending(v, evtchn);
- }
- 
--static bool evtchn_fifo_is_pending(const struct domain *d,
--                                   const struct evtchn *evtchn)
-+static bool cf_check evtchn_fifo_is_pending(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
- 
-     return word && guest_test_bit(d, EVTCHN_FIFO_PENDING, word);
- }
- 
--static bool_t evtchn_fifo_is_masked(const struct domain *d,
--                                    const struct evtchn *evtchn)
-+static bool cf_check evtchn_fifo_is_masked(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
- 
-     return !word || guest_test_bit(d, EVTCHN_FIFO_MASKED, word);
- }
- 
--static bool_t evtchn_fifo_is_busy(const struct domain *d,
--                                  const struct evtchn *evtchn)
-+static bool cf_check evtchn_fifo_is_busy(
-+    const struct domain *d, const struct evtchn *evtchn)
- {
-     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
- 
-     return word && guest_test_bit(d, EVTCHN_FIFO_LINKED, word);
- }
- 
--static int evtchn_fifo_set_priority(struct domain *d, struct evtchn *evtchn,
--                                    unsigned int priority)
-+static int cf_check evtchn_fifo_set_priority(
-+    struct domain *d, struct evtchn *evtchn, unsigned int priority)
- {
-     if ( priority > EVTCHN_FIFO_PRIORITY_MIN )
-         return -EINVAL;
-@@ -390,8 +392,8 @@ static int evtchn_fifo_set_priority(struct domain *d, struct evtchn *evtchn,
-     return 0;
- }
- 
--static void evtchn_fifo_print_state(struct domain *d,
--                                    const struct evtchn *evtchn)
-+static void cf_check evtchn_fifo_print_state(
-+    struct domain *d, const struct evtchn *evtchn)
- {
-     event_word_t *word;
- 
+-    /* Defer CR4.CET until alternatives have finished playing with CR0.WP */
+-    if ( cpu_has_xen_shstk )
+-        set_in_cr4(X86_CR4_CET);
+-
+     /*
+      * NB: when running as a PV shim VCPUOP_up/down is wired to the shim
+      * physical cpu_add/remove functions, so launch the guest with only
 -- 
 2.11.0
 
