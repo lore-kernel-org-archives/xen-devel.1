@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 963BFC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:05:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271646.466225 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1007C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:05:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271648.466246 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb2F-0001LL-5C; Mon, 14 Feb 2022 13:04:55 +0000
+	id 1nJb2K-00027b-AA; Mon, 14 Feb 2022 13:05:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271646.466225; Mon, 14 Feb 2022 13:04:55 +0000
+Received: by outflank-mailman (output) from mailman id 271648.466246; Mon, 14 Feb 2022 13:05:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb2F-0001L9-1C; Mon, 14 Feb 2022 13:04:55 +0000
-Received: by outflank-mailman (input) for mailman id 271646;
- Mon, 14 Feb 2022 13:04:53 +0000
+	id 1nJb2K-00027M-5i; Mon, 14 Feb 2022 13:05:00 +0000
+Received: by outflank-mailman (input) for mailman id 271648;
+ Mon, 14 Feb 2022 13:04:59 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb2D-0008IH-7c
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:53 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b1c1c827-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:04:51 +0100 (CET)
+ id 1nJb2I-0008IH-Kj
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:58 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b3f624cb-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:04:56 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1c1c827-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: b3f624cb-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843891;
+  d=citrix.com; s=securemail; t=1644843895;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=DcxCCbUcz9kGC1s+CalTd9n61kMqs4eclO1Ue2UkPFk=;
-  b=ghlbEI80/nXbYYr+FNiOll1AC/zdGWgpk38jVi1VMITYTFvBGhzn2dhi
-   oDN+wWttEVIXY6RYgNf8w+DBGjCP1a+C1iiMB4GQpnW4oigPbtvVwEKeT
-   5Uc8BG16AUuPY6xkGjUTNSz+NyHuwqjtLomk3ikA1kp/wh07TKX/jRBtw
-   8=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: eEZUEZ9Ij573N0JqESrw5UF2ReAltDdmaV5bWfH2TWTP+RGFhmvJ0pOYJQcjDiiG3QQ/G3VvXt
- hEZUlXCwOc9/GjmZn1rx8i7okXz2WSoPYoDH9pLGLCrjVcUy+uawz+PzpHGQJF4c25sMX9oeX9
- h1D8U/ZsotXm45SqFQyYrj+mM/cNBInZHWnRVdVZEIzP80pm+SeHeXyqDl8c7TJpqpRNqseJUD
- riZDR/36Yk8WcmXBGnpPoIYWt3wgwGiO0svAvFurf0ofJWbQQ+pwlCg9R3Y7C3EbF14zljAfQ8
- 82YMjWj9vWwnEagY6TupmSIF
+  bh=pfhdXVvCWz6Fs6X++wjrTNrqVSs3wjv7wmnK/81GecM=;
+  b=ZDay2MKrjN+Mh8oZQyInZNgPP/fl07hSAFxn3vaKgcXWLdoobN5cgFos
+   NSW4Pk6sHvcsQ1yJhiEOUmk8o/EBXoHBA6E5KpspR6+ZyBgX6VGHsDrp7
+   js1nKcEy4deYJLsarswwXYO1xxClfZ5vUkkcQ6oegMD5BqLI39eqEY0r0
+   M=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 5qzbJEgkWLQuuZ6suPdPbZ5i9qx84NCPrBpyP+ktyWo5TRk6cxC2kKzBxd4F3fonV1/HbnAg4+
+ b3a9QZ3hIdKh4rMBvhq0LbJtxDVueOsQXNGE3i8ZY0oefJK7/eimJfDA5VaVDJXuYmIv4pRoeV
+ Zs8Rt5QcOwWEhaCg+zfMT+XqgN04O59X90HD29y2giLls1bd/FlzyKwkmm9FdgDhkT3fLoE4BX
+ X/dQbuaxdcXVsyaTcGqrcfXcoRUTv6N4M2dzkryVWSmdMHTBz2RjfrCdDkQmvM+mGFNPAow96j
+ aa0ejekdB6HgglrhV+trZVYK
 X-SBRS: 5.1
-X-MesageID: 64050489
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 64149320
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:62nNwK8ng0wTRPQQI6j+DrUDn3mTJUtcMsCJ2f8bNWPcYEJGY0x3x
- mYcDT2OMv+NZWr3Kdl0Oouxpk0CuJXQz9dkTgE6rn08E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7Rg3tYx6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhz9
- 41z6beBEj14AYvuse43fDRyPQFXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4SRauGO
- 5pIAdZpRDiaZRcIE1cGM48Rn+aSmnr/SwdkoXvA8MLb5ECMlVcsgdABKuH9atGMAMlYgEucj
- mbH5HjiRAEXMsSFzjiI+W7qgfXA9R4XQ6pLSuf+rKQzxgTOmCpDU3X6SGdXv9G7tRaAB/luc
- HZFxQwMhKIY22GBYPnUCkjQTGG/gjYQXN9ZEusf4Q6Ly7bJ7wvxOlXoXgKte/R96pZoGGVCO
- kuh2oqwWGcx6OH9pWe1q+/MxQ5eLxT5OoPricUsaQIeq+fur4go5v4kZoYySfXl5jEZ9NyZ/
- txrkMTcr+hJ5SLo///ilbwiv95LjsKXJjPZHi2NAgqYAvpRPeZJnbCA51nB9upnJ42EVFSHt
- 3Vss5HAsLxRXcHQyXTUG79l8FSVCxGtamO0vLKSN8N5q2TFF4CLIei8Hw2S1G82a51ZKFcFk
- WfYuB9L5Y87AZdZRfQfXm5FMOxzlfKIPY28Dpj8N4MSCrAsJF7v1Hw/Pia4gjGy+HXAZIliY
- P93h+73Vi1EYUmmpRLrL9ogPUgDmHxgmzOJGMyTItbO+eP2WUN5gIwtaDOmBt3VJovYyOkM2
- 9oAZcaM1TtFV+jyPnve/YIJdAhYJnknH5Hm7cdQc7fbcAZhHWggDd7XwK8gJNM5z/gEyL+Q8
- yHvQFJcxXr+mWbDdVeAZEd8Ze69Rp14t386Y3AhZA76x3g5bI+zx64DbJ9rL6I//eluwKcsH
- fkIcsmNGNpVTTHD92hPZJXxttU6Jh+qmRiPL2yuZz1mJ8xsQAnA+9nFeArz9XZRUnrr5JVm+
- 7D5j1HVW5sOQQhmHf36UvP3wgPjp2UZlcJzQ1DMfotZdnLz/dU4MCf2lPI2fZ0BcE2R2juA2
- g+KKh4Evu2R8ZQt+dzEiK3Y/YekF+xyQhhTE2XBtOvkMCDb+iyowJNaUfbOdjfYDTum9KKnb
- ORT7vf9LPxYwwoa79siS+5mnfAk+t/ih75G1QA1TnzEYmOiBq5kPnTbj9JEsbdAx+MBtAa7M
- q5VFgK25Vld1BvZLWMs
-IronPort-HdrOrdr: A9a23:6uJ/H60XEe0sUYgDeKx0tQqjBLAkLtp133Aq2lEZdPRUGvb3qy
- nOpoVj6faaslYssR0b9exofZPwJE80lqQFh7X5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtsp
- uIGJIeNDSfNzdHZL7BkWuFL+o=
+IronPort-Data: A9a23:ZwFvuqx2U3I+ix/11EZ6t+cowSrEfRIJ4+MujC+fZmUNrF6WrkUBm
+ GsZCGvSP6zfY2ujKYp/bIiw/UJQvJXSy9EyHQdtqiAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wbdl2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt4937
+ 4tOiMXvcyMsIKnPqOMsUh9RSy4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JwXQaeFP
+ ZJxhTxHZRf4PQZMC34sFb0avuD2jHXETABGtwfAzUYwyzeKl1EguFT3C/LFd9rPSchLk0Kwo
+ mPd43+/EhwcLMaYyzeO7jSrnOCnoM/gcNtMTvvirKcs2QDNgDxIYPELabeliaa/rRC9ZosAE
+ WgR5C4tna8D9UqiFtaoCnVUv0W4lhIbXtNRFcgz5weM1rfY7m6lO4QUctJSQId47ZFrHFTGw
+ nfMxoq0XmI37NV5XFrAru/8kN+kBcQCwYbujwcgRBBN3dTsqZpbYvnnHoc6S/7dYjEY9FjNL
+ 9G2QMoW2u97YS0jjfzTEbX7b9WE/Mahc+LNzl+LNl9JFysgDGJfW6Sm6ELA8dFLJ5uDQ1+Ks
+ RAswpbCsL9eXczQzHXWGo3h+Y1FAN7fblXhbaNHRcF9p1xBBVb/FWyv3N2ODBgwaZtVEdMYS
+ ETSpRlQ9Pdu0IiCNsdKj3aKI51yl8DITI29PtiNN4YmSsUhJWevoXA1DWbNjj+FraTZufxmU
+ XttWZ33Vihy5GUO5GfeetrxJpd1mn5glTmOGfgWDX2PiNKjWZJccp9dWHPmUwzzxPrsTNz9/
+ 4kNOs2U5Q9YVeGiMCDb/ZRKdQIBLGQhBICwoMtSL7bRLg1jEWAnKvnQ3bJ+JNA1w/ULzr/Fr
+ iOnR0tV6Fvjnnmbew+EXW9uNeH0VpFloHNlYSF1ZQS022IuaJqE5bsEc8dlZqEu8eFulKYmT
+ /QMd8iaLO5ITzDLp2YUYZXn9dQwfxW3nwOeeSGiZWFnLZJnQgXI/P7ifxfuq3ZSXnbm65Nmr
+ uT5hA3BQJcFSwBzN+rsaaqinwGroHwQuONuRE+UcNNdT1rhrdpxICvrg/5pf8xVcUffxiGX3
+ hq9CAsDobWfuJc89dTEiPzWr4qtFOciTENWE3OCsOSzPCjeuGGi3ZVBQKCDejWEDDH4/6CrZ
+ ON0yfDgMaJYwAYW4tQkS7s7n7gj49bPpqNBylU2FXrGWF2nF7d8LyTUxsJIrKBMmudUtAbet
+ phjITWG1WFl4P/YLWM=
+IronPort-HdrOrdr: A9a23:uR7z8KPttWKn9MBcTsOjsMiBIKoaSvp037Eqv3oedfU1SL3gqy
+ nAppQmPHPP5Ar5HUtQ/OxoW5PwJ080l6QFgrX5VI3KNGKN1VdAbrsSibcKqweQfBEWndQ96U
+ 4PScdD4aXLfDpHsfo=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64050489"
+   d="scan'208";a="64149320"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 48/70] x86/shadow: CFI hardening
-Date: Mon, 14 Feb 2022 12:51:05 +0000
-Message-ID: <20220214125127.17985-49-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 20/70] xen/sched: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:37 +0000
+Message-ID: <20220214125127.17985-21-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -104,488 +104,965 @@ to help protect against call/jump/return oriented programming attacks.
 Use cf_check to annotate function pointer targets for the toolchain.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Dario Faggioli <dfaggioli@suse.com>
 ---
- xen/arch/x86/mm/shadow/common.c  | 11 +++---
- xen/arch/x86/mm/shadow/hvm.c     |  8 ++--
- xen/arch/x86/mm/shadow/multi.c   | 80 ++++++++++++++++++++--------------------
- xen/arch/x86/mm/shadow/multi.h   | 20 +++++-----
- xen/arch/x86/mm/shadow/private.h | 12 +++---
- xen/arch/x86/mm/shadow/pv.c      |  4 +-
- 6 files changed, 67 insertions(+), 68 deletions(-)
+ xen/common/sched/arinc653.c | 20 +++++++--------
+ xen/common/sched/core.c     |  8 +++---
+ xen/common/sched/credit.c   | 49 ++++++++++++++++++------------------
+ xen/common/sched/credit2.c  | 51 +++++++++++++++++++-------------------
+ xen/common/sched/null.c     | 60 +++++++++++++++++++++++----------------------
+ xen/common/sched/rt.c       | 42 +++++++++++++++----------------
+ 6 files changed, 115 insertions(+), 115 deletions(-)
 
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index 071a19adce82..8f111901730f 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -1215,7 +1215,7 @@ void shadow_free(struct domain *d, mfn_t smfn)
-  * This action is irreversible: the p2m mapping only ever grows.
-  * That's OK because the p2m table only exists for translated domains,
-  * and those domains can't ever turn off shadow mode. */
--static struct page_info *
-+static struct page_info *cf_check
- shadow_alloc_p2m_page(struct domain *d)
+diff --git a/xen/common/sched/arinc653.c b/xen/common/sched/arinc653.c
+index 542191822192..a82c0d7314a1 100644
+--- a/xen/common/sched/arinc653.c
++++ b/xen/common/sched/arinc653.c
+@@ -343,7 +343,7 @@ arinc653_sched_get(
+  *                  <li> !0 = error
+  *                  </ul>
+  */
+-static int
++static int cf_check
+ a653sched_init(struct scheduler *ops)
  {
-     struct page_info *pg;
-@@ -1251,7 +1251,7 @@ shadow_alloc_p2m_page(struct domain *d)
-     return pg;
+     a653sched_priv_t *prv;
+@@ -366,7 +366,7 @@ a653sched_init(struct scheduler *ops)
+  *
+  * @param ops       Pointer to this instance of the scheduler structure
+  */
+-static void
++static void cf_check
+ a653sched_deinit(struct scheduler *ops)
+ {
+     xfree(SCHED_PRIV(ops));
+@@ -381,7 +381,7 @@ a653sched_deinit(struct scheduler *ops)
+  *
+  * @return          Pointer to the allocated data
+  */
+-static void *
++static void *cf_check
+ a653sched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+                       void *dd)
+ {
+@@ -442,7 +442,7 @@ a653sched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+  *
+  * @param ops       Pointer to this instance of the scheduler structure
+  */
+-static void
++static void cf_check
+ a653sched_free_udata(const struct scheduler *ops, void *priv)
+ {
+     a653sched_priv_t *sched_priv = SCHED_PRIV(ops);
+@@ -469,7 +469,7 @@ a653sched_free_udata(const struct scheduler *ops, void *priv)
+  * @param ops       Pointer to this instance of the scheduler structure
+  * @param unit      Pointer to struct sched_unit
+  */
+-static void
++static void cf_check
+ a653sched_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     if ( AUNIT(unit) != NULL )
+@@ -489,7 +489,7 @@ a653sched_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+  * @param ops       Pointer to this instance of the scheduler structure
+  * @param unit      Pointer to struct sched_unit
+  */
+-static void
++static void cf_check
+ a653sched_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     if ( AUNIT(unit) != NULL )
+@@ -505,7 +505,7 @@ a653sched_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+  * @param ops       Pointer to this instance of the scheduler structure
+  * @param now       Current time
+  */
+-static void
++static void cf_check
+ a653sched_do_schedule(
+     const struct scheduler *ops,
+     struct sched_unit *prev,
+@@ -604,7 +604,7 @@ a653sched_do_schedule(
+  *
+  * @return          Scheduler resource to run on
+  */
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ a653sched_pick_resource(const struct scheduler *ops,
+                         const struct sched_unit *unit)
+ {
+@@ -634,7 +634,7 @@ a653sched_pick_resource(const struct scheduler *ops,
+  * @param pdata     scheduler specific PCPU data (we don't have any)
+  * @param vdata     scheduler specific UNIT data of the idle unit
+  */
+-static spinlock_t *
++static spinlock_t *cf_check
+ a653_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+                   void *pdata, void *vdata)
+ {
+@@ -656,7 +656,7 @@ a653_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+  * @param ops       Pointer to this instance of the scheduler structure
+  * @param sc        Pointer to the scheduler operation specified by Domain 0
+  */
+-static int
++static int cf_check
+ a653sched_adjust_global(const struct scheduler *ops,
+                         struct xen_sysctl_scheduler_op *sc)
+ {
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index b1836b591c0a..9e09d9befa23 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -98,13 +98,13 @@ static bool scheduler_active;
+ static void sched_set_affinity(
+     struct sched_unit *unit, const cpumask_t *hard, const cpumask_t *soft);
+ 
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ sched_idle_res_pick(const struct scheduler *ops, const struct sched_unit *unit)
+ {
+     return unit->res;
+ }
+ 
+-static void *
++static void *cf_check
+ sched_idle_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+                        void *dd)
+ {
+@@ -112,12 +112,12 @@ sched_idle_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+     return ZERO_BLOCK_PTR;
  }
  
 -static void
 +static void cf_check
- shadow_free_p2m_page(struct domain *d, struct page_info *pg)
+ sched_idle_free_udata(const struct scheduler *ops, void *priv)
  {
-     struct domain *owner = page_get_owner(pg);
-@@ -2290,7 +2290,8 @@ void shadow_prepare_page_type_change(struct domain *d, struct page_info *page,
- /* Reset the up-pointers of every L3 shadow to 0.
-  * This is called when l3 shadows stop being pinnable, to clear out all
-  * the list-head bits so the up-pointer field is properly inititalised. */
--static int sh_clear_up_pointer(struct vcpu *v, mfn_t smfn, mfn_t unused)
-+static int cf_check sh_clear_up_pointer(
-+    struct vcpu *v, mfn_t smfn, mfn_t unused)
- {
-     mfn_to_page(smfn)->up = 0;
-     return 0;
-@@ -2490,7 +2491,7 @@ static void sh_update_paging_modes(struct vcpu *v)
-     v->arch.paging.mode->update_cr3(v, 0, false);
  }
  
--void shadow_update_paging_modes(struct vcpu *v)
-+void cf_check shadow_update_paging_modes(struct vcpu *v)
+-static void sched_idle_schedule(
++static void cf_check sched_idle_schedule(
+     const struct scheduler *ops, struct sched_unit *unit, s_time_t now,
+     bool tasklet_work_scheduled)
  {
-     paging_lock(v->domain);
-     sh_update_paging_modes(v);
-@@ -3075,7 +3076,7 @@ static bool flush_vcpu(const struct vcpu *v, const unsigned long *vcpu_bitmap)
+diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
+index 5635271f6fea..4d3bd8cba6fc 100644
+--- a/xen/common/sched/credit.c
++++ b/xen/common/sched/credit.c
+@@ -507,7 +507,7 @@ static inline void __runq_tickle(const struct csched_unit *new)
+         SCHED_STAT_CRANK(tickled_no_cpu);
  }
  
- /* Flush TLB of selected vCPUs.  NULL for all. */
--bool shadow_flush_tlb(const unsigned long *vcpu_bitmap)
-+bool cf_check shadow_flush_tlb(const unsigned long *vcpu_bitmap)
- {
-     static DEFINE_PER_CPU(cpumask_t, flush_cpumask);
-     cpumask_t *mask = &this_cpu(flush_cpumask);
-diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
-index c90d326becb3..27dd99f1a12e 100644
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -794,9 +794,9 @@ sh_remove_all_shadows_and_parents(struct domain *d, mfn_t gmfn)
-      * It means extra emulated writes and slows down removal of mappings. */
- }
- 
--static void sh_unshadow_for_p2m_change(struct domain *d, unsigned long gfn,
--                                       l1_pgentry_t old, l1_pgentry_t new,
--                                       unsigned int level)
-+static void cf_check sh_unshadow_for_p2m_change(
-+    struct domain *d, unsigned long gfn, l1_pgentry_t old, l1_pgentry_t new,
-+    unsigned int level)
- {
-     mfn_t omfn = l1e_get_mfn(old);
-     unsigned int oflags = l1e_get_flags(old);
-@@ -879,7 +879,7 @@ static void sh_unshadow_for_p2m_change(struct domain *d, unsigned long gfn,
- }
- 
- #if (SHADOW_OPTIMIZATIONS & SHOPT_FAST_FAULT_PATH)
 -static void
 +static void cf_check
- sh_write_p2m_entry_post(struct p2m_domain *p2m, unsigned int oflags)
+ csched_free_pdata(const struct scheduler *ops, void *pcpu, int cpu)
  {
-     struct domain *d = p2m->domain;
-diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
-index bddef53163f5..b0b1c31ee033 100644
---- a/xen/arch/x86/mm/shadow/multi.c
-+++ b/xen/arch/x86/mm/shadow/multi.c
-@@ -369,7 +369,7 @@ static void sh_audit_gw(struct vcpu *v, const walk_t *gw)
- 
- #if GUEST_PAGING_LEVELS == 2
- /* From one page of a multi-page shadow, find the next one */
--static inline mfn_t sh_next_page(mfn_t smfn)
-+static inline mfn_t cf_check sh_next_page(mfn_t smfn)
- {
-     struct page_info *pg = mfn_to_page(smfn), *next;
-     struct page_list_head h = PAGE_LIST_HEAD_INIT(h);
-@@ -399,8 +399,7 @@ guest_index(void *ptr)
-     return (u32)((unsigned long)ptr & ~PAGE_MASK) / sizeof(guest_l1e_t);
+     const struct csched_private *prv = CSCHED_PRIV(ops);
+@@ -524,7 +524,7 @@ csched_free_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+     xfree(pcpu);
  }
  
--static u32
--shadow_l1_index(mfn_t *smfn, u32 guest_index)
-+static u32 cf_check shadow_l1_index(mfn_t *smfn, u32 guest_index)
- {
- #if (GUEST_PAGING_LEVELS == 2)
-     ASSERT(mfn_to_page(*smfn)->u.sh.head);
-@@ -412,8 +411,7 @@ shadow_l1_index(mfn_t *smfn, u32 guest_index)
- #endif
- }
- 
--static u32
--shadow_l2_index(mfn_t *smfn, u32 guest_index)
-+static u32 cf_check shadow_l2_index(mfn_t *smfn, u32 guest_index)
- {
- #if (GUEST_PAGING_LEVELS == 2)
-     int i;
-@@ -432,14 +430,12 @@ shadow_l2_index(mfn_t *smfn, u32 guest_index)
- 
- #if GUEST_PAGING_LEVELS >= 4
- 
--static u32
--shadow_l3_index(mfn_t *smfn, u32 guest_index)
-+static u32 cf_check shadow_l3_index(mfn_t *smfn, u32 guest_index)
- {
-     return guest_index;
- }
- 
--static u32
--shadow_l4_index(mfn_t *smfn, u32 guest_index)
-+static u32 cf_check shadow_l4_index(mfn_t *smfn, u32 guest_index)
- {
-     return guest_index;
- }
-@@ -924,7 +920,7 @@ do {                                                                    \
- /**************************************************************************/
- /* Create a shadow of a given guest page.
-  */
--static mfn_t
-+static mfn_t cf_check
- sh_make_shadow(struct vcpu *v, mfn_t gmfn, u32 shadow_type)
- {
-     struct domain *d = v->domain;
-@@ -1459,7 +1455,8 @@ void sh_unhook_64b_mappings(struct domain *d, mfn_t sl4mfn, int user_only)
-  */
- 
- #if GUEST_PAGING_LEVELS >= 4
--static int validate_gl4e(struct vcpu *v, void *new_ge, mfn_t sl4mfn, void *se)
-+static int cf_check validate_gl4e(
-+    struct vcpu *v, void *new_ge, mfn_t sl4mfn, void *se)
- {
-     shadow_l4e_t new_sl4e;
-     guest_l4e_t new_gl4e = *(guest_l4e_t *)new_ge;
-@@ -1518,7 +1515,8 @@ static int validate_gl4e(struct vcpu *v, void *new_ge, mfn_t sl4mfn, void *se)
- }
- 
- 
--static int validate_gl3e(struct vcpu *v, void *new_ge, mfn_t sl3mfn, void *se)
-+static int cf_check validate_gl3e(
-+    struct vcpu *v, void *new_ge, mfn_t sl3mfn, void *se)
- {
-     struct domain *d = v->domain;
-     shadow_l3e_t new_sl3e;
-@@ -1552,7 +1550,8 @@ static int validate_gl3e(struct vcpu *v, void *new_ge, mfn_t sl3mfn, void *se)
- }
- #endif // GUEST_PAGING_LEVELS >= 4
- 
--static int validate_gl2e(struct vcpu *v, void *new_ge, mfn_t sl2mfn, void *se)
-+static int cf_check validate_gl2e(
-+    struct vcpu *v, void *new_ge, mfn_t sl2mfn, void *se)
- {
-     struct domain *d = v->domain;
-     shadow_l2e_t new_sl2e;
-@@ -1599,7 +1598,8 @@ static int validate_gl2e(struct vcpu *v, void *new_ge, mfn_t sl2mfn, void *se)
-     return result;
- }
- 
--static int validate_gl1e(struct vcpu *v, void *new_ge, mfn_t sl1mfn, void *se)
-+static int cf_check validate_gl1e(
-+    struct vcpu *v, void *new_ge, mfn_t sl1mfn, void *se)
- {
-     struct domain *d = v->domain;
-     shadow_l1e_t new_sl1e;
-@@ -2089,8 +2089,8 @@ static DEFINE_PER_CPU(int,trace_extra_emulation_count);
- #endif
- static DEFINE_PER_CPU(guest_pa_t,trace_emulate_write_val);
- 
--static void trace_emulate_write_val(const void *ptr, unsigned long vaddr,
--                                    const void *src, unsigned int bytes)
-+static void cf_check trace_emulate_write_val(
-+    const void *ptr, unsigned long vaddr, const void *src, unsigned int bytes)
- {
- #if GUEST_PAGING_LEVELS == 3
-     if ( vaddr == this_cpu(trace_emulate_initial_va) )
-@@ -2144,9 +2144,8 @@ static inline void trace_shadow_emulate(guest_l1e_t gl1e, unsigned long va)
-  * shadow code (and the guest should retry) or 0 if it is not (and the
-  * fault should be handled elsewhere or passed to the guest). */
- 
--static int sh_page_fault(struct vcpu *v,
--                          unsigned long va,
--                          struct cpu_user_regs *regs)
-+static int cf_check sh_page_fault(
-+    struct vcpu *v, unsigned long va, struct cpu_user_regs *regs)
- {
-     struct domain *d = v->domain;
-     walk_t gw;
-@@ -2898,7 +2897,7 @@ static int sh_page_fault(struct vcpu *v,
-  * instruction should be issued on the hardware, or false if it's safe not
-  * to do so.
-  */
--static bool sh_invlpg(struct vcpu *v, unsigned long linear)
-+static bool cf_check sh_invlpg(struct vcpu *v, unsigned long linear)
- {
-     mfn_t sl1mfn;
-     shadow_l2e_t sl2e;
-@@ -3030,9 +3029,8 @@ static bool sh_invlpg(struct vcpu *v, unsigned long linear)
- 
- #ifdef CONFIG_HVM
- 
--static unsigned long
--sh_gva_to_gfn(struct vcpu *v, struct p2m_domain *p2m,
--    unsigned long va, uint32_t *pfec)
-+static unsigned long cf_check sh_gva_to_gfn(
-+    struct vcpu *v, struct p2m_domain *p2m, unsigned long va, uint32_t *pfec)
- /* Called to translate a guest virtual address to what the *guest*
-  * pagetables would map it to. */
- {
-@@ -3196,8 +3194,7 @@ sh_update_linear_entries(struct vcpu *v)
-  * Removes v->arch.paging.shadow.shadow_table[].
-  * Does all appropriate management/bookkeeping/refcounting/etc...
-  */
 -static void
--sh_detach_old_tables(struct vcpu *v)
-+static void cf_check sh_detach_old_tables(struct vcpu *v)
++static void cf_check
+ csched_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
  {
-     struct domain *d = v->domain;
-     mfn_t smfn;
-@@ -3216,8 +3213,7 @@ sh_detach_old_tables(struct vcpu *v)
+     struct csched_private *prv = CSCHED_PRIV(ops);
+@@ -566,7 +566,7 @@ csched_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+ 
+-static void *
++static void *cf_check
+ csched_alloc_pdata(const struct scheduler *ops, int cpu)
+ {
+     struct csched_pcpu *spc;
+@@ -615,7 +615,7 @@ init_pdata(struct csched_private *prv, struct csched_pcpu *spc, int cpu)
+ }
+ 
+ /* Change the scheduler of cpu to us (Credit). */
+-static spinlock_t *
++static spinlock_t *cf_check
+ csched_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+                     void *pdata, void *vdata)
+ {
+@@ -848,7 +848,7 @@ _csched_cpu_pick(const struct scheduler *ops, const struct sched_unit *unit,
+     return cpu;
+ }
+ 
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ csched_res_pick(const struct scheduler *ops, const struct sched_unit *unit)
+ {
+     struct csched_unit *svc = CSCHED_UNIT(unit);
+@@ -985,9 +985,8 @@ csched_unit_acct(struct csched_private *prv, unsigned int cpu)
+     }
+ }
+ 
+-static void *
+-csched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+-                   void *dd)
++static void *cf_check csched_alloc_udata(
++    const struct scheduler *ops, struct sched_unit *unit, void *dd)
+ {
+     struct csched_unit *svc;
+ 
+@@ -1007,7 +1006,7 @@ csched_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+     return svc;
+ }
+ 
+-static void
++static void cf_check
+ csched_unit_insert(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched_unit *svc = unit->priv;
+@@ -1032,7 +1031,7 @@ csched_unit_insert(const struct scheduler *ops, struct sched_unit *unit)
+     SCHED_STAT_CRANK(unit_insert);
+ }
+ 
+-static void
++static void cf_check
+ csched_free_udata(const struct scheduler *ops, void *priv)
+ {
+     struct csched_unit *svc = priv;
+@@ -1042,7 +1041,7 @@ csched_free_udata(const struct scheduler *ops, void *priv)
+     xfree(svc);
+ }
+ 
+-static void
++static void cf_check
+ csched_unit_remove(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched_private *prv = CSCHED_PRIV(ops);
+@@ -1069,7 +1068,7 @@ csched_unit_remove(const struct scheduler *ops, struct sched_unit *unit)
+     BUG_ON( sdom == NULL );
+ }
+ 
+-static void
++static void cf_check
+ csched_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched_unit * const svc = CSCHED_UNIT(unit);
+@@ -1094,7 +1093,7 @@ csched_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+         runq_remove(svc);
+ }
+ 
+-static void
++static void cf_check
+ csched_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched_unit * const svc = CSCHED_UNIT(unit);
+@@ -1156,7 +1155,7 @@ csched_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+     __runq_tickle(svc);
+ }
+ 
+-static void
++static void cf_check
+ csched_unit_yield(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched_unit * const svc = CSCHED_UNIT(unit);
+@@ -1165,7 +1164,7 @@ csched_unit_yield(const struct scheduler *ops, struct sched_unit *unit)
+     set_bit(CSCHED_FLAG_UNIT_YIELD, &svc->flags);
+ }
+ 
+-static int
++static int cf_check
+ csched_dom_cntl(
+     const struct scheduler *ops,
+     struct domain *d,
+@@ -1210,7 +1209,7 @@ csched_dom_cntl(
+     return rc;
+ }
+ 
+-static void
++static void cf_check
+ csched_aff_cntl(const struct scheduler *ops, struct sched_unit *unit,
+                 const cpumask_t *hard, const cpumask_t *soft)
+ {
+@@ -1238,7 +1237,7 @@ __csched_set_tslice(struct csched_private *prv, unsigned int timeslice_ms)
+     prv->credit = prv->credits_per_tslice * prv->ncpus;
+ }
+ 
+-static int
++static int cf_check
+ csched_sys_cntl(const struct scheduler *ops,
+                         struct xen_sysctl_scheduler_op *sc)
+ {
+@@ -1281,7 +1280,7 @@ csched_sys_cntl(const struct scheduler *ops,
+     return rc;
+ }
+ 
+-static void *
++static void *cf_check
+ csched_alloc_domdata(const struct scheduler *ops, struct domain *dom)
+ {
+     struct csched_dom *sdom;
+@@ -1299,7 +1298,7 @@ csched_alloc_domdata(const struct scheduler *ops, struct domain *dom)
+     return sdom;
+ }
+ 
+-static void
++static void cf_check
+ csched_free_domdata(const struct scheduler *ops, void *data)
+ {
+     xfree(data);
+@@ -1809,7 +1808,7 @@ csched_load_balance(struct csched_private *prv, int cpu,
+  * This function is in the critical path. It is designed to be simple and
+  * fast for the common case.
+  */
+-static void csched_schedule(
++static void cf_check csched_schedule(
+     const struct scheduler *ops, struct sched_unit *unit, s_time_t now,
+     bool tasklet_work_scheduled)
+ {
+@@ -2026,7 +2025,7 @@ csched_dump_unit(const struct csched_unit *svc)
+     printk("\n");
+ }
+ 
+-static void
++static void cf_check
+ csched_dump_pcpu(const struct scheduler *ops, int cpu)
+ {
+     const struct list_head *runq;
+@@ -2079,7 +2078,7 @@ csched_dump_pcpu(const struct scheduler *ops, int cpu)
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+ 
+-static void
++static void cf_check
+ csched_dump(const struct scheduler *ops)
+ {
+     struct list_head *iter_sdom, *iter_svc;
+@@ -2143,7 +2142,7 @@ csched_dump(const struct scheduler *ops)
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+ 
+-static int __init
++static int __init cf_check
+ csched_global_init(void)
+ {
+     if ( sched_credit_tslice_ms > XEN_SYSCTL_CSCHED_TSLICE_MAX ||
+@@ -2173,7 +2172,7 @@ csched_global_init(void)
+     return 0;
+ }
+ 
+-static int
++static int cf_check
+ csched_init(struct scheduler *ops)
+ {
+     struct csched_private *prv;
+@@ -2215,7 +2214,7 @@ csched_init(struct scheduler *ops)
+     return 0;
+ }
+ 
+-static void
++static void cf_check
+ csched_deinit(struct scheduler *ops)
+ {
+     struct csched_private *prv;
+diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+index d96e2749ddfb..0e3f89e5378e 100644
+--- a/xen/common/sched/credit2.c
++++ b/xen/common/sched/credit2.c
+@@ -2164,7 +2164,7 @@ csched2_unit_check(const struct sched_unit *unit)
+ #define CSCHED2_UNIT_CHECK(unit)
+ #endif
+ 
+-static void *
++static void *cf_check
+ csched2_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+                     void *dd)
+ {
+@@ -2208,7 +2208,7 @@ csched2_alloc_udata(const struct scheduler *ops, struct sched_unit *unit,
+     return svc;
+ }
+ 
+-static void
++static void cf_check
+ csched2_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched2_unit * const svc = csched2_unit(unit);
+@@ -2230,7 +2230,7 @@ csched2_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+         __clear_bit(__CSFLAG_delayed_runq_add, &svc->flags);
+ }
+ 
+-static void
++static void cf_check
+ csched2_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched2_unit * const svc = csched2_unit(unit);
+@@ -2285,7 +2285,7 @@ csched2_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+     return;
+ }
+ 
+-static void
++static void cf_check
+ csched2_unit_yield(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched2_unit * const svc = csched2_unit(unit);
+@@ -2293,7 +2293,7 @@ csched2_unit_yield(const struct scheduler *ops, struct sched_unit *unit)
+     __set_bit(__CSFLAG_unit_yield, &svc->flags);
+ }
+ 
+-static void
++static void cf_check
+ csched2_context_saved(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched2_unit * const svc = csched2_unit(unit);
+@@ -2335,7 +2335,7 @@ csched2_context_saved(const struct scheduler *ops, struct sched_unit *unit)
+ }
+ 
+ #define MAX_LOAD (STIME_MAX)
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ csched2_res_pick(const struct scheduler *ops, const struct sched_unit *unit)
+ {
+     struct csched2_private *prv = csched2_priv(ops);
+@@ -2867,8 +2867,7 @@ static void balance_load(const struct scheduler *ops, int cpu, s_time_t now)
+     return;
+ }
+ 
+-static void
+-csched2_unit_migrate(
++static void cf_check csched2_unit_migrate(
+     const struct scheduler *ops, struct sched_unit *unit, unsigned int new_cpu)
+ {
+     struct csched2_unit * const svc = csched2_unit(unit);
+@@ -2894,7 +2893,7 @@ csched2_unit_migrate(
+         sched_set_res(unit, get_sched_res(new_cpu));
+ }
+ 
+-static int
++static int cf_check
+ csched2_dom_cntl(
+     const struct scheduler *ops,
+     struct domain *d,
+@@ -3100,7 +3099,7 @@ csched2_dom_cntl(
+     return rc;
+ }
+ 
+-static void
++static void cf_check
+ csched2_aff_cntl(const struct scheduler *ops, struct sched_unit *unit,
+                  const cpumask_t *hard, const cpumask_t *soft)
+ {
+@@ -3116,8 +3115,8 @@ csched2_aff_cntl(const struct scheduler *ops, struct sched_unit *unit,
+         __clear_bit(__CSFLAG_pinned, &svc->flags);
+ }
+ 
+-static int csched2_sys_cntl(const struct scheduler *ops,
+-                            struct xen_sysctl_scheduler_op *sc)
++static int cf_check csched2_sys_cntl(
++    const struct scheduler *ops, struct xen_sysctl_scheduler_op *sc)
+ {
+     struct xen_sysctl_credit2_schedule *params = &sc->u.sched_credit2;
+     struct csched2_private *prv = csched2_priv(ops);
+@@ -3148,7 +3147,7 @@ static int csched2_sys_cntl(const struct scheduler *ops,
+     return 0;
+ }
+ 
+-static void *
++static void *cf_check
+ csched2_alloc_domdata(const struct scheduler *ops, struct domain *dom)
+ {
+     struct csched2_private *prv = csched2_priv(ops);
+@@ -3180,7 +3179,7 @@ csched2_alloc_domdata(const struct scheduler *ops, struct domain *dom)
+     return sdom;
+ }
+ 
+-static void
++static void cf_check
+ csched2_free_domdata(const struct scheduler *ops, void *data)
+ {
+     struct csched2_dom *sdom = data;
+@@ -3200,7 +3199,7 @@ csched2_free_domdata(const struct scheduler *ops, void *data)
      }
  }
  
 -static void
--sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
-+static void cf_check sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
- /* Updates vcpu->arch.cr3 after the guest has changed CR3.
-  * Paravirtual guests should set v->arch.guest_table (and guest_table_user,
-  * if appropriate).
-@@ -3525,7 +3521,8 @@ int sh_rm_write_access_from_sl1p(struct domain *d, mfn_t gmfn,
- #endif /* OOS */
- 
- #if defined(CONFIG_HVM) && (SHADOW_OPTIMIZATIONS & SHOPT_WRITABLE_HEURISTIC)
--static int sh_guess_wrmap(struct vcpu *v, unsigned long vaddr, mfn_t gmfn)
-+static int cf_check sh_guess_wrmap(
-+    struct vcpu *v, unsigned long vaddr, mfn_t gmfn)
- /* Look up this vaddr in the current shadow and see if it's a writeable
-  * mapping of this gmfn.  If so, remove it.  Returns 1 if it worked. */
++static void cf_check
+ csched2_unit_insert(const struct scheduler *ops, struct sched_unit *unit)
  {
-@@ -3589,8 +3586,8 @@ static int sh_guess_wrmap(struct vcpu *v, unsigned long vaddr, mfn_t gmfn)
- }
- #endif
- 
--int sh_rm_write_access_from_l1(struct domain *d, mfn_t sl1mfn,
--                               mfn_t readonly_mfn)
-+int cf_check sh_rm_write_access_from_l1(
-+    struct domain *d, mfn_t sl1mfn, mfn_t readonly_mfn)
- /* Excises all writeable mappings to readonly_mfn from this l1 shadow table */
- {
-     shadow_l1e_t *sl1e;
-@@ -3626,7 +3623,8 @@ int sh_rm_write_access_from_l1(struct domain *d, mfn_t sl1mfn,
+     const struct csched2_unit *svc = unit->priv;
+@@ -3231,7 +3230,7 @@ csched2_unit_insert(const struct scheduler *ops, struct sched_unit *unit)
+     CSCHED2_UNIT_CHECK(unit);
  }
  
- 
--int sh_rm_mappings_from_l1(struct domain *d, mfn_t sl1mfn, mfn_t target_mfn)
-+int cf_check sh_rm_mappings_from_l1(
-+    struct domain *d, mfn_t sl1mfn, mfn_t target_mfn)
- /* Excises all mappings to guest frame from this shadow l1 table */
+-static void
++static void cf_check
+ csched2_free_udata(const struct scheduler *ops, void *priv)
  {
-     shadow_l1e_t *sl1e;
-@@ -3677,7 +3675,7 @@ void sh_clear_shadow_entry(struct domain *d, void *ep, mfn_t smfn)
+     struct csched2_unit *svc = priv;
+@@ -3239,7 +3238,7 @@ csched2_free_udata(const struct scheduler *ops, void *priv)
+     xfree(svc);
+ }
+ 
+-static void
++static void cf_check
+ csched2_unit_remove(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct csched2_unit * const svc = csched2_unit(unit);
+@@ -3558,7 +3557,7 @@ runq_candidate(struct csched2_runqueue_data *rqd,
+  * This function is in the critical path. It is designed to be simple and
+  * fast for the common case.
+  */
+-static void csched2_schedule(
++static void cf_check csched2_schedule(
+     const struct scheduler *ops, struct sched_unit *currunit, s_time_t now,
+     bool tasklet_work_scheduled)
+ {
+@@ -3790,7 +3789,7 @@ dump_pcpu(const struct scheduler *ops, int cpu)
      }
  }
  
--int sh_remove_l1_shadow(struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn)
-+int cf_check sh_remove_l1_shadow(struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn)
- /* Remove all mappings of this l1 shadow from this l2 shadow */
+-static void
++static void cf_check
+ csched2_dump(const struct scheduler *ops)
  {
-     shadow_l2e_t *sl2e;
-@@ -3700,7 +3698,7 @@ int sh_remove_l1_shadow(struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn)
+     struct list_head *iter_sdom;
+@@ -3898,7 +3897,7 @@ csched2_dump(const struct scheduler *ops)
+     read_unlock_irqrestore(&prv->lock, flags);
  }
  
- #if GUEST_PAGING_LEVELS >= 4
--int sh_remove_l2_shadow(struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn)
-+int cf_check sh_remove_l2_shadow(struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn)
- /* Remove all mappings of this l2 shadow from this l3 shadow */
+-static void *
++static void *cf_check
+ csched2_alloc_pdata(const struct scheduler *ops, int cpu)
  {
-     shadow_l3e_t *sl3e;
-@@ -3722,7 +3720,7 @@ int sh_remove_l2_shadow(struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn)
-     return done;
+     struct csched2_pcpu *spc;
+@@ -3988,7 +3987,7 @@ init_pdata(struct csched2_private *prv, struct csched2_pcpu *spc,
  }
  
--int sh_remove_l3_shadow(struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn)
-+int cf_check sh_remove_l3_shadow(struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn)
- /* Remove all mappings of this l3 shadow from this l4 shadow */
+ /* Change the scheduler of cpu to us (Credit2). */
+-static spinlock_t *
++static spinlock_t *cf_check
+ csched2_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+                      void *pdata, void *vdata)
  {
-     shadow_l4e_t *sl4e;
-@@ -3752,7 +3750,7 @@ int sh_remove_l3_shadow(struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn)
-  * and in the meantime we unhook its top-level user-mode entries. */
- 
- #if GUEST_PAGING_LEVELS == 3
--static void sh_pagetable_dying(paddr_t gpa)
-+static void cf_check sh_pagetable_dying(paddr_t gpa)
- {
-     struct vcpu *v = current;
-     struct domain *d = v->domain;
-@@ -3833,7 +3831,7 @@ static void sh_pagetable_dying(paddr_t gpa)
-     put_gfn(d, l3gfn);
- }
- #else
--static void sh_pagetable_dying(paddr_t gpa)
-+static void cf_check sh_pagetable_dying(paddr_t gpa)
- {
-     struct vcpu *v = current;
-     struct domain *d = v->domain;
-@@ -3932,7 +3930,7 @@ static const char *sh_audit_flags(struct vcpu *v, int level,
-     return NULL;
+@@ -4026,7 +4025,7 @@ csched2_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+     return &rqd->lock;
  }
  
--int sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
-+int cf_check sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+-static void
++static void cf_check
+ csched2_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
  {
-     guest_l1e_t *gl1e, *gp;
-     shadow_l1e_t *sl1e;
-@@ -4000,7 +3998,7 @@ int sh_audit_l1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
-     return done;
+     unsigned long flags;
+@@ -4086,7 +4085,7 @@ csched2_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+     return;
  }
  
--int sh_audit_fl1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
-+int cf_check sh_audit_fl1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+-static void
++static void cf_check
+ csched2_free_pdata(const struct scheduler *ops, void *pcpu, int cpu)
  {
-     guest_l1e_t *gl1e, e;
-     shadow_l1e_t *sl1e;
-@@ -4026,7 +4024,7 @@ int sh_audit_fl1_table(struct vcpu *v, mfn_t sl1mfn, mfn_t x)
+     struct csched2_private *prv = csched2_priv(ops);
+@@ -4115,7 +4114,7 @@ csched2_free_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+     xfree(pcpu);
+ }
+ 
+-static int __init
++static int __init cf_check
+ csched2_global_init(void)
+ {
+     if ( opt_load_precision_shift < LOADAVG_PRECISION_SHIFT_MIN )
+@@ -4142,7 +4141,7 @@ csched2_global_init(void)
      return 0;
  }
  
--int sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
-+int cf_check sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
+-static int
++static int cf_check
+ csched2_init(struct scheduler *ops)
  {
-     struct domain *d = v->domain;
-     guest_l2e_t *gl2e, *gp;
-@@ -4078,7 +4076,7 @@ int sh_audit_l2_table(struct vcpu *v, mfn_t sl2mfn, mfn_t x)
- }
- 
- #if GUEST_PAGING_LEVELS >= 4
--int sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
-+int cf_check sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
- {
-     struct domain *d = v->domain;
-     guest_l3e_t *gl3e, *gp;
-@@ -4126,7 +4124,7 @@ int sh_audit_l3_table(struct vcpu *v, mfn_t sl3mfn, mfn_t x)
+     struct csched2_private *prv;
+@@ -4190,7 +4189,7 @@ csched2_init(struct scheduler *ops)
      return 0;
  }
  
--int sh_audit_l4_table(struct vcpu *v, mfn_t sl4mfn, mfn_t x)
-+int cf_check sh_audit_l4_table(struct vcpu *v, mfn_t sl4mfn, mfn_t x)
+-static void
++static void cf_check
+ csched2_deinit(struct scheduler *ops)
  {
-     struct domain *d = v->domain;
-     guest_l4e_t *gl4e, *gp;
-diff --git a/xen/arch/x86/mm/shadow/multi.h b/xen/arch/x86/mm/shadow/multi.h
-index 0bd6a2d5b787..5bcd6ae1a8da 100644
---- a/xen/arch/x86/mm/shadow/multi.h
-+++ b/xen/arch/x86/mm/shadow/multi.h
-@@ -59,10 +59,10 @@ extern void
- SHADOW_INTERNAL_NAME(sh_unhook_64b_mappings, GUEST_LEVELS)
-     (struct domain *d, mfn_t sl4mfn, int user_only);
- 
--extern int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_rm_write_access_from_l1, GUEST_LEVELS)
-     (struct domain *d, mfn_t sl1mfn, mfn_t readonly_mfn);
--extern int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_rm_mappings_from_l1, GUEST_LEVELS)
-     (struct domain *d, mfn_t sl1mfn, mfn_t target_mfn);
- 
-@@ -70,30 +70,30 @@ extern void
- SHADOW_INTERNAL_NAME(sh_clear_shadow_entry, GUEST_LEVELS)
-     (struct domain *d, void *ep, mfn_t smfn);
- 
--extern int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_remove_l1_shadow, GUEST_LEVELS)
-     (struct domain *d, mfn_t sl2mfn, mfn_t sl1mfn);
--extern int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_remove_l2_shadow, GUEST_LEVELS)
-     (struct domain *d, mfn_t sl3mfn, mfn_t sl2mfn);
--extern int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_remove_l3_shadow, GUEST_LEVELS)
-     (struct domain *d, mfn_t sl4mfn, mfn_t sl3mfn);
- 
- #if SHADOW_AUDIT & SHADOW_AUDIT_ENTRIES
--int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_audit_l1_table, GUEST_LEVELS)
-     (struct vcpu *v, mfn_t sl1mfn, mfn_t x);
--int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_audit_fl1_table, GUEST_LEVELS)
-     (struct vcpu *v, mfn_t sl1mfn, mfn_t x);
--int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_audit_l2_table, GUEST_LEVELS)
-     (struct vcpu *v, mfn_t sl2mfn, mfn_t x);
--int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_audit_l3_table, GUEST_LEVELS)
-     (struct vcpu *v, mfn_t sl3mfn, mfn_t x);
--int
-+int cf_check
- SHADOW_INTERNAL_NAME(sh_audit_l4_table, GUEST_LEVELS)
-     (struct vcpu *v, mfn_t sl4mfn, mfn_t x);
- #endif
-diff --git a/xen/arch/x86/mm/shadow/private.h b/xen/arch/x86/mm/shadow/private.h
-index e4db8d32546a..3dc024e30f20 100644
---- a/xen/arch/x86/mm/shadow/private.h
-+++ b/xen/arch/x86/mm/shadow/private.h
-@@ -420,15 +420,15 @@ static inline int sh_remove_write_access(struct domain *d, mfn_t readonly_mfn,
- #endif
- 
- /* Functions that atomically write PV guest PT entries */
--void sh_write_guest_entry(struct vcpu *v, intpte_t *p, intpte_t new,
--                          mfn_t gmfn);
--intpte_t sh_cmpxchg_guest_entry(struct vcpu *v, intpte_t *p, intpte_t old,
--                                intpte_t new, mfn_t gmfn);
-+void cf_check sh_write_guest_entry(
-+    struct vcpu *v, intpte_t *p, intpte_t new, mfn_t gmfn);
-+intpte_t cf_check sh_cmpxchg_guest_entry(
-+    struct vcpu *v, intpte_t *p, intpte_t old, intpte_t new, mfn_t gmfn);
- 
- /* Update all the things that are derived from the guest's CR0/CR3/CR4.
-  * Called to initialize paging structures if the paging mode
-  * has changed, and when bringing up a VCPU for the first time. */
--void shadow_update_paging_modes(struct vcpu *v);
-+void cf_check shadow_update_paging_modes(struct vcpu *v);
- 
- /* Unhook the non-Xen mappings in this top-level shadow mfn.
-  * With user_only == 1, unhooks only the user-mode mappings. */
-@@ -922,7 +922,7 @@ static inline int sh_check_page_has_no_refs(struct page_info *page)
+     struct csched2_private *prv;
+diff --git a/xen/common/sched/null.c b/xen/common/sched/null.c
+index 82d5d1baab85..65a0a6c5312d 100644
+--- a/xen/common/sched/null.c
++++ b/xen/common/sched/null.c
+@@ -130,7 +130,7 @@ static inline bool unit_check_affinity(struct sched_unit *unit,
+     return cpumask_test_cpu(cpu, cpumask_scratch_cpu(cpu));
  }
  
- /* Flush the TLB of the selected vCPUs. */
--bool shadow_flush_tlb(const unsigned long *vcpu_bitmap);
-+bool cf_check shadow_flush_tlb(const unsigned long *vcpu_bitmap);
- 
- #endif /* _XEN_SHADOW_PRIVATE_H */
- 
-diff --git a/xen/arch/x86/mm/shadow/pv.c b/xen/arch/x86/mm/shadow/pv.c
-index f51f980f2694..ed10d5479c5e 100644
---- a/xen/arch/x86/mm/shadow/pv.c
-+++ b/xen/arch/x86/mm/shadow/pv.c
-@@ -28,7 +28,7 @@
-  * Write a new value into the guest pagetable, and update the shadows
-  * appropriately.
-  */
--void
-+void cf_check
- sh_write_guest_entry(struct vcpu *v, intpte_t *p, intpte_t new, mfn_t gmfn)
+-static int null_init(struct scheduler *ops)
++static int cf_check null_init(struct scheduler *ops)
  {
-     paging_lock(v->domain);
-@@ -42,7 +42,7 @@ sh_write_guest_entry(struct vcpu *v, intpte_t *p, intpte_t new, mfn_t gmfn)
-  * appropriately.  Returns the previous entry found, which the caller is
-  * expected to check to see if the cmpxchg was successful.
-  */
--intpte_t
-+intpte_t cf_check
- sh_cmpxchg_guest_entry(struct vcpu *v, intpte_t *p, intpte_t old,
-                        intpte_t new, mfn_t gmfn)
+     struct null_private *prv;
+ 
+@@ -152,7 +152,7 @@ static int null_init(struct scheduler *ops)
+     return 0;
+ }
+ 
+-static void null_deinit(struct scheduler *ops)
++static void cf_check null_deinit(struct scheduler *ops)
  {
+     xfree(ops->sched_data);
+     ops->sched_data = NULL;
+@@ -166,7 +166,8 @@ static void init_pdata(struct null_private *prv, struct null_pcpu *npc,
+     npc->unit = NULL;
+ }
+ 
+-static void null_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
++static void cf_check null_deinit_pdata(
++    const struct scheduler *ops, void *pcpu, int cpu)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct null_pcpu *npc = pcpu;
+@@ -177,7 +178,7 @@ static void null_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+     npc->unit = NULL;
+ }
+ 
+-static void *null_alloc_pdata(const struct scheduler *ops, int cpu)
++static void *cf_check null_alloc_pdata(const struct scheduler *ops, int cpu)
+ {
+     struct null_pcpu *npc;
+ 
+@@ -188,13 +189,14 @@ static void *null_alloc_pdata(const struct scheduler *ops, int cpu)
+     return npc;
+ }
+ 
+-static void null_free_pdata(const struct scheduler *ops, void *pcpu, int cpu)
++static void cf_check null_free_pdata(
++    const struct scheduler *ops, void *pcpu, int cpu)
+ {
+     xfree(pcpu);
+ }
+ 
+-static void *null_alloc_udata(const struct scheduler *ops,
+-                              struct sched_unit *unit, void *dd)
++static void *cf_check null_alloc_udata(
++    const struct scheduler *ops, struct sched_unit *unit, void *dd)
+ {
+     struct null_unit *nvc;
+ 
+@@ -210,15 +212,15 @@ static void *null_alloc_udata(const struct scheduler *ops,
+     return nvc;
+ }
+ 
+-static void null_free_udata(const struct scheduler *ops, void *priv)
++static void cf_check null_free_udata(const struct scheduler *ops, void *priv)
+ {
+     struct null_unit *nvc = priv;
+ 
+     xfree(nvc);
+ }
+ 
+-static void * null_alloc_domdata(const struct scheduler *ops,
+-                                 struct domain *d)
++static void *cf_check null_alloc_domdata(
++    const struct scheduler *ops, struct domain *d)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct null_dom *ndom;
+@@ -237,7 +239,7 @@ static void * null_alloc_domdata(const struct scheduler *ops,
+     return ndom;
+ }
+ 
+-static void null_free_domdata(const struct scheduler *ops, void *data)
++static void cf_check null_free_domdata(const struct scheduler *ops, void *data)
+ {
+     struct null_dom *ndom = data;
+     struct null_private *prv = null_priv(ops);
+@@ -426,9 +428,8 @@ static bool unit_deassign(struct null_private *prv, const struct sched_unit *uni
+ }
+ 
+ /* Change the scheduler of cpu to us (null). */
+-static spinlock_t *null_switch_sched(struct scheduler *new_ops,
+-                                     unsigned int cpu,
+-                                     void *pdata, void *vdata)
++static spinlock_t *cf_check null_switch_sched(
++    struct scheduler *new_ops, unsigned int cpu, void *pdata, void *vdata)
+ {
+     struct sched_resource *sr = get_sched_res(cpu);
+     struct null_private *prv = null_priv(new_ops);
+@@ -450,8 +451,8 @@ static spinlock_t *null_switch_sched(struct scheduler *new_ops,
+     return &sr->_lock;
+ }
+ 
+-static void null_unit_insert(const struct scheduler *ops,
+-                             struct sched_unit *unit)
++static void cf_check null_unit_insert(
++    const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct null_unit *nvc = null_unit(unit);
+@@ -516,8 +517,8 @@ static void null_unit_insert(const struct scheduler *ops,
+     SCHED_STAT_CRANK(unit_insert);
+ }
+ 
+-static void null_unit_remove(const struct scheduler *ops,
+-                             struct sched_unit *unit)
++static void cf_check null_unit_remove(
++    const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct null_unit *nvc = null_unit(unit);
+@@ -556,8 +557,8 @@ static void null_unit_remove(const struct scheduler *ops,
+     SCHED_STAT_CRANK(unit_remove);
+ }
+ 
+-static void null_unit_wake(const struct scheduler *ops,
+-                           struct sched_unit *unit)
++static void cf_check null_unit_wake(
++    const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct null_unit *nvc = null_unit(unit);
+@@ -632,8 +633,8 @@ static void null_unit_wake(const struct scheduler *ops,
+         cpumask_raise_softirq(cpumask_scratch_cpu(cpu), SCHEDULE_SOFTIRQ);
+ }
+ 
+-static void null_unit_sleep(const struct scheduler *ops,
+-                            struct sched_unit *unit)
++static void cf_check null_unit_sleep(
++    const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct null_private *prv = null_priv(ops);
+     unsigned int cpu = sched_unit_master(unit);
+@@ -667,15 +668,15 @@ static void null_unit_sleep(const struct scheduler *ops,
+     SCHED_STAT_CRANK(unit_sleep);
+ }
+ 
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ null_res_pick(const struct scheduler *ops, const struct sched_unit *unit)
+ {
+     ASSERT(!is_idle_unit(unit));
+     return pick_res(null_priv(ops), unit);
+ }
+ 
+-static void null_unit_migrate(const struct scheduler *ops,
+-                              struct sched_unit *unit, unsigned int new_cpu)
++static void cf_check null_unit_migrate(
++    const struct scheduler *ops, struct sched_unit *unit, unsigned int new_cpu)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct null_unit *nvc = null_unit(unit);
+@@ -801,8 +802,9 @@ static inline void null_unit_check(struct sched_unit *unit)
+  *  - the unit assigned to the pCPU, if there's one and it can run;
+  *  - the idle unit, otherwise.
+  */
+-static void null_schedule(const struct scheduler *ops, struct sched_unit *prev,
+-                          s_time_t now, bool tasklet_work_scheduled)
++static void cf_check null_schedule(
++    const struct scheduler *ops, struct sched_unit *prev, s_time_t now,
++    bool tasklet_work_scheduled)
+ {
+     unsigned int bs;
+     const unsigned int cur_cpu = smp_processor_id();
+@@ -939,7 +941,7 @@ static inline void dump_unit(const struct null_private *prv,
+                                 sched_unit_master(nvc->unit) : -1);
+ }
+ 
+-static void null_dump_pcpu(const struct scheduler *ops, int cpu)
++static void cf_check null_dump_pcpu(const struct scheduler *ops, int cpu)
+ {
+     struct null_private *prv = null_priv(ops);
+     const struct null_pcpu *npc = get_sched_res(cpu)->sched_priv;
+@@ -968,7 +970,7 @@ static void null_dump_pcpu(const struct scheduler *ops, int cpu)
+     pcpu_schedule_unlock_irqrestore(lock, flags, cpu);
+ }
+ 
+-static void null_dump(const struct scheduler *ops)
++static void cf_check null_dump(const struct scheduler *ops)
+ {
+     struct null_private *prv = null_priv(ops);
+     struct list_head *iter;
+diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+index 5ea6f01f263c..d6de25531b3c 100644
+--- a/xen/common/sched/rt.c
++++ b/xen/common/sched/rt.c
+@@ -269,13 +269,13 @@ unit_on_q(const struct rt_unit *svc)
+    return !list_empty(&svc->q_elem);
+ }
+ 
+-static struct rt_unit *
++static struct rt_unit *cf_check
+ q_elem(struct list_head *elem)
+ {
+     return list_entry(elem, struct rt_unit, q_elem);
+ }
+ 
+-static struct rt_unit *
++static struct rt_unit *cf_check
+ replq_elem(struct list_head *elem)
+ {
+     return list_entry(elem, struct rt_unit, replq_elem);
+@@ -348,7 +348,7 @@ rt_dump_unit(const struct scheduler *ops, const struct rt_unit *svc)
+             svc->flags, CPUMASK_PR(mask));
+ }
+ 
+-static void
++static void cf_check
+ rt_dump_pcpu(const struct scheduler *ops, int cpu)
+ {
+     struct rt_private *prv = rt_priv(ops);
+@@ -366,7 +366,7 @@ rt_dump_pcpu(const struct scheduler *ops, int cpu)
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+ 
+-static void
++static void cf_check
+ rt_dump(const struct scheduler *ops)
+ {
+     struct list_head *runq, *depletedq, *replq, *iter;
+@@ -636,7 +636,7 @@ replq_reinsert(const struct scheduler *ops, struct rt_unit *svc)
+  * Valid resource of an unit is intesection of unit's affinity
+  * and available resources
+  */
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ rt_res_pick_locked(const struct sched_unit *unit, unsigned int locked_cpu)
+ {
+     cpumask_t *cpus = cpumask_scratch_cpu(locked_cpu);
+@@ -659,7 +659,7 @@ rt_res_pick_locked(const struct sched_unit *unit, unsigned int locked_cpu)
+  * Valid resource of an unit is intesection of unit's affinity
+  * and available resources
+  */
+-static struct sched_resource *
++static struct sched_resource *cf_check
+ rt_res_pick(const struct scheduler *ops, const struct sched_unit *unit)
+ {
+     struct sched_resource *res;
+@@ -672,7 +672,7 @@ rt_res_pick(const struct scheduler *ops, const struct sched_unit *unit)
+ /*
+  * Init/Free related code
+  */
+-static int
++static int cf_check
+ rt_init(struct scheduler *ops)
+ {
+     int rc = -ENOMEM;
+@@ -701,7 +701,7 @@ rt_init(struct scheduler *ops)
+     return rc;
+ }
+ 
+-static void
++static void cf_check
+ rt_deinit(struct scheduler *ops)
+ {
+     struct rt_private *prv = rt_priv(ops);
+@@ -714,7 +714,7 @@ rt_deinit(struct scheduler *ops)
+ }
+ 
+ /* Change the scheduler of cpu to us (RTDS). */
+-static spinlock_t *
++static spinlock_t *cf_check
+ rt_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+                 void *pdata, void *vdata)
+ {
+@@ -750,7 +750,7 @@ rt_switch_sched(struct scheduler *new_ops, unsigned int cpu,
+     return &prv->lock;
+ }
+ 
+-static void
++static void cf_check
+ rt_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+ {
+     unsigned long flags;
+@@ -782,7 +782,7 @@ rt_deinit_pdata(const struct scheduler *ops, void *pcpu, int cpu)
+     spin_unlock_irqrestore(&prv->lock, flags);
+ }
+ 
+-static void *
++static void *cf_check
+ rt_alloc_domdata(const struct scheduler *ops, struct domain *dom)
+ {
+     unsigned long flags;
+@@ -804,7 +804,7 @@ rt_alloc_domdata(const struct scheduler *ops, struct domain *dom)
+     return sdom;
+ }
+ 
+-static void
++static void cf_check
+ rt_free_domdata(const struct scheduler *ops, void *data)
+ {
+     struct rt_dom *sdom = data;
+@@ -822,7 +822,7 @@ rt_free_domdata(const struct scheduler *ops, void *data)
+     }
+ }
+ 
+-static void *
++static void * cf_check
+ rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
+ {
+     struct rt_unit *svc;
+@@ -850,7 +850,7 @@ rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
+     return svc;
+ }
+ 
+-static void
++static void cf_check
+ rt_free_udata(const struct scheduler *ops, void *priv)
+ {
+     struct rt_unit *svc = priv;
+@@ -865,7 +865,7 @@ rt_free_udata(const struct scheduler *ops, void *priv)
+  * It inserts units of moving domain to the scheduler's RunQ in
+  * dest. cpupool.
+  */
+-static void
++static void cf_check
+ rt_unit_insert(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct rt_unit *svc = rt_unit(unit);
+@@ -901,7 +901,7 @@ rt_unit_insert(const struct scheduler *ops, struct sched_unit *unit)
+ /*
+  * Remove rt_unit svc from the old scheduler in source cpupool.
+  */
+-static void
++static void cf_check
+ rt_unit_remove(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct rt_unit * const svc = rt_unit(unit);
+@@ -1042,7 +1042,7 @@ runq_pick(const struct scheduler *ops, const cpumask_t *mask, unsigned int cpu)
+  * schedule function for rt scheduler.
+  * The lock is already grabbed in schedule.c, no need to lock here
+  */
+-static void
++static void cf_check
+ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
+             s_time_t now, bool tasklet_work_scheduled)
+ {
+@@ -1129,7 +1129,7 @@ rt_schedule(const struct scheduler *ops, struct sched_unit *currunit,
+  * Remove UNIT from RunQ
+  * The lock is already grabbed in schedule.c, no need to lock here
+  */
+-static void
++static void cf_check
+ rt_unit_sleep(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct rt_unit * const svc = rt_unit(unit);
+@@ -1244,7 +1244,7 @@ runq_tickle(const struct scheduler *ops, const struct rt_unit *new)
+  * The lock is already grabbed in schedule.c, no need to lock here
+  * TODO: what if these two units belongs to the same domain?
+  */
+-static void
++static void cf_check
+ rt_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct rt_unit * const svc = rt_unit(unit);
+@@ -1314,7 +1314,7 @@ rt_unit_wake(const struct scheduler *ops, struct sched_unit *unit)
+  * scurr has finished context switch, insert it back to the RunQ,
+  * and then pick the highest priority unit from runq to run
+  */
+-static void
++static void cf_check
+ rt_context_saved(const struct scheduler *ops, struct sched_unit *unit)
+ {
+     struct rt_unit *svc = rt_unit(unit);
+@@ -1341,7 +1341,7 @@ rt_context_saved(const struct scheduler *ops, struct sched_unit *unit)
+ /*
+  * set/get each unit info of each domain
+  */
+-static int
++static int cf_check
+ rt_dom_cntl(
+     const struct scheduler *ops,
+     struct domain *d,
 -- 
 2.11.0
 
