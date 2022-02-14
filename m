@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22446C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:17:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271977.466753 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD19BC433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:17:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271981.466763 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbE2-0006Vu-Pi; Mon, 14 Feb 2022 13:17:06 +0000
+	id 1nJbE4-0006s8-Em; Mon, 14 Feb 2022 13:17:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271977.466753; Mon, 14 Feb 2022 13:17:06 +0000
+Received: by outflank-mailman (output) from mailman id 271981.466763; Mon, 14 Feb 2022 13:17:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbE2-0006VW-K4; Mon, 14 Feb 2022 13:17:06 +0000
-Received: by outflank-mailman (input) for mailman id 271977;
- Mon, 14 Feb 2022 13:17:04 +0000
+	id 1nJbE4-0006ra-8Z; Mon, 14 Feb 2022 13:17:08 +0000
+Received: by outflank-mailman (input) for mailman id 271981;
+ Mon, 14 Feb 2022 13:17:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb4d-0008IH-H1
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:07:23 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0b791dfc-8d97-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:07:21 +0100 (CET)
+ id 1nJb3j-0008IH-HO
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:27 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e97f508c-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:06:26 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,163 +38,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0b791dfc-8d97-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: e97f508c-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644844041;
+  d=citrix.com; s=securemail; t=1644843986;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=eqhKAymiA22/wB5PZk3BR4BeJKlUT2B+meSMBCt3MmU=;
-  b=cpFSFB0Y6d6swQiujtITK9SsguSmgsaIDj9dd6Xpceg8NXh5iSw9viMS
-   BwqVNgI5AC04Uz5BHTn7NXNkGBLiuzFdrlG45fB8OFN03xiBc3QJJN4Hg
-   YeC9COwCJXP9HO4IB6CkOQp72n6SnGPx0REXQWqnL8twM8kB569LWyXOC
-   0=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: +E6Enw6kwx7WWxt+vv6po0BIihZjUYHGHfpjS5XIMAvcmcdh12ggcmN2kZipUmE0QjWWe9i9j3
- HyJgdHhXRdaFYMK0qFjIlif5Bynr2nxfMpO8WZGSO2o4eZHUIOMIkIM+XGlLpTbo+1IHEytNNY
- +KaiB/akovSRepz1cbNPrWer1T+D82nSKjJW/huRNG3yV8syMoElL6Uv/fhp/zomF3xjqP/Hzb
- sPB0JGPk7aA7MJn1IlFwMwI6fzmK1wf0/+8PZzTGXt7gW2Aax7MpNontZL+mQ0A5bsPm+k3KrN
- q720fo+VRZGVn5Rx0DLjBfKf
+   references:mime-version:content-transfer-encoding;
+  bh=nFVbC/4CTKrt9ePns4OmTby9fRX+JlbtvMjTI8nUB74=;
+  b=G1ndp5xIyBMM1jx8qgAdJciOCeLvyMC7DK0peGismD3YL5hCMS35Eut3
+   rq2x4xnJpHaKDkc1bcoC9WOV9ptsTBTYxqmckTH8qxynddPnIB6LC9QzO
+   m5rjk/py9GlateWSD2xyMvtekAptnnpN+HqnNXPPlRVwsz1RqylRzY8Nc
+   U=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: p1VJNay5+0TErJJlwhNVrDKyw911DBe46SFZfny+G1zGNcpra+QSgvbh3R4TpIu/E4DsDN95Fx
+ nigN90rokMgW7BknA+b15rBCsGQsU4Cz2gCvzlq6s1PYwXtseCtQgH3kuspus9x2f/iMMUB7hF
+ FQDtydm69u0mVPire4SFMveSYHRrwnJyEu+7IjDWtS4Thp3v8kW6OQja9FanHNmDbaWfluBkfa
+ AoevsD/u/GXiq7iLu72VKJKIeF/sbQhT0XngIghxOGHmm3sS6A8uxwoxzELDvrV2tGLZh/muSR
+ 6w5kwkW8KO1Gfdh5I4YEw5Nd
 X-SBRS: 5.1
-X-MesageID: 64554438
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 64050671
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:SLMNT631puw+7FO/kfbD5cp2kn2cJEfYwER7XKvMYLTBsI5bpzIBz
- mIbCGyAMqneZWb0fI8kb9uzpEIG6MPXyNFjTQVqpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o5wrJh2+aEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhudIyw
- vlPqpeLbgo3Ooj2tfpDSkBHKnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u2p0TQaqFN
- 6L1bxJ/TEiaIDkTNm47L585juOJmV3/KwJX/Qf9Sa0fvDGIkV0ZPKLWGMrYfJmGSNtYmm6cp
- 3na5CLpDxcCLtudxDGZtHW2iYfycTjTAdxIUufir7gz3QPVljd75AAquUWTh/v6gGK8RNlkD
- EEK/g8UgLZs7RW0d4yoN/Gnm0KsshkZUttWNuQ17gCR16bZizqk6ng4oi1pM4J/6pJvLdA+/
- hrQxo6yW2Qz2FGAYS/Frt+pQSWO1T/5xIPoTQsNVkM77tbqu+nfZTqfH484QMZZYjAYcAwcI
- gxmTgBj3d3/buZRjs1XGGwrZBr2+PD0ovYdvFm/Y45cxloRiHSZT4Kp80PHyv1LMZyUSFKM1
- FBdxZTCs7BeUMzVzXfXKAnoIF1Oz6zbWAAwfHY1R8Vxn9hT0yLLkX9sDMFWex4yb5dslc7Ba
- 07PowJBjKK/z1PxBZKbl7mZUpxwpYC5TIyNfqmNMrJmP8ggHCfarXoGTRPBgAjQfL0EzPhX1
- WGzKp33Ux73yM1PkVKLegvq+eF3mH5unz6PLX05pjz+uYejiLeuYe9tGDOzgioRtf/dyOkM2
- 9oAZcaM1TtFV+jyPnve/YIJdAhYJnknH5Hm7cdQc7fbcAZhHWggDd7XwK8gJNM5z/gEyL+Q8
- yHvQFJcxXr+mWbDdVeAZEd8Ze69Rp14t386Y3AhZA76x3g5bI+zx64DbJ9rL6I//eluwKcsH
- fkIcsmNGNpVTTHD92hPZJXxttU6Jh+qmRiPL2yuZz1mJ8xsQAnA+9nFeArz9XZRUnrr5JVm+
- 7D5j1HVW5sOQQhmHf36UvP3wgPjp2UZlcJzQ1DMfotZdnLz/dU4MCf2lPI2fZ0BcE2R2juA2
- g+KKh4Evu2R8ZQt+dzEiK3Y/YekF+xyQhhTE2XBtOvkMCDb+iyowJNaUfbOdjfYDTum9KKnb
- ORT7vf9LPxYwwoa79siS+5mnfAk+t/ih75G1QA1TnzEYmOiBq5kPnTbj9JEsbdAx+MBtAa7M
- q5VFgK25Vld1BvZLWMs
-IronPort-HdrOrdr: A9a23:opt64K0SypVTil+K/JqNtAqjBLAkLtp133Aq2lEZdPRUGvb3qy
- nOpoVj6faaslYssR0b9exofZPwJE80lqQFh7X5X43SPzUO0VHAROoJgLcKgQeQfxEWntQtsp
- uIGJIeNDSfNzdHZL7BkWuFL+o=
+IronPort-Data: A9a23:T9o8dKj3gPBK031rkfVcT9nyX161XxcKZh0ujC45NGQN5FlHY01je
+ htvWW6DOaqPZGanc91yb4nn8x5Q7MTTzoNhG1Y/pX1jFisb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0GE/NtTo5w7Rj2tQx3YDga++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /0RqsaCGAZuApfhhcgbbBgADjhfLfFZreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNaiCP
+ 5dBN2U2BPjGSxNTI3ASIrgApt3rqVjOSgIGmWCepZNitgA/yyQuieOwYbI5YOeiWsF9jkue4
+ GXc8AzRIDsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
+ CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4T/Jg2lCMjZbuzhu1AFcFFiNYScx6q5pjLdA17
+ WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoCtQVnNL
+ ya2QD/Sbln5peoCzO2F8F/OmFpATbCZH1dutm07so9Ihz6VhbJJhaT1szA3Dt4ade51q2VtW
+ 1BexaCjABgmV83lqcB0aLxl8EuVz/iEKibAplVkAoMs8T+gk1b6I9wMv2EueRoxa51eEdMMX
+ KM0kVkPjKK/wVPwNfMnC25PI5hCIVfc+STNCamPM4smjmlZfw6b5iB+DXN8LEi2+HXAZZoXY
+ M/BGe71VC5yIf0+kFKeGrdMuZd2l3tW7T6CGvjGI+GPjOP2iIi9EuxebjNjr4kRscu5neki2
+ 4gDaZXakUgDOAA8CwGOmbMuwZkxBSBTLfjLRwZ/L7DrztNOFD5zBvnP76kmfoA5za1Zmv2Rp
+ iO2W1NCyUq5jnrCcF3YZndmYbLpfJB+sXNkYnB8YQf2gyAuMdS18aMSV5orZr17puZt+uF5E
+ qsecMKaD/URFjmeo2YBbYPwpZBJfQiwgV7cJDKsZTUyJsYyRwHA9tL+UBHo8S0CUni+ucck+
+ uXy3QLHW5sTAQ9lCZ+OOv6oylqwu1kbmf5zABSUcoUCJh20/dEzeSLrj/IxL8UdEjn5x2OXh
+ 1SMHBMVhejRuItpotPHsr+J8tWyGOxkE0sEQ2SCteSqNTPX93aIyJNbVLraZijUUW759fnwZ
+ ehRyP2gYvQLkEwT7th5Grdvi6k/+8Hut/lRyQE9RCfHaFGiC7VBJHia3JYQ6v0Rl+EB4QbmC
+ FiS/tR6OKmSPJK3GVEcEwMpc+Cf2KxGgTLV9/k0fB336SIfEGBriqmO081gUBBgEYY=
+IronPort-HdrOrdr: A9a23:fKjZt6H6mGE1OkcApLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5r
+ mTdZUgpHnJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YZT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64554438"
+   d="scan'208";a="64050671"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 28/70] xen/video: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:45 +0000
-Message-ID: <20220214125127.17985-29-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v2 63/70] x86/traps: Rework write_stub_trampoline() to not hardcode the jmp
+Date: Mon, 14 Feb 2022 12:51:20 +0000
+Message-ID: <20220214125127.17985-64-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Control Flow Integrity schemes use toolchain and optionally hardware support
-to help protect against call/jump/return oriented programming attacks.
+For CET-IBT, we will need to optionally insert an endbr64 instruction at the
+start of the stub.  Don't hardcode the jmp displacement assuming that it
+starts at byte 24 of the stub.
 
-Use cf_check to annotate function pointer targets for the toolchain.
+Also add extra comments describing what is going on.  The mix of %rax and %rsp
+is far from trivial to follow.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/drivers/video/lfb.c  | 4 ++--
- xen/drivers/video/lfb.h  | 4 ++--
- xen/drivers/video/vesa.c | 4 ++--
- xen/drivers/video/vga.c  | 6 +++---
- 4 files changed, 9 insertions(+), 9 deletions(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-diff --git a/xen/drivers/video/lfb.c b/xen/drivers/video/lfb.c
-index 75b749b3303b..48c66f8acf10 100644
---- a/xen/drivers/video/lfb.c
-+++ b/xen/drivers/video/lfb.c
-@@ -53,7 +53,7 @@ static void lfb_show_line(
+v2:
+ * Retain the rounding up to 16 bytes.
+---
+ xen/arch/x86/x86_64/traps.c | 35 ++++++++++++++++++++++-------------
+ 1 file changed, 22 insertions(+), 13 deletions(-)
+
+diff --git a/xen/arch/x86/x86_64/traps.c b/xen/arch/x86/x86_64/traps.c
+index d661d7ffcaaf..edc6820b85c7 100644
+--- a/xen/arch/x86/x86_64/traps.c
++++ b/xen/arch/x86/x86_64/traps.c
+@@ -293,30 +293,39 @@ static unsigned int write_stub_trampoline(
+     unsigned char *stub, unsigned long stub_va,
+     unsigned long stack_bottom, unsigned long target_va)
+ {
++    unsigned char *p = stub;
++
++    /* Store guest %rax into %ss slot */
+     /* movabsq %rax, stack_bottom - 8 */
+-    stub[0] = 0x48;
+-    stub[1] = 0xa3;
+-    *(uint64_t *)&stub[2] = stack_bottom - 8;
++    *p++ = 0x48;
++    *p++ = 0xa3;
++    *(uint64_t *)p = stack_bottom - 8;
++    p += 8;
+ 
++    /* Store guest %rsp in %rax */
+     /* movq %rsp, %rax */
+-    stub[10] = 0x48;
+-    stub[11] = 0x89;
+-    stub[12] = 0xe0;
++    *p++ = 0x48;
++    *p++ = 0x89;
++    *p++ = 0xe0;
+ 
++    /* Switch to Xen stack */
+     /* movabsq $stack_bottom - 8, %rsp */
+-    stub[13] = 0x48;
+-    stub[14] = 0xbc;
+-    *(uint64_t *)&stub[15] = stack_bottom - 8;
++    *p++ = 0x48;
++    *p++ = 0xbc;
++    *(uint64_t *)p = stack_bottom - 8;
++    p += 8;
+ 
++    /* Store guest %rsp into %rsp slot */
+     /* pushq %rax */
+-    stub[23] = 0x50;
++    *p++ = 0x50;
+ 
+     /* jmp target_va */
+-    stub[24] = 0xe9;
+-    *(int32_t *)&stub[25] = target_va - (stub_va + 29);
++    *p++ = 0xe9;
++    *(int32_t *)p = target_va - (stub_va + (p - stub) + 4);
++    p += 4;
+ 
+     /* Round up to a multiple of 16 bytes. */
+-    return 32;
++    return ROUNDUP(p - stub, 16);
  }
  
- /* Fast mode which redraws all modified parts of a 2D text buffer. */
--void lfb_redraw_puts(const char *s, size_t nr)
-+void cf_check lfb_redraw_puts(const char *s, size_t nr)
- {
-     unsigned int i, min_redraw_y = lfb.ypos;
- 
-@@ -98,7 +98,7 @@ void lfb_redraw_puts(const char *s, size_t nr)
- }
- 
- /* Slower line-based scroll mode which interacts better with dom0. */
--void lfb_scroll_puts(const char *s, size_t nr)
-+void cf_check lfb_scroll_puts(const char *s, size_t nr)
- {
-     unsigned int i;
- 
-diff --git a/xen/drivers/video/lfb.h b/xen/drivers/video/lfb.h
-index e743ccdd6b11..42161402d611 100644
---- a/xen/drivers/video/lfb.h
-+++ b/xen/drivers/video/lfb.h
-@@ -35,8 +35,8 @@ struct lfb_prop {
-     unsigned int text_rows;
- };
- 
--void lfb_redraw_puts(const char *s, size_t nr);
--void lfb_scroll_puts(const char *s, size_t nr);
-+void cf_check lfb_redraw_puts(const char *s, size_t nr);
-+void cf_check lfb_scroll_puts(const char *s, size_t nr);
- void lfb_carriage_return(void);
- void lfb_free(void);
- 
-diff --git a/xen/drivers/video/vesa.c b/xen/drivers/video/vesa.c
-index cb0e443be4dd..155bc09d3237 100644
---- a/xen/drivers/video/vesa.c
-+++ b/xen/drivers/video/vesa.c
-@@ -17,7 +17,7 @@
- 
- #define vlfb_info    vga_console_info.u.vesa_lfb
- 
--static void lfb_flush(void);
-+static void cf_check lfb_flush(void);
- 
- static unsigned char *lfb;
- static const struct font_desc *font;
-@@ -177,7 +177,7 @@ void __init vesa_mtrr_init(void)
-     } while ( (size_total >= PAGE_SIZE) && (rc == -EINVAL) );
- }
- 
--static void lfb_flush(void)
-+static void cf_check lfb_flush(void)
- {
-     if ( vesa_mtrr == 3 )
-         __asm__ __volatile__ ("sfence" : : : "memory");
-diff --git a/xen/drivers/video/vga.c b/xen/drivers/video/vga.c
-index b7f04d0d97f4..abe295e477b1 100644
---- a/xen/drivers/video/vga.c
-+++ b/xen/drivers/video/vga.c
-@@ -19,8 +19,8 @@ static int vgacon_keep;
- static unsigned int xpos, ypos;
- static unsigned char *video;
- 
--static void vga_text_puts(const char *s, size_t nr);
--static void vga_noop_puts(const char *s, size_t nr) {}
-+static void cf_check vga_text_puts(const char *s, size_t nr);
-+static void cf_check vga_noop_puts(const char *s, size_t nr) {}
- void (*video_puts)(const char *, size_t nr) = vga_noop_puts;
- 
- /*
-@@ -175,7 +175,7 @@ void __init video_endboot(void)
-     }
- }
- 
--static void vga_text_puts(const char *s, size_t nr)
-+static void cf_check vga_text_puts(const char *s, size_t nr)
- {
-     for ( ; nr > 0; nr--, s++ )
-     {
+ DEFINE_PER_CPU(struct stubs, stubs);
 -- 
 2.11.0
 
