@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CCEC4321E
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271713.466368 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77BDC433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271715.466387 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3a-0008Id-R6; Mon, 14 Feb 2022 13:06:18 +0000
+	id 1nJb3d-0000eN-MH; Mon, 14 Feb 2022 13:06:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271713.466368; Mon, 14 Feb 2022 13:06:18 +0000
+Received: by outflank-mailman (output) from mailman id 271715.466387; Mon, 14 Feb 2022 13:06:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3a-0008Fe-6K; Mon, 14 Feb 2022 13:06:18 +0000
-Received: by outflank-mailman (input) for mailman id 271713;
- Mon, 14 Feb 2022 13:06:16 +0000
+	id 1nJb3d-0000bE-5U; Mon, 14 Feb 2022 13:06:21 +0000
+Received: by outflank-mailman (input) for mailman id 271715;
+ Mon, 14 Feb 2022 13:06:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb35-0008IH-46
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:47 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d214b42f-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:05:45 +0100 (CET)
+ id 1nJb2W-0008IH-WA
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:13 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id bc264d17-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:05:09 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d214b42f-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: bc264d17-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843945;
+  d=citrix.com; s=securemail; t=1644843909;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=cecI+FT44l503L9yO+BFfcS5GuY0TLog87wC0Mx5p8E=;
-  b=O38jx71Zul2bjj1rBV6saBgq7h73AZZqdOR4WfXA2ZBD7BWZcSj28j50
-   HY5vlczv7P53mFkiPtqaI05RehnRDj7s7zsMWDYjEfRUpcEkfcU3+T/ri
-   0clt9S+IV04H07oaRtbP+hY/QOpIsCBbZChJeNYrAQFOP2an3YbEWbwMY
-   I=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: vuaVnpiE5/1VbUEBdoc2AlO5mmSNnFUgbdKKI2IOLHaiq6jyqa/Mn4FpVnPXXszc6kH9GYqlLb
- gSeLTktCqP+0rfKjCvIzUqyVBuyHAGv3L9JoiXgBqO6qGW593IugZwb1CQFWlU2i+aXgYJT1Tx
- sacDZZIirfHeeHsrykrZeLrMjslr+KaSTbggrjTaQjIXR3lvC12B8zTdi9IafYSebzEw9HY82a
- KoqP81SzWAFN04S/uePItXnqyPqjy4I/RxyJIpAhdRZCcCb9XkYFMIDVWMsV+QIQY53gqu+PUL
- Z49Y/4s4hJnOJR2Ytmcvbo7c
+  bh=W97kFRgj/MifUbIaqTE03bRGTNYxneRqJuik8bYXmus=;
+  b=Thd1PFc2MnRcHBfQMxNvSPomzPfvLUJHOZ4F39NrscNwPRdQUdWFMtlt
+   wWxZrUHtTawOJjhQ8u3QGynC43rjZDcCkJA0rUFrcahN7z8f2a879h22t
+   SP+dlt/2rSlgNw0gvqEExKPGpjjY/hmDQs1KVBVk+NRAkAMg5BiOnpGUj
+   Q=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 0kQ1sX3mZvJKZSOECf8Dl6WPt+Bb5qhEtGkfZ7gae1V/6iBUBIwWfi0MvudW4E8bzxH581D6BD
+ 9EOwQ4DBb5fuK+/kGBnRdybZ4xg/daZ4sni1Mq1kcXVdW3XNu2xC5EYA0AQqnRTMyWEhlbWl/y
+ 3baz1A/+EfN7+tFWEc/2stWrSppaTdZWIigq4PSG64UZ7hcyc+RcAjXPZFnVyQxg9RJZomyBjk
+ tUcIj0AmlZRu/f0GrE0I0KlIIOWIKuo343IWJtlH0hTrWQxBU06Pg6J9wrwXvqtj+Gtw4b6GrK
+ iFfIr+LQmWJbCm3N2D0ZJZR7
 X-SBRS: 5.1
-X-MesageID: 63592652
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 66374839
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Z2RLJK2Z7uUo8pkPHvbD5c12kn2cJEfYwER7XKvMYLTBsI5bpzAAn
- WodCzvTb/bbZGrye9xzOtvi/UgEvZfcm9NhSgNrpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o5wrJh2+aEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhxcxX2
- tJunpuLe1k1P/PFqOM/TgFiOnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u3Z0fR6iDP
- aL1bxIzXBvZfkBiCG0NS6oDlcr5r2fWV21x/Qf9Sa0fvDGIkV0ZPKLWGMrYfJmGSNtYmm6cp
- 3na5CLpDxcCLtudxDGZtHW2iYfycTjTAdxIUufir7gz3QPVljd75AAquUWT++WfmEmdcNVkG
- RII+3Qnna8Q6VSRZ4yoN/Gnm0KsshkZUttWNuQ17gCR16bZizqk6ng4oi1pM4J/6pJvLdA+/
- hrQxo6yW2Qz2FGAYS/Frt+pQSWO1T/5xIPoTQsNVkM77tbqu+nfZTqfH484QMZZYjAYcAwcI
- gxmTgBj3d3/buZRjs1XGGwrZBr2+PD0ovYdvFm/Y45cxloRiHSZT4Kp80PHyv1LMZyUSFKM1
- FBdxZTCs7BeUMzVzXfXKAnoIF1Oz6zbWAAwfHY1R8Vxn9hT0yLLkX9sDMFWex4yb5dslc7Ba
- 07PowJBjKK/z1PxBZKbl7mZUpxwpYC5TIyNfqmNMrJmP8ggHCfarXoGTRPBgAjQfL0EzPhX1
- WGzKp33Ux73yM1PkVKLegvq+eF3l35unTuJHfgWDX2PiNKjWZJccp9dWHPmUwzzxPrsTNz9/
- 4kNOs2U5Q9YVeGiMCDb/ZRKdQIBLGQhBICwoMtSL7bRLg1jEWAnKvnQ3bJ+JNA1w/ULzr/Fr
- iOnR0tV6Fvjnnmbew+EXW9uNeH0VpFloHNlYSF1ZQS022IuaJqE5bsEc8dlZqEu8eFulKYmT
- /QMd8iaLO5ITzDLp2YUYZXn9dQwfxW3nwOeeSGiZWFnLZJnQgXI/P7ifxfuq3ZSXnbm65Nmr
- uT5hA3BQJcFSwBzN+rsaaqinwGroHwQuONuRE+UcNNdT1rhrdpxICvrg/5pf8xVcUffxiGX3
- hq9CAsDobWfuJc89dTEiPzWr4qtFOciTENWE3OCsOSzPCjeuGGi3ZVBQKCDejWEDDH4/6CrZ
- ON0yfDgMaJYwAYW4tQkS7s7n7gj49bPpqNBylU2FXrGWF2nF7d8LyTUxsJIrKBMmudUtAbet
- phjITWG1WFl4P/YLWM=
-IronPort-HdrOrdr: A9a23:PWc8jarwhvv7Qligx5fKpGkaV5opeYIsimQD101hICG8cqSj+f
- xG/c5rrCMc5wxwZJhNo7y90ey7MBbhHP1OkO8s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpM
- BdmsNFaeEYY2IUsS+D2njbL+od
+IronPort-Data: A9a23:r8h/KKJH11eaxoWtFE+Rz5IlxSXFcZb7ZxGr2PjKsXjdYENS1zwEx
+ mIdXjzVP63cY2CnLtl2aYzj9E9UuJLdztZmQQZlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUakideSc+EH170Ug6x7Zg6mJVqYPR7z2l6
+ IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2rlfkoz
+ uhhjaC3QDssEJ/KlegzVklhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Glu3Z8STa2PD
+ yYfQWFTXUvFcloRBgpUMLYywfXrgEnPLBQN/Tp5ooJoujOOnWSdyoPFINfTP9CHW8hRtkKZv
+ X7duXT0BAkAM96SwibD9Wij7tIjhguiBthUTufhsKc33hvDnQT/FSH6S3OZq9DgjHOSY+5YI
+ nAR1BgooKQc8RySG4yVswKDnFaIuRsVWtx1GuI86R2Qxqe83zt1FlToXRYaNoV46ZZeqSgCk
+ wbQwoi3XWAHXKi9FCrFnop4uw9eLsT8wYUqQSYfBTUI7ND4yG3YpkKeF40zeEJZYzCcJN0R/
+ 9xohHVk71nwpZRSv0lewbwgq2jyzqUltiZvum3qspuNt2uVnrKNaY2y8kT85v1dNoufRVTpl
+ CFax5TBvLBTUMnUz3blrAAx8FaBvajtDdEhqQQ3Q8lJG8qFpxZPgry8EBkhfRw0Y67oiBfiY
+ VPJuBM52XOgFCDCUEODWKroU55C5fG5TbzND6mIBvITMskZXFLWp0lGOB/Pt10BZWBxyMnTz
+ 7/AKp3yZZvbYIw6pAeLqxA1j+N6mHBmnTmLLX05pjz+uYejiLeuYe9tGDOzgioRtctoeS3Zr
+ IRSMdWk0RJaXLGsayXb69dLf1sLMWI6Fdb9rMkOLryPJQ9vGWcADf7NwOx+J9w5zvoNzuqYr
+ GugXkJ4yUbkgSGVIwu9dX0+OqjkWoxyrCxnMHV0b0qowXUqfa2m8LwbK8ksZbAi+eE6lax0Q
+ vAJdt+uGPNKTjibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz+
+ uTy2BnaTJwPQxVZIPzXMP//nUmsuXU9mf5pWxeaKNdkZ0ixopNhLDb8j6FrLphUewnD3DaTy
+ y2fHQwc+bvWu4Yw/dTE2fKEooOuH7csF0ZWBTCGv7O/NC2c9Wu/245QFu2PeGmFBm/z/ayjY
+ 8RTzu39b6JbzAob7dIkHuY517866vvuu6Ren1ZtE3j8Zli2Dq9tfyud1s5Vu6wRnrJUtGNag
+ K5UFgW27VlRBP7YLQ==
+IronPort-HdrOrdr: A9a23:IlRx5KuOjcTHE5hSfMXq4eTl7skDdNV00zEX/kB9WHVpmszxra
+ 6TdZUgpGbJYVkqOE3I9ertBEDEewK4yXcX2/h2AV7BZniEhILAFugLhuGO/9SjIVybygc079
+ YGT0EUMrzN5DZB4voSmDPIceod/A==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="63592652"
+   d="scan'208";a="66374839"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 23/70] xen/tasklet: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:40 +0000
-Message-ID: <20220214125127.17985-24-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 46/70] x86/guest: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:03 +0000
+Message-ID: <20220214125127.17985-47-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -103,242 +103,103 @@ to help protect against call/jump/return oriented programming attacks.
 
 Use cf_check to annotate function pointer targets for the toolchain.
 
-The function pointer cast in hvm_vcpu_initialise() is undefined behaviour.
-
-While it happens to function correctly, it is not compatible with control flow
-typechecking, so introduce a new hvm_assert_evtchn_irq_tasklet() to handle the
-parameter type conversion in a legal way.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v2:
- * Fix typo in commit message.
- * Drop changes to arm-only driver.
----
- xen/arch/x86/hvm/hvm.c                    | 7 ++++++-
- xen/arch/x86/hvm/vlapic.c                 | 2 +-
- xen/arch/x86/include/asm/shadow.h         | 2 +-
- xen/arch/x86/mm/shadow/common.c           | 2 +-
- xen/common/domain.c                       | 2 +-
- xen/common/keyhandler.c                   | 6 +++---
- xen/common/livepatch.c                    | 2 +-
- xen/common/stop_machine.c                 | 2 +-
- xen/common/trace.c                        | 2 +-
- xen/drivers/char/console.c                | 2 +-
- xen/drivers/passthrough/amd/iommu_guest.c | 2 +-
- xen/drivers/passthrough/amd/iommu_init.c  | 4 ++--
- xen/drivers/passthrough/vtd/iommu.c       | 2 +-
- 13 files changed, 21 insertions(+), 16 deletions(-)
+ xen/arch/x86/guest/hyperv/hyperv.c | 10 +++++-----
+ xen/arch/x86/guest/xen/xen.c       | 11 ++++++-----
+ 2 files changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 0a193530680a..5ec10f30803e 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1528,6 +1528,11 @@ static int __init cf_check hvm_register_CPU_save_and_restore(void)
+diff --git a/xen/arch/x86/guest/hyperv/hyperv.c b/xen/arch/x86/guest/hyperv/hyperv.c
+index 84221b751453..b101ba3080b4 100644
+--- a/xen/arch/x86/guest/hyperv/hyperv.c
++++ b/xen/arch/x86/guest/hyperv/hyperv.c
+@@ -175,7 +175,7 @@ static int setup_vp_assist(void)
+     return 0;
  }
- __initcall(hvm_register_CPU_save_and_restore);
  
-+static void cf_check hvm_assert_evtchn_irq_tasklet(void *v)
-+{
-+    hvm_assert_evtchn_irq(v);
-+}
-+
- int hvm_vcpu_initialise(struct vcpu *v)
+-static void __init setup(void)
++static void __init cf_check setup(void)
+ {
+     ASM_CONSTANT(HV_HCALL_PAGE, __fix_x_to_virt(FIX_X_HYPERV_HCALL));
+ 
+@@ -188,7 +188,7 @@ static void __init setup(void)
+         panic("VP assist page setup failed\n");
+ }
+ 
+-static int ap_setup(void)
++static int cf_check ap_setup(void)
  {
      int rc;
-@@ -1552,7 +1557,7 @@ int hvm_vcpu_initialise(struct vcpu *v)
-         goto fail3;
  
-     softirq_tasklet_init(&v->arch.hvm.assert_evtchn_irq_tasklet,
--                         (void (*)(void *))hvm_assert_evtchn_irq, v);
-+                         hvm_assert_evtchn_irq_tasklet, v);
- 
-     v->arch.hvm.inject_event.vector = HVM_EVENT_VECTOR_UNSET;
- 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index b8c84458ffdc..fe375912bef1 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -312,7 +312,7 @@ static void vlapic_init_sipi_one(struct vcpu *target, uint32_t icr)
-     vcpu_unpause(target);
+@@ -199,7 +199,7 @@ static int ap_setup(void)
+     return setup_vp_assist();
  }
  
--static void vlapic_init_sipi_action(void *data)
-+static void cf_check vlapic_init_sipi_action(void *data)
+-static void __init e820_fixup(struct e820map *e820)
++static void __init cf_check e820_fixup(struct e820map *e820)
  {
-     struct vcpu *origin = data;
-     uint32_t icr = vcpu_vlapic(origin)->init_sipi.icr;
-diff --git a/xen/arch/x86/include/asm/shadow.h b/xen/arch/x86/include/asm/shadow.h
-index e25f9604d896..7ef76cc0635b 100644
---- a/xen/arch/x86/include/asm/shadow.h
-+++ b/xen/arch/x86/include/asm/shadow.h
-@@ -233,7 +233,7 @@ static inline bool pv_l1tf_check_l4e(struct domain *d, l4_pgentry_t l4e)
-     return pv_l1tf_check_pte(d, 4, l4e.l4);
+     uint64_t s = HV_HCALL_MFN << PAGE_SHIFT;
+ 
+@@ -207,8 +207,8 @@ static void __init e820_fixup(struct e820map *e820)
+         panic("Unable to reserve Hyper-V hypercall range\n");
  }
  
--void pv_l1tf_tasklet(void *data);
-+void cf_check pv_l1tf_tasklet(void *data);
- 
- static inline void pv_l1tf_domain_init(struct domain *d)
+-static int flush_tlb(const cpumask_t *mask, const void *va,
+-                     unsigned int flags)
++static int cf_check flush_tlb(
++    const cpumask_t *mask, const void *va, unsigned int flags)
  {
-diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
-index b8730a9441ce..fb370af90b5c 100644
---- a/xen/arch/x86/mm/shadow/common.c
-+++ b/xen/arch/x86/mm/shadow/common.c
-@@ -3242,7 +3242,7 @@ void shadow_audit_tables(struct vcpu *v)
- 
- #ifdef CONFIG_PV
- 
--void pv_l1tf_tasklet(void *data)
-+void cf_check pv_l1tf_tasklet(void *data)
- {
-     struct domain *d = data;
- 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 32ec156e6f6a..a49c26064601 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1824,7 +1824,7 @@ struct migrate_info {
- 
- static DEFINE_PER_CPU(struct migrate_info *, continue_info);
- 
--static void continue_hypercall_tasklet_handler(void *data)
-+static void cf_check continue_hypercall_tasklet_handler(void *data)
- {
-     struct migrate_info *info = data;
-     struct vcpu *v = info->vcpu;
-diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-index 2c916d528ab2..b568484ca62c 100644
---- a/xen/common/keyhandler.c
-+++ b/xen/common/keyhandler.c
-@@ -73,7 +73,7 @@ static struct keyhandler {
- #undef KEYHANDLER
- };
- 
--static void keypress_action(void *unused)
-+static void cf_check keypress_action(void *unused)
- {
-     handle_keypress(keypress_key, NULL);
- }
-@@ -206,7 +206,7 @@ static void dump_registers(unsigned char key, struct cpu_user_regs *regs)
- 
- static DECLARE_TASKLET(dump_hwdom_tasklet, NULL, NULL);
- 
--static void dump_hwdom_action(void *data)
-+static void cf_check dump_hwdom_action(void *data)
- {
-     struct vcpu *v = data;
- 
-@@ -437,7 +437,7 @@ static void read_clocks(unsigned char key)
-            maxdif_cycles, sumdif_cycles/count, count, dif_cycles);
+     if ( !(ms_hyperv.hints & HV_X64_REMOTE_TLB_FLUSH_RECOMMENDED) )
+         return -EOPNOTSUPP;
+diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
+index 17807cdea688..9c2defaa6621 100644
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -237,7 +237,7 @@ static int init_evtchn(void)
+     return rc;
  }
  
--static void run_all_nonirq_keyhandlers(void *unused)
-+static void cf_check run_all_nonirq_keyhandlers(void *unused)
+-static void __init setup(void)
++static void __init cf_check setup(void)
  {
-     /* Fire all the non-IRQ-context diagnostic keyhandlers */
-     struct keyhandler *h;
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 701efd87a173..4e1c29ab7879 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -1591,7 +1591,7 @@ static int schedule_work(struct payload *data, uint32_t cmd, uint32_t timeout)
-     return 0;
+     init_memmap();
+ 
+@@ -265,7 +265,7 @@ static void __init setup(void)
+     BUG_ON(init_evtchn());
  }
  
--static void tasklet_fn(void *unused)
-+static void cf_check tasklet_fn(void *unused)
+-static int ap_setup(void)
++static int cf_check ap_setup(void)
  {
-     this_cpu(work_to_do) = 1;
- }
-diff --git a/xen/common/stop_machine.c b/xen/common/stop_machine.c
-index a122bd4afe09..3adbe380de96 100644
---- a/xen/common/stop_machine.c
-+++ b/xen/common/stop_machine.c
-@@ -141,7 +141,7 @@ int stop_machine_run(int (*fn)(void *), void *data, unsigned int cpu)
-     return ret;
+     set_vcpu_id();
+ 
+@@ -295,7 +295,7 @@ static void cf_check ap_resume(void *unused)
+     BUG_ON(init_evtchn());
  }
  
--static void stopmachine_action(void *data)
-+static void cf_check stopmachine_action(void *data)
+-static void resume(void)
++static void cf_check resume(void)
  {
-     unsigned int cpu = (unsigned long)data;
-     enum stopmachine_state state = STOPMACHINE_START;
-diff --git a/xen/common/trace.c b/xen/common/trace.c
-index b5358508f804..a7c092fcbbe9 100644
---- a/xen/common/trace.c
-+++ b/xen/common/trace.c
-@@ -663,7 +663,7 @@ static inline void insert_lost_records(struct t_buf *buf)
-  * Notification is performed in qtasklet to avoid deadlocks with contexts
-  * which __trace_var() may be called from (e.g., scheduler critical regions).
-  */
--static void trace_notify_dom0(void *unused)
-+static void cf_check trace_notify_dom0(void *unused)
+     /* Reset shared info page. */
+     map_shared_info();
+@@ -318,13 +318,14 @@ static void resume(void)
+         pv_console_init();
+ }
+ 
+-static void __init e820_fixup(struct e820map *e820)
++static void __init cf_check e820_fixup(struct e820map *e820)
  {
-     send_global_virq(VIRQ_TBUF);
- }
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index 4694be83db45..d74b65f6bf23 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -574,7 +574,7 @@ static void serial_rx(char c, struct cpu_user_regs *regs)
-     __serial_rx(c, regs);
+     if ( pv_shim )
+         pv_shim_fixup_e820(e820);
  }
  
--static void notify_dom0_con_ring(void *unused)
-+static void cf_check notify_dom0_con_ring(void *unused)
+-static int flush_tlb(const cpumask_t *mask, const void *va, unsigned int flags)
++static int cf_check flush_tlb(
++    const cpumask_t *mask, const void *va, unsigned int flags)
  {
-     send_global_virq(VIRQ_CON_RING);
+     return xen_hypercall_hvm_op(HVMOP_flush_tlbs, NULL);
  }
-diff --git a/xen/drivers/passthrough/amd/iommu_guest.c b/xen/drivers/passthrough/amd/iommu_guest.c
-index 85828490ffee..361ff864d846 100644
---- a/xen/drivers/passthrough/amd/iommu_guest.c
-+++ b/xen/drivers/passthrough/amd/iommu_guest.c
-@@ -456,7 +456,7 @@ static int do_invalidate_dte(struct domain *d, cmd_entry_t *cmd)
-     return 0;
- }
- 
--static void guest_iommu_process_command(void *data)
-+static void cf_check guest_iommu_process_command(void *data)
- {
-     unsigned long opcode, tail, head, cmd_mfn;
-     cmd_entry_t *cmd;
-diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
-index f1ed75558227..34a9e49f1c5a 100644
---- a/xen/drivers/passthrough/amd/iommu_init.c
-+++ b/xen/drivers/passthrough/amd/iommu_init.c
-@@ -26,7 +26,7 @@
- static int __initdata nr_amd_iommus;
- static bool __initdata pci_init;
- 
--static void do_amd_iommu_irq(void *data);
-+static void cf_check do_amd_iommu_irq(void *data);
- static DECLARE_SOFTIRQ_TASKLET(amd_iommu_irq_tasklet, do_amd_iommu_irq, NULL);
- 
- unsigned int __read_mostly amd_iommu_acpi_info;
-@@ -692,7 +692,7 @@ static void iommu_check_ppr_log(struct amd_iommu *iommu)
-     spin_unlock_irqrestore(&iommu->lock, flags);
- }
- 
--static void do_amd_iommu_irq(void *unused)
-+static void cf_check do_amd_iommu_irq(void *unused)
- {
-     struct amd_iommu *iommu;
- 
-diff --git a/xen/drivers/passthrough/vtd/iommu.c b/xen/drivers/passthrough/vtd/iommu.c
-index 9e85016830bf..7a9c391bec70 100644
---- a/xen/drivers/passthrough/vtd/iommu.c
-+++ b/xen/drivers/passthrough/vtd/iommu.c
-@@ -1097,7 +1097,7 @@ static void __do_iommu_page_fault(struct vtd_iommu *iommu)
-     }
- }
- 
--static void do_iommu_page_fault(void *unused)
-+static void cf_check do_iommu_page_fault(void *unused)
- {
-     struct acpi_drhd_unit *drhd;
- 
 -- 
 2.11.0
 
