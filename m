@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F20DC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:18:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.272043.466834 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90FF1C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:18:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.272051.466852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbEm-0002iq-Hb; Mon, 14 Feb 2022 13:17:52 +0000
+	id 1nJbEs-0003V0-4j; Mon, 14 Feb 2022 13:17:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 272043.466834; Mon, 14 Feb 2022 13:17:52 +0000
+Received: by outflank-mailman (output) from mailman id 272051.466852; Mon, 14 Feb 2022 13:17:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbEm-0002hL-9q; Mon, 14 Feb 2022 13:17:52 +0000
-Received: by outflank-mailman (input) for mailman id 272043;
- Mon, 14 Feb 2022 13:17:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nJbEr-0003UY-UI; Mon, 14 Feb 2022 13:17:57 +0000
+Received: by outflank-mailman (input) for mailman id 272051;
+ Mon, 14 Feb 2022 13:17:56 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb3Q-0008IH-DZ
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:08 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id de5ceaad-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:06:07 +0100 (CET)
+ id 1nJb4m-00023t-9Y
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:07:32 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 0f868522-8d97-11ec-b215-9bbe72dcb22c;
+ Mon, 14 Feb 2022 14:07:30 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,265 +38,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: de5ceaad-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 0f868522-8d97-11ec-b215-9bbe72dcb22c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843967;
+  d=citrix.com; s=securemail; t=1644844050;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=skVgVxLknOxv+80SVwWA5GN8E1fXIaaRgPjclkqsHNc=;
-  b=dBDRWjBxD/GZz1XwKIHDYZLG1yUVtOSvRfIDuPkLZF8IA7aau5s7Mcpg
-   CPjoJxhNVN7uK4sWVijJ8qTU3iRBuDZEjlaCxYEJOIp/RKtC5arHN2XL8
-   WsBosF1Uv3Xt73fY8gI15wlpHeSGfZFbznQIoTSKpe6YofyXoPsCAHfLq
-   k=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: NEp8paYwyA+te02yyWc1DX2MXpcq6Tifjfqu7zoJPEbMHXhfEW7a9tUwfSOgQKyPiqnAPD3sOM
- Yooc66J92E2/d3q0uF8CWYclirm25+Q1cghSJkLll13ysMNmjZapAXPLE9oy5QT/MKvpR0n/Lw
- kuUkBT61uexAaBvJ8KUaBVFVisFCFSILQpQtbu6vBrGK4ltZ+zcZZE5LiLktUHiPcWaCeZcO0O
- mCVFtuzPkQeeSia1mpPL2b+ZPKVPLcw4IMzUelyg6wmi99LeYSmxfmMqdB/cYRcqRH6/4zR0a5
- AbyHphPXe+ld+rS4SecsIa9y
+   references:mime-version;
+  bh=s+Jt3kVFT6FeqRAFMyblKx1FZnX0D4ErdxbQ4UUEYAQ=;
+  b=VHarnlgKoEuz+T/DcNbffAC3R15cP7vxCHcVh7ZMZzg9D1UNXKbnYH2Z
+   DMPp3d4KVFy7W+nCbPf/kl1k5p2qmF5tq5Z0zQrXIvrLrwu4z2lExFH9R
+   RyFz497djkvC/QkT44p/z+M1JsJ2MBxvBesfvZhBqmL3mXF77BF7LGO2h
+   Q=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: sOXmjbQ9kP//HyRdi956wfUOuNX9Kjm/Wd+sZjKDp0SuqOAg0z0HsOt9ixom5wnyM8vkYkojxm
+ bg1bRlH/iLWZwTl44lZzjUIM6HaSSyZtddniFaqScqOJ9q+pS0zonjOqRsxGmGyOOy/aNSFPgP
+ vkIB70wKB6zyczGx+P3uqUU9k7EqyhxP16qRJ8HTuNYx7Rvp5TEgL0YWP4vl0PpalA09LiA4Lo
+ eLtdmwn/rHgPR2gbceQ3xtzVZUEwAGn9ydpe/7O2873JfJRWjA+1r7aBT04ziTi8XziETD20BK
+ E4+Fl/YUTZEBoeFHBoN22mqm
 X-SBRS: 5.1
-X-MesageID: 64149440
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 64554519
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:MmuzEqnTwao9Eb2wHeTxu5To5gy+IURdPkR7XQ2eYbSJt1+Wr1Gzt
- xIfXWiBP63ZNmWjLt10PY21909T6sCAytQxHQI+/CAxECMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA180IMsdoUg7wbRh2Nc02YHR7z6l4
- rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
- s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- M9Pp67uVTcJAqTzmsEFXjVjPwEiFoQTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQ6qHO
- 5tFNWIHgBLoOURzI00pEa4EjdyOnWWuVwJGk1XIuv9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
- XjJl0zbKBwHMN2UyRKe72mhwOTImEvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
- 3H44QJ38/J0rhbyCICgAVvo+xZooyLwRfJKEf8Ith296pbd3AS8HmUodRJhNPcP4ZpeqSMR6
- neFmNbgBDpKubKTSG6A+rr8kQ5eKRT5PkdZO3ZaEFJtD83L5dhq00mRFooL/Lud04WtcQwc1
- Qxmu8TXa187qccQn5u28lnc695HjsiYF1Vljuk7s4/M0++YWGJHT9HygbQ4xawZRGp8crVml
- CJa8/VyFMhUUfmweNWlGY3h5o2B6fefKyH7ilVyBZQn/DnF0yf9IdwPsGEjeR8waZxsldrVj
- Kj741052XOuFCHyMf8fj3yZV6zGMpQM5fy6D6uJP7Kik7B6dROd/TEGWKJj9zuFraTYqolmY
- c3zWZ/1VR4yUP07pBLrF7Z1+eJ6nUgWmDKMLa0XOjz6iNJyklbOEuxbWLZPB8hkhJ65TPL9r
- YoOaZvSk08HOAA8CwGOmbMuwZkxBSBTLfjLRwZ/L4Zv+yJqRzMsDeH/27Qkd9A3lqhZjL6Qr
- Hq8RlVZ2Bz0gniecVeGbXVqabXOW5djrC1kYXxwbAjwg3VzM5yy6Ko/docseeV1/uJU0vMpH
- eIOfN+NA6oTR22fqSgdd5T0sKdraA+v2VCVJyOgbTVmJ8xgSgXF98XKZAzq8CVSXCO7udFn+
- ++r1x/BQIpFTANnVZ6EZPWqxlK3nH4chOMtABeYfogNIB3hqdE4JTbwg/k7J9A3BS/CnjbKh
- RyLBRo4pPXWp9Nn+tf+mq3Z/ZyiFPFzHxQGEjCDv6q2LyTT4kGq3ZREDLSTZTnYWW75pPeia
- OFSw62uOfELhg8X4Y91ErItxqMi/dr/4bRdy108TnnMal2qDJJmI2WHgpYT5vEcmOcBtFvkQ
- F+L9/lbJa6NaZHsH1MmLQY4aviOiKMPkT7I4PVpeEj36UebJlZcvZm+6/VUtBFgEQ==
-IronPort-HdrOrdr: A9a23:GBdeXanfJnC84FfjKRr5d5fvhcPpDfIo3DAbv31ZSRFFG/Fxl6
- iV/cjztCWE8Ar5N0tQ+uxoVJPufZqYz+8Q3WBzB8baYOCFghrLEGgK1+KLqFeMdxEWtNQtsp
- uIG5IObuEYZmIbsS+V2meF+q4bsby6zJw=
+IronPort-Data: A9a23:758jf61bnZxSwly59/bD5cp2kn2cJEfYwER7XKvMYLTBsI5bpzdSz
+ mBJXTzVbP6JYWOhc951OYvjoUwC6pHTnNBjSAU6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o5wrJh2+aEvPDia++zk
+ YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
+ 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhktBD7
+ vlHt5OJGAIQMP3939Y/CyBzHHQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
+ 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u2p0TQauHN
+ qL1bxJrYjXlYhB1fW1PBY8Ykd6xt36nfi9h/Qf9Sa0fvDGIkV0ZPKLWGMrYfJmGSNtYmm6cp
+ 3na5CLpDxcCLtudxDGZtHW2iYfycTjTAdxIUufir7gz3QPVljd75AAquUWTrPmLrGK0Wd1me
+ kkt9Hof6poQrHWAQYyoN/Gnm0KsshkZUttWNuQ17gCR16bZizqk6ng4oi1pM4J/6pJvLdA+/
+ hrQxo6yW2Qz2FGAYS/Frt+pQSWO1T/5xIPoTQsNVkM77tbqu+nfZTqfH484QMZZYjAYcAwcI
+ gxmTgBj3d3/buZRjs1XGGwrZBr2+PD0ovYdvFm/Y45cxloRiHSZT4Kp80PHyv1LMZyUSFKM1
+ FBdxZTCs7BeUMzVzXfXKAnoIF1Oz6zbWAAwfHY1R8Vxn9hT0yLLkX9sDMFWex4yb5dslc7Ba
+ 07PowJBjKK/z1PxBZKbl7mZUpxwpYC5TIyNfqmNMrJmP8ggHCfarXoGTRPBgAjQfL0EzPhX1
+ WGzKp33Ux73yM1PkVKLegvq+eF3mH5unz6PLX05pjz+uYejiLeuYe9tGDOzgioRtfvYyOkM2
+ 9oAZcaM1TtFV+jyPnve/YIJdAhYJnknH5Hm7cdQc7fbcAZhHWggDd7XwK8gJNM5z/gEyL+Q8
+ yHvQFJcxXr+mWbDdVeAZEd8Ze69Rp14t386Y3AhZA76x3g5bI+zx64DbJ9rL6I//eluwKcsH
+ fkIcsmNGNpVTTHD92hPZJXxttU6Jh+qmRiPL2yuZz1mJ8xsQAnA+9nFeArz9XZRUnrr5JVm+
+ 7D5j1HVW5sOQQhmHf36UvP3wgPjp2UZlcJzQ1DMfotZdnLz/dU4MCf2lPI2fZ0BcE2R2juA2
+ g+KKh4Evu2R8ZQt+dzEiK3Y/YekF+xyQhhTE2XBtOvkMCDb+iyowJNaUfbOdjfYDTum9KKnb
+ ORT7vf9LPxYwwoa79siS+5mnfAk+t/ih75G1QA1TnzEYmOiBq5kPnTbj9JEsbdAx+MBtAa7M
+ q5VFgK25Vld1BvZLWMs
+IronPort-HdrOrdr: A9a23:y/CNiai7vN8Zi7SlCLHi2MtuB3BQXtgji2hC6mlwRA09TySZ//
+ rBoB17726MtN9/YhEdcLy7VJVoBEmskKKdgrNhW4tKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QFJSWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149440"
+   d="scan'208";a="64554519"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v2 67/70] x86/entry: Make IDT entrypoints CET-IBT compatible
-Date: Mon, 14 Feb 2022 12:51:24 +0000
-Message-ID: <20220214125127.17985-68-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v2 21/70] xen/evtchn: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:38 +0000
+Message-ID: <20220214125127.17985-22-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Each IDT vector needs to land on an endbr64 instruction.  This is especially
-important for the #CP handler, which will recurse indefinitely if the endbr64
-is missing, eventually escalating to #DF if guard pages are active.
+Control Flow Integrity schemes use toolchain and optionally hardware support
+to help protect against call/jump/return oriented programming attacks.
+
+Use cf_check to annotate function pointer targets for the toolchain.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
+ xen/common/event_2l.c      | 21 ++++++++++++---------
+ xen/common/event_channel.c |  3 ++-
+ xen/common/event_fifo.c    | 30 ++++++++++++++++--------------
+ 3 files changed, 30 insertions(+), 24 deletions(-)
 
-v2:
- * Extra newlines in asm
- * Reword commit message
----
- xen/arch/x86/x86_64/compat/entry.S |  1 +
- xen/arch/x86/x86_64/entry.S        | 30 ++++++++++++++++++++++++++++--
- 2 files changed, 29 insertions(+), 2 deletions(-)
-
-diff --git a/xen/arch/x86/x86_64/compat/entry.S b/xen/arch/x86/x86_64/compat/entry.S
-index c84ff7ea6476..5fd6dbbd4513 100644
---- a/xen/arch/x86/x86_64/compat/entry.S
-+++ b/xen/arch/x86/x86_64/compat/entry.S
-@@ -12,6 +12,7 @@
- #include <irq_vectors.h>
+diff --git a/xen/common/event_2l.c b/xen/common/event_2l.c
+index 7424320e525a..d40dd51ab555 100644
+--- a/xen/common/event_2l.c
++++ b/xen/common/event_2l.c
+@@ -16,7 +16,8 @@
  
- ENTRY(entry_int82)
-+        ENDBR64
-         ALTERNATIVE "", clac, X86_FEATURE_XEN_SMAP
-         pushq $0
-         movl  $HYPERCALL_VECTOR, 4(%rsp)
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 9abcf95bd010..ea6f0afbc2b4 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -386,6 +386,7 @@ UNLIKELY_END(sysenter_gpf)
-         jmp   .Lbounce_exception
+ #include <asm/guest_atomics.h>
  
- ENTRY(int80_direct_trap)
-+        ENDBR64
-         ALTERNATIVE "", clac, X86_FEATURE_XEN_SMAP
-         pushq $0
-         movl  $0x80, 4(%rsp)
-@@ -698,6 +699,7 @@ ENTRY(common_interrupt)
-         jmp ret_from_intr
+-static void evtchn_2l_set_pending(struct vcpu *v, struct evtchn *evtchn)
++static void cf_check evtchn_2l_set_pending(
++    struct vcpu *v, struct evtchn *evtchn)
+ {
+     struct domain *d = v->domain;
+     unsigned int port = evtchn->port;
+@@ -41,12 +42,14 @@ static void evtchn_2l_set_pending(struct vcpu *v, struct evtchn *evtchn)
+     evtchn_check_pollers(d, port);
+ }
  
- ENTRY(page_fault)
-+        ENDBR64
-         movl  $TRAP_page_fault,4(%rsp)
- /* No special register assumptions. */
- GLOBAL(handle_exception)
-@@ -872,75 +874,91 @@ FATAL_exception_with_ints_disabled:
-         BUG   /* fatal_trap() shouldn't return. */
+-static void evtchn_2l_clear_pending(struct domain *d, struct evtchn *evtchn)
++static void cf_check evtchn_2l_clear_pending(
++    struct domain *d, struct evtchn *evtchn)
+ {
+     guest_clear_bit(d, evtchn->port, &shared_info(d, evtchn_pending));
+ }
  
- ENTRY(divide_error)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_divide_error,4(%rsp)
-         jmp   handle_exception
+-static void evtchn_2l_unmask(struct domain *d, struct evtchn *evtchn)
++static void cf_check evtchn_2l_unmask(
++    struct domain *d, struct evtchn *evtchn)
+ {
+     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
+     unsigned int port = evtchn->port;
+@@ -64,8 +67,8 @@ static void evtchn_2l_unmask(struct domain *d, struct evtchn *evtchn)
+     }
+ }
  
- ENTRY(coprocessor_error)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_copro_error,4(%rsp)
-         jmp   handle_exception
+-static bool evtchn_2l_is_pending(const struct domain *d,
+-                                 const struct evtchn *evtchn)
++static bool cf_check evtchn_2l_is_pending(
++    const struct domain *d, const struct evtchn *evtchn)
+ {
+     evtchn_port_t port = evtchn->port;
+     unsigned int max_ports = BITS_PER_EVTCHN_WORD(d) * BITS_PER_EVTCHN_WORD(d);
+@@ -75,8 +78,8 @@ static bool evtchn_2l_is_pending(const struct domain *d,
+             guest_test_bit(d, port, &shared_info(d, evtchn_pending)));
+ }
  
- ENTRY(simd_coprocessor_error)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_simd_error,4(%rsp)
-         jmp   handle_exception
+-static bool evtchn_2l_is_masked(const struct domain *d,
+-                                const struct evtchn *evtchn)
++static bool cf_check evtchn_2l_is_masked(
++    const struct domain *d, const struct evtchn *evtchn)
+ {
+     evtchn_port_t port = evtchn->port;
+     unsigned int max_ports = BITS_PER_EVTCHN_WORD(d) * BITS_PER_EVTCHN_WORD(d);
+@@ -86,8 +89,8 @@ static bool evtchn_2l_is_masked(const struct domain *d,
+             guest_test_bit(d, port, &shared_info(d, evtchn_mask)));
+ }
  
- ENTRY(device_not_available)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_no_device,4(%rsp)
-         jmp   handle_exception
+-static void evtchn_2l_print_state(struct domain *d,
+-                                  const struct evtchn *evtchn)
++static void cf_check evtchn_2l_print_state(
++    struct domain *d, const struct evtchn *evtchn)
+ {
+     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
  
- ENTRY(debug)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_debug,4(%rsp)
-         jmp   handle_ist_exception
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index 2026bc30dc95..183e78ac17f1 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -99,7 +99,8 @@ static xen_event_channel_notification_t __read_mostly
+     xen_consumers[NR_XEN_CONSUMERS];
  
- ENTRY(int3)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_int3,4(%rsp)
-         jmp   handle_exception
+ /* Default notification action: wake up from wait_on_xen_event_channel(). */
+-static void default_xen_notification_fn(struct vcpu *v, unsigned int port)
++static void cf_check default_xen_notification_fn(
++    struct vcpu *v, unsigned int port)
+ {
+     /* Consumer needs notification only if blocked. */
+     if ( test_and_clear_bit(_VPF_blocked_in_xen, &v->pause_flags) )
+diff --git a/xen/common/event_fifo.c b/xen/common/event_fifo.c
+index 2fb01b82db84..ed4d3beb10f3 100644
+--- a/xen/common/event_fifo.c
++++ b/xen/common/event_fifo.c
+@@ -78,7 +78,7 @@ static inline event_word_t *evtchn_fifo_word_from_port(const struct domain *d,
+     return d->evtchn_fifo->event_array[p] + w;
+ }
  
- ENTRY(overflow)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_overflow,4(%rsp)
-         jmp   handle_exception
+-static void evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
++static void cf_check evtchn_fifo_init(struct domain *d, struct evtchn *evtchn)
+ {
+     event_word_t *word;
  
- ENTRY(bounds)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_bounds,4(%rsp)
-         jmp   handle_exception
+@@ -158,7 +158,8 @@ static bool_t evtchn_fifo_set_link(struct domain *d, event_word_t *word,
+     return 1;
+ }
  
- ENTRY(invalid_op)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_invalid_op,4(%rsp)
-         jmp   handle_exception
+-static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
++static void cf_check evtchn_fifo_set_pending(
++    struct vcpu *v, struct evtchn *evtchn)
+ {
+     struct domain *d = v->domain;
+     unsigned int port;
+@@ -317,7 +318,8 @@ static void evtchn_fifo_set_pending(struct vcpu *v, struct evtchn *evtchn)
+         evtchn_check_pollers(d, port);
+ }
  
- ENTRY(invalid_TSS)
-+        ENDBR64
-         movl  $TRAP_invalid_tss,4(%rsp)
-         jmp   handle_exception
+-static void evtchn_fifo_clear_pending(struct domain *d, struct evtchn *evtchn)
++static void cf_check evtchn_fifo_clear_pending(
++    struct domain *d, struct evtchn *evtchn)
+ {
+     event_word_t *word;
  
- ENTRY(segment_not_present)
-+        ENDBR64
-         movl  $TRAP_no_segment,4(%rsp)
-         jmp   handle_exception
+@@ -334,7 +336,7 @@ static void evtchn_fifo_clear_pending(struct domain *d, struct evtchn *evtchn)
+     guest_clear_bit(d, EVTCHN_FIFO_PENDING, word);
+ }
  
- ENTRY(stack_segment)
-+        ENDBR64
-         movl  $TRAP_stack_error,4(%rsp)
-         jmp   handle_exception
+-static void evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
++static void cf_check evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
+ {
+     struct vcpu *v = d->vcpu[evtchn->notify_vcpu_id];
+     event_word_t *word;
+@@ -350,32 +352,32 @@ static void evtchn_fifo_unmask(struct domain *d, struct evtchn *evtchn)
+         evtchn_fifo_set_pending(v, evtchn);
+ }
  
- ENTRY(general_protection)
-+        ENDBR64
-         movl  $TRAP_gp_fault,4(%rsp)
-         jmp   handle_exception
+-static bool evtchn_fifo_is_pending(const struct domain *d,
+-                                   const struct evtchn *evtchn)
++static bool cf_check evtchn_fifo_is_pending(
++    const struct domain *d, const struct evtchn *evtchn)
+ {
+     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
  
- ENTRY(alignment_check)
-+        ENDBR64
-         movl  $TRAP_alignment_check,4(%rsp)
-         jmp   handle_exception
+     return word && guest_test_bit(d, EVTCHN_FIFO_PENDING, word);
+ }
  
- ENTRY(entry_CP)
-+        ENDBR64
-         movl  $X86_EXC_CP, 4(%rsp)
-         jmp   handle_exception
+-static bool_t evtchn_fifo_is_masked(const struct domain *d,
+-                                    const struct evtchn *evtchn)
++static bool cf_check evtchn_fifo_is_masked(
++    const struct domain *d, const struct evtchn *evtchn)
+ {
+     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
  
- ENTRY(double_fault)
-+        ENDBR64
-         movl  $TRAP_double_fault,4(%rsp)
-         /* Set AC to reduce chance of further SMAP faults */
-         ALTERNATIVE "", stac, X86_FEATURE_XEN_SMAP
-@@ -966,6 +984,7 @@ ENTRY(double_fault)
+     return !word || guest_test_bit(d, EVTCHN_FIFO_MASKED, word);
+ }
  
-         .pushsection .init.text, "ax", @progbits
- ENTRY(early_page_fault)
-+        ENDBR64
-         movl  $TRAP_page_fault,4(%rsp)
-         SAVE_ALL
-         movq  %rsp,%rdi
-@@ -974,6 +993,7 @@ ENTRY(early_page_fault)
-         .popsection
+-static bool_t evtchn_fifo_is_busy(const struct domain *d,
+-                                  const struct evtchn *evtchn)
++static bool cf_check evtchn_fifo_is_busy(
++    const struct domain *d, const struct evtchn *evtchn)
+ {
+     const event_word_t *word = evtchn_fifo_word_from_port(d, evtchn->port);
  
- ENTRY(nmi)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_nmi,4(%rsp)
- handle_ist_exception:
-@@ -1102,12 +1122,14 @@ handle_ist_exception:
- #endif
+     return word && guest_test_bit(d, EVTCHN_FIFO_LINKED, word);
+ }
  
- ENTRY(machine_check)
-+        ENDBR64
-         pushq $0
-         movl  $TRAP_machine_check,4(%rsp)
-         jmp   handle_ist_exception
+-static int evtchn_fifo_set_priority(struct domain *d, struct evtchn *evtchn,
+-                                    unsigned int priority)
++static int cf_check evtchn_fifo_set_priority(
++    struct domain *d, struct evtchn *evtchn, unsigned int priority)
+ {
+     if ( priority > EVTCHN_FIFO_PRIORITY_MIN )
+         return -EINVAL;
+@@ -390,8 +392,8 @@ static int evtchn_fifo_set_priority(struct domain *d, struct evtchn *evtchn,
+     return 0;
+ }
  
- /* No op trap handler.  Required for kexec crash path. */
- GLOBAL(trap_nop)
-+        ENDBR64
-         iretq
+-static void evtchn_fifo_print_state(struct domain *d,
+-                                    const struct evtchn *evtchn)
++static void cf_check evtchn_fifo_print_state(
++    struct domain *d, const struct evtchn *evtchn)
+ {
+     event_word_t *word;
  
- /* Table of automatically generated entry points.  One per vector. */
-@@ -1136,7 +1158,9 @@ autogen_stubs: /* Automatically generated stubs. */
- #endif
- 
-         ALIGN
--1:      pushq $0
-+1:
-+        ENDBR64
-+        pushq $0
-         movb  $vec,4(%rsp)
-         jmp   common_interrupt
- 
-@@ -1146,7 +1170,9 @@ autogen_stubs: /* Automatically generated stubs. */
-         .elseif vec == X86_EXC_CSO || vec == X86_EXC_SPV || \
-                 vec == X86_EXC_VE  || (vec > X86_EXC_CP && vec < TRAP_nr)
- 
--1:      test  $8,%spl        /* 64bit exception frames are 16 byte aligned, but the word */
-+1:
-+        ENDBR64
-+        test  $8,%spl        /* 64bit exception frames are 16 byte aligned, but the word */
-         jz    2f             /* size is 8 bytes.  Check whether the processor gave us an */
-         pushq $0             /* error code, and insert an empty one if not.              */
- 2:      movb  $vec,4(%rsp)
 -- 
 2.11.0
 
