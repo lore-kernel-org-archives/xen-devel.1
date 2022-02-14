@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A523FC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:05:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271649.466257 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21D9C433FE
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:05:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271653.466279 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb2M-0002Y1-8x; Mon, 14 Feb 2022 13:05:02 +0000
+	id 1nJb2P-0003Nw-UJ; Mon, 14 Feb 2022 13:05:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271649.466257; Mon, 14 Feb 2022 13:05:02 +0000
+Received: by outflank-mailman (output) from mailman id 271653.466279; Mon, 14 Feb 2022 13:05:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb2L-0002WP-Tm; Mon, 14 Feb 2022 13:05:01 +0000
-Received: by outflank-mailman (input) for mailman id 271649;
- Mon, 14 Feb 2022 13:04:59 +0000
+	id 1nJb2P-0003LQ-Ck; Mon, 14 Feb 2022 13:05:05 +0000
+Received: by outflank-mailman (input) for mailman id 271653;
+ Mon, 14 Feb 2022 13:05:03 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb2J-00023t-HR
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:59 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b44e322f-8d96-11ec-b215-9bbe72dcb22c;
- Mon, 14 Feb 2022 14:04:56 +0100 (CET)
+ id 1nJb2N-00023t-C1
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:03 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b699f3dd-8d96-11ec-b215-9bbe72dcb22c;
+ Mon, 14 Feb 2022 14:05:00 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b44e322f-8d96-11ec-b215-9bbe72dcb22c
+X-Inumbo-ID: b699f3dd-8d96-11ec-b215-9bbe72dcb22c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843897;
+  d=citrix.com; s=securemail; t=1644843901;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=EY8ZkarZcewNBxs9p+GIs0w3h02UIU90azGWZSpiIn8=;
-  b=OPx2bTsGVKk/62xkkCWnEYIam2zc40r8dNaavU1wSyynBFx+//M1zkrV
-   pobGNGB9Fu/qah8WF+Ay239riHTBhtIWEM4Rc5pHLGUZBKC9/Y70carTR
-   9izE0looKvP3jVrU6ffUh3AEOy3PSeJr8UbS5IjT6irMFy8n0kjeCRpXt
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: lrGRbVeK6QOXSw5wAUcVhWcw7xA8/bUr8mDWXFRSxZpgxHVy02daTvWPD8OITqMjreflBfYFav
- +yyMZ5ougwpaZ56EPOY33dIfArG99TFW3Cn2p78/E3yB3QxLOKhgjRFtQERfGRJH9tlHTD2hlL
- 8g4FO0eWLCaIRtdXOuMngBwtPVB35bqzJi9eWiupePa1m4/ormn/FSbVthalZ4ahKoDdKjhNiC
- D6M1a6o0HutMBDhRjv+zFDUYWph7F+iYLtuscB6qVRK8Z2+2sSJiIEI1PcxumX6B1bN/TZFH5b
- lXIoxcXKGR7IobCA5G8LuCMx
+  bh=Vmf+grYE8bKtbE+rcnkJIH/kZo6uatD1f3oilVOV1Mo=;
+  b=dLJwZ9ACtIntA7zQuw9g97zLzcXOs8P1itm25ptg//lLPEE8Cru6NLZh
+   MJA7ASW2pQ8L9gAt2dsAX3BLhKZwrv11JBSwneMPnqEbt9NSbooawiJBM
+   iTQH4Yl6r+MHh12nvMW7XXJg39M0kAjrZQHkVC6Ifj1URpqCdPNz0mDLY
+   g=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: H91983OJySle/XwUPf9C7ClRnyUt40HvBbr2gDnpRR7yQONQvm90NE4gklDMhWGB0bZEeUOBBI
+ P9PXFmw5C2dhAChTv2st6OJ0gAL9nt1zq6RRV/CJW/Oe+5pCgK+qEjj5EhuIM0vD2gOpbRNzzH
+ bwoJ+gIIsAXKPwrHlYDjJAQBFbCt6KeVJO2fqeTINuU+WOLrgaCHMUGjGzchIYPKifidrH+VC5
+ X+Go0idnmudpB804gW1e0E7fQwYTASSOoMgMNeED6UEYdbZCjFsW3zWQxBEFY26vCJ3z/bKudP
+ waVTpe3ebicex2b7Oy7eFN5d
 X-SBRS: 5.1
-X-MesageID: 64149659
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 63592493
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:RlvXQqm8pA1lK+JTilOzsl7o5gyeIURdPkR7XQ2eYbSJt1+Wr1Gzt
- xJKW2mBOvmKMDD9f4glbtvioE4Ov5SHmtRqGVNkqCAxESMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BClVlxJVF/fngqoDUUYYoAQgsA180IMsdoUg7wbRh2Nc02YHR7z6l4
- rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
- s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- MQOiYa2bwknB7LRk9pNcyRXPhF7MJQTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBODtMJkSpTdLyjbBAOx9aZvCX7/L9ZlT2zJYasVmQ6qHO
- 5tHNGsHgBLobQETJA0xT4oEgbmTrSXQWTxCknaxqv9ii4TU5FMoi+W8WDbPQfSaSMMQkkuGq
- 2bu+2XiHgpcJNGZ0SCC8H+nmqnIhyyTZW4JPOTmrLgw2gTVnzFNTk1NPbemnRWnol/9Z8hZD
- UIawzUzppZi1HGkY+n4UiTt9RZooSUgc9ZXFuQ77iSExazV/xuVCwA4c9JRVDA1nJRoHGJ3j
- zdli/usXGUy6+PNFRpx45/J9WvaBMQDEYMVicbopyMh6sKrnow8hwmnoj1LQP/s1Y2d9d0dL
- lm3QMkCa1c70JRjO0aTpwmvb9eQSn/hFFBd2+kvdjj5hj6Vnab8D2BS1XDV7OxbMKGSRUSbs
- X4PlqC2tb5SUc7dxHHQGLxWRtlFAspp1xWG3zZS82QJrWzxqxZPg6gMiN2BGKuZGpldImK4C
- KMikQhQ+IVSLBOXgVxfOOqM5zAR5fG4T7zND6mMBvIXO8QZXFLXrUlGOB/Lt0iwwRdErE3KE
- crCGSpaJS1BUvoPIfvfb7p17ILHMQhgmT2NFcqmk3xKE9O2PRaodFvMC3PWBshR0U9OiFm9H
- w93O5TYxhNBfvf5ZyWLo4cfIUpTdSowBIzsqtwRfemGe1I0FGYkAv7X4LUgZ406wPgFyraWp
- imwCh1C1V7ypXzbMgHWOHptX6ziAMRkpnUhMC1yYVvxgyo/YZyi5bs0focseeV17/RqyPN5F
- qFXe8iJDvlVZC7A/jARMcv0oIB4LUz5jgOSJSu1JjM4esc4FQDO/9bleCrp9TUPUXXr5Zdv/
- eX421qCE5QZRglkAMLHU96Vzgu87SoHheZ/f0rUOd0PKk/ix5dndn7qhfgtLsBSdRianmmG1
- xybCAszrPXWp9Nn68HAgK2Jotv7E+Z6GUYGTWDX4azvaHvf92unh4RBTPyJbXbWU2atoPeuY
- uBczvfdNvwbnQkV79ogQugzla9utcHyo7J6zxh/GCSZZlumPbpsP32a0JQdraZK3LJY5VO7V
- 0/nFgO24llV1BcJyGIsGTc=
-IronPort-HdrOrdr: A9a23:eA9V96uD7sAP5RijWtAMYd087skDdNV00zEX/kB9WHVpmszxra
- 6TdZUgpGbJYVkqOE3I9ertBEDEewK4yXcX2/h2AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YGT0EUMrzN5DZB4voSmDPIceod/A==
+IronPort-Data: A9a23:Dmg5K6jnt8cAp/aTP24tSKe0X161eRcKZh0ujC45NGQN5FlHY01je
+ htvD2uEb/uPZTP9KI0kPtnj908DsJTRm9NgGgo5/CA2Riwb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oAMKRCQ7InQLlbGILes1htZGEk0GE/NtTo5w7Rj2tQx3YDga++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /1NiYK5cywFApbundkgbTR7KTlkBLxJreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNaiFO
+ ptDNWs0BPjGSxNUIAw1AY86p8brikL4XWRVsAvLjpNitgA/yyQuieOwYbI5YOeiVchT20qVu
+ G/C12D4GQ0BcsySzyKf9XChjfOJmjn0ML/+D5XhqKQs2gfKgDVOVltGDjNXvMVVlGa+Z8xWE
+ Wc4xhEMqJUPymGIdMHnZgy39SvsUgEnZ/JcFOgz6Qeow6XS4hqECmVscgOteODKp+dtG2V0i
+ wbhc8fBQGU27ebLES71GqK88GvqURX5O1PucsPtoeEtx9D46L8+gRvUJjqIOP7k14alcd0cL
+ t3jkcTfu1nxpZNRv0lY1Qqe695JmnQuZlRrjjg7pkr/smtEiHeNPuREE2Tz4/daN5q+RVKcp
+ nUCkMX2xLlQUc3SxHzQHb1UR+vBCxO53Nr02wAHInXc3271py7LkX54vFmS23uFwu5bIGS0M
+ Sc/SCta5YNJPWvCUEOES9nZNije9oC5TY6NfqmNNrJmO8EtHCfarHAGTRPBhAjFzRlz+ZzTz
+ L/GKK5A+15BUv85pNd3Ls9AuYIWKtcWmz+CG8Cjl07/uVdcDVbMIYo43JK1RrhRxMu5TM/9q
+ oY32xKix0oNXevgTDPQ9IJPf1kGIWJiXcL9qtBNd/7FKQ1jQTlzB/jUyLInWopkg6UKybuYo
+ iDjAhdVmAjlmHnKCQSWcXQ/Ornhaoly8CAgNis2MFf2h3V6OdSz7L0SfoccdKU88LAx1uZ9S
+ vQIIp3SAvlGRjnd1S4aaJ3x8N5reBix3FrcNCu5ejkvOZVnQlWRqNPjewLu8ggIDza26pRi8
+ +HxiFuDTMNaFQp4DcvQZPa+9H+LvCAQyLBoQk/FAthPY0GwooJkHDP8060sKMYWJBSdmjbDj
+ 1SKAQ0VrPXmqpMu9IWbnriNqoqkHrcsHkdeGGWHv7+6OTODozimyI5EFu2JYSrcRCX//6D7P
+ bdZyPT1MfsmmldWstUjT+Y3nPxmv9a/9aVHyglEHWnQawX5A7xtFXCKwM1Tu/Af3bReowa3B
+ hqC99Qy1W9l4y85/Ir9/DYYU9k=
+IronPort-HdrOrdr: A9a23:9wn6f69jvBhkISSWOupuk+DcI+orL9Y04lQ7vn2YSXRuE/Bw9v
+ re5MjzuiWE6wr5NEtOpTnEAtjlfZq+z+8N3WByB8bBYOCOggLBR+sOgbcKgQeQfBEWntQts5
+ uIGJIfNDSfNzZHZL7BkWyFL+o=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149659"
+   d="scan'208";a="63592493"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 14/70] xen: CFI hardening for init_timer()
-Date: Mon, 14 Feb 2022 12:50:31 +0000
-Message-ID: <20220214125127.17985-15-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 44/70] x86/pmu: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:01 +0000
+Message-ID: <20220214125127.17985-45-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,379 +106,379 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/cpu/mcheck/amd_nonfatal.c |  2 +-
- xen/arch/x86/cpu/mcheck/non-fatal.c    |  2 +-
- xen/arch/x86/hvm/pmtimer.c             |  2 +-
- xen/arch/x86/hvm/rtc.c                 |  6 +++---
- xen/arch/x86/hvm/viridian/time.c       |  2 +-
- xen/arch/x86/hvm/vpt.c                 |  2 +-
- xen/arch/x86/irq.c                     |  4 ++--
- xen/arch/x86/nmi.c                     |  2 +-
- xen/arch/x86/time.c                    |  4 ++--
- xen/common/rcupdate.c                  |  2 +-
- xen/common/sched/core.c                | 18 +++++++++---------
- xen/common/sched/credit.c              | 10 ++++------
- xen/common/sched/credit2.c             |  2 +-
- xen/common/sched/rt.c                  |  5 +++--
- xen/drivers/char/ehci-dbgp.c           |  2 +-
- xen/drivers/char/ns16550.c             |  6 +++---
- xen/drivers/cpufreq/cpufreq_ondemand.c |  2 +-
- 17 files changed, 36 insertions(+), 37 deletions(-)
+ xen/arch/x86/cpu/vpmu_amd.c             | 16 ++++++++--------
+ xen/arch/x86/cpu/vpmu_intel.c           | 16 ++++++++--------
+ xen/arch/x86/oprofile/op_model_athlon.c | 16 ++++++++--------
+ xen/arch/x86/oprofile/op_model_p4.c     | 14 +++++++-------
+ xen/arch/x86/oprofile/op_model_ppro.c   | 26 ++++++++++++++------------
+ 5 files changed, 45 insertions(+), 43 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/mcheck/amd_nonfatal.c b/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
-index 6e8901530a69..da0bf85f0223 100644
---- a/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
-+++ b/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
-@@ -127,7 +127,7 @@ static void mce_amd_checkregs(void *info)
-  * multiple correctable errors between two polls. In that case,
-  * increase polling frequency higher than normal.
-  */
--static void mce_amd_work_fn(void *data)
-+static void cf_check mce_amd_work_fn(void *data)
- {
- 	on_each_cpu(mce_amd_checkregs, data, 1);
- 
-diff --git a/xen/arch/x86/cpu/mcheck/non-fatal.c b/xen/arch/x86/cpu/mcheck/non-fatal.c
-index 2679c220a8a2..f7e411c0870e 100644
---- a/xen/arch/x86/cpu/mcheck/non-fatal.c
-+++ b/xen/arch/x86/cpu/mcheck/non-fatal.c
-@@ -67,7 +67,7 @@ static void mce_checkregs (void *info)
- 	}
+diff --git a/xen/arch/x86/cpu/vpmu_amd.c b/xen/arch/x86/cpu/vpmu_amd.c
+index 25ad4ecf48a4..5963ce90150a 100644
+--- a/xen/arch/x86/cpu/vpmu_amd.c
++++ b/xen/arch/x86/cpu/vpmu_amd.c
+@@ -186,7 +186,7 @@ static void amd_vpmu_unset_msr_bitmap(struct vcpu *v)
+     msr_bitmap_off(vpmu);
  }
  
--static void mce_work_fn(void *data)
-+static void cf_check mce_work_fn(void *data)
- { 
- 	on_each_cpu(mce_checkregs, NULL, 1);
- 
-diff --git a/xen/arch/x86/hvm/pmtimer.c b/xen/arch/x86/hvm/pmtimer.c
-index 97b9e41712fa..808819d1de91 100644
---- a/xen/arch/x86/hvm/pmtimer.c
-+++ b/xen/arch/x86/hvm/pmtimer.c
-@@ -124,7 +124,7 @@ static void pmt_update_time(PMTState *s)
- /* This function should be called soon after each time the MSB of the
-  * pmtimer register rolls over, to make sure we update the status
-  * registers and SCI at least once per rollover */
--static void pmt_timer_callback(void *opaque)
-+static void cf_check pmt_timer_callback(void *opaque)
+-static int amd_vpmu_do_interrupt(struct cpu_user_regs *regs)
++static int cf_check amd_vpmu_do_interrupt(struct cpu_user_regs *regs)
  {
-     PMTState *s = opaque;
-     uint32_t pmt_cycles_until_flip;
-diff --git a/xen/arch/x86/hvm/rtc.c b/xen/arch/x86/hvm/rtc.c
-index 3150f5f1479b..09d3501276bc 100644
---- a/xen/arch/x86/hvm/rtc.c
-+++ b/xen/arch/x86/hvm/rtc.c
-@@ -217,7 +217,7 @@ static void check_update_timer(RTCState *s)
-         s->use_timer = 0;
+     return 1;
  }
- 
--static void rtc_update_timer(void *opaque)
-+static void cf_check rtc_update_timer(void *opaque)
- {
-     RTCState *s = opaque;
- 
-@@ -230,7 +230,7 @@ static void rtc_update_timer(void *opaque)
-     spin_unlock(&s->lock);
- }
- 
--static void rtc_update_timer2(void *opaque)
-+static void cf_check rtc_update_timer2(void *opaque)
- {
-     RTCState *s = opaque;
- 
-@@ -421,7 +421,7 @@ static void alarm_timer_update(RTCState *s)
+@@ -206,7 +206,7 @@ static inline void context_load(struct vcpu *v)
      }
  }
  
--static void rtc_alarm_cb(void *opaque)
-+static void cf_check rtc_alarm_cb(void *opaque)
+-static int amd_vpmu_load(struct vcpu *v, bool_t from_guest)
++static int cf_check amd_vpmu_load(struct vcpu *v, bool from_guest)
  {
-     RTCState *s = opaque;
- 
-diff --git a/xen/arch/x86/hvm/viridian/time.c b/xen/arch/x86/hvm/viridian/time.c
-index 24ff117edb20..b56fd6766292 100644
---- a/xen/arch/x86/hvm/viridian/time.c
-+++ b/xen/arch/x86/hvm/viridian/time.c
-@@ -126,7 +126,7 @@ static void stop_stimer(struct viridian_stimer *vs)
-     vs->started = false;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     struct xen_pmu_amd_ctxt *ctxt;
+@@ -280,7 +280,7 @@ static inline void context_save(struct vcpu *v)
+         rdmsrl(counters[i], counter_regs[i]);
  }
  
--static void stimer_expire(void *data)
-+static void cf_check stimer_expire(void *data)
+-static int amd_vpmu_save(struct vcpu *v,  bool_t to_guest)
++static int cf_check amd_vpmu_save(struct vcpu *v,  bool to_guest)
  {
-     struct viridian_stimer *vs = data;
-     struct vcpu *v = vs->v;
-diff --git a/xen/arch/x86/hvm/vpt.c b/xen/arch/x86/hvm/vpt.c
-index 6fdc3e19fe8c..cb1d81bf9e82 100644
---- a/xen/arch/x86/hvm/vpt.c
-+++ b/xen/arch/x86/hvm/vpt.c
-@@ -271,7 +271,7 @@ void pt_restore_timer(struct vcpu *v)
-     pt_vcpu_unlock(v);
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     unsigned int i;
+@@ -348,7 +348,7 @@ static void context_update(unsigned int msr, u64 msr_content)
+     }
  }
  
--static void pt_timer_fn(void *data)
-+static void cf_check pt_timer_fn(void *data)
+-static int amd_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
++static int cf_check amd_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
  {
-     struct periodic_time *pt = data;
- 
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index bcf46cd54d16..f9c808455535 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -935,7 +935,7 @@ void alloc_direct_apic_vector(
-     spin_unlock(&lock);
- }
- 
--static void irq_ratelimit_timer_fn(void *data)
-+static void cf_check irq_ratelimit_timer_fn(void *data)
- {
-     struct irq_desc *desc, *tmp;
-     unsigned long flags;
-@@ -1129,7 +1129,7 @@ static inline void clear_pirq_eoi(struct domain *d, unsigned int irq)
- 
- static void set_eoi_ready(void *data);
- 
--static void irq_guest_eoi_timer_fn(void *data)
-+static void cf_check irq_guest_eoi_timer_fn(void *data)
- {
-     struct irq_desc *desc = data;
-     unsigned int i, irq = desc - irq_desc;
-diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
-index 5c101a9f97b3..c8ae4a5d7460 100644
---- a/xen/arch/x86/nmi.c
-+++ b/xen/arch/x86/nmi.c
-@@ -211,7 +211,7 @@ void __init check_nmi_watchdog(void)
-     return;
- }
- 
--static void nmi_timer_fn(void *unused)
-+static void cf_check nmi_timer_fn(void *unused)
- {
-     this_cpu(nmi_timer_ticks)++;
-     set_timer(&this_cpu(nmi_timer), NOW() + MILLISECS(1000));
-diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index 14f7d3fd635e..fac97023bf10 100644
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -815,7 +815,7 @@ static s_time_t __read_platform_stime(u64 platform_time)
-     return (stime_platform_stamp + scale_delta(diff, &plt_scale));
- }
- 
--static void plt_overflow(void *unused)
-+static void cf_check plt_overflow(void *unused)
- {
-     int i;
-     u64 count;
-@@ -1855,7 +1855,7 @@ static void time_calibration_nop_rendezvous(void *rv)
- static void (*time_calibration_rendezvous_fn)(void *) =
-     time_calibration_std_rendezvous;
- 
--static void time_calibration(void *unused)
-+static void cf_check time_calibration(void *unused)
- {
-     struct calibration_rendezvous r = {
-         .semaphore = ATOMIC_INIT(0)
-diff --git a/xen/common/rcupdate.c b/xen/common/rcupdate.c
-index 2ec5606de5dd..f9dd2584a8b7 100644
---- a/xen/common/rcupdate.c
-+++ b/xen/common/rcupdate.c
-@@ -575,7 +575,7 @@ static void rcu_idle_timer_stop(void)
-         stop_timer(&rdp->idle_timer);
- }
- 
--static void rcu_idle_timer_handler(void* data)
-+static void cf_check rcu_idle_timer_handler(void* data)
- {
-     perfc_incr(rcu_idle_timer);
- 
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 4a79971a1d45..cf1ba01b4d87 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -71,10 +71,10 @@ cpumask_t sched_res_mask;
- static DEFINE_SPINLOCK(sched_free_cpu_lock);
- 
- /* Various timer handlers. */
--static void s_timer_fn(void *unused);
--static void vcpu_periodic_timer_fn(void *data);
--static void vcpu_singleshot_timer_fn(void *data);
--static void poll_timer_fn(void *data);
-+static void cf_check s_timer_fn(void *unused);
-+static void cf_check vcpu_periodic_timer_fn(void *data);
-+static void cf_check vcpu_singleshot_timer_fn(void *data);
-+static void cf_check poll_timer_fn(void *data);
- 
- /* This is global for now so that private implementations can reach it */
- DEFINE_PER_CPU_READ_MOSTLY(struct sched_resource *, sched_res);
-@@ -1535,7 +1535,7 @@ long vcpu_yield(void)
+     struct vcpu *v = current;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+@@ -404,7 +404,7 @@ static int amd_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
      return 0;
  }
  
--static void domain_watchdog_timeout(void *data)
-+static void cf_check domain_watchdog_timeout(void *data)
+-static int amd_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
++static int cf_check amd_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
  {
-     struct domain *d = data;
- 
-@@ -2697,28 +2697,28 @@ static void schedule(void)
+     struct vcpu *v = current;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+@@ -422,7 +422,7 @@ static int amd_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+     return 0;
  }
  
- /* The scheduler timer: force a run through the scheduler */
--static void s_timer_fn(void *unused)
-+static void cf_check s_timer_fn(void *unused)
+-static void amd_vpmu_destroy(struct vcpu *v)
++static void cf_check amd_vpmu_destroy(struct vcpu *v)
  {
-     raise_softirq(SCHEDULE_SOFTIRQ);
-     SCHED_STAT_CRANK(sched_irq);
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -440,7 +440,7 @@ static void amd_vpmu_destroy(struct vcpu *v)
  }
  
- /* Per-VCPU periodic timer function: sends a virtual timer interrupt. */
--static void vcpu_periodic_timer_fn(void *data)
-+static void cf_check vcpu_periodic_timer_fn(void *data)
+ /* VPMU part of the 'q' keyhandler */
+-static void amd_vpmu_dump(const struct vcpu *v)
++static void cf_check amd_vpmu_dump(const struct vcpu *v)
  {
-     struct vcpu *v = data;
-     vcpu_periodic_timer_work(v);
- }
- 
- /* Per-VCPU single-shot timer function: sends a virtual timer interrupt. */
--static void vcpu_singleshot_timer_fn(void *data)
-+static void cf_check vcpu_singleshot_timer_fn(void *data)
- {
-     struct vcpu *v = data;
-     send_timer_event(v);
- }
- 
- /* SCHEDOP_poll timeout callback. */
--static void poll_timer_fn(void *data)
-+static void cf_check poll_timer_fn(void *data)
- {
-     struct vcpu *v = data;
- 
-diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
-index d0aa017c643e..5635271f6fea 100644
---- a/xen/common/sched/credit.c
-+++ b/xen/common/sched/credit.c
-@@ -230,8 +230,8 @@ struct csched_private {
-     struct timer master_ticker;
- };
- 
--static void csched_tick(void *_cpu);
--static void csched_acct(void *dummy);
-+static void cf_check csched_tick(void *_cpu);
-+static void cf_check csched_acct(void *dummy);
- 
- static inline int
- __unit_on_runq(const struct csched_unit *svc)
-@@ -1356,8 +1356,7 @@ csched_runq_sort(struct csched_private *prv, unsigned int cpu)
-     pcpu_schedule_unlock_irqrestore(lock, flags, cpu);
- }
- 
--static void
--csched_acct(void* dummy)
-+static void cf_check csched_acct(void* dummy)
- {
-     struct csched_private *prv = dummy;
-     unsigned long flags;
-@@ -1563,8 +1562,7 @@ csched_acct(void* dummy)
-     set_timer( &prv->master_ticker, NOW() + prv->tslice);
- }
- 
--static void
--csched_tick(void *_cpu)
-+static void cf_check csched_tick(void *_cpu)
- {
-     unsigned int cpu = (unsigned long)_cpu;
-     const struct sched_resource *sr = get_sched_res(cpu);
-diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
-index a5f073cda51e..d96e2749ddfb 100644
---- a/xen/common/sched/credit2.c
-+++ b/xen/common/sched/credit2.c
-@@ -2072,7 +2072,7 @@ static inline void do_replenish(struct csched2_dom *sdom)
-     sdom->budget += sdom->tot_budget;
- }
- 
--static void replenish_domain_budget(void* data)
-+static void cf_check replenish_domain_budget(void *data)
- {
-     struct csched2_dom *sdom = data;
-     unsigned long flags;
-diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
-index c24cd2ac3200..5ea6f01f263c 100644
---- a/xen/common/sched/rt.c
-+++ b/xen/common/sched/rt.c
-@@ -173,7 +173,7 @@
- #define TRC_RTDS_SCHED_TASKLET    TRC_SCHED_CLASS_EVT(RTDS, 5)
- #define TRC_RTDS_SCHEDULE         TRC_SCHED_CLASS_EVT(RTDS, 6)
- 
--static void repl_timer_handler(void *data);
-+static void cf_check repl_timer_handler(void *data);
- 
- /*
-  * System-wide private data, include global RunQueue/DepletedQ
-@@ -1452,7 +1452,8 @@ rt_dom_cntl(
-  * The replenishment timer handler picks units
-  * from the replq and does the actual replenishment.
-  */
--static void repl_timer_handler(void *data){
-+static void cf_check repl_timer_handler(void *data)
-+{
-     s_time_t now;
-     const struct scheduler *ops = data;
-     struct rt_private *prv = rt_priv(ops);
-diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
-index c893d246defa..a6b57fdf2d19 100644
---- a/xen/drivers/char/ehci-dbgp.c
-+++ b/xen/drivers/char/ehci-dbgp.c
-@@ -1289,7 +1289,7 @@ static void _ehci_dbgp_poll(struct cpu_user_regs *regs)
-     set_timer(&dbgp->timer, NOW() + timeout);
- }
- 
--static void ehci_dbgp_poll(void *data)
-+static void cf_check ehci_dbgp_poll(void *data)
- {
-     poll_port = data;
- #ifdef run_in_exception_handler
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 30596d60d4ed..990cad39fe85 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -111,7 +111,7 @@ struct ns16550_config_param {
- static void enable_exar_enhanced_bits(const struct ns16550 *uart);
- #endif
- 
--static void ns16550_delayed_resume(void *data);
-+static void cf_check ns16550_delayed_resume(void *data);
- 
- static u8 ns_read_reg(const struct ns16550 *uart, unsigned int reg)
- {
-@@ -229,7 +229,7 @@ static void __ns16550_poll(struct cpu_user_regs *regs)
-     set_timer(&uart->timer, NOW() + MILLISECS(uart->timeout_ms));
- }
- 
--static void ns16550_poll(void *data)
-+static void cf_check ns16550_poll(void *data)
- {
-     this_cpu(poll_port) = data;
- #ifdef run_in_exception_handler
-@@ -532,7 +532,7 @@ static void _ns16550_resume(struct serial_port *port)
- }
- 
- static int delayed_resume_tries;
--static void ns16550_delayed_resume(void *data)
-+static void cf_check ns16550_delayed_resume(void *data)
- {
-     struct serial_port *port = data;
-     struct ns16550 *uart = port->uart;
-diff --git a/xen/drivers/cpufreq/cpufreq_ondemand.c b/xen/drivers/cpufreq/cpufreq_ondemand.c
-index cabd9ffa8886..ba03eaa2336d 100644
---- a/xen/drivers/cpufreq/cpufreq_ondemand.c
-+++ b/xen/drivers/cpufreq/cpufreq_ondemand.c
-@@ -172,7 +172,7 @@ static void dbs_check_cpu(struct cpu_dbs_info_s *this_dbs_info)
+     const struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     const struct xen_pmu_amd_ctxt *ctxt = vpmu->context;
+@@ -480,7 +480,7 @@ static void amd_vpmu_dump(const struct vcpu *v)
      }
  }
  
--static void do_dbs_timer(void *dbs)
-+static void cf_check do_dbs_timer(void *dbs)
+-static int svm_vpmu_initialise(struct vcpu *v)
++static int cf_check svm_vpmu_initialise(struct vcpu *v)
  {
-     struct cpu_dbs_info_s *dbs_info = (struct cpu_dbs_info_s *)dbs;
+     struct xen_pmu_amd_ctxt *ctxt;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
+index 22dd4469d920..48b81ab6f018 100644
+--- a/xen/arch/x86/cpu/vpmu_intel.c
++++ b/xen/arch/x86/cpu/vpmu_intel.c
+@@ -288,7 +288,7 @@ static inline void __core2_vpmu_save(struct vcpu *v)
+         rdmsrl(MSR_CORE_PERF_GLOBAL_STATUS, core2_vpmu_cxt->global_status);
+ }
+ 
+-static int core2_vpmu_save(struct vcpu *v, bool_t to_guest)
++static int cf_check core2_vpmu_save(struct vcpu *v, bool to_guest)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -407,7 +407,7 @@ static int core2_vpmu_verify(struct vcpu *v)
+     return 0;
+ }
+ 
+-static int core2_vpmu_load(struct vcpu *v, bool_t from_guest)
++static int cf_check core2_vpmu_load(struct vcpu *v, bool from_guest)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -522,7 +522,7 @@ static int core2_vpmu_msr_common_check(u32 msr_index, int *type, int *index)
+     return 1;
+ }
+ 
+-static int core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
++static int cf_check core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
+ {
+     int i, tmp;
+     int type = -1, index = -1;
+@@ -690,7 +690,7 @@ static int core2_vpmu_do_wrmsr(unsigned int msr, uint64_t msr_content)
+     return 0;
+ }
+ 
+-static int core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
++static int cf_check core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+ {
+     int type = -1, index = -1;
+     struct vcpu *v = current;
+@@ -730,7 +730,7 @@ static int core2_vpmu_do_rdmsr(unsigned int msr, uint64_t *msr_content)
+ }
+ 
+ /* Dump vpmu info on console, called in the context of keyhandler 'q'. */
+-static void core2_vpmu_dump(const struct vcpu *v)
++static void cf_check core2_vpmu_dump(const struct vcpu *v)
+ {
+     const struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     unsigned int i;
+@@ -775,7 +775,7 @@ static void core2_vpmu_dump(const struct vcpu *v)
+     }
+ }
+ 
+-static int core2_vpmu_do_interrupt(struct cpu_user_regs *regs)
++static int cf_check core2_vpmu_do_interrupt(struct cpu_user_regs *regs)
+ {
+     struct vcpu *v = current;
+     u64 msr_content;
+@@ -802,7 +802,7 @@ static int core2_vpmu_do_interrupt(struct cpu_user_regs *regs)
+     return 1;
+ }
+ 
+-static void core2_vpmu_destroy(struct vcpu *v)
++static void cf_check core2_vpmu_destroy(struct vcpu *v)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -816,7 +816,7 @@ static void core2_vpmu_destroy(struct vcpu *v)
+     vpmu_clear(vpmu);
+ }
+ 
+-static int vmx_vpmu_initialise(struct vcpu *v)
++static int cf_check vmx_vpmu_initialise(struct vcpu *v)
+ {
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+     u64 msr_content;
+diff --git a/xen/arch/x86/oprofile/op_model_athlon.c b/xen/arch/x86/oprofile/op_model_athlon.c
+index 2177f02946e2..7bc5853a6c23 100644
+--- a/xen/arch/x86/oprofile/op_model_athlon.c
++++ b/xen/arch/x86/oprofile/op_model_athlon.c
+@@ -164,7 +164,7 @@ static inline u64 op_amd_randomize_ibs_op(u64 val)
+     return val;
+ }
+ 
+-static void athlon_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check athlon_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	msrs->counters[0].addr = MSR_K7_PERFCTR0;
+ 	msrs->counters[1].addr = MSR_K7_PERFCTR1;
+@@ -177,7 +177,7 @@ static void athlon_fill_in_addresses(struct op_msrs * const msrs)
+ 	msrs->controls[3].addr = MSR_K7_EVNTSEL3;
+ }
+ 
+-static void fam15h_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check fam15h_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	msrs->counters[0].addr = MSR_AMD_FAM15H_PERFCTR0;
+ 	msrs->counters[1].addr = MSR_AMD_FAM15H_PERFCTR1;
+@@ -194,7 +194,7 @@ static void fam15h_fill_in_addresses(struct op_msrs * const msrs)
+ 	msrs->controls[5].addr = MSR_AMD_FAM15H_EVNTSEL5;
+ }
+ 
+-static void athlon_setup_ctrs(struct op_msrs const * const msrs)
++static void cf_check athlon_setup_ctrs(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -308,9 +308,9 @@ static inline int handle_ibs(int mode, struct cpu_user_regs const * const regs)
+     return 1;
+ }
+ 
+-static int athlon_check_ctrs(unsigned int const cpu,
+-			     struct op_msrs const * const msrs,
+-			     struct cpu_user_regs const * const regs)
++static int cf_check athlon_check_ctrs(
++	unsigned int const cpu, struct op_msrs const * const msrs,
++	struct cpu_user_regs const * const regs)
+ 
+ {
+ 	uint64_t msr_content;
+@@ -386,7 +386,7 @@ static inline void start_ibs(void)
+ 	}
+ }
+  
+-static void athlon_start(struct op_msrs const * const msrs)
++static void cf_check athlon_start(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -415,7 +415,7 @@ static void stop_ibs(void)
+ 		wrmsrl(MSR_AMD64_IBSOPCTL, 0);
+ }
+ 
+-static void athlon_stop(struct op_msrs const * const msrs)
++static void cf_check athlon_stop(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+diff --git a/xen/arch/x86/oprofile/op_model_p4.c b/xen/arch/x86/oprofile/op_model_p4.c
+index b08ba53cbd39..d047258644db 100644
+--- a/xen/arch/x86/oprofile/op_model_p4.c
++++ b/xen/arch/x86/oprofile/op_model_p4.c
+@@ -390,7 +390,7 @@ static unsigned int get_stagger(void)
+ static unsigned long reset_value[NUM_COUNTERS_NON_HT];
+ 
+ 
+-static void p4_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check p4_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	unsigned int i;
+ 	unsigned int addr, stag;
+@@ -530,7 +530,7 @@ static void pmc_setup_one_p4_counter(unsigned int ctr)
+ }
+ 
+ 
+-static void p4_setup_ctrs(struct op_msrs const * const msrs)
++static void cf_check p4_setup_ctrs(struct op_msrs const * const msrs)
+ {
+ 	unsigned int i;
+ 	uint64_t msr_content;
+@@ -609,9 +609,9 @@ static void p4_setup_ctrs(struct op_msrs const * const msrs)
+ 	}
+ }
+ 
+-static int p4_check_ctrs(unsigned int const cpu,
+-                         struct op_msrs const * const msrs,
+-                         struct cpu_user_regs const * const regs)
++static int cf_check p4_check_ctrs(
++	unsigned int const cpu, struct op_msrs const * const msrs,
++	struct cpu_user_regs const * const regs)
+ {
+ 	unsigned long ctr, stag, real;
+ 	uint64_t msr_content;
+@@ -665,7 +665,7 @@ static int p4_check_ctrs(unsigned int const cpu,
+ }
+ 
+ 
+-static void p4_start(struct op_msrs const * const msrs)
++static void cf_check p4_start(struct op_msrs const * const msrs)
+ {
+ 	unsigned int stag;
+ 	uint64_t msr_content;
+@@ -683,7 +683,7 @@ static void p4_start(struct op_msrs const * const msrs)
+ }
+ 
+ 
+-static void p4_stop(struct op_msrs const * const msrs)
++static void cf_check p4_stop(struct op_msrs const * const msrs)
+ {
+ 	unsigned int stag;
+ 	uint64_t msr_content;
+diff --git a/xen/arch/x86/oprofile/op_model_ppro.c b/xen/arch/x86/oprofile/op_model_ppro.c
+index 72c504a10216..8d7e13ea8777 100644
+--- a/xen/arch/x86/oprofile/op_model_ppro.c
++++ b/xen/arch/x86/oprofile/op_model_ppro.c
+@@ -63,7 +63,7 @@ static int counter_width = 32;
+ static unsigned long reset_value[OP_MAX_COUNTER];
+ int ppro_has_global_ctrl = 0;
+ 
+-static void ppro_fill_in_addresses(struct op_msrs * const msrs)
++static void cf_check ppro_fill_in_addresses(struct op_msrs * const msrs)
+ {
+ 	int i;
+ 
+@@ -74,7 +74,7 @@ static void ppro_fill_in_addresses(struct op_msrs * const msrs)
+ }
+ 
+ 
+-static void ppro_setup_ctrs(struct op_msrs const * const msrs)
++static void cf_check ppro_setup_ctrs(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -128,9 +128,9 @@ static void ppro_setup_ctrs(struct op_msrs const * const msrs)
+ 	}
+ }
+ 
+-static int ppro_check_ctrs(unsigned int const cpu,
+-                           struct op_msrs const * const msrs,
+-                           struct cpu_user_regs const * const regs)
++static int cf_check ppro_check_ctrs(
++	unsigned int const cpu, struct op_msrs const * const msrs,
++	struct cpu_user_regs const * const regs)
+ {
+ 	u64 val;
+ 	int i;
+@@ -170,7 +170,7 @@ static int ppro_check_ctrs(unsigned int const cpu,
+ }
+ 
+ 
+-static void ppro_start(struct op_msrs const * const msrs)
++static void cf_check ppro_start(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -190,7 +190,7 @@ static void ppro_start(struct op_msrs const * const msrs)
+ }
+ 
+ 
+-static void ppro_stop(struct op_msrs const * const msrs)
++static void cf_check ppro_stop(struct op_msrs const * const msrs)
+ {
+ 	uint64_t msr_content;
+ 	int i;
+@@ -206,7 +206,7 @@ static void ppro_stop(struct op_msrs const * const msrs)
+         wrmsrl(MSR_CORE_PERF_GLOBAL_CTRL, 0x0ULL);
+ }
+ 
+-static int ppro_is_arch_pmu_msr(u64 msr_index, int *type, int *index)
++static int cf_check ppro_is_arch_pmu_msr(u64 msr_index, int *type, int *index)
+ {
+ 	if ( (msr_index >= MSR_IA32_PERFCTR0) &&
+             (msr_index < (MSR_IA32_PERFCTR0 + num_counters)) )
+@@ -226,7 +226,7 @@ static int ppro_is_arch_pmu_msr(u64 msr_index, int *type, int *index)
+         return 0;
+ }
+ 
+-static int ppro_allocate_msr(struct vcpu *v)
++static int cf_check ppro_allocate_msr(struct vcpu *v)
+ {
+ 	struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 	struct arch_msr_pair *msr_content;
+@@ -245,7 +245,7 @@ static int ppro_allocate_msr(struct vcpu *v)
+ 	return 0;
+ }
+ 
+-static void ppro_free_msr(struct vcpu *v)
++static void cf_check ppro_free_msr(struct vcpu *v)
+ {
+ 	struct vpmu_struct *vpmu = vcpu_vpmu(v);
+ 
+@@ -255,7 +255,8 @@ static void ppro_free_msr(struct vcpu *v)
+ 	vpmu_reset(vpmu, VPMU_PASSIVE_DOMAIN_ALLOCATED);
+ }
+ 
+-static void ppro_load_msr(struct vcpu *v, int type, int index, u64 *msr_content)
++static void cf_check ppro_load_msr(
++	struct vcpu *v, int type, int index, u64 *msr_content)
+ {
+ 	struct arch_msr_pair *msrs = vcpu_vpmu(v)->context;
+ 	switch ( type )
+@@ -269,7 +270,8 @@ static void ppro_load_msr(struct vcpu *v, int type, int index, u64 *msr_content)
+ 	}
+ }
+ 
+-static void ppro_save_msr(struct vcpu *v, int type, int index, u64 msr_content)
++static void cf_check ppro_save_msr(
++	struct vcpu *v, int type, int index, u64 msr_content)
+ {
+ 	struct arch_msr_pair *msrs = vcpu_vpmu(v)->context;
  
 -- 
 2.11.0
