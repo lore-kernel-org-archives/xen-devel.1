@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B68C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:07:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271788.466531 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E38C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:11:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271856.466555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb4B-0008OS-IJ; Mon, 14 Feb 2022 13:06:55 +0000
+	id 1nJb7z-000553-6G; Mon, 14 Feb 2022 13:10:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271788.466531; Mon, 14 Feb 2022 13:06:55 +0000
+Received: by outflank-mailman (output) from mailman id 271856.466555; Mon, 14 Feb 2022 13:10:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb4A-0008H9-L3; Mon, 14 Feb 2022 13:06:54 +0000
-Received: by outflank-mailman (input) for mailman id 271788;
- Mon, 14 Feb 2022 13:06:52 +0000
+	id 1nJb7z-00054w-3G; Mon, 14 Feb 2022 13:10:51 +0000
+Received: by outflank-mailman (input) for mailman id 271856;
+ Mon, 14 Feb 2022 13:10:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb2o-0008IH-Uv
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:31 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c85ef101-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:05:29 +0100 (CET)
+ id 1nJb7x-00054q-De
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:10:49 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 85963637-8d97-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:10:47 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,439 +38,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c85ef101-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 85963637-8d97-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843928;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=yHxT60mUhe/bdOaYInkxIEHjxisfTCydkooBUoIXm1M=;
-  b=gu3Y0sILdPtKjus+ehUOkt+lF5AKqkB5fkeI2gOi8tzUwmbG1+fMq4yj
-   ldeJ2IXcdVfRbcCuHCxNiR6eqvJmguWXNqPNr8uU4vnrHpOEkyWbetcoG
-   mOX7QdW1rLSwGRomW9KArB443+V1X9JByHIlG9kvnMyQ+xPeibTMPrNlu
-   8=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: IfyhiO4NRjvgMWsYVeStTCJbvfVis7VLr1QbwYda0dNdTcl8JdA14OmEJiDGvL5ZiRmL7+9iNz
- ybln7mX/b0K8VbX7oBwyIeHiwdD9+i2rHYZEH0/cI4VYouSJkZRWYhpdHUoMWqqvuNWny5ci+U
- W37+se8pJsY2NqMjkqd0kjDqsW3dq/J18HEttrVgZYT+TV6Wx/vbicZ4ekYURlmq8uEutugwUk
- 3iKHGxZlQCwDZHYIvvpq4DI94oY/G8aEV3bgENtOey/lNSbOhE1EtbMsPcUdD/6vhz+m9SVfcG
- 8ZOMzQDMBwZ9NZafczvi9Xnb
+  d=citrix.com; s=securemail; t=1644844247;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=Gjteq4o6ekOhtftPo0iUqz/+mLLuuNCqewER07oN4P8=;
+  b=a53yvlqlNNuF3NQ9SBZu8nVKdeBbuLAGYFXU0+KHaXkzjusyOpzoMHNC
+   969ueDqus6pzq+UFjinLY6bHeNzi0kEs75PH9ThdeBVWUTkN1ehl/z5SG
+   uATpycheoUPmqI4mDEpFUjzQwqklWSy4Qiep6QQXrfKsJTSx26Hs6HeSU
+   Q=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+IronPort-SDR: tHlTv38JLab9bUI9A+a6q9S+zbLJ6lUMZ7iVN/xfBWm6EKu0gblU1eEH8JJFMJbQxmvsHKfl0a
+ jKDgHEJND+K1ZQdtSsaZZeRh69shZzoikndwHJ+exsUylcNMSiI/qc0ptAOTBPJclDpe1eQavP
+ FPLJT/FXq3a0SulLYuVdg+xq/g1GBEvdQ7W+pD0ZdwdwMWKzeWMAWWYF28LEV7CaKplGyuN0Y4
+ VOZOCXxpfg3r6q3XurFJq6DC1aKTRPMSrLLv38MJiJrc9lR718IJ63onRnj9aouytw/9iPXGSC
+ qEEsfdX24C8OLMVSlmo1+kjF
 X-SBRS: 5.1
-X-MesageID: 64149818
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 64149892
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Xwjk2a/KST9YhIf28+VrDrUDnnmTJUtcMsCJ2f8bNWPcYEJGY0x3x
- 2QaXG/TMvfZMWb1c40gPtu/9UIF7J/dzoJlSgBt+yE8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7Rg3tYx6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPh0k
- PUKqryOSDwNFYHSissDfURzMw5haPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4SRKqPN
- 5NJAdZpRDL+cRNBJ24qMYw7rP66rHflUzZy+F3A8MLb5ECMlVcsgdABKuH9atGMAMlYgEucj
- mbH5HjiRAEXMsSFzjiI+W7qgfXA9R4XQ6pLSuf+rKQzxgTOmCpDU3X6SGdXv9G80m75RPJhK
- ncw0QYwv4cs2hGAbvbiCkjQTGG/gjYQXN9ZEusf4Q6Ly7bJ7wvxOlXoXgKte/R96pZoGGVCO
- kuh2oqwWGcx6OH9pWe1q+/MxQ5eLxT5OoPricUsaQIeq+fur4go5v4kZoYySfXl5jEZ9NyZ/
- txrkMTcr+hJ5SLo///ilbwiv95LjsKXJjPZHi2NAgqYAvpRPeZJnbCA51nB9upnJ42EVFSHt
- 3Vss5HAsLxRXcHQyXTUG79l8FSVCxGtamO0vLKSN8N5q2TFF4CLIei8Hw2S1G82a51ZKFcFk
- WfYuB9L5Y87AZdZRfQfXm5FMOxzlfKIPY28Dpj8N4MSCrAsJF7v1Hw/Pia4gjGy+HXAZIliY
- P93h+73Vi1EYUmmpRLrL9ogPUgDmHxvmzOLHcqjp/lluJLHDEOopX4+GAPmRogEAGms+W05K
- v5TaJmHzQtxSur7bnWF+IIfNwlSf3M6GYr3u4pccevaelhqH2QoCvnwx7I9etM6w/QJx7mQp
- nztCFVFzFffhGHcLVnYYH5Ud76yD410qmg2PHJwMA/wiWQje4um8IwWa4AzIes87OVmwPMtF
- 6sFdsyMD+5hUDPC/zhBP5DxoJY7LEaghB6UPjrjaz86JsYySwvM897iXw3u6ChRUXbn6Zpg+
- +Wtj1qJT4ACSgJuCNftRMiul17h72IAnO9SXlfTJoUBckvb74U3eTf6ieU6Ip9QJEyblCeaz
- QufHTwRufLJ/90u6NDMiK2J89WpHu95EhYIFmXX9+/rZyzT/27lyo5cSueYOzvaUTqsqqmlY
- OxUydD6MeEGwwkW49YtTe4zwPJs/cbrqp9b0h9gTSfCYFmcA799JmWLgJtUvapXy74F4Qa7V
- ypjIDWB1Wll7C89LGMsGQ==
-IronPort-HdrOrdr: A9a23:UjVNE6/VeiQbj227Zatuk+DaI+orL9Y04lQ7vn2YSXRuHPBw9v
- re5cjzuiWVtN98Yh0dcJW7Scy9qBDnhPhICOsqTNSftWDd0QPCRuxfBMnZslnd8kXFh4lgPM
- xbEpSWZueeMbEDt7eZ3DWF
+IronPort-Data: A9a23:H5wrZayFi0HmngOUiPR6t+d7wCrEfRIJ4+MujC+fZmUNrF6WrkUHm
+ 2dJCm6Fb/2NZzH2KN0nbI/noUNT75XSzNM3TgQ/riAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wbdl2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt9t47
+ d5IhIe6ciEgB5eSkbUxVTJHHAgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JwXQaeON
+ pBxhTxHZiXKXDplGQkrMLUSjsz1tEX0NB51kQfAzUYwyzeKl1EguFT3C/LXdcaNXt59hVuDq
+ yTN+GGRKhMHMN2SzxKV/3TqgfXA9Qv+UZgXHae19dZrhkOS3W0ZDBAKVVq9ruK9g0T4UNVaQ
+ 2QY4jErrLQy3EWzQ8PhQgajp3qZoh8bXcEWGOo/gCmv4KfJ5weSBkAfUyVMLtchsaceVTEsk
+ 1OEgd7tLThuq6GOD2KQ8K+OqjG/MjRTKnUNDQcbSSMV7t+lp5s85jrUVcpqGqOxitzzGBnzz
+ iqMoSx4gK8c5fPnzI3iowqB2Wj14MGUEEhlvW07Q15J8CtybauuYr2z42P95M96co/IYl+qo
+ 3ctzp32AP81MbmBkymEQeMoFb6v5uqYPDC0vWODD6XN5Bz2pSf9INk4DCVWYR4wb51aIWOBj
+ Fr75FsJjKK/KkdGekOej2iZL80xhZbtGt3+Phw/RoofO8MhHONrEcwHWKJx44wPuBV2+U3cE
+ c3CGSpJMZr9If45pAdav89HjdcWKtkWnAs/v6zTwRW9yqa5b3WIU7oDO1bmRrlnsP/b8FWIr
+ o4GbJHiJ/BjvArWOHe/zGLuBQpScShT6W7e96S7idJv0iI5QTp8Wpc9MJsqepB/nrQ9qws71
+ irVZ6Os83Km3SevAVzTMhhLMeqzNb4i/SNTFXF9Zj6Ahil8CbtDGY9CLvPbi5F8r7c9pRO1J
+ tFYE/i97gNnFGiWpWRFNcOlxGGgHTzy7T+z0+OeSGFXV7ZrRhDT+8+ieQ3q9SIUCTGwu9d4q
+ Lqlvj43i7JZL+i7JMqJOv+p0X2run0RxLB7U0fSe4EBc0Tw6ol6bSf2i6Zvcc0LLBzCwBqc1
+ hqXXkhE9bWc/ddt/Ymbn72AoqeoD/B6QhhQEV7E4OvkLiLd5Gein9NNCb7aYTDHWWro06y+f
+ uEJnerkOfgKkQ8S4YpxGrpm14wk4N7rq+MIxwhoBiyTPV+qFqlhMj+N2swW7v9BwbpQuA2XX
+ EOT+4YFZeXVaZ29SFNIfVgrdOWO0/0QiwL+1/VtLRWo/jJz8ZqGTV5WY0uGhhtCIeYnK4gi2
+ +og5pIbslTtlhowP9+apSlI7GDQfGcYWqAqu5xGUo/mjg0nlgNLbZDGU3Kk5ZiOb5NHM1UwI
+ y/Sj63H3uwOyk3Hens1NH7MwesC2she5EEUlAcPdwaTh97Ipv4rxxkAoz04QzNcwghDz+8ua
+ HNgMFd4JPnW8jpl7CSZs7tAx+2V6MWlx3HM
+IronPort-HdrOrdr: A9a23:XFMRdKh3bdeGPvrg8W1JfGP4Q3BQXtgji2hC6mlwRA09TySZ//
+ rBoB17726MtN9/YhEdcLy7VJVoBEmskKKdgrNhW4tKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QFJSWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149818"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+   d="scan'208";a="64149892"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=XJjqPJd+g8G4O16hgABXbx9yZKnsgx3Cl/7TeFdry+HEtmDu1Ms5fZTRw+Nn1XZIEc7yUl1JhYg20DWT0qUzN4b8T78r7/cWPGUp7zfsksmGJD43u9lu2+Vokkka+Gjo991zH8QuGADORXaJeVdKLpwHZSl+zOGLtNsEx3cNpwwQ7jEGGtihMWtGms5urRXK6Pv+rI40/0jfxPVF45ycWhX3kwqdL/Kv2CgHA+snzhFH3XSwES8pjbsN2BpqrAoIpZ37YSSscEmkO5NWi/UaU9ONQH2TL9kGjQnrf9s7pvVTbwOTjXEEZD9UHHF0CWZ7l1Lkz6y/tKhQ/5XQ5aeCDg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Gjteq4o6ekOhtftPo0iUqz/+mLLuuNCqewER07oN4P8=;
+ b=hCXZhO1ZaFsw7D8isrfZfEqtiujvOXXKsm7Oeh9w39GkejNiDvZ3rdVpuikVE3gaRI+k1lq5fGYaRFlogbh6X6q3pjENhEeanvrLXVQct6rmfmqGmJSHhPbyNB9lD4JrUhdmdcug+aBTSpTAYEO30+eH7LLOu5ya1v3WqGGAu92p2y3TPm1Hpwmnk61MYRhNNzhYvTSAwU138KMBEAV0nFa0Bq/OPxD32/H359MVi5R6Sgw/rmm4u8Q2UIYdrGJE5LxlrWYoyocILKnU8efj4KBSUoFLWjDLA62WM2cLynD6BkHHydkWLb+fi6hTUl1ZbF691U/kXMMAcskjonmOtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Gjteq4o6ekOhtftPo0iUqz/+mLLuuNCqewER07oN4P8=;
+ b=HhwzBu53IxOrRmhODmQQbrUMTJdX+4Haxaq0rFo1J+GLw2LEFqe1xynngoC7V+GPcmKZ3HCCsapGFqKh8doUmSKcoGFO1v8cIBpJsGgpJY140yjwWOZcjnftrnbjPPeSyiVL7wl6mGl/1YwdyN0pUiJNF6sUe9qAz/j41Lewz2I=
+From: Andrew Cooper <Andrew.Cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 18/70] xsm/flask/ss: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:35 +0000
-Message-ID: <20220214125127.17985-19-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
+CC: Jan Beulich <JBeulich@suse.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Julien Grall
+	<julien@xen.org>, Roger Pau Monne <roger.pau@citrix.com>, Juergen Gross
+	<jgross@suse.com>, Daniel Smith <dpsmith@apertussolutions.com>,
+	=?utf-8?B?TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tp?=
+	<marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2 00/70] x86: Support for CET Indirect Branch Tracking
+Thread-Topic: [PATCH v2 00/70] x86: Support for CET Indirect Branch Tracking
+Thread-Index: AQHYIaGi+1XAXGQfKUGTLygtpBu/SKyTBUWA
+Date: Mon, 14 Feb 2022 13:10:41 +0000
+Message-ID: <c471dcc2-8a91-60b8-ba5d-58874752e4d7@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.0
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 42c2eea5-40c4-4d85-437b-08d9efbb673a
+x-ms-traffictypediagnostic: CY1PR03MB2313:EE_
+x-microsoft-antispam-prvs: <CY1PR03MB23138B312C7B3EA43E4DADC3BA339@CY1PR03MB2313.namprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2043;
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: HhALCAXDuP4Xjexs4nzH/EORrm5pafhN5IJPQnohuebDNFy8GVWox+a9Px40OtGGaFKel5HxvqwKWSxm6msu81rNyn6H4uIPIRRdI/28kLQu1WDh7BdKAjeW/pxhK98X+1GY1zfonl1ATWZZz2fIxzFhL5PQ0njx0R6TsORYihrelBaDaAlyLCIweR3ZWQOvEALPmfSzhryiOwmQyr19EvgsumlwJ5Scb9uHuPMptxO8lM193dx3IGUK/U3ytSG9jgDOUM56231q8KfAo9CwS1ZxZvOwTFhqSQ1fCtZLz+zwXljgxtZD49i/e4ICYwAt6ZEaK97+Uu1Z495oUkXlFaOAJ0WY5Ngo2PD9RT3Xz6/vzfZHtycQQp5TYfyNROq1GrX8G3qOyz4yXnyBk0pb6H1i5dVyHxDI00j0MiKV6Skk1ReW8uyrPT2jzgoTkC9Ua3TCoLvT6v5pXaYURzzDzbWHF18+vxq4ETXkV4yP9cHj3N+hlErdCB9/mHgvJKtFKSTTcyvh54Dhykz1Rwwygj+oOfBKRAJL29WDgMr59FrqAzxq88pCWQA2PVrIlvTifUI8trUNnP3yr/hdE4bAFLunCjjAhaWIQY9PYJVdBJtV2RbO9j913nwPLz3K8Grhoj7P1HXO2vY2MnP1ELaUq5dHm/qeapBc7yHHVPhW/1xvTugzpUmicwkdsafd3DOLpZIZ28YSYwey/TL4fAiDOnkLPyCatCtkhlwew/3nCem/GREuRvfhMaQO4nYmI1pRrE71UO291hSEA9TPhLT2V5HLs/AYoxM4uUAHg4xTctFmWoYQnIVejL5/aHXFFKj1GMiih13Gn4HAtKilhtU3oV0Mwjig0JQaDkP7iJxaey0kdh8Io7gf326huCFjtDqtsMYAbcVnp0sGQdAvqRTU7Q==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6506007)(2906002)(6486002)(53546011)(86362001)(966005)(31696002)(82960400001)(38070700005)(316002)(5660300002)(71200400001)(26005)(76116006)(31686004)(64756008)(66946007)(66556008)(66476007)(66446008)(91956017)(38100700002)(186003)(6916009)(8936002)(4326008)(8676002)(508600001)(6512007)(54906003)(2616005)(36756003)(122000001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cmQyREhQeGlSS2lkQVk1ZFg0V1pOZWVocVQ2OXJ1eTBGSzhleU9oR2JBM0ZI?=
+ =?utf-8?B?NFQ1Y1pKR1RCT201Kzh1RHdjNXVPR1FLSkZ5ZFk2UDgrdEpxQ08rczVUdGMr?=
+ =?utf-8?B?cjI3L0dTMmM3OWlwLzRabjI2ZzRSVWdjcFQxWSsrRVpXMXNRaTNmTGJiWnA1?=
+ =?utf-8?B?MWZaNHVKbDJ1OXRUc3RiYWlyNmhMQm54dWV1SEgzWnJudmwvQnNPaEpjbGdu?=
+ =?utf-8?B?VWxuRUhjL0pQZU5MbnlyN3FzeEFGUXEyQUZ4bENVa1Body9YZFF2ZkMxOGxW?=
+ =?utf-8?B?aEhZV0tWRUtzdzBYNnJxRFdMZDZwa2tVS1ZzTUxQWnVUQXJvVnZYenRjRnl5?=
+ =?utf-8?B?MnlzWHRyOWYxeGFiT3JOc3ErL0ZtSnZWMExBSlQ2TitBYmNzOUdtb2NNbXpv?=
+ =?utf-8?B?RjJSQ013ODkyL093WlBzMGtobEtyT3gvSkdZNjE1cExOb1pERXhZaWs3MGZq?=
+ =?utf-8?B?anZ2NUFPdHFLeFZRUUcrRzk0c3ZReW9qQytPd0M0NWdrWk94UWtheEYrVmZG?=
+ =?utf-8?B?RWdtSExWRVFaSS9LNHQrUDJNT211U0xUTE9DTUZ4WGwxQWl3Qks0SVFvdDYz?=
+ =?utf-8?B?bzJKVDlGOVN4Z3plN09vR0hBejZ6a0hzZytJdXRZQUdibXE0dXd0clpFNW9m?=
+ =?utf-8?B?UjZQc1FwV3grWXZpQ0xoR1dKNS9HR1JTWjY1RmpmbzExRU5Ganp3cG9MeHYr?=
+ =?utf-8?B?aFVGQ1k4cUhIZGlFUEZJV2ttN1FINHQyU2RQR0tPYmdNdCtnbDhwR0ZrMnZ4?=
+ =?utf-8?B?TDdPZjhLUGFYSlBaTlNYeTJYblR2MTNqakZSM1R2cnBDNi9wTXY4SHQrMGJo?=
+ =?utf-8?B?d3JlamFVbGMrSlB5NUVvVDRuUGxUc1hoUjZuZHN1NUhBNmNuWXFtays0c2c3?=
+ =?utf-8?B?UzY4RW5tdDhxcXpKVmxRMHBJWEdVdUtCbkcyM1dXZUN5RXpoVGV5UXNVMGVI?=
+ =?utf-8?B?Q2ZRek8wdm96NDQzOTZua25KQVhZdC9NQlFFM3cyNVJDT24yY21VbGM2WnhN?=
+ =?utf-8?B?SlJkbjdpTFE1eFlEUVZ1cnZzQmJJU2dncHhiaStYNmpUR3NpWDl5ZHpWb3R1?=
+ =?utf-8?B?U2UreUt2dmZjQVFoc3hGcTZuL2FTdXV6T0g2aTh4dXFmb0FlSG9oaHFUU3Vp?=
+ =?utf-8?B?QkxXT1U3QnlMeUJGNHRUQlo4ZlZ5NVlZWDErazBKNkZlb1Awa2F3SXpTNjRh?=
+ =?utf-8?B?Q0MrSG03bVZJMU5vZ2Z6OGJpcVZ4MmxoblhraFZDR25UdFpTeXhTK1Z2eGVi?=
+ =?utf-8?B?S3lDMWdLKzc5cWFNNi9LTW1BbmsyTEhQWkdad1RmVk10bk9GdFlNRGRVQXRK?=
+ =?utf-8?B?ejJmenZZZ1BER21PSmZVbHVSZWE1ZTJBUU1tWjNRNlFhaHg2Wmw4VWVSSC9M?=
+ =?utf-8?B?ZTZQMGYvcUhNSlhmN3cwTmNNQk9yU0M5VHRqUWpZQ1BHU3pnUGllZHUzOGNW?=
+ =?utf-8?B?eStNR3NBK2FJdERBcEpJSWEvbWZXSVhFdzFxeStSZ1VNTy9IMEtxdWtsU0tx?=
+ =?utf-8?B?TG5mL2p5K2UvUVhaUkt5eWxVV3NNN0J5UzlzY0xaSDJFVVVxRVJZalpGMVpk?=
+ =?utf-8?B?VzladGtTb04vUlRBREl2RUkrOEpFK3c3SzN5VEk3MHdBMnVPOVlHY1A2NVJC?=
+ =?utf-8?B?emc1bWM5QlRpWktUTkxtQUkxNWl0ekc2T1dlUTZsMGUyOXZYek9HSzJOMTRB?=
+ =?utf-8?B?SGtrZkpUNXdTOU14N0NaaHJtWjB1Smh4QlJXd2xkcFJCTlAwc3ZTNzBxWUYy?=
+ =?utf-8?B?S1gzS25CdXZhQmJtbTJJQ3V6R1hmWHdRV0dUbkhtWjB3RnpGYXoyZzhjaTEz?=
+ =?utf-8?B?S1lWY0g3VlAvYzdsSk8zQTFNRWpaU3dpMWJTWm1jblZsN0x3UGdTSUVDVW80?=
+ =?utf-8?B?MVNRU2pCR2NEQ1JreGdxQ0JsTGh0WXFTVktWZHJleUhEUEkvdk9DTS9BKzdG?=
+ =?utf-8?B?eXZKZnhBbjl1WjBNRUdWN1ZSVS9MRlZxQVpBTFhlNXREQ3FvSzZaWW5zNVVm?=
+ =?utf-8?B?TXgyVFhJVU9IZ0I5TjZpcjV1TW5GRTN6cXFlTCtEbUI3MDdXYmRja29MRUww?=
+ =?utf-8?B?TkpZbVFjcnZPd0pqTkRlanYyVnR2ZDlFOVgrSHdUa3ZnRDdISE94c25iY3dx?=
+ =?utf-8?B?TVdXSm1NZUhPZFVMVUZUMnlsTjNqSDIyTWc3SDVYK1JUNGFTYzVjeHVrVzF3?=
+ =?utf-8?B?THVRcTdyOVVtMzRlMUJQMnZDZmdmWEgxMWZVVEZXYzdtM3lIVTZMSFNyU1lw?=
+ =?utf-8?B?WnRFd1B3K3VHd1hhK2JSWWVmdE13PT0=?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <653242B37BA05E4D9E4993B86E3E7F13@namprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42c2eea5-40c4-4d85-437b-08d9efbb673a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Feb 2022 13:10:41.6930
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 9fxuiVsV4zznkOILQOHd3ITvp/z8GE0rZHN09schussZ1XuYfbjG/rl8lSewntYqwWKvFHFsr1tRqWxiqscXT9HT1M9W8C4zQddnV7PiHKg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1PR03MB2313
+X-OriginatorOrg: citrix.com
 
-Control Flow Integrity schemes use toolchain and optionally hardware support
-to help protect against call/jump/return oriented programming attacks.
-
-Use cf_check to annotate function pointer targets for the toolchain.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Daniel P. Smith <dpsmith@apertussolutions.com>
----
- xen/xsm/flask/ss/avtab.c       |  4 ++--
- xen/xsm/flask/ss/conditional.c | 10 ++++----
- xen/xsm/flask/ss/conditional.h |  6 ++---
- xen/xsm/flask/ss/policydb.c    | 53 ++++++++++++++++++++++--------------------
- xen/xsm/flask/ss/services.c    |  6 ++---
- xen/xsm/flask/ss/symtab.c      |  5 ++--
- 6 files changed, 44 insertions(+), 40 deletions(-)
-
-diff --git a/xen/xsm/flask/ss/avtab.c b/xen/xsm/flask/ss/avtab.c
-index bfc91c8b0c2c..55c2b4d8a46d 100644
---- a/xen/xsm/flask/ss/avtab.c
-+++ b/xen/xsm/flask/ss/avtab.c
-@@ -482,8 +482,8 @@ int avtab_read_item(struct avtab *a, void *fp, struct policydb *pol,
-     return insertf(a, &key, &datum, p);
- }
- 
--static int avtab_insertf(struct avtab *a, struct avtab_key *k,
--                                                struct avtab_datum *d, void *p)
-+static int cf_check avtab_insertf(
-+    struct avtab *a, struct avtab_key *k, struct avtab_datum *d, void *p)
- {
-     return avtab_insert(a, k, d);
- }
-diff --git a/xen/xsm/flask/ss/conditional.c b/xen/xsm/flask/ss/conditional.c
-index 3e58aea55147..b4b116666cf7 100644
---- a/xen/xsm/flask/ss/conditional.c
-+++ b/xen/xsm/flask/ss/conditional.c
-@@ -189,14 +189,14 @@ int cond_init_bool_indexes(struct policydb *p)
-     return 0;
- }
- 
--int cond_destroy_bool(void *key, void *datum, void *p)
-+int cf_check cond_destroy_bool(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-     return 0;
- }
- 
--int cond_index_bool(void *key, void *datum, void *datap)
-+int cf_check cond_index_bool(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct cond_bool_datum *booldatum;
-@@ -220,7 +220,7 @@ static int bool_isvalid(struct cond_bool_datum *b)
-     return 1;
- }
- 
--int cond_read_bool(struct policydb *p, struct hashtab *h, void *fp)
-+int cf_check cond_read_bool(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct cond_bool_datum *booldatum;
-@@ -268,8 +268,8 @@ struct cond_insertf_data
-     struct cond_av_list *tail;
- };
- 
--static int cond_insertf(struct avtab *a, struct avtab_key *k, 
--                                            struct avtab_datum *d, void *ptr)
-+static int cf_check cond_insertf(
-+    struct avtab *a, struct avtab_key *k, struct avtab_datum *d, void *ptr)
- {
-     struct cond_insertf_data *data = ptr;
-     struct policydb *p = data->p;
-diff --git a/xen/xsm/flask/ss/conditional.h b/xen/xsm/flask/ss/conditional.h
-index 59ac6b4b57c1..500fe4305a03 100644
---- a/xen/xsm/flask/ss/conditional.h
-+++ b/xen/xsm/flask/ss/conditional.h
-@@ -63,11 +63,11 @@ int cond_policydb_init(struct policydb* p);
- void cond_policydb_destroy(struct policydb* p);
- 
- int cond_init_bool_indexes(struct policydb* p);
--int cond_destroy_bool(void *key, void *datum, void *p);
-+int cf_check cond_destroy_bool(void *key, void *datum, void *p);
- 
--int cond_index_bool(void *key, void *datum, void *datap);
-+int cf_check cond_index_bool(void *key, void *datum, void *datap);
- 
--int cond_read_bool(struct policydb *p, struct hashtab *h, void *fp);
-+int cf_check cond_read_bool(struct policydb *p, struct hashtab *h, void *fp);
- int cond_read_list(struct policydb *p, void *fp);
- 
- void cond_compute_av(struct avtab *ctab, struct avtab_key *key, struct av_decision *avd);
-diff --git a/xen/xsm/flask/ss/policydb.c b/xen/xsm/flask/ss/policydb.c
-index 94261643532a..ff2103c63eab 100644
---- a/xen/xsm/flask/ss/policydb.c
-+++ b/xen/xsm/flask/ss/policydb.c
-@@ -257,12 +257,12 @@ static int policydb_init(struct policydb *p)
-  * of a class, role, or user are needed.
-  */
- 
--static int common_index(void *key, void *datum, void *datap)
-+static int cf_check common_index(void *key, void *datum, void *datap)
- {
-     return 0;
- }
- 
--static int class_index(void *key, void *datum, void *datap)
-+static int cf_check class_index(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct class_datum *cladatum;
-@@ -276,7 +276,7 @@ static int class_index(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int role_index(void *key, void *datum, void *datap)
-+static int cf_check role_index(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct role_datum *role;
-@@ -292,7 +292,7 @@ static int role_index(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int type_index(void *key, void *datum, void *datap)
-+static int cf_check type_index(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct type_datum *typdatum;
-@@ -313,7 +313,7 @@ static int type_index(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int user_index(void *key, void *datum, void *datap)
-+static int cf_check user_index(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct user_datum *usrdatum;
-@@ -329,7 +329,7 @@ static int user_index(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int sens_index(void *key, void *datum, void *datap)
-+static int cf_check sens_index(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct level_datum *levdatum;
-@@ -348,7 +348,7 @@ static int sens_index(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int cat_index(void *key, void *datum, void *datap)
-+static int cf_check cat_index(void *key, void *datum, void *datap)
- {
-     struct policydb *p;
-     struct cat_datum *catdatum;
-@@ -506,14 +506,14 @@ static int policydb_index_others(struct policydb *p)
-  * symbol data in the policy database.
-  */
- 
--static int perm_destroy(void *key, void *datum, void *p)
-+static int cf_check perm_destroy(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-     return 0;
- }
- 
--static int common_destroy(void *key, void *datum, void *p)
-+static int cf_check common_destroy(void *key, void *datum, void *p)
- {
-     struct common_datum *comdatum;
- 
-@@ -525,7 +525,7 @@ static int common_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int class_destroy(void *key, void *datum, void *p)
-+static int cf_check class_destroy(void *key, void *datum, void *p)
- {
-     struct class_datum *cladatum;
-     struct constraint_node *constraint, *ctemp;
-@@ -572,7 +572,7 @@ static int class_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int role_destroy(void *key, void *datum, void *p)
-+static int cf_check role_destroy(void *key, void *datum, void *p)
- {
-     struct role_datum *role;
- 
-@@ -584,14 +584,14 @@ static int role_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int type_destroy(void *key, void *datum, void *p)
-+static int cf_check type_destroy(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-     return 0;
- }
- 
--static int user_destroy(void *key, void *datum, void *p)
-+static int cf_check user_destroy(void *key, void *datum, void *p)
- {
-     struct user_datum *usrdatum;
- 
-@@ -605,7 +605,7 @@ static int user_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int sens_destroy(void *key, void *datum, void *p)
-+static int cf_check sens_destroy(void *key, void *datum, void *p)
- {
-     struct level_datum *levdatum;
- 
-@@ -617,7 +617,7 @@ static int sens_destroy(void *key, void *datum, void *p)
-     return 0;
- }
- 
--static int cat_destroy(void *key, void *datum, void *p)
-+static int cf_check cat_destroy(void *key, void *datum, void *p)
- {
-     xfree(key);
-     xfree(datum);
-@@ -989,7 +989,7 @@ static int perm_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int common_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check common_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct common_datum *comdatum;
-@@ -1151,7 +1151,7 @@ static int read_cons_helper(struct policydb *p, struct constraint_node **nodep,
-     return 0;
- }
- 
--static int class_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check class_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct class_datum *cladatum;
-@@ -1250,7 +1250,7 @@ static int class_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int role_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check role_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct role_datum *role;
-@@ -1321,7 +1321,7 @@ static int role_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int type_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check type_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct type_datum *typdatum;
-@@ -1415,7 +1415,7 @@ static int mls_read_level(struct mls_level *lp, void *fp)
-     return -EINVAL;
- }
- 
--static int user_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check user_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct user_datum *usrdatum;
-@@ -1479,7 +1479,7 @@ static int user_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check sens_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct level_datum *levdatum;
-@@ -1534,7 +1534,7 @@ static int sens_read(struct policydb *p, struct hashtab *h, void *fp)
-     goto out;
- }
- 
--static int cat_read(struct policydb *p, struct hashtab *h, void *fp)
-+static int cf_check cat_read(struct policydb *p, struct hashtab *h, void *fp)
- {
-     char *key = NULL;
-     struct cat_datum *catdatum;
-@@ -1591,7 +1591,8 @@ static int (*read_f[SYM_NUM]) (struct policydb *p, struct hashtab *h, void *fp)
-     cat_read,
- };
- 
--static int user_bounds_sanity_check(void *key, void *datum, void *datap)
-+static int cf_check user_bounds_sanity_check(
-+    void *key, void *datum, void *datap)
- {
-     struct user_datum *upper, *user;
-     struct policydb *p = datap;
-@@ -1631,7 +1632,8 @@ static int user_bounds_sanity_check(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int role_bounds_sanity_check(void *key, void *datum, void *datap)
-+static int cf_check role_bounds_sanity_check(
-+    void *key, void *datum, void *datap)
- {
-     struct role_datum *upper, *role;
-     struct policydb *p = datap;
-@@ -1671,7 +1673,8 @@ static int role_bounds_sanity_check(void *key, void *datum, void *datap)
-     return 0;
- }
- 
--static int type_bounds_sanity_check(void *key, void *datum, void *datap)
-+static int cf_check type_bounds_sanity_check(
-+    void *key, void *datum, void *datap)
- {
-     struct type_datum *upper, *type;
-     struct policydb *p = datap;
-diff --git a/xen/xsm/flask/ss/services.c b/xen/xsm/flask/ss/services.c
-index 42686535f2c4..2f6d3d350d05 100644
---- a/xen/xsm/flask/ss/services.c
-+++ b/xen/xsm/flask/ss/services.c
-@@ -283,7 +283,7 @@ static int constraint_expr_eval(struct context *scontext,
-  * security_dump_masked_av - dumps masked permissions during
-  * security_compute_av due to RBAC, MLS/Constraint and Type bounds.
-  */
--static int dump_masked_av_helper(void *k, void *d, void *args)
-+static int cf_check dump_masked_av_helper(void *k, void *d, void *args)
- {
-     struct perm_datum *pdatum = d;
-     char **permission_names = args;
-@@ -1240,7 +1240,7 @@ static int validate_classes(struct policydb *p)
- }
- 
- /* Clone the SID into the new SID table. */
--static int clone_sid(u32 sid, struct context *context, void *arg)
-+static int cf_check clone_sid(u32 sid, struct context *context, void *arg)
- {
-     struct sidtab *s = arg;
- 
-@@ -1277,7 +1277,7 @@ struct convert_context_args {
-  * in the policy `p->newp'.  Verify that the
-  * context is valid under the new policy.
-  */
--static int convert_context(u32 key, struct context *c, void *p)
-+static int cf_check convert_context(u32 key, struct context *c, void *p)
- {
-     struct convert_context_args *args;
-     struct context oldc;
-diff --git a/xen/xsm/flask/ss/symtab.c b/xen/xsm/flask/ss/symtab.c
-index d98c116d5b97..0ce7e08c24ea 100644
---- a/xen/xsm/flask/ss/symtab.c
-+++ b/xen/xsm/flask/ss/symtab.c
-@@ -12,7 +12,7 @@
- #include <xen/errno.h>
- #include "symtab.h"
- 
--static unsigned int symhash(struct hashtab *h, const void *key)
-+static unsigned int cf_check symhash(struct hashtab *h, const void *key)
- {
-     const char *p, *keyp;
-     unsigned int size;
-@@ -26,7 +26,8 @@ static unsigned int symhash(struct hashtab *h, const void *key)
-     return val & (h->size - 1);
- }
- 
--static int symcmp(struct hashtab *h, const void *key1, const void *key2)
-+static int cf_check symcmp(
-+    struct hashtab *h, const void *key1, const void *key2)
- {
-     const char *keyp1, *keyp2;
- 
--- 
-2.11.0
-
+T24gMTQvMDIvMjAyMiAxMjo1MCwgQW5kcmV3IENvb3BlciB3cm90ZToNCj4gQ0VUIEluZGlyZWN0
+IEJyYW5jaCBUcmFja2luZyBpcyBhIGhhcmR3YXJlIGZlYXR1cmUgZGVzaWduZWQgdG8gcHJvdGVj
+dCBhZ2FpbnN0DQo+IGZvcndhcmQtZWRnZSBjb250cm9sIGZsb3cgaGlqYWNraW5nIChDYWxsL0p1
+bXAgb3JpZW50ZWQgcHJvZ3JhbW1pbmcpLCBhbmQgaXMgYQ0KPiBjb21wYW5pb24gZmVhdHVyZSB0
+byBDRVQgU2hhZG93IFN0YWNrcyBhZGRlZCBpbiBYZW4gNC4xNC4NCj4NCj4gUGF0Y2hlcyAxIHRo
+cnUgNSBhcmUgcHJlcmVxdWlzaXRlcy4gIFBhdGNoZXMgNiB0aHJ1IDYwIGFyZSBmYWlybHkgbWVj
+aGFuaWNhbA0KPiBhbm5vdGF0aW9ucyBvZiBmdW5jdGlvbiBwb2ludGVyIHRhcmdldHMuICBQYXRj
+aGVzIDYxIHRocnUgNzAgYXJlIHRoZSBmaW5hbA0KPiBlbmFibGVtZW50IG9mIENFVC1JQlQuDQo+
+DQo+IFRoaXMgc2VyaWVzIGZ1bmN0aW9ucyBjb3JyZWN0bHkgd2l0aCBHQ0MgOSBhbmQgbGF0ZXIs
+IGFsdGhvdWdoIGFuIGV4cGVyaW1lbnRhbA0KPiBHQ0MgcGF0Y2ggaXMgcmVxdWlyZWQgdG8gZ2V0
+IG1vcmUgaGVscGZ1bCB0eXBlY2hlY2tpbmcgYXQgYnVpbGQgdGltZS4NCj4NCj4gVGVzdGVkIG9u
+IGEgVGlnZXJMYWtlIE5VQy4NCj4NCj4gQ0kgcGlwZWxpbmVzOg0KPiAgIGh0dHBzOi8vZ2l0bGFi
+LmNvbS94ZW4tcHJvamVjdC9wZW9wbGUvYW5keWhocC94ZW4vLS9waXBlbGluZXMvNDcwNDUzNjUy
+DQo+ICAgaHR0cHM6Ly9jaXJydXMtY2kuY29tL2J1aWxkLzQ5NjIzMDgzNjIzMzgzMDQNCj4NCj4g
+TWFqb3IgY2hhbmdlcyBmcm9tIHYxOg0KPiAgKiBCb2lsZXJwbGF0ZSBmb3IgbWVjaGFuaWNhbCBj
+b21taXRzDQo+ICAqIFVFRkkgcnVudGltZSBzZXJ2aWNlcyB1bmNvbmRpdGlvbmFsbHkgZGlzYWJs
+ZSBJQlQNCj4gICogQ29tcHJlaGVuc2l2ZSBidWlsZCB0aW1lIGNoZWNrIGZvciBlbWJlZGRlZCBl
+bmRicidzDQoNClRoZXJlJ3Mgb25lIHRoaW5nIEkgY29uc2lkZXJlZCwgYW5kIHdhbnRlZCB0byBk
+aXNjdXNzLg0KDQpJJ20gdGVtcHRlZCB0byByZW5hbWUgY2ZfY2hlY2sgdG8gY2ZpIGZvciB0aGUg
+ZnVuY3Rpb24gYW5ub3RhdGlvbiwgYXMNCml0J3Mgc2hvcnRlciB3aXRob3V0IHJlZHVjaW5nIGNs
+YXJpdHkuDQoNCkNoYW5naW5nIG5vdyAoaS5lLiBiZWZvcmUgSSBjb21taXQpIGlzIGVhc3kuwqAg
+T25jZSBjb21taXR0ZWQsIGNoYW5naW5nDQppcyBmYXIgaGFyZGVyLg0KDQp+QW5kcmV3DQo=
 
