@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0A5C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271699.466313 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0945CC433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271696.466296 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3U-0006sc-Em; Mon, 14 Feb 2022 13:06:12 +0000
+	id 1nJb3S-0006Ls-2B; Mon, 14 Feb 2022 13:06:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271699.466313; Mon, 14 Feb 2022 13:06:12 +0000
+Received: by outflank-mailman (output) from mailman id 271696.466296; Mon, 14 Feb 2022 13:06:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3U-0006sV-AM; Mon, 14 Feb 2022 13:06:12 +0000
-Received: by outflank-mailman (input) for mailman id 271699;
- Mon, 14 Feb 2022 13:06:10 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nJb3R-0006LF-Sw; Mon, 14 Feb 2022 13:06:09 +0000
+Received: by outflank-mailman (input) for mailman id 271696;
+ Mon, 14 Feb 2022 13:06:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb2w-0008IH-Gb
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:38 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cca26c48-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:05:37 +0100 (CET)
+ id 1nJb2d-00023t-3E
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:19 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bf1c7d79-8d96-11ec-b215-9bbe72dcb22c;
+ Mon, 14 Feb 2022 14:05:14 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cca26c48-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: bf1c7d79-8d96-11ec-b215-9bbe72dcb22c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843937;
+  d=citrix.com; s=securemail; t=1644843915;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=4s3bqHzDxRb3sy7KdmJzYNLlBSeOBXvCKtFlSSrGjpU=;
-  b=CNQti08JLvQqrEccupWdbSo4PoWSm6HyuOiA0tIeLcYMW3e6yssqWxs6
-   BQ/8Pzm6vFyCpmbEmaeSrxiPD2a54nJ2TUvCv1PQRdLWvjuEbdQy9GPCG
-   M/VCPbyZq5fX4Xr8ePjAleJO/mJFI+t2q0IeB27st3rTZ/8eX032eFL0U
-   s=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: f2121Ej7+AAryE+M4fZWH1sR0wMYOCIhdRvvy2ee7nTBRUsqxx5mjG8EbvYG4ULwFfybOvLzbz
- beP00bjVaLt/VtFJzjTyvZxYhAyG7ll6LAv4CYHiKlMN9+b1Z/ArXOVKRZlGGYEH4A6222Bv5N
- av+ofoiIdA7KRlEpTArzl6qgbe/FppWbw232UDgJg5Plhb3Pf5OhXLeAygJc+jXn98UcMWq611
- qRWN282hkenzj0c21G4XpvgibLK9ZOr4OWjwA75o7vALoYEZwP23PvJJ7+4v5JeyZ/FVIg5NRp
- 8sFJ+H3wcz2l0helDOTJup3R
+  bh=Tggw0GZ6bfnXtc3j4bg8kNAeAyzyeywPiqWn1QmRJkY=;
+  b=hWqUX8sHy2nidq9jL+80nzlAb/4wFPqq9B9+1a022ixiHc4MDE+naiSN
+   wtJcqELJEtDONTMK59Xb0KxjM6LpMmsjHl89uAVqfaVcNEApFdFWSpOqv
+   rYCIeTAuBnUDwSclYCYg0+oIANUoj7Mxx3ihyVzHNiJVvdUzFoX72DFQ2
+   c=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: h3iYyQsK6zE5hVydfGasuPl2S6zQCRvyDC8bkeVSnsO+uetH8nNUUuE2JnTJOudLkRFmpRcOUe
+ I5c65DN0NJLHfNifkAASDni17Vg/KlOm39Lh30kFzAG5/liJWQGB+zDU3lOG6T8GBJdC4zjFSn
+ lblgbCBcoLwovYAPr9gZALpt+0UDzLFn8uyjwNwyQmvDcBGEGDZeuJ4Wa1VB/TPBZT7E5AowGq
+ ph/ZiH0Yl5aW43fhtRIRVn4X0H6rb1hon0zFmR3gVHOeMSsf/RgnqZnAoiMgnM6XD0F1zcIkRy
+ kuPS1TxufY1NFHz90P+tDrp4
 X-SBRS: 5.1
-X-MesageID: 63592636
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 64050600
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:LIOa8qPhWI2Yj+vvrR27kMFynXyQoLVcMsEvi/4bfWQNrUoggzYPm
- 2dMWD2DbKmJYzf8f9ogPoqwo0tXuZ6Ay9IwGgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6UUsxNbVU8En1500s/w7dRbrNA2rBVPSvc4
- bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
- 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYoy2swOFS4
- 8Vyibmfaj0DP7zIp80bfBYNRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
- 6VFdnZdNXhvhMrvqF6/YsBqit4uM4/AO4QHt2s75TrYEewnUdbIRKCiCdpwgmxt15oQRqi2i
- 8wxVT8yUQr4ZUZzfUYoKooCvsCqmn/kbGgNwL6SjfVuuDWCpOBr65D9PdyQdtGUSMF9mkeDu
- nmA72n/GgsdNtGU1XyC6H3EuwPUtXqlAsRITuT+r6M0xg3IroAONPEIfUOe/siaoV6BZ/dwC
- HY++zsqkoE020P+G7ERQCaEiHKDuxcdXf9ZHOs79ByBx8Lo3uqJOoQXZmUfMYJ77afaURRvj
- wbUxI2xWVSDpZXIESr1y1uCkd+l1cH5x0cmbDRMcwYK6sKLTGob3kOWFYYL/EJYY7TI9dDML
- 9Ki8XJWa1Y715djO0CHEbfv2WzEm3QxZlRpjjg7p0r8hu+DWKarZpaz9X/Q5utaIYCSQzGp5
- SZYx5fOvL1TVcjWzkRhpdnh+5nzuZ643MD02wYzT/HNCRzxk5JcQWygyG4nfxo4Wir1UTTof
- FXSqWtsCGx7ZxOXgVtMS9vpUawClPG4ffy8D6y8RoceM/BZKV7clAkzNBH44owYuBV1+U3JE
- czAKpjE4LdzIfkP8QdasM9Dje51lnhmnzu7qFKS503P7IdyrUW9Ed8tWGZipMhghE9diAmKo
- dtZKeWQzBBTDL/3biXNqNZBJlEWN3krQ5vxrpUPJOKEJwNnHkAnCuPQnux9K9A0wfwNm7ea5
- Gy5V29Z1EH72S/NJzKVZy0xc7joR5t+8y42ZHR+IVay1nE/So+z96NDJYAvdLwq+bU7n/55R
- vUIYeuaBfFLRmiV8jgRd8Cl/odjaA6qlUSFOC/8OGozeJtpRgro/N74f1SwqHlSX3Tv7cZn+
- u+uzALWR5YHVj9ONseOZaL91U61sFgchPl2AxnCLO5MdRi+64NtMSHw0KM6epleNRXZyzKG/
- A+KGhNE9/LVqoo4/dSV16CJq4ClT7l3EkZARjSJ6L+3MW/R/3a5wJ8GW+GNJGiPWGTx8aSkR
- ONU0/Cjb6FXwAcU69JxQ+Rx0KYzx9rzvLsLnA1rEULCY0mvFr49cGKN2tNCt/EVy7JU0edst
- pljJjWO1W21Bf7Y
-IronPort-HdrOrdr: A9a23:a2X9Z6MLL114acBcTsOjsMiBIKoaSvp037Eqv3oedfU1SL3gqy
- nAppQmPHPP5Ar5HUtQ/OxoW5PwJ080l6QFgrX5VI3KNGKN1VdAbrsSibcKqweQfBEWndQ96U
- 4PScdD4aXLfDpHsfo=
+IronPort-Data: A9a23:dK7b7a6cv4gWjnE+dDCrwAxRtCbAchMFZxGqfqrLsTDasY5as4F+v
+ mofWmzUOP+MazGkfNAgO4znpk9SuZXSzYVjT1Q6/i5nHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZj29Iw2LBVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zl
+ +h18tuXEzgVPZbhpqc6XEF8KwRTFPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQQa6DP
+ 5RBMVKDajzjW1pEI0owOqkUjcSajFv9Wm1ktn+a8P9fD2/7k1UqjemF3MDuUsyHQ4BZk1iVo
+ krC/n/lGVcKOdqH0z2H/3mwwOjVkkvGtJk6TePisKQw2RvKmzJVWEZ+uUaHTeeR1XOGHJV4c
+ XMo+REDk+sV+xSPdvzQdkjtyJKbhSI0V91VGuw8zQiCzKvI/gqUblQ5oi59hM8O75FvG2Fzv
+ rOdt5awXGE07uXJIZ6I3urM9VuP1T4pwXjujMPuZS8M+JHdrY46lXojpf4zQffu3rUZ9dwdq
+ g1mTRTSZZ1O16bnNI3hpDgrZg5AQbCTEGYICv3/BD7N0++ATNfNi3aUwVba9+1cC42SU0OMu
+ nMJ8+DHsrxSUsHdyXHVGb5XdF1M2xpiGGeC6WOD4rF7r2j9k5JdVdw4DM5CyLdBbZ9fJG6Bj
+ L77sgJN/p5DVEZGnocsC79d//8ClPC6ffy8D6i8RoMXPvBZKV/WlAkzNBX49z28zyARfVQXZ
+ M7znTCEVi1BV8yKDVOeGo8g7FPc7n5ilD2DHcihl3xKE9O2PRaodFvMC3PWBshR0U9OiFq9H
+ w93O5TYxhNBfvf5ZyWLo4cfIUpTdSowBIzsqtwRfemGe1I0FGYkAv7X4LUgZ406wPgFyraWp
+ imwCh1C1V7ypXzbMgHWOHptX6ziAMRkpnUhMC1yYVvxgyo/YZyi5bs0focseeV17/RqyPN5F
+ qFXe8iJDvlVZC7A/jARMcv0oIB4LUz5jgOSJSu1JjM4esc4FQDO/9bleCrp9TUPUXXr5Zdv/
+ eX421qCE5QZRglkAMLHU96Vzgu87SoHheZ/f0rUOd0PKk/ix5dndn7qhfgtLsBSdRianmmG1
+ xybCAszrPXWp9Nn68HAgK2Jotv7E+Z6GUYGTWDX4azvaHvf92unh4RBTPyJbXbWU2atoPeuY
+ uBczvfdNvwbnQkV79ogQugzla9utcHyo7J6zxh/GCSZZlumPbpsP32a0JQdraZK3LJY5VO7V
+ 0/nFgO24llV1BcJyGIsGTc=
+IronPort-HdrOrdr: A9a23:peCOGqMpSc0cScBcTvKjsMiBIKoaSvp037B87TEUdfU1SL3jqy
+ nKpp536faaskd2ZJhNo6H5BEDiexPhHPxOkO4s1N6ZNWGMhILPFvAB0WLM+UyEJ8SUzJ8l6U
+ 4PSdkENDQyNzdHZATBjDVQ3+xA/DBPys7Y5tvj8w==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="63592636"
+   d="scan'208";a="64050600"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 53/70] x86/psr: CFI hardening
-Date: Mon, 14 Feb 2022 12:51:10 +0000
-Message-ID: <20220214125127.17985-54-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 49/70] x86/hap: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:06 +0000
+Message-ID: <20220214125127.17985-50-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,106 +106,162 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/psr.c | 33 +++++++++++++++++----------------
- 1 file changed, 17 insertions(+), 16 deletions(-)
+ xen/arch/x86/mm/hap/guest_walk.c |  4 ++--
+ xen/arch/x86/mm/hap/hap.c        | 21 +++++++++++----------
+ xen/arch/x86/mm/hap/private.h    | 30 ++++++++++++------------------
+ 3 files changed, 25 insertions(+), 30 deletions(-)
 
-diff --git a/xen/arch/x86/psr.c b/xen/arch/x86/psr.c
-index 6c9cabf3843d..ccb761998f9a 100644
---- a/xen/arch/x86/psr.c
-+++ b/xen/arch/x86/psr.c
-@@ -282,7 +282,7 @@ static enum psr_feat_type psr_type_to_feat_type(enum psr_type type)
+diff --git a/xen/arch/x86/mm/hap/guest_walk.c b/xen/arch/x86/mm/hap/guest_walk.c
+index 832a8058471e..1da8d3b99edc 100644
+--- a/xen/arch/x86/mm/hap/guest_walk.c
++++ b/xen/arch/x86/mm/hap/guest_walk.c
+@@ -36,14 +36,14 @@
+ #include <asm/guest_pt.h>
+ #include <asm/p2m.h>
+ 
+-unsigned long hap_gva_to_gfn(GUEST_PAGING_LEVELS)(
++unsigned long cf_check hap_gva_to_gfn(GUEST_PAGING_LEVELS)(
+     struct vcpu *v, struct p2m_domain *p2m, unsigned long gva, uint32_t *pfec)
+ {
+     unsigned long cr3 = v->arch.hvm.guest_cr[3];
+     return hap_p2m_ga_to_gfn(GUEST_PAGING_LEVELS)(v, p2m, cr3, gva, pfec, NULL);
  }
  
- /* Implementation of allocation features' functions. */
--static bool cat_check_cbm(const struct feat_node *feat, uint32_t *val)
-+static bool cf_check cat_check_cbm(const struct feat_node *feat, uint32_t *val)
+-unsigned long hap_p2m_ga_to_gfn(GUEST_PAGING_LEVELS)(
++unsigned long cf_check hap_p2m_ga_to_gfn(GUEST_PAGING_LEVELS)(
+     struct vcpu *v, struct p2m_domain *p2m, unsigned long cr3,
+     paddr_t ga, uint32_t *pfec, unsigned int *page_order)
  {
-     unsigned int first_bit, zero_bit;
-     unsigned int cbm_len = feat->cat.cbm_len;
-@@ -417,8 +417,8 @@ static bool mba_init_feature(const struct cpuid_leaf *regs,
-     return true;
+diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
+index ed5112b00b63..9d67a47f5fe9 100644
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -268,7 +268,7 @@ static void hap_free(struct domain *d, mfn_t mfn)
+     page_list_add_tail(pg, &d->arch.paging.hap.freelist);
  }
  
--static bool cat_get_feat_info(const struct feat_node *feat,
--                              uint32_t data[], unsigned int array_len)
-+static bool cf_check cat_get_feat_info(
-+    const struct feat_node *feat, uint32_t data[], unsigned int array_len)
+-static struct page_info *hap_alloc_p2m_page(struct domain *d)
++static struct page_info *cf_check hap_alloc_p2m_page(struct domain *d)
  {
-     if ( array_len != PSR_INFO_ARRAY_SIZE )
-         return false;
-@@ -431,8 +431,8 @@ static bool cat_get_feat_info(const struct feat_node *feat,
+     struct page_info *pg;
+ 
+@@ -294,7 +294,7 @@ static struct page_info *hap_alloc_p2m_page(struct domain *d)
+     return pg;
  }
  
- /* L3 CAT props */
--static void l3_cat_write_msr(unsigned int cos, uint32_t val,
--                             enum psr_type type)
-+static void cf_check l3_cat_write_msr(
-+    unsigned int cos, uint32_t val, enum psr_type type)
+-static void hap_free_p2m_page(struct domain *d, struct page_info *pg)
++static void cf_check hap_free_p2m_page(struct domain *d, struct page_info *pg)
  {
-     wrmsrl(MSR_IA32_PSR_L3_MASK(cos), val);
- }
-@@ -447,8 +447,8 @@ static const struct feat_props l3_cat_props = {
- };
+     struct domain *owner = page_get_owner(pg);
  
- /* L3 CDP props */
--static bool l3_cdp_get_feat_info(const struct feat_node *feat,
--                                 uint32_t data[], uint32_t array_len)
-+static bool cf_check l3_cdp_get_feat_info(
-+    const struct feat_node *feat, uint32_t data[], uint32_t array_len)
+@@ -662,8 +662,8 @@ void hap_vcpu_init(struct vcpu *v)
+  * HAP guests can handle page faults (in the guest page tables) without
+  * needing any action from Xen, so we should not be intercepting them.
+  */
+-static int hap_page_fault(struct vcpu *v, unsigned long va,
+-                          struct cpu_user_regs *regs)
++static int cf_check hap_page_fault(
++    struct vcpu *v, unsigned long va, struct cpu_user_regs *regs)
  {
-     if ( !cat_get_feat_info(feat, data, array_len) )
-         return false;
-@@ -458,8 +458,8 @@ static bool l3_cdp_get_feat_info(const struct feat_node *feat,
-     return true;
- }
+     struct domain *d = v->domain;
  
--static void l3_cdp_write_msr(unsigned int cos, uint32_t val,
--                             enum psr_type type)
-+static void cf_check l3_cdp_write_msr(
-+    unsigned int cos, uint32_t val, enum psr_type type)
- {
-     wrmsrl(((type == PSR_TYPE_L3_DATA) ?
-             MSR_IA32_PSR_L3_MASK_DATA(cos) :
-@@ -478,8 +478,8 @@ static const struct feat_props l3_cdp_props = {
- };
- 
- /* L2 CAT props */
--static void l2_cat_write_msr(unsigned int cos, uint32_t val,
--                             enum psr_type type)
-+static void cf_check l2_cat_write_msr(
-+    unsigned int cos, uint32_t val, enum psr_type type)
- {
-     wrmsrl(MSR_IA32_PSR_L2_MASK(cos), val);
- }
-@@ -494,8 +494,8 @@ static const struct feat_props l2_cat_props = {
- };
- 
- /* MBA props */
--static bool mba_get_feat_info(const struct feat_node *feat,
--                              uint32_t data[], unsigned int array_len)
-+static bool cf_check mba_get_feat_info(
-+    const struct feat_node *feat, uint32_t data[], unsigned int array_len)
- {
-     ASSERT(array_len == PSR_INFO_ARRAY_SIZE);
- 
-@@ -508,13 +508,14 @@ static bool mba_get_feat_info(const struct feat_node *feat,
-     return true;
- }
- 
--static void mba_write_msr(unsigned int cos, uint32_t val,
--                          enum psr_type type)
-+static void cf_check mba_write_msr(
-+    unsigned int cos, uint32_t val, enum psr_type type)
- {
-     wrmsrl(MSR_IA32_PSR_MBA_MASK(cos), val);
- }
- 
--static bool mba_sanitize_thrtl(const struct feat_node *feat, uint32_t *thrtl)
-+static bool cf_check mba_sanitize_thrtl(
-+    const struct feat_node *feat, uint32_t *thrtl)
+@@ -677,7 +677,7 @@ static int hap_page_fault(struct vcpu *v, unsigned long va,
+  * should not be intercepting it.  However, we need to correctly handle
+  * getting here from instruction emulation.
+  */
+-static bool_t hap_invlpg(struct vcpu *v, unsigned long linear)
++static bool cf_check hap_invlpg(struct vcpu *v, unsigned long linear)
  {
      /*
-      * Per SDM (chapter "Memory Bandwidth Allocation Configuration"):
+      * Emulate INVLPGA:
+@@ -690,7 +690,8 @@ static bool_t hap_invlpg(struct vcpu *v, unsigned long linear)
+     return 1;
+ }
+ 
+-static void hap_update_cr3(struct vcpu *v, int do_locking, bool noflush)
++static void cf_check hap_update_cr3(
++    struct vcpu *v, int do_locking, bool noflush)
+ {
+     v->arch.hvm.hw_cr[3] = v->arch.hvm.guest_cr[3];
+     hvm_update_guest_cr3(v, noflush);
+@@ -702,7 +703,7 @@ static bool flush_vcpu(const struct vcpu *v, const unsigned long *vcpu_bitmap)
+ }
+ 
+ /* Flush TLB of selected vCPUs.  NULL for all. */
+-static bool flush_tlb(const unsigned long *vcpu_bitmap)
++static bool cf_check flush_tlb(const unsigned long *vcpu_bitmap)
+ {
+     static DEFINE_PER_CPU(cpumask_t, flush_cpumask);
+     cpumask_t *mask = &this_cpu(flush_cpumask);
+@@ -747,7 +748,7 @@ hap_paging_get_mode(struct vcpu *v)
+                                       &hap_paging_protected_mode);
+ }
+ 
+-static void hap_update_paging_modes(struct vcpu *v)
++static void cf_check hap_update_paging_modes(struct vcpu *v)
+ {
+     struct domain *d = v->domain;
+     unsigned long cr3_gfn = v->arch.hvm.guest_cr[3] >> PAGE_SHIFT;
+@@ -791,13 +792,13 @@ void hap_p2m_init(struct p2m_domain *p2m)
+     p2m->write_p2m_entry_post = hap_write_p2m_entry_post;
+ }
+ 
+-static unsigned long hap_gva_to_gfn_real_mode(
++static unsigned long cf_check hap_gva_to_gfn_real_mode(
+     struct vcpu *v, struct p2m_domain *p2m, unsigned long gva, uint32_t *pfec)
+ {
+     return ((paddr_t)gva >> PAGE_SHIFT);
+ }
+ 
+-static unsigned long hap_p2m_ga_to_gfn_real_mode(
++static unsigned long cf_check hap_p2m_ga_to_gfn_real_mode(
+     struct vcpu *v, struct p2m_domain *p2m, unsigned long cr3,
+     paddr_t ga, uint32_t *pfec, unsigned int *page_order)
+ {
+diff --git a/xen/arch/x86/mm/hap/private.h b/xen/arch/x86/mm/hap/private.h
+index 973fbe8be59c..1040eaf69f43 100644
+--- a/xen/arch/x86/mm/hap/private.h
++++ b/xen/arch/x86/mm/hap/private.h
+@@ -24,27 +24,21 @@
+ /********************************************/
+ /*          GUEST TRANSLATION FUNCS         */
+ /********************************************/
+-unsigned long hap_gva_to_gfn_2_levels(struct vcpu *v,
+-                                     struct p2m_domain *p2m,
+-                                     unsigned long gva, 
+-                                     uint32_t *pfec);
+-unsigned long hap_gva_to_gfn_3_levels(struct vcpu *v,
+-                                     struct p2m_domain *p2m,
+-                                     unsigned long gva, 
+-                                     uint32_t *pfec);
+-unsigned long hap_gva_to_gfn_4_levels(struct vcpu *v,
+-                                     struct p2m_domain *p2m,
+-                                     unsigned long gva, 
+-                                     uint32_t *pfec);
++unsigned long cf_check hap_gva_to_gfn_2_levels(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long gva, uint32_t *pfec);
++unsigned long cf_check hap_gva_to_gfn_3_levels(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long gva, uint32_t *pfec);
++unsigned long cf_check hap_gva_to_gfn_4_levels(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long gva, uint32_t *pfec);
+ 
+-unsigned long hap_p2m_ga_to_gfn_2_levels(struct vcpu *v,
+-    struct p2m_domain *p2m, unsigned long cr3,
++unsigned long cf_check hap_p2m_ga_to_gfn_2_levels(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long cr3,
+     paddr_t ga, uint32_t *pfec, unsigned int *page_order);
+-unsigned long hap_p2m_ga_to_gfn_3_levels(struct vcpu *v,
+-    struct p2m_domain *p2m, unsigned long cr3,
++unsigned long cf_check hap_p2m_ga_to_gfn_3_levels(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long cr3,
+     paddr_t ga, uint32_t *pfec, unsigned int *page_order);
+-unsigned long hap_p2m_ga_to_gfn_4_levels(struct vcpu *v,
+-    struct p2m_domain *p2m, unsigned long cr3,
++unsigned long cf_check hap_p2m_ga_to_gfn_4_levels(
++    struct vcpu *v, struct p2m_domain *p2m, unsigned long cr3,
+     paddr_t ga, uint32_t *pfec, unsigned int *page_order);
+ 
+ #endif /* __HAP_PRIVATE_H__ */
 -- 
 2.11.0
 
