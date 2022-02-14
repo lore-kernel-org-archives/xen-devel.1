@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E9B1C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:05:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271645.466208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95309C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:05:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271642.466181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb2B-0000js-Pt; Mon, 14 Feb 2022 13:04:51 +0000
+	id 1nJb28-00007L-Rf; Mon, 14 Feb 2022 13:04:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271645.466208; Mon, 14 Feb 2022 13:04:51 +0000
+Received: by outflank-mailman (output) from mailman id 271642.466181; Mon, 14 Feb 2022 13:04:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb2B-0000jP-IR; Mon, 14 Feb 2022 13:04:51 +0000
-Received: by outflank-mailman (input) for mailman id 271645;
- Mon, 14 Feb 2022 13:04:49 +0000
+	id 1nJb28-00007B-OX; Mon, 14 Feb 2022 13:04:48 +0000
+Received: by outflank-mailman (input) for mailman id 271642;
+ Mon, 14 Feb 2022 13:04:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb29-0008IH-LL
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:49 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id af782393-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:04:48 +0100 (CET)
+ id 1nJb27-0008IH-3M
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:47 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ae7b14de-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:04:45 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af782393-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: ae7b14de-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843888;
+  d=citrix.com; s=securemail; t=1644843885;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=BEoNz1G1VEb1PvMVHl3dUIUZku1FDM+32RnsoUebuRQ=;
-  b=JpfsnV0I4ACv5kyo+ixL2GWs1tBqlly6FtEObKMqncdivA8rw7A0BJ/L
-   trlnzdHdD3UziKDVAs1TLv5iUltIfFUTFVKEg0zim8tBSXoEOQh9nJOxM
-   fVdk471ds+H3Fx3ciFJ9CEkfuiSUye9SBNabxVQtPb1KL/iAAskQMc+rk
-   c=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: PmpWHPe03+VbbIE8oS71P1YGSlFsPbH89gQw0QKTwC1T5H0nJ9d2eaFOerhhj1Ah1qQnKJENtV
- MpRBfFGnvfyed4YbBcjHH0BgfNLvImeqtPHMzvTttRCI7rCoIJkHz932whdopODlUl7pG1czdn
- 9+AA9t4cqorIciBtMdP9cx57Db7benA5L3uTaylXG57W2QWmOJW6Yg7seuVdSaaGJmougDINAJ
- rH20FV5qvSEvCsesfmGrjG/Zs6Ti0kQ0SsfODw6APf/I0laBbDntFLdv/iBgXpSwkRalj5X/E9
- tgAnKaKKSCEbCQs5QgfSEbhJ
+  bh=e92OCL5JW96cE+yF15zAo6mkF0e29pgcSSh3YdFWn/0=;
+  b=KOwSP+S7PBX11G4DlPNpJYuku9QogWmZwyvy0Ok88/zSyv+2O1UlHhCG
+   +RZzxebWCcEgAgfeCrOfzFzAGMfmm14g9wACFMpVkqas4sTjvS4IOuKe5
+   szYUy3uV7iDiX/c57PTWsqA/NAjMHpTywhtzMkY8lOsqFCMdlfA56WSl0
+   s=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: rQcdzzGVT9+6Jr1mdg/nHbkZS/dqgRwSrlYb3CNg3PlPpzmkbmRD7LtGnH/db0gppo6wneDbNH
+ Y3477CXvYxfIQOu1w4SrnJCi9mm/oyfb+zfln9g9XcJaXO6k1cHXU9oFrTgMTwumZil+Vh6N2u
+ x0KtuFZlni5d3pg/mKgFTCtKaTclr3TO88gKduDAthTOFL062ja0px35Iz6hgLLqcE5zFL9vGb
+ 2nfOHa1gwmJkwEy/owP718rwA9I1XsxYnpPBIn1Cek7g0JilQJ/7FMGWws2Zn4ZAOwEGnXZ1af
+ lQBTeCeexUWKjt8UhUOI4B6l
 X-SBRS: 5.1
-X-MesageID: 64149632
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 64050482
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:sJNihKpkBnGbHDq2jI9fCPpKaWdeBmIGYhIvgKrLsJaIsI4StFCzt
- garIBmCa6uPYDbzL98kbo23pBxVsMDVzdMwGlFrris1RCxD9JuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dndx4f5fs7Rh2NQw24HlW1rlV
- e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
- 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
- DlCnZK+axwJGaHdorsmdUNCLjN7IY9IxLCSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
- 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
- ZZANWsxN06ojxtnOGcPGpwek8qRn3zeai9mklu8oYQe2j2GpOB2+Oe0a4eEEjCQfu1Fk0Ddq
- m/Y8mDRBhABKMfZ2TeD6mirhOLEgWX8Qo16KVGj3qc02hvJnDVVUUBIEwvgyRWktqKgc9xRC
- Vc03SY/l/cJ0haxc8v4Qz+2nHHR63bwROFsO+E97QiMzI/d7ACYGnUIQ1Z9VTA2iCMlbWd0j
- wHUxrsFERQq6eTIEizFqt94uBvvYXB9EIMUWcMToeLpCfHHqZp7sB/AR80L/EWd3oysQmGYL
- 9xnQUEDa1QvYSwjiv/TEbPv2WvESn31oukdvFu/Y45dxlklDLNJnqTxgbQh0d5OLZyCUn6Kt
- 2Uels6V4YgmVM/RyHPdELhQROjyvZ5p1QEwZnY1QfEcG8mFoSb/Lei8HhkiTKuWDir0UWCwO
- xKC0e+gzJRSIGGrfcdKj3GZUKwXIVzbPY29DJj8N4MWCrAoLVPv1Hw+NCa4gjG2+GBxwP5XB
- HtuWZv1ZZrsIf88l2TeqiZ0+eJD+x3SMkuNGcGln0z/i+L2ibz8Ye5tDWZip9sRtMusyDg5O
- f4GXydT4xkAAuD4fAfN9osfcQIDIXQhXMikoM1LbO+TZAFhHTh5WfPWxLogfa1jnrhUybiUr
- i3sBBcAxQqtn2DDJCWLdmtnNOHlU6FgoC9pJicrJ1uphSQuON798KcFepIrVrA77+g/n+VsR
- vwIdpzYUPRCQzjK4RoHapz5oNAwfRinn1vWbSGkfCI+b9hrQAmQoo3oeQ7m9S8vCCurtJRh/
- +38h12DGZdaHlZsFsfbbv6r3midh3lFlbIgRVbML/lSZF7orNpgJRvug6JlOMoLMxjCmGeXj
- l7EHRcCqODRiIYp692V17ucpoKkHuYiTEpXG27XseS/OSXApzfxxIZBVKCDfCzHVXOy86KnP
- L0Hw/b5OfwBvVBLr4sjTOo7kfNgv4Pi9+1A0wBpPHTXdFD6WLpvL06P0dRLqqAQlKRSvhG7W
- x7X99RXUVlT1BgJzLLFyNIZU9m+
-IronPort-HdrOrdr: A9a23:F1g3+asH0y7UsJN15xlOxFFn7skDdNV00zEX/kB9WHVpmszxra
- 6TdZUgpGbJYVkqOE3I9ertBEDEewK4yXcX2/h2AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YGT0EUMrzN5DZB4voSmDPIceod/A==
+IronPort-Data: A9a23:ccKvm69ZwnNm15vLh4rODrUDnnmTJUtcMsCJ2f8bNWPcYEJGY0x3y
+ WVJWWCHOa3eYzf2e9Fzbdvn9xxVupXWx9RrSVQ+/Hg8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7Rg3tYx6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPh3w
+ 94W9rCdWDt3L67jyOMSXjd/H3xxaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4SRauGO
+ 5pDAdZpREjCZAAUeUw3MZ4vlvu6hHK4SGx1q03A8MLb5ECMlVcsgdABKuH9atGMAMlYgEucj
+ mbH5HjiRAEXMsSFzjiI+W7qgfXA9R4XQ6pLSuf+rKQzxgTOmCpDU3X6SGdXv9G/gUXlGP5yO
+ nBK6ykB/a89+WKMQoTyCkjQTGG/gjYQXN9ZEusf4Q6Ly7bJ7wvxOlXoXgKte/R96pZoGGVCO
+ kuh2oqwWGcx6OH9pWe1q+/MxQ5eLxT5OoPricUsaQIeq+fur4go5v4kZoYySfXl5jEZ9NyZ/
+ txrkMTcr+hJ5SLo///ilbwiv95LjsKXJjPZHi2NAgqYAvpRPeZJnbCA51nB9upnJ42EVFSHt
+ 3Vss5HAsLxRXcHQyXTUG79l8FSVCxGtamO0vLKSN8N5q2TFF4CLIei8Hw2S1G82a51ZKFcFk
+ WfYuB9L5Y87AZdZRfQfXm5FMOxzlfKIPY28Dpj8N4MSCrAsJF7v1Hw/Pia4gjGy+HXAZIliY
+ P93h+73Vi1EYUmmpRLrL9ogPUgDmHxvmzOLHcqjp/lluJLHDEOopX4+GAPmRogEAGms+W05K
+ v5TaJmHzQtxSur7bnWF+IIfNwlSf3M6GYr3u4pccevaelhqH2QoCvnwx7I9etM6w/QJx7mQp
+ nztCFVFzFffhGHcLVnYYH5Ud76yD410qmg2PHJwMA/wiWQje4um8IwWa4AzIes87OVmwPMtF
+ 6sFdsyMD+5hUDPC/zhBP5DxoJY7LEaghB6UPjrjaz86JsYySwvM897iXw3u6ChRUXbn6Zpg+
+ +Wtj1qJT4ACSgJuCNftRMiul17h72IAnO9SXlfTJoUBckvb74U3eTf6ieU6Ip9QJEyblCeaz
+ QufHTwRufLJ/90u6NDMiK2J89WpHu95EhYIFmXX9+/rZyzT/27lyo5cSueYOzvaUTqsqqmlY
+ OxUydD6MeEGwwkW49YtTe4zwPJs/cbrqp9b0h9gTSfCYFmcA799JmWLgJtUvapXy74F4Qa7V
+ ypjIDWB1Wll7C89LGMsGQ==
+IronPort-HdrOrdr: A9a23:iy2Qaay9i3yZFZLBISe6KrPw1r1zdoMgy1knxilNoHxuH/BwWf
+ rPoB17726RtN91YhsdcL+7V5VoLUmzyXcX2/h1AV7BZniEhILAFugLgbcKqweKJ8SUzJ8+6U
+ 4PSclD4N2bNykGsS75ijPIb+rJFrO8gd+VbeS19QYScelzAZsQiDuQkmygYzZLrA8tP+teKL
+ OsovBpihCHYnotYsGyFhA+LpL+T42iruOeXfYebSRXkDWzsQ==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149632"
+   d="scan'208";a="64050482"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 36/70] x86/power: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:53 +0000
-Message-ID: <20220214125127.17985-37-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 43/70] x86/mce: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:00 +0000
+Message-ID: <20220214125127.17985-44-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -103,183 +104,230 @@ to help protect against call/jump/return oriented programming attacks.
 
 Use cf_check to annotate function pointer targets for the toolchain.
 
-cpufreq_governor_dbs() has no external callers so make it static.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/acpi/cpufreq/cpufreq.c    | 14 +++++++-------
- xen/arch/x86/acpi/cpufreq/powernow.c   | 15 ++++++++-------
- xen/common/core_parking.c              |  4 ++--
- xen/drivers/cpufreq/cpufreq_ondemand.c |  6 ++++--
- xen/include/acpi/cpufreq/cpufreq.h     |  1 -
- 5 files changed, 21 insertions(+), 19 deletions(-)
+ xen/arch/x86/cpu/mcheck/mce.c       |  8 ++++----
+ xen/arch/x86/cpu/mcheck/mce.h       |  2 +-
+ xen/arch/x86/cpu/mcheck/mce_amd.c   |  9 ++++----
+ xen/arch/x86/cpu/mcheck/mce_amd.h   |  4 ++--
+ xen/arch/x86/cpu/mcheck/mce_intel.c | 41 +++++++++++++++++--------------------
+ 5 files changed, 31 insertions(+), 33 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index 8133c2dd958c..c27cbb2304f2 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -320,7 +320,7 @@ unsigned int get_measured_perf(unsigned int cpu, unsigned int flag)
-     return policy->cpuinfo.max_freq * perf_percent / 100;
+diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
+index 3467e0f1a315..275c54be7c0f 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -75,7 +75,7 @@ static int __init cf_check mce_set_verbosity(const char *str)
+ custom_param("mce_verbosity", mce_set_verbosity);
+ 
+ /* Handle unconfigured int18 (should never happen) */
+-static void unexpected_machine_check(const struct cpu_user_regs *regs)
++static void cf_check unexpected_machine_check(const struct cpu_user_regs *regs)
+ {
+     console_force_unlock();
+     printk("Unexpected Machine Check Exception\n");
+@@ -469,7 +469,7 @@ static int mce_urgent_action(const struct cpu_user_regs *regs,
  }
  
--static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
-+static unsigned int cf_check get_cur_freq_on_cpu(unsigned int cpu)
+ /* Shared #MC handler. */
+-void mcheck_cmn_handler(const struct cpu_user_regs *regs)
++void cf_check mcheck_cmn_handler(const struct cpu_user_regs *regs)
  {
-     struct cpufreq_policy *policy;
-     struct acpi_cpufreq_data *data;
-@@ -369,8 +369,9 @@ static unsigned int check_freqs(const cpumask_t *mask, unsigned int freq,
+     static DEFINE_MCE_BARRIER(mce_trap_bar);
+     static atomic_t severity_cpu = ATOMIC_INIT(-1);
+@@ -1684,7 +1684,7 @@ long cf_check do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc)
+ }
+ 
+ int mcinfo_dumpped;
+-static int x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
++static int cf_check x86_mcinfo_dump_panic(mctelem_cookie_t mctc)
+ {
+     struct mc_info *mcip = mctelem_dataptr(mctc);
+ 
+@@ -1801,7 +1801,7 @@ static enum mce_result mce_action(const struct cpu_user_regs *regs,
+  * should be committed for dom0 consumption, 0 if it should be
+  * dismissed.
+  */
+-static int mce_delayed_action(mctelem_cookie_t mctc)
++static int cf_check mce_delayed_action(mctelem_cookie_t mctc)
+ {
+     enum mce_result result;
+     int ret = 0;
+diff --git a/xen/arch/x86/cpu/mcheck/mce.h b/xen/arch/x86/cpu/mcheck/mce.h
+index 195362691904..535d0abf8f9b 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.h
++++ b/xen/arch/x86/cpu/mcheck/mce.h
+@@ -70,7 +70,7 @@ extern void x86_mce_vector_register(x86_mce_vector_t);
+  * Common generic MCE handler that implementations may nominate
+  * via x86_mce_vector_register.
+  */
+-extern void mcheck_cmn_handler(const struct cpu_user_regs *regs);
++void cf_check mcheck_cmn_handler(const struct cpu_user_regs *regs);
+ 
+ /* Register a handler for judging whether mce is recoverable. */
+ typedef bool (*mce_recoverable_t)(uint64_t status);
+diff --git a/xen/arch/x86/cpu/mcheck/mce_amd.c b/xen/arch/x86/cpu/mcheck/mce_amd.c
+index 279a8e6f122d..d7ae8919df77 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_amd.c
++++ b/xen/arch/x86/cpu/mcheck/mce_amd.c
+@@ -113,7 +113,7 @@ mc_ec2type(uint16_t errorcode)
      return 0;
  }
  
--static int acpi_cpufreq_target(struct cpufreq_policy *policy,
--                               unsigned int target_freq, unsigned int relation)
-+static int cf_check acpi_cpufreq_target(
-+    struct cpufreq_policy *policy,
-+    unsigned int target_freq, unsigned int relation)
+-bool mc_amd_recoverable_scan(uint64_t status)
++bool cf_check mc_amd_recoverable_scan(uint64_t status)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
-     struct processor_performance *perf;
-@@ -449,7 +450,7 @@ static int acpi_cpufreq_target(struct cpufreq_policy *policy,
-     return result;
+     bool ret = false;
+     enum mc_ec_type ectype;
+@@ -143,7 +143,7 @@ bool mc_amd_recoverable_scan(uint64_t status)
+     return ret;
  }
  
--static int acpi_cpufreq_verify(struct cpufreq_policy *policy)
-+static int cf_check acpi_cpufreq_verify(struct cpufreq_policy *policy)
+-bool mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype)
++bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype)
  {
-     struct acpi_cpufreq_data *data;
-     struct processor_performance *perf;
-@@ -494,8 +495,7 @@ acpi_cpufreq_guess_freq(struct acpi_cpufreq_data *data, unsigned int cpu)
+     enum mc_ec_type ectype;
+     uint16_t errorcode;
+@@ -216,7 +216,7 @@ static void mcequirk_amd_apply(enum mcequirk_amd_flags flags)
      }
  }
  
--static int 
--acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
-+static int cf_check acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
+-static struct mcinfo_extended *
++static struct mcinfo_extended *cf_check
+ amd_f10_handler(struct mc_info *mi, uint16_t bank, uint64_t status)
  {
-     unsigned int i;
-     unsigned int valid_states = 0;
-@@ -609,7 +609,7 @@ acpi_cpufreq_cpu_init(struct cpufreq_policy *policy)
-     return result;
+     struct mcinfo_extended *mc_ext;
+@@ -252,7 +252,8 @@ amd_f10_handler(struct mc_info *mi, uint16_t bank, uint64_t status)
+     return mc_ext;
  }
  
--static int acpi_cpufreq_cpu_exit(struct cpufreq_policy *policy)
-+static int cf_check acpi_cpufreq_cpu_exit(struct cpufreq_policy *policy)
+-static bool amd_need_clearbank_scan(enum mca_source who, uint64_t status)
++static bool cf_check amd_need_clearbank_scan(
++    enum mca_source who, uint64_t status)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
+     if ( who != MCA_MCE_SCAN )
+         return true;
+diff --git a/xen/arch/x86/cpu/mcheck/mce_amd.h b/xen/arch/x86/cpu/mcheck/mce_amd.h
+index 67c45454707d..c12c25d74567 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_amd.h
++++ b/xen/arch/x86/cpu/mcheck/mce_amd.h
+@@ -1,7 +1,7 @@
+ #ifndef _MCHECK_AMD_H
+ #define _MCHECK_AMD_H
  
-diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
-index ca71ecf72d67..d4c7dcd5d99d 100644
---- a/xen/arch/x86/acpi/cpufreq/powernow.c
-+++ b/xen/arch/x86/acpi/cpufreq/powernow.c
-@@ -67,8 +67,8 @@ static void cf_check update_cpb(void *data)
+-bool mc_amd_recoverable_scan(uint64_t status);
+-bool mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype);
++bool cf_check mc_amd_recoverable_scan(uint64_t status);
++bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype);
+ 
+ #endif
+diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
+index 7aaa56fd02eb..50198e0c295c 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_intel.c
++++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
+@@ -271,12 +271,13 @@ static void intel_memerr_dhandler(
+     mc_memerr_dhandler(binfo, result, regs);
+ }
+ 
+-static bool intel_srar_check(uint64_t status)
++static bool cf_check intel_srar_check(uint64_t status)
+ {
+     return (intel_check_mce_type(status) == intel_mce_ucr_srar);
+ }
+ 
+-static bool intel_checkaddr(uint64_t status, uint64_t misc, int addrtype)
++static bool cf_check intel_checkaddr(
++    uint64_t status, uint64_t misc, int addrtype)
+ {
+     if ( !(status & MCi_STATUS_ADDRV) ||
+          !(status & MCi_STATUS_MISCV) ||
+@@ -287,10 +288,9 @@ static bool intel_checkaddr(uint64_t status, uint64_t misc, int addrtype)
+     return (addrtype == MC_ADDR_PHYSICAL);
+ }
+ 
+-static void intel_srar_dhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs *regs)
++static void cf_check intel_srar_dhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs *regs)
+ {
+     uint64_t status = binfo->mib->mc_status;
+ 
+@@ -306,15 +306,14 @@ static void intel_srar_dhandler(
      }
  }
  
--static int powernow_cpufreq_update (int cpuid,
--				     struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_update(
-+    int cpuid, struct cpufreq_policy *policy)
+-static bool intel_srao_check(uint64_t status)
++static bool cf_check intel_srao_check(uint64_t status)
  {
-     if (!cpumask_test_cpu(cpuid, &cpu_online_map))
-         return -EINVAL;
-@@ -78,8 +78,9 @@ static int powernow_cpufreq_update (int cpuid,
-     return 0;
+     return (intel_check_mce_type(status) == intel_mce_ucr_srao);
  }
  
--static int powernow_cpufreq_target(struct cpufreq_policy *policy,
--                               unsigned int target_freq, unsigned int relation)
-+static int cf_check powernow_cpufreq_target(
-+    struct cpufreq_policy *policy,
-+    unsigned int target_freq, unsigned int relation)
+-static void intel_srao_dhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs *regs)
++static void cf_check intel_srao_dhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs *regs)
  {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
-     struct processor_performance *perf;
-@@ -180,7 +181,7 @@ static void cf_check get_cpu_data(void *arg)
-         amd_fixup_frequency(&perf->states[i]);
+     uint64_t status = binfo->mib->mc_status;
+ 
+@@ -333,15 +332,14 @@ static void intel_srao_dhandler(
+     }
  }
  
--static int powernow_cpufreq_verify(struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_verify(struct cpufreq_policy *policy)
+-static bool intel_default_check(uint64_t status)
++static bool cf_check intel_default_check(uint64_t status)
  {
-     struct acpi_cpufreq_data *data;
-     struct processor_performance *perf;
-@@ -197,7 +198,7 @@ static int powernow_cpufreq_verify(struct cpufreq_policy *policy)
-     return cpufreq_frequency_table_verify(policy, data->freq_table);
+     return true;
  }
  
--static int powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
+-static void intel_default_mce_dhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs * regs)
++static void cf_check intel_default_mce_dhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs * regs)
  {
-     unsigned int i;
-     unsigned int valid_states = 0;
-@@ -303,7 +304,7 @@ static int powernow_cpufreq_cpu_init(struct cpufreq_policy *policy)
-     return result;
- }
- 
--static int powernow_cpufreq_cpu_exit(struct cpufreq_policy *policy)
-+static int cf_check powernow_cpufreq_cpu_exit(struct cpufreq_policy *policy)
- {
-     struct acpi_cpufreq_data *data = cpufreq_drv_data[policy->cpu];
- 
-diff --git a/xen/common/core_parking.c b/xen/common/core_parking.c
-index 4afad04f2f68..c4f01291c0be 100644
---- a/xen/common/core_parking.c
-+++ b/xen/common/core_parking.c
-@@ -53,7 +53,7 @@ static int __init cf_check setup_core_parking_option(const char *str)
- }
- custom_param("core_parking", setup_core_parking_option);
- 
--static unsigned int core_parking_performance(unsigned int event)
-+static unsigned int cf_check core_parking_performance(unsigned int event)
- {
-     unsigned int cpu = -1;
- 
-@@ -111,7 +111,7 @@ static unsigned int core_parking_performance(unsigned int event)
-     return cpu;
- }
- 
--static unsigned int core_parking_power(unsigned int event)
-+static unsigned int cf_check core_parking_power(unsigned int event)
- {
-     unsigned int cpu = -1;
- 
-diff --git a/xen/drivers/cpufreq/cpufreq_ondemand.c b/xen/drivers/cpufreq/cpufreq_ondemand.c
-index ba03eaa2336d..fbcd14d6c32f 100644
---- a/xen/drivers/cpufreq/cpufreq_ondemand.c
-+++ b/xen/drivers/cpufreq/cpufreq_ondemand.c
-@@ -215,7 +215,8 @@ static void dbs_timer_exit(struct cpu_dbs_info_s *dbs_info)
-     kill_timer(&per_cpu(dbs_timer, dbs_info->cpu));
- }
- 
--int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event)
-+static int cf_check cpufreq_governor_dbs(
-+    struct cpufreq_policy *policy, unsigned int event)
- {
-     unsigned int cpu = policy->cpu;
-     struct cpu_dbs_info_s *this_dbs_info;
-@@ -307,7 +308,8 @@ int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event)
-     return 0;
- }
- 
--static bool_t __init cpufreq_dbs_handle_option(const char *name, const char *val)
-+static bool __init cf_check cpufreq_dbs_handle_option(
-+    const char *name, const char *val)
- {
-     if ( !strcmp(name, "rate") && val )
-     {
-diff --git a/xen/include/acpi/cpufreq/cpufreq.h b/xen/include/acpi/cpufreq/cpufreq.h
-index 4958d3f7d315..e5e58c6c30ea 100644
---- a/xen/include/acpi/cpufreq/cpufreq.h
-+++ b/xen/include/acpi/cpufreq/cpufreq.h
-@@ -227,7 +227,6 @@ struct cpu_dbs_info_s {
-     int8_t stoppable;
+     uint64_t status = binfo->mib->mc_status;
+     enum intel_mce_type type;
+@@ -360,10 +358,9 @@ static const struct mca_error_handler intel_mce_dhandlers[] = {
+     {intel_default_check, intel_default_mce_dhandler}
  };
  
--int cpufreq_governor_dbs(struct cpufreq_policy *policy, unsigned int event);
- int get_cpufreq_ondemand_para(uint32_t *sampling_rate_max,
-                               uint32_t *sampling_rate_min,
-                               uint32_t *sampling_rate,
+-static void intel_default_mce_uhandler(
+-             struct mca_binfo *binfo,
+-             enum mce_result *result,
+-             const struct cpu_user_regs *regs)
++static void cf_check intel_default_mce_uhandler(
++    struct mca_binfo *binfo, enum mce_result *result,
++    const struct cpu_user_regs *regs)
+ {
+     uint64_t status = binfo->mib->mc_status;
+     enum intel_mce_type type;
+@@ -396,7 +393,7 @@ static const struct mca_error_handler intel_mce_uhandlers[] = {
+  * 3) ser_support = 1, SRAO, UC = 1, S = 1, AR = 0, [EN = 1]
+  */
+ 
+-static bool intel_need_clearbank_scan(enum mca_source who, u64 status)
++static bool cf_check intel_need_clearbank_scan(enum mca_source who, u64 status)
+ {
+     if ( who == MCA_CMCI_HANDLER )
+     {
+@@ -453,7 +450,7 @@ static bool intel_need_clearbank_scan(enum mca_source who, u64 status)
+  * 4) SRAO ser_support = 1, PCC = 0, S = 1, AR = 0, EN = 1 [UC = 1]
+  * 5) UCNA ser_support = 1, OVER = 0, EN = 1, PCC = 0, S = 0, AR = 0, [UC = 1]
+  */
+-static bool intel_recoverable_scan(uint64_t status)
++static bool cf_check intel_recoverable_scan(uint64_t status)
+ {
+ 
+     if ( !(status & MCi_STATUS_UC ) )
 -- 
 2.11.0
 
