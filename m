@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75956C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:16:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271930.466687 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0CBDC433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:16:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271941.466698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDb-0003Nf-D0; Mon, 14 Feb 2022 13:16:39 +0000
+	id 1nJbDj-0003zP-SG; Mon, 14 Feb 2022 13:16:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271930.466687; Mon, 14 Feb 2022 13:16:39 +0000
+Received: by outflank-mailman (output) from mailman id 271941.466698; Mon, 14 Feb 2022 13:16:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDb-0003NT-9E; Mon, 14 Feb 2022 13:16:39 +0000
-Received: by outflank-mailman (input) for mailman id 271930;
- Mon, 14 Feb 2022 13:16:37 +0000
+	id 1nJbDj-0003zG-NB; Mon, 14 Feb 2022 13:16:47 +0000
+Received: by outflank-mailman (input) for mailman id 271941;
+ Mon, 14 Feb 2022 13:16:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb3m-0008IH-0Q
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:30 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id eb2b0ec9-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:06:27 +0100 (CET)
+ id 1nJb4F-0008IH-Cc
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:59 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id fb8b33b2-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:06:57 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: eb2b0ec9-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: fb8b33b2-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843987;
+  d=citrix.com; s=securemail; t=1644844017;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=GWauAq5Hi4t0sVZGrU3/q6tMpZvbMlc+nyZ6uD+AkRI=;
-  b=Ay0CCB9Kz/uvcRFfhiLSB3FuZDpAMadFy6IrAJFC8UMVbsMpgeXyMube
-   ZvsvsJb5xhRogwpn4PXuGdH878DFwAvEvZergm9mxrIiwf5bHIdV29+QM
-   YNeBpuFUM8hpBErbvUWgoTOWR/IzkvWNxnkTwFim7DqRGu09B2XT9xQR0
-   0=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: o4lSuCzDEusyVfSInkyFoHW4DgsPAKeUwFYa6tsXxSB0jgSnx/3zwHDm161r/7oMdBA0f212v0
- 0sSY+qJAZRTzrax9S5ujZSAWaWtZjKM4PLDUDnejA6F6izTMDj3EwXkIHONTE4NMkMIW/j28Wl
- 6/zwDaGnHAzxYHxsC4g65ZOyGUyBbCEVnGj+PD6DsqwP4QgXGwbtqXUlzBuy1SpmQ94IPUW/By
- oBvLqf4ZXIK5gajkxkkbu49X6G5shjOQnawJA+LofFqUMjAMqU+RtZt/s3uvNe2Wh5IJATPTGc
- yFnRCnF5ImrkU+N539g2xh3h
+  bh=Mej6N2PECBXwwElk/AVZTwxR6YCdehxfIEnvABetLnE=;
+  b=ddeI0GA2NG5fEWunYEzgTst/T8YrJGF9ORjC6WsJgcnZRIHmGnk1bsYf
+   nX++QGlZTrF7JHs4C7gm0m7BNAOqiXX4R+hLJsWqLG+ZlCYJ8TS5hIqwN
+   dL5jN2YgI/MCGUlAklebq7fl6ZWZ7s4ofnlzU10VNmK8KIIRBQagStXHq
+   8=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 4xuPf0XVUbXgWG0v6rS7g0s9+dMqxffyXCBK0hrLTCa9u6ylaVMULtaJR697DxZ6PVle1cTTxw
+ TvPZ0va8h/gcdAZVeV0Xrf9VMKnAHJJ1pmGwIN1Gj1H3fMDV0XyP6XUqeqVaWOuVPHr/3qr4mM
+ veLJ/OBXAePlVJQsIaSPCTBUUEmCxz2/Li/xfaJJnPv2fUAOdr/uNL0UMr1S4mEyMX4urIR/vT
+ e4iESUp8TmMacNBHMQcSsLPUhTz0kX/LDFR8wPt+ktMnXRB4kU4aRR/f8IXzXf9ZITLFfIVrIY
+ +beXpwySc4UuVvYd3FHWPpI7
 X-SBRS: 5.1
-X-MesageID: 64050683
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 64554298
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Rn4lV65YTRTMTU2Ztge6hQxRtCHAchMFZxGqfqrLsTDasY5as4F+v
- mtJDG+HOvaPNzOjc40kbtyy/E0O68WAzt8yTAI+rygwHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
- +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZj29Iw2LBVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z9
- /hXmMXrYiYSEaSVu8MhXzgBOCNmMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQQa6DP
- 5RJMlKDajyHTCxMHwoGMakDp7nxpynmVj8fpVaa8P9fD2/7k1UqjemF3MDuUsyHQ4BZk1iVo
- krC/n/lGVcKOdqH0z2H/3mwwOjVkkvGtJk6TePisKQw2RvKmzJVWEZ+uUaHTeeRtWOkdosEA
- G0v1SN3jo8O+G3yZdvlUEjtyJKbhSI0V91VGuw8zQiCzKvI/gqUblQ5oi59hM8O75FvG2Fzv
- rOdt5awXGE07uXJIZ6I3urM9VuP1T4pwXjujMPuZS8M+JHdrY46lXojpf4zQffu3rUZ9dwdq
- g1mTRTSZZ1O16bnNI3hpDgrZg5AQbCTEGYICv3/BD7N0++ATNfNi3aUwVba9+1cC42SU0OMu
- nMJ8+DHsrxSUsHdyXHVGb5XdF1M2xpiGGeC6WOD4rF7r2j9k5JdVdw4DM5CyLdBbZ9fJG6Bj
- L77sgJN/p5DVEZGnocsC79d//8ClPC6ffy8D6i8RoMXPvBZKV/WlAkzNBX49z28zyARfVQXZ
- M7znTCEVi1BV8yKDVOeGo8g7FPc7n5ilD2DHcihl3xKE9O2PRaodFvMC3PWBshR0U9OiF+Nm
- zqGH8fVmRhZTsPkZSzbrdwaIVwQdCBpDpHqsc1HMOWEJ1M+Sm0mDvbQx5InepBkwPsJxruZo
- CnlVx8K0kf7iF3GNR6ONiJpZoTwUMsttnk8JyEtYwqlgiBxfYa14a4DXJIrZr17pvd7xPt5Q
- qBdKcWNC/hCUBrd/DEZYcWvpYBubk3z1wmPIzCkcH40eJs5H17F/drtfw3O8igSD3Xo6Zti8
- uP4jg6CGMgNXQVvCsrSecmD9VLpsChPgv92UmvJPsJXJBfm/r91JnGjlfQwOcwNd0nOn2PIy
- waMDB4EjuDRuItposLRjKWJoor1QetzGk1WQzvS4bqsbHSI+2OixclLUfqSfCCbX2Txof3wa
- eJQxvD6EfsGgFcV7NYsT+c1lfozt4n1urtX7gV4B3GaPV2kB4RpLmSCwcQS5LZGwaVUuFfuV
- 0+CkjWA1W5l5C8x/IYtGTcY
-IronPort-HdrOrdr: A9a23:uUxSV6GC3MTHEZd/pLqE6seALOsnbusQ8zAXP0AYc3Jom62j5r
- mTdZsgtSMc5Ax8ZJhko6HkBEDiewK7yXcW2/hzAV7KZmCP0wHEEGgh1/qH/9SJIVyYygc378
- ZdmsZFZ+EYdWIK7/rH3A==
+IronPort-Data: A9a23:qTxo7qpaha/Fuq7jhrFlBmk6T4leBmIAYhIvgKrLsJaIsI4StFCzt
+ garIBmHO6yJZmunLtBxOY+zpBgFu8TXxoQyHlNprC03RntBp5uZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dndx4f5fs7Rh2NQw24HlW1rlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnbbqRw15FKeVoedDTisHOSVAPu5/qZaSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ ZZENGY1PUSojxtnPVgGGI0UwvmTi0b5UQZF+WOJvvMNyj2GpOB2+Oe0a4eEEjCQfu1Fk0Ddq
+ m/Y8mDRBhABKMfZ2TeD6mirhOLEgWX8Qo16KVGj3qc02hvJnDVVUUBIEwvgyRWktqKgc/gFJ
+ UZE0CB3lKts6X70ZN3DXF6B8VfR63bwROFsO+E97QiMzI/d7ACYGnUIQ1Z9VTA2iCMlbWd0j
+ wHUxrsFERQq6eTIEizFqt94uBvvYXB9EIMUWcMToeLpCfHHqZp7sB/AR80L/EWd3oysQmGYL
+ 9xnQUEDa1QvYSwjiv/TEbPv2WvESn31oukdvFu/Y45dxlklDLNJnqTxgbQh0d5OLZyCUn6Kt
+ 2Uels6V4YgmVM/RyHPdELhQROjyvZ5p1QEwZnY1QfEcG8mFoSb/Lei8HhkiTKuWDir0UWCwO
+ xKC0e+gzJRSIGGrfcdKj3GZUKwXIVzbPY29DJj8N4MWCrAoLVPv1Hw+NCa4gjG2+GBxwP5XB
+ HtuWZv1ZZrsIf88l2TeqiZ0+eJD+x3SMkuNGcGln0z/i+L2ibz8Ye5tDWZip9sRtMusyDg5O
+ f4FbJPiJ8x3XLKsby/J35QUKFxWf3E3CYqv855cd/KZIxogE2YkUqeDzbQkco1jvqJUiuaXo
+ S3tBh4GkALy1S/dNAGHSnF/c7ezD5xxmm02YH43NlGy1nl9PYv2tPUDd4E6dKUM/fB4yaImV
+ OEMfsiNW6wdSjnO9zkHQ4P6qYhuKEaiiQ6UZnL3azkjZZ9wAQfO/4a8LAfo8SAPCAuxtNc//
+ OL8hl+KH8JbSl07XsjMaf+pw1eghlQnmbp/DxnSP91eWETw64w2eSb/ueA6fpMXIhLZyzrEi
+ wvPWUUEpfPAqpMe+cXSgfzWtJ+gFuZzExYIH2Tf6rrqZyDW8nD6nN1FWeeMOzvcSHn16OOpY
+ uAMl6PwN/gOnVBrtYtgEuk0kfJitoW3/7IKnB55GHjrbkiwDuIyK3aL6sBDq6lRy+ILogCxQ
+ E+OpoFXNLjh1BkJy7LNyN7Jtti+6Mw=
+IronPort-HdrOrdr: A9a23:9CJNna6Vyk/F5eKSygPXwMrXdLJyesId70hD6qhwISY6TiX4rb
+ HWoB1173/JYVoqNE3I3OrwXZVoIkmsk6Kdg7NhXotKNTOO0ADDQb2Kr7GSpwEIcxeOkdK1vp
+ 0AT0ERMrLN5CBB/KTH3DU=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64050683"
+   d="scan'208";a="64554298"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 34/70] x86/emul: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:51 +0000
-Message-ID: <20220214125127.17985-35-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 30/70] xen/misc: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:47 +0000
+Message-ID: <20220214125127.17985-31-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -103,947 +103,272 @@ to help protect against call/jump/return oriented programming attacks.
 
 Use cf_check to annotate function pointer targets for the toolchain.
 
-pv_emul_is_mem_write() is only used in a single file.  Having it as a static
-inline is pointless because it can't be inlined to begin with.
-
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-v2:
- * Correct details in commit message.
----
- xen/arch/x86/hvm/emulate.c             | 72 +++++++++++++++++-----------------
- xen/arch/x86/hvm/hvm.c                 |  8 ++--
- xen/arch/x86/hvm/svm/svm.c             |  4 +-
- xen/arch/x86/include/asm/hvm/emulate.h |  8 ++--
- xen/arch/x86/include/asm/mm.h          | 16 +++-----
- xen/arch/x86/mm.c                      |  4 +-
- xen/arch/x86/mm/shadow/hvm.c           |  8 ++--
- xen/arch/x86/pv/emul-gate-op.c         |  9 +++--
- xen/arch/x86/pv/emul-priv-op.c         | 64 +++++++++++++++---------------
- xen/arch/x86/pv/emulate.h              |  7 ----
- xen/arch/x86/pv/ro-page-fault.c        | 31 +++++++++------
- xen/arch/x86/x86_emulate.c             | 21 +++++-----
- xen/arch/x86/x86_emulate/x86_emulate.c | 10 ++---
- xen/arch/x86/x86_emulate/x86_emulate.h | 33 ++++++++--------
- 14 files changed, 148 insertions(+), 147 deletions(-)
+ xen/arch/x86/mm.c                        | 6 ++++--
+ xen/arch/x86/setup.c                     | 4 ++--
+ xen/common/domain.c                      | 2 +-
+ xen/common/gdbstub.c                     | 5 ++---
+ xen/common/livepatch.c                   | 7 +++----
+ xen/common/memory.c                      | 4 ++--
+ xen/common/page_alloc.c                  | 2 +-
+ xen/common/radix-tree.c                  | 4 ++--
+ xen/common/rangeset.c                    | 2 +-
+ xen/common/spinlock.c                    | 6 +++---
+ xen/common/vm_event.c                    | 6 +++---
+ xen/common/xmalloc_tlsf.c                | 4 ++--
+ xen/drivers/passthrough/amd/iommu_init.c | 2 +-
+ 13 files changed, 27 insertions(+), 27 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index 39dac7fd9d6d..e8d510e0be91 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -1272,7 +1272,7 @@ static int __hvmemul_read(
-     return linear_read(addr, bytes, p_data, pfec, hvmemul_ctxt);
- }
- 
--static int hvmemul_read(
-+static int cf_check hvmemul_read(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-@@ -1290,7 +1290,7 @@ static int hvmemul_read(
-         container_of(ctxt, struct hvm_emulate_ctxt, ctxt));
- }
- 
--int hvmemul_insn_fetch(
-+int cf_check hvmemul_insn_fetch(
-     unsigned long offset,
-     void *p_data,
-     unsigned int bytes,
-@@ -1336,7 +1336,7 @@ int hvmemul_insn_fetch(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_write(
-+static int cf_check hvmemul_write(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-@@ -1384,7 +1384,7 @@ static int hvmemul_write(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_rmw(
-+static int cf_check hvmemul_rmw(
-     enum x86_segment seg,
-     unsigned long offset,
-     unsigned int bytes,
-@@ -1437,7 +1437,7 @@ static int hvmemul_rmw(
-     return rc;
- }
- 
--static int hvmemul_blk(
-+static int cf_check hvmemul_blk(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-@@ -1478,7 +1478,7 @@ static int hvmemul_blk(
-     return rc;
- }
- 
--static int hvmemul_write_discard(
-+static int cf_check hvmemul_write_discard(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-@@ -1489,7 +1489,7 @@ static int hvmemul_write_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_rep_ins_discard(
-+static int cf_check hvmemul_rep_ins_discard(
-     uint16_t src_port,
-     enum x86_segment dst_seg,
-     unsigned long dst_offset,
-@@ -1500,7 +1500,7 @@ static int hvmemul_rep_ins_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_rep_movs_discard(
-+static int cf_check hvmemul_rep_movs_discard(
-    enum x86_segment src_seg,
-    unsigned long src_offset,
-    enum x86_segment dst_seg,
-@@ -1512,7 +1512,7 @@ static int hvmemul_rep_movs_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_rep_stos_discard(
-+static int cf_check hvmemul_rep_stos_discard(
-     void *p_data,
-     enum x86_segment seg,
-     unsigned long offset,
-@@ -1523,7 +1523,7 @@ static int hvmemul_rep_stos_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_rep_outs_discard(
-+static int cf_check hvmemul_rep_outs_discard(
-     enum x86_segment src_seg,
-     unsigned long src_offset,
-     uint16_t dst_port,
-@@ -1534,7 +1534,7 @@ static int hvmemul_rep_outs_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_cmpxchg_discard(
-+static int cf_check hvmemul_cmpxchg_discard(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_old,
-@@ -1546,7 +1546,7 @@ static int hvmemul_cmpxchg_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_read_io_discard(
-+static int cf_check hvmemul_read_io_discard(
-     unsigned int port,
-     unsigned int bytes,
-     unsigned long *val,
-@@ -1555,7 +1555,7 @@ static int hvmemul_read_io_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_write_io_discard(
-+static int cf_check hvmemul_write_io_discard(
-     unsigned int port,
-     unsigned int bytes,
-     unsigned long val,
-@@ -1564,7 +1564,7 @@ static int hvmemul_write_io_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_write_msr_discard(
-+static int cf_check hvmemul_write_msr_discard(
-     unsigned int reg,
-     uint64_t val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -1572,7 +1572,7 @@ static int hvmemul_write_msr_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_cache_op_discard(
-+static int cf_check hvmemul_cache_op_discard(
-     enum x86emul_cache_op op,
-     enum x86_segment seg,
-     unsigned long offset,
-@@ -1581,7 +1581,7 @@ static int hvmemul_cache_op_discard(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_cmpxchg(
-+static int cf_check hvmemul_cmpxchg(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_old,
-@@ -1675,7 +1675,7 @@ static int hvmemul_cmpxchg(
-     return rc;
- }
- 
--static int hvmemul_validate(
-+static int cf_check hvmemul_validate(
-     const struct x86_emulate_state *state,
-     struct x86_emulate_ctxt *ctxt)
- {
-@@ -1688,7 +1688,7 @@ static int hvmemul_validate(
-            ? X86EMUL_OKAY : X86EMUL_UNHANDLEABLE;
- }
- 
--static int hvmemul_rep_ins(
-+static int cf_check hvmemul_rep_ins(
-     uint16_t src_port,
-     enum x86_segment dst_seg,
-     unsigned long dst_offset,
-@@ -1766,7 +1766,7 @@ static int hvmemul_rep_outs_set_context(
-     return rc;
- }
- 
--static int hvmemul_rep_outs(
-+static int cf_check hvmemul_rep_outs(
-     enum x86_segment src_seg,
-     unsigned long src_offset,
-     uint16_t dst_port,
-@@ -1807,7 +1807,7 @@ static int hvmemul_rep_outs(
-                                !!(ctxt->regs->eflags & X86_EFLAGS_DF), gpa);
- }
- 
--static int hvmemul_rep_movs(
-+static int cf_check hvmemul_rep_movs(
-    enum x86_segment src_seg,
-    unsigned long src_offset,
-    enum x86_segment dst_seg,
-@@ -1977,7 +1977,7 @@ static int hvmemul_rep_movs(
-     return X86EMUL_UNHANDLEABLE;
- }
- 
--static int hvmemul_rep_stos(
-+static int cf_check hvmemul_rep_stos(
-     void *p_data,
-     enum x86_segment seg,
-     unsigned long offset,
-@@ -2105,7 +2105,7 @@ static int hvmemul_rep_stos(
-     }
- }
- 
--static int hvmemul_read_segment(
-+static int cf_check hvmemul_read_segment(
-     enum x86_segment seg,
-     struct segment_register *reg,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2122,7 +2122,7 @@ static int hvmemul_read_segment(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_write_segment(
-+static int cf_check hvmemul_write_segment(
-     enum x86_segment seg,
-     const struct segment_register *reg,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2141,7 +2141,7 @@ static int hvmemul_write_segment(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_read_io(
-+static int cf_check hvmemul_read_io(
-     unsigned int port,
-     unsigned int bytes,
-     unsigned long *val,
-@@ -2158,7 +2158,7 @@ static int hvmemul_read_io(
-     return hvmemul_do_pio_buffer(port, bytes, IOREQ_READ, val);
- }
- 
--static int hvmemul_write_io(
-+static int cf_check hvmemul_write_io(
-     unsigned int port,
-     unsigned int bytes,
-     unsigned long val,
-@@ -2167,7 +2167,7 @@ static int hvmemul_write_io(
-     return hvmemul_do_pio_buffer(port, bytes, IOREQ_WRITE, &val);
- }
- 
--static int hvmemul_read_cr(
-+static int cf_check hvmemul_read_cr(
-     unsigned int reg,
-     unsigned long *val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2188,7 +2188,7 @@ static int hvmemul_read_cr(
-     return X86EMUL_UNHANDLEABLE;
- }
- 
--static int hvmemul_write_cr(
-+static int cf_check hvmemul_write_cr(
-     unsigned int reg,
-     unsigned long val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2232,7 +2232,7 @@ static int hvmemul_write_cr(
-     return rc;
- }
- 
--static int hvmemul_read_xcr(
-+static int cf_check hvmemul_read_xcr(
-     unsigned int reg,
-     uint64_t *val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2245,7 +2245,7 @@ static int hvmemul_read_xcr(
-     return rc;
- }
- 
--static int hvmemul_write_xcr(
-+static int cf_check hvmemul_write_xcr(
-     unsigned int reg,
-     uint64_t val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2255,7 +2255,7 @@ static int hvmemul_write_xcr(
-     return x86emul_write_xcr(reg, val, ctxt);
- }
- 
--static int hvmemul_read_msr(
-+static int cf_check hvmemul_read_msr(
-     unsigned int reg,
-     uint64_t *val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2268,7 +2268,7 @@ static int hvmemul_read_msr(
-     return rc;
- }
- 
--static int hvmemul_write_msr(
-+static int cf_check hvmemul_write_msr(
-     unsigned int reg,
-     uint64_t val,
-     struct x86_emulate_ctxt *ctxt)
-@@ -2281,7 +2281,7 @@ static int hvmemul_write_msr(
-     return rc;
- }
- 
--static int hvmemul_cache_op(
-+static int cf_check hvmemul_cache_op(
-     enum x86emul_cache_op op,
-     enum x86_segment seg,
-     unsigned long offset,
-@@ -2353,7 +2353,7 @@ static int hvmemul_cache_op(
-     return X86EMUL_OKAY;
- }
- 
--static int hvmemul_get_fpu(
-+static int cf_check hvmemul_get_fpu(
-     enum x86_emulate_fpu_type type,
-     struct x86_emulate_ctxt *ctxt)
- {
-@@ -2395,7 +2395,7 @@ static int hvmemul_get_fpu(
-     return X86EMUL_OKAY;
- }
- 
--static void hvmemul_put_fpu(
-+static void cf_check hvmemul_put_fpu(
-     struct x86_emulate_ctxt *ctxt,
-     enum x86_emulate_fpu_type backout,
-     const struct x86_emul_fpu_aux *aux)
-@@ -2482,7 +2482,7 @@ static void hvmemul_put_fpu(
-     }
- }
- 
--static int hvmemul_tlb_op(
-+static int cf_check hvmemul_tlb_op(
-     enum x86emul_tlb_op op,
-     unsigned long addr,
-     unsigned long aux,
-@@ -2539,7 +2539,7 @@ static int hvmemul_tlb_op(
-     return rc;
- }
- 
--static int hvmemul_vmfunc(
-+static int cf_check hvmemul_vmfunc(
-     struct x86_emulate_ctxt *ctxt)
- {
-     int rc;
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 9e4924649077..e87e809a945d 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -3755,8 +3755,8 @@ void hvm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
-     }
- }
- 
--static bool is_sysdesc_access(const struct x86_emulate_state *state,
--                              const struct x86_emulate_ctxt *ctxt)
-+static bool cf_check is_sysdesc_access(
-+    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
- {
-     unsigned int ext;
-     int mode = x86_insn_modrm(state, NULL, &ext);
-@@ -3796,8 +3796,8 @@ int hvm_descriptor_access_intercept(uint64_t exit_info,
-     return X86EMUL_OKAY;
- }
- 
--static bool is_cross_vendor(const struct x86_emulate_state *state,
--                            const struct x86_emulate_ctxt *ctxt)
-+static bool cf_check is_cross_vendor(
-+    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
- {
-     switch ( ctxt->opcode )
-     {
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 4c4ebda5e6e4..dedb2848e6a1 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -2447,8 +2447,8 @@ static void svm_invlpg_intercept(unsigned long linear)
-     paging_invlpg(current, linear);
- }
- 
--static bool is_invlpg(const struct x86_emulate_state *state,
--                      const struct x86_emulate_ctxt *ctxt)
-+static bool cf_check is_invlpg(
-+    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
- {
-     unsigned int ext;
- 
-diff --git a/xen/arch/x86/include/asm/hvm/emulate.h b/xen/arch/x86/include/asm/hvm/emulate.h
-index e67004060345..d8ba2df4e4a2 100644
---- a/xen/arch/x86/include/asm/hvm/emulate.h
-+++ b/xen/arch/x86/include/asm/hvm/emulate.h
-@@ -92,10 +92,10 @@ static inline bool handle_mmio(void)
-     return hvm_emulate_one_insn(x86_insn_is_mem_access, "MMIO");
- }
- 
--int hvmemul_insn_fetch(unsigned long offset,
--                       void *p_data,
--                       unsigned int bytes,
--                       struct x86_emulate_ctxt *ctxt);
-+int cf_check hvmemul_insn_fetch(
-+    unsigned long offset, void *p_data, unsigned int bytes,
-+    struct x86_emulate_ctxt *ctxt);
-+
- int hvmemul_do_pio_buffer(uint16_t port,
-                           unsigned int size,
-                           uint8_t dir,
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index 9b9de4c6bef7..a684ffabfaae 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -538,16 +538,12 @@ struct mmio_ro_emulate_ctxt {
-         unsigned int seg, bdf;
- };
- 
--extern int mmio_ro_emulated_write(enum x86_segment seg,
--                                  unsigned long offset,
--                                  void *p_data,
--                                  unsigned int bytes,
--                                  struct x86_emulate_ctxt *ctxt);
--extern int mmcfg_intercept_write(enum x86_segment seg,
--                                 unsigned long offset,
--                                 void *p_data,
--                                 unsigned int bytes,
--                                 struct x86_emulate_ctxt *ctxt);
-+int cf_check mmio_ro_emulated_write(
-+    enum x86_segment seg, unsigned long offset, void *p_data,
-+    unsigned int bytes, struct x86_emulate_ctxt *ctxt);
-+int cf_check mmcfg_intercept_write(
-+    enum x86_segment seg, unsigned long offset, void *p_data,
-+    unsigned int bytes, struct x86_emulate_ctxt *ctxt);
- 
- int audit_adjust_pgtables(struct domain *d, int dir, int noisy);
- 
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 4b6956c5be78..4d0bebbf8aab 100644
+index 3b8bc3dda977..4b6956c5be78 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -4852,7 +4852,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+@@ -835,7 +835,8 @@ struct mmio_emul_range_ctxt {
+     unsigned long mfn;
+ };
+ 
+-static int print_mmio_emul_range(unsigned long s, unsigned long e, void *arg)
++static int cf_check print_mmio_emul_range(
++    unsigned long s, unsigned long e, void *arg)
+ {
+     const struct mmio_emul_range_ctxt *ctxt = arg;
+ 
+@@ -4606,7 +4607,8 @@ static int _handle_iomem_range(unsigned long s, unsigned long e,
      return 0;
  }
  
--int mmio_ro_emulated_write(
-+int cf_check mmio_ro_emulated_write(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-@@ -4873,7 +4873,7 @@ int mmio_ro_emulated_write(
-     return X86EMUL_OKAY;
+-static int handle_iomem_range(unsigned long s, unsigned long e, void *p)
++static int cf_check handle_iomem_range(
++    unsigned long s, unsigned long e, void *p)
+ {
+     int err = 0;
+ 
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index eceff0a4e2b4..735f69d2cae8 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2023,8 +2023,8 @@ int __hwdom_init xen_in_range(unsigned long mfn)
+     return 0;
  }
  
--int mmcfg_intercept_write(
-+int cf_check mmcfg_intercept_write(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
-index f2991bc176f0..c90d326becb3 100644
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -148,7 +148,7 @@ hvm_read(enum x86_segment seg,
-     return X86EMUL_UNHANDLEABLE;
+-static int __hwdom_init io_bitmap_cb(unsigned long s, unsigned long e,
+-                                     void *ctx)
++static int __hwdom_init cf_check io_bitmap_cb(
++    unsigned long s, unsigned long e, void *ctx)
+ {
+     struct domain *d = ctx;
+     unsigned int i;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index a49c26064601..a3614539e472 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -370,7 +370,7 @@ static void cf_check _free_pirq_struct(struct rcu_head *head)
+     xfree(container_of(head, struct pirq, rcu_head));
  }
  
--static int
-+static int cf_check
- hvm_emulate_read(enum x86_segment seg,
-                  unsigned long offset,
-                  void *p_data,
-@@ -161,7 +161,7 @@ hvm_emulate_read(enum x86_segment seg,
-                     container_of(ctxt, struct sh_emulate_ctxt, ctxt));
+-static void free_pirq_struct(void *ptr)
++static void cf_check free_pirq_struct(void *ptr)
+ {
+     struct pirq *pirq = ptr;
+ 
+diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
+index 079c3ca9616a..d6872721dc0d 100644
+--- a/xen/common/gdbstub.c
++++ b/xen/common/gdbstub.c
+@@ -69,7 +69,7 @@ static void gdb_smp_resume(void);
+ static char __initdata opt_gdb[30];
+ string_param("gdb", opt_gdb);
+ 
+-static void gdbstub_console_puts(const char *str, size_t nr);
++static void cf_check gdbstub_console_puts(const char *str, size_t nr);
+ 
+ /* value <-> char (de)serialzers */
+ static char
+@@ -546,8 +546,7 @@ __gdb_ctx = {
+ };
+ static struct gdb_context *gdb_ctx = &__gdb_ctx;
+ 
+-static void
+-gdbstub_console_puts(const char *str, size_t nr)
++static void cf_check gdbstub_console_puts(const char *str, size_t nr)
+ {
+     const char *p;
+ 
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index e8714920dc8f..ec301a9f120c 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -157,10 +157,9 @@ unsigned long livepatch_symbols_lookup_by_name(const char *symname)
+     return 0;
  }
  
--static int
-+static int cf_check
- hvm_emulate_insn_fetch(unsigned long offset,
-                        void *p_data,
-                        unsigned int bytes,
-@@ -181,7 +181,7 @@ hvm_emulate_insn_fetch(unsigned long offset,
-     return X86EMUL_OKAY;
- }
- 
--static int
-+static int cf_check
- hvm_emulate_write(enum x86_segment seg,
-                   unsigned long offset,
-                   void *p_data,
-@@ -234,7 +234,7 @@ hvm_emulate_write(enum x86_segment seg,
-     return X86EMUL_OKAY;
- }
- 
--static int
-+static int cf_check
- hvm_emulate_cmpxchg(enum x86_segment seg,
-                     unsigned long offset,
-                     void *p_old,
-diff --git a/xen/arch/x86/pv/emul-gate-op.c b/xen/arch/x86/pv/emul-gate-op.c
-index 68ec4d11f6bb..758a20ad9df4 100644
---- a/xen/arch/x86/pv/emul-gate-op.c
-+++ b/xen/arch/x86/pv/emul-gate-op.c
-@@ -96,8 +96,9 @@ struct gate_op_ctxt {
-     bool insn_fetch;
+-static const char *livepatch_symbols_lookup(unsigned long addr,
+-                                            unsigned long *symbolsize,
+-                                            unsigned long *offset,
+-                                            char *namebuf)
++static const char *cf_check livepatch_symbols_lookup(
++    unsigned long addr, unsigned long *symbolsize, unsigned long *offset,
++    char *namebuf)
+ {
+     const struct payload *data;
+     unsigned int i, best;
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index ede45c4af9db..69b0cd1e50de 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1051,8 +1051,8 @@ struct get_reserved_device_memory {
+     unsigned int used_entries;
  };
  
--static int read_mem(enum x86_segment seg, unsigned long offset, void *p_data,
--                    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
-+static int cf_check read_mem(
-+    enum x86_segment seg, unsigned long offset, void *p_data,
-+    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
+-static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
+-                                      u32 id, void *ctxt)
++static int cf_check get_reserved_device_memory(
++    xen_pfn_t start, xen_ulong_t nr, u32 id, void *ctxt)
  {
-     const struct gate_op_ctxt *goc =
-         container_of(ctxt, struct gate_op_ctxt, ctxt);
-@@ -163,8 +164,8 @@ static int read_mem(enum x86_segment seg, unsigned long offset, void *p_data,
-     return X86EMUL_OKAY;
+     struct get_reserved_device_memory *grdm = ctxt;
+     uint32_t sbdf = PCI_SBDF3(grdm->map.dev.pci.seg, grdm->map.dev.pci.bus,
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 3caf5c954b24..46357182375a 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1238,7 +1238,7 @@ struct scrub_wait_state {
+     bool drop;
+ };
+ 
+-static void scrub_continue(void *data)
++static void cf_check scrub_continue(void *data)
+ {
+     struct scrub_wait_state *st = data;
+ 
+diff --git a/xen/common/radix-tree.c b/xen/common/radix-tree.c
+index 33b47748ae49..adc3034222dc 100644
+--- a/xen/common/radix-tree.c
++++ b/xen/common/radix-tree.c
+@@ -52,7 +52,7 @@ struct rcu_node {
+ 	struct rcu_head rcu_head;
+ };
+ 
+-static struct radix_tree_node *rcu_node_alloc(void *arg)
++static struct radix_tree_node *cf_check rcu_node_alloc(void *arg)
+ {
+ 	struct rcu_node *rcu_node = xmalloc(struct rcu_node);
+ 	return rcu_node ? &rcu_node->node : NULL;
+@@ -65,7 +65,7 @@ static void cf_check _rcu_node_free(struct rcu_head *head)
+ 	xfree(rcu_node);
  }
  
--static int fetch(unsigned long offset, void *p_data,
--                 unsigned int bytes, struct x86_emulate_ctxt *ctxt)
-+static int cf_check fetch(unsigned long offset, void *p_data,
-+                          unsigned int bytes, struct x86_emulate_ctxt *ctxt)
+-static void rcu_node_free(struct radix_tree_node *node, void *arg)
++static void cf_check rcu_node_free(struct radix_tree_node *node, void *arg)
  {
-     return read_mem(x86_seg_cs, offset, p_data, bytes, ctxt);
- }
-diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
-index c78be6d92b21..c46c072f93db 100644
---- a/xen/arch/x86/pv/emul-priv-op.c
-+++ b/xen/arch/x86/pv/emul-priv-op.c
-@@ -358,8 +358,9 @@ static unsigned int check_guest_io_breakpoint(struct vcpu *v,
-     return match;
- }
- 
--static int read_io(unsigned int port, unsigned int bytes,
--                   unsigned long *val, struct x86_emulate_ctxt *ctxt)
-+static int cf_check read_io(
-+    unsigned int port, unsigned int bytes, unsigned long *val,
-+    struct x86_emulate_ctxt *ctxt)
- {
-     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
-     struct vcpu *curr = current;
-@@ -462,8 +463,9 @@ static void guest_io_write(unsigned int port, unsigned int bytes,
-     }
- }
- 
--static int write_io(unsigned int port, unsigned int bytes,
--                    unsigned long val, struct x86_emulate_ctxt *ctxt)
-+static int cf_check write_io(
-+    unsigned int port, unsigned int bytes, unsigned long val,
-+    struct x86_emulate_ctxt *ctxt)
- {
-     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
-     struct vcpu *curr = current;
-@@ -493,9 +495,9 @@ static int write_io(unsigned int port, unsigned int bytes,
-     return X86EMUL_OKAY;
- }
- 
--static int read_segment(enum x86_segment seg,
--                        struct segment_register *reg,
--                        struct x86_emulate_ctxt *ctxt)
-+static int cf_check read_segment(
-+    enum x86_segment seg, struct segment_register *reg,
-+    struct x86_emulate_ctxt *ctxt)
- {
-     /* Check if this is an attempt to access the I/O bitmap. */
-     if ( seg == x86_seg_tr )
-@@ -607,10 +609,10 @@ static int pv_emul_virt_to_linear(unsigned long base, unsigned long offset,
+ 	struct rcu_node *rcu_node = container_of(node, struct rcu_node, node);
+ 	call_rcu(&rcu_node->rcu_head, _rcu_node_free);
+diff --git a/xen/common/rangeset.c b/xen/common/rangeset.c
+index 885b6b15c229..a6ef2640462a 100644
+--- a/xen/common/rangeset.c
++++ b/xen/common/rangeset.c
+@@ -384,7 +384,7 @@ int rangeset_consume_ranges(struct rangeset *r,
      return rc;
  }
  
--static int rep_ins(uint16_t port,
--                   enum x86_segment seg, unsigned long offset,
--                   unsigned int bytes_per_rep, unsigned long *reps,
--                   struct x86_emulate_ctxt *ctxt)
-+static int cf_check rep_ins(
-+    uint16_t port, enum x86_segment seg, unsigned long offset,
-+    unsigned int bytes_per_rep, unsigned long *reps,
-+    struct x86_emulate_ctxt *ctxt)
+-static int merge(unsigned long s, unsigned long e, void *data)
++static int cf_check merge(unsigned long s, unsigned long e, void *data)
  {
-     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
-     struct vcpu *curr = current;
-@@ -675,10 +677,10 @@ static int rep_ins(uint16_t port,
-     return X86EMUL_OKAY;
+     struct rangeset *r = data;
+ 
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index 25bfbf3c47f7..62c83aaa6a73 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -375,7 +375,7 @@ static void spinlock_profile_iterate(lock_profile_subfunc *sub, void *par)
+     spin_unlock(&lock_profile_lock);
  }
  
--static int rep_outs(enum x86_segment seg, unsigned long offset,
--                    uint16_t port,
--                    unsigned int bytes_per_rep, unsigned long *reps,
--                    struct x86_emulate_ctxt *ctxt)
-+static int cf_check rep_outs(
-+    enum x86_segment seg, unsigned long offset, uint16_t port,
-+    unsigned int bytes_per_rep, unsigned long *reps,
-+    struct x86_emulate_ctxt *ctxt)
+-static void spinlock_profile_print_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_print_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
  {
-     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
-     struct vcpu *curr = current;
-@@ -744,8 +746,8 @@ static int rep_outs(enum x86_segment seg, unsigned long offset,
-     return X86EMUL_OKAY;
+     struct spinlock *lock = data->lock;
+@@ -404,7 +404,7 @@ void cf_check spinlock_profile_printall(unsigned char key)
+     spinlock_profile_iterate(spinlock_profile_print_elem, NULL);
  }
  
--static int read_cr(unsigned int reg, unsigned long *val,
--                   struct x86_emulate_ctxt *ctxt)
-+static int cf_check read_cr(
-+    unsigned int reg, unsigned long *val, struct x86_emulate_ctxt *ctxt)
+-static void spinlock_profile_reset_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_reset_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
  {
-     const struct vcpu *curr = current;
+     data->lock_cnt = 0;
+@@ -428,7 +428,7 @@ typedef struct {
+     int                      rc;
+ } spinlock_profile_ucopy_t;
  
-@@ -787,8 +789,8 @@ static int read_cr(unsigned int reg, unsigned long *val,
-     return X86EMUL_UNHANDLEABLE;
+-static void spinlock_profile_ucopy_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_ucopy_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
+ {
+     spinlock_profile_ucopy_t *p = par;
+diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
+index 70ab3ba406ff..84cf52636bc4 100644
+--- a/xen/common/vm_event.c
++++ b/xen/common/vm_event.c
+@@ -523,21 +523,21 @@ int __vm_event_claim_slot(struct domain *d, struct vm_event_domain *ved,
+ 
+ #ifdef CONFIG_MEM_PAGING
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void mem_paging_notification(struct vcpu *v, unsigned int port)
++static void cf_check mem_paging_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_paging);
  }
- 
--static int write_cr(unsigned int reg, unsigned long val,
--                    struct x86_emulate_ctxt *ctxt)
-+static int cf_check write_cr(
-+    unsigned int reg, unsigned long val, struct x86_emulate_ctxt *ctxt)
- {
-     struct vcpu *curr = current;
- 
-@@ -871,8 +873,8 @@ static uint64_t guest_efer(const struct domain *d)
-     return val;
- }
- 
--static int read_msr(unsigned int reg, uint64_t *val,
--                    struct x86_emulate_ctxt *ctxt)
-+static int cf_check read_msr(
-+    unsigned int reg, uint64_t *val, struct x86_emulate_ctxt *ctxt)
- {
-     struct vcpu *curr = current;
-     const struct domain *currd = curr->domain;
-@@ -1020,8 +1022,8 @@ static int read_msr(unsigned int reg, uint64_t *val,
-     return ret;
- }
- 
--static int write_msr(unsigned int reg, uint64_t val,
--                     struct x86_emulate_ctxt *ctxt)
-+static int cf_check write_msr(
-+    unsigned int reg, uint64_t val, struct x86_emulate_ctxt *ctxt)
- {
-     struct vcpu *curr = current;
-     const struct domain *currd = curr->domain;
-@@ -1188,8 +1190,9 @@ static int write_msr(unsigned int reg, uint64_t val,
-     return X86EMUL_UNHANDLEABLE;
- }
- 
--static int cache_op(enum x86emul_cache_op op, enum x86_segment seg,
--                    unsigned long offset, struct x86_emulate_ctxt *ctxt)
-+static int cf_check cache_op(
-+    enum x86emul_cache_op op, enum x86_segment seg,
-+    unsigned long offset, struct x86_emulate_ctxt *ctxt)
- {
-     ASSERT(op == x86emul_wbinvd || op == x86emul_wbnoinvd);
- 
-@@ -1208,8 +1211,8 @@ static int cache_op(enum x86emul_cache_op op, enum x86_segment seg,
-     return X86EMUL_OKAY;
- }
- 
--static int validate(const struct x86_emulate_state *state,
--                    struct x86_emulate_ctxt *ctxt)
-+static int cf_check validate(
-+    const struct x86_emulate_state *state, struct x86_emulate_ctxt *ctxt)
- {
-     switch ( ctxt->opcode )
-     {
-@@ -1258,10 +1261,9 @@ static int validate(const struct x86_emulate_state *state,
-     return X86EMUL_UNHANDLEABLE;
- }
- 
--static int insn_fetch(unsigned long offset,
--                      void *p_data,
--                      unsigned int bytes,
--                      struct x86_emulate_ctxt *ctxt)
-+static int cf_check insn_fetch(
-+    unsigned long offset, void *p_data, unsigned int bytes,
-+    struct x86_emulate_ctxt *ctxt)
- {
-     const struct priv_op_ctxt *poc =
-         container_of(ctxt, struct priv_op_ctxt, ctxt);
-diff --git a/xen/arch/x86/pv/emulate.h b/xen/arch/x86/pv/emulate.h
-index 4b845b08e372..49a4d34832df 100644
---- a/xen/arch/x86/pv/emulate.h
-+++ b/xen/arch/x86/pv/emulate.h
-@@ -12,13 +12,6 @@ int pv_emul_read_descriptor(unsigned int sel, const struct vcpu *v,
- 
- void pv_emul_instruction_done(struct cpu_user_regs *regs, unsigned long rip);
- 
--static inline int pv_emul_is_mem_write(const struct x86_emulate_state *state,
--                                       struct x86_emulate_ctxt *ctxt)
--{
--    return x86_insn_is_mem_write(state, ctxt) ? X86EMUL_OKAY
--                                              : X86EMUL_UNHANDLEABLE;
--}
--
- /* Return a pointer to the GDT/LDT descriptor referenced by sel. */
- static inline const seg_desc_t *gdt_ldt_desc_ptr(unsigned int sel)
- {
-diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
-index ef4d146c1d9e..5963f5ee2d51 100644
---- a/xen/arch/x86/pv/ro-page-fault.c
-+++ b/xen/arch/x86/pv/ro-page-fault.c
-@@ -26,6 +26,13 @@
- #include "emulate.h"
- #include "mm.h"
- 
-+static int cf_check pv_emul_is_mem_write(
-+    const struct x86_emulate_state *state, struct x86_emulate_ctxt *ctxt)
-+{
-+    return x86_insn_is_mem_write(state, ctxt) ? X86EMUL_OKAY
-+                                              : X86EMUL_UNHANDLEABLE;
-+}
-+
- /*********************
-  * Writable Pagetables
-  */
-@@ -35,9 +42,9 @@ struct ptwr_emulate_ctxt {
-     l1_pgentry_t  pte;
- };
- 
--static int ptwr_emulated_read(enum x86_segment seg, unsigned long offset,
--                              void *p_data, unsigned int bytes,
--                              struct x86_emulate_ctxt *ctxt)
-+static int cf_check ptwr_emulated_read(
-+    enum x86_segment seg, unsigned long offset, void *p_data,
-+    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
- {
-     unsigned int rc = bytes;
-     unsigned long addr = offset;
-@@ -52,9 +59,9 @@ static int ptwr_emulated_read(enum x86_segment seg, unsigned long offset,
-     return X86EMUL_OKAY;
- }
- 
--static int ptwr_emulated_insn_fetch(unsigned long offset,
--                                    void *p_data, unsigned int bytes,
--                                    struct x86_emulate_ctxt *ctxt)
-+static int cf_check ptwr_emulated_insn_fetch(
-+    unsigned long offset, void *p_data, unsigned int bytes,
-+    struct x86_emulate_ctxt *ctxt)
- {
-     unsigned int rc = copy_from_guest_pv(p_data, (void *)offset, bytes);
- 
-@@ -218,9 +225,9 @@ static int ptwr_emulated_update(unsigned long addr, intpte_t *p_old,
-     return X86EMUL_OKAY;
- }
- 
--static int ptwr_emulated_write(enum x86_segment seg, unsigned long offset,
--                               void *p_data, unsigned int bytes,
--                               struct x86_emulate_ctxt *ctxt)
-+static int cf_check ptwr_emulated_write(
-+    enum x86_segment seg, unsigned long offset, void *p_data,
-+    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
- {
-     intpte_t val = 0;
- 
-@@ -236,9 +243,9 @@ static int ptwr_emulated_write(enum x86_segment seg, unsigned long offset,
-     return ptwr_emulated_update(offset, NULL, val, bytes, ctxt);
- }
- 
--static int ptwr_emulated_cmpxchg(enum x86_segment seg, unsigned long offset,
--                                 void *p_old, void *p_new, unsigned int bytes,
--                                 bool lock, struct x86_emulate_ctxt *ctxt)
-+static int cf_check ptwr_emulated_cmpxchg(
-+    enum x86_segment seg, unsigned long offset, void *p_old, void *p_new,
-+    unsigned int bytes, bool lock, struct x86_emulate_ctxt *ctxt)
- {
-     intpte_t old = 0, new = 0;
-     int rc;
-diff --git a/xen/arch/x86/x86_emulate.c b/xen/arch/x86/x86_emulate.c
-index 1e082e6f3b2d..60191a94dc18 100644
---- a/xen/arch/x86/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate.c
-@@ -53,8 +53,8 @@
- 
- #include "x86_emulate/x86_emulate.c"
- 
--int x86emul_read_xcr(unsigned int reg, uint64_t *val,
--                     struct x86_emulate_ctxt *ctxt)
-+int cf_check x86emul_read_xcr(
-+    unsigned int reg, uint64_t *val, struct x86_emulate_ctxt *ctxt)
- {
-     switch ( reg )
-     {
-@@ -77,8 +77,8 @@ int x86emul_read_xcr(unsigned int reg, uint64_t *val,
- }
- 
- /* Note: May be called with ctxt=NULL. */
--int x86emul_write_xcr(unsigned int reg, uint64_t val,
--                      struct x86_emulate_ctxt *ctxt)
-+int cf_check x86emul_write_xcr(
-+    unsigned int reg, uint64_t val, struct x86_emulate_ctxt *ctxt)
- {
-     switch ( reg )
-     {
-@@ -100,8 +100,8 @@ int x86emul_write_xcr(unsigned int reg, uint64_t val,
- 
- #ifdef CONFIG_PV
- /* Called with NULL ctxt in hypercall context. */
--int x86emul_read_dr(unsigned int reg, unsigned long *val,
--                    struct x86_emulate_ctxt *ctxt)
-+int cf_check x86emul_read_dr(
-+    unsigned int reg, unsigned long *val, struct x86_emulate_ctxt *ctxt)
- {
-     struct vcpu *curr = current;
- 
-@@ -143,8 +143,8 @@ int x86emul_read_dr(unsigned int reg, unsigned long *val,
-     return X86EMUL_OKAY;
- }
- 
--int x86emul_write_dr(unsigned int reg, unsigned long val,
--                     struct x86_emulate_ctxt *ctxt)
-+int cf_check x86emul_write_dr(
-+    unsigned int reg, unsigned long val, struct x86_emulate_ctxt *ctxt)
- {
-     struct vcpu *curr = current;
- 
-@@ -167,8 +167,9 @@ int x86emul_write_dr(unsigned int reg, unsigned long val,
- }
- #endif /* CONFIG_PV */
- 
--int x86emul_cpuid(uint32_t leaf, uint32_t subleaf,
--                  struct cpuid_leaf *res, struct x86_emulate_ctxt *ctxt)
-+int cf_check x86emul_cpuid(
-+    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *res,
-+    struct x86_emulate_ctxt *ctxt)
- {
-     guest_cpuid(current, leaf, subleaf, res);
- 
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
-index 824af9d899b5..5cdef535affd 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -2524,7 +2524,7 @@ static void adjust_bnd(struct x86_emulate_ctxt *ctxt,
-  done:;
- }
- 
--int x86emul_unhandleable_rw(
-+int cf_check x86emul_unhandleable_rw(
-     enum x86_segment seg,
-     unsigned long offset,
-     void *p_data,
-@@ -12318,7 +12318,7 @@ x86_insn_operand_ea(const struct x86_emulate_state *state,
-  * memory operand (like POP), but it does not mean e.g. segment selector
-  * loads, where the descriptor table access is considered an implicit one.
-  */
--bool
-+bool cf_check
- x86_insn_is_mem_access(const struct x86_emulate_state *state,
-                        const struct x86_emulate_ctxt *ctxt)
- {
-@@ -12410,7 +12410,7 @@ x86_insn_is_mem_access(const struct x86_emulate_state *state,
-  * loads, where the (possible) descriptor table write is considered an
-  * implicit access.
-  */
--bool
-+bool cf_check
- x86_insn_is_mem_write(const struct x86_emulate_state *state,
-                       const struct x86_emulate_ctxt *ctxt)
- {
-@@ -12582,7 +12582,7 @@ x86_insn_is_mem_write(const struct x86_emulate_state *state,
-     return false;
- }
- 
--bool
-+bool cf_check
- x86_insn_is_portio(const struct x86_emulate_state *state,
-                    const struct x86_emulate_ctxt *ctxt)
- {
-@@ -12597,7 +12597,7 @@ x86_insn_is_portio(const struct x86_emulate_state *state,
-     return false;
- }
- 
--bool
-+bool cf_check
- x86_insn_is_cr_access(const struct x86_emulate_state *state,
-                       const struct x86_emulate_ctxt *ctxt)
- {
-diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
-index 419def8790a0..4732855c40ed 100644
---- a/xen/arch/x86/x86_emulate/x86_emulate.h
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.h
-@@ -737,7 +737,7 @@ static inline unsigned long *decode_gpr(struct cpu_user_regs *regs,
- }
- 
- /* Unhandleable read, write or instruction fetch */
--int
-+int cf_check
- x86emul_unhandleable_rw(
-     enum x86_segment seg,
-     unsigned long offset,
-@@ -766,16 +766,16 @@ x86_insn_immediate(const struct x86_emulate_state *state,
- unsigned int
- x86_insn_length(const struct x86_emulate_state *state,
-                 const struct x86_emulate_ctxt *ctxt);
--bool
-+bool cf_check
- x86_insn_is_mem_access(const struct x86_emulate_state *state,
-                        const struct x86_emulate_ctxt *ctxt);
--bool
-+bool cf_check
- x86_insn_is_mem_write(const struct x86_emulate_state *state,
-                       const struct x86_emulate_ctxt *ctxt);
--bool
-+bool cf_check
- x86_insn_is_portio(const struct x86_emulate_state *state,
-                    const struct x86_emulate_ctxt *ctxt);
--bool
-+bool cf_check
- x86_insn_is_cr_access(const struct x86_emulate_state *state,
-                       const struct x86_emulate_ctxt *ctxt);
- 
-@@ -787,17 +787,18 @@ void x86_emulate_free_state(struct x86_emulate_state *state);
- 
- #ifdef __XEN__
- 
--int x86emul_read_xcr(unsigned int reg, uint64_t *val,
--                     struct x86_emulate_ctxt *ctxt);
--int x86emul_write_xcr(unsigned int reg, uint64_t val,
--                      struct x86_emulate_ctxt *ctxt);
--
--int x86emul_read_dr(unsigned int reg, unsigned long *val,
--                    struct x86_emulate_ctxt *ctxt);
--int x86emul_write_dr(unsigned int reg, unsigned long val,
--                     struct x86_emulate_ctxt *ctxt);
--int x86emul_cpuid(uint32_t leaf, uint32_t subleaf,
--                  struct cpuid_leaf *res, struct x86_emulate_ctxt *ctxt);
-+int cf_check x86emul_read_xcr(
-+    unsigned int reg, uint64_t *val, struct x86_emulate_ctxt *ctxt);
-+int cf_check x86emul_write_xcr(
-+    unsigned int reg, uint64_t val, struct x86_emulate_ctxt *ctxt);
-+
-+int cf_check x86emul_read_dr(
-+    unsigned int reg, unsigned long *val, struct x86_emulate_ctxt *ctxt);
-+int cf_check x86emul_write_dr(
-+    unsigned int reg, unsigned long val, struct x86_emulate_ctxt *ctxt);
-+int cf_check x86emul_cpuid(
-+    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *res,
-+    struct x86_emulate_ctxt *ctxt);
- 
  #endif
+ 
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void monitor_notification(struct vcpu *v, unsigned int port)
++static void cf_check monitor_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_monitor);
+ }
+ 
+ #ifdef CONFIG_MEM_SHARING
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void mem_sharing_notification(struct vcpu *v, unsigned int port)
++static void cf_check mem_sharing_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_share);
+ }
+diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
+index e3f6886e6b62..d2ad909502d0 100644
+--- a/xen/common/xmalloc_tlsf.c
++++ b/xen/common/xmalloc_tlsf.c
+@@ -512,13 +512,13 @@ int xmem_pool_maxalloc(struct xmem_pool *pool)
+ 
+ static struct xmem_pool *xenpool;
+ 
+-static void *xmalloc_pool_get(unsigned long size)
++static void *cf_check xmalloc_pool_get(unsigned long size)
+ {
+     ASSERT(size == PAGE_SIZE);
+     return alloc_xenheap_page();
+ }
+ 
+-static void xmalloc_pool_put(void *p)
++static void cf_check xmalloc_pool_put(void *p)
+ {
+     free_xenheap_page(p);
+ }
+diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
+index 06b4d2b1fea0..cebcd68a6c04 100644
+--- a/xen/drivers/passthrough/amd/iommu_init.c
++++ b/xen/drivers/passthrough/amd/iommu_init.c
+@@ -1073,7 +1073,7 @@ static void * __init allocate_ppr_log(struct amd_iommu *iommu)
+ #define IVRS_MAPPINGS_DEVTAB(m) (m)[ivrs_bdf_entries].intremap_table
+ 
+ /* Gets passed to radix_tree_destroy(), so its param needs to be void *. */
+-static void __init free_ivrs_mapping_callback(void *ptr)
++static void __init cf_check free_ivrs_mapping_callback(void *ptr)
+ {
+     const struct ivrs_mappings *ivrs_mappings = ptr;
  
 -- 
 2.11.0
