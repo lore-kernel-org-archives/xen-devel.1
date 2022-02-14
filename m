@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28468C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5032C433EF
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 12:52:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271502.465966 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.271500.465949 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJapd-00042w-M7; Mon, 14 Feb 2022 12:51:53 +0000
+	id 1nJapb-0003jx-Vf; Mon, 14 Feb 2022 12:51:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271502.465966; Mon, 14 Feb 2022 12:51:53 +0000
+Received: by outflank-mailman (output) from mailman id 271500.465949; Mon, 14 Feb 2022 12:51:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJapd-00042C-Ft; Mon, 14 Feb 2022 12:51:53 +0000
-Received: by outflank-mailman (input) for mailman id 271502;
- Mon, 14 Feb 2022 12:51:52 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nJapb-0003jq-Se; Mon, 14 Feb 2022 12:51:51 +0000
+Received: by outflank-mailman (input) for mailman id 271500;
+ Mon, 14 Feb 2022 12:51:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJapc-0003jk-Dh
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 12:51:52 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id deb652d9-8d94-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 13:51:49 +0100 (CET)
+ id 1nJapa-0003jd-Dm
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 12:51:50 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id dd86c4bb-8d94-11ec-b215-9bbe72dcb22c;
+ Mon, 14 Feb 2022 13:51:47 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,341 +38,314 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: deb652d9-8d94-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: dd86c4bb-8d94-11ec-b215-9bbe72dcb22c
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843109;
+  d=citrix.com; s=securemail; t=1644843108;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=J9m3axxGB3YzDKMm3KiRlCtcpIXM6a9lXiT912knQRU=;
-  b=C0LN7lOZaZokznpIJGwtMXW4HOaYfkhat9gqyiUSjzpzdrpb2lANUQYD
-   D2J6v447sqHHRjsXz3dponQz37M63MiUkrOPBa4X7nFmbNIkllPJPbWcd
-   cGVjQHPhBpzAYpPmCPNZXpTbwmKF3UvbfngyIfor6RxTPtDyoqmUB1fvb
-   8=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: BICKEwSReIH9eKmvBo1CRZ9hxo4Da6Hik5VETf0yI/mn9LqrA8Izd43jktE8HFjvDSqyIJw48N
- 63A2GHtGC2m/pwqvKv7gip4KKW+Mb015Xzr4XymjNNyVfcFraUpL+YXKwkW9krvO8c9X/eaggd
- 1c0RjsJF9gBK01/v/fEb4BuaZ5QUqKm761Od2YvicIks++DpI9E0gSsLivtvpPmVFeSJQGl8qe
- /gIZi21dliI72pJ7VEC0mhMeaVBOQhwg/quX30LrT5Qm0ktHOLzmSn2YphvDRhOaxTmu/r99SB
- J4uU9l28uFRE/OvEjnQP8paS
+   references:mime-version:content-transfer-encoding;
+  bh=aXXIf+NNN0QNk4zfqFs4eP6IyzxPbQMRw4LdRyX5iLE=;
+  b=DLn+ya2af5u4QtUc1x13c/XqDhf1fGdxxiGJLYCSVLlpICWC9mY+NXz0
+   Mk7wcVXLuwbteeOLN11tIq18UWYPnWwz6+CPiMgy4zV63LBpKFnzGjvsn
+   SMXKeAc2PzvtztRjVkjOO+PQD6OyDvfyji6WmcmkR4PcFLqIlUPTn2VDT
+   Q=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: JUo4Vd3pfWa8T/jVOep+89YwoUs2d7+ivu7Rcedm30U9L93QAmJj3deGVoZiN3Fe8jL8JI5s3u
+ 4/puwCUfVqCWZSy/P3twSEYNjYwy9njJhXFAeG0lQRXpTuovLJCb04Th2Oh0eCFmzyokEO359f
+ SDQrj1MO4Cs1CdWigft0Bnjq7kPZgNV5E+hqLoMqAzfSfnPHnRUtgk8z0oLbVJayvGqcZhC6J7
+ 5sqCCY2kVV0v8THKKOGgIFXXTyrPUCSjgHBimhX1rUPeW0RP49WwsAtDgOlh5oraD5EilFIWQy
+ 8EftccNWIhriLpMoDfdvkJBn
 X-SBRS: 5.1
-X-MesageID: 64148314
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 64148059
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:VgrLkq7kD8T3EMb2ajxFVgxRtBbAchMFZxGqfqrLsTDasY5as4F+v
- mUXDG2DP/2IM2D2fo0jbdi29UgCupbUy4BmGwtlri0xHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
- +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZj29Iw2LBVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z6
- /B86ICuUV8QG4rXm94NbQkDCD4gBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQQa+CN
- 5FANVKDajzgXAV0KgsOAqkdmeyuonPFfSVVun2K8P9fD2/7k1UqjemF3MDuUt6FX8JOhW6Du
- 3nLuW/+B3kyJNGZjDaI7H+oruvOhj/gHpIfEqWi8fxni0HVwXYcYCD6TnPi/6P/0BTnHYsCd
- QpEoULCsJTe6mSIa+igQwOg+EehmQUfYcpuA7Yh91+0n/+8DxmiOkAISTtIadoDvcAwRCA32
- lLho+4FFQCDo5XOFyvDq+78QSeafHFMcDRcPXNsoR4tvoG7yLzfmC4jWTqK/ESdqtTuUQ/9z
- DmRxMTVr+VC1JVbv0lXEL2uvt5NmnQrZlNvjuk0djj8hu+cWGJCT9b2gWU3Fd4acO6koqCp5
- RDoYfS24uEUFo2qnyeQWugLF7zBz6/bbGGD0Q4yQsF4rG7FF5ufkWd4um8WGauUGpxcJW+Bj
- LH75Wu9G6O/zFP1NPQqMupd+uwhzLT6FMSNaxwnRoEmX3SFTyfepHsGTRfJhwjFyRFw+Ylia
- cbzWZv9Vh4yVPU4pAdass9AiNfHMAhlnjiNLX06pjz6uYejiIm9F+tbbgvUM7xRAWHtiFy9z
- uuz/vCik313ONASqAGNmWLKBVxVf3U9G77srMlbKryKLgZ8QTlzAP7N27IxPYdimv0NxOvP+
- 3i8XG5eyUb+2iKbeVnbNCg7ZeO9R4t7oFI6ITcoYQSi1U88bNv996wYbZY2I+UqrbQx0f5uQ
- vAZUMycGfATGC/f8jEQYMCl/oxvfRimnyyUOC+hbGRtdpJsXVWRqNTlYhHu5G8FCS/u7Zkyp
- Lip1wX6R5sfRls9UJaKOaz3l17o5CoTguN/WUfMM+J/QkS0/dg4MTH1g982P9oIdUfJyAyF2
- lvEGhwfv+TM/dM4qYGbmaCeoo61OOJiBU4GTXLD5LO7OCSGrGquxYhMDLSBcTzHDT6m/ayjY
- aNezu3mMe1Bl1FP6tIuH7FuxKM4xt3uu74FkVg0QCSVNwymWuF6P32L/chTrakclLZWtDy/V
- l+L5tQHa66CP9noEQJJKQcoBghZOSr4RtUGASwJHXjH
-IronPort-HdrOrdr: A9a23:ssub/qNNZ3p9EcBcTvKjsMiBIKoaSvp037B87TEJdfU1SL38qy
- jN9M5w6faQslsssR4b9exoVJPufZq+z+8W3WByB9eftVLdyQ2VxehZhOOI/9SHIUPDH4VmpM
- RdmsZFaeEZojJB/L7HCKXTKadF/DEnmprY4tvj8w==
+IronPort-Data: A9a23:rOj1sKsrj3R06oxB0P+t65vbz+fnVMtZMUV32f8akzHdYApBsoF/q
+ tZmKWiOPq7YY2r0L90lO462/RsDvMLVn943TQdlryBkFSwV+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHdJZS5LwbZj2NYy2IThWmthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ Nplioa9WRoTOIT2qv03VzhjCxlleqJL0eqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6AO
+ 5NFOWIyPXwsZTVvKBQPEZAbwdyLh3zjXSF/knnNv5c4tj27IAtZj+G2bYu9lsaxbcdImkeVo
+ ErW8mK/BQsVXPShzj6C/mOpl/X4tyrxU4IPF5W17vdvxlaUwwQ7AhAMSUGyp/X/j0ekQs9eM
+ GQd4C9opq83nGS0SvHtUhv+p2SL1jYMVtwVH+Ak5QWlzqvP/x3fFmUCViRGatEtqIkxXzNC/
+ n2jks7tBDdvmKaIUn/b/bCRxRupIjQcJ2IGYS4CTCMG7sPlrYV1iQjAJuuPC4bs0IezQ2uph
+ WnX8m5u3N3/kPLnyY2E513Xngiqj6L7VyQxxz7PZnni4Q5QMdvNi5OT1XDX6vNJLYC8R1aHv
+ WQZl8X20N3iHa1hhwTWHrxTQejBC+KtdWSF3AUxR8VJGyGFpib7Fb289g2SM6uA3iwsXTbyK
+ HHetgpKjHO4FCv7NPQnC25d5ilD8EQBKTgHfq2OBjatSsIoHONiwM2JTRTOt10BaGB2zckC1
+ W6zKK5A90oyB6V91yaRTOwAy7ItzS1W7TqNGcykn0T6jOLHPyT9pVI53LymNL5R0U95iF+Nr
+ 4Y32zWil32zr9ESkgGIqNVOfDjm3FAwBIzsqtw/SwJwClEOJY3VMNeImelJU9U8x8x9z76Ul
+ lngCh4w4Aeu3hXvdFTVAk2PnZuyBP6TW1pgZndyVbtpslB+CbuSAFA3KcdmI+l/rLY7pRO2J
+ tFcE/i97j10Ymyv01wggVPV9uSOrTyn2lCDOTSLej86c8IyTgDF4Ia8LADu6DMPHmy8ss5n+
+ ++s0QbSQJwiQQV+DZmJNKLzng3p5XVNyvhvW0boI8VIfBm++oZdNCGs3OQ8JNsBKEufy2LCh
+ RqWGxoRucLEv5QxrIvSnamBoorwS7l+E0NWEnP197GzMSWGrGOvzZUZCLSDfCzHVXOy86KnP
+ L0Hw/b5OfwBvVBLr4sjTOo7kfNgv4Pi/uYIwB5lEXPHa0WQJolhenTWj9NSsqBtx6NCvVfkU
+ Ey45dQHa66CP9noEQBNKVN9PPiDz/wdhhLb8e8xfBfh/CZy8beKDRdSMh2LhHAPJbd5Ktp4k
+ +IoucpQ4A2jkBs6dN2Bi3kMpWiLK3UBVYQht40bX9C32lZ6lAkabMyOEDLy7bGOd85IYxsjL
+ TKjjabfg6hRmxjZeH0pGHmRhedQiPziYvyRIIPu87hRpuf4uw==
+IronPort-HdrOrdr: A9a23:l6iu4qsnagOUOA9OLGPnExlv7skDTtV00zEX/kB9WHVpmszxra
+ 6TdZMgpGbJYVcqKRcdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
+ YFT0EXMqyJMbEQt6fHCWeDfOrIuOP3kpyVuQ==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64148314"
+   d="scan'208";a="64148059"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 04/70] x86/pv-shim: Don't modify the hypercall table
-Date: Mon, 14 Feb 2022 12:50:21 +0000
-Message-ID: <20220214125127.17985-5-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Bertrand Marquis <bertrand.marquis@arm.com>
+Subject: [PATCH v2 02/70] xen/sort: Switch to an extern inline implementation
+Date: Mon, 14 Feb 2022 12:50:19 +0000
+Message-ID: <20220214125127.17985-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-From: Juergen Gross <jgross@suse.com>
+There are exactly 3 callers of sort() in the hypervisor.  Callbacks in a tight
+loop like this are problematic for performance, especially with Spectre v2
+protections, which is why extern inline is used commonly by libraries.
 
-When running as pv-shim the hypercall is modified today in order to
-replace the functions for __HYPERVISOR_event_channel_op and
-__HYPERVISOR_grant_table_op hypercalls.
+Both ARM callers pass in NULL for the swap function, and while this might seem
+like an attractive option at first, it causes generic_swap() to be used, which
+forced a byte-wise copy.  Provide real swap functions so the compiler can
+optimise properly, which is very important for ARM downstreams where
+milliseconds until the system is up matters.
 
-Change this to call the related functions from the normal handlers
-instead when running as shim. The performance implications are not
-really relevant, as a normal production hypervisor will not be
-configured to support shim mode, so the related calls will be dropped
-due to optimization of the compiler.
+No functional change.
 
-Note that for the CONFIG_PV_SHIM_EXCLUSIVE case there is a dummy
-wrapper do_grant_table_op() needed, as in this case grant_table.c
-isn't being built.
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/include/asm/hypercall.h     |  4 ++-
- xen/arch/x86/include/asm/pv/shim.h       |  3 ++
- xen/arch/x86/pv/hypercall.c              |  2 +-
- xen/arch/x86/pv/shim.c                   | 54 ++++++++++++++++----------------
- xen/arch/x86/x86_64/platform_hypercall.c |  2 +-
- xen/common/compat/multicall.c            |  3 +-
- xen/common/event_channel.c               |  9 ++++++
- xen/common/grant_table.c                 |  9 ++++++
- 8 files changed, 54 insertions(+), 32 deletions(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien@xen.org>
+CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+CC: Bertrand Marquis <bertrand.marquis@arm.com>
 
-diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
-index 5d394d492318..f004824f16b6 100644
---- a/xen/arch/x86/include/asm/hypercall.h
-+++ b/xen/arch/x86/include/asm/hypercall.h
-@@ -145,6 +145,7 @@ do_set_segment_base(
- 
- #include <compat/arch-x86/xen.h>
- #include <compat/physdev.h>
-+#include <compat/platform.h>
- 
- extern int
- compat_physdev_op(
-@@ -161,8 +162,9 @@ extern int compat_mmuext_op(
-     XEN_GUEST_HANDLE_PARAM(uint) pdone,
-     unsigned int foreigndom);
- 
-+DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
- extern int compat_platform_op(
--    XEN_GUEST_HANDLE_PARAM(void) u_xenpf_op);
-+    XEN_GUEST_HANDLE_PARAM(compat_platform_op_t) u_xenpf_op);
- 
- extern long compat_callback_op(
-     int cmd, XEN_GUEST_HANDLE(void) arg);
-diff --git a/xen/arch/x86/include/asm/pv/shim.h b/xen/arch/x86/include/asm/pv/shim.h
-index 8a91f4f9dfbf..6415f8068e5c 100644
---- a/xen/arch/x86/include/asm/pv/shim.h
-+++ b/xen/arch/x86/include/asm/pv/shim.h
-@@ -19,6 +19,7 @@
- #ifndef __X86_PV_SHIM_H__
- #define __X86_PV_SHIM_H__
- 
-+#include <xen/hypercall.h>
- #include <xen/types.h>
- 
- #if defined(CONFIG_PV_SHIM_EXCLUSIVE)
-@@ -45,6 +46,8 @@ domid_t get_initial_domain_id(void);
- uint64_t pv_shim_mem(uint64_t avail);
- void pv_shim_fixup_e820(struct e820map *e820);
- const struct platform_bad_page *pv_shim_reserved_pages(unsigned int *size);
-+typeof(do_event_channel_op) pv_shim_event_channel_op;
-+typeof(do_grant_table_op) pv_shim_grant_table_op;
- 
- #else
- 
-diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
-index ecdd58deea69..50cd219c18fc 100644
---- a/xen/arch/x86/pv/hypercall.c
-+++ b/xen/arch/x86/pv/hypercall.c
-@@ -64,7 +64,7 @@ const pv_hypercall_table_t pv_hypercall_table[] = {
-     COMPAT_CALL(xen_version),
-     HYPERCALL(console_io),
-     COMPAT_CALL(physdev_op_compat),
--#ifdef CONFIG_GRANT_TABLE
-+#if defined(CONFIG_GRANT_TABLE) || defined(CONFIG_PV_SHIM)
-     COMPAT_CALL(grant_table_op),
- #endif
-     HYPERCALL(vm_assist),
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index d9704121a739..7e891fe2f7a4 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -56,11 +56,6 @@ static DEFINE_SPINLOCK(balloon_lock);
- 
- static struct platform_bad_page __initdata reserved_pages[2];
- 
--static long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
--static long pv_shim_grant_table_op(unsigned int cmd,
--                                   XEN_GUEST_HANDLE_PARAM(void) uop,
--                                   unsigned int count);
--
- /*
-  * By default give the shim 1MB of free memory slack. Some users may wish to
-  * tune this constants for better memory utilization. This can be achieved
-@@ -203,7 +198,6 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
-                               start_info_t *si)
- {
-     bool compat = is_pv_32bit_domain(d);
--    pv_hypercall_table_t *rw_pv_hypercall_table;
-     uint64_t param = 0;
-     long rc;
- 
-@@ -249,23 +243,6 @@ void __init pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
-         consoled_set_ring_addr(page);
-     }
- 
--    /*
--     * Locate pv_hypercall_table[] (usually .rodata) in the directmap (which
--     * is writeable) and insert some shim-specific hypercall handlers.
--     */
--    rw_pv_hypercall_table = __va(__pa(pv_hypercall_table));
--    rw_pv_hypercall_table[__HYPERVISOR_event_channel_op].native =
--        (hypercall_fn_t *)pv_shim_event_channel_op;
--    rw_pv_hypercall_table[__HYPERVISOR_grant_table_op].native =
--        (hypercall_fn_t *)pv_shim_grant_table_op;
--
--#ifdef CONFIG_PV32
--    rw_pv_hypercall_table[__HYPERVISOR_event_channel_op].compat =
--        (hypercall_fn_t *)pv_shim_event_channel_op;
--    rw_pv_hypercall_table[__HYPERVISOR_grant_table_op].compat =
--        (hypercall_fn_t *)pv_shim_grant_table_op;
--#endif
--
-     guest = d;
- 
-     /*
-@@ -435,7 +412,7 @@ int pv_shim_shutdown(uint8_t reason)
+v2:
+ * Adjust commit message
+---
+ xen/arch/arm/bootfdt.c |  9 +++++-
+ xen/arch/arm/io.c      |  9 +++++-
+ xen/include/xen/sort.h | 55 +++++++++++++++++++++++++++++++++-
+ xen/lib/sort.c         | 80 ++------------------------------------------------
+ 4 files changed, 72 insertions(+), 81 deletions(-)
+
+diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
+index afaa0e249b71..e318ef960386 100644
+--- a/xen/arch/arm/bootfdt.c
++++ b/xen/arch/arm/bootfdt.c
+@@ -448,6 +448,13 @@ static int __init cmp_memory_node(const void *key, const void *elem)
      return 0;
  }
  
--static long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-+long pv_shim_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-     struct domain *d = current->domain;
-     struct evtchn_close close;
-@@ -683,9 +660,9 @@ void pv_shim_inject_evtchn(unsigned int port)
- # define compat_handle_okay guest_handle_okay
- #endif
++static void __init swap_memory_node(void *_a, void *_b, size_t size)
++{
++    struct membank *a = _a, *b = _b;
++
++    SWAP(*a, *b);
++}
++
+ /**
+  * boot_fdt_info - initialize bootinfo from a DTB
+  * @fdt: flattened device tree binary
+@@ -472,7 +479,7 @@ size_t __init boot_fdt_info(const void *fdt, paddr_t paddr)
+      * the banks sorted in ascending order. So sort them through.
+      */
+     sort(bootinfo.mem.bank, bootinfo.mem.nr_banks, sizeof(struct membank),
+-         cmp_memory_node, NULL);
++         cmp_memory_node, swap_memory_node);
  
--static long pv_shim_grant_table_op(unsigned int cmd,
--                                   XEN_GUEST_HANDLE_PARAM(void) uop,
--                                   unsigned int count)
-+long pv_shim_grant_table_op(unsigned int cmd,
-+                            XEN_GUEST_HANDLE_PARAM(void) uop,
-+                            unsigned int count)
- {
-     struct domain *d = current->domain;
-     long rc = 0;
-@@ -845,6 +822,29 @@ static long pv_shim_grant_table_op(unsigned int cmd,
-     return rc;
+     early_print_info();
+ 
+diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
+index 729287e37c59..1a066f9ae502 100644
+--- a/xen/arch/arm/io.c
++++ b/xen/arch/arm/io.c
+@@ -80,6 +80,13 @@ static int cmp_mmio_handler(const void *key, const void *elem)
+     return 0;
  }
  
-+#ifndef CONFIG_GRANT_TABLE
-+/* Thin wrapper(s) needed. */
-+long do_grant_table_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop,
-+                       unsigned int count)
++static void swap_mmio_handler(void *_a, void *_b, size_t size)
 +{
-+    if ( !pv_shim )
-+        return -ENOSYS;
++    struct mmio_handler *a = _a, *b = _b;
 +
-+    return pv_shim_grant_table_op(cmd, uop, count);
++    SWAP(*a, *b);
 +}
 +
-+#ifdef CONFIG_PV32
-+int compat_grant_table_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop,
-+                          unsigned int count)
-+{
-+    if ( !pv_shim )
-+        return -ENOSYS;
-+
-+    return pv_shim_grant_table_op(cmd, uop, count);
-+}
-+#endif
-+#endif
-+
- long pv_shim_cpu_up(void *data)
+ static const struct mmio_handler *find_mmio_handler(struct domain *d,
+                                                     paddr_t gpa)
  {
-     struct vcpu *v = data;
-diff --git a/xen/arch/x86/x86_64/platform_hypercall.c b/xen/arch/x86/x86_64/platform_hypercall.c
-index fbba893a47cb..966fd27b5f22 100644
---- a/xen/arch/x86/x86_64/platform_hypercall.c
-+++ b/xen/arch/x86/x86_64/platform_hypercall.c
-@@ -6,8 +6,8 @@ EMIT_FILE;
+@@ -170,7 +177,7 @@ void register_mmio_handler(struct domain *d,
  
- #include <xen/lib.h>
- #include <compat/platform.h>
-+#include <xen/hypercall.h>
+     /* Sort mmio handlers in ascending order based on base address */
+     sort(vmmio->handlers, vmmio->num_entries, sizeof(struct mmio_handler),
+-         cmp_mmio_handler, NULL);
++         cmp_mmio_handler, swap_mmio_handler);
  
--DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
- #define xen_platform_op     compat_platform_op
- #define xen_platform_op_t   compat_platform_op_t
- #define do_platform_op(x)   compat_platform_op(_##x)
-diff --git a/xen/common/compat/multicall.c b/xen/common/compat/multicall.c
-index a0e9918f4805..b17739d21829 100644
---- a/xen/common/compat/multicall.c
-+++ b/xen/common/compat/multicall.c
-@@ -5,7 +5,7 @@
- EMIT_FILE;
+     write_unlock(&vmmio->lock);
+ }
+diff --git a/xen/include/xen/sort.h b/xen/include/xen/sort.h
+index a403652948e7..01479ea44606 100644
+--- a/xen/include/xen/sort.h
++++ b/xen/include/xen/sort.h
+@@ -3,8 +3,61 @@
  
  #include <xen/types.h>
--#include <xen/multicall.h>
-+#include <xen/hypercall.h>
- #include <xen/trace.h>
  
- #define COMPAT
-@@ -19,7 +19,6 @@ static inline void xlat_multicall_entry(struct mc_state *mcs)
-         mcs->compat_call.args[i] = mcs->call.args[i];
- }
- 
--DEFINE_XEN_GUEST_HANDLE(multicall_entry_compat_t);
- #define multicall_entry      compat_multicall_entry
- #define multicall_entry_t    multicall_entry_compat_t
- #define do_multicall_call    compat_multicall_call
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index da88ad141a69..c9912122d1e5 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -31,6 +31,10 @@
- #include <public/event_channel.h>
- #include <xsm/xsm.h>
- 
-+#ifdef CONFIG_PV_SHIM
-+#include <asm/guest.h>
++/*
++ * sort - sort an array of elements
++ * @base: pointer to data to sort
++ * @num: number of elements
++ * @size: size of each element
++ * @cmp: pointer to comparison function
++ * @swap: pointer to swap function or NULL
++ *
++ * This function does a heapsort on the given array. You may provide a
++ * swap function optimized to your element type.
++ *
++ * Sorting time is O(n log n) both on average and worst-case. While
++ * qsort is about 20% faster on average, it suffers from exploitable
++ * O(n*n) worst-case behavior and extra memory requirements that make
++ * it less suitable for kernel use.
++ */
++#ifndef SORT_IMPLEMENTATION
++extern gnu_inline
 +#endif
+ void sort(void *base, size_t num, size_t size,
+           int (*cmp)(const void *, const void *),
+-          void (*swap)(void *, void *, size_t));
++          void (*swap)(void *, void *, size_t))
++{
++    /* pre-scale counters for performance */
++    size_t i = (num / 2) * size, n = num * size, c, r;
 +
- #define ERROR_EXIT(_errno)                                          \
-     do {                                                            \
-         gdprintk(XENLOG_WARNING,                                    \
-@@ -1189,6 +1193,11 @@ long do_event_channel_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-     int rc;
- 
-+#ifdef CONFIG_PV_SHIM
-+    if ( unlikely(pv_shim) )
-+        return pv_shim_event_channel_op(cmd, arg);
-+#endif
++    /* heapify */
++    while ( i > 0 )
++    {
++        for ( r = i -= size; r * 2 + size < n; r = c )
++        {
++            c = r * 2 + size;
++            if ( (c < n - size) && (cmp(base + c, base + c + size) < 0) )
++                c += size;
++            if ( cmp(base + r, base + c) >= 0 )
++                break;
++            swap(base + r, base + c, size);
++        }
++    }
 +
-     switch ( cmd )
-     {
-     case EVTCHNOP_alloc_unbound: {
-diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
-index 3d92fee59285..925ed7d6bee2 100644
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -44,6 +44,10 @@
- #include <asm/flushtlb.h>
- #include <asm/guest_atomics.h>
++    /* sort */
++    for ( i = n; i > 0; )
++    {
++        i -= size;
++        swap(base, base + i, size);
++        for ( r = 0; r * 2 + size < i; r = c )
++        {
++            c = r * 2 + size;
++            if ( (c < i - size) && (cmp(base + c, base + c + size) < 0) )
++                c += size;
++            if ( cmp(base + r, base + c) >= 0 )
++                break;
++            swap(base + r, base + c, size);
++        }
++    }
++}
  
-+#ifdef CONFIG_PV_SHIM
-+#include <asm/guest.h>
-+#endif
-+
- /* Per-domain grant information. */
- struct grant_table {
-     /*
-@@ -3561,6 +3565,11 @@ do_grant_table_op(
-     long rc;
-     unsigned int opaque_in = cmd & GNTTABOP_ARG_MASK, opaque_out = 0;
+ #endif /* __XEN_SORT_H__ */
+diff --git a/xen/lib/sort.c b/xen/lib/sort.c
+index 35ce0d7abdec..b7e78cc0e8d2 100644
+--- a/xen/lib/sort.c
++++ b/xen/lib/sort.c
+@@ -4,81 +4,5 @@
+  * Jan 23 2005  Matt Mackall <mpm@selenic.com>
+  */
  
-+#ifdef CONFIG_PV_SHIM
-+    if ( unlikely(pv_shim) )
-+        return pv_shim_grant_table_op(cmd, uop, count);
-+#endif
-+
-     if ( (int)count < 0 )
-         return -EINVAL;
- 
+-#include <xen/types.h>
+-
+-static void u32_swap(void *a, void *b, size_t size)
+-{
+-    uint32_t t = *(uint32_t *)a;
+-
+-    *(uint32_t *)a = *(uint32_t *)b;
+-    *(uint32_t *)b = t;
+-}
+-
+-static void generic_swap(void *a, void *b, size_t size)
+-{
+-    char t;
+-
+-    do {
+-        t = *(char *)a;
+-        *(char *)a++ = *(char *)b;
+-        *(char *)b++ = t;
+-    } while ( --size > 0 );
+-}
+-
+-/*
+- * sort - sort an array of elements
+- * @base: pointer to data to sort
+- * @num: number of elements
+- * @size: size of each element
+- * @cmp: pointer to comparison function
+- * @swap: pointer to swap function or NULL
+- *
+- * This function does a heapsort on the given array. You may provide a
+- * swap function optimized to your element type.
+- *
+- * Sorting time is O(n log n) both on average and worst-case. While
+- * qsort is about 20% faster on average, it suffers from exploitable
+- * O(n*n) worst-case behavior and extra memory requirements that make
+- * it less suitable for kernel use.
+- */
+-
+-void sort(void *base, size_t num, size_t size,
+-          int (*cmp)(const void *, const void *),
+-          void (*swap)(void *, void *, size_t size))
+-{
+-    /* pre-scale counters for performance */
+-    size_t i = (num / 2) * size, n = num * size, c, r;
+-
+-    if ( !swap )
+-        swap = (size == 4 ? u32_swap : generic_swap);
+-
+-    /* heapify */
+-    while ( i > 0 )
+-    {
+-        for ( r = i -= size; r * 2 + size < n; r = c )
+-        {
+-            c = r * 2 + size;
+-            if ( (c < n - size) && (cmp(base + c, base + c + size) < 0) )
+-                c += size;
+-            if ( cmp(base + r, base + c) >= 0 )
+-                break;
+-            swap(base + r, base + c, size);
+-        }
+-    }
+-
+-    /* sort */
+-    for ( i = n; i > 0; )
+-    {
+-        i -= size;
+-        swap(base, base + i, size);
+-        for ( r = 0; r * 2 + size < i; r = c )
+-        {
+-            c = r * 2 + size;
+-            if ( (c < i - size) && (cmp(base + c, base + c + size) < 0) )
+-                c += size;
+-            if ( cmp(base + r, base + c) >= 0 )
+-                break;
+-            swap(base + r, base + c, size);
+-        }
+-    }
+-}
++#define SORT_IMPLEMENTATION
++#include <xen/sort.h>
 -- 
 2.11.0
 
