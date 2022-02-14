@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E78C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271739.466446 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6B3C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271747.466458 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3s-0003uR-Qv; Mon, 14 Feb 2022 13:06:36 +0000
+	id 1nJb3v-0004ba-88; Mon, 14 Feb 2022 13:06:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271739.466446; Mon, 14 Feb 2022 13:06:36 +0000
+Received: by outflank-mailman (output) from mailman id 271747.466458; Mon, 14 Feb 2022 13:06:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3r-0003p0-UL; Mon, 14 Feb 2022 13:06:35 +0000
-Received: by outflank-mailman (input) for mailman id 271739;
- Mon, 14 Feb 2022 13:06:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nJb3u-0004a4-P5; Mon, 14 Feb 2022 13:06:38 +0000
+Received: by outflank-mailman (input) for mailman id 271747;
+ Mon, 14 Feb 2022 13:06:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb3F-00023t-HC
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:57 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d8332ef6-8d96-11ec-b215-9bbe72dcb22c;
- Mon, 14 Feb 2022 14:05:55 +0100 (CET)
+ id 1nJb34-0008IH-44
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:46 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d1d065cc-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:05:44 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d8332ef6-8d96-11ec-b215-9bbe72dcb22c
+X-Inumbo-ID: d1d065cc-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843956;
+  d=citrix.com; s=securemail; t=1644843945;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=EoLk9ARQfV08rXKWBWT/VxrxjsnGxFJXU/V2o57wTSM=;
-  b=fA6FyD371rJHIbzeyFKoqTM0vvD2eAAyhdV8er5RWRxZW8XCx8N87CtJ
-   mgSV69ZPf8yF3x6O+762ASYquyFHE9x7i6lwv6/wGMEghfolVfqE14dj1
-   sbNPGSxT62A23ROAJCslpuyyDDd+B3cL1/CKnWIAkZYyJog7AsJv+WDdH
-   I=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: lwVxee2gONI8zybZijGPgtRb7S5JZ9rR8CHfg0ghaYoxu1E5N9tIvt91HWF+9OTv8XFLfKgO7I
- sGklG4QuNyuWBJRb7GUFbCvvrPewTUet58z1MlJJ4+lbLHr2rZo4uvi9H19dHhZhXDu+i2WFcb
- du2zGaMKUzOB1bYH7qaaAt6KZ91gHLgkteFKozfwjnDGudYqGKLiGB5CzGSwdJqM/tPPQUmyM9
- EIYP7GhssMUXd5fqYC5X04ybu+vZSrLHzftQZGmHstgwt8EmmDoKN+oB/9SOlGseJgJ+GkJIfM
- H0WldQZPdzkqH90PtQKPTWa/
+  bh=uqi1jxBHAWzCvFq7xfZy03983Yg3cPF97gGqXtbut+k=;
+  b=GdsEl4p4HbJXvigEFQcPPXW7iGAIJbSrb/5bQeFQIB9rg0dfbIO852nt
+   JMw10Cuw6sXlMZEQAhuAIp8bOi1lXfT7V6GwoBn/oDrFI/wgYb8GwNy5H
+   fAzAyre2CIMeVxkwivTt2A1YmZRqG8PDwKsO7JfMkyfnOSyKNE809WdgW
+   o=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: iaDkqD7qUoS+zmzC9I81HrN30704v81fnmngrv1xCn3IcoDwSM9/eR7vPuGemTUvEkaLAHuVgw
+ Mn8p46+CExuwiD9jIgXu480cLfiHSwyWwJ3Yc6JE+MhxFLB8bL6KxOhrVgE43IYrnJOfRFaD1a
+ 9Teps+DNvhyYYUoduPKL32/pXjD2lqKHVes0ctCjQRDAHji9UZTX5Y0M3Ziuqt8n1GadR4wYxU
+ WUhQfhVKDwBXOWnS2UOBwyw1ZJ7MfLhbWHgArXpJwfK6v/26wQukn9JbWVDlbRWFc/TyIKdMgC
+ UJAZDDG22SsF58EKkwKNHqmQ
 X-SBRS: 5.1
-X-MesageID: 64149841
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 64149421
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:yJ9zh6wJaH9Z9ZFyhY96t+cowSrEfRIJ4+MujC+fZmUNrF6WrkUOz
- moeDzuCPqqNMTb1fdtzati/9UMPvZ7Vx4BmTgM4qSAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wbdl2tcAbeWRWGthh
- /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
- wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt+At9
- vtjubzhchoOF/DGgc9eFDtYDxgraMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
- 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JwXQaeOO
- 5NxhTxHSSryaUcSClorFpMshdiZjHemazYJpwfAzUYwyzeKl1EguFT3C/LFd9rPSchLk0Kwo
- mPd43+/EhwcLMaYyzeO7jSrnOCnoM/gcNtMTvvirKcs2QDNgDxIYPELabelicnltGCQV/IOE
- FEz03cktINxs26rUuCoCnVUv0W4lhIbXtNRFcgz5weM1rfY7m6lO4QUctJSQId47ZFrHFTGw
- nfMxoq0XmI37NV5XFrAru/8kN+kBcQCwYbujwcgRBBN3dTsqZpbYvnnHoc6S/7dYjEY9FjNL
- 9G2QMoW2u97YS0jjfzTEbX7b9WE/Mahc+LNzl+LNl9JFysgDGJfW6Sm6ELA8dFLJ5uDQ1+Ks
- RAswpbCsL9eXczQzHXWGo3h+Y1FAN7fblXhbaNHRcF9p1xBBVb/FWyv3N2ODBgwaZtVEdMYS
- ETSpRlQ9Pdu0IiCNsdKj3aKI51yl8DITI29PtiNN4YmSsUhJWevoXA1DWbNjj+FraTZufxmU
- XttWZ33Vihy5GUO5GfeetrxJpd1mn5glTmOGfgWDX2PiNKjWZJccp9dWHPmUwzzxPrsTNz9/
- 4kNOs2U5Q9YVeGiMCDb/ZRKdQIBLGQhBICwoMtSL7bRLg1jEWAnKvnQ3bJ+JNA1w/ULzr/Fr
- iOnR0tV6Fvjnnmbew+EXW9uNeH0VpFloHNlYSF1ZQS022IuaJqE5bsEc8dlZqEu8eFulKYmT
- /QMd8iaLO5ITzDLp2YUYZXn9dQwfxW3nwOeeSGiZWFnLZJnQgXI/P7ifxfuq3ZSXnbm65Nmr
- uT5hA3BQJcFSwBzN+rsaaqinwGroHwQuONuRE+UcNNdT1rhrdpxICvrg/5pf8xVcUffxiGX3
- hq9CAsDobWfuJc89dTEiPzWr4qtFOciTENWE3OCsOSzPCjeuGGi3ZVBQKCDejWEDDH4/6CrZ
- ON0yfDgMaJYwAYW4tQkS7s7n7gj49bPpqNBylU2FXrGWF2nF7d8LyTUxsJIrKBMmudUtAbet
- phjITWG1WFl4P/YLWM=
-IronPort-HdrOrdr: A9a23:6yYMhqsIzUgwOrs8iYRzYp6c7skDdNV00zEX/kB9WHVpmszxra
- 6TdZUgpGbJYVkqOE3I9ertBEDEewK4yXcX2/h2AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YGT0EUMrzN5DZB4voSmDPIceod/A==
+IronPort-Data: A9a23:IDM+Dqr7hQbJCia82Kjfe8P/UYBeBmIGYhIvgKrLsJaIsI4StFCzt
+ garIBmFPfyJYGOnL98jYY6x/BkC65XXy4JqSwJk+X0wRisb85uZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlZT4vE2xbuKU5NTsY0idfic5Dndx4f5fs7Rh2NQw24HlW1rlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnaCgCkBxE6Puo/U6XhBeMCxfBL1D+bCSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFKoZtmtt0nfyCvE+TIqYa67L+cVZzHE7gcUm8fP2O
+ ZZANWszNk2ojxtnIE8+UsgVzaSSuSfHdzFkqWOQmqYlyj2GpOB2+Oe0a4eEEjCQfu1Fk0Ddq
+ m/Y8mDRBhABKMfZ2TeD6mirhOLEgWX8Qo16KVGj3qc02hvJnDVVUUBIEwvgyRWktqKgc+5Pa
+ AtM1yQMlrkV+UWtbdTcZg29oXHR63bwROFsO+E97QiMzI/d7ACYGnUIQ1Z9VTA2iCMlbWd0j
+ wHUxrsFERQq6eTIEizFqt94uBvvYXB9EIMUWcMToeLpCfHHqZp7sB/AR80L/EWd3oysQmGYL
+ 9xnQUEDa1QvYSwjiv/TEbPv2WvESn31oukdvFu/Y45dxlklDLNJnqTxgbQh0d5OLZyCUn6Kt
+ 2Uels6V4YgmVM/RyHPdELhQROjyvZ5p1QEwZnY1QfEcG8mFoSb/Lei8HhkiTKuWDir0UWCwO
+ xKC0e+gzJRSIGGrfcdKj3GZUKwXIVzbPY29DJj8N4MWCrAoLVPv1Hw+NCa4gjG2+GBxwP5XB
+ HtuWZv1ZZrsIf88l2TeqiZ0+eJD+x3SMkuNGcGln0z/i+L2ibz8Ye5tDWZip9sRtMusyDg5O
+ f4DXydT4xkAAuD4fAfN9osfcQIDIXQhXMikoM1LbO+TZAFhHTh5WfPWxLogfa1jnrhUybiUr
+ i3sBBcAxQqtn2DDJCWLdmtnNOHlU6FgoC9pJicrJ1uphSQuON798KcFepIrVrA77+g/n+VsR
+ vwIdpzYUPRCQzjK4RoHapz5oNAwfRinn1vWbSGkfCI+b9hrQAmQoo3oeQ7m9S8vCCurtJRh/
+ +38h12DGZdaHlZsFsfbbv6r3midh3lFlbIgRVbML/lSZF7orNpgJRvug6JlOMoLMxjCmGeXj
+ l7EHRcCqODRiIYp692V17ucpoKkHuYiTEpXG27XseS/OSXApzfxxIZBVKCDfCzHVXOy86KnP
+ L0Hw/b5OfwBvVBLr4sjTOo7kfNgv4Pi9+1A0wBpPHTXdFD6WLpvL06P0dRLqqAQlKRSvhG7W
+ x7X99RXUVlT1BgJzLLFyNIZU9m+
+IronPort-HdrOrdr: A9a23:N2/ke6gbAIuV/gTQIR78AqjGU3BQXtgji2hC6mlwRA09TySZ//
+ rBoB17726MtN9/YhEdcLy7VJVoBEmskKKdgrNhW4tKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QFJSWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149841"
+   d="scan'208";a="64149421"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 55/70] x86/pt: CFI hardening
-Date: Mon, 14 Feb 2022 12:51:12 +0000
-Message-ID: <20220214125127.17985-56-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 39/70] x86/mtrr: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:56 +0000
+Message-ID: <20220214125127.17985-40-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,71 +106,93 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/emul-i8254.c | 2 +-
- xen/arch/x86/hvm/hpet.c   | 2 +-
- xen/arch/x86/hvm/rtc.c    | 2 +-
- xen/arch/x86/hvm/vlapic.c | 4 ++--
- 4 files changed, 5 insertions(+), 5 deletions(-)
+ xen/arch/x86/cpu/mtrr/generic.c | 18 ++++++++++--------
+ xen/arch/x86/cpu/mtrr/mtrr.h    |  8 ++++----
+ 2 files changed, 14 insertions(+), 12 deletions(-)
 
-diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
-index d170f464d966..18894b63488e 100644
---- a/xen/arch/x86/emul-i8254.c
-+++ b/xen/arch/x86/emul-i8254.c
-@@ -156,7 +156,7 @@ static int pit_get_gate(PITState *pit, int channel)
-     return pit->hw.channels[channel].gate;
+diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
+index 7cf4cd01f3f6..47aaf76226e0 100644
+--- a/xen/arch/x86/cpu/mtrr/generic.c
++++ b/xen/arch/x86/cpu/mtrr/generic.c
+@@ -287,7 +287,8 @@ static void set_fixed_range(int msr, bool *changed, unsigned int *msrwords)
+ 	}
  }
  
--static void pit_time_fired(struct vcpu *v, void *priv)
-+static void cf_check pit_time_fired(struct vcpu *v, void *priv)
- {
-     uint64_t *count_load_time = priv;
-     TRACE_0D(TRC_HVM_EMUL_PIT_TIMER_CB);
-diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
-index ed512fa65b63..45c7b9b40688 100644
---- a/xen/arch/x86/hvm/hpet.c
-+++ b/xen/arch/x86/hvm/hpet.c
-@@ -219,7 +219,7 @@ static void hpet_stop_timer(HPETState *h, unsigned int tn,
-     hpet_get_comparator(h, tn, guest_time);
+-int generic_get_free_region(unsigned long base, unsigned long size, int replace_reg)
++int cf_check generic_get_free_region(
++    unsigned long base, unsigned long size, int replace_reg)
+ /*  [SUMMARY] Get a free MTRR.
+     <base> The starting (base) address of the region.
+     <size> The size (in bytes) of the region.
+@@ -309,8 +310,8 @@ int generic_get_free_region(unsigned long base, unsigned long size, int replace_
+ 	return -ENOSPC;
  }
  
--static void hpet_timer_fired(struct vcpu *v, void *data)
-+static void cf_check hpet_timer_fired(struct vcpu *v, void *data)
+-static void generic_get_mtrr(unsigned int reg, unsigned long *base,
+-			     unsigned long *size, mtrr_type *type)
++static void cf_check generic_get_mtrr(
++    unsigned int reg, unsigned long *base, unsigned long *size, mtrr_type *type)
  {
-     unsigned int tn = (unsigned long)data;
-     HPETState *h = vcpu_vhpet(v);
-diff --git a/xen/arch/x86/hvm/rtc.c b/xen/arch/x86/hvm/rtc.c
-index ed397276faa3..d21925db08bc 100644
---- a/xen/arch/x86/hvm/rtc.c
-+++ b/xen/arch/x86/hvm/rtc.c
-@@ -81,7 +81,7 @@ static void rtc_update_irq(RTCState *s)
+ 	uint64_t _mask, _base;
  
- /* Called by the VPT code after it's injected a PF interrupt for us.
-  * Fix up the register state to reflect what happened. */
--static void rtc_pf_callback(struct vcpu *v, void *opaque)
-+static void cf_check rtc_pf_callback(struct vcpu *v, void *opaque)
- {
-     RTCState *s = opaque;
- 
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index d4e29ef1ff1d..49be9c8ea4fe 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -691,13 +691,13 @@ int guest_rdmsr_x2apic(const struct vcpu *v, uint32_t msr, uint64_t *val)
-     return X86EMUL_OKAY;
+@@ -499,7 +500,7 @@ static void post_set(bool pge)
+ 	spin_unlock(&set_atomicity_lock);
  }
  
--static void vlapic_pt_cb(struct vcpu *v, void *data)
-+static void cf_check vlapic_pt_cb(struct vcpu *v, void *data)
+-static void generic_set_all(void)
++static void cf_check generic_set_all(void)
  {
-     TRACE_0D(TRC_HVM_EMUL_LAPIC_TIMER_CB);
-     *(s_time_t *)data = hvm_get_guest_time(v);
+ 	unsigned long mask, count;
+ 	unsigned long flags;
+@@ -522,8 +523,8 @@ static void generic_set_all(void)
+ 	}
  }
  
--static void vlapic_tdt_pt_cb(struct vcpu *v, void *data)
-+static void cf_check vlapic_tdt_pt_cb(struct vcpu *v, void *data)
+-static void generic_set_mtrr(unsigned int reg, unsigned long base,
+-			     unsigned long size, mtrr_type type)
++static void cf_check generic_set_mtrr(
++    unsigned int reg, unsigned long base, unsigned long size, mtrr_type type)
+ /*  [SUMMARY] Set variable MTRR register on the local CPU.
+     <reg> The register to set.
+     <base> The base address of the region.
+@@ -566,7 +567,8 @@ static void generic_set_mtrr(unsigned int reg, unsigned long base,
+ 	local_irq_restore(flags);
+ }
+ 
+-int generic_validate_add_page(unsigned long base, unsigned long size, unsigned int type)
++int cf_check generic_validate_add_page(
++    unsigned long base, unsigned long size, unsigned int type)
  {
-     *(s_time_t *)data = hvm_get_guest_time(v);
-     vcpu_vlapic(v)->hw.tdt_msr = 0;
+ 	unsigned long lbase, last;
+ 
+@@ -584,7 +586,7 @@ int generic_validate_add_page(unsigned long base, unsigned long size, unsigned i
+ }
+ 
+ 
+-static int generic_have_wrcomb(void)
++static int cf_check generic_have_wrcomb(void)
+ {
+ 	unsigned long config;
+ 	rdmsrl(MSR_MTRRcap, config);
+diff --git a/xen/arch/x86/cpu/mtrr/mtrr.h b/xen/arch/x86/cpu/mtrr/mtrr.h
+index 9a406e6f6199..c7fd44daab27 100644
+--- a/xen/arch/x86/cpu/mtrr/mtrr.h
++++ b/xen/arch/x86/cpu/mtrr/mtrr.h
+@@ -24,10 +24,10 @@ struct mtrr_ops {
+ 	int	(*have_wrcomb)(void);
+ };
+ 
+-extern int generic_get_free_region(unsigned long base, unsigned long size,
+-				   int replace_reg);
+-extern int generic_validate_add_page(unsigned long base, unsigned long size,
+-				     unsigned int type);
++int cf_check generic_get_free_region(
++    unsigned long base, unsigned long size, int replace_reg);
++int cf_check generic_validate_add_page(
++    unsigned long base, unsigned long size, unsigned int type);
+ 
+ extern const struct mtrr_ops generic_mtrr_ops;
+ 
 -- 
 2.11.0
 
