@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC85C433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:16:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271923.466676 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75956C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:16:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271930.466687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDW-0002tc-Ta; Mon, 14 Feb 2022 13:16:34 +0000
+	id 1nJbDb-0003Nf-D0; Mon, 14 Feb 2022 13:16:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271923.466676; Mon, 14 Feb 2022 13:16:34 +0000
+Received: by outflank-mailman (output) from mailman id 271930.466687; Mon, 14 Feb 2022 13:16:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDW-0002tR-Pk; Mon, 14 Feb 2022 13:16:34 +0000
-Received: by outflank-mailman (input) for mailman id 271923;
- Mon, 14 Feb 2022 13:16:34 +0000
+	id 1nJbDb-0003NT-9E; Mon, 14 Feb 2022 13:16:39 +0000
+Received: by outflank-mailman (input) for mailman id 271930;
+ Mon, 14 Feb 2022 13:16:37 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb4e-0008IH-R5
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:07:25 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0c38c0dc-8d97-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:07:23 +0100 (CET)
+ id 1nJb3m-0008IH-0Q
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:30 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id eb2b0ec9-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:06:27 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c38c0dc-8d97-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: eb2b0ec9-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644844042;
+  d=citrix.com; s=securemail; t=1644843987;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=9/V6nzRZ7VtFwWVXXCLQG4zjWKxi0K/Bd1I6aiIEiw4=;
-  b=QwfDrd+KjLriMLTRD8JjDXaV2nHw8a8HueWc/3V+NCVzN7JvAH9/z7fH
-   0xfqQffuljFd1DVxeL8XN+x7qPNZvzhm4F5Kw3LgdhWuZN5E/Tv0Vi03a
-   QaU8WASpp4R7stoivLdlKqBdK854CMoOTenN8KKhlvrtl8zFHtSagrIO8
-   Q=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: QoVcGhRi2qO89G0mlfsb3z4fJRpxrsWCEmF6IwH+yljjgQ6tmYJwawULIcQxB9vpa1O+JOptVA
- bKotuYX0SADBqbFVQiOG1r3zg9P2auTZSkj8pSLzYuyz4ZKERtSE20w/ElRbN5G+qa20yMck23
- xNHi1dgvhE8BswwY8rc5rUY6kfcp5nHN6UjGAnWQnhHs5zJ15/ShNok35B++zocRrf9hjy8Yqc
- RJm7x70n8A5ocJ6g0Cygzd7AeePFcmWYHMxkiFy0cNWWVVzTnO2/OEWhQMLOMhtNy7N5UbNLvV
- Pc0x15hKmHTsn35tqjzmlU8z
+  bh=GWauAq5Hi4t0sVZGrU3/q6tMpZvbMlc+nyZ6uD+AkRI=;
+  b=Ay0CCB9Kz/uvcRFfhiLSB3FuZDpAMadFy6IrAJFC8UMVbsMpgeXyMube
+   ZvsvsJb5xhRogwpn4PXuGdH878DFwAvEvZergm9mxrIiwf5bHIdV29+QM
+   YNeBpuFUM8hpBErbvUWgoTOWR/IzkvWNxnkTwFim7DqRGu09B2XT9xQR0
+   0=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: o4lSuCzDEusyVfSInkyFoHW4DgsPAKeUwFYa6tsXxSB0jgSnx/3zwHDm161r/7oMdBA0f212v0
+ 0sSY+qJAZRTzrax9S5ujZSAWaWtZjKM4PLDUDnejA6F6izTMDj3EwXkIHONTE4NMkMIW/j28Wl
+ 6/zwDaGnHAzxYHxsC4g65ZOyGUyBbCEVnGj+PD6DsqwP4QgXGwbtqXUlzBuy1SpmQ94IPUW/By
+ oBvLqf4ZXIK5gajkxkkbu49X6G5shjOQnawJA+LofFqUMjAMqU+RtZt/s3uvNe2Wh5IJATPTGc
+ yFnRCnF5ImrkU+N539g2xh3h
 X-SBRS: 5.1
-X-MesageID: 64554436
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 64050683
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:ylsxfa9MNE57VophY7JdDrUDmXmTJUtcMsCJ2f8bNWPcYEJGY0x3z
- mQZDW3UPPuOM2ejLYx/O9u+oExSu8PVz983SgVs/H08E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
- +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7Rg3tYx6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhhx
- vUQr56/az4IM53ristGAiZBHSNXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4SQKuCO
- 5FHAdZpRC+cMjtyJVsZMc8dwbaUonbUTz5yuE3A8MLb5ECMlVcsgdABKuH9atGMAMlYgEucj
- mbH5HjiRAEXMsSFzjiI+W7qgfXA9R4XQ6pLSuf+rKQzxgTOmCpDU3X6SGdXv9GphG7jQdBQC
- XU19xoJv4dppXOyQNvUCkjQTGG/gjYQXN9ZEusf4Q6Ly7bJ7wvxOlXoXgKte/R96pZoGGVCO
- kuh2oqwWGcx6OH9pWe1q+/MxQ5eLxT5OoPricUsaQIeq+fur4go5v4kZoYySfXl5jEZ9NyZ/
- txrkMTcr+hJ5SLo///ilbwiv95LjsKXJjPZHi2NAgqYAvpRPeZJnbCA51nB9upnJ42EVFSHt
- 3Vss5HAsLxRXcHQyXTUG79l8FSVCxGtamO0vLKSN8N5q2TFF4CLIei8Hw2S1G82a51ZKFcFk
- WfYuB9L5Y87AZdZRfQfXm5FMOxzlfKIPY28Dpj8N4MSCrAsJF7v1Hw/Pia4gjGy+HXAZIliY
- P93h+73Vi1EYUmmpRLrL9ogPUgDmHxgmzOJGMyTItbO+eP2WUN5gIwtaDOmBt3VJovd/Fy9H
- w93O5TYxhNBfvf5ZyWLo4cfIUpTdSowBIzsqtwRfemGe1I0FGYkAv7X4LUgZ406wPgFyraWp
- imwCh1C1V7ypXzbMgHWOHptX6ziAMRkpnUhMC1yYVvxgyo/YZyi5bs0focseeV17/RqyPN5F
- qFXe8iJDvlVZC7A/jARMcv0oIB4LUz5jgOSJSu1JjM4esc4FQDO/9bleCrp9TUPUXXr5Zdv/
- eX421qCE5QZRglkAMLHU96Vzgu87SoHheZ/f0rUOd0PKk/ix5dndn7qhfgtLsBSdRianmmG1
- xybCAszrPXWp9Nn68HAgK2Jotv7E+Z6GUYGTWDX4azvaHvf92unh4RBTPyJbXbWU2atoPeuY
- uBczvfdNvwbnQkV79ogQugzla9utcHyo7J6zxh/GCSZZlumPbpsP32a0JQdraZK3LJY5VO7V
- 0/nFgO24llV1BcJyGIsGTc=
-IronPort-HdrOrdr: A9a23:1Yj2jamh1rf49naRkJgShayoFFjpDfIu3DAbv31ZSRFFG/Fxl6
- iV8sjztCWE8Qr5N0tBpTntAsW9qDbnhPtICOoqTNGftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAs9D4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:Rn4lV65YTRTMTU2Ztge6hQxRtCHAchMFZxGqfqrLsTDasY5as4F+v
+ mtJDG+HOvaPNzOjc40kbtyy/E0O68WAzt8yTAI+rygwHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZj29Iw2LBVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z9
+ /hXmMXrYiYSEaSVu8MhXzgBOCNmMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQQa6DP
+ 5RJMlKDajyHTCxMHwoGMakDp7nxpynmVj8fpVaa8P9fD2/7k1UqjemF3MDuUsyHQ4BZk1iVo
+ krC/n/lGVcKOdqH0z2H/3mwwOjVkkvGtJk6TePisKQw2RvKmzJVWEZ+uUaHTeeRtWOkdosEA
+ G0v1SN3jo8O+G3yZdvlUEjtyJKbhSI0V91VGuw8zQiCzKvI/gqUblQ5oi59hM8O75FvG2Fzv
+ rOdt5awXGE07uXJIZ6I3urM9VuP1T4pwXjujMPuZS8M+JHdrY46lXojpf4zQffu3rUZ9dwdq
+ g1mTRTSZZ1O16bnNI3hpDgrZg5AQbCTEGYICv3/BD7N0++ATNfNi3aUwVba9+1cC42SU0OMu
+ nMJ8+DHsrxSUsHdyXHVGb5XdF1M2xpiGGeC6WOD4rF7r2j9k5JdVdw4DM5CyLdBbZ9fJG6Bj
+ L77sgJN/p5DVEZGnocsC79d//8ClPC6ffy8D6i8RoMXPvBZKV/WlAkzNBX49z28zyARfVQXZ
+ M7znTCEVi1BV8yKDVOeGo8g7FPc7n5ilD2DHcihl3xKE9O2PRaodFvMC3PWBshR0U9OiF+Nm
+ zqGH8fVmRhZTsPkZSzbrdwaIVwQdCBpDpHqsc1HMOWEJ1M+Sm0mDvbQx5InepBkwPsJxruZo
+ CnlVx8K0kf7iF3GNR6ONiJpZoTwUMsttnk8JyEtYwqlgiBxfYa14a4DXJIrZr17pvd7xPt5Q
+ qBdKcWNC/hCUBrd/DEZYcWvpYBubk3z1wmPIzCkcH40eJs5H17F/drtfw3O8igSD3Xo6Zti8
+ uP4jg6CGMgNXQVvCsrSecmD9VLpsChPgv92UmvJPsJXJBfm/r91JnGjlfQwOcwNd0nOn2PIy
+ waMDB4EjuDRuItposLRjKWJoor1QetzGk1WQzvS4bqsbHSI+2OixclLUfqSfCCbX2Txof3wa
+ eJQxvD6EfsGgFcV7NYsT+c1lfozt4n1urtX7gV4B3GaPV2kB4RpLmSCwcQS5LZGwaVUuFfuV
+ 0+CkjWA1W5l5C8x/IYtGTcY
+IronPort-HdrOrdr: A9a23:uUxSV6GC3MTHEZd/pLqE6seALOsnbusQ8zAXP0AYc3Jom62j5r
+ mTdZsgtSMc5Ax8ZJhko6HkBEDiewK7yXcW2/hzAV7KZmCP0wHEEGgh1/qH/9SJIVyYygc378
+ ZdmsZFZ+EYdWIK7/rH3A==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64554436"
+   d="scan'208";a="64050683"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 16/70] xen: CFI hardening for IPIs
-Date: Mon, 14 Feb 2022 12:50:33 +0000
-Message-ID: <20220214125127.17985-17-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 34/70] x86/emul: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:51 +0000
+Message-ID: <20220214125127.17985-35-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -103,642 +103,948 @@ to help protect against call/jump/return oriented programming attacks.
 
 Use cf_check to annotate function pointer targets for the toolchain.
 
+pv_emul_is_mem_write() is only used in a single file.  Having it as a static
+inline is pointless because it can't be inlined to begin with.
+
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/acpi/cpu_idle.c            |  2 +-
- xen/arch/x86/acpi/cpufreq/cpufreq.c     |  8 ++++----
- xen/arch/x86/acpi/cpufreq/powernow.c    |  6 +++---
- xen/arch/x86/acpi/lib.c                 |  2 +-
- xen/arch/x86/cpu/amd.c                  |  2 +-
- xen/arch/x86/cpu/mcheck/amd_nonfatal.c  |  2 +-
- xen/arch/x86/cpu/mcheck/mce.c           |  6 +++---
- xen/arch/x86/cpu/mcheck/mce_intel.c     |  2 +-
- xen/arch/x86/cpu/mcheck/non-fatal.c     |  2 +-
- xen/arch/x86/cpu/microcode/core.c       |  2 +-
- xen/arch/x86/cpu/mtrr/generic.c         |  2 +-
- xen/arch/x86/cpu/mtrr/main.c            |  2 +-
- xen/arch/x86/cpu/mwait-idle.c           |  6 +++---
- xen/arch/x86/cpu/vpmu.c                 |  4 ++--
- xen/arch/x86/guest/xen/xen.c            |  2 +-
- xen/arch/x86/hvm/nestedhvm.c            |  3 +--
- xen/arch/x86/hvm/vmx/vmcs.c             |  2 +-
- xen/arch/x86/include/asm/mtrr.h         |  2 +-
- xen/arch/x86/irq.c                      |  4 ++--
- xen/arch/x86/nmi.c                      |  2 +-
- xen/arch/x86/oprofile/nmi_int.c         | 10 +++++-----
- xen/arch/x86/oprofile/op_model_athlon.c |  2 +-
- xen/arch/x86/platform_hypercall.c       |  4 ++--
- xen/arch/x86/psr.c                      |  2 +-
- xen/arch/x86/shutdown.c                 |  4 ++--
- xen/arch/x86/smp.c                      |  2 +-
- xen/arch/x86/sysctl.c                   |  2 +-
- xen/arch/x86/time.c                     |  8 ++++----
- xen/common/cpu.c                        |  4 ++--
- xen/common/gdbstub.c                    |  2 +-
- xen/common/keyhandler.c                 |  2 +-
- xen/common/page_alloc.c                 |  2 +-
- 32 files changed, 53 insertions(+), 54 deletions(-)
+v2:
+ * Correct details in commit message.
+---
+ xen/arch/x86/hvm/emulate.c             | 72 +++++++++++++++++-----------------
+ xen/arch/x86/hvm/hvm.c                 |  8 ++--
+ xen/arch/x86/hvm/svm/svm.c             |  4 +-
+ xen/arch/x86/include/asm/hvm/emulate.h |  8 ++--
+ xen/arch/x86/include/asm/mm.h          | 16 +++-----
+ xen/arch/x86/mm.c                      |  4 +-
+ xen/arch/x86/mm/shadow/hvm.c           |  8 ++--
+ xen/arch/x86/pv/emul-gate-op.c         |  9 +++--
+ xen/arch/x86/pv/emul-priv-op.c         | 64 +++++++++++++++---------------
+ xen/arch/x86/pv/emulate.h              |  7 ----
+ xen/arch/x86/pv/ro-page-fault.c        | 31 +++++++++------
+ xen/arch/x86/x86_emulate.c             | 21 +++++-----
+ xen/arch/x86/x86_emulate/x86_emulate.c | 10 ++---
+ xen/arch/x86/x86_emulate/x86_emulate.h | 33 ++++++++--------
+ 14 files changed, 148 insertions(+), 147 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index fb47eb9ad68e..22c8bb0c2d94 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -145,7 +145,7 @@ struct hw_residencies
-     uint64_t cc7;
- };
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index 39dac7fd9d6d..e8d510e0be91 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -1272,7 +1272,7 @@ static int __hvmemul_read(
+     return linear_read(addr, bytes, p_data, pfec, hvmemul_ctxt);
+ }
  
--static void do_get_hw_residencies(void *arg)
-+static void cf_check do_get_hw_residencies(void *arg)
+-static int hvmemul_read(
++static int cf_check hvmemul_read(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+@@ -1290,7 +1290,7 @@ static int hvmemul_read(
+         container_of(ctxt, struct hvm_emulate_ctxt, ctxt));
+ }
+ 
+-int hvmemul_insn_fetch(
++int cf_check hvmemul_insn_fetch(
+     unsigned long offset,
+     void *p_data,
+     unsigned int bytes,
+@@ -1336,7 +1336,7 @@ int hvmemul_insn_fetch(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_write(
++static int cf_check hvmemul_write(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+@@ -1384,7 +1384,7 @@ static int hvmemul_write(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_rmw(
++static int cf_check hvmemul_rmw(
+     enum x86_segment seg,
+     unsigned long offset,
+     unsigned int bytes,
+@@ -1437,7 +1437,7 @@ static int hvmemul_rmw(
+     return rc;
+ }
+ 
+-static int hvmemul_blk(
++static int cf_check hvmemul_blk(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+@@ -1478,7 +1478,7 @@ static int hvmemul_blk(
+     return rc;
+ }
+ 
+-static int hvmemul_write_discard(
++static int cf_check hvmemul_write_discard(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+@@ -1489,7 +1489,7 @@ static int hvmemul_write_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_rep_ins_discard(
++static int cf_check hvmemul_rep_ins_discard(
+     uint16_t src_port,
+     enum x86_segment dst_seg,
+     unsigned long dst_offset,
+@@ -1500,7 +1500,7 @@ static int hvmemul_rep_ins_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_rep_movs_discard(
++static int cf_check hvmemul_rep_movs_discard(
+    enum x86_segment src_seg,
+    unsigned long src_offset,
+    enum x86_segment dst_seg,
+@@ -1512,7 +1512,7 @@ static int hvmemul_rep_movs_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_rep_stos_discard(
++static int cf_check hvmemul_rep_stos_discard(
+     void *p_data,
+     enum x86_segment seg,
+     unsigned long offset,
+@@ -1523,7 +1523,7 @@ static int hvmemul_rep_stos_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_rep_outs_discard(
++static int cf_check hvmemul_rep_outs_discard(
+     enum x86_segment src_seg,
+     unsigned long src_offset,
+     uint16_t dst_port,
+@@ -1534,7 +1534,7 @@ static int hvmemul_rep_outs_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_cmpxchg_discard(
++static int cf_check hvmemul_cmpxchg_discard(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_old,
+@@ -1546,7 +1546,7 @@ static int hvmemul_cmpxchg_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_read_io_discard(
++static int cf_check hvmemul_read_io_discard(
+     unsigned int port,
+     unsigned int bytes,
+     unsigned long *val,
+@@ -1555,7 +1555,7 @@ static int hvmemul_read_io_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_write_io_discard(
++static int cf_check hvmemul_write_io_discard(
+     unsigned int port,
+     unsigned int bytes,
+     unsigned long val,
+@@ -1564,7 +1564,7 @@ static int hvmemul_write_io_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_write_msr_discard(
++static int cf_check hvmemul_write_msr_discard(
+     unsigned int reg,
+     uint64_t val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -1572,7 +1572,7 @@ static int hvmemul_write_msr_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_cache_op_discard(
++static int cf_check hvmemul_cache_op_discard(
+     enum x86emul_cache_op op,
+     enum x86_segment seg,
+     unsigned long offset,
+@@ -1581,7 +1581,7 @@ static int hvmemul_cache_op_discard(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_cmpxchg(
++static int cf_check hvmemul_cmpxchg(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_old,
+@@ -1675,7 +1675,7 @@ static int hvmemul_cmpxchg(
+     return rc;
+ }
+ 
+-static int hvmemul_validate(
++static int cf_check hvmemul_validate(
+     const struct x86_emulate_state *state,
+     struct x86_emulate_ctxt *ctxt)
  {
-     struct cpuinfo_x86 *c = &current_cpu_data;
-     struct hw_residencies *hw_res = arg;
-diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-index 9510f05340aa..8133c2dd958c 100644
---- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
-+++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
-@@ -129,7 +129,7 @@ struct drv_cmd {
-     u32 val;
- };
+@@ -1688,7 +1688,7 @@ static int hvmemul_validate(
+            ? X86EMUL_OKAY : X86EMUL_UNHANDLEABLE;
+ }
  
--static void do_drv_read(void *drvcmd)
-+static void cf_check do_drv_read(void *drvcmd)
- {
-     struct drv_cmd *cmd;
+-static int hvmemul_rep_ins(
++static int cf_check hvmemul_rep_ins(
+     uint16_t src_port,
+     enum x86_segment dst_seg,
+     unsigned long dst_offset,
+@@ -1766,7 +1766,7 @@ static int hvmemul_rep_outs_set_context(
+     return rc;
+ }
  
-@@ -148,7 +148,7 @@ static void do_drv_read(void *drvcmd)
+-static int hvmemul_rep_outs(
++static int cf_check hvmemul_rep_outs(
+     enum x86_segment src_seg,
+     unsigned long src_offset,
+     uint16_t dst_port,
+@@ -1807,7 +1807,7 @@ static int hvmemul_rep_outs(
+                                !!(ctxt->regs->eflags & X86_EFLAGS_DF), gpa);
+ }
+ 
+-static int hvmemul_rep_movs(
++static int cf_check hvmemul_rep_movs(
+    enum x86_segment src_seg,
+    unsigned long src_offset,
+    enum x86_segment dst_seg,
+@@ -1977,7 +1977,7 @@ static int hvmemul_rep_movs(
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
+-static int hvmemul_rep_stos(
++static int cf_check hvmemul_rep_stos(
+     void *p_data,
+     enum x86_segment seg,
+     unsigned long offset,
+@@ -2105,7 +2105,7 @@ static int hvmemul_rep_stos(
      }
  }
  
--static void do_drv_write(void *drvcmd)
-+static void cf_check do_drv_write(void *drvcmd)
- {
-     struct drv_cmd *cmd;
-     uint64_t msr_content;
-@@ -244,7 +244,7 @@ struct perf_pair {
- static DEFINE_PER_CPU(struct perf_pair, gov_perf_pair);
- static DEFINE_PER_CPU(struct perf_pair, usr_perf_pair);
- 
--static void read_measured_perf_ctrs(void *_readin)
-+static void cf_check read_measured_perf_ctrs(void *_readin)
- {
-     struct perf_pair *readin = _readin;
- 
-@@ -340,7 +340,7 @@ static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
-     return extract_freq(get_cur_val(cpumask_of(cpu)), data);
+-static int hvmemul_read_segment(
++static int cf_check hvmemul_read_segment(
+     enum x86_segment seg,
+     struct segment_register *reg,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2122,7 +2122,7 @@ static int hvmemul_read_segment(
+     return X86EMUL_OKAY;
  }
  
--static void feature_detect(void *info)
-+static void cf_check feature_detect(void *info)
- {
-     struct cpufreq_policy *policy = info;
-     unsigned int eax;
-diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
-index da8fc40b9a6f..ca71ecf72d67 100644
---- a/xen/arch/x86/acpi/cpufreq/powernow.c
-+++ b/xen/arch/x86/acpi/cpufreq/powernow.c
-@@ -44,12 +44,12 @@
- 
- #define ARCH_CPU_FLAG_RESUME	1
- 
--static void transition_pstate(void *pstate)
-+static void cf_check transition_pstate(void *pstate)
- {
-     wrmsrl(MSR_PSTATE_CTRL, *(unsigned int *)pstate);
+-static int hvmemul_write_segment(
++static int cf_check hvmemul_write_segment(
+     enum x86_segment seg,
+     const struct segment_register *reg,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2141,7 +2141,7 @@ static int hvmemul_write_segment(
+     return X86EMUL_OKAY;
  }
  
--static void update_cpb(void *data)
-+static void cf_check update_cpb(void *data)
- {
-     struct cpufreq_policy *policy = data;
+-static int hvmemul_read_io(
++static int cf_check hvmemul_read_io(
+     unsigned int port,
+     unsigned int bytes,
+     unsigned long *val,
+@@ -2158,7 +2158,7 @@ static int hvmemul_read_io(
+     return hvmemul_do_pio_buffer(port, bytes, IOREQ_READ, val);
+ }
  
-@@ -165,7 +165,7 @@ struct amd_cpu_data {
-     u32 max_hw_pstate;
+-static int hvmemul_write_io(
++static int cf_check hvmemul_write_io(
+     unsigned int port,
+     unsigned int bytes,
+     unsigned long val,
+@@ -2167,7 +2167,7 @@ static int hvmemul_write_io(
+     return hvmemul_do_pio_buffer(port, bytes, IOREQ_WRITE, &val);
+ }
+ 
+-static int hvmemul_read_cr(
++static int cf_check hvmemul_read_cr(
+     unsigned int reg,
+     unsigned long *val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2188,7 +2188,7 @@ static int hvmemul_read_cr(
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
+-static int hvmemul_write_cr(
++static int cf_check hvmemul_write_cr(
+     unsigned int reg,
+     unsigned long val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2232,7 +2232,7 @@ static int hvmemul_write_cr(
+     return rc;
+ }
+ 
+-static int hvmemul_read_xcr(
++static int cf_check hvmemul_read_xcr(
+     unsigned int reg,
+     uint64_t *val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2245,7 +2245,7 @@ static int hvmemul_read_xcr(
+     return rc;
+ }
+ 
+-static int hvmemul_write_xcr(
++static int cf_check hvmemul_write_xcr(
+     unsigned int reg,
+     uint64_t val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2255,7 +2255,7 @@ static int hvmemul_write_xcr(
+     return x86emul_write_xcr(reg, val, ctxt);
+ }
+ 
+-static int hvmemul_read_msr(
++static int cf_check hvmemul_read_msr(
+     unsigned int reg,
+     uint64_t *val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2268,7 +2268,7 @@ static int hvmemul_read_msr(
+     return rc;
+ }
+ 
+-static int hvmemul_write_msr(
++static int cf_check hvmemul_write_msr(
+     unsigned int reg,
+     uint64_t val,
+     struct x86_emulate_ctxt *ctxt)
+@@ -2281,7 +2281,7 @@ static int hvmemul_write_msr(
+     return rc;
+ }
+ 
+-static int hvmemul_cache_op(
++static int cf_check hvmemul_cache_op(
+     enum x86emul_cache_op op,
+     enum x86_segment seg,
+     unsigned long offset,
+@@ -2353,7 +2353,7 @@ static int hvmemul_cache_op(
+     return X86EMUL_OKAY;
+ }
+ 
+-static int hvmemul_get_fpu(
++static int cf_check hvmemul_get_fpu(
+     enum x86_emulate_fpu_type type,
+     struct x86_emulate_ctxt *ctxt)
+ {
+@@ -2395,7 +2395,7 @@ static int hvmemul_get_fpu(
+     return X86EMUL_OKAY;
+ }
+ 
+-static void hvmemul_put_fpu(
++static void cf_check hvmemul_put_fpu(
+     struct x86_emulate_ctxt *ctxt,
+     enum x86_emulate_fpu_type backout,
+     const struct x86_emul_fpu_aux *aux)
+@@ -2482,7 +2482,7 @@ static void hvmemul_put_fpu(
+     }
+ }
+ 
+-static int hvmemul_tlb_op(
++static int cf_check hvmemul_tlb_op(
+     enum x86emul_tlb_op op,
+     unsigned long addr,
+     unsigned long aux,
+@@ -2539,7 +2539,7 @@ static int hvmemul_tlb_op(
+     return rc;
+ }
+ 
+-static int hvmemul_vmfunc(
++static int cf_check hvmemul_vmfunc(
+     struct x86_emulate_ctxt *ctxt)
+ {
+     int rc;
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 9e4924649077..e87e809a945d 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -3755,8 +3755,8 @@ void hvm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
+     }
+ }
+ 
+-static bool is_sysdesc_access(const struct x86_emulate_state *state,
+-                              const struct x86_emulate_ctxt *ctxt)
++static bool cf_check is_sysdesc_access(
++    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
+ {
+     unsigned int ext;
+     int mode = x86_insn_modrm(state, NULL, &ext);
+@@ -3796,8 +3796,8 @@ int hvm_descriptor_access_intercept(uint64_t exit_info,
+     return X86EMUL_OKAY;
+ }
+ 
+-static bool is_cross_vendor(const struct x86_emulate_state *state,
+-                            const struct x86_emulate_ctxt *ctxt)
++static bool cf_check is_cross_vendor(
++    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
+ {
+     switch ( ctxt->opcode )
+     {
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 4c4ebda5e6e4..dedb2848e6a1 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -2447,8 +2447,8 @@ static void svm_invlpg_intercept(unsigned long linear)
+     paging_invlpg(current, linear);
+ }
+ 
+-static bool is_invlpg(const struct x86_emulate_state *state,
+-                      const struct x86_emulate_ctxt *ctxt)
++static bool cf_check is_invlpg(
++    const struct x86_emulate_state *state, const struct x86_emulate_ctxt *ctxt)
+ {
+     unsigned int ext;
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/emulate.h b/xen/arch/x86/include/asm/hvm/emulate.h
+index e67004060345..d8ba2df4e4a2 100644
+--- a/xen/arch/x86/include/asm/hvm/emulate.h
++++ b/xen/arch/x86/include/asm/hvm/emulate.h
+@@ -92,10 +92,10 @@ static inline bool handle_mmio(void)
+     return hvm_emulate_one_insn(x86_insn_is_mem_access, "MMIO");
+ }
+ 
+-int hvmemul_insn_fetch(unsigned long offset,
+-                       void *p_data,
+-                       unsigned int bytes,
+-                       struct x86_emulate_ctxt *ctxt);
++int cf_check hvmemul_insn_fetch(
++    unsigned long offset, void *p_data, unsigned int bytes,
++    struct x86_emulate_ctxt *ctxt);
++
+ int hvmemul_do_pio_buffer(uint16_t port,
+                           unsigned int size,
+                           uint8_t dir,
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 9b9de4c6bef7..a684ffabfaae 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -538,16 +538,12 @@ struct mmio_ro_emulate_ctxt {
+         unsigned int seg, bdf;
  };
  
--static void get_cpu_data(void *arg)
-+static void cf_check get_cpu_data(void *arg)
- {
-     struct amd_cpu_data *data = arg;
-     struct processor_performance *perf = data->perf;
-diff --git a/xen/arch/x86/acpi/lib.c b/xen/arch/x86/acpi/lib.c
-index b66e7338e74d..43831b92d132 100644
---- a/xen/arch/x86/acpi/lib.c
-+++ b/xen/arch/x86/acpi/lib.c
-@@ -99,7 +99,7 @@ unsigned int acpi_get_processor_id(unsigned int cpu)
- 	return INVALID_ACPIID;
+-extern int mmio_ro_emulated_write(enum x86_segment seg,
+-                                  unsigned long offset,
+-                                  void *p_data,
+-                                  unsigned int bytes,
+-                                  struct x86_emulate_ctxt *ctxt);
+-extern int mmcfg_intercept_write(enum x86_segment seg,
+-                                 unsigned long offset,
+-                                 void *p_data,
+-                                 unsigned int bytes,
+-                                 struct x86_emulate_ctxt *ctxt);
++int cf_check mmio_ro_emulated_write(
++    enum x86_segment seg, unsigned long offset, void *p_data,
++    unsigned int bytes, struct x86_emulate_ctxt *ctxt);
++int cf_check mmcfg_intercept_write(
++    enum x86_segment seg, unsigned long offset, void *p_data,
++    unsigned int bytes, struct x86_emulate_ctxt *ctxt);
+ 
+ int audit_adjust_pgtables(struct domain *d, int dir, int noisy);
+ 
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 4b6956c5be78..4d0bebbf8aab 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -4852,7 +4852,7 @@ long arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+     return 0;
  }
  
--static void get_mwait_ecx(void *info)
-+static void cf_check get_mwait_ecx(void *info)
- {
- 	*(u32 *)info = cpuid_ecx(CPUID_MWAIT_LEAF);
- }
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index a8e37dbb1f5c..2d18223f20ef 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -430,7 +430,7 @@ static void disable_c1_ramping(void)
- 	}
+-int mmio_ro_emulated_write(
++int cf_check mmio_ro_emulated_write(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+@@ -4873,7 +4873,7 @@ int mmio_ro_emulated_write(
+     return X86EMUL_OKAY;
  }
  
--static void disable_c1e(void *unused)
-+static void cf_check disable_c1e(void *unused)
- {
- 	uint64_t msr_content;
- 
-diff --git a/xen/arch/x86/cpu/mcheck/amd_nonfatal.c b/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
-index da0bf85f0223..efb45c931e1f 100644
---- a/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
-+++ b/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
-@@ -79,7 +79,7 @@ static int variable_period = 1;
-  * Collects information of correctable errors and notifies
-  * Dom0 via an event.
-  */
--static void mce_amd_checkregs(void *info)
-+static void cf_check mce_amd_checkregs(void *info)
- {
- 	mctelem_cookie_t mctc;
- 	struct mca_summary bs;
-diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
-index a449fa0424ce..43f6c8471a90 100644
---- a/xen/arch/x86/cpu/mcheck/mce.c
-+++ b/xen/arch/x86/cpu/mcheck/mce.c
-@@ -961,7 +961,7 @@ void x86_mcinfo_dump(struct mc_info *mi)
-     } while ( 1 );
+-int mmcfg_intercept_write(
++int cf_check mmcfg_intercept_write(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index f2991bc176f0..c90d326becb3 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -148,7 +148,7 @@ hvm_read(enum x86_segment seg,
+     return X86EMUL_UNHANDLEABLE;
  }
  
--static void do_mc_get_cpu_info(void *v)
-+static void cf_check do_mc_get_cpu_info(void *v)
- {
-     int cpu = smp_processor_id();
-     int cindex, cpn;
-@@ -1242,7 +1242,7 @@ static void x86_mc_hwcr_wren_restore(uint64_t hwcr)
-         wrmsrl(MSR_K8_HWCR, hwcr);
+-static int
++static int cf_check
+ hvm_emulate_read(enum x86_segment seg,
+                  unsigned long offset,
+                  void *p_data,
+@@ -161,7 +161,7 @@ hvm_emulate_read(enum x86_segment seg,
+                     container_of(ctxt, struct sh_emulate_ctxt, ctxt));
  }
  
--static void x86_mc_msrinject(void *data)
-+static void cf_check x86_mc_msrinject(void *data)
- {
-     struct xen_mc_msrinject *mci = data;
-     struct mcinfo_msr *msr;
-@@ -1274,7 +1274,7 @@ static void x86_mc_msrinject(void *data)
+-static int
++static int cf_check
+ hvm_emulate_insn_fetch(unsigned long offset,
+                        void *p_data,
+                        unsigned int bytes,
+@@ -181,7 +181,7 @@ hvm_emulate_insn_fetch(unsigned long offset,
+     return X86EMUL_OKAY;
  }
  
- /*ARGSUSED*/
--static void x86_mc_mceinject(void *data)
-+static void cf_check x86_mc_mceinject(void *data)
- {
-     printk("Simulating #MC on cpu %d\n", smp_processor_id());
-     __asm__ __volatile__("int $0x12");
-diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
-index b6da8262e662..a691e10bdcd6 100644
---- a/xen/arch/x86/cpu/mcheck/mce_intel.c
-+++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
-@@ -599,7 +599,7 @@ static void mce_set_owner(void)
-     cmci_discover();
+-static int
++static int cf_check
+ hvm_emulate_write(enum x86_segment seg,
+                   unsigned long offset,
+                   void *p_data,
+@@ -234,7 +234,7 @@ hvm_emulate_write(enum x86_segment seg,
+     return X86EMUL_OKAY;
  }
  
--static void __cpu_mcheck_distribute_cmci(void *unused)
-+static void cf_check __cpu_mcheck_distribute_cmci(void *unused)
- {
-     cmci_discover();
- }
-diff --git a/xen/arch/x86/cpu/mcheck/non-fatal.c b/xen/arch/x86/cpu/mcheck/non-fatal.c
-index f7e411c0870e..1c0c32ba0821 100644
---- a/xen/arch/x86/cpu/mcheck/non-fatal.c
-+++ b/xen/arch/x86/cpu/mcheck/non-fatal.c
-@@ -32,7 +32,7 @@ static uint64_t period = MCE_PERIOD;
- static int adjust = 0;
- static int variable_period = 1;
+-static int
++static int cf_check
+ hvm_emulate_cmpxchg(enum x86_segment seg,
+                     unsigned long offset,
+                     void *p_old,
+diff --git a/xen/arch/x86/pv/emul-gate-op.c b/xen/arch/x86/pv/emul-gate-op.c
+index 68ec4d11f6bb..758a20ad9df4 100644
+--- a/xen/arch/x86/pv/emul-gate-op.c
++++ b/xen/arch/x86/pv/emul-gate-op.c
+@@ -96,8 +96,9 @@ struct gate_op_ctxt {
+     bool insn_fetch;
+ };
  
--static void mce_checkregs (void *info)
-+static void cf_check mce_checkregs(void *info)
+-static int read_mem(enum x86_segment seg, unsigned long offset, void *p_data,
+-                    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
++static int cf_check read_mem(
++    enum x86_segment seg, unsigned long offset, void *p_data,
++    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
  {
- 	mctelem_cookie_t mctc;
- 	struct mca_summary bs;
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 9631042190ab..841364208053 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -533,7 +533,7 @@ static int control_thread_fn(const struct microcode_patch *patch)
+     const struct gate_op_ctxt *goc =
+         container_of(ctxt, struct gate_op_ctxt, ctxt);
+@@ -163,8 +164,8 @@ static int read_mem(enum x86_segment seg, unsigned long offset, void *p_data,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int fetch(unsigned long offset, void *p_data,
+-                 unsigned int bytes, struct x86_emulate_ctxt *ctxt)
++static int cf_check fetch(unsigned long offset, void *p_data,
++                          unsigned int bytes, struct x86_emulate_ctxt *ctxt)
+ {
+     return read_mem(x86_seg_cs, offset, p_data, bytes, ctxt);
+ }
+diff --git a/xen/arch/x86/pv/emul-priv-op.c b/xen/arch/x86/pv/emul-priv-op.c
+index c78be6d92b21..c46c072f93db 100644
+--- a/xen/arch/x86/pv/emul-priv-op.c
++++ b/xen/arch/x86/pv/emul-priv-op.c
+@@ -358,8 +358,9 @@ static unsigned int check_guest_io_breakpoint(struct vcpu *v,
+     return match;
+ }
+ 
+-static int read_io(unsigned int port, unsigned int bytes,
+-                   unsigned long *val, struct x86_emulate_ctxt *ctxt)
++static int cf_check read_io(
++    unsigned int port, unsigned int bytes, unsigned long *val,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
+     struct vcpu *curr = current;
+@@ -462,8 +463,9 @@ static void guest_io_write(unsigned int port, unsigned int bytes,
+     }
+ }
+ 
+-static int write_io(unsigned int port, unsigned int bytes,
+-                    unsigned long val, struct x86_emulate_ctxt *ctxt)
++static int cf_check write_io(
++    unsigned int port, unsigned int bytes, unsigned long val,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
+     struct vcpu *curr = current;
+@@ -493,9 +495,9 @@ static int write_io(unsigned int port, unsigned int bytes,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int read_segment(enum x86_segment seg,
+-                        struct segment_register *reg,
+-                        struct x86_emulate_ctxt *ctxt)
++static int cf_check read_segment(
++    enum x86_segment seg, struct segment_register *reg,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     /* Check if this is an attempt to access the I/O bitmap. */
+     if ( seg == x86_seg_tr )
+@@ -607,10 +609,10 @@ static int pv_emul_virt_to_linear(unsigned long base, unsigned long offset,
+     return rc;
+ }
+ 
+-static int rep_ins(uint16_t port,
+-                   enum x86_segment seg, unsigned long offset,
+-                   unsigned int bytes_per_rep, unsigned long *reps,
+-                   struct x86_emulate_ctxt *ctxt)
++static int cf_check rep_ins(
++    uint16_t port, enum x86_segment seg, unsigned long offset,
++    unsigned int bytes_per_rep, unsigned long *reps,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
+     struct vcpu *curr = current;
+@@ -675,10 +677,10 @@ static int rep_ins(uint16_t port,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int rep_outs(enum x86_segment seg, unsigned long offset,
+-                    uint16_t port,
+-                    unsigned int bytes_per_rep, unsigned long *reps,
+-                    struct x86_emulate_ctxt *ctxt)
++static int cf_check rep_outs(
++    enum x86_segment seg, unsigned long offset, uint16_t port,
++    unsigned int bytes_per_rep, unsigned long *reps,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     struct priv_op_ctxt *poc = container_of(ctxt, struct priv_op_ctxt, ctxt);
+     struct vcpu *curr = current;
+@@ -744,8 +746,8 @@ static int rep_outs(enum x86_segment seg, unsigned long offset,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int read_cr(unsigned int reg, unsigned long *val,
+-                   struct x86_emulate_ctxt *ctxt)
++static int cf_check read_cr(
++    unsigned int reg, unsigned long *val, struct x86_emulate_ctxt *ctxt)
+ {
+     const struct vcpu *curr = current;
+ 
+@@ -787,8 +789,8 @@ static int read_cr(unsigned int reg, unsigned long *val,
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
+-static int write_cr(unsigned int reg, unsigned long val,
+-                    struct x86_emulate_ctxt *ctxt)
++static int cf_check write_cr(
++    unsigned int reg, unsigned long val, struct x86_emulate_ctxt *ctxt)
+ {
+     struct vcpu *curr = current;
+ 
+@@ -871,8 +873,8 @@ static uint64_t guest_efer(const struct domain *d)
+     return val;
+ }
+ 
+-static int read_msr(unsigned int reg, uint64_t *val,
+-                    struct x86_emulate_ctxt *ctxt)
++static int cf_check read_msr(
++    unsigned int reg, uint64_t *val, struct x86_emulate_ctxt *ctxt)
+ {
+     struct vcpu *curr = current;
+     const struct domain *currd = curr->domain;
+@@ -1020,8 +1022,8 @@ static int read_msr(unsigned int reg, uint64_t *val,
      return ret;
  }
  
--static int do_microcode_update(void *patch)
-+static int cf_check do_microcode_update(void *patch)
+-static int write_msr(unsigned int reg, uint64_t val,
+-                     struct x86_emulate_ctxt *ctxt)
++static int cf_check write_msr(
++    unsigned int reg, uint64_t val, struct x86_emulate_ctxt *ctxt)
  {
-     unsigned int cpu = smp_processor_id();
-     int ret;
-diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
-index 883e3398ff71..7cf4cd01f3f6 100644
---- a/xen/arch/x86/cpu/mtrr/generic.c
-+++ b/xen/arch/x86/cpu/mtrr/generic.c
-@@ -84,7 +84,7 @@ bool is_var_mtrr_overlapped(const struct mtrr_state *m)
+     struct vcpu *curr = current;
+     const struct domain *currd = curr->domain;
+@@ -1188,8 +1190,9 @@ static int write_msr(unsigned int reg, uint64_t val,
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
+-static int cache_op(enum x86emul_cache_op op, enum x86_segment seg,
+-                    unsigned long offset, struct x86_emulate_ctxt *ctxt)
++static int cf_check cache_op(
++    enum x86emul_cache_op op, enum x86_segment seg,
++    unsigned long offset, struct x86_emulate_ctxt *ctxt)
+ {
+     ASSERT(op == x86emul_wbinvd || op == x86emul_wbnoinvd);
+ 
+@@ -1208,8 +1211,8 @@ static int cache_op(enum x86emul_cache_op op, enum x86_segment seg,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int validate(const struct x86_emulate_state *state,
+-                    struct x86_emulate_ctxt *ctxt)
++static int cf_check validate(
++    const struct x86_emulate_state *state, struct x86_emulate_ctxt *ctxt)
+ {
+     switch ( ctxt->opcode )
+     {
+@@ -1258,10 +1261,9 @@ static int validate(const struct x86_emulate_state *state,
+     return X86EMUL_UNHANDLEABLE;
+ }
+ 
+-static int insn_fetch(unsigned long offset,
+-                      void *p_data,
+-                      unsigned int bytes,
+-                      struct x86_emulate_ctxt *ctxt)
++static int cf_check insn_fetch(
++    unsigned long offset, void *p_data, unsigned int bytes,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     const struct priv_op_ctxt *poc =
+         container_of(ctxt, struct priv_op_ctxt, ctxt);
+diff --git a/xen/arch/x86/pv/emulate.h b/xen/arch/x86/pv/emulate.h
+index 4b845b08e372..49a4d34832df 100644
+--- a/xen/arch/x86/pv/emulate.h
++++ b/xen/arch/x86/pv/emulate.h
+@@ -12,13 +12,6 @@ int pv_emul_read_descriptor(unsigned int sel, const struct vcpu *v,
+ 
+ void pv_emul_instruction_done(struct cpu_user_regs *regs, unsigned long rip);
+ 
+-static inline int pv_emul_is_mem_write(const struct x86_emulate_state *state,
+-                                       struct x86_emulate_ctxt *ctxt)
+-{
+-    return x86_insn_is_mem_write(state, ctxt) ? X86EMUL_OKAY
+-                                              : X86EMUL_UNHANDLEABLE;
+-}
+-
+ /* Return a pointer to the GDT/LDT descriptor referenced by sel. */
+ static inline const seg_desc_t *gdt_ldt_desc_ptr(unsigned int sel)
+ {
+diff --git a/xen/arch/x86/pv/ro-page-fault.c b/xen/arch/x86/pv/ro-page-fault.c
+index ef4d146c1d9e..5963f5ee2d51 100644
+--- a/xen/arch/x86/pv/ro-page-fault.c
++++ b/xen/arch/x86/pv/ro-page-fault.c
+@@ -26,6 +26,13 @@
+ #include "emulate.h"
+ #include "mm.h"
+ 
++static int cf_check pv_emul_is_mem_write(
++    const struct x86_emulate_state *state, struct x86_emulate_ctxt *ctxt)
++{
++    return x86_insn_is_mem_write(state, ctxt) ? X86EMUL_OKAY
++                                              : X86EMUL_UNHANDLEABLE;
++}
++
+ /*********************
+  * Writable Pagetables
+  */
+@@ -35,9 +42,9 @@ struct ptwr_emulate_ctxt {
+     l1_pgentry_t  pte;
+ };
+ 
+-static int ptwr_emulated_read(enum x86_segment seg, unsigned long offset,
+-                              void *p_data, unsigned int bytes,
+-                              struct x86_emulate_ctxt *ctxt)
++static int cf_check ptwr_emulated_read(
++    enum x86_segment seg, unsigned long offset, void *p_data,
++    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
+ {
+     unsigned int rc = bytes;
+     unsigned long addr = offset;
+@@ -52,9 +59,9 @@ static int ptwr_emulated_read(enum x86_segment seg, unsigned long offset,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int ptwr_emulated_insn_fetch(unsigned long offset,
+-                                    void *p_data, unsigned int bytes,
+-                                    struct x86_emulate_ctxt *ctxt)
++static int cf_check ptwr_emulated_insn_fetch(
++    unsigned long offset, void *p_data, unsigned int bytes,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     unsigned int rc = copy_from_guest_pv(p_data, (void *)offset, bytes);
+ 
+@@ -218,9 +225,9 @@ static int ptwr_emulated_update(unsigned long addr, intpte_t *p_old,
+     return X86EMUL_OKAY;
+ }
+ 
+-static int ptwr_emulated_write(enum x86_segment seg, unsigned long offset,
+-                               void *p_data, unsigned int bytes,
+-                               struct x86_emulate_ctxt *ctxt)
++static int cf_check ptwr_emulated_write(
++    enum x86_segment seg, unsigned long offset, void *p_data,
++    unsigned int bytes, struct x86_emulate_ctxt *ctxt)
+ {
+     intpte_t val = 0;
+ 
+@@ -236,9 +243,9 @@ static int ptwr_emulated_write(enum x86_segment seg, unsigned long offset,
+     return ptwr_emulated_update(offset, NULL, val, bytes, ctxt);
+ }
+ 
+-static int ptwr_emulated_cmpxchg(enum x86_segment seg, unsigned long offset,
+-                                 void *p_old, void *p_new, unsigned int bytes,
+-                                 bool lock, struct x86_emulate_ctxt *ctxt)
++static int cf_check ptwr_emulated_cmpxchg(
++    enum x86_segment seg, unsigned long offset, void *p_old, void *p_new,
++    unsigned int bytes, bool lock, struct x86_emulate_ctxt *ctxt)
+ {
+     intpte_t old = 0, new = 0;
+     int rc;
+diff --git a/xen/arch/x86/x86_emulate.c b/xen/arch/x86/x86_emulate.c
+index 1e082e6f3b2d..60191a94dc18 100644
+--- a/xen/arch/x86/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate.c
+@@ -53,8 +53,8 @@
+ 
+ #include "x86_emulate/x86_emulate.c"
+ 
+-int x86emul_read_xcr(unsigned int reg, uint64_t *val,
+-                     struct x86_emulate_ctxt *ctxt)
++int cf_check x86emul_read_xcr(
++    unsigned int reg, uint64_t *val, struct x86_emulate_ctxt *ctxt)
+ {
+     switch ( reg )
+     {
+@@ -77,8 +77,8 @@ int x86emul_read_xcr(unsigned int reg, uint64_t *val,
+ }
+ 
+ /* Note: May be called with ctxt=NULL. */
+-int x86emul_write_xcr(unsigned int reg, uint64_t val,
+-                      struct x86_emulate_ctxt *ctxt)
++int cf_check x86emul_write_xcr(
++    unsigned int reg, uint64_t val, struct x86_emulate_ctxt *ctxt)
+ {
+     switch ( reg )
+     {
+@@ -100,8 +100,8 @@ int x86emul_write_xcr(unsigned int reg, uint64_t val,
+ 
+ #ifdef CONFIG_PV
+ /* Called with NULL ctxt in hypercall context. */
+-int x86emul_read_dr(unsigned int reg, unsigned long *val,
+-                    struct x86_emulate_ctxt *ctxt)
++int cf_check x86emul_read_dr(
++    unsigned int reg, unsigned long *val, struct x86_emulate_ctxt *ctxt)
+ {
+     struct vcpu *curr = current;
+ 
+@@ -143,8 +143,8 @@ int x86emul_read_dr(unsigned int reg, unsigned long *val,
+     return X86EMUL_OKAY;
+ }
+ 
+-int x86emul_write_dr(unsigned int reg, unsigned long val,
+-                     struct x86_emulate_ctxt *ctxt)
++int cf_check x86emul_write_dr(
++    unsigned int reg, unsigned long val, struct x86_emulate_ctxt *ctxt)
+ {
+     struct vcpu *curr = current;
+ 
+@@ -167,8 +167,9 @@ int x86emul_write_dr(unsigned int reg, unsigned long val,
+ }
+ #endif /* CONFIG_PV */
+ 
+-int x86emul_cpuid(uint32_t leaf, uint32_t subleaf,
+-                  struct cpuid_leaf *res, struct x86_emulate_ctxt *ctxt)
++int cf_check x86emul_cpuid(
++    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *res,
++    struct x86_emulate_ctxt *ctxt)
+ {
+     guest_cpuid(current, leaf, subleaf, res);
+ 
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.c b/xen/arch/x86/x86_emulate/x86_emulate.c
+index 824af9d899b5..5cdef535affd 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -2524,7 +2524,7 @@ static void adjust_bnd(struct x86_emulate_ctxt *ctxt,
+  done:;
+ }
+ 
+-int x86emul_unhandleable_rw(
++int cf_check x86emul_unhandleable_rw(
+     enum x86_segment seg,
+     unsigned long offset,
+     void *p_data,
+@@ -12318,7 +12318,7 @@ x86_insn_operand_ea(const struct x86_emulate_state *state,
+  * memory operand (like POP), but it does not mean e.g. segment selector
+  * loads, where the descriptor table access is considered an implicit one.
+  */
+-bool
++bool cf_check
+ x86_insn_is_mem_access(const struct x86_emulate_state *state,
+                        const struct x86_emulate_ctxt *ctxt)
+ {
+@@ -12410,7 +12410,7 @@ x86_insn_is_mem_access(const struct x86_emulate_state *state,
+  * loads, where the (possible) descriptor table write is considered an
+  * implicit access.
+  */
+-bool
++bool cf_check
+ x86_insn_is_mem_write(const struct x86_emulate_state *state,
+                       const struct x86_emulate_ctxt *ctxt)
+ {
+@@ -12582,7 +12582,7 @@ x86_insn_is_mem_write(const struct x86_emulate_state *state,
      return false;
  }
  
--void mtrr_save_fixed_ranges(void *info)
-+void cf_check mtrr_save_fixed_ranges(void *info)
+-bool
++bool cf_check
+ x86_insn_is_portio(const struct x86_emulate_state *state,
+                    const struct x86_emulate_ctxt *ctxt)
  {
- 	get_fixed_ranges(mtrr_state.fixed_ranges);
- }
-diff --git a/xen/arch/x86/cpu/mtrr/main.c b/xen/arch/x86/cpu/mtrr/main.c
-index 428133100d46..4e01c8d6f9df 100644
---- a/xen/arch/x86/cpu/mtrr/main.c
-+++ b/xen/arch/x86/cpu/mtrr/main.c
-@@ -131,7 +131,7 @@ struct set_mtrr_data {
-  */
- int hold_mtrr_updates_on_aps;
- 
--static void ipi_handler(void *info)
-+static void cf_check ipi_handler(void *info)
- /*  [SUMMARY] Synchronisation handler. Executed by "other" CPUs.
-     [RETURNS] Nothing.
- */
-diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
-index fe1b7af25f01..927ce1b67aa5 100644
---- a/xen/arch/x86/cpu/mwait-idle.c
-+++ b/xen/arch/x86/cpu/mwait-idle.c
-@@ -877,7 +877,7 @@ static void mwait_idle(void)
- 		cpuidle_current_governor->reflect(power);
+@@ -12597,7 +12597,7 @@ x86_insn_is_portio(const struct x86_emulate_state *state,
+     return false;
  }
  
--static void auto_demotion_disable(void *dummy)
-+static void cf_check auto_demotion_disable(void *dummy)
+-bool
++bool cf_check
+ x86_insn_is_cr_access(const struct x86_emulate_state *state,
+                       const struct x86_emulate_ctxt *ctxt)
  {
- 	u64 msr_bits;
- 
-@@ -886,13 +886,13 @@ static void auto_demotion_disable(void *dummy)
- 	wrmsrl(MSR_PKG_CST_CONFIG_CONTROL, msr_bits);
+diff --git a/xen/arch/x86/x86_emulate/x86_emulate.h b/xen/arch/x86/x86_emulate/x86_emulate.h
+index 419def8790a0..4732855c40ed 100644
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -737,7 +737,7 @@ static inline unsigned long *decode_gpr(struct cpu_user_regs *regs,
  }
  
--static void byt_auto_demotion_disable(void *dummy)
-+static void cf_check byt_auto_demotion_disable(void *dummy)
- {
- 	wrmsrl(MSR_CC6_DEMOTION_POLICY_CONFIG, 0);
- 	wrmsrl(MSR_MC6_DEMOTION_POLICY_CONFIG, 0);
- }
+ /* Unhandleable read, write or instruction fetch */
+-int
++int cf_check
+ x86emul_unhandleable_rw(
+     enum x86_segment seg,
+     unsigned long offset,
+@@ -766,16 +766,16 @@ x86_insn_immediate(const struct x86_emulate_state *state,
+ unsigned int
+ x86_insn_length(const struct x86_emulate_state *state,
+                 const struct x86_emulate_ctxt *ctxt);
+-bool
++bool cf_check
+ x86_insn_is_mem_access(const struct x86_emulate_state *state,
+                        const struct x86_emulate_ctxt *ctxt);
+-bool
++bool cf_check
+ x86_insn_is_mem_write(const struct x86_emulate_state *state,
+                       const struct x86_emulate_ctxt *ctxt);
+-bool
++bool cf_check
+ x86_insn_is_portio(const struct x86_emulate_state *state,
+                    const struct x86_emulate_ctxt *ctxt);
+-bool
++bool cf_check
+ x86_insn_is_cr_access(const struct x86_emulate_state *state,
+                       const struct x86_emulate_ctxt *ctxt);
  
--static void c1e_promotion_disable(void *dummy)
-+static void cf_check c1e_promotion_disable(void *dummy)
- {
- 	u64 msr_bits;
+@@ -787,17 +787,18 @@ void x86_emulate_free_state(struct x86_emulate_state *state);
  
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index df3c9201b2c1..4fedc7c57012 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -335,7 +335,7 @@ void vpmu_do_interrupt(struct cpu_user_regs *regs)
+ #ifdef __XEN__
+ 
+-int x86emul_read_xcr(unsigned int reg, uint64_t *val,
+-                     struct x86_emulate_ctxt *ctxt);
+-int x86emul_write_xcr(unsigned int reg, uint64_t val,
+-                      struct x86_emulate_ctxt *ctxt);
+-
+-int x86emul_read_dr(unsigned int reg, unsigned long *val,
+-                    struct x86_emulate_ctxt *ctxt);
+-int x86emul_write_dr(unsigned int reg, unsigned long val,
+-                     struct x86_emulate_ctxt *ctxt);
+-int x86emul_cpuid(uint32_t leaf, uint32_t subleaf,
+-                  struct cpuid_leaf *res, struct x86_emulate_ctxt *ctxt);
++int cf_check x86emul_read_xcr(
++    unsigned int reg, uint64_t *val, struct x86_emulate_ctxt *ctxt);
++int cf_check x86emul_write_xcr(
++    unsigned int reg, uint64_t val, struct x86_emulate_ctxt *ctxt);
++
++int cf_check x86emul_read_dr(
++    unsigned int reg, unsigned long *val, struct x86_emulate_ctxt *ctxt);
++int cf_check x86emul_write_dr(
++    unsigned int reg, unsigned long val, struct x86_emulate_ctxt *ctxt);
++int cf_check x86emul_cpuid(
++    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *res,
++    struct x86_emulate_ctxt *ctxt);
+ 
  #endif
- }
  
--static void vpmu_save_force(void *arg)
-+static void cf_check vpmu_save_force(void *arg)
- {
-     struct vcpu *v = arg;
-     struct vpmu_struct *vpmu = vcpu_vpmu(v);
-@@ -528,7 +528,7 @@ void vpmu_initialise(struct vcpu *v)
-         put_vpmu(v);
- }
- 
--static void vpmu_clear_last(void *arg)
-+static void cf_check vpmu_clear_last(void *arg)
- {
-     if ( this_cpu(last_vcpu) == arg )
-         this_cpu(last_vcpu) = NULL;
-diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
-index 2ff63d370a8a..b2aa3a009b4a 100644
---- a/xen/arch/x86/guest/xen/xen.c
-+++ b/xen/arch/x86/guest/xen/xen.c
-@@ -289,7 +289,7 @@ int xg_free_unused_page(mfn_t mfn)
-     return rangeset_remove_range(mem, mfn_x(mfn), mfn_x(mfn));
- }
- 
--static void ap_resume(void *unused)
-+static void cf_check ap_resume(void *unused)
- {
-     BUG_ON(map_vcpuinfo());
-     BUG_ON(init_evtchn());
-diff --git a/xen/arch/x86/hvm/nestedhvm.c b/xen/arch/x86/hvm/nestedhvm.c
-index 23516884482b..58370190ffc9 100644
---- a/xen/arch/x86/hvm/nestedhvm.c
-+++ b/xen/arch/x86/hvm/nestedhvm.c
-@@ -82,8 +82,7 @@ nestedhvm_vcpu_destroy(struct vcpu *v)
-     alternative_vcall(hvm_funcs.nhvm_vcpu_destroy, v);
- }
- 
--static void
--nestedhvm_flushtlb_ipi(void *info)
-+static void cf_check nestedhvm_flushtlb_ipi(void *info)
- {
-     struct vcpu *v = current;
-     struct domain *d = info;
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index f72a7db0453d..2b6bafe9d542 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -589,7 +589,7 @@ static void vmx_free_vmcs(paddr_t pa)
-     free_domheap_page(maddr_to_page(pa));
- }
- 
--static void __vmx_clear_vmcs(void *info)
-+static void cf_check __vmx_clear_vmcs(void *info)
- {
-     struct vcpu *v = info;
-     struct vmx_vcpu *vmx = &v->arch.hvm.vmx;
-diff --git a/xen/arch/x86/include/asm/mtrr.h b/xen/arch/x86/include/asm/mtrr.h
-index e0fd1005ce72..7733800b798f 100644
---- a/xen/arch/x86/include/asm/mtrr.h
-+++ b/xen/arch/x86/include/asm/mtrr.h
-@@ -64,7 +64,7 @@ struct mtrr_state {
- };
- extern struct mtrr_state mtrr_state;
- 
--extern void mtrr_save_fixed_ranges(void *);
-+extern void cf_check mtrr_save_fixed_ranges(void *);
- extern void mtrr_save_state(void);
- extern int mtrr_add(unsigned long base, unsigned long size,
-                     unsigned int type, char increment);
-diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-index f9c808455535..d9bd355113d7 100644
---- a/xen/arch/x86/irq.c
-+++ b/xen/arch/x86/irq.c
-@@ -1127,7 +1127,7 @@ static inline void clear_pirq_eoi(struct domain *d, unsigned int irq)
-     }
- }
- 
--static void set_eoi_ready(void *data);
-+static void cf_check set_eoi_ready(void *data);
- 
- static void cf_check irq_guest_eoi_timer_fn(void *data)
- {
-@@ -1398,7 +1398,7 @@ static void __set_eoi_ready(const struct irq_desc *desc)
- }
- 
- /* Mark specified IRQ as ready-for-EOI (if it really is) and attempt to EOI. */
--static void set_eoi_ready(void *data)
-+static void cf_check set_eoi_ready(void *data)
- {
-     struct irq_desc *desc = data;
- 
-diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
-index c8ae4a5d7460..e20d1393c881 100644
---- a/xen/arch/x86/nmi.c
-+++ b/xen/arch/x86/nmi.c
-@@ -149,7 +149,7 @@ int nmi_active;
-     (P4_CCCR_OVF_PMI0|P4_CCCR_THRESHOLD(15)|P4_CCCR_COMPLEMENT| \
-      P4_CCCR_COMPARE|P4_CCCR_REQUIRED|P4_CCCR_ESCR_SELECT(4)|P4_CCCR_ENABLE)
- 
--static void __init wait_for_nmis(void *p)
-+static void __init cf_check wait_for_nmis(void *p)
- {
-     unsigned int start_count = this_cpu(nmi_count);
-     unsigned long ticks = 10 * 1000 * cpu_khz / nmi_hz;
-diff --git a/xen/arch/x86/oprofile/nmi_int.c b/xen/arch/x86/oprofile/nmi_int.c
-index ba9c4b9804ca..6ebe20bd1d3e 100644
---- a/xen/arch/x86/oprofile/nmi_int.c
-+++ b/xen/arch/x86/oprofile/nmi_int.c
-@@ -131,7 +131,7 @@ static void nmi_cpu_save_registers(struct op_msrs *msrs)
- }
- 
- 
--static void nmi_save_registers(void * dummy)
-+static void cf_check nmi_save_registers(void *dummy)
- {
- 	int cpu = smp_processor_id();
- 	struct op_msrs * msrs = &cpu_msrs[cpu];
-@@ -179,7 +179,7 @@ static int allocate_msrs(void)
- }
- 
- 
--static void nmi_cpu_setup(void * dummy)
-+static void cf_check nmi_cpu_setup(void *dummy)
- {
- 	int cpu = smp_processor_id();
- 	struct op_msrs * msrs = &cpu_msrs[cpu];
-@@ -245,7 +245,7 @@ static void nmi_restore_registers(struct op_msrs * msrs)
- }
- 
- 
--static void nmi_cpu_shutdown(void * dummy)
-+static void cf_check nmi_cpu_shutdown(void *dummy)
- {
- 	int cpu = smp_processor_id();
- 	struct op_msrs * msrs = &cpu_msrs[cpu];
-@@ -261,7 +261,7 @@ void nmi_release_counters(void)
- }
- 
- 
--static void nmi_cpu_start(void * dummy)
-+static void cf_check nmi_cpu_start(void *dummy)
- {
- 	int cpu = smp_processor_id();
- 	struct op_msrs const * msrs = &cpu_msrs[cpu];
-@@ -278,7 +278,7 @@ int nmi_start(void)
- }
- 
- 
--static void nmi_cpu_stop(void * dummy)
-+static void cf_check nmi_cpu_stop(void *dummy)
- {
- 	unsigned int v;
- 	int cpu = smp_processor_id();
-diff --git a/xen/arch/x86/oprofile/op_model_athlon.c b/xen/arch/x86/oprofile/op_model_athlon.c
-index ee6eb0ecae79..2177f02946e2 100644
---- a/xen/arch/x86/oprofile/op_model_athlon.c
-+++ b/xen/arch/x86/oprofile/op_model_athlon.c
-@@ -436,7 +436,7 @@ static void athlon_stop(struct op_msrs const * const msrs)
- #define APIC_EILVT_MSG_NMI              0x4
- #define APIC_EILVT_LVTOFF_IBS           1
- #define APIC_EILVTn(n)                  (0x500 + 0x10 * n)
--static inline void __init init_ibs_nmi_per_cpu(void *arg)
-+static inline void __init cf_check init_ibs_nmi_per_cpu(void *arg)
- {
- 	unsigned long reg;
- 
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index f5d7adc1e802..b91ccff58900 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -47,7 +47,7 @@ struct resource_access {
- 
- long cf_check cpu_frequency_change_helper(void *);
- void check_resource_access(struct resource_access *);
--void resource_access(void *);
-+void cf_check resource_access(void *);
- 
- #ifndef COMPAT
- typedef long ret_t;
-@@ -149,7 +149,7 @@ void check_resource_access(struct resource_access *ra)
-     ra->nr_done = i;
- }
- 
--void resource_access(void *info)
-+void cf_check resource_access(void *info)
- {
-     struct resource_access *ra = info;
-     unsigned int i;
-diff --git a/xen/arch/x86/psr.c b/xen/arch/x86/psr.c
-index 5b9991bd5b12..6c9cabf3843d 100644
---- a/xen/arch/x86/psr.c
-+++ b/xen/arch/x86/psr.c
-@@ -1247,7 +1247,7 @@ struct cos_write_info
-     const uint32_t *val;
- };
- 
--static void do_write_psr_msrs(void *data)
-+static void cf_check do_write_psr_msrs(void *data)
- {
-     const struct cos_write_info *info = data;
-     unsigned int i, index, cos = info->cos;
-diff --git a/xen/arch/x86/shutdown.c b/xen/arch/x86/shutdown.c
-index ad3e3a76916f..30985d36a612 100644
---- a/xen/arch/x86/shutdown.c
-+++ b/xen/arch/x86/shutdown.c
-@@ -118,7 +118,7 @@ static inline void kb_wait(void)
-             break;
- }
- 
--static void noreturn __machine_halt(void *unused)
-+static void noreturn cf_check __machine_halt(void *unused)
- {
-     local_irq_disable();
- 
-@@ -548,7 +548,7 @@ static int __init cf_check reboot_init(void)
- }
- __initcall(reboot_init);
- 
--static void noreturn __machine_restart(void *pdelay)
-+static void cf_check noreturn __machine_restart(void *pdelay)
- {
-     machine_restart(*(unsigned int *)pdelay);
- }
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index f4952a6bf9a5..f6fd7f95df58 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -339,7 +339,7 @@ void __stop_this_cpu(void)
-     cpumask_clear_cpu(smp_processor_id(), &cpu_online_map);
- }
- 
--static void stop_this_cpu(void *dummy)
-+static void cf_check stop_this_cpu(void *dummy)
- {
-     __stop_this_cpu();
-     for ( ; ; )
-diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
-index 1772f51f8f6e..f82abc248885 100644
---- a/xen/arch/x86/sysctl.c
-+++ b/xen/arch/x86/sysctl.c
-@@ -69,7 +69,7 @@ struct l3_cache_info {
-     unsigned long size;
- };
- 
--static void l3_cache_get(void *arg)
-+static void cf_check l3_cache_get(void *arg)
- {
-     struct cpuid4_info info;
-     struct l3_cache_info *l3_info = arg;
-diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
-index fac97023bf10..b444d6344e79 100644
---- a/xen/arch/x86/time.c
-+++ b/xen/arch/x86/time.c
-@@ -1661,7 +1661,7 @@ static void check_tsc_warp(unsigned long tsc_khz, unsigned long *max_warp)
- static unsigned long tsc_max_warp, tsc_check_count;
- static cpumask_t tsc_check_cpumask;
- 
--static void tsc_check_slave(void *unused)
-+static void cf_check tsc_check_slave(void *unused)
- {
-     unsigned int cpu = smp_processor_id();
-     local_irq_disable();
-@@ -1809,7 +1809,7 @@ static void time_calibration_tsc_rendezvous(void *_r)
- }
- 
- /* Ordinary rendezvous function which does not modify TSC values. */
--static void time_calibration_std_rendezvous(void *_r)
-+static void cf_check time_calibration_std_rendezvous(void *_r)
- {
-     struct calibration_rendezvous *r = _r;
-     unsigned int total_cpus = cpumask_weight(&r->cpu_calibration_map);
-@@ -1840,7 +1840,7 @@ static void time_calibration_std_rendezvous(void *_r)
-  * Rendezvous function used when clocksource is TSC and
-  * no CPU hotplug will be performed.
-  */
--static void time_calibration_nop_rendezvous(void *rv)
-+static void cf_check time_calibration_nop_rendezvous(void *rv)
- {
-     const struct calibration_rendezvous *r = rv;
-     struct cpu_time_stamp *c = &this_cpu(cpu_calibration);
-@@ -2032,7 +2032,7 @@ static void __init tsc_check_writability(void)
-     disable_tsc_sync = true;
- }
- 
--static void __init reset_percpu_time(void *unused)
-+static void __init cf_check reset_percpu_time(void *unused)
- {
-     struct cpu_time *t = &this_cpu(cpu_time);
- 
-diff --git a/xen/common/cpu.c b/xen/common/cpu.c
-index 1f976db0a51f..b0b63cdb3638 100644
---- a/xen/common/cpu.c
-+++ b/xen/common/cpu.c
-@@ -84,13 +84,13 @@ static int cpu_notifier_call_chain(unsigned int cpu, unsigned long action,
-     return ret;
- }
- 
--static void _take_cpu_down(void *unused)
-+static void cf_check _take_cpu_down(void *unused)
- {
-     cpu_notifier_call_chain(smp_processor_id(), CPU_DYING, NULL, true);
-     __cpu_disable();
- }
- 
--static int take_cpu_down(void *arg)
-+static int cf_check take_cpu_down(void *arg)
- {
-     _take_cpu_down(arg);
-     return 0;
-diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
-index 99bfd9a654c9..079c3ca9616a 100644
---- a/xen/common/gdbstub.c
-+++ b/xen/common/gdbstub.c
-@@ -660,7 +660,7 @@ static int __init cf_check initialise_gdb(void)
- }
- presmp_initcall(initialise_gdb);
- 
--static void gdb_pause_this_cpu(void *unused)
-+static void cf_check gdb_pause_this_cpu(void *unused)
- {
-     unsigned long flags;
- 
-diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
-index 8b9f37837162..2c916d528ab2 100644
---- a/xen/common/keyhandler.c
-+++ b/xen/common/keyhandler.c
-@@ -360,7 +360,7 @@ static cpumask_t read_clocks_cpumask;
- static DEFINE_PER_CPU(s_time_t, read_clocks_time);
- static DEFINE_PER_CPU(u64, read_cycles_time);
- 
--static void read_clocks_slave(void *unused)
-+static void cf_check read_clocks_slave(void *unused)
- {
-     unsigned int cpu = smp_processor_id();
-     local_irq_disable();
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 561e238d2d6a..827617502e35 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -1898,7 +1898,7 @@ void __init end_boot_allocator(void)
-     printk("\n");
- }
- 
--static void __init smp_scrub_heap_pages(void *data)
-+static void __init cf_check smp_scrub_heap_pages(void *data)
- {
-     unsigned long mfn, start, end;
-     struct page_info *pg;
 -- 
 2.11.0
 
