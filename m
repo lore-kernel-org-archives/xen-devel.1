@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77BDC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271715.466387 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88A17C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271718.466401 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3d-0000eN-MH; Mon, 14 Feb 2022 13:06:21 +0000
+	id 1nJb3g-00018C-LO; Mon, 14 Feb 2022 13:06:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271715.466387; Mon, 14 Feb 2022 13:06:21 +0000
+Received: by outflank-mailman (output) from mailman id 271718.466401; Mon, 14 Feb 2022 13:06:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3d-0000bE-5U; Mon, 14 Feb 2022 13:06:21 +0000
-Received: by outflank-mailman (input) for mailman id 271715;
- Mon, 14 Feb 2022 13:06:19 +0000
+	id 1nJb3f-00012f-LZ; Mon, 14 Feb 2022 13:06:23 +0000
+Received: by outflank-mailman (input) for mailman id 271718;
+ Mon, 14 Feb 2022 13:06:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb2W-0008IH-WA
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:13 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bc264d17-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:05:09 +0100 (CET)
+ id 1nJb2k-0008IH-St
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:27 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c59298a3-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:05:25 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bc264d17-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: c59298a3-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843909;
+  d=citrix.com; s=securemail; t=1644843925;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=W97kFRgj/MifUbIaqTE03bRGTNYxneRqJuik8bYXmus=;
-  b=Thd1PFc2MnRcHBfQMxNvSPomzPfvLUJHOZ4F39NrscNwPRdQUdWFMtlt
-   wWxZrUHtTawOJjhQ8u3QGynC43rjZDcCkJA0rUFrcahN7z8f2a879h22t
-   SP+dlt/2rSlgNw0gvqEExKPGpjjY/hmDQs1KVBVk+NRAkAMg5BiOnpGUj
-   Q=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: 0kQ1sX3mZvJKZSOECf8Dl6WPt+Bb5qhEtGkfZ7gae1V/6iBUBIwWfi0MvudW4E8bzxH581D6BD
- 9EOwQ4DBb5fuK+/kGBnRdybZ4xg/daZ4sni1Mq1kcXVdW3XNu2xC5EYA0AQqnRTMyWEhlbWl/y
- 3baz1A/+EfN7+tFWEc/2stWrSppaTdZWIigq4PSG64UZ7hcyc+RcAjXPZFnVyQxg9RJZomyBjk
- tUcIj0AmlZRu/f0GrE0I0KlIIOWIKuo343IWJtlH0hTrWQxBU06Pg6J9wrwXvqtj+Gtw4b6GrK
- iFfIr+LQmWJbCm3N2D0ZJZR7
+  bh=+QYHYC1eoLvldjqb5KMKNFpB/QJHZdfvkMfW0IB8GJg=;
+  b=dGvbwJFzOxIeHii8yWuBpkvNvhVzYnZ+oU13Iq9gSWMpQr2zNdIBaYQP
+   /vkHN0FUCsVsBO0fvn4QRP3GsEjLwhDjRZcUJVaxVwKU2MCxoJWDQP0zR
+   9IV3RRM1Z9gtFaiDfvmHUkpNX57OMSSl9HPtNyDy5N71Gwh3y1Gd3JWPm
+   0=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: C6Sv2M/yMcWd5uk1UcVDDsDlml2D6fzDMx2LjXFX52Hu9QcWv5sN1dhPbLEi68L49qxmoEgCSk
+ yvWMjaeEkbh7r1Pis63iSkFgz1w1dFHGKumlxMMtLzmsQV9fuWLDvBTZL56fVzCOyx49k8uWMc
+ t5kkzd4P0s8gP/v/XGfuSa1ajMmeB2+iYoUKgyEQZ26NqWBgxFIImxEYGwni5cHzuQ8TUv+BZg
+ SP16gzy3ciunaSBTwwOPWs+wgXEsNFMl1cxmM/iOT7lXFdcHHDcctELGf2Z9TksMuLV8BIS1Fe
+ MGQCxQVVzbXcpKjIwtfoVggD
 X-SBRS: 5.1
-X-MesageID: 66374839
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 64149812
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:r8h/KKJH11eaxoWtFE+Rz5IlxSXFcZb7ZxGr2PjKsXjdYENS1zwEx
- mIdXjzVP63cY2CnLtl2aYzj9E9UuJLdztZmQQZlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+IronPort-Data: A9a23:wPpoL6JAo3pq/N8yFE+R95IlxSXFcZb7ZxGr2PjKsXjdYENSgWBVy
+ TAXDT+POvnZYjT2e412OtmzoB5SsJPSm95qTQJlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
  q3yv/GZdJhcokcxIn5BC5C5xZVG/fjgqoHUVaiUakideSc+EH170Ug6x7Zg6mJVqYPR7z2l6
  IuaT/L3YDdJ6xYsWo7Dw/vewP/HlK2aVAIw5jTSV9gS1LPtvyB94KYkDbOwNxPFrrx8RYZWc
- QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB2rlfkoz
- uhhjaC3QDssEJ/KlegzVklhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
- LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Glu3Z8STa2PD
- yYfQWFTXUvFcloRBgpUMLYywfXrgEnPLBQN/Tp5ooJoujOOnWSdyoPFINfTP9CHW8hRtkKZv
- X7duXT0BAkAM96SwibD9Wij7tIjhguiBthUTufhsKc33hvDnQT/FSH6S3OZq9DgjHOSY+5YI
- nAR1BgooKQc8RySG4yVswKDnFaIuRsVWtx1GuI86R2Qxqe83zt1FlToXRYaNoV46ZZeqSgCk
+ QphIIaRpQs19z91Yj+sfy2SnkciGtY+NiDW4pZatjTLbrGvaUXe345iXMfwZ3u7hB3OutpP0
+ I1A7aecbj0nY4jKw9Q+UUFhRnQW0a1uoNcrIFC6uM2XiUbHb2Ht07NlC0Re0Y8wo7gtRzsUr
+ LpBdW5LPkvra+GemdpXTsFFgMg5IdatF4QYonx6lhnSDOo8QICFSKLPjTNd9Gls35wfTa+ED
+ yYfQQVvVRHjexkQBlNNT9Ewv9maiFDvbjIN/Tp5ooJoujOOnWSdyoPFINfTP9CHW8hRtkKZv
+ X7duXT0BAkAM96SwibD9Wij7tIjhguiBthUTufhsKc33hvDnQT/FSH6S3P8hPOHkhazA+lzD
+ HYapw8o9pgR9hSSG4yVswKDnFaIuRsVWtx1GuI86R2Qxqe83zt1FlToXRYaNoV46ZZeqSgCk
  wbQwoi3XWAHXKi9FCrFnop4uw9eLsT8wYUqQSYfBTUI7ND4yG3YpkKeF40zeEJZYzCcJN0R/
- 9xohHVk71nwpZRSv0lewbwgq2jyzqUltiZvum3qspuNt2uVnrKNaY2y8kT85v1dNoufRVTpl
- CFax5TBvLBTUMnUz3blrAAx8FaBvajtDdEhqQQ3Q8lJG8qFpxZPgry8EBkhfRw0Y67oiBfiY
- VPJuBM52XOgFCDCUEODWKroU55C5fG5TbzND6mIBvITMskZXFLWp0lGOB/Pt10BZWBxyMnTz
- 7/AKp3yZZvbYIw6pAeLqxA1j+N6mHBmnTmLLX05pjz+uYejiLeuYe9tGDOzgioRtctoeS3Zr
- IRSMdWk0RJaXLGsayXb69dLf1sLMWI6Fdb9rMkOLryPJQ9vGWcADf7NwOx+J9w5zvoNzuqYr
- GugXkJ4yUbkgSGVIwu9dX0+OqjkWoxyrCxnMHV0b0qowXUqfa2m8LwbK8ksZbAi+eE6lax0Q
- vAJdt+uGPNKTjibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz+
- uTy2BnaTJwPQxVZIPzXMP//nUmsuXU9mf5pWxeaKNdkZ0ixopNhLDb8j6FrLphUewnD3DaTy
- y2fHQwc+bvWu4Yw/dTE2fKEooOuH7csF0ZWBTCGv7O/NC2c9Wu/245QFu2PeGmFBm/z/ayjY
- 8RTzu39b6JbzAob7dIkHuY517866vvuu6Ren1ZtE3j8Zli2Dq9tfyud1s5Vu6wRnrJUtGNag
- K5UFgW27VlRBP7YLQ==
-IronPort-HdrOrdr: A9a23:IlRx5KuOjcTHE5hSfMXq4eTl7skDdNV00zEX/kB9WHVpmszxra
- 6TdZUgpGbJYVkqOE3I9ertBEDEewK4yXcX2/h2AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YGT0EUMrzN5DZB4voSmDPIceod/A==
+ 9xohHVk71nwpZRSv0lewbwgq2jyzqUltiZvum3qspiZxg14fpW5QIej9ELW6/1NRK7AEAXd4
+ yhUxpXGtbtUZX1oqMBqaL9TdIxFGt7faGGM6bKRN8VJG8uRF46LItkLvWAWyLZBOccYYz75C
+ HI/SisKjKK/yECCNPctC6roUpxC5fG5SbzNC6CFBvITM8MZXFLWo0lTibu4gjmFuFIyips2J
+ ZrzWZ/qVR72/4w8l2HoLwrcuJd2rh0DKZT7G8ylkUT9jOb2ibz8Ye5tDWZip9sRtMusyDg5O
+ f4FXydT4xkAAuD4fAfN9osfcQIDIXQhXMikoM1LbO+TZAFhHTh5WfPWxLogfa1jnrhUybiUr
+ i3sBBcAxQqtn2DDJCWLdmtnNOHlU6FgoC9pJicrJ1uphSQuON798KcFepIrVrA77+g/n+VsR
+ vwIdpzYUPRCQzjK4RoHapz5oNAwfRinn1vWbSGkfCI+b9hrQAmQoo3oeQ7m9S8vCCurtJRh/
+ +38h12DGZdaHlZsFsfbbv6r3midh3lFlbIgRVbML/lSZF7orNpgJRvug6JlOMoLMxjCmGeXj
+ l7EHRcCqODRiIYp692V17ucpoKkHuYiTEpXG27XseS/OSXApzfxxIZBVKCDfCzHVXOy86KnP
+ L0Hw/b5OfwBvVBLr4sjTOo7kfNgv4Pi9+1A0wBpPHTXdFD6WLpvL06P0dRLqqAQlKRSvhG7W
+ x7X99RXUVlT1BgJzLLFyNIZU9m+
+IronPort-HdrOrdr: A9a23:Qa61dqnU6+TUEIgrYkd11ElM9YjpDfIu3DAbv31ZSRFFG/Fxl6
+ iV8sjztCWE8Qr5N0tBpTntAsW9qDbnhPtICOoqTNGftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
+ 9bAs9D4bbLbGSS4/yU3ODBKadD/OW6
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="66374839"
+   d="scan'208";a="64149812"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 46/70] x86/guest: CFI hardening
-Date: Mon, 14 Feb 2022 12:51:03 +0000
-Message-ID: <20220214125127.17985-47-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 50/70] x86/p2m: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:07 +0000
+Message-ID: <20220214125127.17985-51-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,100 +106,225 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/guest/hyperv/hyperv.c | 10 +++++-----
- xen/arch/x86/guest/xen/xen.c       | 11 ++++++-----
- 2 files changed, 11 insertions(+), 10 deletions(-)
+ xen/arch/x86/include/asm/p2m.h   |  4 ++--
+ xen/arch/x86/mm/hap/hap.c        |  2 +-
+ xen/arch/x86/mm/hap/nested_hap.c |  2 +-
+ xen/arch/x86/mm/p2m-ept.c        | 32 +++++++++++++++-----------------
+ xen/arch/x86/mm/p2m-pt.c         | 19 +++++++++----------
+ 5 files changed, 28 insertions(+), 31 deletions(-)
 
-diff --git a/xen/arch/x86/guest/hyperv/hyperv.c b/xen/arch/x86/guest/hyperv/hyperv.c
-index 84221b751453..b101ba3080b4 100644
---- a/xen/arch/x86/guest/hyperv/hyperv.c
-+++ b/xen/arch/x86/guest/hyperv/hyperv.c
-@@ -175,7 +175,7 @@ static int setup_vp_assist(void)
-     return 0;
+diff --git a/xen/arch/x86/include/asm/p2m.h b/xen/arch/x86/include/asm/p2m.h
+index 6e2206874d62..787374426371 100644
+--- a/xen/arch/x86/include/asm/p2m.h
++++ b/xen/arch/x86/include/asm/p2m.h
+@@ -820,8 +820,8 @@ void np2m_flush_base(struct vcpu *v, unsigned long np2m_base);
+ void hap_p2m_init(struct p2m_domain *p2m);
+ void shadow_p2m_init(struct p2m_domain *p2m);
+ 
+-void nestedp2m_write_p2m_entry_post(struct p2m_domain *p2m,
+-                                    unsigned int oflags);
++void cf_check nestedp2m_write_p2m_entry_post(
++    struct p2m_domain *p2m, unsigned int oflags);
+ 
+ /*
+  * Alternate p2m: shadow p2m tables used for alternate memory views
+diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
+index 9d67a47f5fe9..c19e337d6585 100644
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -778,7 +778,7 @@ static void cf_check hap_update_paging_modes(struct vcpu *v)
+     put_gfn(d, cr3_gfn);
  }
  
--static void __init setup(void)
-+static void __init cf_check setup(void)
+-static void
++static void cf_check
+ hap_write_p2m_entry_post(struct p2m_domain *p2m, unsigned int oflags)
  {
-     ASM_CONSTANT(HV_HCALL_PAGE, __fix_x_to_virt(FIX_X_HYPERV_HCALL));
+     struct domain *d = p2m->domain;
+diff --git a/xen/arch/x86/mm/hap/nested_hap.c b/xen/arch/x86/mm/hap/nested_hap.c
+index d8a7b3b40167..dbe5ad23a112 100644
+--- a/xen/arch/x86/mm/hap/nested_hap.c
++++ b/xen/arch/x86/mm/hap/nested_hap.c
+@@ -71,7 +71,7 @@
+ /*        NESTED VIRT P2M FUNCTIONS         */
+ /********************************************/
  
-@@ -188,7 +188,7 @@ static void __init setup(void)
-         panic("VP assist page setup failed\n");
+-void
++void cf_check
+ nestedp2m_write_p2m_entry_post(struct p2m_domain *p2m, unsigned int oflags)
+ {
+     if ( oflags & _PAGE_PRESENT )
+diff --git a/xen/arch/x86/mm/p2m-ept.c b/xen/arch/x86/mm/p2m-ept.c
+index a8a6ad629528..70a401c3a7ea 100644
+--- a/xen/arch/x86/mm/p2m-ept.c
++++ b/xen/arch/x86/mm/p2m-ept.c
+@@ -624,7 +624,7 @@ int epte_get_entry_emt(struct domain *d, gfn_t gfn, mfn_t mfn,
+  * - zero if no adjustment was done,
+  * - a positive value if at least one adjustment was done.
+  */
+-static int resolve_misconfig(struct p2m_domain *p2m, unsigned long gfn)
++static int cf_check resolve_misconfig(struct p2m_domain *p2m, unsigned long gfn)
+ {
+     struct ept_data *ept = &p2m->ept;
+     unsigned int level = ept->wl;
+@@ -793,7 +793,7 @@ bool_t ept_handle_misconfig(uint64_t gpa)
+  *
+  * Returns: 0 for success, -errno for failure
+  */
+-static int
++static int cf_check
+ ept_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
+               unsigned int order, p2m_type_t p2mt, p2m_access_t p2ma,
+               int sve)
+@@ -1002,10 +1002,9 @@ ept_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
  }
  
--static int ap_setup(void)
-+static int cf_check ap_setup(void)
+ /* Read ept p2m entries */
+-static mfn_t ept_get_entry(struct p2m_domain *p2m,
+-                           gfn_t gfn_, p2m_type_t *t, p2m_access_t* a,
+-                           p2m_query_t q, unsigned int *page_order,
+-                           bool_t *sve)
++static mfn_t cf_check ept_get_entry(
++    struct p2m_domain *p2m, gfn_t gfn_, p2m_type_t *t, p2m_access_t *a,
++    p2m_query_t q, unsigned int *page_order, bool *sve)
  {
-     int rc;
- 
-@@ -199,7 +199,7 @@ static int ap_setup(void)
-     return setup_vp_assist();
+     ept_entry_t *table =
+         map_domain_page(pagetable_get_mfn(p2m_get_pagetable(p2m)));
+@@ -1165,8 +1164,8 @@ void ept_walk_table(struct domain *d, unsigned long gfn)
+     return;
  }
  
--static void __init e820_fixup(struct e820map *e820)
-+static void __init cf_check e820_fixup(struct e820map *e820)
+-static void ept_change_entry_type_global(struct p2m_domain *p2m,
+-                                         p2m_type_t ot, p2m_type_t nt)
++static void cf_check ept_change_entry_type_global(
++    struct p2m_domain *p2m, p2m_type_t ot, p2m_type_t nt)
  {
-     uint64_t s = HV_HCALL_MFN << PAGE_SHIFT;
+     unsigned long mfn = p2m->ept.mfn;
  
-@@ -207,8 +207,8 @@ static void __init e820_fixup(struct e820map *e820)
-         panic("Unable to reserve Hyper-V hypercall range\n");
+@@ -1177,10 +1176,9 @@ static void ept_change_entry_type_global(struct p2m_domain *p2m,
+         ept_sync_domain(p2m);
  }
  
--static int flush_tlb(const cpumask_t *mask, const void *va,
--                     unsigned int flags)
-+static int cf_check flush_tlb(
-+    const cpumask_t *mask, const void *va, unsigned int flags)
+-static int ept_change_entry_type_range(struct p2m_domain *p2m,
+-                                       p2m_type_t ot, p2m_type_t nt,
+-                                       unsigned long first_gfn,
+-                                       unsigned long last_gfn)
++static int cf_check ept_change_entry_type_range(
++    struct p2m_domain *p2m, p2m_type_t ot, p2m_type_t nt,
++    unsigned long first_gfn, unsigned long last_gfn)
  {
-     if ( !(ms_hyperv.hints & HV_X64_REMOTE_TLB_FLUSH_RECOMMENDED) )
-         return -EOPNOTSUPP;
-diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
-index 17807cdea688..9c2defaa6621 100644
---- a/xen/arch/x86/guest/xen/xen.c
-+++ b/xen/arch/x86/guest/xen/xen.c
-@@ -237,7 +237,7 @@ static int init_evtchn(void)
+     unsigned int i, wl = p2m->ept.wl;
+     unsigned long mask = (1 << EPT_TABLE_ORDER) - 1;
+@@ -1224,7 +1222,7 @@ static int ept_change_entry_type_range(struct p2m_domain *p2m,
+     return rc < 0 ? rc : 0;
+ }
+ 
+-static void ept_memory_type_changed(struct p2m_domain *p2m)
++static void cf_check ept_memory_type_changed(struct p2m_domain *p2m)
+ {
+     unsigned long mfn = p2m->ept.mfn;
+ 
+@@ -1283,7 +1281,7 @@ void ept_sync_domain(struct p2m_domain *p2m)
+     ept_sync_domain_mask(p2m, d->dirty_cpumask);
+ }
+ 
+-static void ept_tlb_flush(struct p2m_domain *p2m)
++static void cf_check ept_tlb_flush(struct p2m_domain *p2m)
+ {
+     ept_sync_domain_mask(p2m, p2m->domain->dirty_cpumask);
+ }
+@@ -1346,7 +1344,7 @@ static void ept_disable_pml(struct p2m_domain *p2m)
+     vmx_domain_update_eptp(p2m->domain);
+ }
+ 
+-static void ept_enable_hardware_log_dirty(struct p2m_domain *p2m)
++static void cf_check ept_enable_hardware_log_dirty(struct p2m_domain *p2m)
+ {
+     struct p2m_domain *hostp2m = p2m_get_hostp2m(p2m->domain);
+ 
+@@ -1355,7 +1353,7 @@ static void ept_enable_hardware_log_dirty(struct p2m_domain *p2m)
+     p2m_unlock(hostp2m);
+ }
+ 
+-static void ept_disable_hardware_log_dirty(struct p2m_domain *p2m)
++static void cf_check ept_disable_hardware_log_dirty(struct p2m_domain *p2m)
+ {
+     struct p2m_domain *hostp2m = p2m_get_hostp2m(p2m->domain);
+ 
+@@ -1364,7 +1362,7 @@ static void ept_disable_hardware_log_dirty(struct p2m_domain *p2m)
+     p2m_unlock(hostp2m);
+ }
+ 
+-static void ept_flush_pml_buffers(struct p2m_domain *p2m)
++static void cf_check ept_flush_pml_buffers(struct p2m_domain *p2m)
+ {
+     /* Domain must have been paused */
+     ASSERT(atomic_read(&p2m->domain->pause_count));
+diff --git a/xen/arch/x86/mm/p2m-pt.c b/xen/arch/x86/mm/p2m-pt.c
+index ef3f8e02a415..eaba2b0fb4e6 100644
+--- a/xen/arch/x86/mm/p2m-pt.c
++++ b/xen/arch/x86/mm/p2m-pt.c
+@@ -399,7 +399,7 @@ static int p2m_pt_set_recalc_range(struct p2m_domain *p2m,
+  * GFN. Propagate the re-calculation flag down to the next page table level
+  * for entries not involved in the translation of the given GFN.
+  */
+-static int do_recalc(struct p2m_domain *p2m, unsigned long gfn)
++static int cf_check do_recalc(struct p2m_domain *p2m, unsigned long gfn)
+ {
+     void *table;
+     unsigned long gfn_remainder = gfn;
+@@ -573,7 +573,7 @@ static void check_entry(mfn_t mfn, p2m_type_t new, p2m_type_t old,
+ }
+ 
+ /* Returns: 0 for success, -errno for failure */
+-static int
++static int cf_check
+ p2m_pt_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
+                  unsigned int page_order, p2m_type_t p2mt, p2m_access_t p2ma,
+                  int sve)
+@@ -774,7 +774,7 @@ p2m_pt_set_entry(struct p2m_domain *p2m, gfn_t gfn_, mfn_t mfn,
      return rc;
  }
  
--static void __init setup(void)
-+static void __init cf_check setup(void)
- {
-     init_memmap();
- 
-@@ -265,7 +265,7 @@ static void __init setup(void)
-     BUG_ON(init_evtchn());
+-static mfn_t
++static mfn_t cf_check
+ p2m_pt_get_entry(struct p2m_domain *p2m, gfn_t gfn_,
+                  p2m_type_t *t, p2m_access_t *a, p2m_query_t q,
+                  unsigned int *page_order, bool_t *sve)
+@@ -943,8 +943,8 @@ p2m_pt_get_entry(struct p2m_domain *p2m, gfn_t gfn_,
+     return (p2m_is_valid(*t) || p2m_is_any_ram(*t)) ? mfn : INVALID_MFN;
  }
  
--static int ap_setup(void)
-+static int cf_check ap_setup(void)
+-static void p2m_pt_change_entry_type_global(struct p2m_domain *p2m,
+-                                            p2m_type_t ot, p2m_type_t nt)
++static void cf_check p2m_pt_change_entry_type_global(
++    struct p2m_domain *p2m, p2m_type_t ot, p2m_type_t nt)
  {
-     set_vcpu_id();
- 
-@@ -295,7 +295,7 @@ static void cf_check ap_resume(void *unused)
-     BUG_ON(init_evtchn());
+     l1_pgentry_t *tab;
+     unsigned long gfn = 0;
+@@ -983,10 +983,9 @@ static void p2m_pt_change_entry_type_global(struct p2m_domain *p2m,
+          guest_flush_tlb_mask(d, d->dirty_cpumask);
  }
  
--static void resume(void)
-+static void cf_check resume(void)
+-static int p2m_pt_change_entry_type_range(struct p2m_domain *p2m,
+-                                          p2m_type_t ot, p2m_type_t nt,
+-                                          unsigned long first_gfn,
+-                                          unsigned long last_gfn)
++static int cf_check p2m_pt_change_entry_type_range(
++    struct p2m_domain *p2m, p2m_type_t ot, p2m_type_t nt,
++    unsigned long first_gfn, unsigned long last_gfn)
  {
-     /* Reset shared info page. */
-     map_shared_info();
-@@ -318,13 +318,14 @@ static void resume(void)
-         pv_console_init();
+     unsigned long mask = (1 << PAGETABLE_ORDER) - 1;
+     unsigned int i;
+@@ -1025,7 +1024,7 @@ static int p2m_pt_change_entry_type_range(struct p2m_domain *p2m,
  }
  
--static void __init e820_fixup(struct e820map *e820)
-+static void __init cf_check e820_fixup(struct e820map *e820)
+ #if P2M_AUDIT
+-static long p2m_pt_audit_p2m(struct p2m_domain *p2m)
++static long cf_check p2m_pt_audit_p2m(struct p2m_domain *p2m)
  {
-     if ( pv_shim )
-         pv_shim_fixup_e820(e820);
- }
- 
--static int flush_tlb(const cpumask_t *mask, const void *va, unsigned int flags)
-+static int cf_check flush_tlb(
-+    const cpumask_t *mask, const void *va, unsigned int flags)
- {
-     return xen_hypercall_hvm_op(HVMOP_flush_tlbs, NULL);
- }
+     unsigned long entry_count = 0, pmbad = 0;
+     unsigned long mfn, gfn, m2pfn;
 -- 
 2.11.0
 
