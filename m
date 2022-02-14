@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 672EDC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:16:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271913.466665 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC85C433FE
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:16:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271923.466676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDK-00020K-Iy; Mon, 14 Feb 2022 13:16:22 +0000
+	id 1nJbDW-0002tc-Ta; Mon, 14 Feb 2022 13:16:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271913.466665; Mon, 14 Feb 2022 13:16:22 +0000
+Received: by outflank-mailman (output) from mailman id 271923.466676; Mon, 14 Feb 2022 13:16:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbDK-0001zy-F0; Mon, 14 Feb 2022 13:16:22 +0000
-Received: by outflank-mailman (input) for mailman id 271913;
- Mon, 14 Feb 2022 13:16:19 +0000
+	id 1nJbDW-0002tR-Pk; Mon, 14 Feb 2022 13:16:34 +0000
+Received: by outflank-mailman (input) for mailman id 271923;
+ Mon, 14 Feb 2022 13:16:34 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb3W-0008IH-A5
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:14 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e168e7d9-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:06:12 +0100 (CET)
+ id 1nJb4e-0008IH-R5
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:07:25 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0c38c0dc-8d97-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:07:23 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e168e7d9-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 0c38c0dc-8d97-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843972;
+  d=citrix.com; s=securemail; t=1644844042;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=ZeH6O9XaSCM4nWzskGu9oWidhKAGbDFLn89nxDUkjLk=;
-  b=QJZzM5oaZhi2xA2Zi89Y2xHTTFb08J+5kg3g51lyURuTTfHkyTqM+ldN
-   MB40FNTexah9W2SHlfj2hz5FQ6TS0uRn0xUQO5vgrDCxP50MvMtW+OuS7
-   4lJ+O9797EniZa0U9k+Z8Df2KId/udjvvMWVDK1cBmU0X2CUIi/D6X6h4
+  bh=9/V6nzRZ7VtFwWVXXCLQG4zjWKxi0K/Bd1I6aiIEiw4=;
+  b=QwfDrd+KjLriMLTRD8JjDXaV2nHw8a8HueWc/3V+NCVzN7JvAH9/z7fH
+   0xfqQffuljFd1DVxeL8XN+x7qPNZvzhm4F5Kw3LgdhWuZN5E/Tv0Vi03a
+   QaU8WASpp4R7stoivLdlKqBdK854CMoOTenN8KKhlvrtl8zFHtSagrIO8
    Q=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: PgHkDbHah6iAFNUMu4uw1QH6AB+iOophm8YewS0rfzJp6aePwkzcxFz0t/hmEoM/+Jxxvzck7g
- LpNjFD83Q+8hHJlHJYJ8B+Nu3K+69PlUeh6vXnWQRIp9QUBHU4uCqbI54QitbuTDHNPqyDgkC9
- FWmMWo8uBygGhhpFuEJdBZ4CkJ3NHWNkvyBEQ8enZGdyXRHTpWAxDozFO0SkviYmbzk7QVa59H
- BcYk8w4f0JwsRK4J7oIr2eejvIa76ZG4PozqUAZGM6+tuNGHx470pUjbsnzie62WHwzNKgxUXL
- jY2T/Ti6Fh9CKX5IGGjgoT78
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: QoVcGhRi2qO89G0mlfsb3z4fJRpxrsWCEmF6IwH+yljjgQ6tmYJwawULIcQxB9vpa1O+JOptVA
+ bKotuYX0SADBqbFVQiOG1r3zg9P2auTZSkj8pSLzYuyz4ZKERtSE20w/ElRbN5G+qa20yMck23
+ xNHi1dgvhE8BswwY8rc5rUY6kfcp5nHN6UjGAnWQnhHs5zJ15/ShNok35B++zocRrf9hjy8Yqc
+ RJm7x70n8A5ocJ6g0Cygzd7AeePFcmWYHMxkiFy0cNWWVVzTnO2/OEWhQMLOMhtNy7N5UbNLvV
+ Pc0x15hKmHTsn35tqjzmlU8z
 X-SBRS: 5.1
-X-MesageID: 64149870
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 64554436
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:7+b3VK6m1Bog8IjFj4AnKQxRtCfAchMFZxGqfqrLsTDasY5as4F+v
- mVOD2qAaK2OYjH3Lox1bom39h4CvcXVnNE2HAI+/yBjHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
- +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZj29Iw2LBVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zx
- I0SrbWAYwsSHrTv2/oHSidcHTNvMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQQa+CN
- ppGMVKDajzRODpOYAkPV6sP37iupXn2dDpit1ua8P9fD2/7k1UqjemF3MDuUsyHQ4BZk1iVo
- krC/n/lGVcKOdqH0z2H/3mwwOjVkkvGtJk6TePisKQw2RvKmzJVWEZ+uUaHTeeRhhbhQ/tvA
- UAv2jMN7rYo7XKvQMvsUEjtyJKbhSI0V91VGuw8zQiCzKvI/gqUblQ5oi59hM8O75FvG2Fzv
- rOdt5awXGE07uXJIZ6I3urM9VuP1T4pwXjujMPuZS8M+JHdrY46lXojpf4zQffu3rUZ9dwdq
- g1mTRTSZZ1O16bnNI3hpDgrZg5AQbCTEGYICv3/BD7N0++ATNfNi3aUwVba9+1cC42SU0OMu
- nMJ8+DHsrxSUsHdyXHVGb5XdF1M2xpiGGeC6WOD4rF7r2j9k5JdVdw4DM5CyLdBbZ9fJG6Bj
- L77sgJN/p5DVEZGnocsC79d//8ClPC6ffy8D6i8RoMXPvBZKV/WlAkzNBX49z28zyARfVQXZ
- M7znTCEVi1BV8yKDVOeGo8g7FPc7n5imz2DH82np/lluJLHDEOopX4+GAPmRogEAGms+W05K
- v5TaJmHzQtxSur7bnWF+IIfNwlSf3M6GYr3u4pccevaelhqH2QoCvnwx7I9etM6w/QJx7mQp
- nztCFVFzFffhGHcLVnYYH5Ud76yD410qmg2PHJwMA/wiWQje4um8IwWa4AzIes87OVmwPMtF
- 6sFdsyMD+5hUDPC/zhBP5DxoJY7LEaghB6UPjrjaz86JsYySwvM897iXw3u6ChRUXbn6Zpg+
- +Wtj1qJT4ACSgJuCNftRMiul17h72IAnO9SXlfTJoUBckvb74U3eTf6ieU6Ip9QJEyblCeaz
- QufHTwRufLJ/90u6NDMiK2J89WpHu95EhYIFmXX9+/rZyzT/27lyo5cSueYOzvaUTqsqqmlY
- OxUydD6MeEGwwkW49YtTe4zwPJs/cbrqp9b0h9gTSfCYFmcA799JmWLgJtUvapXy74F4Qa7V
- ypjIDWB1Wll7C89LGMsGQ==
-IronPort-HdrOrdr: A9a23:6e+jBa8GOLnaHDB8X45uk+DaI+orL9Y04lQ7vn2YSXRuHPBw9v
- re5cjzuiWVtN98Yh0dcJW7Scy9qBDnhPhICOsqTNSftWDd0QPCRuxfBMnZslnd8kXFh4lgPM
- xbEpSWZueeMbEDt7eZ3DWF
+IronPort-Data: A9a23:ylsxfa9MNE57VophY7JdDrUDmXmTJUtcMsCJ2f8bNWPcYEJGY0x3z
+ mQZDW3UPPuOM2ejLYx/O9u+oExSu8PVz983SgVs/H08E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si9AttENlFEkvU2ybuOU5NXsZ2YhFWeIdA970Ug5w7Rg3tYx6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhhx
+ vUQr56/az4IM53ristGAiZBHSNXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwKKsXxMZxZkXZn1TzDVt4tQIzZQrWM7thdtNs1rp4SQKuCO
+ 5FHAdZpRC+cMjtyJVsZMc8dwbaUonbUTz5yuE3A8MLb5ECMlVcsgdABKuH9atGMAMlYgEucj
+ mbH5HjiRAEXMsSFzjiI+W7qgfXA9R4XQ6pLSuf+rKQzxgTOmCpDU3X6SGdXv9GphG7jQdBQC
+ XU19xoJv4dppXOyQNvUCkjQTGG/gjYQXN9ZEusf4Q6Ly7bJ7wvxOlXoXgKte/R96pZoGGVCO
+ kuh2oqwWGcx6OH9pWe1q+/MxQ5eLxT5OoPricUsaQIeq+fur4go5v4kZoYySfXl5jEZ9NyZ/
+ txrkMTcr+hJ5SLo///ilbwiv95LjsKXJjPZHi2NAgqYAvpRPeZJnbCA51nB9upnJ42EVFSHt
+ 3Vss5HAsLxRXcHQyXTUG79l8FSVCxGtamO0vLKSN8N5q2TFF4CLIei8Hw2S1G82a51ZKFcFk
+ WfYuB9L5Y87AZdZRfQfXm5FMOxzlfKIPY28Dpj8N4MSCrAsJF7v1Hw/Pia4gjGy+HXAZIliY
+ P93h+73Vi1EYUmmpRLrL9ogPUgDmHxgmzOJGMyTItbO+eP2WUN5gIwtaDOmBt3VJovd/Fy9H
+ w93O5TYxhNBfvf5ZyWLo4cfIUpTdSowBIzsqtwRfemGe1I0FGYkAv7X4LUgZ406wPgFyraWp
+ imwCh1C1V7ypXzbMgHWOHptX6ziAMRkpnUhMC1yYVvxgyo/YZyi5bs0focseeV17/RqyPN5F
+ qFXe8iJDvlVZC7A/jARMcv0oIB4LUz5jgOSJSu1JjM4esc4FQDO/9bleCrp9TUPUXXr5Zdv/
+ eX421qCE5QZRglkAMLHU96Vzgu87SoHheZ/f0rUOd0PKk/ix5dndn7qhfgtLsBSdRianmmG1
+ xybCAszrPXWp9Nn68HAgK2Jotv7E+Z6GUYGTWDX4azvaHvf92unh4RBTPyJbXbWU2atoPeuY
+ uBczvfdNvwbnQkV79ogQugzla9utcHyo7J6zxh/GCSZZlumPbpsP32a0JQdraZK3LJY5VO7V
+ 0/nFgO24llV1BcJyGIsGTc=
+IronPort-HdrOrdr: A9a23:1Yj2jamh1rf49naRkJgShayoFFjpDfIu3DAbv31ZSRFFG/Fxl6
+ iV8sjztCWE8Qr5N0tBpTntAsW9qDbnhPtICOoqTNGftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
+ 9bAs9D4bbLbGSS4/yU3ODBKadD/OW6
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149870"
+   d="scan'208";a="64554436"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 42/70] x86/hvmsave: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:59 +0000
-Message-ID: <20220214125127.17985-43-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 16/70] xen: CFI hardening for IPIs
+Date: Mon, 14 Feb 2022 12:50:33 +0000
+Message-ID: <20220214125127.17985-17-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,419 +106,639 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/cpu/mcheck/vmce.c       |  4 ++--
- xen/arch/x86/emul-i8254.c            |  4 ++--
- xen/arch/x86/hvm/hpet.c              |  4 ++--
- xen/arch/x86/hvm/hvm.c               | 18 ++++++++++--------
- xen/arch/x86/hvm/irq.c               | 12 ++++++------
- xen/arch/x86/hvm/mtrr.c              |  4 ++--
- xen/arch/x86/hvm/pmtimer.c           |  4 ++--
- xen/arch/x86/hvm/rtc.c               |  4 ++--
- xen/arch/x86/hvm/vioapic.c           |  4 ++--
- xen/arch/x86/hvm/viridian/viridian.c | 15 ++++++++-------
- xen/arch/x86/hvm/vlapic.c            |  8 ++++----
- xen/arch/x86/hvm/vpic.c              |  4 ++--
- 12 files changed, 44 insertions(+), 41 deletions(-)
+ xen/arch/x86/acpi/cpu_idle.c            |  2 +-
+ xen/arch/x86/acpi/cpufreq/cpufreq.c     |  8 ++++----
+ xen/arch/x86/acpi/cpufreq/powernow.c    |  6 +++---
+ xen/arch/x86/acpi/lib.c                 |  2 +-
+ xen/arch/x86/cpu/amd.c                  |  2 +-
+ xen/arch/x86/cpu/mcheck/amd_nonfatal.c  |  2 +-
+ xen/arch/x86/cpu/mcheck/mce.c           |  6 +++---
+ xen/arch/x86/cpu/mcheck/mce_intel.c     |  2 +-
+ xen/arch/x86/cpu/mcheck/non-fatal.c     |  2 +-
+ xen/arch/x86/cpu/microcode/core.c       |  2 +-
+ xen/arch/x86/cpu/mtrr/generic.c         |  2 +-
+ xen/arch/x86/cpu/mtrr/main.c            |  2 +-
+ xen/arch/x86/cpu/mwait-idle.c           |  6 +++---
+ xen/arch/x86/cpu/vpmu.c                 |  4 ++--
+ xen/arch/x86/guest/xen/xen.c            |  2 +-
+ xen/arch/x86/hvm/nestedhvm.c            |  3 +--
+ xen/arch/x86/hvm/vmx/vmcs.c             |  2 +-
+ xen/arch/x86/include/asm/mtrr.h         |  2 +-
+ xen/arch/x86/irq.c                      |  4 ++--
+ xen/arch/x86/nmi.c                      |  2 +-
+ xen/arch/x86/oprofile/nmi_int.c         | 10 +++++-----
+ xen/arch/x86/oprofile/op_model_athlon.c |  2 +-
+ xen/arch/x86/platform_hypercall.c       |  4 ++--
+ xen/arch/x86/psr.c                      |  2 +-
+ xen/arch/x86/shutdown.c                 |  4 ++--
+ xen/arch/x86/smp.c                      |  2 +-
+ xen/arch/x86/sysctl.c                   |  2 +-
+ xen/arch/x86/time.c                     |  8 ++++----
+ xen/common/cpu.c                        |  4 ++--
+ xen/common/gdbstub.c                    |  2 +-
+ xen/common/keyhandler.c                 |  2 +-
+ xen/common/page_alloc.c                 |  2 +-
+ 32 files changed, 53 insertions(+), 54 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/mcheck/vmce.c b/xen/arch/x86/cpu/mcheck/vmce.c
-index eb6434a3ba20..458120f9ad8d 100644
---- a/xen/arch/x86/cpu/mcheck/vmce.c
-+++ b/xen/arch/x86/cpu/mcheck/vmce.c
-@@ -353,7 +353,7 @@ int vmce_wrmsr(uint32_t msr, uint64_t val)
- }
- 
- #if CONFIG_HVM
--static int vmce_save_vcpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check vmce_save_vcpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct hvm_vmce_vcpu ctxt = {
-         .caps = v->arch.vmce.mcg_cap,
-@@ -365,7 +365,7 @@ static int vmce_save_vcpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(VMCE_VCPU, v->vcpu_id, h, &ctxt);
- }
- 
--static int vmce_load_vcpu_ctxt(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check vmce_load_vcpu_ctxt(struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-diff --git a/xen/arch/x86/emul-i8254.c b/xen/arch/x86/emul-i8254.c
-index 0e09a173187f..d170f464d966 100644
---- a/xen/arch/x86/emul-i8254.c
-+++ b/xen/arch/x86/emul-i8254.c
-@@ -391,7 +391,7 @@ void pit_stop_channel0_irq(PITState *pit)
-     spin_unlock(&pit->lock);
- }
- 
--static int pit_save(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check pit_save(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct domain *d = v->domain;
-     PITState *pit = domain_vpit(d);
-@@ -409,7 +409,7 @@ static int pit_save(struct vcpu *v, hvm_domain_context_t *h)
-     return rc;
- }
- 
--static int pit_load(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check pit_load(struct domain *d, hvm_domain_context_t *h)
- {
-     PITState *pit = domain_vpit(d);
-     int i, rc = 0;
-diff --git a/xen/arch/x86/hvm/hpet.c b/xen/arch/x86/hvm/hpet.c
-index 7bdb51cfa1c4..ed512fa65b63 100644
---- a/xen/arch/x86/hvm/hpet.c
-+++ b/xen/arch/x86/hvm/hpet.c
-@@ -582,7 +582,7 @@ static const struct hvm_mmio_ops hpet_mmio_ops = {
+diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
+index fb47eb9ad68e..22c8bb0c2d94 100644
+--- a/xen/arch/x86/acpi/cpu_idle.c
++++ b/xen/arch/x86/acpi/cpu_idle.c
+@@ -145,7 +145,7 @@ struct hw_residencies
+     uint64_t cc7;
  };
  
- 
--static int hpet_save(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check hpet_save(struct vcpu *v, hvm_domain_context_t *h)
+-static void do_get_hw_residencies(void *arg)
++static void cf_check do_get_hw_residencies(void *arg)
  {
-     const struct domain *d = v->domain;
-     HPETState *hp = domain_vhpet(d);
-@@ -645,7 +645,7 @@ static int hpet_save(struct vcpu *v, hvm_domain_context_t *h)
-     return rc;
- }
- 
--static int hpet_load(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check hpet_load(struct domain *d, hvm_domain_context_t *h)
- {
-     HPETState *hp = domain_vhpet(d);
-     struct hvm_hw_hpet *rec;
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index e87e809a945d..4cf313a0ad0a 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -756,7 +756,7 @@ void hvm_domain_destroy(struct domain *d)
-     destroy_vpci_mmcfg(d);
- }
- 
--static int hvm_save_tsc_adjust(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check hvm_save_tsc_adjust(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct hvm_tsc_adjust ctxt = {
-         .tsc_adjust = v->arch.hvm.msr_tsc_adjust,
-@@ -765,7 +765,7 @@ static int hvm_save_tsc_adjust(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(TSC_ADJUST, v->vcpu_id, h, &ctxt);
- }
- 
--static int hvm_load_tsc_adjust(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check hvm_load_tsc_adjust(struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-@@ -788,7 +788,7 @@ static int hvm_load_tsc_adjust(struct domain *d, hvm_domain_context_t *h)
- HVM_REGISTER_SAVE_RESTORE(TSC_ADJUST, hvm_save_tsc_adjust,
-                           hvm_load_tsc_adjust, 1, HVMSR_PER_VCPU);
- 
--static int hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check hvm_save_cpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct segment_register seg;
-     struct hvm_hw_cpu ctxt = {
-@@ -971,7 +971,7 @@ unsigned long hvm_cr4_guest_valid_bits(const struct domain *d)
-             (cet              ? X86_CR4_CET               : 0));
- }
- 
--static int hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check hvm_load_cpu_ctxt(struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-@@ -1172,7 +1172,8 @@ HVM_REGISTER_SAVE_RESTORE(CPU, hvm_save_cpu_ctxt, hvm_load_cpu_ctxt, 1,
-                                            save_area) + \
-                                   xstate_ctxt_size(xcr0))
- 
--static int hvm_save_cpu_xsave_states(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check hvm_save_cpu_xsave_states(
-+    struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct hvm_hw_cpu_xsave *ctxt;
-     unsigned int size = HVM_CPU_XSAVE_SIZE(v->arch.xcr0_accum);
-@@ -1210,7 +1211,8 @@ CHECK_FIELD_(struct, xsave_hdr, reserved);
- #undef compat_xsave_hdr
- #undef xen_xsave_hdr
- 
--static int hvm_load_cpu_xsave_states(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check hvm_load_cpu_xsave_states(
-+    struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int vcpuid, size;
-     int err;
-@@ -1338,7 +1340,7 @@ static const uint32_t msrs_to_send[] = {
-     MSR_AMD64_DR3_ADDRESS_MASK,
+     struct cpuinfo_x86 *c = &current_cpu_data;
+     struct hw_residencies *hw_res = arg;
+diff --git a/xen/arch/x86/acpi/cpufreq/cpufreq.c b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+index 9510f05340aa..8133c2dd958c 100644
+--- a/xen/arch/x86/acpi/cpufreq/cpufreq.c
++++ b/xen/arch/x86/acpi/cpufreq/cpufreq.c
+@@ -129,7 +129,7 @@ struct drv_cmd {
+     u32 val;
  };
  
--static int hvm_save_cpu_msrs(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check hvm_save_cpu_msrs(struct vcpu *v, hvm_domain_context_t *h)
+-static void do_drv_read(void *drvcmd)
++static void cf_check do_drv_read(void *drvcmd)
  {
-     const struct domain *d = v->domain;
-     struct hvm_save_descriptor *desc = _p(&h->data[h->cur]);
-@@ -1418,7 +1420,7 @@ static int hvm_save_cpu_msrs(struct vcpu *v, hvm_domain_context_t *h)
-     return 0;
- }
+     struct drv_cmd *cmd;
  
--static int hvm_load_cpu_msrs(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check hvm_load_cpu_msrs(struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int i, vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-diff --git a/xen/arch/x86/hvm/irq.c b/xen/arch/x86/hvm/irq.c
-index a7f8991a7b84..5a7f39b54ff4 100644
---- a/xen/arch/x86/hvm/irq.c
-+++ b/xen/arch/x86/hvm/irq.c
-@@ -657,7 +657,7 @@ static int __init cf_check dump_irq_info_key_init(void)
- }
- __initcall(dump_irq_info_key_init);
- 
--static int irq_save_pci(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check irq_save_pci(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct domain *d = v->domain;
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-@@ -690,7 +690,7 @@ static int irq_save_pci(struct vcpu *v, hvm_domain_context_t *h)
-     return rc;
- }
- 
--static int irq_save_isa(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check irq_save_isa(struct vcpu *v, hvm_domain_context_t *h)
- {
-     const struct domain *d = v->domain;
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-@@ -699,7 +699,7 @@ static int irq_save_isa(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(ISA_IRQ, 0, h, &hvm_irq->isa_irq);
- }
- 
--static int irq_save_link(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check irq_save_link(struct vcpu *v, hvm_domain_context_t *h)
- {
-     const struct domain *d = v->domain;
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-@@ -708,7 +708,7 @@ static int irq_save_link(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(PCI_LINK, 0, h, &hvm_irq->pci_link);
- }
- 
--static int irq_load_pci(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check irq_load_pci(struct domain *d, hvm_domain_context_t *h)
- {
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-     int link, dev, intx, gsi;
-@@ -741,7 +741,7 @@ static int irq_load_pci(struct domain *d, hvm_domain_context_t *h)
-     return 0;
- }
- 
--static int irq_load_isa(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check irq_load_isa(struct domain *d, hvm_domain_context_t *h)
- {
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-     int irq;
-@@ -760,7 +760,7 @@ static int irq_load_isa(struct domain *d, hvm_domain_context_t *h)
- }
- 
- 
--static int irq_load_link(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check irq_load_link(struct domain *d, hvm_domain_context_t *h)
- {
-     struct hvm_irq *hvm_irq = hvm_domain_irq(d);
-     int link, gsi;
-diff --git a/xen/arch/x86/hvm/mtrr.c b/xen/arch/x86/hvm/mtrr.c
-index 42f3d8319296..4d2aa6def86d 100644
---- a/xen/arch/x86/hvm/mtrr.c
-+++ b/xen/arch/x86/hvm/mtrr.c
-@@ -687,7 +687,7 @@ int hvm_set_mem_pinned_cacheattr(struct domain *d, uint64_t gfn_start,
-     return 0;
- }
- 
--static int hvm_save_mtrr_msr(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check hvm_save_mtrr_msr(struct vcpu *v, hvm_domain_context_t *h)
- {
-     const struct mtrr_state *mtrr_state = &v->arch.hvm.mtrr;
-     struct hvm_hw_mtrr hw_mtrr = {
-@@ -725,7 +725,7 @@ static int hvm_save_mtrr_msr(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(MTRR, v->vcpu_id, h, &hw_mtrr);
- }
- 
--static int hvm_load_mtrr_msr(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check hvm_load_mtrr_msr(struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int vcpuid, i;
-     struct vcpu *v;
-diff --git a/xen/arch/x86/hvm/pmtimer.c b/xen/arch/x86/hvm/pmtimer.c
-index 60e3c8de4c6b..2a89bbdfa5b8 100644
---- a/xen/arch/x86/hvm/pmtimer.c
-+++ b/xen/arch/x86/hvm/pmtimer.c
-@@ -249,7 +249,7 @@ static int cf_check handle_pmt_io(
-     return X86EMUL_OKAY;
- }
- 
--static int acpi_save(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check acpi_save(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct domain *d = v->domain;
-     struct hvm_hw_acpi *acpi = &d->arch.hvm.acpi;
-@@ -281,7 +281,7 @@ static int acpi_save(struct vcpu *v, hvm_domain_context_t *h)
-     return rc;
- }
- 
--static int acpi_load(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check acpi_load(struct domain *d, hvm_domain_context_t *h)
- {
-     struct hvm_hw_acpi *acpi = &d->arch.hvm.acpi;
-     PMTState *s = &d->arch.hvm.pl_time->vpmt;
-diff --git a/xen/arch/x86/hvm/rtc.c b/xen/arch/x86/hvm/rtc.c
-index bdc647e433e9..ed397276faa3 100644
---- a/xen/arch/x86/hvm/rtc.c
-+++ b/xen/arch/x86/hvm/rtc.c
-@@ -738,7 +738,7 @@ void rtc_migrate_timers(struct vcpu *v)
- }
- 
- /* Save RTC hardware state */
--static int rtc_save(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check rtc_save(struct vcpu *v, hvm_domain_context_t *h)
- {
-     const struct domain *d = v->domain;
-     RTCState *s = domain_vrtc(d);
-@@ -756,7 +756,7 @@ static int rtc_save(struct vcpu *v, hvm_domain_context_t *h)
- }
- 
- /* Reload the hardware state from a saved domain */
--static int rtc_load(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check rtc_load(struct domain *d, hvm_domain_context_t *h)
- {
-     RTCState *s = domain_vrtc(d);
- 
-diff --git a/xen/arch/x86/hvm/vioapic.c b/xen/arch/x86/hvm/vioapic.c
-index b56549aa22d1..d5d5b02421e9 100644
---- a/xen/arch/x86/hvm/vioapic.c
-+++ b/xen/arch/x86/hvm/vioapic.c
-@@ -590,7 +590,7 @@ int vioapic_get_trigger_mode(const struct domain *d, unsigned int gsi)
-     return vioapic->redirtbl[pin].fields.trig_mode;
- }
- 
--static int ioapic_save(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check ioapic_save(struct vcpu *v, hvm_domain_context_t *h)
- {
-     const struct domain *d = v->domain;
-     struct hvm_vioapic *s;
-@@ -607,7 +607,7 @@ static int ioapic_save(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(IOAPIC, 0, h, &s->domU);
- }
- 
--static int ioapic_load(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check ioapic_load(struct domain *d, hvm_domain_context_t *h)
- {
-     struct hvm_vioapic *s;
- 
-diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index 7ebcaa1c899f..25dca93e8b71 100644
---- a/xen/arch/x86/hvm/viridian/viridian.c
-+++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -1104,8 +1104,8 @@ void viridian_unmap_guest_page(struct viridian_page *vp)
-     put_page_and_type(page);
- }
- 
--static int viridian_save_domain_ctxt(struct vcpu *v,
--                                     hvm_domain_context_t *h)
-+static int cf_check viridian_save_domain_ctxt(
-+    struct vcpu *v, hvm_domain_context_t *h)
- {
-     const struct domain *d = v->domain;
-     const struct viridian_domain *vd = d->arch.hvm.viridian;
-@@ -1123,8 +1123,8 @@ static int viridian_save_domain_ctxt(struct vcpu *v,
-     return (hvm_save_entry(VIRIDIAN_DOMAIN, 0, h, &ctxt) != 0);
- }
- 
--static int viridian_load_domain_ctxt(struct domain *d,
--                                     hvm_domain_context_t *h)
-+static int cf_check viridian_load_domain_ctxt(
-+    struct domain *d, hvm_domain_context_t *h)
- {
-     struct viridian_domain *vd = d->arch.hvm.viridian;
-     struct hvm_viridian_domain_context ctxt;
-@@ -1144,7 +1144,8 @@ static int viridian_load_domain_ctxt(struct domain *d,
- HVM_REGISTER_SAVE_RESTORE(VIRIDIAN_DOMAIN, viridian_save_domain_ctxt,
-                           viridian_load_domain_ctxt, 1, HVMSR_PER_DOM);
- 
--static int viridian_save_vcpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check viridian_save_vcpu_ctxt(
-+    struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct hvm_viridian_vcpu_context ctxt = {};
- 
-@@ -1157,8 +1158,8 @@ static int viridian_save_vcpu_ctxt(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(VIRIDIAN_VCPU, v->vcpu_id, h, &ctxt);
- }
- 
--static int viridian_load_vcpu_ctxt(struct domain *d,
--                                   hvm_domain_context_t *h)
-+static int cf_check viridian_load_vcpu_ctxt(
-+    struct domain *d, hvm_domain_context_t *h)
- {
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
-index 652e3cb87f12..d4e29ef1ff1d 100644
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -1482,7 +1482,7 @@ static void lapic_rearm(struct vlapic *s)
-     s->timer_last_update = s->pt.last_plt_gtime;
- }
- 
--static int lapic_save_hidden(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check lapic_save_hidden(struct vcpu *v, hvm_domain_context_t *h)
- {
-     if ( !has_vlapic(v->domain) )
-         return 0;
-@@ -1490,7 +1490,7 @@ static int lapic_save_hidden(struct vcpu *v, hvm_domain_context_t *h)
-     return hvm_save_entry(LAPIC, v->vcpu_id, h, &vcpu_vlapic(v)->hw);
- }
- 
--static int lapic_save_regs(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check lapic_save_regs(struct vcpu *v, hvm_domain_context_t *h)
- {
-     if ( !has_vlapic(v->domain) )
-         return 0;
-@@ -1529,7 +1529,7 @@ static void lapic_load_fixup(struct vlapic *vlapic)
+@@ -148,7 +148,7 @@ static void do_drv_read(void *drvcmd)
      }
  }
  
--static int lapic_load_hidden(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check lapic_load_hidden(struct domain *d, hvm_domain_context_t *h)
+-static void do_drv_write(void *drvcmd)
++static void cf_check do_drv_write(void *drvcmd)
  {
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-@@ -1563,7 +1563,7 @@ static int lapic_load_hidden(struct domain *d, hvm_domain_context_t *h)
+     struct drv_cmd *cmd;
+     uint64_t msr_content;
+@@ -244,7 +244,7 @@ struct perf_pair {
+ static DEFINE_PER_CPU(struct perf_pair, gov_perf_pair);
+ static DEFINE_PER_CPU(struct perf_pair, usr_perf_pair);
+ 
+-static void read_measured_perf_ctrs(void *_readin)
++static void cf_check read_measured_perf_ctrs(void *_readin)
+ {
+     struct perf_pair *readin = _readin;
+ 
+@@ -340,7 +340,7 @@ static unsigned int get_cur_freq_on_cpu(unsigned int cpu)
+     return extract_freq(get_cur_val(cpumask_of(cpu)), data);
+ }
+ 
+-static void feature_detect(void *info)
++static void cf_check feature_detect(void *info)
+ {
+     struct cpufreq_policy *policy = info;
+     unsigned int eax;
+diff --git a/xen/arch/x86/acpi/cpufreq/powernow.c b/xen/arch/x86/acpi/cpufreq/powernow.c
+index da8fc40b9a6f..ca71ecf72d67 100644
+--- a/xen/arch/x86/acpi/cpufreq/powernow.c
++++ b/xen/arch/x86/acpi/cpufreq/powernow.c
+@@ -44,12 +44,12 @@
+ 
+ #define ARCH_CPU_FLAG_RESUME	1
+ 
+-static void transition_pstate(void *pstate)
++static void cf_check transition_pstate(void *pstate)
+ {
+     wrmsrl(MSR_PSTATE_CTRL, *(unsigned int *)pstate);
+ }
+ 
+-static void update_cpb(void *data)
++static void cf_check update_cpb(void *data)
+ {
+     struct cpufreq_policy *policy = data;
+ 
+@@ -165,7 +165,7 @@ struct amd_cpu_data {
+     u32 max_hw_pstate;
+ };
+ 
+-static void get_cpu_data(void *arg)
++static void cf_check get_cpu_data(void *arg)
+ {
+     struct amd_cpu_data *data = arg;
+     struct processor_performance *perf = data->perf;
+diff --git a/xen/arch/x86/acpi/lib.c b/xen/arch/x86/acpi/lib.c
+index b66e7338e74d..43831b92d132 100644
+--- a/xen/arch/x86/acpi/lib.c
++++ b/xen/arch/x86/acpi/lib.c
+@@ -99,7 +99,7 @@ unsigned int acpi_get_processor_id(unsigned int cpu)
+ 	return INVALID_ACPIID;
+ }
+ 
+-static void get_mwait_ecx(void *info)
++static void cf_check get_mwait_ecx(void *info)
+ {
+ 	*(u32 *)info = cpuid_ecx(CPUID_MWAIT_LEAF);
+ }
+diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
+index a8e37dbb1f5c..2d18223f20ef 100644
+--- a/xen/arch/x86/cpu/amd.c
++++ b/xen/arch/x86/cpu/amd.c
+@@ -430,7 +430,7 @@ static void disable_c1_ramping(void)
+ 	}
+ }
+ 
+-static void disable_c1e(void *unused)
++static void cf_check disable_c1e(void *unused)
+ {
+ 	uint64_t msr_content;
+ 
+diff --git a/xen/arch/x86/cpu/mcheck/amd_nonfatal.c b/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
+index da0bf85f0223..efb45c931e1f 100644
+--- a/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
++++ b/xen/arch/x86/cpu/mcheck/amd_nonfatal.c
+@@ -79,7 +79,7 @@ static int variable_period = 1;
+  * Collects information of correctable errors and notifies
+  * Dom0 via an event.
+  */
+-static void mce_amd_checkregs(void *info)
++static void cf_check mce_amd_checkregs(void *info)
+ {
+ 	mctelem_cookie_t mctc;
+ 	struct mca_summary bs;
+diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
+index a449fa0424ce..43f6c8471a90 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -961,7 +961,7 @@ void x86_mcinfo_dump(struct mc_info *mi)
+     } while ( 1 );
+ }
+ 
+-static void do_mc_get_cpu_info(void *v)
++static void cf_check do_mc_get_cpu_info(void *v)
+ {
+     int cpu = smp_processor_id();
+     int cindex, cpn;
+@@ -1242,7 +1242,7 @@ static void x86_mc_hwcr_wren_restore(uint64_t hwcr)
+         wrmsrl(MSR_K8_HWCR, hwcr);
+ }
+ 
+-static void x86_mc_msrinject(void *data)
++static void cf_check x86_mc_msrinject(void *data)
+ {
+     struct xen_mc_msrinject *mci = data;
+     struct mcinfo_msr *msr;
+@@ -1274,7 +1274,7 @@ static void x86_mc_msrinject(void *data)
+ }
+ 
+ /*ARGSUSED*/
+-static void x86_mc_mceinject(void *data)
++static void cf_check x86_mc_mceinject(void *data)
+ {
+     printk("Simulating #MC on cpu %d\n", smp_processor_id());
+     __asm__ __volatile__("int $0x12");
+diff --git a/xen/arch/x86/cpu/mcheck/mce_intel.c b/xen/arch/x86/cpu/mcheck/mce_intel.c
+index b6da8262e662..a691e10bdcd6 100644
+--- a/xen/arch/x86/cpu/mcheck/mce_intel.c
++++ b/xen/arch/x86/cpu/mcheck/mce_intel.c
+@@ -599,7 +599,7 @@ static void mce_set_owner(void)
+     cmci_discover();
+ }
+ 
+-static void __cpu_mcheck_distribute_cmci(void *unused)
++static void cf_check __cpu_mcheck_distribute_cmci(void *unused)
+ {
+     cmci_discover();
+ }
+diff --git a/xen/arch/x86/cpu/mcheck/non-fatal.c b/xen/arch/x86/cpu/mcheck/non-fatal.c
+index f7e411c0870e..1c0c32ba0821 100644
+--- a/xen/arch/x86/cpu/mcheck/non-fatal.c
++++ b/xen/arch/x86/cpu/mcheck/non-fatal.c
+@@ -32,7 +32,7 @@ static uint64_t period = MCE_PERIOD;
+ static int adjust = 0;
+ static int variable_period = 1;
+ 
+-static void mce_checkregs (void *info)
++static void cf_check mce_checkregs(void *info)
+ {
+ 	mctelem_cookie_t mctc;
+ 	struct mca_summary bs;
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 9631042190ab..841364208053 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -533,7 +533,7 @@ static int control_thread_fn(const struct microcode_patch *patch)
+     return ret;
+ }
+ 
+-static int do_microcode_update(void *patch)
++static int cf_check do_microcode_update(void *patch)
+ {
+     unsigned int cpu = smp_processor_id();
+     int ret;
+diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
+index 883e3398ff71..7cf4cd01f3f6 100644
+--- a/xen/arch/x86/cpu/mtrr/generic.c
++++ b/xen/arch/x86/cpu/mtrr/generic.c
+@@ -84,7 +84,7 @@ bool is_var_mtrr_overlapped(const struct mtrr_state *m)
+     return false;
+ }
+ 
+-void mtrr_save_fixed_ranges(void *info)
++void cf_check mtrr_save_fixed_ranges(void *info)
+ {
+ 	get_fixed_ranges(mtrr_state.fixed_ranges);
+ }
+diff --git a/xen/arch/x86/cpu/mtrr/main.c b/xen/arch/x86/cpu/mtrr/main.c
+index 428133100d46..4e01c8d6f9df 100644
+--- a/xen/arch/x86/cpu/mtrr/main.c
++++ b/xen/arch/x86/cpu/mtrr/main.c
+@@ -131,7 +131,7 @@ struct set_mtrr_data {
+  */
+ int hold_mtrr_updates_on_aps;
+ 
+-static void ipi_handler(void *info)
++static void cf_check ipi_handler(void *info)
+ /*  [SUMMARY] Synchronisation handler. Executed by "other" CPUs.
+     [RETURNS] Nothing.
+ */
+diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
+index fe1b7af25f01..927ce1b67aa5 100644
+--- a/xen/arch/x86/cpu/mwait-idle.c
++++ b/xen/arch/x86/cpu/mwait-idle.c
+@@ -877,7 +877,7 @@ static void mwait_idle(void)
+ 		cpuidle_current_governor->reflect(power);
+ }
+ 
+-static void auto_demotion_disable(void *dummy)
++static void cf_check auto_demotion_disable(void *dummy)
+ {
+ 	u64 msr_bits;
+ 
+@@ -886,13 +886,13 @@ static void auto_demotion_disable(void *dummy)
+ 	wrmsrl(MSR_PKG_CST_CONFIG_CONTROL, msr_bits);
+ }
+ 
+-static void byt_auto_demotion_disable(void *dummy)
++static void cf_check byt_auto_demotion_disable(void *dummy)
+ {
+ 	wrmsrl(MSR_CC6_DEMOTION_POLICY_CONFIG, 0);
+ 	wrmsrl(MSR_MC6_DEMOTION_POLICY_CONFIG, 0);
+ }
+ 
+-static void c1e_promotion_disable(void *dummy)
++static void cf_check c1e_promotion_disable(void *dummy)
+ {
+ 	u64 msr_bits;
+ 
+diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
+index df3c9201b2c1..4fedc7c57012 100644
+--- a/xen/arch/x86/cpu/vpmu.c
++++ b/xen/arch/x86/cpu/vpmu.c
+@@ -335,7 +335,7 @@ void vpmu_do_interrupt(struct cpu_user_regs *regs)
+ #endif
+ }
+ 
+-static void vpmu_save_force(void *arg)
++static void cf_check vpmu_save_force(void *arg)
+ {
+     struct vcpu *v = arg;
+     struct vpmu_struct *vpmu = vcpu_vpmu(v);
+@@ -528,7 +528,7 @@ void vpmu_initialise(struct vcpu *v)
+         put_vpmu(v);
+ }
+ 
+-static void vpmu_clear_last(void *arg)
++static void cf_check vpmu_clear_last(void *arg)
+ {
+     if ( this_cpu(last_vcpu) == arg )
+         this_cpu(last_vcpu) = NULL;
+diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
+index 2ff63d370a8a..b2aa3a009b4a 100644
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -289,7 +289,7 @@ int xg_free_unused_page(mfn_t mfn)
+     return rangeset_remove_range(mem, mfn_x(mfn), mfn_x(mfn));
+ }
+ 
+-static void ap_resume(void *unused)
++static void cf_check ap_resume(void *unused)
+ {
+     BUG_ON(map_vcpuinfo());
+     BUG_ON(init_evtchn());
+diff --git a/xen/arch/x86/hvm/nestedhvm.c b/xen/arch/x86/hvm/nestedhvm.c
+index 23516884482b..58370190ffc9 100644
+--- a/xen/arch/x86/hvm/nestedhvm.c
++++ b/xen/arch/x86/hvm/nestedhvm.c
+@@ -82,8 +82,7 @@ nestedhvm_vcpu_destroy(struct vcpu *v)
+     alternative_vcall(hvm_funcs.nhvm_vcpu_destroy, v);
+ }
+ 
+-static void
+-nestedhvm_flushtlb_ipi(void *info)
++static void cf_check nestedhvm_flushtlb_ipi(void *info)
+ {
+     struct vcpu *v = current;
+     struct domain *d = info;
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index f72a7db0453d..2b6bafe9d542 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -589,7 +589,7 @@ static void vmx_free_vmcs(paddr_t pa)
+     free_domheap_page(maddr_to_page(pa));
+ }
+ 
+-static void __vmx_clear_vmcs(void *info)
++static void cf_check __vmx_clear_vmcs(void *info)
+ {
+     struct vcpu *v = info;
+     struct vmx_vcpu *vmx = &v->arch.hvm.vmx;
+diff --git a/xen/arch/x86/include/asm/mtrr.h b/xen/arch/x86/include/asm/mtrr.h
+index e0fd1005ce72..7733800b798f 100644
+--- a/xen/arch/x86/include/asm/mtrr.h
++++ b/xen/arch/x86/include/asm/mtrr.h
+@@ -64,7 +64,7 @@ struct mtrr_state {
+ };
+ extern struct mtrr_state mtrr_state;
+ 
+-extern void mtrr_save_fixed_ranges(void *);
++extern void cf_check mtrr_save_fixed_ranges(void *);
+ extern void mtrr_save_state(void);
+ extern int mtrr_add(unsigned long base, unsigned long size,
+                     unsigned int type, char increment);
+diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+index f9c808455535..d9bd355113d7 100644
+--- a/xen/arch/x86/irq.c
++++ b/xen/arch/x86/irq.c
+@@ -1127,7 +1127,7 @@ static inline void clear_pirq_eoi(struct domain *d, unsigned int irq)
+     }
+ }
+ 
+-static void set_eoi_ready(void *data);
++static void cf_check set_eoi_ready(void *data);
+ 
+ static void cf_check irq_guest_eoi_timer_fn(void *data)
+ {
+@@ -1398,7 +1398,7 @@ static void __set_eoi_ready(const struct irq_desc *desc)
+ }
+ 
+ /* Mark specified IRQ as ready-for-EOI (if it really is) and attempt to EOI. */
+-static void set_eoi_ready(void *data)
++static void cf_check set_eoi_ready(void *data)
+ {
+     struct irq_desc *desc = data;
+ 
+diff --git a/xen/arch/x86/nmi.c b/xen/arch/x86/nmi.c
+index c8ae4a5d7460..e20d1393c881 100644
+--- a/xen/arch/x86/nmi.c
++++ b/xen/arch/x86/nmi.c
+@@ -149,7 +149,7 @@ int nmi_active;
+     (P4_CCCR_OVF_PMI0|P4_CCCR_THRESHOLD(15)|P4_CCCR_COMPLEMENT| \
+      P4_CCCR_COMPARE|P4_CCCR_REQUIRED|P4_CCCR_ESCR_SELECT(4)|P4_CCCR_ENABLE)
+ 
+-static void __init wait_for_nmis(void *p)
++static void __init cf_check wait_for_nmis(void *p)
+ {
+     unsigned int start_count = this_cpu(nmi_count);
+     unsigned long ticks = 10 * 1000 * cpu_khz / nmi_hz;
+diff --git a/xen/arch/x86/oprofile/nmi_int.c b/xen/arch/x86/oprofile/nmi_int.c
+index ba9c4b9804ca..6ebe20bd1d3e 100644
+--- a/xen/arch/x86/oprofile/nmi_int.c
++++ b/xen/arch/x86/oprofile/nmi_int.c
+@@ -131,7 +131,7 @@ static void nmi_cpu_save_registers(struct op_msrs *msrs)
+ }
+ 
+ 
+-static void nmi_save_registers(void * dummy)
++static void cf_check nmi_save_registers(void *dummy)
+ {
+ 	int cpu = smp_processor_id();
+ 	struct op_msrs * msrs = &cpu_msrs[cpu];
+@@ -179,7 +179,7 @@ static int allocate_msrs(void)
+ }
+ 
+ 
+-static void nmi_cpu_setup(void * dummy)
++static void cf_check nmi_cpu_setup(void *dummy)
+ {
+ 	int cpu = smp_processor_id();
+ 	struct op_msrs * msrs = &cpu_msrs[cpu];
+@@ -245,7 +245,7 @@ static void nmi_restore_registers(struct op_msrs * msrs)
+ }
+ 
+ 
+-static void nmi_cpu_shutdown(void * dummy)
++static void cf_check nmi_cpu_shutdown(void *dummy)
+ {
+ 	int cpu = smp_processor_id();
+ 	struct op_msrs * msrs = &cpu_msrs[cpu];
+@@ -261,7 +261,7 @@ void nmi_release_counters(void)
+ }
+ 
+ 
+-static void nmi_cpu_start(void * dummy)
++static void cf_check nmi_cpu_start(void *dummy)
+ {
+ 	int cpu = smp_processor_id();
+ 	struct op_msrs const * msrs = &cpu_msrs[cpu];
+@@ -278,7 +278,7 @@ int nmi_start(void)
+ }
+ 
+ 
+-static void nmi_cpu_stop(void * dummy)
++static void cf_check nmi_cpu_stop(void *dummy)
+ {
+ 	unsigned int v;
+ 	int cpu = smp_processor_id();
+diff --git a/xen/arch/x86/oprofile/op_model_athlon.c b/xen/arch/x86/oprofile/op_model_athlon.c
+index ee6eb0ecae79..2177f02946e2 100644
+--- a/xen/arch/x86/oprofile/op_model_athlon.c
++++ b/xen/arch/x86/oprofile/op_model_athlon.c
+@@ -436,7 +436,7 @@ static void athlon_stop(struct op_msrs const * const msrs)
+ #define APIC_EILVT_MSG_NMI              0x4
+ #define APIC_EILVT_LVTOFF_IBS           1
+ #define APIC_EILVTn(n)                  (0x500 + 0x10 * n)
+-static inline void __init init_ibs_nmi_per_cpu(void *arg)
++static inline void __init cf_check init_ibs_nmi_per_cpu(void *arg)
+ {
+ 	unsigned long reg;
+ 
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index f5d7adc1e802..b91ccff58900 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -47,7 +47,7 @@ struct resource_access {
+ 
+ long cf_check cpu_frequency_change_helper(void *);
+ void check_resource_access(struct resource_access *);
+-void resource_access(void *);
++void cf_check resource_access(void *);
+ 
+ #ifndef COMPAT
+ typedef long ret_t;
+@@ -149,7 +149,7 @@ void check_resource_access(struct resource_access *ra)
+     ra->nr_done = i;
+ }
+ 
+-void resource_access(void *info)
++void cf_check resource_access(void *info)
+ {
+     struct resource_access *ra = info;
+     unsigned int i;
+diff --git a/xen/arch/x86/psr.c b/xen/arch/x86/psr.c
+index 5b9991bd5b12..6c9cabf3843d 100644
+--- a/xen/arch/x86/psr.c
++++ b/xen/arch/x86/psr.c
+@@ -1247,7 +1247,7 @@ struct cos_write_info
+     const uint32_t *val;
+ };
+ 
+-static void do_write_psr_msrs(void *data)
++static void cf_check do_write_psr_msrs(void *data)
+ {
+     const struct cos_write_info *info = data;
+     unsigned int i, index, cos = info->cos;
+diff --git a/xen/arch/x86/shutdown.c b/xen/arch/x86/shutdown.c
+index ad3e3a76916f..30985d36a612 100644
+--- a/xen/arch/x86/shutdown.c
++++ b/xen/arch/x86/shutdown.c
+@@ -118,7 +118,7 @@ static inline void kb_wait(void)
+             break;
+ }
+ 
+-static void noreturn __machine_halt(void *unused)
++static void noreturn cf_check __machine_halt(void *unused)
+ {
+     local_irq_disable();
+ 
+@@ -548,7 +548,7 @@ static int __init cf_check reboot_init(void)
+ }
+ __initcall(reboot_init);
+ 
+-static void noreturn __machine_restart(void *pdelay)
++static void cf_check noreturn __machine_restart(void *pdelay)
+ {
+     machine_restart(*(unsigned int *)pdelay);
+ }
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index f4952a6bf9a5..f6fd7f95df58 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -339,7 +339,7 @@ void __stop_this_cpu(void)
+     cpumask_clear_cpu(smp_processor_id(), &cpu_online_map);
+ }
+ 
+-static void stop_this_cpu(void *dummy)
++static void cf_check stop_this_cpu(void *dummy)
+ {
+     __stop_this_cpu();
+     for ( ; ; )
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index 1772f51f8f6e..f82abc248885 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -69,7 +69,7 @@ struct l3_cache_info {
+     unsigned long size;
+ };
+ 
+-static void l3_cache_get(void *arg)
++static void cf_check l3_cache_get(void *arg)
+ {
+     struct cpuid4_info info;
+     struct l3_cache_info *l3_info = arg;
+diff --git a/xen/arch/x86/time.c b/xen/arch/x86/time.c
+index fac97023bf10..b444d6344e79 100644
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -1661,7 +1661,7 @@ static void check_tsc_warp(unsigned long tsc_khz, unsigned long *max_warp)
+ static unsigned long tsc_max_warp, tsc_check_count;
+ static cpumask_t tsc_check_cpumask;
+ 
+-static void tsc_check_slave(void *unused)
++static void cf_check tsc_check_slave(void *unused)
+ {
+     unsigned int cpu = smp_processor_id();
+     local_irq_disable();
+@@ -1809,7 +1809,7 @@ static void time_calibration_tsc_rendezvous(void *_r)
+ }
+ 
+ /* Ordinary rendezvous function which does not modify TSC values. */
+-static void time_calibration_std_rendezvous(void *_r)
++static void cf_check time_calibration_std_rendezvous(void *_r)
+ {
+     struct calibration_rendezvous *r = _r;
+     unsigned int total_cpus = cpumask_weight(&r->cpu_calibration_map);
+@@ -1840,7 +1840,7 @@ static void time_calibration_std_rendezvous(void *_r)
+  * Rendezvous function used when clocksource is TSC and
+  * no CPU hotplug will be performed.
+  */
+-static void time_calibration_nop_rendezvous(void *rv)
++static void cf_check time_calibration_nop_rendezvous(void *rv)
+ {
+     const struct calibration_rendezvous *r = rv;
+     struct cpu_time_stamp *c = &this_cpu(cpu_calibration);
+@@ -2032,7 +2032,7 @@ static void __init tsc_check_writability(void)
+     disable_tsc_sync = true;
+ }
+ 
+-static void __init reset_percpu_time(void *unused)
++static void __init cf_check reset_percpu_time(void *unused)
+ {
+     struct cpu_time *t = &this_cpu(cpu_time);
+ 
+diff --git a/xen/common/cpu.c b/xen/common/cpu.c
+index 1f976db0a51f..b0b63cdb3638 100644
+--- a/xen/common/cpu.c
++++ b/xen/common/cpu.c
+@@ -84,13 +84,13 @@ static int cpu_notifier_call_chain(unsigned int cpu, unsigned long action,
+     return ret;
+ }
+ 
+-static void _take_cpu_down(void *unused)
++static void cf_check _take_cpu_down(void *unused)
+ {
+     cpu_notifier_call_chain(smp_processor_id(), CPU_DYING, NULL, true);
+     __cpu_disable();
+ }
+ 
+-static int take_cpu_down(void *arg)
++static int cf_check take_cpu_down(void *arg)
+ {
+     _take_cpu_down(arg);
      return 0;
+diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
+index 99bfd9a654c9..079c3ca9616a 100644
+--- a/xen/common/gdbstub.c
++++ b/xen/common/gdbstub.c
+@@ -660,7 +660,7 @@ static int __init cf_check initialise_gdb(void)
+ }
+ presmp_initcall(initialise_gdb);
+ 
+-static void gdb_pause_this_cpu(void *unused)
++static void cf_check gdb_pause_this_cpu(void *unused)
+ {
+     unsigned long flags;
+ 
+diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
+index 8b9f37837162..2c916d528ab2 100644
+--- a/xen/common/keyhandler.c
++++ b/xen/common/keyhandler.c
+@@ -360,7 +360,7 @@ static cpumask_t read_clocks_cpumask;
+ static DEFINE_PER_CPU(s_time_t, read_clocks_time);
+ static DEFINE_PER_CPU(u64, read_cycles_time);
+ 
+-static void read_clocks_slave(void *unused)
++static void cf_check read_clocks_slave(void *unused)
+ {
+     unsigned int cpu = smp_processor_id();
+     local_irq_disable();
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 561e238d2d6a..827617502e35 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1898,7 +1898,7 @@ void __init end_boot_allocator(void)
+     printk("\n");
  }
  
--static int lapic_load_regs(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check lapic_load_regs(struct domain *d, hvm_domain_context_t *h)
+-static void __init smp_scrub_heap_pages(void *data)
++static void __init cf_check smp_scrub_heap_pages(void *data)
  {
-     unsigned int vcpuid = hvm_load_instance(h);
-     struct vcpu *v;
-diff --git a/xen/arch/x86/hvm/vpic.c b/xen/arch/x86/hvm/vpic.c
-index 5d8ef259b710..b3cafaab8fad 100644
---- a/xen/arch/x86/hvm/vpic.c
-+++ b/xen/arch/x86/hvm/vpic.c
-@@ -400,7 +400,7 @@ static int cf_check vpic_intercept_elcr_io(
-     return X86EMUL_OKAY;
- }
- 
--static int vpic_save(struct vcpu *v, hvm_domain_context_t *h)
-+static int cf_check vpic_save(struct vcpu *v, hvm_domain_context_t *h)
- {
-     struct domain *d = v->domain;
-     struct hvm_hw_vpic *s;
-@@ -420,7 +420,7 @@ static int vpic_save(struct vcpu *v, hvm_domain_context_t *h)
-     return 0;
- }
- 
--static int vpic_load(struct domain *d, hvm_domain_context_t *h)
-+static int cf_check vpic_load(struct domain *d, hvm_domain_context_t *h)
- {
-     struct hvm_hw_vpic *s;
-     unsigned int inst = hvm_load_instance(h);
+     unsigned long mfn, start, end;
+     struct page_info *pg;
 -- 
 2.11.0
 
