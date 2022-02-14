@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49D66C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271723.466430 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19197C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:06:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.271731.466439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3n-0002if-Sz; Mon, 14 Feb 2022 13:06:31 +0000
+	id 1nJb3q-0003Mm-KJ; Mon, 14 Feb 2022 13:06:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271723.466430; Mon, 14 Feb 2022 13:06:31 +0000
+Received: by outflank-mailman (output) from mailman id 271731.466439; Mon, 14 Feb 2022 13:06:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb3m-0002dA-Jm; Mon, 14 Feb 2022 13:06:30 +0000
-Received: by outflank-mailman (input) for mailman id 271723;
- Mon, 14 Feb 2022 13:06:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nJb3p-0003FZ-GA; Mon, 14 Feb 2022 13:06:33 +0000
+Received: by outflank-mailman (input) for mailman id 271731;
+ Mon, 14 Feb 2022 13:06:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb2h-00023t-4r
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:23 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c2e7a5a7-8d96-11ec-b215-9bbe72dcb22c;
- Mon, 14 Feb 2022 14:05:21 +0100 (CET)
+ id 1nJb38-0008IH-Mh
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:05:50 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d3c4e5f6-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:05:49 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c2e7a5a7-8d96-11ec-b215-9bbe72dcb22c
+X-Inumbo-ID: d3c4e5f6-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843922;
+  d=citrix.com; s=securemail; t=1644843949;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=QPTLA3fxBXu+aWVC9A50VpUZzEOTsG18u0DPp6i34Rw=;
-  b=GSed5NuU4e7fyLn0FMMiVRKkmFUBsHkcWiGsNsy0ZBSaAUBGdEl/TjYZ
-   f4G2yyGAFgMANxZ/q07xVsOUoMOE03VS61qJjgZMiRoQpRjKAuqGROqR/
-   CNBQoC9SPSvTC7g1lfAoQGSnlcCHdEYuOrSXQYE+YGWH7HkLENkK32xB1
+  bh=1inRFtu44sj2FbmOrmiHpNybEEC6ccoHhKdjBehHxfA=;
+  b=EQIVzqD8N8DjsM7KCw7d1bcdufAa+IKfggxH2Xf3RKSm9cwuj+FrPl6q
+   6iMCWgoOElO6lcQtnMrs9Faa2StsGojcQiiVenDeIHkt+wJZLNuiVQgO1
+   svGu0bEyiaks7xf7hZCNH8flborxkdkKJNfwT+pojRydwTSwOs2Rl2qL8
    s=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: c2M73LM69pIwwg1qbCGadoc2ajN9nWF7fZKXxFINZQUIpiechXqiAM9dhGJRicOlH0lNnjKFUQ
- uRNM54fdc3VLddtTFmb1I3uw+xRbmLH+N3tsIZZyCG2VaLCTQ1miqgwmvPZ0J0RSYQLeqINKjW
- /iAsNvjfnQFuzqBsvL97tC4RpaIEBEJU8jaIgQGLTVsvmmofbjewZ/5gnQklSp9gPvcsDymhVj
- GBu4iqutX8ozgWDIl5uHZJfmxUzlIdtgsuPl5sUCoEYq4uaNcVzAeioK2v+5Cg16zFWHUa5uMy
- MyI7uxoZD3JGT23iz1kxgoLg
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+IronPort-SDR: 8IUVSPeiRFZz83MSk0IJGHorStZHdFjdSElCrSoUa8Hl/9CwbUlVIF6FmSEIoHxfUUUD5/PVjI
+ SLN86+5RLAVveE4g0QGIaglQm9kyG75cZkKAxmSJGkMWFsKm6lWfSBWgdVpZkbtcTBn1HJ/a2n
+ wvsSAxuwNIulKX7b+C+j0mBB397Ih+VITXxr4CojUMVv5X5x+DMbpX/Iz00607j+fSnJphbxHL
+ L/QLFX+Bfrvh8WpTE9Te09+5nKoEcfvz3+dX6cv1rPt82rwtPaMOi+JicD0m5wIBYMvVOaJhY0
+ wvkHi2QCEBGMyJpZ2+DYp8U6
 X-SBRS: 5.1
-X-MesageID: 64149399
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 66374885
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:NrpN56M6BtRU0fbvrR27kMFynXyQoLVcMsEvi/4bfWQNrUon1jAEy
- zRNCj2Da/+IZ2unetwiPN7j9U8F6pPRyt5gGQto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdpJYz/uUGuCJQUNUjMlkfZKhTr6UUsxNbVU8En1500s/w7dRbrNA2rBVPSvc4
- bsenOWHULOV82Yc3rU8sv/rRLtH5ZweiRtA1rAMTakjUGz2zhH5OKk3N6CpR0YUd6EPdgKMq
- 0Qv+5nilo/R109F5tpICd8XeGVSKlLZFVDmZna7x8FOK/WNz8A/+v9TCRYSVatYo2WQrs8ux
- 5IQjIyPFAwXObWTwuENXzANRkmSPYUekFPGCX22sMjVxEzaaXr8hf5pCSnaP6VBpLwxWzsXs
- 6VFdnZdNXhvhMrvqF6/YsBqit4uM4/AO4QHt2s75TrYEewnUdbIRKCiCdpwgmtp2pEVTKe2i
- 8wxZytwSyqZTx1zak4uM5U9oqCL2mLEbGgNwL6SjfVuuDWCpOBr65D9PdyQdtGUSMF9mkeDu
- nmA72n/GgsdNtGU1XyC6H3EuwPUtXqlAsRITuT+r6M0xg3IroAONPEIfQuikObmhQnjYsJgd
- kcq/TJx960i+GX+G7ERQCaEiHKDuxcdXf9ZHOs79ByBx8Lo3uqJOoQXZmUfMYJ77afaURRvj
- wbUxI2xWVSDpZXIESr1y1uCkd+l1cH5x0cmbDRMcwYK6sKLTGob3kOWFYYL/EJYY7TI9dDML
- 9Ki8XJWa1Y715djO0CHEbfv2WzEm3QxZlRpjjg7p0r8hu+DWKarZpaz9X/Q5utaIYCSQzGp5
- SZYx5fOvL1TVcjWzkRhpdnh+5nzuZ643MD02wYzT/HNCRzxk5JcQWygyG4nfxo4Wir1UTTof
- FXSqWtsCGx7ZxOXgVtMS9vpUawClPG4ffy8D6y8RoceM/BZKV7clAkzNBH44owYuBV1+U3JE
- czAKpjE4LdzIfkP8QdasM9Dje51lnhmnzu7qFKS503P7IdyrUW9Ed8tWGZipMhghE9diAmKo
- dtZKeWQzBBTDL/3biXNqNZBJlEWN3krQ5vxrpUPJOKEJwNnHkAnCuPQnux9K9A0wfwNm7ea5
- Gy5V29Z1EH72S/NJzKVZy0xc7joR5t+8y42ZHR+IVay1nE/So+z96NDJYAvdLwq+bU7n/55R
- vUIYeuaBfFLRmiV8jgRd8Cl/odjaA6qlUSFOC/8OGozeJtpRgro/N74f1SwqHlSX3Tv7cZn+
- u+uzALWR5YHVj9ONseOZaL91U61sFgchPl2AxnCLO5MdRi+64NtMSHw0KM6epleNRXZyzKG/
- A+KGhNE9/LVqoo4/dSV16CJq4ClT7l3EkZARjSJ6L+3MW/R/3a5wJ8GW+GNJGiPWGTx8aSkR
- ONU0/Cjb6FXwAcU69JxQ+Rx0KYzx9rzvLsLnA1rEULCY0mvFr49cGKN2tNCt/EVy7JU0edst
- pljJjWO1W21Bf7Y
-IronPort-HdrOrdr: A9a23:qibe6KHniW4PmsTmpLqE6seALOsnbusQ8zAXP0AYc3Jom62j5r
- mTdZsgtSMc5Ax8ZJhko6HkBEDiewK7yXcW2/hzAV7KZmCP0wHEEGgh1/qH/9SJIVyYygc378
- ZdmsZFZ+EYdWIK7/rH3A==
+IronPort-Data: A9a23:KmOZM6588DpZukW6csGsAgxRtCHAchMFZxGqfqrLsTDasY5as4F+v
+ jcaC2mDP/vcM2v8et8ka4jloU4Bu5Pcmt4wTQo9qywzHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuV3zyIQUBUjclkfJKlYAL/En03FV8MpBsJ00o5wbZj29Iw2LBVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z7
+ s9A9rb3eAcTMKjDiMYaUEhUIh1uBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQQ62BO
+ 5pJNFKDajyZRSFiNF4QLqg9s8KtjWnteBRE9l6a8P9fD2/7k1UqjemF3MDuUsyHQ4BZk1iVo
+ krC/n/lGVcKOdqH0z2H/3mwwOjVkkvGtJk6TePisKQw2RvKmzJVWEZ+uUaHTeeRrFSzGPgYG
+ kwu9C8hvYo19x2nf+XtZkjtyJKbhSI0V91VGuw8zQiCzKvI/gqUblQ5oi59hM8O75FvG2Fzv
+ rOdt5awXGE07uXJIZ6I3urM9VuP1T4pwXjujMPuZS8M+JHdrY46lXojpf4zQffu3rUZ9dwdq
+ g1mTRTSZZ1O16bnNI3hpDgrZg5AQbCTEGYICv3/BD7N0++ATNfNi3aUwVba9+1cC42SU0OMu
+ nMJ8+DHsrxSUsHdyXHVGb5XdF1M2xpiGGeC6WOD4rF7r2j9k5JdVdw4DM5CyLdBbZ9fJG6Bj
+ L77sgJN/p5DVEZGnocsC79d//8ClPC6ffy8D6i8RoMXPvBZKV/WlAkzNBX49z28zyARfVQXZ
+ M7znTCEVi1BV8yKDVOeGo8g7FPc7n5ilD2DHcihl3xKE9O2PRaodFvMC3PWBshR0U9OiFyKm
+ zqGH8fVmRhZTsPkZSzbrdwaIVwQdCBpDpHqsc1HMOWEJ1M+Sm0mDvbQx5InepBkwPsJxruZo
+ CnlVx8K0kf7iF3GNR6ONiJpZoTwUMsttnk8JyEtYwqlgiBxfYa14a4DXJIrZr17pvd7xPt5Q
+ qBdKcWNC/hCUBrd/DEZYcWvpYBubk3z1wmPIzCkcH40eJs5H17F/drtfw3O8igSD3Xo6Zti8
+ uP4jg6CGMgNXQVvCsrSecmD9VLpsChPgv92UmvJPsJXJBfm/r91JnGjlfQwOcwNd0nOn2PIy
+ waMDB4EjuDRuItposLRjKWJoor1QetzGk1WQzvS4bqsbHSI+2OixclLUfqSfCCbX2Txof3wa
+ eJQxvD6EfsGgFcV7NYsT+c1lfozt4n1urtX7gV4B3GaPV2kB4RpLmSCwcQS5LZGwaVUuFfuV
+ 0+CkjWA1W5l5C8x/IYtGTcY
+IronPort-HdrOrdr: A9a23:ou0Nl6hTl85HVVmm6S3OW8D4GXBQXt4ji2hC6mlwRA09TySZ//
+ rOoB17726NtN9/YgBCpTntAsa9qDbnhPpICOoqTM6ftWvdyQmVxehZhOOIqVCNJ8S9zJ876U
+ 4JSdkZNDSaNzhHZKjBjjVQa+xQpeW6zA==
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149399"
+   d="scan'208";a="66374885"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 41/70] x86/quirks: CFI hardening
-Date: Mon, 14 Feb 2022 12:50:58 +0000
-Message-ID: <20220214125127.17985-42-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 59/70] x86/bugframe: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:16 +0000
+Message-ID: <20220214125127.17985-60-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -103,129 +103,139 @@ to help protect against call/jump/return oriented programming attacks.
 
 Use cf_check to annotate function pointer targets for the toolchain.
 
+run_in_exception_handler() managed to escape typechecking, as the compiler
+can't see where function pointer gets called.  After adding some ad-hoc
+typechecking, it turns out that dump_execution_state() alone differs in
+const-ness from the other users of run_in_exception_handler().
+
+Introduce a new show_execution_state_nonconst() to make the typechecking
+happy.
+
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/dmi_scan.c               | 10 +++++-----
- xen/arch/x86/hvm/quirks.c             |  2 +-
- xen/arch/x86/shutdown.c               |  2 +-
- xen/arch/x86/x86_64/mmconfig-shared.c |  8 ++++----
- 4 files changed, 11 insertions(+), 11 deletions(-)
+ xen/arch/x86/include/asm/bug.h       | 10 +++++++++-
+ xen/arch/x86/include/asm/processor.h |  4 +++-
+ xen/arch/x86/traps.c                 |  5 +++++
+ xen/common/keyhandler.c              |  4 ++--
+ xen/drivers/char/ehci-dbgp.c         |  2 +-
+ xen/drivers/char/ns16550.c           |  2 +-
+ xen/include/xen/lib.h                |  2 +-
+ 7 files changed, 22 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/dmi_scan.c b/xen/arch/x86/dmi_scan.c
-index d27cd3450a29..81f80c053a7a 100644
---- a/xen/arch/x86/dmi_scan.c
-+++ b/xen/arch/x86/dmi_scan.c
-@@ -476,7 +476,7 @@ static void __init dmi_save_ident(const struct dmi_header *dm, int slot, int str
- #define NO_MATCH	{ DMI_NONE, NULL}
- #define MATCH		DMI_MATCH
+diff --git a/xen/arch/x86/include/asm/bug.h b/xen/arch/x86/include/asm/bug.h
+index 9bb4a194202f..b7265bdfbe33 100644
+--- a/xen/arch/x86/include/asm/bug.h
++++ b/xen/arch/x86/include/asm/bug.h
+@@ -65,7 +65,15 @@ struct bug_frame {
+     unreachable();                                              \
+ } while (0)
  
--static int __init ich10_bios_quirk(const struct dmi_system_id *d)
-+static int __init cf_check ich10_bios_quirk(const struct dmi_system_id *d)
- {
-     u32 port, smictl;
+-#define run_in_exception_handler(fn) BUG_FRAME(BUGFRAME_run_fn, 0, fn, 0, NULL)
++/*
++ * TODO: untangle header dependences, break BUILD_BUG_ON() out of xen/lib.h,
++ * and use a real static inline here to get proper type checking of fn().
++ */
++#define run_in_exception_handler(fn)                            \
++    do {                                                        \
++        (void)((fn) == (void (*)(struct cpu_user_regs *))NULL); \
++        BUG_FRAME(BUGFRAME_run_fn, 0, fn, 0, NULL);             \
++    } while ( 0 )
  
-@@ -499,14 +499,14 @@ static int __init ich10_bios_quirk(const struct dmi_system_id *d)
-     return 0;
+ #define assert_failed(msg) do {                                 \
+     BUG_FRAME(BUGFRAME_assert, __LINE__, __FILE__, 1, msg);     \
+diff --git a/xen/arch/x86/include/asm/processor.h b/xen/arch/x86/include/asm/processor.h
+index 23639d5479a3..8e2816fae9b9 100644
+--- a/xen/arch/x86/include/asm/processor.h
++++ b/xen/arch/x86/include/asm/processor.h
+@@ -496,7 +496,9 @@ void show_code(const struct cpu_user_regs *regs);
+ void show_stack_overflow(unsigned int cpu, const struct cpu_user_regs *regs);
+ void show_registers(const struct cpu_user_regs *regs);
+ void show_execution_state(const struct cpu_user_regs *regs);
+-#define dump_execution_state() run_in_exception_handler(show_execution_state)
++void cf_check show_execution_state_nonconst(struct cpu_user_regs *regs);
++#define dump_execution_state() \
++    run_in_exception_handler(show_execution_state_nonconst)
+ void show_page_walk(unsigned long addr);
+ void noreturn fatal_trap(const struct cpu_user_regs *regs, bool_t show_remote);
+ 
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 7b957101934e..a2278d9499d0 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -681,6 +681,11 @@ void show_execution_state(const struct cpu_user_regs *regs)
+     console_unlock_recursive_irqrestore(flags);
  }
  
--static __init int reset_videomode_after_s3(const struct dmi_blacklist *d)
-+static __init int cf_check reset_videomode_after_s3(const struct dmi_blacklist *d)
++void cf_check show_execution_state_nonconst(struct cpu_user_regs *regs)
++{
++    show_execution_state(regs);
++}
++
+ void vcpu_show_execution_state(struct vcpu *v)
  {
- 	/* See wakeup.S */
- 	acpi_video_flags |= 2;
- 	return 0;
+     unsigned long flags = 0;
+diff --git a/xen/common/keyhandler.c b/xen/common/keyhandler.c
+index 5dc650a37c5c..b6e22d8120b1 100644
+--- a/xen/common/keyhandler.c
++++ b/xen/common/keyhandler.c
+@@ -138,7 +138,7 @@ static void cf_check show_handlers(unsigned char key)
+ 
+ static cpumask_t dump_execstate_mask;
+ 
+-void dump_execstate(struct cpu_user_regs *regs)
++void cf_check dump_execstate(struct cpu_user_regs *regs)
+ {
+     unsigned int cpu = smp_processor_id();
+ 
+@@ -490,7 +490,7 @@ static void cf_check run_all_keyhandlers(
+     tasklet_schedule(&run_all_keyhandlers_tasklet);
  }
  
--static __init int dmi_disable_acpi(const struct dmi_blacklist *d)
-+static __init int cf_check dmi_disable_acpi(const struct dmi_blacklist *d)
- { 
- 	if (!acpi_force) { 
- 		printk(KERN_NOTICE "%s detected: acpi off\n",d->ident);
-@@ -521,7 +521,7 @@ static __init int dmi_disable_acpi(const struct dmi_blacklist *d)
- /*
-  * Limit ACPI to CPU enumeration for HT
-  */
--static __init int force_acpi_ht(const struct dmi_blacklist *d)
-+static __init int cf_check force_acpi_ht(const struct dmi_blacklist *d)
- { 
- 	if (!acpi_force) { 
- 		printk(KERN_NOTICE "%s detected: force use of acpi=ht\n", d->ident);
-@@ -650,7 +650,7 @@ static const struct dmi_blacklist __initconstrel dmi_blacklist[] = {
-  *	out of here.
-  */
- 
--static void __init dmi_decode(const struct dmi_header *dm)
-+static void __init cf_check dmi_decode(const struct dmi_header *dm)
+-static void do_debugger_trap_fatal(struct cpu_user_regs *regs)
++static void cf_check do_debugger_trap_fatal(struct cpu_user_regs *regs)
  {
- #ifdef DMI_DEBUG
- 	const uint8_t *data = (const void *)dm;
-diff --git a/xen/arch/x86/hvm/quirks.c b/xen/arch/x86/hvm/quirks.c
-index 917356b1312c..2adab1f4b84b 100644
---- a/xen/arch/x86/hvm/quirks.c
-+++ b/xen/arch/x86/hvm/quirks.c
-@@ -25,7 +25,7 @@
- s8 __read_mostly hvm_port80_allowed = -1;
- boolean_param("hvm_port80", hvm_port80_allowed);
+     (void)debugger_trap_fatal(0xf001, regs);
  
--static int __init dmi_hvm_deny_port80(const struct dmi_system_id *id)
-+static int __init cf_check dmi_hvm_deny_port80(const struct dmi_system_id *id)
+diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
+index e205c0da6a61..16c8ff394d5c 100644
+--- a/xen/drivers/char/ehci-dbgp.c
++++ b/xen/drivers/char/ehci-dbgp.c
+@@ -1247,7 +1247,7 @@ static int cf_check ehci_dbgp_getc(struct serial_port *port, char *pc)
+ /* Safe: ehci_dbgp_poll() runs as timer handler, so not reentrant. */
+ static struct serial_port *poll_port;
+ 
+-static void _ehci_dbgp_poll(struct cpu_user_regs *regs)
++static void cf_check _ehci_dbgp_poll(struct cpu_user_regs *regs)
  {
-     printk(XENLOG_WARNING "%s: port 0x80 access %s allowed for HVM guests\n",
-            id->ident, hvm_port80_allowed > 0 ? "forcibly" : "not");
-diff --git a/xen/arch/x86/shutdown.c b/xen/arch/x86/shutdown.c
-index 30985d36a612..7619544d14da 100644
---- a/xen/arch/x86/shutdown.c
-+++ b/xen/arch/x86/shutdown.c
-@@ -158,7 +158,7 @@ static void default_reboot_type(void)
-         reboot_type = BOOT_ACPI;
- }
+     struct serial_port *port = poll_port;
+     struct ehci_dbgp *dbgp = port->uart;
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index 8df1ee4d5c2c..e5b4a9085516 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -206,7 +206,7 @@ static void cf_check ns16550_interrupt(
+ /* Safe: ns16550_poll() runs as softirq so not reentrant on a given CPU. */
+ static DEFINE_PER_CPU(struct serial_port *, poll_port);
  
--static int __init override_reboot(const struct dmi_system_id *d)
-+static int __init cf_check override_reboot(const struct dmi_system_id *d)
+-static void __ns16550_poll(struct cpu_user_regs *regs)
++static void cf_check __ns16550_poll(struct cpu_user_regs *regs)
  {
-     enum reboot_type type = (long)d->driver_data;
+     struct serial_port *port = this_cpu(poll_port);
+     struct ns16550 *uart = port->uart;
+diff --git a/xen/include/xen/lib.h b/xen/include/xen/lib.h
+index c6987973bf88..3a1fdaf7e35a 100644
+--- a/xen/include/xen/lib.h
++++ b/xen/include/xen/lib.h
+@@ -199,7 +199,7 @@ extern char *print_tainted(char *str);
+ extern void add_taint(unsigned int taint);
  
-diff --git a/xen/arch/x86/x86_64/mmconfig-shared.c b/xen/arch/x86/x86_64/mmconfig-shared.c
-index 2fa7f3f0bc4b..74b22b71a19c 100644
---- a/xen/arch/x86/x86_64/mmconfig-shared.c
-+++ b/xen/arch/x86/x86_64/mmconfig-shared.c
-@@ -62,7 +62,7 @@ static int __init cf_check parse_mmcfg(const char *s)
- }
- custom_param("mmcfg", parse_mmcfg);
+ struct cpu_user_regs;
+-void dump_execstate(struct cpu_user_regs *);
++void cf_check dump_execstate(struct cpu_user_regs *);
  
--static const char __init *pci_mmcfg_e7520(void)
-+static const char *__init cf_check pci_mmcfg_e7520(void)
- {
-     u32 win;
-     win = pci_conf_read16(PCI_SBDF(0, 0, 0, 0), 0xce);
-@@ -84,7 +84,7 @@ static const char __init *pci_mmcfg_e7520(void)
-     return "Intel Corporation E7520 Memory Controller Hub";
- }
+ void init_constructors(void);
  
--static const char __init *pci_mmcfg_intel_945(void)
-+static const char *__init cf_check pci_mmcfg_intel_945(void)
- {
-     u32 pciexbar, mask = 0, len = 0;
- 
-@@ -137,7 +137,7 @@ static const char __init *pci_mmcfg_intel_945(void)
-     return "Intel Corporation 945G/GZ/P/PL Express Memory Controller Hub";
- }
- 
--static const char __init *pci_mmcfg_amd_fam10h(void)
-+static const char *__init cf_check pci_mmcfg_amd_fam10h(void)
- {
-     uint32_t address;
-     uint64_t base, msr_content;
-@@ -190,7 +190,7 @@ static const char __init *pci_mmcfg_amd_fam10h(void)
-     return "AMD Family 10h NB";
- }
- 
--static const char __init *pci_mmcfg_nvidia_mcp55(void)
-+static const char *__init cf_check pci_mmcfg_nvidia_mcp55(void)
- {
-     static bool_t __initdata mcp55_checked;
-     int bus, i;
 -- 
 2.11.0
 
