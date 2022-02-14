@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EE14C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1356C433EF
 	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:04:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.271643.466187 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.271644.466203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb29-0000AN-8B; Mon, 14 Feb 2022 13:04:49 +0000
+	id 1nJb2B-0000hD-CZ; Mon, 14 Feb 2022 13:04:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 271643.466187; Mon, 14 Feb 2022 13:04:49 +0000
+Received: by outflank-mailman (output) from mailman id 271644.466203; Mon, 14 Feb 2022 13:04:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJb28-00009Q-WD; Mon, 14 Feb 2022 13:04:49 +0000
-Received: by outflank-mailman (input) for mailman id 271643;
- Mon, 14 Feb 2022 13:04:47 +0000
+	id 1nJb2B-0000h6-8z; Mon, 14 Feb 2022 13:04:51 +0000
+Received: by outflank-mailman (input) for mailman id 271644;
+ Mon, 14 Feb 2022 13:04:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb27-0008IH-U8
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:47 +0000
+ id 1nJb29-0008IH-3O
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:04:49 +0000
 Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
  [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ad5bf47e-8d96-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:04:46 +0100 (CET)
+ id af28c3de-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:04:48 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,60 +38,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad5bf47e-8d96-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: af28c3de-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644843886;
+  d=citrix.com; s=securemail; t=1644843887;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=Hp8XnKkx9GSqf6AkS0zSNG6Qc1BDd2mSHAJ1CWLZ67A=;
-  b=KEYNINcKXbCFcUlAb0rtyySzGDIHasWKWDgM1YVcXkLuJysbnOhBKttp
-   BtTmfQeIkk3O5jh6BdPpz7ZvP3xmAurWb5l40Yf8n7vD0N4/FY4Joyo0O
-   wAHPV+dApsf8HWCalLWMKBy9XrWpvdzgc8K+Brhs0jOWA2RKo/l4iszi3
-   U=;
+  bh=vffdhJkQcOZTM/FEyvATjcefKfxzfQ918n4MAzGwqnA=;
+  b=a67BnXivL47UiuEZHpBA79Hs3m/KEqQCmrZO1KtGTSZxqoUNeiMZPM5t
+   bJyckYB/Wdh/vp4hARWBbL4HH/imWaBYtsZ0JMjN2febPlovND8380wiu
+   yfAiDUFfBXwt7TdRgX56sf009nFe7nZLd13Av40iorAFjDM+HwEE6xhyk
+   s=;
 Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: b8XcuBXMKkkieRBqBxoKX2f/U+w8fBkueBB1uchr00ZLQ782fgivKa4VtfsQdZ0i8DAAwG1kMo
- DAsIros95B0kTCDCojtIurVtZNbSi0ObYHFMjR6fLElE48qLIiTEbjONBFVdhx5IBDkPEMjgEQ
- WqzRhnQ3RxJPUvMrpREyjJpfyhISYfvCp3yyxHbTGbjJDQImQL6OlTUuQxAvG7E3jnbOBRpE06
- LW3acygO/i7zV3Qn0oP2Y/l8ZQvpImBGYQv0pyLbO7EmYogBnLDEMo1VQosH5qv4Ilm8QTpZhT
- LRossTjr23IIqbplcHVWydFX
+IronPort-SDR: sM20GbCcen2mFkHzTNczXs5slIOV5qqFwR8rms/1B4/eg+cCfD95Sx8tlkm9diDSkpu9Kh79KM
+ IbXGPszWolfrSTN5A/PLQNqHzUnGh0/dosl4szeLcIDueiGMIRChT85psiBWhE9yDiaAk/Lcg0
+ vj9OZ3jqSE6tboicide6kwTDnSUg5ep3g2RMLgKlCBhxSn6BeSwzrwCUh/AkBZcyyvGmd4Ry+g
+ 8ZwXUSH/kb+V9qSrG1L0ZkqKiMHWim4waoFCd6jf2mvjemmL9JVdfuBeQ3MKSZcMG2OcFOTdNY
+ lXKqS5hrHkeupTHBRiWv7ABy
 X-SBRS: 5.1
-X-MesageID: 64149314
+X-MesageID: 64149316
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:MGNz2K04BID6lCN9PvbD5cx2kn2cJEfYwER7XKvMYLTBsI5bpzUHy
- GQfCGHTO6uPZWXzft0nYdu0oElQuZeDzIVqSVE6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkS5PE3oHJ9RGQ74nRLlbHILOCanAZqTNMEn9700o5wrJh2+aEvPDia++zk
- YKqyyHgEAfNNw5cagr4PIra9XuDFNyr0N8plgRWicJj5TcypFFMZH4rHomjLmOQf2VhNrXSq
- 9Avbl2O1jixEx8FUrtJm1tgG6EAaua60QOm0hK6V0U+6/TrS+NbPqsTbZIhhUlrZzqhpftT4
- e1Jk7aKZBo3LI2Wl+FMXxtqKnQrVUFG0OevzXmXtMWSywvNcmf2wuUoB0YzVWEa0r8pWycUr
- 6VecW1TKEDY7w616OvTpu1Er8IvNsT0eqgYvWlt12rxBvc6W5HTBa7N4Le02R9u2pkSTK2HO
- 6L1bxJDUz/KbwV3HWxIEY5gw+Sxmnn9fiBh/Qf9Sa0fvDGIkV0ZPKLWGMrYfJmGSNtYmm6cp
- 3na5CLpDxcCLtudxDGZtHW2iYfycTjTAdxIUufir7gz3QPVljd75AAquUWTm9Kbo3a6ffhlB
- lEK6Ap0oq1j+E6Zd4yoN/Gnm0KsshkZUttWNuQ17gCR16bZizqk6ng4oi1pM4J/6pJvLdA+/
- hrQxo6yW2Qz2FGAYS/Frt+pQSWO1T/5xIPoTQsNVkM77tbqu+nfZTqfH484QMZZYjAYcAwcI
- gxmTgBj3d3/buZRjs1XGGwrZBr2+PD0ovYdvFm/Y45cxloRiHSZT4Kp80PHyv1LMZyUSFKM1
- FBdxZTCs7BeUMzVzXfXKAnoIF1Oz6zbWAAwfHY1R8Vxn9hT0yLLkX9sDMFWex4yb5dslc7Ba
- 07PowJBjKK/z1PxBZKbl7mZUpxwpYC5TIyNfqmNMrJmP8ggHCfarXoGTRPBgAjQfL0EzPhX1
- WGzKp33Ux73yM1PkVKLegvq+eF3mH5unz6PLX05pjz+uYejiLeuYe9tGDOzgioRtstoeS3Zr
- IRSMdWk0RJaXLGsayXb69dLf1sLMWI6Fdb9rMkOLryPJQ9vGWcADf7NwOx+J9w5zvoNzuqYr
- GugXkJ4yUbkgSGVIwu9dX0+OqjkWoxyrCxnMHV0b0qowXUqfa2m8LwbK8ksZbAi+eE6lax0Q
- vAJdt+uGPNKTjibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz+
- uTy2BnaTJwPQxVZIPzXMP//nUmsuXU9mf5pWxeaKNdkZ0ixopNhLDb8j6FrLphUewnD3DaTy
- y2fHQwc+bvWu4Yw/dTE2fKEooOuH7csF0ZWBTCGv7O/NC2c9Wu/245QFu2PeGmFBm/z/ayjY
- 8RTzu39b6JbzAob7dIkHuY517866vvuu6Ren1ZtE3j8Zli2Dq9tfyud1s5Vu6wRnrJUtGNag
- K5UFgW27VlRBP7YLQ==
-IronPort-HdrOrdr: A9a23:yGHfJ6lbxd44LP+EGVWInaMw9+7pDfIu3DAbv31ZSRFFG/Fxl6
- iV8sjztCWE8Qr5N0tBpTntAsW9qDbnhPtICOoqTNGftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAs9D4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:qhcvE6yDkFdLcXQflUd6t+cpwSrEfRIJ4+MujC+fZmUNrF6WrkVSy
+ DMXWD+HPvaOazPxLop1aoi+8EoOupXUx9JhSwE6qCAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnvopW1TYhSEUOZugH9IQM8aZfHAhLeNYYH1500g7wbdl2tcAbeWRWGthh
+ /uj+6UzB3f9s9JEGjp8B3Wr8U4HUFza4Vv0j3RmDRx5lAa2e0o9VfrzEZqZPXrgKrS4K8bhL
+ wr1IBNVyUuCl/slIovNfr8W6STmSJaKVeSFoiI+t6RPHnGuD8H9u0o2HKN0VKtZt9mGt5Nv5
+ oRMt6Tqcg0SZbXzoOgDWBRqKT4raMWq+JefSZS+mcmazkmAeHrw2fR+SkoxOOX0+M4uXzsIr
+ 6ZBbmlQMFbT3Ipaw5riIgVoru0lINPmI8U0vXZ4wCuCJf0nXYrCU+PB4towMDIY2JwXQaeFP
+ pRxhTxHMzjMYS9PB24tOq0Fsc2OokXubw1BkQfAzUYwyzeKl1EguFT3C/LFd9rPSchLk0Kwo
+ mPd43+/EhwcLMaYyzeO7jSrnOCnoM/gcNtMTvvirKcs2QDNgDxIYPELabelibqnpB+/WeoFE
+ EYvoTIRlaQs/0GZdMaoCnVUv0W4lhIbXtNRFcgz5weM1rfY7m6lO4QUctJSQId47ZFrHFTGw
+ nfMxoq0XmI37NV5XFrAru/8kN+kBcQCwYbujwcgRBBN3dTsqZpbYvnnHoc6S/7dYjEY9FjNL
+ 9G2QMoW2u97YS0jjfzTEbX7b9WE/Mahc+LNzl+LNl9JFysgDGJfW6Sm6ELA8dFLJ5uDQ1+Ks
+ RAswpbCsL9eXczQzHXWGo3h+Y1FAN7fblXhbaNHRcF9p1xBBVb/FWyv3N2ODBgwaZtVEdMYS
+ ETSpRlQ9Pdu0IiCNsdKj3aKI51yl8DITI29PtiNN4YmSsUhJWevoXA1DWbNjj+FraTZufxmU
+ XttWZ33Vihy5GUO5GfeetrxJpd1mnFglTuLH8iTItbO+eP2WUN5gIwtaDOmBt3VJoveyOkM2
+ 9oAZcaM1TtFV+jyPnve/YIJdAhYJnknH5Hm7cdQc7fbcAZhHWggDd7XwK8gJNM5z/gEyL+Q8
+ yHvQFJcxXr+mWbDdVeAZEd8Ze69Rp14t386Y3AhZA76x3g5bI+zx64DbJ9rL6I//eluwKcsH
+ fkIcsmNGNpVTTHD92hPZJXxttU6Jh+qmRiPL2yuZz1mJ8xsQAnA+9nFeArz9XZRUnrr5JVm+
+ 7D5j1HVW5sOQQhmHf36UvP3wgPjp2UZlcJzQ1DMfotZdnLz/dU4MCf2lPI2fZ0BcE2R2juA2
+ g+KKh4Evu2R8ZQt+dzEiK3Y/YekF+xyQhhTE2XBtOvkMCDb+iyowJNaUfbOdjfYDTum9KKnb
+ ORT7vf9LPxYwwoa79siS+5mnfAk+t/ih75G1QA1TnzEYmOiBq5kPnTbj9JEsbdAx+MBtAa7M
+ q5VFgK25Vld1BvZLWMs
+IronPort-HdrOrdr: A9a23:D+YHTa9R+7BH4lPnc1Nuk+DaI+orL9Y04lQ7vn2YSXRuHPBw9v
+ re5cjzuiWVtN98Yh0dcJW7Scy9qBDnhPhICOsqTNSftWDd0QPCRuxfBMnZslnd8kXFh4lgPM
+ xbEpSWZueeMbEDt7eZ3DWF
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64149314"
+   d="scan'208";a="64149316"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 57/70] x86/misc: CFI hardening
-Date: Mon, 14 Feb 2022 12:51:14 +0000
-Message-ID: <20220214125127.17985-58-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 26/70] xen/decompress: CFI hardening
+Date: Mon, 14 Feb 2022 12:50:43 +0000
+Message-ID: <20220214125127.17985-27-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
@@ -106,54 +106,86 @@ Use cf_check to annotate function pointer targets for the toolchain.
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/extable.c | 4 ++--
- xen/common/efi/boot.c  | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ xen/common/bunzip2.c            | 2 +-
+ xen/common/decompress.c         | 2 +-
+ xen/common/unlzma.c             | 2 +-
+ xen/common/zstd/zstd_common.c   | 4 ++--
+ xen/common/zstd/zstd_internal.h | 4 ++--
+ 5 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/xen/arch/x86/extable.c b/xen/arch/x86/extable.c
-index 51ef863d786c..4d1875585f9d 100644
---- a/xen/arch/x86/extable.c
-+++ b/xen/arch/x86/extable.c
-@@ -23,7 +23,7 @@ static inline unsigned long ex_cont(const struct exception_table_entry *x)
- 	return EX_FIELD(x, cont);
+diff --git a/xen/common/bunzip2.c b/xen/common/bunzip2.c
+index 2087cfbbedc8..782b589a8b01 100644
+--- a/xen/common/bunzip2.c
++++ b/xen/common/bunzip2.c
+@@ -607,7 +607,7 @@ static int __init read_bunzip(struct bunzip_data *bd, unsigned char *outbuf, int
+ 	goto decode_next_byte;
  }
  
--static int init_or_livepatch cmp_ex(const void *a, const void *b)
-+static int init_or_livepatch cf_check cmp_ex(const void *a, const void *b)
+-static int __init nofill(void *buf, unsigned int len)
++static int __init cf_check nofill(void *buf, unsigned int len)
  {
- 	const struct exception_table_entry *l = a, *r = b;
- 	unsigned long lip = ex_addr(l);
-@@ -37,7 +37,7 @@ static int init_or_livepatch cmp_ex(const void *a, const void *b)
- 	return 0;
+ 	return -1;
  }
+diff --git a/xen/common/decompress.c b/xen/common/decompress.c
+index 79e60f4802d5..989336983f61 100644
+--- a/xen/common/decompress.c
++++ b/xen/common/decompress.c
+@@ -3,7 +3,7 @@
+ #include <xen/string.h>
+ #include <xen/decompress.h>
  
--static void init_or_livepatch swap_ex(void *a, void *b, size_t size)
-+static void init_or_livepatch cf_check swap_ex(void *a, void *b, size_t size)
+-static void __init error(const char *msg)
++static void __init cf_check error(const char *msg)
  {
- 	struct exception_table_entry *l = a, *r = b, tmp;
- 	long delta = b - a;
-diff --git a/xen/common/efi/boot.c b/xen/common/efi/boot.c
-index f31f68fd4cd1..4dd5ea6a0602 100644
---- a/xen/common/efi/boot.c
-+++ b/xen/common/efi/boot.c
-@@ -1497,7 +1497,7 @@ static __init void copy_mapping(unsigned long mfn, unsigned long end,
-     unmap_domain_page(l3dst);
+     printk("%s\n", msg);
  }
+diff --git a/xen/common/unlzma.c b/xen/common/unlzma.c
+index d0ef78eef0d1..6cd99023adf6 100644
+--- a/xen/common/unlzma.c
++++ b/xen/common/unlzma.c
+@@ -76,7 +76,7 @@ struct rc {
+ #define RC_MODEL_TOTAL_BITS 11
  
--static bool __init ram_range_valid(unsigned long smfn, unsigned long emfn)
-+static bool __init cf_check ram_range_valid(unsigned long smfn, unsigned long emfn)
+ 
+-static int __init nofill(void *buffer, unsigned int len)
++static int __init cf_check nofill(void *buffer, unsigned int len)
  {
-     unsigned long sz = pfn_to_pdx(emfn - 1) / PDX_GROUP_COUNT + 1;
- 
-@@ -1506,7 +1506,7 @@ static bool __init ram_range_valid(unsigned long smfn, unsigned long emfn)
-                          pfn_to_pdx(smfn) / PDX_GROUP_COUNT) < sz;
+ 	return -1;
+ }
+diff --git a/xen/common/zstd/zstd_common.c b/xen/common/zstd/zstd_common.c
+index 9a85e938cdd6..5c44e5db7671 100644
+--- a/xen/common/zstd/zstd_common.c
++++ b/xen/common/zstd/zstd_common.c
+@@ -54,12 +54,12 @@ void *__init ZSTD_stackAllocAll(void *opaque, size_t *size)
+ 	return stack_push(stack, *size);
  }
  
--static bool __init rt_range_valid(unsigned long smfn, unsigned long emfn)
-+static bool __init cf_check rt_range_valid(unsigned long smfn, unsigned long emfn)
+-void *__init ZSTD_stackAlloc(void *opaque, size_t size)
++void *__init cf_check ZSTD_stackAlloc(void *opaque, size_t size)
  {
-     return true;
+ 	ZSTD_stack *stack = (ZSTD_stack *)opaque;
+ 	return stack_push(stack, size);
  }
+-void __init ZSTD_stackFree(void *opaque, void *address)
++void __init cf_check ZSTD_stackFree(void *opaque, void *address)
+ {
+ 	(void)opaque;
+ 	(void)address;
+diff --git a/xen/common/zstd/zstd_internal.h b/xen/common/zstd/zstd_internal.h
+index b7dd14f6ce79..94f8c586220e 100644
+--- a/xen/common/zstd/zstd_internal.h
++++ b/xen/common/zstd/zstd_internal.h
+@@ -351,8 +351,8 @@ typedef struct {
+ ZSTD_customMem ZSTD_initStack(void *workspace, size_t workspaceSize);
+ 
+ void *ZSTD_stackAllocAll(void *opaque, size_t *size);
+-void *ZSTD_stackAlloc(void *opaque, size_t size);
+-void ZSTD_stackFree(void *opaque, void *address);
++void *cf_check ZSTD_stackAlloc(void *opaque, size_t size);
++void cf_check ZSTD_stackFree(void *opaque, void *address);
+ 
+ /*======  common function  ======*/
+ 
 -- 
 2.11.0
 
