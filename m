@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60130C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:18:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.272059.466874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3955C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Feb 2022 13:18:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.272060.466879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbEw-0004Jw-58; Mon, 14 Feb 2022 13:18:02 +0000
+	id 1nJbEw-0004Sp-Tr; Mon, 14 Feb 2022 13:18:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 272059.466874; Mon, 14 Feb 2022 13:18:02 +0000
+Received: by outflank-mailman (output) from mailman id 272060.466879; Mon, 14 Feb 2022 13:18:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nJbEv-0004Iw-Tj; Mon, 14 Feb 2022 13:18:01 +0000
-Received: by outflank-mailman (input) for mailman id 272059;
- Mon, 14 Feb 2022 13:17:59 +0000
+	id 1nJbEw-0004QW-Iq; Mon, 14 Feb 2022 13:18:02 +0000
+Received: by outflank-mailman (input) for mailman id 272060;
+ Mon, 14 Feb 2022 13:18:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=HcNt=S5=citrix.com=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nJb4b-0008IH-4e
- for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:07:21 +0000
+ id 1nJb4C-0008IH-Pz
+ for xen-devel@lists.xenproject.org; Mon, 14 Feb 2022 13:06:56 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 09de4c78-8d97-11ec-8eb8-a37418f5ba1a;
- Mon, 14 Feb 2022 14:07:19 +0100 (CET)
+ id fac7a096-8d96-11ec-8eb8-a37418f5ba1a;
+ Mon, 14 Feb 2022 14:06:55 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,99 +38,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09de4c78-8d97-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: fac7a096-8d96-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1644844039;
+  d=citrix.com; s=securemail; t=1644844015;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=xssEdp0Svf1EAcyTm/CHU0ZkwIg2XP7+KI+3Pd9nxnc=;
-  b=KpAQox58+qUhBW8s71bMVh0l4Ht1/xi8M2uGMBAcitomB4tTxR9wQSd7
-   LMEfh1eOPwclnoP0m5PcwzUE44UcYCApLIQG93ma7GRG+cranoRRSs2kQ
-   fdRvWpi2sWgd2qTThLn4VyjwXgVuNWuYP+e5b9fJud2VqFtp+xfXVniaM
-   Q=;
+  bh=Iv+EtTL4QKtjYW+p8dU15rg4ZfKzEluz7BW9resL5q4=;
+  b=MIOvzfYFH3hsCF5qV4kY75oZEsPT6fGIqSO/+yv/LTaLcslFABg07zGk
+   OPSQfCGiQG97PSeqghe8oP9oYMjKP+rSz8JVLUkcvoM0pjsR4tpyn5m2S
+   GPxsQJKz1dQ3H+9fjPQ9Xd4icrFYIGMdtlTVJIVmyzcXuYuoV0aUCaWHW
+   I=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-IronPort-SDR: qBoBnxQsU/3wdIOrqcmHNTR2j7JT7U1nrwwDNZuIrcxUm5kZaXWcX7/Pa8fyCZ1/Yey2y/C2PL
- P1F4aMLpN8iHj21GnmFWozEAB8Z9l2+kmf6iYRfN+0gtH/+SzeYhw1ZUmrl1moOcBrbFG5abKF
- z1gkwk1wldHbb862h7fzqbguRmS4dL56QAVqI3Ag3Ph+9nhVUlBkpqd99ibROi9ALSkyUYQDHs
- Hdeo7RFBiZzp84r94QoQWEWlOKutwoocVOGki8CPVpoUd2mDbPva9qVdI7YkMxTuhGts8F/EHp
- 1bkFOjiaHiSsm7PngOHBwukl
+IronPort-SDR: 4EaJ4De7JaIZS5ouqAPgjsMWIRv7Tz8YCPfBzzjGG2hm3vLKYI77/wBKvgkkAx7dgJiAceWgB4
+ gVXoeIrMqMwy/waTtI3ePBtcckKASl4bj7FBgTHgXNkXuJNFqP1HECQ1X3RxJQpHQjtpZ1Ebqq
+ tqRbfVxQJgLCm1re2xDCF9YiD0oa2xbB6wnPxEj8ubeMlTupvxRBUx8asAbM1pMuj41IFWlcNt
+ xw/Rs13y8AUdBqTZKtVqYacfatkAkosu9mhLVWlNGXneimFyn6OJkQXvmxf0PGBpmz9HThCEDm
+ qeNqADK5gRAMTy2lSQX86kSw
 X-SBRS: 5.1
-X-MesageID: 64554412
+X-MesageID: 64554292
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:8ISm1KCyz/lBqxVW/zHkw5YqxClBgxIJ4kV8jS/XYbTApD9whGcEm
- zcdUGiEaavYM2PzeNB+bIW19U5TuJ+GyYRjQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMo/u1Si6FatANl1ElvU2zbue6WL6s1hxZH1c+En970E47wobVv6Yz6TSHK1LV0
- T/Ni5W31G+Ng1aY5UpNtspvADs21BjDkGtwUm4WPJinj3eH/5UhN7oNJLnZEpfNatI88thW5
- Qr05OrREmvxp3/BAz4++1rxWhVirrX6ZWBihpfKMkQLb9crSiEai84G2PQghUh/rzjVk9Eu8
- uR0noGKeC50EbyTie0kakwNe81+FfUuFL7vJHG+tYqYzlHccmuqyPJrZK00FdRGoKAtWzgIr
- KFGbmBWBvyAr7veLLaTY+9gnMk8auLsO5sSoCpIxjDFF/c2B5vERs0m4PcGgGpt2pwXR54yY
- eIZYxBiUjflSiFEAXYNVaMjxeaV3lvgJmgwRFW9+vNsvjm7IBZK+KjgNp/Zd8KHQe1Rn12Ev
- STW8mLhGBYYOdeDjz2f/RqRavTnxH2hHthITfvhq6As0Ab7KnEv5AM+cVbnrfjmsH+HcM9lG
- mVJ1TtxvKELzRn+JjXiZCGQrHmBtx8aftNfFewm9Q2AopbpDxal6nssFWAYNoF/3CMibXlzj
- wLSwYu1bdB6mODNERqgGqGoQSRe0MT/BUsLfmc6QAQM+LEPS6lj30uUHr6P/ENY5+AZ+A0cI
- RjX9kDSZJ1J1KbnMplXGnid3VqRSmDhFFJd2+kudjvNAvlFTICkfZe0zlPQ8OxNKo2UJnHY4
- iRYxJjOsb1WVMrX/MBofAnqNOv3j8tpzRWG2QI/d3Xf32jFF4GfkXB4v2gleRYB3jcscj71e
- k7D0T69F7cIVEZGmZRfOtrrY+xzlPCIPY28Cpj8M4ofCrAsJVTv1Hw/OiatM5XFzRFEfVcXY
- szAL65BzB8yVMxa8dZBb7lBgOF7nnhknQs+h/nTlnya7FZXX1bNIZ9tDbdERrlksstoeS3Zr
- IRSMdWk0RJaXLGsayXb69dLf1sLMWI6Fdb9rMkOLryPJQ9vGWcADf7NwOx+J9w5zvoNzuqYr
- GugXkJ4yUbkgSGVIwu9dX0+OqjkWoxyrCxnMHV0b0qowXUqfa2m8LwbK8ksZbAi+eE6lax0Q
- vAJdt+uGPNKTjibqT0RYYOk9N5pdQixhBLINC2gOWBtc5llTg3P29nlYgqwq3VeUnvp7ZMz+
- uTy2BnaTJwPQxVZIPzXMP//nUmsuXU9mf5pWxeaKNdkZ0ixopNhLDb8j6FrLphUewnD3DaTy
- y2fHQwc+bvWu4Yw/dTE2fKEooOuH7csF0ZWBTCGv7O/NC2c9Wu/245QFu2PeGmFBm/z/ayjY
- 8RTzu39b6JbzAob7dIkHuY517866vvuu6Ren1ZtE3j8Zli2Dq9tfyud1s5Vu6wRnrJUtGNag
- K5UFgW27VlRBP7YLQ==
-IronPort-HdrOrdr: A9a23:9/AWbKlf9L53ofy0ilBXyWESM3jpDfIu3DAbv31ZSRFFG/Fxl6
- iV8sjztCWE8Qr5N0tBpTntAsW9qDbnhPtICOoqTNGftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAs9D4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:/xJMjavt6chmy3R15TnBwqDhN+fnVE9ZMUV32f8akzHdYApBsoF/q
+ tZmKT3UbKzbYmqkKd92Ot/i9U0GvJXWyYIxGlRorn83FiwS+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZQP0VOZigHtIQMsadUsxKbVIiGHdJZS5LwbZj2NYy2IThWmthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ Nplq7mybAIkOaP3kds/WDBzCQdQY6RJ5+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6AO
+ 5dENWA+NnwsZTUUGVMFU8g439v5xXOhaDZYg1y+poMOtj27IAtZj+G2bYu9lsaxbdVYmAOUq
+ 3zL+0z9AwoGL5qPxDyd6HWui+TT2yThV+ov+KaQr6AwxgfJnypKVUNQBQDTTeSFZlCWRfddD
+ kkZ/SQVpJcQ/2WAVP/TARS3vyvR1vIDYOZ4H+o/4QCL76Pb5QeFG2QJJgJ8hMwaWNweHmJzi
+ ALQ9z/9LXk26eDOFyrBnluBhW7qYUAowXk+iTjopOfvy/3qu8kNgx3GVb6P+4bl34SuSVkcL
+ 91nxRXSZon/b+ZWjc1XHnid2lpAQ6QlqSZvuG3qspqNtF8RWWJcT9XABaLnxfhBNp2FaVKKo
+ WIJncOThMhXU83Ry3zdHbhVRerzjxpgDNE7qQQxd6TNChz3oyLzFWyuyG0WyLhV3jYsJmayP
+ R67VfJ5755PJnq6BZKbkKrqY/nGOZPITIy/PtiNN4ImSsEoKGevoXE/DWbNjjuFuBV9zskC1
+ WKzLJ/E4YAyUv88klJbho41jNcW+8zJ7T2PG86rlUn7uVdcDVbMIYo43JK1RrhRxMu5TM/9q
+ YwOXydT4xkAAuD4fAfN9osfcQIDIXQhXMikoM1LbO+TZAFhHTh5WfPWxLogfa1jnrhUybiUr
+ i3sBBcAxQqtn2DDJCWLdmtnNOHlU6FgoC9pJicrJ1uphSQuON798KcFepIrVrA77+g/n+VsR
+ vwIdpzYUPRCQzjK4RoHapz5oNAwfRinn1vWbSGkfCI+b9hrQAmQoo3oeQ7m9S8vCCurtJRh/
+ +38h12DGZdaHlZsFsfbbv6r3midh3lFlbIgRVbML/lSZF7orNpgJRvug6JlOMoLMxjCmGeXj
+ l7EHRcCqODRiIYp692V17ucpoKkHuYiTEpXG27XseS/OSXApzfxxIZBVKCDfCzHVXOy86KnP
+ L0Hw/b5OfwBvVBLr4sjTOo7kfNgv4Pi9+1A0wBpPHTXdFD6WLpvL06P0dRLqqAQlKRSvhG7W
+ x7X99RXUVlT1BgJzLLFyNIZU9m+
+IronPort-HdrOrdr: A9a23:k5pwYa0FptbJb7JbakFR2QqjBEgkLtp133Aq2lEZdPU0SKGlfg
+ 6V/MjztCWE7Ar5PUtLpTnuAsa9qB/nm6KdgrNhWItKPjOW21dARbsKheffKlXbcBEWndQtt5
+ uIHZIeNDXxZ2IK8PoT4mODYqodKA/sytHWuQ/cpU0dMz2Dc8tbnmBE4p7wKDwMeOFBb6BJcq
+ a01458iBeLX28YVci/DmltZZm4mzWa/KiWGCLvHnQcmXGzsQ8=
 X-IronPort-AV: E=Sophos;i="5.88,367,1635220800"; 
-   d="scan'208";a="64554412"
+   d="scan'208";a="64554292"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v2 61/70] x86/setup: Read CR4 earlier in __start_xen()
-Date: Mon, 14 Feb 2022 12:51:18 +0000
-Message-ID: <20220214125127.17985-62-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 47/70] x86/logdirty: CFI hardening
+Date: Mon, 14 Feb 2022 12:51:04 +0000
+Message-ID: <20220214125127.17985-48-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 References: <20220214125127.17985-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-This is necessary for read_cr4() to function correctly.  Move the EFER caching
-at the same time.
+Control Flow Integrity schemes use toolchain and optionally hardware support
+to help protect against call/jump/return oriented programming attacks.
+
+Use cf_check to annotate function pointer targets for the toolchain.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/setup.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ xen/arch/x86/mm/hap/hap.c       |  6 +++---
+ xen/arch/x86/mm/shadow/common.c | 12 ++++++------
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 735f69d2cae8..2b1192d85b77 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -888,6 +888,9 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
+index de4b13565ab4..ed5112b00b63 100644
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -180,7 +180,7 @@ int hap_track_dirty_vram(struct domain *d,
+  * NB: Domain that having device assigned should not set log_global. Because
+  * there is no way to track the memory updating from device.
+  */
+-static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
++static int cf_check hap_enable_log_dirty(struct domain *d, bool log_global)
+ {
+     struct p2m_domain *p2m = p2m_get_hostp2m(d);
  
-     /* Full exception support from here on in. */
+@@ -211,7 +211,7 @@ static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
+     return 0;
+ }
  
-+    rdmsrl(MSR_EFER, this_cpu(efer));
-+    asm volatile ( "mov %%cr4,%0" : "=r" (get_cpu_info()->cr4) );
-+
-     /* Enable NMIs.  Our loader (e.g. Tboot) may have left them disabled. */
-     enable_nmis();
+-static int hap_disable_log_dirty(struct domain *d)
++static int cf_check hap_disable_log_dirty(struct domain *d)
+ {
+     paging_lock(d);
+     d->arch.paging.mode &= ~PG_log_dirty;
+@@ -228,7 +228,7 @@ static int hap_disable_log_dirty(struct domain *d)
+     return 0;
+ }
  
-@@ -934,9 +937,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+-static void hap_clean_dirty_bitmap(struct domain *d)
++static void cf_check hap_clean_dirty_bitmap(struct domain *d)
+ {
+     /*
+      * Switch to log-dirty mode, either by setting l1e entries of P2M table to
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 83dedc8870aa..071a19adce82 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -40,9 +40,9 @@
  
-     parse_video_info();
+ DEFINE_PER_CPU(uint32_t,trace_shadow_path_flags);
  
--    rdmsrl(MSR_EFER, this_cpu(efer));
--    asm volatile ( "mov %%cr4,%0" : "=r" (get_cpu_info()->cr4) );
--
-     /* We initialise the serial devices very early so we can get debugging. */
-     ns16550.io_base = 0x3f8;
-     ns16550.irq     = 4;
+-static int sh_enable_log_dirty(struct domain *, bool log_global);
+-static int sh_disable_log_dirty(struct domain *);
+-static void sh_clean_dirty_bitmap(struct domain *);
++static int cf_check sh_enable_log_dirty(struct domain *, bool log_global);
++static int cf_check sh_disable_log_dirty(struct domain *);
++static void cf_check sh_clean_dirty_bitmap(struct domain *);
+ 
+ /* Set up the shadow-specific parts of a domain struct at start of day.
+  * Called for every domain from arch_domain_create() */
+@@ -3016,7 +3016,7 @@ static int shadow_test_disable(struct domain *d)
+ /* Shadow specific code which is called in paging_log_dirty_enable().
+  * Return 0 if no problem found.
+  */
+-static int sh_enable_log_dirty(struct domain *d, bool log_global)
++static int cf_check sh_enable_log_dirty(struct domain *d, bool log_global)
+ {
+     int ret;
+ 
+@@ -3044,7 +3044,7 @@ static int sh_enable_log_dirty(struct domain *d, bool log_global)
+ }
+ 
+ /* shadow specfic code which is called in paging_log_dirty_disable() */
+-static int sh_disable_log_dirty(struct domain *d)
++static int cf_check sh_disable_log_dirty(struct domain *d)
+ {
+     int ret;
+ 
+@@ -3058,7 +3058,7 @@ static int sh_disable_log_dirty(struct domain *d)
+ /* This function is called when we CLEAN log dirty bitmap. See
+  * paging_log_dirty_op() for details.
+  */
+-static void sh_clean_dirty_bitmap(struct domain *d)
++static void cf_check sh_clean_dirty_bitmap(struct domain *d)
+ {
+     paging_lock(d);
+     /* Need to revoke write access to the domain's pages again.
 -- 
 2.11.0
 
