@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551B5C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87343C43217
 	for <xen-devel@archiver.kernel.org>; Wed, 16 Feb 2022 15:16:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.274221.469649 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.274219.469634 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nKM2o-0001bL-5X; Wed, 16 Feb 2022 15:16:38 +0000
+	id 1nKM2m-0001Fd-HY; Wed, 16 Feb 2022 15:16:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 274221.469649; Wed, 16 Feb 2022 15:16:38 +0000
+Received: by outflank-mailman (output) from mailman id 274219.469634; Wed, 16 Feb 2022 15:16:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nKM2n-0001aH-UZ; Wed, 16 Feb 2022 15:16:37 +0000
-Received: by outflank-mailman (input) for mailman id 274221;
- Wed, 16 Feb 2022 15:16:36 +0000
+	id 1nKM2m-0001FL-Az; Wed, 16 Feb 2022 15:16:36 +0000
+Received: by outflank-mailman (input) for mailman id 274219;
+ Wed, 16 Feb 2022 15:16:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=miT7=S7=gmail.com=andr2000@srs-se1.protection.inumbo.net>)
- id 1nKM2m-0000ia-P5
- for xen-devel@lists.xenproject.org; Wed, 16 Feb 2022 15:16:36 +0000
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [2a00:1450:4864:20::22c])
+ id 1nKM2l-0000ia-8g
+ for xen-devel@lists.xenproject.org; Wed, 16 Feb 2022 15:16:35 +0000
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [2a00:1450:4864:20::229])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6e692108-8f3b-11ec-8eb8-a37418f5ba1a;
- Wed, 16 Feb 2022 16:16:36 +0100 (CET)
-Received: by mail-lj1-x22c.google.com with SMTP id bx31so3882353ljb.0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Feb 2022 07:16:36 -0800 (PST)
+ id 6d7fc221-8f3b-11ec-8eb8-a37418f5ba1a;
+ Wed, 16 Feb 2022 16:16:34 +0100 (CET)
+Received: by mail-lj1-x229.google.com with SMTP id c15so3779180ljf.11
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Feb 2022 07:16:34 -0800 (PST)
 Received: from a2klaptop.localdomain ([185.199.97.5])
- by smtp.gmail.com with ESMTPSA id bt2sm3082357lfb.93.2022.02.16.07.16.34
+ by smtp.gmail.com with ESMTPSA id bt2sm3082357lfb.93.2022.02.16.07.16.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Feb 2022 07:16:35 -0800 (PST)
+ Wed, 16 Feb 2022 07:16:32 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6e692108-8f3b-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: 6d7fc221-8f3b-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=jzNPBmlgY6KQmcQw14tBqJfV5dL9s7shqTcsZA+5AgQ=;
-        b=TsV6bEvDXLlZtbCASc/xe9GCKFucEulegH3lKRkFAgyMzTU4SyU+Fun96JhxlD+AOY
-         nikahjJOLIneZdfNd8sMpA43APGtReE811C7xELfMAr21E2cGwhS3s38g+oTvwV8/0ik
-         3kZJZaUdUyVW2ibfJWyvcCqYQq4gahf2nHuzcbeDQ7SZR483UZ1O/WaBghyrflm5MM6s
-         6Ucguyj9A7eHx5yL2PtyjXdLXP3NG7az0pJ/kT3Eaq5XoeWSI77AhtkaOCX0EQLIKMKZ
-         P2RhCmWNDcmKSzSWaDaVL14QYZbQEirRAWqpANf3Dq+FxTYKNZI2w8g0RlGw/WJmMIJ8
-         1l7w==
+        bh=+ORkUu56CU6HGY8oCapGyNoSUW812hUexJ6w29f/gaw=;
+        b=cPsCuLNUCp/mAbeiTz7Ea9oexvjfKLEeXyM4EJ7w+M8wZJ7cW/CghjXa3J+Yqii44b
+         yMuNZJpfCHjBeHzIVhtk5jph/ON+iuyGZnBG1bD/R28SRTGWoZeGceNfJZEyqvgQmvj4
+         i7El2Mzpbn2z0yYz0KAXXbZ9jLBXYc3QgiuiOiVWIVZmPUL3WkCIEoWStTcO6DZ+rW6k
+         U1TxrV/fjn1BoCkWZwiVd5MG2mO5lhAE1ssX1H8UsbKHz80ibLFZjn1EComdHg+fgHHj
+         0Uxle6Y5n2etoFwX7Q1a+KY/C9enzTR55NXbXFprFqX7ekC4Yn1zU6eq9jkmXYBQzwrt
+         FBDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=jzNPBmlgY6KQmcQw14tBqJfV5dL9s7shqTcsZA+5AgQ=;
-        b=2x1EOO7F5s3UgZ1VuRsiWKNFOqBcANlOMnElB7PMMpsZagfwp7fKJeJ9R0hjvoINGM
-         hq6kAjKqcBFBTT/zOiIKxx/k+jzQ75hn69MhAkngkg7M5ixyIsT5MbUNYNQ7/T+vyY+d
-         gQQGWFoxigczXdK4wgGj/1HtwyIOKg4HaAAzYf7HccM+rJ1Lo7t2Qc6D46IZEdr/nckO
-         PkLc8xhmIm43x6TtVoS0/pO9dDlJTovrvDxhNuVmAmkhO8HURrO4eFDP56tGtNnErlGB
-         ylDj+gc0U+xw1h/7U8J0T+j6UOtDe76oFkElkqltQj9RZU5bO38l65tPvv9FFk7h0WTq
-         a6hA==
-X-Gm-Message-State: AOAM533JD3NxC+u17dJzP7yKQBT32vXr+AT7UCOuhnAnVQnQ+Eg47xk6
-	TmAb2DH4GVboGMpzGFp0TXBffkKsUfA=
-X-Google-Smtp-Source: ABdhPJxnt0SZcGjSHJgWxCZHuf9astKgh20exBxdg26yhlRFgk9MOZE9juT+b1OUcHBpl8MMQnRcKQ==
-X-Received: by 2002:a05:651c:1791:b0:243:94bd:d94c with SMTP id bn17-20020a05651c179100b0024394bdd94cmr2382485ljb.468.1645024595427;
-        Wed, 16 Feb 2022 07:16:35 -0800 (PST)
+        bh=+ORkUu56CU6HGY8oCapGyNoSUW812hUexJ6w29f/gaw=;
+        b=laTvvgKMWeVlwCLCJOVqxVpG+EMRQtAoj4J8zLYcT7E2z1vwxwP7zXOeRlPKMePfu3
+         /aflLHrdPUJbaKN3bZ54Hl/RbN490sfIEvgplNS46fTX7h+CdNx8yxJgPaJKEhEYfASU
+         y1zOOm464Ku1MjhILiMe5lxSLsWIRzLSZodxk6+dgNdTaodSTXVRGj7i4Qkohdz+Iv34
+         gH9EkgwPzLVCV7LIbdGg2e9n0B+h3hsbpCE89ekld8FbzuUXuPR92GtuWXk9w6XQBWiC
+         StLftaV5yYmrWl7PA1nPRlkXSLP/BdbRttoAP7MT0uzO5PCbmcW/Hv61souK99Ga9P0V
+         4jmw==
+X-Gm-Message-State: AOAM531nqEp/xXh4zjnUkFrEAJkUtb54EXUC5MCiyqfg+Nvn1JKfnZbv
+	PVUwmULszm7QHOKGnEc3SIdOzQ7D2q8=
+X-Google-Smtp-Source: ABdhPJxDYrdyScCegh3iYn/DlxcOxXd/KOxJ/b5f2U0ecvwx/kfDsZpJ6qUQoFHk6MIe+Kfo1c4e5Q==
+X-Received: by 2002:a2e:b891:0:b0:23a:ee88:844b with SMTP id r17-20020a2eb891000000b0023aee88844bmr2456330ljp.402.1645024593157;
+        Wed, 16 Feb 2022 07:16:33 -0800 (PST)
 From: Oleksandr Andrushchenko <andr2000@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: roger.pau@citrix.com,
@@ -85,63 +85,69 @@ Cc: roger.pau@citrix.com,
 	bertrand.marquis@arm.com,
 	rahul.singh@arm.com,
 	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Subject: [PATCH 4/4] vpci: resolve possible clash while removing BAR overlaps
-Date: Wed, 16 Feb 2022 17:16:28 +0200
-Message-Id: <20220216151628.1610777-5-andr2000@gmail.com>
+Subject: [PATCH 2/4] vpci: restrict unhandled read/write operations for guests
+Date: Wed, 16 Feb 2022 17:16:26 +0200
+Message-Id: <20220216151628.1610777-3-andr2000@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220216151628.1610777-1-andr2000@gmail.com>
 References: <20220216151628.1610777-1-andr2000@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-modify_bars checks if the mapping of the BAR memory has already been
-done when mapping other device's BARs or, while unmapping, are still
-in use by other devices.
+A guest would be able to read and write those registers which are not
+emulated and have no respective vPCI handlers, so it will be possible
+for it to access the hardware directly.
+In order to prevent a guest from reads and writes from/to the unhandled
+registers make sure only hardware domain can access the hardware directly
+and restrict guests from doing so.
 
-With the existing locking scheme it is possible that there are other
-devices trying to do the same in parallel with us, but on other CPUs
-as we only hold a read lock without acquiring _pcidevs_lock recursive
-lock.
-
-To prevent that upgrade the read lock to normal pcidevs_lock during
-BAR overlapping check.
-
+Suggested-by: Roger Pau Monné <roger.pau@citrix.com>
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
----
- xen/drivers/vpci/header.c | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 75e972740106..c80a8bb5e3e0 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -281,7 +281,11 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     /*
-      * Check for overlaps with other BARs. Note that only BARs that are
-      * currently mapped (enabled) are checked for overlaps.
-+     * We are holding pcidevs_read_lock here, but we need to access
-+     * different devices at a time. So, upgrade our current read lock to normal
-+     * pcidevs_lock.
-      */
-+    pcidevs_lock();
-     for_each_pdev ( pdev->domain, tmp )
+---
+Since v6:
+- do not use is_hwdom parameter for vpci_{read|write}_hw and use
+  current->domain internally
+- update commit message
+New in v6
+---
+ xen/drivers/vpci/vpci.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index fb0947179b79..f564572a51cb 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -213,6 +213,10 @@ static uint32_t vpci_read_hw(pci_sbdf_t sbdf, unsigned int reg,
+ {
+     uint32_t data;
+ 
++    /* Guest domains are not allowed to read real hardware. */
++    if ( !is_hardware_domain(current->domain) )
++        return ~(uint32_t)0;
++
+     switch ( size )
      {
-         if ( tmp == pdev )
-@@ -321,10 +325,12 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-                 printk(XENLOG_G_WARNING "Failed to remove [%lx, %lx]: %d\n",
-                        start, end, rc);
-                 rangeset_destroy(mem);
-+                pcidevs_unlock();
-                 return rc;
-             }
-         }
-     }
-+    pcidevs_unlock();
+     case 4:
+@@ -253,9 +257,13 @@ static uint32_t vpci_read_hw(pci_sbdf_t sbdf, unsigned int reg,
+     return data;
+ }
  
-     ASSERT(dev);
- 
+-static void vpci_write_hw(pci_sbdf_t sbdf, unsigned int reg, unsigned int size,
+-                          uint32_t data)
++static void vpci_write_hw(pci_sbdf_t sbdf, unsigned int reg,
++                          unsigned int size, uint32_t data)
+ {
++    /* Guest domains are not allowed to write real hardware. */
++    if ( !is_hardware_domain(current->domain) )
++        return;
++
+     switch ( size )
+     {
+     case 4:
 -- 
 2.25.1
 
