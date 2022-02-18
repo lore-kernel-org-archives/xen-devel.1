@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4974EC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Feb 2022 14:18:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.275500.471402 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26D1BC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Feb 2022 14:35:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.275510.471425 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nL450-00066C-VM; Fri, 18 Feb 2022 14:17:50 +0000
+	id 1nL4LC-0000Ho-NC; Fri, 18 Feb 2022 14:34:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 275500.471402; Fri, 18 Feb 2022 14:17:50 +0000
+Received: by outflank-mailman (output) from mailman id 275510.471425; Fri, 18 Feb 2022 14:34:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nL450-000665-SR; Fri, 18 Feb 2022 14:17:50 +0000
-Received: by outflank-mailman (input) for mailman id 275500;
- Fri, 18 Feb 2022 14:17:49 +0000
+	id 1nL4LC-0000Hh-Jv; Fri, 18 Feb 2022 14:34:34 +0000
+Received: by outflank-mailman (input) for mailman id 275510;
+ Fri, 18 Feb 2022 14:34:33 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=YtLv=TB=citrix.com=prvs=0411da6ea=roger.pau@srs-se1.protection.inumbo.net>)
- id 1nL44z-00065z-4l
- for xen-devel@lists.xenproject.org; Fri, 18 Feb 2022 14:17:49 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8b6cd64f-90c5-11ec-8723-dd0c611c5f35;
- Fri, 18 Feb 2022 15:17:47 +0100 (CET)
+ id 1nL4LB-0008Sp-9I
+ for xen-devel@lists.xenproject.org; Fri, 18 Feb 2022 14:34:33 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e21f6463-90c7-11ec-8723-dd0c611c5f35;
+ Fri, 18 Feb 2022 15:34:32 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,196 +38,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8b6cd64f-90c5-11ec-8723-dd0c611c5f35
+X-Inumbo-ID: e21f6463-90c7-11ec-8723-dd0c611c5f35
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645193867;
-  h=date:from:to:cc:subject:message-id:references:
-   content-transfer-encoding:in-reply-to:mime-version;
-  bh=dGRY3nYm5LQJyB2cOwRV6M5AzMjjwfdBEyE/7Jl6Xlw=;
-  b=ER6onnktLz8zT8Io+wyFiAsUFgH923x0Q6jOPtD2uj5ErfxWmeXL8Qra
-   MMUVZ4v/MmevLPo5pP/uUuyLlBgKfB8CqlnCUBojMs1JONQmqU0PO8U8H
-   2TZSZdpH3UzpfzsC9OXb/RszrXjqZEha9FCgfTt+wSGMApiEFSd6WTHGe
-   E=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+  d=citrix.com; s=securemail; t=1645194872;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=OBvd7Te7RVC9tLWUnRCr7dexqEAV0RltpksYs1SPDnw=;
+  b=R3aKWenWhiUGNwfuWyF4iX3s5Ek/OpvQFD9sd4CbtEfwC9SNZlHQpyt7
+   usjz4oB3QZKxy0g0duz8yRZcEQ7Dh/6HuEZOUeqtZtmw3BP/sHDBDd6P9
+   9YA4aR0dzSiZW9Nn2Xi4Gm7FPKArv4mzUjNSPBEE9F81Ds5C6UNuBRiZm
+   A=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
 X-SBRS: 5.1
-X-MesageID: 64416751
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 63960496
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:SgBY5qsZ2mN8yvbSo6f4PhyO+OfnVGleMUV32f8akzHdYApBsoF/q
- tZmKW3UP/mOMzahftgnb4S+8koHucTRmNRqTQduqS4yRSJB+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZhSAgk/nOHNIQMcacUsxLbVYMpBwJ1FQzy4bVvqYy2YLjW1nU6
- YuryyHiEATNNwBcYzp8B52r8HuDjNyq0N/PlgVjDRzjlAa2e0g9VPrzF4noR5fLatA88tqBb
- /TC1NmEElbxpH/BPD8HfoHTKSXmSpaKVeSHZ+E/t6KK2nCurQRquko32WZ1he66RFxlkvgoo
- Oihu6BcRi8kO6Dzuco0YiNeGhFmZ7x6oaDaLFig5Jn7I03uKxMAwt1rBUAye4YZ5vx2ESdF8
- vlwxDIlN07ZwbjsmfTiF7cq1p9LwMrDZevzvll6yj7UF7A+SI3rSKTW/95Imjw3g6iiGN6AO
- 5ZAN2UyNXwsZTVia0gNGKwRv9uG2Emidjh4lHabm6A4tj27IAtZj+G2bYu9lsaxbcdImkeVo
- ErW8mK/BQsVXPSE0iaM+H+ogu7JnAv4VZgUGbn+8eRl6HWMwkQDBRtQUkG0ydGph0j7V99BJ
- kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c9haHvA+6QqN4rHJ+AvfDW8BJgOtc/R/6pVwH2Zzk
- AbUwZW5XlSDrYF5V1qQ87qrjB2bCBITJF8aPz44FBQY7vn89dRbYg30cv5vF6u8j9vQED72w
- iyXoCVWu4j/nfLnxI3gowmZ3mvESozhC1dsu16JBj7NAhZROdb9D7FE/2Q3+hqpwGyxalCa9
- EYJlMGFhAzlJcHczXfdKAnh8VzA2hpkDNE+qQI+d3XC3270k5JGQWy2yGgvTKuOGpxZEQIFm
- GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQPsUoLlPfrX0wPBT4M4XRfK4EyPBX1
- XCzK5vEMJrnIf4/kGreqxk1itfHORzSNUuMHMumnnxLIJKVZWKPSKdtDbd9RrtR0U9wmy2Mq
- 4w3H5LTk313CbSiCgGKod97BQ1bdhATWMGpw/G7g8bee2KK7kl6UKSPqV7gEqQ495loehDgp
- C/lARYAkAKl7ZAFQC3TAk1ehHrUdc8XhVowPDA2PEbu3H4mYI2167wYeYdxdr4inNGPB9YuJ
- xXZU61s2shydwk=
-IronPort-HdrOrdr: A9a23:DyoX0aPXry7ECcBcT1v155DYdb4zR+YMi2TDiHoedfUFSKOlfp
- 6V8MjztSWVtN4QMEtQ/+xoHJPwPE80kqQFnbX5XI3SJjUO3VHIEGgM1/qG/9SNIVybygcZ79
- YeT0EcMqyBMbEZt7eD3ODQKb9Jq7PrgcPY59s2jU0dNj2CA5sQnjuRYTzra3GeKjM2YqbQQ/
- Gnl7R6TnebCD4qR/X+IkNAc/nIptXNmp6jSRkaByQ/4A3LqT+z8rb1HzWRwx9bClp0sPsf2F
- mAtza8yrSosvm9xBOZ/2jP765OkN+k7tdYHsSDhuUcNz2poAe1Y4ZKXaGEoVkO0aySwWdvtO
- OJjwYrPsx15X+UVmapoSH10w2l6zoq42+K8y7QvVLT5ejCAB4qActIgoxUNjHD7VA7gd162K
- VXm0qEqpt+F3r77WXAzumNcysvulu/oHIkn+JWpWdYS5EiZLhYqpFa1F9JEa0HADnx5OkcYa
- dT5fnnlbVrmG6hHjLkVjEF+q3oYp1zJGbIfqE6gL3U79AM90oJi3fxx6Qk7wE9HdwGOt55Dt
- //Q9ZVfYd1P7grhJJGdZQ8qPSMexnwqDL3QSqvyAfcZeo600ykke+C3Fxy3pDtRKA1
-X-IronPort-AV: E=Sophos;i="5.88,378,1635220800"; 
-   d="scan'208";a="64416751"
+IronPort-Data: A9a23:yaHGUKnBiORX9doYGzCHIh7o5gyWJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIXCmzXOv+CMWX9KNt1Ooq/9khTsZSEzIUxHQtrrX82EiMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2UILd9IR2NYy24DjWlPV4
+ 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
+ v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
+ NtxWZOYRxsUI4nDx/0kUD5pHj5UI6tnv5rLPi3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
+ RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3oHZvwCufFf87aZvCX7/L9ZlT2zJYasVmQ62PO
+ ZJFOGQHgBLobx9RNH0qKJIFhe6tmHrnXxgGq0+Euv9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
+ XjJl0z7CBwHMN2UyRKe72mhwOTImEvTSI8UUbG16PNuqFmS3XAITg0bU0Ohpvu0gVL4XMhQQ
+ 3H44QJ38/J0rhbyCICgAVvo+xZooyLwRfJeD9AnzA7S05PXxDeUGUIaSB8GTdA54ZpeqSMR6
+ neFmNbgBDpKubKTSG6A+rr8kQ5eKRT5PkdZO3ZaEFJtD83L5dhq00mRFooL/Lud04WtcQwc1
+ Qxmu8TXa187qccQn5u28lnc695HjsiYF1Vljuk7s4/M0++YWGJHT9D5gbQ4xawZRGp8crVnl
+ CFV8yR5xLpTZaxhbATXHI0w8EiBvp5pygH0j191BIUG/D+w4XOldo04yGggeBowaJpcKGO3O
+ RW7VeZtCHl7ZSrCgUhfOd/ZNijX5fK4SYSNug78NbKinaSdhCfYpXozNCZ8LkjmkVQ2kLFXB
+ HtoWZ3EMJruMow+lGDeb75EidcDn3lirUuOFcGT50n2itK2OS/KIYrpxXPTN4jVGovf+16Lm
+ zueXuPXoyhivBrWOHePqtdLdQhQRZX5bLivw/Fqmie4ClMOMEkqCuPLwKNnfIpgnq9PkfzP8
+ G37UUhdoGcTT1WdQelWQhiPsI/SYKs=
+IronPort-HdrOrdr: A9a23:DCiLMq1pvVo0VBtwcJTw4wqjBLYkLtp133Aq2lEZdPUzSL3+qy
+ nOpoV+6faQsl0ssR4b9exoVJPufZq+z/5ICOsqU4tKNTOO0AHEEGgI1+rf6gylNyri9vNMkY
+ dMGpIObeEY1GIK7voSNjPIceod/A==
+X-IronPort-AV: E=Sophos;i="5.88,379,1635220800"; 
+   d="scan'208";a="63960496"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=k9gC1hLe9Six56e/TFc0tylQEWGND03py2QBjBe36x5hCQ/5mnbzvrKyK37TAd25u7C6yS1onSXXhoeMTDc88d/ob4KvyYuIh/kSHyqUTEmqFrGUA8ZSmjoR1jU+cPntTfEDUOhUe00Pr1DTJzbWE+C2osisEwlJNcemUV4JFX8Tv1yn5bdCbf8jxYbAvgw+kicGLDfO1RqHs9d6Xkkdvr8GgkiXqEXvpz5py8D++a78KQwHVT/aBIJid5yxo64kZd918c/Y0DIM3jNcVitIM10kCa65xqubFZPxSSzKdxFKWfmPjEb3SPtuUwWqNlYSG3L0LcOWxUTbz2tEiCA7ug==
+ b=a6Ixpo+AY8qOybEFDFwVrdOw0xtCGDyypGF3c9qnd6BdCokqebGcxViWDiO/AZpIvaJxzsxjVv7F4OFEApxNWlsoFfqckp0wiKFxhXNHDfRaLOheyhM+u390rnLvahl7cl32cElkC/JTA57H+WUEDQC+8WLhPCRD7PHUBjqEsjvbH75zlPPxmSqwLbrL/90nj7Qt1Z/65iHtTAg0ZQKis4VzE2jBMhUeZyuYhxcAlMDjRxRx5L+B5MuKcZTxHGXOVaTLYouw3QnOuLY+766setZxV1/ezMUCU2gbPyGgYXUDgcnJ03gdbF6URC2UQtBAP5wUY3gZHhXxJSB4PhR68A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RnMNqMDAPNB8sN0Ba8vr6XnL4/lcdqLqp9Dc7DfcPas=;
- b=K23UPVNyRniCS/MMYOMufifUvEDzd2IG0BAFj27R0zSrQ/iNc9rko1UOvV0TAeJrNM++Qal6f7UrP5MKk6dRDLImEcP5xQOs6IhHAtZNF4m/2uCArIO0zGZaCgppnYQfTqnQR/NZBMQto09CvE/ym79EmyNBbKouFQWnkYPBiQ3iNhmIecGbwE9Sl+jbAcreZk2nJA8nW25xuYjQnBUxiJyemn3OOjfeGDEEr54ZsKsX8SDUS4Q6q8lB0y3Ksd0Y45I80IZNUmgEm6agoR65VO6P3f6F3kwO8tixg5C4rG0hWXKTNfA3a60k20YpEJ74UKyoaFk3/DZuHpSAWaVNzQ==
+ bh=Q5KrC8FlxtiywlEQxR4J2fdDfBJ+V23D+gnQTYifv1I=;
+ b=SvzvLa3xJlK2Ze10l26a9mBsji+99lxl0KXdAA1A54PNadroUZtoFQQdnCKkIK6exy79VMU1ArJCKAUv/x40AyKWYFy/TE0Sf4uLln1IEGwCububjOhEUTnV/wSGOTcZLyeQvVwnE7lrSOn0AOmCgt7dSPmdIZ/yCg/YhbSv3OadT/DGrZ9qr/CnaeU+24GEWoRQa8WQTzojF3k7Q7X7iEm4icVINdx7yn0d3rIr+M5iI7iRomYmb1P5gP4rfmddLF65Bw/i5f3wWAQu4GbWbZ0U426P37ur17bGQUiUaE2ne/SplGgY+SugMTQ9rS53m8b8iqeCcMSAMw4A369zGw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RnMNqMDAPNB8sN0Ba8vr6XnL4/lcdqLqp9Dc7DfcPas=;
- b=V6TBEpWsL+h21plnO1BS9n+SUApJlrGj/c+gjlR1HI1VxekyxwgjwBQb2ijLt+ltIU0xWGr8DgimRnGVR1twEpUCaLvCFRxZgY5MpANhC49eLiWCXA9Wt5G8yDzSOahnO9fObnSt+zqVCCk4doNS59wx8eIButbaugYdiS0YzJ0=
-Date: Fri, 18 Feb 2022 15:17:35 +0100
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Andrew Cooper <Andrew.Cooper3@citrix.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Jan
- Beulich" <jbeulich@suse.com>, Wei Liu <wl@xen.org>, George Dunlap
-	<George.Dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>
-Subject: Re: [PATCH v2 0/3] retpoline: add clang support + Kconfig selectable
-Message-ID: <Yg+qf6ZlTX67LPCv@Air-de-Roger>
-References: <20220216162142.15384-1-roger.pau@citrix.com>
- <cfa55fd4-1990-b1ac-e6f3-94ef364793a3@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+ bh=Q5KrC8FlxtiywlEQxR4J2fdDfBJ+V23D+gnQTYifv1I=;
+ b=pFBYwqcI67c6kf8R2NxFy978xltcIrZMpZZSzQ711f6YTPjPr0gBESzYSN4Ae4sNj/pBtA9K7F+kvDuKT/UFoYgjzf191mBkfoE/InEjPVD/EArrrODzhxDvVB8C0uYrhP74uZASU7Qc9X4YPaXPJLgTHe9rE+Kwrl7IvzjrGOY=
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 1/3] x86/retpoline: split retpoline compiler support into separate option
+Date: Fri, 18 Feb 2022 15:34:14 +0100
+Message-ID: <20220218143416.34475-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220218143416.34475-1-roger.pau@citrix.com>
+References: <20220218143416.34475-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <cfa55fd4-1990-b1ac-e6f3-94ef364793a3@citrix.com>
-X-ClientProxiedBy: LO2P265CA0435.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:e::15) To DS7PR03MB5608.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0223.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:1a6::12) To DS7PR03MB5608.namprd03.prod.outlook.com
  (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b6182592-0c2e-4162-8450-08d9f2e96af3
-X-MS-TrafficTypeDiagnostic: BYAPR03MB4439:EE_
-X-Microsoft-Antispam-PRVS: <BYAPR03MB4439207A9E7326A15DCCA1CE8F379@BYAPR03MB4439.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Office365-Filtering-Correlation-Id: 658147a6-596c-4729-b009-08d9f2ebc3ea
+X-MS-TrafficTypeDiagnostic: DS7PR03MB5543:EE_
+X-Microsoft-Antispam-PRVS: <DS7PR03MB5543E921E3CB8FB6701EB8918F379@DS7PR03MB5543.namprd03.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: aoq8pt/Qukd4a31CaVu1cJAawUIOW9CyrkmB1VPjN4VSPWW60NDRnPfsHp7sZkPz5C1ZYHvC3zngT4aruhVcR8U733liON4oj8R/6O1U3SqqQcalBhgfcTBWY5NirMpL9lZSnyTwle5QiISfPWR9341fECnX6Y/VUyv+FAlsCNS52ypBtFGXucxYcJOxs70bV4WXsD/WQxjDCA08IFwGYfazX2YdpXD/ptzwrRIHM97kuqaOyUSPFqdyVDsncz2CLeS9BQOQymkf4T05p6jPrxWdANBrLft7WEWFL77ncLge9/TXr30CLhIsYUBqSKNWGXQU/5TB5w8t0HU8LwKup8Heb/0JWTJKipGZv/DPxJZstV3vdPoxMlgdKYt+UzTwjp/H0J2Nh0vXoegCeIEAIyyKJq8roL4OoeRKLvx77Uo+7s+DU0ZG1+HN6r4jMFu3crgsltk2jIBX98a3Rjk4p7hwtNXLfSEM886vck6eWbdQghJUk0aWd1OZ8X1pfnTeI2eem9TYDAaS+h/4SvU23qdkJYBOgz8XRb5favasFS5JKD9N46NwQRzm96RG1ANK55PJ5UnPJZN9Wx33srNuoq+8LGFAet4tj5XOIMJBv/xZ8SX2WW/C2z0vA6OQvKG12UWFR3Hk1v/ztVSEMc1mScnw/A3yaSjhMP8BUA+xCSE+l6lRWyG9CtovMHFnUnob0tT3+RAn0rIQzegNcwCY0w==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(7916004)(4636009)(366004)(8936002)(2906002)(6486002)(66946007)(66476007)(66556008)(8676002)(4326008)(86362001)(5660300002)(38100700002)(6862004)(82960400001)(83380400001)(33716001)(186003)(26005)(508600001)(54906003)(6666004)(6512007)(6506007)(6636002)(316002)(85182001)(53546011)(9686003)(67856001);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam-Message-Info: aafhI/N//VXt5Qo4d/Rv2WkKL3iGB6LsF5mGo/OE083fZv1nxot1DZf5BFZ1pwjxOQXY8e7ap5K6vBOhShqLwva0BlS7FgkDBrufMq4QWzI/HfvafnRlKQRzT+c+dxtE1Mhur6SGlBakTSnQRblbK0X9b4JKCjR+mTgsW+wKBw88yyYvq5YLqa0x6AFggPdxcnjHDWaSKY1shgPZMWJxZbF3W/RyZDMOYiwh4P9mIwlT6XLuUlokKMFjeN1VlGkkN2zSBWOFjFvu6Uh6N1jkUFr9t18tvJ0g65kr+7Xa/tD5dKZBEwKp6OUuXK++8a+o1wzCNd6OnG0qkH4jf8XtGFVEDKDuN8kf8YcRagbfvzqGaW0NZ2CJvnyNA6mjmlEgdzdyMobLVJK/hCTF6PO1BEh0qQfuVf0xXpeNqJdWsTzwBxMANagZaSKdBTawLmMIoBsjNmZTuutJ9kYLp4xiFOccoyHPqGTnwbql0NX7CNEn93nMGuvfO9GPwDM5+4YULuTuNCxP+K/lv0r2Y+bDUIDAGuIzyGP7kkjJmoVb3AcFCWOd5z4Yo2QSvbF/XWQz0JhxuxTUBLcJMXVRReRtP+1FTvk1KaANgkH42I2T8ZL4ObZhXZ3n20Pt0RNVY46xnJ/l22brrjg4uYS9F7Gukw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(86362001)(6512007)(36756003)(82960400001)(8936002)(26005)(1076003)(6486002)(8676002)(6666004)(6916009)(2616005)(66946007)(5660300002)(2906002)(54906003)(66476007)(316002)(66556008)(83380400001)(4326008)(508600001)(6506007)(186003)(38100700002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WkdoUHVJZk1lKzlmb3hsaEx4MHNiOGdobGJMVXlhZHJ1Z3RUdkdVZnZHZ25x?=
- =?utf-8?B?MXZ3MERtdTJxbDBHZ0ZaNWJtNXpRbDQyMy8yaG5aYUg4SUdSQ0hWa0dRMHNa?=
- =?utf-8?B?NVpCQ3BRQ2IwdUZrem9tZ3g3TXIxQ1BsYW40eDRyMDNrbmhPV2JPanpwSnJT?=
- =?utf-8?B?Rk00T1lyYVhINXBOL1VObWpnRGdlUUcyejdrdmFJeXE0ZHpwOHJQRy9PWTZo?=
- =?utf-8?B?OFNSMjVab3Q0Z1NPUU15d0lFanE5QmxKSjhxV29TYVlaMk41Y2s0eGc3dEs1?=
- =?utf-8?B?MWh5L3JKWUc1eXE3STVwazJYYlhTYWFTU211MVJUQjJVNHR1V2RCTGhvVlNr?=
- =?utf-8?B?MFd6akxEay82MkZaNW5sSVI2TXJydHY0eDBteTlyS2NtRnpvRFF5ZG9nOXh0?=
- =?utf-8?B?SlhFSlRiZ2dkZGtzY0xTZS9JSW94Z1hweFRwVTNVSUQrNnl0bVYwWjIyeWw2?=
- =?utf-8?B?RjdFYUNIRzBhcGF3QzU3ZW5lTi9xYXJrTlNJTmliMUpJbEdJcTRQTVdoLzQv?=
- =?utf-8?B?d2tXdTZPMW5qZlUyU1JhTEVvRmRkQ2JIQjlncnN1VTVjc2tMeTZTOENSbndt?=
- =?utf-8?B?VU1Wc1RuMVpKMW04WEp6N3BQelVMVEJYNUw0TENXSVVvYW5WTVZkbWt3MVFi?=
- =?utf-8?B?Q2RqNWNkRy9jVi9XVVdITndudjVrTkVsSnl2cHFObFVqMDdZcVdmR0hURWJE?=
- =?utf-8?B?dXl2NlBRMkM0VFZpN3pKRXVMZnl5TDZNMHIvM1dudWppOTMrYUMyYzZyc1Na?=
- =?utf-8?B?QmhqUERKRlBkZmFZZm1vTFBWZXYvdEVFamRhMjhNZFNkZlNFNFNKMGxrcWJl?=
- =?utf-8?B?K1g2UDlTc3ljQjJNL3dZNWxmd0p3K0pnV1R0S0oxTXhLbUNOK0s4TUJXU1hv?=
- =?utf-8?B?MmUwY21nWHI5RmVzK2RhcHBvR1pkOTVEeElUSlN2MXp5VHAyUmFabnovdGdG?=
- =?utf-8?B?MTBZOVF2bWFLejhMZGpNeERmZ25XbnpBNzhMS25DbGNaRW5SbVFpZjVUd01i?=
- =?utf-8?B?NmhISE5FMjcwMUpQWEFGbWIvc1d4YWM0S0lQaHZqQW1DUStxUlNBcDZHRi9w?=
- =?utf-8?B?em53WENKZkFrSVhWZlhTdm1uenRRY2EwSis4dlZnQi9paHFTUWhORkdHVDAw?=
- =?utf-8?B?bk16N0hRa2paOGtJc09IVEtDMG81VFlqTktLc20vUUYrSVVkU0hydlozaDNW?=
- =?utf-8?B?UWh2aTAyalBNTlBXdUxJdUU3WEwxMUl5a2ZrTGdWdU8rWjBuMFlkSEU2ZExo?=
- =?utf-8?B?ZEFNMno4VUtSS1c0VDFBODlkWWVSL2NnMTBxanpIekZsOThnSVZnTlhxODNk?=
- =?utf-8?B?cVUvL1dCdm14K1lBTGZOajJ4czYwN1EwbmQxMWRTTG1EWWtkYUw3bXBWUWlw?=
- =?utf-8?B?QldwZkF1ajlRUUx3YzVyRWl6aWFIVjJhSndIaVJ2T0xPKytaWFdJL2RyNlow?=
- =?utf-8?B?RU9LYmNYVmM4RUdqeWhXajJOTHg5L2s4ekxaTG40SndNT1pNWUtyUE5vRk5I?=
- =?utf-8?B?WllRZ3NsREJ4aG9BVUpsRVRZMWlQTWV4Q1VPdCtPaFZHU210OEJOaUxLZmIz?=
- =?utf-8?B?dXNHREVtbk01YTlBR2N0TVp6NElidkNqdjk1VnBWUkgyd1d0SVFXV2tpZmpP?=
- =?utf-8?B?RVpvazRtTWVwTlNobCtjRVY2bDM0ZVA3TXZIQk5kTDFrTXVEL1JnYzlEZzlF?=
- =?utf-8?B?VHJEQ1VKaWZmclBCdDF2TnhHVE5jS3krZUtXQVdydFpPT0k3dW51WCtVM3FV?=
- =?utf-8?B?T0xPYi84SDZVRUpPcHY4N3lLWVMvVFR5TlU4WllxSitGRHJrbVhTQzZJblhM?=
- =?utf-8?B?aWdBZ2NSM2F4aDVWMTZ3KzRFejdQcy9UbHRLNEd2dnRtdXdaRFd6YjV0WEc4?=
- =?utf-8?B?YjNRQXlULzZ3V0hSZEo4QnBDSkhzY2k0VFhKaW9zVTVPL2RCQjhaZHgzZklM?=
- =?utf-8?B?blN5STNkb2NOMnFtWnRENUhsSVJybFhiSFR6MksxUVJuOXFZS2F0dHNJaGxo?=
- =?utf-8?B?TG5VME9WUDJrTWVMK2JMT3AyV2l2OFUzaG9nNitJWkJDMnY2M2RNd0VoQlZY?=
- =?utf-8?B?WDJSTDZqNHNrUFBER3VuRlh5elRvQ0d1cnBpVGsxMGpmRmxERExxWTlqNGxh?=
- =?utf-8?B?dDJ3RVRXYU1CR1dVNU5GcTRxalJ0ZUMvaG5rM3h4UDdRWjBDQmJUK0twS3VL?=
- =?utf-8?Q?9oym/6ckpzjvGdKLTfx+Hwg=3D?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6182592-0c2e-4162-8450-08d9f2e96af3
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V0lIVUpiVHZmb21FR3U3cjBzd0ZCbi9DQStPbDNlZ0tVSWhzRFBCUDlidEkz?=
+ =?utf-8?B?VWE0bThaUm9ReTZWdDJKbmlkaWhQSGFEWkc0T3VuTnB1cXY3eTBiRUNnNkJl?=
+ =?utf-8?B?amw0UkY2aUQ5VEtOK1I4aTFwc0lxZDQ4R0lsWXJYTVBhNUNYc1F6UjNlZzRt?=
+ =?utf-8?B?WlVTUlY3VFF0Sk9lNXY2eUNjZ01jbW91ODl4dDlNd29oVWRJeGtQQVBja3Uv?=
+ =?utf-8?B?VVpBdzJCU2pVQytFTDI1NFRqWnh0bmROTmFnTGd0OGFrTnFZWHF0YlVLSzNh?=
+ =?utf-8?B?ODltMmljQjdSaDc2bWwrajdPSU5EUG9HOEJmQUhCL0NTbXZlMGhmek5iVEgr?=
+ =?utf-8?B?U1NlSWpmVDBkSGEzMWM4Rjd4NXlyNkxPcWQ5Ym5FZVpWaDFMZnNncjZ2d2hp?=
+ =?utf-8?B?aFNYZGN4ZkZZMkIyV1ZXTUh6Y0hlSVZYREtPYUZVbjhxWUoxaWlzcGpabU5i?=
+ =?utf-8?B?VTFXV1Nkbmd1a09mV25nU1p2TGlHOGhQV0RueCtjaXBMMmpOcFA5YWMzM3NL?=
+ =?utf-8?B?Um90OTJ1UmRFcU9Ea0JONkNFRGVGNThkUUk3K25GYWtqbHlGV2hDT0NWVERo?=
+ =?utf-8?B?NW93LzR0QVlIbE9zbGN0TFJydFFUTVZpblFodmxzU3RSY2I3WkFYNlZnV2tQ?=
+ =?utf-8?B?WnFUblFSRmhDaVJhN2FpcW9JUDh0clB2bmZjcXZNL3RUZnNHcGZyenhiS0gv?=
+ =?utf-8?B?YXVTankrc0Y5YWwvT3ZIcUtxOEpSRjNtVmMxYWR4ejk2SzZ0NXI3M1pncUNW?=
+ =?utf-8?B?SkJXeWIvSGVJLzJDV0xweG5FT0h4VzBuWGdlTjRQZjhCSDErVnZBN3RIWlZq?=
+ =?utf-8?B?bnJ4UFNsYW1Qd01qbVJIY0ZLY1I0U2tZR1pMK01zWHV0aUc5NC80aDdtOXBQ?=
+ =?utf-8?B?UkJheS9DWXNlQU5Yai9iL3pRTlFOSTJiMzR3dUJSaHhlaTF3a1hnYXlVUGo2?=
+ =?utf-8?B?eWZKOUJSR1pMMEhiRDAvdWVtZUVLZExOc1Z4SHlOMGVzZjdjQmYwWTU2eldZ?=
+ =?utf-8?B?V0EwNmluTy9LZFlXVWZOOWFSK1NMVUlMY3dGNlJUSklTRFgwbm5ha1ZVdGxW?=
+ =?utf-8?B?Rk9sRC9vdWFxTEZaTkdCM3lXSkZCUkY0YU9lOGlNSmdMVjFFVlZTbW9tWWVt?=
+ =?utf-8?B?anBwSjZ0UnlYMnpnRnRXTkNrZXFWcGJ1cEY3YnR2d2ZZR1N4elMzWmNDK3hh?=
+ =?utf-8?B?azRyS1A0MURCbXNPckhLbEk5NEEvTmxmbVpsc2VLMERyRUlmK1IrT2JDY2Vj?=
+ =?utf-8?B?NVFVZ3RjN1dOWEU4R0s4cE44a1Nyc3EremFPd1ZGSGd1WEhXbGtmLzh6WUNB?=
+ =?utf-8?B?WitrcG9YejVHOFZyWUxjTVhPQ3NVRkZuMW43U0pPMWV4aGhsSUp4Z0hrVzQ5?=
+ =?utf-8?B?ZmdPSDBhNW15dDVRQVFkQTh1QmVyN25VVGpmUi9Ob1RBOUpJbUxzUFFEYW45?=
+ =?utf-8?B?QlNKUmtwbWxXeTNOT25DSnlEN29Rb0hPNk4vQnc3NkVLSWpBT3RwMEkvV0Vr?=
+ =?utf-8?B?c2Jsa2dhQjZHTm1aSld1YkVoZjFrbml0djZsRWZTRm55eWhPT2JJK25SQndI?=
+ =?utf-8?B?enNPK2JRTEQ2WFNnK2ZVVFRDY2pNN0ZucFl6aW5Ba010S1pPT0JadGkzR2li?=
+ =?utf-8?B?SkoyUUphNW9LSmZSQlBJM0R2dGVjUjlSQ01CQmR1aDJNc28wNkJNS3dDdHdj?=
+ =?utf-8?B?SWp4ckJhK0txU0JyS0Z4R21Kb2g3TVhrN1JaT2FaZ0owb3crMkZHdkQyejNq?=
+ =?utf-8?B?QXdWWjNWQlBHaW8zU3F3M1RPVU5lUkNUdk9RSTcrUzNHQi8vZ241Tkg4bVZ4?=
+ =?utf-8?B?YzEvNnFkcFpnaUp4SFVqTkI0aUR5Q3U5UXhEVjJueXZXRFI1UVhGQU5UTVNZ?=
+ =?utf-8?B?d3kwM2tkTzdUVnU4OU9ZQ1VCTjQ4Sk5TbURjQlArTk82SUVabTIzVExTYWkr?=
+ =?utf-8?B?cEJhRFA0NGt6djU3RFFacXZveWVkSFUyZXBpLzM5Szh1czFUSWdMN3ZvU3dO?=
+ =?utf-8?B?Z1Q3b3pxOVI2UkRJZGx1N1VTbGtNOEFQT1dPeWVwbENQZGlMUjFzVlh6aDU0?=
+ =?utf-8?B?ZnlMM1FVaEZrQUp1djBHeW5ncktaNmZ6WDRQcDFGMms4dmZTS25RNERQWGZE?=
+ =?utf-8?B?b3EyNDR2bnpIMEh3VHdidjNvekdMS2pCRFpWa0hrOUlOM2dmVDVWUVhHZVhj?=
+ =?utf-8?Q?NTacOkrg/5ejpy3hWky5yjI=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 658147a6-596c-4729-b009-08d9f2ebc3ea
 X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2022 14:17:38.7000
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2022 14:34:27.0322
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2nlwi/AfquRiA1SshwxcoVv8lwkdDVbHK1WZeZ5PB+hKtDSYYOcYIm13TVzHk3zpmbIa0l17p33ZwTj/o2LCSg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR03MB4439
+X-MS-Exchange-CrossTenant-UserPrincipalName: rgqKvh1TK6+p4i07OBiG71NfQaU2dSjc4dHThmA4mq+B0v+x2g79x5FZnixLS5i99cxMJIzMxvSGTWgJtLpYAA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5543
 X-OriginatorOrg: citrix.com
 
-On Fri, Feb 18, 2022 at 01:58:31PM +0000, Andrew Cooper wrote:
-> On 16/02/2022 16:21, Roger Pau Monne wrote:
-> > Hello,
-> >
-> > The following series adds retpoline support for clang builds, and also
-> > allows the user to select whether to enable retpoline support at build
-> > time via a new Kconfig option.
-> >
-> > I've tried adding a suitable description to the Kconfig option, but I'm
-> > sure there's room for improvement.
-> >
-> > Thanks, Roger.
-> >
-> > Roger Pau Monne (3):
-> >   x86/retpoline: rename retpoline Kconfig check to include GCC prefix
-> >   x86/clang: add retpoline support
-> >   x86/Kconfig: introduce option to select retpoline usage
-> 
-> I don't particularly want to nitpick, but IMO this would be a lot easier
-> to follow if we ended up with
-> 
-> config CC_HAS_RETPOLINE
->     def_bool $(cc-option,-mindirect-branch-register) ||
-> $(cc-option,-mretpoline-external-thunk)
-> 
-> config INDIRECT_THUNK
->     depends on CC_HAS_RETPOLINE
-> 
-> and
-> 
-> ifeq ($(CONFIG_INDIRECT_THUNK),y)
-> CFLAGS-$(CONFIG_CC_IS_GCC) += ...
-> CFLAGS-$(CONFIG_CC_IS_CLANG) += ...
-> endif
-> 
-> because this reduces the number of CONFIG_* options involved.
-> 
-> Thoughts?
+Keep the previous option as a way to signal generic retpoline support
+regardless of the underlying compiler, while introducing a new
+CC_INDIRECT_THUNK that signals whether the underlying compiler
+supports retpoline.
 
-That would reduce one hidden Kconfig option. I don't mind
-implementing it that way.
+No functional change intended.
 
-> On substantially more minor points, INDIRECT_THUNK wants to be first in
-> the speculative hardening list, seeing as it is by far and away the most
-> important one, and I think we should stop writing things like "If
-> unsure, ..." in the help because it's just parroting the default which
-> is also rendered to people reading this message.  Our audience here are
-> developers, and I think we can depend on them to intuit the stated default.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+Changes since v2:
+ - Make the compiler option check generic instead of GCC only.
 
-OK, so let me put that one first on the list then, and drop the "If
-unsure, "
+Changes since v1:
+ - Put def_bool before depend on.
+---
+ xen/arch/x86/Kconfig |  6 +++++-
+ xen/arch/x86/arch.mk | 10 ++++++----
+ 2 files changed, 11 insertions(+), 5 deletions(-)
 
-Thanks, Roger.
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index b4abfca46f..a1a90da4fc 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -32,9 +32,13 @@ config ARCH_DEFCONFIG
+ 	string
+ 	default "arch/x86/configs/x86_64_defconfig"
+ 
+-config INDIRECT_THUNK
++config CC_INDIRECT_THUNK
+ 	def_bool $(cc-option,-mindirect-branch-register)
+ 
++config INDIRECT_THUNK
++	def_bool y
++	depends on CC_INDIRECT_THUNK
++
+ config HAS_AS_CET_SS
+ 	# binutils >= 2.29 or LLVM >= 6
+ 	def_bool $(as-instr,wrssq %rax$(comma)0;setssbsy)
+diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
+index fa7cf38443..6388b1d93f 100644
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -42,10 +42,12 @@ CFLAGS += -mno-red-zone -fpic
+ # SSE setup for variadic function calls.
+ CFLAGS += -mno-sse $(call cc-option,$(CC),-mskip-rax-setup)
+ 
+-# Compile with thunk-extern, indirect-branch-register if avaiable.
+-CFLAGS-$(CONFIG_INDIRECT_THUNK) += -mindirect-branch=thunk-extern
+-CFLAGS-$(CONFIG_INDIRECT_THUNK) += -mindirect-branch-register
+-CFLAGS-$(CONFIG_INDIRECT_THUNK) += -fno-jump-tables
++ifeq ($(CONFIG_INDIRECT_THUNK),y)
++# Compile with gcc thunk-extern, indirect-branch-register if available.
++CFLAGS-$(CONFIG_CC_IS_GCC) += -mindirect-branch=thunk-extern
++CFLAGS-$(CONFIG_CC_IS_GCC) += -mindirect-branch-register
++CFLAGS-$(CONFIG_CC_IS_GCC) += -fno-jump-tables
++endif
+ 
+ # If supported by the compiler, reduce stack alignment to 8 bytes. But allow
+ # this to be overridden elsewhere.
+-- 
+2.34.1
+
 
