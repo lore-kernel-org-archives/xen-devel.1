@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E489C4321E
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Feb 2022 10:22:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.275993.472074 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9299C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Feb 2022 10:22:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.275989.472025 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nM5px-0006C9-0p; Mon, 21 Feb 2022 10:22:33 +0000
+	id 1nM5pr-0004ny-Az; Mon, 21 Feb 2022 10:22:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 275993.472074; Mon, 21 Feb 2022 10:22:32 +0000
+Received: by outflank-mailman (output) from mailman id 275989.472025; Mon, 21 Feb 2022 10:22:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nM5pw-00069E-M3; Mon, 21 Feb 2022 10:22:32 +0000
-Received: by outflank-mailman (input) for mailman id 275993;
- Mon, 21 Feb 2022 10:22:30 +0000
+	id 1nM5pr-0004nL-2Z; Mon, 21 Feb 2022 10:22:27 +0000
+Received: by outflank-mailman (input) for mailman id 275989;
+ Mon, 21 Feb 2022 10:22:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nM5pu-0005TR-6s
- for xen-devel@lists.xenproject.org; Mon, 21 Feb 2022 10:22:30 +0000
+ (envelope-from <julien@xen.org>) id 1nM5pq-0004cB-3l
+ for xen-devel@lists.xenproject.org; Mon, 21 Feb 2022 10:22:26 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nM5pu-0002Bn-0t; Mon, 21 Feb 2022 10:22:30 +0000
+ id 1nM5pp-0002Ay-VE; Mon, 21 Feb 2022 10:22:25 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nM5pt-00070b-Pv; Mon, 21 Feb 2022 10:22:29 +0000
+ id 1nM5pp-00070b-Nh; Mon, 21 Feb 2022 10:22:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,68 +45,112 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=gj6Tx1Ts6XYE8jhOQFSpNUB23rP/9Mj+pm8BtVXwdgI=; b=uVjIeenzjjYRsw54H1HNYmxQfw
-	3v2o/47jmnPmphrWNR5brpLJwHw36oVfIHhVYQH/HTvGFTztGzzBTXDPQ4l4FHFzZkV0lnJXXR4g9
-	on+BkY3BJRTt+4hUBLh0xl947Qr63WSRovux0mdJsfwxG8NGpG/GuF77r2jda4RwhMI4=;
+	bh=MXWuUJ4Gmt9SmtDQvOOz1c2o08azUVVOAJUW5p8Yymw=; b=QLO96n1xIu6/SHSb3SXM+I+P6F
+	52Xx7khHqRnfeSkjkrvlruIRBxcGXkytgs7C0p+wVNyfG/mrykGKosZ780IoW9alQzdE2HJvn+77M
+	e6Yd/5r9n2qbGkVTn32WCx+h3ojkIJ9ePXoZkNj9gefcCGHqDu2BfI/oIoItnyCICyIE=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Julien Grall <julien.grall@arm.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 07/19] xen/arm: mm: Don't open-code Xen PT update in remove_early_mappings()
-Date: Mon, 21 Feb 2022 10:22:06 +0000
-Message-Id: <20220221102218.33785-8-julien@xen.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 03/19] xen/arm: p2m: Replace level_{orders, masks} arrays with XEN_PT_LEVEL_{ORDER, MASK}
+Date: Mon, 21 Feb 2022 10:22:02 +0000
+Message-Id: <20220221102218.33785-4-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220221102218.33785-1-julien@xen.org>
 References: <20220221102218.33785-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <julien.grall@arm.com>
+From: Julien Grall <jgrall@amazon.com>
 
-Now that xen_pt_update_entry() is able to deal with different mapping
-size, we can replace the open-coding of the page-tables update by a call
-to modify_xen_mappings().
+The array level_orders and level_masks can be replaced with the
+recently introduced macros LEVEL_ORDER and LEVEL_MASK.
 
-As the function is not meant to fail, a BUG_ON() is added to check the
-return.
-
-Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ---
-    Changes in v2:
-        - Stay consistent with how function name are used in the commit
-        message
-        - Add my AWS signed-off-by
----
- xen/arch/arm/mm.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+    Changes in v3:
+        - Fix clashes after prefixing the PT macros with XEN_PT_
 
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 7b4b9de8693e..f088a4b2de96 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -599,11 +599,11 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+    Changes in v2:
+        - New patch
+
+    The goal is to remove completely the static arrays so they
+    don't need to be global (or duplicated) when adding superpage
+    support for Xen PT.
+
+    This also has the added benefits to replace a couple of loads
+    with only a few instructions working on immediate.
+---
+ xen/arch/arm/p2m.c | 17 ++++++-----------
+ 1 file changed, 6 insertions(+), 11 deletions(-)
+
+diff --git a/xen/arch/arm/p2m.c b/xen/arch/arm/p2m.c
+index 493a1e25879a..1d1059f7d2bd 100644
+--- a/xen/arch/arm/p2m.c
++++ b/xen/arch/arm/p2m.c
+@@ -37,12 +37,6 @@ static unsigned int __read_mostly max_vmid = MAX_VMID_8_BIT;
+  */
+ unsigned int __read_mostly p2m_ipa_bits = 64;
  
- void __init remove_early_mappings(void)
- {
--    lpae_t pte = {0};
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START), pte);
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START + SZ_2M),
--              pte);
--    flush_xen_tlb_range_va(BOOT_FDT_VIRT_START, BOOT_FDT_SLOT_SIZE);
-+    int rc;
-+
-+    rc = modify_xen_mappings(BOOT_FDT_VIRT_START, BOOT_FDT_VIRT_END,
-+                             _PAGE_BLOCK);
-+    BUG_ON(rc);
+-/* Helpers to lookup the properties of each level */
+-static const paddr_t level_masks[] =
+-    { ZEROETH_MASK, FIRST_MASK, SECOND_MASK, THIRD_MASK };
+-static const uint8_t level_orders[] =
+-    { ZEROETH_ORDER, FIRST_ORDER, SECOND_ORDER, THIRD_ORDER };
+-
+ static mfn_t __read_mostly empty_root_mfn;
+ 
+ static uint64_t generate_vttbr(uint16_t vmid, mfn_t root_mfn)
+@@ -233,7 +227,7 @@ static lpae_t *p2m_get_root_pointer(struct p2m_domain *p2m,
+      * we can't use (P2M_ROOT_LEVEL - 1) because the root level might be
+      * 0. Yet we still want to check if all the unused bits are zeroed.
+      */
+-    root_table = gfn_x(gfn) >> (level_orders[P2M_ROOT_LEVEL] +
++    root_table = gfn_x(gfn) >> (XEN_PT_LEVEL_ORDER(P2M_ROOT_LEVEL) +
+                                 XEN_PT_LPAE_SHIFT);
+     if ( root_table >= P2M_ROOT_PAGES )
+         return NULL;
+@@ -380,7 +374,7 @@ mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
+     if ( gfn_x(gfn) > gfn_x(p2m->max_mapped_gfn) )
+     {
+         for ( level = P2M_ROOT_LEVEL; level < 3; level++ )
+-            if ( (gfn_x(gfn) & (level_masks[level] >> PAGE_SHIFT)) >
++            if ( (gfn_x(gfn) & (XEN_PT_LEVEL_MASK(level) >> PAGE_SHIFT)) >
+                  gfn_x(p2m->max_mapped_gfn) )
+                 break;
+ 
+@@ -423,7 +417,8 @@ mfn_t p2m_get_entry(struct p2m_domain *p2m, gfn_t gfn,
+          * The entry may point to a superpage. Find the MFN associated
+          * to the GFN.
+          */
+-        mfn = mfn_add(mfn, gfn_x(gfn) & ((1UL << level_orders[level]) - 1));
++        mfn = mfn_add(mfn,
++                      gfn_x(gfn) & ((1UL << XEN_PT_LEVEL_ORDER(level)) - 1));
+ 
+         if ( valid )
+             *valid = lpae_is_valid(entry);
+@@ -434,7 +429,7 @@ out_unmap:
+ 
+ out:
+     if ( page_order )
+-        *page_order = level_orders[level];
++        *page_order = XEN_PT_LEVEL_ORDER(level);
+ 
+     return mfn;
  }
+@@ -808,7 +803,7 @@ static bool p2m_split_superpage(struct p2m_domain *p2m, lpae_t *entry,
+     /* Convenience aliases */
+     mfn_t mfn = lpae_get_mfn(*entry);
+     unsigned int next_level = level + 1;
+-    unsigned int level_order = level_orders[next_level];
++    unsigned int level_order = XEN_PT_LEVEL_ORDER(next_level);
  
- /*
+     /*
+      * This should only be called with target != level and the entry is
 -- 
 2.32.0
 
