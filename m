@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AEE4C4332F
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Feb 2022 10:51:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.276099.472211 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DB6EC433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Feb 2022 10:55:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.276160.472254 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nM6HX-0007md-PD; Mon, 21 Feb 2022 10:51:03 +0000
+	id 1nM6Lr-0003zZ-1m; Mon, 21 Feb 2022 10:55:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 276099.472211; Mon, 21 Feb 2022 10:51:03 +0000
+Received: by outflank-mailman (output) from mailman id 276160.472254; Mon, 21 Feb 2022 10:55:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nM6HX-0007jC-5q; Mon, 21 Feb 2022 10:51:03 +0000
-Received: by outflank-mailman (input) for mailman id 276099;
- Mon, 21 Feb 2022 10:50:58 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1nM6Lq-0003zS-TH; Mon, 21 Feb 2022 10:55:30 +0000
+Received: by outflank-mailman (input) for mailman id 276160;
+ Mon, 21 Feb 2022 10:55:30 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nM6HS-0006SR-Lr
- for xen-devel@lists.xenproject.org; Mon, 21 Feb 2022 10:50:58 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nM6HR-0002lx-NZ; Mon, 21 Feb 2022 10:50:57 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nM5q5-00070b-Py; Mon, 21 Feb 2022 10:22:41 +0000
+ (envelope-from <SRS0=3jq6=TE=srcf.net=amc96@srs-se1.protection.inumbo.net>)
+ id 1nM6Lq-0003zM-0L
+ for xen-devel@lists.xenproject.org; Mon, 21 Feb 2022 10:55:30 +0000
+Received: from ppsw-40.csi.cam.ac.uk (ppsw-40.csi.cam.ac.uk [131.111.8.140])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c7229619-9304-11ec-8eb8-a37418f5ba1a;
+ Mon, 21 Feb 2022 11:55:28 +0100 (CET)
+Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:57080)
+ by ppsw-40.csi.cam.ac.uk (ppsw.cam.ac.uk [131.111.8.138]:25)
+ with esmtps (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
+ id 1nM6Ln-0010lg-jF (Exim 4.95) (return-path <amc96@srcf.net>);
+ Mon, 21 Feb 2022 10:55:27 +0000
+Received: from [192.168.1.10] (host-92-12-45-187.as13285.net [92.12.45.187])
+ (Authenticated sender: amc96)
+ by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id C3D781FB2D;
+ Mon, 21 Feb 2022 10:55:26 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,176 +47,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=D3nC49pPPlSt0jCvDVIcUQr1XjPlKjaXYX88znegfds=; b=L37qETmWZoIP8V+g5+NzwQbK8d
-	+ku44VagmufwFIBsvMEhS6wCAM9s4Nd3ikoetMhu+1IbJ5C0XlMbBqyUzCXP+My7zgovNBNQG2ipB
-	smt5znX4iM4F9lacP5KlWY1by0xFmKkRqnV6WaC4+ZRis5le88/xMhqN9HidHJVkRBPU=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: julien@xen.org,
-	Julien Grall <julien.grall@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v3 18/19] xen/arm: mm: Rework setup_xenheap_mappings()
-Date: Mon, 21 Feb 2022 10:22:17 +0000
-Message-Id: <20220221102218.33785-19-julien@xen.org>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20220221102218.33785-1-julien@xen.org>
-References: <20220221102218.33785-1-julien@xen.org>
+X-Inumbo-ID: c7229619-9304-11ec-8eb8-a37418f5ba1a
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: https://help.uis.cam.ac.uk/email-scanner-virus
+Message-ID: <085e64bd-b32f-6162-f5d0-69ac9d0e1a2c@srcf.net>
+Date: Mon, 21 Feb 2022 10:55:26 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.1
+Subject: Re: [PATCH 3/3] CI: Coverity tweaks
+Content-Language: en-GB
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
+References: <20220221100254.13661-1-andrew.cooper3@citrix.com>
+ <20220221100254.13661-4-andrew.cooper3@citrix.com>
+ <YhNrhuvBbZ43hcA6@Air-de-Roger>
+From: Andrew Cooper <amc96@srcf.net>
+In-Reply-To: <YhNrhuvBbZ43hcA6@Air-de-Roger>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <julien.grall@arm.com>
+On 21/02/2022 10:37, Roger Pau Monné wrote:
+> On Mon, Feb 21, 2022 at 10:02:54AM +0000, Andrew Cooper wrote:
+>>  * Use workflow_dispatch to allow manual creation of the job.
+>>  * Use parallel builds.  The workers have two vCPUs.
+>>  * Shrink the dependency list further.  build-essential covers make and gcc,
+>>    while bridge-utils and iproute2 are runtime dependencies not build
+>>    dependencies.  Alter bzip2 to libbz2-dev.
+>>
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> ---
+>> CC: Roger Pau Monné <roger.pau@citrix.com>
+>> ---
+>>  .github/workflows/coverity.yml | 14 ++++++++------
+>>  1 file changed, 8 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/.github/workflows/coverity.yml b/.github/workflows/coverity.yml
+>> index 9d04b56fd31d..6e7b81e74f72 100644
+>> --- a/.github/workflows/coverity.yml
+>> +++ b/.github/workflows/coverity.yml
+>> @@ -2,6 +2,7 @@ name: Coverity Scan
+>>  
+>>  # We only want to test official release code, not every pull request.
+>>  on:
+>> +  workflow_dispatch:
+>>    schedule:
+>>      - cron: '18 9 * * WED,SUN' # Bi-weekly at 9:18 UTC
+>>  
+>> @@ -11,11 +12,11 @@ jobs:
+>>      steps:
+>>      - name: Install build dependencies
+>>        run: |
+>> -        sudo apt-get install -y wget git gawk bridge-utils \
+>> -          iproute2 bzip2 build-essential \
+>> -          make gcc zlib1g-dev libncurses5-dev iasl \
+>> -          libbz2-dev e2fslibs-dev git-core uuid-dev ocaml \
+>> -          ocaml-findlib xz-utils libyajl-dev \
+>> +        sudo apt-get install -y wget git gawk \
+>> +          libbz2-dev build-essential \
+>> +          zlib1g-dev libncurses5-dev iasl \
+>> +          libbz2-dev e2fslibs-dev uuid-dev ocaml \
+>> +          ocaml-findlib libyajl-dev \
+>>            autoconf libtool liblzma-dev \
+>>            python3-dev golang python-dev libsystemd-dev
+>>  
+>> @@ -31,7 +32,7 @@ jobs:
+>>  
+>>      - name: Pre build stuff
+>>        run: |
+>> -        make mini-os-dir
+>> +        make -j`nproc` mini-os-dir
+>>  
+>>      - uses: vapier/coverity-scan-action@v1
+>>        with:
+>> @@ -39,3 +40,4 @@ jobs:
+>>          project: XenProject
+>>          email: ${{ secrets.COVERITY_SCAN_EMAIL }}
+>>          token: ${{ secrets.COVERITY_SCAN_TOKEN }}
+>> +        command: make -j`nproc` build
+> There's already a 'command:' parameter set just before 'project:'.
 
-The current implementation of setup_xenheap_mappings() is using 1GB
-mappings. This can lead to unexpected result because the mapping
-may alias a non-cachable region (such as device or reserved regions).
-For more details see B2.8 in ARM DDI 0487H.a.
+Oh, so there is.
 
-map_pages_to_xen() was recently reworked to allow superpage mappings,
-support contiguous mapping and deal with the use of pagge-tables before
-they are mapped.
+> Are
+> we OK with using plain build?
+>
+> If so we would have to disable docs build and stubdom? We don't want
+> to analyze all the newlib &c that's build as part of stubdoms?
 
-Most of the code in setup_xenheap_mappings() is now replaced with a
-single call to map_pages_to_xen().
+The problem I was trying to work around there was that xen&tools turn
+into *-install so we also spend time shuffling binaries around the build
+environment.
 
-Signed-off-by: Julien Grall <julien.grall@arm.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
+What we actually want is:
 
----
-    Changes in v3:
-        - Don't use 1GB mapping
-        - Re-order code in setup_mm() in a separate patch
+make -j`nproc` build-xen build-tools && make -j`nproc` -C extras/mini-os/
 
-    Changes in v2:
-        - New patch
----
- xen/arch/arm/mm.c | 87 ++++++++++-------------------------------------
- 1 file changed, 18 insertions(+), 69 deletions(-)
-
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 11b6b60a2bc1..4af59375d998 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -138,17 +138,6 @@ static DEFINE_PAGE_TABLE(cpu0_pgtable);
- static DEFINE_PAGE_TABLES(cpu0_dommap, DOMHEAP_SECOND_PAGES);
- #endif
- 
--#ifdef CONFIG_ARM_64
--/* The first page of the first level mapping of the xenheap. The
-- * subsequent xenheap first level pages are dynamically allocated, but
-- * we need this one to bootstrap ourselves. */
--static DEFINE_PAGE_TABLE(xenheap_first_first);
--/* The zeroeth level slot which uses xenheap_first_first. Used because
-- * setup_xenheap_mappings otherwise relies on mfn_to_virt which isn't
-- * valid for a non-xenheap mapping. */
--static __initdata int xenheap_first_first_slot = -1;
--#endif
--
- /* Common pagetable leaves */
- /* Second level page tables.
-  *
-@@ -815,77 +804,37 @@ void __init setup_xenheap_mappings(unsigned long base_mfn,
- void __init setup_xenheap_mappings(unsigned long base_mfn,
-                                    unsigned long nr_mfns)
- {
--    lpae_t *first, pte;
--    unsigned long mfn, end_mfn;
--    vaddr_t vaddr;
--
--    /* Align to previous 1GB boundary */
--    mfn = base_mfn & ~((FIRST_SIZE>>PAGE_SHIFT)-1);
-+    int rc;
- 
-     /* First call sets the xenheap physical and virtual offset. */
-     if ( mfn_eq(xenheap_mfn_start, INVALID_MFN) )
-     {
-+        unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
-+
-         xenheap_mfn_start = _mfn(base_mfn);
-         xenheap_base_pdx = mfn_to_pdx(_mfn(base_mfn));
-+        /*
-+         * The base address may not be aligned to the first level
-+         * size (e.g. 1GB when using 4KB pages). This would prevent
-+         * superpage mappings for all the regions because the virtual
-+         * address and machine address should both be suitably aligned.
-+         *
-+         * Prevent that by offsetting the start of the xenheap virtual
-+         * address.
-+         */
-         xenheap_virt_start = DIRECTMAP_VIRT_START +
--            (base_mfn - mfn) * PAGE_SIZE;
-+            (base_mfn - mfn_gb) * PAGE_SIZE;
-     }
- 
-     if ( base_mfn < mfn_x(xenheap_mfn_start) )
-         panic("cannot add xenheap mapping at %lx below heap start %lx\n",
-               base_mfn, mfn_x(xenheap_mfn_start));
- 
--    end_mfn = base_mfn + nr_mfns;
--
--    /*
--     * Virtual address aligned to previous 1GB to match physical
--     * address alignment done above.
--     */
--    vaddr = (vaddr_t)__mfn_to_virt(base_mfn) & FIRST_MASK;
--
--    while ( mfn < end_mfn )
--    {
--        int slot = zeroeth_table_offset(vaddr);
--        lpae_t *p = &xen_pgtable[slot];
--
--        if ( p->pt.valid )
--        {
--            /* mfn_to_virt is not valid on the 1st 1st mfn, since it
--             * is not within the xenheap. */
--            first = slot == xenheap_first_first_slot ?
--                xenheap_first_first : mfn_to_virt(lpae_get_mfn(*p));
--        }
--        else if ( xenheap_first_first_slot == -1)
--        {
--            /* Use xenheap_first_first to bootstrap the mappings */
--            first = xenheap_first_first;
--
--            pte = pte_of_xenaddr((vaddr_t)xenheap_first_first);
--            pte.pt.table = 1;
--            write_pte(p, pte);
--
--            xenheap_first_first_slot = slot;
--        }
--        else
--        {
--            mfn_t first_mfn = alloc_boot_pages(1, 1);
--
--            clear_page(mfn_to_virt(first_mfn));
--            pte = mfn_to_xen_entry(first_mfn, MT_NORMAL);
--            pte.pt.table = 1;
--            write_pte(p, pte);
--            first = mfn_to_virt(first_mfn);
--        }
--
--        pte = mfn_to_xen_entry(_mfn(mfn), MT_NORMAL);
--        /* TODO: Set pte.pt.contig when appropriate. */
--        write_pte(&first[first_table_offset(vaddr)], pte);
--
--        mfn += FIRST_SIZE>>PAGE_SHIFT;
--        vaddr += FIRST_SIZE;
--    }
--
--    flush_xen_tlb_local();
-+    rc = map_pages_to_xen((vaddr_t)__mfn_to_virt(base_mfn),
-+                          _mfn(base_mfn), nr_mfns,
-+                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
-+    if ( rc )
-+        panic("Unable to setup the xenheap mappings.\n");
- }
- #endif
- 
--- 
-2.32.0
-
+~Andrew
 
