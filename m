@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB3FC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1F11C43217
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 15:27:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.276858.473217 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.276859.473223 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMX4X-0007C3-Mr; Tue, 22 Feb 2022 15:27:25 +0000
+	id 1nMX4Y-0007Jx-5p; Tue, 22 Feb 2022 15:27:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 276858.473217; Tue, 22 Feb 2022 15:27:25 +0000
+Received: by outflank-mailman (output) from mailman id 276859.473223; Tue, 22 Feb 2022 15:27:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMX4X-00079y-3i; Tue, 22 Feb 2022 15:27:25 +0000
-Received: by outflank-mailman (input) for mailman id 276858;
+	id 1nMX4X-0007En-MW; Tue, 22 Feb 2022 15:27:25 +0000
+Received: by outflank-mailman (input) for mailman id 276859;
  Tue, 22 Feb 2022 15:27:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Woib=TF=citrix.com=prvs=045a4fa17=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nMX4V-0006OK-Eb
+ id 1nMX4V-0006Cs-L5
  for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 15:27:23 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ed31e790-93f3-11ec-8eb8-a37418f5ba1a;
- Tue, 22 Feb 2022 16:27:22 +0100 (CET)
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ecbaec81-93f3-11ec-8539-5f4723681683;
+ Tue, 22 Feb 2022 16:27:21 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,271 +38,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ed31e790-93f3-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: ecbaec81-93f3-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
   d=citrix.com; s=securemail; t=1645543642;
   h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=7NU2F5oou3wTFQiiPS+nvCzwPrVqGrwa293dW8VmdiU=;
-  b=BUr7H2GcEymCyhcxcz+3PODXhavp2cHwyCCN5W2o1cjYiuBWEFnKer+A
-   2RbOG/lAKZKxhQqz7KjuCDf+ZgXHef+1bG5cwFFaLHETMka4Fo9KMcy5K
-   i+Bz3BLIFSg7AGfbdd+Ejfh5kg9hFyzkF2K6wdPMdtF66rmUg47ppXEvB
-   A=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+   references:mime-version:content-transfer-encoding;
+  bh=L045W9NEOuIRKd1S32sU0jL0uHWIuPgrAYtbmC4gyoY=;
+  b=Et0i6TBuATWyVR2jJ4Z882ybRFKz7q6LVlibL2zAc5hZP+omQ7TLryaH
+   pvvtmenUEmO6NAhi8eoquW3qOrqwutmDbjxED5aoOtbxKl9wfgkghVh8F
+   ODwDAQO9IaoAd1Lzybvhv+nxnLj4b6XP+9C641icmzM5vHttq+nTh6Hrv
+   s=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 66981791
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 64732553
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:UpBYq6q74B7Zeqn7/MZsGuoFWeJeBmJ8ZRIvgKrLsJaIsI4StFCzt
- garIBmOPqmMajSmKtxyaoWx805X78XUm9c1TQRv/3ozFnsW+JuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlVEliefQAOCU5NfsYkidfyc9IMsaoU8ly75RbrJA24DjWVvX4
- 4mq+aUzBXf+s9JKGjNMg068gEsHUMTa4Fv0aXRnOJinFHeH/5UkJMp3yZOZdhMUcaENdgKOf
- M7RzanRw4/s10xF5uVJMFrMWhZirrb6ZWBig5fNMkSoqkAqSicais7XOBeAAKv+Zvrgc91Zk
- b1wWZKMpQgBAvfpsdoRdyZjGTwuEpBj+J6XE1+mrpnGp6HGWyOEL/RGCUg3OcsT+/ptAHEI/
- vsdQNwPRknd3aTsmuv9E7QywJR4RCXoFNp3VnVI5DfVF/s5B7vERL3H/4Rw1zYsnMFeW/3ZY
- qL1bBIxMkWQOkIeYz/7Dro0ucuq1nvhWQFCg3aev4UvwzPazVF+he2F3N39JYXRGJQ9clyjj
- nLL+SH1Dw8XMPSbyCGZ6TS8i+nXhyT5VYkOUrqi+ZZXbEa7nzJJTkdMDB3i/Kf/2hXWt89jx
- 1I8xnALhJY+0HOQRMStcCCdoF/UjDkFRI8FewEl0z2lxq3R6gefI2ELSD9dddAr3PMLqSwWO
- kyhxI2wW2E22FGBYTfEr+rP82vuUcQABTJaPUc5oR05D84PSW3ZpjbGVZ5dHaG8lbUZ8hmgk
- mnR/EDSa1j+5PPnNplXH3ia21pARbCTF2bZAzk7uEr/tWuVg6b/OuSVBaDzt6ooEWpgZgDpU
- II4s8af9vsSKpqGiTaARu4AdJnwuarYbGON3AM1Q8B5n9hIx5JFVdoLiN2ZDB00WvvohBezO
- BOD0e+vzMU70ISWgV9fPNvqVpVCIVnIHtX5TPHEBueikbAqHDJrCBpGPBbKt0i0yRBEufhmZ
- f+zLJb9ZV5HWP8P5GfnGI8gPUoDm3lWKZX7HsugkXxKENO2ORaodFvyGAHQNrtgtPvc+m04M
- b93bqO39vmWa8WmCgG/zGLZBQtiwaQTbXwul/FqSw==
-IronPort-HdrOrdr: A9a23:TF1Qn6kfkm7FaKieXPBbBf8n9knpDfIo3DAbv31ZSRFFG/Fxl6
- iV/cjztCWE8Ar5N0tQ+uxoVJPufZqYz+8Q3WBzB8baYOCFghrLEGgK1+KLqFeMdxEWtNQtsp
- uIG5IObuEYZmIbsS+V2meF+q4bsby6zJw=
+IronPort-Data: A9a23:EYviNKxYfnJII9KT8Kt6t+cyxirEfRIJ4+MujC+fZmUNrF6WrkVWz
+ 2odUWvQOvffNmSkfdwnOo+39hwCuJfVyYdmTlE/ryAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGHdJZS5LwbZj2NYy24LhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ Npl9pyQEVx3Gbf2n8cjUhkFIR1DGIlf9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6AO
+ 5VCM2cyN3wsZTVCPnIpGs5lkduYrSKua2xFq1mvipU4tj27IAtZj+G2bYu9lsaxbdpRtlaVo
+ CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
+ UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO646yFnWlI3O2QG6OGkEEwx9VfkCrcBjEFTGy
+ WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WoQWmY/
+ tyckMQpa1z/Z+Yv3r7zw13IiinESnPhHl9svVW/so5IA2pEiG+Zi26AtACzARVodt/xory9U
+ J4swZP2AAcmV8zlqcB1aL9RdIxFHt7cWNEmvXZhHoM66xOm8GO5cIZb7VlWfRk1b5paKGK0O
+ hOK4Wu9AaO/2lPwNsebhKrrVqwXIVXIT4y5Bpg4kPIUCnSOSON31H43PhPBt4wcuEMtjbs+K
+ f+mnTWEVh4n5VBc5GPuHY81iOZzrghnnD+7bc2rnnyPjOvFDFbIGOhtDbd7Rr1ghE9yiF6Oq
+ Ig32grj40g3bdASlQGNr9ZIdAhSdSJT6FKfg5U/S9Nv6zFOQAkJY8I9C5t7E2C5t8y5Ttv1w
+ 0w=
+IronPort-HdrOrdr: A9a23:wvbKHa5FasUdd7DxaAPXwPDXdLJyesId70hD6qhwISY6TiX+rb
+ HWoB17726TtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QC5SWY+eQMbEVt6nHCXGDYrQd/OU=
 X-IronPort-AV: E=Sophos;i="5.88,387,1635220800"; 
-   d="scan'208";a="66981791"
+   d="scan'208";a="64732553"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH v3 12/70] xen: CFI hardening for continue_hypercall_on_cpu()
-Date: Tue, 22 Feb 2022 15:26:36 +0000
-Message-ID: <20220222152645.8844-7-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH v3 05/70] x86/kexec: Annotate embedded data with ELF metadata
+Date: Tue, 22 Feb 2022 15:26:33 +0000
+Message-ID: <20220222152645.8844-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220222152645.8844-1-andrew.cooper3@citrix.com>
 References: <20220222152645.8844-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Control Flow Integrity schemes use toolchain and optionally hardware support
-to help protect against call/jump/return oriented programming attacks.
+Scanning for embedded endbranch instructions involves parsing the .text
+disassembly.  Data in the kexec trampoline has no ELF metadata, so objdump
+treats it as instructions and tries to disassemble.  Convert:
 
-Use cf_check to annotate function pointer targets for the toolchain.
+  ffff82d040396108 <compatibility_mode_far>:
+  ffff82d040396108:       00 00                   add    %al,(%rax)
+  ffff82d04039610a:       00 00                   add    %al,(%rax)
+  ffff82d04039610c:       10 00                   adc    %al,(%rax)
+
+  ffff82d04039610e <compat_mode_gdt_desc>:
+  ffff82d04039610e:       17                      (bad)
+          ...
+
+  ffff82d040396118 <compat_mode_gdt>:
+          ...
+  ffff82d040396120:       ff                      (bad)
+  ffff82d040396121:       ff 00                   incl   (%rax)
+  ffff82d040396123:       00 00                   add    %al,(%rax)
+  ffff82d040396125:       93                      xchg   %eax,%ebx
+  ffff82d040396126:       cf                      iret
+  ffff82d040396127:       00 ff                   add    %bh,%bh
+  ffff82d040396129:       ff 00                   incl   (%rax)
+  ffff82d04039612b:       00 00                   add    %al,(%rax)
+  ffff82d04039612d:       9b                      fwait
+  ffff82d04039612e:       cf                      iret
+          ...
+
+  ffff82d040396130 <compat_mode_idt>:
+          ...
+
+  ffff82d0403961b6 <kexec_reloc_size>:
+  ffff82d0403961b6:       b6 01                   mov    $0x1,%dh
+          ...
+
+to:
+
+  ffff82d040396108 <compatibility_mode_far>:
+  ffff82d040396108:       00 00 00 00 10 00                               ......
+
+  ffff82d04039610e <compat_mode_gdt_desc>:
+  ffff82d04039610e:       17 00 00 00 00 00 00 00 00 00                   ..........
+
+  ffff82d040396118 <compat_mode_gdt>:
+          ...
+  ffff82d040396120:       ff ff 00 00 00 93 cf 00 ff ff 00 00 00 9b cf 00 ................
+
+  ffff82d040396130 <compat_mode_idt>:
+  ffff82d040396130:       00 00 00 00 00 00                               ......
+
+  ffff82d040396136 <reloc_stack>:
+          ...
+
+Most data just gains type and size metadata.
+
+The reloc_stack label is the wrong end of the data block to have a size, so
+move it to the lowest address and introduce .Lreloc_stack_base as a
+replacement.  Also, fix the fact that it is misaligned by 2 bytes.
+
+While kexec_reloc_size could gain metadata, it's use in the linker
+assertion (while correct) is deeply confusing to follow.  Drop it entirely,
+using a linker symbol instead to denote the end of the trampoline.
+
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-v3:
- * Fix !CONFIG_PV_SHIM build.  Annotate pv_shim_cpu_{up,down}() stubs.
----
- xen/arch/x86/acpi/power.c          | 2 +-
- xen/arch/x86/cpu/microcode/core.c  | 2 +-
- xen/arch/x86/include/asm/pv/shim.h | 8 ++++----
- xen/arch/x86/include/asm/smp.h     | 6 +++---
- xen/arch/x86/platform_hypercall.c  | 4 ++--
- xen/arch/x86/pv/shim.c             | 4 ++--
- xen/arch/x86/smp.c                 | 4 ++--
- xen/arch/x86/sysctl.c              | 2 +-
- xen/common/core_parking.c          | 2 +-
- xen/common/kexec.c                 | 2 +-
- xen/common/sched/cpupool.c         | 2 +-
- 11 files changed, 19 insertions(+), 19 deletions(-)
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
 
-diff --git a/xen/arch/x86/acpi/power.c b/xen/arch/x86/acpi/power.c
-index 912d4c4d62f4..c4e7e8698920 100644
---- a/xen/arch/x86/acpi/power.c
-+++ b/xen/arch/x86/acpi/power.c
-@@ -326,7 +326,7 @@ static int enter_state(u32 state)
-     return error;
- }
+The remainder of the 32bit code has mode-invariant lengths, so disassembles
+safely as 64bit.  The only differences come from 32/64bit implicit register
+sizes.
+
+v2.1:
+ * New
+v2.2:
+ * Fix stack alignment
+---
+ xen/arch/x86/include/asm/machine_kexec.h |  2 +-
+ xen/arch/x86/machine_kexec.c             |  2 +-
+ xen/arch/x86/x86_64/kexec_reloc.S        | 23 ++++++++++++++++++-----
+ xen/arch/x86/xen.lds.S                   |  3 ++-
+ 4 files changed, 22 insertions(+), 8 deletions(-)
+
+diff --git a/xen/arch/x86/include/asm/machine_kexec.h b/xen/arch/x86/include/asm/machine_kexec.h
+index ba0d469d077b..d4880818c1d9 100644
+--- a/xen/arch/x86/include/asm/machine_kexec.h
++++ b/xen/arch/x86/include/asm/machine_kexec.h
+@@ -9,7 +9,7 @@ extern void kexec_reloc(unsigned long reloc_code, unsigned long reloc_pt,
+                         unsigned long ind_maddr, unsigned long entry_maddr,
+                         unsigned long flags);
  
--static long enter_state_helper(void *data)
-+static long cf_check enter_state_helper(void *data)
- {
-     struct acpi_sleep_info *sinfo = (struct acpi_sleep_info *)data;
-     return enter_state(sinfo->sleep_state);
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index 46f55fe7f191..9631042190ab 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -558,7 +558,7 @@ struct ucode_buf {
-     char buffer[];
- };
+-extern unsigned int kexec_reloc_size;
++extern const char kexec_reloc_end[];
  
--static long microcode_update_helper(void *data)
-+static long cf_check microcode_update_helper(void *data)
- {
-     int ret;
-     struct ucode_buf *buffer = data;
-diff --git a/xen/arch/x86/include/asm/pv/shim.h b/xen/arch/x86/include/asm/pv/shim.h
-index 6415f8068e5c..a43c3689b48a 100644
---- a/xen/arch/x86/include/asm/pv/shim.h
-+++ b/xen/arch/x86/include/asm/pv/shim.h
-@@ -38,8 +38,8 @@ void pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
-                        start_info_t *si);
- int pv_shim_shutdown(uint8_t reason);
- void pv_shim_inject_evtchn(unsigned int port);
--long pv_shim_cpu_up(void *data);
--long pv_shim_cpu_down(void *data);
-+long cf_check pv_shim_cpu_up(void *data);
-+long cf_check pv_shim_cpu_down(void *data);
- void pv_shim_online_memory(unsigned int nr, unsigned int order);
- void pv_shim_offline_memory(unsigned int nr, unsigned int order);
- domid_t get_initial_domain_id(void);
-@@ -69,12 +69,12 @@ static inline void pv_shim_inject_evtchn(unsigned int port)
- {
-     ASSERT_UNREACHABLE();
- }
--static inline long pv_shim_cpu_up(void *data)
-+static inline long cf_check pv_shim_cpu_up(void *data)
- {
-     ASSERT_UNREACHABLE();
-     return 0;
- }
--static inline long pv_shim_cpu_down(void *data)
-+static inline long cf_check pv_shim_cpu_down(void *data)
- {
-     ASSERT_UNREACHABLE();
-     return 0;
-diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.h
-index f7485f602efa..1747772d232e 100644
---- a/xen/arch/x86/include/asm/smp.h
-+++ b/xen/arch/x86/include/asm/smp.h
-@@ -57,10 +57,10 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t pxm);
- 
- void __stop_this_cpu(void);
- 
--long cpu_up_helper(void *data);
--long cpu_down_helper(void *data);
-+long cf_check cpu_up_helper(void *data);
-+long cf_check cpu_down_helper(void *data);
- 
--long core_parking_helper(void *data);
-+long cf_check core_parking_helper(void *data);
- bool core_parking_remove(unsigned int cpu);
- uint32_t get_cur_idle_nums(void);
- 
-diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
-index 84566bbfaa3d..f5d7adc1e802 100644
---- a/xen/arch/x86/platform_hypercall.c
-+++ b/xen/arch/x86/platform_hypercall.c
-@@ -45,7 +45,7 @@ struct resource_access {
-     xenpf_resource_entry_t *entries;
- };
- 
--long cpu_frequency_change_helper(void *);
-+long cf_check cpu_frequency_change_helper(void *);
- void check_resource_access(struct resource_access *);
- void resource_access(void *);
- 
-@@ -59,7 +59,7 @@ DEFINE_SPINLOCK(xenpf_lock);
- # undef guest_from_compat_handle
- # define guest_from_compat_handle(x,y) ((x)=(y))
- 
--long cpu_frequency_change_helper(void *data)
-+long cf_check cpu_frequency_change_helper(void *data)
- {
-     return cpu_frequency_change((uint64_t)data);
- }
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index ae4d8913faa1..2ee290a3920d 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -845,7 +845,7 @@ int cf_check compat_grant_table_op(
- #endif
  #endif
  
--long pv_shim_cpu_up(void *data)
-+long cf_check pv_shim_cpu_up(void *data)
- {
-     struct vcpu *v = data;
-     struct domain *d = v->domain;
-@@ -883,7 +883,7 @@ long pv_shim_cpu_up(void *data)
-     return 0;
- }
+diff --git a/xen/arch/x86/machine_kexec.c b/xen/arch/x86/machine_kexec.c
+index 08ec9fd43b1d..751a9efcaf6a 100644
+--- a/xen/arch/x86/machine_kexec.c
++++ b/xen/arch/x86/machine_kexec.c
+@@ -117,7 +117,7 @@ int machine_kexec_load(struct kexec_image *image)
+     }
  
--long pv_shim_cpu_down(void *data)
-+long cf_check pv_shim_cpu_down(void *data)
- {
-     struct vcpu *v = data;
-     long rc;
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index eef0f9c6cbf4..f4952a6bf9a5 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -399,7 +399,7 @@ void call_function_interrupt(struct cpu_user_regs *regs)
-     smp_call_function_interrupt();
- }
+     code_page = __map_domain_page(image->control_code_page);
+-    memcpy(code_page, kexec_reloc, kexec_reloc_size);
++    memcpy(code_page, kexec_reloc, kexec_reloc_end - (char *)kexec_reloc);
+     unmap_domain_page(code_page);
  
--long cpu_up_helper(void *data)
-+long cf_check cpu_up_helper(void *data)
- {
-     unsigned int cpu = (unsigned long)data;
-     int ret = cpu_up(cpu);
-@@ -422,7 +422,7 @@ long cpu_up_helper(void *data)
-     return ret;
- }
+     /*
+diff --git a/xen/arch/x86/x86_64/kexec_reloc.S b/xen/arch/x86/x86_64/kexec_reloc.S
+index d488d127cfb9..89316bc3a7ac 100644
+--- a/xen/arch/x86/x86_64/kexec_reloc.S
++++ b/xen/arch/x86/x86_64/kexec_reloc.S
+@@ -34,7 +34,7 @@ ENTRY(kexec_reloc)
+         movq    %rcx, %rbp
  
--long cpu_down_helper(void *data)
-+long cf_check cpu_down_helper(void *data)
- {
-     int cpu = (unsigned long)data;
-     int ret = cpu_down(cpu);
-diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
-index aff52a13f373..1772f51f8f6e 100644
---- a/xen/arch/x86/sysctl.c
-+++ b/xen/arch/x86/sysctl.c
-@@ -79,7 +79,7 @@ static void l3_cache_get(void *arg)
-         l3_info->size = info.size / 1024; /* in KB unit */
- }
+         /* Setup stack. */
+-        leaq    (reloc_stack - kexec_reloc)(%rdi), %rsp
++        leaq    (.Lreloc_stack_base - kexec_reloc)(%rdi), %rsp
  
--static long smt_up_down_helper(void *data)
-+static long cf_check smt_up_down_helper(void *data)
- {
-     bool up = (bool)data;
-     unsigned int cpu, sibling_mask = boot_cpu_data.x86_num_siblings - 1;
-diff --git a/xen/common/core_parking.c b/xen/common/core_parking.c
-index 44a907abfd7f..4afad04f2f68 100644
---- a/xen/common/core_parking.c
-+++ b/xen/common/core_parking.c
-@@ -169,7 +169,7 @@ static unsigned int core_parking_power(unsigned int event)
-     return cpu;
- }
+         /* Load reloc page table. */
+         movq    %rsi, %cr3
+@@ -175,10 +175,16 @@ compatibility_mode_far:
+         .long 0x00000000             /* set in call_32_bit above */
+         .word 0x0010
  
--long core_parking_helper(void *data)
-+long cf_check core_parking_helper(void *data)
- {
-     uint32_t idle_nums = (unsigned long)data;
-     unsigned int cpu;
-diff --git a/xen/common/kexec.c b/xen/common/kexec.c
-index 3b223cd03d75..b222a5fd782e 100644
---- a/xen/common/kexec.c
-+++ b/xen/common/kexec.c
-@@ -395,7 +395,7 @@ void kexec_crash(enum crash_reason reason)
-     BUG();
- }
++        .type compatibility_mode_far, @object
++        .size compatibility_mode_far, . - compatibility_mode_far
++
+ compat_mode_gdt_desc:
+         .word .Lcompat_mode_gdt_end - compat_mode_gdt -1
+         .quad 0x0000000000000000     /* set in call_32_bit above */
  
--static long kexec_reboot(void *_image)
-+static long cf_check kexec_reboot(void *_image)
- {
-     struct kexec_image *image = _image;
++        .type compat_mode_gdt_desc, @object
++        .size compat_mode_gdt_desc, . - compat_mode_gdt_desc
++
+         .align 8
+ compat_mode_gdt:
+         .quad 0x0000000000000000     /* null                              */
+@@ -186,16 +192,23 @@ compat_mode_gdt:
+         .quad 0x00cf9b000000ffff     /* 0x0010 ring 0 code, compatibility */
+ .Lcompat_mode_gdt_end:
  
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index e5cfb03b857e..b9d4babd0d8a 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -544,7 +544,7 @@ static int cpupool_unassign_cpu_start(struct cpupool *c, unsigned int cpu)
-     return ret;
- }
++        .type compat_mode_gdt, @object
++        .size compat_mode_gdt, . - compat_mode_gdt
++
+ compat_mode_idt:
+         .word 0                      /* limit */
+         .long 0                      /* base */
  
--static long cpupool_unassign_cpu_helper(void *info)
-+static long cf_check cpupool_unassign_cpu_helper(void *info)
- {
-     struct cpupool *c = info;
-     long ret;
++        .type compat_mode_idt, @object
++        .size compat_mode_idt, . - compat_mode_idt
++
+         /*
+          * 16 words of stack are more than enough.
+          */
+-        .fill 16,8,0
++        .align 8
+ reloc_stack:
++        .fill 16,8,0
++.Lreloc_stack_base:
+ 
+-        .globl kexec_reloc_size
+-kexec_reloc_size:
+-        .long . - kexec_reloc
++        .type reloc_stack, @object
++        .size reloc_stack, . - reloc_stack
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index 82ad8feb6e99..7ffecd463070 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -84,6 +84,7 @@ SECTIONS
+        _etextentry = .;
+ 
+        *(.text.kexec)          /* Page aligned in the object file. */
++       kexec_reloc_end = .;
+ 
+        *(.text.cold)
+        *(.text.unlikely)
+@@ -428,7 +429,7 @@ ASSERT(__2M_rwdata_end <= XEN_VIRT_END - XEN_VIRT_START + __XEN_VIRT_START -
+        "Xen image overlaps stubs area")
+ 
+ #ifdef CONFIG_KEXEC
+-ASSERT(kexec_reloc_size - kexec_reloc <= PAGE_SIZE, "kexec_reloc is too large")
++ASSERT(kexec_reloc_end - kexec_reloc <= PAGE_SIZE, "kexec_reloc is too large")
+ #endif
+ 
+ /* The Multiboot setup paths relies on this to simplify superpage PTE creation. */
 -- 
 2.11.0
 
