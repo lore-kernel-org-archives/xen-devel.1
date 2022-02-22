@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F326CC433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 15:27:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.276855.473194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB3FC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 15:27:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.276858.473217 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMX4V-0006jd-7m; Tue, 22 Feb 2022 15:27:23 +0000
+	id 1nMX4X-0007C3-Mr; Tue, 22 Feb 2022 15:27:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 276855.473194; Tue, 22 Feb 2022 15:27:23 +0000
+Received: by outflank-mailman (output) from mailman id 276858.473217; Tue, 22 Feb 2022 15:27:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMX4V-0006jE-4k; Tue, 22 Feb 2022 15:27:23 +0000
-Received: by outflank-mailman (input) for mailman id 276855;
- Tue, 22 Feb 2022 15:27:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nMX4X-00079y-3i; Tue, 22 Feb 2022 15:27:25 +0000
+Received: by outflank-mailman (input) for mailman id 276858;
+ Tue, 22 Feb 2022 15:27:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Woib=TF=citrix.com=prvs=045a4fa17=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nMX4T-0006Cs-00
- for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 15:27:21 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ebf94108-93f3-11ec-8539-5f4723681683;
- Tue, 22 Feb 2022 16:27:19 +0100 (CET)
+ id 1nMX4V-0006OK-Eb
+ for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 15:27:23 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ed31e790-93f3-11ec-8eb8-a37418f5ba1a;
+ Tue, 22 Feb 2022 16:27:22 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,485 +38,271 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ebf94108-93f3-11ec-8539-5f4723681683
+X-Inumbo-ID: ed31e790-93f3-11ec-8eb8-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645543639;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=4K+rq1ET+69I5UkEpWtzBL2Q+U1T0lAFfJpGQ9h5iPw=;
-  b=BLkwFL7+kJ/5lCby55LvUw6XyDoh7/t637ONuD0wjoYYxtpxUME3mMwu
-   9Mf8qyTxPuf+l6yneCtm/S0qIhU09Hta0knk9flAEGKfws5FZ5uOs+6CX
-   NHCsEFLgkail1EzK6zNuRja0KZyTjdHthhGa0yRGtLHlmXjm8mYg/EKr4
-   I=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1645543642;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=7NU2F5oou3wTFQiiPS+nvCzwPrVqGrwa293dW8VmdiU=;
+  b=BUr7H2GcEymCyhcxcz+3PODXhavp2cHwyCCN5W2o1cjYiuBWEFnKer+A
+   2RbOG/lAKZKxhQqz7KjuCDf+ZgXHef+1bG5cwFFaLHETMka4Fo9KMcy5K
+   i+Bz3BLIFSg7AGfbdd+Ejfh5kg9hFyzkF2K6wdPMdtF66rmUg47ppXEvB
+   A=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 65138254
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 66981791
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:URV+Pa3PZgj2FEbMz/bD5Qxxkn2cJEfYwER7XKvMYLTBsI5bp2NTm
- 2QbUTrUPP2KMzT1eY0lbt+09BgAvpPVzd8xHQttpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkjk7xdOCn9xGQ7InQLlbGILes1htZGEk0GE/NtTo5w7Rj2tQy24Dja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /1PiZGxGQA1Y5TQhcI2WR9ZCyJGHIdZreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHCOo8Ft24m5jbeFfs8GrjIQrnQ5M8e1zA17ixLNaiDP
- pFJM2czBPjGSzJGAksIUZYnoPn23yjlIyJRiVmcg7VitgA/yyQuieOwYbI5YOeiZ+9Yg0KZr
- WLu5HniD1cRM9n34TiK6HW3ncfUgDj2HokVEdWQ8/dwhVSJy287CRsIVEC6q/20lk6/Xd1EL
- 0UevCEpqMAa9lGvT9T7dw21pjiDpBF0c8pdFag25R+AzoLQ4h2FHS4UQzhZctskucQqAzsw2
- TehhMj1DDZitLmUT3O19bqOqz62fy8PIgcqeissXQYDpd75r+kOYgnnF4g5VvTv15usRG+2k
- 2viQDUCa6s7j/IG1vW84Q3+ny+KjZLPTxY23iT9QTfwhu9mX7KNa4ut4FndyP9PKoeFU1WM1
- EQ5d9iiAPMmVs/UynHUKAkZNPTwvqvebmWA6bJ6N8R5r1yQF2ifkZe8Cd2UDGNgKY46dDDge
- yc/UisBtcYIbBNGgUKaCr9d6vjGL4C9TbwJtdiON7Kih6Sdkifdp0mCgmbKggjQfLAEy/1XB
- HtiWZ/E4YwmIapm1iGqYOwWzKUmwCszrUuKG8ymk0r2jOfEOCfNIVvgDLdoRrpihE9jiF+Im
- +uzyuPQk0kPOAEASnO/HXEvwaAiciFgWMGeRz1/fe+fOAt2cFzN+NeKqY7Nj7dNxvwP/s+Rp
- ynVchYBlDLX2C2WQS3XOysLQO6+Av5CQYcTYHVE0aCAgCN4P+5CLc43KvMKQFXQ3LY9laUtF
- 6FdIa1twJ1nE1z6xtjUVrGlxKQKSfhhrVjm0/aNCNTnQ6Ndeg==
-IronPort-HdrOrdr: A9a23:mG72gakbYRQXkSUCwT7JIxrn5lfpDfIg3DAbv31ZSRFFG/Fxl6
- iV8sjzsiWE7wr5OUtQ/exoV5PhfZqxz/JICOoqTNKftWvdyQiVxehZhOOIqVDd8kXFh4hgPM
- xbEpSWZueeMbEDt7eZ3DWF
+IronPort-Data: A9a23:UpBYq6q74B7Zeqn7/MZsGuoFWeJeBmJ8ZRIvgKrLsJaIsI4StFCzt
+ garIBmOPqmMajSmKtxyaoWx805X78XUm9c1TQRv/3ozFnsW+JuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlVEliefQAOCU5NfsYkidfyc9IMsaoU8ly75RbrJA24DjWVvX4
+ 4mq+aUzBXf+s9JKGjNMg068gEsHUMTa4Fv0aXRnOJinFHeH/5UkJMp3yZOZdhMUcaENdgKOf
+ M7RzanRw4/s10xF5uVJMFrMWhZirrb6ZWBig5fNMkSoqkAqSicais7XOBeAAKv+Zvrgc91Zk
+ b1wWZKMpQgBAvfpsdoRdyZjGTwuEpBj+J6XE1+mrpnGp6HGWyOEL/RGCUg3OcsT+/ptAHEI/
+ vsdQNwPRknd3aTsmuv9E7QywJR4RCXoFNp3VnVI5DfVF/s5B7vERL3H/4Rw1zYsnMFeW/3ZY
+ qL1bBIxMkWQOkIeYz/7Dro0ucuq1nvhWQFCg3aev4UvwzPazVF+he2F3N39JYXRGJQ9clyjj
+ nLL+SH1Dw8XMPSbyCGZ6TS8i+nXhyT5VYkOUrqi+ZZXbEa7nzJJTkdMDB3i/Kf/2hXWt89jx
+ 1I8xnALhJY+0HOQRMStcCCdoF/UjDkFRI8FewEl0z2lxq3R6gefI2ELSD9dddAr3PMLqSwWO
+ kyhxI2wW2E22FGBYTfEr+rP82vuUcQABTJaPUc5oR05D84PSW3ZpjbGVZ5dHaG8lbUZ8hmgk
+ mnR/EDSa1j+5PPnNplXH3ia21pARbCTF2bZAzk7uEr/tWuVg6b/OuSVBaDzt6ooEWpgZgDpU
+ II4s8af9vsSKpqGiTaARu4AdJnwuarYbGON3AM1Q8B5n9hIx5JFVdoLiN2ZDB00WvvohBezO
+ BOD0e+vzMU70ISWgV9fPNvqVpVCIVnIHtX5TPHEBueikbAqHDJrCBpGPBbKt0i0yRBEufhmZ
+ f+zLJb9ZV5HWP8P5GfnGI8gPUoDm3lWKZX7HsugkXxKENO2ORaodFvyGAHQNrtgtPvc+m04M
+ b93bqO39vmWa8WmCgG/zGLZBQtiwaQTbXwul/FqSw==
+IronPort-HdrOrdr: A9a23:TF1Qn6kfkm7FaKieXPBbBf8n9knpDfIo3DAbv31ZSRFFG/Fxl6
+ iV/cjztCWE8Ar5N0tQ+uxoVJPufZqYz+8Q3WBzB8baYOCFghrLEGgK1+KLqFeMdxEWtNQtsp
+ uIG5IObuEYZmIbsS+V2meF+q4bsby6zJw=
 X-IronPort-AV: E=Sophos;i="5.88,387,1635220800"; 
-   d="scan'208";a="65138254"
+   d="scan'208";a="66981791"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Juergen Gross
-	<jgross@suse.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>
-Subject: [PATCH v3 00/70 (not all posted)] x86: Support for CET Indirect Branch Tracking
-Date: Tue, 22 Feb 2022 15:26:30 +0000
-Message-ID: <20220222152645.8844-1-andrew.cooper3@citrix.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v3 12/70] xen: CFI hardening for continue_hypercall_on_cpu()
+Date: Tue, 22 Feb 2022 15:26:36 +0000
+Message-ID: <20220222152645.8844-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20220222152645.8844-1-andrew.cooper3@citrix.com>
+References: <20220222152645.8844-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-To avoid spamming everyone, I have only re-sent patches with changes in v3.
+Control Flow Integrity schemes use toolchain and optionally hardware support
+to help protect against call/jump/return oriented programming attacks.
 
-CET Indirect Branch Tracking is a hardware feature designed to protect against
-forward-edge control flow hijacking (Call/Jump oriented programming), and is a
-companion feature to CET Shadow Stacks added in Xen 4.14.
+Use cf_check to annotate function pointer targets for the toolchain.
 
-Patches 1 thru 5 are prerequisites.  Patches 6 thru 59 are fairly mechanical
-annotations of function pointer targets.  Patches 60 thru 70 are the final
-enablement of CET-IBT.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+v3:
+ * Fix !CONFIG_PV_SHIM build.  Annotate pv_shim_cpu_{up,down}() stubs.
+---
+ xen/arch/x86/acpi/power.c          | 2 +-
+ xen/arch/x86/cpu/microcode/core.c  | 2 +-
+ xen/arch/x86/include/asm/pv/shim.h | 8 ++++----
+ xen/arch/x86/include/asm/smp.h     | 6 +++---
+ xen/arch/x86/platform_hypercall.c  | 4 ++--
+ xen/arch/x86/pv/shim.c             | 4 ++--
+ xen/arch/x86/smp.c                 | 4 ++--
+ xen/arch/x86/sysctl.c              | 2 +-
+ xen/common/core_parking.c          | 2 +-
+ xen/common/kexec.c                 | 2 +-
+ xen/common/sched/cpupool.c         | 2 +-
+ 11 files changed, 19 insertions(+), 19 deletions(-)
 
-This series functions correctly with GCC 9 and later, although an experimental
-GCC patch is required to get more helpful typechecking at build time.  A
-container with this fix has been added to CI.
-
-Tested on a TigerLake NUC by me, and by Marek also.
-
-CI pipelines:
-  https://gitlab.com/xen-project/people/andyhhp/xen/-/pipelines/476819536
-  https://cirrus-ci.com/build/4634902334275584
-
-Andrew Cooper (67):
-  xen/sort: Switch to an extern inline implementation
-  xen/xsm: Move {do,compat}_flask_op() declarations into a header
-  x86/kexec: Annotate embedded data with ELF metadata
-  x86: Introduce support for CET-IBT
-  xen: CFI hardening for x86 hypercalls
-  xen: CFI hardening for custom_param()
-  xen: CFI hardening for __initcall()
-  xen: CFI hardening for notifier callbacks
-  xen: CFI hardening for acpi_table_parse()
-  xen: CFI hardening for continue_hypercall_on_cpu()
-  xen: CFI hardening for init_timer()
-  xen: CFI hardening for call_rcu()
-  xen: CFI hardening for IPIs
-  xen: CFI hardening for open_softirq()
-  xsm/flask/ss: CFI hardening
-  xsm: CFI hardening
-  xen/sched: CFI hardening
-  xen/evtchn: CFI hardening
-  xen/hypfs: CFI hardening
-  xen/tasklet: CFI hardening
-  xen/keyhandler: CFI hardening
-  xen/vpci: CFI hardening
-  xen/decompress: CFI hardening
-  xen/iommu: CFI hardening
-  xen/video: CFI hardening
-  xen/console: CFI hardening
-  xen/misc: CFI hardening
-  x86: CFI hardening for request_irq()
-  x86/hvm: CFI hardening for hvm_funcs
-  x86/hvm: CFI hardening for device emulation
-  x86/emul: CFI hardening
-  x86/ucode: CFI hardening
-  x86/power: CFI hardening
-  x86/apic: CFI hardening
-  x86/nmi: CFI hardening
-  x86/mtrr: CFI hardening
-  x86/idle: CFI hardening
-  x86/quirks: CFI hardening
-  x86/hvmsave: CFI hardening
-  x86/mce: CFI hardening
-  x86/pmu: CFI hardening
-  x86/cpu: CFI hardening
-  x86/guest: CFI hardening
-  x86/logdirty: CFI hardening
-  x86/shadow: CFI hardening
-  x86/hap: CFI hardening
-  x86/p2m: CFI hardening
-  x86/irq: CFI hardening
-  x86/apei: CFI hardening
-  x86/psr: CFI hardening
-  x86/dpci: CFI hardening
-  x86/pt: CFI hardening
-  x86/time: CFI hardening
-  x86/misc: CFI hardening
-  x86/stack: CFI hardening
-  x86/bugframe: CFI hardening
-  x86: Use control flow typechecking where possible
-  x86/setup: Read CR4 earlier in __start_xen()
-  x86/alternatives: Clear CR4.CET when clearing CR0.WP
-  x86/traps: Rework write_stub_trampoline() to not hardcode the jmp
-  x86: Introduce helpers/checks for endbr64 instructions
-  x86/emul: Update emulation stubs to be CET-IBT compatible
-  x86/entry: Make syscall/sysenter entrypoints CET-IBT compatible
-  x86/entry: Make IDT entrypoints CET-IBT compatible
-  x86/setup: Rework MSR_S_CET handling for CET-IBT
-  x86/efi: Disable CET-IBT around Runtime Services calls
-  x86: Enable CET Indirect Branch Tracking
-
-Juergen Gross (2):
-  x86/pv-shim: Don't modify the hypercall table
-  x86: Don't use the hypercall table for calling compat hypercalls
-
-Marek Marczykowski-Górecki (1):
-  x86: Build check for embedded endbr64 instructions
-
- Config.mk                                         |   1 -
- README                                            |   1 +
- automation/build/debian/buster-gcc-ibt.dockerfile |  66 ++++
- automation/gitlab-ci/build.yaml                   |   6 +
- automation/scripts/containerize                   |   1 +
- docs/misc/xen-command-line.pandoc                 |  16 +-
- tools/firmware/Makefile                           |   2 +
- tools/libs/guest/xg_dom_decompress_unsafe.h       |   2 +
- tools/tests/x86_emulator/x86-emulate.h            |   2 +
- xen/arch/arm/bootfdt.c                            |   9 +-
- xen/arch/arm/io.c                                 |   9 +-
- xen/arch/x86/Kconfig                              |  17 +
- xen/arch/x86/Makefile                             |   6 +
- xen/arch/x86/acpi/boot.c                          |  24 +-
- xen/arch/x86/acpi/cpu_idle.c                      |  43 ++-
- xen/arch/x86/acpi/cpufreq/cpufreq.c               |  24 +-
- xen/arch/x86/acpi/cpufreq/powernow.c              |  21 +-
- xen/arch/x86/acpi/cpuidle_menu.c                  |   6 +-
- xen/arch/x86/acpi/lib.c                           |   2 +-
- xen/arch/x86/acpi/power.c                         |   4 +-
- xen/arch/x86/acpi/wakeup_prot.S                   |  38 +-
- xen/arch/x86/alternative.c                        |  13 +-
- xen/arch/x86/apic.c                               |  12 +-
- xen/arch/x86/arch.mk                              |   7 +
- xen/arch/x86/boot/x86_64.S                        |  30 +-
- xen/arch/x86/compat.c                             |  21 +-
- xen/arch/x86/configs/pvshim_defconfig             |   1 +
- xen/arch/x86/cpu/amd.c                            |   8 +-
- xen/arch/x86/cpu/centaur.c                        |   2 +-
- xen/arch/x86/cpu/common.c                         |   3 +-
- xen/arch/x86/cpu/cpu.h                            |   2 +-
- xen/arch/x86/cpu/hygon.c                          |   2 +-
- xen/arch/x86/cpu/intel.c                          |   6 +-
- xen/arch/x86/cpu/mcheck/amd_nonfatal.c            |   4 +-
- xen/arch/x86/cpu/mcheck/mce.c                     |  22 +-
- xen/arch/x86/cpu/mcheck/mce.h                     |   2 +-
- xen/arch/x86/cpu/mcheck/mce_amd.c                 |   9 +-
- xen/arch/x86/cpu/mcheck/mce_amd.h                 |   4 +-
- xen/arch/x86/cpu/mcheck/mce_intel.c               |  49 ++-
- xen/arch/x86/cpu/mcheck/non-fatal.c               |   6 +-
- xen/arch/x86/cpu/mcheck/vmce.c                    |   4 +-
- xen/arch/x86/cpu/microcode/amd.c                  |   9 +-
- xen/arch/x86/cpu/microcode/core.c                 |  15 +-
- xen/arch/x86/cpu/microcode/intel.c                |  10 +-
- xen/arch/x86/cpu/mtrr/generic.c                   |  20 +-
- xen/arch/x86/cpu/mtrr/main.c                      |   4 +-
- xen/arch/x86/cpu/mtrr/mtrr.h                      |   8 +-
- xen/arch/x86/cpu/mwait-idle.c                     |  12 +-
- xen/arch/x86/cpu/shanghai.c                       |   2 +-
- xen/arch/x86/cpu/vpmu.c                           |  13 +-
- xen/arch/x86/cpu/vpmu_amd.c                       |  16 +-
- xen/arch/x86/cpu/vpmu_intel.c                     |  16 +-
- xen/arch/x86/cpuid.c                              |   8 +-
- xen/arch/x86/crash.c                              |   7 +-
- xen/arch/x86/dmi_scan.c                           |  10 +-
- xen/arch/x86/dom0_build.c                         |   8 +-
- xen/arch/x86/domain.c                             |  16 +-
- xen/arch/x86/emul-i8254.c                         |  14 +-
- xen/arch/x86/extable.c                            |  18 +-
- xen/arch/x86/genapic/bigsmp.c                     |   4 +-
- xen/arch/x86/genapic/delivery.c                   |  12 +-
- xen/arch/x86/genapic/probe.c                      |   2 +-
- xen/arch/x86/genapic/x2apic.c                     |  18 +-
- xen/arch/x86/guest/hyperv/hyperv.c                |  10 +-
- xen/arch/x86/guest/xen/xen.c                      |  15 +-
- xen/arch/x86/hpet.c                               |  29 +-
- xen/arch/x86/hvm/dm.c                             |   5 +-
- xen/arch/x86/hvm/dom0_build.c                     |  16 +-
- xen/arch/x86/hvm/emulate.c                        |  93 +++--
- xen/arch/x86/hvm/hpet.c                           |  12 +-
- xen/arch/x86/hvm/hvm.c                            |  47 +--
- xen/arch/x86/hvm/hypercall.c                      |   5 +-
- xen/arch/x86/hvm/intercept.c                      |  28 +-
- xen/arch/x86/hvm/io.c                             |  38 +-
- xen/arch/x86/hvm/ioreq.c                          |   2 +-
- xen/arch/x86/hvm/irq.c                            |  16 +-
- xen/arch/x86/hvm/mtrr.c                           |   8 +-
- xen/arch/x86/hvm/nestedhvm.c                      |   6 +-
- xen/arch/x86/hvm/pmtimer.c                        |  10 +-
- xen/arch/x86/hvm/quirks.c                         |   4 +-
- xen/arch/x86/hvm/rtc.c                            |  18 +-
- xen/arch/x86/hvm/stdvga.c                         |  19 +-
- xen/arch/x86/hvm/svm/nestedsvm.c                  |  22 +-
- xen/arch/x86/hvm/svm/svm.c                        | 404 +++++++++++-----------
- xen/arch/x86/hvm/svm/vmcb.c                       |   2 +-
- xen/arch/x86/hvm/vioapic.c                        |  12 +-
- xen/arch/x86/hvm/viridian/time.c                  |   2 +-
- xen/arch/x86/hvm/viridian/viridian.c              |  17 +-
- xen/arch/x86/hvm/vlapic.c                         |  25 +-
- xen/arch/x86/hvm/vmsi.c                           |  16 +-
- xen/arch/x86/hvm/vmx/intr.c                       |   2 +-
- xen/arch/x86/hvm/vmx/vmcs.c                       |  22 +-
- xen/arch/x86/hvm/vmx/vmx.c                        | 155 +++++----
- xen/arch/x86/hvm/vmx/vvmx.c                       |  16 +-
- xen/arch/x86/hvm/vpic.c                           |   8 +-
- xen/arch/x86/hvm/vpt.c                            |   2 +-
- xen/arch/x86/i8259.c                              |  10 +-
- xen/arch/x86/include/asm/asm-defns.h              |   6 +
- xen/arch/x86/include/asm/bug.h                    |  10 +-
- xen/arch/x86/include/asm/cpufeature.h             |   1 +
- xen/arch/x86/include/asm/cpufeatures.h            |   1 +
- xen/arch/x86/include/asm/cpuidle.h                |   4 +-
- xen/arch/x86/include/asm/current.h                |   6 +-
- xen/arch/x86/include/asm/endbr.h                  |  55 +++
- xen/arch/x86/include/asm/flushtlb.h               |   2 +-
- xen/arch/x86/include/asm/genapic.h                |  18 +-
- xen/arch/x86/include/asm/hpet.h                   |   8 +-
- xen/arch/x86/include/asm/hvm/emulate.h            |   8 +-
- xen/arch/x86/include/asm/hvm/save.h               |   2 +-
- xen/arch/x86/include/asm/hvm/svm/nestedsvm.h      |  18 +-
- xen/arch/x86/include/asm/hvm/svm/svm.h            |   1 -
- xen/arch/x86/include/asm/hvm/vioapic.h            |   2 +-
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h           |   8 +-
- xen/arch/x86/include/asm/hvm/vmx/vmx.h            |   4 +-
- xen/arch/x86/include/asm/hvm/vmx/vvmx.h           |  18 +-
- xen/arch/x86/include/asm/hypercall.h              |  81 +++--
- xen/arch/x86/include/asm/irq.h                    |  24 +-
- xen/arch/x86/include/asm/machine_kexec.h          |   2 +-
- xen/arch/x86/include/asm/mm.h                     |  16 +-
- xen/arch/x86/include/asm/msi.h                    |   8 +-
- xen/arch/x86/include/asm/msr-index.h              |   1 +
- xen/arch/x86/include/asm/mtrr.h                   |   2 +-
- xen/arch/x86/include/asm/p2m.h                    |   4 +-
- xen/arch/x86/include/asm/paging.h                 |   2 +-
- xen/arch/x86/include/asm/processor.h              |   4 +-
- xen/arch/x86/include/asm/pv/domain.h              |   4 +-
- xen/arch/x86/include/asm/pv/shim.h                |  11 +-
- xen/arch/x86/include/asm/shadow.h                 |   2 +-
- xen/arch/x86/include/asm/smp.h                    |   6 +-
- xen/arch/x86/include/asm/tboot.h                  |   2 +-
- xen/arch/x86/include/asm/time.h                   |   6 +-
- xen/arch/x86/io_apic.c                            |  28 +-
- xen/arch/x86/ioport_emulate.c                     |   4 +-
- xen/arch/x86/irq.c                                |  28 +-
- xen/arch/x86/livepatch.c                          |   2 +-
- xen/arch/x86/machine_kexec.c                      |   2 +-
- xen/arch/x86/mm.c                                 |  35 +-
- xen/arch/x86/mm/hap/guest_walk.c                  |   4 +-
- xen/arch/x86/mm/hap/hap.c                         |  29 +-
- xen/arch/x86/mm/hap/nested_hap.c                  |   2 +-
- xen/arch/x86/mm/hap/private.h                     |  30 +-
- xen/arch/x86/mm/mem_sharing.c                     |   2 +-
- xen/arch/x86/mm/p2m-ept.c                         |  34 +-
- xen/arch/x86/mm/p2m-pt.c                          |  19 +-
- xen/arch/x86/mm/paging.c                          |   3 +-
- xen/arch/x86/mm/shadow/common.c                   |  33 +-
- xen/arch/x86/mm/shadow/hvm.c                      |  16 +-
- xen/arch/x86/mm/shadow/multi.c                    |  80 +++--
- xen/arch/x86/mm/shadow/multi.h                    |  20 +-
- xen/arch/x86/mm/shadow/none.c                     |  20 +-
- xen/arch/x86/mm/shadow/private.h                  |  12 +-
- xen/arch/x86/mm/shadow/pv.c                       |   4 +-
- xen/arch/x86/msi.c                                |  18 +-
- xen/arch/x86/nmi.c                                |  16 +-
- xen/arch/x86/numa.c                               |  10 +-
- xen/arch/x86/oprofile/nmi_int.c                   |  16 +-
- xen/arch/x86/oprofile/op_model_athlon.c           |  18 +-
- xen/arch/x86/oprofile/op_model_p4.c               |  14 +-
- xen/arch/x86/oprofile/op_model_ppro.c             |  26 +-
- xen/arch/x86/percpu.c                             |   6 +-
- xen/arch/x86/physdev.c                            |   2 +-
- xen/arch/x86/platform_hypercall.c                 |  11 +-
- xen/arch/x86/psr.c                                |  41 +--
- xen/arch/x86/pv/callback.c                        |  25 +-
- xen/arch/x86/pv/descriptor-tables.c               |  14 +-
- xen/arch/x86/pv/domain.c                          |  12 +-
- xen/arch/x86/pv/emul-gate-op.c                    |   9 +-
- xen/arch/x86/pv/emul-priv-op.c                    |  71 ++--
- xen/arch/x86/pv/emulate.h                         |   7 -
- xen/arch/x86/pv/hypercall.c                       |  11 +-
- xen/arch/x86/pv/iret.c                            |   4 +-
- xen/arch/x86/pv/misc-hypercalls.c                 |  10 +-
- xen/arch/x86/pv/ro-page-fault.c                   |  31 +-
- xen/arch/x86/pv/shim.c                            |  60 ++--
- xen/arch/x86/pv/traps.c                           |   2 +-
- xen/arch/x86/setup.c                              |  80 ++++-
- xen/arch/x86/shutdown.c                           |  10 +-
- xen/arch/x86/smp.c                                |  20 +-
- xen/arch/x86/smpboot.c                            |   2 +-
- xen/arch/x86/spec_ctrl.c                          |   6 +-
- xen/arch/x86/srat.c                               |   4 +-
- xen/arch/x86/sysctl.c                             |   4 +-
- xen/arch/x86/tboot.c                              |   2 +-
- xen/arch/x86/time.c                               |  68 ++--
- xen/arch/x86/traps.c                              |   8 +-
- xen/arch/x86/tsx.c                                |   2 +-
- xen/arch/x86/x86_64/acpi_mmcfg.c                  |   2 +-
- xen/arch/x86/x86_64/compat.c                      |   1 -
- xen/arch/x86/x86_64/compat/entry.S                |   1 +
- xen/arch/x86/x86_64/compat/mm.c                   |   7 +-
- xen/arch/x86/x86_64/entry.S                       |  49 ++-
- xen/arch/x86/x86_64/kexec_reloc.S                 |  23 +-
- xen/arch/x86/x86_64/mmconfig-shared.c             |  10 +-
- xen/arch/x86/x86_64/mmconfig.h                    |   2 +-
- xen/arch/x86/x86_64/platform_hypercall.c          |   2 +-
- xen/arch/x86/x86_64/traps.c                       |  42 ++-
- xen/arch/x86/x86_emulate.c                        |  34 +-
- xen/arch/x86/x86_emulate/x86_emulate.c            |  10 +-
- xen/arch/x86/x86_emulate/x86_emulate.h            |  33 +-
- xen/arch/x86/xen.lds.S                            |   3 +-
- xen/common/argo.c                                 |   6 +-
- xen/common/bunzip2.c                              |   2 +-
- xen/common/compat/domain.c                        |   3 +-
- xen/common/compat/grant_table.c                   |   5 +-
- xen/common/compat/kernel.c                        |   2 +-
- xen/common/compat/memory.c                        |   7 +-
- xen/common/compat/multicall.c                     |   3 +-
- xen/common/core_parking.c                         |  10 +-
- xen/common/coverage/gcov.c                        |   8 +-
- xen/common/cpu.c                                  |   4 +-
- xen/common/debugtrace.c                           |  10 +-
- xen/common/decompress.c                           |   2 +-
- xen/common/dm.c                                   |   6 +-
- xen/common/domain.c                               |  15 +-
- xen/common/domctl.c                               |   2 +-
- xen/common/efi/boot.c                             |   6 +-
- xen/common/efi/runtime.c                          |  18 +
- xen/common/event_2l.c                             |  21 +-
- xen/common/event_channel.c                        |  18 +-
- xen/common/event_fifo.c                           |  30 +-
- xen/common/gdbstub.c                              |   9 +-
- xen/common/grant_table.c                          |  29 +-
- xen/common/hypfs.c                                |  63 ++--
- xen/common/irq.c                                  |   6 +-
- xen/common/kernel.c                               |   6 +-
- xen/common/kexec.c                                |  18 +-
- xen/common/keyhandler.c                           |  47 +--
- xen/common/livepatch.c                            |  15 +-
- xen/common/memory.c                               |   8 +-
- xen/common/multicall.c                            |   2 +-
- xen/common/page_alloc.c                           |  14 +-
- xen/common/perfc.c                                |   4 +-
- xen/common/radix-tree.c                           |   8 +-
- xen/common/random.c                               |   2 +-
- xen/common/rangeset.c                             |   2 +-
- xen/common/rcupdate.c                             |   8 +-
- xen/common/sched/arinc653.c                       |  20 +-
- xen/common/sched/compat.c                         |   2 +-
- xen/common/sched/core.c                           |  40 +--
- xen/common/sched/cpupool.c                        |  35 +-
- xen/common/sched/credit.c                         |  59 ++--
- xen/common/sched/credit2.c                        |  55 ++-
- xen/common/sched/null.c                           |  60 ++--
- xen/common/sched/rt.c                             |  47 +--
- xen/common/spinlock.c                             |  12 +-
- xen/common/stop_machine.c                         |   6 +-
- xen/common/sysctl.c                               |   2 +-
- xen/common/tasklet.c                              |   4 +-
- xen/common/timer.c                                |   6 +-
- xen/common/trace.c                                |   4 +-
- xen/common/unlzma.c                               |   2 +-
- xen/common/vm_event.c                             |   6 +-
- xen/common/xenoprof.c                             |   2 +-
- xen/common/xmalloc_tlsf.c                         |   4 +-
- xen/common/zstd/zstd_common.c                     |   4 +-
- xen/common/zstd/zstd_internal.h                   |   4 +-
- xen/drivers/acpi/apei/apei-base.c                 |  32 +-
- xen/drivers/acpi/apei/apei-internal.h             |  20 +-
- xen/drivers/acpi/apei/erst.c                      |  57 ++-
- xen/drivers/acpi/apei/hest.c                      |   4 +-
- xen/drivers/acpi/numa.c                           |  10 +-
- xen/drivers/acpi/tables.c                         |   2 +-
- xen/drivers/char/console.c                        |  36 +-
- xen/drivers/char/ehci-dbgp.c                      |  28 +-
- xen/drivers/char/ns16550.c                        |  34 +-
- xen/drivers/cpufreq/cpufreq.c                     |   6 +-
- xen/drivers/cpufreq/cpufreq_misc_governors.c      |  22 +-
- xen/drivers/cpufreq/cpufreq_ondemand.c            |  10 +-
- xen/drivers/passthrough/amd/iommu.h               |  45 +--
- xen/drivers/passthrough/amd/iommu_acpi.c          |  15 +-
- xen/drivers/passthrough/amd/iommu_guest.c         |  12 +-
- xen/drivers/passthrough/amd/iommu_init.c          |  49 +--
- xen/drivers/passthrough/amd/iommu_intr.c          |  20 +-
- xen/drivers/passthrough/amd/iommu_map.c           |  22 +-
- xen/drivers/passthrough/amd/pci_amd_iommu.c       |  32 +-
- xen/drivers/passthrough/iommu.c                   |  56 ++-
- xen/drivers/passthrough/pci.c                     |  18 +-
- xen/drivers/passthrough/vtd/dmar.c                |   7 +-
- xen/drivers/passthrough/vtd/extern.h              |  38 +-
- xen/drivers/passthrough/vtd/intremap.c            |  14 +-
- xen/drivers/passthrough/vtd/iommu.c               |  94 ++---
- xen/drivers/passthrough/vtd/qinval.c              |  28 +-
- xen/drivers/passthrough/vtd/quirks.c              |   2 +-
- xen/drivers/passthrough/vtd/utils.c               |   2 +-
- xen/drivers/passthrough/vtd/x86/hvm.c             |   4 +-
- xen/drivers/passthrough/x86/hvm.c                 |  14 +-
- xen/drivers/video/lfb.c                           |   4 +-
- xen/drivers/video/lfb.h                           |   4 +-
- xen/drivers/video/vesa.c                          |   6 +-
- xen/drivers/video/vga.c                           |   6 +-
- xen/drivers/vpci/header.c                         |  18 +-
- xen/drivers/vpci/msi.c                            |  42 +--
- xen/drivers/vpci/msix.c                           |  20 +-
- xen/drivers/vpci/vpci.c                           |  16 +-
- xen/include/acpi/cpufreq/cpufreq.h                |   1 -
- xen/include/xen/acpi.h                            |   2 +-
- xen/include/xen/compiler.h                        |   6 +
- xen/include/xen/domain.h                          |   2 +-
- xen/include/xen/hypercall.h                       |  69 ++--
- xen/include/xen/hypfs.h                           |  49 ++-
- xen/include/xen/irq.h                             |   6 +-
- xen/include/xen/lib.h                             |   2 +-
- xen/include/xen/perfc.h                           |   4 +-
- xen/include/xen/sched.h                           |   2 +-
- xen/include/xen/sort.h                            |  55 ++-
- xen/include/xen/spinlock.h                        |   4 +-
- xen/include/xen/vpci.h                            |   8 +-
- xen/include/xsm/dummy.h                           | 211 +++++------
- xen/lib/sort.c                                    |  80 +----
- xen/tools/check-endbr.sh                          |  85 +++++
- xen/xsm/flask/avc.c                               |   2 +-
- xen/xsm/flask/flask_op.c                          |   8 +-
- xen/xsm/flask/hooks.c                             | 236 +++++++------
- xen/xsm/flask/private.h                           |   9 +
- xen/xsm/flask/ss/avtab.c                          |   4 +-
- xen/xsm/flask/ss/conditional.c                    |  10 +-
- xen/xsm/flask/ss/conditional.h                    |   6 +-
- xen/xsm/flask/ss/policydb.c                       |  53 +--
- xen/xsm/flask/ss/services.c                       |   6 +-
- xen/xsm/flask/ss/symtab.c                         |   5 +-
- xen/xsm/silo.c                                    |  24 +-
- xen/xsm/xsm_core.c                                |   6 +-
- 322 files changed, 3316 insertions(+), 2739 deletions(-)
- create mode 100644 automation/build/debian/buster-gcc-ibt.dockerfile
- create mode 100644 xen/arch/x86/include/asm/endbr.h
- create mode 100755 xen/tools/check-endbr.sh
- create mode 100644 xen/xsm/flask/private.h
-
+diff --git a/xen/arch/x86/acpi/power.c b/xen/arch/x86/acpi/power.c
+index 912d4c4d62f4..c4e7e8698920 100644
+--- a/xen/arch/x86/acpi/power.c
++++ b/xen/arch/x86/acpi/power.c
+@@ -326,7 +326,7 @@ static int enter_state(u32 state)
+     return error;
+ }
+ 
+-static long enter_state_helper(void *data)
++static long cf_check enter_state_helper(void *data)
+ {
+     struct acpi_sleep_info *sinfo = (struct acpi_sleep_info *)data;
+     return enter_state(sinfo->sleep_state);
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 46f55fe7f191..9631042190ab 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -558,7 +558,7 @@ struct ucode_buf {
+     char buffer[];
+ };
+ 
+-static long microcode_update_helper(void *data)
++static long cf_check microcode_update_helper(void *data)
+ {
+     int ret;
+     struct ucode_buf *buffer = data;
+diff --git a/xen/arch/x86/include/asm/pv/shim.h b/xen/arch/x86/include/asm/pv/shim.h
+index 6415f8068e5c..a43c3689b48a 100644
+--- a/xen/arch/x86/include/asm/pv/shim.h
++++ b/xen/arch/x86/include/asm/pv/shim.h
+@@ -38,8 +38,8 @@ void pv_shim_setup_dom(struct domain *d, l4_pgentry_t *l4start,
+                        start_info_t *si);
+ int pv_shim_shutdown(uint8_t reason);
+ void pv_shim_inject_evtchn(unsigned int port);
+-long pv_shim_cpu_up(void *data);
+-long pv_shim_cpu_down(void *data);
++long cf_check pv_shim_cpu_up(void *data);
++long cf_check pv_shim_cpu_down(void *data);
+ void pv_shim_online_memory(unsigned int nr, unsigned int order);
+ void pv_shim_offline_memory(unsigned int nr, unsigned int order);
+ domid_t get_initial_domain_id(void);
+@@ -69,12 +69,12 @@ static inline void pv_shim_inject_evtchn(unsigned int port)
+ {
+     ASSERT_UNREACHABLE();
+ }
+-static inline long pv_shim_cpu_up(void *data)
++static inline long cf_check pv_shim_cpu_up(void *data)
+ {
+     ASSERT_UNREACHABLE();
+     return 0;
+ }
+-static inline long pv_shim_cpu_down(void *data)
++static inline long cf_check pv_shim_cpu_down(void *data)
+ {
+     ASSERT_UNREACHABLE();
+     return 0;
+diff --git a/xen/arch/x86/include/asm/smp.h b/xen/arch/x86/include/asm/smp.h
+index f7485f602efa..1747772d232e 100644
+--- a/xen/arch/x86/include/asm/smp.h
++++ b/xen/arch/x86/include/asm/smp.h
+@@ -57,10 +57,10 @@ int cpu_add(uint32_t apic_id, uint32_t acpi_id, uint32_t pxm);
+ 
+ void __stop_this_cpu(void);
+ 
+-long cpu_up_helper(void *data);
+-long cpu_down_helper(void *data);
++long cf_check cpu_up_helper(void *data);
++long cf_check cpu_down_helper(void *data);
+ 
+-long core_parking_helper(void *data);
++long cf_check core_parking_helper(void *data);
+ bool core_parking_remove(unsigned int cpu);
+ uint32_t get_cur_idle_nums(void);
+ 
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index 84566bbfaa3d..f5d7adc1e802 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -45,7 +45,7 @@ struct resource_access {
+     xenpf_resource_entry_t *entries;
+ };
+ 
+-long cpu_frequency_change_helper(void *);
++long cf_check cpu_frequency_change_helper(void *);
+ void check_resource_access(struct resource_access *);
+ void resource_access(void *);
+ 
+@@ -59,7 +59,7 @@ DEFINE_SPINLOCK(xenpf_lock);
+ # undef guest_from_compat_handle
+ # define guest_from_compat_handle(x,y) ((x)=(y))
+ 
+-long cpu_frequency_change_helper(void *data)
++long cf_check cpu_frequency_change_helper(void *data)
+ {
+     return cpu_frequency_change((uint64_t)data);
+ }
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index ae4d8913faa1..2ee290a3920d 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -845,7 +845,7 @@ int cf_check compat_grant_table_op(
+ #endif
+ #endif
+ 
+-long pv_shim_cpu_up(void *data)
++long cf_check pv_shim_cpu_up(void *data)
+ {
+     struct vcpu *v = data;
+     struct domain *d = v->domain;
+@@ -883,7 +883,7 @@ long pv_shim_cpu_up(void *data)
+     return 0;
+ }
+ 
+-long pv_shim_cpu_down(void *data)
++long cf_check pv_shim_cpu_down(void *data)
+ {
+     struct vcpu *v = data;
+     long rc;
+diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
+index eef0f9c6cbf4..f4952a6bf9a5 100644
+--- a/xen/arch/x86/smp.c
++++ b/xen/arch/x86/smp.c
+@@ -399,7 +399,7 @@ void call_function_interrupt(struct cpu_user_regs *regs)
+     smp_call_function_interrupt();
+ }
+ 
+-long cpu_up_helper(void *data)
++long cf_check cpu_up_helper(void *data)
+ {
+     unsigned int cpu = (unsigned long)data;
+     int ret = cpu_up(cpu);
+@@ -422,7 +422,7 @@ long cpu_up_helper(void *data)
+     return ret;
+ }
+ 
+-long cpu_down_helper(void *data)
++long cf_check cpu_down_helper(void *data)
+ {
+     int cpu = (unsigned long)data;
+     int ret = cpu_down(cpu);
+diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
+index aff52a13f373..1772f51f8f6e 100644
+--- a/xen/arch/x86/sysctl.c
++++ b/xen/arch/x86/sysctl.c
+@@ -79,7 +79,7 @@ static void l3_cache_get(void *arg)
+         l3_info->size = info.size / 1024; /* in KB unit */
+ }
+ 
+-static long smt_up_down_helper(void *data)
++static long cf_check smt_up_down_helper(void *data)
+ {
+     bool up = (bool)data;
+     unsigned int cpu, sibling_mask = boot_cpu_data.x86_num_siblings - 1;
+diff --git a/xen/common/core_parking.c b/xen/common/core_parking.c
+index 44a907abfd7f..4afad04f2f68 100644
+--- a/xen/common/core_parking.c
++++ b/xen/common/core_parking.c
+@@ -169,7 +169,7 @@ static unsigned int core_parking_power(unsigned int event)
+     return cpu;
+ }
+ 
+-long core_parking_helper(void *data)
++long cf_check core_parking_helper(void *data)
+ {
+     uint32_t idle_nums = (unsigned long)data;
+     unsigned int cpu;
+diff --git a/xen/common/kexec.c b/xen/common/kexec.c
+index 3b223cd03d75..b222a5fd782e 100644
+--- a/xen/common/kexec.c
++++ b/xen/common/kexec.c
+@@ -395,7 +395,7 @@ void kexec_crash(enum crash_reason reason)
+     BUG();
+ }
+ 
+-static long kexec_reboot(void *_image)
++static long cf_check kexec_reboot(void *_image)
+ {
+     struct kexec_image *image = _image;
+ 
+diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
+index e5cfb03b857e..b9d4babd0d8a 100644
+--- a/xen/common/sched/cpupool.c
++++ b/xen/common/sched/cpupool.c
+@@ -544,7 +544,7 @@ static int cpupool_unassign_cpu_start(struct cpupool *c, unsigned int cpu)
+     return ret;
+ }
+ 
+-static long cpupool_unassign_cpu_helper(void *info)
++static long cf_check cpupool_unassign_cpu_helper(void *info)
+ {
+     struct cpupool *c = info;
+     long ret;
 -- 
 2.11.0
 
