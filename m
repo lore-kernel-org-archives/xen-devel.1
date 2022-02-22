@@ -4,44 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93D68C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 15:22:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.276842.473161 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8877C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 15:27:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.276853.473171 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMWzS-0005PI-W9; Tue, 22 Feb 2022 15:22:10 +0000
+	id 1nMX4S-0006DA-Il; Tue, 22 Feb 2022 15:27:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 276842.473161; Tue, 22 Feb 2022 15:22:10 +0000
+Received: by outflank-mailman (output) from mailman id 276853.473171; Tue, 22 Feb 2022 15:27:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMWzS-0005OB-Se; Tue, 22 Feb 2022 15:22:10 +0000
-Received: by outflank-mailman (input) for mailman id 276842;
- Tue, 22 Feb 2022 15:22:10 +0000
+	id 1nMX4S-0006D3-Fc; Tue, 22 Feb 2022 15:27:20 +0000
+Received: by outflank-mailman (input) for mailman id 276853;
+ Tue, 22 Feb 2022 15:27:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=QzH2=TF=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1nMWzR-0004xs-UB
- for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 15:22:10 +0000
-Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.111.102])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 33059cde-93f3-11ec-8539-5f4723681683;
- Tue, 22 Feb 2022 16:22:08 +0100 (CET)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04lp2050.outbound.protection.outlook.com [104.47.12.50]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-20-EuGrLnZ8Px-WQTJXZQ1mgQ-1; Tue, 22 Feb 2022 16:22:07 +0100
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by DB7PR04MB4170.eurprd04.prod.outlook.com (2603:10a6:5:19::29) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.26; Tue, 22 Feb
- 2022 15:22:05 +0000
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::d479:b728:345c:bd65]) by VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::d479:b728:345c:bd65%6]) with mapi id 15.20.4995.027; Tue, 22 Feb 2022
- 15:22:05 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Woib=TF=citrix.com=prvs=045a4fa17=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1nMX4R-0006Cs-7O
+ for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 15:27:19 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ea382491-93f3-11ec-8539-5f4723681683;
+ Tue, 22 Feb 2022 16:27:17 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,200 +38,379 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 33059cde-93f3-11ec-8539-5f4723681683
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1645543328;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=x7C1TYxIrM4iGA02CqMktBHSEKGII9ThfElLzKOxJ1s=;
-	b=OBIs31DmGyQN5bPfBV+2AbPqkq6EIpwKoD+zdcHFR+LoqtvqCq4sHVzYp1k9B5r+DXVJ73
-	dhWhj3pTijY1IJ91MGHItlpANkM7AWmbUPBZoujYMVddRiWFgZSfaiQl5kHs+n37ZGE4Yk
-	B/crJ/R8o4EEFaw18j6lZZtKZ3MlNbk=
-X-MC-Unique: EuGrLnZ8Px-WQTJXZQ1mgQ-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HsNAORj5ejULJUUH+l2IRq/CSx2QjuvtulYYaRYO1LNI1ZAdBJkF/MbNjdKYLbiO+4XQUb21ivACGtmrg4ViYHAe/vmpSlbM7Tynw69WxwNOifja7ZvXi6Q/KhA8OQlqb7uGM6X2VJieqyazSSkmBVWzAJ8cVJUZTQVUXVBsFh0dT3Pbkm7k7v/3l1aXD2fA5XmIWHk0/gMwE8miiE680kczu8jnQrd1TiFtGrXJKD8MtEALh2Z6sqNjc9HqkE1j1lX5MfU0B0Hg2RNTmWZseuGEDd0DCoira+l/68htwRiKeawiceQbb/CisJHY46afEc/8V3E4VMIll0AJydUtDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x7C1TYxIrM4iGA02CqMktBHSEKGII9ThfElLzKOxJ1s=;
- b=TlpKhnzLrfaey7W2bVKxLR5tx35lc0exnxs+lkyUrqQPL+BRP1HchgSvgECdF3NVMmV0Pv9fr6mRfHfHJbnbwkftyf7N0rR73KrQzJT23SQ0JsVXT2X3NGwG+JgNDFOGdbbG9oKFfD+N5DlJ2EGgx3M6tVGLsKTpX+1skOyocRpTfUia7Tk7Qqo6xbDCZSDjsHg2tE4wx2Vy69gEmeE6N0gAjVzgcWpBQLC2WJSBA3gKcqHvMGyaLDwUNvE9i5reIpVZWuHbdxtjc+TJwrxXEltdscsM0otMKGpTYvluACK52/LOj+RvF5PviW+epwuCwpjP9RtSYxbwBxV0RNpPrA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <fea3b34c-d605-be27-f75e-722b39cc48e3@suse.com>
-Date: Tue, 22 Feb 2022 16:22:03 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.1
-Subject: Re: [PATCH v3 14/19] xen/arm: add Persistent Map (PMAP)
- infrastructure
-Content-Language: en-US
-To: Julien Grall <julien@xen.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Stefano Stabellini
- <sstabellini@kernel.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- George Dunlap <george.dunlap@citrix.com>, Hongyan Xia <hongyxia@amazon.com>,
- Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- xen-devel@lists.xenproject.org
-References: <20220221102218.33785-1-julien@xen.org>
- <20220221102218.33785-15-julien@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20220221102218.33785-15-julien@xen.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM5PR04CA0012.eurprd04.prod.outlook.com
- (2603:10a6:206:1::25) To VI1PR04MB5600.eurprd04.prod.outlook.com
- (2603:10a6:803:e7::16)
+X-Inumbo-ID: ea382491-93f3-11ec-8539-5f4723681683
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1645543637;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=bt4OX/67fRpjbPwMltvyGAYpZSijmRJZNzMcDVcps9k=;
+  b=Gin1nKsn24MtUsdYUVAQe3JoEPsSmGWa6mx91S2IWMg2OdcqgKfdeN9p
+   7AzY0utm9/xaKRWADwRcb6OJ5AYPKftCRx3Lf8wappBSVXCzFZT3BpR+W
+   Xm9uGWdJ6SINh2vHaXqri9q7uz3ZCJgBQoti6bYo42pm4S7DxqTkWQvJ+
+   0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 5.1
+X-MesageID: 64733393
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:3wLknax91XTxUE1eK+R6t+dTxirEfRIJ4+MujC+fZmUNrF6WrkUPz
+ WIaWT+Haf7YZ2v3Ld91PN+0phgEu8fcx9ZrTVM+/CAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGHdJZS5LwbZj2NYy24LhWWthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ NpljKGNVywOL7P3wO0ZVl55DC9XMaZZ5+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6AO
+ 5VCMmE+N3wsZTVGC0VIDqkngt2N3GP4Lx8F9FOT/vAotj27IAtZj+G2bYu9lsaxbdVYmAOUq
+ 3zL+0z9AwoGL5qPxDyd6HWui+TT2yThV+ov+KaQr6AwxgfJnypKVUNQBQDTTeSFZlCWYu9iN
+ Wcz6zQV9aE28QuKUdfUUxanvyvR1vIDYOZ4H+o/4QCL76Pb5QeFG2QJJgJ8hMwaWNweHmJzi
+ ALQ9z/9LXk26eDOFyrBnluBhW7qYUAowXk+iTjopOfvy/3qu8kNgx3GVb6P+4bl34SuSVkcL
+ 91nxRXSZon/b+ZWj81XHnid2lpAQ6QlqCZvvW07uUr/s2tEiHaNPdDA1LQixa8owHylZleAp
+ mMYvMOV8foDC5qA/ATUHrlQQO/4uqvfbGSE6bKKI3XH3272k5JEVdoNiAyS2W8zappUEdMXS
+ BW7VfxtCG97YyLxMP4fj3OZAMU216nwfekJpdiPBueilqNZLVfdlAk3PBb49zm0zCAEzPFuU
+ b/GIJ3EJStLVsxaIM+eGr51PUkDnXtlmws+hPnTknya7FZpTCTLEexcaAPWNIjULsqs+W3oz
+ jqWDOPSoz03bQE0SnC/HVI7RbzSEUUGOA==
+IronPort-HdrOrdr: A9a23:P1jCwK2tojv49pNqu0W3OgqjBIMkLtp133Aq2lEZdPUnSL3gqy
+ nOpoV+6faaskdzZJhNo7y90ey7IE80lqQFhLX5X43SPjUO0VHAROpfBMnZrQEIcBefygcp79
+ YHT0ERMrLN5cERt6zHCSqDYq4dKaG8gceVbTmy9RpQcT0=
+X-IronPort-AV: E=Sophos;i="5.88,387,1635220800"; 
+   d="scan'208";a="64733393"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH v3 29/70] xen/misc: CFI hardening
+Date: Tue, 22 Feb 2022 15:26:39 +0000
+Message-ID: <20220222152645.8844-10-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20220222152645.8844-1-andrew.cooper3@citrix.com>
+References: <20220222152645.8844-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 477b96bf-95ce-4ad3-38d8-08d9f6171558
-X-MS-TrafficTypeDiagnostic: DB7PR04MB4170:EE_
-X-Microsoft-Antispam-PRVS:
-	<DB7PR04MB4170C9C1E8497CD58D71E112B33B9@DB7PR04MB4170.eurprd04.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	sIk1PX/YrWDaNB+/i79FXzD0g7VdhxFZG+plavQuz4eX7xFrrBUfTLVYmFvTlQBmX6+sWlI1jtranNWO8NmixKHkZYZJAFogc2S51vA5CjQsDdvz4vj3ghB1fJxquJ+4YmFusGgBlEU78Wg3hCpxVn5Ein3PAd+Ru+31Cd6DGg30nTWB1uOX7o+u9uLjgfV5vZqbSNnF5J6JrngKQZqQ9v9QliRpjpUfgPbMTXuT6eXRhhcy1Jd1EvH3lYwz6S0C0LEGEVkQdImUv9KT+nbY7pvHqok526Nf6w+Ywjyv3AucNE4An5ZjGkeTfIn2pt/F2OVjoYEYzSKeBMahCEIqQZsrBFH10PaVdxSCUqSaAyPPBU+aDx2NxrIcqPYFp4ZLBXXPbrnfrTxN3/jQ7MAuiC7hC+QHdcx0J+Ojb6wifLpUAvhwftHVvI3//Ge1RVgPwSujH+DLS1ylU9M0fVMfnd0AH3tesj55tTePYnc5YBmfhHPczMbKXWhU25c2/kB/q35w8TqJ7wIvgfv5095VTzY8waknsgavUh+atrQMjlAh3wb3Rug8oKPnEl+n5cVIWF1EhFjMAxNV0yHzuWrZBCNOh1Ul+5XjnsE78dRDEB0pSic5PbIjfZ+BJhWG7DFSoJpRSZ8pkHzcUlLSqGjQZYG+empjw2J561QEC3Xi+t4uYYv4zbPlrYtIk0d1x4x0a9Ipx98oPb0hGNWG530igT+cn+YbQz1mKXJ/VYYIC8zQmWhqDRoUE4myk0vs4a02
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(53546011)(6512007)(38100700002)(6916009)(508600001)(316002)(2906002)(36756003)(2616005)(186003)(26005)(6506007)(6486002)(31686004)(31696002)(66556008)(8676002)(66946007)(86362001)(83380400001)(7416002)(54906003)(5660300002)(8936002)(4326008)(66476007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NG0yYnRiQnZ6T2JWL1R5UXcwaVVya1pDaEkyZGovK3dMMGUwZjZublR5R0hB?=
- =?utf-8?B?cnJ4U1JHSlFYdDVyd3pnZVVVQytJQWY3cU54aWtrczhGOGIrZ1pSSGZqeW9O?=
- =?utf-8?B?QnFVQ2cwOWRzaHUveTV1bHdpRUlCbmFBMzBtZHNkRkhRcEpHckdxblRBVHFx?=
- =?utf-8?B?ZlNuQjR1WmcxQ2JZQlZ1bXNyOXJoekpxQjVyTFlUd0dKRHk0aHRlenhsNHor?=
- =?utf-8?B?c3VCczJpS29yMTBoL1F3YkswakRMdmV6bFBUSzB2aGlHb2hQYWVVQ0d1SUVX?=
- =?utf-8?B?YUkrQURDRUpVWkxpbGlvN1phSU1YaldhV2Z0QXVvT1FBc2ZCODlIVjhMSTR1?=
- =?utf-8?B?MjBnSHNpSXM4MFpQNWgrZzFnb2psTE9BemZYcUM2Z3BSZWNRbXV5NDdLM1BB?=
- =?utf-8?B?UXlkTk1abXU4Y1ZDdVAzQTdzZXNERGs2UGU5c3U2RngrRHdGZlBPaGNYLzVP?=
- =?utf-8?B?cUVDb0o3ZUlDZGhqRGdoTW84dkE3WDlsUjlpSDNsa2Q5ZmVLWmxXMnRZcTdj?=
- =?utf-8?B?UFg2WWlPZGUxRWEvNDlwTVdqUnovZmJ5NVpwYm1TWVlMd2s4VXdObHYrMENa?=
- =?utf-8?B?dlRmYW40ZHFTVHZUVjYvM1VoOHk0d2xFOXRIdjhPYXM1RnQ2R2pLQlVFWmhU?=
- =?utf-8?B?VVhIOEJ2T3hKV2w2dFlISmNBS05xSExKZUhYVWt6cmpYc2o4YzFuMXprcFV4?=
- =?utf-8?B?Mm5oSWMzTUY3L3NjYkxKRU1hVHRSRndISzR6Uy9JaUlTd09uaU93eERGRjkz?=
- =?utf-8?B?VW5rcWwrSVJKMlhGZGk1bHFNZFpRZi9MTDVxcFgva0tmZ205cTJtdUk1azhF?=
- =?utf-8?B?aHVxZ2llSGhuVUlseGt3dVhVT2dzZU9rMG5vQ3NIc0xrMXBEandDbmNiT1I1?=
- =?utf-8?B?SWtlYTFZQkNxdlNmWDhZaHFKMU0veG5JZTk3bmFHS2xGWCtWSEc5ZmZkYk15?=
- =?utf-8?B?YTRvU3VrUEhmaTdxR0Q2TkFMbC9GdzR3NDNQdGJpYlJUcm9iY1BPV0VXWE5K?=
- =?utf-8?B?R0gxN3JkOWprV2VvdVNCVEFSSVFaNkNsUys4V3FpRXZzSnN2RDVvV1hTa05r?=
- =?utf-8?B?aVZ4V1EwSUxjYzYvTzB3bHl3aE82REZRU3FvSDZWbFladTVFTE5ZR0F1ZkdC?=
- =?utf-8?B?elE2ZUxSazJJY3Y3ZGpWRDQ2Yy9rV3UvMzNtNFpPb3lvU1ZDOGlpTkswSVFh?=
- =?utf-8?B?dFJRTFFZQXNIamVLeGo4QWdqR3pwY3JsdjlqVUcyWWowcXh5eWtjZ09kZHhS?=
- =?utf-8?B?bUVCMllrUkYwYm5zRVF0dGtjcXBSRGV2WW9Pc1hYNzREWElVS1puWXlBdGZ6?=
- =?utf-8?B?KzBJU1NIbHVBQTZVYThYdEVRczE1UithUzNqU05lY0t0cTRmM0ZoQnFPTnl3?=
- =?utf-8?B?dXRBRk5ENi9pWGlhZjZVTWs0bWs3Vjc3K0hud2E0aExiUkFTZGhLQmxQZURz?=
- =?utf-8?B?VzNWRmtMUDk3Y3pseFllUTRiYURhaE4vWC9hR2t3TU96QUFBWjU1TElPZWZn?=
- =?utf-8?B?Y0p4NGR0ZkZJcGQ3OTgxTCtXK2pXd3poWUdEWEsxaWptT3QvRDZoODd4VFZC?=
- =?utf-8?B?MWJGVVFLaUxnMWVuclQ1ZzFGVUlmTXAyRU1zZ0FlU2lBd0FTV3gvRFNzUVZX?=
- =?utf-8?B?aHc4dFpkZE1TS0ZCNTRMdGp6NDNkbU1EV3NaN1VSbGdJUTJnTVV1VDZ0Qys1?=
- =?utf-8?B?Z3J0N2ZZZ1RzRW9vb2NKTzVRL2EraGYwbDJIQTZ6enlNNFNkdTZUdzlOdWpP?=
- =?utf-8?B?VVVUNHBXMFNPc2x2ZlBmRUtUSk1UMDkyb0ZHdTVMSzN0VW8rYlVITDlGM2cy?=
- =?utf-8?B?YmpYdExvRzVEazZHOUd1Y1JUU0tqUDRXMmpFd2lxMFJIeHdEbFljdDEwd0Rw?=
- =?utf-8?B?T1B2T25RcktTQzZPbmdBOU1xb0xSWEVXeGJIRXZBWHpTblN0SGg5eDllMzBl?=
- =?utf-8?B?dEFRR2IrQlRxeEFETUVyUnVEVjVKSWdhVDNlN0ZaOG5WTjdjMHhBNXJjWHky?=
- =?utf-8?B?bDRLbm5nMTBabkRBdXVYdk4wVVFLaC9ybERYbWlXdW9mSVU3dk5Od3hqNmpv?=
- =?utf-8?B?REFMbHZFTlkrRGp5WGZqNFpyUXpUUFpNUlNpeHVoUStsTjB1VGFWeVZJZU02?=
- =?utf-8?B?QS9OdDZjTXRtRzhVQk1ZaDI2dmhEQkpWRzFndXM3ZWpFMmp5Q2hKbHFmWjFD?=
- =?utf-8?Q?UQtBO3x6JUzAT8mzR044gdM=3D?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 477b96bf-95ce-4ad3-38d8-08d9f6171558
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Feb 2022 15:22:05.3669
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zLpdyJAY/r3P5UB8JdaMilTNBkvCPB8akIvyWZBr/cqt8ylmf0Pw/zBGore8uLjAamk72W4O3/t7ry+0sf3xkg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR04MB4170
+Content-Type: text/plain
 
-On 21.02.2022 11:22, Julien Grall wrote:
-> --- a/xen/common/Makefile
-> +++ b/xen/common/Makefile
-> @@ -28,6 +28,7 @@ obj-y += multicall.o
->  obj-y += notifier.o
->  obj-y += page_alloc.o
->  obj-$(CONFIG_HAS_PDX) += pdx.o
-> +obj-bin-$(CONFIG_HAS_PMAP) += pmap.init.o
->  obj-$(CONFIG_PERF_COUNTERS) += perfc.o
->  obj-y += preempt.o
->  obj-y += random.o
+Control Flow Integrity schemes use toolchain and optionally hardware support
+to help protect against call/jump/return oriented programming attacks.
 
-Nit: Please move the insertion one line further down.
+Use cf_check to annotate function pointer targets for the toolchain.
 
-> --- /dev/null
-> +++ b/xen/common/pmap.c
-> @@ -0,0 +1,79 @@
-> +#include <xen/bitops.h>
-> +#include <xen/init.h>
-> +#include <xen/pmap.h>
-> +
-> +#include <asm/pmap.h>
-> +#include <asm/fixmap.h>
-> +
-> +/*
-> + * Simple mapping infrastructure to map / unmap pages in fixed map.
-> + * This is used to set up the page table for mapcache, which is used
-> + * by map domain page infrastructure.
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+v3
+ * Annotations for gcov
+---
+ xen/arch/x86/mm.c                        | 6 ++++--
+ xen/arch/x86/setup.c                     | 4 ++--
+ xen/common/coverage/gcov.c               | 8 ++++----
+ xen/common/domain.c                      | 2 +-
+ xen/common/gdbstub.c                     | 5 ++---
+ xen/common/livepatch.c                   | 7 +++----
+ xen/common/memory.c                      | 4 ++--
+ xen/common/page_alloc.c                  | 2 +-
+ xen/common/radix-tree.c                  | 4 ++--
+ xen/common/rangeset.c                    | 2 +-
+ xen/common/spinlock.c                    | 6 +++---
+ xen/common/vm_event.c                    | 6 +++---
+ xen/common/xmalloc_tlsf.c                | 4 ++--
+ xen/drivers/passthrough/amd/iommu_init.c | 2 +-
+ xen/include/xen/domain.h                 | 2 +-
+ 15 files changed, 32 insertions(+), 32 deletions(-)
 
-Is this comment stale from its original x86 purpose?
-
-> + * This structure is not protected by any locks, so it must not be used after
-> + * smp bring-up.
-> + */
-> +
-> +/* Bitmap to track which slot is used */
-> +static unsigned long __initdata inuse;
-
-I guess this wants to use DECLARE_BITMAP(), for ...
-
-> +void *__init pmap_map(mfn_t mfn)
-> +{
-> +    unsigned long flags;
-> +    unsigned int idx;
-> +    unsigned int slot;
-> +
-> +    BUILD_BUG_ON(sizeof(inuse) * BITS_PER_BYTE < NUM_FIX_PMAP);
-> +
-> +    ASSERT(system_state < SYS_STATE_smp_boot);
-> +
-> +    local_irq_save(flags);
-> +
-> +    idx = find_first_zero_bit(&inuse, NUM_FIX_PMAP);
-
-... this to be correct irrespective of how large NUM_FIX_PMAP is?
-I think that's preferable over the BUILD_BUG_ON().
-
-> +    if ( idx == NUM_FIX_PMAP )
-> +        panic("Out of PMAP slots\n");
-> +
-> +    __set_bit(idx, &inuse);
-> +
-> +    slot = idx + FIXMAP_PMAP_BEGIN;
-> +    ASSERT(slot >= FIXMAP_PMAP_BEGIN && slot <= FIXMAP_PMAP_END);
-> +
-> +    /*
-> +     * We cannot use set_fixmap() here. We use PMAP when there is no direct map,
-> +     * so map_pages_to_xen() called by set_fixmap() needs to map pages on
-> +     * demand, which then calls pmap() again, resulting in a loop. Modify the
-> +     * PTEs directly instead. The same is true for pmap_unmap().
-> +     */
-> +    arch_pmap_map(slot, mfn);
-
-I'm less certain here, but like above I'm under the impression
-that this comment may no longer be accurate.
-
-> +    local_irq_restore(flags);
-
-What is this IRQ save/restore intended to protect against, when
-use of this function is limited to pre-SMP boot anyway?
-
-Jan
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index a1b8737096c4..0665095d2309 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -835,7 +835,8 @@ struct mmio_emul_range_ctxt {
+     unsigned long mfn;
+ };
+ 
+-static int print_mmio_emul_range(unsigned long s, unsigned long e, void *arg)
++static int cf_check print_mmio_emul_range(
++    unsigned long s, unsigned long e, void *arg)
+ {
+     const struct mmio_emul_range_ctxt *ctxt = arg;
+ 
+@@ -4606,7 +4607,8 @@ static int _handle_iomem_range(unsigned long s, unsigned long e,
+     return 0;
+ }
+ 
+-static int handle_iomem_range(unsigned long s, unsigned long e, void *p)
++static int cf_check handle_iomem_range(
++    unsigned long s, unsigned long e, void *p)
+ {
+     int err = 0;
+ 
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 3a4ec1fcfd04..a9a371336b36 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2021,8 +2021,8 @@ int __hwdom_init xen_in_range(unsigned long mfn)
+     return 0;
+ }
+ 
+-static int __hwdom_init io_bitmap_cb(unsigned long s, unsigned long e,
+-                                     void *ctx)
++static int __hwdom_init cf_check io_bitmap_cb(
++    unsigned long s, unsigned long e, void *ctx)
+ {
+     struct domain *d = ctx;
+     unsigned int i;
+diff --git a/xen/common/coverage/gcov.c b/xen/common/coverage/gcov.c
+index 3cc98728bfce..327bf8d646c0 100644
+--- a/xen/common/coverage/gcov.c
++++ b/xen/common/coverage/gcov.c
+@@ -120,7 +120,7 @@ static int gcov_info_dump_payload(const struct gcov_info *info,
+ 
+ }
+ 
+-static uint32_t gcov_get_size(void)
++static uint32_t cf_check gcov_get_size(void)
+ {
+     uint32_t total_size = sizeof(uint32_t); /* Magic number XCOV */
+     struct gcov_info *info = NULL;
+@@ -140,7 +140,7 @@ static uint32_t gcov_get_size(void)
+     return total_size;
+ }
+ 
+-static void gcov_reset_all_counters(void)
++static void cf_check gcov_reset_all_counters(void)
+ {
+     struct gcov_info *info = NULL;
+ 
+@@ -172,8 +172,8 @@ static int gcov_dump_one_record(const struct gcov_info *info,
+     return gcov_info_dump_payload(info, buffer, off);
+ }
+ 
+-static int gcov_dump_all(XEN_GUEST_HANDLE_PARAM(char) buffer,
+-                         uint32_t *buffer_size)
++static int cf_check gcov_dump_all(
++    XEN_GUEST_HANDLE_PARAM(char) buffer, uint32_t *buffer_size)
+ {
+     uint32_t off;
+     uint32_t magic = XEN_GCOV_FORMAT_MAGIC;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index f3d06df76c33..351029f8b239 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -1803,7 +1803,7 @@ static void cf_check _free_pirq_struct(struct rcu_head *head)
+     xfree(container_of(head, struct pirq, rcu_head));
+ }
+ 
+-void free_pirq_struct(void *ptr)
++void cf_check free_pirq_struct(void *ptr)
+ {
+     struct pirq *pirq = ptr;
+ 
+diff --git a/xen/common/gdbstub.c b/xen/common/gdbstub.c
+index 079c3ca9616a..d6872721dc0d 100644
+--- a/xen/common/gdbstub.c
++++ b/xen/common/gdbstub.c
+@@ -69,7 +69,7 @@ static void gdb_smp_resume(void);
+ static char __initdata opt_gdb[30];
+ string_param("gdb", opt_gdb);
+ 
+-static void gdbstub_console_puts(const char *str, size_t nr);
++static void cf_check gdbstub_console_puts(const char *str, size_t nr);
+ 
+ /* value <-> char (de)serialzers */
+ static char
+@@ -546,8 +546,7 @@ __gdb_ctx = {
+ };
+ static struct gdb_context *gdb_ctx = &__gdb_ctx;
+ 
+-static void
+-gdbstub_console_puts(const char *str, size_t nr)
++static void cf_check gdbstub_console_puts(const char *str, size_t nr)
+ {
+     const char *p;
+ 
+diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+index e8714920dc8f..ec301a9f120c 100644
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -157,10 +157,9 @@ unsigned long livepatch_symbols_lookup_by_name(const char *symname)
+     return 0;
+ }
+ 
+-static const char *livepatch_symbols_lookup(unsigned long addr,
+-                                            unsigned long *symbolsize,
+-                                            unsigned long *offset,
+-                                            char *namebuf)
++static const char *cf_check livepatch_symbols_lookup(
++    unsigned long addr, unsigned long *symbolsize, unsigned long *offset,
++    char *namebuf)
+ {
+     const struct payload *data;
+     unsigned int i, best;
+diff --git a/xen/common/memory.c b/xen/common/memory.c
+index ede45c4af9db..69b0cd1e50de 100644
+--- a/xen/common/memory.c
++++ b/xen/common/memory.c
+@@ -1051,8 +1051,8 @@ struct get_reserved_device_memory {
+     unsigned int used_entries;
+ };
+ 
+-static int get_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr,
+-                                      u32 id, void *ctxt)
++static int cf_check get_reserved_device_memory(
++    xen_pfn_t start, xen_ulong_t nr, u32 id, void *ctxt)
+ {
+     struct get_reserved_device_memory *grdm = ctxt;
+     uint32_t sbdf = PCI_SBDF3(grdm->map.dev.pci.seg, grdm->map.dev.pci.bus,
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 3caf5c954b24..46357182375a 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1238,7 +1238,7 @@ struct scrub_wait_state {
+     bool drop;
+ };
+ 
+-static void scrub_continue(void *data)
++static void cf_check scrub_continue(void *data)
+ {
+     struct scrub_wait_state *st = data;
+ 
+diff --git a/xen/common/radix-tree.c b/xen/common/radix-tree.c
+index 33b47748ae49..adc3034222dc 100644
+--- a/xen/common/radix-tree.c
++++ b/xen/common/radix-tree.c
+@@ -52,7 +52,7 @@ struct rcu_node {
+ 	struct rcu_head rcu_head;
+ };
+ 
+-static struct radix_tree_node *rcu_node_alloc(void *arg)
++static struct radix_tree_node *cf_check rcu_node_alloc(void *arg)
+ {
+ 	struct rcu_node *rcu_node = xmalloc(struct rcu_node);
+ 	return rcu_node ? &rcu_node->node : NULL;
+@@ -65,7 +65,7 @@ static void cf_check _rcu_node_free(struct rcu_head *head)
+ 	xfree(rcu_node);
+ }
+ 
+-static void rcu_node_free(struct radix_tree_node *node, void *arg)
++static void cf_check rcu_node_free(struct radix_tree_node *node, void *arg)
+ {
+ 	struct rcu_node *rcu_node = container_of(node, struct rcu_node, node);
+ 	call_rcu(&rcu_node->rcu_head, _rcu_node_free);
+diff --git a/xen/common/rangeset.c b/xen/common/rangeset.c
+index 885b6b15c229..a6ef2640462a 100644
+--- a/xen/common/rangeset.c
++++ b/xen/common/rangeset.c
+@@ -384,7 +384,7 @@ int rangeset_consume_ranges(struct rangeset *r,
+     return rc;
+ }
+ 
+-static int merge(unsigned long s, unsigned long e, void *data)
++static int cf_check merge(unsigned long s, unsigned long e, void *data)
+ {
+     struct rangeset *r = data;
+ 
+diff --git a/xen/common/spinlock.c b/xen/common/spinlock.c
+index 25bfbf3c47f7..62c83aaa6a73 100644
+--- a/xen/common/spinlock.c
++++ b/xen/common/spinlock.c
+@@ -375,7 +375,7 @@ static void spinlock_profile_iterate(lock_profile_subfunc *sub, void *par)
+     spin_unlock(&lock_profile_lock);
+ }
+ 
+-static void spinlock_profile_print_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_print_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
+ {
+     struct spinlock *lock = data->lock;
+@@ -404,7 +404,7 @@ void cf_check spinlock_profile_printall(unsigned char key)
+     spinlock_profile_iterate(spinlock_profile_print_elem, NULL);
+ }
+ 
+-static void spinlock_profile_reset_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_reset_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
+ {
+     data->lock_cnt = 0;
+@@ -428,7 +428,7 @@ typedef struct {
+     int                      rc;
+ } spinlock_profile_ucopy_t;
+ 
+-static void spinlock_profile_ucopy_elem(struct lock_profile *data,
++static void cf_check spinlock_profile_ucopy_elem(struct lock_profile *data,
+     int32_t type, int32_t idx, void *par)
+ {
+     spinlock_profile_ucopy_t *p = par;
+diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
+index 70ab3ba406ff..84cf52636bc4 100644
+--- a/xen/common/vm_event.c
++++ b/xen/common/vm_event.c
+@@ -523,21 +523,21 @@ int __vm_event_claim_slot(struct domain *d, struct vm_event_domain *ved,
+ 
+ #ifdef CONFIG_MEM_PAGING
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void mem_paging_notification(struct vcpu *v, unsigned int port)
++static void cf_check mem_paging_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_paging);
+ }
+ #endif
+ 
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void monitor_notification(struct vcpu *v, unsigned int port)
++static void cf_check monitor_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_monitor);
+ }
+ 
+ #ifdef CONFIG_MEM_SHARING
+ /* Registered with Xen-bound event channel for incoming notifications. */
+-static void mem_sharing_notification(struct vcpu *v, unsigned int port)
++static void cf_check mem_sharing_notification(struct vcpu *v, unsigned int port)
+ {
+     vm_event_resume(v->domain, v->domain->vm_event_share);
+ }
+diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
+index e3f6886e6b62..d2ad909502d0 100644
+--- a/xen/common/xmalloc_tlsf.c
++++ b/xen/common/xmalloc_tlsf.c
+@@ -512,13 +512,13 @@ int xmem_pool_maxalloc(struct xmem_pool *pool)
+ 
+ static struct xmem_pool *xenpool;
+ 
+-static void *xmalloc_pool_get(unsigned long size)
++static void *cf_check xmalloc_pool_get(unsigned long size)
+ {
+     ASSERT(size == PAGE_SIZE);
+     return alloc_xenheap_page();
+ }
+ 
+-static void xmalloc_pool_put(void *p)
++static void cf_check xmalloc_pool_put(void *p)
+ {
+     free_xenheap_page(p);
+ }
+diff --git a/xen/drivers/passthrough/amd/iommu_init.c b/xen/drivers/passthrough/amd/iommu_init.c
+index 06b4d2b1fea0..cebcd68a6c04 100644
+--- a/xen/drivers/passthrough/amd/iommu_init.c
++++ b/xen/drivers/passthrough/amd/iommu_init.c
+@@ -1073,7 +1073,7 @@ static void * __init allocate_ppr_log(struct amd_iommu *iommu)
+ #define IVRS_MAPPINGS_DEVTAB(m) (m)[ivrs_bdf_entries].intremap_table
+ 
+ /* Gets passed to radix_tree_destroy(), so its param needs to be void *. */
+-static void __init free_ivrs_mapping_callback(void *ptr)
++static void __init cf_check free_ivrs_mapping_callback(void *ptr)
+ {
+     const struct ivrs_mappings *ivrs_mappings = ptr;
+ 
+diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
+index 24eb4cc7d37e..1c3c88a14d6f 100644
+--- a/xen/include/xen/domain.h
++++ b/xen/include/xen/domain.h
+@@ -52,7 +52,7 @@ void free_vcpu_struct(struct vcpu *v);
+ #ifndef alloc_pirq_struct
+ struct pirq *alloc_pirq_struct(struct domain *);
+ #endif
+-void free_pirq_struct(void *);
++void cf_check free_pirq_struct(void *);
+ 
+ /*
+  * Initialise/destroy arch-specific details of a VCPU.
+-- 
+2.11.0
 
 
