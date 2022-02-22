@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A958C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 00:16:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.276449.472627 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF8CC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Feb 2022 00:18:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.276457.472648 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMIqG-0003JA-Rx; Tue, 22 Feb 2022 00:15:44 +0000
+	id 1nMIt1-0004Ak-HC; Tue, 22 Feb 2022 00:18:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 276449.472627; Tue, 22 Feb 2022 00:15:44 +0000
+Received: by outflank-mailman (output) from mailman id 276457.472648; Tue, 22 Feb 2022 00:18:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nMIqG-0003J3-O6; Tue, 22 Feb 2022 00:15:44 +0000
-Received: by outflank-mailman (input) for mailman id 276449;
- Tue, 22 Feb 2022 00:15:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nMIt1-0004Ab-E9; Tue, 22 Feb 2022 00:18:35 +0000
+Received: by outflank-mailman (input) for mailman id 276457;
+ Tue, 22 Feb 2022 00:18:34 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AYeZ=TF=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1nMIqE-0003Ix-Ts
- for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 00:15:43 +0000
+ id 1nMIsz-0003tm-Vs
+ for xen-devel@lists.xenproject.org; Tue, 22 Feb 2022 00:18:34 +0000
 Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
- [64.147.123.20]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8f161849-9374-11ec-8eb8-a37418f5ba1a;
- Tue, 22 Feb 2022 01:15:40 +0100 (CET)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.west.internal (Postfix) with ESMTP id EFD5E32020A4;
- Mon, 21 Feb 2022 19:15:34 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Mon, 21 Feb 2022 19:15:35 -0500
+ [64.147.123.20]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f79df940-9374-11ec-8539-5f4723681683;
+ Tue, 22 Feb 2022 01:18:33 +0100 (CET)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.west.internal (Postfix) with ESMTP id EC12B32020A4;
+ Mon, 21 Feb 2022 19:18:30 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute3.internal (MEProxy); Mon, 21 Feb 2022 19:18:31 -0500
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 21 Feb 2022 19:15:32 -0500 (EST)
+ 21 Feb 2022 19:18:28 -0500 (EST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,110 +45,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f161849-9374-11ec-8eb8-a37418f5ba1a
+X-Inumbo-ID: f79df940-9374-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:date:date:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=rc93G4/qTvE1ZYiC5
-	yWr1O2C0TkaoFvvFLrkTcp0OiU=; b=Y69o6eJC81KbBulRopMzp6lUJuZ9AISxP
-	+1QcRCFA2Lymy2SX6QdNNij+bpUKjLI7JY4jk6B+bsTE4uvRYLBtYJQVtWxLXOF7
-	MC7BrgMjs73uOxKJd9JXq/llwO7LemYllNLWxpBII5AYt1DEKRPBJVbzniAl47EV
-	I9+klBHWuuqK0ub/hUfvoMiMtMxtH8+AXU2eUhu1qnegNWweYwBpOLP94gcFk3Ed
-	/xZmjxfMLtm6ggHg69s6N6iJbAvkHiohXHuNcbXTJ0JCAuGZGUMILtklyzt0pOtX
-	cCF3DmjcxDKdnzI5Gl1lgGvALIo1R+JX0RkT5U6LWasdG37Dbrdqw==
-X-ME-Sender: <xms:JisUYrJ7-Kx2Gz-DcSLX6JUni2MkM8yWYJQp4AoCgn2hvNSgKKT9zA>
-    <xme:JisUYvKy_JBBMxZSyUGE4ic2Ird8J5qQ0NkL0YVsZKDDDDr5YdhauOPKZEfTegD1y
-    GXHtTTeqwQ4Cw>
-X-ME-Received: <xmr:JisUYjv11Y6MM_noDbeYIUb00bL2l060gnp-_P2lzYgS7yb48dKXZo_tsjqwkhStKt7m7VELWr2YvwyH0hCdhxXSpyzovDUyiw>
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm2; bh=XmMT3EWtd+ciLfBzi+9TAwPbS18Eh5Hhy+YbNx2fX
+	t0=; b=ClWyCP3Q0+m9yPFE7QpnuAWSp8luBTmJ3dLZy+53AyJh/Zew6r3VyamYI
+	iIhemKxWThFxC9kjEGU4HTzWxms0kukrEJ21uNabiUgyw1CWTJB8I6V/Yajjg6aG
+	gJi1YtMtbrm7sM9Erce+fv++TOxyyHvQDRqtgOQNB2w83NYj3DclV9DMyMOCCNsa
+	4yZATPgb5G4jVwJtkfCtvFQN8JEHz6vt+tTs7J7HHu4aWtEHEEHMcn3ZO+9kB5jW
+	VrLEjdY0doKSnZi71hE3tknHK7T/mwblYjPTeOwZu4g4jwtWSHWbG6ogEAKC9u+4
+	UhNrMNXlgXOqMVRm3xFGpr2MkjzXA==
+X-ME-Sender: <xms:1isUYnp-l1g2xVkAWM45cpnGjhFq1lLPA09vmSVMt2qLjxxAx_ooAQ>
+    <xme:1isUYhqSkIDI7-B35lBCLYjTC-Cw6TELhPgxRZZL-Pc4HLqKzPRDwSojxmpyhwMVW
+    zz5gQTN5jjdhA>
+X-ME-Received: <xmr:1isUYkPpKdTxiNAu3PorE0HL9L-j9eE5zP6qjiW4hrnn84tT2QJrJW3wokxTjfxJcXz6ROhhMzcKZq9450PHhG5fGbMIESBVseNv8Z3x4rf6mvaZ-5g>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvvddrkeejgddvtdcutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpeffhffvuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepteevffei
-    gffhkefhgfegfeffhfegveeikeettdfhheevieehieeitddugeefteffnecuvehluhhsth
-    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
-    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:JisUYkbYs4yRQDuWPVpdWhTz-QMKtlgY3G4siF3Azf63M4nIiJq4Rg>
-    <xmx:JisUYia-rc0nv9Ddr695FsbNsEykqpokrW3ZBB2ZlTMV7xRwvbrssA>
-    <xmx:JisUYoC2vmtUkDy87UAuKxSdgXE1Y-PGs7AKNdt35uk5T5MudK5U5A>
-    <xmx:JisUYq7doJGgZO5OJpN9rhB7hPF6DYbyZo9JLQQtjrg4kaKuGWyz8w>
-Date: Tue, 22 Feb 2022 01:15:29 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Juergen Gross <jgross@suse.com>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+    fjughrpefhvffufffkofgjfhggtghogfesthekredtredtjeenucfhrhhomhepofgrrhgv
+    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
+    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepffdt
+    uefffeduhfelueegvdetheejvdehteelfeetfeekgfekkefggedtgefhieejnecuffhomh
+    grihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
+    mhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvghthhhinhhgsh
+    hlrggsrdgtohhm
+X-ME-Proxy: <xmx:1isUYq7vEWZ-SE0XIvbz58gerzXTrCf3BlDiqPoxqk8ZPfjUnpgIjA>
+    <xmx:1isUYm4lpafkKQCw-Ua0K26waSc4wfUPKHHETM0uuInsy1-cCGoHfg>
+    <xmx:1isUYihgQCeVDr3-kAq_Mk3RudqD2Gr_o3pFtlkIFlymhmvjfN4pMQ>
+    <xmx:1isUYtbWCqyVYZH2lMGASRpooP3YL8N-JPeOpnkdvnTqBcODn-1uRw>
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: linux-kernel@vger.kernel.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	stable@vger.kernel.org,
+	Michael Brown <mcb30@ipxe.org>,
+	Wei Liu <wei.liu@kernel.org>,
+	Paul Durrant <paul@xen.org>,
 	"David S. Miller" <davem@davemloft.net>,
 	Jakub Kicinski <kuba@kernel.org>,
-	Antoine Tenart <atenart@kernel.org>,
-	"moderated list:XEN HYPERVISOR INTERFACE" <xen-devel@lists.xenproject.org>,
-	"open list:NETWORKING DRIVERS" <netdev@vger.kernel.org>
-Subject: Re: [PATCH] xen/netfront: destroy queues before real_num_tx_queues
- is zeroed
-Message-ID: <YhQrIWyJ4hhEVVNb@mail-itl>
-References: <20220220134202.2187485-1-marmarek@invisiblethingslab.com>
- <3786b4ef-68e7-5735-0841-fcbae07f7e54@suse.com>
+	xen-devel@lists.xenproject.org (moderated list:XEN NETWORK BACKEND DRIVER),
+	netdev@vger.kernel.org (open list:XEN NETWORK BACKEND DRIVER)
+Subject: [PATCH v2 2/2] Revert "xen-netback: Check for hotplug-status existence before watching"
+Date: Tue, 22 Feb 2022 01:18:17 +0100
+Message-Id: <20220222001817.2264967-2-marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20220222001817.2264967-1-marmarek@invisiblethingslab.com>
+References: <20220222001817.2264967-1-marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="+tkBggBQeIzPYW+u"
-Content-Disposition: inline
-In-Reply-To: <3786b4ef-68e7-5735-0841-fcbae07f7e54@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Organization: Invisible Things Lab
+Content-Transfer-Encoding: 8bit
 
+This reverts commit 2afeec08ab5c86ae21952151f726bfe184f6b23d.
 
---+tkBggBQeIzPYW+u
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 22 Feb 2022 01:15:29 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Juergen Gross <jgross@suse.com>
-Cc: linux-kernel@vger.kernel.org, stable@vger.kernel.org,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Antoine Tenart <atenart@kernel.org>,
-	"moderated list:XEN HYPERVISOR INTERFACE" <xen-devel@lists.xenproject.org>,
-	"open list:NETWORKING DRIVERS" <netdev@vger.kernel.org>
-Subject: Re: [PATCH] xen/netfront: destroy queues before real_num_tx_queues
- is zeroed
+The reasoning in the commit was wrong - the code expected to setup the
+watch even if 'hotplug-status' didn't exist. In fact, it relied on the
+watch being fired the first time - to check if maybe 'hotplug-status' is
+already set to 'connected'. Not registering a watch for non-existing
+path (which is the case if hotplug script hasn't been executed yet),
+made the backend not waiting for the hotplug script to execute. This in
+turns, made the netfront think the interface is fully operational, while
+in fact it was not (the vif interface on xen-netback side might not be
+configured yet).
 
-On Mon, Feb 21, 2022 at 07:27:32AM +0100, Juergen Gross wrote:
-> I checked some of the call paths leading to xennet_close(), and all of
-> those contained an ASSERT_RTNL(), so it seems the rtnl_lock is already
-> taken here. Could you test with adding an ASSERT_RTNL() in
-> xennet_destroy_queues()?
+This was a workaround for 'hotplug-status' erroneously being removed.
+But since that is reverted now, the workaround is not necessary either.
 
-Tried that and no issues spotted.
+More discussion at
+https://lore.kernel.org/xen-devel/afedd7cb-a291-e773-8b0d-4db9b291fa98@ipxe.org/T/#u
 
-> In case your test with the added ASSERT_RTNL() doesn't show any
-> problem you can add my:
->=20
-> Reviewed-by: Juergen Gross <jgross@suse.com>
+Cc: stable@vger.kernel.org
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+---
+I believe this is the same issue as discussed at
+https://lore.kernel.org/xen-devel/20220113111946.GA4133739@dingwall.me.uk/
+Cc: James Dingwall <james-xen@dingwall.me.uk
+Cc: Michael Brown <mcb30@ipxe.org>
+---
+ drivers/net/xen-netback/xenbus.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-Thanks.
+diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/xenbus.c
+index 3fad58d22155..990360d75cb6 100644
+--- a/drivers/net/xen-netback/xenbus.c
++++ b/drivers/net/xen-netback/xenbus.c
+@@ -824,15 +824,11 @@ static void connect(struct backend_info *be)
+ 	xenvif_carrier_on(be->vif);
+ 
+ 	unregister_hotplug_status_watch(be);
+-	if (xenbus_exists(XBT_NIL, dev->nodename, "hotplug-status")) {
+-		err = xenbus_watch_pathfmt(dev, &be->hotplug_status_watch,
+-					   NULL, hotplug_status_changed,
+-					   "%s/%s", dev->nodename,
+-					   "hotplug-status");
+-		if (err)
+-			goto err;
++	err = xenbus_watch_pathfmt(dev, &be->hotplug_status_watch, NULL,
++				   hotplug_status_changed,
++				   "%s/%s", dev->nodename, "hotplug-status");
++	if (!err)
+ 		be->have_hotplug_status_watch = 1;
+-	}
+ 
+ 	netif_tx_wake_all_queues(be->vif->dev);
+ 
+-- 
+2.31.1
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---+tkBggBQeIzPYW+u
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmIUKyEACgkQ24/THMrX
-1yzoYwf9Gx9pcUVHvqm8ndGiV2gIwVCSdgcmDurruCiP0HW8l4A1u6WAWRPs1qRH
-ZBdfn5OSBZwFZu0tVetXVnmWmMAKjqWAHNIF+DlptXue1GzEMa8QIy3NA5iplpOc
-E4xTNf2rn4tEhz4lunfATqTeLKtju19I0w8CD/szjq5CcqOTyHbOV5PodTF2ZdhY
-yAxGB/KTZUROG+8+orCaqmv9RTe0nob293WI8FpAGr4+QowJKuTsygIX+tryKzIA
-2baSea6s+ZjOg0d4NSGSEbU9u8o0NibNiiuT5cAVRHVkVpUNwn4bs3H7K7P25fZe
-RrtbyZfzDTeTV5TfKUQwWl9q6tORaw==
-=Kebw
------END PGP SIGNATURE-----
-
---+tkBggBQeIzPYW+u--
 
