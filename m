@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BE7DC4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBEC1C4167B
 	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279288.477003 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.279290.477012 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKs-0001xz-PE; Fri, 25 Feb 2022 15:16:46 +0000
+	id 1nNcKt-0002B6-N9; Fri, 25 Feb 2022 15:16:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279288.477003; Fri, 25 Feb 2022 15:16:46 +0000
+Received: by outflank-mailman (output) from mailman id 279290.477012; Fri, 25 Feb 2022 15:16:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKs-0001u7-B5; Fri, 25 Feb 2022 15:16:46 +0000
-Received: by outflank-mailman (input) for mailman id 279288;
+	id 1nNcKt-00028j-4i; Fri, 25 Feb 2022 15:16:47 +0000
+Received: by outflank-mailman (input) for mailman id 279290;
  Fri, 25 Feb 2022 15:16:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNcIK-0006fy-6j
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:08 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 93144fa5-964d-11ec-8539-5f4723681683;
- Fri, 25 Feb 2022 16:14:06 +0100 (CET)
+ id 1nNcIV-0006fy-S4
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:19 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 98a8c4b6-964d-11ec-8539-5f4723681683;
+ Fri, 25 Feb 2022 16:14:16 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 93144fa5-964d-11ec-8539-5f4723681683
+X-Inumbo-ID: 98a8c4b6-964d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645802046;
+  d=citrix.com; s=securemail; t=1645802056;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=qfHKg9nbI8bb67OsGXzXE6dg5Icrubx3wFHR9cPr4Ug=;
-  b=JOM1eAyBzQhkTQTHJ7qH5GJYVBuC0ggkJcoMoFIxp5gD0bpbmUF26rcb
-   NspPOkmjG/b5LY459efDRhRnW9/ev6Q4ssBIYAbhOiZfOoqI0Gksi2WW7
-   nCT6NWZe0CqKm4js2BuUDx0fITkMRC/vWdi8MRI8eN+eLqglxiuBecUKq
-   c=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=3vyVdZEIG+4X/H2vZhQNrYK/eTmrh5e09O/takxxz8Q=;
+  b=DJphRGFJ4yDCMBd+gcJQLTpHLXrTJaTLHWPKpv+yPEwPMxiVYmiLrKhT
+   YQVIeY8QMZ2luy/87Bly72XIaqSXqxpt7BN6CIeHEHnq1qUNKnJHjpNQt
+   KUSvs4IX8r2hRfWAY/UVzG4I82oxmRM6Aepj6qditrl0XM7Gvv2Xgyv10
+   0=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 64433057
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 64998429
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:RvLwoKth63cf0m/xIS7FaE0WEufnVCxeMUV32f8akzHdYApBsoF/q
- tZmKWuAbvuKNjCgeYwnaYqyoB9TvpDWz4ViGwtspH00RXtE+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZhSAgk/nOHNIQMcacUsxLbVYMpBwJ1FQyw4bVvqYy2YLjW1nX5
- IuoyyHiEATNNwBcYzp8B52r8HuDjNyq0N/PlgVjDRzjlAa2e0g9VPrzF4noR5fLatA88tqBb
- /TC1NmEElbxpH/BPD8HfoHTKSXmSpaKVeSHZ+E/t6KK2nCurQRquko32WZ1he66RFxlkvgoo
- Oihu6BcRi81D4HepvYdcCVXLCRnHJ8BoZ39LnWg5Jn7I03uKxMAwt1rBUAye4YZ5vx2ESdF8
- vlwxDIlN07ZwbjsmfTiF7cq1p9LwMrDZevzvllpyy3ZCvA3B4jOWazQ6fdT3Ssqh9AIFvHbD
- yYcQWQzME+bO0AQUrsRIJxks8ikqWPbTwR370CVp4E9/HHP4iUkhdABN/KKI4fXFK25hH2wu
- Wbu72n/RBYAO7S3yzWf9Wm3rvTShi69U4UXfJWo+/gvjFCNy2g7DBwNSUD9sfS/klS5Wd9UN
- woT4CVGkEQp3BX1FJ+nBUT++SPa+E5HMzZNLwEkwB285rjq8Qa6Omc7SydgWpt/lvU5SCN/g
- zdlgOjVLTBotbSUT1eU+bGVsS6+NEApEIMSWcMXZVBbuoe++enfmjqKF48+S/Dt0rUZDBmtm
- 2jikcQou1kEYSfnPY2f9EuPvT+jr4OhouUdtlSOBTLNAu+UieeYi22UBbrzsacowGWxFADpU
- J04dy62trFm4XalznHlfQn1NOv1j8tpyRWF6bKVI7Ev9i6251modp1K7Td1KS9Ba5hYJGC1O
- ROO4VsJvPe/2UdGi4ctMupd7OxwkMDd+SnNDKiIPrKinLArHON4wM2eTRHJhD28+KTduao+J
- Y2aYa6R4YUyUsxaIM6Nb75Fi9cDn3lmrUuKHMyT50n3gNK2OS/OIZ9YYQTmUwzMxP7dyOkj2
- 40EbJXiJtQ2eLCWXxQ7BqZIdQFadSVgXMuuwyGVH8baSjdb9KgaI6e56dscl0ZNxcy5Ss+gE
- qmBZ3Jl
-IronPort-HdrOrdr: A9a23:/ZdQs6juOLFlGwpM6jE7g79l13BQXtwji2hC6mlwRA09TySZ//
- rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
- JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+IronPort-Data: A9a23:R+nmIqAPGP9/ehVW/xbjw5YqxClBgxIJ4kV8jS/XYbTApDInhTUCy
+ TEYXjyCP/iIN2TyeNB/boW38UNV68fWm9NjQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+ xA2M4GYRCwMZiaA4E/raNANlFEkvU2ybuOU5NXsZ2YgHWeIdA970Ug5w7Rj39Yy6TSEK1jlV
+ e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhK1
+ dxysYyLQzs7EfThp7QmFDBeAXFXaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwqKtXrO4UO/Glt1zjDAd4tQIzZQrWM7thdtNs1rp4STKeOO
+ 5BIAdZpRCrgZz5TH3MvM6MRzNfx1yDVWTx4pWvA8MLb5ECMlVcsgdABKuH9YceWTM9YmkKZo
+ GPu/GnjBBwectuFxlKt7XaEluLJ2yThV+o6FrKi8eVxqEaO3WFVAxoTPXOrrP/8hkOgVtZ3L
+ 00P5jFovaU07FasTNT2Q1u/unHslhwWVsdUEuY6wBqQ0aeS6AGcbkAGUzpAZdoOpMIwAzsw2
+ Te0c8jBXGI19ufPEDTEq+nS/Wja1TUpwXEqXjINcg8V2NPfsq5qoy2fdZFKFrzlp4igcd3v+
+ AyioC87jrQVqMcE0aSn4FzK6w6RSoj1oh0dvVuOAD/8hu9tTMv8PtHztwCHhRpVBNvBFjG8U
+ G44d99yBQzkJbWEj2SzTeoEB9lFDN7VYWSH0TaD83TMnglBGkJPn6gMsVmSx28za67onAMFh
+ meJ6Gu9A7cJYROXgVdfOd7ZNijT5fGI+S7Zfv7VdMFSRZN6aRWK+ipjDWbJgTywzxR1zfxnY
+ c/DGSpJMZr8If42pNZRb71AuYLHOwhknT+DLXwF507PPUWiiI69Fu5ebQrmghER56KYugTFm
+ +uzxOPRoyizpNbWO3GNmaZKdAhiBSFiWfje9pwGHsbec1EOMDxwVJfsLUYJJtUNc1J9zbyTo
+ BlQmyZwlTLCuJEwAV7SOyA7Nei2Bs4XQLBSFXVEAGtEEkMLOe6HhJrzvbNtFVX73ISPFcJJc
+ sQ=
+IronPort-HdrOrdr: A9a23:TrvJb6mEGxZLBNc4akvo38aCA0LpDfIq3DAbv31ZSRFFG/Fxl6
+ iV88jzsiWE7wr5OUtQ4OxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
+ YET0EXMqyXMbEQt6jHCWeDf+rIuOP3k5yVuQ==
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="64433057"
+   d="scan'208";a="64998429"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 19/29] libs/guest: rework CFLAGS
-Date: Fri, 25 Feb 2022 15:13:11 +0000
-Message-ID: <20220225151321.44126-20-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Juergen Gross
+	<jgross@suse.com>
+Subject: [XEN PATCH v2 23/29] .gitignore: Cleanup ignores of tools/libs/*/{headers.chk,*.pc}
+Date: Fri, 25 Feb 2022 15:13:15 +0000
+Message-ID: <20220225151321.44126-24-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
 References: <20220225151321.44126-1-anthony.perard@citrix.com>
@@ -90,94 +94,78 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Remove '-Werror -Wmissing-progress -I./include $(CFLAGS_xeninclude)',
-those flags are already added via "libs.mk".
-
-Flag "-I." isn't needed, we just need to fix the #include of
-"xg_core.h" as this header isn't expected to be installed.
-
-Make use of "-iquote" instead of '-I' for double-quote included
-headers.
-
-Also, regroup the CFLAGS into the same place in the makefile.
-
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
 
 Notes:
     v2:
-    - reviewed
+    - move new .gitignore entries to the one in tools/libs/
 
- tools/libs/guest/Makefile          | 20 +++++++++-----------
- tools/libs/guest/xg_offline_page.c |  2 +-
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ .gitignore            | 26 --------------------------
+ tools/libs/.gitignore |  2 ++
+ 2 files changed, 2 insertions(+), 26 deletions(-)
 
-diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
-index 7707d4300f..4f2373101f 100644
---- a/tools/libs/guest/Makefile
-+++ b/tools/libs/guest/Makefile
-@@ -28,18 +28,13 @@ OBJS-y       += xg_core.o
- OBJS-$(CONFIG_X86) += xg_core_x86.o
- OBJS-$(CONFIG_ARM) += xg_core_arm.o
- 
--CFLAGS += -I$(XEN_libxenctrl)
--
- vpath %.c ../../../xen/common/libelf
--CFLAGS += -I../../../xen/common/libelf
- 
- LIBELF_OBJS += libelf-tools.o libelf-loader.o
- LIBELF_OBJS += libelf-dominfo.o
- 
- OBJS-y += $(LIBELF_OBJS)
- 
--$(LIBELF_OBJS) $(LIBELF_OBJS:.o=.opic): CFLAGS += -Wno-pointer-sign
--
- ifeq ($(CONFIG_X86),y) # Add libx86 to the build
- vpath %.c ../../../xen/lib/x86
- 
-@@ -70,10 +65,12 @@ OBJS-y                 += xg_dom_decompress_unsafe_xz.o
- OBJS-y                 += xg_dom_decompress_unsafe_zstd.o
- endif
- 
--CFLAGS   += -Werror -Wmissing-prototypes
--CFLAGS   += -I. -I./include $(CFLAGS_xeninclude)
--CFLAGS   += -D__XEN_TOOLS__
--CFLAGS   += -include $(XEN_ROOT)/tools/config.h
-+CFLAGS += -D__XEN_TOOLS__
-+CFLAGS += -include $(XEN_ROOT)/tools/config.h
-+CFLAGS += -iquote ../../../xen/common/libelf
-+
-+# To be able to include xc_private.h
-+CFLAGS += -iquote $(XEN_libxenctrl)
- 
- # Needed for posix_fadvise64() in xc_linux.c
- CFLAGS-$(CONFIG_Linux) += -D_GNU_SOURCE
-@@ -92,8 +89,9 @@ ZLIB_CFLAGS :=
- ZLIB_LIBS :=
- endif
- 
--xg_dom_bzimageloader.o: CFLAGS += $(ZLIB_CFLAGS)
--xg_dom_bzimageloader.opic: CFLAGS += $(ZLIB_CFLAGS)
-+xg_dom_bzimageloader.o xg_dom_bzimageloader.opic: CFLAGS += $(ZLIB_CFLAGS)
-+
-+$(LIBELF_OBJS) $(LIBELF_OBJS:.o=.opic): CFLAGS += -Wno-pointer-sign
- 
- LIBHEADER := xenguest.h
- 
-diff --git a/tools/libs/guest/xg_offline_page.c b/tools/libs/guest/xg_offline_page.c
-index cfe0e2d537..c594fdba41 100644
---- a/tools/libs/guest/xg_offline_page.c
-+++ b/tools/libs/guest/xg_offline_page.c
-@@ -25,7 +25,7 @@
- #include <stdlib.h>
- #include <unistd.h>
- #include <sys/time.h>
--#include <xg_core.h>
-+#include "xg_core.h"
- 
- #include "xc_private.h"
- #include "xg_private.h"
+diff --git a/.gitignore b/.gitignore
+index 3da56594c5..7a04dc3a89 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -105,26 +105,8 @@ tools/config.cache
+ config/Tools.mk
+ config/Stubdom.mk
+ config/Docs.mk
+-tools/libs/toolcore/headers.chk
+-tools/libs/toolcore/xentoolcore.pc
+-tools/libs/toollog/headers.chk
+-tools/libs/toollog/xentoollog.pc
+-tools/libs/evtchn/headers.chk
+-tools/libs/evtchn/xenevtchn.pc
+-tools/libs/gnttab/headers.chk
+-tools/libs/gnttab/xengnttab.pc
+-tools/libs/hypfs/headers.chk
+-tools/libs/hypfs/xenhypfs.pc
+-tools/libs/call/headers.chk
+-tools/libs/call/xencall.pc
+ tools/libs/ctrl/libxenctrl.map
+-tools/libs/ctrl/xencontrol.pc
+-tools/libs/foreignmemory/headers.chk
+-tools/libs/foreignmemory/xenforeignmemory.pc
+-tools/libs/devicemodel/headers.chk
+-tools/libs/devicemodel/xendevicemodel.pc
+ tools/libs/guest/libxenguest.map
+-tools/libs/guest/xenguest.pc
+ tools/libs/guest/xc_bitops.h
+ tools/libs/guest/xc_core.h
+ tools/libs/guest/xc_core_arm.h
+@@ -144,21 +126,13 @@ tools/libs/light/testidl.c
+ tools/libs/light/test_timedereg
+ tools/libs/light/test_fdderegrace
+ tools/libs/light/tmp.*
+-tools/libs/light/xenlight.pc
+-tools/libs/stat/headers.chk
+ tools/libs/stat/libxenstat.map
+-tools/libs/stat/xenstat.pc
+-tools/libs/store/headers.chk
+ tools/libs/store/list.h
+ tools/libs/store/utils.h
+-tools/libs/store/xenstore.pc
+ tools/libs/store/xs_lib.c
+-tools/libs/util/*.pc
+ tools/libs/util/libxlu_cfg_y.output
+ tools/libs/util/libxenutil.map
+-tools/libs/vchan/headers.chk
+ tools/libs/vchan/libxenvchan.map
+-tools/libs/vchan/xenvchan.pc
+ tools/debugger/gdb/gdb-6.2.1-linux-i386-xen/*
+ tools/debugger/gdb/gdb-6.2.1/*
+ tools/debugger/gdb/gdb-6.2.1.tar.bz2
+diff --git a/tools/libs/.gitignore b/tools/libs/.gitignore
+index 4a13126144..1ad7c7f0cb 100644
+--- a/tools/libs/.gitignore
++++ b/tools/libs/.gitignore
+@@ -1 +1,3 @@
++*/*.pc
++*/headers.chk
+ */headers.lst
 -- 
 Anthony PERARD
 
