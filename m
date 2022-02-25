@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30B1C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279285.476990 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C07C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.279282.476988 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKr-0001hh-K7; Fri, 25 Feb 2022 15:16:45 +0000
+	id 1nNcKr-0001cg-6B; Fri, 25 Feb 2022 15:16:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279285.476990; Fri, 25 Feb 2022 15:16:45 +0000
+Received: by outflank-mailman (output) from mailman id 279282.476988; Fri, 25 Feb 2022 15:16:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKr-0001f1-9r; Fri, 25 Feb 2022 15:16:45 +0000
-Received: by outflank-mailman (input) for mailman id 279285;
+	id 1nNcKq-0001cA-Rm; Fri, 25 Feb 2022 15:16:44 +0000
+Received: by outflank-mailman (input) for mailman id 279282;
  Fri, 25 Feb 2022 15:16:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNcIH-0007Bf-8N
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:05 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90344314-964d-11ec-8eb9-a37418f5ba1a;
- Fri, 25 Feb 2022 16:14:03 +0100 (CET)
+ id 1nNcIP-0006fy-R5
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:13 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 95676d2b-964d-11ec-8539-5f4723681683;
+ Fri, 25 Feb 2022 16:14:11 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,49 +38,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90344314-964d-11ec-8eb9-a37418f5ba1a
+X-Inumbo-ID: 95676d2b-964d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645802043;
+  d=citrix.com; s=securemail; t=1645802051;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Qi8ktRfGxKz6TVNBfNc+szyw4+rNfchyhf2q4Nw7GMs=;
-  b=F4n+rKBh+eAVFe6BXWJtVlf0DVGDoWrWGGqNwnlV3Rm9cLmP4WslD5L9
-   yVj9EjemY8P9TnhQdRq6ZwENXP7InJO+JHWYzIxQNdX4k3IVoRFkKdSJl
-   kr8In1+nV5y6G4QdUQqM2KOlp5VbO8xM3JwxpuM043JWQ4cFV7DmglupJ
-   0=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=lstnw/Cy7kkWvWE8Q3+svCB9Cq3t+tCtdqmShje5Wb4=;
+  b=iCo1ZrnSy60EYtvdgjJU+nbJliVULEDnAgYxBv1dyaWTbEWtGMvTDrgY
+   +VO52MMv5C5bnCm12+9EH9HspnMIan27OtMi/ZQp/1M37G5/6sUFr3/Ra
+   HoVjFvGXocHKxhJHKMXCcgAcu2FTKVb8CZyv9HukXnF+msuxAqGaX0BhJ
+   I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 64433034
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 67264776
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:4qtPwK3DISLmD7J/6fbD5blxkn2cJEfYwER7XKvMYLTBsI5bp2YCz
- TZNDzjSOfneMWT3Kt1zPN+0pEpUvsDTzd9gHldqpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkjk7xdOCn9xGQ7InQLlbGILes1htZGEk1EE/NtTo5w7Rj2tQy3IDja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /1xj467FiUxN5beicMsUiVqTSxbYYJ/reqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNaiCO
- 5FCMWEzBPjGSwRKGg8PI5UaoMipqGLAagZjik+vo6VitgA/yyQuieOwYbI5YOeiWsF9jkue4
- GXc8AzREhwccdCS1zeB2natnfPU2zP2XpoIE7+1/eIsh0ecrlH/EzVPCwH9+6PgzBfjBZQPc
- CT45xbCs4AOzl6gEfvlViaqsVm1vyIuBdd1T8IDvVTlJrXv3y6VAW0NTzhkYdMgtdMrSTFC6
- mJlj+8FFhQ07uTLFCv1GqO86GrrZHNLdTNqiTosEFNdi+QPtr3fmf4mojxLNKeuxuP4Fjjrq
- 9xhhHhv3u5D5SLnOkjSwLwmv95OjsSYJuLWzl+ONo5A0u+fTNT0D2BPwQKGhcus1K7DEjG8U
- IEswqByFtwmA5CXjzCqS+4QBryv7PvtGGSC3QMwQ8B9qmz1oybLkWVsDNdWfhYB3iEsI2KBX
- aMukVkJuM870IWCN8ebnL5d++x1lPO9RLwJp9jfb8ZUY4gZSeN01HoGWKJk5Ei0yBJEufhmY
- f+zKJ/wZV5HWfUP5GfnHI81jO50rh3SMEuOHPgXOTz8iuHADJNUIJ9YWGazghcRt/vV8F2Iq
- I8Eb6NnCXx3CYXDX8UeyqZLRXhiEJTxLcmowyCLXoZv+jZbJVw=
-IronPort-HdrOrdr: A9a23:ghfykK9AO/Fxt7JMo09uk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
- re+sjztCWE8Ar5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
- 9bAtFD4bbLbGSS4/yU3ODBKadD/OW6
+IronPort-Data: A9a23:CLdS6ameic96krdP7A9bnRfo5gz7JkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIfXWGDMqneN2WgL4wiYImx9RhTu8DXnINmSFdq/nw9ECMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2EoLd9IR2NYy24DjWV7V4
+ 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
+ v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
+ NtxWZOYTgEOI47epskmUD5gMnFTOoFE4aPACC3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
+ RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3s3d8zTbfHLA+TIrKWani7t5ExjYgwMtJGJ4yY
+ uJHNmAxMEufPXWjPH8lWIB5hcOWmULEfj5mr3+7te0d+ELMmVkZPL/Fb4OOJ43iqd9utlmcj
+ nLL+SL+GB5yHN6Q0z2e6Vq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcU97iaQ6bjqzj2aIVAlHhNGRN4/qMgfEGlCO
+ kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdRGmoq
+ w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSKhRqjBNzAJrVkg
+ JTis5LPhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43bptbJWa1P
+ ReL4Vs5CHpv0J2CN/4fj2WZUZlC8EQdPY69CqC8giRmOPCdizNrDAkxPBXNjggBYWAnkL0lO
+ IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
+ I0BXyZLoj0CONDDjt7/qtZCfQhXdiFgXfgbaaV/L4a+H+avI0l5Y9e5/F/rU9UNc3h9/gsQw
+ kyAZw==
+IronPort-HdrOrdr: A9a23:2FKlp6qBOvzFfhuOvMkasUcaV5oteYIsimQD101hICG8cqSj+P
+ xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
+ 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="64433034"
+   d="scan'208";a="67264776"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 10/29] tools/xenpaging: Rework makefile
-Date: Fri, 25 Feb 2022 15:13:02 +0000
-Message-ID: <20220225151321.44126-11-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
+	<jgross@suse.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 21/29] libs/stat: Fix and rework python-bindings build
+Date: Fri, 25 Feb 2022 15:13:13 +0000
+Message-ID: <20220225151321.44126-22-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
 References: <20220225151321.44126-1-anthony.perard@citrix.com>
@@ -88,72 +90,100 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-- Rename $(SRCS) to $(OBJS-y), we don't need to collect sources.
-- Rename $(IBINS) to $(TARGETS)
-- Stop cleaning "xen" and non-set variable $(LIB).
+Fix the dependency on the library, $(SHLIB) variable doesn't exist
+anymore.
+
+Rework dependency on the include file, we can let `swig` generate the
+dependency for us with the use of "-M*" flags.
+
+The xenstat.h file has moved so we need to fix the include location.
+
+Rather than relaying on the VCS to create an empty directory for us,
+we can create one before generating the *.c file for the bindings.
+
+Make use of generic variable names to build a shared library from a
+source file: CFLAGS, LDFLAGS, and LDLIBS.
+
+Fix python's specific *flags by using python-config, and add them to
+generic flags variables: CFLAGS, LDLIBS.
+
+To build a shared library, we need to build the source file with
+"-fPIC", which was drop by 6d0ec05390 (tools: split libxenstat into
+new tools/libs/stat directory).
+
+The source file generated by swig seems to be missing a prototype for
+the "init" function, so we need "-Wno-missing-prototypes" in order to
+build it.
+
+Add some targets to .PHONY.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
- tools/xenpaging/Makefile | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/tools/xenpaging/Makefile b/tools/xenpaging/Makefile
-index 04743b335c..e2ed9eaa3f 100644
---- a/tools/xenpaging/Makefile
-+++ b/tools/xenpaging/Makefile
-@@ -5,33 +5,33 @@ CFLAGS += $(CFLAGS_libxentoollog) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(
- LDLIBS += $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenstore) $(PTHREAD_LIBS)
- LDFLAGS += $(PTHREAD_LDFLAGS)
+Notes:
+    v2:
+    - reviewed
+
+ tools/libs/stat/Makefile                    | 27 +++++++++++++++------
+ tools/libs/stat/bindings/swig/python/.empty |  1 -
+ 2 files changed, 19 insertions(+), 9 deletions(-)
+ delete mode 100644 tools/libs/stat/bindings/swig/python/.empty
+
+diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
+index 998435d494..b8d75810fc 100644
+--- a/tools/libs/stat/Makefile
++++ b/tools/libs/stat/Makefile
+@@ -49,23 +49,34 @@ install-bindings: install-perl-bindings install-python-bindings
+ .PHONY: uninstall-bindings
+ uninstall-bindings: uninstall-perl-bindings uninstall-python-bindings
  
--POLICY    = default
-+POLICY   := default
+-$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) include/xenstat.h
++$(BINDINGS): libxenstat.so
  
--SRC      :=
--SRCS     += file_ops.c xenpaging.c policy_$(POLICY).c
--SRCS     += pagein.c
-+OBJS-y   := file_ops.o
-+OBJS-y   += xenpaging.o
-+OBJS-y   += policy_$(POLICY).o
-+OBJS-y   += pagein.o
+-SWIG_FLAGS=-module xenstat -Iinclude -I.
++SWIG_FLAGS = -module xenstat -I$(XEN_INCLUDE)
++SWIG_FLAGS += -MMD -MP -MF .$(if $(filter-out .,$(@D)),$(subst /,@,$(@D))@)$(@F).d
  
- CFLAGS   += -Werror
- CFLAGS   += -Wno-unused
+ # Python bindings
+-PYTHON_VERSION=$(PYTHON:python%=%)
+-PYTHON_FLAGS=-I/usr/include/python$(PYTHON_VERSION) -lpython$(PYTHON_VERSION)
+ $(PYMOD): $(PYSRC)
+ $(PYSRC): bindings/swig/xenstat.i
+-	swig -python $(SWIG_FLAGS) -outdir $(@D) -o $(PYSRC) $<
+-
++	mkdir -p $(@D)
++	swig -python $(SWIG_FLAGS) -outdir $(@D) -o $@ $<
++
++$(PYLIB): CFLAGS += $(shell $(PYTHON)-config --includes)
++$(PYLIB): CFLAGS += -fPIC
++$(PYLIB): CFLAGS += -Wno-missing-prototypes
++$(PYLIB): LDFLAGS += $(SHLIB_LDFLAGS)
++$(PYLIB): LDLIBS := $(shell $(PYTHON)-config --libs)
++$(PYLIB): LDLIBS += $(LDLIBS_libxenstat)
+ $(PYLIB): $(PYSRC)
+-	$(CC) $(CFLAGS) $(LDFLAGS) $(PYTHON_FLAGS) $(SHLIB_LDFLAGS) -lxenstat -o $@ $< $(APPEND_LDFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
  
--OBJS     = $(SRCS:.c=.o)
--IBINS    = xenpaging
-+TARGETS := xenpaging
++.PHONY: python-bindings
+ python-bindings: $(PYLIB) $(PYMOD)
  
--all: $(IBINS)
-+all: $(TARGETS)
- 
--xenpaging: $(OBJS)
-+xenpaging: $(OBJS-y)
- 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(APPEND_LDFLAGS)
- 
- install: all
- 	$(INSTALL_DIR) -m 0700 $(DESTDIR)$(XEN_PAGING_DIR)
- 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
--	$(INSTALL_PROG) $(IBINS) $(DESTDIR)$(LIBEXEC_BIN)
-+	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC_BIN)
- 
- uninstall:
--	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(IBINS))
-+	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(TARGETS))
- 
- clean:
--	rm -f *.o *~ $(DEPS_RM) xen TAGS $(IBINS) $(LIB)
-+	rm -f *.o *~ $(DEPS_RM) TAGS $(TARGETS)
- 
- distclean: clean
- 
-@@ -39,6 +39,6 @@ distclean: clean
- 
- .PHONY: TAGS
- TAGS:
--	etags -t $(SRCS) *.h
-+	etags -t *.c *.h
- 
- -include $(DEPS_INCLUDE)
+-pythonlibdir=$(prefix)/lib/python$(PYTHON_VERSION)/site-packages
++pythonlibdir = $(shell $(PYTHON) -c \
++	       'import distutils.sysconfig as cfg; \
++	        print(cfg.get_python_lib(False, False, prefix="$(prefix)"))')
++
++.PHONY: install-python-bindings
+ install-python-bindings: $(PYLIB) $(PYMOD)
+ 	$(INSTALL_PROG) $(PYLIB) $(DESTDIR)$(pythonlibdir)/_xenstat.so
+ 	$(INSTALL_PROG) $(PYMOD) $(DESTDIR)$(pythonlibdir)/xenstat.py
+diff --git a/tools/libs/stat/bindings/swig/python/.empty b/tools/libs/stat/bindings/swig/python/.empty
+deleted file mode 100644
+index 2a8dd4274d..0000000000
+--- a/tools/libs/stat/bindings/swig/python/.empty
++++ /dev/null
+@@ -1 +0,0 @@
+-This directory is empty; this file is included to prevent version control systems from removing the directory.
 -- 
 Anthony PERARD
 
