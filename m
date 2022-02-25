@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0C07C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279282.476988 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441EAC43217
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.279286.476997 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKr-0001cg-6B; Fri, 25 Feb 2022 15:16:45 +0000
+	id 1nNcKs-0001oB-1M; Fri, 25 Feb 2022 15:16:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279282.476988; Fri, 25 Feb 2022 15:16:45 +0000
+Received: by outflank-mailman (output) from mailman id 279286.476997; Fri, 25 Feb 2022 15:16:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKq-0001cA-Rm; Fri, 25 Feb 2022 15:16:44 +0000
-Received: by outflank-mailman (input) for mailman id 279282;
- Fri, 25 Feb 2022 15:16:42 +0000
+	id 1nNcKr-0001l2-O7; Fri, 25 Feb 2022 15:16:45 +0000
+Received: by outflank-mailman (input) for mailman id 279286;
+ Fri, 25 Feb 2022 15:16:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNcIP-0006fy-R5
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:13 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 95676d2b-964d-11ec-8539-5f4723681683;
- Fri, 25 Feb 2022 16:14:11 +0100 (CET)
+ id 1nNcIX-0006fy-SP
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:21 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 9af70695-964d-11ec-8539-5f4723681683;
+ Fri, 25 Feb 2022 16:14:20 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 95676d2b-964d-11ec-8539-5f4723681683
+X-Inumbo-ID: 9af70695-964d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645802051;
+  d=citrix.com; s=securemail; t=1645802060;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=lstnw/Cy7kkWvWE8Q3+svCB9Cq3t+tCtdqmShje5Wb4=;
-  b=iCo1ZrnSy60EYtvdgjJU+nbJliVULEDnAgYxBv1dyaWTbEWtGMvTDrgY
-   +VO52MMv5C5bnCm12+9EH9HspnMIan27OtMi/ZQp/1M37G5/6sUFr3/Ra
-   HoVjFvGXocHKxhJHKMXCcgAcu2FTKVb8CZyv9HukXnF+msuxAqGaX0BhJ
-   I=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=zUPvHCMrHWztCdZF7XbOEKTRFq0ToqxKkhG98hXZpoI=;
+  b=YrlaRQD5Aa33JuOGuqUBaqA1iN5OncTLT6WFT7Qy+8Jhm/zVADYaiUkv
+   K/WIJpXKea3sZKGFD+c3EwABmxaEeZd3t9Z77FTWaCnN2kvQwgtg9ZpNL
+   8475PuhrOUiWgzGJt7elX/Ukau4IN7RtOOiaDSx9cvVGWCuAkzWgL7dvq
+   4=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 67264776
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 64433090
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:CLdS6ameic96krdP7A9bnRfo5gz7JkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xIfXWGDMqneN2WgL4wiYImx9RhTu8DXnINmSFdq/nw9ECMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2EoLd9IR2NYy24DjWV7V4
- 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
- v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
- NtxWZOYTgEOI47epskmUD5gMnFTOoFE4aPACC3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
- RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3s3d8zTbfHLA+TIrKWani7t5ExjYgwMtJGJ4yY
- uJHNmAxMEufPXWjPH8lWIB5hcOWmULEfj5mr3+7te0d+ELMmVkZPL/Fb4OOJ43iqd9utlmcj
- nLL+SL+GB5yHN6Q0z2e6Vq3m/TC2yj8Xeo6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
- FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcU97iaQ6bjqzj2aIVAlHhNGRN4/qMgfEGlCO
- kCyo/vlAjlmsbuwQH2b96uJoT7aBRX5PVPudgdfE1JbvoCLTJUby0uWE409SPLdYsjdRGmoq
- w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQSKhRqjBNzAJrVkg
- JTis5LPhAzpJcvQ/BFhuM1XQNmUCw+taVUwe2JHEZg77CiK8HW+Z41W6zwWDB43bptbJWa1P
- ReL4Vs5CHpv0J2CN/4fj2WZUZlC8EQdPY69CqC8giRmOPCdizNrDAkxPBXNjggBYWAnkL0lO
- IfzTCpfJS1yNEiT9xLvH711+eZynkgWnDqPLbimn0XP+efPPxa9FOZaWGZim8hktctoVi2Oq
- I0BXyZLoj0CONDDjt7/qtZCfQhXdiFgXfgbaaV/L4a+H+avI0l5Y9e5/F/rU9UNc3h9/gsQw
- kyAZw==
-IronPort-HdrOrdr: A9a23:2FKlp6qBOvzFfhuOvMkasUcaV5oteYIsimQD101hICG8cqSj+P
- xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
- 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
+IronPort-Data: A9a23:OzsjYq5KZJr+Pz+KkCm9EgxRtCDHchMFZxGqfqrLsTDasY5as4F+v
+ mJNCzrVb67YNDPwLd53O4q18ElTu57RyNNlHQtrqihgHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuVGuG96yE6j8lkf5KkYAL+EnkZqTRMFWFw0XqPp8Zj2tQy2YLjXlvX0
+ T/Pi5a31GGNimYc3l08s8pvmDs31BglkGpF1rCWTakjUG72zxH5PrpGTU2CByKQrr1vNvy7X
+ 47+IISRpQs1yfuP5uSNyd4XemVSKlLb0JPnZnB+A8BOiTAazsA+PzpS2FPxpi67hh3Q9+2dx
+ umhurSdSRYXI/HNnt4PCRp0HiRMEJBnwePIdC3XXcy7lyUqclPpyvRqSko3IZcZ6qB8BmQmG
+ f4wcW5XKErZ3qTvnez9GrIEascLdaEHOKsWvG1gyjfIS+4rW5nZT43B5MNC3Sd2jcdLdRrbT
+ 5RFNWE0NEWYC/FJEkoaJokFsceQvHfiXhJTpVPOo5omuFGGmWSd15CyaYGIK7RmX/59gUKwt
+ m/AuWPjDXkyL9Wa1DeBtG6sh+XGgCfncI8UD/i85/lsxlqJyQQ7GBAQEFe2v/S9okq/QM5Eb
+ VwZ/DI0qqo//1DtScPyNzW6r2SDpQU0QMdLHqsx7wTl90bPy1/HXC5eFGcHMYF48p9tLdA36
+ rOXt/7pFAJy7LyTc2DH9ZuZqAGfBAkscWBXMEfoUjA5y9XkpYgyiDfGQdBiDLO5g7XJJN3g/
+ 9yZhHNg3utO1Kbnw43+pAma2Gz0+vAlWyZovl2/Y46z0u9uiGdJjaSM4EOT0/tPJZ3xorKp7
+ CldwJj2AAzj4PiweM2xrAclQODBCxWtamS0bbtT838JrWXFF5mLJ9043d2GDB01WvvogBewC
+ KMphStf5YVIIFyhZrJtboS6BqwClPa8SIu5D6yJNoIWOvCdkTNrGgk0NCZ8OEi3zSARfVwXY
+ 8/HIa5A815AYUiY8NZGb7hEiuJ6rszP7WjSWYr633yaPUm2PxaopUM+GALWNIgRtfrcyC2Mq
+ oo3H5bamn13DbylCgGKoNF7ELz/BSVibXwAg5cMLbDrz8sPMDxJNsI9Npt6I901x/kOz7yQl
+ px/M2cBoGfCabT8AV3iQhhehHnHB/6TcVpT0fQQAGuV
+IronPort-HdrOrdr: A9a23:86t1jq2sqHlSKlmk7QFdrgqjBLQkLtp133Aq2lEZdPRUGvb2qy
+ nIpoV96faUskdpZJhOo7G90cW7LE80sKQFg7X5Xo3SODUO2lHJEGgK1+KLqFfd8m/Fh4tgPM
+ 9bAs5D4bbLY2SS4/yX3ODBKadC/OW6
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="67264776"
+   d="scan'208";a="64433090"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 21/29] libs/stat: Fix and rework python-bindings build
-Date: Fri, 25 Feb 2022 15:13:13 +0000
-Message-ID: <20220225151321.44126-22-anthony.perard@citrix.com>
+	<jgross@suse.com>, Wei Liu <wl@xen.org>, Samuel Thibault
+	<samuel.thibault@ens-lyon.org>
+Subject: [XEN PATCH v2 26/29] tools/xenstore: introduce Makefile.common to be used by stubdom
+Date: Fri, 25 Feb 2022 15:13:18 +0000
+Message-ID: <20220225151321.44126-27-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
 References: <20220225151321.44126-1-anthony.perard@citrix.com>
@@ -90,32 +91,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Fix the dependency on the library, $(SHLIB) variable doesn't exist
-anymore.
-
-Rework dependency on the include file, we can let `swig` generate the
-dependency for us with the use of "-M*" flags.
-
-The xenstat.h file has moved so we need to fix the include location.
-
-Rather than relaying on the VCS to create an empty directory for us,
-we can create one before generating the *.c file for the bindings.
-
-Make use of generic variable names to build a shared library from a
-source file: CFLAGS, LDFLAGS, and LDLIBS.
-
-Fix python's specific *flags by using python-config, and add them to
-generic flags variables: CFLAGS, LDLIBS.
-
-To build a shared library, we need to build the source file with
-"-fPIC", which was drop by 6d0ec05390 (tools: split libxenstat into
-new tools/libs/stat directory).
-
-The source file generated by swig seems to be missing a prototype for
-the "init" function, so we need "-Wno-missing-prototypes" in order to
-build it.
-
-Add some targets to .PHONY.
+Also change stubdom to depends on Makefile.common.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Juergen Gross <jgross@suse.com>
@@ -125,65 +101,126 @@ Notes:
     v2:
     - reviewed
 
- tools/libs/stat/Makefile                    | 27 +++++++++++++++------
- tools/libs/stat/bindings/swig/python/.empty |  1 -
- 2 files changed, 19 insertions(+), 9 deletions(-)
- delete mode 100644 tools/libs/stat/bindings/swig/python/.empty
+ stubdom/Makefile               |  4 ++--
+ tools/xenstore/Makefile        | 33 +++------------------------------
+ tools/xenstore/Makefile.common | 33 +++++++++++++++++++++++++++++++++
+ 3 files changed, 38 insertions(+), 32 deletions(-)
+ create mode 100644 tools/xenstore/Makefile.common
 
-diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
-index 998435d494..b8d75810fc 100644
---- a/tools/libs/stat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -49,23 +49,34 @@ install-bindings: install-perl-bindings install-python-bindings
- .PHONY: uninstall-bindings
- uninstall-bindings: uninstall-perl-bindings uninstall-python-bindings
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index fbc63a5063..6b804824ba 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -371,10 +371,10 @@ endef
  
--$(BINDINGS): $(SHLIB) $(SHLIB_LINKS) include/xenstat.h
-+$(BINDINGS): libxenstat.so
+ $(foreach lib,$(STUB_LIBS),$(eval $(call BUILD_lib,$(lib))))
  
--SWIG_FLAGS=-module xenstat -Iinclude -I.
-+SWIG_FLAGS = -module xenstat -I$(XEN_INCLUDE)
-+SWIG_FLAGS += -MMD -MP -MF .$(if $(filter-out .,$(@D)),$(subst /,@,$(@D))@)$(@F).d
+-xenstore/stamp: $(XEN_ROOT)/tools/xenstore/Makefile
++xenstore/stamp: $(XEN_ROOT)/tools/xenstore/Makefile.common
+ 	$(do_links)
  
- # Python bindings
--PYTHON_VERSION=$(PYTHON:python%=%)
--PYTHON_FLAGS=-I/usr/include/python$(PYTHON_VERSION) -lpython$(PYTHON_VERSION)
- $(PYMOD): $(PYSRC)
- $(PYSRC): bindings/swig/xenstat.i
--	swig -python $(SWIG_FLAGS) -outdir $(@D) -o $(PYSRC) $<
+-xenstorepvh/stamp: $(XEN_ROOT)/tools/xenstore/Makefile
++xenstorepvh/stamp: $(XEN_ROOT)/tools/xenstore/Makefile.common
+ 	$(do_links)
+ 
+ LINK_DIRS := xenstore xenstorepvh $(foreach dir,$(STUB_LIBS),libs-$(XEN_TARGET_ARCH)/$(dir))
+diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
+index 830052c65f..1b66190cc5 100644
+--- a/tools/xenstore/Makefile
++++ b/tools/xenstore/Makefile
+@@ -1,31 +1,7 @@
+ XEN_ROOT=$(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-CFLAGS += -Werror
+-# Include configure output (config.h)
+-CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-CFLAGS += -I./include
+-CFLAGS += $(CFLAGS_libxenevtchn)
+-CFLAGS += $(CFLAGS_libxenctrl)
+-CFLAGS += $(CFLAGS_libxenguest)
+-CFLAGS += $(CFLAGS_libxentoolcore)
+-CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
+-CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
 -
-+	mkdir -p $(@D)
-+	swig -python $(SWIG_FLAGS) -outdir $(@D) -o $@ $<
-+
-+$(PYLIB): CFLAGS += $(shell $(PYTHON)-config --includes)
-+$(PYLIB): CFLAGS += -fPIC
-+$(PYLIB): CFLAGS += -Wno-missing-prototypes
-+$(PYLIB): LDFLAGS += $(SHLIB_LDFLAGS)
-+$(PYLIB): LDLIBS := $(shell $(PYTHON)-config --libs)
-+$(PYLIB): LDLIBS += $(LDLIBS_libxenstat)
- $(PYLIB): $(PYSRC)
--	$(CC) $(CFLAGS) $(LDFLAGS) $(PYTHON_FLAGS) $(SHLIB_LDFLAGS) -lxenstat -o $@ $< $(APPEND_LDFLAGS)
-+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
+-ifdef CONFIG_STUBDOM
+-CFLAGS += -DNO_SOCKETS=1
+-endif
+-
+-XENSTORED_OBJS-y := xenstored_core.o xenstored_watch.o xenstored_domain.o
+-XENSTORED_OBJS-y += xenstored_transaction.o xenstored_control.o
+-XENSTORED_OBJS-y += xs_lib.o talloc.o utils.o tdb.o hashtable.o
+-
+-XENSTORED_OBJS-$(CONFIG_Linux) += xenstored_posix.o
+-XENSTORED_OBJS-$(CONFIG_NetBSD) += xenstored_posix.o
+-XENSTORED_OBJS-$(CONFIG_FreeBSD) += xenstored_posix.o
+-XENSTORED_OBJS-$(CONFIG_MiniOS) += xenstored_minios.o
+-
+-$(XENSTORED_OBJS-y): CFLAGS += $(CFLAGS_libxengnttab)
++include Makefile.common
  
-+.PHONY: python-bindings
- python-bindings: $(PYLIB) $(PYMOD)
+ xenstored: LDLIBS += $(LDLIBS_libxenevtchn)
+ xenstored: LDLIBS += $(LDLIBS_libxengnttab)
+@@ -65,9 +41,6 @@ clients: xenstore $(CLIENTS) xenstore-control
+ xenstored: $(XENSTORED_OBJS-y)
+ 	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
  
--pythonlibdir=$(prefix)/lib/python$(PYTHON_VERSION)/site-packages
-+pythonlibdir = $(shell $(PYTHON) -c \
-+	       'import distutils.sysconfig as cfg; \
-+	        print(cfg.get_python_lib(False, False, prefix="$(prefix)"))')
+-xenstored.a: $(XENSTORED_OBJS-y)
+-	$(AR) cr $@ $^
+-
+ $(CLIENTS): xenstore
+ 	ln -f xenstore $@
+ 
+@@ -81,8 +54,8 @@ xs_tdb_dump: xs_tdb_dump.o utils.o tdb.o talloc.o
+ 	$(CC) $(LDFLAGS) $^ -o $@ $(APPEND_LDFLAGS)
+ 
+ .PHONY: clean
+-clean:
+-	$(RM) *.a *.o $(TARGETS) $(DEPS_RM)
++clean::
++	$(RM) $(TARGETS) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
+diff --git a/tools/xenstore/Makefile.common b/tools/xenstore/Makefile.common
+new file mode 100644
+index 0000000000..21b78b0538
+--- /dev/null
++++ b/tools/xenstore/Makefile.common
+@@ -0,0 +1,33 @@
++# Makefile shared with stubdom
 +
-+.PHONY: install-python-bindings
- install-python-bindings: $(PYLIB) $(PYMOD)
- 	$(INSTALL_PROG) $(PYLIB) $(DESTDIR)$(pythonlibdir)/_xenstat.so
- 	$(INSTALL_PROG) $(PYMOD) $(DESTDIR)$(pythonlibdir)/xenstat.py
-diff --git a/tools/libs/stat/bindings/swig/python/.empty b/tools/libs/stat/bindings/swig/python/.empty
-deleted file mode 100644
-index 2a8dd4274d..0000000000
---- a/tools/libs/stat/bindings/swig/python/.empty
-+++ /dev/null
-@@ -1 +0,0 @@
--This directory is empty; this file is included to prevent version control systems from removing the directory.
++XENSTORED_OBJS-y := xenstored_core.o xenstored_watch.o xenstored_domain.o
++XENSTORED_OBJS-y += xenstored_transaction.o xenstored_control.o
++XENSTORED_OBJS-y += xs_lib.o talloc.o utils.o tdb.o hashtable.o
++
++XENSTORED_OBJS-$(CONFIG_Linux) += xenstored_posix.o
++XENSTORED_OBJS-$(CONFIG_NetBSD) += xenstored_posix.o
++XENSTORED_OBJS-$(CONFIG_FreeBSD) += xenstored_posix.o
++XENSTORED_OBJS-$(CONFIG_MiniOS) += xenstored_minios.o
++
++CFLAGS += -Werror
++# Include configure output (config.h)
++CFLAGS += -include $(XEN_ROOT)/tools/config.h
++CFLAGS += -I./include
++CFLAGS += $(CFLAGS_libxenevtchn)
++CFLAGS += $(CFLAGS_libxenctrl)
++CFLAGS += $(CFLAGS_libxenguest)
++CFLAGS += $(CFLAGS_libxentoolcore)
++CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
++CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
++
++ifdef CONFIG_STUBDOM
++CFLAGS += -DNO_SOCKETS=1
++endif
++
++$(XENSTORED_OBJS-y): CFLAGS += $(CFLAGS_libxengnttab)
++
++xenstored.a: $(XENSTORED_OBJS-y)
++	$(AR) cr $@ $^
++
++clean::
++	$(RM) *.a *.o
 -- 
 Anthony PERARD
 
