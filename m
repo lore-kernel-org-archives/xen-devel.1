@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E21C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279299.477028 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C077AC433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:17:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.279305.477066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKv-0002dE-E4; Fri, 25 Feb 2022 15:16:49 +0000
+	id 1nNcL0-0003tv-Kh; Fri, 25 Feb 2022 15:16:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279299.477028; Fri, 25 Feb 2022 15:16:49 +0000
+Received: by outflank-mailman (output) from mailman id 279305.477066; Fri, 25 Feb 2022 15:16:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKu-0002XG-RI; Fri, 25 Feb 2022 15:16:48 +0000
-Received: by outflank-mailman (input) for mailman id 279299;
- Fri, 25 Feb 2022 15:16:46 +0000
+	id 1nNcKz-0003q4-QY; Fri, 25 Feb 2022 15:16:53 +0000
+Received: by outflank-mailman (input) for mailman id 279305;
+ Fri, 25 Feb 2022 15:16:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNcIf-0007Bf-NL
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:29 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9e8be35f-964d-11ec-8eb9-a37418f5ba1a;
- Fri, 25 Feb 2022 16:14:27 +0100 (CET)
+ id 1nNcIM-0007Bf-Qc
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:10 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 935c9a50-964d-11ec-8eb9-a37418f5ba1a;
+ Fri, 25 Feb 2022 16:14:07 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e8be35f-964d-11ec-8eb9-a37418f5ba1a
+X-Inumbo-ID: 935c9a50-964d-11ec-8eb9-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645802067;
+  d=citrix.com; s=securemail; t=1645802047;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=kVfi8O5fUs5vOwYORwAwSsIcv2wq/KeyJm02u0brLh8=;
-  b=B13VtlZNDjEy4Lrb9Kncz0B4+D3s/zKtSIl04Sx2+vyytNnTwG81aSR3
-   i+MH9Y8Tk3/7SUmkAfZpCoh3u32CBzDijK0NzepCPpKw2lqR7Dbqo50q5
-   5cm0JDqcfdzS1mlTbY4LQpp4vcOcLAIYRoQjhlgLT2+YRktpLvx83auid
-   k=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=+VKqQ9Ban5DJzksG49npHQWFkvG/L4HTbI6R5Xjk91w=;
+  b=iPDDwPFn3wbQgYeYWuWznLlzn0mwqcxXKNpXICeCeTcZbik1UUduZ6hQ
+   WMmmsJLhNUe7mmW0HwNfX2B3pYlnLA8DpYvzPgJ3R6POxsnCTu4lb07Q1
+   RQr102rGZeZTA+GzznVbIbCmCXMKHhC+enQrW9WRiVhhMXK7uRCt7wWGd
+   A=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 64998443
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 65407580
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:42XmkqOCEpmHjzzvrR3fl8FynXyQoLVcMsEvi/4bfWQNrUor3zEHx
- mcbDD2CPv/eYGX2ed0naIm0oBlVsZfVmNZlSgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+IronPort-Data: A9a23:LM/w6qOgkd8+srrvrR3fl8FynXyQoLVcMsEvi/4bfWQNrUpw0GMAz
+ DFKWGGFO/qJN2T9ctEiO4rjpEgP7Z/dn9VmHAto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
  ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFcMpBsJ00o5wbZj2NMw27BVPivW0
  T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z0
- /t3t7GoaAkSIrzhnt8+fitID2ZYMvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gQQaePN
- 5ZFMlKDajzcURNWZQhQNa4sxvXvo0vwVAVJ72ua8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
- G2u12jwHBwyLtGUzjuBtHW2iYfnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
- GRNpHBo9/JrshX2EJ+tBHVUvUJooDYHdeBSPvUb5jqR24fS2CW0NHgYCRhOPYlOWNANeRQm0
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z5
+ vpRip+0ZBoVMfPGt+QhWQdYT38uFPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gQQKqGO
+ JdJMVKDajyaaCRUFUwKFqgBjdeSilnUTgdBi1ia8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
+ G2u12b2GBYBL/SE1CGItHmrg4fnjS79HY4fCrC83vprm0GIgHweDgUMUlm2quX/jVSxM++zM
+ GRNpHBo9/JrshX2EJ+tBHVUvUJooDYydMZvEOkX9T2ClKD74zqTGGhYEG5oPYlOWNANeRQm0
  VqAntXMDDNpsaGIRX/1yop4vQ9eKgBOczZcOHZsoR8tpoC6/dpt1k6nosNLTfbt5uAZDw0c1
  NxjQMIWo7wIxfAG2Kyglbwsq2L9/8OZJuLZC+i+Y45E0u+bTNL0D2BLwQKChRqlEGp/ZgPQ1
  JTjs5LDhN3i9bnXyESwrBwlRdlFHcqtPjzGmkJIFJI87Tmr8HPLVdkOvGwheB41b55cIWeBj
  KrvVeV5vs470JyCN/IfXm5MI55ykfiI+SrNDJg4keaikrAuLVTarUmClGab3nz3kVhErE3ME
  czzTCpYNl5DUf4P5GPvH481iOZ3rghjlTK7bc2qlHyPjOvBDEN5vJ9YaTNimMhit/jayOgUm
- v4CX/a3J+J3C7WvMnGKqtdIdTjn7xETXPjLliCeTcbbSiIOJY3rI6K5LW8JE2C9o5loqw==
-IronPort-HdrOrdr: A9a23:0gL9g6jOi35dwX2lbuVCiV4eEHBQXuIji2hC6mlwRA09TySZ//
- rBoB19726TtN9xYgBZpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
- 0QF5SWYOeAdGSS5vya3ODXKbkdKaG8gcKVuds=
+ v4CX/a3J+J3C7WvMnGKqtdIdTjn7xETXPjLliCeTcbbSiIOJY3rI6W5LW8JE2C9o5loqw==
+IronPort-HdrOrdr: A9a23:x3xGZayhnHQSaCmhimyDKrPwFL1zdoMgy1knxilNoRw8SKKlfq
+ eV7ZImPH7P+U4ssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
+ 4JSdkGNDSaNzlHZKjBjzVQa+xQouW6zA==
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="64998443"
+   d="scan'208";a="65407580"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Christian Lindig
-	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v2 29/29] tools/ocaml: fix build dependency target
-Date: Fri, 25 Feb 2022 15:13:21 +0000
-Message-ID: <20220225151321.44126-30-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
+	<jgross@suse.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 18/29] libs/guest: rename ELF_OBJS to LIBELF_OBJS
+Date: Fri, 25 Feb 2022 15:13:10 +0000
+Message-ID: <20220225151321.44126-19-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
 References: <20220225151321.44126-1-anthony.perard@citrix.com>
@@ -90,196 +89,43 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-They are two competiting spelling for the variable holding the path to
-"tools/ocaml", $(TOPLEVEL) and $(OCAML_TOPLEVEL). The "Makefile.rules"
-which is included in all ocaml Makefiles have one rule which make use
-of that variable which is then sometime unset. When building
-"ocaml/xenstored", make isn't capable of generating ".ocamldep.make"
-because $(TOPLEVEL) isn't defined in this case.
-
-This can fail with an error like this when paths.ml have been
-regenerated:
-    Error: Files define.cmx and paths.cmx
-       make inconsistent assumptions over interface Paths
-
-This patch fix ".ocamldep.make" rule by always spelling the variable
-$(OCAML_TOPLEVEL).
+It seems a better name. Later, we will introduce LIBX86_OBJS to
+collect lib/x86/* objects.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
 
 Notes:
     v2:
-    - new patch
+    - fix typo in patch description
+    - reviewed
 
- tools/ocaml/libs/eventchn/Makefile   | 8 ++++----
- tools/ocaml/libs/mmap/Makefile       | 8 ++++----
- tools/ocaml/libs/xb/Makefile         | 8 ++++----
- tools/ocaml/libs/xc/Makefile         | 8 ++++----
- tools/ocaml/libs/xentoollog/Makefile | 8 ++++----
- tools/ocaml/libs/xl/Makefile         | 8 ++++----
- tools/ocaml/libs/xs/Makefile         | 8 ++++----
- tools/ocaml/Makefile.rules           | 2 +-
- 8 files changed, 29 insertions(+), 29 deletions(-)
+ tools/libs/guest/Makefile | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/tools/ocaml/libs/eventchn/Makefile b/tools/ocaml/libs/eventchn/Makefile
-index 154efd4a8e..7362a28d9e 100644
---- a/tools/ocaml/libs/eventchn/Makefile
-+++ b/tools/ocaml/libs/eventchn/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
+diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
+index 17eb0ebf4b..7707d4300f 100644
+--- a/tools/libs/guest/Makefile
++++ b/tools/libs/guest/Makefile
+@@ -33,13 +33,12 @@ CFLAGS += -I$(XEN_libxenctrl)
+ vpath %.c ../../../xen/common/libelf
+ CFLAGS += -I../../../xen/common/libelf
  
- CFLAGS += $(CFLAGS_libxenevtchn) $(CFLAGS_xeninclude)
+-ELF_OBJS-y += libelf-tools.o libelf-loader.o
+-ELF_OBJS-y += libelf-dominfo.o
++LIBELF_OBJS += libelf-tools.o libelf-loader.o
++LIBELF_OBJS += libelf-dominfo.o
  
-@@ -31,5 +31,5 @@ install: $(LIBS) META
- uninstall:
- 	$(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xeneventchn
+-OBJS-y += $(ELF_OBJS-y)
++OBJS-y += $(LIBELF_OBJS)
  
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
+-$(ELF_OBJS-y): CFLAGS += -Wno-pointer-sign
+-$(ELF_OBJS-y:.o=.opic): CFLAGS += -Wno-pointer-sign
++$(LIBELF_OBJS) $(LIBELF_OBJS:.o=.opic): CFLAGS += -Wno-pointer-sign
  
-diff --git a/tools/ocaml/libs/mmap/Makefile b/tools/ocaml/libs/mmap/Makefile
-index df45819df5..a621537135 100644
---- a/tools/ocaml/libs/mmap/Makefile
-+++ b/tools/ocaml/libs/mmap/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
- 
- OBJS = xenmmap
- INTF = $(foreach obj, $(OBJS),$(obj).cmi)
-@@ -26,5 +26,5 @@ install: $(LIBS) META
- uninstall:
- 	$(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xenmmap
- 
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
- 
-diff --git a/tools/ocaml/libs/xb/Makefile b/tools/ocaml/libs/xb/Makefile
-index be4499147e..ff4428af6d 100644
---- a/tools/ocaml/libs/xb/Makefile
-+++ b/tools/ocaml/libs/xb/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
- 
- CFLAGS += -I../mmap
- CFLAGS += $(CFLAGS_libxenctrl) # For xen_mb()
-@@ -49,4 +49,4 @@ install: $(LIBS) META
- uninstall:
- 	$(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xenbus
- 
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
-diff --git a/tools/ocaml/libs/xc/Makefile b/tools/ocaml/libs/xc/Makefile
-index b6da4fdbaf..67acc46bee 100644
---- a/tools/ocaml/libs/xc/Makefile
-+++ b/tools/ocaml/libs/xc/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
- 
- CFLAGS += -I../mmap $(CFLAGS_libxenctrl) $(CFLAGS_libxenguest)
- CFLAGS += $(APPEND_CFLAGS)
-@@ -38,4 +38,4 @@ xenctrl_abi_check.h: abi-check xenctrl_stubs.c xenctrl.ml
- 
- GENERATED_FILES += xenctrl_abi_check.h
- 
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
-diff --git a/tools/ocaml/libs/xentoollog/Makefile b/tools/ocaml/libs/xentoollog/Makefile
-index 593f9e9e9d..9ede2fd124 100644
---- a/tools/ocaml/libs/xentoollog/Makefile
-+++ b/tools/ocaml/libs/xentoollog/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
- 
- # allow mixed declarations and code
- CFLAGS += -Wno-declaration-after-statement
-@@ -62,4 +62,4 @@ install: $(LIBS) META
- uninstall:
- 	ocamlfind remove -destdir $(OCAMLDESTDIR) xentoollog
- 
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
-diff --git a/tools/ocaml/libs/xl/Makefile b/tools/ocaml/libs/xl/Makefile
-index cbe1569cc5..7c1c4edced 100644
---- a/tools/ocaml/libs/xl/Makefile
-+++ b/tools/ocaml/libs/xl/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
- 
- # ignore unused generated functions and allow mixed declarations and code
- CFLAGS += -Wno-unused -Wno-declaration-after-statement
-@@ -68,4 +68,4 @@ install: $(LIBS) META
- uninstall:
- 	$(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xenlight
- 
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
-diff --git a/tools/ocaml/libs/xs/Makefile b/tools/ocaml/libs/xs/Makefile
-index 572efb76c4..e934bbb550 100644
---- a/tools/ocaml/libs/xs/Makefile
-+++ b/tools/ocaml/libs/xs/Makefile
-@@ -1,6 +1,6 @@
--TOPLEVEL=$(CURDIR)/../..
--XEN_ROOT=$(TOPLEVEL)/../..
--include $(TOPLEVEL)/common.make
-+OCAML_TOPLEVEL=$(CURDIR)/../..
-+XEN_ROOT=$(OCAML_TOPLEVEL)/../..
-+include $(OCAML_TOPLEVEL)/common.make
- 
- OCAMLINCLUDE += -I ../xb/
- OCAMLOPTFLAGS += -for-pack Xenstore
-@@ -43,7 +43,7 @@ install: $(LIBS) META
- uninstall:
- 	$(OCAMLFIND) remove -destdir $(OCAMLDESTDIR) xenstore
- 
--include $(TOPLEVEL)/Makefile.rules
-+include $(OCAML_TOPLEVEL)/Makefile.rules
- 
- genpath-target = $(call buildmakevars2module,paths.ml)
- $(eval $(genpath-target))
-diff --git a/tools/ocaml/Makefile.rules b/tools/ocaml/Makefile.rules
-index abfbc64ce0..7e4db457a1 100644
---- a/tools/ocaml/Makefile.rules
-+++ b/tools/ocaml/Makefile.rules
-@@ -44,7 +44,7 @@ META: META.in
- 
- ALL_OCAML_OBJ_SOURCES=$(addsuffix .ml, $(ALL_OCAML_OBJS))
- 
--.ocamldep.make: $(ALL_OCAML_OBJ_SOURCES) Makefile $(TOPLEVEL)/Makefile.rules
-+.ocamldep.make: $(ALL_OCAML_OBJ_SOURCES) Makefile $(OCAML_TOPLEVEL)/Makefile.rules
- 	$(call quiet-command, $(OCAMLDEP) $(ALL_OCAML_OBJ_SOURCES) *.mli $o,MLDEP,)
- 
- clean: $(CLEAN_HOOKS)
+ ifeq ($(CONFIG_X86),y) # Add libx86 to the build
+ vpath %.c ../../../xen/lib/x86
 -- 
 Anthony PERARD
 
