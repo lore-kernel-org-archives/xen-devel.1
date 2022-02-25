@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0C11C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 14:55:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279170.476745 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EC55C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:13:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.279178.476767 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNbzV-0004Fq-9J; Fri, 25 Feb 2022 14:54:41 +0000
+	id 1nNcHt-0006vk-4O; Fri, 25 Feb 2022 15:13:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279170.476745; Fri, 25 Feb 2022 14:54:41 +0000
+Received: by outflank-mailman (output) from mailman id 279178.476767; Fri, 25 Feb 2022 15:13:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNbzV-0004Fj-6E; Fri, 25 Feb 2022 14:54:41 +0000
-Received: by outflank-mailman (input) for mailman id 279170;
- Fri, 25 Feb 2022 14:54:39 +0000
+	id 1nNcHt-0006vd-07; Fri, 25 Feb 2022 15:13:41 +0000
+Received: by outflank-mailman (input) for mailman id 279178;
+ Fri, 25 Feb 2022 15:13:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNbzT-0004Fd-OZ
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 14:54:39 +0000
+ id 1nNcHr-0006fy-1B
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:13:39 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d9ae8d33-964a-11ec-8539-5f4723681683;
- Fri, 25 Feb 2022 15:54:38 +0100 (CET)
+ id 81401bbd-964d-11ec-8539-5f4723681683;
+ Fri, 25 Feb 2022 16:13:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,95 +38,139 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d9ae8d33-964a-11ec-8539-5f4723681683
+X-Inumbo-ID: 81401bbd-964d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645800878;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=IaJt2L4vKz2TOg5dOyMZ7VgsPRoU2r5KtiivYrAd/QY=;
-  b=OHd5L1wlC8QXB6wHy5hXJj3/l0sZEquEWuMvdO6BtOo0+je6nisWL5XM
-   DYNA72pKX0R9wrEbfGOmqmbif0fP39nT+KLD0jvV4jfMkthkNGMUwnHsP
-   vTdz8RUIBHS7yycYgs91McNMIisc6MS//5hirT8mZI/UTjC53crdgMIfV
-   A=;
+  d=citrix.com; s=securemail; t=1645802017;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=e4dSMew7ThkfUT4VBhxHq8D2hkxwuVvIslum+Yj9ZTA=;
+  b=ZFdXX2wSzk61xpbrtkxhazU3pLODbgJyrkpmt0aORNUirUMtjbJ93W0X
+   RAJDtAF1W7n3UMETtbCwA6eGSGZH5sb6vjisIQgL++kYSO0zvmN4f1JAW
+   /SFfrqjxfX4/96Os9zGKRTweuWSwmQhhdPORnvTGWym7fEZ00dgMJsM8B
+   o=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 64888347
+X-MesageID: 64890228
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:wpOJKqy3ZWvQLAgsSCp6t+cbxirEfRIJ4+MujC+fZmUNrF6WrkUAz
- DAXDWmBafeLZjDzetpwOtnj/UwE6JHXx4AyGwNrqSAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGX9JZS5LwbZj2NYy24XhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NpliIOfaAADOb31nacSXkQBPghVepFG9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DNYUDunZm3HfBAOwvW5zrSKTW/95Imjw3g6iiGN6AO
- 5pJOWEzM3wsZTUfFEVQDZckv9vyi1TlVgVqsX6zgK4otj27IAtZj+G2bYu9lsaxbd5Ogk+Sq
- 2bC/mL4KhIXLtqSzXyC6H3ErvDLtTP2XsQVDrLQ3vx3hFyewEQDBRtQUkG0ydGph0j7V99BJ
- kg8/is1sbN05EGtVsP6XRCzvDiDpBF0c9haHvA+6QqN4rHJ+AvfDW8BJgOtc/R/6pVwH2Zzk
- AbUwZW5XlSDrYF5V1qg6Zi1qhm1KREQbmAPOHYpZCBC39ns9dRbYg30cv5vF6u8j9vQED72w
- iyXoCVWu4j/nfLnxI3gowmZ3mvESozhC1dsu16JBj7NAhZROdb9D7FE/2Q3+hqpwGyxalCa9
- EYJlMGFhAzlJcHczXfdKAnh8VzA2hpkDNE+qQI+d3XC3270k5JGQWy2yGsvTKuOGpxZEQIFm
- GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQPsUuKFbboXk2PRb4M4XRfK4Ey/BX1
- XCzK5vEMJrnIf4/kGreqxk1i9fHORzSNUuMHMumnnxLIJKVZWKPSKdtDbd9RrtR0U9wmy2Mq
- 4w3H5LTk313CbSiCgGKod97BQ1bdhATWMGpw/G7g8bee2KK7kl6UKSPqV7gEqQ495loehDgp
- SnsChcFkwOk3RUq62yiMxheVV8mZr4nxVpTAMDmFQ/AN6QLCWp30JoiSg==
-IronPort-HdrOrdr: A9a23:Y7l/S6/BNp3+5YPZcABuk+DUI+orL9Y04lQ7vn2YSXRuHPBw8P
- re+MjztCWE7gr5N0tBpTntAsW9qBDnhPtICOsqTNSftWDd0QPCRuxfBOPZslrd8kbFl9K1u5
- 0OT0EHMqyTMWRH
+IronPort-Data: A9a23:+mI2eKNid+sPdhzvrR3Ol8FynXyQoLVcMsEvi/4bfWQNrUoi0TEPz
+ jZKWjjUOPmCY2HyLo11aI7k9EkFvZ/XydUwTQto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFcMpBsJ00o5wbZj2NMw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z5
+ 8lIiZi8WBcQYY7hmcEQAl5JFjtvBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gQQaaPP
+ 5BDOVKDajz+Yz9pKE8mVal9t/mNuUfSIhBRgnG88P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
+ G2u13T0BFQWOcKSzRKB82mwnanfkCXjQoUQGbaksPlwjzWuKnc7UUNMEwHh+L/g1xD4C4k3x
+ 1EoFjQGgrQ3yEinX8nEAD6VoVuJ71kNXsBBKrhvgO2S8Zb87wGcD2kCazdObt06qcM7LQAXO
+ k+1c8DBXmI27uDMIZ6J3vLN9G7pZ3BJRYMXTXJcFWM4D8/fTJbfZ/4lZvJqC+aLg9L8AlkcK
+ Bja/XFl193/YSPmvphXHGwrYRrw9/AlrSZvv207u15JCCsjNeZJgKTytDDmAQ5odtrxc7V4l
+ CFsdzKixO4PF4qRsyeGXf8AGrqkj97cbmGB3gI2Q8R5r2z1k5JGQWy2yGsvTKuOGpxZEQIFn
+ WeJ4V8BjHOtFCHCgVBLj3KZVJ1xkPmI+SXNXfHIdNteCqWdhyfclByCkXW4hji3+GB1yPlXE
+ c7CLa6EUCZLYYw6nWHeb7pMjtcWKtUWmDq7qWbTlE/8j9JzpRe9FN84Dbd5RrthvfPc/V6Mq
+ I432gnj40w3bdASqxL/qeY7RW3m51BgbXwqg6S7rtK+Hzc=
+IronPort-HdrOrdr: A9a23:otMmpqBLcDW9H/DlHemq55DYdb4zR+YMi2TC1yhKJiC9Ffbo8P
+ xG/c5rrCMc5wxxZJhNo7290ey7MBHhHP1OkO0s1NWZPDUO0VHAROoJ0WKh+UyEJ8SXzJ866U
+ 4KScZD4bPLYWSS9fyKgzWFLw==
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="64888347"
+   d="scan'208";a="64890228"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH] build: fix auto defconfig rule
-Date: Fri, 25 Feb 2022 14:54:08 +0000
-Message-ID: <20220225145409.41323-1-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 03/29] tools/examples: cleanup Makefile
+Date: Fri, 25 Feb 2022 15:12:55 +0000
+Message-ID: <20220225151321.44126-4-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
+References: <20220225151321.44126-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-We should only run "defconfig" if ".config" is missing. Commit
-317c98cb91 have added a dependency on "tools/fixdep", so make would
-start runnning "defconfig" also when "tools/fixdep" is newer than
-".config" and thus overwrite any changes made by a developer.
-Reintroduce intended behavior of the rule to only generate a default
-Kconfig when ".config" is missing.
+Don't check if a target exist before installing it. For directory,
+install doesn't complain, and for file it would prevent from updating
+them. Also remove the existing loop and instead install all files with
+a single call to $(INSTALL_DATA).
 
-Fixes: 317c98cb91 ("build: hook kconfig into xen build system")
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Remove XEN_CONFIGS-y which isn't used.
+
+Remove "build" target.
+
+Add an empty line after the first comment. The comment isn't about
+$(XEN_READMES), it is about the makefile as a whole.
+
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/Makefile | 11 +++--------
- 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index 133b382f86..ed4891daf1 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -243,15 +243,10 @@ ifeq ($(need-config),y)
- # changes are detected.
- -include include/config/auto.conf.cmd
+Notes:
+    v2:
+    - remove existing loops in install targets and use a single call to
+      $(INSTALL_DATA) to install multiple files.
+
+ tools/examples/Makefile | 25 ++++++-------------------
+ 1 file changed, 6 insertions(+), 19 deletions(-)
+
+diff --git a/tools/examples/Makefile b/tools/examples/Makefile
+index 14e24f4cb3..c839bf5603 100644
+--- a/tools/examples/Makefile
++++ b/tools/examples/Makefile
+@@ -2,6 +2,7 @@ XEN_ROOT = $(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
  
--# This allows make to build fixdep before invoking defconfig. We can't use
--# "tools_fixdep" which is a .PHONY target and would force make to call
--# "defconfig" again to update $(KCONFIG_CONFIG).
--tools/fixdep:
--	$(Q)$(MAKE) $(build)=tools tools/fixdep
+ # Xen configuration dir and configs to go there.
++
+ XEN_READMES = README
+ 
+ XEN_CONFIGS += xlexample.hvm
+@@ -10,14 +11,9 @@ XEN_CONFIGS += xlexample.pvhlinux
+ XEN_CONFIGS += xl.conf
+ XEN_CONFIGS += cpupool
+ 
+-XEN_CONFIGS += $(XEN_CONFIGS-y)
 -
- # Allow people to just run `make` as before and not force them to configure
--$(KCONFIG_CONFIG): tools/fixdep
--	$(Q)$(MAKE) $(build)=tools/kconfig defconfig
-+# Only run defconfig if $(KCONFIG_CONFIG) is missing
-+$(KCONFIG_CONFIG): tools_fixdep
-+	$(if $(wildcard $@), , $(Q)$(MAKE) $(build)=tools/kconfig defconfig)
+ .PHONY: all
+ all:
  
- # The actual configuration files used during the build are stored in
- # include/generated/ and include/config/. Update them if .config is newer than
+-.PHONY: build
+-build:
+-
+ .PHONY: install
+ install: all install-readmes install-configs
+ 
+@@ -26,12 +22,8 @@ uninstall: uninstall-readmes uninstall-configs
+ 
+ .PHONY: install-readmes
+ install-readmes:
+-	[ -d $(DESTDIR)$(XEN_CONFIG_DIR) ] || \
+-		$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
+-	set -e; for i in $(XEN_READMES); \
+-	    do [ -e $(DESTDIR)$(XEN_CONFIG_DIR)/$$i ] || \
+-	    $(INSTALL_DATA) $$i $(DESTDIR)$(XEN_CONFIG_DIR); \
+-	done
++	$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
++	$(INSTALL_DATA) $(XEN_READMES) $(DESTDIR)$(XEN_CONFIG_DIR)
+ 
+ .PHONY: uninstall-readmes
+ uninstall-readmes:
+@@ -39,14 +31,9 @@ uninstall-readmes:
+ 
+ .PHONY: install-configs
+ install-configs: $(XEN_CONFIGS)
+-	[ -d $(DESTDIR)$(XEN_CONFIG_DIR) ] || \
+-		$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
+-	[ -d $(DESTDIR)$(XEN_CONFIG_DIR)/auto ] || \
+-		$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)/auto
+-	set -e; for i in $(XEN_CONFIGS); \
+-	    do [ -e $(DESTDIR)$(XEN_CONFIG_DIR)/$$i ] || \
+-	    $(INSTALL_DATA) $$i $(DESTDIR)$(XEN_CONFIG_DIR); \
+-	done
++	$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)
++	$(INSTALL_DIR) $(DESTDIR)$(XEN_CONFIG_DIR)/auto
++	$(INSTALL_DATA) $(XEN_CONFIGS) $(DESTDIR)$(XEN_CONFIG_DIR)
+ 
+ .PHONY: uninstall-configs
+ uninstall-configs:
 -- 
 Anthony PERARD
 
