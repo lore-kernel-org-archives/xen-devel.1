@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6355BC433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:14:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279188.476866 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A033CC433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:14:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.279192.476888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcIA-0001YA-Rz; Fri, 25 Feb 2022 15:13:58 +0000
+	id 1nNcIG-0002VC-4m; Fri, 25 Feb 2022 15:14:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279188.476866; Fri, 25 Feb 2022 15:13:58 +0000
+Received: by outflank-mailman (output) from mailman id 279192.476888; Fri, 25 Feb 2022 15:14:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcIA-0001Xa-Ll; Fri, 25 Feb 2022 15:13:58 +0000
-Received: by outflank-mailman (input) for mailman id 279188;
- Fri, 25 Feb 2022 15:13:56 +0000
+	id 1nNcIF-0002Uw-UM; Fri, 25 Feb 2022 15:14:03 +0000
+Received: by outflank-mailman (input) for mailman id 279192;
+ Fri, 25 Feb 2022 15:14:01 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNcI8-0006fy-FH
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:13:56 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8af36756-964d-11ec-8539-5f4723681683;
- Fri, 25 Feb 2022 16:13:54 +0100 (CET)
+ id 1nNcID-0006fy-KF
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:01 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8ea134df-964d-11ec-8539-5f4723681683;
+ Fri, 25 Feb 2022 16:14:00 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8af36756-964d-11ec-8539-5f4723681683
+X-Inumbo-ID: 8ea134df-964d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645802034;
+  d=citrix.com; s=securemail; t=1645802040;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=PsH7X2yVeRIwZGaTHcN3WknuPqURtR6v199OPOJQpsM=;
-  b=eAU7I2/TBmrBo7+9gVKkVDUdQUjMBvi+VAfFXr9b2rL86r6sLqrC56kh
-   KnfCDi9HVBhVX8v+U5sJ0030DqN9SO1yaV4naZiKlACsfMYjao7mcO0bs
-   scDsZnFSY0eULUv4d/1Vvukv50YTpZt0cZ6IHj7X+3l6fXfANtWD1zcF+
-   A=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=vttR2ey9IAO0GfyGTtbLDlIQNMB1Ci4jM1PA3CUcb8k=;
+  b=KB/LrD5ag1nUBMErNqY/ChMDFWQ/L4vdX+ZeIxXusFwnzpbGIg2j4nux
+   /z7s0Aye08Uk0Sz9lCjJZyu//lXdoGIKw2fx8ZZBctivT0dstXfJ46llD
+   Xq6Vy/JVNiT7PlBKvws8xv+sXYJ3KKFf6q7ZHM8LeIbygqJCs6dvFo+rf
+   0=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 67264742
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 65000303
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:a1ypo6ll8X08Ba4+jWCeC1Po5gyLJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xIcDGDVPPaNYzHwf91ya4jg8EkO6p+AzdQyTAFp+ytnRSMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2EoLd9IR2NYy24DjWV7V4
- 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
- v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
- NtxWZOYSwhwPfHWs78mVSIINw0gZYpp1Jn5CC3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
- RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3s3d8zTbfHLA+TIrKWani7t5ExjYgwMtJGJ4yY
- uJHNmAxMEucOXWjPH82KcwMtaShwUDgTANSkUy3m6At73bcmVkZPL/Fb4OOJ43iqd9utkSXv
- GXd5EziHwoXcteYzFKt8G+oh+LJtTP2XsQVDrLQ3u5nhhify3IeDDUSVECnur+ph0imQdVdJ
- kcIvC00osAa60iDXtT7GRqirxa5UgU0AoQKVbdgsUfUl/SSs13x6nU4oiBpatN/t5MsbmcR0
- GTZu/+3XRtAnJurYCfInluLlg+aNS8QJG4EQCYLSwoZ/tXuyL0OYgLzosVLS/Ds0ICscd3k6
- 3XT9XVl2e1P5SIe//jjpTj6bySQSo8lp+LfziHeRSqb4wxwf+ZJjKT4uAGAvZ6swGt0J2RtX
- UToeeDCvYji7rnXzURhpdnh+pnztp5p1xWG3DZS82EJrWjFxpJaVdk4DMtCDEloKN0YXjTif
- VXevwhcjLcKYif3MvMuP9/pU5xypUQFKTgDfqqFBjapSsIsHDJrAQk0PRLAt4wTuBJEfV4D1
- WezLp/3UCdy5VVPxzuqXeYNuYLHNQhlrV4/savTlkz9uZLHPSb9Ye5cbDOmM7BohIvZ8V692
- 4sOaKO3J+B3DbSWjt//qtVIczjn7BETWPjLliCgXrXbc1o+RTp4UKe5LHFIU9UNopm5X9zgp
- hmVMnK0AnKm7ZEbAW1mskxeVY4=
-IronPort-HdrOrdr: A9a23:IzpogKgnKbNH4PsvRxw1oQxXm3BQXuIji2hC6mlwRA09TySZ//
- rBoB19726TtN9xYgBZpTnuAsm9qB/nmaKdpLNhWItKPzOW31dATrsSjrcKqgeIc0aVm9K1l5
- 0QF5SWYOeAdGSS5vya3ODXKbkdKaG8gcKVuds=
+IronPort-Data: A9a23:D2Lds6sCbDgK7S4cYOrOCa6QDOfnVCxeMUV32f8akzHdYApBsoF/q
+ tZmKWyEaf+MNmbxc4sgao23/UsC75+Gy941Gwptri5kEy5G+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZhSAgk/nOHNIQMcacUsxLbVYMpBwJ1FQyw4bVvqYy2YLjW1nX5
+ IuoyyHiEATNNwBcYzp8B52r8HuDjNyq0N/PlgVjDRzjlAa2e0g9VPrzF4noR5fLatA88tqBb
+ /TC1NmEElbxpH/BPD8HfoHTKSXmSpaKVeSHZ+E/t6KK2nCurQRquko32WZ1he66RFxlkvgoo
+ Oihu6BcRi9uY4bl3/oMCyVBHmZsJvBC+uPcBCKg5Jn7I03uKxMAwt1rBUAye4YZ5vx2ESdF8
+ vlwxDIlN07ZwbjsmfTiF7cq1p9LwMrDZevzvllpyy3ZCvA3B4jOWazQ6fdT3Ssqh9AIFvHbD
+ yYcQWQyNEyYOEUUUrsRII4dssv5nynAShtnjW6Xi/co6nTLzSUkhdABN/KKI4fXFK25hH2wp
+ G3c+H/iKgoHL9HZwj2AmlqzgsffkCW9X5gdfJWo+/gvjFCNy2g7DBwNSUD9sfS/klS5Wd9UN
+ woT4CVGkEQp3BX1FJ+nBUT++SPa+E5HMzZNLwEkwEbQ4YOT/RfBOnEJCSxaNdgk6NQTHyN/g
+ zdlgOjVLTBotbSUT1eU+bGVsS6+NEApEIMSWcMXZVBbuoe++enfmjqKF48+S/Dt0rUZDBmtm
+ 2jikcQou1kEYSfnPY2f9EuPvT+jr4OhouUdtlSOBTLNAu+UieeYi22UBbrzsacowGWxFADpU
+ J04dy62trFm4XalznHlfQn1NOv1j8tpyRWF6bKVI7Ev9i6251modp1K7Td1KS9Ba5hYJGC1O
+ ROO4VsJvPe/2UdGi4ctMupd7OxwkMDd+SnNDKiIPrKinLArHON4wM2eTRHJhD28+KTduao+J
+ Y2aYa6R4YUyUsxaIM6Nb75Fi9cDn3lmrUuKHMyT50n3gNK2OS/OIZ9YYQTmUwzMxP7dyOkj2
+ 40EbJXiJtQ2eLCWXxQ7BqZIdQFadSVgXMuuwyGVH8baSjdb9KgaI6e56dscl0ZNxMy5Ss+gE
+ qmBZ3Jl
+IronPort-HdrOrdr: A9a23:oa4zPK2qm5e5XYUDTcpd6AqjBLgkLtp133Aq2lEZdPRUGvb2qy
+ nIpoV/6faUskd3ZJhOo7G90cW7LE80lqQFg7X5X43DYOCOggLBR+tfBOPZslnd8kbFmNK1u5
+ 0NT0EHMqySMWRH
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="67264742"
+   d="scan'208";a="65000303"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>, "Juergen
- Gross" <jgross@suse.com>, Julien Grall <julien@xen.org>
-Subject: [XEN PATCH v2 11/29] tools/xenstore: Cleanup makefile
-Date: Fri, 25 Feb 2022 15:13:03 +0000
-Message-ID: <20220225151321.44126-12-anthony.perard@citrix.com>
+ Gross" <jgross@suse.com>
+Subject: [XEN PATCH v2 15/29] libs: Remove need for *installlocal targets
+Date: Fri, 25 Feb 2022 15:13:07 +0000
+Message-ID: <20220225151321.44126-16-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
 References: <20220225151321.44126-1-anthony.perard@citrix.com>
@@ -90,201 +90,126 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Regroup *FLAGS together, use $(LDLIBS).
+There is no need for an extra "installlocal" target, we can use
+double-colon rules instead.
 
-Remove $(LDLIBS_xenstored) which was the wrong name name as it doesn't
-decribe how to link to a potential libxenstored.so, instead add the
-value to $(LDLIBS) of xenstored.
-
-Add SYSTEMD_LIBS into $(LDLIBS) instead of $(LDFLAGS).
-
-Remove the "-I." from $(CFLAGS), it shouldn't be needed.
-
-Removed $(CFLAGS-y) and $(LDFLAGS-y). $(CFLAGS-y) is already included
-in $(CFLAGS) and both aren't used anyway.
-
-Rename ALL_TARGETS to TARGETS.
-Only add programmes we want to build in $(TARGETS), not phony-targets
-(replace "clients").
-
-Store all `xenstored` objs into $(XENSTORED_OBJS-y).
-
-Replace one $< by $^ even if there's only one dependency,
-(xenstore-control).
-
-clean: "init-xenstore-domain" isn't built here any more, so stop
-trying to remove it, remove $(TARGETS). Also regroup all files to be
-removed in one command, using $(RM).
-
-Drop $(MAJOR) and $(MINOR), they aren't used anymore.
-
-Drop ".SECONDARY:", it doesn't appear there's intermediate files that
-would be deleted anymore.
-
-Drop "tarball:" target.
+"install-headers" in "libs/store" was introduced for the same reason
+that "installlocal" exist, so it is replaced as well.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
 
 Notes:
     v2:
-    - drop MAJOR and MINOR variables
-    - drop tarball rule
-    - drop ".SECONDARY:"
-    - rework "clean:" to have one command
+    - fix libs/stat/Makefile, make *install targets of the binding also
+      double-column.
 
- tools/xenstore/Makefile | 91 +++++++++++++++++++----------------------
- 1 file changed, 43 insertions(+), 48 deletions(-)
+ tools/libs/light/Makefile | 10 ++--------
+ tools/libs/stat/Makefile  |  8 ++++----
+ tools/libs/store/Makefile | 10 ++--------
+ tools/libs/libs.mk        |  4 ++--
+ 4 files changed, 10 insertions(+), 22 deletions(-)
 
-diff --git a/tools/xenstore/Makefile b/tools/xenstore/Makefile
-index c86278fdb1..830052c65f 100644
---- a/tools/xenstore/Makefile
-+++ b/tools/xenstore/Makefile
-@@ -1,11 +1,7 @@
- XEN_ROOT=$(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
+diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
+index 7c0a5dca85..769e2a83e2 100644
+--- a/tools/libs/light/Makefile
++++ b/tools/libs/light/Makefile
+@@ -239,17 +239,11 @@ libxl-save-helper: $(SAVE_HELPER_OBJS) libxenlight.so
+ testidl: testidl.o libxenlight.so
+ 	$(CC) $(LDFLAGS) -o $@ testidl.o $(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) $(LDLIBS_libxentoolcore) $(APPEND_LDFLAGS)
  
--MAJOR = 3.0
--MINOR = 3
+-install: installlocal $(LIBHEADERS)
 -
- CFLAGS += -Werror
--CFLAGS += -I.
- # Include configure output (config.h)
- CFLAGS += -include $(XEN_ROOT)/tools/config.h
- CFLAGS += -I./include
-@@ -16,71 +12,77 @@ CFLAGS += $(CFLAGS_libxentoolcore)
- CFLAGS += -DXEN_LIB_STORED="\"$(XEN_LIB_STORED)\""
- CFLAGS += -DXEN_RUN_STORED="\"$(XEN_RUN_STORED)\""
+-.PHONY: installlocal
+-installlocal: libxl-save-helper
++install:: $(LIBHEADERS) libxl-save-helper
+ 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+ 	$(INSTALL_PROG) libxl-save-helper $(DESTDIR)$(LIBEXEC_BIN)
  
--CFLAGS  += $(CFLAGS-y)
--LDFLAGS += $(LDFLAGS-y)
-+ifdef CONFIG_STUBDOM
-+CFLAGS += -DNO_SOCKETS=1
-+endif
+-uninstall: uninstalllocal
+-
+-.PHONY: uninstalllocal
+-uninstalllocal:
++uninstall::
+ 	rm -f $(DESTDIR)$(LIBEXEC_BIN)/libxl-save-helper
  
--CLIENTS := xenstore-exists xenstore-list xenstore-read xenstore-rm xenstore-chmod
--CLIENTS += xenstore-write xenstore-ls xenstore-watch
-+XENSTORED_OBJS-y := xenstored_core.o xenstored_watch.o xenstored_domain.o
-+XENSTORED_OBJS-y += xenstored_transaction.o xenstored_control.o
-+XENSTORED_OBJS-y += xs_lib.o talloc.o utils.o tdb.o hashtable.o
- 
--XENSTORED_OBJS = xenstored_core.o xenstored_watch.o xenstored_domain.o
--XENSTORED_OBJS += xenstored_transaction.o xenstored_control.o
--XENSTORED_OBJS += xs_lib.o talloc.o utils.o tdb.o hashtable.o
-+XENSTORED_OBJS-$(CONFIG_Linux) += xenstored_posix.o
-+XENSTORED_OBJS-$(CONFIG_NetBSD) += xenstored_posix.o
-+XENSTORED_OBJS-$(CONFIG_FreeBSD) += xenstored_posix.o
-+XENSTORED_OBJS-$(CONFIG_MiniOS) += xenstored_minios.o
- 
--XENSTORED_OBJS_$(CONFIG_Linux) = xenstored_posix.o
--XENSTORED_OBJS_$(CONFIG_NetBSD) = xenstored_posix.o
--XENSTORED_OBJS_$(CONFIG_FreeBSD) = xenstored_posix.o
--XENSTORED_OBJS_$(CONFIG_MiniOS) = xenstored_minios.o
-+$(XENSTORED_OBJS-y): CFLAGS += $(CFLAGS_libxengnttab)
- 
--XENSTORED_OBJS += $(XENSTORED_OBJS_y)
--LDLIBS_xenstored += -lrt
-+xenstored: LDLIBS += $(LDLIBS_libxenevtchn)
-+xenstored: LDLIBS += $(LDLIBS_libxengnttab)
-+xenstored: LDLIBS += $(LDLIBS_libxenctrl)
-+xenstored: LDLIBS += -lrt
-+xenstored: LDLIBS += $(SOCKET_LIBS)
- 
--ALL_TARGETS = clients
--ifeq ($(XENSTORE_XENSTORED),y)
--ALL_TARGETS += xs_tdb_dump xenstored
-+ifeq ($(CONFIG_SYSTEMD),y)
-+$(XENSTORED_OBJS-y): CFLAGS += $(SYSTEMD_CFLAGS)
-+xenstored: LDLIBS += $(SYSTEMD_LIBS)
- endif
- 
--ifdef CONFIG_STUBDOM
--CFLAGS += -DNO_SOCKETS=1
-+xenstore: LDLIBS += $(LDLIBS_libxenstore)
-+xenstore: LDLIBS += $(LDLIBS_libxentoolcore)
-+xenstore: LDLIBS += $(SOCKET_LIBS)
-+
-+xenstore-control: LDLIBS += $(LDLIBS_libxenstore)
-+xenstore-control: LDLIBS += $(LDLIBS_libxenctrl)
-+xenstore-control: LDLIBS += $(LDLIBS_libxenguest)
-+xenstore-control: LDLIBS += $(LDLIBS_libxentoolcore)
-+xenstore-control: LDLIBS += $(SOCKET_LIBS)
-+
-+CLIENTS := xenstore-exists xenstore-list xenstore-read xenstore-rm xenstore-chmod
-+CLIENTS += xenstore-write xenstore-ls xenstore-watch
-+
-+TARGETS := xenstore $(CLIENTS) xenstore-control
-+ifeq ($(XENSTORE_XENSTORED),y)
-+TARGETS += xs_tdb_dump xenstored
- endif
- 
+ clean: cleanlocal
+diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
+index 6cd0af5239..1aef25a9bb 100644
+--- a/tools/libs/stat/Makefile
++++ b/tools/libs/stat/Makefile
+@@ -78,8 +78,8 @@ uninstall-python-bindings:
+ ifeq ($(XENSTAT_PYTHON_BINDINGS),y)
  .PHONY: all
--all: $(ALL_TARGETS)
-+all: $(TARGETS)
+ all: python-bindings
+-install: install-python-bindings
+-uninstall: uninstall-python-bindings
++install:: install-python-bindings
++uninstall:: uninstall-python-bindings
+ endif
  
- .PHONY: clients
- clients: xenstore $(CLIENTS) xenstore-control
+ # Perl bindings
+@@ -111,8 +111,8 @@ ifeq ($(XENSTAT_PERL_BINDINGS),y)
+ all: perl-bindings
  
--ifeq ($(CONFIG_SYSTEMD),y)
--$(XENSTORED_OBJS): CFLAGS += $(SYSTEMD_CFLAGS)
--xenstored: LDFLAGS += $(SYSTEMD_LIBS)
--endif
--
--$(XENSTORED_OBJS): CFLAGS += $(CFLAGS_libxengnttab)
--
--xenstored: $(XENSTORED_OBJS)
--	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxenctrl) $(LDLIBS_xenstored) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
-+xenstored: $(XENSTORED_OBJS-y)
-+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
- 
--xenstored.a: $(XENSTORED_OBJS)
-+xenstored.a: $(XENSTORED_OBJS-y)
- 	$(AR) cr $@ $^
- 
- $(CLIENTS): xenstore
- 	ln -f xenstore $@
- 
- xenstore: xenstore_client.o xs_lib.o
--	$(CC) $^ $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
- 
- xenstore-control: xenstore_control.o
--	$(CC) $< $(LDFLAGS) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxentoolcore) $(SOCKET_LIBS) -o $@ $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@ $(APPEND_LDFLAGS)
- 
- xs_tdb_dump: xs_tdb_dump.o utils.o tdb.o talloc.o
--	$(CC) $^ $(LDFLAGS) -o $@ $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) $^ -o $@ $(APPEND_LDFLAGS)
- 
- .PHONY: clean
- clean:
--	rm -f *.a *.o
--	rm -f xenstored
--	rm -f xs_tdb_dump xenstore-control init-xenstore-domain
--	rm -f xenstore $(CLIENTS)
--	$(RM) $(DEPS_RM)
-+	$(RM) *.a *.o $(TARGETS) $(DEPS_RM)
- 
- .PHONY: distclean
- distclean: clean
-@@ -89,10 +91,6 @@ distclean: clean
- TAGS:
- 	etags `find . -name '*.[ch]'`
- 
--.PHONY: tarball
--tarball: clean
--	cd .. && tar -c -j -v -h -f xenstore.tar.bz2 xenstore/
--
  .PHONY: install
- install: all
- 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
-@@ -135,6 +133,3 @@ clients-install: clients
- 	done
+-install: install-perl-bindings
+-uninstall: uninstall-perl-bindings
++install:: install-perl-bindings
++uninstall:: uninstall-perl-bindings
+ endif
  
- -include $(DEPS_INCLUDE)
+ clean: cleanlocal
+diff --git a/tools/libs/store/Makefile b/tools/libs/store/Makefile
+index 18ae1fe94d..b94060be8d 100644
+--- a/tools/libs/store/Makefile
++++ b/tools/libs/store/Makefile
+@@ -30,10 +30,7 @@ xs.opic: CFLAGS += -DUSE_DLSYM
+ endif
+ 
+ .PHONY: install
+-install: install-headers
 -
--# never delete any intermediate files.
--.SECONDARY:
+-.PHONY: install-headers
+-install-headers:
++install::
+ 	$(INSTALL_DIR) $(DESTDIR)$(includedir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(includedir)/xenstore-compat
+ 	$(INSTALL_DATA) $(XEN_INCLUDE)/xenstore-compat/xs.h $(DESTDIR)$(includedir)/xenstore-compat/xs.h
+@@ -42,10 +39,7 @@ install-headers:
+ 	ln -sf xenstore-compat/xs_lib.h $(DESTDIR)$(includedir)/xs_lib.h
+ 
+ .PHONY: uninstall
+-uninstall: uninstall-headers
+-
+-.PHONY: uninstall-headers
+-uninstall-headers:
++uninstall::
+ 	rm -f $(DESTDIR)$(includedir)/xs_lib.h
+ 	rm -f $(DESTDIR)$(includedir)/xs.h
+ 	rm -f $(DESTDIR)$(includedir)/xenstore-compat/xs_lib.h
+diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
+index 3118cb4194..a173f59a8b 100644
+--- a/tools/libs/libs.mk
++++ b/tools/libs/libs.mk
+@@ -100,7 +100,7 @@ endif
+ endif
+ 
+ .PHONY: install
+-install: all
++install:: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(libdir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(includedir)
+ 	$(INSTALL_SHLIB) lib$(LIB_FILE_NAME).so.$(MAJOR).$(MINOR) $(DESTDIR)$(libdir)
+@@ -111,7 +111,7 @@ install: all
+ 	$(INSTALL_DATA) $(PKG_CONFIG) $(DESTDIR)$(PKG_INSTALLDIR)
+ 
+ .PHONY: uninstall
+-uninstall:
++uninstall::
+ 	rm -f $(DESTDIR)$(PKG_INSTALLDIR)/$(LIB_FILE_NAME).pc
+ 	for i in $(LIBHEADER); do rm -f $(DESTDIR)$(includedir)/$$i; done
+ 	rm -f $(DESTDIR)$(libdir)/lib$(LIB_FILE_NAME).so
 -- 
 Anthony PERARD
 
