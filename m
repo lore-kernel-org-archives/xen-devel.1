@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55528C43217
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279256.476964 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFD04C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Feb 2022 15:16:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.279254.476955 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKY-0008Cm-39; Fri, 25 Feb 2022 15:16:26 +0000
+	id 1nNcKW-0007uQ-SV; Fri, 25 Feb 2022 15:16:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279256.476964; Fri, 25 Feb 2022 15:16:26 +0000
+Received: by outflank-mailman (output) from mailman id 279254.476955; Fri, 25 Feb 2022 15:16:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nNcKX-0008CS-VP; Fri, 25 Feb 2022 15:16:25 +0000
-Received: by outflank-mailman (input) for mailman id 279256;
+	id 1nNcKW-0007u8-K5; Fri, 25 Feb 2022 15:16:24 +0000
+Received: by outflank-mailman (input) for mailman id 279254;
  Fri, 25 Feb 2022 15:16:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E0Ll=TI=citrix.com=prvs=04808661d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nNcIR-0006fy-Rh
- for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:15 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 96495a21-964d-11ec-8539-5f4723681683;
- Fri, 25 Feb 2022 16:14:13 +0100 (CET)
+ id 1nNcIW-0006fy-S9
+ for xen-devel@lists.xenproject.org; Fri, 25 Feb 2022 15:14:20 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 98e5e580-964d-11ec-8539-5f4723681683;
+ Fri, 25 Feb 2022 16:14:17 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,50 +38,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96495a21-964d-11ec-8539-5f4723681683
+X-Inumbo-ID: 98e5e580-964d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1645802053;
+  d=citrix.com; s=securemail; t=1645802057;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=iBXan52Uptq1lv5gul5Hkg1gH0pXMqxs3qqmW+W01jw=;
-  b=MjzXe7hcOsy22c/tbQJt8Su0MlspPKBSRMoDwBUNGfMUJKeTCt4+q+ts
-   A1w+VEyV1bMS1ygcoO4SmKH0duOqHElUqPQZMhfXz2jDVD8g4asBP1z0h
-   aVeyMWDBgiJ10fgwpXeMQPdK8RMF8SVHMyyt+xnDcPHYdQVzfFF6FoAdS
-   E=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=d3piZxqZuNJB/VZp7MMLQLrSEQWkmz/CgMBBNprZ0OE=;
+  b=Cy0HYOMWQDvMGGVrqAMhikKvWzPoj9PcC1XZuF4iZUpw5uMzHhBkQz+E
+   c11FArnhk54Mgx6ZDCnnBGwZsweSdgyPRi8SNC+K4nv9xs5+zkzzS5oxS
+   h5b+tc1OeEQ4QJiTBjNjAABhP5J+gkkK1F5+zi40+EKGTlc72neMEs3FL
+   g=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 65000328
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 64433086
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:2sa8AqDh4G2S8xVW/1Pjw5YqxClBgxIJ4kV8jS/XYbTApDNzhmQPy
- GsfDDyDbv+JMWr1eI1/PoTj8R8DsJbQzodhQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
+IronPort-Data: A9a23:ugzeC6BqjmufXRVW/yDjw5YqxClBgxIJ4kV8jS/XYbTApD4r0TYPy
+ jAaCG/TPPeDMWajLtt+a4S/9UlVscXXn4I1QQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
  xA2M4GYRCwMZiaA4E/raNANlFEkvU2ybuOU5NXsZ2YgHWeIdA970Ug5w7Rj39Yy6TSEK1jlV
  e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhj6
- /tKh4e9czwMI4SStLkkWThTHBphaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwqKtXrO4UO/Glt1zjDAd4tQIzZQrWM7thdtNs1rp4TRa6GP
- JBJAdZpRErtTwVPOWxKMb4vofv2uCKmQywbp2vA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
- Qru/WvjBQoBHMeC0jfD+XWp7sffkCW+VI8MGbmQ8v9xnEbV1mEVEAcRV1awvb++kEHWZj5EA
- xVKoGx09/F0rRH1CImmN/GlnJKalgw/dd1iCOAA0ySQ4/T4vj+TJ2MLdSEUPbTKq/QKbTAt0
- 1aImfbgCjpurKCZRBqhy1uEkd+hEXNLdDFfPEfoWSNAuoC++99r0nojW/4+SPbdszHjJd3nL
- 9lmRgAajq5bs8ME3r7TEbvv02P1/cihouLYC2zqsoOZAuFRON/Ni2+AswGzARN8wGCxFAjpU
- J8swZX20Qz2JcvR/BFhuc1UdF1T296LMSfHnXlkFIQ7+jKm9haLJN4MvW4ifRs0ap5cIVcFh
- XM/XysLtfe/21PwMMdKj3+ZUZx2ncAM6/y/PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
- v+mnTKXJS9CU8xPlWPuL89EiOND7n1ulAv7GMGgpzz6gOX2WZJgYepcWLd4Rrtit/3sTcS82
- 4s3CvZmPD0ECLyuOnSMqNVLRb3IRFBiba3LRwVsXrbrCmJb9KsJUZc9HZtJl1RZoplo
-IronPort-HdrOrdr: A9a23:mzn/raivuTaJtnmKfbjVxuAX0HBQXtwji2hC6mlwRA09TySZ//
- rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
- JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+ I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPhAl
+ IpBuJaiaz50N7XgtMIxECJoAyVhaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
+ 6ZCcXZUM07F17neLLGTE4GAguwqKtXrO4UO/Glt1zjDAd4tQIzZQrWM7thdtNs1rp4SQa2FP
+ 5pHAdZpRDP4RBFSGGwzNI4nzbmagF/ELTNA9GvA8MLb5ECMlVcsgdABKuH9ZdiiVchT2EGCq
+ Qru5G38HxwecsCfyDCM73awruLJhmb/SYUUUrqi+ZZCkFCVg2AeFhASfV+6uuWizF6zXcpFL
+ E4Z8TZoqrI9nHFHVfGkAUf++iTd+EdBBZwASIXW9T1h1ILlv1mVC2IWbAccYcQKmOkaBgcax
+ luWyoaB6SNUjJWZTneU97GxpDy0ODQIIWJqWRLoXTfp8PG4/tht00unosJLVffs04arQW2YL
+ yWi8XBm74j/m/LnwElSEbrvpzu37qbEQQcujuk8djL0t1gpDGJJimHB1LQ60RqiBNrIJrVil
+ CJd8yR70AzoJcvc/MBqaL9QdIxFH97fbFXhbadHRvHNDQiF9X+5Zpx36zpjPkpvOctsUWa3P
+ BKM5VoNuccLZCPCgUpLj2SZUZVCIU/IT4mNaxwpRoAWPsgZmPGvpkmCmnJ8L0iyyRNxwMnTy
+ L+QcNq2DGZyNEiU5GHeegvp6pdynnpW7TqKHfjTlk37uZLDNC/9YepUazOmM7FmhJ5oVS2Iq
+ r6zwePRkE4BOAA/CwGKmbMuwacidiBqVcir8JUMLoZu4GNOQQkcNhMY+pt5E6QNokifvrygE
+ q2VMqOA9GfCuA==
+IronPort-HdrOrdr: A9a23:cZOTB6rBSZWrKJwZSx7rYJYaV5oteYIsimQD101hICG8cqSj+P
+ xG+85rsiMc6QxhIU3I9urgBEDtex7hHNtOkOss1NSZLW3bUQmTTL2KhLGKq1aLJ8S9zJ856U
+ 4JSdkZNDSaNzZHZKjBjDVQa+xQo+W6zA==
 X-IronPort-AV: E=Sophos;i="5.90,136,1643691600"; 
-   d="scan'208";a="65000328"
+   d="scan'208";a="64433086"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
-	<jgross@suse.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v2 22/29] libs/stat: Fix and rework perl-binding build
-Date: Fri, 25 Feb 2022 15:13:14 +0000
-Message-ID: <20220225151321.44126-23-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Samuel Thibault
+	<samuel.thibault@ens-lyon.org>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v2 24/29] stubdom: introduce xenlibs.mk
+Date: Fri, 25 Feb 2022 15:13:16 +0000
+Message-ID: <20220225151321.44126-25-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220225151321.44126-1-anthony.perard@citrix.com>
 References: <20220225151321.44126-1-anthony.perard@citrix.com>
@@ -89,72 +90,82 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-For PERL_FLAGS, use make's shell rather than a backquote.
+This new makefile will be used to build libraries that provides
+"Makefile.common".
 
-Rather than relying on the VCS to create an empty directory for us,
-we can create one before generating the *.c file for the bindings.
+At some point, we will be converting Makefile in tools/ to "subdirmk"
+and stubdom build will not be able to use those new makefiles, so we
+will put the necessary information for stubdom to build the xen
+libraries into a new Makefile.common and xenlibs.mk will use it.
+We only need to build static libraries and don't need anything else.
 
-Make use of generic variable names to build a shared library from a
-source file: CFLAGS, LDFLAGS, and LDLIBS.
+The check for the presence of "Makefile.common" will go aways once
+there is one for all libraries used by stubdom build.
 
-To build a shared library, we need to build the source file with
-"-fPIC", which was drop by 6d0ec05390 (tools: split libxenstat into
-new tools/libs/stat directory).
-
-The source file generated by swig seems to be missing many prototype for
-many functions, so we need "-Wno-missing-prototypes" in order to
-build it. Also, one of the prototype is deemed malformed, so we also
-need "-Wno-strict-prototypes".
+Also remove DESTDIR= from "clean" targets, we don't do installation in
+this recipe so the value of DESTDIR doesn't matter.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 ---
 
 Notes:
     v2:
     - reviewed
 
- tools/libs/stat/Makefile                  | 15 +++++++++++----
- tools/libs/stat/bindings/swig/perl/.empty |  1 -
- 2 files changed, 11 insertions(+), 5 deletions(-)
- delete mode 100644 tools/libs/stat/bindings/swig/perl/.empty
+ stubdom/Makefile   |  9 +++++++--
+ stubdom/xenlibs.mk | 13 +++++++++++++
+ 2 files changed, 20 insertions(+), 2 deletions(-)
+ create mode 100644 stubdom/xenlibs.mk
 
-diff --git a/tools/libs/stat/Makefile b/tools/libs/stat/Makefile
-index b8d75810fc..7eaf50e91e 100644
---- a/tools/libs/stat/Makefile
-+++ b/tools/libs/stat/Makefile
-@@ -94,13 +94,20 @@ uninstall:: uninstall-python-bindings
- endif
+diff --git a/stubdom/Makefile b/stubdom/Makefile
+index 5fb5dbc341..fba4c977ef 100644
+--- a/stubdom/Makefile
++++ b/stubdom/Makefile
+@@ -346,6 +346,7 @@ define do_links
+   cd $(dir $@); \
+   ln -sf $(dir $<)include/*.h include/; \
+   ln -sf $(dir $<)*.[ch] .; \
++  [ -e $(dir $<)Makefile.common ] && ln -sf $(dir $<)Makefile.common . ||:; \
+   ln -sf $(dir $<)Makefile .
+   touch $@
+ endef
+@@ -355,10 +356,14 @@ define BUILD_lib
+  libxen$(1): libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a
+  libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a: $$(LIBDEPS_$(1)) $$(LIBDEP_$(1))
+  libs-$$(XEN_TARGET_ARCH)/$(1)/libxen$(1).a: mk-headers-$$(XEN_TARGET_ARCH) $$(NEWLIB_STAMPFILE) .phony
+-	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) CONFIG_LIBXC_MINIOS=y -C $$(@D) $$(@F)
++	CPPFLAGS="$$(TARGET_CPPFLAGS)" CFLAGS="$$(TARGET_CFLAGS)" $$(MAKE) CONFIG_LIBXC_MINIOS=y $$(if $$(wildcard $$(@D)/Makefile.common),-f $(CURDIR)/xenlibs.mk) -C $$(@D) $$(@F)
  
- # Perl bindings
--PERL_FLAGS=`perl -MConfig -e 'print "$$Config{ccflags} -I$$Config{archlib}/CORE";'`
-+PERL_FLAGS = $(shell $(PERL) -MConfig -e 'print "$$Config{ccflags} -I$$Config{archlib}/CORE";')
- $(PERLMOD): $(PERLSRC)
- $(PERLSRC): bindings/swig/xenstat.i
--	swig -perl $(SWIG_FLAGS) -outdir $(@D) -o $(PERLSRC) $<
--
-+	mkdir -p $(@D)
-+	swig -perl $(SWIG_FLAGS) -outdir $(@D) -o $@ $<
+  clean-libxen$(1):
+-	[ ! -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile ] || $$(MAKE) DESTDIR= -C libs-$$(XEN_TARGET_ARCH)/$(1) clean
++	if [ -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile.common ]; then \
++	    $$(MAKE) -f $(CURDIR)/xenlibs.mk -C libs-$$(XEN_TARGET_ARCH)/$(1) clean; \
++	elif [ -e libs-$$(XEN_TARGET_ARCH)/$(1)/Makefile ]; then \
++	    $$(MAKE) -C libs-$$(XEN_TARGET_ARCH)/$(1) clean; \
++	fi
+ 
+  libs-$$(XEN_TARGET_ARCH)/$(1)/stamp: $$(XEN_ROOT)/tools/libs/$(1)/Makefile
+ 	$$(do_links)
+diff --git a/stubdom/xenlibs.mk b/stubdom/xenlibs.mk
+new file mode 100644
+index 0000000000..5c8742ccf9
+--- /dev/null
++++ b/stubdom/xenlibs.mk
+@@ -0,0 +1,13 @@
++include $(XEN_ROOT)/tools/Rules.mk
 +
-+$(PERLLIB): CFLAGS += -fPIC
-+$(PERLLIB): CFLAGS += -Wno-strict-prototypes
-+$(PERLLIB): CFLAGS += -Wno-missing-prototypes
-+$(PERLLIB): LDFLAGS += $(PERL_FLAGS)
-+$(PERLLIB): LDFLAGS += $(SHLIB_LDFLAGS)
-+$(PERLLIB): LDLIBS := $(LDLIBS_libxenstat)
- $(PERLLIB): $(PERLSRC)
--	$(CC) $(CFLAGS) $(LDFLAGS) $(PERL_FLAGS) $(SHLIB_LDFLAGS) -lxenstat -o $@ $< $(APPEND_LDFLAGS)
-+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
- 
- .PHONY: perl-bindings
- perl-bindings: $(PERLLIB) $(PERLMOD)
-diff --git a/tools/libs/stat/bindings/swig/perl/.empty b/tools/libs/stat/bindings/swig/perl/.empty
-deleted file mode 100644
-index 2a8dd4274d..0000000000
---- a/tools/libs/stat/bindings/swig/perl/.empty
-+++ /dev/null
-@@ -1 +0,0 @@
--This directory is empty; this file is included to prevent version control systems from removing the directory.
++include Makefile.common
++
++LIBNAME := $(notdir $(CURDIR))
++FILENAME_$(LIBNAME) ?= xen$(LIBNAME)
++LIB_FILE_NAME = $(FILENAME_$(LIBNAME))
++
++lib$(LIB_FILE_NAME).a: $(OBJS-y)
++	$(AR) rc $@ $^
++
++clean::
++	rm -f $(OBJS-y) lib$(LIB_FILE_NAME).a
 -- 
 Anthony PERARD
 
