@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A5AC433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755ACC433F5
 	for <xen-devel@archiver.kernel.org>; Sun, 27 Feb 2022 14:31:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.279952.477742 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.279955.477776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nOKa4-0002yV-2z; Sun, 27 Feb 2022 14:31:24 +0000
+	id 1nOKaC-0003tA-W5; Sun, 27 Feb 2022 14:31:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 279952.477742; Sun, 27 Feb 2022 14:31:24 +0000
+Received: by outflank-mailman (output) from mailman id 279955.477776; Sun, 27 Feb 2022 14:31:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nOKa3-0002yO-W6; Sun, 27 Feb 2022 14:31:23 +0000
-Received: by outflank-mailman (input) for mailman id 279952;
- Sun, 27 Feb 2022 14:31:22 +0000
+	id 1nOKaC-0003t1-Rx; Sun, 27 Feb 2022 14:31:32 +0000
+Received: by outflank-mailman (input) for mailman id 279955;
+ Sun, 27 Feb 2022 14:31:31 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=jKox=TK=bombadil.srs.infradead.org=BATV+9eb748f383daf30c13ac+6762+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nOKa2-0002ie-9f
- for xen-devel@lists.xenproject.org; Sun, 27 Feb 2022 14:31:22 +0000
+ id 1nOKaB-0002ie-M1
+ for xen-devel@lists.xenproject.org; Sun, 27 Feb 2022 14:31:31 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ee77a0b8-97d9-11ec-8539-5f4723681683;
- Sun, 27 Feb 2022 15:31:21 +0100 (CET)
+ id f4156650-97d9-11ec-8539-5f4723681683;
+ Sun, 27 Feb 2022 15:31:31 +0100 (CET)
 Received: from [213.208.157.39] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nOKZq-009Nur-9E; Sun, 27 Feb 2022 14:31:10 +0000
+ id 1nOKZy-009Nyh-As; Sun, 27 Feb 2022 14:31:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ee77a0b8-97d9-11ec-8539-5f4723681683
+X-Inumbo-ID: f4156650-97d9-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=S8rL5r6CVieQSVcTz72mVZA1dTrwukBQ7UxroweHdXM=; b=TmJNvjFSewtYWBr07EHo8a1WwA
-	8e4I78/K50tproBTCfhYD6iRK1G6UAv1A6Rup/LoZsEsEUQE9OdlHXx4jz7jhRyNzXaQtiVFKlupt
-	a2hGvZ4aqXvIr1yj57HcCRUt65RO1+Y5wozGU5i4Z+jrTVcR/2s9BDbFJzUITh9decsl8OkwX+TI4
-	xyhztZrj+xPANoAVZ61PdUT+mxMalQcYiDsCn0GIahnvB1rVuihkl2a5cyicVFHeMavSBVSpLMnz6
-	VHxJC+B1OeUcyn68Iz+B0pyY23J2t7U4tBFoigOIWko50r9hiWnG0mBx9qZO6X4rJTVWF8zxJf5B5
-	y/jM9GUQ==;
+	bh=EOKl3QOewLIjf0ZNmcnzTQ4FZFAHUeZ7HEyWrW0JICI=; b=VUPEtA7V1kUXdEQLXDATMWGPWl
+	B8DR/5fTzGbOotY2kYTIvMBdMiEigGK5KA/dEOClSNYxjT355jLQFUFXUab6e/Pbv6scABIiEjBKu
+	eRCXfdOZejOc9Q1Caj3SkYhqZSP0u48gwi72tuNMLXnVoFf3AuDrW/me+5SXfOwfFnJy2icKFabfD
+	KgRqf9ucOjLQxS0fC0FogpnUSM7GvHoBCfhlifa1X+9qAdn91vh4MqyNcheVpWp4rnvs8nlwT2nem
+	psc3GVSj5A/xheKnzeUaF+be0MRC5VAU7YZBD0dJ80cj7PRNsT7rvL3v9Fvy0Cp42uHab+x47KiA3
+	GgNBOBUA==;
 From: Christoph Hellwig <hch@lst.de>
 To: iommu@lists.linux-foundation.org
 Cc: x86@kernel.org,
@@ -75,9 +75,9 @@ Cc: x86@kernel.org,
 	linux-hyperv@vger.kernel.org,
 	tboot-devel@lists.sourceforge.net,
 	linux-pci@vger.kernel.org
-Subject: [PATCH 03/11] swiotlb: simplify swiotlb_max_segment
-Date: Sun, 27 Feb 2022 15:30:47 +0100
-Message-Id: <20220227143055.335596-4-hch@lst.de>
+Subject: [PATCH 05/11] swiotlb: pass a gfp_mask argument to swiotlb_init_late
+Date: Sun, 27 Feb 2022 15:30:49 +0100
+Message-Id: <20220227143055.335596-6-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220227143055.335596-1-hch@lst.de>
 References: <20220227143055.335596-1-hch@lst.de>
@@ -85,106 +85,65 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Remove the bogus Xen override that was usually larger than the actual
-size and just calculate the value on demand.  Note that
-swiotlb_max_segment still doesn't make sense as an interface and should
-eventually be removed.
+Let the caller chose a zone to allocate from.  This will be used
+later on by the xen-swiotlb initialization on arm.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Anshuman Khandual <anshuman.khandual@arm.com>
 ---
- drivers/xen/swiotlb-xen.c |  2 --
- include/linux/swiotlb.h   |  1 -
- kernel/dma/swiotlb.c      | 20 +++-----------------
- 3 files changed, 3 insertions(+), 20 deletions(-)
+ arch/x86/pci/sta2x11-fixup.c | 2 +-
+ include/linux/swiotlb.h      | 2 +-
+ kernel/dma/swiotlb.c         | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index 47aebd98f52f5..485cd06ed39e7 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -202,7 +202,6 @@ int xen_swiotlb_init(void)
- 	rc = swiotlb_late_init_with_tbl(start, nslabs);
- 	if (rc)
- 		return rc;
--	swiotlb_set_max_segment(PAGE_SIZE);
- 	return 0;
- error:
- 	if (nslabs > 1024 && repeat--) {
-@@ -254,7 +253,6 @@ void __init xen_swiotlb_init_early(void)
- 
- 	if (swiotlb_init_with_tbl(start, nslabs, true))
- 		panic("Cannot allocate SWIOTLB buffer");
--	swiotlb_set_max_segment(PAGE_SIZE);
- }
- #endif /* CONFIG_X86 */
- 
+diff --git a/arch/x86/pci/sta2x11-fixup.c b/arch/x86/pci/sta2x11-fixup.c
+index e0c039a75b2db..c7e6faf59a861 100644
+--- a/arch/x86/pci/sta2x11-fixup.c
++++ b/arch/x86/pci/sta2x11-fixup.c
+@@ -57,7 +57,7 @@ static void sta2x11_new_instance(struct pci_dev *pdev)
+ 		int size = STA2X11_SWIOTLB_SIZE;
+ 		/* First instance: register your own swiotlb area */
+ 		dev_info(&pdev->dev, "Using SWIOTLB (size %i)\n", size);
+-		if (swiotlb_init_late(size))
++		if (swiotlb_init_late(size, GFP_DMA))
+ 			dev_emerg(&pdev->dev, "init swiotlb failed\n");
+ 	}
+ 	list_add(&instance->list, &sta2x11_instance_list);
 diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index f6c3638255d54..9fb3a568f0c51 100644
+index b48b26bfa0edb..1befd6b2ccf5e 100644
 --- a/include/linux/swiotlb.h
 +++ b/include/linux/swiotlb.h
-@@ -164,7 +164,6 @@ static inline void swiotlb_adjust_size(unsigned long size)
- #endif /* CONFIG_SWIOTLB */
+@@ -40,7 +40,7 @@ extern void swiotlb_init(int verbose);
+ int swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose);
+ unsigned long swiotlb_size_or_default(void);
+ extern int swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs);
+-int swiotlb_init_late(size_t size);
++int swiotlb_init_late(size_t size, gfp_t gfp_mask);
+ extern void __init swiotlb_update_mem_attributes(void);
  
- extern void swiotlb_print_info(void);
--extern void swiotlb_set_max_segment(unsigned int);
- 
- #ifdef CONFIG_DMA_RESTRICTED_POOL
- struct page *swiotlb_alloc(struct device *dev, size_t size);
+ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t phys,
 diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 36fbf1181d285..519e363097190 100644
+index 5f64b02fbb732..a653fcf1fe6c2 100644
 --- a/kernel/dma/swiotlb.c
 +++ b/kernel/dma/swiotlb.c
-@@ -75,12 +75,6 @@ struct io_tlb_mem io_tlb_default_mem;
- 
- phys_addr_t swiotlb_unencrypted_base;
- 
--/*
-- * Max segment that we can provide which (if pages are contingous) will
-- * not be bounced (unless SWIOTLB_FORCE is set).
-- */
--static unsigned int max_segment;
--
- static unsigned long default_nslabs = IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT;
- 
- static int __init
-@@ -104,18 +98,12 @@ early_param("swiotlb", setup_io_tlb_npages);
- 
- unsigned int swiotlb_max_segment(void)
+@@ -290,7 +290,7 @@ swiotlb_init(int verbose)
+  * initialize the swiotlb later using the slab allocator if needed.
+  * This should be just like above, but with some error catching.
+  */
+-int swiotlb_init_late(size_t size)
++int swiotlb_init_late(size_t size, gfp_t gfp_mask)
  {
--	return io_tlb_default_mem.nslabs ? max_segment : 0;
-+	if (!io_tlb_default_mem.nslabs)
-+		return 0;
-+	return rounddown(io_tlb_default_mem.nslabs << IO_TLB_SHIFT, PAGE_SIZE);
- }
- EXPORT_SYMBOL_GPL(swiotlb_max_segment);
+ 	unsigned long nslabs = ALIGN(size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
+ 	unsigned long bytes;
+@@ -309,7 +309,7 @@ int swiotlb_init_late(size_t size)
+ 	bytes = nslabs << IO_TLB_SHIFT;
  
--void swiotlb_set_max_segment(unsigned int val)
--{
--	if (swiotlb_force == SWIOTLB_FORCE)
--		max_segment = 1;
--	else
--		max_segment = rounddown(val, PAGE_SIZE);
--}
--
- unsigned long swiotlb_size_or_default(void)
- {
- 	return default_nslabs << IO_TLB_SHIFT;
-@@ -267,7 +255,6 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
- 
- 	if (verbose)
- 		swiotlb_print_info();
--	swiotlb_set_max_segment(mem->nslabs << IO_TLB_SHIFT);
- 	return 0;
- }
- 
-@@ -368,7 +355,6 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
- 	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
- 
- 	swiotlb_print_info();
--	swiotlb_set_max_segment(mem->nslabs << IO_TLB_SHIFT);
- 	return 0;
- }
- 
+ 	while ((SLABS_PER_PAGE << order) > IO_TLB_MIN_SLABS) {
+-		vstart = (void *)__get_free_pages(GFP_DMA | __GFP_NOWARN,
++		vstart = (void *)__get_free_pages(gfp_mask | __GFP_NOWARN,
+ 						  order);
+ 		if (vstart)
+ 			break;
 -- 
 2.30.2
 
