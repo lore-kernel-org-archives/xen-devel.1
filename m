@@ -4,44 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E507C433F5
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Mar 2022 10:32:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.281101.479284 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A274C4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Mar 2022 10:53:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.281114.479345 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nOznd-0000Qm-R6; Tue, 01 Mar 2022 10:32:09 +0000
+	id 1nP08T-0004Bo-A9; Tue, 01 Mar 2022 10:53:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 281101.479284; Tue, 01 Mar 2022 10:32:09 +0000
+Received: by outflank-mailman (output) from mailman id 281114.479345; Tue, 01 Mar 2022 10:53:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nOznd-0000Qf-Mk; Tue, 01 Mar 2022 10:32:09 +0000
-Received: by outflank-mailman (input) for mailman id 281101;
- Tue, 01 Mar 2022 10:32:08 +0000
+	id 1nP08T-0004BZ-6E; Tue, 01 Mar 2022 10:53:41 +0000
+Received: by outflank-mailman (input) for mailman id 281114;
+ Tue, 01 Mar 2022 10:53:39 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=nfYH=TM=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1nOznc-0000QZ-CO
- for xen-devel@lists.xenproject.org; Tue, 01 Mar 2022 10:32:08 +0000
-Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.109.102])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=AA0s=TM=bombadil.srs.infradead.org=BATV+e5026ef6e36407c4b08a+6764+infradead.org+hch@srs-se1.protection.inumbo.net>)
+ id 1nP08R-00031b-LO
+ for xen-devel@lists.xenproject.org; Tue, 01 Mar 2022 10:53:39 +0000
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d7986752-994a-11ec-8539-5f4723681683;
- Tue, 01 Mar 2022 11:32:06 +0100 (CET)
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur02lp2057.outbound.protection.outlook.com [104.47.5.57]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-7-ZJ69LoXtNkiKWFRWjggTGQ-1; Tue, 01 Mar 2022 11:32:05 +0100
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com (2603:10a6:803:e7::16)
- by AM6PR04MB4392.eurprd04.prod.outlook.com (2603:10a6:20b:1c::30)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5017.26; Tue, 1 Mar
- 2022 10:32:03 +0000
-Received: from VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::d479:b728:345c:bd65]) by VI1PR04MB5600.eurprd04.prod.outlook.com
- ([fe80::d479:b728:345c:bd65%6]) with mapi id 15.20.5017.027; Tue, 1 Mar 2022
- 10:32:03 +0000
+ id d93cb5de-994d-11ec-8539-5f4723681683;
+ Tue, 01 Mar 2022 11:53:38 +0100 (CET)
+Received: from [2.53.44.23] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nP08E-00GCz8-AM; Tue, 01 Mar 2022 10:53:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,197 +42,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d7986752-994a-11ec-8539-5f4723681683
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1646130726;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=s/S/93RDEUEGy29b4Zyofycj7JF6IGAg8eYAvK+Q9wc=;
-	b=UVMUOgzzfdHt9RQt83AtBC4PX82Np6g7Po1T7SaxvhlC2If4G5LDrkv7medFnXmqLZ2Q+n
-	ZbI8TWPUW2QnrOYswokzBKD4iBIuRJYq/eANu29mItsEGHnpLH6NaMLD1u3+ScBwVTgcwJ
-	yjL/HAEJ2ModaRJ4jCye+GS+AQvnBgg=
-X-MC-Unique: ZJ69LoXtNkiKWFRWjggTGQ-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Mn3YfJHhAx1oDEkNFSuJk1Nr1AOYLJOWrrjBg3Ij8kA/IOuLUd1oiH/PFru+HVOLwKOjOkbZUxxuvP/JHcMSyLRJbdgIpbQF8+0gPSyV+b5oiLIAOZ7hLTzmr0RgBTpIPXYwnQbV1gi46hc2PWWLzysDU4uhK6uW9wEG/L/aY8gmK66hJuN4wuqGt9d3YlVVfd9iw059FjXJxHbhbZBQ+DAt7y4uTknr6hVHD8jKtT6FVjl5Z6B0TdzFf9ipmcxRIl83b0ly3auaPWAVT0icsE/rb+nzEopQqk5ifT+FGUkCIKjCj88Myw+2vpd3Aryl8kdTnHdZ2I+7h8FdiZMsEA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W0OvDogMLwRZTzxH9oWXV+jlOPVXgRUiv4aYpjtRNDw=;
- b=YS1flxjD8g8P3FBlXIjdfpcYviR9pYOwtP/6MuWNFMdHGX7i1FiHskNMu8WhR8MW5J7mRCfRGVT3pdXTaqbdrG+f2h93MI5KKdsKkvoac4EUjzGSCQSKjT13WrfuQdw8njeIOguwC+hdEPK+tWE61Qqij7iY7aLpcPmVgHAKpgusX5RnX7BMFfnxMeOh1BqpN2UCsLMouJra3vil7VizcI/pHLC8GEXgwBK4kFL1Qp6gZ7FV8KUgzket9yhloLS+KGfYOJ/GcUAOZfxy7jkaTKJV22jt55o28p60jV10j4m18fgQPxoITlTpUIDAY5oEr3/+uZJSUjAz+lygaxIRKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <5e5ad6bf-8c58-745b-dc32-c906a1928329@suse.com>
-Date: Tue, 1 Mar 2022 11:32:01 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.1
-Subject: Re: [PATCH v2.1 2/2] vpci/msix: fix PBA accesses
-Content-Language: en-US
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-CC: Alex Olson <this.is.a0lson@gmail.com>, xen-devel@lists.xenproject.org
-References: <d8da3251985684ab9099ce95a8329a7e35535a7b.camel@gmail.com>
- <20220226100554.2664-1-roger.pau@citrix.com>
- <8597cd20-4d79-0f5f-8370-d2353e7116f7@suse.com>
- <Yh3igzWQQO+Nvf3+@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <Yh3igzWQQO+Nvf3+@Air-de-Roger>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: AM5PR04CA0008.eurprd04.prod.outlook.com
- (2603:10a6:206:1::21) To VI1PR04MB5600.eurprd04.prod.outlook.com
- (2603:10a6:803:e7::16)
+X-Inumbo-ID: d93cb5de-994d-11ec-8539-5f4723681683
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=A0DzSvvS64HjAzE2XMQzk7Jm+OVlQzZUcMYFGVBmu7k=; b=QcD+g2bAZloPsGuAs2SY+vJGCg
+	rv+HhE9TnpOXcyMAPOZmFzmHJl3jnx34GwZgZG24XzdnByIgzZE0CBoGWC/7y8jWksOx8gAtCOn9w
+	11rWTBSZFsTEY3QtBt2TLy/IU42CsemUekEbmdXyZugiZYIdY8t5MdbczK7zOZAhEtqydZMqx5sND
+	hsDOkqXxSuZewhVYVyUPaMNFMtlQZ49ELHfETbHcYFn+wOw0D3MB+68OD6L2VF4BZU1ECdsEL85tx
+	gWcrQajjKEnfOC+GPfRpESVf2ppYJUrQeHGkSbSMThkO7AZAg3xYpOLUqRA52iZRlvoiif6wNe7SB
+	Ir/ycXgw==;
+From: Christoph Hellwig <hch@lst.de>
+To: iommu@lists.linux-foundation.org
+Cc: x86@kernel.org,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Joerg Roedel <joro@8bytes.org>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Lu Baolu <baolu.lu@linux.intel.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	linux-ia64@vger.kernel.org,
+	linux-mips@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	tboot-devel@lists.sourceforge.net,
+	linux-pci@vger.kernel.org
+Subject: [PATCH 03/12] swiotlb: simplify swiotlb_max_segment
+Date: Tue,  1 Mar 2022 12:53:02 +0200
+Message-Id: <20220301105311.885699-4-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220301105311.885699-1-hch@lst.de>
+References: <20220301105311.885699-1-hch@lst.de>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e594b93e-e5f8-459f-6edc-08d9fb6eb9ef
-X-MS-TrafficTypeDiagnostic: AM6PR04MB4392:EE_
-X-Microsoft-Antispam-PRVS:
-	<AM6PR04MB4392388D36678A8F3F7B6829B3029@AM6PR04MB4392.eurprd04.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	d2FKaF8rjT8B51gLkVV8WEzqbXSdkhfCuy8O2pODdZAZsdEanIo2Dda+EVc6YWwZG0dUIuoI8tlw3oLkFzrnjzFwq60lGq1onmsNs2yeBxGbwEfz+1zJr0p4mdsjYmgxflcjjVSQcI/huGhoXESeVRn5NxtfCRMj5AG/I81MBxpT7hetvXvWX8I3q+qTkx6xS+4f5r6PRHJGcxcaiYmTrreAhEB2mfHT4J5ivwvqcbSbyrfqJ//P4JJThAjHw4MftrTq1Bnt4zz1a7ynrVa33dB2/6TOfpq0dLuLG8kwQiIhwW1ZQP6Dtn+LhaGpcID3dVXCa39PRlxIEIhwMyKS5Dsm1OzbZr4P/LnQsWOIjNuzbefNaxKrkHnl7HtM5BuxZ4JDYYWoKuxCO0q4WPN7bWjuDunPAPxgkpqGARupKSKeNtDichIxDLOmff2A+y+kE9Oc617qQ9Ew+pveaCI0uDoYeHZBMdFqExRzCH0muE/Ll13f0wStVkOjz0w7DUK7wJtoOw7OeEGY0erUNrkujkAmq3WMJWk67V8k6x7hvIR1nc7ifMb09/c1qwgWg1yCA3FzR9G3GwvPCsNazeglme+2Rf/tXf/nOclePPbNP+8ePmeJ0x4h3cMkkZbX1wzPbYHw2VgT7FUJS3pUGr1W+u/mSBJRDmHUKrV9xVcg6CbEXzEXsNSVFkfcBt7YLZTwwWyNlPRanj1Mn5lvI3r6C3uVuRM+dCL4PK9hJHP8Xzs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5600.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(83380400001)(8676002)(4326008)(2616005)(2906002)(186003)(26005)(5660300002)(8936002)(31696002)(6916009)(31686004)(6506007)(6512007)(86362001)(6486002)(508600001)(53546011)(36756003)(66946007)(66476007)(66556008)(38100700002)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?II6u1SchmHKJ70xprGA2o+AcrtCG5eH5aOr/90QV02d/OlvCc1Foi94OQLx9?=
- =?us-ascii?Q?ojeDGWdS7pLpOVTEhKb+nG1QaR/POwwsOg6oBEMOa12CFQC2eCaLyg5Z8wNv?=
- =?us-ascii?Q?64khgCwgdSE9hW0+1ihaPRXb7YESL95uXM+IMIxPBph0j2+JnpiQu9IqkXeF?=
- =?us-ascii?Q?TbaB2JNATsdpZdcIML/sj3kbq6Rr16FfVB+uAOCRyYC/Ducae3KTdUbPlsgR?=
- =?us-ascii?Q?JZf1r7piSxAR+Cy8zS9blD0P2M2CrftClaEfJWlCVHwk/uNvq18isgDxiSrO?=
- =?us-ascii?Q?AGSF0Z/Kvs1cBWhHOEcgvnmswmC+jwHPB4gBSH9nbjvQvdVAcES6s3gQygWj?=
- =?us-ascii?Q?cA9TmWY7eQ/lfAmwD1EOQ1hLKmqpK2RnBwUcVIoPpkrXxq8aGO7CmS8UE/Ch?=
- =?us-ascii?Q?XMxMzqlLGI7aeU70mLjoo//kxZ0hr80QMdyFshlUCf27nfYsMdUc2vxTfWcN?=
- =?us-ascii?Q?IdI8ZEvtT/kSk/irEouVuNCbNyhm7y1OjH+W0ceUCwOm+hc4mdgDXLMzpnko?=
- =?us-ascii?Q?wgn0oSKnSUZYD8A06RhrWgDphmUUjChU/qWgmZ4I92b9f9U9SejKlccF1xMf?=
- =?us-ascii?Q?fFFGGnhaFw5t9xyau1/UUfLvX4k2dlUPduhGWgAkb1snkyZwKdz4H89uw10l?=
- =?us-ascii?Q?a/5ycd5E7cvDqabu3CAb+h9LBjaUVcIcmDChg3IzsLrYHw5fS2s29RxNz5NJ?=
- =?us-ascii?Q?X19C7TVwVmUxfH8lK/YPX4tYK0MQJG44wbu4J7rk2c8Hd9ivFFP9ci6cF4sz?=
- =?us-ascii?Q?V1IT6TA0SX139q6Ox0uwY+ZfpBsSL7BDU9Pwl7Wf3YbrDMmpCvgL8weet+lV?=
- =?us-ascii?Q?In2Yvx/J5ZTdfqPCdjhpBxEu6/NT5x6AlKXESlhBQ5/yEAnPnqhkx83VaqCn?=
- =?us-ascii?Q?WaKYZ20dTdjp6MfTnew+c6mjyDoLFkMVs9vEB8sLUflFCME7vuJyGw7xdGSP?=
- =?us-ascii?Q?Wjz7Iqr4gSfA3WMbs+4t+fP+56KRoHM/gdGvFYuMwphUrSAsZPjMF6tUeLmC?=
- =?us-ascii?Q?7+pAAveXg6thQ/2+Dnof/Q2WgJ/gBJhmn+m8wXdBW/oJAypWrvfKaiKyugE4?=
- =?us-ascii?Q?yGsxPlvqUl1SasC3frH/a5DDBXp42iEjjyZKVuU5FhU2+TjMmzrWJKGEk96n?=
- =?us-ascii?Q?bByt+Q77B26wYWbrTGqUz9uMK1y+Z/ZJ99NYGzZDXxNZLvjnHVZ5acrGz6FG?=
- =?us-ascii?Q?naaqTwtgk1+5SWQLKaWkzZgOsiqgjBjOPHIND4Vkv2UKLGxt+mNW22u9nUi1?=
- =?us-ascii?Q?3dYpKzR6LcmKGK2uqV4KqklUh8MJ49GCtoCOC9tt4HyXTUUbjo+04d7KvTRr?=
- =?us-ascii?Q?Xa4jxgQKNQpPlsZTJMXZ9y+cZja/TDFuMoL35s8gqHPLmd6n6WBrOEUdkY0R?=
- =?us-ascii?Q?rfEWvEm6ItHPrOGAhIRU+Lpxl/+MNopLcjexWYK8UkGH42E/VBWtmqVB1S6t?=
- =?us-ascii?Q?TPJNzZ14kj8RIGT1GbxFBPkwWUOIqw7FNqHg7e1DC1DXdacc7Lpa9aRsvjh5?=
- =?us-ascii?Q?mrPi53pE5HbTn1HE5T7+w4WZuxhpkodVGpe14Grz8IiXkYWpfbjTmy7+a6FR?=
- =?us-ascii?Q?g1vUknnS+nfz0cBmXA9+BQB5sh0vp7M468vpaTNFnLRSrsp9mgHgBRCBhonQ?=
- =?us-ascii?Q?SCgQIJLWd3F39hRd/oZiiIg=3D?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e594b93e-e5f8-459f-6edc-08d9fb6eb9ef
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5600.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Mar 2022 10:32:03.6586
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CDOUMM95qyyugQXKXjz16lEksp1br0hqjoQf/3+1C2wk16wadq8n5me6gl+ibBH/BM0zLOAzG/+7ogpi97O5nQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR04MB4392
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-On 01.03.2022 10:08, Roger Pau Monn=C3=A9 wrote:
-> On Tue, Mar 01, 2022 at 09:46:13AM +0100, Jan Beulich wrote:
->> On 26.02.2022 11:05, Roger Pau Monne wrote:
->>> --- a/xen/drivers/vpci/msix.c
->>> +++ b/xen/drivers/vpci/msix.c
->>> @@ -198,8 +198,13 @@ static int cf_check msix_read(
->>>      if ( !access_allowed(msix->pdev, addr, len) )
->>>          return X86EMUL_OKAY;
->>> =20
->>> +    spin_lock(&msix->pdev->vpci->lock);
->>>      if ( VMSIX_ADDR_IN_RANGE(addr, msix->pdev->vpci, VPCI_MSIX_PBA) )
->>>      {
->>> +        struct vpci *vpci =3D msix->pdev->vpci;
->>> +        paddr_t base =3D vmsix_table_addr(vpci, VPCI_MSIX_PBA);
->>> +        unsigned int idx =3D addr - base;
->>> +
->>>          /*
->>>           * Access to PBA.
->>>           *
->>> @@ -207,25 +212,43 @@ static int cf_check msix_read(
->>>           * guest address space. If this changes the address will need =
-to be
->>>           * translated.
->>>           */
->>> +
->>> +        if ( !msix->pba )
->>> +        {
->>> +            msix->pba =3D ioremap(base, vmsix_table_size(vpci, VPCI_MS=
-IX_PBA));
->>> +            if ( !msix->pba )
->>> +            {
->>> +                /*
->>> +                 * If unable to map the PBA return all 1s (all pending=
-): it's
->>> +                 * likely better to trigger spurious events than drop =
-them.
->>> +                 */
->>> +                spin_unlock(&vpci->lock);
->>> +                gprintk(XENLOG_WARNING,
->>> +                        "%pp: unable to map MSI-X PBA, report all pend=
-ing\n",
->>> +                        msix->pdev);
->>> +                return X86EMUL_OKAY;
->>
->> Hmm, this may report more set bits than there are vectors. Which is
->> probably fine, but the comment may want adjusting a little to make
->> clear this is understood and meant to be that way.
->=20
-> Yes, it could return more bits than vectors, but that area is also
-> part of the PBA (as the end is aligned to 8 bytes). I will adjust the
-> comment.
->=20
->>> +           }
->>> +        }
->>
->> Imo it would make sense to limit the locked region to around just this
->> check-and-map logic. There's no need for ...
->>
->>>          switch ( len )
->>>          {
->>>          case 4:
->>> -            *data =3D readl(addr);
->>> +            *data =3D readl(msix->pba + idx);
->>>              break;
->>> =20
->>>          case 8:
->>> -            *data =3D readq(addr);
->>> +            *data =3D readq(msix->pba + idx);
->>>              break;
->>> =20
->>>          default:
->>>              ASSERT_UNREACHABLE();
->>>              break;
->>>          }
->>> +        spin_unlock(&vpci->lock);
->>
->> ... the actual access to happen under lock, as you remove the mapping
->> only when the device is being removed. I'm inclined to suggest making
->> a helper function, which does an unlocked check, then the ioremap(),
->> then takes the lock and re-checks whether the field's still NULL, and
->> either installs the mapping or (after unlocking) iounmap()s it.
->=20
-> I'm fine with dropping the lock earlier, but I'm not sure there's much
-> point in placing this in a separate helper, as it's the mapping of at
-> most 2 pages (PBA is 2048 bytes in size, 64bit aligned).
->=20
-> I guess you are suggesting this in preparation for adding support to
-> access the non PBA area falling into the same page(s)?
+Remove the bogus Xen override that was usually larger than the actual
+size and just calculate the value on demand.  Note that
+swiotlb_max_segment still doesn't make sense as an interface and should
+eventually be removed.
 
-Not just. The write path wants to use the same logic, and with it
-becoming a little more involved I think it would be better to have it
-in just one place.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Anshuman Khandual <anshuman.khandual@arm.com>
+---
+ drivers/xen/swiotlb-xen.c |  2 --
+ include/linux/swiotlb.h   |  1 -
+ kernel/dma/swiotlb.c      | 20 +++-----------------
+ 3 files changed, 3 insertions(+), 20 deletions(-)
 
-Jan
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index 47aebd98f52f5..485cd06ed39e7 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -202,7 +202,6 @@ int xen_swiotlb_init(void)
+ 	rc = swiotlb_late_init_with_tbl(start, nslabs);
+ 	if (rc)
+ 		return rc;
+-	swiotlb_set_max_segment(PAGE_SIZE);
+ 	return 0;
+ error:
+ 	if (nslabs > 1024 && repeat--) {
+@@ -254,7 +253,6 @@ void __init xen_swiotlb_init_early(void)
+ 
+ 	if (swiotlb_init_with_tbl(start, nslabs, true))
+ 		panic("Cannot allocate SWIOTLB buffer");
+-	swiotlb_set_max_segment(PAGE_SIZE);
+ }
+ #endif /* CONFIG_X86 */
+ 
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index f6c3638255d54..9fb3a568f0c51 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -164,7 +164,6 @@ static inline void swiotlb_adjust_size(unsigned long size)
+ #endif /* CONFIG_SWIOTLB */
+ 
+ extern void swiotlb_print_info(void);
+-extern void swiotlb_set_max_segment(unsigned int);
+ 
+ #ifdef CONFIG_DMA_RESTRICTED_POOL
+ struct page *swiotlb_alloc(struct device *dev, size_t size);
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index 64b390136f9ef..e31c235b5fd9e 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -75,12 +75,6 @@ struct io_tlb_mem io_tlb_default_mem;
+ 
+ phys_addr_t swiotlb_unencrypted_base;
+ 
+-/*
+- * Max segment that we can provide which (if pages are contingous) will
+- * not be bounced (unless SWIOTLB_FORCE is set).
+- */
+-static unsigned int max_segment;
+-
+ static unsigned long default_nslabs = IO_TLB_DEFAULT_SIZE >> IO_TLB_SHIFT;
+ 
+ static int __init
+@@ -104,18 +98,12 @@ early_param("swiotlb", setup_io_tlb_npages);
+ 
+ unsigned int swiotlb_max_segment(void)
+ {
+-	return io_tlb_default_mem.nslabs ? max_segment : 0;
++	if (!io_tlb_default_mem.nslabs)
++		return 0;
++	return rounddown(io_tlb_default_mem.nslabs << IO_TLB_SHIFT, PAGE_SIZE);
+ }
+ EXPORT_SYMBOL_GPL(swiotlb_max_segment);
+ 
+-void swiotlb_set_max_segment(unsigned int val)
+-{
+-	if (swiotlb_force == SWIOTLB_FORCE)
+-		max_segment = 1;
+-	else
+-		max_segment = rounddown(val, PAGE_SIZE);
+-}
+-
+ unsigned long swiotlb_size_or_default(void)
+ {
+ 	return default_nslabs << IO_TLB_SHIFT;
+@@ -267,7 +255,6 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
+ 
+ 	if (verbose)
+ 		swiotlb_print_info();
+-	swiotlb_set_max_segment(mem->nslabs << IO_TLB_SHIFT);
+ 	return 0;
+ }
+ 
+@@ -368,7 +355,6 @@ swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs)
+ 	swiotlb_init_io_tlb_mem(mem, virt_to_phys(tlb), nslabs, true);
+ 
+ 	swiotlb_print_info();
+-	swiotlb_set_max_segment(mem->nslabs << IO_TLB_SHIFT);
+ 	return 0;
+ }
+ 
+-- 
+2.30.2
 
 
