@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE67EC433F5
-	for <xen-devel@archiver.kernel.org>; Tue,  1 Mar 2022 20:22:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.281801.480298 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99F1C433F5
+	for <xen-devel@archiver.kernel.org>; Tue,  1 Mar 2022 20:26:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.281812.480315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nP916-0005fW-4j; Tue, 01 Mar 2022 20:22:40 +0000
+	id 1nP94Z-0006j7-2R; Tue, 01 Mar 2022 20:26:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 281801.480298; Tue, 01 Mar 2022 20:22:40 +0000
+Received: by outflank-mailman (output) from mailman id 281812.480315; Tue, 01 Mar 2022 20:26:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nP916-0005fP-1n; Tue, 01 Mar 2022 20:22:40 +0000
-Received: by outflank-mailman (input) for mailman id 281801;
- Tue, 01 Mar 2022 20:22:38 +0000
+	id 1nP94Y-0006h3-UT; Tue, 01 Mar 2022 20:26:14 +0000
+Received: by outflank-mailman (input) for mailman id 281812;
+ Tue, 01 Mar 2022 20:26:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5KN6=TM=kernel.org=sashal@srs-se1.protection.inumbo.net>)
- id 1nP914-0004Wo-QS
- for xen-devel@lists.xenproject.org; Tue, 01 Mar 2022 20:22:38 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 1nP8zo-0002IQ-VS
+ for xen-devel@lists.xenproject.org; Tue, 01 Mar 2022 20:21:21 +0000
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [2604:1380:40e1:4800::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 55d41463-999d-11ec-8539-5f4723681683;
- Tue, 01 Mar 2022 21:22:37 +0100 (CET)
+ id 26ce0ae7-999d-11ec-8539-5f4723681683;
+ Tue, 01 Mar 2022 21:21:19 +0100 (CET)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id B972E60C1A;
- Tue,  1 Mar 2022 20:22:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2111DC340EF;
- Tue,  1 Mar 2022 20:22:31 +0000 (UTC)
+ by sin.source.kernel.org (Postfix) with ESMTPS id 3CF8ECE1EC9;
+ Tue,  1 Mar 2022 20:21:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8B30C340F1;
+ Tue,  1 Mar 2022 20:21:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,17 +46,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 55d41463-999d-11ec-8539-5f4723681683
+X-Inumbo-ID: 26ce0ae7-999d-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1646166156;
-	bh=aPLnTDcN5Cogu7sSosopTtKGWxetddHlbwS/+ePDwqU=;
+	s=k20201202; t=1646166076;
+	bh=2Vzk2YwMAxcJNg8Rm+jvnFFtDs7ThSFhX2BqVrZ51qo=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=h+UeU/zpRmHfhaCMfuhxF+u1Vz65yCguVXd6YqWMqQ9EwnBIAdimJOSMbh1mAA2Ms
-	 84ZxX16WllwqYrGoHC6mgt0OLiTn4sqHEj8N0+1nlzOhG/c3wqsRz1iZN43zEJNX6C
-	 fOf4Cb2jJVVdUET9zwIB+H3zmJA7Caz4tE2pUgkXtzGXRkSGea/bqMf+C+8c3pO6ic
-	 URTUFe4V1gScGuoQ3D0Ekcj6AqUmhMRCtUvNeQ2y1vxYvRG7Kh5ET4Xm1PesL/gEUo
-	 3Q0KWJJ2kRi0inmOpZ6BpBCsXbyHVleS9ScuehEAQi26couDLVPeTg2unOF1F5DL2M
-	 wOb7icT5FLxrA==
+	b=s6tBqiNjjpaShVM2/hLDqSkz66ePssOER49OmyquP39Tq6m2BI2YapFbHlwUFzxCi
+	 kn1fd2AEx/TEPMsuXdS+/pCmJ2yci+YGf4XMddrcLm4lq/k8hOTs7Xv3nthX1Kl4t1
+	 7Lq59r4cr0r8w9YqP32gIE66aeYSUcJe5st8M3MY2q4PVkWd2FhU6WNmtBnwZh4Nbm
+	 G4duiclmwVtLv0SKoj99DjRM5h+Cuv8wwoPS2PvlEMW8efRhJa/SN50yLNluv0+VbH
+	 yAxayxO1mwWx7Ff+FxCAZHwZEd/0gLmOsSC0vPn0x1AFtKB7+6pOgocyhoNAYpbbgo
+	 uBiPKjFuD/4Zw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
@@ -68,12 +69,12 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	davem@davemloft.net,
 	xen-devel@lists.xenproject.org,
 	netdev@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 4/6] Revert "xen-netback: Check for hotplug-status existence before watching"
-Date: Tue,  1 Mar 2022 15:22:08 -0500
-Message-Id: <20220301202212.19419-4-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 5/7] Revert "xen-netback: Check for hotplug-status existence before watching"
+Date: Tue,  1 Mar 2022 15:20:43 -0500
+Message-Id: <20220301202046.19220-5-sashal@kernel.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220301202212.19419-1-sashal@kernel.org>
-References: <20220301202212.19419-1-sashal@kernel.org>
+In-Reply-To: <20220301202046.19220-1-sashal@kernel.org>
+References: <20220301202046.19220-1-sashal@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 X-stable: review
@@ -113,10 +114,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/xenbus.c
-index e6646c8a7bdbb..78788402edd8b 100644
+index 6b678ab0a31f7..6d7fb0a956452 100644
 --- a/drivers/net/xen-netback/xenbus.c
 +++ b/drivers/net/xen-netback/xenbus.c
-@@ -1040,15 +1040,11 @@ static void connect(struct backend_info *be)
+@@ -1044,15 +1044,11 @@ static void connect(struct backend_info *be)
  	xenvif_carrier_on(be->vif);
  
  	unregister_hotplug_status_watch(be);
