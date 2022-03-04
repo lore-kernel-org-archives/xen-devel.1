@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E18E7C433F5
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:18:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.284476.483991 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C378C433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:18:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.284478.483998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCV4-0007Wl-SY; Fri, 04 Mar 2022 18:17:58 +0000
+	id 1nQCV6-0007vh-9t; Fri, 04 Mar 2022 18:18:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 284476.483991; Fri, 04 Mar 2022 18:17:58 +0000
+Received: by outflank-mailman (output) from mailman id 284478.483998; Fri, 04 Mar 2022 18:17:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCV2-0007Ki-Kj; Fri, 04 Mar 2022 18:17:56 +0000
-Received: by outflank-mailman (input) for mailman id 284476;
+	id 1nQCV4-0007np-MY; Fri, 04 Mar 2022 18:17:58 +0000
+Received: by outflank-mailman (input) for mailman id 284478;
  Fri, 04 Mar 2022 17:56:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WvCO=TP=xt3.it=ms@srs-se1.protection.inumbo.net>)
- id 1nQC2E-0005R5-Lr
- for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:10 +0000
+ id 1nQC2H-0005R5-Rt
+ for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:13 +0000
 Received: from radon.xt3.it (radon.xt3.it [2a01:4f8:190:4055::2])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 40c746f5-9be3-11ec-8539-5f4723681683;
- Fri, 04 Mar 2022 18:48:09 +0100 (CET)
+ id 433b3b5c-9be3-11ec-8539-5f4723681683;
+ Fri, 04 Mar 2022 18:48:13 +0100 (CET)
 Received: from nb2assolieri.mat.unimo.it ([155.185.4.56] helo=localhost)
  by radon.xt3.it with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.89) (envelope-from <ms@xt3.it>)
- id 1nQC2C-00006k-F1; Fri, 04 Mar 2022 18:48:08 +0100
+ id 1nQC2G-0000AI-G5; Fri, 04 Mar 2022 18:48:12 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 40c746f5-9be3-11ec-8539-5f4723681683
+X-Inumbo-ID: 433b3b5c-9be3-11ec-8539-5f4723681683
 From: Marco Solieri <marco.solieri@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Marco Solieri <marco.solieri@minervasys.tech>,
@@ -54,10 +54,11 @@ Cc: Marco Solieri <marco.solieri@minervasys.tech>,
 	Wei Liu <wl@xen.org>,
 	Marco Solieri <marco.solieri@unimore.it>,
 	Andrea Bastoni <andrea.bastoni@minervasys.tech>,
-	Luca Miccio <lucmiccio@gmail.com>
-Subject: [PATCH 20/36] xen/common: introduce buddy required reservation
-Date: Fri,  4 Mar 2022 18:46:45 +0100
-Message-Id: <20220304174701.1453977-21-marco.solieri@minervasys.tech>
+	Luca Miccio <lucmiccio@gmail.com>,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH 25/36] xen/arm: bring back get_xen_paddr
+Date: Fri,  4 Mar 2022 18:46:50 +0100
+Message-Id: <20220304174701.1453977-26-marco.solieri@minervasys.tech>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
 References: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
@@ -66,54 +67,90 @@ Content-Transfer-Encoding: 8bit
 
 From: Luca Miccio <lucmiccio@gmail.com>
 
-When cache coloring is enabled, a certain amount of memory is reserved
-for buddy allocation because current coloring implementation does not
-support Xen heap memory. As of this commit, the colored allocator is used
-for dom0, domUs, while the buddy manages only Xen memory. The memory
-reserved to the buddy is thus lowered to a reasonably small value.
-Introduce a new variable that specifies the amount of memory reserved
-for the buddy allocator.
-The current default value will be enough even when we will add
-coloring for Xen in the following patches.
+In order to efficiently coloring Xen, we need to relocate it and move
+the xen code to a unique memory region that will be marked as colored
+for Xen itself. This region will be out target region and it will be
+placed as high as possibile in RAM. To do that we need to use the old
+get_xen_paddr function that was part of the relocation feature.
+Moreover the size of the region we want to relocate is not equal to xen
+code size anymore because of coloring.
+In the worst case the target region must be greater than xen code
+size * avail. colors. However the get_xen_paddr assumes to handle a
+memory with size equals only to xen code region.
+Add a new "size" parameter to handle also the coloring case.
 
 Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
 Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+Acked-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/common/page_alloc.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ xen/arch/arm/setup.c | 54 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 82f6e8330a..fffa438029 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -230,6 +230,13 @@ static bool __read_mostly scrub_debug;
- #define scrub_debug    false
- #endif
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 0bfe12da57..8d980ce18d 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -570,6 +570,60 @@ static paddr_t __init next_module(paddr_t s, paddr_t *end)
+     return lowest;
+ }
  
 +#ifdef CONFIG_COLORING
-+/* Minimum size required for buddy allocator to work with colored one */
-+unsigned long buddy_required_size __read_mostly = MB(64);
-+#else
-+unsigned long buddy_required_size __read_mostly = 0;
++/**
++ * get_xen_paddr - get physical address to relocate Xen to
++ *
++ * Xen is relocated to as near to the top of RAM as possible and
++ * aligned to a XEN_PADDR_ALIGN boundary.
++ */
++static paddr_t __init get_xen_paddr(uint32_t xen_size)
++{
++    struct meminfo *mi = &bootinfo.mem;
++    paddr_t min_size;
++    paddr_t paddr = 0;
++    int i;
++
++    min_size = (xen_size + (XEN_PADDR_ALIGN-1)) & ~(XEN_PADDR_ALIGN-1);
++
++    /* Find the highest bank with enough space. */
++    for ( i = 0; i < mi->nr_banks; i++ )
++    {
++        const struct membank *bank = &mi->bank[i];
++        paddr_t s, e;
++
++        if ( bank->size >= min_size )
++        {
++            e = consider_modules(bank->start, bank->start + bank->size,
++                                 min_size, XEN_PADDR_ALIGN, 0);
++            if ( !e )
++                continue;
++
++#ifdef CONFIG_ARM_32
++            /* Xen must be under 4GB */
++            if ( e > 0x100000000ULL )
++                e = 0x100000000ULL;
++            if ( e < bank->start )
++                continue;
 +#endif
 +
- /*
-  * Bit width of the DMA heap -- used to override NUMA-node-first.
-  * allocation strategy, which can otherwise exhaust low memory.
-@@ -678,6 +685,13 @@ static void dump_col_heap(unsigned char key)
- 
-     printk("Total number of pages: %lu\n", total_avail_col_pages);
- }
-+static int __init parse_buddy_required_size(const char *s)
-+{
-+    buddy_required_size = simple_strtoull(s, &s, 0);
++            s = e - min_size;
 +
-+    return *s ? -EINVAL : 0;
++            if ( s > paddr )
++                paddr = s;
++        }
++    }
++
++    if ( !paddr )
++        panic("Not enough memory to relocate Xen\n");
++
++    printk("Placing Xen at 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
++           paddr, paddr + min_size);
++
++    return paddr;
 +}
-+custom_param("buddy_size", parse_buddy_required_size);
- #else /* !CONFIG_COLORING */
- #define init_col_heap_pages(x, y) init_heap_pages(x, y)
- 
++#endif
++
+ static void __init init_pdx(void)
+ {
+     paddr_t bank_start, bank_size, bank_end;
 -- 
 2.30.2
 
