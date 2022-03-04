@@ -4,31 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C80DC433F5
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 17:43:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.284397.483629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97D0FC433F5
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 17:51:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.284444.483640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQBxU-0004Xw-TP; Fri, 04 Mar 2022 17:43:16 +0000
+	id 1nQC5e-0006TM-47; Fri, 04 Mar 2022 17:51:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 284397.483629; Fri, 04 Mar 2022 17:43:16 +0000
+Received: by outflank-mailman (output) from mailman id 284444.483640; Fri, 04 Mar 2022 17:51:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQBxU-0004Xp-Q5; Fri, 04 Mar 2022 17:43:16 +0000
-Received: by outflank-mailman (input) for mailman id 284397;
- Fri, 04 Mar 2022 17:43:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nQC5e-0006TF-16; Fri, 04 Mar 2022 17:51:42 +0000
+Received: by outflank-mailman (input) for mailman id 284444;
+ Fri, 04 Mar 2022 17:51:40 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2+cs=TP=lst.de=hch@srs-se1.protection.inumbo.net>)
- id 1nQBxT-0004Xj-3G
- for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:43:15 +0000
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 90b6cd28-9be2-11ec-8eba-a37418f5ba1a;
- Fri, 04 Mar 2022 18:43:13 +0100 (CET)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 18C7068BEB; Fri,  4 Mar 2022 18:43:09 +0100 (CET)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nQC5c-0006T5-Lr; Fri, 04 Mar 2022 17:51:40 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nQC5c-0007jj-FJ; Fri, 04 Mar 2022 17:51:40 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nQC5b-0007Ce-Ka; Fri, 04 Mar 2022 17:51:39 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1nQC5b-0003Zj-K9; Fri, 04 Mar 2022 17:51:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,64 +44,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 90b6cd28-9be2-11ec-8eba-a37418f5ba1a
-Date: Fri, 4 Mar 2022 18:43:08 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Christoph Hellwig <hch@lst.de>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	iommu@lists.linux-foundation.org, x86@kernel.org,
-	Anshuman Khandual <anshuman.khandual@arm.com>,
-	Tom Lendacky <thomas.lendacky@amd.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Juergen Gross <jgross@suse.com>, Joerg Roedel <joro@8bytes.org>,
-	David Woodhouse <dwmw2@infradead.org>,
-	Lu Baolu <baolu.lu@linux.intel.com>,
-	Robin Murphy <robin.murphy@arm.com>,
-	linux-arm-kernel@lists.infradead.org,
-	xen-devel@lists.xenproject.org, linux-ia64@vger.kernel.org,
-	linux-mips@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
-	linux-hyperv@vger.kernel.org, tboot-devel@lists.sourceforge.net,
-	linux-pci@vger.kernel.org
-Subject: Re: [PATCH 11/12] swiotlb: merge swiotlb-xen initialization into
- swiotlb
-Message-ID: <20220304174308.GA13515@lst.de>
-References: <20220301105311.885699-1-hch@lst.de> <20220301105311.885699-12-hch@lst.de> <alpine.DEB.2.22.394.2203011720150.3261@ubuntu-linux-20-04-desktop> <ca748512-12bb-7d75-13f1-8d5ec9703e26@oracle.com> <20220304172859.GA12860@lst.de> <fc3992a8-896b-f0fc-e500-9010ec085c57@oracle.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=9sqrLCBCZPLj3x17LyICQgtsbyY3HoQAGt9Ob6VMpds=; b=O0sME4ga6gaf5/AEPHVuMXKhOx
+	q1YreWwvZfoqNkTLiZeZIryZC1cgtby20QpnAIZQ/seJqliEkXyOs8fjExCA9gxWvYFVpqLCbvnN1
+	j37z7d9nhtTLAnHJV5FoBUGCV3s9t6j5GuUewH2k3MC3SpkVtW+d4truqB9OZK8sXfkg=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-168399-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fc3992a8-896b-f0fc-e500-9010ec085c57@oracle.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+Subject: [xen-unstable-smoke test] 168399: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=1145d94c738ea13e0d2ceedb97a4cfe46292b08e
+X-Osstest-Versions-That:
+    xen=248496f890562fd6d6fea779520dd6335269e92c
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 04 Mar 2022 17:51:39 +0000
 
-On Fri, Mar 04, 2022 at 12:36:17PM -0500, Boris Ostrovsky wrote:
->>> I bisected it to "x86: remove the IOMMU table infrastructure" but haven't actually looked at the code yet.
->> That looks like the swiotlb buffer did not get initialized at all, but I
->> can't really explain why.
->>
->> Can you stick in a printk and see if xen_swiotlb_init_early gets called
->> at all?
->
->
->
-> Actually, that's the only thing I did do so far and yes, it does get called.
+flight 168399 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/168399/
 
-So, specifically for "x86: remove the IOMMU table infrastructure" I
-think we need the one-liner below so that swiotlb_exit doesn't get called
-for the Xen case.  But that should have been fixed up by the next
-patch already.
+Failures :-/ but no regressions.
 
-diff --git a/arch/x86/kernel/pci-dma.c b/arch/x86/kernel/pci-dma.c
-index 2ac0ef9c2fb76..1173aa282ab27 100644
---- a/arch/x86/kernel/pci-dma.c
-+++ b/arch/x86/kernel/pci-dma.c
-@@ -70,7 +70,7 @@ static void __init pci_xen_swiotlb_init(void)
- 	if (!xen_initial_domain() && !x86_swiotlb_enable &&
- 	    swiotlb_force != SWIOTLB_FORCE)
- 		return;
--	x86_swiotlb_enable = false;
-+	x86_swiotlb_enable = true;
- 	xen_swiotlb = true;
- 	xen_swiotlb_init_early();
- 	dma_ops = &xen_swiotlb_dma_ops;
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  1145d94c738ea13e0d2ceedb97a4cfe46292b08e
+baseline version:
+ xen                  248496f890562fd6d6fea779520dd6335269e92c
+
+Last test of basis   168396  2022-03-04 09:01:42 Z    0 days
+Testing same since   168399  2022-03-04 14:03:05 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Jan Beulich <jbeulich@suse.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   248496f890..1145d94c73  1145d94c738ea13e0d2ceedb97a4cfe46292b08e -> smoke
 
