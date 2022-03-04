@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E964C433EF
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:17:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.284440.483829 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A0CC433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:17:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.284455.483845 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCUR-00078H-QN; Fri, 04 Mar 2022 18:17:19 +0000
+	id 1nQCUW-0008C6-NS; Fri, 04 Mar 2022 18:17:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 284440.483829; Fri, 04 Mar 2022 18:17:19 +0000
+Received: by outflank-mailman (output) from mailman id 284455.483845; Fri, 04 Mar 2022 18:17:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCUP-0006zY-To; Fri, 04 Mar 2022 18:17:17 +0000
-Received: by outflank-mailman (input) for mailman id 284440;
- Fri, 04 Mar 2022 17:48:14 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nQCUU-0007x7-97; Fri, 04 Mar 2022 18:17:22 +0000
+Received: by outflank-mailman (input) for mailman id 284455;
+ Fri, 04 Mar 2022 17:56:08 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WvCO=TP=xt3.it=ms@srs-se1.protection.inumbo.net>)
- id 1nQC2I-0005R4-OZ
- for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:14 +0000
+ id 1nQC2U-0005R5-Nz
+ for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:26 +0000
 Received: from radon.xt3.it (radon.xt3.it [2a01:4f8:190:4055::2])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 43c46fe5-9be3-11ec-8eba-a37418f5ba1a;
- Fri, 04 Mar 2022 18:48:14 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4aed8000-9be3-11ec-8539-5f4723681683;
+ Fri, 04 Mar 2022 18:48:26 +0100 (CET)
 Received: from nb2assolieri.mat.unimo.it ([155.185.4.56] helo=localhost)
  by radon.xt3.it with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.89) (envelope-from <ms@xt3.it>)
- id 1nQC2H-0000Av-9l; Fri, 04 Mar 2022 18:48:13 +0100
+ id 1nQC2T-0000HB-Cg; Fri, 04 Mar 2022 18:48:25 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 43c46fe5-9be3-11ec-8eba-a37418f5ba1a
+X-Inumbo-ID: 4aed8000-9be3-11ec-8539-5f4723681683
 From: Marco Solieri <marco.solieri@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Marco Solieri <marco.solieri@minervasys.tech>,
@@ -54,11 +54,10 @@ Cc: Marco Solieri <marco.solieri@minervasys.tech>,
 	Wei Liu <wl@xen.org>,
 	Marco Solieri <marco.solieri@unimore.it>,
 	Andrea Bastoni <andrea.bastoni@minervasys.tech>,
-	Luca Miccio <lucmiccio@gmail.com>,
-	Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: [PATCH 26/36] xen/arm: add argument to remove_early_mappings
-Date: Fri,  4 Mar 2022 18:46:51 +0100
-Message-Id: <20220304174701.1453977-27-marco.solieri@minervasys.tech>
+	Luca Miccio <lucmiccio@gmail.com>
+Subject: [PATCH 31/36] Disable coloring if static memory support is selected
+Date: Fri,  4 Mar 2022 18:46:56 +0100
+Message-Id: <20220304174701.1453977-32-marco.solieri@minervasys.tech>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
 References: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
@@ -67,76 +66,27 @@ Content-Transfer-Encoding: 8bit
 
 From: Luca Miccio <lucmiccio@gmail.com>
 
-Upcoming patches will need to remove temporary mappings created during
-Xen coloring process. The function remove_early_mappings does what we
-need but it is case-specific. Parametrize the function to avoid code
-replication.
+Static memory assumes to have physically contiguous memory mapped to
+domains. This assumption cannot be made when coloring is enabled.
+These two features have to be mutually exclusive.
 
 Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
-Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
-Acked-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/arch/arm/include/asm/mm.h | 2 +-
- xen/arch/arm/mm.c             | 8 ++++----
- xen/arch/arm/setup.c          | 3 ++-
- 3 files changed, 7 insertions(+), 6 deletions(-)
+ xen/arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 9ac1767595..041ec4ee70 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -184,7 +184,7 @@ extern void setup_pagetables(unsigned long boot_phys_offset, paddr_t xen_paddr);
- /* Map FDT in boot pagetable */
- extern void *early_fdt_map(paddr_t fdt_paddr);
- /* Remove early mappings */
--extern void remove_early_mappings(void);
-+extern void remove_early_mappings(unsigned long va, unsigned long size);
- /* Allocate and initialise pagetables for a secondary CPU. Sets init_ttbr to the
-  * new page table */
- extern int init_secondary_pagetables(int cpu);
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index fd7a313d88..d69f18b5d2 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -597,13 +597,13 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
-     return fdt_virt;
- }
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index f0f999d172..8f8be9d754 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -100,6 +100,7 @@ config HARDEN_BRANCH_PREDICTOR
+ config COLORING
+ 	bool "L2 cache coloring"
+ 	default n
++	depends on !STATIC_MEMORY
+ 	depends on ARM_64
  
--void __init remove_early_mappings(void)
-+void __init remove_early_mappings(unsigned long va, unsigned long size)
- {
-     lpae_t pte = {0};
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START), pte);
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START + SZ_2M),
-+    write_pte(xen_second + second_table_offset(va), pte);
-+    write_pte(xen_second + second_table_offset(va + size),
-               pte);
--    flush_xen_tlb_range_va(BOOT_FDT_VIRT_START, BOOT_FDT_SLOT_SIZE);
-+    flush_xen_tlb_range_va(va, size);
- }
- 
- /*
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 8d980ce18d..13b10515a8 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -41,6 +41,7 @@
- #include <xen/libfdt/libfdt.h>
- #include <xen/acpi.h>
- #include <xen/warning.h>
-+#include <xen/sizes.h>
- #include <asm/alternative.h>
- #include <asm/page.h>
- #include <asm/current.h>
-@@ -426,7 +427,7 @@ void __init discard_initial_modules(void)
- 
-     mi->nr_mods = 0;
- 
--    remove_early_mappings();
-+    remove_early_mappings(BOOT_FDT_VIRT_START, SZ_2M);
- }
- 
- /* Relocate the FDT in Xen heap */
+ config TEE
 -- 
 2.30.2
 
