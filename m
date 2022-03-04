@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28EB8C433F5
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:17:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.284460.483901 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA05C433F5
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:17:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.284461.483908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCUi-00029V-1y; Fri, 04 Mar 2022 18:17:36 +0000
+	id 1nQCUj-0002gW-AG; Fri, 04 Mar 2022 18:17:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 284460.483901; Fri, 04 Mar 2022 18:17:35 +0000
+Received: by outflank-mailman (output) from mailman id 284461.483908; Fri, 04 Mar 2022 18:17:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCUf-0001yM-Gi; Fri, 04 Mar 2022 18:17:33 +0000
-Received: by outflank-mailman (input) for mailman id 284460;
- Fri, 04 Mar 2022 17:56:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nQCUh-0002Wk-Gx; Fri, 04 Mar 2022 18:17:35 +0000
+Received: by outflank-mailman (input) for mailman id 284461;
+ Fri, 04 Mar 2022 17:56:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WvCO=TP=xt3.it=ms@srs-se1.protection.inumbo.net>)
- id 1nQC2W-0005R4-72
- for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:28 +0000
+ id 1nQC2B-0005R5-La
+ for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:07 +0000
 Received: from radon.xt3.it (radon.xt3.it [2a01:4f8:190:4055::2])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4bc51566-9be3-11ec-8eba-a37418f5ba1a;
- Fri, 04 Mar 2022 18:48:27 +0100 (CET)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3ddfbb0d-9be3-11ec-8539-5f4723681683;
+ Fri, 04 Mar 2022 18:48:04 +0100 (CET)
 Received: from nb2assolieri.mat.unimo.it ([155.185.4.56] helo=localhost)
  by radon.xt3.it with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.89) (envelope-from <ms@xt3.it>)
- id 1nQC2U-0000IG-TQ; Fri, 04 Mar 2022 18:48:27 +0100
+ id 1nQC27-0008Ty-Il; Fri, 04 Mar 2022 18:48:03 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4bc51566-9be3-11ec-8eba-a37418f5ba1a
+X-Inumbo-ID: 3ddfbb0d-9be3-11ec-8539-5f4723681683
 From: Marco Solieri <marco.solieri@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Marco Solieri <marco.solieri@minervasys.tech>,
@@ -55,9 +55,9 @@ Cc: Marco Solieri <marco.solieri@minervasys.tech>,
 	Marco Solieri <marco.solieri@unimore.it>,
 	Andrea Bastoni <andrea.bastoni@minervasys.tech>,
 	Luca Miccio <lucmiccio@gmail.com>
-Subject: [PATCH 33/36] doc, xen-command-line: introduce coloring options
-Date: Fri,  4 Mar 2022 18:46:58 +0100
-Message-Id: <20220304174701.1453977-34-marco.solieri@minervasys.tech>
+Subject: [PATCH 14/36] xen/arch: add dump coloring info for domains
+Date: Fri,  4 Mar 2022 18:46:39 +0100
+Message-Id: <20220304174701.1453977-15-marco.solieri@minervasys.tech>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
 References: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
@@ -66,99 +66,73 @@ Content-Transfer-Encoding: 8bit
 
 From: Luca Miccio <lucmiccio@gmail.com>
 
-Four additional parameters in the Xen command line are used to define
-the underlying coloring policy, which is not directly configurable
-otherwise.
+Print the color assignment for each domain when requested.
 
 Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
 Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 ---
- docs/misc/xen-command-line.pandoc | 51 +++++++++++++++++++++++++++++--
- 1 file changed, 49 insertions(+), 2 deletions(-)
+ xen/arch/arm/coloring.c             | 12 ++++++++++++
+ xen/arch/arm/domain.c               |  1 +
+ xen/arch/arm/include/asm/coloring.h |  7 +++++++
+ 3 files changed, 20 insertions(+)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index efda335652..a472d51cf9 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -299,6 +299,20 @@ can be maintained with the pv-shim mechanism.
-     cause Xen not to use Indirect Branch Tracking even when support is
-     available in hardware.
+diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
+index 382d558021..8061c3824f 100644
+--- a/xen/arch/arm/coloring.c
++++ b/xen/arch/arm/coloring.c
+@@ -332,6 +332,18 @@ static int __init parse_xen_colors(const char *s)
+ }
+ custom_param("xen_colors", parse_xen_colors);
  
-+### buddy\_size (arm64)
-+> `= <size in megabyte>`
++void coloring_dump_info(struct domain *d)
++{
++    int i;
 +
-+> Default: `64 MB`
++    printk("Domain %d has %u color(s) [ ", d->domain_id, d->max_colors);
++    for ( i = 0; i < d->max_colors; i++ )
++    {
++        printk("%"PRIu32" ", d->colors[i]);
++    }
++    printk("]\n");
++}
 +
-+Amount of memory reserved for the buddy allocator when colored allocator is
-+active. This options is useful only if coloring support is enabled.
-+The colored allocator is meant as an alternative to the buddy allocator,
-+since its allocation policy is by definition incompatible with the
-+generic one. Since the Xen heap systems is not colored yet, we need to
-+support the coexistence of the two allocators for now. This parameter, which is
-+optional and for expert only, is used to set the amount of memory reserved to
-+the buddy allocator.
-+
- ### clocksource (x86)
- > `= pit | hpet | acpi | tsc`
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+index 80a6f39464..fc12c79488 100644
+--- a/xen/arch/arm/domain.c
++++ b/xen/arch/arm/domain.c
+@@ -1131,6 +1131,7 @@ int domain_relinquish_resources(struct domain *d)
+ void arch_dump_domain_info(struct domain *d)
+ {
+     p2m_dump_info(d);
++    coloring_dump_info(d);
+ }
  
-@@ -884,7 +898,17 @@ Controls for the dom0 IOMMU setup.
  
-     Incorrect use of this option may result in a malfunctioning system.
- 
--### dom0_ioports_disable (x86)
-+### dom0\_colors (arm64)
-+> `= List of <integer>-<integer>`
+diff --git a/xen/arch/arm/include/asm/coloring.h b/xen/arch/arm/include/asm/coloring.h
+index 1f7e0dde79..8609e17e80 100644
+--- a/xen/arch/arm/include/asm/coloring.h
++++ b/xen/arch/arm/include/asm/coloring.h
+@@ -40,10 +40,17 @@ bool check_domain_colors(struct domain *d);
+  * color configuration.
+  */
+ uint32_t *setup_default_colors(uint32_t *col_num);
 +
-+> Default: `All available colors`
++void coloring_dump_info(struct domain *d);
+ #else /* !CONFIG_COLORING */
+ static inline bool __init coloring_init(void)
+ {
+     return true;
+ }
 +
-+Specify dom0 color configuration. If the parameter is not set, all available
-+colors are chosen and the user is warned on Xen's serial console. This color
-+configuration acts also as the default one for all DomUs that do not have any
-+explicit color assignment in their configuration file.
-+
-+### dom0\_ioports\_disable (x86)
- > `= List of <hex>-<hex>`
- 
- Specify a list of IO ports to be excluded from dom0 access.
-@@ -2625,6 +2649,20 @@ unknown NMIs will still be processed.
- Set the NMI watchdog timeout in seconds.  Specifying `0` will turn off
- the watchdog.
- 
-+### way\_size (arm64)
-+> `= <size in byte>`
-+
-+> Default: `Obtained from the hardware`
-+
-+Specify the way size of the Last Level Cache. This parameter is only useful with
-+coloring support enabled. It is an optional, expert-only parameter and it is
-+used to calculate what bits in the physical address can be used by the coloring
-+algorithm, and thus the maximum available colors on the platform. It can be
-+obtained by dividing the total LLC size by the number of associativity ways.
-+By default, the value is also automatically computed during coloring
-+initialization to avoid any kind of misconfiguration. For this reason, it is
-+highly recommended to use this boot argument with specific needs only.
-+
- ### x2apic (x86)
- > `= <boolean>`
- 
-@@ -2642,7 +2680,16 @@ In the case that x2apic is in use, this option switches between physical and
- clustered mode.  The default, given no hint from the **FADT**, is cluster
- mode.
- 
--### xenheap_megabytes (arm32)
-+### xen\_colors (arm64)
-+> `= List of <integer>-<integer>`
-+
-+> Default: `0-0: the lowermost color`
-+
-+Specify Xen color configuration. 
-+Two colors are most likely needed on platforms where private caches are
-+physically indexed, e.g. the L1 instruction cache of the Arm Cortex-A57.
-+
-+### xenheap\_megabytes (arm32)
- > `= <size>`
- 
- > Default: `0` (1/32 of RAM)
++static inline void coloring_dump_info(struct domain *d)
++{
++    return;
++}
+ #endif /* CONFIG_COLORING */
+ #endif /* !__ASM_ARM_COLORING_H__ */
 -- 
 2.30.2
 
