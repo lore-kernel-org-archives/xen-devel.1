@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C156C43219
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:17:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.284406.483673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA23C43217
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Mar 2022 18:17:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.284413.483694 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCU4-0002Ec-Lg; Fri, 04 Mar 2022 18:16:56 +0000
+	id 1nQCU6-0002cy-6f; Fri, 04 Mar 2022 18:16:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 284406.483673; Fri, 04 Mar 2022 18:16:56 +0000
+Received: by outflank-mailman (output) from mailman id 284413.483694; Fri, 04 Mar 2022 18:16:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nQCU4-0002DV-Df; Fri, 04 Mar 2022 18:16:56 +0000
-Received: by outflank-mailman (input) for mailman id 284406;
- Fri, 04 Mar 2022 17:47:57 +0000
+	id 1nQCU5-0002Zt-NP; Fri, 04 Mar 2022 18:16:57 +0000
+Received: by outflank-mailman (input) for mailman id 284413;
+ Fri, 04 Mar 2022 17:48:00 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=WvCO=TP=xt3.it=ms@srs-se1.protection.inumbo.net>)
- id 1nQC21-0005R5-KP
- for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:47:57 +0000
+ id 1nQC24-0005R5-Kq
+ for xen-devel@lists.xenproject.org; Fri, 04 Mar 2022 17:48:00 +0000
 Received: from radon.xt3.it (radon.xt3.it [2a01:4f8:190:4055::2])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 38adf329-9be3-11ec-8539-5f4723681683;
- Fri, 04 Mar 2022 18:47:55 +0100 (CET)
+ id 39bbb6ac-9be3-11ec-8539-5f4723681683;
+ Fri, 04 Mar 2022 18:47:57 +0100 (CET)
 Received: from nb2assolieri.mat.unimo.it ([155.185.4.56] helo=localhost)
  by radon.xt3.it with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.89) (envelope-from <ms@xt3.it>)
- id 1nQC1y-0008PQ-U7; Fri, 04 Mar 2022 18:47:55 +0100
+ id 1nQC20-0008Pk-Ky; Fri, 04 Mar 2022 18:47:56 +0100
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,7 +42,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 38adf329-9be3-11ec-8539-5f4723681683
+X-Inumbo-ID: 39bbb6ac-9be3-11ec-8539-5f4723681683
 From: Marco Solieri <marco.solieri@minervasys.tech>
 To: xen-devel@lists.xenproject.org
 Cc: Marco Solieri <marco.solieri@minervasys.tech>,
@@ -54,10 +54,11 @@ Cc: Marco Solieri <marco.solieri@minervasys.tech>,
 	Wei Liu <wl@xen.org>,
 	Marco Solieri <marco.solieri@unimore.it>,
 	Andrea Bastoni <andrea.bastoni@minervasys.tech>,
-	Luca Miccio <lucmiccio@gmail.com>
-Subject: [PATCH 03/36] xen/arm: restore xen_paddr argument in setup_pagetables
-Date: Fri,  4 Mar 2022 18:46:28 +0100
-Message-Id: <20220304174701.1453977-4-marco.solieri@minervasys.tech>
+	Luca Miccio <lucmiccio@gmail.com>,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH 05/36] xen/arm: compute LLC way size by hardware inspection
+Date: Fri,  4 Mar 2022 18:46:30 +0100
+Message-Id: <20220304174701.1453977-6-marco.solieri@minervasys.tech>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
 References: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
@@ -66,79 +67,122 @@ Content-Transfer-Encoding: 8bit
 
 From: Luca Miccio <lucmiccio@gmail.com>
 
-Coloring support will re-enable part of the Xen relocation since the
-underlying idea is to "relocate using coloring" for the hypervisors
-itself.
-We setup a target region that will be used exclusively from Xen and
-it will be mapped using the coloring configuration of the hypervisor.
-Part of the relocation we need to bring back is the usage of xen_paddr
-variable that will tell us the physical start address where Xen is
-located.
-Add this variable to the setup_pagetables function and set it properly
-when coloring is not enabled.
-Later on it will be initialized accordingly whether the coloring support
-is enabled or not.
+The size of the LLC way is a crucial parameter for the cache coloring
+support, since it determines the maximum number of available colors on
+the platform.  This parameter can currently be retrieved only from
+the way_size bootarg and it is prone to misconfiguration nullifying the
+coloring mechanism and breaking cache isolation.
+
+Add an alternative and more safe method to retrieve the way size by
+directly asking the hardware, namely using CCSIDR_EL1 and CSSELR_EL1
+registers.
+
+This method has to check also if at least L2 is implemented in the
+hardware since there are scenarios where only L1 cache is availble, e.g,
+QEMU.
 
 Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
+Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- xen/arch/arm/include/asm/mm.h | 2 +-
- xen/arch/arm/mm.c             | 2 +-
- xen/arch/arm/setup.c          | 6 +++---
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ xen/arch/arm/coloring.c | 76 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 76 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 424aaf2823..487be7cf59 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -176,7 +176,7 @@ extern unsigned long total_pages;
- #define PDX_GROUP_SHIFT SECOND_SHIFT
+diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
+index 8f1cff6efb..e3d490b453 100644
+--- a/xen/arch/arm/coloring.c
++++ b/xen/arch/arm/coloring.c
+@@ -25,7 +25,10 @@
+ #include <xen/lib.h>
+ #include <xen/errno.h>
+ #include <xen/param.h>
++
++#include <asm/sysregs.h>
+ #include <asm/coloring.h>
++#include <asm/io.h>
  
- /* Boot-time pagetable setup */
--extern void setup_pagetables(unsigned long boot_phys_offset);
-+extern void setup_pagetables(unsigned long boot_phys_offset, paddr_t xen_paddr);
- /* Map FDT in boot pagetable */
- extern void *early_fdt_map(paddr_t fdt_paddr);
- /* Remove early mappings */
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index e6381e46e6..fd7a313d88 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -634,7 +634,7 @@ static void clear_table(void *table)
+ /* Number of color(s) assigned to Xen */
+ static uint32_t xen_col_num;
+@@ -39,6 +42,79 @@ static uint32_t dom0_col_mask[MAX_COLORS_CELLS];
  
- /* Boot-time pagetable setup.
-  * Changes here may need matching changes in head.S */
--void __init setup_pagetables(unsigned long boot_phys_offset)
-+void __init setup_pagetables(unsigned long boot_phys_offset, paddr_t xen_paddr)
- {
-     uint64_t ttbr;
-     lpae_t pte, *p;
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 100b322b3e..b8d4f50d90 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -867,6 +867,7 @@ void __init start_xen(unsigned long boot_phys_offset,
-     struct bootmodule *xen_bootmodule;
-     struct domain *d;
-     int rc;
-+    paddr_t xen_paddr = (paddr_t)(_start + boot_phys_offset);
+ static uint64_t way_size;
  
-     dcache_line_bytes = read_dcache_line_bytes();
- 
-@@ -893,12 +894,11 @@ void __init start_xen(unsigned long boot_phys_offset,
-     cmdline_parse(cmdline);
- 
-     /* Register Xen's load address as a boot module. */
--    xen_bootmodule = add_boot_module(BOOTMOD_XEN,
--                             (paddr_t)(uintptr_t)(_start + boot_phys_offset),
-+    xen_bootmodule = add_boot_module(BOOTMOD_XEN, xen_paddr,
-                              (paddr_t)(uintptr_t)(_end - _start + 1), false);
-     BUG_ON(!xen_bootmodule);
- 
--    setup_pagetables(boot_phys_offset);
-+    setup_pagetables(boot_phys_offset, xen_paddr);
- 
-     setup_mm();
- 
++#define CTR_LINESIZE_MASK 0x7
++#define CTR_SIZE_SHIFT 13
++#define CTR_SIZE_MASK 0x3FFF
++#define CTR_SELECT_L2 1 << 1
++#define CTR_SELECT_L3 1 << 2
++#define CTR_CTYPEn_MASK 0x7
++#define CTR_CTYPE2_SHIFT 3
++#define CTR_CTYPE3_SHIFT 6
++#define CTR_LLC_ON 1 << 2
++#define CTR_LOC_SHIFT 24
++#define CTR_LOC_MASK 0x7
++#define CTR_LOC_L2 1 << 1
++#define CTR_LOC_NOT_IMPLEMENTED 1 << 0
++
++
++/* Return the way size of last level cache by asking the hardware */
++static uint64_t get_llc_way_size(void)
++{
++    uint32_t cache_sel = READ_SYSREG64(CSSELR_EL1);
++    uint32_t cache_global_info = READ_SYSREG64(CLIDR_EL1);
++    uint32_t cache_info;
++    uint32_t cache_line_size;
++    uint32_t cache_set_num;
++    uint32_t cache_sel_tmp;
++
++    printk(XENLOG_INFO "Get information on LLC\n");
++    printk(XENLOG_INFO "Cache CLIDR_EL1: 0x%"PRIx32"\n", cache_global_info);
++
++    /* Check if at least L2 is implemented */
++    if ( ((cache_global_info >> CTR_LOC_SHIFT) & CTR_LOC_MASK)
++        == CTR_LOC_NOT_IMPLEMENTED )
++    {
++        printk(XENLOG_ERR "ERROR: L2 Cache not implemented\n");
++        return 0;
++    }
++
++    /* Save old value of CSSELR_EL1 */
++    cache_sel_tmp = cache_sel;
++
++    /* Get LLC index */
++    if ( ((cache_global_info >> CTR_CTYPE2_SHIFT) & CTR_CTYPEn_MASK)
++        == CTR_LLC_ON )
++        cache_sel = CTR_SELECT_L2;
++    else
++        cache_sel = CTR_SELECT_L3;
++
++    printk(XENLOG_INFO "LLC selection: %u\n", cache_sel);
++    /* Select the correct LLC in CSSELR_EL1 */
++    WRITE_SYSREG64(cache_sel, CSSELR_EL1);
++
++    /* Ensure write */
++    isb();
++
++    /* Get info about the LLC */
++    cache_info = READ_SYSREG64(CCSIDR_EL1);
++
++    /* ARM TRM: (Log2(Number of bytes in cache line)) - 4. */
++    cache_line_size = 1 << ((cache_info & CTR_LINESIZE_MASK) + 4);
++    /* ARM TRM: (Number of sets in cache) - 1 */
++    cache_set_num = ((cache_info >> CTR_SIZE_SHIFT) & CTR_SIZE_MASK) + 1;
++
++    printk(XENLOG_INFO "Cache line size: %u bytes\n", cache_line_size);
++    printk(XENLOG_INFO "Cache sets num: %u\n", cache_set_num);
++
++    /* Restore value in CSSELR_EL1 */
++    WRITE_SYSREG64(cache_sel_tmp, CSSELR_EL1);
++
++    /* Ensure write */
++    isb();
++
++    return (cache_line_size * cache_set_num);
++}
++
+ /*************************
+  * PARSING COLORING BOOTARGS
+  */
 -- 
 2.30.2
 
