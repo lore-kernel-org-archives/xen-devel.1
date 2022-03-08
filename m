@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5945FC433FE
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Mar 2022 19:48:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.287475.487580 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97FB7C433F5
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Mar 2022 19:48:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.287478.487586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nRfoH-0008IP-Cl; Tue, 08 Mar 2022 19:47:53 +0000
+	id 1nRfoH-0008Qo-TB; Tue, 08 Mar 2022 19:47:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 287475.487580; Tue, 08 Mar 2022 19:47:53 +0000
+Received: by outflank-mailman (output) from mailman id 287478.487586; Tue, 08 Mar 2022 19:47:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nRfoG-0008Fd-JZ; Tue, 08 Mar 2022 19:47:52 +0000
-Received: by outflank-mailman (input) for mailman id 287475;
- Tue, 08 Mar 2022 19:47:51 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nRfoH-0008PA-81; Tue, 08 Mar 2022 19:47:53 +0000
+Received: by outflank-mailman (input) for mailman id 287478;
+ Tue, 08 Mar 2022 19:47:52 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=RGf4=TT=xilinx.com=fnuv@srs-se1.protection.inumbo.net>)
- id 1nRfoE-0004Df-UX
+ id 1nRfoF-0004Om-Pl
  for xen-devel@lists.xenproject.org; Tue, 08 Mar 2022 19:47:51 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2062a.outbound.protection.outlook.com
- [2a01:111:f400:7eae::62a])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a0fb9c64-9f18-11ec-8539-5f4723681683;
- Tue, 08 Mar 2022 20:47:48 +0100 (CET)
-Received: from DS7PR06CA0052.namprd06.prod.outlook.com (2603:10b6:8:54::30) by
- MWHPR0201MB3626.namprd02.prod.outlook.com (2603:10b6:301:77::39) with
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20618.outbound.protection.outlook.com
+ [2a01:111:f400:7eab::618])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id a252d0fa-9f18-11ec-8eba-a37418f5ba1a;
+ Tue, 08 Mar 2022 20:47:49 +0100 (CET)
+Received: from DS7PR06CA0029.namprd06.prod.outlook.com (2603:10b6:8:54::29) by
+ SJ0PR02MB8784.namprd02.prod.outlook.com (2603:10b6:a03:3e1::10) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5038.17; Tue, 8 Mar
- 2022 19:47:45 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5038.15; Tue, 8 Mar
+ 2022 19:47:46 +0000
 Received: from DM3NAM02FT023.eop-nam02.prod.protection.outlook.com
- (2603:10b6:8:54:cafe::f2) by DS7PR06CA0052.outlook.office365.com
- (2603:10b6:8:54::30) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:8:54:cafe::92) by DS7PR06CA0029.outlook.office365.com
+ (2603:10b6:8:54::29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5038.14 via Frontend
  Transport; Tue, 8 Mar 2022 19:47:45 +0000
 Received: from xsj-pvapexch02.xlnx.xilinx.com (149.199.62.198) by
@@ -49,11 +49,11 @@ Received: from xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) by
  15.1.2176.14; Tue, 8 Mar 2022 11:47:26 -0800
 Received: from smtp.xilinx.com (172.19.127.95) by
  xsj-pvapexch02.xlnx.xilinx.com (172.19.86.41) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Tue, 8 Mar 2022 11:47:26 -0800
+ 15.1.2176.14 via Frontend Transport; Tue, 8 Mar 2022 11:47:21 -0800
 Received: from [172.19.2.115] (port=58782 helo=xsjfnuv50.xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <fnu.vikram@xilinx.com>)
- id 1nRfnp-000Cws-Ux; Tue, 08 Mar 2022 11:47:25 -0800
+ id 1nRfnl-000Cws-5e; Tue, 08 Mar 2022 11:47:21 -0800
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,14 +65,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a0fb9c64-9f18-11ec-8539-5f4723681683
+X-Inumbo-ID: a252d0fa-9f18-11ec-8eba-a37418f5ba1a
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PJ/9LP3IjTq1HpjojWR4DRKOH/RiiupFn8vgqXYhr69OIC+KKWf10dcdFVs0ClEVzuQcsu/kutMOurD0mYh95anFF9kVn4Ypo/e+BQ9B9cL+UXox7z/pJ8B83UbV47mjbyEOEhOJ+mqZOBHDThpmdReFejheTBvNBRweUyZvuKWhMCWgFUQmYiILAy5cwM/jDJDvjeLeQWKp9mX7SNAxk/YHVNCiFfVnWLjnK/IJ07xxjCe183vEFSFGq6zTZOMzzrLJRICJjCi+DMTAFveGe2jjx5Z87zpkT2b0F3FkbgtVUmlYUgmRbbjMtacT+iy1Tkb1eqpTEqEmlNPws0UGPA==
+ b=evO+N4/NqQj5VI5dAlaM6O4Yo2tX0jJQ8SDjFtHSF8I+OiR2/+vGinMiMDYOgWI4qZ//eg2wjwblNMzG06946MDLv00u3JZ74N6gu3F5lyOGjjVGe/r/gC9+IrkvdsrE2CSgxQGigWcodanRl8w3AZ5hBvyzjZAVtOxQPsHh7uPo89e/kCSvJ5N+7enyhmw80IPl2v8h6CXNo1KxsmCaYYzVIxjW/nilXLx/oMTExKnOAQxc7/y9r4haqHE+pFvfGOMxASYjx2fJV2KeOhi9SdV72dznYBfHsxR3cJq4xad5CURst/TPjl2MbulRR0hnNWKiKaZ6p7BrH09931Sgkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n0mw2y4BYfrLOmQKhWhdHmTRvK5Ny8UEy4PO2h9XNts=;
- b=E7YLZo25We6jEghN5JYnGXlhdi+DVL9Qz3y2ttEPrDINduLLQ54wenb9CEQfB8TtTNpuE31rMW3HuaVVec+lGSNIHOa0GUxWDjepeeeDaBBkwJh9TYnolnAkAyP5x4fsHgVCxLMbw2q77k4SnVNxTHtwk+vtR9SiiTN1Uyd1+jTXuPJGLem5U9Jv1UFyCu+SNVRdg29O4wOAr/AfO71HXxeTPEoJJnDdyrPenL3Eoql2OcqYBPofvcZ3hb+cmfaWq0uHfrrWfieSsLFa8OycB7n0Id8GSTZ0LLlgh2CnS9zeVT/Kf4v7jx9KYzpp9JBfdEMh+68ztzbXigA95y1qog==
+ bh=W7qfG/E62ZPUQLKP3CMDSNtZWZYJXpDeF3V5RfWzOVc=;
+ b=k7MyJrWg39HGU/4vZC1XRjnzJWQDtBTJiqfAHhEgMqanlqk2bY0ypKeQVHzNcmRm0WtKWUzp8wGDMF53NFQqhnlXglR3sZFIwXhHUmc+SwEaP6rg36rPp9T359o9q10FxeI8ABKCrCbJ3GVBEE6l3Iy7sTFPEz7fmMYengLI1Nc+WjLbIP+O5DLSOBf2EqyenmsiRGPquhAuQ7OLnW99aPqry9bOCX0A3v6Lf8YmkPpUAL23kj38IgiCjPgCuZ28y1loAm3RT6E8ix9xcS073rThqEjaZz6AWvTXIgqqVU4oC2HmpEX8afN+O0WZvur73AdAxYaWW+qrgEDT7JSNmA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.199.62.198) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -80,8 +80,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n0mw2y4BYfrLOmQKhWhdHmTRvK5Ny8UEy4PO2h9XNts=;
- b=eM6utED1MC17LS6pwcCgYaHiSIiTR4ME+F6uLz9f5snLuWdxMeszEWsw0YH5npBhBFrX/GApPEsaytrllxMaa/BJ6I6y7vAoPUpDr+usf8j81erxy4h9lZHybQaF79Mb6CQ40o6liALWdB6Dd0EUW85L/l8TVf3TixD+wvG5zic=
+ bh=W7qfG/E62ZPUQLKP3CMDSNtZWZYJXpDeF3V5RfWzOVc=;
+ b=QbgF+U/E95WZso4QCEbIj/KlZ4pc452OiDNG4SDGpcXAPHihjXoTrZFdl9NgYdZx+0nSiacUh0u2kKfZtS91YOCxnOFHJqcDeCyKBkk+mUjwzb0qkLurzoJhEKoOGuBUOV/tnSa238ql2f2zCEvd9jjCLjs8Uw+hpXwy7+FlVzs=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.62.198)
  smtp.mailfrom=xilinx.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=xilinx.com;
@@ -91,12 +91,11 @@ Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
 From: Vikram Garhwal <fnu.vikram@xilinx.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
-	<volodymyr_babchuk@epam.com>, Vikram Garhwal <fnu.vikram@xilinx.com>, Wei Liu
-	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross
-	<jgross@suse.com>
-Subject: [XEN][RFC PATCH v3 13/14] tools/libs/light: Implement new libxl functions for device tree overlay ops
-Date: Tue, 8 Mar 2022 11:47:03 -0800
-Message-ID: <20220308194704.14061-14-fnu.vikram@xilinx.com>
+	<volodymyr_babchuk@epam.com>, Vikram Garhwal <fnu.vikram@xilinx.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [XEN][RFC PATCH v3 06/14] xen/smmu: Add remove_device callback for smmu_iommu ops
+Date: Tue, 8 Mar 2022 11:46:56 -0800
+Message-ID: <20220308194704.14061-7-fnu.vikram@xilinx.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220308194704.14061-1-fnu.vikram@xilinx.com>
 References: <20220308194704.14061-1-fnu.vikram@xilinx.com>
@@ -104,137 +103,128 @@ MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 95d1b2e3-fbf6-4ac7-3fcf-08da013c840c
-X-MS-TrafficTypeDiagnostic: MWHPR0201MB3626:EE_
+X-MS-Office365-Filtering-Correlation-Id: bef838d3-10fd-4806-fe9a-08da013c846d
+X-MS-TrafficTypeDiagnostic: SJ0PR02MB8784:EE_
 X-Microsoft-Antispam-PRVS:
-	<MWHPR0201MB3626E6CB5462EDC4F844FCA1BC099@MWHPR0201MB3626.namprd02.prod.outlook.com>
+	<SJ0PR02MB8784A51BCB98DC45C0BB1EF7BC099@SJ0PR02MB8784.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	NdDwXP0WZ+dIH2Wa+zvGFH3Pkuxzm0MzF82YgvCUfzK6wsv979eCU7cw/Zh7/QwaCV2ug6cMUr0pi9/V3Ba9b5WYe8Dav03KPEES4m+DEO1a8WX1nK+OEBwblxUXy3u9wNgIKDfywrcuc8Qu5NPXKkJ6NDrN0JIlfiQ9JWI2mgNfOlkqW+L1a9gThvEQIcNEoKTAGGbWxpIlQZ5C+9I4cs0f6utIxzzFE37JKuqbSPMRjKNDmkOjT77gkaWNgY2+f4j1PBQTaQlH3MT5Ag+rCPPSqNc7a6q1jW0OiG9Ti7t3tF1QR1zEbG3fgX+pyGz60rTvXz39od2nDmQh0qMBr3KttSHh4+eproBDcGMNQrdkB3NhR4VUFrn/c9u/xRc1nBaguI7LbXYHTGV0lSndoxrffbm7l7cpiuJj1D+tCTgcy9KV/FFep3vw0tRsuycIltUiAyYDZMUDqURZXOpHL5pOEIP0FUBLs2bKO88ZyiSJ4vqiAuwENV4fMHOfA/hsvTdZnW/Unpz4IYYEaZ0iBwumC9U7mPxFxyRiE3Ul/bjPpedmOLPdlLjcegNdg9zjwzyj7b0FImiu3es7X39ON2O5IihFGxshFsizfRyHwacJz2/N2XfANKLquyLPHRP1WN4XOZsj0/Svq4Q14SZRmxYII/SLwpWd6rMjgxWjzx0BMspeY4QdpUgHjL5Dif4Djlk6B9r5UQW8RxL28KIOFWPtOjDRG/YnQ2VN6K7Cuq0=
+	g1o9PnDS8k8B4xsbIxjCbdSVqwspk9GkJBJaPYgyG2EDBLHw93Ng9bi4QBvcMmPbbQz7+0xvTxdgOdbf7uvVZNs3zmzjOajkPsUihcfDOkHslJFzlIIiZWKJbMgCWPXhsnqcTXUcNbQBk9dnl2fjqEF9R+X9SIBHuzKsrTyqwANfONZBdclyWbcospVG581HFt3b5l3hO46QFyXKzRaIUp+5gCZgUkVaB62webvcrjDh6rBinvhZp+vYK3NBOv+kUQ8xfm+faFxdbCIQYXh6WVGXW57M9n1usWqOWKXiIA4VJyXFZZ3finu5oPZE68o6zZJSq1OXTm0FY2paJ/8gHoW2WmgHr2Icszc1869TND3dBgJdMkQA+75WprB/IfPokPEtI7JjIK9/cDcchfGI49PwJQwcoL13ECD69NDJGFZvji/S9fGJWwZXSrsbKxO/c4qwjL6q1UiigYQ448Cs1ACdtbAmbXEHRUqYho3MtY175lSQKNLUOdfsOCz1ASSblXf0FMO7/3Q9FmytMlAicW+DcrUefkxtVwwuPYsKd1BRDoQYQ7R92CoudmvDI5+5vtOs5KsOEu1A/344FMoK4+MuE4/mF7fWKkIj3CQB0NZ8wp0aFuSMs4smIYCTQtfuRQjrBN/SF/U5auIv3KiuTmxkdsRgIOXWgFEOltp3HdHTvQ03iHIwPXnXGGm27Ui0Cvk7o8ZMncr9gGabIPVVYg==
 X-Forefront-Antispam-Report:
-	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(8676002)(36756003)(36860700001)(2906002)(40460700003)(4326008)(82310400004)(70206006)(508600001)(26005)(186003)(426003)(336012)(1076003)(2616005)(70586007)(356005)(7636003)(8936002)(5660300002)(6916009)(54906003)(316002)(6666004)(9786002)(47076005)(7696005)(102446001)(2004002);DIR:OUT;SFP:1101;
+	CIP:149.199.62.198;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:xsj-pvapexch02.xlnx.xilinx.com;PTR:unknown-62-198.xilinx.com;CAT:NONE;SFS:(13230001)(4636009)(46966006)(40470700004)(36840700001)(6666004)(2616005)(8936002)(8676002)(4326008)(508600001)(70586007)(70206006)(5660300002)(36756003)(1076003)(9786002)(26005)(2906002)(316002)(186003)(7696005)(36860700001)(6916009)(54906003)(47076005)(336012)(426003)(40460700003)(7636003)(356005)(82310400004)(102446001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2022 19:47:45.0313
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2022 19:47:45.6875
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 95d1b2e3-fbf6-4ac7-3fcf-08da013c840c
+X-MS-Exchange-CrossTenant-Network-Message-Id: bef838d3-10fd-4806-fe9a-08da013c846d
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.62.198];Helo=[xsj-pvapexch02.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
 	DM3NAM02FT023.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR0201MB3626
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR02MB8784
+
+Add remove_device callback for removing the device entry from smmu-master using
+following steps:
+1. Find if SMMU master exists for the device node.
+2. Remove the SMMU master
 
 Signed-off-by: Vikram Garhwal <fnu.vikram@xilinx.com>
 ---
- tools/include/libxl.h            |  3 ++
- tools/libs/light/Makefile        |  1 +
- tools/libs/light/libxl_overlay.c | 67 ++++++++++++++++++++++++++++++++
- 3 files changed, 71 insertions(+)
- create mode 100644 tools/libs/light/libxl_overlay.c
+ xen/drivers/passthrough/arm/smmu.c | 56 ++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
 
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 51a9b6cfac..b31e17c2ce 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -2419,6 +2419,9 @@ libxl_device_pci *libxl_device_pci_list(libxl_ctx *ctx, uint32_t domid,
-                                         int *num);
- void libxl_device_pci_list_free(libxl_device_pci* list, int num);
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
+index b186c28dff..8b3b8b9850 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -816,6 +816,19 @@ static int insert_smmu_master(struct arm_smmu_device *smmu,
+ 	return 0;
+ }
  
-+int libxl_dt_overlay(libxl_ctx *ctx, void *overlay,
-+                     int overlay_size, uint8_t overlay_op);
-+
- /*
-  * Turns the current process into a backend device service daemon
-  * for a driver domain.
-diff --git a/tools/libs/light/Makefile b/tools/libs/light/Makefile
-index 453bea0067..405115c13c 100644
---- a/tools/libs/light/Makefile
-+++ b/tools/libs/light/Makefile
-@@ -116,6 +116,7 @@ SRCS-y += libxl_genid.c
- SRCS-y += _libxl_types.c
- SRCS-y += libxl_flask.c
- SRCS-y += _libxl_types_internal.c
-+SRCS-y += libxl_overlay.o
- 
- ifeq ($(CONFIG_LIBNL),y)
- CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
-diff --git a/tools/libs/light/libxl_overlay.c b/tools/libs/light/libxl_overlay.c
-new file mode 100644
-index 0000000000..e370e8cac8
---- /dev/null
-+++ b/tools/libs/light/libxl_overlay.c
-@@ -0,0 +1,67 @@
-+/*
-+ * Copyright (C) 2021 Xilinx Inc.
-+ * Author Vikram Garhwal <fnu.vikram@xilinx.com>
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU Lesser General Public License as published
-+ * by the Free Software Foundation; version 2.1 only. with the special
-+ * exception on linking described in file LICENSE.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU Lesser General Public License for more details.
-+ */
-+
-+#include "libxl_osdeps.h" /* must come before any other headers */
-+#include "libxl_internal.h"
-+#include <libfdt.h>
-+#include <xenguest.h>
-+#include <xenctrl.h>
-+
-+static int check_overlay_fdt(libxl__gc *gc, void *fdt, size_t size)
++static int remove_smmu_master(struct arm_smmu_device *smmu,
++			      struct arm_smmu_master *master)
 +{
-+    int r;
++	if (!smmu->masters.rb_node) {
++		ASSERT_UNREACHABLE();
++		return -ENOENT;
++	}
 +
-+    if (fdt_magic(fdt) != FDT_MAGIC) {
-+        LOG(ERROR, "Overlay FDT is not a valid Flat Device Tree");
-+        return ERROR_FAIL;
-+    }
++	rb_erase(&master->node, &smmu->masters);
 +
-+    r = fdt_check_header(fdt);
-+    if (r) {
-+        LOG(ERROR, "Failed to check the overlay FDT (%d)", r);
-+        return ERROR_FAIL;
-+    }
-+
-+    if (fdt_totalsize(fdt) > size) {
-+        LOG(ERROR, "Overlay FDT totalsize is too big");
-+        return ERROR_FAIL;
-+    }
-+
-+    return 0;
++	return 0;
 +}
 +
-+int libxl_dt_overlay(libxl_ctx *ctx, void *overlay_dt, int overlay_dt_size,
-+                     uint8_t overlay_op)
+ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
+ 					 struct device *dev,
+ 					 struct iommu_fwspec *fwspec)
+@@ -853,6 +866,32 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smmu_device *smmu,
+ 	return insert_smmu_master(smmu, master);
+ }
+ 
++static int arm_smmu_dt_remove_device_legacy(struct arm_smmu_device *smmu,
++					 struct device *dev)
 +{
-+    int rc = 0;
-+    GC_INIT(ctx);
++	struct arm_smmu_master *master;
++	struct device_node *dev_node = dev_get_dev_node(dev);
++	int ret;
 +
-+    if (check_overlay_fdt(gc, overlay_dt, overlay_dt_size)) {
-+        LOG(ERROR, "Overlay DTB check failed\n");
-+        GC_FREE;
-+        return ERROR_FAIL;
-+    } else
-+        LOG(DEBUG, "Overlay DTB check passed\n");
++	master = find_smmu_master(smmu, dev_node);
++	if (master == NULL) {
++		dev_err(dev,
++			"No registrations found for master device %s\n",
++			dev_node->name);
++		return -EINVAL;
++	}
 +
-+    /* We don't need to do  xc_interface_open here. */
-+    rc = xc_dt_overlay(ctx->xch, overlay_dt, overlay_dt_size, overlay_op);
++	ret = remove_smmu_master(smmu, master);
 +
-+    if (rc)
-+        LOG(ERROR, "%s: Adding/Removing overlay dtb failed.\n", __func__);
++	if (ret)
++		return ret;
 +
-+    GC_FREE;
-+    return rc;
++	dev_node->is_protected = false;
++
++	kfree(master);
++	return 0;
 +}
 +
+ static int register_smmu_master(struct arm_smmu_device *smmu,
+ 				struct device *dev,
+ 				struct of_phandle_args *masterspec)
+@@ -876,6 +915,22 @@ static int register_smmu_master(struct arm_smmu_device *smmu,
+ 					     fwspec);
+ }
+ 
++static int arm_smmu_dt_remove_device_generic(u8 devfn, struct device *dev)
++{
++	struct arm_smmu_device *smmu;
++	struct iommu_fwspec *fwspec;
++
++	fwspec = dev_iommu_fwspec_get(dev);
++	if (fwspec == NULL)
++		return -ENXIO;
++
++	smmu = find_smmu(fwspec->iommu_dev);
++	if (smmu == NULL)
++		return -ENXIO;
++
++	return arm_smmu_dt_remove_device_legacy(smmu, dev);
++}
++
+ static int arm_smmu_dt_add_device_generic(u8 devfn, struct device *dev)
+ {
+ 	struct arm_smmu_device *smmu;
+@@ -2861,6 +2916,7 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
+     .init = arm_smmu_iommu_domain_init,
+     .hwdom_init = arch_iommu_hwdom_init,
+     .add_device = arm_smmu_dt_add_device_generic,
++    .remove_device = arm_smmu_dt_remove_device_generic,
+     .teardown = arm_smmu_iommu_domain_teardown,
+     .iotlb_flush = arm_smmu_iotlb_flush,
+     .iotlb_flush_all = arm_smmu_iotlb_flush_all,
 -- 
 2.17.1
 
