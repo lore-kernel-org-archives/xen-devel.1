@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F422DC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 07:34:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.288152.488619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B6CDC433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 07:34:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.288150.488608 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSDJc-0000nb-9e; Thu, 10 Mar 2022 07:34:28 +0000
+	id 1nSDJb-0000Zu-FU; Thu, 10 Mar 2022 07:34:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 288152.488619; Thu, 10 Mar 2022 07:34:28 +0000
+Received: by outflank-mailman (output) from mailman id 288150.488608; Thu, 10 Mar 2022 07:34:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSDJc-0000kZ-1r; Thu, 10 Mar 2022 07:34:28 +0000
-Received: by outflank-mailman (input) for mailman id 288152;
- Thu, 10 Mar 2022 07:34:27 +0000
+	id 1nSDJb-0000Zm-Cb; Thu, 10 Mar 2022 07:34:27 +0000
+Received: by outflank-mailman (input) for mailman id 288150;
+ Thu, 10 Mar 2022 07:34:26 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=QHx9=TV=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nSDJb-0000ZP-0h
- for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 07:34:27 +0000
+ id 1nSDJa-0000ZP-7B
+ for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 07:34:26 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 80a6c3ed-a044-11ec-8539-5f4723681683;
- Thu, 10 Mar 2022 08:34:22 +0100 (CET)
+ id 802a1181-a044-11ec-8539-5f4723681683;
+ Thu, 10 Mar 2022 08:34:21 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 59F7C1F444;
- Thu, 10 Mar 2022 07:34:25 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 7A09E1F381;
+ Thu, 10 Mar 2022 07:34:24 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1C68C13FA5;
- Thu, 10 Mar 2022 07:34:25 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 18F2913FA3;
+ Thu, 10 Mar 2022 07:34:24 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id aDi0BQGqKWIkIAAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 10 Mar 2022 07:34:25 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id qi80BACqKWIkIAAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 10 Mar 2022 07:34:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,107 +53,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 80a6c3ed-a044-11ec-8539-5f4723681683
+X-Inumbo-ID: 802a1181-a044-11ec-8539-5f4723681683
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1646897665; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BEzMzKjCEqWCLH4etovzeszLFEIwdEg6ZM52H2MR7Ho=;
-	b=WKqgQwFza2uC/HWEuRsXBxOLS5oJiVmLCWkBKGaMLeOAu8BH/j1Bj0yHUoAtAA5lC3rMtT
-	i/Y5DrqTLI1jxCiv+I9YoNIPoL65aC4+xsucIOiVJ/JcH962O0y8UnbGvmGgtmQKZkLVqC
-	b6w/ePPZklxgYjbJ2JwlPZMa1AJ3Hs0=
+	t=1646897664; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=VW0S7DOLYYudVpiuotx3ct2mnfrTAcmlNP9qLbkTpQk=;
+	b=pyzIy+dXZ6ehQV3VomECVrN5ky7eAhoAvzw028GJz+HKEhpwG1iYqzrO3fpLmEONgQgfog
+	PFQ84nuwwnY4DQb9CoHu90sQtz6Mjv+3eXyA+9RQllxS8YQtJA7mvPFzMQ/NyuIYSvcy8j
+	1xDOkPbfsgT7R795lJEX/qa60Bo1vJc=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v4 03/11] xen: switch non style compliant hypercall handler parameter types
-Date: Thu, 10 Mar 2022 08:34:12 +0100
-Message-Id: <20220310073420.15622-4-jgross@suse.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Christopher Clark <christopher.w.clark@gmail.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH v4 00/11] xen: drop hypercall function tables
+Date: Thu, 10 Mar 2022 08:34:09 +0100
+Message-Id: <20220310073420.15622-1-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220310073420.15622-1-jgross@suse.com>
-References: <20220310073420.15622-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Switch some non style compliant types (u32, s32, s64) of hypercall
-handler parameters to style compliant ones.
+In order to avoid indirect function calls on the hypercall path as
+much as possible this series is removing the hypercall function tables
+and is replacing the hypercall handler calls via the function array
+by automatically generated call macros.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
----
-V4:
-- carved out from following patch (Julien Grall)
----
- xen/arch/x86/include/asm/hypercall.h | 10 +++++-----
- xen/include/xen/hypercall.h          |  4 ++--
- 2 files changed, 7 insertions(+), 7 deletions(-)
+Another by-product of generating the call macros is the automatic
+generating of the hypercall handler prototypes from the same data base
+which is used to generate the macros.
 
-diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
-index 610c37a0b8..d6daa7e4cb 100644
---- a/xen/arch/x86/include/asm/hypercall.h
-+++ b/xen/arch/x86/include/asm/hypercall.h
-@@ -94,7 +94,7 @@ do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc);
- extern long cf_check
- do_update_va_mapping(
-     unsigned long va,
--    u64 val64,
-+    uint64_t val64,
-     unsigned long flags);
- 
- extern long cf_check
-@@ -104,7 +104,7 @@ do_physdev_op(
- extern long cf_check
- do_update_va_mapping_otherdomain(
-     unsigned long va,
--    u64 val64,
-+    uint64_t val64,
-     unsigned long flags,
-     domid_t domid);
- 
-@@ -162,10 +162,10 @@ extern long cf_check compat_callback_op(
-     int cmd, XEN_GUEST_HANDLE(void) arg);
- 
- extern int cf_check compat_update_va_mapping(
--    unsigned int va, u32 lo, u32 hi, unsigned int flags);
-+    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags);
- 
- extern int cf_check compat_update_va_mapping_otherdomain(
--    unsigned int va, u32 lo, u32 hi, unsigned int flags, domid_t domid);
-+    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags, domid_t domid);
- 
- DEFINE_XEN_GUEST_HANDLE(trap_info_compat_t);
- extern int cf_check compat_set_trap_table(
-@@ -175,7 +175,7 @@ extern int cf_check compat_set_gdt(
-     XEN_GUEST_HANDLE_PARAM(uint) frame_list, unsigned int entries);
- 
- extern int cf_check compat_update_descriptor(
--    u32 pa_lo, u32 pa_hi, u32 desc_lo, u32 desc_hi);
-+    uint32_t pa_lo, uint32_t pa_hi, uint32_t desc_lo, uint32_t desc_hi);
- 
- extern unsigned int cf_check compat_iret(void);
- 
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index 82f7f2caeb..81aae7a662 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -198,8 +198,8 @@ compat_sched_op(
- 
- extern int cf_check
- compat_set_timer_op(
--    u32 lo,
--    s32 hi);
-+    uint32_t lo,
-+    int32_t hi);
- 
- extern int cf_check compat_xsm_op(
-     XEN_GUEST_HANDLE_PARAM(void) op);
+This has the additional advantage of using type safe calls of the
+handlers and to ensure related handler (e.g. PV and HVM ones) share
+the same prototypes.
+
+A very brief performance test (parallel build of the Xen hypervisor
+in a 6 vcpu guest) showed a very slim improvement (less than 1%) of
+the performance with the patches applied. The test was performed using
+a PV and a PVH guest.
+
+Changes in V2:
+- new patches 6, 14, 15
+- patch 7: support hypercall priorities for faster code
+- comments addressed
+
+Changes in V3:
+- patches 1 and 4 removed as already applied
+- comments addressed
+
+Changes in V4:
+- 5 patches removed al already applied
+- new patches 1, 3 and 11
+- avoid switching Arm hypercall handlers to return long (no change of
+  handlers returning long already)
+
+Juergen Gross (11):
+  xen/arm: rename do_phydev_op() to do_arm_physdev_op()
+  xen: move do_vcpu_op() to arch specific code
+  xen: switch non style compliant hypercall handler parameter types
+  xen: harmonize return types of hypercall handlers
+  xen: don't include asm/hypercall.h from C sources
+  xen: include compat/platform.h from hypercall.h
+  xen: generate hypercall interface related code
+  xen: use generated prototypes for hypercall handlers
+  xen/x86: call hypercall handlers via generated macro
+  xen/arm: call hypercall handlers via generated macro
+  xen/x86: remove cf_check attribute from hypercall handlers
+
+ .gitignore                               |   1 +
+ xen/arch/arm/domain.c                    |  15 +-
+ xen/arch/arm/hvm.c                       |   3 +-
+ xen/arch/arm/include/asm/hypercall.h     |   7 +-
+ xen/arch/arm/physdev.c                   |   2 +-
+ xen/arch/arm/platform_hypercall.c        |   1 +
+ xen/arch/arm/traps.c                     | 124 ++-------
+ xen/arch/x86/compat.c                    |   6 +-
+ xen/arch/x86/cpu/mcheck/mce.c            |   2 +-
+ xen/arch/x86/cpu/vpmu.c                  |   3 +-
+ xen/arch/x86/domain.c                    |  11 +-
+ xen/arch/x86/domctl.c                    |   4 +-
+ xen/arch/x86/hvm/dm.c                    |   2 +-
+ xen/arch/x86/hvm/hvm.c                   |   2 +-
+ xen/arch/x86/hvm/hypercall.c             | 177 ++-----------
+ xen/arch/x86/hypercall.c                 |  59 -----
+ xen/arch/x86/include/asm/hypercall.h     | 201 ++++-----------
+ xen/arch/x86/include/asm/paging.h        |   3 -
+ xen/arch/x86/mm.c                        |  13 +-
+ xen/arch/x86/mm/paging.c                 |   3 +-
+ xen/arch/x86/physdev.c                   |   2 +-
+ xen/arch/x86/platform_hypercall.c        |   3 +-
+ xen/arch/x86/pv/callback.c               |  26 +-
+ xen/arch/x86/pv/descriptor-tables.c      |   8 +-
+ xen/arch/x86/pv/emul-priv-op.c           |   2 +-
+ xen/arch/x86/pv/hypercall.c              | 187 ++------------
+ xen/arch/x86/pv/iret.c                   |   5 +-
+ xen/arch/x86/pv/misc-hypercalls.c        |  22 +-
+ xen/arch/x86/pv/shim.c                   |   4 +-
+ xen/arch/x86/traps.c                     |   2 +-
+ xen/arch/x86/x86_64/compat/mm.c          |   3 +-
+ xen/arch/x86/x86_64/domain.c             |  16 +-
+ xen/arch/x86/x86_64/mm.c                 |   2 -
+ xen/arch/x86/x86_64/platform_hypercall.c |   3 +-
+ xen/common/argo.c                        |   8 +-
+ xen/common/compat/domain.c               |  15 +-
+ xen/common/compat/grant_table.c          |   3 +-
+ xen/common/compat/kernel.c               |   2 +-
+ xen/common/compat/memory.c               |   3 +-
+ xen/common/dm.c                          |   2 +-
+ xen/common/domain.c                      |  14 +-
+ xen/common/domctl.c                      |   2 +-
+ xen/common/event_channel.c               |   3 +-
+ xen/common/grant_table.c                 |   4 +-
+ xen/common/hypfs.c                       |   2 +-
+ xen/common/kernel.c                      |   2 +-
+ xen/common/kexec.c                       |   6 +-
+ xen/common/memory.c                      |   2 +-
+ xen/common/multicall.c                   |   4 +-
+ xen/common/sched/compat.c                |   2 +-
+ xen/common/sched/core.c                  |   4 +-
+ xen/common/sysctl.c                      |   2 +-
+ xen/common/xenoprof.c                    |   2 +-
+ xen/drivers/char/console.c               |   2 +-
+ xen/include/Makefile                     |  13 +
+ xen/include/hypercall-defs.c             | 285 ++++++++++++++++++++
+ xen/include/xen/hypercall.h              | 185 +------------
+ xen/scripts/gen_hypercall.awk            | 314 +++++++++++++++++++++++
+ xen/xsm/xsm_core.c                       |   4 +-
+ 59 files changed, 865 insertions(+), 944 deletions(-)
+ create mode 100644 xen/include/hypercall-defs.c
+ create mode 100644 xen/scripts/gen_hypercall.awk
+
 -- 
 2.34.1
 
