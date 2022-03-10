@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0A11C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 07:31:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.288146.488596 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63865C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 07:34:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.288151.488615 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSDGE-0008PZ-Vj; Thu, 10 Mar 2022 07:30:58 +0000
+	id 1nSDJb-0000dP-Ra; Thu, 10 Mar 2022 07:34:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 288146.488596; Thu, 10 Mar 2022 07:30:58 +0000
+Received: by outflank-mailman (output) from mailman id 288151.488615; Thu, 10 Mar 2022 07:34:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSDGE-0008PS-Sb; Thu, 10 Mar 2022 07:30:58 +0000
-Received: by outflank-mailman (input) for mailman id 288146;
- Thu, 10 Mar 2022 07:30:57 +0000
+	id 1nSDJb-0000c5-JZ; Thu, 10 Mar 2022 07:34:27 +0000
+Received: by outflank-mailman (input) for mailman id 288151;
+ Thu, 10 Mar 2022 07:34:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UgV8=TV=amazon.de=prvs=06149a43a=doebel@srs-se1.protection.inumbo.net>)
- id 1nSDGC-0008PM-BW
- for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 07:30:57 +0000
-Received: from smtp-fw-80007.amazon.com (smtp-fw-80007.amazon.com
- [99.78.197.218]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 03ae7716-a044-11ec-8eba-a37418f5ba1a;
- Thu, 10 Mar 2022 08:30:54 +0100 (CET)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2a-5feb294a.us-west-2.amazon.com) ([10.25.36.210])
- by smtp-border-fw-80007.pdx80.corp.amazon.com with ESMTP;
- 10 Mar 2022 07:30:37 +0000
-Received: from EX13D03EUC002.ant.amazon.com
- (pdx1-ws-svc-p6-lb9-vlan2.pdx.amazon.com [10.236.137.194])
- by email-inbound-relay-pdx-2a-5feb294a.us-west-2.amazon.com (Postfix) with
- ESMTPS id 2DF9087C8A; Thu, 10 Mar 2022 07:30:36 +0000 (UTC)
-Received: from [192.168.12.40] (10.43.164.135) by EX13D03EUC002.ant.amazon.com
- (10.43.164.60) with Microsoft SMTP Server (TLS) id 15.0.1497.32;
- Thu, 10 Mar 2022 07:30:34 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=QHx9=TV=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1nSDJa-0000ZQ-AR
+ for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 07:34:26 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 82788018-a044-11ec-8eba-a37418f5ba1a;
+ Thu, 10 Mar 2022 08:34:25 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id AEF8B1F443;
+ Thu, 10 Mar 2022 07:34:24 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 806F413FA3;
+ Thu, 10 Mar 2022 07:34:24 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id yHLoHQCqKWIkIAAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 10 Mar 2022 07:34:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,93 +51,88 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 03ae7716-a044-11ec-8eba-a37418f5ba1a
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
-  t=1646897455; x=1678433455;
-  h=message-id:date:mime-version:to:cc:references:from:
-   in-reply-to:content-transfer-encoding:subject;
-  bh=ufwgmHbCfdgMRniaRjH5zBe3Ep9acz7kM8WGhwF8Iuw=;
-  b=dp8B/LFR4O8sR2dheItO2IdrG4urLoiHTY/+nVPIxMto2E4+uauqdwt4
-   MMyYHjhhfi7UTQagchmEeq8Brkqc1Z1qNAq3YXWXCqiMNI13eOSp46E43
-   zumdix9tvPi1hyW4rVVTxNixxTuUUBVLzLb6kPvqdW/qmTf/cvyjWQ3fG
-   A=;
-X-IronPort-AV: E=Sophos;i="5.90,169,1643673600"; 
-   d="scan'208";a="69573389"
-Subject: Re: [PATCH] x86/cet: Use dedicated NOP4 for cf_clobber
-Message-ID: <1c4fa029-44a9-1e0a-bb09-458ad8d28a64@amazon.de>
-Date: Thu, 10 Mar 2022 08:30:33 +0100
+X-Inumbo-ID: 82788018-a044-11ec-8eba-a37418f5ba1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1646897664; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=LH5iekQAujtfbCT5ppRY8SHnDyE773eE100u+22phKg=;
+	b=fNXoM2VvH1hDPn2/XMCrGU0trY+SNYGEIxO658FKhJA0Eo1c2RLvAmkXnqVsq7z2OGIfof
+	c0a+tIf/rIoixdf64gF6eLSIp2UzbEfCNrDL4hWI+g+uz0tAUhFeSh8DfNdEv0FkXZbicS
+	KBreRyro5YcrP018qp4ekZqG2/BoFFc=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v4 01/11] xen/arm: rename do_phydev_op() to do_arm_physdev_op()
+Date: Thu, 10 Mar 2022 08:34:10 +0100
+Message-Id: <20220310073420.15622-2-jgross@suse.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220310073420.15622-1-jgross@suse.com>
+References: <20220310073420.15622-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.6.2
-Content-Language: en-US
-To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel
-	<xen-devel@lists.xenproject.org>
-CC: Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
-References: <20220308140126.8815-1-andrew.cooper3@citrix.com>
-From: "Doebel, Bjoern" <doebel@amazon.de>
-In-Reply-To: <20220308140126.8815-1-andrew.cooper3@citrix.com>
-X-Originating-IP: [10.43.164.135]
-X-ClientProxiedBy: EX13D23EUC004.ant.amazon.com (10.43.164.201) To
- EX13D03EUC002.ant.amazon.com (10.43.164.60)
-Precedence: Bulk
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
 
-CgpPbiAwOC4wMy4yMiAxNTowMSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBDQVVUSU9OOiBUaGlz
-IGVtYWlsIG9yaWdpbmF0ZWQgZnJvbSBvdXRzaWRlIG9mIHRoZSBvcmdhbml6YXRpb24uIERvIG5v
-dCBjbGljayBsaW5rcyBvciBvcGVuIGF0dGFjaG1lbnRzIHVubGVzcyB5b3UgY2FuIGNvbmZpcm0g
-dGhlIHNlbmRlciBhbmQga25vdyB0aGUgY29udGVudCBpcyBzYWZlLgo+IAo+IAo+IAo+IEZvciBs
-aXZlcGF0Y2hpbmcsIHdlIG5lZWQgdG8gbG9vayBhdCBhIHBvdGVudGlhbGx5IGNsb2JiZXJlZCBm
-dW5jdGlvbiBhbmQKPiBkZXRlcm1pbmUgd2hldGhlciBpdCB1c2VkIHRvIGhhdmUgYW4gRU5EQlI2
-NCBpbnN0cnVjdGlvbi4KPiAKPiBVc2UgYSBub24tZGVmYXVsdCA0LWJ5dGUgUDYgbG9uZyBub3As
-IG5vdCBlbWl0dGVkIGJ5IHRvb2xjaGFpbnMsIGFuZCBpbnRyb2R1Y2UKPiB0aGUgd2FzX2VuZGJy
-NjQoKSBwcmVkaWNhdGUuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KPiAtLS0KPiBDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1
-c2UuY29tPgo+IENDOiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiBD
-QzogV2VpIExpdSA8d2xAeGVuLm9yZz4KPiBDQzogQmpvZXJuIERvZWJlbCA8ZG9lYmVsQGFtYXpv
-bi5kZT4KPiBDQzogTWljaGFlbCBLdXJ0aCA8bWt1QGFtYXpvbi5kZT4KPiBDQzogTWFydGluIFBv
-aGxhY2sgPG1wb2hsYWNrQGFtYXpvbi5kZT4KPiAKPiBCam9lcm46IEZvciB0aGUgbGl2ZXBhdGNo
-aW5nIGNvZGUsIEkgdGhpbmsgeW91IHdhbnQ6Cj4gCj4gICAgaWYgKCBpc19lbmRicjY0KC4uLikg
-fHwgd2FzX2VuZGJyNjQoLi4uKSApCj4gICAgICAgIG5lZWRlZCArPSBFTkRCUjY0X0xFTjsKPiAt
-LS0KPiAgIHhlbi9hcmNoL3g4Ni9hbHRlcm5hdGl2ZS5jICAgICAgIHwgMTAgKysrKysrKysrLQo+
-ICAgeGVuL2FyY2gveDg2L2luY2x1ZGUvYXNtL2VuZGJyLmggfCAxMiArKysrKysrKysrKysKPiAg
-IDIgZmlsZXMgY2hhbmdlZCwgMjEgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRp
-ZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvYWx0ZXJuYXRpdmUuYyBiL3hlbi9hcmNoL3g4Ni9hbHRl
-cm5hdGl2ZS5jCj4gaW5kZXggZDQxZWVlZjFiY2FmLi5mZmIxYjFkOTYwYzggMTAwNjQ0Cj4gLS0t
-IGEveGVuL2FyY2gveDg2L2FsdGVybmF0aXZlLmMKPiArKysgYi94ZW4vYXJjaC94ODYvYWx0ZXJu
-YXRpdmUuYwo+IEBAIC0zNjIsNyArMzYyLDE1IEBAIHN0YXRpYyB2b2lkIGluaXRfb3JfbGl2ZXBh
-dGNoIF9hcHBseV9hbHRlcm5hdGl2ZXMoc3RydWN0IGFsdF9pbnN0ciAqc3RhcnQsCj4gICAgICAg
-ICAgICAgICBpZiAoICFpc19rZXJuZWxfdGV4dChwdHIpIHx8ICFpc19lbmRicjY0KHB0cikgKQo+
-ICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOwo+IAo+IC0gICAgICAgICAgICBhZGRfbm9wcyhw
-dHIsIEVOREJSNjRfTEVOKTsKPiArICAgICAgICAgICAgLyoKPiArICAgICAgICAgICAgICogQ2Fu
-J3QgdXNlIGFkZF9ub3BzKCkgaGVyZS4gIEVOREJSNjRfUE9JU09OIGlzIHNwZWNpZmljYWxseQo+
-ICsgICAgICAgICAgICAgKiBkaWZmZXJlbnQgdG8gTk9QNCBzbyBpdCBjYW4gYmUgc3BvdHRlZCBh
-ZnRlciB0aGUgZmFjdC4KPiArICAgICAgICAgICAgICoKPiArICAgICAgICAgICAgICogQWxsIENF
-VC1jYXBhYmxlIGhhcmR3YXJlIHVzZXMgUDYgTk9QUyAobm8gbmVlZCB0byBwbHVtYiB0aHJvdWdo
-Cj4gKyAgICAgICAgICAgICAqIGlkZWFsX25vcHMpLCBhbmQgZG9lc24ndCByZXF1aXJlIGEgYnJh
-bmNoIHRvIHN5bmNocm9uaXNlIHRoZQo+ICsgICAgICAgICAgICAgKiBpbnN0cnVjdGlvbiBzdHJl
-YW0uCj4gKyAgICAgICAgICAgICAqLwo+ICsgICAgICAgICAgICBtZW1jcHkocHRyLCBFTkRCUjY0
-X1BPSVNPTiwgRU5EQlI2NF9MRU4pOwo+ICAgICAgICAgICAgICAgY2xvYmJlcmVkKys7Cj4gICAg
-ICAgICAgIH0KPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2luY2x1ZGUvYXNtL2VuZGJy
-LmggYi94ZW4vYXJjaC94ODYvaW5jbHVkZS9hc20vZW5kYnIuaAo+IGluZGV4IDYwOTBhZmViMGJk
-OC4uNWUxZTU1Y2I0NjdkIDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9l
-bmRici5oCj4gKysrIGIveGVuL2FyY2gveDg2L2luY2x1ZGUvYXNtL2VuZGJyLmgKPiBAQCAtNTIs
-NCArNTIsMTYgQEAgc3RhdGljIGlubGluZSB2b2lkIHBsYWNlX2VuZGJyNjQodm9pZCAqcHRyKQo+
-ICAgICAgICoodWludDMyX3QgKilwdHIgPSBnZW5fZW5kYnI2NCgpOwo+ICAgfQo+IAo+ICsvKgo+
-ICsgKiBBZnRlciBjbG9iYmVyaW5nIEVOREJSNjQsIHdlIG1heSBuZWVkIHRvIGNvbmZpcm0gdGhh
-dCB0aGUgc2l0ZSB1c2VkIHRvCj4gKyAqIGNvbnRhaW4gYW4gRU5EQlI2NCBpbnN0cnVjdGlvbi4g
-IFVzZSBhbiBlbmNvZGluZyB3aGljaCBpc24ndCB0aGUgZGVmYXVsdAo+ICsgKiBQNl9OT1A0Lgo+
-ICsgKi8KPiArI2RlZmluZSBFTkRCUjY0X1BPSVNPTiAiXHg2Nlx4MGZceDFmXHgwMCIgLyogb3Nw
-IG5vcGwgKCVyYXgpICovCj4gKwo+ICtzdGF0aWMgaW5saW5lIGJvb2wgd2FzX2VuZGJyNjQoY29u
-c3Qgdm9pZCAqcHRyKQo+ICt7Cj4gKyAgICByZXR1cm4gKihjb25zdCB1aW50MzJfdCAqKXB0ciA9
-PSAweDAwMWYwZjY2Owo+ICt9Cj4gKwo+ICAgI2VuZGlmIC8qIFhFTl9BU01fRU5EQlJfSCAqLwo+
-IC0tCj4gMi4xMS4wCgpSZXZpZXdlZC1ieTogQmpvZXJuIERvZWJlbCA8ZG9lYmVsQGFtYXpvbi5k
-ZT4KCgoKQW1hem9uIERldmVsb3BtZW50IENlbnRlciBHZXJtYW55IEdtYkgKS3JhdXNlbnN0ci4g
-MzgKMTAxMTcgQmVybGluCkdlc2NoYWVmdHNmdWVocnVuZzogQ2hyaXN0aWFuIFNjaGxhZWdlciwg
-Sm9uYXRoYW4gV2Vpc3MKRWluZ2V0cmFnZW4gYW0gQW10c2dlcmljaHQgQ2hhcmxvdHRlbmJ1cmcg
-dW50ZXIgSFJCIDE0OTE3MyBCClNpdHo6IEJlcmxpbgpVc3QtSUQ6IERFIDI4OSAyMzcgODc5CgoK
+do_physdev_op() prototypes on Arm and x86 differ in their return type,
+so rename the Arm one in order to prepare using a common generated
+header file.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V4:
+- new patch
+---
+ xen/arch/arm/include/asm/hypercall.h | 2 +-
+ xen/arch/arm/physdev.c               | 2 +-
+ xen/arch/arm/traps.c                 | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/xen/arch/arm/include/asm/hypercall.h b/xen/arch/arm/include/asm/hypercall.h
+index a0c5a31a2f..39d2e7889d 100644
+--- a/xen/arch/arm/include/asm/hypercall.h
++++ b/xen/arch/arm/include/asm/hypercall.h
+@@ -2,7 +2,7 @@
+ #define __ASM_ARM_HYPERCALL_H__
+ 
+ #include <public/domctl.h> /* for arch_do_domctl */
+-int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
++int do_arm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
+ long do_arm_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
+diff --git a/xen/arch/arm/physdev.c b/xen/arch/arm/physdev.c
+index f9aa274dda..95a8cdc0ee 100644
+--- a/xen/arch/arm/physdev.c
++++ b/xen/arch/arm/physdev.c
+@@ -11,7 +11,7 @@
+ #include <xen/hypercall.h>
+ 
+ 
+-int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++int do_arm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+ #ifdef CONFIG_HAS_PCI
+     return pci_physdev_op(cmd, arg);
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 7a1b679b8c..f8c3ef0ca2 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1371,7 +1371,7 @@ static arm_hypercall_t arm_hypercall_table[] = {
+     HYPERCALL(xsm_op, 1),
+     HYPERCALL(event_channel_op, 2),
+     HYPERCALL_DEPRECATED(event_channel_op_compat, 1),
+-    HYPERCALL(physdev_op, 2),
++    HYPERCALL_ARM(physdev_op, 2),
+     HYPERCALL_DEPRECATED(physdev_op_compat, 1),
+     HYPERCALL(sysctl, 2),
+     HYPERCALL(hvm_op, 2),
+-- 
+2.34.1
 
 
