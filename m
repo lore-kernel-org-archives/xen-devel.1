@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 522BEC4167B
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 17:10:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.288504.489229 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99760C43217
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 17:10:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.288509.489289 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSMJ8-0001pb-La; Thu, 10 Mar 2022 17:10:34 +0000
+	id 1nSMJF-0003Si-Kj; Thu, 10 Mar 2022 17:10:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 288504.489229; Thu, 10 Mar 2022 17:10:34 +0000
+Received: by outflank-mailman (output) from mailman id 288509.489289; Thu, 10 Mar 2022 17:10:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSMJ8-0001oM-Dq; Thu, 10 Mar 2022 17:10:34 +0000
-Received: by outflank-mailman (input) for mailman id 288504;
- Thu, 10 Mar 2022 17:10:32 +0000
+	id 1nSMJF-0003Rn-CK; Thu, 10 Mar 2022 17:10:41 +0000
+Received: by outflank-mailman (input) for mailman id 288509;
+ Thu, 10 Mar 2022 17:10:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5/tR=TV=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1nSMJ6-0001lh-Jy
- for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 17:10:32 +0000
+ id 1nSMJD-0001lh-M3
+ for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 17:10:39 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id fd225777-a094-11ec-8eba-a37418f5ba1a;
- Thu, 10 Mar 2022 18:10:30 +0100 (CET)
+ id 01db4491-a095-11ec-8eba-a37418f5ba1a;
+ Thu, 10 Mar 2022 18:10:38 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EBA5116A3;
- Thu, 10 Mar 2022 09:10:29 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D93E716A3;
+ Thu, 10 Mar 2022 09:10:37 -0800 (PST)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 314BD3F99C;
- Thu, 10 Mar 2022 09:10:29 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8DDC13F99C;
+ Thu, 10 Mar 2022 09:10:36 -0800 (PST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,107 +45,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd225777-a094-11ec-8eba-a37418f5ba1a
+X-Inumbo-ID: 01db4491-a095-11ec-8eba-a37418f5ba1a
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v2 1/6] tools/cpupools: Give a name to unnamed cpupools
-Date: Thu, 10 Mar 2022 17:10:14 +0000
-Message-Id: <20220310171019.6170-2-luca.fancellu@arm.com>
+	Juergen Gross <jgross@suse.com>,
+	Dario Faggioli <dfaggioli@suse.com>
+Subject: [PATCH v2 6/6] xen/cpupool: Allow cpupool0 to use different scheduler
+Date: Thu, 10 Mar 2022 17:10:19 +0000
+Message-Id: <20220310171019.6170-7-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220310171019.6170-1-luca.fancellu@arm.com>
 References: <20220310171019.6170-1-luca.fancellu@arm.com>
 
-With the introduction of boot time cpupools, Xen can create many
-different cpupools at boot time other than cpupool with id 0.
+Currently cpupool0 can use only the default scheduler, and
+cpupool_create has an harcoded behavior when creating the pool 0
+that doesn't allocate new memory for the scheduler, but uses the
+default scheduler structure in memory.
 
-Since these newly created cpupools can't have an
-entry in Xenstore, create the entry using xen-init-dom0
-helper with the usual convention: Pool-<cpupool id>.
+With this commit it is possible to allocate a different scheduler for
+the cpupool0 when using the boot time cpupool.
+To achieve this the hardcoded behavior in cpupool_create is removed
+and the cpupool0 creation is moved.
 
-Given the change, remove the check for poolid == 0 from
-libxl_cpupoolid_to_name(...).
+When compiling without boot time cpupools enabled, the current
+behavior is maintained (except that cpupool0 scheduler memory will be
+allocated).
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 ---
 Changes in v2:
- - Remove unused variable, moved xc_cpupool_infofree
-   ahead to simplify the code, use asprintf (Juergen)
+- new patch
 ---
- tools/helpers/xen-init-dom0.c  | 35 +++++++++++++++++++++++++++++++++-
- tools/libs/light/libxl_utils.c |  3 +--
- 2 files changed, 35 insertions(+), 3 deletions(-)
+ xen/common/boot_cpupools.c | 39 ++++++++++++++++++--------------------
+ xen/common/sched/cpupool.c |  8 +-------
+ xen/include/xen/sched.h    |  5 ++++-
+ 3 files changed, 23 insertions(+), 29 deletions(-)
 
-diff --git a/tools/helpers/xen-init-dom0.c b/tools/helpers/xen-init-dom0.c
-index c99224a4b607..84286617790f 100644
---- a/tools/helpers/xen-init-dom0.c
-+++ b/tools/helpers/xen-init-dom0.c
-@@ -43,7 +43,9 @@ int main(int argc, char **argv)
-     int rc;
-     struct xs_handle *xsh = NULL;
-     xc_interface *xch = NULL;
--    char *domname_string = NULL, *domid_string = NULL;
-+    char *domname_string = NULL, *domid_string = NULL, *pool_path, *pool_name;
-+    xc_cpupoolinfo_t *xcinfo;
-+    unsigned int pool_id = 0;
-     libxl_uuid uuid;
+diff --git a/xen/common/boot_cpupools.c b/xen/common/boot_cpupools.c
+index 01a69f894f14..a8ae8c5b7852 100644
+--- a/xen/common/boot_cpupools.c
++++ b/xen/common/boot_cpupools.c
+@@ -189,31 +189,28 @@ void __init btcpupools_allocate_pools(const cpumask_t *cpu_online_map)
+     {
+         struct cpupool *pool = NULL;
+         int pool_id, sched_id;
++        unsigned int i;
  
-     /* Accept 0 or 1 argument */
-@@ -114,6 +116,37 @@ int main(int argc, char **argv)
-         goto out;
+         pool_id = pool_cpu_map[cpu_num].pool_id;
+         sched_id = pool_cpu_map[cpu_num].sched_id;
+ 
+-        if ( pool_id )
+-        {
+-            unsigned int i;
+-
+-            /* Look for previously created pool with id pool_id */
+-            for ( i = 0; i < cpu_num; i++ )
+-                if ( (pool_cpu_map[i].pool_id == pool_id) &&
+-                     pool_cpu_map[i].pool )
+-                {
+-                    pool = pool_cpu_map[i].pool;
+-                    break;
+-                }
+-
+-            /* If no pool was created before, create it */
+-            if ( !pool )
+-                pool = cpupool_create_pool(pool_id, sched_id);
+-            if ( !pool )
+-                panic("Error creating pool id %u!\n", pool_id);
+-        }
+-        else
+-            pool = cpupool0;
++        /* Look for previously created pool with id pool_id */
++        for ( i = 0; i < cpu_num; i++ )
++            if ( (pool_cpu_map[i].pool_id == pool_id) && pool_cpu_map[i].pool )
++            {
++                pool = pool_cpu_map[i].pool;
++                break;
++            }
++
++        /* If no pool was created before, create it */
++        if ( !pool )
++            pool = cpupool_create_pool(pool_id, sched_id);
++        if ( !pool )
++            panic("Error creating pool id %u!\n", pool_id);
++
++        /* Keep track of cpupool id 0 with the global cpupool0 */
++        if ( !pool_id )
++            cpupool0 = pool;
+ 
+         pool_cpu_map[cpu_num].pool = pool;
+         printk(XENLOG_INFO "Logical CPU %u in Pool-%u.\n", cpu_num, pool_id);
+diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
+index b2495ad6d03e..3d458a4932b2 100644
+--- a/xen/common/sched/cpupool.c
++++ b/xen/common/sched/cpupool.c
+@@ -312,10 +312,7 @@ static struct cpupool *cpupool_create(unsigned int poolid,
+         c->cpupool_id = q->cpupool_id + 1;
      }
  
-+    /* Create an entry in xenstore for each cpupool on the system */
-+    do {
-+        xcinfo = xc_cpupool_getinfo(xch, pool_id);
-+        if (xcinfo != NULL) {
-+            if (xcinfo->cpupool_id != pool_id)
-+                pool_id = xcinfo->cpupool_id;
-+            xc_cpupool_infofree(xch, xcinfo);
-+            if (asprintf(&pool_path, "/local/pool/%d/name", pool_id) <= 0) {
-+                fprintf(stderr, "cannot allocate memory for pool path\n");
-+                rc = 1;
-+                goto out;
-+            }
-+            if (asprintf(&pool_name, "Pool-%d", pool_id) <= 0) {
-+                fprintf(stderr, "cannot allocate memory for pool name\n");
-+                rc = 1;
-+                goto out_err;
-+            }
-+            pool_id++;
-+            if (!xs_write(xsh, XBT_NULL, pool_path, pool_name,
-+                          strlen(pool_name))) {
-+                fprintf(stderr, "cannot set pool name\n");
-+                rc = 1;
-+            }
-+            free(pool_name);
-+out_err:
-+            free(pool_path);
-+            if ( rc )
-+                goto out;
-+        }
-+    } while(xcinfo != NULL);
-+
-     printf("Done setting up Dom0\n");
+-    if ( poolid == 0 )
+-        c->sched = scheduler_get_default();
+-    else
+-        c->sched = scheduler_alloc(sched_id);
++    c->sched = scheduler_alloc(sched_id);
+     if ( IS_ERR(c->sched) )
+     {
+         ret = PTR_ERR(c->sched);
+@@ -1242,9 +1239,6 @@ static int __init cf_check cpupool_init(void)
  
- out:
-diff --git a/tools/libs/light/libxl_utils.c b/tools/libs/light/libxl_utils.c
-index b91c2cafa223..81780da3ff40 100644
---- a/tools/libs/light/libxl_utils.c
-+++ b/tools/libs/light/libxl_utils.c
-@@ -151,8 +151,7 @@ char *libxl_cpupoolid_to_name(libxl_ctx *ctx, uint32_t poolid)
+     cpupool_hypfs_init();
  
-     snprintf(path, sizeof(path), "/local/pool/%d/name", poolid);
-     s = xs_read(ctx->xsh, XBT_NULL, path, &len);
--    if (!s && (poolid == 0))
--        return strdup("Pool-0");
-+
-     return s;
- }
+-    cpupool0 = cpupool_create(0, 0);
+-    BUG_ON(IS_ERR(cpupool0));
+-    cpupool_put(cpupool0);
+     register_cpu_notifier(&cpu_nfb);
  
+     btcpupools_dtb_parse();
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 30a6538452bc..4007a3df4c1c 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -1188,7 +1188,10 @@ static inline void btcpupools_dtb_parse(void) {}
+ #endif
+ 
+ #else
+-static inline void btcpupools_allocate_pools(const cpumask_t *cpu_online_map) {}
++static inline void btcpupools_allocate_pools(const cpumask_t *cpu_online_map)
++{
++    cpupool0 = cpupool_create_pool(0, -1);
++}
+ static inline void btcpupools_dtb_parse(void) {}
+ static inline struct cpupool *btcpupools_get_cpupool(unsigned int cpu)
+ {
 -- 
 2.17.1
 
