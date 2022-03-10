@@ -4,36 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 486AEC4321E
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 17:10:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.288506.489256 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ADC4C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Mar 2022 17:23:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.288535.489300 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSMJB-0002YS-Ay; Thu, 10 Mar 2022 17:10:37 +0000
+	id 1nSMVN-0006rn-P5; Thu, 10 Mar 2022 17:23:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 288506.489256; Thu, 10 Mar 2022 17:10:37 +0000
+Received: by outflank-mailman (output) from mailman id 288535.489300; Thu, 10 Mar 2022 17:23:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSMJB-0002YH-5O; Thu, 10 Mar 2022 17:10:37 +0000
-Received: by outflank-mailman (input) for mailman id 288506;
- Thu, 10 Mar 2022 17:10:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nSMVN-0006rg-Li; Thu, 10 Mar 2022 17:23:13 +0000
+Received: by outflank-mailman (input) for mailman id 288535;
+ Thu, 10 Mar 2022 17:23:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5/tR=TV=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1nSMJ9-0001pg-K0
- for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 17:10:35 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id f742fbd5-a094-11ec-853a-5f4723681683;
- Thu, 10 Mar 2022 18:10:20 +0100 (CET)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E4EB71692;
- Thu, 10 Mar 2022 09:10:32 -0800 (PST)
-Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
- [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B42F73F99C;
- Thu, 10 Mar 2022 09:10:31 -0800 (PST)
+ <SRS0=UgV8=TV=amazon.de=prvs=06149a43a=doebel@srs-se1.protection.inumbo.net>)
+ id 1nSMVM-0006ra-Cq
+ for xen-devel@lists.xenproject.org; Thu, 10 Mar 2022 17:23:13 +0000
+Received: from smtp-fw-9103.amazon.com (smtp-fw-9103.amazon.com
+ [207.171.188.200]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c1264e60-a096-11ec-8eba-a37418f5ba1a;
+ Thu, 10 Mar 2022 18:23:10 +0100 (CET)
+Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
+ email-inbound-relay-pdx-2a-92ba9394.us-west-2.amazon.com) ([10.25.36.210])
+ by smtp-border-fw-9103.sea19.amazon.com with ESMTP; 10 Mar 2022 17:22:53 +0000
+Received: from EX13D03EUC002.ant.amazon.com
+ (pdx1-ws-svc-p6-lb9-vlan3.pdx.amazon.com [10.236.137.198])
+ by email-inbound-relay-pdx-2a-92ba9394.us-west-2.amazon.com (Postfix) with
+ ESMTPS id 07982418BD; Thu, 10 Mar 2022 17:22:53 +0000 (UTC)
+Received: from [192.168.12.40] (10.43.164.135) by EX13D03EUC002.ant.amazon.com
+ (10.43.164.60) with Microsoft SMTP Server (TLS) id 15.0.1497.32;
+ Thu, 10 Mar 2022 17:22:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,134 +46,96 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
-Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f742fbd5-a094-11ec-853a-5f4723681683
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: wei.chen@arm.com,
-	George Dunlap <george.dunlap@citrix.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 3/6] xen/sched: retrieve scheduler id by name
-Date: Thu, 10 Mar 2022 17:10:16 +0000
-Message-Id: <20220310171019.6170-4-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220310171019.6170-1-luca.fancellu@arm.com>
-References: <20220310171019.6170-1-luca.fancellu@arm.com>
+X-Inumbo-ID: c1264e60-a096-11ec-8eba-a37418f5ba1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+  t=1646932990; x=1678468990;
+  h=message-id:date:mime-version:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:subject;
+  bh=PeRJ7Dq1zgla7eS4PsRQ+YK72cKN0uZOKASSXsgkSs8=;
+  b=aPXr+dritpvjKu7rVk6wYKSTUTPD2b7GYG99pBPTyAebTpp3glezZ2jT
+   2ln/sBLA6Nv1QCR6pcHX5apBkKNGLd5JJCJkZb+3b1dAhI3rIwoV+jKtM
+   eVSuy9xzz9NDvVigEwY/vr19kH8GCVD7hfj+dmxBmAUT6fcyLWadfbyhX
+   k=;
+X-IronPort-AV: E=Sophos;i="5.90,171,1643673600"; 
+   d="scan'208";a="998292950"
+Subject: Re: [PATCH 1/3] livepatch: use basename to perform object file matching
+Message-ID: <5134560e-ef03-fc37-2234-87186f391d8e@amazon.de>
+Date: Thu, 10 Mar 2022 18:22:50 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.6.2
+Content-Language: en-US
+To: Roger Pau Monne <roger.pau@citrix.com>, <xen-devel@lists.xenproject.org>
+CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ross Lagerwall
+	<ross.lagerwall@citrix.com>
+References: <20220310150834.98815-1-roger.pau@citrix.com>
+ <20220310150834.98815-2-roger.pau@citrix.com>
+From: "Doebel, Bjoern" <doebel@amazon.de>
+In-Reply-To: <20220310150834.98815-2-roger.pau@citrix.com>
+X-Originating-IP: [10.43.164.135]
+X-ClientProxiedBy: EX13D20EUC003.ant.amazon.com (10.43.164.190) To
+ EX13D03EUC002.ant.amazon.com (10.43.164.60)
+Precedence: Bulk
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Add a static function to retrieve the scheduler pointer using the
-scheduler name.
-
-Add a public function to retrieve the scheduler id by the scheduler
-name that makes use of the new static function.
-
-Take the occasion to replace open coded scheduler search with the
-new static function in scheduler_init.
-
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
----
-Changes in v2:
-- replace open coded scheduler search in scheduler_init (Juergen)
----
- xen/common/sched/core.c | 40 ++++++++++++++++++++++++++--------------
- xen/include/xen/sched.h | 11 +++++++++++
- 2 files changed, 37 insertions(+), 14 deletions(-)
-
-diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
-index 19ab67818106..48ee01420fb8 100644
---- a/xen/common/sched/core.c
-+++ b/xen/common/sched/core.c
-@@ -2947,10 +2947,30 @@ void scheduler_enable(void)
-     scheduler_active = true;
- }
- 
-+static inline
-+const struct scheduler *__init sched_get_by_name(const char *sched_name)
-+{
-+    unsigned int i;
-+
-+    for ( i = 0; i < NUM_SCHEDULERS; i++ )
-+        if ( schedulers[i] && !strcmp(schedulers[i]->opt_name, sched_name) )
-+            return schedulers[i];
-+
-+    return NULL;
-+}
-+
-+int __init sched_get_id_by_name(const char *sched_name)
-+{
-+    const struct scheduler *scheduler = sched_get_by_name(sched_name);
-+
-+    return scheduler ? scheduler->sched_id : -1;
-+}
-+
- /* Initialise the data structures. */
- void __init scheduler_init(void)
- {
-     struct domain *idle_domain;
-+    const struct scheduler *scheduler;
-     int i;
- 
-     scheduler_enable();
-@@ -2981,25 +3001,17 @@ void __init scheduler_init(void)
-                    schedulers[i]->opt_name);
-             schedulers[i] = NULL;
-         }
--
--        if ( schedulers[i] && !ops.name &&
--             !strcmp(schedulers[i]->opt_name, opt_sched) )
--            ops = *schedulers[i];
-     }
- 
--    if ( !ops.name )
-+    scheduler = sched_get_by_name(opt_sched);
-+    if ( !scheduler )
-     {
-         printk("Could not find scheduler: %s\n", opt_sched);
--        for ( i = 0; i < NUM_SCHEDULERS; i++ )
--            if ( schedulers[i] &&
--                 !strcmp(schedulers[i]->opt_name, CONFIG_SCHED_DEFAULT) )
--            {
--                ops = *schedulers[i];
--                break;
--            }
--        BUG_ON(!ops.name);
--        printk("Using '%s' (%s)\n", ops.name, ops.opt_name);
-+        scheduler = sched_get_by_name(CONFIG_SCHED_DEFAULT);
-+        BUG_ON(!scheduler);
-+        printk("Using '%s' (%s)\n", scheduler->name, scheduler->opt_name);
-     }
-+    ops = *scheduler;
- 
-     if ( cpu_schedule_up(0) )
-         BUG();
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 47fc856e0fe0..2c10303f0187 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -756,6 +756,17 @@ void sched_destroy_domain(struct domain *d);
- long sched_adjust(struct domain *, struct xen_domctl_scheduler_op *);
- long sched_adjust_global(struct xen_sysctl_scheduler_op *);
- int  sched_id(void);
-+
-+/*
-+ * sched_get_id_by_name - retrieves a scheduler id given a scheduler name
-+ * @sched_name: scheduler name as a string
-+ *
-+ * returns:
-+ *     positive value being the scheduler id, on success
-+ *     negative value if the scheduler name is not found.
-+ */
-+int sched_get_id_by_name(const char *sched_name);
-+
- void vcpu_wake(struct vcpu *v);
- long vcpu_yield(void);
- void vcpu_sleep_nosync(struct vcpu *v);
--- 
-2.17.1
+CgpPbiAxMC4wMy4yMiAxNjowOCwgUm9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+IENBVVRJT046IFRo
+aXMgZW1haWwgb3JpZ2luYXRlZCBmcm9tIG91dHNpZGUgb2YgdGhlIG9yZ2FuaXphdGlvbi4gRG8g
+bm90IGNsaWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNzIHlvdSBjYW4gY29uZmly
+bSB0aGUgc2VuZGVyIGFuZCBrbm93IHRoZSBjb250ZW50IGlzIHNhZmUuCj4gCj4gCj4gCj4gVGhl
+IGNoYW5nZXMgaW4gdGhlIFhlbiBidWlsZCBsb2dpYyBoYXMgcmVzdWx0ZWQgaW4gdGhlIGNvbXBp
+bGVyIGFuZAo+IG9iamNvcHkgYmVpbmcgY2FsbGVkIGZyb20geGVuLyBpbnN0ZWFkIG9mIHJlbGF0
+aXZlIHRvIGVhY2ggb2JqZWN0Cj4gZGlyZWN0b3J5LiBUaGlzIHJlcXVpcmVzIHVzaW5nIGJhc2Vu
+YW1lIHNvIHRoYXQgdGhlIGRpcmVjdG9yeSBpcyBub3QKPiB0YWtlbiBpbnRvIGFjY291bnQgd2hl
+biBjaGVja2luZyBhZ2FpbnN0IHRoZSBsaXN0IG9mIGZpbGVzIHRvIGJlCj4gZXhwbGljaXRseSBp
+Z25vcmVkLgo+IAo+IEFsc28gYWRqdXN0IHRoZSBwYXRocyB1c2VkIHRvIHN0b3JlIHRoZSBkaWZm
+ZXJpbmcgb2JqZWN0IGZpbGVzLCBhcwo+IHdpdGggdGhlIGN1cnJlbnQgbG9naWMgdGhlIHJlc3Vs
+dGluZyBwYXRoIHdpbGwgYmUgd3Jvbmcgd2hlbiB1c2luZwo+IG5ld2VyIFhlbiB2ZXJzaW9ucywg
+Y2hhbmdlZF9vYmpzIHdvdWxkIGVuZCBjb250YWluaW5nIGVudHJpZXMgbGlrZToKPiAKPiB4ZW4v
+YXJjaC94ODYvaHZtL3ZteC9hcmNoL3g4Ni9odm0vdm14L3ZteC5vCj4gCj4gU2lnbmVkLW9mZi1i
+eTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Cj4gLS0tCj4gICBsaXZl
+cGF0Y2gtZ2NjIHwgMTIgKysrKysrKy0tLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRp
+b25zKCspLCA1IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9saXZlcGF0Y2gtZ2NjIGIv
+bGl2ZXBhdGNoLWdjYwo+IGluZGV4IDkxMzMzZDUuLmZlNzgyZTAgMTAwNzU1Cj4gLS0tIGEvbGl2
+ZXBhdGNoLWdjYwo+ICsrKyBiL2xpdmVwYXRjaC1nY2MKPiBAQCAtMzIsMTAgKzMyLDEwIEBAIGlm
+IFtbICIkVE9PTENIQUlOQ01EIiA9fiAkR0NDX1JFIF1dIDsgdGhlbgo+ICAgICAgICAgICBpZiBb
+ICIkMSIgPSAiLW8iIF07IHRoZW4KPiAgICAgICAgICAgICAgIG9iaj0kMgo+ICAgICAgICAgICAg
+ICAgW1sgJDIgPSAqLy50bXBfKi5vIF1dICYmIG9iaj0kezIvLnRtcF8vfQo+IC0gICAgICAgICAg
+ICBjYXNlICIkb2JqIiBpbgo+ICsgICAgICAgICAgICBjYXNlICIkKGJhc2VuYW1lICRvYmopIiBp
+bgo+ICAgICAgICAgICAgICAgdmVyc2lvbi5vfFwKPiAgICAgICAgICAgICAgIGRlYnVnLm98XAo+
+IC0gICAgICAgICAgICBlZmkvY2hlY2sub3xcCj4gKyAgICAgICAgICAgIGNoZWNrLm98XAo+ICAg
+ICAgICAgICAgICAgKi54ZW4tc3ltcy4qLm98XAo+ICAgICAgICAgICAgICAgKi54ZW4uZWZpLiou
+b3xcCj4gICAgICAgICAgICAgICBidWlsdF9pbi5vfFwKPiBAQCAtNDYsNiArNDYsNyBAQCBpZiBb
+WyAiJFRPT0xDSEFJTkNNRCIgPX4gJEdDQ19SRSBdXSA7IHRoZW4KPiAgICAgICAgICAgICAgICou
+bykKPiAgICAgICAgICAgICAgICAgICBwYXRoPSIkKHB3ZCkvJChkaXJuYW1lICRvYmopIgo+ICAg
+ICAgICAgICAgICAgICAgIGRpcj0iJHtwYXRoIyRMSVZFUEFUQ0hfQlVJTERfRElSfSIKPiArICAg
+ICAgICAgICAgICAgIG9iaj0kKGJhc2VuYW1lICRvYmopCj4gICAgICAgICAgICAgICAgICAgaWYg
+WyAtbiAiJExJVkVQQVRDSF9DQVBUVVJFX0RJUiIgLWEgLWQgIiRMSVZFUEFUQ0hfQ0FQVFVSRV9E
+SVIiIF07IHRoZW4KPiAgICAgICAgICAgICAgICAgICAgICAgZWNobyAiJGRpci8kb2JqIiA+PiAi
+JHtMSVZFUEFUQ0hfQ0FQVFVSRV9ESVJ9L2NoYW5nZWRfb2JqcyIKPiAgICAgICAgICAgICAgICAg
+ICAgICAga2VlcD15ZXMKPiBAQCAtNjEsMTUgKzYyLDE2IEBAIGlmIFtbICIkVE9PTENIQUlOQ01E
+IiA9fiAkR0NDX1JFIF1dIDsgdGhlbgo+ICAgZG9uZQo+ICAgZWxpZiBbWyAiJFRPT0xDSEFJTkNN
+RCIgPX4gJE9CSkNPUFlfUkUgXV0gOyB0aGVuCj4gICAgICAgb2JqPSIkeyEjfSIKPiAtICAgIGNh
+c2UgIiRvYmoiIGluCj4gKyAgICBjYXNlICIkKGJhc2VuYW1lICRvYmopIiBpbgo+ICAgICAgICAg
+ICB2ZXJzaW9uLm98XAo+ICAgICAgICAgICBkZWJ1Zy5vfFwKPiAtICAgICAgICBlZmkvY2hlY2su
+b3xcCj4gKyAgICAgICAgY2hlY2sub3xcCj4gICAgICAgICAgIC4qLm8pCj4gICAgICAgICAgICAg
+ICA7Owo+ICAgICAgICAgICAqLm8pCj4gICAgICAgICAgICAgICBwYXRoPSIkKHB3ZCkvJChkaXJu
+YW1lICRvYmopIgo+ICAgICAgICAgICAgICAgZGlyPSIke3BhdGgjJExJVkVQQVRDSF9CVUlMRF9E
+SVJ9Igo+ICsgICAgICAgICAgICBvYmo9JChiYXNlbmFtZSAkb2JqKQo+ICAgICAgICAgICAgICAg
+aWYgWyAtbiAiJExJVkVQQVRDSF9DQVBUVVJFX0RJUiIgLWEgLWQgIiRMSVZFUEFUQ0hfQ0FQVFVS
+RV9ESVIiIF07IHRoZW4KPiAgICAgICAgICAgICAgICAgICBlY2hvICIkZGlyLyRvYmoiID4+ICIk
+e0xJVkVQQVRDSF9DQVBUVVJFX0RJUn0vY2hhbmdlZF9vYmpzIgo+ICAgICAgICAgICAgICAgICAg
+IGtlZXA9eWVzCj4gQEAgLTg1LDcgKzg3LDcgQEAgcmV0PSIkPyIKPiAKPiAgIGlmIFtbICIka2Vl
+cCIgPSAieWVzIiBdXSA7IHRoZW4KPiAgICAgICBta2RpciAtcCAiJChkaXJuYW1lICRMSVZFUEFU
+Q0hfQ0FQVFVSRV9ESVIvJGRpci8kb2JqKSIKPiAtICAgIGNwICIkb2JqIiAiJExJVkVQQVRDSF9D
+QVBUVVJFX0RJUi8kZGlyLyRvYmoiCj4gKyAgICBjcCAiJHBhdGgvJG9iaiIgIiRMSVZFUEFUQ0hf
+Q0FQVFVSRV9ESVIvJGRpci8kb2JqIgo+ICAgZmkKPiAKPiAgIGV4aXQgIiRyZXQiCj4gLS0KPiAy
+LjM0LjEKClJldmlld2VkLWJ5OiBCam9lcm4gRG9lYmVsIDxkb2ViZWxAYW1hem9uLmRlPgoKCgpB
+bWF6b24gRGV2ZWxvcG1lbnQgQ2VudGVyIEdlcm1hbnkgR21iSApLcmF1c2Vuc3RyLiAzOAoxMDEx
+NyBCZXJsaW4KR2VzY2hhZWZ0c2Z1ZWhydW5nOiBDaHJpc3RpYW4gU2NobGFlZ2VyLCBKb25hdGhh
+biBXZWlzcwpFaW5nZXRyYWdlbiBhbSBBbXRzZ2VyaWNodCBDaGFybG90dGVuYnVyZyB1bnRlciBI
+UkIgMTQ5MTczIEIKU2l0ejogQmVybGluClVzdC1JRDogREUgMjg5IDIzNyA4NzkKCgo=
 
 
