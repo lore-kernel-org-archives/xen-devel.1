@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD45C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Mar 2022 15:22:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.289150.490586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67C40C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Mar 2022 15:29:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.289161.490596 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSh5W-0006o3-Io; Fri, 11 Mar 2022 15:21:54 +0000
+	id 1nShCm-00085v-Bt; Fri, 11 Mar 2022 15:29:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 289150.490586; Fri, 11 Mar 2022 15:21:54 +0000
+Received: by outflank-mailman (output) from mailman id 289161.490596; Fri, 11 Mar 2022 15:29:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nSh5W-0006n7-Ek; Fri, 11 Mar 2022 15:21:54 +0000
-Received: by outflank-mailman (input) for mailman id 289150;
- Fri, 11 Mar 2022 15:21:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nShCm-00085o-8r; Fri, 11 Mar 2022 15:29:24 +0000
+Received: by outflank-mailman (input) for mailman id 289161;
+ Fri, 11 Mar 2022 15:29:23 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3p0I=TW=citrix.com=prvs=06245b39f=Jane.Malalane@srs-se1.protection.inumbo.net>)
- id 1nSh5V-0006AM-9U
- for xen-devel@lists.xenproject.org; Fri, 11 Mar 2022 15:21:53 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f8bce061-a14e-11ec-853a-5f4723681683;
- Fri, 11 Mar 2022 16:21:51 +0100 (CET)
+ <SRS0=RXIo=TW=citrix.com=prvs=0626a3ed1=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1nShCk-00085i-Ui
+ for xen-devel@lists.xenproject.org; Fri, 11 Mar 2022 15:29:22 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0552e04b-a150-11ec-8eba-a37418f5ba1a;
+ Fri, 11 Mar 2022 16:29:21 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,529 +38,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f8bce061-a14e-11ec-853a-5f4723681683
+X-Inumbo-ID: 0552e04b-a150-11ec-8eba-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1647012111;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=xFR1X1AGdU5c6vvB51yvPTeo6emGP+lVw3aj9ed8sXE=;
-  b=F3PQa/d6T4Wk4mn218yoA7zB/qKyOo86qO4JMcMlXWt6bodiNc74Frt6
-   XZEAzf+FzOh+QcN13kiQOeT1QjZdJtm3OMbKaTAgelknkxoa9JabAbAQA
-   +k0zRSJNDcJf/SePHE8n4wkwerH9IQCg3uPkPLZxfgdhKWE8G+1bPDeIn
-   w=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  d=citrix.com; s=securemail; t=1647012561;
+  h=date:from:to:cc:subject:message-id:references:
+   in-reply-to:mime-version;
+  bh=bK7jgMrHM0d3pPZ1cR8Yq1a8EfEJPtb+x1j9X46bgeY=;
+  b=JlIxSXbI2dxweZ4nAFwGjVyeFl0AgYarMC/V1JzsF80SYr6YCriCNa0h
+   Na6MAZNl9L4dMzYu9Hja5Rvl7YntdA8lJ1po07B+3ZO6RORHCoJcPTCL+
+   4Sfl+5ZU4cbAbP7kbCkK4WzhZiI6ferWiW+dbRlxj2tSeicu+6VOaKhxw
+   g=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
 X-SBRS: 5.1
-X-MesageID: 66019512
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 65951722
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:rrHs/aBNL5X+xBVW/7Hjw5YqxClBgxIJ4kV8jS/XYbTApDhxhWAGy
- TcWWT3TOK6Ca2anKop1Povi800CsZSHz9ZkQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMZiaA4E/raNANlFEkvU2ybuOU5NXsZ2YgHWeIdA970Ug5w7Vg29Yy6TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPh61
- sVSs4OgEjwXHaH8xekSUTdIEmJxaPguFL/veRBTsOSWxkzCNXDt3+9vHAc9OohwFuRfWD8Us
- 6ZCcXZUM07F17neLLGTE4GAguwBJc/meqYWvnhkxDfUJf0nXYrCU+PB4towMDIY2J4WRKeDP
- pBxhTxHKzOabRZiJxArJ7Vkpvqa3lfcSBNIgQfAzUYwyzeKl1EguFT3C/LrfdiNSdRQj1yvj
- GvM9GTkATkXLNWajzGC9xqEnfTTlCn2XIYTEryQ9fNwhlCXgGsJB3U+X1ahveOwjEL4XttFM
- lEV4QInt610/0uuJvH+UgO5pjiYvxcac9tWD+A+rgqKz8L84RufQG4NTTdDadkvnM4wWTEuk
- FSOmrvBBzN1t6aOYWmA7brSpjS3UQAFIGlHaSIaQA8t59j4vJp1nh/JVsxkEqO+kpvyAz6Y6
- zKAoTU6hr4TpdUWzKj99lfC6xquu5zIQwgd9gjRGGW/4WtRe4qNd4Gur1/B4p59wJ2xFwfb+
- iJewo7Hsb5IXcrleDGxrPslF6+5+PCaIGbnv31jL8Qs+DaD63/gctUFiN1hH3tBPsEBcD7vR
- UbcvwJN+ZNeVEeXgb9Lj5GZUJpzk/W5fTjxfrWNN4cVPMAtHOOS1Hw2PSatM3bRfF/AeE3VE
- bOSao6SAHkTEsyLJxLmFr5GgdfHKs3TrF4/pKwXLTz7gNJyh1bPEN/p1WdiiMhgvctoRy2Pr
- 75i2zOikUk3bQEHSnC/HXQvBV4LN2MnIpv9ttZacOWOSiI/Rj1/WqSOnuN5I9U790iwqgsu1
- ijsMqO/4ACi7UAr1C3QMiwzAF8RdcoXQY0H0dwEYg/zhilLjXeH56YDbZonFYTLB8Q4pcOYu
- 8ItIp3aatwWE2yv021EMfHV8dwzHDz21FnmF3f0P1ACk2tIGlWhFinMJVC0qkHjz0Of6KMDn
- lFX/liCEMRZGFg6Upq+hTDG5wrZgEXxUdlaByPgSuS/sm2xmGS2A0QdVsMKHvw=
-IronPort-HdrOrdr: A9a23:poJxAqrZyok9pi2vn3EHpp8aV5oReYIsimQD101hICG8cqSj9v
- xG+85rrSMc6QxhIU3I9urwW5VoLUmyyXcx2/h0AV7AZniBhILLFvAB0WKK+VSJcEeSmtK1l5
- 0QFJSWYOeAdmSS5vyb3ODXKbgdKaG8gcWVuds=
+IronPort-Data: A9a23:qLhtTaN2iDp1JITvrR2Jl8FynXyQoLVcMsEvi/4bfWQNrUoigmEPn
+ GFMX2CCOq6LZzOmfdB0PN/g8U4OvcKDy9ZqSgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFcMpBsJ00o5wbZi29cw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zl
+ 4kOu4Crb1YVGu7Bx8YXDxBdTgI5BPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALNs7kMZlZonh95TrYEewnUdbIRKCiCdpwgmph25kRR6y2i
+ 8wxdiFCNBTtXgxzN04wFIg+wvnytyD6fGgNwL6SjfVuuDWCpOBr65D9PdyQdtGUSMF9mkeDu
+ nmA72n/GgsdNtGU1XyC6H3ErvDLtTP2XsQVDrLQ3vxgjUCXx2cTIAYLTlb9qv684ma1Q99FI
+ E0K8wIgt6U//lenCN7nUHWFTGWs50BGHYAKSqtjtV/LmvG8Dxul6nYsEWICZsA9kp4KYX8ni
+ X2Dw9rsWB8oiejAIZ6CzYu8oTS3MCkTCGYNYy4YUAcIi+XeTJEPYgHnFYg6TvPs5jHhMXSpm
+ m3R8nBi71kGpZNTj82GEUb7byVAT3QjZio8/U3pU22s9WuVj6b1NtXzuTA3ARutRbt1r2VtX
+ lBYyqByD8hUVPlhcRBhps1UTdlFAN7fbFXhbaZHRcVJythU0yfLkXpsyD9/Plx1Fc0PZCXkZ
+ kTe0SsIusMNbSD1Mv8vO9vvYyjP8UQGPY20PhwzRoATCqWdiSfdpH0+DaJu9zyFfLcQfVEXZ
+ s7ALJfE4YcyAqV71jumL9rxIpdwrh3SMVj7HMihpzz+iOL2TCfMFd8tbQvfBshkvfjsiFiEr
+ L5i2z6ilkw3vBvWOXKMr+b+7DkicBAGOHwBg5cOJ7DZfVY+Rj1J5j246epJRrGJVp99z4/g1
+ nq8RlVZ2Bz4g3jGIh+NcXdtdPXkWpMXkJ7xFXZE0YqAs5T7XbuS0Q==
+IronPort-HdrOrdr: A9a23:N8FA26w7YDe0pIz4yvapKrPxwOskLtp133Aq2lEZdPULSKOlfp
+ GV8MjziyWYtN9wYhAdcdDpAtjmfZr5z+8O3WBxB8bYYOCCggWVxe5ZnOnfKlHbakjDH6tmpN
+ pdmstFeaPN5DpB/L/HCWCDer5Kqrn3k5xAx92ut0uFJTsaFJ2IhD0JbDpzfHcGIDWvUvECZe
+ ahD4d81nOdUEVSSv7+KmgOXuDFqdGOvJX6YSQeDxpizAWVlzun5JPzDhDdh34lInhy6IZn1V
+ KAvx3y562lvf3+4hjA11XL55ATvNf60NNMCOGFl8BQADTxjQSDYphnRtS5zXgIidDqzGxvvM
+ jHoh8mMcg2w3TNflutqR+o4AXk2CZG0Q6X9XaoxV/Y5eDpTjMzDMRMwahDdAHC1kYmtNZglI
+ pWwmOwrfNsfF/9tRW4w+KNewBhl0Kyr3Znu/UUlWZjXYwXb6IUhZAD/XlSDIwLEEvBmc0a+d
+ FVfY/hDcttABKnhyizhBgu/DXsZAV4Iv6+eDlMhiTPuAIm30yQzCMjtbkidzk7hdAAoqJ/lp
+ T525RT5cBzp/AtHNFA7cc6MLyK4z/2MGTx2Fz7GyWUKEhAAQOJl6LK
 X-IronPort-AV: E=Sophos;i="5.90,174,1643691600"; 
-   d="scan'208";a="66019512"
-From: Jane Malalane <jane.malalane@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Jane Malalane <jane.malalane@citrix.com>, Wei Liu <wl@xen.org>, "Anthony
- PERARD" <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian
-	<kevin.tian@intel.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>
-Subject: [PATCH v7 1/2] xen+tools: Report Interrupt Controller Virtualization capabilities on x86
-Date: Fri, 11 Mar 2022 15:21:06 +0000
-Message-ID: <20220311152107.2918-2-jane.malalane@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220311152107.2918-1-jane.malalane@citrix.com>
-References: <20220311152107.2918-1-jane.malalane@citrix.com>
+   d="scan'208";a="65951722"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=i5uOO7ylvF85zRmAtE0wJI+uq+OOsOMMdZ/II7twbBguLeXVWD93v9rCrPXGG5pDND9J1+tmxLPUiLajpQtOOe324WwGmwDFWz2pXbaCiSfAu3yjo33bfIXcrPtwfBP31CD+kLP9hK45xbRqHFuQEhYH/6AjXFo7LLWGZ7d/6IwxdHwLzQZhDBWusYIs+b8Wv0Djpu7eoxpqSVDdGPpCX8F/rJrxyK3XMXhZfRJMag30ii+RiFfpeK+UG8pKkDHmgTly14Kl5rIaCSz4n/T+Kc/goBUD6ZvMM/G8nLCoKEQ7fEeEt0eJznRC6Vf+/4SqDt9R1InkmEqmuFQlmkxvPg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VBo92vs/J2whbFMGg3aG7kvVyctYctEerkmEdGhcIH8=;
+ b=RX2ht63DNJQk77E4pGyJ9/l/oX1/04C3H6b4VvljhDzSkEx/gaFoYKXmdzxFtUX6z7aElLrrR9HucdJr97bxE7A9n73+sAc1fjlzWp53pAKh8u1OEiyIXo49Tb3n8ttKa8R3ZERQlmSYs0setpQNenAOWSpfTQVbHdOy5QqJIdGpja3FYtL99wHAKGZMwCvHwgKZL6gjqJCZw0EiIfJwWFML1KL5Vm7yNZa+m45Epdi8K/PFOQwPJ+n4emAKRp2+WKfXJ4tkMCsPD/5BLM3D33/7g23mSXvlk1R0Lq6vhl2j2RhkoWFkvKy7ULMv/bIU6ggEAzMRE5uSsFswspAnag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VBo92vs/J2whbFMGg3aG7kvVyctYctEerkmEdGhcIH8=;
+ b=jhh8g4I0Q5Va0TbalAQUpwf9cSPAoEH+QXWqaM9VetfM9FemVkFSeHiYU2v9HO4xJwNz4FpbJFUDHOqIrtvSa5OTT47U8xsRdtlORKfISatgTy048xKmsHRxIeIffOYPqtol+U4LhDr+jVme8m4sBCNObbR4NIwa0K5Ce9cCOE4=
+Date: Fri, 11 Mar 2022 16:29:01 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>, Colin Percival <cperciva@FreeBSD.org>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
+Subject: Re: statistical time calibration
+Message-ID: <YitqvQxsJ1/hqfrg@Air-de-Roger>
+References: <1ea5815b-df22-7884-d28b-bdcc1741e349@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <1ea5815b-df22-7884-d28b-bdcc1741e349@suse.com>
+X-ClientProxiedBy: LO2P265CA0032.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:61::20) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 88d0f47a-e9e2-4ff1-f81b-08da0373e190
+X-MS-TrafficTypeDiagnostic: CY4PR03MB3318:EE_
+X-Microsoft-Antispam-PRVS: <CY4PR03MB3318E8C07E85342D17B9CC6C8F0C9@CY4PR03MB3318.namprd03.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Bkk6z6EAJN+JQdiIC4Y478jEuEOzn8d+uc17X2YxaINa3EIq+M14lYpSU4jwSbQFknWLeEcax4Xz1uRNabPSAM838UEwqyN23Yasn72Lgcme8fdkOUXHZjL/Q3Y2Kjn9A8mKpWatxZzUHdF1IToUQCHqxdJImTOvBcx5Af175w0LF38xTyTtWqo6VpPmdSK1uYb2TAe4yD5HkXoKAOCO6ore0yL3zSoZLfnZlwVBU5wQp3UD32YzGeFf6fjIf5eFFXCwi/54Mfv+N+evgWlE+yUT0YNUK707Mc3AVucR/GVDE3QRluwW3GoNM87/n1bXBv8K+NcDaxyDb7okX8lyXtmm5blWesW2KquwbTIphiN/gOOnwd1Bkyor1MdjRfk+j7QfchmaYRYTQdmBHmK17ngG+pjDJG2ohozLWTCa4X2FbUrkepgYxLuFqSx9m59Sz3UfGAQRJoJWDnjU3ORDs5mlYijZMBcr5pYNkprqm0o8e8adQhwvCuEQ1zWqnWzJhRB3LTpFNgiyLmBVnkNzWsr6Pt+aS2iHo9cVkRAjbv6IXwGAqaFr6zECSIWaPAbGsTNbaRXXCxUg5YhuTDmTBkIxv6X60NS3Vf513BzpJrck9YdqLoiL8LFqaAtYEJHRSYbyg0kVQjRfAfwUwaKiWTYTJogyxz8bexGYu2hXL0d1t+V4g/2WHlN/jLobFNkYnpOPAo6XV7xh9uHPhNx5sBS57tgBOX/UjvjzdGavNTA=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(7916004)(4636009)(366004)(66476007)(85182001)(9686003)(6512007)(38100700002)(33716001)(66946007)(6506007)(186003)(26005)(3480700007)(83380400001)(6666004)(86362001)(7116003)(6486002)(5660300002)(8676002)(966005)(54906003)(8936002)(2906002)(82960400001)(110136005)(316002)(508600001)(66556008)(4326008);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bUMvT2ZiUldUbE5maERid283Q2ErcGNKSkdlaFBqdW5BZnZ0d2dySzJKelN1?=
+ =?utf-8?B?NnhBbCtCYVE1U21DSGJjbWVWQ3ZDMXgzZ3NzcHRlOW8wdGdyQzFrRXNHYzRr?=
+ =?utf-8?B?MUVESmVXK1UrTldFazc1aVVOa0ltakRXWWxhQXc3eTMzblA0ZUx0bXZNYmoz?=
+ =?utf-8?B?R1JxalNwR05VVWpVUDhManA2T2pXYnVJeWVEcFgxTTBEbVo4alVuSng2amhG?=
+ =?utf-8?B?S09Nd0xzdFZCM0t5NkFZZzlsQ3EwSVREaWUrVmlFVjRvUkFoZE1nMWVGWWNV?=
+ =?utf-8?B?UG15R3F1UHg1ZGdnM3I1cExVY3RqSG1IL3ZqS2hIblNaTHRoTUZzQ2VMUS9i?=
+ =?utf-8?B?R3JSTWt3M09iVFNWbzZXeG1BVk1rQ2t2SkVLcnRIQnhWbjV5ekFQbjl1bzIx?=
+ =?utf-8?B?S3M2WUQrWlBJUG9KSVRMei9MYkl3R2l2S2VVazlmVUgrTVBlV0Y1Y08zVDM4?=
+ =?utf-8?B?TE9KSzltR3ovZ29SS1NIb3pXTjEzVDN4bVVqZXExSk8zYkhZYzZrWTBzQ3Fz?=
+ =?utf-8?B?bXdsK0pkeFFMbTBuU1lGNFQ3dHdOdzlCRUNzSDdWRmtZK1hJNHl2eVRBc0E3?=
+ =?utf-8?B?T2NkQWtJaEZwTElwSmlZQ0tTUjVsL1FpTmUvNWR0R2FhN0hYQ3FhcjF6K3Zv?=
+ =?utf-8?B?bUhtUjYxKzUwVC9sRlY2QTM4UGYyMWpRT1VNakM0S1d4SWJGTy9zL2U4T3Y2?=
+ =?utf-8?B?Q1ovTTBjd2xZRER5YXdzOFhYUFhGVVB5QmpiME5YMjhjQ05wNzBGRytLUDFP?=
+ =?utf-8?B?d2Q1Y2FWMzVuZTBiZ29JYkF0V1JlTDc0THJOa2Y4cS9CWTVxejEwOVZYWndv?=
+ =?utf-8?B?UjRBTWo0bTcvNmhwbW9zUXU1Z0R4SUtsWjNvZy95bFg2cncvMmlkTnRVQmRl?=
+ =?utf-8?B?d0xyTHRneCtHN1BlS0U3UTlvQ2hERzkzcFp6MWNRRUcwYmhsU05Jb1NSWWNj?=
+ =?utf-8?B?UjJxMXhnRzduNTY0Yi9pS09EZ0gzZ2lXSWllRytNZVBZYnVRaXhrNWM1d2dv?=
+ =?utf-8?B?aG8wY2hzL3ZzdmRYb2VjdlFQRFFPZkhIa0lxRHRmSXNScW4zNnUxaHVJaWRK?=
+ =?utf-8?B?eHU1TVJHNVNSNFVSeStPZnlIZGZEQTFWdEJ5L3FZWVBVcEJxUWNmOURNVmMx?=
+ =?utf-8?B?OWZ6U3podmJBWmhaYzUwNk5QNFJzTDlPb0dvTlN2bU9OOTlHOVlFTkc1ZDkx?=
+ =?utf-8?B?bGJ0SEJzc3Z2M0lyWDdIcHRPWTNGL29YS0xINysyQWFtUmhmTCtqVEtzcjJs?=
+ =?utf-8?B?MXlpcFdIek4zUGdJb1dTTm16a0hQQ20yWS92bUFyRnFmNUFMNmNuM0VEUlQ1?=
+ =?utf-8?B?ZXB3akNKUU1XS3MxVkwvNEl3U3dMTUJVb2Q0TVFmRVppWURoLzRHbTRISWNa?=
+ =?utf-8?B?ZGFIWHgxd1MwUFBhRFl0U3lqOHZsejdTblRic1YwcE9FdGJNQXFGdGxaWlUz?=
+ =?utf-8?B?MlZjK0RQbjhOUEZ3d1phWWpIYzEwazZXSC80UUZpaGNmTjhscVJlSmYxN2J3?=
+ =?utf-8?B?TXJnTWF4SlRFSStyaVhtOExSYnhMbVpLM0dUbDBSZ1hac1ZTRlJrZGsvNGxJ?=
+ =?utf-8?B?bm1kdmo0cDlzdVN0WWlkcE1SOXFUaU1qckVYTDc0c1dvR1pzRElVYnZCOGN1?=
+ =?utf-8?B?b0lrRld1T3dRRVptQ0VlVEVIRCtkYkE5L21hRnRTOUY1akU5YVVjRzZ4dndP?=
+ =?utf-8?B?cE12OG9nVVdHenJ2T0pmdWN2cFcvYlhnQXQ0UitwTG5vS011ODc4dklDcDdS?=
+ =?utf-8?B?UXpQVnFkRmQrOWhTTGlUYzlUWGMzYTRNbWpKYlFnK1RDS0JFNksvcExObng4?=
+ =?utf-8?B?MmF1M0RNRURNNlZLM0xVdjJYeUhKQWViWWRnNm5TUVlaOWQ2V01FWExSSkhN?=
+ =?utf-8?B?UHhjWENNcElyeURmcEhBQWc3SzFSYzJuQlZkK20xTlBEUlhIcWd3Nkp2TVh4?=
+ =?utf-8?B?cVhwbVZVUHN0cnNxMk5UMHViNTV3bWxxU0JlR0VSRTdEVFVhc2t2ZVZjWWpl?=
+ =?utf-8?B?dkVDcndScVFGa3dkdVpQU2o5YnpQSmJlNThidE9wRkpMS1NoOEFPMDljQ1NS?=
+ =?utf-8?B?cjZvRGRlY1hPOXlxTkZ1SVpTcmpCVTlFRHNacDBOY3JOOXd5Nnlza1FidHdp?=
+ =?utf-8?B?RU9uVzkwOUk3cnFpSFpWTDBDOHZuczFTelVOOTA1WVR0ZURqTFNyS1lmK3ho?=
+ =?utf-8?Q?IFbHYWQKg/wwJuhXZb434Kg=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88d0f47a-e9e2-4ff1-f81b-08da0373e190
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Mar 2022 15:29:06.8720
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: r4DJM2yPLjpMNC5pt3zmgyW3nRMSeDiyMaZd9H6UE2+boeoe4sDOwjYoVZMogG0GeemW+eY2E8qLMRTPKYzAfA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR03MB3318
+X-OriginatorOrg: citrix.com
 
-Add XEN_SYSCTL_PHYSCAP_X86_ASSISTED_XAPIC and
-XEN_SYSCTL_PHYSCAP_X86_ASSISTED_X2APIC to report accelerated xapic
-and x2apic, on x86 hardware.
-No such features are currently implemented on AMD hardware.
+On Tue, Jan 18, 2022 at 04:03:56PM +0100, Jan Beulich wrote:
+> Hello,
+> 
+> Roger pointer me to a FreeBSD commit [1] introducing such there. While
+> we don't start at 2000ms (but rather at 50), this still looked interesting
+> enough to take a closer look. I think I've mostly understood the idea and
+> implementation now, with the exception of three things:
 
-HW assisted xAPIC virtualization will be reported if HW, at the
-minimum, supports virtualize_apic_accesses as this feature alone means
-that an access to the APIC page will cause an APIC-access VM exit. An
-APIC-access VM exit provides a VMM with information about the access
-causing the VM exit, unlike a regular EPT fault, thus simplifying some
-internal handling.
+I have to admit I didn't really look at the commit in detail, just saw
+it go by at the same time you where working on improving our time
+calibration, and assumed it could be interesting.
 
-HW assisted x2APIC virtualization will be reported if HW supports
-virtualize_x2apic_mode and, at least, either apic_reg_virt or
-virtual_intr_delivery. This also means that
-sysctl follows the conditionals in vmx_vlapic_msr_changed().
+> 1) When deciding whether to increment "passes", both variance values have
+> an arbitrary value of 4 added to them. There's a sentence about this in
+> the earlier (big) comment, but it lacks any justification as to the chosen
+> value. What's worse, variance is not a plain number, but a quantity in the
+> same units as the base values. Since typically both clocks will run at
+> very difference frequencies, using the same (constant) value here has much
+> more of an effect on the lower frequency clock's value than on the higher
+> frequency one's.
+> 
+> 2) The second of the "important formulas" is nothing I could recall or was
+> able to look up. All I could find are somewhat similar, but still
+> sufficiently different ones. Perhaps my "introductory statistics" have
+> meanwhile been too long ago ... (In this context I'd like to also mention
+> that it took me quite a while to prove to myself that the degenerate case
+> of, in particular, the first iteration wouldn't lead to an early exit
+> from the function.)
+> 
+> 3) At the bottom of the loop there is some delaying logic, leading to
+> later data points coming in closer succession than earlier ones. I'm
+> afraid I don't understand the "theoretical risk of aliasing", and hence
+> I'm seeing more risks than benefits from this construct.
 
-For that purpose, also add an arch-specific "capabilities" parameter
-to struct xen_sysctl_physinfo.
+Might be easier to just add Colin, he did the original commit and can
+likely answer those questions much better than me. He has also done a
+bunch of work for FreeBSD/Xen.
 
-Note that this interface is intended to be compatible with AMD so that
-AVIC support can be introduced in a future patch. Unlike Intel that
-has multiple controls for APIC Virtualization, AMD has one global
-'AVIC Enable' control bit, so fine-graining of APIC virtualization
-control cannot be done on a common interface.
-
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Jane Malalane <jane.malalane@citrix.com>
----
-CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
-CC: Juergen Gross <jgross@suse.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>
-CC: George Dunlap <george.dunlap@citrix.com>
-CC: Jan Beulich <jbeulich@suse.com>
-CC: Julien Grall <julien@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-CC: Bertrand Marquis <bertrand.marquis@arm.com>
-CC: Jun Nakajima <jun.nakajima@intel.com>
-CC: Kevin Tian <kevin.tian@intel.com>
-CC: "Roger Pau Monné" <roger.pau@citrix.com>
-
-v7:
- * Make sure assisted_x{2}apic_available evaluates to false, to ensure
-   Xen builds, when !CONFIG_HVM
- * Fix coding style issues
-
-v6:
- * Limit abi check to x86
- * Fix coding style issue
-
-v5:
- * Have assisted_xapic_available solely depend on
-   cpu_has_vmx_virtualize_apic_accesses and assisted_x2apic_available
-   depend on cpu_has_vmx_virtualize_x2apic_mode and
-   cpu_has_vmx_apic_reg_virt OR cpu_has_vmx_virtual_intr_delivery
-
-v4:
- * Fallback to the original v2/v1 conditions for setting
-   assisted_xapic_available and assisted_x2apic_available so that in
-   the future APIC virtualization can be exposed on AMD hardware
-   since fine-graining of "AVIC" is not supported, i.e., AMD solely
-   uses "AVIC Enable". This also means that sysctl mimics what's
-   exposed in CPUID
-
-v3:
- * Define XEN_SYSCTL_PHYSCAP_ARCH_MAX for ABI checking and actually
-   set "arch_capbilities", via a call to c_bitmap_to_ocaml_list()
- * Have assisted_x2apic_available only depend on
-   cpu_has_vmx_virtualize_x2apic_mode
-
-v2:
- * Use one macro LIBXL_HAVE_PHYSINFO_ASSISTED_APIC instead of two
- * Pass xcpyshinfo as a pointer in libxl__arch_get_physinfo
- * Set assisted_x{2}apic_available to be conditional upon "bsp" and
-   annotate it with __ro_after_init
- * Change XEN_SYSCTL_PHYSCAP_ARCH_ASSISTED_X{2}APIC to
-   _X86_ASSISTED_X{2}APIC
- * Keep XEN_SYSCTL_PHYSCAP_X86_ASSISTED_X{2}APIC contained within
-   sysctl.h
- * Fix padding introduced in struct xen_sysctl_physinfo and bump
-   XEN_SYSCTL_INTERFACE_VERSION
----
- tools/golang/xenlight/helpers.gen.go |  4 ++++
- tools/golang/xenlight/types.gen.go   |  2 ++
- tools/include/libxl.h                |  7 +++++++
- tools/libs/light/libxl.c             |  3 +++
- tools/libs/light/libxl_arch.h        |  4 ++++
- tools/libs/light/libxl_arm.c         |  5 +++++
- tools/libs/light/libxl_types.idl     |  2 ++
- tools/libs/light/libxl_x86.c         | 11 +++++++++++
- tools/ocaml/libs/xc/xenctrl.ml       |  5 +++++
- tools/ocaml/libs/xc/xenctrl.mli      |  5 +++++
- tools/ocaml/libs/xc/xenctrl_stubs.c  | 15 +++++++++++++--
- tools/xl/xl_info.c                   |  6 ++++--
- xen/arch/x86/hvm/hvm.c               |  3 +++
- xen/arch/x86/hvm/vmx/vmcs.c          |  9 +++++++++
- xen/arch/x86/include/asm/hvm/hvm.h   |  5 +++++
- xen/arch/x86/sysctl.c                |  4 ++++
- xen/include/public/sysctl.h          | 11 ++++++++++-
- 17 files changed, 96 insertions(+), 5 deletions(-)
-
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index b746ff1081..dd4e6c9f14 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -3373,6 +3373,8 @@ x.CapVmtrace = bool(xc.cap_vmtrace)
- x.CapVpmu = bool(xc.cap_vpmu)
- x.CapGnttabV1 = bool(xc.cap_gnttab_v1)
- x.CapGnttabV2 = bool(xc.cap_gnttab_v2)
-+x.CapAssistedXapic = bool(xc.cap_assisted_xapic)
-+x.CapAssistedX2Apic = bool(xc.cap_assisted_x2apic)
- 
-  return nil}
- 
-@@ -3407,6 +3409,8 @@ xc.cap_vmtrace = C.bool(x.CapVmtrace)
- xc.cap_vpmu = C.bool(x.CapVpmu)
- xc.cap_gnttab_v1 = C.bool(x.CapGnttabV1)
- xc.cap_gnttab_v2 = C.bool(x.CapGnttabV2)
-+xc.cap_assisted_xapic = C.bool(x.CapAssistedXapic)
-+xc.cap_assisted_x2apic = C.bool(x.CapAssistedX2Apic)
- 
-  return nil
-  }
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index b1e84d5258..87be46c745 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -1014,6 +1014,8 @@ CapVmtrace bool
- CapVpmu bool
- CapGnttabV1 bool
- CapGnttabV2 bool
-+CapAssistedXapic bool
-+CapAssistedX2Apic bool
- }
- 
- type Connectorinfo struct {
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 51a9b6cfac..94e6355822 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -528,6 +528,13 @@
- #define LIBXL_HAVE_MAX_GRANT_VERSION 1
- 
- /*
-+ * LIBXL_HAVE_PHYSINFO_ASSISTED_APIC indicates that libxl_physinfo has
-+ * cap_assisted_xapic and cap_assisted_x2apic fields, which indicates
-+ * the availability of x{2}APIC hardware assisted virtualization.
-+ */
-+#define LIBXL_HAVE_PHYSINFO_ASSISTED_APIC 1
-+
-+/*
-  * libxl ABI compatibility
-  *
-  * The only guarantee which libxl makes regarding ABI compatibility
-diff --git a/tools/libs/light/libxl.c b/tools/libs/light/libxl.c
-index a0bf7d186f..6d699951e2 100644
---- a/tools/libs/light/libxl.c
-+++ b/tools/libs/light/libxl.c
-@@ -15,6 +15,7 @@
- #include "libxl_osdeps.h"
- 
- #include "libxl_internal.h"
-+#include "libxl_arch.h"
- 
- int libxl_ctx_alloc(libxl_ctx **pctx, int version,
-                     unsigned flags, xentoollog_logger * lg)
-@@ -410,6 +411,8 @@ int libxl_get_physinfo(libxl_ctx *ctx, libxl_physinfo *physinfo)
-     physinfo->cap_gnttab_v2 =
-         !!(xcphysinfo.capabilities & XEN_SYSCTL_PHYSCAP_gnttab_v2);
- 
-+    libxl__arch_get_physinfo(physinfo, &xcphysinfo);
-+
-     GC_FREE;
-     return 0;
- }
-diff --git a/tools/libs/light/libxl_arch.h b/tools/libs/light/libxl_arch.h
-index 1522ecb97f..207ceac6a1 100644
---- a/tools/libs/light/libxl_arch.h
-+++ b/tools/libs/light/libxl_arch.h
-@@ -86,6 +86,10 @@ int libxl__arch_extra_memory(libxl__gc *gc,
-                              uint64_t *out);
- 
- _hidden
-+void libxl__arch_get_physinfo(libxl_physinfo *physinfo,
-+                              const xc_physinfo_t *xcphysinfo);
-+
-+_hidden
- void libxl__arch_update_domain_config(libxl__gc *gc,
-                                       libxl_domain_config *dst,
-                                       const libxl_domain_config *src);
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index eef1de0939..39fdca1b49 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -1431,6 +1431,11 @@ int libxl__arch_passthrough_mode_setdefault(libxl__gc *gc,
-     return rc;
- }
- 
-+void libxl__arch_get_physinfo(libxl_physinfo *physinfo,
-+                              const xc_physinfo_t *xcphysinfo)
-+{
-+}
-+
- void libxl__arch_update_domain_config(libxl__gc *gc,
-                                       libxl_domain_config *dst,
-                                       const libxl_domain_config *src)
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index 2a42da2f7d..42ac6c357b 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -1068,6 +1068,8 @@ libxl_physinfo = Struct("physinfo", [
-     ("cap_vpmu", bool),
-     ("cap_gnttab_v1", bool),
-     ("cap_gnttab_v2", bool),
-+    ("cap_assisted_xapic", bool),
-+    ("cap_assisted_x2apic", bool),
-     ], dir=DIR_OUT)
- 
- libxl_connectorinfo = Struct("connectorinfo", [
-diff --git a/tools/libs/light/libxl_x86.c b/tools/libs/light/libxl_x86.c
-index 1feadebb18..e0a06ecfe3 100644
---- a/tools/libs/light/libxl_x86.c
-+++ b/tools/libs/light/libxl_x86.c
-@@ -866,6 +866,17 @@ int libxl__arch_passthrough_mode_setdefault(libxl__gc *gc,
-     return rc;
- }
- 
-+void libxl__arch_get_physinfo(libxl_physinfo *physinfo,
-+                              const xc_physinfo_t *xcphysinfo)
-+{
-+    physinfo->cap_assisted_xapic =
-+        !!(xcphysinfo->arch_capabilities &
-+           XEN_SYSCTL_PHYSCAP_X86_ASSISTED_XAPIC);
-+    physinfo->cap_assisted_x2apic =
-+        !!(xcphysinfo->arch_capabilities &
-+           XEN_SYSCTL_PHYSCAP_X86_ASSISTED_X2APIC);
-+}
-+
- void libxl__arch_update_domain_config(libxl__gc *gc,
-                                       libxl_domain_config *dst,
-                                       const libxl_domain_config *src)
-diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
-index 7503031d8f..712456e098 100644
---- a/tools/ocaml/libs/xc/xenctrl.ml
-+++ b/tools/ocaml/libs/xc/xenctrl.ml
-@@ -127,6 +127,10 @@ type physinfo_cap_flag =
- 	| CAP_Gnttab_v1
- 	| CAP_Gnttab_v2
- 
-+type physinfo_arch_cap_flag =
-+	| CAP_X86_ASSISTED_XAPIC
-+	| CAP_X86_ASSISTED_X2APIC
-+
- type physinfo =
- {
- 	threads_per_core : int;
-@@ -140,6 +144,7 @@ type physinfo =
- 	(* XXX hw_cap *)
- 	capabilities     : physinfo_cap_flag list;
- 	max_nr_cpus      : int;
-+	arch_capabilities : physinfo_arch_cap_flag list;
- }
- 
- type version =
-diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
-index d1d9c9247a..b034434f68 100644
---- a/tools/ocaml/libs/xc/xenctrl.mli
-+++ b/tools/ocaml/libs/xc/xenctrl.mli
-@@ -112,6 +112,10 @@ type physinfo_cap_flag =
-   | CAP_Gnttab_v1
-   | CAP_Gnttab_v2
- 
-+type physinfo_arch_cap_flag =
-+  | CAP_X86_ASSISTED_XAPIC
-+  | CAP_X86_ASSISTED_X2APIC
-+
- type physinfo = {
-   threads_per_core : int;
-   cores_per_socket : int;
-@@ -123,6 +127,7 @@ type physinfo = {
-   scrub_pages      : nativeint;
-   capabilities     : physinfo_cap_flag list;
-   max_nr_cpus      : int; (** compile-time max possible number of nr_cpus *)
-+  arch_capabilities : physinfo_arch_cap_flag list;
- }
- type version = { major : int; minor : int; extra : string; }
- type compile_info = {
-diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
-index 5b4fe72c8d..7e9c32ad1b 100644
---- a/tools/ocaml/libs/xc/xenctrl_stubs.c
-+++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
-@@ -712,7 +712,7 @@ CAMLprim value stub_xc_send_debug_keys(value xch, value keys)
- CAMLprim value stub_xc_physinfo(value xch)
- {
- 	CAMLparam1(xch);
--	CAMLlocal2(physinfo, cap_list);
-+	CAMLlocal3(physinfo, cap_list, arch_cap_list);
- 	xc_physinfo_t c_physinfo;
- 	int r;
- 
-@@ -731,7 +731,7 @@ CAMLprim value stub_xc_physinfo(value xch)
- 		/* ! XEN_SYSCTL_PHYSCAP_ XEN_SYSCTL_PHYSCAP_MAX max */
- 		(c_physinfo.capabilities);
- 
--	physinfo = caml_alloc_tuple(10);
-+	physinfo = caml_alloc_tuple(11);
- 	Store_field(physinfo, 0, Val_int(c_physinfo.threads_per_core));
- 	Store_field(physinfo, 1, Val_int(c_physinfo.cores_per_socket));
- 	Store_field(physinfo, 2, Val_int(c_physinfo.nr_cpus));
-@@ -743,6 +743,17 @@ CAMLprim value stub_xc_physinfo(value xch)
- 	Store_field(physinfo, 8, cap_list);
- 	Store_field(physinfo, 9, Val_int(c_physinfo.max_cpu_id + 1));
- 
-+#if defined(__i386__) || defined(__x86_64__)
-+	/*
-+	 * arch_capabilities: physinfo_arch_cap_flag list;
-+	 */
-+	arch_cap_list = c_bitmap_to_ocaml_list
-+		/* ! physinfo_arch_cap_flag CAP_ none */
-+		/* ! XEN_SYSCTL_PHYSCAP_ XEN_SYSCTL_PHYSCAP_X86_MAX max */
-+		(c_physinfo.arch_capabilities);
-+	Store_field(physinfo, 10, arch_cap_list);
-+#endif
-+
- 	CAMLreturn(physinfo);
- }
- 
-diff --git a/tools/xl/xl_info.c b/tools/xl/xl_info.c
-index 712b7638b0..3205270754 100644
---- a/tools/xl/xl_info.c
-+++ b/tools/xl/xl_info.c
-@@ -210,7 +210,7 @@ static void output_physinfo(void)
-          info.hw_cap[4], info.hw_cap[5], info.hw_cap[6], info.hw_cap[7]
-         );
- 
--    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s%s%s%s\n",
-+    maybe_printf("virt_caps              :%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
-          info.cap_pv ? " pv" : "",
-          info.cap_hvm ? " hvm" : "",
-          info.cap_hvm && info.cap_hvm_directio ? " hvm_directio" : "",
-@@ -221,7 +221,9 @@ static void output_physinfo(void)
-          info.cap_vmtrace ? " vmtrace" : "",
-          info.cap_vpmu ? " vpmu" : "",
-          info.cap_gnttab_v1 ? " gnttab-v1" : "",
--         info.cap_gnttab_v2 ? " gnttab-v2" : ""
-+         info.cap_gnttab_v2 ? " gnttab-v2" : "",
-+         info.cap_assisted_xapic ? " assisted_xapic" : "",
-+         info.cap_assisted_x2apic ? " assisted_x2apic" : ""
-         );
- 
-     vinfo = libxl_get_version_info(ctx);
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 709a4191ef..e5dde9f8ce 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -117,6 +117,9 @@ static const char __initconst warning_hvm_fep[] =
- static bool_t __initdata opt_altp2m_enabled = 0;
- boolean_param("altp2m", opt_altp2m_enabled);
- 
-+bool __ro_after_init assisted_xapic_available;
-+bool __ro_after_init assisted_x2apic_available;
-+
- static int cf_check cpu_callback(
-     struct notifier_block *nfb, unsigned long action, void *hcpu)
- {
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index e1e1fa14e6..77ce0b2121 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -343,6 +343,15 @@ static int vmx_init_vmcs_config(bool bsp)
-             MSR_IA32_VMX_PROCBASED_CTLS2, &mismatch);
-     }
- 
-+    /* Check whether hardware supports accelerated xapic and x2apic. */
-+    if ( bsp )
-+    {
-+        assisted_xapic_available = cpu_has_vmx_virtualize_apic_accesses;
-+        assisted_x2apic_available = cpu_has_vmx_virtualize_x2apic_mode &&
-+                                    (cpu_has_vmx_apic_reg_virt ||
-+                                     cpu_has_vmx_virtual_intr_delivery);
-+    }
-+
-     /* The IA32_VMX_EPT_VPID_CAP MSR exists only when EPT or VPID available */
-     if ( _vmx_secondary_exec_control & (SECONDARY_EXEC_ENABLE_EPT |
-                                         SECONDARY_EXEC_ENABLE_VPID) )
-diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
-index 5b7ec0cf69..e0d9348878 100644
---- a/xen/arch/x86/include/asm/hvm/hvm.h
-+++ b/xen/arch/x86/include/asm/hvm/hvm.h
-@@ -373,6 +373,9 @@ int hvm_get_param(struct domain *d, uint32_t index, uint64_t *value);
- #define hvm_tsc_scaling_ratio(d) \
-     ((d)->arch.hvm.tsc_scaling_ratio)
- 
-+extern bool assisted_xapic_available;
-+extern bool assisted_x2apic_available;
-+
- #define hvm_get_guest_time(v) hvm_get_guest_time_fixed(v, 0)
- 
- #define hvm_paging_enabled(v) \
-@@ -872,6 +875,8 @@ static inline void hvm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
- #define hvm_tsc_scaling_supported false
- #define hap_has_1gb false
- #define hap_has_2mb false
-+#define assisted_xapic_available false
-+#define assisted_x2apic_available false
- 
- #define hvm_paging_enabled(v) ((void)(v), false)
- #define hvm_wp_enabled(v) ((void)(v), false)
-diff --git a/xen/arch/x86/sysctl.c b/xen/arch/x86/sysctl.c
-index f82abc2488..716525f72f 100644
---- a/xen/arch/x86/sysctl.c
-+++ b/xen/arch/x86/sysctl.c
-@@ -135,6 +135,10 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
-         pi->capabilities |= XEN_SYSCTL_PHYSCAP_hap;
-     if ( IS_ENABLED(CONFIG_SHADOW_PAGING) )
-         pi->capabilities |= XEN_SYSCTL_PHYSCAP_shadow;
-+    if ( assisted_xapic_available )
-+        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_X86_ASSISTED_XAPIC;
-+    if ( assisted_x2apic_available )
-+        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_X86_ASSISTED_X2APIC;
- }
- 
- long arch_do_sysctl(
-diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
-index 55252e97f2..fbb9912067 100644
---- a/xen/include/public/sysctl.h
-+++ b/xen/include/public/sysctl.h
-@@ -35,7 +35,7 @@
- #include "domctl.h"
- #include "physdev.h"
- 
--#define XEN_SYSCTL_INTERFACE_VERSION 0x00000014
-+#define XEN_SYSCTL_INTERFACE_VERSION 0x00000015
- 
- /*
-  * Read console content from Xen buffer ring.
-@@ -111,6 +111,13 @@ struct xen_sysctl_tbuf_op {
- /* Max XEN_SYSCTL_PHYSCAP_* constant.  Used for ABI checking. */
- #define XEN_SYSCTL_PHYSCAP_MAX XEN_SYSCTL_PHYSCAP_gnttab_v2
- 
-+/* The platform supports x{2}apic hardware assisted emulation. */
-+#define XEN_SYSCTL_PHYSCAP_X86_ASSISTED_XAPIC  (1u << 0)
-+#define XEN_SYSCTL_PHYSCAP_X86_ASSISTED_X2APIC (1u << 1)
-+
-+/* Max XEN_SYSCTL_PHYSCAP_X86__* constant. Used for ABI checking. */
-+#define XEN_SYSCTL_PHYSCAP_X86_MAX XEN_SYSCTL_PHYSCAP_X86_ASSISTED_X2APIC
-+
- struct xen_sysctl_physinfo {
-     uint32_t threads_per_core;
-     uint32_t cores_per_socket;
-@@ -120,6 +127,8 @@ struct xen_sysctl_physinfo {
-     uint32_t max_node_id; /* Largest possible node ID on this host */
-     uint32_t cpu_khz;
-     uint32_t capabilities;/* XEN_SYSCTL_PHYSCAP_??? */
-+    uint32_t arch_capabilities;/* XEN_SYSCTL_PHYSCAP_{X86,ARM,...}_??? */
-+    uint32_t pad;
-     uint64_aligned_t total_pages;
-     uint64_aligned_t free_pages;
-     uint64_aligned_t scrub_pages;
--- 
-2.11.0
-
+> Beyond that there are implementation aspects that I'm not happy with,
+> like aforementioned delay loop not dealing with a TSC which did start
+> from a large "negative" value, and which hence would eventually wrap. Nor
+> is the SMI (or other long latency events) aspect being taken care of. But
+> any such concern could of course be dealt with as we port over this
+> logic, if we decided we want to go that route.
+> 
+> My main concern is with the goal of reaching accuracy of 1PPM, and the
+> loop ending only after a full second (if I got that right) if that
+> accuracy cannot be reached. Afaict there's no guarantee that 1PPM is
+> reachable. My recent observations suggest that with HPET that's
+> feasible (but only barely), but with PMTMR it might be more like 3 or
+> more.
+> 
+> The other slight concern I have, as previously voiced on IRC, is the use
+> of floating point here.
+> 
+> Jan
+> 
+> [1] https://cgit.freebsd.org/src/commit/?id=c2705ceaeb09d8579661097fd358ffb5defb5624
+> 
 
