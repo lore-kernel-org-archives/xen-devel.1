@@ -4,32 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6539C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Mar 2022 10:23:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.288912.490071 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A41C433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Mar 2022 10:34:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.288917.490089 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nScQQ-0002cf-E7; Fri, 11 Mar 2022 10:23:10 +0000
+	id 1nScbU-0004B2-QJ; Fri, 11 Mar 2022 10:34:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 288912.490071; Fri, 11 Mar 2022 10:23:10 +0000
+Received: by outflank-mailman (output) from mailman id 288917.490089; Fri, 11 Mar 2022 10:34:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nScQQ-0002cY-Ap; Fri, 11 Mar 2022 10:23:10 +0000
-Received: by outflank-mailman (input) for mailman id 288912;
- Fri, 11 Mar 2022 10:23:09 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1nScbU-0004AF-Jx; Fri, 11 Mar 2022 10:34:36 +0000
+Received: by outflank-mailman (input) for mailman id 288917;
+ Fri, 11 Mar 2022 10:34:35 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nScQP-0002cQ-AU
- for xen-devel@lists.xenproject.org; Fri, 11 Mar 2022 10:23:09 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nScQL-0006DS-G6; Fri, 11 Mar 2022 10:23:05 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233] helo=[10.95.172.72])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nScQL-0006wc-AK; Fri, 11 Mar 2022 10:23:05 +0000
+ (envelope-from <SRS0=aAGA=TW=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1nScbT-00047U-K8
+ for xen-devel@lists.xenproject.org; Fri, 11 Mar 2022 10:34:35 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d7973e09-a126-11ec-8eba-a37418f5ba1a;
+ Fri, 11 Mar 2022 11:34:34 +0100 (CET)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id A6E151F38D;
+ Fri, 11 Mar 2022 10:34:33 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7E45213FA6;
+ Fri, 11 Mar 2022 10:34:33 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id sBSlHbklK2LxdQAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 11 Mar 2022 10:34:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,87 +53,229 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=ugFcATDfwLUcJxWd59sXJ8fRfbNaVCaXWg6vatzSz78=; b=JA1jrWLuP1z52DBpjTyI2TAYc/
-	DPn+DakMImF+Pf80MGD48DqtqwVOmVhx4GkE/rAGBbegRVXYUgP3Au/wHkrVJc7zVRAsvWk980lgn
-	h0dydeqOj6oAXkdi0rNv5nhH1nbKU5AHXoGlNofwEUOXQ1yeVgrtu/JjX8FBmH7l9yz4=;
-Message-ID: <d2c63630-6ab3-b4dd-128e-72f871fb9e08@xen.org>
-Date: Fri, 11 Mar 2022 10:23:03 +0000
+X-Inumbo-ID: d7973e09-a126-11ec-8eba-a37418f5ba1a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1646994873; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=zIKrcrVv8sT7uGpdxBONglT2SrtoCB1xadTjqU49EQU=;
+	b=ELDyhB/pH3g1wNJ9NCIGljJ0NiUjr/eV44nW0TBeCBZEPxzRjH0TAZleF2TcInRM3GMZq5
+	bNyCjCx4Dprb3ou9V62DzSxf8GOTp6WpxPDTeucbqFJA2wZV0cbT+bvqNkLKnF8vFrPzz4
+	QEZNLWqGh6PdbE6DjGcNB4TU1l/RBK8=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 1/2] xen/grant-table: remove gnttab_*transfer*() functions
+Date: Fri, 11 Mar 2022 11:34:28 +0100
+Message-Id: <20220311103429.12845-2-jgross@suse.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220311103429.12845-1-jgross@suse.com>
+References: <20220311103429.12845-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.6.2
-Subject: Re: [PATCH 1/2] ns16550: reject IRQ above nr_irqs
-To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org
-References: <20220310143403.50944-1-marmarek@invisiblethingslab.com>
- <7acb2915-5a9d-c1f1-4b7b-2bc6c2055ea3@suse.com>
- <YioddbNor6w/U9ed@Air-de-Roger>
- <53361d65-2bd8-c07b-938c-91b95f2d68ad@suse.com>
- <Yiojgxgd4amSjHog@Air-de-Roger>
- <3055b4a5-2d55-9cf1-1069-8c57208bf0af@xen.org> <YiopXU65pAlnNVNI@mail-itl>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <YiopXU65pAlnNVNI@mail-itl>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hi Marek,
+All grant table operations related to the "transfer" functionality
+are unused currently. There have been users in the old days of the
+"Xen-o-Linux" kernel, but those didn't make it upstream.
 
-On 10/03/2022 16:37, Marek Marczykowski-Górecki wrote:
-> On Thu, Mar 10, 2022 at 04:21:50PM +0000, Julien Grall wrote:
->> Hi,
->>
->> On 10/03/2022 16:12, Roger Pau Monné wrote:
->>> On Thu, Mar 10, 2022 at 05:08:07PM +0100, Jan Beulich wrote:
->>>> On 10.03.2022 16:47, Roger Pau Monné wrote:
->>>>> On Thu, Mar 10, 2022 at 04:23:00PM +0100, Jan Beulich wrote:
->>>>>> On 10.03.2022 15:34, Marek Marczykowski-Górecki wrote:
->>>>>>> --- a/xen/drivers/char/ns16550.c
->>>>>>> +++ b/xen/drivers/char/ns16550.c
->>>>>>> @@ -1221,6 +1221,9 @@ pci_uart_config(struct ns16550 *uart, bool_t skip_amt, unsigned int idx)
->>>>>>>                                pci_conf_read8(PCI_SBDF(0, b, d, f),
->>>>>>>                                               PCI_INTERRUPT_LINE) : 0;
->>>>>>> +                if (uart->irq >= nr_irqs)
->>>>>>> +                    uart->irq = 0;
->>>>>>
->>>>>> Don't you mean nr_irqs_gsi here? Also (nit) please add the missing blanks
->>>>>> immediately inside the parentheses.
->>>>>
->>>>> If we use nr_irqs_gsi we will need to make the check x86 only AFAICT.
->>>>
->>>> Down the road (when Arm wants to select HAS_PCI) - yes. Not necessarily
->>>> right away. After all Arm wants to have an equivalent check here then,
->>>> not merely checking against nr_irqs instead. So putting a conditional
->>>> here right away would hide the need for putting in place an Arm-specific
->>>> alternative.
->>>
->>> Oh, I always forget Arm doesn't have CONFIG_HAS_PCI enabled just yet.
->> The PCI code in ns16550.c is gated by CONFIG_HAS_PCI and CONFIG_X86. I am
->> not sure we will ever see a support for PCI UART card in Xen on Arm.
->>
->> However, if it evers happens then neither nr_irqs or nr_irqs_gsi would help
->> here because from the interrupt controller PoV 0xff may be a valid (GICv2
->> supports up to 1024 interrupts).
->>
->> Is there any reason we can't explicitely check 0xff?
-> 
-> That's what my v0.1 did, but Roger suggested nr_irqs. And I agree,
-> because the value is later used (on x86) to access irq_desc array (via
-> irq_to_desc), which has nr_irqs size.
+So remove the "transfer" related functions.
 
-I think it would be better if that check is closer to who access the 
-irq_desc. This would be helpful for other users (I am sure this is not 
-the only potential place where the IRQ may be wrong). So how about 
-moving it in setup_irq()?
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/xen/grant-table.c | 113 +-------------------------------------
+ include/xen/grant_table.h |   8 ---
+ 2 files changed, 2 insertions(+), 119 deletions(-)
 
-Cheers,
-
+diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
+index 5c83d41766c8..8963af8ec764 100644
+--- a/drivers/xen/grant-table.c
++++ b/drivers/xen/grant-table.c
+@@ -109,7 +109,7 @@ struct gnttab_ops {
+ 	void (*unmap_frames)(void);
+ 	/*
+ 	 * Introducing a valid entry into the grant table, granting the frame of
+-	 * this grant entry to domain for accessing or transfering. Ref
++	 * this grant entry to domain for accessing. Ref
+ 	 * parameter is reference of this introduced grant entry, domid is id of
+ 	 * granted domain, frame is the page frame to be granted, and flags is
+ 	 * status of the grant entry to be updated.
+@@ -125,14 +125,6 @@ struct gnttab_ops {
+ 	 * access for this entry and return success(==1).
+ 	 */
+ 	int (*end_foreign_access_ref)(grant_ref_t ref, int readonly);
+-	/*
+-	 * Stop granting a grant entry to domain for transfer. Ref parameter is
+-	 * reference of a grant entry whose grant transfer will be stopped. If
+-	 * tranfer has not started, just reclaim the grant entry and return
+-	 * failure(==0). Otherwise, wait for the transfer to complete and then
+-	 * return the frame.
+-	 */
+-	unsigned long (*end_foreign_transfer_ref)(grant_ref_t ref);
+ 	/*
+ 	 * Read the frame number related to a given grant reference.
+ 	 */
+@@ -230,10 +222,7 @@ static void put_free_entry(grant_ref_t ref)
+  * Following applies to gnttab_update_entry_v1 and gnttab_update_entry_v2.
+  * Introducing a valid entry into the grant table:
+  *  1. Write ent->domid.
+- *  2. Write ent->frame:
+- *      GTF_permit_access:   Frame to which access is permitted.
+- *      GTF_accept_transfer: Pseudo-phys frame slot being filled by new
+- *                           frame, or zero if none.
++ *  2. Write ent->frame: Frame to which access is permitted.
+  *  3. Write memory barrier (WMB).
+  *  4. Write ent->flags, inc. valid type.
+  */
+@@ -455,102 +444,6 @@ void gnttab_end_foreign_access(grant_ref_t ref, int readonly,
+ }
+ EXPORT_SYMBOL_GPL(gnttab_end_foreign_access);
+ 
+-int gnttab_grant_foreign_transfer(domid_t domid, unsigned long pfn)
+-{
+-	int ref;
+-
+-	ref = get_free_entries(1);
+-	if (unlikely(ref < 0))
+-		return -ENOSPC;
+-	gnttab_grant_foreign_transfer_ref(ref, domid, pfn);
+-
+-	return ref;
+-}
+-EXPORT_SYMBOL_GPL(gnttab_grant_foreign_transfer);
+-
+-void gnttab_grant_foreign_transfer_ref(grant_ref_t ref, domid_t domid,
+-				       unsigned long pfn)
+-{
+-	gnttab_interface->update_entry(ref, domid, pfn, GTF_accept_transfer);
+-}
+-EXPORT_SYMBOL_GPL(gnttab_grant_foreign_transfer_ref);
+-
+-static unsigned long gnttab_end_foreign_transfer_ref_v1(grant_ref_t ref)
+-{
+-	unsigned long frame;
+-	u16           flags;
+-	u16          *pflags;
+-
+-	pflags = &gnttab_shared.v1[ref].flags;
+-
+-	/*
+-	 * If a transfer is not even yet started, try to reclaim the grant
+-	 * reference and return failure (== 0).
+-	 */
+-	while (!((flags = *pflags) & GTF_transfer_committed)) {
+-		if (sync_cmpxchg(pflags, flags, 0) == flags)
+-			return 0;
+-		cpu_relax();
+-	}
+-
+-	/* If a transfer is in progress then wait until it is completed. */
+-	while (!(flags & GTF_transfer_completed)) {
+-		flags = *pflags;
+-		cpu_relax();
+-	}
+-
+-	rmb();	/* Read the frame number /after/ reading completion status. */
+-	frame = gnttab_shared.v1[ref].frame;
+-	BUG_ON(frame == 0);
+-
+-	return frame;
+-}
+-
+-static unsigned long gnttab_end_foreign_transfer_ref_v2(grant_ref_t ref)
+-{
+-	unsigned long frame;
+-	u16           flags;
+-	u16          *pflags;
+-
+-	pflags = &gnttab_shared.v2[ref].hdr.flags;
+-
+-	/*
+-	 * If a transfer is not even yet started, try to reclaim the grant
+-	 * reference and return failure (== 0).
+-	 */
+-	while (!((flags = *pflags) & GTF_transfer_committed)) {
+-		if (sync_cmpxchg(pflags, flags, 0) == flags)
+-			return 0;
+-		cpu_relax();
+-	}
+-
+-	/* If a transfer is in progress then wait until it is completed. */
+-	while (!(flags & GTF_transfer_completed)) {
+-		flags = *pflags;
+-		cpu_relax();
+-	}
+-
+-	rmb();  /* Read the frame number /after/ reading completion status. */
+-	frame = gnttab_shared.v2[ref].full_page.frame;
+-	BUG_ON(frame == 0);
+-
+-	return frame;
+-}
+-
+-unsigned long gnttab_end_foreign_transfer_ref(grant_ref_t ref)
+-{
+-	return gnttab_interface->end_foreign_transfer_ref(ref);
+-}
+-EXPORT_SYMBOL_GPL(gnttab_end_foreign_transfer_ref);
+-
+-unsigned long gnttab_end_foreign_transfer(grant_ref_t ref)
+-{
+-	unsigned long frame = gnttab_end_foreign_transfer_ref(ref);
+-	put_free_entry(ref);
+-	return frame;
+-}
+-EXPORT_SYMBOL_GPL(gnttab_end_foreign_transfer);
+-
+ void gnttab_free_grant_reference(grant_ref_t ref)
+ {
+ 	put_free_entry(ref);
+@@ -1423,7 +1316,6 @@ static const struct gnttab_ops gnttab_v1_ops = {
+ 	.unmap_frames			= gnttab_unmap_frames_v1,
+ 	.update_entry			= gnttab_update_entry_v1,
+ 	.end_foreign_access_ref		= gnttab_end_foreign_access_ref_v1,
+-	.end_foreign_transfer_ref	= gnttab_end_foreign_transfer_ref_v1,
+ 	.read_frame			= gnttab_read_frame_v1,
+ };
+ 
+@@ -1435,7 +1327,6 @@ static const struct gnttab_ops gnttab_v2_ops = {
+ 	.unmap_frames			= gnttab_unmap_frames_v2,
+ 	.update_entry			= gnttab_update_entry_v2,
+ 	.end_foreign_access_ref		= gnttab_end_foreign_access_ref_v2,
+-	.end_foreign_transfer_ref	= gnttab_end_foreign_transfer_ref_v2,
+ 	.read_frame			= gnttab_read_frame_v2,
+ };
+ 
+diff --git a/include/xen/grant_table.h b/include/xen/grant_table.h
+index c9fea9389ebe..9f9b1a297f0d 100644
+--- a/include/xen/grant_table.h
++++ b/include/xen/grant_table.h
+@@ -125,11 +125,6 @@ void gnttab_end_foreign_access(grant_ref_t ref, int readonly,
+  */
+ int gnttab_try_end_foreign_access(grant_ref_t ref);
+ 
+-int gnttab_grant_foreign_transfer(domid_t domid, unsigned long pfn);
+-
+-unsigned long gnttab_end_foreign_transfer_ref(grant_ref_t ref);
+-unsigned long gnttab_end_foreign_transfer(grant_ref_t ref);
+-
+ /*
+  * operations on reserved batches of grant references
+  */
+@@ -162,9 +157,6 @@ static inline void gnttab_page_grant_foreign_access_ref_one(
+ 					readonly);
+ }
+ 
+-void gnttab_grant_foreign_transfer_ref(grant_ref_t, domid_t domid,
+-				       unsigned long pfn);
+-
+ static inline void
+ gnttab_set_map_op(struct gnttab_map_grant_ref *map, phys_addr_t addr,
+ 		  uint32_t flags, grant_ref_t ref, domid_t domid)
 -- 
-Julien Grall
+2.34.1
+
 
