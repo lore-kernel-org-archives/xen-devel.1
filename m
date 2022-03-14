@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9847AC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Mar 2022 07:32:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.289942.491722 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED2DEC433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Mar 2022 07:32:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.289946.491744 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nTfBW-0006sT-0W; Mon, 14 Mar 2022 07:32:06 +0000
+	id 1nTfBd-0007wY-QG; Mon, 14 Mar 2022 07:32:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 289942.491722; Mon, 14 Mar 2022 07:32:05 +0000
+Received: by outflank-mailman (output) from mailman id 289946.491744; Mon, 14 Mar 2022 07:32:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nTfBV-0006rg-Rl; Mon, 14 Mar 2022 07:32:05 +0000
-Received: by outflank-mailman (input) for mailman id 289942;
- Mon, 14 Mar 2022 07:32:05 +0000
+	id 1nTfBd-0007wL-Me; Mon, 14 Mar 2022 07:32:13 +0000
+Received: by outflank-mailman (input) for mailman id 289946;
+ Mon, 14 Mar 2022 07:32:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=BEku=TZ=bombadil.srs.infradead.org=BATV+605a0c0c3369109790a8+6777+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nTfBV-00056d-4w
- for xen-devel@lists.xenproject.org; Mon, 14 Mar 2022 07:32:05 +0000
+ id 1nTfBb-00056d-92
+ for xen-devel@lists.xenproject.org; Mon, 14 Mar 2022 07:32:11 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d7c160fe-a368-11ec-8eba-a37418f5ba1a;
- Mon, 14 Mar 2022 08:32:04 +0100 (CET)
+ id db43d627-a368-11ec-8eba-a37418f5ba1a;
+ Mon, 14 Mar 2022 08:32:10 +0100 (CET)
 Received: from [46.140.54.162] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nTfBH-0044b2-Bx; Mon, 14 Mar 2022 07:31:52 +0000
+ id 1nTfBO-0044gC-7e; Mon, 14 Mar 2022 07:31:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d7c160fe-a368-11ec-8eba-a37418f5ba1a
+X-Inumbo-ID: db43d627-a368-11ec-8eba-a37418f5ba1a
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=fPQX1tW6oEG+I0H/rxZDFlkVrHm+7UqYHxDjUft+pbI=; b=UaUDSuTfz++xf50tkHNiHGXJZq
-	cJ7jDE7eLn4++IV9Tll52n1Vyta7Quk7g2f3APPp8NZQ82J9lVEH0b+2sz77Kx5Ag19nVkSSMOHca
-	Q+4rQuVGpmGgZutzMpfA5u3XmfFPI5bVsb07TCve+RRWDWakNpqhwENvwDSHO4BZduNpBFXaySMjE
-	UGCLRYOwl0Xqsbq+YUPpW34dps/onEFHOIF/iOXPMh3FmAWkYnxr8hf3aefQd6Yzrs5k6KcfnvkBt
-	bVljteU+8Uox68Ji5IQ+EVsDkRO+On8IRzUH/KkmbM7cukrYjUNKbL5VWd44MaREvLr7mZQKNZUnB
-	NK1I2pAQ==;
+	bh=G+BH4X2UfRw8OQMrfsMNZasg39oL/O6RTmQprXaltS0=; b=Grkv61SpDZXDtEl+P0acp2tTgz
+	OLt1K0n4GmPr0GQxsUa8/K8MjT3fytjZ3rMBnPHO2kpSrwAz0QoAkPN/ghuhz21oW1mV/v64yJByU
+	2OV008sibw7ZWNht6kzeRC++MtgAaleBtX4VbTiTlboGVSvOamqdjEHWbgTpAwaTcwbE/jDMQFqpI
+	asso+bSa91CnpkigH56+ORMUcaFOjOcTjY+IeFeok3J3cRYAK3Okh52ITJFOrcYMNTOisQuUDaIeP
+	BaZ0miOCwVVihjS9gxDyrn/S/D3V7gXL5BDCq6FpCcdb9+LOEAc1r+dumDEfY4xYA4ex0Cqigpbpr
+	IkwBVJtQ==;
 From: Christoph Hellwig <hch@lst.de>
 To: iommu@lists.linux-foundation.org
 Cc: x86@kernel.org,
@@ -75,11 +75,10 @@ Cc: x86@kernel.org,
 	linux-s390@vger.kernel.org,
 	linux-hyperv@vger.kernel.org,
 	tboot-devel@lists.sourceforge.net,
-	linux-pci@vger.kernel.org,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Subject: [PATCH 06/15] MIPS/octeon: use swiotlb_init instead of open coding it
-Date: Mon, 14 Mar 2022 08:31:20 +0100
-Message-Id: <20220314073129.1862284-7-hch@lst.de>
+	linux-pci@vger.kernel.org
+Subject: [PATCH 08/15] x86: centralize setting SWIOTLB_FORCE when guest memory encryption is enabled
+Date: Mon, 14 Mar 2022 08:31:22 +0100
+Message-Id: <20220314073129.1862284-9-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220314073129.1862284-1-hch@lst.de>
 References: <20220314073129.1862284-1-hch@lst.de>
@@ -87,66 +86,67 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the generic swiotlb initialization helper instead of open coding it.
+Move enabling SWIOTLB_FORCE for guest memory encryption into common code.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Acked-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 ---
- arch/mips/cavium-octeon/dma-octeon.c | 15 ++-------------
- arch/mips/pci/pci-octeon.c           |  2 +-
- 2 files changed, 3 insertions(+), 14 deletions(-)
+ arch/x86/kernel/cpu/mshyperv.c | 8 --------
+ arch/x86/kernel/pci-dma.c      | 8 ++++++++
+ arch/x86/mm/mem_encrypt_amd.c  | 3 ---
+ 3 files changed, 8 insertions(+), 11 deletions(-)
 
-diff --git a/arch/mips/cavium-octeon/dma-octeon.c b/arch/mips/cavium-octeon/dma-octeon.c
-index df70308db0e69..fb7547e217263 100644
---- a/arch/mips/cavium-octeon/dma-octeon.c
-+++ b/arch/mips/cavium-octeon/dma-octeon.c
-@@ -186,15 +186,12 @@ phys_addr_t dma_to_phys(struct device *dev, dma_addr_t daddr)
- 	return daddr;
- }
- 
--char *octeon_swiotlb;
--
- void __init plat_swiotlb_setup(void)
- {
- 	phys_addr_t start, end;
- 	phys_addr_t max_addr;
- 	phys_addr_t addr_size;
- 	size_t swiotlbsize;
--	unsigned long swiotlb_nslabs;
- 	u64 i;
- 
- 	max_addr = 0;
-@@ -236,15 +233,7 @@ void __init plat_swiotlb_setup(void)
- 	if (OCTEON_IS_OCTEON2() && max_addr >= 0x100000000ul)
- 		swiotlbsize = 64 * (1<<20);
+diff --git a/arch/x86/kernel/cpu/mshyperv.c b/arch/x86/kernel/cpu/mshyperv.c
+index 5a99f993e6392..568274917f1cd 100644
+--- a/arch/x86/kernel/cpu/mshyperv.c
++++ b/arch/x86/kernel/cpu/mshyperv.c
+@@ -336,14 +336,6 @@ static void __init ms_hyperv_init_platform(void)
+ 			swiotlb_unencrypted_base = ms_hyperv.shared_gpa_boundary;
  #endif
--	swiotlb_nslabs = swiotlbsize >> IO_TLB_SHIFT;
--	swiotlb_nslabs = ALIGN(swiotlb_nslabs, IO_TLB_SEGSIZE);
--	swiotlbsize = swiotlb_nslabs << IO_TLB_SHIFT;
+ 		}
 -
--	octeon_swiotlb = memblock_alloc_low(swiotlbsize, PAGE_SIZE);
--	if (!octeon_swiotlb)
--		panic("%s: Failed to allocate %zu bytes align=%lx\n",
--		      __func__, swiotlbsize, PAGE_SIZE);
+-#ifdef CONFIG_SWIOTLB
+-		/*
+-		 * Enable swiotlb force mode in Isolation VM to
+-		 * use swiotlb bounce buffer for dma transaction.
+-		 */
+-		swiotlb_force = SWIOTLB_FORCE;
+-#endif
+ 	}
  
--	if (swiotlb_init_with_tbl(octeon_swiotlb, swiotlb_nslabs, 1) == -ENOMEM)
--		panic("Cannot allocate SWIOTLB buffer");
-+	swiotlb_adjust_size(swiotlbsize);
-+	swiotlb_init(1);
+ 	if (hv_max_functions_eax >= HYPERV_CPUID_NESTED_FEATURES) {
+diff --git a/arch/x86/kernel/pci-dma.c b/arch/x86/kernel/pci-dma.c
+index df96926421be0..04140e20ef1a3 100644
+--- a/arch/x86/kernel/pci-dma.c
++++ b/arch/x86/kernel/pci-dma.c
+@@ -53,6 +53,14 @@ static void __init pci_swiotlb_detect(void)
+ 	if (cc_platform_has(CC_ATTR_HOST_MEM_ENCRYPT))
+ 		x86_swiotlb_enable = true;
+ 
++	/*
++	 * Guest with guest memory encryption currently perform all DMA through
++	 * bounce buffers as the hypervisor can't access arbitrary VM memory
++	 * that is not explicitly shared with it.
++	 */
++	if (cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT))
++		swiotlb_force = SWIOTLB_FORCE;
++
+ 	if (swiotlb_force == SWIOTLB_FORCE)
+ 		x86_swiotlb_enable = true;
  }
-diff --git a/arch/mips/pci/pci-octeon.c b/arch/mips/pci/pci-octeon.c
-index fc29b85cfa926..e457a18cbdc59 100644
---- a/arch/mips/pci/pci-octeon.c
-+++ b/arch/mips/pci/pci-octeon.c
-@@ -664,7 +664,7 @@ static int __init octeon_pci_setup(void)
+diff --git a/arch/x86/mm/mem_encrypt_amd.c b/arch/x86/mm/mem_encrypt_amd.c
+index 2b2d018ea3450..a72942d569cf9 100644
+--- a/arch/x86/mm/mem_encrypt_amd.c
++++ b/arch/x86/mm/mem_encrypt_amd.c
+@@ -191,9 +191,6 @@ void __init sme_early_init(void)
+ 	/* Update the protection map with memory encryption mask */
+ 	for (i = 0; i < ARRAY_SIZE(protection_map); i++)
+ 		protection_map[i] = pgprot_encrypted(protection_map[i]);
+-
+-	if (cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT))
+-		swiotlb_force = SWIOTLB_FORCE;
+ }
  
- 		/* BAR1 movable regions contiguous to cover the swiotlb */
- 		octeon_bar1_pci_phys =
--			virt_to_phys(octeon_swiotlb) & ~((1ull << 22) - 1);
-+			io_tlb_default_mem.start & ~((1ull << 22) - 1);
- 
- 		for (index = 0; index < 32; index++) {
- 			union cvmx_pci_bar1_indexx bar1_index;
+ void __init sev_setup_arch(void)
 -- 
 2.30.2
 
