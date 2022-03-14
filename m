@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53598C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Mar 2022 18:12:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.290413.492502 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3AC7C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Mar 2022 19:00:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.290422.492512 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nTpB3-0001Ka-2M; Mon, 14 Mar 2022 18:12:17 +0000
+	id 1nTpvB-0006DP-Pj; Mon, 14 Mar 2022 18:59:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 290413.492502; Mon, 14 Mar 2022 18:12:17 +0000
+Received: by outflank-mailman (output) from mailman id 290422.492512; Mon, 14 Mar 2022 18:59:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nTpB2-0001KT-UN; Mon, 14 Mar 2022 18:12:16 +0000
-Received: by outflank-mailman (input) for mailman id 290413;
- Mon, 14 Mar 2022 18:12:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=OavK=TZ=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1nTpB1-0001KM-MM
- for xen-devel@lists.xenproject.org; Mon, 14 Mar 2022 18:12:15 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4500d762-a3c2-11ec-853b-5f4723681683;
- Mon, 14 Mar 2022 19:12:13 +0100 (CET)
-Received: from [10.10.1.138] (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1647281529709100.52692257812805;
- Mon, 14 Mar 2022 11:12:09 -0700 (PDT)
+	id 1nTpvB-0006DI-Md; Mon, 14 Mar 2022 18:59:57 +0000
+Received: by outflank-mailman (input) for mailman id 290422;
+ Mon, 14 Mar 2022 18:59:56 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1nTpvA-0006DC-9Q
+ for xen-devel@lists.xenproject.org; Mon, 14 Mar 2022 18:59:56 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nTpv9-0002iE-7e; Mon, 14 Mar 2022 18:59:55 +0000
+Received: from 54-240-197-227.amazon.com ([54.240.197.227]
+ helo=[10.95.108.113]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nTpv9-0003Yt-11; Mon, 14 Mar 2022 18:59:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,121 +41,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4500d762-a3c2-11ec-853b-5f4723681683
-ARC-Seal: i=1; a=rsa-sha256; t=1647281530; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=L4hJLxPaAYjiLSt3Iyen65FwVa7iYIIefs0/8hjMPC+KYXfsThtg2tBnRs4KoMzF+Klfd3H4mZ7Pwm+AdE2zrc7fvTijJGnRvb2DsEmrk1W9lFXxKXwGvlsOjn0+zO2/4ThKnaYM2BggOKbpgBf7unYs6mIDv8NfiMNiuZi7S2Q=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1647281530; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=SPQMz7Zv6+r0nf9UUfJhgeNkOosKuGtugZznTP1PR0g=; 
-	b=jif2lTy9KsZtNHY+njgHgXAru/hm7sW5fvWWjuQtyfRo1weGu6f5mMsf9SLm40fepVKRfo31FiT+nzITYkbL+g2nF0UOuh86PKR9QUyeK0gFFSYZ9kQ1pC+yPz05JHbhCTMpWvw7Un8pApppWm1nqueLWX6T5iRcW+w7R/L+e40=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1647281530;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=Message-ID:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=SPQMz7Zv6+r0nf9UUfJhgeNkOosKuGtugZznTP1PR0g=;
-	b=DYpvj8TeE8tiSI8FM+QTMglH6jQW44C/OIJT3i/jA7Kv/9OyV76Va2rgaTjinmgz
-	HOPhspQeNX1QF8wO+p4beLh/D6JsoI1VUYfTFPjn/i6kGiQLUsWVTcdS1Q56d9hAKTr
-	n9oUU7TIzPA2Xa7X87BIH5O5pYLNKcDDmvkZyPik=
-Message-ID: <33fdcbae-e083-ce1d-a5c8-d89e8ecbfddd@apertussolutions.com>
-Date: Mon, 14 Mar 2022 13:25:04 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=wUMMu6JHKIccap/X+FGwmbytiaOaNrrDZ1ytxXP3zYQ=; b=kCwyB9X+mAloSG/LcdUkBRh7qr
+	JXXUK+uiYGXuGy38Fruu4MpZOeiKWUC10QutlhjL9HTSlYDNwT8e5E+lGCCQtb/ubvP9oNncA+RzD
+	JFXTfTlEhL/0Z1zZnuMnxXsYCtluv/5+3acGb9BuNLsmw/yWqtpg37ZhchLo6YPJ32sk=;
+Message-ID: <e7e38143-8ebe-942c-c85b-20604fdc1470@xen.org>
+Date: Mon, 14 Mar 2022 18:59:52 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.1
-Subject: Re: [PATCH v4 11/11] xen/x86: remove cf_check attribute from
- hypercall handlers
-Content-Language: en-US
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?=
- <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Christopher Clark <christopher.w.clark@gmail.com>,
- Dario Faggioli <dfaggioli@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
-References: <20220310073420.15622-1-jgross@suse.com>
- <20220310073420.15622-12-jgross@suse.com>
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-In-Reply-To: <20220310073420.15622-12-jgross@suse.com>
-Content-Type: text/plain; charset=UTF-8
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.7.0
+Subject: Re: [PATCH 22/36] xen/arch: init cache coloring conf for Xen
+To: Marco Solieri <marco.solieri@minervasys.tech>,
+ xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Marco Solieri <marco.solieri@unimore.it>,
+ Andrea Bastoni <andrea.bastoni@minervasys.tech>,
+ Luca Miccio <lucmiccio@gmail.com>, Luca Miccio <206497@studenti.unimore.it>
+References: <20220304174701.1453977-1-marco.solieri@minervasys.tech>
+ <20220304174701.1453977-23-marco.solieri@minervasys.tech>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20220304174701.1453977-23-marco.solieri@minervasys.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ZohoMailClient: External
 
-On 3/10/22 02:34, Juergen Gross wrote:
-> Now that the hypercall handlers are all being called directly instead
-> through a function vector, the "cf_check" attribute can be removed.
+Hi,
+
+On 04/03/2022 17:46, Marco Solieri wrote:
+> From: Luca Miccio <lucmiccio@gmail.com>
 > 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Add initialization for Xen coloring data. By default, use the lowest
+> color index available.
+> 
+> Benchmarking the VM interrupt response time provides an estimation of
+> LLC usage by Xen's most latency-critical runtime task.  Results on Arm
+> Cortex-A53 on Xilinx Zynq UltraScale+ XCZU9EG show that one color, which
+> reserves 64 KiB of L2, is enough to attain best responsiveness.
+> 
+> More colors are instead very likely to be needed on processors whose L1
+> cache is physically-indexed and physically-tagged, such as Cortex-A57.
+> In such cases, coloring applies to L1 also, and there typically are two
+> distinct L1-colors. Therefore, reserving only one color for Xen would
+> senselessly partitions a cache memory that is already private, i.e.
+> underutilize it. The default amount of Xen colors is thus set to one.
+> 
+> Signed-off-by: Luca Miccio <206497@studenti.unimore.it>
+> Signed-off-by: Marco Solieri <marco.solieri@minervasys.tech>
 > ---
-> V4:
-> - new patch
-> ---
->  xen/arch/x86/compat.c               |  6 +++---
->  xen/arch/x86/cpu/mcheck/mce.c       |  2 +-
->  xen/arch/x86/cpu/vpmu.c             |  2 +-
->  xen/arch/x86/domain.c               |  3 +--
->  xen/arch/x86/hvm/dm.c               |  2 +-
->  xen/arch/x86/hvm/hvm.c              |  2 +-
->  xen/arch/x86/hvm/hypercall.c        |  6 +++---
->  xen/arch/x86/mm.c                   | 12 ++++++------
->  xen/arch/x86/mm/paging.c            |  2 +-
->  xen/arch/x86/physdev.c              |  2 +-
->  xen/arch/x86/platform_hypercall.c   |  2 +-
->  xen/arch/x86/pv/callback.c          | 16 ++++++++--------
->  xen/arch/x86/pv/descriptor-tables.c |  8 ++++----
->  xen/arch/x86/pv/iret.c              |  4 ++--
->  xen/arch/x86/pv/misc-hypercalls.c   | 10 +++++-----
->  xen/arch/x86/pv/shim.c              |  4 ++--
->  xen/arch/x86/x86_64/compat/mm.c     |  2 +-
->  xen/common/argo.c                   |  4 ++--
->  xen/common/compat/grant_table.c     |  2 +-
->  xen/common/compat/kernel.c          |  2 +-
->  xen/common/compat/memory.c          |  3 +--
->  xen/common/dm.c                     |  2 +-
->  xen/common/domain.c                 |  2 +-
->  xen/common/domctl.c                 |  2 +-
->  xen/common/event_channel.c          |  2 +-
->  xen/common/grant_table.c            |  3 +--
->  xen/common/hypfs.c                  |  2 +-
->  xen/common/kernel.c                 |  2 +-
->  xen/common/kexec.c                  |  4 ++--
->  xen/common/memory.c                 |  2 +-
->  xen/common/multicall.c              |  3 +--
->  xen/common/sched/compat.c           |  2 +-
->  xen/common/sched/core.c             |  4 ++--
->  xen/common/sysctl.c                 |  2 +-
->  xen/common/xenoprof.c               |  2 +-
->  xen/drivers/char/console.c          |  2 +-
->  xen/scripts/gen_hypercall.awk       |  2 +-
->  xen/xsm/xsm_core.c                  |  4 ++--
->  38 files changed, 67 insertions(+), 71 deletions(-)
->
+>   xen/arch/arm/coloring.c | 31 ++++++++++++++++++++++++++++++-
+>   1 file changed, 30 insertions(+), 1 deletion(-)
+> 
+> diff --git a/xen/arch/arm/coloring.c b/xen/arch/arm/coloring.c
+> index d1ac193a80..761414fcd7 100644
+> --- a/xen/arch/arm/coloring.c
+> +++ b/xen/arch/arm/coloring.c
+> @@ -30,10 +30,18 @@
+>   #include <asm/coloring.h>
+>   #include <asm/io.h>
+>   
+> +/* By default Xen uses the lowestmost color */
+> +#define XEN_COLOR_DEFAULT_MASK 0x0001
 
-<snip/>
+You are setting a uint32_t value. So it should be 0x00000001.
 
-> diff --git a/xen/xsm/xsm_core.c b/xen/xsm/xsm_core.c
-> index 2286a502e3..eaa028109b 100644
-> --- a/xen/xsm/xsm_core.c
-> +++ b/xen/xsm/xsm_core.c
-> @@ -219,13 +219,13 @@ bool __init has_xsm_magic(paddr_t start)
->  
->  #endif
->  
-> -long cf_check do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
-> +long do_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
->  {
->      return xsm_do_xsm_op(op);
->  }
->  
->  #ifdef CONFIG_COMPAT
-> -int cf_check compat_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
-> +int compat_xsm_op(XEN_GUEST_HANDLE_PARAM(void) op)
->  {
->      return xsm_do_compat_op(op);
->  }
+But I think it is a bit confusing to define a mask here. Instead, I 
+would define the color ID and set the bit.
 
-Reviewed-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+> +#define XEN_COLOR_DEFAULT_NUM 1
+> +/* Current maximum useful colors */
+> +#define MAX_XEN_COLOR   128 > +
+>   /* Number of color(s) assigned to Xen */
+>   static uint32_t xen_col_num;
+>   /* Coloring configuration of Xen as bitmask */
+>   static uint32_t xen_col_mask[MAX_COLORS_CELLS];
+> +/* Xen colors IDs */
+> +static uint32_t xen_col_list[MAX_XEN_COLOR];
+
+Why do we need to store xen colors in both a bitmask form and an array 
+of color ID?
+
+>   
+>   /* Number of color(s) assigned to Dom0 */
+>   static uint32_t dom0_col_num;
+> @@ -216,7 +224,7 @@ uint32_t get_max_colors(void)
+>   
+>   bool __init coloring_init(void)
+>   {
+> -    int i;
+> +    int i, rc;
+>   
+>       printk(XENLOG_INFO "Initialize XEN coloring: \n");
+>       /*
+> @@ -266,6 +274,27 @@ bool __init coloring_init(void)
+>       printk(XENLOG_INFO "Color bits in address: 0x%"PRIx64"\n", addr_col_mask);
+>       printk(XENLOG_INFO "Max number of colors: %u\n", max_col_num);
+>   
+> +    if ( !xen_col_num )
+> +    {
+> +        xen_col_mask[0] = XEN_COLOR_DEFAULT_MASK;
+> +        xen_col_num = XEN_COLOR_DEFAULT_NUM;
+> +        printk(XENLOG_WARNING "Xen color configuration not found. Using default\n");
+> +    }
+> +
+> +    printk(XENLOG_INFO "Xen color configuration: 0x%"PRIx32"%"PRIx32"%"PRIx32"%"PRIx32"\n",
+> +            xen_col_mask[3], xen_col_mask[2], xen_col_mask[1], xen_col_mask[0]);
+
+You are making the assumption that MAX_COLORS_CELLS is always 4. This 
+may be more or worse less. So this should be rework to avoid making any 
+assumption on the size.
+
+I expect switching to the generic bitmask will help here.
+
+> +    rc = copy_mask_to_list(xen_col_mask, xen_col_list, xen_col_num);
+> +
+> +    if ( rc )
+> +        return false;
+> +
+> +    for ( i = 0; i < xen_col_num; i++ )
+> +        if ( xen_col_list[i] > (max_col_num - 1) )
+> +        {
+> +            printk(XENLOG_ERR "ERROR: max. color value not supported\n");
+> +            return false;
+> +        }
+> +
+>       return true;
+>   }
+>   
+
+Cheers,
+
+-- 
+Julien Grall
 
