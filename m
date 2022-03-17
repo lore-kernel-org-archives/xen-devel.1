@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A99D9C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5185C4332F
 	for <xen-devel@archiver.kernel.org>; Thu, 17 Mar 2022 14:01:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.291587.494991 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.291586.494979 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nUqga-00010f-EA; Thu, 17 Mar 2022 14:01:04 +0000
+	id 1nUqgZ-0000ka-4v; Thu, 17 Mar 2022 14:01:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 291587.494991; Thu, 17 Mar 2022 14:01:04 +0000
+Received: by outflank-mailman (output) from mailman id 291586.494979; Thu, 17 Mar 2022 14:01:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nUqga-00010W-AO; Thu, 17 Mar 2022 14:01:04 +0000
-Received: by outflank-mailman (input) for mailman id 291587;
- Thu, 17 Mar 2022 14:01:02 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nUqgZ-0000kT-21; Thu, 17 Mar 2022 14:01:03 +0000
+Received: by outflank-mailman (input) for mailman id 291586;
+ Thu, 17 Mar 2022 14:01:01 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zfHd=T4=xilinx.com=ayankuma@srs-se1.protection.inumbo.net>)
- id 1nUqgY-0000hx-Dm
- for xen-devel@lists.xenproject.org; Thu, 17 Mar 2022 14:01:02 +0000
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2062f.outbound.protection.outlook.com
- [2a01:111:f400:fe5b::62f])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ad2eda1d-a5fa-11ec-853c-5f4723681683;
- Thu, 17 Mar 2022 15:01:01 +0100 (CET)
-Received: from BN9PR03CA0176.namprd03.prod.outlook.com (2603:10b6:408:f4::31)
- by MN2PR02MB5888.namprd02.prod.outlook.com (2603:10b6:208:11b::11)
+ id 1nUqgX-0000IZ-EJ
+ for xen-devel@lists.xenproject.org; Thu, 17 Mar 2022 14:01:01 +0000
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam07on20624.outbound.protection.outlook.com
+ [2a01:111:f400:7eb2::624])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ab980459-a5fa-11ec-8eba-a37418f5ba1a;
+ Thu, 17 Mar 2022 15:00:59 +0100 (CET)
+Received: from BN9PR03CA0210.namprd03.prod.outlook.com (2603:10b6:408:f9::35)
+ by BL0PR02MB4610.namprd02.prod.outlook.com (2603:10b6:208:4b::30)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5061.26; Thu, 17 Mar
- 2022 14:00:57 +0000
-Received: from BN1NAM02FT055.eop-nam02.prod.protection.outlook.com
- (2603:10b6:408:f4:cafe::be) by BN9PR03CA0176.outlook.office365.com
- (2603:10b6:408:f4::31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5061.25 via Frontend
- Transport; Thu, 17 Mar 2022 14:00:57 +0000
-Received: from xir-pvapexch01.xlnx.xilinx.com (149.199.80.198) by
- BN1NAM02FT055.mail.protection.outlook.com (10.13.2.163) with Microsoft SMTP
+ 2022 14:00:52 +0000
+Received: from BN1NAM02FT025.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:408:f9:cafe::39) by BN9PR03CA0210.outlook.office365.com
+ (2603:10b6:408:f9::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.17 via Frontend
+ Transport; Thu, 17 Mar 2022 14:00:52 +0000
+Received: from xir-pvapexch02.xlnx.xilinx.com (149.199.80.198) by
+ BN1NAM02FT025.mail.protection.outlook.com (10.13.2.139) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5081.14 via Frontend Transport; Thu, 17 Mar 2022 14:00:57 +0000
+ 15.20.5081.14 via Frontend Transport; Thu, 17 Mar 2022 14:00:52 +0000
 Received: from xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) by
- xir-pvapexch01.xlnx.xilinx.com (172.21.17.15) with Microsoft SMTP Server
+ xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.14; Thu, 17 Mar 2022 14:00:56 +0000
+ 15.1.2176.14; Thu, 17 Mar 2022 14:00:51 +0000
 Received: from smtp.xilinx.com (172.21.105.197) by
  xir-pvapexch02.xlnx.xilinx.com (172.21.17.17) with Microsoft SMTP Server id
- 15.1.2176.14 via Frontend Transport; Thu, 17 Mar 2022 14:00:56 +0000
+ 15.1.2176.14 via Frontend Transport; Thu, 17 Mar 2022 14:00:51 +0000
 Received: from [10.108.8.223] (port=9027 helo=xcbayankuma41x.xilinx.com)
  by smtp.xilinx.com with esmtp (Exim 4.90)
  (envelope-from <ayan.kumar.halder@xilinx.com>)
- id 1nUqgS-0004ME-8e; Thu, 17 Mar 2022 14:00:56 +0000
+ id 1nUqgM-0004ME-Mi; Thu, 17 Mar 2022 14:00:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,14 +65,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad2eda1d-a5fa-11ec-853c-5f4723681683
+X-Inumbo-ID: ab980459-a5fa-11ec-8eba-a37418f5ba1a
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FGLPawwRjNjjxC9NG5py8snL69qROJLZn/APbDVdc+tzlnWPikvC5MysxYZq0OA2A3wEWnVGZpwRtLCujqiLWP22K5IgxBNnmRyJiQnfLcluIudmxLzwo3GulBuH1kJ9cMtEblohbrxtsHX58t5hHhr9DUmSf0XiEq9M/C9xLNalyJ1H1jXj6fATnVFUqIxaMh1RV+JoyvCBo2lt+GAYqmMun7eMLMJf0eU10cGk7mHhss8LkMioD+i1FsVSUkguf+muZ5/4LSYG2RpoJZ7uJpb/5+62Ak46W2DHMflXuoOi292TAbh67jQ/w5nJJBJUnZ8/mbtNwcli8NCMFREz5w==
+ b=TtaIqCQZZfUnhsqN14FINFE7ENwkgUmrMLZCXGmMnEkGs/2KfHJnr/a7UHggUObSeuLr9hQ/rHj7Iic5K0YYnd4Ze5uaDEzOl3Gpsv8Sr/Xqn4CCI9KKVNB8ajyQE5r62Dlkbq2CgtIgqZv9TzVkICgzPURSdTJOlRRm4etLGaeDJG/LzcIguhntZu3Jkb42miau0bSVB6MNjLu6Dpp3cUBNXoRLiGuLQvshDiI3enh00FOT2V0mxwIMu/J/apZ18cP01IS3dja3JHWI0VViiHOYcBt+eK5sQ/W8WrEt/hkk9jvpGF25PRqoolXTjpX30u6R8+D2fDn/dBD8qMqaVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8Mg1rcUV+64uiAhbrtzygMvcZnG6+I4jbMdmSaOC8CU=;
- b=mPRB2gF18RJbTz8krNWwka9tX6KLbWNxEHV1ipsXzil60lxcPsIq/g42RsxQhPjMhxTsIGUrCTKojiChT3fq5dbtzNXW2jPA8sKbm0+nj/MF0VtMl247VmmY3C4Ld+gDNgI9J0yzEo7+baFTRaw5usdnBaft2aFDcwzN9eNXjWH85lM7XDY8nYCO7mdA4yojCoi+JXoLrx4FyehPEw1N9O0i0tAUedM4EpVrdd7/dZbbHcsdwbLBiVcYgJlR05KdHDvhQs5domVffcyA0E+hafyzTDbgiL4bOirqZyXt1uu4kvNCn6m6RvfJ46m5rFTjUmwLZ6yk6JMvTJ2LHDKAoQ==
+ bh=aXrU+SHMFUVKeGdJn+m6fiq82dkwxZek/EvuMvh/LkE=;
+ b=VEOPdpa0UA/mqM1riSUiDJc36t3QfyFTNlnviuFrwXYDLGYQKSoSseHUH3OhD8Oo84gC2wlzPT/eTgldLVMoyWzm6KOSTi0uted1sO5WvKdxb6Cq4ne1qB7JUoqsuuMLhpzq5+hO0FpK6KxESVEz06l7D79D/+1OgXwCjhgkrt0jt7jiOtZsFzJ5YFw19wk8YjzDyr4DKXm4xVa4JhVwOXyqvS9F54eojhfRjUbiQfLqgm/AhaYOkkY8zHCSsw2N6rq+fowR+CihxOguJRkxJCKZ+lXw4r0Q4/6Ghel+I80EMkVcDLMS6ZnbPyqzV4CJ+nnB3gVUpxR+f97WrZ/ADA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.199.80.198) smtp.rcpttodomain=lists.xenproject.org
  smtp.mailfrom=xilinx.com; dmarc=pass (p=none sp=none pct=100) action=none
@@ -80,14 +80,14 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8Mg1rcUV+64uiAhbrtzygMvcZnG6+I4jbMdmSaOC8CU=;
- b=A/2UasP48Krh1NB83lMkFGiveX5aov8+CXMqmRRO/71csGhUJZYlImDFc4Ej3IUEFWLp1tHY461noHty524R6JEKdRW3u6Uzwz1l+Nx0y7yfmNHVQbYBFRhMPagJuA38YWftgH2ZDENBFhsOLj54eBEQVZ8VvM2IHked8GCbZv0=
+ bh=aXrU+SHMFUVKeGdJn+m6fiq82dkwxZek/EvuMvh/LkE=;
+ b=liI1xv1ZvBnIS+CDlbmfOIniG6bpPib9a6SkRxKMpRvZQYMRqGsdJ9DKiy4aIYgY8SlW9FINCB41YQq1XtLJBuKVRhE+lT1Bwk0tc20iQM7kr3oNjOFUteMME3vBVQkpY9nrX3/Vx3e5RqQOmIYPe37EMpKI6b7Cq9yiLbmHsoc=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.199.80.198)
  smtp.mailfrom=xilinx.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=xilinx.com;
 Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
  149.199.80.198 as permitted sender) receiver=protection.outlook.com;
- client-ip=149.199.80.198; helo=xir-pvapexch01.xlnx.xilinx.com;
+ client-ip=149.199.80.198; helo=xir-pvapexch02.xlnx.xilinx.com;
 From: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <sstabellini@kernel.org>, <stefanos@xilinx.com>, <julien@xen.org>,
@@ -95,100 +95,151 @@ CC: <sstabellini@kernel.org>, <stefanos@xilinx.com>, <julien@xen.org>,
 	<andrew.cooper3@citrix.com>, <george.dunlap@citrix.com>, <jbeulich@suse.com>,
 	<wl@xen.org>, <paul@xen.org>, <roger.pau@citrix.com>, Ayan Kumar Halder
 	<ayankuma@xilinx.com>
-Subject: [PATCH v11 2/3] xen/arm64: io: Handle the abort due to access to stage1 translation table
-Date: Thu, 17 Mar 2022 14:00:45 +0000
-Message-ID: <20220317140046.64563-3-ayankuma@xilinx.com>
+Subject: [PATCH v11 0/3] xen/arm64: io: Decode ldr/str post-indexing instruction
+Date: Thu, 17 Mar 2022 14:00:43 +0000
+Message-ID: <20220317140046.64563-1-ayankuma@xilinx.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220317140046.64563-1-ayankuma@xilinx.com>
-References: <20220317140046.64563-1-ayankuma@xilinx.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 0908830e-a972-4f1a-63fa-08da081e8f7b
-X-MS-TrafficTypeDiagnostic: MN2PR02MB5888:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8971e89f-997c-4fc5-7b20-08da081e8c8d
+X-MS-TrafficTypeDiagnostic: BL0PR02MB4610:EE_
 X-Microsoft-Antispam-PRVS:
-	<MN2PR02MB588885562FD54B5B7BA8306BB2129@MN2PR02MB5888.namprd02.prod.outlook.com>
+	<BL0PR02MB46102B32BE61F0F536ADDD76B2129@BL0PR02MB4610.namprd02.prod.outlook.com>
 X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	FNgEwJlboksNuQiq8jkUVcqGBSkZICQ+oBKAPK8z5to3C/16lQPhHuqvcleNkzNDAY7d+SJRIPlvFv+uTYi6hrytICdawDK756DybL7OyPIbGZm9lQEtWb5yiWLX5voy7jxJfDYX+eYWPVX1dI/4pS0R56shZCMYs5tBxylPVdvzsG9HnbDdI2/abHaeYCMReO34LSQAQhCSIRX2UoYmm4oXpu2xoxF6hSq7L/spPDAgsHdFhTr+x9c2C+z6R90TjHU81R+hWolDz9LpgKCxRUIEjWY9pSNzWzxFAAWE8qIXrEn6BEBPJrsUiqIpX6Zm8PDo1Ta2Kh+FyEMHmD56A1EXQmEBX9xq7l7woMnQz+vvm/NR6Zc3WGFiGZJN406QFWm/fPrYoZdKoxl+I0RVhtfTbHzM5TgXIsRbuLta4yvpRuQG35WicNxBOh6CpbzbwIOyKIQ8bAi1I91N50ex+tEpsmDtC9HMLVOl4vCZBCiRXci0zlZeIQPUeLxkYwx8eH48m0qY3W89wylf1PBAc9xd5FkJY5ywBMrvIOoCtt/oSJ5AqQl/nGnVVwuRYrC0OjjHByDsjnsx2Cv3NMPqo+wtzRIcAQTYzcYqbT+4XA35YVgUNPswIckyt29RoO22AapK+SLd617LN3IkJC+aX064NSxnxFBsQo2h/afnQA4bJtbp02uzo6VzFWn8M7hzE2E5usqeOIt8Nn99aDh34w1DKTI4PZW3Sedovnl8pyA=
+	zc06GGQgjvkQ3O2T3iKnrIlODDaJDP+9Z4iG72X/SRGVO5tJTUyWFaNsLiZmwumkAJjxy6qxo8sYvOeI5dgdH9cqwT1LIKwte3t3D2qvhGjGhG/5X60GT9bbiu5z/WTUoDIKezVwbdsMislFcGGvWvGivB0dKGwvzoQTuqocUZED4H7fZzZehCkhBsv2/1Et2He6Yi8I2wNiSa+Qpafo2yfyaQkrJoPMSrRfVic3a1FGafvJHF8qGnVKN6BvX8IOGAhb8/RBYDbCeWdZC59B8f3Qhwmpv+ikitj8BPA2nvZiIBNyVCKz1Zn+sE502E2BofuLzRHZm7+HHF4DehOWIEW5zHIvCzAi6kNH8mVqbL9av/XkMLZxUn3Tp3/Xa9zaQQH0+fXPEMtkeKFM6DFj1r3Hl70izWv9+dwJsquF89p6W5LeuzLzw68bAIISjZm9zNRYMc6qPooljZwr7fE6GLHwLK7oxrTN6mpEWTfFBRBbknfAGIgmob/NZouwNCfehML29ibNO1fuHOyx/avxAJwHGKz0qms5WcOGKbVCxce+81K03lrqT63UY9+FNohOIKAq4m+hiHQdPVyBu+zDXGOJC+chGuevvYimz+XJefjhdA6LYEGSa9ebgnVVzMnzaZcAxxskZGlMbsOHMA5OpBv88b0fqdOmVKSnigMv9ptaCWA9CKHZeoiqllxW7pRF5C7u6H+yf1KTWUgNUC9rGsWYR+Wlnayu3T1LgdFgcyE=
 X-Forefront-Antispam-Report:
-	CIP:149.199.80.198;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:xir-pvapexch01.xlnx.xilinx.com;PTR:unknown-80-198.xilinx.com;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(40470700004)(46966006)(26005)(6916009)(186003)(316002)(70206006)(70586007)(1076003)(508600001)(336012)(426003)(4326008)(9786002)(8936002)(107886003)(36860700001)(6666004)(2616005)(54906003)(82310400004)(7696005)(2906002)(36756003)(5660300002)(7416002)(356005)(7636003)(8676002)(83380400001)(47076005)(40460700003)(102446001)(473944003);DIR:OUT;SFP:1101;
+	CIP:149.199.80.198;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:xir-pvapexch02.xlnx.xilinx.com;PTR:unknown-80-198.xilinx.com;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(36756003)(6666004)(508600001)(8936002)(47076005)(83380400001)(7416002)(5660300002)(426003)(336012)(40460700003)(2906002)(82310400004)(186003)(26005)(4326008)(6916009)(9786002)(54906003)(70586007)(70206006)(316002)(2616005)(36860700001)(1076003)(7636003)(356005)(107886003)(7696005)(8676002)(102446001)(473944003);DIR:OUT;SFP:1101;
 X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2022 14:00:57.3897
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2022 14:00:52.4751
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0908830e-a972-4f1a-63fa-08da081e8f7b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8971e89f-997c-4fc5-7b20-08da081e8c8d
 X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.80.198];Helo=[xir-pvapexch01.xlnx.xilinx.com]
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;Ip=[149.199.80.198];Helo=[xir-pvapexch02.xlnx.xilinx.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1NAM02FT055.eop-nam02.prod.protection.outlook.com
+	BN1NAM02FT025.eop-nam02.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR02MB5888
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR02MB4610
 
-If the abort was caused due to access to stage1 translation table, Xen
-will try to set the p2m entry (assuming that the Stage 1 translation
-table is in a non MMIO region).
-If there is no such entry found, then Xen will try to map the address as
-a MMIO region (assuming that the Stage 1 translation table is in a
-direct MMIO region).
+Hi All,
 
-If that fails as well, then there are the two following scenarios:-
-1. Stage 1 translation table being in an emulated MMIO region - Xen
-can read the region, but it has no way to return the value read to the
-CPU page table walker (which tries to go through the stage1 tables to
-resolve the translation fault).
+The patch series continues with the support to decode instructions by Xen when
+ISS is invalid. Currently, when the guest executes post indexing ldr/str instructions
+on emulated MMIO, these instructions are trapped into Xen as a data abort.
+Xen reads hsr_dabt.isv == 0, so ISS is invalid. Therefore, it reads the faulting
+instruction's opcode from guest's PC. It decodes and executes the instruction on
+the emulated region.
 
-2. Stage 1 translation table address is invalid.
+This is a continuation of the previous patch series "[XEN v10 0/4] xen/arm64: io:
+Decode ldr/str post-indexing instruction". In the previous series, patches 2 and
+3 had to be reverted as they cause a build break on x86 and boot failure on arm32.
+Only patch 1 (ie "[XEN v10 1/4] xen/arm64: Decode ldr/str post increment operations"
+was committed)
 
-In both the above scenarios, Xen will forward the abort to the guest.
+While doing the patch, we found two bugs in the codebase. I have addressed them
+in patches 2 and 3. This was discussed with Julien on the IRC.
 
-Signed-off-by: Ayan Kumar Halder <ayankuma@xilinx.com>
----
+Ayan Kumar Halder (3):
+  xen/arm64: io: Emulate instructions (with invalid ISS) on MMIO region
+  xen/arm64: io: Handle the abort due to access to stage1 translation
+    table
+  xen/arm64: io: Handle data abort due to cache maintenance instructions
+
+ xen/arch/arm/arm32/traps.c        |  12 +++
+ xen/arch/arm/arm64/traps.c        |  52 +++++++++++++
+ xen/arch/arm/decode.c             |   2 +
+ xen/arch/arm/include/asm/domain.h |   4 +
+ xen/arch/arm/include/asm/mmio.h   |  18 ++++-
+ xen/arch/arm/include/asm/traps.h  |   2 +
+ xen/arch/arm/io.c                 | 117 +++++++++++++++++++++---------
+ xen/arch/arm/ioreq.c              |  15 +++-
+ xen/arch/arm/traps.c              |  77 ++++++++++++++++----
+ xen/arch/x86/include/asm/domain.h |   3 +
+ xen/include/xen/sched.h           |   2 +
+ 11 files changed, 251 insertions(+), 53 deletions(-)
 
 Changelog :-
+v2 - 1. Updated the rn register after reading from it. (Pointed by Julien,
+        Stefano)
+     2. Used a union to represent the instruction opcode (Suggestd by Bertrand)
+     3. Fixed coding style issues (Pointed by Julien)
+     4. In the previous patch, I was updating dabt->sign based on the signedness
+        of imm9. This was incorrect. As mentioned in ARMv8 ARM  DDI 0487G.b,
+        Page 3221, SSE indicates the signedness of the data item loaded. In our
+        case, the data item loaded is always unsigned.
 
-v1..v8 - NA
+v3- 1. Handled all the variants of ldr/str (ie 64, 32, 16, 8 bit variants).
+       Thus, I have removed the check for "instr->code.opc == 0" (Suggested by
+       Andre)
+    2. Handled the scenario when rn = SP, rt = XZR (Suggested by Jan, Andre)
+    3. Added restriction for "rt != rn" (Suggested by Andre)
+    4. Moved union ldr_str_instr_class {} to decode.h. This is the header included
+       by io.c and decode.c (where the union is referred). (Suggested by Jan)
+    5. Indentation and typo fixes (Suggested by Jan)
 
-v9 - 1. Extracted this change from "[XEN v8 2/2] xen/arm64: io: Support
-instructions (for which ISS is not..." into a separate patch of its own.
-The reason being this is an existing bug in the codebase.
+v4- 1. Fixed the patch as per Stefano's comments on v3. They are as follows :-
+        1.1 Use macros to determine the fixed values in the instruction opcode
+        1.2 Checked if instr != NULL
+        1.3 Changed some data types and added #define ARM_64 for AArch64 specific
+            code
+        1.4 Moved post_increment_register() to decode.c so that the decoding
+            logic is confined to a single file.
+        1.5 Moved some checks from post_increment_register() to
+            decode_loadstore_postindexing()
+        1.6 Removed a duplicate check
+    2. Updated the commit message as per Andre's comments.
+    3. Changed the names of a label and some comments. *32bit* was erroneously
+       mentioned in a label and comments in decode_loadstore_postindexing()
+       although the function handled all variants of ldr/str post indexing.
 
-v10 - 1. Enabled checking for stage1 translation table address in the
-MMIO region. The reason being Arm Arm does not have any restrictions.
-2. Updated the commit message to explain all the possible scenarios.
+v5- 1. Renamed decode_loadstore_postindexing() to decode_arm64(). The reason
+       being this will be extended in future to support more instructions for
+       which hsr_badt.isv = 0
+    2. Introduce a function try_decode_instruction_invalid_iss() to determine
+       if the instruction needs to be decoded before invoking decode_instruction().
 
-v11 - 1. Fixed some wordings in comments and commit message (pointed
-by Julien in v10).
+       It checks :-
+       2.1  dabt->s1ptw - Returns IO_UNHANDLED
+       2.2  dabt->cache - Returns IO_IGNORED. (new enum instroduced to let the
+            caller know that the instruction needs to be ignored by Xen. Thus
+            the caller needs to increment the PC and return to the guest.
 
- xen/arch/arm/io.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+    3. Invoked try_decode_instruction_invalid_iss() from the following 2 places :-
+        3.a - try_handle_mmio() - When we have determined that there is a valid
+              mmio handler.
+        3.b - try_fwd_ioserv()
+        When ioserver completes the io request, the acknowledgement is sent via
+        handle_ioserv(). Here, we need to increment the register. As there is no
+        common data shared between try_fwd_ioserv() and handle_ioserv(), we need
+        to decode the instruction again in handle_ioserv() to determine rn, imm9.
 
-diff --git a/xen/arch/arm/io.c b/xen/arch/arm/io.c
-index fd903b7b03..6f458ee7fd 100644
---- a/xen/arch/arm/io.c
-+++ b/xen/arch/arm/io.c
-@@ -128,6 +128,17 @@ void try_decode_instruction(const struct cpu_user_regs *regs,
-         return;
-     }
- 
-+    /*
-+     * At this point, we know that the stage1 translation table is either in an
-+     * emulated MMIO region or its address is invalid . This is not expected by
-+     * Xen and thus it forwards the abort to the guest.
-+     */
-+    if ( info->dabt.s1ptw )
-+    {
-+        info->dabt_instr.state = INSTR_ERROR;
-+        return;
-+    }
-+
-     /*
-      * Armv8 processor does not provide a valid syndrome for decoding some
-      * instructions. So in order to process these instructions, Xen must
+        (NOTE to Reviewers) - This does not feel correct. However, I could not
+        think of a better approach. Please provide your inputs.
+
+    4. Augumented struct hsr_dabt{} with struct hsr_dabt_instr_details{} to hold
+       rn and imm9. This is passed to post_increment_register() to update rn.
+    5. Other style changes as suggested in v4.
+
+v6 - 1. Split the patch into three parts.
+
+v7 - 1. Merged patch2 and patch3 into a single patch.
+
+v8 - 1. Changes mentioned in the individual patches.
+
+v9 - 1. Added patches 3 and 4 to address the bugs found in the existing codebase.
+     2. Changes mentioned in the individual patches.
+
+v10 - 1. Changes mentioned in the individual patches.
+
+v11 - 1. Patch 1/4 from v10 was committed. Thus, this series contains patches 2..4.
+      2. Changes mentioned in the individual patches.
+
 -- 
 2.17.1
 
