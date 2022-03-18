@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5483C4332F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B8DEC433FE
 	for <xen-devel@archiver.kernel.org>; Fri, 18 Mar 2022 15:26:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.292101.496050 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.292104.496082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nVEUH-0001kx-Hy; Fri, 18 Mar 2022 15:25:57 +0000
+	id 1nVEUK-0002YU-Kt; Fri, 18 Mar 2022 15:26:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 292101.496050; Fri, 18 Mar 2022 15:25:57 +0000
+Received: by outflank-mailman (output) from mailman id 292104.496082; Fri, 18 Mar 2022 15:26:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nVEUH-0001kq-ET; Fri, 18 Mar 2022 15:25:57 +0000
-Received: by outflank-mailman (input) for mailman id 292101;
- Fri, 18 Mar 2022 15:25:55 +0000
+	id 1nVEUK-0002YC-HT; Fri, 18 Mar 2022 15:26:00 +0000
+Received: by outflank-mailman (input) for mailman id 292104;
+ Fri, 18 Mar 2022 15:25:59 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VNnc=T5=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1nVEUF-0001ka-OP
- for xen-devel@lists.xenproject.org; Fri, 18 Mar 2022 15:25:55 +0000
+ id 1nVEUI-0001ka-RN
+ for xen-devel@lists.xenproject.org; Fri, 18 Mar 2022 15:25:58 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id b389e5d1-a6cf-11ec-853c-5f4723681683;
- Fri, 18 Mar 2022 16:25:54 +0100 (CET)
+ id b58755b9-a6cf-11ec-853c-5f4723681683;
+ Fri, 18 Mar 2022 16:25:57 +0100 (CET)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D70801570;
- Fri, 18 Mar 2022 08:25:53 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1CBF01515;
+ Fri, 18 Mar 2022 08:25:57 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F21FF3F7D7;
- Fri, 18 Mar 2022 08:25:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C08113F7D7;
+ Fri, 18 Mar 2022 08:25:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,111 +45,135 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b389e5d1-a6cf-11ec-853c-5f4723681683
+X-Inumbo-ID: b58755b9-a6cf-11ec-853c-5f4723681683
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v3 1/6] tools/cpupools: Give a name to unnamed cpupools
-Date: Fri, 18 Mar 2022 15:25:36 +0000
-Message-Id: <20220318152541.7460-2-luca.fancellu@arm.com>
+	George Dunlap <george.dunlap@citrix.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 3/6] xen/sched: retrieve scheduler id by name
+Date: Fri, 18 Mar 2022 15:25:38 +0000
+Message-Id: <20220318152541.7460-4-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220318152541.7460-1-luca.fancellu@arm.com>
 References: <20220318152541.7460-1-luca.fancellu@arm.com>
 
-With the introduction of boot time cpupools, Xen can create many
-different cpupools at boot time other than cpupool with id 0.
+Add a static function to retrieve the scheduler pointer using the
+scheduler name.
 
-Since these newly created cpupools can't have an
-entry in Xenstore, create the entry using xen-init-dom0
-helper with the usual convention: Pool-<cpupool id>.
+Add a public function to retrieve the scheduler id by the scheduler
+name that makes use of the new static function.
 
-Given the change, remove the check for poolid == 0 from
-libxl_cpupoolid_to_name(...).
+Take the occasion to replace open coded scheduler search with the
+new static function in scheduler_init.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
 Reviewed-by: Juergen Gross <jgross@suse.com>
 ---
 Changes in v3:
-- no changes, add R-by
+- add R-by
 Changes in v2:
- - Remove unused variable, moved xc_cpupool_infofree
-   ahead to simplify the code, use asprintf (Juergen)
+- replace open coded scheduler search in scheduler_init (Juergen)
 ---
- tools/helpers/xen-init-dom0.c  | 35 +++++++++++++++++++++++++++++++++-
- tools/libs/light/libxl_utils.c |  3 +--
- 2 files changed, 35 insertions(+), 3 deletions(-)
+ xen/common/sched/core.c | 40 ++++++++++++++++++++++++++--------------
+ xen/include/xen/sched.h | 11 +++++++++++
+ 2 files changed, 37 insertions(+), 14 deletions(-)
 
-diff --git a/tools/helpers/xen-init-dom0.c b/tools/helpers/xen-init-dom0.c
-index c99224a4b607..84286617790f 100644
---- a/tools/helpers/xen-init-dom0.c
-+++ b/tools/helpers/xen-init-dom0.c
-@@ -43,7 +43,9 @@ int main(int argc, char **argv)
-     int rc;
-     struct xs_handle *xsh = NULL;
-     xc_interface *xch = NULL;
--    char *domname_string = NULL, *domid_string = NULL;
-+    char *domname_string = NULL, *domid_string = NULL, *pool_path, *pool_name;
-+    xc_cpupoolinfo_t *xcinfo;
-+    unsigned int pool_id = 0;
-     libxl_uuid uuid;
- 
-     /* Accept 0 or 1 argument */
-@@ -114,6 +116,37 @@ int main(int argc, char **argv)
-         goto out;
-     }
- 
-+    /* Create an entry in xenstore for each cpupool on the system */
-+    do {
-+        xcinfo = xc_cpupool_getinfo(xch, pool_id);
-+        if (xcinfo != NULL) {
-+            if (xcinfo->cpupool_id != pool_id)
-+                pool_id = xcinfo->cpupool_id;
-+            xc_cpupool_infofree(xch, xcinfo);
-+            if (asprintf(&pool_path, "/local/pool/%d/name", pool_id) <= 0) {
-+                fprintf(stderr, "cannot allocate memory for pool path\n");
-+                rc = 1;
-+                goto out;
-+            }
-+            if (asprintf(&pool_name, "Pool-%d", pool_id) <= 0) {
-+                fprintf(stderr, "cannot allocate memory for pool name\n");
-+                rc = 1;
-+                goto out_err;
-+            }
-+            pool_id++;
-+            if (!xs_write(xsh, XBT_NULL, pool_path, pool_name,
-+                          strlen(pool_name))) {
-+                fprintf(stderr, "cannot set pool name\n");
-+                rc = 1;
-+            }
-+            free(pool_name);
-+out_err:
-+            free(pool_path);
-+            if ( rc )
-+                goto out;
-+        }
-+    } while(xcinfo != NULL);
-+
-     printf("Done setting up Dom0\n");
- 
- out:
-diff --git a/tools/libs/light/libxl_utils.c b/tools/libs/light/libxl_utils.c
-index b91c2cafa223..81780da3ff40 100644
---- a/tools/libs/light/libxl_utils.c
-+++ b/tools/libs/light/libxl_utils.c
-@@ -151,8 +151,7 @@ char *libxl_cpupoolid_to_name(libxl_ctx *ctx, uint32_t poolid)
- 
-     snprintf(path, sizeof(path), "/local/pool/%d/name", poolid);
-     s = xs_read(ctx->xsh, XBT_NULL, path, &len);
--    if (!s && (poolid == 0))
--        return strdup("Pool-0");
-+
-     return s;
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index 19ab67818106..48ee01420fb8 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -2947,10 +2947,30 @@ void scheduler_enable(void)
+     scheduler_active = true;
  }
  
++static inline
++const struct scheduler *__init sched_get_by_name(const char *sched_name)
++{
++    unsigned int i;
++
++    for ( i = 0; i < NUM_SCHEDULERS; i++ )
++        if ( schedulers[i] && !strcmp(schedulers[i]->opt_name, sched_name) )
++            return schedulers[i];
++
++    return NULL;
++}
++
++int __init sched_get_id_by_name(const char *sched_name)
++{
++    const struct scheduler *scheduler = sched_get_by_name(sched_name);
++
++    return scheduler ? scheduler->sched_id : -1;
++}
++
+ /* Initialise the data structures. */
+ void __init scheduler_init(void)
+ {
+     struct domain *idle_domain;
++    const struct scheduler *scheduler;
+     int i;
+ 
+     scheduler_enable();
+@@ -2981,25 +3001,17 @@ void __init scheduler_init(void)
+                    schedulers[i]->opt_name);
+             schedulers[i] = NULL;
+         }
+-
+-        if ( schedulers[i] && !ops.name &&
+-             !strcmp(schedulers[i]->opt_name, opt_sched) )
+-            ops = *schedulers[i];
+     }
+ 
+-    if ( !ops.name )
++    scheduler = sched_get_by_name(opt_sched);
++    if ( !scheduler )
+     {
+         printk("Could not find scheduler: %s\n", opt_sched);
+-        for ( i = 0; i < NUM_SCHEDULERS; i++ )
+-            if ( schedulers[i] &&
+-                 !strcmp(schedulers[i]->opt_name, CONFIG_SCHED_DEFAULT) )
+-            {
+-                ops = *schedulers[i];
+-                break;
+-            }
+-        BUG_ON(!ops.name);
+-        printk("Using '%s' (%s)\n", ops.name, ops.opt_name);
++        scheduler = sched_get_by_name(CONFIG_SCHED_DEFAULT);
++        BUG_ON(!scheduler);
++        printk("Using '%s' (%s)\n", scheduler->name, scheduler->opt_name);
+     }
++    ops = *scheduler;
+ 
+     if ( cpu_schedule_up(0) )
+         BUG();
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 415b939ba8ae..4050e22544f9 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -756,6 +756,17 @@ void sched_destroy_domain(struct domain *d);
+ long sched_adjust(struct domain *, struct xen_domctl_scheduler_op *);
+ long sched_adjust_global(struct xen_sysctl_scheduler_op *);
+ int  sched_id(void);
++
++/*
++ * sched_get_id_by_name - retrieves a scheduler id given a scheduler name
++ * @sched_name: scheduler name as a string
++ *
++ * returns:
++ *     positive value being the scheduler id, on success
++ *     negative value if the scheduler name is not found.
++ */
++int sched_get_id_by_name(const char *sched_name);
++
+ void vcpu_wake(struct vcpu *v);
+ long vcpu_yield(void);
+ void vcpu_sleep_nosync(struct vcpu *v);
 -- 
 2.17.1
 
