@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CD60C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F82CC433EF
 	for <xen-devel@archiver.kernel.org>; Wed, 23 Mar 2022 17:34:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294014.499725 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.294015.499736 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nX4rt-0002fn-PQ; Wed, 23 Mar 2022 17:33:57 +0000
+	id 1nX4ru-0002wI-W8; Wed, 23 Mar 2022 17:33:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294014.499725; Wed, 23 Mar 2022 17:33:57 +0000
+Received: by outflank-mailman (output) from mailman id 294015.499736; Wed, 23 Mar 2022 17:33:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nX4rt-0002fg-KF; Wed, 23 Mar 2022 17:33:57 +0000
-Received: by outflank-mailman (input) for mailman id 294014;
+	id 1nX4ru-0002wB-Rv; Wed, 23 Mar 2022 17:33:58 +0000
+Received: by outflank-mailman (input) for mailman id 294015;
  Wed, 23 Mar 2022 17:33:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s5zF=UC=gmail.com=philippe.mathieu.daude@srs-se1.protection.inumbo.net>)
- id 1nX4f1-0004Zy-UB
- for xen-devel@lists.xenproject.org; Wed, 23 Mar 2022 17:20:40 +0000
-Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com
- [2607:f8b0:4864:20::52e])
+ id 1nX4dr-0004Zy-E8
+ for xen-devel@lists.xenproject.org; Wed, 23 Mar 2022 17:19:27 +0000
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [2607:f8b0:4864:20::434])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8ed3205c-aacd-11ec-a405-831a346695d4;
- Wed, 23 Mar 2022 18:20:39 +0100 (CET)
-Received: by mail-pg1-x52e.google.com with SMTP id c2so1663318pga.10
- for <xen-devel@lists.xenproject.org>; Wed, 23 Mar 2022 10:20:39 -0700 (PDT)
+ id 639b15f3-aacd-11ec-a405-831a346695d4;
+ Wed, 23 Mar 2022 18:19:26 +0100 (CET)
+Received: by mail-pf1-x434.google.com with SMTP id u17so1963987pfk.11
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Mar 2022 10:19:26 -0700 (PDT)
 Received: from localhost.localdomain (198.red-83-50-65.dynamicip.rima-tde.net.
  [83.50.65.198]) by smtp.gmail.com with ESMTPSA id
- y12-20020a17090a784c00b001c6bdafc995sm5775028pjl.3.2022.03.23.10.20.31
+ a24-20020a637f18000000b003821e17819csm354438pgd.61.2022.03.23.10.19.19
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 23 Mar 2022 10:20:37 -0700 (PDT)
+ Wed, 23 Mar 2022 10:19:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8ed3205c-aacd-11ec-a405-831a346695d4
+X-Inumbo-ID: 639b15f3-aacd-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=32I90XyrSsgFhoTvAz7kFHmgBFJVrEU2lmj8L6zrA7w=;
-        b=HziQehOw9rA6WaAjt6GWtN96OEZQKNeqtt8BUYKzQhy7osdWurjWlBG20QGQW/EB+F
-         jeu4GS9/mQNcxaXFiYXQHD+Newqzq1veJVbG2jRb7R8WXmdqG/gVdrZDjIlDxW4lRXOq
-         I71naYjPm4YaQCCMtZQaseOvo60Lz/IkNWzSHUBWsfnNXC2oOABAKojB2mfg+D9g7D1D
-         aCifnKvwu9gBP/efpCWO8b9KL2IWYDxFdNbknFbXsjBT6YGAcCikhEVWZMzFhjo4Dyoi
-         m5OUOkfn3o+MT9iQ4opD1tk8fsbzJgw5Qcb9c/JxYjHFhN6Q4eH03QkTyrPcQEV21Vlq
-         Vusg==
+        bh=qDaNpZGuS1pck7ljrYFEMbUPV6qyv4FTweWO+b6dthQ=;
+        b=T/qLqQeIJbWYsc9iaC9cBJMrxMVXpFG/QUiJyPoZd2LdVpzgu4IXrjsjtgh7JucAvy
+         K7XpwsgzEr4aysFsdfXZmw3r4NYiJ3DWcc8JZSOA6Tl3BokPzJQNj2so5OQV1hh6HwEd
+         K1QxKLSW49T2dyO8ay7JL+g882pp7zrdo93r7w/Lf9Ytie2vCQEYjBetUSMwG2E36vDl
+         O1T8FHb+t6UP2pO29Px3c/CN3Z5Qpup501aDNB/0R3S7yzRNJBBBqU6RsNi2V43JnUir
+         +2yzv/A6XJFzT3jeRvNmug8zR6Gv0G3QKmEJL2xM7jyr2axrPlstTpbbBI6cVPxAa6d7
+         uTWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=32I90XyrSsgFhoTvAz7kFHmgBFJVrEU2lmj8L6zrA7w=;
-        b=hoDzNMtLr98gAiXwnT/9dSSVZLcHaMv7grg300hG6EcH2/SCBDDeauoRmhCeSoIPkQ
-         hxq1T1k7Bk8at4m+qenGo5nvQZ4wnI+ambWD8LI5m2bwU7AfOJNSR39twij1Y138V6Dz
-         eJt75pXFs4JJX9hwmoFDyt4HLJiOgPWCg7DsgEfHXViQXwxBzx707TDib0c7JAWg91k/
-         mYwowiTZoy+kMEBHd3c0Pe8gXIfShW3k5xFIRk/AMf8pYkx0j8wagp/tlHZd/4MlOAf/
-         tWjnuY179qMERV9V8tLcVCMABuF67ovzX12UwrTjs8IsW9S6/E4VaHl2UKqTxq7D3XBY
-         bitw==
-X-Gm-Message-State: AOAM533wR8LDc1ymNWwEtJl6sk/h4zpUJMwjD1Rhifbo8Yo3fEAemuWd
-	64z8Z2/sBDG34TLy50t8E6o=
-X-Google-Smtp-Source: ABdhPJzitqpHPUzN1FOlO6Xy6wxyKTy6324HAUZa9Y29UTDRmfk9C7LuqvIVu5doI3n8WNcv+vf6iw==
-X-Received: by 2002:a63:1e52:0:b0:380:ae84:256e with SMTP id p18-20020a631e52000000b00380ae84256emr758991pgm.84.1648056037806;
-        Wed, 23 Mar 2022 10:20:37 -0700 (PDT)
+        bh=qDaNpZGuS1pck7ljrYFEMbUPV6qyv4FTweWO+b6dthQ=;
+        b=wp2rxRnMbJRes1RM7Hq5I1eNTJ4aGEiMsNJlYoAiQ7bZbMe3lOZ7vr5vQNyNusJMLQ
+         7klhajUDgZHKsPsgeiRxah2Rbc/Oe6JebIJqE6vGiifbPcA5oXeic5W9udJuOW4dkTdy
+         MasP9ha1TqXBcRayTGxpXE8b5/7/Tkfm4FeUqZI5fysgt2pM5zg0BhBUUDUO7Yh2iclE
+         G67aXQnGMI5J4OSLBJxLHdJh+5sd/YyZF3wZKbjJjy8yeCHgUOp+FM5qHe97fsTAJZrI
+         3eL9/0Eyi003bWEOd5dSeIAR874vaGeFeXehg6EV7L36QBSKHZ3bRWvKiLBuoVfUsaBi
+         NgBQ==
+X-Gm-Message-State: AOAM530QHjQiYOnPXAzYIi5ejLX19J0W43QZjWeqqiFWHYx+bQZy92vi
+	iCJOSxuF7UeLqSW1F/A5Ghw=
+X-Google-Smtp-Source: ABdhPJysELA1SacEi6NLWr6VDuEztyIdr+gkkW330J+PSAAiBOd3a1EdmuP7lIO3WbruDTaR69cscQ==
+X-Received: by 2002:a63:cf09:0:b0:372:d564:8024 with SMTP id j9-20020a63cf09000000b00372d5648024mr705074pgg.251.1648055965298;
+        Wed, 23 Mar 2022 10:19:25 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Wenchao Wang <wenchao.wang@intel.com>,
@@ -98,11 +98,10 @@ Cc: Wenchao Wang <wenchao.wang@intel.com>,
 	Eduardo Habkost <eduardo@habkost.net>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Thomas Huth <thuth@redhat.com>,
-	Colin Xu <colin.xu@intel.com>,
-	Mark Kanda <mark.kanda@oracle.com>
-Subject: [PATCH v4 13/13] softmmu/cpus: Free cpu->halt_cond in generic_destroy_vcpu_thread()
-Date: Wed, 23 Mar 2022 18:17:51 +0100
-Message-Id: <20220323171751.78612-14-philippe.mathieu.daude@gmail.com>
+	Colin Xu <colin.xu@intel.com>
+Subject: [PATCH v4 07/13] accel-ops: Introduce create_vcpu_thread_precheck / postcheck handlers
+Date: Wed, 23 Mar 2022 18:17:45 +0100
+Message-Id: <20220323171751.78612-8-philippe.mathieu.daude@gmail.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220323171751.78612-1-philippe.mathieu.daude@gmail.com>
 References: <20220323171751.78612-1-philippe.mathieu.daude@gmail.com>
@@ -110,43 +109,52 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Mark Kanda <mark.kanda@oracle.com>
+From: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-vCPU hotunplug related leak reported by Valgrind:
+Introduce precheck/postcheck handlers which will help to
+refactor code common to the various create_vcpu_thread()
+implementations.
 
-  ==102631== 56 bytes in 1 blocks are definitely lost in loss record 5,089 of 8,555
-  ==102631==    at 0x4C3ADBB: calloc (vg_replace_malloc.c:1117)
-  ==102631==    by 0x69EE4CD: g_malloc0 (in /usr/lib64/libglib-2.0.so.0.5600.4)
-  ==102631==    by 0x924452: kvm_start_vcpu_thread (kvm-accel-ops.c:69)
-  ==102631==    by 0x4505C2: qemu_init_vcpu (cpus.c:643)
-  ==102631==    by 0x76B4D1: x86_cpu_realizefn (cpu.c:6520)
-  ==102631==    by 0x9344A7: device_set_realized (qdev.c:531)
-  ==102631==    by 0x93E329: property_set_bool (object.c:2273)
-  ==102631==    by 0x93C2F8: object_property_set (object.c:1408)
-  ==102631==    by 0x940796: object_property_set_qobject (qom-qobject.c:28)
-  ==102631==    by 0x93C663: object_property_set_bool (object.c:1477)
-  ==102631==    by 0x933D3B: qdev_realize (qdev.c:333)
-  ==102631==    by 0x455EC4: qdev_device_add_from_qdict (qdev-monitor.c:713)
-
-Signed-off-by: Mark Kanda <mark.kanda@oracle.com>
-Message-Id: <20220321141409.3112932-4-mark.kanda@oracle.com>
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- softmmu/cpus.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/sysemu/accel-ops.h | 4 ++++
+ softmmu/cpus.c             | 8 +++++++-
+ 2 files changed, 11 insertions(+), 1 deletion(-)
 
+diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
+index 6013c9444c..26b542d35c 100644
+--- a/include/sysemu/accel-ops.h
++++ b/include/sysemu/accel-ops.h
+@@ -31,6 +31,10 @@ struct AccelOpsClass {
+     bool (*cpus_are_resettable)(void);
+ 
+     void (*create_vcpu_thread)(CPUState *cpu); /* MANDATORY NON-NULL */
++    /* If non-NULL, return whether common vCPU thread must be created */
++    bool (*create_vcpu_thread_precheck)(CPUState *cpu);
++    void (*create_vcpu_thread_postcheck)(CPUState *cpu);
++
+     void (*kick_vcpu_thread)(CPUState *cpu);
+     bool (*cpu_thread_is_idle)(CPUState *cpu);
+ 
 diff --git a/softmmu/cpus.c b/softmmu/cpus.c
-index efa8397f04..23bed29545 100644
+index 7b75bb66d5..857e2081ba 100644
 --- a/softmmu/cpus.c
 +++ b/softmmu/cpus.c
-@@ -620,6 +620,7 @@ static void common_vcpu_thread_create(CPUState *cpu)
- static void common_vcpu_thread_destroy(CPUState *cpu)
- {
-     g_free(cpu->thread);
-+    g_free(cpu->halt_cond);
- }
+@@ -637,7 +637,13 @@ void qemu_init_vcpu(CPUState *cpu)
  
- void cpu_remove_sync(CPUState *cpu)
+     /* accelerators all implement the AccelOpsClass */
+     g_assert(cpus_accel != NULL && cpus_accel->create_vcpu_thread != NULL);
+-    cpus_accel->create_vcpu_thread(cpu);
++    if (cpus_accel->create_vcpu_thread_precheck == NULL
++            || cpus_accel->create_vcpu_thread_precheck(cpu)) {
++        cpus_accel->create_vcpu_thread(cpu);
++    }
++    if (cpus_accel->create_vcpu_thread_postcheck) {
++        cpus_accel->create_vcpu_thread_postcheck(cpu);
++    }
+ 
+     while (!cpu->created) {
+         qemu_cond_wait(&qemu_cpu_cond, &qemu_global_mutex);
 -- 
 2.35.1
 
