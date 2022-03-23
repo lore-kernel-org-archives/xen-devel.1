@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F82CC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Mar 2022 17:34:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294015.499736 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98DAFC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Mar 2022 17:35:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.294026.499758 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nX4ru-0002wI-W8; Wed, 23 Mar 2022 17:33:58 +0000
+	id 1nX4tA-0004Rw-Ss; Wed, 23 Mar 2022 17:35:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294015.499736; Wed, 23 Mar 2022 17:33:58 +0000
+Received: by outflank-mailman (output) from mailman id 294026.499758; Wed, 23 Mar 2022 17:35:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nX4ru-0002wB-Rv; Wed, 23 Mar 2022 17:33:58 +0000
-Received: by outflank-mailman (input) for mailman id 294015;
- Wed, 23 Mar 2022 17:33:57 +0000
+	id 1nX4tA-0004Rp-PM; Wed, 23 Mar 2022 17:35:16 +0000
+Received: by outflank-mailman (input) for mailman id 294026;
+ Wed, 23 Mar 2022 17:35:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s5zF=UC=gmail.com=philippe.mathieu.daude@srs-se1.protection.inumbo.net>)
- id 1nX4dr-0004Zy-E8
- for xen-devel@lists.xenproject.org; Wed, 23 Mar 2022 17:19:27 +0000
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [2607:f8b0:4864:20::434])
+ id 1nX4dT-0004Zy-K0
+ for xen-devel@lists.xenproject.org; Wed, 23 Mar 2022 17:19:03 +0000
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [2607:f8b0:4864:20::631])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 639b15f3-aacd-11ec-a405-831a346695d4;
- Wed, 23 Mar 2022 18:19:26 +0100 (CET)
-Received: by mail-pf1-x434.google.com with SMTP id u17so1963987pfk.11
- for <xen-devel@lists.xenproject.org>; Wed, 23 Mar 2022 10:19:26 -0700 (PDT)
+ id 5561da2e-aacd-11ec-a405-831a346695d4;
+ Wed, 23 Mar 2022 18:19:02 +0100 (CET)
+Received: by mail-pl1-x631.google.com with SMTP id c23so2183651plo.0
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Mar 2022 10:19:02 -0700 (PDT)
 Received: from localhost.localdomain (198.red-83-50-65.dynamicip.rima-tde.net.
  [83.50.65.198]) by smtp.gmail.com with ESMTPSA id
- a24-20020a637f18000000b003821e17819csm354438pgd.61.2022.03.23.10.19.19
+ u15-20020a056a00098f00b004faa58d44eesm455060pfg.145.2022.03.23.10.18.55
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 23 Mar 2022 10:19:24 -0700 (PDT)
+ Wed, 23 Mar 2022 10:19:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 639b15f3-aacd-11ec-a405-831a346695d4
+X-Inumbo-ID: 5561da2e-aacd-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=qDaNpZGuS1pck7ljrYFEMbUPV6qyv4FTweWO+b6dthQ=;
-        b=T/qLqQeIJbWYsc9iaC9cBJMrxMVXpFG/QUiJyPoZd2LdVpzgu4IXrjsjtgh7JucAvy
-         K7XpwsgzEr4aysFsdfXZmw3r4NYiJ3DWcc8JZSOA6Tl3BokPzJQNj2so5OQV1hh6HwEd
-         K1QxKLSW49T2dyO8ay7JL+g882pp7zrdo93r7w/Lf9Ytie2vCQEYjBetUSMwG2E36vDl
-         O1T8FHb+t6UP2pO29Px3c/CN3Z5Qpup501aDNB/0R3S7yzRNJBBBqU6RsNi2V43JnUir
-         +2yzv/A6XJFzT3jeRvNmug8zR6Gv0G3QKmEJL2xM7jyr2axrPlstTpbbBI6cVPxAa6d7
-         uTWA==
+        bh=0hihgfEmLJPNBEh4WW6rYf49XmgK0ovI41W1a0emuNk=;
+        b=MrdYb7945anCfYH1VRiFA5pAW7S4hoZOOF1Pdv+2ZTrCvIPQ0tdNE6NgZGHvIaYl6F
+         plkh3wIlaqYoXktAcEAtQmOqlHJdMmidt+Oa/wnRaHYaNMUJZ9CkCSrlqjquwFaZdWSC
+         HPnXLzJcabcEufzwkRoVTxfpe1EHQA8+scJQyC9OkHIYWUa2UKWUlEhDYRHbD8EXQtLR
+         hGXTs3LTe0tNECvEc0QQ3gavKzuFIBW5V+W6pGyNgy0F8X1RKcixk5n93FXcTecHiIep
+         G1WrbmTHafbZqiFIsAW0M4VWI5qRob0xYjL9jnDgfVfth7/f271rS43Pm6WxxiTOI/Ta
+         havA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=qDaNpZGuS1pck7ljrYFEMbUPV6qyv4FTweWO+b6dthQ=;
-        b=wp2rxRnMbJRes1RM7Hq5I1eNTJ4aGEiMsNJlYoAiQ7bZbMe3lOZ7vr5vQNyNusJMLQ
-         7klhajUDgZHKsPsgeiRxah2Rbc/Oe6JebIJqE6vGiifbPcA5oXeic5W9udJuOW4dkTdy
-         MasP9ha1TqXBcRayTGxpXE8b5/7/Tkfm4FeUqZI5fysgt2pM5zg0BhBUUDUO7Yh2iclE
-         G67aXQnGMI5J4OSLBJxLHdJh+5sd/YyZF3wZKbjJjy8yeCHgUOp+FM5qHe97fsTAJZrI
-         3eL9/0Eyi003bWEOd5dSeIAR874vaGeFeXehg6EV7L36QBSKHZ3bRWvKiLBuoVfUsaBi
-         NgBQ==
-X-Gm-Message-State: AOAM530QHjQiYOnPXAzYIi5ejLX19J0W43QZjWeqqiFWHYx+bQZy92vi
-	iCJOSxuF7UeLqSW1F/A5Ghw=
-X-Google-Smtp-Source: ABdhPJysELA1SacEi6NLWr6VDuEztyIdr+gkkW330J+PSAAiBOd3a1EdmuP7lIO3WbruDTaR69cscQ==
-X-Received: by 2002:a63:cf09:0:b0:372:d564:8024 with SMTP id j9-20020a63cf09000000b00372d5648024mr705074pgg.251.1648055965298;
-        Wed, 23 Mar 2022 10:19:25 -0700 (PDT)
+        bh=0hihgfEmLJPNBEh4WW6rYf49XmgK0ovI41W1a0emuNk=;
+        b=1OfMaxDMPcPasAsY7fbV2TiWVgXCVPfg6D625qP50cS7Yxzu0413ZYLJSLAkHYKOiN
+         +h2Y+haFNJeWqgk2NRZpPtA1Sqo+SCjPECnctUuPi2WgxLL2c4LMHYjRqX1/FNjsavTw
+         +4HQr3Wm6JCj3DSid5XlvBbvk9+jE+A005PhVLGtyhtfd10d3eJ2nJ9FrocaoH0U3qvf
+         lKzPRkjjk1qS9tdpl9MKGNE35PCOvQmGZizcgZkCT6dzQARAdC3NSwi3LdM6tu4rvkF6
+         EFmOmretVXFfJYYQ4NwcDPhkfz9ngw+XbH5LVbmKHKqeNTD8RsYKCy/s99+pzI4JXrx0
+         N+yQ==
+X-Gm-Message-State: AOAM531itduDtQnQVXu3zavZTAypP/HBBC+IdP2e3emVysmw7Fq/D7SG
+	r+0ok+S8J5O8KWvQQkrYhwQ=
+X-Google-Smtp-Source: ABdhPJwdV5/nAguIIYnMM8I+otidppMXPEnBBQGuuNIH21Igt/CypcRNRBAVG30eApAdY410n71pzg==
+X-Received: by 2002:a17:90a:8581:b0:1b2:7541:af6c with SMTP id m1-20020a17090a858100b001b27541af6cmr842235pjn.48.1648055941418;
+        Wed, 23 Mar 2022 10:19:01 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philippe.mathieu.daude@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Wenchao Wang <wenchao.wang@intel.com>,
@@ -99,9 +99,9 @@ Cc: Wenchao Wang <wenchao.wang@intel.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Thomas Huth <thuth@redhat.com>,
 	Colin Xu <colin.xu@intel.com>
-Subject: [PATCH v4 07/13] accel-ops: Introduce create_vcpu_thread_precheck / postcheck handlers
-Date: Wed, 23 Mar 2022 18:17:45 +0100
-Message-Id: <20220323171751.78612-8-philippe.mathieu.daude@gmail.com>
+Subject: [PATCH v4 05/13] accel/tcg: Init TCG cflags in vCPU thread handler
+Date: Wed, 23 Mar 2022 18:17:43 +0100
+Message-Id: <20220323171751.78612-6-philippe.mathieu.daude@gmail.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220323171751.78612-1-philippe.mathieu.daude@gmail.com>
 References: <20220323171751.78612-1-philippe.mathieu.daude@gmail.com>
@@ -111,50 +111,63 @@ Content-Transfer-Encoding: 8bit
 
 From: Philippe Mathieu-Daudé <f4bug@amsat.org>
 
-Introduce precheck/postcheck handlers which will help to
-refactor code common to the various create_vcpu_thread()
-implementations.
+Move TCG cflags initialization to thread handler.
+Remove the duplicated assert checks.
 
 Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
 ---
- include/sysemu/accel-ops.h | 4 ++++
- softmmu/cpus.c             | 8 +++++++-
- 2 files changed, 11 insertions(+), 1 deletion(-)
+ accel/tcg/tcg-accel-ops-mttcg.c | 5 ++---
+ accel/tcg/tcg-accel-ops-rr.c    | 7 +++----
+ 2 files changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/include/sysemu/accel-ops.h b/include/sysemu/accel-ops.h
-index 6013c9444c..26b542d35c 100644
---- a/include/sysemu/accel-ops.h
-+++ b/include/sysemu/accel-ops.h
-@@ -31,6 +31,10 @@ struct AccelOpsClass {
-     bool (*cpus_are_resettable)(void);
+diff --git a/accel/tcg/tcg-accel-ops-mttcg.c b/accel/tcg/tcg-accel-ops-mttcg.c
+index ea2b741deb..80609964a6 100644
+--- a/accel/tcg/tcg-accel-ops-mttcg.c
++++ b/accel/tcg/tcg-accel-ops-mttcg.c
+@@ -71,6 +71,8 @@ static void *mttcg_cpu_thread_fn(void *arg)
+     assert(tcg_enabled());
+     g_assert(!icount_enabled());
  
-     void (*create_vcpu_thread)(CPUState *cpu); /* MANDATORY NON-NULL */
-+    /* If non-NULL, return whether common vCPU thread must be created */
-+    bool (*create_vcpu_thread_precheck)(CPUState *cpu);
-+    void (*create_vcpu_thread_postcheck)(CPUState *cpu);
++    tcg_cpu_init_cflags(cpu, current_machine->smp.max_cpus > 1);
 +
-     void (*kick_vcpu_thread)(CPUState *cpu);
-     bool (*cpu_thread_is_idle)(CPUState *cpu);
+     rcu_register_thread();
+     force_rcu.notifier.notify = mttcg_force_rcu;
+     force_rcu.cpu = cpu;
+@@ -140,9 +142,6 @@ void mttcg_start_vcpu_thread(CPUState *cpu)
+ {
+     char thread_name[VCPU_THREAD_NAME_SIZE];
  
-diff --git a/softmmu/cpus.c b/softmmu/cpus.c
-index 7b75bb66d5..857e2081ba 100644
---- a/softmmu/cpus.c
-+++ b/softmmu/cpus.c
-@@ -637,7 +637,13 @@ void qemu_init_vcpu(CPUState *cpu)
+-    g_assert(tcg_enabled());
+-    tcg_cpu_init_cflags(cpu, current_machine->smp.max_cpus > 1);
+-
+     cpu->thread = g_new0(QemuThread, 1);
+     cpu->halt_cond = g_malloc0(sizeof(QemuCond));
+     qemu_cond_init(cpu->halt_cond);
+diff --git a/accel/tcg/tcg-accel-ops-rr.c b/accel/tcg/tcg-accel-ops-rr.c
+index b287110766..de8af32af7 100644
+--- a/accel/tcg/tcg-accel-ops-rr.c
++++ b/accel/tcg/tcg-accel-ops-rr.c
+@@ -153,7 +153,9 @@ static void *rr_cpu_thread_fn(void *arg)
+     Notifier force_rcu;
+     CPUState *cpu = arg;
  
-     /* accelerators all implement the AccelOpsClass */
-     g_assert(cpus_accel != NULL && cpus_accel->create_vcpu_thread != NULL);
--    cpus_accel->create_vcpu_thread(cpu);
-+    if (cpus_accel->create_vcpu_thread_precheck == NULL
-+            || cpus_accel->create_vcpu_thread_precheck(cpu)) {
-+        cpus_accel->create_vcpu_thread(cpu);
-+    }
-+    if (cpus_accel->create_vcpu_thread_postcheck) {
-+        cpus_accel->create_vcpu_thread_postcheck(cpu);
-+    }
+-    assert(tcg_enabled());
++    g_assert(tcg_enabled());
++    tcg_cpu_init_cflags(cpu, false);
++
+     rcu_register_thread();
+     force_rcu.notify = rr_force_rcu;
+     rcu_add_force_rcu_notifier(&force_rcu);
+@@ -276,9 +278,6 @@ void rr_start_vcpu_thread(CPUState *cpu)
+     static QemuCond *single_tcg_halt_cond;
+     static QemuThread *single_tcg_cpu_thread;
  
-     while (!cpu->created) {
-         qemu_cond_wait(&qemu_cpu_cond, &qemu_global_mutex);
+-    g_assert(tcg_enabled());
+-    tcg_cpu_init_cflags(cpu, false);
+-
+     if (!single_tcg_cpu_thread) {
+         cpu->thread = g_new0(QemuThread, 1);
+         cpu->halt_cond = g_new0(QemuCond, 1);
 -- 
 2.35.1
 
