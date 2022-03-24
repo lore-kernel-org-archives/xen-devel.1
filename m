@@ -4,44 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E374EC4167D
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 08:13:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294189.500077 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A080CC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 08:31:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.294221.500159 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXIav-0007fY-O6; Thu, 24 Mar 2022 08:13:21 +0000
+	id 1nXIsV-0006ya-Ta; Thu, 24 Mar 2022 08:31:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294189.500077; Thu, 24 Mar 2022 08:13:21 +0000
+Received: by outflank-mailman (output) from mailman id 294221.500159; Thu, 24 Mar 2022 08:31:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXIav-0007cG-CZ; Thu, 24 Mar 2022 08:13:21 +0000
-Received: by outflank-mailman (input) for mailman id 294189;
- Thu, 24 Mar 2022 08:13:19 +0000
+	id 1nXIsV-0006yT-Pc; Thu, 24 Mar 2022 08:31:31 +0000
+Received: by outflank-mailman (input) for mailman id 294221;
+ Thu, 24 Mar 2022 08:31:30 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=+IHq=UD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nXIat-0006ux-DF
- for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 08:13:19 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eW/x=UD=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
+ id 1nXIsU-0006yN-Cy
+ for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 08:31:30 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on0620.outbound.protection.outlook.com
+ [2a01:111:f400:fe0d::620])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 42940c64-ab4a-11ec-8fbc-03012f2f19d4;
- Thu, 24 Mar 2022 09:13:17 +0100 (CET)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4E0911F391;
- Thu, 24 Mar 2022 08:13:17 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0734E13B98;
- Thu, 24 Mar 2022 08:13:17 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 2JqHAB0oPGIpEwAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 08:13:17 +0000
+ id cce49a76-ab4c-11ec-8fbc-03012f2f19d4;
+ Thu, 24 Mar 2022 09:31:29 +0100 (CET)
+Received: from DB6PR0601CA0045.eurprd06.prod.outlook.com (2603:10a6:4:17::31)
+ by VI1PR08MB4032.eurprd08.prod.outlook.com (2603:10a6:803:e2::25)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.16; Thu, 24 Mar
+ 2022 08:31:25 +0000
+Received: from DB5EUR03FT003.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:4:17:cafe::54) by DB6PR0601CA0045.outlook.office365.com
+ (2603:10a6:4:17::31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5102.17 via Frontend
+ Transport; Thu, 24 Mar 2022 08:31:25 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DB5EUR03FT003.mail.protection.outlook.com (10.152.20.157) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5102.18 via Frontend Transport; Thu, 24 Mar 2022 08:31:24 +0000
+Received: ("Tessian outbound 741ca6c82739:v113");
+ Thu, 24 Mar 2022 08:31:24 +0000
+Received: from b52bb298c80b.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 9667C638-A092-46D2-BD56-8D883BF18CF4.1; 
+ Thu, 24 Mar 2022 08:31:18 +0000
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b52bb298c80b.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 24 Mar 2022 08:31:18 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by DB6PR0801MB1797.eurprd08.prod.outlook.com (2603:10a6:4:32::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5081.19; Thu, 24 Mar
+ 2022 08:31:16 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::c9ab:6cb2:6d11:ac62]) by AM6PR08MB3784.eurprd08.prod.outlook.com
+ ([fe80::c9ab:6cb2:6d11:ac62%3]) with mapi id 15.20.5102.018; Thu, 24 Mar 2022
+ 08:31:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,763 +74,271 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42940c64-ab4a-11ec-8fbc-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1648109597; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=g0HNr+GNjkvWOdjc6NuCMGxPR9ugdYNAjE7zoYxjkw8=;
-	b=eEiJk0niev5kGEbZclXH+3v8+ks1obh4WeYRaVvtVY0g6upeqr3PG2Ls3o6LyZeLhZO6Hr
-	uUVNG6avh+9RQdKYS9I1sz5vwMwJIKhoSf1hkw59YpDdmuL7xMaG6Lb0ldpLCU63IK3H2l
-	S8m9kCE34T8CbHDjd8ilX3knlJgCebI=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v5 06/10] xen: generate hypercall interface related code
-Date: Thu, 24 Mar 2022 09:13:08 +0100
-Message-Id: <20220324081312.18222-7-jgross@suse.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220324081312.18222-1-jgross@suse.com>
-References: <20220324081312.18222-1-jgross@suse.com>
+X-Inumbo-ID: cce49a76-ab4c-11ec-8fbc-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GL8+C0DxIO2X9JEoO0P5jNQzjHBJ9Ntm6OSL0/ylPX4=;
+ b=m1UlI5lnE7069DG4MmD0dXl5vtvhQcDUz4V7sPbNM9B51XxB2MfhlRMM3xzviirj3zkYNj2j/1JmPq58NQBoI/O3jKH/3qEn0Kr9XQos47KaXRocSFmEPobGp86AhXlLR8ZoM3E+3cMxq6IalfFMOEtILRp+HFOcT3OilkZU/5M=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 4280ec46f4a042a5
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hD+KkdG1gtXvwNlEYOR2Fng02VYkGCU1FUUaLh/SypMyvPK35vIfXJK/0thhnKYYqprEzKFBVcrV17nSiq6oocKBAagc3jxWwWDFzYVqccvhmIlOGDj9a6QVgIPeNLvnhPkrWWCZ0Ry+80wiJHM59pUGuhrdbegTqpYVVBwzc+ROmRmf6whJWdrkrCD5DmxodK8z3iSXbQGzrP+9xwZyfZwSe7jVAhoV1UWk0tFHLG/HsQRVITbJDD1kc33ihPQNXT5mLapZNQaA3HSb9A7fU2Pz5ma2P1KIH1TgrJBakZ6Fgt6YzL5PWmUXSAoFh9ZNfQj/PWcm5FdPi2nPpeeqAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GL8+C0DxIO2X9JEoO0P5jNQzjHBJ9Ntm6OSL0/ylPX4=;
+ b=BC9kU7VtdoshVftVG4fpV7eDSDJNrR7sr6L6uzQnhWG5m1NK8HOd/UVJKegKaTjsM8DTdpKlKDIUPEmqCkcFVe7WX/qZtO+T2yfNIG2EtSkwhm6Bfu2HKyXh6/vjdMI15CSF2K6DFD6COBr1D8LOjxdd2EWdNgbchwQu3gso1EX19gNoZPC8utDypOUa1lwGm5Oa33WDI8CzpqmQF0G6zr/xCAJDSufGP//M8TSO4tcREtqfZOy9fPOl3BqOiFgdhntfMlDeenSVkbklzGkskbzWW/wNyVt8jyU3HYMOeFp8eO11McFBH31kZMuvta0892hVWuP0Wn/aStSyuPp1hQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GL8+C0DxIO2X9JEoO0P5jNQzjHBJ9Ntm6OSL0/ylPX4=;
+ b=m1UlI5lnE7069DG4MmD0dXl5vtvhQcDUz4V7sPbNM9B51XxB2MfhlRMM3xzviirj3zkYNj2j/1JmPq58NQBoI/O3jKH/3qEn0Kr9XQos47KaXRocSFmEPobGp86AhXlLR8ZoM3E+3cMxq6IalfFMOEtILRp+HFOcT3OilkZU/5M=
+From: Bertrand Marquis <Bertrand.Marquis@arm.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"julien@xen.org" <julien@xen.org>, "Volodymyr_Babchuk@epam.com"
+	<Volodymyr_Babchuk@epam.com>, Stefano Stabellini
+	<stefano.stabellini@xilinx.com>
+Subject: Re: [PATCH v2] xen/arm: set CPSR Z bit when creating aarch32 guests
+Thread-Topic: [PATCH v2] xen/arm: set CPSR Z bit when creating aarch32 guests
+Thread-Index: AQHYPittA0qvCk1VqUeT+Og+1zrr1azMqmOAgAEgdgCAAGvcAA==
+Date: Thu, 24 Mar 2022 08:31:14 +0000
+Message-ID: <484F678F-0918-407E-B8FE-55022CF22D7D@arm.com>
+References: <20220322202825.418232-1-sstabellini@kernel.org>
+ <E2220831-D72C-423C-A33F-453C8E851B8D@arm.com>
+ <alpine.DEB.2.22.394.2203231844240.2910984@ubuntu-linux-20-04-desktop>
+In-Reply-To:
+ <alpine.DEB.2.22.394.2203231844240.2910984@ubuntu-linux-20-04-desktop>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-mailer: Apple Mail (2.3693.60.0.1.1)
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-MS-Office365-Filtering-Correlation-Id: 47f02e93-0441-491c-71c3-08da0d70aeda
+x-ms-traffictypediagnostic:
+	DB6PR0801MB1797:EE_|DB5EUR03FT003:EE_|VI1PR08MB4032:EE_
+X-Microsoft-Antispam-PRVS:
+	<VI1PR08MB4032E1A11F50FACADDD9AB239D199@VI1PR08MB4032.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ 8YsKWBknlGQ7PCCtT5oVQEBbsSyqVICvjBgNiFzE8bFFD9aUWpD440zublaAXA/iTxL/oVeTcqDsPFnPRg90VdUpRRAzdbGwIsHpBj8tg4oxkrVzaZJLIMtWDjvrHFEqIX+cWjKG+ca7dqyrYUWuh4eMpoUPhv+qPp+eeBn5h+GWn/y+Vj06QtWkFNtEw64BpScvOdXAkWyVZG3DQHNUFOG4Z3Za/BgP7ivcjhnQAZKdlynTqspdkjC1QUK1vpzNamIUhTk0RwEasI2+1Pgz9Z0sjGx3L1WSNM6w6GCdTBK6brRPUOhti16/dct22E34rjPY0ad9A5Rt/uF6FKUp9iv1ctWXx9TGKJpCJyI/kfuvRGBi1bw1Xi9KHYhGoitY1SkDKAswGCijlyYI9rhCtmA3akAkX5l+gGqXYw7ERJ3eiWz298LDSYEigG/6TvQjhVPVSS1PUYubpLY7mSaoJza6WMAl8uunIDIpYtmdh2Z3UeerdyYasX7opwvj2uQSZ96vk0eNBJjhQrHzc1bfqB4FMkTAwKum3iSZG5p+c8IGLE4ZaeffrTWSKZyVKYwo3wKuxtxrH1hEojfqi8Iwcz67zggoZ4pHHxK6vuKr+9b5kUJ3t7/1vsFA2ICuBo+jxmBUwo4S2X0fwCNykv+ijgMenX2foFQsk0CPciok/zMW/9icpx50qsjj8YumyBDTlFSw1mvRF8MKJuynNCHLCH9HpXn/diIm58r7ls0qS8PHOci16UC/Yz6NYqddenm1L6o7eMMkTR9KQi5R2NOjguSbl+BSq3kQHN154TMZE21Jqu3JKIj2OMf4xfPf+kyX
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(36756003)(508600001)(6512007)(316002)(2616005)(83380400001)(6916009)(54906003)(71200400001)(966005)(53546011)(6506007)(26005)(186003)(6486002)(91956017)(4326008)(2906002)(8936002)(5660300002)(38070700005)(66476007)(66556008)(33656002)(86362001)(76116006)(38100700002)(66446008)(64756008)(8676002)(66946007)(122000001)(45980500001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <ECD3B46ECA1FD845AFAD316E4ADE0CE9@eurprd08.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0801MB1797
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ DB5EUR03FT003.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	644d8d23-3afd-44c1-c3d1-08da0d70a959
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	tNv5cd6Kzf6UqFRYAcNwNFHBzyACPBB/vlrKLE0s+/jCtxSI+ldDMl0eXZ3g5sbELwu+m3b+5GArcAUI4TzSWhiYb3O8s/aBBnB67QSf2BEZDhKDLnMdRgk9iGubkgm40DLSVdRNXjYFYY0wUQBKXFYEvSkVeaOmA5sABUyZShcLkrCvNTYnvqZKPrU2LWhwq7rJ0WC51YWr5KIofE8eWSPGxFZjpb2V2oOOBDt5cIpy73tMToOQPVACwE8qivrzR/M9Xwa79QTDU8mERoMX/mm2PIeHmpQV69NmQT5Of+v3CsjmqV+wQj89AfHnumdrABEg6TCTuIogyZkAvBvKV/M9v/R9BuPqjrt3nQOZnR3BzZVlELyWuamxehUdjcWErAB+PJVIWr5KQO5x5QyFwIu19219pPoiBEItcf8vcHp8IRssan6Ad5F2b1jnGJoFTtHgrCZPyoE4YawJlxsj2PB6CJPKt9qmieWd10ogSu2vXpv+tzp/FRtPK81j6H73m7+CflyQlxwK3w7yJLA8ZenbeJpnQVJnpMGFtXGJ6/2K3o0Yb8GwyvvCzV11XE5IWpNod29ilxYbzCcMZ2FyfmpK6K1FV+ip6iVcKHYRCXdv2qfg+ka9SKPNUoJCTz1d0mI8/SHOZaGTX42gNILHxrb1aaaINRNtm+Vb/9RY5FZ8Yk29aOjf4RvozArWuOG3/kj+1CtVBD78qFS0oS0zn8+NN1WHmUXMUkNYgDW0cQsFeqCDmTBjqZ3bZoLpSx9ELTdNdo5RdIdpP/SWtIb+Gw==
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(46966006)(36840700001)(81166007)(36756003)(36860700001)(2906002)(47076005)(82310400004)(356005)(508600001)(6486002)(966005)(54906003)(4326008)(316002)(70206006)(8676002)(70586007)(336012)(83380400001)(8936002)(6862004)(107886003)(6512007)(26005)(40460700003)(5660300002)(186003)(6506007)(53546011)(2616005)(33656002)(86362001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2022 08:31:24.7396
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 47f02e93-0441-491c-71c3-08da0d70aeda
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	DB5EUR03FT003.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4032
 
-Instead of repeating similar data multiple times use a single source
-file and a generator script for producing prototypes and call sequences
-of the hypercalls.
+Hi Stefano,
 
-As the script already knows the number of parameters used add generating
-a macro for populating an array with the number of parameters per
-hypercall.
+Thanks a lot for the detailed answers.
 
-The priorities for the specific hypercalls are based on two benchamrks
-performed in guests (PV and PVH):
+> On 24 Mar 2022, at 03:05, Stefano Stabellini <sstabellini@kernel.org> wro=
+te:
+>=20
+> On Wed, 23 Mar 2022, Bertrand Marquis wrote:
+>>> On 22 Mar 2022, at 21:28, Stefano Stabellini <sstabellini@kernel.org> w=
+rote:
+>>>=20
+>>> From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+>>>=20
+>>> The first 32 bytes of zImage are NOPs. When CONFIG_EFI is enabled in th=
+e
+>>> kernel, certain versions of Linux will use an UNPREDICATABLE NOP
+>>> encoding, sometimes resulting in an unbootable kernel. Whether the
+>>> resulting kernel is bootable or not depends on the processor. See commi=
+t
+>>> a92882a4d270 in the Linux kernel for all the details.
+>>>=20
+>>> All kernel releases starting from Linux 4.9 without commit a92882a4d270
+>>> are affected.
+>>=20
+>> Can you confirm if those kernels are also affected when started natively=
+ ?
+>=20
+> Theoretically yes, but in practice only booting on Xen is affected
+> because:
+>=20
+> - the issue cannot happen when booting from u-boot because u-boot sets
+>  the "Z" bit
+> - the issue cannot happen when booting with QEMU -kernel because it also
+>  sets "Z"
+> - older bootloaders on native skip the first 32 bytes of the start
+>  address, which also masks this problem
+>=20
+> Thus, in practice, I have no idea how one could reproduce the problem on
+> native.
+>=20
+> This info is in the commit message a92882a4d270 on Linux and in-code
+> comments in the kernel.
 
-- make -j 4 of the Xen hypervisor (resulting in cpu load with lots of
-  processes created)
-- scp of a large file to the guest (network load)
+If uboot is setting we can consider that we have a behaviour equivalent to
+a native boot.
+Could you add something in the comment in your patch to state that the Z
+flag is also set by uboot ?
+This will help in the future to remember why it is ok to have that as the
+current comment could make one think that this is something only done by
+Xen.
 
-With a small additional debug patch applied the number of the
-different hypercalls in the guest and in dom0 (for looking at backend
-activity related hypercalls) were counted while the benchmark in domU
-was running:
+>=20
+>=20
+>>> Fortunately there is a simple workaround: setting the "Z" bit in CPSR
+>>> make it so those invalid NOP instructions are never executed. That is
+>>> because the instruction is conditional (not equal). So, on QEMU at
+>>> least, the instruction will end up to be ignored and not generate an
+>>> exception. Setting the "Z" bit makes those kernel versions bootable
+>>> again and it is harmless in the other cases.
+>>=20
+>> I agree with Jan here. This will never be set or should not be expected
+>> to be set by anyone when started.
+>> It feels to me that we are introducing an ack for a temporary issue in
+>> Linux which will makes us derive from the behaviour that could be
+>> expected on native hardware.
+>>=20
+>> Could you give more details on how blocking this is ?=20
+>=20
+> Without this change, none of the Debian arm32 kernels boot on Xen after
+> Jessie (on QEMU).
 
-PV-hypercall    PV-guest build   PV-guest scp    dom0 build     dom0 scp
-mmu_update           186175729           2865         20936        33725
-stack_switch           1273311          62381        108589       270764
-multicall              2182803             50           302          524
-update_va_mapping       571868             10            60           80
-xen_version              73061            850           859         5432
-grant_table_op               0              0         35557       139110
-iret                  75673006         484132        268157       757958
-vcpu_op                 453037          71199        138224       334988
-set_segment_base       1650249          62387        108645       270823
-mmuext_op             11225681            188          7239         3426
-sched_op                280153         134645         70729       137943
-event_channel_op        192327          66204         71409       214191
-physdev_op                   0              0          7721         4315
-(the dom0 values are for the guest running the build or scp test, so
-dom0 acting as backend)
+Ok
 
-HVM-hypercall   PVH-guest build    PVH-guest scp
-vcpu_op                  277684             2324
-event_channel_op         350233            57383
-(the related dom0 counter values are in the same range as with the test
-running in the PV guest)
+>=20
+>=20
+>> Is the kernel update with the fix available on any of the affected distr=
+ibutions ?
+>=20
+> None that I could find. I tried Debian Buster, Debian Bullseye, Debian
+> testing and the latest Alpine Linux. Happy to try more if you give me a
+> download link or two.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
----
-V2:
-- split platform_op for doe and compat prefixes (Jan Beulich)
-- add "addline:" directive
-- add priorities to handlers (Jan Beulich)
-V2.1:
-- add missing "delete" statement in awk script
-- optimize case of 2 hypercalls with same priority
-V2.2:
-- avoid asort() function (Michal Orzel)
-V3:
-- drop "addline:" support, as no longer needed
-- enclose call sequence macros in "({ ... })" (Jan Beulich)
-- small style adjustment (Jan Beulich)
-- move generating to xen/include/Makefile (Anthony PERARD)
-V4:
-- generate cf_check attribute for prototype (will be removed in later patch)
-- add Arm-specific variant of physdev_op()
-V5:
-- user $(srctree) (Anthony Perard)
-- specify priority 1 for arm evtchn_op (Julien Grall)
----
- .gitignore                    |   1 +
- xen/include/Makefile          |  13 ++
- xen/include/hypercall-defs.c  | 285 ++++++++++++++++++++++++++++++
- xen/scripts/gen_hypercall.awk | 314 ++++++++++++++++++++++++++++++++++
- 4 files changed, 613 insertions(+)
- create mode 100644 xen/include/hypercall-defs.c
- create mode 100644 xen/scripts/gen_hypercall.awk
+I think the list is long enough to justify the change.
 
-diff --git a/.gitignore b/.gitignore
-index d425be4bd9..c6e5b31b98 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -324,6 +324,7 @@ xen/include/public/public
- xen/include/xen/*.new
- xen/include/xen/acm_policy.h
- xen/include/xen/compile.h
-+xen/include/xen/hypercall-defs.h
- xen/include/xen/lib/x86/cpuid-autogen.h
- xen/test/livepatch/config.h
- xen/test/livepatch/expect_config.h
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index a3c2511f5f..dfc43f9fba 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -77,6 +77,18 @@ $(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/
- 	cat $(filter %.h,$^) >$@.new
- 	mv -f $@.new $@
- 
-+quiet_cmd_genhyp = GEN     $@
-+define cmd_genhyp
-+    awk -f $(srctree)/scripts/gen_hypercall.awk <$< >$@
-+endef
-+
-+all: $(obj)/xen/hypercall-defs.h
-+
-+$(obj)/xen/hypercall-defs.h: $(obj)/hypercall-defs.i $(srctree)/scripts/gen_hypercall.awk FORCE
-+	$(call if_changed,genhyp)
-+
-+targets += xen/hypercall-defs.h
-+
- ifeq ($(XEN_TARGET_ARCH),$(XEN_COMPILE_ARCH))
- 
- all: $(obj)/headers.chk $(obj)/headers99.chk $(obj)/headers++.chk
-@@ -132,3 +144,4 @@ all: lib-x86-all
- endif
- 
- clean-files := compat config generated headers*.chk xen/lib/x86/cpuid-autogen.h
-+clean-files += xen/hypercall-defs.h hypercall-defs.i
-diff --git a/xen/include/hypercall-defs.c b/xen/include/hypercall-defs.c
-new file mode 100644
-index 0000000000..60cbeb18e4
---- /dev/null
-+++ b/xen/include/hypercall-defs.c
-@@ -0,0 +1,285 @@
-+/*
-+ * Hypercall interface description:
-+ * Used by scripts/gen_hypercall.awk to generate hypercall prototypes and call
-+ * sequences.
-+ *
-+ * Syntax is like a prototype, but without return type and without the ";" at
-+ * the end. Pointer types will be automatically converted to use the
-+ * XEN_GUEST_HANDLE_PARAM() macro. Handlers with no parameters just use a
-+ * definition like "fn()".
-+ * Hypercall/function names are without the leading "__HYPERVISOR_"/"do_"
-+ * strings.
-+ *
-+ * The return type of a class of prototypes using the same prefix is set via:
-+ * rettype: <prefix> <type>
-+ * Default return type is "long". A return type for a prefix can be set only
-+ * once and it needs to be set before that prefix is being used via the
-+ * "prefix:" directive.
-+ *
-+ * The prefix of the prototypes is set via a line:
-+ * prefix: <prefix> ...
-+ * Multiple prefixes are possible (restriction see below). Prefixes are without
-+ * a trailing "_". The current prefix settings are active until a new "prefix:"
-+ * line.
-+ *
-+ * Caller macros are suffixed with a selectable name via lines like:
-+ * caller: <suffix>
-+ * When a caller suffix is active, there is only one active prefix allowed.
-+ *
-+ * With a "defhandle:" line it is possible to add a DEFINE_XEN_GUEST_HANDLE()
-+ * to the generated header:
-+ * defhandle: <handle-type> [<type>]
-+ * Without specifying <type> only a DEFINE_XEN_GUEST_HANDLE(<handle-type>)
-+ * will be generated, otherwise it will be a
-+ * __DEFINE_XEN_GUEST_HANDLE(<handle-type>, <type>) being generated. Note that
-+ * the latter will include the related "const" handle "const_<handle-type>".
-+ *
-+ * In order to support using coding style compliant pointers in the
-+ * prototypes it is possible to add translation entries to generate the correct
-+ * handle types:
-+ * handle: <handle-type> <type>
-+ * This will result in the prototype translation from "<type> *" to
-+ * "XEN_GUEST_HANDLE_PARAM(<handle-type>)".
-+ *
-+ * The hypercall handler calling code will be generated from a final table in
-+ * the source file, which is started via the line:
-+ * table: <caller> <caller> ...
-+ * with the <caller>s specifying the designated caller macro of each column of
-+ * the table. Any column of a <caller> not having been set via a "caller:"
-+ * line will be ignored.
-+ * The first column of the table contains the hypercall/prototype, each
-+ * <caller> column contains the prefix for the function to use for that caller.
-+ * A function prefix can be annotated with a priority by adding ":<prio>" to it
-+ * ("1" being the highest priority, higher numbers mean lower priority, no
-+ * priority specified is the lowest priority). The generated code will try to
-+ * achieve better performance for calling high priority handlers.
-+ * A column not being supported by a <caller> is marked with "-". Lines with all
-+ * entries being "-" after removal of inactive <caller> columns are ignored.
-+ *
-+ * This file is being preprocessed using $(CPP), so #ifdef CONFIG_* conditionals
-+ * are possible.
-+ */
-+
-+#ifdef CONFIG_HVM
-+#define PREFIX_hvm hvm
-+#else
-+#define PREFIX_hvm
-+#endif
-+
-+#ifdef CONFIG_COMPAT
-+#define PREFIX_compat compat
-+rettype: compat int
-+#else
-+#define PREFIX_compat
-+#endif
-+
-+#ifdef CONFIG_ARM
-+#define PREFIX_dep dep
-+#define PREFIX_do_arm do_arm
-+rettype: do_arm int
-+#else
-+#define PREFIX_dep
-+#define PREFIX_do_arm
-+#endif
-+
-+handle: uint unsigned int
-+handle: const_void const void
-+handle: const_char const char
-+
-+#ifdef CONFIG_COMPAT
-+defhandle: multicall_entry_compat_t
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+defhandle: compat_platform_op_t
-+#endif
-+#endif
-+#ifdef CONFIG_PV32
-+defhandle: trap_info_compat_t
-+defhandle: physdev_op_compat_t
-+#endif
-+
-+prefix: do PREFIX_hvm PREFIX_compat PREFIX_do_arm
-+physdev_op(int cmd, void *arg)
-+
-+prefix: do PREFIX_hvm PREFIX_compat
-+#if defined(CONFIG_GRANT_TABLE) || defined(CONFIG_PV_SHIM)
-+grant_table_op(unsigned int cmd, void *uop, unsigned int count)
-+#endif
-+
-+prefix: do PREFIX_hvm
-+memory_op(unsigned long cmd, void *arg)
-+
-+prefix: do PREFIX_compat
-+xen_version(int cmd, void *arg)
-+vcpu_op(int cmd, unsigned int vcpuid, void *arg)
-+sched_op(int cmd, void *arg)
-+xsm_op(void *op)
-+callback_op(int cmd, const void *arg)
-+#ifdef CONFIG_ARGO
-+argo_op(unsigned int cmd, void *arg1, void *arg2, unsigned long arg3, unsigned long arg4)
-+#endif
-+#ifdef CONFIG_KEXEC
-+kexec_op(unsigned int op, void *uarg)
-+#endif
-+#ifdef CONFIG_PV
-+iret()
-+nmi_op(unsigned int cmd, void *arg)
-+#ifdef CONFIG_XENOPROF
-+xenoprof_op(int op, void *arg)
-+#endif
-+#endif /* CONFIG_PV */
-+
-+#ifdef CONFIG_COMPAT
-+prefix: compat
-+set_timer_op(uint32_t lo, int32_t hi)
-+multicall(multicall_entry_compat_t *call_list, uint32_t nr_calls)
-+memory_op(unsigned int cmd, void *arg)
-+#ifdef CONFIG_IOREQ_SERVER
-+dm_op(domid_t domid, unsigned int nr_bufs, void *bufs)
-+#endif
-+mmuext_op(void *arg, unsigned int count, uint *pdone, unsigned int foreigndom)
-+#ifdef CONFIG_PV32
-+set_trap_table(trap_info_compat_t *traps)
-+set_gdt(unsigned int *frame_list, unsigned int entries)
-+set_callbacks(unsigned long event_selector, unsigned long event_address, unsigned long failsafe_selector, unsigned long failsafe_address)
-+update_descriptor(uint32_t pa_lo, uint32_t pa_hi, uint32_t desc_lo, uint32_t desc_hi)
-+update_va_mapping(unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags)
-+physdev_op_compat(physdev_op_compat_t *uop)
-+update_va_mapping_otherdomain(unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags, domid_t domid)
-+#endif
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+platform_op(compat_platform_op_t *u_xenpf_op)
-+#endif
-+#endif /* CONFIG_COMPAT */
-+
-+#if defined(CONFIG_PV) || defined(CONFIG_ARM)
-+prefix: do PREFIX_dep
-+event_channel_op_compat(evtchn_op_t *uop)
-+physdev_op_compat(physdev_op_t *uop)
-+/* Legacy hypercall (as of 0x00030101). */
-+sched_op_compat(int cmd, unsigned long arg)
-+#endif
-+
-+prefix: do
-+set_timer_op(s_time_t timeout)
-+console_io(unsigned int cmd, unsigned int count, char *buffer)
-+vm_assist(unsigned int cmd, unsigned int type)
-+event_channel_op(int cmd, void *arg)
-+mmuext_op(mmuext_op_t *uops, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
-+multicall(multicall_entry_t *call_list, unsigned int nr_calls)
-+#ifdef CONFIG_PV
-+mmu_update(mmu_update_t *ureqs, unsigned int count, unsigned int *pdone, unsigned int foreigndom)
-+stack_switch(unsigned long ss, unsigned long esp)
-+fpu_taskswitch(int set)
-+set_debugreg(int reg, unsigned long value)
-+get_debugreg(int reg)
-+set_segment_base(unsigned int which, unsigned long base)
-+mca(xen_mc_t *u_xen_mc)
-+set_trap_table(const_trap_info_t *traps)
-+set_gdt(xen_ulong_t *frame_list, unsigned int entries)
-+set_callbacks(unsigned long event_address, unsigned long failsafe_address, unsigned long syscall_address)
-+update_descriptor(uint64_t gaddr, seg_desc_t desc)
-+update_va_mapping(unsigned long va, uint64_t val64, unsigned long flags)
-+update_va_mapping_otherdomain(unsigned long va, uint64_t val64, unsigned long flags, domid_t domid)
-+#endif
-+#ifdef CONFIG_IOREQ_SERVER
-+dm_op(domid_t domid, unsigned int nr_bufs, xen_dm_op_buf_t *bufs)
-+#endif
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+sysctl(xen_sysctl_t *u_sysctl)
-+domctl(xen_domctl_t *u_domctl)
-+paging_domctl_cont(xen_domctl_t *u_domctl)
-+platform_op(xen_platform_op_t *u_xenpf_op)
-+#endif
-+#ifdef CONFIG_HVM
-+hvm_op(unsigned long op, void *arg)
-+#endif
-+#ifdef CONFIG_HYPFS
-+hypfs_op(unsigned int cmd, const char *arg1, unsigned long arg2, void *arg3, unsigned long arg4)
-+#endif
-+#ifdef CONFIG_X86
-+xenpmu_op(unsigned int op, xen_pmu_params_t *arg)
-+#endif
-+
-+#ifdef CONFIG_PV
-+caller: pv64
-+#ifdef CONFIG_PV32
-+caller: pv32
-+#endif
-+#endif
-+#if defined(CONFIG_HVM) && defined(CONFIG_X86)
-+caller: hvm64
-+#ifdef CONFIG_COMPAT
-+caller: hvm32
-+#endif
-+#endif
-+#ifdef CONFIG_ARM
-+caller: arm
-+#endif
-+
-+table:                             pv32     pv64     hvm32    hvm64    arm
-+set_trap_table                     compat   do       -        -        -
-+mmu_update                         do:1     do:1     -        -        -
-+set_gdt                            compat   do       -        -        -
-+stack_switch                       do:2     do:2     -        -        -
-+set_callbacks                      compat   do       -        -        -
-+fpu_taskswitch                     do       do       -        -        -
-+sched_op_compat                    do       do       -        -        dep
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+platform_op                        compat   do       compat   do       do
-+#endif
-+set_debugreg                       do       do       -        -        -
-+get_debugreg                       do       do       -        -        -
-+update_descriptor                  compat   do       -        -        -
-+memory_op                          compat   do       hvm      hvm      do
-+multicall                          compat:2 do:2     compat   do       do
-+update_va_mapping                  compat   do       -        -        -
-+set_timer_op                       compat   do       compat   do       -
-+event_channel_op_compat            do       do       -        -        dep
-+xen_version                        compat   do       compat   do       do
-+console_io                         do       do       do       do       do
-+physdev_op_compat                  compat   do       -        -        dep
-+#if defined(CONFIG_GRANT_TABLE) || defined(CONFIG_PV_SHIM)
-+grant_table_op                     compat   do       hvm      hvm      do
-+#endif
-+vm_assist                          do       do       do       do       do
-+update_va_mapping_otherdomain      compat   do       -        -        -
-+iret                               compat:1 do:1     -        -        -
-+vcpu_op                            compat   do       compat:1 do:1     do
-+set_segment_base                   do:2     do:2     -        -        -
-+#ifdef CONFIG_PV
-+mmuext_op                          compat:2 do:2     compat   do       -
-+#endif
-+xsm_op                             compat   do       compat   do       do
-+nmi_op                             compat   do       -        -        -
-+sched_op                           compat   do       compat   do       do
-+callback_op                        compat   do       -        -        -
-+#ifdef CONFIG_XENOPROF
-+xenoprof_op                        compat   do       -        -        -
-+#endif
-+event_channel_op                   do       do       do:1     do:1     do:1
-+physdev_op                         compat   do       hvm      hvm      do_arm
-+#ifdef CONFIG_HVM
-+hvm_op                             do       do       do       do       do
-+#endif
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+sysctl                             do       do       do       do       do
-+domctl                             do       do       do       do       do
-+#endif
-+#ifdef CONFIG_KEXEC
-+kexec_op                           compat   do       -        -        -
-+#endif
-+tmem_op                            -        -        -        -        -
-+#ifdef CONFIG_ARGO
-+argo_op                            compat   do       compat   do       do
-+#endif
-+xenpmu_op                          do       do       do       do       -
-+#ifdef CONFIG_IOREQ_SERVER
-+dm_op                              compat   do       compat   do       do
-+#endif
-+#ifdef CONFIG_HYPFS
-+hypfs_op                           do       do       do       do       do
-+#endif
-+mca                                do       do       -        -        -
-+#ifndef CONFIG_PV_SHIM_EXCLUSIVE
-+paging_domctl_cont                 do       do       do       do       -
-+#endif
-diff --git a/xen/scripts/gen_hypercall.awk b/xen/scripts/gen_hypercall.awk
-new file mode 100644
-index 0000000000..403758be21
---- /dev/null
-+++ b/xen/scripts/gen_hypercall.awk
-@@ -0,0 +1,314 @@
-+# awk script to generate hypercall handler prototypes and a macro for doing
-+# the calls of the handlers inside a switch() statement.
-+
-+BEGIN {
-+    printf("/* Generated file, do not edit! */\n\n");
-+    e = 0;
-+    n = 0;
-+    p = 0;
-+    nc = 0;
-+}
-+
-+# Issue error to stderr
-+function do_err(msg) {
-+    print "Error: "msg": "$0 >"/dev/stderr";
-+    exit 1;
-+}
-+
-+# Generate handler call
-+function do_call(f, p,    i) {
-+    printf("            ret = %s_%s(", pre[f, p], fn[f]);
-+    for (i = 1; i <= n_args[f]; i++) {
-+        if (i > 1)
-+            printf(", ");
-+        if (ptr[f, i])
-+            printf("(XEN_GUEST_HANDLE_PARAM(%s)){ _p(a%d) }", typ[f, i], i);
-+        else
-+            printf("(%s)(a%d)", typ[f, i], i);
-+    }
-+    printf("); \\\n");
-+}
-+
-+# Generate case statement for call
-+function do_case(f, p) {
-+    printf("        case __HYPERVISOR_%s: \\\n", fn[f]);
-+    do_call(f, p);
-+    printf("            break; \\\n");
-+}
-+
-+# Generate switch statement for calling handlers
-+function do_switch(ca, p,    i) {
-+    printf("        switch ( num ) \\\n");
-+    printf("        { \\\n");
-+    for (i = 1; i <= nc; i++)
-+        if (call[i] == ca && call_prio[i] == p)
-+            do_case(call_fn[i], call_p[i]);
-+    printf("        default: \\\n");
-+    printf("            ret = -ENOSYS; \\\n");
-+    printf("            break; \\\n");
-+    printf("        } \\\n");
-+}
-+
-+function rest_of_line(par,    i, val) {
-+    val = $(par);
-+    for (i = par + 1; i <= NF; i++)
-+        val = val " " $(i);
-+    return val;
-+}
-+
-+# Handle comments (multi- and single line)
-+$1 == "/*" {
-+    comment = 1;
-+}
-+comment == 1 {
-+    if ($(NF) == "*/") comment = 0;
-+    next;
-+}
-+
-+# Skip preprocessing artefacts
-+$1 == "extern" {
-+    next;
-+}
-+/^#/ {
-+    next;
-+}
-+
-+# Drop empty lines
-+NF == 0 {
-+    next;
-+}
-+
-+# Handle "handle:" line
-+$1 == "handle:" {
-+    if (NF < 3)
-+        do_err("\"handle:\" requires at least two parameters");
-+    val = rest_of_line(3);
-+    xlate[val] = $2;
-+    next;
-+}
-+
-+# Handle "defhandle:" line
-+$1 == "defhandle:" {
-+    if (NF < 2)
-+        do_err("\"defhandle:\" requires at least one parameter");
-+    e++;
-+    if (NF == 2) {
-+        emit[e] = sprintf("DEFINE_XEN_GUEST_HANDLE(%s);", $2);
-+    } else {
-+        val = rest_of_line(3);
-+        emit[e] = sprintf("__DEFINE_XEN_GUEST_HANDLE(%s, %s);", $2, val);
-+        xlate[val] = $2;
-+    }
-+    next;
-+}
-+
-+# Handle "rettype:" line
-+$1 == "rettype:" {
-+    if (NF < 3)
-+        do_err("\"rettype:\" requires at least two parameters");
-+    if ($2 in rettype)
-+        do_err("rettype can be set only once for each prefix");
-+    rettype[$2] = rest_of_line(3);
-+    next;
-+}
-+
-+# Handle "caller:" line
-+$1 == "caller:" {
-+    caller[$2] = 1;
-+    next;
-+}
-+
-+# Handle "prefix:" line
-+$1 == "prefix:" {
-+    p = NF - 1;
-+    for (i = 2; i <= NF; i++) {
-+        prefix[i - 1] = $(i);
-+        if (!(prefix[i - 1] in rettype))
-+            rettype[prefix[i - 1]] = "long";
-+    }
-+    next;
-+}
-+
-+# Handle "table:" line
-+$1 == "table:" {
-+    table = 1;
-+    for (i = 2; i <= NF; i++)
-+        col[i - 1] = $(i);
-+    n_cols = NF - 1;
-+    next;
-+}
-+
-+# Handle table definition line
-+table == 1 {
-+    if (NF != n_cols + 1)
-+        do_err("Table definition line has wrong number of fields");
-+    for (c = 1; c <= n_cols; c++) {
-+        if (caller[col[c]] != 1)
-+            continue;
-+        if ($(c + 1) == "-")
-+            continue;
-+        pref = $(c + 1);
-+        idx = index(pref, ":");
-+        if (idx == 0)
-+            prio = 100;
-+        else {
-+            prio = substr(pref, idx + 1) + 0;
-+            pref = substr(pref, 1, idx - 1);
-+            if (prio >= 100 || prio < 1)
-+                do_err("Priority must be in the range 1..99");
-+        }
-+        fnd = 0;
-+        for (i = 1; i <= n; i++) {
-+            if (fn[i] != $1)
-+                continue;
-+            for (j = 1; j <= n_pre[i]; j++) {
-+                if (pre[i, j] == pref) {
-+                    prios[col[c], prio]++;
-+                    if (prios[col[c], prio] == 1) {
-+                        n_prios[col[c]]++;
-+                        prio_list[col[c], n_prios[col[c]]] = prio;
-+                        prio_mask[col[c], prio] = "(1ULL << __HYPERVISOR_"$1")";
-+                    } else
-+                        prio_mask[col[c], prio] = prio_mask[col[c], prio] " | (1ULL << __HYPERVISOR_"$1")";
-+                    nc++;
-+                    call[nc] = col[c];
-+                    call_fn[nc] = i;
-+                    call_p[nc] = j;
-+                    call_prio[nc] = prio;
-+                    fnd = 1;
-+                }
-+            }
-+        }
-+        if (fnd == 0)
-+            do_err("No prototype for prefix/hypercall combination");
-+    }
-+    next;
-+}
-+
-+# Prototype line
-+{
-+    bro = index($0, "(");
-+    brc = index($0, ")");
-+    if (bro < 2 || brc < bro)
-+        do_err("No valid prototype line");
-+    n++;
-+    fn[n] = substr($0, 1, bro - 1);
-+    n_pre[n] = p;
-+    for (i = 1; i <= p; i++)
-+        pre[n, i] = prefix[i];
-+    args = substr($0, bro + 1, brc - bro - 1);
-+    n_args[n] = split(args, a, ",");
-+    if (n_args[n] > 5)
-+        do_err("Too many parameters");
-+    for (i = 1; i <= n_args[n]; i++) {
-+        sub("^ *", "", a[i]);         # Remove leading white space
-+        sub(" +", " ", a[i]);         # Replace multiple spaces with single ones
-+        sub(" *$", "", a[i]);         # Remove trailing white space
-+        ptr[n, i] = index(a[i], "*"); # Is it a pointer type?
-+        sub("[*]", "", a[i]);         # Remove "*"
-+        if (index(a[i], " ") == 0)
-+            do_err("Parameter with no type or no name");
-+        typ[n, i] = a[i];
-+        sub(" [^ ]+$", "", typ[n, i]);    # Remove parameter name
-+        if (ptr[n, i] && (typ[n, i] in xlate))
-+            typ[n, i] = xlate[typ[n, i]];
-+        arg[n, i] = a[i];
-+        sub("^([^ ]+ )+", "", arg[n, i]); # Remove parameter type
-+    }
-+}
-+
-+# Generate the output
-+END {
-+    # Verbatim generated lines
-+    for (i = 1; i <= e; i++)
-+        printf("%s\n", emit[i]);
-+    printf("\n");
-+    # Generate prototypes
-+    for (i = 1; i <= n; i++) {
-+        for (p = 1; p <= n_pre[i]; p++) {
-+            printf("%s cf_check %s_%s(", rettype[pre[i, p]], pre[i, p], fn[i]);
-+            if (n_args[i] == 0)
-+                printf("void");
-+            else
-+                for (j = 1; j <= n_args[i]; j++) {
-+                    if (j > 1)
-+                        printf(", ");
-+                    if (ptr[i, j])
-+                        printf("XEN_GUEST_HANDLE_PARAM(%s)", typ[i, j]);
-+                    else
-+                        printf("%s", typ[i, j]);
-+                    printf(" %s", arg[i, j]);
-+                }
-+            printf(");\n");
-+        }
-+    }
-+    # Generate call sequences and args array contents
-+    for (ca in caller) {
-+        if (caller[ca] != 1)
-+            continue;
-+        need_mask = 0;
-+        for (pl = 1; pl <= n_prios[ca]; pl++) {
-+            for (pll = pl; pll > 1; pll--) {
-+                if (prio_list[ca, pl] > p_list[pll - 1])
-+                    break;
-+                else
-+                    p_list[pll] = p_list[pll - 1];
-+            }
-+            p_list[pll] = prio_list[ca, pl];
-+            # If any prio but the default one has more than 1 entry we need "mask"
-+            if (p_list[pll] != 100 && prios[ca, p_list[pll]] > 1)
-+                need_mask = 1;
-+        }
-+        printf("\n");
-+        printf("#define call_handlers_%s(num, ret, a1, a2, a3, a4, a5) \\\n", ca);
-+        printf("({ \\\n");
-+        if (need_mask)
-+            printf("    uint64_t mask = 1ULL << num; \\\n");
-+        printf("    ");
-+        for (pl = 1; pl <= n_prios[ca]; pl++) {
-+            if (prios[ca, p_list[pl]] > 1) {
-+                if (pl < n_prios[ca]) {
-+                    printf("    if ( likely(mask & (%s)) ) \\\n", prio_mask[ca, p_list[pl]]);
-+                    printf("    { \\\n");
-+                }
-+                if (prios[ca, p_list[pl]] == 2) {
-+                    fnd = 0;
-+                    for (i = 1; i <= nc; i++)
-+                        if (call[i] == ca && call_prio[i] == p_list[pl]) {
-+                            fnd++;
-+                            if (fnd == 1)
-+                                printf("        if ( num == __HYPERVISOR_%s ) \\\n", fn[call_fn[i]]);
-+                            else
-+                                printf("        else \\\n");
-+                            do_call(call_fn[i], call_p[i]);
-+                        }
-+                } else {
-+                    do_switch(ca, p_list[pl]);
-+                }
-+                if (pl < n_prios[ca])
-+                    printf("    } \\\n");
-+            } else {
-+                for (i = 1; i <= nc; i++)
-+                    if (call[i] == ca && call_prio[i] == p_list[pl]) {
-+                        printf("if ( likely(num == __HYPERVISOR_%s) ) \\\n", fn[call_fn[i]]);
-+                        do_call(call_fn[i], call_p[i]);
-+                    }
-+            }
-+            if (pl < n_prios[ca] || prios[ca, p_list[pl]] <= 2)
-+                printf("    else \\\n");
-+        }
-+        if (prios[ca, p_list[n_prios[ca]]] <= 2) {
-+            printf("\\\n");
-+            printf("        ret = -ENOSYS; \\\n");
-+        }
-+        printf("})\n");
-+        delete p_list;
-+        printf("\n");
-+        printf("#define hypercall_args_%s \\\n", ca);
-+        printf("{ \\\n");
-+        for (i = 1; i <= nc; i++)
-+            if (call[i] == ca)
-+                printf("[__HYPERVISOR_%s] = %d, \\\n", fn[call_fn[i]], n_args[call_fn[i]]);
-+        printf("}\n");
-+    }
-+}
--- 
-2.34.1
+>=20
+>=20
+>> Depending on the answers I think we could for example have a config arou=
+nd
+>> this to flag it as workaround for a specific guest issue so that this is=
+ only
+>> activated when needed.
+>=20
+> Also note that this alternative workaround also solves the problem,
+> however it has other drawbacks as Julien described:
+> [1] https://marc.info/?l=3Dxen-devel&m=3D164774063802402
+
+Definitely setting the Z bit is better I think.
+
+>=20
+>=20
+> My take on this is the following. PSR_GUEST32_INIT is not part of the
+> ABI so this cannot be considered an ABI change.
+>=20
+> But in any case, given that without this change (or another change [1])
+> most of the kernels out there don't work, is there a point in discussing
+> ABI breakages? Basically nothing works right now :-D
+>=20
+> I think it makes sense to think whether this change could cause a kernel
+> that used to boot, not to boot anymore. However, I don't think is
+> possible because:
+>=20
+> - we only support zImage on arm32 and "Z" works well with it
+> - both u-boot and qemu -kernel set "Z" so we would already now if
+>  something broke
+>=20
+
+Agree so please add that both in the comment and in the commit message.
+
+Cheers
+Bertrand
+
+>=20
+>=20
+>>> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+>>> ---
+>>> Changes in v2:
+>>> - improve commit message
+>>> - add in-code comment
+>>> - move PSR_Z to the beginning
+>>> ---
+>>> xen/include/public/arch-arm.h | 8 +++++++-
+>>> 1 file changed, 7 insertions(+), 1 deletion(-)
+>>>=20
+>>> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-ar=
+m.h
+>>> index 94b31511dd..81cee95f14 100644
+>>> --- a/xen/include/public/arch-arm.h
+>>> +++ b/xen/include/public/arch-arm.h
+>>> @@ -361,6 +361,7 @@ typedef uint64_t xen_callback_t;
+>>> #define PSR_DBG_MASK    (1<<9)        /* arm64: Debug Exception mask */
+>>> #define PSR_IT_MASK     (0x0600fc00)  /* Thumb If-Then Mask */
+>>> #define PSR_JAZELLE     (1<<24)       /* Jazelle Mode */
+>>> +#define PSR_Z           (1<<30)       /* Zero condition flag */
+>>>=20
+>>> /* 32 bit modes */
+>>> #define PSR_MODE_USR 0x10
+>>> @@ -383,7 +384,12 @@ typedef uint64_t xen_callback_t;
+>>> #define PSR_MODE_EL1t 0x04
+>>> #define PSR_MODE_EL0t 0x00
+>>>=20
+>>> -#define PSR_GUEST32_INIT  (PSR_ABT_MASK|PSR_FIQ_MASK|PSR_IRQ_MASK|PSR_=
+MODE_SVC)
+>>> +/*
+>>> + * We set PSR_Z to be able to boot Linux kernel versions with an inval=
+id
+>>> + * encoding of the first 8 NOP instructions. See commit a92882a4d270 i=
+n
+>>> + * Linux.
+>>> + */
+>>> +#define PSR_GUEST32_INIT  (PSR_Z|PSR_ABT_MASK|PSR_FIQ_MASK|PSR_IRQ_MAS=
+K|PSR_MODE_SVC)
+>>> #define PSR_GUEST64_INIT (PSR_ABT_MASK|PSR_FIQ_MASK|PSR_IRQ_MASK|PSR_MO=
+DE_EL1h)
+>>>=20
+>>> #define SCTLR_GUEST_INIT    xen_mk_ullong(0x00c50078)
+>>> --=20
+>>> 2.25.1
+>>>=20
+>>=20
 
 
