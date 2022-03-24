@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7753C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 14:02:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294329.500422 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60351C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 14:02:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.294332.500446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXO27-0008PI-Kq; Thu, 24 Mar 2022 14:01:47 +0000
+	id 1nXO29-0000Yv-Ka; Thu, 24 Mar 2022 14:01:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294329.500422; Thu, 24 Mar 2022 14:01:47 +0000
+Received: by outflank-mailman (output) from mailman id 294332.500446; Thu, 24 Mar 2022 14:01:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXO27-0008Ns-8T; Thu, 24 Mar 2022 14:01:47 +0000
-Received: by outflank-mailman (input) for mailman id 294329;
- Thu, 24 Mar 2022 14:01:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nXO29-0000TH-56; Thu, 24 Mar 2022 14:01:49 +0000
+Received: by outflank-mailman (input) for mailman id 294332;
+ Thu, 24 Mar 2022 14:01:47 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+IHq=UD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nXO25-0008Hr-IX
- for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 14:01:45 +0000
+ id 1nXO27-0008Hw-5Q
+ for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 14:01:47 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ef975ca7-ab7a-11ec-8fbc-03012f2f19d4;
- Thu, 24 Mar 2022 15:01:43 +0100 (CET)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f07a12d9-ab7a-11ec-a405-831a346695d4;
+ Thu, 24 Mar 2022 15:01:45 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 58A422129B;
- Thu, 24 Mar 2022 14:01:43 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id DC650215FE;
+ Thu, 24 Mar 2022 14:01:44 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0DEAF13B2F;
- Thu, 24 Mar 2022 14:01:43 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8FA4813B2F;
+ Thu, 24 Mar 2022 14:01:44 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 0IxGAsd5PGKeegAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 14:01:43 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id GFPhIch5PGKeegAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 14:01:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ef975ca7-ab7a-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: f07a12d9-ab7a-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1648130503; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1648130504; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=spmhNqd3EISKD0rxYFhHwLe2HksoGzLziDkQw9Igros=;
-	b=jqd+1y/SRwWDM1FoBzK70m1D9fPomdFVgimmuDjLk9DdsM/cMrGVc3u62O95S6Rxwpj4kF
-	u/T99nO+lj20S1gSNYYKxzlEHGlxbNGPZfnOQHNMq9tpaJ2wIS8/+Txx3TSSgF7gwMCKVI
-	fOEr+bY5iUdIfsLHFaGR3S7zqUMqnic=
+	bh=DrpgpTGkFEv/IeXFwA2PDbf2FH7rXe4534vSynZIag4=;
+	b=ZTqoXlzQ12dWOK2DiSHvJXtYu8SH7dU4/NIZARIzGInoJNPT52yEyzAKCxemSu4lyDwVhh
+	X+Q+E2GXY7rAUrmz2e33iSR6EflThN18jyIj7XmcdWxXrSJUThKdyzTURQEQkTdYhi268V
+	sr6V61emSUFo/7M3gWiuiqUgRrRG7uc=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -76,282 +76,445 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v6 1/9] xen: move do_vcpu_op() to arch specific code
-Date: Thu, 24 Mar 2022 15:01:31 +0100
-Message-Id: <20220324140139.5899-2-jgross@suse.com>
+Subject: [PATCH v6 6/9] xen: use generated prototypes for hypercall handlers
+Date: Thu, 24 Mar 2022 15:01:36 +0100
+Message-Id: <20220324140139.5899-7-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220324140139.5899-1-jgross@suse.com>
 References: <20220324140139.5899-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The entry point used for the vcpu_op hypercall on Arm is different
-from the one on x86 today, as some of the common sub-ops are not
-supported on Arm. The Arm specific handler filters out the not
-supported sub-ops and then calls the common handler. This leads to the
-weird call hierarchy:
+Remove the hypercall handler's prototypes in the related header files
+and use the generated ones instead.
 
-  do_arm_vcpu_op()
-    do_vcpu_op()
-      arch_do_vcpu_op()
-
-Clean this up by renaming do_vcpu_op() to common_vcpu_op() and
-arch_do_vcpu_op() in each architecture to do_vcpu_op(). This way one
-of above calls can be avoided without restricting any potential
-future use of common sub-ops for Arm.
+Some handlers having been static before need to be made globally
+visible.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Julien Grall <jgrall@amazon.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-V4:
-- don't remove HYPERCALL_ARM()
-V4.1:
-- add missing cf_check (Andrew Cooper)
-V5:
-- use v instead of current (Julien Grall)
----
- xen/arch/arm/domain.c                | 15 ++++++++-------
- xen/arch/arm/include/asm/hypercall.h |  2 --
- xen/arch/arm/traps.c                 |  2 +-
- xen/arch/x86/domain.c                | 12 ++++++++----
- xen/arch/x86/include/asm/hypercall.h |  2 +-
- xen/arch/x86/x86_64/domain.c         | 18 +++++++++++++-----
- xen/common/compat/domain.c           | 15 ++++++---------
- xen/common/domain.c                  | 12 ++++--------
- xen/include/xen/hypercall.h          |  2 +-
- 9 files changed, 42 insertions(+), 38 deletions(-)
+ xen/arch/arm/include/asm/hypercall.h |   1 -
+ xen/arch/x86/hvm/hypercall.c         |   7 +-
+ xen/arch/x86/include/asm/hypercall.h | 141 ---------------------
+ xen/include/xen/hypercall.h          | 177 +--------------------------
+ 4 files changed, 5 insertions(+), 321 deletions(-)
 
-diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-index 8110c1df86..2f8eaab7b5 100644
---- a/xen/arch/arm/domain.c
-+++ b/xen/arch/arm/domain.c
-@@ -1079,23 +1079,24 @@ void arch_dump_domain_info(struct domain *d)
- }
- 
- 
--long do_arm_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
-+long do_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
-+    struct domain *d = current->domain;
-+    struct vcpu *v;
-+
-+    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
-+        return -ENOENT;
-+
-     switch ( cmd )
-     {
-         case VCPUOP_register_vcpu_info:
-         case VCPUOP_register_runstate_memory_area:
--            return do_vcpu_op(cmd, vcpuid, arg);
-+            return common_vcpu_op(cmd, v, arg);
-         default:
-             return -EINVAL;
-     }
- }
- 
--long arch_do_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
--{
--    return -ENOSYS;
--}
--
- void arch_dump_vcpu_info(struct vcpu *v)
- {
-     gic_dump_info(v);
 diff --git a/xen/arch/arm/include/asm/hypercall.h b/xen/arch/arm/include/asm/hypercall.h
-index 39d2e7889d..fac4d60f17 100644
+index 8182895358..ccd26c5184 100644
 --- a/xen/arch/arm/include/asm/hypercall.h
 +++ b/xen/arch/arm/include/asm/hypercall.h
-@@ -4,8 +4,6 @@
- #include <public/domctl.h> /* for arch_do_domctl */
- int do_arm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+@@ -6,7 +6,6 @@
+ #define __ASM_ARM_HYPERCALL_H__
  
--long do_arm_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg);
--
+ #include <public/domctl.h> /* for arch_do_domctl */
+-int do_arm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
  long subarch_do_domctl(struct xen_domctl *domctl, struct domain *d,
                         XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+diff --git a/xen/arch/x86/hvm/hypercall.c b/xen/arch/x86/hvm/hypercall.c
+index 3a35543997..a9c9ad721f 100644
+--- a/xen/arch/x86/hvm/hypercall.c
++++ b/xen/arch/x86/hvm/hypercall.c
+@@ -31,8 +31,7 @@
+ #include <public/hvm/hvm_op.h>
+ #include <public/hvm/params.h>
  
-diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-index 43f30747cf..e906bb4a89 100644
---- a/xen/arch/arm/traps.c
-+++ b/xen/arch/arm/traps.c
-@@ -1380,7 +1380,7 @@ static arm_hypercall_t arm_hypercall_table[] = {
- #endif
-     HYPERCALL(multicall, 2),
-     HYPERCALL(platform_op, 1),
--    HYPERCALL_ARM(vcpu_op, 3),
-+    HYPERCALL(vcpu_op, 3),
-     HYPERCALL(vm_assist, 2),
- #ifdef CONFIG_ARGO
-     HYPERCALL(argo_op, 5),
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index a5048ed654..d566fc82b4 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -1489,11 +1489,15 @@ int arch_vcpu_reset(struct vcpu *v)
-     return 0;
+-static long cf_check hvm_memory_op(
+-    unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++long cf_check hvm_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+     long rc;
+ 
+@@ -52,7 +51,7 @@ static long cf_check hvm_memory_op(
  }
  
--long
--arch_do_vcpu_op(
--    int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-+long cf_check do_vcpu_op(int cmd, unsigned int vcpuid,
-+                         XEN_GUEST_HANDLE_PARAM(void) arg)
+ #ifdef CONFIG_GRANT_TABLE
+-static long cf_check hvm_grant_table_op(
++long cf_check hvm_grant_table_op(
+     unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) uop, unsigned int count)
  {
-     long rc = 0;
-+    struct domain *d = current->domain;
-+    struct vcpu *v;
-+
-+    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
-+        return -ENOENT;
- 
      switch ( cmd )
-     {
-@@ -1545,7 +1549,7 @@ arch_do_vcpu_op(
-     }
+@@ -78,7 +77,7 @@ static long cf_check hvm_grant_table_op(
+ }
+ #endif
  
-     default:
--        rc = -ENOSYS;
-+        rc = common_vcpu_op(cmd, v, arg);
-         break;
-     }
- 
+-static long cf_check hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++long cf_check hvm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+     const struct vcpu *curr = current;
+     const struct domain *currd = curr->domain;
 diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
-index 61bf897147..d6daa7e4cb 100644
+index 81ca25f7b3..2d243b48bc 100644
 --- a/xen/arch/x86/include/asm/hypercall.h
 +++ b/xen/arch/x86/include/asm/hypercall.h
-@@ -145,7 +145,7 @@ compat_physdev_op(
-     XEN_GUEST_HANDLE_PARAM(void) arg);
+@@ -44,109 +44,6 @@ void pv_ring3_init_hypercall_page(void *ptr);
+  */
+ #define MMU_UPDATE_PREEMPTED          (~(~0U>>1))
  
- extern int
--arch_compat_vcpu_op(
-+compat_common_vcpu_op(
+-extern long cf_check
+-do_event_channel_op_compat(
+-    XEN_GUEST_HANDLE_PARAM(evtchn_op_t) uop);
+-
+-/* Legacy hypercall (as of 0x00030202). */
+-extern long cf_check do_physdev_op_compat(
+-    XEN_GUEST_HANDLE(physdev_op_t) uop);
+-
+-/* Legacy hypercall (as of 0x00030101). */
+-extern long cf_check do_sched_op_compat(
+-    int cmd, unsigned long arg);
+-
+-extern long cf_check
+-do_set_trap_table(
+-    XEN_GUEST_HANDLE_PARAM(const_trap_info_t) traps);
+-
+-extern long cf_check
+-do_mmu_update(
+-    XEN_GUEST_HANDLE_PARAM(mmu_update_t) ureqs,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(uint) pdone,
+-    unsigned int foreigndom);
+-
+-extern long cf_check
+-do_set_gdt(
+-    XEN_GUEST_HANDLE_PARAM(xen_ulong_t) frame_list,
+-    unsigned int entries);
+-
+-extern long cf_check
+-do_stack_switch(
+-    unsigned long ss,
+-    unsigned long esp);
+-
+-extern long cf_check
+-do_fpu_taskswitch(
+-    int set);
+-
+-extern long cf_check
+-do_set_debugreg(
+-    int reg,
+-    unsigned long value);
+-
+-extern long cf_check
+-do_get_debugreg(
+-    int reg);
+-
+-extern long cf_check
+-do_update_descriptor(
+-    uint64_t gaddr, seg_desc_t desc);
+-
+-extern long cf_check
+-do_mca(XEN_GUEST_HANDLE_PARAM(xen_mc_t) u_xen_mc);
+-
+-extern long cf_check
+-do_update_va_mapping(
+-    unsigned long va,
+-    uint64_t val64,
+-    unsigned long flags);
+-
+-extern long cf_check
+-do_physdev_op(
+-    int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_update_va_mapping_otherdomain(
+-    unsigned long va,
+-    uint64_t val64,
+-    unsigned long flags,
+-    domid_t domid);
+-
+-extern long cf_check
+-do_mmuext_op(
+-    XEN_GUEST_HANDLE_PARAM(mmuext_op_t) uops,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(uint) pdone,
+-    unsigned int foreigndom);
+-
+-extern long cf_check do_callback_op(
+-    int cmd, XEN_GUEST_HANDLE_PARAM(const_void) arg);
+-
+-extern long cf_check
+-do_iret(
+-    void);
+-
+-extern long cf_check
+-do_set_callbacks(
+-    unsigned long event_address,
+-    unsigned long failsafe_address,
+-    unsigned long syscall_address);
+-
+-extern long cf_check
+-do_set_segment_base(
+-    unsigned int which,
+-    unsigned long base);
+-
+-long cf_check do_nmi_op(unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-long cf_check do_xenpmu_op(unsigned int op,
+-                           XEN_GUEST_HANDLE_PARAM(xen_pmu_params_t) arg);
+-
+-long cf_check do_paging_domctl_cont(
+-    XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+-
+ #ifdef CONFIG_COMPAT
+ 
+ #include <compat/arch-x86/xen.h>
+@@ -157,44 +54,6 @@ extern int
+ compat_common_vcpu_op(
      int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg);
  
- extern int cf_check compat_mmuext_op(
-diff --git a/xen/arch/x86/x86_64/domain.c b/xen/arch/x86/x86_64/domain.c
-index c46dccc25a..9c559aa3ea 100644
---- a/xen/arch/x86/x86_64/domain.c
-+++ b/xen/arch/x86/x86_64/domain.c
-@@ -12,11 +12,15 @@
- CHECK_vcpu_get_physid;
- #undef xen_vcpu_get_physid
- 
--int
--arch_compat_vcpu_op(
--    int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-+int cf_check
-+compat_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
--    int rc = -ENOSYS;
-+    int rc;
-+    struct domain *d = current->domain;
-+    struct vcpu *v;
-+
-+    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
-+        return -ENOENT;
- 
-     switch ( cmd )
-     {
-@@ -55,7 +59,11 @@ arch_compat_vcpu_op(
-     }
- 
-     case VCPUOP_get_physid:
--        rc = arch_do_vcpu_op(cmd, v, arg);
-+        rc = do_vcpu_op(cmd, vcpuid, arg);
-+        break;
-+
-+    default:
-+        rc = compat_common_vcpu_op(cmd, v, arg);
-         break;
-     }
- 
-diff --git a/xen/common/compat/domain.c b/xen/common/compat/domain.c
-index afae27eeba..1119534679 100644
---- a/xen/common/compat/domain.c
-+++ b/xen/common/compat/domain.c
-@@ -38,15 +38,12 @@ CHECK_vcpu_hvm_context;
- 
- #endif
- 
--int cf_check compat_vcpu_op(
--    int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
-+int compat_common_vcpu_op(int cmd, struct vcpu *v,
-+                          XEN_GUEST_HANDLE_PARAM(void) arg)
- {
--    struct domain *d = current->domain;
--    struct vcpu *v;
-     int rc = 0;
+-extern int cf_check compat_mmuext_op(
+-    XEN_GUEST_HANDLE_PARAM(void) arg,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(uint) pdone,
+-    unsigned int foreigndom);
 -
--    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
--        return -ENOENT;
-+    struct domain *d = current->domain;
-+    unsigned int vcpuid = v->vcpu_id;
- 
-     switch ( cmd )
-     {
-@@ -103,7 +100,7 @@ int cf_check compat_vcpu_op(
-     case VCPUOP_stop_singleshot_timer:
-     case VCPUOP_register_vcpu_info:
-     case VCPUOP_send_nmi:
--        rc = do_vcpu_op(cmd, vcpuid, arg);
-+        rc = common_vcpu_op(cmd, v, arg);
-         break;
- 
-     case VCPUOP_get_runstate_info:
-@@ -134,7 +131,7 @@ int cf_check compat_vcpu_op(
-     }
- 
-     default:
--        rc = arch_compat_vcpu_op(cmd, v, arg);
-+        rc = -ENOSYS;
-         break;
-     }
- 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 351029f8b2..70747c02e6 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1570,15 +1570,11 @@ int default_initialise_vcpu(struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
-     return rc;
- }
- 
--long cf_check do_vcpu_op(
--    int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
-+long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
- {
--    struct domain *d = current->domain;
--    struct vcpu *v;
-     long rc = 0;
+-extern int cf_check compat_callback_op(
+-    int cmd, XEN_GUEST_HANDLE(const_void) arg);
 -
--    if ( (v = domain_vcpu(d, vcpuid)) == NULL )
--        return -ENOENT;
-+    struct domain *d = v->domain;
-+    unsigned int vcpuid = v->vcpu_id;
+-extern int cf_check compat_update_va_mapping(
+-    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags);
+-
+-extern int cf_check compat_update_va_mapping_otherdomain(
+-    unsigned int va, uint32_t lo, uint32_t hi, unsigned int flags, domid_t domid);
+-
+-DEFINE_XEN_GUEST_HANDLE(trap_info_compat_t);
+-extern int cf_check compat_set_trap_table(
+-    XEN_GUEST_HANDLE(trap_info_compat_t) traps);
+-
+-extern int cf_check compat_set_gdt(
+-    XEN_GUEST_HANDLE_PARAM(uint) frame_list, unsigned int entries);
+-
+-extern int cf_check compat_update_descriptor(
+-    uint32_t pa_lo, uint32_t pa_hi, uint32_t desc_lo, uint32_t desc_hi);
+-
+-extern int cf_check compat_iret(void);
+-
+-extern int cf_check compat_nmi_op(
+-    unsigned int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int cf_check compat_set_callbacks(
+-    unsigned long event_selector, unsigned long event_address,
+-    unsigned long failsafe_selector, unsigned long failsafe_address);
+-
+-DEFINE_XEN_GUEST_HANDLE(physdev_op_compat_t);
+-extern int cf_check compat_physdev_op_compat(
+-    XEN_GUEST_HANDLE(physdev_op_compat_t) uop);
+-
+ #endif /* CONFIG_COMPAT */
  
-     switch ( cmd )
-     {
-@@ -1750,7 +1746,7 @@ long cf_check do_vcpu_op(
-     }
- 
-     default:
--        rc = arch_do_vcpu_op(cmd, v, arg);
-+        rc = -ENOSYS;
-         break;
-     }
- 
+ #endif /* __ASM_X86_HYPERCALL_H__ */
 diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index a1b6575976..81aae7a662 100644
+index ca8ee22717..f307dfb597 100644
 --- a/xen/include/xen/hypercall.h
 +++ b/xen/include/xen/hypercall.h
-@@ -110,7 +110,7 @@ do_vcpu_op(
+@@ -21,33 +21,19 @@
+ #include <asm/hypercall.h>
+ #include <xsm/xsm.h>
  
- struct vcpu;
+-extern long cf_check
+-do_sched_op(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_domctl(
+-    XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
++/* Needs to be after asm/hypercall.h. */
++#include <xen/hypercall-defs.h>
+ 
  extern long
--arch_do_vcpu_op(int cmd,
-+common_vcpu_op(int cmd,
+ arch_do_domctl(
+     struct xen_domctl *domctl, struct domain *d,
+     XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl);
+ 
+-extern long cf_check
+-do_sysctl(
+-    XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl);
+-
+ extern long
+ arch_do_sysctl(
+     struct xen_sysctl *sysctl,
+     XEN_GUEST_HANDLE_PARAM(xen_sysctl_t) u_sysctl);
+ 
+-extern long cf_check
+-do_platform_op(
+-    XEN_GUEST_HANDLE_PARAM(xen_platform_op_t) u_xenpf_op);
+-
+ extern long
+ pci_physdev_op(
+     int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+@@ -65,170 +51,11 @@ pci_physdev_op(
+ #define MEMOP_EXTENT_SHIFT 6 /* cmd[:6] == start_extent */
+ #define MEMOP_CMD_MASK     ((1 << MEMOP_EXTENT_SHIFT) - 1)
+ 
+-extern long cf_check
+-do_memory_op(
+-    unsigned long cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_multicall(
+-    XEN_GUEST_HANDLE_PARAM(multicall_entry_t) call_list,
+-    unsigned int nr_calls);
+-
+-extern long cf_check
+-do_set_timer_op(
+-    s_time_t timeout);
+-
+-extern long cf_check
+-do_event_channel_op(
+-    int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_xen_version(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_console_io(
+-    unsigned int cmd,
+-    unsigned int count,
+-    XEN_GUEST_HANDLE_PARAM(char) buffer);
+-
+-extern long cf_check
+-do_grant_table_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) uop,
+-    unsigned int count);
+-
+-extern long cf_check
+-do_vm_assist(
+-    unsigned int cmd,
+-    unsigned int type);
+-
+-extern long cf_check
+-do_vcpu_op(
+-    int cmd,
+-    unsigned int vcpuid,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-struct vcpu;
+ extern long
+ common_vcpu_op(int cmd,
      struct vcpu *v,
      XEN_GUEST_HANDLE_PARAM(void) arg);
  
+-extern long cf_check
+-do_hvm_op(
+-    unsigned long op,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_kexec_op(
+-    unsigned int op,
+-    XEN_GUEST_HANDLE_PARAM(void) uarg);
+-
+-extern long cf_check
+-do_xsm_op(
+-    XEN_GUEST_HANDLE_PARAM(void) u_xsm_op);
+-
+-#ifdef CONFIG_ARGO
+-extern long cf_check do_argo_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg1,
+-    XEN_GUEST_HANDLE_PARAM(void) arg2,
+-    unsigned long arg3,
+-    unsigned long arg4);
+-#endif
+-
+-extern long cf_check
+-do_xenoprof_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern long cf_check
+-do_dm_op(
+-    domid_t domid,
+-    unsigned int nr_bufs,
+-    XEN_GUEST_HANDLE_PARAM(xen_dm_op_buf_t) bufs);
+-
+-#ifdef CONFIG_HYPFS
+-extern long cf_check
+-do_hypfs_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(const_char) arg1,
+-    unsigned long arg2,
+-    XEN_GUEST_HANDLE_PARAM(void) arg3,
+-    unsigned long arg4);
+-#endif
+-
+-#ifdef CONFIG_COMPAT
+-
+-extern int cf_check
+-compat_memory_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int cf_check
+-compat_grant_table_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) uop,
+-    unsigned int count);
+-
+-extern int cf_check
+-compat_vcpu_op(
+-    int cmd,
+-    unsigned int vcpuid,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int cf_check
+-compat_xenoprof_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int cf_check
+-compat_xen_version(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int cf_check
+-compat_sched_op(
+-    int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-extern int cf_check
+-compat_set_timer_op(
+-    uint32_t lo,
+-    int32_t hi);
+-
+-extern int cf_check compat_xsm_op(
+-    XEN_GUEST_HANDLE_PARAM(void) op);
+-
+-extern int cf_check compat_kexec_op(
+-    unsigned int op, XEN_GUEST_HANDLE_PARAM(void) uarg);
+-
+-DEFINE_XEN_GUEST_HANDLE(multicall_entry_compat_t);
+-extern int cf_check compat_multicall(
+-    XEN_GUEST_HANDLE_PARAM(multicall_entry_compat_t) call_list,
+-    uint32_t nr_calls);
+-
+-int compat_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+-
+-DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
+-int compat_platform_op(XEN_GUEST_HANDLE_PARAM(compat_platform_op_t) u_xenpf_op);
+-
+-#ifdef CONFIG_ARGO
+-extern int cf_check compat_argo_op(
+-    unsigned int cmd,
+-    XEN_GUEST_HANDLE_PARAM(void) arg1,
+-    XEN_GUEST_HANDLE_PARAM(void) arg2,
+-    unsigned long arg3,
+-    unsigned long arg4);
+-#endif
+-
+-extern int cf_check
+-compat_dm_op(
+-    domid_t domid,
+-    unsigned int nr_bufs,
+-    XEN_GUEST_HANDLE_PARAM(void) bufs);
+-
+-#endif
+-
+ void arch_get_xen_caps(xen_capabilities_info_t *info);
+ 
+ #endif /* __XEN_HYPERCALL_H__ */
 -- 
 2.34.1
 
