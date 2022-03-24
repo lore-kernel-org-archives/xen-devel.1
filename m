@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAAD3C43219
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 08:13:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294185.500049 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 807B1C4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 08:13:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.294188.500069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXIat-0007B0-Pd; Thu, 24 Mar 2022 08:13:19 +0000
+	id 1nXIav-0007X5-2S; Thu, 24 Mar 2022 08:13:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294185.500049; Thu, 24 Mar 2022 08:13:19 +0000
+Received: by outflank-mailman (output) from mailman id 294188.500069; Thu, 24 Mar 2022 08:13:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXIat-0007At-Lk; Thu, 24 Mar 2022 08:13:19 +0000
-Received: by outflank-mailman (input) for mailman id 294185;
- Thu, 24 Mar 2022 08:13:18 +0000
+	id 1nXIau-0007Uw-RC; Thu, 24 Mar 2022 08:13:20 +0000
+Received: by outflank-mailman (input) for mailman id 294188;
+ Thu, 24 Mar 2022 08:13:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+IHq=UD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nXIar-0006uw-SX
- for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 08:13:17 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1nXIat-0006uw-BA
+ for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 08:13:19 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4189f8e8-ab4a-11ec-a405-831a346695d4;
+ id 422e5bd5-ab4a-11ec-a405-831a346695d4;
  Thu, 24 Mar 2022 09:13:16 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6707F210DC;
- Thu, 24 Mar 2022 08:13:15 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id ADAEE1F38E;
+ Thu, 24 Mar 2022 08:13:16 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0693613B98;
- Thu, 24 Mar 2022 08:13:15 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5CF5813B98;
+ Thu, 24 Mar 2022 08:13:16 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id NoM2ABsoPGIpEwAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 08:13:15 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id qChHFRwoPGIpEwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 08:13:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,15 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4189f8e8-ab4a-11ec-a405-831a346695d4
+X-Inumbo-ID: 422e5bd5-ab4a-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1648109595; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=FWXr/vR+liQ4qXHMpaTH/gdK1Xe9wA/EAfjYKdc5aOY=;
-	b=oIjAQdhfHpt0RhOT390ygCxMz4V9HSts9SasoGE19LQI4kbqTywO3gw8jQzc0cuI+6MrAf
-	X7v6+NHQzuldQWqGixzazJtYW/rDjk8GutjCBsQTjus2ZDBf3QwOGX7HH3yrWiu8NX3aGt
-	9sRm2qF4gYQuQ9YygwdsOOExrdd5GmI=
+	t=1648109596; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=E/WlWegUufrI46j8kJnnrGZXbEfr6xile5c+QZv8+qk=;
+	b=FDmxFu5MVglSyo+PAT8s5IFAz0X2isdH5GtmS9vZbknkoaglb+1ldO4Xm5auEOPFZPNsCU
+	Wadv9GllyMIavI85mj3tXbs1/+yEoReBErlrXXPs8t5ABx8QRqJ5pVXp8vJH4Vl7YU/kV1
+	Dvk8qaoNFHQD/GFhhZuPIfHa8lnb73k=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -74,131 +75,269 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Christopher Clark <christopher.w.clark@gmail.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: [PATCH v5 00/10] xen: drop hypercall function tables
-Date: Thu, 24 Mar 2022 09:13:02 +0100
-Message-Id: <20220324081312.18222-1-jgross@suse.com>
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v5 04/10] xen: don't include asm/hypercall.h from C sources
+Date: Thu, 24 Mar 2022 09:13:06 +0100
+Message-Id: <20220324081312.18222-5-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220324081312.18222-1-jgross@suse.com>
+References: <20220324081312.18222-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-In order to avoid indirect function calls on the hypercall path as
-much as possible this series is removing the hypercall function tables
-and is replacing the hypercall handler calls via the function array
-by automatically generated call macros.
+Instead of including asm/hypercall.h always use xen/hypercall.h.
+Additionally include xen/hypercall.h from all sources containing a
+hypercall handler.
 
-Another by-product of generating the call macros is the automatic
-generating of the hypercall handler prototypes from the same data base
-which is used to generate the macros.
+This prepares for generating the handlers' prototypes at build time.
 
-This has the additional advantage of using type safe calls of the
-handlers and to ensure related handler (e.g. PV and HVM ones) share
-the same prototypes.
+Add a guard in asm/hypercall.h to catch direct inclusion.
 
-A very brief performance test (parallel build of the Xen hypervisor
-in a 6 vcpu guest) showed a very slim improvement (less than 1%) of
-the performance with the patches applied. The test was performed using
-a PV and a PVH guest.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com> # arm
+---
+V2:
+- remove platform_op hunk (Jan Beulich)
+- remove including of xen/hypervisor.h from arch/x86/x86_64/mm.c
+  (Jan Beulich)
+- fix include order in common/compat/grant_table.c (Jan Beulich)
+---
+ xen/arch/arm/hvm.c                       | 3 +--
+ xen/arch/arm/include/asm/hypercall.h     | 4 ++++
+ xen/arch/arm/platform_hypercall.c        | 1 +
+ xen/arch/x86/cpu/vpmu.c                  | 1 +
+ xen/arch/x86/include/asm/hypercall.h     | 4 ++++
+ xen/arch/x86/mm.c                        | 1 -
+ xen/arch/x86/platform_hypercall.c        | 1 +
+ xen/arch/x86/pv/iret.c                   | 1 +
+ xen/arch/x86/traps.c                     | 2 +-
+ xen/arch/x86/x86_64/compat/mm.c          | 1 +
+ xen/arch/x86/x86_64/mm.c                 | 2 --
+ xen/arch/x86/x86_64/platform_hypercall.c | 1 -
+ xen/common/compat/grant_table.c          | 1 +
+ xen/common/event_channel.c               | 1 +
+ xen/common/grant_table.c                 | 1 +
+ xen/common/multicall.c                   | 1 +
+ 16 files changed, 19 insertions(+), 7 deletions(-)
 
-Changes in V2:
-- new patches 6, 14, 15
-- patch 7: support hypercall priorities for faster code
-- comments addressed
-
-Changes in V3:
-- patches 1 and 4 removed as already applied
-- comments addressed
-
-Changes in V4:
-- 5 patches removed al already applied
-- new patches 1, 3 and 11
-- avoid switching Arm hypercall handlers to return long (no change of
-  handlers returning long already)
-
-Changes in V5:
-- patch 3 of V4 has been applied already
-- comments addressed
-- rebase
-
-Juergen Gross (10):
-  xen/arm: rename do_phydev_op() to do_arm_physdev_op()
-  xen: move do_vcpu_op() to arch specific code
-  xen: harmonize return types of hypercall handlers
-  xen: don't include asm/hypercall.h from C sources
-  xen: include compat/platform.h from hypercall.h
-  xen: generate hypercall interface related code
-  xen: use generated prototypes for hypercall handlers
-  xen/x86: call hypercall handlers via generated macro
-  xen/arm: call hypercall handlers via generated macro
-  xen/x86: remove cf_check attribute from hypercall handlers
-
- .gitignore                               |   1 +
- xen/arch/arm/domain.c                    |  15 +-
- xen/arch/arm/hvm.c                       |   3 +-
- xen/arch/arm/include/asm/hypercall.h     |   7 +-
- xen/arch/arm/physdev.c                   |   2 +-
- xen/arch/arm/platform_hypercall.c        |   1 +
- xen/arch/arm/traps.c                     | 117 ++-------
- xen/arch/x86/compat.c                    |   6 +-
- xen/arch/x86/cpu/mcheck/mce.c            |   2 +-
- xen/arch/x86/cpu/vpmu.c                  |   3 +-
- xen/arch/x86/domain.c                    |  11 +-
- xen/arch/x86/domctl.c                    |   4 +-
- xen/arch/x86/hvm/dm.c                    |   2 +-
- xen/arch/x86/hvm/hvm.c                   |   2 +-
- xen/arch/x86/hvm/hypercall.c             | 177 ++-----------
- xen/arch/x86/hypercall.c                 |  59 -----
- xen/arch/x86/include/asm/hypercall.h     | 201 ++++-----------
- xen/arch/x86/include/asm/paging.h        |   3 -
- xen/arch/x86/mm.c                        |  13 +-
- xen/arch/x86/mm/paging.c                 |   3 +-
- xen/arch/x86/physdev.c                   |   2 +-
- xen/arch/x86/platform_hypercall.c        |   3 +-
- xen/arch/x86/pv/callback.c               |  26 +-
- xen/arch/x86/pv/descriptor-tables.c      |   8 +-
- xen/arch/x86/pv/emul-priv-op.c           |   2 +-
- xen/arch/x86/pv/hypercall.c              | 187 ++------------
- xen/arch/x86/pv/iret.c                   |   5 +-
- xen/arch/x86/pv/misc-hypercalls.c        |  22 +-
- xen/arch/x86/pv/shim.c                   |   4 +-
- xen/arch/x86/traps.c                     |   2 +-
- xen/arch/x86/x86_64/compat/mm.c          |   3 +-
- xen/arch/x86/x86_64/domain.c             |  16 +-
- xen/arch/x86/x86_64/mm.c                 |   2 -
- xen/arch/x86/x86_64/platform_hypercall.c |   3 +-
- xen/common/argo.c                        |   8 +-
- xen/common/compat/domain.c               |  15 +-
- xen/common/compat/grant_table.c          |   3 +-
- xen/common/compat/kernel.c               |   2 +-
- xen/common/compat/memory.c               |   3 +-
- xen/common/dm.c                          |   2 +-
- xen/common/domain.c                      |  14 +-
- xen/common/domctl.c                      |   2 +-
- xen/common/event_channel.c               |   3 +-
- xen/common/grant_table.c                 |   4 +-
- xen/common/hypfs.c                       |   2 +-
- xen/common/kernel.c                      |   2 +-
- xen/common/kexec.c                       |   6 +-
- xen/common/memory.c                      |   2 +-
- xen/common/multicall.c                   |   4 +-
- xen/common/sched/compat.c                |   2 +-
- xen/common/sched/core.c                  |   4 +-
- xen/common/sysctl.c                      |   2 +-
- xen/common/xenoprof.c                    |   2 +-
- xen/drivers/char/console.c               |   2 +-
- xen/include/Makefile                     |  13 +
- xen/include/hypercall-defs.c             | 285 ++++++++++++++++++++
- xen/include/xen/hypercall.h              | 185 +------------
- xen/scripts/gen_hypercall.awk            | 314 +++++++++++++++++++++++
- xen/xsm/xsm_core.c                       |   4 +-
- 59 files changed, 863 insertions(+), 939 deletions(-)
- create mode 100644 xen/include/hypercall-defs.c
- create mode 100644 xen/scripts/gen_hypercall.awk
-
+diff --git a/xen/arch/arm/hvm.c b/xen/arch/arm/hvm.c
+index 8951b34086..fc1a52767d 100644
+--- a/xen/arch/arm/hvm.c
++++ b/xen/arch/arm/hvm.c
+@@ -20,6 +20,7 @@
+ #include <xen/lib.h>
+ #include <xen/errno.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/sched.h>
+ #include <xen/monitor.h>
+ 
+@@ -29,8 +30,6 @@
+ #include <public/hvm/params.h>
+ #include <public/hvm/hvm_op.h>
+ 
+-#include <asm/hypercall.h>
+-
+ static int hvm_allow_set_param(const struct domain *d, unsigned int param)
+ {
+     switch ( param )
+diff --git a/xen/arch/arm/include/asm/hypercall.h b/xen/arch/arm/include/asm/hypercall.h
+index fac4d60f17..8182895358 100644
+--- a/xen/arch/arm/include/asm/hypercall.h
++++ b/xen/arch/arm/include/asm/hypercall.h
+@@ -1,3 +1,7 @@
++#ifndef __XEN_HYPERCALL_H__
++#error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
++#endif
++
+ #ifndef __ASM_ARM_HYPERCALL_H__
+ #define __ASM_ARM_HYPERCALL_H__
+ 
+diff --git a/xen/arch/arm/platform_hypercall.c b/xen/arch/arm/platform_hypercall.c
+index 8efac7ee60..403cc84324 100644
+--- a/xen/arch/arm/platform_hypercall.c
++++ b/xen/arch/arm/platform_hypercall.c
+@@ -9,6 +9,7 @@
+ #include <xen/types.h>
+ #include <xen/sched.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/spinlock.h>
+ #include <public/platform.h>
+ #include <xsm/xsm.h>
+diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
+index 4fedc7c570..51d171615f 100644
+--- a/xen/arch/x86/cpu/vpmu.c
++++ b/xen/arch/x86/cpu/vpmu.c
+@@ -22,6 +22,7 @@
+ #include <xen/param.h>
+ #include <xen/event.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/sched.h>
+ #include <asm/regs.h>
+ #include <asm/types.h>
+diff --git a/xen/arch/x86/include/asm/hypercall.h b/xen/arch/x86/include/asm/hypercall.h
+index 49973820af..81ca25f7b3 100644
+--- a/xen/arch/x86/include/asm/hypercall.h
++++ b/xen/arch/x86/include/asm/hypercall.h
+@@ -2,6 +2,10 @@
+  * asm-x86/hypercall.h
+  */
+ 
++#ifndef __XEN_HYPERCALL_H__
++#error "asm/hypercall.h should not be included directly - include xen/hypercall.h instead"
++#endif
++
+ #ifndef __ASM_X86_HYPERCALL_H__
+ #define __ASM_X86_HYPERCALL_H__
+ 
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 2befd0c191..6cc73187ac 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -129,7 +129,6 @@
+ #include <asm/ldt.h>
+ #include <asm/x86_emulate.h>
+ #include <asm/e820.h>
+-#include <asm/hypercall.h>
+ #include <asm/shared.h>
+ #include <asm/mem_sharing.h>
+ #include <public/memory.h>
+diff --git a/xen/arch/x86/platform_hypercall.c b/xen/arch/x86/platform_hypercall.c
+index b91ccff589..eeb4f7a20e 100644
+--- a/xen/arch/x86/platform_hypercall.c
++++ b/xen/arch/x86/platform_hypercall.c
+@@ -17,6 +17,7 @@
+ #include <xen/console.h>
+ #include <xen/iocap.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/acpi.h>
+ #include <xen/efi.h>
+ #include <xen/cpu.h>
+diff --git a/xen/arch/x86/pv/iret.c b/xen/arch/x86/pv/iret.c
+index 55eb6a63bd..58de9f7922 100644
+--- a/xen/arch/x86/pv/iret.c
++++ b/xen/arch/x86/pv/iret.c
+@@ -18,6 +18,7 @@
+  */
+ 
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/lib.h>
+ #include <xen/sched.h>
+ 
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 8659547970..4c38f6c015 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -29,6 +29,7 @@
+ #include <xen/lib.h>
+ #include <xen/err.h>
+ #include <xen/errno.h>
++#include <xen/hypercall.h>
+ #include <xen/mm.h>
+ #include <xen/param.h>
+ #include <xen/console.h>
+@@ -70,7 +71,6 @@
+ #include <asm/x86_emulate.h>
+ #include <asm/traps.h>
+ #include <asm/hvm/vpt.h>
+-#include <asm/hypercall.h>
+ #include <asm/mce.h>
+ #include <asm/apic.h>
+ #include <asm/mc146818rtc.h>
+diff --git a/xen/arch/x86/x86_64/compat/mm.c b/xen/arch/x86/x86_64/compat/mm.c
+index b3da8fafbb..70b08a832a 100644
+--- a/xen/arch/x86/x86_64/compat/mm.c
++++ b/xen/arch/x86/x86_64/compat/mm.c
+@@ -1,4 +1,5 @@
+ #include <xen/event.h>
++#include <xen/hypercall.h>
+ #include <xen/mem_access.h>
+ #include <xen/multicall.h>
+ #include <compat/memory.h>
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 4f225da81e..3510a5affe 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -25,14 +25,12 @@ EMIT_FILE;
+ #include <xen/numa.h>
+ #include <xen/nodemask.h>
+ #include <xen/guest_access.h>
+-#include <xen/hypercall.h>
+ #include <xen/mem_access.h>
+ #include <asm/current.h>
+ #include <asm/asm_defns.h>
+ #include <asm/page.h>
+ #include <asm/flushtlb.h>
+ #include <asm/fixmap.h>
+-#include <asm/hypercall.h>
+ #include <asm/msr.h>
+ #include <asm/pv/domain.h>
+ #include <asm/setup.h>
+diff --git a/xen/arch/x86/x86_64/platform_hypercall.c b/xen/arch/x86/x86_64/platform_hypercall.c
+index 2c21a3fd05..f84252bac6 100644
+--- a/xen/arch/x86/x86_64/platform_hypercall.c
++++ b/xen/arch/x86/x86_64/platform_hypercall.c
+@@ -7,7 +7,6 @@ EMIT_FILE;
+ #include <xen/hypercall.h>
+ #include <xen/lib.h>
+ #include <compat/platform.h>
+-#include <xen/hypercall.h>
+ 
+ #define xen_platform_op     compat_platform_op
+ #define xen_platform_op_t   compat_platform_op_t
+diff --git a/xen/common/compat/grant_table.c b/xen/common/compat/grant_table.c
+index c6199e8918..d5787e3719 100644
+--- a/xen/common/compat/grant_table.c
++++ b/xen/common/compat/grant_table.c
+@@ -3,6 +3,7 @@
+  *
+  */
+ 
++#include <xen/hypercall.h>
+ #include <compat/grant_table.h>
+ 
+ #define xen_grant_entry_v1 grant_entry_v1
+diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
+index ffb042a241..0a82eb3ac2 100644
+--- a/xen/common/event_channel.c
++++ b/xen/common/event_channel.c
+@@ -24,6 +24,7 @@
+ #include <xen/iocap.h>
+ #include <xen/compat.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/keyhandler.h>
+ #include <asm/current.h>
+ 
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 1e0762b064..febbe12eab 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -33,6 +33,7 @@
+ #include <xen/trace.h>
+ #include <xen/grant_table.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/domain_page.h>
+ #include <xen/iommu.h>
+ #include <xen/paging.h>
+diff --git a/xen/common/multicall.c b/xen/common/multicall.c
+index e48f46dbe0..9db49092b4 100644
+--- a/xen/common/multicall.c
++++ b/xen/common/multicall.c
+@@ -9,6 +9,7 @@
+ #include <xen/event.h>
+ #include <xen/multicall.h>
+ #include <xen/guest_access.h>
++#include <xen/hypercall.h>
+ #include <xen/perfc.h>
+ #include <xen/trace.h>
+ #include <asm/current.h>
 -- 
 2.34.1
 
