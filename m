@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87011C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30AEDC43217
 	for <xen-devel@archiver.kernel.org>; Thu, 24 Mar 2022 08:13:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294190.500088 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.294184.500038 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXIaw-0007v7-M1; Thu, 24 Mar 2022 08:13:22 +0000
+	id 1nXIas-0006vJ-Hm; Thu, 24 Mar 2022 08:13:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294190.500088; Thu, 24 Mar 2022 08:13:22 +0000
+Received: by outflank-mailman (output) from mailman id 294184.500038; Thu, 24 Mar 2022 08:13:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXIaw-0007s8-BF; Thu, 24 Mar 2022 08:13:22 +0000
-Received: by outflank-mailman (input) for mailman id 294190;
- Thu, 24 Mar 2022 08:13:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nXIas-0006v8-Du; Thu, 24 Mar 2022 08:13:18 +0000
+Received: by outflank-mailman (input) for mailman id 294184;
+ Thu, 24 Mar 2022 08:13:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=+IHq=UD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nXIau-0006uw-BG
- for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 08:13:20 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 425f4208-ab4a-11ec-a405-831a346695d4;
- Thu, 24 Mar 2022 09:13:17 +0100 (CET)
+ id 1nXIar-0006ux-Jj
+ for xen-devel@lists.xenproject.org; Thu, 24 Mar 2022 08:13:17 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 4193b57c-ab4a-11ec-8fbc-03012f2f19d4;
+ Thu, 24 Mar 2022 09:13:16 +0100 (CET)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id F16121F38F;
- Thu, 24 Mar 2022 08:13:16 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A1F23210E4;
+ Thu, 24 Mar 2022 08:13:15 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B3FB513B98;
- Thu, 24 Mar 2022 08:13:16 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6E16613B98;
+ Thu, 24 Mar 2022 08:13:15 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id KJe7KhwoPGIpEwAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 08:13:16 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id WNGZGRsoPGIpEwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 24 Mar 2022 08:13:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,86 +53,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 425f4208-ab4a-11ec-a405-831a346695d4
+X-Inumbo-ID: 4193b57c-ab4a-11ec-8fbc-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1648109596; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1648109595; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=IfItSZSW0o2H4xQgtklqjsDZtwba90rKZ+jpu4SrJ+k=;
-	b=m+iNTLngLNHJVBJ12ZfZoy1QDHv4jbiJeIGfafd+3MG1a8+8WSzVTNJ31cjscqyCxSCqqj
-	DsLtfI9TcqK8YMwgy4cbO1mxnrhujwj3jGvDPzqXvz2Z/DaYLyiQFpqAOgr85GvWQvB1bv
-	mJ0RyhL9vmjigG49MHM4klZ64cNEyTk=
+	bh=XRQkQM3nkX048Co0Ei4MgctIFOzk/2kWV1vK88mLPKE=;
+	b=ncIXpUgOyhiseKvoEXjWOT0jwyemrN8QMJ8gtYurzvzUcqlZNE5X185rc2LH262IeZPhAH
+	nIJEI0QJ8mrmnBd3DpF5KE+udbPfehWKhEIjrUeqJ9SepvIsRzuhDrM+XAntq2EaWeJZx3
+	Jznq39XSKVAMEIwLXD2vhbkwL7quw/I=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	George Dunlap <george.dunlap@citrix.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 05/10] xen: include compat/platform.h from hypercall.h
-Date: Thu, 24 Mar 2022 09:13:07 +0100
-Message-Id: <20220324081312.18222-6-jgross@suse.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v5 01/10] xen/arm: rename do_phydev_op() to do_arm_physdev_op()
+Date: Thu, 24 Mar 2022 09:13:03 +0100
+Message-Id: <20220324081312.18222-2-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220324081312.18222-1-jgross@suse.com>
 References: <20220324081312.18222-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The definition of compat_platform_op_t is in compat/platform.h
-already, so include that file from hypercall.h instead of repeating
-the typedef.
-
-This allows to remove the related include statement from
-arch/x86/x86_64/platform_hypercall.c.
+do_physdev_op() prototypes on Arm and x86 differ in their return type,
+so rename the Arm one in order to prepare using a common generated
+header file.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
-V3:
+V4:
 - new patch
 ---
- xen/arch/x86/x86_64/platform_hypercall.c | 1 -
- xen/include/xen/hypercall.h              | 4 +++-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ xen/arch/arm/include/asm/hypercall.h | 2 +-
+ xen/arch/arm/physdev.c               | 2 +-
+ xen/arch/arm/traps.c                 | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/x86_64/platform_hypercall.c b/xen/arch/x86/x86_64/platform_hypercall.c
-index f84252bac6..7631058cce 100644
---- a/xen/arch/x86/x86_64/platform_hypercall.c
-+++ b/xen/arch/x86/x86_64/platform_hypercall.c
-@@ -6,7 +6,6 @@ EMIT_FILE;
+diff --git a/xen/arch/arm/include/asm/hypercall.h b/xen/arch/arm/include/asm/hypercall.h
+index a0c5a31a2f..39d2e7889d 100644
+--- a/xen/arch/arm/include/asm/hypercall.h
++++ b/xen/arch/arm/include/asm/hypercall.h
+@@ -2,7 +2,7 @@
+ #define __ASM_ARM_HYPERCALL_H__
  
+ #include <public/domctl.h> /* for arch_do_domctl */
+-int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
++int do_arm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
+ long do_arm_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg);
+ 
+diff --git a/xen/arch/arm/physdev.c b/xen/arch/arm/physdev.c
+index f9aa274dda..95a8cdc0ee 100644
+--- a/xen/arch/arm/physdev.c
++++ b/xen/arch/arm/physdev.c
+@@ -11,7 +11,7 @@
  #include <xen/hypercall.h>
- #include <xen/lib.h>
--#include <compat/platform.h>
  
- #define xen_platform_op     compat_platform_op
- #define xen_platform_op_t   compat_platform_op_t
-diff --git a/xen/include/xen/hypercall.h b/xen/include/xen/hypercall.h
-index a032ba2b4a..ca8ee22717 100644
---- a/xen/include/xen/hypercall.h
-+++ b/xen/include/xen/hypercall.h
-@@ -15,6 +15,9 @@
- #include <public/version.h>
- #include <public/pmu.h>
- #include <public/hvm/dm_op.h>
-+#ifdef CONFIG_COMPAT
-+#include <compat/platform.h>
-+#endif
- #include <asm/hypercall.h>
- #include <xsm/xsm.h>
  
-@@ -206,7 +209,6 @@ extern int cf_check compat_multicall(
- 
- int compat_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- 
--typedef struct compat_platform_op compat_platform_op_t;
- DEFINE_XEN_GUEST_HANDLE(compat_platform_op_t);
- int compat_platform_op(XEN_GUEST_HANDLE_PARAM(compat_platform_op_t) u_xenpf_op);
- 
+-int do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
++int do_arm_physdev_op(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+ {
+ #ifdef CONFIG_HAS_PCI
+     return pci_physdev_op(cmd, arg);
+diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
+index 11f970d926..43f30747cf 100644
+--- a/xen/arch/arm/traps.c
++++ b/xen/arch/arm/traps.c
+@@ -1371,7 +1371,7 @@ static arm_hypercall_t arm_hypercall_table[] = {
+     HYPERCALL(xsm_op, 1),
+     HYPERCALL(event_channel_op, 2),
+     HYPERCALL_DEPRECATED(event_channel_op_compat, 1),
+-    HYPERCALL(physdev_op, 2),
++    HYPERCALL_ARM(physdev_op, 2),
+     HYPERCALL_DEPRECATED(physdev_op_compat, 1),
+     HYPERCALL(sysctl, 2),
+     HYPERCALL(hvm_op, 2),
 -- 
 2.34.1
 
