@@ -4,35 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C89FC433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Mar 2022 13:56:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294754.501321 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D135C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Mar 2022 14:06:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.294762.501344 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXkQI-000407-2s; Fri, 25 Mar 2022 13:56:14 +0000
+	id 1nXkZW-0005sq-DR; Fri, 25 Mar 2022 14:05:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294754.501321; Fri, 25 Mar 2022 13:56:14 +0000
+Received: by outflank-mailman (output) from mailman id 294762.501344; Fri, 25 Mar 2022 14:05:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXkQI-000400-01; Fri, 25 Mar 2022 13:56:14 +0000
-Received: by outflank-mailman (input) for mailman id 294754;
- Fri, 25 Mar 2022 13:56:12 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nXkQG-0003zq-JO; Fri, 25 Mar 2022 13:56:12 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nXkQG-0003Qj-He; Fri, 25 Mar 2022 13:56:12 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nXkQG-0001Ft-6h; Fri, 25 Mar 2022 13:56:12 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1nXkQG-0006zK-65; Fri, 25 Mar 2022 13:56:12 +0000
+	id 1nXkZW-0005sj-AB; Fri, 25 Mar 2022 14:05:46 +0000
+Received: by outflank-mailman (input) for mailman id 294762;
+ Fri, 25 Mar 2022 14:05:45 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=+r7I=UE=citrix.com=prvs=076f4df05=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1nXkZU-0005rQ-Ur
+ for xen-devel@lists.xenproject.org; Fri, 25 Mar 2022 14:05:45 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a6b0a1f0-ac44-11ec-8fbc-03012f2f19d4;
+ Fri, 25 Mar 2022 15:05:41 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,129 +38,216 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=glYDiCYmTjzBnobIGYjp81iauIkN5sOxcoifYesw504=; b=HvO2nk67pKVC/tOgvJ0zAzviqj
-	lLwm5NH4SLV+dDD8wvs+dQGDCDncL6Dxy2DA3kK5qB1YA7zomthnORexN5hrLJLsgcR7/1/Z+V2+E
-	0AkZwlvcPiXc0oBMsKyQUg6dw1ga6iMTsg2X6aes7ynUcvMFvz/sLoXm5CTUvQTvXHYw=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-168844-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Inumbo-ID: a6b0a1f0-ac44-11ec-8fbc-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1648217140;
+  h=date:from:to:cc:subject:message-id:references:
+   content-transfer-encoding:in-reply-to:mime-version;
+  bh=edYyeS72PhfZ6v0flBZ8h6zYD7zZUNINVTn5poqERww=;
+  b=W5xUDz71UK9vin4A1mLTQWx9ZVbJb3SGRHqt1MhBQi1ecWStbvvUXh2y
+   ta9xp1BGvlNaR5rj++Qr9VGd0tGodzo7mBV8M5teDzkB3VKQ82kYz5ATP
+   rScrg81m7ZeIsk8GyJIm5vs6v5zeLXQaQp6VW/squFC6f1bTnpz6XVCpz
+   4=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
+X-SBRS: 5.1
+X-MesageID: 69555818
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:8oMVya8ZWqvpyBmczWDHDrUDj36TJUtcMsCJ2f8bNWPcYEJGY0x3m
+ GEWWWyOPauPazb0e99wat/jpEgFvMWHyIMwTwA+rHs8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si+Fa+Sn9T8mvU2xbuKU5NTsY0idfic5DnZ54f5fs7Rh2NQw2oLkW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnbXrGCB0Y63dpL82ECZyIhF1FqAZw7CSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFJkYtXx6iynQEN4tQIzZQrWM7thdtNs1rp4fQKuDN
+ 5NJAdZpRDfSQDsUJ0otNKIjkb6UuHPvTGBCtGvA8MLb5ECMlVcsgdABKuH9eduMX8xZ2FmZo
+ mHu+H7wCRUXcteYzFKt4n+qw+PCgy7/cIYTD6GjsO5nhkWJwW4eAwFQUkG0ycRVkWbnBYgZc
+ RZNvHNz8+5iryRHU+URQTWR+y+j40McSuYLOK4FwjC9wYHZvD2WUz1soiF6VPQqs8o/RDoP3
+ 1CPns/0CTEHjIB5WU5x5Z/P82rsZHF9wXsqIHZdEFBbu4WLTJQb1Eqnczp1LEKiYjQZ8xnUy
+ ivCkiUxjq57YSUjh/TipgCvb95BS/H0ou8JCuf/AzrNAuBRPtfNi2mUBb7ztKcowGGxFAXpg
+ ZT8s5LChN3i9LnU/MB3fM0DHauy+9GOOyDGjFhkEvEJrmrxqyf+IN0OsWokfy+F1/ronxewM
+ Sc/XisLufdu0IaCN/crM+pd9ex0pUQfKTgVfq+NNYcfCnSAXASG4DtvdSatM5PFyyARfVUEE
+ c7DK66EVC9CYYw+lWbeb7pNgNcDm3FlrUuOFM+T8vhS+efHDJJjYexeawXmgyFQxP7snTg5B
+ P4DaJrQl0QOCrGWj+u+2dd7EG3m5EMTXPjeg8dWavSCMkxhHmQgAOXW2rQvZ8pumKE9qwsC1
+ ivVtpNwoLYnuUD6FA==
+IronPort-HdrOrdr: A9a23:rH3Y/KzSrehI68NbJoa7KrPwT71zdoMgy1knxilNoH1uEvBw8v
+ rEoB1173LJYVoqMk3I+urgBED/exzhHPdOiOEs1NyZMDUO1lHHEL1f
+X-IronPort-AV: E=Sophos;i="5.90,209,1643691600"; 
+   d="scan'208";a="69555818"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=A5ohlRKGmXmU7Y686SxHq1wIFuqjZNV9T8XYd3aC2ezLVGg0KrwNoCoVYovpe+3WiVeBueuPsQ8Xhx6oh0YTMcEdR/76KzIlZyYGnMhj3b8bYMSngynrK2KwM7dqS3SPnxNvN0Qy6ih344lMcMlWfxZarmvVg2ZOfSScazpPgwB8U8lmeN4/hKIgQp317lixHKsUfOQjJu3e7sbOKxLWtv8IixjS0+AAU6rVRBROeWn7UVTSl7bG5ktsPGfczYu4NBnHR15ZXh+89Uc1CEhucyS1/4yK6q0IB2EX7aOSZX/EHUZCMcPYoqOoEimcv6KsoS1Hg6AFBx8CJdOMl0LdlA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gC6EtQXmTr4vaY/nIowHOx+tpWpQqzUShU1wYIXc9qA=;
+ b=Eor54+OTfPH6997FjyF2HZtITpKV8SAXvWUiGkrL2BgxnR0jLp7DO9agJwI9kkcudPvNUc3KL9I3YZJG3JgzvEWGospmdmHywwP0yDAYQSCHX8OmRPphXtrkP76PLxnZbOdc5q6/Dtve1MuFShX43VA6q4H7sUH93kb6PSPx8p8uw8TaTaSiZZ4oZfB3HLTbJsMs58JzJHM9POH7phl3uMAkqOOX0oVz/lq34HxAtqgUb02t4KBBe6t7yM/oYrx9Jldn3gciRIbz/5OFJRxwTHnSZUyVZba9HIuHfMbGcw93ktvU7Hq7rbs8+J+6pWgdaQSjNpfZSsg0o91sDZskQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gC6EtQXmTr4vaY/nIowHOx+tpWpQqzUShU1wYIXc9qA=;
+ b=Oy4taRJjBTP7nNUY0kC81tO7KKDK3EZxvxmfcm/l/x2YSdmvpDpZUlebmfhU8zJt7W1MwgQG/7ZNBRvtorqKIRJds44NSxYsdJHf8HEe+WzmccD6Bv/stw41PSdUWXiy42KiGxEt00TOLfdrYlchYxaLqblyuMQQAjfkSRPTIzU=
+Date: Fri, 25 Mar 2022 15:05:30 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+CC: <xen-devel@lists.xenproject.org>, Konrad Rzeszutek Wilk
+	<konrad.wilk@oracle.com>, Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [PATCH 1/2] livepatch: do not ignore sections with 0 size
+Message-ID: <Yj3MKvqpqRUd2nIS@Air-de-Roger>
+References: <20220317110854.39050-1-roger.pau@citrix.com>
+ <20220317110854.39050-2-roger.pau@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20220317110854.39050-2-roger.pau@citrix.com>
+X-ClientProxiedBy: LNXP265CA0033.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:5c::21) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
 MIME-Version: 1.0
-Subject: [ovmf test] 168844: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-amd64:xen-build:fail:regression
-    ovmf:build-i386:xen-build:fail:regression
-    ovmf:build-i386-xsm:xen-build:fail:regression
-    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    ovmf=69218d5d2854acaa7a11c777244de4a297d2fbb9
-X-Osstest-Versions-That:
-    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 25 Mar 2022 13:56:12 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 1df07f24-5069-45a8-dcc6-08da0e6888a9
+X-MS-TrafficTypeDiagnostic: CO1PR03MB5858:EE_
+X-Microsoft-Antispam-PRVS: <CO1PR03MB58580F0E273B339E8A6EE56E8F1A9@CO1PR03MB5858.namprd03.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: tvyZJMSUAvKIb1DXTi1kcves4kf+DTM22/SC0gYqeAXbx15AQcRdgZLTs1nikJTttHLi0CSvBt91G1ns8wHwyPUwCr+GwgzZsgUYIEuWjul61RnPWCtJ4aDCrS5XCqUGFQ2/tyX0BzpNAIGTSHtDJpL8/hTjvzi6mDOTDi0b1hkRYGuchWDSB+6OVtVvBDQw3NLKDvKbbsJrNPRmpQpVPof1Atl9Z5zm2IvZd5a9jYQ8Rqd45vduqJwQK5d8HzRECqIqcBpby6VjghLEM+7+9v+cg1sgLriWadsCefRKSCYVPdRqmMNQeJ9F/U/hb8XtIf7WZ6RORB1kQD6cOMdFtwnf2axbfauywg7FjDg0rLFqiAx/UkwozdOf0htOA5g+GcbCLB3xjnQrupnnFUi5BuBJJySHFsFREBOYER9YAnt8VEnbm2DTRN5btBHWV2as79qdWDvhtRvBW9wLbeOGIGZMp6hiRhG3ERmRjKypfyvuqilVe+tTaGXyt7RI42IU+PIJeHca/iRTV43CWnMT8rg01yXNkin/uo/XuZjPoEvUm9/P7yXKtYQKKeM5NH0aqfXDCnOyEVMcLD7H8dFxF7nUenzKdIpU/0gLqfHu/G1KMUefn/jc/kD6m08/NjM+xkAQJrpEyIO4z6UijYhhbg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(7916004)(366004)(6862004)(6666004)(5660300002)(66946007)(66476007)(26005)(6512007)(186003)(107886003)(8936002)(9686003)(66556008)(508600001)(6486002)(82960400001)(6506007)(38100700002)(8676002)(316002)(86362001)(4326008)(54906003)(85182001)(2906002)(83380400001)(6200100001)(33716001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?M3ZFc2NRdFViejVpM3AwbTg4ZlFoRVpSS29ITFk5UnlaM1hUczQweVpHVFBH?=
+ =?utf-8?B?Nk9ISVRRUDV2NUpWS29zK3doeTdLbjhtN2tCTW1ndHRVcDdFZUtoL0ZXRmll?=
+ =?utf-8?B?ZGhNeVVRVFVxQ3VDZ0R3Tjhvdzhsc2llVTdKMk9IdklCWmhBa1FucU5MVXhv?=
+ =?utf-8?B?SHI1b0ROZFp5b1FGcmpSRDJmM0FMSU9abTVIV0VmZGlZWEIwNUdjSFllNEVj?=
+ =?utf-8?B?dHB2ZXp4ZVRJOEhGSUk4MW56M2FnQ3N0aXRvaVRqMy9yWWtPZFNWRXhGeCt5?=
+ =?utf-8?B?Z3dKMi9SOHQwR0RGZjVON1NONU54QmtuSzhkcHRzZUtsejQ0dHVHanFEa0FN?=
+ =?utf-8?B?dkRZM3RFcWw3cmFDby94SEpDOGtNRUNldFRWRzlLd2tzSjBIOWVWSFlqdlpk?=
+ =?utf-8?B?c3pxVGpYV2VYNytIRStsY2RGdUxIRmhHaHpXWElObmJmTTFiak1jVVM1VmZz?=
+ =?utf-8?B?ZlN0dlFaZ0tZbmZ5Wk02TSs3WXdDQmMvZUx4Q0xvczgyYmFub09lbnRnS2Vx?=
+ =?utf-8?B?TVNxa3I3UkU0TmJHVE9lSGxJV21EZUx5T2JxcE9rclNvOXNMT3oxTnRtMGJa?=
+ =?utf-8?B?SnJTZnZDTklDN3NER1d1bjBhdllTSGVndENjTE9uVG1SYjd2Y09wa1BDMTM2?=
+ =?utf-8?B?SzFNVDhpK2h2WVRnSzh6QTh6WTdsWVF4U0RjOGpab3IvcEZ1ak43RkV5SC9J?=
+ =?utf-8?B?QkhUeTU5eU14TGVVekFhOWkwZmJpRU9QQmt3R2UzcDV0SEYzekRCNUNZV0JO?=
+ =?utf-8?B?TVJtVjBLbEc4c1c5V3VOdXA2cm00S1hIMldKZXNvYVZoMFJ4L0tmdnc5MWc2?=
+ =?utf-8?B?ZTkxWjFreUgwSlY0Tk1Nb3NKQ0g2czVkNXZtV1dYRkRKeHRhVytzdG9iYTZD?=
+ =?utf-8?B?eHoyZnV2VlNST3JwYy9IY0pHZHhJS0s4cjhWc3VjUVhOSkJ2cTNtd1dzWXg5?=
+ =?utf-8?B?SDVLSlBKNjhUWDJKLzJtSkNhcU1OeXlmYzN3cWE4bWxyKzJYUHh0TVBUQXMw?=
+ =?utf-8?B?ajlSa043WjRoSmIxMkRQNGUxbVhRc3NxUDlOYXBzekl4NnJOcndZR3k2UUV4?=
+ =?utf-8?B?OGNIUWlNZi8xV2tQM2ZPSWk0c1UrTWw5YmsrYkQ3dWdDME1BU3JieWd3RUZx?=
+ =?utf-8?B?amorYmpFMXNHN1d4WEorcXovT3RjemVCeWtaM2VQOVJIYzZILzZaQXFRbzdw?=
+ =?utf-8?B?UXNWUU9NdTRRVDNSNjhzRWdaVWlDNVZDZUpmTHhMalJFWU8vVklwVlBERmRG?=
+ =?utf-8?B?alUwRk9hTlhwMnVHREhnK1NKZDZJTXp0M3RySklkd2JocDVaOXVLWm13b2tQ?=
+ =?utf-8?B?bW1EanFsUlFHaVVUU1VFUHM4V0dzYUtxUWRiWDZ5YTBtQ2Y3ek5zaGEzamha?=
+ =?utf-8?B?REV3Z0xMNnIxT1FFWTFiMitlMTIyWkVENWpxNjlHNWxrSSt3WS9UMjZZUENS?=
+ =?utf-8?B?bFpXYXJ2UVJIRGNKK3B5TllZSGpXQjZDNElIeHJzU0VVcE5VVWhjbDJrczYv?=
+ =?utf-8?B?U1p5R3pCb3NyczNZbk55YWxxRU0vOFFqMEptdThuZ2V1dXJHd3BDaVQ2eThD?=
+ =?utf-8?B?bk81M1hrSFhsbjNhUThMVUdoLzJna2tROTlDa1N0NVh1VE5sRFNha1NycmhE?=
+ =?utf-8?B?dEhzUGdBdVZHVzhITVM0MjJCK2FMaXE4TmVOcHpGM2d2WnVYcXRKcXhOUENk?=
+ =?utf-8?B?SVRIM2tPQmo1bUFIbnNmcmppM2lpUHQxL1k2eTVzNkF1S3JCeHhTcUFFS0Y4?=
+ =?utf-8?B?WGdkQlhxWklaWU5wOXNoNUpXNUkzaytrUi9EYUpSSm9jSFp6TG9FZXU4dlZs?=
+ =?utf-8?B?bmJiTVVPcDJuR1owV01IQ282N3BvRUtIK2xSL2FiVkpDNUc5Y0UvLzZ4TFZM?=
+ =?utf-8?B?ZVN6UlFTc1NtUk5MeEVoaitrdGloYWRMblY2c0JYL2ZDeVBvM0gzcDVjWGtW?=
+ =?utf-8?B?Zmlaa2RscVAxaCsvS2luNTZOVXZUNW53MHU5eVl3bENxZXozT1dCOWNtbVEx?=
+ =?utf-8?B?WGExb1htY1hrdEVSU1pTRGNZdURZS2VaaE5aczlWNWNrN01qS0RzLzdyWUlJ?=
+ =?utf-8?B?MDEyQlZBTWU2RW1rcnFjYjVLUVpSczIremczOFUxbXlMT2krUzd2RzVIV2Jm?=
+ =?utf-8?B?NlY0a1lKNjM1b0hYUGhNVXdMeWl6UzJJck5wRHB0SjNOSERXbkhsdXZ3OG9H?=
+ =?utf-8?B?ZCtJdTZVL05YOFljMnpYZnN5YkZrOGRMWkxoOGdrVGJ4cDdJS1g5UHpuRXhD?=
+ =?utf-8?B?SlVaSHFMUUJuNnVhSk8rMjJCQ0pHTEE1eUtFaXJpNU1HSEVQZGNMZnAwR2wy?=
+ =?utf-8?B?b2p3aUNpQXoxYUVCQlo1dFMyMEZnbVdvU2x0V0ZpK1BqVjZqWnZMVWFUVmZk?=
+ =?utf-8?Q?95NcYsb7CwxsS2TQ=3D?=
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1df07f24-5069-45a8-dcc6-08da0e6888a9
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2022 14:05:36.1379
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZzLpZ+faEM8CyFd3AEyUWRleLBr6G7L9UqVxktuM0TJ1iHW0Kb5uw8AljUfzNB8/6RcbCDkWo2HxT/Xv9UVHaw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5858
+X-OriginatorOrg: citrix.com
 
-flight 168844 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/168844/
+Ping?
 
-Regressions :-(
+There was some discussion on whether we need to handle such empty
+sections, but I think we settled that it's necessary.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
- build-amd64                   6 xen-build                fail REGR. vs. 168254
- build-i386                    6 xen-build                fail REGR. vs. 168254
- build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+Thanks, Roger.
 
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
-
-version targeted for testing:
- ovmf                 69218d5d2854acaa7a11c777244de4a297d2fbb9
-baseline version:
- ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
-
-Last test of basis   168254  2022-02-28 10:41:46 Z   25 days
-Failing since        168258  2022-03-01 01:55:31 Z   24 days  252 attempts
-Testing same since   168832  2022-03-25 01:43:21 Z    0 days    4 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Abdul Lateef Attar <abdattar@amd.com>
-  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
-  Abner Chang <abner.chang@hpe.com>
-  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Guo Dong <guo.dong@intel.com>
-  Guomin Jiang <guomin.jiang@intel.com>
-  Hao A Wu <hao.a.wu@intel.com>
-  Hua Ma <hua.ma@intel.com>
-  Huang, Li-Xia <lisa.huang@intel.com>
-  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
-  Jason <yun.lou@intel.com>
-  Jason Lou <yun.lou@intel.com>
-  Ken Lautner <kenlautner3@gmail.com>
-  Kenneth Lautner <kenlautner3@gmail.com>
-  Kuo, Ted <ted.kuo@intel.com>
-  Li, Zhihao <zhihao.li@intel.com>
-  Lixia Huang <lisa.huang@intel.com>
-  Lou, Yun <Yun.Lou@intel.com>
-  Ma, Hua <Hua.Ma@intel.com>
-  Mara Sophie Grosch <littlefox@lf-net.org>
-  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
-  Matt DeVillier <matt.devillier@gmail.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Patrick Rudolph <patrick.rudolph@9elements.com>
-  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sean Rhodes <sean@starlabs.systems>
-  Sebastien Boeuf <sebastien.boeuf@intel.com>
-  Sunny Wang <sunny.wang@arm.com>
-  Ted Kuo <ted.kuo@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
-  Xiaolu.Jiang <xiaolu.jiang@intel.com>
-  Zhihao Li <zhihao.li@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 904 lines long.)
+On Thu, Mar 17, 2022 at 12:08:53PM +0100, Roger Pau Monne wrote:
+> A side effect of ignoring such sections is that symbols belonging to
+> them won't be resolved, and that could make relocations belonging to
+> other sections that reference those symbols fail.
+> 
+> For example it's likely to have an empty .altinstr_replacement with
+> symbols pointing to it, and marking the section as ignored will
+> prevent the symbols from being resolved, which in turn will cause any
+> relocations against them to fail.
+> 
+> In order to solve this do not ignore sections with 0 size, only ignore
+> sections that don't have the SHF_ALLOC flag set.
+> 
+> Special case such empty sections in move_payload so they are not taken
+> into account in order to decide whether a livepatch can be safely
+> re-applied after a revert.
+> 
+> Fixes: 98b728a7b2 ('livepatch: Disallow applying after an revert')
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+>  xen/common/livepatch.c          | 16 +++++++++++-----
+>  xen/include/xen/livepatch_elf.h |  2 +-
+>  2 files changed, 12 insertions(+), 6 deletions(-)
+> 
+> diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
+> index be2cf75c2d..abc1cae136 100644
+> --- a/xen/common/livepatch.c
+> +++ b/xen/common/livepatch.c
+> @@ -300,9 +300,6 @@ static int move_payload(struct payload *payload, struct livepatch_elf *elf)
+>           * and .shstrtab. For the non-relocate we allocate and copy these
+>           * via other means - and the .rel we can ignore as we only use it
+>           * once during loading.
+> -         *
+> -         * Also ignore sections with zero size. Those can be for example:
+> -         * data, or .bss.
+>           */
+>          if ( livepatch_elf_ignore_section(elf->sec[i].sec) )
+>              offset[i] = UINT_MAX;
+> @@ -361,8 +358,17 @@ static int move_payload(struct payload *payload, struct livepatch_elf *elf)
+>              else if ( elf->sec[i].sec->sh_flags & SHF_WRITE )
+>              {
+>                  buf = rw_buf;
+> -                rw_buf_sec = i;
+> -                rw_buf_cnt++;
+> +                if ( elf->sec[i].sec->sh_size )
+> +                {
+> +                    /*
+> +                     * Special handling of RW empty regions: do not account for
+> +                     * them in order to decide whether a patch can safely be
+> +                     * re-applied, but assign them a load address so symbol
+> +                     * resolution and relocations work.
+> +                     */
+> +                    rw_buf_sec = i;
+> +                    rw_buf_cnt++;
+> +                }
+>              }
+>              else
+>                  buf = ro_buf;
+> diff --git a/xen/include/xen/livepatch_elf.h b/xen/include/xen/livepatch_elf.h
+> index 9ad499ee8b..5b1ec469da 100644
+> --- a/xen/include/xen/livepatch_elf.h
+> +++ b/xen/include/xen/livepatch_elf.h
+> @@ -48,7 +48,7 @@ int livepatch_elf_perform_relocs(struct livepatch_elf *elf);
+>  
+>  static inline bool livepatch_elf_ignore_section(const Elf_Shdr *sec)
+>  {
+> -    return !(sec->sh_flags & SHF_ALLOC) || sec->sh_size == 0;
+> +    return !(sec->sh_flags & SHF_ALLOC);
+>  }
+>  #endif /* __XEN_LIVEPATCH_ELF_H__ */
+>  
+> -- 
+> 2.34.1
+> 
 
