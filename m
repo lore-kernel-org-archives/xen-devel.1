@@ -4,40 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB93C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Mar 2022 16:29:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.294837.501530 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F78C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Mar 2022 16:35:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.294841.501542 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXmoH-0004rH-6g; Fri, 25 Mar 2022 16:29:09 +0000
+	id 1nXmto-0006J5-UG; Fri, 25 Mar 2022 16:34:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 294837.501530; Fri, 25 Mar 2022 16:29:09 +0000
+Received: by outflank-mailman (output) from mailman id 294841.501542; Fri, 25 Mar 2022 16:34:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nXmoH-0004rA-3d; Fri, 25 Mar 2022 16:29:09 +0000
-Received: by outflank-mailman (input) for mailman id 294837;
- Fri, 25 Mar 2022 16:29:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qzZe=UE=linaro.org=alex.bennee@srs-se1.protection.inumbo.net>)
- id 1nXmoF-0004r4-LZ
- for xen-devel@lists.xen.org; Fri, 25 Mar 2022 16:29:07 +0000
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [2a00:1450:4864:20::630])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id af448af8-ac58-11ec-a405-831a346695d4;
- Fri, 25 Mar 2022 17:29:06 +0100 (CET)
-Received: by mail-ej1-x630.google.com with SMTP id dr20so16408054ejc.6
- for <xen-devel@lists.xen.org>; Fri, 25 Mar 2022 09:29:04 -0700 (PDT)
-Received: from zen.linaroharston ([51.148.130.216])
- by smtp.gmail.com with ESMTPSA id
- ec21-20020a170906b6d500b006d170a3444csm2501103ejb.164.2022.03.25.09.29.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 25 Mar 2022 09:29:02 -0700 (PDT)
-Received: from zen (localhost [127.0.0.1])
- by zen.linaroharston (Postfix) with ESMTP id 3B3BB1FFB7;
- Fri, 25 Mar 2022 16:29:01 +0000 (GMT)
+	id 1nXmto-0006Iy-R3; Fri, 25 Mar 2022 16:34:52 +0000
+Received: by outflank-mailman (input) for mailman id 294841;
+ Fri, 25 Mar 2022 16:34:51 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nXmtn-0006Io-Nn; Fri, 25 Mar 2022 16:34:51 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nXmtn-0006xH-M4; Fri, 25 Mar 2022 16:34:51 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nXmtn-0007wr-Ab; Fri, 25 Mar 2022 16:34:51 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1nXmtn-00027V-A8; Fri, 25 Mar 2022 16:34:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,188 +44,129 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: af448af8-ac58-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=references:user-agent:from:to:cc:subject:date:in-reply-to
-         :message-id:mime-version:content-transfer-encoding;
-        bh=Bs6Ew4qcDSOPaAAgM3hWT94vALNcRpubufRp6rMTEHg=;
-        b=ujpme7SbyVmPEIcwqa0cXoC9/8B8Wh20DGZpLHua01JTm7XTevZlOXLQJ+v/lHn5EZ
-         Qv6J1qyCsWsSCxYK22oW8uQhgp5+DvWC+zy3wFC3psBotw7lQfuKJ9sNeWZy2WHOIcQo
-         6kGSvs5qWqx5vxAXZk62+opV7F45WAZ7WZ8BBx5JhH0hTAfB8WG6dJR7wFZ/LTugGcL4
-         eEhr52xrFW9YfXlYkedb97kmuTOp6TJoxaVEjCIFjuRbgjg2c1g7LvyZrzUYDp36rhnY
-         SMM2QueIjhU5nxlovwmqF4y0PW62aWN0FBxAXBMHexmrLmcN4B7BSyHC3ZowTutMHYXI
-         rXeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:references:user-agent:from:to:cc:subject:date
-         :in-reply-to:message-id:mime-version:content-transfer-encoding;
-        bh=Bs6Ew4qcDSOPaAAgM3hWT94vALNcRpubufRp6rMTEHg=;
-        b=VUzG80Km6CgAYpsYa2HzbtvEm78/uBb0mrU7PfzqebLHJvpLGZ8zP1CgOPS2s+2dTB
-         gY4mX0PX1pPyE7kHNmaEOICX4n5gzmUC6alSWXaIqAwvdmlYpdMVhU4lVunEmIfTlnXA
-         PTu/9S32gkQF4tmxHOSoy81rjBBtmBUFhsZNep/kwByOGQtGiPak7jCBv6hhPbi6yHPT
-         8jmhiZq8g9HcZk28ldRqUoE5Ddvk9z51G3vCJ4GFRp2r6ASn8sY20RXsjKa91x4iGFLW
-         icveSGVKDw84GMt7OKR8s9ard/cPbEkt0LYqjClp1n/ZFD8922r/gJvQ0mjtMGvYFEnI
-         DfNA==
-X-Gm-Message-State: AOAM530xlGdfW7l8V5k5TIBav7rPaMl1FcHBELBNQzmtSd47cXEUqf2F
-	QCWF3ozidYlzuxNJ/wjMgn88Nw==
-X-Google-Smtp-Source: ABdhPJx0oF1r9pspDG5weBqyLFiciFK7zxS9wHzyhze8BE48Ik/CHUsij5AMJexvMZJe7Fb+nkJhaQ==
-X-Received: by 2002:a17:906:32d8:b0:6ce:d850:f79 with SMTP id k24-20020a17090632d800b006ced8500f79mr12201040ejk.414.1648225743518;
-        Fri, 25 Mar 2022 09:29:03 -0700 (PDT)
-References: <alpine.DEB.2.22.394.2203231838130.2910984@ubuntu-linux-20-04-desktop>
- <57549560-879d-f705-8693-9bfdc73e3f7f@suse.com>
-User-agent: mu4e 1.7.10; emacs 28.0.92
-From: Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xen.org, Stratos-dev@op-lists.linaro.org,
- viresh.kumar@linaro.org, Mathieu Poirier <mathieu.poirier@linaro.org>,
- christopher.w.clark@gmail.com, boris.ostrovsky@oracle.com,
- Arnd Bergmann <arnd.bergmann@linaro.org>
-Subject: Re: Understanding osdep_xenforeignmemory_map mmap behaviour
-Date: Fri, 25 Mar 2022 16:07:51 +0000
-In-reply-to: <57549560-879d-f705-8693-9bfdc73e3f7f@suse.com>
-Message-ID: <87mthe0zea.fsf@linaro.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=P3vNdryOXon8n2QkqdpluCrePU5oHrt5NrWFQfpQCZM=; b=oF97Sydm1hfyys4SXTuZLUCguO
+	bZxcIHjhxshU+9fK2MdWnmvEgW1IyWUA30FMv60ZU+HMEwBAgDRb1aPK2rtHSndLXCWoVA1WPph0u
+	WqiaVyYSJJZivF3h4rRs2dX1eSHvx4NC5sM/d+z7UREGXflIG4xPdBRxYN3+lE72dLiY=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-168858-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Subject: [ovmf test] 168858: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=69218d5d2854acaa7a11c777244de4a297d2fbb9
+X-Osstest-Versions-That:
+    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 25 Mar 2022 16:34:51 +0000
+
+flight 168858 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/168858/
+
+Regressions :-(
+
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
+ build-amd64                   6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
+ build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+
+version targeted for testing:
+ ovmf                 69218d5d2854acaa7a11c777244de4a297d2fbb9
+baseline version:
+ ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
+
+Last test of basis   168254  2022-02-28 10:41:46 Z   25 days
+Failing since        168258  2022-03-01 01:55:31 Z   24 days  254 attempts
+Testing same since   168832  2022-03-25 01:43:21 Z    0 days    6 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
+  Abner Chang <abner.chang@hpe.com>
+  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Guo Dong <guo.dong@intel.com>
+  Guomin Jiang <guomin.jiang@intel.com>
+  Hao A Wu <hao.a.wu@intel.com>
+  Hua Ma <hua.ma@intel.com>
+  Huang, Li-Xia <lisa.huang@intel.com>
+  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
+  Jason <yun.lou@intel.com>
+  Jason Lou <yun.lou@intel.com>
+  Ken Lautner <kenlautner3@gmail.com>
+  Kenneth Lautner <kenlautner3@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Li, Zhihao <zhihao.li@intel.com>
+  Lixia Huang <lisa.huang@intel.com>
+  Lou, Yun <Yun.Lou@intel.com>
+  Ma, Hua <Hua.Ma@intel.com>
+  Mara Sophie Grosch <littlefox@lf-net.org>
+  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
+  Matt DeVillier <matt.devillier@gmail.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Rhodes <sean@starlabs.systems>
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Sunny Wang <sunny.wang@arm.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
+  Xiaolu.Jiang <xiaolu.jiang@intel.com>
+  Zhihao Li <zhihao.li@intel.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
 
 
-(add Arnd to CC)
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
-Juergen Gross <jgross@suse.com> writes:
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
 
-> [[PGP Signed Part:Undecided]]
-> On 24.03.22 02:42, Stefano Stabellini wrote:
->> I am pretty sure the reasons have to do with old x86 PV guests, so I am
->> CCing Juergen and Boris.
->>=20
->>> Hi,
->>>
->>> While we've been working on the rust-vmm virtio backends on Xen we
->>> obviously have to map guest memory info the userspace of the daemon.
->>> However following the logic of what is going on is a little confusing.
->>> For example in the Linux backend we have this:
->>>
->>>    void *osdep_xenforeignmemory_map(xenforeignmemory_handle *fmem,
->>>                                     uint32_t dom, void *addr,
->>>                                     int prot, int flags, size_t num,
->>>                                     const xen_pfn_t arr[/*num*/], int e=
-rr[/*num*/])
->>>    {
->>>        int fd =3D fmem->fd;
->>>        privcmd_mmapbatch_v2_t ioctlx;
->>>        size_t i;
->>>        int rc;
->>>
->>>        addr =3D mmap(addr, num << XC_PAGE_SHIFT, prot, flags | MAP_SHAR=
-ED,
->>>                    fd, 0);
->>>        if ( addr =3D=3D MAP_FAILED )
->>>            return NULL;
->>>
->>>        ioctlx.num =3D num;
->>>        ioctlx.dom =3D dom;
->>>        ioctlx.addr =3D (unsigned long)addr;
->>>        ioctlx.arr =3D arr;
->>>        ioctlx.err =3D err;
->>>
->>>        rc =3D ioctl(fd, IOCTL_PRIVCMD_MMAPBATCH_V2, &ioctlx);
->>>
->>> Where the fd passed down is associated with the /dev/xen/privcmd device
->>> for issuing hypercalls on userspaces behalf. What is confusing is why
->>> the function does it's own mmap - one would assume the passed addr would
->>> be associated with a anonymous or file backed mmap region already that
->>> the calling code has setup. Applying a mmap to a special device seems a
->>> little odd.
->>>
->>> Looking at the implementation on the kernel side it seems the mmap
->>> handler only sets a few flags:
->>>
->>>    static int privcmd_mmap(struct file *file, struct vm_area_struct *vm=
-a)
->>>    {
->>>            /* DONTCOPY is essential for Xen because copy_page_range doe=
-sn't know
->>>             * how to recreate these mappings */
->>>            vma->vm_flags |=3D VM_IO | VM_PFNMAP | VM_DONTCOPY |
->>>                             VM_DONTEXPAND | VM_DONTDUMP;
->>>            vma->vm_ops =3D &privcmd_vm_ops;
->>>            vma->vm_private_data =3D NULL;
->>>
->>>            return 0;
->>>    }
->>>
->>> So can I confirm that the mmap of /dev/xen/privcmd is being called for
->>> side effects? Is it so when the actual ioctl is called the correct flags
->>> are set of the pages associated with the user space virtual address
->>> range?
->>>
->>> Can I confirm there shouldn't be any limitation on where and how the
->>> userspace virtual address space is setup for the mapping in the guest
->>> memory?
->>>
->>> Is there a reason why this isn't done in the ioctl path itself?
->
-> For a rather long time we were using "normal" user pages for this purpose,
-> which were just locked into memory for doing the hypercall.
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
 
-Was this using the normal mlock() semantics to stop pages being swapped
-out of RAM?
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
-> Unfortunately there have been very rare problems with that approach, as
-> the Linux kernel can set a user page related PTE to invalid for short
-> periods of time, which led to EFAULT in the hypervisor when trying to
-> access the hypercall data.
 
-I must admit I'm not super familiar with the internals of page table
-handling with Linux+Xen. Doesn't the kernel need to delegate the
-tweaking of page tables to the hypervisor or is it allowed to manipulate
-the page tables itself?
+Not pushing.
 
-> In Linux this can avoided only by using kernel memory, which is the
-> reason why the hypercall buffers are allocated and mmap()-ed through the
-> privcmd driver.
->
->>>
->>> I'm trying to understand the differences between Xen and KVM in the API
->>> choices here. I think the equivalent is the KVM_SET_USER_MEMORY_REGION
->>> ioctl for KVM which brings a section of the guest physical address space
->>> into the userspaces vaddr range.
->
-> The main difference is just that the consumer of the hypercall buffer is
-> NOT the kernel, but the hypervisor. In the KVM case both are the same, so
-> a brief period of an invalid PTE can be handled just fine in KVM, while
-> the Xen hypervisor has no idea that this situation will be over very
-> soon.
-
-I still don't follow the details of why we have the separate mmap. Is it
-purely because the VM flags of the special file can be changed in a way
-that can't be done with a traditional file-backed mmap?
-
-I can see various other devices have their own setting of vm flags but
-VM_DONTCOPY for example can be set with the appropriate madvise call:
-
-       MADV_DONTFORK (since Linux 2.6.16)
-              Do not make the pages in this range available to the child af=
-ter
-              a fork(2).  This is useful to  prevent  copy-on-write  semant=
-ics
-              from  changing  the  physical  location  of a page if the par=
-ent
-              writes to it after a  fork(2).   (Such  page  relocations  ca=
-use
-              problems for hardware that DMAs into the page.)
-
-For the vhost-user work we need to be able to share the guest memory
-between the xen-vhost-master (which is doing the ioctls to talk to Xen)
-and the vhost-user daemon (which doesn't know about hypervisors but just
-deals in memory and events).
-
-Would it be enough to loosen the API and just have xen_remap_pfn()
-verify the kernels VM flags are appropriately set before requesting Xen
-updates the page tables?
-
---=20
-Alex Benn=C3=A9e
+(No revision log; it would be 904 lines long.)
 
