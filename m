@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5182EC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Mar 2022 16:25:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.295528.502955 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EDD6C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Mar 2022 16:35:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.295531.502965 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nYsB0-0008Tj-QD; Mon, 28 Mar 2022 16:25:06 +0000
+	id 1nYsLH-0001bj-Ox; Mon, 28 Mar 2022 16:35:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 295528.502955; Mon, 28 Mar 2022 16:25:06 +0000
+Received: by outflank-mailman (output) from mailman id 295531.502965; Mon, 28 Mar 2022 16:35:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nYsB0-0008Tc-NA; Mon, 28 Mar 2022 16:25:06 +0000
-Received: by outflank-mailman (input) for mailman id 295528;
- Mon, 28 Mar 2022 16:25:05 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nYsAz-0008TU-Kt
- for xen-devel@lists.xenproject.org; Mon, 28 Mar 2022 16:25:05 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nYsAy-0000jo-Fr; Mon, 28 Mar 2022 16:25:04 +0000
-Received: from [54.239.6.185] (helo=[192.168.7.207])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nYsAy-0008JG-9A; Mon, 28 Mar 2022 16:25:04 +0000
+	id 1nYsLH-0001bc-Lt; Mon, 28 Mar 2022 16:35:43 +0000
+Received: by outflank-mailman (input) for mailman id 295531;
+ Mon, 28 Mar 2022 16:35:42 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=3mb0=UH=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1nYsLF-0001bP-MQ
+ for xen-devel@lists.xenproject.org; Mon, 28 Mar 2022 16:35:41 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 189181fc-aeb5-11ec-a405-831a346695d4;
+ Mon, 28 Mar 2022 18:35:39 +0200 (CEST)
+Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
+ [72.81.132.2]) by mx.zohomail.com
+ with SMTPS id 1648485332535493.0992602782029;
+ Mon, 28 Mar 2022 09:35:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,149 +42,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=vyVttO0mpx+DvefUB+zwyjb9MWr1/LRrnzp0cm9giqw=; b=6KjovLon2yzRQcC+pfbcwhgjhC
-	DNkEyp/DTN3UAiOj5+81OMcwZ6Bs0ACWvEucJt/HbV2qZNua9/+DPJTG29HhlV7PRgNrK7JE5qAIV
-	F+MF8vAKxxpAvzdjZHXqTwmuZJEQWLqfE/YEcWWObRXe0bcoqavsCDivg8A8lTSb5o1g=;
-Message-ID: <07fa2884-e497-250b-53ab-dd452b501920@xen.org>
-Date: Mon, 28 Mar 2022 17:25:01 +0100
+X-Inumbo-ID: 189181fc-aeb5-11ec-a405-831a346695d4
+ARC-Seal: i=1; a=rsa-sha256; t=1648485334; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=AuxhZiSizSrTt6uFL8noR1zwcYqQ+mwJHswRmYUavt4CriU2+Nkg+E5KrIl2gIShNWujYkkp+7W4kunG+hWuhoxboTtLZ1xRF9u0AzAkytcx3+h6VGbZR/99qIj1gXnN1uYhXQ7C5bd+wR/CAW7O2yye8/RYUgg3ig5Ox00NszE=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1648485334; h=Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
+	bh=rVSicid7cDP30cTP7xbd0CtnuhwtVXsNfPS2mJ2odxM=; 
+	b=Jt0xt/T/0Rz71KuHa6zuWpMAcgDyZiUvTgYzbKm4lEx6z88v2PHKcY7uJgBjYm3FIyYmY0sHSbNWLsD0wnfEFEPq96N9FEOZUZHrANdvKzVZBMbZic06PnB+clql8IXwr59r2uNv5hoMj+IovkV809S/UCu7NaX7cnDLTR0WgrQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1648485334;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
+	bh=rVSicid7cDP30cTP7xbd0CtnuhwtVXsNfPS2mJ2odxM=;
+	b=sbF8yx5QlHpQLANJ2Q+nGv8QxdV+s5LYtle4OSem00wnx7f1K/G8YKRE2YgZouX3
+	nWc+VtiBP/I4UeaVGCM2ecxHDAkjPJ2wy2OK0mislfLly8k5M6f2u8HFHfYNtO5zFv7
+	XT4ZIKgk9kivEF9cYZpI/VdINqo2XnguWeGZwvVE=
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+To: xen-devel@lists.xenproject.org
+Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	scott.davis@starlab.io,
+	jandryuk@gmail.com,
+	sstabellini@kernel.org
+Subject: [RFC PATCH 0/1] allow system domains to allocate event channels
+Date: Mon, 28 Mar 2022 16:36:21 -0400
+Message-Id: <20220328203622.30961-1-dpsmith@apertussolutions.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.7.0
-Subject: Re: [PATCH v3 5/5] tools: add example application to initialize
- dom0less PV drivers
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, jgross@suse.com,
- Bertrand.Marquis@arm.com, Volodymyr_Babchuk@epam.com,
- Luca Miccio <lucmiccio@gmail.com>,
- Stefano Stabellini <stefano.stabellini@xilinx.com>, Wei Liu <wl@xen.org>,
- Anthony PERARD <anthony.perard@citrix.com>
-References: <alpine.DEB.2.22.394.2201281330520.27308@ubuntu-linux-20-04-desktop>
- <20220128213307.2822078-5-sstabellini@kernel.org>
- <395710eb-ba51-eb67-1519-2a949326f699@xen.org>
- <alpine.DEB.2.22.394.2203221821520.2910984@ubuntu-linux-20-04-desktop>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <alpine.DEB.2.22.394.2203221821520.2910984@ubuntu-linux-20-04-desktop>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
-Hi Stefano,
+In the discussion thread on patch `[PATCH v3 2/5] xen: make
+evtchn_alloc_unbound public` there were a few suggestions on the appropriate
+way to handle allowing the hypervisor to allocate event channels for domains
+being constructed by dom0less and hyerplaunch. After taking another look at how
+to generalize the suggested approach to temporarily promote the idle domain to
+`is_privileged` it became clear there was a simpler and a longer term fix.
 
-On 23/03/2022 02:50, Stefano Stabellini wrote:
-> On Sat, 29 Jan 2022, Julien Grall wrote:
->> On 28/01/2022 21:33, Stefano Stabellini wrote:
->>> +    libxl_uuid uuid;
->>> +    uint64_t v;
->>> +    int rc;
->>> +
->>> +    printf("Init dom0less domain: %d\n", info->domid);
->>> +    dom.guest_domid = info->domid;
->>> +    dom.xenstore_domid = 0;
->>> +    dom.xch = xc_interface_open(0, 0, 0);
->>> +
->>> +    rc = xc_hvm_param_get(dom.xch, info->domid, HVM_PARAM_STORE_EVTCHN,
->>> &v);
->>> +    if (rc != 0) {
->>> +        printf("Failed to get HVM_PARAM_STORE_EVTCHN\n");
->>> +        return 1;
->>> +    }
->>> +    dom.xenstore_evtchn = v;
->>> +
->>> +    /* Console won't be initialized but set its data for completeness */
->>> +    dom.console_domid = 0;
->>
->> I find a bit odd you set the domid but not the event channel, page. Can you
->> explain?
->>
->> Actually, can you explain why only half of the structure is initialized?
->   
-> We are only using the struct xc_dom_image parameter for
-> xc_dom_gnttab_init, and nothing else. We only need very few fields in
-> it. Basically we could call xc_dom_gnttab_seed directly and then we
-> wouldn't need struct xc_dom_image at all. Only the needed fields are
-> currently populated.
+Since it was not discussed and with others are on limited time, I have not done
+any testing beyond making sure this compiles and therefore I am sending this as
+an RFC to allow everyone to review it. This also provides a patch should
+dom0less would like to include it into their patch series.
 
-I would prefer if we don't use xc_dom_image and call 
-xc_dom_gnttab_seed(). This would:
-   1) reduce the risk that one of the unitialized field is will be 
-mistakenly use
-   2) extra documentation (currently missing) to explain which fields is 
-used.
+Daniel P. Smith (1):
+  xsm: allows system domains to allocate evtchn
 
->>> +
->>> +    /* Alloc magic pages */
->>> +    if (alloc_magic_pages(info, &dom) != 0) {
->>> +        printf("Error on alloc magic pages\n");
->>> +        return 1;
->>> +    }
->>> +
->>> +    xc_dom_gnttab_init(&dom);
->>
->> This call as the risk to break the guest if the dom0 Linux doesn't support the
->> acquire interface. This is because it will punch a hole in the domain memory
->> where the grant-table may have already been mapped.
->>
->> Also, this function could fails.
-> 
-> I'll check for return errors. Dom0less is for fully static
-> configurations so I think it is OK to return error and abort if
-> something unexpected happens: dom0less' main reason for being is that
-> there is nothing unexpected :-)
-Does this mean the caller will have to reboot the system if there is an 
-error? IOW, we don't expect them to call ./init-dom0less twice.
-
->>> +
->>> +    libxl_uuid_generate(&uuid);
->>> +    xc_domain_sethandle(dom.xch, info->domid, libxl_uuid_bytearray(&uuid));
->>> +
->>> +    rc = gen_stub_json_config(info->domid, &uuid);
->>> +    if (rc)
->>> +        err(1, "gen_stub_json_config");
->>> +
->>> +    rc = restore_xenstore(xsh, info, uuid, dom.xenstore_evtchn);
->>> +    if (rc)
->>> +        err(1, "writing to xenstore");
->>> +
->>> +    xs_introduce_domain(xsh, info->domid,
->>> +            (GUEST_MAGIC_BASE >> XC_PAGE_SHIFT) + XENSTORE_PFN_OFFSET,
->>> +            dom.xenstore_evtchn);
->>
->> xs_introduce_domain() can technically fails.
-> 
-> OK
-> 
-> 
->>> +    return 0;
->>> +}
->>> +
->>> +/* Check if domain has been configured in XS */
->>> +static bool domain_exists(struct xs_handle *xsh, int domid)
->>> +{
->>> +    return xs_is_domain_introduced(xsh, domid);
->>> +}
->>
->> Would not this lead to initialize a domain with PV driver disabled?
-> 
-> I am not sure I understood your question, but I'll try to answer anyway.
-> This check is purely to distinguish dom0less guests, which needs further
-> initializations, from regular guests (e.g. xl guests) that don't need
-> any actions taken here.
-
-Dom0less domUs can be divided in two categories based on whether they 
-are xen aware (e.g. xen,enhanced is set).
-
-Looking at this script, it seems to assume that all dom0less domUs are 
-Xen aware. So it will end up to allocate Xenstore ring and call 
-xs_introduce_domain(). I suspect the call will end up to fail because 
-the event channel would be 0.
-
-So did you try to use this script on a platform where there only xen 
-aware domU and/or a mix?
-
-Cheers,
+ xen/common/event_channel.c | 4 ++--
+ xen/include/xsm/dummy.h    | 8 ++++++--
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
 -- 
-Julien Grall
+2.20.1
+
 
