@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF004C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Mar 2022 19:05:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.296501.504752 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4599CC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Mar 2022 19:47:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.296524.504765 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZddB-0002IC-Ap; Wed, 30 Mar 2022 19:05:21 +0000
+	id 1nZeHb-0006vP-KU; Wed, 30 Mar 2022 19:47:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 296501.504752; Wed, 30 Mar 2022 19:05:21 +0000
+Received: by outflank-mailman (output) from mailman id 296524.504765; Wed, 30 Mar 2022 19:47:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZddB-0002HN-79; Wed, 30 Mar 2022 19:05:21 +0000
-Received: by outflank-mailman (input) for mailman id 296501;
- Wed, 30 Mar 2022 19:05:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nZeHb-0006vI-Hd; Wed, 30 Mar 2022 19:47:07 +0000
+Received: by outflank-mailman (input) for mailman id 296524;
+ Wed, 30 Mar 2022 19:47:06 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=L21/=UJ=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1nZdd9-0001VT-8X
- for xen-devel@lists.xenproject.org; Wed, 30 Mar 2022 19:05:19 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 560afc2e-b05c-11ec-a405-831a346695d4;
- Wed, 30 Mar 2022 21:05:18 +0200 (CEST)
-Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1648667098306644.7320036155761;
- Wed, 30 Mar 2022 12:04:58 -0700 (PDT)
+ <SRS0=wjcS=UJ=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
+ id 1nZeHa-0006vC-Kz
+ for xen-devel@lists.xenproject.org; Wed, 30 Mar 2022 19:47:06 +0000
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [2607:f8b0:4864:20::829])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 2c4fc833-b062-11ec-8fbc-03012f2f19d4;
+ Wed, 30 Mar 2022 21:47:04 +0200 (CEST)
+Received: by mail-qt1-x829.google.com with SMTP id s11so19113150qtc.3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Mar 2022 12:47:04 -0700 (PDT)
+Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:ba27:ebff:fee8:ce27])
+ by smtp.gmail.com with ESMTPSA id
+ x4-20020a05620a258400b0067d47fb5aa4sm1895896qko.63.2022.03.30.12.47.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Mar 2022 12:47:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,89 +46,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 560afc2e-b05c-11ec-a405-831a346695d4
-ARC-Seal: i=1; a=rsa-sha256; t=1648667100; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=PAvk23Bp7OtwQ34hjKg724vdDXmYp6UIWNv4TDRbpKCX7HyxO2AOGo2MnX2CxV5sjrmbXak7X8QD+HAj6BRk72yilMYNpxVHDdx07cPtoSTnbrM/SFCl9Up2erpztzZ+8lljUp6i6FUJQkNFOi2VviY2CBXQOPMwAbbWLvxfVGA=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1648667100; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=dB9qOZNsWI6cdhi3GPQMvCqqeva+kPJ+omKewxXhvII=; 
-	b=jMRIkmlwpqBXCDmGVKiO1J7il6k/RLDL3Xq13V2/8PIJEMLXGVFQClGOlnIyxWS9PLcKNIVkZx4HzjU+lO2GPg3J1HYZduxmFPEU8TQKd1QqCJDJNgjEMk2upIDsQ1b7e/qQz3fM7XKVpMyWyAY0rs/inyKVJFSW2FjWw2oELP0=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1648667100;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=dB9qOZNsWI6cdhi3GPQMvCqqeva+kPJ+omKewxXhvII=;
-	b=uk3A1857UhrOj+FEX5+zWliaVJduT9HgfOaCYkUQplgjGzFRXXT+u2Apki667jlV
-	I1pVnlIJIB+WS6PpwLKv2sFSr0p7UuOktkTF9nNP7wiV/TGAPgRIt9dzpJqQC6/TogK
-	s7pfv522ajyftOZdqblzm7u/zoUkzAGDJb0UK4uU=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+X-Inumbo-ID: 2c4fc833-b062-11ec-8fbc-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=SyDB2WAHAhwiKBINMlehh9VGxcM27O5l3BvqNPNjvAo=;
+        b=ewQRmR9r9FWsDoBzfGiucgKYiugn/l8Na2fK4+7Pwu56IpYC63c9463MqRrk2/DXfp
+         8lHmRvhxHEZdVvejelEwXTlwxDITwcPKUg2d3S4z8YQBVkobE28uNOvGpgB4hHRSOrhf
+         z270tjUU/2gvjPHJtQZKfCMddDYbzwgWG0iauRflqHeR0hNbWikYbH+ONkJDw6OK63ic
+         3NVlyddoihGWyrSLqVpKsP59uYH1RfLVHroM9Ypgg4fjomnE9ex35bMF834+t7ycAgWd
+         DjHLVQVzUd+oA0R00wrn/tXxBrTWayxAy/vxHRDXSNn/ibRD651orIZoh5sy+POTobqp
+         sFnw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=SyDB2WAHAhwiKBINMlehh9VGxcM27O5l3BvqNPNjvAo=;
+        b=e6iuf7fzVAC3Q69FKi92v8EWFp0um8EmVu/7ElPBu0/x+6WgUFW4dcNTW2nuY0gvAh
+         bBpd2jZOEuTCE6EVVXMsdTWpexECFTh84HNoN261QDCe812w8qggYsPHu3Zm/kxN7GYP
+         MUlQLdZ/bRCOIL3jNmcPyVZUxgkNzTbo8v0rGe6GjURlNk87tIiG6oS95Ugmk0yLzA1Z
+         S/LGkAL+q8Key39weUnCOy3MVBpsqatMojXDPU4sW9tLuxC6LWNNXk7oCOL2tM5273E6
+         AeR6VAAy0d+oij7Vyg9Vc5GgMCbPyiQ+/Nq5Tk8i85I4jYvQRMDLSGrf9KPHsjgEVnvk
+         ODxA==
+X-Gm-Message-State: AOAM533oAS1apQkaR7bMS4/mdYNRjZnycharH35eA4gp//KQ59jMUXwC
+	if/qKIS1CrCvXJCDpwvzAka3UtI/aRs=
+X-Google-Smtp-Source: ABdhPJwxzfMZhl7myAdznnlaHwalOTY5yvtzsKCQATMNu0GEdJRII5z+N7WvmreWiqTh0NbgJa387g==
+X-Received: by 2002:a05:622a:1801:b0:2e0:6909:6e0 with SMTP id t1-20020a05622a180100b002e0690906e0mr1186694qtc.148.1648669622856;
+        Wed, 30 Mar 2022 12:47:02 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Wei Liu <wl@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	xen-devel@lists.xenproject.org
-Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	scott.davis@starlab.io,
-	jandryuk@gmail.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 2/2] arch: ensure idle domain is not left privileged
-Date: Wed, 30 Mar 2022 19:05:49 -0400
-Message-Id: <20220330230549.26074-3-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20220330230549.26074-1-dpsmith@apertussolutions.com>
-References: <20220330230549.26074-1-dpsmith@apertussolutions.com>
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Subject: [PATCH] libxl: Retry QMP PCI device_add
+Date: Wed, 30 Mar 2022 15:46:56 -0400
+Message-Id: <20220330194656.39051-1-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
 
-It is now possible to promote the idle domain to privileged during setup.  It
-is not desirable for the idle domain to still be privileged when moving into a
-running state. If the idle domain was elevated and not properly demoted, it is
-desirable to fail at this point. This commit adds an assert for both x86 and
-Arm just before transitioning to a running state that ensures the idle is not
-privileged.
+PCI device assignment to an HVM with stubdom is potentially racy.  First
+the PCI device is assigned to the stubdom via the PV PCI protocol.  Then
+QEMU is sent a QMP command to attach the PCI device to QEMU running
+within the stubdom.  However, the sysfs entries within the stubdom may
+not have appeared by the time QEMU receives the device_add command
+resulting in errors like:
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+libxl_qmp.c:1838:qmp_ev_parse_error_messages:Domain 10:Could not open '/sys/bus/pci/devices/0000:00:1f.3/config': No such file or directory
+
+This patch retries the device assignment up to 10 times with a 1 second
+delay between.  That roughly matches the overall hotplug timeout.
+
+The qmp_ev_parse_error_messages error is still printed since it happens
+at a lower level than the pci code controlling the retries.  With that,
+the "Retrying PCI add %d" message is also printed at ERROR level to
+clarify what is happening.
+
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 ---
- xen/arch/arm/setup.c | 3 +++
- xen/arch/x86/setup.c | 3 +++
- 2 files changed, 6 insertions(+)
+ tools/libs/light/libxl_pci.c | 32 ++++++++++++++++++++++++++++++--
+ 1 file changed, 30 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-index 7968cee47d..3de394e946 100644
---- a/xen/arch/arm/setup.c
-+++ b/xen/arch/arm/setup.c
-@@ -973,6 +973,9 @@ void __init start_xen(unsigned long boot_phys_offset,
-     /* Hide UART from DOM0 if we're using it */
-     serial_endboot();
+diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
+index 4bbbfe9f16..8d6a0e65cc 100644
+--- a/tools/libs/light/libxl_pci.c
++++ b/tools/libs/light/libxl_pci.c
+@@ -1109,8 +1109,10 @@ typedef struct pci_add_state {
+     libxl__xswait_state xswait;
+     libxl__ev_qmp qmp;
+     libxl__ev_time timeout;
++    libxl__ev_time timeout_retries;
+     libxl_device_pci pci;
+     libxl_domid pci_domid;
++    int retries;
+ } pci_add_state;
  
-+    /* Ensure idle domain was not left privileged */
-+    ASSERT(current->domain->is_privileged == false) ;
+ static void pci_add_qemu_trad_watch_state_cb(libxl__egc *egc,
+@@ -1118,6 +1120,8 @@ static void pci_add_qemu_trad_watch_state_cb(libxl__egc *egc,
+ static void pci_add_qmp_device_add(libxl__egc *, pci_add_state *);
+ static void pci_add_qmp_device_add_cb(libxl__egc *,
+     libxl__ev_qmp *, const libxl__json_object *, int rc);
++static void pci_add_qmp_device_add_retry(libxl__egc *egc, libxl__ev_time *ev,
++    const struct timeval *requested_abs, int rc);
+ static void pci_add_qmp_query_pci_cb(libxl__egc *,
+     libxl__ev_qmp *, const libxl__json_object *, int rc);
+ static void pci_add_timeout(libxl__egc *egc, libxl__ev_time *ev,
+@@ -1137,7 +1141,9 @@ static void do_pci_add(libxl__egc *egc,
+     libxl__xswait_init(&pas->xswait);
+     libxl__ev_qmp_init(&pas->qmp);
+     pas->pci_domid = domid;
++    pas->retries = 0;
+     libxl__ev_time_init(&pas->timeout);
++    libxl__ev_time_init(&pas->timeout_retries);
+ 
+     if (type == LIBXL_DOMAIN_TYPE_INVALID) {
+         rc = ERROR_FAIL;
+@@ -1252,10 +1258,22 @@ static void pci_add_qmp_device_add_cb(libxl__egc *egc,
+                                       const libxl__json_object *response,
+                                       int rc)
+ {
+-    EGC_GC;
+     pci_add_state *pas = CONTAINER_OF(qmp, *pas, qmp);
++    STATE_AO_GC(pas->aodev->ao);
+ 
+-    if (rc) goto out;
++    if (rc) {
++        if (pas->retries++ < 10) {
++            LOGD(ERROR, qmp->domid, "Retrying PCI add %d", pas->retries);
++            rc = libxl__ev_time_register_rel(ao, &pas->timeout_retries,
++                                             pci_add_qmp_device_add_retry,
++                                             1000);
++            if (rc) goto out;
 +
-     system_state = SYS_STATE_active;
++            return; /* wait for the timeout to then retry */
++        } else {
++            goto out;
++        }
++    }
  
-     create_domUs();
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 885919d5c3..b868463f83 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -589,6 +589,9 @@ static void noinline init_done(void)
-     void *va;
-     unsigned long start, end;
+     qmp->callback = pci_add_qmp_query_pci_cb;
+     rc = libxl__ev_qmp_send(egc, qmp, "query-pci", NULL);
+@@ -1266,6 +1284,15 @@ out:
+     pci_add_dm_done(egc, pas, rc); /* must be last */
+ }
  
-+    /* Ensure idle domain was not left privileged */
-+    ASSERT(current->domain->is_privileged == false) ;
++static void pci_add_qmp_device_add_retry(libxl__egc *egc, libxl__ev_time *ev,
++                                         const struct timeval *requested_abs,
++                                         int rc)
++{
++    pci_add_state *pas = CONTAINER_OF(ev, *pas, timeout_retries);
 +
-     system_state = SYS_STATE_active;
++    pci_add_qmp_device_add(egc, pas);
++}
++
+ static void pci_add_qmp_query_pci_cb(libxl__egc *egc,
+                                      libxl__ev_qmp *qmp,
+                                      const libxl__json_object *response,
+@@ -1507,6 +1534,7 @@ out_no_irq:
+         rc = 0;
+ out:
+     libxl__ev_time_deregister(gc, &pas->timeout);
++    libxl__ev_time_deregister(gc, &pas->timeout_retries);
+     pas->callback(egc, pas, rc);
+ }
  
-     domain_unpause_by_systemcontroller(dom0);
 -- 
-2.20.1
+2.35.1
 
 
