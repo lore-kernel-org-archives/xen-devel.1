@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D32B7C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Mar 2022 18:17:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.296466.504644 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B3DC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Mar 2022 18:17:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.296468.504666 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZcso-0001MN-7P; Wed, 30 Mar 2022 18:17:26 +0000
+	id 1nZct0-0001yY-PX; Wed, 30 Mar 2022 18:17:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 296466.504644; Wed, 30 Mar 2022 18:17:26 +0000
+Received: by outflank-mailman (output) from mailman id 296468.504666; Wed, 30 Mar 2022 18:17:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZcso-0001MF-3n; Wed, 30 Mar 2022 18:17:26 +0000
-Received: by outflank-mailman (input) for mailman id 296466;
- Wed, 30 Mar 2022 18:17:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nZct0-0001yO-KY; Wed, 30 Mar 2022 18:17:38 +0000
+Received: by outflank-mailman (input) for mailman id 296468;
+ Wed, 30 Mar 2022 18:17:36 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=wjcS=UJ=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
- id 1nZcsm-0001M9-Q3
- for xen-devel@lists.xenproject.org; Wed, 30 Mar 2022 18:17:24 +0000
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [2607:f8b0:4864:20::72d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a52d354b-b055-11ec-8fbc-03012f2f19d4;
- Wed, 30 Mar 2022 20:17:23 +0200 (CEST)
-Received: by mail-qk1-x72d.google.com with SMTP id 85so17329323qkm.9
- for <xen-devel@lists.xenproject.org>; Wed, 30 Mar 2022 11:17:23 -0700 (PDT)
+ id 1nZcsy-0001bv-Kq
+ for xen-devel@lists.xenproject.org; Wed, 30 Mar 2022 18:17:36 +0000
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [2607:f8b0:4864:20::f33])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ac1c6647-b055-11ec-a405-831a346695d4;
+ Wed, 30 Mar 2022 20:17:35 +0200 (CEST)
+Received: by mail-qv1-xf33.google.com with SMTP id jo24so17532985qvb.5
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Mar 2022 11:17:35 -0700 (PDT)
 Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:ba27:ebff:fee8:ce27])
  by smtp.gmail.com with ESMTPSA id
- w10-20020a05620a424a00b00680c0c0312dsm7647908qko.30.2022.03.30.11.17.21
+ j1-20020a05620a410100b0067ec5ecac66sm13021652qko.19.2022.03.30.11.17.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Mar 2022 11:17:21 -0700 (PDT)
+ Wed, 30 Mar 2022 11:17:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,89 +46,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a52d354b-b055-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: ac1c6647-b055-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=5YqCLPlryrNNNW0/olca6wbBWbnfZE4rRVNX1Y/x2+E=;
-        b=bK3iFG5bWynCGaU2ntDTSGnUaORvgJ3IaMBlcLG8ci7GlRARjRgcAID2RzsdQKa5Yj
-         Og7ZFUxGhsHr4FKlrO5EF79ecS0niCyjghloIo/hqD1sjGWvucP9sAobAD5kafsQGhf4
-         a33pA6EpW3u43Gz/glwc6CEqFrgWSjUt++rFTptSNIaq8tmN5z26HD8PHXPZjMCuvfmg
-         NoiR3YRQAEk5G//x8uvP08jrPOzillmltsygJ2Hvfiu6N0gGNRdmheoIpg2zZIAyDFXW
-         bIt6Y6lLjEIP4Zo8IciaSvr8cK/gft0h6cIuykOaqPQBzmASSvf+ilROIIbMKleynKy2
-         p6Ug==
+        bh=pHvZEn7+cQHssE3I7gGuWSbtom5d43HxgDpkmlD56Vg=;
+        b=Y1Oywlcn4NzkRRdHX/HPJEkzgfrOjCtr9CMY+ksEZ2Dg2KVUYYn3fO5tFwDzm6kghX
+         mFZNdh2BumHlGh4gwDVCfYso9IukdM/ZUaI5MKVHVcPV/gJS0id858FsU0vcfPzYxaOW
+         BVTf5MyMjei83A+4YVIjffunKMn7r4vUWcOJQrGFDXrJ6cyaZS0E1onXNNwmxMQItOWL
+         ge2Jf9ycPAPNf/vpZIgelBD3Aebx2pwEMEzlCelKnk1fnOynDpO7OJnDPi/L5lL8BH+2
+         y0oMLxrD311yph0zd7antevynW7jgQAU428h7NIo4w+reBbpco2ksl/VA0iZcEVDiht/
+         qFpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=5YqCLPlryrNNNW0/olca6wbBWbnfZE4rRVNX1Y/x2+E=;
-        b=nHfrfyUAf4ilcxK/cUfRUmipUSarB2T/bwuGR7LiYtg14QNkhRiq/vfNaudO/IYQ1s
-         6yMqYGx4jrhU9UeRIqzpjYtHGz/47e624YR4FBmA+i8Yzllg4vDBxanpIaqch4PpQQnb
-         ieVneZ+ggZ48IQSiECG+Dd1qy8XhZMD85JJ49zqUXNMp2bvOWW6T2n7X5By1ep5QT0gJ
-         gk1wnaZK6axeAI2XDGEkYObgbzLkNaRgKUdMPkEDwWiIyEjpkAK7VCCaTs9LB6QlCyZQ
-         qgnRzqRwKqimdTfcMNAfRKRfUInp8eX7SAQj7eB6xjUeYJhvEpc5XASdEZnz2Rh7JbZO
-         C3BA==
-X-Gm-Message-State: AOAM532MKbrVm1Zd+fQVb0tgDHQuagdtnpMJ0Dxchy7JuUZ+cUIUrfpl
-	FF0OlWqxj35d37/stPPrIh90KUOMaXk=
-X-Google-Smtp-Source: ABdhPJzQUf/8qwXR20wbxPBnQEhlfkYx6oNT+P5gGem+NBl949xIkf3ITs0D1w4T68XglKkC3drSew==
-X-Received: by 2002:a05:620a:16b7:b0:67d:3abc:e4d2 with SMTP id s23-20020a05620a16b700b0067d3abce4d2mr693864qkj.702.1648664242081;
-        Wed, 30 Mar 2022 11:17:22 -0700 (PDT)
+        bh=pHvZEn7+cQHssE3I7gGuWSbtom5d43HxgDpkmlD56Vg=;
+        b=OmabkmZhAXe9+aWO1tn/BT6SOIb1hu6ZnLDKeUThvlgxozrcW7YtVwueQ/mH5UMxPa
+         AvFRuRXwQTVAf2HiTQIHP/wTPjXAXm/R7nj02QW4p4qUG+J5vLwzL47rttFpwPoRYQs0
+         tXu/0BgcXWIlLA/BCHt+mRUvQluTJcMeDFaNgJ33pyAJyqnvhWfAx9EIjl7TyiOVAD8U
+         HKEMUkQVJwXSS1z/5SJaVpY9qIlSFR6FZeLP/4u1BpyEWTPbFVL4wMW6jdHBXh/+VRls
+         517ItVs3USS89KFNLX/NNEvLW4KV1/KVkMb+CN7cleAP9REPNwUopPfYTbI0NLwoP8GN
+         zKAQ==
+X-Gm-Message-State: AOAM532aYi7COM1tVG1vD+i5GxWvMvEeRt3kzf4i0kkHe4vFdz23aYyE
+	8zM8Gk7sKY0U054VRNCpMljy4DPk9eE=
+X-Google-Smtp-Source: ABdhPJz7VLTKVNyTETqw9Jjjy4PgrvVA/6Fer71PLcEVxi/87OqbFB2Xebxpehtuqx2lStV8f5NIWw==
+X-Received: by 2002:a05:6214:622:b0:441:2918:ee18 with SMTP id a2-20020a056214062200b004412918ee18mr463749qvx.118.1648664254631;
+        Wed, 30 Mar 2022 11:17:34 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Jason Andryuk <jandryuk@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Anthony PERARD <anthony.perard@citrix.com>,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH] libxl: Always set ao for qmp_proxy_spawn_outcome
-Date: Wed, 30 Mar 2022 14:16:58 -0400
-Message-Id: <20220330181658.30209-1-jandryuk@gmail.com>
+Subject: [PATCH] libxl: Don't segfault on soft-reset failure
+Date: Wed, 30 Mar 2022 14:17:27 -0400
+Message-Id: <20220330181727.30303-1-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-I've observed this failed assertion:
-libxl_event.c:2057: libxl__ao_inprogress_gc: Assertion `ao' failed.
+If domain_soft_reset_cb can't rename the save file, it doesn't call
+initiate_domain_create() and calls domcreate_complete().
 
-AFAICT, this is happening in qmp_proxy_spawn_outcome where
-sdss->qmp_proxy_spawn.ao is NULL.
+Skipping initiate_domain_create() means dcs->console_wait is
+uninitialized and all 0s.
 
-The out label of spawn_stub_launch_dm calls qmp_proxy_spawn_outcome, but
-it is only in the success path that sdss->qmp_proxy_spawn.ao gets set to
-the current ao.  Move the setting earlier to have an ao in all paths
-through the function.
+We have:
+  domcreate_complete()
+    libxl__xswait_stop()
+      libxl__ev_xswatch_deregister().
+
+The uninitialized slotnum 0 is considered valid (-1 is the invalid
+sentinel), so the NULL pointer path to passed to xs_unwatch() which
+segfaults.
+
+libxl__ev_xswatch_deregister:watch w=0x12bc250 wpath=(null) token=0/0: deregister slotnum=0
+
+Ensure dcs->console_xswait is minimally initialized by calling
+libxl__xswait_init() in do_domain_soft_reset().
+
+Also add a check for dcs->console_xswait.path being NULL in
+domcreate_complete() to avoid the segfault.
 
 Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
 ---
-Another option would be to make spawn_stub_launch_dm call
-spawn_stubdom_pvqemu_cb on error.  This avoids needing to set
-sdss->qmp_proxy_spawn.ao, but it makes more paths through the code.
----
- tools/libs/light/libxl_dm.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+The NULL check in domcreate_complete isn't needed when the xswait is
+initialized, but it could catch other occurances.
 
-diff --git a/tools/libs/light/libxl_dm.c b/tools/libs/light/libxl_dm.c
-index 9a8ddbe188..59a8dcf3a9 100644
---- a/tools/libs/light/libxl_dm.c
-+++ b/tools/libs/light/libxl_dm.c
-@@ -2468,6 +2468,9 @@ static void spawn_stub_launch_dm(libxl__egc *egc,
-     uint32_t dm_domid = sdss->pvqemu.guest_domid;
-     int need_qemu;
+ tools/libs/light/libxl_create.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/tools/libs/light/libxl_create.c b/tools/libs/light/libxl_create.c
+index 15ed021f41..631caa416d 100644
+--- a/tools/libs/light/libxl_create.c
++++ b/tools/libs/light/libxl_create.c
+@@ -1970,7 +1970,8 @@ static void domcreate_complete(libxl__egc *egc,
+     libxl_domain_config *const d_config = dcs->guest_config;
+     libxl_domain_config *d_config_saved = &dcs->guest_config_saved;
  
-+    /* Set for out label through qmp_proxy_spawn_outcome(). */
-+    sdss->qmp_proxy_spawn.ao = ao;
+-    libxl__xswait_stop(gc, &dcs->console_xswait);
++    if (dcs->console_xswait.path)
++        libxl__xswait_stop(gc, &dcs->console_xswait);
+ 
+     libxl__domain_build_state_dispose(&dcs->build_state);
+ 
+@@ -2176,6 +2177,10 @@ static int do_domain_soft_reset(libxl_ctx *ctx,
+                               aop_console_how);
+     cdcs->domid_out = &domid_out;
+ 
++    /* Initialize in case we end up in domcreate_complete without calling
++     * initiate_domain_create. */
++    libxl__xswait_init(&cdcs->dcs.console_xswait);
 +
-     if (ret) {
-         LOGD(ERROR, guest_domid, "error connecting disk devices");
-         goto out;
-@@ -2567,7 +2570,6 @@ static void spawn_stub_launch_dm(libxl__egc *egc,
-             goto out;
-     }
- 
--    sdss->qmp_proxy_spawn.ao = ao;
-     if (libxl__stubdomain_is_linux(&guest_config->b_info)) {
-         spawn_qmp_proxy(egc, sdss);
-     } else {
+     dom_path = libxl__xs_get_dompath(gc, domid);
+     if (!dom_path) {
+         LOGD(ERROR, domid, "failed to read domain path");
 -- 
 2.35.1
 
