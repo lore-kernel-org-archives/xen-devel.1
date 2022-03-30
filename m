@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4A9C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Mar 2022 17:28:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.296459.504624 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE3CAC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Mar 2022 18:17:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.296467.504654 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZc6m-0004fL-C5; Wed, 30 Mar 2022 17:27:48 +0000
+	id 1nZcst-0001cw-FD; Wed, 30 Mar 2022 18:17:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 296459.504624; Wed, 30 Mar 2022 17:27:48 +0000
+Received: by outflank-mailman (output) from mailman id 296467.504654; Wed, 30 Mar 2022 18:17:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZc6m-0004fE-92; Wed, 30 Mar 2022 17:27:48 +0000
-Received: by outflank-mailman (input) for mailman id 296459;
- Wed, 30 Mar 2022 17:27:47 +0000
+	id 1nZcst-0001cp-C5; Wed, 30 Mar 2022 18:17:31 +0000
+Received: by outflank-mailman (input) for mailman id 296467;
+ Wed, 30 Mar 2022 18:17:29 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Z5fr=UJ=srcf.net=amc96@srs-se1.protection.inumbo.net>)
- id 1nZc6l-0004e6-54
- for xen-devel@lists.xenproject.org; Wed, 30 Mar 2022 17:27:47 +0000
-Received: from ppsw-31.csi.cam.ac.uk (ppsw-31.csi.cam.ac.uk [131.111.8.131])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=wjcS=UJ=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
+ id 1nZcsr-0001bv-MX
+ for xen-devel@lists.xenproject.org; Wed, 30 Mar 2022 18:17:29 +0000
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [2607:f8b0:4864:20::831])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b5434510-b04e-11ec-a405-831a346695d4;
- Wed, 30 Mar 2022 19:27:44 +0200 (CEST)
-Received: from hades.srcf.societies.cam.ac.uk ([131.111.179.67]:52158)
- by ppsw-31.csi.cam.ac.uk (ppsw.cam.ac.uk [131.111.8.137]:25)
- with esmtps (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256)
- id 1nZc6h-000AEC-KW (Exim 4.95) (return-path <amc96@srcf.net>);
- Wed, 30 Mar 2022 18:27:43 +0100
-Received: from [192.168.1.10] (host-78-149-3-47.as13285.net [78.149.3.47])
- (Authenticated sender: amc96)
- by hades.srcf.societies.cam.ac.uk (Postfix) with ESMTPSA id 2095D1FA4C;
- Wed, 30 Mar 2022 18:27:43 +0100 (BST)
+ id a791bdea-b055-11ec-a405-831a346695d4;
+ Wed, 30 Mar 2022 20:17:28 +0200 (CEST)
+Received: by mail-qt1-x831.google.com with SMTP id t7so18832172qta.10
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Mar 2022 11:17:28 -0700 (PDT)
+Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:ba27:ebff:fee8:ce27])
+ by smtp.gmail.com with ESMTPSA id
+ r17-20020a05620a299100b00680b43004bfsm10101405qkp.45.2022.03.30.11.17.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Mar 2022 11:17:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,123 +46,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b5434510-b04e-11ec-a405-831a346695d4
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: https://help.uis.cam.ac.uk/email-scanner-virus
-Message-ID: <408e5e07-453c-f377-a5b0-c421d002aec5@srcf.net>
-Date: Wed, 30 Mar 2022 18:27:42 +0100
+X-Inumbo-ID: a791bdea-b055-11ec-a405-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=bcMntDmKCVs95+e0vkGO4mVI2Vi2Ub88nm3xAyn1r5k=;
+        b=SJJ5ZBhVXh0/cPxy737DuocIHKceO5dNhNeAqReioLJIuK3sssj+2qU2lutvUjQGKZ
+         wTVdvJtU8aTZlEMy+4jEKrNs9qC/H8q9wqTvMezsa3EzaG9Jgf8k698yT4lKJhbOACqC
+         34kOBZeamKwPvBaSWsGLIK4z1zb+hmd7AjvKwI1B4L9KcrpiJzkg8Qakvfui3obNARru
+         B/llZWjWsLA4tYxjd5+/cHVAWxOdoBLhvvGalIGzHh6UTSuCU2fpn1yyBRkP1+XNmymY
+         vqakwjaF8IQS4yIQXfaOOJkbYIN5DfLT8sDWwKFSxoo/3WUXY83Q0v4303Qr+u2eT4V7
+         17Ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=bcMntDmKCVs95+e0vkGO4mVI2Vi2Ub88nm3xAyn1r5k=;
+        b=UsbIWyWHDm/b8mcMA9DK+NC1plfwQVnhCsSrAWiMkvEEYBOe2Aik2Jm3FTHtJXDpsH
+         YQo6N648/qOF8pzkdxmvfhy1aDp3O3XTIFKSdrbqKlV7SEg7v9rQlUffq+FEdXo22Din
+         ori7+D664o3EyS3DAfyTgrwPLtDyRmiwmtEKENqDG9Klx1D7YW/8VdimIK5kmF5EWpvr
+         5YklLr+BsNLR2RG98+N2BTPMH5dACbrEjNMl97de/FxQ8V6qVGKbeVkEw7WcsmBWyRY7
+         IQv5xbFw27mVIvxZ5heniF+lpMlmM8PTbX2lQFAwRAm+8Ocq7iGiry/UpalrH5Va0sR9
+         Jemw==
+X-Gm-Message-State: AOAM532hDs/11k43au/1ax6+cRHPNm3ZQMvKNwPVrIqgoWhhccX2GgtH
+	08p4/NOjOlDiyBWSmLGA100KSIBf6q0=
+X-Google-Smtp-Source: ABdhPJxPx5465p8F+LsFFeoPO1Bylxge6c+JMcqFT38HHWEwHPMOqZGBn5HvPb8Fq5Q+6hLkeHrQ/Q==
+X-Received: by 2002:ac8:5ac2:0:b0:2e1:cc2d:362a with SMTP id d2-20020ac85ac2000000b002e1cc2d362amr790199qtd.584.1648664247023;
+        Wed, 30 Mar 2022 11:17:27 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Jason Andryuk <jandryuk@gmail.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Juergen Gross <jgross@suse.com>
+Subject: [PATCH] libxl: constify libxl__stubdomain_is_linux
+Date: Wed, 30 Mar 2022 14:17:22 -0400
+Message-Id: <20220330181722.30280-1-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.35.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-GB
-To: Anthony PERARD <anthony.perard@citrix.com>,
- Chuck Zmudzinski <brchuckz@netscape.net>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
- Juergen Gross <jgross@suse.com>, Jan Beulich <jbeulich@suse.com>
-References: <b62fbc602a629941c1acaad3b93d250a3eba33c0.1647222184.git.brchuckz.ref@netscape.net>
- <b62fbc602a629941c1acaad3b93d250a3eba33c0.1647222184.git.brchuckz@netscape.net>
- <YkSQIoYhomhNKpYR@perard.uk.xensource.com>
-From: Andrew Cooper <amc96@srcf.net>
-Subject: Re: [XEN PATCH] tools/libs/light/libxl_pci.c: explicitly grant access
- to Intel IGD opregion
-In-Reply-To: <YkSQIoYhomhNKpYR@perard.uk.xensource.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 30/03/2022 18:15, Anthony PERARD wrote:
-> Hi Chuck,
->
-> On Sun, Mar 13, 2022 at 11:41:37PM -0400, Chuck Zmudzinski wrote:
->> When gfx_passthru is enabled for the Intel IGD, hvmloader maps the IGD
->> opregion to the guest but libxl does not grant the guest permission to
-> I'm not reading the same thing when looking at code in hvmloader. It
-> seems that hvmloader allocate some memory for the IGD opregion rather
-> than mapping it.
->
->
-> tools/firmware/hvmloader/pci.c:184
->     if ( vendor_id == 0x8086 )
->     {
->         igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
->         /*
->          * Write the the OpRegion offset to give the opregion
->          * address to the device model. The device model will trap
->          * and map the OpRegion at the give address.
->          */
->         pci_writel(vga_devfn, PCI_INTEL_OPREGION,
->                    igd_opregion_pgbase << PAGE_SHIFT);
->     }
->
-> I think this write would go through QEMU, does it do something with it?
-> (I kind of replying to this question at the end of the mail.)
->
-> Is this code in hvmloader actually run in your case?
->
->> Currently, because of another bug in Qemu upstream, this crash can
->> only be reproduced using the traditional Qemu device model, and of
-> qemu-traditional is a bit old... What is the bug in QEMU? Do you have a
-> link to a patch/mail?
->
->> diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
->> index 4bbbfe9f16..a4fc473de9 100644
->> --- a/tools/libs/light/libxl_pci.c
->> +++ b/tools/libs/light/libxl_pci.c
->> @@ -2531,6 +2572,37 @@ int libxl__grant_vga_iomem_permission(libxl__gc *gc, const uint32_t domid,
->>                    domid, vga_iomem_start, (vga_iomem_start + 0x20 - 1));
->>              return ret;
->>          }
->> +
->> +        /* If this is an Intel IGD, allow access to the IGD opregion */
->> +        if (!libxl__is_igd_vga_passthru(gc, d_config)) return 0;
->> +
->> +        uint32_t igd_opregion = sysfs_dev_get_igd_opregion(gc, pci);
->> +        uint32_t error = 0xffffffff;
->> +        if (igd_opregion == error) break;
->> +
->> +        vga_iomem_start = ( (uint64_t) igd_opregion ) >> XC_PAGE_SHIFT;
->> +        ret = xc_domain_iomem_permission(CTX->xch, stubdom_domid,
->> +                                         vga_iomem_start,
->> +                                         IGD_OPREGION_PAGES, 1);
->> +        if (ret < 0) {
->> +            LOGED(ERROR, domid,
->> +                  "failed to give stubdom%d access to iomem range "
->> +                  "%"PRIx64"-%"PRIx64" for IGD passthru",
->> +                  stubdom_domid, vga_iomem_start, (vga_iomem_start +
->> +                                                IGD_OPREGION_PAGES - 1));
->> +            return ret;
->> +        }
->> +        ret = xc_domain_iomem_permission(CTX->xch, domid,
->> +                                         vga_iomem_start,
->> +                                         IGD_OPREGION_PAGES, 1);
-> Here, you seems to add permission to an address that is read from the
-> pci config space of the device, but as I've pointed above hvmloader
-> seems to overwrite this address. It this call to
-> xc_domain_iomem_permission() does actually anything useful?
-> Or is it by luck that the address returned by
-> sysfs_dev_get_igd_opregion() happened to be the address that hvmloader
-> is going to write?
->
-> Or maybe hvmloader doesn't actually do anything?
->
->
-> Some more though on that, looking at QEMU, it seems that there's already
-> a call to xc_domain_iomem_permission(), in igd_write_opregion(). So
-> adding one in libxl would seems redundant, or maybe it the one for the
-> device model's domain that's needed  (named 'stubdom_domid' here)?
+libxl__stubdomain_is_linux can take a const pointer, so make the change.
 
-This has been discussed before, but noone's done anything about it. 
-It's a massive layering violation for QEMU to issue
-xc_domain_iomem_permission()/etc hypercalls.
+This isn't an issue in-tree, but was found with an OpenXT patch where it
+was called with only const libxl_domain_build_info available.
 
-It should be the toolstack, and only the toolstack, which makes
-permissions hypercalls, which in turn will fix a slew of "QEMU doesn't
-work when it doesn't have dom0 superpowers" bugs with stubdomains.
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+ tools/libs/light/libxl_internal.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-In this case specifically, the opregion is a magic Intel graphics
-specific bodge.  The i915 driver in the guest really does need to access
-part of the real PCH during init, which (in Xen's permission model)
-really does require permitting access to the MMIO range (8k iirc) so it
-can be mapped as a BAR in QEMU's emulated PCH.
+diff --git a/tools/libs/light/libxl_internal.h b/tools/libs/light/libxl_internal.h
+index c0e7779d97..a26daec040 100644
+--- a/tools/libs/light/libxl_internal.h
++++ b/tools/libs/light/libxl_internal.h
+@@ -2326,7 +2326,7 @@ bool libxl__stubdomain_is_linux_running(libxl__gc *gc, uint32_t domid)
+ }
+ 
+ static inline
+-bool libxl__stubdomain_is_linux(libxl_domain_build_info *b_info)
++bool libxl__stubdomain_is_linux(const libxl_domain_build_info *b_info)
+ {
+     /* right now qemu-tranditional implies MiniOS stubdomain and qemu-xen
+      * implies Linux stubdomain */
+-- 
+2.35.1
 
-~Andrew
 
