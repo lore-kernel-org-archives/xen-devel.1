@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C588DC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Mar 2022 09:38:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.296826.505384 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2129C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Mar 2022 09:42:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.296833.505395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZrFX-00028N-9V; Thu, 31 Mar 2022 09:37:51 +0000
+	id 1nZrKB-0003Wb-TV; Thu, 31 Mar 2022 09:42:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 296826.505384; Thu, 31 Mar 2022 09:37:51 +0000
+Received: by outflank-mailman (output) from mailman id 296833.505395; Thu, 31 Mar 2022 09:42:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZrFX-00028G-65; Thu, 31 Mar 2022 09:37:51 +0000
-Received: by outflank-mailman (input) for mailman id 296826;
- Thu, 31 Mar 2022 09:37:49 +0000
+	id 1nZrKB-0003WU-Pj; Thu, 31 Mar 2022 09:42:39 +0000
+Received: by outflank-mailman (input) for mailman id 296833;
+ Thu, 31 Mar 2022 09:42:39 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=TTh1=UK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1nZr8B-00057w-QY
- for xen-devel@lists.xenproject.org; Thu, 31 Mar 2022 09:30:16 +0000
+ id 1nZrKB-0003WO-Ci
+ for xen-devel@lists.xenproject.org; Thu, 31 Mar 2022 09:42:39 +0000
 Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.109.102])
+ (de-smtp-delivery-102.mimecast.com [194.104.111.102])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2b92bb21-b0d5-11ec-a405-831a346695d4;
- Thu, 31 Mar 2022 11:30:15 +0200 (CEST)
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur02lp2054.outbound.protection.outlook.com [104.47.5.54]) by
+ id e6a353c5-b0d6-11ec-a405-831a346695d4;
+ Thu, 31 Mar 2022 11:42:38 +0200 (CEST)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05lp2110.outbound.protection.outlook.com [104.47.17.110]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-23-U0TuF9ktOt-h5zTVKqsFpQ-1; Thu, 31 Mar 2022 11:30:05 +0200
+ de-mta-12-zsqP0yAXNNS0xCdoxS-UfA-1; Thu, 31 Mar 2022 11:42:35 +0200
 Received: from DU2PR04MB8616.eurprd04.prod.outlook.com (2603:10a6:10:2db::16)
- by AM0PR04MB4817.eurprd04.prod.outlook.com (2603:10a6:208:c2::26)
+ by AM6PR0402MB3415.eurprd04.prod.outlook.com (2603:10a6:209:d::22)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.21; Thu, 31 Mar
- 2022 09:30:04 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.16; Thu, 31 Mar
+ 2022 09:42:34 +0000
 Received: from DU2PR04MB8616.eurprd04.prod.outlook.com
  ([fe80::914d:e08d:7798:8476]) by DU2PR04MB8616.eurprd04.prod.outlook.com
  ([fe80::914d:e08d:7798:8476%7]) with mapi id 15.20.5123.021; Thu, 31 Mar 2022
- 09:30:04 +0000
+ 09:42:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,224 +53,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b92bb21-b0d5-11ec-a405-831a346695d4
+X-Inumbo-ID: e6a353c5-b0d6-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1648719014;
+	t=1648719758;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=3QN0fYa0oMl7IDnTsZt7IRjYRX2ba78F7K2wvp/PpMw=;
-	b=ZCt6B91Oa7DiTlHVE5OnFiW0b8QX5JytE/Dya4+OoDRRw3bQMTRdI4NZvfo8HymdgKePwp
-	q++0ThB+ZX/19nUHxd71NLVacsq27sFSK51emuo3zdhcfI+oeuomyk/pk0pckv4nzHZJky
-	+X28gEoBu1JgBuFViEMoKd42vsxS4d0=
-X-MC-Unique: U0TuF9ktOt-h5zTVKqsFpQ-1
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=5Pc2vGAcBdNdvOMgm5cOr8HDjrJP6wj0L/4UaA6G/Ao=;
+	b=RRsoEnOa3CqMhZ2KRXLoENOe66dCpwojIu5jWqlO0gjQ3fdmIn/FDF3jBMPUnoTxCjI1Z0
+	95Q+QingvYHHTZBIUKVBd9kq9wQWiew4Elq9C5CQj1YzJewjBLdsiOELKjm9zp/NH5wU2u
+	Z3SehiUMzD0EFRYuqkkcO93Y1PyjDJo=
+X-MC-Unique: zsqP0yAXNNS0xCdoxS-UfA-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mE/dgmmFpD1MHBeaiac2Qb1sN1o2XByB6vGhfD69zJYIXi6k+0wla+sTKN1RETZgxxhF6YfkYQLBK2mYqsL5vvO8fcSyWgdKRrUNKLtZKD8lHkyU0L6/jUJbzzfpuiIDg2D1BtnMZ74BN/M+S4V9KnGtrRI0QU9o7CP8CiSt9fcfq12K2NNXPYhM9iRuYRhTIutbppwmGb57PEZgmJnsN3fr+di0TAQWEMH3kd3p6/SFFxsVgB+NZp9bfrINIB0+gy2XWLhQUPcZZ/rXiuXKUEmBTYySzYSDaBYdy1cMtCa717Gugebxq16e0t1eICk+CSpJyEHv/hrJzAcSIsWrsw==
+ b=J6ACTviJfosqzr3fKCyf85Z9zk+L+g+qVw72VbB2NLCqtOCKdESkljJBy0xs7CR7sl32XnvPgm2D55wsSOGqiKue3bR8q3bxYG1ZwNvtohAc5CohUapiblyEaztHiGORjPQvo3Vj0+oRv21MDlSMLvxENoag4QnocppFYALesjf8m4Rhl5hr6Gs3x/gGGFeHZsGgDnHgHQyntwNlo/tFkoMgMjCgGa2UKErdJK0nm5hVWECV8TUU+dzOIYC7qWoC07LfNIblGWbsyMJKI/bM2qodZh8iJlY9M+cO3yoAWmInQsbQrmlzLXpz9263nlfEz7PnECZBYybzMXsC6V3ygQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wcbWh8araaOsLGTP+eR3aRWtZQ9q+jMuD82Drem89xU=;
- b=mk1sNRcZYfCYDBJ/0WAGcQD8JLkqXjtNHcXILSwHdu7m7F15jz1e/ldE7UEVr3vNEHZ+hS7tN54cTo80RdYNsY8/pw5E3QR+NzJBX0HHcF50WIyArF0vS6y/OoJzW3Q4HYK1aiUaCySiG1gvnlK15HiTD5VUdYGBP4oJ+TfYb5U8RjjXK/CE6HnTF7vchfCYJkdm+SBVyMD2Med2JBTrzB6u2+XrXy6JA/D4/uHrXBxcuNlVLdM7jKrntweXUQVmEUVNS0TANVB2lWcj5bdFReOMoG2MROaYoodZND55/iFzqDPXdw3MgsKjDYt65gmgGHACKAS8aCU324b9vBSmKg==
+ bh=5Pc2vGAcBdNdvOMgm5cOr8HDjrJP6wj0L/4UaA6G/Ao=;
+ b=G1v/DI3636MCFmgNYJBlnGy+YTeXC0zgzhYR31bC4P5J5NMGWIDUTDiXBysFGIF+7iAPELbEYSpXueawHOOuyAfuL9G5f4lqkHtf0SlRwr9QI4Kx2KiTZ9b+Rr8rZiD4+Tn5VftmDx65S3/fXjDeUcfBlMwTWrkcoU/6vCx8kvsUGzL6Sat1iMctg9IrZ0Ey/CObMcs6h10fJ6psLHvpDfcg1LVqxs6+pC85YcqABzO9nLW56KEgW+KReU67CVbRL9vEQCXw0ZO40kgWp2ItS0A4WbN1YeJFw/sCO3lfAxLCnF/bLZtQhPz+IzYlqtI1bsqmpogEizoLNFlB0fXSHQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <a6401a97-4528-595a-4baa-d41ea42a198c@suse.com>
-Date: Thu, 31 Mar 2022 11:30:02 +0200
+Message-ID: <819eb552-d49d-e98a-9524-8d30c1b93908@suse.com>
+Date: Thu, 31 Mar 2022 11:42:31 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
-Subject: [PATCH v4 2/4] x86/APIC: make connections between seemingly arbitrary
- numbers
-Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v4 0/8] x86/boot: (mostly) video mode handling adjustments
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <6e540bc9-c536-84ac-fb1c-8271e7731b3e@suse.com>
-In-Reply-To: <6e540bc9-c536-84ac-fb1c-8271e7731b3e@suse.com>
+Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-ClientProxiedBy: AS8PR07CA0022.eurprd07.prod.outlook.com
- (2603:10a6:20b:451::17) To DU2PR04MB8616.eurprd04.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AS9PR06CA0006.eurprd06.prod.outlook.com
+ (2603:10a6:20b:462::25) To DU2PR04MB8616.eurprd04.prod.outlook.com
  (2603:10a6:10:2db::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 913e51fd-876e-41dc-fcf9-08da12f9099c
-X-MS-TrafficTypeDiagnostic: AM0PR04MB4817:EE_
+X-MS-Office365-Filtering-Correlation-Id: f098096e-9b54-43b2-93da-08da12fac83f
+X-MS-TrafficTypeDiagnostic: AM6PR0402MB3415:EE_
 X-Microsoft-Antispam-PRVS:
-	<AM0PR04MB48176915D0C42113336EE0E6B3E19@AM0PR04MB4817.eurprd04.prod.outlook.com>
+	<AM6PR0402MB34159545975CB0DBA500759DB3E19@AM6PR0402MB3415.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	tYLzOJJY8URVXEMKABH47c+scSVSO6nA5Ip4Ktj+feTSn9rHyhF4ZT1NQK0a77dME5lg+eDGjL6Nj2UFnye2Ebucj7xHf1eaJPNe2yKAtRlw/Rb5qGLeDdK0itsbpAcUsNIXn1rvNSGl31LptOsFBgO5BKwTCbwwzwzNmGn3nzQ0lSeCZ61V3OhpXDYK90fYtK7eTL05dgmqxA45MbMv7sNh8a+bTwmoms5VQ9endsh5N20N6Fi7QODUwhYhxht8PMVt1Glr13nE0c3gogKsCg+ODMsQ4xD/goL+gWeNzuMNqpxRLLW84ezfmPQqQ3LxZmg8IDiqwdIK3v1s+aV9hp/uDSFpi8in/Wwkf624s3Wd1DmUJaOYLvFt7AWNZH3Iixibgyefq+8sL04OLWRo/1mRnW30zA+xA8bDrjBuGwNFYfw9xVCO7ebaNl0zeK/Yi92g+JBkA0TvNRLrRZCCRSqXlp/6CM7aEoGa8SqDXpmHHjJLJAmDB3+70BYOm7C3dljEkK+/Hmq8XyKpum2K6rvaMOrr+2wuZCp5XfVvA5nbYucaszmId62WOw9Y2Glk+oP29qTXtduS1sQvpTwFEpIOWTjJKdFIeOrjSt6fsArTZO5DAhrZMuAplhkQf49Vh0J/+MK9uw/4JuaDwtCIK2YucntVm0uE1rzmXiTVGdOnjfOBSZxXik9S4lpYd2acxYOTXnqgYhtSEpBQ6VFY21dQgnYZTec3gKj1WadBA4iXc0ncHGvGnXaV82Z6I3dI
+	90uQZhYGyKvibb17CQg7z6uKo4zlCE9i/JsEaalfY28teYizJsMiYZqRDVLVUt9h0SJV3CfXJPpt03PsiiXZgBZ4rwmok6gOL6G7lIKeiP0RcIlLHddlmHtoNB3s0kYfIYNKoW3sydcIVqo2SA3pOg0AsGpq2Tp4Wgs0nLm6meJzjROCPDga1MPrkf1XGAAMrORFyF4xIm+NSsSLXnktT432aqzN4ABEBOBanWxFybVdVrTe6jF18y5UDGskqckYW0wf7GnYGmy/QDCm9nEpTx0d3hAyUmvpT7lnJYnJX4eGFJCdhT15OBHFre/KqCAk6M20mW9Ao+vurzRCCh9rhwR3ZKFSvr7toan05+XsOVnlw/9t4ZxyvHSjvRmG7Xbg8xJ35dxSfqDXc7P7lYFNJSbI59A9Rku35FveR5D21hSm6mfK3+XtCJN9N7BJXFnflJxKwd3wSZ2mXBDkshRGHdikGIbDdEisFDHzCBrDNuIR1zy7BsgvY6amEzR/MwQb8fDT87CcPCWL5YV6CPp4TSm1QYr7CnEMm3I/oQLbR+gz8CfeOP0FxLp4pBeJS8fQIWRW60wv35zQ4/rHrM7MFnBPueOXYTzw8AsDDADpwHL36LsIdo6BRE69x64+hQZe9VCaJdqb4SmIJzHgppiWBafbqsFW5xJX+zQV9xOQvUf2fl8Gxs1FSdtKIPDc2Qi3ruCu7IYmAlxqiAnpPhJVkw7SwFv/jrekMQ3KdJRbjV+x2jy05n9VhYSsITWtsQxK
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(6486002)(38100700002)(31686004)(5660300002)(508600001)(186003)(83380400001)(8936002)(26005)(2906002)(316002)(8676002)(4326008)(66476007)(31696002)(54906003)(6916009)(66946007)(86362001)(66556008)(2616005)(6506007)(6512007)(36756003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(8936002)(8676002)(54906003)(4744005)(6916009)(316002)(66476007)(66946007)(66556008)(5660300002)(6512007)(6486002)(6666004)(31686004)(36756003)(4326008)(508600001)(6506007)(2906002)(26005)(31696002)(186003)(38100700002)(86362001)(2616005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?11HFNgP9te8TFcyFrr6mtsEjqwkLTfK7IKU1v0OUGdhPicbl60VRWuYNFH04?=
- =?us-ascii?Q?j8I/umHdU73pMY7VSub+bn2iriyQeern8fbHIJfLQ6xge58xGadetvRXOKJZ?=
- =?us-ascii?Q?5+QRUMjoX1NXZ9Ui0TeqlnQf75gDRmydV9Di7T53h66DHggQcOgs4Gz+G9+l?=
- =?us-ascii?Q?TLKDF3nIou97/fKLE1LiyeCKuEhTgA4bqI5FdiMaOsFXP+MGT+ELodhBdtcD?=
- =?us-ascii?Q?ELvb+DZHpGM1JtL0AhRxv8oOvGy27scoZ/pu1qzDvjRZcLhea3LSfdNY1Fz4?=
- =?us-ascii?Q?JuXjja8YVerWAj7DQUoSINzBo2kEOaOAH4NmR5QDjEqCmgX29VrYd29e1Kx+?=
- =?us-ascii?Q?TFtYg8qSGZ2RNq6JZl0bKEInZpYTd06akvt08x55W8pm+z1WstcQ7K2WG+9F?=
- =?us-ascii?Q?4r2jhCG/LUcbmae6jdfdwmESHgYPo5TOYRh6Ly4/fTvGeQDB9vWK8DXaZR0F?=
- =?us-ascii?Q?upii1thJCbJrJJk4RjvYOtWrPyiYE2+jWXDyMYScRWtRekmaf3ExlpRDYJVq?=
- =?us-ascii?Q?LgKx1AYgBkn9NEfJMCfkSoBiOen0ieIcG+ocpcldq7RkgUkrlMWq4H9nTgLv?=
- =?us-ascii?Q?/5gTBRI2Ym0AjlJwTrbL3b0tRjMqzOgja1e/nx1J/HOatXJcyl0Uhso2/Tve?=
- =?us-ascii?Q?gnBIe4fCG0H7LTeI53xaS6ixIjyfSQqkBjrca8oTVUlmCcpX03WebOzUN9AB?=
- =?us-ascii?Q?gSXRHS9UFR3Ga7d9oBNAtbHzdWnNZ3oKhANZvhubRGwREHiJpU4bTe1/ycP3?=
- =?us-ascii?Q?W9Vd2Nak5zoFI2I0/u5diIbsuzoV30T2gxw71ip1bkY2aRzOPnENTW/Yr81W?=
- =?us-ascii?Q?Pejo1A/omqL2vwYx2tWTdwr65mAUwC+GNp0acRwMXYa2z2x5nZdcIHps8BXu?=
- =?us-ascii?Q?906aDM8l4qc6BKfW8Ho7pUqZV3BUueTU/C5iMcv1knWn7Hj83nwPBM1sOKAM?=
- =?us-ascii?Q?Kz7Ece1Zkw6jZWFtaP0P/1FpwusdHzc0aZ7w2kRqY3LhCoAMeZEVT6P9UFKv?=
- =?us-ascii?Q?UEHwmyr9jPM6UFQ28AKia+oNMwSK/ZabiDHwiBjAyuB+r6wcou1ZNwb0Twud?=
- =?us-ascii?Q?pbkv3+pAFLDq+QD/Pf4Sg6BrxZUgdrwgqCveIsa342yzrhT7nEnBrvcNZT7N?=
- =?us-ascii?Q?puaHwzPjyxW2gb/1wYnyIap2xNuvASgOWurIR/ovta8tJgzXdEmSTEbd/mpM?=
- =?us-ascii?Q?1JjNCH8o/abaAsc/IKkCXqaNKoToQUmduuScChSJQGYgau6K0v5Uf0/cuV3p?=
- =?us-ascii?Q?DBZ8moBxYwQeM7d+QO7x49oynTPzWnGdSIb44aWhhefzMH4ge4NCNU7uLMlE?=
- =?us-ascii?Q?kXISa6pPJw9TiDa9+3ObqUW3mqi60oWWxSLOBfMxrgvJW646QKYMZRooB7U4?=
- =?us-ascii?Q?nlosd2lbLU0oX23nUE1920hVBduWWFBNN63+8hQ1XMUO2da3yDwf4XxJXV8a?=
- =?us-ascii?Q?gsKPCyNB3tYvmqxFVQurgJtTmcwCFsyJzv0CllqVryaFwT4UE9l8LWdBoLDY?=
- =?us-ascii?Q?WTL3Xm9nqsQRtvtKhL1gRRStNUkAVlBz4I/onszmpmc0SrmRL8YFeouPuWzo?=
- =?us-ascii?Q?ppc1rCS8nkK4Fj6dEazvT2OuIdBpQr1vhk6tB1YnyjFX6bxDyAgc8g1ZP4o6?=
- =?us-ascii?Q?zmfdE7lvTZaAGzKYsyad688PiMR4Ca9Mg/7uxPHucMSOh2y/WAfT3OVYkT9m?=
- =?us-ascii?Q?g1x9XO9SbFuXUFEWX2Brd4Va4c8inl1AsUMTjFHxU+w08uvz7u/6sH8FzW1n?=
- =?us-ascii?Q?ur0YfvN9Sw=3D=3D?=
+	=?utf-8?B?S0JWTVpEOU02eERNRDNCZTVXUmNBUUVSYlFsUHJSN0pHQ0hHVVR3N0tlM0Fy?=
+ =?utf-8?B?OWI2TWVmYkhrdXJIc1RLMU0rd0ZYbGNiZWpGTVhxMmszY3FwaDdHUHlnSGNW?=
+ =?utf-8?B?Tkx1cytQTUdWSG9SQjYyNHZpLzN6QzNvcGt0SkIwY2FIMW1sSzZzd2hiT2JX?=
+ =?utf-8?B?czdmT3hqb1VTQ001dUMzL25yL042bVNzMkxCQXNrUVZ1RkRwK1dtMjNXTHNw?=
+ =?utf-8?B?YUhmUVVtK2k0VGxxcDJ0U2xpR2hDMEtGdFpDRUdacVUxWW0zRzV6WFozUExH?=
+ =?utf-8?B?cnBvSFJMRnFTT2RydGdyazVGSHcxNWhGbmkzRHp3a2R1eUFOMDA5dEtGVkl1?=
+ =?utf-8?B?aVdraFI0MjVyRU5WcGlWOFhOU2RibXRJemNoWnlOcjE4UXh1THdSTzFtczlV?=
+ =?utf-8?B?K1pCRElCTm5VdlF4Y3J1WHhBYmovZmVtRXV2cDZEQ0tUbGZmdFRWeE5NV0hq?=
+ =?utf-8?B?eWNwTTNFOXZEQkl5T0locGhML1ZGOWtua2t2OXYveUFka3c5MTE2ZlM5SzdH?=
+ =?utf-8?B?KytJU1pVQ2pMajNtOGd3Tk5JWHVCMHhjNWJSNyttNmlzUGRtNDBJRGhzWG5j?=
+ =?utf-8?B?dTgvaTZZdkt4Y3ZrSjRmNERXRm84WjRzUWZXUFIwL2k3ZFVCNnNIcEZjL1JZ?=
+ =?utf-8?B?djJndWFnRzhNZURzNVhkNENpbS9UaUFseEo0WnMzeHduT3ZETW11enRpczN2?=
+ =?utf-8?B?SithbUJST1lsZHc0b3c1SzlaQU1JQ3BZZ1A2dnBsc0crYlB3RHRaSTVkbXgx?=
+ =?utf-8?B?Ti9scU5SdXZVaUhoUFRTby9QdEFXUHpwVVJRMkVEU1dQMUhyekg4S0psQlp0?=
+ =?utf-8?B?SkdpdkdIRFZ1MmRuVTdOK1A1N1RoZGp0Yml6TkNPZXRUdURuMDEwQkhKYUFR?=
+ =?utf-8?B?QURwRlpHYTd6MlUvLzRZNXA5NjFZWEFibGs4K3JGZTNxZkcwQVEyWnhGOElm?=
+ =?utf-8?B?cnp0c2FpYjZlVkxhU0djSmExQTJjNWZJdFZwL3FuUGpPOTRGQlp2SmlnTDZ3?=
+ =?utf-8?B?aVB2dkRFcjUxWjczV0pzeWdvZkxQVU5Gekd2SjNxa0E5SGhtdWVXeUVleUNh?=
+ =?utf-8?B?RTBiZ0xrV2paZDhNNnNicUcxWXNyN2Z5VHRBNE1ub3ZqRkQ4TWRNQ1BkaFR2?=
+ =?utf-8?B?Sm1CYnZtTGczR2tzSUZJSlplcnBLSEx3UExJOWJuR3hZRTBnamRxRXhRVGdr?=
+ =?utf-8?B?NlJUZjd6RWtyY1psQXVxT0ZmdC9tdFJkaDkzanQ5VkFLMHg0bkFFOSsyMlk2?=
+ =?utf-8?B?b1hMbmxWcnpvZzZleVA5c3JmV01pdTQ4aEdrcm1QVHlBUCs1WjJpT1lwV2V3?=
+ =?utf-8?B?WjhjTmc0VlBjcnd1VjFpdDZibUZybUdrSFhpcFN6aVpra25sei9QNnRjTC91?=
+ =?utf-8?B?RXJEOGpKdzBveEdJbXNrcmZSZjhXUW1McVV3Tm96T21wQWduM0N0dk5xbldX?=
+ =?utf-8?B?K1Qwa3IwRHZvbEhQdVdxWVQwczIrQisvaVpydnpqRUtEYytFZEV6bFpQc2VF?=
+ =?utf-8?B?YnJJQXhQYUdWOU9DeFF0N3dvY2E1eHdxSDFvQk1vN2t4b2NqUGlLN2NjZk8v?=
+ =?utf-8?B?NkhkY1ZHYmRkTDlVUVRzZi81aDNrSFh1NC9OTWh2YUQ1Z1FrVE1aWHVyNzJM?=
+ =?utf-8?B?OUFtbHFDRHRDOXBQODZORGdaWGVlNFpvcmFaK1lNUkdPZExmZkNHUEV3eGZZ?=
+ =?utf-8?B?b3FzQkZtQkdVUGhIaUx1L3Y2bjNlbWNVU1JldFRONjVKM3g0bjhyUGwrdHhP?=
+ =?utf-8?B?Y2UydHM3cVd4c2ZTTHd3RFJyK1Y5UHRyY3I0Y3VlVUhMYXEzckJXSTUvcmlJ?=
+ =?utf-8?B?QnlZd0ZJNEFEaVhmc3I1K2FmQkRxUEZVU1dwT0pBNCt5b1RwanpDM3B0M3Ax?=
+ =?utf-8?B?SkJDNHpsWlBPVzhXaGRrUGdidkUxVEtmQUhrblF6d1FBTVQxbXJsaXNTdVhj?=
+ =?utf-8?B?ZmF3R05GYXZrSE1GaVFBNzJHSEFIVjhqT0twb2dRS0dsakMrZVAzR0JhZnlz?=
+ =?utf-8?B?VjEzU1pmMGx6NjNmYi9xZXVoaFFuekRiWnJ6SkdvbTNVU0hJVG9VaWVpVGR2?=
+ =?utf-8?B?Q2tiNGxOd1ducnRjV0RkR0VGako2azhQeXpDSXBUeENQY1hCeVdDL24zVSti?=
+ =?utf-8?B?M2xIV2J1RG56L1REZS9MSHlRczVjcEZrVzhFS2xGenJ2YzQ1bTdXdDBqLzJ6?=
+ =?utf-8?B?MW9iUXZTUmQ2eENnODBHekpMdEE4blhpcXB0dS9ZMmU3QnVZTE5JSy9lRlMw?=
+ =?utf-8?B?UTZVUFJmTExlbXhxSGRxVWZ0VVI4YlFlOGlSSmN5ZWd2TWJ1cElWeDhBRFVD?=
+ =?utf-8?B?UmFyRVZ1MHh4UFNpSWdGbHVIMzd5RXNBeVpjcFIzUDNWbW5nMGJjZz09?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 913e51fd-876e-41dc-fcf9-08da12f9099c
+X-MS-Exchange-CrossTenant-Network-Message-Id: f098096e-9b54-43b2-93da-08da12fac83f
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8616.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 09:30:04.4723
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 09:42:33.8954
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xjZ1aTJ7T1kf4pyTcCMMTUIc814PdL2n+rEIRPpVgZFjb9oMpSj4uV46orw/KIIXacs73BigcNPOPgBdeByPXg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB4817
+X-MS-Exchange-CrossTenant-UserPrincipalName: /ZMr3Y9DXc9gf+0Yrm+yuWXalIywFIZmGL3AimR8TWQJtqq6lj7S+G3E2QSGYCvihh1vZFs4nptQvwIMwVOHmQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR0402MB3415
 
-Making adjustments to arbitrarily chosen values shouldn't require
-auditing the code for possible derived numbers - such a change should
-be doable in a single place, having an effect on all code depending on
-that choice.
+v4 largely has some re-basing changes compared to v3, plus one new patch.
+I have to admit that I find it particularly sad that the enhancement done
+by patch 1 has not made 4.16. This series had been submitted well in time.
 
-For one make the TDCR write actually use APIC_DIVISOR. With the
-necessary mask constant introduced, also use that in vLAPIC code. While
-introducing the constant, drop APIC_TDR_DIV_TMBASE: The bit has been
-undefined in halfway recent SDM and PM versions.
+1: make "vga=current" work with graphics modes
+2: obtain video info from boot loader
+3: EFI: retrieve EDID
+4: simplify mode_table
+5: fold branches in video handling code
+6: fold/replace moves in video handling code
+7: LEA -> MOV in video handling code
+8: fold two MOVs into an ADD
 
-And then introduce a constant tying together the scale used when
-converting nanoseconds to bus clocks.
-
-No functional change intended.
-
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
----
-v3: Introduce and use PASTE() instead of (ab)using _AC().
-v2: New.
-
---- a/xen/arch/x86/apic.c
-+++ b/xen/arch/x86/apic.c
-@@ -1078,8 +1078,8 @@ static void __setup_APIC_LVTT(unsigned i
-     lvtt_value =3D APIC_TIMER_MODE_ONESHOT | LOCAL_TIMER_VECTOR;
-     apic_write(APIC_LVTT, lvtt_value);
-=20
--    tmp_value =3D apic_read(APIC_TDCR);
--    apic_write(APIC_TDCR, tmp_value | APIC_TDR_DIV_1);
-+    tmp_value =3D apic_read(APIC_TDCR) & ~APIC_TDR_DIV_MASK;
-+    apic_write(APIC_TDCR, tmp_value | PASTE(APIC_TDR_DIV_, APIC_DIVISOR));
-=20
-     apic_write(APIC_TMICT, clocks / APIC_DIVISOR);
- }
-@@ -1212,6 +1212,8 @@ uint32_t __init apic_tmcct_read(void)
-  * APIC irq that way.
-  */
-=20
-+#define BUS_SCALE_SHIFT 18
-+
- static void __init calibrate_APIC_clock(void)
- {
-     unsigned long bus_freq; /* KAF: pointer-size avoids compile warns. */
-@@ -1265,8 +1267,8 @@ static void __init calibrate_APIC_clock(
-     /* set up multipliers for accurate timer code */
-     bus_cycle  =3D 1000000000000UL / bus_freq; /* in pico seconds */
-     bus_cycle +=3D (1000000000000UL % bus_freq) * 2 > bus_freq;
--    bus_scale  =3D (1000*262144)/bus_cycle;
--    bus_scale +=3D ((1000 * 262144) % bus_cycle) * 2 > bus_cycle;
-+    bus_scale  =3D (1000 << BUS_SCALE_SHIFT) / bus_cycle;
-+    bus_scale +=3D ((1000 << BUS_SCALE_SHIFT) % bus_cycle) * 2 > bus_cycle=
-;
-=20
-     apic_printk(APIC_VERBOSE, "..... bus_scale =3D %#x\n", bus_scale);
-     /* reset APIC to zero timeout value */
-@@ -1353,7 +1355,8 @@ int reprogram_timer(s_time_t timeout)
-     }
-=20
-     if ( timeout && ((expire =3D timeout - NOW()) > 0) )
--        apic_tmict =3D min_t(u64, (bus_scale * expire) >> 18, UINT_MAX);
-+        apic_tmict =3D min_t(uint64_t, (bus_scale * expire) >> BUS_SCALE_S=
-HIFT,
-+                           UINT32_MAX);
-=20
-     apic_write(APIC_TMICT, (unsigned long)apic_tmict);
-=20
---- a/xen/arch/x86/hvm/vlapic.c
-+++ b/xen/arch/x86/hvm/vlapic.c
-@@ -580,7 +580,7 @@ static uint32_t vlapic_get_tmcct(const s
- static void vlapic_set_tdcr(struct vlapic *vlapic, unsigned int val)
- {
-     /* Only bits 0, 1 and 3 are settable; others are MBZ. */
--    val &=3D 0xb;
-+    val &=3D APIC_TDR_DIV_MASK;
-     vlapic_set_reg(vlapic, APIC_TDCR, val);
-=20
-     /* Update the demangled hw.timer_divisor. */
-@@ -888,7 +888,7 @@ void vlapic_reg_write(struct vcpu *v, un
-     {
-         uint32_t current_divisor =3D vlapic->hw.timer_divisor;
-=20
--        vlapic_set_tdcr(vlapic, val & 0xb);
-+        vlapic_set_tdcr(vlapic, val);
-=20
-         vlapic_update_timer(vlapic, vlapic_get_reg(vlapic, APIC_LVTT), fal=
-se,
-                             current_divisor);
-@@ -1020,7 +1020,7 @@ int guest_wrmsr_x2apic(struct vcpu *v, u
-         break;
-=20
-     case APIC_TDCR:
--        if ( msr_content & ~APIC_TDR_DIV_1 )
-+        if ( msr_content & ~APIC_TDR_DIV_MASK )
-             return X86EMUL_EXCEPTION;
-         break;
-=20
---- a/xen/arch/x86/include/asm/apicdef.h
-+++ b/xen/arch/x86/include/asm/apicdef.h
-@@ -106,7 +106,7 @@
- #define		APIC_TMICT	0x380
- #define		APIC_TMCCT	0x390
- #define		APIC_TDCR	0x3E0
--#define			APIC_TDR_DIV_TMBASE	(1<<2)
-+#define			APIC_TDR_DIV_MASK	0xB
- #define			APIC_TDR_DIV_1		0xB
- #define			APIC_TDR_DIV_2		0x0
- #define			APIC_TDR_DIV_4		0x1
---- a/xen/include/xen/lib.h
-+++ b/xen/include/xen/lib.h
-@@ -13,6 +13,10 @@
- #define count_args(args...) \
-     count_args_(., ## args, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-=20
-+/* Indirect macros required for expanded argument pasting. */
-+#define PASTE_(a, b) a ## b
-+#define PASTE(a, b) PASTE_(a, b)
-+
- #ifndef __ASSEMBLY__
-=20
- #include <xen/inttypes.h>
+Jan
 
 
