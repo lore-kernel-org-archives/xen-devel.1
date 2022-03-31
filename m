@@ -4,44 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D214C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Mar 2022 07:08:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.296694.505107 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A777CC433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Mar 2022 07:15:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.296707.505133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZouX-0000Eg-2X; Thu, 31 Mar 2022 07:08:01 +0000
+	id 1nZp16-00023A-6b; Thu, 31 Mar 2022 07:14:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 296694.505107; Thu, 31 Mar 2022 07:08:01 +0000
+Received: by outflank-mailman (output) from mailman id 296707.505133; Thu, 31 Mar 2022 07:14:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZouW-0000EY-VR; Thu, 31 Mar 2022 07:08:00 +0000
-Received: by outflank-mailman (input) for mailman id 296694;
- Thu, 31 Mar 2022 07:07:59 +0000
+	id 1nZp16-000231-3I; Thu, 31 Mar 2022 07:14:48 +0000
+Received: by outflank-mailman (input) for mailman id 296707;
+ Thu, 31 Mar 2022 07:14:47 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=8eLM=UK=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nZouV-0000EQ-Fz
- for xen-devel@lists.xenproject.org; Thu, 31 Mar 2022 07:07:59 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4b7b5499-b0c1-11ec-a405-831a346695d4;
- Thu, 31 Mar 2022 09:07:58 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 2435D1F7AB;
- Thu, 31 Mar 2022 07:07:58 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F1CC6139C2;
- Thu, 31 Mar 2022 07:07:57 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id roseOU1TRWKFWQAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 31 Mar 2022 07:07:57 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=nUkb=UK=arm.com=michal.orzel@srs-se1.protection.inumbo.net>)
+ id 1nZp15-0001n6-5K
+ for xen-devel@lists.xenproject.org; Thu, 31 Mar 2022 07:14:47 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 3e8d499e-b0c2-11ec-a405-831a346695d4;
+ Thu, 31 Mar 2022 09:14:46 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9355423A;
+ Thu, 31 Mar 2022 00:14:45 -0700 (PDT)
+Received: from e129167.arm.com (unknown [10.57.7.5])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 440203F66F;
+ Thu, 31 Mar 2022 00:14:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,56 +44,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4b7b5499-b0c1-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1648710478; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=CwodxS3v8TjpSSyOje93Qv45jgmGMLCbfJozxFKuEgM=;
-	b=PA+bHPWIdk9nhXbhoq7yMEvGCAcB45g8Crb89kFO1mptexKHe4055co4IY5X61LgAjh1mO
-	Ekght1o9/cJNr1QF+MivH01A2az8+5scxLxUd/IWCfX6LZzrP/QqISWbj2NA1OtgTBfgId
-	7tfNv8kgCXvZAOUEssQHxEOIUrM/jKc=
-From: Juergen Gross <jgross@suse.com>
+X-Inumbo-ID: 3e8d499e-b0c2-11ec-a405-831a346695d4
+From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Wei Liu <wl@xen.org>,
-	Anthony PERARD <anthony.perard@citrix.com>
-Subject: [PATCH] tools/libs/light: update xenstore entry when setting max domain memory
-Date: Thu, 31 Mar 2022 09:07:55 +0200
-Message-Id: <20220331070755.10894-1-jgross@suse.com>
-X-Mailer: git-send-email 2.34.1
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 1/2] xen: Introduce a header to store common linker scripts content
+Date: Thu, 31 Mar 2022 09:14:24 +0200
+Message-Id: <20220331071425.49141-2-michal.orzel@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220331071425.49141-1-michal.orzel@arm.com>
+References: <20220331071425.49141-1-michal.orzel@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-libxl_domain_setmaxmem() should update the domain's memory/static-max
-Xenstore node, as otherwise "xl mem-set" won't be able to set the
-memory size to the new maximum.
+Both x86 and arm linker scripts share quite a lot of common content.
+It is difficult to keep syncing them up, thus introduce a new header
+in include/xen called xen.lds.h to store the internals mutual to all
+the linker scripts.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+Include this header in linker scripts for x86 and arm.
+This patch serves as an intermediate step before populating xen.lds.h
+and making use of its content in the linker scripts later on.
+
+Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
- tools/libs/light/libxl_mem.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+Changes since v2:
+-none
+Changes since v1:
+-rename header to xen.lds.h to be coherent with Linux kernel
+-include empty header in linker scripts
+---
+ xen/arch/arm/xen.lds.S    | 1 +
+ xen/arch/x86/xen.lds.S    | 1 +
+ xen/include/xen/xen.lds.h | 8 ++++++++
+ 3 files changed, 10 insertions(+)
+ create mode 100644 xen/include/xen/xen.lds.h
 
-diff --git a/tools/libs/light/libxl_mem.c b/tools/libs/light/libxl_mem.c
-index c739d00f39..2f4f9d4a4a 100644
---- a/tools/libs/light/libxl_mem.c
-+++ b/tools/libs/light/libxl_mem.c
-@@ -82,6 +82,15 @@ int libxl_domain_setmaxmem(libxl_ctx *ctx, uint32_t domid, uint64_t max_memkb)
-         goto out;
-     }
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index 7921d8fa28..c666fc3e69 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -3,6 +3,7 @@
+ /* Modified for ARM Xen by Ian Campbell */
  
-+    rc = libxl__xs_printf(gc, XBT_NULL,
-+                          GCSPRINTF("%s/memory/static-max", dompath),
-+                          "%"PRIu64, max_memkb);
-+    if (rc != 0) {
-+        LOGED(ERROR, domid, "Couldn't set %s/memory/static-max, rc=%d\n",
-+              dompath, rc);
-+        goto out;
-+    }
+ #include <xen/cache.h>
++#include <xen/xen.lds.h>
+ #include <asm/page.h>
+ #undef ENTRY
+ #undef ALIGN
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index 3f9f633f55..3e65c09bb3 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -2,6 +2,7 @@
+ /* Modified for i386/x86-64 Xen by Keir Fraser */
+ 
+ #include <xen/cache.h>
++#include <xen/xen.lds.h>
+ #include <asm/page.h>
+ #undef ENTRY
+ #undef ALIGN
+diff --git a/xen/include/xen/xen.lds.h b/xen/include/xen/xen.lds.h
+new file mode 100644
+index 0000000000..dd292fa7dc
+--- /dev/null
++++ b/xen/include/xen/xen.lds.h
+@@ -0,0 +1,8 @@
++#ifndef __XEN_LDS_H__
++#define __XEN_LDS_H__
 +
-     rc = 0;
- out:
-     libxl_domain_config_dispose(&d_config);
++/*
++ * Common macros to be used in architecture specific linker scripts.
++ */
++
++#endif /* __XEN_LDS_H__ */
 -- 
-2.34.1
+2.25.1
 
 
