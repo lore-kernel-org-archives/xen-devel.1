@@ -4,29 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C99E4C433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 31 Mar 2022 09:29:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.296798.505337 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22507C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 31 Mar 2022 09:30:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.296805.505348 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZr7H-0006W7-CA; Thu, 31 Mar 2022 09:29:19 +0000
+	id 1nZr7o-0007dX-Pn; Thu, 31 Mar 2022 09:29:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 296798.505337; Thu, 31 Mar 2022 09:29:19 +0000
+Received: by outflank-mailman (output) from mailman id 296805.505348; Thu, 31 Mar 2022 09:29:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nZr7H-0006Vx-8w; Thu, 31 Mar 2022 09:29:19 +0000
-Received: by outflank-mailman (input) for mailman id 296798;
- Thu, 31 Mar 2022 09:29:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=lDhN=UK=citrix.com=prvs=08274bcc4=roger.pau@srs-se1.protection.inumbo.net>)
- id 1nZr7F-00057w-Kg
- for xen-devel@lists.xenproject.org; Thu, 31 Mar 2022 09:29:17 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 078302f6-b0d5-11ec-a405-831a346695d4;
- Thu, 31 Mar 2022 11:29:15 +0200 (CEST)
+	id 1nZr7o-0007dQ-Mn; Thu, 31 Mar 2022 09:29:52 +0000
+Received: by outflank-mailman (input) for mailman id 296805;
+ Thu, 31 Mar 2022 09:29:51 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=TTh1=UK=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1nZr7n-0005JJ-8y
+ for xen-devel@lists.xenproject.org; Thu, 31 Mar 2022 09:29:51 +0000
+Received: from de-smtp-delivery-102.mimecast.com
+ (de-smtp-delivery-102.mimecast.com [194.104.111.102])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1cf5c3a4-b0d5-11ec-8fbc-03012f2f19d4;
+ Thu, 31 Mar 2022 11:29:50 +0200 (CEST)
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur02lp2058.outbound.protection.outlook.com [104.47.5.58]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-4-SGmMGXfgO_667l57DKBIug-1; Thu, 31 Mar 2022 11:29:47 +0200
+Received: from DU2PR04MB8616.eurprd04.prod.outlook.com (2603:10a6:10:2db::16)
+ by AM0PR04MB6161.eurprd04.prod.outlook.com (2603:10a6:208:148::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.21; Thu, 31 Mar
+ 2022 09:29:46 +0000
+Received: from DU2PR04MB8616.eurprd04.prod.outlook.com
+ ([fe80::914d:e08d:7798:8476]) by DU2PR04MB8616.eurprd04.prod.outlook.com
+ ([fe80::914d:e08d:7798:8476%7]) with mapi id 15.20.5123.021; Thu, 31 Mar 2022
+ 09:29:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,419 +53,341 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 078302f6-b0d5-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1648718955;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=c5A7oIriEvC0cGBbEld53uU0PBaaj0rfbtF3sBKzgsc=;
-  b=R0b4lnJSgvIRoDHzGad5BszSC2BSy7vicKHlecNvMXTYjv7IY8rOus+c
-   zhkS1QLl1nenAnT8lOWum3FKDMYiYZB4/9OwXWqILFsrN7Cxa+AaMh1rV
-   ADsFtbfzmje8/dBvAQD7ckpgNALlZJr53zi+z/hYpSMBw7C0I1jTye8GB
-   c=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=pass (signature verified) header.i=@citrix.onmicrosoft.com
-X-SBRS: 5.1
-X-MesageID: 67539612
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:veW5h6gM68gxNXnct1mPywiqX161dhAKZh0ujC45NGQN5FlHY01je
- htvUGmDb/2CMzamedp2YN7goxlUvMCAzodgHQNsrC40RX8b9cadCdqndUqhZCn6wu8v7a5EA
- 2fyTvGacajYm1eF/k/F3oDJ9CU6jefSLlbFILas1hpZHGeIcw98z0M78wIFqtQw24LhWFjU4
- YqaT/D3YzdJ5RYlagr41IrbwP9flKyaVOQw5wFWiVhj5TcyplFNZH4tDfjZw0jQG+G4KtWSV
- efbpIxVy0uCl/sb5nFJpZ6gGqECaua60QFjERO6UYD66vRJjnRaPqrWqJPwwKqY4tmEt4kZ9
- TlDiXC/YRwXYaOcm8A0aAJ3TBpMZKEa5pDrMXfq5KR/z2WeG5ft6/BnDUVwNowE4OdnR2pJ8
- JT0KhhUMErF3bjvhuvmFK883azPL+GyVG8bkmtnwjzDS+4vXLjIQrnQ5M8e1zA17ixLNaiBO
- pFIN2M1BPjGSyJLCEU0JooVoNn2vUvQcBwHmVOVh7VitgA/yyQuieOwYbI5YOeiWsF9jkue4
- GXc8AzRABsXKdiewjqt6W+3i6nEmiaTcJIfEvi0++BnhHWXx3cPE1sGWF2ju/67h0WiHdVFJ
- CQpFjEG9PZoshbxF5+kAkP+8CXsUgMgt8R4CNNl5lGO7oPv+CnGPVpdQmJfR/A2u5pjLdA17
- WOhk9TsDD1plbSaT3OB67uZxQ+P1TgpwXwqPnFdE1ZcizX3iMRq10+UEI4/eEKgpoetcQwc1
- Qxmu8TXa187qccQn5u28lnc695HjsiYF1Vljuk7s4/M0++YWGJHT9HwgbQ4xawZRGp8crVnl
- CJe8yR5xLpSZaxhbATXHI0w8EiBvp5pygH0j191BIUG/D+w4XOldo04yGggeBc3bJtbJ2W0P
- xK7VeZtCHl7ZiHCgUhfOd/ZNijX5fK4SYSNug78MLKinaSdhCfYpXozNCZ8LkjmkVQ2kLFXB
- HtoWZ3EMJruMow+lGDeb75EidcDn3lirUuOFcGT50n2itK2OS/KIYrpxXPTN4jVGovf+16Lm
- zueXuPXoyhivBrWOXePq9dJfQFXdRDWx/ne8qRqSwJKGSI/cEkJAP7N27IxPYtjmqVejODT+
- X+hHERfzTLCabfvcFzihqxLAF83YatCkA==
-IronPort-HdrOrdr: A9a23:2dF9Y6trh1B0lQASU+QIUQco7skDctV00zEX/kB9WHVpm6uj5q
- eTdZUgpHvJYVMqM03I9urtBEDtexzhHP1OgbX5X43NYOCOggLBRuxfBODZogHIKmnT8fNcyL
- clU4UWMqyUMbGit7eY3OBvKadD/OW6
-X-IronPort-AV: E=Sophos;i="5.90,224,1643691600"; 
-   d="scan'208";a="67539612"
+X-Inumbo-ID: 1cf5c3a4-b0d5-11ec-8fbc-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1648718990;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=izkM3/z4sPkt4zpxlsHGtY1fc5KRMyoYNoGbHZjH4Q0=;
+	b=mYWhfAt4wjtQW5Cxn3zhirewX7CVQsGTnGi5PlKCL3WcRDOaBnw7RD3lxewT44z4yRdM+2
+	R71SpBWA40/e/HshBctJFzJyCIP5+YjkCKuZ7cUVa2HgRGbv67nTuU95K1giuDFxKgrxjY
+	R1SC6y5OmqElHynqPN5PehWSdHbumPI=
+X-MC-Unique: SGmMGXfgO_667l57DKBIug-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HpLmc0/tjlz15C+5QsU5BPWMrreIlg87qk2h1hAwvKFMA4JSMnIiJ+bed7qbcz7O/3ibR6hod9CIpUb1++hxfFr+jdmhk/v2i7bJeAV/hgI5a+GclmOYWwh0xxR83Pq1c1s+rRkHhPzJhTi3LSAvTg8EFvcimvw4cVu2z0L2voxMBQzrg+6gsvEEAjkERwSVBSG31KrJf695EvBvSJQbAI8wJD5YFgRNhBSRPAr0gVuaDHMYs14e9Uu+RTimgvtTlUc90oh3eqsmQRp0WTP2N4JbDYV+ZA/4DdWRn8nSEVTY3CMX/Iwrx2+qJtzP5O2XzqzlLMPB52p/Thmnc691zw==
+ b=TCRIT5/BMJ3RHYIz3kjxkjPL8Nw8rd20IpoCeFWWKn2oIgMIe6FoIFmpYiNIjZVFp/1f/C33YROc6wsHcWYzubMEdBedVtZ/XsYsVeevq9/IOorDjwZuFjs5sDixuKw9bMcmIa4s9DV7N+3MxBtaAH71TLebn5MnNuxEQabydnjUbbKtNmD30QCFzIHuW7zTDMOssWsVLELiQIFKLGpDwYNB5o+uEYoNHd2KCuXVtVMVNNA+e1XxBS4zvQk9QLh8Y3pwaZd59BJecTqa+m+nYsz1buAM7iiqXuc/8kJjLZG/3VyK/gRLg7J+1k56QoGBnYL8lx5KDb9Q8yd3APWHAg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=O5Fvyon9pP8jficILgXhOuMiNAjcLMUPifEHs+FbT5Q=;
- b=m00sqj2yWV4/MJH+wrIfSyPL0A3m0F/tcXHvOwnsnyJVuxUBhIm/PwkbFdItvM3R4qZSYv3Rc9U4GgZ1Zudxqi/E09PbYkFJT9ttUXlgzGfkHToEhM0GiU0H1RKi/gxqcJHMVJmUFVht6LpqcKMHUgbr1ecalahNPq1aO2yY6fNoeDcD0oHpXJZ6WqwwCwq78y2kWebFU4e4wsxd88WTLA/m3q4EkbDk/I5avgOi7OEdjp0JEZUNxvKyG7fJ9p+CDnRNSeMFLQRpDKRNYr0ldfjifUeyvDJKl1mFoy3GsefxnMk11Rz4lE51RLNyOFySDJ7iyUtimbbYq+/eLehcow==
+ bh=izkM3/z4sPkt4zpxlsHGtY1fc5KRMyoYNoGbHZjH4Q0=;
+ b=TS4TuKTtl+T7D+tlbqCyAA/F1RxlZTGihpOyzIzLxJdw7XKrMOZtj9TZU2hKh9fuiivrCV3Vh+0JK1M9Kj9IcDcQSlxy0RrtRqWfiNnZ0TFlP74tjBHF4NQTdyCaaFnjpkgzqfEucKWFTnzoQVeIdQodRXfDjuX6xN3DS+avOzaoCatTTRX5pz3K79Sw5HK2avZm7llaZ1LJFNFJX85Goj5M11Ti/6BcgicFqq9WjbKf+RbeDUbXzZHuQJ0ELjN+Gd8pDgheAvU/gUHXjpcxsiYVJJLRro6phoIjtuPTCzS90zwv0dMTUl+P4sqi2UoyM82uBhzn386pTYyHcQ3mLQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=O5Fvyon9pP8jficILgXhOuMiNAjcLMUPifEHs+FbT5Q=;
- b=dsg/0MDuWbreaQ5P93GNc1j1Gm9WOp/mw+2G3FHE5SP+JsVg7eJBJHKI2DQS0SRdrD1rgGA0LCeJ7wuwY+w+tBm7uSwz8urziQAtEC47scdNRTuEHYwRhENCOwJ35my1AP+Z7v7zhLlqkBBLIEdiyK3wUHjodfQZKlERkglAn+E=
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 3/3] amd/msr: implement VIRT_SPEC_CTRL for HVM guests using legacy SSBD
-Date: Thu, 31 Mar 2022 11:27:17 +0200
-Message-ID: <20220331092717.9023-4-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220331092717.9023-1-roger.pau@citrix.com>
-References: <20220331092717.9023-1-roger.pau@citrix.com>
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <37ee7fe7-1218-7fa3-bc29-0fb45389bf75@suse.com>
+Date: Thu, 31 Mar 2022 11:29:44 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Subject: [PATCH v4 1/4] x86/APIC: calibrate against platform timer when
+ possible
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <6e540bc9-c536-84ac-fb1c-8271e7731b3e@suse.com>
+In-Reply-To: <6e540bc9-c536-84ac-fb1c-8271e7731b3e@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO2P265CA0225.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:b::21) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AS8PR07CA0007.eurprd07.prod.outlook.com
+ (2603:10a6:20b:451::6) To DU2PR04MB8616.eurprd04.prod.outlook.com
+ (2603:10a6:10:2db::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: cd6ae490-2884-4e34-8165-08da12f8e6ff
-X-MS-TrafficTypeDiagnostic: CY4PR03MB3112:EE_
-X-Microsoft-Antispam-PRVS: <CY4PR03MB311245364FF410758064244A8FE19@CY4PR03MB3112.namprd03.prod.outlook.com>
+X-MS-Office365-Filtering-Correlation-Id: 74fd2d73-fabe-4521-68f5-08da12f8febc
+X-MS-TrafficTypeDiagnostic: AM0PR04MB6161:EE_
+X-Microsoft-Antispam-PRVS:
+	<AM0PR04MB616136F3659C67DA9889C215B3E19@AM0PR04MB6161.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PHUojfE4w+p6R5/PzlOPH07MTcALZzXZyONewvPPLNyEFx+AgpvUG0DQ64rqf/VsfNT0DsRYgODWgKCd3GURIhvLReo1J8SL9jZijRCt2OxXRZzTaTA6VX8F+LHvrCB0YuMl0feRLWeRhEyem2Kq/9xp81qyHS+3MVWnqH0PULQMzM9X48JTEo2yFOXmADC5xfhxyaHIKAXTec4wDteBGt/FOu1mSe7wkLig/lQALAMoRT0hG+AJ3H6jheqtynLFgcSfQAm/iLYw63+Mq7NqvEUIeCdFNqelLJq/kg9rJhtkQ31+psTH6RlhK9FM/7QUDox28Gr2AU83I/oHI56g+VsMrqkc8FymcKOBBMhrk+eQJy+JtAZBTtGXKHSI+cy5SPPSVP9Zg2gDTJ/2LaHD6UcSG9/nHyux4b/LcOrc6J8g1CHO91A+3ZIw+YQxV8vMxBG7Bj4pazuGrHskCxPF0wGsQdVPqhdzNfRR6UoI+bkWbgdsPSxcDK3iV3UGKBJ9ILR3jBmCj5y1AcdXxvElAIJIbuB0een51RPRiVS4SJuo/1cAd5925lvlqc3JahAYXYSQMpXJPRnXpMwT6j6nqqYgYRoSDiE/tTa69urL2VuxTEWVaWFcIBQDe9LDmuTL4aK+z60u/7Q6NJXZFYFj5h6Aj7BppnTUCOQ6mIM2oh89/EG3RzsqE+8th/6fzY71obdXg2sVEvH8dYGSnehU071wJ6fx9fsRLJiWUI3qpcQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(36756003)(186003)(1076003)(26005)(83380400001)(2906002)(6506007)(2616005)(6666004)(66556008)(5660300002)(54906003)(6512007)(82960400001)(8936002)(6486002)(966005)(66476007)(38100700002)(8676002)(6916009)(4326008)(86362001)(316002)(66946007)(508600001);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam-Message-Info:
+	0uPofuTbHtC9SMECRn2gXw/CZqa+1EY637Qh0bQ+NBUz5rbycj8lpTtX/zYYtTRXoyUzIChe0LEYBu+b+SfitBqcrfy7pbamFkMjzDu+DK2PejOnb6u5rQXTQ0tb2po3l/DbwDQw0f5lYqZOQENwc1Af+bTEte4V6aM0BOuEgmEul8CU0vSCdRo8FgpVhRe8Kje8z8Q/TK0i98ekpcjmfWa9eoKjAFLD2LxeL9GYFn7U3bBxwkt07JBQeldOIUU8jRF+F6T3Wsvnbcb8NYvmRhmNzOe6ruSKkw22WYZApt2VTd/RlGjChu4qCBzpl6JBAYmK1RGxK98fbnqiHvAbAFttSZ3N7MDvTpdMFXlD1YgnkEMkyNO4ULvBGzCAhQasHtwOAuP9/TZym3qQD+jov6tdWRPXfunK8UGk26vkm2XHET3UZx781z/ezb1wyb/TMvBtnP0ug0I3s/vHvVyVi4/T0KAOJEJ/RalUwCYTpTWr5+gNlPovY2donD3d5Y4rnFs08nR3QyUqm59eQkdl9tf1Z1WRa/7niFeCbS/CdSVLF+VhAj/OtYVRgFxG71ISLBgtJIkWKMoHCUHOSTz2P6mi9loovRRmaSBmAOqXgJ+matVcswA8FqAzJoADwseSU5raygnzn4yyINS7rkdiNV0bKi1mYSHkXj+8QP9zG4qxvw2qh9zOrr8XKPL9GeuOywQu52bxzAqrO7XCnJ1FD6dL1gfOx0OZioKHxOJtjt4=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(6916009)(54906003)(66946007)(38100700002)(2616005)(8936002)(6506007)(66556008)(5660300002)(8676002)(186003)(2906002)(4326008)(66476007)(26005)(316002)(86362001)(6486002)(83380400001)(6512007)(31696002)(31686004)(508600001)(36756003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NTdLaXh1VWhzN1pMdjhrb1RYT3o1OFlmeGVmUVRqMDd2R004cWx6UlpYT1B3?=
- =?utf-8?B?dVl0QlJhNHd3RGM0M2VXVHl3L2dxdyswQ2dIKzJFNElubitOLy9GdEEvZExC?=
- =?utf-8?B?SFJjamE0N0Q4RjVGMVNzR2dUVVk0VldrZlFwZ09QN2R4Nm9LSFV0empTMno1?=
- =?utf-8?B?WGdhMUhUaGJlOXp3czdHd0Z0bCttTlBOamVYMGJML3JBZGRJUm5IbUVBTmVD?=
- =?utf-8?B?SHVxT2d3YVA2T2dobWJKaTJMY1hEbmlabjdYZW5Eb1JGMEVGUlBCOFI3QjMx?=
- =?utf-8?B?cW5vcXpvMzdKYW5TdmtnY2tXM3RtYTNVRWlIVEwyT1NIbnEwZUZYV1hWOGd3?=
- =?utf-8?B?SXN4Njh6a1hkL2dPUVZyTGxYUUczaDNZUGE4QThNQ3kzVXhYOUdLTUxJbmtN?=
- =?utf-8?B?Z0N5M1FKR1FHWFFLcVJDbzByWlRSU2poanR0ek4wRHhZY0Y2U3pQd3NDSTQv?=
- =?utf-8?B?VzBvSS9VaXZKaUVpamdBOEVLRGdOSEpVWjNYb0ZJSFU4RzFDZ3VvQ3JVUFBS?=
- =?utf-8?B?Q1hNc1pWT1hVVUZFZXVjajJLTnJ1ODNkWjA5M2pTWUtFMjhkdVBuN05zSElp?=
- =?utf-8?B?M3JyT3V1a3d6YXJRWDBYUWJWK3BGaWNNVktkQit2cWc3NGNLS0pSLzc4WGZn?=
- =?utf-8?B?UmVhd25UcElpOEJYbUdYa0t2OEF4bkE4dHhrY0piR3NjOVBoU3BMOUdoSk5l?=
- =?utf-8?B?YjBmbjR2ajZNTW5WNFVySHRxRldGbFA0aEowUGRXRVVvTTFPckNqdlVZV204?=
- =?utf-8?B?dExwK1grZnhSai9jQVZlSXRXTFlSVVZNeW5GY2hLWDRrWHRIZzlSNUZtZ0kr?=
- =?utf-8?B?bHRjSXpUd1VRMGZ6NHhKemU2eGsvUDYxZTk2UUVLbzBzQlNvOVN0eHpGVE5m?=
- =?utf-8?B?azR4TjZiVEo5RmFsNDgzRkNmQmNkWHVVZGYrV0U0NTBWMkk3b2R6bUl2VHY4?=
- =?utf-8?B?SVlHeWtNY1Z6R0RwTTdNanRPaXJyak1aNGkveGFpcmhzc3FiR2xtNnJtQmxr?=
- =?utf-8?B?TjgxamVVL1Q3ZlQ4a0ZwY3lSb3ZjcjE2TjA5VDlCaHN1YmhEUXl3ZWt1UHVJ?=
- =?utf-8?B?bWdpQjRrT05WeEtyc2xFZlBqV1V6bEp0YUpRSmlob2Rwa3NaR0hxeHo1WjZZ?=
- =?utf-8?B?a2lQY3hLQjFwV1IvNktKeG0rYktjQUY5NnNNYUwzTjQyMU92aU1GSkRZY2sr?=
- =?utf-8?B?ZXZPWHdHemw0bHVYbS9EQ2lkZUx6RG9jRVJEYVRXZU1xY0d0L1pCTXB4NUxS?=
- =?utf-8?B?TkdMNmVUUGt1L2FOQXRpaGovc1Iya0ZPTDZTaHlBR3dkWTI5cm5KeVpaWWZz?=
- =?utf-8?B?RjR1VFV2a1BESHpzTW1vTEtDYjhvaWtRL015WlpJdEdaQWR1TnBuU3lHWURu?=
- =?utf-8?B?dmNKeXAyeHZzb1UxclJWTWxrS0ZTbGt5dlE1QVlIMEJTbWFVMmQzT3E3ZTNR?=
- =?utf-8?B?VmZMbDMvVllvVzN5WDdhalRmLzNQZUFZQUFFTW5pTXR3ei9IN0dka2wrTzl2?=
- =?utf-8?B?ci83Mm02YmJZTUszdWgzckFHcGlodzRxM2drUi9hUURhV1RBYnJFVEJyQkU3?=
- =?utf-8?B?amJYd29XUlB2SjNyUFMySjZZY2lyVG9MbWRLUXl6eDJ0ekJxRWdOQ0czSTUx?=
- =?utf-8?B?N0p0Ymp3Nytrd1VBSjVXNXByZ3NOUVJhRGtaUnRJZFBhbkl2RURJYXAwQVg1?=
- =?utf-8?B?RENiaE4wcmRwdHdDTG40UncwaXlsMFBOdDhWYnZDaDFmaHdqWjNGZy9IYzBr?=
- =?utf-8?B?VFJpM0ZSY2NNWWtaWXV0Rmh3bUJ3MGZGbnRobEc4VTRpWW5JZ3MvRldZdzBv?=
- =?utf-8?B?WlVKRno5ckJQOFRSMzBTY1Y0UDFVajJaTWNZaXlTanZlV1lTUHpRYUs5a2Nt?=
- =?utf-8?B?Y1BEampPT01kNU9OdEJLZWZ2K3J6OXNFeTdxRCtUY1h3ZWJVaUd3UFhmbmg5?=
- =?utf-8?B?RTJJZm1GSWVpTGxPZ0VPRkNlSEFDZWM2SmlQTFQ3UGJ2SzZMVmFiRklab1FT?=
- =?utf-8?B?MmRicjM4SUJiNWZxWXNPTVRQZDRvZmt4WE40ZUo2MkJxN3dpRG5oSDJubWU1?=
- =?utf-8?B?T3VseUVDT29TOE80MlJ2eUFvMFBLUWtEdXhFb08vem1pWElnNGFnVEhEY1Zj?=
- =?utf-8?B?UFZxaFpmYmE5bXNabi90aXZHR1V6VUFzeXBNQ205SHovcC9TcGtCRUxqRmNN?=
- =?utf-8?B?ZGQ5ZnB2MS85ZGlEYVJqa01mSEFGSWdKWkhzYzI1RGxYUDN2ZmZyVGNnMHNi?=
- =?utf-8?B?alQ1blkwUExncEZVOFI0WVdIYkRYZGxTQjhxUFEyWW1NMWxmSHdtKytKMFRX?=
- =?utf-8?B?bjk5NHpRblBYbTkxVFArMmVZQ3FDZ3hNMTRZeWYrTWxEKzFTR0NFbng1ZGty?=
- =?utf-8?Q?GF+ruYJlm5K2B1fQ=3D?=
-X-MS-Exchange-CrossTenant-Network-Message-Id: cd6ae490-2884-4e34-8165-08da12f8e6ff
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?KzBac3dDclZQVGIzbkN0cHpyVk1iYk01bUdIdjdObDB0STNJMGxQMUU4c094?=
+ =?utf-8?B?RTJ1L2tiemNYb2tOWHhZWnJKaHEzajBrWC80aE5mN0htYUlTUDhsN0ozZkxE?=
+ =?utf-8?B?UnBhYWFZblY0TmRsZHc3ZlF5WFBFSGsrQ2xkZkFXdzdqRFU3dkRkNUU3U0Nz?=
+ =?utf-8?B?bVdvZ0g5aFVMVHhXSFFVSVZIazRLbFlFUEJ0S2xFclRtd1JVNVRoOTFqSnhl?=
+ =?utf-8?B?M3lBM3RNZDlvUERZUlpMdjZ3aEpQKzJSVllsMEQ5eld4M1dWRWhjYWJVbW9S?=
+ =?utf-8?B?Mm14dlF0U3h6QnJ0TDB0QU80Uzd5L1Rsa0h6d052bUUvQitaakcwSmVROU9S?=
+ =?utf-8?B?ZU9FS2ZENUgxYU1PZVdVM3huL0haSGNCaHhId05JLzJmazJqQWJBektCcjhO?=
+ =?utf-8?B?S1VnL2E5Ky9sYzBUY0NoRlc0SmZ5ZDN1TlpkNHk2K2ZXMXgrYnJWMFNsbzND?=
+ =?utf-8?B?Uy9DRDgwcStiYVBycG16VkF2YTAzMlFSQWw4b2hKZzc1YThWTG5ZNVllc3dt?=
+ =?utf-8?B?TkdDVW1vbithRmo2QUt0UTJ5ZmR6QlJFUU84Y2V6bTROZVpHSHljb2JNMFlS?=
+ =?utf-8?B?a2hPYTdZWm4wbVBQSm93UlFZRlc1cytQelpOeDk1a1N6VDdjNGliTXVqVGRR?=
+ =?utf-8?B?NTVvMWxIbGRhWmJoNllSTkZlVEQweXJpdEpPajNPQnR2Zk5YYWwybXIvdjQ0?=
+ =?utf-8?B?RHg4b2YyVUVFeVVaTWR1Uy9DTjY5YjlOOEQrMXhucm9OVC9TU2p4Z1JWdUF4?=
+ =?utf-8?B?UUVkcFBDRzZLeGZhTGt0czZmT2NJK0t5NUNiais2bEx4QkRMNXFiWWVEd1Nn?=
+ =?utf-8?B?bGdZMS84SlpwRVNqVlhLQzBvcmxKalI0Qm5WQ2FIRjVoLzk2K2ttZjFobnMx?=
+ =?utf-8?B?TFF2MFRLQldzL2srZUJlbHdNREhzVHVFbDduaWhOZ1VzNjBTNE9YT0JXY1pj?=
+ =?utf-8?B?bC96YXNCa1RNbE9kYmQxeWNiMDJORFhWVG93TDJ3NTZVK2c4eFd0TkY4NjJQ?=
+ =?utf-8?B?RWNpMmFpdUVmaU1WaTY0UzRSVER6aWRydjdITUlrb1FSWm03RlFuMUxsZ2x6?=
+ =?utf-8?B?clltNnJhSVBMWHhUVXh1TndoSXpXZGxHZkZGbjJnaDhSZ0d1aUxGWG1VY3h1?=
+ =?utf-8?B?eWhYU29yMFk3Z3MvUW9UOFljY2pzelpRZFk0Nm0rRTA0c0RVVmdtK3ZYdEhn?=
+ =?utf-8?B?MlVYYi8vQ3ZlbFY3OHNvZFBuSnFvQXF0UzAwVWdoV2N3N0dHcHZob0FIbVFv?=
+ =?utf-8?B?VHhyYU82RzhscTZ5bWdCQ1A1OU9mR1ozRDdWSWo1UWh4TWJ2R2Y4YUw1OGIz?=
+ =?utf-8?B?TDhFNWlPcnVwdk5icG9LMlFDZU92VDV3cFdNK3Mrb1hCeFV4YzZ0dlAwMlhU?=
+ =?utf-8?B?dnZ1WW03ZGVZYnN6VjN1bkI0SDVWWnZNTS95WUpCVnpsVlgrRDNadW1TUFN5?=
+ =?utf-8?B?MFE5d1V0K0JyMkJ1WlY0R09oY0s5Z0thWnROdmtDYWFyYkxvTVRXYlFEMlIv?=
+ =?utf-8?B?M1RMRWJWaEY0Wm1rYlRYNU9Na1ZDejlYbDRHMDBpUnBkM3ppeU14aU5QMFV4?=
+ =?utf-8?B?YWhUKys5Q09pa0ZCMmdoc3Y2RGEzcW5PbkdDTDNiYVpQK3JTY1ljU0YzcGg3?=
+ =?utf-8?B?RWxKZ05SU2JUY0x6Q09CbVRPWjhzcWNNRVlXVm92c0dNTjhSZEVhN3FoTlRy?=
+ =?utf-8?B?bDRrLzByOXZMalhHQ0dmUnR1d1F6bGk3RnJTT2UxQWNjTXhiZTFSMkZTS2Jr?=
+ =?utf-8?B?RDRHU0ZFYzBoc2JpOXI2aUV5QU8yRE4xOEtrUE9LNWdMbTZWc3RFb0Y1cWEy?=
+ =?utf-8?B?dEZwbXBVOXhTbzQreWhlc0NWa1UzZjRoWFh4WXNkYVV2K3dmcXN3WXlZOVdk?=
+ =?utf-8?B?ZFFsOXJCSzlCMlMrS3lEVExnRTcyblBWTjl3dE1CajNvOE9vMVpMTXJuYkZP?=
+ =?utf-8?B?cWVCdXpvR2ZsNUN3SDlTRVlDL1UyMG9XNmhaVmcxZGwrY0ptSnk3V1IwNm1t?=
+ =?utf-8?B?UjZhTjR2NTB6aTdZRFdIaVkzN1dYcWllNjB3UXdMc01QbTNjV3ViZXJtbTdp?=
+ =?utf-8?B?ZC9jQXNwSHFuaDJQU0RqU3RsMFJWMTE4ekNPYk11d3RvNGpOOC81cnp1c3VE?=
+ =?utf-8?B?N1E0MDRxeTdYZ0hEYjN6a0lsMFlmVlo0MytqOHlTRnQ0TlVhcmNZMW94SUxM?=
+ =?utf-8?B?UzA3T01JeXY4T0tDYVQrUVYrU0VRODZsY3RJY1hTZVh3TzJPNnJmM21FQTcx?=
+ =?utf-8?B?NEhKaFpSQkJOdldWV08ybUFXZUl4MS92TjB5aFloK0VSWTEzQ2pOM0dqalZn?=
+ =?utf-8?B?OE9DU0hDS0FrVEVkNUd2dVk4WTU3ZlNqMitLOEpsaXFub3JYVHlFZz09?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 74fd2d73-fabe-4521-68f5-08da12f8febc
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8616.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 09:29:06.4758
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2022 09:29:46.2546
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eKLy/wCHLyW8HTqC4qb3GrGfBg2QQMNthzETkWl7URg1q334ui4ju5XpYHKS7RhdWge+ASShJPqYVEE1/1Gx0w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR03MB3112
-X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9mmIUx9VUgow94qic/LnAooyQrhZF66/Z1VoDKGqZU5LewpiXQu5xCC1pEZYjeQm0z9uUBNj1hg1/+YQWzqokg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6161
 
-Expose VIRT_SSBD to guests if the hardware supports setting SSBD in
-the LS_CFG MSR (a.k.a. non-architectural way). Different AMD CPU
-families use different bits in LS_CFG, so exposing VIRT_SPEC_CTRL.SSBD
-allows for an unified way of exposing SSBD support to guests on AMD
-hardware that's compatible migration wise, regardless of what
-underlying mechanism is used to set SSBD.
+Use the original calibration against PIT only when the platform timer
+is PIT. This implicitly excludes the "xen_guest" case from using the PIT
+logic (init_pit() fails there, and as of 5e73b2594c54 ["x86/time: minor
+adjustments to init_pit()"] using_pit also isn't being set too early
+anymore), so the respective hack there can be dropped at the same time.
+This also reduces calibration time from 100ms to 50ms, albeit this step
+is being skipped as of 0731a56c7c72 ("x86/APIC: no need for timer
+calibration when using TDT") anyway.
 
-Note that on AMD Family 17h (Zen 1) the value of SSBD in LS_CFG is
-shared between threads on the same core, so there's extra logic in
-order to synchronize the value and have SSBD set as long as one of the
-threads in the core requires it to be set. Such logic also requires
-extra storage for each thread state, which is allocated at
-initialization time.
+While re-indenting the PIT logic in calibrate_APIC_clock(), besides
+adjusting style also switch around the 2nd TSC/TMCCT read pair, to match
+the order of the 1st one, yielding more consistent deltas.
 
-Do the context switching of the SSBD selection in LS_CFG between
-hypervisor and guest in the same handler that's already used to switch
-the value of VIRT_SPEC_CTRL in the hardware when supported.
-
-Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes since v2:
- - Fix codding style issues.
- - Use AMD_ZEN1_MAX_SOCKETS to define the max number of possible
-   sockets in Zen1 systems.
+Open-coding apic_read() in apic_tmcct_read() isn't overly nice, but I
+wanted to avoid x2apic_enabled being evaluated twice in close
+succession. And I also wouldn't want to have the barrier there even for
+the (uncached) MMIO read.
 
-Changes since v1:
- - Report legacy SSBD support using a global variable.
- - Use ro_after_init for ssbd_max_cores.
- - Handle boot_cpu_data.x86_num_siblings < 1.
- - Add comment regarding _irqsave usage in amd_set_legacy_ssbd.
+Unlike the CPU frequencies enumerated in CPUID leaf 0x16 (which aren't
+precise), using CPUID[0x15].ECX - if populated - may be an option to
+skip calibration altogether. Aiui the value there is precise, but using
+the systems I have easy access to I cannot verify this: In the sample
+of three I have, none have ECX populated.
+
+I wonder whether the secondary CPU freq measurement (used for display
+purposes only) wouldn't better be dropped at this occasion.
 ---
- xen/arch/x86/cpu/amd.c         | 116 ++++++++++++++++++++++++++++-----
- xen/arch/x86/cpuid.c           |  10 +++
- xen/arch/x86/hvm/svm/svm.c     |  12 +++-
- xen/arch/x86/include/asm/amd.h |   4 ++
- xen/arch/x86/spec_ctrl.c       |   4 +-
- 5 files changed, 127 insertions(+), 19 deletions(-)
+v3: Move (and rename) read_tmcct() as previously suggested.
+v2: New.
 
-diff --git a/xen/arch/x86/cpu/amd.c b/xen/arch/x86/cpu/amd.c
-index 4999f8be2b..a256a9d882 100644
---- a/xen/arch/x86/cpu/amd.c
-+++ b/xen/arch/x86/cpu/amd.c
-@@ -48,6 +48,7 @@ boolean_param("allow_unsafe", opt_allow_unsafe);
+--- a/xen/arch/x86/apic.c
++++ b/xen/arch/x86/apic.c
+@@ -1183,18 +1183,20 @@ static void __init check_deadline_errata
+            "please update microcode to version %#x (or later)\n", rev);
+ }
  
- /* Signal whether the ACPI C1E quirk is required. */
- bool __read_mostly amd_acpi_c1e_quirk;
-+bool __ro_after_init amd_legacy_ssbd;
- 
- static inline int rdmsr_amd_safe(unsigned int msr, unsigned int *lo,
- 				 unsigned int *hi)
-@@ -685,23 +686,10 @@ void amd_init_lfence(struct cpuinfo_x86 *c)
-  * Refer to the AMD Speculative Store Bypass whitepaper:
-  * https://developer.amd.com/wp-content/resources/124441_AMD64_SpeculativeStoreBypassDisable_Whitepaper_final.pdf
-  */
--void amd_init_ssbd(const struct cpuinfo_x86 *c)
-+static bool set_legacy_ssbd(const struct cpuinfo_x86 *c, bool enable)
+-static void __init wait_tick_pvh(void)
++uint32_t __init apic_tmcct_read(void)
  {
- 	int bit = -1;
- 
--	if (cpu_has_ssb_no)
--		return;
+-    u64 lapse_ns = 1000000000ULL / HZ;
+-    s_time_t start, curr_time;
 -
--	if (cpu_has_amd_ssbd) {
--		/* Handled by common MSR_SPEC_CTRL logic */
--		return;
--	}
--
--	if (cpu_has_virt_ssbd) {
--		wrmsrl(MSR_VIRT_SPEC_CTRL, opt_ssbd ? SPEC_CTRL_SSBD : 0);
--		return;
--	}
--
- 	switch (c->x86) {
- 	case 0x15: bit = 54; break;
- 	case 0x16: bit = 33; break;
-@@ -715,20 +703,114 @@ void amd_init_ssbd(const struct cpuinfo_x86 *c)
- 		if (rdmsr_safe(MSR_AMD64_LS_CFG, val) ||
- 		    ({
- 			    val &= ~mask;
--			    if (opt_ssbd)
-+			    if (enable)
- 				    val |= mask;
- 			    false;
- 		    }) ||
- 		    wrmsr_safe(MSR_AMD64_LS_CFG, val) ||
- 		    ({
- 			    rdmsrl(MSR_AMD64_LS_CFG, val);
--			    (val & mask) != (opt_ssbd * mask);
-+			    (val & mask) != (enable * mask);
- 		    }))
- 			bit = -1;
- 	}
- 
--	if (bit < 0)
-+	return bit >= 0;
-+}
-+
-+void amd_init_ssbd(const struct cpuinfo_x86 *c)
-+{
-+	if (cpu_has_ssb_no)
-+		return;
-+
-+	if (cpu_has_amd_ssbd) {
-+		/* Handled by common MSR_SPEC_CTRL logic */
-+		return;
-+	}
-+
-+	if (cpu_has_virt_ssbd) {
-+		wrmsrl(MSR_VIRT_SPEC_CTRL, opt_ssbd ? SPEC_CTRL_SSBD : 0);
-+		return;
-+	}
-+
-+	if (!set_legacy_ssbd(c, opt_ssbd)) {
- 		printk_once(XENLOG_ERR "No SSBD controls available\n");
-+		if (amd_legacy_ssbd)
-+			panic("CPU feature mismatch: no legacy SSBD\n");
-+	} else if (c == &boot_cpu_data)
-+		amd_legacy_ssbd = true;
-+}
-+
-+static struct ssbd_core {
-+    spinlock_t lock;
-+    unsigned int count;
-+} *ssbd_core;
-+static unsigned int __ro_after_init ssbd_max_cores;
-+#define AMD_ZEN1_MAX_SOCKETS 2
-+
-+bool __init amd_setup_legacy_ssbd(void)
-+{
-+	unsigned int i;
-+
-+	if (boot_cpu_data.x86 != 0x17 || boot_cpu_data.x86_num_siblings <= 1)
-+		return true;
-+
-+	/*
-+	 * One could be forgiven for thinking that c->x86_max_cores is the
-+	 * correct value to use here.
-+	 *
-+	 * However, that value is derived from the current configuration, and
-+	 * c->cpu_core_id is sparse on all but the top end CPUs.  Derive
-+	 * max_cpus from ApicIdCoreIdSize which will cover any sparseness.
-+	 */
-+	if (boot_cpu_data.extended_cpuid_level >= 0x80000008) {
-+		ssbd_max_cores = 1u << MASK_EXTR(cpuid_ecx(0x80000008), 0xf000);
-+		ssbd_max_cores /= boot_cpu_data.x86_num_siblings;
-+	}
-+	if (!ssbd_max_cores)
-+		return false;
-+
-+	/* Max is two sockets for Fam17h hardware. */
-+	ssbd_core = xzalloc_array(struct ssbd_core,
-+	                          ssbd_max_cores * AMD_ZEN1_MAX_SOCKETS);
-+	if (!ssbd_core)
-+		return false;
-+
-+	for (i = 0; i < ssbd_max_cores * AMD_ZEN1_MAX_SOCKETS; i++) {
-+		spin_lock_init(&ssbd_core[i].lock);
-+		/* Record initial state, also applies to any hotplug CPU. */
-+		if (opt_ssbd)
-+			ssbd_core[i].count = boot_cpu_data.x86_num_siblings;
-+	}
-+
-+	return true;
-+}
-+
-+void amd_set_legacy_ssbd(bool enable)
-+{
-+	const struct cpuinfo_x86 *c = &current_cpu_data;
-+	struct ssbd_core *core;
-+	unsigned long flags;
-+
-+	if (c->x86 != 0x17 || c->x86_num_siblings <= 1) {
-+		BUG_ON(!set_legacy_ssbd(c, enable));
-+		return;
-+	}
-+
-+	BUG_ON(c->phys_proc_id >= AMD_ZEN1_MAX_SOCKETS);
-+	BUG_ON(c->cpu_core_id >= ssbd_max_cores);
-+	core = &ssbd_core[c->phys_proc_id * ssbd_max_cores + c->cpu_core_id];
-+	/*
-+	 * Use irqsave variant to make check_lock() happy. When called from
-+	 * vm{exit,entry}_virt_spec_ctrl GIF=0, but the state of IF could be 1,
-+	 * thus fooling the spinlock check.
-+	 */
-+	spin_lock_irqsave(&core->lock, flags);
-+	core->count += enable ? 1 : -1;
-+	ASSERT(core->count <= c->x86_num_siblings);
-+	if (enable ? core->count == 1 : !core->count)
-+		BUG_ON(!set_legacy_ssbd(c, enable));
-+	spin_unlock_irqrestore(&core->lock, flags);
- }
- 
- void __init detect_zen2_null_seg_behaviour(void)
-diff --git a/xen/arch/x86/cpuid.c b/xen/arch/x86/cpuid.c
-index 91e53284fc..e278fee689 100644
---- a/xen/arch/x86/cpuid.c
-+++ b/xen/arch/x86/cpuid.c
-@@ -537,6 +537,16 @@ static void __init calculate_hvm_max_policy(void)
-     if ( !boot_cpu_has(X86_FEATURE_VIRT_SC_MSR_HVM) )
-         /* Clear VIRT_SSBD if VIRT_SPEC_CTRL is not exposed to guests. */
-         __clear_bit(X86_FEATURE_VIRT_SSBD, hvm_featureset);
-+    else
-+        /*
-+         * Expose VIRT_SSBD if VIRT_SPEC_CTRL is supported, as that implies the
-+         * underlying hardware is capable of setting SSBD using
-+         * non-architectural way or VIRT_SSBD is available.
-+         *
-+         * Note that if the hardware supports VIRT_SSBD natively this setting
-+         * will just override an already set bit.
-+         */
-+        __set_bit(X86_FEATURE_VIRT_SSBD, hvm_featureset);
- 
-     /*
-      * If Xen isn't virtualising MSR_SPEC_CTRL for HVM guests (functional
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 40ff28ecf1..9b8f8d21bd 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -3133,7 +3133,12 @@ void vmexit_virt_spec_ctrl(void)
-         if ( val != lo )
-             wrmsr(MSR_VIRT_SPEC_CTRL, val, 0);
-         current->arch.msrs->virt_spec_ctrl.raw = lo;
-+
-+        return;
-     }
-+
-+    if ( val != current->arch.msrs->virt_spec_ctrl.raw )
-+        amd_set_legacy_ssbd(val & SPEC_CTRL_SSBD);
- }
- 
- /* Called with GIF=0. */
-@@ -3142,7 +3147,12 @@ void vmentry_virt_spec_ctrl(void)
-     unsigned int val = current->arch.msrs->virt_spec_ctrl.raw;
- 
-     if ( val != (opt_ssbd ? SPEC_CTRL_SSBD : 0) )
--        wrmsr(MSR_VIRT_SPEC_CTRL, val, 0);
+-    start = NOW();
++    if ( x2apic_enabled )
 +    {
-+        if ( cpu_has_virt_ssbd )
-+            wrmsr(MSR_VIRT_SPEC_CTRL, val, 0);
-+        else
-+            amd_set_legacy_ssbd(val & SPEC_CTRL_SSBD);
++        /*
++         * Have a barrier here just like in rdtsc_ordered() as it's
++         * unclear whether this non-serializing RDMSR also can be
++         * executed speculatively (like RDTSC can).
++         */
++        alternative("lfence", "mfence", X86_FEATURE_MFENCE_RDTSC);
++        return apic_rdmsr(APIC_TMCCT);
 +    }
+ 
+-    /* Won't wrap around */
+-    do {
+-        cpu_relax();
+-        curr_time = NOW();
+-    } while ( curr_time - start < lapse_ns );
++    return apic_mem_read(APIC_TMCCT);
  }
  
  /*
-diff --git a/xen/arch/x86/include/asm/amd.h b/xen/arch/x86/include/asm/amd.h
-index a82382e6bf..6a42f68542 100644
---- a/xen/arch/x86/include/asm/amd.h
-+++ b/xen/arch/x86/include/asm/amd.h
-@@ -151,4 +151,8 @@ void check_enable_amd_mmconf_dmi(void);
- extern bool amd_acpi_c1e_quirk;
- void amd_check_disable_c1e(unsigned int port, u8 value);
+@@ -1212,9 +1214,6 @@ static void __init wait_tick_pvh(void)
  
-+extern bool amd_legacy_ssbd;
-+bool amd_setup_legacy_ssbd(void);
-+void amd_set_legacy_ssbd(bool enable);
+ static void __init calibrate_APIC_clock(void)
+ {
+-    unsigned long long t1, t2;
+-    unsigned long tt1, tt2;
+-    unsigned int i;
+     unsigned long bus_freq; /* KAF: pointer-size avoids compile warns. */
+     unsigned int bus_cycle; /* length of one bus cycle in pico-seconds */
+ #define LOOPS_FRAC 10U      /* measure for one tenth of a second */
+@@ -1227,39 +1226,38 @@ static void __init calibrate_APIC_clock(
+      */
+     __setup_APIC_LVTT(0xffffffff);
+ 
+-    if ( !xen_guest )
++    bus_freq = calibrate_apic_timer();
++    if ( !bus_freq )
++    {
++        unsigned int i, tt1, tt2;
++        unsigned long t1, t2;
 +
- #endif /* __AMD_H__ */
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 0d5ec877d1..495e6f9405 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -22,6 +22,7 @@
- #include <xen/param.h>
- #include <xen/warning.h>
++        ASSERT(!xen_guest);
++
+         /*
+-         * The timer chip counts down to zero. Let's wait
+-         * for a wraparound to start exact measurement:
+-         * (the current tick might have been already half done)
++         * The timer chip counts down to zero. Let's wait for a wraparound to
++         * start exact measurement (the current tick might have been already
++         * half done):
+          */
+         wait_8254_wraparound();
+-    else
+-        wait_tick_pvh();
  
-+#include <asm/amd.h>
- #include <asm/hvm/svm/svm.h>
- #include <asm/microcode.h>
+-    /*
+-     * We wrapped around just now. Let's start:
+-     */
+-    t1 = rdtsc_ordered();
+-    tt1 = apic_read(APIC_TMCCT);
++        /* We wrapped around just now. Let's start: */
++        t1 = rdtsc_ordered();
++        tt1 = apic_read(APIC_TMCCT);
+ 
+-    /*
+-     * Let's wait HZ / LOOPS_FRAC ticks:
+-     */
+-    for (i = 0; i < HZ / LOOPS_FRAC; i++)
+-        if ( !xen_guest )
++        /* Let's wait HZ / LOOPS_FRAC ticks: */
++        for ( i = 0; i < HZ / LOOPS_FRAC; ++i )
+             wait_8254_wraparound();
+-        else
+-            wait_tick_pvh();
+ 
+-    tt2 = apic_read(APIC_TMCCT);
+-    t2 = rdtsc_ordered();
++        t2 = rdtsc_ordered();
++        tt2 = apic_read(APIC_TMCCT);
+ 
+-    bus_freq = (tt1 - tt2) * APIC_DIVISOR * LOOPS_FRAC;
++        bus_freq = (tt1 - tt2) * APIC_DIVISOR * LOOPS_FRAC;
+ 
+-    apic_printk(APIC_VERBOSE, "..... CPU clock speed is %lu.%04lu MHz.\n",
+-                ((unsigned long)(t2 - t1) * LOOPS_FRAC) / 1000000,
+-                (((unsigned long)(t2 - t1) * LOOPS_FRAC) / 100) % 10000);
++        apic_printk(APIC_VERBOSE, "..... CPU clock speed is %lu.%04lu MHz.\n",
++                    ((t2 - t1) * LOOPS_FRAC) / 1000000,
++                    (((t2 - t1) * LOOPS_FRAC) / 100) % 10000);
++    }
+ 
+     apic_printk(APIC_VERBOSE, "..... host bus clock speed is %ld.%04ld MHz.\n",
+                 bus_freq / 1000000, (bus_freq / 100) % 10000);
+--- a/xen/arch/x86/include/asm/apic.h
++++ b/xen/arch/x86/include/asm/apic.h
+@@ -192,6 +192,9 @@ extern void record_boot_APIC_mode(void);
+ extern enum apic_mode current_local_apic_mode(void);
+ extern void check_for_unexpected_msi(unsigned int vector);
+ 
++uint64_t calibrate_apic_timer(void);
++uint32_t apic_tmcct_read(void);
++
+ extern void check_nmi_watchdog(void);
+ 
+ extern unsigned int nmi_watchdog;
+--- a/xen/arch/x86/time.c
++++ b/xen/arch/x86/time.c
+@@ -26,6 +26,7 @@
+ #include <xen/symbols.h>
+ #include <xen/keyhandler.h>
+ #include <xen/guest_access.h>
++#include <asm/apic.h>
+ #include <asm/io.h>
+ #include <asm/iocap.h>
  #include <asm/msr.h>
-@@ -1073,7 +1074,8 @@ void __init init_speculation_mitigations(void)
-     }
+@@ -1018,6 +1019,67 @@ static u64 __init init_platform_timer(vo
+     return rc;
+ }
  
-     /* Support VIRT_SPEC_CTRL.SSBD if AMD_SSBD is not available. */
--    if ( opt_msr_sc_hvm && !cpu_has_amd_ssbd && cpu_has_virt_ssbd )
-+    if ( opt_msr_sc_hvm && !cpu_has_amd_ssbd &&
-+         (cpu_has_virt_ssbd || (amd_legacy_ssbd && amd_setup_legacy_ssbd())) )
-         setup_force_cpu_cap(X86_FEATURE_VIRT_SC_MSR_HVM);
- 
-     /* If we have IBRS available, see whether we should use it. */
--- 
-2.35.1
++static uint64_t __init read_pt_and_tmcct(uint32_t *tmcct)
++{
++    uint32_t tmcct_prev = *tmcct = apic_tmcct_read(), tmcct_min = ~0;
++    uint64_t best = best;
++    unsigned int i;
++
++    for ( i = 0; ; ++i )
++    {
++        uint64_t pt = plt_src.read_counter();
++        uint32_t tmcct_cur = apic_tmcct_read();
++        uint32_t tmcct_delta = tmcct_prev - tmcct_cur;
++
++        if ( tmcct_delta < tmcct_min )
++        {
++            tmcct_min = tmcct_delta;
++            *tmcct = tmcct_cur;
++            best = pt;
++        }
++        else if ( i > 2 )
++            break;
++
++        tmcct_prev = tmcct_cur;
++    }
++
++    return best;
++}
++
++uint64_t __init calibrate_apic_timer(void)
++{
++    uint32_t start, end;
++    uint64_t count = read_pt_and_tmcct(&start), elapsed;
++    uint64_t target = CALIBRATE_VALUE(plt_src.frequency), actual;
++    uint64_t mask = (uint64_t)~0 >> (64 - plt_src.counter_bits);
++
++    /*
++     * PIT cannot be used here as it requires the timer interrupt to maintain
++     * its 32-bit software counter, yet here we run with IRQs disabled.
++     */
++    if ( using_pit )
++        return 0;
++
++    while ( ((plt_src.read_counter() - count) & mask) < target )
++        continue;
++
++    actual = read_pt_and_tmcct(&end) - count;
++    elapsed = start - end;
++
++    if ( likely(actual > target) )
++    {
++        /* See the comment in calibrate_tsc(). */
++        while ( unlikely(actual > (uint32_t)actual) )
++        {
++            actual >>= 1;
++            target >>= 1;
++        }
++        elapsed = muldiv64(elapsed, target, actual);
++    }
++
++    return elapsed * CALIBRATE_FRAC;
++}
++
+ u64 stime2tsc(s_time_t stime)
+ {
+     struct cpu_time *t;
 
 
