@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0846C4167E
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Apr 2022 05:06:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.298115.507770 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B83F9C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Apr 2022 05:06:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.298118.507792 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbEvB-000356-Tr; Mon, 04 Apr 2022 05:06:33 +0000
+	id 1nbEvM-00043Z-TU; Mon, 04 Apr 2022 05:06:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 298115.507770; Mon, 04 Apr 2022 05:06:33 +0000
+Received: by outflank-mailman (output) from mailman id 298118.507792; Mon, 04 Apr 2022 05:06:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbEvB-00034v-QB; Mon, 04 Apr 2022 05:06:33 +0000
-Received: by outflank-mailman (input) for mailman id 298115;
- Mon, 04 Apr 2022 05:06:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nbEvM-00042h-MU; Mon, 04 Apr 2022 05:06:44 +0000
+Received: by outflank-mailman (input) for mailman id 298118;
+ Mon, 04 Apr 2022 05:06:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yBc+=UO=bombadil.srs.infradead.org=BATV+8f3f264ef3f87e17849e+6798+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nbEvA-00021C-HU
- for xen-devel@lists.xenproject.org; Mon, 04 Apr 2022 05:06:32 +0000
+ id 1nbEvL-000216-El
+ for xen-devel@lists.xenproject.org; Mon, 04 Apr 2022 05:06:43 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fd728895-b3d4-11ec-8fbc-03012f2f19d4;
- Mon, 04 Apr 2022 07:06:31 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 03ff5e4b-b3d5-11ec-a405-831a346695d4;
+ Mon, 04 Apr 2022 07:06:42 +0200 (CEST)
 Received: from 089144211060.atnat0020.highway.a1.net ([89.144.211.60]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nbEuy-00D8sf-RU; Mon, 04 Apr 2022 05:06:21 +0000
+ id 1nbEv8-00D8yQ-5x; Mon, 04 Apr 2022 05:06:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fd728895-b3d4-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: 03ff5e4b-b3d5-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=rkpZ3s8fgryeAMuUBNOS3xz/G9atdlLDsC40fwEGHdk=; b=yjAftHgYYiU99p0V+TDtV7tE0o
-	gxIDDpeYBIADcBl/6V08XcvSHygoBgJp/KIAbrI1Vfw1wyw7HMDcT3JyWO9zsPQ2aL4K6lWxDyUPg
-	gkou57CwzlBz5CDkD+LclThCZDYXe39Q9Anlw6/dZvOBfBEY4w89BKRoBjdLvHiz+16qOyaxShe+8
-	q9yCfnyWUVHwH3AqCgWge6XPUX0WoH6fUTFvmWF0qHc/QR6AozWpxoibfat0PFrxiIhQgkzatyxR3
-	PmLUvCoFkOB9ySCCIMM7gJ5eKvptEEUBQXwCg1aUR72y8eXs+G3Ba2yk/aOlPCBZvsM8AZyeq7EbR
-	aKWj7NkA==;
+	bh=fPQX1tW6oEG+I0H/rxZDFlkVrHm+7UqYHxDjUft+pbI=; b=uSQNHmXng2AqqGS9vNecI5TrZb
+	ckqwMNHmjFyNEdi2OAxPwf/mSfXx0n0Nk4nTcSLU2I4AhgYDA7JqEvCUreN9tmiISibq9vUYTha6z
+	yXL5uCk5K+AWgUjqvusF5U2Y2X4+vHMS8BoOxveW21dDgpVJl78IFlASU3cSy+9mlXG4CzJo6ThmF
+	h25qND6yZrqapnhJ94EuP346vzIzAx8l0nlzPdltTVEbHEBsJLoDvBEELPaPL0drlEVpLOrvc0+x6
+	d8IdqCts8J/Akl9qIxFc83Xu0Howm75y1RKNHlPjlxwzdSFXZvI7S3EcK76Bvh7fRZIMY9cEtJf9+
+	yjHrxkNQ==;
 From: Christoph Hellwig <hch@lst.de>
 To: iommu@lists.linux-foundation.org
 Cc: x86@kernel.org,
@@ -76,10 +76,11 @@ Cc: x86@kernel.org,
 	linux-s390@vger.kernel.org,
 	linux-hyperv@vger.kernel.org,
 	tboot-devel@lists.sourceforge.net,
-	linux-pci@vger.kernel.org
-Subject: [PATCH 04/15] swiotlb: rename swiotlb_late_init_with_default_size
-Date: Mon,  4 Apr 2022 07:05:48 +0200
-Message-Id: <20220404050559.132378-5-hch@lst.de>
+	linux-pci@vger.kernel.org,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Subject: [PATCH 06/15] MIPS/octeon: use swiotlb_init instead of open coding it
+Date: Mon,  4 Apr 2022 07:05:50 +0200
+Message-Id: <20220404050559.132378-7-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220404050559.132378-1-hch@lst.de>
 References: <20220404050559.132378-1-hch@lst.de>
@@ -87,64 +88,66 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-swiotlb_late_init_with_default_size is an overly verbose name that
-doesn't even catch what the function is doing, given that the size is
-not just a default but the actual requested size.
-
-Rename it to swiotlb_init_late.
+Use the generic swiotlb initialization helper instead of open coding it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Anshuman Khandual <anshuman.khandual@arm.com>
+Acked-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 ---
- arch/x86/pci/sta2x11-fixup.c | 2 +-
- include/linux/swiotlb.h      | 2 +-
- kernel/dma/swiotlb.c         | 6 ++----
- 3 files changed, 4 insertions(+), 6 deletions(-)
+ arch/mips/cavium-octeon/dma-octeon.c | 15 ++-------------
+ arch/mips/pci/pci-octeon.c           |  2 +-
+ 2 files changed, 3 insertions(+), 14 deletions(-)
 
-diff --git a/arch/x86/pci/sta2x11-fixup.c b/arch/x86/pci/sta2x11-fixup.c
-index 101081ad64b6d..e0c039a75b2db 100644
---- a/arch/x86/pci/sta2x11-fixup.c
-+++ b/arch/x86/pci/sta2x11-fixup.c
-@@ -57,7 +57,7 @@ static void sta2x11_new_instance(struct pci_dev *pdev)
- 		int size = STA2X11_SWIOTLB_SIZE;
- 		/* First instance: register your own swiotlb area */
- 		dev_info(&pdev->dev, "Using SWIOTLB (size %i)\n", size);
--		if (swiotlb_late_init_with_default_size(size))
-+		if (swiotlb_init_late(size))
- 			dev_emerg(&pdev->dev, "init swiotlb failed\n");
- 	}
- 	list_add(&instance->list, &sta2x11_instance_list);
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index 9fb3a568f0c51..b48b26bfa0edb 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -40,7 +40,7 @@ extern void swiotlb_init(int verbose);
- int swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose);
- unsigned long swiotlb_size_or_default(void);
- extern int swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs);
--extern int swiotlb_late_init_with_default_size(size_t default_size);
-+int swiotlb_init_late(size_t size);
- extern void __init swiotlb_update_mem_attributes(void);
+diff --git a/arch/mips/cavium-octeon/dma-octeon.c b/arch/mips/cavium-octeon/dma-octeon.c
+index df70308db0e69..fb7547e217263 100644
+--- a/arch/mips/cavium-octeon/dma-octeon.c
++++ b/arch/mips/cavium-octeon/dma-octeon.c
+@@ -186,15 +186,12 @@ phys_addr_t dma_to_phys(struct device *dev, dma_addr_t daddr)
+ 	return daddr;
+ }
  
- phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t phys,
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index e0127e397335e..9a4fe6e48a074 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -281,11 +281,9 @@ swiotlb_init(int verbose)
-  * initialize the swiotlb later using the slab allocator if needed.
-  * This should be just like above, but with some error catching.
-  */
--int
--swiotlb_late_init_with_default_size(size_t default_size)
-+int swiotlb_init_late(size_t size)
+-char *octeon_swiotlb;
+-
+ void __init plat_swiotlb_setup(void)
  {
--	unsigned long nslabs =
--		ALIGN(default_size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
-+	unsigned long nslabs = ALIGN(size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
- 	unsigned long bytes;
- 	unsigned char *vstart = NULL;
- 	unsigned int order;
+ 	phys_addr_t start, end;
+ 	phys_addr_t max_addr;
+ 	phys_addr_t addr_size;
+ 	size_t swiotlbsize;
+-	unsigned long swiotlb_nslabs;
+ 	u64 i;
+ 
+ 	max_addr = 0;
+@@ -236,15 +233,7 @@ void __init plat_swiotlb_setup(void)
+ 	if (OCTEON_IS_OCTEON2() && max_addr >= 0x100000000ul)
+ 		swiotlbsize = 64 * (1<<20);
+ #endif
+-	swiotlb_nslabs = swiotlbsize >> IO_TLB_SHIFT;
+-	swiotlb_nslabs = ALIGN(swiotlb_nslabs, IO_TLB_SEGSIZE);
+-	swiotlbsize = swiotlb_nslabs << IO_TLB_SHIFT;
+-
+-	octeon_swiotlb = memblock_alloc_low(swiotlbsize, PAGE_SIZE);
+-	if (!octeon_swiotlb)
+-		panic("%s: Failed to allocate %zu bytes align=%lx\n",
+-		      __func__, swiotlbsize, PAGE_SIZE);
+ 
+-	if (swiotlb_init_with_tbl(octeon_swiotlb, swiotlb_nslabs, 1) == -ENOMEM)
+-		panic("Cannot allocate SWIOTLB buffer");
++	swiotlb_adjust_size(swiotlbsize);
++	swiotlb_init(1);
+ }
+diff --git a/arch/mips/pci/pci-octeon.c b/arch/mips/pci/pci-octeon.c
+index fc29b85cfa926..e457a18cbdc59 100644
+--- a/arch/mips/pci/pci-octeon.c
++++ b/arch/mips/pci/pci-octeon.c
+@@ -664,7 +664,7 @@ static int __init octeon_pci_setup(void)
+ 
+ 		/* BAR1 movable regions contiguous to cover the swiotlb */
+ 		octeon_bar1_pci_phys =
+-			virt_to_phys(octeon_swiotlb) & ~((1ull << 22) - 1);
++			io_tlb_default_mem.start & ~((1ull << 22) - 1);
+ 
+ 		for (index = 0; index < 32; index++) {
+ 			union cvmx_pci_bar1_indexx bar1_index;
 -- 
 2.30.2
 
