@@ -4,35 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5467FC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  4 Apr 2022 02:37:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.298100.507714 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D96EC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  4 Apr 2022 05:06:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.298116.507781 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbCab-0003ZW-3k; Mon, 04 Apr 2022 02:37:09 +0000
+	id 1nbEvH-0003WP-EQ; Mon, 04 Apr 2022 05:06:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 298100.507714; Mon, 04 Apr 2022 02:37:09 +0000
+Received: by outflank-mailman (output) from mailman id 298116.507781; Mon, 04 Apr 2022 05:06:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbCab-0003ZP-0q; Mon, 04 Apr 2022 02:37:09 +0000
-Received: by outflank-mailman (input) for mailman id 298100;
- Mon, 04 Apr 2022 02:37:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nbCaZ-0003XQ-Pj; Mon, 04 Apr 2022 02:37:07 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nbCaZ-0002xV-Oh; Mon, 04 Apr 2022 02:37:07 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nbCaZ-0005FV-9p; Mon, 04 Apr 2022 02:37:07 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1nbCaZ-0003pM-9O; Mon, 04 Apr 2022 02:37:07 +0000
+	id 1nbEvH-0003W6-An; Mon, 04 Apr 2022 05:06:39 +0000
+Received: by outflank-mailman (input) for mailman id 298116;
+ Mon, 04 Apr 2022 05:06:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=yBc+=UO=bombadil.srs.infradead.org=BATV+8f3f264ef3f87e17849e+6798+infradead.org+hch@srs-se1.protection.inumbo.net>)
+ id 1nbEvF-000216-OP
+ for xen-devel@lists.xenproject.org; Mon, 04 Apr 2022 05:06:37 +0000
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [2607:7c80:54:e::133])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 00a77307-b3d5-11ec-a405-831a346695d4;
+ Mon, 04 Apr 2022 07:06:37 +0200 (CEST)
+Received: from 089144211060.atnat0020.highway.a1.net ([89.144.211.60]
+ helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nbEv3-00D8uv-7w; Mon, 04 Apr 2022 05:06:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,138 +43,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+X-Inumbo-ID: 00a77307-b3d5-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=wDhwhx2Cl9U+5Tm5D4fRLdoNC8Nbo1ssPkmVQ8rZU+Q=; b=NkL9MU8IilguGZ5FY4EGd6gO+Q
-	jss5UErkTicNRj9rBt9u1oUAQ1ahBBgXYztoBeXoopGTp4RVt4uxCLxR4AB3OZfx4fnAAQg3KOAnF
-	sPndGPE5Y6Xk/w8frV19r08e+dt+ls4iFg+IcgP9qSlcoQUVCIvuYpv8+xwN/MXwM4qo=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-169150-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=PXzvxDuJ7dtq4MEwSJLJWBZwmoZU9P9omOl6CdJuIoM=; b=J0ixhsO+YSmFk3veuPhfX4XbNN
+	fnLuVNVyiMyuqHMjG9Nm2j1QpkedDteZ/bUxB/nstVQR1kzCVf1HfyhjPHMtYmFcYkI5XO+PU1PO8
+	vYnXgpo+osZWDdaHlagIdcKjUWiK3YcXno80RpIJtk3hBVg0z5HbCGdJRO885gGbDdwICtCuMfsc4
+	LXknn7SUV16b1hVCB4GHdvg/UQJBOvxOZtFjUgeqmW9MWS9YXRDw/YqxSnJzydpaFaMXqkG9L52sO
+	t12p1tMKTEuj//lEDkvoIbVNRfFdfHubUQBxqnFTG6Pyn9uHx25It5RZIGXV/Wtps3V7DHTPl4SYn
+	PpSm/Nkg==;
+From: Christoph Hellwig <hch@lst.de>
+To: iommu@lists.linux-foundation.org
+Cc: x86@kernel.org,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Joerg Roedel <joro@8bytes.org>,
+	David Woodhouse <dwmw2@infradead.org>,
+	Lu Baolu <baolu.lu@linux.intel.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org,
+	linux-ia64@vger.kernel.org,
+	linux-mips@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org,
+	linux-s390@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	tboot-devel@lists.sourceforge.net,
+	linux-pci@vger.kernel.org,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH 05/15] arm/xen: don't check for xen_initial_domain() in xen_create_contiguous_region
+Date: Mon,  4 Apr 2022 07:05:49 +0200
+Message-Id: <20220404050559.132378-6-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220404050559.132378-1-hch@lst.de>
+References: <20220404050559.132378-1-hch@lst.de>
 MIME-Version: 1.0
-Subject: [ovmf test] 169150: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:build-amd64:xen-build:fail:regression
-    ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-i386:xen-build:fail:regression
-    ovmf:build-i386-xsm:xen-build:fail:regression
-    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    ovmf=3e130e40fc55f06f7fe019e87ed9bae957870a12
-X-Osstest-Versions-That:
-    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 04 Apr 2022 02:37:07 +0000
+Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-flight 169150 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/169150/
+From: Stefano Stabellini <sstabellini@kernel.org>
 
-Regressions :-(
+It used to be that Linux enabled swiotlb-xen when running a dom0 on ARM.
+Since f5079a9a2a31 "xen/arm: introduce XENFEAT_direct_mapped and
+XENFEAT_not_direct_mapped", Linux detects whether to enable or disable
+swiotlb-xen based on the new feature flags: XENFEAT_direct_mapped and
+XENFEAT_not_direct_mapped.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 168254
- build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
- build-i386                    6 xen-build                fail REGR. vs. 168254
- build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+However, there is still a leftover xen_initial_domain() check in
+xen_create_contiguous_region. Remove the check as
+xen_create_contiguous_region is only called by swiotlb-xen during
+initialization. If xen_create_contiguous_region is called, we know Linux
+is running 1:1 mapped so there is no need for additional checks.
 
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+Also update the in-code comment.
 
-version targeted for testing:
- ovmf                 3e130e40fc55f06f7fe019e87ed9bae957870a12
-baseline version:
- ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ arch/arm/xen/mm.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-Last test of basis   168254  2022-02-28 10:41:46 Z   34 days
-Failing since        168258  2022-03-01 01:55:31 Z   34 days  273 attempts
-Testing same since   169141  2022-04-03 08:40:51 Z    0 days    4 attempts
+diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
+index a7e54a087b802..28c2070602535 100644
+--- a/arch/arm/xen/mm.c
++++ b/arch/arm/xen/mm.c
+@@ -122,10 +122,7 @@ int xen_create_contiguous_region(phys_addr_t pstart, unsigned int order,
+ 				 unsigned int address_bits,
+ 				 dma_addr_t *dma_handle)
+ {
+-	if (!xen_initial_domain())
+-		return -EINVAL;
+-
+-	/* we assume that dom0 is mapped 1:1 for now */
++	/* the domain is 1:1 mapped to use swiotlb-xen */
+ 	*dma_handle = pstart;
+ 	return 0;
+ }
+-- 
+2.30.2
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Abdul Lateef Attar <abdattar@amd.com>
-  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
-  Abner Chang <abner.chang@hpe.com>
-  Akihiko Odaki <akihiko.odaki@gmail.com>
-  Anthony PERARD <anthony.perard@citrix.com
-  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
-  Bob Feng <bob.c.feng@intel.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Guo Dong <guo.dong@intel.com>
-  Guomin Jiang <guomin.jiang@intel.com>
-  Hao A Wu <hao.a.wu@intel.com>
-  Hua Ma <hua.ma@intel.com>
-  Huang, Li-Xia <lisa.huang@intel.com>
-  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
-  Jason <yun.lou@intel.com>
-  Jason Lou <yun.lou@intel.com>
-  Ken Lautner <kenlautner3@gmail.com>
-  Kenneth Lautner <kenlautner3@gmail.com>
-  Kuo, Ted <ted.kuo@intel.com>
-  Li, Zhihao <zhihao.li@intel.com>
-  Lixia Huang <lisa.huang@intel.com>
-  Lou, Yun <Yun.Lou@intel.com>
-  Ma, Hua <Hua.Ma@intel.com>
-  Mara Sophie Grosch <littlefox@lf-net.org>
-  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
-  Matt DeVillier <matt.devillier@gmail.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Min Xu <min.m.xu@intel.com>
-  Patrick Rudolph <patrick.rudolph@9elements.com>
-  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
-  Ray Ni <ray.ni@intel.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sean Rhodes <sean@starlabs.systems>
-  Sean Rhodes sean@starlabs.systems
-  Sebastien Boeuf <sebastien.boeuf@intel.com>
-  Sunny Wang <sunny.wang@arm.com>
-  Ted Kuo <ted.kuo@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
-  Xiaolu.Jiang <xiaolu.jiang@intel.com>
-  Xie, Yuanhao <yuanhao.xie@intel.com>
-  Yi Li <yi1.li@intel.com>
-  Yuanhao Xie <yuanhao.xie@intel.com>
-  Zhihao Li <zhihao.li@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 3211 lines long.)
 
