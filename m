@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DE99C4167D
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0846C4167E
 	for <xen-devel@archiver.kernel.org>; Mon,  4 Apr 2022 05:06:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.298111.507726 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.298115.507770 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbEv5-00021K-Lu; Mon, 04 Apr 2022 05:06:27 +0000
+	id 1nbEvB-000356-Tr; Mon, 04 Apr 2022 05:06:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 298111.507726; Mon, 04 Apr 2022 05:06:27 +0000
+Received: by outflank-mailman (output) from mailman id 298115.507770; Mon, 04 Apr 2022 05:06:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbEv5-00021D-Iv; Mon, 04 Apr 2022 05:06:27 +0000
-Received: by outflank-mailman (input) for mailman id 298111;
- Mon, 04 Apr 2022 05:06:26 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nbEvB-00034v-QB; Mon, 04 Apr 2022 05:06:33 +0000
+Received: by outflank-mailman (input) for mailman id 298115;
+ Mon, 04 Apr 2022 05:06:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yBc+=UO=bombadil.srs.infradead.org=BATV+8f3f264ef3f87e17849e+6798+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nbEv3-000216-J4
- for xen-devel@lists.xenproject.org; Mon, 04 Apr 2022 05:06:25 +0000
+ id 1nbEvA-00021C-HU
+ for xen-devel@lists.xenproject.org; Mon, 04 Apr 2022 05:06:32 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f71367c3-b3d4-11ec-a405-831a346695d4;
- Mon, 04 Apr 2022 07:06:22 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id fd728895-b3d4-11ec-8fbc-03012f2f19d4;
+ Mon, 04 Apr 2022 07:06:31 +0200 (CEST)
 Received: from 089144211060.atnat0020.highway.a1.net ([89.144.211.60]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nbEug-00D8mu-0p; Mon, 04 Apr 2022 05:06:03 +0000
+ id 1nbEuy-00D8sf-RU; Mon, 04 Apr 2022 05:06:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f71367c3-b3d4-11ec-a405-831a346695d4
+X-Inumbo-ID: fd728895-b3d4-11ec-8fbc-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
-	Content-ID:Content-Description:In-Reply-To:References;
-	bh=KJNpqDmInpKNb0Ba6QeWsT+B+VJPRpifPEMByOx0SBg=; b=2xQrfIxcemUjQVz4pRH4tfgiVa
-	3XIS0/qYlgyD0IPcbkT+CtyJYQ+N/Mqk258vsL/HrJ9HMlcUeHKFXtKovNh7o7atoMd2f3vKTCcUg
-	KHfpkpJdTNcrL38s2CroJ+aqT+9ezFQ2X8ReztMbBgCVgY1ouP8LtD6Hu/GXM0SuMrRr2i9sJFvGZ
-	LEIXHmcRo+SqA+FqqjEZAXIcrE7HAkzJRJHErCMVKXPmI5rhQWdqKTyD4gEpiXPodWFJo6gN0/P5g
-	EWuZp+Nfd0G7hWSN8tzUu5T5ISbTSQNqmWELzJb7TpltEMHqH4dECM38unbtlxp6dxC9bACDoNciX
-	ZXG1SgVA==;
+	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+	:Reply-To:Content-Type:Content-ID:Content-Description;
+	bh=rkpZ3s8fgryeAMuUBNOS3xz/G9atdlLDsC40fwEGHdk=; b=yjAftHgYYiU99p0V+TDtV7tE0o
+	gxIDDpeYBIADcBl/6V08XcvSHygoBgJp/KIAbrI1Vfw1wyw7HMDcT3JyWO9zsPQ2aL4K6lWxDyUPg
+	gkou57CwzlBz5CDkD+LclThCZDYXe39Q9Anlw6/dZvOBfBEY4w89BKRoBjdLvHiz+16qOyaxShe+8
+	q9yCfnyWUVHwH3AqCgWge6XPUX0WoH6fUTFvmWF0qHc/QR6AozWpxoibfat0PFrxiIhQgkzatyxR3
+	PmLUvCoFkOB9ySCCIMM7gJ5eKvptEEUBQXwCg1aUR72y8eXs+G3Ba2yk/aOlPCBZvsM8AZyeq7EbR
+	aKWj7NkA==;
 From: Christoph Hellwig <hch@lst.de>
 To: iommu@lists.linux-foundation.org
 Cc: x86@kernel.org,
@@ -77,109 +77,75 @@ Cc: x86@kernel.org,
 	linux-hyperv@vger.kernel.org,
 	tboot-devel@lists.sourceforge.net,
 	linux-pci@vger.kernel.org
-Subject: cleanup swiotlb initialization v8
-Date: Mon,  4 Apr 2022 07:05:44 +0200
-Message-Id: <20220404050559.132378-1-hch@lst.de>
+Subject: [PATCH 04/15] swiotlb: rename swiotlb_late_init_with_default_size
+Date: Mon,  4 Apr 2022 07:05:48 +0200
+Message-Id: <20220404050559.132378-5-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220404050559.132378-1-hch@lst.de>
+References: <20220404050559.132378-1-hch@lst.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Hi all,
+swiotlb_late_init_with_default_size is an overly verbose name that
+doesn't even catch what the function is doing, given that the size is
+not just a default but the actual requested size.
 
-this series tries to clean up the swiotlb initialization, including
-that of swiotlb-xen.  To get there is also removes the x86 iommu table
-infrastructure that massively obsfucates the initialization path.
+Rename it to swiotlb_init_late.
 
-Git tree:
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Anshuman Khandual <anshuman.khandual@arm.com>
+---
+ arch/x86/pci/sta2x11-fixup.c | 2 +-
+ include/linux/swiotlb.h      | 2 +-
+ kernel/dma/swiotlb.c         | 6 ++----
+ 3 files changed, 4 insertions(+), 6 deletions(-)
 
-    git://git.infradead.org/users/hch/misc.git swiotlb-init-cleanup
+diff --git a/arch/x86/pci/sta2x11-fixup.c b/arch/x86/pci/sta2x11-fixup.c
+index 101081ad64b6d..e0c039a75b2db 100644
+--- a/arch/x86/pci/sta2x11-fixup.c
++++ b/arch/x86/pci/sta2x11-fixup.c
+@@ -57,7 +57,7 @@ static void sta2x11_new_instance(struct pci_dev *pdev)
+ 		int size = STA2X11_SWIOTLB_SIZE;
+ 		/* First instance: register your own swiotlb area */
+ 		dev_info(&pdev->dev, "Using SWIOTLB (size %i)\n", size);
+-		if (swiotlb_late_init_with_default_size(size))
++		if (swiotlb_init_late(size))
+ 			dev_emerg(&pdev->dev, "init swiotlb failed\n");
+ 	}
+ 	list_add(&instance->list, &sta2x11_instance_list);
+diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
+index 9fb3a568f0c51..b48b26bfa0edb 100644
+--- a/include/linux/swiotlb.h
++++ b/include/linux/swiotlb.h
+@@ -40,7 +40,7 @@ extern void swiotlb_init(int verbose);
+ int swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose);
+ unsigned long swiotlb_size_or_default(void);
+ extern int swiotlb_late_init_with_tbl(char *tlb, unsigned long nslabs);
+-extern int swiotlb_late_init_with_default_size(size_t default_size);
++int swiotlb_init_late(size_t size);
+ extern void __init swiotlb_update_mem_attributes(void);
+ 
+ phys_addr_t swiotlb_tbl_map_single(struct device *hwdev, phys_addr_t phys,
+diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
+index e0127e397335e..9a4fe6e48a074 100644
+--- a/kernel/dma/swiotlb.c
++++ b/kernel/dma/swiotlb.c
+@@ -281,11 +281,9 @@ swiotlb_init(int verbose)
+  * initialize the swiotlb later using the slab allocator if needed.
+  * This should be just like above, but with some error catching.
+  */
+-int
+-swiotlb_late_init_with_default_size(size_t default_size)
++int swiotlb_init_late(size_t size)
+ {
+-	unsigned long nslabs =
+-		ALIGN(default_size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
++	unsigned long nslabs = ALIGN(size >> IO_TLB_SHIFT, IO_TLB_SEGSIZE);
+ 	unsigned long bytes;
+ 	unsigned char *vstart = NULL;
+ 	unsigned int order;
+-- 
+2.30.2
 
-Gitweb:
-
-    http://git.infradead.org/users/hch/misc.git/shortlog/refs/heads/swiotlb-init-cleanup
-
-Changes since v7:
- - rebased to Linux 5.18-rc1
- - better document the lower bound swiotlb size for xen-swiotlb
- - improve the nslabs calculation for the retry case in
-   swiotlb_init_remap and swiotlb_init_late
-
-Changes since v6:
- - use IO_TLB_MIN_SLABS instead of open coding the constant
- - call the remap callback later in swiotlb_init_late
- - set SWIOTLB_ANY for xen/x86
-
-Changes since v5:
- - split a patch into three
- - fix setting x86_swiotlb_enable for Xen
- - fix a comment about forced bounce buffering for guest memory
-   encryption
- - remove the xen_initial_domain check from
-   xen_create_contiguous_region
-
-Changes since v3:
- - fix a compilation issue on some powerpc configfs
- - fix and cleanup how forced bounce buffering is enabled for
-   guest memory encryption
-
-Changes since v2:
- - make ppc_swiotlb_flags actually work again
- - also force enable swiotlb for guest encrypted memory to cater
-   to hyperv which doesn't set the host encrypted memory flag
-
-Changes since v1:
- - skip IOMMU initialization on Xen PV kernels
- - various small whitespace / typo fixes
-
-Diffstat:
- arch/ia64/include/asm/iommu_table.h      |    7 -
- arch/x86/include/asm/iommu_table.h       |  102 -------------------
- arch/x86/include/asm/swiotlb.h           |   30 -----
- arch/x86/kernel/pci-iommu_table.c        |   77 --------------
- arch/x86/kernel/pci-swiotlb.c            |   77 --------------
- arch/x86/xen/pci-swiotlb-xen.c           |   96 ------------------
- b/arch/arm/mm/init.c                     |    6 -
- b/arch/arm/xen/mm.c                      |   26 ++--
- b/arch/arm64/mm/init.c                   |    6 -
- b/arch/ia64/mm/init.c                    |    4 
- b/arch/mips/cavium-octeon/dma-octeon.c   |   15 --
- b/arch/mips/loongson64/dma.c             |    2 
- b/arch/mips/pci/pci-octeon.c             |    2 
- b/arch/mips/sibyte/common/dma.c          |    2 
- b/arch/powerpc/include/asm/svm.h         |    4 
- b/arch/powerpc/include/asm/swiotlb.h     |    1 
- b/arch/powerpc/kernel/dma-swiotlb.c      |    1 
- b/arch/powerpc/mm/mem.c                  |    6 -
- b/arch/powerpc/platforms/pseries/setup.c |    3 
- b/arch/powerpc/platforms/pseries/svm.c   |   26 ----
- b/arch/riscv/mm/init.c                   |    8 -
- b/arch/s390/mm/init.c                    |    3 
- b/arch/x86/include/asm/dma-mapping.h     |   12 --
- b/arch/x86/include/asm/gart.h            |    5 
- b/arch/x86/include/asm/iommu.h           |    8 +
- b/arch/x86/include/asm/xen/page.h        |    5 
- b/arch/x86/include/asm/xen/swiotlb-xen.h |    2 
- b/arch/x86/kernel/Makefile               |    2 
- b/arch/x86/kernel/amd_gart_64.c          |    5 
- b/arch/x86/kernel/aperture_64.c          |   14 --
- b/arch/x86/kernel/cpu/mshyperv.c         |    8 -
- b/arch/x86/kernel/pci-dma.c              |  114 +++++++++++++++++----
- b/arch/x86/kernel/tboot.c                |    1 
- b/arch/x86/kernel/vmlinux.lds.S          |   12 --
- b/arch/x86/mm/mem_encrypt_amd.c          |    3 
- b/arch/x86/pci/sta2x11-fixup.c           |    2 
- b/arch/x86/xen/Makefile                  |    2 
- b/drivers/iommu/amd/init.c               |    6 -
- b/drivers/iommu/amd/iommu.c              |    5 
- b/drivers/iommu/intel/dmar.c             |    6 -
- b/drivers/xen/swiotlb-xen.c              |  132 -------------------------
- b/include/linux/dmar.h                   |    6 -
- b/include/linux/swiotlb.h                |   22 ++--
- b/include/trace/events/swiotlb.h         |   29 +----
- b/include/xen/arm/page.h                 |    1 
- b/include/xen/swiotlb-xen.h              |    8 +
- b/kernel/dma/direct.h                    |    2 
- b/kernel/dma/swiotlb.c                   |  163 ++++++++++++++-----------------
- 48 files changed, 252 insertions(+), 827 deletions(-)
 
