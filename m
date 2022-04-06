@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28C0FC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21D3DC433F5
 	for <xen-devel@archiver.kernel.org>; Wed,  6 Apr 2022 06:08:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.299555.510493 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.299551.510480 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbypa-0006u6-Bt; Wed, 06 Apr 2022 06:07:50 +0000
+	id 1nbypZ-0006fU-Id; Wed, 06 Apr 2022 06:07:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 299555.510493; Wed, 06 Apr 2022 06:07:50 +0000
+Received: by outflank-mailman (output) from mailman id 299551.510480; Wed, 06 Apr 2022 06:07:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nbypa-0006s7-15; Wed, 06 Apr 2022 06:07:50 +0000
-Received: by outflank-mailman (input) for mailman id 299555;
- Wed, 06 Apr 2022 06:07:48 +0000
+	id 1nbypZ-0006es-D2; Wed, 06 Apr 2022 06:07:49 +0000
+Received: by outflank-mailman (input) for mailman id 299551;
+ Wed, 06 Apr 2022 06:07:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=huFP=UQ=bombadil.srs.infradead.org=BATV+4210fbe0094d03a681f9+6800+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nbyoW-0000i6-3R
- for xen-devel@lists.xenproject.org; Wed, 06 Apr 2022 06:06:44 +0000
+ id 1nbyoj-0000i6-Ap
+ for xen-devel@lists.xenproject.org; Wed, 06 Apr 2022 06:06:57 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b8b4106b-b56f-11ec-8fbc-03012f2f19d4;
- Wed, 06 Apr 2022 08:06:39 +0200 (CEST)
+ id c06b3a90-b56f-11ec-8fbc-03012f2f19d4;
+ Wed, 06 Apr 2022 08:06:52 +0200 (CEST)
 Received: from 213-225-3-188.nat.highway.a1.net ([213.225.3.188]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nbyoK-003vcM-Lw; Wed, 06 Apr 2022 06:06:33 +0000
+ id 1nbyoS-003vjO-9L; Wed, 06 Apr 2022 06:06:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b8b4106b-b56f-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: c06b3a90-b56f-11ec-8fbc-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=d3sJ7l3Ux9SIWrKAiUmyBkG0qOnuM50cLv7WOo5iKv8=; b=U2k/JlDotMbinK7/JDeqSo6/XP
-	Bs6ySJFC9su858GHk30OJaJoPB8rDR3fvqdgMURXO1OQquTgsv4KE+byWZoWhPXIJrPHFRYb57htY
-	5kZ+Tj1EaeX24yHzNVPsnH8vK+56pifogbah/qUjzUOJyGboKhFS3X1qob8eCfNE75hF6DRia35U9
-	qUd69uVjtYbl+AqrDw3m1Y45lEPmXYcMS6cMXqiqEpwL10Cir9JTLmDF/dQj22I6ypwBu1ciZGVg0
-	rsksxrk+RgNjFNzHV8WMNg8RMAo9CfrbuDS6Y2JIjcM3aNVVcHFf8/GoINpy91AK7PBW/D671mulY
-	8/TSMjOw==;
+	bh=M87611C6i/ov1/eZb42tZHfhB+4TDGyoM3tVyFqdBW8=; b=K8zhFyJNpfgn61EWvQNSpZGhoz
+	IsW4d6jPg/o8RKdUEsY2I/0tp3DUigRRARrtQZS25XHPg6Ev8uZ5v/1QUVxcxn0UGRSq3QsUvtq8v
+	m/wMNTUuZ0otna4wKyCKR9KuxhJuJrTxMCeQTsVHCLUaBLTq/yY7C/2YjXGPofV9QR6/pigrTQvyL
+	+7FqGR+5akCXPC49M0KmVYykqYBaCN6qbVITFsaW/p3jcsFmAJQrrYOqAHtx2ogkbDQplnGNGSG9t
+	hp4bnoEMlp1dxurHyPf38IfpaJHQv16bHjbw1cMsHDW5/ZArceH5PRjetepYbBzoAtUPy5j6Xetj9
+	Onlv8nZg==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -83,9 +83,9 @@ Cc: dm-devel@redhat.com,
 	ntfs3@lists.linux.dev,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org
-Subject: [PATCH 19/27] block: remove queue_discard_alignment
-Date: Wed,  6 Apr 2022 08:05:08 +0200
-Message-Id: <20220406060516.409838-20-hch@lst.de>
+Subject: [PATCH 21/27] block: move {bdev,queue_limit}_discard_alignment out of line
+Date: Wed,  6 Apr 2022 08:05:10 +0200
+Message-Id: <20220406060516.409838-22-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220406060516.409838-1-hch@lst.de>
 References: <20220406060516.409838-1-hch@lst.de>
@@ -93,48 +93,110 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Just use bdev_alignment_offset in disk_discard_alignment_show instead.
-That helpers is the same except for an always false branch that doesn't
-matter in this slow path.
+No need to inline these fairly larger helpers.  Also fix the return value
+to be unsigned, just like the field in struct queue_limits.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/genhd.c          | 2 +-
- include/linux/blkdev.h | 8 --------
- 2 files changed, 1 insertion(+), 9 deletions(-)
+ block/blk-settings.c   | 35 +++++++++++++++++++++++++++++++++++
+ include/linux/blkdev.h | 34 +---------------------------------
+ 2 files changed, 36 insertions(+), 33 deletions(-)
 
-diff --git a/block/genhd.c b/block/genhd.c
-index 712031ce19070..36532b9318419 100644
---- a/block/genhd.c
-+++ b/block/genhd.c
-@@ -1019,7 +1019,7 @@ static ssize_t disk_discard_alignment_show(struct device *dev,
- {
- 	struct gendisk *disk = dev_to_disk(dev);
- 
--	return sprintf(buf, "%d\n", queue_discard_alignment(disk->queue));
-+	return sprintf(buf, "%d\n", bdev_alignment_offset(disk->part0));
+diff --git a/block/blk-settings.c b/block/blk-settings.c
+index 94410a13c0dee..fd83d674afd0a 100644
+--- a/block/blk-settings.c
++++ b/block/blk-settings.c
+@@ -478,6 +478,30 @@ static int queue_limit_alignment_offset(struct queue_limits *lim,
+ 	return (granularity + lim->alignment_offset - alignment) % granularity;
  }
  
- static ssize_t diskseq_show(struct device *dev,
++static unsigned int queue_limit_discard_alignment(struct queue_limits *lim,
++		sector_t sector)
++{
++	unsigned int alignment, granularity, offset;
++
++	if (!lim->max_discard_sectors)
++		return 0;
++
++	/* Why are these in bytes, not sectors? */
++	alignment = lim->discard_alignment >> SECTOR_SHIFT;
++	granularity = lim->discard_granularity >> SECTOR_SHIFT;
++	if (!granularity)
++		return 0;
++
++	/* Offset of the partition start in 'granularity' sectors */
++	offset = sector_div(sector, granularity);
++
++	/* And why do we do this modulus *again* in blkdev_issue_discard()? */
++	offset = (granularity + alignment - offset) % granularity;
++
++	/* Turn it back into bytes, gaah */
++	return offset << SECTOR_SHIFT;
++}
++
+ static unsigned int blk_round_down_sectors(unsigned int sectors, unsigned int lbs)
+ {
+ 	sectors = round_down(sectors, lbs >> SECTOR_SHIFT);
+@@ -924,3 +948,14 @@ int bdev_alignment_offset(struct block_device *bdev)
+ 	return q->limits.alignment_offset;
+ }
+ EXPORT_SYMBOL_GPL(bdev_alignment_offset);
++
++unsigned int bdev_discard_alignment(struct block_device *bdev)
++{
++	struct request_queue *q = bdev_get_queue(bdev);
++
++	if (bdev_is_partition(bdev))
++		return queue_limit_discard_alignment(&q->limits,
++				bdev->bd_start_sect);
++	return q->limits.discard_alignment;
++}
++EXPORT_SYMBOL_GPL(bdev_discard_alignment);
 diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
-index 0a1795ac26275..5a9b7aeda010b 100644
+index 5a9b7aeda010b..34b1cfd067421 100644
 --- a/include/linux/blkdev.h
 +++ b/include/linux/blkdev.h
-@@ -1253,14 +1253,6 @@ bdev_zone_write_granularity(struct block_device *bdev)
+@@ -1252,39 +1252,7 @@ bdev_zone_write_granularity(struct block_device *bdev)
+ }
  
  int bdev_alignment_offset(struct block_device *bdev);
- 
--static inline int queue_discard_alignment(const struct request_queue *q)
--{
--	if (q->limits.discard_misaligned)
--		return -1;
 -
--	return q->limits.discard_alignment;
+-static inline int queue_limit_discard_alignment(struct queue_limits *lim, sector_t sector)
+-{
+-	unsigned int alignment, granularity, offset;
+-
+-	if (!lim->max_discard_sectors)
+-		return 0;
+-
+-	/* Why are these in bytes, not sectors? */
+-	alignment = lim->discard_alignment >> SECTOR_SHIFT;
+-	granularity = lim->discard_granularity >> SECTOR_SHIFT;
+-	if (!granularity)
+-		return 0;
+-
+-	/* Offset of the partition start in 'granularity' sectors */
+-	offset = sector_div(sector, granularity);
+-
+-	/* And why do we do this modulus *again* in blkdev_issue_discard()? */
+-	offset = (granularity + alignment - offset) % granularity;
+-
+-	/* Turn it back into bytes, gaah */
+-	return offset << SECTOR_SHIFT;
 -}
 -
- static inline int queue_limit_discard_alignment(struct queue_limits *lim, sector_t sector)
+-static inline int bdev_discard_alignment(struct block_device *bdev)
+-{
+-	struct request_queue *q = bdev_get_queue(bdev);
+-
+-	if (bdev_is_partition(bdev))
+-		return queue_limit_discard_alignment(&q->limits,
+-				bdev->bd_start_sect);
+-	return q->limits.discard_alignment;
+-}
++unsigned int bdev_discard_alignment(struct block_device *bdev);
+ 
+ static inline unsigned int bdev_write_zeroes_sectors(struct block_device *bdev)
  {
- 	unsigned int alignment, granularity, offset;
 -- 
 2.30.2
 
