@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF75AC433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Apr 2022 06:08:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.300376.512303 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2BFC4332F
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Apr 2022 06:09:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.300381.512326 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ncLJ2-00074c-Cz; Thu, 07 Apr 2022 06:07:44 +0000
+	id 1ncLKu-00088y-4D; Thu, 07 Apr 2022 06:09:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 300376.512303; Thu, 07 Apr 2022 06:07:44 +0000
+Received: by outflank-mailman (output) from mailman id 300381.512326; Thu, 07 Apr 2022 06:09:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ncLJ2-00074V-A3; Thu, 07 Apr 2022 06:07:44 +0000
-Received: by outflank-mailman (input) for mailman id 300376;
- Thu, 07 Apr 2022 06:07:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ncLKu-00088o-0p; Thu, 07 Apr 2022 06:09:40 +0000
+Received: by outflank-mailman (input) for mailman id 300381;
+ Thu, 07 Apr 2022 06:09:39 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Mzit=UR=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1ncLJ1-00074M-Ou
- for xen-devel@lists.xenproject.org; Thu, 07 Apr 2022 06:07:43 +0000
+ (envelope-from <SRS0=hdtG=UR=suse.de=colyli@srs-se1.protection.inumbo.net>)
+ id 1ncLKs-0007q8-To
+ for xen-devel@lists.xenproject.org; Thu, 07 Apr 2022 06:09:39 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 09390ee8-b639-11ec-8fbc-03012f2f19d4;
- Thu, 07 Apr 2022 08:07:42 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 4de73857-b639-11ec-a405-831a346695d4;
+ Thu, 07 Apr 2022 08:09:37 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 52F12210F4;
- Thu,  7 Apr 2022 06:07:42 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id A29E1210E4;
+ Thu,  7 Apr 2022 06:09:37 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E2B1C13485;
- Thu,  7 Apr 2022 06:07:41 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4017213485;
+ Thu,  7 Apr 2022 06:09:32 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id mhayNa1/TmIoUAAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 07 Apr 2022 06:07:41 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id kE04BRyATmI2UQAAMHmgww
+ (envelope-from <colyli@suse.de>); Thu, 07 Apr 2022 06:09:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,151 +53,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 09390ee8-b639-11ec-8fbc-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1649311662; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+X-Inumbo-ID: 4de73857-b639-11ec-a405-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1649311777; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=JGmSjF6pVNGXAInKuwVmHmKz0Sh1UD4JOuhFLGlC+xc=;
-	b=FP1ydTeuJrHWWkE1J/souxlHHPv93g6Y1c+eJV6mE39SVuc60dJrCTRT6jnIny7oTPBn2J
-	X+WCDq7aoGhMr6L61Q1Id3P1th2dk6vXEX2p5vEWTdIpVSn/qVQN7R2wR75UEMFNNtg3Rt
-	G/+iaQY6iQrU+KS1ku2GevSn/iqTj9c=
-Message-ID: <9e776738-7e54-27ad-0a41-dc5cf8669510@suse.com>
-Date: Thu, 7 Apr 2022 08:07:41 +0200
+	bh=JT4UvlPRTF1rf1PNVYTQl5oxY75vXHbMm6cxI+vJlzM=;
+	b=wOiyRM1WKAijaiXA/6UPpDOabfmgWyFiXfUydWL/10ZCv7yghtyaXvUcoBtsxJ2dnhBhf4
+	MXxBRV2J27Fs0oBPGyW3Bcz1OeFP7yQybfPi0d2TDSS1Rp6Pn1IPyM3ErNotkeHAJf1Ysz
+	2ylrrplM7mJGkpksfcE/0PXv/RJ0b84=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1649311777;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JT4UvlPRTF1rf1PNVYTQl5oxY75vXHbMm6cxI+vJlzM=;
+	b=qH6/6KvekVW7yUEoPIXC0j8Nl8eBqt7dLT/vdiczEh3nQdRmXIIFkTLVPwnvPg8wyiCLJm
+	FUCApLKkaSIR8qDQ==
+Message-ID: <ac88801d-c1f9-e8a4-e0cf-e5f7cbdfbfc3@suse.de>
+Date: Thu, 7 Apr 2022 14:09:30 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH v5 2/6] xen/sched: create public function for cpupools
- creation
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.7.0
+Subject: Re: [PATCH 26/27] block: uncouple REQ_OP_SECURE_ERASE from
+ REQ_OP_DISCARD
 Content-Language: en-US
-To: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com, wei.chen@arm.com,
- Dario Faggioli <dfaggioli@suse.com>, George Dunlap
- <george.dunlap@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-References: <20220405085741.18336-1-luca.fancellu@arm.com>
- <20220405085741.18336-3-luca.fancellu@arm.com>
-From: Juergen Gross <jgross@suse.com>
-In-Reply-To: <20220405085741.18336-3-luca.fancellu@arm.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------axlaadpoda6kaQUZsfixwwE0"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------axlaadpoda6kaQUZsfixwwE0
-Content-Type: multipart/mixed; boundary="------------5wUE9qfpqmOJvTqHFuilU2lx";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Luca Fancellu <luca.fancellu@arm.com>, xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com, wei.chen@arm.com,
- Dario Faggioli <dfaggioli@suse.com>, George Dunlap
- <george.dunlap@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Message-ID: <9e776738-7e54-27ad-0a41-dc5cf8669510@suse.com>
-Subject: Re: [PATCH v5 2/6] xen/sched: create public function for cpupools
- creation
-References: <20220405085741.18336-1-luca.fancellu@arm.com>
- <20220405085741.18336-3-luca.fancellu@arm.com>
-In-Reply-To: <20220405085741.18336-3-luca.fancellu@arm.com>
-
---------------5wUE9qfpqmOJvTqHFuilU2lx
-Content-Type: multipart/mixed; boundary="------------ZBw4fphiiDH1pWalTaI9MWaf"
-
---------------ZBw4fphiiDH1pWalTaI9MWaf
+To: Christoph Hellwig <hch@lst.de>
+Cc: dm-devel@redhat.com, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-um@lists.infradead.org,
+ linux-block@vger.kernel.org, drbd-dev@lists.linbit.com,
+ nbd@other.debian.org, ceph-devel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, xen-devel@lists.xenproject.org,
+ linux-bcache@vger.kernel.org, linux-raid@vger.kernel.org,
+ linux-mmc@vger.kernel.org, linux-mtd@lists.infradead.org,
+ linux-nvme@lists.infradead.org, linux-s390@vger.kernel.org,
+ linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
+ linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, cluster-devel@redhat.com,
+ jfs-discussion@lists.sourceforge.net, linux-nilfs@vger.kernel.org,
+ ntfs3@lists.linux.dev, ocfs2-devel@oss.oracle.com, linux-mm@kvack.org,
+ Jens Axboe <axboe@kernel.dk>
+References: <20220406060516.409838-1-hch@lst.de>
+ <20220406060516.409838-27-hch@lst.de>
+From: Coly Li <colyli@suse.de>
+In-Reply-To: <20220406060516.409838-27-hch@lst.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 7bit
 
-T24gMDUuMDQuMjIgMTA6NTcsIEx1Y2EgRmFuY2VsbHUgd3JvdGU6DQo+IENyZWF0ZSBuZXcg
-cHVibGljIGZ1bmN0aW9uIHRvIGNyZWF0ZSBjcHVwb29scywgY2FuIHRha2UgYXMgcGFyYW1l
-dGVyDQo+IHRoZSBzY2hlZHVsZXIgaWQgb3IgYSBuZWdhdGl2ZSB2YWx1ZSB0aGF0IG1lYW5z
-IHRoZSBkZWZhdWx0IFhlbg0KPiBzY2hlZHVsZXIgd2lsbCBiZSB1c2VkLg0KPiANCj4gU2ln
-bmVkLW9mZi1ieTogTHVjYSBGYW5jZWxsdSA8bHVjYS5mYW5jZWxsdUBhcm0uY29tPg0KPiAt
-LS0NCj4gQ2hhbmdlcyBpbiB2NToNCj4gLSBubyBjaGFuZ2VzDQo+IENoYW5nZXMgaW4gdjQ6
-DQo+IC0gbm8gY2hhbmdlcw0KPiBDaGFuZ2VzIGluIHYzOg0KPiAtIEZpeGVkIGNvbW1lbnQg
-KEFuZHJldykNCj4gQ2hhbmdlcyBpbiB2MjoNCj4gLSBjcHVwb29sX2NyZWF0ZV9wb29sIGRv
-ZXNuJ3QgY2hlY2sgYW55bW9yZSBmb3IgcG9vbCBpZCB1bmlxdWVuZXNzDQo+ICAgIGJlZm9y
-ZSBjYWxsaW5nIGNwdXBvb2xfY3JlYXRlLiBNb2RpZmllZCBjb21taXQgbWVzc2FnZSBhY2Nv
-cmRpbmdseQ0KDQpJIGdhdmUgeW91IG15ICJSZXZpZXdlZC1ieToiIGluIFYyIGFscmVhZHku
-DQoNCg0KSnVlcmdlbg0K
---------------ZBw4fphiiDH1pWalTaI9MWaf
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+On 4/6/22 2:05 PM, Christoph Hellwig wrote:
+> Secure erase is a very different operation from discard in that it is
+> a data integrity operation vs hint.  Fully split the limits and helper
+> infrastructure to make the separation more clear.
+>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+For the bcache part,
 
-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
-jR/i1DG86lem3iBDXzXsZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
+Acked-by: Coly Li <colyli@suse.de>
 
---------------ZBw4fphiiDH1pWalTaI9MWaf--
 
---------------5wUE9qfpqmOJvTqHFuilU2lx--
+Thanks.
 
---------------axlaadpoda6kaQUZsfixwwE0
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+Coly Li
 
------BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmJOf60FAwAAAAAACgkQsN6d1ii/Ey+L
-9Af8DShp5jmpFaJdq0x4kVym4BgB5qmsovBHhsjrmbFHsl1hzv7o0rUQ1etVQYfb41ftwXls91x6
-WvQxmZDZuP3Yu3vW/i2hP3DpSaw0rzqdS1f58xOP3uyTjPNceY5LYkpCPq7nGad64X30Phxb6lVa
-OOJzAlUbgAWB96OcNv2MZQKeSJDRuMjiZC6kt47Of9KONisOEVP1BpxwOOCrGY6h612wm50skHGm
-9IqBPeEZgOUfWd+bKh18/UWfiov/M7vm6p3gvwAXtpFQtZboU9+nnZKU4izac3/XvCxd6UE14I3w
-i71u96ehmvA0oBswgJhB5qdn1UV3DbQu9Nm1VzTtJw==
-=8b7S
------END PGP SIGNATURE-----
+> ---
+>   block/blk-core.c                    |  2 +-
+>   block/blk-lib.c                     | 64 ++++++++++++++++++++---------
+>   block/blk-mq-debugfs.c              |  1 -
+>   block/blk-settings.c                | 16 +++++++-
+>   block/fops.c                        |  2 +-
+>   block/ioctl.c                       | 43 +++++++++++++++----
+>   drivers/block/drbd/drbd_receiver.c  |  5 ++-
+>   drivers/block/rnbd/rnbd-clt.c       |  4 +-
+>   drivers/block/rnbd/rnbd-srv-dev.h   |  2 +-
+>   drivers/block/xen-blkback/blkback.c | 15 +++----
+>   drivers/block/xen-blkback/xenbus.c  |  5 +--
+>   drivers/block/xen-blkfront.c        |  5 ++-
+>   drivers/md/bcache/alloc.c           |  2 +-
+>   drivers/md/dm-table.c               |  8 ++--
+>   drivers/md/dm-thin.c                |  4 +-
+>   drivers/md/md.c                     |  2 +-
+>   drivers/md/raid5-cache.c            |  6 +--
+>   drivers/mmc/core/queue.c            |  2 +-
+>   drivers/nvme/target/io-cmd-bdev.c   |  2 +-
+>   drivers/target/target_core_file.c   |  2 +-
+>   drivers/target/target_core_iblock.c |  2 +-
+>   fs/btrfs/extent-tree.c              |  4 +-
+>   fs/ext4/mballoc.c                   |  2 +-
+>   fs/f2fs/file.c                      | 16 ++++----
+>   fs/f2fs/segment.c                   |  2 +-
+>   fs/jbd2/journal.c                   |  2 +-
+>   fs/nilfs2/sufile.c                  |  4 +-
+>   fs/nilfs2/the_nilfs.c               |  4 +-
+>   fs/ntfs3/super.c                    |  2 +-
+>   fs/xfs/xfs_discard.c                |  2 +-
+>   fs/xfs/xfs_log_cil.c                |  2 +-
+>   include/linux/blkdev.h              | 27 +++++++-----
+>   mm/swapfile.c                       |  6 +--
+>   33 files changed, 168 insertions(+), 99 deletions(-)
+[snipped]
+> diff --git a/drivers/md/bcache/alloc.c b/drivers/md/bcache/alloc.c
+> index 097577ae3c471..ce13c272c3872 100644
+> --- a/drivers/md/bcache/alloc.c
+> +++ b/drivers/md/bcache/alloc.c
+> @@ -336,7 +336,7 @@ static int bch_allocator_thread(void *arg)
+>   				mutex_unlock(&ca->set->bucket_lock);
+>   				blkdev_issue_discard(ca->bdev,
+>   					bucket_to_sector(ca->set, bucket),
+> -					ca->sb.bucket_size, GFP_KERNEL, 0);
+> +					ca->sb.bucket_size, GFP_KERNEL);
+>   				mutex_lock(&ca->set->bucket_lock);
+>   			}
+>   
 
---------------axlaadpoda6kaQUZsfixwwE0--
+
+[snipped]
+
 
