@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3030C4167E
-	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 04:51:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.301887.515292 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21855C3525B
+	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 04:51:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.301890.515336 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd346-00078M-HK; Sat, 09 Apr 2022 04:51:14 +0000
+	id 1nd34F-0008SG-OT; Sat, 09 Apr 2022 04:51:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 301887.515292; Sat, 09 Apr 2022 04:51:14 +0000
+Received: by outflank-mailman (output) from mailman id 301890.515336; Sat, 09 Apr 2022 04:51:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd346-00075m-Cb; Sat, 09 Apr 2022 04:51:14 +0000
-Received: by outflank-mailman (input) for mailman id 301887;
- Sat, 09 Apr 2022 04:51:13 +0000
+	id 1nd34F-0008S7-KH; Sat, 09 Apr 2022 04:51:23 +0000
+Received: by outflank-mailman (input) for mailman id 301890;
+ Sat, 09 Apr 2022 04:51:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6m1B=UT=bombadil.srs.infradead.org=BATV+43fc5532e856fea764d1+6803+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nd345-0006gL-K3
- for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:51:13 +0000
+ id 1nd34E-0006gL-Cd
+ for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:51:22 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ab93d985-b7c0-11ec-8fbc-03012f2f19d4;
- Sat, 09 Apr 2022 06:51:09 +0200 (CEST)
+ id b31ed9c4-b7c0-11ec-8fbc-03012f2f19d4;
+ Sat, 09 Apr 2022 06:51:21 +0200 (CEST)
 Received: from 213-147-167-116.nat.highway.webapn.at ([213.147.167.116]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nd33p-0020Uf-5Z; Sat, 09 Apr 2022 04:50:57 +0000
+ id 1nd33z-0020bF-0B; Sat, 09 Apr 2022 04:51:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ab93d985-b7c0-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: b31ed9c4-b7c0-11ec-8fbc-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
-	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=OTIsP1OizukmDhxFkiULvJk6rKtH8rZ66Toc2zFZ06c=; b=UPj32NEZSs0CZXU66K8zWiAfa1
-	xZi9mNnXgP+xDQL0eZfIz641yrgwphIK2vKHJq+DoAtDvElmNRgDbJUWiJ8LyL9xqUM2UWFY7Qyui
-	tvbHWEmImnVRF7P5yMfrv6iT3Cq0iPs429cZILRmpjqQ1A5wLRB6v5agc1vr3+sykUaLRIBEx/Esx
-	+L2whSVV5Udt9aHJm3N6VtcagVQ4jfmDqHnMwZyb9ChnAcwzA/ZypVRwhIc2odkVgg/54WmJlHYVp
-	s6rib0l0pjoJtsNxoS/ADbx9+kWTDEWWDVpseZqy/qnwy7fqLCYKD3ouvwlL9wYpZg4OadMvweV7k
-	BfVKIhsg==;
+	Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+	To:From:Sender:Reply-To:Content-ID:Content-Description;
+	bh=mSb0+dwzgM6VKYFxP/SxijH+ZlgC/mCnwmCWElH9Px8=; b=GeHiEC33kqU3XVD5nL4JSSzw9j
+	UuYbGyM2BXXR+stmsdf5DjhZy4DmQUWQMFN0vSfrL8aUhBe+6Ofrgbj+Dbx5uxEAqYOBhWREkppXD
+	kdRzxDavbe8DbbMc6qyOhN2cA6i5obcc9Wc+hP+sVKryA1uBRUfBVDOlYnio24jRKSkCpFo+tSiXl
+	6u0gF+2q2d7oaysxI+ClBO5UEjKSEG5mJBDObnDrEZKJSMP7hUVOwIlO/C7MDHMssw01IKDI4CTXp
+	PRCDWE+Bw8zXMLtTw0QbfZSkAUMsYs8Kzz9wpJlJkYu9q6ou7iULbQ0RWrchfFLVlYlgnHKpBsjXJ
+	gpZHWQ4w==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -83,42 +83,40 @@ Cc: dm-devel@redhat.com,
 	ntfs3@lists.linux.dev,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org,
-	"Martin K . Petersen" <martin.petersen@oracle.com>
-Subject: [PATCH 03/27] target: fix discard alignment on partitions
-Date: Sat,  9 Apr 2022 06:50:19 +0200
-Message-Id: <20220409045043.23593-4-hch@lst.de>
+	=?UTF-8?q?Christoph=20B=C3=B6hmwalder?= <christoph.boehmwalder@linbit.com>
+Subject: [PATCH 06/27] drbd: use bdev_alignment_offset instead of queue_alignment_offset
+Date: Sat,  9 Apr 2022 06:50:22 +0200
+Message-Id: <20220409045043.23593-7-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220409045043.23593-1-hch@lst.de>
 References: <20220409045043.23593-1-hch@lst.de>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the proper bdev_discard_alignment helper that accounts for partition
-offsets.
+The bdev version does the right thing for partitions, so use that.
 
-Fixes: c66ac9db8d4a ("[SCSI] target: Add LIO target core v4.0.0-rc6")
+Fixes: 9104d31a759f ("drbd: introduce WRITE_SAME support")
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
+Acked-by: Christoph Böhmwalder <christoph.boehmwalder@linbit.com>
 ---
- drivers/target/target_core_device.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/block/drbd/drbd_main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/target/target_core_device.c b/drivers/target/target_core_device.c
-index 3a1ec705cd80b..16e775bcf4a7c 100644
---- a/drivers/target/target_core_device.c
-+++ b/drivers/target/target_core_device.c
-@@ -849,8 +849,8 @@ bool target_configure_unmap_from_queue(struct se_dev_attrib *attrib,
- 	 */
- 	attrib->max_unmap_block_desc_count = 1;
- 	attrib->unmap_granularity = q->limits.discard_granularity / block_size;
--	attrib->unmap_granularity_alignment = q->limits.discard_alignment /
--								block_size;
-+	attrib->unmap_granularity_alignment =
-+		bdev_discard_alignment(bdev) / block_size;
- 	return true;
- }
- EXPORT_SYMBOL(target_configure_unmap_from_queue);
+diff --git a/drivers/block/drbd/drbd_main.c b/drivers/block/drbd/drbd_main.c
+index aa2c21aeb747c..eae629c4f6eaf 100644
+--- a/drivers/block/drbd/drbd_main.c
++++ b/drivers/block/drbd/drbd_main.c
+@@ -939,7 +939,7 @@ int drbd_send_sizes(struct drbd_peer_device *peer_device, int trigger_reply, enu
+ 		p->qlim->logical_block_size =
+ 			cpu_to_be32(bdev_logical_block_size(bdev));
+ 		p->qlim->alignment_offset =
+-			cpu_to_be32(queue_alignment_offset(q));
++			cpu_to_be32(bdev_alignment_offset(bdev));
+ 		p->qlim->io_min = cpu_to_be32(bdev_io_min(bdev));
+ 		p->qlim->io_opt = cpu_to_be32(bdev_io_opt(bdev));
+ 		p->qlim->discard_enabled = blk_queue_discard(q);
 -- 
 2.30.2
 
