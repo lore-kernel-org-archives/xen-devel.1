@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82AC4C4167D
-	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 04:51:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.301896.515369 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2A3C433F5
+	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 05:00:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.301924.515393 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd34M-00018y-5k; Sat, 09 Apr 2022 04:51:30 +0000
+	id 1nd3Co-0005U2-PM; Sat, 09 Apr 2022 05:00:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 301896.515369; Sat, 09 Apr 2022 04:51:30 +0000
+Received: by outflank-mailman (output) from mailman id 301924.515393; Sat, 09 Apr 2022 05:00:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd34M-00018e-0m; Sat, 09 Apr 2022 04:51:30 +0000
-Received: by outflank-mailman (input) for mailman id 301896;
- Sat, 09 Apr 2022 04:51:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nd3Co-0005Ss-HW; Sat, 09 Apr 2022 05:00:14 +0000
+Received: by outflank-mailman (input) for mailman id 301924;
+ Sat, 09 Apr 2022 05:00:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6m1B=UT=bombadil.srs.infradead.org=BATV+43fc5532e856fea764d1+6803+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nd34K-0006gL-5B
- for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:51:28 +0000
+ id 1nd34y-0006gF-QE
+ for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:52:08 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b687bbf3-b7c0-11ec-8fbc-03012f2f19d4;
- Sat, 09 Apr 2022 06:51:27 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ce1ec427-b7c0-11ec-a405-831a346695d4;
+ Sat, 09 Apr 2022 06:52:07 +0200 (CEST)
 Received: from 213-147-167-116.nat.highway.webapn.at ([213.147.167.116]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nd348-0020i9-Di; Sat, 09 Apr 2022 04:51:16 +0000
+ id 1nd34h-0021HO-HS; Sat, 09 Apr 2022 04:51:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b687bbf3-b7c0-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: ce1ec427-b7c0-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=Bh+vV8H1PUD+w/3YWj6wMRz8JdOJ8okMcDjW6Mx/Fiw=; b=DWf7imoDvMSXJTtirA5ltk+rtE
-	YeH7NxKahOANJaW3JeWmpEL0KWvrQ+sUioHsm0dQaUs7Tks6Ss/UVOXMhmulR7QEBLriQYI1KEMzQ
-	aO9ISV0dwvPZErcNPFhlMeFi6wIDVT8NvUOYYMlUOKdrnhvM68xwDYg36srZ722XpvX8aIcmuYcaD
-	sB1HtVb3yxckb8p+8Hs6srY4Fa9xc+Rr/tmxJaQIFCFAy3LRp9g0YB5fD3IXoh+PksnNKd9R9552Q
-	DFKI2Il5Y+lOkByKWQ2YD6LETuE64wDq4THU/F5OZAcQu9U4H1sQRvyeZgS12iohkvkHfPdltFjhr
-	Z+SPB7CA==;
+	bh=J+DlKJplDF1Q+uvJsRC9/x84m39e7OAPqS6lbIf59go=; b=Vg9G4nec7vlw9JzY8ZelhLqst6
+	ucW6GkU1kL/cckjMXF2Ml7hSDWPk0eXkPWwiYReqkgU31v2L8/TZCAwJcIAknq29ONqcGwBOqoyy/
+	WYEExBpIUNCaVoczlTCCzWmGmVmLb9sdCt2/KpA+J1RiElt3I5LUNJS6TppQaHanfTgucuVfWVEqw
+	AMAgeT/+i8cp5mqhw5xpCWTsnxLqKYlbYbpVf9dEsk8jlTsF0YqgExniCnZNX5XEO12khG8E+nclP
+	kStumcAwUmqAnzRWuX42XMeJAWn+kUo4gGpuhFKBWVbZUS0Ww7Py5+qQcuSTLhz9CYlA7wF2hyPxg
+	ePGLsb7Q==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -83,10 +83,10 @@ Cc: dm-devel@redhat.com,
 	ntfs3@lists.linux.dev,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org,
-	Johannes Thumshirn <johannes.thumshirn@wdc.com>
-Subject: [PATCH 09/27] ntfs3: use bdev_logical_block_size instead of open coding it
-Date: Sat,  9 Apr 2022 06:50:25 +0200
-Message-Id: <20220409045043.23593-10-hch@lst.de>
+	"Martin K . Petersen" <martin.petersen@oracle.com>
+Subject: [PATCH 19/27] block: remove queue_discard_alignment
+Date: Sat,  9 Apr 2022 06:50:35 +0200
+Message-Id: <20220409045043.23593-20-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220409045043.23593-1-hch@lst.de>
 References: <20220409045043.23593-1-hch@lst.de>
@@ -94,25 +94,49 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
----
- fs/ntfs3/super.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Just use bdev_alignment_offset in disk_discard_alignment_show instead.
+That helpers is the same except for an always false branch that doesn't
+matter in this slow path.
 
-diff --git a/fs/ntfs3/super.c b/fs/ntfs3/super.c
-index 278dcf5024102..cd30e81abbce0 100644
---- a/fs/ntfs3/super.c
-+++ b/fs/ntfs3/super.c
-@@ -920,7 +920,7 @@ static int ntfs_fill_super(struct super_block *sb, struct fs_context *fc)
- 	}
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
+---
+ block/genhd.c          | 2 +-
+ include/linux/blkdev.h | 8 --------
+ 2 files changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/block/genhd.c b/block/genhd.c
+index 712031ce19070..36532b9318419 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -1019,7 +1019,7 @@ static ssize_t disk_discard_alignment_show(struct device *dev,
+ {
+ 	struct gendisk *disk = dev_to_disk(dev);
  
- 	/* Parse boot. */
--	err = ntfs_init_from_boot(sb, rq ? queue_logical_block_size(rq) : 512,
-+	err = ntfs_init_from_boot(sb, bdev_logical_block_size(bdev),
- 				  bdev_nr_bytes(bdev));
- 	if (err)
- 		goto out;
+-	return sprintf(buf, "%d\n", queue_discard_alignment(disk->queue));
++	return sprintf(buf, "%d\n", bdev_alignment_offset(disk->part0));
+ }
+ 
+ static ssize_t diskseq_show(struct device *dev,
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 0a1795ac26275..5a9b7aeda010b 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1253,14 +1253,6 @@ bdev_zone_write_granularity(struct block_device *bdev)
+ 
+ int bdev_alignment_offset(struct block_device *bdev);
+ 
+-static inline int queue_discard_alignment(const struct request_queue *q)
+-{
+-	if (q->limits.discard_misaligned)
+-		return -1;
+-
+-	return q->limits.discard_alignment;
+-}
+-
+ static inline int queue_limit_discard_alignment(struct queue_limits *lim, sector_t sector)
+ {
+ 	unsigned int alignment, granularity, offset;
 -- 
 2.30.2
 
