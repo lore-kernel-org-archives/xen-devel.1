@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D37A1C43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F8EC433EF
 	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 05:00:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.301956.515501 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.301955.515497 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd3DI-0001SN-SX; Sat, 09 Apr 2022 05:00:44 +0000
+	id 1nd3DI-0001NQ-D5; Sat, 09 Apr 2022 05:00:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 301956.515501; Sat, 09 Apr 2022 05:00:44 +0000
+Received: by outflank-mailman (output) from mailman id 301955.515497; Sat, 09 Apr 2022 05:00:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd3DI-0001QV-EC; Sat, 09 Apr 2022 05:00:44 +0000
-Received: by outflank-mailman (input) for mailman id 301956;
+	id 1nd3DH-0001MK-Vs; Sat, 09 Apr 2022 05:00:43 +0000
+Received: by outflank-mailman (input) for mailman id 301955;
  Sat, 09 Apr 2022 05:00:42 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6m1B=UT=bombadil.srs.infradead.org=BATV+43fc5532e856fea764d1+6803+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nd354-0006gF-Mr
- for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:52:14 +0000
+ id 1nd34k-0006gL-8H
+ for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:51:54 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d22b6bce-b7c0-11ec-a405-831a346695d4;
- Sat, 09 Apr 2022 06:52:14 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c6036906-b7c0-11ec-8fbc-03012f2f19d4;
+ Sat, 09 Apr 2022 06:51:53 +0200 (CEST)
 Received: from 213-147-167-116.nat.highway.webapn.at ([213.147.167.116]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nd34k-0021Kt-TR; Sat, 09 Apr 2022 04:51:55 +0000
+ id 1nd34Q-0020zD-BL; Sat, 09 Apr 2022 04:51:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d22b6bce-b7c0-11ec-a405-831a346695d4
+X-Inumbo-ID: c6036906-b7c0-11ec-8fbc-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=A3F4pzgWH2QQ0wtpIeTWEbWkE7zvp2Hf2SzUvBBV6uI=; b=eX3MLxgs7+LMLexFHqIdmiQ1Yi
-	JdldSlm4poJNjPdmeRgScog9CyFDEOKE36j3Y8GOp25ZxOav5fY5REWK35ZSyRrUZZpvLOWxApha8
-	AqMJ/MRcKr/CciLBe0jYueVDtJe90F1Pdg6qhOzgnLBHrJsW74l04GpKIl/5YuRS1FbaP4TBsToNP
-	0GMgdPs2iWYbeYRMarbkSLZIEMdyAXHMZf+OWZlI5UmjWZF1rz7GghGKiiX6rIFIXD4QKrdrCfgbK
-	fUs8lbnQ+FGDvl7FzdU6CQADQv8poqc/NeAD2tkAuI0L7ZIL5HeAN+izt/vpd0COwgfEQET8Ojz2e
-	P5cDct/w==;
+	bh=2RG8/4DncVNJBVxiwRZlDWFw3of1TwdfVdHLgkB+Spw=; b=bHToJbTwXX9JeK0n0FFEHck7oK
+	nA96qn4tsO9VvTxVN8oChK/ZngVrRM/0RF6G9ra3tv3c4LiSpAW93VdnTUb837bG7nj26lWP035AX
+	+oB1LRxVd3o4RNZBzKIPVYYv/AqgqQH13jSTRjPJXLj+fHe3sQ7lQiOs0AqFOPiV0QvmbZSG1K8qh
+	9AilEZ6nzAlZEnIp9Du8I20RfuJmhuvcocvyHX9G65n9qxdF8wS5MzRNFD9kn7Nula/Xd3cMLnifm
+	ikockttcbAn2ou+cROly75gq/5PqLm1F2FPp9pVf438qn2667h4Aje3z8zrXhBCgwdMkGUyOJsCBu
+	B0U5qlrw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -84,9 +84,9 @@ Cc: dm-devel@redhat.com,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org,
 	"Martin K . Petersen" <martin.petersen@oracle.com>
-Subject: [PATCH 20/27] block: use bdev_discard_alignment in part_discard_alignment_show
-Date: Sat,  9 Apr 2022 06:50:36 +0200
-Message-Id: <20220409045043.23593-21-hch@lst.de>
+Subject: [PATCH 14/27] block: add a bdev_stable_writes helper
+Date: Sat,  9 Apr 2022 06:50:30 +0200
+Message-Id: <20220409045043.23593-15-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220409045043.23593-1-hch@lst.de>
 References: <20220409045043.23593-1-hch@lst.de>
@@ -94,31 +94,76 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the bdev based alignment helper instead of open coding it.
+Add a helper to check the stable writes flag based on the block_device
+instead of having to poke into the block layer internal request_queue.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
 ---
- block/partitions/core.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ drivers/md/dm-table.c  | 4 +---
+ fs/super.c             | 2 +-
+ include/linux/blkdev.h | 6 ++++++
+ mm/swapfile.c          | 2 +-
+ 4 files changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/block/partitions/core.c b/block/partitions/core.c
-index 240b3fff521e4..70dec1c78521d 100644
---- a/block/partitions/core.c
-+++ b/block/partitions/core.c
-@@ -206,11 +206,7 @@ static ssize_t part_alignment_offset_show(struct device *dev,
- static ssize_t part_discard_alignment_show(struct device *dev,
- 					   struct device_attribute *attr, char *buf)
+diff --git a/drivers/md/dm-table.c b/drivers/md/dm-table.c
+index 5e38d0dd009d5..d46839faa0ca5 100644
+--- a/drivers/md/dm-table.c
++++ b/drivers/md/dm-table.c
+@@ -1950,9 +1950,7 @@ static int device_requires_stable_pages(struct dm_target *ti,
+ 					struct dm_dev *dev, sector_t start,
+ 					sector_t len, void *data)
  {
--	struct block_device *bdev = dev_to_bdev(dev);
+-	struct request_queue *q = bdev_get_queue(dev->bdev);
 -
--	return sprintf(buf, "%u\n",
--		queue_limit_discard_alignment(&bdev_get_queue(bdev)->limits,
--				bdev->bd_start_sect));
-+	return sprintf(buf, "%u\n", bdev_discard_alignment(dev_to_bdev(dev)));
+-	return blk_queue_stable_writes(q);
++	return bdev_stable_writes(dev->bdev);
  }
  
- static DEVICE_ATTR(partition, 0444, part_partition_show, NULL);
+ int dm_table_set_restrictions(struct dm_table *t, struct request_queue *q,
+diff --git a/fs/super.c b/fs/super.c
+index f1d4a193602d6..60f57c7bc0a69 100644
+--- a/fs/super.c
++++ b/fs/super.c
+@@ -1204,7 +1204,7 @@ static int set_bdev_super(struct super_block *s, void *data)
+ 	s->s_dev = s->s_bdev->bd_dev;
+ 	s->s_bdi = bdi_get(s->s_bdev->bd_disk->bdi);
+ 
+-	if (blk_queue_stable_writes(s->s_bdev->bd_disk->queue))
++	if (bdev_stable_writes(s->s_bdev))
+ 		s->s_iflags |= SB_I_STABLE_WRITES;
+ 	return 0;
+ }
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 075b16d4560e7..a433798c3343e 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1330,6 +1330,12 @@ static inline bool bdev_nonrot(struct block_device *bdev)
+ 	return blk_queue_nonrot(bdev_get_queue(bdev));
+ }
+ 
++static inline bool bdev_stable_writes(struct block_device *bdev)
++{
++	return test_bit(QUEUE_FLAG_STABLE_WRITES,
++			&bdev_get_queue(bdev)->queue_flags);
++}
++
+ static inline bool bdev_write_cache(struct block_device *bdev)
+ {
+ 	return test_bit(QUEUE_FLAG_WC, &bdev_get_queue(bdev)->queue_flags);
+diff --git a/mm/swapfile.c b/mm/swapfile.c
+index d5ab7ec4d92ca..4069f17a82c8e 100644
+--- a/mm/swapfile.c
++++ b/mm/swapfile.c
+@@ -3065,7 +3065,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 		goto bad_swap_unlock_inode;
+ 	}
+ 
+-	if (p->bdev && blk_queue_stable_writes(p->bdev->bd_disk->queue))
++	if (p->bdev && bdev_stable_writes(p->bdev))
+ 		p->flags |= SWP_STABLE_WRITES;
+ 
+ 	if (p->bdev && p->bdev->bd_disk->fops->rw_page)
 -- 
 2.30.2
 
