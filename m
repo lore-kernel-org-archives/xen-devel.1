@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4838FC433EF
-	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 05:01:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.301962.515525 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31B01C433F5
+	for <xen-devel@archiver.kernel.org>; Sat,  9 Apr 2022 05:01:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.301970.515546 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd3DN-0002F2-1z; Sat, 09 Apr 2022 05:00:49 +0000
+	id 1nd3DR-0003Zi-V9; Sat, 09 Apr 2022 05:00:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 301962.515525; Sat, 09 Apr 2022 05:00:48 +0000
+Received: by outflank-mailman (output) from mailman id 301970.515546; Sat, 09 Apr 2022 05:00:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nd3DL-00029L-Rd; Sat, 09 Apr 2022 05:00:47 +0000
-Received: by outflank-mailman (input) for mailman id 301962;
- Sat, 09 Apr 2022 05:00:45 +0000
+	id 1nd3DR-0003ZM-O5; Sat, 09 Apr 2022 05:00:53 +0000
+Received: by outflank-mailman (input) for mailman id 301970;
+ Sat, 09 Apr 2022 05:00:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6m1B=UT=bombadil.srs.infradead.org=BATV+43fc5532e856fea764d1+6803+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nd34n-0006gL-8x
- for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:51:57 +0000
+ id 1nd34O-0006gL-65
+ for xen-devel@lists.xenproject.org; Sat, 09 Apr 2022 04:51:32 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c77dfa74-b7c0-11ec-8fbc-03012f2f19d4;
- Sat, 09 Apr 2022 06:51:56 +0200 (CEST)
+ id b8a0af61-b7c0-11ec-8fbc-03012f2f19d4;
+ Sat, 09 Apr 2022 06:51:31 +0200 (CEST)
 Received: from 213-147-167-116.nat.highway.webapn.at ([213.147.167.116]
  helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nd34X-00217H-QX; Sat, 09 Apr 2022 04:51:42 +0000
+ id 1nd34C-0020kv-0d; Sat, 09 Apr 2022 04:51:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,17 +43,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c77dfa74-b7c0-11ec-8fbc-03012f2f19d4
+X-Inumbo-ID: b8a0af61-b7c0-11ec-8fbc-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=V+N3WPhcjqbqmVRPAoIxuBjo6dgh1f5KuPVQDpaEGEs=; b=tiIaiEVMWAbVYZUjb2lOkfyysx
-	dbx49Qpm+lo+UUevAGrVDIkvKOBa+44snHlQ0a+KaxdGF8tKMoYuXWs/fvRv0ae96tcME++4ORVYu
-	qYaC1vBwLvlzDvH7/c4A7h9mvUaVl8+MzbhpnW7kmDycYjo20v3XRILfplXYTrbZMX8JEk4N43tKH
-	ZGQP+OitiIrdN0xV7JNnkLHd6fyLWakKMo7lxXmk9Yj+ODdh4QMMFZVM+vhTm4zDm7nCREr0fmSsA
-	waBKGG0G7evAOkXMc1HpZXEoglbkXIOtFpSCT7RrqLEic0YOHBHXQ9EKk4JuDHcopl0LFeqmVS4RI
-	X94UE+Ww==;
+	bh=OGJvHxXgCvw9/l2/0Y6T0ivupEa5/VICLVgDi4pj6zk=; b=bvdxNtIBSK2e/CHWOJvjhJQ/pD
+	ziWAaN1+H5rv0PFjwCtxUb32HQisXqhv0CfdNRRakGSvxS2SlGM7sa31KM+kznDnIR/AZLVb6CdU4
+	vS8DuWDB+gUHx5md6g+mCQSqz3crMjKTJ6PsdykxY9osHuidQtFbDkq6qQ9nvfWGIgIk4Rkp02Mzl
+	WCYI+BDG1gl4hW/mPoncA+V1yctBgiee9+ltyBfbzQvs00T9mPYBlaJ4i/TRsB0Z4Fkgt4oIU5qzV
+	IXkEEPpdqsWu7ooiuyvMhxa14Ribw7Jyx9BT4vHhU8n59256QhhUPR6N/0aIFpZCRpJfpeccBNtOP
+	uiV7Ifjw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -82,11 +82,10 @@ Cc: dm-devel@redhat.com,
 	linux-nilfs@vger.kernel.org,
 	ntfs3@lists.linux.dev,
 	ocfs2-devel@oss.oracle.com,
-	linux-mm@kvack.org,
-	"Martin K . Petersen" <martin.petersen@oracle.com>
-Subject: [PATCH 16/27] block: use bdev_alignment_offset in part_alignment_offset_show
-Date: Sat,  9 Apr 2022 06:50:32 +0200
-Message-Id: <20220409045043.23593-17-hch@lst.de>
+	linux-mm@kvack.org
+Subject: [PATCH 10/27] mm: use bdev_is_zoned in claim_swapfile
+Date: Sat,  9 Apr 2022 06:50:26 +0200
+Message-Id: <20220409045043.23593-11-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220409045043.23593-1-hch@lst.de>
 References: <20220409045043.23593-1-hch@lst.de>
@@ -94,34 +93,26 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Replace the open coded offset calculation with the proper helper.
-This is an ABI change in that the -1 for a misaligned partition is
-properly propagated, which can be considered a bug fix and matches
-what is done on the whole device.
+Use the bdev based helper instead of poking into the queue.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
 ---
- block/partitions/core.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ mm/swapfile.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/block/partitions/core.c b/block/partitions/core.c
-index 2ef8dfa1e5c85..240b3fff521e4 100644
---- a/block/partitions/core.c
-+++ b/block/partitions/core.c
-@@ -200,11 +200,7 @@ static ssize_t part_ro_show(struct device *dev,
- static ssize_t part_alignment_offset_show(struct device *dev,
- 					  struct device_attribute *attr, char *buf)
- {
--	struct block_device *bdev = dev_to_bdev(dev);
--
--	return sprintf(buf, "%u\n",
--		queue_limit_alignment_offset(&bdev_get_queue(bdev)->limits,
--				bdev->bd_start_sect));
-+	return sprintf(buf, "%u\n", bdev_alignment_offset(dev_to_bdev(dev)));
- }
- 
- static ssize_t part_discard_alignment_show(struct device *dev,
+diff --git a/mm/swapfile.c b/mm/swapfile.c
+index 63c61f8b26118..4c7537162af5e 100644
+--- a/mm/swapfile.c
++++ b/mm/swapfile.c
+@@ -2761,7 +2761,7 @@ static int claim_swapfile(struct swap_info_struct *p, struct inode *inode)
+ 		 * write only restriction.  Hence zoned block devices are not
+ 		 * suitable for swapping.  Disallow them here.
+ 		 */
+-		if (blk_queue_is_zoned(p->bdev->bd_disk->queue))
++		if (bdev_is_zoned(p->bdev))
+ 			return -EINVAL;
+ 		p->flags |= SWP_BLKDEV;
+ 	} else if (S_ISREG(inode->i_mode)) {
 -- 
 2.30.2
 
