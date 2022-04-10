@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A96C433EF
-	for <xen-devel@archiver.kernel.org>; Sun, 10 Apr 2022 17:36:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.302526.516184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CC0C433EF
+	for <xen-devel@archiver.kernel.org>; Sun, 10 Apr 2022 18:46:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.302536.516196 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ndbTc-00060H-OO; Sun, 10 Apr 2022 17:35:52 +0000
+	id 1ndcZg-0006Jd-TV; Sun, 10 Apr 2022 18:46:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 302526.516184; Sun, 10 Apr 2022 17:35:52 +0000
+Received: by outflank-mailman (output) from mailman id 302536.516196; Sun, 10 Apr 2022 18:46:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ndbTc-00060A-LQ; Sun, 10 Apr 2022 17:35:52 +0000
-Received: by outflank-mailman (input) for mailman id 302526;
- Sun, 10 Apr 2022 17:35:51 +0000
+	id 1ndcZg-0006JW-Po; Sun, 10 Apr 2022 18:46:12 +0000
+Received: by outflank-mailman (input) for mailman id 302536;
+ Sun, 10 Apr 2022 18:46:11 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1ndbTb-000600-Ka; Sun, 10 Apr 2022 17:35:51 +0000
+ id 1ndcZf-0006JM-Gk; Sun, 10 Apr 2022 18:46:11 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1ndbTb-0006Kz-GR; Sun, 10 Apr 2022 17:35:51 +0000
+ id 1ndcZf-0007j2-DV; Sun, 10 Apr 2022 18:46:11 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1ndbTa-0007pL-VW; Sun, 10 Apr 2022 17:35:51 +0000
+ id 1ndcZf-0001Jb-0l; Sun, 10 Apr 2022 18:46:11 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1ndbTa-0001Gy-V3; Sun, 10 Apr 2022 17:35:50 +0000
+ id 1ndcZf-0001nA-0L; Sun, 10 Apr 2022 18:46:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,20 +47,20 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=cpQDDpIbWH/4e9PH177nX71uSc4cGQB7iPw8vDAuN6Y=; b=QsIxKdByxAAR51aV9pDRIRAKTq
-	DisCzMxI+XbnnW/eWxrBkG0oiJ9JbbMw1eOy8Jlo8ZmffN3ay9/ylIBn5CjcSoUvczKotlxFa+zKQ
-	VXw7itIxgeAjpVE12UPTPCqew22YDxSrhjsQY19xrnys1n+3Zxwae90XWa1AYa4FxQNE=;
+	bh=9FKxKuQ+hKbEvOQKkoCS/ltQJmqBH3SbOQkOWOwUMOE=; b=XVMX04DaxOmvbIrUpYHrGZTqUm
+	LzHf0m3uq9KnBXChfgaj2xbSdncAFMrwpzFz0mdZzPVb0h/+e0yVZv4L9m2MQNbaL7L7mobrkoFQh
+	35UDYzepMvvFvjZwl/wBFSHjvb1KrHT28r6iZGYegaRDUTsCS1pH9GljhPFFaQZZUWoU=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-169281-mainreport@xen.org>
+Message-ID: <osstest-169282-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [ovmf test] 169281: regressions - FAIL
+Subject: [ovmf test] 169282: regressions - FAIL
 X-Osstest-Failures:
     ovmf:build-amd64:xen-build:fail:regression
     ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-i386:xen-build:fail:regression
     ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
     ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
     ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
     ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
@@ -70,10 +70,10 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sun, 10 Apr 2022 17:35:50 +0000
+Date: Sun, 10 Apr 2022 18:46:11 +0000
 
-flight 169281 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/169281/
+flight 169282 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/169282/
 
 Regressions :-(
 
@@ -81,8 +81,8 @@ Tests which did not succeed and are blocking,
 including tests which could not be run:
  build-amd64                   6 xen-build                fail REGR. vs. 168254
  build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
- build-i386                    6 xen-build                fail REGR. vs. 168254
  build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
 
 Tests which did not succeed, but are not blocking:
  build-amd64-libvirt           1 build-check(1)               blocked  n/a
@@ -96,8 +96,8 @@ baseline version:
  ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
 
 Last test of basis   168254  2022-02-28 10:41:46 Z   41 days
-Failing since        168258  2022-03-01 01:55:31 Z   40 days  308 attempts
-Testing same since   169258  2022-04-09 08:33:35 Z    1 days   13 attempts
+Failing since        168258  2022-03-01 01:55:31 Z   40 days  309 attempts
+Testing same since   169258  2022-04-09 08:33:35 Z    1 days   14 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
