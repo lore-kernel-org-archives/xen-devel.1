@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 361FDC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Apr 2022 15:21:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.303108.517155 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A78DC43219
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Apr 2022 15:21:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.303106.517140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ndvqy-0006V0-RW; Mon, 11 Apr 2022 15:21:20 +0000
+	id 1ndvqw-00067Z-6K; Mon, 11 Apr 2022 15:21:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 303108.517155; Mon, 11 Apr 2022 15:21:20 +0000
+Received: by outflank-mailman (output) from mailman id 303106.517140; Mon, 11 Apr 2022 15:21:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ndvqy-0006TN-LR; Mon, 11 Apr 2022 15:21:20 +0000
-Received: by outflank-mailman (input) for mailman id 303108;
- Mon, 11 Apr 2022 15:21:19 +0000
+	id 1ndvqw-000677-2G; Mon, 11 Apr 2022 15:21:18 +0000
+Received: by outflank-mailman (input) for mailman id 303106;
+ Mon, 11 Apr 2022 15:21:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dfOQ=UV=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1ndvqx-0005MA-0K
- for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 15:21:19 +0000
+ id 1ndvqu-0005MA-Bg
+ for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 15:21:16 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 08cf3f02-b9ab-11ec-a405-831a346695d4;
- Mon, 11 Apr 2022 17:21:18 +0200 (CEST)
+ id 0712cfd2-b9ab-11ec-a405-831a346695d4;
+ Mon, 11 Apr 2022 17:21:15 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 98C0B1570;
- Mon, 11 Apr 2022 08:21:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9F7491570;
+ Mon, 11 Apr 2022 08:21:14 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B66953F73B;
- Mon, 11 Apr 2022 08:21:16 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5257E3F73B;
+ Mon, 11 Apr 2022 08:21:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,59 +45,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 08cf3f02-b9ab-11ec-a405-831a346695d4
+X-Inumbo-ID: 0712cfd2-b9ab-11ec-a405-831a346695d4
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com,
-	Juergen Gross <jgross@suse.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Dario Faggioli <dfaggioli@suse.com>,
-	George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH v7 5/7] xen/cpupool: Don't allow removing cpu0 from cpupool0
-Date: Mon, 11 Apr 2022 16:20:59 +0100
-Message-Id: <20220411152101.17539-6-luca.fancellu@arm.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v7 3/7] xen/sched: retrieve scheduler id by name
+Date: Mon, 11 Apr 2022 16:20:57 +0100
+Message-Id: <20220411152101.17539-4-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20220411152101.17539-1-luca.fancellu@arm.com>
 References: <20220411152101.17539-1-luca.fancellu@arm.com>
 
-Cpu0 must remain in cpupool0, otherwise some operations like moving cpus
-between cpupools, cpu hotplug, destroying cpupools, shutdown of the host,
-might not work in a sane way.
+Add a static function to retrieve the scheduler pointer using the
+scheduler name.
+
+Add a public function to retrieve the scheduler id by the scheduler
+name that makes use of the new static function.
+
+Take the occasion to replace open coded scheduler search with the
+new static function in scheduler_init.
 
 Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+Reviewed-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 ---
 Changes in v7:
-- new patch
+- Add R-by (Dario)
+Changes in v6:
+- no changes
+Changes in v5:
+- no changes
+Changes in v4:
+- no changes
+Changes in v3:
+- add R-by
+Changes in v2:
+- replace open coded scheduler search in scheduler_init (Juergen)
 ---
- xen/common/sched/cpupool.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ xen/common/sched/core.c | 40 ++++++++++++++++++++++++++--------------
+ xen/include/xen/sched.h | 11 +++++++++++
+ 2 files changed, 37 insertions(+), 14 deletions(-)
 
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 86a175f99cd5..0a93bcc631bf 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -572,6 +572,7 @@ static long cf_check cpupool_unassign_cpu_helper(void *info)
-  * possible failures:
-  * - last cpu and still active domains in cpupool
-  * - cpu just being unplugged
-+ * - Attempt to remove boot cpu from cpupool0
-  */
- static int cpupool_unassign_cpu(struct cpupool *c, unsigned int cpu)
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index 19ab67818106..48ee01420fb8 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -2947,10 +2947,30 @@ void scheduler_enable(void)
+     scheduler_active = true;
+ }
+ 
++static inline
++const struct scheduler *__init sched_get_by_name(const char *sched_name)
++{
++    unsigned int i;
++
++    for ( i = 0; i < NUM_SCHEDULERS; i++ )
++        if ( schedulers[i] && !strcmp(schedulers[i]->opt_name, sched_name) )
++            return schedulers[i];
++
++    return NULL;
++}
++
++int __init sched_get_id_by_name(const char *sched_name)
++{
++    const struct scheduler *scheduler = sched_get_by_name(sched_name);
++
++    return scheduler ? scheduler->sched_id : -1;
++}
++
+ /* Initialise the data structures. */
+ void __init scheduler_init(void)
  {
-@@ -582,7 +583,12 @@ static int cpupool_unassign_cpu(struct cpupool *c, unsigned int cpu)
-     debugtrace_printk("cpupool_unassign_cpu(pool=%u,cpu=%d)\n",
-                       c->cpupool_id, cpu);
+     struct domain *idle_domain;
++    const struct scheduler *scheduler;
+     int i;
  
--    if ( !cpu_online(cpu) )
-+    /*
-+     * Cpu0 must remain in cpupool0, otherwise some operations like moving cpus
-+     * between cpupools, cpu hotplug, destroying cpupools, shutdown of the host,
-+     * might not work in a sane way.
-+     */
-+    if ( (!c->cpupool_id && !cpu) || !cpu_online(cpu) )
-         return -EINVAL;
+     scheduler_enable();
+@@ -2981,25 +3001,17 @@ void __init scheduler_init(void)
+                    schedulers[i]->opt_name);
+             schedulers[i] = NULL;
+         }
+-
+-        if ( schedulers[i] && !ops.name &&
+-             !strcmp(schedulers[i]->opt_name, opt_sched) )
+-            ops = *schedulers[i];
+     }
  
-     master_cpu = sched_get_resource_cpu(cpu);
+-    if ( !ops.name )
++    scheduler = sched_get_by_name(opt_sched);
++    if ( !scheduler )
+     {
+         printk("Could not find scheduler: %s\n", opt_sched);
+-        for ( i = 0; i < NUM_SCHEDULERS; i++ )
+-            if ( schedulers[i] &&
+-                 !strcmp(schedulers[i]->opt_name, CONFIG_SCHED_DEFAULT) )
+-            {
+-                ops = *schedulers[i];
+-                break;
+-            }
+-        BUG_ON(!ops.name);
+-        printk("Using '%s' (%s)\n", ops.name, ops.opt_name);
++        scheduler = sched_get_by_name(CONFIG_SCHED_DEFAULT);
++        BUG_ON(!scheduler);
++        printk("Using '%s' (%s)\n", scheduler->name, scheduler->opt_name);
+     }
++    ops = *scheduler;
+ 
+     if ( cpu_schedule_up(0) )
+         BUG();
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index 0164db996b8b..4442a1940c25 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -764,6 +764,17 @@ void sched_destroy_domain(struct domain *d);
+ long sched_adjust(struct domain *, struct xen_domctl_scheduler_op *);
+ long sched_adjust_global(struct xen_sysctl_scheduler_op *);
+ int  sched_id(void);
++
++/*
++ * sched_get_id_by_name - retrieves a scheduler id given a scheduler name
++ * @sched_name: scheduler name as a string
++ *
++ * returns:
++ *     positive value being the scheduler id, on success
++ *     negative value if the scheduler name is not found.
++ */
++int sched_get_id_by_name(const char *sched_name);
++
+ void vcpu_wake(struct vcpu *v);
+ long vcpu_yield(void);
+ void vcpu_sleep_nosync(struct vcpu *v);
 -- 
 2.17.1
 
