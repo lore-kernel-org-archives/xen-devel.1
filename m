@@ -4,35 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AF60C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:09:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.303360.517447 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D99AC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:12:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.303285.517467 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8lh-0005VK-9S; Tue, 12 Apr 2022 05:08:45 +0000
+	id 1ne8om-00070H-FH; Tue, 12 Apr 2022 05:11:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 303360.517447; Tue, 12 Apr 2022 05:08:45 +0000
+Received: by outflank-mailman (output) from mailman id 303285.517467; Tue, 12 Apr 2022 05:11:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8lh-0005VD-6A; Tue, 12 Apr 2022 05:08:45 +0000
-Received: by outflank-mailman (input) for mailman id 303360;
- Tue, 12 Apr 2022 05:08:44 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ne8lg-0005V3-34; Tue, 12 Apr 2022 05:08:44 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ne8lg-0000Al-1C; Tue, 12 Apr 2022 05:08:44 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ne8lf-0004ha-LM; Tue, 12 Apr 2022 05:08:43 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1ne8lf-0002AV-Kt; Tue, 12 Apr 2022 05:08:43 +0000
+	id 1ne8om-0006z7-8S; Tue, 12 Apr 2022 05:11:56 +0000
+Received: by outflank-mailman (input) for mailman id 303285;
+ Mon, 11 Apr 2022 23:39:05 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=9GfR=UV=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
+ id 1ne3ce-0006oE-SS
+ for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:39:04 +0000
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 92301096-b9f0-11ec-a405-831a346695d4;
+ Tue, 12 Apr 2022 01:39:03 +0200 (CEST)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id C52711F42D8A
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,154 +40,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=w2uTuOWyFfPckzmRUZgBUCNEUaYRGkRjzoej3lxHQbk=; b=bYFYSbwXuguHIdMgGjslvjzR+M
-	Zcad7qACUTnAhw+64+jF+W27XeSkpvIfS5/QnxwhsRgMH+xFptZINz5bFi7tBUACybvItip4Pi9hq
-	Kh5/GkeyB8X1DjryCZRGQ2KPOpRDbt/6kOZAV2tJ/5OWmgT/iE4Iq/UTeuFURoDMGZyc=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-169321-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 92301096-b9f0-11ec-a405-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1649720343;
+	bh=vZl2ZWhj3ebII6Fu4HXosJY7ElBNxPQBVC6ByCiZ1BY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=JviWvIvL43QfXlelzChv/e65G8pQVStHm/cjt8S+palR7BBcwJ28HEV3zpH6iZZTv
+	 TAwdfm98zB2JhkW2hCsPJU++kmtM1VV3c4q/FAbp1kMxQV66wX4eOP2dzPpxKzrKBh
+	 r/GZxCh68qnq8qhz28d+ivGoVY9SXlXFmaOMiSdDnfRi1xFRVYkWEqZNi0hbs2vHRd
+	 Dcs5ywFB53D3180fJ8zfDiYmWEkxlPJhV6Jj84tKq7D3RzpHX7l0fPdorLAO9CU7xa
+	 bri2qC1nbypivw49u7/3CmwoCU41LCltEdGxoZKNd3lvbfE0eFlmxhLRCcCz+OsT9r
+	 V/pa36+mViA/w==
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: Thierry Reding <thierry.reding@gmail.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>,
+	Guo Ren <guoren@kernel.org>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Greg Ungerer <gerg@linux-m68k.org>,
+	Joshua Thompson <funaho@jurai.org>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	Sebastian Reichel <sre@kernel.org>,
+	Linus Walleij <linus.walleij@linaro.org>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Greentime Hu <green.hu@gmail.com>,
+	Vincent Chen <deanbo422@gmail.com>,
+	"James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+	Helge Deller <deller@gmx.de>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Rich Felker <dalias@libc.org>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	x86@kernel.org,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Len Brown <lenb@kernel.org>,
+	Santosh Shilimkar <ssantosh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>,
+	Pavel Machek <pavel@ucw.cz>,
+	Lee Jones <lee.jones@linaro.org>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Ulf Hansson <ulf.hansson@linaro.org>,
+	=?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>
+Cc: linux-kernel@vger.kernel.org,
+	linux-csky@vger.kernel.org,
+	linux-ia64@vger.kernel.org,
+	linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org,
+	linux-riscv@lists.infradead.org,
+	linux-sh@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	linux-acpi@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-tegra@vger.kernel.org
+Subject: [PATCH v7 02/20] notifier: Add atomic/blocking_notifier_chain_register_unique_prio()
+Date: Tue, 12 Apr 2022 02:38:14 +0300
+Message-Id: <20220411233832.391817-3-dmitry.osipenko@collabora.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
+References: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 169321: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:build-amd64:xen-build:fail:regression
-    ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-i386-xsm:xen-build:fail:regression
-    ovmf:build-i386:xen-build:fail:regression
-    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    ovmf=12a50c9ce117b6106c92bb965799e709547d8494
-X-Osstest-Versions-That:
-    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 12 Apr 2022 05:08:43 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 169321 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/169321/
+Add variant of atomic/blocking_notifier_chain_register() functions that
+doesn't allow to register notifier using a duplicated priority. The -EBUSY
+error code is returned in this case by the new API functions.
 
-Regressions :-(
+Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+---
+ include/linux/notifier.h |  5 +++
+ kernel/notifier.c        | 88 +++++++++++++++++++++++++++++++---------
+ 2 files changed, 74 insertions(+), 19 deletions(-)
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 168254
- build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
- build-i386-xsm                6 xen-build                fail REGR. vs. 168254
- build-i386                    6 xen-build                fail REGR. vs. 168254
+diff --git a/include/linux/notifier.h b/include/linux/notifier.h
+index d4717bc0ab85..ccce26197dd2 100644
+--- a/include/linux/notifier.h
++++ b/include/linux/notifier.h
+@@ -150,6 +150,11 @@ extern int raw_notifier_chain_register(struct raw_notifier_head *nh,
+ extern int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
+ 		struct notifier_block *nb);
+ 
++extern int atomic_notifier_chain_register_unique_prio(
++		struct atomic_notifier_head *nh, struct notifier_block *nb);
++extern int blocking_notifier_chain_register_unique_prio(
++		struct blocking_notifier_head *nh, struct notifier_block *nb);
++
+ extern int atomic_notifier_chain_unregister(struct atomic_notifier_head *nh,
+ 		struct notifier_block *nb);
+ extern int blocking_notifier_chain_unregister(struct blocking_notifier_head *nh,
+diff --git a/kernel/notifier.c b/kernel/notifier.c
+index 4ed6bda8f127..4fc32b1e6cbb 100644
+--- a/kernel/notifier.c
++++ b/kernel/notifier.c
+@@ -20,7 +20,8 @@ BLOCKING_NOTIFIER_HEAD(reboot_notifier_list);
+  */
+ 
+ static int notifier_chain_register(struct notifier_block **nl,
+-				   struct notifier_block *n)
++				   struct notifier_block *n,
++				   bool unique_priority)
+ {
+ 	while ((*nl) != NULL) {
+ 		if (unlikely((*nl) == n)) {
+@@ -30,6 +31,8 @@ static int notifier_chain_register(struct notifier_block **nl,
+ 		}
+ 		if (n->priority > (*nl)->priority)
+ 			break;
++		if (n->priority == (*nl)->priority && unique_priority)
++			return -EBUSY;
+ 		nl = &((*nl)->next);
+ 	}
+ 	n->next = *nl;
+@@ -144,12 +147,35 @@ int atomic_notifier_chain_register(struct atomic_notifier_head *nh,
+ 	int ret;
+ 
+ 	spin_lock_irqsave(&nh->lock, flags);
+-	ret = notifier_chain_register(&nh->head, n);
++	ret = notifier_chain_register(&nh->head, n, false);
+ 	spin_unlock_irqrestore(&nh->lock, flags);
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(atomic_notifier_chain_register);
+ 
++/**
++ *	atomic_notifier_chain_register_unique_prio - Add notifier to an atomic notifier chain
++ *	@nh: Pointer to head of the atomic notifier chain
++ *	@n: New entry in notifier chain
++ *
++ *	Adds a notifier to an atomic notifier chain if there is no other
++ *	notifier registered using the same priority.
++ *
++ *	Returns 0 on success, %-EEXIST or %-EBUSY on error.
++ */
++int atomic_notifier_chain_register_unique_prio(struct atomic_notifier_head *nh,
++					       struct notifier_block *n)
++{
++	unsigned long flags;
++	int ret;
++
++	spin_lock_irqsave(&nh->lock, flags);
++	ret = notifier_chain_register(&nh->head, n, true);
++	spin_unlock_irqrestore(&nh->lock, flags);
++	return ret;
++}
++EXPORT_SYMBOL_GPL(atomic_notifier_chain_register_unique_prio);
++
+ /**
+  *	atomic_notifier_chain_unregister - Remove notifier from an atomic notifier chain
+  *	@nh: Pointer to head of the atomic notifier chain
+@@ -209,18 +235,9 @@ NOKPROBE_SYMBOL(atomic_notifier_call_chain);
+  *	synchronized by an rwsem.
+  */
+ 
+-/**
+- *	blocking_notifier_chain_register - Add notifier to a blocking notifier chain
+- *	@nh: Pointer to head of the blocking notifier chain
+- *	@n: New entry in notifier chain
+- *
+- *	Adds a notifier to a blocking notifier chain.
+- *	Must be called in process context.
+- *
+- *	Returns 0 on success, %-EEXIST on error.
+- */
+-int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
+-		struct notifier_block *n)
++static int __blocking_notifier_chain_register(struct blocking_notifier_head *nh,
++					      struct notifier_block *n,
++					      bool unique_priority)
+ {
+ 	int ret;
+ 
+@@ -230,15 +247,48 @@ int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
+ 	 * such times we must not call down_write().
+ 	 */
+ 	if (unlikely(system_state == SYSTEM_BOOTING))
+-		return notifier_chain_register(&nh->head, n);
++		return notifier_chain_register(&nh->head, n, unique_priority);
+ 
+ 	down_write(&nh->rwsem);
+-	ret = notifier_chain_register(&nh->head, n);
++	ret = notifier_chain_register(&nh->head, n, unique_priority);
+ 	up_write(&nh->rwsem);
+ 	return ret;
+ }
++
++/**
++ *	blocking_notifier_chain_register - Add notifier to a blocking notifier chain
++ *	@nh: Pointer to head of the blocking notifier chain
++ *	@n: New entry in notifier chain
++ *
++ *	Adds a notifier to a blocking notifier chain.
++ *	Must be called in process context.
++ *
++ *	Returns 0 on success, %-EEXIST on error.
++ */
++int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
++		struct notifier_block *n)
++{
++	return __blocking_notifier_chain_register(nh, n, false);
++}
+ EXPORT_SYMBOL_GPL(blocking_notifier_chain_register);
+ 
++/**
++ *	blocking_notifier_chain_register_unique_prio - Add notifier to a blocking notifier chain
++ *	@nh: Pointer to head of the blocking notifier chain
++ *	@n: New entry in notifier chain
++ *
++ *	Adds a notifier to an blocking notifier chain if there is no other
++ *	notifier registered using the same priority.
++ *
++ *	Returns 0 on success, %-EEXIST or %-EBUSY on error.
++ */
++int blocking_notifier_chain_register_unique_prio(struct blocking_notifier_head *nh,
++						 struct notifier_block *n)
++{
++	return __blocking_notifier_chain_register(nh, n, true);
++}
++EXPORT_SYMBOL_GPL(blocking_notifier_chain_register_unique_prio);
++
+ /**
+  *	blocking_notifier_chain_unregister - Remove notifier from a blocking notifier chain
+  *	@nh: Pointer to head of the blocking notifier chain
+@@ -354,7 +404,7 @@ bool blocking_notifier_call_chain_is_empty(struct blocking_notifier_head *nh)
+ int raw_notifier_chain_register(struct raw_notifier_head *nh,
+ 		struct notifier_block *n)
+ {
+-	return notifier_chain_register(&nh->head, n);
++	return notifier_chain_register(&nh->head, n, false);
+ }
+ EXPORT_SYMBOL_GPL(raw_notifier_chain_register);
+ 
+@@ -433,10 +483,10 @@ int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
+ 	 * such times we must not call mutex_lock().
+ 	 */
+ 	if (unlikely(system_state == SYSTEM_BOOTING))
+-		return notifier_chain_register(&nh->head, n);
++		return notifier_chain_register(&nh->head, n, false);
+ 
+ 	mutex_lock(&nh->mutex);
+-	ret = notifier_chain_register(&nh->head, n);
++	ret = notifier_chain_register(&nh->head, n, false);
+ 	mutex_unlock(&nh->mutex);
+ 	return ret;
+ }
+-- 
+2.35.1
 
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
-
-version targeted for testing:
- ovmf                 12a50c9ce117b6106c92bb965799e709547d8494
-baseline version:
- ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
-
-Last test of basis   168254  2022-02-28 10:41:46 Z   42 days
-Failing since        168258  2022-03-01 01:55:31 Z   42 days  336 attempts
-Testing same since   169311  2022-04-11 15:43:02 Z    0 days    9 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Abdul Lateef Attar <abdattar@amd.com>
-  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
-  Abner Chang <abner.chang@hpe.com>
-  Akihiko Odaki <akihiko.odaki@gmail.com>
-  Anthony PERARD <anthony.perard@citrix.com
-  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
-  Bob Feng <bob.c.feng@intel.com>
-  Chen Lin Z <lin.z.chen@intel.com>
-  Chen, Lin Z <lin.z.chen@intel.com>
-  Dandan Bi <dandan.bi@intel.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Guo Dong <guo.dong@intel.com>
-  Guomin Jiang <guomin.jiang@intel.com>
-  Hao A Wu <hao.a.wu@intel.com>
-  Heng Luo <heng.luo@intel.com>
-  Hua Ma <hua.ma@intel.com>
-  Huang, Li-Xia <lisa.huang@intel.com>
-  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
-  Jason <yun.lou@intel.com>
-  Jason Lou <yun.lou@intel.com>
-  Ken Lautner <kenlautner3@gmail.com>
-  Kenneth Lautner <kenlautner3@gmail.com>
-  Kuo, Ted <ted.kuo@intel.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Lean Sheng Tan <sheng.tan@9elements.com>
-  Leif Lindholm <quic_llindhol@quicinc.com
-  Leif Lindholm <quic_llindhol@quicinc.com>
-  Li, Zhihao <zhihao.li@intel.com>
-  Liming Gao <gaoliming@byosoft.com.cn>
-  Liu <yun.y.liu@intel.com>
-  Liu Yun <yun.y.liu@intel.com>
-  Liu Yun Y <yun.y.liu@intel.com>
-  Lixia Huang <lisa.huang@intel.com>
-  Lou, Yun <Yun.Lou@intel.com>
-  Ma, Hua <Hua.Ma@intel.com>
-  Mara Sophie Grosch <littlefox@lf-net.org>
-  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
-  Matt DeVillier <matt.devillier@gmail.com>
-  Michael D Kinney <michael.d.kinney@intel.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Michael Kubacki <mikuback@microsoft.com>
-  Min Xu <min.m.xu@intel.com>
-  Oliver Steffen <osteffen@redhat.com>
-  Patrick Rudolph <patrick.rudolph@9elements.com>
-  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
-  Ray Ni <ray.ni@intel.com>
-  Rebecca Cran <quic_rcran@quicinc.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sean Rhodes <sean@starlabs.systems>
-  Sean Rhodes sean@starlabs.systems
-  Sebastien Boeuf <sebastien.boeuf@intel.com>
-  Sunny Wang <sunny.wang@arm.com>
-  Ted Kuo <ted.kuo@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
-  Xiaolu.Jiang <xiaolu.jiang@intel.com>
-  Xie, Yuanhao <yuanhao.xie@intel.com>
-  Yi Li <yi1.li@intel.com>
-  Yuanhao Xie <yuanhao.xie@intel.com>
-  Zhihao Li <zhihao.li@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 4890 lines long.)
 
