@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CEAEC433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Apr 2022 09:38:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.302785.516559 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B2EC433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Apr 2022 09:40:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.302797.516570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ndqUi-0000cm-A7; Mon, 11 Apr 2022 09:38:00 +0000
+	id 1ndqXA-00029h-PC; Mon, 11 Apr 2022 09:40:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 302785.516559; Mon, 11 Apr 2022 09:38:00 +0000
+Received: by outflank-mailman (output) from mailman id 302797.516570; Mon, 11 Apr 2022 09:40:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ndqUi-0000ca-7A; Mon, 11 Apr 2022 09:38:00 +0000
-Received: by outflank-mailman (input) for mailman id 302785;
- Mon, 11 Apr 2022 09:37:59 +0000
+	id 1ndqXA-00029a-M4; Mon, 11 Apr 2022 09:40:32 +0000
+Received: by outflank-mailman (input) for mailman id 302797;
+ Mon, 11 Apr 2022 09:40:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=1peA=UV=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ndqUg-0006iD-QX
- for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 09:37:59 +0000
+ id 1ndqX8-00029U-OG
+ for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 09:40:30 +0000
 Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.109.102])
+ (de-smtp-delivery-102.mimecast.com [194.104.111.102])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1213f83d-b97b-11ec-a405-831a346695d4;
- Mon, 11 Apr 2022 11:37:58 +0200 (CEST)
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur02lp2058.outbound.protection.outlook.com [104.47.5.58]) by
+ id 6c71e83e-b97b-11ec-a405-831a346695d4;
+ Mon, 11 Apr 2022 11:40:29 +0200 (CEST)
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+ (mail-am5eur02lp2059.outbound.protection.outlook.com [104.47.4.59]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-41-uECLT-hvNZ2WoZAj196Xhw-1; Mon, 11 Apr 2022 11:37:55 +0200
+ de-mta-40-c9mMjQfyOAqrDY-zPijx3w-1; Mon, 11 Apr 2022 11:40:28 +0200
 Received: from DU2PR04MB8616.eurprd04.prod.outlook.com (2603:10a6:10:2db::16)
- by AS4PR04MB9364.eurprd04.prod.outlook.com (2603:10a6:20b:4e9::22)
+ by VI1PR04MB4255.eurprd04.prod.outlook.com (2603:10a6:803:3f::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.21; Mon, 11 Apr
- 2022 09:37:53 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5144.29; Mon, 11 Apr
+ 2022 09:40:25 +0000
 Received: from DU2PR04MB8616.eurprd04.prod.outlook.com
  ([fe80::5592:2abe:fb16:6cd1]) by DU2PR04MB8616.eurprd04.prod.outlook.com
  ([fe80::5592:2abe:fb16:6cd1%6]) with mapi id 15.20.5144.029; Mon, 11 Apr 2022
- 09:37:53 +0000
+ 09:40:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,195 +53,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1213f83d-b97b-11ec-a405-831a346695d4
+X-Inumbo-ID: 6c71e83e-b97b-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1649669877;
+	t=1649670029;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=WsXEt03rYwGXma+YK8JHkDArPL/VDC+WUTJ5m0TRmbw=;
-	b=hVIUVsmxdS5jqAn4HNVMxGTJRkbwTPw/UPcze9YBMJm555VTqYqzHv/d/JvTIitxf1XW4B
-	Yxpj340bbDOpR9JI+SMs/1xMBH+/o76Sby0moB+Yitb2ybKwyeqdnCC61JELVJ7+vBPNjf
-	0OCekjnTUoaeAyDVUe6y96YEBXz8Opc=
-X-MC-Unique: uECLT-hvNZ2WoZAj196Xhw-1
+	bh=uRgxPutiiXf/saj/uPcnRpqmyyUE+aGnEJJuikrPuyY=;
+	b=boReclB7xzohkKsbguMNvdfBtD6ydU6AM3Ta2mygW9/xzHzyTipfza4CwKMG7lkFwRqmjr
+	or32k2ep0j/IVkzCvFGXmPaWmq7KUn5Zwl/jMDdXD98hrYV91ge/kwxbf/ED7tJ/kuKIx3
+	LP2auhQtuScgzKNTvaIwwe3WMguixzY=
+X-MC-Unique: c9mMjQfyOAqrDY-zPijx3w-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=VeVZYMkCRTlqNEVCML3EQNhnreit1Bdg7+jPFsz6D6k90y4uWHkzLigY/D6Ziry/NQVmdRq70Xyeu76UvgISGT4hm7t7vf0LIXWF77iztFDi1dgo5OS8/Coqy7tY5L3hjdxDW19gFY+A0ykZ3xNqEzTwTPwdqo9CMjMr71IbIVb+MBILOdV1aMDrbvp4DZxxo6ztJo6Enn5Ec25gxe9tAFo4CE4guDQssnaS1EdGB9Mf+PLJl1ROwZ8m7/5JXsRUkymvlBmFTYKJhEOVEQ0aBUZgmX2T/Lqk19EDNf/lbG+k41iym+lF7xcj9Gm2N6YUuSkFNWUnkev6iKz6eQVeyg==
+ b=cj7XvMeYAotiN0cRAts3A3/X/fxFqCpO3A77Ueeylxp3ti7SZIAHoHk7JIF07kIffBBdAKUifSmEafLJ9UnDR9BPN7AVa8O2EAvR3UR9boq2lQB71YdYDVY4lmYqIeSe5xL/4AvWHM5Ep+SDTzGfWqJcXYyq2Eq8H1LLqprLzo8WjI+ZflQMnktVgV4LdH6gV2StBpJ6KvkqxKPuKLKigAwpQqRgXoEhBx5TzlWjRQXrIdW4jaVf+ZBkNReLaQutS3Wo/x0LFKilBK6dVf95fGhxXKDvM1b/CQeenHRxkefRGADz1JVSJ0xFqKMRY8d5KeQcm636x3kB7TKMcpGsQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=WsXEt03rYwGXma+YK8JHkDArPL/VDC+WUTJ5m0TRmbw=;
- b=AVMymlQbaxdBSB9aqn2nSGcBw+9TyJrvGdwa/NDN1zPoeBLaSVu/08at62bOegrF6YMK23hHpzopdm7p5bEIFtp7FvN7WRcEvppq+LBbNwrG75hj01kzbGCZ/V5fS/borTlMAhdUYhvAy3GHnQ7RsghryT3iRzjMp7StlqRjDusMRY/4RLLk9ta3xHgWo4zgoDrq8UJe4pPiymKwroE4u4ypcdI0rrLfLS3qFbXO+gaJWfmNojOCLcDLNYekI+4EQ5sUKU4TMcmgNKVHLp9VwmBHM2GZ9OyoavDOnqAGi/MxJIM31ZW0Tjydpu1hq/rPa74m6TwW97DMoQ86YQLJKQ==
+ bh=uRgxPutiiXf/saj/uPcnRpqmyyUE+aGnEJJuikrPuyY=;
+ b=aIKHyWPNH//hDystYO6BUpgaOVIUMXoLK712SjMlBuTndoSHCyWgaeFQtWmefNnYsSiMm2KOASReqe16Hh90abcf8Td0aGet714jP88YQocmEtBeI9iPpjRPFoD2DV3VtHEEwk2yKOn7wXnk7gPB3risP2g/293oxgXsBkvW5dH3nEgvNVba1ppqCHuXkyRE13Nv/1yRmnMWXk8eNjko72kfuo/qPK9Ur4HonFd/H+0s6vMRP/DelyPPAeg/9DtUHHMrR/OPM4rZFH+HHCKHEj1DDKGrDVzJxPpJkOv6ALvAnXjh6aeEVfMpnmg0J/WKMibWa6xhKbbGWneZTn6VwA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <68a10516-7737-5bbe-e9e5-537031251fcc@suse.com>
-Date: Mon, 11 Apr 2022 11:37:52 +0200
+Message-ID: <452b42cb-56a5-3f28-989f-c02e53334447@suse.com>
+Date: Mon, 11 Apr 2022 11:40:24 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.0
-Subject: [PATCH 5/8] AMD/IOMMU: replace a few PCI_BDF2()
+Subject: [PATCH 7/8] PCI: replace stray uses of PCI_{DEVFN,BDF}2()
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Kevin Tian <kevin.tian@intel.com>, Paul Durrant <paul@xen.org>,
+ Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 References: <4785ba7d-8759-7441-4ac8-0866489707b6@suse.com>
 In-Reply-To: <4785ba7d-8759-7441-4ac8-0866489707b6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM6P192CA0012.EURP192.PROD.OUTLOOK.COM
- (2603:10a6:209:83::25) To DU2PR04MB8616.eurprd04.prod.outlook.com
+X-ClientProxiedBy: AM6PR10CA0067.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:209:80::44) To DU2PR04MB8616.eurprd04.prod.outlook.com
  (2603:10a6:10:2db::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 9b0986ff-aca0-4f27-bb23-08da1b9ef3d2
-X-MS-TrafficTypeDiagnostic: AS4PR04MB9364:EE_
+X-MS-Office365-Filtering-Correlation-Id: 200dc4f4-e19b-4789-641f-08da1b9f4e89
+X-MS-TrafficTypeDiagnostic: VI1PR04MB4255:EE_
 X-Microsoft-Antispam-PRVS:
-	<AS4PR04MB9364B7BC1E5DA459670780B3B3EA9@AS4PR04MB9364.eurprd04.prod.outlook.com>
+	<VI1PR04MB42559137A13CBDC62A1E9B0AB3EA9@VI1PR04MB4255.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	dNKZiZNvjAZZe7HhoBg7ZhOyg2+UvUv56WtdWkXTyMR0Wrt3POpFWRespPN0HH2AlB7Z9N+yanLgw0qnK15BuSY5W05nmduYzt7j+8E3Dq5MffOetZoFOr/qXh6J/YCexELIHgQpOAJf5n6ooXqCvM2avzD7cK3EkNYy9u7FESiWbqOQ7GUaf4tCmtbLA/OPoHSm0si1Ylwc6W/skQR+fiAgYjKRL5ATizTk/APte0JHW0R/tIPAYDjAbhnncLwb4egHJQsO/SQheuiGvOxcknT1jLWXl5I4JYwck8SW/eo6l7G8ZpI+fSGj5RKfJuwC/91dLbap+LXxCITzUXx5+TyR15hpubtqDVpTRPtr82a2Vy2fUArRalGlFMqpHb4GDlWOV/M9CP4zwOHZYXNidJX/So8pY17cnSZsSI7qno0vKhFYCAh9L/EI/qPHRO5nlM7Ytv2XZ9XAvJrb+odtRA9GFU/Y0jKhUTMl7Kf5KNwodPsvBFSQrvMs+O/StB1koc5guNou3uuol680dF3bW/MohZ92Ag0k7VGelIcusloXDTJHPWKAoIRLe6EZGdK8fQhFYkpo9Y3JH6MOHJnFAy2lofKSCchq7fkOWzsfuOP5oICv0iNDsxQ6H8oMueiyJkvB1x2i8XY/MQILz9MGzcIrapV0JQS78xIU+UUlilkFCaoCiu6Ba4W6DW8idJQNZRqPYpCscKbPBq1Ocsngq9sM33NGBIWsCd8cCvW06ibj5HTIKX3jmZUbi6Chyl+C
+	NvkFD4KO5QOPvZAK6YRJN3ZgJ6X9LbusCnJGo8mIZUVh/ii4FQ4UktnlyYv7iLik+Cs2zKKGDOGw1yBQCXYWKWzIspXpDtGaVwpJ0D/cPlOnZM5/3XrSA5AmIWHfFyPO2QudY2EWoNsGCce3EI0u9Gifbe+cuTVKflmTinCAidpMVocuCWlHa/kaS8F6+ISIkb45mltR3uAgWVk1uPRkNcx+aJ0T7759shX7ekOdgECl2jIsynl1KIQnKJQ+fQVvhh725K8Hrg0CItGouEJBUBDDQMPI/H+QwXUNfsKPsOP6hyA/Qbt45nCQOv6TCFEZUvmkw2A+/N6tKscmd+9WgU7BOqZGRxsbjOcUbBTPkzq7Vl08kaT9R7KTJZtTOiuzJ/lIVwxoG5COCrXct0bSoeUOcSmUYriUJIFB419b3ua1YnHdPU0df6/8RwPSh5+o6qykE2EsFZjio8leouvQ3aY4vSeEESRo9jLSzCDn8sVFK3GgPink6n2n4rluAUk2J1dHUsjAyRPm/j0lz3BOnoJItpLQzAHh6cEm79cwnOXth7d+Tbkmsw0JdRIKCh4UrQ3xUOuVPfPTONPZHXXgvhVcwYgDWMIke1Kv0i+POu0wNO9o3brK3WIAROt0iBvCdXs+WzCUWtwjVqeP0Qn8alxlExlZirznG5LTqhbo2j3fgXtv+pJ8GgsLJHTDv8kOFzWklM7qAgFkwy/r1FfJc3/ff88gyNK9wpU3DzHb11NL7pvDG3Cr5UeGpY/VNmMM
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(38100700002)(66556008)(66946007)(66476007)(4326008)(2906002)(186003)(31686004)(8676002)(36756003)(83380400001)(6506007)(2616005)(5660300002)(6512007)(6486002)(508600001)(86362001)(31696002)(6916009)(316002)(54906003)(8936002)(26005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(86362001)(8936002)(7416002)(31696002)(38100700002)(2906002)(5660300002)(6512007)(66476007)(316002)(6506007)(26005)(54906003)(6916009)(2616005)(186003)(36756003)(508600001)(6486002)(66946007)(66556008)(4326008)(8676002)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?M0hpMlBOLzFGN29kaVhTMmlwR2s0UWtndVVXRUpidU92OHVVbVJhQWVCZkNS?=
- =?utf-8?B?SEdNU2xOcnF6UkVTSlFlRld3Z3M0UVR2RGVJYXVSSWV5VUhqN3kyU1l2WFhs?=
- =?utf-8?B?cENiZjdpMUY3VWZueG1uQzFFOTFHQzFRS1RSUS8xTzNGVVBqT0U0ZkIzZkEw?=
- =?utf-8?B?RDVpbURTbkV2VWd3MVZMTVhycDRnTmpBSWVGckppanNrdWdxdVBQOU5vNHlT?=
- =?utf-8?B?aWFHL24veFJYZ2ZCbVdGc1RDdVBWSGlzSUFrTk9nNFJycXRRWDUxbGw4VU9U?=
- =?utf-8?B?dGxuM25SUHJSM253cituVWdDSFBBczY3S2k2S29xR0FkWjVTZjRxM0M1UFBC?=
- =?utf-8?B?R0VITUdrN1dOaU1iSHJ2UDlRYit2K3NXbk9jWVMyZURoWWxNNnp0MjArZ1RC?=
- =?utf-8?B?eEh0cWplemRZN2JTNk03eWVlbVRXY2RyWlM2T1pIZXpRVlBkV28vS2Qyb3Ux?=
- =?utf-8?B?NmJNMU0xTHVrSlNseTRzbC9WcEd6MFBuODFjYnRZUFRXUTBuK1ZFcUxZWVBB?=
- =?utf-8?B?YTA3K2NFU3FJTHE5T1krYmMxZ1lxR05oOTIwbEUwV1hJV3Fvd1F3REhINWtJ?=
- =?utf-8?B?MmRwbURJWWk5dURqL0I5dUlHNjk2VXBMTXo5Z2FxOFJxbjU0TnZTYlBCOFNj?=
- =?utf-8?B?Ukh2OGpEdG5xTFo0U0IzRjNtL29hRElTL29CeVNaSVBTUFovMHBSb2xiYmFx?=
- =?utf-8?B?MU5CZHZIZjJLdjRLdkRYNEhaVE44QUt1WEF4MFZTbmhtaEIwa1ZUT0dFMHV6?=
- =?utf-8?B?a2xwMzlRMEpYNzYybE40d3FlNnU2NDY3a1NFa1ZaaE1Fcml3U1ljNDJ3U2x2?=
- =?utf-8?B?MjdmVmt1eklkWmJYQVV0RzV1WFFXbjFaUnE2dHE4NDAydy9lZTF0YjU2WXdu?=
- =?utf-8?B?cXUrSmU5OXJwdDdyeEdacHBET2lJWEpoYjVOaDRiOEd3L1hzdWlkVFdQTHpx?=
- =?utf-8?B?M0VVN0s1VnV2YTZMZFlHZkpvSThLdFlZNFZxRTN0WjkvamZzTVpuWXRLOWdN?=
- =?utf-8?B?WndmakFXS2FJRmNWOG1zKzZ3Sk1yUjd1Ty9vMXhpcnNraEpKVXdZdWpNY3B3?=
- =?utf-8?B?REMwMlU5WlJwNmtlUVR2Q1pPWEpjVkdUTjJ4TVR6cTZCQmZ5enhtcXVVWmlv?=
- =?utf-8?B?TWgzRkFNQXlCMjhmMm5zYndoOENWY1pqZVBMUTB3NTdFN2tSZHh0ZkplYzJn?=
- =?utf-8?B?RkhvSGpjcnlPbVBDT2wxZWVKNXNpNjk5VUM5SThrWklGdzRHVGxabVJLOEZm?=
- =?utf-8?B?RkYyZjZpOGU2VDd3ME4xd3RqMFB3Y2pCSkgrd1JPUUxUOXF6UjZaVEFTNmdT?=
- =?utf-8?B?K3l5NDdxdk04ekg3THdEeGtuQm5XdE9NM2VRcElpTXFYbTVYbnZRdVoxTWgy?=
- =?utf-8?B?cVJtVVFTenh3d3B5L1IySko5em1hTFdxanFUbDZ1cnd0TG1MbU1qcHZGMndF?=
- =?utf-8?B?T3FiRkw3bWRBR3ZNS3pVY1RUNVNOcHZmbFFacEUrc2hBM0thYlo0M1d2UEVG?=
- =?utf-8?B?Y3lyRTJ5SUdLbWgvd0xiUnFJaUxUaktFM3NCL3gra2d6bFhqczVacFhYOVdo?=
- =?utf-8?B?NzRVTTAvVmlHNDVnOUthOThOUGZVcmhzZmo4TnZraVNSWE9mYXdBbTFXYjNQ?=
- =?utf-8?B?T2pKVmRSeGZoV2dZa1l1QS9CQkpWR2toQWJQbXQ0KzZUMGJDbXlCRWxpeVJh?=
- =?utf-8?B?SVA3OHNMMUQ0TWxYcStDYUN5UGdUcmpvbnFlUE1ybWpxTUJadkxBUEZwR25o?=
- =?utf-8?B?UFlUUGprRHI0TGJQdTdJL2xWMkJtMUFnTStzci9LakVhZ0NLdjJFVXpJWURU?=
- =?utf-8?B?RnVkNDdYMVBPMFd6cUEvMTUzd3BEZjAyRFppUzM3SE9CZk51WXNqcjMwdHR0?=
- =?utf-8?B?ZUJFc25SbFUvdUxjTjF2M0NzQklCcXpiNnhNOGJMM21YKzB1SUNRYVRVZEpH?=
- =?utf-8?B?WFpFY3o1MzUwbkZtTllkZmRpVDJ2UEsyRHBlVW1uSlR2ZjRSanNzQ3B6RzZT?=
- =?utf-8?B?bFJRUUo4RGo0T0xqM1VuQWk1Z2dFbkxwS2NoK3phZER2bkVnWkN3aERUWVRB?=
- =?utf-8?B?aGZESVdhK2dMTVBDQXlwNWFoNGlmUUU2b0pZZ21lQXFzOGdvMFloNzFOY1FP?=
- =?utf-8?B?ZnBhTG5jK3VkcEprS05PeXZDSWlON1VJNGJERWovYlNnUU9rZXhURHdHbFh4?=
- =?utf-8?B?b2NoMFNZRTQrVzVqb0NTNVExUUFtbGlkamZkQzJjamE3aDhoWmE2VXFybnpx?=
- =?utf-8?B?M09RRTIvbHBQdXZjSGNoRVVyNnpIeCtqeTRLbkJ5RHVIMFI3Rlk5cmJlaTZh?=
- =?utf-8?B?cXQxRzVNMUNnYmt1RllDamltaW1jckY0MUdoUTNlcEVwWFJnVWl1Zz09?=
+	=?utf-8?B?alI3R2ZFMksyOCszdVJ5WEVpME4wek5iaFhubkErR1FUOXpVMlFqSVhybjB5?=
+ =?utf-8?B?dHl1V3Z5NjdUQTJnV0pqYjg5T2N4WXkvY2dGQmxrRXVoN2hNSEtLOU1FYWFm?=
+ =?utf-8?B?bUNCaFhlUjhLKzNydnhjOHBFN0l0bCs2Zk9ZSktaNW81Ui9QcjhJWUNscG82?=
+ =?utf-8?B?dzNET2hHTDJPRVYvUVJJQmJVK3BmeHI3U0xTU1hmOVJiUzBuK0N6aUNPSnNj?=
+ =?utf-8?B?TkNkSUR5c0hSV1IvaE9wcGFUcGJLbEhzVUFhcUdwYnhScXRod0x5eUROMjRx?=
+ =?utf-8?B?OWJkeEI3YXNaeUtxamQvNFhWdUxCbzNWeTdxbXZaRW5mMGtWdmFkbzlDTER1?=
+ =?utf-8?B?bmhURDJ6MGxtMFFKQjJudXVobHRheFpmS0dxNWFxUFB5T2NsSE8xZ0F0TkNt?=
+ =?utf-8?B?WmRBV1BQZTdGbkFFaDJsU3hSUkhsbzRBTUpGUklpS2dYeHI0MTBJWGFJam55?=
+ =?utf-8?B?elNjbmc0aDhoYTkrK1FHdE41K21XUDIzRXRpNGxvWm9jNWZBQVE0OHArZVhL?=
+ =?utf-8?B?QmhjdmdGTEFlZkUzbG5uOTRUcUdYS0dXd0wwdjc0azU3NXhqOFowdXhEMDlV?=
+ =?utf-8?B?YmxybWErWnplOHpxVFo1MGFCZkFpMCthUWVUNjNrcXZXN3BUeXp2emxJMmJr?=
+ =?utf-8?B?MEo2Nmt0U2tjb1hMemxNbDRFU3BsYS9yWm1aS3VqanlVSDh6NldxbFNEdG4z?=
+ =?utf-8?B?ZkZJdThGWEpZMFdoaGpyZFVqTkZJRkhTT1ZMY0dSVDJuaWp5VEcxQjVmZWh2?=
+ =?utf-8?B?bEtzYUtWOUdKWDV6OGNYRld6T3N6K0ZjNGl2MUpBOWZjODBLM2hMUStlNWR3?=
+ =?utf-8?B?RERLdWhUYXhnNjh4L3M5SzdaNTNlaXZ6eU9KVmNLN2RZOW01UCtCMTQxMjRT?=
+ =?utf-8?B?aHBlUjVacVF6aTdtUWdheUt0ankyRjhSYlhxZVJGL3hyejgrbWtFbDh3Q3hw?=
+ =?utf-8?B?aU4rckx5d0plOXlSY0ZVdkVoTUhRZXdjaWpKSDZwc2hzTDhYcU1PMm1qa2Yv?=
+ =?utf-8?B?aHkvbkwrK1Vib1M1N1RIV01TeUZDZmJMZ1JtRnFmWWIzVlZTNVBkSFJYOWpL?=
+ =?utf-8?B?cnd6SHhYNFVlZ252T0Qzd242OElwUjB5eXJ5ZEYzdmNzREd3dVdlM2FQWGJv?=
+ =?utf-8?B?eml6T1pEMlpzbWZSbk0ycXZOdG9BTzA0MjhtNllLWUl3YlJsaUl2YUExQ0dF?=
+ =?utf-8?B?ZjhBazZXeVc4RTZlVE5PaWdjVmdqVnUxNzFUNDRQS3N3T1duRjlIQUtPMTlr?=
+ =?utf-8?B?eDcwbGhxNGJSLzNPNVRPdmMrMG1ZWUpmU3c2TnIyZHRXTXVPOVkvcGFXTkJa?=
+ =?utf-8?B?bEt5VnVDUzczcXB6VzBZblZ5R1pDMERST2pENUdxaUE2bVRNVTlsUVQvLzUy?=
+ =?utf-8?B?YzFianpsdG5aOUVpdittKzJtU0c0VUhINTFkTEs3aUxmQVZON2tQNTNTMVVm?=
+ =?utf-8?B?VHpQd0U3dTJMVXFlL3BmZExtajl5cHRmdVF6OTFWZmR1S2ZHYXlmK29mQ3N4?=
+ =?utf-8?B?RG95QWQxQTVja0cvb0dLK1prcEVsOEZYWTJ6bEswWTluUUs5cm1YU0x3OXl0?=
+ =?utf-8?B?cnRWb1A0dWUwbERLMFRLZzQwcTBvdWhVcytUd2I2TER0dW56WEcxaHZsajBk?=
+ =?utf-8?B?QjlLT1ZON3VZQ2lpUlhHWUJsUDcwa1RGNm8wc1NNODBkVDZGcnhEL2xQMHBm?=
+ =?utf-8?B?RnpGQ256RXU1VWxXNHVLRFRjQnliYzRTOERIQ29OL3lhSVBBK253Z01sdmRw?=
+ =?utf-8?B?UTJQTnhreEFNV1g2eXlETk1iakdSSGErdDNsWTVXcGF5Q09UTjV1ZHhRYjRy?=
+ =?utf-8?B?empXNWJXS2tjMWZ3RUVVbWY2WmthVXl3SVRTSUxNcU1iZE1FMXpldE9HUGM3?=
+ =?utf-8?B?QVd1QVBlUFN0c2JzQVk0cGhkRkdGWGNoZXpxUVJXTU13MnV2STVSK1JTSisy?=
+ =?utf-8?B?TThNWEpLR0hrd296eUxuTmZOcGR3QjY3N3VSZnl4dVAxVC9uSm43NjIzN3Bt?=
+ =?utf-8?B?R2QwRjlHenZDcWQ4MlF0QXhSenhMUCsvTzdrckhXMmNLUHg5ckRQT0R1NjY5?=
+ =?utf-8?B?QUpTeDJWa2JOb1NrQ1JDd0FRUzNUS1FzV0Q2YXhJUkpyS3ExZEFRVmw1aXRT?=
+ =?utf-8?B?SStiTUNvSVZyTjVaWnBYa2dNS1VTRlpyVDBNaGpJUjVscW1ab3JtNDlDUkFo?=
+ =?utf-8?B?YWNLMEFPU3NFWTVLR1JhamROWUs5VlJ0bnQwMzNiR01hVnVqbXhVRnFOUFhk?=
+ =?utf-8?B?U2VWSlJDSUN2SWJTejJtdVJiaVZvVmtKYnhlQlp2Zy9MMU5qV1I0WFFyTHlN?=
+ =?utf-8?B?bHhuQVRnZWVvVW94Z3JQd1RoZ1NhbXJESXdwd2ZxUTNHdm5NV1BFZz09?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9b0986ff-aca0-4f27-bb23-08da1b9ef3d2
+X-MS-Exchange-CrossTenant-Network-Message-Id: 200dc4f4-e19b-4789-641f-08da1b9f4e89
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8616.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2022 09:37:53.7052
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2022 09:40:25.8816
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b4Ep4COoCpr0Z4C4d1u2ZryXr055Q2+OdQcaT3SwebcdjhWIRRqgJLk+pz9hNzpvOJ0ZSYnKs8QYorREE7+azg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR04MB9364
+X-MS-Exchange-CrossTenant-UserPrincipalName: u9iOVVYnU3u5MogYqurO8HqxYoN6UhHKXvtwQEukx0Qv3tnbHdLIlU71b4d/qgTzLZEcnBobTKIGPH9vXrfm4g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4255
 
-struct pci_dev has the wanted value directly available; use it. Note
-that this fixes a - imo benign - mistake in reassign_device(): The unity
-map removal ought to be based on the passed in devfn (as is the case on
-the establishing side). This is benign because the mappings would be
-removed anyway a little later, when the "main" device gets processed.
-While there also limit the scope of two variables in that function.
+There's no good reason to use these when we already have a pci_sbdf_t
+type object available. This extends to the use of PCI_BUS() in
+pci_ecam_map_bus() as well.
+
+No change to generated code (with gcc11 at least, and I have to admit
+that I didn't expect compilers to necessarily be able to spot the
+optimization potential on the original code).
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Note that the Arm changes are "blind": I haven't been able to spot a way
+to at least compile test the changes there; the code looks to be
+entirely dead.
 
---- a/xen/drivers/passthrough/amd/iommu_cmd.c
-+++ b/xen/drivers/passthrough/amd/iommu_cmd.c
-@@ -287,7 +287,7 @@ void amd_iommu_flush_iotlb(u8 devfn, con
-     if ( !pci_ats_enabled(pdev->seg, pdev->bus, pdev->devfn) )
-         return;
- 
--    iommu = find_iommu_for_device(pdev->seg, PCI_BDF2(pdev->bus, pdev->devfn));
-+    iommu = find_iommu_for_device(pdev->seg, pdev->sbdf.bdf);
- 
-     if ( !iommu )
-     {
---- a/xen/drivers/passthrough/amd/iommu_intr.c
-+++ b/xen/drivers/passthrough/amd/iommu_intr.c
-@@ -617,7 +617,7 @@ int cf_check amd_iommu_msi_msg_update_ir
-     unsigned int i, nr = 1;
-     u32 data;
- 
--    bdf = pdev ? PCI_BDF2(pdev->bus, pdev->devfn) : hpet_sbdf.bdf;
-+    bdf = pdev ? pdev->sbdf.bdf : hpet_sbdf.bdf;
-     seg = pdev ? pdev->seg : hpet_sbdf.seg;
- 
-     iommu = _find_iommu_for_device(seg, bdf);
---- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
-+++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
-@@ -455,11 +455,9 @@ static int cf_check reassign_device(
-     struct pci_dev *pdev)
- {
-     struct amd_iommu *iommu;
--    int bdf, rc;
--    const struct ivrs_mappings *ivrs_mappings = get_ivrs_mappings(pdev->seg);
-+    int rc;
- 
--    bdf = PCI_BDF2(pdev->bus, pdev->devfn);
--    iommu = find_iommu_for_device(pdev->seg, bdf);
-+    iommu = find_iommu_for_device(pdev->seg, pdev->sbdf.bdf);
-     if ( !iommu )
-     {
-         AMD_IOMMU_WARN("failed to find IOMMU: %pp cannot be assigned to %pd\n",
-@@ -489,6 +487,9 @@ static int cf_check reassign_device(
-      */
-     if ( !is_hardware_domain(source) )
-     {
-+        const struct ivrs_mappings *ivrs_mappings = get_ivrs_mappings(pdev->seg);
-+        unsigned int bdf = PCI_BDF2(pdev->bus, devfn);
-+
-         rc = amd_iommu_reserve_domain_unity_unmap(
-                  source,
-                  ivrs_mappings[get_dma_requestor_id(pdev->seg, bdf)].unity_map);
-@@ -558,13 +559,11 @@ static int cf_check amd_iommu_add_device
-     if ( !pdev->domain )
-         return -EINVAL;
- 
--    bdf = PCI_BDF2(pdev->bus, pdev->devfn);
+--- a/xen/arch/arm/pci/ecam.c
++++ b/xen/arch/arm/pci/ecam.c
+@@ -28,8 +28,7 @@ void __iomem *pci_ecam_map_bus(struct pc
+         container_of(bridge->ops, const struct pci_ecam_ops, pci_ops);
+     unsigned int devfn_shift = ops->bus_shift - 8;
+     void __iomem *base;
 -
-     for_each_amd_iommu(iommu)
--        if ( pdev->seg == iommu->seg && bdf == iommu->bdf )
-+        if ( pdev->seg == iommu->seg && pdev->sbdf.bdf == iommu->bdf )
-             return is_hardware_domain(pdev->domain) ? 0 : -ENODEV;
+-    unsigned int busn = PCI_BUS(sbdf.bdf);
++    unsigned int busn = sbdf.bus;
  
--    iommu = find_iommu_for_device(pdev->seg, bdf);
-+    iommu = find_iommu_for_device(pdev->seg, pdev->sbdf.bdf);
-     if ( unlikely(!iommu) )
-     {
-         /* Filter bridge devices. */
-@@ -648,8 +647,7 @@ static int cf_check amd_iommu_remove_dev
-     if ( !pdev->domain )
-         return -EINVAL;
+     if ( busn < cfg->busn_start || busn > cfg->busn_end )
+         return NULL;
+@@ -37,7 +36,7 @@ void __iomem *pci_ecam_map_bus(struct pc
+     busn -= cfg->busn_start;
+     base = cfg->win + (busn << ops->bus_shift);
  
--    bdf = PCI_BDF2(pdev->bus, pdev->devfn);
--    iommu = find_iommu_for_device(pdev->seg, bdf);
-+    iommu = find_iommu_for_device(pdev->seg, pdev->sbdf.bdf);
-     if ( !iommu )
-     {
-         AMD_IOMMU_WARN("failed to find IOMMU: %pp cannot be removed from %pd\n",
+-    return base + (PCI_DEVFN2(sbdf.bdf) << devfn_shift) + where;
++    return base + (sbdf.df << devfn_shift) + where;
+ }
+ 
+ bool __init pci_ecam_need_p2m_hwdom_mapping(struct domain *d,
+--- a/xen/arch/x86/msi.c
++++ b/xen/arch/x86/msi.c
+@@ -839,7 +839,7 @@ static int msix_capability_init(struct p
+             pbus = dev->info.physfn.bus;
+             pslot = PCI_SLOT(dev->info.physfn.devfn);
+             pfunc = PCI_FUNC(dev->info.physfn.devfn);
+-            vf = PCI_BDF2(dev->bus, dev->devfn);
++            vf = dev->sbdf.bdf;
+         }
+ 
+         table_paddr = read_pci_mem_bar(seg, pbus, pslot, pfunc, bir, vf);
+--- a/xen/drivers/passthrough/vtd/qinval.c
++++ b/xen/drivers/passthrough/vtd/qinval.c
+@@ -267,7 +267,7 @@ int qinval_device_iotlb_sync(struct vtd_
+     qinval_entry->q.dev_iotlb_inv_dsc.lo.res_1 = 0;
+     qinval_entry->q.dev_iotlb_inv_dsc.lo.max_invs_pend = pdev->ats.queue_depth;
+     qinval_entry->q.dev_iotlb_inv_dsc.lo.res_2 = 0;
+-    qinval_entry->q.dev_iotlb_inv_dsc.lo.sid = PCI_BDF2(pdev->bus, pdev->devfn);
++    qinval_entry->q.dev_iotlb_inv_dsc.lo.sid = pdev->sbdf.bdf;
+     qinval_entry->q.dev_iotlb_inv_dsc.lo.res_3 = 0;
+ 
+     qinval_entry->q.dev_iotlb_inv_dsc.hi.size = size;
 
 
