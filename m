@@ -4,32 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE05DC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:12:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.303317.517628 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4F6C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:12:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.303318.517636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8p9-0003mU-KH; Tue, 12 Apr 2022 05:12:19 +0000
+	id 1ne8pB-0004Hx-Ag; Tue, 12 Apr 2022 05:12:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 303317.517628; Tue, 12 Apr 2022 05:12:19 +0000
+Received: by outflank-mailman (output) from mailman id 303318.517636; Tue, 12 Apr 2022 05:12:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8p7-0003dq-Ry; Tue, 12 Apr 2022 05:12:17 +0000
-Received: by outflank-mailman (input) for mailman id 303317;
+	id 1ne8pA-00047F-0B; Tue, 12 Apr 2022 05:12:20 +0000
+Received: by outflank-mailman (input) for mailman id 303318;
  Mon, 11 Apr 2022 23:41:48 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9GfR=UV=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1ne3dZ-0006oE-LR
- for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:40:01 +0000
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk
- [2a00:1098:0:82:1000:25:2eeb:e3e3])
+ id 1ne3dp-0006oE-QW
+ for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:40:17 +0000
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b429abee-b9f0-11ec-a405-831a346695d4;
- Tue, 12 Apr 2022 01:40:01 +0200 (CEST)
+ id bdd3f8ce-b9f0-11ec-a405-831a346695d4;
+ Tue, 12 Apr 2022 01:40:17 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id C16F31F43D44
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id ECBE41F43D65
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b429abee-b9f0-11ec-a405-831a346695d4
+X-Inumbo-ID: bdd3f8ce-b9f0-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1649720400;
-	bh=tQBjrLc8wxDM/i52bUpXMeBe/Yyvxo9TnWn/cLTHgHQ=;
+	s=mail; t=1649720416;
+	bh=iYfrEabh/hAGujUdJ+A/I+DmpedLWQ8gHOkzzfFNwA8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=UkG7tcSwL+91g3dVfqEnPY3BuC71fVJElMqsfljBoKbyZADM1aklFPTybo4Yg/Sho
-	 m1H9ejpSdOkWGU0WDyo+ejDP0+AWN8iLlx8aej6TjaLlhbeRjZhKn+mVxDsF00AdT6
-	 GD71LDlNuOaEQ6Wg2bej41JN04RfNu1qafGZPu3z6U9Zy7WYCYx/OYXC4l6NzDw8fG
-	 8JXkmUCmD6p9tsYvRq7TkB5WLA2gvNzOyALTkP3xqccJvx3C6460dShM7i36zJi1HJ
-	 58I+BhUvpRHeCZfqxub8dMNc4jeg83wgps+KIWLm/iUHIlPtZWOlYdTWDl/M4yVzZN
-	 k83/KXiUv8lzQ==
+	b=c1svoiAR7m0K6n7FtQj4RQRVEfLDNf+rwLT3neRX08SjGxKJYiC6HyM61WH9D/o3y
+	 vAJO3f/Ys3tCCGTE9bmhQwmmHvzdi+chCvJXp1Npd/GlWrZMZHyViOEgNhsLyOJzTk
+	 WaypFbLIoOXzHL4B5nWZOTZInVtzuAgZL1HRm6zaAYZPbJVUGS8V4EJ2Mc0SPMy0Sw
+	 qJHgIWiLSIgASKFu7wMg0n4w6xwajTCa/N/m8HFcI9swRLPhXyd9bPMTdXw6j07VZa
+	 h6Rg8HGTvAD0gX8doiBfJ8Letk7TvBw7eZK4sZ4E0EPUScPBbaZsR1J8aceqd22he4
+	 YaYXWDOj7297Q==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -113,39 +112,65 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v7 16/20] mips: Use do_kernel_power_off()
-Date: Tue, 12 Apr 2022 02:38:28 +0300
-Message-Id: <20220411233832.391817-17-dmitry.osipenko@collabora.com>
+Subject: [PATCH v7 20/20] reboot: Remove pm_power_off_prepare()
+Date: Tue, 12 Apr 2022 02:38:32 +0300
+Message-Id: <20220411233832.391817-21-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 References: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new power-off API.
+All pm_power_off_prepare() users were converted to sys-off handler API.
+Remove the obsolete callback.
 
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- arch/mips/kernel/reset.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ include/linux/pm.h |  1 -
+ kernel/reboot.c    | 11 -----------
+ 2 files changed, 12 deletions(-)
 
-diff --git a/arch/mips/kernel/reset.c b/arch/mips/kernel/reset.c
-index 6288780b779e..e7ce07b3e79b 100644
---- a/arch/mips/kernel/reset.c
-+++ b/arch/mips/kernel/reset.c
-@@ -114,8 +114,7 @@ void machine_halt(void)
+diff --git a/include/linux/pm.h b/include/linux/pm.h
+index ffe941958501..6cdf279c7f2f 100644
+--- a/include/linux/pm.h
++++ b/include/linux/pm.h
+@@ -21,7 +21,6 @@
+  * Callbacks for platform drivers to implement.
+  */
+ extern void (*pm_power_off)(void);
+-extern void (*pm_power_off_prepare)(void);
  
- void machine_power_off(void)
+ struct device; /* we have a circular dep with device.h */
+ #ifdef CONFIG_VT_CONSOLE_SLEEP
+diff --git a/kernel/reboot.c b/kernel/reboot.c
+index e76e2570dcf5..f2f5c9d7caa0 100644
+--- a/kernel/reboot.c
++++ b/kernel/reboot.c
+@@ -48,13 +48,6 @@ int reboot_cpu;
+ enum reboot_type reboot_type = BOOT_ACPI;
+ int reboot_force;
+ 
+-/*
+- * If set, this is used for preparing the system to power off.
+- */
+-
+-void (*pm_power_off_prepare)(void);
+-EXPORT_SYMBOL_GPL(pm_power_off_prepare);
+-
+ /**
+  *	emergency_restart - reboot the system
+  *
+@@ -877,10 +870,6 @@ void do_kernel_power_off(void)
+ 
+ static void do_kernel_power_off_prepare(void)
  {
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
- 
- #ifdef CONFIG_SMP
- 	preempt_disable();
+-	/* legacy pm_power_off_prepare() is unchained and has highest priority */
+-	if (pm_power_off_prepare)
+-		return pm_power_off_prepare();
+-
+ 	blocking_notifier_call_chain(&power_off_handler_list, POWEROFF_PREPARE,
+ 				     NULL);
+ }
 -- 
 2.35.1
 
