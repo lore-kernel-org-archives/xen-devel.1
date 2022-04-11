@@ -4,31 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D99AC433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44B4FC433FE
 	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:12:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.303285.517467 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.303281.517458 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8om-00070H-FH; Tue, 12 Apr 2022 05:11:56 +0000
+	id 1ne8ol-0006uQ-S9; Tue, 12 Apr 2022 05:11:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 303285.517467; Tue, 12 Apr 2022 05:11:56 +0000
+Received: by outflank-mailman (output) from mailman id 303281.517458; Tue, 12 Apr 2022 05:11:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8om-0006z7-8S; Tue, 12 Apr 2022 05:11:56 +0000
-Received: by outflank-mailman (input) for mailman id 303285;
- Mon, 11 Apr 2022 23:39:05 +0000
+	id 1ne8ol-0006uJ-Mu; Tue, 12 Apr 2022 05:11:55 +0000
+Received: by outflank-mailman (input) for mailman id 303281;
+ Mon, 11 Apr 2022 23:39:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9GfR=UV=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1ne3ce-0006oE-SS
- for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:39:04 +0000
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+ id 1ne3cZ-0006oE-Ro
+ for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:39:00 +0000
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk
+ [2a00:1098:0:82:1000:25:2eeb:e3e3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 92301096-b9f0-11ec-a405-831a346695d4;
- Tue, 12 Apr 2022 01:39:03 +0200 (CEST)
+ id 8d8ea0fb-b9f0-11ec-a405-831a346695d4;
+ Tue, 12 Apr 2022 01:38:57 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id C52711F42D8A
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 503051F4028B
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +41,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 92301096-b9f0-11ec-a405-831a346695d4
+X-Inumbo-ID: 8d8ea0fb-b9f0-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1649720343;
-	bh=vZl2ZWhj3ebII6Fu4HXosJY7ElBNxPQBVC6ByCiZ1BY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=JviWvIvL43QfXlelzChv/e65G8pQVStHm/cjt8S+palR7BBcwJ28HEV3zpH6iZZTv
-	 TAwdfm98zB2JhkW2hCsPJU++kmtM1VV3c4q/FAbp1kMxQV66wX4eOP2dzPpxKzrKBh
-	 r/GZxCh68qnq8qhz28d+ivGoVY9SXlXFmaOMiSdDnfRi1xFRVYkWEqZNi0hbs2vHRd
-	 Dcs5ywFB53D3180fJ8zfDiYmWEkxlPJhV6Jj84tKq7D3RzpHX7l0fPdorLAO9CU7xa
-	 bri2qC1nbypivw49u7/3CmwoCU41LCltEdGxoZKNd3lvbfE0eFlmxhLRCcCz+OsT9r
-	 V/pa36+mViA/w==
+	s=mail; t=1649720335;
+	bh=FlE6aXeklkCK/AI2WoLzbfUrvXlLcjuPO9lE+MlTmGY=;
+	h=From:To:Cc:Subject:Date:From;
+	b=j+6DZIwJdleyULy9bYi7IIrtEan9CdcwksRYcm5h8cT0CGnytw+oY1GsbHra8+mo7
+	 WAj0RfHgJkhRuYgUcWavGMh9E1Hhu+tKsgei/htxQ+qjIqGrCN6t2+bWVHjWjj1Qpq
+	 7b+zsXRmKixDrhr9fCidfruuyuPRyVyxJhbdKz2yHpOMugsFgMbuhM965aXmnaRDE+
+	 LTiAdSCP8Lzw70g2GfuLwtuRh9M1mRUkgyo7Hnx1qgsL3EUKjP743t0hBs1pOf8lsU
+	 zcikwcJL0GUjlp2ni/qBTGHc6jdc3APJ62532Pu4lcn3EW1rST4jSFE9stwZof/GVv
+	 U1VMzfHvk+aag==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,196 +113,226 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v7 02/20] notifier: Add atomic/blocking_notifier_chain_register_unique_prio()
-Date: Tue, 12 Apr 2022 02:38:14 +0300
-Message-Id: <20220411233832.391817-3-dmitry.osipenko@collabora.com>
+Subject: [PATCH v7 00/20] Introduce power-off+restart call chain API
+Date: Tue, 12 Apr 2022 02:38:12 +0300
+Message-Id: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
-References: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add variant of atomic/blocking_notifier_chain_register() functions that
-doesn't allow to register notifier using a duplicated priority. The -EBUSY
-error code is returned in this case by the new API functions.
+Problem
+-------
 
-Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
----
- include/linux/notifier.h |  5 +++
- kernel/notifier.c        | 88 +++++++++++++++++++++++++++++++---------
- 2 files changed, 74 insertions(+), 19 deletions(-)
+SoC devices require power-off call chaining functionality from kernel.
+We have a widely used restart chaining provided by restart notifier API,
+but nothing for power-off.
 
-diff --git a/include/linux/notifier.h b/include/linux/notifier.h
-index d4717bc0ab85..ccce26197dd2 100644
---- a/include/linux/notifier.h
-+++ b/include/linux/notifier.h
-@@ -150,6 +150,11 @@ extern int raw_notifier_chain_register(struct raw_notifier_head *nh,
- extern int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
- 		struct notifier_block *nb);
- 
-+extern int atomic_notifier_chain_register_unique_prio(
-+		struct atomic_notifier_head *nh, struct notifier_block *nb);
-+extern int blocking_notifier_chain_register_unique_prio(
-+		struct blocking_notifier_head *nh, struct notifier_block *nb);
-+
- extern int atomic_notifier_chain_unregister(struct atomic_notifier_head *nh,
- 		struct notifier_block *nb);
- extern int blocking_notifier_chain_unregister(struct blocking_notifier_head *nh,
-diff --git a/kernel/notifier.c b/kernel/notifier.c
-index 4ed6bda8f127..4fc32b1e6cbb 100644
---- a/kernel/notifier.c
-+++ b/kernel/notifier.c
-@@ -20,7 +20,8 @@ BLOCKING_NOTIFIER_HEAD(reboot_notifier_list);
-  */
- 
- static int notifier_chain_register(struct notifier_block **nl,
--				   struct notifier_block *n)
-+				   struct notifier_block *n,
-+				   bool unique_priority)
- {
- 	while ((*nl) != NULL) {
- 		if (unlikely((*nl) == n)) {
-@@ -30,6 +31,8 @@ static int notifier_chain_register(struct notifier_block **nl,
- 		}
- 		if (n->priority > (*nl)->priority)
- 			break;
-+		if (n->priority == (*nl)->priority && unique_priority)
-+			return -EBUSY;
- 		nl = &((*nl)->next);
- 	}
- 	n->next = *nl;
-@@ -144,12 +147,35 @@ int atomic_notifier_chain_register(struct atomic_notifier_head *nh,
- 	int ret;
- 
- 	spin_lock_irqsave(&nh->lock, flags);
--	ret = notifier_chain_register(&nh->head, n);
-+	ret = notifier_chain_register(&nh->head, n, false);
- 	spin_unlock_irqrestore(&nh->lock, flags);
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(atomic_notifier_chain_register);
- 
-+/**
-+ *	atomic_notifier_chain_register_unique_prio - Add notifier to an atomic notifier chain
-+ *	@nh: Pointer to head of the atomic notifier chain
-+ *	@n: New entry in notifier chain
-+ *
-+ *	Adds a notifier to an atomic notifier chain if there is no other
-+ *	notifier registered using the same priority.
-+ *
-+ *	Returns 0 on success, %-EEXIST or %-EBUSY on error.
-+ */
-+int atomic_notifier_chain_register_unique_prio(struct atomic_notifier_head *nh,
-+					       struct notifier_block *n)
-+{
-+	unsigned long flags;
-+	int ret;
-+
-+	spin_lock_irqsave(&nh->lock, flags);
-+	ret = notifier_chain_register(&nh->head, n, true);
-+	spin_unlock_irqrestore(&nh->lock, flags);
-+	return ret;
-+}
-+EXPORT_SYMBOL_GPL(atomic_notifier_chain_register_unique_prio);
-+
- /**
-  *	atomic_notifier_chain_unregister - Remove notifier from an atomic notifier chain
-  *	@nh: Pointer to head of the atomic notifier chain
-@@ -209,18 +235,9 @@ NOKPROBE_SYMBOL(atomic_notifier_call_chain);
-  *	synchronized by an rwsem.
-  */
- 
--/**
-- *	blocking_notifier_chain_register - Add notifier to a blocking notifier chain
-- *	@nh: Pointer to head of the blocking notifier chain
-- *	@n: New entry in notifier chain
-- *
-- *	Adds a notifier to a blocking notifier chain.
-- *	Must be called in process context.
-- *
-- *	Returns 0 on success, %-EEXIST on error.
-- */
--int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
--		struct notifier_block *n)
-+static int __blocking_notifier_chain_register(struct blocking_notifier_head *nh,
-+					      struct notifier_block *n,
-+					      bool unique_priority)
- {
- 	int ret;
- 
-@@ -230,15 +247,48 @@ int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
- 	 * such times we must not call down_write().
- 	 */
- 	if (unlikely(system_state == SYSTEM_BOOTING))
--		return notifier_chain_register(&nh->head, n);
-+		return notifier_chain_register(&nh->head, n, unique_priority);
- 
- 	down_write(&nh->rwsem);
--	ret = notifier_chain_register(&nh->head, n);
-+	ret = notifier_chain_register(&nh->head, n, unique_priority);
- 	up_write(&nh->rwsem);
- 	return ret;
- }
-+
-+/**
-+ *	blocking_notifier_chain_register - Add notifier to a blocking notifier chain
-+ *	@nh: Pointer to head of the blocking notifier chain
-+ *	@n: New entry in notifier chain
-+ *
-+ *	Adds a notifier to a blocking notifier chain.
-+ *	Must be called in process context.
-+ *
-+ *	Returns 0 on success, %-EEXIST on error.
-+ */
-+int blocking_notifier_chain_register(struct blocking_notifier_head *nh,
-+		struct notifier_block *n)
-+{
-+	return __blocking_notifier_chain_register(nh, n, false);
-+}
- EXPORT_SYMBOL_GPL(blocking_notifier_chain_register);
- 
-+/**
-+ *	blocking_notifier_chain_register_unique_prio - Add notifier to a blocking notifier chain
-+ *	@nh: Pointer to head of the blocking notifier chain
-+ *	@n: New entry in notifier chain
-+ *
-+ *	Adds a notifier to an blocking notifier chain if there is no other
-+ *	notifier registered using the same priority.
-+ *
-+ *	Returns 0 on success, %-EEXIST or %-EBUSY on error.
-+ */
-+int blocking_notifier_chain_register_unique_prio(struct blocking_notifier_head *nh,
-+						 struct notifier_block *n)
-+{
-+	return __blocking_notifier_chain_register(nh, n, true);
-+}
-+EXPORT_SYMBOL_GPL(blocking_notifier_chain_register_unique_prio);
-+
- /**
-  *	blocking_notifier_chain_unregister - Remove notifier from a blocking notifier chain
-  *	@nh: Pointer to head of the blocking notifier chain
-@@ -354,7 +404,7 @@ bool blocking_notifier_call_chain_is_empty(struct blocking_notifier_head *nh)
- int raw_notifier_chain_register(struct raw_notifier_head *nh,
- 		struct notifier_block *n)
- {
--	return notifier_chain_register(&nh->head, n);
-+	return notifier_chain_register(&nh->head, n, false);
- }
- EXPORT_SYMBOL_GPL(raw_notifier_chain_register);
- 
-@@ -433,10 +483,10 @@ int srcu_notifier_chain_register(struct srcu_notifier_head *nh,
- 	 * such times we must not call mutex_lock().
- 	 */
- 	if (unlikely(system_state == SYSTEM_BOOTING))
--		return notifier_chain_register(&nh->head, n);
-+		return notifier_chain_register(&nh->head, n, false);
- 
- 	mutex_lock(&nh->mutex);
--	ret = notifier_chain_register(&nh->head, n);
-+	ret = notifier_chain_register(&nh->head, n, false);
- 	mutex_unlock(&nh->mutex);
- 	return ret;
- }
+Solution
+--------
+
+Introduce new API that provides both restart and power-off call chains.
+
+Why combine restart with power-off? Because drivers often do both.
+More practical to have API that provides both under the same roof.
+
+The new API is designed with simplicity and extensibility in mind.
+It's built upon the existing restart and reboot APIs. The simplicity
+is in new helper functions that are convenient for drivers. The
+extensibility is in the design that doesn't hardcode callback
+arguments, making easy to add new parameters and remove old.
+
+This is a third attempt to introduce the new API. First was made by
+Guenter Roeck back in 2014, second was made by Thierry Reding in 2017.
+In fact the work didn't stop and recently arm_pm_restart() was removed
+from v5.14 kernel, which was a part of preparatory work started by
+Guenter Roeck. I took into account experience and ideas from the
+previous attempts, extended and polished them.
+
+Adoption plan
+-------------
+
+This patchset introduces the new API. It also converts multiple drivers
+and arch code to the new API to demonstrate how it all looks in practice.
+
+The plan is:
+
+1. Merge the new API and convert arch code to use do_kernel_power_off().
+   For now the new API will co-exist with the older API.
+
+2. Convert all drivers and platform code to the new API.
+
+3. Remove obsoleted pm_power_off and pm_power_off_prepare variables.
+
+4. Make restart-notifier API private to kernel/reboot.c once no users left.
+
+5. Make unique-priority of the handlers' a mandatory requirement in the
+   new API.
+
+The plan is fully implemented here:
+
+[1] https://gitlab.collabora.com/dmitry.osipenko/linux-kernel-rd/-/commits/sys-off-handler
+
+For now I'm sending the first 20 base patches out of ~180.
+Majority of drivers and platform patches depend on the base patches,
+hence the rest will come later on, once base will land.
+
+All [1] patches are compile-tested. Tegra, Rockchip and x86 ACPI patches
+are tested on hardware.
+
+Results
+-------
+
+1. Devices can be powered off properly.
+
+2. Global variables are removed from drivers.
+
+3. Global pm_power_off and pm_power_off_prepare callback variables are
+removed once all users are converted to the new API. The latter callback
+is removed by patch #25 of this series.
+
+4. Ambiguous call chain ordering is prohibited. See patch #4 which adds
+verification of restart handlers priorities, ensuring that they are unique.
+
+Changelog:
+
+v7: - Rebased on a recent linux-next. Dropped the recently removed
+      NDS32 architecture. Only SH and x86 arches left un-acked.
+
+    - Added acks from Thomas Bogendoerfer and Krzysztof Kozlowski
+      to the MIPS and memory/emif patches respectively.
+
+    - Made couple minor cosmetic improvements to the new API.
+
+    - A month ago I joined Collabora and continuing to work on this series
+      on the company's time, so changed my email address to collabora.com
+
+v6: - Rebased on a recent linux-next.
+
+    - Made minor couple cosmetic changes.
+
+v5: - Dropped patches which cleaned up notifier/reboot headers, as was
+      requested by Rafael Wysocki.
+
+    - Dropped WARN_ON() from the code, as was requested by Rafael Wysocki.
+      Replaced it with pr_err() appropriately.
+
+    - Dropped *_notifier_has_unique_priority() functions and added
+      *_notifier_chain_register_unique_prio() instead, as was suggested
+      by Michał Mirosław and Rafael Wysocki.
+
+    - Dropped export of blocking_notifier_call_chain_is_empty() symbol,
+      as was suggested by Rafael Wysocki.
+
+    - Michał Mirosław suggested that will be better to split up patch
+      that adds the new API to ease reviewing, but Rafael Wysocki asked
+      not add more patches, so I kept it as a single patch.
+
+    - Added temporary "weak" stub for pm_power_off() which fixes linkage
+      failure once symbol is removed from arch/* code. Previously I missed
+      this problem because was only compile-testing object files.
+
+v4: - Made a very minor improvement to doc comments, clarifying couple
+      default values.
+
+    - Corrected list of emails recipient by adding Linus, Sebastian,
+      Philipp and more NDS people. Removed bouncing emails.
+
+    - Added acks that were given to v3.
+
+v3: - Renamed power_handler to sys_off_handler as was suggested by
+      Rafael Wysocki.
+
+    - Improved doc-comments as was suggested by Rafael Wysocki. Added more
+      doc-comments.
+
+    - Implemented full set of 180 patches which convert whole kernel in
+      accordance to the plan, see link [1] above. Slightly adjusted API to
+      better suit for the remaining converted drivers.
+
+      * Added unregister_sys_off_handler() that is handy for a couple old
+        platform drivers.
+
+      * Dropped devm_register_trivial_restart_handler(), 'simple' variant
+        is enough to have.
+
+    - Improved "Add atomic/blocking_notifier_has_unique_priority()" patch,
+      as was suggested by Andy Shevchenko. Also replaced down_write() with
+      down_read() and factored out common notifier_has_unique_priority().
+
+    - Added stop_chain field to struct restart_data and reboot_prep_data
+      after discovering couple drivers wanting that feature.
+
+    - Added acks that were given to v2.
+
+v2: - Replaced standalone power-off call chain demo-API with the combined
+      power-off+restart API because this is what drivers want. It's a more
+      comprehensive solution.
+
+    - Converted multiple drivers and arch code to the new API. Suggested by
+      Andy Shevchenko. I skimmed through the rest of drivers, verifying that
+      new API suits them. The rest of the drivers will be converted once we
+      will settle on the new API, otherwise will be too many patches here.
+
+    - v2 API doesn't expose notifier to users and require handlers to
+      have unique priority. Suggested by Guenter Roeck.
+
+    - v2 API has power-off chaining disabled by default and require
+      drivers to explicitly opt-in to the chaining. This preserves old
+      behaviour for existing drivers once they are converted to the new
+      API.
+
+Dmitry Osipenko (20):
+  notifier: Add blocking_notifier_call_chain_is_empty()
+  notifier: Add atomic/blocking_notifier_chain_register_unique_prio()
+  reboot: Print error message if restart handler has duplicated priority
+  kernel: Add combined power-off+restart handler call chain API
+  ARM: Use do_kernel_power_off()
+  csky: Use do_kernel_power_off()
+  riscv: Use do_kernel_power_off()
+  arm64: Use do_kernel_power_off()
+  parisc: Use do_kernel_power_off()
+  xen/x86: Use do_kernel_power_off()
+  powerpc: Use do_kernel_power_off()
+  m68k: Switch to new sys-off handler API
+  sh: Use do_kernel_power_off()
+  x86: Use do_kernel_power_off()
+  ia64: Use do_kernel_power_off()
+  mips: Use do_kernel_power_off()
+  memory: emif: Use kernel_can_power_off()
+  ACPI: power: Switch to sys-off handler API
+  regulator: pfuze100: Use devm_register_sys_off_handler()
+  reboot: Remove pm_power_off_prepare()
+
+ arch/arm/kernel/reboot.c               |   4 +-
+ arch/arm64/kernel/process.c            |   3 +-
+ arch/csky/kernel/power.c               |   6 +-
+ arch/ia64/kernel/process.c             |   4 +-
+ arch/m68k/emu/natfeat.c                |   3 +-
+ arch/m68k/include/asm/machdep.h        |   1 -
+ arch/m68k/kernel/process.c             |   5 +-
+ arch/m68k/kernel/setup_mm.c            |   1 -
+ arch/m68k/kernel/setup_no.c            |   1 -
+ arch/m68k/mac/config.c                 |   4 +-
+ arch/mips/kernel/reset.c               |   3 +-
+ arch/parisc/kernel/process.c           |   4 +-
+ arch/powerpc/kernel/setup-common.c     |   4 +-
+ arch/powerpc/xmon/xmon.c               |   3 +-
+ arch/riscv/kernel/reset.c              |  12 +-
+ arch/sh/kernel/reboot.c                |   3 +-
+ arch/x86/kernel/reboot.c               |   4 +-
+ arch/x86/xen/enlighten_pv.c            |   4 +-
+ drivers/acpi/sleep.c                   |  25 +-
+ drivers/memory/emif.c                  |   2 +-
+ drivers/regulator/pfuze100-regulator.c |  38 +-
+ include/linux/notifier.h               |   7 +
+ include/linux/pm.h                     |   1 -
+ include/linux/reboot.h                 | 229 ++++++++-
+ kernel/notifier.c                      | 101 +++-
+ kernel/power/hibernate.c               |   2 +-
+ kernel/reboot.c                        | 622 ++++++++++++++++++++++++-
+ 27 files changed, 980 insertions(+), 116 deletions(-)
+
 -- 
 2.35.1
 
