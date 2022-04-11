@@ -4,31 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A9DC433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:12:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.303301.517540 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9718C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 12 Apr 2022 05:12:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.303303.517556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8os-0000D1-Pm; Tue, 12 Apr 2022 05:12:02 +0000
+	id 1ne8ou-0000bf-N2; Tue, 12 Apr 2022 05:12:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 303301.517540; Tue, 12 Apr 2022 05:12:02 +0000
+Received: by outflank-mailman (output) from mailman id 303303.517556; Tue, 12 Apr 2022 05:12:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ne8or-00006k-Vy; Tue, 12 Apr 2022 05:12:01 +0000
-Received: by outflank-mailman (input) for mailman id 303301;
- Mon, 11 Apr 2022 23:39:37 +0000
+	id 1ne8ot-0000Ws-Ee; Tue, 12 Apr 2022 05:12:03 +0000
+Received: by outflank-mailman (input) for mailman id 303303;
+ Mon, 11 Apr 2022 23:39:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=9GfR=UV=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1ne3dB-0006oE-D0
- for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:39:37 +0000
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+ id 1ne3dF-0006oE-Hl
+ for xen-devel@lists.xenproject.org; Mon, 11 Apr 2022 23:39:41 +0000
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk
+ [2a00:1098:0:82:1000:25:2eeb:e3e3])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a5b9ace5-b9f0-11ec-a405-831a346695d4;
- Tue, 12 Apr 2022 01:39:36 +0200 (CEST)
+ id a828cf33-b9f0-11ec-a405-831a346695d4;
+ Tue, 12 Apr 2022 01:39:40 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id 915191F43D1A
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 909861F43D1D
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +41,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a5b9ace5-b9f0-11ec-a405-831a346695d4
+X-Inumbo-ID: a828cf33-b9f0-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1649720376;
-	bh=/6N1NqWTzjqffsr0MYGq4IYVUQskqSynn6Y334kzapg=;
+	s=mail; t=1649720380;
+	bh=AnjrhaHENsX+9TktlKasoiUkGDZC8u25pvM/oDIQuBM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=mQsjTJIn+P3/qMm6CgQ+bPQ7EleJ40FaGcgtLTxE/ao4KfvFaQYrjidT8XaGySRfW
-	 LtMhTqRxWtDelluYdNNnvCF2SHtqFrhbTq6SQjR/wYerXvArxXHqIe46wUNgoMmR75
-	 e5GuMQ+FN0MnaxSGFHmBAxERZcEN6zLzn9MNxkwOchkm5cUvhvFF3WsvMyY+Wvj/Bf
-	 FZ61MdojqgQMFK3VHKf9XPK7pidFdgqxhl15dckSHVqGqULXhOrHjm1H0/aTJSki+S
-	 2lHLWe0gcmF+BXemoi+m6zGClffgIvI5J5rTM647heG7g0c1/HMiTMFnNnbbpJz5I+
-	 S9piQ2GTV7bFg==
+	b=mCs0xXKXBGwKhSNizz+CrsN6ijBgTwnfXqn6tYSvyJZmHSD5olRTei4LE/G7coxYf
+	 CdB+dreJDhlfyN9XCDD4SviS0SmWim/cg7mtN04vs2oHnCtGBVPT6ckS3CZtoWmbEA
+	 I/gc8aKseKuzeqxAjIsqUT+GOOhAiTI3UhnDIbn6WTaQ5HgsqbEwXHY1aJyLFAveRz
+	 nKPagL8xhkJk3dLCpGc+JnYLWLB19jnsaWShwat50U3lRK/VSm8lo8REWhKYt0uv5+
+	 WvePNPqDKrlZanfab8M+cTo/qPdH4ci3OwDczmWuAhAKwJRpU2wR8ZAyEQyeG2SlI6
+	 aILbZj82gIeeQ==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,9 +113,9 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v7 10/20] xen/x86: Use do_kernel_power_off()
-Date: Tue, 12 Apr 2022 02:38:22 +0300
-Message-Id: <20220411233832.391817-11-dmitry.osipenko@collabora.com>
+Subject: [PATCH v7 11/20] powerpc: Use do_kernel_power_off()
+Date: Tue, 12 Apr 2022 02:38:23 +0300
+Message-Id: <20220411233832.391817-12-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 References: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
@@ -126,32 +127,40 @@ that invokes chained power-off handlers. It also invokes legacy
 pm_power_off() for now, which will be removed once all drivers will
 be converted to the new power-off API.
 
-Acked-by: Juergen Gross <jgross@suse.com>
+Acked-by: Michael Ellerman <mpe@ellerman.id.au>
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- arch/x86/xen/enlighten_pv.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/powerpc/kernel/setup-common.c | 4 +---
+ arch/powerpc/xmon/xmon.c           | 3 +--
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 5038edb79ad5..af1f6e886225 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -31,6 +31,7 @@
- #include <linux/gfp.h>
- #include <linux/edd.h>
- #include <linux/objtool.h>
-+#include <linux/reboot.h>
- 
- #include <xen/xen.h>
- #include <xen/events.h>
-@@ -1071,8 +1072,7 @@ static void xen_machine_halt(void)
- 
- static void xen_machine_power_off(void)
+diff --git a/arch/powerpc/kernel/setup-common.c b/arch/powerpc/kernel/setup-common.c
+index 518ae5aa9410..1b586577e75b 100644
+--- a/arch/powerpc/kernel/setup-common.c
++++ b/arch/powerpc/kernel/setup-common.c
+@@ -161,9 +161,7 @@ void machine_restart(char *cmd)
+ void machine_power_off(void)
  {
+ 	machine_shutdown();
 -	if (pm_power_off)
 -		pm_power_off();
+-
 +	do_kernel_power_off();
- 	xen_reboot(SHUTDOWN_poweroff);
+ 	smp_send_stop();
+ 	machine_hang();
+ }
+diff --git a/arch/powerpc/xmon/xmon.c b/arch/powerpc/xmon/xmon.c
+index fd72753e8ad5..c916bf250796 100644
+--- a/arch/powerpc/xmon/xmon.c
++++ b/arch/powerpc/xmon/xmon.c
+@@ -1243,8 +1243,7 @@ static void bootcmds(void)
+ 	} else if (cmd == 'h') {
+ 		ppc_md.halt();
+ 	} else if (cmd == 'p') {
+-		if (pm_power_off)
+-			pm_power_off();
++		do_kernel_power_off();
+ 	}
  }
  
 -- 
