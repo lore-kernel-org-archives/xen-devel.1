@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E1F9C43217
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 11:47:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.304646.519329 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0838AC433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 11:47:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.304648.519352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nexwZ-00015Y-8v; Thu, 14 Apr 2022 11:47:23 +0000
+	id 1nexwb-0001ak-1k; Thu, 14 Apr 2022 11:47:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 304646.519329; Thu, 14 Apr 2022 11:47:23 +0000
+Received: by outflank-mailman (output) from mailman id 304648.519352; Thu, 14 Apr 2022 11:47:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nexwZ-00015R-5W; Thu, 14 Apr 2022 11:47:23 +0000
-Received: by outflank-mailman (input) for mailman id 304646;
- Thu, 14 Apr 2022 11:47:22 +0000
+	id 1nexwa-0001YU-Qr; Thu, 14 Apr 2022 11:47:24 +0000
+Received: by outflank-mailman (input) for mailman id 304648;
+ Thu, 14 Apr 2022 11:47:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dNZz=UY=citrix.com=prvs=096427a9b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nexwX-0000HT-R1
- for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 11:47:21 +0000
+ id 1nexwZ-0000HT-RL
+ for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 11:47:23 +0000
 Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
  [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a35e2510-bbe8-11ec-8fbd-03012f2f19d4;
- Thu, 14 Apr 2022 13:47:20 +0200 (CEST)
+ id a4aed2f9-bbe8-11ec-8fbd-03012f2f19d4;
+ Thu, 14 Apr 2022 13:47:21 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a35e2510-bbe8-11ec-8fbd-03012f2f19d4
+X-Inumbo-ID: a4aed2f9-bbe8-11ec-8fbd-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1649936840;
+  d=citrix.com; s=securemail; t=1649936841;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=0s1yCBflD3p2q66QNUN1vJ9nlrel+PCFiTRjaDEozt8=;
-  b=T+WRhVlZtU0wpD4hPfsk4Vn9w23aA/V+riqBYqR/7Yas3c55iBHI3AGG
-   +kw3RY1PWAV7zZNMGzLTF5Sw4pSIMY4vMb4jbtCu2JkASj7hRjra92VdS
-   tCKuMp6n3Rm+6ZkQkRkZbOQ5Rfg6JAuF7DEvpI8FIi3loKy2cLxYNoGb+
-   E=;
+  bh=8Uae8bFBeN10HyzNO9f3vkE192c+nPR4Tmdy4ORjMWo=;
+  b=QyJKBNfETaZFBx9x6flcsKxBzets1VirHoH5WuarCncq1qpo94KkGg7T
+   ibb9bMLZ0Gjt57Hh/gbzoCdmQjLwT7d9tsUhWgkl8/bNsBWkk0rQz/A2M
+   flskMcKFzp/h9BwRcqQo0+ZZViLBJyCTG5qA6ubsa+fkthgebE87DqCiA
+   s=;
 Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 68829284
+X-MesageID: 68829285
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:0Ks8dq4J9j4PxqPoJoan2gxRtDTHchMFZxGqfqrLsTDasY5as4F+v
- mAbDG+Ob/yMZDPwLo9+YN+x9kkOu8TUz9RhQQpurHxgHi5G8cbLO4+Ufxz6V8+wwmwvb67FA
- +E2MISowBUcFyeEzvuVGuG96yE6j8lkf5KkYAL+EnkZqTRMFWFw0XqPp8Zj2tQy2YTgX1vU0
- T/Pi5a31GGNimYc3l08s8pvmDs31BglkGpF1rCWTakjUG72zxH5PrpGTU2CByKQrr1vNvy7X
- 47+IISRpQs1yfuP5uSNyd4XemVSKlLb0JPnZnB+A8BOiTAazsA+PzpS2FPxpi67hh3Q9+2dx
- umhurSRYFsiNKjnsd4dXklBNRlaHrZA6Zv+dC3XXcy7lyUqclPpyvRqSko3IZcZ6qB8BmQmG
- f4wcW5XKErZ3qTvnez9GrIEascLdaEHOKs2vH16wC6fJvEhWZ3ZGI3B5MNC3Sd2jcdLdRrbT
- 5RJOWA+NkScC/FJEgsrDZgUp8K3ulXAQydHlF6vp/M6xXeGmWSd15CyaYGIK7RmX/59gUKwt
- m/AuWPjDXkyFvaS1D6E+XKEnfLUkGXwX4d6PK218LtmjUOewkQXCQYKTh2rrP+hkEm8VtlDb
- UsO9UITQbMarRLxCIOnBlvh/SDC7kV0t8ds//MSySjRwaDRyC+jBmVUVxh5TP89st4SfGl/v
- rOWpO/BCTtqubyTbHuS8LaIsD+/URQowX8+iTwsFlVcvYS6yG0npleWF4s4Tvbp5jHgMWuoq
- w1muhTSkFn6YSQj86ygtW7KjDu3znQiZl5kv16HNo5JA+4QWWJEW2BKwQWDhRqjBNzAJrVkg
- JTis5LPhAzpJcvT/BFhuM1XQNmUCwy5GDPdm0VzOJIq6i6g/XWuFagJvm0vdB0xa5hYImS0C
- KM2he+3zMUCVJdNRfUpC79d9uxwlfSwfTgbfq28giVyjmhZK1bcoXAGib+41GHxikk8+ZzTy
- r/AGftA+U0yUPw9pBLvHr91+eZymkgWmDOCLbimnk/P+efPOxaopUItbQLmRvon95mNvAi92
- 48Zb6NmPT0EC7agCsQWmKZORW03wY8TXMmo8J0GKrTeemKL2ggJUpfs/F/oQKQ994w9qwsC1
- ivVtpNwoLYnuUD6FA==
-IronPort-HdrOrdr: A9a23:xLfyg6OVQ0I0hcBcTvujsMiBIKoaSvp037Eqv3oRdfUzSL3hqy
- nOpoVj6faaskdzZJhNo7+90ey7MBfhHP1OkO8s1NWZLWvbUQKTRekIh+aP/9SjIVyYygc079
- YaT0EUMr3N5DZB4/oSmDPIduod/A==
+IronPort-Data: A9a23:3qtVSaxbzqvftlcWBCt6t+c7xirEfRIJ4+MujC+fZmUNrF6WrkVSm
+ jRKD27Xb//ZYDeheYgjPI2xo0IE78SAydZiSlM5/CAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
+ 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGX9JZS5LwbZj2NY02IThWmthh
+ PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
+ gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
+ NpllLXsQg0sFYT2mOlNSj9gNwJlO7xiweqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
+ aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6AN
+ 5pDOGA/MXwsZTVXFXY3U80+w9yRuSL6fz1GpWyRnfYotj27IAtZj+G2bYu9lsaxbdpRtlaVo
+ CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
+ UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO8wTtAqHz4H92QaUVnEidhpic9o3kPZjEFTGy
+ WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WvQVnNL
+ ya2QD/Sbln5peoCzO2F8F/OmFpATbCZH1dutm07so9Ihz6VhbJJhaT1sTA3Dt4ade51q2VtW
+ lBeyqByC8hUU/mweNSlGrllIV1T296LMSfHnXlkFIQ7+jKm9haLJN4MsWEkfB43bp1fJFcFh
+ XM/XysLtfe/21PwM8dKj3+ZUZx2ncAM6/y4PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
+ v+mnTKXJS9CU8xPlWPuL89EiOND7n1ulAv7GMGgpzz6gOX2WZJgYepcWHOUcPsD5b+JyC2Mt
+ Y432z2ikE4EDoUTo0D/rOYuELz9BSFiW8un+pANK7brz8gPMDhJNsI9CIgJI+RN95m5XM+Rl
+ p1hcie0EGbCuEA=
+IronPort-HdrOrdr: A9a23:bW9B1KxCe+7/0kMB+zqiKrPwFr1zdoMgy1knxilNoRw8SK2lfq
+ eV7YwmPH7P+U8ssR4b6LO90cW7Lk80sKQFhbX5Xo3SOjUO2lHYTr2KhLGKq1aLdkHDH6xmpM
+ BdmsBFeabN5DNB7foSjjPXLz9Z+qjjzJyV
 X-IronPort-AV: E=Sophos;i="5.90,259,1643691600"; 
-   d="scan'208";a="68829284"
+   d="scan'208";a="68829285"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
 	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Anthony PERARD
 	<anthony.perard@citrix.com>
-Subject: [PATCH 3/3] x86/build: Clean up boot/Makefile
-Date: Thu, 14 Apr 2022 12:47:08 +0100
-Message-ID: <20220414114708.4788-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 1/3] x86/build: Rework binary conversion for boot/{cmdline,reloc}.c
+Date: Thu, 14 Apr 2022 12:47:06 +0100
+Message-ID: <20220414114708.4788-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20220414114708.4788-1-andrew.cooper3@citrix.com>
 References: <20220414114708.4788-1-andrew.cooper3@citrix.com>
@@ -92,7 +92,15 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-There are no .S intermediate files, so rework in terms of head-bin-objs.
+There is no need to opencode .got.plt size check; it can be done with linker
+asserts instead.  Extend the checking to all dynamic linkage sections, and
+drop the $(OBJDUMP) pass.
+
+Furthermore, instead of removing .got.plt specifically, take only .text when
+converting to a flat binary.  This makes the process invariant of .text's
+position relative to the start of the binary, which avoids needing to discard
+all sections, and removes the need to work around sections that certain
+linkers are unhappy discarding.
 
 No functional change.
 
@@ -102,65 +110,110 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 CC: Wei Liu <wl@xen.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>
-
-I'm slightly -1 on this, because
-
-  head-bin-objs := $(addprefix $(obj)/,$(head-bin-objs))
-
-is substantial obfuscation which I'd prefer to bin.
-
-Anthony: Why does dropping the targets += line interfere with incremental
-builds?  With it gone, *.bin are regenerated unconditionally, but I can't see
-what would cause that, nor why the normal dependencies on head.o don't work.
 ---
- xen/arch/x86/boot/Makefile | 19 ++++++++++---------
- 1 file changed, 10 insertions(+), 9 deletions(-)
+ xen/arch/x86/boot/Makefile    | 13 +---------
+ xen/arch/x86/boot/build32.lds | 58 +++++++++++++++++++------------------------
+ 2 files changed, 26 insertions(+), 45 deletions(-)
 
 diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index 294ac2418583..527f3e393037 100644
+index ca8001c72b23..09d1f9f75394 100644
 --- a/xen/arch/x86/boot/Makefile
 +++ b/xen/arch/x86/boot/Makefile
-@@ -1,16 +1,17 @@
- obj-bin-y += head.o
--head-srcs := cmdline.S reloc.S
+@@ -22,19 +22,8 @@ $(head-srcs): %.S: %.bin
+ 	(od -v -t x $< | tr -s ' ' | awk 'NR > 1 {print s} {s=$$0}' | \
+ 	sed 's/ /,0x/g' | sed 's/,0x$$//' | sed 's/^[0-9]*,/ .long /') >$@
  
--nocov-y += $(head-srcs:.S=.o)
--noubsan-y += $(head-srcs:.S=.o)
--targets += $(head-srcs:.S=.o)
-+head-bin-objs := cmdline.o reloc.o
- 
--head-srcs := $(addprefix $(obj)/, $(head-srcs))
-+nocov-y += $(head-bin-objs)
-+noubsan-y += $(head-bin-objs)
-+targets += $(head-bin-objs)
-+
-+head-bin-objs := $(addprefix $(obj)/,$(head-bin-objs))
- 
- # For .incbin - add $(obj) to the include path and add the dependencies
- # manually as they're not included in .d
- $(obj)/head.o: AFLAGS-y += -Wa$(comma)-I$(obj)
--$(obj)/head.o: $(head-srcs:.S=.bin)
-+$(obj)/head.o: $(head-bin-objs:.o=.bin)
- 
- CFLAGS_x86_32 := $(subst -m64,-m32 -march=i686,$(XEN_TREEWIDE_CFLAGS))
- $(call cc-options-add,CFLAGS_x86_32,CC,$(EMBEDDED_EXTRA_CFLAGS))
-@@ -18,8 +19,8 @@ CFLAGS_x86_32 += -Werror -fno-builtin -g0 -msoft-float
- CFLAGS_x86_32 += -I$(srctree)/include
- 
- # override for 32bit binaries
--$(head-srcs:.S=.o): CFLAGS_stack_boundary :=
--$(head-srcs:.S=.o): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
-+$(head-bin-objs): CFLAGS_stack_boundary :=
-+$(head-bin-objs): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
- 
+-# Drop .got.plt during conversion to plain binary format.
+-# Please check build32.lds for more details.
  %.bin: %.lnk
- 	$(OBJCOPY) -j .text -O binary $< $@
-@@ -27,4 +28,4 @@ $(head-srcs:.S=.o): XEN_CFLAGS := $(CFLAGS_x86_32) -fpic
+-	$(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | \
+-		while read idx name sz rest; do \
+-			case "$$name" in \
+-			.got.plt) \
+-				test $$sz != 0c || continue; \
+-				echo "Error: non-empty $$name: 0x$$sz" >&2; \
+-				exit $$(expr $$idx + 1);; \
+-			esac; \
+-		done
+-	$(OBJCOPY) -O binary -R .got.plt $< $@
++	$(OBJCOPY) -j .text -O binary $< $@
+ 
  %.lnk: %.o $(src)/build32.lds
  	$(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT)) -N -T $(filter %.lds,$^) -o $@ $<
+diff --git a/xen/arch/x86/boot/build32.lds b/xen/arch/x86/boot/build32.lds
+index 1ab941879312..d8fb9170ca40 100644
+--- a/xen/arch/x86/boot/build32.lds
++++ b/xen/arch/x86/boot/build32.lds
+@@ -31,44 +31,36 @@ SECTIONS
+         *(.bss.*)
+   }
  
--clean-files := cmdline.S reloc.S *.lnk *.bin
-+clean-files := *.lnk *.bin
++  /* Dynamic linkage sections.  Collected simply so we can check they're empty. */
++  .got : {
++        *(.got)
++  }
+   .got.plt : {
+-        /*
+-         * PIC/PIE executable contains .got.plt section even if it is not linked
+-         * with dynamic libraries. In such case it is just placeholder for
+-         * _GLOBAL_OFFSET_TABLE_ symbol and .PLT0. .PLT0 is filled by dynamic
+-         * linker and our code is not supposed to be loaded by dynamic linker.
+-         * So, from our point of view .PLT0 is unused. This means that there is
+-         * pretty good chance that we can safely drop .got.plt as a whole here.
+-         * Sadly this is not true. _GLOBAL_OFFSET_TABLE_ is used as a reference
+-         * for relative addressing (and only for that thing) and ld complains if
+-         * we remove .got.plt section here because it cannot find required symbol.
+-         * However, _GLOBAL_OFFSET_TABLE_ is no longer needed in final output.
+-         * So, drop .got.plt section during conversion to plain binary format.
+-         *
+-         * Please check build32.mk for more details.
+-         */
+         *(.got.plt)
+   }
+-
+-  /*
+-   * Discarding .shstrtab is not supported by LLD (LLVM LD) and will trigger an
+-   * error. Also keep the rest of the control sections to match GNU LD behavior.
+-   */
+-  .shstrtab : {
+-        *(.shstrtab)
++  .igot.plt : {
++        *(.igot.plt)
+   }
+-  .strtab : {
+-        *(.strtab)
++  .iplt : {
++        *(.iplt)
+   }
+-  .symtab : {
+-        *(.symtab)
++  .plt : {
++        *(.plt)
+   }
+-
+-  /DISCARD/ : {
+-        /*
+-         * Discard everything else, to prevent linkers from putting
+-         * orphaned sections ahead of .text, which needs to be first.
+-         */
+-        *(*)
++  .rela : {
++        *(.rela.*)
+   }
+ }
++
++ASSERT(SIZEOF(.got) == 0,         ".got non-empty")
++/*
++ * At least GNU ld 2.30 and earlier fail to discard the generic part of
++ * .got.plt when no actual entries were allocated. Permit this case alongside
++ * the section being empty.
++ */
++ASSERT(SIZEOF(.got.plt) == 0 ||
++       SIZEOF(.got.plt) == 3 * 4, "unexpected .got.plt size")
++ASSERT(SIZEOF(.igot.plt) == 0,    ".igot.plt non-empty")
++ASSERT(SIZEOF(.iplt) == 0,        ".iplt non-empty")
++ASSERT(SIZEOF(.plt) == 0,         ".plt non-empty")
++ASSERT(SIZEOF(.rela) == 0,        "leftover relocations")
 -- 
 2.11.0
 
