@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73BE7C4332F
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 19:20:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.305047.519874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBB7C433FE
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 19:20:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.305045.519852 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nf50J-0005aW-UM; Thu, 14 Apr 2022 19:19:43 +0000
+	id 1nf50I-00055F-8x; Thu, 14 Apr 2022 19:19:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 305047.519874; Thu, 14 Apr 2022 19:19:43 +0000
+Received: by outflank-mailman (output) from mailman id 305045.519852; Thu, 14 Apr 2022 19:19:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nf50J-0005aP-RK; Thu, 14 Apr 2022 19:19:43 +0000
-Received: by outflank-mailman (input) for mailman id 305047;
- Thu, 14 Apr 2022 19:19:42 +0000
+	id 1nf50I-000558-5O; Thu, 14 Apr 2022 19:19:42 +0000
+Received: by outflank-mailman (input) for mailman id 305045;
+ Thu, 14 Apr 2022 19:19:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RCiM=UY=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1nf50I-00054x-GV
- for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 19:19:42 +0000
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [2a00:1450:4864:20::133])
+ id 1nf50G-00054x-8T
+ for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 19:19:40 +0000
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [2a00:1450:4864:20::130])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id d5956c64-bc27-11ec-8fbe-03012f2f19d4;
- Thu, 14 Apr 2022 21:19:41 +0200 (CEST)
-Received: by mail-lf1-x133.google.com with SMTP id b21so10776889lfb.5
- for <xen-devel@lists.xenproject.org>; Thu, 14 Apr 2022 12:19:41 -0700 (PDT)
+ id d419adcc-bc27-11ec-8fbe-03012f2f19d4;
+ Thu, 14 Apr 2022 21:19:39 +0200 (CEST)
+Received: by mail-lf1-x130.google.com with SMTP id p10so10721585lfa.12
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Apr 2022 12:19:39 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- l3-20020a194943000000b0046b928d2795sm85001lfj.67.2022.04.14.12.19.39
+ l3-20020a194943000000b0046b928d2795sm85001lfj.67.2022.04.14.12.19.36
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 14 Apr 2022 12:19:40 -0700 (PDT)
+ Thu, 14 Apr 2022 12:19:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,382 +46,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d5956c64-bc27-11ec-8fbe-03012f2f19d4
+X-Inumbo-ID: d419adcc-bc27-11ec-8fbe-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=nXDE5bXmpYq/ePRB6NaY2RzAfrYEzRtO2mFypRZiPSg=;
-        b=cA7nvITvdvZ/NWohiTI9yXw9Bsz1InbMamu75ldsnVN7x3qmhXLAyGvrPtVVlEgWuL
-         NZ3WkBCQbtGZmGnVfZF2FI0zW3lSrAaEiYaf3NmzuajCnK038Drh9zTO0b7nSusi4CnL
-         e1qZbPPKBKFxxe5DFB0XvQaj7wjjs2o9wvNtVpddBoGigZZMnKaYx5+oaeq3JQzLKw0i
-         dmCDvFfxnorQ4mEMq5dbKyVJvdzCrQPa7QBoW2pSIpyUfluDWhcpbCpCEOrh3ERVZ6RQ
-         JHqdT6uWfB4Vl0qS8RUuuhOok2RLcjf5S86uHftuQb/SnSZkGxKzOpqLEaWYzD0UAaz4
-         EOBw==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=hBeYUJyh8cohFIBXMw+rp2zvHseFstsvrmjjJq6v1RA=;
+        b=OS9Zyyw11+ahcSbaFBwnet4m/+SqFvTSxBJAra7HuBWht0AJqsov+byDRY2fDcE7Cs
+         ytQj6zRGrqwIncCbAZw9crMvkswQ0zpZovlwDav7PgeiWph9GDH1Vn+lFgWyfq4pf9Q6
+         D2bG8OWhifqZbowaCdO0dbVut/XPPk2sn+J4gDQPfI0IRUkzB49h1qS2s77WM2wj6Hc0
+         XiiWyRzeOYZiYXi7x7A/rRQlZHH+glMqunBBbrU6BwKqFdu1m5oH6E29FDom7ZKFAHyW
+         2ozw4PRAgrtB8ITcoMnvHW1txGeX3p4mnMFmtLnTd+4XkolWYRvNXGTibUY+EzZSgMXW
+         D3vw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=nXDE5bXmpYq/ePRB6NaY2RzAfrYEzRtO2mFypRZiPSg=;
-        b=sgOKNksVCeJ0vfPhlYl3dls2dYRr4Tt8ncOo8JIONmfhB8m5YmQ5959AFhYn3dkziT
-         cGRiyel9Q3vaqMV5PInb6rZyUlgAFAar09gKHcMKuuDsMRuORJjB+2bGKPxVfp6DDUt4
-         cl/ewW0DIQ19aKPdfH4hK4Z8SYeMQzreGIZsVJEr99D5VLMIRaJjD44rj4d1Eblp1UIc
-         j6CBxWGC82i/ldyYmQPfq2RSBDDbjLqAJWOKuh7neUinw87Xw7+jCWWxIM79Q/IGUU7y
-         BzH8Kf3VDC4oriUb09D/MiRXT3xLPa60b4TiL3J64lzCcj0XxxYMzJucK1kQOXbirNqa
-         bZ3w==
-X-Gm-Message-State: AOAM532CjZ7IuUbvQWNvrDiAAkYsty+btwwKWSay1qxOY0/V+uAhQHoC
-	eZqmDQ6Sh3esp8gzuRtTszhCQOWl7yU=
-X-Google-Smtp-Source: ABdhPJzJhDvPs8vZGIIBknd5EoVx+RBEPyUKlr3iat2rqmV3Cugsf4QEmPHWFroNg//S6JCMgOBeAA==
-X-Received: by 2002:a05:6512:b18:b0:44a:9a1f:dcf6 with SMTP id w24-20020a0565120b1800b0044a9a1fdcf6mr2838218lfu.4.1649963980695;
-        Thu, 14 Apr 2022 12:19:40 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=hBeYUJyh8cohFIBXMw+rp2zvHseFstsvrmjjJq6v1RA=;
+        b=hAZmmcU5Owv+s0GbrbfllirN7dzhY7fl4g5me5r7uNjrBvBVv6ggtl4Gju2Es6eNeT
+         BbA54HK0DUoRmjMNSXactDKPojFPZWssYXnTNoKUO1BYc6VCpTFV0BY/wSE0YmPrn3Bq
+         uP/jnnwECzeXG5x7m6c+dMlH4HIc7TOEH5w30o8aCJc0emDYViIVuvSJ1SnD4PJtYD34
+         MrfWjt06NGSbVvhanhnsEBudqc88DhQ5OR++4y4Sic85gvF9170+ghWamHFvZEejGhNp
+         PdsdaP1xukKkDRle62QjmmZzh2PMN+MpxR4GWHxpcYy9WedUY2zAjc8WoTvxpfjco7nA
+         +TDQ==
+X-Gm-Message-State: AOAM533zINWnobCY7AB3LklX+m+KEJsGfPnX2mId1grteYswviyZJkSb
+	o1VRjf0Uh6LvaHQRuYg3mkKSXR1XXoY=
+X-Google-Smtp-Source: ABdhPJyF5XrQhJyJg+R3ILmVTNsDHntbRwzflHI2RtvXh6tjp4CUiSxKClbc5XPs/9iS6Kt3RoSWZQ==
+X-Received: by 2002:ac2:4d18:0:b0:46b:c318:193b with SMTP id r24-20020ac24d18000000b0046bc318193bmr2602821lfi.293.1649963978137;
+        Thu, 14 Apr 2022 12:19:38 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	virtualization@lists.linux-foundation.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Subject: [RFC PATCH 2/6] virtio: add option to restrict memory access under Xen
-Date: Thu, 14 Apr 2022 22:19:29 +0300
-Message-Id: <1649963973-22879-3-git-send-email-olekstysh@gmail.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Wei Chen <Wei.Chen@arm.com>,
+	Henry Wang <Henry.Wang@arm.com>,
+	Kaly Xin <Kaly.Xin@arm.com>,
+	Jiamei Xie <Jiamei.Xie@arm.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
+Subject: [RFC PATCH 0/6] virtio: Solution to restrict memory access under Xen using xen-virtio DMA ops layer
+Date: Thu, 14 Apr 2022 22:19:27 +0300
+Message-Id: <1649963973-22879-1-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1649963973-22879-1-git-send-email-olekstysh@gmail.com>
-References: <1649963973-22879-1-git-send-email-olekstysh@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Juergen Gross <jgross@suse.com>
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-In order to support virtio in Xen guests add a config option enabling
-the user to specify whether in all Xen guests virtio should be able to
-access memory via Xen grant mappings only on the host side.
+Hello all.
 
-This applies to fully virtualized guests only, as for paravirtualized
-guests this is mandatory.
+The purpose of this RFC patch series is to add support for restricting memory access under Xen using specific
+grant table based DMA ops layer. Patch series is based on Juergen Gross’ initial work [1] which implies using
+grant references instead of raw guest physical addresses (GPA) for the virtio communications (some kind of
+the software IOMMU).
 
-This requires to switch arch_has_restricted_virtio_memory_access()
-from a pure stub to a real function on x86 systems (Arm systems are
-not covered by now).
+The high level idea is to create new Xen’s grant table based DMA ops layer for the guest Linux whose main
+purpose is to provide a special 64-bit DMA address which is formed by using the grant reference (for a page
+to be shared with the backend) with offset and setting the highest address bit (this is for the backend to
+be able to distinguish grant ref based DMA address from normal GPA). For this to work we need the ability
+to allocate contiguous (consecutive) grant references for multi-page allocations. And the backend then needs
+to offer VIRTIO_F_ACCESS_PLATFORM and VIRTIO_F_VERSION_1 feature bits (it must support virtio-mmio modern
+transport for 64-bit addresses in the virtqueue).
 
-Add the needed functionality by providing a special set of DMA ops
-handling the needed grant operations for the I/O pages.
+Xen's grant mapping mechanism is the secure and safe solution to share pages between domains which proven
+to work and works for years (in the context of traditional Xen PV drivers for example). So far, the foreign
+mapping is used for the virtio backend to map and access guest memory. With the foreign mapping, the backend
+is able to map arbitrary pages from the guest memory (or even from Dom0 memory). And as the result, the malicious
+backend which runs in a non-trusted domain can take advantage of this. Instead, with the grant mapping
+the backend is only allowed to map pages which were explicitly granted by the guest before and nothing else. 
+According to the discussions in various mainline threads this solution would likely be welcome because it
+perfectly fits in the security model Xen provides. 
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/mm/init.c        |  15 ++++
- arch/x86/mm/mem_encrypt.c |   5 --
- arch/x86/xen/Kconfig      |   9 +++
- drivers/xen/Kconfig       |  20 ++++++
- drivers/xen/Makefile      |   1 +
- drivers/xen/xen-virtio.c  | 177 ++++++++++++++++++++++++++++++++++++++++++++++
- include/xen/xen-ops.h     |   8 +++
- 7 files changed, 230 insertions(+), 5 deletions(-)
+What is more, the grant table based solution requires zero changes to the Xen hypervisor itself at least
+with virtio-mmio and DT (in comparison, for example, with "foreign mapping + virtio-iommu" solution which would
+require the whole new complex emulator in hypervisor in addition to new functionality/hypercall to pass IOVA
+from the virtio backend running elsewhere to the hypervisor and translate it to the GPA before mapping into
+P2M or denying the foreign mapping request if no corresponding IOVA-GPA mapping present in the IOMMU page table
+for that particular device). We only need to update toolstack to insert a new "xen,dev-domid" property to
+the virtio-mmio device node when creating a guest device-tree (this is an indicator for the guest to use grants
+and the ID of Xen domain where the corresponding backend resides, it is used as an argument to the grant mapping
+APIs). It worth mentioning that toolstack patch is based on non  upstreamed yet “Virtio support for toolstack
+on Arm” series which is on review now [2].
+
+Please note the following:
+- Patch series only covers Arm and virtio-mmio (device-tree) for now. To enable the restricted memory access
+  feature on Arm the following options should be set:
+  CONFIG_XEN_VIRTIO = y
+  CONFIG_XEN_HVM_VIRTIO_GRANT = y
+- Some callbacks in xen-virtio DMA ops layer (map_sg/unmap_sg, etc) are not implemented yet as they are not
+  needed/used in the first prototype
+
+Patch series is rebased on Linux 5.18-rc2 tag and tested on Renesas Salvator-X board + H3 ES3.0 SoC (Arm64)
+with standalone userspace (non-Qemu) virtio-mmio based virtio-disk backend running in Driver domain and Linux
+guest running on existing virtio-blk driver (frontend). No issues were observed. Guest domain 'reboot/destroy'
+use-cases work properly. I have also tested other use-cases such as assigning several virtio block devices
+or a mix of virtio and Xen PV block devices to the guest. 
+
+1. Xen changes located at (last patch):
+https://github.com/otyshchenko1/xen/commits/libxl_virtio_next
+2. Linux changes located at:
+https://github.com/otyshchenko1/linux/commits/virtio_grant5
+3. virtio-disk changes located at:
+https://github.com/otyshchenko1/virtio-disk/commits/virtio_grant
+
+Any feedback/help would be highly appreciated.
+
+[1] https://www.youtube.com/watch?v=IrlEdaIUDPk
+[2] https://lore.kernel.org/xen-devel/1649442065-8332-1-git-send-email-olekstysh@gmail.com/
+
+Juergen Gross (2):
+  xen/grants: support allocating consecutive grants
+  virtio: add option to restrict memory access under Xen
+
+Oleksandr Tyshchenko (4):
+  dt-bindings: xen: Add xen,dev-domid property description for
+    xen-virtio layer
+  virtio: Various updates to xen-virtio DMA ops layer
+  arm/xen: Introduce xen_setup_dma_ops()
+  arm/xen: Assign xen-virtio DMA ops for virtio devices in Xen guests
+
+ .../devicetree/bindings/virtio/xen,dev-domid.yaml  |  39 +++
+ arch/arm/include/asm/xen/xen-ops.h                 |   1 +
+ arch/arm/mm/dma-mapping.c                          |   5 +-
+ arch/arm/xen/enlighten.c                           |  11 +
+ arch/arm64/include/asm/xen/xen-ops.h               |   1 +
+ arch/arm64/mm/dma-mapping.c                        |   5 +-
+ arch/x86/mm/init.c                                 |  15 +
+ arch/x86/mm/mem_encrypt.c                          |   5 -
+ arch/x86/xen/Kconfig                               |   9 +
+ drivers/xen/Kconfig                                |  20 ++
+ drivers/xen/Makefile                               |   1 +
+ drivers/xen/grant-table.c                          | 238 +++++++++++++--
+ drivers/xen/xen-virtio.c                           | 335 +++++++++++++++++++++
+ include/xen/arm/xen-ops.h                          |  20 ++
+ include/xen/grant_table.h                          |   4 +
+ include/xen/xen-ops.h                              |  13 +
+ 16 files changed, 679 insertions(+), 43 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/virtio/xen,dev-domid.yaml
+ create mode 100644 arch/arm/include/asm/xen/xen-ops.h
+ create mode 100644 arch/arm64/include/asm/xen/xen-ops.h
  create mode 100644 drivers/xen/xen-virtio.c
+ create mode 100644 include/xen/arm/xen-ops.h
 
-diff --git a/arch/x86/mm/init.c b/arch/x86/mm/init.c
-index d8cfce2..526a3b2 100644
---- a/arch/x86/mm/init.c
-+++ b/arch/x86/mm/init.c
-@@ -8,6 +8,8 @@
- #include <linux/kmemleak.h>
- #include <linux/sched/task.h>
- 
-+#include <xen/xen.h>
-+
- #include <asm/set_memory.h>
- #include <asm/e820/api.h>
- #include <asm/init.h>
-@@ -1065,3 +1067,16 @@ unsigned long max_swapfile_size(void)
- 	return pages;
- }
- #endif
-+
-+#ifdef CONFIG_ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS
-+int arch_has_restricted_virtio_memory_access(void)
-+{
-+	if (IS_ENABLED(CONFIG_XEN_PV_VIRTIO) && xen_pv_domain())
-+		return 1;
-+	if (IS_ENABLED(CONFIG_XEN_HVM_VIRTIO_GRANT) && xen_hvm_domain())
-+		return 1;
-+
-+	return cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT);
-+}
-+EXPORT_SYMBOL_GPL(arch_has_restricted_virtio_memory_access);
-+#endif
-diff --git a/arch/x86/mm/mem_encrypt.c b/arch/x86/mm/mem_encrypt.c
-index 50d2099..dda020f 100644
---- a/arch/x86/mm/mem_encrypt.c
-+++ b/arch/x86/mm/mem_encrypt.c
-@@ -77,8 +77,3 @@ void __init mem_encrypt_init(void)
- 	print_mem_encrypt_feature_info();
- }
- 
--int arch_has_restricted_virtio_memory_access(void)
--{
--	return cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT);
--}
--EXPORT_SYMBOL_GPL(arch_has_restricted_virtio_memory_access);
-diff --git a/arch/x86/xen/Kconfig b/arch/x86/xen/Kconfig
-index 85246dd..dffdffd 100644
---- a/arch/x86/xen/Kconfig
-+++ b/arch/x86/xen/Kconfig
-@@ -92,3 +92,12 @@ config XEN_DOM0
- 	select X86_X2APIC if XEN_PVH && X86_64
- 	help
- 	  Support running as a Xen Dom0 guest.
-+
-+config XEN_PV_VIRTIO
-+	bool "Xen virtio support for PV guests"
-+	depends on XEN_VIRTIO && XEN_PV
-+	default y
-+	help
-+	  Support virtio for running as a paravirtualized guest. This will
-+	  need support on the backend side (qemu or kernel, depending on the
-+	  virtio device types used).
-diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index 120d32f..fc61f7a 100644
---- a/drivers/xen/Kconfig
-+++ b/drivers/xen/Kconfig
-@@ -335,4 +335,24 @@ config XEN_UNPOPULATED_ALLOC
- 	  having to balloon out RAM regions in order to obtain physical memory
- 	  space to create such mappings.
- 
-+config XEN_VIRTIO
-+	bool "Xen virtio support"
-+	default n
-+	depends on VIRTIO && DMA_OPS
-+	select ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS
-+	help
-+	  Enable virtio support for running as Xen guest. Depending on the
-+	  guest type this will require special support on the backend side
-+	  (qemu or kernel, depending on the virtio device types used).
-+
-+config XEN_HVM_VIRTIO_GRANT
-+	bool "Require virtio for fully virtualized guests to use grant mappings"
-+	depends on XEN_VIRTIO && X86_64
-+	default y
-+	help
-+	  Require virtio for fully virtualized guests to use grant mappings.
-+	  This will avoid the need to give the backend the right to map all
-+	  of the guest memory. This will need support on the backend side
-+	  (qemu or kernel, depending on the virtio device types used).
-+
- endmenu
-diff --git a/drivers/xen/Makefile b/drivers/xen/Makefile
-index 5aae66e..767009c 100644
---- a/drivers/xen/Makefile
-+++ b/drivers/xen/Makefile
-@@ -39,3 +39,4 @@ xen-gntalloc-y				:= gntalloc.o
- xen-privcmd-y				:= privcmd.o privcmd-buf.o
- obj-$(CONFIG_XEN_FRONT_PGDIR_SHBUF)	+= xen-front-pgdir-shbuf.o
- obj-$(CONFIG_XEN_UNPOPULATED_ALLOC)	+= unpopulated-alloc.o
-+obj-$(CONFIG_XEN_VIRTIO)		+= xen-virtio.o
-diff --git a/drivers/xen/xen-virtio.c b/drivers/xen/xen-virtio.c
-new file mode 100644
-index 00000000..cfd5eda
---- /dev/null
-+++ b/drivers/xen/xen-virtio.c
-@@ -0,0 +1,177 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/******************************************************************************
-+ * Xen virtio driver - enables using virtio devices in Xen guests.
-+ *
-+ * Copyright (c) 2021, Juergen Gross <jgross@suse.com>
-+ */
-+
-+#include <linux/module.h>
-+#include <linux/dma-map-ops.h>
-+#include <linux/pci.h>
-+#include <linux/pfn.h>
-+#include <linux/virtio_config.h>
-+#include <xen/xen.h>
-+#include <xen/grant_table.h>
-+
-+#define XEN_GRANT_ADDR_OFF	0x8000000000000000ULL
-+
-+static inline dma_addr_t grant_to_dma(grant_ref_t grant)
-+{
-+	return XEN_GRANT_ADDR_OFF | ((dma_addr_t)grant << PAGE_SHIFT);
-+}
-+
-+static inline grant_ref_t dma_to_grant(dma_addr_t dma)
-+{
-+	return (grant_ref_t)((dma & ~XEN_GRANT_ADDR_OFF) >> PAGE_SHIFT);
-+}
-+
-+/*
-+ * DMA ops for Xen virtio frontends.
-+ *
-+ * Used to act as a kind of software IOMMU for Xen guests by using grants as
-+ * DMA addresses.
-+ * Such a DMA address is formed by using the grant reference as a frame
-+ * number and setting the highest address bit (this bit is for the backend
-+ * to be able to distinguish it from e.g. a mmio address).
-+ *
-+ * Note that for now we hard wire dom0 to be the backend domain. In order to
-+ * support any domain as backend we'd need to add a way to communicate the
-+ * domid of this backend, e.g. via Xenstore or via the PCI-device's config
-+ * space.
-+ */
-+static void *xen_virtio_dma_alloc(struct device *dev, size_t size,
-+				  dma_addr_t *dma_handle, gfp_t gfp,
-+				  unsigned long attrs)
-+{
-+	unsigned int n_pages = PFN_UP(size);
-+	unsigned int i;
-+	unsigned long pfn;
-+	grant_ref_t grant;
-+	void *ret;
-+
-+	ret = (void *)__get_free_pages(gfp, get_order(size));
-+	if (!ret)
-+		return NULL;
-+
-+	pfn = virt_to_pfn(ret);
-+
-+	if (gnttab_alloc_grant_reference_seq(n_pages, &grant)) {
-+		free_pages((unsigned long)ret, get_order(size));
-+		return NULL;
-+	}
-+
-+	for (i = 0; i < n_pages; i++) {
-+		gnttab_grant_foreign_access_ref(grant + i, 0,
-+						pfn_to_gfn(pfn + i), 0);
-+	}
-+
-+	*dma_handle = grant_to_dma(grant);
-+
-+	return ret;
-+}
-+
-+static void xen_virtio_dma_free(struct device *dev, size_t size, void *vaddr,
-+				dma_addr_t dma_handle, unsigned long attrs)
-+{
-+	unsigned int n_pages = PFN_UP(size);
-+	unsigned int i;
-+	grant_ref_t grant;
-+
-+	grant = dma_to_grant(dma_handle);
-+
-+	for (i = 0; i < n_pages; i++)
-+		gnttab_end_foreign_access_ref(grant + i);
-+
-+	gnttab_free_grant_reference_seq(grant, n_pages);
-+
-+	free_pages((unsigned long)vaddr, get_order(size));
-+}
-+
-+static struct page *xen_virtio_dma_alloc_pages(struct device *dev, size_t size,
-+					       dma_addr_t *dma_handle,
-+					       enum dma_data_direction dir,
-+					       gfp_t gfp)
-+{
-+	WARN_ONCE(1, "xen_virtio_dma_alloc_pages size %ld\n", size);
-+	return NULL;
-+}
-+
-+static void xen_virtio_dma_free_pages(struct device *dev, size_t size,
-+				      struct page *vaddr, dma_addr_t dma_handle,
-+				      enum dma_data_direction dir)
-+{
-+	WARN_ONCE(1, "xen_virtio_dma_free_pages size %ld\n", size);
-+}
-+
-+static dma_addr_t xen_virtio_dma_map_page(struct device *dev, struct page *page,
-+					  unsigned long offset, size_t size,
-+					  enum dma_data_direction dir,
-+					  unsigned long attrs)
-+{
-+	grant_ref_t grant;
-+
-+	if (gnttab_alloc_grant_references(1, &grant))
-+		return 0;
-+
-+	gnttab_grant_foreign_access_ref(grant, 0, xen_page_to_gfn(page),
-+					dir == DMA_TO_DEVICE);
-+
-+	return grant_to_dma(grant) + offset;
-+}
-+
-+static void xen_virtio_dma_unmap_page(struct device *dev, dma_addr_t dma_handle,
-+				      size_t size, enum dma_data_direction dir,
-+				      unsigned long attrs)
-+{
-+	grant_ref_t grant;
-+
-+	grant = dma_to_grant(dma_handle);
-+
-+	gnttab_end_foreign_access_ref(grant);
-+
-+	gnttab_free_grant_reference(grant);
-+}
-+
-+static int xen_virtio_dma_map_sg(struct device *dev, struct scatterlist *sg,
-+				 int nents, enum dma_data_direction dir,
-+				 unsigned long attrs)
-+{
-+	WARN_ONCE(1, "xen_virtio_dma_map_sg nents %d\n", nents);
-+	return -EINVAL;
-+}
-+
-+static void xen_virtio_dma_unmap_sg(struct device *dev, struct scatterlist *sg,
-+				    int nents, enum dma_data_direction dir,
-+				    unsigned long attrs)
-+{
-+	WARN_ONCE(1, "xen_virtio_dma_unmap_sg nents %d\n", nents);
-+}
-+
-+static int xen_virtio_dma_dma_supported(struct device *dev, u64 mask)
-+{
-+	return 1;
-+}
-+
-+static const struct dma_map_ops xen_virtio_dma_ops = {
-+	.alloc = xen_virtio_dma_alloc,
-+	.free = xen_virtio_dma_free,
-+	.alloc_pages = xen_virtio_dma_alloc_pages,
-+	.free_pages = xen_virtio_dma_free_pages,
-+	.mmap = dma_common_mmap,
-+	.get_sgtable = dma_common_get_sgtable,
-+	.map_page = xen_virtio_dma_map_page,
-+	.unmap_page = xen_virtio_dma_unmap_page,
-+	.map_sg = xen_virtio_dma_map_sg,
-+	.unmap_sg = xen_virtio_dma_unmap_sg,
-+	.dma_supported = xen_virtio_dma_dma_supported,
-+};
-+
-+void xen_virtio_setup_dma_ops(struct device *dev)
-+{
-+	dev->dma_ops = &xen_virtio_dma_ops;
-+}
-+EXPORT_SYMBOL_GPL(xen_virtio_setup_dma_ops);
-+
-+MODULE_DESCRIPTION("Xen virtio support driver");
-+MODULE_AUTHOR("Juergen Gross <jgross@suse.com>");
-+MODULE_LICENSE("GPL");
-diff --git a/include/xen/xen-ops.h b/include/xen/xen-ops.h
-index a3584a3..ae3c1bc 100644
---- a/include/xen/xen-ops.h
-+++ b/include/xen/xen-ops.h
-@@ -221,4 +221,12 @@ static inline void xen_preemptible_hcall_end(void) { }
- 
- #endif /* CONFIG_XEN_PV && !CONFIG_PREEMPTION */
- 
-+#ifdef CONFIG_XEN_VIRTIO
-+void xen_virtio_setup_dma_ops(struct device *dev);
-+#else
-+static inline void xen_virtio_setup_dma_ops(struct device *dev)
-+{
-+}
-+#endif /* CONFIG_XEN_VIRTIO */
-+
- #endif /* INCLUDE_XEN_OPS_H */
 -- 
 2.7.4
 
