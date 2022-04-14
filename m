@@ -4,32 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A3FCC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 18:28:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.305023.519819 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B96C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 18:36:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.305028.519830 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nf4CZ-00077o-7C; Thu, 14 Apr 2022 18:28:19 +0000
+	id 1nf4KD-0000Ak-0Y; Thu, 14 Apr 2022 18:36:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 305023.519819; Thu, 14 Apr 2022 18:28:19 +0000
+Received: by outflank-mailman (output) from mailman id 305028.519830; Thu, 14 Apr 2022 18:36:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nf4CZ-00077h-49; Thu, 14 Apr 2022 18:28:19 +0000
-Received: by outflank-mailman (input) for mailman id 305023;
- Thu, 14 Apr 2022 18:28:17 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nf4KC-0000Ac-Tt; Thu, 14 Apr 2022 18:36:12 +0000
+Received: by outflank-mailman (input) for mailman id 305028;
+ Thu, 14 Apr 2022 18:36:11 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DvB4=UY=rere.qmqm.pl=mirq-linux@srs-se1.protection.inumbo.net>)
- id 1nf4CW-00077b-QS
- for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 18:28:17 +0000
-Received: from rere.qmqm.pl (rere.qmqm.pl [91.227.64.183])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a6076b8e-bc20-11ec-a405-831a346695d4;
- Thu, 14 Apr 2022 20:28:15 +0200 (CEST)
-Received: from remote.user (localhost [127.0.0.1])
- by rere.qmqm.pl (Postfix) with ESMTPSA id 4KfSCW69gWz4X;
- Thu, 14 Apr 2022 20:09:27 +0200 (CEST)
+ <SRS0=dNZz=UY=citrix.com=prvs=096427a9b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1nf4KB-0000AW-AI
+ for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 18:36:11 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ba977b17-bc21-11ec-8fbe-03012f2f19d4;
+ Thu, 14 Apr 2022 20:36:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,92 +38,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a6076b8e-bc20-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=rere.qmqm.pl; s=1;
-	t=1649959782; bh=dFgq80ZhVmCzh8EszsBqFZFG3IVVYvOIEvlGI0Tq4bM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=M6meHZrwxDyeU2pD3ZmxqrGIOzrLBQXdCeqnbtwDtUq7d8NQ4FnteJZa5YFykZ6e+
-	 X355Jw6iEC8xz5YVcTjA7IGBOIrhJJnO2gyLkF37nJHv3MgLZmJqPn2G0I5dDKnrg4
-	 F4lkBza7OIX6WAPVjLgmrFFU3bI2WDyTsmq3yRNaX+0PJysAXwkYCJl0nPOwBhBgob
-	 8slrsU1NRKlCWPtWM49DA1EczNJlhcfy1OC/YVXW0ILmdWA2Y4HIWMLSnQstsdxWpp
-	 LxCcPEO0wf/x0jtEuJ4NrLpxwq+b047xHqknUEqc50McWrzi2dQf66NZb5+xCwTgL8
-	 LJAaOowB2v/uQ==
-X-Virus-Status: Clean
-X-Virus-Scanned: clamav-milter 0.103.5 at mail
-Date: Thu, 14 Apr 2022 20:09:26 +0200
-From: =?iso-8859-2?Q?Micha=B3_Miros=B3aw?= <mirq-linux@rere.qmqm.pl>
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Cc: Thierry Reding <thierry.reding@gmail.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>,
-	Geert Uytterhoeven <geert@linux-m68k.org>,
-	Greg Ungerer <gerg@linux-m68k.org>,
-	Joshua Thompson <funaho@jurai.org>,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-	Sebastian Reichel <sre@kernel.org>,
-	Linus Walleij <linus.walleij@linaro.org>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Greentime Hu <green.hu@gmail.com>,
-	Vincent Chen <deanbo422@gmail.com>,
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-	Helge Deller <deller@gmx.de>, Michael Ellerman <mpe@ellerman.id.au>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	Paul Mackerras <paulus@samba.org>,
-	Paul Walmsley <paul.walmsley@sifive.com>,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Albert Ou <aou@eecs.berkeley.edu>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Rich Felker <dalias@libc.org>, Thomas Gleixner <tglx@linutronix.de>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Len Brown <lenb@kernel.org>,
-	Santosh Shilimkar <ssantosh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Pavel Machek <pavel@ucw.cz>,
-	Lee Jones <lee.jones@linaro.org>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Daniel Lezcano <daniel.lezcano@linaro.org>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Ulf Hansson <ulf.hansson@linaro.org>, linux-kernel@vger.kernel.org,
-	linux-csky@vger.kernel.org, linux-ia64@vger.kernel.org,
-	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
-	linux-parisc@vger.kernel.org, linux-riscv@lists.infradead.org,
-	linux-sh@vger.kernel.org, xen-devel@lists.xenproject.org,
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-tegra@vger.kernel.org
-Subject: Re: [PATCH v7 00/20] Introduce power-off+restart call chain API
-Message-ID: <YlhjVqStJJoL01v9@qmqm.qmqm.pl>
-References: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
+X-Inumbo-ID: ba977b17-bc21-11ec-8fbe-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1649961361;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Di5+t/87BhZxgJtY2Uvlne/fduhLkHlu/xbxATrt2uA=;
+  b=SFuyBtXT2dC4iogrYILcqXB7HIphyPzrXtz6ws4bU4zU8uY5JB9PWyad
+   e4eUVrlcki8SSbtgAenOF+8ebkSe/wh/L0kuxXSWx+g0We74GX56qNMxM
+   e62ewhLeqookYNwe5KbD5vjmlB0I1D4ZbAIhBQZcBBwlIceUkrmwc7OYZ
+   I=;
+Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 5.1
+X-MesageID: 69399701
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:gb87g6PeZSpM++HvrR2gl8FynXyQoLVcMsEvi/4bfWQNrUojhGEDm
+ mQcWTrTb//ZZmfxfdx/PIW280lVucKAmoNkQAto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFcMpBsJ00o5wbZl29Iw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z2
+ Y5GlZLhZycQeY7Bs/1FcDMJIQREFPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALBc/nJo4A/FpnyinUF60OSpHfWaTao9Rf2V/cg+gQTK2PN
+ pVBMFKDajzcTydzC1U1CKksp9mawVj6KWFlhkqK8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
+ G2u10bTDwweNdef4SGY6X/qjejK9QvrVYRXGLCm+/pChFyI2ndVGBAQTUG8o/Sylgi5Qd03F
+ qAP0nNw9+5orhXtF4SjGU3jyJKZgvICc8sLGM00uS+t8+337i2AXksuHwxkUvVz4afaWgcW/
+ lOOmtroAxlmv7uUVW+R+9+okN+iBcQGBTRcPHFZFGPp9/Gm+dhu1UyXEr6PBYbv1rXI9SfML
+ ydmRcTUr5EaloY12qqy5jgraBr898GSHmbZCug6N19JDz+Vhqb4P+RECnCBtJ6sybp1qHHb7
+ RDofODEsogz4WmlznDlfQn0NOjBCwy5GDPdm0VzOJIq6i6g/XWuFagJvm0vdB0xa5hYImS0C
+ KM2he+3zMUCVJdNRfUpC79d9uxwlfSwfTgbfq28giVyjmhZK1bcoXAGib+41GHxikk8+ZzTy
+ r/AGftA+U0yUPw9pBLvHr91+eZymkgWmDOCLbimnk/P+efPOxaopUItbQLmghYRt/jf/m04M
+ r93aqO39vmoeLSnPHKGoNJJcAhiwLpSLcmelvG7v9WremJOcFzNwdeKqV/9U+SJR5hoq9o=
+IronPort-HdrOrdr: A9a23:PYKRSK3qmF34E6oB7wBCuQqjBIokLtp133Aq2lEZdPRUGvb3qy
+ nIpoVj6faUskd2ZJhOo7C90cW7LU80sKQFhLX5Xo3SOzUO2lHYT72KhLGKq1aLdhEWtNQtsZ
+ uIG5IOcOEYZmIasS+V2maF+q4bsbu6zJw=
+X-IronPort-AV: E=Sophos;i="5.90,260,1643691600"; 
+   d="scan'208";a="69399701"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Anthony PERARD
+	<anthony.perard@citrix.com>
+Subject: [PATCH v2] xen/build: Fix dependency for the MAP rule
+Date: Thu, 14 Apr 2022 19:35:48 +0100
+Message-ID: <20220414183548.19611-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20220414162348.4808-1-andrew.cooper3@citrix.com>
+References: <20220414162348.4808-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20220411233832.391817-1-dmitry.osipenko@collabora.com>
 
-On Tue, Apr 12, 2022 at 02:38:12AM +0300, Dmitry Osipenko wrote:
-> Problem
-> -------
-> 
-> SoC devices require power-off call chaining functionality from kernel.
-> We have a widely used restart chaining provided by restart notifier API,
-> but nothing for power-off.
-> 
-> Solution
-> --------
-> 
-> Introduce new API that provides both restart and power-off call chains.
-[...]
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monn√© <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>
 
-For the series:
+v2:
+ * Use $(TARGET) not $(TARGET)-syms
+---
+ xen/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Micha≥ Miros≥aw <mirq-linux@rere.qmqm.pl>
+diff --git a/xen/Makefile b/xen/Makefile
+index dd05672ff42d..3a4e3bdd0f95 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -599,7 +599,7 @@ cscope:
+ 	cscope -k -b -q
+ 
+ .PHONY: _MAP
+-_MAP:
++_MAP: $(TARGET)
+ 	$(NM) -n $(TARGET)-syms | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aUw] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)' > System.map
+ 
+ %.o %.i %.s: %.c tools_fixdep FORCE
+-- 
+2.11.0
+
 
