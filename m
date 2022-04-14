@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0838AC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 11:47:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.304648.519352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BC3C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Apr 2022 11:58:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.304671.519361 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nexwb-0001ak-1k; Thu, 14 Apr 2022 11:47:25 +0000
+	id 1ney7E-0004Aw-69; Thu, 14 Apr 2022 11:58:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 304648.519352; Thu, 14 Apr 2022 11:47:24 +0000
+Received: by outflank-mailman (output) from mailman id 304671.519361; Thu, 14 Apr 2022 11:58:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nexwa-0001YU-Qr; Thu, 14 Apr 2022 11:47:24 +0000
-Received: by outflank-mailman (input) for mailman id 304648;
- Thu, 14 Apr 2022 11:47:24 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=dNZz=UY=citrix.com=prvs=096427a9b=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1nexwZ-0000HT-RL
- for xen-devel@lists.xenproject.org; Thu, 14 Apr 2022 11:47:23 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a4aed2f9-bbe8-11ec-8fbd-03012f2f19d4;
- Thu, 14 Apr 2022 13:47:21 +0200 (CEST)
+	id 1ney7E-0004Ap-39; Thu, 14 Apr 2022 11:58:24 +0000
+Received: by outflank-mailman (input) for mailman id 304671;
+ Thu, 14 Apr 2022 11:58:22 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ney7C-0004Af-Tf; Thu, 14 Apr 2022 11:58:22 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ney7C-0000ql-Qz; Thu, 14 Apr 2022 11:58:22 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ney7C-0000Pp-DO; Thu, 14 Apr 2022 11:58:22 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1ney7C-00010J-Cx; Thu, 14 Apr 2022 11:58:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,183 +44,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a4aed2f9-bbe8-11ec-8fbd-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1649936841;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=8Uae8bFBeN10HyzNO9f3vkE192c+nPR4Tmdy4ORjMWo=;
-  b=QyJKBNfETaZFBx9x6flcsKxBzets1VirHoH5WuarCncq1qpo94KkGg7T
-   ibb9bMLZ0Gjt57Hh/gbzoCdmQjLwT7d9tsUhWgkl8/bNsBWkk0rQz/A2M
-   flskMcKFzp/h9BwRcqQo0+ZZViLBJyCTG5qA6ubsa+fkthgebE87DqCiA
-   s=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 5.1
-X-MesageID: 68829285
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:3qtVSaxbzqvftlcWBCt6t+c7xirEfRIJ4+MujC+fZmUNrF6WrkVSm
- jRKD27Xb//ZYDeheYgjPI2xo0IE78SAydZiSlM5/CAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGX9JZS5LwbZj2NY02IThWmthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NpllLXsQg0sFYT2mOlNSj9gNwJlO7xiweqSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DFYUToHx/ixreCu4rW8vrSKTW/95Imjw3g6iiGN6AN
- 5pDOGA/MXwsZTVXFXY3U80+w9yRuSL6fz1GpWyRnfYotj27IAtZj+G2bYu9lsaxbdpRtlaVo
- CTB5WuRKjMwOcGbyDGF2mmxneKJliT+MKoCGbv9+vN0jVm7wm0IFAZQRVa9ueO+iEO1R5RYM
- UN8x8Y1hfFsrgrxFIC7BkDm5i7f1vIBZzZOO8wTtAqHz4H92QaUVnEidhpic9o3kPZjEFTGy
- WS1t9/uADVutpicRnSc6qqYoFuOBMQFEYMRTXRaFFVYurEPtKl210uSFYg7TMZZm/WvQVnNL
- ya2QD/Sbln5peoCzO2F8F/OmFpATbCZH1dutm07so9Ihz6VhbJJhaT1sTA3Dt4ade51q2VtW
- lBeyqByC8hUU/mweNSlGrllIV1T296LMSfHnXlkFIQ7+jKm9haLJN4MsWEkfB43bp1fJFcFh
- XM/XysLtfe/21PwM8dKj3+ZUZx2ncAM6/y4PhwrUja+SscoL1LWlM2fTUWRw3rsgCARfVIXY
- v+mnTKXJS9CU8xPlWPuL89EiOND7n1ulAv7GMGgpzz6gOX2WZJgYepcWHOUcPsD5b+JyC2Mt
- Y432z2ikE4EDoUTo0D/rOYuELz9BSFiW8un+pANK7brz8gPMDhJNsI9CIgJI+RN95m5XM+Rl
- p1hcie0EGbCuEA=
-IronPort-HdrOrdr: A9a23:bW9B1KxCe+7/0kMB+zqiKrPwFr1zdoMgy1knxilNoRw8SK2lfq
- eV7YwmPH7P+U8ssR4b6LO90cW7Lk80sKQFhbX5Xo3SOjUO2lHYTr2KhLGKq1aLdkHDH6xmpM
- BdmsBFeabN5DNB7foSjjPXLz9Z+qjjzJyV
-X-IronPort-AV: E=Sophos;i="5.90,259,1643691600"; 
-   d="scan'208";a="68829285"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
-	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Anthony PERARD
-	<anthony.perard@citrix.com>
-Subject: [PATCH 1/3] x86/build: Rework binary conversion for boot/{cmdline,reloc}.c
-Date: Thu, 14 Apr 2022 12:47:06 +0100
-Message-ID: <20220414114708.4788-2-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20220414114708.4788-1-andrew.cooper3@citrix.com>
-References: <20220414114708.4788-1-andrew.cooper3@citrix.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=bSS7rIr3CH3YfMW5uk6l7YHHVI0XR5YIqPG7yloDaF8=; b=5KrpGFo50AfVUCdGftfA9k+s72
+	8wX78cncpF+PFFytihac1kOb7920j1Ir6eqtqZQlk56II7Zl0ThrONGTHqM3U2DkG3GSpXpJWey8e
+	mCVYPD8gu5q15e30Zj9ZfI1dqQgfXVzx2rP64DH84iIG5sjiAZfjqyFpPnvzDm5I2kC4=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-169392-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 169392: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=0c901fcc200e411b78b9ca42d07d5ea4aaa13b21
+X-Osstest-Versions-That:
+    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 14 Apr 2022 11:58:22 +0000
 
-There is no need to opencode .got.plt size check; it can be done with linker
-asserts instead.  Extend the checking to all dynamic linkage sections, and
-drop the $(OBJDUMP) pass.
+flight 169392 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/169392/
 
-Furthermore, instead of removing .got.plt specifically, take only .text when
-converting to a flat binary.  This makes the process invariant of .text's
-position relative to the start of the binary, which avoids needing to discard
-all sections, and removes the need to work around sections that certain
-linkers are unhappy discarding.
+Regressions :-(
 
-No functional change.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 168254
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
+ build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
----
- xen/arch/x86/boot/Makefile    | 13 +---------
- xen/arch/x86/boot/build32.lds | 58 +++++++++++++++++++------------------------
- 2 files changed, 26 insertions(+), 45 deletions(-)
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
-diff --git a/xen/arch/x86/boot/Makefile b/xen/arch/x86/boot/Makefile
-index ca8001c72b23..09d1f9f75394 100644
---- a/xen/arch/x86/boot/Makefile
-+++ b/xen/arch/x86/boot/Makefile
-@@ -22,19 +22,8 @@ $(head-srcs): %.S: %.bin
- 	(od -v -t x $< | tr -s ' ' | awk 'NR > 1 {print s} {s=$$0}' | \
- 	sed 's/ /,0x/g' | sed 's/,0x$$//' | sed 's/^[0-9]*,/ .long /') >$@
- 
--# Drop .got.plt during conversion to plain binary format.
--# Please check build32.lds for more details.
- %.bin: %.lnk
--	$(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | \
--		while read idx name sz rest; do \
--			case "$$name" in \
--			.got.plt) \
--				test $$sz != 0c || continue; \
--				echo "Error: non-empty $$name: 0x$$sz" >&2; \
--				exit $$(expr $$idx + 1);; \
--			esac; \
--		done
--	$(OBJCOPY) -O binary -R .got.plt $< $@
-+	$(OBJCOPY) -j .text -O binary $< $@
- 
- %.lnk: %.o $(src)/build32.lds
- 	$(LD) $(subst x86_64,i386,$(LDFLAGS_DIRECT)) -N -T $(filter %.lds,$^) -o $@ $<
-diff --git a/xen/arch/x86/boot/build32.lds b/xen/arch/x86/boot/build32.lds
-index 1ab941879312..d8fb9170ca40 100644
---- a/xen/arch/x86/boot/build32.lds
-+++ b/xen/arch/x86/boot/build32.lds
-@@ -31,44 +31,36 @@ SECTIONS
-         *(.bss.*)
-   }
- 
-+  /* Dynamic linkage sections.  Collected simply so we can check they're empty. */
-+  .got : {
-+        *(.got)
-+  }
-   .got.plt : {
--        /*
--         * PIC/PIE executable contains .got.plt section even if it is not linked
--         * with dynamic libraries. In such case it is just placeholder for
--         * _GLOBAL_OFFSET_TABLE_ symbol and .PLT0. .PLT0 is filled by dynamic
--         * linker and our code is not supposed to be loaded by dynamic linker.
--         * So, from our point of view .PLT0 is unused. This means that there is
--         * pretty good chance that we can safely drop .got.plt as a whole here.
--         * Sadly this is not true. _GLOBAL_OFFSET_TABLE_ is used as a reference
--         * for relative addressing (and only for that thing) and ld complains if
--         * we remove .got.plt section here because it cannot find required symbol.
--         * However, _GLOBAL_OFFSET_TABLE_ is no longer needed in final output.
--         * So, drop .got.plt section during conversion to plain binary format.
--         *
--         * Please check build32.mk for more details.
--         */
-         *(.got.plt)
-   }
--
--  /*
--   * Discarding .shstrtab is not supported by LLD (LLVM LD) and will trigger an
--   * error. Also keep the rest of the control sections to match GNU LD behavior.
--   */
--  .shstrtab : {
--        *(.shstrtab)
-+  .igot.plt : {
-+        *(.igot.plt)
-   }
--  .strtab : {
--        *(.strtab)
-+  .iplt : {
-+        *(.iplt)
-   }
--  .symtab : {
--        *(.symtab)
-+  .plt : {
-+        *(.plt)
-   }
--
--  /DISCARD/ : {
--        /*
--         * Discard everything else, to prevent linkers from putting
--         * orphaned sections ahead of .text, which needs to be first.
--         */
--        *(*)
-+  .rela : {
-+        *(.rela.*)
-   }
- }
-+
-+ASSERT(SIZEOF(.got) == 0,         ".got non-empty")
-+/*
-+ * At least GNU ld 2.30 and earlier fail to discard the generic part of
-+ * .got.plt when no actual entries were allocated. Permit this case alongside
-+ * the section being empty.
-+ */
-+ASSERT(SIZEOF(.got.plt) == 0 ||
-+       SIZEOF(.got.plt) == 3 * 4, "unexpected .got.plt size")
-+ASSERT(SIZEOF(.igot.plt) == 0,    ".igot.plt non-empty")
-+ASSERT(SIZEOF(.iplt) == 0,        ".iplt non-empty")
-+ASSERT(SIZEOF(.plt) == 0,         ".plt non-empty")
-+ASSERT(SIZEOF(.rela) == 0,        "leftover relocations")
--- 
-2.11.0
+version targeted for testing:
+ ovmf                 0c901fcc200e411b78b9ca42d07d5ea4aaa13b21
+baseline version:
+ ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
 
+Last test of basis   168254  2022-02-28 10:41:46 Z   45 days
+Failing since        168258  2022-03-01 01:55:31 Z   44 days  384 attempts
+Testing same since   169385  2022-04-14 03:40:29 Z    0 days    7 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
+  Abner Chang <abner.chang@hpe.com>
+  Akihiko Odaki <akihiko.odaki@gmail.com>
+  Anthony PERARD <anthony.perard@citrix.com
+  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Chen Lin Z <lin.z.chen@intel.com>
+  Chen, Lin Z <lin.z.chen@intel.com>
+  Dandan Bi <dandan.bi@intel.com>
+  Feng, Bob C <bob.c.feng@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Guo Dong <guo.dong@intel.com>
+  Guomin Jiang <guomin.jiang@intel.com>
+  Hao A Wu <hao.a.wu@intel.com>
+  Heng Luo <heng.luo@intel.com>
+  Hua Ma <hua.ma@intel.com>
+  Huang, Li-Xia <lisa.huang@intel.com>
+  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
+  Jason <yun.lou@intel.com>
+  Jason Lou <yun.lou@intel.com>
+  Ken Lautner <kenlautner3@gmail.com>
+  Kenneth Lautner <kenlautner3@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Lean Sheng Tan <sheng.tan@9elements.com>
+  Leif Lindholm <quic_llindhol@quicinc.com
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Li, Zhihao <zhihao.li@intel.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Liu <yun.y.liu@intel.com>
+  Liu Yun <yun.y.liu@intel.com>
+  Liu Yun Y <yun.y.liu@intel.com>
+  Lixia Huang <lisa.huang@intel.com>
+  Lou, Yun <Yun.Lou@intel.com>
+  Ma, Hua <Hua.Ma@intel.com>
+  Mara Sophie Grosch <littlefox@lf-net.org>
+  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
+  Matt DeVillier <matt.devillier@gmail.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Michael Kubacki <mikuback@microsoft.com>
+  Min Xu <min.m.xu@intel.com>
+  Oliver Steffen <osteffen@redhat.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <quic_rcran@quicinc.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Rhodes <sean@starlabs.systems>
+  Sean Rhodes sean@starlabs.systems
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Sunny Wang <sunny.wang@arm.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
+  Xiaolu.Jiang <xiaolu.jiang@intel.com>
+  Xie, Yuanhao <yuanhao.xie@intel.com>
+  Yi Li <yi1.li@intel.com>
+  yi1 li <yi1.li@intel.com>
+  Yuanhao Xie <yuanhao.xie@intel.com>
+  Zhihao Li <zhihao.li@intel.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 5086 lines long.)
 
