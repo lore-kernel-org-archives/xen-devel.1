@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D0C5C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3AECC433EF
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Apr 2022 05:02:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.305286.520293 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.305287.520301 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nfE6B-0006N2-SS; Fri, 15 Apr 2022 05:02:23 +0000
+	id 1nfE6C-0006X2-GO; Fri, 15 Apr 2022 05:02:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 305286.520293; Fri, 15 Apr 2022 05:02:23 +0000
+Received: by outflank-mailman (output) from mailman id 305287.520301; Fri, 15 Apr 2022 05:02:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nfE6B-0006Lf-AO; Fri, 15 Apr 2022 05:02:23 +0000
-Received: by outflank-mailman (input) for mailman id 305286;
+	id 1nfE6B-0006V0-Re; Fri, 15 Apr 2022 05:02:23 +0000
+Received: by outflank-mailman (input) for mailman id 305287;
  Fri, 15 Apr 2022 05:02:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5UAI=UZ=bombadil.srs.infradead.org=BATV+2d633663de0085320ac7+6809+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nfDyS-0004TJ-QR
- for xen-devel@lists.xenproject.org; Fri, 15 Apr 2022 04:54:24 +0000
+ id 1nfDyE-0004b8-1Q
+ for xen-devel@lists.xenproject.org; Fri, 15 Apr 2022 04:54:10 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 1deab6a8-bc78-11ec-8fbe-03012f2f19d4;
- Fri, 15 Apr 2022 06:54:24 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 12a07798-bc78-11ec-a405-831a346695d4;
+ Fri, 15 Apr 2022 06:54:05 +0200 (CEST)
 Received: from [2a02:1205:504b:4280:f5dd:42a4:896c:d877] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nfDy9-008PY0-20; Fri, 15 Apr 2022 04:54:05 +0000
+ id 1nfDxv-008PIQ-ME; Fri, 15 Apr 2022 04:53:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1deab6a8-bc78-11ec-8fbe-03012f2f19d4
+X-Inumbo-ID: 12a07798-bc78-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=A3F4pzgWH2QQ0wtpIeTWEbWkE7zvp2Hf2SzUvBBV6uI=; b=2blFxPm6xz5pgZn6E5jvsGqhvn
-	2WDz/E43ISZl4v/rhlHMaqtSb4lVbmKeEW11/ljs0aiEkq0TnWEDxeJnrojcMAcOqNB8N3gDxJnoZ
-	0NRetUsPJHvzddTt7lmgpHndIYp7bFipN2chfdRidmHIR3lH3yyIVmQny7lS+2WzaIVhTRY61ZPLW
-	cNdIp932vWgZbDLAr3bVHO1tMLGx1FOnjxoa9UVQZYEIwSKlwU7ByTf62px4tvbNkH8lyOAfKg6eV
-	fvQs7AcyDRrAWF5ZnpqPRd0RsttREedP1tYS6zdjKYykJ8LivF4bs1Leq71tf07T70LHtI3i4RcFf
-	TuAsL+Kw==;
+	bh=EfN09E7KgfFk5NOTogRSBSf7jTlM22RGe5+0+tCjcRA=; b=HT20lFvm4eaWJQtGcnmbhRoft9
+	/gWueL2ezX0rtmvfD1y6vW4lHfpzH1cPIp08f4BIGZSC49RVBBYbHgbS+KAX1oiXK6QDo4EDns/41
+	oLVOfq3MekqhckOiTRP9I3u5vQgfRVLF/o2daYUi8nTXdLHpKUoyn49HYrmB7+ZqRfsquW9YDBu4p
+	D4uxvWlZnhsloYsO2zNcp/KkBQnezNnSaCF8uUycTEb/HLNgy42tQ7EfyQZm1uZruK006gQ9xmJK1
+	PsGSSD0WP/jCSlttlJweZM8gxob8/S6HjFCPWqpNQJhWwkjWmgqx1AWPPsqaJu3qLEkP5zbjSOfgd
+	w6iJtnUA==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -82,10 +82,12 @@ Cc: dm-devel@redhat.com,
 	ntfs3@lists.linux.dev,
 	ocfs2-devel@oss.oracle.com,
 	linux-mm@kvack.org,
-	"Martin K . Petersen" <martin.petersen@oracle.com>
-Subject: [PATCH 20/27] block: use bdev_discard_alignment in part_discard_alignment_show
-Date: Fri, 15 Apr 2022 06:52:51 +0200
-Message-Id: <20220415045258.199825-21-hch@lst.de>
+	Damien Le Moal <damien.lemoal@opensource.wdc.com>,
+	"Martin K . Petersen" <martin.petersen@oracle.com>,
+	Johannes Thumshirn <johannes.thumshirn@wdc.com>
+Subject: [PATCH 15/27] block: add a bdev_max_zone_append_sectors helper
+Date: Fri, 15 Apr 2022 06:52:46 +0200
+Message-Id: <20220415045258.199825-16-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220415045258.199825-1-hch@lst.de>
 References: <20220415045258.199825-1-hch@lst.de>
@@ -93,31 +95,70 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Use the bdev based alignment helper instead of open coding it.
+Add a helper to check the max supported sectors for zone append based on
+the block_device instead of having to poke into the block layer internal
+request_queue.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Acked-by: Damien Le Moal <damien.lemoal@opensource.wdc.com>
 Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- block/partitions/core.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ drivers/nvme/target/zns.c | 3 +--
+ fs/zonefs/super.c         | 3 +--
+ include/linux/blkdev.h    | 6 ++++++
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/block/partitions/core.c b/block/partitions/core.c
-index 240b3fff521e4..70dec1c78521d 100644
---- a/block/partitions/core.c
-+++ b/block/partitions/core.c
-@@ -206,11 +206,7 @@ static ssize_t part_alignment_offset_show(struct device *dev,
- static ssize_t part_discard_alignment_show(struct device *dev,
- 					   struct device_attribute *attr, char *buf)
+diff --git a/drivers/nvme/target/zns.c b/drivers/nvme/target/zns.c
+index e34718b095504..82b61acf7a72b 100644
+--- a/drivers/nvme/target/zns.c
++++ b/drivers/nvme/target/zns.c
+@@ -34,8 +34,7 @@ static int validate_conv_zones_cb(struct blk_zone *z,
+ 
+ bool nvmet_bdev_zns_enable(struct nvmet_ns *ns)
  {
--	struct block_device *bdev = dev_to_bdev(dev);
--
--	return sprintf(buf, "%u\n",
--		queue_limit_discard_alignment(&bdev_get_queue(bdev)->limits,
--				bdev->bd_start_sect));
-+	return sprintf(buf, "%u\n", bdev_discard_alignment(dev_to_bdev(dev)));
+-	struct request_queue *q = ns->bdev->bd_disk->queue;
+-	u8 zasl = nvmet_zasl(queue_max_zone_append_sectors(q));
++	u8 zasl = nvmet_zasl(bdev_max_zone_append_sectors(ns->bdev));
+ 	struct gendisk *bd_disk = ns->bdev->bd_disk;
+ 	int ret;
+ 
+diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
+index 3614c7834007d..7a63807b736c4 100644
+--- a/fs/zonefs/super.c
++++ b/fs/zonefs/super.c
+@@ -678,13 +678,12 @@ static ssize_t zonefs_file_dio_append(struct kiocb *iocb, struct iov_iter *from)
+ 	struct inode *inode = file_inode(iocb->ki_filp);
+ 	struct zonefs_inode_info *zi = ZONEFS_I(inode);
+ 	struct block_device *bdev = inode->i_sb->s_bdev;
+-	unsigned int max;
++	unsigned int max = bdev_max_zone_append_sectors(bdev);
+ 	struct bio *bio;
+ 	ssize_t size;
+ 	int nr_pages;
+ 	ssize_t ret;
+ 
+-	max = queue_max_zone_append_sectors(bdev_get_queue(bdev));
+ 	max = ALIGN_DOWN(max << SECTOR_SHIFT, inode->i_sb->s_blocksize);
+ 	iov_iter_truncate(from, max);
+ 
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index a433798c3343e..f8c50b77543eb 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1188,6 +1188,12 @@ static inline unsigned int queue_max_zone_append_sectors(const struct request_qu
+ 	return min(l->max_zone_append_sectors, l->max_sectors);
  }
  
- static DEVICE_ATTR(partition, 0444, part_partition_show, NULL);
++static inline unsigned int
++bdev_max_zone_append_sectors(struct block_device *bdev)
++{
++	return queue_max_zone_append_sectors(bdev_get_queue(bdev));
++}
++
+ static inline unsigned queue_logical_block_size(const struct request_queue *q)
+ {
+ 	int retval = 512;
 -- 
 2.30.2
 
