@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501CBC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 15 Apr 2022 21:26:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.305893.520992 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 585B6C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 15 Apr 2022 22:01:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.305904.521014 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nfTSL-0004VF-RJ; Fri, 15 Apr 2022 21:26:17 +0000
+	id 1nfU0O-0000bR-Vf; Fri, 15 Apr 2022 22:01:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 305893.520992; Fri, 15 Apr 2022 21:26:17 +0000
+Received: by outflank-mailman (output) from mailman id 305904.521014; Fri, 15 Apr 2022 22:01:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nfTSL-0004V8-O5; Fri, 15 Apr 2022 21:26:17 +0000
-Received: by outflank-mailman (input) for mailman id 305893;
- Fri, 15 Apr 2022 21:26:16 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nfTSJ-0004Uy-Up; Fri, 15 Apr 2022 21:26:15 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nfTSJ-0003rF-S9; Fri, 15 Apr 2022 21:26:15 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1nfTSJ-00005C-ED; Fri, 15 Apr 2022 21:26:15 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1nfTSJ-0004ya-Dj; Fri, 15 Apr 2022 21:26:15 +0000
+	id 1nfU0O-0000bK-Sc; Fri, 15 Apr 2022 22:01:28 +0000
+Received: by outflank-mailman (input) for mailman id 305904;
+ Fri, 15 Apr 2022 22:01:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=JP5O=UZ=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1nfU0O-0000HG-51
+ for xen-devel@lists.xenproject.org; Fri, 15 Apr 2022 22:01:28 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 990a68e0-bd07-11ec-8fbe-03012f2f19d4;
+ Sat, 16 Apr 2022 00:01:27 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 95673B83120;
+ Fri, 15 Apr 2022 22:01:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0D90C385A4;
+ Fri, 15 Apr 2022 22:01:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,159 +45,108 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=Qrl3e2w72raVfzM95Ovltthk5PvvrCwd0m7kcQBQyWU=; b=3w7TTvCDOx0S4zUI4YZFIC+tNe
-	6eSNAsomv8qmZ9OuF5U395BObR7ZtjCdKC+UMy3XQLKEh294EdOtC+K63qzAYrLTgp+N5NZYhmYqj
-	j3o+bRftMoJRb4fpCKRDUlInTHNbzWdfmQcHb9hx7hdxaeejrN9sBeW/eqtNcgPBSXd8=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-169436-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 990a68e0-bd07-11ec-8fbe-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1650060085;
+	bh=3nAlILfONam3A1vF12+Z//hbMZsSoLMl3r4snyjFDkg=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=R5ACtTmRa1lWffZNP40CcYwujsVyYLvLu7t4cuSkHx/zaTDgutlQ4iwTl0T+OF46E
+	 KTk2+o63Z5vwr6TH66atXLG4sAjRb/3Fu3/lo+Yd3s4T2y408M4g5eshPM00FXsruY
+	 gnQywd9MCBBru4u0+hmOTmRr5Sf6fOH6A8aUY3iN3hikuJ5hZX6mYNnkvR8sfqbHJZ
+	 6cwdJQMOfy9nf5UrBix4ZArxlSXSr5cEKNoGxqL5AE9/8QMWl5q0TSv2lORkNvm+eu
+	 0mpduXkufAAx6byB3UeBLcqIFKHPEHxW+sH7kFA7AyIzaxOVMzTIUGBGsnuhnJ9rtg
+	 ul349pv5wZ/2g==
+Date: Fri, 15 Apr 2022 15:01:24 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Oleksandr Tyshchenko <olekstysh@gmail.com>
+cc: xen-devel@lists.xenproject.org, virtualization@lists.linux-foundation.org, 
+    devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+    Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+    "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+    Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+    Julien Grall <julien@xen.org>, Juergen Gross <jgross@suse.com>, 
+    Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [RFC PATCH 3/6] dt-bindings: xen: Add xen,dev-domid property
+ description for xen-virtio layer
+In-Reply-To: <1649963973-22879-4-git-send-email-olekstysh@gmail.com>
+Message-ID: <alpine.DEB.2.22.394.2204151300130.915916@ubuntu-linux-20-04-desktop>
+References: <1649963973-22879-1-git-send-email-olekstysh@gmail.com> <1649963973-22879-4-git-send-email-olekstysh@gmail.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Subject: [ovmf test] 169436: regressions - FAIL
-X-Osstest-Failures:
-    ovmf:build-amd64:xen-build:fail:regression
-    ovmf:build-amd64-xsm:xen-build:fail:regression
-    ovmf:build-i386-xsm:xen-build:fail:regression
-    ovmf:build-i386:xen-build:fail:regression
-    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
-    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This:
-    ovmf=9bf7291d636ebd816b8f81edcf366dac926f9f44
-X-Osstest-Versions-That:
-    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 15 Apr 2022 21:26:15 +0000
+Content-Type: text/plain; charset=US-ASCII
 
-flight 169436 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/169436/
+On Thu, 14 Apr 2022, Oleksandr Tyshchenko wrote:
+> From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> 
+> Introduce Xen specific binding for the virtio-mmio device to be used
+> by Xen virtio support driver in a subsequent commit.
+> 
+> This binding specifies the ID of Xen domain where the corresponding
+> device (backend) resides. This is needed for the option to restrict
+> memory access using Xen grant mappings to work.
+> 
+> Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> ---
+>  .../devicetree/bindings/virtio/xen,dev-domid.yaml  | 39 ++++++++++++++++++++++
+>  1 file changed, 39 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/virtio/xen,dev-domid.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/virtio/xen,dev-domid.yaml b/Documentation/devicetree/bindings/virtio/xen,dev-domid.yaml
+> new file mode 100644
+> index 00000000..78be993
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/virtio/xen,dev-domid.yaml
+> @@ -0,0 +1,39 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only or BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/virtio/xen,dev-domid.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Xen specific binding for the virtio device
+> +
+> +maintainers:
+> +  - Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> +
+> +select: true
+> +
+> +description:
+> +  This binding specifies the ID of Xen domain where the corresponding device
+> +  (backend) resides. This is needed for the option to restrict memory access
+> +  using Xen grant mappings to work.
+> +
+> +  Note that current and generic "iommus" bindings are mutually exclusive, since
+> +  the restricted memory access model on Xen behaves as a kind of software IOMMU.
 
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-amd64                   6 xen-build                fail REGR. vs. 168254
- build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
- build-i386-xsm                6 xen-build                fail REGR. vs. 168254
- build-i386                    6 xen-build                fail REGR. vs. 168254
-
-Tests which did not succeed, but are not blocking:
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- build-i386-libvirt            1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
- test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
-
-version targeted for testing:
- ovmf                 9bf7291d636ebd816b8f81edcf366dac926f9f44
-baseline version:
- ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
-
-Last test of basis   168254  2022-02-28 10:41:46 Z   46 days
-Failing since        168258  2022-03-01 01:55:31 Z   45 days  420 attempts
-Testing same since   169414  2022-04-15 04:11:47 Z    0 days   18 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Abdul Lateef Attar <abdattar@amd.com>
-  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
-  Abner Chang <abner.chang@hpe.com>
-  Akihiko Odaki <akihiko.odaki@gmail.com>
-  Anthony PERARD <anthony.perard@citrix.com
-  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
-  Bo Chang Ke <bo-changx.ke@intel.com>
-  Bob Feng <bob.c.feng@intel.com>
-  Chen Lin Z <lin.z.chen@intel.com>
-  Chen, Lin Z <lin.z.chen@intel.com>
-  Dandan Bi <dandan.bi@intel.com>
-  Dun Tan <dun.tan@intel.com>
-  Feng, Bob C <bob.c.feng@intel.com>
-  Gerd Hoffmann <kraxel@redhat.com>
-  Guo Dong <guo.dong@intel.com>
-  Guomin Jiang <guomin.jiang@intel.com>
-  Hao A Wu <hao.a.wu@intel.com>
-  Heng Luo <heng.luo@intel.com>
-  Hua Ma <hua.ma@intel.com>
-  Huang, Li-Xia <lisa.huang@intel.com>
-  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
-  Jason <yun.lou@intel.com>
-  Jason Lou <yun.lou@intel.com>
-  Ke, Bo-ChangX <bo-changx.ke@intel.com>
-  Ken Lautner <kenlautner3@gmail.com>
-  Kenneth Lautner <kenlautner3@gmail.com>
-  Kuo, Ted <ted.kuo@intel.com>
-  Laszlo Ersek <lersek@redhat.com>
-  Lean Sheng Tan <sheng.tan@9elements.com>
-  Leif Lindholm <quic_llindhol@quicinc.com
-  Leif Lindholm <quic_llindhol@quicinc.com>
-  Li, Zhihao <zhihao.li@intel.com>
-  Liming Gao <gaoliming@byosoft.com.cn>
-  Liu <yun.y.liu@intel.com>
-  Liu Yun <yun.y.liu@intel.com>
-  Liu Yun Y <yun.y.liu@intel.com>
-  Lixia Huang <lisa.huang@intel.com>
-  Lou, Yun <Yun.Lou@intel.com>
-  Ma, Hua <Hua.Ma@intel.com>
-  Mara Sophie Grosch <littlefox@lf-net.org>
-  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
-  Matt DeVillier <matt.devillier@gmail.com>
-  Michael D Kinney <michael.d.kinney@intel.com>
-  Michael Kubacki <michael.kubacki@microsoft.com>
-  Michael Kubacki <mikuback@microsoft.com>
-  Min Xu <min.m.xu@intel.com>
-  Oliver Steffen <osteffen@redhat.com>
-  Patrick Rudolph <patrick.rudolph@9elements.com>
-  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
-  Ray Ni <ray.ni@intel.com>
-  Rebecca Cran <quic_rcran@quicinc.com>
-  Sami Mujawar <sami.mujawar@arm.com>
-  Sean Rhodes <sean@starlabs.systems>
-  Sean Rhodes sean@starlabs.systems
-  Sebastien Boeuf <sebastien.boeuf@intel.com>
-  Sunny Wang <sunny.wang@arm.com>
-  Ted Kuo <ted.kuo@intel.com>
-  Wenyi Xie <xiewenyi2@huawei.com>
-  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
-  Xiaolu.Jiang <xiaolu.jiang@intel.com>
-  Xie, Yuanhao <yuanhao.xie@intel.com>
-  Yi Li <yi1.li@intel.com>
-  yi1 li <yi1.li@intel.com>
-  Yuanhao Xie <yuanhao.xie@intel.com>
-  Zhihao Li <zhihao.li@intel.com>
-
-jobs:
- build-amd64-xsm                                              fail    
- build-i386-xsm                                               fail    
- build-amd64                                                  fail    
- build-i386                                                   fail    
- build-amd64-libvirt                                          blocked 
- build-i386-libvirt                                           blocked 
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
- test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+I don't think that this last statement is necessary or fully accurate, so
+I would remove it. Other than that, this looks good to me.
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
+> +properties:
+> +  xen,dev-domid:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    description:
+> +      Should contain the ID of device's domain.
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+Maybe better as:
+"The domid (domain ID) of the domain where the device (backend) is running"
 
 
-Not pushing.
 
-(No revision log; it would be 5135 lines long.)
+> +additionalProperties: true
+> +
+> +examples:
+> +  - |
+> +    virtio_block@3000 {
+> +            compatible = "virtio,mmio";
+> +            reg = <0x3000 0x100>;
+> +            interrupts = <41>;
+> +
+> +            /* The device is located in Xen domain with ID 1 */
+> +            xen,dev-domid = <1>;
+> +    };
+> -- 
+> 2.7.4
+> 
 
