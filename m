@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66E96C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BAFC433EF
 	for <xen-devel@archiver.kernel.org>; Fri, 15 Apr 2022 05:02:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.305271.520258 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.305272.520263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nfE65-0005Jd-Hf; Fri, 15 Apr 2022 05:02:17 +0000
+	id 1nfE65-0005OG-Tj; Fri, 15 Apr 2022 05:02:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 305271.520258; Fri, 15 Apr 2022 05:02:17 +0000
+Received: by outflank-mailman (output) from mailman id 305272.520263; Fri, 15 Apr 2022 05:02:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nfE65-0005JP-Dx; Fri, 15 Apr 2022 05:02:17 +0000
-Received: by outflank-mailman (input) for mailman id 305271;
+	id 1nfE65-0005NL-Nl; Fri, 15 Apr 2022 05:02:17 +0000
+Received: by outflank-mailman (input) for mailman id 305272;
  Fri, 15 Apr 2022 05:02:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5UAI=UZ=bombadil.srs.infradead.org=BATV+2d633663de0085320ac7+6809+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1nfDye-0004b8-KV
- for xen-devel@lists.xenproject.org; Fri, 15 Apr 2022 04:54:36 +0000
+ id 1nfDyD-0004b8-1c
+ for xen-devel@lists.xenproject.org; Fri, 15 Apr 2022 04:54:09 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 246a1773-bc78-11ec-a405-831a346695d4;
- Fri, 15 Apr 2022 06:54:34 +0200 (CEST)
+ id 125374be-bc78-11ec-a405-831a346695d4;
+ Fri, 15 Apr 2022 06:54:04 +0200 (CEST)
 Received: from [2a02:1205:504b:4280:f5dd:42a4:896c:d877] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nfDyR-008Ptb-2k; Fri, 15 Apr 2022 04:54:23 +0000
+ id 1nfDxt-008PFj-9w; Fri, 15 Apr 2022 04:53:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 246a1773-bc78-11ec-a405-831a346695d4
+X-Inumbo-ID: 125374be-bc78-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=eypoqjBCbHteIGJMjEE77faduCfiNIsAQ0ydQeu7OQ0=; b=yel/I7wJHKQGgU++DGlNr4s6By
-	PhYVQZj76IsIJmZMeImq5Q6B2/aQRkMD3ug5dWOU3Jeh5aspjbtIuEjPut08JeM1WmCeQvYQ+tJ0f
-	U696Xi8dd1qtuDaSpjLkD+EO876944juvaQn7mqYu4AmZhVRFKFIBWZURNzhkvK80mkS4SdYE8ghg
-	5kwkeIFA+dIpz0sffz1xoP4BK6LoTUtTMKLOpm6yB1H7oV7nfL4grqbNBsJP5+jCEy6k9Hq/bQASA
-	9dlkqzozrnkdCC5ckIaWKU5KZigzG6TnQjnKvn/KI4zIY9eR4oRyKCNwIxfdzpwno3WYuY2QxxbuI
-	z9ygJJXA==;
+	bh=2RG8/4DncVNJBVxiwRZlDWFw3of1TwdfVdHLgkB+Spw=; b=TPuJfqXQYB+IC35ZbEz9CiQlaP
+	djXIx0VTkzhzaYzpf2LZ0DDooPinTXguiju0AYCGSu3XAhEA+wzVismYaoX+3FR9eNAg3biu1OIj0
+	CNWcQrqG9KwJqTbS05bqC74Hcp5G8fJ5Dpqbc41a5wovtXyrz6AnrzdO6HJSlv+co9m5WLmUX5I/2
+	1vg6dJgX8fRkFI9MMSOkSfnCdkNwHb1kqsdqtSSukL34iYYeRnM6jabi2m1nx/iB0bJqJyAfSKPi1
+	QfdCggnyqMztz/KBp1d+dGH+Q0SMobP0ybTMhNnUN2Xr4FneN5Nr0VM4ULPM98M5hdJ71ysDrIM3k
+	XuXkKxgg==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: dm-devel@redhat.com,
@@ -81,10 +81,11 @@ Cc: dm-devel@redhat.com,
 	linux-nilfs@vger.kernel.org,
 	ntfs3@lists.linux.dev,
 	ocfs2-devel@oss.oracle.com,
-	linux-mm@kvack.org
-Subject: [PATCH 27/27] direct-io: remove random prefetches
-Date: Fri, 15 Apr 2022 06:52:58 +0200
-Message-Id: <20220415045258.199825-28-hch@lst.de>
+	linux-mm@kvack.org,
+	"Martin K . Petersen" <martin.petersen@oracle.com>
+Subject: [PATCH 14/27] block: add a bdev_stable_writes helper
+Date: Fri, 15 Apr 2022 06:52:45 +0200
+Message-Id: <20220415045258.199825-15-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220415045258.199825-1-hch@lst.de>
 References: <20220415045258.199825-1-hch@lst.de>
@@ -92,66 +93,76 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
-Randomly poking into block device internals for manual prefetches isn't
-exactly a very maintainable thing to do.  And none of the performance
-criticil direct I/O implementations still use this library function
-anyway, so just drop it.
+Add a helper to check the stable writes flag based on the block_device
+instead of having to poke into the block layer internal request_queue.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Martin K. Petersen <martin.petersen@oracle.com>
 ---
- fs/direct-io.c | 32 ++++----------------------------
- 1 file changed, 4 insertions(+), 28 deletions(-)
+ drivers/md/dm-table.c  | 4 +---
+ fs/super.c             | 2 +-
+ include/linux/blkdev.h | 6 ++++++
+ mm/swapfile.c          | 2 +-
+ 4 files changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/fs/direct-io.c b/fs/direct-io.c
-index aef06e607b405..840752006f601 100644
---- a/fs/direct-io.c
-+++ b/fs/direct-io.c
-@@ -1115,11 +1115,10 @@ static inline int drop_refcount(struct dio *dio)
-  * individual fields and will generate much worse code. This is important
-  * for the whole file.
-  */
--static inline ssize_t
--do_blockdev_direct_IO(struct kiocb *iocb, struct inode *inode,
--		      struct block_device *bdev, struct iov_iter *iter,
--		      get_block_t get_block, dio_iodone_t end_io,
--		      dio_submit_t submit_io, int flags)
-+ssize_t __blockdev_direct_IO(struct kiocb *iocb, struct inode *inode,
-+		struct block_device *bdev, struct iov_iter *iter,
-+		get_block_t get_block, dio_iodone_t end_io,
-+		dio_submit_t submit_io, int flags)
+diff --git a/drivers/md/dm-table.c b/drivers/md/dm-table.c
+index 5e38d0dd009d5..d46839faa0ca5 100644
+--- a/drivers/md/dm-table.c
++++ b/drivers/md/dm-table.c
+@@ -1950,9 +1950,7 @@ static int device_requires_stable_pages(struct dm_target *ti,
+ 					struct dm_dev *dev, sector_t start,
+ 					sector_t len, void *data)
  {
- 	unsigned i_blkbits = READ_ONCE(inode->i_blkbits);
- 	unsigned blkbits = i_blkbits;
-@@ -1334,29 +1333,6 @@ do_blockdev_direct_IO(struct kiocb *iocb, struct inode *inode,
- 	kmem_cache_free(dio_cache, dio);
- 	return retval;
+-	struct request_queue *q = bdev_get_queue(dev->bdev);
+-
+-	return blk_queue_stable_writes(q);
++	return bdev_stable_writes(dev->bdev);
  }
--
--ssize_t __blockdev_direct_IO(struct kiocb *iocb, struct inode *inode,
--			     struct block_device *bdev, struct iov_iter *iter,
--			     get_block_t get_block,
--			     dio_iodone_t end_io, dio_submit_t submit_io,
--			     int flags)
--{
--	/*
--	 * The block device state is needed in the end to finally
--	 * submit everything.  Since it's likely to be cache cold
--	 * prefetch it here as first thing to hide some of the
--	 * latency.
--	 *
--	 * Attempt to prefetch the pieces we likely need later.
--	 */
--	prefetch(&bdev->bd_disk->part_tbl);
--	prefetch(bdev->bd_disk->queue);
--	prefetch((char *)bdev->bd_disk->queue + SMP_CACHE_BYTES);
--
--	return do_blockdev_direct_IO(iocb, inode, bdev, iter, get_block,
--				     end_io, submit_io, flags);
--}
--
- EXPORT_SYMBOL(__blockdev_direct_IO);
  
- static __init int dio_init(void)
+ int dm_table_set_restrictions(struct dm_table *t, struct request_queue *q,
+diff --git a/fs/super.c b/fs/super.c
+index f1d4a193602d6..60f57c7bc0a69 100644
+--- a/fs/super.c
++++ b/fs/super.c
+@@ -1204,7 +1204,7 @@ static int set_bdev_super(struct super_block *s, void *data)
+ 	s->s_dev = s->s_bdev->bd_dev;
+ 	s->s_bdi = bdi_get(s->s_bdev->bd_disk->bdi);
+ 
+-	if (blk_queue_stable_writes(s->s_bdev->bd_disk->queue))
++	if (bdev_stable_writes(s->s_bdev))
+ 		s->s_iflags |= SB_I_STABLE_WRITES;
+ 	return 0;
+ }
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 075b16d4560e7..a433798c3343e 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1330,6 +1330,12 @@ static inline bool bdev_nonrot(struct block_device *bdev)
+ 	return blk_queue_nonrot(bdev_get_queue(bdev));
+ }
+ 
++static inline bool bdev_stable_writes(struct block_device *bdev)
++{
++	return test_bit(QUEUE_FLAG_STABLE_WRITES,
++			&bdev_get_queue(bdev)->queue_flags);
++}
++
+ static inline bool bdev_write_cache(struct block_device *bdev)
+ {
+ 	return test_bit(QUEUE_FLAG_WC, &bdev_get_queue(bdev)->queue_flags);
+diff --git a/mm/swapfile.c b/mm/swapfile.c
+index d5ab7ec4d92ca..4069f17a82c8e 100644
+--- a/mm/swapfile.c
++++ b/mm/swapfile.c
+@@ -3065,7 +3065,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 		goto bad_swap_unlock_inode;
+ 	}
+ 
+-	if (p->bdev && blk_queue_stable_writes(p->bdev->bd_disk->queue))
++	if (p->bdev && bdev_stable_writes(p->bdev))
+ 		p->flags |= SWP_STABLE_WRITES;
+ 
+ 	if (p->bdev && p->bdev->bd_disk->fops->rw_page)
 -- 
 2.30.2
 
