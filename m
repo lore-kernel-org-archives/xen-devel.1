@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7701C43219
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Apr 2022 04:53:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.306872.522048 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC515C3525B
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Apr 2022 04:54:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.306877.522097 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ngJOV-0001fR-QU; Mon, 18 Apr 2022 04:53:47 +0000
+	id 1ngJOZ-0002l6-Af; Mon, 18 Apr 2022 04:53:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 306872.522048; Mon, 18 Apr 2022 04:53:47 +0000
+Received: by outflank-mailman (output) from mailman id 306877.522097; Mon, 18 Apr 2022 04:53:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ngJOV-0001fK-Mo; Mon, 18 Apr 2022 04:53:47 +0000
-Received: by outflank-mailman (input) for mailman id 306872;
- Mon, 18 Apr 2022 04:53:46 +0000
+	id 1ngJOY-0002hT-Vx; Mon, 18 Apr 2022 04:53:50 +0000
+Received: by outflank-mailman (input) for mailman id 306877;
+ Mon, 18 Apr 2022 04:53:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f7HF=U4=bombadil.srs.infradead.org=BATV+786b5b18f0b4466cc734+6812+infradead.org+hch@srs-se1.protection.inumbo.net>)
- id 1ngJOT-0001c8-LY
- for xen-devel@lists.xenproject.org; Mon, 18 Apr 2022 04:53:46 +0000
+ id 1ngJOW-0001c8-Ey
+ for xen-devel@lists.xenproject.org; Mon, 18 Apr 2022 04:53:48 +0000
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [2607:7c80:54:e::133])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 859e67d2-bed3-11ec-8fbe-03012f2f19d4;
- Mon, 18 Apr 2022 06:53:44 +0200 (CEST)
+ id 87e10c8b-bed3-11ec-8fbe-03012f2f19d4;
+ Mon, 18 Apr 2022 06:53:47 +0200 (CEST)
 Received: from [2a02:1205:504b:4280:f5dd:42a4:896c:d877] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1ngJO3-00FYha-FT; Mon, 18 Apr 2022 04:53:20 +0000
+ id 1ngJOE-00FYjt-Uc; Mon, 18 Apr 2022 04:53:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,17 +42,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 859e67d2-bed3-11ec-8fbe-03012f2f19d4
+X-Inumbo-ID: 87e10c8b-bed3-11ec-8fbe-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
 	MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
 	:Reply-To:Content-Type:Content-ID:Content-Description;
-	bh=ehhbXywWEInDu2MzhhcU8qyC2x202NRIVxnfV552fWg=; b=4+aRzQJYcjSRih3CAHHoWbQKH7
-	tpRyxCuoqoDD29J+mP/JD+tuOpLTzRf6tGAVyuGm1tGzqWiKw0VPI3Z//Ivegeb/zkkMfBF25uEJu
-	8o1KOY9vmrdu70v5p52qRPOvKYU/KO1j7AILK0X1SV3xH0zUNCBtjO5MxmPWDyB3FnDcknLf1/b8+
-	fYnEzGYeuBU14+X4y8DMlr1JmpgaZUgZLWvLmRML5UshcDri7muDpboKeTNp2VDYLGcnydDsZfdy1
-	EQTV6mqhUtxtdvZYv9mIEeqGcvXfbsOHMtH6Uny/9EHEwtxN5JNm1DCu1+PcS53QbmFNMsfc4uiGB
-	S1uPtQoA==;
+	bh=jJDfNJ+noyJ0aQwSxPjfuM0bukOLXIlZdKOCCRo7UC0=; b=xuIkX7BaO7YLYo2xtforYUeJSz
+	D4ZkceNgWZcqsdA4kKDR70kSEQCNujP+EuBqv6qBw0ZF92W/0/cEfjWOan0nETRKihTYr6lzIZlZl
+	bBcwq/JHARHxWpbiEMaI9y7fhWsSop569zSNCbdEUmCgnceKeTdNHmdubHo2T02f4jZnDeMuy9YEp
+	gX5Gk0YQFUdeh+lTgVE6905xov9XyUfA8uV/rEBVxEimHbnB03TXVy+Q+6Z3Gp8bR9szIE8Cp8Ndy
+	rknbV4gm7RVldjeoTzmK+sn63+wAUNv9Myo89P/eXTHdhfPYO+SAS69EJRqWmwD6yqU/r8IFcrYqq
+	/61rhfuw==;
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
 Cc: Richard Weinberger <richard@nod.at>,
@@ -77,9 +77,9 @@ Cc: Richard Weinberger <richard@nod.at>,
 	linux-nvme@lists.infradead.org,
 	linux-s390@vger.kernel.org,
 	dm-devel@redhat.com
-Subject: [PATCH 01/11] ubd: don't set the discard_alignment queue limit
-Date: Mon, 18 Apr 2022 06:53:04 +0200
-Message-Id: <20220418045314.360785-2-hch@lst.de>
+Subject: [PATCH 05/11] dm-zoned: don't set the discard_alignment queue limit
+Date: Mon, 18 Apr 2022 06:53:08 +0200
+Message-Id: <20220418045314.360785-6-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220418045314.360785-1-hch@lst.de>
 References: <20220418045314.360785-1-hch@lst.de>
@@ -89,26 +89,27 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.
 
 The discard_alignment queue limit is named a bit misleading means the
 offset into the block device at which the discard granularity starts.
-Setting it to the discard granularity as done by ubd is mostly harmless
-but also useless.
+Setting it to the discard granularity as done by dm-zoned is mostly
+harmless but also useless.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- arch/um/drivers/ubd_kern.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/md/dm-zoned-target.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
-index 085ffdf98e57e..c4344b67628dd 100644
---- a/arch/um/drivers/ubd_kern.c
-+++ b/arch/um/drivers/ubd_kern.c
-@@ -799,7 +799,6 @@ static int ubd_open_dev(struct ubd *ubd_dev)
- 	}
- 	if (ubd_dev->no_trim == 0) {
- 		ubd_dev->queue->limits.discard_granularity = SECTOR_SIZE;
--		ubd_dev->queue->limits.discard_alignment = SECTOR_SIZE;
- 		blk_queue_max_discard_sectors(ubd_dev->queue, UBD_MAX_REQUEST);
- 		blk_queue_max_write_zeroes_sectors(ubd_dev->queue, UBD_MAX_REQUEST);
- 	}
+diff --git a/drivers/md/dm-zoned-target.c b/drivers/md/dm-zoned-target.c
+index cac295cc8840e..0ec5d8b9b1a4e 100644
+--- a/drivers/md/dm-zoned-target.c
++++ b/drivers/md/dm-zoned-target.c
+@@ -1001,7 +1001,7 @@ static void dmz_io_hints(struct dm_target *ti, struct queue_limits *limits)
+ 	blk_limits_io_min(limits, DMZ_BLOCK_SIZE);
+ 	blk_limits_io_opt(limits, DMZ_BLOCK_SIZE);
+ 
+-	limits->discard_alignment = DMZ_BLOCK_SIZE;
++	limits->discard_alignment = 0;
+ 	limits->discard_granularity = DMZ_BLOCK_SIZE;
+ 	limits->max_discard_sectors = chunk_sectors;
+ 	limits->max_hw_discard_sectors = chunk_sectors;
 -- 
 2.30.2
 
