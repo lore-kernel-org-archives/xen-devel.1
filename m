@@ -4,44 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAA03C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Apr 2022 08:47:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.307871.523214 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BDC0C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Apr 2022 08:59:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.307877.523236 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ngjVS-0003dj-Pd; Tue, 19 Apr 2022 08:46:42 +0000
+	id 1ngjhw-0005WM-AJ; Tue, 19 Apr 2022 08:59:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 307871.523214; Tue, 19 Apr 2022 08:46:42 +0000
+Received: by outflank-mailman (output) from mailman id 307877.523236; Tue, 19 Apr 2022 08:59:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ngjVS-0003dc-Mf; Tue, 19 Apr 2022 08:46:42 +0000
-Received: by outflank-mailman (input) for mailman id 307871;
- Tue, 19 Apr 2022 08:46:41 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ngjhw-0005WF-7N; Tue, 19 Apr 2022 08:59:36 +0000
+Received: by outflank-mailman (input) for mailman id 307877;
+ Tue, 19 Apr 2022 08:59:35 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=TFaJ=U5=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1ngjVR-0003dW-Ba
- for xen-devel@lists.xenproject.org; Tue, 19 Apr 2022 08:46:41 +0000
-Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.109.102])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3b0788d9-bfbd-11ec-a405-831a346695d4;
- Tue, 19 Apr 2022 10:46:40 +0200 (CEST)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04lp2054.outbound.protection.outlook.com [104.47.14.54]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-17-30kMAKx-ME69Q3IEkq9Xbg-1; Tue, 19 Apr 2022 10:46:35 +0200
-Received: from DU2PR04MB8616.eurprd04.prod.outlook.com (2603:10a6:10:2db::16)
- by VI1PR04MB6318.eurprd04.prod.outlook.com (2603:10a6:803:f3::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Tue, 19 Apr
- 2022 08:46:33 +0000
-Received: from DU2PR04MB8616.eurprd04.prod.outlook.com
- ([fe80::5cb0:5195:4203:7c2f]) by DU2PR04MB8616.eurprd04.prod.outlook.com
- ([fe80::5cb0:5195:4203:7c2f%7]) with mapi id 15.20.5186.013; Tue, 19 Apr 2022
- 08:46:33 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ngjhv-0005Vs-Nn; Tue, 19 Apr 2022 08:59:35 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ngjhv-0002AA-LM; Tue, 19 Apr 2022 08:59:35 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ngjhv-0003pn-7x; Tue, 19 Apr 2022 08:59:35 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1ngjhv-0007Xw-7W; Tue, 19 Apr 2022 08:59:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,139 +44,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3b0788d9-bfbd-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1650358000;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=u7PxaHUOrgYXxz8Eg25NMAmP24bRqiAmVQlVEwg2qVk=;
-	b=UUEs9jd2V8keZHboo75dz8w6yLih+9CfBJnbjcLC7AM18smdbJiV+fl/SJb33c+NxjZ4Tk
-	QINZocNUzErRNnIxVob0s/Ty76sWvKVyuA1nbygsbzg1g5iNNAYt9/biiOWdPM2wDVGRRp
-	Le9rK3ytfmm1I2CV9LARlpAx+8heWlc=
-X-MC-Unique: 30kMAKx-ME69Q3IEkq9Xbg-1
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K4gk/5AjEc6xmnf/TsAhPlNUhanmqu+Kh8HKZbJjdMBJTE+YtMIK90ls312f6OSU25qR5RuV/k2oddHo8c2YwylMSKG99ase/tZO/JDjHmkrdpQohski5YziJmR7FOm8HxGxrik6xi5LlRYBOKT6heo0icd8Cylvhscj1+AcRcx4eELTLxOtrHdveNAov92xRMfrgppW9jfUqevqa7s5auf8ZuMkGat5jA48VtK6bg3ACjMDodkKYrRyPbouNuDSjLxcMVcG4ktrXvD2XxYMPKXZsK0crbOhjUN8rK+/r1zydXLza9TGwXE2xGJ2ZHiVZ3bh4/cWkG6x68KBvXKsgA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u7PxaHUOrgYXxz8Eg25NMAmP24bRqiAmVQlVEwg2qVk=;
- b=KZEmQqvhcH/ND0/eDGegIKFrGIX74wWDEj5druJvv9VlcisIGxjv91KGHglZKg/0YeYIqgA13oO+gGTffTAAxJR5GKjSSSx8ciuqDl71HylJ9oByNmYYawFs3MfFCjfl+kL/dsoXn3uWJWZppCGMn94LQkc2bhMS8hCSSwKxJtNDAjxO13dB5IdM03rrnVyBA1RQNleobff7YaYGxJOQdJTxv2OJoYa3z465YFQoMB2syOJjOhUp6iBKOPLKKpKGroOWGUno3DS38Wd7jz2zQzaiBRGgODKdFZoekSF25ACRfiGWsUulwDQ8699GYj/kUxt7Mo1bw/oP1FtElcl0KA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <505f2900-4f0b-e3ca-93c3-705028c1e826@suse.com>
-Date: Tue, 19 Apr 2022 10:46:36 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [PATCH V2 0/6] populate/unpopulate memory when domain on static
-Content-Language: en-US
-To: Penny Zheng <Penny.Zheng@arm.com>
-Cc: wei.chen@arm.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org
-References: <20220418122251.3583049-1-Penny.Zheng@arm.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <20220418122251.3583049-1-Penny.Zheng@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM5PR0301CA0036.eurprd03.prod.outlook.com
- (2603:10a6:206:14::49) To DU2PR04MB8616.eurprd04.prod.outlook.com
- (2603:10a6:10:2db::16)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=0g6rMVsuz5S1qZbmL08l1XOpRHEFMTyPqwdV6aI2Rmc=; b=Iz1ZAtY0nJ9I0eSLL3hdSnED2r
+	bWJknPeJ3tjRA0qEwIGa1uwd7KFfmGTjmA1bow+Trin2QcIFDzdr5BV3U4/+im6bn2h/CVFFPJLjm
+	QFQ7xjOq/ZLWY2GF9oosKtFVaJC7vPuY9Ue1MLMdJLDw/xWrzFrHvxdmsokcCtzEspSY=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-169534-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2427c996-22e7-48b9-563e-08da21e11b51
-X-MS-TrafficTypeDiagnostic: VI1PR04MB6318:EE_
-X-Microsoft-Antispam-PRVS:
-	<VI1PR04MB631838A0C299E9D629D7E57DB3F29@VI1PR04MB6318.eurprd04.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	D+0JlO2JjmG/D5oZpJWvF2biemaA5ztG+UcVvfCnwR8QeIzPGEOfNX/p1r1dogQTuAy+hdgJOS/0aosLY/PZn0FI4KfOS4oYoHaLytsH4EJQk0nyOe+xjam2aKiAgTreaNDNWUAUH4EggMVGxtZGLR9TrV/mnXLRHd3BFNPZBqPARyhUOdf0aXwRLT4ZF81zBHUUlej9wOaenwUISFNy01YZym0Ex8oAKJkS9t/EOMya1OobmUFbPbptq/GxLuSUD18lGwqD3juAt2ngXgkWBpZ6ZqWhyZiwf8emJHkWmfK6zEGCOohkx8NWlekSJKuICprfb9u2x6uMyWC3o2LwoLOqhsU6GOhHFVou4UxNT6IIfwrxTnbLSbeZvWscIjpC9kRnt8dOkpRkJuF1f66MipCP2RDWYEBfxtYEVnLeiPytzEnGacFn6tpnavoy3+Ts56GxWL8PF2aciJ4yMJDC9NFo3NFEaPNK3uBOfJgFVprPV3Zf8R46Pds6o1azTjt/d4AWB/hBMsMb1ZGB0MeiqMiEgFnWFQFSoxXzXe6DHa5fuAamjqALBR7xPhYjBwYVdMaIcYw1SiB+PYBp9Ch5XqzV/RbzidpQkpdDvm4O67G1R7j21U8q6rmGV19TpjblZNb/qv2ULWVflxoqw6DVBtOXSf7NXyAKwTbPeTRVWK6crp2nhYmfJ9LWWtQWvrpQ1/8A1HAK1pybpEy2bongVb9kdtZpasOGfpwQ0MMo5FVrj79HiYv41TYgCQAQuq0W
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(26005)(86362001)(508600001)(186003)(6486002)(6512007)(8936002)(2616005)(2906002)(5660300002)(53546011)(6506007)(31696002)(7416002)(36756003)(66476007)(66946007)(4326008)(8676002)(66556008)(31686004)(54906003)(6916009)(316002)(38100700002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?b0R3Rzk1dUdPNmt0ZDVaZjAwNE5sajd1SW0wQlJQRW9nS3BQQzBoc21qQVNk?=
- =?utf-8?B?Sm95cXdweVI5YjR5THRKVkJrQ3FGeVNYMzVMSUFHb0NTYzlSZ0cyUERxNGxh?=
- =?utf-8?B?K3FvTFVOQnNSYU85QkIvaGdTdXI1dDI0QUFLRFFMSXFRM05vbXBLMWFzMnQw?=
- =?utf-8?B?b25ySHh2TFRRSHVEclpkQ0JCNXVZc1RYb1JIayttTFVGdlJkb3RybC83OEs3?=
- =?utf-8?B?WE4rRUI2Ymw5bTMxRlhHZlhxaFB2TStZWFpmMThmdnNwTitYbXA5L0xoQUFi?=
- =?utf-8?B?dmJmOVVXYytQU0lIVGlNTzd2SFlaeWVZWEVUSUpYSDJwMTQxQ1NSRjNMYXp6?=
- =?utf-8?B?MVFXUWMxTndMTG1TbklMWjdLR1hPRi9nRHRJcUV3QndXdWVQaUg5SmthWVp0?=
- =?utf-8?B?VXVyMDhhQTlTYXpINVdvUlNqcnJxNXZPL2tEZ2JtelNqakdpQXMrUmRucXJk?=
- =?utf-8?B?dmpjbmtjZ3UyT2VYYi9mMWp5eFh0T3NKZ2x6OVlORVNwd1ZBdXY5OHVWOHF5?=
- =?utf-8?B?clZrd0tIOHNaS2VIeGR6MGZNNVhwME92Q21GMFErMjhkZjFBcnlyVHZrbnpK?=
- =?utf-8?B?YmV4NXFKdm9vcDV5Sld0SEVkeDFnSGpLeGxzam9IT1F6QVVPQXpudUdMUDdu?=
- =?utf-8?B?eUljNFg5RlV6Q2NValpFdDZCQUNKcmdZY2pCeGpJZnNEbTBPWTFKbXFVRjB2?=
- =?utf-8?B?eUk3U1R3K2NQWWVqaksxTzdaTjA3ZUs1aTJsT2wrRHVZMzRNelFYeVpSUkNR?=
- =?utf-8?B?SDQ4SFREOTgvVGxKTXFnUk5iMGxyVms1alBsZG9hdVJBNitFcC83V1ZTRStF?=
- =?utf-8?B?RDI0VklQdFdvYzU4emF3L3l2TnVabEs1RHRtMjlxT2NKSTkzKzdNSElFMGw0?=
- =?utf-8?B?NW5hb2VqdmMvSDk1Ym5WWFNXNnVFaVczK2JESC9KZFVXVEhRS2dpdWkwZGV5?=
- =?utf-8?B?c0wvV05SVnhxS2NmK0lpcTdiMnFmWnA1di9NR29Cems0OTZZMEFCYmp6Vmha?=
- =?utf-8?B?M1VycGRkQkROUUJkOVhmekhsZUdlckZMbWZja3RoWWhHUDd5S1JpdnNVVysy?=
- =?utf-8?B?QWF3Q09OSlB3VzhrZnJLS1krV2t3ZkZYd0JUc3VZT0ZaVzUxbFNndEthUFg2?=
- =?utf-8?B?b1pUdjBoM25ydHR5ckxjTW9CNVp4OWZCdU1jeTdXN2J2TitIc1h6NkIwdURv?=
- =?utf-8?B?OURvakJDWXhzT0U1Zm1hL3c2dFBKeG9YS2FFNGFmTldJczZqTGwvYmRZcS85?=
- =?utf-8?B?bFY1bDlESXZ4ZXA4Vm1nTkc5NGNwSTFwNENya2FIbk9tZVdUUFVabXduNm14?=
- =?utf-8?B?L1ZBUXoyTkpCWnhjQ1RVSzVrcGNiaTBqY3Zsb2JjSkd0ejViTWJpbmN3bkts?=
- =?utf-8?B?OFgwYkpsVnhlMGVRVWIvcmU2OTJHY3Z6NkZZd0wzNVJKUjQwR1VUWkp0cjhi?=
- =?utf-8?B?ZFFrQUIwVEtJcnIxWWE2dnY4ZDlNdTg1MUdaOXBDa2RQS0JiNE9xcWJYUXRl?=
- =?utf-8?B?TjU5U1kycGJCLzFRZ0xuTTQrZjhKWk5UM0drSEZ6cnZDaFRvRHh4RHpITytw?=
- =?utf-8?B?M25na21FcGpSNTdPclBpKytrS0hxZXk2VVhEekhVSHl1dXRxWlRSc29UTmIy?=
- =?utf-8?B?RnVkaVpjcHNEdnZsWmNPMlFFcGZEKysrOW9KY2hCc05LeGhwTi9udVlzMExO?=
- =?utf-8?B?TzZFVkhsQWw3WTg2Ylp3NldHRDA1RjNiQWNZOFRmT09XcmlFQW9GT1B2cEtk?=
- =?utf-8?B?TWdXYTNZSHVmZjRXSVgraWVJZWxZd1g4ZXlGdHlkZ3YvZFBLZnpLSm5EcGh6?=
- =?utf-8?B?d1JMQitVZllRZEFkQzNlbEcvMVNna3dWSTl5djZsY3BlT3pKclJNZ2ZCZGR1?=
- =?utf-8?B?cVBIa1A3Q2lKYkFlN29zL1FHaDBWc2FYeURTcHN4OHdVV2Q5N2l6cHphcWky?=
- =?utf-8?B?SmNMY05uRDdTVDl5QmllTUtEVElSSmRLd2JBSkRQVFlwS3hubEh5eU9zZjFq?=
- =?utf-8?B?b0l5Y21KT1JEZi9SVmR4TFBvU3lkdGkrZTMrMnBuenp5MnpHRHZGaENPblBC?=
- =?utf-8?B?SHZGQ0VOQmxxMUJ4Z3hlaGFUNkJwdU93c1V6ZG55djFUYjh6cjFEcjFxOHBG?=
- =?utf-8?B?WnRWbTVsZDBBS3RWc1E2NVFUekRlNi9VRTVXZFJWOHlyQTNhVWdmRndrcnBp?=
- =?utf-8?B?YnlhSVhaWDJPTVc0a1I0SW1PVXJiQTJ1MHlOTnUzaWVMd0NRSTdIS1pwam01?=
- =?utf-8?B?aUl6ZEZKVVFiZEpERWIycTZUTmF2Z3hQWHN5a1BPMFlDeXpWNFM2VFUwUzNt?=
- =?utf-8?B?aU9VcDVtaWh6R241N2NBZS9OMlJGdXRlWjQxZ2tFTFNsUDJqQVo3QT09?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2427c996-22e7-48b9-563e-08da21e11b51
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8616.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2022 08:46:33.7582
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JUNmUmsfmfRvV8g2WUsRiBmem5h7QF0uPAeM7pjxkpvFL3WBuoi7Nv3eaDDtc43Q9JM3mq7AkYaz/LsvCC0+ng==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6318
+Subject: [ovmf test] 169534: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=76fda1def3d1baea3b01ae697687ff478d2d1b42
+X-Osstest-Versions-That:
+    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 19 Apr 2022 08:59:35 +0000
 
-On 18.04.2022 14:22, Penny Zheng wrote:
-> Today when a domain unpopulates the memory on runtime, they will always
-> hand the memory over to the heap allocator. And it will be a problem if it
-> is a static domain. Pages as guest RAM for static domain shall always be
-> reserved to only this domain and not be used for any other purposes, so
-> they shall never go back to heap allocator.
-> 
-> This patch serie intends to fix this issue, by adding pages on the new list
-> resv_page_list after having taken them off the "normal" list, when unpopulating
-> memory, and retrieving pages from resv page list(resv_page_list) when
-> populating memory.
-> 
-> ---
-> v2 changes:
-> - let "flags" live in the struct domain. So other arch can take
-> advantage of it in the future
-> - change name from "is_domain_on_static_allocation" to "is_domain_static()"
+flight 169534 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/169534/
 
-I have reservations against this new name: This could mean far more aspects
-of the domain are static than just its memory assignment. Was this intended
-(or at least considered)?
+Regressions :-(
 
-Jan
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 168254
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
+ build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
 
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+
+version targeted for testing:
+ ovmf                 76fda1def3d1baea3b01ae697687ff478d2d1b42
+baseline version:
+ ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
+
+Last test of basis   168254  2022-02-28 10:41:46 Z   49 days
+Failing since        168258  2022-03-01 01:55:31 Z   49 days  501 attempts
+Testing same since   169527  2022-04-19 01:40:37 Z    0 days    6 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
+  Abner Chang <abner.chang@hpe.com>
+  Akihiko Odaki <akihiko.odaki@gmail.com>
+  Anthony PERARD <anthony.perard@citrix.com
+  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
+  Bo Chang Ke <bo-changx.ke@intel.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Chen Lin Z <lin.z.chen@intel.com>
+  Chen, Lin Z <lin.z.chen@intel.com>
+  Dandan Bi <dandan.bi@intel.com>
+  Dun Tan <dun.tan@intel.com>
+  Feng, Bob C <bob.c.feng@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Guo Dong <guo.dong@intel.com>
+  Guomin Jiang <guomin.jiang@intel.com>
+  Hao A Wu <hao.a.wu@intel.com>
+  Heng Luo <heng.luo@intel.com>
+  Hua Ma <hua.ma@intel.com>
+  Huang, Li-Xia <lisa.huang@intel.com>
+  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
+  Jason <yun.lou@intel.com>
+  Jason Lou <yun.lou@intel.com>
+  Ke, Bo-ChangX <bo-changx.ke@intel.com>
+  Ken Lautner <kenlautner3@gmail.com>
+  Kenneth Lautner <kenlautner3@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Lean Sheng Tan <sheng.tan@9elements.com>
+  Leif Lindholm <quic_llindhol@quicinc.com
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Li, Zhihao <zhihao.li@intel.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Liu <yun.y.liu@intel.com>
+  Liu Yun <yun.y.liu@intel.com>
+  Liu Yun Y <yun.y.liu@intel.com>
+  Lixia Huang <lisa.huang@intel.com>
+  Lou, Yun <Yun.Lou@intel.com>
+  Ma, Hua <Hua.Ma@intel.com>
+  Mara Sophie Grosch <littlefox@lf-net.org>
+  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
+  Matt DeVillier <matt.devillier@gmail.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Michael Kubacki <mikuback@microsoft.com>
+  Min Xu <min.m.xu@intel.com>
+  Oliver Steffen <osteffen@redhat.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <quic_rcran@quicinc.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Rhodes <sean@starlabs.systems>
+  Sean Rhodes sean@starlabs.systems
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Sunny Wang <sunny.wang@arm.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
+  Xiaolu.Jiang <xiaolu.jiang@intel.com>
+  Xie, Yuanhao <yuanhao.xie@intel.com>
+  Yi Li <yi1.li@intel.com>
+  yi1 li <yi1.li@intel.com>
+  Yuanhao Xie <yuanhao.xie@intel.com>
+  Zhihao Li <zhihao.li@intel.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 5491 lines long.)
 
