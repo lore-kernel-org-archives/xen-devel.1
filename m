@@ -4,37 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54040C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 07:27:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.308932.524841 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EB5BC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 07:31:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.308940.524878 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh4kZ-00056E-1N; Wed, 20 Apr 2022 07:27:43 +0000
+	id 1nh4o9-000745-Je; Wed, 20 Apr 2022 07:31:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 308932.524841; Wed, 20 Apr 2022 07:27:43 +0000
+Received: by outflank-mailman (output) from mailman id 308940.524878; Wed, 20 Apr 2022 07:31:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh4kY-000567-Tj; Wed, 20 Apr 2022 07:27:42 +0000
-Received: by outflank-mailman (input) for mailman id 308932;
- Wed, 20 Apr 2022 07:27:42 +0000
+	id 1nh4o9-00072n-DY; Wed, 20 Apr 2022 07:31:25 +0000
+Received: by outflank-mailman (input) for mailman id 308940;
+ Wed, 20 Apr 2022 07:31:24 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=glqv=U6=kernel.org=sj@srs-se1.protection.inumbo.net>)
- id 1nh4kY-000561-98
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 07:27:42 +0000
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [2604:1380:4601:e00::1])
+ (envelope-from <SRS0=aTZJ=U6=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1nh4o8-0006Tb-BJ
+ for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 07:31:24 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5bccc89d-c07b-11ec-8fbf-03012f2f19d4;
- Wed, 20 Apr 2022 09:27:40 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id dfdddeec-c07b-11ec-8fbf-03012f2f19d4;
+ Wed, 20 Apr 2022 09:31:21 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 5FB0FB81D64;
- Wed, 20 Apr 2022 07:27:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 994ECC385A1;
- Wed, 20 Apr 2022 07:27:37 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 8615D2112B;
+ Wed, 20 Apr 2022 07:31:21 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5694C13A30;
+ Wed, 20 Apr 2022 07:31:21 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id wED1E8m2X2IhXAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 07:31:21 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,86 +53,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5bccc89d-c07b-11ec-8fbf-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1650439658;
-	bh=SOilJc5Vxvp6JDI/sAy8cOGRwLrY6YXHjo9rcXuykR0=;
-	h=From:To:Cc:Subject:Date:From;
-	b=AAoiVkRoimlgphII5KT74LccxQywDwBG6zlj3n/nXZMKq0h/3hKTni+wRFYiLNliH
-	 2wdA6wHLs+hRq1qPEVquhcFlO4hcz5SITkyceaZsdjsApJlKgHZjbSgxVaLFVFdykw
-	 u6z5sIfBytOwXvr0D0EYU5yNCJUjmjU+mE7lR6PDFCK4USuNy4j/zm1tqGXBV4TB7q
-	 gjPdo0F1ZOq+sLDuVP1+wpxehnvgwVEkcsvXHaK5n2/LxpF6zxFOxH136VUFCiIYEl
-	 PIZKaXKJJCPecI+kugX5fY6fOQd5fLCU9p9q5WD9DLwHixBKU2D3Y8ECtq8ALV7s9V
-	 5dG7FlOpE15ig==
-From: SeongJae Park <sj@kernel.org>
-To: jgross@suse.com
-Cc: roger.pau@citrix.com,
-	mheyne@amazon.de,
-	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
-	SeongJae Park <sj@kernel.org>
-Subject: [PATCH v2] xen-blk{back,front}: Update contact points for buffer_squeeze_duration_ms and feature_persistent
-Date: Wed, 20 Apr 2022 07:27:34 +0000
-Message-Id: <20220420072734.1692-1-sj@kernel.org>
-X-Mailer: git-send-email 2.25.1
+X-Inumbo-ID: dfdddeec-c07b-11ec-8fbf-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1650439881; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=8ofN2RF9Ov3D5sC5yESVJrU8I3one2H23BuRvfynNlI=;
+	b=CFYyAfwKtHfiGQPN8PiSdhC2b12FJrOUyq3casjWcZCNkvp7W9stmazsqnXa4o/RhhTyeb
+	MP/iSlvFo1wX/n/wZnwJjJeIbS2HQjVU/qQzGB2Hhj/P/NIyaGKm9k2L964JCsnPGxZTA+
+	GeWxLSGo7DqukzpY3u4yJFuYIlGl5tQ=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH 3/4] tools/libs/guest: don't set errno to a negative value
+Date: Wed, 20 Apr 2022 09:31:18 +0200
+Message-Id: <20220420073119.16974-4-jgross@suse.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220420073119.16974-1-jgross@suse.com>
+References: <20220420073119.16974-1-jgross@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-SeongJae is currently listed as a contact point for some blk{back,front}
-features, but he will not work for XEN for a while.  This commit
-therefore updates the contact point to his colleague, Maximilian, who is
-understanding the context and actively working with the features now.
+Setting errno to a negative error value makes no sense.
 
-Signed-off-by: SeongJae Park <sj@kernel.org>
-Signed-off-by: Maximilian Heyne <mheyne@amazon.de>
-Acked-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
+ tools/libs/guest/xg_dom_core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changes from v1
-(https://lore.kernel.org/xen-devel/20220301144628.2858-1-sj@kernel.org/)
-- Add Acked-by from Roger
-
- Documentation/ABI/testing/sysfs-driver-xen-blkback  | 4 ++--
- Documentation/ABI/testing/sysfs-driver-xen-blkfront | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkback b/Documentation/ABI/testing/sysfs-driver-xen-blkback
-index a74dfe52dd76..7faf719af165 100644
---- a/Documentation/ABI/testing/sysfs-driver-xen-blkback
-+++ b/Documentation/ABI/testing/sysfs-driver-xen-blkback
-@@ -29,7 +29,7 @@ Description:
- What:           /sys/module/xen_blkback/parameters/buffer_squeeze_duration_ms
- Date:           December 2019
- KernelVersion:  5.6
--Contact:        SeongJae Park <sj@kernel.org>
-+Contact:        Maximilian Heyne <mheyne@amazon.de>
- Description:
-                 When memory pressure is reported to blkback this option
-                 controls the duration in milliseconds that blkback will not
-@@ -39,7 +39,7 @@ Description:
- What:           /sys/module/xen_blkback/parameters/feature_persistent
- Date:           September 2020
- KernelVersion:  5.10
--Contact:        SeongJae Park <sj@kernel.org>
-+Contact:        Maximilian Heyne <mheyne@amazon.de>
- Description:
-                 Whether to enable the persistent grants feature or not.  Note
-                 that this option only takes effect on newly created backends.
-diff --git a/Documentation/ABI/testing/sysfs-driver-xen-blkfront b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-index 61fd173fabfe..7f646c58832e 100644
---- a/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-+++ b/Documentation/ABI/testing/sysfs-driver-xen-blkfront
-@@ -12,7 +12,7 @@ Description:
- What:           /sys/module/xen_blkfront/parameters/feature_persistent
- Date:           September 2020
- KernelVersion:  5.10
--Contact:        SeongJae Park <sj@kernel.org>
-+Contact:        Maximilian Heyne <mheyne@amazon.de>
- Description:
-                 Whether to enable the persistent grants feature or not.  Note
-                 that this option only takes effect on newly created frontends.
+diff --git a/tools/libs/guest/xg_dom_core.c b/tools/libs/guest/xg_dom_core.c
+index c17cf9f712..c4f4e7f3e2 100644
+--- a/tools/libs/guest/xg_dom_core.c
++++ b/tools/libs/guest/xg_dom_core.c
+@@ -855,7 +855,7 @@ int xc_dom_devicetree_file(struct xc_dom_image *dom, const char *filename)
+         return -1;
+     return 0;
+ #else
+-    errno = -EINVAL;
++    errno = EINVAL;
+     return -1;
+ #endif
+ }
 -- 
-2.25.1
+2.34.1
 
 
