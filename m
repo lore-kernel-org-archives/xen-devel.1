@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F95C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 15:10:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.309361.525619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B9B2C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 15:10:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.309362.525631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhByB-0007H9-FG; Wed, 20 Apr 2022 15:10:15 +0000
+	id 1nhByD-0007fM-9x; Wed, 20 Apr 2022 15:10:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 309361.525619; Wed, 20 Apr 2022 15:10:15 +0000
+Received: by outflank-mailman (output) from mailman id 309362.525631; Wed, 20 Apr 2022 15:10:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhByA-00079l-3z; Wed, 20 Apr 2022 15:10:14 +0000
-Received: by outflank-mailman (input) for mailman id 309361;
+	id 1nhByB-0007X3-TO; Wed, 20 Apr 2022 15:10:15 +0000
+Received: by outflank-mailman (input) for mailman id 309362;
  Wed, 20 Apr 2022 15:10:07 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aTZJ=U6=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nhBy2-0003l4-N6
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 15:10:06 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f3288839-c0bb-11ec-a405-831a346695d4;
- Wed, 20 Apr 2022 17:10:01 +0200 (CEST)
+ id 1nhBy3-0003l9-7V
+ for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 15:10:07 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f3a0aa29-c0bb-11ec-8fbf-03012f2f19d4;
+ Wed, 20 Apr 2022 17:10:02 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 326F31F752;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id EC45B2112B;
  Wed, 20 Apr 2022 15:10:01 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0350D13AD5;
- Wed, 20 Apr 2022 15:10:00 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B940913AD5;
+ Wed, 20 Apr 2022 15:10:01 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id wJc1O0giYGJILQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 15:10:00 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id GL8QLEkiYGJILQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 15:10:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,81 +53,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3288839-c0bb-11ec-a405-831a346695d4
+X-Inumbo-ID: f3a0aa29-c0bb-11ec-8fbf-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1650467401; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=CI5eCbbUh0HTvUxNvVm6rOMW68v7G6W10HjxAtg/ngA=;
-	b=gjZEMURyKhH+ffoe/cJZIs+1qR6NiuC5LbjUsc6HQbUiY2YzhMqa9gcWbW4J8W52XRcuUB
-	bxVKmzgppOt2rXgXD9zG+IZ7iT7xfDjw0J35R694tg4TxR9zrp0FyFGkwbXBgSna0vfc7P
-	/KVWK5ggl/fmh28DGQ7IZcMIgPfHAnU=
+	bh=zIVRYJfuKT5Cc8Eh8lkT4S5YymR5yO4CxthS7o0vErk=;
+	b=dqosmBbYFka6Cq4Fx3XDgQHYlD1l+kwlMIm2CKI8qmUk88Qls9O2u9OhjZfgqQVVyXEHAl
+	F5AYRXlkgASQKbFoZaaEmJYPy7bQ0yV3XDjBRjOVGpr8R+cUhgWmk84/IMZM/K9yZKlQHC
+	oSvKC/4crEhSlduV6M0b2pJQU17VPOU=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	linux-integrity@vger.kernel.org,
+	linux-scsi@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Peter Huewe <peterhuewe@gmx.de>,
-	Jarkko Sakkinen <jarkko@kernel.org>,
-	Jason Gunthorpe <jgg@ziepe.ca>
-Subject: [PATCH 12/18] xen/tpmfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-Date: Wed, 20 Apr 2022 17:09:36 +0200
-Message-Id: <20220420150942.31235-13-jgross@suse.com>
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"James E.J. Bottomley" <jejb@linux.ibm.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>
+Subject: [PATCH 15/18] xen/scsifront: use xenbus_setup_ring() and xenbus_teardown_ring()
+Date: Wed, 20 Apr 2022 17:09:39 +0200
+Message-Id: <20220420150942.31235-16-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220420150942.31235-1-jgross@suse.com>
 References: <20220420150942.31235-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Simplify tpmfront's ring creation and removal via xenbus_setup_ring()
+Simplify scsifront's ring creation and removal via xenbus_setup_ring()
 and xenbus_teardown_ring().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/char/tpm/xen-tpmfront.c | 18 +++---------------
- 1 file changed, 3 insertions(+), 15 deletions(-)
+ drivers/scsi/xen-scsifront.c | 27 +++++++--------------------
+ 1 file changed, 7 insertions(+), 20 deletions(-)
 
-diff --git a/drivers/char/tpm/xen-tpmfront.c b/drivers/char/tpm/xen-tpmfront.c
-index 69df04ae2401..379291826261 100644
---- a/drivers/char/tpm/xen-tpmfront.c
-+++ b/drivers/char/tpm/xen-tpmfront.c
-@@ -253,20 +253,12 @@ static int setup_ring(struct xenbus_device *dev, struct tpm_private *priv)
- 	struct xenbus_transaction xbt;
- 	const char *message = NULL;
- 	int rv;
+diff --git a/drivers/scsi/xen-scsifront.c b/drivers/scsi/xen-scsifront.c
+index 9db2366fa2d4..f15a35750040 100644
+--- a/drivers/scsi/xen-scsifront.c
++++ b/drivers/scsi/xen-scsifront.c
+@@ -798,28 +798,17 @@ static int scsifront_alloc_ring(struct vscsifrnt_info *info)
+ {
+ 	struct xenbus_device *dev = info->dev;
+ 	struct vscsiif_sring *sring;
 -	grant_ref_t gref;
+-	int err = -ENOMEM;
++	int err;
  
--	priv->shr = (void *)__get_free_page(GFP_KERNEL|__GFP_ZERO);
--	if (!priv->shr) {
--		xenbus_dev_fatal(dev, -ENOMEM, "allocating shared ring");
--		return -ENOMEM;
+ 	/***** Frontend to Backend ring start *****/
+-	sring = (struct vscsiif_sring *)__get_free_page(GFP_KERNEL);
+-	if (!sring) {
+-		xenbus_dev_fatal(dev, err,
+-			"fail to allocate shared ring (Front to Back)");
++	err = xenbus_setup_ring(dev, GFP_KERNEL, (void **)&sring, 1,
++				&info->ring_ref);
++	if (err)
+ 		return err;
 -	}
++
+ 	SHARED_RING_INIT(sring);
+ 	FRONT_RING_INIT(&info->ring, sring, PAGE_SIZE);
+ 
+-	err = xenbus_grant_ring(dev, sring, 1, &gref);
+-	if (err < 0) {
+-		free_page((unsigned long)sring);
+-		xenbus_dev_fatal(dev, err,
+-			"fail to grant shared ring (Front to Back)");
+-		return err;
+-	}
+-	info->ring_ref = gref;
 -
--	rv = xenbus_grant_ring(dev, priv->shr, 1, &gref);
-+	rv = xenbus_setup_ring(dev, GFP_KERNEL, (void **)&priv->shr, 1,
-+			       &priv->ring_ref);
- 	if (rv < 0)
- 		return rv;
+ 	err = xenbus_alloc_evtchn(dev, &info->evtchn);
+ 	if (err) {
+ 		xenbus_dev_fatal(dev, err, "xenbus_alloc_evtchn");
+@@ -847,8 +836,7 @@ static int scsifront_alloc_ring(struct vscsifrnt_info *info)
+ free_irq:
+ 	unbind_from_irqhandler(info->irq, info);
+ free_gnttab:
+-	gnttab_end_foreign_access(info->ring_ref,
+-				  (unsigned long)info->ring.sring);
++	xenbus_teardown_ring((void **)&sring, 1, &info->ring_ref);
  
--	priv->ring_ref = gref;
--
- 	rv = xenbus_alloc_evtchn(dev, &priv->evtchn);
- 	if (rv)
- 		return rv;
-@@ -331,11 +323,7 @@ static void ring_free(struct tpm_private *priv)
- 	if (!priv)
- 		return;
+ 	return err;
+ }
+@@ -856,8 +844,7 @@ static int scsifront_alloc_ring(struct vscsifrnt_info *info)
+ static void scsifront_free_ring(struct vscsifrnt_info *info)
+ {
+ 	unbind_from_irqhandler(info->irq, info);
+-	gnttab_end_foreign_access(info->ring_ref,
+-				  (unsigned long)info->ring.sring);
++	xenbus_teardown_ring((void **)&info->ring.sring, 1, &info->ring_ref);
+ }
  
--	if (priv->ring_ref)
--		gnttab_end_foreign_access(priv->ring_ref,
--				(unsigned long)priv->shr);
--	else
--		free_page((unsigned long)priv->shr);
-+	xenbus_teardown_ring((void **)&priv->shr, 1, &priv->ring_ref);
- 
- 	if (priv->irq)
- 		unbind_from_irqhandler(priv->irq, priv);
+ static int scsifront_init_ring(struct vscsifrnt_info *info)
 -- 
 2.34.1
 
