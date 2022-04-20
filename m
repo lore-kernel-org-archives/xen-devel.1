@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D01E8C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 13:28:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.309242.525294 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10227C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 13:40:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.309248.525305 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhANL-0000FQ-K7; Wed, 20 Apr 2022 13:28:07 +0000
+	id 1nhAZ3-0002ed-Oj; Wed, 20 Apr 2022 13:40:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 309242.525294; Wed, 20 Apr 2022 13:28:07 +0000
+Received: by outflank-mailman (output) from mailman id 309248.525305; Wed, 20 Apr 2022 13:40:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhANL-0000FJ-GE; Wed, 20 Apr 2022 13:28:07 +0000
-Received: by outflank-mailman (input) for mailman id 309242;
- Wed, 20 Apr 2022 13:28:06 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nhAZ3-0002eW-Jz; Wed, 20 Apr 2022 13:40:13 +0000
+Received: by outflank-mailman (input) for mailman id 309248;
+ Wed, 20 Apr 2022 13:40:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=nGXA=U6=inria.fr=julia.lawall@srs-se1.protection.inumbo.net>)
- id 1nhANK-0000FD-8W
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 13:28:06 +0000
+ id 1nhAZ2-0002eQ-Qy
+ for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 13:40:12 +0000
 Received: from mail2-relais-roc.national.inria.fr
  (mail2-relais-roc.national.inria.fr [192.134.164.83])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ae6dd775-c0ad-11ec-8fbf-03012f2f19d4;
- Wed, 20 Apr 2022 15:27:53 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 664fea9d-c0af-11ec-a405-831a346695d4;
+ Wed, 20 Apr 2022 15:40:11 +0200 (CEST)
 Received: from 203.107.68.85.rev.sfr.net (HELO hadrien) ([85.68.107.203])
  by mail2-relais-roc.national.inria.fr with
- ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Apr 2022 15:28:03 +0200
+ ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Apr 2022 15:40:10 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,20 +42,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ae6dd775-c0ad-11ec-8fbf-03012f2f19d4
+X-Inumbo-ID: 664fea9d-c0af-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=inria.fr; s=dc;
   h=date:from:to:cc:subject:in-reply-to:message-id:
    references:mime-version;
-  bh=+CoeG1wGEI8/gfMyxtQ5JH5NSEVqNFUDQuUEB1szdvM=;
-  b=AEhXO2mE1hpaKTTPfhCAJm2kDZDm+IKMhPsQCDZfeqrnUOkvF3XHJSft
-   0uWekxsBgStNaOhDaWn4f9+SepJ845Q0i8JhNvEvztlACkGEvBkg8DZoe
-   C2rKv55OG3gHEVEv077nOIw/KnN63OT80cFE6q4+X6CqIIdcGj2M3SCl5
-   U=;
+  bh=9I3bT6dcN2vCZLdK2K7miTQFQ1CYOstV5pWjpPiUb+Y=;
+  b=WNZyopOqnJxaQ0EhlQcHhCW6rNA0BpnSUqA0bIJDlbTQEM3Rt2Cdovry
+   Tutni1e+2r9GTbhxHgPRi8GoQGNbn11m+/rdD/n/BRa1s4Wzw9FP785jj
+   ys0FAO5f9ksBA0jBF9qSnnCdQEI6Fv4lliFLxxLcUZLBl5iqvKjU2Yv+0
+   I=;
 Authentication-Results: mail2-relais-roc.national.inria.fr; dkim=none (message not signed) header.i=none; spf=SoftFail smtp.mailfrom=julia.lawall@inria.fr; dmarc=fail (p=none dis=none) d=inria.fr
 X-IronPort-AV: E=Sophos;i="5.90,275,1643670000"; 
-   d="scan'208";a="32524915"
-Date: Wed, 20 Apr 2022 15:28:03 +0200 (CEST)
+   d="scan'208";a="32527674"
+Date: Wed, 20 Apr 2022 15:40:10 +0200 (CEST)
 From: Julia Lawall <julia.lawall@inria.fr>
 X-X-Sender: jll@hadrien
 To: "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
@@ -66,16 +66,16 @@ cc: Julia Lawall <julia.lawall@inria.fr>, ira.weiny@intel.com,
     linux-kernel@vger.kernel.org
 Subject: Re: [PATCH v2] xen:  Convert kmap() to kmap_local_page()
 In-Reply-To: <2940450.687JKscXgg@leap>
-Message-ID: <alpine.DEB.2.22.394.2204201525080.2937@hadrien>
+Message-ID: <alpine.DEB.2.22.394.2204201538560.2937@hadrien>
 References: <20220419234328.10346-1-eng.alaamohamedsoliman.am@gmail.com> <alpine.DEB.2.22.394.2204200759080.2937@hadrien> <2940450.687JKscXgg@leap>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-65486685-1650461283=:2937"
+Content-Type: multipart/mixed; boundary="8323329-1715972237-1650462010=:2937"
 
   This message is in MIME format.  The first part should be readable text,
   while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323329-65486685-1650461283=:2937
+--8323329-1715972237-1650462010=:2937
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8BIT
 
@@ -119,11 +119,6 @@ On Wed, 20 Apr 2022, Fabio M. De Francesco wrote:
 >
 > Only a minor objection... it doesn't tell when 'e2' has been allocated
 > within the same function where the kmap() call is.
-
-OK, thanks for pointing that out.  That seems like a key point that should
-be mentioned in log messages.  It's not even visible in the context lines
-around the patch.
-
 >
 > In the particular case that I cite above, I'd prefer to remove the
 > allocation of the page (say with alloc_page()) and convert kmap() /kunmap()
@@ -139,10 +134,19 @@ around the patch.
 > argument to this function) and, if so, propose a replacement with
 > kmalloc()?
 
-Sure.  I'll take a look at the precise example Alaa started with and see
-if I can come up with something.
+It looks complex in this case, because the allocation is in another
+function, and it is passed to another function.
 
-thanks,
 julia
---8323329-65486685-1650461283=:2937--
+
+
+>
+> Thanks,
+>
+> Fabio
+>
+>
+>
+>
+--8323329-1715972237-1650462010=:2937--
 
