@@ -4,37 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 100A3C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 02:42:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.308670.524478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7DEDC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 02:48:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.308704.524500 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh0Hv-0005kG-Sj; Wed, 20 Apr 2022 02:41:51 +0000
+	id 1nh0Nc-0007N8-1M; Wed, 20 Apr 2022 02:47:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 308670.524478; Wed, 20 Apr 2022 02:41:51 +0000
+Received: by outflank-mailman (output) from mailman id 308704.524500; Wed, 20 Apr 2022 02:47:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nh0Hv-0005k2-OD; Wed, 20 Apr 2022 02:41:51 +0000
-Received: by outflank-mailman (input) for mailman id 308670;
- Wed, 20 Apr 2022 02:41:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=HBwa=U6=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1nh0Cv-0000eu-1W
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 02:36:41 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b43f5801-c052-11ec-a405-831a346695d4;
- Wed, 20 Apr 2022 04:36:39 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 01C0F615A4;
- Wed, 20 Apr 2022 02:36:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8762C385A5;
- Wed, 20 Apr 2022 02:36:36 +0000 (UTC)
+	id 1nh0Nb-0007N1-TL; Wed, 20 Apr 2022 02:47:43 +0000
+Received: by outflank-mailman (input) for mailman id 308704;
+ Wed, 20 Apr 2022 02:47:42 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nh0Na-0007Mr-LW; Wed, 20 Apr 2022 02:47:42 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nh0Na-0004Pp-Id; Wed, 20 Apr 2022 02:47:42 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nh0Na-0005VM-40; Wed, 20 Apr 2022 02:47:42 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1nh0Na-0004xC-3W; Wed, 20 Apr 2022 02:47:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,193 +44,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b43f5801-c052-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1650422197;
-	bh=n6fUiwY5cUeV/2+c5RHqtGzf+nZ4s2cGnOrO1GfdEe8=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=D0xlD03sW7FW+35G64kb/KoosNEJ2tvPRcy7dG/mcBZqzHccRtpcHctWY+UmHr/Tm
-	 O8lLEtro+48WAcOOi2ryfmqk++SPnTYjHzr5xGyLQ+xgIsaSUcLyAv4juStMOV+jZ9
-	 g40LFZL1qNqUFMVKiYTrnKzA3+LG+6ydxSXH+m0bgQkAhN/xik4IcXDVX7JXQCEYDI
-	 nMhqO70kPicUQPc2N6UiB2TMgA8PXGWWb+hjNw9nZJWD0S5ycE+wmmKCJowk1a+opK
-	 axASYlIfgmouow1x2OngjI922JSFIPSwPp5CmOOmYRZAL1+q9XTznhizDPSi2HXbsZ
-	 YMo6akpfd628g==
-Date: Tue, 19 Apr 2022 19:36:36 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Rahul Singh <Rahul.Singh@arm.com>
-cc: Stefano Stabellini <sstabellini@kernel.org>, 
-    Christoph Hellwig <hch@lst.de>, xen-devel <xen-devel@lists.xenproject.org>, 
-    Bertrand Marquis <Bertrand.Marquis@arm.com>, Julien Grall <julien@xen.org>, 
-    Jan Beulich <jbeulich@suse.com>, "jgross@suse.com" <jgross@suse.com>, 
-    "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>
-Subject: Re: xen-swiotlb issue when NVMe driver is enabled in Dom0 on ARM
-In-Reply-To: <49E3535A-5672-4047-AF86-05D5597C7019@arm.com>
-Message-ID: <alpine.DEB.2.22.394.2204191933450.915916@ubuntu-linux-20-04-desktop>
-References: <C82612B1-FED5-4139-9B87-FB33DD81F01A@arm.com> <alpine.DEB.2.22.394.2204131354190.3066615@ubuntu-linux-20-04-desktop> <8C511888-6183-421E-A4C7-B271DAF46696@arm.com> <alpine.DEB.2.22.394.2204141329290.894007@ubuntu-linux-20-04-desktop>
- <20220415063705.GA24262@lst.de> <alpine.DEB.2.22.394.2204150917390.915916@ubuntu-linux-20-04-desktop> <4BC65913-EB0A-441C-A09C-4175697BDE9D@arm.com> <alpine.DEB.2.22.394.2204181225340.915916@ubuntu-linux-20-04-desktop>
- <49E3535A-5672-4047-AF86-05D5597C7019@arm.com>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=U78hzo7khoQWkRnEUZXpteibCmltcGHftEf5YYeU9bU=; b=axHuGT8hSheUNox8rr0yO5YcgS
+	35U8Ro6gUpCYR8z4IXdqob9OCFGz+UaWh24Lk3TDi9VP7jBWdFELR86hlIef9dw71iyipa5PhZZzT
+	tYRaLfeFnwcsOWlgnRxbFQJU/3QhWtUpMUWMDtbE0PoSWGKPlmsdabuM4T9t+o1iW1Mk=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-169553-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [ovmf test] 169553: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=76fda1def3d1baea3b01ae697687ff478d2d1b42
+X-Osstest-Versions-That:
+    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 20 Apr 2022 02:47:42 +0000
 
-> > Then there is xen_swiotlb_init() which allocates some memory for
-> > swiotlb-xen at boot. It could lower the total amount of memory
-> > available, but if you disabled swiotlb-xen like I suggested,
-> > xen_swiotlb_init() still should get called and executed anyway at boot
-> > (it is called from arch/arm/xen/mm.c:xen_mm_init). So xen_swiotlb_init()
-> > shouldn't be the one causing problems.
-> >
-> > That's it -- there is nothing else in swiotlb-xen that I can think of.
-> >
-> > I don't have any good ideas, so I would only suggest to add more printks
-> > and report the results, for instance:
-> 
-> As suggested I added the more printks but only difference I see is the size apart
-> from that everything looks same .
-> 
-> Please find the attached logs for xen and native linux boot.
+flight 169553 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/169553/
 
-One difference is that the order of the allocations is significantly
-different after the first 3 allocations. It is very unlikely but
-possible that this is an unrelated concurrency bug that only occurs on
-Xen. I doubt it.
+Regressions :-(
 
-I think you could try booting native and Xen with only 1 CPU enabled in
-both cases.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 168254
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
+ build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
 
-For native, you can do that with maxcpus, e.g. maxcpus=1.
-For Xen, you can do that with dom0_max_vcpus=1. I don't think we need to
-reduce the number of pCPUs seen by Xen, but it could be useful to pass
-sched=null to avoid any scheduler effects. This is just for debugging of
-course.
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
+
+version targeted for testing:
+ ovmf                 76fda1def3d1baea3b01ae697687ff478d2d1b42
+baseline version:
+ ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
+
+Last test of basis   168254  2022-02-28 10:41:46 Z   50 days
+Failing since        168258  2022-03-01 01:55:31 Z   50 days  513 attempts
+Testing same since   169527  2022-04-19 01:40:37 Z    1 days   18 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
+  Abner Chang <abner.chang@hpe.com>
+  Akihiko Odaki <akihiko.odaki@gmail.com>
+  Anthony PERARD <anthony.perard@citrix.com
+  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
+  Bo Chang Ke <bo-changx.ke@intel.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Chen Lin Z <lin.z.chen@intel.com>
+  Chen, Lin Z <lin.z.chen@intel.com>
+  Dandan Bi <dandan.bi@intel.com>
+  Dun Tan <dun.tan@intel.com>
+  Feng, Bob C <bob.c.feng@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Guo Dong <guo.dong@intel.com>
+  Guomin Jiang <guomin.jiang@intel.com>
+  Hao A Wu <hao.a.wu@intel.com>
+  Heng Luo <heng.luo@intel.com>
+  Hua Ma <hua.ma@intel.com>
+  Huang, Li-Xia <lisa.huang@intel.com>
+  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
+  Jason <yun.lou@intel.com>
+  Jason Lou <yun.lou@intel.com>
+  Ke, Bo-ChangX <bo-changx.ke@intel.com>
+  Ken Lautner <kenlautner3@gmail.com>
+  Kenneth Lautner <kenlautner3@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Lean Sheng Tan <sheng.tan@9elements.com>
+  Leif Lindholm <quic_llindhol@quicinc.com
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Li, Zhihao <zhihao.li@intel.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Liu <yun.y.liu@intel.com>
+  Liu Yun <yun.y.liu@intel.com>
+  Liu Yun Y <yun.y.liu@intel.com>
+  Lixia Huang <lisa.huang@intel.com>
+  Lou, Yun <Yun.Lou@intel.com>
+  Ma, Hua <Hua.Ma@intel.com>
+  Mara Sophie Grosch <littlefox@lf-net.org>
+  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
+  Matt DeVillier <matt.devillier@gmail.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Michael Kubacki <mikuback@microsoft.com>
+  Min Xu <min.m.xu@intel.com>
+  Oliver Steffen <osteffen@redhat.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <quic_rcran@quicinc.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Rhodes <sean@starlabs.systems>
+  Sean Rhodes sean@starlabs.systems
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Sunny Wang <sunny.wang@arm.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
+  Xiaolu.Jiang <xiaolu.jiang@intel.com>
+  Xie, Yuanhao <yuanhao.xie@intel.com>
+  Yi Li <yi1.li@intel.com>
+  yi1 li <yi1.li@intel.com>
+  Yuanhao Xie <yuanhao.xie@intel.com>
+  Zhihao Li <zhihao.li@intel.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
 
 
-In reality, the most likely explanation is that the issue is a memory
-corruption. Something somewhere is corrupting Linux memory and it just
-happens that we see it when calling dma_direct_alloc. This means it is
-going to be difficult to find as the only real clue is that it is
-swiotlb-xen that is causing it.
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
 
 
-I added more printks with the goal of detecting swiotlb-xen code paths
-that shouldn't be taken in a normal dom0 boot without domUs. For
-instance, range_straddles_page_boundary should always return zero and
-the dma_mask check in xen_swiotlb_alloc_coherent should always succeed.
+Not pushing.
 
-Fingers crossed we'll notice that the wrong path is taken just before
-the crash.
-
-
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index 2b385c1b4a99..aab45ba4e9ef 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -284,6 +284,7 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 	phys_addr_t phys;
- 	dma_addr_t dev_addr;
- 
-+	printk("DEBUG %s %d size=%lu flags=%x attr=%lx\n",__func__,__LINE__,size,flags,attrs);
- 	/*
- 	* Ignore region specifiers - the kernel's ideas of
- 	* pseudo-phys memory layout has nothing to do with the
-@@ -295,6 +296,8 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 	/* Convert the size to actually allocated. */
- 	size = 1UL << (order + XEN_PAGE_SHIFT);
- 
-+	printk("DEBUG %s %d size=%lu flags=%x attr=%lx\n",__func__,__LINE__,size,flags,attrs);
-+
- 	/* On ARM this function returns an ioremap'ped virtual address for
- 	 * which virt_to_phys doesn't return the corresponding physical
- 	 * address. In fact on ARM virt_to_phys only works for kernel direct
-@@ -315,15 +318,18 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 	phys = dma_to_phys(hwdev, *dma_handle);
- 	dev_addr = xen_phys_to_dma(hwdev, phys);
- 	if (((dev_addr + size - 1 <= dma_mask)) &&
--	    !range_straddles_page_boundary(phys, size))
-+	    !range_straddles_page_boundary(phys, size)) {
- 		*dma_handle = dev_addr;
--	else {
-+		printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,dev_addr);
-+	} else {
-+		printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,dev_addr);
- 		if (xen_create_contiguous_region(phys, order,
- 						 fls64(dma_mask), dma_handle) != 0) {
- 			xen_free_coherent_pages(hwdev, size, ret, (dma_addr_t)phys, attrs);
- 			return NULL;
- 		}
- 		*dma_handle = phys_to_dma(hwdev, *dma_handle);
-+		printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,*dma_handle);
- 		SetPageXenRemapped(virt_to_page(ret));
- 	}
- 	memset(ret, 0, size);
-@@ -388,8 +394,12 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
- 	    !range_straddles_page_boundary(phys, size) &&
- 		!xen_arch_need_swiotlb(dev, phys, dev_addr) &&
- 		swiotlb_force != SWIOTLB_FORCE)
-+	{
-+		printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,dev_addr);
- 		goto done;
-+	}
- 
-+	printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,dev_addr);
- 	/*
- 	 * Oh well, have to allocate and map a bounce buffer.
- 	 */
-@@ -413,10 +423,13 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
- 
- done:
- 	if (!dev_is_dma_coherent(dev) && !(attrs & DMA_ATTR_SKIP_CPU_SYNC)) {
--		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dev_addr))))
-+		if (pfn_valid(PFN_DOWN(dma_to_phys(dev, dev_addr)))) {
-+			printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,dev_addr);
- 			arch_sync_dma_for_device(phys, size, dir);
--		else
-+		} else {
-+			printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,phys,dev_addr);
- 			xen_dma_sync_for_device(dev, dev_addr, size, dir);
-+		}
- 	}
- 	return dev_addr;
- }
-@@ -437,15 +450,20 @@ static void xen_swiotlb_unmap_page(struct device *hwdev, dma_addr_t dev_addr,
- 	BUG_ON(dir == DMA_NONE);
- 
- 	if (!dev_is_dma_coherent(hwdev) && !(attrs & DMA_ATTR_SKIP_CPU_SYNC)) {
--		if (pfn_valid(PFN_DOWN(dma_to_phys(hwdev, dev_addr))))
-+		if (pfn_valid(PFN_DOWN(dma_to_phys(hwdev, dev_addr)))) {
-+			printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,paddr,dev_addr);
- 			arch_sync_dma_for_cpu(paddr, size, dir);
--		else
-+		} else {
-+			printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,paddr,dev_addr);
- 			xen_dma_sync_for_cpu(hwdev, dev_addr, size, dir);
-+		}
- 	}
- 
- 	/* NOTE: We use dev_addr here, not paddr! */
--	if (is_xen_swiotlb_buffer(hwdev, dev_addr))
-+	if (is_xen_swiotlb_buffer(hwdev, dev_addr)) {
-+		printk("DEBUG %s %d phys=%llx dev_addr=%llx\n",__func__,__LINE__,paddr,dev_addr);
- 		swiotlb_tbl_unmap_single(hwdev, paddr, size, size, dir, attrs);
-+	}
- }
- 
- static void
-diff --git a/kernel/dma/mapping.c b/kernel/dma/mapping.c
-index 51bb8fa8eb89..fdddeaf1b7cd 100644
---- a/kernel/dma/mapping.c
-+++ b/kernel/dma/mapping.c
-@@ -429,9 +429,11 @@ void *dma_alloc_attrs(struct device *dev, size_t size, dma_addr_t *dma_handle,
- 	if (dma_alloc_from_dev_coherent(dev, size, dma_handle, &cpu_addr))
- 		return cpu_addr;
- 
-+	printk("DEBUG %s %d size=%lu flags=%x attr=%lx\n",__func__,__LINE__,size,flag,attrs);
- 	/* let the implementation decide on the zone to allocate from: */
- 	flag &= ~(__GFP_DMA | __GFP_DMA32 | __GFP_HIGHMEM);
- 
-+	printk("DEBUG %s %d size=%lu flags=%x attr=%lx\n",__func__,__LINE__,size,flag,attrs);
- 	if (dma_alloc_direct(dev, ops))
- 		cpu_addr = dma_direct_alloc(dev, size, dma_handle, flag, attrs);
- 	else if (ops->alloc)
+(No revision log; it would be 5491 lines long.)
 
