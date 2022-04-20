@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4B3AC4321E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 694E1C43217
 	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 15:10:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.309347.525487 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.309348.525498 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhBxw-0003lM-JS; Wed, 20 Apr 2022 15:10:00 +0000
+	id 1nhBxx-00043c-Rq; Wed, 20 Apr 2022 15:10:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 309347.525487; Wed, 20 Apr 2022 15:10:00 +0000
+Received: by outflank-mailman (output) from mailman id 309348.525498; Wed, 20 Apr 2022 15:10:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhBxw-0003lF-GD; Wed, 20 Apr 2022 15:10:00 +0000
-Received: by outflank-mailman (input) for mailman id 309347;
- Wed, 20 Apr 2022 15:09:59 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nhBxx-000434-O6; Wed, 20 Apr 2022 15:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 309348;
+ Wed, 20 Apr 2022 15:10:00 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aTZJ=U6=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nhBxv-0003l4-Tg
- for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 15:09:59 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f191d712-c0bb-11ec-a405-831a346695d4;
- Wed, 20 Apr 2022 17:09:58 +0200 (CEST)
+ id 1nhBxw-0003l9-EK
+ for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 15:10:00 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id f1d218da-c0bb-11ec-8fbf-03012f2f19d4;
+ Wed, 20 Apr 2022 17:09:59 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 5B4A1210E4;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id E2C341F380;
  Wed, 20 Apr 2022 15:09:58 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 96AE513AD5;
- Wed, 20 Apr 2022 15:09:57 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A1E0513AD5;
+ Wed, 20 Apr 2022 15:09:58 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id QAKAI0UiYGJILQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 15:09:57 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id uItUJkYiYGJILQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 15:09:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,97 +53,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f191d712-c0bb-11ec-a405-831a346695d4
+X-Inumbo-ID: f1d218da-c0bb-11ec-8fbf-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1650467398; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=E9Za1fy7SJZVuU3gsJHYcUnfUQspR3rknfU8bXQql9Y=;
-	b=s7o4aJsXllglxjEicM+le/pE5Q4+nZsQh1+qkc+l1wMXB8I5KM8EXHpK9vVJQBopp4olwE
-	/0eL2tvJFzr8/5F+QMy5ysfmCp4A5ramqeRsMJKSZCtFDWgeFHKh6l0oEFDWWCNJk0EhzP
-	yXIHNy0QuiJkmeTPgRibcNpvjDS2yuo=
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1+sLUcbyL72u2uT21oB5tsWX/EFozEKqCEXKzXzCiFA=;
+	b=RLridzMgQycyuagIizn5XaAT4I+nxk2qHqd10tZfXxzpJqLqtrA1gDkHD182fZNaso9mSe
+	M9IT/uHa81ObORL8HehqC09E8nBntt7MTyqLHZ9M417SVAZWN+02SKS/YxV7x5VfpqEzCX
+	9ftMZq85+XPw0YvTrEoKDbTzpI9EF3E=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
 	netdev@vger.kernel.org,
-	linux-scsi@vger.kernel.org,
-	linux-usb@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linux-integrity@vger.kernel.org,
-	linux-pci@vger.kernel.org
+	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jens Axboe <axboe@kernel.dk>,
 	"David S. Miller" <davem@davemloft.net>,
 	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	"James E.J. Bottomley" <jejb@linux.ibm.com>,
-	"Martin K. Petersen" <martin.petersen@oracle.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	David Airlie <airlied@linux.ie>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	alsa-devel@alsa-project.org,
-	Peter Huewe <peterhuewe@gmx.de>,
-	Jarkko Sakkinen <jarkko@kernel.org>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Bjorn Helgaas <bhelgaas@google.com>
-Subject: [PATCH 00/18] xen: simplify frontend side ring setup
-Date: Wed, 20 Apr 2022 17:09:24 +0200
-Message-Id: <20220420150942.31235-1-jgross@suse.com>
+	Paolo Abeni <pabeni@redhat.com>
+Subject: [PATCH 02/18] xen/netfront: switch netfront to use INVALID_GRANT_REF
+Date: Wed, 20 Apr 2022 17:09:26 +0200
+Message-Id: <20220420150942.31235-3-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220420150942.31235-1-jgross@suse.com>
+References: <20220420150942.31235-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Many Xen PV frontends share similar code for setting up a ring page
-(allocating and granting access for the backend) and for tearing it
-down.
+Instead of using a private macro for an invalid grant reference use
+the common one.
 
-Create new service functions doing all needed steps in one go.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ drivers/net/xen-netfront.c | 36 +++++++++++++++++-------------------
+ 1 file changed, 17 insertions(+), 19 deletions(-)
 
-This requires all frontends to use a common value for an invalid
-grant reference in order to make the functions idempotent.
-
-Juergen Gross (18):
-  xen/blkfront: switch blkfront to use INVALID_GRANT_REF
-  xen/netfront: switch netfront to use INVALID_GRANT_REF
-  xen/scsifront: remove unused GRANT_INVALID_REF definition
-  xen/usb: switch xen-hcd to use INVALID_GRANT_REF
-  xen/drm: switch xen_drm_front to use INVALID_GRANT_REF
-  xen/sound: switch xen_snd_front to use INVALID_GRANT_REF
-  xen/dmabuf: switch gntdev-dmabuf to use INVALID_GRANT_REF
-  xen/shbuf: switch xen-front-pgdir-shbuf to use INVALID_GRANT_REF
-  xen/xenbus: add xenbus_setup_ring() service function
-  xen/blkfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/netfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/tpmfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/drmfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/pcifront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/scsifront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/usbfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/sndfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-  xen/xenbus: eliminate xenbus_grant_ring()
-
- drivers/block/xen-blkfront.c                | 54 ++++----------
- drivers/char/tpm/xen-tpmfront.c             | 18 +----
- drivers/gpu/drm/xen/xen_drm_front.h         |  9 ---
- drivers/gpu/drm/xen/xen_drm_front_evtchnl.c | 40 +++-------
- drivers/net/xen-netfront.c                  | 77 ++++++--------------
- drivers/pci/xen-pcifront.c                  | 19 +----
- drivers/scsi/xen-scsifront.c                | 30 ++------
- drivers/usb/host/xen-hcd.c                  | 59 ++++-----------
- drivers/xen/gntdev-dmabuf.c                 | 13 +---
- drivers/xen/xen-front-pgdir-shbuf.c         | 17 +----
- drivers/xen/xenbus/xenbus_client.c          | 81 ++++++++++++++++-----
- include/xen/xenbus.h                        |  4 +-
- sound/xen/xen_snd_front_evtchnl.c           | 41 +++--------
- sound/xen/xen_snd_front_evtchnl.h           |  9 ---
- 14 files changed, 156 insertions(+), 315 deletions(-)
-
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index e2b4a1893a13..af3d3de7d9fa 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -78,8 +78,6 @@ struct netfront_cb {
+ 
+ #define RX_COPY_THRESHOLD 256
+ 
+-#define GRANT_INVALID_REF	0
+-
+ #define NET_TX_RING_SIZE __CONST_RING_SIZE(xen_netif_tx, XEN_PAGE_SIZE)
+ #define NET_RX_RING_SIZE __CONST_RING_SIZE(xen_netif_rx, XEN_PAGE_SIZE)
+ 
+@@ -224,7 +222,7 @@ static grant_ref_t xennet_get_rx_ref(struct netfront_queue *queue,
+ {
+ 	int i = xennet_rxidx(ri);
+ 	grant_ref_t ref = queue->grant_rx_ref[i];
+-	queue->grant_rx_ref[i] = GRANT_INVALID_REF;
++	queue->grant_rx_ref[i] = INVALID_GRANT_REF;
+ 	return ref;
+ }
+ 
+@@ -432,7 +430,7 @@ static bool xennet_tx_buf_gc(struct netfront_queue *queue)
+ 			}
+ 			gnttab_release_grant_reference(
+ 				&queue->gref_tx_head, queue->grant_tx_ref[id]);
+-			queue->grant_tx_ref[id] = GRANT_INVALID_REF;
++			queue->grant_tx_ref[id] = INVALID_GRANT_REF;
+ 			queue->grant_tx_page[id] = NULL;
+ 			add_id_to_list(&queue->tx_skb_freelist, queue->tx_link, id);
+ 			dev_kfree_skb_irq(skb);
+@@ -1021,7 +1019,7 @@ static int xennet_get_responses(struct netfront_queue *queue,
+ 		 * the backend driver. In future this should flag the bad
+ 		 * situation to the system controller to reboot the backend.
+ 		 */
+-		if (ref == GRANT_INVALID_REF) {
++		if (ref == INVALID_GRANT_REF) {
+ 			if (net_ratelimit())
+ 				dev_warn(dev, "Bad rx response id %d.\n",
+ 					 rx->id);
+@@ -1390,7 +1388,7 @@ static void xennet_release_tx_bufs(struct netfront_queue *queue)
+ 		gnttab_end_foreign_access(queue->grant_tx_ref[i],
+ 					  (unsigned long)page_address(queue->grant_tx_page[i]));
+ 		queue->grant_tx_page[i] = NULL;
+-		queue->grant_tx_ref[i] = GRANT_INVALID_REF;
++		queue->grant_tx_ref[i] = INVALID_GRANT_REF;
+ 		add_id_to_list(&queue->tx_skb_freelist, queue->tx_link, i);
+ 		dev_kfree_skb_irq(skb);
+ 	}
+@@ -1411,7 +1409,7 @@ static void xennet_release_rx_bufs(struct netfront_queue *queue)
+ 			continue;
+ 
+ 		ref = queue->grant_rx_ref[id];
+-		if (ref == GRANT_INVALID_REF)
++		if (ref == INVALID_GRANT_REF)
+ 			continue;
+ 
+ 		page = skb_frag_page(&skb_shinfo(skb)->frags[0]);
+@@ -1422,7 +1420,7 @@ static void xennet_release_rx_bufs(struct netfront_queue *queue)
+ 		get_page(page);
+ 		gnttab_end_foreign_access(ref,
+ 					  (unsigned long)page_address(page));
+-		queue->grant_rx_ref[id] = GRANT_INVALID_REF;
++		queue->grant_rx_ref[id] = INVALID_GRANT_REF;
+ 
+ 		kfree_skb(skb);
+ 	}
+@@ -1761,7 +1759,7 @@ static int netfront_probe(struct xenbus_device *dev,
+ static void xennet_end_access(int ref, void *page)
+ {
+ 	/* This frees the page as a side-effect */
+-	if (ref != GRANT_INVALID_REF)
++	if (ref != INVALID_GRANT_REF)
+ 		gnttab_end_foreign_access(ref, (unsigned long)page);
+ }
+ 
+@@ -1798,8 +1796,8 @@ static void xennet_disconnect_backend(struct netfront_info *info)
+ 		xennet_end_access(queue->tx_ring_ref, queue->tx.sring);
+ 		xennet_end_access(queue->rx_ring_ref, queue->rx.sring);
+ 
+-		queue->tx_ring_ref = GRANT_INVALID_REF;
+-		queue->rx_ring_ref = GRANT_INVALID_REF;
++		queue->tx_ring_ref = INVALID_GRANT_REF;
++		queue->rx_ring_ref = INVALID_GRANT_REF;
+ 		queue->tx.sring = NULL;
+ 		queue->rx.sring = NULL;
+ 
+@@ -1927,8 +1925,8 @@ static int setup_netfront(struct xenbus_device *dev,
+ 	grant_ref_t gref;
+ 	int err;
+ 
+-	queue->tx_ring_ref = GRANT_INVALID_REF;
+-	queue->rx_ring_ref = GRANT_INVALID_REF;
++	queue->tx_ring_ref = INVALID_GRANT_REF;
++	queue->rx_ring_ref = INVALID_GRANT_REF;
+ 	queue->rx.sring = NULL;
+ 	queue->tx.sring = NULL;
+ 
+@@ -1978,17 +1976,17 @@ static int setup_netfront(struct xenbus_device *dev,
+ 	 * granted pages because backend is not accessing it at this point.
+ 	 */
+  fail:
+-	if (queue->rx_ring_ref != GRANT_INVALID_REF) {
++	if (queue->rx_ring_ref != INVALID_GRANT_REF) {
+ 		gnttab_end_foreign_access(queue->rx_ring_ref,
+ 					  (unsigned long)rxs);
+-		queue->rx_ring_ref = GRANT_INVALID_REF;
++		queue->rx_ring_ref = INVALID_GRANT_REF;
+ 	} else {
+ 		free_page((unsigned long)rxs);
+ 	}
+-	if (queue->tx_ring_ref != GRANT_INVALID_REF) {
++	if (queue->tx_ring_ref != INVALID_GRANT_REF) {
+ 		gnttab_end_foreign_access(queue->tx_ring_ref,
+ 					  (unsigned long)txs);
+-		queue->tx_ring_ref = GRANT_INVALID_REF;
++		queue->tx_ring_ref = INVALID_GRANT_REF;
+ 	} else {
+ 		free_page((unsigned long)txs);
+ 	}
+@@ -2020,7 +2018,7 @@ static int xennet_init_queue(struct netfront_queue *queue)
+ 	queue->tx_pend_queue = TX_LINK_NONE;
+ 	for (i = 0; i < NET_TX_RING_SIZE; i++) {
+ 		queue->tx_link[i] = i + 1;
+-		queue->grant_tx_ref[i] = GRANT_INVALID_REF;
++		queue->grant_tx_ref[i] = INVALID_GRANT_REF;
+ 		queue->grant_tx_page[i] = NULL;
+ 	}
+ 	queue->tx_link[NET_TX_RING_SIZE - 1] = TX_LINK_NONE;
+@@ -2028,7 +2026,7 @@ static int xennet_init_queue(struct netfront_queue *queue)
+ 	/* Clear out rx_skbs */
+ 	for (i = 0; i < NET_RX_RING_SIZE; i++) {
+ 		queue->rx_skbs[i] = NULL;
+-		queue->grant_rx_ref[i] = GRANT_INVALID_REF;
++		queue->grant_rx_ref[i] = INVALID_GRANT_REF;
+ 	}
+ 
+ 	/* A grant for every tx ring slot */
 -- 
 2.34.1
 
