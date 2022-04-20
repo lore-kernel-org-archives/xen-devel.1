@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26C65C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3504BC433F5
 	for <xen-devel@archiver.kernel.org>; Wed, 20 Apr 2022 15:10:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.309354.525543 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.309355.525556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhBy1-00058X-Rn; Wed, 20 Apr 2022 15:10:05 +0000
+	id 1nhBy2-0005L4-VS; Wed, 20 Apr 2022 15:10:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 309354.525543; Wed, 20 Apr 2022 15:10:05 +0000
+Received: by outflank-mailman (output) from mailman id 309355.525556; Wed, 20 Apr 2022 15:10:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhBy1-000545-D2; Wed, 20 Apr 2022 15:10:05 +0000
-Received: by outflank-mailman (input) for mailman id 309354;
- Wed, 20 Apr 2022 15:10:03 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nhBy2-0005Hn-7b; Wed, 20 Apr 2022 15:10:06 +0000
+Received: by outflank-mailman (input) for mailman id 309355;
+ Wed, 20 Apr 2022 15:10:04 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aTZJ=U6=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nhBxz-0003l9-70
+ id 1nhBxz-0003l4-Me
  for xen-devel@lists.xenproject.org; Wed, 20 Apr 2022 15:10:03 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f280d0b4-c0bb-11ec-8fbf-03012f2f19d4;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f2b5a086-c0bb-11ec-a405-831a346695d4;
  Wed, 20 Apr 2022 17:10:00 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1094E215FC;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 6E98B215FD;
  Wed, 20 Apr 2022 15:10:00 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DDE5413AD5;
- Wed, 20 Apr 2022 15:09:59 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 45D1113AD5;
+ Wed, 20 Apr 2022 15:10:00 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id iEbyNEciYGJILQAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 15:09:59 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id kDnRD0giYGJILQAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 20 Apr 2022 15:10:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,76 +53,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f280d0b4-c0bb-11ec-8fbf-03012f2f19d4
+X-Inumbo-ID: f2b5a086-c0bb-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1650467400; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=SPIngja7rfH6/X0ahWtYB7L7nX8NRl4zj/+cjR7xZr0=;
-	b=izW36Q/K4I+x9+ssoIZTIP6kcaOBnqGIAchacXhFrguclN9mlcwDy5Y3j6XIl58RxItKh2
-	yFKJRHgSaBRlN10cFBSOt7Ea7MtSQEgQQW0NFvI/a+0rlT0kNILSRJWUf2qg0/waqA7ALN
-	NEaH3ZeHIDVzSTHBGCrCGbqlRrM0AMs=
+	bh=YDGIDWKPRWQB7unVe+D0Q46rvuLr6BdasgzAbPg2LQ4=;
+	b=ldrF4kjq+B1ALbw+0FXFa11PZ6m6yv1eHafGyMjuw6sVEYhgTHTCPqG4eHHk3RNDnjFvFR
+	uDngELLfvTSL23P1jfO6z9oZtu/Q96ANRFBwBt10W+2B3ZxB7zzO52ScagQgii6L1DZlt7
+	yUr1q+kDuVo+nLFzfmzqcDwMKjr82z4=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH 07/18] xen/dmabuf: switch gntdev-dmabuf to use INVALID_GRANT_REF
-Date: Wed, 20 Apr 2022 17:09:31 +0200
-Message-Id: <20220420150942.31235-8-jgross@suse.com>
+Subject: [PATCH 09/18] xen/xenbus: add xenbus_setup_ring() service function
+Date: Wed, 20 Apr 2022 17:09:33 +0200
+Message-Id: <20220420150942.31235-10-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220420150942.31235-1-jgross@suse.com>
 References: <20220420150942.31235-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of using a private macro for an invalid grant reference use
-the common one.
+Most PV device frontends share very similar code for setting up shared
+ring buffers:
+
+- allocate page(s)
+- init the ring admin data
+- give the backend access to the ring via grants
+
+Tearing down the ring requires similar actions in all frontends again:
+
+- remove grants
+- free the page(s)
+
+Provide service functions xenbus_setup_ring() and xenbus_teardown_ring()
+for that purpose.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/xen/gntdev-dmabuf.c | 13 ++-----------
- 1 file changed, 2 insertions(+), 11 deletions(-)
+ drivers/xen/xenbus/xenbus_client.c | 69 ++++++++++++++++++++++++++++++
+ include/xen/xenbus.h               |  4 ++
+ 2 files changed, 73 insertions(+)
 
-diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
-index d5bfd7b867fc..91073b4e4a20 100644
---- a/drivers/xen/gntdev-dmabuf.c
-+++ b/drivers/xen/gntdev-dmabuf.c
-@@ -24,15 +24,6 @@
- 
- MODULE_IMPORT_NS(DMA_BUF);
- 
--#ifndef GRANT_INVALID_REF
--/*
-- * Note on usage of grant reference 0 as invalid grant reference:
-- * grant reference 0 is valid, but never exposed to a driver,
-- * because of the fact it is already in use/reserved by the PV console.
-- */
--#define GRANT_INVALID_REF	0
--#endif
--
- struct gntdev_dmabuf {
- 	struct gntdev_dmabuf_priv *priv;
- 	struct dma_buf *dmabuf;
-@@ -532,7 +523,7 @@ static void dmabuf_imp_end_foreign_access(u32 *refs, int count)
- 	int i;
- 
- 	for (i = 0; i < count; i++)
--		if (refs[i] != GRANT_INVALID_REF)
-+		if (refs[i] != INVALID_GRANT_REF)
- 			gnttab_end_foreign_access(refs[i], 0UL);
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index df6890681231..1a2e0d94ccd1 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -407,6 +407,75 @@ int xenbus_grant_ring(struct xenbus_device *dev, void *vaddr,
  }
+ EXPORT_SYMBOL_GPL(xenbus_grant_ring);
  
-@@ -567,7 +558,7 @@ static struct gntdev_dmabuf *dmabuf_imp_alloc_storage(int count)
- 	gntdev_dmabuf->nr_pages = count;
++/*
++ * xenbus_setup_ring
++ * @dev: xenbus device
++ * @vaddr: pointer to starting virtual address of the ring
++ * @nr_pages: number of pages to be granted
++ * @grefs: grant reference array to be filled in
++ *
++ * Allocate physically contiguous pages for a shared ring buffer and grant it
++ * to the peer of the given device. The ring buffer is initially filled with
++ * zeroes. The virtual address of the ring is stored at @vaddr and the
++ * grant references are stored in the @grefs array. In case of error @vaddr
++ * will be set to NULL and @grefs will be filled with INVALID_GRANT_REF.
++ */
++int xenbus_setup_ring(struct xenbus_device *dev, gfp_t gfp, void **vaddr,
++		      unsigned int nr_pages, grant_ref_t *grefs)
++{
++	unsigned long ring_size = nr_pages * XEN_PAGE_SIZE;
++	unsigned int i;
++	int ret;
++
++	*vaddr = alloc_pages_exact(ring_size, gfp | __GFP_ZERO);
++	if (!*vaddr) {
++		ret = -ENOMEM;
++		goto err;
++	}
++
++	ret = xenbus_grant_ring(dev, *vaddr, nr_pages, grefs);
++	if (ret)
++		goto err;
++
++	return 0;
++
++ err:
++	if (*vaddr)
++		free_pages_exact(*vaddr, ring_size);
++	for (i = 0; i < nr_pages; i++)
++		grefs[i] = INVALID_GRANT_REF;
++	*vaddr = NULL;
++
++	return ret;
++}
++EXPORT_SYMBOL_GPL(xenbus_setup_ring);
++
++/*
++ * xenbus_teardown_ring
++ * @vaddr: starting virtual address of the ring
++ * @nr_pages: number of pages
++ * @grefs: grant reference array
++ *
++ * Remove grants for the shared ring buffer and free the associated memory.
++ * On return the grant reference array is filled with INVALID_GRANT_REF.
++ */
++void xenbus_teardown_ring(void **vaddr, unsigned int nr_pages,
++			  grant_ref_t *grefs)
++{
++	unsigned int i;
++
++	for (i = 0; i < nr_pages; i++) {
++		if (grefs[i] != INVALID_GRANT_REF) {
++			gnttab_end_foreign_access(grefs[i], 0);
++			grefs[i] = INVALID_GRANT_REF;
++		}
++	}
++
++	if (*vaddr)
++		free_pages_exact(*vaddr, nr_pages * XEN_PAGE_SIZE);
++	*vaddr = NULL;
++}
++EXPORT_SYMBOL_GPL(xenbus_teardown_ring);
  
- 	for (i = 0; i < count; i++)
--		gntdev_dmabuf->u.imp.refs[i] = GRANT_INVALID_REF;
-+		gntdev_dmabuf->u.imp.refs[i] = INVALID_GRANT_REF;
- 
- 	return gntdev_dmabuf;
+ /**
+  * Allocate an event channel for the given xenbus_device, assigning the newly
+diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
+index b13eb86395e0..b533b4adc835 100644
+--- a/include/xen/xenbus.h
++++ b/include/xen/xenbus.h
+@@ -226,6 +226,10 @@ int xenbus_watch_pathfmt(struct xenbus_device *dev, struct xenbus_watch *watch,
+ int xenbus_switch_state(struct xenbus_device *dev, enum xenbus_state new_state);
+ int xenbus_grant_ring(struct xenbus_device *dev, void *vaddr,
+ 		      unsigned int nr_pages, grant_ref_t *grefs);
++int xenbus_setup_ring(struct xenbus_device *dev, gfp_t gfp, void **vaddr,
++		      unsigned int nr_pages, grant_ref_t *grefs);
++void xenbus_teardown_ring(void **vaddr, unsigned int nr_pages,
++			  grant_ref_t *grefs);
+ int xenbus_map_ring_valloc(struct xenbus_device *dev, grant_ref_t *gnt_refs,
+ 			   unsigned int nr_grefs, void **vaddr);
  
 -- 
 2.34.1
