@@ -4,65 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B70C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377F4C433FE
 	for <xen-devel@archiver.kernel.org>; Thu, 21 Apr 2022 13:22:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.310178.526889 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.310177.526883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhWlF-0006yA-DU; Thu, 21 Apr 2022 13:22:17 +0000
+	id 1nhWlE-0006ut-RX; Thu, 21 Apr 2022 13:22:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 310178.526889; Thu, 21 Apr 2022 13:22:17 +0000
+Received: by outflank-mailman (output) from mailman id 310177.526883; Thu, 21 Apr 2022 13:22:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhWlF-0006x7-0c; Thu, 21 Apr 2022 13:22:17 +0000
-Received: by outflank-mailman (input) for mailman id 310178;
- Thu, 21 Apr 2022 13:22:16 +0000
+	id 1nhWlE-0006ui-N6; Thu, 21 Apr 2022 13:22:16 +0000
+Received: by outflank-mailman (input) for mailman id 310177;
+ Thu, 21 Apr 2022 13:22:14 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Mw+u=U7=arm.com=Rahul.Singh@srs-se1.protection.inumbo.net>)
- id 1nhWlE-0006Vx-8I
- for xen-devel@lists.xenproject.org; Thu, 21 Apr 2022 13:22:16 +0000
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on061b.outbound.protection.outlook.com
- [2a01:111:f400:fe0e::61b])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0eb837ff-c176-11ec-a405-831a346695d4;
- Thu, 21 Apr 2022 15:22:14 +0200 (CEST)
-Received: from DB7PR05CA0012.eurprd05.prod.outlook.com (2603:10a6:10:36::25)
- by AM9PR08MB6660.eurprd08.prod.outlook.com (2603:10a6:20b:305::20) with
+ <SRS0=/1dP=U7=citrix.com=prvs=1038dedf8=roger.pau@srs-se1.protection.inumbo.net>)
+ id 1nhWlC-0006Vx-D9
+ for xen-devel@lists.xenproject.org; Thu, 21 Apr 2022 13:22:14 +0000
+Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
+ [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 0c927209-c176-11ec-a405-831a346695d4;
+ Thu, 21 Apr 2022 15:22:12 +0200 (CEST)
+Received: from mail-bn8nam11lp2171.outbound.protection.outlook.com (HELO
+ NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.171])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 21 Apr 2022 09:22:08 -0400
+Received: from DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
+ by DM6PR03MB3771.namprd03.prod.outlook.com (2603:10b6:5:4e::26) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.13; Thu, 21 Apr
- 2022 13:22:12 +0000
-Received: from DB5EUR03FT061.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:10:36:cafe::23) by DB7PR05CA0012.outlook.office365.com
- (2603:10a6:10:36::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.15 via Frontend
- Transport; Thu, 21 Apr 2022 13:22:12 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- DB5EUR03FT061.mail.protection.outlook.com (10.152.21.234) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5186.14 via Frontend Transport; Thu, 21 Apr 2022 13:22:11 +0000
-Received: ("Tessian outbound 9511859e950a:v118");
- Thu, 21 Apr 2022 13:22:11 +0000
-Received: from f13710f363c3.2
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 2D0B353B-7510-4289-AC7F-1F70D4A7C287.1; 
- Thu, 21 Apr 2022 13:22:00 +0000
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id f13710f363c3.2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 21 Apr 2022 13:22:00 +0000
-Received: from AM5PR0801MB2020.eurprd08.prod.outlook.com
- (2603:10a6:203:4c::14) by HE1PR08MB2858.eurprd08.prod.outlook.com
- (2603:10a6:7:33::13) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5164.20; Thu, 21 Apr
- 2022 13:21:38 +0000
-Received: from AM5PR0801MB2020.eurprd08.prod.outlook.com
- ([fe80::9464:cc9:b4b4:bf8]) by AM5PR0801MB2020.eurprd08.prod.outlook.com
- ([fe80::9464:cc9:b4b4:bf8%4]) with mapi id 15.20.5186.014; Thu, 21 Apr 2022
- 13:21:38 +0000
+ 2022 13:22:06 +0000
+Received: from DS7PR03MB5608.namprd03.prod.outlook.com
+ ([fe80::5df3:95ce:4dfd:134e]) by DS7PR03MB5608.namprd03.prod.outlook.com
+ ([fe80::5df3:95ce:4dfd:134e%4]) with mapi id 15.20.5186.015; Thu, 21 Apr 2022
+ 13:22:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,235 +51,607 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0eb837ff-c176-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IAs366f38BlkOobXmdIdYladZKcRxVm8Lk0kmXz5/hc=;
- b=VnWVBK5YeZz4mJujjr1swFAixeI+jatZ05ong4sjYRUDnrYTyAuVR+GLDaIX3mmBZgrPqkgxR4P5KBbNUedEPkuwq9OzCtbYMzRNSVROY973I5eabgwAb6YY12BXmLuXCATSeD67SEBy6TZDGGXO4AZWykrOx/v8hlycHE8bTYQ=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: a48196827fd3baf2
-X-CR-MTA-TID: 64aa7808
+X-Inumbo-ID: 0c927209-c176-11ec-a405-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1650547332;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=7YRqHDhmiB+IydPusKoIgSDWAyO7QgBP+ELxznFDh5c=;
+  b=JmIhSHxlm5qiBSlCKzebWCHqqMSLBEsut4GX5tUyCrnTnyWyd5w9ak4m
+   mGbcRC/ZLKGlTMH0W/naa3FfLdw/c4wUlUVtYHRpo0vZ0GLK6vaeHJYxk
+   k96n6cHoPSnXTKpDvc4iBiUlUPcwc/TuQ7/sH7gXrFLn6heOaHkppiSQJ
+   c=;
+X-IronPort-RemoteIP: 104.47.58.171
+X-IronPort-MID: 70011025
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:8RXj2q4tLis4+CHsbRL/UAxRtCjGchMFZxGqfqrLsTDasY5as4F+v
+ mMeX2GGbPeKMDbxct11bIm/9xsGuZKGm9FmGlQ5+H81Hi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuVGuG96yE6j8lkf5KkYAL+EnkZqTRMFWFw0XqPp8Zj2tQy2YTjWlvU0
+ T/Pi5a31GGNimYc3l08s8pvmDs31BglkGpF1rCWTakjUG72zxH5PrpGTU2CByKQrr1vNvy7X
+ 47+IISRpQs1yfuP5uSNyd4XemVSKlLb0JPnZnB+A8BOiTAazsA+PzpS2FPxpi67hh3Q9+2dx
+ umhurSXZTZyGIbPx90MCR9JSw1DJ6JD/+H+dC3XXcy7lyUqclPK6tA3VQQcG91d/ex6R2ZT6
+ fYfNTYBKAiZgP67y666Te8qgdk/KM7sP8UUvXQIITPxVK56B8ycBfiao4YHhV/chegXdRraT
+ 9AeZjd1KgzJfjVEO0sNCYJ4l+Ct7pX6W2IA8AvM/fBqi4TV5F1IwprGG9bnRtehXZRxn0rE/
+ 334oU2sV3n2M/Tak1Jp6EmEluLJ2C/2Ro8WPLm57eJxxk2ewHQJDx8bXkf9puO24ma8Ud9CL
+ 00f+gI1sLM/skesS7HVQBmQsHOC+BkGVLJ4EOAk6QfL1qvd5S6YAHQJSnhKb9lOnNc/WDgCx
+ lKP2dTzClRSXKa9THuc8vKeq2O0MC1MdGsaP3ZbFE0C/sXpp5w1glTXVNF/HaWpj9rzXzbt3
+ zSNqyt4jLIW5SIW65iGEZn8q2rEjvD0osQdv207gkrNAttFWbOY
+IronPort-HdrOrdr: A9a23:+a/K06MGtWJsGcBcT1z155DYdb4zR+YMi2TDiHoddfUFSKalfp
+ 6V98jztSWatN/eYgBDpTnmAtj5fZq8z+8N3WB1B9uftWbdyQ+Vxe1ZjbcKoAeQZhEWiNQtsp
+ uIGpIWYLOQMbETt7eB3ODSKadE/DDoytHKuQ+IpE0dNj2CJpsQmTuQTW2gYzxLbTgDIaB8OI
+ uX58JBqTblUXMLbv6jDn1Ae+TYvdXEmL/vfBZDXnccmUGzpALtzIS/PwmT3x8YXT8K6bA+8V
+ Ldmwi8wqm4qfm0xjLVymeWxZVLn9nKzMdFGaW3+4EoAwSprjztSJVqWrWEsjxwiOaz6GwymN
+ 2JmBskN9Qb0QKlQkiF5T/WnyXw2jcn7HHvjXWCh2H4nMD/TDUmT+JcmINwaHLimgYdleA59J
+ gO83OStpJRAx+Ftj/6/cL0WxZjkVfxiWY+kNQUk2dUXeIlGfJsRLQkjQ1o+ao7bWPHANhNKp
+ gvMCic3ocdTbqiVQGXgoE1q+bcHUjaHX+9Mzo/U4KuonprdUtCvjQlLfwk7ws9Ha0GOud5Dp
+ z/Q8JVfZF1P7srhPFGdZA8qfXeMB28fTv8dESvHH/AKIYrf1rwlr+f2sRH2AjtQu1C8KcP
+X-IronPort-AV: E=Sophos;i="5.90,278,1643691600"; 
+   d="scan'208";a="70011025"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ibtDdJOBOwX+RJDyniu3P9z6MMvvXpk/9KDEqtbgWf8tgOqxUnTyNrufxrq5R9nas4rxxx3zScMviNidVYpLPOv/lSzw9xWIOtVFoH6QOfsphWUO22pYpHpn6OW58kjX8UvSjVAKL0lbxoGtBgpTTK4QZKUJTZNUCjkE8ZshvCt9nnPW2emTCogL7vH33sbETkd+Uw4nq2NAX4QMp6SCjtJD7tAWcCEcJyXAaZCGlu8TkxyaJzKtMPt7X02KMiT7LKACvzmL9froLB3UdPL0AYFbb3Z42P9JgHFEeBv4vKeoWcR6xExd/ZdH1c//L3fFHHsDXNdzouelJXNRb5D5Ag==
+ b=Yz8tz8/wYqnSSm2dd+E14l3meHqH+KAgQeatEidikiTeuMqdD3ItGR43OSSV2J6wQRQk7LhI9zoacsGtz3lQjjyM/LBwwbq0LQM3T5mhWS+SDIJo3f9HCbHgA/6r0Wuc3YmES/MUxsJm+Ozdw26BHphYE5u8ktSgCIlocx5fj9zsilotpSfKIaTzzSTehpJb8s6rRml9mDwLXjoRmGrp+zD/f7swEVEyzAoIAAajovOrfKTFy0x5CIYGHF4tcQTRK+QcdoySndS7MAmCWA487UoEh1vYgJdO8lxJrMw9a6QHrUEaazY1PoMPd0OUYdoj2OAtwvu0MZFTlO45jiN5TQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IAs366f38BlkOobXmdIdYladZKcRxVm8Lk0kmXz5/hc=;
- b=X0Ncpv5eQ1xma4EvYnnIWjWX4F6YVBz78/0ocXrhPWDKViIpH/CEAtazuGysv7z6ffMrt/uqc9KkiUhhP/K2BWScDo3q5VEX9+O9jC5mGFqk6aL0qWRiea0SjUcEZLzlmwE5utgXCh4n1PHywoiFzhY63V5s8WjCKCha78lLJ8noYZBPj98+Xhac9LT4qMvMcbZsW8yG3J1fcW2+ZoHGuo0WxSTYuSDSRK5UT3XsUwQrbhoGvMwO4UY6UsG1NwxmUYXsN2YicKDZ6Ov9pdi9p/+CAtd8N3Zwj5+tcGFrmPzP4LzpIU0WMvj4cvvBEoDkhJ/oT4WdHn5CMszoLXK0nQ==
+ bh=FOHBZEpDF09Hk8lNie+2sWfpJc6zb8jWHm0gVWptEBg=;
+ b=FnaorujnPZQnF7NWlwqXyTvDuVwOd/BVXzGjkUUp6JKqNkfwaj7MXSNB/mtrIZuAAwiUIsjqCLD7ywk80tA7E27ltEMcRdxD75u0/gD57wkSoBIjaaeXgIahGIghI8E5ANUh/98RxfRlGbUF3po/KoveHOeS3Gzcizcx1eQaCgJxXHw0Xpd4bH9uQHSkMmMbw+AMviWE6bfBXiYrRQONu2DJk+vJiUZcVJtZDp+In1ryrfnOgDlUqwZVnZNJU+F11uX0VUP4DZ4IPa1O3MksTdjLZSvsYMGHJrcMhntC51f6FeCEnTBBYzmTt+1uQ/v056NOn+ClqELz73xMquKEHg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IAs366f38BlkOobXmdIdYladZKcRxVm8Lk0kmXz5/hc=;
- b=VnWVBK5YeZz4mJujjr1swFAixeI+jatZ05ong4sjYRUDnrYTyAuVR+GLDaIX3mmBZgrPqkgxR4P5KBbNUedEPkuwq9OzCtbYMzRNSVROY973I5eabgwAb6YY12BXmLuXCATSeD67SEBy6TZDGGXO4AZWykrOx/v8hlycHE8bTYQ=
-From: Rahul Singh <Rahul.Singh@arm.com>
-To: Ayan Kumar Halder <ayan.kumar.halder@xilinx.com>
-CC: Bertrand Marquis <Bertrand.Marquis@arm.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, ", Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-Subject: Re: Need help to debug Arm SMMU issue seen on guests with passthrough
- devices
-Thread-Topic: Need help to debug Arm SMMU issue seen on guests with
- passthrough devices
-Thread-Index: AQHYVXCysDCtUSKEqUams17wmJg+Jqz6WpOA
-Date: Thu, 21 Apr 2022 13:21:38 +0000
-Message-ID: <98FE5BFF-4201-49F1-9F17-42E26FBE3FAF@arm.com>
-References: <022fb545-9295-1f10-6caa-01813cf0a646@xilinx.com>
-In-Reply-To: <022fb545-9295-1f10-6caa-01813cf0a646@xilinx.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator:
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-MS-Office365-Filtering-Correlation-Id: 92da8dda-5b07-477c-84ee-08da2399f1be
-x-ms-traffictypediagnostic:
-	HE1PR08MB2858:EE_|DB5EUR03FT061:EE_|AM9PR08MB6660:EE_
+ bh=FOHBZEpDF09Hk8lNie+2sWfpJc6zb8jWHm0gVWptEBg=;
+ b=xctScZo3c4pVpyBuWmLr8XkWnV2xokWr9gqyXejnuejkrRtG20NicwpTD7vG5vMcfYY5zL9ZurLs7gEP4i1lV85Y2xHIEZGP2o+KNPiBm1SE3kk9VLdodciFFjWo4HFGoY6JKUgNRAELLZx5sUnYLUWSaZBvj96DRGE7MvI61K0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Roger Pau Monne <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Wei Liu <wl@xen.org>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Paul Durrant <paul@xen.org>
+Subject: [PATCH RFC 4/6] x86/iommu: pass full IO-APIC RTE for remapping table update
+Date: Thu, 21 Apr 2022 15:21:12 +0200
+Message-Id: <20220421132114.35118-5-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220421132114.35118-1-roger.pau@citrix.com>
+References: <20220421132114.35118-1-roger.pau@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: MR2P264CA0082.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:500:32::22) To DS7PR03MB5608.namprd03.prod.outlook.com
+ (2603:10b6:5:2c9::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 4e04b4fd-75a6-4d76-19b7-08da2399ee05
+X-MS-TrafficTypeDiagnostic: DM6PR03MB3771:EE_
+X-LD-Processed: 335836de-42ef-43a2-b145-348c2ee9ca5b,ExtAddr
 X-Microsoft-Antispam-PRVS:
-	<AM9PR08MB666037EA5E65326D1E6C4986FCF49@AM9PR08MB6660.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
+	<DM6PR03MB377123953A733FA3A6F4068C8FF49@DM6PR03MB3771.namprd03.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- sWgQKUjiGV4usW9kgS5gbc4qff3Q+xPtjPEJ+/UHGcKF2T6ydaJBa1p30ro4imWv9SopOO321PlMAMucTmA5XtqcQrlHA3ONfF/BmHeHUOsimM/7YL9Cl+bG2Fs37QIB4obvRm6I5RYZ23t9jP0AqOF/rDJcrssu5PNA1l4zZ5ih0xSigYwci3eDW10qzY+hU9AKsLRkVyuQP29c7HH1MAHGwlF7UjVQkY786i0dEWN75qCMDbQOG2WG+9fUPtcsn3I/VaVr0kvN9wp/+eGYZYZqmMV0ahiRs/Qf2Qdf+E+n1mHzIs4Rzmz/7WJFxNnheBASZd1KSe3MfN2JBlJcqHonxSoxgbxUipl1EQsbquts0+b1awfRpzh/oQD/zKoQDPtnfAeel2G/IFxf18R4JwST43447FYx0D4ofKL23VRvrJdUppaiRX7rdP+O0jMiPycK79FhwXq4rSZb4JoduvxRWR2aTBQNZvvxFHukB8XqmF5iNSxoRCMHiqx8tC2HRi3VqNaUz5f2+ZZDyafwV5aXvWX0rRdtqokTVDYAjfMGYLCBNOurvr8kFYJRXYAOguQY9elPWkx61EaAhKJ3YBT4ZYJ1m8uxMddfIBh6fC8Z7VhE4ioCojmifJB67PRQ39ewkFc6CWIrmSHbLkcsSTc3ZlYuijrJDmZ+3DxFfQv6mHvywO47k7uGDx5s67ZevUuLgP5J211V2fQYanuC8Vxoou0O0CurhZ4I2uiAU/8=
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM5PR0801MB2020.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6506007)(36756003)(38070700005)(4326008)(38100700002)(66476007)(508600001)(186003)(8676002)(64756008)(86362001)(66556008)(122000001)(316002)(5660300002)(99936003)(8936002)(76116006)(6486002)(91956017)(66946007)(66446008)(6916009)(71200400001)(53546011)(83380400001)(33656002)(6512007)(2906002)(26005)(54906003)(2616005)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: multipart/mixed;
-	boundary="_004_98FE5BFF420149F19F1742E26FBE3FAFarmcom_"
-MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR08MB2858
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- DB5EUR03FT061.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	cd5601c8-e523-4fd9-f3cf-08da2399ddb7
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	jAuBlyx5y8Fz4hv8Ng5dVnr/tCA7U2rwT+fabXtZJ8suOq6DEdKr2u/tAHgCgL/FAieKPk9c5Z7o55QKOiG19sDuESc2Sp33I+xkngymujYAbNK+Gr/DvVTX+TxVgAXDhnFw62YDz+wp7PPKkF2LUaiMpf3TRabH3BV0sSIAwqlaS1fQr8nZ6qAacoEwpBfZ80s3V2rYNLo8W+vius4cVAx8eTtjsGNcEp487uu4Of8XqGg19ah8tZsaWvAKfi9inC4bZ4NAn8UBldMnb73iy/e2KPHr43n47SnuGM8Iv8dPas1+qW1aIzmqzalcEbtpMZqgf5iPYDa3ui60znz99P6d1BOuyOQ7TtB4SBCOboGaz3XZSwDLnKT1fOmffa/MLojeGrC2pHMwCCa9mPjNFLDGHSkhDnnOF3qFfwWl47SQyhR41x71jhE+jkQXxwCAna54UiontcdYisgPcD641/PLWB6VTDSFbQG4QYQ3H5lBAibUtc7Fiv6zJ6QFwx3+dOrqfIOf++V8qwOVaD7ULGHQP1u87jEzITEI7+FC3lSyGtXlrPXCF7WZtQOgjL6yoDa51MFoU7/7JeqnRsWW900gCCRjVZArBgRuBPpryI16FkBe52B8dNLQ97va71YYCQEBtIaKkCTCy+d16QlKLaLl0Bp8ZXEk+O7k+V5ZUbIFIFEajqXRPDjfKHP0fl8b
+	gdR8h9qMAnOoKhH5lTxbtJ1I1ck2zoVcA0v0GL9WbW9JAG1Wu6IGNHTBTeLcMMZzDlCIzTkW7SMOrEghwq8H1FCmTShASSM9zDC1mKrAx2PSK+xmtIDSnfXIp/b0cDTZFuHmsxgb7Td3iKkkzQQIDTM57LDGwzg3dfQoaRc7bp+jik/fUDIcQ6ICI98OBEe0pUX5mjdFEC8PtaiyTVyxFtIG2ecKptEyd02gPRENLKDk1nBTIcVWm6htkWV8JOesPOfiKOV/QHo5No+BapHMQNliDDhs7O/l1tXrUTmGAFMBheInux6a5WX1Daupo6NaL1TOEJiHLhmZSv7FM+76f4lE1whxqQhJt9JNWfUqeQUL/hkDZil46EA6TxMcGotwGGzxcNVj1y4UDsB6yeVrS++DQ/GeeITqcGOsamWrTEaPSyce6E67R+Eufpgd0b/p/faI+DlbdAiUc46ivHBCYlqk4XyXkQAwinKS1/f86Y6Kqf1P+zxBfu6BlvWaTUOrKxgMEcJIY5OGFYgq5c4U3Rj3ko0XbHKnRaHoM8poLGhW/bURBSY7FX3nW2hrdcIFEp/mEjAu3RTugYj6axo95lHZzlYwzQS4aU3hwJ9hZS5E9LNeim2X0VxStxYvxnD36vgNaa0mo5VgkHQJVVwmgg==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(46966006)(40470700004)(36840700001)(356005)(336012)(47076005)(53546011)(99936003)(2616005)(36860700001)(6512007)(26005)(86362001)(45080400002)(82310400005)(81166007)(2906002)(235185007)(40460700003)(5660300002)(8936002)(6486002)(36756003)(33656002)(508600001)(83380400001)(186003)(6862004)(8676002)(4326008)(54906003)(6506007)(70206006)(70586007)(316002);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2022 13:22:11.9109
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6666004)(82960400001)(316002)(186003)(2616005)(26005)(5660300002)(30864003)(83380400001)(2906002)(6512007)(4326008)(8936002)(15650500001)(66556008)(6506007)(86362001)(66476007)(38100700002)(1076003)(8676002)(508600001)(54906003)(6486002)(66946007)(6916009)(36756003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?NGducFVjd2pvbGIvUFJSYTV6Q1pnWHpXekN1Slc3UkdJWEFXRDh0OERncXBu?=
+ =?utf-8?B?a1dXRW1TcXVYcGc1dVVxZW9NN2toOWNiYjBvelcwcFZiUmFjLzVKMmdwcHFS?=
+ =?utf-8?B?VkZ0b2s4T00zY3huOGl1Y2RBalpHL3pFSWh1cFNVTUdXN2tHUjJ1KzU5aVdU?=
+ =?utf-8?B?dG1nTVhHRUR4WnQyOG1wVHVvYVpjK2hUNDYzMWsxNHJEbThQRDZQaUZ5MW1H?=
+ =?utf-8?B?dEJmbnpJelZWT2JmQ3A4dlBrcXMxaGFGYUxsWWE1dlZNYmcxRFF4T1E0a1RR?=
+ =?utf-8?B?ekZ3eFpaNHZYdHFWR0JFWjJVV3lJWU85R1hUTFVDWEFWNnQ0SjZ0WHpGV0V5?=
+ =?utf-8?B?MDMwL0QvOWxrcGFSNG16Z3BGSTNNcUhxbEdTNFoyZFgwbmdPYStSTUhnZjV1?=
+ =?utf-8?B?MFREaUt3Mno3Y1BiSE9kdnp3L2RMR1hqSzRlcmF0SzZRbkowRXpwNUY1WmRK?=
+ =?utf-8?B?SlcxazQwUDN4WTgzc01HZHkyUkd4QWhtUXAvTmx6akI3aFJIYkpyanJWRE4x?=
+ =?utf-8?B?VVZnWDA2Y3BySDlEV3NzK2twVGZGVVZDcjFXcDk4Y1NpRTI1NmtpRUE0ZW91?=
+ =?utf-8?B?cDFjcktZOWJnVDFCTjZRZXU3cWlyV0lONkxuR1IyQ29HMU02YkoxaUY0NDdl?=
+ =?utf-8?B?dWMxbGtNMDFELzg1dkRHNU1zVDF3OE5FSWRmL0xSUS9sTEdBOURyYVVYK2JH?=
+ =?utf-8?B?RFA1bzBtbWdCR010b3RuTVJnUkF5bi92cU5hdFhWUVZMTlAyM0src3I1RkJi?=
+ =?utf-8?B?bjN0Vy9wRTJKZHI2UUhJcFpFUFVwT2ZjekZyemYvWjNROW55RjEwQTBLZGpH?=
+ =?utf-8?B?RTVFclJVU3lGMEpmSDJlcTMxZVY4UXZHRDF4Qy9OaE05TzJIblk1Y3E5em1y?=
+ =?utf-8?B?dWVqWVROZGpmb1FzdHpYSnNBMkpqYXhJT1hDY2FWNzJiM2Y5UU1xcjZsNjlh?=
+ =?utf-8?B?ZVRVUllVbzR3U24yQVVuSGsxajNVS2xhMTFsVzVYUkl2VlZsaU1DNmMxMlJZ?=
+ =?utf-8?B?SWE3T1ZXMFhrb2JxMmszMjRENzNmdXVSQ2kzNVMrY3ZUU2VObkpvRTYvK20v?=
+ =?utf-8?B?R2FrcHhYYmN4SzllZmlVbVRoeG5ndTNBZGZnaGd0RE5SQWFBUEZNYlR6UkI4?=
+ =?utf-8?B?aTY4UTBDOFVoSFRhVkJzZzJBMHEzdGF0MGl4RzlXOW11Qjh5N21VQXBrdzk1?=
+ =?utf-8?B?Q1EzVUVIcm5XVmJPUk45VTA0dS9KQnZyRzFtaU54SWhqYWN5ZTdKVktmVHBn?=
+ =?utf-8?B?MDJpbmExdk9PTGk0WEMwaGZrYU1GcG1yYnpidWJZd1ptenpOd0p1cE5EWm9I?=
+ =?utf-8?B?amtNMmRCc2ZvOHFUZk42TUtWWTJnWXRLS3A2RjlhMlJMN3FRYllBU2F0dGE3?=
+ =?utf-8?B?aTNIUWdSN3JBTUYxUlJuM1FFcDlEWEdaT0VEc3hrQXMxQnBic2hTOXo4Ui80?=
+ =?utf-8?B?dVlFVWdDbmdjOWpDU0U0aXk5NUdDZ1FuakxqZFUxV1o3N3lZZ2RqSTRuOGxC?=
+ =?utf-8?B?cDF3T3NBOEhiaGNZblhoYTBHS0JxZmppMy80WWE1bGpTQzQ3ZGY3bW1KNGky?=
+ =?utf-8?B?MlhrczhDSnZHT093dHNjdWNhaThNYXRPWW5CM0puT0V3dzQ0SzB0SEdkNGxq?=
+ =?utf-8?B?QWwrNERLQ1lkOGJZUkVWTGlxcDIreStYQlVXY2xaeWlERms2MGpIektBT0VL?=
+ =?utf-8?B?VENhOWtSbkpRNTlMY0wvcTVQZU9XakJQS3hVTXVXdUlXZTdTSWVjZGVUZ09B?=
+ =?utf-8?B?eVRCRGQwR2lsTkk0QXkxdHdoaG8vT3E3UmlmSHk5SmIySUloZERZTUdwZC9k?=
+ =?utf-8?B?VkFGS21uZ0hzRklOaVhDcDllZkdwZzJuZ3NIOGU0R0FmdG1Wc2Y3TlJ2Vitl?=
+ =?utf-8?B?MmFPU1JoemNzb1ZzcnpZWUg1VFdTMkd4SmpNUE9UQ0JQSWxLc3BJRHRScDNj?=
+ =?utf-8?B?Z1RScGdORVBLU3h6QUZoekRBbmVuaFpjNVRKL1lzSGU5OVBSQjVDckUvWnNr?=
+ =?utf-8?B?L3NIdG0zbWRtQTBYZDRsS0lUeW9USVdUSlFMQTJvN3BFQkNtYlEvbWpERmow?=
+ =?utf-8?B?a0lJK3dDTjBWUlQzeDdaTmhlbmpTSnB6YWRyYmU5eU5OVmFhNHZraXVXZlR3?=
+ =?utf-8?B?QTVFSWljOFc3bHllUU4wQ1Bhemw5ME40clIybUk0VmZrakxOazRDOExlVVFl?=
+ =?utf-8?B?RzJ2YkF5QVU5WGdDV1k0eXU5QXlSZmU1UWMweGcraFZxZklpaGpoQnRmdDNG?=
+ =?utf-8?B?S0JFeGxuNnlMVkZBQytGcVNVSU1JNE9SMlhKQVBmWXlCVitpZklZd3lnSEM1?=
+ =?utf-8?B?MWtJMTk5WDBOMlFLNHBweFN2SDdOOHUrQ2Z3OXI0N0ZFUXdaVWRNTjZwLys2?=
+ =?utf-8?Q?cVRTUMYM8/KvkQ7I=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e04b4fd-75a6-4d76-19b7-08da2399ee05
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2022 13:22:05.8188
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 92da8dda-5b07-477c-84ee-08da2399f1be
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DB5EUR03FT061.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6660
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: W21p7AyHntu1s7JnHXiU7DvFDxMC9fPryBvgwLWJuPagKFGoNj0f+kmPR0aC3SpXlPjiSWxgBLoMi41sxefL6Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB3771
 
---_004_98FE5BFF420149F19F1742E26FBE3FAFarmcom_
-Content-Type: multipart/alternative;
-	boundary="_000_98FE5BFF420149F19F1742E26FBE3FAFarmcom_"
+So that the remapping entry can be updated atomically when possible.
 
---_000_98FE5BFF420149F19F1742E26FBE3FAFarmcom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Doing such update atomically will avoid Xen having to mask the IO-APIC
+pin prior to performing any interrupt movements (ie: changing the
+destination and vector fields), as the interrupt remapping entry is
+always consistent.
 
-Hi Ayan,
+This also simplifies some of the logic on both VT-d and AMD-Vi
+implementations, as having the full RTE available instead of half of
+it avoids to possibly read and update the missing other half from
+hardware.
 
-> On 21 Apr 2022, at 12:12 pm, Ayan Kumar Halder <ayan.kumar.halder@xilinx.=
-com> wrote:
->
-> Hi Arm/SMMU experts,
->
-> Scenario :- I am trying to assign a device (eg mmc) to a guest which uses=
- smmu. I start the guest using "xl create -c ...". It works fine for the fi=
-rst time. I am able to access the device.
->
-> Now, when I destroy the guest and create again, I see this issue
+While there remove the explicit zeroing of new_ire fields in
+ioapic_rte_to_remap_entry and initialize the variable at definition so
+all fields are zeroed.  Note fields could be also initialized with
+final values at definition, but I found that likely too much to be
+done at this time.
 
-Did you observe any other Xen error while deassigning and assigning the dev=
-ice ?
->
-> (XEN) smmu: /axi/smmu@fd800000:         GFSR 0x00000002, GFSYNR0 0x000000=
-00, GFSYNR1 0x00000871, GFSYNR2 0x00000000
->
-> 0x871 is the stream id used by mmc.
->
-> We are using SMMU-500. So from the Arm SMMU v2 specs, it is "Unidentified=
- stream fault" for stream id "0x871".
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+There's some functional differences between VT-d and AMD-Vi that we
+might also want to address: the logic on failure from setting up the
+remap entry on VT-d unmasks the previous RTE, while on AMD-Vi the pin
+is left masked.
 
-Yes, you are right above error means that Unidentified stream fault. That m=
-eans SMMU hardware is not set up for streamId 0x0000087
-I just try to go through the SMMU code and observe that this issue may be r=
-elated to iommu group but I am not maybe I am wrong.
-I just created the patch that is not tested. Please try to apply the patch =
-and test it once.
+Note that certain combination of changes to the RTE are impossible to
+handle atomically. For example changing the vector and/or destination
+fields together with the triggering mode is impossible to be performed
+atomically (as the destination and vector is set in the IRTE, but the
+triggering mode is set in the RTE).  Xen doesn't attempt to perform
+such changes in a single update to the RTE anyway, so it's fine.
 
+Since the IOMMU code now also uses __ioapic_write_entry to update the
+RTE it might be helpful to introduce an explicit raw version of the
+function, as IOMMU always wants to write the provided raw value to the
+RTE.
+---
+ xen/arch/x86/include/asm/iommu.h         |   3 +-
+ xen/arch/x86/io_apic.c                   |   5 +-
+ xen/drivers/passthrough/amd/iommu.h      |   2 +-
+ xen/drivers/passthrough/amd/iommu_intr.c |  84 ++-------------
+ xen/drivers/passthrough/vtd/extern.h     |   2 +-
+ xen/drivers/passthrough/vtd/intremap.c   | 125 +++++++++++------------
+ xen/drivers/passthrough/x86/iommu.c      |   4 +-
+ xen/include/xen/iommu.h                  |   3 +-
+ 8 files changed, 80 insertions(+), 148 deletions(-)
 
+diff --git a/xen/arch/x86/include/asm/iommu.h b/xen/arch/x86/include/asm/iommu.h
+index 9ccf4f8bdd..1d62b42e17 100644
+--- a/xen/arch/x86/include/asm/iommu.h
++++ b/xen/arch/x86/include/asm/iommu.h
+@@ -97,7 +97,8 @@ struct iommu_init_ops {
+ 
+ extern const struct iommu_init_ops *iommu_init_ops;
+ 
+-void iommu_update_ire_from_apic(unsigned int apic, unsigned int reg, unsigned int value);
++void iommu_update_ire_from_apic(unsigned int apic, unsigned int reg,
++                                uint64_t rte);
+ unsigned int iommu_read_apic_from_ire(unsigned int apic, unsigned int reg);
+ int iommu_setup_hpet_msi(struct msi_desc *);
+ 
+diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
+index 3a5e3b7872..f61e56f3d1 100644
+--- a/xen/arch/x86/io_apic.c
++++ b/xen/arch/x86/io_apic.c
+@@ -275,10 +275,7 @@ void __ioapic_write_entry(
+         __io_apic_write(apic, 0x10 + 2 * pin, eu.w1);
+     }
+     else
+-    {
+-        iommu_update_ire_from_apic(apic, 0x11 + 2 * pin, eu.w2);
+-        iommu_update_ire_from_apic(apic, 0x10 + 2 * pin, eu.w1);
+-    }
++        iommu_update_ire_from_apic(apic, pin, e.raw);
+ }
+ 
+ static void ioapic_write_entry(
+diff --git a/xen/drivers/passthrough/amd/iommu.h b/xen/drivers/passthrough/amd/iommu.h
+index 64e4bbf33c..35df504406 100644
+--- a/xen/drivers/passthrough/amd/iommu.h
++++ b/xen/drivers/passthrough/amd/iommu.h
+@@ -298,7 +298,7 @@ int cf_check amd_iommu_free_intremap_table(
+ unsigned int amd_iommu_intremap_table_order(
+     const void *irt, const struct amd_iommu *iommu);
+ void cf_check amd_iommu_ioapic_update_ire(
+-    unsigned int apic, unsigned int reg, unsigned int value);
++    unsigned int apic, unsigned int pin, uint64_t raw);
+ unsigned int cf_check amd_iommu_read_ioapic_from_ire(
+     unsigned int apic, unsigned int reg);
+ int cf_check amd_iommu_msi_msg_update_ire(
+diff --git a/xen/drivers/passthrough/amd/iommu_intr.c b/xen/drivers/passthrough/amd/iommu_intr.c
+index cebf9ceca7..feed1d1447 100644
+--- a/xen/drivers/passthrough/amd/iommu_intr.c
++++ b/xen/drivers/passthrough/amd/iommu_intr.c
+@@ -247,11 +247,6 @@ static void update_intremap_entry(const struct amd_iommu *iommu,
+     }
+ }
+ 
+-static inline int get_rte_index(const struct IO_APIC_route_entry *rte)
+-{
+-    return rte->vector | (rte->delivery_mode << 8);
+-}
+-
+ static inline void set_rte_index(struct IO_APIC_route_entry *rte, int offset)
+ {
+     rte->vector = (u8)offset;
+@@ -267,7 +262,6 @@ static int update_intremap_entry_from_ioapic(
+     int bdf,
+     struct amd_iommu *iommu,
+     struct IO_APIC_route_entry *rte,
+-    bool_t lo_update,
+     u16 *index)
+ {
+     unsigned long flags;
+@@ -315,31 +309,6 @@ static int update_intremap_entry_from_ioapic(
+         spin_lock(lock);
+     }
+ 
+-    if ( fresh )
+-        /* nothing */;
+-    else if ( !lo_update )
+-    {
+-        /*
+-         * Low half of incoming RTE is already in remapped format,
+-         * so need to recover vector and delivery mode from IRTE.
+-         */
+-        ASSERT(get_rte_index(rte) == offset);
+-        if ( iommu->ctrl.ga_en )
+-            vector = entry.ptr128->full.vector;
+-        else
+-            vector = entry.ptr32->flds.vector;
+-        /* The IntType fields match for both formats. */
+-        delivery_mode = entry.ptr32->flds.int_type;
+-    }
+-    else if ( x2apic_enabled )
+-    {
+-        /*
+-         * High half of incoming RTE was read from the I/O APIC and hence may
+-         * not hold the full destination, so need to recover full destination
+-         * from IRTE.
+-         */
+-        dest = get_full_dest(entry.ptr128);
+-    }
+     update_intremap_entry(iommu, entry, vector, delivery_mode, dest_mode, dest);
+ 
+     spin_unlock_irqrestore(lock, flags);
+@@ -350,23 +319,15 @@ static int update_intremap_entry_from_ioapic(
+ }
+ 
+ void cf_check amd_iommu_ioapic_update_ire(
+-    unsigned int apic, unsigned int reg, unsigned int value)
++    unsigned int apic, unsigned int pin, uint64_t raw)
+ {
+-    struct IO_APIC_route_entry old_rte = { 0 };
+-    struct IO_APIC_route_entry new_rte = { 0 };
+-    unsigned int rte_lo = (reg & 1) ? reg - 1 : reg;
+-    unsigned int pin = (reg - 0x10) / 2;
++    struct IO_APIC_route_entry new_rte = { .raw = raw };
++    struct IO_APIC_route_entry old_rte = { };
+     int seg, bdf, rc;
+     bool saved_mask, fresh = false;
+     struct amd_iommu *iommu;
+     unsigned int idx;
+ 
+-    if ( !iommu_intremap )
+-    {
+-        __io_apic_write(apic, reg, value);
+-        return;
+-    }
+-
+     idx = ioapic_id_to_index(IO_APIC_ID(apic));
+     if ( idx == MAX_IO_APICS )
+         return;
+@@ -379,26 +340,14 @@ void cf_check amd_iommu_ioapic_update_ire(
+     {
+         AMD_IOMMU_WARN("failed to find IOMMU for IO-APIC @ %04x:%04x\n",
+                        seg, bdf);
+-        __io_apic_write(apic, reg, value);
++        __ioapic_write_entry(apic, pin, true, new_rte);
+         return;
+     }
+ 
+     /* save io-apic rte lower 32 bits */
+-    *((u32 *)&old_rte) =  __io_apic_read(apic, rte_lo);
++    old_rte = __ioapic_read_entry(apic, pin, true);
+     saved_mask = old_rte.mask;
+ 
+-    if ( reg == rte_lo )
+-    {
+-        *((u32 *)&new_rte) = value;
+-        /* read upper 32 bits from io-apic rte */
+-        *(((u32 *)&new_rte) + 1) = __io_apic_read(apic, reg + 1);
+-    }
+-    else
+-    {
+-        *((u32 *)&new_rte) = *((u32 *)&old_rte);
+-        *(((u32 *)&new_rte) + 1) = value;
+-    }
+-
+     if ( ioapic_sbdf[idx].pin_2_idx[pin] >= INTREMAP_MAX_ENTRIES )
+     {
+         ASSERT(saved_mask);
+@@ -410,7 +359,7 @@ void cf_check amd_iommu_ioapic_update_ire(
+          */
+         if ( new_rte.mask && !x2apic_enabled )
+         {
+-            __io_apic_write(apic, reg, value);
++            __ioapic_write_entry(apic, pin, true, new_rte);
+             return;
+         }
+ 
+@@ -421,16 +370,14 @@ void cf_check amd_iommu_ioapic_update_ire(
+     if ( !saved_mask )
+     {
+         old_rte.mask = 1;
+-        __io_apic_write(apic, rte_lo, *((u32 *)&old_rte));
++        __ioapic_write_entry(apic, pin, true, old_rte);
+     }
+ 
+     /* Update interrupt remapping entry */
+     rc = update_intremap_entry_from_ioapic(
+-             bdf, iommu, &new_rte, reg == rte_lo,
++             bdf, iommu, &new_rte,
+              &ioapic_sbdf[idx].pin_2_idx[pin]);
+ 
+-    __io_apic_write(apic, reg, ((u32 *)&new_rte)[reg != rte_lo]);
+-
+     if ( rc )
+     {
+         /* Keep the entry masked. */
+@@ -439,20 +386,7 @@ void cf_check amd_iommu_ioapic_update_ire(
+         return;
+     }
+ 
+-    /* For lower bits access, return directly to avoid double writes */
+-    if ( reg == rte_lo )
+-        return;
+-
+-    /*
+-     * Unmask the interrupt after we have updated the intremap table. Also
+-     * write the low half if a fresh entry was allocated for a high half
+-     * update in x2APIC mode.
+-     */
+-    if ( !saved_mask || (x2apic_enabled && fresh) )
+-    {
+-        old_rte.mask = saved_mask;
+-        __io_apic_write(apic, rte_lo, *((u32 *)&old_rte));
+-    }
++    __ioapic_write_entry(apic, pin, true, new_rte);
+ }
+ 
+ unsigned int cf_check amd_iommu_read_ioapic_from_ire(
+diff --git a/xen/drivers/passthrough/vtd/extern.h b/xen/drivers/passthrough/vtd/extern.h
+index 39602d1f88..032a7c3b42 100644
+--- a/xen/drivers/passthrough/vtd/extern.h
++++ b/xen/drivers/passthrough/vtd/extern.h
+@@ -92,7 +92,7 @@ int cf_check intel_iommu_get_reserved_device_memory(
+ unsigned int cf_check io_apic_read_remap_rte(
+     unsigned int apic, unsigned int reg);
+ void cf_check io_apic_write_remap_rte(
+-    unsigned int apic, unsigned int reg, unsigned int value);
++    unsigned int apic, unsigned int ioapic_pin, uint64_t raw);
+ 
+ struct msi_desc;
+ struct msi_msg;
+diff --git a/xen/drivers/passthrough/vtd/intremap.c b/xen/drivers/passthrough/vtd/intremap.c
+index e6ba89591b..52058efe86 100644
+--- a/xen/drivers/passthrough/vtd/intremap.c
++++ b/xen/drivers/passthrough/vtd/intremap.c
+@@ -328,12 +328,11 @@ static int remap_entry_to_ioapic_rte(
+ 
+ static int ioapic_rte_to_remap_entry(struct vtd_iommu *iommu,
+     int apic, unsigned int ioapic_pin, struct IO_xAPIC_route_entry *old_rte,
+-    unsigned int rte_upper, unsigned int value)
++    struct IO_xAPIC_route_entry new_rte)
+ {
+     struct iremap_entry *iremap_entry = NULL, *iremap_entries;
+-    struct iremap_entry new_ire;
++    struct iremap_entry new_ire = { };
+     struct IO_APIC_route_remap_entry *remap_rte;
+-    struct IO_xAPIC_route_entry new_rte;
+     int index;
+     unsigned long flags;
+     bool init = false;
+@@ -364,48 +363,37 @@ static int ioapic_rte_to_remap_entry(struct vtd_iommu *iommu,
+ 
+     new_ire = *iremap_entry;
+ 
+-    if ( rte_upper )
+-    {
+-        if ( x2apic_enabled )
+-            new_ire.remap.dst = value;
+-        else
+-            new_ire.remap.dst = (value >> 24) << 8;
+-    }
++    if ( x2apic_enabled )
++        new_ire.remap.dst = new_rte.dest.dest32;
+     else
+-    {
+-        *(((u32 *)&new_rte) + 0) = value;
+-        new_ire.remap.fpd = 0;
+-        new_ire.remap.dm = new_rte.dest_mode;
+-        new_ire.remap.tm = new_rte.trigger;
+-        new_ire.remap.dlm = new_rte.delivery_mode;
+-        /* Hardware require RH = 1 for LPR delivery mode */
+-        new_ire.remap.rh = (new_ire.remap.dlm == dest_LowestPrio);
+-        new_ire.remap.avail = 0;
+-        new_ire.remap.res_1 = 0;
+-        new_ire.remap.vector = new_rte.vector;
+-        new_ire.remap.res_2 = 0;
+-
+-        set_ioapic_source_id(IO_APIC_ID(apic), &new_ire);
+-        new_ire.remap.res_3 = 0;
+-        new_ire.remap.res_4 = 0;
+-        new_ire.remap.p = 1;     /* finally, set present bit */
+-
+-        /* now construct new ioapic rte entry */
+-        remap_rte->vector = new_rte.vector;
+-        remap_rte->delivery_mode = 0;    /* has to be 0 for remap format */
+-        remap_rte->index_15 = (index >> 15) & 0x1;
+-        remap_rte->index_0_14 = index & 0x7fff;
+-
+-        remap_rte->delivery_status = new_rte.delivery_status;
+-        remap_rte->polarity = new_rte.polarity;
+-        remap_rte->irr = new_rte.irr;
+-        remap_rte->trigger = new_rte.trigger;
+-        remap_rte->mask = new_rte.mask;
+-        remap_rte->reserved = 0;
+-        remap_rte->format = 1;    /* indicate remap format */
+-    }
+-
+-    update_irte(iommu, iremap_entry, &new_ire, !init);
++        new_ire.remap.dst = (new_rte.dest.dest32 >> 24) << 8;
++
++    new_ire.remap.dm = new_rte.dest_mode;
++    new_ire.remap.tm = new_rte.trigger;
++    new_ire.remap.dlm = new_rte.delivery_mode;
++    /* Hardware require RH = 1 for LPR delivery mode */
++    new_ire.remap.rh = (new_ire.remap.dlm == dest_LowestPrio);
++    new_ire.remap.vector = new_rte.vector;
++
++    set_ioapic_source_id(IO_APIC_ID(apic), &new_ire);
++    new_ire.remap.p = 1;     /* finally, set present bit */
++
++    /* now construct new ioapic rte entry */
++    remap_rte->vector = new_rte.vector;
++    remap_rte->delivery_mode = 0;    /* has to be 0 for remap format */
++    remap_rte->index_15 = (index >> 15) & 0x1;
++    remap_rte->index_0_14 = index & 0x7fff;
++
++    remap_rte->delivery_status = new_rte.delivery_status;
++    remap_rte->polarity = new_rte.polarity;
++    remap_rte->irr = new_rte.irr;
++    remap_rte->trigger = new_rte.trigger;
++    remap_rte->mask = new_rte.mask;
++    remap_rte->reserved = 0;
++    remap_rte->format = 1;    /* indicate remap format */
++
++    /* If cmpxchg16b is not available the caller must mask the IO-APIC pin. */
++    update_irte(iommu, iremap_entry, &new_ire, !init && cpu_has_cx16);
+     iommu_sync_cache(iremap_entry, sizeof(*iremap_entry));
+     iommu_flush_iec_index(iommu, 0, index);
+ 
+@@ -439,33 +427,44 @@ unsigned int cf_check io_apic_read_remap_rte(
+ }
+ 
+ void cf_check io_apic_write_remap_rte(
+-    unsigned int apic, unsigned int reg, unsigned int value)
++    unsigned int apic, unsigned int ioapic_pin, uint64_t raw)
+ {
+-    unsigned int ioapic_pin = (reg - 0x10) / 2;
+-    struct IO_xAPIC_route_entry old_rte = { 0 };
++    struct IO_APIC_route_entry rte = { .raw = raw };
++    struct IO_xAPIC_route_entry old_rte = { };
+     struct IO_APIC_route_remap_entry *remap_rte;
+-    unsigned int rte_upper = (reg & 1) ? 1 : 0;
+     struct vtd_iommu *iommu = ioapic_to_iommu(IO_APIC_ID(apic));
+-    int saved_mask;
+-
+-    old_rte = __ioapic_read_entry(apic, ioapic_pin, true);
++    bool masked = true;
++    int rc;
+ 
+     remap_rte = (struct IO_APIC_route_remap_entry *) &old_rte;
+ 
+-    /* mask the interrupt while we change the intremap table */
+-    saved_mask = remap_rte->mask;
+-    remap_rte->mask = 1;
+-    __io_apic_write(apic, reg & ~1, *(u32 *)&old_rte);
+-    remap_rte->mask = saved_mask;
+-
+-    if ( ioapic_rte_to_remap_entry(iommu, apic, ioapic_pin,
+-                                   &old_rte, rte_upper, value) )
++    if ( !cpu_has_cx16 )
+     {
+-        __io_apic_write(apic, reg, value);
++       /*
++        * Cannot atomically update the IRTE entry: mask the IO-APIC pin to
++        * avoid interrupts seeing an inconsistent IRTE entry.
++        */
++        old_rte = __ioapic_read_entry(apic, ioapic_pin, true);
++        if ( !old_rte.mask )
++        {
++            masked = false;
++            old_rte.mask = 1;
++            __ioapic_write_entry(apic, ioapic_pin, true, old_rte);
++        }
++    }
+ 
+-        /* Recover the original value of 'mask' bit */
+-        if ( rte_upper )
+-            __io_apic_write(apic, reg & ~1, *(u32 *)&old_rte);
++    rc = ioapic_rte_to_remap_entry(iommu, apic, ioapic_pin, &old_rte, rte);
++    if ( rc )
++    {
++        dprintk(XENLOG_ERR,
++                "failed to update IRTE for IO-APIC#%u pin %u: %d\n",
++                apic, ioapic_pin, rc);
++        if ( !masked )
++        {
++            /* Recover the original value of 'mask' bit */
++            old_rte.mask = 0;
++            __ioapic_write_entry(apic, ioapic_pin, true, old_rte);
++        }
+     }
+     else
+         __ioapic_write_entry(apic, ioapic_pin, true, old_rte);
+diff --git a/xen/drivers/passthrough/x86/iommu.c b/xen/drivers/passthrough/x86/iommu.c
+index d5bf4d3241..e0ad38a09d 100644
+--- a/xen/drivers/passthrough/x86/iommu.c
++++ b/xen/drivers/passthrough/x86/iommu.c
+@@ -133,9 +133,9 @@ int iommu_enable_x2apic(void)
+ }
+ 
+ void iommu_update_ire_from_apic(
+-    unsigned int apic, unsigned int reg, unsigned int value)
++    unsigned int apic, unsigned int idx, uint64_t rte)
+ {
+-    iommu_vcall(&iommu_ops, update_ire_from_apic, apic, reg, value);
++    iommu_vcall(&iommu_ops, update_ire_from_apic, apic, idx, rte);
+ }
+ 
+ unsigned int iommu_read_apic_from_ire(unsigned int apic, unsigned int reg)
+diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
+index 3a83981464..b619cd872b 100644
+--- a/xen/include/xen/iommu.h
++++ b/xen/include/xen/iommu.h
+@@ -262,7 +262,8 @@ struct iommu_ops {
+     int (*enable_x2apic)(void);
+     void (*disable_x2apic)(void);
+ 
+-    void (*update_ire_from_apic)(unsigned int apic, unsigned int reg, unsigned int value);
++    void (*update_ire_from_apic)(unsigned int apic, unsigned int idx,
++                                 uint64_t rte);
+     unsigned int (*read_apic_from_ire)(unsigned int apic, unsigned int reg);
+ 
+     int (*setup_hpet_msi)(struct msi_desc *);
+-- 
+2.35.1
 
-Regards,
-Rahul
-
-
---_000_98FE5BFF420149F19F1742E26FBE3FAFarmcom_
-Content-Type: text/html; charset="us-ascii"
-Content-ID: <3E8C096859DBE743B060FF943AAB2E35@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-</head>
-<body>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
-">
-<div class=3D"PlainText">Hi Ayan,<br>
-<br>
-&gt; On 21 Apr 2022, at 12:12 pm, Ayan Kumar Halder &lt;ayan.kumar.halder@x=
-ilinx.com&gt; wrote:<br>
-&gt; <br>
-&gt; Hi Arm/SMMU experts,<br>
-&gt; <br>
-&gt; Scenario :- I am trying to assign a device (eg mmc) to a guest which u=
-ses smmu. I start the guest using &quot;xl create -c ...&quot;. It works fi=
-ne for the first time. I am able to access the device.<br>
-&gt; <br>
-&gt; Now, when I destroy the guest and create again, I see this issue<br>
-<br>
-Did you observe any other Xen error while deassigning and assigning the dev=
-ice ?<br>
-&gt; <br>
-&gt; (XEN) smmu: /axi/smmu@fd800000:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp; GFSR 0x00000002, GFSYNR0 0x00000000, GFSYNR1 0x00000871, GFSYNR2 =
-0x00000000<br>
-&gt; <br>
-&gt; 0x871 is the stream id used by mmc.<br>
-&gt; <br>
-&gt; We are using SMMU-500. So from the Arm SMMU v2 specs, it is &quot;Unid=
-entified stream fault&quot; for stream id &quot;0x871&quot;.<br>
-<br>
-Yes, you are right above error means that Unidentified stream fault. That m=
-eans SMMU hardware is not set up for streamId 0x0000087<br>
-I just try to go through the SMMU code and observe that this issue may be r=
-elated to iommu group but I am not maybe I am wrong.<br>
-I just created the patch that is not tested. Please try to apply the patch =
-and test it once.<br>
-<br>
-</div>
-</span></font></div>
-<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
-">
-<div class=3D"PlainText"><br>
-<br>
-Regards,<br>
-Rahul<br>
-<br>
-</div>
-</span></font></div>
-</body>
-</html>
-
---_000_98FE5BFF420149F19F1742E26FBE3FAFarmcom_--
-
---_004_98FE5BFF420149F19F1742E26FBE3FAFarmcom_
-Content-Type: application/octet-stream;
-	name="0001-xen-arm-smmuv1-remove-iommu-group-when-deassign.patch"
-Content-Description:
- 0001-xen-arm-smmuv1-remove-iommu-group-when-deassign.patch
-Content-Disposition: attachment;
-	filename="0001-xen-arm-smmuv1-remove-iommu-group-when-deassign.patch";
-	size=943; creation-date="Thu, 21 Apr 2022 13:21:37 GMT";
-	modification-date="Thu, 21 Apr 2022 13:21:37 GMT"
-Content-ID: <4A426946194A5C44BA5ADB74CF76019E@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: base64
-
-RnJvbSBiMGYyYzM4ZDU4NTZhOGMxOWNkMDRmNzBkM2JkOGI4Y2QyMjU2YmJkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpNZXNzYWdlLUlkOiA8YjBmMmMzOGQ1ODU2YThjMTljZDA0ZjcwZDNiZDhi
-OGNkMjI1NmJiZC4xNjUwNTQ2MjI4LmdpdC5yYWh1bC5zaW5naEBhcm0uY29tPgpGcm9tOiBSYWh1
-bCBTaW5naCA8cmFodWwuc2luZ2hAYXJtLmNvbT4KRGF0ZTogVGh1LCAyMSBBcHIgMjAyMiAxMzo0
-MjoyMCArMDEwMApTdWJqZWN0OiBbUEFUQ0hdIHhlbi9hcm06IHNtbXV2MTogcmVtb3ZlIGlvbW11
-IGdyb3VwIHdoZW4gZGVhc3NpZ24KClNpZ25lZC1vZmYtYnk6IFJhaHVsIFNpbmdoIDxyYWh1bC5z
-aW5naEBhcm0uY29tPgpDaGFuZ2UtSWQ6IEk5NDFjNTU0MWMyNGRmNDk2YmQzMTQzZjFjNzVmMTM2
-NmFmNWQ4Y2E0Ci0tLQogeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL3NtbXUuYyB8IDIgKysK
-IDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS94ZW4vZHJpdmVy
-cy9wYXNzdGhyb3VnaC9hcm0vc21tdS5jIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYXJtL3Nt
-bXUuYwppbmRleCBjOWRmYzRjYWEwLi4zODMxNDgwZWQ3IDEwMDY0NAotLS0gYS94ZW4vZHJpdmVy
-cy9wYXNzdGhyb3VnaC9hcm0vc21tdS5jCisrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2Fy
-bS9zbW11LmMKQEAgLTE2OTAsNiArMTY5MCw4IEBAIHN0YXRpYyB2b2lkIGFybV9zbW11X2RldGFj
-aF9kZXYoc3RydWN0IGlvbW11X2RvbWFpbiAqZG9tYWluLCBzdHJ1Y3QgZGV2aWNlICpkZXYpCiAJ
-aWYgKGNmZykKIAkJYXJtX3NtbXVfbWFzdGVyX2ZyZWVfc21lcyhjZmcpOwogCisJaW9tbXVfZ3Jv
-dXBfcHV0KGRldl9pb21tdV9ncm91cChkZXYpKTsKKwlkZXZfaW9tbXVfZ3JvdXAoZGV2KSA9IE5V
-TEw7CiB9CiAKICNpZiAwIC8qCi0tIAoyLjI1LjEKCg==
-
---_004_98FE5BFF420149F19F1742E26FBE3FAFarmcom_--
 
