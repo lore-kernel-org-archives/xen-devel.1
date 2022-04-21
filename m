@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DE16C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36CA2C433F5
 	for <xen-devel@archiver.kernel.org>; Thu, 21 Apr 2022 08:17:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.309845.526345 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.309843.526333 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhRzq-0002z4-B0; Thu, 21 Apr 2022 08:17:02 +0000
+	id 1nhRzp-0002nn-Lv; Thu, 21 Apr 2022 08:17:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 309845.526345; Thu, 21 Apr 2022 08:17:02 +0000
+Received: by outflank-mailman (output) from mailman id 309843.526333; Thu, 21 Apr 2022 08:17:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nhRzq-0002v1-3h; Thu, 21 Apr 2022 08:17:02 +0000
-Received: by outflank-mailman (input) for mailman id 309845;
- Thu, 21 Apr 2022 08:17:00 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nhRzp-0002ng-Gh; Thu, 21 Apr 2022 08:17:01 +0000
+Received: by outflank-mailman (input) for mailman id 309843;
+ Thu, 21 Apr 2022 08:16:59 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=foL4=U7=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1nhRzo-0002nQ-EA
- for xen-devel@lists.xenproject.org; Thu, 21 Apr 2022 08:17:00 +0000
+ id 1nhRzn-0002nP-Np
+ for xen-devel@lists.xenproject.org; Thu, 21 Apr 2022 08:16:59 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 68c397f7-c14b-11ec-8fbf-03012f2f19d4;
- Thu, 21 Apr 2022 10:16:56 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 68a05d1d-c14b-11ec-a405-831a346695d4;
+ Thu, 21 Apr 2022 10:16:57 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 84B4E1477;
- Thu, 21 Apr 2022 01:16:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EDD921480;
+ Thu, 21 Apr 2022 01:16:55 -0700 (PDT)
 Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
  [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EB5B13F73B;
- Thu, 21 Apr 2022 01:16:56 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 60D153F73B;
+ Thu, 21 Apr 2022 01:16:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,98 +45,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 68c397f7-c14b-11ec-8fbf-03012f2f19d4
+X-Inumbo-ID: 68a05d1d-c14b-11ec-a405-831a346695d4
 From: Luca Fancellu <luca.fancellu@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: bertrand.marquis@arm.com,
 	wei.chen@arm.com
-Subject: [PATCH v8 2/7] xen/sched: create public function for cpupools creation
-Date: Thu, 21 Apr 2022 09:16:40 +0100
-Message-Id: <20220421081645.40235-3-luca.fancellu@arm.com>
+Subject: [PATCH v8 0/7] Boot time cpupools
+Date: Thu, 21 Apr 2022 09:16:38 +0100
+Message-Id: <20220421081645.40235-1-luca.fancellu@arm.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220421081645.40235-1-luca.fancellu@arm.com>
-References: <20220421081645.40235-1-luca.fancellu@arm.com>
 
-Create new public function to create cpupools, can take as parameter
-the scheduler id or a negative value that means the default Xen
-scheduler will be used.
+This serie introduces a feature for Xen to create cpu pools at boot time, the
+feature is enabled using a configurable that is disabled by default.
+The boot time cpupool feature relies on the device tree to describe the cpu
+pools.
+Another feature is introduced by the serie, the possibility to assign a
+dom0less guest to a cpupool at boot time.
 
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Juergen Gross <jgross@suse.com>
----
-Changes in v8:
-- no changes
-Changes in v7:
-- no changes
-Changes in v6:
-- add R-by
-Changes in v5:
-- no changes
-Changes in v4:
-- no changes
-Changes in v3:
-- Fixed comment (Andrew)
-Changes in v2:
-- cpupool_create_pool doesn't check anymore for pool id uniqueness
-  before calling cpupool_create. Modified commit message accordingly
----
- xen/common/sched/cpupool.c | 15 +++++++++++++++
- xen/include/xen/sched.h    | 16 ++++++++++++++++
- 2 files changed, 31 insertions(+)
+Here follows an example, Xen is built with CONFIG_BOOT_TIME_CPUPOOLS=y.
 
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index a6da4970506a..89a891af7076 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -1219,6 +1219,21 @@ static void cpupool_hypfs_init(void)
- 
- #endif /* CONFIG_HYPFS */
- 
-+struct cpupool *__init cpupool_create_pool(unsigned int pool_id, int sched_id)
-+{
-+    struct cpupool *pool;
-+
-+    if ( sched_id < 0 )
-+        sched_id = scheduler_get_default()->sched_id;
-+
-+    pool = cpupool_create(pool_id, sched_id);
-+
-+    BUG_ON(IS_ERR(pool));
-+    cpupool_put(pool);
-+
-+    return pool;
-+}
-+
- static int __init cf_check cpupool_init(void)
- {
-     unsigned int cpu;
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index ed8539f6d297..0164db996b8b 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -1153,6 +1153,22 @@ int cpupool_move_domain(struct domain *d, struct cpupool *c);
- int cpupool_do_sysctl(struct xen_sysctl_cpupool_op *op);
- unsigned int cpupool_get_id(const struct domain *d);
- const cpumask_t *cpupool_valid_cpus(const struct cpupool *pool);
-+
-+/*
-+ * cpupool_create_pool - Creates a cpupool
-+ * @pool_id: id of the pool to be created
-+ * @sched_id: id of the scheduler to be used for the pool
-+ *
-+ * Creates a cpupool with pool_id id.
-+ * The sched_id parameter identifies the scheduler to be used, if it is
-+ * negative, the default scheduler of Xen will be used.
-+ *
-+ * returns:
-+ *     pointer to the struct cpupool just created, or Xen will panic in case of
-+ *     error
-+ */
-+struct cpupool *cpupool_create_pool(unsigned int pool_id, int sched_id);
-+
- extern void cf_check dump_runq(unsigned char key);
- 
- void arch_do_physinfo(struct xen_sysctl_physinfo *pi);
+From the DT:
+
+  [...]
+
+  a72_0: cpu@0 {
+    compatible = "arm,cortex-a72";
+    reg = <0x0 0x0>;
+    device_type = "cpu";
+    [...]
+  };
+
+  a72_1: cpu@1 {
+    compatible = "arm,cortex-a72";
+    reg = <0x0 0x1>;
+    device_type = "cpu";
+    [...]
+  };
+
+  a53_0: cpu@100 {
+    compatible = "arm,cortex-a53";
+    reg = <0x0 0x100>;
+    device_type = "cpu";
+    [...]
+  };
+
+  a53_1: cpu@101 {
+    compatible = "arm,cortex-a53";
+    reg = <0x0 0x101>;
+    device_type = "cpu";
+    [...]
+  };
+
+  a53_2: cpu@102 {
+    compatible = "arm,cortex-a53";
+    reg = <0x0 0x102>;
+    device_type = "cpu";
+    [...]
+  };
+
+  a53_3: cpu@103 {
+    compatible = "arm,cortex-a53";
+    reg = <0x0 0x103>;
+    device_type = "cpu";
+    [...]
+  };
+
+  chosen {
+    #size-cells = <0x1>;
+    #address-cells = <0x1>;
+    xen,dom0-bootargs = "...";
+    xen,xen-bootargs = "...";
+
+    cpupool0 {
+      compatible = "xen,cpupool";
+      cpupool-cpus = <&a72_0 &a72_1>;
+      cpupool-sched = "credit2";
+    };
+
+    cp1: cpupool1 {
+      compatible = "xen,cpupool";
+      cpupool-cpus = <&a53_0 &a53_1 &a53_2 &a53_3>;
+      cpupool-sched = "null";
+    };
+
+    module@0 {
+      reg = <0x80080000 0x1300000>;
+      compatible = "multiboot,module";
+    };
+
+    domU1 {
+      #size-cells = <0x1>;
+      #address-cells = <0x1>;
+      compatible = "xen,domain";
+      cpus = <1>;
+      memory = <0 0xC0000>;
+      vpl011;
+      domain-cpupool = <&cp1>;
+
+      module@92000000 {
+        compatible = "multiboot,kernel", "multiboot,module";
+        reg = <0x92000000 0x1ffffff>;
+        bootargs = "...";
+      };
+    };
+  };
+
+  [...]
+
+The example DT is instructing Xen to have two cpu pools, one having two phisical
+cpus and the one having 4 phisical cpus, the last mentioned cpu pool uses the
+null scheduler and from the /chosen node we can see that a dom0less guest will
+be started on that cpu pool.
+
+In this particular case Xen must boot with different type of cpus, so the
+boot argument hmp_unsafe must be enabled.
+
+Luca Fancellu (7):
+  tools/cpupools: Give a name to unnamed cpupools
+  xen/sched: create public function for cpupools creation
+  xen/sched: retrieve scheduler id by name
+  xen/cpupool: Create different cpupools at boot time
+  xen/cpupool: Don't allow removing cpu0 from cpupool0
+  arm/dom0less: assign dom0less guests to cpupools
+  xen/cpupool: Allow cpupool0 to use different scheduler
+
+ MAINTAINERS                            |   2 +-
+ docs/misc/arm/device-tree/booting.txt  |   5 +
+ docs/misc/arm/device-tree/cpupools.txt | 140 +++++++++++++++
+ tools/helpers/xen-init-dom0.c          |  37 +++-
+ tools/libs/light/libxl_utils.c         |   3 +-
+ xen/arch/arm/domain_build.c            |  19 +-
+ xen/arch/arm/include/asm/smp.h         |   3 +
+ xen/common/domain.c                    |   2 +-
+ xen/common/sched/Kconfig               |   7 +
+ xen/common/sched/Makefile              |   1 +
+ xen/common/sched/boot-cpupool.c        | 234 +++++++++++++++++++++++++
+ xen/common/sched/core.c                |  40 +++--
+ xen/common/sched/cpupool.c             |  43 ++++-
+ xen/include/public/domctl.h            |   5 +-
+ xen/include/xen/sched.h                |  53 ++++++
+ 15 files changed, 563 insertions(+), 31 deletions(-)
+ create mode 100644 docs/misc/arm/device-tree/cpupools.txt
+ create mode 100644 xen/common/sched/boot-cpupool.c
+
 -- 
 2.17.1
 
