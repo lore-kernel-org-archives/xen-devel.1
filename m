@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E322FC433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 25 Apr 2022 08:42:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.312562.529874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5CC3C433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 25 Apr 2022 08:43:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.312577.529885 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1niuI2-0004xn-T1; Mon, 25 Apr 2022 08:41:50 +0000
+	id 1niuJ6-0005m4-76; Mon, 25 Apr 2022 08:42:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 312562.529874; Mon, 25 Apr 2022 08:41:50 +0000
+Received: by outflank-mailman (output) from mailman id 312577.529885; Mon, 25 Apr 2022 08:42:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1niuI2-0004xg-Nz; Mon, 25 Apr 2022 08:41:50 +0000
-Received: by outflank-mailman (input) for mailman id 312562;
- Mon, 25 Apr 2022 08:41:49 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1niuJ6-0005lx-3j; Mon, 25 Apr 2022 08:42:56 +0000
+Received: by outflank-mailman (input) for mailman id 312577;
+ Mon, 25 Apr 2022 08:42:55 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=OfhB=VD=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
- id 1niuCB-0005mk-Vq
- for xen-devel@lists.xenproject.org; Mon, 25 Apr 2022 08:35:48 +0000
+ id 1niuJ5-0005as-70
+ for xen-devel@lists.xenproject.org; Mon, 25 Apr 2022 08:42:55 +0000
 Received: from de-smtp-delivery-102.mimecast.com
- (de-smtp-delivery-102.mimecast.com [194.104.109.102])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b427c536-c472-11ec-a405-831a346695d4;
- Mon, 25 Apr 2022 10:35:47 +0200 (CEST)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04lp2059.outbound.protection.outlook.com [104.47.12.59]) by
+ (de-smtp-delivery-102.mimecast.com [194.104.111.102])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id b29b928a-c473-11ec-8fc2-03012f2f19d4;
+ Mon, 25 Apr 2022 10:42:54 +0200 (CEST)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04lp2057.outbound.protection.outlook.com [104.47.14.57]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-33-GyOr7XTDMV6Y45BrJtxeOw-1; Mon, 25 Apr 2022 10:35:45 +0200
+ de-mta-38-GNVznJqEMCyrHfr4cwFnUw-1; Mon, 25 Apr 2022 10:42:51 +0200
 Received: from DU2PR04MB8616.eurprd04.prod.outlook.com (2603:10a6:10:2db::16)
- by DBBPR04MB7641.eurprd04.prod.outlook.com (2603:10a6:10:1f7::21)
+ by AM6PR04MB6647.eurprd04.prod.outlook.com (2603:10a6:20b:f2::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5186.21; Mon, 25 Apr
- 2022 08:35:44 +0000
+ 2022 08:42:49 +0000
 Received: from DU2PR04MB8616.eurprd04.prod.outlook.com
  ([fe80::5cb0:5195:4203:7c2f]) by DU2PR04MB8616.eurprd04.prod.outlook.com
  ([fe80::5cb0:5195:4203:7c2f%9]) with mapi id 15.20.5186.021; Mon, 25 Apr 2022
- 08:35:44 +0000
+ 08:42:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,242 +53,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b427c536-c472-11ec-a405-831a346695d4
+X-Inumbo-ID: b29b928a-c473-11ec-8fc2-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
-	t=1650875746;
+	t=1650876174;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xpBRkm9Z5IBvu/NQMA+LCq2v737PicnDjxA+STnwy5s=;
-	b=LHQLpS2dJwvVnjaLr852QknCwsaIN6y/ZBujl3QH7KjU6bU0MjKxlQ+rCsYhTWG2XWJr5N
-	A/jxvGWDB59unjvm4HY4Ed9lbKih9CLBdjlvhP+bgK+XJNpQpWzxfkPdYrkzneKsmlLD3f
-	e4VICLe5JwriFBA7RC6lY1ckdfjtGhU=
-X-MC-Unique: GyOr7XTDMV6Y45BrJtxeOw-1
+	bh=F76uggdKpcuSYHZPwCK0FV2JMpLEoy075SIPYzCN2oY=;
+	b=aHt0+UEKQ5szrRaM/h7CXa47hjLmRn1XOA9ssQzOkcVIYIrXHiEz0uRpdNfjmTdcEXnFIw
+	DI1dMvwvY/FkFGZqH6Sb1bv7Z7zW/w6QwDJeKG18o+PXr+wSEml6gyRqZblSHrO3EdDucw
+	h2PMLOLjfEU7rNDkQVre18RRe9uavs0=
+X-MC-Unique: GNVznJqEMCyrHfr4cwFnUw-1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=clhCJyuyPVJOkk/RFMeOsimStHG7DCGYFXLt4YDz5r7m30pbzjTHaYPtIZ/z/rWV9aQm/a5m6a/TG1Hta8pypf05RuyxseGsaCRM5W1IZppl9ZglDaXJ+Ap6WL73TNDKjLkNENETX0Z3t8zIC3RJu96fW0hTarqpdGzmpCUI6iAIAcJVmtIbM7sq+weppRmThFxXkEh5OM6IlkDNUsLH8fuLcesNpDU61YZbuWXSisj0KowtDM0WlBDwoRmHNnsNNdci4j0UNTdteE3jaFHJtqFFzEdXaBNqf8zXXoxLvctq/qyn6nNxnndmsTp+YmVnkIe/YsQa5rL24OoNxw8NTA==
+ b=IwIt75MDAsiF5vuXMEKM7Qs+6xXxJvstqdESHtOtEwDLFLjwSSEFbGjSRN97SO7fthl7A00hE/kQdhmu4/fnuQ8CULnCFlXWgDkL/odcVYm+sviWr5/OBkc56EvarFy+JyiNXunjq/wK4+0B6MkcQfXNFvaIGkXRj3FUPeEM8d3AaP/k7Ktk5+xfSUSURSnWMAIJLDktKyNb96SgacdOPoJVovH0P6Cau75VKGOAY8cLchySdky7j2AYWFok0aTjLmdeyEFvVEKW3aGiaCOlYSQU7g7QtLhz7NpzDiusy+7bVE6LcEoC1LGVybKdqJIGO6ELqasXif/BYww+Dx/9uQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xpBRkm9Z5IBvu/NQMA+LCq2v737PicnDjxA+STnwy5s=;
- b=gslz2pLKZdGxIaWIJvr2T70alvPIBleVYreJxfZlcNzdaogpZkPPHKfZw8dApDN1lD7Vphr5IWxHAnsKN5bCGb8XUePSvv7MjB/6zY7cYlc/Q3qAISIhJf4+frVsVP4uxNyFCyjEsVYS+dMPLYVozEKhrVR5Gw+ROmdwpP7rCIguvOX9nmUITUwXEnGhLRV4puml+ENnSRnLAyjmIrwClZ6fTdFYZSIqLr4m8xydtoETXZ/y8tHdjmEtlrtUDQJiXSQzpIUpZ8r5d619u4CyIculyN7jjerDAgBYKaeSHjeClah8bs7dTq3gKHNX3RLoBpcUWJCHmDpcLYznsAi4dA==
+ bh=F76uggdKpcuSYHZPwCK0FV2JMpLEoy075SIPYzCN2oY=;
+ b=CMkyhM7LTzpt/ZYD1AKt5b6zsuaGrv43WnK6Zjz7u6vRl9zfWCFmTmkaFMDjIPHHRcM+Ak2136f9pEDzP2r0cehOsB1BH5HCuWCWUIjMSnYKcgb8cwD+K/y/QY8ut2IKHmmRxBjyT5YjjZn2acCnU69Jg+eTVL6mzPRaYgpHzTvRknrQqSYZAvkFpVVRZZiZaq7nvo/ESTe6RIR4m84sEnClCO3F/G98gFoyu5sBSX55UIoMgj2+gO8WFbIGqruxF0PRmsRBlCA6XCMXwTLCfYLlyx8K5JrU6qrdppfRuU+AyvnqfJbRg+TdsOBOcOtUoVinldcYz922sv8xETHUGg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <1389c785-ffe3-5d8c-36f1-a923ce5250cd@suse.com>
-Date: Mon, 25 Apr 2022 10:35:45 +0200
+Message-ID: <b9a2be8d-3bb9-3718-6e3b-f07f6dcdde20@suse.com>
+Date: Mon, 25 Apr 2022 10:42:50 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.1
-Subject: [PATCH v4 07/21] IOMMU/x86: support freeing of pagetables
+Subject: [PATCH v4 16/21] VT-d: free all-empty page tables
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Kevin Tian <kevin.tian@intel.com>
 References: <b92e294e-7277-d977-bb96-7c28d60000c6@suse.com>
 In-Reply-To: <b92e294e-7277-d977-bb96-7c28d60000c6@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS9PR06CA0194.eurprd06.prod.outlook.com
- (2603:10a6:20b:45d::29) To DU2PR04MB8616.eurprd04.prod.outlook.com
+X-ClientProxiedBy: AS9PR04CA0033.eurprd04.prod.outlook.com
+ (2603:10a6:20b:46a::8) To DU2PR04MB8616.eurprd04.prod.outlook.com
  (2603:10a6:10:2db::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4786ce58-5143-4d8b-b37b-08da269696cc
-X-MS-TrafficTypeDiagnostic: DBBPR04MB7641:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f36f1ab-8f0d-44cf-4b65-08da269793cc
+X-MS-TrafficTypeDiagnostic: AM6PR04MB6647:EE_
 X-Microsoft-Antispam-PRVS:
-	<DBBPR04MB76413E83A5449C54140D84B0B3F89@DBBPR04MB7641.eurprd04.prod.outlook.com>
+	<AM6PR04MB66472FA36886A4E5EB0E4277B3F89@AM6PR04MB6647.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	jqOyCAWCKznMvypUKtfiWpUP2kDn3ZGwvltvR/p04I4Y0KYqdjiwQFNuJ81ToF5ofpWd91XXDnBv0eTz5Mxxx3H8JgQZtMbdntPdPMiwq8jtxrZ96+bDsUHasJXhCXVbYxdWp8YDhm1ITD6h+wEFX7BQkuhFp4wqPqvIlfn2ofCggFiJnO1K2St0+xgPm5BZ2+sCYvT8b3kj8Z3tJ+s0Q40H1mDu4vLHH0OZrd/JB+iy9RhtoAiMx62G8Ha8d97/qtPlY/wXZcXoTfgOXVcHdKEHZxfAfhB5aBkRXU6FTyRWS0gcsV3ev90zCox471CX91nhcV7miSNaqBDY3a9G9QLnjFYQrhy9q8BvTaYb3kfui0/pQfGKL2hPiFN/aiWYNoO8SMBeRveTB93PdJs4eQGIjsyWV5527679joyshpTcIh6okipFU4i5pepm58u1zY939EF+9w7CdHx3fycw608BZREFJg7KTyM3Bpo+iuZCwebCJVfwBL+QHrE2LD74Q6IIlOeQDI+ErLCc86EO/oFFGzXfK7VM0oDen7fsuS91M7zEPdE1OcEvTPMS6KCe2U/42RB/rgGJOA0Ya467H3D++eQpUiszXVk8AwDB5bKhHN6I3N4ZCBqky+Y99p9OUPt9xuo4hXCcJkIjgrCFgWd7BvIIgUmBp59A4/i2lz0atUcgCZVRH83GmN4atsTdkbvW0iqZe4ItBuY4r06TO/hAVXEOqM1StW93MseFNLzZhjm34yV7URDwKophxPQwkMC4JsFsipiX58/NBt00f6JAjArhp4hx056gi2IYikeoLB/fttGn1/LRWV1iZ52I
+	+sZCJwKu+kKqohWo2wnpRtkG+226O4gDKlAtsuJIqnk6FjMeovxdmo9YulYupX9OPLn6n5NO0Hut7derq1vXpL6swurkfUaU/VJ3MICXKVkbaXw1gR0hWKgVsfdnzFoynS7dKGn+r5acRHdsoVEauALfhsqfnzK00kOIfk/tM2c6c4bevJ0noXrpJRdXpzUgTdATF30uSaLV6qhH0B74J+ZKs9ueRvFeBZqwKzZdzqC27CK+XPzxBsuYt8EuF6nvIUOLo1hXVHeq+pwZ1GwmkdbvsWzdgjmiWPz/k4dtZ6OhrOZoLDoiKSsY/ZxLcChd4h2MJBy8d/6jZWp1TCnVogvDP0ibWdD26nZmD/r+kZHzAc7V/8t5aTb7rMZz+ST44TAF1VrXT0yFawWMn0VsYcEeUokz5NYe5emXbp6K/jqUPtTmuwJo/l620EsFUw/WMdlhq6Y5WSyIq/uP84T4y+jaqX+yRcTE4pmKjeCO9RLKDUJhq4HWnCma+HasPxv3X/AwCJDcSxhjaffLF2pAO0cPQsgk77pIKXQPDnh158H3gLku2rXUq6pYpR7sHEnEhVpMF0jTIC1RbXRLDkjY43E51cAVdzw/Mr3V8Fdpy7XqbbDymywUB4+amsZLvRAOJ2Pd3xKPuQv2Jps+ZoxTnfMQad7Xo6RFTTQKsuQpgYtC4vhfhP1wwDISLIL7l8EHKWAlQ1WkEL49c5X/JdziyYliCRB+KW1iTPMDn3D4WdQ=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(2616005)(186003)(6916009)(31696002)(86362001)(31686004)(8936002)(4326008)(8676002)(36756003)(2906002)(5660300002)(508600001)(66476007)(38100700002)(316002)(26005)(66556008)(66946007)(6506007)(6512007)(83380400001)(54906003)(6486002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU2PR04MB8616.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(6512007)(66556008)(66476007)(4326008)(2616005)(31696002)(8676002)(38100700002)(86362001)(26005)(6666004)(6506007)(6486002)(2906002)(83380400001)(5660300002)(508600001)(66946007)(36756003)(316002)(8936002)(186003)(31686004)(6916009)(54906003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MENSczdJWDEvL1JlcFpJb1Y5NmF2NXUrSWJUTXM3ZkFBNU1XQ0xuNTFhTjVs?=
- =?utf-8?B?ZVd0dFBHOU54dDAwRjBEYzl4aHJqK1BzazFlb0JnUWd6dzc3djhvQWN0OVo3?=
- =?utf-8?B?NXBYaGhIK05VZmNoUDlVeUczMVVaWFF0VFBONkEzVnhyU2V4SDJpZThHVGpV?=
- =?utf-8?B?c0R5cE8rK0ZtMFVVNDdKMCs3SW0rQXFxU1pvUldZSkxxanUySDQrdWpjUGs5?=
- =?utf-8?B?U3hFd1BNMzFEMlVHbmdCdUlEZmd2OWt4K21pY2JORFFCSHhaLzJNNUlEc054?=
- =?utf-8?B?Wkl6dVM5aFVVMFluWHZZc29BUEhsZkpwcUE1c2FEaHRLOWUvV2JZVlZRMVA4?=
- =?utf-8?B?R2NsaUZuWTN6VEFBRXdMcTlrT2RzbFFVTWV0MnVKSFVDc1ExbjNNNWIvK0lG?=
- =?utf-8?B?Mk5VWVhFaUFzUXdlN2RxOVFUQ0RDRXFCYkI3V09aaE96V1RuMFY4b0l5aGs2?=
- =?utf-8?B?TUVVbHBVa0tmNjY5Z1dwd3ZaR2VvVG1NSW5QTzdJeEJHUmNZNndCMWwvQTBo?=
- =?utf-8?B?T2o2Z2U2eE15QTZYcDA4eFNCcE1tRmdYdzNBSC9SeWhxemNLVG5HeXBTcnpP?=
- =?utf-8?B?dHJ6TjNzRlhsaW1xMUxCQUlFK2FKMUZXbjdsM0czQkRtbkkza2xobFlmd0lQ?=
- =?utf-8?B?Rkk2ZjN6WEM2cDlsS2ZZOVQ3eEoySmQxeG1sTkRKTG5PQ3BZclZtdzhockd0?=
- =?utf-8?B?bWNuMFc3WDUvcXRFeHUzYUw0QWVTQUtOMC9WOTZmeGFIbGRYeFdmcHNxcDJ1?=
- =?utf-8?B?TVpSVzArODBtRWYzeWxpcXZQZi9ILzRvVStSaTFnU1prdG5FajE1SWpZOVlV?=
- =?utf-8?B?SmhsaG5zNk5GUXZsekV6ZXhHTVA5RWRvN2JoeGo0b0hmdGFzaWdyVDEzdFA2?=
- =?utf-8?B?ZUh5OUUycEcwOURlOTNBRWFELzYvZmFWSXhjU3Zoc2w3MGp6QjVpMGw3THZw?=
- =?utf-8?B?OE9hQlZ6MnU1TkhnUDZyNEsyL3ZFVUJEdG94UDg4YkhvRGdBL1gxRzhpUzRx?=
- =?utf-8?B?TXFJbHBJb3pOTHFnejhDTVlnWGtmTWphZzJ5OHV3dWpaNzdRazREckx3cnBP?=
- =?utf-8?B?ZVFVSmtNWUM4M050MFd0Rmg5Rno5LysxZ1Z3OHp4eDZnRnFQMnhWUVRLZWJN?=
- =?utf-8?B?eEhmNFFpR1hROWYwelQ5OWFCQkdLQmVPdWF6N2VKdGh4NjVvcXlyRG5kc0pY?=
- =?utf-8?B?V3c2ZVFDOWQzelo1SXNCN081dDlrZjdLNzlKY2VaaElUTFVsMlVKOHVnejZW?=
- =?utf-8?B?WThwdDlOZFdqWXFhMCtNSkJaT016eUttUVhUalYvcjQrbmFKNmRRS1VxNmlO?=
- =?utf-8?B?Q0tNeTFVaThuU2M3SjhhYXBFRFdqUUlOSTN2UnlrZVI4VnVBSW92dXJZa0s3?=
- =?utf-8?B?WVJoTmJ2WFp1V0JWL0R0aDk1a2hUbkpHYXdmTDJCT2ZPQUhja2dOdDF3VmFY?=
- =?utf-8?B?Q2ttcSsrTW93T0ZzWXdiNmUvMmdxbkluNTFMN3JSd0wxNm1GVEN3bHhsUk90?=
- =?utf-8?B?d2JjQUhyL0xYU3VWQWgzaW5wOVhUOWFxUG1OSkQwYzAvK1h6elBBb2cycTY2?=
- =?utf-8?B?OHJJQWVVOXY5dTRiVXdzenhoSmRXek0xWGMybnkram03R0JLRmwwUWRxNVZV?=
- =?utf-8?B?R1NCSEcwRDZOQjFiYWZmMTh2ak1oWVRaZFdPc3crYWZWQVlaN0lsWjlHMTR4?=
- =?utf-8?B?MGwvSFkxUXAzUUFWUDhpT2FiOEwrbkg4R1JFcStpYm5yb01sZnhRRkJJOTI3?=
- =?utf-8?B?MjBOYldjRFQ1dDB0TC9iOW1pYXpManZEcXZOcDdFYUc1REJYZzg3K2xMWHMr?=
- =?utf-8?B?amIvZlhwLzVPamtnNkZOd3RSUjRmNytuNVhzZVlnWXJIMWo5bUJ0TVp6bEFX?=
- =?utf-8?B?elhSenl6Y1FoOGxyOWxNcGlhRndQeFYwaTNnSWlMUFpVWlpTWklMMlphR0FH?=
- =?utf-8?B?ZExVOVl0SmdZQ1BHWTRnUExQN2dWUmNCZld1U2djZ0FNWU8zQTdUYXVpeDht?=
- =?utf-8?B?alFNUG1oRGpGK1gzSGNRVDNzbHhsL0hvMG1CK2tid3R4K3lXM1I3eDlOd1Qr?=
- =?utf-8?B?T3RSaTZQRXVweDRTZVFpRVA3cU9ibG84MG9pYUcvekhoaHpjYzZxcFZIM1RU?=
- =?utf-8?B?aERXaXN0ZVNOdVBtcXZhcXhyb0RxdmFyNy9qcTBORDRxQmhhbjhVemlram1m?=
- =?utf-8?B?UE5COC90SG9KZTlTb3ZOcmVwLzFaZmJlR0IwM09MeS9sUmJvOFVDczBheEFm?=
- =?utf-8?B?a2NQWVZ4RmlONnl4bGt0aGJNZmRyWHg0TjlnUFNGOVMwZWpaTDVLbllvWTU1?=
- =?utf-8?B?eHlIV3dRYnRlTzZoanYxVzMyYWdYeDMvZE9yT0VmWEFyRGNlMG82dz09?=
+	=?utf-8?B?aC82d1NidEowdi9UUTlmVXAvL0w4S1JmbWN1NVJKY3JPVTlYZ0FVR1g4QnJZ?=
+ =?utf-8?B?Z0VVWmN6bUIvZm85UnhlRFlqWG1DN293NjFKWEtVZnNUMjFSQlJsZ08vakVm?=
+ =?utf-8?B?a2xycjgvczl1dlE2ZG1ERHZ2bU5INFU2ZG5nTS9uYi9QZHBBWUo5OHJ2U00v?=
+ =?utf-8?B?dWE0dk5nQTREVlpBWWRlZWkrRHVON1JIa1BnYUIyenFHUk1rd2VrcVlFWmov?=
+ =?utf-8?B?TDA3V2N4aFIzek5GSWwxd1RkZVFzL0prOGFDZUhIUUJSRVNTZGlIN2pic2Vi?=
+ =?utf-8?B?bXVzQ3VvTnM3aDRTb1ZVcVZkbTJRZUNBMnEvNCtwZmh1T1VzaWdTVnZHZ24z?=
+ =?utf-8?B?VnJ5SXBqRk0xeE94dTRoSDFvaXlHQjVnaWdyLzg1VXk1UHdhRFFwZFFIUzVh?=
+ =?utf-8?B?a1pkQmk1eENUMlV0OGNKN1ZMbFhIaXlmUHQ1RjIvT0RMc2t5ZFhXMzFlMHRN?=
+ =?utf-8?B?cDVqaFdPN0NoQTlIU2pya2Fvc0VIYVRBZ1JEbDR4ZDk4NEZqOEYyNXpOSFFP?=
+ =?utf-8?B?ZFF0MmF5aXJtMkU2VU4xdzltdThkQXU5d3NtOGZ3QXNXd1hBMHg4MktWVTdY?=
+ =?utf-8?B?aUZZNTZRMW45a0xHNE52c3BHMGNQVFZHYjBvZXVBcTVIYlUwdDJUQThsc3VU?=
+ =?utf-8?B?bzhKQnZtbUUvM3VRRVRKOFUxVGJveHM2a25EWTJheGVxckk4RTlPNk9Ucm5J?=
+ =?utf-8?B?Q0VESmJmajVpM29UUXk0N1dyS0lIOWFoQW9kNmdMTjN2aHFQdGRuRXhkQ3U3?=
+ =?utf-8?B?SEtIMUZyNU11MnA3eW9nQjZvODNMbnkxckt0MWxYbHdzMmZmVDlOZjJsd2hB?=
+ =?utf-8?B?Vm05Z2lOeGVFK2o3eHhEVGRWMmhvV0NCK3piU2ZudkFMbnZreWhzam5xMWl5?=
+ =?utf-8?B?SW5tMTZYdXN2WmRheE5qS1NHTU45ZVRZSmIzZmo2cDlKdzRNMDU3cVlsNTJv?=
+ =?utf-8?B?OENPL253WlphbjFzdytLTUF6VmhielN2d1JyTWVHT1M4YUViUllNS25BUnpl?=
+ =?utf-8?B?ckFyRzBFbnVoNFZkNGVUWnhHc2dEUStFRkxJMmxvcG93MHpuMUt0dVkrRXBx?=
+ =?utf-8?B?RDNtUjFHV3hhd0FDWG5kNytRdjY0ZERGbnZ3ZVRGK2VLdVhMTVNmbWR6RVla?=
+ =?utf-8?B?MllQY21jOFNySnZhUk9XUnhRZVFtVnpMZ2UzYU5Rd2dta3VleUNvd3BMNW44?=
+ =?utf-8?B?NXVnaHNhbEFjUlcwd3dPQVpkY3ZvN0IwZ0VDNGRzd0NoSUozQXdLY3EwME55?=
+ =?utf-8?B?VmJKOXpBWlhxMTFLRUFoSEFiclFlYkJEamM4MWhqUnBNNlkrUHU5aHNMMXlB?=
+ =?utf-8?B?ZytET09YdHZJc0poazJBcHprNTFKNjNMcEUvdEpFT2pzaURFUUh5amZmYmJZ?=
+ =?utf-8?B?eWdJaW53UXkvN3ZYNlQ1bFVndHdEL3cya3lWdjAySHVoMC9pNCt6c1dTVU1u?=
+ =?utf-8?B?VElvTUhrWEdVdlRpNzNvV3kvUzBjUGxGRXl6UTRvSzQ4M21Da3ZiTlh3cUZu?=
+ =?utf-8?B?Z3E2blFvWUZsOVhoQmZuZG9STkZ2UW5PTmRaUTQxb2ZaV0tFeSswVHZRR3Vt?=
+ =?utf-8?B?MytXN1psQnlFYlE5cnllUU92Wk5hRVBVWjExOGVpU1lwcFZ4cGwrK21aWXdG?=
+ =?utf-8?B?Q3hoUlhobDY0aGo0c3I1dWpPbnhRUHRsVkRGdis0cFBnRXFKell0ZWYwQndu?=
+ =?utf-8?B?RlFVWkJPRWgyUnZUUzlWR3V3L1JvZmJDOXZaeVo4TS9QekJkdmt2M0xpWDBS?=
+ =?utf-8?B?bXJjaTFEMWhqVDZVT2R1anpkZzBBdE51emJWQUIwYy9rcCszbnp1dGxuSXFY?=
+ =?utf-8?B?T3hTLy9adFZScHZOSGE3eExKdWZBMUVPaFZJRDMvbVFvZFdVQkhxbkJaTXpL?=
+ =?utf-8?B?SEMyaDhVakp1ckY2WnArdmZQVVYzNzR0MHJ2YklEMU43eXh2TEtoOGdoNVJ0?=
+ =?utf-8?B?T25rOVF6YkFVd2kzNnA2cm5XelJUZUFhcFRUd0hmM2krc21TdEx2cWs2Umc2?=
+ =?utf-8?B?eXhZTDRRVFlKbXV0Qm5DaWlTVmZ6aU9ET2NESUs1Q0hxOURmaEJCUjR5Y1hC?=
+ =?utf-8?B?aURWeXFQQjZtUk9aSFhIRTAvdGphSWl5QVI1MGM5MGtudXZPY1h5d1dJMTVu?=
+ =?utf-8?B?M0lSMGhTSjF4MWtCQkxZZ2swRmZoSnNXQmpFY0cxOEFGY003QUF0T2l0Zjhm?=
+ =?utf-8?B?bktGaFV3Q3JTRFpkQWN5TndBUUx0WTRlSmxiWkRnZk1aQWs5T2hIODBmRkdp?=
+ =?utf-8?B?VFNIQnpEaGpGTnpZRldhaTVtNjBPajVRQ29TSlR3RkpjRENOZ0dsUjZ3dWFU?=
+ =?utf-8?B?VlhRUlg1b0ozYUZOMU1ldWk2ODFrQ2xDa2tTT2R3N3EwZnB1RjJIdz09?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4786ce58-5143-4d8b-b37b-08da269696cc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f36f1ab-8f0d-44cf-4b65-08da269793cc
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8616.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2022 08:35:44.4231
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2022 08:42:48.9933
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6ehietAuHGSpWwSk1Qjh5wrMwLnBLbCvBD9PZjVgRIwxWA6zLSizU2Hkt2RrQIjf5gI11iykMfDt2lyI3sStcA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7641
+X-MS-Exchange-CrossTenant-UserPrincipalName: jsmPMr0Ur35rlFPrzoOZ5DbnsRGaLvtm54hMftZ30/8sLRqFmrAOKhr7z/nR7CubGlwix4WOz85X9hPsdgTFgw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR04MB6647
 
-For vendor specific code to support superpages we need to be able to
-deal with a superpage mapping replacing an intermediate page table (or
-hierarchy thereof). Consequently an iommu_alloc_pgtable() counterpart is
-needed to free individual page tables while a domain is still alive.
-Since the freeing needs to be deferred until after a suitable IOTLB
-flush was performed, released page tables get queued for processing by a
-tasklet.
+When a page table ends up with no present entries left, it can be
+replaced by a non-present entry at the next higher level. The page table
+itself can then be scheduled for freeing.
+
+Note that while its output isn't used there yet,
+pt_update_contig_markers() right away needs to be called in all places
+where entries get updated, not just the one where entries get cleared.
+
+Note further that while pt_update_contig_markers() updates perhaps
+several PTEs within the table, since these are changes to "avail" bits
+only I do not think that cache flushing would be needed afterwards. Such
+cache flushing (of entire pages, unless adding yet more logic to me more
+selective) would be quite noticable performance-wise (very prominent
+during Dom0 boot).
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-I was considering whether to use a softirq-tasklet instead. This would
-have the benefit of avoiding extra scheduling operations, but come with
-the risk of the freeing happening prematurely because of a
-process_pending_softirqs() somewhere.
+v4: Re-base over changes earlier in the series.
+v3: Properly bound loop. Re-base over changes earlier in the series.
+v2: New.
 ---
-v4: Change type of iommu_queue_free_pgtable()'s 1st parameter. Re-base.
-v3: Call process_pending_softirqs() from free_queued_pgtables().
+The hang during boot on my Latitude E6410 (see the respective code
+comment) was pretty close after iommu_enable_translation(). No errors,
+no watchdog would kick in, just sometimes the first few pixel lines of
+the next log message's (XEN) prefix would have made it out to the screen
+(and there's no serial there). It's been a lot of experimenting until I
+figured the workaround (which I consider ugly, but halfway acceptable).
+I've been trying hard to make sure the workaround wouldn't be masking a
+real issue, yet I'm still wary of it possibly doing so ... My best guess
+at this point is that on these old IOMMUs the ignored bits 52...61
+aren't really ignored for present entries, but also aren't "reserved"
+enough to trigger faults. This guess is from having tried to set other
+bits in this range (unconditionally, and with the workaround here in
+place), which yielded the same behavior.
 
---- a/xen/arch/x86/include/asm/iommu.h
-+++ b/xen/arch/x86/include/asm/iommu.h
-@@ -147,6 +147,7 @@ void iommu_free_domid(domid_t domid, uns
- int __must_check iommu_free_pgtables(struct domain *d);
- struct domain_iommu;
- struct page_info *__must_check iommu_alloc_pgtable(struct domain_iommu *hd);
-+void iommu_queue_free_pgtable(struct domain_iommu *hd, struct page_info *pg);
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -43,6 +43,9 @@
+ #include "vtd.h"
+ #include "../ats.h"
  
- #endif /* !__ARCH_X86_IOMMU_H__ */
- /*
---- a/xen/drivers/passthrough/x86/iommu.c
-+++ b/xen/drivers/passthrough/x86/iommu.c
-@@ -12,6 +12,7 @@
-  * this program; If not, see <http://www.gnu.org/licenses/>.
-  */
++#define CONTIG_MASK DMA_PTE_CONTIG_MASK
++#include <asm/pt-contig-markers.h>
++
+ /* dom_io is used as a sentinel for quarantined devices */
+ #define QUARANTINE_SKIP(d, pgd_maddr) ((d) == dom_io && !(pgd_maddr))
+ #define DEVICE_DOMID(d, pdev) ((d) != dom_io ? (d)->domain_id \
+@@ -405,6 +408,9 @@ static uint64_t addr_to_dma_page_maddr(s
  
-+#include <xen/cpu.h>
- #include <xen/sched.h>
- #include <xen/iommu.h>
- #include <xen/paging.h>
-@@ -550,6 +551,91 @@ struct page_info *iommu_alloc_pgtable(st
-     return pg;
- }
+             write_atomic(&pte->val, new_pte.val);
+             iommu_sync_cache(pte, sizeof(struct dma_pte));
++            pt_update_contig_markers(&parent->val,
++                                     address_level_offset(addr, level),
++                                     level, PTE_kind_table);
+         }
  
-+/*
-+ * Intermediate page tables which get replaced by large pages may only be
-+ * freed after a suitable IOTLB flush. Hence such pages get queued on a
-+ * per-CPU list, with a per-CPU tasklet processing the list on the assumption
-+ * that the necessary IOTLB flush will have occurred by the time tasklets get
-+ * to run. (List and tasklet being per-CPU has the benefit of accesses not
-+ * requiring any locking.)
-+ */
-+static DEFINE_PER_CPU(struct page_list_head, free_pgt_list);
-+static DEFINE_PER_CPU(struct tasklet, free_pgt_tasklet);
+         if ( --level == target )
+@@ -837,9 +843,31 @@ static int dma_pte_clear_one(struct doma
+ 
+     old = *pte;
+     dma_clear_pte(*pte);
++    iommu_sync_cache(pte, sizeof(*pte));
 +
-+static void free_queued_pgtables(void *arg)
-+{
-+    struct page_list_head *list = arg;
-+    struct page_info *pg;
-+    unsigned int done = 0;
-+
-+    while ( (pg = page_list_remove_head(list)) )
++    while ( pt_update_contig_markers(&page->val,
++                                     address_level_offset(addr, level),
++                                     level, PTE_kind_null) &&
++            ++level < min_pt_levels )
 +    {
-+        free_domheap_page(pg);
++        struct page_info *pg = maddr_to_page(pg_maddr);
 +
-+        /* Granularity of checking somewhat arbitrary. */
-+        if ( !(++done & 0x1ff) )
-+             process_pending_softirqs();
++        unmap_vtd_domain_page(page);
++
++        pg_maddr = addr_to_dma_page_maddr(domain, addr, level, flush_flags,
++                                          false);
++        BUG_ON(pg_maddr < PAGE_SIZE);
++
++        page = map_vtd_domain_page(pg_maddr);
++        pte = &page[address_level_offset(addr, level)];
++        dma_clear_pte(*pte);
++        iommu_sync_cache(pte, sizeof(*pte));
++
++        *flush_flags |= IOMMU_FLUSHF_all;
++        iommu_queue_free_pgtable(hd, pg);
 +    }
-+}
+ 
+     spin_unlock(&hd->arch.mapping_lock);
+-    iommu_sync_cache(pte, sizeof(struct dma_pte));
+ 
+     unmap_vtd_domain_page(page);
+ 
+@@ -2182,8 +2210,21 @@ static int __must_check cf_check intel_i
+     }
+ 
+     *pte = new;
+-
+     iommu_sync_cache(pte, sizeof(struct dma_pte));
 +
-+void iommu_queue_free_pgtable(struct domain_iommu *hd, struct page_info *pg)
-+{
-+    unsigned int cpu = smp_processor_id();
++    /*
++     * While the (ab)use of PTE_kind_table here allows to save some work in
++     * the function, the main motivation for it is that it avoids a so far
++     * unexplained hang during boot (while preparing Dom0) on a Westmere
++     * based laptop.
++     */
++    pt_update_contig_markers(&page->val,
++                             address_level_offset(dfn_to_daddr(dfn), level),
++                             level,
++                             (hd->platform_ops->page_sizes &
++                              (1UL << level_to_offset_bits(level + 1))
++                              ? PTE_kind_leaf : PTE_kind_table));
 +
-+    spin_lock(&hd->arch.pgtables.lock);
-+    page_list_del(pg, &hd->arch.pgtables.list);
-+    spin_unlock(&hd->arch.pgtables.lock);
-+
-+    page_list_add_tail(pg, &per_cpu(free_pgt_list, cpu));
-+
-+    tasklet_schedule(&per_cpu(free_pgt_tasklet, cpu));
-+}
-+
-+static int cf_check cpu_callback(
-+    struct notifier_block *nfb, unsigned long action, void *hcpu)
-+{
-+    unsigned int cpu = (unsigned long)hcpu;
-+    struct page_list_head *list = &per_cpu(free_pgt_list, cpu);
-+    struct tasklet *tasklet = &per_cpu(free_pgt_tasklet, cpu);
-+
-+    switch ( action )
-+    {
-+    case CPU_DOWN_PREPARE:
-+        tasklet_kill(tasklet);
-+        break;
-+
-+    case CPU_DEAD:
-+        page_list_splice(list, &this_cpu(free_pgt_list));
-+        INIT_PAGE_LIST_HEAD(list);
-+        tasklet_schedule(&this_cpu(free_pgt_tasklet));
-+        break;
-+
-+    case CPU_UP_PREPARE:
-+    case CPU_DOWN_FAILED:
-+        tasklet_init(tasklet, free_queued_pgtables, list);
-+        break;
-+    }
-+
-+    return NOTIFY_DONE;
-+}
-+
-+static struct notifier_block cpu_nfb = {
-+    .notifier_call = cpu_callback,
-+};
-+
-+static int __init cf_check bsp_init(void)
-+{
-+    if ( iommu_enabled )
-+    {
-+        cpu_callback(&cpu_nfb, CPU_UP_PREPARE,
-+                     (void *)(unsigned long)smp_processor_id());
-+        register_cpu_notifier(&cpu_nfb);
-+    }
-+
-+    return 0;
-+}
-+presmp_initcall(bsp_init);
-+
- bool arch_iommu_use_permitted(const struct domain *d)
- {
-     /*
+     spin_unlock(&hd->arch.mapping_lock);
+     unmap_vtd_domain_page(page);
+ 
 
 
