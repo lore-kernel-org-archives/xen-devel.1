@@ -4,33 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31271C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 26 Apr 2022 10:45:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.313766.531502 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DE3C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 26 Apr 2022 10:45:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.313774.531512 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njIgh-0007ZJ-Iq; Tue, 26 Apr 2022 10:44:55 +0000
+	id 1njIhT-0008F6-Sa; Tue, 26 Apr 2022 10:45:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 313766.531502; Tue, 26 Apr 2022 10:44:55 +0000
+Received: by outflank-mailman (output) from mailman id 313774.531512; Tue, 26 Apr 2022 10:45:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njIgh-0007Z6-Fu; Tue, 26 Apr 2022 10:44:55 +0000
-Received: by outflank-mailman (input) for mailman id 313766;
- Tue, 26 Apr 2022 10:44:54 +0000
+	id 1njIhT-0008Ex-Pb; Tue, 26 Apr 2022 10:45:43 +0000
+Received: by outflank-mailman (input) for mailman id 313774;
+ Tue, 26 Apr 2022 10:45:42 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=bVWk=VE=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1njIgg-0007XV-93
- for xen-devel@lists.xenproject.org; Tue, 26 Apr 2022 10:44:54 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e633d383-c54d-11ec-8fc2-03012f2f19d4;
- Tue, 26 Apr 2022 12:44:52 +0200 (CEST)
-Received: from [10.10.1.128] (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1650969886537818.2673685055015;
- Tue, 26 Apr 2022 03:44:46 -0700 (PDT)
+ <SRS0=1SWQ=VE=tklengyel.com=tamas@srs-se1.protection.inumbo.net>)
+ id 1njIhR-0007XV-Sa
+ for xen-devel@lists.xenproject.org; Tue, 26 Apr 2022 10:45:42 +0000
+Received: from MTA-06-4.privateemail.com (mta-06-4.privateemail.com
+ [198.54.122.146]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 02fce9c0-c54e-11ec-8fc2-03012f2f19d4;
+ Tue, 26 Apr 2022 12:45:40 +0200 (CEST)
+Received: from mta-06.privateemail.com (localhost [127.0.0.1])
+ by mta-06.privateemail.com (Postfix) with ESMTP id 4234218000A7
+ for <xen-devel@lists.xenproject.org>; Tue, 26 Apr 2022 06:45:38 -0400 (EDT)
+Received: from mail-oa1-f51.google.com (unknown [10.20.151.196])
+ by mta-06.privateemail.com (Postfix) with ESMTPA id 165A818000AE
+ for <xen-devel@lists.xenproject.org>; Tue, 26 Apr 2022 06:45:38 -0400 (EDT)
+Received: by mail-oa1-f51.google.com with SMTP id
+ 586e51a60fabf-e68392d626so13865154fac.4
+ for <xen-devel@lists.xenproject.org>; Tue, 26 Apr 2022 03:45:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,99 +47,236 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e633d383-c54d-11ec-8fc2-03012f2f19d4
-ARC-Seal: i=1; a=rsa-sha256; t=1650969887; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=iUfO5XZhhaxFKUapN+vEdfaDWAfsfylK5KWGJjm3l3yF/PfNTrFVxs0DW05GTOJwbkhn50V0A1QezI5K2YdQ8xMD+91QLP4t0UIRn9nDKlcmB3/l4ec5rC/tW4Wa0spTy6kP50rXSi1FSz90KczW5XaMjxXKXKPnEU+WI0XXBTY=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1650969887; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=hj+dEkNlqWhPGTS1YlWUm/Kq/vBPWzD4km56q01emc8=; 
-	b=BM3XT+M9a3hxMB4Bh0kBrBKyJ2A9bPQeUQQ+iMdzujGHCNr4g76Ogb7+VZ55fEnP6AgsdOvvJerDpENglM6CWy1RZOqhk8FQvuy29GToHZAiNxYhrkbGiki8LyERhQNXQWrHEo7Bv0dY1FVuJEi1VxXZ1O0X+PgqpUP2VdsPHkc=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1650969887;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=hj+dEkNlqWhPGTS1YlWUm/Kq/vBPWzD4km56q01emc8=;
-	b=ZiSNxSDhjYtBUr6RklVCOered6CAK3/x0yXnqCVrLkqV4WufoRZVqDudx3j6RBHE
-	XQ1H8mRgqbJeQl2izLtnBQnBPZmlOXYw0xRFj2x3TDb4i8LcMNmYupOgCu9W8KxqFk6
-	nnFm5rYrqPmQ11atfSZl+rq/02l+qSZNiBzUMLwU=
-Message-ID: <7e3b375b-f5f2-588f-692f-4ccf092d6db6@apertussolutions.com>
-Date: Tue, 26 Apr 2022 06:43:54 -0400
+X-Inumbo-ID: 02fce9c0-c54e-11ec-8fc2-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=tklengyel.com;
+	s=default; t=1650969938;
+	bh=nlcZFBj/6nclOGGfSsnO6KzzvshtblHXrPlXqt2RQ4s=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+	b=gnQksIipZW0zNS5d9+KpQ1wBHl/SdcstUkvRE6CpzLgkuIELsrDLUv0DAkf8OyrlZ
+	 G3HO3iYsLoG+3PWyQhMMJz7kZmWJJYWylIOH6/iEFT7EMumnU+syq8iGY3EdaROtZG
+	 s8CwBqnpZ/cuw8IrgQht5Zwf/TpTFG4Zzt1MQTTAtNKRbRX4sDI8SmOItXn75fPRJq
+	 wehvG0+rrbc0CzeHtVDlOD6lqGIYpFaJ+S5Wfn3tVeFmaqjriN/ZYhyQbJaJ02AX1J
+	 8/l2sjgTCUF8GtIkaylO2/jQpV43PjQ4XPG2fOLmC7tY0imJ8SDs/qOuXHrJiVnnvr
+	 skNcv04yXFfRw==
+X-Gm-Message-State: AOAM5335wWMuWocP/Vi7XUDXAXdsolpq9iMPR0q7ClqhnotcdnVMR1gl
+	2zMMMpKGfYrYrB8+r9ZSggDIL0wOQF7IdQxsrck=
+X-Google-Smtp-Source: ABdhPJy4tz+rhYYRXIj7a050byoO+TuVX3OmhzfsKiFg4b/ChYKYW2btPr+kDdvsTD07g6Om4JIMoEkIBbo7Kemyt94=
+X-Received: by 2002:a05:6870:b295:b0:e9:1c84:3671 with SMTP id
+ c21-20020a056870b29500b000e91c843671mr5770214oao.128.1650969937362; Tue, 26
+ Apr 2022 03:45:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.0
-Subject: Re: [PATCH v4 1/2] xsm: create idle domain privileged and demote
- after setup
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>
-Cc: scott.davis@starlab.io, jandryuk@gmail.com,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Dario Faggioli
- <dfaggioli@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- xen-devel@lists.xenproject.org,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Wei Liu <wl@xen.org>
-References: <20220425172231.27401-1-dpsmith@apertussolutions.com>
- <20220425172231.27401-2-dpsmith@apertussolutions.com>
- <f82679b4-8b2a-ff9c-cc2c-60ba9b737de9@suse.com>
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-In-Reply-To: <f82679b4-8b2a-ff9c-cc2c-60ba9b737de9@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ZohoMailClient: External
+References: <bc13e07cdb651afc2c8a97dde1be9c2158160307.1649857162.git.tamas.lengyel@intel.com>
+ <YmasHAT0YkeJVMbv@Air-de-Roger> <CABfawhn=6KVVPZD6AVRH2=NJFd5ZwtPpxDn__LdEFJQx6bhCXA@mail.gmail.com>
+ <Ymeqg+UmOl2mN5Dz@Air-de-Roger> <bce39358-9739-c39d-c97f-6bae216da89b@xen.org>
+In-Reply-To: <bce39358-9739-c39d-c97f-6bae216da89b@xen.org>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Tue, 26 Apr 2022 06:45:26 -0400
+X-Gmail-Original-Message-ID: <CABfawhnbo-Yy1Se8sz-RKveRes-z_wTdfznzsBbQ0tAXkuN=vg@mail.gmail.com>
+Message-ID: <CABfawhnbo-Yy1Se8sz-RKveRes-z_wTdfznzsBbQ0tAXkuN=vg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] x86/mem_sharing: make fork_reset more configurable
+To: Julien Grall <julien@xen.org>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Tamas K Lengyel <tamas.lengyel@intel.com>, Xen-devel <xen-devel@lists.xenproject.org>, 
+	Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Juergen Gross <jgross@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Jan Beulich <jbeulich@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
+	Alexandru Isaila <aisaila@bitdefender.com>, Petre Pircalabu <ppircalabu@bitdefender.com>
+Content-Type: multipart/alternative; boundary="000000000000a6c43f05dd8c6482"
+X-Virus-Scanned: ClamAV using ClamSMTP
 
-On 4/26/22 02:35, Jan Beulich wrote:
-> On 25.04.2022 19:22, Daniel P. Smith wrote:
->> --- a/xen/arch/x86/setup.c
->> +++ b/xen/arch/x86/setup.c
->> @@ -621,6 +621,9 @@ static void noreturn init_done(void)
->>       void *va;
->>       unsigned long start, end;
->>   
->> +    if ( xsm_set_system_active() != 0 )
->> +        panic("xsm: unable to set hypervisor to SYSTEM_ACTIVE privilege\n");
-> 
-> Roger did request that the panic() either also report the error
-> code, or that the function be returning bool. You did neither,
-> and your earlier verbal reply also didn't really respond to this
-> part of Roger's comments.
+--000000000000a6c43f05dd8c6482
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Opps, my apologies. I meant to add his suggestion of adding the error to 
-the panic message.
+On Tue, Apr 26, 2022, 4:33 AM Julien Grall <julien@xen.org> wrote:
 
->> --- a/xen/xsm/flask/hooks.c
->> +++ b/xen/xsm/flask/hooks.c
->> @@ -186,6 +186,26 @@ static int cf_check flask_domain_alloc_security(struct domain *d)
->>       return 0;
->>   }
->>   
->> +static int cf_check flask_set_system_active(void)
->> +{
->> +    struct domain *d = current->domain;
->> +
->> +    if ( d->domain_id != DOMID_IDLE )
->> +    {
->> +        printk("xsm_set_system_active should only be called by idle domain\n");
->> +        return -EPERM;
->> +    }
->> +
->> +    /*
->> +     * While is_privileged has no significant meaning under flask, set to false
->> +     * as there are times in hypervisor code privilege checks check this
->> +     * directly instead of going through XSM.
->> +     */
-> 
-> It feels as if there is "which" missing between "checks" and "check",
-> or something else (better fitting "as there are times"), without which
-> the sentence is a little hard to follow.
+> Hi,
+>
+> On 26/04/2022 09:17, Roger Pau Monn=C3=A9 wrote:
+> > On Mon, Apr 25, 2022 at 11:24:37AM -0400, Tamas K Lengyel wrote:
+> >> On Mon, Apr 25, 2022 at 10:12 AM Roger Pau Monn=C3=A9 <roger.pau@citri=
+x.com>
+> wrote:
+> >>>> diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
+> >>>> index 84cf52636b..d26a6699fc 100644
+> >>>> --- a/xen/common/vm_event.c
+> >>>> +++ b/xen/common/vm_event.c
+> >>>> @@ -28,6 +28,11 @@
+> >>>>   #include <asm/p2m.h>
+> >>>>   #include <asm/monitor.h>
+> >>>>   #include <asm/vm_event.h>
+> >>>> +
+> >>>> +#ifdef CONFIG_MEM_SHARING
+> >>>> +#include <asm/mem_sharing.h>
+> >>>> +#endif
+> >>>> +
+> >>>>   #include <xsm/xsm.h>
+> >>>>   #include <public/hvm/params.h>
+> >>>>
+> >>>> @@ -394,6 +399,16 @@ static int vm_event_resume(struct domain *d,
+> struct vm_event_domain *ved)
+> >>>>               if ( rsp.reason =3D=3D VM_EVENT_REASON_MEM_PAGING )
+> >>>>                   p2m_mem_paging_resume(d, &rsp);
+> >>>>   #endif
+> >>>> +#ifdef CONFIG_MEM_SHARING
+> >>>> +            if ( mem_sharing_is_fork(d) )
+> >>>> +            {
+> >>>> +                bool reset_state =3D rsp.flags &
+> VM_EVENT_FLAG_RESET_FORK_STATE;
+> >>>> +                bool reset_mem =3D rsp.flags &
+> VM_EVENT_FLAG_RESET_FORK_MEMORY;
+> >>>> +
+> >>>> +                if ( reset_state || reset_mem )
+> >>>> +                    ASSERT(!mem_sharing_fork_reset(d, reset_state,
+> reset_mem));
+> >>>
+> >>> Might be appropriate to destroy the domain in case fork reset fails?
+> >>> ASSERT will only help in debug builds.
+> >>
+> >> No, I would prefer not destroying the domain here. If it ever becomes
+> >> necessary the right way would be to introduce a new monitor event to
+> >> signal an error and let the listener decide what to do. At the moment
+> >> I don't see that being necessary as there are no known scenarios where
+> >> we would be able to setup a fork but fail to reset is.
+> >
+> > My concern for raising this was what would happen on non-debug
+> > builds if mem_sharing_fork_reset() failed, and hence my request to
+> > crash the domain.  I would have used something like:
+> >
+> > if ( (reset_state || reset_mem) &&
+> >       mem_sharing_fork_reset(d, reset_state, reset_mem) )
+> > {
+> >      ASSERT_UNREACHABLE();
+> >      domain_crash(d);
+> >      break;
+> > }
+> >
+> > But if you and other vm_event maintainers are fine with the current
+> > approach and don't think it's a problem that's OK with me.
+>
+> The current approach is actually not correct. On production build,
+> ASSERT() will turn to NOP. IOW mem_sharing_fork_reset() *will* not be
+> called.
+>
+> So the call needs to move outside of the ASSERT() and use a construct
+> similar to what you suggested:
+>
+> if ( .... && mem_sharing_fork_reset(...) )
+> {
+>    ASSERT_UNREACHABLE();
+>    break;
+> }
+>
 
-You are correct, will fix.
+Ah, good call. Thanks!
 
-v/r
-dps
+Tamas
+
+>
+
+--000000000000a6c43f05dd8c6482
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">On Tue, Apr 26, 2022, 4:33 AM Julien Grall &lt;<a href=
+=3D"mailto:julien@xen.org">julien@xen.org</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
+lid;padding-left:1ex">Hi,<br>
+<br>
+On 26/04/2022 09:17, Roger Pau Monn=C3=A9 wrote:<br>
+&gt; On Mon, Apr 25, 2022 at 11:24:37AM -0400, Tamas K Lengyel wrote:<br>
+&gt;&gt; On Mon, Apr 25, 2022 at 10:12 AM Roger Pau Monn=C3=A9 &lt;<a href=
+=3D"mailto:roger.pau@citrix.com" target=3D"_blank" rel=3D"noreferrer">roger=
+.pau@citrix.com</a>&gt; wrote:<br>
+&gt;&gt;&gt;&gt; diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c=
+<br>
+&gt;&gt;&gt;&gt; index 84cf52636b..d26a6699fc 100644<br>
+&gt;&gt;&gt;&gt; --- a/xen/common/vm_event.c<br>
+&gt;&gt;&gt;&gt; +++ b/xen/common/vm_event.c<br>
+&gt;&gt;&gt;&gt; @@ -28,6 +28,11 @@<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0#include &lt;asm/p2m.h&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0#include &lt;asm/monitor.h&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0#include &lt;asm/vm_event.h&gt;<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +#ifdef CONFIG_MEM_SHARING<br>
+&gt;&gt;&gt;&gt; +#include &lt;asm/mem_sharing.h&gt;<br>
+&gt;&gt;&gt;&gt; +#endif<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0#include &lt;xsm/xsm.h&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0#include &lt;public/hvm/params.h&gt;<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; @@ -394,6 +399,16 @@ static int vm_event_resume(struct dom=
+ain *d, struct vm_event_domain *ved)<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (=
+ rsp.reason =3D=3D VM_EVENT_REASON_MEM_PAGING )<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0p2m_mem_paging_resume(d, &amp;rsp);<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0#endif<br>
+&gt;&gt;&gt;&gt; +#ifdef CONFIG_MEM_SHARING<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if ( mem_sharin=
+g_is_fork(d) )<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 {<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 b=
+ool reset_state =3D rsp.flags &amp; VM_EVENT_FLAG_RESET_FORK_STATE;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 b=
+ool reset_mem =3D rsp.flags &amp; VM_EVENT_FLAG_RESET_FORK_MEMORY;<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 i=
+f ( reset_state || reset_mem )<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 ASSERT(!mem_sharing_fork_reset(d, reset_state, reset_mem));<b=
+r>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; Might be appropriate to destroy the domain in case fork reset =
+fails?<br>
+&gt;&gt;&gt; ASSERT will only help in debug builds.<br>
+&gt;&gt;<br>
+&gt;&gt; No, I would prefer not destroying the domain here. If it ever beco=
+mes<br>
+&gt;&gt; necessary the right way would be to introduce a new monitor event =
+to<br>
+&gt;&gt; signal an error and let the listener decide what to do. At the mom=
+ent<br>
+&gt;&gt; I don&#39;t see that being necessary as there are no known scenari=
+os where<br>
+&gt;&gt; we would be able to setup a fork but fail to reset is.<br>
+&gt; <br>
+&gt; My concern for raising this was what would happen on non-debug<br>
+&gt; builds if mem_sharing_fork_reset() failed, and hence my request to<br>
+&gt; crash the domain.=C2=A0 I would have used something like:<br>
+&gt; <br>
+&gt; if ( (reset_state || reset_mem) &amp;&amp;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0mem_sharing_fork_reset(d, reset_state, reset=
+_mem) )<br>
+&gt; {<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 ASSERT_UNREACHABLE();<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 domain_crash(d);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 break;<br>
+&gt; }<br>
+&gt; <br>
+&gt; But if you and other vm_event maintainers are fine with the current<br=
+>
+&gt; approach and don&#39;t think it&#39;s a problem that&#39;s OK with me.=
+<br>
+<br>
+The current approach is actually not correct. On production build, <br>
+ASSERT() will turn to NOP. IOW mem_sharing_fork_reset() *will* not be <br>
+called.<br>
+<br>
+So the call needs to move outside of the ASSERT() and use a construct <br>
+similar to what you suggested:<br>
+<br>
+if ( .... &amp;&amp; mem_sharing_fork_reset(...) )<br>
+{<br>
+=C2=A0 =C2=A0ASSERT_UNREACHABLE();<br>
+=C2=A0 =C2=A0break;<br>
+}<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto"=
+>Ah, good call. Thanks!</div><div dir=3D"auto"><br></div><div dir=3D"auto">=
+Tamas</div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex">
+</blockquote></div></div></div>
+
+--000000000000a6c43f05dd8c6482--
 
