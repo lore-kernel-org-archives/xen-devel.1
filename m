@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24DE4C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:02:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.315572.534237 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7825C43217
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:02:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.315564.534195 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqgH-0006kh-6s; Wed, 27 Apr 2022 23:02:45 +0000
+	id 1njqgD-0005oA-Mt; Wed, 27 Apr 2022 23:02:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 315572.534237; Wed, 27 Apr 2022 23:02:45 +0000
+Received: by outflank-mailman (output) from mailman id 315564.534195; Wed, 27 Apr 2022 23:02:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqgG-0006fM-DA; Wed, 27 Apr 2022 23:02:44 +0000
-Received: by outflank-mailman (input) for mailman id 315572;
- Wed, 27 Apr 2022 22:51:54 +0000
+	id 1njqgD-0005m8-GT; Wed, 27 Apr 2022 23:02:41 +0000
+Received: by outflank-mailman (input) for mailman id 315564;
+ Wed, 27 Apr 2022 22:50:57 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mIOA=VF=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
- id 1njqVm-0003ne-Lg
- for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 22:51:54 +0000
+ id 1njqUr-0003gq-6D
+ for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 22:50:57 +0000
 Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a18ffc0f-c67c-11ec-a405-831a346695d4;
- Thu, 28 Apr 2022 00:51:53 +0200 (CEST)
+ id 7f6c2872-c67c-11ec-a405-831a346695d4;
+ Thu, 28 Apr 2022 00:50:56 +0200 (CEST)
 Received: from [179.113.53.197] (helo=localhost)
  by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1njqVW-000250-IT; Thu, 28 Apr 2022 00:51:39 +0200
+ id 1njqUS-0001zw-SF; Thu, 28 Apr 2022 00:50:33 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,19 +42,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a18ffc0f-c67c-11ec-a405-831a346695d4
+X-Inumbo-ID: 7f6c2872-c67c-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=sBnzQEgOETevrWvoFDe4UXYaoyJvnokumNTnFd8nYd4=; b=C3WoMDzHemUiz3TJonrj4OLB2r
-	FSxQF+F2lHHptNuVBTghKMJZClefE6Imxei6ehl090Dy2iIiwWYXrKfz8k6+wORL9DMg3LEbLg3HV
-	Yy5IDocQKz78CwwV1x1BjunLLiApngptGwnQE+MM0c5kIHbxgr5QD1BtqzYPoELgJZUScA99Ow0T5
-	DgoMAXPJxcpvr2MM73b5S2P6pfeIYXcyYWBlbiqaBO38Mb9qP/Auq8X4+iMlX3NAoRdIHY9DVHKc8
-	OvjiTLZuxC2PHt1XEzIKelV5l8TbSCfHnuQVB2KdJOLt6lDAQzFhqrTn+CsXTsATCFcE2SPeUMfAC
-	eC7wzCXg==;
+	bh=jw69MD++mJtoVz+5OF/yDyT7SM6GG1QVsO5qZnTbfPY=; b=R4BaLs+44BYJptao8GvC8ttDH3
+	QBY0eMxhKSzWFCpxMbR+Fbp293MCB3zvPYgTPMf/b3OkQdSjP24E3L8e4Mxpy4tg+aM7LX40+eANn
+	E9NmhqtSLVcTKfq6OAtiABfZVuEeL7pK/Jggwsb0Z66SwiIPgUgdk8N8FAOWtcyDE4pUFXnvlOs4u
+	KY15nvIzaU7LDhXzbLelthG04bdK8jQeGFwa+aWfBFuZkkmcHkGvkm9AzL5O497raBTZiIXIwFkMO
+	bBhCSNyrOC33WN5GrpTyqWn82roSYAhC1Njfns6EapEQdXDs5qCmdq3kXZk6bj6zjDvwVdiy1jwJ3
+	PjTlDVgw==;
 From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
 To: akpm@linux-foundation.org,
 	bhe@redhat.com,
@@ -115,76 +115,63 @@ Cc: linux-kernel@vger.kernel.org,
 	vgoyal@redhat.com,
 	vkuznets@redhat.com,
 	will@kernel.org,
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>
-Subject: [PATCH 07/30] mips: ip22: Reword PANICED to PANICKED and remove useless header
-Date: Wed, 27 Apr 2022 19:49:01 -0300
-Message-Id: <20220427224924.592546-8-gpiccoli@igalia.com>
+	Arjan van de Ven <arjan@linux.intel.com>,
+	Cong Wang <xiyou.wangcong@gmail.com>,
+	Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+	Valentin Schneider <valentin.schneider@arm.com>,
+	Xiaoming Ni <nixiaoming@huawei.com>
+Subject: [PATCH 03/30] notifier: Add panic notifiers info and purge trailing whitespaces
+Date: Wed, 27 Apr 2022 19:48:57 -0300
+Message-Id: <20220427224924.592546-4-gpiccoli@igalia.com>
 X-Mailer: git-send-email 2.36.0
 In-Reply-To: <20220427224924.592546-1-gpiccoli@igalia.com>
 References: <20220427224924.592546-1-gpiccoli@igalia.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Many other place in the kernel prefer the latter, so let's keep
-it consistent in MIPS code as well. Also, removes a useless header.
+Although many notifiers are mentioned in the comments, the panic
+notifiers infrastructure is not. Also, the file contains some
+trailing whitespaces. This commit fix both issues.
 
-Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Cc: Arjan van de Ven <arjan@linux.intel.com>
+Cc: Cong Wang <xiyou.wangcong@gmail.com>
+Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Cc: Valentin Schneider <valentin.schneider@arm.com>
+Cc: Xiaoming Ni <nixiaoming@huawei.com>
 Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
 ---
- arch/mips/sgi-ip22/ip22-reset.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+ include/linux/notifier.h | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/arch/mips/sgi-ip22/ip22-reset.c b/arch/mips/sgi-ip22/ip22-reset.c
-index 9028dbbb45dd..8f0861c58080 100644
---- a/arch/mips/sgi-ip22/ip22-reset.c
-+++ b/arch/mips/sgi-ip22/ip22-reset.c
-@@ -11,7 +11,6 @@
- #include <linux/interrupt.h>
- #include <linux/kernel.h>
- #include <linux/sched/signal.h>
--#include <linux/notifier.h>
- #include <linux/panic_notifier.h>
- #include <linux/pm.h>
- #include <linux/timer.h>
-@@ -41,7 +40,7 @@
- static struct timer_list power_timer, blink_timer, debounce_timer;
- static unsigned long blink_timer_timeout;
+diff --git a/include/linux/notifier.h b/include/linux/notifier.h
+index 87069b8459af..0589896fc7bd 100644
+--- a/include/linux/notifier.h
++++ b/include/linux/notifier.h
+@@ -201,12 +201,12 @@ static inline int notifier_to_errno(int ret)
  
--#define MACHINE_PANICED		1
-+#define MACHINE_PANICKED		1
- #define MACHINE_SHUTTING_DOWN	2
+ /*
+  *	Declared notifiers so far. I can imagine quite a few more chains
+- *	over time (eg laptop power reset chains, reboot chain (to clean 
++ *	over time (eg laptop power reset chains, reboot chain (to clean
+  *	device units up), device [un]mount chain, module load/unload chain,
+- *	low memory chain, screenblank chain (for plug in modular screenblankers) 
++ *	low memory chain, screenblank chain (for plug in modular screenblankers)
+  *	VC switch chains (for loadable kernel svgalib VC switch helpers) etc...
+  */
+- 
++
+ /* CPU notfiers are defined in include/linux/cpu.h. */
  
- static int machine_state;
-@@ -112,7 +111,7 @@ static void debounce(struct timer_list *unused)
- 		return;
- 	}
+ /* netdevice notifiers are defined in include/linux/netdevice.h */
+@@ -217,6 +217,8 @@ static inline int notifier_to_errno(int ret)
  
--	if (machine_state & MACHINE_PANICED)
-+	if (machine_state & MACHINE_PANICKED)
- 		sgimc->cpuctrl0 |= SGIMC_CCTRL0_SYSINIT;
+ /* Virtual Terminal events are defined in include/linux/vt.h. */
  
- 	enable_irq(SGI_PANEL_IRQ);
-@@ -120,7 +119,7 @@ static void debounce(struct timer_list *unused)
++/* Panic notifiers are defined in include/linux/panic_notifier.h. */
++
+ #define NETLINK_URELEASE	0x0001	/* Unicast netlink socket released */
  
- static inline void power_button(void)
- {
--	if (machine_state & MACHINE_PANICED)
-+	if (machine_state & MACHINE_PANICKED)
- 		return;
- 
- 	if ((machine_state & MACHINE_SHUTTING_DOWN) ||
-@@ -167,9 +166,9 @@ static irqreturn_t panel_int(int irq, void *dev_id)
- static int panic_event(struct notifier_block *this, unsigned long event,
- 		      void *ptr)
- {
--	if (machine_state & MACHINE_PANICED)
-+	if (machine_state & MACHINE_PANICKED)
- 		return NOTIFY_DONE;
--	machine_state |= MACHINE_PANICED;
-+	machine_state |= MACHINE_PANICKED;
- 
- 	blink_timer_timeout = PANIC_FREQ;
- 	blink_timeout(&blink_timer);
+ /* Console keyboard events.
 -- 
 2.36.0
 
