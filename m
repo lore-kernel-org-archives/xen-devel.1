@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64989C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 16:16:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.315273.533739 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21FCDC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 16:39:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.315285.533749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njkKj-0007EV-QS; Wed, 27 Apr 2022 16:16:05 +0000
+	id 1njkgh-0001C2-KP; Wed, 27 Apr 2022 16:38:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 315273.533739; Wed, 27 Apr 2022 16:16:05 +0000
+Received: by outflank-mailman (output) from mailman id 315285.533749; Wed, 27 Apr 2022 16:38:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njkKj-0007EO-NH; Wed, 27 Apr 2022 16:16:05 +0000
-Received: by outflank-mailman (input) for mailman id 315273;
- Wed, 27 Apr 2022 16:16:04 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=sRcl=VF=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1njkKi-0007EC-9I
- for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 16:16:04 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 556acb42-c645-11ec-a405-831a346695d4;
- Wed, 27 Apr 2022 18:16:03 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 827F8ED1;
- Wed, 27 Apr 2022 09:16:02 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9DBD83F5A1;
- Wed, 27 Apr 2022 09:16:01 -0700 (PDT)
+	id 1njkgh-0001Bv-HU; Wed, 27 Apr 2022 16:38:47 +0000
+Received: by outflank-mailman (input) for mailman id 315285;
+ Wed, 27 Apr 2022 16:38:46 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1njkgg-0001Bl-04; Wed, 27 Apr 2022 16:38:46 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1njkgf-00026P-UP; Wed, 27 Apr 2022 16:38:45 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1njkgf-0001aT-5f; Wed, 27 Apr 2022 16:38:45 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1njkgf-0003L0-5D; Wed, 27 Apr 2022 16:38:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,48 +44,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 556acb42-c645-11ec-a405-831a346695d4
-From: Rahul Singh <rahul.singh@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=/XOwyAwDuWYdDl01EHnYRYEeWFe1AQ38zgGgSUuj0lQ=; b=gAaMDkIOLN1uB/V+JwQoKWqMXp
+	d31WN1MbiNEZKqnTq4EJe+FK5w5XPwiYZ/01TGL1ecEV8zDUUcx2sQn8IBD3R6DD8IOK0Ft9oWt5m
+	sO9Yrw2yd7EOv7wBBJNgKe9Q/giJALmpeTh5gp7F2C3VB8EFO2cmt8/lMwYepwtsV+b0=;
 To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH] xen/arm: smmuv1: remove iommu group when deassign a device
-Date: Wed, 27 Apr 2022 17:15:51 +0100
-Message-Id: <a19f7238f428deb610df643944f60e1e79e273cf.1651075797.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Message-ID: <osstest-169781-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 169781: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:xen-boot:fail:regression
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=fa6dc0879ffd3dffffaea2837953c7a8761a9ba0
+X-Osstest-Versions-That:
+    xen=163071b1800304c962756789b4ef0ddb978059ba
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 27 Apr 2022 16:38:45 +0000
 
-When a device is deassigned from the domain it is required to remove the
-iommu group.
+flight 169781 xen-unstable-smoke real [real]
+flight 169785 xen-unstable-smoke real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/169781/
+http://logs.test-lab.xenproject.org/osstest/logs/169785/
 
-If we don't remove the group, the next time when we assign
-a device, SME and S2CR will not be setup correctly for the device
-because of that SMMU fault will be observed.
+Regressions :-(
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
----
- xen/drivers/passthrough/arm/smmu.c | 2 ++
- 1 file changed, 2 insertions(+)
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-arm64-arm64-xl-xsm       8 xen-boot                 fail REGR. vs. 169773
 
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/arm/smmu.c
-index 5cacb2dd99..9a31c332d0 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -1690,6 +1690,8 @@ static void arm_smmu_detach_dev(struct iommu_domain *domain, struct device *dev)
- 	if (cfg)
- 		arm_smmu_master_free_smes(cfg);
- 
-+	iommu_group_put(dev_iommu_group(dev));
-+	dev_iommu_group(dev) = NULL;
- }
- 
- #if 0 /*
--- 
-2.25.1
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
+version targeted for testing:
+ xen                  fa6dc0879ffd3dffffaea2837953c7a8761a9ba0
+baseline version:
+ xen                  163071b1800304c962756789b4ef0ddb978059ba
+
+Last test of basis   169773  2022-04-27 08:01:54 Z    0 days
+Testing same since   169781  2022-04-27 12:01:52 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  David Vrabel <dvrabel@amazon.co.uk>
+  Julien Grall <jgrall@amazon.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit fa6dc0879ffd3dffffaea2837953c7a8761a9ba0
+Author: David Vrabel <dvrabel@amazon.co.uk>
+Date:   Tue Apr 26 10:33:01 2022 +0200
+
+    page_alloc: assert IRQs are enabled in heap alloc/free
+    
+    Heap pages can only be safely allocated and freed with interrupts
+    enabled as they may require a TLB flush which may send IPIs (on x86).
+    
+    Normally spinlock debugging would catch calls from the incorrect
+    context, but not from stop_machine_run() action functions as these are
+    called with spin lock debugging disabled.
+    
+    Enhance the assertions in alloc_xenheap_pages() and
+    alloc_domheap_pages() to check interrupts are enabled. For consistency
+    the same asserts are used when freeing heap pages.
+    
+    As an exception, when only 1 PCPU is online, allocations are permitted
+    with interrupts disabled as any TLB flushes would be local only. This
+    is necessary during early boot.
+    
+    Signed-off-by: David Vrabel <dvrabel@amazon.co.uk>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+commit fbd2445558beff90eb9607308f0845b18a7a2b5a
+Author: Julien Grall <jgrall@amazon.com>
+Date:   Tue Apr 26 21:06:29 2022 +0100
+
+    xen/arm: alternative: Don't call vmap() within stop_machine_run()
+    
+    Commit 88a037e2cfe1 "page_alloc: assert IRQs are enabled in heap
+    alloc/free" extended the checks in the buddy allocator to catch
+    any use of the helpers from context with interrupts disabled.
+    
+    Unfortunately, the rule is not followed in the alternative code and
+    this will result to crash at boot with debug enabled:
+    
+    (XEN) Xen call trace:
+    (XEN)    [<0022a510>] alloc_xenheap_pages+0x120/0x150 (PC)
+    (XEN)    [<00000000>] 00000000 (LR)
+    (XEN)    [<002736ac>] arch/arm/mm.c#xen_pt_update+0x144/0x6e4
+    (XEN)    [<002740d4>] map_pages_to_xen+0x10/0x20
+    (XEN)    [<00236864>] __vmap+0x400/0x4a4
+    (XEN)    [<0026aee8>] arch/arm/alternative.c#__apply_alternatives_multi_stop+0x144/0x1ec
+    (XEN)    [<0022fe40>] stop_machine_run+0x23c/0x300
+    (XEN)    [<002c40c4>] apply_alternatives_all+0x34/0x5c
+    (XEN)    [<002ce3e8>] start_xen+0xcb8/0x1024
+    (XEN)    [<00200068>] arch/arm/arm32/head.o#primary_switched+0xc/0x1c
+    
+    The interrupts will be disabled by the state machine in stop_machine_run(),
+    hence why the ASSERT is hit.
+    
+    For now the patch extending the checks has been reverted, but it would
+    be good to re-introduce it (allocation with interrupts disabled is not
+    desirable).
+    
+    So move the re-mapping of Xen to the caller of stop_machine_run().
+    
+    Signed-off-by: Julien Grall <jgrall@amazon.com>
+    Cc: David Vrabel <dvrabel@amazon.co.uk>
+    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+(qemu changes not included)
 
