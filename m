@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10151C433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:02:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.315576.534255 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9040C433FE
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:03:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.315580.534276 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqgJ-0007BZ-3C; Wed, 27 Apr 2022 23:02:47 +0000
+	id 1njqgL-0007lm-Co; Wed, 27 Apr 2022 23:02:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 315576.534255; Wed, 27 Apr 2022 23:02:46 +0000
+Received: by outflank-mailman (output) from mailman id 315580.534276; Wed, 27 Apr 2022 23:02:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqgI-00074J-5P; Wed, 27 Apr 2022 23:02:46 +0000
-Received: by outflank-mailman (input) for mailman id 315576;
- Wed, 27 Apr 2022 22:52:24 +0000
+	id 1njqgK-0007il-C9; Wed, 27 Apr 2022 23:02:48 +0000
+Received: by outflank-mailman (input) for mailman id 315580;
+ Wed, 27 Apr 2022 22:52:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mIOA=VF=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
- id 1njqWG-0003q5-N1
- for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 22:52:24 +0000
+ id 1njqWj-0003q5-IE
+ for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 22:52:53 +0000
 Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b37aaf20-c67c-11ec-8fc3-03012f2f19d4;
- Thu, 28 Apr 2022 00:52:23 +0200 (CEST)
+ id c4d6ec14-c67c-11ec-8fc3-03012f2f19d4;
+ Thu, 28 Apr 2022 00:52:52 +0200 (CEST)
 Received: from [179.113.53.197] (helo=localhost)
  by fanzine2.igalia.com with esmtpsa 
  (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1njqW1-000289-9r; Thu, 28 Apr 2022 00:52:10 +0200
+ id 1njqWU-0002B5-Ub; Thu, 28 Apr 2022 00:52:40 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,19 +42,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b37aaf20-c67c-11ec-8fc3-03012f2f19d4
+X-Inumbo-ID: c4d6ec14-c67c-11ec-8fc3-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
 	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
 	List-Post:List-Owner:List-Archive;
-	bh=seVlMlqj/OOgqWCw1tUxCfRyMjTeYr5Z28M++b51Xf4=; b=ZaOL9ZgN+EGmQho6+KGFZHTRbn
-	OaOWIMR4M4pabKtnueiNn0ccKPcDo3HPhyU+dXv5cnfPUStBzfPFVl+jQM59vF4ZhACUpuR43IYXQ
-	ZxDFWoPV6MSwPwBTAmhnCK48+3Rd3s3YxmPfJVkzBknJImEbRwxzoUg95gTvTUorv8vMDdjprmUy3
-	YkS66FLAwKwDNOu8o7q4f4XVv/vUJe4PGzk68gQ9Mx3uMtXXVmK27/P4rcS4LEEam3214m5o7ahcQ
-	5LKqcAxUSITnoTva0XbxnJK2lHjf45/V+xGb9BJP25J23hUhWNHPX2AXkANv1NANWHSZgkACdPcYF
-	QXixtySQ==;
+	bh=bCeC+folLkdyk3b6apumHxcRwMBwOys8pMRPpqSclew=; b=TqPRVvgSfmMVR610uLcwg2vC34
+	pLIumny6UC9NAVKrJeC8kjbMxl/tivBCI9wjj++xXokR3qbvfCHXTOfrOaZezN2wYfsTeWwS7JgiC
+	ST58COWgOj0NVLj/RM40gpf1tYeZ+3Akn0o3OOB9wnVZqXRK498bYXNcV51purgIjJ73eodK18ucj
+	+Iyv87VDCsJruNsaOWJAaGmlYU1Av1XSojv9QPvuFZsys/hw7VJ6aN2N3d0SlURJabJe1PgCqptXF
+	Xo2aIypAELGn+aiNCAnoOIj6PgcxN1C5aslHAtr3OG/wMakbb0/ORKtlMkkFaGzr7X86jahmQbl4p
+	VjCzjD3g==;
 From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
 To: akpm@linux-foundation.org,
 	bhe@redhat.com,
@@ -115,66 +115,91 @@ Cc: linux-kernel@vger.kernel.org,
 	vgoyal@redhat.com,
 	vkuznets@redhat.com,
 	will@kernel.org,
-	Leo Yan <leo.yan@linaro.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Mike Leach <mike.leach@linaro.org>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>
-Subject: [PATCH 09/30] coresight: cpu-debug: Replace mutex with mutex_trylock on panic notifier
-Date: Wed, 27 Apr 2022 19:49:03 -0300
-Message-Id: <20220427224924.592546-10-gpiccoli@igalia.com>
+	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Richard Weinberger <richard@nod.at>
+Subject: [PATCH 11/30] um: Improve panic notifiers consistency and ordering
+Date: Wed, 27 Apr 2022 19:49:05 -0300
+Message-Id: <20220427224924.592546-12-gpiccoli@igalia.com>
 X-Mailer: git-send-email 2.36.0
 In-Reply-To: <20220427224924.592546-1-gpiccoli@igalia.com>
 References: <20220427224924.592546-1-gpiccoli@igalia.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The panic notifier infrastructure executes registered callbacks when
-a panic event happens - such callbacks are executed in atomic context,
-with interrupts and preemption disabled in the running CPU and all other
-CPUs disabled. That said, mutexes in such context are not a good idea.
+Currently the panic notifiers from user mode linux don't follow
+the convention for most of the other notifiers present in the
+kernel (indentation, priority setting, numeric return).
+More important, the priorities could be improved, since it's a
+special case (userspace), hence we could run the notifiers earlier;
+user mode linux shouldn't care much with other panic notifiers but
+the ordering among the mconsole and arch notifier is important,
+given that the arch one effectively triggers a core dump.
 
-This patch replaces a regular mutex with a mutex_trylock safer approach;
-given the nature of the mutex used in the driver, it should be pretty
-uncommon being unable to acquire such mutex in the panic path, hence
-no functional change should be observed (and if it is, that would be
-likely a deadlock with the regular mutex).
+This patch fixes that by running the mconsole notifier as the first
+panic notifier, followed by the architecture one (that coredumps).
+Also, we remove a useless header inclusion.
 
-Fixes: 2227b7c74634 ("coresight: add support for CPU debug module")
-Cc: Leo Yan <leo.yan@linaro.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: Mike Leach <mike.leach@linaro.org>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
+Cc: Anton Ivanov <anton.ivanov@cambridgegreys.com>
+Cc: Johannes Berg <johannes@sipsolutions.net>
+Cc: Richard Weinberger <richard@nod.at>
 Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
 ---
- drivers/hwtracing/coresight/coresight-cpu-debug.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ arch/um/drivers/mconsole_kern.c | 8 +++-----
+ arch/um/kernel/um_arch.c        | 8 ++++----
+ 2 files changed, 7 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/hwtracing/coresight/coresight-cpu-debug.c b/drivers/hwtracing/coresight/coresight-cpu-debug.c
-index 8845ec4b4402..1874df7c6a73 100644
---- a/drivers/hwtracing/coresight/coresight-cpu-debug.c
-+++ b/drivers/hwtracing/coresight/coresight-cpu-debug.c
-@@ -380,9 +380,10 @@ static int debug_notifier_call(struct notifier_block *self,
- 	int cpu;
- 	struct debug_drvdata *drvdata;
+diff --git a/arch/um/drivers/mconsole_kern.c b/arch/um/drivers/mconsole_kern.c
+index 8ca67a692683..2ea0421bcc3f 100644
+--- a/arch/um/drivers/mconsole_kern.c
++++ b/arch/um/drivers/mconsole_kern.c
+@@ -11,7 +11,6 @@
+ #include <linux/list.h>
+ #include <linux/mm.h>
+ #include <linux/module.h>
+-#include <linux/notifier.h>
+ #include <linux/panic_notifier.h>
+ #include <linux/reboot.h>
+ #include <linux/sched/debug.h>
+@@ -846,13 +845,12 @@ static int notify_panic(struct notifier_block *self, unsigned long unused1,
  
--	mutex_lock(&debug_lock);
-+	/* Bail out if we can't acquire the mutex or the functionality is off */
-+	if (!mutex_trylock(&debug_lock))
-+		return NOTIFY_DONE;
- 
--	/* Bail out if the functionality is disabled */
- 	if (!debug_enable)
- 		goto skip_dump;
- 
-@@ -401,7 +402,7 @@ static int debug_notifier_call(struct notifier_block *self,
- 
- skip_dump:
- 	mutex_unlock(&debug_lock);
+ 	mconsole_notify(notify_socket, MCONSOLE_PANIC, message,
+ 			strlen(message) + 1);
 -	return 0;
 +	return NOTIFY_DONE;
  }
  
- static struct notifier_block debug_notifier = {
+ static struct notifier_block panic_exit_notifier = {
+-	.notifier_call 		= notify_panic,
+-	.next 			= NULL,
+-	.priority 		= 1
++	.notifier_call	= notify_panic,
++	.priority	= INT_MAX, /* run as soon as possible */
+ };
+ 
+ static int add_notifier(void)
+diff --git a/arch/um/kernel/um_arch.c b/arch/um/kernel/um_arch.c
+index 0760e24f2eba..4485b1a7c8e4 100644
+--- a/arch/um/kernel/um_arch.c
++++ b/arch/um/kernel/um_arch.c
+@@ -246,13 +246,13 @@ static int panic_exit(struct notifier_block *self, unsigned long unused1,
+ 	bust_spinlocks(0);
+ 	uml_exitcode = 1;
+ 	os_dump_core();
+-	return 0;
++
++	return NOTIFY_DONE;
+ }
+ 
+ static struct notifier_block panic_exit_notifier = {
+-	.notifier_call 		= panic_exit,
+-	.next 			= NULL,
+-	.priority 		= 0
++	.notifier_call	= panic_exit,
++	.priority	= INT_MAX - 1, /* run as 2nd notifier, won't return */
+ };
+ 
+ void uml_finishsetup(void)
 -- 
 2.36.0
 
