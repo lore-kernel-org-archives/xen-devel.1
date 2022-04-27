@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE5AC433FE
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:02:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.315620.534161 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8775BC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:02:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.315558.534178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqfk-000508-OS; Wed, 27 Apr 2022 23:02:12 +0000
+	id 1njqgC-0005Rf-Dd; Wed, 27 Apr 2022 23:02:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 315620.534161; Wed, 27 Apr 2022 23:02:12 +0000
+Received: by outflank-mailman (output) from mailman id 315558.534178; Wed, 27 Apr 2022 23:02:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqfk-000501-LL; Wed, 27 Apr 2022 23:02:12 +0000
-Received: by outflank-mailman (input) for mailman id 315620;
- Wed, 27 Apr 2022 23:02:11 +0000
+	id 1njqgC-0005R8-6e; Wed, 27 Apr 2022 23:02:40 +0000
+Received: by outflank-mailman (input) for mailman id 315558;
+ Wed, 27 Apr 2022 22:50:46 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=83Ve=VF=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1njqfj-0004zv-7c
- for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 23:02:11 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ <SRS0=mIOA=VF=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
+ id 1njqUg-0003gq-Id
+ for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 22:50:46 +0000
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 10168384-c67e-11ec-a405-831a346695d4;
- Thu, 28 Apr 2022 01:02:09 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 8045C61EB1;
- Wed, 27 Apr 2022 23:02:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6E312C385B3;
- Wed, 27 Apr 2022 23:02:06 +0000 (UTC)
+ id 7817bed3-c67c-11ec-a405-831a346695d4;
+ Thu, 28 Apr 2022 00:50:44 +0200 (CEST)
+Received: from [179.113.53.197] (helo=localhost)
+ by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1njqU9-0001ye-3z; Thu, 28 Apr 2022 00:50:14 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,96 +42,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 10168384-c67e-11ec-a405-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1651100526;
-	bh=2B0I6UKvUahmLNSo7IJecEPRSchsOYXKzGhpm2fjGfA=;
-	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=iWBvdqT4Qbwoh8GS0FE0U+3z8IjbOdIrIB+iUg8neoPXQ/0gONGe+OhYJN+vMexTB
-	 IAsa7lGrQ8KxXbqwxi8iA2tMb6cYDi3NyE374HAKBYxHXe9IxD9TV0gkAQmM8ZS9Z4
-	 lxzOaUjoeoLvll8SKdhSqH6dFWAk1HZk6ibxPsW9oZl5Rr9TlylM39adOi91tW4kzM
-	 h8FOt9hL48grw2OKXn2Wy2XjaChLVMLrcTsG8KbOFyzbUvxPZ42N4IJ3tvyS8P6Uff
-	 OKbNTDYsY5ErNtrUxecTB/IVX3DJGW48T5wbtnk/ZZsaGMH+uBF3JMB87oScH9eKRO
-	 lFFGSWaT4p9PA==
-Date: Wed, 27 Apr 2022 16:02:05 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
-To: Julien Grall <julien@xen.org>
-cc: osstest service owner <osstest-admin@xenproject.org>, 
-    xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
-    David Vrabel <dvrabel@amazon.co.uk>, 
-    Stefano Stabellini <sstabellini@kernel.org>, 
-    Bertrand Marquis <bertrand.marquis@arm.com>
-Subject: Re: [xen-unstable-smoke test] 169781: regressions - FAIL
-In-Reply-To: <d1d3d81e-fe1d-fc1c-11b3-781263d8ba84@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2204271556110.915916@ubuntu-linux-20-04-desktop>
-References: <osstest-169781-mainreport@xen.org> <d1d3d81e-fe1d-fc1c-11b3-781263d8ba84@xen.org>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+X-Inumbo-ID: 7817bed3-c67c-11ec-a405-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
+	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=9bJIN4/MOEhLx8CsVfKAquGTzb1mVDbHr+j6ymCNHAs=; b=S+EoVVMbG0R6l0pBfRnMsKZosp
+	2PXBHwhmghS5Lvs4v4GQMUSqpGyoQ5U6Zbnyj6sMhUP4BCGILxO7PkeMyVqV/H8eeh+l7ihT1MYQn
+	6lRWijWvq/MbBgY8W5xo5rf6VIJ8bQ3A6HUNn+RlRorsijlroe/vsascbDWK+dCTLeTv/edmbXzZt
+	IkkQl7Ezob0EK5zEWLgIk+XPPHoVSiw2Ov7kaRBDa36NQrRgmO2O3HFxvBLZEYb5QzmHEcsWLMOdr
+	YdjDzKF3as62X+/HBzxjW/bJqz3Ux15HOHGOCZtJDgeQcPUWNNi8PdpLZsxk0QJWHs39xjqIBwc58
+	XGSV7jaw==;
+From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+To: akpm@linux-foundation.org,
+	bhe@redhat.com,
+	pmladek@suse.com,
+	kexec@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org,
+	bcm-kernel-feedback-list@broadcom.com,
+	coresight@lists.linaro.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-alpha@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-edac@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	linux-leds@vger.kernel.org,
+	linux-mips@vger.kernel.org,
+	linux-parisc@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org,
+	linux-s390@vger.kernel.org,
+	linux-tegra@vger.kernel.org,
+	linux-um@lists.infradead.org,
+	linux-xtensa@linux-xtensa.org,
+	netdev@vger.kernel.org,
+	openipmi-developer@lists.sourceforge.net,
+	rcu@vger.kernel.org,
+	sparclinux@vger.kernel.org,
+	xen-devel@lists.xenproject.org,
+	x86@kernel.org,
+	kernel-dev@igalia.com,
+	gpiccoli@igalia.com,
+	kernel@gpiccoli.net,
+	halves@canonical.com,
+	fabiomirmar@gmail.com,
+	alejandro.j.jimenez@oracle.com,
+	andriy.shevchenko@linux.intel.com,
+	arnd@arndb.de,
+	bp@alien8.de,
+	corbet@lwn.net,
+	d.hatayama@jp.fujitsu.com,
+	dave.hansen@linux.intel.com,
+	dyoung@redhat.com,
+	feng.tang@intel.com,
+	gregkh@linuxfoundation.org,
+	mikelley@microsoft.com,
+	hidehiro.kawai.ez@hitachi.com,
+	jgross@suse.com,
+	john.ogness@linutronix.de,
+	keescook@chromium.org,
+	luto@kernel.org,
+	mhiramat@kernel.org,
+	mingo@redhat.com,
+	paulmck@kernel.org,
+	peterz@infradead.org,
+	rostedt@goodmis.org,
+	senozhatsky@chromium.org,
+	stern@rowland.harvard.edu,
+	tglx@linutronix.de,
+	vgoyal@redhat.com,
+	vkuznets@redhat.com,
+	will@kernel.org,
+	Marc Zyngier <maz@kernel.org>,
+	Russell King <linux@armlinux.org.uk>
+Subject: [PATCH 02/30] ARM: kexec: Disable IRQs/FIQs also on crash CPUs shutdown path
+Date: Wed, 27 Apr 2022 19:48:56 -0300
+Message-Id: <20220427224924.592546-3-gpiccoli@igalia.com>
+X-Mailer: git-send-email 2.36.0
+In-Reply-To: <20220427224924.592546-1-gpiccoli@igalia.com>
+References: <20220427224924.592546-1-gpiccoli@igalia.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 
-On Wed, 27 Apr 2022, Julien Grall wrote:
-> On 27/04/2022 17:38, osstest service owner wrote:
-> > flight 169781 xen-unstable-smoke real [real]
-> > flight 169785 xen-unstable-smoke real-retest [real]
-> > http://logs.test-lab.xenproject.org/osstest/logs/169781/
-> > http://logs.test-lab.xenproject.org/osstest/logs/169785/
-> > 
-> > Regressions :-(
-> > 
-> > Tests which did not succeed and are blocking,
-> > including tests which could not be run:
-> >   test-arm64-arm64-xl-xsm       8 xen-boot                 fail REGR. vs.
-> > 169773
-> 
-> Well, I was overly optimistic :(. This now breaks in the ITS code:
-> 
-> Apr 27 13:23:14.324831 (XEN) Xen call trace:
-> Apr 27 13:23:14.324855 (XEN)    [<000000000022a678>]
-> alloc_xenheap_pages+0x178/0x194 (PC)
-> Apr 27 13:23:14.336856 (XEN)    [<000000000022a670>]
-> alloc_xenheap_pages+0x170/0x194 (LR)
-> Apr 27 13:23:14.336886 (XEN)    [<0000000000237770>] _xmalloc+0x144/0x294
-> Apr 27 13:23:14.348773 (XEN)    [<00000000002378d4>] _xzalloc+0x14/0x30
-> Apr 27 13:23:14.348808 (XEN)    [<000000000027b4e4>]
-> gicv3_lpi_init_rdist+0x54/0x324
-> Apr 27 13:23:14.348835 (XEN)    [<0000000000279898>]
-> arch/arm/gic-v3.c#gicv3_cpu_init+0x128/0x46c
-> Apr 27 13:23:14.360799 (XEN)    [<0000000000279bfc>]
-> arch/arm/gic-v3.c#gicv3_secondary_cpu_init+0x20/0x50
-> Apr 27 13:23:14.372796 (XEN)    [<0000000000277054>]
-> gic_init_secondary_cpu+0x18/0x30
-> Apr 27 13:23:14.372829 (XEN)    [<0000000000284518>]
-> start_secondary+0x1a8/0x234
-> Apr 27 13:23:14.372856 (XEN)    [<0000010722aa4200>] 0000010722aa4200
-> Apr 27 13:23:14.384793 (XEN)
-> Apr 27 13:23:14.384823 (XEN)
-> Apr 27 13:23:14.384845 (XEN) ****************************************
-> Apr 27 13:23:14.384869 (XEN) Panic on CPU 2:
-> Apr 27 13:23:14.384891 (XEN) Assertion '!in_irq() && (local_irq_is_enabled()
-> || num_online_cpus() <= 1)' failed at common/page_alloc.c:2212
-> Apr 27 13:23:14.396805 (XEN) ****************************************
-> 
-> The GICv3 LPI code contains a few calls to xmalloc() that will be done while
-> initializing the GIC CPU interface. I don't think we can delay the
-> initialization of the LPI part past local_irq_enable(). So I think we will
-> need to allocate the memory when preparing the CPU.
-> 
-> Any thoughts?
+Currently the regular CPU shutdown path for ARM disables IRQs/FIQs
+in the secondary CPUs - smp_send_stop() calls ipi_cpu_stop(), which
+is responsible for that. This makes sense, since we're turning off
+such CPUs, putting them in an endless busy-wait loop.
 
+Problem is that there is an alternative path for disabling CPUs,
+in the form of function crash_smp_send_stop(), used for kexec/panic
+paths. This functions relies in a SMP call that also triggers a
+busy-wait loop [at machine_crash_nonpanic_core()], but *without*
+disabling interrupts. This might lead to odd scenarios, like early
+interrupts in the boot of kexec'd kernel or even interrupts in
+other CPUs while the main one still works in the panic path and
+assumes all secondary CPUs are (really!) off.
 
-As a general principle I think the ASSERT is a good idea, and it should
-make the code better and safer. I would not change the code to make the
-ASSERT go away if not to improve the code.
+This patch mimics the ipi_cpu_stop() interrupt disable mechanism
+in the crash CPU shutdown path, hence disabling IRQs/FIQs in all
+secondary CPUs in the kexec/panic path as well.
 
-In this case, gicv3_lpi_init_rdist and gicv3_lpi_allocate_pendtable
-should be __init functions although they are not marked as __init at the
-moment.
+Cc: Marc Zyngier <maz@kernel.org>
+Cc: Russell King <linux@armlinux.org.uk>
+Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
+---
+ arch/arm/kernel/machine_kexec.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-It seems to me that it is acceptable to allocate memory with interrupt
-disabled during __init. I cannot see any drawbacks with it. I think we
-should change the ASSERT to only trigger after __init: system_state ==
-SYS_STATE_active.
+diff --git a/arch/arm/kernel/machine_kexec.c b/arch/arm/kernel/machine_kexec.c
+index f567032a09c0..ef788ee00519 100644
+--- a/arch/arm/kernel/machine_kexec.c
++++ b/arch/arm/kernel/machine_kexec.c
+@@ -86,6 +86,9 @@ void machine_crash_nonpanic_core(void *unused)
+ 	set_cpu_online(smp_processor_id(), false);
+ 	atomic_dec(&waiting_for_crash_ipi);
+ 
++	local_fiq_disable();
++	local_irq_disable();
++
+ 	while (1) {
+ 		cpu_relax();
+ 		wfe();
+-- 
+2.36.0
 
-What do you think?
 
