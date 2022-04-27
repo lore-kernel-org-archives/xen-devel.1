@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1582FC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:03:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.315618.534480 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F90C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 23:13:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.315729.534524 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqh0-0000iY-DF; Wed, 27 Apr 2022 23:03:30 +0000
+	id 1njqqf-0000Oz-6e; Wed, 27 Apr 2022 23:13:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 315618.534480; Wed, 27 Apr 2022 23:03:29 +0000
+Received: by outflank-mailman (output) from mailman id 315729.534524; Wed, 27 Apr 2022 23:13:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njqgy-0000X1-Mj; Wed, 27 Apr 2022 23:03:28 +0000
-Received: by outflank-mailman (input) for mailman id 315618;
- Wed, 27 Apr 2022 22:58:58 +0000
+	id 1njqqf-0000Os-3r; Wed, 27 Apr 2022 23:13:29 +0000
+Received: by outflank-mailman (input) for mailman id 315729;
+ Wed, 27 Apr 2022 23:13:28 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mIOA=VF=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
- id 1njqcc-00048k-L0
- for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 22:58:58 +0000
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ <SRS0=OIub=VF=gmail.com=julien.grall.oss@srs-se1.protection.inumbo.net>)
+ id 1njqqe-0000Om-E1
+ for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 23:13:28 +0000
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [2a00:1450:4864:20::436])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9e790fe4-c67d-11ec-8fc3-03012f2f19d4;
- Thu, 28 Apr 2022 00:58:58 +0200 (CEST)
-Received: from [179.113.53.197] (helo=localhost)
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1njqcO-0002Xa-TN; Thu, 28 Apr 2022 00:58:45 +0200
+ id a4d5ed33-c67f-11ec-8fc3-03012f2f19d4;
+ Thu, 28 Apr 2022 01:13:27 +0200 (CEST)
+Received: by mail-wr1-x436.google.com with SMTP id u3so4474989wrg.3
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Apr 2022 16:13:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,124 +41,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e790fe4-c67d-11ec-8fc3-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-	List-Post:List-Owner:List-Archive;
-	bh=hhYlsUbOeU+dOwRnxPZPUYbOytvtm3s9TOl//oHNJDA=; b=d0jf6vbMLbNOzh0eGG9B6/Px+6
-	qkEUtrYepm4ucy/4pLos0iQRqgjXbtzxxFn26kSmjojOKmseLi3xGvVq3y13qqT30NTY0kTvl6DKc
-	b6KKl04amU0+oieZ13497T1EMR69awT+qjyjGwR4D5aTKq4vZpRUj+GzWZO2UZDfeYATrEMziknBs
-	TEMzSmzx206U+K28hnKwrx3+IjpI8ZztfEqS39tmb441zpVb+KuDwyZTgdwShziC74jYqn49bnQHG
-	y/bSqJ0agKp8q0sRXPRW98dnPCHObluazUbKWH8Sqc1S7wQ8dewAG//hvPY5MrIv8zVHDor3/GUxI
-	SaUMFP1g==;
-From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-To: akpm@linux-foundation.org,
-	bhe@redhat.com,
-	pmladek@suse.com,
-	kexec@lists.infradead.org
-Cc: linux-kernel@vger.kernel.org,
-	bcm-kernel-feedback-list@broadcom.com,
-	coresight@lists.linaro.org,
-	linuxppc-dev@lists.ozlabs.org,
-	linux-alpha@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-edac@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	linux-leds@vger.kernel.org,
-	linux-mips@vger.kernel.org,
-	linux-parisc@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org,
-	linux-s390@vger.kernel.org,
-	linux-tegra@vger.kernel.org,
-	linux-um@lists.infradead.org,
-	linux-xtensa@linux-xtensa.org,
-	netdev@vger.kernel.org,
-	openipmi-developer@lists.sourceforge.net,
-	rcu@vger.kernel.org,
-	sparclinux@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	x86@kernel.org,
-	kernel-dev@igalia.com,
-	gpiccoli@igalia.com,
-	kernel@gpiccoli.net,
-	halves@canonical.com,
-	fabiomirmar@gmail.com,
-	alejandro.j.jimenez@oracle.com,
-	andriy.shevchenko@linux.intel.com,
-	arnd@arndb.de,
-	bp@alien8.de,
-	corbet@lwn.net,
-	d.hatayama@jp.fujitsu.com,
-	dave.hansen@linux.intel.com,
-	dyoung@redhat.com,
-	feng.tang@intel.com,
-	gregkh@linuxfoundation.org,
-	mikelley@microsoft.com,
-	hidehiro.kawai.ez@hitachi.com,
-	jgross@suse.com,
-	john.ogness@linutronix.de,
-	keescook@chromium.org,
-	luto@kernel.org,
-	mhiramat@kernel.org,
-	mingo@redhat.com,
-	paulmck@kernel.org,
-	peterz@infradead.org,
-	rostedt@goodmis.org,
-	senozhatsky@chromium.org,
-	stern@rowland.harvard.edu,
-	tglx@linutronix.de,
-	vgoyal@redhat.com,
-	vkuznets@redhat.com,
-	will@kernel.org,
-	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	Richard Weinberger <richard@nod.at>
-Subject: [PATCH 30/30] um: Avoid duplicate call to kmsg_dump()
-Date: Wed, 27 Apr 2022 19:49:24 -0300
-Message-Id: <20220427224924.592546-31-gpiccoli@igalia.com>
-X-Mailer: git-send-email 2.36.0
-In-Reply-To: <20220427224924.592546-1-gpiccoli@igalia.com>
-References: <20220427224924.592546-1-gpiccoli@igalia.com>
+X-Inumbo-ID: a4d5ed33-c67f-11ec-8fc3-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SxiiRmMl5WBejmvqm2h9HANsI9aHhNewk5E5NijQr/o=;
+        b=eivdzjr+bvYej3sqsPZTpahW99j1DDGQYv/x4hZi7RboztnxvKQ7F2tpzNqXB+l5qM
+         ZYR1c25lB4TT0S+wSUnkLjdqsxlO2YnKAMVgChdzU84WdV49uGCQk6jJZh7nAxQnkf5b
+         B0h+IPMup6u3hUC0R/Uz8qD5CWR4B7DVSrCOVhf75V2vluZ5xkLN6Xazj/kubgFQrOIQ
+         35aK4WnVNMB+V+Y5c8Mpc2WKlflluuN3abRG0hpR5R6pOpRT5tfwuF3+Bc+Kkz1tCIpt
+         HgOCSQgLZKTZmceJ1gdImMJREsuHsKB/4bQ8GchufK4NTq9QXORI7dnMX/iqrl68Ez89
+         TI8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SxiiRmMl5WBejmvqm2h9HANsI9aHhNewk5E5NijQr/o=;
+        b=jpdpnFtFQOivKEm3HJEplrvAh4tCjiz1cXAOpDMuO5RVPJENGhweGYWVqL5hPxFLwO
+         ZzLsdEAnn+kVN54Vngo5IYhgIn+erit1QQuTmOWHIyAki+q4fnsCD6aPaDg6udoGq37B
+         VV2SQ4LmeP/UVXm0Turbtn4GektWJ/Fit5ZYIyw+DbiyichkkOE0BrdfK6ot+TMOtR2m
+         B6dbYfb8d0jyddy8rYrPP0h8E6bLNAkcLeCfakCNvreg/hJRFqfynGvvqy1fPdUA3VK1
+         X126tZZ9V/5nhRo5B3qlGF+EoYT6mGkjfS1t+2GGuZzNk0FC1j+9ava1nBdKQ0X37NxK
+         o9aA==
+X-Gm-Message-State: AOAM530zkIt7p34Ze/5GxB+4rvND0jGJkiskLHCnkEMgdWMB+Jk2TTT+
+	C9QEih/yLQHQd1B0oCtx1BN7FkncR/DnAcNqItQ=
+X-Google-Smtp-Source: ABdhPJy9FOnAe4DIcaJl8HsJwgR7U2znP40WqNsmOLagkLtS7SLE73VR7AXDPptJEB++DH7ueAUKVIVEVZIDWRx1Uf4=
+X-Received: by 2002:a5d:4645:0:b0:20a:db5d:258f with SMTP id
+ j5-20020a5d4645000000b0020adb5d258fmr13708827wrs.135.1651101206642; Wed, 27
+ Apr 2022 16:13:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <osstest-169781-mainreport@xen.org> <d1d3d81e-fe1d-fc1c-11b3-781263d8ba84@xen.org>
+ <alpine.DEB.2.22.394.2204271556110.915916@ubuntu-linux-20-04-desktop>
+In-Reply-To: <alpine.DEB.2.22.394.2204271556110.915916@ubuntu-linux-20-04-desktop>
+From: Julien Grall <julien.grall.oss@gmail.com>
+Date: Thu, 28 Apr 2022 00:13:15 +0100
+Message-ID: <CAJ=z9a1bu=3sX0rvWy+T-ey4363DMUEJvzkSqkQkTnvOQtT0=A@mail.gmail.com>
+Subject: Re: [xen-unstable-smoke test] 169781: regressions - FAIL
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: osstest service owner <osstest-admin@xenproject.org>, 
+	xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <jbeulich@suse.com>, 
+	David Vrabel <dvrabel@amazon.co.uk>, Bertrand Marquis <bertrand.marquis@arm.com>
+Content-Type: multipart/alternative; boundary="000000000000e9040605ddaaf45e"
 
-Currently the panic notifier panic_exit() calls kmsg_dump() and
-some console flushing routines - this makes sense since such
-panic notifier exits UserMode Linux and never returns.
+--000000000000e9040605ddaaf45e
+Content-Type: text/plain; charset="UTF-8"
 
-Happens that after a panic refactor, kmsg_dump() is now always
-called *before* the pre_reboot list of panic notifiers, in which
-panic_exit() belongs, leading to a double call situation.
+Hi Stefano,
 
-This patch changes that by removing such call from the panic
-notifier, but leaving the console flushing calls since the
-pre_reboot list still runs before console flushing on panic().
+On Thu, 28 Apr 2022, 00:02 Stefano Stabellini, <sstabellini@kernel.org>
+wrote
 
-Cc: Anton Ivanov <anton.ivanov@cambridgegreys.com>
-Cc: Johannes Berg <johannes@sipsolutions.net>
-Cc: Richard Weinberger <richard@nod.at>
-Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
----
- arch/um/kernel/um_arch.c | 1 -
- 1 file changed, 1 deletion(-)
+> It seems to me that it is acceptable to allocate memory with interrupt
+> disabled during __init. I cannot see any drawbacks with it. I think we
+> should change the ASSERT to only trigger after __init: system_state ==
+> SYS_STATE_active.
+>
+> What do you think?
+>
 
-diff --git a/arch/um/kernel/um_arch.c b/arch/um/kernel/um_arch.c
-index fc6e443299da..651310e3e86f 100644
---- a/arch/um/kernel/um_arch.c
-+++ b/arch/um/kernel/um_arch.c
-@@ -241,7 +241,6 @@ static void __init uml_postsetup(void)
- static int panic_exit(struct notifier_block *self, unsigned long unused1,
- 		      void *unused2)
- {
--	kmsg_dump(KMSG_DUMP_PANIC);
- 	bust_spinlocks(1);
- 	bust_spinlocks(0);
- 	uml_exitcode = 1;
--- 
-2.36.0
+This would solve the immediate problem but not the long term one (i.e cpu
+hotplug).
 
+So I think it would be better to properly fix it right away.
+
+Cheers,
+
+>
+
+--000000000000e9040605ddaaf45e
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div>Hi Stefano,<br><br><div class=3D"gmail_quote"><div d=
+ir=3D"ltr" class=3D"gmail_attr">On Thu, 28 Apr 2022, 00:02 Stefano Stabelli=
+ni, &lt;<a href=3D"mailto:sstabellini@kernel.org">sstabellini@kernel.org</a=
+>&gt; wrote</div></div></div><div dir=3D"auto"><div class=3D"gmail_quote"><=
+blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
+ #ccc solid;padding-left:1ex">
+It seems to me that it is acceptable to allocate memory with interrupt<br>
+disabled during __init. I cannot see any drawbacks with it. I think we<br>
+should change the ASSERT to only trigger after __init: system_state =3D=3D<=
+br>
+SYS_STATE_active.<br>
+<br>
+What do you think?<br></blockquote></div></div><div dir=3D"auto"><br></div>=
+<div dir=3D"auto">This would solve the immediate problem but not the long t=
+erm one (i.e cpu hotplug).</div><div dir=3D"auto"><br></div><div dir=3D"aut=
+o">So I think it would be better to properly fix it right away.</div><div d=
+ir=3D"auto"><br></div><div dir=3D"auto">Cheers,</div><div dir=3D"auto"><div=
+ class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 =
+0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+</blockquote></div></div></div>
+
+--000000000000e9040605ddaaf45e--
 
