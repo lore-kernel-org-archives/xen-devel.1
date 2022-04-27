@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B244AC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 09:50:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.314680.532861 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41533C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Apr 2022 09:50:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.314682.532890 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njeJ2-00089D-UR; Wed, 27 Apr 2022 09:49:56 +0000
+	id 1njeJ7-0000X5-Ek; Wed, 27 Apr 2022 09:50:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 314680.532861; Wed, 27 Apr 2022 09:49:56 +0000
+Received: by outflank-mailman (output) from mailman id 314682.532890; Wed, 27 Apr 2022 09:50:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njeJ2-00088U-Qr; Wed, 27 Apr 2022 09:49:56 +0000
-Received: by outflank-mailman (input) for mailman id 314680;
- Wed, 27 Apr 2022 09:49:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1njeJ7-0000Wc-B6; Wed, 27 Apr 2022 09:50:01 +0000
+Received: by outflank-mailman (input) for mailman id 314682;
+ Wed, 27 Apr 2022 09:49:59 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=XTRx=VF=arm.com=michal.orzel@srs-se1.protection.inumbo.net>)
- id 1njeJ1-00085x-Vs
- for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 09:49:55 +0000
+ id 1njeJ5-0008Li-Eh
+ for xen-devel@lists.xenproject.org; Wed, 27 Apr 2022 09:49:59 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 64240b9e-c60f-11ec-a405-831a346695d4;
- Wed, 27 Apr 2022 11:49:55 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 6648801b-c60f-11ec-8fc2-03012f2f19d4;
+ Wed, 27 Apr 2022 11:49:58 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7F56414BF;
- Wed, 27 Apr 2022 02:49:54 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 187241480;
+ Wed, 27 Apr 2022 02:49:58 -0700 (PDT)
 Received: from e129167.arm.com (unknown [10.57.13.174])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 084053F774;
- Wed, 27 Apr 2022 02:49:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 23F0F3F774;
+ Wed, 27 Apr 2022 02:49:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,46 +44,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 64240b9e-c60f-11ec-a405-831a346695d4
+X-Inumbo-ID: 6648801b-c60f-11ec-8fc2-03012f2f19d4
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/8] xen/arm: bootfdt.c: Remove unused-but-set variable
-Date: Wed, 27 Apr 2022 11:49:34 +0200
-Message-Id: <20220427094941.291554-2-michal.orzel@arm.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH 3/8] gnttab: Remove unused-but-set variable
+Date: Wed, 27 Apr 2022 11:49:36 +0200
+Message-Id: <20220427094941.291554-4-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220427094941.291554-1-michal.orzel@arm.com>
 References: <20220427094941.291554-1-michal.orzel@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Function device_tree_node_compatible defines and sets a variable
-mlen but does not make use of it. Remove this variable.
+Function unmap_common_complete defines and sets a variable ld that is
+later on passed to a macro gnttab_host_mapping_get_page_type. On arm
+this macro does not make use of any arguments causing a compiler to
+warn about unused-but-set variable (when -Wunused-but-set-variable is
+enabled). Fix this by removing ld and directly passing current->domain
+to gnttab_host_mapping_get_page_type.
 
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
 ---
- xen/arch/arm/bootfdt.c | 3 ---
- 1 file changed, 3 deletions(-)
+ xen/common/grant_table.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index e318ef9603..29671c8df0 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -36,11 +36,8 @@ static bool __init device_tree_node_compatible(const void *fdt, int node,
-                                                const char *match)
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index febbe12eab..71b1107999 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -1556,7 +1556,7 @@ unmap_common(
+ static void
+ unmap_common_complete(struct gnttab_unmap_common *op)
  {
-     int len, l;
--    int mlen;
-     const void *prop;
+-    struct domain *ld, *rd = op->rd;
++    struct domain *rd = op->rd;
+     struct grant_table *rgt;
+     struct active_grant_entry *act;
+     grant_entry_header_t *sha;
+@@ -1569,8 +1569,6 @@ unmap_common_complete(struct gnttab_unmap_common *op)
+         return;
+     }
  
--    mlen = strlen(match);
+-    ld = current->domain;
 -
-     prop = fdt_getprop(fdt, node, "compatible", &len);
-     if ( prop == NULL )
-         return false;
+     rcu_lock_domain(rd);
+     rgt = rd->grant_table;
+ 
+@@ -1608,7 +1606,7 @@ unmap_common_complete(struct gnttab_unmap_common *op)
+         if ( pg )
+         {
+             if ( gnttab_host_mapping_get_page_type(op->done & GNTMAP_readonly,
+-                                                   ld, rd) )
++                                                   current->domain, rd) )
+                 put_page_type(pg);
+             put_page(pg);
+         }
 -- 
 2.25.1
 
