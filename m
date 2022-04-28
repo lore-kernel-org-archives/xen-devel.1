@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C042CC433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Apr 2022 07:53:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.316083.534818 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE8BC4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Apr 2022 07:53:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.316082.534807 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njyxv-0003zp-9h; Thu, 28 Apr 2022 07:53:31 +0000
+	id 1njyxu-0003kF-2z; Thu, 28 Apr 2022 07:53:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 316083.534818; Thu, 28 Apr 2022 07:53:31 +0000
+Received: by outflank-mailman (output) from mailman id 316082.534807; Thu, 28 Apr 2022 07:53:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njyxv-0003zi-6P; Thu, 28 Apr 2022 07:53:31 +0000
-Received: by outflank-mailman (input) for mailman id 316083;
- Thu, 28 Apr 2022 07:53:29 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1njyxt-0003k8-Ut; Thu, 28 Apr 2022 07:53:29 +0000
+Received: by outflank-mailman (input) for mailman id 316082;
+ Thu, 28 Apr 2022 07:53:28 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KUQd=VG=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1njyxt-0003js-47
- for xen-devel@lists.xenproject.org; Thu, 28 Apr 2022 07:53:29 +0000
+ id 1njyxs-0003jr-OX
+ for xen-devel@lists.xenproject.org; Thu, 28 Apr 2022 07:53:28 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 49eb4655-c6c8-11ec-a405-831a346695d4;
- Thu, 28 Apr 2022 09:53:28 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 49bd0ef9-c6c8-11ec-8fc3-03012f2f19d4;
+ Thu, 28 Apr 2022 09:53:27 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id AACEE21870;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 354692186F;
  Thu, 28 Apr 2022 07:53:27 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7707F13AF8;
- Thu, 28 Apr 2022 07:53:27 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E100C13AF8;
+ Thu, 28 Apr 2022 07:53:26 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id QDOoG/dHamIoHAAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 28 Apr 2022 07:53:27 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id qNCTNfZHamIoHAAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 28 Apr 2022 07:53:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,158 +53,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 49eb4655-c6c8-11ec-a405-831a346695d4
+X-Inumbo-ID: 49bd0ef9-c6c8-11ec-8fc3-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1651132407; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=e7smBjs6Cs54j9gtj63aB2bUTDoqIo4j1UzSK6xvBWg=;
-	b=rpwyrV9E6S/d9bU0Olq3d0lZ/V4hx2lhfq8AigAGZwgiad+EOGLOiKyt3wOw0lACnEj/Gr
-	7XLQTGdTp6LuN7zjo3FEYVQEXr1TbhFcR68hqxGB320Bs6nK+htjcjCLxPBzEmSU/kYSB3
-	PFGspBJj5GfMqbXPksQC1qLa2e2SWs0=
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=3E7uGHyVSRLlv1q/BP8AWtqLSArF2xlrVNvb53ZZO3Q=;
+	b=r3XSYHwZGjPKGDDJnE8y1TzQDS660lC8ubSYtSgv3fDXdqTjp7PRW3yk4VmEGD0yYctRb6
+	N2Cad7N/zT3wVToO0LIRMHi7Q5SA4KFmR6GDtMgWqzUho8hMvGo68rdSEeCKN5QsOTJ96V
+	OTggVTVRIKMzc52CNcHY5fN1SxcXrG0=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	linux-scsi@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 2/4] xen/scsiback: use new command result macros
-Date: Thu, 28 Apr 2022 09:53:21 +0200
-Message-Id: <20220428075323.12853-3-jgross@suse.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	"James E.J. Bottomley" <jejb@linux.ibm.com>,
+	"Martin K. Petersen" <martin.petersen@oracle.com>
+Subject: [PATCH v2 0/4] xen/pv-scsi: update header and harden frontend
+Date: Thu, 28 Apr 2022 09:53:19 +0200
+Message-Id: <20220428075323.12853-1-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220428075323.12853-1-jgross@suse.com>
-References: <20220428075323.12853-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of using the kernel's values for the result of PV scsi
-operations use the values of the interface definition.
+Update the Xen PV-scsi interface from the Xen tree and adapt the
+related drivers to use the new definitions.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- fix scsiback_result() to pass through lowest 16 bits of result
-- use XEN_VSCSIIF_RSLT_HOST() instead of open coding it (Boris Ostrovsky)
----
- drivers/xen/xen-scsiback.c | 82 ++++++++++++++++++++++++++++++++++++--
- 1 file changed, 79 insertions(+), 3 deletions(-)
+Harden the frontend driver to be no longer vulnerable to a malicious
+backend.
 
-diff --git a/drivers/xen/xen-scsiback.c b/drivers/xen/xen-scsiback.c
-index 0c5e565aa8cf..7a0c93acc2c5 100644
---- a/drivers/xen/xen-scsiback.c
-+++ b/drivers/xen/xen-scsiback.c
-@@ -280,6 +280,82 @@ static void scsiback_free_translation_entry(struct kref *kref)
- 	kfree(entry);
- }
- 
-+static int32_t scsiback_result(int32_t result)
-+{
-+	int32_t host_status;
-+
-+	switch (XEN_VSCSIIF_RSLT_HOST(result)) {
-+	case DID_OK:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_OK;
-+		break;
-+	case DID_NO_CONNECT:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_NO_CONNECT;
-+		break;
-+	case DID_BUS_BUSY:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_BUS_BUSY;
-+		break;
-+	case DID_TIME_OUT:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_TIME_OUT;
-+		break;
-+	case DID_BAD_TARGET:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_BAD_TARGET;
-+		break;
-+	case DID_ABORT:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_ABORT;
-+		break;
-+	case DID_PARITY:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_PARITY;
-+		break;
-+	case DID_ERROR:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_ERROR;
-+		break;
-+	case DID_RESET:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_RESET;
-+		break;
-+	case DID_BAD_INTR:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_BAD_INTR;
-+		break;
-+	case DID_PASSTHROUGH:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_PASSTHROUGH;
-+		break;
-+	case DID_SOFT_ERROR:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_SOFT_ERROR;
-+		break;
-+	case DID_IMM_RETRY:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_IMM_RETRY;
-+		break;
-+	case DID_REQUEUE:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_REQUEUE;
-+		break;
-+	case DID_TRANSPORT_DISRUPTED:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_TRANSPORT_DISRUPTED;
-+		break;
-+	case DID_TRANSPORT_FAILFAST:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_TRANSPORT_FAILFAST;
-+		break;
-+	case DID_TARGET_FAILURE:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_TARGET_FAILURE;
-+		break;
-+	case DID_NEXUS_FAILURE:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_NEXUS_FAILURE;
-+		break;
-+	case DID_ALLOC_FAILURE:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_ALLOC_FAILURE;
-+		break;
-+	case DID_MEDIUM_ERROR:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_MEDIUM_ERROR;
-+		break;
-+	case DID_TRANSPORT_MARGINAL:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_TRANSPORT_MARGINAL;
-+		break;
-+	default:
-+		host_status = XEN_VSCSIIF_RSLT_HOST_ERROR;
-+		break;
-+	}
-+
-+	return (host_status << 16) | (result & 0x00ffff);
-+}
-+
- static void scsiback_send_response(struct vscsibk_info *info,
- 			char *sense_buffer, int32_t result, uint32_t resid,
- 			uint16_t rqid)
-@@ -295,7 +371,7 @@ static void scsiback_send_response(struct vscsibk_info *info,
- 	ring_res = RING_GET_RESPONSE(&info->ring, info->ring.rsp_prod_pvt);
- 	info->ring.rsp_prod_pvt++;
- 
--	ring_res->rslt   = result;
-+	ring_res->rslt   = scsiback_result(result);
- 	ring_res->rqid   = rqid;
- 
- 	if (sense_buffer != NULL &&
-@@ -555,7 +631,7 @@ static void scsiback_device_action(struct vscsibk_pend *pending_req,
- 	struct scsiback_nexus *nexus = tpg->tpg_nexus;
- 	struct se_cmd *se_cmd = &pending_req->se_cmd;
- 	u64 unpacked_lun = pending_req->v2p->lun;
--	int rc, err = FAILED;
-+	int rc, err = XEN_VSCSIIF_RSLT_RESET_FAILED;
- 
- 	init_completion(&pending_req->tmr_done);
- 
-@@ -569,7 +645,7 @@ static void scsiback_device_action(struct vscsibk_pend *pending_req,
- 	wait_for_completion(&pending_req->tmr_done);
- 
- 	err = (se_cmd->se_tmr_req->response == TMR_FUNCTION_COMPLETE) ?
--		SUCCESS : FAILED;
-+		XEN_VSCSIIF_RSLT_RESET_SUCCESS : XEN_VSCSIIF_RSLT_RESET_FAILED;
- 
- 	scsiback_do_resp_with_sense(NULL, err, 0, pending_req);
- 	transport_generic_free_cmd(&pending_req->se_cmd, 0);
+Juergen Gross (4):
+  xen: update vscsiif.h
+  xen/scsiback: use new command result macros
+  xen/scsifront: use new command result macros
+  xen/scsifront: harden driver against malicious backend
+
+ drivers/scsi/xen-scsifront.c       | 168 ++++++++++++++++++++++-------
+ drivers/xen/xen-scsiback.c         |  82 +++++++++++++-
+ include/xen/interface/io/vscsiif.h | 133 ++++++++++++++++++++++-
+ 3 files changed, 340 insertions(+), 43 deletions(-)
+
 -- 
 2.34.1
 
