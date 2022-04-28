@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EAA8C433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Apr 2022 08:19:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.316145.534922 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37083C4332F
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Apr 2022 08:28:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.316173.534978 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njzNF-0003PO-NI; Thu, 28 Apr 2022 08:19:41 +0000
+	id 1njzVB-0006Ed-IX; Thu, 28 Apr 2022 08:27:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 316145.534922; Thu, 28 Apr 2022 08:19:41 +0000
+Received: by outflank-mailman (output) from mailman id 316173.534978; Thu, 28 Apr 2022 08:27:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njzNF-0003PH-KN; Thu, 28 Apr 2022 08:19:41 +0000
-Received: by outflank-mailman (input) for mailman id 316145;
- Thu, 28 Apr 2022 08:11:23 +0000
+	id 1njzVB-0006AS-97; Thu, 28 Apr 2022 08:27:53 +0000
+Received: by outflank-mailman (input) for mailman id 316173;
+ Thu, 28 Apr 2022 08:27:51 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SwrA=VG=arm.com=suzuki.poulose@srs-se1.protection.inumbo.net>)
- id 1njzFD-00033Q-GJ
- for xen-devel@lists.xenproject.org; Thu, 28 Apr 2022 08:11:23 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id ca03ed08-c6ca-11ec-a405-831a346695d4;
- Thu, 28 Apr 2022 10:11:21 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0B87FED1;
- Thu, 28 Apr 2022 01:11:21 -0700 (PDT)
-Received: from [10.57.12.231] (unknown [10.57.12.231])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0E93F3F774;
- Thu, 28 Apr 2022 01:11:11 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=KUQd=VG=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1njzV9-0005SL-AA
+ for xen-devel@lists.xenproject.org; Thu, 28 Apr 2022 08:27:51 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 169b9424-c6cd-11ec-a405-831a346695d4;
+ Thu, 28 Apr 2022 10:27:49 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id ECFC21F899;
+ Thu, 28 Apr 2022 08:27:48 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BDE1313491;
+ Thu, 28 Apr 2022 08:27:48 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id OFX/LARQamIBLgAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 28 Apr 2022 08:27:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,71 +53,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca03ed08-c6ca-11ec-a405-831a346695d4
-Message-ID: <3cafe4fd-8a0b-2633-44a3-2995abd6c38c@arm.com>
-Date: Thu, 28 Apr 2022 09:11:10 +0100
+X-Inumbo-ID: 169b9424-c6cd-11ec-a405-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1651134468; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=7TSQqudTcVLuLhQNOY3wWT3BirutbrjVm/F1DYUL/Jc=;
+	b=bXQFN0N+BgI1kmZyCngmvHVCA1I+1WiKiyl4AoNXMJlXEBLY1bscsQfLjv+ocbOnCYApPF
+	Bj/5Cq72navU9MxLn+AfqK7WV3/FX3gM1bLJgJ28Gl0hLTxsS7SNqZ8qKkurAL6KoXX2bH
+	6ofYmp6Du47LiNOIHekEpuVElAnDZSs=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: [PATCH v2 04/19] xen/usb: switch xen-hcd to use INVALID_GRANT_REF
+Date: Thu, 28 Apr 2022 10:27:28 +0200
+Message-Id: <20220428082743.16593-5-jgross@suse.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20220428082743.16593-1-jgross@suse.com>
+References: <20220428082743.16593-1-jgross@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.8.1
-Subject: Re: [PATCH 09/30] coresight: cpu-debug: Replace mutex with
- mutex_trylock on panic notifier
-To: "Guilherme G. Piccoli" <gpiccoli@igalia.com>, akpm@linux-foundation.org,
- bhe@redhat.com, pmladek@suse.com, kexec@lists.infradead.org
-Cc: linux-kernel@vger.kernel.org, bcm-kernel-feedback-list@broadcom.com,
- coresight@lists.linaro.org, linuxppc-dev@lists.ozlabs.org,
- linux-alpha@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org,
- linux-leds@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-parisc@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-remoteproc@vger.kernel.org, linux-s390@vger.kernel.org,
- linux-tegra@vger.kernel.org, linux-um@lists.infradead.org,
- linux-xtensa@linux-xtensa.org, netdev@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net, rcu@vger.kernel.org,
- sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org,
- kernel-dev@igalia.com, kernel@gpiccoli.net, halves@canonical.com,
- fabiomirmar@gmail.com, alejandro.j.jimenez@oracle.com,
- andriy.shevchenko@linux.intel.com, arnd@arndb.de, bp@alien8.de,
- corbet@lwn.net, d.hatayama@jp.fujitsu.com, dave.hansen@linux.intel.com,
- dyoung@redhat.com, feng.tang@intel.com, gregkh@linuxfoundation.org,
- mikelley@microsoft.com, hidehiro.kawai.ez@hitachi.com, jgross@suse.com,
- john.ogness@linutronix.de, keescook@chromium.org, luto@kernel.org,
- mhiramat@kernel.org, mingo@redhat.com, paulmck@kernel.org,
- peterz@infradead.org, rostedt@goodmis.org, senozhatsky@chromium.org,
- stern@rowland.harvard.edu, tglx@linutronix.de, vgoyal@redhat.com,
- vkuznets@redhat.com, will@kernel.org, Leo Yan <leo.yan@linaro.org>,
- Mathieu Poirier <mathieu.poirier@linaro.org>,
- Mike Leach <mike.leach@linaro.org>
-References: <20220427224924.592546-1-gpiccoli@igalia.com>
- <20220427224924.592546-10-gpiccoli@igalia.com>
-From: Suzuki K Poulose <suzuki.poulose@arm.com>
-In-Reply-To: <20220427224924.592546-10-gpiccoli@igalia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-Hi Guilherme,
+Instead of using a private macro for an invalid grant reference use
+the common one.
 
-On 27/04/2022 23:49, Guilherme G. Piccoli wrote:
-> The panic notifier infrastructure executes registered callbacks when
-> a panic event happens - such callbacks are executed in atomic context,
-> with interrupts and preemption disabled in the running CPU and all other
-> CPUs disabled. That said, mutexes in such context are not a good idea.
-> 
-> This patch replaces a regular mutex with a mutex_trylock safer approach;
-> given the nature of the mutex used in the driver, it should be pretty
-> uncommon being unable to acquire such mutex in the panic path, hence
-> no functional change should be observed (and if it is, that would be
-> likely a deadlock with the regular mutex).
-> 
-> Fixes: 2227b7c74634 ("coresight: add support for CPU debug module")
-> Cc: Leo Yan <leo.yan@linaro.org>
-> Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
-> Cc: Mike Leach <mike.leach@linaro.org>
-> Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
-> Signed-off-by: Guilherme G. Piccoli <gpiccoli@igalia.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ drivers/usb/host/xen-hcd.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
 
-How would you like to proceed with queuing this ? I am happy
-either way. In case you plan to push this as part of this
-series (I don't see any potential conflicts) :
+diff --git a/drivers/usb/host/xen-hcd.c b/drivers/usb/host/xen-hcd.c
+index 3e487baf8422..9cbc7c2dab02 100644
+--- a/drivers/usb/host/xen-hcd.c
++++ b/drivers/usb/host/xen-hcd.c
+@@ -87,8 +87,6 @@ struct xenhcd_info {
+ 	bool error;
+ };
+ 
+-#define GRANT_INVALID_REF 0
+-
+ #define XENHCD_RING_JIFFIES (HZ/200)
+ #define XENHCD_SCAN_JIFFIES 1
+ 
+@@ -1100,17 +1098,17 @@ static void xenhcd_destroy_rings(struct xenhcd_info *info)
+ 		unbind_from_irqhandler(info->irq, info);
+ 	info->irq = 0;
+ 
+-	if (info->urb_ring_ref != GRANT_INVALID_REF) {
++	if (info->urb_ring_ref != INVALID_GRANT_REF) {
+ 		gnttab_end_foreign_access(info->urb_ring_ref,
+ 					  (unsigned long)info->urb_ring.sring);
+-		info->urb_ring_ref = GRANT_INVALID_REF;
++		info->urb_ring_ref = INVALID_GRANT_REF;
+ 	}
+ 	info->urb_ring.sring = NULL;
+ 
+-	if (info->conn_ring_ref != GRANT_INVALID_REF) {
++	if (info->conn_ring_ref != INVALID_GRANT_REF) {
+ 		gnttab_end_foreign_access(info->conn_ring_ref,
+ 					  (unsigned long)info->conn_ring.sring);
+-		info->conn_ring_ref = GRANT_INVALID_REF;
++		info->conn_ring_ref = INVALID_GRANT_REF;
+ 	}
+ 	info->conn_ring.sring = NULL;
+ }
+@@ -1123,8 +1121,8 @@ static int xenhcd_setup_rings(struct xenbus_device *dev,
+ 	grant_ref_t gref;
+ 	int err;
+ 
+-	info->urb_ring_ref = GRANT_INVALID_REF;
+-	info->conn_ring_ref = GRANT_INVALID_REF;
++	info->urb_ring_ref = INVALID_GRANT_REF;
++	info->conn_ring_ref = INVALID_GRANT_REF;
+ 
+ 	urb_sring = (struct xenusb_urb_sring *)get_zeroed_page(
+ 							GFP_NOIO | __GFP_HIGH);
+-- 
+2.34.1
 
-Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
 
