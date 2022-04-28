@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E145DC433FE
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Apr 2022 08:28:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.316180.535032 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F34C433F5
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Apr 2022 08:28:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.316179.535044 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njzVH-0007cs-OX; Thu, 28 Apr 2022 08:27:59 +0000
+	id 1njzVJ-0007u6-3Y; Thu, 28 Apr 2022 08:28:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 316180.535032; Thu, 28 Apr 2022 08:27:59 +0000
+Received: by outflank-mailman (output) from mailman id 316179.535044; Thu, 28 Apr 2022 08:28:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1njzVH-0007Y3-7K; Thu, 28 Apr 2022 08:27:59 +0000
-Received: by outflank-mailman (input) for mailman id 316180;
+	id 1njzVI-0007qQ-FX; Thu, 28 Apr 2022 08:28:00 +0000
+Received: by outflank-mailman (input) for mailman id 316179;
  Thu, 28 Apr 2022 08:27:54 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=KUQd=VG=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1njzVC-0005SM-ET
+ id 1njzVC-0005SL-Aj
  for xen-devel@lists.xenproject.org; Thu, 28 Apr 2022 08:27:54 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 17a735bb-c6cd-11ec-8fc3-03012f2f19d4;
- Thu, 28 Apr 2022 10:27:51 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 17541ed6-c6cd-11ec-a405-831a346695d4;
+ Thu, 28 Apr 2022 10:27:50 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C72351F88F;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 464531F8AC;
  Thu, 28 Apr 2022 08:27:50 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 86DCA13491;
- Thu, 28 Apr 2022 08:27:50 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 038BE13491;
+ Thu, 28 Apr 2022 08:27:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id qJVhHwZQamIBLgAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 28 Apr 2022 08:27:50 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id kIMQOwVQamIBLgAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 28 Apr 2022 08:27:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,101 +53,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 17a735bb-c6cd-11ec-8fc3-03012f2f19d4
+X-Inumbo-ID: 17541ed6-c6cd-11ec-a405-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1651134470; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=VDUTirs/68J75dLhVfxQ8SwGZggDnAgUBf0vqNCyldA=;
-	b=uYPkEtI1D+dBDttNAMWwXe5ps2vwOgVNOH3jvmBtgFhBUy/z0IPKe2AMkUYo9qfXjXomlv
-	eDi8P8+olYpzbp6RDG+C2VAYvNC2s/qwj3kH+fQ1mRdC6zeuKb69a8lZJCAUDt5w17TMiZ
-	crrx8z21AJh4HirtTLTotjXWv2WOsT4=
+	bh=8veqePX7rdlWDFOqgS78jUbLrgjtOmHQWA4ds9ys4IE=;
+	b=rlIU5c4XpDDC7FrePn4vUJzKDyXHqwBA/KrdUbuegUL/GMk4CbeRxuLFKYzRcV4h6uEH0R
+	L0jIaXxjVS2Dr3TW9oriwnhhCWoUjTrAD4Ua6LmdjKnMAEecMlj3qMU8neAALFcwsCaTww
+	qTn2D9U/CoxHhFQs9ltdPwvn5qwcNqw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	linux-block@vger.kernel.org,
+	netdev@vger.kernel.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH v2 11/19] xen/blkfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-Date: Thu, 28 Apr 2022 10:27:35 +0200
-Message-Id: <20220428082743.16593-12-jgross@suse.com>
+	"David S. Miller" <davem@davemloft.net>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>
+Subject: [PATCH v2 09/19] xen: update ring.h
+Date: Thu, 28 Apr 2022 10:27:33 +0200
+Message-Id: <20220428082743.16593-10-jgross@suse.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220428082743.16593-1-jgross@suse.com>
 References: <20220428082743.16593-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Simplify blkfront's ring creation and removal via xenbus_setup_ring()
-and xenbus_teardown_ring().
+Update include/xen/interface/io/ring.h to its newest version.
+
+Switch the two improper use cases of RING_HAS_UNCONSUMED_RESPONSES() to
+XEN_RING_NR_UNCONSUMED_RESPONSES() in order to avoid the nasty
+XEN_RING_HAS_UNCONSUMED_IS_BOOL #define.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/block/xen-blkfront.c | 37 ++++++++----------------------------
- 1 file changed, 8 insertions(+), 29 deletions(-)
+V2:
+- new patch
+---
+ drivers/net/xen-netfront.c      |  4 ++--
+ include/xen/interface/io/ring.h | 19 ++++++++++++++-----
+ 2 files changed, 16 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 7f35e30e626a..bd7b34f29193 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -1280,15 +1280,8 @@ static void blkif_free_ring(struct blkfront_ring_info *rinfo)
- 	flush_work(&rinfo->work);
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index af3d3de7d9fa..966bee2a6902 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -866,7 +866,7 @@ static void xennet_set_rx_rsp_cons(struct netfront_queue *queue, RING_IDX val)
  
- 	/* Free resources associated with old device channel. */
--	for (i = 0; i < info->nr_ring_pages; i++) {
--		if (rinfo->ring_ref[i] != INVALID_GRANT_REF) {
--			gnttab_end_foreign_access(rinfo->ring_ref[i], 0);
--			rinfo->ring_ref[i] = INVALID_GRANT_REF;
--		}
--	}
--	free_pages_exact(rinfo->ring.sring,
--			 info->nr_ring_pages * XEN_PAGE_SIZE);
--	rinfo->ring.sring = NULL;
-+	xenbus_teardown_ring((void **)&rinfo->ring.sring, info->nr_ring_pages,
-+			     rinfo->ring_ref);
+ 	spin_lock_irqsave(&queue->rx_cons_lock, flags);
+ 	queue->rx.rsp_cons = val;
+-	queue->rx_rsp_unconsumed = RING_HAS_UNCONSUMED_RESPONSES(&queue->rx);
++	queue->rx_rsp_unconsumed = XEN_RING_NR_UNCONSUMED_RESPONSES(&queue->rx);
+ 	spin_unlock_irqrestore(&queue->rx_cons_lock, flags);
+ }
  
- 	if (rinfo->irq)
- 		unbind_from_irqhandler(rinfo->irq, rinfo);
-@@ -1679,30 +1672,16 @@ static int setup_blkring(struct xenbus_device *dev,
- 			 struct blkfront_ring_info *rinfo)
- {
- 	struct blkif_sring *sring;
--	int err, i;
-+	int err;
- 	struct blkfront_info *info = rinfo->dev_info;
- 	unsigned long ring_size = info->nr_ring_pages * XEN_PAGE_SIZE;
--	grant_ref_t gref[XENBUS_MAX_RING_GRANTS];
--
--	for (i = 0; i < info->nr_ring_pages; i++)
--		rinfo->ring_ref[i] = INVALID_GRANT_REF;
+@@ -1498,7 +1498,7 @@ static bool xennet_handle_rx(struct netfront_queue *queue, unsigned int *eoi)
+ 		return false;
  
--	sring = alloc_pages_exact(ring_size, GFP_NOIO);
--	if (!sring) {
--		xenbus_dev_fatal(dev, -ENOMEM, "allocating shared ring");
--		return -ENOMEM;
--	}
--	SHARED_RING_INIT(sring);
--	FRONT_RING_INIT(&rinfo->ring, sring, ring_size);
--
--	err = xenbus_grant_ring(dev, rinfo->ring.sring, info->nr_ring_pages, gref);
--	if (err < 0) {
--		free_pages_exact(sring, ring_size);
--		rinfo->ring.sring = NULL;
-+	err = xenbus_setup_ring(dev, GFP_NOIO, (void **)&sring,
-+				info->nr_ring_pages, rinfo->ring_ref);
-+	if (err)
- 		goto fail;
--	}
--	for (i = 0; i < info->nr_ring_pages; i++)
--		rinfo->ring_ref[i] = gref[i];
+ 	spin_lock_irqsave(&queue->rx_cons_lock, flags);
+-	work_queued = RING_HAS_UNCONSUMED_RESPONSES(&queue->rx);
++	work_queued = XEN_RING_NR_UNCONSUMED_RESPONSES(&queue->rx);
+ 	if (work_queued > queue->rx_rsp_unconsumed) {
+ 		queue->rx_rsp_unconsumed = work_queued;
+ 		*eoi = 0;
+diff --git a/include/xen/interface/io/ring.h b/include/xen/interface/io/ring.h
+index 2470ec45ebb2..ba4c4274b714 100644
+--- a/include/xen/interface/io/ring.h
++++ b/include/xen/interface/io/ring.h
+@@ -72,9 +72,8 @@ typedef unsigned int RING_IDX;
+  * of the shared memory area (PAGE_SIZE, for instance). To initialise
+  * the front half:
+  *
+- *     mytag_front_ring_t front_ring;
+- *     SHARED_RING_INIT((mytag_sring_t *)shared_page);
+- *     FRONT_RING_INIT(&front_ring, (mytag_sring_t *)shared_page, PAGE_SIZE);
++ *     mytag_front_ring_t ring;
++ *     XEN_FRONT_RING_INIT(&ring, (mytag_sring_t *)shared_page, PAGE_SIZE);
+  *
+  * Initializing the back follows similarly (note that only the front
+  * initializes the shared ring):
+@@ -146,6 +145,11 @@ struct __name##_back_ring {                                             \
+ 
+ #define FRONT_RING_INIT(_r, _s, __size) FRONT_RING_ATTACH(_r, _s, 0, __size)
+ 
++#define XEN_FRONT_RING_INIT(r, s, size) do {                            \
++    SHARED_RING_INIT(s);                                                \
++    FRONT_RING_INIT(r, s, size);                                        \
++} while (0)
 +
-+	XEN_FRONT_RING_INIT(&rinfo->ring, sring, ring_size);
+ #define BACK_RING_ATTACH(_r, _s, _i, __size) do {                       \
+     (_r)->rsp_prod_pvt = (_i);                                          \
+     (_r)->req_cons = (_i);                                              \
+@@ -170,16 +174,21 @@ struct __name##_back_ring {                                             \
+     (RING_FREE_REQUESTS(_r) == 0)
  
- 	err = xenbus_alloc_evtchn(dev, &rinfo->evtchn);
- 	if (err)
+ /* Test if there are outstanding messages to be processed on a ring. */
+-#define RING_HAS_UNCONSUMED_RESPONSES(_r)                               \
++#define XEN_RING_NR_UNCONSUMED_RESPONSES(_r)                            \
+     ((_r)->sring->rsp_prod - (_r)->rsp_cons)
+ 
+-#define RING_HAS_UNCONSUMED_REQUESTS(_r) ({                             \
++#define XEN_RING_NR_UNCONSUMED_REQUESTS(_r) ({                          \
+     unsigned int req = (_r)->sring->req_prod - (_r)->req_cons;          \
+     unsigned int rsp = RING_SIZE(_r) -                                  \
+         ((_r)->req_cons - (_r)->rsp_prod_pvt);                          \
+     req < rsp ? req : rsp;                                              \
+ })
+ 
++#define RING_HAS_UNCONSUMED_RESPONSES(_r) \
++    (!!XEN_RING_NR_UNCONSUMED_RESPONSES(_r))
++#define RING_HAS_UNCONSUMED_REQUESTS(_r)  \
++    (!!XEN_RING_NR_UNCONSUMED_REQUESTS(_r))
++
+ /* Direct access to individual ring elements, by index. */
+ #define RING_GET_REQUEST(_r, _idx)                                      \
+     (&((_r)->sring->ring[((_idx) & (RING_SIZE(_r) - 1))].req))
 -- 
 2.34.1
 
