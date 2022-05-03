@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2506EC433F5
-	for <xen-devel@archiver.kernel.org>; Tue,  3 May 2022 09:39:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.319343.539581 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4278AC4332F
+	for <xen-devel@archiver.kernel.org>; Tue,  3 May 2022 09:39:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.319341.539558 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nlozU-00062a-N9; Tue, 03 May 2022 09:38:44 +0000
+	id 1nlozS-0005XM-73; Tue, 03 May 2022 09:38:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 319343.539581; Tue, 03 May 2022 09:38:44 +0000
+Received: by outflank-mailman (output) from mailman id 319341.539558; Tue, 03 May 2022 09:38:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nlozU-00062T-JP; Tue, 03 May 2022 09:38:44 +0000
-Received: by outflank-mailman (input) for mailman id 319343;
- Tue, 03 May 2022 09:38:43 +0000
+	id 1nlozS-0005XF-3x; Tue, 03 May 2022 09:38:42 +0000
+Received: by outflank-mailman (input) for mailman id 319341;
+ Tue, 03 May 2022 09:38:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1P+g=VL=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1nlozT-0005X9-5l
- for xen-devel@lists.xenproject.org; Tue, 03 May 2022 09:38:43 +0000
+ id 1nlozR-0005X9-Ex
+ for xen-devel@lists.xenproject.org; Tue, 03 May 2022 09:38:41 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id d159bfae-cac4-11ec-8fc4-03012f2f19d4;
- Tue, 03 May 2022 11:38:41 +0200 (CEST)
+ id d0449201-cac4-11ec-8fc4-03012f2f19d4;
+ Tue, 03 May 2022 11:38:40 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4534E13D5;
- Tue,  3 May 2022 02:38:41 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 616EBED1;
+ Tue,  3 May 2022 02:38:39 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8D5373F73D;
- Tue,  3 May 2022 02:38:40 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A91B53F73D;
+ Tue,  3 May 2022 02:38:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,67 +45,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d159bfae-cac4-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: d0449201-cac4-11ec-8fc4-03012f2f19d4
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 2/3] xen/arm: Advertise workaround 1 if we apply 3
-Date: Tue,  3 May 2022 10:38:30 +0100
-Message-Id: <8119538cce93516f1e78d37d578996a195686f89.1651570561.git.bertrand.marquis@arm.com>
+Subject: [PATCH 0/3] Spectre BHB follow up
+Date: Tue,  3 May 2022 10:38:28 +0100
+Message-Id: <cover.1651570561.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1651570561.git.bertrand.marquis@arm.com>
-References: <cover.1651570561.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-SMCC_WORKAROUND_3 is handling both Spectre v2 and spectre BHB.
-So when a guest is asking if we support workaround 1, tell yes if we
-apply workaround 3 on exception entry as it handles it.
+Following up the handling of Spectre BHB on Arm (XSA-398), this serie
+contain several changes which were not needed in the XSA patches but
+should be done in Xen:
+- Sync sysregs and cpuinfo with latest version of Linux (5.18-rc3)
+- Advertise both workaround 1 and 3 if we apply workaround 3 as it
+  handle both cases. This will keep the same behaviour for guests which
+  are not updated to support workaround 3.
+- Add sb instruction support. Some newer generations of CPU
+  (Neoverse-N2) do support the instruction so add support for it in Xen.
 
-This will allow guests not supporting Spectre BHB but impacted by
-spectre v2 to still handle it correctly.
-The modified behaviour is coherent with what the Linux kernel does in
-KVM for guests.
+Bertrand Marquis (3):
+  xen/arm: Sync sysregs and cpuinfo with Linux 5.18-rc3
+  xen/arm: Advertise workaround 1 if we apply 3
+  xen/arm: Add sb instruction support
 
-While there use ARM_SMCCC_SUCCESS instead of 0 for the return code value
-for workaround detection to be coherent with Workaround 2 handling.
+ xen/arch/arm/arm64/cpufeature.c          | 18 +++++-
+ xen/arch/arm/cpuerrata.c                 | 14 +++++
+ xen/arch/arm/include/asm/arm32/macros.h  |  8 +++
+ xen/arch/arm/include/asm/arm64/macros.h  | 18 ++++++
+ xen/arch/arm/include/asm/arm64/sysregs.h | 76 ++++++++++++++++++++----
+ xen/arch/arm/include/asm/cpufeature.h    | 17 ++++--
+ xen/arch/arm/include/asm/macros.h        |  9 ---
+ xen/arch/arm/vsmc.c                      | 11 +++-
+ 8 files changed, 141 insertions(+), 30 deletions(-)
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
----
- xen/arch/arm/vsmc.c | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
-
-diff --git a/xen/arch/arm/vsmc.c b/xen/arch/arm/vsmc.c
-index b633ff2fe8..676740ef15 100644
---- a/xen/arch/arm/vsmc.c
-+++ b/xen/arch/arm/vsmc.c
-@@ -104,8 +104,13 @@ static bool handle_arch(struct cpu_user_regs *regs)
-         switch ( arch_func_id )
-         {
-         case ARM_SMCCC_ARCH_WORKAROUND_1_FID:
--            if ( cpus_have_cap(ARM_HARDEN_BRANCH_PREDICTOR) )
--                ret = 0;
-+            /*
-+             * Workaround 3 is also mitigating spectre v2 so advertise that we
-+             * support Workaround 1 if we do Workaround 3 on exception entry.
-+             */
-+            if ( cpus_have_cap(ARM_HARDEN_BRANCH_PREDICTOR) ||
-+                 cpus_have_cap(ARM_WORKAROUND_BHB_SMCC_3) )
-+                ret = ARM_SMCCC_SUCCESS;
-             break;
-         case ARM_SMCCC_ARCH_WORKAROUND_2_FID:
-             switch ( get_ssbd_state() )
-@@ -126,7 +131,7 @@ static bool handle_arch(struct cpu_user_regs *regs)
-             break;
-         case ARM_SMCCC_ARCH_WORKAROUND_3_FID:
-             if ( cpus_have_cap(ARM_WORKAROUND_BHB_SMCC_3) )
--                ret = 0;
-+                ret = ARM_SMCCC_SUCCESS;
-             break;
-         }
- 
 -- 
 2.25.1
 
