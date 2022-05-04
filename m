@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96DCAC433FE
-	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.320015.540605 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAAE1C433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.320023.540636 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7N3-0005jB-R3; Wed, 04 May 2022 05:16:17 +0000
+	id 1nm7N5-0006HQ-U8; Wed, 04 May 2022 05:16:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 320015.540605; Wed, 04 May 2022 05:16:17 +0000
+Received: by outflank-mailman (output) from mailman id 320023.540636; Wed, 04 May 2022 05:16:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7N3-0005iu-M6; Wed, 04 May 2022 05:16:17 +0000
-Received: by outflank-mailman (input) for mailman id 320015;
- Wed, 04 May 2022 01:47:36 +0000
+	id 1nm7N5-0006Ec-Eu; Wed, 04 May 2022 05:16:19 +0000
+Received: by outflank-mailman (input) for mailman id 320023;
+ Wed, 04 May 2022 01:47:40 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Rvwn=VM=chromium.org=keescook@srs-se1.protection.inumbo.net>)
- id 1nm476-0007U4-Er
- for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:47:36 +0000
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [2607:f8b0:4864:20::42e])
+ id 1nm47A-0007U4-Al
+ for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:47:40 +0000
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [2607:f8b0:4864:20::102b])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2aecb958-cb4c-11ec-8fc4-03012f2f19d4;
- Wed, 04 May 2022 03:47:35 +0200 (CEST)
-Received: by mail-pf1-x42e.google.com with SMTP id a11so21695pff.1
- for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:47:34 -0700 (PDT)
+ id 2d8ca463-cb4c-11ec-8fc4-03012f2f19d4;
+ Wed, 04 May 2022 03:47:39 +0200 (CEST)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ qe3-20020a17090b4f8300b001dc24e4da73so2750449pjb.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:47:39 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
  by smtp.gmail.com with ESMTPSA id
- k23-20020a170902ba9700b0015e8d4eb1d6sm7012542pls.32.2022.05.03.18.47.32
+ ij16-20020a170902ab5000b0015e8d4eb200sm7024989plb.74.2022.05.03.18.47.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 May 2022 18:47:32 -0700 (PDT)
+ Tue, 03 May 2022 18:47:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,39 +47,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2aecb958-cb4c-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 2d8ca463-cb4c-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=+ZZ5vfFx25K1I7i1kYl8UxhLqvkhElnoRitD8+hKJmA=;
-        b=DpRwgsc8k+bO9cXVHmU7ksT2E8T7R4om62xOunRq9j6F4/Hlmd+72tPALfSIkWpTBv
-         6ZsB/FoXumwXqUlvu94h7ehF0Poi6zQZRyL/SVAXWNru3D7CYZKN+GO4S+p3OYu8TvOf
-         p5r4/HuAd0PoSIWCdxVFPC7ODUIYPeBjfKvmU=
+        bh=xU+lft0xYFj1fS1yuTZSbozxjgBGk0a+m2yFd6VoFH8=;
+        b=a+tRkUtoblEDLjvFId++UphGjoZEaQCYI3Vk83Wii7jOQPjtu5Lszr9szx/ri1HX51
+         wV1jt/Of6XxA4HH6Vf9VLVYuUYeTQ2uz41Vd4xndvpOP8cB9qurXZHACinwkcuuAVoNS
+         S4kXDV6k7pYw97SFuBD/SAZ91ynDl2QAdaG/0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=+ZZ5vfFx25K1I7i1kYl8UxhLqvkhElnoRitD8+hKJmA=;
-        b=H3QBJt/8FGoNQ5tBkoz9intG79x0e79OkL5RhEkVHtcOG9moyDesIcBce+RH3JQWp8
-         CsBSv5aJ+eNuYZka6umPEfZrdZ7fsnmMUrHRpgFzGJJ8h2yLjSPf0yEg1DYnU3QU215e
-         JLlqOGtw+5nh2AfgiwbpWKfNqzjorh0R43SzEuttjAIff+9jd8KzdMjGJQx4XoiBDbA9
-         V5dENXB2yryBxs/SV5Rn+2pHGOtdqUlL66+4xJQL7zrulUHJso8VlYB+hDVaBx2c/Kc+
-         bxzLm0SsXZnWICCNT+db+yFwXUVKRF/v0aI4q1PY88hhz3o5Wy6KdIZZ01YVMhH+NWrT
-         wYTQ==
-X-Gm-Message-State: AOAM533t0VWpDlAbh3obgPlGAYAoIJrDkM1VV7Pxr/v14Y/BO7PCLM4k
-	hSzci+WWN1gZZDS09g2Y58Vxsg==
-X-Google-Smtp-Source: ABdhPJytQuECKGgEb8eAW6DkkFw1E8TxkJAce0g4AzSArkwdtDW898amuL4eidgPFi1A7RBjUnKTDA==
-X-Received: by 2002:a62:8684:0:b0:50d:972b:d9d2 with SMTP id x126-20020a628684000000b0050d972bd9d2mr18445121pfd.4.1651628853419;
-        Tue, 03 May 2022 18:47:33 -0700 (PDT)
+        bh=xU+lft0xYFj1fS1yuTZSbozxjgBGk0a+m2yFd6VoFH8=;
+        b=fktl6Yv3Nm3QkSrb7p49UsoedJnB+T1LtCoWrC5aMnua+A7CliP10R0kINaiOIdNJe
+         cDWYpgWPWJo6S1XkPix5ntPsEr+ewj30JFmd6Lt9MgS8Wm6TKT2i4h90YBqZGXaqU2e6
+         9CzzDAtzn+tqEKRFXSorQNvE0OUppCaqmnUkpVgxArrrBYXjja9qrXTRLrFTff36VW5c
+         H9LAeFS4x+Feygm3sFnSO7Aup5VmJ3wjCHwVC9a/VjeQC9puby9mmd90G+Y6HtY668xL
+         wW3C7gVp12nwF8LUZ0zAQxkKDpmMUSOPDz5gMW7nu1QB/U3B/SyrQ8T6RgzvwQd9w3CE
+         Z0uQ==
+X-Gm-Message-State: AOAM533h1rB0hsaftIEPXgWtL1YV2Xfo/fysjXDl/KZ1isfFvrR2LZ/3
+	BIjlTjV3W04WrA/aexlNOfx1Hg==
+X-Google-Smtp-Source: ABdhPJxAtBZ9EXzckbFxXEo5UZhmn/LsbzwXw7S3livWp9IXdIuEWTNc+6eQzBZkUiCIn0RCFgRUjw==
+X-Received: by 2002:a17:90a:8407:b0:1d9:ab62:bd3c with SMTP id j7-20020a17090a840700b001d9ab62bd3cmr7874329pjn.139.1651628857838;
+        Tue, 03 May 2022 18:47:37 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: "Gustavo A . R . Silva" <gustavoars@kernel.org>
 Cc: Kees Cook <keescook@chromium.org>,
-	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Andy Lavr <andy.lavr@gmail.com>,
+	Luca Coelho <luciano.coelho@intel.com>,
+	Kalle Valo <kvalo@kernel.org>,
 	"David S. Miller" <davem@davemloft.net>,
 	Jakub Kicinski <kuba@kernel.org>,
-	Rich Felker <dalias@aerifal.cx>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Gregory Greenman <gregory.greenman@intel.com>,
 	Eric Dumazet <edumazet@google.com>,
+	linux-wireless@vger.kernel.org,
 	netdev@vger.kernel.org,
 	Alexei Starovoitov <ast@kernel.org>,
 	alsa-devel@alsa-project.org,
@@ -86,7 +91,6 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Andrew Gabbasov <andrew_gabbasov@mentor.com>,
 	Andrew Morton <akpm@linux-foundation.org>,
 	Andy Gross <agross@kernel.org>,
-	Andy Lavr <andy.lavr@gmail.com>,
 	Arend van Spriel <aspriel@gmail.com>,
 	Baowen Zheng <baowen.zheng@corigine.com>,
 	Bjorn Andersson <bjorn.andersson@linaro.org>,
@@ -115,7 +119,6 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Frank Rowand <frowand.list@gmail.com>,
 	Franky Lin <franky.lin@broadcom.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Gregory Greenman <gregory.greenman@intel.com>,
 	Guenter Roeck <linux@roeck-us.net>,
 	Haiyang Zhang <haiyangz@microsoft.com>,
 	Hante Meuleman <hante.meuleman@broadcom.com>,
@@ -132,7 +135,6 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Johannes Berg <johannes@sipsolutions.net>,
 	John Keeping <john@metanate.com>,
 	Juergen Gross <jgross@suse.com>,
-	Kalle Valo <kvalo@kernel.org>,
 	Keith Packard <keithp@keithp.com>,
 	keyrings@vger.kernel.org,
 	kunit-dev@googlegroups.com,
@@ -154,12 +156,10 @@ Cc: Kees Cook <keescook@chromium.org>,
 	linux-scsi@vger.kernel.org,
 	linux-security-module@vger.kernel.org,
 	linux-usb@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
 	linux-xtensa@linux-xtensa.org,
 	llvm@lists.linux.dev,
 	Loic Poulain <loic.poulain@linaro.org>,
 	Louis Peens <louis.peens@corigine.com>,
-	Luca Coelho <luciano.coelho@intel.com>,
 	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
 	Marc Dionne <marc.dionne@auristor.com>,
 	Marcel Holtmann <marcel@holtmann.org>,
@@ -171,8 +171,8 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Nathan Chancellor <nathan@kernel.org>,
 	Nick Desaulniers <ndesaulniers@google.com>,
 	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-	Paolo Abeni <pabeni@redhat.com>,
 	Paul Moore <paul@paul-moore.com>,
+	Rich Felker <dalias@aerifal.cx>,
 	Rob Herring <robh+dt@kernel.org>,
 	Russell King <linux@armlinux.org.uk>,
 	selinux@vger.kernel.org,
@@ -194,69 +194,79 @@ Cc: Kees Cook <keescook@chromium.org>,
 	xen-devel@lists.xenproject.org,
 	Xiu Jianfeng <xiujianfeng@huawei.com>,
 	Yang Yingliang <yangyingliang@huawei.com>
-Subject: [PATCH 01/32] netlink: Avoid memcpy() across flexible array boundary
-Date: Tue,  3 May 2022 18:44:10 -0700
-Message-Id: <20220504014440.3697851-2-keescook@chromium.org>
+Subject: [PATCH 07/32] iwlwifi: calib: Use mem_to_flex_dup() with struct iwl_calib_result
+Date: Tue,  3 May 2022 18:44:16 -0700
+Message-Id: <20220504014440.3697851-8-keescook@chromium.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220504014440.3697851-1-keescook@chromium.org>
 References: <20220504014440.3697851-1-keescook@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2198; h=from:subject; bh=m3+rrHA3rlt0sA4WgKzRJNTXeSTN4vWW0f0prUvbWYY=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqAKYSI60YG7oB43Zm2qf2XEYFq9+0dv6JxgKQA Vag6ObOJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHagAAKCRCJcvTf3G3AJt+PD/ 4wYVpcKl2liC+Uc4jUmmdOovQey8J6/k2HmeHGxkjjuXUGIWCxvRqFTmpp0zt8q6NeCY1dzyQE7A9N PW2CVLlv5GLZfLyBlcsOWL4hofk/Ed905HvAky/Dx8yVe0LszOaIIrWGUii70nX0RIZBcDlNYaOY4k wGJaGLJ9XI5Abp/vMi8qzgEIVt5Qty6Z+cfnpAvETE9FFC0ibHAuxSsOCPhKMgvWgkyDjMAVgJQC6t TKGjSE1Rwow+68x8cxXa3ZsNgWXO0wHDaWWB4/QUxyVrq/AqCxOvgu3SljXBgVpaeUF41w+gB7rTXz Jpn7XXtJZLIDQT9yoNDAsj8yjQSIPdaKabA732knKP+dXXvoimMLj17LWxunuIrNQJ5Awl5Dz2jNa4 96eQ4Eabc5miPNc5+9VOK1Wc20FUE/uqW/VkQkBWzcnLXslpLRuJ2jNTFzk50BKZOJ20vutotuSmWf 5gqjyHzRfK+iajoBCEV6nUiWN7ewO8XDDayLZtzu5foCWXgFFwp2ZWksNnvY6M1djooGD0fU2cMDkZ HK9WR0ZfO5zv8cE5RCjDXb25deVhtGS6HRKU3vBlDmFx3drFqOEK/4zwTej6ttVyJqAspxBqEq7xpi JDgQOkTfh60YdtsNYhykruXCL3NnFuRLtxOeMGWD4IL6YtPwYfH3V6aFCljQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2309; h=from:subject; bh=WpodBqq01jqwxM1KRcJO62uugaWovPAJ5k8Asd34efc=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqCGKNTo/e4rYqRS6JHFIWEcMsPl6ZUWQBFBFL/ Wqla2nSJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHaggAKCRCJcvTf3G3AJvqCD/ 9KMmQRVL3p5s+EO2ziT+OnA/bWRcfyVrpdD2apYiZrAvV6jv+ChcK5o9LNvgU6liqmGQvBK56XO3bQ qrNnEnu62KEpY0aEShwY6YNXdwdTLw3FEMK42jV6f34XbajiPo0MoQoS/x/QSbL1eIG6JO5d4TRjIe 0/Q48qkArPdlLvI5pKeSr1lsEVPndfc9NGHCI6nA2+bBonwbXOWfAC7HZPfrpPcmTgLfoKTkBLXai4 ePDPJtwC3/jzsxtTC7J9DHOmQvRPHeYKpPXefkrkgeOaZf2ToPQ3uG49rEHXnkAeJVNemhQ1DJPNcQ HudzUsakTefZTR7ato8r+9r+0+ie8aFfQEAagdWcpPFVR9EyXHXbSWIWZPdHaXSsvv+zcH2BVwp+lX PHt2bIY0X/x3Uouh1It3/uSZlg30A1qnqeXxqNsMc6p4qaHY4pJywV1EkrsZwZd1PdBaiWc6LsdWnm g/rpEfcleSaFr5QGOmd7i7ErfwdtNTNDj5n6eo7f/rD6qfq1dEAIa3IkdH7xRECGPpT/2qd+a747A7 vm2gjfh13/ghhPAbVTSZORt9oZN46upeJxwm83wHp0XHC4gVbEH+bjDqXYQAWbhNyUaOA8Ua7uIonu l7HgMXAQ7eoMMallt3TbHeAxvHxkwxcyt1LUHi517rK5CcCYO26DROhVZXYw==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
-In preparation for run-time memcpy() bounds checking, split the nlmsg
-copying for error messages (which crosses a previous unspecified flexible
-array boundary) in half. Avoids the future run-time warning:
+As part of the work to perform bounds checking on all memcpy() uses,
+replace the open-coded a deserialization of bytes out of memory into a
+trailing flexible array by using a flex_array.h helper to perform the
+allocation, bounds checking, and copying.
 
-memcpy: detected field-spanning write (size 32) of single field "&errmsg->msg" (size 16)
+Avoids future false-positive warning when strict run-time memcpy()
+bounds checking is enabled:
 
-Creates an explicit flexible array at the end of nlmsghdr for the payload,
-named "nlmsg_payload". There is no impact on UAPI; the sizeof(struct
-nlmsghdr) does not change, but now the compiler can better reason about
-where things are being copied.
+memcpy: detected field-spanning write (size 8) of single field "&res->hdr" (size 4)
 
-Fixed-by: Rasmus Villemoes <linux@rasmusvillemoes.dk>
-Link: https://lore.kernel.org/lkml/d7251d92-150b-5346-6237-52afc154bb00@rasmusvillemoes.dk
+Adds an additional size check since the minimum isn't 0.
+
+Reported-by: Andy Lavr <andy.lavr@gmail.com>
+Cc: Luca Coelho <luciano.coelho@intel.com>
+Cc: Kalle Valo <kvalo@kernel.org>
 Cc: "David S. Miller" <davem@davemloft.net>
 Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Rich Felker <dalias@aerifal.cx>
+Cc: Paolo Abeni <pabeni@redhat.com>
+Cc: Gregory Greenman <gregory.greenman@intel.com>
 Cc: Eric Dumazet <edumazet@google.com>
+Cc: linux-wireless@vger.kernel.org
 Cc: netdev@vger.kernel.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- include/uapi/linux/netlink.h | 1 +
- net/netlink/af_netlink.c     | 5 ++++-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ drivers/net/wireless/intel/iwlwifi/dvm/calib.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/include/uapi/linux/netlink.h b/include/uapi/linux/netlink.h
-index 855dffb4c1c3..47f9342d51bc 100644
---- a/include/uapi/linux/netlink.h
-+++ b/include/uapi/linux/netlink.h
-@@ -47,6 +47,7 @@ struct nlmsghdr {
- 	__u16		nlmsg_flags;	/* Additional flags */
- 	__u32		nlmsg_seq;	/* Sequence number */
- 	__u32		nlmsg_pid;	/* Sending process port ID */
-+	__u8		nlmsg_payload[];/* Contents of message */
+diff --git a/drivers/net/wireless/intel/iwlwifi/dvm/calib.c b/drivers/net/wireless/intel/iwlwifi/dvm/calib.c
+index ae1f0cf560e2..7480c19d7af0 100644
+--- a/drivers/net/wireless/intel/iwlwifi/dvm/calib.c
++++ b/drivers/net/wireless/intel/iwlwifi/dvm/calib.c
+@@ -18,8 +18,11 @@
+ /* Opaque calibration results */
+ struct iwl_calib_result {
+ 	struct list_head list;
+-	size_t cmd_len;
+-	struct iwl_calib_cmd cmd;
++	DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(size_t, cmd_len);
++	union {
++		struct iwl_calib_cmd cmd;
++		DECLARE_FLEX_ARRAY_ELEMENTS(u8, data);
++	};
+ 	/* data follows */
  };
  
- /* Flags values */
-diff --git a/net/netlink/af_netlink.c b/net/netlink/af_netlink.c
-index 1b5a9c2e1c29..09346aee1022 100644
---- a/net/netlink/af_netlink.c
-+++ b/net/netlink/af_netlink.c
-@@ -2445,7 +2445,10 @@ void netlink_ack(struct sk_buff *in_skb, struct nlmsghdr *nlh, int err,
- 			  NLMSG_ERROR, payload, flags);
- 	errmsg = nlmsg_data(rep);
- 	errmsg->error = err;
--	memcpy(&errmsg->msg, nlh, payload > sizeof(*errmsg) ? nlh->nlmsg_len : sizeof(*nlh));
-+	errmsg->msg = *nlh;
-+	if (payload > sizeof(*errmsg))
-+		memcpy(errmsg->msg.nlmsg_payload, nlh->nlmsg_payload,
-+		       nlh->nlmsg_len - sizeof(*nlh));
+@@ -59,14 +62,10 @@ int iwl_send_calib_results(struct iwl_priv *priv)
+ int iwl_calib_set(struct iwl_priv *priv,
+ 		  const struct iwl_calib_cmd *cmd, int len)
+ {
+-	struct iwl_calib_result *res, *tmp;
++	struct iwl_calib_result *res = NULL, *tmp;
  
- 	if (nlk_has_extack && extack) {
- 		if (extack->_msg) {
+-	res = kmalloc(sizeof(*res) + len - sizeof(struct iwl_calib_hdr),
+-		      GFP_ATOMIC);
+-	if (!res)
++	if (len < sizeof(*cmd) || mem_to_flex_dup(&res, cmd, len, GFP_ATOMIC))
+ 		return -ENOMEM;
+-	memcpy(&res->hdr, cmd, len);
+-	res->cmd_len = len;
+ 
+ 	list_for_each_entry(tmp, &priv->calib_results, list) {
+ 		if (tmp->cmd.hdr.op_code == res->cmd.hdr.op_code) {
 -- 
 2.32.0
 
