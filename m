@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF712C433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.320048.540751 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A04C433F5
+	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.320049.540762 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7NL-0001H9-0u; Wed, 04 May 2022 05:16:35 +0000
+	id 1nm7NN-0001p9-HQ; Wed, 04 May 2022 05:16:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 320048.540751; Wed, 04 May 2022 05:16:34 +0000
+Received: by outflank-mailman (output) from mailman id 320049.540762; Wed, 04 May 2022 05:16:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7NJ-00019I-8m; Wed, 04 May 2022 05:16:33 +0000
-Received: by outflank-mailman (input) for mailman id 320048;
+	id 1nm7NL-0001dS-SD; Wed, 04 May 2022 05:16:35 +0000
+Received: by outflank-mailman (input) for mailman id 320049;
  Wed, 04 May 2022 01:52:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Rvwn=VM=chromium.org=keescook@srs-se1.protection.inumbo.net>)
- id 1nm4C5-0008Vf-Qc
+ id 1nm4C5-0008Vg-UZ
  for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:52:45 +0000
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [2607:f8b0:4864:20::1035])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e3a46777-cb4c-11ec-8fc4-03012f2f19d4;
+Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
+ [2607:f8b0:4864:20::532])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e3b25c7e-cb4c-11ec-a406-831a346695d4;
  Wed, 04 May 2022 03:52:44 +0200 (CEST)
-Received: by mail-pj1-x1035.google.com with SMTP id
- w17-20020a17090a529100b001db302efed6so14823pjh.4
+Received: by mail-pg1-x532.google.com with SMTP id 6so2144pgb.13
  for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:52:44 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
  by smtp.gmail.com with ESMTPSA id
- g16-20020a62e310000000b0050dc76281d2sm7165111pfh.172.2022.05.03.18.52.42
+ m1-20020a637d41000000b003c14af5063esm13641114pgn.86.2022.05.03.18.52.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 May 2022 18:52:42 -0700 (PDT)
+ Tue, 03 May 2022 18:52:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,40 +46,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e3a46777-cb4c-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: e3b25c7e-cb4c-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=KYZx+y1oKNSP1oqgJrB6Tz6rT9EWA8WKaERG51foz1A=;
-        b=bz1Sh9MVCXyP0oQlo8D6xVMzQ27pV4R6B//UGDTL8nzMS3F7Sze+JRYFVh2IBIaTFl
-         BrDTiNFs4Nw3sFWGEkG5ftS8E8tnvlsvZL9PIbvMFVJ2Ru0EtHqoxpqbupakHeJmxqdO
-         iZ/yeqiNZ245qldJTLvXJrPu0t4+xuvhNmFB4=
+        bh=xT+5hQcq61BvthAgaoVmL+Iixyk9Kz6M9vS9nNgwYZE=;
+        b=foxymm92zvgmK0ETJD/OF52F7nwlYYgJQ8oVdho7r9BzWtgtuSGYfDYK5MhNshEOoZ
+         2wn0h0u9CPuexCbq87DKe80piTtxK5R6ZpJwSBGXRNF7rOHEPYzOtCIu9lKjSdiUbhe+
+         r2DkWtw3UKhrg5w4I5ukgiJdOnG5MzFcAx9yc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=KYZx+y1oKNSP1oqgJrB6Tz6rT9EWA8WKaERG51foz1A=;
-        b=6jhQdmwyS7DaNkjisqbSo5Tp37RoF1zEWXYNYD3pgkIjTt/SUi6QJ1ikvslE9Xl4oB
-         eHQpaeDcUwLXjJhIE2ZVmoDs2aK4S9o51MLCBynxHvsr4/im4islngvQl92pm99iAf+X
-         WAm/zZOV85QK2Bp8TvOrTG6lqfJy+xtDeU/LxkhXD7QBUITzrGVqqfyB7tvM0yHTPqKd
-         kyV4EupwL8A91d5ElBqHWw7ECuUg/BHE570njlQ3J0xjVm4SkqtlKCEsvme8OK8TACD6
-         CxwdEmw5lHk9Z9889F6k2fBORyv8rXkEDVLG/XKIYGMUAB1ZXHGsp68c03uZhHTaEVWu
-         V6NA==
-X-Gm-Message-State: AOAM530jP4LEhYPsLSihR/h7Lgp26ZFM4npl1Jy6KpDFY7w6n4JlG/tc
-	fa7FNvWHd4SORBINUQMVGf1YPg==
-X-Google-Smtp-Source: ABdhPJzn4mkWoLO9GkvHCb0f9HPITkXNkv0C1WpBFBFfJEBtcJV5kgYulneag//rfVNwLsJ0LGVqMg==
-X-Received: by 2002:a17:90b:1251:b0:1d7:f7ae:9f1 with SMTP id gx17-20020a17090b125100b001d7f7ae09f1mr7834178pjb.65.1651629163350;
+        bh=xT+5hQcq61BvthAgaoVmL+Iixyk9Kz6M9vS9nNgwYZE=;
+        b=Ej/NX4k2cHepcyQKn330sRS+z2I0Wc/VSQC5SnEh+juypLzcp92uOLgqKAbgpf9F7D
+         mcBizMiCM4JvC4HeDNS33ptC69evMiHB8NBhFC2FembNtViK816XAhM0XePKxAbEJ9b2
+         K56+wzHWs7aKoM3a82c3kQQ00MccC+fahmEb52Gki0ct4XJyHG2vAhOtsQRMbZcImanS
+         GiYhNDT4yDxDzNfsuSUW7U4rd1yOmQsVwbAr0rtFp1Ig3LEErE+rDv1WvTefC5TQKOa5
+         6CVs14ZPzs0D901QvOqD5hb0Vve+idStDrq/dlj9F/nPfTIr7k59gAAOLJdIUwu1byLw
+         Q/Ag==
+X-Gm-Message-State: AOAM5327+nQ0InZNKZ9fn0C4Ba5HEDVcVuUcs4bn/Q4GXSRlmiWGr3l1
+	YkNiRWRGXc0OR7VatZw7NfnflQ==
+X-Google-Smtp-Source: ABdhPJzg0KwFLixG8Pstl42rdZ/PTRxkyHAZczqCheTOMrqPGfLT6/zfzGOMo4pLCA8igqbxzHRxPA==
+X-Received: by 2002:a63:6fc4:0:b0:393:9567:16dc with SMTP id k187-20020a636fc4000000b00393956716dcmr15834959pgc.593.1651629163469;
         Tue, 03 May 2022 18:52:43 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: "Gustavo A . R . Silva" <gustavoars@kernel.org>
 Cc: Kees Cook <keescook@chromium.org>,
+	Luca Coelho <luciano.coelho@intel.com>,
+	Kalle Valo <kvalo@kernel.org>,
 	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
 	Jakub Kicinski <kuba@kernel.org>,
 	Paolo Abeni <pabeni@redhat.com>,
-	Hulk Robot <hulkci@huawei.com>,
-	Yang Yingliang <yangyingliang@huawei.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Gregory Greenman <gregory.greenman@intel.com>,
+	Eric Dumazet <edumazet@google.com>,
+	linux-wireless@vger.kernel.org,
 	netdev@vger.kernel.org,
 	Alexei Starovoitov <ast@kernel.org>,
 	alsa-devel@alsa-project.org,
@@ -117,11 +119,11 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Frank Rowand <frowand.list@gmail.com>,
 	Franky Lin <franky.lin@broadcom.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Gregory Greenman <gregory.greenman@intel.com>,
 	Guenter Roeck <linux@roeck-us.net>,
 	Haiyang Zhang <haiyangz@microsoft.com>,
 	Hante Meuleman <hante.meuleman@broadcom.com>,
 	Herbert Xu <herbert@gondor.apana.org.au>,
+	Hulk Robot <hulkci@huawei.com>,
 	"James E.J. Bottomley" <jejb@linux.ibm.com>,
 	James Morris <jmorris@namei.org>,
 	Jarkko Sakkinen <jarkko@kernel.org>,
@@ -130,10 +132,8 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Jens Axboe <axboe@kernel.dk>,
 	Johan Hedberg <johan.hedberg@gmail.com>,
 	Johannes Berg <johannes.berg@intel.com>,
-	Johannes Berg <johannes@sipsolutions.net>,
 	John Keeping <john@metanate.com>,
 	Juergen Gross <jgross@suse.com>,
-	Kalle Valo <kvalo@kernel.org>,
 	Keith Packard <keithp@keithp.com>,
 	keyrings@vger.kernel.org,
 	kunit-dev@googlegroups.com,
@@ -155,12 +155,10 @@ Cc: Kees Cook <keescook@chromium.org>,
 	linux-scsi@vger.kernel.org,
 	linux-security-module@vger.kernel.org,
 	linux-usb@vger.kernel.org,
-	linux-wireless@vger.kernel.org,
 	linux-xtensa@linux-xtensa.org,
 	llvm@lists.linux.dev,
 	Loic Poulain <loic.poulain@linaro.org>,
 	Louis Peens <louis.peens@corigine.com>,
-	Luca Coelho <luciano.coelho@intel.com>,
 	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
 	Marc Dionne <marc.dionne@auristor.com>,
 	Marcel Holtmann <marcel@holtmann.org>,
@@ -193,15 +191,16 @@ Cc: Kees Cook <keescook@chromium.org>,
 	wcn36xx@lists.infradead.org,
 	Wei Liu <wei.liu@kernel.org>,
 	xen-devel@lists.xenproject.org,
-	Xiu Jianfeng <xiujianfeng@huawei.com>
-Subject: [PATCH 15/32] 802/garp: Use mem_to_flex_dup() with struct garp_attr
-Date: Tue,  3 May 2022 18:44:24 -0700
-Message-Id: <20220504014440.3697851-16-keescook@chromium.org>
+	Xiu Jianfeng <xiujianfeng@huawei.com>,
+	Yang Yingliang <yangyingliang@huawei.com>
+Subject: [PATCH 08/32] iwlwifi: mvm: Use mem_to_flex_dup() with struct ieee80211_key_conf
+Date: Tue,  3 May 2022 18:44:17 -0700
+Message-Id: <20220504014440.3697851-9-keescook@chromium.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220504014440.3697851-1-keescook@chromium.org>
 References: <20220504014440.3697851-1-keescook@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2053; h=from:subject; bh=g6mLY++H2BfqQCK003F0EjItFkVyhehgYOIo/aZQtaQ=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqEjjw/bjk+w/BAp5zZGN/lLOysTcemUiPR49xS rdNJyZqJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHahAAKCRCJcvTf3G3AJkdZD/ 9ULlU2HE7dyOGGZcxoTDzzzQ0RkAnTOaJ+RVqmjII2Tv1VoPm6QRB0LGPVIKf/ajMgajI22eW2yGjV dV/acgUammYsccOQLPxTPzsPUVFZFU0hxMis5Oq9JqjehQPY4nErl1wT/Zymsur2YjD5pHbuIEHC00 ++wwwIwEXX7l/PdVNJ+PMRIdE9atC0npYUgWrpfpDQWjeDdc8adknigoQ33ZyiQZNgrZVYTO9/59Qg 8KXYHO+zkVTrXNgaZRW0wDjH3ltz+pKJr0geOSSbUhz6LlZjAauJ/rC2ZsYG+CUN5gZKKeQGMACl+O utmoGfrkJAMo4fchbVPoySQfEI4RycU3tPyq3AjrjHPoEOk1up5kNYJrBZjwNIsdxzt2klrR6QtXyt bfI8wU27DsqhelPlsyi6UMtKYVW917c/eUpFGiSJstE8AvpEEc7fwbwOkpO95+zogvhdjqrPwm0ODF hO4WSuDl0qqoSCqmphywXtHTbvP3/SyHQqpHk+XFWlqObHfRedTUudfAq0fRt/wpoTokjndugHxbB3 vPHZIR/QvpGV0TdPvLZ2ykBHieWoDTJLdsmeVjUv1/KqeUr4N1QQRZM24ry1hMmkrjPTDYRPSVjN1n 2Idl5GOStpor5uc8wuqfeiXlQfP7X+6iC5KJi+Kgwt8eOaWFgTn89ibYrF3g==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2437; h=from:subject; bh=kqrSs6qCwh+Lec2OX97eOmuBYGTxbYZO/oveyYvsSyU=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqCYob8Le101GWyzNPT8SUQLcWbnMdLaBLnNMKi PFuQ5FWJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHaggAKCRCJcvTf3G3AJrrrD/ 41pLe3vLmy1DT131k402AnWkbvKKTeLHCfdZOZOBG/caJXqmnpOxwil6RAxg5u6hN5hKr+gqoQg3jM PjxMAKOnj4UigmA4/hMbFkpe2UAFQce0nHR1yDX9KirGdKMvnAq1KmeZTOvAK12ubsFuw1otFOoOY9 il9bAkoOcb67DGRv3WnjeBeJAIZesPeob+hkdIGXBLwjDM9HsKNWnS0CO4faN9H2UB5yHtan5AE3fY ejNDT+faux7HktJ5LMXGuFK8hNTMT6DzsBUJMh/VqnJUQfz4J8NZnt1C2fhjm2UKTMJJXaSL2VTIls +E869VhJZmwXhnjNOoXxgs2ypZPdZn7bJMJt9MVXQCWOJ/r5Z4HL//NjQwlMsxa5eN/OtY6fhuJmQa Kt081e3mYWawz+yHoGLyrxfgEVcaxPetNNZbtFWAguSAm+2kDAVJoYtbd1P/PeFNxjV9iclz5KMbsR vfwg2FoAJ4/UE7uv/e9hwMg874lDgZBVxecyw2BfPg0CFqa9KiQ4QmpYRs8HaRBhJQv/jDtfxWqnVh RhanF8E/YIf8Mwjneo+/nQykVNYJP+mnin2t2PXGGQTtyZfdgc4mogRxpnvnUcDOoGAndvfOm8tHL7 lnC6lEffqiIvIoLzddv1Yrb2IU0R/a/tFtHusn7zJ+WlS695vP3r1pDWMDUg==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
@@ -210,63 +209,67 @@ replace the open-coded a deserialization of bytes out of memory into a
 trailing flexible array by using a flex_array.h helper to perform the
 allocation, bounds checking, and copying.
 
+Cc: Luca Coelho <luciano.coelho@intel.com>
+Cc: Kalle Valo <kvalo@kernel.org>
 Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Eric Dumazet <edumazet@google.com>
 Cc: Jakub Kicinski <kuba@kernel.org>
 Cc: Paolo Abeni <pabeni@redhat.com>
-Cc: Hulk Robot <hulkci@huawei.com>
-Cc: Yang Yingliang <yangyingliang@huawei.com>
+Cc: Johannes Berg <johannes@sipsolutions.net>
+Cc: Gregory Greenman <gregory.greenman@intel.com>
+Cc: Eric Dumazet <edumazet@google.com>
+Cc: linux-wireless@vger.kernel.org
 Cc: netdev@vger.kernel.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- include/net/garp.h | 4 ++--
- net/802/garp.c     | 9 +++------
- 2 files changed, 5 insertions(+), 8 deletions(-)
+ drivers/net/wireless/intel/iwlwifi/mvm/sta.c | 8 ++------
+ include/net/mac80211.h                       | 4 ++--
+ 2 files changed, 4 insertions(+), 8 deletions(-)
 
-diff --git a/include/net/garp.h b/include/net/garp.h
-index 4d9a0c6a2e5f..ec087ae534e7 100644
---- a/include/net/garp.h
-+++ b/include/net/garp.h
-@@ -80,8 +80,8 @@ struct garp_attr {
- 	struct rb_node			node;
- 	enum garp_applicant_state	state;
- 	u8				type;
--	u8				dlen;
--	unsigned char			data[];
-+	DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(u8, dlen);
-+	DECLARE_FLEX_ARRAY_ELEMENTS(unsigned char, data);
+diff --git a/drivers/net/wireless/intel/iwlwifi/mvm/sta.c b/drivers/net/wireless/intel/iwlwifi/mvm/sta.c
+index 406f0a50a5bf..23cade528dcf 100644
+--- a/drivers/net/wireless/intel/iwlwifi/mvm/sta.c
++++ b/drivers/net/wireless/intel/iwlwifi/mvm/sta.c
+@@ -4108,7 +4108,7 @@ int iwl_mvm_add_pasn_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
+ 	int ret;
+ 	u16 queue;
+ 	struct iwl_mvm_vif *mvmvif = iwl_mvm_vif_from_mac80211(vif);
+-	struct ieee80211_key_conf *keyconf;
++	struct ieee80211_key_conf *keyconf = NULL;
+ 
+ 	ret = iwl_mvm_allocate_int_sta(mvm, sta, 0,
+ 				       NL80211_IFTYPE_UNSPECIFIED,
+@@ -4122,15 +4122,11 @@ int iwl_mvm_add_pasn_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
+ 	if (ret)
+ 		goto out;
+ 
+-	keyconf = kzalloc(sizeof(*keyconf) + key_len, GFP_KERNEL);
+-	if (!keyconf) {
++	if (mem_to_flex_dup(&keyconf, key, key_len, GFP_KERNEL)) {
+ 		ret = -ENOBUFS;
+ 		goto out;
+ 	}
+-
+ 	keyconf->cipher = cipher;
+-	memcpy(keyconf->key, key, key_len);
+-	keyconf->keylen = key_len;
+ 
+ 	ret = iwl_mvm_send_sta_key(mvm, sta->sta_id, keyconf, false,
+ 				   0, NULL, 0, 0, true);
+diff --git a/include/net/mac80211.h b/include/net/mac80211.h
+index 75880fc70700..4abe52963a96 100644
+--- a/include/net/mac80211.h
++++ b/include/net/mac80211.h
+@@ -1890,8 +1890,8 @@ struct ieee80211_key_conf {
+ 	u8 hw_key_idx;
+ 	s8 keyidx;
+ 	u16 flags;
+-	u8 keylen;
+-	u8 key[];
++	DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(u8, keylen);
++	DECLARE_FLEX_ARRAY_ELEMENTS(u8, key);
  };
  
- enum garp_applications {
-diff --git a/net/802/garp.c b/net/802/garp.c
-index f6012f8e59f0..72743ed00a54 100644
---- a/net/802/garp.c
-+++ b/net/802/garp.c
-@@ -168,7 +168,7 @@ static struct garp_attr *garp_attr_create(struct garp_applicant *app,
- 					  const void *data, u8 len, u8 type)
- {
- 	struct rb_node *parent = NULL, **p = &app->gid.rb_node;
--	struct garp_attr *attr;
-+	struct garp_attr *attr = NULL;
- 	int d;
- 
- 	while (*p) {
-@@ -184,13 +184,10 @@ static struct garp_attr *garp_attr_create(struct garp_applicant *app,
- 			return attr;
- 		}
- 	}
--	attr = kmalloc(sizeof(*attr) + len, GFP_ATOMIC);
--	if (!attr)
--		return attr;
-+	if (mem_to_flex_dup(&attr, data, len, GFP_ATOMIC))
-+		return NULL;
- 	attr->state = GARP_APPLICANT_VO;
- 	attr->type  = type;
--	attr->dlen  = len;
--	memcpy(attr->data, data, len);
- 
- 	rb_link_node(&attr->node, parent, p);
- 	rb_insert_color(&attr->node, &app->gid);
+ #define IEEE80211_MAX_PN_LEN	16
 -- 
 2.32.0
 
