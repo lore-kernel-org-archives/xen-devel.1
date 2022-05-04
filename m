@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D4DC4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.320024.540641 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96DCAC433FE
+	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.320015.540605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7N6-0006SJ-Dc; Wed, 04 May 2022 05:16:20 +0000
+	id 1nm7N3-0005jB-R3; Wed, 04 May 2022 05:16:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 320024.540641; Wed, 04 May 2022 05:16:20 +0000
+Received: by outflank-mailman (output) from mailman id 320015.540605; Wed, 04 May 2022 05:16:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7N6-0006Ns-2c; Wed, 04 May 2022 05:16:20 +0000
-Received: by outflank-mailman (input) for mailman id 320024;
- Wed, 04 May 2022 01:47:40 +0000
+	id 1nm7N3-0005iu-M6; Wed, 04 May 2022 05:16:17 +0000
+Received: by outflank-mailman (input) for mailman id 320015;
+ Wed, 04 May 2022 01:47:36 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Rvwn=VM=chromium.org=keescook@srs-se1.protection.inumbo.net>)
- id 1nm47A-0007U4-Ty
- for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:47:40 +0000
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [2607:f8b0:4864:20::42c])
+ id 1nm476-0007U4-Er
+ for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:47:36 +0000
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [2607:f8b0:4864:20::42e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2df7430c-cb4c-11ec-8fc4-03012f2f19d4;
- Wed, 04 May 2022 03:47:40 +0200 (CEST)
-Received: by mail-pf1-x42c.google.com with SMTP id j6so16129857pfe.13
- for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:47:40 -0700 (PDT)
+ id 2aecb958-cb4c-11ec-8fc4-03012f2f19d4;
+ Wed, 04 May 2022 03:47:35 +0200 (CEST)
+Received: by mail-pf1-x42e.google.com with SMTP id a11so21695pff.1
+ for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:47:34 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
  by smtp.gmail.com with ESMTPSA id
- j14-20020aa7800e000000b0050dc762816bsm6923568pfi.69.2022.05.03.18.47.35
+ k23-20020a170902ba9700b0015e8d4eb1d6sm7012542pls.32.2022.05.03.18.47.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 May 2022 18:47:37 -0700 (PDT)
+ Tue, 03 May 2022 18:47:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,45 +46,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2df7430c-cb4c-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 2aecb958-cb4c-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=/zjSzrQhFPsEVokcSsrv18uPDt/e1w8KitHmUEp+EKs=;
-        b=mT+0HB76IN8PFmOQ4RQ3Shsn/xpSWIw4uZtDzm+qPL1ltT6DXjm7Tp880YLv6NTlX2
-         jzlnck4Hcy2b22tjZHTFIsFigeOwa/p0jwatnoLYw/6ZPZFoRjVJYcegxFjMo85nErfR
-         VdOWk3eGpgUIVPQ45lqiYFZPzg8bYlpkvYlx8=
+        bh=+ZZ5vfFx25K1I7i1kYl8UxhLqvkhElnoRitD8+hKJmA=;
+        b=DpRwgsc8k+bO9cXVHmU7ksT2E8T7R4om62xOunRq9j6F4/Hlmd+72tPALfSIkWpTBv
+         6ZsB/FoXumwXqUlvu94h7ehF0Poi6zQZRyL/SVAXWNru3D7CYZKN+GO4S+p3OYu8TvOf
+         p5r4/HuAd0PoSIWCdxVFPC7ODUIYPeBjfKvmU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=/zjSzrQhFPsEVokcSsrv18uPDt/e1w8KitHmUEp+EKs=;
-        b=hgDqft2slnu8FVh3VbVEVkVjahO9V0qincdjYBTHOeYCfLIh8HMur9Dx4UmdUT+pff
-         iPGbU1ZMo9xykNhTDx9+FU7ON+jgqVwxjZREiyoGQJTg7XYwQSwHYqCm/plHaHcYEypc
-         /+fZo3+QE9YIne9TUKCckCHmQLkoamlGJFz8399+CKKq3XWpATWVQqGFcZfPB5IcUjEQ
-         XA8nMeDcI836pCmJrne7SMQFQ+Di4cI5r/zxGH7QHR/yL/L/ScPYN5dgJv4f8DgCTfyK
-         QpyRoWwnQuBP7NAxnokfujtjBFAyELv/6Bepl6HuMJ/t0r0aLZUEJxLqPVZxQFIdhwnA
-         ojMw==
-X-Gm-Message-State: AOAM53368V3GZP6HCksMpycIQ0IiDrGZ6y90xsPP4Yf8tRyp1sEIZSN6
-	i1dIqMyHeMzpFE9bnwbA79jzIw==
-X-Google-Smtp-Source: ABdhPJxhtwXtLVIUcB2US4slqD0XToxtoZJgPLmnCR1fqgUmJy/AmZ3otgqvCCOEdhxOZsYp+oeMXA==
-X-Received: by 2002:a63:3409:0:b0:3ab:4d72:1f0a with SMTP id b9-20020a633409000000b003ab4d721f0amr15975186pga.420.1651628858527;
-        Tue, 03 May 2022 18:47:38 -0700 (PDT)
+        bh=+ZZ5vfFx25K1I7i1kYl8UxhLqvkhElnoRitD8+hKJmA=;
+        b=H3QBJt/8FGoNQ5tBkoz9intG79x0e79OkL5RhEkVHtcOG9moyDesIcBce+RH3JQWp8
+         CsBSv5aJ+eNuYZka6umPEfZrdZ7fsnmMUrHRpgFzGJJ8h2yLjSPf0yEg1DYnU3QU215e
+         JLlqOGtw+5nh2AfgiwbpWKfNqzjorh0R43SzEuttjAIff+9jd8KzdMjGJQx4XoiBDbA9
+         V5dENXB2yryBxs/SV5Rn+2pHGOtdqUlL66+4xJQL7zrulUHJso8VlYB+hDVaBx2c/Kc+
+         bxzLm0SsXZnWICCNT+db+yFwXUVKRF/v0aI4q1PY88hhz3o5Wy6KdIZZ01YVMhH+NWrT
+         wYTQ==
+X-Gm-Message-State: AOAM533t0VWpDlAbh3obgPlGAYAoIJrDkM1VV7Pxr/v14Y/BO7PCLM4k
+	hSzci+WWN1gZZDS09g2Y58Vxsg==
+X-Google-Smtp-Source: ABdhPJytQuECKGgEb8eAW6DkkFw1E8TxkJAce0g4AzSArkwdtDW898amuL4eidgPFi1A7RBjUnKTDA==
+X-Received: by 2002:a62:8684:0:b0:50d:972b:d9d2 with SMTP id x126-20020a628684000000b0050d972bd9d2mr18445121pfd.4.1651628853419;
+        Tue, 03 May 2022 18:47:33 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: "Gustavo A . R . Silva" <gustavoars@kernel.org>
 Cc: Kees Cook <keescook@chromium.org>,
-	Luca Coelho <luciano.coelho@intel.com>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
 	"David S. Miller" <davem@davemloft.net>,
 	Jakub Kicinski <kuba@kernel.org>,
-	Lee Jones <lee.jones@linaro.org>,
-	Johannes Berg <johannes.berg@intel.com>,
-	Gregory Greenman <gregory.greenman@intel.com>,
-	Kalle Valo <kvalo@kernel.org>,
+	Rich Felker <dalias@aerifal.cx>,
 	Eric Dumazet <edumazet@google.com>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Andy Lavr <andy.lavr@gmail.com>,
-	linux-wireless@vger.kernel.org,
 	netdev@vger.kernel.org,
 	Alexei Starovoitov <ast@kernel.org>,
 	alsa-devel@alsa-project.org,
@@ -92,6 +86,7 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Andrew Gabbasov <andrew_gabbasov@mentor.com>,
 	Andrew Morton <akpm@linux-foundation.org>,
 	Andy Gross <agross@kernel.org>,
+	Andy Lavr <andy.lavr@gmail.com>,
 	Arend van Spriel <aspriel@gmail.com>,
 	Baowen Zheng <baowen.zheng@corigine.com>,
 	Bjorn Andersson <bjorn.andersson@linaro.org>,
@@ -120,6 +115,7 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Frank Rowand <frowand.list@gmail.com>,
 	Franky Lin <franky.lin@broadcom.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Gregory Greenman <gregory.greenman@intel.com>,
 	Guenter Roeck <linux@roeck-us.net>,
 	Haiyang Zhang <haiyangz@microsoft.com>,
 	Hante Meuleman <hante.meuleman@broadcom.com>,
@@ -132,15 +128,18 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Jason Gunthorpe <jgg@ziepe.ca>,
 	Jens Axboe <axboe@kernel.dk>,
 	Johan Hedberg <johan.hedberg@gmail.com>,
+	Johannes Berg <johannes.berg@intel.com>,
 	Johannes Berg <johannes@sipsolutions.net>,
 	John Keeping <john@metanate.com>,
 	Juergen Gross <jgross@suse.com>,
+	Kalle Valo <kvalo@kernel.org>,
 	Keith Packard <keithp@keithp.com>,
 	keyrings@vger.kernel.org,
 	kunit-dev@googlegroups.com,
 	Kuniyuki Iwashima <kuniyu@amazon.co.jp>,
 	"K. Y. Srinivasan" <kys@microsoft.com>,
 	Lars-Peter Clausen <lars@metafoo.de>,
+	Lee Jones <lee.jones@linaro.org>,
 	Leon Romanovsky <leon@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
 	linux1394-devel@lists.sourceforge.net,
@@ -155,10 +154,12 @@ Cc: Kees Cook <keescook@chromium.org>,
 	linux-scsi@vger.kernel.org,
 	linux-security-module@vger.kernel.org,
 	linux-usb@vger.kernel.org,
+	linux-wireless@vger.kernel.org,
 	linux-xtensa@linux-xtensa.org,
 	llvm@lists.linux.dev,
 	Loic Poulain <loic.poulain@linaro.org>,
 	Louis Peens <louis.peens@corigine.com>,
+	Luca Coelho <luciano.coelho@intel.com>,
 	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
 	Marc Dionne <marc.dionne@auristor.com>,
 	Marcel Holtmann <marcel@holtmann.org>,
@@ -170,8 +171,8 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Nathan Chancellor <nathan@kernel.org>,
 	Nick Desaulniers <ndesaulniers@google.com>,
 	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Paolo Abeni <pabeni@redhat.com>,
 	Paul Moore <paul@paul-moore.com>,
-	Rich Felker <dalias@aerifal.cx>,
 	Rob Herring <robh+dt@kernel.org>,
 	Russell King <linux@armlinux.org.uk>,
 	selinux@vger.kernel.org,
@@ -193,130 +194,69 @@ Cc: Kees Cook <keescook@chromium.org>,
 	xen-devel@lists.xenproject.org,
 	Xiu Jianfeng <xiujianfeng@huawei.com>,
 	Yang Yingliang <yangyingliang@huawei.com>
-Subject: [PATCH 06/32] iwlwifi: calib: Prepare to use mem_to_flex_dup()
-Date: Tue,  3 May 2022 18:44:15 -0700
-Message-Id: <20220504014440.3697851-7-keescook@chromium.org>
+Subject: [PATCH 01/32] netlink: Avoid memcpy() across flexible array boundary
+Date: Tue,  3 May 2022 18:44:10 -0700
+Message-Id: <20220504014440.3697851-2-keescook@chromium.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220504014440.3697851-1-keescook@chromium.org>
 References: <20220504014440.3697851-1-keescook@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4285; h=from:subject; bh=3rsHreun4MVxtWWXTu1WNAZSbES1/vQKrpGvwiRs9tU=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqBVRPLVwI+Gac+Hu63Hjdxl/T8wFFeQtpYoExL lGTHr0KJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHagQAKCRCJcvTf3G3AJls/D/ 437IfHiRN/O/WyQZtpBUHVGUgP169cUmMhP62Pg0E7Hm7/o39zhQLTQ6d/zK2YTBo7GmHkrgW8+U89 K5ocyNlNeKiAOXNNyYjAKY0hINeYBOJbO+yP8Qb7dZ/ehdVAMXsZ5FjQQj2vRKXsiXBoCT4SNc7+7q 9k8nWm0scS/uHdUFonlvWzm3U/glq/QdTO6+M+RL75mqVm3Z2pZVYd2zeERbawqDVM7cuH2Zg17Avr WdhGyjfTAsPULi+qZBWVUvqc6X+iQ4DfUXZsJix/xvmINZyl3qG1d9TC92K8dHMKiRgdQpvnR+FE6Q WFBlvLGlrizcMolOVSXOkMFCRZ74YilAy+JISkDbLH5XPWP7v8ecKO+KApQCuxSqbyQ5G2zKND3+pY XoycBgIvvVGCy6VqLKW/gevPTpcBLR3Co4zh7nUKJffVspyQUE2M+5pLQBir/tmUVL54XdaUlMD4Tn pwD2p93A7KSHATImTFhq4PX2SS6jGi0V6Il1OHQS6pknXDGlaqxdwNO9EjP+edRb938jKgEGXypou9 S7mjGxWZ8I5Vu1E04fw2ClHZt4VH4Yas0mafjkRAPt2hiDdKF7TGiEg+awmLwQxN4tzHXDSsSGnmAv D9O1AcRWlYNF1HE1jUt/Y9dXMSZUe1atungkrYoabVpF4z5SrVEEglZiUKow==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2198; h=from:subject; bh=m3+rrHA3rlt0sA4WgKzRJNTXeSTN4vWW0f0prUvbWYY=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqAKYSI60YG7oB43Zm2qf2XEYFq9+0dv6JxgKQA Vag6ObOJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHagAAKCRCJcvTf3G3AJt+PD/ 4wYVpcKl2liC+Uc4jUmmdOovQey8J6/k2HmeHGxkjjuXUGIWCxvRqFTmpp0zt8q6NeCY1dzyQE7A9N PW2CVLlv5GLZfLyBlcsOWL4hofk/Ed905HvAky/Dx8yVe0LszOaIIrWGUii70nX0RIZBcDlNYaOY4k wGJaGLJ9XI5Abp/vMi8qzgEIVt5Qty6Z+cfnpAvETE9FFC0ibHAuxSsOCPhKMgvWgkyDjMAVgJQC6t TKGjSE1Rwow+68x8cxXa3ZsNgWXO0wHDaWWB4/QUxyVrq/AqCxOvgu3SljXBgVpaeUF41w+gB7rTXz Jpn7XXtJZLIDQT9yoNDAsj8yjQSIPdaKabA732knKP+dXXvoimMLj17LWxunuIrNQJ5Awl5Dz2jNa4 96eQ4Eabc5miPNc5+9VOK1Wc20FUE/uqW/VkQkBWzcnLXslpLRuJ2jNTFzk50BKZOJ20vutotuSmWf 5gqjyHzRfK+iajoBCEV6nUiWN7ewO8XDDayLZtzu5foCWXgFFwp2ZWksNnvY6M1djooGD0fU2cMDkZ HK9WR0ZfO5zv8cE5RCjDXb25deVhtGS6HRKU3vBlDmFx3drFqOEK/4zwTej6ttVyJqAspxBqEq7xpi JDgQOkTfh60YdtsNYhykruXCL3NnFuRLtxOeMGWD4IL6YtPwYfH3V6aFCljQ==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
-In preparation for replacing an open-coded memcpy() of a dynamically
-side buffer, rearrange the structures to pass enough information into
-the calling function to examine the bounds of the struct.
+In preparation for run-time memcpy() bounds checking, split the nlmsg
+copying for error messages (which crosses a previous unspecified flexible
+array boundary) in half. Avoids the future run-time warning:
 
-Rearrange the argument passing to use "cmd", rather than "hdr", since
-"res" expects to operate on the "data" flex array in "cmd" (that follows
-"hdr").
+memcpy: detected field-spanning write (size 32) of single field "&errmsg->msg" (size 16)
 
-Cc: Luca Coelho <luciano.coelho@intel.com>
+Creates an explicit flexible array at the end of nlmsghdr for the payload,
+named "nlmsg_payload". There is no impact on UAPI; the sizeof(struct
+nlmsghdr) does not change, but now the compiler can better reason about
+where things are being copied.
+
+Fixed-by: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Link: https://lore.kernel.org/lkml/d7251d92-150b-5346-6237-52afc154bb00@rasmusvillemoes.dk
 Cc: "David S. Miller" <davem@davemloft.net>
 Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Lee Jones <lee.jones@linaro.org>
-Cc: Johannes Berg <johannes.berg@intel.com>
-Cc: Gregory Greenman <gregory.greenman@intel.com>
-Cc: Kalle Valo <kvalo@kernel.org>
+Cc: Rich Felker <dalias@aerifal.cx>
 Cc: Eric Dumazet <edumazet@google.com>
-Cc: Paolo Abeni <pabeni@redhat.com>
-Cc: Andy Lavr <andy.lavr@gmail.com>
-Cc: linux-wireless@vger.kernel.org
 Cc: netdev@vger.kernel.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- drivers/net/wireless/intel/iwlwifi/dvm/agn.h   |  2 +-
- drivers/net/wireless/intel/iwlwifi/dvm/calib.c | 10 +++++-----
- drivers/net/wireless/intel/iwlwifi/dvm/ucode.c |  8 ++++----
- 3 files changed, 10 insertions(+), 10 deletions(-)
+ include/uapi/linux/netlink.h | 1 +
+ net/netlink/af_netlink.c     | 5 ++++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/wireless/intel/iwlwifi/dvm/agn.h b/drivers/net/wireless/intel/iwlwifi/dvm/agn.h
-index abb8696ba294..744e111d2ea3 100644
---- a/drivers/net/wireless/intel/iwlwifi/dvm/agn.h
-+++ b/drivers/net/wireless/intel/iwlwifi/dvm/agn.h
-@@ -112,7 +112,7 @@ int iwl_load_ucode_wait_alive(struct iwl_priv *priv,
- 			      enum iwl_ucode_type ucode_type);
- int iwl_send_calib_results(struct iwl_priv *priv);
- int iwl_calib_set(struct iwl_priv *priv,
--		  const struct iwl_calib_hdr *cmd, int len);
-+		  const struct iwl_calib_cmd *cmd, int len);
- void iwl_calib_free_results(struct iwl_priv *priv);
- int iwl_dump_nic_event_log(struct iwl_priv *priv, bool full_log,
- 			    char **buf);
-diff --git a/drivers/net/wireless/intel/iwlwifi/dvm/calib.c b/drivers/net/wireless/intel/iwlwifi/dvm/calib.c
-index a11884fa254b..ae1f0cf560e2 100644
---- a/drivers/net/wireless/intel/iwlwifi/dvm/calib.c
-+++ b/drivers/net/wireless/intel/iwlwifi/dvm/calib.c
-@@ -19,7 +19,7 @@
- struct iwl_calib_result {
- 	struct list_head list;
- 	size_t cmd_len;
--	struct iwl_calib_hdr hdr;
-+	struct iwl_calib_cmd cmd;
- 	/* data follows */
+diff --git a/include/uapi/linux/netlink.h b/include/uapi/linux/netlink.h
+index 855dffb4c1c3..47f9342d51bc 100644
+--- a/include/uapi/linux/netlink.h
++++ b/include/uapi/linux/netlink.h
+@@ -47,6 +47,7 @@ struct nlmsghdr {
+ 	__u16		nlmsg_flags;	/* Additional flags */
+ 	__u32		nlmsg_seq;	/* Sequence number */
+ 	__u32		nlmsg_pid;	/* Sending process port ID */
++	__u8		nlmsg_payload[];/* Contents of message */
  };
  
-@@ -43,12 +43,12 @@ int iwl_send_calib_results(struct iwl_priv *priv)
- 		int ret;
+ /* Flags values */
+diff --git a/net/netlink/af_netlink.c b/net/netlink/af_netlink.c
+index 1b5a9c2e1c29..09346aee1022 100644
+--- a/net/netlink/af_netlink.c
++++ b/net/netlink/af_netlink.c
+@@ -2445,7 +2445,10 @@ void netlink_ack(struct sk_buff *in_skb, struct nlmsghdr *nlh, int err,
+ 			  NLMSG_ERROR, payload, flags);
+ 	errmsg = nlmsg_data(rep);
+ 	errmsg->error = err;
+-	memcpy(&errmsg->msg, nlh, payload > sizeof(*errmsg) ? nlh->nlmsg_len : sizeof(*nlh));
++	errmsg->msg = *nlh;
++	if (payload > sizeof(*errmsg))
++		memcpy(errmsg->msg.nlmsg_payload, nlh->nlmsg_payload,
++		       nlh->nlmsg_len - sizeof(*nlh));
  
- 		hcmd.len[0] = res->cmd_len;
--		hcmd.data[0] = &res->hdr;
-+		hcmd.data[0] = &res->cmd;
- 		hcmd.dataflags[0] = IWL_HCMD_DFL_NOCOPY;
- 		ret = iwl_dvm_send_cmd(priv, &hcmd);
- 		if (ret) {
- 			IWL_ERR(priv, "Error %d on calib cmd %d\n",
--				ret, res->hdr.op_code);
-+				ret, res->cmd.hdr.op_code);
- 			return ret;
- 		}
- 	}
-@@ -57,7 +57,7 @@ int iwl_send_calib_results(struct iwl_priv *priv)
- }
- 
- int iwl_calib_set(struct iwl_priv *priv,
--		  const struct iwl_calib_hdr *cmd, int len)
-+		  const struct iwl_calib_cmd *cmd, int len)
- {
- 	struct iwl_calib_result *res, *tmp;
- 
-@@ -69,7 +69,7 @@ int iwl_calib_set(struct iwl_priv *priv,
- 	res->cmd_len = len;
- 
- 	list_for_each_entry(tmp, &priv->calib_results, list) {
--		if (tmp->hdr.op_code == res->hdr.op_code) {
-+		if (tmp->cmd.hdr.op_code == res->cmd.hdr.op_code) {
- 			list_replace(&tmp->list, &res->list);
- 			kfree(tmp);
- 			return 0;
-diff --git a/drivers/net/wireless/intel/iwlwifi/dvm/ucode.c b/drivers/net/wireless/intel/iwlwifi/dvm/ucode.c
-index 4b27a53d0bb4..bb13ca5d666c 100644
---- a/drivers/net/wireless/intel/iwlwifi/dvm/ucode.c
-+++ b/drivers/net/wireless/intel/iwlwifi/dvm/ucode.c
-@@ -356,18 +356,18 @@ static bool iwlagn_wait_calib(struct iwl_notif_wait_data *notif_wait,
- 			      struct iwl_rx_packet *pkt, void *data)
- {
- 	struct iwl_priv *priv = data;
--	struct iwl_calib_hdr *hdr;
-+	struct iwl_calib_cmd *cmd;
- 
- 	if (pkt->hdr.cmd != CALIBRATION_RES_NOTIFICATION) {
- 		WARN_ON(pkt->hdr.cmd != CALIBRATION_COMPLETE_NOTIFICATION);
- 		return true;
- 	}
- 
--	hdr = (struct iwl_calib_hdr *)pkt->data;
-+	cmd = (struct iwl_calib_cmd *)pkt->data;
- 
--	if (iwl_calib_set(priv, hdr, iwl_rx_packet_payload_len(pkt)))
-+	if (iwl_calib_set(priv, cmd, iwl_rx_packet_payload_len(pkt)))
- 		IWL_ERR(priv, "Failed to record calibration data %d\n",
--			hdr->op_code);
-+			cmd->hdr.op_code);
- 
- 	return false;
- }
+ 	if (nlk_has_extack && extack) {
+ 		if (extack->_msg) {
 -- 
 2.32.0
 
