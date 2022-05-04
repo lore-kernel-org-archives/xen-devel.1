@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AF56C4332F
-	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.320030.540674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDDDBC433FE
+	for <xen-devel@archiver.kernel.org>; Wed,  4 May 2022 05:16:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.320035.540699 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7N9-0007Gw-Q2; Wed, 04 May 2022 05:16:23 +0000
+	id 1nm7NC-0007wL-8O; Wed, 04 May 2022 05:16:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 320030.540674; Wed, 04 May 2022 05:16:23 +0000
+Received: by outflank-mailman (output) from mailman id 320035.540699; Wed, 04 May 2022 05:16:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nm7N8-0007CI-Rn; Wed, 04 May 2022 05:16:22 +0000
-Received: by outflank-mailman (input) for mailman id 320030;
- Wed, 04 May 2022 01:47:43 +0000
+	id 1nm7NB-0007nh-By; Wed, 04 May 2022 05:16:25 +0000
+Received: by outflank-mailman (input) for mailman id 320035;
+ Wed, 04 May 2022 01:47:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Rvwn=VM=chromium.org=keescook@srs-se1.protection.inumbo.net>)
- id 1nm47D-0007U4-DV
- for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:47:43 +0000
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [2607:f8b0:4864:20::42d])
+ id 1nm47F-0007U4-CE
+ for xen-devel@lists.xenproject.org; Wed, 04 May 2022 01:47:45 +0000
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [2607:f8b0:4864:20::534])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2f320c5b-cb4c-11ec-8fc4-03012f2f19d4;
- Wed, 04 May 2022 03:47:42 +0200 (CEST)
-Received: by mail-pf1-x42d.google.com with SMTP id bo5so13454pfb.4
- for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:47:42 -0700 (PDT)
+ id 30645da1-cb4c-11ec-8fc4-03012f2f19d4;
+ Wed, 04 May 2022 03:47:44 +0200 (CEST)
+Received: by mail-pg1-x534.google.com with SMTP id i62so13977pgd.6
+ for <xen-devel@lists.xenproject.org>; Tue, 03 May 2022 18:47:44 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
  by smtp.gmail.com with ESMTPSA id
- f1-20020aa782c1000000b0051008603b66sm534694pfn.219.2022.05.03.18.47.37
+ a7-20020aa780c7000000b0050dc76281b6sm7143766pfn.144.2022.05.03.18.47.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 May 2022 18:47:39 -0700 (PDT)
+ Tue, 03 May 2022 18:47:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,42 +46,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2f320c5b-cb4c-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 30645da1-cb4c-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=z9UACyPlKQMpsfBiUxRNSWJwLKyqQ0BVbIzFlqTVpEg=;
-        b=VrQ6dmSQ7VwQQlIfvwbiI2ql0BVm4J4y9LnkKFZwetWH13cFjtZDcQhXtoigM+PS1n
-         cWMsbR1tWdnyAFxVTIwv3Ub+HJcEvYJUmHiHKdd7Tvd9COj+RhcM0WyuPg5dj9PivY8a
-         z6yX6sb9Wvgoc2VwmZES4MbGCx8+oyfzVBgW4=
+        bh=c1Rtb5BPD8+4OzMMFAYya8AfbyIngu3+nEeMZt3y0UI=;
+        b=PPT74quvAq5PeXKx/MiU6TPQu9k3CNU13XJUuKL0EyoDADIEUu/0flA/RnFvgA1c7X
+         mBDEtN+hqIFmsdnm+Z9MnOUhAzMjdHFmhT3p34uRueOVQQXniPBqP+mbSA7EtL7aqOIy
+         RKCLgSNE4LzNp+Ti/YBiXR973K5zL+mViu9iQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=z9UACyPlKQMpsfBiUxRNSWJwLKyqQ0BVbIzFlqTVpEg=;
-        b=IQc73+5+jKk96efUyDTD3gTkunWq2894dqstlAop9DyrjkJ4koVNYprOBNR0o6iWuu
-         ttyyGE0DA7eMak94UfLE4RWoH2EInMETvnEm9CQiP8mITOj7tSOTokPouFsTm0dJ5aic
-         uVgd/mhCWncK6BGx6qHjZk85LWS2tAzBZB2t+hqidE6XwftyJctB9Cg3aNZZAA+BcrRU
-         S61l1ROJsbDsEkbKMJFqxO3Jk1XRKSnhJOV0h00+NrASp5dHo3XrTrx6Lx7YSpLiTBMR
-         MsJ/H/mxTfbjF74p4tY5y6gptI55UXogvT/pJh9I85Q5MPEH021JziWFfaF3IuMigrQ0
-         miog==
-X-Gm-Message-State: AOAM530KAJJYmW2vg+nEl2TmdKlMAvsMmqus0TtRuspcZhCxZvLRwnS5
-	wpLbBNbzBGmm0Wql+v6uIVszTQ==
-X-Google-Smtp-Source: ABdhPJwEApgoIF80IVfCqZ7Wc14eeSv0NeFMafCSFu13taEwh77M4/lfD99nmAtgnvxZOmH48ydyyA==
-X-Received: by 2002:a65:524b:0:b0:383:1b87:2d21 with SMTP id q11-20020a65524b000000b003831b872d21mr15967593pgp.482.1651628860634;
-        Tue, 03 May 2022 18:47:40 -0700 (PDT)
+        bh=c1Rtb5BPD8+4OzMMFAYya8AfbyIngu3+nEeMZt3y0UI=;
+        b=CBO3FRDCo5FT6GIKWHYp9yxSblV7fccPJ2I9MDCAx1PEQdt8JvhDr1UTA6s13LL1Iz
+         0pkzl7zuACVxgs+p/0CYYzRh10dkrScKKbGZTdQlMc0sYcd72UQXzJnPLTJlm0gsB5e5
+         EY9d8B5JhQzRvQeLzYAyyBZ2KKgBG0ziboIJxJqV0lWN/FpS6O1j3miuwVpMGQFZji4/
+         XwY+ogzgIuRehZwQHM1j5JnDC7pH/c7TozhpfIsmODNKgyGaB8AU2ugjNaqpNs5uwoUn
+         XMlNKWyZ4iKcCeTPuiDEYfScytsQ112Gbolf42UKI7OhZF43tYnxmq8NYw1s3SQ+dyWb
+         mZlQ==
+X-Gm-Message-State: AOAM530H68nr/Q9u8iJJC9ynwMBV/6VY2Y21w8CSTk0uZX1+jP8l+hbJ
+	21vYkYEX4l0HN/3ICgKl3a2t3w==
+X-Google-Smtp-Source: ABdhPJxnr15nFI48HkUIGCzg3Ti+ux7Hnf2+eF3BCNGMnuO30iNkq86oUQW51ItlsFi5999/esgbAg==
+X-Received: by 2002:a62:33c2:0:b0:50d:a588:daab with SMTP id z185-20020a6233c2000000b0050da588daabmr18437024pfz.31.1651628862604;
+        Tue, 03 May 2022 18:47:42 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: "Gustavo A . R . Silva" <gustavoars@kernel.org>
 Cc: Kees Cook <keescook@chromium.org>,
-	Christian Lamparter <chunkeey@googlemail.com>,
-	Kalle Valo <kvalo@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	linux-wireless@vger.kernel.org,
-	netdev@vger.kernel.org,
+	Stefan Richter <stefanr@s5r6.in-berlin.de>,
+	linux1394-devel@lists.sourceforge.net,
 	Alexei Starovoitov <ast@kernel.org>,
 	alsa-devel@alsa-project.org,
 	Al Viro <viro@zeniv.linux.org.uk>,
@@ -97,6 +91,7 @@ Cc: Kees Cook <keescook@chromium.org>,
 	brcm80211-dev-list.pdl@broadcom.com,
 	Christian Brauner <brauner@kernel.org>,
 	=?UTF-8?q?Christian=20G=C3=B6ttsche?= <cgzones@googlemail.com>,
+	Christian Lamparter <chunkeey@googlemail.com>,
 	Chris Zankel <chris@zankel.net>,
 	Cong Wang <cong.wang@bytedance.com>,
 	Daniel Axtens <dja@axtens.net>,
@@ -104,11 +99,13 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Dan Williams <dan.j.williams@intel.com>,
 	David Gow <davidgow@google.com>,
 	David Howells <dhowells@redhat.com>,
+	"David S. Miller" <davem@davemloft.net>,
 	Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
 	devicetree@vger.kernel.org,
 	Dexuan Cui <decui@microsoft.com>,
 	Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
 	Eli Cohen <elic@nvidia.com>,
+	Eric Dumazet <edumazet@google.com>,
 	Eric Paris <eparis@parisplace.org>,
 	Eugeniu Rosca <erosca@de.adit-jv.com>,
 	Felipe Balbi <balbi@kernel.org>,
@@ -122,6 +119,7 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Hante Meuleman <hante.meuleman@broadcom.com>,
 	Herbert Xu <herbert@gondor.apana.org.au>,
 	Hulk Robot <hulkci@huawei.com>,
+	Jakub Kicinski <kuba@kernel.org>,
 	"James E.J. Bottomley" <jejb@linux.ibm.com>,
 	James Morris <jmorris@namei.org>,
 	Jarkko Sakkinen <jarkko@kernel.org>,
@@ -133,6 +131,7 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Johannes Berg <johannes@sipsolutions.net>,
 	John Keeping <john@metanate.com>,
 	Juergen Gross <jgross@suse.com>,
+	Kalle Valo <kvalo@kernel.org>,
 	Keith Packard <keithp@keithp.com>,
 	keyrings@vger.kernel.org,
 	kunit-dev@googlegroups.com,
@@ -142,7 +141,6 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Lee Jones <lee.jones@linaro.org>,
 	Leon Romanovsky <leon@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
-	linux1394-devel@lists.sourceforge.net,
 	linux-afs@lists.infradead.org,
 	linux-arm-kernel@lists.infradead.org,
 	linux-arm-msm@vger.kernel.org,
@@ -154,6 +152,7 @@ Cc: Kees Cook <keescook@chromium.org>,
 	linux-scsi@vger.kernel.org,
 	linux-security-module@vger.kernel.org,
 	linux-usb@vger.kernel.org,
+	linux-wireless@vger.kernel.org,
 	linux-xtensa@linux-xtensa.org,
 	llvm@lists.linux.dev,
 	Loic Poulain <loic.poulain@linaro.org>,
@@ -168,8 +167,10 @@ Cc: Kees Cook <keescook@chromium.org>,
 	Mimi Zohar <zohar@linux.ibm.com>,
 	Muchun Song <songmuchun@bytedance.com>,
 	Nathan Chancellor <nathan@kernel.org>,
+	netdev@vger.kernel.org,
 	Nick Desaulniers <ndesaulniers@google.com>,
 	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
+	Paolo Abeni <pabeni@redhat.com>,
 	Paul Moore <paul@paul-moore.com>,
 	Rich Felker <dalias@aerifal.cx>,
 	Rob Herring <robh+dt@kernel.org>,
@@ -179,7 +180,6 @@ Cc: Kees Cook <keescook@chromium.org>,
 	SHA-cyfmac-dev-list@infineon.com,
 	Simon Horman <simon.horman@corigine.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Stefan Richter <stefanr@s5r6.in-berlin.de>,
 	Steffen Klassert <steffen.klassert@secunet.com>,
 	Stephen Hemminger <sthemmin@microsoft.com>,
 	Stephen Smalley <stephen.smalley.work@gmail.com>,
@@ -193,14 +193,14 @@ Cc: Kees Cook <keescook@chromium.org>,
 	xen-devel@lists.xenproject.org,
 	Xiu Jianfeng <xiujianfeng@huawei.com>,
 	Yang Yingliang <yangyingliang@huawei.com>
-Subject: [PATCH 09/32] p54: Use mem_to_flex_dup() with struct p54_cal_database
-Date: Tue,  3 May 2022 18:44:18 -0700
-Message-Id: <20220504014440.3697851-10-keescook@chromium.org>
+Subject: [PATCH 18/32] firewire: Use __mem_to_flex_dup() with struct iso_interrupt_event
+Date: Tue,  3 May 2022 18:44:27 -0700
+Message-Id: <20220504014440.3697851-19-keescook@chromium.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220504014440.3697851-1-keescook@chromium.org>
 References: <20220504014440.3697851-1-keescook@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2429; h=from:subject; bh=nMnYI58OZL/NYqqBGThX6X9At9N55AKclw2PdmxLkv8=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqCpEYc7sUWDpluF0bUB90CkVbrB3/z8O0fymGg eduju0uJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHaggAKCRCJcvTf3G3AJkJoEA CB3d+CRBr1VkScrlHfbIs1LkNyymQ0HwJgl7p4QyueseREG9Mt5326Iwc7RqKF+Rn+YzyWk8dFShzv z6gbI8PNrGAqBPz5BIqLg3dYYHVK5dPPYcYrISNYxFwyXlYH5CnwM8gllN72k9RJxbWzAxh0A+60N/ jviJWlHykiM1Zhxd/qazs6ZevTYO060Zif3DN8WCX/LuwNHp30u5sclQ55oDW3betiobkSC6Ov1eP6 Hi7uDPuaVPlM2ZtdStVUbJUtmb0ddMSgxtTLjFPmzu+/igOg0pwYTovc41hbeEbBnxlRHIoUJWYLEF 9HwXpVeVj29IIka07Wj1DhYds+eo/zSM1UgogveTLy1YqauYGa0HDWQq9oUmlyE1DVBtfNlwDKfQFw abW5WTkLqlaK1bDWZEM/2f5rXJ6Qb2wLF8985KU4MwKaSdM+Jib4Npl3mdvg3RTIqLUDL5C0EsnPZd jx7VWu4NuZxHBeVOpG042kcl9h6NgrzPV4i2lneNTdK9Mf4aIUBuhXuEi0RjjZPRX5KWBWDETa+SHA xIpk2sXTFarSyRcDwvPPRN7FWxxM5y5OPAGRGPRQhj9zCDB+Eh+NAEZe1GFUTZYOWu4PHtyiVVuH0q lf+bEbHqDfX8rt+XVzeUsKcH3bW7KZvEkMLgB/C70MIwPtiUdXvWDMDbvCRw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2017; h=from:subject; bh=En62c6cYeUTmU8jbvcTu7IkYSFHpDUIXfTMNPx9PLGc=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBicdqEY3t8cFKELeYkm2NJIduUgR+ZPwYvLuYXHKSq h9RlNwCJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYnHahAAKCRCJcvTf3G3AJmzQD/ 40OwL2hRSWj9CwaOb0EjwNMYNrEpXdJJUx4PtLsO50tNm7kViyp0rIIENwt0Refm3UMfgJOd4uhpAP UnN8m9LoCHDWTn2Ip+vIMDS3s7F5W2nAcbk5hF/C+qyUcxpZ01AbHR+GyZjxwzVt9qEG+TAXzPRQnp dfwWrtSjiyM2jKV9PjBNt6qRhM7Jxt/+wokWBFK4eM8IKP5wMTPXf0n1BGa/3mFi6dkoZD+yXtl4IT q4PePWOvlJ8zihIyMKu6xe3P2Cd5gPfwiDcsKwkrzufOJPHAEhY8riHbDxYytvqLGG7bw341elDFvM fFg+b/yC+gowOuz1miET0BDC+cA6vVe4BMDspdtGoFbNEJfsp72+AkNfwxKDENX6TekjFRU3iHzOci lPoBqEyf2AILOQko5Kh9u3twT5Z6Azf7bj/NRatR/QKpZXBkjRcvBCR8SN8nlgdnYckPdhxRBU5YUS IHSagdIFo3kzcAF1P/Aq785Nakdj4SMvQp66HlJm0gKK57rvSGhQtlRXIDROMfObo/Dar+MBASK/fr qWo15PcDT/tqMlbzcrYAAB4BcvmIgHfXG5riesv5IcmZv6ehMHVZTaM4Sf1wIA6V0OWztJpmHeUVBs 1l35/YNa44KeLfFackz/5o7jU6Cqxn/jknqaXV6GkQkL2jafxDjZYhz781sQ==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Content-Transfer-Encoding: 8bit
 
@@ -209,66 +209,53 @@ replace the open-coded a deserialization of bytes out of memory into a
 trailing flexible array by using a flex_array.h helper to perform the
 allocation, bounds checking, and copying.
 
-Cc: Christian Lamparter <chunkeey@googlemail.com>
-Cc: Kalle Valo <kvalo@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Eric Dumazet <edumazet@google.com>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Paolo Abeni <pabeni@redhat.com>
-Cc: linux-wireless@vger.kernel.org
-Cc: netdev@vger.kernel.org
+Cc: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Cc: linux1394-devel@lists.sourceforge.net
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- drivers/net/wireless/intersil/p54/eeprom.c | 8 ++------
- drivers/net/wireless/intersil/p54/p54.h    | 4 ++--
- 2 files changed, 4 insertions(+), 8 deletions(-)
+ drivers/firewire/core-cdev.c       | 7 ++-----
+ include/uapi/linux/firewire-cdev.h | 4 ++--
+ 2 files changed, 4 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/net/wireless/intersil/p54/eeprom.c b/drivers/net/wireless/intersil/p54/eeprom.c
-index 5bd35c147e19..bd9b3ea327b9 100644
---- a/drivers/net/wireless/intersil/p54/eeprom.c
-+++ b/drivers/net/wireless/intersil/p54/eeprom.c
-@@ -702,7 +702,7 @@ static int p54_convert_output_limits(struct ieee80211_hw *dev,
- static struct p54_cal_database *p54_convert_db(struct pda_custom_wrapper *src,
- 					       size_t total_len)
+diff --git a/drivers/firewire/core-cdev.c b/drivers/firewire/core-cdev.c
+index c9fe5903725a..7e884c61e12e 100644
+--- a/drivers/firewire/core-cdev.c
++++ b/drivers/firewire/core-cdev.c
+@@ -913,17 +913,14 @@ static void iso_callback(struct fw_iso_context *context, u32 cycle,
+ 			 size_t header_length, void *header, void *data)
  {
--	struct p54_cal_database *dst;
-+	struct p54_cal_database *dst = NULL;
- 	size_t payload_len, entries, entry_size, offset;
+ 	struct client *client = data;
+-	struct iso_interrupt_event *e;
++	struct iso_interrupt_event *e = NULL;
  
- 	payload_len = le16_to_cpu(src->len);
-@@ -713,16 +713,12 @@ static struct p54_cal_database *p54_convert_db(struct pda_custom_wrapper *src,
- 	     (payload_len + sizeof(*src) != total_len))
- 		return NULL;
+-	e = kmalloc(sizeof(*e) + header_length, GFP_ATOMIC);
+-	if (e == NULL)
++	if (__mem_to_flex_dup(&e, .interrupt, header, header_length, GFP_ATOMIC))
+ 		return;
  
--	dst = kmalloc(sizeof(*dst) + payload_len, GFP_KERNEL);
--	if (!dst)
-+	if (mem_to_flex_dup(&dst, src->data, payload_len, GFP_KERNEL))
- 		return NULL;
- 
- 	dst->entries = entries;
- 	dst->entry_size = entry_size;
- 	dst->offset = offset;
--	dst->len = payload_len;
--
--	memcpy(dst->data, src->data, payload_len);
- 	return dst;
+ 	e->interrupt.type      = FW_CDEV_EVENT_ISO_INTERRUPT;
+ 	e->interrupt.closure   = client->iso_closure;
+ 	e->interrupt.cycle     = cycle;
+-	e->interrupt.header_length = header_length;
+-	memcpy(e->interrupt.header, header, header_length);
+ 	queue_event(client, &e->event, &e->interrupt,
+ 		    sizeof(e->interrupt) + header_length, NULL, 0);
  }
- 
-diff --git a/drivers/net/wireless/intersil/p54/p54.h b/drivers/net/wireless/intersil/p54/p54.h
-index 3356ea708d81..22bbb6d28245 100644
---- a/drivers/net/wireless/intersil/p54/p54.h
-+++ b/drivers/net/wireless/intersil/p54/p54.h
-@@ -125,8 +125,8 @@ struct p54_cal_database {
- 	size_t entries;
- 	size_t entry_size;
- 	size_t offset;
--	size_t len;
--	u8 data[];
-+	DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(size_t, len);
-+	DECLARE_FLEX_ARRAY_ELEMENTS(u8, data);
+diff --git a/include/uapi/linux/firewire-cdev.h b/include/uapi/linux/firewire-cdev.h
+index 5effa9832802..22c5f59e9dfa 100644
+--- a/include/uapi/linux/firewire-cdev.h
++++ b/include/uapi/linux/firewire-cdev.h
+@@ -264,8 +264,8 @@ struct fw_cdev_event_iso_interrupt {
+ 	__u64 closure;
+ 	__u32 type;
+ 	__u32 cycle;
+-	__u32 header_length;
+-	__u32 header[0];
++	__DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(__u32, header_length);
++	__DECLARE_FLEX_ARRAY_ELEMENTS(__u32, header);
  };
  
- #define EEPROM_READBACK_LEN 0x3fc
+ /**
 -- 
 2.32.0
 
