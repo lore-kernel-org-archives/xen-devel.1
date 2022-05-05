@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE588C433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  5 May 2022 08:32:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.321798.542956 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E22C433F5
+	for <xen-devel@archiver.kernel.org>; Thu,  5 May 2022 08:39:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.321827.542966 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmWuE-0000TQ-7S; Thu, 05 May 2022 08:32:14 +0000
+	id 1nmX0T-0001HG-Sl; Thu, 05 May 2022 08:38:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 321798.542956; Thu, 05 May 2022 08:32:14 +0000
+Received: by outflank-mailman (output) from mailman id 321827.542966; Thu, 05 May 2022 08:38:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmWuE-0000TJ-4o; Thu, 05 May 2022 08:32:14 +0000
-Received: by outflank-mailman (input) for mailman id 321798;
- Thu, 05 May 2022 08:32:13 +0000
+	id 1nmX0T-0001H9-Q4; Thu, 05 May 2022 08:38:41 +0000
+Received: by outflank-mailman (input) for mailman id 321827;
+ Thu, 05 May 2022 08:38:41 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=YMz1=VN=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nmWfP-0001o5-Bc
- for xen-devel@lists.xenproject.org; Thu, 05 May 2022 08:16:55 +0000
+ id 1nmWfQ-0001o5-Bj
+ for xen-devel@lists.xenproject.org; Thu, 05 May 2022 08:16:56 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b591ea6b-cc4b-11ec-a406-831a346695d4;
- Thu, 05 May 2022 10:16:48 +0200 (CEST)
+ id b63b1ddf-cc4b-11ec-a406-831a346695d4;
+ Thu, 05 May 2022 10:16:49 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 12A012129A;
- Thu,  5 May 2022 08:16:48 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 4ABF921871;
+ Thu,  5 May 2022 08:16:49 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CCA8B13B11;
- Thu,  5 May 2022 08:16:47 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 1888F13B11;
+ Thu,  5 May 2022 08:16:49 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id kD2xMO+Hc2K1BwAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 05 May 2022 08:16:47 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id SCawBPGHc2K1BwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 05 May 2022 08:16:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,132 +53,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b591ea6b-cc4b-11ec-a406-831a346695d4
+X-Inumbo-ID: b63b1ddf-cc4b-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1651738608; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1651738609; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=IedMI7VTW3rOengTxIhbDIljAXRKt8bJ55HpQHeXTKE=;
-	b=icajDoZbBIwzJ6XcUYvjT5rdUpqaOLHVx+KJgSdfR6jIBErNSkSt0o44KvdViEe6Gl4dxM
-	y8ety7dLU+QVWAR9qvUOSPuT4K7BvqCgmQSR10XuH36FLkxabJLU+fZ6mW8c6f0yU+WgIg
-	CVjSUZA1EqxHMUE0Gi/sxDg4kyBRsoM=
+	bh=Hj6JgClEpjn6TGh0jHUJx9zkFBBp/YGxKjjz8AW9Jwc=;
+	b=eY1x7w8cnLUr3BuPmzWU96Csqt2i/OipoBessbn74oEwg3ab+rmGZw1odPnIDFmotJ228A
+	/1dxHTptERgmJGhz1nf4m63A8AAXb/45etB0cEKFtDLH5dit6Hh0FKkDHrpay1UhjHuHSg
+	sEPUMV6nZWaJFy2qqBkz6PIq5nWPZ7s=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
-	dri-devel@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	David Airlie <airlied@linux.ie>,
-	Daniel Vetter <daniel@ffwll.ch>
-Subject: [PATCH v3 16/21] xen/drmfront: use xenbus_setup_ring() and xenbus_teardown_ring()
-Date: Thu,  5 May 2022 10:16:35 +0200
-Message-Id: <20220505081640.17425-17-jgross@suse.com>
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH v3 21/21] xen/xenbus: eliminate xenbus_grant_ring()
+Date: Thu,  5 May 2022 10:16:40 +0200
+Message-Id: <20220505081640.17425-22-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220505081640.17425-1-jgross@suse.com>
 References: <20220505081640.17425-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Simplify drmfront's ring creation and removal via xenbus_setup_ring()
-and xenbus_teardown_ring().
+There is no external user of xenbus_grant_ring() left, so merge it into
+the only caller xenbus_setup_ring().
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 ---
- drivers/gpu/drm/xen/xen_drm_front_evtchnl.c | 43 ++++++---------------
- 1 file changed, 11 insertions(+), 32 deletions(-)
+V2:
+- make error message more precise (Andrew Cooper)
+---
+ drivers/xen/xenbus/xenbus_client.c | 65 +++++++++---------------------
+ include/xen/xenbus.h               |  2 -
+ 2 files changed, 19 insertions(+), 48 deletions(-)
 
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c b/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-index 4006568b9e32..e52afd792346 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_evtchnl.c
-@@ -123,12 +123,12 @@ static irqreturn_t evtchnl_interrupt_evt(int irq, void *dev_id)
- static void evtchnl_free(struct xen_drm_front_info *front_info,
- 			 struct xen_drm_front_evtchnl *evtchnl)
- {
--	unsigned long page = 0;
-+	void *page = NULL;
- 
- 	if (evtchnl->type == EVTCHNL_TYPE_REQ)
--		page = (unsigned long)evtchnl->u.req.ring.sring;
-+		page = evtchnl->u.req.ring.sring;
- 	else if (evtchnl->type == EVTCHNL_TYPE_EVT)
--		page = (unsigned long)evtchnl->u.evt.page;
-+		page = evtchnl->u.evt.page;
- 	if (!page)
- 		return;
- 
-@@ -147,8 +147,7 @@ static void evtchnl_free(struct xen_drm_front_info *front_info,
- 		xenbus_free_evtchn(front_info->xb_dev, evtchnl->port);
- 
- 	/* end access and free the page */
--	if (evtchnl->gref != INVALID_GRANT_REF)
--		gnttab_end_foreign_access(evtchnl->gref, page);
-+	xenbus_teardown_ring(&page, 1, &evtchnl->gref);
- 
- 	memset(evtchnl, 0, sizeof(*evtchnl));
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 1a2e0d94ccd1..d6fdd2d209d3 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -363,50 +363,6 @@ static void xenbus_switch_fatal(struct xenbus_device *dev, int depth, int err,
+ 		__xenbus_switch_state(dev, XenbusStateClosing, 1);
  }
-@@ -158,8 +157,7 @@ static int evtchnl_alloc(struct xen_drm_front_info *front_info, int index,
- 			 enum xen_drm_front_evtchnl_type type)
+ 
+-/**
+- * xenbus_grant_ring
+- * @dev: xenbus device
+- * @vaddr: starting virtual address of the ring
+- * @nr_pages: number of pages to be granted
+- * @grefs: grant reference array to be filled in
+- *
+- * Grant access to the given @vaddr to the peer of the given device.
+- * Then fill in @grefs with grant references.  Return 0 on success, or
+- * -errno on error.  On error, the device will switch to
+- * XenbusStateClosing, and the error will be saved in the store.
+- */
+-int xenbus_grant_ring(struct xenbus_device *dev, void *vaddr,
+-		      unsigned int nr_pages, grant_ref_t *grefs)
+-{
+-	int err;
+-	unsigned int i;
+-	grant_ref_t gref_head;
+-
+-	err = gnttab_alloc_grant_references(nr_pages, &gref_head);
+-	if (err) {
+-		xenbus_dev_fatal(dev, err, "granting access to ring page");
+-		return err;
+-	}
+-
+-	for (i = 0; i < nr_pages; i++) {
+-		unsigned long gfn;
+-
+-		if (is_vmalloc_addr(vaddr))
+-			gfn = pfn_to_gfn(vmalloc_to_pfn(vaddr));
+-		else
+-			gfn = virt_to_gfn(vaddr);
+-
+-		grefs[i] = gnttab_claim_grant_reference(&gref_head);
+-		gnttab_grant_foreign_access_ref(grefs[i], dev->otherend_id,
+-						gfn, 0);
+-
+-		vaddr = vaddr + XEN_PAGE_SIZE;
+-	}
+-
+-	return 0;
+-}
+-EXPORT_SYMBOL_GPL(xenbus_grant_ring);
+-
+ /*
+  * xenbus_setup_ring
+  * @dev: xenbus device
+@@ -424,6 +380,7 @@ int xenbus_setup_ring(struct xenbus_device *dev, gfp_t gfp, void **vaddr,
+ 		      unsigned int nr_pages, grant_ref_t *grefs)
  {
- 	struct xenbus_device *xb_dev = front_info->xb_dev;
--	unsigned long page;
--	grant_ref_t gref;
-+	void *page;
- 	irq_handler_t handler;
+ 	unsigned long ring_size = nr_pages * XEN_PAGE_SIZE;
++	grant_ref_t gref_head;
+ 	unsigned int i;
  	int ret;
  
-@@ -168,44 +166,25 @@ static int evtchnl_alloc(struct xen_drm_front_info *front_info, int index,
- 	evtchnl->index = index;
- 	evtchnl->front_info = front_info;
- 	evtchnl->state = EVTCHNL_STATE_DISCONNECTED;
--	evtchnl->gref = INVALID_GRANT_REF;
- 
--	page = get_zeroed_page(GFP_NOIO | __GFP_HIGH);
--	if (!page) {
--		ret = -ENOMEM;
-+	ret = xenbus_setup_ring(xb_dev, GFP_NOIO | __GFP_HIGH, &page,
-+				1, &evtchnl->gref);
-+	if (ret)
- 		goto fail;
--	}
- 
- 	if (type == EVTCHNL_TYPE_REQ) {
- 		struct xen_displif_sring *sring;
- 
- 		init_completion(&evtchnl->u.req.completion);
- 		mutex_init(&evtchnl->u.req.req_io_lock);
--		sring = (struct xen_displif_sring *)page;
--		SHARED_RING_INIT(sring);
--		FRONT_RING_INIT(&evtchnl->u.req.ring, sring, XEN_PAGE_SIZE);
--
--		ret = xenbus_grant_ring(xb_dev, sring, 1, &gref);
--		if (ret < 0) {
--			evtchnl->u.req.ring.sring = NULL;
--			free_page(page);
--			goto fail;
--		}
-+		sring = page;
-+		XEN_FRONT_RING_INIT(&evtchnl->u.req.ring, sring, XEN_PAGE_SIZE);
- 
- 		handler = evtchnl_interrupt_ctrl;
- 	} else {
--		ret = gnttab_grant_foreign_access(xb_dev->otherend_id,
--						  virt_to_gfn((void *)page), 0);
--		if (ret < 0) {
--			free_page(page);
--			goto fail;
--		}
--
--		evtchnl->u.evt.page = (struct xendispl_event_page *)page;
--		gref = ret;
-+		evtchnl->u.evt.page = page;
- 		handler = evtchnl_interrupt_evt;
+@@ -433,9 +390,25 @@ int xenbus_setup_ring(struct xenbus_device *dev, gfp_t gfp, void **vaddr,
+ 		goto err;
  	}
--	evtchnl->gref = gref;
  
- 	ret = xenbus_alloc_evtchn(xb_dev, &evtchnl->port);
- 	if (ret < 0)
+-	ret = xenbus_grant_ring(dev, *vaddr, nr_pages, grefs);
+-	if (ret)
++	ret = gnttab_alloc_grant_references(nr_pages, &gref_head);
++	if (ret) {
++		xenbus_dev_fatal(dev, ret, "granting access to %u ring pages",
++				 nr_pages);
+ 		goto err;
++	}
++
++	for (i = 0; i < nr_pages; i++) {
++		unsigned long gfn;
++
++		if (is_vmalloc_addr(*vaddr))
++			gfn = pfn_to_gfn(vmalloc_to_pfn(vaddr[i]));
++		else
++			gfn = virt_to_gfn(vaddr[i]);
++
++		grefs[i] = gnttab_claim_grant_reference(&gref_head);
++		gnttab_grant_foreign_access_ref(grefs[i], dev->otherend_id,
++						gfn, 0);
++	}
+ 
+ 	return 0;
+ 
+diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
+index b533b4adc835..eaa932b99d8a 100644
+--- a/include/xen/xenbus.h
++++ b/include/xen/xenbus.h
+@@ -224,8 +224,6 @@ int xenbus_watch_pathfmt(struct xenbus_device *dev, struct xenbus_watch *watch,
+ 			 const char *pathfmt, ...);
+ 
+ int xenbus_switch_state(struct xenbus_device *dev, enum xenbus_state new_state);
+-int xenbus_grant_ring(struct xenbus_device *dev, void *vaddr,
+-		      unsigned int nr_pages, grant_ref_t *grefs);
+ int xenbus_setup_ring(struct xenbus_device *dev, gfp_t gfp, void **vaddr,
+ 		      unsigned int nr_pages, grant_ref_t *grefs);
+ void xenbus_teardown_ring(void **vaddr, unsigned int nr_pages,
 -- 
 2.35.3
 
