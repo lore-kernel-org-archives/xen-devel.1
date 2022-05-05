@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDF9C433F5
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6981C433FE
 	for <xen-devel@archiver.kernel.org>; Thu,  5 May 2022 02:54:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.321316.542303 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.321314.542281 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmRdJ-00017c-5Q; Thu, 05 May 2022 02:54:25 +0000
+	id 1nmRdG-0000cZ-KP; Thu, 05 May 2022 02:54:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 321316.542303; Thu, 05 May 2022 02:54:25 +0000
+Received: by outflank-mailman (output) from mailman id 321314.542281; Thu, 05 May 2022 02:54:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmRdJ-00017V-1Y; Thu, 05 May 2022 02:54:25 +0000
-Received: by outflank-mailman (input) for mailman id 321316;
- Thu, 05 May 2022 02:54:23 +0000
+	id 1nmRdG-0000cS-Hd; Thu, 05 May 2022 02:54:22 +0000
+Received: by outflank-mailman (input) for mailman id 321314;
+ Thu, 05 May 2022 02:54:21 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=1YwP=VN=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
- id 1nmRdH-0000cH-RT
- for xen-devel@lists.xenproject.org; Thu, 05 May 2022 02:54:23 +0000
+ id 1nmRdF-0000cH-9s
+ for xen-devel@lists.xenproject.org; Thu, 05 May 2022 02:54:21 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id aab10dc1-cc1e-11ec-a406-831a346695d4;
- Thu, 05 May 2022 04:54:22 +0200 (CEST)
+ id a89ebb83-cc1e-11ec-a406-831a346695d4;
+ Thu, 05 May 2022 04:54:19 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 668881042;
- Wed,  4 May 2022 19:54:22 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CBDDC1042;
+ Wed,  4 May 2022 19:54:18 -0700 (PDT)
 Received: from a015966.shanghai.arm.com (a015966.shanghai.arm.com
  [10.169.190.24])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 416D03FA35;
- Wed,  4 May 2022 19:54:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 627533FA35;
+ Wed,  4 May 2022 19:54:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,88 +45,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aab10dc1-cc1e-11ec-a406-831a346695d4
+X-Inumbo-ID: a89ebb83-cc1e-11ec-a406-831a346695d4
 From: Henry Wang <Henry.Wang@arm.com>
 To: xen-devel@lists.xenproject.org,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH 2/2] xen/common: Use enhanced ASSERT_ALLOC_CONTEXT in xmalloc()
-Date: Thu,  5 May 2022 10:54:07 +0800
-Message-Id: <20220505025407.919988-3-Henry.Wang@arm.com>
+	Julien Grall <julien@xen.org>,
+	Wei Chen <Wei.Chen@arm.com>
+Subject: [PATCH 0/2] Adjustment after introducing ASSERT_ALLOC_CONTEXT
+Date: Thu,  5 May 2022 10:54:05 +0800
+Message-Id: <20220505025407.919988-1-Henry.Wang@arm.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220505025407.919988-1-Henry.Wang@arm.com>
-References: <20220505025407.919988-1-Henry.Wang@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-xmalloc() will use a pool for allocation smaller than a page.
-The pool is extended only when there are no more space. At which
-point, alloc_xenheap_pages() is called to add more memory.
+With the enhanced ASSERT_ALLOC_CONTEXT, calling request_irq before
+local_irq_enable on secondary cores on Arm will lead to
 
-xmalloc() must be protected by ASSERT_ALLOC_CONTEXT. It should not
-rely on pool expanding to trigger the ASSERT_ALLOC_CONTEXT in
-alloc_xenheap_pages(). Hence, this commit moves the definition of
-ASSERT_ALLOC_CONTEXT to header and uses the ASSERT_ALLOC_CONTEXT
-to replace the original assertion in xmalloc().
+(XEN) Xen call trace:
+(XEN) [<000000000021d86c>] alloc_xenheap_pages+0x74/0x194 (PC)
+(XEN) [<000000000021d864>] alloc_xenheap_pages+0x6c/0x194 (LR)
+(XEN) [<0000000000229e90>] xmalloc_tlsf.c#xmalloc_pool_get+0x1c/0x28
+(XEN) [<000000000022a270>] xmem_pool_alloc+0x21c/0x448
+(XEN) [<000000000022a8dc>] _xmalloc+0x8c/0x290
+(XEN) [<000000000026b57c>] request_irq+0x40/0xb8
+(XEN) [<0000000000272780>] init_timer_interrupt+0x74/0xcc
+(XEN) [<000000000027212c>] start_secondary+0x1b4/0x238
+(XEN) [<0000000084000200>] 0000000084000200
+(XEN)
+(XEN)
+(XEN) ****************************************
+(XEN) Panic on CPU 4:
+(XEN) Assertion '!in_irq() && (local_irq_is_enabled() ||
+num_online_cpus() <= 1)' failed at common/page_alloc.c:2212
+(XEN) ****************************************
 
-Reported-by: Wei Chen <Wei.Chen@arm.com>
-Suggested-by: Julien Grall <jgrall@amazon.com>
-Signed-off-by: Henry Wang <Henry.Wang@arm.com>
-Change-Id: Ia463d2241e80e8a78d7dbb5b2318694d3ca5ed67
----
+on systems without a big enough pool for xmalloc() to cater the
+requested size. To solve this issue, this series introduces two
+patches. The first one defers the calling of request_irq on
+secondary CPUs after local_irq_enable on Arm. The second one
+moves the definition of ASSERT_ALLOC_CONTEXT to header and uses
+the ASSERT_ALLOC_CONTEXT to replace the original assertion in
+xmalloc().
+
+Henry Wang (2):
+  xen/arm: Defer request_irq on secondary CPUs after local_irq_enable
+  xen/common: Use enhanced ASSERT_ALLOC_CONTEXT in xmalloc()
+
+ xen/arch/arm/smpboot.c    | 7 ++++---
  xen/common/page_alloc.c   | 7 -------
  xen/common/xmalloc_tlsf.c | 2 +-
  xen/include/xen/irq.h     | 7 +++++++
- 3 files changed, 8 insertions(+), 8 deletions(-)
+ 4 files changed, 12 insertions(+), 11 deletions(-)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index e866e0d864..ea59cd1a4a 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -162,13 +162,6 @@
- static char __initdata opt_badpage[100] = "";
- string_param("badpage", opt_badpage);
- 
--/*
-- * Heap allocations may need TLB flushes which may require IRQs to be
-- * enabled (except when only 1 PCPU is online).
-- */
--#define ASSERT_ALLOC_CONTEXT() \
--    ASSERT(!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1))
--
- /*
-  * no-bootscrub -> Free pages are not zeroed during boot.
-  */
-diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
-index d2ad909502..b8f838ae74 100644
---- a/xen/common/xmalloc_tlsf.c
-+++ b/xen/common/xmalloc_tlsf.c
-@@ -594,7 +594,7 @@ void *_xmalloc(unsigned long size, unsigned long align)
- {
-     void *p = NULL;
- 
--    ASSERT(!in_irq());
-+    ASSERT_ALLOC_CONTEXT();
- 
-     if ( !size )
-         return ZERO_BLOCK_PTR;
-diff --git a/xen/include/xen/irq.h b/xen/include/xen/irq.h
-index d8beadd16b..300625e56d 100644
---- a/xen/include/xen/irq.h
-+++ b/xen/include/xen/irq.h
-@@ -10,6 +10,13 @@
- #include <asm/hardirq.h>
- #include <public/event_channel.h>
- 
-+/*
-+ * Heap allocations may need TLB flushes which may require IRQs to be
-+ * enabled (except when only 1 PCPU is online).
-+ */
-+#define ASSERT_ALLOC_CONTEXT() \
-+    ASSERT(!in_irq() && (local_irq_is_enabled() || num_online_cpus() <= 1))
-+
- struct irqaction {
-     void (*handler)(int, void *, struct cpu_user_regs *);
-     const char *name;
 -- 
 2.25.1
 
