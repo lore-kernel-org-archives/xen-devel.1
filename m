@@ -4,33 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1883C433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  5 May 2022 19:31:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.322352.543629 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F58C433F5
+	for <xen-devel@archiver.kernel.org>; Thu,  5 May 2022 20:24:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.322371.543651 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmhC8-0003yI-Pb; Thu, 05 May 2022 19:31:24 +0000
+	id 1nmi1f-00015X-E8; Thu, 05 May 2022 20:24:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 322352.543629; Thu, 05 May 2022 19:31:24 +0000
+Received: by outflank-mailman (output) from mailman id 322371.543651; Thu, 05 May 2022 20:24:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmhC8-0003yB-MF; Thu, 05 May 2022 19:31:24 +0000
-Received: by outflank-mailman (input) for mailman id 322352;
- Thu, 05 May 2022 19:31:23 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nmi1f-00015O-9P; Thu, 05 May 2022 20:24:39 +0000
+Received: by outflank-mailman (input) for mailman id 322371;
+ Thu, 05 May 2022 20:24:38 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Xl8R=VN=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
- id 1nmhC4-0003y3-U9
- for xen-devel@lists.xenproject.org; Thu, 05 May 2022 19:31:23 +0000
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ee7cf920-cca9-11ec-a406-831a346695d4;
- Thu, 05 May 2022 21:31:17 +0200 (CEST)
-Received: from [179.113.53.197] (helo=[192.168.1.60])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1nmhB9-0009Pt-2n; Thu, 05 May 2022 21:30:24 +0200
+ <SRS0=YLaE=VN=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1nmi1e-0000pB-4w
+ for xen-devel@lists.xenproject.org; Thu, 05 May 2022 20:24:38 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 61e3a317-ccb1-11ec-8fc4-03012f2f19d4;
+ Thu, 05 May 2022 22:24:37 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2CEA061E85;
+ Thu,  5 May 2022 20:24:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BC07C385A4;
+ Thu,  5 May 2022 20:24:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,66 +45,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ee7cf920-cca9-11ec-a406-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=26sf2Bz2SDgQmdCQw3Y4ZTnImgJ2MyGCiyio6ZL3q3Y=; b=OX97Z/D1CJSI6hriVTxC2kAnOw
-	1KITEk45cAtwCpY9rkRCDUh3KDg2O2YzMgXcmuPrqXaafenIhWWC1+LyxgtF/580Mzq9ZdOBGqQII
-	szuZz7L+gnBGPa0DhyrfUrxKFOKAOdS+/7tX8dF3YT6RRRi5n+Pvq9GzAiarMSPSGIbrEUOikWcQ4
-	luIwkR5QmpMMR3ULcRXOtddO+8na/Jrhq18XXAepQbZ7X+3+2omWFwgyxPBez0WA9LEkMMiNJ8gOK
-	/vnX5br4i70krbeAId+z+Wo/kxx7sPLDtH+XBAxzqCS0vo9z0RVsXdy6BbySPaaEQO2JnHI7/cIaw
-	LlqXpVFA==;
-Message-ID: <95fd6c2b-8a80-7161-953c-0660c9cc046f@igalia.com>
-Date: Thu, 5 May 2022 16:28:55 -0300
+X-Inumbo-ID: 61e3a317-ccb1-11ec-8fc4-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1651782275;
+	bh=a14+JEcgQvZosgTIeFyNoWmCUpYVx97L0RGZOeBDFd4=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=PJYZ/LGNYRu4yYDWk6OmeVIGB3fGWi7bhfp2DUMJNVCUZuaWA8ue9No/RxnsXHuVq
+	 rBQO2svwv6SiJIMwxXyMxq8p4xq99bxKFZ5w7Y5bVuKkIbyXLtB9iWAgH8ggtHWhcu
+	 Xo0QMMyY/dnJFH3U+ReDAh34/0Dp4U9EF21777XsdWBiYGXXWwzDi9OTuuIBHUtShk
+	 wgDeKXYv4fn+HCjG/TZQ1CSQd86iSFsQeW/e4zGQftl8Iq3IVlLTUk8G/l93R6I519
+	 WGTxGuo21IPhwq4ZLHn9ST+ZZrUfjs3vOnm+GD9Sr3QzWw7EjuaOxwbpJSydmKlnOg
+	 muOuFAy4YFBoA==
+Date: Thu, 5 May 2022 13:24:33 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Jan Beulich <jbeulich@suse.com>
+cc: Stefano Stabellini <sstabellini@kernel.org>, jgross@suse.com, 
+    Bertrand.Marquis@arm.com, julien@xen.org, Volodymyr_Babchuk@epam.com, 
+    Luca Miccio <lucmiccio@gmail.com>, 
+    Stefano Stabellini <stefano.stabellini@xilinx.com>, 
+    xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v6 4/7] xen/arm: configure dom0less domain for enabling
+ xenstore after boot
+In-Reply-To: <6e3aa32b-5b6e-7432-a6db-f2e8f9937c2a@suse.com>
+Message-ID: <alpine.DEB.2.22.394.2205051321180.43560@ubuntu-linux-20-04-desktop>
+References: <alpine.DEB.2.22.394.2205041715320.43560@ubuntu-linux-20-04-desktop> <20220505001656.395419-4-sstabellini@kernel.org> <6e3aa32b-5b6e-7432-a6db-f2e8f9937c2a@suse.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [PATCH 08/30] powerpc/setup: Refactor/untangle panic notifiers
-Content-Language: en-US
-To: Hari Bathini <hbathini@linux.ibm.com>, akpm@linux-foundation.org,
- bhe@redhat.com, pmladek@suse.com, kexec@lists.infradead.org
-Cc: linux-kernel@vger.kernel.org, bcm-kernel-feedback-list@broadcom.com,
- linuxppc-dev@lists.ozlabs.org, linux-alpha@vger.kernel.org,
- linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org,
- linux-leds@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-parisc@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-remoteproc@vger.kernel.org, linux-s390@vger.kernel.org,
- linux-tegra@vger.kernel.org, linux-um@lists.infradead.org,
- linux-xtensa@linux-xtensa.org, netdev@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net, rcu@vger.kernel.org,
- sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org,
- kernel-dev@igalia.com, kernel@gpiccoli.net, halves@canonical.com,
- fabiomirmar@gmail.com, alejandro.j.jimenez@oracle.com,
- andriy.shevchenko@linux.intel.com, arnd@arndb.de, bp@alien8.de,
- corbet@lwn.net, d.hatayama@jp.fujitsu.com, dave.hansen@linux.intel.com,
- dyoung@redhat.com, feng.tang@intel.com, gregkh@linuxfoundation.org,
- mikelley@microsoft.com, hidehiro.kawai.ez@hitachi.com, jgross@suse.com,
- john.ogness@linutronix.de, keescook@chromium.org, luto@kernel.org,
- mhiramat@kernel.org, mingo@redhat.com, paulmck@kernel.org,
- peterz@infradead.org, rostedt@goodmis.org, senozhatsky@chromium.org,
- stern@rowland.harvard.edu, tglx@linutronix.de, vgoyal@redhat.com,
- vkuznets@redhat.com, will@kernel.org,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Paul Mackerras <paulus@samba.org>
-References: <20220427224924.592546-1-gpiccoli@igalia.com>
- <20220427224924.592546-9-gpiccoli@igalia.com>
- <3c34d8e2-6f84-933f-a4ed-338cd300d6b0@linux.ibm.com>
-From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-In-Reply-To: <3c34d8e2-6f84-933f-a4ed-338cd300d6b0@linux.ibm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
 
-On 05/05/2022 15:55, Hari Bathini wrote:
-> [...] 
+On Thu, 5 May 2022, Jan Beulich wrote:
+> On 05.05.2022 02:16, Stefano Stabellini wrote:
+> > From: Luca Miccio <lucmiccio@gmail.com>
+> > 
+> > Export evtchn_alloc_unbound and make it __must_check.
+> > 
+> > If "xen,enhanced" is enabled, then add to dom0less domains:
+> > 
+> > - the hypervisor node in device tree
+> > - the xenstore event channel
+> > 
+> > The xenstore event channel is also used for the first notification to
+> > let the guest know that xenstore has become available.
+> > 
+> > Signed-off-by: Luca Miccio <lucmiccio@gmail.com>
+> > Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> > Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+> > CC: Julien Grall <julien@xen.org>
+> > CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+> > CC: Bertrand Marquis <bertrand.marquis@arm.com>
+> > CC: jbeulich@suse.com
 > 
-> The change looks good. I have tested it on an LPAR (ppc64).
-> 
-> Reviewed-by: Hari Bathini <hbathini@linux.ibm.com>
+> Somehow my ack given for v5 was lost?
 
-Thanks a bunch Hari, much appreciated!
+I'll put it back
+
+
+> > ---
+> > Changes in v5:
+> > - merge with "xen: export evtchn_alloc_unbound"
+> > - __must_check
+> > 
+> > Changes in v3:
+> > - use evtchn_alloc_unbound
+> > 
+> > Changes in v2:
+> > - set HVM_PARAM_STORE_PFN to ~0ULL at domain creation
+> > - in alloc_xenstore_evtchn do not call _evtchn_alloc_unbound
+> > 
+> > xen: export evtchn_alloc_unbound
+> > 
+> > It will be used during dom0less domains construction.
+> > 
+> > Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> 
+> This is somewhat confusing to find in a post-commit-message remark.
+
+Sorry I don't know what happened there
 
