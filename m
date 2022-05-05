@@ -4,40 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59CD8C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13328C433FE
 	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 05:18:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.322366.543865 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.322434.543880 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmqLf-0001aJ-IY; Fri, 06 May 2022 05:17:51 +0000
+	id 1nmqLg-0001no-DN; Fri, 06 May 2022 05:17:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 322366.543865; Fri, 06 May 2022 05:17:51 +0000
+Received: by outflank-mailman (output) from mailman id 322434.543880; Fri, 06 May 2022 05:17:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmqLf-0001Yq-EG; Fri, 06 May 2022 05:17:51 +0000
-Received: by outflank-mailman (input) for mailman id 322366;
- Thu, 05 May 2022 20:09:03 +0000
+	id 1nmqLg-0001lx-2k; Fri, 06 May 2022 05:17:52 +0000
+Received: by outflank-mailman (input) for mailman id 322434;
+ Thu, 05 May 2022 23:16:33 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=QviM=VN=keithp.com=keithp@srs-se1.protection.inumbo.net>)
- id 1nmhmZ-0007Up-AJ
- for xen-devel@lists.xenproject.org; Thu, 05 May 2022 20:09:03 +0000
-Received: from elaine.keithp.com (home.keithp.com [63.227.221.253])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=B872=VN=paul-moore.com=paul@srs-se1.protection.inumbo.net>)
+ id 1nmki1-0004GV-6c
+ for xen-devel@lists.xenproject.org; Thu, 05 May 2022 23:16:33 +0000
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [2a00:1450:4864:20::42e])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 327837f0-ccaf-11ec-a406-831a346695d4;
- Thu, 05 May 2022 22:09:00 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by elaine.keithp.com (Postfix) with ESMTP id 891C13F3296F;
- Thu,  5 May 2022 13:08:56 -0700 (PDT)
-Received: from elaine.keithp.com ([127.0.0.1])
- by localhost (elaine.keithp.com [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id 5VTuAkNJ6jJp; Thu,  5 May 2022 13:08:56 -0700 (PDT)
-Received: from keithp.com (koto.keithp.com [192.168.11.2])
- by elaine.keithp.com (Postfix) with ESMTPSA id 067933F3296B;
- Thu,  5 May 2022 13:08:56 -0700 (PDT)
-Received: by keithp.com (Postfix, from userid 1000)
- id A1FFA1E601B9; Thu,  5 May 2022 13:08:55 -0700 (PDT)
+ id 65459c16-ccc9-11ec-a406-831a346695d4;
+ Fri, 06 May 2022 01:16:30 +0200 (CEST)
+Received: by mail-wr1-x42e.google.com with SMTP id u3so7913670wrg.3
+ for <xen-devel@lists.xenproject.org>; Thu, 05 May 2022 16:16:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,166 +41,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 327837f0-ccaf-11ec-a406-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
-	t=1651781336; bh=FYwb/JL7BiNf1ERDNYW+QEpxdN3SDh8ueitySQdIrBQ=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Np/XZ4pFy233AB0Yh+gi2AcW/e9+t3y/fWG6qdh4wkqzGzyv/5d60R37rlx2q0dkx
-	 ZcA/OHcd/fQ1CoFSDxr0Vi8FXjWjSwahx9raUDyKmUlHDNFden+UlqdoPoL9lb3N6j
-	 z/Qqv9Wa2pLIQ3ZQ4WNbOu4gllTZvT8Le/cE0WdmezbxN7Lo811QY78xROKox4aoxD
-	 YtJ5TG07Cfh89+3GGGmDQQjL7bmwxYOqopOZ5A82byaJA6k7cohAwc8JRFZ33WFxKZ
-	 /7mx5KCwL1wU3NFmP6UKOcEgk9zOwdOR12cnrjAgCLv/62+PIg/yKTdgVBApfc2HeW
-	 bh24dG0NyBe9A==
-X-Virus-Scanned: Debian amavisd-new at keithp.com
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=keithp.com; s=mail;
-	t=1651781336; bh=FYwb/JL7BiNf1ERDNYW+QEpxdN3SDh8ueitySQdIrBQ=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-	b=Np/XZ4pFy233AB0Yh+gi2AcW/e9+t3y/fWG6qdh4wkqzGzyv/5d60R37rlx2q0dkx
-	 ZcA/OHcd/fQ1CoFSDxr0Vi8FXjWjSwahx9raUDyKmUlHDNFden+UlqdoPoL9lb3N6j
-	 z/Qqv9Wa2pLIQ3ZQ4WNbOu4gllTZvT8Le/cE0WdmezbxN7Lo811QY78xROKox4aoxD
-	 YtJ5TG07Cfh89+3GGGmDQQjL7bmwxYOqopOZ5A82byaJA6k7cohAwc8JRFZ33WFxKZ
-	 /7mx5KCwL1wU3NFmP6UKOcEgk9zOwdOR12cnrjAgCLv/62+PIg/yKTdgVBApfc2HeW
-	 bh24dG0NyBe9A==
-From: Keith Packard <keithp@keithp.com>
-To: Kees Cook <keescook@chromium.org>
-Cc: Johannes Berg <johannes@sipsolutions.net>, "Gustavo A . R . Silva"
- <gustavoars@kernel.org>, Francis Laniel
- <laniel_francis@privacyrequired.com>, Daniel Axtens <dja@axtens.net>, Dan
- Williams <dan.j.williams@intel.com>, Vincenzo Frascino
- <vincenzo.frascino@arm.com>, Guenter Roeck <linux@roeck-us.net>, Daniel
- Vetter <daniel.vetter@ffwll.ch>, Tadeusz Struk <tadeusz.struk@linaro.org>,
- Alexei Starovoitov <ast@kernel.org>, alsa-devel@alsa-project.org, Al Viro
- <viro@zeniv.linux.org.uk>, Andrew Gabbasov <andrew_gabbasov@mentor.com>,
- Andrew Morton <akpm@linux-foundation.org>, Andy Gross <agross@kernel.org>,
- Andy Lavr <andy.lavr@gmail.com>, Arend van Spriel <aspriel@gmail.com>,
- Baowen Zheng <baowen.zheng@corigine.com>, Bjorn Andersson
- <bjorn.andersson@linaro.org>, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Bradley Grove <linuxdrivers@attotech.com>,
- brcm80211-dev-list.pdl@broadcom.com, Christian Brauner
- <brauner@kernel.org>, Christian =?utf-8?Q?G=C3=B6ttsche?=
- <cgzones@googlemail.com>,
- Christian Lamparter <chunkeey@googlemail.com>, Chris Zankel
- <chris@zankel.net>, Cong Wang <cong.wang@bytedance.com>, David Gow
- <davidgow@google.com>, David Howells <dhowells@redhat.com>, "David S.
- Miller" <davem@davemloft.net>, Dennis Dalessandro
- <dennis.dalessandro@cornelisnetworks.com>, devicetree@vger.kernel.org,
- Dexuan Cui <decui@microsoft.com>, Dmitry Kasatkin
- <dmitry.kasatkin@gmail.com>, Eli Cohen <elic@nvidia.com>, Eric Dumazet
- <edumazet@google.com>, Eric Paris <eparis@parisplace.org>, Eugeniu Rosca
- <erosca@de.adit-jv.com>, Felipe Balbi <balbi@kernel.org>, Frank Rowand
- <frowand.list@gmail.com>, Franky Lin <franky.lin@broadcom.com>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, Gregory Greenman
- <gregory.greenman@intel.com>, Haiyang Zhang <haiyangz@microsoft.com>,
- Hante Meuleman <hante.meuleman@broadcom.com>, Herbert Xu
- <herbert@gondor.apana.org.au>, Hulk Robot <hulkci@huawei.com>, Jakub
- Kicinski <kuba@kernel.org>, "James E.J. Bottomley" <jejb@linux.ibm.com>,
- James Morris <jmorris@namei.org>, Jarkko Sakkinen <jarkko@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>, Jason Gunthorpe <jgg@ziepe.ca>, Jens
- Axboe <axboe@kernel.dk>, Johan Hedberg <johan.hedberg@gmail.com>, John
- Keeping <john@metanate.com>, Juergen Gross <jgross@suse.com>, Kalle Valo
- <kvalo@kernel.org>, keyrings@vger.kernel.org, kunit-dev@googlegroups.com,
- Kuniyuki Iwashima <kuniyu@amazon.co.jp>, "K. Y. Srinivasan"
- <kys@microsoft.com>, Lars-Peter Clausen <lars@metafoo.de>, Lee Jones
- <lee.jones@linaro.org>, Leon Romanovsky <leon@kernel.org>, Liam Girdwood
- <lgirdwood@gmail.com>, linux1394-devel@lists.sourceforge.net,
- linux-afs@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
- linux-hardening@vger.kernel.org, linux-hyperv@vger.kernel.org,
- linux-integrity@vger.kernel.org, linux-rdma@vger.kernel.org,
- linux-scsi@vger.kernel.org, linux-security-module@vger.kernel.org,
- linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org,
- linux-xtensa@linux-xtensa.org, llvm@lists.linux.dev, Loic Poulain
- <loic.poulain@linaro.org>, Louis Peens <louis.peens@corigine.com>, Luca
- Coelho <luciano.coelho@intel.com>, Luiz Augusto von Dentz
- <luiz.dentz@gmail.com>, Marc Dionne <marc.dionne@auristor.com>, Marcel
- Holtmann <marcel@holtmann.org>, Mark Brown <broonie@kernel.org>, "Martin
- K. Petersen" <martin.petersen@oracle.com>, Max Filippov
- <jcmvbkbc@gmail.com>, Mimi Zohar <zohar@linux.ibm.com>, Muchun Song
- <songmuchun@bytedance.com>, Nathan Chancellor <nathan@kernel.org>,
- netdev@vger.kernel.org, Nick Desaulniers <ndesaulniers@google.com>, Nuno
- =?utf-8?Q?S=C3=A1?= <nuno.sa@analog.com>, Paolo Abeni <pabeni@redhat.com>,
- Paul Moore
- <paul@paul-moore.com>, Rich Felker <dalias@aerifal.cx>, Rob Herring
- <robh+dt@kernel.org>, Russell King <linux@armlinux.org.uk>,
- selinux@vger.kernel.org, "Serge E. Hallyn" <serge@hallyn.com>,
- SHA-cyfmac-dev-list@infineon.com, Simon Horman
- <simon.horman@corigine.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Stefan Richter <stefanr@s5r6.in-berlin.de>, Steffen Klassert
- <steffen.klassert@secunet.com>, Stephen Hemminger
- <sthemmin@microsoft.com>, Stephen Smalley
- <stephen.smalley.work@gmail.com>, Takashi Iwai <tiwai@suse.com>, Tom Rix
- <trix@redhat.com>, Udipto Goswami <quic_ugoswami@quicinc.com>,
- wcn36xx@lists.infradead.org, Wei Liu <wei.liu@kernel.org>,
- xen-devel@lists.xenproject.org, Xiu Jianfeng <xiujianfeng@huawei.com>,
- Yang Yingliang <yangyingliang@huawei.com>
-Subject: Re: [PATCH 02/32] Introduce flexible array struct memcpy() helpers
-In-Reply-To: <202205051228.4D5B8CD624@keescook>
-References: <20220504014440.3697851-1-keescook@chromium.org>
- <20220504014440.3697851-3-keescook@chromium.org>
- <d3b73d80f66325fdfaf2d1f00ea97ab3db03146a.camel@sipsolutions.net>
- <202205040819.DEA70BD@keescook>
- <970a674df04271b5fd1971b495c6b11a996c20c2.camel@sipsolutions.net>
- <871qx8qabo.fsf@keithp.com> <202205051228.4D5B8CD624@keescook>
-Date: Thu, 05 May 2022 13:08:55 -0700
-Message-ID: <87pmkrpwrs.fsf@keithp.com>
+X-Inumbo-ID: 65459c16-ccc9-11ec-a406-831a346695d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=paul-moore-com.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BNb5FwciOrnmYbDhJp90kHEHFZ0681UtkEHiY9rBD84=;
+        b=Ohr3X3EP78LxuYDKhnz8KuPiuz1PhY8VlacN2n0UZF33p11lrzHmoTg5FkuLveaWWc
+         B+PHWzpGocOw99rYrrwOT2j6K7yl6TZjHfwiwfQv58T2SgC8RJjpZCrBvbUHRa3tAEjw
+         vBvW2uixSk3X4wocsWWICUIdWEyFIPpXBQF7km3BjP4lO/AiOmnrqBvYof/Hmrk8g3Ui
+         VsyTbQQECGTWGpH9GRnc/7V1pdbEyCgAuGzq4iO4E+9FajCsxUmBzSMnYaru+xQE/MDx
+         VovhSYGTu5JLsFhCQL0rb2sLJwJC/ZTQ8Ao2n8UXvDJkacdd5/9qZgjSKryNtgTW6CEs
+         aKmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BNb5FwciOrnmYbDhJp90kHEHFZ0681UtkEHiY9rBD84=;
+        b=dVEcUIAfIp4KBwBoeSGEMZOY0bC2lGhUEbOY6GzLDwIvpU64/XvcyFoY6RNkimNMFe
+         BGD/P/8vea3kxhS6Tv5pq4F3V4C4cGXgzT5u1uMtgjKvXGBxhFsKTgeX4HCyvfbFZkdA
+         YxpMxUp1MdYugV15Z+3BPgjXswxWbx5BfgSCOm+GxNOl4f+yKr3allsWDUE9Q9ASJtAF
+         3B9pfQxDiPr8PYU67QcqmBeuIiVDfyGzLIRy9KCN7AVbCnQGGnUfXKJQ/Wv89wxJaqPW
+         EcM72MIlDwU7s2528+OWLLkIe0fpOFQwYuRY892lugDZzMJqZRWdoBCfi9vKtOAUykGQ
+         zF0g==
+X-Gm-Message-State: AOAM530aZUr8+WmX1wjDihib7Mb9y72edaTBkK4tOmlVRoWI5trF6rhu
+	sgh74pluluNpswVG6hTRRbHbHYa06k94al5L2n4j
+X-Google-Smtp-Source: ABdhPJyI6zIzqRKP45wkz/HSJ9ebgV2/QaH+Jh5XG21YfFQB+clnUfHaAanM4WnjOyZZ77zPKKT04iIWWkNblva8IBo=
+X-Received: by 2002:a5d:590d:0:b0:20a:c3eb:2584 with SMTP id
+ v13-20020a5d590d000000b0020ac3eb2584mr325652wrd.18.1651792589559; Thu, 05 May
+ 2022 16:16:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
-	micalg=pgp-sha256; protocol="application/pgp-signature"
+References: <20220504014440.3697851-1-keescook@chromium.org>
+ <20220504014440.3697851-29-keescook@chromium.org> <CAHC9VhT5Y=ENiSyb=S-NVbGX63sLOv4nVuR_GS-yww6tiz0wYA@mail.gmail.com>
+ <20220504234324.GA12556@embeddedor> <CAHC9VhRJC4AxeDsGpdphfJD4WzgaeBsdONHnixBzft5u_cE-Dw@mail.gmail.com>
+ <202205051124.6D80ABAE32@keescook>
+In-Reply-To: <202205051124.6D80ABAE32@keescook>
+From: Paul Moore <paul@paul-moore.com>
+Date: Thu, 5 May 2022 19:16:18 -0400
+Message-ID: <CAHC9VhT3EDCZEP1og3H_PGFETE6403HUHw7aQb_wDMwJnWeb3Q@mail.gmail.com>
+Subject: Re: [PATCH 28/32] selinux: Use mem_to_flex_dup() with xfrm and sidtab
+To: Kees Cook <keescook@chromium.org>
+Cc: "Gustavo A. R. Silva" <gustavoars@kernel.org>, Steffen Klassert <steffen.klassert@secunet.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	Stephen Smalley <stephen.smalley.work@gmail.com>, Eric Paris <eparis@parisplace.org>, 
+	Nick Desaulniers <ndesaulniers@google.com>, Xiu Jianfeng <xiujianfeng@huawei.com>, 
+	=?UTF-8?Q?Christian_G=C3=B6ttsche?= <cgzones@googlemail.com>, 
+	netdev@vger.kernel.org, selinux@vger.kernel.org, 
+	Alexei Starovoitov <ast@kernel.org>, alsa-devel@alsa-project.org, 
+	Al Viro <viro@zeniv.linux.org.uk>, Andrew Gabbasov <andrew_gabbasov@mentor.com>, 
+	Andrew Morton <akpm@linux-foundation.org>, Andy Gross <agross@kernel.org>, 
+	Andy Lavr <andy.lavr@gmail.com>, Arend van Spriel <aspriel@gmail.com>, 
+	Baowen Zheng <baowen.zheng@corigine.com>, Bjorn Andersson <bjorn.andersson@linaro.org>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Bradley Grove <linuxdrivers@attotech.com>, 
+	brcm80211-dev-list.pdl@broadcom.com, Christian Brauner <brauner@kernel.org>, 
+	Christian Lamparter <chunkeey@googlemail.com>, Chris Zankel <chris@zankel.net>, 
+	Cong Wang <cong.wang@bytedance.com>, Daniel Axtens <dja@axtens.net>, 
+	Daniel Vetter <daniel.vetter@ffwll.ch>, Dan Williams <dan.j.williams@intel.com>, 
+	David Gow <davidgow@google.com>, David Howells <dhowells@redhat.com>, 
+	Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>, devicetree@vger.kernel.org, 
+	Dexuan Cui <decui@microsoft.com>, Dmitry Kasatkin <dmitry.kasatkin@gmail.com>, 
+	Eli Cohen <elic@nvidia.com>, Eric Dumazet <edumazet@google.com>, 
+	Eugeniu Rosca <erosca@de.adit-jv.com>, Felipe Balbi <balbi@kernel.org>, 
+	Francis Laniel <laniel_francis@privacyrequired.com>, Frank Rowand <frowand.list@gmail.com>, 
+	Franky Lin <franky.lin@broadcom.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Gregory Greenman <gregory.greenman@intel.com>, Guenter Roeck <linux@roeck-us.net>, 
+	Haiyang Zhang <haiyangz@microsoft.com>, Hante Meuleman <hante.meuleman@broadcom.com>, 
+	Hulk Robot <hulkci@huawei.com>, Jakub Kicinski <kuba@kernel.org>, 
+	"James E.J. Bottomley" <jejb@linux.ibm.com>, James Morris <jmorris@namei.org>, 
+	Jarkko Sakkinen <jarkko@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	Jens Axboe <axboe@kernel.dk>, Johan Hedberg <johan.hedberg@gmail.com>, 
+	Johannes Berg <johannes.berg@intel.com>, Johannes Berg <johannes@sipsolutions.net>, 
+	John Keeping <john@metanate.com>, Juergen Gross <jgross@suse.com>, Kalle Valo <kvalo@kernel.org>, 
+	Keith Packard <keithp@keithp.com>, keyrings@vger.kernel.org, kunit-dev@googlegroups.com, 
+	Kuniyuki Iwashima <kuniyu@amazon.co.jp>, "K. Y. Srinivasan" <kys@microsoft.com>, 
+	Lars-Peter Clausen <lars@metafoo.de>, Lee Jones <lee.jones@linaro.org>, 
+	Leon Romanovsky <leon@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
+	linux1394-devel@lists.sourceforge.net, linux-afs@lists.infradead.org, 
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+	linux-bluetooth@vger.kernel.org, linux-hardening@vger.kernel.org, 
+	linux-hyperv@vger.kernel.org, linux-integrity@vger.kernel.org, 
+	linux-rdma@vger.kernel.org, linux-scsi@vger.kernel.org, 
+	linux-security-module@vger.kernel.org, linux-usb@vger.kernel.org, 
+	linux-wireless@vger.kernel.org, linux-xtensa@linux-xtensa.org, 
+	llvm@lists.linux.dev, Loic Poulain <loic.poulain@linaro.org>, 
+	Louis Peens <louis.peens@corigine.com>, Luca Coelho <luciano.coelho@intel.com>, 
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Marc Dionne <marc.dionne@auristor.com>, 
+	Marcel Holtmann <marcel@holtmann.org>, Mark Brown <broonie@kernel.org>, 
+	"Martin K. Petersen" <martin.petersen@oracle.com>, Max Filippov <jcmvbkbc@gmail.com>, 
+	Mimi Zohar <zohar@linux.ibm.com>, Muchun Song <songmuchun@bytedance.com>, 
+	Nathan Chancellor <nathan@kernel.org>, =?UTF-8?B?TnVubyBTw6E=?= <nuno.sa@analog.com>, 
+	Paolo Abeni <pabeni@redhat.com>, Rich Felker <dalias@aerifal.cx>, Rob Herring <robh+dt@kernel.org>, 
+	Russell King <linux@armlinux.org.uk>, "Serge E. Hallyn" <serge@hallyn.com>, 
+	SHA-cyfmac-dev-list@infineon.com, Simon Horman <simon.horman@corigine.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Stefan Richter <stefanr@s5r6.in-berlin.de>, 
+	Stephen Hemminger <sthemmin@microsoft.com>, Tadeusz Struk <tadeusz.struk@linaro.org>, 
+	Takashi Iwai <tiwai@suse.com>, Tom Rix <trix@redhat.com>, 
+	Udipto Goswami <quic_ugoswami@quicinc.com>, Vincenzo Frascino <vincenzo.frascino@arm.com>, 
+	wcn36xx@lists.infradead.org, Wei Liu <wei.liu@kernel.org>, 
+	xen-devel@lists.xenproject.org, Yang Yingliang <yangyingliang@huawei.com>
+Content-Type: text/plain; charset="UTF-8"
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On Thu, May 5, 2022 at 2:39 PM Kees Cook <keescook@chromium.org> wrote:
+> On Wed, May 04, 2022 at 11:14:42PM -0400, Paul Moore wrote:
+> > On Wed, May 4, 2022 at 7:34 PM Gustavo A. R. Silva
+> > <gustavoars@kernel.org> wrote:
+> > >
+> > > Hi Paul,
+> > >
+> > > On Wed, May 04, 2022 at 06:57:28PM -0400, Paul Moore wrote:
+> > > > On Tue, May 3, 2022 at 9:57 PM Kees Cook <keescook@chromium.org> wrote:
+> > >
+> > > [..]
+> > >
+> > > > > +++ b/include/uapi/linux/xfrm.h
+> > > > > @@ -31,9 +31,9 @@ struct xfrm_id {
+> > > > >  struct xfrm_sec_ctx {
+> > > > >         __u8    ctx_doi;
+> > > > >         __u8    ctx_alg;
+> > > > > -       __u16   ctx_len;
+> > > > > +       __DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(__u16, ctx_len);
+> > > > >         __u32   ctx_sid;
+> > > > > -       char    ctx_str[0];
+> > > > > +       __DECLARE_FLEX_ARRAY_ELEMENTS(char, ctx_str);
+> > > > >  };
+> > > >
+> > > > While I like the idea of this in principle, I'd like to hear about the
+> > > > testing you've done on these patches.  A previous flex array
+> > > > conversion in the audit uapi headers ended up causing a problem with
+> > >
+> > > I'm curious about which commit caused those problems...?
+> >
+> > Commit ed98ea2128b6 ("audit: replace zero-length array with
+> > flexible-array member"), however, as I said earlier, the problem was
+> > actually with SWIG, it just happened to be triggered by the kernel
+> > commit.  There was a brief fedora-devel mail thread about the problem,
+> > see the link below:
+> >
+> > * https://www.spinics.net/lists/fedora-devel/msg297991.html
+>
+> Wow, that's pretty weird -- it looks like SWIG was scraping the headers
+> to build its conversions? I assume SWIG has been fixed now?
 
-Kees Cook <keescook@chromium.org> writes:
+I honestly don't know, the audit userspace was hacking around it with
+some header file duplication/munging last I heard, but I try to avoid
+having to touch Steve's audit userspace code.
 
-> I don't think I can do a declaration and an expression statement at the
-> same time with different scopes, but that would be kind of cool. We did
-> just move to c11 to gain the in-loop iterator declarations...
+> > To reiterate, I'm supportive of changes like this, but I would like to
+> > hear how it was tested to ensure there are no unexpected problems with
+> > userspace.  If there are userspace problems it doesn't mean we can't
+> > make changes like this, it just means we need to ensure that the
+> > userspace issues are resolved first.
+>
+> Well, as this is the first and only report of any problems with [0] -> []
+> conversions (in UAPI or anywhere) that I remember seeing, and they've
+> been underway since at least v5.9, I hadn't been doing any new testing.
 
-Yeah, you'd end up creating a statement-level macro, and I think that
-would have poor syntax:
+... and for whatever it is worth, I wasn't expecting it to be a
+problem either.  Surprise :)
 
-        mem_to_flex_dup(struct something *instance, rc, byte_array,
-                        count, GFP_KERNEL);
-        if (rc)
-           return rc;
+> So, for this case, I guess I should ask what tests you think would be
+> meaningful here? Anything using #include should be fine:
+> https://codesearch.debian.net/search?q=linux%2Fxfrm.h&literal=1&perpkg=1
+> Which leaves just this, which may be doing something weird:
+>
+> libabigail_2.0-1/tests/data/test-diff-filter/test-PR27569-v0.abi
+>         </data-member>
+>         <data-member access="public" layout-offset-in-bits="128">
+>           <var-decl name="seq_hi" type-id="3f1a6b60" visibility="default" filepath="include/uapi/linux/xfrm.h" line="97" column="1"/>
+>         </data-member>
+>         <data-member access="public" layout-offset-in-bits="160">
+>
+> But I see that SWIG doesn't show up in a search for linux/audit.h:
+> https://codesearch.debian.net/search?q=linux%2Faudit.h&literal=1&perpkg=1
+>
+> So this may not be a sufficient analysis...
 
-I bet you've already considered the simpler form:
+I think from a practical perspective ensuring that the major IPsec/IKE
+tools, e.g. the various *SWANs, that know about labeled IPSec still
+build and can set/get the SA/SPD labels correctly would be sufficient.
+I seriously doubt there would be any problems, but who knows.
 
-        struct something *instance =3D mem_to_flex_dup(byte_array, count, G=
-FP_KERNEL);
-        if (IS_ERR(instance))
-            return PTR_ERR(instance);
-
-This doesn't allow you to require a new name, so you effectively lose
-the check you're trying to insist upon.
-
-Some way to ask the compiler 'is this reference dead?' would be nice --
-it knows if a valid pointer was passed to free, or if a variable has not
-been initialized, after all; we just need that exposed at the source
-level.
-
-=2D-=20
-=2Dkeith
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEw4O3eCVWE9/bQJ2R2yIaaQAAABEFAmJ0LtcACgkQ2yIaaQAA
-ABHC0hAAr3uHP5hrK0TrjV0miTlsckS+Z8SZ2+xvHioDubRTMMdfP79BMu5ndZB4
-QaRps+OPUgs6f0p8V2N5qN2jruvrUHrKXQyiIjdsRQmUp+3qyvpjuYrtNDeHHTD2
-vfM0b48EgU8kkiVZH9ksTQ/b48dkf2r7GYLnmd3VO/LkFTymGVqvodKSYl/6dZOZ
-x7yTZYIRcbsjqPumSocldZhrYNuDwDWd3K2voU8pDD202q2xk3BpatYQOCnRYAzk
-Le8pCTMAkJmy3VcKuORvTyRaq0/AvjfjEVHVP9ucCk68zGEU1/egKnkv3iQ5b7UY
-RzyQTJSlFZQv2EomuxRRhmKQ/Ubqr//1Y5P8FLqQjJFdocf7x/wCkMdE5X/WZhIN
-tjA64pkC+b20mi6NQ5XouaUSTBKTnU44rsSCWsabc+fBx96Arj1tMJCrOoqYCWpy
-yg2mbeB3A55aDXAVSoC9vKoeleOJER70z7sOfycFpLPcO/XAoDOUOlfH46McYIIK
-0xMfYCih17SZ/wY5s/NAamDnihpT26Zkm028+XJtQdxgyS3rSIjH+TxqQ3dpl+Tq
-q78xgiJ/GBR6QVyfdgbWEbXlJUOTIA1gtT+YvkC9NwhJszdT72psVFUXtZraEaRs
-+XEV7uZeDpyI0x1VGRqSDZgJtavhxjCqeR9SZ21Vch7I0NhT24I=
-=lS49
------END PGP SIGNATURE-----
---=-=-=--
+-- 
+paul-moore.com
 
