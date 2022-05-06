@@ -4,36 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E762C4332F
-	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 12:00:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.322977.544525 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BD88C433F5
+	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 12:03:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.322998.544569 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmwdN-0000La-PE; Fri, 06 May 2022 12:00:33 +0000
+	id 1nmwgQ-0003zw-Ps; Fri, 06 May 2022 12:03:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 322977.544525; Fri, 06 May 2022 12:00:33 +0000
+Received: by outflank-mailman (output) from mailman id 322998.544569; Fri, 06 May 2022 12:03:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmwdN-0000LM-Lr; Fri, 06 May 2022 12:00:33 +0000
-Received: by outflank-mailman (input) for mailman id 322977;
- Fri, 06 May 2022 12:00:32 +0000
+	id 1nmwgQ-0003zp-L6; Fri, 06 May 2022 12:03:42 +0000
+Received: by outflank-mailman (input) for mailman id 322998;
+ Fri, 06 May 2022 12:03:41 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=qjQo=VO=arm.com=luca.fancellu@srs-se1.protection.inumbo.net>)
- id 1nmwdL-0007iY-Sw
- for xen-devel@lists.xenproject.org; Fri, 06 May 2022 12:00:32 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 200c9d7c-cd34-11ec-8fc4-03012f2f19d4;
- Fri, 06 May 2022 14:00:30 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C77F814BF;
- Fri,  6 May 2022 05:00:29 -0700 (PDT)
-Received: from e125770.cambridge.arm.com (e125770.cambridge.arm.com
- [10.1.195.16])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1A1193F7F5;
- Fri,  6 May 2022 05:00:27 -0700 (PDT)
+ <SRS0=CuCn=VO=arm.com=Henry.Wang@srs-se1.protection.inumbo.net>)
+ id 1nmwgP-0003zZ-1z
+ for xen-devel@lists.xenproject.org; Fri, 06 May 2022 12:03:41 +0000
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20613.outbound.protection.outlook.com
+ [2a01:111:f400:7d00::613])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 90db9586-cd34-11ec-8fc4-03012f2f19d4;
+ Fri, 06 May 2022 14:03:39 +0200 (CEST)
+Received: from AM6P191CA0028.EURP191.PROD.OUTLOOK.COM (2603:10a6:209:8b::41)
+ by DB9PR08MB7161.eurprd08.prod.outlook.com (2603:10a6:10:2ca::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5227.18; Fri, 6 May
+ 2022 12:03:37 +0000
+Received: from VE1EUR03FT051.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:209:8b:cafe::4f) by AM6P191CA0028.outlook.office365.com
+ (2603:10a6:209:8b::41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5227.20 via Frontend
+ Transport; Fri, 6 May 2022 12:03:36 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT051.mail.protection.outlook.com (10.152.19.75) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5227.15 via Frontend Transport; Fri, 6 May 2022 12:03:36 +0000
+Received: ("Tessian outbound ac9bb5dd84f6:v118");
+ Fri, 06 May 2022 12:03:36 +0000
+Received: from 16eaaaab0055.2
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 1C7135CC-DC7B-4674-82B0-F9A03719975D.1; 
+ Fri, 06 May 2022 12:03:25 +0000
+Received: from EUR03-AM5-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 16eaaaab0055.2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Fri, 06 May 2022 12:03:25 +0000
+Received: from AS8PR08MB7991.eurprd08.prod.outlook.com (2603:10a6:20b:570::15)
+ by PA4PR08MB5981.eurprd08.prod.outlook.com (2603:10a6:102:e2::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5206.12; Fri, 6 May
+ 2022 12:03:24 +0000
+Received: from AS8PR08MB7991.eurprd08.prod.outlook.com
+ ([fe80::1d49:4e03:8569:a07c]) by AS8PR08MB7991.eurprd08.prod.outlook.com
+ ([fe80::1d49:4e03:8569:a07c%7]) with mapi id 15.20.5144.027; Fri, 6 May 2022
+ 12:03:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,581 +74,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 200c9d7c-cd34-11ec-8fc4-03012f2f19d4
-From: Luca Fancellu <luca.fancellu@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	wei.chen@arm.com,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v8 4/7] xen/cpupool: Create different cpupools at boot time
-Date: Fri,  6 May 2022 13:00:09 +0100
-Message-Id: <20220506120012.32326-5-luca.fancellu@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220506120012.32326-1-luca.fancellu@arm.com>
-References: <20220506120012.32326-1-luca.fancellu@arm.com>
+X-Inumbo-ID: 90db9586-cd34-11ec-8fc4-03012f2f19d4
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=ntH+jH9s2SIop0JhZ2+C/ylcvr9r3Uwvsw1gPRmboCmohoCQF+R0XvEGjY2WcQ9TR8ulmxBhrneo0rdKyReuRo6u0MCu4teDc9WqECdkG8sh8Donwj8RDNouv+FydZ4mFReisa60kHSV5o5Ty+eXeF8cpCvRvKrQSvvr9L+/yb2m0sHrSOnGlCdHfpVo7lmUXvEIfaAVKv4zSWfbP3RBsL0XrYlouNN4wFoqIodj4gNdwvClEJi8iO4tShRmIhAZtogb4/H2lkxiM3uok3B5dkeQ5XZUT1oqOdtIxu9rUIGVsnsnUrm/PNrw41vinw82jFGi7DojvjCmeJG8SJq8fg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3ngeQtgrxCaWSrBPVmd67JBnD1aLnowqKALKoCu1V0g=;
+ b=I5AajyWBttD+aoVrncfo1sVp9ByUGjMCdS39Qu62CgCK0YCdshNlFMF6zS3Nl5AegDG7gnJ5VPNqkOu7+elE2jXmcI7H8FW4pOPOLLPek2L6cCdNJQCE6cvSZoLn44JSPgOW1iH0PVlLWWAYsT62mpbY39dPexc+lbn5FMC7Gths7L8q8dH3Ni90lzXSX46FKxtDDVIRaSwcWLSbHQYCl6a1Zn99LMWJYHy0dFI9mt1rzUnLbzECWi9sGC79fDmXPWiNkVnCDMrEXzUV6pHedqUzEWdDwAGHa/uRs7Gt6L/N0JAKpqbY26bRE631LCajri8OEvNcniupY6qkf+o6Zg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3ngeQtgrxCaWSrBPVmd67JBnD1aLnowqKALKoCu1V0g=;
+ b=GOj52XuPV1OS4xn5IBQtrfEIjBRukzzeHRIhk3x2zPrTxJ+FcEijeheKPXUc9yudn13lbjnn3DxNIXnhu0M5lUkT5wHCatAwr4N5k8DOSiJa4ipGiX7A5u/LT2K5yNDWcMFiejIQSA/aEJxBp667CDglvR4yFv3g6WxxHIPh0Xk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+X-CR-MTA-TID: 64aa7808
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=cgWIcq+TXEqFkn7ATUpLEeekh+D06WeDm6/iWfMAsKL4czylh3xRYBG9lEuHXXfF6jtDgoGkFGMUtMbos2mjYP91Vt+EeveJp8jx7Pf3m+VqV1Y1cZIgosG+4JKEVNr8WQGtlhpEthK7sOC3l61C4rXAQkdVuHZftm7RQOKhhSFen2XzF5B0+Fc9y0CvnRIov4sGolSTKSY+6yJ3Q65mKR/gqFW1EeMke/FznNgYWpEAXvqpJN5m2dp3bAmlKNTeYmG2mF9R4Zd54ATyWv4cjlrq5F+RYVWl0lJjKta6P6SwCnkFYhNXYOPFfx923jo2xAbv5uyhH4WiDO5Lb/nOTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3ngeQtgrxCaWSrBPVmd67JBnD1aLnowqKALKoCu1V0g=;
+ b=NlWm5hRQY6Xbq+VzP48YMaDAwP/QfcxYizN8bQ4kwp1GV7G3ftxPzY0LWZmRK4ua0djL+ECuZidh/MXKm3QJSxbTJN7XxTUEXKEB9YixYfbEEzV9X7mdYUdU1Mm9POZY+7Kemzma2a8KvO/ic760LWOgmou+zv5adJ2BAVZquMVZUBzjHKaKGcY1i0nj3ZN6uqiQmJ7t256ycKu6JgGmXYluG99w3XfOj+oYRroVhTlpB8JQEV4sT0tRdB2MNbsStJa9UzEtfupKDPvk0Z7uvABkSeGxrEQ0H5jcz3+6STBgVpDLAK/SSFBBgGzpuSyzwcJkYhRrtRH1qBIY4PTmkw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3ngeQtgrxCaWSrBPVmd67JBnD1aLnowqKALKoCu1V0g=;
+ b=GOj52XuPV1OS4xn5IBQtrfEIjBRukzzeHRIhk3x2zPrTxJ+FcEijeheKPXUc9yudn13lbjnn3DxNIXnhu0M5lUkT5wHCatAwr4N5k8DOSiJa4ipGiX7A5u/LT2K5yNDWcMFiejIQSA/aEJxBp667CDglvR4yFv3g6WxxHIPh0Xk=
+From: Henry Wang <Henry.Wang@arm.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <Bertrand.Marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Wei
+ Liu <wl@xen.org>, Wei Chen <Wei.Chen@arm.com>, Julien Grall
+	<jgrall@amazon.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+Subject: RE: [PATCH v2 2/2] xen/common: Use enhanced ASSERT_ALLOC_CONTEXT in
+ xmalloc()
+Thread-Topic: [PATCH v2 2/2] xen/common: Use enhanced ASSERT_ALLOC_CONTEXT in
+ xmalloc()
+Thread-Index: AQHYYQ1+wSNISpljvkG6pMKyJcwNSq0Rpx4AgAAWlnA=
+Date: Fri, 6 May 2022 12:03:23 +0000
+Message-ID:
+ <AS8PR08MB7991DBFE189E7FC5E63C1EB392C59@AS8PR08MB7991.eurprd08.prod.outlook.com>
+References: <20220506055201.999277-1-Henry.Wang@arm.com>
+ <20220506055201.999277-3-Henry.Wang@arm.com>
+ <6a44bc43-c392-2eac-d350-ec87cb2c3ab3@suse.com>
+In-Reply-To: <6a44bc43-c392-2eac-d350-ec87cb2c3ab3@suse.com>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-ts-tracking-id: 3E0E6FAB06ADAE4CB84E0CAAE5AFB91F.0
+x-checkrecipientchecked: true
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-MS-Office365-Filtering-Correlation-Id: 9c5174aa-5cfa-4f41-c55c-08da2f587359
+x-ms-traffictypediagnostic:
+	PA4PR08MB5981:EE_|VE1EUR03FT051:EE_|DB9PR08MB7161:EE_
+X-Microsoft-Antispam-PRVS:
+	<DB9PR08MB7161DC3B475B271B773947E492C59@DB9PR08MB7161.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original:
+ QIreALH1mh4V27Kia3GoiRxHduStCjvoUkmwSoh1/B1PVxa3626MsLGY2l/lDr1ZJcrCPFsBgkn+Ax3fBi5FRSc5PJvaPw//PAYDRvEXQMHSBf18jx9ffdlcaSwwrWsewPrq2Ph0Fc7OV2QomESuhgXBjxz6HYTwoQiqS3Ekvz0vxBP3vmlRbw1tYmLVMdqBSSI3K1gGBOPgS8yDlKlOeeVq8i1Z0L+s/48zAsai0YMcPnF+0wPTqsecH+5z5UnoIWmmstX1AePh8oRhQHLEDve6jOeoKJEsbhLrw40mXXqnkdXxjp2EuKbTzgX7k9ISOtIa8MiKMPRda3Ts+xyzUP4eHxbce0yIeTsQR3tjsrTotzrB1c+xejMnhKFY2F5BTUfwnzs+6OAkF1CjDtq2Pps7Gg9/EELlpy6SnZ1Mf26n51v0z9f5euoXfnRXPVDjZS6YL3T2QU+x7xaiklEL+/Nca/NVCHE+aaodseubPiyTXvIxIlfNY+BxqfpeqL6t9Ow5vRE5wfsOPH0BPE1ktomiVFWHMkUBHDHMYidB58qZvfI8Rp2haB8D/8xSnJjfi6edXfgWwNpheXpqQ+WbmoJOh4RQO5n0xBOOpjHDdMpCI2eKtEztYLSKObVEaxE27W67HHrVr30mXm2WaRrqJCUUnSoQGG9MkU5AXkSPkAI2A0PxR8dc/TaavlOlGqEqOvAqlttYyuyz9i2bFH78Eg==
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB7991.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(66476007)(66446008)(64756008)(8676002)(9686003)(71200400001)(186003)(26005)(66946007)(4326008)(66556008)(5660300002)(6506007)(53546011)(8936002)(7696005)(52536014)(2906002)(86362001)(55016003)(508600001)(6916009)(76116006)(54906003)(316002)(38100700002)(38070700005)(33656002)(122000001)(83380400001);DIR:OUT;SFP:1101;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB5981
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ VE1EUR03FT051.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+	45e00738-b8c1-46c8-92de-08da2f586bd4
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	qgiYK+873Ew1ob+1eK8lrB+oidMlEGqv/mn794bzTz2+++Zdr7981eTF+cty6O+WzXzfKUWY92TdJvk0RmMz07GJRRJsBIJIMLYVJf6DWJZ9dZDJXxfs6ceSx3cRxycK5t9cxzUlbLfEFIfH5RUB5/6BunJrUERCcB8c5+HueG/93HDaED/N+3lcAtIpzFTkcpomQFPT0Dnwv4Azd92k6GZsTE8lBJnNdd0nUiArrbqaA5dcZoMgbq8RZIUOZJm6QrRC6o0kDyAA9GRP0wLuOMycgE4dFE5lux47+PhC87I4sVG2hyQl+P35GIfdUYTv7JKsOAxl3ASgUGhQSL3nnZ/yj6f9k10VUVRXc8/8++CJcl8anP3B/chv43O80IG3VCP+ZekTmLrY6l+ANFaKBL6blBlmqXYXOU8h5pPdGgCSudRzOMETQu9vFngEUhlz8YBYKBFQ26u8sSVoq1omVBbImUgHoSUUNU/g4AUIluxYAJTJJaPnegG3iDwyo4LqW0q4Vw8vuy4jO0F3dPHQNKxAvAMy72siPQW+6Xdim+g27UysgYcpHiN8k+OtLah6Zi1keq/7T4CrgKWC4ZPz2CP1o3kZhuPFiH/JwRfOMDvOEP8vk5UCEpG5ygJb9q/RH+qYnaRSRrJzeAc0XDu607yCZxULJ83WtKPml6rAw5XJYMybhJFsxpSVR3i3kFHg
+X-Forefront-Antispam-Report:
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(54906003)(36860700001)(55016003)(70206006)(2906002)(316002)(70586007)(9686003)(47076005)(508600001)(336012)(356005)(8676002)(81166007)(7696005)(6862004)(8936002)(5660300002)(40460700003)(26005)(4326008)(52536014)(33656002)(53546011)(6506007)(83380400001)(82310400005)(86362001)(186003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 May 2022 12:03:36.4299
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9c5174aa-5cfa-4f41-c55c-08da2f587359
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	VE1EUR03FT051.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB7161
 
-Introduce a way to create different cpupools at boot time, this is
-particularly useful on ARM big.LITTLE system where there might be the
-need to have different cpupools for each type of core, but also
-systems using NUMA can have different cpu pools for each node.
-
-The feature on arm relies on a specification of the cpupools from the
-device tree to build pools and assign cpus to them.
-
-ACPI is not supported for this feature.
-
-With this patch, cpupool0 can now have less cpus than the number of
-online ones, so update the default case for opt_dom0_max_vcpus.
-
-Documentation is created to explain the feature.
-
-Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
-Changes in v8:
-- moved Kconfig parameter from xen/common/Kconfig to
-  xen/common/sched/Kconfig (Jan)
-- Add R-by (Stefano)
-Changes in v7:
-- rename xen/common/boot_cpupools.c to xen/common/sched/boot-cpupool.c (Jan)
-- reverted xen/common/Makefile, add entry in xen/common/sched/Makefile
-- changed line in MAINTAINERS under CPU POOLS section (Dario)
-- Fix documentation, update opt_dom0_max_vcpus to the number of cpu in
-  cpupool0 (Julien)
-Changes in v6:
-- Changed docs, return if booted with ACPI in btcpupools_dtb_parse,
-  panic if /chosen does not exists. Changed commit message (Julien)
-- Add Juergen R-by for the xen/common/sched part that didn't change
-Changes in v5:
-- Fixed wrong variable name, swapped schedulers, add scheduler info
-  in the printk (Stefano)
-- introduce assert in cpupool_init and btcpupools_get_cpupool_id to
-  harden the code
-Changes in v4:
-- modify Makefile to put in *.init.o, fixed stubs and macro (Jan)
-- fixed docs, fix brakets (Stefano)
-- keep cpu0 in Pool-0 (Julien)
-- moved printk from btcpupools_allocate_pools to
-  btcpupools_get_cpupool_id
-- Add to docs constraint about cpu0 and Pool-0
-Changes in v3:
-- Add newline to cpupools.txt and removed "default n" from Kconfig (Jan)
-- Fixed comment, moved defines, used global cpu_online_map, use
-  HAS_DEVICE_TREE instead of ARM and place arch specific code in header
-  (Juergen)
-- Fix brakets, x86 code only panic, get rid of scheduler dt node, don't
-  save pool pointer and look for it from the pool list (Stefano)
-- Changed data structures to allow modification to the code.
-Changes in v2:
-- Move feature to common code (Juergen)
-- Try to decouple dtb parse and cpupool creation to allow
-  more way to specify cpupools (for example command line)
-- Created standalone dt node for the scheduler so it can
-  be used in future work to set scheduler specific
-  parameters
-- Use only auto generated ids for cpupools
----
- MAINTAINERS                            |   2 +-
- docs/misc/arm/device-tree/cpupools.txt | 140 +++++++++++++++++
- xen/arch/arm/domain_build.c            |   5 +-
- xen/arch/arm/include/asm/smp.h         |   3 +
- xen/common/sched/Kconfig               |   7 +
- xen/common/sched/Makefile              |   1 +
- xen/common/sched/boot-cpupool.c        | 207 +++++++++++++++++++++++++
- xen/common/sched/cpupool.c             |  12 +-
- xen/include/xen/sched.h                |  14 ++
- 9 files changed, 388 insertions(+), 3 deletions(-)
- create mode 100644 docs/misc/arm/device-tree/cpupools.txt
- create mode 100644 xen/common/sched/boot-cpupool.c
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ba0d1c0c1bfa..a417c3586051 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -279,7 +279,7 @@ CPU POOLS
- M:	Juergen Gross <jgross@suse.com>
- M:	Dario Faggioli <dfaggioli@suse.com>
- S:	Supported
--F:	xen/common/sched/cpupool.c
-+F:	xen/common/sched/*cpupool.c
- 
- DEVICE TREE
- M:	Stefano Stabellini <sstabellini@kernel.org>
-diff --git a/docs/misc/arm/device-tree/cpupools.txt b/docs/misc/arm/device-tree/cpupools.txt
-new file mode 100644
-index 000000000000..1f640d680317
---- /dev/null
-+++ b/docs/misc/arm/device-tree/cpupools.txt
-@@ -0,0 +1,140 @@
-+Boot time cpupools
-+==================
-+
-+When BOOT_TIME_CPUPOOLS is enabled in the Xen configuration, it is possible to
-+create cpupools during boot phase by specifying them in the device tree.
-+ACPI is not supported for this feature.
-+
-+Cpupools specification nodes shall be direct childs of /chosen node.
-+Each cpupool node contains the following properties:
-+
-+- compatible (mandatory)
-+
-+    Must always include the compatiblity string: "xen,cpupool".
-+
-+- cpupool-cpus (mandatory)
-+
-+    Must be a list of device tree phandle to nodes describing cpus (e.g. having
-+    device_type = "cpu"), it can't be empty.
-+
-+- cpupool-sched (optional)
-+
-+    Must be a string having the name of a Xen scheduler. Check the sched=<...>
-+    boot argument for allowed values [1]. When this property is omitted, the Xen
-+    default scheduler will be used.
-+
-+
-+Constraints
-+===========
-+
-+If no cpupools are specified, all cpus will be assigned to one cpupool
-+implicitly created (Pool-0).
-+
-+If cpupools node are specified, but not every cpu brought up by Xen is assigned,
-+all the not assigned cpu will be assigned to an additional cpupool.
-+
-+If a cpu is assigned to a cpupool, but it's not brought up correctly, Xen will
-+stop.
-+
-+The boot cpu must be assigned to Pool-0, so the cpupool containing that core
-+will become Pool-0 automatically.
-+
-+
-+Examples
-+========
-+
-+A system having two types of core, the following device tree specification will
-+instruct Xen to have two cpupools:
-+
-+- The cpupool described by node cpupool_a will have 4 cpus assigned.
-+- The cpupool described by node cpupool_b will have 2 cpus assigned.
-+
-+The following example can work only if hmp-unsafe=1 is passed to Xen boot
-+arguments, otherwise not all cores will be brought up by Xen and the cpupool
-+creation process will stop Xen.
-+
-+
-+a72_1: cpu@0 {
-+        compatible = "arm,cortex-a72";
-+        reg = <0x0 0x0>;
-+        device_type = "cpu";
-+        [...]
-+};
-+
-+a72_2: cpu@1 {
-+        compatible = "arm,cortex-a72";
-+        reg = <0x0 0x1>;
-+        device_type = "cpu";
-+        [...]
-+};
-+
-+a53_1: cpu@100 {
-+        compatible = "arm,cortex-a53";
-+        reg = <0x0 0x100>;
-+        device_type = "cpu";
-+        [...]
-+};
-+
-+a53_2: cpu@101 {
-+        compatible = "arm,cortex-a53";
-+        reg = <0x0 0x101>;
-+        device_type = "cpu";
-+        [...]
-+};
-+
-+a53_3: cpu@102 {
-+        compatible = "arm,cortex-a53";
-+        reg = <0x0 0x102>;
-+        device_type = "cpu";
-+        [...]
-+};
-+
-+a53_4: cpu@103 {
-+        compatible = "arm,cortex-a53";
-+        reg = <0x0 0x103>;
-+        device_type = "cpu";
-+        [...]
-+};
-+
-+chosen {
-+
-+    cpupool_a {
-+        compatible = "xen,cpupool";
-+        cpupool-cpus = <&a53_1 &a53_2 &a53_3 &a53_4>;
-+    };
-+    cpupool_b {
-+        compatible = "xen,cpupool";
-+        cpupool-cpus = <&a72_1 &a72_2>;
-+        cpupool-sched = "credit2";
-+    };
-+
-+    [...]
-+
-+};
-+
-+
-+A system having the cpupools specification below will instruct Xen to have three
-+cpupools:
-+
-+- The cpupool described by node cpupool_a will have 2 cpus assigned.
-+- The cpupool described by node cpupool_b will have 2 cpus assigned.
-+- An additional cpupool will be created, having 2 cpus assigned (created by Xen
-+  with all the unassigned cpus a53_3 and a53_4).
-+
-+chosen {
-+
-+    cpupool_a {
-+        compatible = "xen,cpupool";
-+        cpupool-cpus = <&a53_1 &a53_2>;
-+    };
-+    cpupool_b {
-+        compatible = "xen,cpupool";
-+        cpupool-cpus = <&a72_1 &a72_2>;
-+        cpupool-sched = "null";
-+    };
-+
-+    [...]
-+
-+};
-+
-+[1] docs/misc/xen-command-line.pandoc
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 1472ca4972b0..5df5c8ffb8ba 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -73,7 +73,10 @@ custom_param("dom0_mem", parse_dom0_mem);
- unsigned int __init dom0_max_vcpus(void)
- {
-     if ( opt_dom0_max_vcpus == 0 )
--        opt_dom0_max_vcpus = num_online_cpus();
-+    {
-+        ASSERT(cpupool0);
-+        opt_dom0_max_vcpus = cpumask_weight(cpupool_valid_cpus(cpupool0));
-+    }
-     if ( opt_dom0_max_vcpus > MAX_VIRT_CPUS )
-         opt_dom0_max_vcpus = MAX_VIRT_CPUS;
- 
-diff --git a/xen/arch/arm/include/asm/smp.h b/xen/arch/arm/include/asm/smp.h
-index af5a2fe65266..83c0cd69767b 100644
---- a/xen/arch/arm/include/asm/smp.h
-+++ b/xen/arch/arm/include/asm/smp.h
-@@ -34,6 +34,9 @@ extern void init_secondary(void);
- extern void smp_init_cpus(void);
- extern void smp_clear_cpu_maps (void);
- extern int smp_get_max_cpus (void);
-+
-+#define cpu_physical_id(cpu) cpu_logical_map(cpu)
-+
- #endif
- 
- /*
-diff --git a/xen/common/sched/Kconfig b/xen/common/sched/Kconfig
-index 3d9f9214b8cc..b2ef0c99a3f8 100644
---- a/xen/common/sched/Kconfig
-+++ b/xen/common/sched/Kconfig
-@@ -64,3 +64,10 @@ config SCHED_DEFAULT
- 	default "credit2"
- 
- endmenu
-+
-+config BOOT_TIME_CPUPOOLS
-+	bool "Create cpupools at boot time"
-+	depends on HAS_DEVICE_TREE
-+	help
-+	  Creates cpupools during boot time and assigns cpus to them. Cpupools
-+	  options can be specified in the device tree.
-diff --git a/xen/common/sched/Makefile b/xen/common/sched/Makefile
-index 3537f2a68d69..697bd54bfe93 100644
---- a/xen/common/sched/Makefile
-+++ b/xen/common/sched/Makefile
-@@ -1,3 +1,4 @@
-+obj-$(CONFIG_BOOT_TIME_CPUPOOLS) += boot-cpupool.init.o
- obj-y += cpupool.o
- obj-$(CONFIG_SCHED_ARINC653) += arinc653.o
- obj-$(CONFIG_SCHED_CREDIT) += credit.o
-diff --git a/xen/common/sched/boot-cpupool.c b/xen/common/sched/boot-cpupool.c
-new file mode 100644
-index 000000000000..9429a5025fc4
---- /dev/null
-+++ b/xen/common/sched/boot-cpupool.c
-@@ -0,0 +1,207 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * xen/common/boot_cpupools.c
-+ *
-+ * Code to create cpupools at boot time.
-+ *
-+ * Copyright (C) 2022 Arm Ltd.
-+ */
-+
-+#include <xen/sched.h>
-+#include <asm/acpi.h>
-+
-+/*
-+ * pool_cpu_map:   Index is logical cpu number, content is cpupool id, (-1) for
-+ *                 unassigned.
-+ * pool_sched_map: Index is cpupool id, content is scheduler id, (-1) for
-+ *                 unassigned.
-+ */
-+static int __initdata pool_cpu_map[NR_CPUS]   = { [0 ... NR_CPUS-1] = -1 };
-+static int __initdata pool_sched_map[NR_CPUS] = { [0 ... NR_CPUS-1] = -1 };
-+static unsigned int __initdata next_pool_id;
-+
-+#define BTCPUPOOLS_DT_NODE_NO_REG     (-1)
-+#define BTCPUPOOLS_DT_NODE_NO_LOG_CPU (-2)
-+
-+static int __init get_logical_cpu_from_hw_id(unsigned int hwid)
-+{
-+    unsigned int i;
-+
-+    for ( i = 0; i < nr_cpu_ids; i++ )
-+    {
-+        if ( cpu_physical_id(i) == hwid )
-+            return i;
-+    }
-+
-+    return -1;
-+}
-+
-+static int __init
-+get_logical_cpu_from_cpu_node(const struct dt_device_node *cpu_node)
-+{
-+    int cpu_num;
-+    const __be32 *prop;
-+    unsigned int cpu_reg;
-+
-+    prop = dt_get_property(cpu_node, "reg", NULL);
-+    if ( !prop )
-+        return BTCPUPOOLS_DT_NODE_NO_REG;
-+
-+    cpu_reg = dt_read_number(prop, dt_n_addr_cells(cpu_node));
-+
-+    cpu_num = get_logical_cpu_from_hw_id(cpu_reg);
-+    if ( cpu_num < 0 )
-+        return BTCPUPOOLS_DT_NODE_NO_LOG_CPU;
-+
-+    return cpu_num;
-+}
-+
-+static int __init check_and_get_sched_id(const char* scheduler_name)
-+{
-+    int sched_id = sched_get_id_by_name(scheduler_name);
-+
-+    if ( sched_id < 0 )
-+        panic("Scheduler %s does not exists!\n", scheduler_name);
-+
-+    return sched_id;
-+}
-+
-+void __init btcpupools_dtb_parse(void)
-+{
-+    const struct dt_device_node *chosen, *node;
-+
-+    if ( !acpi_disabled )
-+        return;
-+
-+    chosen = dt_find_node_by_path("/chosen");
-+    if ( !chosen )
-+        panic("/chosen missing. Boot time cpupools can't be parsed from DT.\n");
-+
-+    dt_for_each_child_node(chosen, node)
-+    {
-+        const struct dt_device_node *phandle_node;
-+        int sched_id = -1;
-+        const char* scheduler_name;
-+        unsigned int i = 0;
-+
-+        if ( !dt_device_is_compatible(node, "xen,cpupool") )
-+            continue;
-+
-+        if ( !dt_property_read_string(node, "cpupool-sched", &scheduler_name) )
-+            sched_id = check_and_get_sched_id(scheduler_name);
-+
-+        phandle_node = dt_parse_phandle(node, "cpupool-cpus", i++);
-+        if ( !phandle_node )
-+            panic("Missing or empty cpupool-cpus property!\n");
-+
-+        while ( phandle_node )
-+        {
-+            int cpu_num;
-+
-+            cpu_num = get_logical_cpu_from_cpu_node(phandle_node);
-+
-+            if ( cpu_num < 0 )
-+                panic("Error retrieving logical cpu from node %s (%d)\n",
-+                      dt_node_name(node), cpu_num);
-+
-+            if ( pool_cpu_map[cpu_num] != -1 )
-+                panic("Logical cpu %d already added to a cpupool!\n", cpu_num);
-+
-+            pool_cpu_map[cpu_num] = next_pool_id;
-+
-+            phandle_node = dt_parse_phandle(node, "cpupool-cpus", i++);
-+        }
-+
-+        /* Save scheduler choice for this cpupool id */
-+        pool_sched_map[next_pool_id] = sched_id;
-+
-+        /* Let Xen generate pool ids */
-+        next_pool_id++;
-+    }
-+}
-+
-+void __init btcpupools_allocate_pools(void)
-+{
-+    unsigned int i;
-+    bool add_extra_cpupool = false;
-+    int swap_id = -1;
-+
-+    /*
-+     * If there are no cpupools, the value of next_pool_id is zero, so the code
-+     * below will assign every cpu to cpupool0 as the default behavior.
-+     * When there are cpupools, the code below is assigning all the not
-+     * assigned cpu to a new pool (next_pool_id value is the last id + 1).
-+     * In the same loop we check if there is any assigned cpu that is not
-+     * online.
-+     */
-+    for ( i = 0; i < nr_cpu_ids; i++ )
-+    {
-+        if ( cpumask_test_cpu(i, &cpu_online_map) )
-+        {
-+            /* Unassigned cpu gets next_pool_id pool id value */
-+            if ( pool_cpu_map[i] < 0 )
-+            {
-+                pool_cpu_map[i] = next_pool_id;
-+                add_extra_cpupool = true;
-+            }
-+
-+            /*
-+             * Cpu0 must be in cpupool0, otherwise some operations like moving
-+             * cpus between cpupools, cpu hotplug, destroying cpupools, shutdown
-+             * of the host, might not work in a sane way.
-+             */
-+            if ( !i && (pool_cpu_map[0] != 0) )
-+                swap_id = pool_cpu_map[0];
-+
-+            if ( swap_id != -1 )
-+            {
-+                if ( pool_cpu_map[i] == swap_id )
-+                    pool_cpu_map[i] = 0;
-+                else if ( pool_cpu_map[i] == 0 )
-+                    pool_cpu_map[i] = swap_id;
-+            }
-+        }
-+        else
-+        {
-+            if ( pool_cpu_map[i] >= 0 )
-+                panic("Pool-%d contains cpu%u that is not online!\n",
-+                      pool_cpu_map[i], i);
-+        }
-+    }
-+
-+    /* A swap happened, swap schedulers between cpupool id 0 and the other */
-+    if ( swap_id != -1 )
-+    {
-+        int swap_sched = pool_sched_map[swap_id];
-+
-+        pool_sched_map[swap_id] = pool_sched_map[0];
-+        pool_sched_map[0] = swap_sched;
-+    }
-+
-+    if ( add_extra_cpupool )
-+        next_pool_id++;
-+
-+    /* Create cpupools with selected schedulers */
-+    for ( i = 0; i < next_pool_id; i++ )
-+        cpupool_create_pool(i, pool_sched_map[i]);
-+}
-+
-+unsigned int __init btcpupools_get_cpupool_id(unsigned int cpu)
-+{
-+    ASSERT((cpu < NR_CPUS) && (pool_cpu_map[cpu] >= 0));
-+
-+    printk(XENLOG_INFO "Logical CPU %u in Pool-%d (Scheduler id: %d).\n",
-+           cpu, pool_cpu_map[cpu], pool_sched_map[pool_cpu_map[cpu]]);
-+
-+    return pool_cpu_map[cpu];
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
-index 89a891af7076..86a175f99cd5 100644
---- a/xen/common/sched/cpupool.c
-+++ b/xen/common/sched/cpupool.c
-@@ -1247,12 +1247,22 @@ static int __init cf_check cpupool_init(void)
-     cpupool_put(cpupool0);
-     register_cpu_notifier(&cpu_nfb);
- 
-+    btcpupools_dtb_parse();
-+
-+    btcpupools_allocate_pools();
-+
-     spin_lock(&cpupool_lock);
- 
-     cpumask_copy(&cpupool_free_cpus, &cpu_online_map);
- 
-     for_each_cpu ( cpu, &cpupool_free_cpus )
--        cpupool_assign_cpu_locked(cpupool0, cpu);
-+    {
-+        unsigned int pool_id = btcpupools_get_cpupool_id(cpu);
-+        struct cpupool *pool = cpupool_find_by_id(pool_id);
-+
-+        ASSERT(pool);
-+        cpupool_assign_cpu_locked(pool, cpu);
-+    }
- 
-     spin_unlock(&cpupool_lock);
- 
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 4442a1940c25..74b3aae10b94 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -1184,6 +1184,20 @@ extern void cf_check dump_runq(unsigned char key);
- 
- void arch_do_physinfo(struct xen_sysctl_physinfo *pi);
- 
-+#ifdef CONFIG_BOOT_TIME_CPUPOOLS
-+void btcpupools_allocate_pools(void);
-+unsigned int btcpupools_get_cpupool_id(unsigned int cpu);
-+void btcpupools_dtb_parse(void);
-+
-+#else /* !CONFIG_BOOT_TIME_CPUPOOLS */
-+static inline void btcpupools_allocate_pools(void) {}
-+static inline void btcpupools_dtb_parse(void) {}
-+static inline unsigned int btcpupools_get_cpupool_id(unsigned int cpu)
-+{
-+    return 0;
-+}
-+#endif
-+
- #endif /* __SCHED_H__ */
- 
- /*
--- 
-2.17.1
-
+SGkgSmFuLA0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEphbiBCZXVs
+aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCj4gU2VudDogRnJpZGF5LCBNYXkgNiwgMjAyMiA2OjMz
+IFBNDQo+IFRvOiBIZW5yeSBXYW5nIDxIZW5yeS5XYW5nQGFybS5jb20+DQo+IENjOiBTdGVmYW5v
+IFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+OyBKdWxpZW4gR3JhbGwgPGp1bGll
+bkB4ZW4ub3JnPjsNCj4gQmVydHJhbmQgTWFycXVpcyA8QmVydHJhbmQuTWFycXVpc0Bhcm0uY29t
+PjsgVm9sb2R5bXlyIEJhYmNodWsNCj4gPFZvbG9keW15cl9CYWJjaHVrQGVwYW0uY29tPjsgQW5k
+cmV3IENvb3Blcg0KPiA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT47IEdlb3JnZSBEdW5sYXAg
+PGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT47DQo+IFdlaSBMaXUgPHdsQHhlbi5vcmc+OyBXZWkg
+Q2hlbiA8V2VpLkNoZW5AYXJtLmNvbT47IEp1bGllbiBHcmFsbA0KPiA8amdyYWxsQGFtYXpvbi5j
+b20+OyB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcNCj4gU3ViamVjdDogUmU6IFtQQVRD
+SCB2MiAyLzJdIHhlbi9jb21tb246IFVzZSBlbmhhbmNlZA0KPiBBU1NFUlRfQUxMT0NfQ09OVEVY
+VCBpbiB4bWFsbG9jKCkNCj4gDQo+IE9uIDA2LjA1LjIwMjIgMDc6NTIsIEhlbnJ5IFdhbmcgd3Jv
+dGU6DQo+ID4gLS0tIGEveGVuL2NvbW1vbi94bWFsbG9jX3Rsc2YuYw0KPiA+ICsrKyBiL3hlbi9j
+b21tb24veG1hbGxvY190bHNmLmMNCj4gPiBAQCAtNTk0LDcgKzU5NCw3IEBAIHZvaWQgKl94bWFs
+bG9jKHVuc2lnbmVkIGxvbmcgc2l6ZSwgdW5zaWduZWQgbG9uZw0KPiBhbGlnbikNCj4gPiAgew0K
+PiA+ICAgICAgdm9pZCAqcCA9IE5VTEw7DQo+ID4NCj4gPiAtICAgIEFTU0VSVCghaW5faXJxKCkp
+Ow0KPiA+ICsgICAgQVNTRVJUX0FMTE9DX0NPTlRFWFQoKTsNCj4gDQo+IEZvciBvbmUgLSB3aGF0
+IGFib3V0IHhmcmVlKCk/DQoNCk9oIHlvdSBhcmUgZGVmaW5pdGVseSBjb3JyZWN0LCB0aGFua3Mg
+Zm9yIHBvaW50aW5nIHRoaXMgb3V0LiBJIHdpbGwNCmRlZmluaXRlbHkgY2hhbmdlIHRoZSBhc3Nl
+cnRpb24gaW4geGZyZWUoKSBhcyB3ZWxsIGluIHYzLg0KDQo+IA0KPiBBbmQgdGhlbiBkaWQgeW91
+IGNvbnNpZGVyIHRha2luZyB0aGUgb3Bwb3J0dW5pdHkgYW5kIG1vdmluZyBib3RoIHRvDQo+IHRo
+ZSByZXNwZWN0aXZlIHBvb2wgYWxsb2MgZnVuY3Rpb25zLCB0aHVzIGdpdmluZyBldmVuIGJldHRl
+ciBjb3ZlcmFnZT8NCg0KWWVhaCBJIHdvdWxkIGxvdmUgdG8uIEJ1dCBzb3JyeSBhYm91dCB0aGUg
+cXVlc3Rpb24gKGp1c3QgZm9yIGxlYXJuaW5nKToNCkkgYXNzdW1lIHlvdSBhcmUgdGFsa2luZyBh
+Ym91dCBjb2RlIGNvdmVyYWdlLCBjb3VsZCB5b3UgcGxlYXNlIGtpbmRseQ0KYWRkIGEgbGl0dGxl
+IGJpdCBtb3JlIGRldGFpbCB0byBoZWxwIG1lIHVuZGVyc3RhbmQgd2h5IGFkZGluZyB0aGUgc2Ft
+ZQ0KQVNTRVJUX0FMTE9DX0NPTlRFWFQgd291bGQgaGVscCB0byBhIGJldHRlciBjb3ZlcmFnZT8g
+U2luY2UuLi4NCg0KPiBHcmFudGVkIHRoZXJlJ3Mgb25lIGRvd25zaWRlIHRvIG1vdmluZyBpdCB0
+byB4bWVtX3Bvb2xfYWxsb2MoKTogVGhlbg0KPiB0aGUgZWFybHkgemVyby1zaXplIGFuZCBlcnJv
+ciByZXR1cm5zIHdvbid0IGJlIGNvdmVyZWQsIHNvIG1heWJlIHdlDQo+IGFjdHVhbGx5IHdhbnQg
+Y2hlY2tzIGluIGJvdGggcGxhY2VzLiANCg0KLi4uYWZ0ZXIgcmVhZGluZyB0aGVzZSBJIGhhdmUg
+YSBmZWVsaW5nIHRoYXQgd2UgbmVlZCB0byBhZGQgdGhlIHNhbWUNCkFTU0VSVF9BTExPQ19DT05U
+RVhUIGluIHRoZSBiZWdpbm5pbmcgb2YgdGhlIHhtZW1fcG9vbF9hbGxvYywNCnhtYWxsb2Nfd2hv
+bGVfcGFnZXMsIGFuZCB4bWVtX3Bvb2xfZnJlZSwgd2hpbGUga2VlcGluZw0KQVNTRVJUX0FMTE9D
+X0NPTlRFWFQgaW4gX3htYWxsb2MuIEkgdGhpbmsgeG1lbV9wb29sX2FsbG9jIGFuZA0KeG1hbGxv
+Y193aG9sZV9wYWdlcyBhcmUgb25seSBjYWxsZWQgaW4gX3htYWxsb2MgYW5kIHhtZW1fcG9vbF9m
+cmVlDQppcyBvbmx5IGNhbGxlZCBpbiB4ZnJlZS4gQWRkaW5nIHRoZSBzYW1lIGFzc2VydGlvbiBp
+biB0aGVzZSB0aHJlZSBmdW5jdGlvbnMNCmlzIGR1cGxpY2F0aW9uIG9mIGNvZGU/DQoNClRoYW5r
+IHlvdSBmb3IgeW91ciBleHBsYW5hdGlvbiBhbmQgcGF0aWVuY2UuDQoNCj4gSW4geGZyZWUoKSBJ
+IHRoaW5rIHRoZSBjaGVjaw0KPiB3b3VsZCB0aGVuIGFsc28gd2FudCB0byBtb3ZlIGFoZWFkIG9m
+IHRoZSBlYXJseSByZXR1cm4uDQoNClN1cmUsIHdpbGwgZG8gYXMgeW91IHN1Z2dlc3RlZC4NCg0K
+S2luZCByZWdhcmRzLA0KSGVucnkNCg0KPiANCj4gSmFuDQoNCg==
 
