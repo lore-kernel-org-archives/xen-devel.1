@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7844C433F5
-	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 07:27:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.322668.544114 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BAFAC433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 07:27:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.322678.544125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmsMh-0002b6-AK; Fri, 06 May 2022 07:27:03 +0000
+	id 1nmsMo-00030V-JC; Fri, 06 May 2022 07:27:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 322668.544114; Fri, 06 May 2022 07:27:03 +0000
+Received: by outflank-mailman (output) from mailman id 322678.544125; Fri, 06 May 2022 07:27:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmsMh-0002az-68; Fri, 06 May 2022 07:27:03 +0000
-Received: by outflank-mailman (input) for mailman id 322668;
- Fri, 06 May 2022 07:27:02 +0000
+	id 1nmsMo-00030O-El; Fri, 06 May 2022 07:27:10 +0000
+Received: by outflank-mailman (input) for mailman id 322678;
+ Fri, 06 May 2022 07:27:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=5MfP=VO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1nmsLz-00078X-QD
- for xen-devel@lists.xenproject.org; Fri, 06 May 2022 07:26:19 +0000
+ id 1nmsM4-00078X-Qy
+ for xen-devel@lists.xenproject.org; Fri, 06 May 2022 07:26:24 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id cf6aa5d6-cd0d-11ec-a406-831a346695d4;
- Fri, 06 May 2022 09:26:14 +0200 (CEST)
+ id d3333901-cd0d-11ec-a406-831a346695d4;
+ Fri, 06 May 2022 09:26:20 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A3E7C1063;
- Fri,  6 May 2022 00:26:13 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 04C201063;
+ Fri,  6 May 2022 00:26:20 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id C7FB53FA27;
- Fri,  6 May 2022 00:26:10 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 765BD3FA27;
+ Fri,  6 May 2022 00:26:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,60 +45,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cf6aa5d6-cd0d-11ec-a406-831a346695d4
+X-Inumbo-ID: d3333901-cd0d-11ec-a406-831a346695d4
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
-	Penny Zheng <Penny.Zheng@arm.com>,
+	Penny Zheng <penny.zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 7/9] xen/arm: set up shared memory foreign mapping for borrower domain
-Date: Fri,  6 May 2022 15:25:00 +0800
-Message-Id: <20220506072502.2177828-8-Penny.Zheng@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v2 9/9] xen/arm: enable statically shared memory on Dom0
+Date: Fri,  6 May 2022 15:25:02 +0800
+Message-Id: <20220506072502.2177828-10-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220506072502.2177828-1-Penny.Zheng@arm.com>
 References: <20220506072502.2177828-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This commit sets up shared memory foreign mapping for borrower domain.
+From: Penny Zheng <penny.zheng@arm.com>
 
-If owner domain is the default dom_io, all shared domain are treated as
-borrower domain.
+To add statically shared memory nodes in Dom0, user shall put according
+static shared memory configuration under /chosen node.
+
+This commit adds shm-processing function process_shm in construct_dom0
+to enable statically shared memory on Dom0.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 ---
 v2 change:
-- remove guest_physmap_add_shm, since for borrower domain, we only
-do P2M foreign memory mapping now.
+- no change
 ---
- xen/arch/arm/domain_build.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ xen/arch/arm/domain_build.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 089b9e99fc..8d299a3616 100644
+index f08606d2c0..9da0a0c88b 100644
 --- a/xen/arch/arm/domain_build.c
 +++ b/xen/arch/arm/domain_build.c
-@@ -965,6 +965,16 @@ static int __init process_shm(struct domain *d,
-             if ( ret )
-                 return ret;
+@@ -2628,6 +2628,11 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
+             if ( res )
+                 return res;
          }
 +
-+        if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
-+        {
-+            /* Set up P2M foreign mapping for borrower domain. */
-+            ret = guest_physmap_add_pages(d, _gfn(PFN_UP(gbase)),
-+                                          _mfn(PFN_UP(pbase)), PFN_DOWN(psize),
-+                                          p2m_map_foreign_rw);
-+            if ( ret )
-+                return ret;
-+        }
++        res = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
++                                    d->arch.shm_mem);
++        if ( res )
++            return res;
      }
  
-     return 0;
+     res = fdt_end_node(kinfo->fdt);
+@@ -3639,6 +3644,9 @@ static int __init construct_dom0(struct domain *d)
+ {
+     struct kernel_info kinfo = {};
+     int rc;
++#ifdef CONFIG_STATIC_SHM
++    const struct dt_device_node *chosen = dt_find_node_by_path("/chosen");
++#endif
+ 
+     /* Sanity! */
+     BUG_ON(d->domain_id != 0);
+@@ -3673,6 +3681,12 @@ static int __init construct_dom0(struct domain *d)
+     allocate_memory_11(d, &kinfo);
+     find_gnttab_region(d, &kinfo);
+ 
++#ifdef CONFIG_STATIC_SHM
++    rc = process_shm(d, chosen);
++    if ( rc < 0 )
++        return rc;
++#endif
++
+     /* Map extra GIC MMIO, irqs and other hw stuffs to dom0. */
+     rc = gic_map_hwdom_extra_mappings(d);
+     if ( rc < 0 )
 -- 
 2.25.1
 
