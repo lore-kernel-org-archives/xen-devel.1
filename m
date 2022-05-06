@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C30ECC433EF
-	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 07:27:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.322694.544136 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA2BC433F5
+	for <xen-devel@archiver.kernel.org>; Fri,  6 May 2022 07:31:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.322697.544147 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmsN8-0003oJ-QH; Fri, 06 May 2022 07:27:30 +0000
+	id 1nmsQq-0005XN-AA; Fri, 06 May 2022 07:31:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 322694.544136; Fri, 06 May 2022 07:27:30 +0000
+Received: by outflank-mailman (output) from mailman id 322697.544147; Fri, 06 May 2022 07:31:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nmsN8-0003oC-NN; Fri, 06 May 2022 07:27:30 +0000
-Received: by outflank-mailman (input) for mailman id 322694;
- Fri, 06 May 2022 07:27:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=5MfP=VO=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1nmsLy-0007P7-JD
- for xen-devel@lists.xenproject.org; Fri, 06 May 2022 07:26:18 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id d157c0c9-cd0d-11ec-8fc4-03012f2f19d4;
- Fri, 06 May 2022 09:26:17 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F0FB61063;
- Fri,  6 May 2022 00:26:16 -0700 (PDT)
-Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
- [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 298193FA27;
- Fri,  6 May 2022 00:26:13 -0700 (PDT)
+	id 1nmsQq-0005XG-7L; Fri, 06 May 2022 07:31:20 +0000
+Received: by outflank-mailman (input) for mailman id 322697;
+ Fri, 06 May 2022 07:31:18 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nmsQo-0005X6-PI; Fri, 06 May 2022 07:31:18 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nmsQo-0000SQ-M2; Fri, 06 May 2022 07:31:18 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nmsQo-0001Sh-3s; Fri, 06 May 2022 07:31:18 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1nmsQo-00024J-3P; Fri, 06 May 2022 07:31:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,259 +44,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d157c0c9-cd0d-11ec-8fc4-03012f2f19d4
-From: Penny Zheng <Penny.Zheng@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=wxdGzWAKqkmPaAN5EaK0fj3DojNAR5UU97eiZ79qZEI=; b=wn6n7knUoWVEFIFnS92vcZXebK
+	JGecoObYIFhNLqLNJdWAFQkTuGLLFREziYZ38vC1EgI6c157dsJ5OO5vIg8NHm4iFmzgwEcCbgPQL
+	o4iHuvSdqoCHM+OjVvlQc9n3AkgYI5HcJ7l3/H7hfLTHjGo78C7sQmLEPS02EjTevd6Y=;
 To: xen-devel@lists.xenproject.org
-Cc: wei.chen@arm.com,
-	Penny Zheng <Penny.Zheng@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v2 8/9] xen/arm: create shared memory nodes in guest device tree
-Date: Fri,  6 May 2022 15:25:01 +0800
-Message-Id: <20220506072502.2177828-9-Penny.Zheng@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220506072502.2177828-1-Penny.Zheng@arm.com>
-References: <20220506072502.2177828-1-Penny.Zheng@arm.com>
-MIME-Version: 1.0
+Message-ID: <osstest-170174-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 170174: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=826527c9db11f34ca500033e131633f831da2ac2
+X-Osstest-Versions-That:
+    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 06 May 2022 07:31:18 +0000
 
-We expose the shared memory to the domU using the "xen,shared-memory-v1"
-reserved-memory binding. See
-Documentation/devicetree/bindings/reserved-memory/xen,shared-memory.txt
-in Linux for the corresponding device tree binding.
+flight 170174 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/170174/
 
-To save the cost of re-parsing shared memory device tree configuration when
-creating shared memory nodes in guest device tree, this commit adds new field
-"shm_mem" to store shm-info per domain.
+Regressions :-(
 
-For each shared memory region, a range is exposed under
-the /reserved-memory node as a child node. Each range sub-node is
-named xen-shmem@<address> and has the following properties:
-- compatible:
-        compatible = "xen,shared-memory-v1"
-- reg:
-        the base guest physical address and size of the shared memory region
-- xen,id:
-        a string that identifies the shared memory region.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
+ build-amd64                   6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
+ build-i386-xsm                6 xen-build                fail REGR. vs. 168254
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
----
-v2 change:
-- using xzalloc
-- shm_id should be uint8_t
-- make reg a local variable
-- add #address-cells and #size-cells properties
-- fix alignment
----
- xen/arch/arm/domain_build.c       | 144 ++++++++++++++++++++++++++++++
- xen/arch/arm/include/asm/domain.h |   1 +
- xen/arch/arm/include/asm/setup.h  |   1 +
- 3 files changed, 146 insertions(+)
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-index 8d299a3616..f08606d2c0 100644
---- a/xen/arch/arm/domain_build.c
-+++ b/xen/arch/arm/domain_build.c
-@@ -894,6 +894,26 @@ static int __init allocate_shared_memory(struct domain *d,
-     return ret;
- }
- 
-+static int __init append_shm_bank_to_domain(struct domain *d,
-+                                            paddr_t start, paddr_t size,
-+                                            u32 shm_id)
-+{
-+    /* Allocate memory at first insertion. */
-+    if ( d->arch.shm_mem == NULL )
-+    {
-+        d->arch.shm_mem = xzalloc(struct meminfo);
-+        if ( d->arch.shm_mem == NULL )
-+            return -ENOMEM;
-+    }
-+
-+    d->arch.shm_mem->bank[d->arch.shm_mem->nr_banks].start = start;
-+    d->arch.shm_mem->bank[d->arch.shm_mem->nr_banks].size = size;
-+    d->arch.shm_mem->bank[d->arch.shm_mem->nr_banks].shm_id = shm_id;
-+    d->arch.shm_mem->nr_banks++;
-+
-+    return 0;
-+}
-+
- static int __init process_shm(struct domain *d,
-                               const struct dt_device_node *node)
- {
-@@ -975,6 +995,14 @@ static int __init process_shm(struct domain *d,
-             if ( ret )
-                 return ret;
-         }
-+
-+        /*
-+         * Record static shared memory region info for later setting
-+         * up shm-node in guest device tree.
-+         */
-+        ret = append_shm_bank_to_domain(d, gbase, psize, shm_id);
-+        if ( ret )
-+            return ret;
-     }
- 
-     return 0;
-@@ -1305,6 +1333,117 @@ static int __init make_memory_node(const struct domain *d,
-     return res;
- }
- 
-+#ifdef CONFIG_STATIC_SHM
-+static int __init make_shm_memory_node(const struct domain *d,
-+                                       void *fdt,
-+                                       int addrcells, int sizecells,
-+                                       struct meminfo *mem)
-+{
-+    unsigned long i = 0;
-+    int res = 0;
-+
-+    if ( mem->nr_banks == 0 )
-+        return -ENOENT;
-+
-+    /*
-+     * For each shared memory region, a range is exposed under
-+     * the /reserved-memory node as a child node. Each range sub-node is
-+     * named xen-shmem@<address>.
-+     */
-+    dt_dprintk("Create xen-shmem node\n");
-+
-+    for ( ; i < mem->nr_banks; i++ )
-+    {
-+        uint64_t start = mem->bank[i].start;
-+        uint64_t size = mem->bank[i].size;
-+        uint8_t shm_id = mem->bank[i].shm_id;
-+        /* Placeholder for xen-shmem@ + a 64-bit number + \0 */
-+        char buf[27];
-+        const char compat[] = "xen,shared-memory-v1";
-+        __be32 reg[4];
-+        __be32 *cells;
-+        unsigned int len = (addrcells + sizecells) * sizeof(__be32);
-+
-+        snprintf(buf, sizeof(buf), "xen-shmem@%"PRIx64, mem->bank[i].start);
-+        res = fdt_begin_node(fdt, buf);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_property(fdt, "compatible", compat, sizeof(compat));
-+        if ( res )
-+            return res;
-+
-+        cells = reg;
-+        dt_child_set_range(&cells, addrcells, sizecells, start, size);
-+
-+        res = fdt_property(fdt, "reg", reg, len);
-+        if ( res )
-+            return res;
-+
-+        dt_dprintk("Shared memory bank %lu: %#"PRIx64"->%#"PRIx64"\n",
-+                   i, start, start + size);
-+
-+        res = fdt_property_cell(fdt, "xen,id", shm_id);
-+        if ( res )
-+            return res;
-+
-+        res = fdt_end_node(fdt);
-+        if ( res )
-+            return res;
-+    }
-+
-+    return res;
-+}
-+#else
-+static int __init make_shm_memory_node(const struct domain *d,
-+                                       void *fdt,
-+                                       int addrcells, int sizecells,
-+                                       struct meminfo *mem)
-+{
-+    ASSERT_UNREACHABLE();
-+}
-+#endif
-+
-+static int __init make_resv_memory_node(const struct domain *d,
-+                                        void *fdt,
-+                                        int addrcells, int sizecells,
-+                                        struct meminfo *mem)
-+{
-+    int res = 0;
-+    /* Placeholder for reserved-memory\0 */
-+    char resvbuf[16] = "reserved-memory";
-+
-+    if ( mem == NULL )
-+        /* No shared memory provided. */
-+        return 0;
-+
-+    dt_dprintk("Create reserved-memory node\n");
-+
-+    res = fdt_begin_node(fdt, resvbuf);
-+    if ( res )
-+        return res;
-+
-+    res = fdt_property(fdt, "ranges", NULL, 0);
-+    if ( res )
-+        return res;
-+
-+    res = fdt_property_cell(fdt, "#address-cells", addrcells);
-+    if ( res )
-+        return res;
-+
-+    res = fdt_property_cell(fdt, "#size-cells", sizecells);
-+    if ( res )
-+        return res;
-+
-+    res = make_shm_memory_node(d, fdt, addrcells, sizecells, mem);
-+    if ( res )
-+        return res;
-+
-+    res = fdt_end_node(fdt);
-+
-+    return res;
-+}
-+
- static int __init add_ext_regions(unsigned long s, unsigned long e, void *data)
- {
-     struct meminfo *ext_regions = data;
-@@ -3041,6 +3180,11 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
-     if ( ret )
-         goto err;
- 
-+    ret = make_resv_memory_node(d, kinfo->fdt, addrcells, sizecells,
-+                                d->arch.shm_mem);
-+    if ( ret )
-+        goto err;
-+
-     /*
-      * domain_handle_dtb_bootmodule has to be called before the rest of
-      * the device tree is generated because it depends on the value of
-diff --git a/xen/arch/arm/include/asm/domain.h b/xen/arch/arm/include/asm/domain.h
-index ed63c2b6f9..d0d1e12cfe 100644
---- a/xen/arch/arm/include/asm/domain.h
-+++ b/xen/arch/arm/include/asm/domain.h
-@@ -104,6 +104,7 @@ struct arch_domain
- #endif
- 
-     bool directmap;
-+    struct meminfo *shm_mem;
- }  __cacheline_aligned;
- 
- struct arch_vcpu
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 38e02ced36..b5909acf68 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -29,6 +29,7 @@ struct membank {
-     bool xen_domain; /* whether the memory bank is bound to a Xen domain. */
- #ifdef CONFIG_STATIC_SHM
-     unsigned long nr_shm_domain;
-+    uint8_t shm_id ; /* ID identifier of a static shared memory bank. */
- #endif
- };
- 
--- 
-2.25.1
+version targeted for testing:
+ ovmf                 826527c9db11f34ca500033e131633f831da2ac2
+baseline version:
+ ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
 
+Last test of basis   168254  2022-02-28 10:41:46 Z   66 days
+Failing since        168258  2022-03-01 01:55:31 Z   66 days  836 attempts
+Testing same since   170171  2022-05-06 05:41:36 Z    0 days    3 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
+  Abner Chang <abner.chang@hpe.com>
+  Akihiko Odaki <akihiko.odaki@gmail.com>
+  Anthony PERARD <anthony.perard@citrix.com
+  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
+  Bo Chang Ke <bo-changx.ke@intel.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Chen Lin Z <lin.z.chen@intel.com>
+  Chen, Christine <Yuwei.Chen@intel.com>
+  Chen, Lin Z <lin.z.chen@intel.com>
+  Corvin Köhne <c.koehne@beckhoff.com>
+  Dandan Bi <dandan.bi@intel.com>
+  Dun Tan <dun.tan@intel.com>
+  duntan <dun.tan@intel.com>
+  Feng, Bob C <bob.c.feng@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Guo Dong <guo.dong@intel.com>
+  Guomin Jiang <guomin.jiang@intel.com>
+  Hao A Wu <hao.a.wu@intel.com>
+  Heng Luo <heng.luo@intel.com>
+  Hua Ma <hua.ma@intel.com>
+  Huang, Li-Xia <lisa.huang@intel.com>
+  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
+  Jake Garver <jake@nvidia.com>
+  Jake Garver via groups.io <jake=nvidia.com@groups.io>
+  Jason <yun.lou@intel.com>
+  Jason Lou <yun.lou@intel.com>
+  Jiewen Yao <jiewen.yao@intel.com>
+  Ke, Bo-ChangX <bo-changx.ke@intel.com>
+  Ken Lautner <kenlautner3@gmail.com>
+  Kenneth Lautner <kenlautner3@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Lean Sheng Tan <sheng.tan@9elements.com>
+  Leif Lindholm <quic_llindhol@quicinc.com
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Li, Yi1 <yi1.li@intel.com>
+  Li, Zhihao <zhihao.li@intel.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Liu <yun.y.liu@intel.com>
+  Liu Yun <yun.y.liu@intel.com>
+  Liu Yun Y <yun.y.liu@intel.com>
+  Lixia Huang <lisa.huang@intel.com>
+  Lou, Yun <Yun.Lou@intel.com>
+  Ma, Hua <Hua.Ma@intel.com>
+  Mara Sophie Grosch <littlefox@lf-net.org>
+  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
+  Matt DeVillier <matt.devillier@gmail.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Michael Kubacki <mikuback@microsoft.com>
+  Min Xu <min.m.xu@intel.com>
+  Oliver Steffen <osteffen@redhat.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Peter Grehan <grehan@freebsd.org>
+  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <quic_rcran@quicinc.com>
+  Rebecca Cran <rebecca@bsdio.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Rhodes <sean@starlabs.systems>
+  Sean Rhodes sean@starlabs.systems
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Sunny Wang <sunny.wang@arm.com>
+  Tan, Dun <dun.tan@intel.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
+  Xiaolu.Jiang <xiaolu.jiang@intel.com>
+  Xie, Yuanhao <yuanhao.xie@intel.com>
+  Yi Li <yi1.li@intel.com>
+  yi1 li <yi1.li@intel.com>
+  Yuanhao Xie <yuanhao.xie@intel.com>
+  Yuwei Chen <yuwei.chen@intel.com>
+  Zhihao Li <zhihao.li@intel.com>
+
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 5967 lines long.)
 
