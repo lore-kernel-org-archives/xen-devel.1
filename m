@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7B1C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AC4C43219
 	for <xen-devel@archiver.kernel.org>; Sat,  7 May 2022 18:19:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.323755.545574 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.323761.545640 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nnP1X-0006jT-T4; Sat, 07 May 2022 18:19:23 +0000
+	id 1nnP1i-00004t-9l; Sat, 07 May 2022 18:19:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 323755.545574; Sat, 07 May 2022 18:19:23 +0000
+Received: by outflank-mailman (output) from mailman id 323761.545640; Sat, 07 May 2022 18:19:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nnP1X-0006jM-Pn; Sat, 07 May 2022 18:19:23 +0000
-Received: by outflank-mailman (input) for mailman id 323755;
- Sat, 07 May 2022 18:19:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nnP1i-0008WF-4p; Sat, 07 May 2022 18:19:34 +0000
+Received: by outflank-mailman (input) for mailman id 323761;
+ Sat, 07 May 2022 18:19:32 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Y6lb=VP=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1nnP1V-0006Tm-Ow
- for xen-devel@lists.xenproject.org; Sat, 07 May 2022 18:19:21 +0000
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [2a00:1450:4864:20::32f])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 36f9c426-ce32-11ec-a406-831a346695d4;
- Sat, 07 May 2022 20:19:21 +0200 (CEST)
-Received: by mail-wm1-x32f.google.com with SMTP id
- m2-20020a1ca302000000b003943bc63f98so6129843wme.4
- for <xen-devel@lists.xenproject.org>; Sat, 07 May 2022 11:19:20 -0700 (PDT)
+ id 1nnP1g-00079i-5q
+ for xen-devel@lists.xenproject.org; Sat, 07 May 2022 18:19:32 +0000
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [2a00:1450:4864:20::335])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3d24b932-ce32-11ec-8fc4-03012f2f19d4;
+ Sat, 07 May 2022 20:19:31 +0200 (CEST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ n126-20020a1c2784000000b0038e8af3e788so6133525wmn.1
+ for <xen-devel@lists.xenproject.org>; Sat, 07 May 2022 11:19:31 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- b10-20020a5d4d8a000000b0020c5253d8f3sm8198457wru.63.2022.05.07.11.19.17
+ b10-20020a5d4d8a000000b0020c5253d8f3sm8198457wru.63.2022.05.07.11.19.28
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Sat, 07 May 2022 11:19:19 -0700 (PDT)
+ Sat, 07 May 2022 11:19:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,173 +47,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 36f9c426-ce32-11ec-a406-831a346695d4
+X-Inumbo-ID: 3d24b932-ce32-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=JdehnkGLqTKFFqJmno6u7ZfWHrdJGNPcR0+Jk9IE3ng=;
-        b=W2CM1/+K9Zk1Kt7dirJgx2bl5Gzq0zuZnPN5BVRpPATox1liMddFAgkXT9YhMEJKJW
-         3O660mwRMAf8TC005txxxBgmgrS9oiMeZwotoJPeew+vIvCdOm765wKV5c9x0BQ00/qM
-         lOgnr6KN7alyGkPQQDDUnMJeacpkc2gh1QJmK01mhUdDzdgbsOjUoKte+pU3cJeipEuf
-         YSvs0HkqOPU6wQ5cIxg7hJrG1hxCK2aJ4ZjSYAp3T1krrkp7p1CUCOkmJSjmRJV2FUhp
-         N7Fr3JhClK19P4klrT/48MqsDShlu0CI9z8qoywZr6bhKFckl2kixdga3Z5rYAdM4lNL
-         NeOA==
+        bh=JQ4/wPcUQ3XIBwyiOH+85aEeFtvLk17ZXfaTMabSQhQ=;
+        b=M0nL9AqbUiqgoGeBXuGJocL7BzhM9dpf6lZVm6z1MjjHA7Ksx3fAI6nsxT0Nt1TL05
+         V9n3RuTkUTnoTUTcWzbDZzYyXq+nDqhodBqF5QWBpLz3KG7WkLCJw+dMLaWXpmXERYF1
+         Z/ciVWktZyebFps/o8q2Oq5Yq41Pu3hxh+stWpNbBkwcaCkgIOQ5WYEwn7lV+jJsEdSh
+         +HhxY/jdkwpoWo5uCgqY6+fdKmpb5rQY+LpZDKBI6NpE+HUIsQOlFS0+S/WN3zq9WuIL
+         TiiJg4uvRYrYvsi0W51dYzG/nuX5J3xAnuGzn1LhIo6s+ydhszeik8BNC8Hg3Kloj1TO
+         zwOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=JdehnkGLqTKFFqJmno6u7ZfWHrdJGNPcR0+Jk9IE3ng=;
-        b=KJaxT8T12HeSmZK9j2tBWHIlTGJsmkd9MS4knL28sOpMmBfHi+265HQCtpvfS6CSx+
-         jo3d1+W8kMiAeD4EUgxU3bUBrtsprPpDeVESpjMgKvI3FOWIVZ8mlRSEGh6C/6JYyxCx
-         +It6wyniH31NSKtmgy5+XU48+B/gtpCYclL82nKMSS4bjwKxDPOxYngZ2hhiApZutMu1
-         Adi3rpdxtRK5Q5Emr8zJbPDbI6E0rCemPH+RNVYG7vvHo1k3PpnTN1bOlMLim6otYj+0
-         tbERcAJWLEDlW7lZVJO/6ZyKNPph3F6bsxU1XwdraeuYBTDU2KUsv5hgZJyWzCH7lDxs
-         Txrg==
-X-Gm-Message-State: AOAM531rKDnJgUwpnhw2iqbzm4QhteuDaLcLwm1yhqFhqstFUAfM9Fr9
-	MsSFBsAIsnygeWlGihgxCu5JqxsA248=
-X-Google-Smtp-Source: ABdhPJwcoJACAJIOBQsEykFr9K/bH+BLZEo0MgY60F8IfPkFfRkCVpyNg4ZkPrg0s2ewaX0SV0R9DQ==
-X-Received: by 2002:a7b:c446:0:b0:394:3293:a88f with SMTP id l6-20020a7bc446000000b003943293a88fmr8943853wmi.22.1651947559848;
-        Sat, 07 May 2022 11:19:19 -0700 (PDT)
+        bh=JQ4/wPcUQ3XIBwyiOH+85aEeFtvLk17ZXfaTMabSQhQ=;
+        b=QKuK7H4mHW4Rb2TWgRjgWF1dfvgqErexTsqBgTKml00O+VM8PJiFhefq5+P6EQg6fF
+         +s9m2h4EdQG6KTbhlsE6zeFL0zGD9CWVMjc9/OlfNjD+r1hbRBmwFY15NRfgaMGVo3iX
+         lqYURc6UhBBTkf3auVrEgsuxy/ypz9LfMnuEn/L0UrjRsqnTXpRowDUQqch+Rt3bG6JP
+         IK5psoGYcHXPoEG9Erzn7AwvXjThBdzgnI5H2hzkGucBhYIMVo2ckiUtE6macY+0VcKh
+         t2zVCYm+XRVFHaOz2xJgo/lEer0nTDyfQ0QDRoPrULYj9Mq94buj16fyc1Mul5F/kK7V
+         kpDA==
+X-Gm-Message-State: AOAM531WipuSW3tgh8U5619w7wi87yaTonjC9r/QwbY60vhjck9PHfg4
+	OZPcPXDbyOeV7BZmAfgHzwUmWvHJSjg=
+X-Google-Smtp-Source: ABdhPJx4KKTzPkd6Pb55J8tu0qaETBwCwPrhXqxi1bGV5Mve7UPIQCUHgzJRC6duNfUV/2m203EIIQ==
+X-Received: by 2002:a1c:3b54:0:b0:394:3910:3c7b with SMTP id i81-20020a1c3b54000000b0039439103c7bmr8718493wma.3.1651947570262;
+        Sat, 07 May 2022 11:19:30 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>,
 	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Christoph Hellwig <hch@infradead.org>
-Subject: [PATCH V2 1/7] arm/xen: Introduce xen_setup_dma_ops()
-Date: Sat,  7 May 2022 21:19:02 +0300
-Message-Id: <1651947548-4055-2-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V2 7/7] arm/xen: Assign xen-grant DMA ops for xen-grant DMA devices
+Date: Sat,  7 May 2022 21:19:08 +0300
+Message-Id: <1651947548-4055-8-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1651947548-4055-1-git-send-email-olekstysh@gmail.com>
 References: <1651947548-4055-1-git-send-email-olekstysh@gmail.com>
 
 From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-This patch introduces new helper and places it in new header.
-The helper's purpose is to assign any Xen specific DMA ops in
-a single place. For now, we deal with xen-swiotlb DMA ops only.
-The one of the subsequent commits in current series will add
-xen-grant DMA ops case.
+By assigning xen-grant DMA ops we will restrict memory access for
+passed device using Xen grant mappings. This is needed for using any
+virtualized device (e.g. virtio) in Xen guests in a safe manner.
 
-Also re-use the xen_swiotlb_detect() check on Arm32.
+Please note, for the virtio devices the XEN_VIRTIO config should
+be enabled (it forces ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS).
 
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes RFC -> V1:
-   - update commit description
-   - move commit to the beginning of the series
-   - move #ifdef CONFIG_XEN from dma-mapping.c to xen-ops.h
+   - update commit subject/description
+   - remove #ifdef CONFIG_XEN_VIRTIO
+   - re-organize the check taking into the account that
+     swiotlb and virtio cases are mutually exclusive
+   - update according to the new naming scheme:
+     s/virtio/grant_dma
 
 Changes V1 -> V2:
    - add Stefano's R-b
-   - add missing SPDX-License-Identifier to xen-ops.h
+   - remove arch_has_restricted_virtio_memory_access() check
+   - update commit description
+   - remove the inclusion of virtio_config.h
 ---
- arch/arm/include/asm/xen/xen-ops.h   |  2 ++
- arch/arm/mm/dma-mapping.c            |  7 ++-----
- arch/arm64/include/asm/xen/xen-ops.h |  2 ++
- arch/arm64/mm/dma-mapping.c          |  7 ++-----
- include/xen/arm/xen-ops.h            | 15 +++++++++++++++
- 5 files changed, 23 insertions(+), 10 deletions(-)
- create mode 100644 arch/arm/include/asm/xen/xen-ops.h
- create mode 100644 arch/arm64/include/asm/xen/xen-ops.h
- create mode 100644 include/xen/arm/xen-ops.h
+ include/xen/arm/xen-ops.h | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/xen/xen-ops.h b/arch/arm/include/asm/xen/xen-ops.h
-new file mode 100644
-index 00000000..7ebb7eb
---- /dev/null
-+++ b/arch/arm/include/asm/xen/xen-ops.h
-@@ -0,0 +1,2 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#include <xen/arm/xen-ops.h>
-diff --git a/arch/arm/mm/dma-mapping.c b/arch/arm/mm/dma-mapping.c
-index 82ffac6..059cce0 100644
---- a/arch/arm/mm/dma-mapping.c
-+++ b/arch/arm/mm/dma-mapping.c
-@@ -33,7 +33,7 @@
- #include <asm/dma-iommu.h>
- #include <asm/mach/map.h>
- #include <asm/system_info.h>
--#include <xen/swiotlb-xen.h>
-+#include <asm/xen/xen-ops.h>
- 
- #include "dma.h"
- #include "mm.h"
-@@ -2287,10 +2287,7 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
- 
- 	set_dma_ops(dev, dma_ops);
- 
--#ifdef CONFIG_XEN
--	if (xen_initial_domain())
--		dev->dma_ops = &xen_swiotlb_dma_ops;
--#endif
-+	xen_setup_dma_ops(dev);
- 	dev->archdata.dma_ops_setup = true;
- }
- 
-diff --git a/arch/arm64/include/asm/xen/xen-ops.h b/arch/arm64/include/asm/xen/xen-ops.h
-new file mode 100644
-index 00000000..7ebb7eb
---- /dev/null
-+++ b/arch/arm64/include/asm/xen/xen-ops.h
-@@ -0,0 +1,2 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#include <xen/arm/xen-ops.h>
-diff --git a/arch/arm64/mm/dma-mapping.c b/arch/arm64/mm/dma-mapping.c
-index 6719f9e..6099c81 100644
---- a/arch/arm64/mm/dma-mapping.c
-+++ b/arch/arm64/mm/dma-mapping.c
-@@ -9,9 +9,9 @@
- #include <linux/dma-map-ops.h>
- #include <linux/dma-iommu.h>
- #include <xen/xen.h>
--#include <xen/swiotlb-xen.h>
- 
- #include <asm/cacheflush.h>
-+#include <asm/xen/xen-ops.h>
- 
- void arch_sync_dma_for_device(phys_addr_t paddr, size_t size,
- 		enum dma_data_direction dir)
-@@ -52,8 +52,5 @@ void arch_setup_dma_ops(struct device *dev, u64 dma_base, u64 size,
- 	if (iommu)
- 		iommu_setup_dma_ops(dev, dma_base, dma_base + size - 1);
- 
--#ifdef CONFIG_XEN
--	if (xen_swiotlb_detect())
--		dev->dma_ops = &xen_swiotlb_dma_ops;
--#endif
-+	xen_setup_dma_ops(dev);
- }
 diff --git a/include/xen/arm/xen-ops.h b/include/xen/arm/xen-ops.h
-new file mode 100644
-index 00000000..288deb1
---- /dev/null
+index 288deb1..b0766a6 100644
+--- a/include/xen/arm/xen-ops.h
 +++ b/include/xen/arm/xen-ops.h
-@@ -0,0 +1,15 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#ifndef _ASM_ARM_XEN_OPS_H
-+#define _ASM_ARM_XEN_OPS_H
-+
-+#include <xen/swiotlb-xen.h>
-+
-+static inline void xen_setup_dma_ops(struct device *dev)
-+{
-+#ifdef CONFIG_XEN
-+	if (xen_swiotlb_detect())
-+		dev->dma_ops = &xen_swiotlb_dma_ops;
-+#endif
-+}
-+
-+#endif /* _ASM_ARM_XEN_OPS_H */
+@@ -3,11 +3,14 @@
+ #define _ASM_ARM_XEN_OPS_H
+ 
+ #include <xen/swiotlb-xen.h>
++#include <xen/xen-ops.h>
+ 
+ static inline void xen_setup_dma_ops(struct device *dev)
+ {
+ #ifdef CONFIG_XEN
+-	if (xen_swiotlb_detect())
++	if (xen_is_grant_dma_device(dev))
++		xen_grant_setup_dma_ops(dev);
++	else if (xen_swiotlb_detect())
+ 		dev->dma_ops = &xen_swiotlb_dma_ops;
+ #endif
+ }
 -- 
 2.7.4
 
