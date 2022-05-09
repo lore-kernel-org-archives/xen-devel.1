@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1A05C43217
-	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:41:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324900.547275 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 408F4C433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.324907.547302 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD0f-0005ko-Uq; Mon, 09 May 2022 23:41:49 +0000
+	id 1noD0i-0006WZ-Dx; Mon, 09 May 2022 23:41:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324900.547275; Mon, 09 May 2022 23:41:49 +0000
+Received: by outflank-mailman (output) from mailman id 324907.547302; Mon, 09 May 2022 23:41:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD0f-0005hj-Kp; Mon, 09 May 2022 23:41:49 +0000
-Received: by outflank-mailman (input) for mailman id 324900;
- Mon, 09 May 2022 23:41:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1noD0i-0006UN-5o; Mon, 09 May 2022 23:41:52 +0000
+Received: by outflank-mailman (input) for mailman id 324907;
+ Mon, 09 May 2022 23:41:50 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCtK-0007bw-Ji
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:14 +0000
+ id 1noCt1-0007Pf-4W
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:55 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 88ece6ef-cff0-11ec-a406-831a346695d4;
- Tue, 10 May 2022 01:34:14 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7d54017e-cff0-11ec-8fc4-03012f2f19d4;
+ Tue, 10 May 2022 01:33:54 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id E7D5B1F441FD
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 777391F441DA
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 88ece6ef-cff0-11ec-a406-831a346695d4
+X-Inumbo-ID: 7d54017e-cff0-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139253;
-	bh=i0EpyUpthjBui1PGSfTlV0XdMEaBb9rmJl1vNRe/ntg=;
+	s=mail; t=1652139234;
+	bh=CZQ7QwYyjXyLiPmx1jEp6oFdo06Stqavz0Fvz+iublM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cOsU2r2Eblivwj/4cs5M9vQ+EIm4O22kzOvkVpXBwVaGlQQqUaU+9c9J8h2kpjBSt
-	 GpXjMQQdLCoJJlIHF5IfMSLeGCyJvESoQPCKt3kCPQedCVqLaoeEopcTf+HEY5q1lO
-	 jJ/uDMUpGaMZkBso16PjrWo29hM7vhwjdcV20pn3IDz86wk5E9pcvm7DLWuJ5eN3xe
-	 Rv7XJipXyrsWHlwyWVQKKYth00nFChhonNPtOvFo1TEnjkAjXR2JiSFF1yvm2SKeAq
-	 YVHXAi1edwQHbtnVBglD/8RVeEInLaeMWxknedL6gsMlzSmRogo0SRclXVYd+laLv3
-	 s6F3Ihd0ore/g==
+	b=SDwxSlJbQCiHJPQR1lFxat/dNwe8Cw95mO18xUWrblUCwDvptuIvvEihxQgGpz5lE
+	 v2+pPQDPfEo3nnjLdmECYiEfCheycMmmwveoEMSaWwJXDRf8e887FYh72xXKEegajp
+	 QaQcT3OCtuH2kjObn8s3MAYD2oH9anmXSqs9c04hn+AcRFQ/mX1WKGwRGep7JOFA4H
+	 C4Kw1/Eunfbvp/ckKUJxjBvsJXFMHtbcJothUCcVahPvTLvth5UGn5EftS+9NNh38M
+	 HjrUmzlEFiFFJMInbk7G2giz3tbBsMgkXr4iYVpbDdzeOedK37AnhRRRKckmNr0O4x
+	 VvnSrMrlH5ppw==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,9 +112,9 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 18/27] x86: Use do_kernel_power_off()
-Date: Tue, 10 May 2022 02:32:26 +0300
-Message-Id: <20220509233235.995021-19-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 13/27] parisc: Use do_kernel_power_off()
+Date: Tue, 10 May 2022 02:32:21 +0300
+Message-Id: <20220509233235.995021-14-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
@@ -127,29 +127,35 @@ that invokes chained power-off handlers. It also invokes legacy
 pm_power_off() for now, which will be removed once all drivers will
 be converted to the new sys-off API.
 
+Acked-by: Helge Deller <deller@gmx.de> # parisc
 Reviewed-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- arch/x86/kernel/reboot.c | 4 ++--
+ arch/parisc/kernel/process.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/kernel/reboot.c b/arch/x86/kernel/reboot.c
-index fa700b46588e..c3636ea4aa71 100644
---- a/arch/x86/kernel/reboot.c
-+++ b/arch/x86/kernel/reboot.c
-@@ -739,10 +739,10 @@ static void native_machine_halt(void)
+diff --git a/arch/parisc/kernel/process.c b/arch/parisc/kernel/process.c
+index a6a2a558fc5b..7c37e09c92da 100644
+--- a/arch/parisc/kernel/process.c
++++ b/arch/parisc/kernel/process.c
+@@ -26,6 +26,7 @@
+ #include <linux/module.h>
+ #include <linux/personality.h>
+ #include <linux/ptrace.h>
++#include <linux/reboot.h>
+ #include <linux/sched.h>
+ #include <linux/sched/debug.h>
+ #include <linux/sched/task.h>
+@@ -116,8 +117,7 @@ void machine_power_off(void)
+ 	pdc_chassis_send_status(PDC_CHASSIS_DIRECT_SHUTDOWN);
  
- static void native_machine_power_off(void)
- {
--	if (pm_power_off) {
-+	if (kernel_can_power_off()) {
- 		if (!reboot_force)
- 			machine_shutdown();
+ 	/* ipmi_poweroff may have been installed. */
+-	if (pm_power_off)
 -		pm_power_off();
-+		do_kernel_power_off();
- 	}
- 	/* A fallback in case there is no PM info available */
- 	tboot_shutdown(TB_SHUTDOWN_HALT);
++	do_kernel_power_off();
+ 		
+ 	/* It seems we have no way to power the system off via
+ 	 * software. The user has to press the button himself. */
 -- 
 2.35.1
 
