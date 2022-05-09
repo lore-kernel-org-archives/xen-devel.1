@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CEE0C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 001ABC4332F
 	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324947.547379 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.324948.547386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD19-0001qV-EA; Mon, 09 May 2022 23:42:19 +0000
+	id 1noD1A-0001yF-87; Mon, 09 May 2022 23:42:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324947.547379; Mon, 09 May 2022 23:42:19 +0000
+Received: by outflank-mailman (output) from mailman id 324948.547386; Mon, 09 May 2022 23:42:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD19-0001nX-7G; Mon, 09 May 2022 23:42:19 +0000
-Received: by outflank-mailman (input) for mailman id 324947;
- Mon, 09 May 2022 23:42:16 +0000
+	id 1noD19-0001xA-Qc; Mon, 09 May 2022 23:42:19 +0000
+Received: by outflank-mailman (input) for mailman id 324948;
+ Mon, 09 May 2022 23:42:17 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCtu-0007bw-21
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:50 +0000
+ id 1noCti-0007bw-7q
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:38 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 9e06d0b5-cff0-11ec-a406-831a346695d4;
- Tue, 10 May 2022 01:34:49 +0200 (CEST)
+ id 96f58f30-cff0-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 01:34:37 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id 3F0BE1F44239
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 6D3621F4422E
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9e06d0b5-cff0-11ec-a406-831a346695d4
+X-Inumbo-ID: 96f58f30-cff0-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139289;
-	bh=pGHmFEEjaXj2663JV2ZbLu8gGj/vTytf7TAeEENRqwc=;
+	s=mail; t=1652139277;
+	bh=G4Vm4i3PSuNHHHXU+oCPvsxvVX3S/U1mmDmC4crDrZ0=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=j6TdMpmPOCtsPovulFCfAQHz4uF7UDkPzJj/3CmgFYBImRy8M4O8YGcz4W706uWok
-	 oiILXGafhBbX7n+gHJn6RXTuMBUQC8tJ+EhQAGsuO/iXIERVRLzkR/44dQES7yRA6/
-	 FtuuqnjfOGSov1+k3mURGR/0OqutTfvEFLoWalI2/ND2VETgVusAQFBX2DfNOA/g7I
-	 j0l9XZgvP22CfJfFfA6ZxZIqFh1T34qNRlUcm5bkUIByJGzf9sEM5G0d3YHcPWZak3
-	 l8eX2DCnZSObZ31khwPUziOiMTJxqBOzynYhlqeRkrRRR5tLIOpk/iZhwBgqc0RGs9
-	 Toz7YL4ixFXdA==
+	b=J1T7cZ+8sXSyoqCiUswKzOPFbdK4lnLHa5BLo2lX4nJpcRZIVTEMOuLWjxgIELGye
+	 ufjX2Hcm977X8wW9VIKwmYrPBZIT2jZyQSJcd3y3ctDLGwG6vbfYYfBucmxM0e6f69
+	 n4G6fiy/jZG4ulLYGXCzk/NXBNl9yxR3LdmM8xgsi+aeIQil2CBs1nL1/qF9yAqQb6
+	 TwsvXlIqKT1rIXf2rsjmkGmeFCnf76sZCJi24rB3dPW7e5fbOXyqchk0i1LS7WPsiA
+	 hJ3XzxAXeaIo84Zou6nGR4l+Tqo+kILO2aR+d7l0+SuSwY5z4aIqVSkb+wJg4dCx15
+	 lDprZUGzZAd+g==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,75 +112,80 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 27/27] kernel/reboot: Add devm_register_restart_handler()
-Date: Tue, 10 May 2022 02:32:35 +0300
-Message-Id: <20220509233235.995021-28-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 24/27] reboot: Remove pm_power_off_prepare()
+Date: Tue, 10 May 2022 02:32:32 +0300
+Message-Id: <20220509233235.995021-25-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add devm_register_restart_handler() helper that registers sys-off
-handler using restart mode and with a default priority. Most drivers
-will want to register restart handler with a default priority, so this
-helper will reduce the boilerplate code and make code easier to read and
-follow.
+All pm_power_off_prepare() users were converted to sys-off handler API.
+Remove the obsolete global callback variable.
 
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- include/linux/reboot.h |  4 ++++
- kernel/reboot.c        | 22 ++++++++++++++++++++++
- 2 files changed, 26 insertions(+)
+ include/linux/pm.h |  1 -
+ kernel/reboot.c    | 19 -------------------
+ 2 files changed, 20 deletions(-)
 
-diff --git a/include/linux/reboot.h b/include/linux/reboot.h
-index 7c6e1f308f7c..e5d9ef886179 100644
---- a/include/linux/reboot.h
-+++ b/include/linux/reboot.h
-@@ -145,6 +145,10 @@ int devm_register_power_off_handler(struct device *dev,
- 				    int (*callback)(struct sys_off_data *data),
- 				    void *cb_data);
+diff --git a/include/linux/pm.h b/include/linux/pm.h
+index 70ec69d8bafd..871c9c49ec9d 100644
+--- a/include/linux/pm.h
++++ b/include/linux/pm.h
+@@ -21,7 +21,6 @@
+  * Callbacks for platform drivers to implement.
+  */
+ extern void (*pm_power_off)(void);
+-extern void (*pm_power_off_prepare)(void);
  
-+int devm_register_restart_handler(struct device *dev,
-+				  int (*callback)(struct sys_off_data *data),
-+				  void *cb_data);
-+
- int register_platform_power_off(void (*power_off)(void));
- void unregister_platform_power_off(void (*power_off)(void));
- 
+ struct device; /* we have a circular dep with device.h */
+ #ifdef CONFIG_VT_CONSOLE_SLEEP
 diff --git a/kernel/reboot.c b/kernel/reboot.c
-index b790025154ac..2e78bd754a75 100644
+index e74103f2a801..66033e12e8eb 100644
 --- a/kernel/reboot.c
 +++ b/kernel/reboot.c
-@@ -484,6 +484,28 @@ int devm_register_power_off_handler(struct device *dev,
+@@ -63,13 +63,6 @@ struct sys_off_handler {
+  */
+ void __weak (*pm_power_off)(void);
+ 
+-/*
+- * If set, this is used for preparing the system to power off.
+- */
+-
+-void (*pm_power_off_prepare)(void);
+-EXPORT_SYMBOL_GPL(pm_power_off_prepare);
+-
+ /**
+  *	emergency_restart - reboot the system
+  *
+@@ -524,14 +517,6 @@ void unregister_platform_power_off(void (*power_off)(void))
  }
- EXPORT_SYMBOL_GPL(devm_register_power_off_handler);
+ EXPORT_SYMBOL_GPL(unregister_platform_power_off);
  
-+/**
-+ *	devm_register_restart_handler - Register restart handler
-+ *	@dev: Device that registers callback
-+ *	@callback: Callback function
-+ *	@cb_data: Callback's argument
-+ *
-+ *	Registers resource-managed sys-off handler with a default priority
-+ *	and using restart mode.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int devm_register_restart_handler(struct device *dev,
-+				  int (*callback)(struct sys_off_data *data),
-+				  void *cb_data)
-+{
-+	return devm_register_sys_off_handler(dev,
-+					     SYS_OFF_MODE_RESTART,
-+					     SYS_OFF_PRIO_DEFAULT,
-+					     callback, cb_data);
-+}
-+EXPORT_SYMBOL_GPL(devm_register_restart_handler);
-+
- static struct sys_off_handler *platform_power_off_handler;
+-static int legacy_pm_power_off_prepare(struct sys_off_data *data)
+-{
+-	if (pm_power_off_prepare)
+-		pm_power_off_prepare();
+-
+-	return NOTIFY_DONE;
+-}
+-
+ static int legacy_pm_power_off(struct sys_off_data *data)
+ {
+ 	if (pm_power_off)
+@@ -549,10 +534,6 @@ static int legacy_pm_power_off(struct sys_off_data *data)
+  */
+ static int __init legacy_pm_init(void)
+ {
+-	register_sys_off_handler(SYS_OFF_MODE_POWER_OFF_PREPARE,
+-				 SYS_OFF_PRIO_DEFAULT,
+-				 legacy_pm_power_off_prepare, NULL);
+-
+ 	register_sys_off_handler(SYS_OFF_MODE_POWER_OFF, SYS_OFF_PRIO_DEFAULT,
+ 				 legacy_pm_power_off, NULL);
  
- static int platform_power_off_notify(struct sys_off_data *data)
 -- 
 2.35.1
 
