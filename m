@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D619DC43219
-	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:33:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324872.547153 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D74E4C4167E
+	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:33:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.324875.547186 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noCsG-0007Ps-T2; Mon, 09 May 2022 23:33:08 +0000
+	id 1noCsP-0008JH-TP; Mon, 09 May 2022 23:33:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324872.547153; Mon, 09 May 2022 23:33:08 +0000
+Received: by outflank-mailman (output) from mailman id 324875.547186; Mon, 09 May 2022 23:33:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noCsG-0007Pl-Pn; Mon, 09 May 2022 23:33:08 +0000
-Received: by outflank-mailman (input) for mailman id 324872;
- Mon, 09 May 2022 23:33:06 +0000
+	id 1noCsP-0008Iz-PV; Mon, 09 May 2022 23:33:17 +0000
+Received: by outflank-mailman (input) for mailman id 324875;
+ Mon, 09 May 2022 23:33:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCsE-0007Pf-AX
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:06 +0000
+ id 1noCsO-0007Pf-7i
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:16 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5f1d9648-cff0-11ec-8fc4-03012f2f19d4;
- Tue, 10 May 2022 01:33:04 +0200 (CEST)
+ id 65e4033c-cff0-11ec-8fc4-03012f2f19d4;
+ Tue, 10 May 2022 01:33:15 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id 607931F416C1
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 2F8AA1F41C30
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5f1d9648-cff0-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 65e4033c-cff0-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139183;
-	bh=lLgNEvskjYPed89A1nrHxa9JSdRs0IUn4pOHSUK7jTc=;
-	h=From:To:Cc:Subject:Date:From;
-	b=WUHzEmLOMl++gIYprzLY4Y5ZgwkylBFM3NXfpKcZkd+7BNaZaUmiGqg0VUYWRABmv
-	 hJH1Ou7MvzVQEeCAUDDHWRMZxDQoppEXGKbM2j06jRJrIABXsEZZwm7i9NM879gB6O
-	 2Y1Se37TomGB4d2h1mXO6OlgzOTBjNFsW3GHIFZ7/mIkei0JXAEQaCq8Rz0ut+bUea
-	 RPU0PjopsaMLBS9qFclxouby5tVIWXA/d0NuIMg3imq9abL7b/0/41RgiE9Je581Oh
-	 wDZpoyFknmJS5vpV9L2nPVYSN0vUloiI1KAFaWeUbC9qrgYElXNzM0KEblyCj/O68o
-	 va3jAifDGqHhA==
+	s=mail; t=1652139194;
+	bh=bWEhd2ly681MLGj7UVCJAzYeXMznG9pbqJy3OeFWJRg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=BPDQwkauvsVGCV6donoyMBQqi6nfKh7S+Iw/1P9iMbIBBqyoUvSgbLuYvsqdYh/ls
+	 GMjWJ14AyXBDnXQre3telXmHCJzLKXlCCI3qHan6n6N+oKtio7vMszlQ/fxWkoZQss
+	 FWDRbd6hKveTgyIf56hKjN7sgj9kRrU43a5oXc/b4FYAyh/tffvNibZf6DI0vK54ws
+	 zhTvXytd8B9ucimFodcLV0sRbymSo1ScARgq6soV9eL7++8Wv9QDXGNUEog3feDRa0
+	 8MU4GtColV6cUkO+UZwfe5puFbTFwvmAXe5mtb2I6jqpygEimE8CDtmiPOapiivdh/
+	 Y3sLj2Qbwqplg==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,237 +112,345 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 00/27] Introduce power-off+restart call chain API
-Date: Tue, 10 May 2022 02:32:08 +0300
-Message-Id: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 03/27] kernel/reboot: Introduce sys-off handler API
+Date: Tue, 10 May 2022 02:32:11 +0300
+Message-Id: <20220509233235.995021-4-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
+References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Problem
--------
+In order to support power-off chaining we need to get rid of the global
+pm_* variables, replacing them with the new kernel API functions that
+support chaining.
 
-SoC devices require power-off call chaining functionality from kernel.
-We have a widely used restart chaining provided by restart notifier API,
-but nothing for power-off.
+Introduce new generic sys-off handler API that brings the following
+features:
 
-Solution
---------
+1. Power-off and restart handlers are registered using same API function
+   that supports chaining, hence all power-off and restart modes will
+   support chaining using this unified function.
 
-Introduce new API that provides call chains support for all restart and
-power-off modes. The new API is designed with simplicity and extensibility
-in mind.
+2. Prevents notifier priority collisions by disallowing registration of
+   multiple handlers at the non-default priority level.
 
-This is a third attempt to introduce the new API. First was made by
-Guenter Roeck back in 2014, second was made by Thierry Reding in 2017.
-In fact the work didn't stop and recently arm_pm_restart() was removed
-from v5.14 kernel, which was a part of preparatory work started by
-Guenter Roeck.
+3. Supports passing opaque user argument to callback, which allows us to
+   remove global variables from drivers.
 
-Adoption plan
--------------
+This patch adds support of the following sys-off modes:
 
-This patchset introduces the new API. It also converts multiple drivers
-and arch code to the new API to demonstrate how it all looks in practice,
-removing the pm_power_off_prepare global variable.
+- SYS_OFF_MODE_POWER_OFF_PREPARE that replaces global pm_power_off_prepare
+  variable and provides chaining support for power-off-prepare handlers.
 
-The plan is:
+- SYS_OFF_MODE_POWER_OFF that replaces global pm_power_off variable and
+  provides chaining support for power-off handlers.
 
-1. Merge the new API and convert arch code to use do_kernel_power_off().
-   For now the new API will co-exist with the older API.
+- SYS_OFF_MODE_RESTART that provides a better restart API, removing a need
+  from drivers to have a global scratch variable by utilizing the opaque
+  callback argument.
 
-2. Convert all drivers and platform code to the new API.
+Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+---
+ include/linux/reboot.h |  77 +++++++++++++++++
+ kernel/reboot.c        | 182 +++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 259 insertions(+)
 
-3. Remove obsoleted pm_power_off and pm_power_off_prepare variables.
-
-Results
--------
-
-1. Devices can be powered off properly.
-
-2. Global variables are removed from drivers.
-
-3. Global pm_power_off and pm_power_off_prepare callback variables are
-removed once all users are converted to the new API. The latter callback
-is removed by patch #24 of this series.
-
-4. Ambiguous call chain ordering is prohibited for non-default priorities.
-
-Changelog:
-
-v8: - Reworked sys-off handler like was suggested by Rafael Wysocki in
-      the comments to v7.
-
-    - The struct sys-off handler now is private to kernel/reboot.c and
-      new API is simplified.
-
-    - There is a single sys-off API function for all handler types.
-      Users shall pass the required sys-off mode type (restart, power-off
-      and etc).
-
-    - There is single struct sys_off_data callback argument for all
-      handler modes.
-
-    - User's callback now must return NOTIFY_DONE or NOTIFY_STOP.
-
-    - The default priority level is zero now.
-
-    - Multiple handlers now allowed to be registered at the default
-      priority level.
-
-    - Power-off call chain is atomic now, like the restart chain.
-
-    - kernel/reboot.c changes are split up into several logical patches.
-
-    - Added r-b from Michał Mirosław to unmodified patches from v7.
-
-    - Added acks that were missing in v7 by accident.
-
-v7: - Rebased on a recent linux-next. Dropped the recently removed
-      NDS32 architecture. Only SH and x86 arches left un-acked.
-
-    - Added acks from Thomas Bogendoerfer and Krzysztof Kozlowski
-      to the MIPS and memory/emif patches respectively.
-
-    - Made couple minor cosmetic improvements to the new API.
-
-    - A month ago I joined Collabora and continuing to work on this series
-      on the company's time, so changed my email address to collabora.com
-
-v6: - Rebased on a recent linux-next.
-
-    - Made minor couple cosmetic changes.
-
-v5: - Dropped patches which cleaned up notifier/reboot headers, as was
-      requested by Rafael Wysocki.
-
-    - Dropped WARN_ON() from the code, as was requested by Rafael Wysocki.
-      Replaced it with pr_err() appropriately.
-
-    - Dropped *_notifier_has_unique_priority() functions and added
-      *_notifier_chain_register_unique_prio() instead, as was suggested
-      by Michał Mirosław and Rafael Wysocki.
-
-    - Dropped export of blocking_notifier_call_chain_is_empty() symbol,
-      as was suggested by Rafael Wysocki.
-
-    - Michał Mirosław suggested that will be better to split up patch
-      that adds the new API to ease reviewing, but Rafael Wysocki asked
-      not add more patches, so I kept it as a single patch.
-
-    - Added temporary "weak" stub for pm_power_off() which fixes linkage
-      failure once symbol is removed from arch/* code. Previously I missed
-      this problem because was only compile-testing object files.
-
-v4: - Made a very minor improvement to doc comments, clarifying couple
-      default values.
-
-    - Corrected list of emails recipient by adding Linus, Sebastian,
-      Philipp and more NDS people. Removed bouncing emails.
-
-    - Added acks that were given to v3.
-
-v3: - Renamed power_handler to sys_off_handler as was suggested by
-      Rafael Wysocki.
-
-    - Improved doc-comments as was suggested by Rafael Wysocki. Added more
-      doc-comments.
-
-    - Implemented full set of 180 patches which convert whole kernel in
-      accordance to the plan, see link [1] above. Slightly adjusted API to
-      better suit for the remaining converted drivers.
-
-      * Added unregister_sys_off_handler() that is handy for a couple old
-        platform drivers.
-
-      * Dropped devm_register_trivial_restart_handler(), 'simple' variant
-        is enough to have.
-
-    - Improved "Add atomic/blocking_notifier_has_unique_priority()" patch,
-      as was suggested by Andy Shevchenko. Also replaced down_write() with
-      down_read() and factored out common notifier_has_unique_priority().
-
-    - Added stop_chain field to struct restart_data and reboot_prep_data
-      after discovering couple drivers wanting that feature.
-
-    - Added acks that were given to v2.
-
-v2: - Replaced standalone power-off call chain demo-API with the combined
-      power-off+restart API because this is what drivers want. It's a more
-      comprehensive solution.
-
-    - Converted multiple drivers and arch code to the new API. Suggested by
-      Andy Shevchenko. I skimmed through the rest of drivers, verifying that
-      new API suits them. The rest of the drivers will be converted once we
-      will settle on the new API, otherwise will be too many patches here.
-
-    - v2 API doesn't expose notifier to users and require handlers to
-      have unique priority. Suggested by Guenter Roeck.
-
-    - v2 API has power-off chaining disabled by default and require
-      drivers to explicitly opt-in to the chaining. This preserves old
-      behaviour for existing drivers once they are converted to the new
-      API.
-
-Dmitry Osipenko (27):
-  notifier: Add atomic_notifier_call_chain_is_empty()
-  notifier: Add blocking/atomic_notifier_chain_register_unique_prio()
-  kernel/reboot: Introduce sys-off handler API
-  kernel/reboot: Wrap legacy power-off callbacks into sys-off handlers
-  kernel/reboot: Add do_kernel_power_off()
-  kernel/reboot: Add stub for pm_power_off
-  kernel/reboot: Add kernel_can_power_off()
-  kernel/reboot: Add register_platform_power_off()
-  ARM: Use do_kernel_power_off()
-  csky: Use do_kernel_power_off()
-  riscv: Use do_kernel_power_off()
-  arm64: Use do_kernel_power_off()
-  parisc: Use do_kernel_power_off()
-  xen/x86: Use do_kernel_power_off()
-  powerpc: Use do_kernel_power_off()
-  m68k: Switch to new sys-off handler API
-  sh: Use do_kernel_power_off()
-  x86: Use do_kernel_power_off()
-  ia64: Use do_kernel_power_off()
-  mips: Use do_kernel_power_off()
-  memory: emif: Use kernel_can_power_off()
-  ACPI: power: Switch to sys-off handler API
-  regulator: pfuze100: Use devm_register_sys_off_handler()
-  reboot: Remove pm_power_off_prepare()
-  soc/tegra: pmc: Use sys-off handler API to power off Nexus 7 properly
-  kernel/reboot: Add devm_register_power_off_handler()
-  kernel/reboot: Add devm_register_restart_handler()
-
- arch/arm/kernel/reboot.c               |   4 +-
- arch/arm64/kernel/process.c            |   3 +-
- arch/csky/kernel/power.c               |   6 +-
- arch/ia64/kernel/process.c             |   4 +-
- arch/m68k/emu/natfeat.c                |   3 +-
- arch/m68k/include/asm/machdep.h        |   1 -
- arch/m68k/kernel/process.c             |   5 +-
- arch/m68k/kernel/setup_mm.c            |   1 -
- arch/m68k/kernel/setup_no.c            |   1 -
- arch/m68k/mac/config.c                 |   4 +-
- arch/mips/kernel/reset.c               |   3 +-
- arch/parisc/kernel/process.c           |   4 +-
- arch/powerpc/kernel/setup-common.c     |   4 +-
- arch/powerpc/xmon/xmon.c               |   3 +-
- arch/riscv/kernel/reset.c              |  12 +-
- arch/sh/kernel/reboot.c                |   3 +-
- arch/x86/kernel/reboot.c               |   4 +-
- arch/x86/xen/enlighten_pv.c            |   4 +-
- drivers/acpi/sleep.c                   |  16 +-
- drivers/memory/emif.c                  |   2 +-
- drivers/regulator/pfuze100-regulator.c |  42 ++-
- drivers/soc/tegra/pmc.c                |  87 +++++--
- include/linux/notifier.h               |   7 +
- include/linux/pm.h                     |   1 -
- include/linux/reboot.h                 |  91 +++++++
- kernel/notifier.c                      | 101 +++++--
- kernel/reboot.c                        | 347 ++++++++++++++++++++++++-
- 27 files changed, 639 insertions(+), 124 deletions(-)
-
+diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+index a2429648d831..05981ef079d8 100644
+--- a/include/linux/reboot.h
++++ b/include/linux/reboot.h
+@@ -7,6 +7,7 @@
+ #include <uapi/linux/reboot.h>
+ 
+ struct device;
++struct sys_off_handler;
+ 
+ #define SYS_DOWN	0x0001	/* Notify of system down */
+ #define SYS_RESTART	SYS_DOWN
+@@ -62,6 +63,82 @@ extern void machine_shutdown(void);
+ struct pt_regs;
+ extern void machine_crash_shutdown(struct pt_regs *);
+ 
++/*
++ * sys-off handler API.
++ */
++
++/*
++ * Standard sys-off priority levels. Users are expected to set priorities
++ * relative to the standard levels.
++ *
++ * SYS_OFF_PRIO_PLATFORM:	Use this for platform-level handlers.
++ *
++ * SYS_OFF_PRIO_LOW:		Use this for handler of last resort.
++ *
++ * SYS_OFF_PRIO_DEFAULT:	Use this for normal handlers.
++ *
++ * SYS_OFF_PRIO_HIGH:		Use this for higher priority handlers.
++ *
++ * SYS_OFF_PRIO_FIRMWARE:	Use this if handler uses firmware call.
++ */
++#define SYS_OFF_PRIO_PLATFORM		-256
++#define SYS_OFF_PRIO_LOW		-128
++#define SYS_OFF_PRIO_DEFAULT		0
++#define SYS_OFF_PRIO_HIGH		192
++#define SYS_OFF_PRIO_FIRMWARE		224
++
++enum sys_off_mode {
++	/**
++	 * @SYS_OFF_MODE_POWER_OFF_PREPARE:
++	 *
++	 * Handlers prepare system to be powered off. Handlers are
++	 * allowed to sleep.
++	 */
++	SYS_OFF_MODE_POWER_OFF_PREPARE,
++
++	/**
++	 * @SYS_OFF_MODE_POWER_OFF:
++	 *
++	 * Handlers power-off system. Handlers are disallowed to sleep.
++	 */
++	SYS_OFF_MODE_POWER_OFF,
++
++	/**
++	 * @SYS_OFF_MODE_RESTART:
++	 *
++	 * Handlers restart system. Handlers are disallowed to sleep.
++	 */
++	SYS_OFF_MODE_RESTART,
++};
++
++/**
++ * struct sys_off_data - sys-off callback argument
++ *
++ * @mode: Mode ID. Currently used only by the sys-off restart mode,
++ *        see enum reboot_mode for the available modes.
++ * @cb_data: User's callback data.
++ * @cmd: Command string. Currently used only by the sys-off restart mode,
++ *       NULL otherwise.
++ */
++struct sys_off_data {
++	int mode;
++	void *cb_data;
++	const char *cmd;
++};
++
++struct sys_off_handler *
++register_sys_off_handler(enum sys_off_mode mode,
++			 int priority,
++			 int (*callback)(struct sys_off_data *data),
++			 void *cb_data);
++void unregister_sys_off_handler(struct sys_off_handler *handler);
++
++int devm_register_sys_off_handler(struct device *dev,
++				  enum sys_off_mode mode,
++				  int priority,
++				  int (*callback)(struct sys_off_data *data),
++				  void *cb_data);
++
+ /*
+  * Architecture independent implemenations of sys_reboot commands.
+  */
+diff --git a/kernel/reboot.c b/kernel/reboot.c
+index 8ce30fa0a104..672a658f21ee 100644
+--- a/kernel/reboot.c
++++ b/kernel/reboot.c
+@@ -48,6 +48,15 @@ int reboot_cpu;
+ enum reboot_type reboot_type = BOOT_ACPI;
+ int reboot_force;
+ 
++struct sys_off_handler {
++	struct notifier_block nb;
++	int (*sys_off_cb)(struct sys_off_data *data);
++	void *cb_data;
++	enum sys_off_mode mode;
++	bool blocking;
++	void *list;
++};
++
+ /*
+  * If set, this is used for preparing the system to power off.
+  */
+@@ -281,6 +290,179 @@ void kernel_halt(void)
+ }
+ EXPORT_SYMBOL_GPL(kernel_halt);
+ 
++/*
++ *	Notifier list for kernel code which wants to be called
++ *	to prepare system for power off.
++ */
++static BLOCKING_NOTIFIER_HEAD(power_off_prep_handler_list);
++
++/*
++ *	Notifier list for kernel code which wants to be called
++ *	to power off system.
++ */
++static ATOMIC_NOTIFIER_HEAD(power_off_handler_list);
++
++static int sys_off_notify(struct notifier_block *nb,
++			  unsigned long mode, void *cmd)
++{
++	struct sys_off_handler *handler;
++	struct sys_off_data data = {};
++
++	handler = container_of(nb, struct sys_off_handler, nb);
++	data.cb_data = handler->cb_data;
++	data.mode = mode;
++	data.cmd = cmd;
++
++	return handler->sys_off_cb(&data);
++}
++
++/**
++ *	register_sys_off_handler - Register sys-off handler
++ *	@mode: Sys-off mode
++ *	@priority: Handler priority
++ *	@callback: Callback function
++ *	@cb_data: Callback argument
++ *
++ *	Registers system power-off or restart handler that will be invoked
++ *	at the step corresponding to the given sys-off mode. Handler's callback
++ *	should return NOTIFY_DONE to permit execution of the next handler in
++ *	the call chain or NOTIFY_STOP to break the chain (in error case for
++ *	example).
++ *
++ *	Multiple handlers can be registered at the default priority level.
++ *
++ *	Only one handler can be registered at the non-default priority level,
++ *	otherwise ERR_PTR(-EBUSY) is returned.
++ *
++ *	Returns a new instance of struct sys_off_handler on success, or
++ *	an ERR_PTR()-encoded error code otherwise.
++ */
++struct sys_off_handler *
++register_sys_off_handler(enum sys_off_mode mode,
++			 int priority,
++			 int (*callback)(struct sys_off_data *data),
++			 void *cb_data)
++{
++	struct sys_off_handler *handler;
++	int err;
++
++	handler = kzalloc(sizeof(*handler), GFP_KERNEL);
++	if (!handler)
++		return ERR_PTR(-ENOMEM);
++
++	switch (mode) {
++	case SYS_OFF_MODE_POWER_OFF_PREPARE:
++		handler->list = &power_off_prep_handler_list;
++		handler->blocking = true;
++		break;
++
++	case SYS_OFF_MODE_POWER_OFF:
++		handler->list = &power_off_handler_list;
++		break;
++
++	case SYS_OFF_MODE_RESTART:
++		handler->list = &restart_handler_list;
++		break;
++
++	default:
++		kfree(handler);
++		return ERR_PTR(-EINVAL);
++	}
++
++	handler->nb.notifier_call = sys_off_notify;
++	handler->nb.priority = priority;
++	handler->sys_off_cb = callback;
++	handler->cb_data = cb_data;
++	handler->mode = mode;
++
++	if (handler->blocking) {
++		if (priority == SYS_OFF_PRIO_DEFAULT)
++			err = blocking_notifier_chain_register(handler->list,
++							       &handler->nb);
++		else
++			err = blocking_notifier_chain_register_unique_prio(handler->list,
++									   &handler->nb);
++	} else {
++		if (priority == SYS_OFF_PRIO_DEFAULT)
++			err = atomic_notifier_chain_register(handler->list,
++							     &handler->nb);
++		else
++			err = atomic_notifier_chain_register_unique_prio(handler->list,
++									 &handler->nb);
++	}
++
++	if (err) {
++		kfree(handler);
++		return ERR_PTR(err);
++	}
++
++	return handler;
++}
++EXPORT_SYMBOL_GPL(register_sys_off_handler);
++
++/**
++ *	unregister_sys_off_handler - Unregister sys-off handler
++ *	@handler: Sys-off handler
++ *
++ *	Unregisters given sys-off handler.
++ */
++void unregister_sys_off_handler(struct sys_off_handler *handler)
++{
++	int err;
++
++	if (!handler)
++		return;
++
++	if (handler->blocking)
++		err = blocking_notifier_chain_unregister(handler->list,
++							 &handler->nb);
++	else
++		err = atomic_notifier_chain_unregister(handler->list,
++						       &handler->nb);
++
++	/* sanity check, shall never happen */
++	WARN_ON(err);
++
++	kfree(handler);
++}
++EXPORT_SYMBOL_GPL(unregister_sys_off_handler);
++
++static void devm_unregister_sys_off_handler(void *data)
++{
++	struct sys_off_handler *handler = data;
++
++	unregister_sys_off_handler(handler);
++}
++
++/**
++ *	devm_register_sys_off_handler - Register sys-off handler
++ *	@dev: Device that registers handler
++ *	@mode: Sys-off mode
++ *	@priority: Handler priority
++ *	@callback: Callback function
++ *	@cb_data: Callback argument
++ *
++ *	Registers resource-managed sys-off handler.
++ *
++ *	Returns zero on success, or error code on failure.
++ */
++int devm_register_sys_off_handler(struct device *dev,
++				  enum sys_off_mode mode,
++				  int priority,
++				  int (*callback)(struct sys_off_data *data),
++				  void *cb_data)
++{
++	struct sys_off_handler *handler;
++
++	handler = register_sys_off_handler(mode, priority, callback, cb_data);
++	if (IS_ERR(handler))
++		return PTR_ERR(handler);
++
++	return devm_add_action_or_reset(dev, devm_unregister_sys_off_handler,
++					handler);
++}
++EXPORT_SYMBOL_GPL(devm_register_sys_off_handler);
++
+ /**
+  *	kernel_power_off - power_off the system
+  *
 -- 
 2.35.1
 
