@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54C1BC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324958.547432 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12FA2C433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.324960.547439 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD1L-0004OL-66; Mon, 09 May 2022 23:42:31 +0000
+	id 1noD1M-0004Un-32; Mon, 09 May 2022 23:42:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324958.547432; Mon, 09 May 2022 23:42:31 +0000
+Received: by outflank-mailman (output) from mailman id 324960.547439; Mon, 09 May 2022 23:42:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD1K-0004Mh-Lq; Mon, 09 May 2022 23:42:30 +0000
-Received: by outflank-mailman (input) for mailman id 324958;
- Mon, 09 May 2022 23:42:28 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1noD1L-0004Ru-DQ; Mon, 09 May 2022 23:42:31 +0000
+Received: by outflank-mailman (input) for mailman id 324960;
+ Mon, 09 May 2022 23:42:29 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCsx-0007Pf-82
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:51 +0000
+ id 1noCte-0007bw-Bo
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:34 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7afd11ba-cff0-11ec-8fc4-03012f2f19d4;
- Tue, 10 May 2022 01:33:50 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 949daf10-cff0-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 01:34:33 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id 6D3491F441D2
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 7BE1A1F4422B
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7afd11ba-cff0-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 949daf10-cff0-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139230;
-	bh=qKcEaaqMIJ4u5Ci+7b2uBSMlhy7r7OU77hT8ObUoKho=;
+	s=mail; t=1652139273;
+	bh=XtOxeNpEZBzsEZoOwk1w0xc4u4++IeNM8JHEy/MILRs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=YmHmlZT4yyO6cWM3Bz5JftChowVg/M2fXvwFMhRS4e+Wuq4sD1q3OkohJJlDsPPL2
-	 j5kr4/JUymIkLlQMnmeGWx/oL/gzhnBQuKsL8jB4iuv6hwrbHMcsw3LuhebKodzWFk
-	 rmnjBC0+wPIYX6c0ORsexWKd3U+jCsIpfbjSiclXE3M9LeCXBn+ESKjT58ePCxxTWV
-	 Zl82L0X/fkIGQBuqIcNG6Jl9nhzo3I5HfMrX4c7iNnVoa+PkQdE4O3elLjDQsPpn1Q
-	 MEclW34sJqJsqXbvF7sjn3ufyEIcH1MhP4YeSXnfNNyguaVxY5pj3bnr/70Q51dzF8
-	 7fEmC00bkHk/g==
+	b=DGGv7NB7YFjR/XyFr6bky/W+z/hPJaeKzOrZp6S3NkKmsspZefTK98eiyR/2PprHF
+	 SZXwZ9k9uPPdX2japixfTOG/AkmkZ3D+LB7Udgq8t/o13fV+sK+wTnOE/L4HgXdA53
+	 nvSDO9U/xKP8LpKY1VJetO4hoBC6fW0zfXiuOgG/3L6dFRe9KpmJts3DTUhBhSu7D4
+	 /z4YOyQOb4V/fbU6Imyw0C5sByK4+txkAyVBFrLWSJ5ovT1rrtNZtFjsKgKayHBUAG
+	 dYw8SdmUATaBmvB/AvJb06MJ7Bn9SOe65TF2LOFEbL8F4bwXe+OpgmwAQ88g/rheVt
+	 rGHHW0DMlZ6Ag==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,42 +112,117 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 12/27] arm64: Use do_kernel_power_off()
-Date: Tue, 10 May 2022 02:32:20 +0300
-Message-Id: <20220509233235.995021-13-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 23/27] regulator: pfuze100: Use devm_register_sys_off_handler()
+Date: Tue, 10 May 2022 02:32:31 +0300
+Message-Id: <20220509233235.995021-24-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Kernel now supports chained power-off handlers. Use do_kernel_power_off()
-that invokes chained power-off handlers. It also invokes legacy
-pm_power_off() for now, which will be removed once all drivers will
-be converted to the new sys-off API.
+Use devm_register_sys_off_handler() that replaces global
+pm_power_off_prepare variable and allows to register multiple
+power-off handlers.
 
-Acked-by: Catalin Marinas <catalin.marinas@arm.com>
-Reviewed-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
+Acked-by: Mark Brown <broonie@kernel.org>
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- arch/arm64/kernel/process.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/regulator/pfuze100-regulator.c | 42 +++++++++++---------------
+ 1 file changed, 17 insertions(+), 25 deletions(-)
 
-diff --git a/arch/arm64/kernel/process.c b/arch/arm64/kernel/process.c
-index 142a51256669..92bcc1768f0b 100644
---- a/arch/arm64/kernel/process.c
-+++ b/arch/arm64/kernel/process.c
-@@ -111,8 +111,7 @@ void machine_power_off(void)
- {
- 	local_irq_disable();
- 	smp_send_stop();
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
+diff --git a/drivers/regulator/pfuze100-regulator.c b/drivers/regulator/pfuze100-regulator.c
+index d60d7d1b7fa2..0322f6b1fb60 100644
+--- a/drivers/regulator/pfuze100-regulator.c
++++ b/drivers/regulator/pfuze100-regulator.c
+@@ -10,6 +10,7 @@
+ #include <linux/of_device.h>
+ #include <linux/regulator/of_regulator.h>
+ #include <linux/platform_device.h>
++#include <linux/reboot.h>
+ #include <linux/regulator/driver.h>
+ #include <linux/regulator/machine.h>
+ #include <linux/regulator/pfuze100.h>
+@@ -569,10 +570,10 @@ static inline struct device_node *match_of_node(int index)
+ 	return pfuze_matches[index].of_node;
  }
  
- /*
+-static struct pfuze_chip *syspm_pfuze_chip;
+-
+-static void pfuze_power_off_prepare(void)
++static int pfuze_power_off_prepare(struct sys_off_data *data)
+ {
++	struct pfuze_chip *syspm_pfuze_chip = data->cb_data;
++
+ 	dev_info(syspm_pfuze_chip->dev, "Configure standby mode for power off");
+ 
+ 	/* Switch from default mode: APS/APS to APS/Off */
+@@ -607,28 +608,30 @@ static void pfuze_power_off_prepare(void)
+ 	regmap_update_bits(syspm_pfuze_chip->regmap, PFUZE100_VGEN6VOL,
+ 			   PFUZE100_VGENxLPWR | PFUZE100_VGENxSTBY,
+ 			   PFUZE100_VGENxSTBY);
++
++	return NOTIFY_DONE;
+ }
+ 
+ static int pfuze_power_off_prepare_init(struct pfuze_chip *pfuze_chip)
+ {
++	int err;
++
+ 	if (pfuze_chip->chip_id != PFUZE100) {
+ 		dev_warn(pfuze_chip->dev, "Requested pm_power_off_prepare handler for not supported chip\n");
+ 		return -ENODEV;
+ 	}
+ 
+-	if (pm_power_off_prepare) {
+-		dev_warn(pfuze_chip->dev, "pm_power_off_prepare is already registered.\n");
+-		return -EBUSY;
++	err = devm_register_sys_off_handler(pfuze_chip->dev,
++					    SYS_OFF_MODE_POWER_OFF_PREPARE,
++					    SYS_OFF_PRIO_DEFAULT,
++					    pfuze_power_off_prepare,
++					    pfuze_chip);
++	if (err) {
++		dev_err(pfuze_chip->dev, "failed to register sys-off handler: %d\n",
++			err);
++		return err;
+ 	}
+ 
+-	if (syspm_pfuze_chip) {
+-		dev_warn(pfuze_chip->dev, "syspm_pfuze_chip is already set.\n");
+-		return -EBUSY;
+-	}
+-
+-	syspm_pfuze_chip = pfuze_chip;
+-	pm_power_off_prepare = pfuze_power_off_prepare;
+-
+ 	return 0;
+ }
+ 
+@@ -837,23 +840,12 @@ static int pfuze100_regulator_probe(struct i2c_client *client,
+ 	return 0;
+ }
+ 
+-static int pfuze100_regulator_remove(struct i2c_client *client)
+-{
+-	if (syspm_pfuze_chip) {
+-		syspm_pfuze_chip = NULL;
+-		pm_power_off_prepare = NULL;
+-	}
+-
+-	return 0;
+-}
+-
+ static struct i2c_driver pfuze_driver = {
+ 	.driver = {
+ 		.name = "pfuze100-regulator",
+ 		.of_match_table = pfuze_dt_ids,
+ 	},
+ 	.probe = pfuze100_regulator_probe,
+-	.remove = pfuze100_regulator_remove,
+ };
+ module_i2c_driver(pfuze_driver);
+ 
 -- 
 2.35.1
 
