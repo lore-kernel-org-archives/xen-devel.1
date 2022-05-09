@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC4A3C433FE
-	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:33:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324891.547241 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9DCC433F5
+	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:41:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.324892.547251 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noCsj-0002ND-0C; Mon, 09 May 2022 23:33:37 +0000
+	id 1noD0P-00059W-R0; Mon, 09 May 2022 23:41:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324891.547241; Mon, 09 May 2022 23:33:36 +0000
+Received: by outflank-mailman (output) from mailman id 324892.547251; Mon, 09 May 2022 23:41:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noCsi-0002N0-Sq; Mon, 09 May 2022 23:33:36 +0000
-Received: by outflank-mailman (input) for mailman id 324891;
- Mon, 09 May 2022 23:33:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1noD0P-00059P-OT; Mon, 09 May 2022 23:41:33 +0000
+Received: by outflank-mailman (input) for mailman id 324892;
+ Mon, 09 May 2022 23:41:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCsh-0007Pf-Ho
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:35 +0000
+ id 1noCss-0007bw-2E
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:46 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7192045c-cff0-11ec-8fc4-03012f2f19d4;
- Tue, 10 May 2022 01:33:34 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7638ec4d-cff0-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 01:33:42 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id C21B61F430BF
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 959D61F441CC
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7192045c-cff0-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 7638ec4d-cff0-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139214;
-	bh=hTMdSPi0zN4MGEkpm7fbCDxWpGgYrC/cc+PuY565mHY=;
+	s=mail; t=1652139222;
+	bh=6s0maqcEZmA2YXgu3K4UCDPu+D53/76G+RW0Zx9hW8k=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Sk8pDCwXSAwTQ9cVTZlPz8a8ySrGY3hGrPt+VGDskV6R+uCOw9LADMc/JKfeftNPo
-	 asFxJcHbxHiK/3w91N3jvIgWMJgwCq+N4MlCfsgguAazqG3J0kdIxL0enJF0AIFfvB
-	 qrj4DZBOnMGXRehw13w/Gqu1lXja85Nu7DH8kFwOkMscD0FBV8ggmpXlUuebyAbpd6
-	 13JtTCF+jbP9cTENV6T22N6ht/UOp/jY7vlhjRhQskgAm5LbyaAdU+aqJl1oWzNotR
-	 zhh4iJ4DmsyzvGmL9Z1V2DZh2YCAdFZhUlWdl4dlLp7iND0uYa6NncprgcDCwwXRCN
-	 BwArMJ/2esCeg==
+	b=h4OvUVSAAn8ONu+FqbmPB/ZUg1Qkbk6CMBh2JL9wBLZZNByEx452+sfFnsAzbrW5g
+	 WobsFtZ/ugKUfeWEuu8gKnblyxG7kr6RGNcK/DuRUjgE7VnPsIPzVT6BWE/ogkwXcM
+	 ZEa6zQM9Ud51zEudJ43wylNsHR/LBoT0+ycy6T0RzK3M4I3LXqeJ068zrXIUjA3hEU
+	 FWiFVtYOTuHH+O/MM14WQytKXOng1sNd/DkdhgtmsB0Ohc4IKE/Ry6rNzouXX33NP9
+	 PLUYHYobr5c/gP/EBTkVk4jNp31Iu2OSNaJdJc28/R7zEnpy6HkG+xlpPc3bqWbG1U
+	 Qw6/DNrpVeC/A==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,105 +112,51 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 08/27] kernel/reboot: Add register_platform_power_off()
-Date: Tue, 10 May 2022 02:32:16 +0300
-Message-Id: <20220509233235.995021-9-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 10/27] csky: Use do_kernel_power_off()
+Date: Tue, 10 May 2022 02:32:18 +0300
+Message-Id: <20220509233235.995021-11-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add platform-level registration helpers that will ease transition of the
-arch/platform power-off callbacks to the new sys-off based API, allowing
-us to remove the global pm_power_off variable in the future.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new sys-off API.
 
+Acked-by: Guo Ren <guoren@kernel.org>
+Reviewed-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- include/linux/reboot.h |  3 +++
- kernel/reboot.c        | 55 ++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
+ arch/csky/kernel/power.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/include/linux/reboot.h b/include/linux/reboot.h
-index c52f77ee4ddd..f185b64faae0 100644
---- a/include/linux/reboot.h
-+++ b/include/linux/reboot.h
-@@ -141,6 +141,9 @@ int devm_register_sys_off_handler(struct device *dev,
- 				  int (*callback)(struct sys_off_data *data),
- 				  void *cb_data);
- 
-+int register_platform_power_off(void (*power_off)(void));
-+void unregister_platform_power_off(void (*power_off)(void));
-+
- /*
-  * Architecture independent implemenations of sys_reboot commands.
-  */
-diff --git a/kernel/reboot.c b/kernel/reboot.c
-index 982e58c11ce8..e74103f2a801 100644
---- a/kernel/reboot.c
-+++ b/kernel/reboot.c
-@@ -469,6 +469,61 @@ int devm_register_sys_off_handler(struct device *dev,
- }
- EXPORT_SYMBOL_GPL(devm_register_sys_off_handler);
- 
-+static struct sys_off_handler *platform_power_off_handler;
-+
-+static int platform_power_off_notify(struct sys_off_data *data)
-+{
-+	void (*platform_power_power_off_cb)(void) = data->cb_data;
-+
-+	platform_power_power_off_cb();
-+
-+	return NOTIFY_DONE;
-+}
-+
-+/**
-+ *	register_platform_power_off - Register platform-level power-off callback
-+ *	@power_off: Power-off callback
-+ *
-+ *	Registers power-off callback that will be called as last step
-+ *	of the power-off sequence. This callback is expected to be invoked
-+ *	for the last resort. Only one platform power-off callback is allowed
-+ *	to be registered at a time.
-+ *
-+ *	Returns zero on success, or error code on failure.
-+ */
-+int register_platform_power_off(void (*power_off)(void))
-+{
-+	struct sys_off_handler *handler;
-+
-+	handler = register_sys_off_handler(SYS_OFF_MODE_POWER_OFF,
-+					   SYS_OFF_PRIO_PLATFORM,
-+					   platform_power_off_notify,
-+					   power_off);
-+	if (IS_ERR(handler))
-+		return PTR_ERR(handler);
-+
-+	platform_power_off_handler = handler;
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(register_platform_power_off);
-+
-+/**
-+ *	unregister_platform_power_off - Unregister platform-level power-off callback
-+ *	@power_off: Power-off callback
-+ *
-+ *	Unregisters previously registered platform power-off callback.
-+ */
-+void unregister_platform_power_off(void (*power_off)(void))
-+{
-+	if (platform_power_off_handler &&
-+	    platform_power_off_handler->cb_data == power_off) {
-+		unregister_sys_off_handler(platform_power_off_handler);
-+		platform_power_off_handler = NULL;
-+	}
-+}
-+EXPORT_SYMBOL_GPL(unregister_platform_power_off);
-+
- static int legacy_pm_power_off_prepare(struct sys_off_data *data)
+diff --git a/arch/csky/kernel/power.c b/arch/csky/kernel/power.c
+index 923ee4e381b8..86ee202906f8 100644
+--- a/arch/csky/kernel/power.c
++++ b/arch/csky/kernel/power.c
+@@ -9,16 +9,14 @@ EXPORT_SYMBOL(pm_power_off);
+ void machine_power_off(void)
  {
- 	if (pm_power_off_prepare)
+ 	local_irq_disable();
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
+ 	asm volatile ("bkpt");
+ }
+ 
+ void machine_halt(void)
+ {
+ 	local_irq_disable();
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
+ 	asm volatile ("bkpt");
+ }
+ 
 -- 
 2.35.1
 
