@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A82ACC433EF
-	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324946.547367 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CEE0C433FE
+	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.324947.547379 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD18-0001NP-5z; Mon, 09 May 2022 23:42:18 +0000
+	id 1noD19-0001qV-EA; Mon, 09 May 2022 23:42:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324946.547367; Mon, 09 May 2022 23:42:18 +0000
+Received: by outflank-mailman (output) from mailman id 324947.547379; Mon, 09 May 2022 23:42:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD17-0001Ly-Qn; Mon, 09 May 2022 23:42:17 +0000
-Received: by outflank-mailman (input) for mailman id 324946;
+	id 1noD19-0001nX-7G; Mon, 09 May 2022 23:42:19 +0000
+Received: by outflank-mailman (input) for mailman id 324947;
  Mon, 09 May 2022 23:42:16 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCta-0007Pf-Jf
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:30 +0000
+ id 1noCtu-0007bw-21
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:50 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9271a10d-cff0-11ec-8fc4-03012f2f19d4;
- Tue, 10 May 2022 01:34:29 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9e06d0b5-cff0-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 01:34:49 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id 8E5731F44225
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id 3F0BE1F44239
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9271a10d-cff0-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 9e06d0b5-cff0-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139269;
-	bh=EWW47oALn1Py7rO4Rd4kvLdqb3xgTFAdsjGRYU8cAKA=;
+	s=mail; t=1652139289;
+	bh=pGHmFEEjaXj2663JV2ZbLu8gGj/vTytf7TAeEENRqwc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XdL/zWKlCfq+TjvuU5fks/wPZFNjeji7AfXoYAF4bTiiFsU+GbQDWY5508Nou7Rce
-	 WYBcyhfJDaUwS8cKmQ/6xhTDhEn7DgZ437y6IJmFfUHbyhUr2I0pUQT65Nc5H/sWQX
-	 4CQ3Oqfcv1qGbFpHVtnQr4Z3IC7yIc9gWPTXPgaxSTbFDl6YwL8B3phA9z7ZaOppvE
-	 f7qvUmb7kMaTIEa9YuMPH0XJi4FR1vaJB4JWphvOXWQxkyMm2uwk+0LT1pd1wpZb/e
-	 wcTKgqKz4FgaEUjSUJQHs+uwYiB91IQ/Go1i+BrOc9tM3Caq7CuU3nClpmaBT9NJXU
-	 qmHj9eFJTTNIg==
+	b=j6TdMpmPOCtsPovulFCfAQHz4uF7UDkPzJj/3CmgFYBImRy8M4O8YGcz4W706uWok
+	 oiILXGafhBbX7n+gHJn6RXTuMBUQC8tJ+EhQAGsuO/iXIERVRLzkR/44dQES7yRA6/
+	 FtuuqnjfOGSov1+k3mURGR/0OqutTfvEFLoWalI2/ND2VETgVusAQFBX2DfNOA/g7I
+	 j0l9XZgvP22CfJfFfA6ZxZIqFh1T34qNRlUcm5bkUIByJGzf9sEM5G0d3YHcPWZak3
+	 l8eX2DCnZSObZ31khwPUziOiMTJxqBOzynYhlqeRkrRRR5tLIOpk/iZhwBgqc0RGs9
+	 Toz7YL4ixFXdA==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,70 +112,75 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 22/27] ACPI: power: Switch to sys-off handler API
-Date: Tue, 10 May 2022 02:32:30 +0300
-Message-Id: <20220509233235.995021-23-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 27/27] kernel/reboot: Add devm_register_restart_handler()
+Date: Tue, 10 May 2022 02:32:35 +0300
+Message-Id: <20220509233235.995021-28-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Switch to sys-off API that replaces legacy pm_power_off callbacks,
-allowing us to remove global pm_* variables and support chaining of
-all restart and power-off modes consistently.
+Add devm_register_restart_handler() helper that registers sys-off
+handler using restart mode and with a default priority. Most drivers
+will want to register restart handler with a default priority, so this
+helper will reduce the boilerplate code and make code easier to read and
+follow.
 
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- drivers/acpi/sleep.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ include/linux/reboot.h |  4 ++++
+ kernel/reboot.c        | 22 ++++++++++++++++++++++
+ 2 files changed, 26 insertions(+)
 
-diff --git a/drivers/acpi/sleep.c b/drivers/acpi/sleep.c
-index c992e57b2c79..c3e3cee27f01 100644
---- a/drivers/acpi/sleep.c
-+++ b/drivers/acpi/sleep.c
-@@ -1023,20 +1023,22 @@ static void acpi_sleep_hibernate_setup(void)
- static inline void acpi_sleep_hibernate_setup(void) {}
- #endif /* !CONFIG_HIBERNATION */
+diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+index 7c6e1f308f7c..e5d9ef886179 100644
+--- a/include/linux/reboot.h
++++ b/include/linux/reboot.h
+@@ -145,6 +145,10 @@ int devm_register_power_off_handler(struct device *dev,
+ 				    int (*callback)(struct sys_off_data *data),
+ 				    void *cb_data);
  
--static void acpi_power_off_prepare(void)
-+static int acpi_power_off_prepare(struct sys_off_data *data)
- {
- 	/* Prepare to power off the system */
- 	acpi_sleep_prepare(ACPI_STATE_S5);
- 	acpi_disable_all_gpes();
- 	acpi_os_wait_events_complete();
-+	return NOTIFY_DONE;
- }
- 
--static void acpi_power_off(void)
-+static int acpi_power_off(struct sys_off_data *data)
- {
- 	/* acpi_sleep_prepare(ACPI_STATE_S5) should have already been called */
- 	pr_debug("%s called\n", __func__);
- 	local_irq_disable();
- 	acpi_enter_sleep_state(ACPI_STATE_S5);
-+	return NOTIFY_DONE;
- }
- 
- int __init acpi_sleep_init(void)
-@@ -1055,8 +1057,14 @@ int __init acpi_sleep_init(void)
- 
- 	if (acpi_sleep_state_supported(ACPI_STATE_S5)) {
- 		sleep_states[ACPI_STATE_S5] = 1;
--		pm_power_off_prepare = acpi_power_off_prepare;
--		pm_power_off = acpi_power_off;
++int devm_register_restart_handler(struct device *dev,
++				  int (*callback)(struct sys_off_data *data),
++				  void *cb_data);
 +
-+		register_sys_off_handler(SYS_OFF_MODE_POWER_OFF_PREPARE,
-+					 SYS_OFF_PRIO_FIRMWARE,
-+					 acpi_power_off_prepare, NULL);
+ int register_platform_power_off(void (*power_off)(void));
+ void unregister_platform_power_off(void (*power_off)(void));
+ 
+diff --git a/kernel/reboot.c b/kernel/reboot.c
+index b790025154ac..2e78bd754a75 100644
+--- a/kernel/reboot.c
++++ b/kernel/reboot.c
+@@ -484,6 +484,28 @@ int devm_register_power_off_handler(struct device *dev,
+ }
+ EXPORT_SYMBOL_GPL(devm_register_power_off_handler);
+ 
++/**
++ *	devm_register_restart_handler - Register restart handler
++ *	@dev: Device that registers callback
++ *	@callback: Callback function
++ *	@cb_data: Callback's argument
++ *
++ *	Registers resource-managed sys-off handler with a default priority
++ *	and using restart mode.
++ *
++ *	Returns zero on success, or error code on failure.
++ */
++int devm_register_restart_handler(struct device *dev,
++				  int (*callback)(struct sys_off_data *data),
++				  void *cb_data)
++{
++	return devm_register_sys_off_handler(dev,
++					     SYS_OFF_MODE_RESTART,
++					     SYS_OFF_PRIO_DEFAULT,
++					     callback, cb_data);
++}
++EXPORT_SYMBOL_GPL(devm_register_restart_handler);
 +
-+		register_sys_off_handler(SYS_OFF_MODE_POWER_OFF,
-+					 SYS_OFF_PRIO_FIRMWARE,
-+					 acpi_power_off, NULL);
- 	} else {
- 		acpi_no_s5 = true;
- 	}
+ static struct sys_off_handler *platform_power_off_handler;
+ 
+ static int platform_power_off_notify(struct sys_off_data *data)
 -- 
 2.35.1
 
