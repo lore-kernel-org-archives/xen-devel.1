@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9DCC433F5
-	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:41:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324892.547251 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964C0C433EF
+	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:41:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.324897.547262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD0P-00059W-R0; Mon, 09 May 2022 23:41:33 +0000
+	id 1noD0f-0005Zp-4G; Mon, 09 May 2022 23:41:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324892.547251; Mon, 09 May 2022 23:41:33 +0000
+Received: by outflank-mailman (output) from mailman id 324897.547262; Mon, 09 May 2022 23:41:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD0P-00059P-OT; Mon, 09 May 2022 23:41:33 +0000
-Received: by outflank-mailman (input) for mailman id 324892;
- Mon, 09 May 2022 23:41:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1noD0e-0005Ze-Vp; Mon, 09 May 2022 23:41:48 +0000
+Received: by outflank-mailman (input) for mailman id 324897;
+ Mon, 09 May 2022 23:41:47 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCss-0007bw-2E
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:33:46 +0000
+ id 1noCtO-0007Pf-Ho
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:18 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7638ec4d-cff0-11ec-a406-831a346695d4;
- Tue, 10 May 2022 01:33:42 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8b427652-cff0-11ec-8fc4-03012f2f19d4;
+ Tue, 10 May 2022 01:34:17 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id 959D61F441CC
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id CD6681F44218
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7638ec4d-cff0-11ec-a406-831a346695d4
+X-Inumbo-ID: 8b427652-cff0-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139222;
-	bh=6s0maqcEZmA2YXgu3K4UCDPu+D53/76G+RW0Zx9hW8k=;
+	s=mail; t=1652139257;
+	bh=vRb4DtICDxJaROyEtMW3UwUdcH4tg+twL9gOXYS6wp8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=h4OvUVSAAn8ONu+FqbmPB/ZUg1Qkbk6CMBh2JL9wBLZZNByEx452+sfFnsAzbrW5g
-	 WobsFtZ/ugKUfeWEuu8gKnblyxG7kr6RGNcK/DuRUjgE7VnPsIPzVT6BWE/ogkwXcM
-	 ZEa6zQM9Ud51zEudJ43wylNsHR/LBoT0+ycy6T0RzK3M4I3LXqeJ068zrXIUjA3hEU
-	 FWiFVtYOTuHH+O/MM14WQytKXOng1sNd/DkdhgtmsB0Ohc4IKE/Ry6rNzouXX33NP9
-	 PLUYHYobr5c/gP/EBTkVk4jNp31Iu2OSNaJdJc28/R7zEnpy6HkG+xlpPc3bqWbG1U
-	 Qw6/DNrpVeC/A==
+	b=gt4u81G/LFxhoOEWGR2YMg+vhkXhorm0jgFd64YTZTuXmM+7vG7f3q4ZdaFuqYRJS
+	 tGUmDGjP5E8g3OsXjzvy7rc8/B4hk2wxUh254z6arCFJCq4Zn4nYnOEuMGAFxhhkwc
+	 FeFBnrORsJSOriC3iEOi3iWo3k8QOf23bj2Nt6IUYGS+Vok5FiMxP+66U31QsS8qsL
+	 mVpptTyKx3JXLvhtJiVMPU7cAlmSudorXN3MNL4LPBNQ56Fm1aY+u8x67N3P+KtJ22
+	 6BIPyxJsFkQfhUsOqyWUF/BWHTPKTs8seyIqQEcyu9CdhBsdEQuumAGveCtmifiXNx
+	 wIYCEzEJi6pLw==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,9 +112,9 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 10/27] csky: Use do_kernel_power_off()
-Date: Tue, 10 May 2022 02:32:18 +0300
-Message-Id: <20220509233235.995021-11-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 19/27] ia64: Use do_kernel_power_off()
+Date: Tue, 10 May 2022 02:32:27 +0300
+Message-Id: <20220509233235.995021-20-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
@@ -127,34 +127,32 @@ that invokes chained power-off handlers. It also invokes legacy
 pm_power_off() for now, which will be removed once all drivers will
 be converted to the new sys-off API.
 
-Acked-by: Guo Ren <guoren@kernel.org>
 Reviewed-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- arch/csky/kernel/power.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ arch/ia64/kernel/process.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/csky/kernel/power.c b/arch/csky/kernel/power.c
-index 923ee4e381b8..86ee202906f8 100644
---- a/arch/csky/kernel/power.c
-+++ b/arch/csky/kernel/power.c
-@@ -9,16 +9,14 @@ EXPORT_SYMBOL(pm_power_off);
- void machine_power_off(void)
+diff --git a/arch/ia64/kernel/process.c b/arch/ia64/kernel/process.c
+index 167b1765bea1..416305e550e2 100644
+--- a/arch/ia64/kernel/process.c
++++ b/arch/ia64/kernel/process.c
+@@ -19,6 +19,7 @@
+ #include <linux/module.h>
+ #include <linux/notifier.h>
+ #include <linux/personality.h>
++#include <linux/reboot.h>
+ #include <linux/sched.h>
+ #include <linux/sched/debug.h>
+ #include <linux/sched/hotplug.h>
+@@ -602,8 +603,7 @@ machine_halt (void)
+ void
+ machine_power_off (void)
  {
- 	local_irq_disable();
 -	if (pm_power_off)
 -		pm_power_off();
 +	do_kernel_power_off();
- 	asm volatile ("bkpt");
- }
- 
- void machine_halt(void)
- {
- 	local_irq_disable();
--	if (pm_power_off)
--		pm_power_off();
-+	do_kernel_power_off();
- 	asm volatile ("bkpt");
+ 	machine_halt();
  }
  
 -- 
