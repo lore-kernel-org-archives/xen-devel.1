@@ -4,31 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EEEFC433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86765C4332F
 	for <xen-devel@archiver.kernel.org>; Mon,  9 May 2022 23:42:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.324928.547335 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.324931.547339 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD0x-00087C-C1; Mon, 09 May 2022 23:42:07 +0000
+	id 1noD0y-0008BC-0i; Mon, 09 May 2022 23:42:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 324928.547335; Mon, 09 May 2022 23:42:07 +0000
+Received: by outflank-mailman (output) from mailman id 324931.547339; Mon, 09 May 2022 23:42:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noD0w-00085x-VC; Mon, 09 May 2022 23:42:06 +0000
-Received: by outflank-mailman (input) for mailman id 324928;
- Mon, 09 May 2022 23:42:05 +0000
+	id 1noD0x-00089B-CA; Mon, 09 May 2022 23:42:07 +0000
+Received: by outflank-mailman (input) for mailman id 324931;
+ Mon, 09 May 2022 23:42:06 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=s4mp=VR=collabora.com=dmitry.osipenko@srs-se1.protection.inumbo.net>)
- id 1noCtW-0007bw-9c
- for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:26 +0000
+ id 1noCtT-0007bw-EK
+ for xen-devel@lists.xenproject.org; Mon, 09 May 2022 23:34:23 +0000
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8feaabfa-cff0-11ec-a406-831a346695d4;
- Tue, 10 May 2022 01:34:25 +0200 (CEST)
+ id 8e31ecc5-cff0-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 01:34:22 +0200 (CEST)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- (Authenticated sender: dmitry.osipenko) with ESMTPSA id A135D1F44222
+ (Authenticated sender: dmitry.osipenko) with ESMTPSA id C06B91F4421D
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,17 +40,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8feaabfa-cff0-11ec-a406-831a346695d4
+X-Inumbo-ID: 8e31ecc5-cff0-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1652139265;
-	bh=0HjIUgv+906XrAObDigD/ThUSuZMAL8DnPYgjzjpmC0=;
+	s=mail; t=1652139261;
+	bh=8v4IT57+mYAUaWHgG2SWPXczQ+re0x8/DMpbbFlIS8M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=TWCiuLNt7/xJ8odTWc8GyA2loDND0GGWRmOLSDJZ3/1EOOM46MoO6kcL0XNk3HwPe
-	 FBPpCFoePNs4rPAAZRKP+rw/ZolMsMxYimmM4SWHpv67kFo+HnqMhIKFI3o9iJnuWS
-	 vNlcat+YAoNJG0U7fH5nF+xZr/J3ldOvzJraAO0ornmvSG33Iwh+7D/WO9KPdopL/I
-	 4fstIQm6rGU1cDpxZRjjzwcmAnN/r2ufy/hVwsd2Ga1ZdsJDzAOFQPmAS1qD2fVhxO
-	 UL54muri0ZQhU7rjF30W/z7G7m5ZKwocnvqA9RnpgcfN4zFZ8kzOBHH30lfBRBp5PE
-	 p0vvde97M8jrQ==
+	b=isHqVuBEBya3ws/kEg+oG4SY7cz7IlcFyGnrUpkaZVcGOjpZxRhpzSw44LoLfDOJa
+	 WG+MtxGMzWjlq+wBMlpt+KNs2yTOPSWGcQVJuCZGKQnBwwK5ItMuAZjFF+prk5PVOf
+	 dbW8U+TBV0uJ/lW7DoEmYBN+dWUUR3JmXsjCQnAoqtd+e/OC4UCPn1dbpDb9NKnPOR
+	 gwWBLXpkonDuICKTRolr5FU0p5ifDNqvOUcqTMXX1M5CkKwte65fYr/AmYqOdZnoWi
+	 vrDx1AIDfO9+OLCEpYijEbVExDT6hmoW8p3VzsnPd6npIRWlURULaN5k1zAUbNcY2c
+	 KQvzdoNzeUO7A==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: Thierry Reding <thierry.reding@gmail.com>,
 	Jonathan Hunter <jonathanh@nvidia.com>,
@@ -112,9 +112,9 @@ Cc: linux-kernel@vger.kernel.org,
 	linux-acpi@vger.kernel.org,
 	linux-pm@vger.kernel.org,
 	linux-tegra@vger.kernel.org
-Subject: [PATCH v8 21/27] memory: emif: Use kernel_can_power_off()
-Date: Tue, 10 May 2022 02:32:29 +0300
-Message-Id: <20220509233235.995021-22-dmitry.osipenko@collabora.com>
+Subject: [PATCH v8 20/27] mips: Use do_kernel_power_off()
+Date: Tue, 10 May 2022 02:32:28 +0300
+Message-Id: <20220509233235.995021-21-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
 References: <20220509233235.995021-1-dmitry.osipenko@collabora.com>
@@ -122,29 +122,32 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Replace legacy pm_power_off with kernel_can_power_off() helper that
-is aware about chained power-off handlers.
+Kernel now supports chained power-off handlers. Use do_kernel_power_off()
+that invokes chained power-off handlers. It also invokes legacy
+pm_power_off() for now, which will be removed once all drivers will
+be converted to the new sys-off API.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>
+Acked-by: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
 Reviewed-by: Michał Mirosław <mirq-linux@rere.qmqm.pl>
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- drivers/memory/emif.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/mips/kernel/reset.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/memory/emif.c b/drivers/memory/emif.c
-index 6c2a421b86e3..f305643209f0 100644
---- a/drivers/memory/emif.c
-+++ b/drivers/memory/emif.c
-@@ -630,7 +630,7 @@ static irqreturn_t emif_threaded_isr(int irq, void *dev_id)
- 		dev_emerg(emif->dev, "SDRAM temperature exceeds operating limit.. Needs shut down!!!\n");
+diff --git a/arch/mips/kernel/reset.c b/arch/mips/kernel/reset.c
+index 6288780b779e..e7ce07b3e79b 100644
+--- a/arch/mips/kernel/reset.c
++++ b/arch/mips/kernel/reset.c
+@@ -114,8 +114,7 @@ void machine_halt(void)
  
- 		/* If we have Power OFF ability, use it, else try restarting */
--		if (pm_power_off) {
-+		if (kernel_can_power_off()) {
- 			kernel_power_off();
- 		} else {
- 			WARN(1, "FIXME: NO pm_power_off!!! trying restart\n");
+ void machine_power_off(void)
+ {
+-	if (pm_power_off)
+-		pm_power_off();
++	do_kernel_power_off();
+ 
+ #ifdef CONFIG_SMP
+ 	preempt_disable();
 -- 
 2.35.1
 
