@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 932AEC433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69FCBC433F5
 	for <xen-devel@archiver.kernel.org>; Tue, 10 May 2022 06:05:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.325182.547692 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.325179.547655 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noIzn-00019b-7a; Tue, 10 May 2022 06:05:19 +0000
+	id 1noIzg-0008TC-Eo; Tue, 10 May 2022 06:05:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 325182.547692; Tue, 10 May 2022 06:05:19 +0000
+Received: by outflank-mailman (output) from mailman id 325179.547655; Tue, 10 May 2022 06:05:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noIzn-00019P-3p; Tue, 10 May 2022 06:05:19 +0000
-Received: by outflank-mailman (input) for mailman id 325182;
- Tue, 10 May 2022 06:05:18 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1noIzg-0008QY-6C; Tue, 10 May 2022 06:05:12 +0000
+Received: by outflank-mailman (input) for mailman id 325179;
+ Tue, 10 May 2022 06:05:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+NA3=VS=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1noIzm-0007z7-44
- for xen-devel@lists.xen.org; Tue, 10 May 2022 06:05:18 +0000
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [2607:f8b0:4864:20::1029])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 232c783a-d027-11ec-8fc4-03012f2f19d4;
- Tue, 10 May 2022 08:05:06 +0200 (CEST)
-Received: by mail-pj1-x1029.google.com with SMTP id
- w17-20020a17090a529100b001db302efed6so1258812pjh.4
- for <xen-devel@lists.xen.org>; Mon, 09 May 2022 23:05:17 -0700 (PDT)
+ id 1noIze-0007ob-TK
+ for xen-devel@lists.xen.org; Tue, 10 May 2022 06:05:11 +0000
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [2607:f8b0:4864:20::102b])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 25223eee-d027-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 08:05:09 +0200 (CEST)
+Received: by mail-pj1-x102b.google.com with SMTP id
+ cx11-20020a17090afd8b00b001d9fe5965b3so1176648pjb.3
+ for <xen-devel@lists.xen.org>; Mon, 09 May 2022 23:05:09 -0700 (PDT)
 Received: from localhost ([122.162.234.2]) by smtp.gmail.com with ESMTPSA id
- i63-20020a636d42000000b003c14af5062esm9489879pgc.70.2022.05.09.23.05.15
+ g17-20020a170902d5d100b0015e8d4eb1f0sm1027055plh.58.2022.05.09.23.05.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 May 2022 23:05:15 -0700 (PDT)
+ Mon, 09 May 2022 23:05:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 232c783a-d027-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 25223eee-d027-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=LdUL/a7ibfgZJBH8Cwv9KTcb3UJUgKsljFq91lvqCvU=;
-        b=k181qsg4Qqs42nA6b8nsKIeuG8Fdeh1LZm41PT3KKx6dGkeV/r8YFGCtyV57yQuzjo
-         kIptadhPH57dwBQtf0tn1kRKYhyF+sC+KZvhttghy8dnvrYJAA0A1v93+Ovo28q34zvS
-         cRhJFtZh4Fn015Q9ZING6/pjkd9+PBoKa9vaYQzXm1hkOqrVS2ACRbwKNts1dVD1z4KR
-         hOzxtV7WYkIHKmgTbJwg7DkSfa7EKdrNqf60YoeJItsYva2LqK2puY+vy9S/pdxYSfrB
-         YWLg1q8SjkmLT9ZUp74vAzgRJJd9HUrhVd/hLn2sSDCEXOeKnHoCihy8S7gK1in4dNWL
-         ZOMg==
+        bh=svVS82OvBdmvv7JLfSbwnD8mRf2Q0xw4MKyZG61zwPs=;
+        b=bZHc71ib68Kyd06jqtULLoUCaA3zns/ci74fepqyPN3W8EsEXTQcdBKGX1HPQ1u1/h
+         U7YfPdGh8YBaWTrGEEHDS/ma/YUWpv4Jv3+RKulsB9cWgKHacDoHGaSz6FwBKNVPjDj1
+         AzuzYPvDkEe9YyCuSGzeh1Kx5PdBaO+zzQgXkphqf9xX2cVMr4Ea9OBMsBeuClFxup1k
+         ESpZwGz+8FTsGWOV+VzjaWO0Czk6dA8ETlBi+1VaiMfQ/Hud/0tvof9yXgP7NuT/WIG4
+         /j3FvDFe9t25WEr9yb1zgRBSeDd620fn9u6+UAkPS4yFqhZpGSqdB1U4r6/kEvbs2EgZ
+         Ezuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=LdUL/a7ibfgZJBH8Cwv9KTcb3UJUgKsljFq91lvqCvU=;
-        b=gzoozIml9x0MjzhbJ4PpqUYaaFlJVkAsb4r5X8U5R5Z4TbLBMA+Zr9RarJ6ZN6XN6j
-         vWdi+X0pwfQ2ypDlNaX41nzBY2IzEPzZz/8NoIvgcNiuOU2KOwSSc9j2LQfsl0Rzbl7B
-         6ic4sB2+03ylata/CVWszOiZhVzMOJf0yvz2SqBTE38KXw84ugbqP/FsjW3lvnJ5SLo6
-         /pXP6L7IRmeNC8h7VSGes+B1h+PIDHsSalqB4hMHznOUKh/Z9BT+pGQPuZiXWSWmlTmj
-         SwnkQTw1uAJsg185gL1MPux24uMP6FQWN0v3U4EfTp0DD5oSofYMntZfjq7Eg59sazWz
-         BJkQ==
-X-Gm-Message-State: AOAM533XgfFtaAnDZcVBT+NOMAQG+qSn8mP/t9U91hRJjCcqCTmgHWzi
-	EIH9Yi9E+29EfOkB8FYTtiZzXIiyFmM1ZQ==
-X-Google-Smtp-Source: ABdhPJw/ICaJJRhvcX/HWYXMOuOkkNrEi+Qx5x4tMRG+zUNhqhq33zc7z7WNf7qxwb1Sgq1hPehPuw==
-X-Received: by 2002:a17:902:70c9:b0:15f:a78:fd15 with SMTP id l9-20020a17090270c900b0015f0a78fd15mr9855184plt.12.1652162715940;
-        Mon, 09 May 2022 23:05:15 -0700 (PDT)
+        bh=svVS82OvBdmvv7JLfSbwnD8mRf2Q0xw4MKyZG61zwPs=;
+        b=nTzvYPlP0AWNuH2p/llEe97CdN6Dcdn+VSWW4Ht/0S/4gnOqFNbEOkun7igIFLULGq
+         b/psYNC/2hjlXbgg8EV+y2Umx/dohdnIemhbEob84OEroILcC5tZk0pPbxEgoZ901PZQ
+         MgLwmZaBXhDP66lu26LKQFBjpVT2A2yH7kHYanb1fcmnEH9hVmmtrDnzdizHnpZUSR4l
+         3tT1kDV3hPxlxzsqNz8SWNsgULkoH6gvdep5/WwgUTa+JSEB2WAlF1qj2P50BJOc6br+
+         9Rc9wie0ofjasgqvu1/5reoV03/v7wdPUU5B7S2qzWWvvgWeOwBkoKvu8CS8EhvpI9M0
+         VuSg==
+X-Gm-Message-State: AOAM532BLOLGrvtVJyriGc6F2Uk9R6XSkOTYnCPTwrYBT++xok+Q+TYP
+	20Jq+iKTTtJKmJ2cdFnwGp67BGcvmL7cgA==
+X-Google-Smtp-Source: ABdhPJw0NKJ4Q/0dkxs8PCIcoIpZRhB2dwZKfpWje1lHYFkWpSYYwaA1BNIRtzlezkm2oH3TFk6mBw==
+X-Received: by 2002:a17:902:a981:b0:156:229d:6834 with SMTP id bh1-20020a170902a98100b00156229d6834mr18791093plb.128.1652162708233;
+        Mon, 09 May 2022 23:05:08 -0700 (PDT)
 From: Viresh Kumar <viresh.kumar@linaro.org>
 To: xen-devel@lists.xen.org
 Cc: Viresh Kumar <viresh.kumar@linaro.org>,
@@ -86,98 +86,89 @@ Cc: Viresh Kumar <viresh.kumar@linaro.org>,
 	Oleksandr Tyshchenko <olekstysh@gmail.com>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>
-Subject: [PATCH V2 6/6] libxl: Allocate MMIO params for GPIO device and update DT
-Date: Tue, 10 May 2022 11:34:51 +0530
-Message-Id: <5bae7f1e7fe2415f075e71353e3ca12f8f662b05.1652162646.git.viresh.kumar@linaro.org>
+	Julien Grall <julien@xen.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V2 3/6] libxl: arm: Create alloc_virtio_mmio_params()
+Date: Tue, 10 May 2022 11:34:48 +0530
+Message-Id: <32fa4a77c76187f68b074ff1cc81d8de5f683638.1652162646.git.viresh.kumar@linaro.org>
 X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
 In-Reply-To: <cover.1652162646.git.viresh.kumar@linaro.org>
 References: <cover.1652162646.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This patch allocates Virtio MMIO params (IRQ and memory region) and pass
-them to the backend, also update Guest device-tree based on Virtio GPIO
-DT bindings [1].
+Create a separate routine to allocate base and irq for a device as the
+same code will be required for each device type.
 
-[1] https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio-virtio.yaml
-
+Suggested-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
 ---
- tools/libs/light/libxl_arm.c | 46 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
+ tools/libs/light/libxl_arm.c | 41 +++++++++++++++++++++++-------------
+ 1 file changed, 26 insertions(+), 15 deletions(-)
 
 diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index d085c7cf4dbd..2f23430a3ea3 100644
+index 37403a2cebb1..6b95ded82dc3 100644
 --- a/tools/libs/light/libxl_arm.c
 +++ b/tools/libs/light/libxl_arm.c
-@@ -119,6 +119,15 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-             return rc;
-     }
- 
-+    for (i = 0; i < d_config->num_gpios; i++) {
-+        libxl_device_gpio *gpio = &d_config->gpios[i];
-+
-+    int rc = alloc_virtio_mmio_params(gc, &gpio->base, &gpio->irq,
-+            &virtio_mmio_base, &virtio_mmio_irq);
-+    if (rc)
-+        return rc;
-+    }
-+
-     if (virtio_mmio_irq != GUEST_VIRTIO_MMIO_SPI_FIRST) {
-         virtio_irq = virtio_mmio_irq - 1;
-         nr_spis += (virtio_irq - 32) + 1;
-@@ -938,6 +947,38 @@ static int make_virtio_mmio_node_i2c(libxl__gc *gc, void *fdt,
-     return fdt_end_node(fdt);
+@@ -48,6 +48,24 @@ static uint32_t alloc_virtio_mmio_irq(libxl__gc *gc, uint32_t *virtio_mmio_irq)
+     return irq;
  }
  
-+static int make_virtio_mmio_node_gpio(libxl__gc *gc, void *fdt,
-+                                 uint64_t base, uint32_t irq)
++static int alloc_virtio_mmio_params(libxl__gc *gc, uint64_t *base,
++                                    uint32_t *irq, uint64_t *virtio_mmio_base,
++                                    uint32_t *virtio_mmio_irq)
 +{
-+    int res;
++    *base = alloc_virtio_mmio_base(gc, virtio_mmio_base);
++    if (!*base)
++        return ERROR_FAIL;
 +
-+    res = make_virtio_mmio_node_common(gc, fdt, base, irq);
-+    if (res) return res;
++    *irq = alloc_virtio_mmio_irq(gc, virtio_mmio_irq);
++    if (!*irq)
++        return ERROR_FAIL;
 +
-+    res = fdt_begin_node(fdt, "gpio");
-+    if (res) return res;
++    LOG(DEBUG, "Allocate Virtio MMIO params: IRQ %u BASE 0x%"PRIx64, *irq,
++        *base);
 +
-+    res = fdt_property_compat(gc, fdt, 1, "virtio,device29");
-+    if (res) return res;
-+
-+    res = fdt_property(fdt, "gpio-controller", NULL, 0);
-+    if (res) return res;
-+
-+    res = fdt_property_cell(fdt, "#gpio-cells", 2);
-+    if (res) return res;
-+
-+    res = fdt_property(fdt, "interrupt-controller", NULL, 0);
-+    if (res) return res;
-+
-+    res = fdt_property_cell(fdt, "#interrupt-cells", 2);
-+    if (res) return res;
-+
-+    res = fdt_end_node(fdt);
-+    if (res) return res;
-+
-+    return fdt_end_node(fdt);
++    return 0;
 +}
 +
- static const struct arch_info *get_arch_info(libxl__gc *gc,
-                                              const struct xc_dom_image *dom)
+ static const char *gicv_to_string(libxl_gic_version gic_version)
  {
-@@ -1253,6 +1294,11 @@ static int libxl__prepare_dtb(libxl__gc *gc, libxl_domain_config *d_config,
-                 FDT( make_virtio_mmio_node_simple(gc, fdt, disk->base, disk->irq) );
-         }
+     switch (gic_version) {
+@@ -85,25 +103,18 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         libxl_device_disk *disk = &d_config->disks[i];
  
-+        for (i = 0; i < d_config->num_gpios; i++) {
-+            libxl_device_gpio *gpio = &d_config->gpios[i];
-+            FDT( make_virtio_mmio_node_gpio(gc, fdt, gpio->base, gpio->irq) );
-+        }
-+
-         for (i = 0; i < d_config->num_i2cs; i++) {
-             libxl_device_i2c *i2c = &d_config->i2cs[i];
-             FDT( make_virtio_mmio_node_i2c(gc, fdt, i2c->base, i2c->irq) );
+         if (disk->specification == LIBXL_DISK_SPECIFICATION_VIRTIO) {
+-            disk->base = alloc_virtio_mmio_base(gc, &virtio_mmio_base);
+-            if (!disk->base)
+-                return ERROR_FAIL;
+-
+-            disk->irq = alloc_virtio_mmio_irq(gc, &virtio_mmio_irq);
+-            if (!disk->irq)
+-                return ERROR_FAIL;
+-
+-            if (virtio_irq < disk->irq)
+-                virtio_irq = disk->irq;
+-            virtio_enabled = true;
+-
+-            LOG(DEBUG, "Allocate Virtio MMIO params for Vdev %s: IRQ %u BASE 0x%"PRIx64,
+-                disk->vdev, disk->irq, disk->base);
++            int rc = alloc_virtio_mmio_params(gc, &disk->base, &disk->irq,
++                    &virtio_mmio_base, &virtio_mmio_irq);
++            if (rc)
++                return rc;
+         }
+     }
+ 
+-    if (virtio_enabled)
++    if (virtio_mmio_irq != GUEST_VIRTIO_MMIO_SPI_FIRST) {
++        virtio_irq = virtio_mmio_irq - 1;
+         nr_spis += (virtio_irq - 32) + 1;
++        virtio_enabled = true;
++    }
+ 
+     for (i = 0; i < d_config->b_info.num_irqs; i++) {
+         uint32_t irq = d_config->b_info.irqs[i];
 -- 
 2.31.1.272.g89b43f80a514
 
