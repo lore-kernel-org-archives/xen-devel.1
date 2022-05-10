@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A36E8C4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 10 May 2022 06:05:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.325180.547670 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 932AEC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 10 May 2022 06:05:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.325182.547692 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noIzi-0000UG-Kh; Tue, 10 May 2022 06:05:14 +0000
+	id 1noIzn-00019b-7a; Tue, 10 May 2022 06:05:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 325180.547670; Tue, 10 May 2022 06:05:14 +0000
+Received: by outflank-mailman (output) from mailman id 325182.547692; Tue, 10 May 2022 06:05:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noIzi-0000U3-HU; Tue, 10 May 2022 06:05:14 +0000
-Received: by outflank-mailman (input) for mailman id 325180;
- Tue, 10 May 2022 06:05:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1noIzn-00019P-3p; Tue, 10 May 2022 06:05:19 +0000
+Received: by outflank-mailman (input) for mailman id 325182;
+ Tue, 10 May 2022 06:05:18 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+NA3=VS=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
- id 1noIzg-0007ob-PR
- for xen-devel@lists.xen.org; Tue, 10 May 2022 06:05:12 +0000
-Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
- [2607:f8b0:4864:20::533])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 26a1bf24-d027-11ec-a406-831a346695d4;
- Tue, 10 May 2022 08:05:12 +0200 (CEST)
-Received: by mail-pg1-x533.google.com with SMTP id a191so13834968pge.2
- for <xen-devel@lists.xen.org>; Mon, 09 May 2022 23:05:12 -0700 (PDT)
+ id 1noIzm-0007z7-44
+ for xen-devel@lists.xen.org; Tue, 10 May 2022 06:05:18 +0000
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [2607:f8b0:4864:20::1029])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 232c783a-d027-11ec-8fc4-03012f2f19d4;
+ Tue, 10 May 2022 08:05:06 +0200 (CEST)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ w17-20020a17090a529100b001db302efed6so1258812pjh.4
+ for <xen-devel@lists.xen.org>; Mon, 09 May 2022 23:05:17 -0700 (PDT)
 Received: from localhost ([122.162.234.2]) by smtp.gmail.com with ESMTPSA id
- g8-20020a1709029f8800b0015e8d4eb277sm971751plq.193.2022.05.09.23.05.10
+ i63-20020a636d42000000b003c14af5062esm9489879pgc.70.2022.05.09.23.05.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 May 2022 23:05:10 -0700 (PDT)
+ Mon, 09 May 2022 23:05:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +46,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 26a1bf24-d027-11ec-a406-831a346695d4
+X-Inumbo-ID: 232c783a-d027-11ec-8fc4-03012f2f19d4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=PPqz95lztCC38dTJHeWNR5iEVbeizZheBx488usygyI=;
-        b=vMHmiiogda0eo2/FDg6G7b/iTEveRUAuIW2QZ0etiRM4FaQNA6XkuU+P+GXpnXf+5b
-         enCYqyc1TUOUd26J0sLkxH/e6wIA6yU4ZJptcid0h+KsWU+69ifJTbbgyTivLDvgG6SH
-         L1PodZd2PtLXYXUtl8DwkcGyBom3cTecCzSEdwlaTIfNAV2tlorluAa0qsJuYkYap1RD
-         OnRZiBUkmd+c/5JNSKaAfpCaNouATNjXvBRXBeIetFY+k9GyV91ls6DnwguiUVny6z7P
-         LYMpAaKnKKeLCeweY8nJHftRFAIZf4olPFXkC6rRKP5HqP38WlRQ94l+yuRDulWPETzY
-         7EyQ==
+        bh=LdUL/a7ibfgZJBH8Cwv9KTcb3UJUgKsljFq91lvqCvU=;
+        b=k181qsg4Qqs42nA6b8nsKIeuG8Fdeh1LZm41PT3KKx6dGkeV/r8YFGCtyV57yQuzjo
+         kIptadhPH57dwBQtf0tn1kRKYhyF+sC+KZvhttghy8dnvrYJAA0A1v93+Ovo28q34zvS
+         cRhJFtZh4Fn015Q9ZING6/pjkd9+PBoKa9vaYQzXm1hkOqrVS2ACRbwKNts1dVD1z4KR
+         hOzxtV7WYkIHKmgTbJwg7DkSfa7EKdrNqf60YoeJItsYva2LqK2puY+vy9S/pdxYSfrB
+         YWLg1q8SjkmLT9ZUp74vAzgRJJd9HUrhVd/hLn2sSDCEXOeKnHoCihy8S7gK1in4dNWL
+         ZOMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=PPqz95lztCC38dTJHeWNR5iEVbeizZheBx488usygyI=;
-        b=wqFfOkEHmjwZvEpgj7z60JbdSmePlxHgdzMLBvGsYpT4HzZvIfoDOvdjizzLtvtnLW
-         37UHPNljVw8kRDK4F/vqAEvAbTjt2olJ70w6eIHq7xLfDr75bYwkXev9Wn6J3MntIT3M
-         CpcHcCWdM3sBEZ3gd+50lO2Kc1jyX2V7VH3yKqHAh0xPb12+oIz3PNoIVjjybo4FZAsv
-         LpKj33LMKbA7yEmKokF9vc9C8DIJuoow8pHOIRnExDxVfk+VxIxyzi2X31qGnwhdGNQv
-         h0FsrH3oql33Sk5vEPo7/+YnCXt6N5QqtRDGfV2HvOE+oLBw+IaravqPx6uDwTbSKeXl
-         Wmew==
-X-Gm-Message-State: AOAM530DOH2XUMJ76s73PBKGM90BBWKppchh/UpP+iMYXamfLj3sogAI
-	b/Fb8drxjux6ATwflnSF7tMtDKFS5r7d6g==
-X-Google-Smtp-Source: ABdhPJzcx6XKRkhlGQEGnNBK9sTlPxZap2TWqCwx24Uvq6gyUKoCCpT28whgCMXvS+N9E7dqP+t5aQ==
-X-Received: by 2002:a63:a50e:0:b0:3c6:d417:6704 with SMTP id n14-20020a63a50e000000b003c6d4176704mr4793374pgf.526.1652162710796;
-        Mon, 09 May 2022 23:05:10 -0700 (PDT)
+        bh=LdUL/a7ibfgZJBH8Cwv9KTcb3UJUgKsljFq91lvqCvU=;
+        b=gzoozIml9x0MjzhbJ4PpqUYaaFlJVkAsb4r5X8U5R5Z4TbLBMA+Zr9RarJ6ZN6XN6j
+         vWdi+X0pwfQ2ypDlNaX41nzBY2IzEPzZz/8NoIvgcNiuOU2KOwSSc9j2LQfsl0Rzbl7B
+         6ic4sB2+03ylata/CVWszOiZhVzMOJf0yvz2SqBTE38KXw84ugbqP/FsjW3lvnJ5SLo6
+         /pXP6L7IRmeNC8h7VSGes+B1h+PIDHsSalqB4hMHznOUKh/Z9BT+pGQPuZiXWSWmlTmj
+         SwnkQTw1uAJsg185gL1MPux24uMP6FQWN0v3U4EfTp0DD5oSofYMntZfjq7Eg59sazWz
+         BJkQ==
+X-Gm-Message-State: AOAM533XgfFtaAnDZcVBT+NOMAQG+qSn8mP/t9U91hRJjCcqCTmgHWzi
+	EIH9Yi9E+29EfOkB8FYTtiZzXIiyFmM1ZQ==
+X-Google-Smtp-Source: ABdhPJw/ICaJJRhvcX/HWYXMOuOkkNrEi+Qx5x4tMRG+zUNhqhq33zc7z7WNf7qxwb1Sgq1hPehPuw==
+X-Received: by 2002:a17:902:70c9:b0:15f:a78:fd15 with SMTP id l9-20020a17090270c900b0015f0a78fd15mr9855184plt.12.1652162715940;
+        Mon, 09 May 2022 23:05:15 -0700 (PDT)
 From: Viresh Kumar <viresh.kumar@linaro.org>
 To: xen-devel@lists.xen.org
 Cc: Viresh Kumar <viresh.kumar@linaro.org>,
@@ -86,74 +87,97 @@ Cc: Viresh Kumar <viresh.kumar@linaro.org>,
 	Wei Liu <wl@xen.org>,
 	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>
-Subject: [PATCH V2 4/6] libxl: arm: Split make_virtio_mmio_node()
-Date: Tue, 10 May 2022 11:34:49 +0530
-Message-Id: <65dfe45db3829990335c0c5307d4bcfb40647986.1652162646.git.viresh.kumar@linaro.org>
+Subject: [PATCH V2 6/6] libxl: Allocate MMIO params for GPIO device and update DT
+Date: Tue, 10 May 2022 11:34:51 +0530
+Message-Id: <5bae7f1e7fe2415f075e71353e3ca12f8f662b05.1652162646.git.viresh.kumar@linaro.org>
 X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
 In-Reply-To: <cover.1652162646.git.viresh.kumar@linaro.org>
 References: <cover.1652162646.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-make_virtio_mmio_node() creates the DT node for simple MMIO devices
-currently, i.e. the ones that don't require any additional properties.
+This patch allocates Virtio MMIO params (IRQ and memory region) and pass
+them to the backend, also update Guest device-tree based on Virtio GPIO
+DT bindings [1].
 
-In order to allow using it for other complex device types, split the
-functionality into two, one where the fdt node isn't closed and the
-other one to create a simple DT node.
+[1] https://www.kernel.org/doc/Documentation/devicetree/bindings/gpio/gpio-virtio.yaml
 
 Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
 ---
- tools/libs/light/libxl_arm.c | 19 ++++++++++++-------
- 1 file changed, 12 insertions(+), 7 deletions(-)
+ tools/libs/light/libxl_arm.c | 46 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
 
 diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index 6b95ded82dc3..3a038d388cf0 100644
+index d085c7cf4dbd..2f23430a3ea3 100644
 --- a/tools/libs/light/libxl_arm.c
 +++ b/tools/libs/light/libxl_arm.c
-@@ -872,8 +872,8 @@ static int make_vpci_node(libxl__gc *gc, void *fdt,
+@@ -119,6 +119,15 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+             return rc;
+     }
+ 
++    for (i = 0; i < d_config->num_gpios; i++) {
++        libxl_device_gpio *gpio = &d_config->gpios[i];
++
++    int rc = alloc_virtio_mmio_params(gc, &gpio->base, &gpio->irq,
++            &virtio_mmio_base, &virtio_mmio_irq);
++    if (rc)
++        return rc;
++    }
++
+     if (virtio_mmio_irq != GUEST_VIRTIO_MMIO_SPI_FIRST) {
+         virtio_irq = virtio_mmio_irq - 1;
+         nr_spis += (virtio_irq - 32) + 1;
+@@ -938,6 +947,38 @@ static int make_virtio_mmio_node_i2c(libxl__gc *gc, void *fdt,
+     return fdt_end_node(fdt);
  }
  
- 
--static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
--                                 uint64_t base, uint32_t irq)
-+static int make_virtio_mmio_node_common(libxl__gc *gc, void *fdt, uint64_t base,
-+                                        uint32_t irq)
- {
-     int res;
-     gic_interrupt intr;
-@@ -895,13 +895,18 @@ static int make_virtio_mmio_node(libxl__gc *gc, void *fdt,
-     res = fdt_property_interrupts(gc, fdt, &intr, 1);
-     if (res) return res;
- 
--    res = fdt_property(fdt, "dma-coherent", NULL, 0);
--    if (res) return res;
-+    return fdt_property(fdt, "dma-coherent", NULL, 0);
-+}
- 
--    res = fdt_end_node(fdt);
-+static int make_virtio_mmio_node_simple(libxl__gc *gc, void *fdt, uint64_t base,
-+                                        uint32_t irq)
++static int make_virtio_mmio_node_gpio(libxl__gc *gc, void *fdt,
++                                 uint64_t base, uint32_t irq)
 +{
 +    int res;
 +
 +    res = make_virtio_mmio_node_common(gc, fdt, base, irq);
-     if (res) return res;
- 
--    return 0;
++    if (res) return res;
++
++    res = fdt_begin_node(fdt, "gpio");
++    if (res) return res;
++
++    res = fdt_property_compat(gc, fdt, 1, "virtio,device29");
++    if (res) return res;
++
++    res = fdt_property(fdt, "gpio-controller", NULL, 0);
++    if (res) return res;
++
++    res = fdt_property_cell(fdt, "#gpio-cells", 2);
++    if (res) return res;
++
++    res = fdt_property(fdt, "interrupt-controller", NULL, 0);
++    if (res) return res;
++
++    res = fdt_property_cell(fdt, "#interrupt-cells", 2);
++    if (res) return res;
++
++    res = fdt_end_node(fdt);
++    if (res) return res;
++
 +    return fdt_end_node(fdt);
- }
- 
++}
++
  static const struct arch_info *get_arch_info(libxl__gc *gc,
-@@ -1216,7 +1221,7 @@ static int libxl__prepare_dtb(libxl__gc *gc, libxl_domain_config *d_config,
-             libxl_device_disk *disk = &d_config->disks[i];
- 
-             if (disk->specification == LIBXL_DISK_SPECIFICATION_VIRTIO)
--                FDT( make_virtio_mmio_node(gc, fdt, disk->base, disk->irq) );
-+                FDT( make_virtio_mmio_node_simple(gc, fdt, disk->base, disk->irq) );
+                                              const struct xc_dom_image *dom)
+ {
+@@ -1253,6 +1294,11 @@ static int libxl__prepare_dtb(libxl__gc *gc, libxl_domain_config *d_config,
+                 FDT( make_virtio_mmio_node_simple(gc, fdt, disk->base, disk->irq) );
          }
  
-         if (pfdt)
++        for (i = 0; i < d_config->num_gpios; i++) {
++            libxl_device_gpio *gpio = &d_config->gpios[i];
++            FDT( make_virtio_mmio_node_gpio(gc, fdt, gpio->base, gpio->irq) );
++        }
++
+         for (i = 0; i < d_config->num_i2cs; i++) {
+             libxl_device_i2c *i2c = &d_config->i2cs[i];
+             FDT( make_virtio_mmio_node_i2c(gc, fdt, i2c->base, i2c->irq) );
 -- 
 2.31.1.272.g89b43f80a514
 
