@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BADC4332F
-	for <xen-devel@archiver.kernel.org>; Tue, 10 May 2022 10:16:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.325335.547861 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA62C4167B
+	for <xen-devel@archiver.kernel.org>; Tue, 10 May 2022 10:16:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.325339.547909 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noMuJ-0005EX-2F; Tue, 10 May 2022 10:15:55 +0000
+	id 1noMuQ-0006Ut-O2; Tue, 10 May 2022 10:16:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 325335.547861; Tue, 10 May 2022 10:15:55 +0000
+Received: by outflank-mailman (output) from mailman id 325339.547909; Tue, 10 May 2022 10:16:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noMuI-0005D6-T2; Tue, 10 May 2022 10:15:54 +0000
-Received: by outflank-mailman (input) for mailman id 325335;
- Tue, 10 May 2022 10:15:53 +0000
+	id 1noMuQ-0006Tt-Ga; Tue, 10 May 2022 10:16:02 +0000
+Received: by outflank-mailman (input) for mailman id 325339;
+ Tue, 10 May 2022 10:16:00 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JkLT=VS=citrix.com=prvs=122513738=lin.liu@srs-se1.protection.inumbo.net>)
- id 1noMuH-000561-Gr
- for xen-devel@lists.xenproject.org; Tue, 10 May 2022 10:15:53 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 29c50bdf-d04a-11ec-a406-831a346695d4;
- Tue, 10 May 2022 12:15:51 +0200 (CEST)
+ id 1noMuO-000561-Ih
+ for xen-devel@lists.xenproject.org; Tue, 10 May 2022 10:16:00 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2ed209b0-d04a-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 12:15:59 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,377 +38,299 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 29c50bdf-d04a-11ec-a406-831a346695d4
+X-Inumbo-ID: 2ed209b0-d04a-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1652177751;
+  d=citrix.com; s=securemail; t=1652177758;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=0T/JNn3Dww3wHscmgvdIRfZs4Ekns00pQ2CWndQ/ZWk=;
-  b=EEmsDdzTkk3Q8tscErIHkq4n3sRwpWEHI/InD3TnzKClI7uVBOATLtNn
-   1BZ53g0S3DKWFLJCiNIIHrU9YP9Xq9iIx2XPE2hFrWAxSV8QPSVm68EGY
-   tu/7NijKfS0Hb4zpbLJiKHuPrR91Y6ikMliSlmHRAHHWIU/dBiNGSJZ6k
-   U=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=FBx5VXViH2N+eGGpOUcQCz2z12c6GtTDSfMwDmCLLRQ=;
+  b=gwBvgm3VJ/R45JGo/aVGhZ+ohl1fRCfMbZioevIqAhmV6lrU0x3jws5a
+   BpIyc7tpz+LNkyyS7zZ0WfQcQVQ6qg3hPa8EfokGissi649zJzNQgYwQc
+   FqL5FvFSwKuqq7Iw3/RJzoZ/PEDPhMdgJp0i2AwZ6HXLWYJI5VWYtIUqI
+   o=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 70954409
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 70351037
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:bve7HqOmaevnueDvrR2vl8FynXyQoLVcMsEvi/4bfWQNrUok3jxUx
- 2cbWmzTOvePZTSkfN5zPtvkpk4FupSEn942Gwto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFYMpBsJ00o5wbZk29Yw27BVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zw
- sRwqqKtCj8SAI7Kk8gZagVoMAZjBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALKMjteocep1lrzC3DDOZgSpfGK0nPzYAAjWps2pgfdRrYT
- 8MpKgI+dw3qXxRKAFMnVs4Yrd6CoUCqJlW0r3rK/PFqsgA/1jdZ0qXpMdfTUsyHQ4NShEnwj
- n3C13T0BFcdLtP34TiP/2+oh+TPtTjmQ49UH7q9ntZ6jVvWymENBRk+UVqgveL/mkO4Q8hYK
- UEf5mwpt6da3FewUtD3Uhm8oXiFlh0RQdxdF6s98g7l90bPy1/HXC5eFGcHMYF48p9tLdA36
- rOXt9n4OCNRrf6tcky+8Ly4qQquCQsyMFZXMEfoUjA5y9XkpYgyiDfGQdBiDLO5g7XJJN3g/
- 9yZhHNg3utO1Kbnw43+pAma2Gz0+vAlWyZvvm3qsnSZAhSVjWJPT6ih8hDl4PlJN+51pXHR7
- SFfy6ByAA3jZKxhdRBhos1QRdlFBN7faVUwZGKD+LF7rlyQF4aLJ9w43d2HDB4B3jw4UTHoe
- lTPngha+YVeOnCnBYcuPd/rUp5zkviwSYy4PhwxUjapSsIqHDJrAQk0PRLAt4wTuBZEfV4D1
- WezLp/3UCdy5VVPxzuqXeYNuYLHNQhlrV4/savTlkz9uZLHPSb9Ye5cbDOmM7FihIvZ8Vq9z
- jqqH5bTo/mpeLamMne/HE96BQ1iEEXX8ris9ZMNKr7YcloO9aNII6a5/I7NsrdNx8x9/tokN
- FnnMqOE4DITXUH6FDg=
-IronPort-HdrOrdr: A9a23:zPaLjKAGn+9BzZPlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo8f
- xG/c5rrSMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
- 5dmsNFaeEYY2IUsS+D2njbL+od
+IronPort-Data: A9a23:KqtWoK58/i/gMmkLaNnoBAxRtPjHchMFZxGqfqrLsTDasY5as4F+v
+ jMXCmiDbKyDazf1f4sibti19xkOvZWEx4I2Sgc+rCE9Hi5G8cbLO4+Ufxz6V8+wwmwvb67FA
+ +E2MISowBUcFyeEzvuVGuG96yE6j8lkf5KkYAL+EnkZqTRMFWFw0HqPp8Zj2tQy2YXgW1vX0
+ T/Pi5a31GGNimYc3l08s8pvmDs31BglkGpF1rCWTakjUG72zxH5PrpGTU2CByKQrr1vNvy7X
+ 47+IISRpQs1yfuP5uSNyd4XemVSKlLb0JPnZnB+A8BOiTAazsA+PzpS2FPxpi67hh3Q9+2dx
+ umhurS8Thx1P7HQoN4fUgRhA2J7J51gxZLIdC3XXcy7lyUqclPpyvRqSko3IZcZ6qB8BmQmG
+ f4wcW5XKErZ3qTvnez9GrIEascLdaEHOKsbu3cmyTDEJf0nXYrCU+PB4towMDIY2ZgVQK+GP
+ JVxhTxHZkXgYT5iKn0uNcgjpb2Ull/neRFCtwfAzUYwyzeKl1EguFT3C/LXcNGXQcRenm6Du
+ 3nLuW/+B3kyNsGbyDeD2mKhgKnIhyyTcJ0WPK218LhtmlL77lIUDBoaRF6qu86Tg0S1W89cA
+ 0EM8y9opq83nGS7Q9+4UxCmrXqsuh8HR8EWA+A88BuKyKff/0CeHGdsZiVadNUsucsyRDor/
+ lyEhdXkAXpoqrL9YXiQ7KuOpDW+fy0cN3YfZDQsRBEApdLkpekOYgnnF4g5VvTv15usRG+2k
+ 2viQDUCa6s7gckQi6Sn4Wj9gTOxn4iKSxQFwDj6UTfwhu9mX7KNa4ut4FndyP9PKoeFU1WM1
+ EQ5d9iiAPMmVs/UynHUKAkZNPTwvqvebmWA6bJ6N8N5nwlB7UJPamy5DNtWAE5yevgJdjbyC
+ KM4kVMAvcQDVJdGgEIeXm5QNyjI5fW5fTgGfqqNBjarXnSWXFXelByCnWbKgwjQfLEEyMnTw
+ 6uzf8e2Fmo9Aq961jewTOp1+eZ1m3pnnzqMFcCnl0nPPV+iiJm9E+xtDbdzRrphsPPsTPv9r
+ b6zyPdmOz0ACbajM0E7AKYYLEwQLGhTOHwFg5c/SwJ3GSI/QDtJI6aImdsJItU594wIx7yg1
+ izsBSdlJK/X2CSvxfOiMSgzNtsCnP9X8BoGAMDbFQz2hCJ/Md3/vM/ytfIfJNEayQCq9tYsJ
+ 9FtRilKKq0npujvk9jFUaTAkQ==
+IronPort-HdrOrdr: A9a23:GBFz3K8Uk8EIMM93lWFuk+DgI+orL9Y04lQ7vn2YSXRuHPBw8P
+ re5cjztCWE7gr5N0tBpTntAsW9qDbnhPtICOoqTNCftWvdyQiVxehZhOOIqVDd8m/Fh4pgPM
+ 9bAtBD4bbLbGSS4/yU3ODBKadD/OW6
 X-IronPort-AV: E=Sophos;i="5.91,214,1647316800"; 
-   d="scan'208";a="70954409"
+   d="scan'208";a="70351037"
 From: Lin Liu <lin.liu@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Lin Liu <lin.liu@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 4/6] xen: Switch to byteswap
-Date: Tue, 10 May 2022 06:15:22 -0400
-Message-ID: <c9488a2fe15d59dc86712e70614c4dbe0794506b.1652170719.git.lin.liu@citrix.com>
+	Julien Grall <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v3 1/6] xen: implement byteswap
+Date: Tue, 10 May 2022 06:15:19 -0400
+Message-ID: <2699787cd4ba1d71448bbcdf190d927e180e80b9.1652170719.git.lin.liu@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1652170719.git.lin.liu@citrix.com>
 References: <cover.1652170719.git.lin.liu@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Update to use byteswap to swap bytes.
-
-No functional change.
+swab() is massively over complicated and can be simplified by builtins.
+The compilers provide builtin function to swap bytes.
+* gcc:   https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
+* clang: https://clang.llvm.org/docs/LanguageExtensions.html
+This patch simplify swab() with builtins and fallback for old compilers.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
 ---
 Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Julien Grall <julien@xen.org>
+Cc: Bertrand Marquis <bertrand.marquis@arm.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Jan Beulich <jbeulich@suse.com>
 Cc: Wei Liu <wl@xen.org>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
 Changes in v3:
-- Update xen/common/device_tree.c to use be32_to_cpu
-- Keep const in type cast in unaligned.h
----
- xen/common/device_tree.c           | 44 +++++++++++++++---------------
- xen/common/libelf/libelf-private.h |  6 ++--
- xen/common/xz/private.h            |  2 +-
- xen/include/xen/unaligned.h        | 24 ++++++++--------
- 4 files changed, 38 insertions(+), 38 deletions(-)
+- Check __has_builtin instead of GNUC version 
 
-diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
-index 4aae281e89..70d3be3be6 100644
---- a/xen/common/device_tree.c
-+++ b/xen/common/device_tree.c
-@@ -171,7 +171,7 @@ bool_t dt_property_read_u32(const struct dt_device_node *np,
-     if ( !val || len < sizeof(*out_value) )
-         return 0;
+Changes in v2:
+- Add fallback for compilers without __builtin_bswap
+- Implement with plain C instead of macros
+---
+ xen/arch/arm/include/asm/byteorder.h | 14 ++-----
+ xen/arch/x86/include/asm/byteorder.h | 34 ++---------------
+ xen/include/xen/byteorder.h          | 56 ++++++++++++++++++++++++++++
+ xen/include/xen/byteswap.h           | 44 ++++++++++++++++++++++
+ xen/include/xen/compiler.h           | 12 ++++++
+ 5 files changed, 120 insertions(+), 40 deletions(-)
+ create mode 100644 xen/include/xen/byteorder.h
+ create mode 100644 xen/include/xen/byteswap.h
+
+diff --git a/xen/arch/arm/include/asm/byteorder.h b/xen/arch/arm/include/asm/byteorder.h
+index 9c712c4788..622eeaba07 100644
+--- a/xen/arch/arm/include/asm/byteorder.h
++++ b/xen/arch/arm/include/asm/byteorder.h
+@@ -1,16 +1,10 @@
+ #ifndef __ASM_ARM_BYTEORDER_H__
+ #define __ASM_ARM_BYTEORDER_H__
  
--    *out_value = be32_to_cpup(val);
-+    *out_value = be32_to_cpu(*val);
+-#define __BYTEORDER_HAS_U64__
++#ifndef __BYTE_ORDER__
++   #define __BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__
++#endif
  
-     return 1;
- }
-@@ -264,7 +264,7 @@ int dt_property_read_variable_u32_array(const struct dt_device_node *np,
+-#include <xen/byteorder/little_endian.h>
++#include <xen/byteorder.h>
  
-     count = sz;
-     while ( count-- )
--        *out_values++ = be32_to_cpup(val++);
-+        *out_values++ = be32_to_cpu(*val++);
+ #endif /* __ASM_ARM_BYTEORDER_H__ */
+-/*
+- * Local variables:
+- * mode: C
+- * c-file-style: "BSD"
+- * c-basic-offset: 4
+- * indent-tabs-mode: nil
+- * End:
+- */
+diff --git a/xen/arch/x86/include/asm/byteorder.h b/xen/arch/x86/include/asm/byteorder.h
+index 1f77e502a5..82aadee7bd 100644
+--- a/xen/arch/x86/include/asm/byteorder.h
++++ b/xen/arch/x86/include/asm/byteorder.h
+@@ -1,36 +1,10 @@
+ #ifndef __ASM_X86_BYTEORDER_H__
+ #define __ASM_X86_BYTEORDER_H__
  
-     return sz;
- }
-@@ -490,7 +490,7 @@ static int __dt_n_addr_cells(const struct dt_device_node *np, bool_t parent)
+-#include <asm/types.h>
+-#include <xen/compiler.h>
++#ifndef __BYTE_ORDER__
++   #define __BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__
++#endif
  
-         ip = dt_get_property(np, "#address-cells", NULL);
-         if ( ip )
--            return be32_to_cpup(ip);
-+            return be32_to_cpu(*ip);
-     } while ( np->parent );
-     /* No #address-cells property for the root node */
-     return DT_ROOT_NODE_ADDR_CELLS_DEFAULT;
-@@ -507,7 +507,7 @@ int __dt_n_size_cells(const struct dt_device_node *np, bool_t parent)
+-static inline __attribute_const__ __u32 ___arch__swab32(__u32 x)
+-{
+-    asm("bswap %0" : "=r" (x) : "0" (x));
+-    return x;
+-}
+-
+-static inline __attribute_const__ __u64 ___arch__swab64(__u64 val)
+-{ 
+-    union { 
+-        struct { __u32 a,b; } s;
+-        __u64 u;
+-    } v;
+-    v.u = val;
+-    asm("bswapl %0 ; bswapl %1 ; xchgl %0,%1" 
+-        : "=r" (v.s.a), "=r" (v.s.b) 
+-        : "0" (v.s.a), "1" (v.s.b)); 
+-    return v.u;
+-} 
+-
+-/* Do not define swab16.  Gcc is smart enough to recognize "C" version and
+-   convert it into rotation or exhange.  */
+-
+-#define __arch__swab64(x) ___arch__swab64(x)
+-#define __arch__swab32(x) ___arch__swab32(x)
+-
+-#define __BYTEORDER_HAS_U64__
+-
+-#include <xen/byteorder/little_endian.h>
++#include <xen/byteorder.h>
  
-         ip = dt_get_property(np, "#size-cells", NULL);
-         if ( ip )
--            return be32_to_cpup(ip);
-+            return be32_to_cpu(*ip);
-     } while ( np->parent );
-     /* No #address-cells property for the root node */
-     return DT_ROOT_NODE_SIZE_CELLS_DEFAULT;
-@@ -660,7 +660,7 @@ static void dt_bus_pci_count_cells(const struct dt_device_node *np,
- static unsigned int dt_bus_pci_get_flags(const __be32 *addr)
- {
-     unsigned int flags = 0;
--    u32 w = be32_to_cpup(addr);
-+    u32 w = be32_to_cpu(*addr);
- 
-     switch((w >> 24) & 0x03) {
-     case 0x01:
-@@ -1077,7 +1077,7 @@ dt_irq_find_parent(const struct dt_device_node *child)
-         if ( parp == NULL )
-             p = dt_get_parent(child);
-         else
--            p = dt_find_node_by_phandle(be32_to_cpup(parp));
-+            p = dt_find_node_by_phandle(be32_to_cpu(*parp));
-         child = p;
-     } while ( p && dt_get_property(p, "#interrupt-cells", NULL) == NULL );
- 
-@@ -1110,7 +1110,7 @@ unsigned int dt_number_of_irq(const struct dt_device_node *device)
-     intlen /= sizeof(*intspec);
- 
-     dt_dprintk(" using 'interrupts' property\n");
--    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpup(intspec), intlen);
-+    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpu(*intspec), intlen);
- 
-     /* Look for the interrupt parent. */
-     p = dt_irq_find_parent(device);
-@@ -1241,7 +1241,7 @@ int dt_for_each_irq_map(const struct dt_device_node *dev,
-         imaplen -= addrsize + intsize;
- 
-         /* Get the interrupt parent */
--        ipar = dt_find_node_by_phandle(be32_to_cpup(imap));
-+        ipar = dt_find_node_by_phandle(be32_to_cpu(*imap));
-         imap++;
-         --imaplen;
- 
-@@ -1358,8 +1358,8 @@ static int dt_irq_map_raw(const struct dt_device_node *parent,
-     int match, i;
- 
-     dt_dprintk("dt_irq_map_raw: par=%s,intspec=[0x%08x 0x%08x...],ointsize=%d\n",
--               parent->full_name, be32_to_cpup(intspec),
--               be32_to_cpup(intspec + 1), ointsize);
-+               parent->full_name, be32_to_cpu(*intspec),
-+               be32_to_cpu(*(intspec+1)), ointsize);
- 
-     ipar = parent;
- 
-@@ -1471,7 +1471,7 @@ static int dt_irq_map_raw(const struct dt_device_node *parent,
-             dt_dprintk(" -> match=%d (imaplen=%d)\n", match, imaplen);
- 
-             /* Get the interrupt parent */
--            newpar = dt_find_node_by_phandle(be32_to_cpup(imap));
-+            newpar = dt_find_node_by_phandle(be32_to_cpu(*imap));
-             imap++;
-             --imaplen;
- 
-@@ -1565,7 +1565,7 @@ int dt_device_get_raw_irq(const struct dt_device_node *device,
-     intlen /= sizeof(*intspec);
- 
-     dt_dprintk(" using 'interrupts' property\n");
--    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpup(intspec), intlen);
-+    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpu(*intspec), intlen);
- 
-     /* Look for the interrupt parent. */
-     p = dt_irq_find_parent(device);
-@@ -1676,7 +1676,7 @@ static int __dt_parse_phandle_with_args(const struct dt_device_node *np,
-          * If phandle is 0, then it is an empty entry with no
-          * arguments.  Skip forward to the next entry.
-          * */
--        phandle = be32_to_cpup(list++);
-+        phandle = be32_to_cpu(*list++);
-         if ( phandle )
-         {
-             /*
-@@ -1745,7 +1745,7 @@ static int __dt_parse_phandle_with_args(const struct dt_device_node *np,
-                 out_args->np = node;
-                 out_args->args_count = count;
-                 for ( i = 0; i < count; i++ )
--                    out_args->args[i] = be32_to_cpup(list++);
-+                    out_args->args[i] = be32_to_cpu(*list++);
-             }
- 
-             /* Found it! return success */
-@@ -1826,7 +1826,7 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
-     int has_name = 0;
-     int new_format = 0;
- 
--    tag = be32_to_cpup((__be32 *)(*p));
-+    tag = be32_to_cpu(*(__be32 *)(*p));
-     if ( tag != FDT_BEGIN_NODE )
-     {
-         printk(XENLOG_WARNING "Weird tag at start of node: %x\n", tag);
-@@ -1919,7 +1919,7 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
-         u32 sz, noff;
-         const char *pname;
- 
--        tag = be32_to_cpup((__be32 *)(*p));
-+        tag = be32_to_cpu(*(__be32 *)(*p));
-         if ( tag == FDT_NOP )
-         {
-             *p += 4;
-@@ -1928,8 +1928,8 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
-         if ( tag != FDT_PROP )
-             break;
-         *p += 4;
--        sz = be32_to_cpup((__be32 *)(*p));
--        noff = be32_to_cpup((__be32 *)((*p) + 4));
-+        sz = be32_to_cpu(*(__be32 *)(*p));
-+        noff = be32_to_cpu(*(__be32 *)((*p) + 4));
-         *p += 8;
-         if ( fdt_version(fdt) < 0x10 )
-             *p = ROUNDUP(*p, sz >= 8 ? 8 : 4);
-@@ -1956,13 +1956,13 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
-                  (strcmp(pname, "linux,phandle") == 0) )
-             {
-                 if ( np->phandle == 0 )
--                    np->phandle = be32_to_cpup((__be32*)*p);
-+                    np->phandle = be32_to_cpu(*(__be32*)*p);
-             }
-             /* And we process the "ibm,phandle" property
-              * used in pSeries dynamic device tree
-              * stuff */
-             if ( strcmp(pname, "ibm,phandle") == 0 )
--                np->phandle = be32_to_cpup((__be32 *)*p);
-+                np->phandle = be32_to_cpu(*(__be32 *)*p);
-             pp->name = pname;
-             pp->length = sz;
-             pp->value = (void *)*p;
-@@ -2034,7 +2034,7 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
-             *p += 4;
-         else
-             mem = unflatten_dt_node(fdt, mem, p, np, allnextpp, fpsize);
--        tag = be32_to_cpup((__be32 *)(*p));
-+        tag = be32_to_cpu(*(__be32 *)(*p));
-     }
-     if ( tag != FDT_END_NODE )
-     {
-@@ -2086,7 +2086,7 @@ static void __init __unflatten_device_tree(const void *fdt,
-     /* Second pass, do actual unflattening */
-     start = ((unsigned long)fdt) + fdt_off_dt_struct(fdt);
-     unflatten_dt_node(fdt, mem, &start, NULL, &allnextp, 0);
--    if ( be32_to_cpup((__be32 *)start) != FDT_END )
-+    if ( be32_to_cpu(*(__be32 *)start) != FDT_END )
-         printk(XENLOG_WARNING "Weird tag at end of tree: %08x\n",
-                   *((u32 *)start));
-     if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeef )
-diff --git a/xen/common/libelf/libelf-private.h b/xen/common/libelf/libelf-private.h
-index 47db679966..6062598fb8 100644
---- a/xen/common/libelf/libelf-private.h
-+++ b/xen/common/libelf/libelf-private.h
-@@ -31,9 +31,9 @@
-    printk(fmt, ## args )
- 
- #define strtoull(str, end, base) simple_strtoull(str, end, base)
--#define bswap_16(x) swab16(x)
--#define bswap_32(x) swab32(x)
--#define bswap_64(x) swab64(x)
-+#define bswap_16(x) bswap16(x)
-+#define bswap_32(x) bswap32(x)
-+#define bswap_64(x) bswap64(x)
- 
- #else /* !__XEN__ */
- 
-diff --git a/xen/common/xz/private.h b/xen/common/xz/private.h
-index 511343fcc2..97131fa714 100644
---- a/xen/common/xz/private.h
-+++ b/xen/common/xz/private.h
-@@ -28,7 +28,7 @@ static inline void put_unaligned_le32(u32 val, void *p)
- 
+ #endif /* __ASM_X86_BYTEORDER_H__ */
+diff --git a/xen/include/xen/byteorder.h b/xen/include/xen/byteorder.h
+new file mode 100644
+index 0000000000..2ec434e6a6
+--- /dev/null
++++ b/xen/include/xen/byteorder.h
+@@ -0,0 +1,56 @@
++#ifndef __XEN_BYTEORDER_H__
++#define __XEN_BYTEORDER_H__
++
++#include <xen/byteswap.h>
++
++#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
++
++# ifndef __LITTLE_ENDIAN
++#  define __LITTLE_ENDIAN 1234
++# endif
++
++# ifndef __LITTLE_ENDIAN_BITFIELD
++#  define __LITTLE_ENDIAN_BITFIELD
++# endif
++
++# define cpu_to_le64(x) (x)
++# define le64_to_cpu(x) (x)
++# define cpu_to_le32(x) (x)
++# define le32_to_cpu(x) (x)
++# define cpu_to_le16(x) (x)
++# define le16_to_cpu(x) (x)
++# define cpu_to_be64(x) bswap64(x)
++# define be64_to_cpu(x) bswap64(x)
++# define cpu_to_be32(x) bswap32(x)
++# define be32_to_cpu(x) bswap32(x)
++# define cpu_to_be16(x) bswap16(x)
++# define be16_to_cpu(x) bswap16(x)
++
++#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
++
++# ifndef __BIG_ENDIAN
++#  define __BIG_ENDIAN 4321
++# endif
++
++# ifndef __BIG_ENDIAN_BITFIELD
++#  define __BIG_ENDIAN_BITFIELD
++# endif
++
++# define cpu_to_le64(x) bswap64(x)
++# define le64_to_cpu(x) bswap64(x)
++# define cpu_to_le32(x) bswap32(x)
++# define le32_to_cpu(x) bswap32(x)
++# define cpu_to_le16(x) bswap16(x)
++# define le16_to_cpu(x) bswap16(x)
++# define cpu_to_be64(x) (x)
++# define be64_to_cpu(x) (x)
++# define cpu_to_be32(x) (x)
++# define be32_to_cpu(x) (x)
++# define cpu_to_be16(x) (x)
++# define be16_to_cpu(x) (x)
++
++#else
++# error "Unknown Endianness"
++#endif /* __BYTE_ORDER__ */
++
++#endif /* __XEN_BYTEORDER_H__ */
+diff --git a/xen/include/xen/byteswap.h b/xen/include/xen/byteswap.h
+new file mode 100644
+index 0000000000..0dd5567557
+--- /dev/null
++++ b/xen/include/xen/byteswap.h
+@@ -0,0 +1,44 @@
++#ifndef __XEN_BYTESWAP_H__
++#define __XEN_BYTESWAP_H__
++
++#include <xen/types.h>
++#include <xen/lib.h>
++
++#if !__has_builtin(__builtin_bswap16)
++static always_inline uint16_t __builtin_bswap16(uint16_t val)
++{
++    return ((val & 0x00FF) << 8) | ((val & 0xFF00) >> 8);
++}
++#endif
++
++#if !__has_builtin(__builtin_bswap32)
++static always_inline uint32_t __builtin_bswap32(uint32_t val)
++{
++    return ((val & 0x000000FF) << 24) |
++           ((val & 0x0000FF00) <<  8) |
++           ((val & 0x00FF0000) >>  8) |
++           ((val & 0xFF000000) >> 24);
++}
++#endif
++
++#if !__has_builtin(__builtin_bswap64)
++static always_inline uint64_t __builtin_bswap64(uint64_t val)
++{
++    return ((val & 0x00000000000000FF) << 56) |
++           ((val & 0x000000000000FF00) << 40) |
++           ((val & 0x0000000000FF0000) << 24) |
++           ((val & 0x00000000FF000000) <<  8) |
++           ((val & 0x000000FF00000000) >>  8) |
++           ((val & 0x0000FF0000000000) >> 24) |
++           ((val & 0x00FF000000000000) >> 40) |
++           ((val & 0xFF00000000000000) >> 56);
++}
++#endif
++
++#define bswap16(x) __builtin_bswap16(x)
++#define bswap32(x) __builtin_bswap32(x)
++#define bswap64(x) __builtin_bswap64(x)
++
++#define bswap_ul(x) PASTE(bswap,BITS_PER_LONG)(x)
++
++#endif /* __XEN_BYTESWAP_H__ */
+diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
+index 933aec09a9..05b1b8b24d 100644
+--- a/xen/include/xen/compiler.h
++++ b/xen/include/xen/compiler.h
+@@ -185,4 +185,16 @@
+ # define CLANG_DISABLE_WARN_GCC_COMPAT_END
  #endif
  
--#define get_le32(p) le32_to_cpup((const uint32_t *)(p))
-+#define get_le32(p) le32_to_cpu(*(const uint32_t *)(p))
- 
- #define false 0
- #define true 1
-diff --git a/xen/include/xen/unaligned.h b/xen/include/xen/unaligned.h
-index 0a2b16d05d..16b2e6f5f0 100644
---- a/xen/include/xen/unaligned.h
-+++ b/xen/include/xen/unaligned.h
-@@ -20,62 +20,62 @@
- 
- static inline uint16_t get_unaligned_be16(const void *p)
- {
--	return be16_to_cpup(p);
-+	return be16_to_cpu(*(const uint16_t *)p);
- }
- 
- static inline void put_unaligned_be16(uint16_t val, void *p)
- {
--	*(__force __be16*)p = cpu_to_be16(val);
-+	*(__be16 *)p = cpu_to_be16(val);
- }
- 
- static inline uint32_t get_unaligned_be32(const void *p)
- {
--	return be32_to_cpup(p);
-+	return be32_to_cpu(*(const uint32_t *)p);
- }
- 
- static inline void put_unaligned_be32(uint32_t val, void *p)
- {
--	*(__force __be32*)p = cpu_to_be32(val);
-+	*(__be32 *)p = cpu_to_be32(val);
- }
- 
- static inline uint64_t get_unaligned_be64(const void *p)
- {
--	return be64_to_cpup(p);
-+	return be64_to_cpu(*(const uint64_t *)p);
- }
- 
- static inline void put_unaligned_be64(uint64_t val, void *p)
- {
--	*(__force __be64*)p = cpu_to_be64(val);
-+	*(__be64 *)p = cpu_to_be64(val);
- }
- 
- static inline uint16_t get_unaligned_le16(const void *p)
- {
--	return le16_to_cpup(p);
-+	return le16_to_cpu(*(const uint16_t *)p);
- }
- 
- static inline void put_unaligned_le16(uint16_t val, void *p)
- {
--	*(__force __le16*)p = cpu_to_le16(val);
-+	*(__le16 *)p = cpu_to_le16(val);
- }
- 
- static inline uint32_t get_unaligned_le32(const void *p)
- {
--	return le32_to_cpup(p);
-+	return le32_to_cpu(*(const uint32_t *)p);
- }
- 
- static inline void put_unaligned_le32(uint32_t val, void *p)
- {
--	*(__force __le32*)p = cpu_to_le32(val);
-+	*(__le32 *)p = cpu_to_le32(val);
- }
- 
- static inline uint64_t get_unaligned_le64(const void *p)
- {
--	return le64_to_cpup(p);
-+	return le64_to_cpu(*(const uint64_t *)p);
- }
- 
- static inline void put_unaligned_le64(uint64_t val, void *p)
- {
--	*(__force __le64*)p = cpu_to_le64(val);
-+	*(__le64 *)p = cpu_to_le64(val);
- }
- 
- #endif /* __XEN_UNALIGNED_H__ */
++#ifndef __has_builtin
++/*
++ * Backwards compatibility for GCC < 10.
++ * All supported versions of Clang support __has_builtin
++ * */
++#define __has_builtin(x) GCC_has ## x
++
++#define GCC_has__builtin_bswap16 (CONFIG_GCC_VERSION >= 40800)
++#define GCC_has__builtin_bswap32 (CONFIG_GCC_VERSION >= 40400)
++#define GCC_has__builtin_bswap64 (CONFIG_GCC_VERSION >= 40400)
++#endif
++
+ #endif /* __LINUX_COMPILER_H */
 -- 
 2.27.0
 
