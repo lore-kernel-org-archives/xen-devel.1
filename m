@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C62BFC43219
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72BADC4332F
 	for <xen-devel@archiver.kernel.org>; Tue, 10 May 2022 10:16:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.325340.547920 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.325335.547861 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noMuV-0006wd-7U; Tue, 10 May 2022 10:16:07 +0000
+	id 1noMuJ-0005EX-2F; Tue, 10 May 2022 10:15:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 325340.547920; Tue, 10 May 2022 10:16:07 +0000
+Received: by outflank-mailman (output) from mailman id 325335.547861; Tue, 10 May 2022 10:15:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1noMuV-0006wQ-1w; Tue, 10 May 2022 10:16:07 +0000
-Received: by outflank-mailman (input) for mailman id 325340;
- Tue, 10 May 2022 10:16:05 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1noMuI-0005D6-T2; Tue, 10 May 2022 10:15:54 +0000
+Received: by outflank-mailman (input) for mailman id 325335;
+ Tue, 10 May 2022 10:15:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=JkLT=VS=citrix.com=prvs=122513738=lin.liu@srs-se1.protection.inumbo.net>)
- id 1noMuT-00055w-Hu
- for xen-devel@lists.xenproject.org; Tue, 10 May 2022 10:16:05 +0000
+ id 1noMuH-000561-Gr
+ for xen-devel@lists.xenproject.org; Tue, 10 May 2022 10:15:53 +0000
 Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 320097b6-d04a-11ec-8fc4-03012f2f19d4;
- Tue, 10 May 2022 12:16:04 +0200 (CEST)
+ [216.71.145.155]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 29c50bdf-d04a-11ec-a406-831a346695d4;
+ Tue, 10 May 2022 12:15:51 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 320097b6-d04a-11ec-8fc4-03012f2f19d4
+X-Inumbo-ID: 29c50bdf-d04a-11ec-a406-831a346695d4
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1652177763;
+  d=citrix.com; s=securemail; t=1652177751;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=pihspNLolWNcndSwdSRcONnMwvkmXayMv7dBXhsK0NA=;
-  b=OGNl9bp7B0VLuVwxx+tmiSBE3iV49cnZrVlJ5RuxIrtLbcS+/IzIODcD
-   1q1kgsIbn3JyDLhtmAcCw/M+bj9h9qjWtF2pBOYgnPMDGcMqQ7og7mMiI
-   C+fO8viY7KwKDGAh+tBO99bMZk59i3rVP8XAT2egAoGi5fylTBIEleGu+
-   g=;
+  bh=0T/JNn3Dww3wHscmgvdIRfZs4Ekns00pQ2CWndQ/ZWk=;
+  b=EEmsDdzTkk3Q8tscErIHkq4n3sRwpWEHI/InD3TnzKClI7uVBOATLtNn
+   1BZ53g0S3DKWFLJCiNIIHrU9YP9Xq9iIx2XPE2hFrWAxSV8QPSVm68EGY
+   tu/7NijKfS0Hb4zpbLJiKHuPrR91Y6ikMliSlmHRAHHWIU/dBiNGSJZ6k
+   U=;
 Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 70954436
+X-MesageID: 70954409
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:/nf4JajtdGeUrUHiFT/tVwvMX161ahAKZh0ujC45NGQN5FlHY01je
- htvXGGBbPfcN2L9ed1/bI+19xwE65DTxoQyHFFt+SpgEi0b9cadCdqndUqhZCn6wu8v7a5EA
- 2fyTvGacajYm1eF/k/F3oDJ9CU6jefSLlbFILas1hpZHGeIcw98z0M68wIFqtQw24LhXlrV4
- YmaT/D3YzdJ5RYlagr41IrbwP9flKyaVOQw5wFWiVhj5TcyplFNZH4tDfjZw0jQG+G4KtWSV
- efbpIxVy0uCl/sb5nFJpZ6gGqECaua60QFjERO6UYD66vRJjnRaPqrWqJPwwKqY4tmEt4kZ9
- TlDiXC/YQR3IpKUiOM/akljGTBUeupt4eTVPHfq5KR/z2WeG5ft6/BnDUVwNowE4OdnR2pJ8
- JT0KhhUMErF3bjvhuvmFK883azPL+GyVG8bknVhy3fdDOsOSpHfWaTao9Rf2V/cg+gRRaeDO
- 5ZCN1KDajzaQURNJlUeLagEu9zxpHnTSRla91288P9fD2/7k1UqjemF3MDuUt6XQcRYmG6Iq
- 2SA+H72ajkFMPSPxDzD9Wij7sfUhj/yUo8WELy+99ZpjUeVy2hVDwcZPXOrrP/8hkOgVtZ3L
- 00P5jFovaU07FasTNT2Q1u/unHslhwWVsdUEuY6wBqQ0aeS6AGcblXoVRYYNoZg7pVvA2V3i
- BnZxLsFGACDrpWWF26irqeTjwriAiIEByhFTjZfXxYKtoyLTJ4IsjrDSdNqEaiQh9LzGC3tz
- z3ikBXSl4n/nuZQifzloAmvbyaE48GQE1Vrvlm/sneNtFsRWWKzW2C/BbE3B95kJZ3RcFSOt
- WNsdyO2vLFXVsHleMBgrYww8FCVCxStbWS0bb1HRcBJG9GRF5mLJ9k43d2GDB01WvvogBewC
- KMphStf5YVIIFyhZrJtboS6BqwClPa9T42/D6+EPoYWP/CdkTNrGwk0PiatM53FyhBwwcnTx
- 7/FGSpTMZrqIfs+l2fnLwvs+bQq2jo/1QvuqWPTlHyaPU6lTCfNE98taQLWBshgtf/siFiEq
- L53aprVoyizpcWjO0E7B6ZIdQBURZX6bLirw/FqmhmreFQ5Qj1xUK+BqV7jEqQ895loei7z1
- inVcidlJJDX3hUr9S3ihqhfVY7S
-IronPort-HdrOrdr: A9a23:ygCE/auHafWTU2F1XNJ3+MoA7skDTtV00zEX/kB9WHVpmszxra
- 6TdZMgpHnJYVcqKQkdcL+7WJVoLUmxyXcx2/h1AV7AZniAhILLFvAA0WKK+VSJcEeSygce79
- YFT0EXMqyIMbEQt6fHCWeDfOrIuOP3kpyVuQ==
+IronPort-Data: A9a23:bve7HqOmaevnueDvrR2vl8FynXyQoLVcMsEvi/4bfWQNrUok3jxUx
+ 2cbWmzTOvePZTSkfN5zPtvkpk4FupSEn942Gwto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFYMpBsJ00o5wbZk29Yw27BVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zw
+ sRwqqKtCj8SAI7Kk8gZagVoMAZjBPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALKMjteocep1lrzC3DDOZgSpfGK0nPzYAAjWps2pgfdRrYT
+ 8MpKgI+dw3qXxRKAFMnVs4Yrd6CoUCqJlW0r3rK/PFqsgA/1jdZ0qXpMdfTUsyHQ4NShEnwj
+ n3C13T0BFcdLtP34TiP/2+oh+TPtTjmQ49UH7q9ntZ6jVvWymENBRk+UVqgveL/mkO4Q8hYK
+ UEf5mwpt6da3FewUtD3Uhm8oXiFlh0RQdxdF6s98g7l90bPy1/HXC5eFGcHMYF48p9tLdA36
+ rOXt9n4OCNRrf6tcky+8Ly4qQquCQsyMFZXMEfoUjA5y9XkpYgyiDfGQdBiDLO5g7XJJN3g/
+ 9yZhHNg3utO1Kbnw43+pAma2Gz0+vAlWyZvvm3qsnSZAhSVjWJPT6ih8hDl4PlJN+51pXHR7
+ SFfy6ByAA3jZKxhdRBhos1QRdlFBN7faVUwZGKD+LF7rlyQF4aLJ9w43d2HDB4B3jw4UTHoe
+ lTPngha+YVeOnCnBYcuPd/rUp5zkviwSYy4PhwxUjapSsIqHDJrAQk0PRLAt4wTuBZEfV4D1
+ WezLp/3UCdy5VVPxzuqXeYNuYLHNQhlrV4/savTlkz9uZLHPSb9Ye5cbDOmM7FihIvZ8Vq9z
+ jqqH5bTo/mpeLamMne/HE96BQ1iEEXX8ris9ZMNKr7YcloO9aNII6a5/I7NsrdNx8x9/tokN
+ FnnMqOE4DITXUH6FDg=
+IronPort-HdrOrdr: A9a23:zPaLjKAGn+9BzZPlHemU55DYdb4zR+YMi2TC1yhKJyC9Ffbo8f
+ xG/c5rrSMc5wxwZJhNo7y90ey7MBbhHP1OkO4s1NWZLWrbUQKTRekIh+bfKn/baknDH4ZmpN
+ 5dmsNFaeEYY2IUsS+D2njbL+od
 X-IronPort-AV: E=Sophos;i="5.91,214,1647316800"; 
-   d="scan'208";a="70954436"
+   d="scan'208";a="70954409"
 From: Lin Liu <lin.liu@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Lin Liu <lin.liu@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [PATCH v3 2/6] crypto/vmac: Simplify code with byteswap
-Date: Tue, 10 May 2022 06:15:20 -0400
-Message-ID: <4bf9200cfbd798130d2ef68c9b0f5373f72a1b95.1652170719.git.lin.liu@citrix.com>
+CC: Lin Liu <lin.liu@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 4/6] xen: Switch to byteswap
+Date: Tue, 10 May 2022 06:15:22 -0400
+Message-ID: <c9488a2fe15d59dc86712e70614c4dbe0794506b.1652170719.git.lin.liu@citrix.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1652170719.git.lin.liu@citrix.com>
 References: <cover.1652170719.git.lin.liu@citrix.com>
@@ -92,154 +92,323 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-This file has its own implementation of swap bytes. Clean up
-the code with xen/byteswap.h.
+Update to use byteswap to swap bytes.
 
 No functional change.
 
 Signed-off-by: Lin Liu <lin.liu@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Julien Grall <julien@xen.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
+Changes in v3:
+- Update xen/common/device_tree.c to use be32_to_cpu
+- Keep const in type cast in unaligned.h
 ---
- xen/crypto/vmac.c | 76 ++---------------------------------------------
- 1 file changed, 3 insertions(+), 73 deletions(-)
+ xen/common/device_tree.c           | 44 +++++++++++++++---------------
+ xen/common/libelf/libelf-private.h |  6 ++--
+ xen/common/xz/private.h            |  2 +-
+ xen/include/xen/unaligned.h        | 24 ++++++++--------
+ 4 files changed, 38 insertions(+), 38 deletions(-)
 
-diff --git a/xen/crypto/vmac.c b/xen/crypto/vmac.c
-index 294dd16a52..acb4e015f5 100644
---- a/xen/crypto/vmac.c
-+++ b/xen/crypto/vmac.c
-@@ -8,6 +8,7 @@
+diff --git a/xen/common/device_tree.c b/xen/common/device_tree.c
+index 4aae281e89..70d3be3be6 100644
+--- a/xen/common/device_tree.c
++++ b/xen/common/device_tree.c
+@@ -171,7 +171,7 @@ bool_t dt_property_read_u32(const struct dt_device_node *np,
+     if ( !val || len < sizeof(*out_value) )
+         return 0;
  
- /* start for Xen */
- #include <xen/init.h>
-+#include <xen/byteswap.h>
- #include <xen/types.h>
- #include <xen/lib.h>
- #include <crypto/vmac.h>
-@@ -50,7 +51,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
-  * MUL64: 64x64->128-bit multiplication
-  * PMUL64: assumes top bits cleared on inputs
-  * ADD128: 128x128->128-bit addition
-- * GET_REVERSED_64: load and byte-reverse 64-bit word  
-  * ----------------------------------------------------------------------- */
+-    *out_value = be32_to_cpup(val);
++    *out_value = be32_to_cpu(*val);
  
- /* ----------------------------------------------------------------------- */
-@@ -68,22 +68,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
+     return 1;
+ }
+@@ -264,7 +264,7 @@ int dt_property_read_variable_u32_array(const struct dt_device_node *np,
  
- #define PMUL64 MUL64
+     count = sz;
+     while ( count-- )
+-        *out_values++ = be32_to_cpup(val++);
++        *out_values++ = be32_to_cpu(*val++);
  
--#define GET_REVERSED_64(p)                                                \
--    ({uint64_t x;                                                         \
--     asm ("bswapq %0" : "=r" (x) : "0"(*(uint64_t *)(p))); x;})
--
--/* ----------------------------------------------------------------------- */
--#elif (__GNUC__ && __i386__)
--/* ----------------------------------------------------------------------- */
--
--#define GET_REVERSED_64(p)                                                \
--    ({ uint64_t x;                                                        \
--    uint32_t *tp = (uint32_t *)(p);                                       \
--    asm  ("bswap %%edx\n\t"                                               \
--          "bswap %%eax"                                                   \
--    : "=A"(x)                                                             \
--    : "a"(tp[1]), "d"(tp[0]));                                            \
--    x; })
+     return sz;
+ }
+@@ -490,7 +490,7 @@ static int __dt_n_addr_cells(const struct dt_device_node *np, bool_t parent)
  
- /* ----------------------------------------------------------------------- */
- #elif (__GNUC__ && __ppc64__)
-@@ -103,37 +87,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
+         ip = dt_get_property(np, "#address-cells", NULL);
+         if ( ip )
+-            return be32_to_cpup(ip);
++            return be32_to_cpu(*ip);
+     } while ( np->parent );
+     /* No #address-cells property for the root node */
+     return DT_ROOT_NODE_ADDR_CELLS_DEFAULT;
+@@ -507,7 +507,7 @@ int __dt_n_size_cells(const struct dt_device_node *np, bool_t parent)
  
- #define PMUL64 MUL64
+         ip = dt_get_property(np, "#size-cells", NULL);
+         if ( ip )
+-            return be32_to_cpup(ip);
++            return be32_to_cpu(*ip);
+     } while ( np->parent );
+     /* No #address-cells property for the root node */
+     return DT_ROOT_NODE_SIZE_CELLS_DEFAULT;
+@@ -660,7 +660,7 @@ static void dt_bus_pci_count_cells(const struct dt_device_node *np,
+ static unsigned int dt_bus_pci_get_flags(const __be32 *addr)
+ {
+     unsigned int flags = 0;
+-    u32 w = be32_to_cpup(addr);
++    u32 w = be32_to_cpu(*addr);
  
--#define GET_REVERSED_64(p)                                                \
--    ({ uint32_t hi, lo, *_p = (uint32_t *)(p);                            \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(lo) : "b%"(0), "r"(_p) );  \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(hi) : "b%"(4), "r"(_p) );  \
--       ((uint64_t)hi << 32) | (uint64_t)lo; } )
--
--/* ----------------------------------------------------------------------- */
--#elif (__GNUC__ && (__ppc__ || __PPC__))
--/* ----------------------------------------------------------------------- */
--
--#define GET_REVERSED_64(p)                                                \
--    ({ uint32_t hi, lo, *_p = (uint32_t *)(p);                            \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(lo) : "b%"(0), "r"(_p) );  \
--       asm volatile ("lwbrx %0, %1, %2" : "=r"(hi) : "b%"(4), "r"(_p) );  \
--       ((uint64_t)hi << 32) | (uint64_t)lo; } )
--
--/* ----------------------------------------------------------------------- */
--#elif (__GNUC__ && (__ARMEL__ || __ARM__))
--/* ----------------------------------------------------------------------- */
--
--#define bswap32(v)                                                        \
--({ uint32_t tmp,out;                                                      \
--    asm volatile(                                                         \
--        "eor    %1, %2, %2, ror #16\n"                                    \
--        "bic    %1, %1, #0x00ff0000\n"                                    \
--        "mov    %0, %2, ror #8\n"                                         \
--        "eor    %0, %0, %1, lsr #8"                                       \
--    : "=r" (out), "=&r" (tmp)                                             \
--    : "r" (v));                                                           \
--    out;})
--
- /* ----------------------------------------------------------------------- */
- #elif _MSC_VER
- /* ----------------------------------------------------------------------- */
-@@ -154,11 +107,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
-         (rh) += (ih) + ((rl) < (_il));                               \
+     switch((w >> 24) & 0x03) {
+     case 0x01:
+@@ -1077,7 +1077,7 @@ dt_irq_find_parent(const struct dt_device_node *child)
+         if ( parp == NULL )
+             p = dt_get_parent(child);
+         else
+-            p = dt_find_node_by_phandle(be32_to_cpup(parp));
++            p = dt_find_node_by_phandle(be32_to_cpu(*parp));
+         child = p;
+     } while ( p && dt_get_property(p, "#interrupt-cells", NULL) == NULL );
+ 
+@@ -1110,7 +1110,7 @@ unsigned int dt_number_of_irq(const struct dt_device_node *device)
+     intlen /= sizeof(*intspec);
+ 
+     dt_dprintk(" using 'interrupts' property\n");
+-    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpup(intspec), intlen);
++    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpu(*intspec), intlen);
+ 
+     /* Look for the interrupt parent. */
+     p = dt_irq_find_parent(device);
+@@ -1241,7 +1241,7 @@ int dt_for_each_irq_map(const struct dt_device_node *dev,
+         imaplen -= addrsize + intsize;
+ 
+         /* Get the interrupt parent */
+-        ipar = dt_find_node_by_phandle(be32_to_cpup(imap));
++        ipar = dt_find_node_by_phandle(be32_to_cpu(*imap));
+         imap++;
+         --imaplen;
+ 
+@@ -1358,8 +1358,8 @@ static int dt_irq_map_raw(const struct dt_device_node *parent,
+     int match, i;
+ 
+     dt_dprintk("dt_irq_map_raw: par=%s,intspec=[0x%08x 0x%08x...],ointsize=%d\n",
+-               parent->full_name, be32_to_cpup(intspec),
+-               be32_to_cpup(intspec + 1), ointsize);
++               parent->full_name, be32_to_cpu(*intspec),
++               be32_to_cpu(*(intspec+1)), ointsize);
+ 
+     ipar = parent;
+ 
+@@ -1471,7 +1471,7 @@ static int dt_irq_map_raw(const struct dt_device_node *parent,
+             dt_dprintk(" -> match=%d (imaplen=%d)\n", match, imaplen);
+ 
+             /* Get the interrupt parent */
+-            newpar = dt_find_node_by_phandle(be32_to_cpup(imap));
++            newpar = dt_find_node_by_phandle(be32_to_cpu(*imap));
+             imap++;
+             --imaplen;
+ 
+@@ -1565,7 +1565,7 @@ int dt_device_get_raw_irq(const struct dt_device_node *device,
+     intlen /= sizeof(*intspec);
+ 
+     dt_dprintk(" using 'interrupts' property\n");
+-    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpup(intspec), intlen);
++    dt_dprintk(" intspec=%d intlen=%d\n", be32_to_cpu(*intspec), intlen);
+ 
+     /* Look for the interrupt parent. */
+     p = dt_irq_find_parent(device);
+@@ -1676,7 +1676,7 @@ static int __dt_parse_phandle_with_args(const struct dt_device_node *np,
+          * If phandle is 0, then it is an empty entry with no
+          * arguments.  Skip forward to the next entry.
+          * */
+-        phandle = be32_to_cpup(list++);
++        phandle = be32_to_cpu(*list++);
+         if ( phandle )
+         {
+             /*
+@@ -1745,7 +1745,7 @@ static int __dt_parse_phandle_with_args(const struct dt_device_node *np,
+                 out_args->np = node;
+                 out_args->args_count = count;
+                 for ( i = 0; i < count; i++ )
+-                    out_args->args[i] = be32_to_cpup(list++);
++                    out_args->args[i] = be32_to_cpu(*list++);
+             }
+ 
+             /* Found it! return success */
+@@ -1826,7 +1826,7 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
+     int has_name = 0;
+     int new_format = 0;
+ 
+-    tag = be32_to_cpup((__be32 *)(*p));
++    tag = be32_to_cpu(*(__be32 *)(*p));
+     if ( tag != FDT_BEGIN_NODE )
+     {
+         printk(XENLOG_WARNING "Weird tag at start of node: %x\n", tag);
+@@ -1919,7 +1919,7 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
+         u32 sz, noff;
+         const char *pname;
+ 
+-        tag = be32_to_cpup((__be32 *)(*p));
++        tag = be32_to_cpu(*(__be32 *)(*p));
+         if ( tag == FDT_NOP )
+         {
+             *p += 4;
+@@ -1928,8 +1928,8 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
+         if ( tag != FDT_PROP )
+             break;
+         *p += 4;
+-        sz = be32_to_cpup((__be32 *)(*p));
+-        noff = be32_to_cpup((__be32 *)((*p) + 4));
++        sz = be32_to_cpu(*(__be32 *)(*p));
++        noff = be32_to_cpu(*(__be32 *)((*p) + 4));
+         *p += 8;
+         if ( fdt_version(fdt) < 0x10 )
+             *p = ROUNDUP(*p, sz >= 8 ? 8 : 4);
+@@ -1956,13 +1956,13 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
+                  (strcmp(pname, "linux,phandle") == 0) )
+             {
+                 if ( np->phandle == 0 )
+-                    np->phandle = be32_to_cpup((__be32*)*p);
++                    np->phandle = be32_to_cpu(*(__be32*)*p);
+             }
+             /* And we process the "ibm,phandle" property
+              * used in pSeries dynamic device tree
+              * stuff */
+             if ( strcmp(pname, "ibm,phandle") == 0 )
+-                np->phandle = be32_to_cpup((__be32 *)*p);
++                np->phandle = be32_to_cpu(*(__be32 *)*p);
+             pp->name = pname;
+             pp->length = sz;
+             pp->value = (void *)*p;
+@@ -2034,7 +2034,7 @@ static unsigned long __init unflatten_dt_node(const void *fdt,
+             *p += 4;
+         else
+             mem = unflatten_dt_node(fdt, mem, p, np, allnextpp, fpsize);
+-        tag = be32_to_cpup((__be32 *)(*p));
++        tag = be32_to_cpu(*(__be32 *)(*p));
      }
+     if ( tag != FDT_END_NODE )
+     {
+@@ -2086,7 +2086,7 @@ static void __init __unflatten_device_tree(const void *fdt,
+     /* Second pass, do actual unflattening */
+     start = ((unsigned long)fdt) + fdt_off_dt_struct(fdt);
+     unflatten_dt_node(fdt, mem, &start, NULL, &allnextp, 0);
+-    if ( be32_to_cpup((__be32 *)start) != FDT_END )
++    if ( be32_to_cpu(*(__be32 *)start) != FDT_END )
+         printk(XENLOG_WARNING "Weird tag at end of tree: %08x\n",
+                   *((u32 *)start));
+     if ( be32_to_cpu(((__be32 *)mem)[size / 4]) != 0xdeadbeef )
+diff --git a/xen/common/libelf/libelf-private.h b/xen/common/libelf/libelf-private.h
+index 47db679966..6062598fb8 100644
+--- a/xen/common/libelf/libelf-private.h
++++ b/xen/common/libelf/libelf-private.h
+@@ -31,9 +31,9 @@
+    printk(fmt, ## args )
  
--#if _MSC_VER >= 1300
--#define GET_REVERSED_64(p) _byteswap_uint64(*(uint64_t *)(p))
--#pragma intrinsic(_byteswap_uint64)
--#endif
--
- #if _MSC_VER >= 1400 && \
-     (!defined(__INTEL_COMPILER) || __INTEL_COMPILER >= 1000)
- #define MUL32(i1,i2)    (__emulu((uint32_t)(i1),(uint32_t)(i2)))
-@@ -219,24 +167,6 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
-     }
+ #define strtoull(str, end, base) simple_strtoull(str, end, base)
+-#define bswap_16(x) swab16(x)
+-#define bswap_32(x) swab32(x)
+-#define bswap_64(x) swab64(x)
++#define bswap_16(x) bswap16(x)
++#define bswap_32(x) bswap32(x)
++#define bswap_64(x) bswap64(x)
+ 
+ #else /* !__XEN__ */
+ 
+diff --git a/xen/common/xz/private.h b/xen/common/xz/private.h
+index 511343fcc2..97131fa714 100644
+--- a/xen/common/xz/private.h
++++ b/xen/common/xz/private.h
+@@ -28,7 +28,7 @@ static inline void put_unaligned_le32(u32 val, void *p)
+ 
  #endif
  
--#ifndef GET_REVERSED_64
--#ifndef bswap64
--#ifndef bswap32
--#define bswap32(x)                                                        \
--  ({ uint32_t bsx = (x);                                                  \
--      ((((bsx) & 0xff000000u) >> 24) | (((bsx) & 0x00ff0000u) >>  8) |    \
--       (((bsx) & 0x0000ff00u) <<  8) | (((bsx) & 0x000000ffu) << 24)); })
--#endif
--#define bswap64(x)                                                        \
--     ({ union { uint64_t ll; uint32_t l[2]; } w, r;                       \
--         w.ll = (x);                                                      \
--         r.l[0] = bswap32 (w.l[1]);                                       \
--         r.l[1] = bswap32 (w.l[0]);                                       \
--         r.ll; })
--#endif
--#define GET_REVERSED_64(p) bswap64(*(uint64_t *)(p)) 
--#endif
--
- /* ----------------------------------------------------------------------- */
+-#define get_le32(p) le32_to_cpup((const uint32_t *)(p))
++#define get_le32(p) le32_to_cpu(*(const uint32_t *)(p))
  
- #if (VMAC_PREFER_BIG_ENDIAN)
-@@ -247,9 +177,9 @@ const uint64_t mpoly = UINT64_C(0x1fffffff1fffffff);  /* Poly key mask     */
+ #define false 0
+ #define true 1
+diff --git a/xen/include/xen/unaligned.h b/xen/include/xen/unaligned.h
+index 0a2b16d05d..16b2e6f5f0 100644
+--- a/xen/include/xen/unaligned.h
++++ b/xen/include/xen/unaligned.h
+@@ -20,62 +20,62 @@
  
- #if (VMAC_ARCH_BIG_ENDIAN)
- #  define get64BE(ptr) (*(uint64_t *)(ptr))
--#  define get64LE(ptr) GET_REVERSED_64(ptr)
-+#  define get64LE(ptr) bswap64(*(uint64_t *)(ptr))
- #else /* assume little-endian */
--#  define get64BE(ptr) GET_REVERSED_64(ptr)
-+#  define get64BE(ptr) bswap64(*(uint64_t *)(ptr))
- #  define get64LE(ptr) (*(uint64_t *)(ptr))
- #endif
+ static inline uint16_t get_unaligned_be16(const void *p)
+ {
+-	return be16_to_cpup(p);
++	return be16_to_cpu(*(const uint16_t *)p);
+ }
  
+ static inline void put_unaligned_be16(uint16_t val, void *p)
+ {
+-	*(__force __be16*)p = cpu_to_be16(val);
++	*(__be16 *)p = cpu_to_be16(val);
+ }
+ 
+ static inline uint32_t get_unaligned_be32(const void *p)
+ {
+-	return be32_to_cpup(p);
++	return be32_to_cpu(*(const uint32_t *)p);
+ }
+ 
+ static inline void put_unaligned_be32(uint32_t val, void *p)
+ {
+-	*(__force __be32*)p = cpu_to_be32(val);
++	*(__be32 *)p = cpu_to_be32(val);
+ }
+ 
+ static inline uint64_t get_unaligned_be64(const void *p)
+ {
+-	return be64_to_cpup(p);
++	return be64_to_cpu(*(const uint64_t *)p);
+ }
+ 
+ static inline void put_unaligned_be64(uint64_t val, void *p)
+ {
+-	*(__force __be64*)p = cpu_to_be64(val);
++	*(__be64 *)p = cpu_to_be64(val);
+ }
+ 
+ static inline uint16_t get_unaligned_le16(const void *p)
+ {
+-	return le16_to_cpup(p);
++	return le16_to_cpu(*(const uint16_t *)p);
+ }
+ 
+ static inline void put_unaligned_le16(uint16_t val, void *p)
+ {
+-	*(__force __le16*)p = cpu_to_le16(val);
++	*(__le16 *)p = cpu_to_le16(val);
+ }
+ 
+ static inline uint32_t get_unaligned_le32(const void *p)
+ {
+-	return le32_to_cpup(p);
++	return le32_to_cpu(*(const uint32_t *)p);
+ }
+ 
+ static inline void put_unaligned_le32(uint32_t val, void *p)
+ {
+-	*(__force __le32*)p = cpu_to_le32(val);
++	*(__le32 *)p = cpu_to_le32(val);
+ }
+ 
+ static inline uint64_t get_unaligned_le64(const void *p)
+ {
+-	return le64_to_cpup(p);
++	return le64_to_cpu(*(const uint64_t *)p);
+ }
+ 
+ static inline void put_unaligned_le64(uint64_t val, void *p)
+ {
+-	*(__force __le64*)p = cpu_to_le64(val);
++	*(__le64 *)p = cpu_to_le64(val);
+ }
+ 
+ #endif /* __XEN_UNALIGNED_H__ */
 -- 
 2.27.0
 
