@@ -4,33 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59EF7C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 11 May 2022 20:05:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.327252.550028 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CFFC43217
+	for <xen-devel@archiver.kernel.org>; Wed, 11 May 2022 20:11:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.327268.550039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nosaG-00077D-Q1; Wed, 11 May 2022 20:05:20 +0000
+	id 1nosgI-0000N4-I6; Wed, 11 May 2022 20:11:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 327252.550028; Wed, 11 May 2022 20:05:20 +0000
+Received: by outflank-mailman (output) from mailman id 327268.550039; Wed, 11 May 2022 20:11:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nosaG-000776-N6; Wed, 11 May 2022 20:05:20 +0000
-Received: by outflank-mailman (input) for mailman id 327252;
- Wed, 11 May 2022 20:05:18 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nosgI-0000Mx-FO; Wed, 11 May 2022 20:11:34 +0000
+Received: by outflank-mailman (input) for mailman id 327268;
+ Wed, 11 May 2022 20:11:33 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SAT7=VT=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
- id 1nosaE-00075w-I5
- for xen-devel@lists.xenproject.org; Wed, 11 May 2022 20:05:18 +0000
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ad310eb4-d165-11ec-a406-831a346695d4;
- Wed, 11 May 2022 22:05:17 +0200 (CEST)
-Received: from [177.183.162.244] (helo=[192.168.0.5])
- by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1nosZy-0009Kz-VC; Wed, 11 May 2022 22:05:03 +0200
+ <SRS0=MfEy=VT=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1nosb9-0006lp-RI
+ for xen-devel@lists.xenproject.org; Wed, 11 May 2022 20:06:15 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id cee9d81e-d165-11ec-8fc4-03012f2f19d4;
+ Wed, 11 May 2022 22:06:14 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 01C8061A14;
+ Wed, 11 May 2022 20:06:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 55959C340EE;
+ Wed, 11 May 2022 20:06:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,84 +45,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad310eb4-d165-11ec-a406-831a346695d4
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=cfPMnwRmX7h9FC5zogrRSwPWC8hDFfBXdcAc10BCDXg=; b=PNZaBGeXFsuAaBpHuaMdvRY4/s
-	9D5MPz4xTVgTuRGWrB/KEfGG5tVa1JqSC/LT3Rso5sabWhCAduFdYhflwDt6bgTFq6qWGSH0+ncvk
-	oTm6f/w8sOzZYRkq+1JkZmdb25beje8r1H2EX6HM4WVyQEo/2Q4CTK9pG4z28p8fSDjazKpN99+TQ
-	EpXC0JAykc5ZUnUcVTqfleYx6Z4fPGlU4RkoA5IfJGN2tN+4XLZXjyd3oEcuP2YNdEgKXaQFpZZnR
-	Vejz8nGO8jKYtblRG3YNO8+SxkagQsqAK3ZztXb4IgRQ6EnIjofQ7r4kch6g3mJv37QTO/U/Hn9jn
-	eVwzVLtQ==;
-Message-ID: <c8818906-f113-82b6-b58b-d47ae0c16b4f@igalia.com>
-Date: Wed, 11 May 2022 17:03:51 -0300
+X-Inumbo-ID: cee9d81e-d165-11ec-8fc4-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1652299572;
+	bh=oeCZ0vTTOTH1KbY27j1I9n9AJlgXD9xSXE4rv86FJpY=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=Ef6XfNTiqyQhJ6q02mxt7NwtbOVlgMMT30mxCxSyV4pgzHy4DddWm/ictGWuu4WtK
+	 xc4Lqu1+SQ8R7haPLzcwPhsQ6n5HVMDy1N5A//jgsS4UwDzK81IzgKFH8AHzxCm9aP
+	 rHFrqHO8u3UIjSw55ErjujYOlOBL1KcbQk34Pas2R0Ysg2P9ggDR+vs4yLxISIEhUj
+	 yVwGDBh2I2jONWQcoiELYoyOLhTt+BS5a3ri41WaLGmUVwKTsBXT0Ba3JoOhA2XZrY
+	 i3wXgNmQPGNmLw83TEMWYpEXr8hVg6pKP2cK5mh8AG378lG31GVyuUto01cyLsu23X
+	 pDeX40Bq7ojBw==
+Date: Wed, 11 May 2022 13:06:10 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, 
+    "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+    George Dunlap <George.Dunlap@citrix.com>
+Subject: Re: [PATCH 1/3] xen/arm: Sync sysregs and cpuinfo with Linux
+ 5.18-rc3
+In-Reply-To: <F60293D4-0A44-4365-939E-5C1A80D7A159@arm.com>
+Message-ID: <alpine.DEB.2.22.394.2205111247030.43560@ubuntu-linux-20-04-desktop>
+References: <cover.1651570561.git.bertrand.marquis@arm.com> <832955382caa4ced744ec7894282592b62e8cf61.1651570561.git.bertrand.marquis@arm.com> <a05b426c-1800-a365-5b02-f82f0a391306@xen.org> <2E66F8B4-4DDA-47E2-B93C-E36FEB70F552@arm.com>
+ <f1315848-fe9e-b365-bbf6-a596abc6e0de@xen.org> <31F40037-3A43-4F94-8C03-D9F939DAF8C6@arm.com> <139b3f6c-ebb9-6ed2-f173-a7dbd3c94a95@xen.org> <alpine.DEB.2.22.394.2205091857230.43560@ubuntu-linux-20-04-desktop> <BCE017C4-53AA-4918-AEBD-D3CCEF0913F4@arm.com>
+ <19a140a9-f8a3-79d6-54fa-a873dab6ff42@xen.org> <F60293D4-0A44-4365-939E-5C1A80D7A159@arm.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [PATCH 23/30] printk: kmsg_dump: Introduce helper to inform
- number of dumpers
-Content-Language: en-US
-To: Steven Rostedt <rostedt@goodmis.org>
-Cc: akpm@linux-foundation.org, bhe@redhat.com, pmladek@suse.com,
- kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
- bcm-kernel-feedback-list@broadcom.com, linuxppc-dev@lists.ozlabs.org,
- linux-alpha@vger.kernel.org, linux-edac@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-leds@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
- linux-s390@vger.kernel.org, linux-tegra@vger.kernel.org,
- linux-um@lists.infradead.org, linux-xtensa@linux-xtensa.org,
- netdev@vger.kernel.org, openipmi-developer@lists.sourceforge.net,
- rcu@vger.kernel.org, sparclinux@vger.kernel.org,
- xen-devel@lists.xenproject.org, x86@kernel.org, kernel-dev@igalia.com,
- kernel@gpiccoli.net, halves@canonical.com, fabiomirmar@gmail.com,
- alejandro.j.jimenez@oracle.com, andriy.shevchenko@linux.intel.com,
- arnd@arndb.de, bp@alien8.de, corbet@lwn.net, d.hatayama@jp.fujitsu.com,
- dave.hansen@linux.intel.com, dyoung@redhat.com, feng.tang@intel.com,
- gregkh@linuxfoundation.org, mikelley@microsoft.com,
- hidehiro.kawai.ez@hitachi.com, jgross@suse.com, john.ogness@linutronix.de,
- keescook@chromium.org, luto@kernel.org, mhiramat@kernel.org,
- mingo@redhat.com, paulmck@kernel.org, peterz@infradead.org,
- senozhatsky@chromium.org, stern@rowland.harvard.edu, tglx@linutronix.de,
- vgoyal@redhat.com, vkuznets@redhat.com, will@kernel.org
-References: <20220427224924.592546-1-gpiccoli@igalia.com>
- <20220427224924.592546-24-gpiccoli@igalia.com>
- <20220510134014.3923ccba@gandalf.local.home>
-From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-In-Reply-To: <20220510134014.3923ccba@gandalf.local.home>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
 
-On 10/05/2022 14:40, Steven Rostedt wrote:
-> On Wed, 27 Apr 2022 19:49:17 -0300
-> "Guilherme G. Piccoli" <gpiccoli@igalia.com> wrote:
+On Wed, 11 May 2022, Bertrand Marquis wrote:
+> > I understand the patch is already written, so I was OK if you simply list of the commits with the authors/tags for this time.
 > 
->> Currently we don't have a way to check if there are dumpers set,
->> except counting the list members maybe. This patch introduces a very
->> simple helper to provide this information, by just keeping track of
->> registered/unregistered kmsg dumpers. It's going to be used on the
->> panic path in the subsequent patch.
+> I would like to understand where this requirement is coming from.
 > 
-> FYI, it is considered "bad form" to reference in the change log "this
-> patch". We know this is a patch. The change log should just talk about what
-> is being done. So can you reword your change logs (you do this is almost
-> every patch). Here's what I would reword the above to be:
-> 
->  Currently we don't have a way to check if there are dumpers set, except
->  perhaps by counting the list members. Introduce a very simple helper to
->  provide this information, by just keeping track of registered/unregistered
->  kmsg dumpers. This will simplify the refactoring of the panic path.
+> @George: is there some kind of legal reason for something like that ?
 
-Thanks for the hint, you're right - it's almost in all of my patches.
-I'll reword all of them (except the ones already merged) to remove this
-"bad form".
+I am not George but I'll answer the legal question. Our "legal" document
+is the DCO:
+
+https://developercertificate.org/
+
+This falls under case (b):
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
+
+So from the legal point of view only your Signed-off-by line is
+required.
+
+I remember this well because I was confused about this a few years ago
+in another case of taking code from Linux.
+
+
+> > If both Stefano and you agree to not keep the authorships, then I will
+> > not stand against it. However, I will not get involved in
+> > committing and adding my ack.
+
+I am fine either way. My only request is to mention the Linux commit-id
+that Bertrand used as a base and Bertrand has already done that.
+
+
+> I want first to clear up this process and understand why you are
+> requesting this to know how I should do anything like that in the
+> future.
+
+It looks like our process docs are not very good on this point and might
+benefit from a clarification. I hope you are volunteering :-)
+
+Origin is defined as "it specifies the source of the patch" but it
+doesn't say what actually is considered a "source".
+
+I suggest to distinguish between the case where commits are ported
+individually from the case where code is copied over (like when we
+introduced SMMUv3.) If commits are copied individually, I think we
+probably want an Origin tag for each of them and the source is the
+original commit-id. If the code is copied from Linux (like the SMMUv3
+case) then we probably only want to request a single Origin tag (or a
+new tag?) with the base Linux version (5.18-rc3) rather than the
+commit-id being backported. In that case the source would be the
+repository baseline.
 
 Cheers,
 
-
-Guilherme
+Stefano
 
