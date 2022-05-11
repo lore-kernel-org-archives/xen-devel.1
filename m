@@ -4,36 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA9EDC433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 11 May 2022 14:00:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.326899.549561 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C8BC433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 11 May 2022 14:13:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.326922.549583 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nomsX-0005rq-Lq; Wed, 11 May 2022 13:59:49 +0000
+	id 1non5r-0000Wy-A6; Wed, 11 May 2022 14:13:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 326899.549561; Wed, 11 May 2022 13:59:49 +0000
+Received: by outflank-mailman (output) from mailman id 326922.549583; Wed, 11 May 2022 14:13:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nomsX-0005rj-J1; Wed, 11 May 2022 13:59:49 +0000
-Received: by outflank-mailman (input) for mailman id 326899;
- Wed, 11 May 2022 13:59:49 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=+7Fu=VT=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1nomsX-0005rd-1y
- for xen-devel@lists.xenproject.org; Wed, 11 May 2022 13:59:49 +0000
-Received: from wout4-smtp.messagingengine.com (wout4-smtp.messagingengine.com
- [64.147.123.20]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9d40c74b-d132-11ec-8fc4-03012f2f19d4;
- Wed, 11 May 2022 15:59:47 +0200 (CEST)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id F3B80320096F;
- Wed, 11 May 2022 09:59:43 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Wed, 11 May 2022 09:59:44 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 11 May 2022 09:59:41 -0400 (EDT)
+	id 1non5r-0000Wr-6m; Wed, 11 May 2022 14:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 326922;
+ Wed, 11 May 2022 14:13:33 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Ttdd=VT=lst.de=hch@srs-se1.protection.inumbo.net>)
+ id 1non5p-0000Wl-Tu
+ for xen-devel@lists.xenproject.org; Wed, 11 May 2022 14:13:33 +0000
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 89c967f2-d134-11ec-a406-831a346695d4;
+ Wed, 11 May 2022 16:13:32 +0200 (CEST)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 260F668CFE; Wed, 11 May 2022 16:13:29 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,95 +40,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9d40c74b-d132-11ec-8fc4-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:message-id
-	:mime-version:reply-to:sender:subject:subject:to:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1652277583; x=1652363983; bh=Lexwo3wAboDXzqe+46X7nnMk4/mtVtLozIW
-	S6x7/VRo=; b=WLHZwkFadLKiZX167D+7OwsLV5K5hv4LjBYyFqyfLsOhhrc9czw
-	0QD7U6oGOzNaTOZSMOgWPGTeTtNU+NNK5UrLpNCx91OEotqyawBDPi6sRaklL92W
-	Slj6S4S5Lw2n644xEsry82kk3dYNdbhUdAlvn9w+s8UgutmWJNVjejwfgX0g+nfk
-	ouaRVBnJEoerD/ed1gEh41jhP5qHo5ZcRhGzt3AnB0Fc2VC1Ijhx+mFNUCXA0X/V
-	ovsqpC2W3c9LHrd82cWYXePjjRBOdsw/K6frzRp3ZY811vMuJY2c8IQVrjm8VOlL
-	ika9XVu+/AR4I5NI+GVm9DgVWmidvIlAWJg==
-X-ME-Sender: <xms:T8F7Ym0T96u_rtXkBENwtAocUZgYkqCa7-B8kJrpvOGuWDLBwF271w>
-    <xme:T8F7YpFPGerXCs51BDGNLEjh1OwzEwACGsSjCtUf50X65VHZYVoWvYG2_y0w9pjIG
-    CeNGSGocI2rRQ>
-X-ME-Received: <xmr:T8F7Yu5-T3kIsbifpur6OGHDNjsTX-r-_KJ6RG8ZBJ5oHD14yq6Q-SM3u8Wfsef1kiw8xyI8R0Q24ONLP6sAFte2RhxT3j8Oyw4bloT8p8OCFt4FOWY>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrgeehgdeikecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhvfevufffkffogggtgfesthekredtredtjeenucfhrhhomhepofgrrhgvkhcu
-    ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
-    hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepleekhfdu
-    leetleelleetteevfeefteffkeetteejheelgfegkeelgeehhfdthedvnecuvehluhhsth
-    gvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehi
-    nhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
-X-ME-Proxy: <xmx:T8F7Yn1LLr_sS1kDZQQsJVJHJ9lGJIDdHt2kQskQTvFZwDWFyJ-DBA>
-    <xmx:T8F7YpE2CDhDvkrvKHfgMJvN5sb85BoMjmVTtkEVQzkmNz9FlgXG-g>
-    <xmx:T8F7Yg8eGMlnu3Xhi22PcrHPgaHEg4NraFJfjOL5hHM-0u2b6C7wnQ>
-    <xmx:T8F7YiN0IQpg3_qfwgK0w_VheikZZ1LfPtqEHW9QbD6j3H5boXnx-A>
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v4 1/2] ns16550: use poll mode if INTERRUPT_LINE is 0xff
-Date: Wed, 11 May 2022 15:59:28 +0200
-Message-Id: <20220511135929.1823116-1-marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.35.1
+X-Inumbo-ID: 89c967f2-d134-11ec-a406-831a346695d4
+Date: Wed, 11 May 2022 16:13:28 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Christoph Hellwig <hch@lst.de>, jgross@suse.com,
+	xen-devel@lists.xenproject.org,
+	linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux-foundation.org, Rahul Singh <Rahul.Singh@arm.com>
+Subject: Re: [PATCH] swiotlb-xen: fix DMA_ATTR_NO_KERNEL_MAPPING on arm
+Message-ID: <20220511141328.GA31939@lst.de>
+References: <20220423171422.1831676-1-hch@lst.de> <alpine.DEB.2.22.394.2204261605420.915916@ubuntu-linux-20-04-desktop> <20220428132737.GA13999@lst.de> <alpine.DEB.2.22.394.2204281449060.915916@ubuntu-linux-20-04-desktop> <27d39d5a-3b79-bdda-b7e4-f4477667919f@oracle.com> <alpine.DEB.2.22.394.2204281548320.915916@ubuntu-linux-20-04-desktop> <41c2483c-ab54-41be-7815-9d4a98e0249e@oracle.com> <alpine.DEB.2.22.394.2204291615130.1947187@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.22.394.2204291615130.1947187@ubuntu-linux-20-04-desktop>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 
-Intel LPSS has INTERRUPT_LINE set to 0xff by default, that is declared
-by the PCI Local Bus Specification Revision 3.0 (from 2004) as
-"unknown"/"no connection". Fallback to poll mode in this case.
-The 0xff handling is x86-specific, the surrounding code is guarded with
-CONFIG_X86 anyway.
+On Fri, Apr 29, 2022 at 04:15:38PM -0700, Stefano Stabellini wrote:
+> Great! Christoph you can go ahead and pick it up in your tree if you are
+> up for it.
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-Changes in v4:
- - adjust log message, change it from WARNING to INFO
- - re-add x86 reference in the commit message
-Changes in v3:
- - change back to checking 0xff explicitly
- - adjust commit message, include spec reference
- - change warning to match the above
-Changes in v2:
- - add log message
- - extend commit message
- - code style fix
----
- xen/drivers/char/ns16550.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+The patch is in the dma-mapping for-next brancch now:
 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index fb75cee4a13a..c0d65cff62fe 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -1238,6 +1238,13 @@ pci_uart_config(struct ns16550 *uart, bool_t skip_amt, unsigned int idx)
-                             pci_conf_read8(PCI_SBDF(0, b, d, f),
-                                            PCI_INTERRUPT_LINE) : 0;
- 
-+                if ( uart->irq == 0xff )
-+                    uart->irq = 0;
-+                if ( !uart->irq )
-+                    printk(XENLOG_INFO
-+                           "ns16550: %pp no legacy IRQ %d, using poll mode\n",
-+                           &PCI_SBDF(0, b, d, f), uart->irq);
-+
-                 return 0;
-             }
-         }
--- 
-2.35.1
+http://git.infradead.org/users/hch/dma-mapping.git/commitdiff/62cb1ca1654b57589c582efae2748159c74ee356
 
+There were a few smaller merge conflicts with the swiotlb refactoring.
+I think everything is fine, but please take another look if possible.
 
