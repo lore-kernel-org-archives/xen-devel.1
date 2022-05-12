@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0757EC433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 05:34:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.328208.551168 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00D7C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 05:34:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.327983.551178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npNw3-0005Z9-4M; Fri, 13 May 2022 05:33:55 +0000
+	id 1npNwT-0005zy-Gs; Fri, 13 May 2022 05:34:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 328208.551168; Fri, 13 May 2022 05:33:55 +0000
+Received: by outflank-mailman (output) from mailman id 327983.551178; Fri, 13 May 2022 05:34:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npNw3-0005Z2-1E; Fri, 13 May 2022 05:33:55 +0000
-Received: by outflank-mailman (input) for mailman id 328208;
- Fri, 13 May 2022 05:33:53 +0000
+	id 1npNwT-0005zr-Dz; Fri, 13 May 2022 05:34:21 +0000
+Received: by outflank-mailman (input) for mailman id 327983;
+ Thu, 12 May 2022 21:41:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Fm8U=VV=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1npNw1-0005Yw-Ke
- for xen-devel@lists.xenproject.org; Fri, 13 May 2022 05:33:53 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=yEzj=VU=redhat.com=dhowells@srs-se1.protection.inumbo.net>)
+ id 1npGYw-0007I3-Fj
+ for xen-devel@lists.xenproject.org; Thu, 12 May 2022 21:41:34 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 44e0583e-d27e-11ec-8fc4-03012f2f19d4;
- Fri, 13 May 2022 07:33:50 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ id 49adfa64-d23c-11ec-8fc4-03012f2f19d4;
+ Thu, 12 May 2022 23:41:32 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-651-_lIP8Q0uMUaVvsz49D3spw-1; Thu, 12 May 2022 17:41:24 -0400
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2D16421AE2;
- Fri, 13 May 2022 05:33:50 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CF59E13A84;
- Fri, 13 May 2022 05:33:49 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id sZhGMb3tfWLIFgAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 13 May 2022 05:33:49 +0000
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E9268296A609;
+ Thu, 12 May 2022 21:41:22 +0000 (UTC)
+Received: from warthog.procyon.org.uk (unknown [10.33.37.67])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0E2C7416156;
+ Thu, 12 May 2022 21:41:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,234 +52,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 44e0583e-d27e-11ec-8fc4-03012f2f19d4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1652420030; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
+X-Inumbo-ID: 49adfa64-d23c-11ec-8fc4-03012f2f19d4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1652391691;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=AaNK9VI92CtlLRufqelHTuZqKOQA/3zBp3OZRQgQ4/A=;
-	b=NGRd1kaTOR9gXF3g5ClJFREszBP4PQdh6s7fgHjNNMGjRtcluLQekZrKNbxw/xnDC3p+jq
-	TuCBukRsHNhwWmix40crh+zQstPofhp/WEzn9EBQG5OwjTBZln9tLxYnQXzc3rTKh5I5ri
-	YsFiMzYlJ/+Wj3ZY/LHzBJ7b/tMRzx0=
-Message-ID: <d1d61bcf-86f9-68cd-9bd4-a13bf8149b88@suse.com>
-Date: Fri, 13 May 2022 07:33:49 +0200
+	bh=YX4qZOz+9WbIDFanSGeueshT1smpwyQHiwCB0mvZIgg=;
+	b=PJOaSv3WRC6mW8fZIEeGNINL8AFfYV/cmpyaj0b60jdo61YZtLWwHjI13lcxJUtguTiBd0
+	e7Viy8VZ2VtnUIXmveWCj7AsY5cedemQKGLnZmSszi8yF8q6vDw8yfxnbp4xaZVd5JbEgd
+	tna+B+5FsaWBa4ZrgAYRX5bJ04PvTc4=
+X-MC-Unique: _lIP8Q0uMUaVvsz49D3spw-1
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+	Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+	Kingdom.
+	Registered in England and Wales under Company Registration No. 3798903
+From: David Howells <dhowells@redhat.com>
+In-Reply-To: <20220504014440.3697851-20-keescook@chromium.org>
+References: <20220504014440.3697851-20-keescook@chromium.org> <20220504014440.3697851-1-keescook@chromium.org>
+To: Kees Cook <keescook@chromium.org>
+Cc: "Gustavo A . R . Silva" <gustavoars@kernel.org>,
+    David Howells <dhowells@redhat.com>,
+    Marc Dionne <marc.dionne@auristor.com>,
+    linux-afs@lists.infradead.org, Alexei Starovoitov <ast@kernel.org>,
+    alsa-devel@alsa-project.org, Al Viro <viro@zeniv.linux.org.uk>,
+    Andrew Gabbasov <andrew_gabbasov@mentor.com>,
+    Andrew Morton <akpm@linux-foundation.org>,
+    Andy Gross <agross@kernel.org>, Andy Lavr <andy.lavr@gmail.com>,
+    Arend van Spriel <aspriel@gmail.com>,
+    Baowen Zheng <baowen.zheng@corigine.com>,
+    Bjorn Andersson <bjorn.andersson@linaro.org>,
+    Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+    Bradley Grove <linuxdrivers@attotech.com>,
+    brcm80211-dev-list.pdl@broadcom.com,
+    Christian Brauner <brauner@kernel.org>,
+    Christian =?utf-8?Q?G=C3=B6ttsche?= <cgzones@googlemail.com>,
+    Christian Lamparter <chunkeey@googlemail.com>,
+    Chris Zankel <chris@zankel.net>, Cong Wang <cong.wang@bytedance.com>,
+    Daniel Axtens <dja@axtens.net>,
+    Daniel Vetter <daniel.vetter@ffwll.ch>,
+    Dan Williams <dan.j.williams@intel.com>,
+    David Gow <davidgow@google.com>,
+    "David S. Miller" <davem@davemloft.net>,
+    Dennis Dalessandro <dennis.dalessandro@cornelisnetworks.com>,
+    devicetree@vger.kernel.org, Dexuan Cui <decui@microsoft.com>,
+    Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
+    Eli Cohen <elic@nvidia.com>, Eric Dumazet <edumazet@google.com>,
+    Eric Paris <eparis@parisplace.org>,
+    Eugeniu Rosca <erosca@de.adit-jv.com>,
+    Felipe Balbi <balbi@kernel.org>,
+    Francis Laniel <laniel_francis@privacyrequired.com>,
+    Frank Rowand <frowand.list@gmail.com>,
+    Franky Lin <franky.lin@broadcom.com>,
+    Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+    Gregory Greenman <gregory.greenman@intel.com>,
+    Guenter Roeck <linux@roeck-us.net>,
+    Haiyang Zhang <haiyangz@microsoft.com>,
+    Hante Meuleman <hante.meuleman@broadcom.com>,
+    Herbert Xu <herbert@gondor.apana.org.au>,
+    Hulk Robot <hulkci@huawei.com>, Jakub Kicinski <kuba@kernel.org>,
+    "James E.J. Bottomley" <jejb@linux.ibm.com>,
+    James Morris <jmorris@namei.org>,
+    Jarkko Sakkinen <jarkko@kernel.org>,
+    Jaroslav Kysela <perex@perex.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+    Jens Axboe <axboe@kernel.dk>,
+    Johan Hedberg <johan.hedberg@gmail.com>,
+    Johannes Berg <johannes.berg@intel.com>,
+    Johannes Berg <johannes@sipsolutions.net>,
+    John Keeping <john@metanate.com>, Juergen Gross <jgross@suse.com>,
+    Kalle Valo <kvalo@kernel.org>, Keith Packard <keithp@keithp.com>,
+    keyrings@vger.kernel.org, kunit-dev@googlegroups.com,
+    Kuniyuki Iwashima <kuniyu@amazon.co.jp>,
+    "K. Y. Srinivasan" <kys@microsoft.com>,
+    Lars-Peter Clausen <lars@metafoo.de>,
+    Lee Jones <lee.jones@linaro.org>, Leon Romanovsky <leon@kernel.org>,
+    Liam Girdwood <lgirdwood@gmail.com>,
+    linux1394-devel@lists.sourceforge.net,
+    linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+    linux-bluetooth@vger.kernel.org, linux-hardening@vger.kernel.org,
+    linux-hyperv@vger.kernel.org, linux-integrity@vger.kernel.org,
+    linux-rdma@vger.kernel.org, linux-scsi@vger.kernel.org,
+    linux-security-module@vger.kernel.org, linux-usb@vger.kernel.org,
+    linux-wireless@vger.kernel.org, linux-xtensa@linux-xtensa.org,
+    llvm@lists.linux.dev, Loic Poulain <loic.poulain@linaro.org>,
+    Louis Peens <louis.peens@corigine.com>,
+    Luca Coelho <luciano.coelho@intel.com>,
+    Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+    Marcel Holtmann <marcel@holtmann.org>,
+    Mark Brown <broonie@kernel.org>,
+    "Martin K. Petersen" <martin.petersen@oracle.com>,
+    Max Filippov <jcmvbkbc@gmail.com>, Mimi Zohar <zohar@linux.ibm.com>,
+    Muchun Song <songmuchun@bytedance.com>,
+    Nathan Chancellor <nathan@kernel.org>, netdev@vger.kernel.org,
+    Nick Desaulniers <ndesaulniers@google.com>,
+    Nuno =?utf-8?Q?S=C3=A1?= <nuno.sa@analog.com>,
+    Paolo Abeni <pabeni@redhat.com>, Paul Moore <paul@paul-moore.com>,
+    Rich Felker <dalias@aerifal.cx>, Rob Herring <robh+dt@kernel.org>,
+    Russell King <linux@armlinux.org.uk>, selinux@vger.kernel.org,
+    "Serge E. Hallyn" <serge@hallyn.com>,
+    SHA-cyfmac-dev-list@infineon.com,
+    Simon Horman <simon.horman@corigine.com>,
+    Stefano Stabellini <sstabellini@kernel.org>,
+    Stefan Richter <stefanr@s5r6.in-berlin.de>,
+    Steffen Klassert <steffen.klassert@secunet.com>,
+    Stephen Hemminger <sthemmin@microsoft.com>,
+    Stephen Smalley <stephen.smalley.work@gmail.com>,
+    Tadeusz Struk <tadeusz.struk@linaro.org>,
+    Takashi Iwai <tiwai@suse.com>, Tom Rix <trix@redhat.com>,
+    Udipto Goswami <quic_ugoswami@quicinc.com>,
+    Vincenzo Frascino <vincenzo.frascino@arm.com>,
+    wcn36xx@lists.infradead.org, Wei Liu <wei.liu@kernel.org>,
+    xen-devel@lists.xenproject.org,
+    Xiu Jianfeng <xiujianfeng@huawei.com>,
+    Yang Yingliang <yangyingliang@huawei.com>
+Subject: Re: [PATCH 19/32] afs: Use mem_to_flex_dup() with struct afs_acl
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Content-Language: en-US
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Christoph Hellwig <hch@infradead.org>
-References: <1651947548-4055-1-git-send-email-olekstysh@gmail.com>
- <1651947548-4055-3-git-send-email-olekstysh@gmail.com>
- <597125fd-4c85-fde0-9d5b-a9cc13a81ccc@oracle.com>
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH V2 2/7] xen/grants: support allocating consecutive grants
-In-Reply-To: <597125fd-4c85-fde0-9d5b-a9cc13a81ccc@oracle.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------Sr9EeqdIb8iPoFhoY08CFv9r"
+Date: Thu, 12 May 2022 22:41:05 +0100
+Message-ID: <898803.1652391665@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=dhowells@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Sr9EeqdIb8iPoFhoY08CFv9r
-Content-Type: multipart/mixed; boundary="------------ss12YByrfgbibODZLOK0ywZB";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
- <julien@xen.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Christoph Hellwig <hch@infradead.org>
-Message-ID: <d1d61bcf-86f9-68cd-9bd4-a13bf8149b88@suse.com>
-Subject: Re: [PATCH V2 2/7] xen/grants: support allocating consecutive grants
-References: <1651947548-4055-1-git-send-email-olekstysh@gmail.com>
- <1651947548-4055-3-git-send-email-olekstysh@gmail.com>
- <597125fd-4c85-fde0-9d5b-a9cc13a81ccc@oracle.com>
-In-Reply-To: <597125fd-4c85-fde0-9d5b-a9cc13a81ccc@oracle.com>
 
---------------ss12YByrfgbibODZLOK0ywZB
-Content-Type: multipart/mixed; boundary="------------FphEvG0f0pwtWW6kWmn04s0b"
+Kees Cook <keescook@chromium.org> wrote:
 
---------------FphEvG0f0pwtWW6kWmn04s0b
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+>  struct afs_acl {
+> -	u32	size;
+> -	u8	data[];
+> +	DECLARE_FLEX_ARRAY_ELEMENTS_COUNT(u32, size);
+> +	DECLARE_FLEX_ARRAY_ELEMENTS(u8, data);
+>  };
 
-T24gMTIuMDUuMjIgMjI6MDEsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToNCj4gDQo+IE9uIDUv
-Ny8yMiAyOjE5IFBNLCBPbGVrc2FuZHIgVHlzaGNoZW5rbyB3cm90ZToNCj4+ICsNCj4+ICsv
-Kg0KPj4gKyAqIEhhbmRsaW5nIG9mIGZyZWUgZ3JhbnRzOg0KPj4gKyAqDQo+PiArICogRnJl
-ZSBncmFudHMgYXJlIGluIGEgc2ltcGxlIGxpc3QgYW5jaG9yZWQgaW4gZ250dGFiX2ZyZWVf
-aGVhZC4gVGhleSBhcmUNCj4+ICsgKiBsaW5rZWQgYnkgZ3JhbnQgcmVmLCB0aGUgbGFzdCBl
-bGVtZW50IGNvbnRhaW5zIEdOVFRBQl9MSVNUX0VORC4gVGhlIG51bWJlcg0KPj4gKyAqIG9m
-IGZyZWUgZW50cmllcyBpcyBzdG9yZWQgaW4gZ250dGFiX2ZyZWVfY291bnQuDQo+PiArICog
-QWRkaXRpb25hbGx5IHRoZXJlIGlzIGEgYml0bWFwIG9mIGZyZWUgZW50cmllcyBhbmNob3Jl
-ZCBpbg0KPj4gKyAqIGdudHRhYl9mcmVlX2JpdG1hcC4gVGhpcyBpcyBiZWluZyB1c2VkIGZv
-ciBzaW1wbGlmeWluZyBhbGxvY2F0aW9uIG9mDQo+PiArICogbXVsdGlwbGUgY29uc2VjdXRp
-dmUgZ3JhbnRzLCB3aGljaCBpcyBuZWVkZWQgZS5nLiBmb3Igc3VwcG9ydCBvZiB2aXJ0aW8u
-DQo+PiArICogZ250dGFiX2xhc3RfZnJlZSBpcyB1c2VkIHRvIGFkZCBmcmVlIGVudHJpZXMg
-b2YgbmV3IGZyYW1lcyBhdCB0aGUgZW5kIG9mDQo+PiArICogdGhlIGZyZWUgbGlzdC4NCj4+
-ICsgKiBnbnR0YWJfZnJlZV90YWlsX3B0ciBzcGVjaWZpZXMgdGhlIHZhcmlhYmxlIHdoaWNo
-IHJlZmVyZW5jZXMgdGhlIHN0YXJ0DQo+IA0KPiANCj4gSWYgdGhpcyByZWZlcmVuY2VzIHRo
-ZSBzdGFydCBvZiB0aGUgZnJlZSBpbnRlcnZhbCwgd2h5IGlzIGl0IGNhbGxlZCANCj4gZ250
-dGFiX2ZyZWVfKnRhaWwqX3B0cj8NCg0KQmVjYXVzZSB0aGlzIGlzIHRoZSB0YWlsIG9mIHRo
-ZSB3aG9sZSBhcmVhIHdoaWNoIGlzIGZyZWUuDQoNCkl0IGNvdWxkIGJlIHJlbmFtZWQgdG8g
-Z250dGFiX2ZyZWVfdGFpbF9zdGFydF9wdHIuIDotKQ0KDQo+IA0KPiANCj4+ICsgKiBvZiBj
-b25zZWN1dGl2ZSBmcmVlIGdyYW50cyBlbmRpbmcgd2l0aCBnbnR0YWJfbGFzdF9mcmVlLiBU
-aGlzIHBvaW50ZXIgaXMNCj4+ICsgKiB1cGRhdGVkIGluIGEgcmF0aGVyIGRlZmVuc2l2ZSB3
-YXksIGluIG9yZGVyIHRvIGF2b2lkIHBlcmZvcm1hbmNlIGhpdHMgaW4NCj4+ICsgKiBob3Qg
-cGF0aHMuDQo+PiArICogQWxsIHRob3NlIHZhcmlhYmxlcyBhcmUgcHJvdGVjdGVkIGJ5IGdu
-dHRhYl9saXN0X2xvY2suDQo+PiArICovDQo+PiDCoCBzdGF0aWMgaW50IGdudHRhYl9mcmVl
-X2NvdW50Ow0KPj4gLXN0YXRpYyBncmFudF9yZWZfdCBnbnR0YWJfZnJlZV9oZWFkOw0KPj4g
-K3N0YXRpYyB1bnNpZ25lZCBpbnQgZ250dGFiX3NpemU7DQo+PiArc3RhdGljIGdyYW50X3Jl
-Zl90IGdudHRhYl9mcmVlX2hlYWQgPSBHTlRUQUJfTElTVF9FTkQ7DQo+PiArc3RhdGljIGdy
-YW50X3JlZl90IGdudHRhYl9sYXN0X2ZyZWUgPSBHTlRUQUJfTElTVF9FTkQ7DQo+PiArc3Rh
-dGljIGdyYW50X3JlZl90ICpnbnR0YWJfZnJlZV90YWlsX3B0cjsNCj4+ICtzdGF0aWMgdW5z
-aWduZWQgbG9uZyAqZ250dGFiX2ZyZWVfYml0bWFwOw0KPj4gwqAgc3RhdGljIERFRklORV9T
-UElOTE9DSyhnbnR0YWJfbGlzdF9sb2NrKTsNCj4+ICsNCj4+IMKgIHN0cnVjdCBncmFudF9m
-cmFtZXMgeGVuX2F1dG9feGxhdF9ncmFudF9mcmFtZXM7DQo+PiDCoCBzdGF0aWMgdW5zaWdu
-ZWQgaW50IHhlbl9nbnR0YWJfdmVyc2lvbjsNCj4+IMKgIG1vZHVsZV9wYXJhbV9uYW1lZCh2
-ZXJzaW9uLCB4ZW5fZ250dGFiX3ZlcnNpb24sIHVpbnQsIDApOw0KPj4gQEAgLTE3MCwxNiAr
-MTk0LDExMSBAQCBzdGF0aWMgaW50IGdldF9mcmVlX2VudHJpZXModW5zaWduZWQgY291bnQp
-DQo+PiDCoMKgwqDCoMKgIHJlZiA9IGhlYWQgPSBnbnR0YWJfZnJlZV9oZWFkOw0KPj4gwqDC
-oMKgwqDCoCBnbnR0YWJfZnJlZV9jb3VudCAtPSBjb3VudDsNCj4+IC3CoMKgwqAgd2hpbGUg
-KGNvdW50LS0gPiAxKQ0KPj4gLcKgwqDCoMKgwqDCoMKgIGhlYWQgPSBnbnR0YWJfZW50cnko
-aGVhZCk7DQo+PiArwqDCoMKgIHdoaWxlIChjb3VudC0tKSB7DQo+PiArwqDCoMKgwqDCoMKg
-wqAgYml0bWFwX2NsZWFyKGdudHRhYl9mcmVlX2JpdG1hcCwgaGVhZCwgMSk7DQo+PiArwqDC
-oMKgwqDCoMKgwqAgaWYgKGdudHRhYl9mcmVlX3RhaWxfcHRyID09IF9fZ250dGFiX2VudHJ5
-KGhlYWQpKQ0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZ250dGFiX2ZyZWVfdGFpbF9w
-dHIgPSAmZ250dGFiX2ZyZWVfaGVhZDsNCj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAoY291bnQp
-DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBoZWFkID0gZ250dGFiX2VudHJ5KGhlYWQp
-Ow0KPj4gK8KgwqDCoCB9DQo+PiDCoMKgwqDCoMKgIGdudHRhYl9mcmVlX2hlYWQgPSBnbnR0
-YWJfZW50cnkoaGVhZCk7DQo+PiDCoMKgwqDCoMKgIGdudHRhYl9lbnRyeShoZWFkKSA9IEdO
-VFRBQl9MSVNUX0VORDsNCj4+ICvCoMKgwqAgaWYgKCFnbnR0YWJfZnJlZV9jb3VudCkgew0K
-Pj4gK8KgwqDCoMKgwqDCoMKgIGdudHRhYl9sYXN0X2ZyZWUgPSBHTlRUQUJfTElTVF9FTkQ7
-DQo+PiArwqDCoMKgwqDCoMKgwqAgZ250dGFiX2ZyZWVfdGFpbF9wdHIgPSBOVUxMOw0KPj4g
-K8KgwqDCoCB9DQo+PiArDQo+PiDCoMKgwqDCoMKgIHNwaW5fdW5sb2NrX2lycXJlc3RvcmUo
-JmdudHRhYl9saXN0X2xvY2ssIGZsYWdzKTsNCj4+IMKgwqDCoMKgwqAgcmV0dXJuIHJlZjsN
-Cj4+IMKgIH0NCj4+ICtzdGF0aWMgaW50IGdldF9zZXFfZW50cnlfY291bnQodm9pZCkNCj4+
-ICt7DQo+PiArwqDCoMKgIGlmIChnbnR0YWJfbGFzdF9mcmVlID09IEdOVFRBQl9MSVNUX0VO
-RCB8fCAhZ250dGFiX2ZyZWVfdGFpbF9wdHIgfHwNCj4+ICvCoMKgwqDCoMKgwqDCoCAqZ250
-dGFiX2ZyZWVfdGFpbF9wdHIgPT0gR05UVEFCX0xJU1RfRU5EKQ0KPj4gK8KgwqDCoMKgwqDC
-oMKgIHJldHVybiAwOw0KPj4gKw0KPj4gK8KgwqDCoCByZXR1cm4gZ250dGFiX2xhc3RfZnJl
-ZSAtICpnbnR0YWJfZnJlZV90YWlsX3B0ciArIDE7DQo+PiArfQ0KPj4gKw0KPj4gKy8qIFJl
-YnVpbGRzIHRoZSBmcmVlIGdyYW50IGxpc3QgYW5kIHRyaWVzIHRvIGZpbmQgY291bnQgY29u
-c2VjdXRpdmUgZW50cmllcy4gKi8NCj4+ICtzdGF0aWMgaW50IGdldF9mcmVlX3NlcSh1bnNp
-Z25lZCBpbnQgY291bnQpDQo+PiArew0KPj4gK8KgwqDCoCBpbnQgcmV0ID0gLUVOT1NQQzsN
-Cj4+ICvCoMKgwqAgdW5zaWduZWQgaW50IGZyb20sIHRvOw0KPj4gK8KgwqDCoCBncmFudF9y
-ZWZfdCAqbGFzdDsNCj4+ICsNCj4+ICvCoMKgwqAgZ250dGFiX2ZyZWVfdGFpbF9wdHIgPSAm
-Z250dGFiX2ZyZWVfaGVhZDsNCj4+ICvCoMKgwqAgbGFzdCA9ICZnbnR0YWJfZnJlZV9oZWFk
-Ow0KPj4gKw0KPj4gK8KgwqDCoCBmb3IgKGZyb20gPSBmaW5kX2ZpcnN0X2JpdChnbnR0YWJf
-ZnJlZV9iaXRtYXAsIGdudHRhYl9zaXplKTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgIGZyb20g
-PCBnbnR0YWJfc2l6ZTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgIGZyb20gPSBmaW5kX25leHRf
-Yml0KGdudHRhYl9mcmVlX2JpdG1hcCwgZ250dGFiX3NpemUsIHRvICsgMSkpIHsNCj4+ICvC
-oMKgwqDCoMKgwqDCoCB0byA9IGZpbmRfbmV4dF96ZXJvX2JpdChnbnR0YWJfZnJlZV9iaXRt
-YXAsIGdudHRhYl9zaXplLA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIGZyb20gKyAxKTsNCj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAocmV0IDwgMCAmJiB0
-byAtIGZyb20gPj0gY291bnQpIHsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldCA9
-IGZyb207DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBiaXRtYXBfY2xlYXIoZ250dGFi
-X2ZyZWVfYml0bWFwLCByZXQsIGNvdW50KTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IGZyb20gKz0gY291bnQ7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnbnR0YWJfZnJl
-ZV9jb3VudCAtPSBjb3VudDsNCj4gDQo+IA0KPiBJSVVJQyB3ZSBjYW4gaGF2ZSBtdWx0aXBs
-ZSBwYXNzZXMgb3ZlciB0aGlzLCBtZWFuaW5nIHRoYXQgdGhlIGdudHRhYl9mcmVlX2NvdW50
-IA0KPiBtYXkgYmUgZGVjcmVtZW50ZWQgbW9yZSB0aGFuIG9uY2UuIElzIHRoYXQgaW50ZW50
-aW9uYWw/DQoNCkFmdGVyIHRoZSBmaXJzdCBwYXNzIGRlY3JlbWVudGluZyBnbnR0YWJfZnJl
-ZV9jbnQsIHJldCB3aWxsIG5vDQpsb25nZXIgYmUgbGVzcyB0aGFuIHplcm8sIHNvIHRoaXMg
-Y2FuIGJlIGhpdCBvbmx5IG9uY2UuDQoNCj4gDQo+IA0KPj4gK8KgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgaWYgKGZyb20gPT0gdG8pDQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIGNvbnRpbnVlOw0KPj4gK8KgwqDCoMKgwqDCoMKgIH0NCj4+ICsNCj4+ICvCoMKgwqDC
-oMKgwqDCoCB3aGlsZSAoZnJvbSA8IHRvKSB7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCAqbGFzdCA9IGZyb207DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsYXN0ID0gX19n
-bnR0YWJfZW50cnkoZnJvbSk7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBnbnR0YWJf
-bGFzdF9mcmVlID0gZnJvbTsNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGZyb20rKzsN
-Cj4+ICvCoMKgwqDCoMKgwqDCoCB9DQo+IA0KPiANCj4gSSBoYXZlIGJlZW4gbG9va2luZyBh
-dCB0aGlzIGxvb3AgYW5kIEkgY2FuJ3QgdW5kZXJzdGFuZCB3aGF0IGl0IGlzIGRvaW5nIDst
-KCBDYW4gDQo+IHlvdSBlbmxpZ2h0ZW4gbWU/DQoNCkl0IGlzIHJlY3JlYXRpbmcgdGhlIGZy
-ZWUgbGlzdCBpbiBvcmRlciB0byBoYXZlIGl0IHByb3Blcmx5IHNvcnRlZC4NClRoaXMgaXMg
-bmVlZGVkIHRvIG1ha2Ugc3VyZSB0aGF0IHRoZSBmcmVlIHRhaWwgaGFzIHRoZSBtYXhpbXVt
-DQpwb3NzaWJsZSBzaXplICh5b3UgY2FuIHRha2UgdGhlIHRhaWwgb2ZmIHRoZSBsaXN0IHdp
-dGhvdXQgaGF2aW5nDQp0byB3b3JyeSBhYm91dCBicmVha2luZyB0aGUgbGlua2VkIGxpc3Qg
-YmVjYXVzZSBvZiByZWZlcmVuY2VzIGludG8NCnRoZSB0YWlsKS4NCg0KDQpKdWVyZ2VuDQo=
+Oof...  That's really quite unpleasant syntax.  Is it not possible to have
+mem_to_flex_dup() and friends work without that?  You are telling them the
+fields they have to fill in.
 
---------------FphEvG0f0pwtWW6kWmn04s0b
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+> +	struct afs_acl *acl = NULL;
+>  
+> -	acl = kmalloc(sizeof(*acl) + size, GFP_KERNEL);
+> -	if (!acl) {
+> +	if (mem_to_flex_dup(&acl, buffer, size, GFP_KERNEL)) {
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+Please don't do that.  Either do:
 
-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
-jR/i1DG86lem3iBDXzXsZDn8R38=3D
-=3D2wuH
------END PGP PUBLIC KEY BLOCK-----
+	acl = mem_to_flex_dup(buffer, size, GFP_KERNEL);
+	if (!acl)
 
---------------FphEvG0f0pwtWW6kWmn04s0b--
+or:
 
---------------ss12YByrfgbibODZLOK0ywZB--
+	acl = mem_to_flex_dup(buffer, size, GFP_KERNEL);
+	if (IS_ERR(acl))
 
---------------Sr9EeqdIb8iPoFhoY08CFv9r
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+Please especially don't make it that an apparent 'true' return indicates an
+error.  If you absolutely must return the acl pointer through the argument
+list (presumably because it's actually a macro), make it return false on
+failure:
 
------BEGIN PGP SIGNATURE-----
+	if (!mem_to_flex_dup(&acl, buffer, size, GFP_KERNEL))
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmJ97b0FAwAAAAAACgkQsN6d1ii/Ey/l
-FQf/WRYZFQzeL2rCU3Bru0qDZto4066JMU0804HHabSJhzePs20dNQpUSPrqiIPkCy3cFlcjs/uQ
-gh8ThS9wdbfxqmSpG6PDqiKVU3ggP9mcz7OUiGXVH5z3mv4Pxa7xRWc6t8NHm2DbfGi4q/nMHKcq
-0CPLvRHfQXugz27DOZWxjx3SmvYQuoNsPyTK7qnuAl8Bq2KwGJEhipNX69aCDrlZLVsCxqWHtBkF
-te7agxLVIRoX/ify9yjnWmGeRo/3Zbbv1UDGCNCUlWzwg/9j92N9/y0PzAbn4219F1pxyDMV4BEV
-nY3AH1mPgUCiM4gUFkjgFAyZsH2F/W16iFMkSoSqEA==
-=Pt1N
------END PGP SIGNATURE-----
+or return and explicitly check for an error code:
 
---------------Sr9EeqdIb8iPoFhoY08CFv9r--
+	if (mem_to_flex_dup(&acl, buffer, size, GFP_KERNEL) < 0)
+
+or:
+
+	ret = mem_to_flex_dup(&acl, buffer, size, GFP_KERNEL);
+	if (ret < 0)
+
+(or use != 0 rather than < 0)
+
+David
+
 
