@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 361F0C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 18:10:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.328678.551777 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED3EC433FE
+	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 18:10:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.328676.551755 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npZjw-0006GB-6H; Fri, 13 May 2022 18:10:12 +0000
+	id 1npZju-0005lJ-Lx; Fri, 13 May 2022 18:10:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 328678.551777; Fri, 13 May 2022 18:10:12 +0000
+Received: by outflank-mailman (output) from mailman id 328676.551755; Fri, 13 May 2022 18:10:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npZjw-0006FN-2B; Fri, 13 May 2022 18:10:12 +0000
-Received: by outflank-mailman (input) for mailman id 328678;
- Fri, 13 May 2022 18:10:10 +0000
+	id 1npZju-0005lC-J0; Fri, 13 May 2022 18:10:10 +0000
+Received: by outflank-mailman (input) for mailman id 328676;
+ Fri, 13 May 2022 18:10:09 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eu56=VV=gmail.com=shentey@srs-se1.protection.inumbo.net>)
- id 1npZju-0005kx-Ga
- for xen-devel@lists.xenproject.org; Fri, 13 May 2022 18:10:10 +0000
+ id 1npZjt-0005kx-Cb
+ for xen-devel@lists.xenproject.org; Fri, 13 May 2022 18:10:09 +0000
 Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
  [2a00:1450:4864:20::631])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ecdeada5-d2e7-11ec-aa76-f101dd46aeb6;
- Fri, 13 May 2022 20:10:09 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id bv19so17737346ejb.6
- for <xen-devel@lists.xenproject.org>; Fri, 13 May 2022 11:10:09 -0700 (PDT)
+ id ebb2818a-d2e7-11ec-aa76-f101dd46aeb6;
+ Fri, 13 May 2022 20:10:07 +0200 (CEST)
+Received: by mail-ej1-x631.google.com with SMTP id j6so17685722ejc.13
+ for <xen-devel@lists.xenproject.org>; Fri, 13 May 2022 11:10:07 -0700 (PDT)
 Received: from Provence.localdomain
  (dynamic-089-014-181-123.89.14.pool.telefonica.de. [89.14.181.123])
  by smtp.gmail.com with ESMTPSA id
- e11-20020a170906648b00b006fa84a0af2asm1040008ejm.16.2022.05.13.11.10.08
+ e11-20020a170906648b00b006fa84a0af2asm1040008ejm.16.2022.05.13.11.10.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 May 2022 11:10:09 -0700 (PDT)
+ Fri, 13 May 2022 11:10:07 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ecdeada5-d2e7-11ec-aa76-f101dd46aeb6
+X-Inumbo-ID: ebb2818a-d2e7-11ec-aa76-f101dd46aeb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Hp6j9E0komHwkQmjVaaJwGXlUmBw15qUD+2uycCxKRo=;
-        b=F6ECj1KowlkuN7ndNLG4RXVONt3ugmk+q9Hi/xtsP3eiZ8ZL0nuSrxMOKrM5piAaMn
-         oZVcacYQpx5jhTeQ451SnkGgZgcC+2FArUYvOOba7IXnLkpiLCmSjrJfH4140JrGfdaA
-         DDKaBGot+x4QfZLJkUdcSRyMZy0355YA3JjyVQvKWKDVe9Oc+c0902kRxqJK47A9Owbz
-         Wo23wbWOu/V3dS/MJkCO1+CxAj1a90WzQguDmjmui18vahU9ZuOVJyd1wrOW8CmmC5TW
-         z1SN7HYd8RGG1I4E7qL0Om7lIq4IW5FH2ooK04osvFfWLUC7kJYdyWSiUU5whYG7aJw1
-         CYYg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=B+mnGzoN8dF8kZBDeMa+h7r+FYrqSgMHMidhuCTWTwI=;
+        b=KQyMk8bzCjy0W1OsgrA0q4WybcDGmASfNSaP4NhbF5LFNZ0A2hOdi8gP/DomS8+9dO
+         LOtlncXxSgCWY/yVRwqKmITN6LDQQHN4lDTe2BEwVzeS2Bo5DqdyfggEHTGDOKhnxoDx
+         UWWqWoAaGdd0Hf+R50zigPdk255eeYJeETMTLpLprPojkA6nTPQhppqWkLirQ9mOECCu
+         JnNA3pumn8jQ+zzVk9jEQpA6aMwE58GROOErTICDOHsi8QdTug0tQuTRamAQPOpwhE3t
+         9YagHd8XqrwxN4bQN02sWW9uOU4i/zG/Yhv2qINbJzmYkJj9N/00IYn/RQrsgbng6wsn
+         jc7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Hp6j9E0komHwkQmjVaaJwGXlUmBw15qUD+2uycCxKRo=;
-        b=lWmjbLbtcbbxGsdl9GhC27MTosBekpPrlKM2Wsujhej/Dw2vWgz1EziYR7t8zMwKNN
-         mG9VRupgkFl64VdqHYk4ma9PDmG6SmCntzAXOvQwU/UTHT5DoATPvcj50Vllft7zBDyp
-         Jn7y3ifVZFpxN3YmbX9eyYxRTzHgVqN5mpT9vWS1X+6B0KwZEKZcXlA01atNO4+TCNbZ
-         QX/tlIQm0uPxQKQWmEowHRCtTUtqA1VPJh7DzLxClQMrHXj5unjHzNz0EQrulw38Cv87
-         d4DF84Fw5s1pADpC6cdElFvrwwZAz7DPebbXJyx3kAr5TT/cdJd8YYJfahglH6XmLkPJ
-         /s0g==
-X-Gm-Message-State: AOAM530JZ5pE9FyDPKd0PHQ9Dnx6V6VsQiTGhp5+avfKk7VoSok5EziA
-	bCfdukTidbKnFsy/K2jPDzc=
-X-Google-Smtp-Source: ABdhPJwgEkBcZJqTIki5Kg8REFF/cfX7eSZw1juY5Lx09Lc2VuiwHYjI+5INyzSwkKmlGUFfLJt8Rw==
-X-Received: by 2002:a17:906:4fd5:b0:6f8:5784:fddb with SMTP id i21-20020a1709064fd500b006f85784fddbmr5572529ejw.161.1652465409259;
-        Fri, 13 May 2022 11:10:09 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=B+mnGzoN8dF8kZBDeMa+h7r+FYrqSgMHMidhuCTWTwI=;
+        b=d/1hIXj9INurgaTtA63D9FAWRBSjyomDzTlMnrpvHRNHtEOVKzhn4cfe23M/TdRVdT
+         dGF/WIH/Gyi0m8MxsW49wbJ41cW2a/p6kSizEI58RabBf87WD+UYmdx5nvNYFVicD9Qf
+         QP6RvTQ2m4i9kh4pdsufZUopnHlA73sY6fh9Lz0XylRk8NLtTVk9vcedwEkX2P7eSRo8
+         YY3y7rBIoWfK2PLdxbkKbtccpr8IIJHwNeJ8AbU7cDGFQlwDRL5CMTwHpqkrf7pfqxH1
+         fXYPvZ9Yyxh65NvIvo0I6v3iGrjredXq8mobDh3WrfEylf1XmrDrhh6VmUrKBBSG3f5K
+         MkjQ==
+X-Gm-Message-State: AOAM530rXW0eCQ1/dqF+wkNzUA8jXxokMFQphP7msYW0mYggxe9/DgZ3
+	95vUlVppih/JW0Yiyjr00Bk=
+X-Google-Smtp-Source: ABdhPJxLNDiGt6mu8g/iIcRbxj5+FP6Ssv6g2I5vuL2XAJ6cqEhKgpSgehK74/8lZ6EnnQbrcXlRVA==
+X-Received: by 2002:a17:907:1b19:b0:6f0:1022:1430 with SMTP id mp25-20020a1709071b1900b006f010221430mr5361497ejc.13.1652465407328;
+        Fri, 13 May 2022 11:10:07 -0700 (PDT)
 From: Bernhard Beschow <shentey@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-trivial@nongnu.org,
@@ -82,50 +82,42 @@ Cc: qemu-trivial@nongnu.org,
 	anthony.perard@citrix.com,
 	paul@xen.org,
 	xen-devel@lists.xenproject.org,
-	Bernhard Beschow <shentey@gmail.com>,
-	John Snow <jsnow@redhat.com>,
-	qemu-block@nongnu.org (open list:IDE)
-Subject: [PATCH v2 2/3] hw/ide/piix: Add some documentation to pci_piix3_xen_ide_unplug()
-Date: Fri, 13 May 2022 20:09:56 +0200
-Message-Id: <20220513180957.90514-3-shentey@gmail.com>
+	Bernhard Beschow <shentey@gmail.com>
+Subject: [PATCH v2 0/3] PIIX3-IDE XEN cleanup
+Date: Fri, 13 May 2022 20:09:54 +0200
+Message-Id: <20220513180957.90514-1-shentey@gmail.com>
 X-Mailer: git-send-email 2.36.1
-In-Reply-To: <20220513180957.90514-1-shentey@gmail.com>
-References: <20220513180957.90514-1-shentey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The comment is based on commit message
-ae4d2eb273b167dad748ea4249720319240b1ac2 'xen-platform: add missing disk
-unplug option'. Since it seems to describe design decisions and
-limitations that still apply it seems worth having.
+v2:
+* Have pci_xen_ide_unplug() return void (Paul Durrant)
+* CC Xen maintainers (Michael S. Tsirkin)
 
-Signed-off-by: Bernhard Beschow <shentey@gmail.com>
----
- hw/ide/piix.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+v1:
+This patch series first removes the redundant "piix3-ide-xen" device class and
+then moves a XEN-specific helper function from PIIX3 code to XEN code. The idea
+is to decouple PIIX3-IDE and XEN and to compile XEN-specific bits only if XEN
+support is enabled.
 
-diff --git a/hw/ide/piix.c b/hw/ide/piix.c
-index 2345fe9e1d..bc1b37512a 100644
---- a/hw/ide/piix.c
-+++ b/hw/ide/piix.c
-@@ -173,6 +173,17 @@ static void pci_piix_ide_realize(PCIDevice *dev, Error **errp)
-     }
- }
- 
-+/*
-+ * The Xen HVM unplug protocol [1] specifies a mechanism to allow guests to
-+ * request unplug of 'aux' disks (which is stated to mean all IDE disks,
-+ * except the primary master).
-+ *
-+ * NOTE: The semantics of what happens if unplug of all disks and 'aux' disks
-+ *       is simultaneously requested is not clear. The implementation assumes
-+ *       that an 'all' request overrides an 'aux' request.
-+ *
-+ * [1] https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/misc/hvm-emulated-unplug.pandoc
-+ */
- int pci_piix3_xen_ide_unplug(DeviceState *dev, bool aux)
- {
-     PCIIDEState *pci_ide;
+Testing done:
+'qemu-system-x86_64 -M pc -m 1G -cdrom archlinux-2022.05.01-x86_64.iso" boots
+successfully and a 'poweroff' inside the VM also shuts it down correctly.
+
+XEN mode wasn't tested for the time being since its setup procedure seems quite
+sophisticated. Please let me know in case this is an obstacle.
+
+Bernhard Beschow (3):
+  hw/ide/piix: Remove redundant "piix3-ide-xen" device class
+  hw/ide/piix: Add some documentation to pci_piix3_xen_ide_unplug()
+  include/hw/ide: Unexport pci_piix3_xen_ide_unplug()
+
+ hw/i386/pc_piix.c          |  3 +--
+ hw/i386/xen/xen_platform.c | 48 +++++++++++++++++++++++++++++++++++++-
+ hw/ide/piix.c              | 42 ---------------------------------
+ include/hw/ide.h           |  3 ---
+ 4 files changed, 48 insertions(+), 48 deletions(-)
+
 -- 
 2.36.1
 
