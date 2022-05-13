@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69136C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB5EC433FE
 	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 18:10:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.328677.551759 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.328679.551783 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npZju-0005oT-Uk; Fri, 13 May 2022 18:10:10 +0000
+	id 1npZjw-0006MU-Mz; Fri, 13 May 2022 18:10:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 328677.551759; Fri, 13 May 2022 18:10:10 +0000
+Received: by outflank-mailman (output) from mailman id 328679.551783; Fri, 13 May 2022 18:10:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npZju-0005nz-RE; Fri, 13 May 2022 18:10:10 +0000
-Received: by outflank-mailman (input) for mailman id 328677;
- Fri, 13 May 2022 18:10:09 +0000
+	id 1npZjw-0006Kl-GP; Fri, 13 May 2022 18:10:12 +0000
+Received: by outflank-mailman (input) for mailman id 328679;
+ Fri, 13 May 2022 18:10:11 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eu56=VV=gmail.com=shentey@srs-se1.protection.inumbo.net>)
- id 1npZjt-0005kx-Su
- for xen-devel@lists.xenproject.org; Fri, 13 May 2022 18:10:09 +0000
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [2a00:1450:4864:20::631])
+ id 1npZjv-0005kx-Me
+ for xen-devel@lists.xenproject.org; Fri, 13 May 2022 18:10:11 +0000
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [2a00:1450:4864:20::632])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ec4ee4e2-d2e7-11ec-aa76-f101dd46aeb6;
- Fri, 13 May 2022 20:10:08 +0200 (CEST)
-Received: by mail-ej1-x631.google.com with SMTP id j6so17685722ejc.13
- for <xen-devel@lists.xenproject.org>; Fri, 13 May 2022 11:10:08 -0700 (PDT)
+ id ed969dc2-d2e7-11ec-aa76-f101dd46aeb6;
+ Fri, 13 May 2022 20:10:10 +0200 (CEST)
+Received: by mail-ej1-x632.google.com with SMTP id ks9so17763395ejb.2
+ for <xen-devel@lists.xenproject.org>; Fri, 13 May 2022 11:10:10 -0700 (PDT)
 Received: from Provence.localdomain
  (dynamic-089-014-181-123.89.14.pool.telefonica.de. [89.14.181.123])
  by smtp.gmail.com with ESMTPSA id
- e11-20020a170906648b00b006fa84a0af2asm1040008ejm.16.2022.05.13.11.10.07
+ e11-20020a170906648b00b006fa84a0af2asm1040008ejm.16.2022.05.13.11.10.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 May 2022 11:10:08 -0700 (PDT)
+ Fri, 13 May 2022 11:10:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,34 +47,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ec4ee4e2-d2e7-11ec-aa76-f101dd46aeb6
+X-Inumbo-ID: ed969dc2-d2e7-11ec-aa76-f101dd46aeb6
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=x/cQH/1Zw9GFUPtTbC8zhxsJeeQwE0nxDRipyyaTmMk=;
-        b=nJbHxWaET9J2XSZE+M5dxA8DbQG9coK769SMpj9GQeA6B5MYfqK0lpTZcTTjHsEoB2
-         YsduPUN8KjpCjR1DlXYGnacXqjJvn7IpxP4QJwwabsXwlB2JehTlehcQWwm8++WmkHfw
-         zMKKJEq7lkxDz9bynvEtBKYjR8DZFnZ0q1rIZLCNHjl5MEiaHmg2/Pua8eTz0e5i/K0s
-         O35/MwMsvzGnN1SNER3JYxYIq1A0gTWG/4Mf4U0UOVAfyKazUT1wcSm0RnH/KlFTIpPO
-         ezpSVliTQlXlbntvSNatMSPlv39fsevETfJV20FcGkLi7qNZ1UwkQcUejQEj+ufSI0cT
-         RTuA==
+        bh=CBXAkFrCGs28BI30AzYWmYh3sIrQDSjFAmvH5xdAdFk=;
+        b=Bgcy7jIh1t61wlZnBAq+JZld3nOesqYuWWAdJJQ0sl5bxUB9nsHbDiHngRu1OutYbW
+         OG4VHmgNSqmhme8qgcCXmbEvIbIkbJDxxYz0+LuY/SJhWJjQ3/CYEQ9XFbgPX1dsLuxf
+         XIGJ53kceKKUz2qVjgUC/cWmwF3HbLDV5msbnHnu8HPlavKmPUxicAXfXl2G0GqjwW32
+         mYHwZUV1bTyn8D8pLeBFHjF+NFVyzw1boC9HcP8y/EX8ZZ4I4r3zhkHORo6RIDVJjr/l
+         ESmOonSf3nBPpEBH/WkgN4DFFIGJVy2vYJJOgtj8wUkMscuLJRjrQ4/xw3nRhil/1CJL
+         xNKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=x/cQH/1Zw9GFUPtTbC8zhxsJeeQwE0nxDRipyyaTmMk=;
-        b=FTVttHFuUlvijRcgSuVuUeCt1nZAe9YhyxuQyNNIZv7CN3Bgq7ag/0ASzAqtz5IWbN
-         rkG6XVkQOAJRqyjwYvgBb1Z/JjG07qGtTDtRDLNsPt77fGLAXKgd/9IPHi/pn65BwNAq
-         gL9EmvLd/4r/W+e31UpLCxUT6hBVQa2UgbtuJIq065VhpwXCXNnFSGJlcRxDhq/O85Ir
-         UV6OdN1TnYAOwXlRhZ0+vsy9lc4Y6tofK7+tokmB3hXWu5+1BUCwsoz9kUQa8yXLqNCi
-         vW+p2l3RB1reGhKdAr1cCCXjENXHP36mcGpahvfHVMTnL/IL2sykWnN0+AQH26VqKDEN
-         C0UA==
-X-Gm-Message-State: AOAM531gVxEFe7t8Q6SKE6MyydRHOPROG8SylFeFOpby1k39DbXXjxiR
-	pdvF++Gwk1jsSZKvOJMx8k4=
-X-Google-Smtp-Source: ABdhPJzCkBRWOB3k5QAtg0VncyWPkLbOceUIGxvuo0vGktR8YMH06iLzsWamhF0MqDhovZ65RgZoVQ==
-X-Received: by 2002:a17:907:2064:b0:6f4:3f07:c76e with SMTP id qp4-20020a170907206400b006f43f07c76emr5383734ejb.462.1652465408332;
-        Fri, 13 May 2022 11:10:08 -0700 (PDT)
+        bh=CBXAkFrCGs28BI30AzYWmYh3sIrQDSjFAmvH5xdAdFk=;
+        b=BxpW4U0cJuvwGLVQgedT6caloKpfusMQgV0qSBCMjsYi5uGjg8x6WnZeVQUA31ID2j
+         X+t7kGPSenj4fQTykkKVjL6f7JCt3fF3Kaszr5ToudqfjLXN7+oF69FRfTr4VZLxBiuk
+         /nlp3+hSsm7NiluzD+JF/rfictZlc1EfOPxNYh2QoPtCBwYKIwqN98nHkekSI5q+ZQeD
+         QiH8JKx9dpLzrQYrp2Sbh96+EEHkkYgmjX1xllDWwMecYDrqCry3sB1XOdeNtWvmrjXz
+         xIE830UMbzMGTKS/e7JfTbC5xKypzg+kmskqff7o4mVeqkbdMabtm8RF+KwI68EtIgAY
+         HTVA==
+X-Gm-Message-State: AOAM530G4mfcCJWICuqfTrpse97scmoYudE1KVtiNVRtNEksrWZmc/iB
+	taiH2YgkiW4odyx+KojasNM=
+X-Google-Smtp-Source: ABdhPJzd1ozMHGZZFnRvVPDcf7J6MJFx90w5pAiPDrPJQobwuWQ40761pwClkT/3oeGExjerubnvSw==
+X-Received: by 2002:a17:907:97c4:b0:6f8:5ec5:61e2 with SMTP id js4-20020a17090797c400b006f85ec561e2mr5456098ejc.559.1652465410414;
+        Fri, 13 May 2022 11:10:10 -0700 (PDT)
 From: Bernhard Beschow <shentey@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-trivial@nongnu.org,
@@ -83,70 +83,182 @@ Cc: qemu-trivial@nongnu.org,
 	paul@xen.org,
 	xen-devel@lists.xenproject.org,
 	Bernhard Beschow <shentey@gmail.com>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
 	Paolo Bonzini <pbonzini@redhat.com>,
 	Richard Henderson <richard.henderson@linaro.org>,
 	Eduardo Habkost <eduardo@habkost.net>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
 	John Snow <jsnow@redhat.com>,
 	qemu-block@nongnu.org (open list:IDE)
-Subject: [PATCH v2 1/3] hw/ide/piix: Remove redundant "piix3-ide-xen" device class
-Date: Fri, 13 May 2022 20:09:55 +0200
-Message-Id: <20220513180957.90514-2-shentey@gmail.com>
+Subject: [PATCH v2 3/3] include/hw/ide: Unexport pci_piix3_xen_ide_unplug()
+Date: Fri, 13 May 2022 20:09:57 +0200
+Message-Id: <20220513180957.90514-4-shentey@gmail.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <20220513180957.90514-1-shentey@gmail.com>
 References: <20220513180957.90514-1-shentey@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit 0f8445820f11a69154309863960328dda3dc1ad4 'xen: piix reuse pci
-generic class init function' already resolved redundant code which in
-turn rendered piix3-ide-xen redundant.
+This function was declared in a generic and public header, implemented
+in a device-specific source file but only used in xen_platform. Given its
+'aux' parameter, this function is more xen-specific than piix-specific.
+Also, the hardcoded magic constants seem to be generic and related to
+PCIIDEState and IDEBus rather than piix.
+
+Therefore, move this function to xen_platform, unexport it, and drop the
+"piix3" in the function name as well.
 
 Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
 ---
- hw/i386/pc_piix.c | 3 +--
- hw/ide/piix.c     | 7 -------
- 2 files changed, 1 insertion(+), 9 deletions(-)
+ hw/i386/xen/xen_platform.c | 48 +++++++++++++++++++++++++++++++++++++-
+ hw/ide/piix.c              | 46 ------------------------------------
+ include/hw/ide.h           |  3 ---
+ 3 files changed, 47 insertions(+), 50 deletions(-)
 
-diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
-index f843dd906f..c2bf33d2f1 100644
---- a/hw/i386/pc_piix.c
-+++ b/hw/i386/pc_piix.c
-@@ -244,8 +244,7 @@ static void pc_init1(MachineState *machine,
-     if (pcmc->pci_enabled) {
-         PCIDevice *dev;
+diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
+index 72028449ba..a64265cca0 100644
+--- a/hw/i386/xen/xen_platform.c
++++ b/hw/i386/xen/xen_platform.c
+@@ -26,6 +26,7 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "hw/ide.h"
++#include "hw/ide/pci.h"
+ #include "hw/pci/pci.h"
+ #include "hw/xen/xen_common.h"
+ #include "migration/vmstate.h"
+@@ -134,6 +135,51 @@ static void pci_unplug_nics(PCIBus *bus)
+     pci_for_each_device(bus, 0, unplug_nic, NULL);
+ }
  
--        dev = pci_create_simple(pci_bus, piix3_devfn + 1,
--                                xen_enabled() ? "piix3-ide-xen" : "piix3-ide");
-+        dev = pci_create_simple(pci_bus, piix3_devfn + 1, "piix3-ide");
-         pci_ide_create_devs(dev);
-         idebus[0] = qdev_get_child_bus(&dev->qdev, "ide.0");
-         idebus[1] = qdev_get_child_bus(&dev->qdev, "ide.1");
++/*
++ * The Xen HVM unplug protocol [1] specifies a mechanism to allow guests to
++ * request unplug of 'aux' disks (which is stated to mean all IDE disks,
++ * except the primary master).
++ *
++ * NOTE: The semantics of what happens if unplug of all disks and 'aux' disks
++ *       is simultaneously requested is not clear. The implementation assumes
++ *       that an 'all' request overrides an 'aux' request.
++ *
++ * [1] https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/misc/hvm-emulated-unplug.pandoc
++ */
++static void pci_xen_ide_unplug(DeviceState *dev, bool aux)
++{
++    PCIIDEState *pci_ide;
++    int i;
++    IDEDevice *idedev;
++    IDEBus *idebus;
++    BlockBackend *blk;
++
++    pci_ide = PCI_IDE(dev);
++
++    for (i = aux ? 1 : 0; i < 4; i++) {
++        idebus = &pci_ide->bus[i / 2];
++        blk = idebus->ifs[i % 2].blk;
++
++        if (blk && idebus->ifs[i % 2].drive_kind != IDE_CD) {
++            if (!(i % 2)) {
++                idedev = idebus->master;
++            } else {
++                idedev = idebus->slave;
++            }
++
++            blk_drain(blk);
++            blk_flush(blk);
++
++            blk_detach_dev(blk, DEVICE(idedev));
++            idebus->ifs[i % 2].blk = NULL;
++            idedev->conf.blk = NULL;
++            monitor_remove_blk(blk);
++            blk_unref(blk);
++        }
++    }
++    qdev_reset_all(dev);
++}
++
+ static void unplug_disks(PCIBus *b, PCIDevice *d, void *opaque)
+ {
+     uint32_t flags = *(uint32_t *)opaque;
+@@ -147,7 +193,7 @@ static void unplug_disks(PCIBus *b, PCIDevice *d, void *opaque)
+ 
+     switch (pci_get_word(d->config + PCI_CLASS_DEVICE)) {
+     case PCI_CLASS_STORAGE_IDE:
+-        pci_piix3_xen_ide_unplug(DEVICE(d), aux);
++        pci_xen_ide_unplug(DEVICE(d), aux);
+         break;
+ 
+     case PCI_CLASS_STORAGE_SCSI:
 diff --git a/hw/ide/piix.c b/hw/ide/piix.c
-index ce89fd0aa3..2345fe9e1d 100644
+index bc1b37512a..9a9b28078e 100644
 --- a/hw/ide/piix.c
 +++ b/hw/ide/piix.c
-@@ -241,12 +241,6 @@ static const TypeInfo piix3_ide_info = {
-     .class_init    = piix3_ide_class_init,
- };
- 
--static const TypeInfo piix3_ide_xen_info = {
--    .name          = "piix3-ide-xen",
--    .parent        = TYPE_PCI_IDE,
--    .class_init    = piix3_ide_class_init,
--};
--
- /* NOTE: for the PIIX4, the IRQs and IOports are hardcoded */
- static void piix4_ide_class_init(ObjectClass *klass, void *data)
- {
-@@ -272,7 +266,6 @@ static const TypeInfo piix4_ide_info = {
- static void piix_ide_register_types(void)
- {
-     type_register_static(&piix3_ide_info);
--    type_register_static(&piix3_ide_xen_info);
-     type_register_static(&piix4_ide_info);
+@@ -173,52 +173,6 @@ static void pci_piix_ide_realize(PCIDevice *dev, Error **errp)
+     }
  }
+ 
+-/*
+- * The Xen HVM unplug protocol [1] specifies a mechanism to allow guests to
+- * request unplug of 'aux' disks (which is stated to mean all IDE disks,
+- * except the primary master).
+- *
+- * NOTE: The semantics of what happens if unplug of all disks and 'aux' disks
+- *       is simultaneously requested is not clear. The implementation assumes
+- *       that an 'all' request overrides an 'aux' request.
+- *
+- * [1] https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/misc/hvm-emulated-unplug.pandoc
+- */
+-int pci_piix3_xen_ide_unplug(DeviceState *dev, bool aux)
+-{
+-    PCIIDEState *pci_ide;
+-    int i;
+-    IDEDevice *idedev;
+-    IDEBus *idebus;
+-    BlockBackend *blk;
+-
+-    pci_ide = PCI_IDE(dev);
+-
+-    for (i = aux ? 1 : 0; i < 4; i++) {
+-        idebus = &pci_ide->bus[i / 2];
+-        blk = idebus->ifs[i % 2].blk;
+-
+-        if (blk && idebus->ifs[i % 2].drive_kind != IDE_CD) {
+-            if (!(i % 2)) {
+-                idedev = idebus->master;
+-            } else {
+-                idedev = idebus->slave;
+-            }
+-
+-            blk_drain(blk);
+-            blk_flush(blk);
+-
+-            blk_detach_dev(blk, DEVICE(idedev));
+-            idebus->ifs[i % 2].blk = NULL;
+-            idedev->conf.blk = NULL;
+-            monitor_remove_blk(blk);
+-            blk_unref(blk);
+-        }
+-    }
+-    qdev_reset_all(dev);
+-    return 0;
+-}
+-
+ static void pci_piix_ide_exitfn(PCIDevice *dev)
+ {
+     PCIIDEState *d = PCI_IDE(dev);
+diff --git a/include/hw/ide.h b/include/hw/ide.h
+index c5ce5da4f4..60f1f4f714 100644
+--- a/include/hw/ide.h
++++ b/include/hw/ide.h
+@@ -8,9 +8,6 @@
+ ISADevice *isa_ide_init(ISABus *bus, int iobase, int iobase2, int isairq,
+                         DriveInfo *hd0, DriveInfo *hd1);
+ 
+-/* ide-pci.c */
+-int pci_piix3_xen_ide_unplug(DeviceState *dev, bool aux);
+-
+ /* ide-mmio.c */
+ void mmio_ide_init_drives(DeviceState *dev, DriveInfo *hd0, DriveInfo *hd1);
  
 -- 
 2.36.1
