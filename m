@@ -4,29 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FF1C433F5
-	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 13:44:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.328479.551499 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F96C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 13 May 2022 14:26:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.328488.551510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npVaJ-0000dW-GI; Fri, 13 May 2022 13:43:59 +0000
+	id 1npWFR-0004sp-RM; Fri, 13 May 2022 14:26:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 328479.551499; Fri, 13 May 2022 13:43:59 +0000
+Received: by outflank-mailman (output) from mailman id 328488.551510; Fri, 13 May 2022 14:26:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1npVaJ-0000dP-Co; Fri, 13 May 2022 13:43:59 +0000
-Received: by outflank-mailman (input) for mailman id 328479;
- Fri, 13 May 2022 13:43:57 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1npWFR-0004si-Og; Fri, 13 May 2022 14:26:29 +0000
+Received: by outflank-mailman (input) for mailman id 328488;
+ Fri, 13 May 2022 14:26:29 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9K7m=VV=citrix.com=prvs=125a2c5b7=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1npVaH-0000dJ-O9
- for xen-devel@lists.xenproject.org; Fri, 13 May 2022 13:43:57 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id bb11cea7-d2c2-11ec-aa76-f101dd46aeb6;
- Fri, 13 May 2022 15:43:56 +0200 (CEST)
+ <SRS0=oDqO=VV=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
+ id 1npWFQ-0004sc-UP
+ for xen-devel@lists.xenproject.org; Fri, 13 May 2022 14:26:28 +0000
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [2604:1380:4641:c500::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id abf708a6-d2c8-11ec-b8b8-f95467ff1ed0;
+ Fri, 13 May 2022 16:26:27 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id B51AE62154;
+ Fri, 13 May 2022 14:26:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E49D0C34115;
+ Fri, 13 May 2022 14:26:24 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,77 +46,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bb11cea7-d2c2-11ec-aa76-f101dd46aeb6
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1652449435;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=rQC07PpQMF9xJzVeoTFgYv9nHEd76NhVdm5OojvYYRk=;
-  b=EJ2ALCsbPOjScQKSds/p96WEsKlwNiVdXQyhh4Oi1DEvfmpg6s0tSmSS
-   q9BBHClsHL0JQRz4vMjBJvm9YLkZA2/oyslicfEKQRnHTC7c2BEcFMIt3
-   eqln/bjuRnaEfJhjs+Je2aRzCDmJEmI+xkyPfv+jlMJFp767tHvGAFDRO
-   g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 5.1
-X-MesageID: 70639408
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:5Hueh6z6LqTcGtcI0sx6t+dRxirEfRIJ4+MujC+fZmUNrF6WrkUGz
- jAWDW2AO6uKN2P1Loh3bd+y80pTvZeEnNE3S1Y6+yAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGX5JZS5LwbZj2NY12IPhWWthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- Nplj5jgFRY4Mob3ns8DDiVRCCtDDadk9+qSSZS/mZT7I0zudnLtx7NlDV0sPJ1e8eFyaY1M3
- aVGcnZXNEnF3r/ohuLgIgVvrp1LwM3DNYUDunZm3HfBAOwvW5zrSKTW/95Imjw3g6iiGN6BP
- 5RCOGY3PHwsZTUQBUgaJJM/gt7z2FTYaTh7t1aLqfootj27IAtZj+G2bYu9lsaxbcRKnG6Iq
- 2Te5WP7DxoGctuFxlKt4n+qw+PCgy7/cIYTD6GjsO5nhkWJwW4eAwFQUkG0ycRVkWbnBYgZc
- RZNvHNz8+5iryRHU+URQTWCpC7Yrw8QcOFWOPNn1AiWwJfk6SSWUz1soiF6VPQqs8o/RDoP3
- 1CPns/0CTEHjIB5WU5x5Z/P82rsZHF9wXsqIHZdEFBbu4WLTJQb1Eqnczp1LEKiYjQZ8xnUy
- ivCkiUxjq57YSUjh/TipgCvb95BS/H0ou8JCuf/AzrNAuBRPtfNi2mUBb/zt64oEWphZgPd1
- EXoYuDHhAz0MbmDlTaWXMIGF6yz6vCOPVX02AAyRcJxr2jyoyb5Jei8BQ2Sw28zaK45lcLBO
- heP6Wu9GrcNVJdVUUOHS93oUJl7pUQRPd/kSurVfrJzjmtZL2e6ENVVTRfIhQjFyRF0+YlmY
- MfzWZv9Vh4yVPU4pAdass9AiNfHMAhlnTONLX06pjz6uYejiIm9E+laagfeNbBphE5GyS2Mm
- +ti2wKx4003eIXDjuP/qub/8XhiwaAHOK3L
-IronPort-HdrOrdr: A9a23:k38+baGgrS5znY7kpLqE6MeALOsnbusQ8zAXP0AYc3Jom+ij5q
- STdZUgpHrJYVkqNU3I9ertBEDEewK6yXcX2/hyAV7BZmnbUQKTRekIh7cKgQeQeBEWntQts5
- uIGJIeNDSfNzdHsfo=
-X-IronPort-AV: E=Sophos;i="5.91,223,1647316800"; 
-   d="scan'208";a="70639408"
-Date: Fri, 13 May 2022 14:43:38 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Roger Pau Monne <roger.pau@citrix.com>, Ian Jackson <iwj@xenproject.org>
-Subject: Re: [OSSTEST PATCH] ts-xen-build-prep: Grab newer NASM version, to
- build OVMF
-Message-ID: <Yn5git1z9Xfz5HwM@perard.uk.xensource.com>
-References: <20220513133534.88564-1-anthony.perard@citrix.com>
+X-Inumbo-ID: abf708a6-d2c8-11ec-b8b8-f95467ff1ed0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1652451985;
+	bh=LAW3oRY7WSoDZ6V/paLZpl/L6DCV49O7Hv7830ybxPM=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=GXyDhOiiJRccrS99PCIsAaKHP9Sfl/W3GtF8OHGZsFeNJgYw2vkdj9lmReCuZSkNW
+	 25YoqfN66gr42evUIl7QNmeNuCH8IypHBLMZpk/+Qzxuxtc4VAsZSMj+3y3daylWvL
+	 POShwnNedeIhzgznHSIRDIqrnyaAvDkMlZKy4y9k=
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: linux-kernel@vger.kernel.org
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	stable@vger.kernel.org,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	"Peter Zijlstra (Intel)" <peterz@infradead.org>,
+	Juergen Gross <jgross@suse.com>,
+	x86@kernel.org,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Ingo Molnar <mingo@kernel.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Borislav Petkov <bp@alien8.de>,
+	xen-devel@lists.xenproject.org,
+	Randy Dunlap <rdunlap@infradead.org>,
+	Josh Poimboeuf <jpoimboe@redhat.com>,
+	Maximilian Heyne <mheyne@amazon.de>
+Subject: [PATCH 5.4 10/18] x86/asm: Allow to pass macros to __ASM_FORM()
+Date: Fri, 13 May 2022 16:23:36 +0200
+Message-Id: <20220513142229.456082257@linuxfoundation.org>
+X-Mailer: git-send-email 2.36.1
+In-Reply-To: <20220513142229.153291230@linuxfoundation.org>
+References: <20220513142229.153291230@linuxfoundation.org>
+User-Agent: quilt/0.66
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20220513133534.88564-1-anthony.perard@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, May 13, 2022 at 02:35:34PM +0100, Anthony PERARD wrote:
-> Recent versions of OVMF now need a version of NASM that is newer
-> than the one available on Debian oldstable/buster. They want to use
-> NASM 2.15.05 [1], which is available in Debian stable/bullseye. The
-> need to use a newer version started with d3febfd9ade3 ("MdePkg:
-> Replace Opcode with the corresponding instructions.").
-> 
-> There is no backport package available but the nasm package from
-> Debian Bullseye can easily be installed on Buster as it has few
-> dependencies and are already satisfied.
-> 
-> [1] https://github.com/tianocore/edk2/commit/6a890db161cd6d378bec3499a1e774db3f5a27a7
->     ("BaseTools: Upgrade the version of NASM tool")
-> 
-> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+From: Masami Hiramatsu <mhiramat@kernel.org>
 
-A flight with my change:
-http://logs.test-lab.xenproject.org/osstest/logs/170388/
-(ignore the failing "libvirt-build" jobs which shouldn't be part
-of the flight ;-) )
+commit f7919fd943abf0c77aed4441ea9897a323d132f5 upstream.
 
--- 
-Anthony PERARD
+Use __stringify() at __ASM_FORM() so that user can pass
+code including macros to __ASM_FORM().
+
+Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
+Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Cc: Juergen Gross <jgross@suse.com>
+Cc: x86@kernel.org
+Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Ingo Molnar <mingo@kernel.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: xen-devel@lists.xenproject.org
+Cc: Randy Dunlap <rdunlap@infradead.org>
+Cc: Josh Poimboeuf <jpoimboe@redhat.com>
+Link: https://lkml.kernel.org/r/156777562873.25081.2288083344657460959.stgit@devnote2
+Signed-off-by: Maximilian Heyne <mheyne@amazon.de>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+ arch/x86/include/asm/asm.h |    8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+--- a/arch/x86/include/asm/asm.h
++++ b/arch/x86/include/asm/asm.h
+@@ -7,9 +7,11 @@
+ # define __ASM_FORM_RAW(x)     x
+ # define __ASM_FORM_COMMA(x) x,
+ #else
+-# define __ASM_FORM(x)	" " #x " "
+-# define __ASM_FORM_RAW(x)     #x
+-# define __ASM_FORM_COMMA(x) " " #x ","
++#include <linux/stringify.h>
++
++# define __ASM_FORM(x)	" " __stringify(x) " "
++# define __ASM_FORM_RAW(x)     __stringify(x)
++# define __ASM_FORM_COMMA(x) " " __stringify(x) ","
+ #endif
+ 
+ #ifndef __x86_64__
+
+
 
