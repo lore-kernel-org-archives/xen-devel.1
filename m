@@ -4,46 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72CADC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 17 May 2022 16:32:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.331261.554746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62EF3C433F5
+	for <xen-devel@archiver.kernel.org>; Tue, 17 May 2022 16:40:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.331272.554757 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nr073-0005WM-T8; Tue, 17 May 2022 16:31:57 +0000
+	id 1nr0Ei-0006IW-Ny; Tue, 17 May 2022 16:39:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 331261.554746; Tue, 17 May 2022 16:31:57 +0000
+Received: by outflank-mailman (output) from mailman id 331272.554757; Tue, 17 May 2022 16:39:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nr073-0005WF-Pf; Tue, 17 May 2022 16:31:57 +0000
-Received: by outflank-mailman (input) for mailman id 331261;
- Tue, 17 May 2022 16:31:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nr0Ei-0006IP-KW; Tue, 17 May 2022 16:39:52 +0000
+Received: by outflank-mailman (input) for mailman id 331272;
+ Tue, 17 May 2022 16:39:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mBie=VZ=amazon.de=prvs=129122aa7=mheyne@srs-se1.protection.inumbo.net>)
- id 1nr071-0005Ee-Tp
- for xen-devel@lists.xenproject.org; Tue, 17 May 2022 16:31:56 +0000
-Received: from smtp-fw-80007.amazon.com (smtp-fw-80007.amazon.com
- [99.78.197.218]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dbe3f5b8-d5fe-11ec-837e-e5687231ffcc;
- Tue, 17 May 2022 18:31:54 +0200 (CEST)
-Received: from pdx4-co-svc-p1-lb2-vlan2.amazon.com (HELO
- email-inbound-relay-pdx-2b-718d0906.us-west-2.amazon.com) ([10.25.36.210])
- by smtp-border-fw-80007.pdx80.corp.amazon.com with ESMTP;
- 17 May 2022 16:24:43 +0000
-Received: from EX13D08EUC002.ant.amazon.com
- (pdx1-ws-svc-p6-lb9-vlan2.pdx.amazon.com [10.236.137.194])
- by email-inbound-relay-pdx-2b-718d0906.us-west-2.amazon.com (Postfix) with
- ESMTPS id 2584E3E00E4; Tue, 17 May 2022 16:24:43 +0000 (UTC)
-Received: from EX13MTAUEA002.ant.amazon.com (10.43.61.77) by
- EX13D08EUC002.ant.amazon.com (10.43.164.124) with Microsoft SMTP Server (TLS)
- id 15.0.1497.32; Tue, 17 May 2022 16:24:41 +0000
-Received: from dev-dsk-mheyne-1b-c1524648.eu-west-1.amazon.com (10.15.60.66)
- by mail-relay.amazon.com (10.43.61.169) with Microsoft SMTP Server id
- 15.0.1497.32 via Frontend Transport; Tue, 17 May 2022 16:24:40 +0000
-Received: by dev-dsk-mheyne-1b-c1524648.eu-west-1.amazon.com (Postfix,
- from userid 5466572)
- id DC06A41146; Tue, 17 May 2022 16:24:40 +0000 (UTC)
+ <SRS0=Ghfa=VZ=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
+ id 1nr0Eg-0006IJ-Ln
+ for xen-devel@lists.xenproject.org; Tue, 17 May 2022 16:39:51 +0000
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f5f5b521-d5ff-11ec-bd2c-47488cf2e6aa;
+ Tue, 17 May 2022 18:39:46 +0200 (CEST)
+Received: from 200-161-159-120.dsl.telesp.net.br ([200.161.159.120]
+ helo=[192.168.1.60]) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1nr0Da-008gju-GJ; Tue, 17 May 2022 18:38:42 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,89 +40,153 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
+Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dbe3f5b8-d5fe-11ec-837e-e5687231ffcc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
-  t=1652805114; x=1684341114;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=IteN9ICL3vHHQMXeE78rzjKCW/+s+R1bzkPHD4BhrHE=;
-  b=r0j9UaflDNMhTAhfz6UReLXYA9FR/Ts003RsaUOrJ2fyLmzyuyWkd54Y
-   Ql2+hqQ5CxaLBZnXsja/J4mAk6bhRHYcvJLoirb6IO+tWYB8GosO6ZkLe
-   wPR176wVQ77zwodsmaqyD4lZdK+iEOgUW58orEZ6O8xfycAQieUC88CqY
-   k=;
-X-IronPort-AV: E=Sophos;i="5.91,233,1647302400"; 
-   d="scan'208";a="89313648"
-From: Maximilian Heyne <mheyne@amazon.de>
-To: 
-CC: Maximilian Heyne <mheyne@amazon.de>, Josh Poimboeuf <jpoimboe@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross
-	<jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Thomas
- Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>, Borislav
- Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
-	<x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
-	<xen-devel@lists.xenproject.org>, <linux-kernel@vger.kernel.org>
-Subject: [PATCH] x86: xen: remove STACK_FRAME_NON_STANDARD from xen_cpuid
-Date: Tue, 17 May 2022 16:24:25 +0000
-Message-ID: <20220517162425.100567-1-mheyne@amazon.de>
-X-Mailer: git-send-email 2.32.0
+X-Inumbo-ID: f5f5b521-d5ff-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=nkckcEBnQlRsFTpASqSz6WprnZRaV0YhYSvPtBA0AVg=; b=GXitEwhCwUT4w9+D5pmH2zeSKa
+	60OoBts2cxKaTjkNlztKOiPg7JmJSxA8Nf6Mc3GM9eoyPx0kgrCnR1AZ6EjsP0NE4+IxyqcasC5FH
+	Bzs6mPDD2Ojz26SlVHGGSFKa4MS4PaKNy9b4ykBdp04iHw75Gq64zjSE08zAzR/RUXjez/E1PIcPr
+	w9iTODel9NpjUtjDaWlc8Esr0zkZKONhALq9dFCmuDS5Nj18Wn3hMj4H1VTlzFy6uMc+YdCA3ReKq
+	k/CxfFfQpOp3w1u8K+s1/QjiYVlCZZRZYeOFoWStjActxBApHl98rSBUYLtUajOsHPvmBlqZChf2A
+	VEU39bjw==;
+Message-ID: <b9ec2fc8-216f-f261-8417-77b6dd95e25c@igalia.com>
+Date: Tue, 17 May 2022 13:37:58 -0300
 MIME-Version: 1.0
-Precedence: Bulk
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Subject: Re: [PATCH 19/30] panic: Add the panic hypervisor notifier list
+Content-Language: en-US
+To: Petr Mladek <pmladek@suse.com>, Evan Green <evgreen@chromium.org>,
+ David Gow <davidgow@google.com>, Julius Werner <jwerner@chromium.org>
+Cc: Scott Branden <scott.branden@broadcom.com>,
+ bcm-kernel-feedback-list@broadcom.com, Sebastian Reichel <sre@kernel.org>,
+ Linux PM <linux-pm@vger.kernel.org>, Florian Fainelli
+ <f.fainelli@gmail.com>, Andrew Morton <akpm@linux-foundation.org>,
+ bhe@redhat.com, kexec@lists.infradead.org,
+ LKML <linux-kernel@vger.kernel.org>, linuxppc-dev@lists.ozlabs.org,
+ linux-alpha@vger.kernel.org,
+ linux-arm Mailing List <linux-arm-kernel@lists.infradead.org>,
+ linux-edac@vger.kernel.org, linux-hyperv@vger.kernel.org,
+ linux-leds@vger.kernel.org, linux-mips@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+ linux-s390@vger.kernel.org, linux-tegra@vger.kernel.org,
+ linux-um@lists.infradead.org, linux-xtensa@linux-xtensa.org,
+ netdev@vger.kernel.org, openipmi-developer@lists.sourceforge.net,
+ rcu@vger.kernel.org, sparclinux@vger.kernel.org,
+ xen-devel@lists.xenproject.org, x86@kernel.org, kernel-dev@igalia.com,
+ kernel@gpiccoli.net, halves@canonical.com, fabiomirmar@gmail.com,
+ alejandro.j.jimenez@oracle.com,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Arnd Bergmann <arnd@arndb.de>, Borislav Petkov <bp@alien8.de>,
+ Jonathan Corbet <corbet@lwn.net>, d.hatayama@jp.fujitsu.com,
+ dave.hansen@linux.intel.com, dyoung@redhat.com, feng.tang@intel.com,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, mikelley@microsoft.com,
+ hidehiro.kawai.ez@hitachi.com, jgross@suse.com, john.ogness@linutronix.de,
+ Kees Cook <keescook@chromium.org>, luto@kernel.org, mhiramat@kernel.org,
+ mingo@redhat.com, paulmck@kernel.org, peterz@infradead.org,
+ rostedt@goodmis.org, senozhatsky@chromium.org,
+ Alan Stern <stern@rowland.harvard.edu>, Thomas Gleixner
+ <tglx@linutronix.de>, vgoyal@redhat.com, vkuznets@redhat.com,
+ Will Deacon <will@kernel.org>, Alexander Gordeev <agordeev@linux.ibm.com>,
+ Andrea Parri <parri.andrea@gmail.com>, Ard Biesheuvel <ardb@kernel.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Brian Norris <computersforpeace@gmail.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ "David S. Miller" <davem@davemloft.net>, Dexuan Cui <decui@microsoft.com>,
+ Doug Berger <opendmb@gmail.com>, Haiyang Zhang <haiyangz@microsoft.com>,
+ Hari Bathini <hbathini@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
+ Justin Chen <justinpopo6@gmail.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Lee Jones <lee.jones@linaro.org>, Markus Mayer <mmayer@broadcom.com>,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Mihai Carabas <mihai.carabas@oracle.com>, Nicholas Piggin
+ <npiggin@gmail.com>, Paul Mackerras <paulus@samba.org>,
+ Pavel Machek <pavel@ucw.cz>, Shile Zhang <shile.zhang@linux.alibaba.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Sven Schnelle <svens@linux.ibm.com>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Tianyu Lan <Tianyu.Lan@microsoft.com>, Vasily Gorbik <gor@linux.ibm.com>,
+ Wang ShaoBo <bobo.shaobowang@huawei.com>, Wei Liu <wei.liu@kernel.org>,
+ zhenwei pi <pizhenwei@bytedance.com>, Stephen Boyd <swboyd@chromium.org>
+References: <20220427224924.592546-1-gpiccoli@igalia.com>
+ <20220427224924.592546-20-gpiccoli@igalia.com> <YoJZVZl/MH0KiE/J@alley>
+ <ad082ce7-db50-13bb-3dbb-9b595dfa78be@igalia.com>
+ <CAE=gft7ds+dHfEkRz8rnSH1EbTpGTpKbi5Wxj9DW0Jr5mX_j4w@mail.gmail.com>
+ <YoOi9PFK/JnNwH+D@alley>
+From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+In-Reply-To: <YoOi9PFK/JnNwH+D@alley>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Since commit 4d65adfcd119 ("x86: xen: insn: Decode Xen and KVM
-emulate-prefix signature"), objtool is able to correctly parse the
-prefixed instruction in xen_cpuid and emit correct orc unwind
-information. Hence, marking the function as STACKFRAME_NON_STANDARD is
-no longer needed.
+On 17/05/2022 10:28, Petr Mladek wrote:
+> [...]
+>>> Disagree here. I'm looping Google maintainers, so they can comment.
+>>> (CCed Evan, David, Julius)
+>>>
+>>> This notifier is clearly a hypervisor notification mechanism. I've fixed
+>>> a locking stuff there (in previous patch), I feel it's low-risk but even
+>>> if it's mid-risk, the class of such callback remains a perfect fit with
+>>> the hypervisor list IMHO.
+>>
+>> This logs a panic to our "eventlog", a tiny logging area in SPI flash
+>> for critical and power-related events. In some cases this ends up
+>> being the only clue we get in a Chromebook feedback report that a
+>> panic occurred, so from my perspective moving it to the front of the
+>> line seems like a good idea.
+> 
+> IMHO, this would really better fit into the pre-reboot notifier list:
+> 
+>    + the callback stores the log so it is similar to kmsg_dump()
+>      or console_flush_on_panic()
+> 
+>    + the callback should be proceed after "info" notifiers
+>      that might add some other useful information.
+> 
+> Honestly, I am not sure what exactly hypervisor callbacks do. But I
+> think that they do not try to extract the kernel log because they
+> would need to handle the internal format.
+> 
 
-This commit is basically a revert of commit 983bb6d254c7 ("x86/xen: Mark
-xen_cpuid() stack frame as non-standard").
+I guess the main point in your response is : "I am not sure what exactly
+hypervisor callbacks do". We need to be sure about the semantics of such
+list, and agree on that.
 
-Signed-off-by: Maximilian Heyne <mheyne@amazon.de>
-CC: Josh Poimboeuf <jpoimboe@kernel.org>
+So, my opinion about this first list, that we call "hypervisor list",
+is: it contains callbacks that
 
-cr: https://code.amazon.com/reviews/CR-69645080
----
- arch/x86/xen/enlighten_pv.c | 2 --
- 1 file changed, 2 deletions(-)
+(1) should run early, preferably before kdump (or even if kdump isn't
+set, should run ASAP);
 
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 5038edb79ad5..ca85d1409917 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -30,7 +30,6 @@
- #include <linux/pci.h>
- #include <linux/gfp.h>
- #include <linux/edd.h>
--#include <linux/objtool.h>
- 
- #include <xen/xen.h>
- #include <xen/events.h>
-@@ -165,7 +164,6 @@ static void xen_cpuid(unsigned int *ax, unsigned int *bx,
- 
- 	*bx &= maskebx;
- }
--STACK_FRAME_NON_STANDARD(xen_cpuid); /* XEN_EMULATE_PREFIX */
- 
- static bool __init xen_check_mwait(void)
- {
--- 
-2.32.0
+(2) these callbacks perform some communication with an abstraction that
+runs "below" the kernel, like a firmware or hypervisor. Classic example:
+pvpanic, that communicates with VMM (usually qemu) and allow such VMM to
+snapshot the full guest memory, for example.
 
+(3) Should be low-risk. What defines risk is the level of reliability of
+subsequent operations - if the callback have 50% of chance of "bricking"
+the system totally and prevent kdump / kmsg_dump() / reboot , this is
+high risk one for example.
 
+Some good fits IMO: pvpanic, sstate_panic_event() [sparc], fadump in
+powerpc, etc.
+
+So, this is a good case for the Google notifier as well - it's not
+collecting data like the dmesg (hence your second bullet seems to not
+apply here, info notifiers won't add info to be collected by gsmi). It
+is a firmware/hypervisor/whatever-gsmi-is notification mechanism, that
+tells such "lower" abstraction a panic occurred. It seems low risk and
+we want it to run ASAP, if possible.
+
+So, I'd like to keep it here, unless gsmi maintainers disagree or I'm
+perhaps misunderstanding the meaning of this first list.
+Cheers,
 
 
-Amazon Development Center Germany GmbH
-Krausenstr. 38
-10117 Berlin
-Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-Sitz: Berlin
-Ust-ID: DE 289 237 879
-
-
-
+Guilherme
 
