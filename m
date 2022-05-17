@@ -4,37 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C6D9C433FE
-	for <xen-devel@archiver.kernel.org>; Tue, 17 May 2022 18:04:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.331381.554881 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D38FC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 17 May 2022 18:14:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.331406.554915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nr1Ye-0004RW-Ui; Tue, 17 May 2022 18:04:32 +0000
+	id 1nr1hh-0007Be-KK; Tue, 17 May 2022 18:13:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 331381.554881; Tue, 17 May 2022 18:04:32 +0000
+Received: by outflank-mailman (output) from mailman id 331406.554915; Tue, 17 May 2022 18:13:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nr1Ye-0004RP-Ri; Tue, 17 May 2022 18:04:32 +0000
-Received: by outflank-mailman (input) for mailman id 331381;
- Tue, 17 May 2022 18:04:32 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nr1hh-0007BX-Ge; Tue, 17 May 2022 18:13:53 +0000
+Received: by outflank-mailman (input) for mailman id 331406;
+ Tue, 17 May 2022 18:13:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=KpkB=VZ=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1nr1Ye-0004RH-0W
- for xen-devel@lists.xenproject.org; Tue, 17 May 2022 18:04:32 +0000
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [2a00:1450:4864:20::32d])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ccb2a982-d60b-11ec-837e-e5687231ffcc;
- Tue, 17 May 2022 20:04:31 +0200 (CEST)
-Received: by mail-wm1-x32d.google.com with SMTP id k126so10879291wme.2
- for <xen-devel@lists.xenproject.org>; Tue, 17 May 2022 11:04:31 -0700 (PDT)
-Received: from otyshchenko.router ([212.22.223.21])
- by smtp.gmail.com with ESMTPSA id
- c3-20020adfc6c3000000b0020c5253d8dasm12978625wrh.38.2022.05.17.11.04.29
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 17 May 2022 11:04:29 -0700 (PDT)
+ <SRS0=Ghfa=VZ=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
+ id 1nr1hf-0007BO-8g
+ for xen-devel@lists.xenproject.org; Tue, 17 May 2022 18:13:51 +0000
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 17ff14da-d60d-11ec-bd2c-47488cf2e6aa;
+ Tue, 17 May 2022 20:13:47 +0200 (CEST)
+Received: from 200-161-159-120.dsl.telesp.net.br ([200.161.159.120]
+ helo=[192.168.1.60]) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1nr1gv-008nSU-6m; Tue, 17 May 2022 20:13:05 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,93 +42,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ccb2a982-d60b-11ec-837e-e5687231ffcc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id;
-        bh=EKSmnvJVRKuNiorxmh6RKpW9+C+oBWZuirhwngUpiFA=;
-        b=d8XJLJsZpEXABv6ZORuvVlkZV/eZ0n5QWvVfV1Il8MFmUInxoYkMl3Kmq2wMRGnu/Y
-         tGbJqIujPWUGCNgZ/tqGy1+5cJlA7oXSk+0oDV1jG1oZ7o9gkyVG9ATGIB0RjMTRhhL3
-         OB76y7+GsffV/CyOU75jAwBwYjMFeWYOacizhtdmid6sisM4pzfceqYcyTq1aNYQkZ42
-         XcUOTZerZ4FvdaSvcQx0+uErEOW1VaA0Js5mUP10jFw0gcH5pu2DuTZ4HlBZo/OWP7lq
-         bUhyWznZSNRpzW/t/T6xXZf95iBXy/9wwFuCzKZcv/KtEhRZzwvHKypq/MhU7fck63m3
-         Gdxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=EKSmnvJVRKuNiorxmh6RKpW9+C+oBWZuirhwngUpiFA=;
-        b=SYrOVzX9fR3vDBYJYFNh4uaDJracxOckABfwEmrgaQCBkbqigQxVor027PlY8DCfoO
-         3h/nk6IAgttXiOfujdesLCH79C39xijsMbSNBY2WyB7j8DUwU5qLL5CHQSxXr7OVL9GO
-         wPDo8IV0J2iCXlBqvhBzejECmbwCtxeCmmVPEtJCKnkuOFsROZSjizHUpFrba2mz3Lmn
-         17JUKblGMDG7LzwPVjnKDClmrq9ywWybUB17tp4lYY3AO5JUijFMu9IV0lqhWdseRH6L
-         lIjW7nUh4w6Wr6p+8E/u7KMio6GDWN12btE8qpq3jpzDP0ulR6ivcSfBZOM9r4PX0J5K
-         w/cw==
-X-Gm-Message-State: AOAM532o25i5m5otmyl5iSbkrZCwLiAb9Foo5Vf9+al7GwvT4KpZT7SO
-	Ep/xw7wUtEi3alW2cPsV72G4yc4f9qQ=
-X-Google-Smtp-Source: ABdhPJxvO8aJltdNydOcbp7B8L4owevPlqnxSW+KqTPFcqROlQBAyvV0Gb48z5sSt/DmKwKj8j4PqQ==
-X-Received: by 2002:a05:600c:3caa:b0:394:8fb8:716 with SMTP id bg42-20020a05600c3caa00b003948fb80716mr32758904wmb.105.1652810670151;
-        Tue, 17 May 2022 11:04:30 -0700 (PDT)
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-To: xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Juergen Gross <jgross@suse.com>,
-	Julien Grall <julien@xen.org>
-Subject: [RFC PATCH 0/2] Ability to allocate DMAable pages using unpopulated-alloc 
-Date: Tue, 17 May 2022 21:04:16 +0300
-Message-Id: <1652810658-27810-1-git-send-email-olekstysh@gmail.com>
-X-Mailer: git-send-email 2.7.4
+X-Inumbo-ID: 17ff14da-d60d-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=6MSK1Z4Nv/e1GFKFinCP8P3dIYao0CoLyUe3quXpDhY=; b=cRMrVSVTR+3cn6FVG65SC4Au0y
+	UkLE3SVfqGk36g/jG1E9IomGRvED5Awi+eOSCTntuGE0jPXl5+kfHlbKsvhvVjaCNf8y4mBWXGPlT
+	8r/o/CMKhbUaIdrKhLkt446cgXa07HTSiorku/w0xJvIn3aE4uqi2qj8QGi7eb4Kmsg0/Wh5BR8Vi
+	YCGb8f9djqv6fWXVwjRpFQtg+9b6W6H4TQisr9ZwQKSIB4SsmfEWL196/jrcNQFL2lm66S4LfYE8s
+	uZ+fz2jSIIuBy2Np//l8BP/gbXHu+JyZVeJsb8IAXoZSlvi3RYMR9sSIMXj8sSzR7kYxeP4KKKokk
+	nGGtp5Zg==;
+Message-ID: <62a63fc2-346f-f375-043a-fa21385279df@igalia.com>
+Date: Tue, 17 May 2022 15:12:25 -0300
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Subject: Re: [PATCH 21/30] panic: Introduce the panic pre-reboot notifier list
+Content-Language: en-US
+To: "Luck, Tony" <tony.luck@intel.com>, Petr Mladek <pmladek@suse.com>,
+ Dinh Nguyen <dinguyen@kernel.org>
+Cc: "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+ "bhe@redhat.com" <bhe@redhat.com>,
+ "kexec@lists.infradead.org" <kexec@lists.infradead.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "bcm-kernel-feedback-list@broadcom.com"
+ <bcm-kernel-feedback-list@broadcom.com>,
+ "linuxppc-dev@lists.ozlabs.org" <linuxppc-dev@lists.ozlabs.org>,
+ "linux-alpha@vger.kernel.org" <linux-alpha@vger.kernel.org>,
+ "linux-edac@vger.kernel.org" <linux-edac@vger.kernel.org>,
+ "linux-hyperv@vger.kernel.org" <linux-hyperv@vger.kernel.org>,
+ "linux-leds@vger.kernel.org" <linux-leds@vger.kernel.org>,
+ "linux-mips@vger.kernel.org" <linux-mips@vger.kernel.org>,
+ "linux-parisc@vger.kernel.org" <linux-parisc@vger.kernel.org>,
+ "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>,
+ "linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>,
+ "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
+ "linux-tegra@vger.kernel.org" <linux-tegra@vger.kernel.org>,
+ "linux-um@lists.infradead.org" <linux-um@lists.infradead.org>,
+ "linux-xtensa@linux-xtensa.org" <linux-xtensa@linux-xtensa.org>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "openipmi-developer@lists.sourceforge.net"
+ <openipmi-developer@lists.sourceforge.net>,
+ "rcu@vger.kernel.org" <rcu@vger.kernel.org>,
+ "sparclinux@vger.kernel.org" <sparclinux@vger.kernel.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "x86@kernel.org" <x86@kernel.org>,
+ "kernel-dev@igalia.com" <kernel-dev@igalia.com>,
+ "kernel@gpiccoli.net" <kernel@gpiccoli.net>,
+ "halves@canonical.com" <halves@canonical.com>,
+ "fabiomirmar@gmail.com" <fabiomirmar@gmail.com>,
+ "alejandro.j.jimenez@oracle.com" <alejandro.j.jimenez@oracle.com>,
+ "andriy.shevchenko@linux.intel.com" <andriy.shevchenko@linux.intel.com>,
+ "arnd@arndb.de" <arnd@arndb.de>, "bp@alien8.de" <bp@alien8.de>,
+ "corbet@lwn.net" <corbet@lwn.net>,
+ "d.hatayama@jp.fujitsu.com" <d.hatayama@jp.fujitsu.com>,
+ "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
+ "dyoung@redhat.com" <dyoung@redhat.com>, "Tang, Feng" <feng.tang@intel.com>,
+ "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
+ "mikelley@microsoft.com" <mikelley@microsoft.com>,
+ "hidehiro.kawai.ez@hitachi.com" <hidehiro.kawai.ez@hitachi.com>,
+ "jgross@suse.com" <jgross@suse.com>,
+ "john.ogness@linutronix.de" <john.ogness@linutronix.de>,
+ "keescook@chromium.org" <keescook@chromium.org>,
+ "luto@kernel.org" <luto@kernel.org>,
+ "mhiramat@kernel.org" <mhiramat@kernel.org>,
+ "mingo@redhat.com" <mingo@redhat.com>,
+ "paulmck@kernel.org" <paulmck@kernel.org>,
+ "peterz@infradead.org" <peterz@infradead.org>,
+ "rostedt@goodmis.org" <rostedt@goodmis.org>,
+ "senozhatsky@chromium.org" <senozhatsky@chromium.org>,
+ "stern@rowland.harvard.edu" <stern@rowland.harvard.edu>,
+ "tglx@linutronix.de" <tglx@linutronix.de>,
+ "vgoyal@redhat.com" <vgoyal@redhat.com>,
+ "vkuznets@redhat.com" <vkuznets@redhat.com>,
+ "will@kernel.org" <will@kernel.org>, Alex Elder <elder@kernel.org>,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>, Chris Zankel
+ <chris@zankel.net>, Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Corey Minyard <minyard@acm.org>, Dexuan Cui <decui@microsoft.com>,
+ "H. Peter Anvin" <hpa@zytor.com>, Haiyang Zhang <haiyangz@microsoft.com>,
+ Heiko Carstens <hca@linux.ibm.com>, Helge Deller <deller@gmx.de>,
+ Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+ "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+ James Morse <james.morse@arm.com>, Johannes Berg
+ <johannes@sipsolutions.net>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>,
+ Matt Turner <mattst88@gmail.com>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Max Filippov <jcmvbkbc@gmail.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Paul Mackerras <paulus@samba.org>,
+ Pavel Machek <pavel@ucw.cz>, Richard Weinberger <richard@nod.at>,
+ Robert Richter <rric@kernel.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Stephen Hemminger <sthemmin@microsoft.com>,
+ Sven Schnelle <svens@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+ Wei Liu <wei.liu@kernel.org>
+References: <20220427224924.592546-1-gpiccoli@igalia.com>
+ <20220427224924.592546-22-gpiccoli@igalia.com> <YoJgcC8c6LaKADZV@alley>
+ <63a74b56-89ef-8d1f-d487-cdb986aab798@igalia.com>
+ <bed66b9467254a5a8bafc1983dad643a@intel.com>
+ <e895ce94-e6b9-caf6-e5d3-06bf0149445c@igalia.com> <YoOs9GJ5Ovq63u5Q@alley>
+ <599b72f6-76a4-8e6d-5432-56fb1ffd7e0b@igalia.com>
+ <06d85642fef24bc482642d669242654b@intel.com>
+From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+In-Reply-To: <06d85642fef24bc482642d669242654b@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+On 17/05/2022 14:02, Luck, Tony wrote:
+>> Tony / Dinh - can I just *skip* this notifier *if kdump* is set or else
+>> we run the code as-is? Does that make sense to you?
+> 
+> The "skip" option sounds like it needs some special flag associated with
+> an entry on the notifier chain. But there are other notifier chains ... so that
+> sounds messy to me.
+> 
+> Just all the notifiers in priority order. If any want to take different actions
+> based on kdump status, change the code. That seems more flexible than
+> an "all or nothing" approach by skipping.
+> 
+> -Tony
 
-Hello all.
+I guess I've expressed myself in a poor way - sorry!
 
-The purpose of this RFC patch series is to get feedback about supporting the allocation
-of DMAable pages by Linux's unpopulated-alloc.
+What I'm planning to do in the altera_edac notifier is:
 
-The unpopulated-alloc feature has been enabled on Arm since the extended-regions support
-reached upstream. With that (if, of course, we run new Xen version and Xen was able to
-allocate extended regions), we don't allocate the real RAM pages from host memory and balloon
-them out (in order to obtain physical memory space to map the guest pages into) anymore, we use
-the unpopulated pages instead. And it seems that all users I have played with on Arm (I mean,
-Xen PV and virtio backends) are happy with the pages provided by xen_alloc_unpopulated_pages().
-It is worth mentioning that these pages are not contiguous, but this wasn't an issue so far.
+if (kdump_is_set)
+ return;
 
-There is one place, where we still steal RAM pages if user-space Xen PV backend tries
-to establish grant mapping with a need to be backed by a DMA buffer for the sake of zero-copy
-(see dma_alloc*() usage in gnttab_dma_alloc_pages()).
+/* regular code */
 
-And, if I am not mistaken (there might be pitfalls which I am not aware of), we could avoid
-wasting real RAM pages in that particular case also by adding an ability to allocate
-unpopulated DMAable pages (which are guaranteed to be contiguous in IPA).
-The benefit is quite clear here:
-1. Avoid wasting real RAM pages (reducing the amount of CMA memory usable) for allocating
-   physical memory space to map the granted buffer into (which can be big enough if
-   we deal with Xen PV Display driver using multiple Full HD buffers) 
-2. Avoid superpage shattering in Xen P2M when establishing stage-2 mapping for that
-   granted buffer
-3. Avoid extra operations needed for the granted buffer to be properly mapped and
-   unmapped such as ballooning in/out real RAM pages
+In other words: if the kdump is set, this notifier will be effectively a
+nop (although it's gonna be called).
 
-Please note, there are several TODOs (described in corresponding commit subjects),
-which I will try to eliminate in next versions if we find a common ground regarding
-the approach.
+Lemme know your thoughts Tony, if that makes sense.
+Thanks,
 
-Any feedback/help would be highly appreciated.
 
-Oleksandr Tyshchenko (2):
-  xen/unpopulated-alloc: Introduce helpers for DMA allocations
-  xen/grant-table: Use unpopulated DMAable pages instead of real RAM
-    ones
-
- drivers/xen/grant-table.c       |  27 +++++++
- drivers/xen/unpopulated-alloc.c | 167 ++++++++++++++++++++++++++++++++++++++++
- include/xen/xen.h               |  15 ++++
- 3 files changed, 209 insertions(+)
-
--- 
-2.7.4
-
+Guilherme
 
