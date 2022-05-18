@@ -4,43 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C323C433F5
-	for <xen-devel@archiver.kernel.org>; Wed, 18 May 2022 13:10:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.332115.555758 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED1AFC433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 18 May 2022 13:11:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.332124.555769 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nrJR8-0001km-21; Wed, 18 May 2022 13:09:58 +0000
+	id 1nrJS9-00036j-Ci; Wed, 18 May 2022 13:11:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 332115.555758; Wed, 18 May 2022 13:09:58 +0000
+Received: by outflank-mailman (output) from mailman id 332124.555769; Wed, 18 May 2022 13:11:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nrJR7-0001kf-V3; Wed, 18 May 2022 13:09:57 +0000
-Received: by outflank-mailman (input) for mailman id 332115;
- Wed, 18 May 2022 13:09:56 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nrJS9-00036c-8u; Wed, 18 May 2022 13:11:01 +0000
+Received: by outflank-mailman (input) for mailman id 332124;
+ Wed, 18 May 2022 13:11:00 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=cAy6=V2=redhat.com=stefanha@srs-se1.protection.inumbo.net>)
- id 1nrJR6-0001YW-Fr
- for xen-devel@lists.xenproject.org; Wed, 18 May 2022 13:09:56 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id cc6a0f0e-d6ab-11ec-837e-e5687231ffcc;
- Wed, 18 May 2022 15:09:51 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-191-ngHoSp9hM-2D9F5m28W-Cg-1; Wed, 18 May 2022 09:09:48 -0400
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3041A294EDC0;
- Wed, 18 May 2022 13:09:48 +0000 (UTC)
-Received: from localhost (unknown [10.39.192.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 596B4492CA2;
- Wed, 18 May 2022 13:09:46 +0000 (UTC)
+ <SRS0=g5V8=V2=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
+ id 1nrJS6-00036J-Pn
+ for xen-devel@lists.xenproject.org; Wed, 18 May 2022 13:10:59 +0000
+Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f378af27-d6ab-11ec-bd2c-47488cf2e6aa;
+ Wed, 18 May 2022 15:10:57 +0200 (CEST)
+Received: from 200-161-159-120.dsl.telesp.net.br ([200.161.159.120]
+ helo=[192.168.1.60]) by fanzine2.igalia.com with esmtpsa 
+ (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+ id 1nrJR1-009xZP-0G; Wed, 18 May 2022 15:09:51 +0200
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,185 +42,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cc6a0f0e-d6ab-11ec-837e-e5687231ffcc
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1652879394;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=K801eJCmU2pj2pPB6zBLBAL3MRfzoEeZW44TvBJ7tvo=;
-	b=adCb/tEzf8MiMzregr0D3rsk9Rko1ac6qb26i7NqMasNE5tW5Z3nEZ/Wh+ifyMkw+UPFgj
-	bWp8AfoI4ZUb7UFGyPTeh2YtTxtj+mNOfumPrGJHSvhyZMc+1aDuNG/r+q2HqixLH0C+wN
-	v09HtMOqM6QnVo+9IvOgrQcyfsoaJWc=
-X-MC-Unique: ngHoSp9hM-2D9F5m28W-Cg-1
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: Stefan Hajnoczi <stefanha@redhat.com>,
-	Paul Durrant <paul@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	John Snow <jsnow@redhat.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	qemu-block@nongnu.org,
-	Fam Zheng <fam@euphon.net>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Kevin Wolf <kwolf@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	Coiby Xu <Coiby.Xu@gmail.com>,
-	Xie Yongji <xieyongji@bytedance.com>
-Subject: [PATCH] block: get rid of blk->guest_block_size
-Date: Wed, 18 May 2022 14:09:45 +0100
-Message-Id: <20220518130945.2657905-1-stefanha@redhat.com>
+X-Inumbo-ID: f378af27-d6ab-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=Du0yR9uhHpKwWrKsjoqMfifs7bCXApVmJcTLKS159Q8=; b=KR8Ca3qzn6Prru2b2ovD3a5c88
+	3Yl32PXNgwJAzJv1K+GwtALbIi3R7PHWPogPI//mjA46BacEdcFlczlu7VgbqBbi0iRFln4dhAmL3
+	5vAwoEH2Y5npRXnrsBS0Pt1IPEFHpxBOrNJbK+CGAUFY1mpA/Xk/bDS+XL+ITQtGq3i57YSw2ze27
+	6u/aeZyJiDji8Ld6K9lb+iY/t9E1NA5TGk8rCRjPY8WXYQAQH85dDOYmikTTt80JzPDf76BhHmUH/
+	IE+yGx2cI+Y6f449JTeHotkEOnM9AIr+trG8kHtj2MTTykTHXqJtKMQ7SzJhAjeP0O52jetyt0xPW
+	XVvP+JXg==;
+Message-ID: <8a1159c6-b4c1-87b9-8a09-6d5696f8f3f4@igalia.com>
+Date: Wed, 18 May 2022 10:09:06 -0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Subject: Re: [PATCH 19/30] panic: Add the panic hypervisor notifier list
+Content-Language: en-US
+To: Petr Mladek <pmladek@suse.com>
+Cc: Scott Branden <scott.branden@broadcom.com>,
+ Sebastian Reichel <sre@kernel.org>, Florian Fainelli <f.fainelli@gmail.com>,
+ David Gow <davidgow@google.com>, Evan Green <evgreen@chromium.org>,
+ Julius Werner <jwerner@chromium.org>, bcm-kernel-feedback-list@broadcom.com,
+ linux-pm@vger.kernel.org, akpm@linux-foundation.org, bhe@redhat.com,
+ kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, linux-alpha@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, linux-leds@vger.kernel.org,
+ linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+ linux-remoteproc@vger.kernel.org, linux-s390@vger.kernel.org,
+ linux-tegra@vger.kernel.org, linux-um@lists.infradead.org,
+ linux-xtensa@linux-xtensa.org, netdev@vger.kernel.org,
+ openipmi-developer@lists.sourceforge.net, rcu@vger.kernel.org,
+ sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org,
+ kernel-dev@igalia.com, kernel@gpiccoli.net, halves@canonical.com,
+ fabiomirmar@gmail.com, alejandro.j.jimenez@oracle.com,
+ andriy.shevchenko@linux.intel.com, arnd@arndb.de, bp@alien8.de,
+ corbet@lwn.net, d.hatayama@jp.fujitsu.com, dave.hansen@linux.intel.com,
+ dyoung@redhat.com, feng.tang@intel.com, gregkh@linuxfoundation.org,
+ mikelley@microsoft.com, hidehiro.kawai.ez@hitachi.com, jgross@suse.com,
+ john.ogness@linutronix.de, keescook@chromium.org, luto@kernel.org,
+ mhiramat@kernel.org, mingo@redhat.com, paulmck@kernel.org,
+ peterz@infradead.org, rostedt@goodmis.org, senozhatsky@chromium.org,
+ stern@rowland.harvard.edu, tglx@linutronix.de, vgoyal@redhat.com,
+ vkuznets@redhat.com, will@kernel.org,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Andrea Parri <parri.andrea@gmail.com>, Ard Biesheuvel <ardb@kernel.org>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Brian Norris <computersforpeace@gmail.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ "David S. Miller" <davem@davemloft.net>, Dexuan Cui <decui@microsoft.com>,
+ Doug Berger <opendmb@gmail.com>, Haiyang Zhang <haiyangz@microsoft.com>,
+ Hari Bathini <hbathini@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
+ Justin Chen <justinpopo6@gmail.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Lee Jones <lee.jones@linaro.org>, Markus Mayer <mmayer@broadcom.com>,
+ Michael Ellerman <mpe@ellerman.id.au>,
+ Mihai Carabas <mihai.carabas@oracle.com>, Nicholas Piggin
+ <npiggin@gmail.com>, Paul Mackerras <paulus@samba.org>,
+ Pavel Machek <pavel@ucw.cz>, Shile Zhang <shile.zhang@linux.alibaba.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>,
+ Sven Schnelle <svens@linux.ibm.com>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Tianyu Lan <Tianyu.Lan@microsoft.com>, Vasily Gorbik <gor@linux.ibm.com>,
+ Wang ShaoBo <bobo.shaobowang@huawei.com>, Wei Liu <wei.liu@kernel.org>,
+ zhenwei pi <pizhenwei@bytedance.com>
+References: <20220427224924.592546-1-gpiccoli@igalia.com>
+ <20220427224924.592546-20-gpiccoli@igalia.com> <YoJZVZl/MH0KiE/J@alley>
+ <ad082ce7-db50-13bb-3dbb-9b595dfa78be@igalia.com> <YoOpyW1+q+Z5as78@alley>
+ <d72b9aab-675c-ac89-b73a-b1de4a0b722d@igalia.com> <YoSijKwuwbY9uHxG@alley>
+From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+In-Reply-To: <YoSijKwuwbY9uHxG@alley>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Commit 1b7fd729559c ("block: rename buffer_alignment to
-guest_block_size") noted:
+On 18/05/2022 04:38, Petr Mladek wrote:
+> [...]
+> I have answered this in more detail in the other reply, see
+> https://lore.kernel.org/r/YoShZVYNAdvvjb7z@alley
+> 
+> I agree that both notifiers in
+> 
+>     drivers/soc/bcm/brcmstb/pm/pm-arm.c
+>     drivers/firmware/google/gsmi.c
+> 
+> better fit into the hypervisor list after all.
+> 
+> Best Regards,
+> Petr
 
-  At this point, the field is set by the device emulation, but completely
-  ignored by the block layer.
-
-The last time the value of buffer_alignment/guest_block_size was
-actually used was before commit 339064d50639 ("block: Don't use guest
-sector size for qemu_blockalign()").
-
-This value has not been used since 2013. Get rid of it.
-
-Cc: Xie Yongji <xieyongji@bytedance.com>
-Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
----
- include/sysemu/block-backend-io.h    |  1 -
- block/block-backend.c                | 10 ----------
- block/export/vhost-user-blk-server.c |  1 -
- hw/block/virtio-blk.c                |  1 -
- hw/block/xen-block.c                 |  1 -
- hw/ide/core.c                        |  1 -
- hw/scsi/scsi-disk.c                  |  1 -
- hw/scsi/scsi-generic.c               |  1 -
- 8 files changed, 17 deletions(-)
-
-diff --git a/include/sysemu/block-backend-io.h b/include/sysemu/block-backend-io.h
-index 6517c39295..ccef514023 100644
---- a/include/sysemu/block-backend-io.h
-+++ b/include/sysemu/block-backend-io.h
-@@ -72,7 +72,6 @@ void blk_error_action(BlockBackend *blk, BlockErrorAction action,
- void blk_iostatus_set_err(BlockBackend *blk, int error);
- int blk_get_max_iov(BlockBackend *blk);
- int blk_get_max_hw_iov(BlockBackend *blk);
--void blk_set_guest_block_size(BlockBackend *blk, int align);
- 
- void blk_io_plug(BlockBackend *blk);
- void blk_io_unplug(BlockBackend *blk);
-diff --git a/block/block-backend.c b/block/block-backend.c
-index e0e1aff4b1..d4abdf8faa 100644
---- a/block/block-backend.c
-+++ b/block/block-backend.c
-@@ -56,9 +56,6 @@ struct BlockBackend {
-     const BlockDevOps *dev_ops;
-     void *dev_opaque;
- 
--    /* the block size for which the guest device expects atomicity */
--    int guest_block_size;
--
-     /* If the BDS tree is removed, some of its options are stored here (which
-      * can be used to restore those options in the new BDS on insert) */
-     BlockBackendRootState root_state;
-@@ -998,7 +995,6 @@ void blk_detach_dev(BlockBackend *blk, DeviceState *dev)
-     blk->dev = NULL;
-     blk->dev_ops = NULL;
-     blk->dev_opaque = NULL;
--    blk->guest_block_size = 512;
-     blk_set_perm(blk, 0, BLK_PERM_ALL, &error_abort);
-     blk_unref(blk);
- }
-@@ -2100,12 +2096,6 @@ int blk_get_max_iov(BlockBackend *blk)
-     return blk->root->bs->bl.max_iov;
- }
- 
--void blk_set_guest_block_size(BlockBackend *blk, int align)
--{
--    IO_CODE();
--    blk->guest_block_size = align;
--}
--
- void *blk_try_blockalign(BlockBackend *blk, size_t size)
- {
-     IO_CODE();
-diff --git a/block/export/vhost-user-blk-server.c b/block/export/vhost-user-blk-server.c
-index a129204c44..b2e458ade3 100644
---- a/block/export/vhost-user-blk-server.c
-+++ b/block/export/vhost-user-blk-server.c
-@@ -495,7 +495,6 @@ static int vu_blk_exp_create(BlockExport *exp, BlockExportOptions *opts,
-         return -EINVAL;
-     }
-     vexp->blk_size = logical_block_size;
--    blk_set_guest_block_size(exp->blk, logical_block_size);
- 
-     if (vu_opts->has_num_queues) {
-         num_queues = vu_opts->num_queues;
-diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
-index cd804795c6..e9ba752f6b 100644
---- a/hw/block/virtio-blk.c
-+++ b/hw/block/virtio-blk.c
-@@ -1228,7 +1228,6 @@ static void virtio_blk_device_realize(DeviceState *dev, Error **errp)
- 
-     s->change = qemu_add_vm_change_state_handler(virtio_blk_dma_restart_cb, s);
-     blk_set_dev_ops(s->blk, &virtio_block_ops, s);
--    blk_set_guest_block_size(s->blk, s->conf.conf.logical_block_size);
- 
-     blk_iostatus_enable(s->blk);
- 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 674953f1ad..345b284d70 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -243,7 +243,6 @@ static void xen_block_realize(XenDevice *xendev, Error **errp)
-     }
- 
-     blk_set_dev_ops(blk, &xen_block_dev_ops, blockdev);
--    blk_set_guest_block_size(blk, conf->logical_block_size);
- 
-     if (conf->discard_granularity == -1) {
-         conf->discard_granularity = conf->physical_block_size;
-diff --git a/hw/ide/core.c b/hw/ide/core.c
-index 3a5afff5d7..f7ec68513f 100644
---- a/hw/ide/core.c
-+++ b/hw/ide/core.c
-@@ -2544,7 +2544,6 @@ int ide_init_drive(IDEState *s, BlockBackend *blk, IDEDriveKind kind,
-     s->smart_selftest_count = 0;
-     if (kind == IDE_CD) {
-         blk_set_dev_ops(blk, &ide_cd_block_ops, s);
--        blk_set_guest_block_size(blk, 2048);
-     } else {
-         if (!blk_is_inserted(s->blk)) {
-             error_setg(errp, "Device needs media, but drive is empty");
-diff --git a/hw/scsi/scsi-disk.c b/hw/scsi/scsi-disk.c
-index 072686ed58..91acb5c0ce 100644
---- a/hw/scsi/scsi-disk.c
-+++ b/hw/scsi/scsi-disk.c
-@@ -2419,7 +2419,6 @@ static void scsi_realize(SCSIDevice *dev, Error **errp)
-     } else {
-         blk_set_dev_ops(s->qdev.conf.blk, &scsi_disk_block_ops, s);
-     }
--    blk_set_guest_block_size(s->qdev.conf.blk, s->qdev.blocksize);
- 
-     blk_iostatus_enable(s->qdev.conf.blk);
- 
-diff --git a/hw/scsi/scsi-generic.c b/hw/scsi/scsi-generic.c
-index 0ab00ef85c..ada24d7486 100644
---- a/hw/scsi/scsi-generic.c
-+++ b/hw/scsi/scsi-generic.c
-@@ -321,7 +321,6 @@ static void scsi_read_complete(void * opaque, int ret)
-         s->blocksize = ldl_be_p(&r->buf[8]);
-         s->max_lba = ldq_be_p(&r->buf[0]);
-     }
--    blk_set_guest_block_size(s->conf.blk, s->blocksize);
- 
-     /*
-      * Patch MODE SENSE device specific parameters if the BDS is opened
--- 
-2.36.1
-
+Perfect, thanks - will keep both in such list for V2.
 
