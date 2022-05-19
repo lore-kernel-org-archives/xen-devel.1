@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0FAAC433F5
-	for <xen-devel@archiver.kernel.org>; Thu, 19 May 2022 05:08:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.332496.556384 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFFBCC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 19 May 2022 06:04:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.332668.556395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nrYO0-0007YQ-VG; Thu, 19 May 2022 05:07:44 +0000
+	id 1nrZG1-00057T-Ac; Thu, 19 May 2022 06:03:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 332496.556384; Thu, 19 May 2022 05:07:44 +0000
+Received: by outflank-mailman (output) from mailman id 332668.556395; Thu, 19 May 2022 06:03:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nrYO0-0007YJ-S2; Thu, 19 May 2022 05:07:44 +0000
-Received: by outflank-mailman (input) for mailman id 332496;
- Wed, 18 May 2022 22:17:23 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nrZG1-00057M-7p; Thu, 19 May 2022 06:03:33 +0000
+Received: by outflank-mailman (input) for mailman id 332668;
+ Thu, 19 May 2022 06:03:32 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=oc67=V2=broadcom.com=scott.branden@srs-se1.protection.inumbo.net>)
- id 1nrRys-0003ZW-Pm
- for xen-devel@lists.xenproject.org; Wed, 18 May 2022 22:17:22 +0000
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [2607:f8b0:4864:20::102e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 48919457-d6f8-11ec-837e-e5687231ffcc;
- Thu, 19 May 2022 00:17:20 +0200 (CEST)
-Received: by mail-pj1-x102e.google.com with SMTP id
- l20-20020a17090a409400b001dd2a9d555bso3466378pjg.0
- for <xen-devel@lists.xenproject.org>; Wed, 18 May 2022 15:17:20 -0700 (PDT)
-Received: from [10.136.13.180] ([192.19.161.250])
+ <SRS0=9elr=V3=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1nrZG0-00057D-12
+ for xen-devel@lists.xenproject.org; Thu, 19 May 2022 06:03:32 +0000
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [2a00:1450:4864:20::12f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6875b67f-d739-11ec-bd2c-47488cf2e6aa;
+ Thu, 19 May 2022 08:03:30 +0200 (CEST)
+Received: by mail-lf1-x12f.google.com with SMTP id w14so7223561lfl.13
+ for <xen-devel@lists.xenproject.org>; Wed, 18 May 2022 23:03:30 -0700 (PDT)
+Received: from [192.168.1.7] ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- ji15-20020a170903324f00b001616e13fccdsm2195161plb.221.2022.05.18.15.17.08
+ z9-20020ac25de9000000b0047255d211b3sm159674lfq.226.2022.05.18.23.03.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 May 2022 15:17:17 -0700 (PDT)
+ Wed, 18 May 2022 23:03:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,285 +46,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 48919457-d6f8-11ec-837e-e5687231ffcc
+X-Inumbo-ID: 6875b67f-d739-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google;
-        h=message-id:date:mime-version:user-agent:subject:to:cc:references
-         :from:in-reply-to;
-        bh=BeMzYKDj0/gubphlSjQZreBctERYtWwyZX2TGXbvLRM=;
-        b=Lzzuusb9kFWDIOc/GDdRDMX+gcF9zI/tyX4kwZLlHuiR7k7ZoyDJyi/B5tFmeDqbhz
-         nh3yU61Je4pK5o3cgPKpmu4Sv2QjxeUuKtghPMaJ77pVKGreRACk7UNhy8S7e8uv2HmW
-         QAFWGF9c8fmfZz/oPl8t0stH4jloxe3sGFk0g=
+        d=gmail.com; s=20210112;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=X+iyqLf77Krjb4QH3xlKBzqBdXBeBxfWT5vFT9hWB/E=;
+        b=jMiIn+oPqAbUSnsl0S1EqWOpvRnIcpeNMiwZI6oyIi8xhmBfbS0iXSTPrI9fRM0yK3
+         shzE8bDkGkYA9EhOOUX0QU0wLP4QQoFJglzVWFRGUFihYkHMmO4E6qMuMAwRmBE3Fb29
+         LEbCqY6aee+/3T+wPLd3RffpjN6/xgG291hMA+v9JF2TUTVdVeWsT6J6ofyyeD01qlKm
+         fBBHfR1YeYk1vyGq0IXKTNfhaswYcqCTmShveU5CSbuNb0b2uKBm9D5eUMnaLKaogBcO
+         IVdN60uPvVqB2IVOgavpFDPsgOrh/GOMGkUwu0zXQ//s/G6C/9uX5K58kzqdB8e9hAMB
+         XgEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :to:cc:references:from:in-reply-to;
-        bh=BeMzYKDj0/gubphlSjQZreBctERYtWwyZX2TGXbvLRM=;
-        b=Ie/tcMnoQvQO5rq9yVjub4xs8Dj3efJohi07k7AIQNZsx9UCciPwI9tubgKEAFliuU
-         HgfBLRttRxGTnpq5aPcWgZFTrgPqn16yhr4/DtzGUItUnEGYPnPrvQmmaximAa5HBwQ/
-         qoisOX1a5Z+8D1qL84itgqSFdWbcRTgRgU5ON5wa7cWIXtlcVhhdwTtIue5ZGUkyU74G
-         xBBUgXQHwc9uWri3YLFT1MfT9WK+eIEAdKbOAuHS+0Jew547vqAgRsVJs7fy12GOe5A/
-         yjCAt336X5YNSnA643D1MnTzvHPi8mJoadTjPq2o8okVJ8iO+Vvf4dwT8imtVWIuRIeL
-         QvVA==
-X-Gm-Message-State: AOAM530KpoR+9Jnh6lWBBNZ2CiwbtQ2QJjQVNg6dHKMjYXn3f9ab1Xvz
-	AAN4DnmiWYy1sgeZUPzanUeuqA==
-X-Google-Smtp-Source: ABdhPJxkLsE36Kq2JcCUoiWV2ClSYG7H68DZOk0Dnd5ufVpjZfzcSk9Zz5AbXiW59SdIpTBHz/LAmw==
-X-Received: by 2002:a17:902:ec92:b0:161:7e29:6f9d with SMTP id x18-20020a170902ec9200b001617e296f9dmr1458536plg.157.1652912238747;
-        Wed, 18 May 2022 15:17:18 -0700 (PDT)
-Message-ID: <81878a67-21f1-fee8-1add-f381bc8b05df@broadcom.com>
-Date: Wed, 18 May 2022 15:17:07 -0700
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=X+iyqLf77Krjb4QH3xlKBzqBdXBeBxfWT5vFT9hWB/E=;
+        b=37svC6MBkLBacZyqwyAV98P0JaQ7A4xBnBfelehSg8EgACpqlFOTiUEg+2t8yZN36L
+         KpUkdw5ng0eyz72RrNyD3TiNwa268D+Vn+zmtH8cwr1pdE86xbbwg50mKJtmLAKWflJN
+         QdpXDi622uqOLi8KYsBDzca/afiOY9A6h1Wh+xKbSz8SavVg4BvnIU4F+Nz84JjFwj4C
+         ebHLuK7335+nnWTE0P3JbpkMz8vLzb6BPkQX1YEh5JS7WfdQSBhMGOUoA7ZXQpiV8ajF
+         XIDZ3CadPFT2va7JcEexLpXtrXqCqIO0U9QSxonS/9NRXFZMSWOQEodHghxwuf1GhivF
+         HCFg==
+X-Gm-Message-State: AOAM5300HcR0xYPTkRNLEikgj1ygPYNuWlQyrgQdI6lS0/qxUxyXhfug
+	99kjC1+e2Ss+f2+eFw3qKY4=
+X-Google-Smtp-Source: ABdhPJzwmwkFDCRWW2Cad13XCWqyTTIZvwGLTYnv5Wt5Re5HVYbl0W10atfcLup8GeN/5VWUJmeMMg==
+X-Received: by 2002:a05:6512:ace:b0:473:ba5b:8e06 with SMTP id n14-20020a0565120ace00b00473ba5b8e06mr2114663lfu.614.1652940210293;
+        Wed, 18 May 2022 23:03:30 -0700 (PDT)
+Subject: Re: [PATCH V2 5/7] dt-bindings: Add xen,dev-domid property
+ description for xen-grant DMA ops
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>, xen-devel
+ <xen-devel@lists.xenproject.org>,
+ "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
+ <virtualization@lists.linux-foundation.org>,
+ DTML <devicetree@vger.kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Jason Wang <jasowang@redhat.com>, Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Julien Grall <julien@xen.org>,
+ Juergen Gross <jgross@suse.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Christoph Hellwig <hch@infradead.org>,
+ Jean-Philippe Brucker <jean-philippe@linaro.org>
+References: <1651947548-4055-1-git-send-email-olekstysh@gmail.com>
+ <1651947548-4055-6-git-send-email-olekstysh@gmail.com>
+ <CAK8P3a2cAnXr8TDDYTiFxTWzQxa67sGnYDQRRD+=Q8_cSb1mEw@mail.gmail.com>
+ <56e8c32d-6771-7179-005f-26ca58555659@gmail.com>
+ <CAK8P3a1YhkEZ8gcbXHEa5Bwx-4VVRJO8SUHf8=RNWRsc2Yo-+A@mail.gmail.com>
+ <460a746c-6b61-214b-4653-44a1430e314d@gmail.com>
+ <alpine.DEB.2.22.394.2205181802310.1905099@ubuntu-linux-20-04-desktop>
+From: Oleksandr <olekstysh@gmail.com>
+Message-ID: <6f469e9c-c26e-f4be-9a85-710afb0d77eb@gmail.com>
+Date: Thu, 19 May 2022 09:03:28 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Subject: Re: [PATCH 19/30] panic: Add the panic hypervisor notifier list
-To: "Guilherme G. Piccoli" <gpiccoli@igalia.com>,
- Petr Mladek <pmladek@suse.com>, Sebastian Reichel <sre@kernel.org>,
- Florian Fainelli <f.fainelli@gmail.com>,
- Desmond yan <desmond.yan@broadcom.com>
-Cc: David Gow <davidgow@google.com>, Evan Green <evgreen@chromium.org>,
- Julius Werner <jwerner@chromium.org>, bcm-kernel-feedback-list@broadcom.com,
- linux-pm@vger.kernel.org, akpm@linux-foundation.org, bhe@redhat.com,
- kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-alpha@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-leds@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
- linux-remoteproc@vger.kernel.org, linux-s390@vger.kernel.org,
- linux-tegra@vger.kernel.org, linux-um@lists.infradead.org,
- linux-xtensa@linux-xtensa.org, netdev@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net, rcu@vger.kernel.org,
- sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org,
- kernel-dev@igalia.com, kernel@gpiccoli.net, halves@canonical.com,
- fabiomirmar@gmail.com, alejandro.j.jimenez@oracle.com,
- andriy.shevchenko@linux.intel.com, arnd@arndb.de, bp@alien8.de,
- corbet@lwn.net, d.hatayama@jp.fujitsu.com, dave.hansen@linux.intel.com,
- dyoung@redhat.com, feng.tang@intel.com, gregkh@linuxfoundation.org,
- mikelley@microsoft.com, hidehiro.kawai.ez@hitachi.com, jgross@suse.com,
- john.ogness@linutronix.de, keescook@chromium.org, luto@kernel.org,
- mhiramat@kernel.org, mingo@redhat.com, paulmck@kernel.org,
- peterz@infradead.org, rostedt@goodmis.org, senozhatsky@chromium.org,
- stern@rowland.harvard.edu, tglx@linutronix.de, vgoyal@redhat.com,
- vkuznets@redhat.com, will@kernel.org,
- Alexander Gordeev <agordeev@linux.ibm.com>,
- Andrea Parri <parri.andrea@gmail.com>, Ard Biesheuvel <ardb@kernel.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Brian Norris <computersforpeace@gmail.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- "David S. Miller" <davem@davemloft.net>, Dexuan Cui <decui@microsoft.com>,
- Doug Berger <opendmb@gmail.com>, Haiyang Zhang <haiyangz@microsoft.com>,
- Hari Bathini <hbathini@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
- Justin Chen <justinpopo6@gmail.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Lee Jones <lee.jones@linaro.org>, Markus Mayer <mmayer@broadcom.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Mihai Carabas <mihai.carabas@oracle.com>, Nicholas Piggin
- <npiggin@gmail.com>, Paul Mackerras <paulus@samba.org>,
- Pavel Machek <pavel@ucw.cz>, Shile Zhang <shile.zhang@linux.alibaba.com>,
- Stephen Hemminger <sthemmin@microsoft.com>,
- Sven Schnelle <svens@linux.ibm.com>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Tianyu Lan <Tianyu.Lan@microsoft.com>, Vasily Gorbik <gor@linux.ibm.com>,
- Wang ShaoBo <bobo.shaobowang@huawei.com>, Wei Liu <wei.liu@kernel.org>,
- zhenwei pi <pizhenwei@bytedance.com>
-References: <20220427224924.592546-1-gpiccoli@igalia.com>
- <20220427224924.592546-20-gpiccoli@igalia.com> <YoJZVZl/MH0KiE/J@alley>
- <ad082ce7-db50-13bb-3dbb-9b595dfa78be@igalia.com> <YoOpyW1+q+Z5as78@alley>
- <d72b9aab-675c-ac89-b73a-b1de4a0b722d@igalia.com>
-From: Scott Branden <scott.branden@broadcom.com>
-In-Reply-To: <d72b9aab-675c-ac89-b73a-b1de4a0b722d@igalia.com>
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="000000000000e0603605df509e06"
-
---000000000000e0603605df509e06
+In-Reply-To: <alpine.DEB.2.22.394.2205181802310.1905099@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
-Hi Guilherme,
 
-+Desmond
+On 19.05.22 04:06, Stefano Stabellini wrote:
 
-On 2022-05-17 09:42, Guilherme G. Piccoli wrote:
-> On 17/05/2022 10:57, Petr Mladek wrote:
->> [...]
->>>>> --- a/drivers/misc/bcm-vk/bcm_vk_dev.c
->>>>> +++ b/drivers/misc/bcm-vk/bcm_vk_dev.c
->>>>> @@ -1446,7 +1446,7 @@ static int bcm_vk_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
->>>> [... snip ...]
->>>> It seems to reset some hardware or so. IMHO, it should go into the
->>>> pre-reboot list.
->>>
->>> Mixed feelings here, I'm looping Broadcom maintainers to comment.
->>> (CC Scott and Broadcom list)
->>>
->>> I'm afraid it breaks kdump if this device is not reset beforehand - it's
->>> a doorbell write, so not high risk I think...
->>>
->>> But in case the not-reset device can be probed normally in kdump kernel,
->>> then I'm fine in moving this to the reboot list! I don't have the HW to
->>> test myself.
->>
->> Good question. Well, it if has to be called before kdump then
->> even "hypervisor" list is a wrong place because is not always
->> called before kdump.
-> 
-> Agreed! I'll defer that to Scott and Broadcom folks to comment.
-> If it's not strictly necessary, I'll happily move it to the reboot list.
-> 
-> If necessary, we could use the machine_crash_kexec() approach, but we'll
-> fall into the case arm64 doesn't support it and I'm not sure if this
-> device is available for arm - again a question for the maintainers.
-We register to the panic notifier so that we can kill the VK card ASAP
-to stop DMAing things over to the host side.  If it is not notified then
-memory may not be frozen when kdump is occurring.
-Notifying the card on panic is also needed to allow for any type of 
-reset to occur.
 
-So, the only thing preventing moving the notifier later is the chance
-that memory is modified while kdump is occurring.  Or, if DMA is 
-disabled before kdump already then this wouldn't be an issue and the 
-notification to the card (to allow for clean resets) can be done later.
-> 
-> 
->>   [...]
->>>>> --- a/drivers/power/reset/ltc2952-poweroff.c
->>>>> +++ b/drivers/power/reset/ltc2952-poweroff.c
->>> [...]
->>> This is setting a variable only, and once it's set (data->kernel_panic
->>> is the bool's name), it just bails out the IRQ handler and a timer
->>> setting - this timer seems kinda tricky, so bailing out ASAP makes sense
->>> IMHO.
->>
->> IMHO, the timer informs the hardware that the system is still alive
->> in the middle of panic(). If the timer is not working then the
->> hardware (chip) will think that the system frozen in panic()
->> and will power off the system. See the comments in
->> drivers/power/reset/ltc2952-poweroff.c:
->> [.... snip ...]
->> IMHO, we really have to keep it alive until we reach the reboot stage.
->>
->> Another question is how it actually works when the interrupts are
->> disabled during panic() and the timer callbacks are not handled.
-> 
-> Agreed here! Guess I can move this one the reboot list, fine by me.
-> Unless PM folks think otherwise.
-> 
-> 
->> [...]
->>> Disagree here, I'm CCing Florian for information.
->>>
->>> This notifier preserves RAM so it's *very interesting* if we have
->>> kmsg_dump() for example, but maybe might be also relevant in case kdump
->>> kernel is configured to store something in a persistent RAM (then,
->>> without this notifier, after kdump reboots the system data would be lost).
->>
->> I see. It is actually similar problem as with
->> drivers/firmware/google/gsmi.c.
->>
->> I does similar things like kmsg_dump() so it should be called in
->> the same location (after info notifier list and before kdump).
->>
->> A solution might be to put it at these notifiers at the very
->> end of the "info" list or make extra "dump" notifier list.
-> 
-> Here I still disagree. I've commented in the other response thread
-> (about Google gsmi) about the semantics of the hypervisor list, but
-> again: this list should contain callbacks that
-> 
-> (a) Should run early, _by default_ before a kdump;
-> (b) Communicate with the firmware/hypervisor in a "low-risk" way;
-> 
-> Imagine a scenario where users configure kdump kernel to save something
-> in a persistent form in DRAM - it'd be like a late pstore, in the next
-> kernel. This callback enables that, it's meant to inform FW "hey, panic
-> happened, please from now on don't clear the RAM in the next FW-reboot".
-> I don't see a reason to postpone that - let's see if the maintainers
-> have an opinion.
-> 
-> Cheers,
-> 
-> 
-> Guilherme
+Hello Stefano
 
---000000000000e0603605df509e06
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
+> On Thu, 19 May 2022, Oleksandr wrote:
+>>> On Wed, May 18, 2022 at 5:06 PM Oleksandr <olekstysh@gmail.com> wrote:
+>>>> On 18.05.22 17:32, Arnd Bergmann wrote:
+>>>>> On Sat, May 7, 2022 at 7:19 PM Oleksandr Tyshchenko
+>>>>> <olekstysh@gmail.com> wrote:
+>>>>>     This would mean having a device
+>>>>> node for the grant-table mechanism that can be referred to using the
+>>>>> 'iommus'
+>>>>> phandle property, with the domid as an additional argument.
+>>>> I assume, you are speaking about something like the following?
+>>>>
+>>>>
+>>>> xen_dummy_iommu {
+>>>>       compatible = "xen,dummy-iommu";
+>>>>       #iommu-cells = <1>;
+>>>> };
+>>>>
+>>>> virtio@3000 {
+>>>>       compatible = "virtio,mmio";
+>>>>       reg = <0x3000 0x100>;
+>>>>       interrupts = <41>;
+>>>>
+>>>>       /* The device is located in Xen domain with ID 1 */
+>>>>       iommus = <&xen_dummy_iommu 1>;
+>>>> };
+>>> Right, that's that's the idea,
+>> thank you for the confirmation
+>>
+>>
+>>
+>>>    except I would not call it a 'dummy'.
+>>>   From the perspective of the DT, this behaves just like an IOMMU,
+>>> even if the exact mechanism is different from most hardware IOMMU
+>>> implementations.
+>> well, agree
+>>
+>>
+>>>>> It does not quite fit the model that Linux currently uses for iommus,
+>>>>> as that has an allocator for dma_addr_t space
+>>>> yes (# 3/7 adds grant-table based allocator)
+>>>>
+>>>>
+>>>>> , but it would think it's
+>>>>> conceptually close enough that it makes sense for the binding.
+>>>> Interesting idea. I am wondering, do we need an extra actions for this
+>>>> to work in Linux guest (dummy IOMMU driver, etc)?
+>>> It depends on how closely the guest implementation can be made to
+>>> resemble a normal iommu. If you do allocate dma_addr_t addresses,
+>>> it may actually be close enough that you can just turn the grant-table
+>>> code into a normal iommu driver and change nothing else.
+>> Unfortunately, I failed to find a way how use grant references at the
+>> iommu_ops level (I mean to fully pretend that we are an IOMMU driver). I am
+>> not too familiar with that, so what is written below might be wrong or at
+>> least not precise.
+>>
+>> The normal IOMMU driver in Linux doesn’t allocate DMA addresses by itself, it
+>> just maps (IOVA-PA) what was requested to be mapped by the upper layer. The
+>> DMA address allocation is done by the upper layer (DMA-IOMMU which is the glue
+>> layer between DMA API and IOMMU API allocates IOVA for PA?). But, all what we
+>> need here is just to allocate our specific grant-table based DMA addresses
+>> (DMA address = grant reference + offset in the page), so let’s say we need an
+>> entity to take a physical address as parameter and return a DMA address (what
+>> actually commit #3/7 is doing), and that’s all. So working at the dma_ops
+>> layer we get exactly what we need, with the minimal changes to guest
+>> infrastructure. In our case the Xen itself acts as an IOMMU.
+>>
+>> Assuming that we want to reuse the IOMMU infrastructure somehow for our needs.
+>> I think, in that case we will likely need to introduce a new specific IOVA
+>> allocator (alongside with a generic one) to be hooked up by the DMA-IOMMU
+>> layer if we run on top of Xen. But, even having the specific IOVA allocator to
+>> return what we indeed need (DMA address = grant reference + offset in the
+>> page) we will still need the specific minimal required IOMMU driver to be
+>> present in the system anyway in order to track the mappings(?) and do nothing
+>> with them, returning a success (this specific IOMMU driver should have all
+>> mandatory callbacks implemented).
+>>
+>> I completely agree, it would be really nice to reuse generic IOMMU bindings
+>> rather than introducing Xen specific property if what we are trying to
+>> implement in current patch series fits in the usage of "iommus" in Linux
+>> more-less. But, if we will have to add more complexity/more components to the
+>> code for the sake of reusing device tree binding, this raises a question
+>> whether that’s worthwhile.
+>>
+>> Or I really missed something?
+> I think Arnd was primarily suggesting to reuse the IOMMU Device Tree
+> bindings, not necessarily the IOMMU drivers framework in Linux (although
+> that would be an added bonus.)
+>
+> I know from previous discussions with you that making the grant table
+> fit in the existing IOMMU drivers model is difficult, but just reusing
+> the Device Tree bindings seems feasible?
 
-MIIQcAYJKoZIhvcNAQcCoIIQYTCCEF0CAQExDzANBglghkgBZQMEAgEFADALBgkqhkiG9w0BBwGg
-gg3HMIIFDTCCA/WgAwIBAgIQeEqpED+lv77edQixNJMdADANBgkqhkiG9w0BAQsFADBMMSAwHgYD
-VQQLExdHbG9iYWxTaWduIFJvb3QgQ0EgLSBSMzETMBEGA1UEChMKR2xvYmFsU2lnbjETMBEGA1UE
-AxMKR2xvYmFsU2lnbjAeFw0yMDA5MTYwMDAwMDBaFw0yODA5MTYwMDAwMDBaMFsxCzAJBgNVBAYT
-AkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYDVQQDEyhHbG9iYWxTaWduIEdDQyBS
-MyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
-vbCmXCcsbZ/a0fRIQMBxp4gJnnyeneFYpEtNydrZZ+GeKSMdHiDgXD1UnRSIudKo+moQ6YlCOu4t
-rVWO/EiXfYnK7zeop26ry1RpKtogB7/O115zultAz64ydQYLe+a1e/czkALg3sgTcOOcFZTXk38e
-aqsXsipoX1vsNurqPtnC27TWsA7pk4uKXscFjkeUE8JZu9BDKaswZygxBOPBQBwrA5+20Wxlk6k1
-e6EKaaNaNZUy30q3ArEf30ZDpXyfCtiXnupjSK8WU2cK4qsEtj09JS4+mhi0CTCrCnXAzum3tgcH
-cHRg0prcSzzEUDQWoFxyuqwiwhHu3sPQNmFOMwIDAQABo4IB2jCCAdYwDgYDVR0PAQH/BAQDAgGG
-MGAGA1UdJQRZMFcGCCsGAQUFBwMCBggrBgEFBQcDBAYKKwYBBAGCNxQCAgYKKwYBBAGCNwoDBAYJ
-KwYBBAGCNxUGBgorBgEEAYI3CgMMBggrBgEFBQcDBwYIKwYBBQUHAxEwEgYDVR0TAQH/BAgwBgEB
-/wIBADAdBgNVHQ4EFgQUljPR5lgXWzR1ioFWZNW+SN6hj88wHwYDVR0jBBgwFoAUj/BLf6guRSSu
-TVD6Y5qL3uLdG7wwegYIKwYBBQUHAQEEbjBsMC0GCCsGAQUFBzABhiFodHRwOi8vb2NzcC5nbG9i
-YWxzaWduLmNvbS9yb290cjMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9zZWN1cmUuZ2xvYmFsc2lnbi5j
-b20vY2FjZXJ0L3Jvb3QtcjMuY3J0MDYGA1UdHwQvMC0wK6ApoCeGJWh0dHA6Ly9jcmwuZ2xvYmFs
-c2lnbi5jb20vcm9vdC1yMy5jcmwwWgYDVR0gBFMwUTALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgEo
-CjA0MDIGCCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzAN
-BgkqhkiG9w0BAQsFAAOCAQEAdAXk/XCnDeAOd9nNEUvWPxblOQ/5o/q6OIeTYvoEvUUi2qHUOtbf
-jBGdTptFsXXe4RgjVF9b6DuizgYfy+cILmvi5hfk3Iq8MAZsgtW+A/otQsJvK2wRatLE61RbzkX8
-9/OXEZ1zT7t/q2RiJqzpvV8NChxIj+P7WTtepPm9AIj0Keue+gS2qvzAZAY34ZZeRHgA7g5O4TPJ
-/oTd+4rgiU++wLDlcZYd/slFkaT3xg4qWDepEMjT4T1qFOQIL+ijUArYS4owpPg9NISTKa1qqKWJ
-jFoyms0d0GwOniIIbBvhI2MJ7BSY9MYtWVT5jJO3tsVHwj4cp92CSFuGwunFMzCCA18wggJHoAMC
-AQICCwQAAAAAASFYUwiiMA0GCSqGSIb3DQEBCwUAMEwxIDAeBgNVBAsTF0dsb2JhbFNpZ24gUm9v
-dCBDQSAtIFIzMRMwEQYDVQQKEwpHbG9iYWxTaWduMRMwEQYDVQQDEwpHbG9iYWxTaWduMB4XDTA5
-MDMxODEwMDAwMFoXDTI5MDMxODEwMDAwMFowTDEgMB4GA1UECxMXR2xvYmFsU2lnbiBSb290IENB
-IC0gUjMxEzARBgNVBAoTCkdsb2JhbFNpZ24xEzARBgNVBAMTCkdsb2JhbFNpZ24wggEiMA0GCSqG
-SIb3DQEBAQUAA4IBDwAwggEKAoIBAQDMJXaQeQZ4Ihb1wIO2hMoonv0FdhHFrYhy/EYCQ8eyip0E
-XyTLLkvhYIJG4VKrDIFHcGzdZNHr9SyjD4I9DCuul9e2FIYQebs7E4B3jAjhSdJqYi8fXvqWaN+J
-J5U4nwbXPsnLJlkNc96wyOkmDoMVxu9bi9IEYMpJpij2aTv2y8gokeWdimFXN6x0FNx04Druci8u
-nPvQu7/1PQDhBjPogiuuU6Y6FnOM3UEOIDrAtKeh6bJPkC4yYOlXy7kEkmho5TgmYHWyn3f/kRTv
-riBJ/K1AFUjRAjFhGV64l++td7dkmnq/X8ET75ti+w1s4FRpFqkD2m7pg5NxdsZphYIXAgMBAAGj
-QjBAMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSP8Et/qC5FJK5N
-UPpjmove4t0bvDANBgkqhkiG9w0BAQsFAAOCAQEAS0DbwFCq/sgM7/eWVEVJu5YACUGssxOGhigH
-M8pr5nS5ugAtrqQK0/Xx8Q+Kv3NnSoPHRHt44K9ubG8DKY4zOUXDjuS5V2yq/BKW7FPGLeQkbLmU
-Y/vcU2hnVj6DuM81IcPJaP7O2sJTqsyQiunwXUaMld16WCgaLx3ezQA3QY/tRG3XUyiXfvNnBB4V
-14qWtNPeTCekTBtzc3b0F5nCH3oO4y0IrQocLP88q1UOD5F+NuvDV0m+4S4tfGCLw0FREyOdzvcy
-a5QBqJnnLDMfOjsl0oZAzjsshnjJYS8Uuu7bVW/fhO4FCU29KNhyztNiUGUe65KXgzHZs7XKR1g/
-XzCCBU8wggQ3oAMCAQICDH2hdImkqeI7h1IaTzANBgkqhkiG9w0BAQsFADBbMQswCQYDVQQGEwJC
-RTEZMBcGA1UEChMQR2xvYmFsU2lnbiBudi1zYTExMC8GA1UEAxMoR2xvYmFsU2lnbiBHQ0MgUjMg
-UGVyc29uYWxTaWduIDIgQ0EgMjAyMDAeFw0yMTAyMjIxNDA5MDJaFw0yMjA5MjIxNDMxMTRaMIGQ
-MQswCQYDVQQGEwJJTjESMBAGA1UECBMJS2FybmF0YWthMRIwEAYDVQQHEwlCYW5nYWxvcmUxFjAU
-BgNVBAoTDUJyb2FkY29tIEluYy4xFjAUBgNVBAMTDVNjb3R0IEJyYW5kZW4xKTAnBgkqhkiG9w0B
-CQEWGnNjb3R0LmJyYW5kZW5AYnJvYWRjb20uY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB
-CgKCAQEAtKitgySOPXrCfmgJJ/6N4Bq2PYQ9C7pbBbEOgcLdGZyOHK9MJW3fcf8NXplv3OfFCQzp
-rm9QWjKvH806lCzDhSKgAg+vro9Alv6BTl7wBdSVpgFsV/Tl+kbDfeBxjE/AwOW+WNGIPJLH4WCo
-MMkaRzH4Lg/8h9DnzxR46++4CqLY4KQQ151a+4Ojb/u/YlVGYlZa/jmTEgk3It8dzv54hZ/UoZg1
-cRe0CRXA7ypOJSgxO/nOOyQoaJxT7CGg1npOeSpPjEuc3fE4xum3l0nvU85hj6MlKZu43hokdBh0
-D0nLyyhEwlR3AC/msdff/UGbM/JR9vk812RP4m/aNWZFJwIDAQABo4IB2zCCAdcwDgYDVR0PAQH/
-BAQDAgWgMIGjBggrBgEFBQcBAQSBljCBkzBOBggrBgEFBQcwAoZCaHR0cDovL3NlY3VyZS5nbG9i
-YWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyM3BlcnNvbmFsc2lnbjJjYTIwMjAuY3J0MEEGCCsGAQUF
-BzABhjVodHRwOi8vb2NzcC5nbG9iYWxzaWduLmNvbS9nc2djY3IzcGVyc29uYWxzaWduMmNhMjAy
-MDBNBgNVHSAERjBEMEIGCisGAQQBoDIBKAowNDAyBggrBgEFBQcCARYmaHR0cHM6Ly93d3cuZ2xv
-YmFsc2lnbi5jb20vcmVwb3NpdG9yeS8wCQYDVR0TBAIwADBJBgNVHR8EQjBAMD6gPKA6hjhodHRw
-Oi8vY3JsLmdsb2JhbHNpZ24uY29tL2dzZ2NjcjNwZXJzb25hbHNpZ24yY2EyMDIwLmNybDAlBgNV
-HREEHjAcgRpzY290dC5icmFuZGVuQGJyb2FkY29tLmNvbTATBgNVHSUEDDAKBggrBgEFBQcDBDAf
-BgNVHSMEGDAWgBSWM9HmWBdbNHWKgVZk1b5I3qGPzzAdBgNVHQ4EFgQUOhjEpl04Sz9dh5MI82E1
-V39lM/owDQYJKoZIhvcNAQELBQADggEBAA7Rlypx/esz/iq1yA4+KW7uwV/aBY344BWcXt6I+SNK
-VwFBgFWfLj5vaEud9TVv2fPSiaHJo0umemOJk+43QD+bsoqmgcFXd21PrOt7Jjs+jjVED9VC5kJq
-S4NNKUkS+BqijJwSegtVygrc/atrIlJbjI21q4qpemUo5fgwqCNm++BmBGTI8yA09vtGSNDRN42k
-lLX9hl3iEj5SBgkQqCbbnoE+ZjjKfqt7ED166WhgyQWNrl39yLcvLj+JRUB3RuvXKZjH0NQEEBII
-wZBDSkyneykLt3CBNIhSCTxKM6OWxVp936ALSa5K9FNy00TeWSpokR6NmzaW8VD/EjTgvqAxggJt
-MIICaQIBATBrMFsxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMTEwLwYD
-VQQDEyhHbG9iYWxTaWduIEdDQyBSMyBQZXJzb25hbFNpZ24gMiBDQSAyMDIwAgx9oXSJpKniO4dS
-Gk8wDQYJYIZIAWUDBAIBBQCggdQwLwYJKoZIhvcNAQkEMSIEIILFBbO32At0jlQYmvDlBzxxKfke
-QfIJzMrdu2nIpFihMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIy
-MDUxODIyMTcxOVowaQYJKoZIhvcNAQkPMVwwWjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAsG
-CWCGSAFlAwQBAjAKBggqhkiG9w0DBzALBgkqhkiG9w0BAQowCwYJKoZIhvcNAQEHMAsGCWCGSAFl
-AwQCATANBgkqhkiG9w0BAQEFAASCAQBIc7nOZb/W3CkCvD0kf3LJMsgwBiUyTBcOQHeudvIMXgiB
-QQ8+U0c03geY7pr3oC9UDTjRSIF1RwJcP3BwheBLJu7kfHK3jy1JiouqgOLb3cV+n/v8R/+Xc+Q9
-MlWFHGJrAD9gPOMrvJ1KMqx0CFXaz0l8rlyXDGV6s+r8X1jt1rnbjZIGoBbGOP0+bObjxE+1Gdyd
-bQJRFfYVGChsqzAPm+mOmOBOafJhgclqEhJSTDfXRiL12HGLyzWipIAmcAo0FrSMyjIkYTvnPG2n
-n3uZVbKScFO51F6GoCOYWwE5SK0CHfHOWXk8TRl9CTBHlWCZR0XRAfCmijeVCq6/xT0J
---000000000000e0603605df509e06--
+I started experimenting with that. As wrote in a separate email, I got a 
+deferred probe timeout,
+
+after inserting required nodes into guest device tree, which seems to be 
+a consequence of the unavailability of IOMMU, I will continue to 
+investigate this question.
+
+
+
+-- 
+Regards,
+
+Oleksandr Tyshchenko
+
 
