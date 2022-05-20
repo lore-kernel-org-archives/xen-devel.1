@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BF9C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 20 May 2022 08:31:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.333541.557380 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C432C433F5
+	for <xen-devel@archiver.kernel.org>; Fri, 20 May 2022 08:54:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.333550.557398 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nry2V-0005zW-MP; Fri, 20 May 2022 08:31:15 +0000
+	id 1nryOa-0008SM-Ux; Fri, 20 May 2022 08:54:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 333541.557380; Fri, 20 May 2022 08:31:15 +0000
+Received: by outflank-mailman (output) from mailman id 333550.557398; Fri, 20 May 2022 08:54:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nry2V-0005zP-I4; Fri, 20 May 2022 08:31:15 +0000
-Received: by outflank-mailman (input) for mailman id 333541;
- Fri, 20 May 2022 08:31:13 +0000
+	id 1nryOa-0008RV-N9; Fri, 20 May 2022 08:54:04 +0000
+Received: by outflank-mailman (input) for mailman id 333550;
+ Fri, 20 May 2022 08:54:03 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=3l+G=V4=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1nry2S-0005zJ-Qt
- for xen-devel@lists.xenproject.org; Fri, 20 May 2022 08:31:13 +0000
-Received: from sonic314-21.consmr.mail.gq1.yahoo.com
- (sonic314-21.consmr.mail.gq1.yahoo.com [98.137.69.84])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e586227-d817-11ec-bd2c-47488cf2e6aa;
- Fri, 20 May 2022 10:31:03 +0200 (CEST)
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic314.consmr.mail.gq1.yahoo.com with HTTP; Fri, 20 May 2022 08:31:00 +0000
-Received: by hermes--canary-production-bf1-5d4b57496-wjd85 (Yahoo Inc. Hermes
- SMTP Server) with ESMTPA ID b6f8f6a30f469bee93e26cb01475724b; 
- Fri, 20 May 2022 08:30:57 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=dOI6=V4=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
+ id 1nryOZ-0008OY-BO
+ for xen-devel@lists.xenproject.org; Fri, 20 May 2022 08:54:03 +0000
+Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
+ [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 635e06fb-d81a-11ec-bd2c-47488cf2e6aa;
+ Fri, 20 May 2022 10:54:00 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id C35875C02A8;
+ Fri, 20 May 2022 04:53:58 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute5.internal (MEProxy); Fri, 20 May 2022 04:53:58 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 20 May 2022 04:53:57 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,152 +45,181 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e586227-d817-11ec-bd2c-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=netscape.net; s=a2048; t=1653035460; bh=WuvwqA1c8r2r+p12+b/hUYdMq9rnRGTuBcxt58to+Ao=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=HF4w2B3LXxAzsPu0cKlClPAp4lIFCVFZUlM+pPQk/ux+ANH+hXbKsjrMjPSA0fZJ7bFN0k3vBmgockcp65NFWPRjltp/uZX8m6/CHBdr+bCznj5y10gd4DlD8HEzG69uE3tqaVbbHsoRnvclRrccUySMDf9kJ1C9NXsVBlCML8dQT9W9zbLw+22y3mNNGSaq/bL8pBTiaCsZ1FW4aFBOwyR2iMix+qtlmTAh2VK/hzqEyMo/dLfJQtZdgFZQeyxm8X+8RTOo9VhypjdtEObCOc6lZPTBSUTACmWdnQ142+D1X8U3FscLu7nqk75T10eZHlh/FT9c4xcPNXHZtL9fMw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1653035460; bh=O145fJvMYEd44wHYCOcQPm3BRaty1a+efZ4N8LUkQQr=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=KTMMx1J1l42zBLEuD7iEYrVpRZ7tenDIzhJP+FNinhG3SjIyDMVzw5N0pDNVL2N2MQ9pb94qH7dr01GJOCOZcXNtF8TViexLW79zwv6ynfIDVQKFpS6XcgMAsXtYpnghDDtVAALwjd1vB81Lt0374U4JDN08+xNpIlCqrxBcoc75xbCbKUwYizkkDqgLilGxLfiRDz8S0S9Gxn5MU4glFMXNaQAKCF1dwkGi1+k+TdJPi7eidZEKU7fihPGPg7vII2CW9XcWkjQ1lU6CFTr5srzCOHQVtMq9U0EeZOeKGy8AtuFKfsD9VLMOg512Kzby6gny/gOQ4gHLvwbJklvxvw==
-X-YMail-OSG: 7CjV_foVM1l0tGFHgoKRE.wnpkoqWeJCUCM8L4Pwg7EBf4yx.s.aoDJ2z8Y4XF5
- nkBd3hXNBdVVi6K__NDC5IxyqplLijiN9NeZ4cFpS.V3YLTiqBnHc6oRK5Z8EqCF41FjbcgasEe_
- .7jTmaDxxxf1seLHTx3CMGqC.uE0FcUfHFCdQ0aFCHAylPQXkQbxVdVLtetzY5jGVyjJjYAwblN1
- vPfLUmFTOFV92.71_ntQfBCwQwxYodrAu9_5r9.7MLVTv3RsXOFhjJzUzjOjuXkVlViS6EWQK39I
- pAOH1zQrv4fDeo.H8kIqXiLaLguNxlaaZ_5BkUXZmDyonaKBi.sYdF2Q8XKolWBpPxBjL8ABwAxz
- dORGC7HOvY3DqgaDeTcW1VX0UNy2rSYcPdOHELAgnsIw.ReQ.6t8Zi38Ww_9v0Y.eIJ.JhBK3F4y
- 3AvYhUpNIQ7E4y0_KowaJFdmoLIWOs39S41mUGY04i6hwR2YBSQiTyf1skcbtWjF1o1DGoJiA47p
- tGB643aWqy7swWezv7nWOrH7RgGfwz0QXrfxM_SD651_S7WfPhLprmZ4DJsaKp2huC182n9G5mj2
- J7tDv8s3ODCP_Pam_edh69oKeODvNDb7Wcv9Q4WPDh2ow0MWkSw9Gd_JegWygV6hWYcSVGsyIMrC
- Wul_q8qqQk4r9Um3QQe1X7fiwQzX00qdEhCJN3gRgddGsttY9VmdmLOmGAk8VGRxDNx3EZZvVTom
- k55_gpE8nhH2sQRR4p_qDBVjbfd6tGLNXmeZct5LkVFmiuMbBvTeGbWeJ6beEq6bINfpeuA1s7Vz
- dUw9sJsRt_EVP7jT3WUu.lwEUKXqn8iCY.mH_6LNHYGiCFFh1u_geLafXI7TvrwGd__DIWkfGN0c
- B21Ne4nzqW3mM.zen08WR5bF_h7EkCQKcdGQs7B0_U6psVHys5khnmhSFSkPgLuNt7Mzg81aq_i5
- lEb6CJ7LjZ068w7uni4NWUwKNYJPDEuChGKW9zLeXqUpPxcGtYLksJ38AFZFIYttRsR5isWRdf3V
- PVZDQGlDooMFGmzRHM8Vzxl99v5HLLnuw18gf7b5N9Wfhj_fNjPBDcloD1_sqZ3rhcZQmBP9_Qfj
- aL693WDn0UhR8roOTVIiA8r4v9qdPji4UHbg8G4CvQqeY3DXoyrFh8bJ75dFqvI6tPdjgjULmUnS
- uatpSUT5iyIUuNJZsKUMlrkXPZ01xbMjD37Qlqxlryt5PgONqdq_V.oKu.mHofpNX4Xs3SfbwzVv
- O0TOoGKHDE1LufOSQaSaJkQqei.wo3J4HqrbMCYCIuGkcdq7cOlVLzJZakFZBOBBFcA8KYqKPDNm
- 9Jl4vloFJ.L3QWh_4yJvRtbkIZp5HOzayLuZgpb96FqCHsCw4Nj1zkOZ_S2BvjISwUOnSmj7ci1L
- 46Led9OyVaAkyuSIr0zWtBA1VqJi_Hgrj.kD3zvG7RATCJGALuaHWtp3qGr3Th74hoZ5P.AFKhiA
- jX7R5smlDei5Eqq2bJH97wSPKzCzvv6QUOi5q2d8PZxHiDiyL6Ln0tKdVhpmrGGpuc.ZKRBiD8Nk
- OH2dAahaCJegaKgkXPsjWp4eoB540liVr0lbyginWNwwuX0o.J4lBvOfFz7JAlLA60DB_mgL5ELJ
- tIdfcySg.Rwa8Wp0nOiNuehVWR18vyOqHc6AQjdUnqFUO11t06w9wVnXk8.KY.InwPEryEvMp5yC
- GkVlRDktIfUiGsrnm8EHJcPr6PFCDJvU0aS.ZZWIeX5YefIp1ia0F8OKBeioS5d0TlIbhaJ1perB
- VC8aEYplBd6nDvIbBgVINPEqP86l8KrhYsaofvY_KFasBr8DgnTzvoQVQrRzWpT8q8pQKIf8DcGF
- kVqA6Oadng9UvGIr4J8ZNFir93IcQFiB5YCQQ7NPseQ6Jz15Cum5De1zuR3xvLk.2GNwjrtfTfWI
- jog8o9t3Hwq595MgPp04QPPyH09YM.m5.vyqLRFjcyz_qRmZr_dXE2DfZslymukJNVGJcr5euLX_
- ExafElfRJQ5PA88fSzYl33h7dRiPCVxt.gj6.sUHE8tfZNgU7dF6fwb1jrrK4hYy85fEDlhsjwPo
- tJTd4wvGHA9eAEs7BX_MGbWtbvv.Bo86PLThrT2VFseqEjtbs487_aIswCgSe1BYROpOoQTVbqmJ
- dUl0qV2u5_EGU5ZMvZYeg_Q2Y7toVdr73hw5cJfn5UFjOyl6kspqzrW0rE0YHIknQdgQ._MTGKhq
- Dgy1f
-X-Sonic-MF: <brchuckz@aim.com>
-Message-ID: <c5fa3c3f-e602-ed68-d670-d59b93c012a0@netscape.net>
-Date: Fri, 20 May 2022 04:30:55 -0400
+X-Inumbo-ID: 635e06fb-d81a-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:sender:subject
+	:subject:to:to; s=fm1; t=1653036838; x=1653123238; bh=9SoDrM5QXO
+	ZZaENaU/Vm3Kz95pyoPpFXFzfpd79RRT4=; b=LCszMCKuP0zC9hT2zd1cAdmOcQ
+	i2N+8aSPgul9dfjJ3mUS4ILp4ZI4MUJSi4Bjlx0H6vTV+Ru7mf5IYK1wRf4Qz11j
+	qpIiMuP4m2Ft3pV9j5QckOn0ZY56JeKnXG1RMRmfDcl20mLj7lydKkLO3wHTVhHD
+	aorEXVluZK8kPZeB3aPwZa9LBQ5Z/eU5rU98njX8CwiK/ckju0BL2vu1gdE8kY8t
+	CqARfaz0DavHu8wFuk9XDmMTv5PX3smvEG8e16QHgu2lCx9ZNwPL0p9xzvYqrC1x
+	CbR5fKBS0f8dRaf/uFm7kEbT8h1gpTYUaPFBNzwWGlUhRM9Lpncu/HUCAYsw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:in-reply-to:message-id:mime-version:references
+	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1653036838; x=
+	1653123238; bh=9SoDrM5QXOZZaENaU/Vm3Kz95pyoPpFXFzfpd79RRT4=; b=s
+	Rfw21pbDfj5erRoCBw/z/ClKDcbe9RCZo+13dXolDLK0dWBD1RXPPQ5RgB2Y/CB5
+	5tnzEKbsYlo4Su4AV16u+o+LQ2B0Oi0LTH9ff8WcaqxW0qDOMrQPsn6f+BewxLrW
+	ONEA4idSPHr8+a3it1wO1C+RRi+T7rn+sWk3NC8PGVJI+3nsk0b/u+R5kvZC6R1d
+	zwy1dEPUA9Ie2cw56pyPckQt7sThgZ14bK/0xM65N8q93ngarMgECf7tZ3X80BsI
+	pWCSZBxonB2f7ecc6n22XTfiHnEWScrYPEMDXiIb3CTCQPqghMn2ZBw05Hsl3Rl2
+	iO72YutBtypT5AbjlY9pw==
+X-ME-Sender: <xms:JleHYl3JhP7vBKVwgV-Rb6Yc-oExSNc_8naUx2Cb2z0WvnaJFzKacA>
+    <xme:JleHYsFmJTs9aD8ZYGHfy-YxW_ME8yNkCMfKM5DsB9GOXk8_6BWUV2LB0S0lBnVCJ
+    ylvqXXjd1KpvA>
+X-ME-Received: <xmr:JleHYl5-itiBxyqtUZCvifbHP5kgMPnPAMnmGRZ_xfNCcd3knPnpFkBIqsH4swFTO2q71qeCmJ6S4bFPeu7RXYU3yIUynl8ttoX3QIjS5kerclzIT6g>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrieefgddtjecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrrhgv
+    khcuofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinh
+    hvihhsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecuggftrfgrthhtvghrnhepgfeu
+    udehgfdvfeehhedujeehfeduveeugefhkefhheelgeevudetueeiudfggfffnecuvehluh
+    hsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghk
+    sehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:JleHYi2uC-jPAiT5btl8Vc6-Gs7HtNAwK9pr3GYR-OF0VUdPFMjavA>
+    <xmx:JleHYoFbNR8iDfPW4vJ49u3mOOvlky9U9l2dsklnFO_CEVQcckHdzw>
+    <xmx:JleHYj94wPOfDnILZ-fyaIxrm3HcKiPc_JE8pm1ggoPfo0g5SdsXXg>
+    <xmx:JleHYtNXMNNS2uPZD_xJ6uJHEungwxUT5Aesp4bcndkDkRb-NcVkKA>
+Feedback-ID: i1568416f:Fastmail
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel@lists.xenproject.org
+Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v6 2/2] ns16550: Add more device IDs for Intel LPSS UART
+Date: Fri, 20 May 2022 10:53:43 +0200
+Message-Id: <20220520085343.1835866-2-marmarek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220520085343.1835866-1-marmarek@invisiblethingslab.com>
+References: <20220520085343.1835866-1-marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Subject: Re: [PATCH 2/2] x86/pat: add functions to query specific cache mode
- availability
-Content-Language: en-US
-From: Chuck Zmudzinski <brchuckz@netscape.net>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H. Peter Anvin" <hpa@zytor.com>, Andy Lutomirski <luto@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
- xen-devel@lists.xenproject.org, x86@kernel.org,
- linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, Juergen Gross <jgross@suse.com>
-References: <20220503132207.17234-1-jgross@suse.com>
- <20220503132207.17234-3-jgross@suse.com>
- <1d86d8ff-6878-5488-e8c4-cbe8a5e8f624@suse.com>
- <0dcb05d0-108f-6252-e768-f75b393a7f5c@suse.com>
- <77255e5b-12bf-5390-6910-dafbaff18e96@netscape.net>
- <a2e95587-418b-879f-2468-8699a6df4a6a@suse.com>
- <8b1ebea5-7820-69c4-2e2b-9866d55bc180@netscape.net>
-In-Reply-To: <8b1ebea5-7820-69c4-2e2b-9866d55bc180@netscape.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.20225 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On 5/20/2022 2:59 AM, Chuck Zmudzinski wrote:
-> On 5/20/2022 2:05 AM, Jan Beulich wrote:
->> On 20.05.2022 06:43, Chuck Zmudzinski wrote:
->>> On 5/4/22 5:14 AM, Juergen Gross wrote:
->>>> On 04.05.22 10:31, Jan Beulich wrote:
->>>>> On 03.05.2022 15:22, Juergen Gross wrote:
->>>>>
->>>>> ... these uses there are several more. You say nothing on why 
->>>>> those want
->>>>> leaving unaltered. When preparing my earlier patch I did inspect them
->>>>> and came to the conclusion that these all would also better 
->>>>> observe the
->>>>> adjusted behavior (or else I couldn't have left pat_enabled() as the
->>>>> only predicate). In fact, as said in the description of my earlier 
->>>>> patch, in
->>>>> my debugging I did find the use in i915_gem_object_pin_map() to be 
->>>>> the
->>>>> problematic one, which you leave alone.
->>>> Oh, I missed that one, sorry.
->>> That is why your patch would not fix my Haswell unless
->>> it also touches i915_gem_object_pin_map() in
->>> drivers/gpu/drm/i915/gem/i915_gem_pages.c
->>>
->>>> I wanted to be rather defensive in my changes, but I agree at least 
->>>> the
->>>> case in arch_phys_wc_add() might want to be changed, too.
->>> I think your approach needs to be more aggressive so it will fix
->>> all the known false negatives introduced by bdd8b6c98239
->>> such as the one in i915_gem_object_pin_map().
->>>
->>> I looked at Jan's approach and I think it would fix the issue
->>> with my Haswell as long as I don't use the nopat option. I
->>> really don't have a strong opinion on that question, but I
->>> think the nopat option as a Linux kernel option, as opposed
->>> to a hypervisor option, should only affect the kernel, and
->>> if the hypervisor provides the pat feature, then the kernel
->>> should not override that,
->> Hmm, why would the kernel not be allowed to override that? Such
->> an override would affect only the single domain where the
->> kernel runs; other domains could take their own decisions.
->>
->> Also, for the sake of completeness: "nopat" used when running on
->> bare metal has the same bad effect on system boot, so there
->> pretty clearly is an error cleanup issue in the i915 driver. But
->> that's orthogonal, and I expect the maintainers may not even care
->> (but tell us "don't do that then").
+This is purely based on the spec:
+- Intel 500 Series PCH: 635218-006
+- Intel 600 Series PCH: 691222-001, 648364-003
 
-Actually I just did a test with the last official Debian kernel
-build of Linux 5.16, that is, a kernel before bdd8b6c98239 was
-applied. In fact, the nopat option does *not* break the i915 driver
-in 5.16. That is, with the nopat option, the i915 driver loads
-normally on both the bare metal and on the Xen hypervisor.
-That means your presumption (and the presumption of
-the author of bdd8b6c98239) that the "nopat" option was
-being observed by the i915 driver is incorrect. Setting "nopat"
-had no effect on my system with Linux 5.16. So after doing these
-tests, I am against the aggressive approach of breaking the i915
-driver with the "nopat" option because prior to bdd8b6c98239,
-nopat did not break the i915 driver. Why break it now?
+This is tested only on TGL-LP added initially, but according to the
+spec, they should behave the same.
 
-Prior to bdd8b6c98239, the i915 driver used
-static_cpu_has(X86_FEATURE_PAT) to test for the PAT
-feature, and apparently this returns true even if nopat
-is set, but the new test, pat_enabled(), returns false on
-the Xen hypervisor even if nopat is not set. That is
-the only problem I see. The question of nopat should
-be irrelevant to the i915 driver.
+Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+Changes in v2:
+ - new patch, adding more IDs to the patch that went in already
+---
+ xen/drivers/char/ns16550.c | 80 +++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 79 insertions(+), 1 deletion(-)
 
-It was unfortunate that the author of bdd8b6c98239
-mentioned nopat in the commit message when in fact
-nopat was never intended to be used to break the
-i915 driver. The i915 driver should ignore the nopat
-option and decide what to do based solely on the
-capability of the cpu, firmware, and the compiled
-options of the Linux kernel. That is how it behaved
-before bdd8b6c98239, and that behavior is what needs
-to be restored with a patch.
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index b37f67dc7430..b7da5646fc28 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -1077,12 +1077,90 @@ static const struct ns16550_config __initconst uart_config[] =
+         .dev_id = 0x0358,
+         .param = param_exar_xr17v358
+     },
+-    /* Intel Corp. TGL-LP LPSS PCI */
++    /* Intel Corp. TGL-LP LPSS PCI UART #0 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0xa0a8,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. TGL-LP LPSS PCI UART #1 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0xa0a9,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. TGL-LP LPSS PCI UART #2 */
+     {
+         .vendor_id = PCI_VENDOR_ID_INTEL,
+         .dev_id = 0xa0c7,
+         .param = param_intel_lpss
+     },
++    /* Intel Corp. TGL-H LPSS PCI UART #0 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x43a8,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. TGL-H LPSS PCI UART #1 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x43a9,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. TGL-H LPSS PCI UART #2 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x43a7,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-P LPSS PCI UART #0 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x51a8,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-P LPSS PCI UART #1 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x51a9,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-P LPSS PCI UART #2 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x51c7,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-P LPSS PCI UART #3 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x51da,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-S LPSS PCI UART #0 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x7aa8,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-S LPSS PCI UART #1 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x7aa9,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-S LPSS PCI UART #2 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x7afe,
++        .param = param_intel_lpss
++    },
++    /* Intel Corp. ADL-S LPSS PCI UART #3 */
++    {
++        .vendor_id = PCI_VENDOR_ID_INTEL,
++        .dev_id = 0x7adc,
++        .param = param_intel_lpss
++    },
+ };
+ 
+ static int __init
+-- 
+2.35.1
 
-Chuck
 
