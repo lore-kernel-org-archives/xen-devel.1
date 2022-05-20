@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB36C433FE
-	for <xen-devel@archiver.kernel.org>; Fri, 20 May 2022 12:14:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.333988.557943 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B24C4332F
+	for <xen-devel@archiver.kernel.org>; Fri, 20 May 2022 12:14:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.333986.557932 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ns1Wn-0003Y5-AG; Fri, 20 May 2022 12:14:45 +0000
+	id 1ns1Wm-0003O4-ML; Fri, 20 May 2022 12:14:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 333988.557943; Fri, 20 May 2022 12:14:45 +0000
+Received: by outflank-mailman (output) from mailman id 333986.557932; Fri, 20 May 2022 12:14:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ns1Wn-0003WA-5W; Fri, 20 May 2022 12:14:45 +0000
-Received: by outflank-mailman (input) for mailman id 333988;
+	id 1ns1Wm-0003Nx-JZ; Fri, 20 May 2022 12:14:44 +0000
+Received: by outflank-mailman (input) for mailman id 333986;
  Fri, 20 May 2022 12:14:43 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ns1Wl-0003NP-R9
+ (envelope-from <julien@xen.org>) id 1ns1Wl-0003NF-Od
  for xen-devel@lists.xenproject.org; Fri, 20 May 2022 12:14:43 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ns1Wl-0005wW-Li; Fri, 20 May 2022 12:14:43 +0000
+ id 1ns1Wl-0005wQ-Gq; Fri, 20 May 2022 12:14:43 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ns1Sm-0001lI-S2; Fri, 20 May 2022 12:10:37 +0000
+ id 1ns1Ss-0001lI-7T; Fri, 20 May 2022 12:10:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,98 +45,141 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=HwmRtt4otl1crmQ3IgjCxj/lVWCzBdIkM8zTQonw0lU=; b=EiJ687OV4u5psb86gk5OSHYba4
-	gE5eOTcNprJA0+yjr3EcYZo+FUl/WEp+BWKB+Xz9owRPWsmeK6yZQz+y+7V+kIjhLXlPySjjEH4Qt
-	+M7dZYhOx8bgcih8R1K/0YRJJKsbLBgy6DgZdCkI9YhC7Kl5vry0Ob7hKk4bU5PrzS4M=;
+	bh=7kkcUtTj63g7Kwg1pXZqqsSOsowp6Vr0NeH5tERRvKE=; b=Y/a0/6lqiOd+ENWCW26KMos1CT
+	IaBH4JCumNkQJzAc5WJwRhRuYudmnr30I+g1PGh1IbPw6S5ql5Jyur0RS7RrTsGnnCCUugQmf58F0
+	zp+VjvgR9JrglKY39gKq8IQgbAvetjSL8qW//zW1WX3mjX9E7s3R7x5prKh+NnG5VgLQ=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Julien Grall <jgrall@amazon.com>,
+	Julien Grall <julien.grall@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 11/16] xen/arm: mm: Clean-up the includes and order them
-Date: Fri, 20 May 2022 13:09:32 +0100
-Message-Id: <20220520120937.28925-12-julien@xen.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH 16/16] xen/arm: mm: Re-implement setup_frame_table_mappings() with map_pages_to_xen()
+Date: Fri, 20 May 2022 13:09:37 +0100
+Message-Id: <20220520120937.28925-17-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220520120937.28925-1-julien@xen.org>
 References: <20220520120937.28925-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <jgrall@amazon.com>
+From: Julien Grall <julien.grall@arm.com>
 
-The numbers of includes in mm.c has been growing quite a lot. However
-some of them (e.g. xen/device_tree.h, xen/softirq.h) doesn't look
-to be directly used by the file or other will be included by
-larger headers (e.g asm/flushtlb.h will be included by xen/mm.h).
+Now that map_pages_to_xen() has been extended to support 2MB mappings,
+we can replace the create_mappings() call by map_pages_to_xen() call.
 
-So trim down the number of includes. Take the opportunity to order
-them with the xen headers first, then asm headers and last public
-headers.
+This has the advantage to remove the differences between 32-bit and
+64-bit code.
 
+Lastly remove create_mappings() as there is no more callers.
+
+Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-Acked-by: Stefano Stabellini <sstabellini@kernel.org>
 
 ---
-
     Changes in v4:
-        - Add Stefano's acked-by
+        - Add missing _PAGE_BLOCK
 
     Changes in v3:
-        - Patch added
+        - Fix typo in the commit message
+        - Remove the TODO regarding contiguous bit
+
+    Changes in v2:
+        - New patch
 ---
- xen/arch/arm/mm.c | 27 ++++++++++-----------------
- 1 file changed, 10 insertions(+), 17 deletions(-)
+ xen/arch/arm/mm.c | 64 +++++------------------------------------------
+ 1 file changed, 6 insertions(+), 58 deletions(-)
 
 diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index bd1348a99716..d40dd4e6c9e6 100644
+index 65af44f42232..be37176a4725 100644
 --- a/xen/arch/arm/mm.c
 +++ b/xen/arch/arm/mm.c
-@@ -17,33 +17,26 @@
-  * GNU General Public License for more details.
-  */
+@@ -369,40 +369,6 @@ void clear_fixmap(unsigned map)
+     BUG_ON(res != 0);
+ }
  
--#include <xen/compile.h>
--#include <xen/types.h>
--#include <xen/device_tree.h>
--#include <xen/init.h>
--#include <xen/mm.h>
--#include <xen/preempt.h>
-+#include <xen/domain_page.h>
- #include <xen/errno.h>
- #include <xen/grant_table.h>
--#include <xen/softirq.h>
--#include <xen/event.h>
- #include <xen/guest_access.h>
--#include <xen/domain_page.h>
--#include <xen/err.h>
--#include <asm/page.h>
--#include <asm/current.h>
--#include <asm/flushtlb.h>
--#include <public/memory.h>
-+#include <xen/init.h>
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/mm.h>
-+#include <xen/pfn.h>
- #include <xen/sched.h>
-+#include <xen/sizes.h>
-+#include <xen/types.h>
- #include <xen/vmap.h>
-+
- #include <xsm/xsm.h>
--#include <xen/pfn.h>
--#include <xen/sizes.h>
--#include <xen/libfdt/libfdt.h>
+-/* Create Xen's mappings of memory.
+- * Mapping_size must be either 2MB or 32MB.
+- * Base and virt must be mapping_size aligned.
+- * Size must be a multiple of mapping_size.
+- * second must be a contiguous set of second level page tables
+- * covering the region starting at virt_offset. */
+-static void __init create_mappings(lpae_t *second,
+-                                   unsigned long virt_offset,
+-                                   unsigned long base_mfn,
+-                                   unsigned long nr_mfns,
+-                                   unsigned int mapping_size)
+-{
+-    unsigned long i, count;
+-    const unsigned long granularity = mapping_size >> PAGE_SHIFT;
+-    lpae_t pte, *p;
+-
+-    ASSERT((mapping_size == MB(2)) || (mapping_size == MB(32)));
+-    ASSERT(!((virt_offset >> PAGE_SHIFT) % granularity));
+-    ASSERT(!(base_mfn % granularity));
+-    ASSERT(!(nr_mfns % granularity));
+-
+-    count = nr_mfns / XEN_PT_LPAE_ENTRIES;
+-    p = second + second_linear_offset(virt_offset);
+-    pte = mfn_to_xen_entry(_mfn(base_mfn), MT_NORMAL);
+-    if ( granularity == 16 * XEN_PT_LPAE_ENTRIES )
+-        pte.pt.contig = 1;  /* These maps are in 16-entry contiguous chunks. */
+-    for ( i = 0; i < count; i++ )
+-    {
+-        write_pte(p + i, pte);
+-        pte.pt.base += 1 << XEN_PT_LPAE_SHIFT;
+-    }
+-    flush_xen_tlb_local();
+-}
+-
+ #ifdef CONFIG_DOMAIN_PAGE
+ void *map_domain_page_global(mfn_t mfn)
+ {
+@@ -862,36 +828,18 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+     unsigned long frametable_size = nr_pdxs * sizeof(struct page_info);
+     mfn_t base_mfn;
+     const unsigned long mapping_size = frametable_size < MB(32) ? MB(2) : MB(32);
+-#ifdef CONFIG_ARM_64
+-    lpae_t *second, pte;
+-    unsigned long nr_second;
+-    mfn_t second_base;
+-    int i;
+-#endif
++    int rc;
  
- #include <asm/fixmap.h>
- #include <asm/setup.h>
+     frametable_base_pdx = mfn_to_pdx(maddr_to_mfn(ps));
+     /* Round up to 2M or 32M boundary, as appropriate. */
+     frametable_size = ROUNDUP(frametable_size, mapping_size);
+     base_mfn = alloc_boot_pages(frametable_size >> PAGE_SHIFT, 32<<(20-12));
  
-+#include <public/memory.h>
-+
- /* Override macros from asm/page.h to make them work with mfn_t */
- #undef virt_to_mfn
- #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
+-#ifdef CONFIG_ARM_64
+-    /* Compute the number of second level pages. */
+-    nr_second = ROUNDUP(frametable_size, FIRST_SIZE) >> FIRST_SHIFT;
+-    second_base = alloc_boot_pages(nr_second, 1);
+-    second = mfn_to_virt(second_base);
+-    for ( i = 0; i < nr_second; i++ )
+-    {
+-        clear_page(mfn_to_virt(mfn_add(second_base, i)));
+-        pte = mfn_to_xen_entry(mfn_add(second_base, i), MT_NORMAL);
+-        pte.pt.table = 1;
+-        write_pte(&xen_first[first_table_offset(FRAMETABLE_VIRT_START)+i], pte);
+-    }
+-    create_mappings(second, 0, mfn_x(base_mfn), frametable_size >> PAGE_SHIFT,
+-                    mapping_size);
+-#else
+-    create_mappings(xen_second, FRAMETABLE_VIRT_START, mfn_x(base_mfn),
+-                    frametable_size >> PAGE_SHIFT, mapping_size);
+-#endif
++    rc = map_pages_to_xen(FRAMETABLE_VIRT_START, base_mfn,
++                          frametable_size >> PAGE_SHIFT,
++                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
++    if ( rc )
++        panic("Unable to setup the frametable mappings.\n");
+ 
+     memset(&frame_table[0], 0, nr_pdxs * sizeof(struct page_info));
+     memset(&frame_table[nr_pdxs], -1,
 -- 
 2.32.0
 
