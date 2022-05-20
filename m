@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE669C43219
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CF09C4332F
 	for <xen-devel@archiver.kernel.org>; Fri, 20 May 2022 12:10:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.333901.557856 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.333899.557833 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ns1Sg-0006Fs-9T; Fri, 20 May 2022 12:10:30 +0000
+	id 1ns1Sd-0005fH-F7; Fri, 20 May 2022 12:10:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 333901.557856; Fri, 20 May 2022 12:10:30 +0000
+Received: by outflank-mailman (output) from mailman id 333899.557833; Fri, 20 May 2022 12:10:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ns1Sg-0006Fl-4S; Fri, 20 May 2022 12:10:30 +0000
-Received: by outflank-mailman (input) for mailman id 333901;
- Fri, 20 May 2022 12:10:28 +0000
+	id 1ns1Sd-0005es-Ah; Fri, 20 May 2022 12:10:27 +0000
+Received: by outflank-mailman (input) for mailman id 333899;
+ Fri, 20 May 2022 12:10:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ns1Se-0005v8-Hk
- for xen-devel@lists.xenproject.org; Fri, 20 May 2022 12:10:28 +0000
+ (envelope-from <julien@xen.org>) id 1ns1Sc-0005Sb-A9
+ for xen-devel@lists.xenproject.org; Fri, 20 May 2022 12:10:26 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ns1Se-0005oM-BP; Fri, 20 May 2022 12:10:28 +0000
+ id 1ns1Sc-0005n7-2i; Fri, 20 May 2022 12:10:26 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ns1Se-0001lI-3Z; Fri, 20 May 2022 12:10:28 +0000
+ id 1ns1Sb-0001lI-RB; Fri, 20 May 2022 12:10:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,82 +45,206 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=noAFzbg7XMXNKcoQy6EbRQkG8IRrJ9Zy042sIzuyylk=; b=JMmHBQf30UDfDEGdAOJclsCP2F
-	MfBJ0ImN4oLdOXiZZmlAYP361G0+BY+p+TKwEIwLRK4yddh+z4yP/tcYuOt7yxiUAsGsf3XQBPwCv
-	9psvqC+wV5F5oe89mmB5JgLAhP+9RHy7QpMCX/jHvaDZoW7Ev1S0nszbujx5CneafAA8=;
+	bh=G/yN/MMtss1f4FLjXsFIcnhjFW34XkVIM7A866pB5UU=; b=269d0/n+a5ZxknKGNjRNIHkykk
+	ai0vXTeeOTqJUDLP2r/QRjhi54o7qkt8Rj9oncohm+yT7uow6nHpFMLeaHmbAG5S7cfGxfh3tJjhM
+	0DuQNlMIq3tBOW9rbRqshKDt28Cy+H2vPRG35KnPVM1X5+nw5ppchRD0URig3DQBXc/Y=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Julien Grall <julien.grall@arm.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>,
-	Hongda Deng <Hongda.Heng@arm.com>
-Subject: [PATCH 04/16] xen/arm: mm: Don't open-code Xen PT update in remove_early_mappings()
-Date: Fri, 20 May 2022 13:09:25 +0100
-Message-Id: <20220520120937.28925-5-julien@xen.org>
+	Hongda Deng <Hongda.Deng@arm.com>
+Subject: [PATCH 02/16] xen/arm: mm: Add support for the contiguous bit
+Date: Fri, 20 May 2022 13:09:23 +0100
+Message-Id: <20220520120937.28925-3-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220520120937.28925-1-julien@xen.org>
 References: <20220520120937.28925-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <julien.grall@arm.com>
+From: Julien Grall <jgrall@amazon.com>
 
-Now that xen_pt_update_entry() is able to deal with different mapping
-size, we can replace the open-coding of the page-tables update by a call
-to modify_xen_mappings().
+In follow-up patches, we will use xen_pt_update() (or its callers)
+to handle large mappings (e.g. frametable, xenheap). They are also
+not going to be modified once created.
 
-As the function is not meant to fail, a BUG_ON() is added to check the
-return.
+The page-table entries have an hint to indicate that whether an
+entry is contiguous to another 16 entries (assuming 4KB). When the
+processor support the hint, one TLB entry will be created per
+contiguous region.
 
-Note that we don't use destroy_xen_mappings() because the helper doesn't
-allow us to pass a flags. In theory we could add an extra parameter to
-the function, however there are no other expected users. Hence why
-modify_xen_mappings() is used.
+For now this is tied to _PAGE_BLOCK. We can untie it in the future
+if there are use-cases where we may want to use _PAGE_BLOCK without
+setting the contiguous (couldn't think of any yet).
 
-Signed-off-by: Julien Grall <julien.grall@arm.com>
+Note that to avoid extra complexity, mappings with the contiguous
+bit set cannot be removed. Given the expected use, this restriction
+ought to be fine.
+
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-Reviewed-by: Hongda Deng <Hongda.Heng@arm.com>
+Reviewed-by: Hongda Deng <Hongda.Deng@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
 ---
     Changes in v4:
-        - Add Hongda's reviewed-by
-        - Add a comment to explain what modify_xen_mappings() does.
-        - Clarify in the commit message hwy modify_xen_mappings() is
-          used rather than destroy_xen_mappings().
+        - Add Hongda and Stefano's reviewed-by
+        - Exit the outer loop as soon as there is an error.
 
-    Changes in v2:
-        - Stay consistent with how function name are used in the commit
-        message
-        - Add my AWS signed-off-by
+    Changes in v3:
+        - New patch
 ---
- xen/arch/arm/mm.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ xen/arch/arm/include/asm/page.h |  4 ++
+ xen/arch/arm/mm.c               | 83 +++++++++++++++++++++++++++++----
+ 2 files changed, 79 insertions(+), 8 deletions(-)
 
+diff --git a/xen/arch/arm/include/asm/page.h b/xen/arch/arm/include/asm/page.h
+index 07998df47bac..e7cd62190c7f 100644
+--- a/xen/arch/arm/include/asm/page.h
++++ b/xen/arch/arm/include/asm/page.h
+@@ -70,6 +70,7 @@
+  * [5]   Page present
+  * [6]   Only populate page tables
+  * [7]   Superpage mappings is allowed
++ * [8]   Set contiguous bit (internal flag)
+  */
+ #define PAGE_AI_MASK(x) ((x) & 0x7U)
+ 
+@@ -86,6 +87,9 @@
+ #define _PAGE_BLOCK_BIT     7
+ #define _PAGE_BLOCK         (1U << _PAGE_BLOCK_BIT)
+ 
++#define _PAGE_CONTIG_BIT    8
++#define _PAGE_CONTIG        (1U << _PAGE_CONTIG_BIT)
++
+ /*
+  * _PAGE_DEVICE and _PAGE_NORMAL are convenience defines. They are not
+  * meant to be used outside of this header.
 diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 747083d820dd..64a79d45b38c 100644
+index be2ac302d731..c4487dd7fc46 100644
 --- a/xen/arch/arm/mm.c
 +++ b/xen/arch/arm/mm.c
-@@ -614,11 +614,12 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
+@@ -1252,6 +1252,8 @@ static int xen_pt_update_entry(mfn_t root, unsigned long virt,
+         /* Set permission */
+         pte.pt.ro = PAGE_RO_MASK(flags);
+         pte.pt.xn = PAGE_XN_MASK(flags);
++        /* Set contiguous bit */
++        pte.pt.contig = !!(flags & _PAGE_CONTIG);
+     }
  
- void __init remove_early_mappings(void)
- {
--    lpae_t pte = {0};
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START), pte);
--    write_pte(xen_second + second_table_offset(BOOT_FDT_VIRT_START + SZ_2M),
--              pte);
--    flush_xen_tlb_range_va(BOOT_FDT_VIRT_START, BOOT_FDT_SLOT_SIZE);
-+    int rc;
-+
-+    /* destroy the _PAGE_BLOCK mapping */
-+    rc = modify_xen_mappings(BOOT_FDT_VIRT_START, BOOT_FDT_VIRT_END,
-+                             _PAGE_BLOCK);
-+    BUG_ON(rc);
+     write_pte(entry, pte);
+@@ -1304,6 +1306,51 @@ static int xen_pt_mapping_level(unsigned long vfn, mfn_t mfn, unsigned long nr,
+      return level;
  }
  
- /*
++#define XEN_PT_4K_NR_CONTIG 16
++
++/*
++ * Check whether the contiguous bit can be set. Return the number of
++ * contiguous entry allowed. If not allowed, return 1.
++ */
++static unsigned int xen_pt_check_contig(unsigned long vfn, mfn_t mfn,
++                                        unsigned int level, unsigned long left,
++                                        unsigned int flags)
++{
++    unsigned long nr_contig;
++
++    /*
++     * Allow the contiguous bit to set when the caller requests block
++     * mapping.
++     */
++    if ( !(flags & _PAGE_BLOCK) )
++        return 1;
++
++    /*
++     * We don't allow to remove mapping with the contiguous bit set.
++     * So shortcut the logic and directly return 1.
++     */
++    if ( mfn_eq(mfn, INVALID_MFN) )
++        return 1;
++
++    /*
++     * The number of contiguous entries varies depending on the page
++     * granularity used. The logic below assumes 4KB.
++     */
++    BUILD_BUG_ON(PAGE_SIZE != SZ_4K);
++
++    /*
++     * In order to enable the contiguous bit, we should have enough entries
++     * to map left and both the virtual and physical address should be
++     * aligned to the size of 16 translation tables entries.
++     */
++    nr_contig = BIT(XEN_PT_LEVEL_ORDER(level), UL) * XEN_PT_4K_NR_CONTIG;
++
++    if ( (left < nr_contig) || ((mfn_x(mfn) | vfn) & (nr_contig - 1)) )
++        return 1;
++
++    return XEN_PT_4K_NR_CONTIG;
++}
++
+ static DEFINE_SPINLOCK(xen_pt_lock);
+ 
+ static int xen_pt_update(unsigned long virt,
+@@ -1338,6 +1385,12 @@ static int xen_pt_update(unsigned long virt,
+         return -EINVAL;
+     }
+ 
++    if ( flags & _PAGE_CONTIG )
++    {
++        mm_printk("_PAGE_CONTIG is an internal only flag.\n");
++        return -EINVAL;
++    }
++
+     if ( !IS_ALIGNED(virt, PAGE_SIZE) )
+     {
+         mm_printk("The virtual address is not aligned to the page-size.\n");
+@@ -1348,22 +1401,36 @@ static int xen_pt_update(unsigned long virt,
+ 
+     while ( left )
+     {
+-        unsigned int order, level;
++        unsigned int order, level, nr_contig, new_flags;
+ 
+         level = xen_pt_mapping_level(vfn, mfn, left, flags);
+         order = XEN_PT_LEVEL_ORDER(level);
+ 
+         ASSERT(left >= BIT(order, UL));
+ 
+-        rc = xen_pt_update_entry(root, vfn << PAGE_SHIFT, mfn, level, flags);
+-        if ( rc )
+-            break;
++        /*
++         * Check if we can set the contiguous mapping and update the
++         * flags accordingly.
++         */
++        nr_contig = xen_pt_check_contig(vfn, mfn, level, left, flags);
++        new_flags = flags | ((nr_contig > 1) ? _PAGE_CONTIG : 0);
+ 
+-        vfn += 1U << order;
+-        if ( !mfn_eq(mfn, INVALID_MFN) )
+-            mfn = mfn_add(mfn, 1U << order);
++        for ( ; nr_contig > 0; nr_contig-- )
++        {
++            rc = xen_pt_update_entry(root, vfn << PAGE_SHIFT, mfn, level,
++                                     new_flags);
++            if ( rc )
++                break;
++
++            vfn += 1U << order;
++            if ( !mfn_eq(mfn, INVALID_MFN) )
++                mfn = mfn_add(mfn, 1U << order);
+ 
+-        left -= (1U << order);
++            left -= (1U << order);
++        }
++
++        if ( rc )
++            break;
+     }
+ 
+     /*
 -- 
 2.32.0
 
