@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29DDBC43217
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE54C433F5
 	for <xen-devel@archiver.kernel.org>; Fri, 20 May 2022 12:14:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.333991.557968 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.333992.557977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ns1Wo-0003yz-S2; Fri, 20 May 2022 12:14:46 +0000
+	id 1ns1Wp-0004BU-EL; Fri, 20 May 2022 12:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 333991.557968; Fri, 20 May 2022 12:14:46 +0000
+Received: by outflank-mailman (output) from mailman id 333992.557977; Fri, 20 May 2022 12:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ns1Wo-0003vf-EY; Fri, 20 May 2022 12:14:46 +0000
-Received: by outflank-mailman (input) for mailman id 333991;
- Fri, 20 May 2022 12:14:43 +0000
+	id 1ns1Wo-00047E-Vu; Fri, 20 May 2022 12:14:46 +0000
+Received: by outflank-mailman (input) for mailman id 333992;
+ Fri, 20 May 2022 12:14:44 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ns1Wl-0003Nd-Tk
+ (envelope-from <julien@xen.org>) id 1ns1Wl-0003NZ-TR
  for xen-devel@lists.xenproject.org; Fri, 20 May 2022 12:14:43 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ns1Wl-0005we-Oq; Fri, 20 May 2022 12:14:43 +0000
+ id 1ns1Wl-0005wU-K9; Fri, 20 May 2022 12:14:43 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1ns1Sr-0001lI-38; Fri, 20 May 2022 12:10:41 +0000
+ id 1ns1Sn-0001lI-T1; Fri, 20 May 2022 12:10:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,177 +45,114 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=41WjXhbveDV5dmNCQg1PHVgqE6S+lfA5Dgi2tBRYmT0=; b=sZoYCpyBcFzHWZlYss8ssgcJBg
-	ZCC9jzSuNV0zXOmMwhY6dEB7lqRhdIJuoWSebGFUDYQGwbVbq1NKe0tpccxEASdhs/B7XKNDv5d26
-	1PJsLbQ+CVjSrKVjX54SZdXZe5AyZ6LUcfJeXIXviwddedkf4qOKLwAKdRQZLlIStO7A=;
+	bh=QrMX+f1B9/uCnIONfcNrd5IjXpsYHLALKUn/Mv7SupA=; b=6Up0ZDUUnV7j3M6/hSXLAhP30w
+	JjdnUfUG1voWCIHjL4TOnQyYZFkX4i1J0w1x10XhV5yAe10ZeDXQigwv4OK11+YZkzQAVyhIur8ED
+	QEDfrRXcCTkokXAVlBrpuvsBzcin/bcjIgkl1EJciGHxzTMy4kC6TWq6k6y64nJ78Efk=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
-	Julien Grall <julien.grall@arm.com>,
+	Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julien Grall <jgrall@amazon.com>
-Subject: [PATCH 15/16] xen/arm: mm: Rework setup_xenheap_mappings()
-Date: Fri, 20 May 2022 13:09:36 +0100
-Message-Id: <20220520120937.28925-16-julien@xen.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 12/16] xen/arm: mm: Use the PMAP helpers in xen_{,un}map_table()
+Date: Fri, 20 May 2022 13:09:33 +0100
+Message-Id: <20220520120937.28925-13-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220520120937.28925-1-julien@xen.org>
 References: <20220520120937.28925-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Julien Grall <julien.grall@arm.com>
+From: Julien Grall <jgrall@amazon.com>
 
-The current implementation of setup_xenheap_mappings() is using 1GB
-mappings. This can lead to unexpected result because the mapping
-may alias a non-cachable region (such as device or reserved regions).
-For more details see B2.8 in ARM DDI 0487H.a.
+During early boot, it is not possible to use xen_{,un}map_table()
+if the page tables are not residing the Xen binary.
 
-map_pages_to_xen() was recently reworked to allow superpage mappings,
-support contiguous mapping and deal with the use of page-tables before
-they are mapped.
+This is a blocker to switch some of the helpers to use xen_pt_update()
+as we may need to allocate extra page tables and access them before
+the domheap has been initialized (see setup_xenheap_mappings()).
 
-Most of the code in setup_xenheap_mappings() is now replaced with a
-single call to map_pages_to_xen().
+xen_{,un}map_table() are now updated to use the PMAP helpers for early
+boot map/unmap. Note that the special case for page-tables residing
+in Xen binary has been dropped because it is "complex" and was
+only added as a workaround in 8d4f1b8878e0 ("xen/arm: mm: Allow
+generic xen page-tables helpers to be called early").
 
-Signed-off-by: Julien Grall <julien.grall@arm.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
 ---
     Changes in v4:
-        - Fix typo
         - Add Stefano's reviewed-by
-
-    Changes in v3:
-        - Don't use 1GB mapping
-        - Re-order code in setup_mm() in a separate patch
 
     Changes in v2:
         - New patch
 ---
- xen/arch/arm/mm.c | 87 ++++++++++-------------------------------------
- 1 file changed, 18 insertions(+), 69 deletions(-)
+ xen/arch/arm/mm.c | 33 +++++++++------------------------
+ 1 file changed, 9 insertions(+), 24 deletions(-)
 
 diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index b019e4b35b55..65af44f42232 100644
+index d40dd4e6c9e6..b019e4b35b55 100644
 --- a/xen/arch/arm/mm.c
 +++ b/xen/arch/arm/mm.c
-@@ -138,17 +138,6 @@ static DEFINE_PAGE_TABLE(cpu0_pgtable);
- static DEFINE_PAGE_TABLES(cpu0_dommap, DOMHEAP_SECOND_PAGES);
- #endif
- 
--#ifdef CONFIG_ARM_64
--/* The first page of the first level mapping of the xenheap. The
-- * subsequent xenheap first level pages are dynamically allocated, but
-- * we need this one to bootstrap ourselves. */
--static DEFINE_PAGE_TABLE(xenheap_first_first);
--/* The zeroeth level slot which uses xenheap_first_first. Used because
-- * setup_xenheap_mappings otherwise relies on mfn_to_virt which isn't
-- * valid for a non-xenheap mapping. */
--static __initdata int xenheap_first_first_slot = -1;
--#endif
--
- /* Common pagetable leaves */
- /* Second level page tables.
-  *
-@@ -831,77 +820,37 @@ void __init setup_xenheap_mappings(unsigned long base_mfn,
- void __init setup_xenheap_mappings(unsigned long base_mfn,
-                                    unsigned long nr_mfns)
+@@ -25,6 +25,7 @@
+ #include <xen/libfdt/libfdt.h>
+ #include <xen/mm.h>
+ #include <xen/pfn.h>
++#include <xen/pmap.h>
+ #include <xen/sched.h>
+ #include <xen/sizes.h>
+ #include <xen/types.h>
+@@ -980,27 +981,11 @@ void *ioremap(paddr_t pa, size_t len)
+ static lpae_t *xen_map_table(mfn_t mfn)
  {
--    lpae_t *first, pte;
--    unsigned long mfn, end_mfn;
--    vaddr_t vaddr;
--
--    /* Align to previous 1GB boundary */
--    mfn = base_mfn & ~((FIRST_SIZE>>PAGE_SHIFT)-1);
-+    int rc;
- 
-     /* First call sets the xenheap physical and virtual offset. */
-     if ( mfn_eq(xenheap_mfn_start, INVALID_MFN) )
-     {
-+        unsigned long mfn_gb = base_mfn & ~((FIRST_SIZE >> PAGE_SHIFT) - 1);
-+
-         xenheap_mfn_start = _mfn(base_mfn);
-         xenheap_base_pdx = mfn_to_pdx(_mfn(base_mfn));
-+        /*
-+         * The base address may not be aligned to the first level
-+         * size (e.g. 1GB when using 4KB pages). This would prevent
-+         * superpage mappings for all the regions because the virtual
-+         * address and machine address should both be suitably aligned.
-+         *
-+         * Prevent that by offsetting the start of the xenheap virtual
-+         * address.
-+         */
-         xenheap_virt_start = DIRECTMAP_VIRT_START +
--            (base_mfn - mfn) * PAGE_SIZE;
-+            (base_mfn - mfn_gb) * PAGE_SIZE;
-     }
- 
-     if ( base_mfn < mfn_x(xenheap_mfn_start) )
-         panic("cannot add xenheap mapping at %lx below heap start %lx\n",
-               base_mfn, mfn_x(xenheap_mfn_start));
- 
--    end_mfn = base_mfn + nr_mfns;
--
--    /*
--     * Virtual address aligned to previous 1GB to match physical
--     * address alignment done above.
--     */
--    vaddr = (vaddr_t)__mfn_to_virt(base_mfn) & FIRST_MASK;
--
--    while ( mfn < end_mfn )
+     /*
+-     * We may require to map the page table before map_domain_page() is
+-     * useable. The requirements here is it must be useable as soon as
+-     * page-tables are allocated dynamically via alloc_boot_pages().
+-     *
+-     * We need to do the check on physical address rather than virtual
+-     * address to avoid truncation on Arm32. Therefore is_kernel() cannot
+-     * be used.
++     * During early boot, map_domain_page() may be unusable. Use the
++     * PMAP to map temporarily a page-table.
+      */
+     if ( system_state == SYS_STATE_early_boot )
 -    {
--        int slot = zeroeth_table_offset(vaddr);
--        lpae_t *p = &xen_pgtable[slot];
--
--        if ( p->pt.valid )
+-        if ( is_xen_fixed_mfn(mfn) )
 -        {
--            /* mfn_to_virt is not valid on the 1st 1st mfn, since it
--             * is not within the xenheap. */
--            first = slot == xenheap_first_first_slot ?
--                xenheap_first_first : mfn_to_virt(lpae_get_mfn(*p));
+-            /*
+-             * It is fine to demote the type because the size of Xen
+-             * will always fit in vaddr_t.
+-             */
+-            vaddr_t offset = mfn_to_maddr(mfn) - virt_to_maddr(&_start);
+-
+-            return (lpae_t *)(XEN_VIRT_START + offset);
 -        }
--        else if ( xenheap_first_first_slot == -1)
--        {
--            /* Use xenheap_first_first to bootstrap the mappings */
--            first = xenheap_first_first;
--
--            pte = pte_of_xenaddr((vaddr_t)xenheap_first_first);
--            pte.pt.table = 1;
--            write_pte(p, pte);
--
--            xenheap_first_first_slot = slot;
--        }
--        else
--        {
--            mfn_t first_mfn = alloc_boot_pages(1, 1);
--
--            clear_page(mfn_to_virt(first_mfn));
--            pte = mfn_to_xen_entry(first_mfn, MT_NORMAL);
--            pte.pt.table = 1;
--            write_pte(p, pte);
--            first = mfn_to_virt(first_mfn);
--        }
--
--        pte = mfn_to_xen_entry(_mfn(mfn), MT_NORMAL);
--        /* TODO: Set pte.pt.contig when appropriate. */
--        write_pte(&first[first_table_offset(vaddr)], pte);
--
--        mfn += FIRST_SIZE>>PAGE_SHIFT;
--        vaddr += FIRST_SIZE;
 -    }
--
--    flush_xen_tlb_local();
-+    rc = map_pages_to_xen((vaddr_t)__mfn_to_virt(base_mfn),
-+                          _mfn(base_mfn), nr_mfns,
-+                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
-+    if ( rc )
-+        panic("Unable to setup the xenheap mappings.\n");
- }
- #endif
++        return pmap_map(mfn);
  
+     return map_domain_page(mfn);
+ }
+@@ -1009,12 +994,12 @@ static void xen_unmap_table(const lpae_t *table)
+ {
+     /*
+      * During early boot, xen_map_table() will not use map_domain_page()
+-     * for page-tables residing in Xen binary. So skip the unmap part.
++     * but the PMAP.
+      */
+-    if ( system_state == SYS_STATE_early_boot && is_kernel(table) )
+-        return;
+-
+-    unmap_domain_page(table);
++    if ( system_state == SYS_STATE_early_boot )
++        pmap_unmap(table);
++    else
++        unmap_domain_page(table);
+ }
+ 
+ static int create_xen_table(lpae_t *entry)
 -- 
 2.32.0
 
