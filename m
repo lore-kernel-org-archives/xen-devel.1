@@ -4,33 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B7B5C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 23 May 2022 15:01:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.335963.560204 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA88BC433F5
+	for <xen-devel@archiver.kernel.org>; Mon, 23 May 2022 15:09:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.335996.560215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nt9YY-0001lP-Mg; Mon, 23 May 2022 15:01:14 +0000
+	id 1nt9g3-0002Zu-Ft; Mon, 23 May 2022 15:08:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 335963.560204; Mon, 23 May 2022 15:01:14 +0000
+Received: by outflank-mailman (output) from mailman id 335996.560215; Mon, 23 May 2022 15:08:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nt9YY-0001lI-JS; Mon, 23 May 2022 15:01:14 +0000
-Received: by outflank-mailman (input) for mailman id 335963;
- Mon, 23 May 2022 15:01:12 +0000
+	id 1nt9g3-0002Zn-CG; Mon, 23 May 2022 15:08:59 +0000
+Received: by outflank-mailman (input) for mailman id 335996;
+ Mon, 23 May 2022 15:08:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Smdb=V7=igalia.com=gpiccoli@srs-se1.protection.inumbo.net>)
- id 1nt9YW-0001lB-HN
- for xen-devel@lists.xenproject.org; Mon, 23 May 2022 15:01:12 +0000
-Received: from fanzine2.igalia.com (fanzine.igalia.com [178.60.130.6])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2d0a9c15-daa9-11ec-bd2c-47488cf2e6aa;
- Mon, 23 May 2022 17:01:09 +0200 (CEST)
-Received: from 200-161-159-120.dsl.telesp.net.br ([200.161.159.120]
- helo=[192.168.1.60]) by fanzine2.igalia.com with esmtpsa 
- (Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
- id 1nt9XQ-00GTti-N1; Mon, 23 May 2022 17:00:05 +0200
+ <SRS0=HaIF=V7=citrix.com=prvs=1359a750d=lin.liu@srs-se1.protection.inumbo.net>)
+ id 1nt9PU-0004UK-4w
+ for xen-devel@lists.xenproject.org; Mon, 23 May 2022 14:51:52 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id dfcb9243-daa7-11ec-bd2c-47488cf2e6aa;
+ Mon, 23 May 2022 16:51:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,118 +38,167 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2d0a9c15-daa9-11ec-bd2c-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
-	List-Subscribe:List-Post:List-Owner:List-Archive;
-	bh=keKJrvyQ/+r75XOnYYRl19FO+VGyiPJcwICfZxDBkqs=; b=O+C3jDB0Vwu4Y/gkTmW/RCmTwy
-	kNqD2emzzlOs/8A7J1xO/TSH5qapt6sCckUwfqeKLJwoCrpUi4pUQfOKCsbI70QtSFMdfNTmFr+H0
-	NXT6Oh9iPuG4hVKz84ZvxHpmEirVLNSMQMza54o3VmB+D23FpdTtf7JnpYZ61zk10z8NLp053Dtmb
-	5G5TvLT8W+VF+imYpIQccZx+LAQHhkmqjWgwAULVFomENEWSpKhN5UeAVPt+Y1vZC04/4FyRoMtUE
-	OHqcld4S4ftUjXzRb6CJS95k+7T+FIlHKMRNj13Qcs75Xk/j3Ix2WaTpEwsP72+2bzr+hEFsSu6v0
-	WUJ5ifAA==;
-Message-ID: <0fac8c71-6f18-d15c-23f5-075dbc45f3f9@igalia.com>
-Date: Mon, 23 May 2022 11:56:12 -0300
+X-Inumbo-ID: dfcb9243-daa7-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1653317511;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=52aGEXz6/L0mi8JKOaEZHZV/EuUs/IK0pCYUytUMr38=;
+  b=XvdNwfClTCQTj+z12XyHP3lB7BbPFHrQ9ywhGRSz8hUaacYcRR3b6bEg
+   AS3sujEK6x33oKkcI9V5H6AsueoLAp7a0Uy8HXUZhZQORGFc0556qflbt
+   VGFWKmiF4QPSLJiShm9LVtBTjGlmw36lY9sTIVdWhpOPNNO5NbWNYamKR
+   g=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 5.1
+X-MesageID: 71325017
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:FNmRQKN3Yb9CelXvrR2Gl8FynXyQoLVcMsEvi/4bfWQNrUoh1z0Bm
+ zdLUT2PPPneZmT9Kt4ibd6ypE0F7JPVn9UxTgto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
+ ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFYMpBsJ00o5wbZk2NUw2LBVPivW0
+ T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
+ 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Z0
+ +Qd67/pEVsTJ+7CiPQ5agNpGRpAFPgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
+ 7pCcmlLN03dwbLtqF64YrAEasALKMjteocep1lrzC3DDOZgSpfGK0nPzYABh21t3pkRdRrYT
+ 5JGYxxhRirfXy10Jw4lK55npPitlmaqJlW0r3rK/PFqsgA/1jdZ0qXpMdfTUsyHQ4NShEnwj
+ mjL5XjjCxcWctmW0yOY82mEj/XK2yj8Xeo6Krq88fJ7hUyJ8UYaAhYWSFiTrOGwjwi1XNc3A
+ 1wZ/G8ioLY/8GSvT8LhRFuorXicpBkeVtFMVeog52mlyKXO6gKdLmEBRyxGbpots8pebScxy
+ laDktftBDpumL6YU3SQ8vGTtzzaBMQOBTZcP2leF1JDuoS95tFo5v7Scjp9OLWE3oPWQGms+
+ SnJojguo4wJvMQw6YzuqDgrnAmQSoj1oh8dv1uKBTj+vlMiPuZJdKTztwGFsK8owJKxCwDY4
+ SNaw5X2APUmV8nlqcCbfAka8FhFDd6hOSaUv1NgFoJJG9+Fqy/6JtA4DN2TyS5U3ic4ldzBO
+ ha7Vft5vsM7AZdTRfYfj3iNI8or17P8Mt/uS+rZaNFDCrAoKlLcpn0yORfKhzm9+KTJrU3YE
+ c7GGftA8F5AUfg3pNZIb7l1PUAXKtAWmjqIGMGTI+WP2ruCfn+FIYrpw3PXBt3VGJis+V2Pm
+ /4GbpPi40wGAIXWP3iMmaZOfA9iEJTOLc2vwyChXrXbclQO9aBII6K5/I7NjKQ8wP0Fx7+Vo
+ yjnMqKaoXKm7UD6xcyxQigLQNvSsVxX9ChT0fAEVbpw50UeXA==
+IronPort-HdrOrdr: A9a23:ForCf66yyJ9tLQO/ZgPXwPDXdLJyesId70hD6qhwISY6TiX+rb
+ HJoB17726NtN9/YhEdcLy7VJVoBEmskKKdgrNhWotKPjOW21dARbsKheCJrgEIWReOktK1vZ
+ 0QCpSWY+eQMbEVt6nHCXGDYrQd/OU=
+X-IronPort-AV: E=Sophos;i="5.91,246,1647316800"; 
+   d="scan'208";a="71325017"
+From: Lin Liu <lin.liu@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Lin Liu <lin.liu@citrix.com>, Julien Grall <jgrall@amazon.com>, "Andrew
+ Cooper" <andrew.cooper3@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v5 3/6] arm64/find_next_bit: Remove ext2_swab()
+Date: Mon, 23 May 2022 10:50:48 -0400
+Message-ID: <fd7137e91aa6132e2b6a19c53ecce2cac0295b55.1653314499.git.lin.liu@citrix.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <cover.1653314499.git.lin.liu@citrix.com>
+References: <cover.1653314499.git.lin.liu@citrix.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Subject: Re: [PATCH 19/30] panic: Add the panic hypervisor notifier list
-Content-Language: en-US
-To: Scott Branden <scott.branden@broadcom.com>, Petr Mladek
- <pmladek@suse.com>, Sebastian Reichel <sre@kernel.org>,
- Florian Fainelli <f.fainelli@gmail.com>,
- Desmond yan <desmond.yan@broadcom.com>
-Cc: David Gow <davidgow@google.com>, Evan Green <evgreen@chromium.org>,
- Julius Werner <jwerner@chromium.org>, bcm-kernel-feedback-list@broadcom.com,
- linux-pm@vger.kernel.org, akpm@linux-foundation.org, bhe@redhat.com,
- kexec@lists.infradead.org, linux-kernel@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-alpha@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-leds@vger.kernel.org,
- linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
- linux-remoteproc@vger.kernel.org, linux-s390@vger.kernel.org,
- linux-tegra@vger.kernel.org, linux-um@lists.infradead.org,
- linux-xtensa@linux-xtensa.org, netdev@vger.kernel.org,
- openipmi-developer@lists.sourceforge.net, rcu@vger.kernel.org,
- sparclinux@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org,
- kernel-dev@igalia.com, kernel@gpiccoli.net, halves@canonical.com,
- fabiomirmar@gmail.com, alejandro.j.jimenez@oracle.com,
- andriy.shevchenko@linux.intel.com, arnd@arndb.de, bp@alien8.de,
- corbet@lwn.net, d.hatayama@jp.fujitsu.com, dave.hansen@linux.intel.com,
- dyoung@redhat.com, feng.tang@intel.com, gregkh@linuxfoundation.org,
- mikelley@microsoft.com, hidehiro.kawai.ez@hitachi.com, jgross@suse.com,
- john.ogness@linutronix.de, keescook@chromium.org, luto@kernel.org,
- mhiramat@kernel.org, mingo@redhat.com, paulmck@kernel.org,
- peterz@infradead.org, rostedt@goodmis.org, senozhatsky@chromium.org,
- stern@rowland.harvard.edu, tglx@linutronix.de, vgoyal@redhat.com,
- vkuznets@redhat.com, will@kernel.org,
- Alexander Gordeev <agordeev@linux.ibm.com>,
- Andrea Parri <parri.andrea@gmail.com>, Ard Biesheuvel <ardb@kernel.org>,
- Benjamin Herrenschmidt <benh@kernel.crashing.org>,
- Brian Norris <computersforpeace@gmail.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- "David S. Miller" <davem@davemloft.net>, Dexuan Cui <decui@microsoft.com>,
- Doug Berger <opendmb@gmail.com>, Haiyang Zhang <haiyangz@microsoft.com>,
- Hari Bathini <hbathini@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
- Justin Chen <justinpopo6@gmail.com>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Lee Jones <lee.jones@linaro.org>, Markus Mayer <mmayer@broadcom.com>,
- Michael Ellerman <mpe@ellerman.id.au>,
- Mihai Carabas <mihai.carabas@oracle.com>, Nicholas Piggin
- <npiggin@gmail.com>, Paul Mackerras <paulus@samba.org>,
- Pavel Machek <pavel@ucw.cz>, Shile Zhang <shile.zhang@linux.alibaba.com>,
- Stephen Hemminger <sthemmin@microsoft.com>,
- Sven Schnelle <svens@linux.ibm.com>,
- Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
- Tianyu Lan <Tianyu.Lan@microsoft.com>, Vasily Gorbik <gor@linux.ibm.com>,
- Wang ShaoBo <bobo.shaobowang@huawei.com>, Wei Liu <wei.liu@kernel.org>,
- zhenwei pi <pizhenwei@bytedance.com>
-References: <20220427224924.592546-1-gpiccoli@igalia.com>
- <20220427224924.592546-20-gpiccoli@igalia.com> <YoJZVZl/MH0KiE/J@alley>
- <ad082ce7-db50-13bb-3dbb-9b595dfa78be@igalia.com> <YoOpyW1+q+Z5as78@alley>
- <d72b9aab-675c-ac89-b73a-b1de4a0b722d@igalia.com>
- <81878a67-21f1-fee8-1add-f381bc8b05df@broadcom.com>
- <edbaa4fa-561c-6f5e-f2ab-43ae68acaede@igalia.com>
- <d1cc0bee-2a98-0c2e-8796-6fb7fae6b803@broadcom.com>
-From: "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-In-Reply-To: <d1cc0bee-2a98-0c2e-8796-6fb7fae6b803@broadcom.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On 19/05/2022 16:20, Scott Branden wrote:
-> [...] 
->> Hi Scott / Desmond, thanks for the detailed answer! Is this adapter
->> designed to run in x86 only or you have other architectures' use cases?
-> The adapter may be used in any PCIe design that supports DMA.
-> So it may be possible to run in arm64 servers.
->>
->> [...]
->> With that said, and given this is a lightweight notifier that ideally
->> should run ASAP, I'd keep this one in the hypervisor list. We can
->> "adjust" the semantic of this list to include lightweight notifiers that
->> reset adapters.
-> Sounds the best to keep system operating as tested today.
->>
->> With that said, Petr has a point - not always such list is going to be
->> called before kdump. So, that makes me think in another idea: what if we
->> have another list, but not on panic path, but instead in the custom
->> crash_shutdown()? Drivers could add callbacks there that must execute
->> before kexec/kdump, no matter what.
-> It may be beneficial for some other drivers but for our use we would 
-> then need to register for the panic path and the crash_shutdown path. 
-> We notify the VK card for 2 purposes: one to stop DMA so memory stop 
-> changing during a kdump.  And also to get the card into a good state so 
-> resets happen cleanly.
+ext2 has nothing to do with this logic.  Clean up the code with
+xen/byteswap.h which now has an unsigned long helper.
 
-Thanks Scott! With that, I guess it's really better to keep this
-notifier in this hypervisor/early list - I'm planning to do that for V2.
-Unless Petr or somebody has strong feelings against that, of course.
+No functional change.
 
-Cheers,
+Signed-off-by: Lin Liu <lin.liu@citrix.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Julien Grall <julien@xen.org>
+Cc: Bertrand Marquis <bertrand.marquis@arm.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+---
+ xen/arch/arm/arm64/lib/find_next_bit.c | 36 +++++---------------------
+ 1 file changed, 6 insertions(+), 30 deletions(-)
 
+diff --git a/xen/arch/arm/arm64/lib/find_next_bit.c b/xen/arch/arm/arm64/lib/find_next_bit.c
+index 8ebf8bfe97..e3b3720ff4 100644
+--- a/xen/arch/arm/arm64/lib/find_next_bit.c
++++ b/xen/arch/arm/arm64/lib/find_next_bit.c
+@@ -161,30 +161,6 @@ EXPORT_SYMBOL(find_first_zero_bit);
+ 
+ #ifdef __BIG_ENDIAN
+ 
+-/* include/linux/byteorder does not support "unsigned long" type */
+-static inline unsigned long ext2_swabp(const unsigned long * x)
+-{
+-#if BITS_PER_LONG == 64
+-	return (unsigned long) __swab64p((u64 *) x);
+-#elif BITS_PER_LONG == 32
+-	return (unsigned long) __swab32p((u32 *) x);
+-#else
+-#error BITS_PER_LONG not defined
+-#endif
+-}
+-
+-/* include/linux/byteorder doesn't support "unsigned long" type */
+-static inline unsigned long ext2_swab(const unsigned long y)
+-{
+-#if BITS_PER_LONG == 64
+-	return (unsigned long) __swab64((u64) y);
+-#elif BITS_PER_LONG == 32
+-	return (unsigned long) __swab32((u32) y);
+-#else
+-#error BITS_PER_LONG not defined
+-#endif
+-}
+-
+ #ifndef find_next_zero_bit_le
+ unsigned long find_next_zero_bit_le(const void *addr, unsigned
+ 		long size, unsigned long offset)
+@@ -199,7 +175,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
+ 	size -= result;
+ 	offset &= (BITS_PER_LONG - 1UL);
+ 	if (offset) {
+-		tmp = ext2_swabp(p++);
++		tmp = bswap_ul(*p++);
+ 		tmp |= (~0UL >> (BITS_PER_LONG - offset));
+ 		if (size < BITS_PER_LONG)
+ 			goto found_first;
+@@ -217,7 +193,7 @@ unsigned long find_next_zero_bit_le(const void *addr, unsigned
+ 	}
+ 	if (!size)
+ 		return result;
+-	tmp = ext2_swabp(p);
++	tmp = bswap_ul(*p);
+ found_first:
+ 	tmp |= ~0UL << size;
+ 	if (tmp == ~0UL)	/* Are any bits zero? */
+@@ -226,7 +202,7 @@ found_middle:
+ 	return result + ffz(tmp);
+ 
+ found_middle_swap:
+-	return result + ffz(ext2_swab(tmp));
++	return result + ffz(bswap_ul(tmp));
+ }
+ EXPORT_SYMBOL(find_next_zero_bit_le);
+ #endif
+@@ -245,7 +221,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
+ 	size -= result;
+ 	offset &= (BITS_PER_LONG - 1UL);
+ 	if (offset) {
+-		tmp = ext2_swabp(p++);
++		tmp = bswap_ul(*p++);
+ 		tmp &= (~0UL << offset);
+ 		if (size < BITS_PER_LONG)
+ 			goto found_first;
+@@ -264,7 +240,7 @@ unsigned long find_next_bit_le(const void *addr, unsigned
+ 	}
+ 	if (!size)
+ 		return result;
+-	tmp = ext2_swabp(p);
++	tmp = bswap_ul(*p);
+ found_first:
+ 	tmp &= (~0UL >> (BITS_PER_LONG - size));
+ 	if (tmp == 0UL)		/* Are any bits set? */
+@@ -273,7 +249,7 @@ found_middle:
+ 	return result + __ffs(tmp);
+ 
+ found_middle_swap:
+-	return result + __ffs(ext2_swab(tmp));
++	return result + __ffs(bswap_ul(tmp));
+ }
+ EXPORT_SYMBOL(find_next_bit_le);
+ #endif
+-- 
+2.27.0
 
-Guilherme
 
