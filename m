@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA88C433F5
-	for <xen-devel@archiver.kernel.org>; Mon, 23 May 2022 16:05:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.336029.560259 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB5AC433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 23 May 2022 17:02:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.336035.560270 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntAYb-0002Yo-Fw; Mon, 23 May 2022 16:05:21 +0000
+	id 1ntBRn-0000DF-St; Mon, 23 May 2022 17:02:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 336029.560259; Mon, 23 May 2022 16:05:21 +0000
+Received: by outflank-mailman (output) from mailman id 336035.560270; Mon, 23 May 2022 17:02:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntAYb-0002Yh-DB; Mon, 23 May 2022 16:05:21 +0000
-Received: by outflank-mailman (input) for mailman id 336029;
- Mon, 23 May 2022 16:05:20 +0000
+	id 1ntBRn-0000D8-Pb; Mon, 23 May 2022 17:02:23 +0000
+Received: by outflank-mailman (input) for mailman id 336035;
+ Mon, 23 May 2022 17:02:22 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1ntAYa-0002YI-7r
- for xen-devel@lists.xenproject.org; Mon, 23 May 2022 16:05:20 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntBRm-0000Cy-TS; Mon, 23 May 2022 17:02:22 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ntAYZ-0003Cc-SJ; Mon, 23 May 2022 16:05:19 +0000
-Received: from [54.239.6.190] (helo=[192.168.27.218])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1ntAYZ-0006dd-Lk; Mon, 23 May 2022 16:05:19 +0000
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntBRm-0004BR-SL; Mon, 23 May 2022 17:02:22 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntBRm-0008De-Gt; Mon, 23 May 2022 17:02:22 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntBRm-00010z-GN; Mon, 23 May 2022 17:02:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,88 +44,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=KbkzlDtxUkKxdwqqoTjcWACsHCE88PfRN4/a2QFirhE=; b=FUe9tIaEOPl1EUFucYst88dcxf
-	cOUUmrU/miN7iy6nuU5S0QKLGTKc+ExCzalI89Ep3ZOQdKtkSaldOZfYycJKBjdbbOODSyVCd32rR
-	BWd/BfMjyUto1gwT0Ptdo6oHc9Uc+POoHjMrdHXJlWore67MhBZrx+XHzYiJn6J/jvI8=;
-Message-ID: <1c7342ed-63af-e420-4f3a-938cb93021c7@xen.org>
-Date: Mon, 23 May 2022 17:05:17 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.9.0
-Subject: Re: [PATCH v5 4/6] xen: Switch to byteswap
-To: Andrew Cooper <Andrew.Cooper3@citrix.com>,
- =?UTF-8?B?TGluIExpdSDvvIjliJjmnpfvvIk=?= <lin.liu@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Wei Liu <wl@xen.org>
-References: <cover.1653314499.git.lin.liu@citrix.com>
- <dcabb541d0b5ab7858ccf1c925afc334f3123ad5.1653314499.git.lin.liu@citrix.com>
- <8fcd30a6-9b93-6687-a0f5-1e035fa5f789@xen.org>
- <d77a5995-a916-70a9-4bf2-efdb2948588b@citrix.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <d77a5995-a916-70a9-4bf2-efdb2948588b@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=HLBbMI0tZqvZfWBqzwQ6mdhyOkjc36tc32qTJLrvq0c=; b=6HUulds+vQ6goOHMGTgLeAdsKw
+	38kUjKuS8me106sIZ4HGRJB9m9E8QXBa/b5nOkw3yIDIoBZGqq3TzJB68VyhHbQUAfoZBa5Yg2YtU
+	gaPGKef16ZYx6y2oXyipnwK+f3Xyzrqh47JY1SRYPbxXOxaMI54hcfnrm9H6xhyT0t5U=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-170706-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [ovmf test] 170706: regressions - FAIL
+X-Osstest-Failures:
+    ovmf:build-amd64:xen-build:fail:regression
+    ovmf:build-i386:xen-build:fail:regression
+    ovmf:build-i386-xsm:xen-build:fail:regression
+    ovmf:build-amd64-xsm:xen-build:fail:regression
+    ovmf:build-amd64-libvirt:build-check(1):blocked:nonblocking
+    ovmf:build-i386-libvirt:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-amd64-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+    ovmf:test-amd64-i386-xl-qemuu-ovmf-amd64:build-check(1):blocked:nonblocking
+X-Osstest-Versions-This:
+    ovmf=a21a3438f795deecb24e1843c1636f95c485017c
+X-Osstest-Versions-That:
+    ovmf=b1b89f9009f2390652e0061bd7b24fc40732bc70
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 23 May 2022 17:02:22 +0000
 
-Hi Andrew,
+flight 170706 ovmf real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/170706/
 
-On 23/05/2022 16:38, Andrew Cooper wrote:
-> On 23/05/2022 15:56, Julien Grall wrote:
->> Hi,
->>
->> On 23/05/2022 15:50, Lin Liu wrote:
->>> Update to use byteswap to swap bytes
->>> be*_to_cpup(p) is short for be*to_cpu(*p), update to use latter
->>> one explictly
->>
->> But why?
-> 
-> Because deleting code obfuscation constructs *is* the point of the cleanup.
-> 
->> I really don't have a suggestion on the comment because I disagree
->> (and AFAICT Jan as well) with the approach.
-> 
-> Dropping the obfuscation has uncovered pre-existing bugs in the
-> hypervisor.  The series stands on its own merit.
+Regressions :-(
 
-I am guessing you mean that we don't handle unaligned access? If so, yes 
-I agree this helped with that.
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ build-amd64                   6 xen-build                fail REGR. vs. 168254
+ build-i386                    6 xen-build                fail REGR. vs. 168254
+ build-i386-xsm                6 xen-build                fail REGR. vs. 168254
+ build-amd64-xsm               6 xen-build                fail REGR. vs. 168254
 
-> 
-> While I can't help if you like it or not, it really does bring an
-> improvement to code quality and legibility.
-> 
-> If you have no technical objections, and no suggestions for how to do it
-> differently while retaining the quality and legibility improvements,
-> then "I don't like it" doesn't block it going in.
+Tests which did not succeed, but are not blocking:
+ build-amd64-libvirt           1 build-check(1)               blocked  n/a
+ build-i386-libvirt            1 build-check(1)               blocked  n/a
+ test-amd64-amd64-xl-qemuu-ovmf-amd64  1 build-check(1)             blocked n/a
+ test-amd64-i386-xl-qemuu-ovmf-amd64  1 build-check(1)              blocked n/a
 
-And you don't like the existing code :). I am willing to compromise, but 
-for that I need to understand why the existing code is technically not 
-correct.
+version targeted for testing:
+ ovmf                 a21a3438f795deecb24e1843c1636f95c485017c
+baseline version:
+ ovmf                 b1b89f9009f2390652e0061bd7b24fc40732bc70
 
-So far, all the arguments you provided in v3 was either a matter of 
-taste or IMHO bogus.
+Last test of basis   168254  2022-02-28 10:41:46 Z   84 days
+Failing since        168258  2022-03-01 01:55:31 Z   83 days 1192 attempts
+Testing same since   170593  2022-05-20 06:42:41 Z    3 days   80 attempts
 
-Your taste is nor better nor worse than mine. At which, we need someone 
-else to break the tie.
+------------------------------------------------------------
+People who touched revisions under test:
+  Abdul Lateef Attar <abdattar@amd.com>
+  Abdul Lateef Attar via groups.io <abdattar=amd.com@groups.io>
+  Abner Chang <abner.chang@hpe.com>
+  Akihiko Odaki <akihiko.odaki@gmail.com>
+  Anthony PERARD <anthony.perard@citrix.com
+  Ard Biesheuvel <ardb@kernel.org>
+  Bandaru, Purna Chandra Rao <Purna.Chandra.Rao.Bandaru@intel.com>
+  Bo Chang Ke <bo-changx.ke@intel.com>
+  Bob Feng <bob.c.feng@intel.com>
+  Chao Li <lichao@loongson.cn>
+  Chao, Zhuoran <zhuoran.chao@intel.com>
+  Chen Lin Z <lin.z.chen@intel.com>
+  Chen, Christine <Yuwei.Chen@intel.com>
+  Chen, Lin Z <lin.z.chen@intel.com>
+  Corvin Köhne <c.koehne@beckhoff.com>
+  Dandan Bi <dandan.bi@intel.com>
+  dann frazier <dann.frazier@canonical.com>
+  Dun Tan <dun.tan@intel.com>
+  duntan <dun.tan@intel.com>
+  Feng, Bob C <bob.c.feng@intel.com>
+  Gerd Hoffmann <kraxel@redhat.com>
+  Gua Guo <gua.guo@intel.com>
+  Guo Dong <guo.dong@intel.com>
+  Guomin Jiang <guomin.jiang@intel.com>
+  Hao A Wu <hao.a.wu@intel.com>
+  Heng Luo <heng.luo@intel.com>
+  Hua Ma <hua.ma@intel.com>
+  Huang, Li-Xia <lisa.huang@intel.com>
+  Jagadeesh Ujja <Jagadeesh.Ujja@arm.com>
+  Jake Garver <jake@nvidia.com>
+  Jake Garver via groups.io <jake=nvidia.com@groups.io>
+  Jason <yun.lou@intel.com>
+  Jason Lou <yun.lou@intel.com>
+  Jiewen Yao <jiewen.yao@intel.com>
+  Ke, Bo-ChangX <bo-changx.ke@intel.com>
+  Ken Lautner <kenlautner3@gmail.com>
+  Kenneth Lautner <kenlautner3@gmail.com>
+  Kun Qin <kuqin12@gmail.com>
+  Kuo, Ted <ted.kuo@intel.com>
+  Laszlo Ersek <lersek@redhat.com>
+  Lean Sheng Tan <sheng.tan@9elements.com>
+  Leif Lindholm <quic_llindhol@quicinc.com
+  Leif Lindholm <quic_llindhol@quicinc.com>
+  Li, Yi1 <yi1.li@intel.com>
+  Li, Zhihao <zhihao.li@intel.com>
+  Liming Gao <gaoliming@byosoft.com.cn>
+  Liu <yun.y.liu@intel.com>
+  Liu Yun <yun.y.liu@intel.com>
+  Liu Yun Y <yun.y.liu@intel.com>
+  Liu, Zhiguang <Zhiguang.Liu@intel.com>
+  Lixia Huang <lisa.huang@intel.com>
+  Lou, Yun <Yun.Lou@intel.com>
+  Ma, Hua <Hua.Ma@intel.com>
+  Mara Sophie Grosch <littlefox@lf-net.org>
+  Mara Sophie Grosch via groups.io <littlefox=lf-net.org@groups.io>
+  Matt DeVillier <matt.devillier@gmail.com>
+  Michael D Kinney <michael.d.kinney@intel.com>
+  Michael Kubacki <michael.kubacki@microsoft.com>
+  Michael Kubacki <mikuback@microsoft.com>
+  Min M Xu <min.m.xu@intel.com>
+  Min Xu <min.m.xu@intel.com>
+  Oliver Steffen <osteffen@redhat.com>
+  Patrick Rudolph <patrick.rudolph@9elements.com>
+  Peter Grehan <grehan@freebsd.org>
+  Purna Chandra Rao Bandaru <purna.chandra.rao.bandaru@intel.com>
+  Ray Ni <ray.ni@intel.com>
+  Rebecca Cran <quic_rcran@quicinc.com>
+  Rebecca Cran <rebecca@bsdio.com>
+  Sami Mujawar <sami.mujawar@arm.com>
+  Sean Rhodes <sean@starlabs.systems>
+  Sean Rhodes sean@starlabs.systems
+  Sebastien Boeuf <sebastien.boeuf@intel.com>
+  Sunny Wang <sunny.wang@arm.com>
+  Tan, Dun <dun.tan@intel.com>
+  Ted Kuo <ted.kuo@intel.com>
+  Tom Lendacky <thomas.lendacky@amd.com>
+  Wenyi Xie <xiewenyi2@huawei.com>
+  wenyi,xie via groups.io <xiewenyi2=huawei.com@groups.io>
+  Xiaolu.Jiang <xiaolu.jiang@intel.com>
+  Xie, Yuanhao <yuanhao.xie@intel.com>
+  Yi Li <yi1.li@intel.com>
+  yi1 li <yi1.li@intel.com>
+  Yu Pu <yu.pu@intel.com>
+  Yuanhao Xie <yuanhao.xie@intel.com>
+  Yuwei Chen <yuwei.chen@intel.com>
+  Zhiguang Liu <zhiguang.liu@intel.com>
+  Zhihao Li <zhihao.li@intel.com>
+  Zhuoran Chao <zhuoran.chao@intel.com>
 
-If I am not mistaken, Jan is also objecting on the proposal. At which 
-point, we are 2 vs 1.
+jobs:
+ build-amd64-xsm                                              fail    
+ build-i386-xsm                                               fail    
+ build-amd64                                                  fail    
+ build-i386                                                   fail    
+ build-amd64-libvirt                                          blocked 
+ build-i386-libvirt                                           blocked 
+ build-amd64-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         blocked 
+ test-amd64-i386-xl-qemuu-ovmf-amd64                          blocked 
 
-So there are three choices here:
-   1) You find two others maintainers (including on Arm maintainer) to 
-agree with you
-   2) You provide arguments that will sway one of us in your side
-   3) We keep be32_cpu*() (they are simple wrapper and I am willing to 
-write the code).
 
-Cheers,
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
 
--- 
-Julien Grall
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 6968 lines long.)
 
