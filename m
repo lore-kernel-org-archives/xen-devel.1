@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEB3FC433FE
-	for <xen-devel@archiver.kernel.org>; Mon, 23 May 2022 06:26:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.335351.559515 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 534C3C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 23 May 2022 06:26:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.335357.559559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nt1W5-00085d-Ck; Mon, 23 May 2022 06:26:09 +0000
+	id 1nt1WK-0000yp-6w; Mon, 23 May 2022 06:26:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 335351.559515; Mon, 23 May 2022 06:26:09 +0000
+Received: by outflank-mailman (output) from mailman id 335357.559559; Mon, 23 May 2022 06:26:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nt1W5-00085W-8w; Mon, 23 May 2022 06:26:09 +0000
-Received: by outflank-mailman (input) for mailman id 335351;
- Mon, 23 May 2022 06:26:08 +0000
+	id 1nt1WK-0000yd-3L; Mon, 23 May 2022 06:26:24 +0000
+Received: by outflank-mailman (input) for mailman id 335357;
+ Mon, 23 May 2022 06:26:23 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=eb4B=V7=arm.com=Wei.Chen@srs-se1.protection.inumbo.net>)
- id 1nt1W3-0007pn-Ny
- for xen-devel@lists.xenproject.org; Mon, 23 May 2022 06:26:07 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20630.outbound.protection.outlook.com
- [2a01:111:f400:7e1b::630])
+ id 1nt1WI-0007pn-Qu
+ for xen-devel@lists.xenproject.org; Mon, 23 May 2022 06:26:23 +0000
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur01on0600.outbound.protection.outlook.com
+ [2a01:111:f400:fe1f::600])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3a16bae3-da61-11ec-837e-e5687231ffcc;
- Mon, 23 May 2022 08:26:06 +0200 (CEST)
-Received: from AS8PR07CA0054.eurprd07.prod.outlook.com (2603:10a6:20b:459::32)
- by PAXPR08MB7549.eurprd08.prod.outlook.com (2603:10a6:102:24c::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.22; Mon, 23 May
- 2022 06:26:03 +0000
-Received: from AM5EUR03FT047.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:459:cafe::c0) by AS8PR07CA0054.outlook.office365.com
- (2603:10a6:20b:459::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5293.12 via Frontend
- Transport; Mon, 23 May 2022 06:26:03 +0000
+ id 42aecdae-da61-11ec-837e-e5687231ffcc;
+ Mon, 23 May 2022 08:26:21 +0200 (CEST)
+Received: from AS9PR04CA0098.eurprd04.prod.outlook.com (2603:10a6:20b:50e::29)
+ by DB7PR08MB3642.eurprd08.prod.outlook.com (2603:10a6:10:4a::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.14; Mon, 23 May
+ 2022 06:26:19 +0000
+Received: from VE1EUR03FT044.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:50e:cafe::d6) by AS9PR04CA0098.outlook.office365.com
+ (2603:10a6:20b:50e::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.22 via Frontend
+ Transport; Mon, 23 May 2022 06:26:19 +0000
 Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM5EUR03FT047.mail.protection.outlook.com (10.152.16.197) with
+ VE1EUR03FT044.mail.protection.outlook.com (10.152.19.106) with
  Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5273.14 via Frontend Transport; Mon, 23 May 2022 06:26:02 +0000
-Received: ("Tessian outbound 07c1c99345b0:v119");
- Mon, 23 May 2022 06:26:02 +0000
-Received: from b2b1ae26b73d.1
+ 15.20.5273.14 via Frontend Transport; Mon, 23 May 2022 06:26:18 +0000
+Received: ("Tessian outbound 3314dea8c23c:v119");
+ Mon, 23 May 2022 06:26:18 +0000
+Received: from 1df778f9afdf.1
  by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 49E9562D-944A-4F42-8459-EA8E520D366B.1; 
- Mon, 23 May 2022 06:25:55 +0000
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id b2b1ae26b73d.1
+ BD48433C-39B2-4CE4-9B55-16FBCDE8EB08.1; 
+ Mon, 23 May 2022 06:26:11 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 1df778f9afdf.1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Mon, 23 May 2022 06:25:55 +0000
-Received: from DB6P191CA0015.EURP191.PROD.OUTLOOK.COM (2603:10a6:6:28::25) by
- VI1PR08MB4302.eurprd08.prod.outlook.com (2603:10a6:803:fb::20) with
+ Mon, 23 May 2022 06:26:11 +0000
+Received: from DB6P191CA0003.EURP191.PROD.OUTLOOK.COM (2603:10a6:6:28::13) by
+ AM6PR08MB4551.eurprd08.prod.outlook.com (2603:10a6:20b:70::22) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5273.17; Mon, 23 May 2022 06:25:52 +0000
-Received: from DBAEUR03FT028.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:6:28:cafe::6c) by DB6P191CA0015.outlook.office365.com
- (2603:10a6:6:28::25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.15 via Frontend
- Transport; Mon, 23 May 2022 06:25:51 +0000
+ 15.20.5273.13; Mon, 23 May 2022 06:26:08 +0000
+Received: from DBAEUR03FT047.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:6:28:cafe::c4) by DB6P191CA0003.outlook.office365.com
+ (2603:10a6:6:28::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.14 via Frontend
+ Transport; Mon, 23 May 2022 06:26:08 +0000
 Received: from nebula.arm.com (40.67.248.234) by
- DBAEUR03FT028.mail.protection.outlook.com (100.127.142.236) with Microsoft
+ DBAEUR03FT047.mail.protection.outlook.com (100.127.143.25) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5273.14 via Frontend Transport; Mon, 23 May 2022 06:25:51 +0000
-Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX04.Arm.com
+ 15.20.5273.14 via Frontend Transport; Mon, 23 May 2022 06:26:08 +0000
+Received: from AZ-NEU-EX01.Emea.Arm.com (10.251.26.4) by AZ-NEU-EX04.Arm.com
  (10.251.24.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2308.27; Mon, 23 May
- 2022 06:25:50 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id 15.1.2308.27; Mon, 23 May
+ 2022 06:26:07 +0000
+Received: from AZ-NEU-EX04.Arm.com (10.251.24.32) by AZ-NEU-EX01.Emea.Arm.com
+ (10.251.26.4) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2308.27; Mon, 23
+ May 2022 06:26:07 +0000
 Received: from ais-wip-ds.shanghai.arm.com (10.169.190.86) by mail.arm.com
  (10.251.24.32) with Microsoft SMTP Server id 15.1.2308.27 via Frontend
- Transport; Mon, 23 May 2022 06:25:47 +0000
+ Transport; Mon, 23 May 2022 06:26:04 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -86,14 +90,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3a16bae3-da61-11ec-837e-e5687231ffcc
+X-Inumbo-ID: 42aecdae-da61-11ec-837e-e5687231ffcc
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=Fb4hL0yc09MLsc5zFMdAdz3FRS2CMqlYrpjijDzFgp4vypMRT6ZWxGCaRILJba5L3BRx4A3iVRKTsxMbmF/7uCuvgBD7RLHcQM2v7yPyYHssl6JtbEblpeycMLw1Zu+i4Z2IiQZncC9MFoEg+9pUkvRN/EV4+XUep5Wtklq6UXClBTBMurygzoj1E6xWWmAxTamaQQ8oVgfFvch+njX4GoxcVFVgzi/xgcHtVTYL5JlT2/jMQTfsldfnCZmeKUQ86aTJRpI8paajrWiSNNy2P+j1DdnFejsDlF/9o7NOOHYJVl6bsMJV8FuxIzLJ4qgJacVMkMztdF+8wg/TEnZOAQ==
+ b=VgE00X9kVtQbIzXXEG9qzacXaXWER5WfS3RgOLR5DLxg2hemNnh3nh0nGjbNaFdNaZqqxNee3jbJ07RWFPQipE2yAnL9n32B+QOZc8bJi73fzIlXQxClg/sJ1CpSyc3Y0P55GPuyASt2NBtnYWr9UQCmBA5uEk5vKEknMznGk8AlhCLyGbvM5Rj2IQcnjWDxZ4V/ZSF6NmK9mnOql7TMrkg9bNGZJGbAtpw0uRmjxdFOu2JhcG0IBB0m7XmCffQutrCsCg1/5z/y3e0EUxNDXQ7JuZhqpiKjoDYZZ1oTjj/tJokYrkMIlhx4Cl+gQSBTOrknzRfhFh1qWwyYH25aug==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oo+mgb4JbHlmUNvz//rcx4bdSUBO9I8LAbHX+BGSbl8=;
- b=C6ey0GQe3dQ6sDy+bFe0OmrBZsl67YT3MOJYftRdhkJvEpALVxA8iX7jpvVuNmuDEOG8jiDeWWwehCeqZeZCJVgpzx7QyEW6wWXkvaiXxGDSGtSEn5Yr86mZvuDSRrm5isA8RgDW2V8i67Ggn+cVESpKY2M8GzsIfqKesmgPnu0JN3E0GRxkVffemqLrecDH0UalbQYG2hvoykOnIqioHNkd7iS940J8iTo2ypTrgmJFylhaXqFKVZoDAUF/9yjTq4uh7VaWvRqjezLRbrKuiXldrgtI+EvOvXKVTLpWPNe29VLymK6G/8ICXXMIZhAJU4iYBl9Gy0//3XMnc5GJpg==
+ bh=OLz9U4f5kBuwv8fnxvQyEObMqpaBQsZ5NTftoU1ebo0=;
+ b=n3prIL8aCyivzg5zQ7tLjU6DctejpEnpIoUazvi1tIrgCi1Lj8UxzyITFDldqn0UDxse+R1qDUSNy13y/NVxnzdy9yNlrqfeqP+49Zffz3UNcXIhmcZ+FMHGqWSJy/e/TGFAVCdqaSQ+/dB0YRpQENwWUp450R/7ec5KPbROPSEvvgS5gt6B/FVd7k2Lteoqedluy3VtmRQm5VPcPC9rDKAvD/Tf4NdfQN3IBShLYcUHNPSYSnXJICSs8LrCxqQRkgHvnaJj7m9/E+1/ExBczE/Y7zFMIzbQ1kqxHGFb2D1tECzseoiQ0lYrLsjN+tZEg6fhSniRCbUmJl55fQgBhg==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -102,8 +106,8 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oo+mgb4JbHlmUNvz//rcx4bdSUBO9I8LAbHX+BGSbl8=;
- b=naldSN/AGHLaBYh1998QuFBtcCjP00xCEuLo1/iN/nL/JpwVveuXzJhPpPo4EWe2PO79lxpRIsg/jPF4LGvHaXc1I9e/djX/FVvX3HubpxhRhIebzNRa5jhTRF1ObgvbYWrW+CNd8MBzV5stmzLxOX7VfS1n7rfZaELxQTqtHag=
+ bh=OLz9U4f5kBuwv8fnxvQyEObMqpaBQsZ5NTftoU1ebo0=;
+ b=Sb6cy0hPMNnvEwSqRE1pz9YQAl/r4PXPATqrH0cPntT7VVGCA4Tz94AkZURZb79Z2FrSeD0jVGwLKJHPQBsipDTgFm/FnKl0or2HOBlzVsKL+ZfhmAZTACZ21JkMIQivqJqdCZKnxzaNbkCB581k5QPRlccaC4U5pMV4iYOC29k=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
@@ -112,15 +116,15 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
  pr=C
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 10ac714f71a4c7c1
+X-CR-MTA-CID: f5aa893e04a90374
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ib1MBpQnmeGgtnymx/w4iwDdthDhyeILfda7T3zsGU4xk6r+QO2FoucSIAGNZsttkdYwTE+MytyPb2Yaju1aThdTa678jIH8J63TMDvXv4dfc8YgK0w+2B5KwvhRYhurPHO4QPtJf7U32CtqHeDqpTi2rTGF1R/DfJsOMI7yHY0Cedi/w962zssC3I6msAeTKXbRJANRJYkY69Dg83Xm3OirRvYFdNtZWphnbowGgrFGQmfvFO5f14LsdBhRoCls+RhRRPTlptpGoD6dr1Pabu6boZm60rYsaCNU9W590aLlxoFAkwkTgG79zpK0erccVipHqQjur6fQWNk0X8kvcA==
+ b=izPrzjYtgf8q4E/3BmZOqMEJZyvmbSQNpw3zRAA7Ik2rGtlZ1NJcMyoovq0rSlJnHLFbF70+4i5LZDyFjm542mc30wIs+nQ3RYSyE/kZlQB/xdpXTPZNC+jnp3f9JFPx8hMsmDls5y586x85pzj0d2ka/DbiPwkNPLlQoxPCbF1PG557uYJyWyVDXFHDMLZgku7/Lv0xCt9knj8slJTtMxKVz3XA0uQNmunBmo1RbEWxUqQDIlW8h4V6fKLRs7P/zdrYFE6eozPM1hAO/A2qYNf+rK+QBYUaA0ZHk9ELgiZfgRQAkh1xUKIrNwPrcbMAjACpp8q+/5gJPHMvZZLqNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oo+mgb4JbHlmUNvz//rcx4bdSUBO9I8LAbHX+BGSbl8=;
- b=XdmlnRwpK7W9eKfvbtLlNcPxCv5xnwt22rLyJT6mXaKeiN6psNuFm+Z/+WRjBKAYn/bLfVyKenfUSyLPxKkOGXnaXeMr+9ti5Cu7zgWOH/JwBV7Gti1xzomQFmH9VSbvfA+t4OkMhLxdsOwbWhQJThHTpwOjOeJxHBniokURFmQW+pRY7BCmbFfcejQdlxLkh6vVCG7G8nRm5/flfYUrISgsMbsO8bb14q4ODMs5Q34CV4Cp43WYBj4glvi0S0OGikQgDepDYGPjYp7iUW0hHmNO2v21TLrYT6K278JoTPAuDnK7DgDp9I26+uVkgZxsHJ7VR0Ixw2Y+gUdODBdZSw==
+ bh=OLz9U4f5kBuwv8fnxvQyEObMqpaBQsZ5NTftoU1ebo0=;
+ b=Rz/dc0gMbVSgScVb6fYy0gyutK8Y1fnpaJffOLTMaA3p5KUhp4FckbPSEPdyRfDXnOUSSZ77VvQswWp+mmLoH4J9g4ypPTWd8WL5p1OaCVfFqrtbUkJrllQE0DdrR+MSHkvelLKgRPnUDxMIbP+ud5xNZydieUuoMZkrO4D2sZNrgA7w2BCgETFtsznW7wwLP+moXuI9USZNRsDhDHnsT4vfqypbiL2ut78ESqUvZe8WZ4AVC5pXUj2e/BDrIj4aVAlDuFmPJ2/IoVxePmNiKaB1krUl4dmuCYuNYhBm8FtBuKYD/hKl9Yrd6mCKfNOTMXb9VDn5xwQBn+KwCDvhQg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  40.67.248.234) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -128,8 +132,8 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oo+mgb4JbHlmUNvz//rcx4bdSUBO9I8LAbHX+BGSbl8=;
- b=naldSN/AGHLaBYh1998QuFBtcCjP00xCEuLo1/iN/nL/JpwVveuXzJhPpPo4EWe2PO79lxpRIsg/jPF4LGvHaXc1I9e/djX/FVvX3HubpxhRhIebzNRa5jhTRF1ObgvbYWrW+CNd8MBzV5stmzLxOX7VfS1n7rfZaELxQTqtHag=
+ bh=OLz9U4f5kBuwv8fnxvQyEObMqpaBQsZ5NTftoU1ebo0=;
+ b=Sb6cy0hPMNnvEwSqRE1pz9YQAl/r4PXPATqrH0cPntT7VVGCA4Tz94AkZURZb79Z2FrSeD0jVGwLKJHPQBsipDTgFm/FnKl0or2HOBlzVsKL+ZfhmAZTACZ21JkMIQivqJqdCZKnxzaNbkCB581k5QPRlccaC4U5pMV4iYOC29k=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 40.67.248.234)
  smtp.mailfrom=arm.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=arm.com;
@@ -138,15 +142,13 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=40.67.248.234; helo=nebula.arm.com; pr=C
 From: Wei Chen <wei.chen@arm.com>
 To: <xen-devel@lists.xenproject.org>
-CC: <nd@arm.com>, Wei Chen <wei.chen@arm.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+CC: <nd@arm.com>, Wei Chen <wei.chen@arm.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
 	<wl@xen.org>, Jiamei Xie <jiamei.xie@arm.com>
-Subject: [PATCH v4 1/8] xen: reuse x86 EFI stub functions for Arm
-Date: Mon, 23 May 2022 14:25:18 +0800
-Message-ID: <20220523062525.2504290-2-wei.chen@arm.com>
+Subject: [PATCH v4 6/8] xen/x86: use paddr_t for addresses in NUMA node structure
+Date: Mon, 23 May 2022 14:25:23 +0800
+Message-ID: <20220523062525.2504290-7-wei.chen@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220523062525.2504290-1-wei.chen@arm.com>
 References: <20220523062525.2504290-1-wei.chen@arm.com>
@@ -154,271 +156,310 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 1
-X-MS-Office365-Filtering-Correlation-Id: 6caa2191-6d48-4feb-44a2-08da3c851c48
+X-MS-Office365-Filtering-Correlation-Id: 0b5b9c2a-c195-4d8d-76a8-08da3c85259e
 X-MS-TrafficTypeDiagnostic:
-	VI1PR08MB4302:EE_|AM5EUR03FT047:EE_|PAXPR08MB7549:EE_
+	AM6PR08MB4551:EE_|VE1EUR03FT044:EE_|DB7PR08MB3642:EE_
 X-Microsoft-Antispam-PRVS:
-	<PAXPR08MB7549BF34A035756CE462F8929ED49@PAXPR08MB7549.eurprd08.prod.outlook.com>
+	<DB7PR08MB36422AB72E778388D55E4CA39ED49@DB7PR08MB3642.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 NoDisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- GMommwcAWmF5rJFW2Wu1Kgcte/Ed+NVBxpzCuyepcEV9VD/vLKnli3RCFMzy9rJr2L4zVF+tHtI+ivggU5ao/dYfiXEeX3+TPA3voU/msu08gkKkJQGTw4D3QOEerrXUmyJslmTRdXLBJH5wtJBD18LJs/MF/tfDQazejkc3tuaYAYbbREWIxLIku1zRmRqom8zo4x1Rto7e5q5G599m73LMssCFyRvwzTc9b9JxWhWpujaPqy6TorOFxaf5Oe78QV54hihGnOmswqBC6q/uH0nAli6PUSYgeQmyV7/YGh+CYDCoeqoektpQht3oi0PL7hMahX0ILVCOBte59+4jWaEw9YOI7vr4q691qgFAEWwhbSRRXw0voAI9IukslAzmoe4NkC5qNtf24lKR6K0DS9i6ABa+U+CyINcBplCm6JiiHcfnhtM/LcCQHgknLHx5BDFEu4qhRQaCX61aI4u/JQmp8zICDEi4VU0s0ufBVKh+1UGyHz3mGOxkfjIG+yr9ZD1J+2idXpSyo4FCROlgulSNvRgfvqxlsqxfz1e+5XOYyy8UHlQraBXX+Lo0ZKV8Sa2YGodgNoixAbQkQpjLAGplG4cGfsdTZgdkLZZRvTXSF6ZbPARtMxgfmtMw2nWTg7FnpM/Lu8IbPczitwnqktwzQEvR3yDIc8xBdR8z27dAz6qi2V0Ea2pdSQ/Iu45T2tkIkXsCxrIjKrlUiWnkYQ==
+ GJU/wEYLfiuXfxxnb/OkXgmAGgo9v8i1LBqLNl6GsNEL5d+PNXDK83Lp2t7SX5H3d2pV1jFX2NRNqYMQqR8rtSNNyUex7aW/EQFRhyTZpB8TqrX4JX2lIqPvyi1Sv+LD86/7xUgT17frvPQ4aQDg0XbYjrt5mdi/CBpOJGugNEqLOE9lhUrq4pgc0GUgmiHnXRjTcKW6BQJXMLMV2VvKcGi4RPfLw+79D5zlmxdsDKOsEk9mSPA7bCuGoNzk1WKTeArstSVAqo7JNsbKFeNxg91zcXbhmn/r0/mzLZZyoFB97EKrjjNd+AvNOvPni3CfJ8YCdDrCE/9LoX5sYPdbwX3c0xO6JFKqlCXrAycQY8WoLNTqXdljxlyXXAPl5FM/IYcJ2pCTAIDQ6Y0Xz42uYcTJsC0dLwd4RIA8LDoFlSbOIpWWW5uKJYlYE1fneOTFY2sWZFQ7M3niYqbTkxByhK5/EBQuXchFfkuc17195WNWd4+t8okINr5thy54GQdH+fi9mU1z0pdCo0Qp/NvL33P0DcTUR7dlCB3kVn49pypShQZTBfE+ZIfNisK4eHvxnLnNjVUHKoEI4eZhJDZIL9PLg7G90vpqBtWm6MxEpqfS9Xxn5PQKNBOzZuxnP3VRktVzKW5lJm7sUaGdcy44FywqPgCZEg3rztKh/2D+7/Bx2PV2hsCokfsDFaWWIoXad+S4eBoXCeeRtg0XgA+keA==
 X-Forefront-Antispam-Report-Untrusted:
- CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(46966006)(82310400005)(5660300002)(2616005)(81166007)(36860700001)(36756003)(44832011)(2906002)(8936002)(6666004)(316002)(356005)(426003)(86362001)(1076003)(26005)(70206006)(7696005)(70586007)(508600001)(6916009)(54906003)(8676002)(47076005)(83380400001)(336012)(4326008)(186003)(21314003)(36900700001);DIR:OUT;SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4302
+ CIP:40.67.248.234;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:nebula.arm.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(46966006)(36840700001)(40470700004)(47076005)(316002)(54906003)(4326008)(336012)(426003)(83380400001)(8676002)(82310400005)(70586007)(70206006)(86362001)(36860700001)(356005)(81166007)(2906002)(26005)(2616005)(508600001)(6666004)(44832011)(36756003)(7696005)(40460700003)(186003)(6916009)(1076003)(5660300002)(8936002)(36900700001);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB4551
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM5EUR03FT047.eop-EUR03.prod.protection.outlook.com
+ VE1EUR03FT044.eop-EUR03.prod.protection.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	deb31881-8cac-49e3-1bb3-08da3c851574
+	37b3d7dd-7440-41b1-9fdf-08da3c851f9a
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	xVjx4cgcVqh5ZvtKZQ00GezPeE539MZimGr6hhBxFlJeVIXKLOk+7gOrCkBxFhtE3PuWO0xrJxz1GNf3QzmBGZHTugZW3fzQVUD25LWXPrU4mqP8ax8JQSipaRqIQ8WB8h6vyGLdccy93uHD3ojJCigDn3f+M/szeRsvX2TcdfH1OYx9HEYHNKMUXJE80U7iixEk9lR1v0/0pNgxtSYsoXzWEiZCwmKPtjBvlu3hczThQxWlOI7BCui6/y/bf3XdfgKy8rj2u3W8WneDPJ/jTPvYGO3DcOTyRlTvSEYe6mp9HzgsbRkmLcxVbvQOdB8gHZjL4bv48/2Fn9s/JX9WtN+KLED9Op0NFKUTRWCnXrKwe2yjclIorPrD6fiZ4DWdpUS3gPSuxB1mhaG57T3+U+yNnYuhK+gnAhvOu8vl8LafXm3A1gz4CE0mcpkw9aHA/NAq/t0CzVSbYsGy8v3TiOkXrky75PVShuNAzbInhNfVm3h80cP8VmMnkYa1dJLF6iAagWwt32q7gkM+eIW4OzOFC/VEwGgukb4G+zLbsb2dhvSF6aVm3HldfOlE83/SoQJm29CUgUtSJAVz1UjowlzRRhCUsVw53R3ctoQTEiC1giolC/0vc1snGtzTaVCadpUfn8ekp0PQR8kMHyf68rgTUP7eOEAk6GWT1WVcvwASFICQ6EC4qdkLHcEMERAIKh56CxSfQBkQoc7LjaJCqg==
+	hs/ZPJRdBIgS/J3az0a2mKOs4wC1ndzzYEPeg+Po1qQpWDQEMI9hV7O7bAfUZ7470cO+2tIRyXzPNzF7vvnylMSarY6VmACC4ZcxtO8G0Ci7E61bUoJXZ2yKGkn4Gb/JX8dRr6IgsayOJMtSpPNibT4eZSnXvr1AVo1rY92eSjHzjRCZCZgseG8yt1FRaufKKd5G3+EMD5DwrVA8fqrLrjyQ7uJV3kM3Jg2J6gnn+Orc9Asnz3v6T03vfWGnftVthlM1hKDlbgmkwpmYVAtqZEqXsVkY7FGF3MYvG7CP9QQHApRdxXBtLJRIjUat9R/CJizjFbYmedJqkEnod5pFzZSD2tRwkEMMTDCUXBgLiryilmbmZ5qqpIaFnsDRCFHyjCW1FOzMC/urS+mS3hTDo5S1bfeSzRC3V/F8lKOwh9j6YJjtynf8zj2FQdLAh9+K5kIA4mVsDjKWRR2eHLK02yFFl1qCCprtdi9qPexfPsUO/esmz2T67aNqPP1cIqHhIjOz2E3P0Ui/gf8GnMS+7CbCouGYz+v+4/i48cAa79US5ynuDzLG11NpCiMSVrmyLfybbLIrsZT9FG4IcYKvOdavrXGViRTpJSzZKAh1y16n1z9otuChP10krXFHqBU0Es2L/kS/CDpcM5e0LZZ2AQ==
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(46966006)(40470700004)(36840700001)(70586007)(70206006)(83380400001)(6666004)(40460700003)(2616005)(7696005)(316002)(36860700001)(82310400005)(8676002)(2906002)(336012)(5660300002)(4326008)(47076005)(426003)(1076003)(26005)(8936002)(81166007)(508600001)(6916009)(54906003)(36756003)(44832011)(86362001)(186003)(21314003);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(46966006)(36840700001)(4326008)(83380400001)(86362001)(5660300002)(36756003)(8936002)(508600001)(8676002)(7696005)(316002)(47076005)(426003)(336012)(82310400005)(70586007)(70206006)(36860700001)(81166007)(6916009)(1076003)(54906003)(44832011)(186003)(2616005)(6666004)(2906002)(26005);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2022 06:26:02.8536
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 May 2022 06:26:18.4399
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6caa2191-6d48-4feb-44a2-08da3c851c48
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b5b9c2a-c195-4d8d-76a8-08da3c85259e
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	AM5EUR03FT047.eop-EUR03.prod.protection.outlook.com
+	VE1EUR03FT044.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7549
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR08MB3642
 
-x86 is using compiler feature testing to decide EFI build
-enable or not. When EFI build is disabled, x86 will use an
-efi/stub.c file to replace efi/runtime.c for build objects.
-Following this idea, we introduce a stub file for Arm, but
-use CONFIG_ARM_EFI to decide EFI build enable or not.
+NUMA node structure "struct node" is using u64 as node memory
+range. In order to make other architectures can reuse this
+NUMA node relative code, we replace the u64 to paddr_t. And
+use pfn_to_paddr and paddr_to_pfn to replace explicit shift
+operations. The relate PRIx64 in print messages have been
+replaced by PRIpaddr at the same time. And some being-phased-out
+types like u64 in the lines we have touched also have been
+converted to uint64_t or unsigned long.
 
-And the most functions in x86 EFI stub.c can be reused for
-other architectures, like Arm. So we move them to common
-and keep the x86 specific function in x86/efi/stub.c.
-
-To avoid the symbol link conflict error when linking common
-stub files to x86/efi. We add a regular file check in efi
-stub files' link script. Depends on this check we can bypass
-the link behaviors for existed stub files in x86/efi.
-
-As there is no Arm specific EFI stub function for Arm in
-current stage, Arm still can use the existed symbol link
-method for EFI stub files.
-
-Change-Id: Idf19db1ada609d05fc0c0c3b0e1e8687c9d6ac71
+Change-Id: Iac64ff398c10f6e642d40d06fc57e28806a1a4ff
 Issue-Id: SCM-2240
-Signed-off-by: Wei Chen <wei.chen@arm.com>
 Tested-by: Jiamei Xie <jiamei.xie@arm.com>
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 v3 -> v4:
-1. Add indent to make ln and test to be aligned.
+1. Add Tb.
 v2 -> v3:
-1. Add existed file check, if a regular stub files,
-   the common/stub files' link will be ignored.
-2. Keep stub.c in x86/efi to include common/efi/stub.c
-3. Restore efi_compat_xxx stub functions to x86/efi.c.
-   Other architectures will not use efi_compat_xxx.
-4. Remove ARM_EFI dependency from ARM_64.
-5. Add comment for adding stub.o to EFIOBJ-y.
-6. Merge patch#2 and patch#3 to one patch.
+1. Use uint64_t for size in acpi_scan_nodes, make it be
+   consistent with numa_emulation.
+2. Add Tb.
 v1 -> v2:
-1. Drop the copy of stub.c from Arm EFI.
-2. Share common codes of x86 EFI stub for other architectures.
-3. Use CONFIG_ARM_EFI to replace CONFIG_EFI
-4. Remove help text and make CONFIG_ARM_EFI invisible.
-5. Merge one following patch:
-   xen/arm: introduce a stub file for non-EFI architectures
-6. Use the common stub.c instead of creating new one.
+1. Drop useless cast.
+2. Use initializers of the variables.
+3. Replace u64 by uint64_t.
+4. Use unsigned long for start_pfn and end_pfn.
 ---
- xen/arch/arm/Kconfig         |  4 ++++
- xen/arch/arm/Makefile        |  2 +-
- xen/arch/arm/efi/Makefile    |  8 ++++++++
- xen/arch/x86/efi/stub.c      | 32 +-------------------------------
- xen/common/efi/efi-common.mk |  3 ++-
- xen/common/efi/stub.c        | 32 ++++++++++++++++++++++++++++++++
- 6 files changed, 48 insertions(+), 33 deletions(-)
- create mode 100644 xen/common/efi/stub.c
+ xen/arch/x86/include/asm/numa.h |  8 ++++----
+ xen/arch/x86/numa.c             | 32 +++++++++++++++-----------------
+ xen/arch/x86/srat.c             | 25 +++++++++++++------------
+ 3 files changed, 32 insertions(+), 33 deletions(-)
 
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index ecfa6822e4..8a16d43bd5 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -6,6 +6,7 @@ config ARM_64
- 	def_bool y
- 	depends on !ARM_32
- 	select 64BIT
-+	select ARM_EFI
- 	select HAS_FAST_MULTIPLY
+diff --git a/xen/arch/x86/include/asm/numa.h b/xen/arch/x86/include/asm/numa.h
+index 5d8385f2e1..c32ccffde3 100644
+--- a/xen/arch/x86/include/asm/numa.h
++++ b/xen/arch/x86/include/asm/numa.h
+@@ -18,7 +18,7 @@ extern cpumask_t     node_to_cpumask[];
+ #define node_to_cpumask(node)    (node_to_cpumask[node])
  
- config ARM
-@@ -33,6 +34,9 @@ config ACPI
- 	  Advanced Configuration and Power Interface (ACPI) support for Xen is
- 	  an alternative to device tree on ARM64.
+ struct node { 
+-	u64 start,end; 
++	paddr_t start, end;
+ };
  
-+config ARM_EFI
-+	bool
-+
- config GICV3
- 	bool "GICv3 driver"
- 	depends on ARM_64 && !NEW_VGIC
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 1d862351d1..bb7a6151c1 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -1,6 +1,5 @@
- obj-$(CONFIG_ARM_32) += arm32/
- obj-$(CONFIG_ARM_64) += arm64/
--obj-$(CONFIG_ARM_64) += efi/
- obj-$(CONFIG_ACPI) += acpi/
- obj-$(CONFIG_HAS_PCI) += pci/
- ifneq ($(CONFIG_NO_PLAT),y)
-@@ -20,6 +19,7 @@ obj-y += domain.o
- obj-y += domain_build.init.o
- obj-y += domctl.o
- obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
-+obj-y += efi/
- obj-y += gic.o
- obj-y += gic-v2.o
- obj-$(CONFIG_GICV3) += gic-v3.o
-diff --git a/xen/arch/arm/efi/Makefile b/xen/arch/arm/efi/Makefile
-index 4313c39066..dffe72e589 100644
---- a/xen/arch/arm/efi/Makefile
-+++ b/xen/arch/arm/efi/Makefile
-@@ -1,4 +1,12 @@
- include $(srctree)/common/efi/efi-common.mk
+ extern int compute_hash_shift(struct node *nodes, int numnodes,
+@@ -38,7 +38,7 @@ extern void numa_set_node(int cpu, nodeid_t node);
+ extern nodeid_t setup_node(unsigned int pxm);
+ extern void srat_detect_node(int cpu);
  
-+ifeq ($(CONFIG_ARM_EFI),y)
- obj-y += $(EFIOBJ-y)
- obj-$(CONFIG_ACPI) +=  efi-dom0.init.o
-+else
-+# Add stub.o to EFIOBJ-y to re-use the clean-files in
-+# efi-common.mk. Otherwise the link of stub.c in arm/efi
-+# will not be cleaned in "make clean".
-+EFIOBJ-y += stub.o
-+obj-y += stub.o
-+endif
-diff --git a/xen/arch/x86/efi/stub.c b/xen/arch/x86/efi/stub.c
-index 9984932626..f2365bc041 100644
---- a/xen/arch/x86/efi/stub.c
-+++ b/xen/arch/x86/efi/stub.c
-@@ -1,7 +1,5 @@
- #include <xen/efi.h>
--#include <xen/errno.h>
- #include <xen/init.h>
--#include <xen/lib.h>
- #include <asm/asm_defns.h>
- #include <asm/efibind.h>
- #include <asm/page.h>
-@@ -10,6 +8,7 @@
- #include <efi/eficon.h>
- #include <efi/efidevp.h>
- #include <efi/efiapi.h>
-+#include "../../../common/efi/stub.c"
+-extern void setup_node_bootmem(nodeid_t nodeid, u64 start, u64 end);
++extern void setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end);
+ extern nodeid_t apicid_to_node[];
+ extern void init_cpu_to_node(void);
  
- /*
-  * Here we are in EFI stub. EFI calls are not supported due to lack
-@@ -45,11 +44,6 @@ void __init noreturn efi_multiboot2(EFI_HANDLE ImageHandle,
-     unreachable();
+@@ -76,9 +76,9 @@ static inline __attribute__((pure)) nodeid_t phys_to_nid(paddr_t addr)
+ 				 NODE_DATA(nid)->node_spanned_pages)
+ #define arch_want_default_dmazone() (num_online_nodes() > 1)
+ 
+-extern int valid_numa_range(u64 start, u64 end, nodeid_t node);
++extern int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node);
+ 
+-void srat_parse_regions(u64 addr);
++void srat_parse_regions(paddr_t addr);
+ extern u8 __node_distance(nodeid_t a, nodeid_t b);
+ unsigned int arch_get_dma_bitsize(void);
+ 
+diff --git a/xen/arch/x86/numa.c b/xen/arch/x86/numa.c
+index 680b7d9002..627ae8aa95 100644
+--- a/xen/arch/x86/numa.c
++++ b/xen/arch/x86/numa.c
+@@ -162,12 +162,10 @@ int __init compute_hash_shift(struct node *nodes, int numnodes,
+     return shift;
+ }
+ /* initialize NODE_DATA given nodeid and start/end */
+-void __init setup_node_bootmem(nodeid_t nodeid, u64 start, u64 end)
+-{ 
+-    unsigned long start_pfn, end_pfn;
+-
+-    start_pfn = start >> PAGE_SHIFT;
+-    end_pfn = end >> PAGE_SHIFT;
++void __init setup_node_bootmem(nodeid_t nodeid, paddr_t start, paddr_t end)
++{
++    unsigned long start_pfn = paddr_to_pfn(start);
++    unsigned long end_pfn = paddr_to_pfn(end);
+ 
+     NODE_DATA(nodeid)->node_start_pfn = start_pfn;
+     NODE_DATA(nodeid)->node_spanned_pages = end_pfn - start_pfn;
+@@ -198,11 +196,12 @@ void __init numa_init_array(void)
+ static int numa_fake __initdata = 0;
+ 
+ /* Numa emulation */
+-static int __init numa_emulation(u64 start_pfn, u64 end_pfn)
++static int __init numa_emulation(unsigned long start_pfn,
++                                 unsigned long end_pfn)
+ {
+     int i;
+     struct node nodes[MAX_NUMNODES];
+-    u64 sz = ((end_pfn - start_pfn)<<PAGE_SHIFT) / numa_fake;
++    uint64_t sz = pfn_to_paddr(end_pfn - start_pfn) / numa_fake;
+ 
+     /* Kludge needed for the hash function */
+     if ( hweight64(sz) > 1 )
+@@ -218,9 +217,9 @@ static int __init numa_emulation(u64 start_pfn, u64 end_pfn)
+     memset(&nodes,0,sizeof(nodes));
+     for ( i = 0; i < numa_fake; i++ )
+     {
+-        nodes[i].start = (start_pfn<<PAGE_SHIFT) + i*sz;
++        nodes[i].start = pfn_to_paddr(start_pfn) + i * sz;
+         if ( i == numa_fake - 1 )
+-            sz = (end_pfn<<PAGE_SHIFT) - nodes[i].start;
++            sz = pfn_to_paddr(end_pfn) - nodes[i].start;
+         nodes[i].end = nodes[i].start + sz;
+         printk(KERN_INFO "Faking node %d at %"PRIx64"-%"PRIx64" (%"PRIu64"MB)\n",
+                i,
+@@ -246,6 +245,8 @@ static int __init numa_emulation(u64 start_pfn, u64 end_pfn)
+ void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
+ { 
+     int i;
++    paddr_t start = pfn_to_paddr(start_pfn);
++    paddr_t end = pfn_to_paddr(end_pfn);
+ 
+ #ifdef CONFIG_NUMA_EMU
+     if ( numa_fake && !numa_emulation(start_pfn, end_pfn) )
+@@ -253,17 +254,15 @@ void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
+ #endif
+ 
+ #ifdef CONFIG_ACPI_NUMA
+-    if ( !numa_off && !acpi_scan_nodes((u64)start_pfn << PAGE_SHIFT,
+-         (u64)end_pfn << PAGE_SHIFT) )
++    if ( !numa_off && !acpi_scan_nodes(start, end) )
+         return;
+ #endif
+ 
+     printk(KERN_INFO "%s\n",
+            numa_off ? "NUMA turned off" : "No NUMA configuration found");
+ 
+-    printk(KERN_INFO "Faking a node at %016"PRIx64"-%016"PRIx64"\n",
+-           (u64)start_pfn << PAGE_SHIFT,
+-           (u64)end_pfn << PAGE_SHIFT);
++    printk(KERN_INFO "Faking a node at %"PRIpaddr"-%"PRIpaddr"\n",
++           start, end);
+     /* setup dummy node covering all memory */
+     memnode_shift = BITS_PER_LONG - 1;
+     memnodemap = _memnodemap;
+@@ -276,8 +275,7 @@ void __init numa_initmem_init(unsigned long start_pfn, unsigned long end_pfn)
+     for ( i = 0; i < nr_cpu_ids; i++ )
+         numa_set_node(i, 0);
+     cpumask_copy(&node_to_cpumask[0], cpumask_of(0));
+-    setup_node_bootmem(0, (u64)start_pfn << PAGE_SHIFT,
+-                    (u64)end_pfn << PAGE_SHIFT);
++    setup_node_bootmem(0, start, end);
  }
  
--bool efi_enabled(unsigned int feature)
--{
--    return false;
--}
--
- void __init efi_init_memory(void) { }
+ void numa_add_cpu(int cpu)
+diff --git a/xen/arch/x86/srat.c b/xen/arch/x86/srat.c
+index cfe24c7e78..8ffe43bdfe 100644
+--- a/xen/arch/x86/srat.c
++++ b/xen/arch/x86/srat.c
+@@ -104,7 +104,7 @@ nodeid_t setup_node(unsigned pxm)
+ 	return node;
+ }
  
- bool efi_boot_mem_unused(unsigned long *start, unsigned long *end)
-@@ -62,32 +56,8 @@ bool efi_boot_mem_unused(unsigned long *start, unsigned long *end)
+-int valid_numa_range(u64 start, u64 end, nodeid_t node)
++int valid_numa_range(paddr_t start, paddr_t end, nodeid_t node)
+ {
+ 	int i;
  
- void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t l4e) { }
+@@ -119,7 +119,7 @@ int valid_numa_range(u64 start, u64 end, nodeid_t node)
+ 	return 0;
+ }
  
--bool efi_rs_using_pgtables(void)
--{
--    return false;
--}
--
--unsigned long efi_get_time(void)
--{
--    BUG();
--    return 0;
--}
--
--void efi_halt_system(void) { }
--void efi_reset_system(bool warm) { }
--
--int efi_get_info(uint32_t idx, union xenpf_efi_info *info)
--{
--    return -ENOSYS;
--}
--
- int efi_compat_get_info(uint32_t idx, union compat_pf_efi_info *)
-     __attribute__((__alias__("efi_get_info")));
+-static __init int conflicting_memblks(u64 start, u64 end)
++static __init int conflicting_memblks(paddr_t start, paddr_t end)
+ {
+ 	int i;
  
--int efi_runtime_call(struct xenpf_efi_runtime_call *op)
--{
--    return -ENOSYS;
--}
--
- int efi_compat_runtime_call(struct compat_pf_efi_runtime_call *)
-     __attribute__((__alias__("efi_runtime_call")));
-diff --git a/xen/common/efi/efi-common.mk b/xen/common/efi/efi-common.mk
-index 4298ceaee7..ec2c34f198 100644
---- a/xen/common/efi/efi-common.mk
-+++ b/xen/common/efi/efi-common.mk
-@@ -9,7 +9,8 @@ CFLAGS-y += -iquote $(srcdir)
- # e.g.: It transforms "dir/foo/bar" into successively
- #       "dir foo bar", ".. .. ..", "../../.."
- $(obj)/%.c: $(srctree)/common/efi/%.c FORCE
--	$(Q)ln -nfs $(subst $(space),/,$(patsubst %,..,$(subst /, ,$(obj))))/source/common/efi/$(<F) $@
-+	$(Q)test -f $@ || \
-+	    ln -nfs $(subst $(space),/,$(patsubst %,..,$(subst /, ,$(obj))))/source/common/efi/$(<F) $@
+@@ -135,7 +135,7 @@ static __init int conflicting_memblks(u64 start, u64 end)
+ 	return -1;
+ }
  
- clean-files += $(patsubst %.o, %.c, $(EFIOBJ-y:.init.o=.o) $(EFIOBJ-))
+-static __init void cutoff_node(int i, u64 start, u64 end)
++static __init void cutoff_node(int i, paddr_t start, paddr_t end)
+ {
+ 	struct node *nd = &nodes[i];
+ 	if (nd->start < start) {
+@@ -275,7 +275,7 @@ acpi_numa_processor_affinity_init(const struct acpi_srat_cpu_affinity *pa)
+ void __init
+ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
+ {
+-	u64 start, end;
++	paddr_t start, end;
+ 	unsigned pxm;
+ 	nodeid_t node;
+ 	int i;
+@@ -318,7 +318,7 @@ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
+ 		bool mismatch = !(ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE) !=
+ 		                !test_bit(i, memblk_hotplug);
  
-diff --git a/xen/common/efi/stub.c b/xen/common/efi/stub.c
-new file mode 100644
-index 0000000000..15694632c2
---- /dev/null
-+++ b/xen/common/efi/stub.c
-@@ -0,0 +1,32 @@
-+#include <xen/efi.h>
-+#include <xen/errno.h>
-+#include <xen/lib.h>
+-		printk("%sSRAT: PXM %u (%"PRIx64"-%"PRIx64") overlaps with itself (%"PRIx64"-%"PRIx64")\n",
++		printk("%sSRAT: PXM %u (%"PRIpaddr"-%"PRIpaddr") overlaps with itself (%"PRIpaddr"-%"PRIpaddr")\n",
+ 		       mismatch ? KERN_ERR : KERN_WARNING, pxm, start, end,
+ 		       node_memblk_range[i].start, node_memblk_range[i].end);
+ 		if (mismatch) {
+@@ -327,7 +327,7 @@ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
+ 		}
+ 	} else {
+ 		printk(KERN_ERR
+-		       "SRAT: PXM %u (%"PRIx64"-%"PRIx64") overlaps with PXM %u (%"PRIx64"-%"PRIx64")\n",
++		       "SRAT: PXM %u (%"PRIpaddr"-%"PRIpaddr") overlaps with PXM %u (%"PRIpaddr"-%"PRIpaddr")\n",
+ 		       pxm, start, end, node_to_pxm(memblk_nodeid[i]),
+ 		       node_memblk_range[i].start, node_memblk_range[i].end);
+ 		bad_srat();
+@@ -346,7 +346,7 @@ acpi_numa_memory_affinity_init(const struct acpi_srat_mem_affinity *ma)
+ 				nd->end = end;
+ 		}
+ 	}
+-	printk(KERN_INFO "SRAT: Node %u PXM %u %"PRIx64"-%"PRIx64"%s\n",
++	printk(KERN_INFO "SRAT: Node %u PXM %u %"PRIpaddr"-%"PRIpaddr"%s\n",
+ 	       node, pxm, start, end,
+ 	       ma->flags & ACPI_SRAT_MEM_HOT_PLUGGABLE ? " (hotplug)" : "");
+ 
+@@ -369,7 +369,7 @@ static int __init nodes_cover_memory(void)
+ 
+ 	for (i = 0; i < e820.nr_map; i++) {
+ 		int j, found;
+-		unsigned long long start, end;
++		paddr_t start, end;
+ 
+ 		if (e820.map[i].type != E820_RAM) {
+ 			continue;
+@@ -396,7 +396,7 @@ static int __init nodes_cover_memory(void)
+ 
+ 		if (start < end) {
+ 			printk(KERN_ERR "SRAT: No PXM for e820 range: "
+-				"%016Lx - %016Lx\n", start, end);
++				"%"PRIpaddr" - %"PRIpaddr"\n", start, end);
+ 			return 0;
+ 		}
+ 	}
+@@ -432,7 +432,7 @@ static int __init cf_check srat_parse_region(
+ 	return 0;
+ }
+ 
+-void __init srat_parse_regions(u64 addr)
++void __init srat_parse_regions(paddr_t addr)
+ {
+ 	u64 mask;
+ 	unsigned int i;
+@@ -457,7 +457,7 @@ void __init srat_parse_regions(u64 addr)
+ }
+ 
+ /* Use the information discovered above to actually set up the nodes. */
+-int __init acpi_scan_nodes(u64 start, u64 end)
++int __init acpi_scan_nodes(paddr_t start, paddr_t end)
+ {
+ 	int i;
+ 	nodemask_t all_nodes_parsed;
+@@ -489,7 +489,8 @@ int __init acpi_scan_nodes(u64 start, u64 end)
+ 	/* Finally register nodes */
+ 	for_each_node_mask(i, all_nodes_parsed)
+ 	{
+-		u64 size = nodes[i].end - nodes[i].start;
++		uint64_t size = nodes[i].end - nodes[i].start;
 +
-+bool efi_enabled(unsigned int feature)
-+{
-+    return false;
-+}
-+
-+bool efi_rs_using_pgtables(void)
-+{
-+    return false;
-+}
-+
-+unsigned long efi_get_time(void)
-+{
-+    BUG();
-+    return 0;
-+}
-+
-+void efi_halt_system(void) { }
-+void efi_reset_system(bool warm) { }
-+
-+int efi_get_info(uint32_t idx, union xenpf_efi_info *info)
-+{
-+    return -ENOSYS;
-+}
-+
-+int efi_runtime_call(struct xenpf_efi_runtime_call *op)
-+{
-+    return -ENOSYS;
-+}
+ 		if ( size == 0 )
+ 			printk(KERN_WARNING "SRAT: Node %u has no memory. "
+ 			       "BIOS Bug or mis-configured hardware?\n", i);
 -- 
 2.25.1
 
