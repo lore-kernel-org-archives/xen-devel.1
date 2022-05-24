@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74642C433F5
-	for <xen-devel@archiver.kernel.org>; Tue, 24 May 2022 07:41:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.336194.560515 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C026EC4332F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 May 2022 07:42:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.336215.560559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntPAk-00045X-GJ; Tue, 24 May 2022 07:41:42 +0000
+	id 1ntPAr-0005ES-PN; Tue, 24 May 2022 07:41:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 336194.560515; Tue, 24 May 2022 07:41:42 +0000
+Received: by outflank-mailman (output) from mailman id 336215.560559; Tue, 24 May 2022 07:41:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntPAk-00045Q-Cf; Tue, 24 May 2022 07:41:42 +0000
-Received: by outflank-mailman (input) for mailman id 336194;
- Tue, 24 May 2022 07:41:40 +0000
+	id 1ntPAr-0005EH-Km; Tue, 24 May 2022 07:41:49 +0000
+Received: by outflank-mailman (input) for mailman id 336215;
+ Tue, 24 May 2022 07:41:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6c9/=WA=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1ntP6E-0003DA-QQ
- for xen-devel@lists.xenproject.org; Tue, 24 May 2022 07:37:02 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id abe7e49f-daae-11ec-837e-e5687231ffcc;
- Mon, 23 May 2022 17:40:30 +0200 (CEST)
-Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1653320431089155.22680033498602;
- Mon, 23 May 2022 08:40:31 -0700 (PDT)
+ <SRS0=QgIG=WA=arm.com=michal.orzel@srs-se1.protection.inumbo.net>)
+ id 1ntP5s-0003DA-NU
+ for xen-devel@lists.xenproject.org; Tue, 24 May 2022 07:36:40 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 9d17c108-db2b-11ec-837e-e5687231ffcc;
+ Tue, 24 May 2022 08:34:51 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 42E531FB;
+ Mon, 23 May 2022 23:34:50 -0700 (PDT)
+Received: from [10.57.2.178] (unknown [10.57.2.178])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 004563F66F;
+ Mon, 23 May 2022 23:34:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,194 +44,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: abe7e49f-daae-11ec-837e-e5687231ffcc
-ARC-Seal: i=1; a=rsa-sha256; t=1653320432; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=QuXS1HEj0dvBJR2U8ihqk8BbN7rGuPNp/rtmwBU+gH2/qXMXK5PT76NWyjeLHhuQZBbZbpBDFfoSODSLdAiIQjTy24l35m5/Fm0cWbMipDhAw4anJj1yB94Ni/n9h5tFse0yTg1l8zLQ+mqwjmn57fgVtt8oP+VUCavy4GI8VoM=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1653320432; h=Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
-	bh=98v0UwvujcfL6C9tx4e5oAX1065dOOeYtIhzPpau0Tw=; 
-	b=kZeAUtQNwaAvJEu13sFORdPqc7Soy50h7EmXs3G5DlLoaqHnIqTzoBRxueR7g71kFGpO/BMdYIvkii1aoJP/gbCWj7xkItT95rz8h3SnWbpnR4bTvikCQJacAqvVWaZxRr1QowMYBpOcTYBnsPAW9q1ffD7QmK3syozF1biZlmw=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1653320432;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=98v0UwvujcfL6C9tx4e5oAX1065dOOeYtIhzPpau0Tw=;
-	b=BQKPur29NhqC4YNELGVJO0XHUthYhshfF2F2vX5d8boDvAexBYDFDGJULF95kyca
-	yNBi92rvLbiI4/ssoIs0fIOtq6TSjLT6ZOFw76bQd5a+BrW4uzeWmnrOSCQXNPnPEdA
-	V2iyTrkldPiZbwX/EnZNICAywEd94uXHdo0o8Yas=
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org,
-	"Daniel P. Smith" <dpsmith@apertussolutions.com>
-Cc: scott.davis@starlab.io,
-	jandryuk@gmail.com,
-	christopher.clark@starlab.io,
-	Daniel De Graaf <dgdegra@tycho.nsa.gov>
-Subject: [PATCH] xsm: refactor and optimize policy loading
-Date: Mon, 23 May 2022 11:40:24 -0400
-Message-Id: <20220523154024.1947-1-dpsmith@apertussolutions.com>
-X-Mailer: git-send-email 2.20.1
+X-Inumbo-ID: 9d17c108-db2b-11ec-837e-e5687231ffcc
+Message-ID: <06dbe73a-a14f-4b9f-4839-9c97829303ff@arm.com>
+Date: Tue, 24 May 2022 08:34:37 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-ZohoMailClient: External
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Subject: Re: [PATCH] xen/arm: Allow setting the number of CPUs to activate at
+ runtime
+Content-Language: en-US
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20220523091324.137350-1-michal.orzel@arm.com>
+ <45054a80-3958-a6b8-1575-02dd5bb17892@xen.org>
+ <cb1e1ce0-4667-c436-6e5d-abc26add4ebe@arm.com>
+ <3236e8e6-c25d-1733-9315-e0363cc73f84@xen.org>
+From: Michal Orzel <michal.orzel@arm.com>
+In-Reply-To: <3236e8e6-c25d-1733-9315-e0363cc73f84@xen.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-It is possible to select a few different build configurations that results in
-the unnecessary walking of the boot module list looking for a policy module.
-This specifically occurs when the flask policy is enabled but either the dummy
-or the SILO policy is selected as the enforcing policy. This is not ideal for
-configurations like hyperlaunch and dom0less when there could be a number of
-modules to be walked or unnecessary device tree lookups
+Hi Julien,
 
-This patch does two things, it moves all policy initialization logic under the
-xsm_XXXX_policy_init() functions and introduces the init_policy flag.  The
-init_policy flag will be set based on which enforcing policy is selected and
-gates whether the boot modules should be checked for a policy file.
+On 23.05.2022 22:00, Julien Grall wrote:
+> 
+> 
+> On 23/05/2022 11:21, Michal Orzel wrote:
+>> Hi Julien,
+> 
+> Hi Michal,
+> 
+>>
+>> On 23.05.2022 12:05, Julien Grall wrote:
+>>> Hi,
+>>>
+>>> On 23/05/2022 10:13, Michal Orzel wrote:
+>>>> Introduce a command line parameter "maxcpus" on Arm to allow adjusting
+>>>> the number of CPUs to activate.
+>>>
+>>> The current definition "maxcpus" is not really suitable for big.LITTLE systems as you have no flexibility to say how many types of each cores you want to boot.
+>>>
+>>> Instead, Xen will pick-up the first CPUs it parsed from the firmware tables.
+>>>
+>>>
+>>> So what's your use-case/target?
+>>>
+>> - use cases where we have no big little (although even on big.LITTLE limiting this number makes sense if we do not care about the types)
+> 
+> This may make sense in debug build, but for prod I think you need some certainty how which CPUs you are going to use.
+My conviction was that using big.LITTLE by enabling hmp-unsafe is not really used in the production systems (after all it's called *unsafe*)
+as it may easily end up in an insecure/unstable platform without specifying the cpu affinity (which must be done carefully).
 
-Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
----
- xen/xsm/xsm_core.c   | 30 +++++++++++++++++++-----------
- xen/xsm/xsm_policy.c | 21 +++++++++++++++++++--
- 2 files changed, 38 insertions(+), 13 deletions(-)
+> 
+> So I would like a warning in the documentation "maxcpus" that in big.LITTLE system, there are no guarantee on which types will be used.
+I'm fully ok with adding this warning.
 
-diff --git a/xen/xsm/xsm_core.c b/xen/xsm/xsm_core.c
-index 2286a502e3..0dfc970283 100644
---- a/xen/xsm/xsm_core.c
-+++ b/xen/xsm/xsm_core.c
-@@ -55,19 +55,35 @@ static enum xsm_bootparam __initdata xsm_bootparam =
-     XSM_BOOTPARAM_DUMMY;
- #endif
- 
-+static bool __initdata init_policy =
-+#ifdef CONFIG_XSM_FLASK_DEFAULT
-+    true;
-+#else
-+    false;
-+#endif
-+
- static int __init cf_check parse_xsm_param(const char *s)
- {
-     int rc = 0;
- 
-     if ( !strcmp(s, "dummy") )
-+    {
-         xsm_bootparam = XSM_BOOTPARAM_DUMMY;
-+        init_policy = false;
-+    }
- #ifdef CONFIG_XSM_FLASK
-     else if ( !strcmp(s, "flask") )
-+    {
-         xsm_bootparam = XSM_BOOTPARAM_FLASK;
-+        init_policy = true;
-+    }
- #endif
- #ifdef CONFIG_XSM_SILO
-     else if ( !strcmp(s, "silo") )
-+    {
-         xsm_bootparam = XSM_BOOTPARAM_SILO;
-+        init_policy = false;
-+    }
- #endif
-     else
-         rc = -EINVAL;
-@@ -80,14 +96,6 @@ static int __init xsm_core_init(const void *policy_buffer, size_t policy_size)
- {
-     const struct xsm_ops *ops = NULL;
- 
--#ifdef CONFIG_XSM_FLASK_POLICY
--    if ( policy_size == 0 )
--    {
--        policy_buffer = xsm_flask_init_policy;
--        policy_size = xsm_flask_init_policy_size;
--    }
--#endif
--
-     if ( xsm_ops_registered != XSM_OPS_UNREGISTERED )
-     {
-         printk(XENLOG_ERR
-@@ -148,11 +156,11 @@ int __init xsm_multiboot_init(
- 
-     printk("XSM Framework v" XSM_FRAMEWORK_VERSION " initialized\n");
- 
--    if ( XSM_MAGIC )
-+    if ( init_policy && XSM_MAGIC )
-     {
-         ret = xsm_multiboot_policy_init(module_map, mbi, &policy_buffer,
-                                         &policy_size);
--        if ( ret )
-+        if ( ret != 0 )
-         {
-             bootstrap_map(NULL);
-             printk(XENLOG_ERR "Error %d initializing XSM policy\n", ret);
-@@ -176,7 +184,7 @@ int __init xsm_dt_init(void)
- 
-     printk("XSM Framework v" XSM_FRAMEWORK_VERSION " initialized\n");
- 
--    if ( XSM_MAGIC )
-+    if ( init_policy && XSM_MAGIC )
-     {
-         ret = xsm_dt_policy_init(&policy_buffer, &policy_size);
-         if ( ret )
-diff --git a/xen/xsm/xsm_policy.c b/xen/xsm/xsm_policy.c
-index 8dafbc9381..0e32418999 100644
---- a/xen/xsm/xsm_policy.c
-+++ b/xen/xsm/xsm_policy.c
-@@ -8,7 +8,7 @@
-  *  Contributors:
-  *  Michael LeMay, <mdlemay@epoch.ncsc.mil>
-  *  George Coker, <gscoker@alpha.ncsc.mil>
-- *  
-+ *
-  *  This program is free software; you can redistribute it and/or modify
-  *  it under the terms of the GNU General Public License version 2,
-  *  as published by the Free Software Foundation.
-@@ -36,10 +36,17 @@ int __init xsm_multiboot_policy_init(
- {
-     int i;
-     module_t *mod = (module_t *)__va(mbi->mods_addr);
--    int rc = 0;
-+    int rc = -ENOENT;
-     u32 *_policy_start;
-     unsigned long _policy_len;
- 
-+#ifdef CONFIG_XSM_FLASK_POLICY
-+    /* Initially set to builtin policy, overriden if boot module is found. */
-+    *policy_buffer = (void *)xsm_flask_init_policy;
-+    *policy_size = xsm_flask_init_policy_size;
-+    rc = 0;
-+#endif
-+
-     /*
-      * Try all modules and see whichever could be the binary policy.
-      * Adjust module_map for the module that is the binary policy.
-@@ -61,6 +68,7 @@ int __init xsm_multiboot_policy_init(
-                    _policy_len,_policy_start);
- 
-             __clear_bit(i, module_map);
-+            rc = 0;
-             break;
- 
-         }
-@@ -79,7 +87,16 @@ int __init xsm_dt_policy_init(void **policy_buffer, size_t *policy_size)
-     paddr_t paddr, len;
- 
-     if ( !mod || !mod->size )
-+#ifdef CONFIG_XSM_FLASK_POLICY
-+    {
-+        *policy_buffer = (void *)xsm_flask_init_policy;
-+        *policy_size = xsm_flask_init_policy_size;
-         return 0;
-+    }
-+#else
-+        /* No policy was loaded */
-+        return -ENOENT;
-+#endif
- 
-     paddr = mod->start;
-     len = mod->size;
--- 
-2.20.1
+**WARNING: On Arm big.LITTLE systems, when `hmp-unsafe` option is enabled, this command line
+option does not guarantee on which CPU types will be used.**
 
+> 
+> This is technically a lie, but I don't want a user to start relying on how Xen will parse the DT.
+> 
+>> - debug cases where we want to set maxcpus=1
+> 
+> Thanks for the clarification. I would be happy to add my tag with a warning in the documentation.
+> 
+Does it mean you want to do this on commit or should I handle it in v2?
+
+> Cheers,
+> 
+
+Cheers,
+Michal
 
