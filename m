@@ -4,42 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42C94C43217
-	for <xen-devel@archiver.kernel.org>; Wed, 25 May 2022 08:13:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.336975.561428 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1A30C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 25 May 2022 08:25:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.337001.561461 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntm96-0006Xl-UH; Wed, 25 May 2022 08:13:32 +0000
+	id 1ntmKb-0000oZ-R0; Wed, 25 May 2022 08:25:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 336975.561428; Wed, 25 May 2022 08:13:32 +0000
+Received: by outflank-mailman (output) from mailman id 337001.561461; Wed, 25 May 2022 08:25:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntm96-0006Xe-RC; Wed, 25 May 2022 08:13:32 +0000
-Received: by outflank-mailman (input) for mailman id 336975;
- Wed, 25 May 2022 08:13:31 +0000
+	id 1ntmKb-0000oS-Nm; Wed, 25 May 2022 08:25:25 +0000
+Received: by outflank-mailman (input) for mailman id 337001;
+ Wed, 25 May 2022 08:25:24 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=x7Hr=WB=citrix.com=prvs=137588b7b=roger.pau@srs-se1.protection.inumbo.net>)
- id 1ntm95-0006XS-Er
- for xen-devel@lists.xenproject.org; Wed, 25 May 2022 08:13:31 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8e054db6-dc02-11ec-bd2c-47488cf2e6aa;
- Wed, 25 May 2022 10:13:30 +0200 (CEST)
-Received: from mail-bn8nam11lp2175.outbound.protection.outlook.com (HELO
- NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.175])
- by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 25 May 2022 04:13:26 -0400
-Received: from DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
- by SN2PR03MB2384.namprd03.prod.outlook.com (2603:10b6:804:c::10) with
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=gDv/=WB=suse.com=jbeulich@srs-se1.protection.inumbo.net>)
+ id 1ntmKa-0000oM-Ik
+ for xen-devel@lists.xenproject.org; Wed, 25 May 2022 08:25:24 +0000
+Received: from de-smtp-delivery-102.mimecast.com
+ (de-smtp-delivery-102.mimecast.com [194.104.111.102])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 385025b1-dc04-11ec-bd2c-47488cf2e6aa;
+ Wed, 25 May 2022 10:25:22 +0200 (CEST)
+Received: from EUR02-AM5-obe.outbound.protection.outlook.com
+ (mail-am5eur02lp2059.outbound.protection.outlook.com [104.47.4.59]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-40-2ZnN6_5-PDWemgx08xxTqQ-2; Wed, 25 May 2022 10:25:21 +0200
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by DB7PR04MB4476.eurprd04.prod.outlook.com (2603:10a6:5:36::25) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5293.13; Wed, 25 May
- 2022 08:13:24 +0000
-Received: from DS7PR03MB5608.namprd03.prod.outlook.com
- ([fe80::5df3:95ce:4dfd:134e]) by DS7PR03MB5608.namprd03.prod.outlook.com
- ([fe80::5df3:95ce:4dfd:134e%5]) with mapi id 15.20.5273.023; Wed, 25 May 2022
- 08:13:24 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.23; Wed, 25 May
+ 2022 08:25:19 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::dfa:a64a:432f:e26b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::dfa:a64a:432f:e26b%7]) with mapi id 15.20.5293.013; Wed, 25 May 2022
+ 08:25:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,209 +53,219 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8e054db6-dc02-11ec-bd2c-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1653466410;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=POv1bx7iLdSJsiqqXLREhhkckNI2R8ta4CoCgLlMJAo=;
-  b=GxtGRH/71K4d9ap1vUH76g5Y+NJWjnQ86HnIUS94HhKmP73R3lZfnaL2
-   JkKbFsRpA0pQM2lzHKruQRcxF9QjpR92e5cb2STbhvHkeF8N8cQAZJNhv
-   /VARbbcGyS0xXYwrGFG1/zbsahZ0lDBaKiYoPJoX30bf9Js+3+5nYHGdQ
-   o=;
-X-IronPort-RemoteIP: 104.47.58.175
-X-IronPort-MID: 72524842
-X-IronPort-Reputation: None
-X-IronPort-Listener: OutboundMail
-X-IronPort-SenderGroup: RELAY_O365
-X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:gWf8N6z476+KTl2bQiZ6t+dDxyrEfRIJ4+MujC+fZmUNrF6WrkVVm
- jEcUWCEO/fcNmb3KNt1a9vl9B8Ovp+HzdAxTlNt+yAxQypGp/SeCIXCJC8cHc8zwu4v7q5Dx
- 59DAjUVBJlsFhcwnj/0bv656yMUOZigHtIQMsadUsxKbVIiGX5JZS5LwbZj2NY124XhWmthh
- PupyyHhEA79s9JLGjp8B5Kr8HuDa9yr5Vv0FnRnDRx6lAe2e0s9VfrzFonoR5fMeaFGH/bSe
- gr25OrRElU1XfsaIojNfr7TKiXmS1NJVOSEoiI+t6OK2nCuqsGuu0qS2TV1hUp/0l20c95NJ
- NplmKGcTC55Joj1k99HA0BgDwNbL/F/9+qSSZS/mZT7I0zuVVLJmqwrJmdmeIoS96BwHH1E8
- uEeJHYVdBefiumqwbW9DO5xmsAkK8qtN4Qa0p1i5WiBUbB6HtaeE+OTuoIwMDQY36iiGd7EY
- MUUc3x3ZQnoaBxTIFYHTpk5mY9Eg1GgKWAC9ALJ/8Lb5UD/kB4o++PHHOCJe+LaT8VImB2en
- 0TvqjGR7hYycYb3JSC+2mKhgKrDkD32XKoWFaak7bh6jVuL3GsRBRYKE1yhrpGRiESzRtZeI
- Ew84Tc1oO4580nDZsb5dw21pjiDpBF0ZjZLO+gz6QXIwKyE5Q+cXzEAVmQYN4Fgs9IqTzs30
- FPPh8nuGTFkrLySTzSa66uQqjSxfyMSKAfueBM5cOfM2PG7yKlbs/4FZo8L/HKd5jEtJQzN/
- g==
-IronPort-HdrOrdr: A9a23:p3yZ9Kyiar+6fFHZ+uFMKrPwFb1zdoMgy1knxilNoH1uA7Wlfq
- WV9sjzuiWE7Qr5NEtQ++xofZPwIk80lqQV3WByB8bHYOCOggLBR72Kr7GD/9SKIVyYygcy79
- YHT0G8MrHN5JpB4PoSLDPWLz/o+re6zJw=
-X-IronPort-AV: E=Sophos;i="5.91,250,1647316800"; 
-   d="scan'208";a="72524842"
+X-Inumbo-ID: 385025b1-dc04-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=mimecast20200619;
+	t=1653467122;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=I2me7tb3mSHiU9YqXajMUu0sxh+Usbk71xw8ljT6BIE=;
+	b=g40DBMqRhtIsDbG5JV0TRfdfnBUBL7XUb8/YdfULbYALcvveYzT4zia7pvghk93xWxHveg
+	L/phMBvCv67lAu1oUEHGiRuW/X8SZ/gjrjx1QAJR2kfkXZAD6ytlZkc66RHEXWOlseybWN
+	Fpgdn5a0zTQRJfCnaXYUX5VqhG50/Rw=
+X-MC-Unique: 2ZnN6_5-PDWemgx08xxTqQ-2
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZxDXUsvm66e47gMMiMemaWD2VJdj8k6lXhMIRMp5okaFYwmx8GRljMvlCwnCV+m2+sjoLe7QbFuK208Yte0AxP/Xr3/tQxjLX+WvmO6F+sqrpncFz7po6SUfAZo1JQCd1owWTomYg7wveAslVX5ha8ZvposqSX0T53kdhwy1/bT3VRUCCCXu/CIzt4rMuw5mJO6jMqH3KN6Ym8kFf5Jw2CSRE5KXbjHabQez6nI8IIHCaS/uZSjgU2s08WpZIjGCSUssiTw90lBn/3S7sUSP7oCyS5y4JJBKBGwyNLoqvMA1loVSmNhR+3K4O172bG+CxGLxNZgIVqO4Boh+ZIBZ2g==
+ b=OhYa+r/Rnmf/pPtfJKgq33JuoGwV4bXL1MCpFG5CvEsPxazyerLUdE4CbDDP+Mzt+Pu6BZRZqrEtATEsoN4GnZsIS35Q4XpnjuYWi077h5VBRbdNnNyAxXby6Qjdi8jTcDvaKP3PChFSKo5ngQ1ictwjgpj/oG02mlMiOQaMwnIsoWTHHJ1Rig+QKHxV+3KniPFrUSoRzd+uqNbTzMWJKvq8BgbVbIRzSgXuD+qs35VOq+jCySc+Ppc7p43Yk92Q39dQlyI62ja5x+Y9N9vaY5vGiyF+LjlCW/LG0ZAfrJFnSNXi1U068oNwj6fFGm38TIrLjyne0tr+fBGqSlpHQA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Pv4o2EB645bspSYKdAOEJYy3+IXNe5d0keMtqwzqBBs=;
- b=XoHVZyFQaAslN+Vsq6/7vDKjzzFytUhFRGxEYwz2l7yqOjKuW11F186AIv2Gy0FM+9Y6+lAf34XkIzD6jCAjZji055Ug/QNhoD6Ew+O8vZbpNyFBtD0ArH7TOcHNxbtZ/9LaLPdkTotrF2FvhFsAuZkw9LMVIKBaMTkv0CuYF03nJqril8mmhiHIHQXBoGDamHMHqxIblW3wfVAXvX9/izJO4eagq0qp7MfCVjkTbcgHzTB2C+PsKf+CRjI9NYv54492t+mk4w0n3FH0kyanr0V6PY9dlGQtP9tdtAfCUNWm351XE9KT8e3bDlPs4gHxcmBOb+/ZSQVk36JDcfFZ2Q==
+ bh=I2me7tb3mSHiU9YqXajMUu0sxh+Usbk71xw8ljT6BIE=;
+ b=cBYE1193XpQB5LY11/FiS3SjO6Ui89Xem9YtBabJZP0EvT0HXuenTCS5pNIBIY1muy+wazvEAxkIGhVsrYRsTetsePq/UAF13fA2HKlkSrj/FjaBJB+bDy72FYq4QSDqq4Hq08lPxxG2agFX+lPBgeBoqOLD/iuRVzZYUgLzxdeKk/D05/gWyYIVajbfEE2KfFwsIjYTdoZn7Kac6egCHKpPENpVkmlo5MEZf7G1Q5/+Gd1dYkz0BR5K4j6gcz4vA3DH3q5ZLKaQWKy9qswwTzf3VUaPEHo5XahG3Ti+EVTamByf1lBI4eDilxMaYm5uY/duz5vdqVXYOQcboLScyA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Pv4o2EB645bspSYKdAOEJYy3+IXNe5d0keMtqwzqBBs=;
- b=xJ6Dd3ldkjn6gMC7uRru43S411gHiYa9N/mLSt8Trbb+UGqL6NnPLsctVGyTKWX8kXQIY3bL/7b/vADaj5wqI8rzwtpSpjvEYYZ4Igau80YClqwhoPCnubY/yMlEu6LUDnnT0rSRFSQzJQaM6dZZ6YuZmpJxPEGKTUoLzqaDatw=
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Roger Pau Monne <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 1/2] x86/mm: rename FLUSH_FORCE_IPI to FLUSH_NO_ASSIST
-Date: Wed, 25 May 2022 10:13:10 +0200
-Message-Id: <20220525081311.13416-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.36.0
-In-Reply-To: <20220525081311.13416-1-roger.pau@citrix.com>
-References: <20220525081311.13416-1-roger.pau@citrix.com>
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <62f142e3-02c7-22e0-3917-3a29fa2630b1@suse.com>
+Date: Wed, 25 May 2022 10:25:17 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: Re: [PATCH 1/2] docs/misra: introduce rules.rst
+Content-Language: en-US
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: andrew.cooper3@citrix.com, roger.pau@citrix.com, julien@xen.org,
+ Bertrand.Marquis@arm.com, George.Dunlap@citrix.com,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>,
+ xen-devel@lists.xenproject.org
+References: <alpine.DEB.2.22.394.2205241650160.1905099@ubuntu-linux-20-04-desktop>
+ <20220525003505.304617-1-sstabellini@kernel.org>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <20220525003505.304617-1-sstabellini@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0379.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:18f::6) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: AM6P195CA0027.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:209:81::40) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: c25b9bf1-0dc4-40e3-c153-08da3e26702b
-X-MS-TrafficTypeDiagnostic: SN2PR03MB2384:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9f4a2303-ef84-4642-45b0-08da3e281a66
+X-MS-TrafficTypeDiagnostic: DB7PR04MB4476:EE_
 X-Microsoft-Antispam-PRVS:
-	<SN2PR03MB238474943E215E90BBEF35418FD69@SN2PR03MB2384.namprd03.prod.outlook.com>
+	<DB7PR04MB4476CFDE146941D12052F90CB3D69@DB7PR04MB4476.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	oGdZVQgL8YveeSzbuWPpZ8ulCvnDyHMFcb4Ijx7W37impbPc2/SdUBxdGVGGahULzopoGR4sLGzaYTJxs9MKIpG73MieFOwS0Z1jG+6Rvb2V90kw7Mm55tDF63BRHNn/iTmMEq0htHAm+m3GIwMplPkxZ6CkVa4PAjmh51OjR8kOiA1BFD9QcCaZYiGONkK3bzURumBLjtMiQn2OqipRSLKwttMwZxqG3cSalFxYgoHAiv8bnBhQ44CGHGCkIuqySYcx6LQ6uytxSfcgzSygG7hXniP5y2+/8B/mHv8FH8QPyMqJqZ/fsaf5w28bp4MT1z8U2S6UJSmAA+Pn7N35XaORvn4/MF9PC1DrEZcwlsUyBu2yetalxevHz4cgEKtK53OUUfI+5FwiOpBXzuckIO3azk92L6ijQAJd5GjxJEA9LUH3O67WUTxCeHhnZTvdgqC26+FqBwXVtvpb219iYisYENwdgN7EN8sSSp3uj6S44ZTVpFpyg24VK5TOSh8RVnsTEhyXZl2K676ugMNJqIuNMKLAfjtUUy8HVBANqfFlHfYufR+JrnjjfBhL5/ZamNYPvIB/D1cWyXJ8zlvxCl66h0vfs8T5ON/smKBxETVWbpWt9JTNqo0pvgrc8YIHJXghJxpCpQsvW38Vc7Vrbg==
+	yO38tytYm7pjRuFfuTPo9Eqv5hsfTW5YM0NnwRvpuk4/TQNY04gTtLsC0Cgk+qRlIS0y/s1pl5yOq9ghp+iCi93mp/Pq2RvgPEil4bEmUL7SjEBqTR3s8Y33PKDGm8jAWz52djQLMtZGhUTW2K+yAVIvn+yfHiEwBK0i9nejP3EamzX67VtOd9UZRhn457PGRBJirdk1dr11gL4sarWDXXtHYacUmzpHos5aq/rLdGOKdYhVC/2GpqgR+RGj7/AcQ70DkahfSYEaum1aNVbMpFLdUoA/3vnU9l6pUHbA0s5M5PwOnQYwkTJurZJHN7H6lo5zpSd47qfTqLfKCkqqaof05plQmqnGtvpdSOKdYqeTNtuhmx/3q1TzPhwQWnyTJT3DThEfHiqZ21PccjXSIYNSGDh231vOcesZ0RyoKs4iWygpajlbkhxu9Lm1d1uoS7Immo2Y3HEycEw8waw5S86wbEWi54nekgBl3Zlr5juhs1qLJalrDoT9/DbdlvrIpRRZJRCnWqHu/C5FTg68aS4ymC1EAa9PeH1HmYO9aSyUYmov8gBw7wMxi1lPq6yweJd5LWm0nka+Cc3v6HJfnmSWQVsdYX4t8nvFh/jiF+kSvNwwz+XYKBwWoBdAG30DbQ7Zh00Q1TeSlUWdOsSK1+HNELMhq8Go7F/jXDAuItW9vyuavrs7RtkowwGbJqPzIvZA+CsJEsJ7VDslMSfPu45J7jsva9SmmGNIbgPw/NUQP5dNoSharuYkK4D0ergBTy+ljihAI+7jTyH0tSezsu1xHyPFmR0nMUxTJ2A0zti63t9n993G+pQcfW9j1T9RN0cxzwfZKFK8t5OFmWYZ4Fyj1JavDg+YiP987PaIfx0=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(66556008)(66946007)(66476007)(6506007)(4326008)(26005)(6512007)(8676002)(82960400001)(86362001)(5660300002)(508600001)(83380400001)(8936002)(6486002)(1076003)(2906002)(38100700002)(316002)(2616005)(6666004)(36756003)(186003)(6916009)(54906003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(66556008)(2616005)(31686004)(36756003)(2906002)(66476007)(6506007)(6512007)(26005)(966005)(8936002)(6486002)(5660300002)(53546011)(508600001)(316002)(83380400001)(31696002)(38100700002)(6916009)(186003)(8676002)(4326008)(86362001)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?RStWbGIzbUEySEpCZGV3ajRkYVEvOXVwUXFoOE1TWnJhTithVjJiNm9nMFV0?=
- =?utf-8?B?TlNUZ25WR1dteVRKWEwzSGo2Qm56Vm16c05aNHpYMjh6WkFJTGlSQmJibUQx?=
- =?utf-8?B?d05EcVg1TERSVDJueVNucGsvZFJJci9WVnBhSk9qTXpibURBWWhLd0tKSUll?=
- =?utf-8?B?dUh0SHJFaVhzQ3FJSG1sbzVQcWdTRXVWNXo2ZllxbmlYQUZyOG51V0V1V09X?=
- =?utf-8?B?NWgzVktlbU5wcldObFNSSVJtU01SL0tBTUN1TnBxQVROaTlmMCs4bDJua01h?=
- =?utf-8?B?QzFkUHlIbGZPTHk2TkY1UGx5MitWSGtCRTRocS9wN2NrNTJXWXU5eFpUcGVD?=
- =?utf-8?B?MWxndng3TnBaUFFVcE4yV1pTeWxpSkJVb01KazJrZzRvdGZrY1RBRmU5OE9h?=
- =?utf-8?B?dklsZWhsbWdBN0JvQWh4NloxOXdqZHJlWmZPbEltdjJkYmRlaXo5OVE2VXg1?=
- =?utf-8?B?SDlDSEJWZWMvNjAyRGhDV3N0b2p5dGQwcW1TMWlmbEVXcTNBMW9jcU5iUXMv?=
- =?utf-8?B?QXRrT0FSWW1mQXJ0TkNOZU84SzRUTU5tQU8yOWpGMWhCM0JNaDk2THhub1hl?=
- =?utf-8?B?dEJySGlMbUdqVXYvVXloVE9FbHF1SUhWNERsTk1FOVZrTEQ5ZVA2VmN5WklI?=
- =?utf-8?B?VGg2eUtzckNHOGRYTnJpWnZHSWdNckU0VUJpYWl6cGpCWXExV21qM1RVUVlK?=
- =?utf-8?B?bENMakZUbjg2MDNXQlc0MHFablNwRkNnV1phVENRaldyTmx0TmU5NkZXTFFL?=
- =?utf-8?B?YmZjWlRQVEV0MnJRRXJHM0NUczJNZ01mWWNqWjd3YjVVaElXZEhMVXR3Q3lk?=
- =?utf-8?B?MCsxNlB4aWVXQXo0YW9ON1RvNjdJbElwOVlTTm1JVFJXbUZCaTI2WUFUVmNn?=
- =?utf-8?B?dHc3NFJxd2M1aWFrWFFYU2duVkZvWmlpRzlzZ2Q4K3EzSThuanhBem5mZkZw?=
- =?utf-8?B?L0FFZGV2aFRwTmN4UnZkUm1PU2ppRHFUa2dPYWFxcWx6a1dsdjIxbUJUd1RR?=
- =?utf-8?B?b25IcVZWNU5yWTBYcUEyQmhqYi9tWFBUZlhxRlpFUXY2M3hqYnZuQnVpMHpa?=
- =?utf-8?B?cklvc3JwN2RxWFRXUzQ0Mkh6ZnRyMVBBRGU1NW56ZWZ3K0hzT1VHUnF1RUtX?=
- =?utf-8?B?Z2xVcEsxMFBZbktQek83OG5zbUEvUkhUV2dBSkNqdUl3OGdGa01hTnZKeXRp?=
- =?utf-8?B?cmtkS3o5QnBnMzVFOVFpaTNWUDE3V0I5Qkh3NjhDOHdOTzJWdXhtNy95Zk9D?=
- =?utf-8?B?L2EvTmc2NXAzQk1JMGhvajdnVHpucjhHbkl3MDVwWG5SWVVVRndzMjkrU2h1?=
- =?utf-8?B?WDIyL2kzeU04ME0ySmVzQTBLOVJMV3lRNDFuOUJnMGRUT25VK1pJSGtPeE5h?=
- =?utf-8?B?UjdieWF3YlhqWi9ZL1JCZFZyV3lWbDBkb2tucVVCVTViZ0NMK3h6U0ZHNXg2?=
- =?utf-8?B?eG04Wm9UM0lFTTZOcUNHdmZRUGVIWjdncVVMUG5sK2dFU0VZTnRpdFpGcTdH?=
- =?utf-8?B?MjdteU5TUHVlczBqYmpmSVAwdFcvZzNTb3J0aTBMY1d1T0szWlpDMExqUWVa?=
- =?utf-8?B?MlVoaDl6eXBiQ0l5QUNyL1FXY3pnQjkrN3RDYWlaZVZPaHRDUklvWUc2cEtZ?=
- =?utf-8?B?RkxEMjlJZC9JT0I1aGI3S0pxNk5hS3Q2RmkrTit2dlRHNGpFQWs2WkN5OENQ?=
- =?utf-8?B?NnlrYUM1UDFCcXBMRFpPYTRLUllUZEJPUXZVYjZwamR6QVNaTGN5QWNBUmM2?=
- =?utf-8?B?dkVuQ2JrY2hwd3lpVGJTb1E4WGNKYkRRTFpIQTNlNDdxY3dWWW5kZkk0Zkky?=
- =?utf-8?B?NEE1UzdXeVVKUHovZXBxL3c3MXNucDV6TVcvWWl3NnhPU0JBMXhDRk4rTXJN?=
- =?utf-8?B?cVdGZmtTZkNqajhaTG5FcDFaZElxaXpKTjJwWG1iL3k3N0Y2VE9ycHB5eUVM?=
- =?utf-8?B?djJvTFdPcWg3SlcwNGFpSlhQR01QTi9MUXBaZ01mUVA2RDBERXB2R052aEZJ?=
- =?utf-8?B?ZU9obFFEd0VRRDBQVVVIenZRb012UXpRajBCaFRkNWJpdHJFMWNIMXI3MFhq?=
- =?utf-8?B?MU5zRmplbWl2Y0p4MXU1UHBTUW1kc2VlckdhU05jOXBDNFphdUV1YndCTkJM?=
- =?utf-8?B?ZVFIc0E4WEJFS3F5dDl3ZFhEUHpUdUZPQzlvdzhoenFxYXN3THYzMXJISUtX?=
- =?utf-8?B?bVpXc1gxZVdwVGowMUZyNm8xa1ZJTC9uWWVpTEM4dG45QXBxSjNZM05WcTFn?=
- =?utf-8?B?MU5aTG9DU3BFSlM0RUJKWWt1Y3V4QVNkTC9TUGJaYzhCOFdEcU1rblA4Qngr?=
- =?utf-8?B?OStXT2FaRGhaMjJZVjRPQnhHWWpWbXMxeTRrN2h4Z21XWHN3ZVh2WUZTU3FY?=
- =?utf-8?Q?aTd7evUBfiYChJZ8=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c25b9bf1-0dc4-40e3-c153-08da3e26702b
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+	=?utf-8?B?K2QxY2xBT3lFaW9VNnJYbHA1cThoTEFDUWczSDVjQkJKRlVGNkVXSXVUVERH?=
+ =?utf-8?B?ejFVTDMwWm9YMlNCV0UyUXhFOGY5bGlObWoyK09zcXdhdFFndlBwbHRaekE3?=
+ =?utf-8?B?bDV1UUNYODBqR290QjBZOUJheHJYMzg5bEEyRXQ1bDAvbGREVWdNWG05eGdZ?=
+ =?utf-8?B?MWNFRWIvS0NLd2Jyb2JLQUpnZllYRjVWOUtXZEgzWGZRc1gydnVLTVhvbkZN?=
+ =?utf-8?B?YlJ4Q2JsOGcwaTlwSE9OU3RML1ZrM01vZ2lrcnZnellhQThDeTZhdU11akZO?=
+ =?utf-8?B?Q2pTYXpPaklwN2FtZHFodG5oK29PNW1UZUxBZlp3MjMwbjBYMmVPNGhvVzF6?=
+ =?utf-8?B?RHVsbU9lN1ZhK2ltWHZaQmhlY1ROYkl5L1BocklHT0R0ZXZsOXBaNTcrNXJz?=
+ =?utf-8?B?M2tDVGtyc3dJeWFrbGw1QnlrVzFzNVBoeEJoSjRXOXhENUJETkFTREZlSVYz?=
+ =?utf-8?B?TG95WlpsRnlxajhIQ0pyMTQ1ZVJ1WlBpaFk1SGVPbkVhMkEvWmhGY3Q4RGxI?=
+ =?utf-8?B?ZHZSYXpNbGdnaFB6REJybEVEeDRPcExnMWpoUnpFak9zeG95MTR2Tlp1N1RZ?=
+ =?utf-8?B?QlpJWXI3Nzd3NXF4NWRsVmQwWWZaZXRoREV0a3kxZkZubUZyYXFieFlwYXln?=
+ =?utf-8?B?azNOTjBNclRYc2lHVzZSbDBsbDVEeUhweWd0cExQNThXK2NSa1EydGhHV3l0?=
+ =?utf-8?B?dE5IVzY2K3pYRjR3SjZDYzRQTUlwZVlCTXd0dWNET0E1QW9wNGF3eU14dUdB?=
+ =?utf-8?B?Z3ZFZGhGSnlPWUkxelZ4MWt2dkFadStvY2tuVjFUOGtXcDhOM3kzQ2JqYmNW?=
+ =?utf-8?B?c0MveU4rTTdIb1pycFJoVWI5R3pualBPY0dWVFZrQkVXRFRhT0NjcHRIOE9D?=
+ =?utf-8?B?YU5Qd2FHVzMrZ1pKNWZnR2FEenUvcko4TTlnWUJJRDF5Q1pDVFhWTTZzMGwx?=
+ =?utf-8?B?aXR0akhIK3ZNS1dnSHZwRGpvUWhHUW1NNGp0bXMvbDVTYThVbkNvdnpLblYy?=
+ =?utf-8?B?MDQ5aEEydndpdUNIazV0Sno2NUJpOVhublQ2TzRnVzIrQXptSGsrSVpKUmNE?=
+ =?utf-8?B?bGVhb2xlbFJUaHdXOGg2Vk1Ob2FHWTFDMHNpcUlBRnA5L3dmQnhRVFBNUEg1?=
+ =?utf-8?B?RlhaR0NIWkY4eHNMZ1ZEVm92RjFmSU00Q2VmTGRlZlU3VFE5ZGVralBXM29l?=
+ =?utf-8?B?Vm9Oamd0OTJVTzZEUEU0YnBvVjI0UGtoVVAyaWwrcHFqR0c3UStQM0IzU0ZU?=
+ =?utf-8?B?N0sweStJWUJvWm1mdmp4R3R1TXZhNVNMU3FhTGJPUU45NXBoTWhrWFJVVWUy?=
+ =?utf-8?B?YmZHTkpJUFlTZW9mMVVDazlaWDFIcFZ4dmx4S0F0QXQyTnlaVVRjV2NlSFV2?=
+ =?utf-8?B?TC9wNjU5QkVLSHNrNGNWWWZJVndnSi9IWHNkMXZtdURrOUhkU3E0WlFDaFEy?=
+ =?utf-8?B?SXU1NlhOeWFIWG1EWFJFQXBQZFFDKzZpTkJrYWFTS3Z4QVRFNWZCdWVhSG5B?=
+ =?utf-8?B?bmtHUDZwcHV3Zm1jNEM4WTliSGZNc3lmdXdEeTN3alNocnlWYTFTWitKUmN5?=
+ =?utf-8?B?b0MxcFBJZkhubFJsOFVYUFJlZExBNnZwNHgxSExMUndSUElNRWx4eHgrYlY3?=
+ =?utf-8?B?eGRIK05xalNRY05GZVpqTlJydDMrYjNSQXc5R280VDRXTm1jMEE0RU82L2RP?=
+ =?utf-8?B?dHpjWUt0SkMvQmhXekk0K0Z6azgvZFpQcXAybEM3UkhQOExlYitRYURXSE5a?=
+ =?utf-8?B?QS9HdXUrcXU5WCs3VDJwVXdGaGRZdEM5Q2QxYnVXR1NzQ1JOemoxVUkxNmFH?=
+ =?utf-8?B?Y284S3gzWUMxTTYwcllzYThpMTV4cHB5SE15WjhZcmIwVUhWdkpxTnRFYmlM?=
+ =?utf-8?B?ZlBMTjJMczZqSGs4RUNKelpVb3FEMHVMdVp0Sjc2M2dkZzY2bmJSdUkrb3gz?=
+ =?utf-8?B?S2N6QjFTRWFKcktIOTcvWThWcmgrOVN6eVZaakxIWjZ0dUcyb05hZzVYaHRQ?=
+ =?utf-8?B?cHdQV2FMT09CaDJxYlgvU2pJejdCRjBPN0JpSUU0djVRendDR25lb01yNTFM?=
+ =?utf-8?B?dVg2Y0NTSmR5Z1pyUVFkd3Z3MGk2ZzdaRW4rNFNmWGxrSnZ6ZmJVYTRiMk50?=
+ =?utf-8?B?UkR6NnJhRFpzZGdIRHFTdVE3NjZidHJUTkhORnFDakFsNWdmQ0xnWk5HNzBl?=
+ =?utf-8?B?eUgyVGl5WTEvd1gyeEh3L0dOdVl2dGRlWUZiM2dMZ3hHYUY2MENwTXlNbENk?=
+ =?utf-8?B?ZnhKemdLSFJoVmNuKzBqNVlIMzlIUUM0bHloM3RXenZ2ZSthUndSMnMzNmFw?=
+ =?utf-8?B?N2d0cVhLL013TE9KbnYrTVh5NTZhOU5WSVc5K0oxYzVKNElLTkFnUT09?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9f4a2303-ef84-4642-45b0-08da3e281a66
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2022 08:13:23.9203
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2022 08:25:18.9964
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Bv2HdBE6MOvPW7xXsW9XTBZu9RVBEaokQYVBW0TZsjnUj/5naqfF9saYFoy1mSRHnitxEWSGJ7LaYZ3oF56zJA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN2PR03MB2384
+X-MS-Exchange-CrossTenant-UserPrincipalName: n/ADdFwQYGrRbJUvWQpsaKTO46axcY4PjcWbyr47+yfwt55gzMWN+3X9JL3h47bV71zwrWpcoyI8vE5JvYWMfg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB7PR04MB4476
 
-Rename the flag to better note that it's not actually forcing any IPIs
-to be issued if none is required, but merely avoiding the usage of TLB
-flush assistance (which itself can avoid the sending of IPIs to remote
-processors).
+On 25.05.2022 02:35, Stefano Stabellini wrote:
+> --- a/CODING_STYLE
+> +++ b/CODING_STYLE
+> @@ -235,3 +235,9 @@ callstack between the initial function call and the failure, no error
+>  is returned.  Using domain_crash() requires careful inspection and
+>  documentation of the code to make sure all callers at the stack handle
+>  a newly-dead domain gracefully.
+> +
+> +MISRA C
+> +-------
+> +
+> +The Xen Project hypervisor follows the MISRA C coding rules and
+> +directives listed under docs/misra/rules.rst.
 
-No functional change expected.
+Putting this at the very bottom isn't helpful, I'm afraid. I'd rather
+see this go directly after the initial paragraphs, before "Indentation".
 
-Requested-by: Jan Beulich <jbeulich@suse.com>
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - New in this version.
----
- xen/arch/x86/include/asm/flushtlb.h | 16 ++++++++--------
- xen/arch/x86/mm.c                   |  2 +-
- 2 files changed, 9 insertions(+), 9 deletions(-)
+> --- /dev/null
+> +++ b/docs/misra/rules.rst
+> @@ -0,0 +1,65 @@
+> +=====================
+> +MISRA C rules for Xen
+> +=====================
+> +
+> +**IMPORTANT** All MISRA C rules, text, and examples are copyrighted by the
+> +MISRA Consortium Limited and used with permission.
+> +
+> +Please refer to https://www.misra.org.uk/ to obtain a copy of MISRA C, or for
+> +licensing options for other use of the rules.
+> +
+> +The following is the list of MISRA C rules that apply to the Xen Project
+> +hypervisor.
+> +
+> +- Rule: Dir 2.1
+> +  - Severity:  Required
+> +  - Summary:  All source files shall compile without any compilation errors
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_02_01.c
+> +- Rule: Dir 4.7
+> +  - Severity:  Required
+> +  - Summary:  If a function returns error information then that error information shall be tested
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_07.c
+> +- Rule: Dir 4.10
+> +  - Severity:  Required
+> +  - Summary:  Precautions shall be taken in order to prevent the contents of a header file being included more than once
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_10.c
 
-diff --git a/xen/arch/x86/include/asm/flushtlb.h b/xen/arch/x86/include/asm/flushtlb.h
-index 18777f1d4c..a461ee36ff 100644
---- a/xen/arch/x86/include/asm/flushtlb.h
-+++ b/xen/arch/x86/include/asm/flushtlb.h
-@@ -128,13 +128,12 @@ void switch_cr3_cr4(unsigned long cr3, unsigned long cr4);
- #endif
- #if defined(CONFIG_PV) || defined(CONFIG_SHADOW_PAGING)
- /*
-- * Force an IPI to be sent. Note that adding this to the flags passed to
-- * flush_area_mask will prevent using the assisted flush without having any
-- * other side effect.
-+ * Adding this to the flags passed to flush_area_mask will prevent using the
-+ * assisted flush without having any other side effect.
-  */
--# define FLUSH_FORCE_IPI 0x8000
-+# define FLUSH_NO_ASSIST 0x8000
- #else
--# define FLUSH_FORCE_IPI 0
-+# define FLUSH_NO_ASSIST 0
- #endif
- 
- /* Flush local TLBs/caches. */
-@@ -162,11 +161,12 @@ void flush_area_mask(const cpumask_t *, const void *va, unsigned int flags);
-     flush_area_mask(mask, (const void *)(v), FLUSH_TLB|FLUSH_ORDER(0))
- 
- /*
-- * Make the common code TLB flush helper force use of an IPI in order to be
-- * on the safe side. Note that not all calls from common code strictly require
-+ * Make the common code TLB flush helper disallow the usage of any flush
-+ * assistance in order to be on the safe side and interrupt remote processors
-+ * requiring a flush. Note that not all calls from common code strictly require
-  * this.
-  */
--#define arch_flush_tlb_mask(mask) flush_mask(mask, FLUSH_TLB | FLUSH_FORCE_IPI)
-+#define arch_flush_tlb_mask(mask) flush_mask(mask, FLUSH_TLB | FLUSH_NO_ASSIST)
- 
- /* Flush all CPUs' TLBs */
- #define flush_tlb_all()                         \
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 72dbce43b1..bbb834c3fb 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -2988,7 +2988,7 @@ static int _get_page_type(struct page_info *page, unsigned long type,
-                     flush_mask(mask,
-                                (x & PGT_type_mask) &&
-                                (x & PGT_type_mask) <= PGT_root_page_table
--                               ? FLUSH_TLB | FLUSH_FORCE_IPI
-+                               ? FLUSH_TLB | FLUSH_NO_ASSIST
-                                : FLUSH_TLB);
-                 }
- 
--- 
-2.36.0
+Like Julien has already pointed out for 4.7, this and perhaps other ones
+also want clarifying somewhere that we expect certain exceptions. Without
+saying so explicitly, someone could come forward with a patch eliminating
+some uses (and perhaps crippling the code) just to satisfy such a rule.
+This would then be a waste of both their and our time.
+
+> +- Rule: Dir 4.14
+> +  - Severity:  Required
+> +  - Summary:  The validity of values received from external sources shall be checked
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/D_04_14.c
+> +- Rule: Rule 1.3
+> +  - Severity:  Required
+> +  - Summary:  There shall be no occurrence of undefined or critical unspecified behaviour
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_01_03.c
+> +- Rule: Rule 3.2
+> +  - Severity:  Required
+> +  - Summary:  Line-splicing shall not be used in // comments
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_03_02.c
+
+To aid easily looking up presence of a rule here, I think the table wants
+sorting numerically.
+
+> +- Rule: Rule 6.2
+> +  - Severity:  Required
+> +  - Summary:  Single-bit named bit fields shall not be of a signed type
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_06_02.c
+> +- Rule: Rule 8.1
+> +  - Severity:  Required
+> +  - Summary:  Types shall be explicitly specified
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_01.c
+> +- Rule: Rule 8.4
+> +  - Severity:  Required
+> +  - Summary:  A compatible declaration shall be visible when an object or function with external linkage is defined
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_04.c
+> +- Rule: Rule 8.5
+> +  - Severity:  Required
+> +  - Summary:  An external object or function shall be declared once in one and only one file
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_05_2.c
+> +- Rule: Rule 8.6
+> +  - Severity:  Required
+> +  - Summary:  An identifier with external linkage shall have exactly one external definition
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_06_2.c
+
+I don't think this was uncontroversial, as we've got a lot of uses of
+declarations when we expect DCE to actually take out all uses. There
+are also almost a thousand violations, which - imo - by itself speaks
+against adoption.
+
+Jan
+
+> +- Rule: Rule 8.8
+> +  - Severity:  Required
+> +  - Summary:  The static storage class specifier shall be used in all declarations of objects and functions that have internal linkage
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_08.c
+> +- Rule: Rule 8.12
+> +  - Severity:  Required
+> +  - Summary:  Within an enumerator list the value of an implicitly-specified enumeration constant shall be unique
+> +  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_12.c
 
 
