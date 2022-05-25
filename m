@@ -4,37 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A7D1C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B153DC433FE
 	for <xen-devel@archiver.kernel.org>; Wed, 25 May 2022 00:35:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.336793.561208 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.336795.561230 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntezO-0001NR-5v; Wed, 25 May 2022 00:35:02 +0000
+	id 1ntezZ-0001vY-S9; Wed, 25 May 2022 00:35:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 336793.561208; Wed, 25 May 2022 00:35:02 +0000
+Received: by outflank-mailman (output) from mailman id 336795.561230; Wed, 25 May 2022 00:35:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntezO-0001NK-1O; Wed, 25 May 2022 00:35:02 +0000
-Received: by outflank-mailman (input) for mailman id 336793;
- Wed, 25 May 2022 00:35:00 +0000
+	id 1ntezZ-0001vR-Of; Wed, 25 May 2022 00:35:13 +0000
+Received: by outflank-mailman (input) for mailman id 336795;
+ Wed, 25 May 2022 00:35:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AIJu=WB=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1ntezM-0001N9-7z
- for xen-devel@lists.xenproject.org; Wed, 25 May 2022 00:35:00 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ id 1ntezY-0001N9-Gp
+ for xen-devel@lists.xenproject.org; Wed, 25 May 2022 00:35:12 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8071f897-dbc2-11ec-837f-e5687231ffcc;
- Wed, 25 May 2022 02:34:57 +0200 (CEST)
+ id 88d94eac-dbc2-11ec-837f-e5687231ffcc;
+ Wed, 25 May 2022 02:35:10 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0FF5A615B1;
- Wed, 25 May 2022 00:34:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0238CC34100;
- Wed, 25 May 2022 00:34:54 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 6C75FB81BFC;
+ Wed, 25 May 2022 00:35:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A360FC34118;
+ Wed, 25 May 2022 00:35:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,61 +45,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8071f897-dbc2-11ec-837f-e5687231ffcc
+X-Inumbo-ID: 88d94eac-dbc2-11ec-837f-e5687231ffcc
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1653438895;
-	bh=z6rZJmg35HTbcLY6xC8GV/XUKS+KBk9uUWKRQMRZZoU=;
-	h=Date:From:To:cc:Subject:From;
-	b=k3AEw6UojlF+K/aq3V079hAIDieSNXTyOcxC0ycuCTDSLGGVSYhvcXPEP+f2yqNMP
-	 +tl8IT7+9nrf5zhUbWPlLQXP/SEBdR3phdwxPUFferIX6uT98cfkJVC6qVVdz7bUJP
-	 /T5k01u589lgUdcaAMdq3xpDMlHxqf6B+J+XEm81Axe3nitQZYh8gCFduA13kGUpvO
-	 nd6p2fHMhY2z0ll53sXK0pKe/SUMN4ZaNGOT8NLVWOfHaQXKtNWonyPJozfYZUo4uA
-	 OCMdC+YgUj41ErTt2D53xk8wgfZFq+CTMCKDUYPO2qaft7kNOFTTCgXe9UZ1T88eV6
-	 kHvfdSiR+3yjA==
-Date: Tue, 24 May 2022 17:34:54 -0700 (PDT)
+	s=k20201202; t=1653438909;
+	bh=sjKpMtPk4Pg6387GmnH2YJdsLfcRs7y+YGW+mPOUkgk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=vJdcQN7MwlXt9tsknTo8xOee3y5rmdsilSBNvEh/0YyNXk8MxoG7nV56eEeSSXox/
+	 9MUswDFQC5tFX+p+/vQrwxjdMTny7VeNBmtY/gl6eLpJDNyndUAGgWq9U+2tIMIfd/
+	 eEY24rinh9YJKSwWYQgo0EXVQrgfzKKmPa25gBlLNR1NkZILAgKa6xGgbrek1LfqF4
+	 XJexjMv+QiAM9rPx3e19xqi72uMH+4pxC1AQkvATQ2cQ2yw+HomsalX8RInPLP+jm/
+	 guj3CjZxOqCIOO809mpE30nJ8/if5mL6o/Wy1gmzfuPoElKenu0Aq0kMUMFJTPIp8r
+	 ZqEnwlYUzGz6g==
 From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: xen-devel@lists.xenproject.org
-cc: sstabellini@kernel.org, andrew.cooper3@citrix.com, jbeulich@suse.com, 
-    roger.pau@citrix.com, julien@xen.org, Bertrand.Marquis@arm.com, 
-    George.Dunlap@citrix.com
-Subject: [PATCH 0/2] introduce docs/misra/rules.rst
-Message-ID: <alpine.DEB.2.22.394.2205241650160.1905099@ubuntu-linux-20-04-desktop>
-User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+Cc: sstabellini@kernel.org,
+	andrew.cooper3@citrix.com,
+	jbeulich@suse.com,
+	roger.pau@citrix.com,
+	julien@xen.org,
+	Bertrand.Marquis@arm.com,
+	George.Dunlap@citrix.com,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>
+Subject: [PATCH 2/2] docs/misra: add Rule 5.1
+Date: Tue, 24 May 2022 17:35:05 -0700
+Message-Id: <20220525003505.304617-2-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <alpine.DEB.2.22.394.2205241650160.1905099@ubuntu-linux-20-04-desktop>
+References: <alpine.DEB.2.22.394.2205241650160.1905099@ubuntu-linux-20-04-desktop>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-This patch series is a follow-up from the MISRA C meeting last Thursday,
-when we went through the list of MISRA C rules on the spreadsheet and
-agreed to accept into the Xen coding style the first ones, starting from
-Dir 2.1 up until Rule 5.1 (except for Rule 2.2) in descending popularity
-order.
+Add Rule 5.1, with the additional note that the character limit for Xen
+is 63 characters.
 
-This is the full list of accepted rules so far:
+The max length identifiers found by ECLAIR are:
 
-Dir 2.1
-Dir 4.7
-Dir 4.10
-Dir 4.14
-Rule 1.3
-Rule 3.2
-Rule 5.1
-Rule 6.2
-Rule 8.1
-Rule 8.4
-Rule 8.5
-Rule 8.6
-Rule 8.8
-Rule 8.12
+__mitigate_spectre_bhb_clear_insn_start
+domain_pause_by_systemcontroller_nosync
 
-This short patch series add them as a new document under docs/misra as a
-list in rst format. The file can be used as input to cppcheck using a
-small python script from Bertrand (who will send it to the xen-devel
-separately.)
+Both of them are 40 characters long. A limit of 63 characters work for
+the existing code.
 
-Cheers,
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+---
+ docs/misra/rules.rst | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-Stefano
+diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+index c0ee58ab25..6052fc6309 100644
+--- a/docs/misra/rules.rst
++++ b/docs/misra/rules.rst
+@@ -35,6 +35,11 @@ hypervisor.
+   - Severity:  Required
+   - Summary:  Line-splicing shall not be used in // comments
+   - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_03_02.c
++- Rule: Rule 5.1
++  - Severity:  Required
++  - Summary:  External identifiers shall be distinct
++  - Link:  https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_01_2.c
++  - Note: the Xen characters limit for identifiers is 63
+ - Rule: Rule 6.2
+   - Severity:  Required
+   - Summary:  Single-bit named bit fields shall not be of a signed type
+-- 
+2.25.1
+
 
