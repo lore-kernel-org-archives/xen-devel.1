@@ -4,33 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 622BBC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 25 May 2022 04:42:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.336730.561252 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 388B8C433F5
+	for <xen-devel@archiver.kernel.org>; Wed, 25 May 2022 05:34:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.336840.561263 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntiqi-00021E-T1; Wed, 25 May 2022 04:42:20 +0000
+	id 1ntjeQ-0007u8-S1; Wed, 25 May 2022 05:33:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 336730.561252; Wed, 25 May 2022 04:42:20 +0000
+Received: by outflank-mailman (output) from mailman id 336840.561263; Wed, 25 May 2022 05:33:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ntiqi-000217-Pv; Wed, 25 May 2022 04:42:20 +0000
-Received: by outflank-mailman (input) for mailman id 336730;
- Tue, 24 May 2022 18:34:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9YPC=WA=google.com=saravanak@srs-se1.protection.inumbo.net>)
- id 1ntZMk-0002kb-Dt
- for xen-devel@lists.xenproject.org; Tue, 24 May 2022 18:34:46 +0000
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [2607:f8b0:4864:20::1135])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 2e6c81c7-db90-11ec-bd2c-47488cf2e6aa;
- Tue, 24 May 2022 20:34:44 +0200 (CEST)
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-2ff7b90e635so125488907b3.5
- for <xen-devel@lists.xenproject.org>; Tue, 24 May 2022 11:34:44 -0700 (PDT)
+	id 1ntjeQ-0007u1-Ou; Wed, 25 May 2022 05:33:42 +0000
+Received: by outflank-mailman (input) for mailman id 336840;
+ Wed, 25 May 2022 05:33:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntjeP-0007tr-5M; Wed, 25 May 2022 05:33:41 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntjeP-0000KJ-2a; Wed, 25 May 2022 05:33:41 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntjeO-0001sj-Ji; Wed, 25 May 2022 05:33:40 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1ntjeO-00010Z-J6; Wed, 25 May 2022 05:33:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,393 +44,485 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2e6c81c7-db90-11ec-bd2c-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=iBrJdmkYhyMKFfjatCCnMuBZLCB3cSo3begeOpY/XW0=;
-        b=jQIgotbIxIKwjqP3Ytx/1zmEQiJy3GUwR7pfzJzuQ/KNfOg9PR/sWrGJ023UbG/uEJ
-         0xHi7ypEjCWhSd1ukgWYWGlnvThWteDRtlCWJv6EwBcHPCHUF0gN51dFNaneKpRvLncC
-         LAXz+ixBiY8+lJSiou2TBEtzqWwsF+sdxbMw+SGtJlzI8mpNUayyZg+RK+H05IOmfbpr
-         18EPXakonYulEUB0y9ZdDRRUGcB2xuPIMwPd4c762ozCaW8xPw7dAv4F22pjDNoljNGN
-         kz24YuRjs0EGn0LFKcaoPpxJnGG7K4Vf26j6JMQgIaOaoESDRviYMUu9J5qo74/Woa/W
-         MWXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=iBrJdmkYhyMKFfjatCCnMuBZLCB3cSo3begeOpY/XW0=;
-        b=u2bfiP5Wsj1p0W+4NcVtPdoRL7UZDZ1Vlsr0uAZ9HC6zE2+3EgEidiGpYuwJr/+LxR
-         Qv4EK1Q/IhVAZIj2ExjWVM+Z7MlQOU1+6O2u0+a9NGbq2TXGfvbXWEKOw2Cy3T/lF7AI
-         NeVDA66AEU1DeO0dhTHVlc+f8TvjnASGNsnyzA6ETjf++M88gBudEpbZZqXw2HQCiOe0
-         aGsgmMsvs9ADIhWiKw7rlY09gnjFUOIx1KhTsmfMyitCbO79ysdY6mvODOOiDahQj+D2
-         b1C6cPjpfkhe6fQFw79lndXVPRaHhkvg8YLDVnPyrTiSwTPeiuiCNhiz3y2vb+wtbnXE
-         79og==
-X-Gm-Message-State: AOAM532eQXdceagtgvh/6G++48nc2ZGhDW3Hl7jmBiV+B9l/FOY7RFhG
-	+DIeDzHeEm6qfKTpH3r3kNihjZAGjePDcvDz57phoA==
-X-Google-Smtp-Source: ABdhPJyY/JYhlZXxoEKO5HYVCNG5z/yk9AUUyQrAuiHIkRvGXWuoudF873m2e4tA4dlfQtDUZsLjJfE9Xq/pklwwrWc=
-X-Received: by 2002:a81:72c5:0:b0:300:7d0:a642 with SMTP id
- n188-20020a8172c5000000b0030007d0a642mr8927907ywc.80.1653417283496; Tue, 24
- May 2022 11:34:43 -0700 (PDT)
-MIME-Version: 1.0
-References: <1651947548-4055-1-git-send-email-olekstysh@gmail.com>
- <1651947548-4055-6-git-send-email-olekstysh@gmail.com> <CAK8P3a2cAnXr8TDDYTiFxTWzQxa67sGnYDQRRD+=Q8_cSb1mEw@mail.gmail.com>
- <56e8c32d-6771-7179-005f-26ca58555659@gmail.com> <CAK8P3a1YhkEZ8gcbXHEa5Bwx-4VVRJO8SUHf8=RNWRsc2Yo-+A@mail.gmail.com>
- <460a746c-6b61-214b-4653-44a1430e314d@gmail.com> <alpine.DEB.2.22.394.2205181802310.1905099@ubuntu-linux-20-04-desktop>
- <6f469e9c-c26e-f4be-9a85-710afb0d77eb@gmail.com> <390ba7bb-ee9e-b7b7-5f08-71a7245fa4ec@gmail.com>
- <alpine.DEB.2.22.394.2205231856330.1905099@ubuntu-linux-20-04-desktop> <20220524160134.GE3730540-robh@kernel.org>
-In-Reply-To: <20220524160134.GE3730540-robh@kernel.org>
-From: Saravana Kannan <saravanak@google.com>
-Date: Tue, 24 May 2022 11:34:07 -0700
-Message-ID: <CAGETcx8k8VzdDgrijEYG_mAr_dPctQXT==DFWcieKKYoD9W_sQ@mail.gmail.com>
-Subject: Re: [PATCH V2 5/7] dt-bindings: Add xen,dev-domid property
- description for xen-grant DMA ops
-To: Rob Herring <robh@kernel.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Oleksandr <olekstysh@gmail.com>, 
-	xen-devel <xen-devel@lists.xenproject.org>, 
-	"open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE" <virtualization@lists.linux-foundation.org>, 
-	DTML <devicetree@vger.kernel.org>, 
-	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, 
-	Linux ARM <linux-arm-kernel@lists.infradead.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Jason Wang <jasowang@redhat.com>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Julien Grall <julien@xen.org>, Juergen Gross <jgross@suse.com>, 
-	"Michael S. Tsirkin" <mst@redhat.com>, Christoph Hellwig <hch@infradead.org>, 
-	Jean-Philippe Brucker <jean-philippe@linaro.org>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=bBNVKI8qnzTl+4PeXbCeOjb/Vr2JvKzl9aMF2rvdGwU=; b=f0aIqNx2BZmO2pcfStdnGDyE5X
+	pQeUH2hF+oy48B9/eAnYQ5FfGVCMEDD7O2LPLyfEhA3AUs/mxxes2say7NRHXi2QnIZnCIKzl2SQA
+	fotVZsajbmL8Blmqv6vdj7ltkDVioDLHmK7Hxd6WPookhY2nnymfyxYo1LKhaE1m1K7c=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-170718-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [linux-linus test] 170718: regressions - FAIL
+X-Osstest-Failures:
+    linux-linus:test-amd64-amd64-dom0pvh-xl-amd:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-dom0pvh-xl-intel:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl-seattle:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvhv2-intel:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvshim:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvhv2-amd:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-libvirt:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-xsm:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-pair:guest-start/debian:fail:regression
+    linux-linus:test-amd64-amd64-freebsd11-amd64:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-credit2:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-multivcpu:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-credit1:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-xsm:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-shadow:guest-start:fail:regression
+    linux-linus:test-amd64-coresched-amd64-xl:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit1:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl-credit2:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl-thunderx:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-xsm:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl-xsm:guest-start:fail:regression
+    linux-linus:test-armhf-armhf-xl-arndale:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-pair:guest-start/debian:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit1:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-amd64:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-debianhvm-amd64:debian-hvm-install:fail:regression
+    linux-linus:test-armhf-armhf-xl-multivcpu:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-qemuu-nested-intel:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemuu-ovmf-amd64:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-freebsd12-amd64:guest-start:fail:regression
+    linux-linus:test-armhf-armhf-xl-cubietruck:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-qemut-debianhvm-i386-xsm:debian-hvm-install:fail:regression
+    linux-linus:test-amd64-amd64-pygrub:debian-di-install:fail:regression
+    linux-linus:test-armhf-armhf-xl-credit2:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-qcow2:debian-di-install:fail:regression
+    linux-linus:test-amd64-amd64-libvirt-raw:debian-di-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-vhd:debian-di-install:fail:regression
+    linux-linus:test-armhf-armhf-libvirt:guest-start:fail:regression
+    linux-linus:test-arm64-arm64-xl-vhd:debian-di-install:fail:regression
+    linux-linus:test-arm64-arm64-libvirt-raw:debian-di-install:fail:regression
+    linux-linus:test-armhf-armhf-libvirt-raw:debian-di-install:fail:regression
+    linux-linus:test-armhf-armhf-libvirt-qcow2:debian-di-install:fail:regression
+    linux-linus:test-armhf-armhf-xl:guest-start:fail:regression
+    linux-linus:test-armhf-armhf-xl-vhd:debian-di-install:fail:regression
+    linux-linus:test-amd64-amd64-xl-rtds:guest-start:fail:allowable
+    linux-linus:test-armhf-armhf-xl-rtds:guest-start:fail:allowable
+    linux-linus:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+    linux-linus:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+X-Osstest-Versions-This:
+    linux=0350785b0a092c99c5ddd2ace0260dbe7b3f919f
+X-Osstest-Versions-That:
+    linux=d6ecaa0024485effd065124fe774de2e22095f2d
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 25 May 2022 05:33:40 +0000
 
-"
+flight 170718 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/170718/
 
-On Tue, May 24, 2022 at 9:01 AM Rob Herring <robh@kernel.org> wrote:
->
-> +Saravana
->
-> On Mon, May 23, 2022 at 06:58:13PM -0700, Stefano Stabellini wrote:
-> > On Mon, 23 May 2022, Oleksandr wrote:
-> > > > > On Thu, 19 May 2022, Oleksandr wrote:
-> > > > > > > On Wed, May 18, 2022 at 5:06 PM Oleksandr <olekstysh@gmail.co=
-m> wrote:
-> > > > > > > > On 18.05.22 17:32, Arnd Bergmann wrote:
-> > > > > > > > > On Sat, May 7, 2022 at 7:19 PM Oleksandr Tyshchenko
-> > > > > > > > > <olekstysh@gmail.com> wrote:
-> > > > > > > > >     This would mean having a device
-> > > > > > > > > node for the grant-table mechanism that can be referred t=
-o using
-> > > > > > > > > the
-> > > > > > > > > 'iommus'
-> > > > > > > > > phandle property, with the domid as an additional argumen=
-t.
-> > > > > > > > I assume, you are speaking about something like the followi=
-ng?
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > xen_dummy_iommu {
-> > > > > > > >       compatible =3D "xen,dummy-iommu";
-> > > > > > > >       #iommu-cells =3D <1>;
-> > > > > > > > };
-> > > > > > > >
-> > > > > > > > virtio@3000 {
-> > > > > > > >       compatible =3D "virtio,mmio";
-> > > > > > > >       reg =3D <0x3000 0x100>;
-> > > > > > > >       interrupts =3D <41>;
-> > > > > > > >
-> > > > > > > >       /* The device is located in Xen domain with ID 1 */
-> > > > > > > >       iommus =3D <&xen_dummy_iommu 1>;
-> > > > > > > > };
-> > > > > > > Right, that's that's the idea,
-> > > > > > thank you for the confirmation
-> > > > > >
-> > > > > >
-> > > > > >
-> > > > > > >    except I would not call it a 'dummy'.
-> > > > > > >   From the perspective of the DT, this behaves just like an I=
-OMMU,
-> > > > > > > even if the exact mechanism is different from most hardware I=
-OMMU
-> > > > > > > implementations.
-> > > > > > well, agree
-> > > > > >
-> > > > > >
-> > > > > > > > > It does not quite fit the model that Linux currently uses=
- for
-> > > > > > > > > iommus,
-> > > > > > > > > as that has an allocator for dma_addr_t space
-> > > > > > > > yes (# 3/7 adds grant-table based allocator)
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > > , but it would think it's
-> > > > > > > > > conceptually close enough that it makes sense for the bin=
-ding.
-> > > > > > > > Interesting idea. I am wondering, do we need an extra actio=
-ns for
-> > > > > > > > this
-> > > > > > > > to work in Linux guest (dummy IOMMU driver, etc)?
-> > > > > > > It depends on how closely the guest implementation can be mad=
-e to
-> > > > > > > resemble a normal iommu. If you do allocate dma_addr_t addres=
-ses,
-> > > > > > > it may actually be close enough that you can just turn the gr=
-ant-table
-> > > > > > > code into a normal iommu driver and change nothing else.
-> > > > > > Unfortunately, I failed to find a way how use grant references =
-at the
-> > > > > > iommu_ops level (I mean to fully pretend that we are an IOMMU d=
-river). I
-> > > > > > am
-> > > > > > not too familiar with that, so what is written below might be w=
-rong or
-> > > > > > at
-> > > > > > least not precise.
-> > > > > >
-> > > > > > The normal IOMMU driver in Linux doesn=E2=80=99t allocate DMA a=
-ddresses by
-> > > > > > itself, it
-> > > > > > just maps (IOVA-PA) what was requested to be mapped by the uppe=
-r layer.
-> > > > > > The
-> > > > > > DMA address allocation is done by the upper layer (DMA-IOMMU wh=
-ich is
-> > > > > > the glue
-> > > > > > layer between DMA API and IOMMU API allocates IOVA for PA?). Bu=
-t, all
-> > > > > > what we
-> > > > > > need here is just to allocate our specific grant-table based DM=
-A
-> > > > > > addresses
-> > > > > > (DMA address =3D grant reference + offset in the page), so let=
-=E2=80=99s say we
-> > > > > > need an
-> > > > > > entity to take a physical address as parameter and return a DMA=
- address
-> > > > > > (what
-> > > > > > actually commit #3/7 is doing), and that=E2=80=99s all. So work=
-ing at the
-> > > > > > dma_ops
-> > > > > > layer we get exactly what we need, with the minimal changes to =
-guest
-> > > > > > infrastructure. In our case the Xen itself acts as an IOMMU.
-> > > > > >
-> > > > > > Assuming that we want to reuse the IOMMU infrastructure somehow=
- for our
-> > > > > > needs.
-> > > > > > I think, in that case we will likely need to introduce a new sp=
-ecific
-> > > > > > IOVA
-> > > > > > allocator (alongside with a generic one) to be hooked up by the
-> > > > > > DMA-IOMMU
-> > > > > > layer if we run on top of Xen. But, even having the specific IO=
-VA
-> > > > > > allocator to
-> > > > > > return what we indeed need (DMA address =3D grant reference + o=
-ffset in
-> > > > > > the
-> > > > > > page) we will still need the specific minimal required IOMMU dr=
-iver to
-> > > > > > be
-> > > > > > present in the system anyway in order to track the mappings(?) =
-and do
-> > > > > > nothing
-> > > > > > with them, returning a success (this specific IOMMU driver shou=
-ld have
-> > > > > > all
-> > > > > > mandatory callbacks implemented).
-> > > > > >
-> > > > > > I completely agree, it would be really nice to reuse generic IO=
-MMU
-> > > > > > bindings
-> > > > > > rather than introducing Xen specific property if what we are tr=
-ying to
-> > > > > > implement in current patch series fits in the usage of "iommus"=
- in Linux
-> > > > > > more-less. But, if we will have to add more complexity/more com=
-ponents
-> > > > > > to the
-> > > > > > code for the sake of reusing device tree binding, this raises a=
- question
-> > > > > > whether that=E2=80=99s worthwhile.
-> > > > > >
-> > > > > > Or I really missed something?
-> > > > > I think Arnd was primarily suggesting to reuse the IOMMU Device T=
-ree
-> > > > > bindings, not necessarily the IOMMU drivers framework in Linux (a=
-lthough
-> > > > > that would be an added bonus.)
-> > > > >
-> > > > > I know from previous discussions with you that making the grant t=
-able
-> > > > > fit in the existing IOMMU drivers model is difficult, but just re=
-using
-> > > > > the Device Tree bindings seems feasible?
-> > > >
-> > > > I started experimenting with that. As wrote in a separate email, I =
-got a
-> > > > deferred probe timeout,
-> > > >
-> > > > after inserting required nodes into guest device tree, which seems =
-to be a
-> > > > consequence of the unavailability of IOMMU, I will continue to inve=
-stigate
-> > > > this question.
-> > >
-> > >
-> > > I have experimented with that. Yes, just reusing the Device Tree bind=
-ings is
-> > > technically feasible (and we are able to do this by only touching
-> > > grant-dma-ops.c), although deferred probe timeout still stands (as th=
-ere is no
-> > > IOMMU driver being present actually).
-> > >
-> > > [    0.583771] virtio-mmio 2000000.virtio: deferred probe timeout, ig=
-noring
-> > > dependency
-> > > [    0.615556] virtio_blk virtio0: [vda] 4096000 512-byte logical blo=
-cks (2.10
-> > > GB/1.95 GiB)
-> > >
-> > >
-> > > Below the working diff (on top of current series):
-> > >
-> > > diff --git a/drivers/xen/grant-dma-ops.c b/drivers/xen/grant-dma-ops.=
-c
-> > > index da9c7ff..6586152 100644
-> > > --- a/drivers/xen/grant-dma-ops.c
-> > > +++ b/drivers/xen/grant-dma-ops.c
-> > > @@ -272,17 +272,24 @@ static const struct dma_map_ops xen_grant_dma_o=
-ps =3D {
-> > >
-> > >  bool xen_is_grant_dma_device(struct device *dev)
-> > >  {
-> > > +       struct device_node *iommu_np;
-> > > +       bool has_iommu;
-> > > +
-> > >         /* XXX Handle only DT devices for now */
-> > >         if (!dev->of_node)
-> > >                 return false;
-> > >
-> > > -       return of_property_read_bool(dev->of_node, "xen,backend-domid=
-");
-> > > +       iommu_np =3D of_parse_phandle(dev->of_node, "iommus", 0);
-> > > +       has_iommu =3D iommu_np && of_device_is_compatible(iommu_np,
-> > > "xen,grant-dma");
-> > > +       of_node_put(iommu_np);
-> > > +
-> > > +       return has_iommu;
-> > >  }
-> > >
-> > >  void xen_grant_setup_dma_ops(struct device *dev)
-> > >  {
-> > >         struct xen_grant_dma_data *data;
-> > > -       uint32_t domid;
-> > > +       struct of_phandle_args iommu_spec;
-> > >
-> > >         data =3D find_xen_grant_dma_data(dev);
-> > >         if (data) {
-> > > @@ -294,16 +301,30 @@ void xen_grant_setup_dma_ops(struct device *dev=
-)
-> > >         if (!dev->of_node)
-> > >                 goto err;
-> > >
-> > > -       if (of_property_read_u32(dev->of_node, "xen,backend-domid", &=
-domid)) {
-> > > -               dev_err(dev, "xen,backend-domid property is not prese=
-nt\n");
-> > > +       if (of_parse_phandle_with_args(dev->of_node, "iommus", "#iomm=
-u-cells",
-> > > +                       0, &iommu_spec)) {
-> > > +               dev_err(dev, "Cannot parse iommus property\n");
-> > > +               goto err;
-> > > +       }
-> > > +
-> > > +       if (!of_device_is_compatible(iommu_spec.np, "xen,grant-dma") =
-||
-> > > +                       iommu_spec.args_count !=3D 1) {
-> > > +               dev_err(dev, "Incompatible IOMMU node\n");
-> > > +               of_node_put(iommu_spec.np);
-> > >                 goto err;
-> > >         }
-> > >
-> > > +       of_node_put(iommu_spec.np);
-> > > +
-> > >         data =3D devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
-> > >         if (!data)
-> > >                 goto err;
-> > >
-> > > -       data->backend_domid =3D domid;
-> > > +       /*
-> > > +        * The endpoint ID here means the ID of the domain where the
-> > > corresponding
-> > > +        * backend is running
-> > > +        */
-> > > +       data->backend_domid =3D iommu_spec.args[0];
-> > >
-> > >         if (xa_err(xa_store(&xen_grant_dma_devices, (unsigned long)de=
-v, data,
-> > >                         GFP_KERNEL))) {
-> > > (END)
-> > >
-> > >
-> > >
-> > > Below, the nodes generated by Xen toolstack:
-> > >
-> > >         xen_grant_dma {
->
-> Nit: iommu {
->
-> > >                 compatible =3D "xen,grant-dma";
-> > >                 #iommu-cells =3D <0x01>;
-> > >                 phandle =3D <0xfde9>;
-> > >         };
-> > >
-> > >         virtio@2000000 {
-> > >                 compatible =3D "virtio,mmio";
-> > >                 reg =3D <0x00 0x2000000 0x00 0x200>;
-> > >                 interrupts =3D <0x00 0x01 0xf01>;
-> > >                 interrupt-parent =3D <0xfde8>;
-> > >                 dma-coherent;
-> > >                 iommus =3D <0xfde9 0x01>;
-> > >         };
-> >
-> > Not bad! I like it.
-> >
-> >
-> > > I am wondering, would be the proper solution to eliminate deferred pr=
-obe
-> > > timeout issue in our particular case (without introducing an extra IO=
-MMU
-> > > driver)?
-> >
-> > In reality I don't think there is a way to do that. I would create an
-> > empty skelethon IOMMU driver for xen,grant-dma.
->
-> Does it have to be an empty driver? Originally, IOMMU 'drivers' were not
-> drivers, but they've been getting converted. Can that be done here?
->
-> Short of that, I think we could have some sort of skip probe list for
-> deferred probe. Not sure if that would be easiest as IOMMU specific or
-> global.
+Regressions :-(
 
-Hi Oleksandr,
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-amd64-amd64-dom0pvh-xl-amd 14 guest-start           fail REGR. vs. 170714
+ test-amd64-amd64-dom0pvh-xl-intel 14 guest-start         fail REGR. vs. 170714
+ test-arm64-arm64-xl-seattle  14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-pvhv2-intel 14 guest-start           fail REGR. vs. 170714
+ test-amd64-amd64-xl-pvshim   14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-pvhv2-amd 14 guest-start             fail REGR. vs. 170714
+ test-amd64-amd64-libvirt     14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-libvirt-xsm 14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl          14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-pair        25 guest-start/debian       fail REGR. vs. 170714
+ test-amd64-amd64-freebsd11-amd64 13 guest-start          fail REGR. vs. 170714
+ test-amd64-amd64-xl-credit2  14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-multivcpu 14 guest-start             fail REGR. vs. 170714
+ test-amd64-amd64-xl-credit1  14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-xsm      14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-shadow   14 guest-start              fail REGR. vs. 170714
+ test-amd64-coresched-amd64-xl 14 guest-start             fail REGR. vs. 170714
+ test-arm64-arm64-xl          14 guest-start              fail REGR. vs. 170714
+ test-arm64-arm64-xl-credit1  14 guest-start              fail REGR. vs. 170714
+ test-arm64-arm64-xl-credit2  14 guest-start              fail REGR. vs. 170714
+ test-arm64-arm64-xl-thunderx 14 guest-start              fail REGR. vs. 170714
+ test-arm64-arm64-libvirt-xsm 14 guest-start              fail REGR. vs. 170714
+ test-arm64-arm64-xl-xsm      14 guest-start              fail REGR. vs. 170714
+ test-armhf-armhf-xl-arndale  14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-libvirt-pair 25 guest-start/debian      fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-qemuu-nested-amd 12 debian-hvm-install  fail REGR. vs. 170714
+ test-armhf-armhf-xl-credit1  14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemut-debianhvm-amd64 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64 12 debian-hvm-install fail REGR. vs. 170714
+ test-armhf-armhf-xl-multivcpu 14 guest-start             fail REGR. vs. 170714
+ test-amd64-amd64-qemuu-nested-intel 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemuu-ovmf-amd64 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-freebsd12-amd64 13 guest-start          fail REGR. vs. 170714
+ test-armhf-armhf-xl-cubietruck 14 guest-start            fail REGR. vs. 170714
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm 12 debian-hvm-install fail REGR. vs. 170714
+ test-amd64-amd64-pygrub      12 debian-di-install        fail REGR. vs. 170714
+ test-armhf-armhf-xl-credit2  14 guest-start              fail REGR. vs. 170714
+ test-amd64-amd64-libvirt-qcow2 12 debian-di-install      fail REGR. vs. 170714
+ test-amd64-amd64-libvirt-raw 12 debian-di-install        fail REGR. vs. 170714
+ test-amd64-amd64-xl-vhd      12 debian-di-install        fail REGR. vs. 170714
+ test-armhf-armhf-libvirt     14 guest-start              fail REGR. vs. 170714
+ test-arm64-arm64-xl-vhd      12 debian-di-install        fail REGR. vs. 170714
+ test-arm64-arm64-libvirt-raw 12 debian-di-install        fail REGR. vs. 170714
+ test-armhf-armhf-libvirt-raw 12 debian-di-install        fail REGR. vs. 170714
+ test-armhf-armhf-libvirt-qcow2 12 debian-di-install      fail REGR. vs. 170714
+ test-armhf-armhf-xl          14 guest-start              fail REGR. vs. 170714
+ test-armhf-armhf-xl-vhd      12 debian-di-install        fail REGR. vs. 170714
 
-If you do fw_devlink.strict=3D1, you'll notice that the consumers of
-this "iommu" won't probe at all or will delay the boot by some number
-of seconds. The eventual goal is to go towards fw_devlink.strict=3D1
-being the default.
+Regressions which are regarded as allowable (not blocking):
+ test-amd64-amd64-xl-rtds     14 guest-start              fail REGR. vs. 170714
+ test-armhf-armhf-xl-rtds     14 guest-start              fail REGR. vs. 170714
 
-From a fw_devlik perspective, please implement a driver. Ideally a
-real one, but at least an empty one. The empty one doesn't need to be
-an IOMMU driver, but at least just do a return 0 in the probe
-function. Also, if it's not a device, why even have a "compatible"
-property (removing it won't necessarily remove the deferred probe
-timeout issue you see)? Will any code be using "xen,grant-dma" to look
-up the node? If so, that driver could be the one that probes this
-device. At least from a fw_devlink perspective, it just needs to have
-a driver that binds to this device.
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-xl-qemut-win7-amd64 19 guest-stop            fail like 170714
+ test-amd64-amd64-xl-qemuu-ws16-amd64 19 guest-stop            fail like 170714
+ test-amd64-amd64-xl-qemut-ws16-amd64 19 guest-stop            fail like 170714
+ test-amd64-amd64-xl-qemuu-win7-amd64 19 guest-stop            fail like 170714
 
-Also, if we aren't going to implement a driver and have the supplier
-("xen,grant-dma") behave like a device (as in, have a driver that
-probes), I'd rather that the iommu binding not be used at all as this
-would be an exception to how every other iommu device behaves.
+version targeted for testing:
+ linux                0350785b0a092c99c5ddd2ace0260dbe7b3f919f
+baseline version:
+ linux                d6ecaa0024485effd065124fe774de2e22095f2d
 
--Saravana
+Last test of basis   170714  2022-05-24 03:27:44 Z    1 days
+Failing since        170716  2022-05-24 11:12:06 Z    0 days    3 attempts
+Testing same since   170718  2022-05-24 22:12:03 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+    "Eric W. Biederman" <ebiederm@xmission.com>
+  Aditya Garg <gargaditya08@live.com>
+  Ahmad Fatoum <a.fatoum@pengutronix.de>
+  Alexander Egorenkov <egorenar@linux.ibm.com>
+  Alexander Gordeev <agordeev@linux.ibm.com>
+  Alexandre Belloni <alexandre.belloni@bootlin.com>
+  Alexandru Elisei <alexandru.elisei@arm.com>
+  Andre Przywara <andre.przywara@arm.com>
+  Andreas Rammhold <andreas@rammhold.de>
+  Anshuman Khandual <anshuman.khandual@arm.com>
+  Ard Biesheuvel <ardb@kernel.org>
+  Baolin Wang <baolin.wang@linux.alibaba.com>
+  Baoquan He <bhe@redhat.com>
+  Barry Song <baohua@kernel.org>
+  Bill Wendling <morbo@google.com>
+  Borislav Petkov <bp@suse.de>
+  Casey Schaufler <casey@schaufler-ca.com>
+  Catalin Marinas <catalin.marinas@arm.com>
+  Chen Zhongjin <chenzhongjin@huawei.com>
+  Chen Zhou <chenzhou10@huawei.com>
+  Chengming Zhou <zhouchengming@bytedance.com>
+  Christian Göttsche <cgzones@googlemail.com>
+  Christoph Hellwig <hch@lst.de>
+  Colin Ian King <colin.i.king@gmail.com>
+  Dan Carpenter <dan.carpenter@oracle.com>
+  Daniel Beer <daniel.beer@tirotech.co.nz>
+  Daniel Lezcano <daniel.lezcano@linaro.org>
+  Daniel Thompson <daniel.thompson@linaro.org>
+  Darryn Anton Jordan <darrynjordan@icloud.com>
+  Dave Hansen <dave.hansen@linux.intel.com>
+  Dave Kleikamp <dave.kleikamp@oracle.com>
+  David Arcari <darcari@redhat.com>
+  David E. Box <david.e.box@linux.intel.com>
+  David Sterba <dsterba@suse.com>
+  David Yang <davidcomponentone@gmail.com>
+  Deyan Wang <wonder_rock@126.com>
+  Dietmar Eggemann <dietmar.eggemann@arm.com>
+  Dinh Nguyen <dinguyen@kernel.org>
+  Dmitry Vyukov <dvyukov@google.com>
+  Eric Biggers <ebiggers@google.com>
+  Eric W. Biederman <ebiederm@xmission.com>
+  Frank Crawford <frank@crawford.emu.id.au>
+  Frederic Weisbecker <frederic@kernel.org>
+  Gabriele Mazzotta <gabriele.mzt@gmail.com>
+  Geert Uytterhoeven <geert+renesas@glider.be>
+  Geert Uytterhoeven <geert@linux-m68k.org>
+  Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+  Greg Ungerer <gerg@linux-m68k.org>
+  Guilherme G. Piccoli <gpiccoli@igalia.com>
+  Guo Ren <guoren@kernel.org>
+  Guo Ren <guoren@linux.alibaba.com>
+  Guo Zhengkui <guozhengkui@vivo.com>
+  GUO Zihua <guozihua@huawei.com>
+  Hailong Liu <liuhailong@linux.alibaba.com>
+  Haitao Huang <haitao.huang@intel.com>
+  Hans de Goede <hdegoede@redhat.com>
+  Hao Jia <jiahao.os@bytedance.com>
+  Haowen Bai <baihaowen@meizu.com>
+  Harald Freudenberger <freude@linux.ibm.com>
+  Hector Martin <marcan@marcan.st>
+  Heikki Krogerus <heikki.krogerus@linux.intel.com>
+  Heiko Carstens <hca@linux.ibm.com>
+  Helge Deller <deller@gmx.de>
+  Hyeonggon Yoo <42.hyeyoo@gmail.com>
+  Ilkka Koskinen <ilkka@os.amperecomputing.com>
+  Ilya Leoshkevich <iii@linux.ibm.com>
+  Ingo Molnar <mingo@kernel.org>
+  Jakob Koschel <jakobkoschel@gmail.com>
+  Jakub Kicinski <kuba@kernel.org>
+  Jann Horn <jannh@google.com>
+  Jarkko Sakkinen <jarkko@kernel.org>
+  Jason A. Donenfeld <Jason@zx2c4.com>
+  Jason Wang <wangborong@cdjrlc.com>
+  Jens Axboe <axboe@kernel.dk>
+  Jes B. Klinke <jbk@chromium.org>
+  Jithu Joseph <jithu.joseph@intel.com>
+  Johannes Berg <johannes@sipsolutions.net>
+  Johannes Holland <johannes.holland@infineon.com>
+  Johannes Weiner <hannes@cmpxchg.org>
+  John Donnelly  <john.p.donnelly@oracle.com>
+  John Ernberg <john.ernberg@actia.se> # iMX8QXP
+  John Johansen <john.johansen@canonical.com>
+  Jorge Lopez <jorge.lopez2@hp.com>
+  Josh Poimboeuf <jpoimboe@kernel.org>
+  Josh Poimboeuf <jpoimboe@redhat.com>
+  Juerg Haefliger <juerg.haefliger@canonical.com>
+  Juerg Haefliger <juergh@canonical.com>
+  Juergen Gross <jgross@suse.com>
+  Julia Lawall <Julia.Lawall@inria.fr>
+  Kan Liang <kan.liang@linux.intel.com>
+  Kees Cook <keescook@chromium.org>
+  Kefeng Wang <wangkefeng.wang@huawei.com>
+  Kuniyuki Iwashima <kuniyu@amazon.co.jp>
+  Laurent Vivier <laurent@vivier.eu>
+  Linu Cherian <lcherian@marvell.com>
+  Linus Torvalds <torvalds@linux-foundation.org>
+  Linus Walleij <linus.walleij@linaro.org>
+  Luca Miccio <lucmiccio@gmail.com>
+  Luca Stefani <luca.stefani.ge1@gmail.com>
+  Maciej W. Rozycki <macro@orcam.me.uk>
+  Madhavan T. Venkataraman <madvenka@linux.microsoft.com>
+  Marc Zyngier <maz@kernel.org>
+  Marco Elver <elver@google.com>
+  Marek Szyprowski <m.szyprowski@samsung.com>
+  Mario Limonciello <mario.limonciello@amd.com>
+  Mark Brown <broonie@kernel.org>
+  Mark Pearson <markpearson@lenovo.com>
+  Mark Pearson <markpearson@lenvo.com>
+  Mark Rutland <mark.rutland@arm.com
+  Mark Rutland <mark.rutland@arm.com>
+  Masahiro Yamada <masahiroy@kernel.org>
+  Matt Turner <mattst88@gmail.com>
+  Matteo Croce <mcroce@microsoft.com>
+  Matthew Wilcox (Oracle) <willy@infradead.org>
+  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+  Max Filippov <jcmvbkbc@gmail.com>
+  Maximilian Heyne <mheyne@amazon.de>
+  Maximilian Luz <luzmaximilian@gmail.com>
+  Michael Ellerman <mpe@ellerman.id.au>
+  Michael Niewöhner <linux@mniewoehner.de>
+  Michael Schmitz <schmitzmic@gmail.com>
+  Michael Shych <michaelsh@nvidia.com>
+  Michael Walle <michael@walle.cc>
+  Michael Walle <michael@walle.cc> # on ls1028a (non-E and E)
+  Michal Orzel <michal.orzel@arm.com>
+  Michal Orzel <michalorzel.eng@gmail.com>
+  Mickaël Salaün <mic@digikod.net>
+  Mickaël Salaün <mic@linux.microsoft.com>
+  Mikulas Patocka <mpatocka@redhat.com>
+  Mimi Zohar <zohar@linux.ibm.com>
+  Minghao Chi <chi.minghao@zte.com.cn>
+  Namhyung Kim <namhyung@kernel.org>
+  Naresh Kamboju <naresh.kamboju@linaro.org>
+  Nathan Chancellor <nathan@kernel.org>
+  Naveen Krishna Chatradhi <nchatrad@amd.com>
+  Nick Desaulniers <ndesaulniers@google.com>
+  Nick Hawkins <nick.hawkins@hpe.com>
+  Niklas Cassel <niklas.cassel@wdc.com>
+  Niklas Schnelle <schnelle@linux.ibm.com>
+  Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com> # Arm64 only
+  Pali Rohár <pali@kernel.org>
+  Palmer Dabbelt <palmer@rivosinc.com>
+  Pankaj Gupta <pankaj.gupta@nxp.com>
+  Patrice Chotard <patrice.chotard@foss.st.com>
+  Paul Gortmaker <paul.gortmaker@windriver.com>
+  Paul Moore <paul@paul-moore.com>
+  Peter Collingbourne <pcc@google.com>
+  Peter Oberparleiter <oberpar@linux.ibm.com>
+  Peter Zijlstra (Intel) <peterz@infradead.org>
+  Peter Zijlstra <peterz@infradead.org>
+  Petr Mladek <pmladek@suse.com> # for vsprintf.c
+  Pingfan Liu <kernelfans@gmail.com>
+  Prarit Bhargava <prarit@redhat.com>
+  Qais Yousef <qais.yousef@arm.com>
+  Qi Liu <liuqi115@huawei.com>
+  Randy Dunlap <rdunlap@infradead.org>
+  Ravi Bangoria <ravi.bangoria@amd.com>
+  Reinette Chatre <reinette.chatre@intel.com>
+  Ren Yu <renyu@nfschina.com>
+  Ren Zhijie <renzhijie2@huawei.com>
+  Rob Herring <robh@kernel.org>
+  Robin Murphy <robin.murphy@arm.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
+  Sami Tolvanen <samitolvanen@google.com>
+  Sandipan Das <sandipan.das@amd.com>
+  Sargun Dhillon <sargun@sargun.me>
+  Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+  SeongJae Park <sj@kernel.org>
+  Shaokun Zhang <zhangshaokun@hisilicon.com>
+  Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+  Stafford Horne <shorne@gmail.com>
+  Stefan Berger <stefanb@linux.ibm.com>
+  Stefan Mahnke-Hartmann <stefan.mahnke-hartmann@infineon.com>
+  Stefano Stabellini <stefano.stabellini@xilinx.com>
+  Steffen Trumtrar <s.trumtrar@pengutronix.de>
+  Stephane Eranian <eranian@google.com>
+  Stephen Brennan <stephen.s.brennan@oracle.com>
+  Steven Rostedt (Google) <rostedt@goodmis.org>
+  Suma Hegde <suma.hegde@amd.com>
+  Sumanth Korikkar <sumanthk@linux.ibm.com>
+  Sumit Garg <sumit.garg@linaro.org>
+  Suren Baghdasaryan <surenb@google.com>
+  Sven Schnelle <svens@linux.ibm.com>
+  Tanmay Jagdale <tanmay@marvell.com>
+  Tao Zhou <tao.zhou@linux.dev>
+  Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>
+  Theodore Ts'o <tytso@mit.edu>
+  Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+  Thomas Gleixner <tglx@linutronix.de>
+  Thomas Huth <thuth@redhat.com>
+  Thomas Richter <tmricht@linux.ibm.com>
+  Thomas Weißschuh <thomas@weissschuh.net>
+  Tiezhu Yang <yangtiezhu@loongson.cn>
+  Tim Harvey <tharvey@gateworks.com>
+  Tom Rix <trix@redhat.com>
+  Tong Tiangen <tongtiangen@huawei.com>
+  Tony Luck <tony.luck@intel.com>
+  Tycho Andersen <tycho@tycho.pizza>
+  Uros Bizjak <ubizjak@gmail.com>
+  Uwe Kleine-König <u.kleine-koenig@pengutronix.de>
+  Valentin Schneider <valentin.schneider@arm.com>
+  Valentin Schneider <vschneid@redhat.com>
+  Vasily Gorbik <gor@linux.ibm.com>
+  Vladimir Murzin <vladimir.murzin@arm.com> # ARM
+  Waiman Long <longman@redhat.com>
+  Wan Jiabing <wanjiabing@vivo.com>
+  Wang Kefeng <wangkefeng.wang@huawei.com>
+  Will Deacon <will@kernel.org>
+  Will Deacon <will@kernel.org> # arm64
+  Xiu Jianfeng <xiujianfeng@huawei.com>
+  Yang Guang <yang.guang5@zte.com.cn>
+  Yang Jihong <yangjihong1@huawei.com>
+  Yang Li <yang.lee@linux.alibaba.com>
+  Yi Yang <yiyang13@huawei.com>
+  Yuanzheng Song <songyuanzheng@huawei.com>
+  zgpeng <zgpeng.linux@gmail.com>
+  zgpeng <zgpeng@tencent.com>
+  Zhang Jianhua <chris.zjh@huawei.com>
+  Zhen Lei <thunder.leizhen@huawei.com>
+  Zucheng Zheng <zhengzucheng@huawei.com>
+
+jobs:
+ build-amd64-xsm                                              pass    
+ build-arm64-xsm                                              pass    
+ build-i386-xsm                                               pass    
+ build-amd64                                                  pass    
+ build-arm64                                                  pass    
+ build-armhf                                                  pass    
+ build-i386                                                   pass    
+ build-amd64-libvirt                                          pass    
+ build-arm64-libvirt                                          pass    
+ build-armhf-libvirt                                          pass    
+ build-i386-libvirt                                           pass    
+ build-amd64-pvops                                            pass    
+ build-arm64-pvops                                            pass    
+ build-armhf-pvops                                            pass    
+ build-i386-pvops                                             pass    
+ test-amd64-amd64-xl                                          fail    
+ test-amd64-coresched-amd64-xl                                fail    
+ test-arm64-arm64-xl                                          fail    
+ test-armhf-armhf-xl                                          fail    
+ test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm           fail    
+ test-amd64-amd64-xl-qemut-stubdom-debianhvm-amd64-xsm        fail    
+ test-amd64-amd64-xl-qemut-debianhvm-i386-xsm                 fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm                 fail    
+ test-amd64-amd64-libvirt-xsm                                 fail    
+ test-arm64-arm64-libvirt-xsm                                 fail    
+ test-amd64-amd64-xl-xsm                                      fail    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-amd64-qemuu-nested-amd                            fail    
+ test-amd64-amd64-xl-pvhv2-amd                                fail    
+ test-amd64-amd64-dom0pvh-xl-amd                              fail    
+ test-amd64-amd64-xl-qemut-debianhvm-amd64                    fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    fail    
+ test-amd64-amd64-freebsd11-amd64                             fail    
+ test-amd64-amd64-freebsd12-amd64                             fail    
+ test-amd64-amd64-xl-qemuu-ovmf-amd64                         fail    
+ test-amd64-amd64-xl-qemut-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-win7-amd64                         fail    
+ test-amd64-amd64-xl-qemut-ws16-amd64                         fail    
+ test-amd64-amd64-xl-qemuu-ws16-amd64                         fail    
+ test-armhf-armhf-xl-arndale                                  fail    
+ test-amd64-amd64-examine-bios                                pass    
+ test-amd64-amd64-xl-credit1                                  fail    
+ test-arm64-arm64-xl-credit1                                  fail    
+ test-armhf-armhf-xl-credit1                                  fail    
+ test-amd64-amd64-xl-credit2                                  fail    
+ test-arm64-arm64-xl-credit2                                  fail    
+ test-armhf-armhf-xl-credit2                                  fail    
+ test-armhf-armhf-xl-cubietruck                               fail    
+ test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict        fail    
+ test-amd64-amd64-examine                                     pass    
+ test-arm64-arm64-examine                                     pass    
+ test-armhf-armhf-examine                                     pass    
+ test-amd64-amd64-qemuu-nested-intel                          fail    
+ test-amd64-amd64-xl-pvhv2-intel                              fail    
+ test-amd64-amd64-dom0pvh-xl-intel                            fail    
+ test-amd64-amd64-libvirt                                     fail    
+ test-armhf-armhf-libvirt                                     fail    
+ test-amd64-amd64-xl-multivcpu                                fail    
+ test-armhf-armhf-xl-multivcpu                                fail    
+ test-amd64-amd64-pair                                        fail    
+ test-amd64-amd64-libvirt-pair                                fail    
+ test-amd64-amd64-xl-pvshim                                   fail    
+ test-amd64-amd64-pygrub                                      fail    
+ test-amd64-amd64-libvirt-qcow2                               fail    
+ test-armhf-armhf-libvirt-qcow2                               fail    
+ test-amd64-amd64-libvirt-raw                                 fail    
+ test-arm64-arm64-libvirt-raw                                 fail    
+ test-armhf-armhf-libvirt-raw                                 fail    
+ test-amd64-amd64-xl-rtds                                     fail    
+ test-armhf-armhf-xl-rtds                                     fail    
+ test-arm64-arm64-xl-seattle                                  fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow             fail    
+ test-amd64-amd64-xl-shadow                                   fail    
+ test-arm64-arm64-xl-thunderx                                 fail    
+ test-amd64-amd64-examine-uefi                                pass    
+ test-amd64-amd64-xl-vhd                                      fail    
+ test-arm64-arm64-xl-vhd                                      fail    
+ test-armhf-armhf-xl-vhd                                      fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+(No revision log; it would be 14800 lines long.)
 
