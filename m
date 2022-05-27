@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 676DDC43219
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B671C4332F
 	for <xen-devel@archiver.kernel.org>; Fri, 27 May 2022 07:24:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.337814.562524 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.337813.562515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nuUKo-0003pR-Rk; Fri, 27 May 2022 07:24:34 +0000
+	id 1nuUKo-0003fA-Bd; Fri, 27 May 2022 07:24:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 337814.562524; Fri, 27 May 2022 07:24:34 +0000
+Received: by outflank-mailman (output) from mailman id 337813.562515; Fri, 27 May 2022 07:24:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nuUKo-0003nC-JM; Fri, 27 May 2022 07:24:34 +0000
-Received: by outflank-mailman (input) for mailman id 337814;
- Fri, 27 May 2022 07:24:33 +0000
+	id 1nuUKo-0003do-5l; Fri, 27 May 2022 07:24:34 +0000
+Received: by outflank-mailman (input) for mailman id 337813;
+ Fri, 27 May 2022 07:24:32 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=OTKn=WD=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1nuUKn-0003UV-TP
- for xen-devel@lists.xenproject.org; Fri, 27 May 2022 07:24:33 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1nuUKm-0003UV-T7
+ for xen-devel@lists.xenproject.org; Fri, 27 May 2022 07:24:32 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 0c4e4fb1-dd8e-11ec-bd2c-47488cf2e6aa;
- Fri, 27 May 2022 09:24:30 +0200 (CEST)
+ id 0c920126-dd8e-11ec-bd2c-47488cf2e6aa;
+ Fri, 27 May 2022 09:24:31 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 216D721A82;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9EC531F937;
  Fri, 27 May 2022 07:24:30 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id DD257139C4;
- Fri, 27 May 2022 07:24:29 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 66C4B139C4;
+ Fri, 27 May 2022 07:24:30 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ONqkNK18kGJLIgAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 27 May 2022 07:24:29 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id YETfF658kGJLIgAAMHmgww
+ (envelope-from <jgross@suse.com>); Fri, 27 May 2022 07:24:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c4e4fb1-dd8e-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: 0c920126-dd8e-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1653636270; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=k6QNfdHoQpClTtcFyNorgKp8JNEjHOV3+KrUm17Tu6g=;
-	b=D9GSqwx0VyC/4JZtvww3XF3dFTWmEL6cxsGI9xzMNMYJ0t2qpehEw9/csEaWr7S/ow79XU
-	NGGsgFWUlz/CQyQlZZqQj99aH9vKSkcqtYgnnTmNTrWSwshJScV8ZDCYugq/Abt9EuIcBr
-	rf56Sb2c4Jm/jP9Xe/uuCL06NVJ8Kmk=
+	bh=LXfNj/iGT8On9btajkRJiSegeiqr4EifmedQT5zKgB8=;
+	b=MRnjpdNTuiaij2HtIBz/4giFm4JwphAzSH2SPbn7zst2jXfoBve17Sd9qyvqpmoBq7FtSs
+	lF/sak4APgN9ydnGx9ixg3D4mEOxpHhZ/hWW2ChlzDqrWGw/2uDB4A60UWTd3PZhSWU9bm
+	K6XTSfDxuvvFrxvrQI76f+IKohN+lEs=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>,
@@ -72,49 +72,58 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 1/4] tools/xenstore: modify feature bit specification in xenstore-ring.txt
-Date: Fri, 27 May 2022 09:24:24 +0200
-Message-Id: <20220527072427.20327-2-jgross@suse.com>
+Subject: [PATCH v2 3/4] tools/xenstore: add documentation for new set/get-quota commands
+Date: Fri, 27 May 2022 09:24:26 +0200
+Message-Id: <20220527072427.20327-4-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220527072427.20327-1-jgross@suse.com>
 References: <20220527072427.20327-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of specifying the feature bits in xenstore-ring.txt as a mask
-value use bit numbers. This will make the specification easier to read
-when adding more features.
+Add documentation for two new Xenstore wire commands SET_QUOTA and
+GET_QUOTA used to set or query the global Xenstore quota or those of
+a given domain.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
+Note that it might be a good idea to add support to the Xenstore
+migration protocol to transfer quota data (global and/or per domain).
 V2:
-- new patch (triggered by Julien Grall)
+- remove feature bit (Julien Grall)
+- add possibility to access global quota and to query supported quotas
 ---
- docs/misc/xenstore-ring.txt | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ docs/misc/xenstore.txt | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/docs/misc/xenstore-ring.txt b/docs/misc/xenstore-ring.txt
-index f3d6ca4264..2792d13530 100644
---- a/docs/misc/xenstore-ring.txt
-+++ b/docs/misc/xenstore-ring.txt
-@@ -62,12 +62,13 @@ the server feature bitmap. The server features are offered to the guest;
- it is up to the guest whether to use them or not. The guest should ignore
- any unknown feature bits.
+diff --git a/docs/misc/xenstore.txt b/docs/misc/xenstore.txt
+index 00f6969202..49b05e3c9a 100644
+--- a/docs/misc/xenstore.txt
++++ b/docs/misc/xenstore.txt
+@@ -345,6 +345,23 @@ SET_FEATURE		<domid>|<value>|
+ 	xenstored prevents the use of GET_FEATURE and SET_FEATURE other
+ 	than by dom0.
  
--The following features are defined:
-+The following features are defined (bit number 0 is equivalent to a mask
-+value of 1):
++GET_QUOTA		[[<domid>|]<quota>|]	<value>|
++SET_QUOTA		[<domid>|]<quota>|<value>|
++	Returns or sets a quota value for the domain being specified by
++	<domid>. Omitting <domid> will return or set the global quota
++	values, which are the default values for new domains. <quota> is
++	 one of "nodes", "watches", "transactions", "node-size",
++	"permissions", or any other implementation defined value. For
++	GET_QUOTA it is possible to omit the <quota> parameter together
++	with the <domid> parameter, which will return a single string of
++	all supported <quota> values separated by blanks. <value> is a
++	decimal number specifying the quota value, with "0" having the
++	special meaning of quota checks being disabled. The initial quota
++	settings for a domain are the global ones of Xenstore.
++
++	xenstored prevents the use of GET_QUOTA and SET_QUOTA other
++	than by dom0.
++
+ ---------- Miscellaneous ----------
  
--Mask    Description
-+Bit     Description
- -----------------------------------------------------------------
--1       Ring reconnection (see the ring reconnection feature below)
--2       Connection error indicator (see connection error feature below)
-+0       Ring reconnection (see the ring reconnection feature below)
-+1       Connection error indicator (see connection error feature below)
- 
- The "Connection state" field is used to request a ring close and reconnect.
- The "Connection state" field only contains valid data if the server has
+ CONTROL			<command>|[<parameters>|]
 -- 
 2.35.3
 
