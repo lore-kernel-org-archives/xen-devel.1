@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03115C433F5
-	for <xen-devel@archiver.kernel.org>; Sat, 28 May 2022 14:17:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.338214.562973 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70686C433F5
+	for <xen-devel@archiver.kernel.org>; Sat, 28 May 2022 19:18:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.338225.562984 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nuxFW-0003VA-NC; Sat, 28 May 2022 14:17:02 +0000
+	id 1nv1wa-0005ye-5Z; Sat, 28 May 2022 19:17:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 338214.562973; Sat, 28 May 2022 14:17:02 +0000
+Received: by outflank-mailman (output) from mailman id 338225.562984; Sat, 28 May 2022 19:17:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nuxFW-0003V3-J1; Sat, 28 May 2022 14:17:02 +0000
-Received: by outflank-mailman (input) for mailman id 338214;
- Sat, 28 May 2022 14:17:01 +0000
+	id 1nv1wa-0005yX-2l; Sat, 28 May 2022 19:17:48 +0000
+Received: by outflank-mailman (input) for mailman id 338225;
+ Sat, 28 May 2022 19:17:47 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1nuxFV-0003Ut-Pq; Sat, 28 May 2022 14:17:01 +0000
+ id 1nv1wZ-0005yN-AP; Sat, 28 May 2022 19:17:47 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1nuxFV-0003nD-Mi; Sat, 28 May 2022 14:17:01 +0000
+ id 1nv1wZ-00016t-7I; Sat, 28 May 2022 19:17:47 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1nuxFV-0000aD-D4; Sat, 28 May 2022 14:17:01 +0000
+ id 1nv1wY-0000an-M0; Sat, 28 May 2022 19:17:46 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1nuxFV-0002TR-Ch; Sat, 28 May 2022 14:17:01 +0000
+ id 1nv1wY-0003PY-La; Sat, 28 May 2022 19:17:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,18 +47,17 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=XO0G23eMrjzBKYLS3ZqzxDrKRvefu6un9QDQ16yb2G4=; b=5lh1t0JEC8al8HgALTi5W22MYv
-	EiXt3ydGFsuavaCHIT9fk9TFdrcox7m1MSqRsztpkQJGBPmqN5KRhamnUYiDr1t6HeodOUBjZ5LR8
-	xKMPZT/ZnTw2Yacey3dsymx9uKCXxCJ5dMb3wOUA3fyWpuHrvUet/IAyFFBNfkOPSy7U=;
+	bh=6Qy2HgTbLTENip5Ho0QCg0l1PpSd+E1oBqKanS4Kl9E=; b=4qWN5Xnn8Bdybw6hXCKaQrvBLi
+	pWAMUuRwHCEOtlrQww18CDWgoxm8iYj4n9UFA2+POR9dPqEsa00Vw/w+qlmd9l1YisblOHnuPD5C9
+	Q/SMXsnCb1J+kAH9QuLMltNerSsnEX+Fwua/X9pOlSGWMsSAYW7mRE74nqHoQo8TGtiI=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-170761-mainreport@xen.org>
+Message-ID: <osstest-170763-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [linux-linus test] 170761: regressions - FAIL
+Subject: [linux-linus test] 170763: regressions - FAIL
 X-Osstest-Failures:
     linux-linus:test-amd64-amd64-dom0pvh-xl-amd:guest-start:fail:regression
-    linux-linus:test-amd64-amd64-xl-pvshim:guest-start:fail:regression
     linux-linus:test-amd64-amd64-dom0pvh-xl-intel:guest-start:fail:regression
     linux-linus:test-amd64-amd64-libvirt:xen-boot:fail:regression
     linux-linus:test-amd64-amd64-libvirt-qcow2:xen-boot:fail:regression
@@ -68,6 +67,7 @@ X-Osstest-Failures:
     linux-linus:test-amd64-amd64-libvirt-xsm:guest-start:fail:regression
     linux-linus:test-amd64-amd64-xl:guest-start:fail:regression
     linux-linus:test-amd64-amd64-freebsd11-amd64:guest-start:fail:regression
+    linux-linus:test-amd64-amd64-xl-pvshim:guest-start:fail:regression
     linux-linus:test-amd64-amd64-pair:guest-start/debian:fail:regression
     linux-linus:test-amd64-amd64-xl-credit2:guest-start:fail:regression
     linux-linus:test-amd64-amd64-xl-multivcpu:guest-start:fail:regression
@@ -126,17 +126,16 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     linux=d6ecaa0024485effd065124fe774de2e22095f2d
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 28 May 2022 14:17:01 +0000
+Date: Sat, 28 May 2022 19:17:46 +0000
 
-flight 170761 linux-linus real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/170761/
+flight 170763 linux-linus real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/170763/
 
 Regressions :-(
 
 Tests which did not succeed and are blocking,
 including tests which could not be run:
  test-amd64-amd64-dom0pvh-xl-amd 14 guest-start           fail REGR. vs. 170714
- test-amd64-amd64-xl-pvshim   14 guest-start              fail REGR. vs. 170714
  test-amd64-amd64-dom0pvh-xl-intel 14 guest-start         fail REGR. vs. 170714
  test-amd64-amd64-libvirt      8 xen-boot                 fail REGR. vs. 170714
  test-amd64-amd64-libvirt-qcow2  8 xen-boot               fail REGR. vs. 170714
@@ -146,6 +145,7 @@ including tests which could not be run:
  test-amd64-amd64-libvirt-xsm 14 guest-start              fail REGR. vs. 170714
  test-amd64-amd64-xl          14 guest-start              fail REGR. vs. 170714
  test-amd64-amd64-freebsd11-amd64 13 guest-start          fail REGR. vs. 170714
+ test-amd64-amd64-xl-pvshim   14 guest-start              fail REGR. vs. 170714
  test-amd64-amd64-pair        25 guest-start/debian       fail REGR. vs. 170714
  test-amd64-amd64-xl-credit2  14 guest-start              fail REGR. vs. 170714
  test-amd64-amd64-xl-multivcpu 14 guest-start             fail REGR. vs. 170714
@@ -210,8 +210,8 @@ baseline version:
  linux                d6ecaa0024485effd065124fe774de2e22095f2d
 
 Last test of basis   170714  2022-05-24 03:27:44 Z    4 days
-Failing since        170716  2022-05-24 11:12:06 Z    4 days   11 attempts
-Testing same since   170761  2022-05-28 10:12:28 Z    0 days    1 attempts
+Failing since        170716  2022-05-24 11:12:06 Z    4 days   12 attempts
+Testing same since   170761  2022-05-28 10:12:28 Z    0 days    2 attempts
 
 ------------------------------------------------------------
 1850 people touched revisions under test,
