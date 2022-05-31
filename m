@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78C54C433FE
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029EAC43217
 	for <xen-devel@archiver.kernel.org>; Tue, 31 May 2022 03:13:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.338983.563804 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.338986.563836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nvsJz-0004HF-0T; Tue, 31 May 2022 03:13:27 +0000
+	id 1nvsK7-0005BS-Ub; Tue, 31 May 2022 03:13:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 338983.563804; Tue, 31 May 2022 03:13:26 +0000
+Received: by outflank-mailman (output) from mailman id 338986.563836; Tue, 31 May 2022 03:13:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nvsJy-0004H6-SA; Tue, 31 May 2022 03:13:26 +0000
-Received: by outflank-mailman (input) for mailman id 338983;
- Tue, 31 May 2022 03:13:25 +0000
+	id 1nvsK7-0005BL-RY; Tue, 31 May 2022 03:13:35 +0000
+Received: by outflank-mailman (input) for mailman id 338986;
+ Tue, 31 May 2022 03:13:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Brif=WH=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1nvsJx-0004Go-IW
- for xen-devel@lists.xenproject.org; Tue, 31 May 2022 03:13:25 +0000
+ id 1nvsK6-0004Go-JT
+ for xen-devel@lists.xenproject.org; Tue, 31 May 2022 03:13:34 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id a08f576b-e08f-11ec-837f-e5687231ffcc;
- Tue, 31 May 2022 05:13:23 +0200 (CEST)
+ id a77049b0-e08f-11ec-837f-e5687231ffcc;
+ Tue, 31 May 2022 05:13:33 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8E393ED1;
- Mon, 30 May 2022 20:13:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3432723A;
+ Mon, 30 May 2022 20:13:33 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id EFC803F66F;
- Mon, 30 May 2022 20:13:17 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D3D5E3F66F;
+ Mon, 30 May 2022 20:13:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,135 +45,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a08f576b-e08f-11ec-837f-e5687231ffcc
+X-Inumbo-ID: a77049b0-e08f-11ec-837f-e5687231ffcc
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
 	Penny Zheng <Penny.Zheng@arm.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>,
+	Julien Grall <jgrall@amazon.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v5 1/9] xen/arm: rename PGC_reserved to PGC_staticmem
-Date: Tue, 31 May 2022 11:12:33 +0800
-Message-Id: <20220531031241.90374-2-Penny.Zheng@arm.com>
+Subject: [PATCH v5 4/9] xen: do not merge reserved pages in free_heap_pages()
+Date: Tue, 31 May 2022 11:12:36 +0800
+Message-Id: <20220531031241.90374-5-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220531031241.90374-1-Penny.Zheng@arm.com>
 References: <20220531031241.90374-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-PGC_reserved could be ambiguous, and we have to tell what the pages are
-reserved for, so this commit intends to rename PGC_reserved to
-PGC_staticmem, which clearly indicates the page is reserved for static
-memory.
+The code in free_heap_pages() will try to merge pages with the
+successor/predecessor if pages are suitably aligned. So if the pages
+reserved are right next to the pages given to the heap allocator,
+free_heap_pages() will merge them, and give the reserved pages to heap
+allocator accidently as a result.
 
+So in order to avoid the above scenario, this commit updates free_heap_pages()
+to check whether the predecessor and/or successor has PGC_reserved set,
+when trying to merge the about-to-be-freed chunk with the predecessor
+and/or successor.
+
+Suggested-by: Julien Grall <jgrall@amazon.com>
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
 v5 changes:
+- change PGC_reserved to adapt to PGC_staticmem
+---
+v4 changes:
+- no changes
+---
+v3 changes:
+- no changes
+---
+v2 changes:
 - new commit
 ---
- xen/arch/arm/include/asm/mm.h |  6 +++---
- xen/common/page_alloc.c       | 20 ++++++++++----------
- 2 files changed, 13 insertions(+), 13 deletions(-)
+ xen/common/page_alloc.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 424aaf2823..1226700085 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -108,9 +108,9 @@ struct page_info
-   /* Page is Xen heap? */
- #define _PGC_xen_heap     PG_shift(2)
- #define PGC_xen_heap      PG_mask(1, 2)
--  /* Page is reserved */
--#define _PGC_reserved     PG_shift(3)
--#define PGC_reserved      PG_mask(1, 3)
-+  /* Page is static memory */
-+#define _PGC_staticmem    PG_shift(3)
-+#define PGC_staticmem     PG_mask(1, 3)
- /* ... */
- /* Page is broken? */
- #define _PGC_broken       PG_shift(7)
 diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 319029140f..44600dd9cd 100644
+index 6425761116..b1350fc238 100644
 --- a/xen/common/page_alloc.c
 +++ b/xen/common/page_alloc.c
-@@ -151,8 +151,8 @@
- #define p2m_pod_offline_or_broken_replace(pg) BUG_ON(pg != NULL)
- #endif
- 
--#ifndef PGC_reserved
--#define PGC_reserved 0
-+#ifndef PGC_staticmem
-+#define PGC_staticmem 0
- #endif
- 
- /*
-@@ -2286,7 +2286,7 @@ int assign_pages(
- 
-         for ( i = 0; i < nr; i++ )
-         {
--            ASSERT(!(pg[i].count_info & ~(PGC_extra | PGC_reserved)));
-+            ASSERT(!(pg[i].count_info & ~(PGC_extra | PGC_staticmem)));
-             if ( pg[i].count_info & PGC_extra )
-                 extra_pages++;
-         }
-@@ -2346,7 +2346,7 @@ int assign_pages(
-         page_set_owner(&pg[i], d);
-         smp_wmb(); /* Domain pointer must be visible before updating refcnt. */
-         pg[i].count_info =
--            (pg[i].count_info & (PGC_extra | PGC_reserved)) | PGC_allocated | 1;
-+            (pg[i].count_info & (PGC_extra | PGC_staticmem)) | PGC_allocated | 1;
- 
-         page_list_add_tail(&pg[i], page_to_list(d, &pg[i]));
-     }
-@@ -2652,8 +2652,8 @@ void __init free_staticmem_pages(struct page_info *pg, unsigned long nr_mfns,
-             scrub_one_page(pg);
-         }
- 
--        /* In case initializing page of static memory, mark it PGC_reserved. */
--        pg[i].count_info |= PGC_reserved;
-+        /* In case initializing page of static memory, mark it PGC_staticmem. */
-+        pg[i].count_info |= PGC_staticmem;
-     }
- }
- 
-@@ -2683,7 +2683,7 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-     for ( i = 0; i < nr_mfns; i++ )
-     {
-         /* The page should be reserved and not yet allocated. */
--        if ( pg[i].count_info != (PGC_state_free | PGC_reserved) )
-+        if ( pg[i].count_info != (PGC_state_free | PGC_staticmem) )
-         {
-             printk(XENLOG_ERR
-                    "pg[%lu] Static MFN %"PRI_mfn" c=%#lx t=%#x\n",
-@@ -2697,10 +2697,10 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-                                 &tlbflush_timestamp);
- 
-         /*
--         * Preserve flag PGC_reserved and change page state
-+         * Preserve flag PGC_staticmem and change page state
-          * to PGC_state_inuse.
-          */
--        pg[i].count_info = PGC_reserved | PGC_state_inuse;
-+        pg[i].count_info = PGC_staticmem | PGC_state_inuse;
-         /* Initialise fields which have other uses for free pages. */
-         pg[i].u.inuse.type_info = 0;
-         page_set_owner(&pg[i], NULL);
-@@ -2722,7 +2722,7 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
- 
-  out_err:
-     while ( i-- )
--        pg[i].count_info = PGC_reserved | PGC_state_free;
-+        pg[i].count_info = PGC_staticmem | PGC_state_free;
- 
-     spin_unlock(&heap_lock);
- 
+@@ -1482,6 +1482,7 @@ static void free_heap_pages(
+             /* Merge with predecessor block? */
+             if ( !mfn_valid(page_to_mfn(predecessor)) ||
+                  !page_state_is(predecessor, free) ||
++                 (predecessor->count_info & PGC_staticmem) ||
+                  (PFN_ORDER(predecessor) != order) ||
+                  (phys_to_nid(page_to_maddr(predecessor)) != node) )
+                 break;
+@@ -1505,6 +1506,7 @@ static void free_heap_pages(
+             /* Merge with successor block? */
+             if ( !mfn_valid(page_to_mfn(successor)) ||
+                  !page_state_is(successor, free) ||
++                 (successor->count_info & PGC_staticmem) ||
+                  (PFN_ORDER(successor) != order) ||
+                  (phys_to_nid(page_to_maddr(successor)) != node) )
+                 break;
 -- 
 2.25.1
 
