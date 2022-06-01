@@ -4,29 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A92BBC433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jun 2022 16:59:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.340585.565689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA195C433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jun 2022 17:18:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.340628.565700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwRh3-00019Z-EW; Wed, 01 Jun 2022 16:59:37 +0000
+	id 1nwRyb-00058w-8F; Wed, 01 Jun 2022 17:17:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 340585.565689; Wed, 01 Jun 2022 16:59:37 +0000
+Received: by outflank-mailman (output) from mailman id 340628.565700; Wed, 01 Jun 2022 17:17:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwRh3-00019G-7p; Wed, 01 Jun 2022 16:59:37 +0000
-Received: by outflank-mailman (input) for mailman id 340585;
- Wed, 01 Jun 2022 16:59:35 +0000
+	id 1nwRyb-00058p-56; Wed, 01 Jun 2022 17:17:45 +0000
+Received: by outflank-mailman (input) for mailman id 340628;
+ Wed, 01 Jun 2022 17:17:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CPHY=WI=citrix.com=prvs=144c139f6=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nwRh0-0000Xw-V5
- for xen-devel@lists.xenproject.org; Wed, 01 Jun 2022 16:59:35 +0000
-Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
- [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3519baf0-e1cc-11ec-837f-e5687231ffcc;
- Wed, 01 Jun 2022 18:59:32 +0200 (CEST)
+ <SRS0=UpDj=WI=citrix.com=prvs=144fbc88a=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
+ id 1nwRyZ-00058j-ID
+ for xen-devel@lists.xenproject.org; Wed, 01 Jun 2022 17:17:43 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id bda60623-e1ce-11ec-837f-e5687231ffcc;
+ Wed, 01 Jun 2022 19:17:42 +0200 (CEST)
+Received: from mail-bn8nam11lp2169.outbound.protection.outlook.com (HELO
+ NAM11-BN8-obe.outbound.protection.outlook.com) ([104.47.58.169])
+ by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 01 Jun 2022 13:17:38 -0400
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com (2603:10b6:a02:aa::12)
+ by SN4PR03MB6718.namprd03.prod.outlook.com (2603:10b6:806:1ed::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5293.13; Wed, 1 Jun
+ 2022 17:17:36 +0000
+Received: from BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::50a2:499b:fa53:b1eb]) by BYAPR03MB3623.namprd03.prod.outlook.com
+ ([fe80::50a2:499b:fa53:b1eb%5]) with mapi id 15.20.5293.019; Wed, 1 Jun 2022
+ 17:17:36 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,1185 +51,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3519baf0-e1cc-11ec-837f-e5687231ffcc
+X-Inumbo-ID: bda60623-e1ce-11ec-837f-e5687231ffcc
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1654102772;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=WoBfmEao3DrJCNeVSjlgM3yjFCOP00okKErgLU5uy7I=;
-  b=AYkU6r0jO3EA+mYR3hGMK0uv7pgVFrJ9sCZDMFNx0HxbVvIbtlXEoz6s
-   QTgWcPYEZ9gTYj1JzrCXtMY2Ttjbq7gjejF6g1qPId+nJHVFajDdFtk0U
-   md4zn9e/Cn0axz3zfCJG5U7DmlfcKO3+OidxK6qLTzj2sMVbOAfnCaMse
-   g=;
-Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 5.1
-X-MesageID: 72494147
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:kdaoo6gzNzeu5lB46qQf42AJX161GBAKZh0ujC45NGQN5FlHY01je
- htvX2qEbPaOY2rxKIpyOt62oR8D75DcmoNiG1NupH83RSIb9cadCdqndUqhZCn6wu8v7a5EA
- 2fyTvGacajYm1eF/k/F3oDJ9CU6jefSLlbFILas1hpZHGeIcw98z0M68wIFqtQw24LhXVvU4
- YiaT/D3YzdJ5RYlagr41IrbwP9flKyaVOQw5wFWiVhj5TcyplFNZH4tDfjZw0jQG+G4KtWSV
- efbpIxVy0uCl/sb5nFJpZ6gGqECaua60QFjERO6UYD66vRJjnRaPqrWqJPwwKqY4tmEt4kZ9
- TlDiXC/YV91B6jNpr8waAhBGgBwMvFI27bee1Hq5KR/z2WeG5ft6/BnDUVwNowE4OdnR2pJ8
- JT0KhhUMErF3bjvhuvmFK883azPL+GyVG8bknhm0THeC+dgWZ3ZSr/GzdRZwC0xloZFGvO2i
- 88xNmAzPUiZP0In1lE/S5IdxNnvhVfGLwJFrkyp/roQynHOw1kkuFTqGIWMIYHbLSlPpW6Dv
- X7P9Wn9BhAcNfScxCCD/3bqgfXA9QvkXKoCGbv+8eRl6HWR22gSBRs+RVa95/6jhSaWS99Zb
- kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8U44gyQzqvf4y6CG3MJCDVGbbQbWNQeHGJwk
- AXTxpWwWGIp4Ob9pW+hGqm89W+LPCkrdkI5dDYNbAUKv9fAqZhpp0eaJjp8K5JZnuEZCBmpn
- W3W9HRh2e5D5SIY//7lpA6a2lpAsrCMF1dovVuPAwpJ+ysjPOaYi5qUBU83BBqqBKKQVRG/s
- XcNgKByB8heXMjWxERhrAjgdYxFBspp0xWG2DaD57F7q1yQF4eLJOi8Gg1WKkZzKdojcjT0e
- kLVsg45zMYNYSfyN/UvPNzuUp1CIU3c+TPND6m8UzazSsIpKF/vEN9GPiZ8IFwBYGBzyPpia
- P93gO6nDGoACLQP8Qdas9w1iOdxrghnnDu7bcmik3yPjOvFDFbIGOhtDbd7Rr1ghE9yiF6No
- 4g32grj40g3bdASlQGNrtBDdgBRdydlbX00wuQOHtO+zsNdMDlJI5fsLXkJIeSJQ4w9ej/0w
- 0yA
-IronPort-HdrOrdr: A9a23:stiJ9ajJ1cONnIsbnYiNyk0MPHBQXtwji2hC6mlwRA09TySZ//
- rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
- JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+  d=citrix.com; s=securemail; t=1654103862;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=i3YrQFEUT1vDBhQnJgFaO4yKn/IKEH7GluQ0X6ZOKKg=;
+  b=E2ZQZ5UdNezew+sjFmEN/MXRZ3u9gwJoSmuSAYnKI+Ot8qZMBvoG9wHo
+   1C6JjCSxX5qL/2P3oQgd6PTVW26BCaR+Bu6//DPw8DRBcXJoRAvUZk4rw
+   ANIoKztpqvMAbGRgozwyMLapO82q4PB8IEmQlfQDoVd3YwaZ/XUqv7Ska
+   M=;
+X-IronPort-RemoteIP: 104.47.58.169
+X-IronPort-MID: 72649710
+X-IronPort-Reputation: None
+X-IronPort-Listener: OutboundMail
+X-IronPort-SenderGroup: RELAY_O365
+X-IronPort-MailFlowPolicy: $RELAYED
+IronPort-Data: A9a23:041Nk6oAenV+PhRmp8jhGLlZ+F5eBmIDZBIvgKrLsJaIsI4StFCzt
+ garIBmEOquKZGLyLdh2YIq/p0xVvsLdm9RrTlA4+3szRSwb8ZuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlVEliefQAOCU5NfsYkidfyc9IMsaoU8lyrdRbrJA24DjWVvT4
+ Yqq+KUzBXf+s9JKGjNMg068gEsHUMTa4Fv0aXRnOJinFHeH/5UkJMp3yZOZdhMUcaENdgKOf
+ M7RzanRw4/s10xF5uVJMFrMWhZirrb6ZWBig5fNMkSoqkAqSicais7XOBeAAKv+Zvrgc91Zk
+ b1wWZKMpQgBHKnskcIEVR9hDR5hJJ9MpLDOMSPirpnGp6HGWyOEL/RGKmgTZNRd0MAnRGZE+
+ LofNSwHaQ2Fi6Su2rWnR+Jwh8Mlas72IIcYvXImxjbcZRokacmbH+OWupkFjHFp2JEm8fX2P
+ qL1bRJGahjabgIJEVAQEJ8kx8+jh2Xlci0eo1WQzUYyyzeJklAgj+G1WDbTUuWSQ5h5rBa4n
+ VLfr2WnAikdZcST1jXQpxpAgceKx0sXQrk6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkgIssKwz+UqDXtT7GRqirxasvBQRRt5RGO0S8xyWx+zf5APxLncAZi5MbpohrsBebScxy
+ laDktftBDpumL6YU3SQ8vGTtzzaBMQOBWoLZCtBRw1V5dDm+dg3lkiWEIclF7OphNroHz222
+ yqNsCU1m7QUi4gMyrm/+lfExTmro/AlUzII2+keZUr9hisRWWJvT9bABYTzhRqYELukcw==
+IronPort-HdrOrdr: A9a23:TaQWnqHttr1Ry+RKpLqFsZLXdLJyesId70hD6qkvc3Fom52j/f
+ xGws5x6fatskdrZJkh8erwW5Vp2RvnhNJICPoqTM2ftW7dySSVxeBZnMbfKljbdxEWmdQtsp
+ uIH5IeNDS0NykDsS+Y2nj3Lz9D+qjgzEnAv463oBlQpENRGthdBmxCe2Sm+zhNNW177O0CZf
+ +hD6R8xwaISDAyVICWF3MFV+/Mq5ngj5T9eyMLABYh9U2nkS6owKSSKWnZ4j4uFxd0hZsy+2
+ nMlAL0oo+5teug9xPa32jPq7xLhdrazMdZDsDksLlXFtyssHfrWG1SYczHgNkHmpDp1L/sqq
+ iLn/4UBbU315oWRBDtnfKi4Xi57N9k0Q6e9bbRuwqenSW+fkN6NyMJv/MmTvOSgXBQw+1Uwe
+ ZF2XmUuIFQCg6FlCPh58LQXxUvjUasp2E++NRjx0C3fLFuHoO5l7ZvtX+90a1wbh7S+cQiCq
+ 1jHcvc7PFZfReTaG3YpHBmxJipUm4oFhmLT0AesojNugIm1kxR3g8d3ogSj30A/JUyR91N4P
+ nFKL1hkPVLQtUNZaxwCe8dSY+8C3DLQxjLLGWOSG6XX50vKjbIsdr68b817OaldNgBy4Yzgo
+ 3IVBdCuWs7ayvVeLqzNV1wg2TwqUmGLETQI5tllulEU5XHNcnWGDzGTkwymM29pPhaCtHHWp
+ +ISedrP8M=
 X-IronPort-AV: E=Sophos;i="5.91,269,1647316800"; 
-   d="scan'208";a="72494147"
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 3/4] build: replace get-fields.sh by a perl script
-Date: Wed, 1 Jun 2022 17:59:08 +0100
-Message-ID: <20220601165909.46588-4-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220601165909.46588-1-anthony.perard@citrix.com>
+   d="scan'208";a="72649710"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jLRQdw9WkIuM8mbPPh9G3Iq5sdbYwk3B8rhBMFDBraxj0S05CqWuihXkZsLVb+41C+06gD0j7RscKeQ7bvBtTnBAx7HWcBZv2Ei5rNXBoHhT1WxSE20K+a65V5awutr9+ila7r4z9+BzJvIgQLO3B6pANnG1QxEstd3+lEBe0Aofz25ynSNGxyajSM2EnIhQwnPc08GpAJRje9VPADt8GzTl651vFc9RU8p0yKhhbMnyt8Q+4wm8V3tOszhXIv9EdxtkIi+DkDR0VcsyAfDH0a9Pi0wGc12pAmBF3u3ONQDQqTFW0SbPZK7rjqjkIcGWs+wdrCRY0/TtTgP2U2q0aQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=i3YrQFEUT1vDBhQnJgFaO4yKn/IKEH7GluQ0X6ZOKKg=;
+ b=Smqf9MEkvrA2ijaEynQ2oMvFxJ3z2Oe4pRmB1Jv43Fc2Td/mYA+lScdj9GTageDeII35x/Eyvy1Z0SZ9M1ELJq/f+DI2USlv/jbIKkJTRyjXzRI2RMw7EQV3ZgRQ+c6myNSkAPiZ65JyBaFzlQOanMiIQElLMq9l1gCCcnfS0AdV/zDNLzvwvX7SP3DS+IdJXiI6zmyLMZ5jbciIn/QK+i5zPA3CzKPKV++F8RaX5rLsFad8xaM1nisGOWod3KbGpn5t3WepkMRXZMgnPNdOBv1REgQmf+EhH5skGFoASoCBRbaRmVPEP8mh9XuxK+9gKM0Ryuy4A3WXStKfgA34iA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=i3YrQFEUT1vDBhQnJgFaO4yKn/IKEH7GluQ0X6ZOKKg=;
+ b=vWWrfwAPrvYvo1ZZOquSjevI8HgOTjFDCskU5SSBF+nyAbmviDxkIbShw0QISz55/4eI6pkjz2MeC5V1CNJ6aRklufskJnUQsFZPp9r0tUwLuJXD3kszMTNMM2qOCofwo2pEjjfdJTVxKSP0/5XNQgaeaxBjIjYsbNRSv8danFE=
+From: Andrew Cooper <Andrew.Cooper3@citrix.com>
+To: Anthony Perard <anthony.perard@citrix.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Julien Grall <julien@xen.org>, Jan Beulich <jbeulich@suse.com>, Wei Liu
+	<wl@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: Re: [XEN PATCH 0/4] xen: rework compat headers generation
+Thread-Topic: [XEN PATCH 0/4] xen: rework compat headers generation
+Thread-Index: AQHYddjyz0tXrY3j20Cs3apay7U+za06y0cA
+Date: Wed, 1 Jun 2022 17:17:36 +0000
+Message-ID: <5e94648f-ba89-3691-0d80-1a8cca588ca6@citrix.com>
 References: <20220601165909.46588-1-anthony.perard@citrix.com>
+In-Reply-To: <20220601165909.46588-1-anthony.perard@citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 5417750f-851c-43fd-5a76-08da43f29f95
+x-ms-traffictypediagnostic: SN4PR03MB6718:EE_
+x-microsoft-antispam-prvs:
+ <SN4PR03MB67183FF4316CA1BFF32341C6BADF9@SN4PR03MB6718.namprd03.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info:
+ hh++QGynYEilWUtYNKLBYFeqcun91OTokEqK8gIR3CaIGUOr3JuhMH9rRLRmW8nRsLDY1fBkmdBUNoW8uSBZqBjRj7pp2TtaekML6MCEOdcQ9Wi46YkK9vjJzT/sMIb24Id7+VTlnLj2Y0t8qwOVdEvJhwOQ1Pk513uYmeGAinv9q483VY7luqyQTSj+h68ARDJlXd4b/e+WPyDMO6w3fIhVRbYKSsGWkQa9tc5fqya08u4Iqm7wN/EMoF7YURa3+r+9D78dG55NZBsDXr5mAO1bBHWjWjiJ3OiJXiMdESLb9Z5j3yAhByZ0oWVZzGtrU8i895FGe4Onnq9hgINvBBbI3Ns5xISsD+BeuNBLdA0v21kg3sWunRmimvXjMm5QUJeEvke0grTJanlTyeaFHMUqb2q4cDbWXQ1GEzukM+NJvWdleCIhiwr6s8MPArYBPMITo8pDrOjwjSG5Z4W9+qV8w+G1PT9yZrJXKXwgGZKSl47P0GVRrWZMEYqRZf0myuOaQDqPGtvUNyqyrY0pgJLQNxSz/gixn9F5b9EVmuj/j/wSooCaIaXIqDJth2iWXg77NyBbxoZYupx28NcLvenVEpiSfY83nG5ccmzJLn2OB2qLbeZw9SAv3Rm9NT7A6ZPWqIRBLOcureD3lV+Yw0V2VsYNXRNze93CHG41Xkm2CSM/5PwXGASZ83Q5faXwWd/k82bXAvFTKyGr4TGK1sX8gMDdYdhLFPThpnVMFeZmhp8/zgLKcxIVqbjvRxvDKYZNikwdg//HEaLgWez5g1wMYBqvotiGYrRas4gWQCd1ECBuDoBNSlMOxj3oSWCfnrS80hwYC3Ul9CKtPs1A7u7EsnE8orMiXebPLRwJHHo=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR03MB3623.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(966005)(2906002)(316002)(6506007)(6512007)(26005)(53546011)(54906003)(508600001)(38100700002)(8676002)(64756008)(66476007)(4326008)(8936002)(66946007)(66446008)(76116006)(66556008)(91956017)(31696002)(86362001)(82960400001)(71200400001)(110136005)(6486002)(2616005)(5660300002)(38070700005)(122000001)(31686004)(186003)(36756003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?R1Z1dEtVU01XeThabGFJdHlBeXVrbE41WEpvQ1JnVXZvNTdXVE9ZcVA2MnIz?=
+ =?utf-8?B?a1VOZzA1bS9aR3J6ckJva0dOL1I3YkJ2aEtLWDZuZ2JXNjJpWS90NGNGSWl4?=
+ =?utf-8?B?QnBUTll5enRpWGlCWGx3NlQzTFZYRWMrZmk4N3BPRDk2OFVXV25qVHh2Ri9r?=
+ =?utf-8?B?UDh6RERQWG5DMnp2WXJZNUl1N05TOFVUdE1xelIwcDJjUG5pT2NuK2ZZc1Q5?=
+ =?utf-8?B?cGNtKzVaTzdUOHgwUms3c3Y1MHdoREl6aDMyZUFXeENIYUxiNE81MjhmWVhk?=
+ =?utf-8?B?dlhsTEFFN293cHVlYm9PdVJVUVBXZVVGZ2JUQmw5RGlMMU5sWFpsY3J4ZFg1?=
+ =?utf-8?B?MjY1Ry9BbllGM0tjUzNTZno0RTRLWUJpTzkxdFZSdmhDY1FHckdPZE04ejZM?=
+ =?utf-8?B?SHY4UXl5WCttNUlFeWZGT00vTEpVTFlSS0crS1ZHRDFXNmxpaS9IcGNnUTZD?=
+ =?utf-8?B?KzJQVHpZVEZHWElES2tIdWh4T3FIT2ZURjF4SzdKSmFEU0VJcnRBYzJ0MjVw?=
+ =?utf-8?B?cGQyczMvd011SUE2N3gyOUl6NlI1ZEpSbzE1QkNUbHp5UFhvNFJQNFhuMjVT?=
+ =?utf-8?B?a1NudWpTTmVDaVVYQXBSbzhmZGpKMTZKZkxRNDhyQ1kvSHZWWll2SGdjc0lB?=
+ =?utf-8?B?Smk0TWxoZ3BQakN6L29IMmswOVAvV08rRllaQmYvd0UyMkxvUFcwWHdLa2tJ?=
+ =?utf-8?B?bHBwZU82K3hsYjY0UWFPUEV3RHZEWnRrR0poaXRQbzJ4WnJIRVFmbnp6aERP?=
+ =?utf-8?B?WkJnQXNUWDQySFB1U2ZmZjVVMWw2OEFRSkpuc2NxZmh3aGVwbzVaMEU1emVT?=
+ =?utf-8?B?T0pTaEhLTmxqTDlnbXlobkJEd1VmOFphUHdoK0JNL3ZDUzMvdzNtc0JvVWZy?=
+ =?utf-8?B?Uk44cTJHbkNSdEM1ZFpTSXVBWVp6TUN4Tm9NWGF3a0RHdTBoZkpDbDd5YlpC?=
+ =?utf-8?B?S1Z1MjFsTytuNkx3VWNncS9DVFoyZDVBMHltNk9mbjR1VnRFWWpYVUVOVmVy?=
+ =?utf-8?B?MHc5ek9KLytaU29SaGZveC9aOThhRW5IOGxBRXowa2R6MWh1SGVDdldsWTBk?=
+ =?utf-8?B?elhjLzFtbVVyd3lNblQ3QklSSUpIb0dlOVZaT1lZWVpHMkpzc1RPMjJKcHlk?=
+ =?utf-8?B?ZVd6SXZRSk9IMXVBODRFQnV4cENhRTZDWXg1dlR4RXVUNHROdXhPdGpxcDBZ?=
+ =?utf-8?B?VkMwNWlnZ1BZd3dRMnd2aDFkZFdsTDJnVVBzOElpeHpaRUVEYkVWZnByNVlM?=
+ =?utf-8?B?Zk4rMUxBTGpyZDN1cFN5cnNyc1IwVlZISlUzaFNHWEpLQmpxelkzWE9hcUFz?=
+ =?utf-8?B?NWNjdWlnVVBRRzl0RjdsWTlTSjVzd1R2ZThveHZRWHZBemZRK04zTTlFTk1S?=
+ =?utf-8?B?L2l5bXZiemlncjk0b0VZZ2lvbTl4QlZ2bld3UWV3djZRc2diS2xlVmJ0Q2VJ?=
+ =?utf-8?B?dGtPNnFOVmFIWTZaOTVqRDJCTXBCTWkwem8zOGk4N0hyRForWGF4eWhTZG1q?=
+ =?utf-8?B?enYwQVZ5ZzR5QUFGTXljejRqT2xSMjhSS0E2OVJTeVUwdHhxMjc0UFRZYWdx?=
+ =?utf-8?B?ajdsdUdqNTVpTm5OeEtyRkI2bGl1cExJK1ZDTm13OGwyQ3g5dGQ5bUdMZFhm?=
+ =?utf-8?B?dU1maEFHK1p6Qy9sbVgySnBEdXN4aGpRNXdRSFZzdTVCSXhOa0Fodk1QMUs0?=
+ =?utf-8?B?Zi9jSUNXSzlhemhpNkF3Z0RQRXFWOEFjbHlUOEJrM2Ezc2x2SkVyQ0JzQlpj?=
+ =?utf-8?B?ZVU0aEUwaGJxVjZaOXp5dElQMk5GTklDVDB6ZzNYc2dKTDlHTk03SHRKT1Y3?=
+ =?utf-8?B?WDlvcXJBVFlkTXNpMFd2N3RVL0VaOW1kRWp0YTJtZ2FXZGhKQkNXZ2J1Q3Q5?=
+ =?utf-8?B?Z0Vqd1hUaC9yWWQxZTdqcUEyUS9YcU8vMGZlUFVRNzd1YXJxMk0rM1BJaE9q?=
+ =?utf-8?B?cTlQOW5LKzJ4TnZqRzUySHpZWlNYUXBVVzlSOCtPTFlCWHJ6cDdwWnc5c3dY?=
+ =?utf-8?B?aWdGMVd4Rng5Wm04NWJHUnJJSWFXV01RVG5vQzU0S0xDeFk4Wm44SFNsL1Bl?=
+ =?utf-8?B?MVVva3lNNk5yczdCd1hheEU4Smw2TW1iQjFDTDVYK3FORTdJTkx1NXdWRHBi?=
+ =?utf-8?B?OUxDYUdrUUduelpxcHBwdE9YK2UyalkrTkRYREpUak1jU3lWY01XZWJlSDR6?=
+ =?utf-8?B?MXIwUm95MFl0MEJHd2FhdTFkazY4Q2RyRHpHSjEwK3czUVVFVlZYYURacFhv?=
+ =?utf-8?B?TkpQZmdLa0N1ZHA5RG1lMTdHL0RibG91UVRoTGIyazZWTkZiZ1d3V3hteEdo?=
+ =?utf-8?B?QzcrVEJQMW5oYWRLb1ZJMVdwRHJseVpORFVQV1V5dUlkR05SMUxQcWJDRkdq?=
+ =?utf-8?Q?uTEKfjc1PrScar4Q=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2BAF9D909864254B90248DD87456FDD9@namprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR03MB3623.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5417750f-851c-43fd-5a76-08da43f29f95
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Jun 2022 17:17:36.4389
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: v8S3Hj6RCKhpWdTNHQjRiEsTnaEr/5ciVD9BQH0OQi+lLnWiBgVaY/aFsGTfr+timEGcvYz3InJQg9DWfERCUWtJDl0Zd9c94wzhatPVneY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR03MB6718
 
-The get-fields.sh which generate all the include/compat/.xlat/*.h
-headers is quite slow. It takes for example nearly 3 seconds to
-generate platform.h on a recent machine, or 2.3 seconds for memory.h.
-
-Since it's only text processing, rewriting the mix of shell/sed/python
-into a single perl script make the generation of those file a lot
-faster.
-
-I tried to keep a similar look for the code, to keep the code similar
-between the shell and perl, and to ease review. So some code in perl
-might look weird or could be written better.
-
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- xen/include/Makefile         |   6 +-
- xen/tools/compat-xlat-header | 539 +++++++++++++++++++++++++++++++++++
- xen/tools/get-fields.sh      | 528 ----------------------------------
- 3 files changed, 541 insertions(+), 532 deletions(-)
- create mode 100755 xen/tools/compat-xlat-header
- delete mode 100644 xen/tools/get-fields.sh
-
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index 6d9bcc19b0..b7e7148665 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -60,9 +60,7 @@ cmd_compat_c = \
- 
- quiet_cmd_xlat_headers = GEN     $@
- cmd_xlat_headers = \
--    while read what name; do \
--        $(SHELL) $(srctree)/tools/get-fields.sh "$$what" compat_$$name $< || exit $$?; \
--    done <$(patsubst $(obj)/compat/%,$(obj)/compat/.xlat/%,$(basename $<)).lst >$@.new; \
-+    $(PERL) $(srctree)/tools/compat-xlat-header $< $(patsubst $(obj)/compat/%,$(obj)/compat/.xlat/%,$(basename $<)).lst > $@.new; \
-     mv -f $@.new $@
- 
- targets += $(headers-y)
-@@ -80,7 +78,7 @@ $(obj)/compat/%.c: $(src)/public/%.h $(srcdir)/xlat.lst $(srctree)/tools/compat-
- 	$(call if_changed,compat_c)
- 
- targets += $(patsubst compat/%, compat/.xlat/%, $(headers-y))
--$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/get-fields.sh FORCE
-+$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(srctree)/tools/compat-xlat-header FORCE
- 	$(call if_changed,xlat_headers)
- 
- quiet_cmd_xlat_lst = GEN     $@
-diff --git a/xen/tools/compat-xlat-header b/xen/tools/compat-xlat-header
-new file mode 100755
-index 0000000000..f1f42a9dde
---- /dev/null
-+++ b/xen/tools/compat-xlat-header
-@@ -0,0 +1,539 @@
-+#!/usr/bin/perl -w
-+
-+use strict;
-+use warnings;
-+
-+open COMPAT_LIST, "<$ARGV[1]" or die "can't open $ARGV[1], $!";
-+open HEADER, "<$ARGV[0]" or die "can't open $ARGV[0], $!";
-+
-+my @typedefs;
-+
-+my @header_tokens;
-+while (<HEADER>) {
-+    next if m/^\s*#.*/;
-+    s/([\]\[,;:{}])/ $1 /g;
-+    s/^\s+//;
-+    push(@header_tokens, split(/\s+/));
-+}
-+
-+sub get_fields {
-+    my ($looking_for) = @_;
-+    my $level = 1;
-+    my $aggr = 0;
-+    my ($name, @fields);
-+
-+    foreach (@header_tokens) {
-+        if (/^(struct|union)$/) {
-+            unless ($level != 1) {
-+                $aggr = 1;
-+                @fields = ();
-+                $name = '';
-+            }
-+        } elsif ($_ eq '{') {
-+            $level++;
-+        } elsif ($_ eq '}') {
-+            $level--;
-+            if ($level == 1 and $name eq $looking_for) {
-+                push (@fields, $_);
-+                return @fields;
-+            }
-+        } elsif (/^[a-zA-Z_].*/) {
-+            unless ($aggr == 0 or $name ne "") {
-+                $name = $_;
-+            }
-+        }
-+        unless ($aggr == 0) {
-+            push (@fields, $_);
-+        }
-+    }
-+    return ();
-+}
-+
-+sub get_typedefs {
-+    my $level = 1;
-+    my $state = 0;
-+    my @typedefs;
-+    foreach (@_) {
-+        if ($_ eq 'typedef') {
-+            unless ($level != 1) {
-+                $state = 1;
-+            }
-+        } elsif (m/^COMPAT_HANDLE\(.*\)$/) {
-+            unless ($level != 1 or $state != 1) {
-+                $state = 2;
-+            }
-+        } elsif (m/^[\[\{]$/) {
-+            $level++;
-+        } elsif (m/^[\]\}]$/) {
-+            $level--;
-+        } elsif ($_ eq ';') {
-+            unless  ($level != 1) {
-+                $state = 0;
-+            }
-+        } elsif (m/^[a-zA-Z_].*$/) {
-+            unless ($level != 1 or $state != 2) {
-+                push (@typedefs, $_);
-+            }
-+        }
-+    }
-+    return @typedefs;
-+}
-+
-+sub build_enums {
-+    my ($name, @tokens) = @_;
-+
-+    my $level = 1;
-+    my $kind = '';
-+    my $named = '';
-+    my (@fields, @members, $id);
-+
-+    foreach (@tokens) {
-+        if (m/^(struct|union)$/) {
-+            unless ($level != 2) {
-+                @fields = ('');
-+            }
-+            $kind="$_;$kind";
-+        } elsif ($_ eq '{') {
-+            $level++;
-+        } elsif ($_ eq '}') {
-+            $level--;
-+            if ($level == 1) {
-+                my $subkind = $kind;
-+                $subkind =~ s/;.*//;
-+                if ($subkind eq 'union') {
-+                    print "\nenum XLAT_$name {\n";
-+                    foreach (@members) {
-+                        print "    XLAT_${name}_$_,\n";
-+                    }
-+                    print "};\n";
-+                }
-+                return;
-+            } elsif ($level == 2) {
-+                $named = '?';
-+            }
-+        } elsif (/^[a-zA-Z_].*$/) {
-+            $id = $_;
-+            my $k = $kind;
-+            $k =~ s/.*?;//;
-+            if ($named ne '' and $k ne '') {
-+                shift @fields if @fields > 0 and $fields[0] eq '';
-+                build_enums("${name}_$_", @fields);
-+                $named = '!';
-+            }
-+        } elsif ($_ eq ',') {
-+            unless ($level != 2) {
-+                push (@members, $id);
-+            }
-+        } elsif ($_ eq ';') {
-+            unless ($level != 2) {
-+                push (@members, $id);
-+            }
-+            unless ($named eq '') {
-+                $kind =~ s/.*?;//;
-+            }
-+            $named = '';
-+        }
-+        unless (@fields == 0) {
-+            push (@fields, $_);
-+        }
-+    }
-+}
-+
-+sub handle_field {
-+    my ($prefix, $name, $id, $type, @fields) = @_;
-+
-+    if (@fields == 0) {
-+        print " \\\n";
-+        if ($type eq '') {
-+            print "$prefix\(_d_)->$id = (_s_)->$id;"
-+        } else {
-+            my $k = $id;
-+            $k =~ s/\./_/g;
-+            print "${prefix}XLAT_${name}_HNDL_${k}(_d_, _s_);";
-+        }
-+    } elsif ("@fields" !~ m/[{}]/) {
-+        my $tag = "@fields";
-+        $tag =~ s/\s*(struct|union)\s+(compat_)?(\w+)\s.*/$3/;
-+        print " \\\n";
-+        print "${prefix}XLAT_$tag(&(_d_)->$id, &(_s_)->$id);"
-+    } else {
-+        my $func_id = $id;
-+        my @func_tokens = @fields;
-+        my $kind = '';
-+        my $array = "";
-+        my $level = 1;
-+        my $arrlvl = 1;
-+        my $array_type = '';
-+        my $id = '';
-+        my $type = '';
-+        @fields = ();
-+        foreach (@func_tokens) {
-+            if (/^(struct|union)$/) {
-+                unless ($level != 2) {
-+                    @fields = ('');
-+                }
-+                if ($level == 1) {
-+                    $kind = $_;
-+                    if ($kind eq 'union') {
-+                        my $tmp = $func_id;
-+                        $tmp =~ s/\./_/g;
-+                        print " \\\n";
-+                        print  "${prefix}switch ($tmp) {"
-+                    }
-+                }
-+            } elsif ($_ eq '{') {
-+                $level++;
-+                $id = '';
-+            } elsif ($_ eq '}') {
-+                $level--;
-+                $id = '';
-+                if ($level == 1 and $kind eq 'union') {
-+                    print " \\\n";
-+                    print "$prefix}"
-+                }
-+            } elsif ($_ eq '[') {
-+                if ($level != 2 or $arrlvl != 1) {
-+                    # skip
-+                } elsif ($array eq '') {
-+                    $array = ' ';
-+                } else {
-+                    $array = "$array;";
-+                }
-+                $arrlvl++;
-+            } elsif ($_ eq ']') {
-+                $arrlvl--;
-+            } elsif (m/^COMPAT_HANDLE\((.*)\)$/) {
-+                if ($level == 2 and $id eq '') {
-+                    $type = $1;
-+                    $type =~ s/^compat_//;
-+                }
-+            } elsif ($_ eq "compat_domain_handle_t") {
-+                if ($level == 2 and $id eq '') {
-+                    $array_type = $_;
-+                }
-+            } elsif (m/^[a-zA-Z_].*$/) {
-+                if ($id eq '' and $type eq '' and $array_type eq '') {
-+                    foreach $id (@typedefs) {
-+                        unless ($id ne $_) {
-+                            $type = $id;
-+                        }
-+                    }
-+                    if ($type eq '') {
-+                        $id = $_;
-+                    } else {
-+                        $id = '';
-+                    }
-+                } else {
-+                    $id = $_;
-+                }
-+            } elsif (m/^[,;]$/) {
-+                if ($level == 2 and $id !~ /^_pad\d*$/) {
-+                    if ($kind eq 'union') {
-+                        my $tmp = "$func_id.$id";
-+                        $tmp =~ s/\./_/g;
-+                        print " \\\n";
-+                        print  "${prefix}case XLAT_${name}_$tmp:";
-+                        shift @fields if @fields > 0 and $fields[0] eq '';
-+                        handle_field("$prefix    ", $name,  "$func_id.$id", $type, @fields);
-+                    } elsif ($array eq '' and $array_type eq '') {
-+                        shift @fields if @fields > 0 and $fields[0] eq '';
-+                        handle_field($prefix, $name, "$func_id.$id", $type, @fields);
-+                    } elsif ($array eq '') {
-+                        copy_array("    ", "$func_id.$id");
-+                    } else {
-+                        $array =~ s/^.*?;//;
-+                        shift @fields if @fields > 0 and $fields[0] eq '';
-+                        handle_array($prefix, $name, "$func_id.$id", $array, $type, @fields);
-+                    }
-+                    unless ($_ ne ';') {
-+                        @fields = ();
-+                        $id = '';
-+                        $type = '';
-+                    }
-+                    $array = '';
-+                    if ($kind eq 'union') {
-+                        print " \\\n";
-+                        print "$prefix    break;";
-+                    }
-+                }
-+            } else {
-+                if ($array ne '') {
-+                    $array = "$array $_";
-+                }
-+            }
-+            unless (@fields == 0) {
-+                push (@fields, $_);
-+            }
-+        }
-+    }
-+}
-+
-+sub copy_array {
-+    my ($prefix, $id) = @_;
-+
-+    print " \\\n";
-+    print  "${prefix}if ((_d_)->$id != (_s_)->$id) \\\n";
-+    print  "$prefix    memcpy((_d_)->$id, (_s_)->$id, sizeof((_d_)->$id));";
-+}
-+
-+sub handle_array {
-+    my ($prefix, $name, $id, $array, $type, @fields) = @_;
-+
-+    my $i = $array;
-+    $i =~ s/[^;]//g;
-+    $i = length($i);
-+    $i = "i$i";
-+
-+    print " \\\n";
-+    print "$prefix\{ \\\n";
-+    print "$prefix    unsigned int $i; \\\n";
-+    my $tmp = $array;
-+    $tmp =~ s/;.*$//;
-+    $tmp =~ s/^\s*(.*)\s*$/$1/;
-+    print "$prefix    for ($i = 0; $i < $tmp; ++$i) {";
-+    if ($array !~ m/^.*?;/) {
-+        handle_field("$prefix        ", $name, "$id\[$i]", $type, @fields);
-+    } else {
-+        handle_array("$prefix        " ,$name, "$id\[$i]", $', $type, @fields);
-+    }
-+    print " \\\n";
-+    print "$prefix    } \\\n";
-+    print "$prefix\}";
-+}
-+
-+sub build_body {
-+    my ($name, @tokens) = @_;
-+    my $level = 1;
-+    my $id = '';
-+    my $array = '';
-+    my $arrlvl = 1;
-+    my $array_type = '';
-+    my $type = '';
-+    my @fields;
-+
-+    printf "\n#define XLAT_$name(_d_, _s_) do {";
-+
-+    foreach (@tokens) {
-+        if (/^(struct|union)$/) {
-+            unless ($level != 2) {
-+                @fields = ('');
-+            }
-+        } elsif ($_ eq '{') {
-+            $level++;
-+            $id = '';
-+        } elsif ($_ eq '}') {
-+            $level--;
-+            $id = '';
-+        } elsif ($_ eq '[') {
-+            if ($level != 2 or $arrlvl != 1) {
-+                # skip
-+            } elsif ($array eq '') {
-+                $array = ' ';
-+            } else {
-+                $array = "$array;";
-+            }
-+            $arrlvl++;
-+        } elsif ($_ eq ']') {
-+            $arrlvl--;
-+        } elsif (m/^COMPAT_HANDLE\((.*)\)$/) {
-+            if ($level == 2 and $id eq '') {
-+                $type = $1;
-+                $type =~ s/^compat_//;
-+            }
-+        } elsif ($_ eq "compat_domain_handle_t") {
-+            if ($level == 2 and $id eq '') {
-+                $array_type = $_;
-+            }
-+        } elsif (m/^[a-zA-Z_].*$/) {
-+            if ($array ne '') {
-+                $array = "$array $_";
-+            } elsif ($id eq '' and $type eq '' and $array_type eq '') {
-+                foreach $id (@typedefs) {
-+                    unless ($id eq $_) {
-+                        $type = $id;
-+                    }
-+                }
-+                if ($type eq '') {
-+                    $id = $_;
-+                } else {
-+                    $id = '';
-+                }
-+            } else {
-+                $id = $_;
-+            }
-+        } elsif (m/^[,;]$/) {
-+            if ($level == 2 and $id !~ /^_pad\d*$/) {
-+                if ($array eq '' and $array_type eq '') {
-+                    shift @fields if @fields > 0 and $fields[0] eq '';
-+                    handle_field("    ", $name, $id, $type, @fields);
-+                } elsif ($array eq '') {
-+                    copy_array("    ", $id);
-+                } else {
-+                    my $tmp = $array;
-+                    $tmp =~ s/^.*?;//;
-+                    shift @fields if @fields > 0 and $fields[0] eq '';
-+                    handle_array("    ", $name, $id, $tmp, $type, @fields);
-+                }
-+                unless ($_ ne ';') {
-+                    @fields = ();
-+                    $id = '';
-+                    $type = '';
-+                }
-+                $array = '';
-+            }
-+        } else {
-+            if ($array ne '') {
-+                $array = "$array $_";
-+            }
-+        }
-+        unless (@fields == 0) {
-+            push (@fields, $_);
-+        }
-+    }
-+    print " \\\n} while (0)\n";
-+}
-+
-+sub check_field {
-+    my ($kind, $name, $field, @extrafields) = @_;
-+
-+    if ("@extrafields" !~ m/[{}]/) {
-+        print "; \\\n";
-+        if (@extrafields != 0) {
-+            foreach (@extrafields) {
-+                if (m/^(struct|union)$/) {
-+                    # skip
-+                } elsif (m/^[a-zA-Z_].*/) {
-+                    s/^xen_//;
-+                    print "    CHECK_$_";
-+                    last;
-+                } else {
-+                    die "Malformed compound declaration: '$_'";
-+                }
-+            }
-+        } elsif ($field !~ m/\./) {
-+            print "    CHECK_FIELD_($kind, $name, $field)";
-+        } else {
-+            my $n = $field =~ s/\./, /g;
-+            print  "    CHECK_SUBFIELD_${n}_($kind, $name, $field)";
-+        }
-+    } else {
-+        my $level = 1;
-+        my @fields = ();
-+        my $id = '';
-+
-+        foreach (@extrafields) {
-+            if (m/^(struct|union)$/) {
-+                unless ($level != 2) {
-+                    @fields = ('');
-+                }
-+            } elsif ($_ eq '{') {
-+                $level++;
-+                $id = '';
-+            } elsif ($_ eq '}') {
-+                $level--;
-+                $id = '';
-+            } elsif (/^compat_.*_t$/) {
-+                if ($level == 2) {
-+                    @fields = ('');
-+                    s/_t$//;
-+                    s/^compat_//;
-+                }
-+            } elsif (/^evtchn_.*_compat_t$/) {
-+                if ($level == 2 and $_ ne "evtchn_port_compat_t") {
-+                    @fields = ('');
-+                    s/_compat_t$//;
-+                }
-+            } elsif (/^[a-zA-Z_].*$/) {
-+                $id = $_;
-+            } elsif (/^[,;]$/) {
-+                if ($level == 2 and $id !~ /^_pad\d*$/) {
-+                    shift @fields if @fields > 0 and $fields[0] eq '';
-+                    check_field($kind, $name, "$field.$id", @fields);
-+                    unless ($_ ne ";") {
-+                        @fields = ();
-+                        $id = '';
-+                    }
-+                }
-+            }
-+            unless (@fields == 0) {
-+                push (@fields, $_);
-+            }
-+        }
-+    }
-+}
-+
-+sub build_check {
-+    my ($name, @tokens) = @_;
-+    my $level = 1;
-+    my (@fields, $kind, $id);
-+    my $arrlvl = 1;
-+
-+    print "\n";
-+    print "#define CHECK_$name \\\n";
-+
-+    foreach (@tokens) {
-+        if (/^(struct|union)$/) {
-+            if ($level == 1) {
-+                $kind = $_;
-+                print "    CHECK_SIZE_($kind, $name)";
-+            } elsif ($level == 2) {
-+                @fields = ('');
-+            }
-+        } elsif ($_ eq '{') {
-+            $level++;
-+            $id = '';
-+        } elsif ($_ eq '}') {
-+            $level--;
-+            $id = '';
-+        } elsif ($_ eq '[') {
-+            $arrlvl++;
-+        } elsif ($_ eq ']') {
-+            $arrlvl--;
-+        } elsif (/^compat_.*_t$/) {
-+            if ($level == 2 and $_ ne "compat_argo_port_t") {
-+                @fields = ('');
-+                s/_t$//;
-+                s/^compat_//;
-+            }
-+        } elsif (/^[a-zA-Z_].*$/) {
-+            unless ($level != 2 or $arrlvl != 1) {
-+                $id = $_;
-+            }
-+        } elsif (/^[,;]$/) {
-+            if ($level == 2 and $id !~ /^_pad\d*$/) {
-+                shift @fields if @fields > 0 and $fields[0] eq '';
-+                check_field($kind, $name, $id, @fields);
-+                unless ($_ ne ";") {
-+                    @fields = ();
-+                    $id = '';
-+                }
-+            }
-+        }
-+
-+        unless (@fields == 0) {
-+            push (@fields, $_);
-+        }
-+    }
-+    print "\n";
-+}
-+
-+@typedefs = get_typedefs(@header_tokens);
-+
-+while (<COMPAT_LIST>) {
-+    my ($what, $name) = split(/\s+/, $_);
-+    $name =~ s/^xen//;
-+
-+    my @fields = get_fields("compat_$name");
-+    if (@fields == 0) {
-+	die "Fields of 'compat_$name' not found in '$ARGV[1]'";
-+    }
-+
-+    if ($what eq "!") {
-+        build_enums($name, @fields);
-+        build_body($name, @fields);
-+    } elsif ($what eq "?") {
-+        build_check($name, @fields);
-+    } else {
-+        die "Invalid translation indicator: '$what'";
-+    }
-+}
-diff --git a/xen/tools/get-fields.sh b/xen/tools/get-fields.sh
-deleted file mode 100644
-index 002db2093f..0000000000
---- a/xen/tools/get-fields.sh
-+++ /dev/null
-@@ -1,528 +0,0 @@
--test -n "$1" -a -n "$2" -a -n "$3"
--set -ef
--
--SED=sed
--if test -x /usr/xpg4/bin/sed; then
--	SED=/usr/xpg4/bin/sed
--fi
--if test -z ${PYTHON}; then
--	PYTHON=`/usr/bin/env python`
--fi
--if test -z ${PYTHON}; then
--	echo "Python not found"
--	exit 1
--fi
--
--get_fields ()
--{
--	local level=1 aggr=0 name= fields=
--	for token in $2
--	do
--		case "$token" in
--		struct|union)
--			test $level != 1 || aggr=1 fields= name=
--			;;
--		"{")
--			level=$(expr $level + 1)
--			;;
--		"}")
--			level=$(expr $level - 1)
--			if [ $level = 1 -a $name = $1 ]
--			then
--				echo "$fields }"
--				return 0
--			fi
--			;;
--		[a-zA-Z_]*)
--			test $aggr = 0 -o -n "$name" || name="$token"
--			;;
--		esac
--		test $aggr = 0 || fields="$fields $token"
--	done
--}
--
--get_typedefs ()
--{
--	local level=1 state=
--	for token in $1
--	do
--		case "$token" in
--		typedef)
--			test $level != 1 || state=1
--			;;
--		COMPAT_HANDLE\(*\))
--			test $level != 1 -o "$state" != 1 || state=2
--			;;
--		[\{\[])
--			level=$(expr $level + 1)
--			;;
--		[\}\]])
--			level=$(expr $level - 1)
--			;;
--		";")
--			test $level != 1 || state=
--			;;
--		[a-zA-Z_]*)
--			test $level != 1 -o "$state" != 2 || echo "$token"
--			;;
--		esac
--	done
--}
--
--build_enums ()
--{
--	local level=1 kind= fields= members= named= id= token
--	for token in $2
--	do
--		case "$token" in
--		struct|union)
--			test $level != 2 || fields=" "
--			kind="$token;$kind"
--			;;
--		"{")
--			level=$(expr $level + 1)
--			;;
--		"}")
--			level=$(expr $level - 1)
--			if [ $level = 1 ]
--			then
--				if [ "${kind%%;*}" = union ]
--				then
--					echo
--					echo "enum XLAT_$1 {"
--					for m in $members
--					do
--						echo "    XLAT_${1}_$m,"
--					done
--					echo "};"
--				fi
--				return 0
--			elif [ $level = 2 ]
--			then
--				named='?'
--			fi
--			;;
--		[a-zA-Z]*)
--			id=$token
--			if [ -n "$named" -a -n "${kind#*;}" ]
--			then
--				build_enums ${1}_$token "$fields"
--				named='!'
--			fi
--			;;
--		",")
--			test $level != 2 || members="$members $id"
--			;;
--		";")
--			test $level != 2 || members="$members $id"
--			test -z "$named" || kind=${kind#*;}
--			named=
--			;;
--		esac
--		test -z "$fields" || fields="$fields $token"
--	done
--}
--
--handle_field ()
--{
--	if [ -z "$5" ]
--	then
--		echo " \\"
--		if [ -z "$4" ]
--		then
--			printf %s "$1(_d_)->$3 = (_s_)->$3;"
--		else
--			printf %s "$1XLAT_${2}_HNDL_$(echo $3 | $SED 's,\.,_,g')(_d_, _s_);"
--		fi
--	elif [ -z "$(echo "$5" | $SED 's,[^{}],,g')" ]
--	then
--		local tag=$(echo "$5" | ${PYTHON} -c '
--import re,sys
--for line in sys.stdin.readlines():
--    sys.stdout.write(re.subn(r"\s*(struct|union)\s+(compat_)?(\w+)\s.*", r"\3", line)[0].rstrip() + "\n")
--')
--		echo " \\"
--		printf %s "${1}XLAT_$tag(&(_d_)->$3, &(_s_)->$3);"
--	else
--		local level=1 kind= fields= id= array= arrlvl=1 array_type= type= token
--		for token in $5
--		do
--			case "$token" in
--			struct|union)
--				test $level != 2 || fields=" "
--				if [ $level = 1 ]
--				then
--					kind=$token
--					if [ $kind = union ]
--					then
--						echo " \\"
--						printf %s "${1}switch ($(echo $3 | $SED 's,\.,_,g')) {"
--					fi
--				fi
--				;;
--			"{")
--				level=$(expr $level + 1) id=
--				;;
--			"}")
--				level=$(expr $level - 1) id=
--				if [ $level = 1 -a $kind = union ]
--				then
--					echo " \\"
--					printf %s "$1}"
--				fi
--				;;
--			"[")
--				if [ $level != 2 -o $arrlvl != 1 ]
--				then
--					:
--				elif [ -z "$array" ]
--				then
--					array=" "
--				else
--					array="$array;"
--				fi
--				arrlvl=$(expr $arrlvl + 1)
--				;;
--			"]")
--				arrlvl=$(expr $arrlvl - 1)
--				;;
--			COMPAT_HANDLE\(*\))
--				if [ $level = 2 -a -z "$id" ]
--				then
--					type=${token#COMPAT_HANDLE?}
--					type=${type%?}
--					type=${type#compat_}
--				fi
--				;;
--			compat_domain_handle_t)
--				if [ $level = 2 -a -z "$id" ]
--				then
--					array_type=$token
--				fi
--				;;
--			[a-zA-Z]*)
--				if [ -z "$id" -a -z "$type" -a -z "$array_type" ]
--				then
--					for id in $typedefs
--					do
--						test $id != "$token" || type=$id
--					done
--					if [ -z "$type" ]
--					then
--						id=$token
--					else
--						id=
--					fi
--				else
--					id=$token
--				fi
--				;;
--			[\,\;])
--				if [ $level = 2 -a -n "$(echo $id | $SED 's,^_pad[[:digit:]]*,,')" ]
--				then
--					if [ $kind = union ]
--					then
--						echo " \\"
--						printf %s "${1}case XLAT_${2}_$(echo $3.$id | $SED 's,\.,_,g'):"
--						handle_field "$1    " $2 $3.$id "$type" "$fields"
--					elif [ -z "$array" -a -z "$array_type" ]
--					then
--						handle_field "$1" $2 $3.$id "$type" "$fields"
--					elif [ -z "$array" ]
--					then
--						copy_array "    " $3.$id
--					else
--						handle_array "$1" $2 $3.$id "${array#*;}" "$type" "$fields"
--					fi
--					test "$token" != ";" || fields= id= type=
--					array=
--					if [ $kind = union ]
--					then
--						echo " \\"
--						printf %s "$1    break;"
--					fi
--				fi
--				;;
--			*)
--				if [ -n "$array" ]
--				then
--					array="$array $token"
--				fi
--				;;
--			esac
--			test -z "$fields" || fields="$fields $token"
--		done
--	fi
--}
--
--copy_array ()
--{
--	echo " \\"
--	echo "${1}if ((_d_)->$2 != (_s_)->$2) \\"
--	printf %s "$1    memcpy((_d_)->$2, (_s_)->$2, sizeof((_d_)->$2));"
--}
--
--handle_array ()
--{
--	local i="i$(echo $4 | $SED 's,[^;], ,g' | wc -w | $SED 's,[[:space:]]*,,g')"
--	echo " \\"
--	echo "$1{ \\"
--	echo "$1    unsigned int $i; \\"
--	printf %s "$1    for ($i = 0; $i < "${4%%;*}"; ++$i) {"
--	if [ "$4" = "${4#*;}" ]
--	then
--		handle_field "$1        " $2 $3[$i] "$5" "$6"
--	else
--		handle_array "$1        " $2 $3[$i] "${4#*;}" "$5" "$6"
--	fi
--	echo " \\"
--	echo "$1    } \\"
--	printf %s "$1}"
--}
--
--build_body ()
--{
--	echo
--	printf %s "#define XLAT_$1(_d_, _s_) do {"
--	local level=1 fields= id= array= arrlvl=1 array_type= type= token
--	for token in $2
--	do
--		case "$token" in
--		struct|union)
--			test $level != 2 || fields=" "
--			;;
--		"{")
--			level=$(expr $level + 1) id=
--			;;
--		"}")
--			level=$(expr $level - 1) id=
--			;;
--		"[")
--			if [ $level != 2 -o $arrlvl != 1 ]
--			then
--				:
--			elif [ -z "$array" ]
--			then
--				array=" "
--			else
--				array="$array;"
--			fi
--			arrlvl=$(expr $arrlvl + 1)
--			;;
--		"]")
--			arrlvl=$(expr $arrlvl - 1)
--			;;
--		COMPAT_HANDLE\(*\))
--			if [ $level = 2 -a -z "$id" ]
--			then
--				type=${token#COMPAT_HANDLE?}
--				type=${type%?}
--				type=${type#compat_}
--			fi
--			;;
--		compat_domain_handle_t)
--			if [ $level = 2 -a -z "$id" ]
--			then
--				array_type=$token
--			fi
--			;;
--		[a-zA-Z_]*)
--			if [ -n "$array" ]
--			then
--				array="$array $token"
--			elif [ -z "$id" -a -z "$type" -a -z "$array_type" ]
--			then
--				for id in $typedefs
--				do
--					test $id != "$token" || type=$id
--				done
--				if [ -z "$type" ]
--				then
--					id=$token
--				else
--					id=
--				fi
--			else
--				id=$token
--			fi
--			;;
--		[\,\;])
--			if [ $level = 2 -a -n "$(echo $id | $SED 's,^_pad[[:digit:]]*,,')" ]
--			then
--				if [ -z "$array" -a -z "$array_type" ]
--				then
--					handle_field "    " $1 $id "$type" "$fields"
--				elif [ -z "$array" ]
--				then
--					copy_array "    " $id
--				else
--					handle_array "    " $1 $id "${array#*;}" "$type" "$fields"
--				fi
--				test "$token" != ";" || fields= id= type=
--				array=
--			fi
--			;;
--		*)
--			if [ -n "$array" ]
--			then
--				array="$array $token"
--			fi
--			;;
--		esac
--		test -z "$fields" || fields="$fields $token"
--	done
--	echo " \\"
--	echo "} while (0)"
--}
--
--check_field ()
--{
--	if [ -z "$(echo "$4" | $SED 's,[^{}],,g')" ]
--	then
--		echo "; \\"
--		local n=$(echo $3 | $SED 's,[^.], ,g' | wc -w | $SED 's,[[:space:]]*,,g')
--		if [ -n "$4" ]
--		then
--			for n in $4
--			do
--				case $n in
--				struct|union)
--					;;
--				[a-zA-Z_]*)
--					printf %s "    CHECK_${n#xen_}"
--					break
--					;;
--				*)
--					echo "Malformed compound declaration: '$n'" >&2
--					exit 1
--					;;
--				esac
--			done
--		elif [ $n = 0 ]
--		then
--			printf %s "    CHECK_FIELD_($1, $2, $3)"
--		else
--			printf %s "    CHECK_SUBFIELD_${n}_($1, $2, $(echo $3 | $SED 's!\.!, !g'))"
--		fi
--	else
--		local level=1 fields= id= token
--		for token in $4
--		do
--			case "$token" in
--			struct|union)
--				test $level != 2 || fields=" "
--				;;
--			"{")
--				level=$(expr $level + 1) id=
--				;;
--			"}")
--				level=$(expr $level - 1) id=
--				;;
--			compat_*_t)
--				if [ $level = 2 ]
--				then
--					fields=" "
--					token="${token%_t}"
--					token="${token#compat_}"
--				fi
--				;;
--			evtchn_*_compat_t)
--				if [ $level = 2 -a $token != evtchn_port_compat_t ]
--				then
--					fields=" "
--					token="${token%_compat_t}"
--				fi
--				;;
--			[a-zA-Z]*)
--				id=$token
--				;;
--			[\,\;])
--				if [ $level = 2 -a -n "$(echo $id | $SED 's,^_pad[[:digit:]]*,,')" ]
--				then
--					check_field $1 $2 $3.$id "$fields"
--					test "$token" != ";" || fields= id=
--				fi
--				;;
--			esac
--			test -z "$fields" || fields="$fields $token"
--		done
--	fi
--}
--
--build_check ()
--{
--	echo
--	echo "#define CHECK_$1 \\"
--	local level=1 fields= kind= id= arrlvl=1 token
--	for token in $2
--	do
--		case "$token" in
--		struct|union)
--			if [ $level = 1 ]
--			then
--				kind=$token
--				printf %s "    CHECK_SIZE_($kind, $1)"
--			elif [ $level = 2 ]
--			then
--				fields=" "
--			fi
--			;;
--		"{")
--			level=$(expr $level + 1) id=
--			;;
--		"}")
--			level=$(expr $level - 1) id=
--			;;
--		"[")
--			arrlvl=$(expr $arrlvl + 1)
--			;;
--		"]")
--			arrlvl=$(expr $arrlvl - 1)
--			;;
--		compat_*_t)
--			if [ $level = 2 -a $token != compat_argo_port_t ]
--			then
--				fields=" "
--				token="${token%_t}"
--				token="${token#compat_}"
--			fi
--			;;
--		[a-zA-Z_]*)
--			test $level != 2 -o $arrlvl != 1 || id=$token
--			;;
--		[\,\;])
--			if [ $level = 2 -a -n "$(echo $id | $SED 's,^_pad[[:digit:]]*,,')" ]
--			then
--				check_field $kind $1 $id "$fields"
--				test "$token" != ";" || fields= id=
--			fi
--			;;
--		esac
--		test -z "$fields" || fields="$fields $token"
--	done
--	echo ""
--}
--
--list="$($SED -e 's,^[[:space:]]#.*,,' -e 's!\([]\[,;:{}]\)! \1 !g' $3)"
--fields="$(get_fields $(echo $2 | $SED 's,^compat_xen,compat_,') "$list")"
--if [ -z "$fields" ]
--then
--	echo "Fields of '$2' not found in '$3'" >&2
--	exit 1
--fi
--name=${2#compat_}
--name=${name#xen}
--case "$1" in
--"!")
--	typedefs="$(get_typedefs "$list")"
--	build_enums $name "$fields"
--	build_body $name "$fields"
--	;;
--"?")
--	build_check $name "$fields"
--	;;
--*)
--	echo "Invalid translation indicator: '$1'" >&2
--	exit 1
--	;;
--esac
--- 
-Anthony PERARD
-
+T24gMDEvMDYvMjAyMiAxNzo1OSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6DQo+IFBhdGNoIHNlcmll
+cyBhdmFpbGFibGUgaW4gdGhpcyBnaXQgYnJhbmNoOg0KPiBodHRwczovL3hlbmJpdHMueGVuLm9y
+Zy9naXQtaHR0cC9wZW9wbGUvYXBlcmFyZC94ZW4tdW5zdGFibGUuZ2l0IGJyLmJ1aWxkLXN5c3Rl
+bS14ZW4taW5jbHVkZS1yZXdvcmstdjENCj4NCj4gSGksDQo+DQo+IFRoaXMgcGF0Y2ggc2VyaWVz
+IGlzIGFib3V0IDIgaW1wcm92ZW1lbnQuIEZpcnN0IG9uZSBpcyB0byB1c2UgJChpZl9jaGFuZ2Vk
+LCApDQo+IGluICJpbmNsdWRlL01ha2VmaWxlIiB0byBtYWtlIHRoZSBnZW5lcmF0aW9uIG9mIHRo
+ZSBjb21wYXQgaGVhZGVycyBsZXNzIHZlcmJvc2UNCj4gYW5kIHRvIGhhdmUgdGhlIGNvbW1hbmQg
+bGluZSBwYXJ0IG9mIHRoZSBkZWNpc2lvbiB0byByZWJ1aWxkIHRoZSBoZWFkZXJzLg0KPiBTZWNv
+bmQgb25lIGlzIHRvIHJlcGxhY2Ugb25lIHNsb3cgc2NyaXB0IGJ5IGEgbXVjaCBmYXN0ZXIgb25l
+LCBhbmQgc2F2ZSB0aW1lDQo+IHdoZW4gZ2VuZXJhdGluZyB0aGUgaGVhZGVycy4NCj4NCj4gVGhh
+bmtzLg0KPg0KPiBBbnRob255IFBFUkFSRCAoNCk6DQo+ICAgYnVpbGQ6IHhlbi9pbmNsdWRlOiB1
+c2UgaWZfY2hhbmdlZA0KPiAgIGJ1aWxkOiBzZXQgUEVSTA0KPiAgIGJ1aWxkOiByZXBsYWNlIGdl
+dC1maWVsZHMuc2ggYnkgYSBwZXJsIHNjcmlwdA0KPiAgIGJ1aWxkOiByZW1vdmUgYXV0by5jb25m
+IHByZXJlcXVpc2l0ZSBmcm9tIGNvbXBhdC94bGF0LmggdGFyZ2V0DQo+DQo+ICB4ZW4vTWFrZWZp
+bGUgICAgICAgICAgICAgICAgIHwgICAxICsNCj4gIHhlbi9pbmNsdWRlL01ha2VmaWxlICAgICAg
+ICAgfCAxMDYgKysrKy0tLQ0KPiAgeGVuL3Rvb2xzL2NvbXBhdC14bGF0LWhlYWRlciB8IDUzOSAr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPiAgeGVuL3Rvb2xzL2dldC1maWVs
+ZHMuc2ggICAgICB8IDUyOCAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCkV4
+Y2VsbGVudC7CoCBJIHdhcyBwbGFubmluZyB0byBhc2sgeW91IGFib3V0IHRoaXMuwqAgKEkgYWxz
+byBuZWVkIHRvDQpyZWZyZXNoaW5nIG15IGhhbGYgc2VyaWVzIGNsZWFuaW5nIHVwIG90aGVyIGJp
+dHMgb2YgdGhlIGJ1aWxkLikNCg0KT25lIHRyaXZpYWwgb2JzZXJ2YXRpb24gaXMgdGhhdCBpdCB3
+b3VsZCBwcm9iYWJseSBiZSBuaWNlciB0byBuYW1lIHRoZQ0Kc2NyaXB0IHdpdGggYSAucGwgZXh0
+ZW5zaW9uLg0KDQpBbnkgbnVtYmVycyBvbiB3aGF0IHRoZSBzcGVlZHVwIGluIHBhdGNoIDMgaXM/
+DQoNCkFyZSB0aGUgZ2VuZXJhdGVkIGNvbXBhdCBoZWFkZXJzIGlkZW50aWNhbCBiZWZvcmUgYW5k
+IGFmdGVyIHRoaXMNCnNlcmllcz/CoCBJZiB5ZXMsIEknbSB2ZXJ5IHRlbXB0ZWQgdG8gYWNrIGFu
+ZCBjb21taXQgaXQgc3RyYWlnaHQgYXdheS4NCg0KfkFuZHJldw0K
 
