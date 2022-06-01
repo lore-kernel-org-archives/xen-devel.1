@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB77C433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  1 Jun 2022 16:59:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.340583.565667 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B102C43334
+	for <xen-devel@archiver.kernel.org>; Wed,  1 Jun 2022 16:59:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.340584.565672 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwRgz-0000Yv-ME; Wed, 01 Jun 2022 16:59:33 +0000
+	id 1nwRh0-0000c4-0K; Wed, 01 Jun 2022 16:59:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 340583.565667; Wed, 01 Jun 2022 16:59:33 +0000
+Received: by outflank-mailman (output) from mailman id 340584.565672; Wed, 01 Jun 2022 16:59:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwRgz-0000Yo-JF; Wed, 01 Jun 2022 16:59:33 +0000
-Received: by outflank-mailman (input) for mailman id 340583;
+	id 1nwRgz-0000ah-RH; Wed, 01 Jun 2022 16:59:33 +0000
+Received: by outflank-mailman (input) for mailman id 340584;
  Wed, 01 Jun 2022 16:59:32 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=CPHY=WI=citrix.com=prvs=144c139f6=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1nwRgy-0008OC-J8
+ id 1nwRgy-0000Xw-Rb
  for xen-devel@lists.xenproject.org; Wed, 01 Jun 2022 16:59:32 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 3345643a-e1cc-11ec-bd2c-47488cf2e6aa;
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3355f586-e1cc-11ec-837f-e5687231ffcc;
  Wed, 01 Jun 2022 18:59:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -38,52 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3345643a-e1cc-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: 3355f586-e1cc-11ec-837f-e5687231ffcc
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1654102770;
+  d=citrix.com; s=securemail; t=1654102771;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=lTcMhdu7U3PbutCiovcP5+LL1tCro+vwpmFhh06+tHU=;
-  b=HDHkZMN6n30hVAZN2MKH+LXvMUEx0ozJUY54MirDnBYAKWcf5VAK5MzC
-   Lz/DzZr4ocTHPOpoLs1zK8CyGYLFHocWT+6Uwnj/W+DFhg0xsrphq8vrz
-   PVA6SgWsFp30PJj2wHF2LFlFz2nA0kO7agoBNxorV7ORhH0ZfsXw29zmh
-   w=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=XFVVIbvewXpq18wLagkSmqKQFGebkO+PaAyJtLO/9K8=;
+  b=VF+AqHuON8WHLriyTwRdVXR3ra0uqaQ0z3ibpz++GYpR2cB6LM4Gk1DB
+   zjpUn7xWn4u1O/qg8rRb5OS0SlST6OKjC8BZc7AfNnxlBckTHdh2EaQQo
+   W3r6FT1c+YcGR0hcfvTDyp44iz5CRYKE4ic3HxmXpQMJFhDeSNsBurloC
+   s=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 72647996
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 72494142
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:fC3eBqL6t0KeJT3uFE+RqZUlxSXFcZb7ZxGr2PjKsXjdYENS3jwEm
- mcaWW7SaPyDZWr8eIhxYIq2oE5SvZHSn9RjTAdlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
- q3yv/GZdJhcokf0/0vrav67xZVF/fngqoDUUYYoAQgsA149IMsdoUg7wbRh3NYx2YLR7z6l4
- rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
- s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
- OdKrbH3FyZyBbHzttQ9Sz0GNnxHYoQTrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
- 6ZecmpUKEne2aTmm9pXScE17ignBMDtIIMYvGAm1TzDBOwqaZvCX7/L9ZlT2zJYasVmQqyAO
- 5VIOGQHgBLoQxlEJ04dT6kCpMS0vFXZbQMDkXeHqv9ii4TU5FMoi+W8WDbPQfSRXtlclEuco
- mPA/kz6DwscOdjZziCKmlqzgsffkCW9X5gdfJW66/prjVu71mEVThoMWjOTsfS/z0KzRd9bA
- 0gV4TY167g/8lSxSdvwVAH+p2SL1jYeUddNF+wx6CmW17HZpQ2eAwA5oiVpMYJ88pVsHHpzi
- wHPz4iB6SFTXKO9e3WF2/DKjGiJJRc7HU8aQXEhEDJayoy2yG0stS4jXuqPAYbs0ICpQW2vn
- WvaxMQtr+5N1JBWjs1X6XiC2mvx/caRE2bZ8y2NBgqYAhVFiJlJjmBCwXzS9r5+IYmQVTFtV
- 1BUypHFvIji4Xxg/RFhodnh/5nzvp5pyBWG3TZS82AJrlxBAUKLc4FK+y1ZL0x0KMsCcjKBS
- BaN5F8JvsULYyX1NPYfj2eN5yMClPGIKDgYfqqMMoomjmZZL2drAx2ClWbPhjuwwSDAYIk0O
- IuBcNbEMEv2/Z9PlWLsL89EiOdD7nlnmQv7GMGgpzz6gOX2WZJgYepcWLd4RrthvP3sTcS82
- 4s3CvZmPD0FD7OuOXmMq9FNRb3IRFBiba3LRwVsXrbrCmJb9KsJUJc9HZtJl1RZoplo
-IronPort-HdrOrdr: A9a23:xdWcsqHGaflyk95hpLqE0MeALOsnbusQ8zAXP0AYc3Jom6uj5q
- aTdZUgpGfJYVkqOE3I9ertBEDEewK4yXcX2/h3AV7BZniEhILAFugLhuGO/9SjIVybygc079
- YYT0EUMrzN5DZB4voSmDPIceod/A==
-X-IronPort-AV: E=Sophos;i="5.91,268,1647316800"; 
-   d="scan'208";a="72647996"
+IronPort-Data: A9a23:OoSqwqinvuCJ3pRVzKHD4FDgX161GBAKZh0ujC45NGQN5FlHY01je
+ htvXTyCb/qMYDSgf4wgO4+3p0oC75DQnYRqT1dtq3o3QyMb9cadCdqndUqhZCn6wu8v7a5EA
+ 2fyTvGacajYm1eF/k/F3oDJ9CU6jefSLlbFILas1hpZHGeIcw98z0M68wIFqtQw24LhXVvU4
+ YiaT/D3YzdJ5RYlagr41IrbwP9flKyaVOQw5wFWiVhj5TcyplFNZH4tDfjZw0jQG+G4KtWSV
+ efbpIxVy0uCl/sb5nFJpZ6gGqECaua60QFjERO6UYD66vRJjnRaPqrWqJPwwKqY4tmEt4kZ9
+ TlDiXC/YT41MbzJwuMcb0RJCjw5J/JKwpvsGVHq5KR/z2WeG5ft6/BnDUVwNowE4OdnR2pJ8
+ JT0KhhUMErF3bjvhuvmFK883azPL+GyVG8bknhm0THeC+dgWZ3ZSr/GzdRZwC0xloZFGvO2i
+ 88xNmAzPUiZP0cn1lE/Uss/uP+miUvEbzBXk1KcpKkdyHeM01kkuFTqGIWMIYHbLSlPpW6Dv
+ X7P9Wn9BhAcNfScxCCD/3bqgfXA9QvkXKoCGbv+8eRl6HWR22gSBRs+RVa95/6jhSaWS99Zb
+ kAZ5Ccqhawz71CwCMnwWQWip3yJtQJaXMBfe8U44gyQzqvf4y6CG3MJCDVGbbQbWNQeHGJwk
+ AXTxpWwWGIp4Ob9pW+hGqm8lC+9KC1PKm4+OD4dUEwfvNXZhKoLp0eaJjp8K5JZnuEZCBmpn
+ W3W9HRh2e5D5SIY//7lpA6a2lpAsrCMF1dovVuPAwpJ+ysjPOaYi5qUBU83BBqqBKKQVRG/s
+ XcNgKByB8heXMjWxERhrAjgdYxFBspp0xWG2DaD57F7q1yQF4eLJOi8Gg1WKkZzKdojcjT0e
+ kLVsg45zMYNYSfyN/UvPNzuUp1CIU3c+TPND6m8UzazSsIpKF/vEN9GPiZ8IFwBYGBzyPpia
+ P93gO6nDGoACLQP8Qdas9w1iOdxrghnnDu7bcmik3yPjOvFDFbIGOhtDbd7Rr1ghE9yiF6No
+ 4g32grj40g3bdASlQGNrtBDdgBRdydlbX00wuQOHtO+zsNdMDlJI5fsLXkJIuSJQ4w9ej/0w
+ 0yA
+IronPort-HdrOrdr: A9a23:8BwDfamrKb54aO+kaqExKfY52i/pDfIq3DAbv31ZSRFFG/Fxl6
+ iV88jzsiWE7wr5OUtQ4OxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
+ YET0EXMqyXMbEQt6jHCWeDf+rIuOP3k5yVuQ==
+X-IronPort-AV: E=Sophos;i="5.91,269,1647316800"; 
+   d="scan'208";a="72494142"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
 	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
  Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
  Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH 4/4] build: remove auto.conf prerequisite from compat/xlat.h target
-Date: Wed, 1 Jun 2022 17:59:09 +0100
-Message-ID: <20220601165909.46588-5-anthony.perard@citrix.com>
+Subject: [XEN PATCH 2/4] build: set PERL
+Date: Wed, 1 Jun 2022 17:59:07 +0100
+Message-ID: <20220601165909.46588-3-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220601165909.46588-1-anthony.perard@citrix.com>
 References: <20220601165909.46588-1-anthony.perard@citrix.com>
@@ -91,29 +92,25 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Now that the command line generating "xlat.h" is check on rebuild, the
-header will be regenerated whenever the list of xlat headers changes
-due to change in ".config". We don't need to force a regeneration for
-every changes in ".config".
+We are going to use it in a moment.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- xen/include/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/Makefile | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index b7e7148665..937a8bc884 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -99,7 +99,7 @@ cmd_xlat_h = \
- 	cat $(filter %.h,$^) >$@.new; \
- 	mv -f $@.new $@
+diff --git a/xen/Makefile b/xen/Makefile
+index 82f5310b12..a6650a2acc 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -22,6 +22,7 @@ PYTHON_INTERPRETER	:= $(word 1,$(shell which python3 python python2 2>/dev/null)
+ export PYTHON		?= $(PYTHON_INTERPRETER)
  
--$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)/config/auto.conf FORCE
-+$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) FORCE
- 	$(call if_changed,xlat_h)
+ export CHECKPOLICY	?= checkpolicy
++export PERL		?= perl
  
- ifeq ($(XEN_TARGET_ARCH),$(XEN_COMPILE_ARCH))
+ $(if $(filter __%, $(MAKECMDGOALS)), \
+     $(error targets prefixed with '__' are only for internal use))
 -- 
 Anthony PERARD
 
