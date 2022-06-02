@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD80CCA480
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF5B5CCA47B
 	for <xen-devel@archiver.kernel.org>; Thu,  2 Jun 2022 19:24:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.341181.566379 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.341185.566417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwqQg-0000EI-BQ; Thu, 02 Jun 2022 19:24:22 +0000
+	id 1nwqQk-0001AC-RF; Thu, 02 Jun 2022 19:24:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 341181.566379; Thu, 02 Jun 2022 19:24:22 +0000
+Received: by outflank-mailman (output) from mailman id 341185.566417; Thu, 02 Jun 2022 19:24:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwqQg-0000EB-6i; Thu, 02 Jun 2022 19:24:22 +0000
-Received: by outflank-mailman (input) for mailman id 341181;
- Thu, 02 Jun 2022 19:24:20 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nwqQk-00019J-Hi; Thu, 02 Jun 2022 19:24:26 +0000
+Received: by outflank-mailman (input) for mailman id 341185;
+ Thu, 02 Jun 2022 19:24:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2EeJ=WJ=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1nwqQe-00089L-I9
- for xen-devel@lists.xenproject.org; Thu, 02 Jun 2022 19:24:20 +0000
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [2a00:1450:4864:20::62e])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 99505fe7-e2a9-11ec-837f-e5687231ffcc;
- Thu, 02 Jun 2022 21:24:19 +0200 (CEST)
-Received: by mail-ej1-x62e.google.com with SMTP id m20so11797117ejj.10
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jun 2022 12:24:19 -0700 (PDT)
+ id 1nwqQi-0000dK-Vq
+ for xen-devel@lists.xenproject.org; Thu, 02 Jun 2022 19:24:25 +0000
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [2a00:1450:4864:20::636])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9c3c75da-e2a9-11ec-bd2c-47488cf2e6aa;
+ Thu, 02 Jun 2022 21:24:24 +0200 (CEST)
+Received: by mail-ej1-x636.google.com with SMTP id s12so4610717ejx.3
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jun 2022 12:24:24 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- eg13-20020a056402288d00b0042dce73168csm2938301edb.13.2022.06.02.12.24.17
+ eg13-20020a056402288d00b0042dce73168csm2938301edb.13.2022.06.02.12.24.22
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 02 Jun 2022 12:24:18 -0700 (PDT)
+ Thu, 02 Jun 2022 12:24:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,477 +46,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99505fe7-e2a9-11ec-837f-e5687231ffcc
+X-Inumbo-ID: 9c3c75da-e2a9-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=atWo2NXjcz5EzUayOwhy3M2BlNEMIGiujbLV+faeIXM=;
-        b=mP3vwQLwa0THZTdq8qiG3tbQqJFf1Xa1X4oAlyLR5UqR/h4POoo6cfg3UIa0R2wHNN
-         dMbc9PL3Vw0pplOrQLrAJFVP2MRYdJ7pZQEZUfQyb2gubCPE5BhZOo3K4te6P553NKI4
-         KIr9nRFzx1ipkPa3FhZCOv6jHUpYB4nbk9avk0iHRjtZIfEiXIl/l5nKooK2Rqf3tmrL
-         XUHVs1LjD0B42IqgtkK/H4RW3sW8Cor3NF7n1RouI7Qn8mvA+EUGJLsHwIFeU4pVBr5s
-         1virlHJv37c1XR+AUStA+w1ATBX/mCO80WCseY0IzT91IBJUCR9Goi/De/HPzRJ/3ZFH
-         1RMA==
+        bh=iNk74UaWLtQZL938Xxs3lBfmlvnA9FseeUHkafxECOY=;
+        b=l5kSUmTyGQGXi74E515dldlWlFe3o08m4WJUZfONrAYROcSF48RNd1TEGdK3LNFW+s
+         tHjQHCQNYLmJh9wphr3xZq+NVXxnGx3cH+ocoirkpGeSZ869Kup4B5xOfIsyusPe34JW
+         fimV2t9ST7TGBac/fuJaEnuwygaZgZ26gqFiCY1muNWsRbEzGytMUMQZC+PpYHUU7H29
+         PVza1L+tH2IrywKG2WMwfvahBQ9yUpDBlpQqq+UjuysWSRqg/fQRnKtJgG0s+bfA05tE
+         a1K1tERwgCp1gamFt3ZSwmgs8FxhO+ttN+3bbIuzaXgPzMAYhqlnluJoFMc+67kQwS3r
+         9Ecg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=atWo2NXjcz5EzUayOwhy3M2BlNEMIGiujbLV+faeIXM=;
-        b=HstbzG1Z2VfvktAYSUuGDP/mhy8ahAIXpcRzxXxdvmcNnBXVxr39fvaYojgKxvvvMi
-         ndQ+xt/yH5dsdqrrPuhPTlPwvnfBsqfOLPuGQfsWp0lxkzAC3wWK5ztmmJZcxJCgPI3P
-         kuuYzdYy1+QUP8b5sh11AKKyu+bZe1vMNwKCgNEyrtB0AuWWU8tRr1B8NcIzgqDlMin+
-         ZKSIcYG+CnCWztvEDgD4tkgW22/itMFEm0QushNtKiZBtxLm4T3IOYbjzDYr01akjNIi
-         EeRHqFOPb0hpYM7DH5BmUUQ2WnHmN681GQN5dXdxDomORzX7HxpHpAZovvQ4aP9bT1u8
-         dPeA==
-X-Gm-Message-State: AOAM532RITUlcrAFhC6iMHg3IZ6dkew226GGCeb6NKJtOxGwa3i2Vtos
-	xwrQANsjBuvwwS136ul0oBX5qgLRkhY=
-X-Google-Smtp-Source: ABdhPJx/6ujytkYbLeLEkphxNTCLeRmoVTHOusFR7B4mHvxmoVacNzV7jZZx/LpplQtjtaYoF3cL+g==
-X-Received: by 2002:a17:907:3f8b:b0:6ff:4721:3cf3 with SMTP id hr11-20020a1709073f8b00b006ff47213cf3mr5545696ejc.48.1654197858501;
-        Thu, 02 Jun 2022 12:24:18 -0700 (PDT)
+        bh=iNk74UaWLtQZL938Xxs3lBfmlvnA9FseeUHkafxECOY=;
+        b=4tKQGjnt8cPOhMHY1OTfDlmJbKZEJtZqiMT8oiLwL6GXY/fc0uTfJeZ3ijPi0TH+xR
+         1UHWeF758izIqmBnh7xxyDY/ruBlrCOdYH7WNmu+LRXVO0ZTobAOVZZQdngrOIvSp375
+         wGZaK0wJS0WBQ0Joy1j4E+NHmcpkjTzphBQvJSaLI5HSOSaMoA0viKwIrVvLfIBWdTjm
+         DA1yCakrK0a2M6eD+EUIgBwjCHXOA5a2lN2NN+QZ8qpT6ya8nFTyBPO8t85epW9iWoNN
+         FSO/g2J79sWVAZ3lmCFnEchyYu59VJ3QrcvOgeX2UhA9/M4/7QbbUG3msvZ9JdCe+UdE
+         hVgw==
+X-Gm-Message-State: AOAM531t39dhlQY+kKFukx9HBByrPN5Raj19nHYMlLQx6FZ6LLZGjhTV
+	itoJKc68MaYUSoo0M/EPIuttlf2ngUA=
+X-Google-Smtp-Source: ABdhPJwzZQbzIbCIFf3Pkn1ya1TGT8EEvSTk8i6RqQF4X2KAXdSL8hILlCy1w1gJmVJ7oRgwQh7H8w==
+X-Received: by 2002:a17:906:d1cc:b0:709:567f:3506 with SMTP id bs12-20020a170906d1cc00b00709567f3506mr5538761ejb.363.1654197863445;
+        Thu, 02 Jun 2022 12:24:23 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org,
 	linux-kernel@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Juergen Gross <jgross@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	Christoph Hellwig <hch@infradead.org>
-Subject: [PATCH V4 2/8] xen/grants: support allocating consecutive grants
-Date: Thu,  2 Jun 2022 22:23:47 +0300
-Message-Id: <1654197833-25362-3-git-send-email-olekstysh@gmail.com>
+Subject: [PATCH V4 6/8] xen/grant-dma-iommu: Introduce stub IOMMU driver
+Date: Thu,  2 Jun 2022 22:23:51 +0300
+Message-Id: <1654197833-25362-7-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1654197833-25362-1-git-send-email-olekstysh@gmail.com>
 References: <1654197833-25362-1-git-send-email-olekstysh@gmail.com>
 
-From: Juergen Gross <jgross@suse.com>
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-For support of virtio via grant mappings in rare cases larger mappings
-using consecutive grants are needed. Support those by adding a bitmap
-of free grants.
+In order to reuse generic IOMMU device tree bindings by Xen grant
+DMA-mapping layer we need to add this stub driver from a fw_devlink
+perspective (grant-dma-ops cannot be converted into the proper
+IOMMU driver).
 
-As consecutive grants will be needed only in very rare cases (e.g. when
-configuring a virtio device with a multi-page ring), optimize for the
-normal case of non-consecutive allocations.
+Otherwise, just reusing IOMMU bindings (without having a corresponding
+driver) leads to the deferred probe timeout afterwards, because
+the IOMMU device never becomes available.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+This stub driver does nothing except registering empty iommu_ops,
+the upper layer "of_iommu" will treat this as NO_IOMMU condition
+and won't return -EPROBE_DEFER.
+
+As this driver is quite different from the most hardware IOMMU
+implementations and only needed in Xen guests, place it in drivers/xen
+directory. The subsequent commit will make use of it.
+
+Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-Changes RFC -> V1:
-   - no changes
+According to the discussion at:
+https://lore.kernel.org/xen-devel/c0f78aab-e723-fe00-a310-9fe52ec75e48@gmail.com/
 
-Changes V1 -> V2:
-   - no changes
-
-Changes V2 -> V3:
-   - rebase, move "if (unlikely(ref < GNTTAB_NR_RESERVED_ENTRIES))"
-     to put_free_entry_locked()
-   - do not overwrite "i" in gnttab_init(), introduce local max_nr_grefs
-   - add a comment on top of "while (from < to)" in get_free_seq()
-   - add Boris' R-b
+Change V2 -> V3:
+   - new patch
 
 Changes V3 -> V4:
-   - no changes
+   - add Stefano's R-b
 ---
- drivers/xen/grant-table.c | 251 +++++++++++++++++++++++++++++++++++++++-------
- include/xen/grant_table.h |   4 +
- 2 files changed, 219 insertions(+), 36 deletions(-)
+ drivers/xen/Kconfig           |  4 +++
+ drivers/xen/Makefile          |  1 +
+ drivers/xen/grant-dma-iommu.c | 78 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 83 insertions(+)
+ create mode 100644 drivers/xen/grant-dma-iommu.c
 
-diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
-index 7a18292..738029d 100644
---- a/drivers/xen/grant-table.c
-+++ b/drivers/xen/grant-table.c
-@@ -33,6 +33,7 @@
+diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
+index a7bd8ce..35d20d9 100644
+--- a/drivers/xen/Kconfig
++++ b/drivers/xen/Kconfig
+@@ -335,6 +335,10 @@ config XEN_UNPOPULATED_ALLOC
+ 	  having to balloon out RAM regions in order to obtain physical memory
+ 	  space to create such mappings.
  
- #define pr_fmt(fmt) "xen:" KBUILD_MODNAME ": " fmt
- 
-+#include <linux/bitmap.h>
- #include <linux/memblock.h>
- #include <linux/sched.h>
- #include <linux/mm.h>
-@@ -70,9 +71,32 @@
- 
- static grant_ref_t **gnttab_list;
- static unsigned int nr_grant_frames;
++config XEN_GRANT_DMA_IOMMU
++	bool
++	select IOMMU_API
 +
+ config XEN_GRANT_DMA_OPS
+ 	bool
+ 	select DMA_OPS
+diff --git a/drivers/xen/Makefile b/drivers/xen/Makefile
+index 1a23cb0..c0503f1 100644
+--- a/drivers/xen/Makefile
++++ b/drivers/xen/Makefile
+@@ -40,3 +40,4 @@ xen-privcmd-y				:= privcmd.o privcmd-buf.o
+ obj-$(CONFIG_XEN_FRONT_PGDIR_SHBUF)	+= xen-front-pgdir-shbuf.o
+ obj-$(CONFIG_XEN_UNPOPULATED_ALLOC)	+= unpopulated-alloc.o
+ obj-$(CONFIG_XEN_GRANT_DMA_OPS)		+= grant-dma-ops.o
++obj-$(CONFIG_XEN_GRANT_DMA_IOMMU)	+= grant-dma-iommu.o
+diff --git a/drivers/xen/grant-dma-iommu.c b/drivers/xen/grant-dma-iommu.c
+new file mode 100644
+index 00000000..16b8bc0
+--- /dev/null
++++ b/drivers/xen/grant-dma-iommu.c
+@@ -0,0 +1,78 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Handling of free grants:
++ * Stub IOMMU driver which does nothing.
++ * The main purpose of it being present is to reuse generic IOMMU device tree
++ * bindings by Xen grant DMA-mapping layer.
 + *
-+ * Free grants are in a simple list anchored in gnttab_free_head. They are
-+ * linked by grant ref, the last element contains GNTTAB_LIST_END. The number
-+ * of free entries is stored in gnttab_free_count.
-+ * Additionally there is a bitmap of free entries anchored in
-+ * gnttab_free_bitmap. This is being used for simplifying allocation of
-+ * multiple consecutive grants, which is needed e.g. for support of virtio.
-+ * gnttab_last_free is used to add free entries of new frames at the end of
-+ * the free list.
-+ * gnttab_free_tail_ptr specifies the variable which references the start
-+ * of consecutive free grants ending with gnttab_last_free. This pointer is
-+ * updated in a rather defensive way, in order to avoid performance hits in
-+ * hot paths.
-+ * All those variables are protected by gnttab_list_lock.
++ * Copyright (C) 2022 EPAM Systems Inc.
 + */
- static int gnttab_free_count;
--static grant_ref_t gnttab_free_head;
-+static unsigned int gnttab_size;
-+static grant_ref_t gnttab_free_head = GNTTAB_LIST_END;
-+static grant_ref_t gnttab_last_free = GNTTAB_LIST_END;
-+static grant_ref_t *gnttab_free_tail_ptr;
-+static unsigned long *gnttab_free_bitmap;
- static DEFINE_SPINLOCK(gnttab_list_lock);
 +
- struct grant_frames xen_auto_xlat_grant_frames;
- static unsigned int xen_gnttab_version;
- module_param_named(version, xen_gnttab_version, uint, 0);
-@@ -168,16 +192,116 @@ static int get_free_entries(unsigned count)
- 
- 	ref = head = gnttab_free_head;
- 	gnttab_free_count -= count;
--	while (count-- > 1)
--		head = gnttab_entry(head);
-+	while (count--) {
-+		bitmap_clear(gnttab_free_bitmap, head, 1);
-+		if (gnttab_free_tail_ptr == __gnttab_entry(head))
-+			gnttab_free_tail_ptr = &gnttab_free_head;
-+		if (count)
-+			head = gnttab_entry(head);
-+	}
- 	gnttab_free_head = gnttab_entry(head);
- 	gnttab_entry(head) = GNTTAB_LIST_END;
- 
-+	if (!gnttab_free_count) {
-+		gnttab_last_free = GNTTAB_LIST_END;
-+		gnttab_free_tail_ptr = NULL;
-+	}
++#include <linux/iommu.h>
++#include <linux/of.h>
++#include <linux/platform_device.h>
 +
- 	spin_unlock_irqrestore(&gnttab_list_lock, flags);
- 
- 	return ref;
- }
- 
-+static int get_seq_entry_count(void)
++struct grant_dma_iommu_device {
++	struct device *dev;
++	struct iommu_device iommu;
++};
++
++/* Nothing is really needed here */
++static const struct iommu_ops grant_dma_iommu_ops;
++
++static const struct of_device_id grant_dma_iommu_of_match[] = {
++	{ .compatible = "xen,grant-dma" },
++	{ },
++};
++
++static int grant_dma_iommu_probe(struct platform_device *pdev)
 +{
-+	if (gnttab_last_free == GNTTAB_LIST_END || !gnttab_free_tail_ptr ||
-+	    *gnttab_free_tail_ptr == GNTTAB_LIST_END)
-+		return 0;
++	struct grant_dma_iommu_device *mmu;
++	int ret;
 +
-+	return gnttab_last_free - *gnttab_free_tail_ptr + 1;
-+}
++	mmu = devm_kzalloc(&pdev->dev, sizeof(*mmu), GFP_KERNEL);
++	if (!mmu)
++		return -ENOMEM;
 +
-+/* Rebuilds the free grant list and tries to find count consecutive entries. */
-+static int get_free_seq(unsigned int count)
-+{
-+	int ret = -ENOSPC;
-+	unsigned int from, to;
-+	grant_ref_t *last;
++	mmu->dev = &pdev->dev;
 +
-+	gnttab_free_tail_ptr = &gnttab_free_head;
-+	last = &gnttab_free_head;
++	ret = iommu_device_register(&mmu->iommu, &grant_dma_iommu_ops, &pdev->dev);
++	if (ret)
++		return ret;
 +
-+	for (from = find_first_bit(gnttab_free_bitmap, gnttab_size);
-+	     from < gnttab_size;
-+	     from = find_next_bit(gnttab_free_bitmap, gnttab_size, to + 1)) {
-+		to = find_next_zero_bit(gnttab_free_bitmap, gnttab_size,
-+					from + 1);
-+		if (ret < 0 && to - from >= count) {
-+			ret = from;
-+			bitmap_clear(gnttab_free_bitmap, ret, count);
-+			from += count;
-+			gnttab_free_count -= count;
-+			if (from == to)
-+				continue;
-+		}
-+
-+		/*
-+		 * Recreate the free list in order to have it properly sorted.
-+		 * This is needed to make sure that the free tail has the maximum
-+		 * possible size.
-+		 */
-+		while (from < to) {
-+			*last = from;
-+			last = __gnttab_entry(from);
-+			gnttab_last_free = from;
-+			from++;
-+		}
-+		if (to < gnttab_size)
-+			gnttab_free_tail_ptr = __gnttab_entry(to - 1);
-+	}
-+
-+	*last = GNTTAB_LIST_END;
-+	if (gnttab_last_free != gnttab_size - 1)
-+		gnttab_free_tail_ptr = NULL;
-+
-+	return ret;
-+}
-+
-+static int get_free_entries_seq(unsigned int count)
-+{
-+	unsigned long flags;
-+	int ret = 0;
-+
-+	spin_lock_irqsave(&gnttab_list_lock, flags);
-+
-+	if (gnttab_free_count < count) {
-+		ret = gnttab_expand(count - gnttab_free_count);
-+		if (ret < 0)
-+			goto out;
-+	}
-+
-+	if (get_seq_entry_count() < count) {
-+		ret = get_free_seq(count);
-+		if (ret >= 0)
-+			goto out;
-+		ret = gnttab_expand(count - get_seq_entry_count());
-+		if (ret < 0)
-+			goto out;
-+	}
-+
-+	ret = *gnttab_free_tail_ptr;
-+	*gnttab_free_tail_ptr = gnttab_entry(ret + count - 1);
-+	gnttab_free_count -= count;
-+	if (!gnttab_free_count)
-+		gnttab_free_tail_ptr = NULL;
-+	bitmap_clear(gnttab_free_bitmap, ret, count);
-+
-+ out:
-+	spin_unlock_irqrestore(&gnttab_list_lock, flags);
-+
-+	return ret;
-+}
-+
- static void do_free_callbacks(void)
- {
- 	struct gnttab_free_callback *callback, *next;
-@@ -204,21 +328,51 @@ static inline void check_free_callbacks(void)
- 		do_free_callbacks();
- }
- 
--static void put_free_entry(grant_ref_t ref)
-+static void put_free_entry_locked(grant_ref_t ref)
- {
--	unsigned long flags;
--
- 	if (unlikely(ref < GNTTAB_NR_RESERVED_ENTRIES))
- 		return;
- 
--	spin_lock_irqsave(&gnttab_list_lock, flags);
- 	gnttab_entry(ref) = gnttab_free_head;
- 	gnttab_free_head = ref;
-+	if (!gnttab_free_count)
-+		gnttab_last_free = ref;
-+	if (gnttab_free_tail_ptr == &gnttab_free_head)
-+		gnttab_free_tail_ptr = __gnttab_entry(ref);
- 	gnttab_free_count++;
-+	bitmap_set(gnttab_free_bitmap, ref, 1);
-+}
-+
-+static void put_free_entry(grant_ref_t ref)
-+{
-+	unsigned long flags;
-+
-+	spin_lock_irqsave(&gnttab_list_lock, flags);
-+	put_free_entry_locked(ref);
- 	check_free_callbacks();
- 	spin_unlock_irqrestore(&gnttab_list_lock, flags);
- }
- 
-+static void gnttab_set_free(unsigned int start, unsigned int n)
-+{
-+	unsigned int i;
-+
-+	for (i = start; i < start + n - 1; i++)
-+		gnttab_entry(i) = i + 1;
-+
-+	gnttab_entry(i) = GNTTAB_LIST_END;
-+	if (!gnttab_free_count) {
-+		gnttab_free_head = start;
-+		gnttab_free_tail_ptr = &gnttab_free_head;
-+	} else {
-+		gnttab_entry(gnttab_last_free) = start;
-+	}
-+	gnttab_free_count += n;
-+	gnttab_last_free = i;
-+
-+	bitmap_set(gnttab_free_bitmap, start, n);
-+}
-+
- /*
-  * Following applies to gnttab_update_entry_v1 and gnttab_update_entry_v2.
-  * Introducing a valid entry into the grant table:
-@@ -450,23 +604,31 @@ void gnttab_free_grant_references(grant_ref_t head)
- {
- 	grant_ref_t ref;
- 	unsigned long flags;
--	int count = 1;
--	if (head == GNTTAB_LIST_END)
--		return;
-+
- 	spin_lock_irqsave(&gnttab_list_lock, flags);
--	ref = head;
--	while (gnttab_entry(ref) != GNTTAB_LIST_END) {
--		ref = gnttab_entry(ref);
--		count++;
-+	while (head != GNTTAB_LIST_END) {
-+		ref = gnttab_entry(head);
-+		put_free_entry_locked(head);
-+		head = ref;
- 	}
--	gnttab_entry(ref) = gnttab_free_head;
--	gnttab_free_head = head;
--	gnttab_free_count += count;
- 	check_free_callbacks();
- 	spin_unlock_irqrestore(&gnttab_list_lock, flags);
- }
- EXPORT_SYMBOL_GPL(gnttab_free_grant_references);
- 
-+void gnttab_free_grant_reference_seq(grant_ref_t head, unsigned int count)
-+{
-+	unsigned long flags;
-+	unsigned int i;
-+
-+	spin_lock_irqsave(&gnttab_list_lock, flags);
-+	for (i = count; i > 0; i--)
-+		put_free_entry_locked(head + i - 1);
-+	check_free_callbacks();
-+	spin_unlock_irqrestore(&gnttab_list_lock, flags);
-+}
-+EXPORT_SYMBOL_GPL(gnttab_free_grant_reference_seq);
-+
- int gnttab_alloc_grant_references(u16 count, grant_ref_t *head)
- {
- 	int h = get_free_entries(count);
-@@ -480,6 +642,24 @@ int gnttab_alloc_grant_references(u16 count, grant_ref_t *head)
- }
- EXPORT_SYMBOL_GPL(gnttab_alloc_grant_references);
- 
-+int gnttab_alloc_grant_reference_seq(unsigned int count, grant_ref_t *first)
-+{
-+	int h;
-+
-+	if (count == 1)
-+		h = get_free_entries(1);
-+	else
-+		h = get_free_entries_seq(count);
-+
-+	if (h < 0)
-+		return -ENOSPC;
-+
-+	*first = h;
++	platform_set_drvdata(pdev, mmu);
 +
 +	return 0;
 +}
-+EXPORT_SYMBOL_GPL(gnttab_alloc_grant_reference_seq);
 +
- int gnttab_empty_grant_references(const grant_ref_t *private_head)
- {
- 	return (*private_head == GNTTAB_LIST_END);
-@@ -572,16 +752,13 @@ static int grow_gnttab_list(unsigned int more_frames)
- 			goto grow_nomem;
- 	}
- 
-+	gnttab_set_free(gnttab_size, extra_entries);
- 
--	for (i = grefs_per_frame * nr_grant_frames;
--	     i < grefs_per_frame * new_nr_grant_frames - 1; i++)
--		gnttab_entry(i) = i + 1;
--
--	gnttab_entry(i) = gnttab_free_head;
--	gnttab_free_head = grefs_per_frame * nr_grant_frames;
--	gnttab_free_count += extra_entries;
-+	if (!gnttab_free_tail_ptr)
-+		gnttab_free_tail_ptr = __gnttab_entry(gnttab_size);
- 
- 	nr_grant_frames = new_nr_grant_frames;
-+	gnttab_size += extra_entries;
- 
- 	check_free_callbacks();
- 
-@@ -1424,20 +1601,20 @@ static int gnttab_expand(unsigned int req_entries)
- int gnttab_init(void)
- {
- 	int i;
--	unsigned long max_nr_grant_frames;
-+	unsigned long max_nr_grant_frames, max_nr_grefs;
- 	unsigned int max_nr_glist_frames, nr_glist_frames;
--	unsigned int nr_init_grefs;
- 	int ret;
- 
- 	gnttab_request_version();
- 	max_nr_grant_frames = gnttab_max_grant_frames();
-+	max_nr_grefs = max_nr_grant_frames *
-+			gnttab_interface->grefs_per_grant_frame;
- 	nr_grant_frames = 1;
- 
- 	/* Determine the maximum number of frames required for the
- 	 * grant reference free list on the current hypervisor.
- 	 */
--	max_nr_glist_frames = (max_nr_grant_frames *
--			       gnttab_interface->grefs_per_grant_frame / RPP);
-+	max_nr_glist_frames = max_nr_grefs / RPP;
- 
- 	gnttab_list = kmalloc_array(max_nr_glist_frames,
- 				    sizeof(grant_ref_t *),
-@@ -1454,6 +1631,12 @@ int gnttab_init(void)
- 		}
- 	}
- 
-+	gnttab_free_bitmap = bitmap_zalloc(max_nr_grefs, GFP_KERNEL);
-+	if (!gnttab_free_bitmap) {
-+		ret = -ENOMEM;
-+		goto ini_nomem;
-+	}
++static int grant_dma_iommu_remove(struct platform_device *pdev)
++{
++	struct grant_dma_iommu_device *mmu = platform_get_drvdata(pdev);
 +
- 	ret = arch_gnttab_init(max_nr_grant_frames,
- 			       nr_status_frames(max_nr_grant_frames));
- 	if (ret < 0)
-@@ -1464,15 +1647,10 @@ int gnttab_init(void)
- 		goto ini_nomem;
- 	}
- 
--	nr_init_grefs = nr_grant_frames *
--			gnttab_interface->grefs_per_grant_frame;
--
--	for (i = GNTTAB_NR_RESERVED_ENTRIES; i < nr_init_grefs - 1; i++)
--		gnttab_entry(i) = i + 1;
-+	gnttab_size = nr_grant_frames * gnttab_interface->grefs_per_grant_frame;
- 
--	gnttab_entry(nr_init_grefs - 1) = GNTTAB_LIST_END;
--	gnttab_free_count = nr_init_grefs - GNTTAB_NR_RESERVED_ENTRIES;
--	gnttab_free_head  = GNTTAB_NR_RESERVED_ENTRIES;
-+	gnttab_set_free(GNTTAB_NR_RESERVED_ENTRIES,
-+			gnttab_size - GNTTAB_NR_RESERVED_ENTRIES);
- 
- 	printk("Grant table initialized\n");
- 	return 0;
-@@ -1481,6 +1659,7 @@ int gnttab_init(void)
- 	for (i--; i >= 0; i--)
- 		free_page((unsigned long)gnttab_list[i]);
- 	kfree(gnttab_list);
-+	bitmap_free(gnttab_free_bitmap);
- 	return ret;
- }
- EXPORT_SYMBOL_GPL(gnttab_init);
-diff --git a/include/xen/grant_table.h b/include/xen/grant_table.h
-index 527c990..e279be3 100644
---- a/include/xen/grant_table.h
-+++ b/include/xen/grant_table.h
-@@ -127,10 +127,14 @@ int gnttab_try_end_foreign_access(grant_ref_t ref);
-  */
- int gnttab_alloc_grant_references(u16 count, grant_ref_t *pprivate_head);
- 
-+int gnttab_alloc_grant_reference_seq(unsigned int count, grant_ref_t *first);
++	platform_set_drvdata(pdev, NULL);
++	iommu_device_unregister(&mmu->iommu);
 +
- void gnttab_free_grant_reference(grant_ref_t ref);
- 
- void gnttab_free_grant_references(grant_ref_t head);
- 
-+void gnttab_free_grant_reference_seq(grant_ref_t head, unsigned int count);
++	return 0;
++}
 +
- int gnttab_empty_grant_references(const grant_ref_t *pprivate_head);
- 
- int gnttab_claim_grant_reference(grant_ref_t *pprivate_head);
++static struct platform_driver grant_dma_iommu_driver = {
++	.driver = {
++		.name = "grant-dma-iommu",
++		.of_match_table = grant_dma_iommu_of_match,
++	},
++	.probe = grant_dma_iommu_probe,
++	.remove = grant_dma_iommu_remove,
++};
++
++static int __init grant_dma_iommu_init(void)
++{
++	struct device_node *iommu_np;
++
++	iommu_np = of_find_matching_node(NULL, grant_dma_iommu_of_match);
++	if (!iommu_np)
++		return 0;
++
++	of_node_put(iommu_np);
++
++	return platform_driver_register(&grant_dma_iommu_driver);
++}
++subsys_initcall(grant_dma_iommu_init);
 -- 
 2.7.4
 
