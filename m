@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2566CCA47E
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Jun 2022 19:24:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.341182.566383 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34B79CCA47F
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Jun 2022 19:24:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.341184.566412 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwqQg-0000JK-Qo; Thu, 02 Jun 2022 19:24:22 +0000
+	id 1nwqQk-00017G-9y; Thu, 02 Jun 2022 19:24:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 341182.566383; Thu, 02 Jun 2022 19:24:22 +0000
+Received: by outflank-mailman (output) from mailman id 341184.566412; Thu, 02 Jun 2022 19:24:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nwqQg-0000I2-Li; Thu, 02 Jun 2022 19:24:22 +0000
-Received: by outflank-mailman (input) for mailman id 341182;
- Thu, 02 Jun 2022 19:24:21 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nwqQk-000173-6V; Thu, 02 Jun 2022 19:24:26 +0000
+Received: by outflank-mailman (input) for mailman id 341184;
+ Thu, 02 Jun 2022 19:24:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2EeJ=WJ=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1nwqQf-00089L-JZ
- for xen-devel@lists.xenproject.org; Thu, 02 Jun 2022 19:24:21 +0000
+ id 1nwqQi-0000dK-6i
+ for xen-devel@lists.xenproject.org; Thu, 02 Jun 2022 19:24:24 +0000
 Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
  [2a00:1450:4864:20::634])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 99f42cd2-e2a9-11ec-837f-e5687231ffcc;
- Thu, 02 Jun 2022 21:24:20 +0200 (CEST)
-Received: by mail-ej1-x634.google.com with SMTP id s6so262562eja.0
- for <xen-devel@lists.xenproject.org>; Thu, 02 Jun 2022 12:24:20 -0700 (PDT)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9baf920f-e2a9-11ec-bd2c-47488cf2e6aa;
+ Thu, 02 Jun 2022 21:24:23 +0200 (CEST)
+Received: by mail-ej1-x634.google.com with SMTP id y19so11826897ejq.6
+ for <xen-devel@lists.xenproject.org>; Thu, 02 Jun 2022 12:24:23 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- eg13-20020a056402288d00b0042dce73168csm2938301edb.13.2022.06.02.12.24.18
+ eg13-20020a056402288d00b0042dce73168csm2938301edb.13.2022.06.02.12.24.20
  (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 02 Jun 2022 12:24:19 -0700 (PDT)
+ Thu, 02 Jun 2022 12:24:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,469 +46,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 99f42cd2-e2a9-11ec-837f-e5687231ffcc
+X-Inumbo-ID: 9baf920f-e2a9-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=nn54oKyQdkUXTfQLrsUbZfVHd04Jg6Oti25WXdtpMEw=;
-        b=noeKA44CCMwcwNGK2g1eYOfnRdRyy7YOIY85Btv7FnrULdiaoUxlDZmE99B4uAx2hl
-         v3AAgssc0fBiVPqPmbvs8Ogd19qf98nnhiLAdzRRJrumuogoxvY99i8H++/nbNEpHgMP
-         ZsSdxFpZ1upRG8LMm0C6tHsdL+SHt97eAWqDpkMzj6VgDkT8QDesdJZgeFgqhuR4GMsW
-         W+9LhRwR2LDVdPTGhTtsPWUdLv/BcNvs4er9b0CKWheN494JF8vVx8drRQdMHnKHErER
-         FwiQxdLM1NuG8Rv9mu1ec6WTo3TEat35psDn72MiP+vBOU3X7L95QcgluYRC61QHzqCE
-         v/gw==
+        bh=JATYvLe48LS2H6IM0secvITvXQRFYJatDO7tIGdxKew=;
+        b=VTT0OBaJLQkU0DXmYjkEMy4pAELAV+jBlguhxMn7A/UqRxOPNmS5CHgPtJ8qEHZ37t
+         dJchUBQgCQYu0sVoQ3XZJeZMu/D3NfZmgNzNcTSM6d3mQgW/gfiuwtDFZ3C/zopEft70
+         53psImCdfXqfPzsfnsJ0x1WX2TilCTwWqqoFx42M3g540JOK5MIBPNJ4HDu3rtPd0NvR
+         Q9zPUyeZA5Hv2CYInUh8MlFvL4nmj/eO1LHolt3AXfJI734JjCLw7bSnIYS5ZeZ4TIuR
+         W3MaS7EEAi42acDU5NxK7pTxBgmMuOOT0q63i2Wpbh1F/ySWKn407asxBaQC4EJYFYUB
+         ZPxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=nn54oKyQdkUXTfQLrsUbZfVHd04Jg6Oti25WXdtpMEw=;
-        b=mytLNRh4hXntEc2PB9o5oekpNi3lKsqlvIq9bV4RE+Afm1+dBBfhvx6VPD6LrXFCrd
-         CrBkcmbIddgfgxGzXy49a6kGFpIhzK01JunNiVhlKx/9T6jQ7PyAbuyry86eWNEVo3hx
-         QN6r1kzzI2PwXHUijZxWswGtP5+D/tnRuZoon014YTEJJmgoBeEbLdM7BA6AowrgDA6R
-         OJZwrReEQBRNTxK00VjX+OXYsc+5r2qzSJKLryrXTCZpLYEii3p58+3gKNZUaxMFlJ1a
-         bj+9iYufpGvWHYVK5Wdmc4qZ8+TT8NWsrpvI5qz44vxtCCVW7yEfvrGkTGcPjlLl3Xta
-         40MA==
-X-Gm-Message-State: AOAM532aAgGTlM66ofOwgRHPLZBcb6hLKLcSpuPMoLnONuoNHMOI0yxI
-	aIaWHZXfsCJisZVdAf/QU50SfZlZHVA=
-X-Google-Smtp-Source: ABdhPJxZPDsUROaiVqX6gtzt0y2M8IBZgC5AdCU2RJGga4LqtS2VHdKMb9QkG4kguQOxYTMFi3K4eg==
-X-Received: by 2002:a17:907:9715:b0:6fe:d943:3116 with SMTP id jg21-20020a170907971500b006fed9433116mr5617210ejc.257.1654197859519;
-        Thu, 02 Jun 2022 12:24:19 -0700 (PDT)
+        bh=JATYvLe48LS2H6IM0secvITvXQRFYJatDO7tIGdxKew=;
+        b=sikCSiT7VNwQ2CGBqHKTY68QomlhyeNdB7nsn3XWEiFcCRMzcfqrCLptjtX9iNvJEk
+         Kwmj+O/2kH9rgOim7CRPhkIhXu3LrorEW7uM0JmpiNrssZlmODLD1z2Nxk7KmDNq6XY1
+         +VTHJMrvX5yGkLsQZq0vEqb+oRVGIfDmlgwn7p2dlSVSF16Jj/q5SZHadUeR2JNZ+uw+
+         4m3tbBuOTJBSxgYNP9pitEzY6RaukOTab0xLJww8v5nj+3K94XeeKmS0yZ2dXraKQAwH
+         RuY/c4XWT9Hiw1rDH0v171bMW7b0hCtGEUiH94UpePstY3kwQg4HMQ4wOekbr8p3Zo2w
+         q7Uw==
+X-Gm-Message-State: AOAM5308JzgloSop9IBc8CI4xqlbcvoxkEIVoCSOpT2uiOAogRPAbSsH
+	/xYHS/xSUH5JokG1RfkY5izhS91B0mI=
+X-Google-Smtp-Source: ABdhPJwiCOLciOxN6TBYEcpArcIF1bwM/jhBDOJnBMmkSZAOupAwiR+Hr2XzW8lOBJHN2sRoLEmt4Q==
+X-Received: by 2002:a17:906:8146:b0:6ff:119c:881f with SMTP id z6-20020a170906814600b006ff119c881fmr5659395ejw.38.1654197862292;
+        Thu, 02 Jun 2022 12:24:22 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux-foundation.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Rob Herring <robh+dt@kernel.org>,
+	Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
 	Julien Grall <julien@xen.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
-	Christoph Hellwig <hch@infradead.org>
-Subject: [PATCH V4 3/8] xen/grant-dma-ops: Add option to restrict memory access under Xen
-Date: Thu,  2 Jun 2022 22:23:48 +0300
-Message-Id: <1654197833-25362-4-git-send-email-olekstysh@gmail.com>
+	Christoph Hellwig <hch@infradead.org>,
+	Arnd Bergmann <arnd@arndb.de>
+Subject: [PATCH V4 5/8] dt-bindings: Add xen,grant-dma IOMMU description for xen-grant DMA ops
+Date: Thu,  2 Jun 2022 22:23:50 +0300
+Message-Id: <1654197833-25362-6-git-send-email-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1654197833-25362-1-git-send-email-olekstysh@gmail.com>
 References: <1654197833-25362-1-git-send-email-olekstysh@gmail.com>
 
-From: Juergen Gross <jgross@suse.com>
+From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 
-Introduce Xen grant DMA-mapping layer which contains special DMA-mapping
-routines for providing grant references as DMA addresses to be used by
-frontends (e.g. virtio) in Xen guests.
+The main purpose of this binding is to communicate Xen specific
+information using generic IOMMU device tree bindings (which is
+a good fit here) rather than introducing a custom property.
 
-Add the needed functionality by providing a special set of DMA ops
-handling the needed grant operations for the I/O pages.
+Introduce Xen specific IOMMU for the virtualized device (e.g. virtio)
+to be used by Xen grant DMA-mapping layer in the subsequent commit.
 
-The subsequent commit will introduce the use case for xen-grant DMA ops
-layer to enable using virtio devices in Xen guests in a safe manner.
+The reference to Xen specific IOMMU node using "iommus" property
+indicates that Xen grant mappings need to be enabled for the device,
+and it specifies the ID of the domain where the corresponding backend
+resides. The domid (domain ID) is used as an argument to the Xen grant
+mapping APIs.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+This is needed for the option to restrict memory access using Xen grant
+mappings to work which primary goal is to enable using virtio devices
+in Xen guests.
+
 Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 Changes RFC -> V1:
-   - squash with almost all changes from commit (except handling "xen,dev-domid"
-     property):
-     "[PATCH 4/6] virtio: Various updates to xen-virtio DMA ops layer"
-   - update commit subject/description and comments in code
-   - leave only single Kconfig option XEN_VIRTIO and remove architectural
-     dependencies
-   - introduce common xen_has_restricted_virtio_memory_access() in xen.h
-     and update arch_has_restricted_virtio_memory_access() for both
-     Arm and x86 to call new helper
-   - use (1ULL << 63) instead of 0x8000000000000000ULL for XEN_GRANT_ADDR_OFF
-   - implement xen_virtio_dma_map(unmap)_sg() using example in swiotlb-xen.c
-   - optimize padding by moving "broken" field in struct xen_virtio_data
-   - remove unneeded per-device spinlock
-   - remove the inclusion of virtio_config.h
-   - remane everything according to the new naming scheme:
-     s/virtio/grant_dma
-   - add new hidden config option XEN_GRANT_DMA_OPS
+   - update commit subject/description and text in description
+   - move to devicetree/bindings/arm/
 
 Changes V1 -> V2:
-   - fix checkpatch.pl warnings
-   - remove the inclusion of linux/pci.h
-   - rework to use xarray for data context
-   - remove EXPORT_SYMBOL_GPL(xen_grant_setup_dma_ops);
-   - remove the line of * after SPDX-License-Identifier
-   - split changes into grant-dma-ops.c and arch_has_restricted_virtio_memory_access()
-     and update commit subject/description accordingly
-   - remove "default n" for config XEN_VIRTIO
-   - implement xen_grant_dma_alloc(free)_pages()
+   - update text in description
+   - change the maintainer of the binding
+   - fix validation issue
+   - reference xen,dev-domid.yaml schema from virtio/mmio.yaml
 
-Changes V2 -> V3:
-   - Stefano already gave his Reviewed-by, I dropped it due to the changes (minor)
-   - remane field "dev_domid" in struct xen_grant_dma_data to "backend_domid"
-   - remove local variable "domid" in xen_grant_setup_dma_ops()
+Change V2 -> V3:
+   - Stefano already gave his Reviewed-by, I dropped it due to the changes (significant)
+   - use generic IOMMU device tree bindings instead of custom property
+     "xen,dev-domid"
+   - change commit subject and description, was
+     "dt-bindings: Add xen,dev-domid property description for xen-grant DMA ops"
 
 Changes V3 -> V4:
    - add Stefano's R-b
+   - remove underscore in iommu node name
+   - remove consumer example virtio@3000
+   - update text for two descriptions
 ---
----
- drivers/xen/Kconfig         |   4 +
- drivers/xen/Makefile        |   1 +
- drivers/xen/grant-dma-ops.c | 311 ++++++++++++++++++++++++++++++++++++++++++++
- include/xen/xen-ops.h       |   8 ++
- 4 files changed, 324 insertions(+)
- create mode 100644 drivers/xen/grant-dma-ops.c
+ .../devicetree/bindings/iommu/xen,grant-dma.yaml   | 39 ++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/iommu/xen,grant-dma.yaml
 
-diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index 120d32f..313a9127 100644
---- a/drivers/xen/Kconfig
-+++ b/drivers/xen/Kconfig
-@@ -335,4 +335,8 @@ config XEN_UNPOPULATED_ALLOC
- 	  having to balloon out RAM regions in order to obtain physical memory
- 	  space to create such mappings.
- 
-+config XEN_GRANT_DMA_OPS
-+	bool
-+	select DMA_OPS
-+
- endmenu
-diff --git a/drivers/xen/Makefile b/drivers/xen/Makefile
-index 5aae66e..1a23cb0 100644
---- a/drivers/xen/Makefile
-+++ b/drivers/xen/Makefile
-@@ -39,3 +39,4 @@ xen-gntalloc-y				:= gntalloc.o
- xen-privcmd-y				:= privcmd.o privcmd-buf.o
- obj-$(CONFIG_XEN_FRONT_PGDIR_SHBUF)	+= xen-front-pgdir-shbuf.o
- obj-$(CONFIG_XEN_UNPOPULATED_ALLOC)	+= unpopulated-alloc.o
-+obj-$(CONFIG_XEN_GRANT_DMA_OPS)		+= grant-dma-ops.o
-diff --git a/drivers/xen/grant-dma-ops.c b/drivers/xen/grant-dma-ops.c
+diff --git a/Documentation/devicetree/bindings/iommu/xen,grant-dma.yaml b/Documentation/devicetree/bindings/iommu/xen,grant-dma.yaml
 new file mode 100644
-index 00000000..44659f4
+index 00000000..be1539d
 --- /dev/null
-+++ b/drivers/xen/grant-dma-ops.c
-@@ -0,0 +1,311 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Xen grant DMA-mapping layer - contains special DMA-mapping routines
-+ * for providing grant references as DMA addresses to be used by frontends
-+ * (e.g. virtio) in Xen guests
-+ *
-+ * Copyright (c) 2021, Juergen Gross <jgross@suse.com>
-+ */
-+
-+#include <linux/module.h>
-+#include <linux/dma-map-ops.h>
-+#include <linux/of.h>
-+#include <linux/pfn.h>
-+#include <linux/xarray.h>
-+#include <xen/xen.h>
-+#include <xen/grant_table.h>
-+
-+struct xen_grant_dma_data {
-+	/* The ID of backend domain */
-+	domid_t backend_domid;
-+	/* Is device behaving sane? */
-+	bool broken;
-+};
-+
-+static DEFINE_XARRAY(xen_grant_dma_devices);
-+
-+#define XEN_GRANT_DMA_ADDR_OFF	(1ULL << 63)
-+
-+static inline dma_addr_t grant_to_dma(grant_ref_t grant)
-+{
-+	return XEN_GRANT_DMA_ADDR_OFF | ((dma_addr_t)grant << PAGE_SHIFT);
-+}
-+
-+static inline grant_ref_t dma_to_grant(dma_addr_t dma)
-+{
-+	return (grant_ref_t)((dma & ~XEN_GRANT_DMA_ADDR_OFF) >> PAGE_SHIFT);
-+}
-+
-+static struct xen_grant_dma_data *find_xen_grant_dma_data(struct device *dev)
-+{
-+	struct xen_grant_dma_data *data;
-+
-+	xa_lock(&xen_grant_dma_devices);
-+	data = xa_load(&xen_grant_dma_devices, (unsigned long)dev);
-+	xa_unlock(&xen_grant_dma_devices);
-+
-+	return data;
-+}
-+
-+/*
-+ * DMA ops for Xen frontends (e.g. virtio).
-+ *
-+ * Used to act as a kind of software IOMMU for Xen guests by using grants as
-+ * DMA addresses.
-+ * Such a DMA address is formed by using the grant reference as a frame
-+ * number and setting the highest address bit (this bit is for the backend
-+ * to be able to distinguish it from e.g. a mmio address).
-+ *
-+ * Note that for now we hard wire dom0 to be the backend domain. In order
-+ * to support any domain as backend we'd need to add a way to communicate
-+ * the domid of this backend, e.g. via Xenstore, via the PCI-device's
-+ * config space or DT/ACPI.
-+ */
-+static void *xen_grant_dma_alloc(struct device *dev, size_t size,
-+				 dma_addr_t *dma_handle, gfp_t gfp,
-+				 unsigned long attrs)
-+{
-+	struct xen_grant_dma_data *data;
-+	unsigned int i, n_pages = PFN_UP(size);
-+	unsigned long pfn;
-+	grant_ref_t grant;
-+	void *ret;
-+
-+	data = find_xen_grant_dma_data(dev);
-+	if (!data)
-+		return NULL;
-+
-+	if (unlikely(data->broken))
-+		return NULL;
-+
-+	ret = alloc_pages_exact(n_pages * PAGE_SIZE, gfp);
-+	if (!ret)
-+		return NULL;
-+
-+	pfn = virt_to_pfn(ret);
-+
-+	if (gnttab_alloc_grant_reference_seq(n_pages, &grant)) {
-+		free_pages_exact(ret, n_pages * PAGE_SIZE);
-+		return NULL;
-+	}
-+
-+	for (i = 0; i < n_pages; i++) {
-+		gnttab_grant_foreign_access_ref(grant + i, data->backend_domid,
-+				pfn_to_gfn(pfn + i), 0);
-+	}
-+
-+	*dma_handle = grant_to_dma(grant);
-+
-+	return ret;
-+}
-+
-+static void xen_grant_dma_free(struct device *dev, size_t size, void *vaddr,
-+			       dma_addr_t dma_handle, unsigned long attrs)
-+{
-+	struct xen_grant_dma_data *data;
-+	unsigned int i, n_pages = PFN_UP(size);
-+	grant_ref_t grant;
-+
-+	data = find_xen_grant_dma_data(dev);
-+	if (!data)
-+		return;
-+
-+	if (unlikely(data->broken))
-+		return;
-+
-+	grant = dma_to_grant(dma_handle);
-+
-+	for (i = 0; i < n_pages; i++) {
-+		if (unlikely(!gnttab_end_foreign_access_ref(grant + i))) {
-+			dev_alert(dev, "Grant still in use by backend domain, disabled for further use\n");
-+			data->broken = true;
-+			return;
-+		}
-+	}
-+
-+	gnttab_free_grant_reference_seq(grant, n_pages);
-+
-+	free_pages_exact(vaddr, n_pages * PAGE_SIZE);
-+}
-+
-+static struct page *xen_grant_dma_alloc_pages(struct device *dev, size_t size,
-+					      dma_addr_t *dma_handle,
-+					      enum dma_data_direction dir,
-+					      gfp_t gfp)
-+{
-+	void *vaddr;
-+
-+	vaddr = xen_grant_dma_alloc(dev, size, dma_handle, gfp, 0);
-+	if (!vaddr)
-+		return NULL;
-+
-+	return virt_to_page(vaddr);
-+}
-+
-+static void xen_grant_dma_free_pages(struct device *dev, size_t size,
-+				     struct page *vaddr, dma_addr_t dma_handle,
-+				     enum dma_data_direction dir)
-+{
-+	xen_grant_dma_free(dev, size, page_to_virt(vaddr), dma_handle, 0);
-+}
-+
-+static dma_addr_t xen_grant_dma_map_page(struct device *dev, struct page *page,
-+					 unsigned long offset, size_t size,
-+					 enum dma_data_direction dir,
-+					 unsigned long attrs)
-+{
-+	struct xen_grant_dma_data *data;
-+	unsigned int i, n_pages = PFN_UP(size);
-+	grant_ref_t grant;
-+	dma_addr_t dma_handle;
-+
-+	if (WARN_ON(dir == DMA_NONE))
-+		return DMA_MAPPING_ERROR;
-+
-+	data = find_xen_grant_dma_data(dev);
-+	if (!data)
-+		return DMA_MAPPING_ERROR;
-+
-+	if (unlikely(data->broken))
-+		return DMA_MAPPING_ERROR;
-+
-+	if (gnttab_alloc_grant_reference_seq(n_pages, &grant))
-+		return DMA_MAPPING_ERROR;
-+
-+	for (i = 0; i < n_pages; i++) {
-+		gnttab_grant_foreign_access_ref(grant + i, data->backend_domid,
-+				xen_page_to_gfn(page) + i, dir == DMA_TO_DEVICE);
-+	}
-+
-+	dma_handle = grant_to_dma(grant) + offset;
-+
-+	return dma_handle;
-+}
-+
-+static void xen_grant_dma_unmap_page(struct device *dev, dma_addr_t dma_handle,
-+				     size_t size, enum dma_data_direction dir,
-+				     unsigned long attrs)
-+{
-+	struct xen_grant_dma_data *data;
-+	unsigned int i, n_pages = PFN_UP(size);
-+	grant_ref_t grant;
-+
-+	if (WARN_ON(dir == DMA_NONE))
-+		return;
-+
-+	data = find_xen_grant_dma_data(dev);
-+	if (!data)
-+		return;
-+
-+	if (unlikely(data->broken))
-+		return;
-+
-+	grant = dma_to_grant(dma_handle);
-+
-+	for (i = 0; i < n_pages; i++) {
-+		if (unlikely(!gnttab_end_foreign_access_ref(grant + i))) {
-+			dev_alert(dev, "Grant still in use by backend domain, disabled for further use\n");
-+			data->broken = true;
-+			return;
-+		}
-+	}
-+
-+	gnttab_free_grant_reference_seq(grant, n_pages);
-+}
-+
-+static void xen_grant_dma_unmap_sg(struct device *dev, struct scatterlist *sg,
-+				   int nents, enum dma_data_direction dir,
-+				   unsigned long attrs)
-+{
-+	struct scatterlist *s;
-+	unsigned int i;
-+
-+	if (WARN_ON(dir == DMA_NONE))
-+		return;
-+
-+	for_each_sg(sg, s, nents, i)
-+		xen_grant_dma_unmap_page(dev, s->dma_address, sg_dma_len(s), dir,
-+				attrs);
-+}
-+
-+static int xen_grant_dma_map_sg(struct device *dev, struct scatterlist *sg,
-+				int nents, enum dma_data_direction dir,
-+				unsigned long attrs)
-+{
-+	struct scatterlist *s;
-+	unsigned int i;
-+
-+	if (WARN_ON(dir == DMA_NONE))
-+		return -EINVAL;
-+
-+	for_each_sg(sg, s, nents, i) {
-+		s->dma_address = xen_grant_dma_map_page(dev, sg_page(s), s->offset,
-+				s->length, dir, attrs);
-+		if (s->dma_address == DMA_MAPPING_ERROR)
-+			goto out;
-+
-+		sg_dma_len(s) = s->length;
-+	}
-+
-+	return nents;
-+
-+out:
-+	xen_grant_dma_unmap_sg(dev, sg, i, dir, attrs | DMA_ATTR_SKIP_CPU_SYNC);
-+	sg_dma_len(sg) = 0;
-+
-+	return -EIO;
-+}
-+
-+static int xen_grant_dma_supported(struct device *dev, u64 mask)
-+{
-+	return mask == DMA_BIT_MASK(64);
-+}
-+
-+static const struct dma_map_ops xen_grant_dma_ops = {
-+	.alloc = xen_grant_dma_alloc,
-+	.free = xen_grant_dma_free,
-+	.alloc_pages = xen_grant_dma_alloc_pages,
-+	.free_pages = xen_grant_dma_free_pages,
-+	.mmap = dma_common_mmap,
-+	.get_sgtable = dma_common_get_sgtable,
-+	.map_page = xen_grant_dma_map_page,
-+	.unmap_page = xen_grant_dma_unmap_page,
-+	.map_sg = xen_grant_dma_map_sg,
-+	.unmap_sg = xen_grant_dma_unmap_sg,
-+	.dma_supported = xen_grant_dma_supported,
-+};
-+
-+void xen_grant_setup_dma_ops(struct device *dev)
-+{
-+	struct xen_grant_dma_data *data;
-+
-+	data = find_xen_grant_dma_data(dev);
-+	if (data) {
-+		dev_err(dev, "Xen grant DMA data is already created\n");
-+		return;
-+	}
-+
-+	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
-+	if (!data)
-+		goto err;
-+
-+	/* XXX The dom0 is hardcoded as the backend domain for now */
-+	data->backend_domid = 0;
-+
-+	if (xa_err(xa_store(&xen_grant_dma_devices, (unsigned long)dev, data,
-+			GFP_KERNEL))) {
-+		dev_err(dev, "Cannot store Xen grant DMA data\n");
-+		goto err;
-+	}
-+
-+	dev->dma_ops = &xen_grant_dma_ops;
-+
-+	return;
-+
-+err:
-+	dev_err(dev, "Cannot set up Xen grant DMA ops, retain platform DMA ops\n");
-+}
-+
-+MODULE_DESCRIPTION("Xen grant DMA-mapping layer");
-+MODULE_AUTHOR("Juergen Gross <jgross@suse.com>");
-+MODULE_LICENSE("GPL");
-diff --git a/include/xen/xen-ops.h b/include/xen/xen-ops.h
-index a3584a3..4f9fad5 100644
---- a/include/xen/xen-ops.h
-+++ b/include/xen/xen-ops.h
-@@ -221,4 +221,12 @@ static inline void xen_preemptible_hcall_end(void) { }
- 
- #endif /* CONFIG_XEN_PV && !CONFIG_PREEMPTION */
- 
-+#ifdef CONFIG_XEN_GRANT_DMA_OPS
-+void xen_grant_setup_dma_ops(struct device *dev);
-+#else
-+static inline void xen_grant_setup_dma_ops(struct device *dev)
-+{
-+}
-+#endif /* CONFIG_XEN_GRANT_DMA_OPS */
-+
- #endif /* INCLUDE_XEN_OPS_H */
++++ b/Documentation/devicetree/bindings/iommu/xen,grant-dma.yaml
+@@ -0,0 +1,39 @@
++# SPDX-License-Identifier: (GPL-2.0-only or BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/iommu/xen,grant-dma.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Xen specific IOMMU for virtualized devices (e.g. virtio)
++
++maintainers:
++  - Stefano Stabellini <sstabellini@kernel.org>
++
++description:
++  The Xen IOMMU represents the Xen grant table interface. Grant mappings
++  are to be used with devices connected to the Xen IOMMU using the "iommus"
++  property, which also specifies the ID of the backend domain.
++  The binding is required to restrict memory access using Xen grant mappings.
++
++properties:
++  compatible:
++    const: xen,grant-dma
++
++  '#iommu-cells':
++    const: 1
++    description:
++      The single cell is the domid (domain ID) of the domain where the backend
++      is running.
++
++required:
++  - compatible
++  - "#iommu-cells"
++
++additionalProperties: false
++
++examples:
++  - |
++    iommu {
++        compatible = "xen,grant-dma";
++        #iommu-cells = <1>;
++    };
 -- 
 2.7.4
 
