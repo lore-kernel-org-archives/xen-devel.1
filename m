@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F305CC433EF
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jun 2022 22:34:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.341697.566932 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F571C43334
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jun 2022 23:09:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.341719.566965 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nxFrj-0005Cs-Im; Fri, 03 Jun 2022 22:33:59 +0000
+	id 1nxGPx-0001Np-0y; Fri, 03 Jun 2022 23:09:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 341697.566932; Fri, 03 Jun 2022 22:33:59 +0000
+Received: by outflank-mailman (output) from mailman id 341719.566965; Fri, 03 Jun 2022 23:09:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nxFrj-0005Cl-Fh; Fri, 03 Jun 2022 22:33:59 +0000
-Received: by outflank-mailman (input) for mailman id 341697;
- Fri, 03 Jun 2022 22:33:58 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nxGPw-0001Ni-Ts; Fri, 03 Jun 2022 23:09:20 +0000
+Received: by outflank-mailman (input) for mailman id 341719;
+ Fri, 03 Jun 2022 23:09:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Fj01=WK=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1nxFri-0005Cd-EF
- for xen-devel@lists.xenproject.org; Fri, 03 Jun 2022 22:33:58 +0000
+ id 1nxGPv-000174-Mi
+ for xen-devel@lists.xenproject.org; Fri, 03 Jun 2022 23:09:19 +0000
 Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4196a916-e38d-11ec-bd2c-47488cf2e6aa;
- Sat, 04 Jun 2022 00:33:57 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 321e049d-e392-11ec-837f-e5687231ffcc;
+ Sat, 04 Jun 2022 01:09:18 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id D46BCB82482;
- Fri,  3 Jun 2022 22:33:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 366E8C385A9;
- Fri,  3 Jun 2022 22:33:55 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 8364CB82473;
+ Fri,  3 Jun 2022 23:09:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDE5FC385A9;
+ Fri,  3 Jun 2022 23:09:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,18 +45,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4196a916-e38d-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: 321e049d-e392-11ec-837f-e5687231ffcc
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1654295635;
-	bh=+9JHCtA9BLmi35HrS9NgwTtn0qiew72TgVW99JpUGjU=;
+	s=k20201202; t=1654297757;
+	bh=0djJC9KLui+Kdr5MsphZ6+DQIIwNtfeYRS1QGzcW9e8=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=QPz2+32AZnI21aFRJBEFN4IJXJQezGNMT3ZyDrkMGppvH9hPdgt4btwORr4kkc1ar
-	 rKdi5RLbnn+cG9hxkXq9CO1YRIUS4k+27gfG1avKKSlYsz/6FeY62u5piBkTXEpESx
-	 wNQ2v4jcHid1KLvum6yTibtdnbNyMtEs1XVCUIsH6ext/kAbH4BERpdzsp8kdqep2d
-	 MtKknYhTEPv0p+ksMrSXhfxJorGXHwRRR/pbBmDx6yN/bP4sBvJ+ca04ZZPPLAR+zm
-	 grOJ7CBm663S85SU876ywJMxlwibgAMpa6VwYD01zAsBuq5uk3X/exxoV/kFImf3HR
-	 cGUl3OUNB4PVg==
-Date: Fri, 3 Jun 2022 15:33:54 -0700 (PDT)
+	b=AeXZpqvHDF2QzAYSnYNnSOzuB5MweypuQ/a/HMLX0HBmx357NGTXwhtDg64FSST78
+	 HwxphRFillNQuBJ5vh+nqT0bWFtmTvnEcOUj7B2OlWyOMSDaVBsJYhf4lZg2yHK8pJ
+	 X36JDZUAmQF/18BWbGmVWNYDhdD5vWk5RSMO2lrg8g2NzqFKvOfPBAlkf5JPC2y+69
+	 apuI73x4YElGj5slwRe/TNNTZaixBZKO5A4WZ+tMY42XgSiOHsYJ1PcVS+lpjA0KoX
+	 ST1QcNZAoW5Cb4oo5/+XLI05W4TV+be5TZrj/Hv3cmMGY0WhijWSgfCDtc6oGeZNwT
+	 p7KB0l1c7HEkQ==
+Date: Fri, 3 Jun 2022 16:09:16 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Julien Grall <julien@xen.org>
@@ -64,12 +64,12 @@ cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>,
     Stefano Stabellini <sstabellini@kernel.org>, 
     Bertrand Marquis <bertrand.marquis@arm.com>, 
     Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    Julien Grall <jgrall@amazon.com>, Hongda Deng <Hongda.Heng@arm.com>
-Subject: Re: [PATCH 05/16] xen/arm: mm: Re-implement early_fdt_map() using
- map_pages_to_xen()
-In-Reply-To: <20220520120937.28925-6-julien@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2206031533400.2783803@ubuntu-linux-20-04-desktop>
-References: <20220520120937.28925-1-julien@xen.org> <20220520120937.28925-6-julien@xen.org>
+    Julien Grall <jgrall@amazon.com>
+Subject: Re: [PATCH 16/16] xen/arm: mm: Re-implement setup_frame_table_mappings()
+ with map_pages_to_xen()
+In-Reply-To: <20220520120937.28925-17-julien@xen.org>
+Message-ID: <alpine.DEB.2.22.394.2206031607510.2783803@ubuntu-linux-20-04-desktop>
+References: <20220520120937.28925-1-julien@xen.org> <20220520120937.28925-17-julien@xen.org>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -78,73 +78,121 @@ On Fri, 20 May 2022, Julien Grall wrote:
 > From: Julien Grall <julien.grall@arm.com>
 > 
 > Now that map_pages_to_xen() has been extended to support 2MB mappings,
-> we can replace the create_mappings() calls by map_pages_to_xen() calls.
+> we can replace the create_mappings() call by map_pages_to_xen() call.
 > 
-> The mapping can also be marked read-only as Xen should not modify
-> the host Device Tree during boot.
+> This has the advantage to remove the differences between 32-bit and
+> 64-bit code.
+> 
+> Lastly remove create_mappings() as there is no more callers.
 > 
 > Signed-off-by: Julien Grall <julien.grall@arm.com>
 > Signed-off-by: Julien Grall <jgrall@amazon.com>
-> Reviewed-by: Hongda Deng <Hongda.Heng@arm.com>
 
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
 
 > ---
 >     Changes in v4:
+>         - Add missing _PAGE_BLOCK
+> 
+>     Changes in v3:
 >         - Fix typo in the commit message
->         - Add Hongda's reviewed-by
+>         - Remove the TODO regarding contiguous bit
 > 
 >     Changes in v2:
->         - Add my AWS signed-off-by
->         - Fix typo in the commit message
+>         - New patch
 > ---
->  xen/arch/arm/mm.c | 18 +++++++++++++-----
->  1 file changed, 13 insertions(+), 5 deletions(-)
+>  xen/arch/arm/mm.c | 64 +++++------------------------------------------
+>  1 file changed, 6 insertions(+), 58 deletions(-)
 > 
 > diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-> index 64a79d45b38c..03f970e4d10b 100644
+> index 65af44f42232..be37176a4725 100644
 > --- a/xen/arch/arm/mm.c
 > +++ b/xen/arch/arm/mm.c
-> @@ -574,6 +574,7 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
->      paddr_t offset;
->      void *fdt_virt;
->      uint32_t size;
+> @@ -369,40 +369,6 @@ void clear_fixmap(unsigned map)
+>      BUG_ON(res != 0);
+>  }
+>  
+> -/* Create Xen's mappings of memory.
+> - * Mapping_size must be either 2MB or 32MB.
+> - * Base and virt must be mapping_size aligned.
+> - * Size must be a multiple of mapping_size.
+> - * second must be a contiguous set of second level page tables
+> - * covering the region starting at virt_offset. */
+> -static void __init create_mappings(lpae_t *second,
+> -                                   unsigned long virt_offset,
+> -                                   unsigned long base_mfn,
+> -                                   unsigned long nr_mfns,
+> -                                   unsigned int mapping_size)
+> -{
+> -    unsigned long i, count;
+> -    const unsigned long granularity = mapping_size >> PAGE_SHIFT;
+> -    lpae_t pte, *p;
+> -
+> -    ASSERT((mapping_size == MB(2)) || (mapping_size == MB(32)));
+> -    ASSERT(!((virt_offset >> PAGE_SHIFT) % granularity));
+> -    ASSERT(!(base_mfn % granularity));
+> -    ASSERT(!(nr_mfns % granularity));
+> -
+> -    count = nr_mfns / XEN_PT_LPAE_ENTRIES;
+> -    p = second + second_linear_offset(virt_offset);
+> -    pte = mfn_to_xen_entry(_mfn(base_mfn), MT_NORMAL);
+> -    if ( granularity == 16 * XEN_PT_LPAE_ENTRIES )
+> -        pte.pt.contig = 1;  /* These maps are in 16-entry contiguous chunks. */
+> -    for ( i = 0; i < count; i++ )
+> -    {
+> -        write_pte(p + i, pte);
+> -        pte.pt.base += 1 << XEN_PT_LPAE_SHIFT;
+> -    }
+> -    flush_xen_tlb_local();
+> -}
+> -
+>  #ifdef CONFIG_DOMAIN_PAGE
+>  void *map_domain_page_global(mfn_t mfn)
+>  {
+> @@ -862,36 +828,18 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
+>      unsigned long frametable_size = nr_pdxs * sizeof(struct page_info);
+>      mfn_t base_mfn;
+>      const unsigned long mapping_size = frametable_size < MB(32) ? MB(2) : MB(32);
+> -#ifdef CONFIG_ARM_64
+> -    lpae_t *second, pte;
+> -    unsigned long nr_second;
+> -    mfn_t second_base;
+> -    int i;
+> -#endif
 > +    int rc;
 >  
->      /*
->       * Check whether the physical FDT address is set and meets the minimum
-> @@ -589,8 +590,12 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
->      /* The FDT is mapped using 2MB superpage */
->      BUILD_BUG_ON(BOOT_FDT_VIRT_START % SZ_2M);
+>      frametable_base_pdx = mfn_to_pdx(maddr_to_mfn(ps));
+>      /* Round up to 2M or 32M boundary, as appropriate. */
+>      frametable_size = ROUNDUP(frametable_size, mapping_size);
+>      base_mfn = alloc_boot_pages(frametable_size >> PAGE_SHIFT, 32<<(20-12));
 >  
-> -    create_mappings(xen_second, BOOT_FDT_VIRT_START, paddr_to_pfn(base_paddr),
-> -                    SZ_2M >> PAGE_SHIFT, SZ_2M);
-> +    rc = map_pages_to_xen(BOOT_FDT_VIRT_START, maddr_to_mfn(base_paddr),
-> +                          SZ_2M >> PAGE_SHIFT,
-> +                          PAGE_HYPERVISOR_RO | _PAGE_BLOCK);
+> -#ifdef CONFIG_ARM_64
+> -    /* Compute the number of second level pages. */
+> -    nr_second = ROUNDUP(frametable_size, FIRST_SIZE) >> FIRST_SHIFT;
+> -    second_base = alloc_boot_pages(nr_second, 1);
+> -    second = mfn_to_virt(second_base);
+> -    for ( i = 0; i < nr_second; i++ )
+> -    {
+> -        clear_page(mfn_to_virt(mfn_add(second_base, i)));
+> -        pte = mfn_to_xen_entry(mfn_add(second_base, i), MT_NORMAL);
+> -        pte.pt.table = 1;
+> -        write_pte(&xen_first[first_table_offset(FRAMETABLE_VIRT_START)+i], pte);
+> -    }
+> -    create_mappings(second, 0, mfn_x(base_mfn), frametable_size >> PAGE_SHIFT,
+> -                    mapping_size);
+> -#else
+> -    create_mappings(xen_second, FRAMETABLE_VIRT_START, mfn_x(base_mfn),
+> -                    frametable_size >> PAGE_SHIFT, mapping_size);
+> -#endif
+> +    rc = map_pages_to_xen(FRAMETABLE_VIRT_START, base_mfn,
+> +                          frametable_size >> PAGE_SHIFT,
+> +                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
 > +    if ( rc )
-> +        panic("Unable to map the device-tree.\n");
-> +
+> +        panic("Unable to setup the frametable mappings.\n");
 >  
->      offset = fdt_paddr % SECOND_SIZE;
->      fdt_virt = (void *)BOOT_FDT_VIRT_START + offset;
-> @@ -604,9 +609,12 @@ void * __init early_fdt_map(paddr_t fdt_paddr)
->  
->      if ( (offset + size) > SZ_2M )
->      {
-> -        create_mappings(xen_second, BOOT_FDT_VIRT_START + SZ_2M,
-> -                        paddr_to_pfn(base_paddr + SZ_2M),
-> -                        SZ_2M >> PAGE_SHIFT, SZ_2M);
-> +        rc = map_pages_to_xen(BOOT_FDT_VIRT_START + SZ_2M,
-> +                              maddr_to_mfn(base_paddr + SZ_2M),
-> +                              SZ_2M >> PAGE_SHIFT,
-> +                              PAGE_HYPERVISOR_RO | _PAGE_BLOCK);
-> +        if ( rc )
-> +            panic("Unable to map the device-tree\n");
->      }
->  
->      return fdt_virt;
+>      memset(&frame_table[0], 0, nr_pdxs * sizeof(struct page_info));
+>      memset(&frame_table[nr_pdxs], -1,
 > -- 
 > 2.32.0
 > 
