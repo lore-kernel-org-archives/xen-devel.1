@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F571C43334
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Jun 2022 23:09:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.341719.566965 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA94FC43334
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Jun 2022 23:09:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.341717.566943 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nxGPx-0001Np-0y; Fri, 03 Jun 2022 23:09:21 +0000
+	id 1nxGPr-0000ro-F1; Fri, 03 Jun 2022 23:09:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 341719.566965; Fri, 03 Jun 2022 23:09:20 +0000
+Received: by outflank-mailman (output) from mailman id 341717.566943; Fri, 03 Jun 2022 23:09:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nxGPw-0001Ni-Ts; Fri, 03 Jun 2022 23:09:20 +0000
-Received: by outflank-mailman (input) for mailman id 341719;
- Fri, 03 Jun 2022 23:09:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nxGPr-0000rh-Bn; Fri, 03 Jun 2022 23:09:15 +0000
+Received: by outflank-mailman (input) for mailman id 341717;
+ Fri, 03 Jun 2022 23:09:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Fj01=WK=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
- id 1nxGPv-000174-Mi
- for xen-devel@lists.xenproject.org; Fri, 03 Jun 2022 23:09:19 +0000
+ id 1nxGPp-0000rb-QR
+ for xen-devel@lists.xenproject.org; Fri, 03 Jun 2022 23:09:13 +0000
 Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 321e049d-e392-11ec-837f-e5687231ffcc;
- Sat, 04 Jun 2022 01:09:18 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2e29f754-e392-11ec-bd2c-47488cf2e6aa;
+ Sat, 04 Jun 2022 01:09:12 +0200 (CEST)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 8364CB82473;
- Fri,  3 Jun 2022 23:09:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDE5FC385A9;
- Fri,  3 Jun 2022 23:09:16 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 9D1E8B82473;
+ Fri,  3 Jun 2022 23:09:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 195E9C385A9;
+ Fri,  3 Jun 2022 23:09:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,154 +45,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 321e049d-e392-11ec-837f-e5687231ffcc
+X-Inumbo-ID: 2e29f754-e392-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1654297757;
-	bh=0djJC9KLui+Kdr5MsphZ6+DQIIwNtfeYRS1QGzcW9e8=;
+	s=k20201202; t=1654297750;
+	bh=FnK2Y3LSrb78iul2thCA0adS6+qvrw7Rw8b8irhGjl0=;
 	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
-	b=AeXZpqvHDF2QzAYSnYNnSOzuB5MweypuQ/a/HMLX0HBmx357NGTXwhtDg64FSST78
-	 HwxphRFillNQuBJ5vh+nqT0bWFtmTvnEcOUj7B2OlWyOMSDaVBsJYhf4lZg2yHK8pJ
-	 X36JDZUAmQF/18BWbGmVWNYDhdD5vWk5RSMO2lrg8g2NzqFKvOfPBAlkf5JPC2y+69
-	 apuI73x4YElGj5slwRe/TNNTZaixBZKO5A4WZ+tMY42XgSiOHsYJ1PcVS+lpjA0KoX
-	 ST1QcNZAoW5Cb4oo5/+XLI05W4TV+be5TZrj/Hv3cmMGY0WhijWSgfCDtc6oGeZNwT
-	 p7KB0l1c7HEkQ==
-Date: Fri, 3 Jun 2022 16:09:16 -0700 (PDT)
+	b=nxEnw2N5ezlJB7DRLFf2ycdYflUqPpo4IqTAi2nE2jsLcS+7ARfWYgw58dDGtBJKU
+	 B7L0Fk4/d/oc/AzTa9eei6eO+7m9dw4KECaOcjA+cvT6a+27J0g/PjlbZed1j/tVWz
+	 pkoOCCQgidHFbLdSsK2CmOH5HUf5nbfSkwjuTsF25UdDgwnNbuuvleKLyFfJnVkgE5
+	 gtIy/SeTmPen1rLGS/NV6vao+RGo2RsI7GfchH9b4GV0lu87SLZzHaCwSB1USZvPFp
+	 01pVhWsDWggf5W2bPnXmKeuY2FKkRqy/JksZelDFYfMAS0ZPcBk2wNXDibiKebuodt
+	 HnCaNApDUBblg==
+Date: Fri, 3 Jun 2022 16:09:09 -0700 (PDT)
 From: Stefano Stabellini <sstabellini@kernel.org>
 X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
 To: Julien Grall <julien@xen.org>
-cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, 
+cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>, 
     Stefano Stabellini <sstabellini@kernel.org>, 
     Bertrand Marquis <bertrand.marquis@arm.com>, 
-    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-    Julien Grall <jgrall@amazon.com>
-Subject: Re: [PATCH 16/16] xen/arm: mm: Re-implement setup_frame_table_mappings()
- with map_pages_to_xen()
-In-Reply-To: <20220520120937.28925-17-julien@xen.org>
-Message-ID: <alpine.DEB.2.22.394.2206031607510.2783803@ubuntu-linux-20-04-desktop>
-References: <20220520120937.28925-1-julien@xen.org> <20220520120937.28925-17-julien@xen.org>
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH 13/16] xen/arm32: setup: Move out the code to populate
+ the boot allocator
+In-Reply-To: <20220520120937.28925-14-julien@xen.org>
+Message-ID: <alpine.DEB.2.22.394.2206031557080.2783803@ubuntu-linux-20-04-desktop>
+References: <20220520120937.28925-1-julien@xen.org> <20220520120937.28925-14-julien@xen.org>
 User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 
 On Fri, 20 May 2022, Julien Grall wrote:
-> From: Julien Grall <julien.grall@arm.com>
+> From: Julien Grall <jgrall@amazon.com>
 > 
-> Now that map_pages_to_xen() has been extended to support 2MB mappings,
-> we can replace the create_mappings() call by map_pages_to_xen() call.
+> In a follow-up patch, we will want to populate the boot allocator
+> separately for arm64. The code will end up to be very similar to the one
+> on arm32. So move out the code in a new helper populate_boot_allocator().
 > 
-> This has the advantage to remove the differences between 32-bit and
-> 64-bit code.
+> For now the code is still protected by CONFIG_ARM_32 to avoid any build
+> failure on arm64.
 > 
-> Lastly remove create_mappings() as there is no more callers.
+> Take the opportunity to replace mfn_add(xen_mfn_start, xenheap_pages) with
+> xenheap_mfn_end as they are equivalent.
 > 
-> Signed-off-by: Julien Grall <julien.grall@arm.com>
 > Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
 
 > ---
+> 
 >     Changes in v4:
->         - Add missing _PAGE_BLOCK
-> 
->     Changes in v3:
->         - Fix typo in the commit message
->         - Remove the TODO regarding contiguous bit
-> 
->     Changes in v2:
->         - New patch
+>         - Patch added
 > ---
->  xen/arch/arm/mm.c | 64 +++++------------------------------------------
->  1 file changed, 6 insertions(+), 58 deletions(-)
+>  xen/arch/arm/setup.c | 90 +++++++++++++++++++++++++-------------------
+>  1 file changed, 51 insertions(+), 39 deletions(-)
 > 
-> diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-> index 65af44f42232..be37176a4725 100644
-> --- a/xen/arch/arm/mm.c
-> +++ b/xen/arch/arm/mm.c
-> @@ -369,40 +369,6 @@ void clear_fixmap(unsigned map)
->      BUG_ON(res != 0);
+> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+> index d5d0792ed48a..3d5a2283d4ef 100644
+> --- a/xen/arch/arm/setup.c
+> +++ b/xen/arch/arm/setup.c
+> @@ -637,10 +637,58 @@ static void __init init_staticmem_pages(void)
 >  }
 >  
-> -/* Create Xen's mappings of memory.
-> - * Mapping_size must be either 2MB or 32MB.
-> - * Base and virt must be mapping_size aligned.
-> - * Size must be a multiple of mapping_size.
-> - * second must be a contiguous set of second level page tables
-> - * covering the region starting at virt_offset. */
-> -static void __init create_mappings(lpae_t *second,
-> -                                   unsigned long virt_offset,
-> -                                   unsigned long base_mfn,
-> -                                   unsigned long nr_mfns,
-> -                                   unsigned int mapping_size)
-> -{
-> -    unsigned long i, count;
-> -    const unsigned long granularity = mapping_size >> PAGE_SHIFT;
-> -    lpae_t pte, *p;
-> -
-> -    ASSERT((mapping_size == MB(2)) || (mapping_size == MB(32)));
-> -    ASSERT(!((virt_offset >> PAGE_SHIFT) % granularity));
-> -    ASSERT(!(base_mfn % granularity));
-> -    ASSERT(!(nr_mfns % granularity));
-> -
-> -    count = nr_mfns / XEN_PT_LPAE_ENTRIES;
-> -    p = second + second_linear_offset(virt_offset);
-> -    pte = mfn_to_xen_entry(_mfn(base_mfn), MT_NORMAL);
-> -    if ( granularity == 16 * XEN_PT_LPAE_ENTRIES )
-> -        pte.pt.contig = 1;  /* These maps are in 16-entry contiguous chunks. */
-> -    for ( i = 0; i < count; i++ )
-> -    {
-> -        write_pte(p + i, pte);
-> -        pte.pt.base += 1 << XEN_PT_LPAE_SHIFT;
-> -    }
-> -    flush_xen_tlb_local();
-> -}
-> -
->  #ifdef CONFIG_DOMAIN_PAGE
->  void *map_domain_page_global(mfn_t mfn)
+>  #ifdef CONFIG_ARM_32
+> +/*
+> + * Populate the boot allocator. All the RAM but the following regions
+> + * will be added:
+> + *  - Modules (e.g., Xen, Kernel)
+> + *  - Reserved regions
+> + *  - Xenheap
+> + */
+> +static void __init populate_boot_allocator(void)
+> +{
+> +    unsigned int i;
+> +    const struct meminfo *banks = &bootinfo.mem;
+> +
+> +    for ( i = 0; i < banks->nr_banks; i++ )
+> +    {
+> +        const struct membank *bank = &banks->bank[i];
+> +        paddr_t bank_end = bank->start + bank->size;
+> +        paddr_t s, e;
+> +
+> +        s = bank->start;
+> +        while ( s < bank_end )
+> +        {
+> +            paddr_t n = bank_end;
+> +
+> +            e = next_module(s, &n);
+> +
+> +            if ( e == ~(paddr_t)0 )
+> +                e = n = bank_end;
+> +
+> +            /*
+> +             * Module in a RAM bank other than the one which we are
+> +             * not dealing with here.
+> +             */
+> +            if ( e > bank_end )
+> +                e = bank_end;
+> +
+> +            /* Avoid the xenheap */
+> +            if ( s < mfn_to_maddr(xenheap_mfn_end) &&
+> +                 mfn_to_maddr(xenheap_mfn_start) < e )
+> +            {
+> +                e = mfn_to_maddr(xenheap_mfn_start);
+> +                n = mfn_to_maddr(xenheap_mfn_end);
+> +            }
+> +
+> +            fw_unreserved_regions(s, e, init_boot_pages, 0);
+> +            s = n;
+> +        }
+> +    }
+> +}
+> +
+>  static void __init setup_mm(void)
 >  {
-> @@ -862,36 +828,18 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
->      unsigned long frametable_size = nr_pdxs * sizeof(struct page_info);
->      mfn_t base_mfn;
->      const unsigned long mapping_size = frametable_size < MB(32) ? MB(2) : MB(32);
-> -#ifdef CONFIG_ARM_64
-> -    lpae_t *second, pte;
-> -    unsigned long nr_second;
-> -    mfn_t second_base;
-> -    int i;
-> -#endif
-> +    int rc;
+> -    paddr_t ram_start, ram_end, ram_size;
+> -    paddr_t s, e;
+> +    paddr_t ram_start, ram_end, ram_size, e;
+>      unsigned long ram_pages;
+>      unsigned long heap_pages, xenheap_pages, domheap_pages;
+>      int i;
+> @@ -718,43 +766,7 @@ static void __init setup_mm(void)
+>      setup_xenheap_mappings((e >> PAGE_SHIFT) - xenheap_pages, xenheap_pages);
 >  
->      frametable_base_pdx = mfn_to_pdx(maddr_to_mfn(ps));
->      /* Round up to 2M or 32M boundary, as appropriate. */
->      frametable_size = ROUNDUP(frametable_size, mapping_size);
->      base_mfn = alloc_boot_pages(frametable_size >> PAGE_SHIFT, 32<<(20-12));
->  
-> -#ifdef CONFIG_ARM_64
-> -    /* Compute the number of second level pages. */
-> -    nr_second = ROUNDUP(frametable_size, FIRST_SIZE) >> FIRST_SHIFT;
-> -    second_base = alloc_boot_pages(nr_second, 1);
-> -    second = mfn_to_virt(second_base);
-> -    for ( i = 0; i < nr_second; i++ )
+>      /* Add non-xenheap memory */
+> -    for ( i = 0; i < bootinfo.mem.nr_banks; i++ )
 > -    {
-> -        clear_page(mfn_to_virt(mfn_add(second_base, i)));
-> -        pte = mfn_to_xen_entry(mfn_add(second_base, i), MT_NORMAL);
-> -        pte.pt.table = 1;
-> -        write_pte(&xen_first[first_table_offset(FRAMETABLE_VIRT_START)+i], pte);
+> -        paddr_t bank_start = bootinfo.mem.bank[i].start;
+> -        paddr_t bank_end = bank_start + bootinfo.mem.bank[i].size;
+> -
+> -        s = bank_start;
+> -        while ( s < bank_end )
+> -        {
+> -            paddr_t n = bank_end;
+> -
+> -            e = next_module(s, &n);
+> -
+> -            if ( e == ~(paddr_t)0 )
+> -            {
+> -                e = n = ram_end;
+> -            }
+> -
+> -            /*
+> -             * Module in a RAM bank other than the one which we are
+> -             * not dealing with here.
+> -             */
+> -            if ( e > bank_end )
+> -                e = bank_end;
+> -
+> -            /* Avoid the xenheap */
+> -            if ( s < mfn_to_maddr(mfn_add(xenheap_mfn_start, xenheap_pages))
+> -                 && mfn_to_maddr(xenheap_mfn_start) < e )
+> -            {
+> -                e = mfn_to_maddr(xenheap_mfn_start);
+> -                n = mfn_to_maddr(mfn_add(xenheap_mfn_start, xenheap_pages));
+> -            }
+> -
+> -            fw_unreserved_regions(s, e, init_boot_pages, 0);
+> -
+> -            s = n;
+> -        }
 > -    }
-> -    create_mappings(second, 0, mfn_x(base_mfn), frametable_size >> PAGE_SHIFT,
-> -                    mapping_size);
-> -#else
-> -    create_mappings(xen_second, FRAMETABLE_VIRT_START, mfn_x(base_mfn),
-> -                    frametable_size >> PAGE_SHIFT, mapping_size);
-> -#endif
-> +    rc = map_pages_to_xen(FRAMETABLE_VIRT_START, base_mfn,
-> +                          frametable_size >> PAGE_SHIFT,
-> +                          PAGE_HYPERVISOR_RW | _PAGE_BLOCK);
-> +    if ( rc )
-> +        panic("Unable to setup the frametable mappings.\n");
+> +    populate_boot_allocator();
 >  
->      memset(&frame_table[0], 0, nr_pdxs * sizeof(struct page_info));
->      memset(&frame_table[nr_pdxs], -1,
+>      /* Frame table covers all of RAM region, including holes */
+>      setup_frametable_mappings(ram_start, ram_end);
 > -- 
 > 2.32.0
 > 
