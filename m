@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 400A2CCA482
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36737CCA47F
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Jun 2022 03:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.342168.567274 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.342174.567335 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ny3bo-0007T0-J5; Mon, 06 Jun 2022 03:40:52 +0000
+	id 1ny3bx-0000md-5C; Mon, 06 Jun 2022 03:41:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 342168.567274; Mon, 06 Jun 2022 03:40:52 +0000
+Received: by outflank-mailman (output) from mailman id 342174.567335; Mon, 06 Jun 2022 03:41:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ny3bo-0007S0-EO; Mon, 06 Jun 2022 03:40:52 +0000
-Received: by outflank-mailman (input) for mailman id 342168;
- Mon, 06 Jun 2022 03:40:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1ny3bw-0000iw-ND; Mon, 06 Jun 2022 03:41:00 +0000
+Received: by outflank-mailman (input) for mailman id 342174;
+ Mon, 06 Jun 2022 03:40:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PxEH=WN=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1ny3bm-0006LY-L8
- for xen-devel@lists.xenproject.org; Mon, 06 Jun 2022 03:40:50 +0000
+ id 1ny3bu-0006AI-L9
+ for xen-devel@lists.xenproject.org; Mon, 06 Jun 2022 03:40:58 +0000
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 74e2a6e1-e54a-11ec-bd2c-47488cf2e6aa;
- Mon, 06 Jun 2022 05:40:49 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 2738F5C005B;
- Sun,  5 Jun 2022 23:40:49 -0400 (EDT)
+ [66.111.4.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7999dc07-e54a-11ec-b605-df0040e90b76;
+ Mon, 06 Jun 2022 05:40:57 +0200 (CEST)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+ by mailout.nyi.internal (Postfix) with ESMTP id 0D5C45C009E;
+ Sun,  5 Jun 2022 23:40:57 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Sun, 05 Jun 2022 23:40:49 -0400
+ by compute1.internal (MEProxy); Sun, 05 Jun 2022 23:40:57 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 5 Jun 2022 23:40:47 -0400 (EDT)
+ 5 Jun 2022 23:40:55 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,36 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 74e2a6e1-e54a-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: 7999dc07-e54a-11ec-b605-df0040e90b76
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm1; t=1654486849; x=1654573249; bh=U8kU4goNfn
-	hejF90xv/RWehAvQ7mOrYaRxEFIubWjr0=; b=vKoohr+AUD15ReHYhN+5posuv8
-	ylsZ3vFTqlXURpzI/se+U7FhzPiVA0hqzje5Zax24fMlYfIfceiJ4o6hgyn5yZgr
-	6tAUlsbm4i2G0mpAAsFI5B+tiXdNu4lTYD0rY4D9yFCFoP4r3o+7lEZ1QJA6VDss
-	1iOeJB78rSUDqTzTT5UT9yRx6mbmyu0Yjn89HRc/BEbDMltMVV19ZpY2YsA/iOlr
-	KtsjaiKIYDyX/SSK/ydwqa8AoEVEzF/pYXrDrYJi/cKNyPC1hdQuXSOnrAHBdxI4
-	yoT6HsEIetEdP3aCjrNSsrAeAEAHDMKS+GghXQGjWOHVGDTzD/2eg55jdY/g==
+	:subject:to:to; s=fm1; t=1654486857; x=1654573257; bh=CJWHUy2VWq
+	xW/8CRCgMpeNzBJIn8oo40U2Dyt2b4CbY=; b=cbiGlQRAPePlltHvsM0totHwde
+	mQgxKBrEQIYBdnaLgbZTwEBcaVF00/5RSMlM3pwDjpagnY2htyg0s+bcgvV9Ezkm
+	/T9/p/IQnLOoOuThbgBEcexfysh05byebCgqkROmb7ilaOUxmDExJ9cx4JLftnBa
+	tynWvL1cV52Xh/dGPChY9d5REvIiIDaDkG8h3VNttXMZd+t0QfN9sjFTy5ovLZHX
+	XPHfxQJiDTRCbgjKolXQ37pZimlsB9MNLb75oiwmxBy6tXAe2Rnsxb/40eh1nwpf
+	u+gf0b0clblWPqhAmXV2n/euYLdfVjtrntxMVbd20x47RoJAV12vEZCxsRWQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654486849; x=
-	1654573249; bh=U8kU4goNfnhejF90xv/RWehAvQ7mOrYaRxEFIubWjr0=; b=E
-	DAJtJ0Kmuhtg3wq8osJPyguvt9sSGG4+gzZUU37svHFhYSN7eQTcx+B0Vg3WKwLn
-	qAN5I3vEf3hHz9lWDiZSz02NHXtQokOhErVrL4F4Ey0NBjoEGhI7myzZA0GWE8sF
-	tkxwhrA+93qLnPHHpJuJB0s4hd85A5bQfrVGYrwZzylVbV8DYGnyH+I/4I/dFv/s
-	E5TCYvR6zSM85Vcieqlyt2lSGPvdurmIOU3i/F+HedE7qqlOMZTjNDNqxJnBDXEQ
-	JSpzPnQaipcpLHeh9Acuv3U7etNq1P2tcZc6zMGJs3Kg/xMfyF5yN3rwLdIM4PP9
-	x3hW0mYdy7Ay43krr1cmw==
-X-ME-Sender: <xms:QHedYqXcnBT6k38M3lCs_deMbrU76XY3K8-cg0dyOoURDmxCxsIzcA>
-    <xme:QHedYmlMGHvn6lA4xbUG7cKC_S5ggJxRHujcBB5QyXqIA2oqcQTpFLLRAnBLbopx0
-    CwqbTDUb3r50g>
-X-ME-Received: <xmr:QHedYuY2K7QAi0SmzIZl0ikkf7lOfotJ_nfKfLjO3m-77RfkZJ2yJhIGFVPq7kzZTWpyVXl93mIUOA2Y9jnXktEOflj7j3DyclbH3fAoH2uPkHJnT0o>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeegucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654486857; x=
+	1654573257; bh=CJWHUy2VWqxW/8CRCgMpeNzBJIn8oo40U2Dyt2b4CbY=; b=S
+	is+XW1FcqbLf61YDtDrxLIWBV+PynaefCYM3lTuYwR/KqA4AeQGPSLammQU4BTMx
+	ReDxr94nAgQ1HrPlbIsvn5oNRv3wJRwOYKzUTNe3wu7NbMwQ3aQYo00spND0o+Cl
+	h+wC3jebG6HUUJ+RI5sujOw5SAdfASpYwQKuYcOCDvc5Zx6Yh3/5K2fdWi69rMaP
+	Xa5x03kHSMZnDsslalwZHGmwt1ro65BW9t3E4Y4XodaXyksRXF70E7Y9oIfrdHr4
+	EV5WE99XaMam6TrsDWOGNp0/tH5+HXK4n28BuJLLh2oP30jRaWGpn47bNZx/YxFa
+	6xcZLM/NHJ8049V/szPaQ==
+X-ME-Sender: <xms:SHedYnoq2Xv0qS3rgxLxQ0AvDoaEnxGhkEpdDdiOlbWepeQdw6c5RA>
+    <xme:SHedYhrODhRrIJHbx6zkNC6jlxYtTV6YrpwqnLg9jqdZ-WWyijuvUZ8Vr8eca8_MF
+    q2iYsA3qDxPJg>
+X-ME-Received: <xmr:SHedYkN10VrovxOJr6y6MC3IE9znRumzk0fbD9dLiCk7ilYKHjxSyhGYX0hSPUXP0c9-U25XYMtpn06WQ-irD-aBS2CKufYmHNIF2eNLZAlR3aJb3kE>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeefucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
@@ -83,10 +83,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeegucetufdoteggod
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
     hushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:QXedYhVwpN7N_jcoJJJ5Vrso4bsTh3kGj_r_G83LFl0IvsNiXbPMfQ>
-    <xmx:QXedYklbVk7VxGseBb7IBnC-wfxuGNETuCu0k8tQ1bWIvl4iA2UeBQ>
-    <xmx:QXedYmcQ--bfAIOZ1ReWy8EV9reBlGfhGHXwBgpZRBTJpsanNFw72Q>
-    <xmx:QXedYjv1uU73cbFr2wuyNngp1TlOtjiUZu-BRmcArPvXdJJXP-_nZA>
+X-ME-Proxy: <xmx:SHedYq6LMFP48lT7Aee9_514AdYmN-b6XnJ3sNcizFD_hY4mL7X2rQ>
+    <xmx:SHedYm6R1e1FbPbs0z7iDzQrLVzrqxFTy11OCcOFLUbV7Hxmt-uNEg>
+    <xmx:SHedYihc5hr40FSOm93vKIVLXdi57IRTuxy30e7V45GvcRgapDyLbA>
+    <xmx:SXedYoSNb_UC64k8g5jBC9NvRXw9MaGtgVWWLjsG6dg3jg8Jlx42nQ>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,9 +97,9 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH 05/12] ehci-dbgp: fix selecting n-th ehci controller
-Date: Mon,  6 Jun 2022 05:40:17 +0200
-Message-Id: <c24ab71e7ee5ae4f411d4070fe7d29bf07c02dc7.1654486751.git-series.marmarek@invisiblethingslab.com>
+Subject: [RFC PATCH 11/12] xue: prevent dom0 (or other domain) from using the device
+Date: Mon,  6 Jun 2022 05:40:23 +0200
+Message-Id: <74ffafdaa109f6067f2ecbc89b885a8a9cdbadaf.1654486751.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.07846d9c1900bd8c905a05e7afb214b4cf4ab881.1654486751.git-series.marmarek@invisiblethingslab.com>
 References: <cover.07846d9c1900bd8c905a05e7afb214b4cf4ab881.1654486751.git-series.marmarek@invisiblethingslab.com>
@@ -107,26 +107,36 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The ehci<n> number was parsed but ignored.
+Mark config space of the device as read-only, to prevent dom0 (or
+others) re-configuring the USB controller while it's used as a debug
+console.
+
+This isn't strictly necessary, as the xhci and xhci-dbc drivers can
+co-exists, but that's a simpler option.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- xen/drivers/char/ehci-dbgp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/drivers/char/xue.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/xen/drivers/char/ehci-dbgp.c b/xen/drivers/char/ehci-dbgp.c
-index 16c8ff394d5c..92c588ec0aa3 100644
---- a/xen/drivers/char/ehci-dbgp.c
-+++ b/xen/drivers/char/ehci-dbgp.c
-@@ -1480,7 +1480,7 @@ void __init ehci_dbgp_init(void)
-         unsigned int num = 0;
+diff --git a/xen/drivers/char/xue.c b/xen/drivers/char/xue.c
+index 8863b996c619..ff62b868e906 100644
+--- a/xen/drivers/char/xue.c
++++ b/xen/drivers/char/xue.c
+@@ -70,6 +70,13 @@ static void __init cf_check xue_uart_init_postirq(struct serial_port *port)
+     serial_async_transmit(port);
+     init_timer(&uart->timer, xue_uart_poll, port, 0);
+     set_timer(&uart->timer, NOW() + MILLISECS(1));
++
++    if ( pci_ro_device(0, (uart->xue.xhc_cf8 >> 16) & 0xff,
++                          (uart->xue.xhc_cf8 >> 8) & 0xff) )
++            printk(XENLOG_INFO "Could not mark config space of %02x:%02x.%u read-only.\n",
++                   (uart->xue.xhc_cf8 >> 16) & 0xff,
++                   (uart->xue.xhc_cf8 >> 11) & 0x1f,
++                   (uart->xue.xhc_cf8 >> 8) & 0x0f);
+ }
  
-         if ( opt_dbgp[4] )
--            simple_strtoul(opt_dbgp + 4, &e, 10);
-+            num = simple_strtoul(opt_dbgp + 4, &e, 10);
- 
-         dbgp->cap = find_dbgp(dbgp, num);
-         if ( !dbgp->cap )
+ static int cf_check xue_uart_tx_ready(struct serial_port *port)
 -- 
 git-series 0.9.1
 
