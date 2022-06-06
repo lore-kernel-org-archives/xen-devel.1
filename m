@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43D2DCCA473
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C231CCA484
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Jun 2022 03:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.342170.567290 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.342166.567247 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ny3br-0007uf-Ih; Mon, 06 Jun 2022 03:40:55 +0000
+	id 1ny3bl-0006mP-Vr; Mon, 06 Jun 2022 03:40:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 342170.567290; Mon, 06 Jun 2022 03:40:55 +0000
+Received: by outflank-mailman (output) from mailman id 342166.567247; Mon, 06 Jun 2022 03:40:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ny3br-0007td-DR; Mon, 06 Jun 2022 03:40:55 +0000
-Received: by outflank-mailman (input) for mailman id 342170;
- Mon, 06 Jun 2022 03:40:53 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1ny3bl-0006lD-PR; Mon, 06 Jun 2022 03:40:49 +0000
+Received: by outflank-mailman (input) for mailman id 342166;
+ Mon, 06 Jun 2022 03:40:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PxEH=WN=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1ny3bp-0006AI-KJ
- for xen-devel@lists.xenproject.org; Mon, 06 Jun 2022 03:40:53 +0000
+ id 1ny3bl-0006LY-2l
+ for xen-devel@lists.xenproject.org; Mon, 06 Jun 2022 03:40:49 +0000
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 767fca2c-e54a-11ec-b605-df0040e90b76;
- Mon, 06 Jun 2022 05:40:52 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id D2ECA5C0067;
- Sun,  5 Jun 2022 23:40:51 -0400 (EDT)
+ [66.111.4.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7311c486-e54a-11ec-bd2c-47488cf2e6aa;
+ Mon, 06 Jun 2022 05:40:47 +0200 (CEST)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailout.nyi.internal (Postfix) with ESMTP id 17C635C0148;
+ Sun,  5 Jun 2022 23:40:46 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Sun, 05 Jun 2022 23:40:51 -0400
+ by compute3.internal (MEProxy); Sun, 05 Jun 2022 23:40:46 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 5 Jun 2022 23:40:50 -0400 (EDT)
+ 5 Jun 2022 23:40:44 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,58 +45,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 767fca2c-e54a-11ec-b605-df0040e90b76
+X-Inumbo-ID: 7311c486-e54a-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm1; t=1654486851; x=1654573251; bh=9Z09zPwAMV
-	UfGBsTlLDLpiIwvOBt3luu8w7C4olNcaY=; b=rfKtrEAxCdTEyWbp73pYhMWN6/
-	786II0vy2qb982ghSlOhqlBaiBfdCYJYHM7lo0cK4DRoSsHLQiUrNNZPOUqy4VFR
-	qbwFZMTMjo+WphmQhUnz/kRGRp4yGzSUBGGbSuHUP2ylk0tpfcB+EVFKNvDSNhRy
-	xEYe7WosfAUF586LGgxo24t2Qmz3cdvgClydzreRnkhodSDijzUGRwke1wQRp5kp
-	awAkewluaX9KGPuI8q054T4xzynQyTjb+wgi4ARQXggI38aD86pEu63WaXY1STDN
-	Gl/MQchrJepiJE/MMrvJh2ZD7Hqgc1uIMsRjbgIc2fSfWeuATXdPDV0ZhmtQ==
+	:subject:to:to; s=fm1; t=1654486846; x=1654573246; bh=c0cgv9w4Lg
+	orNmNlJ07oJSahIj0+LHfl1jX6Aux8s3M=; b=Em9l1tQe6BW4ubfwuvScHVisYO
+	NZ9juiKsdj2dzC/QD736ofHVHoXvvzcLgDRdZ5hyWnlegygzwT6Hwb/xc2zCfJTF
+	KrWoED1p85JKkSL3Lmx6lylYJ+GPyEGtnwqqU+fJCJDo6FZ02uSerqjMIhWSmBbr
+	Eo1HcGRmJKy9Q9IhWRk2zAZeD8vs9Bn5SBqFNMRM37nhemaHuDxdXpzqFn5uuHie
+	ha83nwuUFaLntZkwydflYRkkC5Cw6O7sO6YM5hY8YntNdO6lLZYy7/LEUoRtlc4K
+	9fOCGHquDYmoQrt1Ka5b9pNc3Y5GH4Av8fTLdZPXqy0nEp/GllFHPN5FHVSA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654486851; x=
-	1654573251; bh=9Z09zPwAMVUfGBsTlLDLpiIwvOBt3luu8w7C4olNcaY=; b=R
-	JvWzyPG/YtFe/BIlHdR7UejC82pvAzRXFlCROrJfOWORsaZN8fKD4iwMROYjCC3c
-	Zo54r0ilw5MiWF6oHg1tKFc7dlmspwJOKju37OwkU9jLyTmjPQ9EuhLQE5mqKTAp
-	aCGQXFK9OkmbL825GBaJFTalfCo7leWkituOOd9TPuw373W+bNPNQB1KWXKHKufc
-	NkP6CqM+AeK8yKlHlUGo13nw55GbWwODYBu2S0Zu9ZHIrz9FfjSLr0d3vbFmsmJz
-	VQU/d2DWlfyGq6cnAtXdu5xlTWs+t2Ne6DhkEgxEE2T/n6NmtDochWlBu858sSr2
-	zyX8sJ9JEbtGLu4J7CQiQ==
-X-ME-Sender: <xms:Q3edYnwO7bQVWiMN3-IOTS4I02TRTwwRJbDtUaPCEWxcXnfPJdvxZg>
-    <xme:Q3edYvSuOC6k-_aqrrYZnKqnvp3yCOrTQxP_endrVJE2yUNz-wOxuljfDvJC8Fzlg
-    guqFDuZkIcQTw>
-X-ME-Received: <xmr:Q3edYhUOonOVpVJTpeSphw6wXeEvjyDRSuiQg8RKwL47l5SmpxBEk3F9eIH-_Zdjjx8JVJXE2kIhAYJuxOm5zU8fxo2KvBM3qT5YAqF8fwNqcq7qeLI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeegucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654486846; x=
+	1654573246; bh=c0cgv9w4LgorNmNlJ07oJSahIj0+LHfl1jX6Aux8s3M=; b=q
+	DrAlhTnCMLiolvNqEwz453ubt1eiVi+e5NXTnNt+zxnxFOVRcLKbjTfjDR7G6KBH
+	LKdKWoC1R30v6WIXQ7U1JnJN3MhNWV7c+XA+hAEcNjAheb06ch79I0om/Zx8KquH
+	DqP4JhboHogjzNUOJ+NuPrjbpcK/19G8vYVVaPII+5dfwVI1HTisqyMQtjjcQQ0K
+	VW4mbDE7T/Fzw4v1g/jmtTugy2MR+KfGJNggjVYM9XqclSD9zSKzpGT2xWtwKA7U
+	uCXkfgz/2KYb0BuZsBzT/7LjViO5M1IEME115WuaYS62n4S7ezgMte6Jv972uont
+	PPc1I3w7DU/8irBk+EVHQ==
+X-ME-Sender: <xms:PXedYtTh_s7fpihmjYWSI2GYJc3nA0tc7HPsD3dDbrn9YOOw4GPHzg>
+    <xme:PXedYmy70HCgJPe561RN85h-PDX1WwH5uJlC4-Vo-bwvv4B34tfEbP0D1naD-zjyq
+    TABpMceYgLqpw>
+X-ME-Received: <xmr:PXedYi0tM_i_0w5pRisLS4PlXEKOgnozfK_e0Y0FqQmV-ODpW3VQ8vBqvq-u1uvLOtwh4mV3v_QRs6bGCe9gY9CKQsD3Jt-qK6NYnkkdjfYW7PHUSRg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeefucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
     vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
     hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:Q3edYhhJ5krkcRvyqHDidOkKuHvf0K_naO6OQdlm1TiEmQo6oSSdNg>
-    <xmx:Q3edYpBzHDgx6nbwhl_IImREVH8Vcs-m4RhoAg3Cn9FkIWb-F6qsrQ>
-    <xmx:Q3edYqIwl121yafWzxRtX8eOPxQkX1Bs_v2DAwndIS3rwiB8jjpS5A>
-    <xmx:Q3edYsNiDMhV-eaBjxKZ0bzq7NLvx6NV6HRlgOFQFiz1zh29XycmMA>
+X-ME-Proxy: <xmx:PXedYlAWwJj0V0DTvW12LDXET0xPeBuPCcfqQjnKzh68fMq6VrvXXg>
+    <xmx:PXedYmgk2cuG_PU8trxdqvNJ-3zBDsLkEVR4VC3o4qG9YtGcNknRJA>
+    <xmx:PXedYpqM8CK1v36faClKh17oWIkcKsV_2T92zUFcWSCTKbZBJiejGw>
+    <xmx:PnedYoa2_KnKlcXSoTMgcijT7KAp4LWFyk4xZr77IDRF8_qpFUgExg>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [RFC PATCH 07/12] IOMMU: add common API for device reserved memory
-Date: Mon,  6 Jun 2022 05:40:19 +0200
-Message-Id: <8ba3e1cbfc7ee1d0a5da54e47f33a14c526691d3.1654486751.git-series.marmarek@invisiblethingslab.com>
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [RFC PATCH 03/12] xue: reset XHCI ports when initializing dbc
+Date: Mon,  6 Jun 2022 05:40:15 +0200
+Message-Id: <27748e5f94769a66900697e521b35b61b1da01d8.1654486751.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.07846d9c1900bd8c905a05e7afb214b4cf4ab881.1654486751.git-series.marmarek@invisiblethingslab.com>
 References: <cover.07846d9c1900bd8c905a05e7afb214b4cf4ab881.1654486751.git-series.marmarek@invisiblethingslab.com>
@@ -104,98 +107,112 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add API similar to rmrr= and ivmd= arguments, but in a common code. This
-will allow drivers to register reserved memory regardless of the IOMMU
-vendor.
-The direct reason for this API is xhci-dbc console driver (aka xue),
-that needs to use DMA. But future change may unify command line
-arguments for user-supplied reserved memory, and it may be useful for
-other drivers in the future too.
+Reset ports, to force host system to re-enumerate devices. Otheriwse it
+will require the cable to be re-plugged, or will wait in the
+"configuring" state indefinitely.
 
-This commit just introduces an API, subsequent patches will plug it in
-appropriate places. The reserved memory ranges needs to be saved
-locally, because at the point when they are collected, Xen doesn't know
-yet which IOMMU driver will be used.
+Trick and code copied from Linux:
+drivers/usb/early/xhci-dbc.c:xdbc_start()->xdbc_reset_debug_port()
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- xen/drivers/passthrough/iommu.c | 40 ++++++++++++++++++++++++++++++++++-
- xen/include/xen/iommu.h         | 11 +++++++++-
- 2 files changed, 51 insertions(+)
+ xen/include/xue.h | 69 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 69 insertions(+)
 
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 9393d987c788..5c4162912359 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -654,6 +654,46 @@ bool_t iommu_has_feature(struct domain *d, enum iommu_feature feature)
-     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
+diff --git a/xen/include/xue.h b/xen/include/xue.h
+index 7515244f6af3..6048dcdd5509 100644
+--- a/xen/include/xue.h
++++ b/xen/include/xue.h
+@@ -59,6 +59,10 @@
+     ((1UL << XUE_PSC_CSC) | (1UL << XUE_PSC_PRC) | (1UL << XUE_PSC_PLC) |      \
+      (1UL << XUE_PSC_CEC))
+ 
++#define     XUE_XHC_EXT_PORT_MAJOR(x)  (((x) >> 24) & 0xff)
++#define PORT_RESET  (1 << 4)
++#define PORT_CONNECT  (1 << 0)
++
+ static inline int known_xhc(uint32_t dev_ven)
+ {
+     switch (dev_ven) {
+@@ -1420,6 +1424,67 @@ static inline void xue_init_strings(struct xue *xue, uint32_t *info)
+     info[8] = (4 << 24) | (30 << 16) | (8 << 8) | 6;
  }
  
-+#define MAX_EXTRA_RESERVED_RANGES 20
-+struct extra_reserved_range {
-+    xen_pfn_t start;
-+    xen_ulong_t nr;
-+    u32 sbdf;
-+};
-+static unsigned int __initdata nr_extra_reserved_ranges;
-+static struct extra_reserved_range __initdata extra_reserved_ranges[MAX_EXTRA_RESERVED_RANGES];
-+
-+int iommu_add_extra_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr, u32 sbdf)
++static inline void xue_do_reset_debug_port(struct xue *xue, u32 id, u32 count)
 +{
-+    unsigned int idx;
++    uint32_t *ops_reg;
++    uint32_t *portsc;
++    u32 val, cap_length;
++    int i;
 +
-+    if ( nr_extra_reserved_ranges >= MAX_EXTRA_RESERVED_RANGES )
-+        return -ENOMEM;
++    cap_length = (*(uint32_t*)xue->xhc_mmio) & 0xff;
++    ops_reg = xue->xhc_mmio + cap_length;
 +
-+    idx = nr_extra_reserved_ranges++;
-+    extra_reserved_ranges[idx].start = start;
-+    extra_reserved_ranges[idx].nr = nr;
-+    extra_reserved_ranges[idx].sbdf = sbdf;
-+    return 0;
-+}
-+
-+int iommu_get_extra_reserved_device_memory(iommu_grdm_t *func, void *ctxt)
-+{
-+    unsigned int idx;
-+    int ret;
-+
-+    for ( idx = 0; idx < nr_extra_reserved_ranges; idx++ )
-+    {
-+        ret = func(extra_reserved_ranges[idx].start,
-+                   extra_reserved_ranges[idx].nr,
-+                   extra_reserved_ranges[idx].sbdf,
-+                   ctxt);
-+        if ( ret < 0 )
-+            return ret;
++    id--;
++    for (i = id; i < (id + count); i++) {
++        portsc = ops_reg + 0x100 + i * 0x4;
++        val = *portsc;
++        if (!(val & PORT_CONNECT))
++            *portsc = val | PORT_RESET;
 +    }
-+    return 0;
 +}
 +
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index e0f82712ed73..97424130247c 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -296,6 +296,17 @@ struct iommu_ops {
- #endif
- };
- 
-+/*
-+ * To be called by Xen internally, to register extra RMRR/IVMD ranges.
-+ * Needs to be called before IOMMU initialization.
-+ */
-+extern int iommu_add_extra_reserved_device_memory(xen_pfn_t start, xen_ulong_t nr, u32 sbdf);
-+/*
-+ * To be called by specific IOMMU driver during initialization,
-+ * to fetch ranges registered with iommu_add_extra_reserved_device_memory().
-+ */
-+extern int iommu_get_extra_reserved_device_memory(iommu_grdm_t *func, void *ctxt);
 +
- #include <asm/iommu.h>
++static inline void xue_reset_debug_port(struct xue *xue)
++{
++    u32 val, port_offset, port_count;
++    uint32_t *xcap;
++    uint32_t next;
++    uint32_t id;
++    uint8_t *mmio = (uint8_t *)xue->xhc_mmio;
++    uint32_t *hccp1 = (uint32_t *)(mmio + 0x10);
++    const uint32_t PROTOCOL_ID = 0x2;
++
++    /**
++     * Paranoid check against a zero value. The spec mandates that
++     * at least one "supported protocol" capability must be implemented,
++     * so this should always be false.
++     */
++    if ((*hccp1 & 0xFFFF0000) == 0) {
++        return;
++    }
++
++    xcap = (uint32_t *)(mmio + (((*hccp1 & 0xFFFF0000) >> 16) << 2));
++    next = (*xcap & 0xFF00) >> 8;
++    id = *xcap & 0xFF;
++
++    /* Look for "supported protocol" capability, major revision 3 */
++    for (;next; xcap += next, id = *xcap & 0xFF, next = (*xcap & 0xFF00) >> 8) {
++        if (id != PROTOCOL_ID && next)
++            continue;
++
++        if (XUE_XHC_EXT_PORT_MAJOR(*xcap) != 0x3)
++            continue;
++
++        /* extract ports offset and count from the capability structure */
++        val = *(xcap + 2);
++        port_offset = val & 0xff;
++        port_count = (val >> 8) & 0xff;
++
++        /* and reset them all */
++        xue_do_reset_debug_port(xue, port_offset, port_count);
++    }
++}
++
+ static inline void xue_dump(struct xue *xue)
+ {
+     struct xue_ops *op = xue->ops;
+@@ -1459,6 +1524,10 @@ static inline void xue_enable_dbc(struct xue *xue)
+         ops->pause(sys);
+     }
  
- #ifndef iommu_call
++    /* reset ports on initial open, to force re-enumerating by the host */
++    if (!xue->open)
++        xue_reset_debug_port(xue);
++
+     ops->sfence(sys);
+     reg->portsc |= (1UL << XUE_PSC_PED);
+     ops->sfence(sys);
 -- 
 git-series 0.9.1
 
