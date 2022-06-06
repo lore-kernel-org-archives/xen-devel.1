@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36737CCA47F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E01C3F2D4
 	for <xen-devel@archiver.kernel.org>; Mon,  6 Jun 2022 03:41:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.342174.567335 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.342164.567224 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ny3bx-0000md-5C; Mon, 06 Jun 2022 03:41:01 +0000
+	id 1ny3bk-0006Dj-76; Mon, 06 Jun 2022 03:40:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 342174.567335; Mon, 06 Jun 2022 03:41:01 +0000
+Received: by outflank-mailman (output) from mailman id 342164.567224; Mon, 06 Jun 2022 03:40:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ny3bw-0000iw-ND; Mon, 06 Jun 2022 03:41:00 +0000
-Received: by outflank-mailman (input) for mailman id 342174;
- Mon, 06 Jun 2022 03:40:58 +0000
+	id 1ny3bk-0006Ca-1Q; Mon, 06 Jun 2022 03:40:48 +0000
+Received: by outflank-mailman (input) for mailman id 342164;
+ Mon, 06 Jun 2022 03:40:46 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=PxEH=WN=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1ny3bu-0006AI-L9
- for xen-devel@lists.xenproject.org; Mon, 06 Jun 2022 03:40:58 +0000
+ id 1ny3bi-0006AI-Qm
+ for xen-devel@lists.xenproject.org; Mon, 06 Jun 2022 03:40:46 +0000
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
  [66.111.4.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 7999dc07-e54a-11ec-b605-df0040e90b76;
- Mon, 06 Jun 2022 05:40:57 +0200 (CEST)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.nyi.internal (Postfix) with ESMTP id 0D5C45C009E;
- Sun,  5 Jun 2022 23:40:57 -0400 (EDT)
+ id 722c1c16-e54a-11ec-b605-df0040e90b76;
+ Mon, 06 Jun 2022 05:40:45 +0200 (CEST)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailout.nyi.internal (Postfix) with ESMTP id 8FFC15C00E6;
+ Sun,  5 Jun 2022 23:40:44 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute1.internal (MEProxy); Sun, 05 Jun 2022 23:40:57 -0400
+ by compute2.internal (MEProxy); Sun, 05 Jun 2022 23:40:44 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sun,
- 5 Jun 2022 23:40:55 -0400 (EDT)
+ 5 Jun 2022 23:40:43 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,48 +45,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7999dc07-e54a-11ec-b605-df0040e90b76
+X-Inumbo-ID: 722c1c16-e54a-11ec-b605-df0040e90b76
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm1; t=1654486857; x=1654573257; bh=CJWHUy2VWq
-	xW/8CRCgMpeNzBJIn8oo40U2Dyt2b4CbY=; b=cbiGlQRAPePlltHvsM0totHwde
-	mQgxKBrEQIYBdnaLgbZTwEBcaVF00/5RSMlM3pwDjpagnY2htyg0s+bcgvV9Ezkm
-	/T9/p/IQnLOoOuThbgBEcexfysh05byebCgqkROmb7ilaOUxmDExJ9cx4JLftnBa
-	tynWvL1cV52Xh/dGPChY9d5REvIiIDaDkG8h3VNttXMZd+t0QfN9sjFTy5ovLZHX
-	XPHfxQJiDTRCbgjKolXQ37pZimlsB9MNLb75oiwmxBy6tXAe2Rnsxb/40eh1nwpf
-	u+gf0b0clblWPqhAmXV2n/euYLdfVjtrntxMVbd20x47RoJAV12vEZCxsRWQ==
+	:subject:to:to; s=fm1; t=1654486844; x=1654573244; bh=eX7fSKteqe
+	onuY94tGwQDaahOOYr2OCH2EyjM2W2Mdk=; b=RTUScW8EXvoifl2aFua3yOjN42
+	DoDd+q7Bz+sdizPVk8CdgetgBwlorqpm6CV4vSswMnEQt1hzdm5+XUWv8glK8aP3
+	jJM42MJqK7vCSCzZCH2+jXYQHgrey8hsSzmER0IAfk2XfcPCFFMaC3XJdicCk+vu
+	u/AuWuZ+PjptqKMwm/TNd1vl3SQWBYYAsYnsElV4iKnORt6Zp+SM60R3w4zlHK4J
+	4mcSsDCdCo24dDP5tw8fkZcCxfxUTz+eH3M7KWl21Wiv7k6120fYrOhtzHEIIsMa
+	9O5WZi01vfNohSlmSJhJnOfIpjc6CfTMSZjwFXsGCiCwgQQUImmT+F9QcW/w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654486857; x=
-	1654573257; bh=CJWHUy2VWqxW/8CRCgMpeNzBJIn8oo40U2Dyt2b4CbY=; b=S
-	is+XW1FcqbLf61YDtDrxLIWBV+PynaefCYM3lTuYwR/KqA4AeQGPSLammQU4BTMx
-	ReDxr94nAgQ1HrPlbIsvn5oNRv3wJRwOYKzUTNe3wu7NbMwQ3aQYo00spND0o+Cl
-	h+wC3jebG6HUUJ+RI5sujOw5SAdfASpYwQKuYcOCDvc5Zx6Yh3/5K2fdWi69rMaP
-	Xa5x03kHSMZnDsslalwZHGmwt1ro65BW9t3E4Y4XodaXyksRXF70E7Y9oIfrdHr4
-	EV5WE99XaMam6TrsDWOGNp0/tH5+HXK4n28BuJLLh2oP30jRaWGpn47bNZx/YxFa
-	6xcZLM/NHJ8049V/szPaQ==
-X-ME-Sender: <xms:SHedYnoq2Xv0qS3rgxLxQ0AvDoaEnxGhkEpdDdiOlbWepeQdw6c5RA>
-    <xme:SHedYhrODhRrIJHbx6zkNC6jlxYtTV6YrpwqnLg9jqdZ-WWyijuvUZ8Vr8eca8_MF
-    q2iYsA3qDxPJg>
-X-ME-Received: <xmr:SHedYkN10VrovxOJr6y6MC3IE9znRumzk0fbD9dLiCk7ilYKHjxSyhGYX0hSPUXP0c9-U25XYMtpn06WQ-irD-aBS2CKufYmHNIF2eNLZAlR3aJb3kE>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeefucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654486844; x=
+	1654573244; bh=eX7fSKteqeonuY94tGwQDaahOOYr2OCH2EyjM2W2Mdk=; b=q
+	KkPMpIyBeYquR/feUT4HEvTY3j2rB4kGyEEYqK57IYMRcH7f7dy81GXY3xfzLidO
+	lmh0Uk/Eh2RB5EJ8f1ddxmFXYKQAYBKS83l6h2Bz1y+ntSzZEKQMcTOV+KaaLlMb
+	1ZLnEBXvTuGxgieLWFqR9oi0cksjnZq0lIZHeKikn4NAlmDmfubAQ992ITYi9kR4
+	1t62rdMP6/pBC3aQksattom/OiKqzUGK1uz4GVfExyLA0Ru7GkP0mJM8s3b50ZdO
+	Gi1C5ZPQjJZFzkJzSyTrMszNXFB+8lJQdNHbHFYXX3XkVCxhUebqnBC9b8TacEMb
+	wYbNwCC5rLr7GJ9sH9tHg==
+X-ME-Sender: <xms:PHedYrB9lhcU2nf48qPphXHLhaSdPDz10fkHTBIN9rmJPHHWff3SJQ>
+    <xme:PHedYhjANQaZZdnVDFcvoJfy_iiC6tWmjQ1lytv2AVDHiE5LexLYeEan_sS4kSawA
+    gJvlH7Y4oaqxA>
+X-ME-Received: <xmr:PHedYmmy-Myg-Zjr39809TmCApD8Nbf7yR4x4h5N2M4Bbia80bf8-jQy7sOEagZXIuejJ0cHiBLbQPzmtXI1ULAQMQM9TC6-tDn4zh47sDJr1gA3-L0>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddtuddgjeegucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
     vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
     hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:SHedYq6LMFP48lT7Aee9_514AdYmN-b6XnJ3sNcizFD_hY4mL7X2rQ>
-    <xmx:SHedYm6R1e1FbPbs0z7iDzQrLVzrqxFTy11OCcOFLUbV7Hxmt-uNEg>
-    <xmx:SHedYihc5hr40FSOm93vKIVLXdi57IRTuxy30e7V45GvcRgapDyLbA>
-    <xmx:SXedYoSNb_UC64k8g5jBC9NvRXw9MaGtgVWWLjsG6dg3jg8Jlx42nQ>
+X-ME-Proxy: <xmx:PHedYty43YGeinW2J6q9np7DyOIIF9QL6pTUqru-4Dshalhbw21thA>
+    <xmx:PHedYgQike4r9v2UjlKckAGj9CPJ95bGaYTO_VdW0V1Fu8vJnmC_iw>
+    <xmx:PHedYgaw8Uw1EKLzqBE-eqSCj8nJmWddyqzPpmOFk8ayMNcewp4-uw>
+    <xmx:PHedYlKTWovfNv5NizIRrGXFjU8VcwF65uvZcn5qjSQDzup3klmfWw>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,9 +97,9 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [RFC PATCH 11/12] xue: prevent dom0 (or other domain) from using the device
-Date: Mon,  6 Jun 2022 05:40:23 +0200
-Message-Id: <74ffafdaa109f6067f2ecbc89b885a8a9cdbadaf.1654486751.git-series.marmarek@invisiblethingslab.com>
+Subject: [RFC PATCH 02/12] xue: annotate functions with cf_check
+Date: Mon,  6 Jun 2022 05:40:14 +0200
+Message-Id: <7f248769d2e50077b8719f7524c607d843199951.1654486751.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.07846d9c1900bd8c905a05e7afb214b4cf4ab881.1654486751.git-series.marmarek@invisiblethingslab.com>
 References: <cover.07846d9c1900bd8c905a05e7afb214b4cf4ab881.1654486751.git-series.marmarek@invisiblethingslab.com>
@@ -107,36 +107,130 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Mark config space of the device as read-only, to prevent dom0 (or
-others) re-configuring the USB controller while it's used as a debug
-console.
-
-This isn't strictly necessary, as the xhci and xhci-dbc drivers can
-co-exists, but that's a simpler option.
+Annotate indirectly called functions for IBT.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- xen/drivers/char/xue.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ xen/drivers/char/xue.c | 12 ++++++------
+ xen/include/xue.h      | 24 ++++++++++++------------
+ 2 files changed, 18 insertions(+), 18 deletions(-)
 
 diff --git a/xen/drivers/char/xue.c b/xen/drivers/char/xue.c
-index 8863b996c619..ff62b868e906 100644
+index 8aefae482b71..98334090c078 100644
 --- a/xen/drivers/char/xue.c
 +++ b/xen/drivers/char/xue.c
-@@ -70,6 +70,13 @@ static void __init cf_check xue_uart_init_postirq(struct serial_port *port)
-     serial_async_transmit(port);
-     init_timer(&uart->timer, xue_uart_poll, port, 0);
-     set_timer(&uart->timer, NOW() + MILLISECS(1));
-+
-+    if ( pci_ro_device(0, (uart->xue.xhc_cf8 >> 16) & 0xff,
-+                          (uart->xue.xhc_cf8 >> 8) & 0xff) )
-+            printk(XENLOG_INFO "Could not mark config space of %02x:%02x.%u read-only.\n",
-+                   (uart->xue.xhc_cf8 >> 16) & 0xff,
-+                   (uart->xue.xhc_cf8 >> 11) & 0x1f,
-+                   (uart->xue.xhc_cf8 >> 8) & 0x0f);
+@@ -39,7 +39,7 @@ struct xue_uart {
+ static struct xue_uart xue_uart;
+ static struct xue_ops xue_ops;
+ 
+-static void xue_uart_poll(void *data)
++static void cf_check xue_uart_poll(void *data)
+ {
+     struct serial_port *port = data;
+     struct xue_uart *uart = port->uart;
+@@ -56,13 +56,13 @@ static void xue_uart_poll(void *data)
+     set_timer(&uart->timer, NOW() + MICROSECS(XUE_POLL_INTERVAL));
  }
  
- static int cf_check xue_uart_tx_ready(struct serial_port *port)
+-static void __init xue_uart_init_preirq(struct serial_port *port)
++static void __init cf_check xue_uart_init_preirq(struct serial_port *port)
+ {
+     struct xue_uart *uart = port->uart;
+     uart->lock = &port->tx_lock;
+ }
+ 
+-static void __init xue_uart_init_postirq(struct serial_port *port)
++static void __init cf_check xue_uart_init_postirq(struct serial_port *port)
+ {
+     struct xue_uart *uart = port->uart;
+ 
+@@ -71,7 +71,7 @@ static void __init xue_uart_init_postirq(struct serial_port *port)
+     set_timer(&uart->timer, NOW() + MILLISECS(1));
+ }
+ 
+-static int xue_uart_tx_ready(struct serial_port *port)
++static int cf_check xue_uart_tx_ready(struct serial_port *port)
+ {
+     struct xue_uart *uart = port->uart;
+     struct xue *xue = &uart->xue;
+@@ -79,13 +79,13 @@ static int xue_uart_tx_ready(struct serial_port *port)
+     return XUE_WORK_RING_CAP - xue_work_ring_size(&xue->dbc_owork);
+ }
+ 
+-static void xue_uart_putc(struct serial_port *port, char c)
++static void cf_check xue_uart_putc(struct serial_port *port, char c)
+ {
+     struct xue_uart *uart = port->uart;
+     xue_putc(&uart->xue, c);
+ }
+ 
+-static inline void xue_uart_flush(struct serial_port *port)
++static inline void cf_check xue_uart_flush(struct serial_port *port)
+ {
+     s_time_t goal;
+     struct xue_uart *uart = port->uart;
+diff --git a/xen/include/xue.h b/xen/include/xue.h
+index 66f7d66447f3..7515244f6af3 100644
+--- a/xen/include/xue.h
++++ b/xen/include/xue.h
+@@ -684,45 +684,45 @@ static inline void xue_sys_clflush(void *sys, void *ptr)
+ #define xue_error(...) printk("xue error: " __VA_ARGS__)
+ #define XUE_SYSID xue_sysid_xen
+ 
+-static inline int xue_sys_init(void *sys) { return 1; }
+-static inline void xue_sys_sfence(void *sys) { wmb(); }
+-static inline void xue_sys_lfence(void *sys) { rmb(); }
+-static inline void xue_sys_unmap_xhc(void *sys, void *virt, uint64_t count) {}
+-static inline void xue_sys_free_dma(void *sys, void *addr, uint64_t order) {}
++static inline int cf_check xue_sys_init(void *sys) { return 1; }
++static inline void cf_check xue_sys_sfence(void *sys) { wmb(); }
++static inline void cf_check xue_sys_lfence(void *sys) { rmb(); }
++static inline void cf_check xue_sys_unmap_xhc(void *sys, void *virt, uint64_t count) {}
++static inline void cf_check xue_sys_free_dma(void *sys, void *addr, uint64_t order) {}
+ 
+-static inline void xue_sys_pause(void *sys)
++static inline void cf_check xue_sys_pause(void *sys)
+ {
+     (void)sys;
+     __asm volatile("pause" ::: "memory");
+ }
+ 
+-static inline void xue_sys_clflush(void *sys, void *ptr)
++static inline void cf_check xue_sys_clflush(void *sys, void *ptr)
+ {
+     (void)sys;
+     __asm volatile("clflush %0" : "+m"(*(volatile char *)ptr));
+ }
+ 
+-static inline void *xue_sys_alloc_dma(void *sys, uint64_t order)
++static inline void *cf_check xue_sys_alloc_dma(void *sys, uint64_t order)
+ {
+     return NULL;
+ }
+ 
+-static inline uint32_t xue_sys_ind(void *sys, uint32_t port)
++static inline uint32_t cf_check xue_sys_ind(void *sys, uint32_t port)
+ {
+     return inl(port);
+ }
+ 
+-static inline void xue_sys_outd(void *sys, uint32_t port, uint32_t data)
++static inline void cf_check xue_sys_outd(void *sys, uint32_t port, uint32_t data)
+ {
+     outl(data, port);
+ }
+ 
+-static inline uint64_t xue_sys_virt_to_dma(void *sys, const void *virt)
++static inline uint64_t cf_check xue_sys_virt_to_dma(void *sys, const void *virt)
+ {
+     return virt_to_maddr(virt);
+ }
+ 
+-static void *xue_sys_map_xhc(void *sys, uint64_t phys, uint64_t size)
++static void *cf_check xue_sys_map_xhc(void *sys, uint64_t phys, uint64_t size)
+ {
+     size_t i;
+ 
 -- 
 git-series 0.9.1
 
