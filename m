@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F0ACCA481
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jun 2022 14:31:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343350.568718 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBC91C43334
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jun 2022 14:31:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.343348.568696 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyaEs-0007Pu-FU; Tue, 07 Jun 2022 14:31:22 +0000
+	id 1nyaEp-0006pV-N6; Tue, 07 Jun 2022 14:31:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343350.568718; Tue, 07 Jun 2022 14:31:22 +0000
+Received: by outflank-mailman (output) from mailman id 343348.568696; Tue, 07 Jun 2022 14:31:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyaEs-0007Pg-Bj; Tue, 07 Jun 2022 14:31:22 +0000
-Received: by outflank-mailman (input) for mailman id 343350;
- Tue, 07 Jun 2022 14:31:21 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nyaEp-0006pJ-Hr; Tue, 07 Jun 2022 14:31:19 +0000
+Received: by outflank-mailman (input) for mailman id 343348;
+ Tue, 07 Jun 2022 14:31:17 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fbs7=WO=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1nyaEr-000619-3Z
- for xen-devel@lists.xenproject.org; Tue, 07 Jun 2022 14:31:21 +0000
+ id 1nyaEn-00061K-GP
+ for xen-devel@lists.xenproject.org; Tue, 07 Jun 2022 14:31:17 +0000
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
- [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 7ee3f402-e66e-11ec-bd2c-47488cf2e6aa;
- Tue, 07 Jun 2022 16:31:19 +0200 (CEST)
+ [66.111.4.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7cfeae9f-e66e-11ec-b605-df0040e90b76;
+ Tue, 07 Jun 2022 16:31:16 +0200 (CEST)
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.nyi.internal (Postfix) with ESMTP id 48AAD5C01ED;
- Tue,  7 Jun 2022 10:31:19 -0400 (EDT)
+ by mailout.nyi.internal (Postfix) with ESMTP id C13F55C01E9;
+ Tue,  7 Jun 2022 10:31:15 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute5.internal (MEProxy); Tue, 07 Jun 2022 10:31:19 -0400
+ by compute5.internal (MEProxy); Tue, 07 Jun 2022 10:31:15 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 7 Jun 2022 10:31:17 -0400 (EDT)
+ 7 Jun 2022 10:31:14 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,35 +45,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 7ee3f402-e66e-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: 7cfeae9f-e66e-11ec-b605-df0040e90b76
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm1; t=1654612279; x=1654698679; bh=/FmM9IRoHk
-	jrJvz5SecKZ+9vnPpot8BHqRtqlD2wsdk=; b=nRmoMLokKnoTQxNYHIVIw6fE1F
-	177uy3Ek8M3bRPAGocRhUA91JiD6McUjah+DxUKG2X7wCEDpEIMNJ32lZKHPS4Vt
-	sAWqYtZlee9SCdgWHD95BmrNoTfJIxPbm2MEkDAB7jpp1COWYEEqXqoa9oaNpEgx
-	XmBvcm5kny8NuTpzHCVYx8xWjyYr8W5f+FyfrijW5gl54Og4K+tQNxCuL51fJEmD
-	ELtKV5Q1ZN+p1oLuBNHIWqrDi14khV1cRlGvOk4wu3IOSMhdLVZBzeyBH+BuwzyO
-	PX0m30cGtNFk09D/6t9jOlt6Ux7Yod8Bhsd/xBR4ZOcD46A8ks6zdnGXbVYA==
+	:subject:to:to; s=fm1; t=1654612275; x=1654698675; bh=Q5My+tX/Z1
+	yRUUbiyXNglzpIQl2V/2Tz8JD1D74I3cc=; b=nbw599YaKL8ReHa6gbyVi9XSSv
+	ItmURASUNmvTOp7lDLCLDrL7exendz2RW064vfjKNe+XEEyDSOe7taLHiIk/EWX+
+	N2Xu5o3rAFowCxKcmq5ZQMo70VEs/Lzaw1DmK934uZjoyUzxF+kyrNFw7vao86Lo
+	XY4ga85nMJ4YikbBWAgBNurGAxvofsvTmpWwrHg8DgjqsT31QqKVx0mbF9SG0QOd
+	/Sj6JbIBlqoBVcMLFYGFp4UpeSoauhkSA45EyOXEQrChzWjT6wH7r5kfgHvOqzLx
+	VwildrMwXDgstNL422TTIbZtdYwmTBMV5s28k744Th+BClQjgx9JIqkKogpQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654612279; x=
-	1654698679; bh=/FmM9IRoHkjrJvz5SecKZ+9vnPpot8BHqRtqlD2wsdk=; b=h
-	E4byz8dzkMVIukdL40jB1/bCncvD2WvJLvYOfo6DohGP60RT3ZHzKb6kuGVh0OnA
-	N81od+R+NH8Kh2A/nO09OFE8Epb/QC1ZdSGxDxgKYRL+tPPXUY5gBbNE+m869MtK
-	jZwF9NHZY9Fob/b8MnHjol7yjNnkyUR2RdGtLk85L5z+VSEiJYZwLNSyh3Ois5P+
-	RiJOSnk6CWj6/dkL9EmF02IqiloxEvd6DVWkNRcWtjX99yCqyDMXcllrhaNq9gs5
-	bYC+SX5uZ+w0vD1ri8brr+eur/JS0RY/OAexZfMvLrf6lL8jhjoC1iw+ZiTLaQoc
-	J2uAvzmXGTjs2j28NQvmQ==
-X-ME-Sender: <xms:N2GfYhxX9sKRAy1N9bhVop8Rv4lE1USK_3bdIgSS_mrFlXgdzxqd9Q>
-    <xme:N2GfYhRb7DL-phmy-tFyJAFRCQ5rqXeilIjVE7MxJXjyhwH1wWO4oBMT_u6l_pTiv
-    0AEtIIKX7QcsA>
-X-ME-Received: <xmr:N2GfYrUXR04OfikY8ouYlYwRx3rk6WD9nJ8rGQmNgURFmzpHGUBiu_ByrhoJsa-wk9N9AfndC5kVOib8yAznlXV3VGazaOJHX3H1PKZRDUlTc4vzro0>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1654612275; x=
+	1654698675; bh=Q5My+tX/Z1yRUUbiyXNglzpIQl2V/2Tz8JD1D74I3cc=; b=g
+	vHbtrRLLsyncnXqdlZ2ywdzEvXx2p7iDewMG2ktXdlzIHRPJjP14GE4/ZNZ7d1JF
+	meGrWecXZ0dVYqs8hdYMPi7ALfmqrkpsExXspysTeo+BTxVGuZiyre74yV4M4rUx
+	dMwPZrMYPG1Tmqmnkpe0LYVRFpggDBz4AOKqz/utRl1kfjyuNYT/6L4elk91KkEl
+	fqk6FqMeY1qqzTIDwZ3en6fU1IKwlFrAL7PZq7lAn5eKHtuen/Bjsku695qXh4wY
+	N3JKeufGTrho5vWe5858kcaKCbgcfFSyhi1XlrFo5ApqWV94WiCJ2ROjc+WrzETn
+	OorJ4Z24NI9fspxAjIy4Q==
+X-ME-Sender: <xms:M2GfYh-7kxcn6m_xEPTmP1WnBWPzgAqVV9-Bk3vs7eBfPru4qqHYzg>
+    <xme:M2GfYluijm4wXJjmDBlEPblMUPS0LiSMJ7s-P1_vbgobUhtWSEH0Gu1pxF7k1GnnK
+    ET_5iMuEHvcFQ>
+X-ME-Received: <xmr:M2GfYvA63cXPkjYrLukZdFXijV7aqh6ahv3LAgbh9p-gulc1SwovZy-KAzFNmcNwK-oq2RPhDOkHya6YunMWlUZjgQhzcfhwmv4LbfzlPxpZPpOKwd8>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddthedgjeeiucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -81,12 +81,12 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedruddthedgjeeiucetufdoteggod
     vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
     hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
+    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:N2GfYjgiUUmIVUW7-J8DsqxqqzkR8QqW1SntlxzZwaFEX5tkSL74kw>
-    <xmx:N2GfYjCmLXTSOfR3se0zmOoY0q8c0iL2ZMoTyKuEQJuiU_zqxiuipQ>
-    <xmx:N2GfYsJ-5c-fsc8lFmtPk3U8kd7YgCPdcALExN8Fglrn1ZAjiNAJew>
-    <xmx:N2GfYu59LKrKUUt9kZLRjQljwmbBEt2nOY9YC0Gz80R_wiZ9AydBYA>
+X-ME-Proxy: <xmx:M2GfYlckSbwrVLPOOjGNmJy1B3lGu1-NlBm4xFkUb1zB0uTTJP2v1Q>
+    <xmx:M2GfYmNnQhAwXQltAOYO9KOwetl09zCuConknJYbkqhZEPj4pSh5Dw>
+    <xmx:M2GfYnmTUz9Rnb3ZcoQpKq2Iy4ccbtlVnMNxl60sVx9OXwulGKmq1w>
+    <xmx:M2GfYt0VJmy4Oe3uIrlcHZhADFtbs4q8X51liDIxluAHefDL9Au_rA>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -97,9 +97,9 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Wei Liu <wl@xen.org>
-Subject: [PATCH v1 05/10] console: support multiple serial console simultaneously
-Date: Tue,  7 Jun 2022 16:30:11 +0200
-Message-Id: <e13ee6e75e41da9468c3c38a18ec265879985976.1654612169.git-series.marmarek@invisiblethingslab.com>
+Subject: [PATCH v1 03/10] xue: add support for selecting specific xhci
+Date: Tue,  7 Jun 2022 16:30:09 +0200
+Message-Id: <b5466e495943210adc48c754df98862ae49ee489.1654612169.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.5d286dc6304969ed7155051e900236947c1b14dc.1654612169.git-series.marmarek@invisiblethingslab.com>
 References: <cover.5d286dc6304969ed7155051e900236947c1b14dc.1654612169.git-series.marmarek@invisiblethingslab.com>
@@ -107,175 +107,129 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Previously only one serial console was supported at the same time. Using
-console=com1,dbgp,vga silently ignored all but last serial console (in
-this case: only dbgp and vga were active).
+Handle parameters similar to dbgp=ehci.
 
-Fix this by storing not a single sercon_handle, but an array of them, up
-to MAX_SERCONS entries. The value of MAX_SERCONS (4) is arbitrary,
-inspired by the number of SERHND_IDX values.
+Implement this by not resettting xhc_cf8 again in xue_init_xhc(), but
+using a value found there if non-zero. Additionally, add xue->xhc_num to
+select n-th controller.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 ---
- xen/drivers/char/console.c | 58 ++++++++++++++++++++++++++++++---------
- 1 file changed, 45 insertions(+), 13 deletions(-)
+ docs/misc/xen-command-line.pandoc |  5 +++-
+ xen/drivers/char/xue.c            | 56 ++++++++++++++++++++++++--------
+ 2 files changed, 47 insertions(+), 14 deletions(-)
 
-diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
-index f9937c5134c0..44b703296487 100644
---- a/xen/drivers/char/console.c
-+++ b/xen/drivers/char/console.c
-@@ -113,7 +113,9 @@ static char *__read_mostly conring = _conring;
- static uint32_t __read_mostly conring_size = _CONRING_SIZE;
- static uint32_t conringc, conringp;
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index 881fe409ac76..37a564c2386f 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -721,10 +721,15 @@ Available alternatives, with their meaning, are:
  
--static int __read_mostly sercon_handle = -1;
-+#define MAX_SERCONS 4
-+static int __read_mostly sercon_handle[MAX_SERCONS];
-+static int __read_mostly nr_sercon_handle = 0;
+ ### dbgp
+ > `= ehci[ <integer> | @pci<bus>:<slot>.<func> ]`
++> `= xue[ <integer> | @pci<bus>:<slot>.<func> ]`
  
- #ifdef CONFIG_X86
- /* Tristate: 0 disabled, 1 user enabled, -1 default enabled */
-@@ -395,9 +397,17 @@ static unsigned int serial_rx_cons, serial_rx_prod;
+ Specify the USB controller to use, either by instance number (when going
+ over the PCI busses sequentially) or by PCI device (must be on segment 0).
  
- static void (*serial_steal_fn)(const char *, size_t nr) = early_puts;
- 
-+/* Redirect any console output to *fn*, if *handle* is configured as a console. */
- int console_steal(int handle, void (*fn)(const char *, size_t nr))
- {
--    if ( (handle == -1) || (handle != sercon_handle) )
-+    int i;
++Use `ehci` for EHCI debug port, use `xue` for XHCI debug capability.
++Xue driver will wait indefinitely for the debug host to connect - make sure the
++cable is connected.
 +
-+    if ( handle == -1 )
-+        return 0;
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        if ( handle == sercon_handle[i] )
-+            break;
-+    if ( nr_sercon_handle && i == nr_sercon_handle )
-         return 0;
+ ### debug_stack_lines
+ > `= <integer>`
  
-     if ( serial_steal_fn != NULL )
-@@ -415,10 +425,13 @@ void console_giveback(int id)
+diff --git a/xen/drivers/char/xue.c b/xen/drivers/char/xue.c
+index a9ba25d9d07e..b253426a95f8 100644
+--- a/xen/drivers/char/xue.c
++++ b/xen/drivers/char/xue.c
+@@ -204,6 +204,7 @@ struct xue {
+     void *xhc_mmio;
  
- void console_serial_puts(const char *s, size_t nr)
- {
-+    int i;
-+
-     if ( serial_steal_fn != NULL )
-         serial_steal_fn(s, nr);
-     else
--        serial_puts(sercon_handle, s, nr);
-+        for ( i = 0; i < nr_sercon_handle; i++ )
-+            serial_puts(sercon_handle[i], s, nr);
+     int open;
++    int xhc_num; /* look for n-th xhc */
+ };
  
-     /* Copy all serial output into PV console */
-     pv_console_puts(s, nr);
-@@ -956,7 +969,7 @@ void guest_printk(const struct domain *d, const char *fmt, ...)
- void __init console_init_preirq(void)
- {
-     char *p;
--    int sh;
-+    int sh, i;
+ static void xue_sys_pause(void)
+@@ -252,24 +253,34 @@ static int xue_init_xhc(struct xue *xue)
+     uint64_t bar1;
+     uint64_t devfn;
  
-     serial_init_preirq();
- 
-@@ -977,7 +990,8 @@ void __init console_init_preirq(void)
-             continue;
-         else if ( (sh = serial_parse_handle(p)) >= 0 )
+-    /*
+-     * Search PCI bus 0 for the xHC. All the host controllers supported so far
+-     * are part of the chipset and are on bus 0.
+-     */
+-    for ( devfn = 0; devfn < 256; devfn++ ) {
+-        uint32_t dev = (devfn & 0xF8) >> 3;
+-        uint32_t fun = devfn & 0x07;
+-        pci_sbdf_t sbdf = PCI_SBDF(0, dev, fun);
+-        uint32_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
+-
+-        if ( hdr == 0 || hdr == 0x80 )
++    if ( xue->sbdf.sbdf == 0 )
++    {
++        /*
++         * Search PCI bus 0 for the xHC. All the host controllers supported so far
++         * are part of the chipset and are on bus 0.
++         */
++        for ( devfn = 0; devfn < 256; devfn++ )
          {
--            sercon_handle = sh;
-+            if ( nr_sercon_handle < MAX_SERCONS )
-+                sercon_handle[nr_sercon_handle++] = sh;
-             serial_steal_fn = NULL;
+-            if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == XUE_XHC_CLASSC )
++            uint32_t dev = (devfn & 0xF8) >> 3;
++            uint32_t fun = devfn & 0x07;
++            pci_sbdf_t sbdf = PCI_SBDF(0, dev, fun);
++            uint32_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
++
++            if ( hdr == 0 || hdr == 0x80 )
+             {
+-                xue->sbdf = sbdf;
+-                break;
++                if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == XUE_XHC_CLASSC )
++                {
++                    if ( xue->xhc_num-- )
++                        continue;
++                    xue->sbdf = sbdf;
++                    break;
++                }
+             }
          }
-         else
-@@ -996,7 +1010,8 @@ void __init console_init_preirq(void)
-         opt_console_xen = 0;
- #endif
++    } else {
++        /* Verify if selected device is really xHC */
++        if ( (pci_conf_read32(xue->sbdf, PCI_CLASS_REVISION) >> 8) != XUE_XHC_CLASSC )
++            xue->sbdf.sbdf = 0;
+     }
  
--    serial_set_rx_handler(sercon_handle, serial_rx);
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_set_rx_handler(sercon_handle[i], serial_rx);
-     pv_console_set_rx_handler(serial_rx);
- 
-     /* HELLO WORLD --- start-of-day banner text. */
-@@ -1014,7 +1029,8 @@ void __init console_init_preirq(void)
- 
-     if ( opt_sync_console )
-     {
--        serial_start_sync(sercon_handle);
-+        for ( i = 0; i < nr_sercon_handle; i++ )
-+            serial_start_sync(sercon_handle[i]);
-         add_taint(TAINT_SYNC_CONSOLE);
-         printk("Console output is synchronous.\n");
-         warning_add(warning_sync_console);
-@@ -1121,13 +1137,19 @@ int __init console_has(const char *device)
- 
- void console_start_log_everything(void)
+     if ( !xue->sbdf.sbdf )
+@@ -999,12 +1010,29 @@ void __init xue_uart_init(void)
  {
--    serial_start_log_everything(sercon_handle);
-+    int i;
+     struct xue_uart *uart = &xue_uart;
+     struct xue *xue = &uart->xue;
++    const char *e;
+ 
+     if ( strncmp(opt_dbgp, "xue", 3) )
+         return;
+ 
+     memset(xue, 0, sizeof(*xue));
+ 
++    if ( isdigit(opt_dbgp[3]) || !opt_dbgp[3] )
++    {
++        if ( opt_dbgp[3] )
++            xue->xhc_num = simple_strtoul(opt_dbgp + 3, &e, 10);
++    }
++    else if ( strncmp(opt_dbgp + 3, "@pci", 4) == 0 )
++    {
++        unsigned int bus, slot, func;
 +
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_start_log_everything(sercon_handle[i]);
-     atomic_inc(&print_everything);
- }
- 
- void console_end_log_everything(void)
- {
--    serial_end_log_everything(sercon_handle);
-+    int i;
++        e = parse_pci(opt_dbgp + 7, NULL, &bus, &slot, &func);
++        if ( !e || *e )
++            return;
 +
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_end_log_everything(sercon_handle[i]);
-     atomic_dec(&print_everything);
- }
- 
-@@ -1149,23 +1171,32 @@ void console_unlock_recursive_irqrestore(unsigned long flags)
- 
- void console_force_unlock(void)
- {
-+    int i;
++        xue->sbdf = PCI_SBDF(0, bus, slot, func);
++    }
 +
-     watchdog_disable();
-     spin_debug_disable();
-     spin_lock_init(&console_lock);
--    serial_force_unlock(sercon_handle);
-+    for ( i = 0 ; i < nr_sercon_handle ; i++ )
-+        serial_force_unlock(sercon_handle[i]);
-     console_locks_busted = 1;
-     console_start_sync();
- }
- 
- void console_start_sync(void)
- {
-+    int i;
-+
-     atomic_inc(&print_everything);
--    serial_start_sync(sercon_handle);
-+    for ( i = 0 ; i < nr_sercon_handle ; i++ )
-+        serial_start_sync(sercon_handle[i]);
- }
- 
- void console_end_sync(void)
- {
--    serial_end_sync(sercon_handle);
-+    int i;
-+
-+    for ( i = 0; i < nr_sercon_handle; i++ )
-+        serial_end_sync(sercon_handle[i]);
-     atomic_dec(&print_everything);
- }
- 
-@@ -1291,7 +1322,8 @@ static int suspend_steal_id;
- 
- int console_suspend(void)
- {
--    suspend_steal_id = console_steal(sercon_handle, suspend_steal_fn);
-+    if ( nr_sercon_handle )
-+        suspend_steal_id = console_steal(sercon_handle[0], suspend_steal_fn);
-     serial_suspend();
-     return 0;
- }
+     xue->dbc_ctx = &ctx;
+     xue->dbc_erst = &erst;
+     xue->dbc_ering.trb = evt_trb;
 -- 
 git-series 0.9.1
 
