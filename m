@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06D90C433EF
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Jun 2022 13:49:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343286.568585 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67D5CC43334
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Jun 2022 13:57:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.343296.568596 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyZaa-0005R9-BL; Tue, 07 Jun 2022 13:49:44 +0000
+	id 1nyZhn-00074i-7i; Tue, 07 Jun 2022 13:57:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343286.568585; Tue, 07 Jun 2022 13:49:44 +0000
+Received: by outflank-mailman (output) from mailman id 343296.568596; Tue, 07 Jun 2022 13:57:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyZaa-0005R2-8U; Tue, 07 Jun 2022 13:49:44 +0000
-Received: by outflank-mailman (input) for mailman id 343286;
- Tue, 07 Jun 2022 13:49:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nyZhn-00074b-4f; Tue, 07 Jun 2022 13:57:11 +0000
+Received: by outflank-mailman (input) for mailman id 343296;
+ Tue, 07 Jun 2022 13:57:10 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dSew=WO=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1nyZaY-0005Qs-Du
- for xen-devel@lists.xenproject.org; Tue, 07 Jun 2022 13:49:42 +0000
+ id 1nyZhm-00074V-0r
+ for xen-devel@lists.xenproject.org; Tue, 07 Jun 2022 13:57:10 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ad16a1c4-e668-11ec-b605-df0040e90b76;
- Tue, 07 Jun 2022 15:49:41 +0200 (CEST)
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b785aae1-e669-11ec-bd2c-47488cf2e6aa;
+ Tue, 07 Jun 2022 15:57:08 +0200 (CEST)
 Received: from [10.10.1.138] (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1654609773475473.3381688403167;
- Tue, 7 Jun 2022 06:49:33 -0700 (PDT)
+ with SMTPS id 1654610219359757.4448433028651;
+ Tue, 7 Jun 2022 06:56:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,117 +42,83 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ad16a1c4-e668-11ec-b605-df0040e90b76
-ARC-Seal: i=1; a=rsa-sha256; t=1654609777; cv=none; 
+X-Inumbo-ID: b785aae1-e669-11ec-bd2c-47488cf2e6aa
+ARC-Seal: i=1; a=rsa-sha256; t=1654610224; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=GsqfH/xRBbpoECvLih4W7OE5L3wqkOnkNAYo92peDB+BtVzZDVt9ZvB2oyxtHl70e6IEiCc1uMeY5XgkUj/2czBja797Fzyc9CQMaxi3hyAVBwCMMvVqWQn0hT/WlKzkxQ9CEULLcH0sPq2Wq/IeER/+vO9c/QFt2SNnhuoSeO4=
+	b=NgD/lrOma2MdX58Kdyi3sc+FlohT0S9Zd8/aikUnsQDOKnKbquphyoV0N2bSL8mdTq7Ge/clRm5pCL4/xkUs1teONELvrH2wZCC6Gf4ot4IQ+BYeZxkIFxT/lf7cUbQK40dvET9RI1nWXvZN1HF0ImR8ssmG4gWtsHLrPumpn0I=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1654609777; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=dOsy6EjkVih1OL+NrztAnvYWxEfNj6E/Al9okX3Yf1Q=; 
-	b=b69NotZvp57/6VDwDFZ9rdHvzfJ813iYJRN2Snx6gbeJqCQVBvFSb/HryMdnhP1MUrhUKyYlx/bWt0/tKf4zs/dC2BkFFEon7OWWLfwV2SDz2NZt3Y1Wk5IPwZofsRH+9SlTDaj82ATbX/AH4kmRAmJ7U0PGXvYqZWZRjWXm+/Q=
+	t=1654610224; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=i+13/atmT2pRkn+f2pb7VWfDJx2TihjcLgz8X3iQ3xw=; 
+	b=KZxlGwKk9j9FBxbYKxmd4O/Aului3XMlpWM9ZNPm2Mf1/ehzPqFN/VqMJZn14dQ4TCDRqd3EeBU8wab+eivCV7z8spx/XuuIkwOZItzZTC5HVLgzDFA/6pVHeUF18ahoK9hT7YhjHHVEn//io7/7ufMpl2d0NGriJghoaRXsvWs=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1654609777;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1654610224;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=Message-ID:Date:Date:MIME-Version:To:To:Cc:Cc:References:From:From:Subject:Subject:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=dOsy6EjkVih1OL+NrztAnvYWxEfNj6E/Al9okX3Yf1Q=;
-	b=RAg9smD1DPlz+1vCi+TQpcvqGs+rLnzq0UgJy2IH+eVQUvLmnDnsRacFLwpUNle0
-	eKkIg8Hbj4xefoQSGA2BThHu7Jrd56uwGruSyRgkHdPEApQblX6TCszOdbcCF91DVhI
-	xy3eeaLcsiVxR/Wcayi4c9yGx+1mwS2CeS5iISuw=
-Message-ID: <6447f0ff-993c-9d39-52a8-40a434be9e52@apertussolutions.com>
-Date: Tue, 7 Jun 2022 09:47:57 -0400
+	bh=i+13/atmT2pRkn+f2pb7VWfDJx2TihjcLgz8X3iQ3xw=;
+	b=OL9cfskioxpqc/hD+3UrKbIljiRoA6HiLS8x8+3Ms/Hj0ZdRCCq7Qn5CE5ZTeQlH
+	n7In/RJWXBKc4GKBg9HNituzbApuLQ1WCwAw53Q5GSXIuk8XZIgK5GM7ek4ColfR8NG
+	a+TkZRePdwSGpCbu2qqE9OKwq46Gc994scukI9zU=
+Message-ID: <76d59a32-203a-5a8b-83f4-ab60d419ef9f@apertussolutions.com>
+Date: Tue, 7 Jun 2022 09:55:22 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.0
 Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>
-Cc: scott.davis@starlab.io, christopher.clark@starlab.io, jandryuk@gmail.com,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>, xen-devel@lists.xenproject.org
+To: Andrew Cooper <Andrew.Cooper3@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Wei Liu <wl@xen.org>
+Cc: "scott.davis@starlab.io" <scott.davis@starlab.io>,
+ "christopher.clark@starlab.io" <christopher.clark@starlab.io>,
+ "jandryuk@gmail.com" <jandryuk@gmail.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>
 References: <20220531182041.10640-1-dpsmith@apertussolutions.com>
- <20220531182041.10640-3-dpsmith@apertussolutions.com>
- <17edde4a-0d00-0da7-5910-09874ab70838@suse.com>
+ <20220531182041.10640-4-dpsmith@apertussolutions.com>
+ <c206a20b-ee5f-aa5b-64ba-fe06469f0f2f@citrix.com>
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-Subject: Re: [PATCH v4 2/3] xsm: consolidate loading the policy buffer
-In-Reply-To: <17edde4a-0d00-0da7-5910-09874ab70838@suse.com>
+Subject: Re: [PATCH v4 3/3] xsm: properly handle error from XSM init
+In-Reply-To: <c206a20b-ee5f-aa5b-64ba-fe06469f0f2f@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-ZohoMailClient: External
 
 
-On 6/2/22 05:47, Jan Beulich wrote:
-> On 31.05.2022 20:20, Daniel P. Smith wrote:
->> Previously, initializing the policy buffer was split between two functions,
->> xsm_{multiboot,dt}_policy_init() and xsm_core_init(). The latter for loading
->> the policy from boot modules and the former for falling back to built-in
->> policy.
->>
->> This patch moves all policy buffer initialization logic under the
->> xsm_{multiboot,dt}_policy_init() functions. It then ensures that an error
->> message is printed for every error condition that may occur in the functions.
->> With all policy buffer init contained and only called when the policy buffer
->> must be populated, the respective xsm_{mb,dt}_init() functions will panic for
->> all errors except ENOENT. An ENOENT signifies that a policy file could not be
->> located. Since it is not possible to know if late loading of the policy file is
->> intended, a warning is reported and XSM initialization is continued.
-> 
-> Is it really not possible to know? flask_init() panics in the one case
-> where a policy is strictly required. And I'm not convinced it is
-> appropriate to issue both an error and a warning in most (all?) of the
-> other cases (and it should be at most one of the two anyway imo).
-
-With how XSM currently works, I do not see how without creating a
-layering violation, as you had mentioned before. It is possible for
-flask_init() to know because the flask= parameter belongs to the flask
-policy module and can be directly checked.
-
-I think we view this differently. A call to
-xsm_{multiboot,dt}_policy_init() is asking for a policy file to be
-loaded. If it is not able to do so is an error. This error is reported
-back to xsm_{multiboot,dt}_init() which is responsible for initializing
-the XSM framework. If it encounters an error for which inhibits it from
-initializing XSM would be an error whereas an error it encounters that
-does not block initialization should warn the user as such. While it is
-true that the only error for the xsm_multiboot_policy_init() currently
-is a failure to locate a policy file, ENOENT, I don't see how that
-changes the understanding.
-
->> --- a/xen/include/xsm/xsm.h
->> +++ b/xen/include/xsm/xsm.h
->> @@ -775,7 +775,7 @@ int xsm_multiboot_init(
->>      unsigned long *module_map, const multiboot_info_t *mbi);
->>  int xsm_multiboot_policy_init(
->>      unsigned long *module_map, const multiboot_info_t *mbi,
->> -    void **policy_buffer, size_t *policy_size);
->> +    const unsigned char *policy_buffer[], size_t *policy_size);
-> 
-> See my v3 comment on the use of [] here. And that comment was actually
-> made before you sent v4 (unlike the later comment on patch 1). Oh,
-> actually you did change this in the function definition, just not here.
-
-ack
-
->> @@ -32,14 +32,21 @@
->>  #ifdef CONFIG_MULTIBOOT
->>  int __init xsm_multiboot_policy_init(
->>      unsigned long *module_map, const multiboot_info_t *mbi,
->> -    void **policy_buffer, size_t *policy_size)
->> +    const unsigned char **policy_buffer, size_t *policy_size)
->>  {
->>      int i;
->>      module_t *mod = (module_t *)__va(mbi->mods_addr);
->> -    int rc = 0;
->> +    int rc = -ENOENT;
->>      u32 *_policy_start;
->>      unsigned long _policy_len;
+On 5/31/22 15:18, Andrew Cooper wrote:
+> On 31/05/2022 19:20, Daniel P. Smith wrote:
+>> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+>> index 53a73010e0..ed67b50c9d 100644
+>> --- a/xen/arch/x86/setup.c
+>> +++ b/xen/arch/x86/setup.c
+>> @@ -1700,7 +1701,11 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+>>      mmio_ro_ranges = rangeset_new(NULL, "r/o mmio ranges",
+>>                                    RANGESETF_prettyprint_hex);
 >>  
->> +#ifdef CONFIG_XSM_FLASK_POLICY
->> +    /* Initially set to builtin policy, overriden if boot module is found. */
+>> -    xsm_multiboot_init(module_map, mbi);
+>> +    if ( xsm_multiboot_init(module_map, mbi) )
+>> +        warning_add("WARNING: XSM failed to initialize.\n"
+>> +                    "This has implications on the security of the system,\n"
+>> +                    "as uncontrolled communications between trusted and\n"
+>> +                    "untrusted domains may occur.\n");
 > 
-> Nit: "overridden"
+> The problem with this approach is that it forces each architecture to
+> opencode the failure string, in a function which is very busy with other
+> things too.
+> 
+> Couldn't xsm_{multiboot,dt}_init() be void, and the warning_add() move
+> into them, like the SLIO warning for ARM already?
+> 
+> That would simplify both ARM and x86's __start_xen(), and be an
+> improvement for the RISC-V series just posted to xen-devel...
 
-ack
+I was trying to address the MISRA review comment by handling the
+unhandled return while trying to provide a uniform implementation across
+arch. Moving the xsm_{multiboot,dt}_init() to void will address both and
+as you point out make it simpler overall.
 
 v/r,
 dps
