@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6E9C433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:55:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.344072.569663 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4BCC43334
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:55:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344101.569700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyx5e-0004AN-ID; Wed, 08 Jun 2022 14:55:22 +0000
+	id 1nyx5h-00050I-Ag; Wed, 08 Jun 2022 14:55:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 344072.569663; Wed, 08 Jun 2022 14:55:22 +0000
+Received: by outflank-mailman (output) from mailman id 344101.569700; Wed, 08 Jun 2022 14:55:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyx5e-00048u-At; Wed, 08 Jun 2022 14:55:22 +0000
-Received: by outflank-mailman (input) for mailman id 344072;
- Wed, 08 Jun 2022 14:54:42 +0000
+	id 1nyx5g-0004x8-Uv; Wed, 08 Jun 2022 14:55:24 +0000
+Received: by outflank-mailman (input) for mailman id 344101;
+ Wed, 08 Jun 2022 14:54:54 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OvtQ=WP=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1nywy5-0004Sj-S2
- for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:33 +0000
+ id 1nywy7-0004Sj-Sa
+ for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:35 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e69f6cbf-e739-11ec-bd2c-47488cf2e6aa;
- Wed, 08 Jun 2022 16:47:21 +0200 (CEST)
+ id e7fd822c-e739-11ec-bd2c-47488cf2e6aa;
+ Wed, 08 Jun 2022 16:47:23 +0200 (CEST)
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywww-00ChVp-CO; Wed, 08 Jun 2022 14:46:22 +0000
+ id 1nywx3-00ChYC-JV; Wed, 08 Jun 2022 14:46:29 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 5CD17300779;
- Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A3BE9302EEA;
+ Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 36D1B20C0F9A1; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ id 9DB8020C10EDE; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e69f6cbf-e739-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: e7fd822c-e739-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=YOWU43M4IjsvcmJXQwOIFJh+WuCbnSytdcIdnv65DkY=; b=XCDVN9tj9Nd6cCt5yPaK9O3amI
-	ci7YUUM2v+28cn8J99wm4KhjbAdAoCxm0ZkgOdpCkJChjzfZ+C735h+hlVrx0OpQ7Sz06hLL2cROZ
-	Bv8WVo508YV6l6eZBA29iCGnbSDF9FtDcrv+aceuzuJTig8MZggSg4i4uwwpFk8A3wQMqX47uf/mT
-	8zfnGc1VxoVB+WmWEDtxTYLuSF41PTkkxW16U+FTxE7204ryh1jVbHwBdUZ4quIaNuIHjqbsN+C7n
-	+Iep3h1zsyXP0xbxfqaVi9r1Yzcival+fbwxlxbx1qrowfPg2m7YfJQdX7yj+Cn50NoW7JIOu6shq
-	BsRPsiUA==;
-Message-ID: <20220608144515.984413284@infradead.org>
+	bh=+nBTmu8be4dn87X4h4i4v5hXqWi/FDQJ2e0V2G49JnI=; b=c0sBpB4EJtpUlMJmM1BtzQg1jI
+	4PcdDgJzYOowDoMnmKAFYhNbpvRYzsV7kRFyLJf62+ZuPqPEFAxeBvm38jC9EIzinrmdPRpzRnIth
+	ZjcGrFN3FC2OLDiPw1MQ9GiO/ueu64sxGeUIVMfNNGZ1I6IAzUSGlYS50yZYH/qpVkumUW9sz9ylw
+	NiQ4O2XB8H8Hk/RXSmU/7i/042dpY1RsaqJxDbzJ3hgd+h+vW2daHvNujHxeLDb2O3c/EAvt6fmpH
+	/CT3Hd5fJEQuF8uryywQG23Lx98/8viggcr1njgwvu2L7IHYIVv/w/rdZa7aTRE+XIf9ro7DYS6a3
+	okJs1Mxg==;
+Message-ID: <20220608144517.507286638@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:24 +0200
+Date: Wed, 08 Jun 2022 16:27:48 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
 Cc: rth@twiddle.net,
@@ -200,65 +200,58 @@ Cc: rth@twiddle.net,
  linux-tegra@vger.kernel.org,
  linux-arch@vger.kernel.org,
  rcu@vger.kernel.org
-Subject: [PATCH 01/36] x86/perf/amd: Remove tracing from perf_lopwr_cb()
+Subject: [PATCH 25/36] time/tick-broadcast: Remove RCU_NONIDLE usage
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-The perf_lopwr_cb() is called from the idle routines; there is no RCU
-there, we must not enter tracing.
+No callers left that have already disabled RCU.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/x86/events/amd/brs.c         |   13 +++++--------
- arch/x86/include/asm/perf_event.h |    2 +-
- 2 files changed, 6 insertions(+), 9 deletions(-)
+ kernel/time/tick-broadcast-hrtimer.c |   29 ++++++++++++-----------------
+ 1 file changed, 12 insertions(+), 17 deletions(-)
 
---- a/arch/x86/events/amd/brs.c
-+++ b/arch/x86/events/amd/brs.c
-@@ -41,18 +41,15 @@ static inline unsigned int brs_to(int id
- 	return MSR_AMD_SAMP_BR_FROM + 2 * idx + 1;
+--- a/kernel/time/tick-broadcast-hrtimer.c
++++ b/kernel/time/tick-broadcast-hrtimer.c
+@@ -56,25 +56,20 @@ static int bc_set_next(ktime_t expires,
+ 	 * hrtimer callback function is currently running, then
+ 	 * hrtimer_start() cannot move it and the timer stays on the CPU on
+ 	 * which it is assigned at the moment.
++	 */
++	hrtimer_start(&bctimer, expires, HRTIMER_MODE_ABS_PINNED_HARD);
++	/*
++	 * The core tick broadcast mode expects bc->bound_on to be set
++	 * correctly to prevent a CPU which has the broadcast hrtimer
++	 * armed from going deep idle.
+ 	 *
+-	 * As this can be called from idle code, the hrtimer_start()
+-	 * invocation has to be wrapped with RCU_NONIDLE() as
+-	 * hrtimer_start() can call into tracing.
++	 * As tick_broadcast_lock is held, nothing can change the cpu
++	 * base which was just established in hrtimer_start() above. So
++	 * the below access is safe even without holding the hrtimer
++	 * base lock.
+ 	 */
+-	RCU_NONIDLE( {
+-		hrtimer_start(&bctimer, expires, HRTIMER_MODE_ABS_PINNED_HARD);
+-		/*
+-		 * The core tick broadcast mode expects bc->bound_on to be set
+-		 * correctly to prevent a CPU which has the broadcast hrtimer
+-		 * armed from going deep idle.
+-		 *
+-		 * As tick_broadcast_lock is held, nothing can change the cpu
+-		 * base which was just established in hrtimer_start() above. So
+-		 * the below access is safe even without holding the hrtimer
+-		 * base lock.
+-		 */
+-		bc->bound_on = bctimer.base->cpu_base->cpu;
+-	} );
++	bc->bound_on = bctimer.base->cpu_base->cpu;
++
+ 	return 0;
  }
  
--static inline void set_debug_extn_cfg(u64 val)
-+static __always_inline void set_debug_extn_cfg(u64 val)
- {
- 	/* bits[4:3] must always be set to 11b */
--	wrmsrl(MSR_AMD_DBG_EXTN_CFG, val | 3ULL << 3);
-+	__wrmsr(MSR_AMD_DBG_EXTN_CFG, val | 3ULL << 3, val >> 32);
- }
- 
--static inline u64 get_debug_extn_cfg(void)
-+static __always_inline u64 get_debug_extn_cfg(void)
- {
--	u64 val;
--
--	rdmsrl(MSR_AMD_DBG_EXTN_CFG, val);
--	return val;
-+	return __rdmsr(MSR_AMD_DBG_EXTN_CFG);
- }
- 
- static bool __init amd_brs_detect(void)
-@@ -338,7 +335,7 @@ void amd_pmu_brs_sched_task(struct perf_
-  * called from ACPI processor_idle.c or acpi_pad.c
-  * with interrupts disabled
-  */
--void perf_amd_brs_lopwr_cb(bool lopwr_in)
-+void noinstr perf_amd_brs_lopwr_cb(bool lopwr_in)
- {
- 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
- 	union amd_debug_extn_cfg cfg;
---- a/arch/x86/include/asm/perf_event.h
-+++ b/arch/x86/include/asm/perf_event.h
-@@ -554,7 +554,7 @@ extern void perf_amd_brs_lopwr_cb(bool l
- 
- DECLARE_STATIC_CALL(perf_lopwr_cb, perf_amd_brs_lopwr_cb);
- 
--static inline void perf_lopwr_cb(bool lopwr_in)
-+static __always_inline void perf_lopwr_cb(bool lopwr_in)
- {
- 	static_call_mod(perf_lopwr_cb)(lopwr_in);
- }
 
 
 
