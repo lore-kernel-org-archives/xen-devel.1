@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A8BCCA488
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76D8CCA48E
 	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:48:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343847.569390 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.343863.569456 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyj-00051u-3X; Wed, 08 Jun 2022 14:48:13 +0000
+	id 1nywyo-0006VB-7K; Wed, 08 Jun 2022 14:48:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343847.569390; Wed, 08 Jun 2022 14:48:13 +0000
+Received: by outflank-mailman (output) from mailman id 343863.569456; Wed, 08 Jun 2022 14:48:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyi-00050Y-Qu; Wed, 08 Jun 2022 14:48:12 +0000
-Received: by outflank-mailman (input) for mailman id 343847;
- Wed, 08 Jun 2022 14:47:24 +0000
+	id 1nywyn-0006Px-Ld; Wed, 08 Jun 2022 14:48:17 +0000
+Received: by outflank-mailman (input) for mailman id 343863;
+ Wed, 08 Jun 2022 14:47:30 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OvtQ=WP=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1nywxw-0004Sj-UG
- for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:24 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ id 1nywy1-0004Sj-Rh
+ for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:29 +0000
+Received: from casper.infradead.org (casper.infradead.org
+ [2001:8b0:10b:1236::1])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e6dc62a2-e739-11ec-bd2c-47488cf2e6aa;
+ id e6a4266d-e739-11ec-bd2c-47488cf2e6aa;
  Wed, 08 Jun 2022 16:47:21 +0200 (CEST)
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywwx-0066BF-JJ; Wed, 08 Jun 2022 14:46:24 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nywwy-00ChW2-V1; Wed, 08 Jun 2022 14:46:25 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 8DD01301134;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 9A5BD302D93;
  Wed,  8 Jun 2022 16:46:22 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 44C8420C0F9B2; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ id 4EAD120C0F9B6; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e6dc62a2-e739-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: e6a4266d-e739-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
+	d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=UoTZx1hq9H2CvH0rrTcV0HznPxDNWA5jpJDFLHo4BPo=; b=pWyQNOHjBAsuQpOso13wfLuQhy
-	thcRQJ5QKxIY2Kx66e1E+YWNvAX7hqXi16FG/Yvv/6jL9gxmDHqHQPKhI/0ggi7JOI+l8ZF0tpt+J
-	/gMx4WY4gISoTMfEmXYlgqylwRgmyofm3M3UVZmyco3ziu7Gt9h7q5c6wPiUbTexd+wgemxfyY0hu
-	i2lO18Et3kvZasrH8//VkE/uwwYBCUK8seXG2zWjgtEkf9QnvC7u4APyLvyuKQI1XGO+wwn5fXDdh
-	Vbf00ESlaotTdYhjQqpHmvpB4FpOELLEZl4FjWs1MRv1VKlYsOC56S74pB+SmAESsa1OcuRYoS/lu
-	XKg+WotA==;
-Message-ID: <20220608144516.172460444@infradead.org>
+	bh=cRgbn3QvpupGZaeUDgwKs7FEGzBWq3dUbK0A/YX8NGM=; b=PSLeO/yNb1FdwotZ74TIoxbYsI
+	soiM9zNMO7t19/qdX6p+jhtYuw+jlgRDVggbwYw5y93wJ9B0AEFFNitZiOLiLqvrO6WYzTd3Ks6/N
+	j6ONiLqH02pSUgCxo2FohIp7YpPnZGRJFJTWnKXkMEaG1p9PIY+g1hJZEWjA2DvWqfDzZ864CPgsH
+	JZUmgyUVfTzWlN2taLJ537IYJBncAgv7L7CMo71dRetIsfM+fYr9nFmmPfnAie7VS2DskPrxSiIFO
+	ifFfahGR54R38dhYOg0BWoewZIQRuCcVUmaPuAuM9Fgo4uTkuRaQcDupqqv1VST4cbPCmhIiOv9NB
+	7YdXlpfg==;
+Message-ID: <20220608144516.297980240@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:27 +0200
+Date: Wed, 08 Jun 2022 16:27:29 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
 Cc: rth@twiddle.net,
@@ -200,80 +200,59 @@ Cc: rth@twiddle.net,
  linux-tegra@vger.kernel.org,
  linux-arch@vger.kernel.org,
  rcu@vger.kernel.org
-Subject: [PATCH 04/36] cpuidle,intel_idle: Fix CPUIDLE_FLAG_IRQ_ENABLE
+Subject: [PATCH 06/36] cpuidle,riscv: Push RCU-idle into driver
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-Commit c227233ad64c ("intel_idle: enable interrupts before C1 on
-Xeons") wrecked intel_idle in two ways:
+Doing RCU-idle outside the driver, only to then temporarily enable it
+again, at least twice, before going idle is daft.
 
- - must not have tracing in idle functions
- - must return with IRQs disabled
-
-Additionally, it added a branch for no good reason.
-
-Fixes: c227233ad64c ("intel_idle: enable interrupts before C1 on Xeons")
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- drivers/idle/intel_idle.c |   48 +++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 37 insertions(+), 11 deletions(-)
+ drivers/cpuidle/cpuidle-riscv-sbi.c |    9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
---- a/drivers/idle/intel_idle.c
-+++ b/drivers/idle/intel_idle.c
-@@ -129,21 +137,37 @@ static unsigned int mwait_substates __in
-  *
-  * Must be called under local_irq_disable().
-  */
-+
--static __cpuidle int intel_idle(struct cpuidle_device *dev,
--				struct cpuidle_driver *drv, int index)
-+static __always_inline int __intel_idle(struct cpuidle_device *dev,
-+					struct cpuidle_driver *drv, int index)
- {
- 	struct cpuidle_state *state = &drv->states[index];
- 	unsigned long eax = flg2MWAIT(state->flags);
- 	unsigned long ecx = 1; /* break on interrupt flag */
+--- a/drivers/cpuidle/cpuidle-riscv-sbi.c
++++ b/drivers/cpuidle/cpuidle-riscv-sbi.c
+@@ -116,12 +116,12 @@ static int __sbi_enter_domain_idle_state
+ 		return -1;
  
--	if (state->flags & CPUIDLE_FLAG_IRQ_ENABLE)
--		local_irq_enable();
--
- 	mwait_idle_with_hints(eax, ecx);
+ 	/* Do runtime PM to manage a hierarchical CPU toplogy. */
+-	rcu_irq_enter_irqson();
+ 	if (s2idle)
+ 		dev_pm_genpd_suspend(pd_dev);
+ 	else
+ 		pm_runtime_put_sync_suspend(pd_dev);
+-	rcu_irq_exit_irqson();
++
++	rcu_idle_enter();
  
- 	return index;
- }
+ 	if (sbi_is_domain_state_available())
+ 		state = sbi_get_domain_state();
+@@ -130,12 +130,12 @@ static int __sbi_enter_domain_idle_state
  
-+static __cpuidle int intel_idle(struct cpuidle_device *dev,
-+				struct cpuidle_driver *drv, int index)
-+{
-+	return __intel_idle(dev, drv, index);
-+}
-+
-+static __cpuidle int intel_idle_irq(struct cpuidle_device *dev,
-+				    struct cpuidle_driver *drv, int index)
-+{
-+	int ret;
-+
-+	raw_local_irq_enable();
-+	ret = __intel_idle(dev, drv, index);
-+	raw_local_irq_disable();
-+
-+	return ret;
-+}
-+
- /**
-  * intel_idle_s2idle - Ask the processor to enter the given idle state.
-  * @dev: cpuidle device of the target CPU.
-@@ -1801,6 +1824,9 @@ static void __init intel_idle_init_cstat
- 		/* Structure copy. */
- 		drv->states[drv->state_count] = cpuidle_state_table[cstate];
+ 	ret = sbi_suspend(state) ? -1 : idx;
  
-+		if (cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IRQ_ENABLE)
-+			drv->states[drv->state_count].enter = intel_idle_irq;
+-	rcu_irq_enter_irqson();
++	rcu_idle_exit();
 +
- 		if ((disabled_states_mask & BIT(drv->state_count)) ||
- 		    ((icpu->use_acpi || force_use_acpi) &&
- 		     intel_idle_off_by_default(mwait_hint) &&
+ 	if (s2idle)
+ 		dev_pm_genpd_resume(pd_dev);
+ 	else
+ 		pm_runtime_get_sync(pd_dev);
+-	rcu_irq_exit_irqson();
+ 
+ 	cpu_pm_exit();
+ 
+@@ -246,6 +246,7 @@ static int sbi_dt_cpu_init_topology(stru
+ 	 * of a shared state for the domain, assumes the domain states are all
+ 	 * deeper states.
+ 	 */
++	drv->states[state_count - 1].flags |= CPUIDLE_FLAG_RCU_IDLE;
+ 	drv->states[state_count - 1].enter = sbi_enter_domain_idle_state;
+ 	drv->states[state_count - 1].enter_s2idle =
+ 					sbi_enter_s2idle_domain_idle_state;
 
 
 
