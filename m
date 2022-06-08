@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A0D4CCA498
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:48:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343867.569478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F3D5C433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:48:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.343868.569487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyq-00077r-MZ; Wed, 08 Jun 2022 14:48:20 +0000
+	id 1nywyr-0007Mg-Qf; Wed, 08 Jun 2022 14:48:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343867.569478; Wed, 08 Jun 2022 14:48:20 +0000
+Received: by outflank-mailman (output) from mailman id 343868.569487; Wed, 08 Jun 2022 14:48:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyq-00071R-0K; Wed, 08 Jun 2022 14:48:20 +0000
-Received: by outflank-mailman (input) for mailman id 343867;
- Wed, 08 Jun 2022 14:47:32 +0000
+	id 1nywyq-0007Ij-W6; Wed, 08 Jun 2022 14:48:20 +0000
+Received: by outflank-mailman (input) for mailman id 343868;
+ Wed, 08 Jun 2022 14:47:33 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OvtQ=WP=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1nywxz-0004T5-EI
- for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:32 +0000
+ id 1nywy4-0004T5-VI
+ for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:33 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id e5376313-e739-11ec-b605-df0040e90b76;
+ id e53af897-e739-11ec-b605-df0040e90b76;
  Wed, 08 Jun 2022 16:47:21 +0200 (CEST)
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywwz-00ChW4-1y; Wed, 08 Jun 2022 14:46:25 +0000
+ id 1nywx3-00ChYK-L3; Wed, 08 Jun 2022 14:46:29 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id AC095302D9E;
- Wed,  8 Jun 2022 16:46:22 +0200 (CEST)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A3BDD302EE7;
+ Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 598CC20C0FC8A; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ id 981A220C10EDC; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e5376313-e739-11ec-b605-df0040e90b76
+X-Inumbo-ID: e53af897-e739-11ec-b605-df0040e90b76
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=y6I/0XZeW+SwdAeAR3t2m034incS08IQBnZfBcNKYzA=; b=pV/EkEgKRIpeKvq5HN3+CCEy73
-	r8xSxfvRwX0Hp/RbmQEkGGqgtSQmt2V7wVKm/Dgh7gCxT8VN3Zd3ykv33oYJXDZhFrsOiZzgqwZwN
-	mYfnoNbn4mkY4D0X7knpoC+PXyRY28u9ZWLLFNEC02wY4oKlFNPo5yScw7t5dA1Upkyps4KrRMpkG
-	hdfHf70HVdGxmq1amZj2pji0fv+Uuwf5Bh2HdSJMzH66/m6rsKuia+FhR3TxjdKwxLuBcApt1D03J
-	veIlHyJOTL69bf8GkRxQ0BEOGIuKD5pe0mKmy/Kj0wSR+O/rPyAwmL/tyBM+mm2nltdjhcArwd3n8
-	F0v7I28w==;
-Message-ID: <20220608144516.426117259@infradead.org>
+	bh=1usWiRWR4uttba39otUsN6OqB3IXu4/S2NHARc2LOVI=; b=FwGsX6HqAEWrIDIwqSsLl+2rn+
+	jxtc/+7Q73QoS/5n4U2sAOL0VlfaYMGCWkilbboinFeB59SIcUo3UpH4a5CtYGWmPThbsscblAnH4
+	PSS71rXa70D7UmJtRK8HWOujM8sLBbHEPGPYqLVKvfZP62p3cW80pTaY4XSX5yfYbfkdrHxiUG5Wz
+	T0edzqMYifaS2QyjulPfkPqxRE0jrOsPGKKpMpJYlly7Zipb93HlY74okg/8Mb1f3Kbt7PF9GRF4I
+	xfQiX+7/KU3X93vRF1S+bG52Qv3PZIAkNXLJYuCETihI1/nFsTHWt4NnKd/O4/6se7YsYY89QZ1rA
+	qO/mDSKA==;
+Message-ID: <20220608144517.444659212@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:31 +0200
+Date: Wed, 08 Jun 2022 16:27:47 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
 Cc: rth@twiddle.net,
@@ -200,59 +200,33 @@ Cc: rth@twiddle.net,
  linux-tegra@vger.kernel.org,
  linux-arch@vger.kernel.org,
  rcu@vger.kernel.org
-Subject: [PATCH 08/36] cpuidle,psci: Push RCU-idle into driver
+Subject: [PATCH 24/36] printk: Remove trace_.*_rcuidle() usage
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-Doing RCU-idle outside the driver, only to then temporarily enable it
-again, at least twice, before going idle is daft.
+The problem, per commit fc98c3c8c9dc ("printk: use rcuidle console
+tracepoint"), was printk usage from the cpuidle path where RCU was
+already disabled.
+
+Per the patches earlier in this series, this is no longer the case.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- drivers/cpuidle/cpuidle-psci.c |    9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ kernel/printk/printk.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---- a/drivers/cpuidle/cpuidle-psci.c
-+++ b/drivers/cpuidle/cpuidle-psci.c
-@@ -69,12 +69,12 @@ static int __psci_enter_domain_idle_stat
- 		return -1;
+--- a/kernel/printk/printk.c
++++ b/kernel/printk/printk.c
+@@ -2238,7 +2238,7 @@ static u16 printk_sprint(char *text, u16
+ 		}
+ 	}
  
- 	/* Do runtime PM to manage a hierarchical CPU toplogy. */
--	rcu_irq_enter_irqson();
- 	if (s2idle)
- 		dev_pm_genpd_suspend(pd_dev);
- 	else
- 		pm_runtime_put_sync_suspend(pd_dev);
--	rcu_irq_exit_irqson();
-+
-+	rcu_idle_enter();
+-	trace_console_rcuidle(text, text_len);
++	trace_console(text, text_len);
  
- 	state = psci_get_domain_state();
- 	if (!state)
-@@ -82,12 +82,12 @@ static int __psci_enter_domain_idle_stat
- 
- 	ret = psci_cpu_suspend_enter(state) ? -1 : idx;
- 
--	rcu_irq_enter_irqson();
-+	rcu_idle_exit();
-+
- 	if (s2idle)
- 		dev_pm_genpd_resume(pd_dev);
- 	else
- 		pm_runtime_get_sync(pd_dev);
--	rcu_irq_exit_irqson();
- 
- 	cpu_pm_exit();
- 
-@@ -240,6 +240,7 @@ static int psci_dt_cpu_init_topology(str
- 	 * of a shared state for the domain, assumes the domain states are all
- 	 * deeper states.
- 	 */
-+	drv->states[state_count - 1].flags |= CPUIDLE_FLAG_RCU_IDLE;
- 	drv->states[state_count - 1].enter = psci_enter_domain_idle_state;
- 	drv->states[state_count - 1].enter_s2idle = psci_enter_s2idle_domain_idle_state;
- 	psci_cpuidle_use_cpuhp = true;
+ 	return text_len;
+ }
 
 
 
