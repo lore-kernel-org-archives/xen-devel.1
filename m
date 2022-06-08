@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B64DCCA49E
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:48:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343845.569374 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B8ACCA47B
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:48:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.343880.569548 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyi-0004jo-76; Wed, 08 Jun 2022 14:48:12 +0000
+	id 1nywz3-00012z-Al; Wed, 08 Jun 2022 14:48:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343845.569374; Wed, 08 Jun 2022 14:48:12 +0000
+Received: by outflank-mailman (output) from mailman id 343880.569548; Wed, 08 Jun 2022 14:48:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyi-0004iu-1d; Wed, 08 Jun 2022 14:48:12 +0000
-Received: by outflank-mailman (input) for mailman id 343845;
- Wed, 08 Jun 2022 14:47:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nywz1-0000wJ-D9; Wed, 08 Jun 2022 14:48:31 +0000
+Received: by outflank-mailman (input) for mailman id 343880;
+ Wed, 08 Jun 2022 14:47:39 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OvtQ=WP=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1nywxv-0004Sj-RG
- for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:23 +0000
+ id 1nywyB-0004T5-0D
+ for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:39 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e4a60525-e739-11ec-bd2c-47488cf2e6aa;
- Wed, 08 Jun 2022 16:47:19 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id eac7d911-e739-11ec-b605-df0040e90b76;
+ Wed, 08 Jun 2022 16:47:28 +0200 (CEST)
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywx3-0066CV-M7; Wed, 08 Jun 2022 14:46:30 +0000
+ id 1nywwy-0066BS-W1; Wed, 08 Jun 2022 14:46:25 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id C2880302F13;
- Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A8FF730008D;
+ Wed,  8 Jun 2022 16:46:22 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id A2E5D20C119A0; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ id 5313720C0F9B9; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e4a60525-e739-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: eac7d911-e739-11ec-b605-df0040e90b76
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=o5HILV8lXWZVR34kQkfXu7ELtM3PHvDf12JWqGFz8as=; b=FdF0WwTfqAD0qSj5IztZ4sLhvT
-	k5gLeMLjDAi8AiG+FPGxmqabFeIQHQCNOTIfhG/cpcbGLZPNynYxoEOkV1KR6W1cM26gk09NcMOho
-	OTH5ruv6nF9XsgSF9ERM0tY+ijfUIOhLwICgBWU3v/b6jxNumek114l8uiB/Ho+YCAnkYFEEtHFA1
-	yJwPilsqg79N5SwaSL+a8z3EFTRK0XJDDbWj1Ixr9OQeIT2Fab/9sy2Cr+siozN3wTiG232WtGG/1
-	MiOLZNXIY/fnByd71PGk1LDgy98zbKguCtDMF+RXQCVcyn0bJrc/NWlQckEgt24lFU5RTP60t+1Fw
-	I4HHiDAQ==;
-Message-ID: <20220608144517.570101266@infradead.org>
+	bh=OtG2eksypqTPnibPh4fnaffiD2hY+EVznlbJ2kHLrow=; b=OVXFxuucL+euI7qJ0DHWP+HSd+
+	K0Ja573cJSNgJwZfmTV/5FSX0IvQJrgOo9v/0uLAq5TdSmJQtXAZyIW9o/35yTdAOleYqjANFEm+E
+	l56+S1viwHvjXO62dxEnDYPCdtMwVOYv/k+oP4A2fDyCb6sOHq4kRNEOvqcsJ/5x/Zoh6zkng8v4u
+	/0d1tlL+++2dqJwM54DkEmGHC+DPLj6jQdLOk++gXXVkvZXV4HarSMkLWNk/RWR6rJjZ3hTgPD+7o
+	fRFAUGoXS/CQX8DE/ix3aPY/jnZckpcWrGai1TDNvAnceUPXNMM/pOlZZ/Tt52+3oavm+6TFmtcmc
+	EkhLqJ7w==;
+Message-ID: <20220608144516.362668063@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:49 +0200
+Date: Wed, 08 Jun 2022 16:27:30 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
 Cc: rth@twiddle.net,
@@ -200,134 +200,88 @@ Cc: rth@twiddle.net,
  linux-tegra@vger.kernel.org,
  linux-arch@vger.kernel.org,
  rcu@vger.kernel.org
-Subject: [PATCH 26/36] cpuidle,sched: Remove annotations from TIF_{POLLING_NRFLAG,NEED_RESCHED}
+Subject: [PATCH 07/36] cpuidle,tegra: Push RCU-idle into driver
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-vmlinux.o: warning: objtool: mwait_idle+0x5: call to current_set_polling_and_test() leaves .noinstr.text section
-vmlinux.o: warning: objtool: acpi_processor_ffh_cstate_enter+0xc5: call to current_set_polling_and_test() leaves .noinstr.text section
-vmlinux.o: warning: objtool: cpu_idle_poll.isra.0+0x73: call to test_ti_thread_flag() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle+0xbc: call to current_set_polling_and_test() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_irq+0xea: call to current_set_polling_and_test() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_s2idle+0xb4: call to current_set_polling_and_test() leaves .noinstr.text section
-
-vmlinux.o: warning: objtool: intel_idle+0xa6: call to current_clr_polling() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_irq+0xbf: call to current_clr_polling() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_s2idle+0xa1: call to current_clr_polling() leaves .noinstr.text section
-
-vmlinux.o: warning: objtool: mwait_idle+0xe: call to __current_set_polling() leaves .noinstr.text section
-vmlinux.o: warning: objtool: acpi_processor_ffh_cstate_enter+0xc5: call to __current_set_polling() leaves .noinstr.text section
-vmlinux.o: warning: objtool: cpu_idle_poll.isra.0+0x73: call to test_ti_thread_flag() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle+0xbc: call to __current_set_polling() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_irq+0xea: call to __current_set_polling() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_s2idle+0xb4: call to __current_set_polling() leaves .noinstr.text section
-
-vmlinux.o: warning: objtool: cpu_idle_poll.isra.0+0x73: call to test_ti_thread_flag() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_s2idle+0x73: call to test_ti_thread_flag.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_irq+0x91: call to test_ti_thread_flag.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle+0x78: call to test_ti_thread_flag.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: acpi_safe_halt+0xf: call to test_ti_thread_flag.constprop.0() leaves .noinstr.text section
+Doing RCU-idle outside the driver, only to then temporarily enable it
+again, at least twice, before going idle is daft.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- include/linux/sched/idle.h  |   40 ++++++++++++++++++++++++++++++----------
- include/linux/thread_info.h |   18 +++++++++++++++++-
- 2 files changed, 47 insertions(+), 11 deletions(-)
+ drivers/cpuidle/cpuidle-tegra.c |   21 ++++++++++++++++-----
+ 1 file changed, 16 insertions(+), 5 deletions(-)
 
---- a/include/linux/sched/idle.h
-+++ b/include/linux/sched/idle.h
-@@ -23,12 +23,37 @@ static inline void wake_up_if_idle(int c
-  */
- #ifdef TIF_POLLING_NRFLAG
+--- a/drivers/cpuidle/cpuidle-tegra.c
++++ b/drivers/cpuidle/cpuidle-tegra.c
+@@ -180,9 +180,11 @@ static int tegra_cpuidle_state_enter(str
+ 	}
  
--static inline void __current_set_polling(void)
-+#ifdef _ASM_GENERIC_BITOPS_INSTRUMENTED_ATOMIC_H
+ 	local_fiq_disable();
+-	RCU_NONIDLE(tegra_pm_set_cpu_in_lp2());
++	tegra_pm_set_cpu_in_lp2();
+ 	cpu_pm_enter();
+ 
++	rcu_idle_enter();
 +
-+static __always_inline void __current_set_polling(void)
+ 	switch (index) {
+ 	case TEGRA_C7:
+ 		err = tegra_cpuidle_c7_enter();
+@@ -197,8 +199,10 @@ static int tegra_cpuidle_state_enter(str
+ 		break;
+ 	}
+ 
++	rcu_idle_exit();
++
+ 	cpu_pm_exit();
+-	RCU_NONIDLE(tegra_pm_clear_cpu_in_lp2());
++	tegra_pm_clear_cpu_in_lp2();
+ 	local_fiq_enable();
+ 
+ 	return err ?: index;
+@@ -226,6 +230,7 @@ static int tegra_cpuidle_enter(struct cp
+ 			       struct cpuidle_driver *drv,
+ 			       int index)
  {
--	set_thread_flag(TIF_POLLING_NRFLAG);
-+	arch_set_bit(TIF_POLLING_NRFLAG,
-+		     (unsigned long *)(&current_thread_info()->flags));
- }
++	bool do_rcu = drv->states[index].flags & CPUIDLE_FLAG_RCU_IDLE;
+ 	unsigned int cpu = cpu_logical_map(dev->cpu);
+ 	int ret;
  
--static inline bool __must_check current_set_polling_and_test(void)
-+static __always_inline void __current_clr_polling(void)
-+{
-+	arch_clear_bit(TIF_POLLING_NRFLAG,
-+		       (unsigned long *)(&current_thread_info()->flags));
-+}
-+
-+#else
-+
-+static __always_inline void __current_set_polling(void)
-+{
-+	set_bit(TIF_POLLING_NRFLAG,
-+		(unsigned long *)(&current_thread_info()->flags));
-+}
-+
-+static __always_inline void __current_clr_polling(void)
-+{
-+	clear_bit(TIF_POLLING_NRFLAG,
-+		  (unsigned long *)(&current_thread_info()->flags));
-+}
-+
-+#endif /* _ASM_GENERIC_BITOPS_INSTRUMENTED_ATOMIC_H */
-+
-+static __always_inline bool __must_check current_set_polling_and_test(void)
- {
- 	__current_set_polling();
+@@ -233,9 +238,13 @@ static int tegra_cpuidle_enter(struct cp
+ 	if (dev->states_usage[index].disable)
+ 		return -1;
  
-@@ -41,12 +66,7 @@ static inline bool __must_check current_
- 	return unlikely(tif_need_resched());
- }
+-	if (index == TEGRA_C1)
++	if (index == TEGRA_C1) {
++		if (do_rcu)
++			rcu_idle_enter();
+ 		ret = arm_cpuidle_simple_enter(dev, drv, index);
+-	else
++		if (do_rcu)
++			rcu_idle_exit();
++	} else
+ 		ret = tegra_cpuidle_state_enter(dev, index, cpu);
  
--static inline void __current_clr_polling(void)
--{
--	clear_thread_flag(TIF_POLLING_NRFLAG);
--}
--
--static inline bool __must_check current_clr_polling_and_test(void)
-+static __always_inline bool __must_check current_clr_polling_and_test(void)
- {
- 	__current_clr_polling();
- 
-@@ -73,7 +93,7 @@ static inline bool __must_check current_
- }
- #endif
- 
--static inline void current_clr_polling(void)
-+static __always_inline void current_clr_polling(void)
- {
- 	__current_clr_polling();
- 
---- a/include/linux/thread_info.h
-+++ b/include/linux/thread_info.h
-@@ -177,7 +177,23 @@ static __always_inline unsigned long rea
- 	clear_ti_thread_flag(task_thread_info(t), TIF_##fl)
- #endif /* !CONFIG_GENERIC_ENTRY */
- 
--#define tif_need_resched() test_thread_flag(TIF_NEED_RESCHED)
-+#ifdef _ASM_GENERIC_BITOPS_INSTRUMENTED_NON_ATOMIC_H
-+
-+static __always_inline bool tif_need_resched(void)
-+{
-+	return arch_test_bit(TIF_NEED_RESCHED,
-+			     (unsigned long *)(&current_thread_info()->flags));
-+}
-+
-+#else
-+
-+static __always_inline bool tif_need_resched(void)
-+{
-+	return test_bit(TIF_NEED_RESCHED,
-+			(unsigned long *)(&current_thread_info()->flags));
-+}
-+
-+#endif /* _ASM_GENERIC_BITOPS_INSTRUMENTED_NON_ATOMIC_H */
- 
- #ifndef CONFIG_HAVE_ARCH_WITHIN_STACK_FRAMES
- static inline int arch_within_stack_frames(const void * const stack,
+ 	if (ret < 0) {
+@@ -285,7 +294,8 @@ static struct cpuidle_driver tegra_idle_
+ 			.exit_latency		= 2000,
+ 			.target_residency	= 2200,
+ 			.power_usage		= 100,
+-			.flags			= CPUIDLE_FLAG_TIMER_STOP,
++			.flags			= CPUIDLE_FLAG_TIMER_STOP |
++						  CPUIDLE_FLAG_RCU_IDLE,
+ 			.name			= "C7",
+ 			.desc			= "CPU core powered off",
+ 		},
+@@ -295,6 +305,7 @@ static struct cpuidle_driver tegra_idle_
+ 			.target_residency	= 10000,
+ 			.power_usage		= 0,
+ 			.flags			= CPUIDLE_FLAG_TIMER_STOP |
++						  CPUIDLE_FLAG_RCU_IDLE   |
+ 						  CPUIDLE_FLAG_COUPLED,
+ 			.name			= "CC6",
+ 			.desc			= "CPU cluster powered off",
 
 
 
