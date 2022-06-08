@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B080FC04E83
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:48:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343878.569540 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA055C433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:54:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.343987.569610 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywz1-0000gG-KR; Wed, 08 Jun 2022 14:48:31 +0000
+	id 1nyx4R-00010Z-Lm; Wed, 08 Jun 2022 14:54:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343878.569540; Wed, 08 Jun 2022 14:48:31 +0000
+Received: by outflank-mailman (output) from mailman id 343987.569610; Wed, 08 Jun 2022 14:54:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nywyz-0000aE-Nz; Wed, 08 Jun 2022 14:48:29 +0000
-Received: by outflank-mailman (input) for mailman id 343878;
- Wed, 08 Jun 2022 14:47:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nyx4R-0000yP-Eo; Wed, 08 Jun 2022 14:54:07 +0000
+Received: by outflank-mailman (input) for mailman id 343987;
+ Wed, 08 Jun 2022 14:53:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OvtQ=WP=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1nywy9-0004T5-Vv
+ id 1nywy9-0004Sj-Sz
  for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:38 +0000
 Received: from casper.infradead.org (casper.infradead.org
  [2001:8b0:10b:1236::1])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ea0e3a0e-e739-11ec-b605-df0040e90b76;
- Wed, 08 Jun 2022 16:47:27 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id e83f51a0-e739-11ec-bd2c-47488cf2e6aa;
+ Wed, 08 Jun 2022 16:47:24 +0200 (CEST)
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywx6-00ChZS-6w; Wed, 08 Jun 2022 14:46:32 +0000
+ id 1nywx2-00ChXM-Tb; Wed, 08 Jun 2022 14:46:29 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E2347302F4B;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A06A8302E95;
  Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id C09F920C119B6; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ id 9441920C10EDA; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ea0e3a0e-e739-11ec-b605-df0040e90b76
+X-Inumbo-ID: e83f51a0-e739-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=72Sb3LM19KDQn37emviwOKsQWcEROOYn6vEWI6g4O0g=; b=EIStTNEvIWCOhCtVS6i/K7y72k
-	Z2/y8QVivxbrQMzv70rV/xYI1TqoeKXswIk5VnUpw0+4RhgOORQAEqSaWWFcpGN/Ozze52Ug5i0sI
-	TleRT/9YHz6wiGFbGNdRNWgltUsVvJQ/VjZwME/1FoaZpc7a2ndwOU/eD8GtMnigWvtYOtoQbNZbT
-	YAEGoBE1YPDvgKLkfYqGdKYI7530FqsneWIVYclJ5CEXvPE38a9eC2TbKb0SOYjj+vs7v40/yoQE7
-	k4NN68jbT7q4/PIwEPV2vzemhXOOO98Uy9H+Lq6ErhVJIdH1jDJG5a7zOOPhARBO9XvArNFyyMFwC
-	hXw9kkBw==;
-Message-ID: <20220608144518.010587032@infradead.org>
+	bh=RgIlqtYjjJdUiI+7wCmxTrS6x1kOK6pzGpl8Q80bmr4=; b=G36djvM6W5RR7vlHVG43A6Iudr
+	2F5NZ1PvnNXbTO0zpliXNxkDUVY5zkHKbOaq03CD5t8mleRv7RSL0O0tO1HwRwQ/MOKZWZwXP94dO
+	OyHTPEvggi7hUK+yhhVFLFdvi4GdvU2f2SC8Nsjn5PVc/OK6YfCwGyHnvXicXlc0Bl51oWzBO7qjr
+	s4lmtFzyLrwIq1biy5jzW2hDxT+rMaooNCcN/ALUDKJ5MfHYSkr4rDMi0HCIPUt8IpmdPh8QLzULX
+	1Pzez9sPHZCsctScaUazcc/wB8wvvc2KcGz1r+hnNxtZlyWfJIlX0d7HYAF/GjFQCHJgoGLPVpXS4
+	rz4KAG3w==;
+Message-ID: <20220608144517.380962958@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:56 +0200
+Date: Wed, 08 Jun 2022 16:27:46 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
 Cc: rth@twiddle.net,
@@ -200,35 +200,39 @@ Cc: rth@twiddle.net,
  linux-tegra@vger.kernel.org,
  linux-arch@vger.kernel.org,
  rcu@vger.kernel.org
-Subject: [PATCH 33/36] cpuidle,omap3: Use WFI for omap3_pm_idle()
+Subject: [PATCH 23/36] arm64,smp: Remove trace_.*_rcuidle() usage
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-arch_cpu_idle() is a very simple idle interface and exposes only a
-single idle state and is expected to not require RCU and not do any
-tracing/instrumentation.
-
-As such, omap_sram_idle() is not a valid implementation. Replace it
-with the simple (shallow) omap3_do_wfi() call. Leaving the more
-complicated idle states for the cpuidle driver.
+Ever since commit d3afc7f12987 ("arm64: Allow IPIs to be handled as
+normal interrupts") this function is called in regular IRQ context.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/arm/mach-omap2/pm34xx.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm64/kernel/smp.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---- a/arch/arm/mach-omap2/pm34xx.c
-+++ b/arch/arm/mach-omap2/pm34xx.c
-@@ -294,7 +294,7 @@ static void omap3_pm_idle(void)
- 	if (omap_irq_pending())
- 		return;
+--- a/arch/arm64/kernel/smp.c
++++ b/arch/arm64/kernel/smp.c
+@@ -865,7 +865,7 @@ static void do_handle_IPI(int ipinr)
+ 	unsigned int cpu = smp_processor_id();
  
--	omap_sram_idle();
-+	omap3_do_wfi();
+ 	if ((unsigned)ipinr < NR_IPI)
+-		trace_ipi_entry_rcuidle(ipi_types[ipinr]);
++		trace_ipi_entry(ipi_types[ipinr]);
+ 
+ 	switch (ipinr) {
+ 	case IPI_RESCHEDULE:
+@@ -914,7 +914,7 @@ static void do_handle_IPI(int ipinr)
+ 	}
+ 
+ 	if ((unsigned)ipinr < NR_IPI)
+-		trace_ipi_exit_rcuidle(ipi_types[ipinr]);
++		trace_ipi_exit(ipi_types[ipinr]);
  }
  
- #ifdef CONFIG_SUSPEND
+ static irqreturn_t ipi_handler(int irq, void *data)
 
 
 
