@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D57C433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:54:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.343998.569634 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE0FAC43334
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Jun 2022 14:55:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344059.569656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyx4W-0001pI-Ai; Wed, 08 Jun 2022 14:54:12 +0000
+	id 1nyx5e-00044y-7U; Wed, 08 Jun 2022 14:55:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 343998.569634; Wed, 08 Jun 2022 14:54:12 +0000
+Received: by outflank-mailman (output) from mailman id 344059.569656; Wed, 08 Jun 2022 14:55:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nyx4W-0001p4-5b; Wed, 08 Jun 2022 14:54:12 +0000
-Received: by outflank-mailman (input) for mailman id 343998;
- Wed, 08 Jun 2022 14:53:59 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nyx5e-000431-0q; Wed, 08 Jun 2022 14:55:22 +0000
+Received: by outflank-mailman (input) for mailman id 344059;
+ Wed, 08 Jun 2022 14:54:37 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OvtQ=WP=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1nywyE-0004T5-0L
- for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:42 +0000
+ id 1nywyI-0004Sj-1b
+ for xen-devel@lists.xenproject.org; Wed, 08 Jun 2022 14:47:46 +0000
 Received: from desiato.infradead.org (desiato.infradead.org
  [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f0d78caf-e739-11ec-b605-df0040e90b76;
- Wed, 08 Jun 2022 16:47:38 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f4e13d87-e739-11ec-bd2c-47488cf2e6aa;
+ Wed, 08 Jun 2022 16:47:45 +0200 (CEST)
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywww-0066AZ-G5; Wed, 08 Jun 2022 14:46:22 +0000
+ id 1nywx5-0066DR-V8; Wed, 08 Jun 2022 14:46:32 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A2545302D40;
- Wed,  8 Jun 2022 16:46:20 +0200 (CEST)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id D41E1302F3B;
+ Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 40FBE20C0F9AF; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+ id B77DB20C119AE; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f0d78caf-e739-11ec-b605-df0040e90b76
+X-Inumbo-ID: f4e13d87-e739-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
 	Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
 	Content-ID:Content-Description:In-Reply-To;
-	bh=5naerUzcbldjXRb10QYbs7+/pM4Ur6B2nPLePdbzHOg=; b=rhgD+2PcLe5JBDMlblYneku2pt
-	sdXli9DhMYdDhGWlEZGfdH33pA1vxt2/I6b1j6EXLWZWbJKzwmGTw5dQ1MmGgZUXFXCjmqjyi7Cj0
-	RDEeMRhRx462t65vhBmJxF3B2p6UkTTvXKi94yWM8bZ08fR0lDh+Y4pYwx1LnZArZ4GjMKpZDddEp
-	x8xSvPeIQZbvtL3deY5Q/Os9xDxH0nwk7Kl+yc43Zl8sk4PIGyqEmr5VJo8LA2u3JPyOV7lFHyHMX
-	QOljdOyxCUAilPhGGsAmgB+8n8H2M0DXrQgHdXFz3ZS+VW69bh5LQomhK8O36eqaPNPg9koIFunZF
-	REK2rFOw==;
-Message-ID: <20220608144516.109792837@infradead.org>
+	bh=OtI5HbrqLesCtm4u4WFjeviiqkcvkrIAtN470m5UDAY=; b=YxAxQQTnVMjXt5F5qT80bkgPh5
+	ixluP6Zz3hO7fx8vJIQrj4C5TqUSGKakaJJsFYPkJyX/quow9i3Q1RHxs4fPIHvQqAI4ItoUKSg9H
+	Q96BC3qMYMoqP4qCHwfqrdYRb4hE4ZTb5URJUGq6ct2gnpSWNNz0/tb6QgN8X/3EG+8+Hn8P0Jpfj
+	s1Mx2wUY/shYiCwGx373RWVVV8k86WJZX6RUBzcpDy2OG/HxZoSIcohcw28STfEH3IheSXP1uOHaG
+	ZHJWiPNFWu4NLZ6eL7MRQvDj+sp0KsDvF/li+47ulaB6B0czYcAARGWueTqt7adXuGkZdkHCdgM5d
+	rhVbSspQ==;
+Message-ID: <20220608144517.885263942@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:26 +0200
+Date: Wed, 08 Jun 2022 16:27:54 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
 Cc: rth@twiddle.net,
@@ -200,38 +200,65 @@ Cc: rth@twiddle.net,
  linux-tegra@vger.kernel.org,
  linux-arch@vger.kernel.org,
  rcu@vger.kernel.org
-Subject: [PATCH 03/36] cpuidle/poll: Ensure IRQ state is invariant
+Subject: [PATCH 31/36] cpuidle,acpi: Make noinstr clean
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-cpuidle_state::enter() methods should be IRQ invariant
+vmlinux.o: warning: objtool: io_idle+0xc: call to __inb.isra.0() leaves .noinstr.text section
+vmlinux.o: warning: objtool: acpi_idle_enter+0xfe: call to num_online_cpus() leaves .noinstr.text section
+vmlinux.o: warning: objtool: acpi_idle_enter+0x115: call to acpi_idle_fallback_to_c1.isra.0() leaves .noinstr.text section
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- drivers/cpuidle/poll_state.c |    4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ arch/x86/include/asm/shared/io.h |    4 ++--
+ drivers/acpi/processor_idle.c    |    2 +-
+ include/linux/cpumask.h          |    4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
---- a/drivers/cpuidle/poll_state.c
-+++ b/drivers/cpuidle/poll_state.c
-@@ -17,7 +17,7 @@ static int __cpuidle poll_idle(struct cp
+--- a/arch/x86/include/asm/shared/io.h
++++ b/arch/x86/include/asm/shared/io.h
+@@ -5,13 +5,13 @@
+ #include <linux/types.h>
  
- 	dev->poll_time_limit = false;
+ #define BUILDIO(bwl, bw, type)						\
+-static inline void __out##bwl(type value, u16 port)			\
++static __always_inline void __out##bwl(type value, u16 port)		\
+ {									\
+ 	asm volatile("out" #bwl " %" #bw "0, %w1"			\
+ 		     : : "a"(value), "Nd"(port));			\
+ }									\
+ 									\
+-static inline type __in##bwl(u16 port)					\
++static __always_inline type __in##bwl(u16 port)				\
+ {									\
+ 	type value;							\
+ 	asm volatile("in" #bwl " %w1, %" #bw "0"			\
+--- a/drivers/acpi/processor_idle.c
++++ b/drivers/acpi/processor_idle.c
+@@ -593,7 +593,7 @@ static int acpi_idle_play_dead(struct cp
+ 	return 0;
+ }
  
--	local_irq_enable();
-+	raw_local_irq_enable();
- 	if (!current_set_polling_and_test()) {
- 		unsigned int loop_count = 0;
- 		u64 limit;
-@@ -36,6 +36,8 @@ static int __cpuidle poll_idle(struct cp
- 			}
- 		}
- 	}
-+	raw_local_irq_disable();
-+
- 	current_clr_polling();
- 
- 	return index;
+-static bool acpi_idle_fallback_to_c1(struct acpi_processor *pr)
++static __always_inline bool acpi_idle_fallback_to_c1(struct acpi_processor *pr)
+ {
+ 	return IS_ENABLED(CONFIG_HOTPLUG_CPU) && !pr->flags.has_cst &&
+ 		!(acpi_gbl_FADT.flags & ACPI_FADT_C2_MP_SUPPORTED);
+--- a/include/linux/cpumask.h
++++ b/include/linux/cpumask.h
+@@ -908,9 +908,9 @@ static inline const struct cpumask *get_
+  * concurrent CPU hotplug operations unless invoked from a cpuhp_lock held
+  * region.
+  */
+-static inline unsigned int num_online_cpus(void)
++static __always_inline unsigned int num_online_cpus(void)
+ {
+-	return atomic_read(&__num_online_cpus);
++	return arch_atomic_read(&__num_online_cpus);
+ }
+ #define num_possible_cpus()	cpumask_weight(cpu_possible_mask)
+ #define num_present_cpus()	cpumask_weight(cpu_present_mask)
 
 
 
