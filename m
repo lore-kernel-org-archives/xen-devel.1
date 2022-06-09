@@ -4,65 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16F0CC43334
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 10:17:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.344865.570481 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9A1FC433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 10:18:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344878.570492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzFDh-0000n9-34; Thu, 09 Jun 2022 10:16:53 +0000
+	id 1nzFEg-0001eh-Gw; Thu, 09 Jun 2022 10:17:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 344865.570481; Thu, 09 Jun 2022 10:16:53 +0000
+Received: by outflank-mailman (output) from mailman id 344878.570492; Thu, 09 Jun 2022 10:17:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzFDg-0000n2-VT; Thu, 09 Jun 2022 10:16:52 +0000
-Received: by outflank-mailman (input) for mailman id 344865;
- Thu, 09 Jun 2022 10:16:52 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=6kiA=WQ=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
- id 1nzFDf-0000Tp-SI
- for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 10:16:52 +0000
-Received: from EUR02-VE1-obe.outbound.protection.outlook.com
- (mail-ve1eur02on0621.outbound.protection.outlook.com
- [2a01:111:f400:fe06::621])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 46fc6939-e7dd-11ec-b605-df0040e90b76;
- Thu, 09 Jun 2022 12:16:51 +0200 (CEST)
-Received: from AS9PR06CA0350.eurprd06.prod.outlook.com (2603:10a6:20b:466::10)
- by DB6PR0801MB1797.eurprd08.prod.outlook.com (2603:10a6:4:32::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5314.17; Thu, 9 Jun
- 2022 10:16:47 +0000
-Received: from VE1EUR03FT026.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:466:cafe::1) by AS9PR06CA0350.outlook.office365.com
- (2603:10a6:20b:466::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.13 via Frontend
- Transport; Thu, 9 Jun 2022 10:16:47 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- VE1EUR03FT026.mail.protection.outlook.com (10.152.18.148) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5332.12 via Frontend Transport; Thu, 9 Jun 2022 10:16:47 +0000
-Received: ("Tessian outbound d3318d0cda7b:v120");
- Thu, 09 Jun 2022 10:16:46 +0000
-Received: from ac2cf8f44b83.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 492D3347-3F23-4085-B935-1DE8D8426FD4.1; 
- Thu, 09 Jun 2022 10:16:39 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id ac2cf8f44b83.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 09 Jun 2022 10:16:39 +0000
-Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
- by AM6PR08MB2998.eurprd08.prod.outlook.com (2603:10a6:209:4e::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5314.13; Thu, 9 Jun
- 2022 10:16:37 +0000
-Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
- ([fe80::d9f0:12ef:bfa3:3adb]) by AM6PR08MB3784.eurprd08.prod.outlook.com
- ([fe80::d9f0:12ef:bfa3:3adb%5]) with mapi id 15.20.5314.019; Thu, 9 Jun 2022
- 10:16:37 +0000
+	id 1nzFEg-0001ea-Ds; Thu, 09 Jun 2022 10:17:54 +0000
+Received: by outflank-mailman (input) for mailman id 344878;
+ Thu, 09 Jun 2022 10:17:53 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jWvP=WQ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
+ id 1nzFEf-0001eG-3a
+ for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 10:17:53 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on0629.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::629])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6b31da17-e7dd-11ec-bd2c-47488cf2e6aa;
+ Thu, 09 Jun 2022 12:17:52 +0200 (CEST)
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
+ by DBBPR04MB6297.eurprd04.prod.outlook.com (2603:10a6:10:cd::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.12; Thu, 9 Jun
+ 2022 10:17:49 +0000
+Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::dfa:a64a:432f:e26b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
+ ([fe80::dfa:a64a:432f:e26b%7]) with mapi id 15.20.5332.013; Thu, 9 Jun 2022
+ 10:17:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -74,340 +49,297 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46fc6939-e7dd-11ec-b605-df0040e90b76
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=dF9faxHMKim1awnkWZnK5CBTB6qJjlA+5G4TMPFgrFT8ThjWo/xCIVztqmElCbEPXPzKIeN9UDzuXHJT13lezVhJbNNplbibICaDzS9PXiGF5dKJeGBzQ4Z4SR9oPSx9IRGxeeImhnaKNw1SSUX5LL4Mdk7HmJx8bd8VTIXI26f/7HkoYLoVHRYbvZULuugxSb+nh0h00LyC4QIjij/CdVngIE46rkrBejkQMd1VQm/2MLw0tynGvJkfi6JrI0nBwPtyPC5Tng47ZQ19mm5mEGggnTbdJ1euvRbwKBCyk71bs4JvHmojZn7gmFblUBsg4CmguvYUaqCVI28toie4JQ==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sZUP64wpScVM9B/KumhWG4mkq4094dBhOkHD0muqmsY=;
- b=JOTvHFN4JdBDkuqMID9igVoiBr0v5MhaRh6Y+eJPKgwExVhqHxIQfFfYPgtmBeTd/aNvEorQqJT+66Au1ntGiixF7cBtO57qMjibZiuQCsUaVki450YfIQCI4LbDGYHnfcL+stec8Xob6dNILH/ZSgkwTa1Jye1iCTXfVpUblRI41tifpOt4zHPmzqhuL/NxlVwg7wevCxYrEVfXmdeGz3Cr0nsck/UCLdd5F1fjJQkSwYoWy2NSEYrhmoJLv5erJ+LZ00YlRjiNRaOE/LVyNE/sxwTXpemZAQ+a1Exy1xorzhjeFXcYmi9nnQ/JTFMcLYuqT2gGLXU7zwMG5+xcEg==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
- oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sZUP64wpScVM9B/KumhWG4mkq4094dBhOkHD0muqmsY=;
- b=su43UjA56g8U3Za4qxYeCyQ/0dDfSbDKAuVfjAnCfsHFoxdaQzMTez67GKxBfbwXDxpGJ+nrABvcUdHxVY4UqHx+wX3ZdZdWvlQ6hc8YiMBuSz3dX3m5nG2VYm6pcjLkF4Lq/69shzs3MdGmXhSzibUY1LcThxQoyFai1S37NVE=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
- client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
- pr=C
-X-CheckRecipientChecked: true
-X-CR-MTA-CID: 482bdf5473fccc23
-X-CR-MTA-TID: 64aa7808
+X-Inumbo-ID: 6b31da17-e7dd-11ec-bd2c-47488cf2e6aa
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FFfKK69uXlUxBhgvfKepGWxI3I6YcgWVV8GKDwxHQ+SLNgr58uILKA2+5u5WtWVk+PPTaJXYnWVcb7U4DtaDkNXXrBOzesdvjwRNwysAIwruE9yDfg3wkXDdhSvWqBjQZsLvo1p2MKYq/XJSrxlMkTtEPKhpS87rB4FIXAzJeuyKZKU6dC9rlmPUh/dq+SvJuRE0rzqO5EqMzxi5CCbAzwAZowZxilJBkHGJhX2fHBF5x0WeQMHqyps9HTRNJWoU4ubhQ6peVtIse25VNQ5pPxxIkOmCKD/F/jFpt/3KhQYY7qBBg1H3jKmGy4j3Hnl9s+gGMpccPL+WANoSxp08og==
+ b=VuZwRaVZOZULWr7YNvcOn45z8LRSdDG8yBRnBcjztnBO3ZFkxurmrOnRvRZLK/T9Jz5KFdgxYDxch8Dyt2gJDkXi+tONpgDCu+k7HJSN6kLnHbV2zei5Qc3ME8LizT/Ji6Hhm0hRK4JEufFbMz2aUKkUTBixvwfexNswa10hHoDwGVEXuvNZLxKt7gAIX+w2vacTs4EXfhnFLBdN2KdFbeGi9EBF0kO89nU6LKfiIs7yYMbZf4+n3HNIbsMmBEpDQxvPvkwCpJ971qjeDKg3wIvR50OcIwgQa5wH5vix9qMOixSphQHzvI3kEy91HBzj1ch30l+4sqoh9CKlHqVrGQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sZUP64wpScVM9B/KumhWG4mkq4094dBhOkHD0muqmsY=;
- b=T+5IiJyBEbTp1MDodGGQ4N96ThVEakJmlaXvo9G/DZGdd6MCOIaSkFThiaKE2l49v1kIvbnpgVq8/rmYiIQuocLjeHE3UAXV4lEph7c9Kv6Elr8YZG+b5LIS/902wcoB1pSb/f/DgaQHPT5bW5LqYtxEmcCvZAOJFZ7W1PVZTCPJ3wbJR2oFfUOF8lFAPAFv3b2uRjw/vrbqaMthpcetjETDseNpjbuwCUMDC76AyLM+y/Q1pV/gyawDTkAomInfZDGMr8bp1L9wJZZ8u6IQy+xD9cPwrvh2TtE3T6GcI2lKp2k6tTnPDZjvPGS4zHB/z96IYGQbHST5lUJey2v00Q==
+ bh=AxiRfgvA8ZTM896+3sr+fZ7fI2k/BkIKHoJCeGpTy2A=;
+ b=BH9AgLBo4YDVtaM0nrNSYwAoL7RFOTOC/JcQKuxsHG6NkMy0JJZmP9Wmr7jZYhiDh7f7WBEYAbTySJ+0tEQx4GShuMRIQ7iMs3t02ozinY12KlzCefJ7akvjB/cYCvZsBn0442pXRrzK8u0AN3dLRYjkuOMnk00K1EXLdPcdfbYTY3NSfTpChOL8RvDgPs2hCp5kjDKQaSDNOmvNssEFfX95ndhdN/eytHXc+9E6ob6ETKBDSPJoemcPXBY7YJ5bkzaorRdhqoyANWR+lD0lytG6N25SbO45prxD8OuKdAKcNJ51JVsVU8cAhO7QiQdZiEXhHlSdlYPfTSH984JgGQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
- s=selector2-armh-onmicrosoft-com;
+ smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
+ dkim=pass header.d=suse.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sZUP64wpScVM9B/KumhWG4mkq4094dBhOkHD0muqmsY=;
- b=su43UjA56g8U3Za4qxYeCyQ/0dDfSbDKAuVfjAnCfsHFoxdaQzMTez67GKxBfbwXDxpGJ+nrABvcUdHxVY4UqHx+wX3ZdZdWvlQ6hc8YiMBuSz3dX3m5nG2VYm6pcjLkF4Lq/69shzs3MdGmXhSzibUY1LcThxQoyFai1S37NVE=
-From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Anthony PERARD <anthony.perard@citrix.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: Re: [XEN PATCH 1/4] build: xen/include: use if_changed
-Thread-Topic: [XEN PATCH 1/4] build: xen/include: use if_changed
-Thread-Index: AQHYddkD4JsESJA0gkGnWWwykzQjSK1G6E+A
-Date: Thu, 9 Jun 2022 10:16:37 +0000
-Message-ID: <6EE2C13C-7218-4063-8C73-88695C6BF4CE@arm.com>
-References: <20220601165909.46588-1-anthony.perard@citrix.com>
- <20220601165909.46588-2-anthony.perard@citrix.com>
-In-Reply-To: <20220601165909.46588-2-anthony.perard@citrix.com>
-Accept-Language: en-GB, en-US
+ bh=AxiRfgvA8ZTM896+3sr+fZ7fI2k/BkIKHoJCeGpTy2A=;
+ b=JoG35Y0rnua6N8FOZ3UAT/x5CFgDtE1kqBy4BqzYcTQGLT9HwFT/OGueEwtXOYw/GbbfwBIVzlWckVy4ppI3jbIIenmiI2PNi6X2n9xhvsAOjkJTPGcX1slwsQsyL4Tqf7NmGXWDodK68spENWCH/1Cl6cOYEAcglR1LNlhDKpsrhU6FcCzF6zQ9292vpgPhN9hPTC/98c2t7COL5U4ozMRIqj3HC/bEdDK1yfV/t2MwYazcdA/3sFCnv7ltDTtj97U6dGOKdz98KgwiRvkXjNG11JRaS6mJGyH4b8Akrj6XGuABRUORyXwSc58LKEkPc2fkPTiLuzvYyY/WdQ20zQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=suse.com;
+Message-ID: <ffe69943-1d65-9d04-f167-f0d61e04a9fb@suse.com>
+Date: Thu, 9 Jun 2022 12:17:48 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Subject: [PATCH v6 03/12] AMD/IOMMU: allow use of superpage mappings
 Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-x-mailer: Apple Mail (2.3696.80.82.1.1)
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-MS-Office365-Filtering-Correlation-Id: b66f1e4a-c6bb-4497-8678-08da4a012940
-x-ms-traffictypediagnostic:
-	AM6PR08MB2998:EE_|VE1EUR03FT026:EE_|DB6PR0801MB1797:EE_
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <e873e30c-7a04-a8a3-2fe5-0dda30e654fe@suse.com>
+In-Reply-To: <e873e30c-7a04-a8a3-2fe5-0dda30e654fe@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AS8PR04CA0009.eurprd04.prod.outlook.com
+ (2603:10a6:20b:310::14) To VE1PR04MB6560.eurprd04.prod.outlook.com
+ (2603:10a6:803:122::25)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d7e8f5f5-7357-4601-53f6-08da4a014e56
+X-MS-TrafficTypeDiagnostic: DBBPR04MB6297:EE_
 X-Microsoft-Antispam-PRVS:
-	<DB6PR0801MB1797C15CF9364D35547869659DA79@DB6PR0801MB1797.eurprd08.prod.outlook.com>
-x-checkrecipientrouted: true
-nodisclaimer: true
+	<DBBPR04MB62970640B237D96693498A8CB3A79@DBBPR04MB6297.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
-X-Microsoft-Antispam-Message-Info-Original:
- lrwSwIf7V5qWHevc/mxQ5jIbfQ8NgIQR+LMDZx+pGCs+7c8kYBVFcnjatEyVvmJabQ7pPY6YaBo8CCO+lam/lMB0W2Zu+w26JS2gqK9E9J43lhDIc0NzOgrjiia6JYuWua8Em1N9/GFoBk769zpuYzmixjsAu7VBrf7vjexzc+mBGetJLo5PBFSmKdw5h8yDSKTSm5W6Ozmwa7R8NRbL6Fgf/AZdMjZ42FMmOvEXrEAaCZ00keUN+5E66Nmq8sl2njSKdL16hWzR9pPC+d3o7haYIS14jCnBPcRBjzo823SVtZPxMP+BdEYF+woWxGsfav7pt9SvHV+6aM7yA4FzgGvpN5gzrRFT56mGtOLCIsgTLq7ajOMq2B3H/EeMqyA9YQ32lIvYrVGtnX2JDChmuu2Y+c8hkml3VYG50rY1yX3JV/sLqo//f6sa8M0NbYZFFXnqBV065ZB1As1drW83ngZ67iAvW2rYij1uHHlKbDUlp/rUPY1GNagJOkywrZx8S6A3s0Z7iAcHR1g03uRF2EoQb3BW4K6T4ZSvyooqZAT2gF3EWFMjVkp2fZPFzfX5JHfHTf1wbo0G9EfpDn4pq8ZD+QuchOfwxBbJjflGeTNw9vqD+sYitN/+uGhSwnE2W38/ojPLsHocZ7W8q4Wx4v6qCCOHbj8S6jqdB9TDnS50M5naHcgf6tSabbX07BbIAjptygACoa5jGqejKkTduLlkJ07OxGkYe8NBgxC1hKRibAOnnyITa9DHetXizOpZ
-X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(54906003)(38070700005)(66556008)(316002)(6512007)(186003)(71200400001)(6486002)(8936002)(2906002)(83380400001)(508600001)(33656002)(38100700002)(66946007)(122000001)(2616005)(36756003)(6916009)(66476007)(66446008)(64756008)(8676002)(4326008)(76116006)(53546011)(26005)(91956017)(5660300002)(6506007)(86362001)(45980500001);DIR:OUT;SFP:1101;
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <78A91C6CC22D9643A88C652E1B7863A2@eurprd08.prod.outlook.com>
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR08MB2998
-Original-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- VE1EUR03FT026.eop-EUR03.prod.protection.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	d69e5ee9-e547-49e3-3dee-08da4a012373
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	T3L6Oku/CUMTXeLFkH3lq8Xw6uoRLmojD6l5fhDNAcLEndcJahyvIoyj67p+QFcCeQ4LWBf6u0O47a1IGdebHW15MBJjWHnGyhts9SEMEeFCEfhv1csCTbhu9cdJ4rHan6OXRw+IeXv07cUt2OB1OIuwBMo4kstyqJ9HJkFbv1zPGQWS9woN63ASTFrLxv5ipCUjkDyerNEx69GRU0D11E51LSmSyntDhOqnClQ4rkhfVzuBAezY2/nrsk8TrtaVrJEcsLfjlzcwEI+OX71zDSfrNsweO+w1Dud/uKxuSAc5rNh7jGL4mgxBfKDvziB4SgL3QsBpRwrK+mUkJYm3YNsVXcgr/Ur8Prgk6adnt5ZQS/hgJU1ycQ2hVD+g9iretiDj8SgnrZ1zxZbp4NqBzxhzD8th+ZACN/h8MXa1LpYGSJOCnKdBb05Fy1XjLq+NmqVjY0rY6EMSpIZlt5qJxpU4LfppeyDUty4FDE1vjjW+VQM9HqNu09TgSyw/bHz3VGLcpYeU7G08XTM1S777WSloo83G9dnMqB46QhwIFDVgwwxaV1jk8R238KnjR7lE+s2OxjFKXBY+liQEJdhhUVc39TiDdjnc+OyE02+Xk95ULkcde6Re9NXNb5Ud6CaWQV12YngHORSiNO5drRoTyVi6ynDLO6R3Edjh9cVceepe5epBcU/izl7pDyJa/tIH
+	3R/Q6DIY1wA4zQqvgybq5IySLmywL9Vj4o85gUEBvPsvetMRPm03pO24wliT92gxwQLPEv7UP0AUdiFxf8UeW3eUpQXUQ0hQXkWkieBqKtG6ha2CxqE/yM6rkhx3bS6lpK2CgzEts70w2QFNN1zgq+ed3iDyXYaJjnDNpQKeRIphXx07PLf+/tYTplecZB17toauAatRf+adeWqpFL9KS050YuGBU5CbFCXVObp5ySqjYCdzQKgfBQbZS4WMimt2Il8hHVDXyTvVemBy6SkQfQdGCJm9VG9N3e4gUKVLKqqSnY/t4kXJNqNMvZN0aOCym+0CYTTzYWzREw3Y4zl/pkUeLpLgWEtTxMSno0D3I/sxjVEsSFhtWBDFO8Y8d5bfQAT9HJdznwU7znR6jko4QJhHNRqg4a3h4tKqC/kwcBCwKT+GCpa1TrMmtL+vzKhGyR1o7qlF/skIqq88LxunGjXV3X/u7uTeKqE937a+4gw6hfvtfUO9nMwy8W3ki9cIFoZJAx6BE4WedVt56r/IZAyc3k/5L5o+5KEZvaiMwwbxnyoxMdI6inqU+lKHhfLytFZHYm0bigpkVgb2PdO4wi55nV9rCP0oSjcxxnDPs315+H64aEjWShnWyQyK7ax7qDjxGJDnykoDWVjw1t7xC0DDbdkR7q9h6o3rRiL4gGRHoIuEOI6OjxzBz0h6OFedihAGKMglqRc3gNCjjFOU/WSBtHZklFeTKHAgC/Rvc/o=
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230001)(4636009)(40470700004)(36840700001)(46966006)(356005)(26005)(36860700001)(6486002)(8936002)(6862004)(508600001)(6506007)(53546011)(8676002)(81166007)(82310400005)(86362001)(2906002)(83380400001)(70586007)(6512007)(316002)(4326008)(186003)(5660300002)(70206006)(40460700003)(336012)(47076005)(2616005)(33656002)(36756003)(54906003);DIR:OUT;SFP:1101;
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 10:16:47.2301
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(2616005)(36756003)(83380400001)(31696002)(26005)(31686004)(6512007)(6506007)(2906002)(4326008)(54906003)(8936002)(5660300002)(316002)(6486002)(6916009)(38100700002)(508600001)(86362001)(186003)(66556008)(66476007)(8676002)(66946007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?SVJsZFlBbmVYWkk3Z0JubWVOd21VTHZ5c21IelB0djd0MHBSWjRtQjhLR09S?=
+ =?utf-8?B?THc0ZXJrajM0M1ppaGo3ZHROV25DdUZLRnVkNjN3ZXlLYmkxMXVhcXR3VDJG?=
+ =?utf-8?B?bVdYRFVncFFrTmxIZTZ1UWlmMXVXMGJVTjZQeVlOcEZIWHQxaHVsRUtnSG9t?=
+ =?utf-8?B?R2FOaXlqK0JRSVVhY1NOZ0t0OU1NTFExZTRpVnlINExpVitxZnZUdEtnYWc1?=
+ =?utf-8?B?ZExSOEhGZis3RUNmSjBLclFaZlRaQ0tLNS9QNnZTdmpXMzBSSzVuaGdRMWdG?=
+ =?utf-8?B?azZuNzJHMnR0WDZBb3ZhVmppRVgxNlk2YUxzOW84NUFtendRZlJ3WnlqQ2Np?=
+ =?utf-8?B?cTI5UVJNVTVtQUlxWXorZkdSRCt4MDdNN2NoRnliTFhmM2NEZnhSQnp5V2F2?=
+ =?utf-8?B?SUQvZDRVdEs3SG9sYitSVmFoNVV3ZkdiNUNKaGN1Z2R0cHl2RC9RMU5hOXVU?=
+ =?utf-8?B?OGh0eFFuTVB4Vjh3Yy8zT1ZXSDVFZHZlZjNMVWswOWx2UHdTQSswUjRCT1lL?=
+ =?utf-8?B?ZHJmUEZOK3lHcXZ2MzNQNk9oOCs2aXV3djBERnhjRDVtM3g1TFpoUkZQRWN3?=
+ =?utf-8?B?MTYvR0kyN05lV1VaOFJnUDlUdEJESENGeHk2TDJZVVJUYjlrMElaNGMvMWJP?=
+ =?utf-8?B?a3c5U0RteEt2YjJDcFVrQXkvT1IvdTJWcGpmMkp5VTdHeW5WT3JablN3eW5w?=
+ =?utf-8?B?dHBGRStYa0UrMytMSURlM1ltSi9UVTJ6VW9VNXRLMjBBVXRoamxuT0Ira2Z2?=
+ =?utf-8?B?WmptMTRvY1hNQ0gza2xTYWZPTVo0NHd2Z0p5ZENGS0lDN3hqeE43c2JJbFQ3?=
+ =?utf-8?B?SzZ0eDVZSXZOQUYrNkdPd2ZtYTJtbjdMTkFEOC9tRC9XNzJIK3NaZnRZS1Bi?=
+ =?utf-8?B?VlpubXQzNVh2V3FuOHhJUVN0T3NJN2ZZTW9QelRvQkZDU3hMKy9ja0xGUUgw?=
+ =?utf-8?B?c2dmS3FmYzhPNm5nMDVaVklKSTI0K2FpK1M0M1NianAwa0RiTlZ6ZU9kajkx?=
+ =?utf-8?B?S1hGQ1ZDdlEyMk42b0ozNmhkeUJEcXJCZ0hFblRYeVI2aVI2VjZrdWM0K2E2?=
+ =?utf-8?B?d1dnV1hMSkZpdDFodXhHYmdpM0EzU3RYOGVNeURZWHVmL2hiWnhQejJGVG1I?=
+ =?utf-8?B?WUNaR1B5TFdYd1V6NERNRmZVR3lkWE56bi9XaUc2bHFZR0xjbmo4UWdZUndw?=
+ =?utf-8?B?K29TOVA0UlU0dkdWK3lnWkNOTXhMTlhvNi9vNUdIZnlUV3Y5T3FrYTRQYXk1?=
+ =?utf-8?B?NlVKbzU4a3o5eGFqcHdFRlc4M1Rkbkp0UVlDbExBNE9qZGs1bm5EdzJybGlr?=
+ =?utf-8?B?aVNudDZFTmlweDhoZ0xrN1lwNjV2VFhKcWhHM3BVbXVSY2pEQXpRRVVKbVJi?=
+ =?utf-8?B?K0NPb0pTY0w5cnNuN1JnM1VNWEtod3NBYVllckRCSGh5UGhxNzZSNXJOK0w2?=
+ =?utf-8?B?WUhTZyt4ZVlLOFVTdmxEbVozMGdjMWZTTitFY0Z4QWxxRHBkcTJWZmZxM3c3?=
+ =?utf-8?B?RlNmdGd3NUwzMXJ1WlBEaWdzb2UwSmo5Rk5reHlWdndlRzhUeDVjUHdzZ29o?=
+ =?utf-8?B?NUE3NSsxYkY3QzB2SWhqanNlS1RJODdVUVc3bnM1VnNmRStpcHFsOElhL0pZ?=
+ =?utf-8?B?SGl3Miszdi9pZnNNNXdWaElCUU5QM2w4RENhcVhFWWd1NXlZV25iZm55VTl2?=
+ =?utf-8?B?TlpZQ2puWkFhU3V2N2dkRW5ZQi9vdHd3SGRRLzlrVXFKWGo0bFFiWHllZlVH?=
+ =?utf-8?B?VjhjcGNlR1h4eGdkYlQvcllwWVc5T3JrZ1RUTFozQnA4THUxbHZGcWQwNkhE?=
+ =?utf-8?B?UnJweTNrS0x2VHRzT3NEdC9KWHFwNmFTc3U4VXptNU5RMklFSzBibHQ5aTdm?=
+ =?utf-8?B?TE5TSVJNSjZraU9pOGFYMSs4RGZwRU1wWkF5aG5DVklaTDVEdWFQaVFlckxW?=
+ =?utf-8?B?UGsxbTgzV0FKNFZHbnNsUGZFRVpQWUdlL2ZXL1pwb21KakVTcWhCRkFkYUpz?=
+ =?utf-8?B?aXF5UStIMEhORFBwSEp5NS81dFl4YkdpeE1SNTZkbG9hRVk4dnlsZ3BJc0g0?=
+ =?utf-8?B?MkFmTWV0VDdxbENBQ0hDcy9PWC85Z2FlSEk3ZFFsQzQyYzQzS09yK1FrYXVa?=
+ =?utf-8?B?VU54UWVlc2FQRXEwRi95eGZleWQ2MnRjK05ub2s4VjNySDVIMFdhTGJreGtC?=
+ =?utf-8?B?NVlzOUUzRHd6K0FzQm44Q0hNdlBQSnlyQSt6TXlwWHVkKys1UjJPNjFWZlF2?=
+ =?utf-8?B?T0F3dURIREVyZ1FMZ0RMTGIycmJqU3lqeU04Q2xKcXE4NjM3R2NDWCtBakZz?=
+ =?utf-8?B?MWE4Y1dIOHBLSnlreXdQdmVBdC9MMVFEV2VlZWVmOHpERE9tNlBhZz09?=
+X-OriginatorOrg: suse.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7e8f5f5-7357-4601-53f6-08da4a014e56
+X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 10:17:49.7143
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b66f1e4a-c6bb-4497-8678-08da4a012940
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	VE1EUR03FT026.eop-EUR03.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0801MB1797
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: x7YmCFx/gyE4T16TDgIg23liYij8Wh85TRRphxCr/8f08HvvHFfGKdX03gsQeTde/MDa3+BHJg/Y3GHesgKxLg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB6297
 
-Hi Anthony,
+No separate feature flags exist which would control availability of
+these; the only restriction is HATS (establishing the maximum number of
+page table levels in general), and even that has a lower bound of 4.
+Thus we can unconditionally announce 2M and 1G mappings. (Via non-
+default page sizes the implementation in principle permits arbitrary
+size mappings, but these require multiple identical leaf PTEs to be
+written, which isn't all that different from having to write multiple
+consecutive PTEs with increasing frame numbers. IMO that's therefore
+beneficial only on hardware where suitable TLBs exist; I'm unaware of
+such hardware.)
 
-> On 1 Jun 2022, at 17:59, Anthony PERARD <anthony.perard@citrix.com> wrote=
-:
->=20
-> Use "define" for the headers*_chk commands as otherwise the "#"
-> is interpreted as a comment and make can't find the end of
-> $(foreach,).
->=20
-> Adding several .PRECIOUS as without them `make` deletes the
-> intermediate targets. This is an issue because the macro $(if_changed,)
-> check if the target exist in order to decide whether to recreate the
-> target.
->=20
-> Removing the call to `mkdir` from the commands. Those aren't needed
-> anymore because a rune in Rules.mk creates the directory for each
-> $(targets).
->=20
-> Remove "export PYTHON" as it is already exported.
+Note that in principle 512G and 256T mappings could also be supported
+right away, but the freeing of page tables (to be introduced in
+subsequent patches) when replacing a sufficiently populated tree with a
+single huge page would need suitable preemption, which will require
+extra work.
 
-With this change, compiling for x86 is now ending up in:
-CHK     include/headers99.chk
-make[9]: execvp: /bin/sh: Argument list too long
-make[9]: *** [include/Makefile:181: include/headers++.chk] Error 127
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+v5: Drop PAGE_SIZE_512G. In amd_iommu_{,un}map_page() assert page order
+    is supported.
+v4: Change type of queue_free_pt()'s 1st parameter. Re-base.
+v3: Rename queue_free_pt()'s last parameter. Replace "level > 1" checks
+    where possible.
 
-Not quite sure yet why but I wanted to signal it early as other might be im=
-pacted.
-
-Arm and arm64 builds are not impacted.
-
-Cheers
-Bertrand
-
->=20
-> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-> ---
-> xen/include/Makefile | 108 ++++++++++++++++++++++++++++++-------------
-> 1 file changed, 76 insertions(+), 32 deletions(-)
->=20
-> diff --git a/xen/include/Makefile b/xen/include/Makefile
-> index 03baf10efb..6d9bcc19b0 100644
-> --- a/xen/include/Makefile
-> +++ b/xen/include/Makefile
-> @@ -45,38 +45,65 @@ public-$(CONFIG_ARM) :=3D $(wildcard $(srcdir)/public=
-/arch-arm/*.h $(srcdir)/publi
-> .PHONY: all
-> all: $(addprefix $(obj)/,$(headers-y))
->=20
-> -$(obj)/compat/%.h: $(obj)/compat/%.i $(srcdir)/Makefile $(srctree)/tools=
-/compat-build-header.py
-> -	$(PYTHON) $(srctree)/tools/compat-build-header.py <$< $(patsubst $(obj)=
-/%,%,$@) >>$@.new; \
-> -	mv -f $@.new $@
-> -
-> -$(obj)/compat/%.i: $(obj)/compat/%.c $(srcdir)/Makefile
-> -	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(XEN_=
-CFLAGS)) $(cppflags-y) -o $@ $<
-> -
-> -$(obj)/compat/%.c: $(src)/public/%.h $(srcdir)/xlat.lst $(srcdir)/Makefi=
-le $(srctree)/tools/compat-build-source.py
-> -	mkdir -p $(@D)
-> -	$(PYTHON) $(srctree)/tools/compat-build-source.py $(srcdir)/xlat.lst <$=
-< >$@.new
-> -	mv -f $@.new $@
-> -
-> -$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(s=
-rctree)/tools/get-fields.sh $(srcdir)/Makefile
-> -	export PYTHON=3D$(PYTHON); \
-> -	while read what name; do \
-> -		$(SHELL) $(srctree)/tools/get-fields.sh "$$what" compat_$$name $< || e=
-xit $$?; \
-> -	done <$(patsubst $(obj)/compat/%,$(obj)/compat/.xlat/%,$(basename $<)).=
-lst >$@.new
-> -	mv -f $@.new $@
-> +quiet_cmd_compat_h =3D GEN     $@
-> +cmd_compat_h =3D \
-> +    $(PYTHON) $(srctree)/tools/compat-build-header.py <$< $(patsubst $(o=
-bj)/%,%,$@) >>$@.new; \
-> +    mv -f $@.new $@
-> +
-> +quiet_cmd_compat_i =3D CPP     $@
-> +cmd_compat_i =3D $(CPP) $(filter-out -Wa$(comma)% -include %/include/xen=
-/config.h,$(XEN_CFLAGS)) $(cppflags-y) -o $@ $<
-> +
-> +quiet_cmd_compat_c =3D GEN     $@
-> +cmd_compat_c =3D \
-> +   $(PYTHON) $(srctree)/tools/compat-build-source.py $(srcdir)/xlat.lst =
-<$< >$@.new; \
-> +   mv -f $@.new $@
-> +
-> +quiet_cmd_xlat_headers =3D GEN     $@
-> +cmd_xlat_headers =3D \
-> +    while read what name; do \
-> +        $(SHELL) $(srctree)/tools/get-fields.sh "$$what" compat_$$name $=
-< || exit $$?; \
-> +    done <$(patsubst $(obj)/compat/%,$(obj)/compat/.xlat/%,$(basename $<=
-)).lst >$@.new; \
-> +    mv -f $@.new $@
-> +
-> +targets +=3D $(headers-y)
-> +$(obj)/compat/%.h: $(obj)/compat/%.i $(srctree)/tools/compat-build-heade=
-r.py FORCE
-> +	$(call if_changed,compat_h)
-> +
-> +.PRECIOUS: $(obj)/compat/%.i
-> +targets +=3D $(patsubst %.h, %.i, $(headers-y))
-> +$(obj)/compat/%.i: $(obj)/compat/%.c FORCE
-> +	$(call if_changed,compat_i)
-> +
-> +.PRECIOUS: $(obj)/compat/%.c
-> +targets +=3D $(patsubst %.h, %.c, $(headers-y))
-> +$(obj)/compat/%.c: $(src)/public/%.h $(srcdir)/xlat.lst $(srctree)/tools=
-/compat-build-source.py FORCE
-> +	$(call if_changed,compat_c)
-> +
-> +targets +=3D $(patsubst compat/%, compat/.xlat/%, $(headers-y))
-> +$(obj)/compat/.xlat/%.h: $(obj)/compat/%.h $(obj)/compat/.xlat/%.lst $(s=
-rctree)/tools/get-fields.sh FORCE
-> +	$(call if_changed,xlat_headers)
-> +
-> +quiet_cmd_xlat_lst =3D GEN     $@
-> +cmd_xlat_lst =3D \
-> +	grep -v '^[[:blank:]]*$(pound)' $< | sed -ne 's,@arch@,$(compat-arch-y)=
-,g' -re 's,[[:blank:]]+$*\.h[[:blank:]]*$$,,p' >$@.new; \
-> +	$(call move-if-changed,$@.new,$@)
->=20
-> .PRECIOUS: $(obj)/compat/.xlat/%.lst
-> -$(obj)/compat/.xlat/%.lst: $(srcdir)/xlat.lst $(srcdir)/Makefile
-> -	mkdir -p $(@D)
-> -	grep -v '^[[:blank:]]*#' $< | sed -ne 's,@arch@,$(compat-arch-y),g' -re=
- 's,[[:blank:]]+$*\.h[[:blank:]]*$$,,p' >$@.new
-> -	$(call move-if-changed,$@.new,$@)
-> +targets +=3D $(patsubst compat/%.h, compat/.xlat/%.lst, $(headers-y))
-> +$(obj)/compat/.xlat/%.lst: $(srcdir)/xlat.lst FORCE
-> +	$(call if_changed,xlat_lst)
->=20
-> xlat-y :=3D $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:=
-blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(srcdir)/xlat.lst | uniq)
-> xlat-y :=3D $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
->=20
-> -$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)=
-/config/auto.conf $(srcdir)/Makefile
-> -	cat $(filter %.h,$^) >$@.new
-> +quiet_cmd_xlat_h =3D GEN     $@
-> +cmd_xlat_h =3D \
-> +	cat $(filter %.h,$^) >$@.new; \
-> 	mv -f $@.new $@
->=20
-> +$(obj)/compat/xlat.h: $(addprefix $(obj)/compat/.xlat/,$(xlat-y)) $(obj)=
-/config/auto.conf FORCE
-> +	$(call if_changed,xlat_h)
-> +
-> ifeq ($(XEN_TARGET_ARCH),$(XEN_COMPILE_ARCH))
->=20
-> all: $(obj)/headers.chk $(obj)/headers99.chk $(obj)/headers++.chk
-> @@ -102,27 +129,31 @@ PUBLIC_C99_HEADERS :=3D $(call public-filter-header=
-s,public-c99-headers)
-> $(src)/public/io/9pfs.h-prereq :=3D string
-> $(src)/public/io/pvcalls.h-prereq :=3D string
->=20
-> -$(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) $(srcdir)/Makefile
-> +quiet_cmd_header_chk =3D CHK     $@
-> +cmd_header_chk =3D \
-> 	for i in $(filter %.h,$^); do \
-> 	    $(CC) -x c -ansi -Wall -Werror -include stdint.h \
-> 	          -S -o /dev/null $$i || exit 1; \
-> 	    echo $$i; \
-> -	done >$@.new
-> +	done >$@.new; \
-> 	mv $@.new $@
->=20
-> -$(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) $(srcdir)/Makefile
-> -	rm -f $@.new
-> +quiet_cmd_headers99_chk =3D CHK     $@
-> +define cmd_headers99_chk
-> +	rm -f $@.new; \
-> 	$(foreach i, $(filter %.h,$^),                                        \
-> 	    echo "#include "\"$(i)\"                                          \
-> 	    | $(CC) -x c -std=3Dc99 -Wall -Werror                               =
-\
-> 	      -include stdint.h                                               \
-> 	      $(foreach j, $($(patsubst $(srctree)/%,%,$i)-prereq), -include $(j=
-).h) \
-> 	      -S -o /dev/null -                                               \
-> -	    || exit $$?; echo $(i) >> $@.new;)
-> +	    || exit $$?; echo $(i) >> $@.new;) \
-> 	mv $@.new $@
-> +endef
->=20
-> -$(obj)/headers++.chk: $(PUBLIC_HEADERS) $(srcdir)/Makefile
-> -	rm -f $@.new
-> +quiet_cmd_headerscxx_chk =3D CHK     $@
-> +define cmd_headerscxx_chk
-> +	rm -f $@.new; \
-> 	if ! $(CXX) -v >/dev/null 2>&1; then                                  \
-> 	    touch $@.new;                                                     \
-> 	    exit 0;                                                           \
-> @@ -133,8 +164,21 @@ $(obj)/headers++.chk: $(PUBLIC_HEADERS) $(srcdir)/Ma=
-kefile
-> 	      -include stdint.h -include $(srcdir)/public/xen.h               \
-> 	      $(foreach j, $($(patsubst $(srctree)/%,%,$i)-prereq), -include c$(=
-j)) \
-> 	      -S -o /dev/null -                                               \
-> -	    || exit $$?; echo $(i) >> $@.new;)
-> +	    || exit $$?; echo $(i) >> $@.new;) \
-> 	mv $@.new $@
-> +endef
-> +
-> +targets +=3D headers.chk
-> +$(obj)/headers.chk: $(PUBLIC_ANSI_HEADERS) FORCE
-> +	$(call if_changed,header_chk)
-> +
-> +targets +=3D headers99.chk
-> +$(obj)/headers99.chk: $(PUBLIC_C99_HEADERS) FORCE
-> +	$(call if_changed,headers99_chk)
-> +
-> +targets +=3D headers++.chk
-> +$(obj)/headers++.chk: $(PUBLIC_HEADERS) FORCE
-> +	$(call if_changed,headerscxx_chk)
->=20
-> endif
->=20
-> --=20
-> Anthony PERARD
->=20
->=20
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -32,12 +32,13 @@ static unsigned int pfn_to_pde_idx(unsig
+ }
+ 
+ static union amd_iommu_pte clear_iommu_pte_present(unsigned long l1_mfn,
+-                                                   unsigned long dfn)
++                                                   unsigned long dfn,
++                                                   unsigned int level)
+ {
+     union amd_iommu_pte *table, *pte, old;
+ 
+     table = map_domain_page(_mfn(l1_mfn));
+-    pte = &table[pfn_to_pde_idx(dfn, 1)];
++    pte = &table[pfn_to_pde_idx(dfn, level)];
+     old = *pte;
+ 
+     write_atomic(&pte->raw, 0);
+@@ -351,15 +352,39 @@ static int iommu_pde_from_dfn(struct dom
+     return 0;
+ }
+ 
++static void queue_free_pt(struct domain_iommu *hd, mfn_t mfn, unsigned int level)
++{
++    if ( level > 1 )
++    {
++        union amd_iommu_pte *pt = map_domain_page(mfn);
++        unsigned int i;
++
++        for ( i = 0; i < PTE_PER_TABLE_SIZE; ++i )
++            if ( pt[i].pr && pt[i].next_level )
++            {
++                ASSERT(pt[i].next_level < level);
++                queue_free_pt(hd, _mfn(pt[i].mfn), pt[i].next_level);
++            }
++
++        unmap_domain_page(pt);
++    }
++
++    iommu_queue_free_pgtable(hd, mfn_to_page(mfn));
++}
++
+ int cf_check amd_iommu_map_page(
+     struct domain *d, dfn_t dfn, mfn_t mfn, unsigned int flags,
+     unsigned int *flush_flags)
+ {
+     struct domain_iommu *hd = dom_iommu(d);
++    unsigned int level = (IOMMUF_order(flags) / PTE_PER_TABLE_SHIFT) + 1;
+     int rc;
+     unsigned long pt_mfn = 0;
+     union amd_iommu_pte old;
+ 
++    ASSERT((hd->platform_ops->page_sizes >> IOMMUF_order(flags)) &
++           PAGE_SIZE_4K);
++
+     spin_lock(&hd->arch.mapping_lock);
+ 
+     /*
+@@ -384,7 +409,7 @@ int cf_check amd_iommu_map_page(
+         return rc;
+     }
+ 
+-    if ( iommu_pde_from_dfn(d, dfn_x(dfn), 1, &pt_mfn, flush_flags, true) ||
++    if ( iommu_pde_from_dfn(d, dfn_x(dfn), level, &pt_mfn, flush_flags, true) ||
+          !pt_mfn )
+     {
+         spin_unlock(&hd->arch.mapping_lock);
+@@ -394,8 +419,8 @@ int cf_check amd_iommu_map_page(
+         return -EFAULT;
+     }
+ 
+-    /* Install 4k mapping */
+-    old = set_iommu_pte_present(pt_mfn, dfn_x(dfn), mfn_x(mfn), 1,
++    /* Install mapping */
++    old = set_iommu_pte_present(pt_mfn, dfn_x(dfn), mfn_x(mfn), level,
+                                 (flags & IOMMUF_writable),
+                                 (flags & IOMMUF_readable));
+ 
+@@ -403,8 +428,13 @@ int cf_check amd_iommu_map_page(
+ 
+     *flush_flags |= IOMMU_FLUSHF_added;
+     if ( old.pr )
++    {
+         *flush_flags |= IOMMU_FLUSHF_modified;
+ 
++        if ( IOMMUF_order(flags) && old.next_level )
++            queue_free_pt(hd, _mfn(old.mfn), old.next_level);
++    }
++
+     return 0;
+ }
+ 
+@@ -413,8 +443,15 @@ int cf_check amd_iommu_unmap_page(
+ {
+     unsigned long pt_mfn = 0;
+     struct domain_iommu *hd = dom_iommu(d);
++    unsigned int level = (order / PTE_PER_TABLE_SHIFT) + 1;
+     union amd_iommu_pte old = {};
+ 
++    /*
++     * While really we could unmap at any granularity, for now we assume unmaps
++     * are issued by common code only at the same granularity as maps.
++     */
++    ASSERT((hd->platform_ops->page_sizes >> order) & PAGE_SIZE_4K);
++
+     spin_lock(&hd->arch.mapping_lock);
+ 
+     if ( !hd->arch.amd.root_table )
+@@ -423,7 +460,7 @@ int cf_check amd_iommu_unmap_page(
+         return 0;
+     }
+ 
+-    if ( iommu_pde_from_dfn(d, dfn_x(dfn), 1, &pt_mfn, flush_flags, false) )
++    if ( iommu_pde_from_dfn(d, dfn_x(dfn), level, &pt_mfn, flush_flags, false) )
+     {
+         spin_unlock(&hd->arch.mapping_lock);
+         AMD_IOMMU_ERROR("invalid IO pagetable entry dfn = %"PRI_dfn"\n",
+@@ -435,14 +472,19 @@ int cf_check amd_iommu_unmap_page(
+     if ( pt_mfn )
+     {
+         /* Mark PTE as 'page not present'. */
+-        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn));
++        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level);
+     }
+ 
+     spin_unlock(&hd->arch.mapping_lock);
+ 
+     if ( old.pr )
++    {
+         *flush_flags |= IOMMU_FLUSHF_modified;
+ 
++        if ( order && old.next_level )
++            queue_free_pt(hd, _mfn(old.mfn), old.next_level);
++    }
++
+     return 0;
+ }
+ 
+--- a/xen/drivers/passthrough/amd/pci_amd_iommu.c
++++ b/xen/drivers/passthrough/amd/pci_amd_iommu.c
+@@ -747,7 +747,7 @@ static void cf_check amd_dump_page_table
+ }
+ 
+ static const struct iommu_ops __initconst_cf_clobber _iommu_ops = {
+-    .page_sizes = PAGE_SIZE_4K,
++    .page_sizes = PAGE_SIZE_4K | PAGE_SIZE_2M | PAGE_SIZE_1G,
+     .init = amd_iommu_domain_init,
+     .hwdom_init = amd_iommu_hwdom_init,
+     .quarantine_init = amd_iommu_quarantine_init,
+--- a/xen/include/xen/page-defs.h
++++ b/xen/include/xen/page-defs.h
+@@ -21,4 +21,14 @@
+ #define PAGE_MASK_64K               PAGE_MASK_GRAN(64K)
+ #define PAGE_ALIGN_64K(addr)        PAGE_ALIGN_GRAN(64K, addr)
+ 
++#define PAGE_SHIFT_2M               21
++#define PAGE_SIZE_2M                PAGE_SIZE_GRAN(2M)
++#define PAGE_MASK_2M                PAGE_MASK_GRAN(2M)
++#define PAGE_ALIGN_2M(addr)         PAGE_ALIGN_GRAN(2M, addr)
++
++#define PAGE_SHIFT_1G               30
++#define PAGE_SIZE_1G                PAGE_SIZE_GRAN(1G)
++#define PAGE_MASK_1G                PAGE_MASK_GRAN(1G)
++#define PAGE_ALIGN_1G(addr)         PAGE_ALIGN_GRAN(1G, addr)
++
+ #endif /* __XEN_PAGE_DEFS_H__ */
 
 
