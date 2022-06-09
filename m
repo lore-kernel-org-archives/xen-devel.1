@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0EEFCCA47D
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 08:31:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.344764.570365 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB00DC433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 09:22:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344805.570415 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzDZ4-0001CN-JV; Thu, 09 Jun 2022 08:30:50 +0000
+	id 1nzEMG-00007n-7q; Thu, 09 Jun 2022 09:21:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 344764.570365; Thu, 09 Jun 2022 08:30:50 +0000
+Received: by outflank-mailman (output) from mailman id 344805.570415; Thu, 09 Jun 2022 09:21:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzDZ4-0001CG-Gm; Thu, 09 Jun 2022 08:30:50 +0000
-Received: by outflank-mailman (input) for mailman id 344764;
- Thu, 09 Jun 2022 08:30:49 +0000
+	id 1nzEMG-00007g-4n; Thu, 09 Jun 2022 09:21:40 +0000
+Received: by outflank-mailman (input) for mailman id 344805;
+ Thu, 09 Jun 2022 09:21:39 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nzDZ3-0001CA-5J
- for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 08:30:49 +0000
+ (envelope-from <julien@xen.org>) id 1nzEMF-00007a-1u
+ for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 09:21:39 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nzDZ2-0002Mb-SA; Thu, 09 Jun 2022 08:30:48 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
+ id 1nzEME-0003JB-LJ; Thu, 09 Jun 2022 09:21:38 +0000
+Received: from [54.239.6.190] (helo=[10.85.101.129])
  by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1nzDZ2-0001qx-HE; Thu, 09 Jun 2022 08:30:48 +0000
+ id 1nzEME-0004w1-DE; Thu, 09 Jun 2022 09:21:38 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,59 +42,171 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
-	Subject:Cc:To:From; bh=bP2JcB/LIDxgF1FeJGcHxrQnobjWYEcKaQQDMM+Bw+8=; b=3VdsdL
-	hjxXUUKU0Yia/jxq61CgSoOrjEWSBbE122ilmqISlFIyOPx1+mqR/ISeEeSm8nAbRBxCYXerNQ5xY
-	dHZZMN0HnKXwzOf15N08uTnOP3hcX3fA7xD4aNhqThQfdjfKSRdDIn0CodKApLjxSOODoYxgCiW0D
-	q+jMVjyEGqE=;
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	Julien Grall <jgrall@amazon.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 0/2] xen/mm: Optimize init_heap_pages()
-Date: Thu,  9 Jun 2022 09:30:37 +0100
-Message-Id: <20220609083039.76667-1-julien@xen.org>
-X-Mailer: git-send-email 2.32.0
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=KFWx10asrx386DYKVQ1NOzEXPolvDb3zs5yGeLHwxV8=; b=hYuKDtosi4VnOEtd1gqbV3wRao
+	zLUdJdsQ0NC8xFL5R1s+2SN+lTbB8dPp54ghbUZ+Oi1wtHuYuVHTIN6Ao1WHznOp2Rwu4dT/yXbNH
+	/D0IWNCmjkZe9PkIAhsJ69ZDd52gTtelsd6V00GwDk9ibJc1jGbROwkMtQdSTPeUhYps=;
+Message-ID: <dd9f8a18-23ce-d5f6-45ff-82376aaefaba@xen.org>
+Date: Thu, 9 Jun 2022 10:21:35 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.10.0
+Subject: Re: [PATCH v6 2/9] xen: do not free reserved memory into heap
+To: Penny Zheng <Penny.Zheng@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Wei Chen <Wei.Chen@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
+References: <20220607073031.722174-1-Penny.Zheng@arm.com>
+ <20220607073031.722174-3-Penny.Zheng@arm.com>
+ <d43d2dbd-6b0e-fb0c-5e0a-d409db4e18e9@xen.org>
+ <DU2PR08MB7325B2A677FCF2FBF905D588F7A79@DU2PR08MB7325.eurprd08.prod.outlook.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <DU2PR08MB7325B2A677FCF2FBF905D588F7A79@DU2PR08MB7325.eurprd08.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Julien Grall <jgrall@amazon.com>
+Hi,
 
-Hi all,
+On 09/06/2022 06:54, Penny Zheng wrote:
+> 
+> 
+>> -----Original Message-----
+>> From: Julien Grall <julien@xen.org>
+>> Sent: Tuesday, June 7, 2022 5:13 PM
+>> To: Penny Zheng <Penny.Zheng@arm.com>; xen-devel@lists.xenproject.org
+>> Cc: Wei Chen <Wei.Chen@arm.com>; Stefano Stabellini
+>> <sstabellini@kernel.org>; Bertrand Marquis <Bertrand.Marquis@arm.com>;
+>> Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>; Andrew Cooper
+>> <andrew.cooper3@citrix.com>; George Dunlap <george.dunlap@citrix.com>;
+>> Jan Beulich <jbeulich@suse.com>; Wei Liu <wl@xen.org>
+>> Subject: Re: [PATCH v6 2/9] xen: do not free reserved memory into heap
+>>
+>> Hi Penny,
+>>
+> 
+> Hi Julien
+> 
+>> On 07/06/2022 08:30, Penny Zheng wrote:
+>>> Pages used as guest RAM for static domain, shall be reserved to this
+>>> domain only.
+>>> So in case reserved pages being used for other purpose, users shall
+>>> not free them back to heap, even when last ref gets dropped.
+>>>
+>>> free_staticmem_pages will be called by free_heap_pages in runtime for
+>>> static domain freeing memory resource, so let's drop the __init flag.
+>>>
+>>> Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+>>> ---
+>>> v6 changes:
+>>> - adapt to PGC_static
+>>> - remove #ifdef aroud function declaration
+>>> ---
+>>> v5 changes:
+>>> - In order to avoid stub functions, we #define PGC_staticmem to
+>>> non-zero only when CONFIG_STATIC_MEMORY
+>>> - use "unlikely()" around pg->count_info & PGC_staticmem
+>>> - remove pointless "if", since mark_page_free() is going to set
+>>> count_info to PGC_state_free and by consequence clear PGC_staticmem
+>>> - move #define PGC_staticmem 0 to mm.h
+>>> ---
+>>> v4 changes:
+>>> - no changes
+>>> ---
+>>> v3 changes:
+>>> - fix possible racy issue in free_staticmem_pages()
+>>> - introduce a stub free_staticmem_pages() for the
+>>> !CONFIG_STATIC_MEMORY case
+>>> - move the change to free_heap_pages() to cover other potential call
+>>> sites
+>>> - fix the indentation
+>>> ---
+>>> v2 changes:
+>>> - new commit
+>>> ---
+>>>    xen/arch/arm/include/asm/mm.h |  4 +++-
+>>>    xen/common/page_alloc.c       | 12 +++++++++---
+>>>    xen/include/xen/mm.h          |  2 --
+>>>    3 files changed, 12 insertions(+), 6 deletions(-)
+>>>
+>>> diff --git a/xen/arch/arm/include/asm/mm.h
+>>> b/xen/arch/arm/include/asm/mm.h index fbff11c468..7442893e77 100644
+>>> --- a/xen/arch/arm/include/asm/mm.h
+>>> +++ b/xen/arch/arm/include/asm/mm.h
+>>> @@ -108,9 +108,11 @@ struct page_info
+>>>      /* Page is Xen heap? */
+>>>    #define _PGC_xen_heap     PG_shift(2)
+>>>    #define PGC_xen_heap      PG_mask(1, 2)
+>>> -  /* Page is static memory */
+>>
+>> NITpicking: You added this comment in patch #1 and now removing the space.
+>> Any reason to drop the space?
+>>
+>>> +#ifdef CONFIG_STATIC_MEMORY
+>>
+>> I think this change ought to be explained in the commit message. AFAIU, this is
+>> necessary to allow the compiler to remove code and avoid linking issues. Is
+>> that correct?
+>>
+>>> +/* Page is static memory */
+>>>    #define _PGC_static    PG_shift(3)
+>>>    #define PGC_static     PG_mask(1, 3)
+>>> +#endif
+>>>    /* ... */
+>>>    /* Page is broken? */
+>>>    #define _PGC_broken       PG_shift(7)
+>>> diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c index
+>>> 9e5c757847..6876869fa6 100644
+>>> --- a/xen/common/page_alloc.c
+>>> +++ b/xen/common/page_alloc.c
+>>> @@ -1443,6 +1443,13 @@ static void free_heap_pages(
+>>>
+>>>        ASSERT(order <= MAX_ORDER);
+>>>
+>>> +    if ( unlikely(pg->count_info & PGC_static) )
+>>> +    {
+>>> +        /* Pages of static memory shall not go back to the heap. */
+>>> +        free_staticmem_pages(pg, 1UL << order, need_scrub);
+>> I can't remember whether I asked this before (I couldn't find a thread).
+>>
+>> free_staticmem_pages() doesn't seem to be protected by any lock. So how do
+>> you prevent the concurrent access to the page info with the acquire part?
+> 
+> True, last time you suggested that rsv_page_list needs to be protected with a
+> spinlock (mostly like d->page_alloc_lock). I haven't thought it thoroughly, sorry
+> about that.
+> So for freeing part, I shall get the lock at arch_free_heap_page(), where we insert
+> the page to the rsv_page_list, and release the lock at the end of the free_staticmem_page.
 
-As part of the Live-Update work, we noticed that a big part Xen boot
-is spent to add pages in the heap. For instance, on when running Xen
-in a nested envionment on a c5.metal, it takes ~1.5s.
+In general, a lock is better to be lock/unlock in the same function 
+because it is easier to verify. However, I am not sure that extending 
+the locking from d->page_alloc_lock up after free_heap_pages() is right.
 
-This small series is reworking init_heap_pages() to give the pages
-to free_heap_pages() by chunk rather than one by one.
+The first reason being that they are other callers of free_heap_pages(). 
+So now all the callers of the helpers would need to know whether they 
+need to help d->page_alloc_lock.
 
-With this approach, the time spent to init the heap is down
-to 166 ms in the setup mention above.
+Secondly, free_staticmem_pages() is meant to be the reverse of 
+prepare_staticmem_pages(). We should prevent both of them to be called 
+concurrently. It sounds strange to use the d->page_alloc_lock to protect 
+it (a page is technically not belonging to a domain at this point).
 
-There is potentially one more optimization possible that would
-allow to further reduce the time spent. The new approach is accessing
-the page information multiple time in separate loop that can potentially
-be large.
+To me it looks like we want to add the pages on the rsv_page_list 
+*after* the pages have been freed. So we know that all the pages on that 
+list have been marked as freed (i.e. free_staticmem_pages() completed).
+
+In addition to that, we would need the code in free_staticmem_pages() to 
+be protected by the heap_lock (at least so it is match 
+prepare_staticmem_pages()).
+
+Any thoughts?
 
 Cheers,
 
-Hongyan Xia (1):
-  xen/heap: pass order to free_heap_pages() in heap init
-
-Julien Grall (1):
-  xen/heap: Split init_heap_pages() in two
-
- xen/common/page_alloc.c | 109 ++++++++++++++++++++++++++++++----------
- 1 file changed, 82 insertions(+), 27 deletions(-)
-
 -- 
-2.32.0
-
+Julien Grall
 
