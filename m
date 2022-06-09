@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55849C433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 11:35:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.345104.570756 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294B7C433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 11:46:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.345126.570766 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzGRO-00085W-LK; Thu, 09 Jun 2022 11:35:06 +0000
+	id 1nzGbl-0001Ps-Q3; Thu, 09 Jun 2022 11:45:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 345104.570756; Thu, 09 Jun 2022 11:35:06 +0000
+Received: by outflank-mailman (output) from mailman id 345126.570766; Thu, 09 Jun 2022 11:45:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzGRO-00085P-IT; Thu, 09 Jun 2022 11:35:06 +0000
-Received: by outflank-mailman (input) for mailman id 345104;
- Thu, 09 Jun 2022 11:31:12 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nzGbl-0001Pl-NJ; Thu, 09 Jun 2022 11:45:49 +0000
+Received: by outflank-mailman (input) for mailman id 345126;
+ Thu, 09 Jun 2022 11:45:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pINC=WQ=chromium.org=senozhatsky@srs-se1.protection.inumbo.net>)
- id 1nzGNb-0007EE-W9
- for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 11:31:12 +0000
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [2a00:1450:4864:20::635])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a92481be-e7e7-11ec-b605-df0040e90b76;
- Thu, 09 Jun 2022 13:31:10 +0200 (CEST)
-Received: by mail-ej1-x635.google.com with SMTP id o7so13563403eja.1
- for <xen-devel@lists.xenproject.org>; Thu, 09 Jun 2022 04:31:10 -0700 (PDT)
+ <SRS0=sdCg=WQ=gmail.com=akihiko.odaki@srs-se1.protection.inumbo.net>)
+ id 1nzGbk-0001PM-Gh
+ for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 11:45:48 +0000
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [2607:f8b0:4864:20::102a])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id b3535908-e7e9-11ec-bd2c-47488cf2e6aa;
+ Thu, 09 Jun 2022 13:45:47 +0200 (CEST)
+Received: by mail-pj1-x102a.google.com with SMTP id e24so21178586pjt.0
+ for <xen-devel@lists.xenproject.org>; Thu, 09 Jun 2022 04:45:47 -0700 (PDT)
+Received: from [192.168.66.3] (p912131-ipoe.ipoe.ocn.ne.jp. [153.243.13.130])
+ by smtp.gmail.com with ESMTPSA id
+ k14-20020aa792ce000000b0050dc76281b5sm17501351pfa.143.2022.06.09.04.45.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Jun 2022 04:45:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,98 +46,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a92481be-e7e7-11ec-b605-df0040e90b76
+X-Inumbo-ID: b3535908-e7e9-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=+XewJc/p+7yp1re11t6BfmEtfp27WPbXPnywgusXXTc=;
-        b=dD0Bz9eW32MHk+TeRLS+QqFpXQSyJG1PFuM0sFc2oIQiPmRbBKI4wiAjUnrY0TOPB3
-         vmLpoVIxPESYT9ISrrirk39KtLhSpCgEKtG3yrDCpv/Gh6ZWSamp4kS8RJg23gIGNIEa
-         lDd2yagv7BcuRvFzrWxMhthjwknH7br96szys=
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=1uWRq0qALlsYTQq3er3sD+PXamQFroMLzNzNZ5Baq/E=;
+        b=nDYk9F2UkksG7vJXwzdocA1HGXnEFw3FhR+DLGD+lBRr8jWzyttCTlkhOU/M6RtFod
+         AtQ7el+DjbiVebfgHf/rkjH+pSUcLBsGXJbLqR5fvzb6ML5W8QC8nA8Dhwbw3uL8SVke
+         0hfFTKNtxfZzeospUYTn17XH33tx0FFHrA5ebXazRYhs3mf3nmMvLTiKJzzX+14wpB7o
+         dzHgB+4+x2f++5WPxFhGhZeb/glqK+FJlGPWxTpDqsGqHmpyMs4MU+9VJsEvl+MzIpF2
+         FgEvPSDwZDYe2ztAARR1NlDLaCM7lo8UtkbRcij8JLSD0Yd96Ngkkn2rQe4ESwX1S5jq
+         /VYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=+XewJc/p+7yp1re11t6BfmEtfp27WPbXPnywgusXXTc=;
-        b=uOSQvCB1vmFENbDYIJeYXJuaejA9VnmVRreE73ZoKXMTE0jpH1KohaXecIIlmatggO
-         ahtycpKjZ1xteE8FqvADjnjow8XbfSaV7EKiaVynwB+Q/fden0zfK+s1X7z9HJqPM5bd
-         ylV9gvh/qiDjKmNmISfE+lS60sDqPMghEHizj2h5W5h8PUtLLHCGI/i/Ss1g6k993OFv
-         o6bItU5/jAwfi+tLlDygxPk/JRiHCA1kgBsQ305849WFQIrambUhv0cS1c6rdxZeRvcz
-         bwheXMcYMDLs1Rd7s4WpdO16ATML2mdwllyefvxYkY3zTZZGA39ZH8cPVsVrSQH+jKD9
-         gLJA==
-X-Gm-Message-State: AOAM5310jp1ctll4Nesy9JF1mLv5SuBMLs3NFJ9gzochFfV2EbheF2Mw
-	vhyLevZSz1+hRpZuKnwimOOjfgmBlPjCSRrGfGKhOQ==
-X-Google-Smtp-Source: ABdhPJx9nV7wAxP/lyAtNedlGfDPIROj9YXpatcH7EqCac1uVlfTSKszMzYbWUxkatf8WgjTCZNOZTjPAlJBoltWDx4=
-X-Received: by 2002:a17:907:c22:b0:711:dc95:3996 with SMTP id
- ga34-20020a1709070c2200b00711dc953996mr13928684ejc.62.1654774269713; Thu, 09
- Jun 2022 04:31:09 -0700 (PDT)
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=1uWRq0qALlsYTQq3er3sD+PXamQFroMLzNzNZ5Baq/E=;
+        b=TfIaL/KPXOCUjEBCXaR04xOCdguzoHSc25a6BK2Ok6qV8Lzuk1ivT/W1lpG63VJsSe
+         uqdhtCH7Ht9/CD7bvBCYvj9G82O+9Jgw8zHVD6m2uO9z5kurgBR4y3hDcFDAK63Tfnq/
+         7GuQg43HcPzakmtPC8Rc4hD+E3RG4L0Dl18cchSlNcYBEpJ9xa6de20aaC9ssuc0phK0
+         XqkxBVV46SU620mWDJ8gwSU4B9dAIH+yKWJoGZ6VAUCDBu2yRIdqRZnIvuzu7psq05w2
+         IuSVHPoE2uc4r+PRLvF4Ko41G+evYtajItytCraPHDW8TWjj23DBJsLzgrn6d1KEFG5Q
+         KTgQ==
+X-Gm-Message-State: AOAM532N/GoIsPGNPyS/xkic/gSoa8+6uOEmARalUBH+kxRtlpl5gV1R
+	kOtxv7qC+0CWEctPG6KXb0U=
+X-Google-Smtp-Source: ABdhPJy6NBGODlL2qFbVm78WCpoq/0vnl33flGVIgU6549lot3LxsKE9L21JFV8c0odlHFpFhjRTgw==
+X-Received: by 2002:a17:90a:e7c5:b0:1e3:3cf1:6325 with SMTP id kb5-20020a17090ae7c500b001e33cf16325mr3066860pjb.178.1654775145812;
+        Thu, 09 Jun 2022 04:45:45 -0700 (PDT)
+Message-ID: <19ae71a4-c988-3c9e-20d6-614098376524@gmail.com>
+Date: Thu, 9 Jun 2022 20:45:41 +0900
 MIME-Version: 1.0
-References: <20220608142723.103523089@infradead.org> <20220608144517.444659212@infradead.org>
- <YqG6URbihTNCk9YR@alley> <YqHFHB6qqv5wiR8t@worktop.programming.kicks-ass.net>
-In-Reply-To: <YqHFHB6qqv5wiR8t@worktop.programming.kicks-ass.net>
-From: Sergey Senozhatsky <senozhatsky@chromium.org>
-Date: Thu, 9 Jun 2022 20:30:58 +0900
-Message-ID: <CA+_sPaoJGrXhNPCs2dKf2J7u07y1xYrRFZBUtkKwzK9GqcHSuQ@mail.gmail.com>
-Subject: Re: [PATCH 24/36] printk: Remove trace_.*_rcuidle() usage
-To: Peter Zijlstra <peterz@infradead.org>
-Cc: Petr Mladek <pmladek@suse.com>, ink@jurassic.park.msu.ru, mattst88@gmail.com, 
-	vgupta@kernel.org, linux@armlinux.org.uk, ulli.kroll@googlemail.com, 
-	linus.walleij@linaro.org, shawnguo@kernel.org, 
-	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de, festevam@gmail.com, 
-	linux-imx@nxp.com, tony@atomide.com, khilman@kernel.org, 
-	catalin.marinas@arm.com, will@kernel.org, guoren@kernel.org, 
-	bcain@quicinc.com, chenhuacai@kernel.org, kernel@xen0n.name, 
-	geert@linux-m68k.org, sammy@sammy.net, monstr@monstr.eu, 
-	tsbogend@alpha.franken.de, dinguyen@kernel.org, jonas@southpole.se, 
-	stefan.kristiansson@saunalahti.fi, shorne@gmail.com, 
-	James.Bottomley@hansenpartnership.com, deller@gmx.de, mpe@ellerman.id.au, 
-	benh@kernel.crashing.org, paulus@samba.org, paul.walmsley@sifive.com, 
-	palmer@dabbelt.com, aou@eecs.berkeley.edu, hca@linux.ibm.com, 
-	gor@linux.ibm.com, agordeev@linux.ibm.com, borntraeger@linux.ibm.com, 
-	svens@linux.ibm.com, ysato@users.sourceforge.jp, dalias@libc.org, 
-	davem@davemloft.net, richard@nod.at, anton.ivanov@cambridgegreys.com, 
-	johannes@sipsolutions.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, 
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com, acme@kernel.org, 
-	mark.rutland@arm.com, alexander.shishkin@linux.intel.com, jolsa@kernel.org, 
-	namhyung@kernel.org, jgross@suse.com, srivatsa@csail.mit.edu, 
-	amakhalov@vmware.com, pv-drivers@vmware.com, boris.ostrovsky@oracle.com, 
-	chris@zankel.net, jcmvbkbc@gmail.com, rafael@kernel.org, lenb@kernel.org, 
-	pavel@ucw.cz, gregkh@linuxfoundation.org, mturquette@baylibre.com, 
-	sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org, 
-	sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org, 
-	anup@brainfault.org, thierry.reding@gmail.com, jonathanh@nvidia.com, 
-	jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>, yury.norov@gmail.com, 
-	andriy.shevchenko@linux.intel.com, linux@rasmusvillemoes.dk, 
-	rostedt@goodmis.org, john.ogness@linutronix.de, paulmck@kernel.org, 
-	frederic@kernel.org, quic_neeraju@quicinc.com, josh@joshtriplett.org, 
-	mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com, 
-	joel@joelfernandes.org, juri.lelli@redhat.com, vincent.guittot@linaro.org, 
-	dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de, 
-	bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org, 
-	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
-	linux-omap@vger.kernel.org, linux-csky@vger.kernel.org, 
-	linux-hexagon@vger.kernel.org, linux-ia64@vger.kernel.org, 
-	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, 
-	openrisc@lists.librecores.org, linux-parisc@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org, 
-	linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, 
-	sparclinux@vger.kernel.org, linux-um@lists.infradead.org, 
-	linux-perf-users@vger.kernel.org, virtualization@lists.linux-foundation.org, 
-	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org, 
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org, rcu@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:91.0) Gecko/20100101
+ Thunderbird/91.10.0
+Subject: Re: [PATCH v3 2/3] ui: Deliver refresh rate via QemuUIInfo
+Content-Language: en-US
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: qemu Developers <qemu-devel@nongnu.org>, xen-devel@lists.xenproject.org,
+ "Michael S . Tsirkin" <mst@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony Perard <anthony.perard@citrix.com>, Paul Durrant <paul@xen.org>
+References: <20220226115516.59830-1-akihiko.odaki@gmail.com>
+ <20220226115516.59830-3-akihiko.odaki@gmail.com>
+ <20220609102805.qz2xrnd6ms6cigir@sirius.home.kraxel.org>
+From: Akihiko Odaki <akihiko.odaki@gmail.com>
+In-Reply-To: <20220609102805.qz2xrnd6ms6cigir@sirius.home.kraxel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-My emails are getting rejected... Let me try web-interface
+On 2022/06/09 19:28, Gerd Hoffmann wrote:
+>> --- a/include/ui/console.h
+>> +++ b/include/ui/console.h
+>> @@ -139,6 +139,7 @@ typedef struct QemuUIInfo {
+>>       int       yoff;
+>>       uint32_t  width;
+>>       uint32_t  height;
+>> +    uint32_t  refresh_rate;
+>>   } QemuUIInfo;
+>>   
+>>   /* cursor data format is 32bit RGBA */
+>> @@ -426,7 +427,6 @@ typedef struct GraphicHwOps {
+>>       void (*gfx_update)(void *opaque);
+>>       bool gfx_update_async; /* if true, calls graphic_hw_update_done() */
+>>       void (*text_update)(void *opaque, console_ch_t *text);
+>> -    void (*update_interval)(void *opaque, uint64_t interval);
+>>       void (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
+>>       void (*gl_block)(void *opaque, bool block);
+>>   } GraphicHwOps;
+> 
+> So you are dropping update_interval, which isn't mentioned in the commit
+> message at all.  Also this patch is rather big.  I'd suggest:
+> 
+> (1) add refresh_rate
+> (2) update users one by one
+> (3) finally drop update_interval when no user is left.
+> 
+> thanks,
+>    Gerd
+> 
 
-Kudos to Petr for the questions and thanks to PeterZ for the answers.
+I think 1 and 3 should have to be done once since refresh_rate and 
+update_interval would interfere with each other otherwise. Does that 
+make sense?
 
-On Thu, Jun 9, 2022 at 7:02 PM Peter Zijlstra <peterz@infradead.org> wrote:
-> This is the tracepoint used to spool all of printk into ftrace, I
-> suspect there's users, but I haven't used it myself.
-
-I'm somewhat curious whether we can actually remove that trace event.
+Regards,
+Akihiko Odaki
 
