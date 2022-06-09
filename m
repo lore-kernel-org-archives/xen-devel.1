@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63E79C433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 01:00:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.344440.569987 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243EEC433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 01:03:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344480.570042 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nz6WP-0001t5-M6; Thu, 09 Jun 2022 00:59:37 +0000
+	id 1nz6Zw-0004lG-08; Thu, 09 Jun 2022 01:03:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 344440.569987; Thu, 09 Jun 2022 00:59:37 +0000
+Received: by outflank-mailman (output) from mailman id 344480.570042; Thu, 09 Jun 2022 01:03:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nz6WP-0001su-Gk; Thu, 09 Jun 2022 00:59:37 +0000
-Received: by outflank-mailman (input) for mailman id 344440;
- Thu, 09 Jun 2022 00:59:35 +0000
+	id 1nz6Zv-0004l8-Sg; Thu, 09 Jun 2022 01:03:15 +0000
+Received: by outflank-mailman (input) for mailman id 344480;
+ Thu, 09 Jun 2022 01:03:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=RtT8=WQ=oracle.com=dongli.zhang@srs-se1.protection.inumbo.net>)
- id 1nz6WN-0001NE-7g
- for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 00:59:35 +0000
+ id 1nz6XP-0001NE-L3
+ for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 01:00:39 +0000
 Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
  [205.220.177.32]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6bde0305-e78f-11ec-b605-df0040e90b76;
- Thu, 09 Jun 2022 02:59:33 +0200 (CEST)
+ id 93315604-e78f-11ec-b605-df0040e90b76;
+ Thu, 09 Jun 2022 03:00:38 +0200 (CEST)
 Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 258LYAah017875;
- Thu, 9 Jun 2022 00:58:49 GMT
+ by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 258LZ7rl017866;
+ Thu, 9 Jun 2022 00:58:46 GMT
 Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3ghexefa62-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3ghexefa60-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 09 Jun 2022 00:58:49 +0000
+ Thu, 09 Jun 2022 00:58:46 +0000
 Received: from pps.filterd
  (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.16.1.2/8.16.1.2)
- with SMTP id 2590ub31032517; Thu, 9 Jun 2022 00:58:48 GMT
+ with SMTP id 2590ub2v032517; Thu, 9 Jun 2022 00:58:45 GMT
 Received: from nam12-mw2-obe.outbound.protection.outlook.com
  (mail-mw2nam12lp2049.outbound.protection.outlook.com [104.47.66.49])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com with ESMTP id
- 3gfwu433k8-5
+ 3gfwu433k8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 09 Jun 2022 00:58:48 +0000
+ Thu, 09 Jun 2022 00:58:45 +0000
 Received: from BYAPR10MB2663.namprd10.prod.outlook.com (2603:10b6:a02:a9::20)
  by BN0PR10MB5126.namprd10.prod.outlook.com (2603:10b6:408:129::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5314.13; Thu, 9 Jun
- 2022 00:58:45 +0000
+ 2022 00:58:42 +0000
 Received: from BYAPR10MB2663.namprd10.prod.outlook.com
  ([fe80::7081:e264:cc58:37b9]) by BYAPR10MB2663.namprd10.prod.outlook.com
  ([fe80::7081:e264:cc58:37b9%3]) with mapi id 15.20.5314.019; Thu, 9 Jun 2022
- 00:58:45 +0000
+ 00:58:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,31 +65,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6bde0305-e78f-11ec-b605-df0040e90b76
+X-Inumbo-ID: 93315604-e78f-11ec-b605-df0040e90b76
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : content-type :
- mime-version; s=corp-2021-07-09;
- bh=nekokp8TW4nxfgOy/dsnG3rVJSWVzWzy9psuFT1B75U=;
- b=GMBqDZK+PAwYlUzMbGQhxJM5l0kHoHp/ZTShoUcvDMnTueiJYk7+aWp6Dj8jhcWPSI85
- HeFi1msOXWEebXsuQs1i7XKs3ebwu6vMtnK/JARTCRvIUgDqmFHyy/W4PCC00z8ijQvQ
- 4r20InFx8Xhj4L/EnpqcmmpVxVMhXYAhwqK7sJiKY6BlaVmjw/zVzW8m/gdyN4iI70VW
- Ded2/qDF/G0dNbQ1PaqJRau4rQ5AjJ0Amm2C05c+iSglP36FPGwDtyIyakQ9DDsja2aq
- W7PbYRN+70zFkFMWe1whg4CYR1RfWkWgVDagxpmagbGN9jAEQf0kX71EqvCueEscQ/1c XQ== 
+ subject : date : message-id : content-type : mime-version;
+ s=corp-2021-07-09; bh=3SsoYUhartg9823tFAK+tRiIVPElf2jSv9+cjvVkLE8=;
+ b=M7ozWCOa3+TfeNQwOa7gpxd6yF1zY09Ju/Ua5AF2i4a+U0N0tYT6jd4AgcPfgt3VJg4L
+ mf43BzUEdhRAyNu9OJXAG7BmRswA912dPbMmBC4czuQUiufxvHP8zkmjUCN/oPjc5fqe
+ /07g4anPGymLFyAqaBykDLXyvCKuio5RL/xHeJeXdvV4BuYj4QCsuNjHBMGFj5hLfw8/
+ QxzsXc+LSifuibdoZtGFiVe/t7uCQQo42tuDKldAJBynWlMP9zOTw2rJXXpbHU/G5oTw
+ I4x3Xt0UDGKNwmMfJbyeR8oPodKHdovuWA0+Bp1ku29N9/ITu6tsNs6teSxg6h5phS6O QQ== 
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WgZ33u82gVHs+34+LlKyvBPTKxqgvVMrF7pZnmHxZoHs4VsmdXTjQEMQ56/POBJxCufdYYdhrz83mDE0B4QLYIf665CyWmISA+qnx5hgDmIRuzQcgjYtK0psUtczzzhLVPDMN9es9WbCt6aFkFy82Winj5Ikgke0rFySDD7/X4EJ0d2f0yf9rtbxnOOA9E/4E5dz1RVShZ0bbLu8UZjdUGV0y+5/oz8OpsCFKeXCLzG6jn2VB7EgoOH2/X/vQJeP6Z+pxYGy5YW4q1wIed8LPB1Pbt2LjfYs86+OwwsGt5+LhuohRVe41kR6w3VHiOhUXcHWvZCKkvPSJSkHXJO4eA==
+ b=idy4vGYje4vaAx7bI5YnHt2whCNmdGL3p1mv7u9rNj4WZ9iMgD5paaaqFCcqaNPcCTAdF/VZJanjvYcNAJYHfnKG5A6HFVtS7juVmr6umgM0FTXp4YU7NXRpZPSonbkTPk2fbFNKXYXG9MPr3DB9fU+2uOkHCObu7trKnZOb4yawwFEttsO/ZiSEBy7hUfRgIcJvwmPb2Luq2XT8lpjl+05O/SaCbBDCSRvAqHzVIxbI/guMSFMvyCglMU+6QKmfPksYe88L42eLV5LNziZ4ktacscyaraznquN6IE9apVVW2Vk6XUOfhqLCRI6CepTGUsXpaBKoe9PvrWJYVXwtvg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nekokp8TW4nxfgOy/dsnG3rVJSWVzWzy9psuFT1B75U=;
- b=LGgfjynM+7CwFq5AdgRrUhcTWXYmRVXc1aqmvpTcUeIirRwi1ZoO993xAbmC6vp988oyQAP0BJ2+E/E4VA0xSVRe8oFj93rt7Jm7Ye+WgxpVzO5CCYkbHj6xNwcfjx283HBB75OGDKrlDF1+6PtZWgPa0XxGVemfV7KfmfuYq46fMWvMAsMq08M1HxXFjLj3SLVi5VYwUXyqBQMgGqh1HkkgNd3wahqvJLxEXUhXfELMViecAqofkTYI938n39nKzW2H7HoiDcU+TVKKgTt5J0tYw8F8efuItONUq/ILwMq9Mq+br9jqlxMYLKao/jcQ3fYFD21TtN6JDcjRCL44eg==
+ bh=3SsoYUhartg9823tFAK+tRiIVPElf2jSv9+cjvVkLE8=;
+ b=OrzNLs5L2oDowsnZEhb9imoQmZGNI1om7SDzWikUSRhgHvYwrjIeWZ4ZLAsxHtV1hpfkK2nDtNLIezUGAlBy4AkxwsANj5tRlfVY4Yhdynrditrm8XAeMfhtVVa+KGF2dV+ARsqWg0YMZSwtWu0H1tkJw0fq5QbAfiOVnbvLyGdMO0/3iRL+qoGD1uMi1o5JMs9Ev/zdraYJW6RImQId2h20D2ONdqMadjvLK61VJsifO2SbKXk+hMXMcThWli+CckbWW4gnP3etp+iKuTeo4t2PXYKy7yVlhiyuFya8G49nHtMNYKfRFaZ15t9VtIEJUNxHdRaeIA6ccyCypWCezA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
  dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nekokp8TW4nxfgOy/dsnG3rVJSWVzWzy9psuFT1B75U=;
- b=dojvVz+u0/uvYoSYrL0wtDfV4g0AvMj6XWxh0nY0t+RCakvbkLBxGGndrgt+UGfpmA7BzLpm+LMNziv0ffJG5xiPDAmSkMNzCK0/L9YwbNBqZd7UOay0Z4WH68HPd2OKtiktyYDwF3IIRyR3rq7bA/dFxDup7+u7IlnYgVWbRcg=
+ bh=3SsoYUhartg9823tFAK+tRiIVPElf2jSv9+cjvVkLE8=;
+ b=NXncSQgfGOTZYlykBnhqLvNUMWyXStN+cMfunC05/2R/j5aV5n/M90jBRFomdHVEHjemXHEBPKy8IjiWhwznojDtUcLYRYIWIgN8gs6EYtYijHRTsbk33AZuimaOSOE9Qx4JWqWle878j7LbIiNoW0La0JpOwPgjuQ6+majAVQI=
 From: Dongli Zhang <dongli.zhang@oracle.com>
 To: iommu@lists.linux-foundation.org, xen-devel@lists.xenproject.org,
         x86@kernel.org, linuxppc-dev@lists.ozlabs.org,
@@ -99,71 +98,69 @@ Cc: linux-kernel@vger.kernel.org, hch@infradead.org, m.szyprowski@samsung.com,
         dave.hansen@linux.intel.com, sstabellini@kernel.org,
         mpe@ellerman.id.au, konrad.wilk@oracle.com, mst@redhat.com,
         jasowang@redhat.com, joe.jin@oracle.com
-Subject: [PATCH RFC v1 4/7] swiotlb: to implement io_tlb_high_mem
-Date: Wed,  8 Jun 2022 17:55:50 -0700
-Message-Id: <20220609005553.30954-5-dongli.zhang@oracle.com>
+Subject: [PATCH RFC v1 0/7] swiotlb: extra 64-bit buffer for dev->dma_io_tlb_mem
+Date: Wed,  8 Jun 2022 17:55:46 -0700
+Message-Id: <20220609005553.30954-1-dongli.zhang@oracle.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220609005553.30954-1-dongli.zhang@oracle.com>
-References: <20220609005553.30954-1-dongli.zhang@oracle.com>
 Content-Type: text/plain
 X-ClientProxiedBy: SJ0PR05CA0075.namprd05.prod.outlook.com
  (2603:10b6:a03:332::20) To BYAPR10MB2663.namprd10.prod.outlook.com
  (2603:10b6:a02:a9::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f6344bf6-302d-401e-7fea-08da49b33378
+X-MS-Office365-Filtering-Correlation-Id: 2cb2e478-077a-4474-2b82-08da49b3329d
 X-MS-TrafficTypeDiagnostic: BN0PR10MB5126:EE_
 X-Microsoft-Antispam-PRVS: 
-	<BN0PR10MB5126C91F431E8CD443CABD44F0A79@BN0PR10MB5126.namprd10.prod.outlook.com>
+	<BN0PR10MB512612A37D72D4478347F88AF0A79@BN0PR10MB5126.namprd10.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	3AvNmZ5CCbdviHODH6y40fVAdyczC50JrU2fTllizQb59n8MhDlm8SZEkseXDAEeDHWBLifws7IWqQOkcOZPR2OVPpRRTgt5SC1nQm5iM27IzypGZINdflLDL6Auj807bsC74y2XMW1Ng3LV4GE20UR4+mNpWss/3Ob4V7lMx8Tmt2jFNGvcOg9GjVsIPrLbSytpXSRRnKfYm+7UvYQ6CKlGyMFly1Q4JLgezsxSEd9uJMbBiqshXmcADXPOfrFSTNuI9VvvvgdJX65Ny5QQFclwEV/URAWY79qVFLy8bagdBBsP0JmXgydi1XrpIDV0p6TXXb1a1dzBtD3BNnW8nFx67xtFSpnGxW1dK08FXCUEPPlT92Bqd5Q4BAY7gx5b/+5y5yDVuI0m/gZKqxsmF4zCG4OD7wb0lDRdfWkh8oJNN2iPd+uPTgAHGBsvEAIA7+kdt5SX3XqfJwKru28/GMJ271AoTcTNxWQTqqGF5HRf5rsiLdpMIZ163wg1nj9tmmYIETm3s1tXJc399/fBE8FiyxdGpNZ8vz59anD9JuLHP10UqBNk8MyT4xGEImA+jVNHHcGSQ4aI78BMItdRCgsk9ENcMDwyHk841vno8ubcUCWbVsp+i5fAZT4k3x01RLtO56QIey15lnfBGRZMzggG5lIfw+7Qw42xZ0M2zkUMvXNgPd0cXuUpf/PYvjdYnQWag9b3C7WtnyFnxYceIQ==
+	phOFzr6us0qxhf4BlGC3EWXqNEz4CBGDjH5s96GZyLoh7N7Uncb5zBgg9UZs1cWlABTdKJf3vVcy6UmmAe1FwkKCHedsPsZ3H66G/pLWfxIfF8ung6ESlpj1+wKgmZ2t8ar9tRRY7m/rj6de43oS32Ixsa1WrhOnpOUPdjIQKHAclCD1b9jmp0WGnC68WQk8arYJDaMd0KuAFAe5HPzu6JY+cqhD+lAt2e6f94pzitLkW5GG6h9k7ccFEhxsmEhRk0RVbKI3laZ3EyuvS7s8jFwBWnH0S1niRu7jR52/HWQ8JN5ocj8w9r0sFL36Mdr0JReqh5O4gHzs0QnHlbJQrv3OUYK6DivggUKlG/teKz0f+QbGmGgeCgqNEKM77uFBIeNJunDSbCYY5UJcrXNjC74s7eW5csyNUJzt3fW4vEcdB3hSaYa/zUTOk69jLrWK8taPs/XkVxSHl5MT8ugrEiR0yon9SEkVjBBvSYbDOuA1G9ahAWHTp7yzqhV2Msdic4ZYt/Uh3vsrFSTFFYam7FBaInuPUUvp9VKonsmBIgnv6OgXx5/03R7JcpE1/PlDarM0ixweZt8OBrQYU6DQl1oBacXHBiFOH37pbjaNS5oZa5jobwFRbA5CTBX8K4HiZNtvcJCQlGtbyJafF7ABgIYnhjwmnP+cCzJMKnEZgn3kq8tfoGbubGD6eM2EzwQHX8olfXNxDpUFKAXDwLXvVaSZkF63C1FiYaos4aASYkWTDv3ezZCM6v2ZZ5pfO/yUkVeJnsPHfOz5uIzx1XEG27QkgyqaFFQWzoA6NceVcOY=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB2663.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(8936002)(6486002)(5660300002)(186003)(66556008)(508600001)(4326008)(66946007)(7416002)(66476007)(2616005)(8676002)(107886003)(1076003)(2906002)(38100700002)(38350700002)(26005)(6666004)(316002)(6512007)(36756003)(83380400001)(86362001)(44832011)(6506007)(52116002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR10MB2663.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(8936002)(6486002)(966005)(5660300002)(186003)(66556008)(508600001)(4326008)(66946007)(7416002)(66476007)(2616005)(8676002)(107886003)(1076003)(2906002)(38100700002)(38350700002)(26005)(316002)(6512007)(36756003)(83380400001)(86362001)(44832011)(6506007)(52116002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?0qxQmydipRe6x+4KxK/g0yP+vjf71C3oD4ELdMTU1X/iKIpS+rxB2yX5GvM3?=
- =?us-ascii?Q?6MtwxwutCpdqbBYsfo3VT9u3RSG76AeGDcE1ucqRUEE+gR/Y/+miL7ipgUSa?=
- =?us-ascii?Q?aegXAuOF8vpCiMuoiUXymqfPoQQIwqZdhqorKtfLN13LJYLZ+FtH/3RS353c?=
- =?us-ascii?Q?EXJogWzkX/XDGwDKL9lVyJETfVqAkDhFq/m/MpY4aXdHXvMk0+4Ud2VGWEQS?=
- =?us-ascii?Q?yvhNYimXq0fh6vkXIGwiYMAU6y9v5kipTvr9lKlF5CRMEBi3YNWkZhRjjgf2?=
- =?us-ascii?Q?UTT0GW4kuCXH89ZRI/o2fw198IQqazPm2N0K60oK27B1LH8KfcOs86klF2xK?=
- =?us-ascii?Q?6KPvQjXVo7HqKpDriZgVBEbQQ0utNRanaOiiIm+pNH1phpwugf0Se2ihR2a1?=
- =?us-ascii?Q?8fjEeMDBGEfHVkpbzuEkgm+nyvfGdy3xwVFOCgrrHeyus4Sh/A6HzYnsK/L/?=
- =?us-ascii?Q?9M+lujldAGUX62k1Mq/bjRZ28fqENPpxWYGTfQR4TgfnnshYvfGHU+AmkLvL?=
- =?us-ascii?Q?dGIMlRW7Bd9QXtDVhUDFXiYyWqWQzplmhuba8A2B5DQEIzIjWmzXEX6B/nKB?=
- =?us-ascii?Q?/rsNPtny1+F5RcuNFYCvgobBcTQGXUulYsxgSgx12YG3RbjKs+P9DucAalP+?=
- =?us-ascii?Q?003uhcfM7IL2XPhSlDnzwKIp6SUAawebkfjhyFgJZ8p02QOh33F1pcBEszlp?=
- =?us-ascii?Q?Q9TgWlYulY/I8ZJHrWdNi1cM+tWrNlx1w0tx+WVUOz328tDrbzRJJKsXO7mq?=
- =?us-ascii?Q?kG9zYI04x7URSothWZgPiyfQlw1CUHBxb+hHRsRnawGys2LUXG5haUzxr1+M?=
- =?us-ascii?Q?F8Qo6ky6PQeXaDtF5rGpAG8u8K/pnOJ/T0jlzZxkbnJTw+V19S0143VQXJzR?=
- =?us-ascii?Q?n+ijzGDkK7CG0dFizF2nQkJ9F/6M3yHL6CN/hya2RG3hFswMSnxSnlDOfY0f?=
- =?us-ascii?Q?7txGA9j0jJlbGn9H3ea1yCkWk5fWsUcACyBzAb8BTaZti/dq6y6x5qBhtZbw?=
- =?us-ascii?Q?+mTj6AUSIMdqgX0UBUEDs/smbljYrdVT1J+VlLRicdNVgMw58bQy3JJ4RukZ?=
- =?us-ascii?Q?QkbQC3KZM+Wri4UBNdERQa6GfJMIaSCyNb9bpUfbiuxcLt6C6pdxj/11gyEv?=
- =?us-ascii?Q?qIbdFMtw9+hu6Necp2x0aCk2Jb7Y6ceGd5+MF8zlLuIC/TXeJeUCs0pOLOqy?=
- =?us-ascii?Q?bik+I+aPJ45+RXQQ8PnuaJG2rXGUxY9B9nRjpyBA+1OUk7egs8RFKJkrZBMa?=
- =?us-ascii?Q?z6X+3PnfrpccXeVz71pXC9rh7oe9exNxMSBA4Mq3UMJpxL1V1CMLh2CplbJj?=
- =?us-ascii?Q?GR3XK3vBpn3CIB0b+lAW+ywA69KMx1RbICb8OFfYHMu7rsLLx5r3DDHKgMTN?=
- =?us-ascii?Q?DbBtqRC9uMF/yBg9GpFy9ZCFhM1FHy2r5SN8il6c9SOJGeAdHI9CnR8xf5sI?=
- =?us-ascii?Q?GedOgs+Q1a9zKnRb8FZqgxzXq4pxrL3Fp3kax/TIbApfT8iaYoksiyZP5kme?=
- =?us-ascii?Q?JM7pkU+oHFfbpnwm6BYH+JWnuC5zoutucLIVtZB0v6Q9dKOBqXszL+OdHFf+?=
- =?us-ascii?Q?Sgz/okE2R/63J7LqBfOVv4thINQQHneM8TJnQOWirmgbpkGPxsRXdYk7Jtsi?=
- =?us-ascii?Q?WkZ5zG5vX8uGJPjyp7+JwEXbCEDZiCspHkafW/XjyhX5yIh6Ucchra4RINU8?=
- =?us-ascii?Q?VT8Jzs2qNRxmts7a3BUn2iQ1QaxYjgQLJSMbINAJNmza9Nd5VPKjjLybRuNF?=
- =?us-ascii?Q?e13WfbMEfIezRj5QybDpVXZUPH9CzB8=3D?=
+	=?us-ascii?Q?pBO4BPbogLXOZu6vcAtGBYD2Ytg0IwKr8vEIZF/oWiSMFol+V2mrETdzXMMy?=
+ =?us-ascii?Q?RJZuyCI8Jn+4MwL9ESFnHzPQpHjV0YWAXpC/IAHuyMPuUH+JE7GdFRHal5lL?=
+ =?us-ascii?Q?rofuZhUPvU157zGW0V8sssCE/racWWq7ixXUOp3gDPoSHBHKabOXHCE+HEEm?=
+ =?us-ascii?Q?H1yfS/a6Tms6oxIASg4FtKjSdzI0HPHHOsAEqkD0J2Gos0kuLp2HpelOUuFs?=
+ =?us-ascii?Q?J7mueZgg7b8o7ndpugpXcG+ksyGd5EmGRQlgpGgQLBotFD7ChbOekaQeY7JU?=
+ =?us-ascii?Q?IsHP4BovrgCHVvA4xJ+3mz4AAWwSWmL9wgJeEmv4j9W7uQSHFBSM8+CHr/6f?=
+ =?us-ascii?Q?QlH+eH3wtS4XS6cUE90EQ7jR5UyI2UhJn5J/wE3Wb2khsNoBlm3TnulBVOQx?=
+ =?us-ascii?Q?Vu2A474nl6ZkutUCasH7oaOtEuVOoi0u3pgo9RBD38DGRNt15QDfS7ODiS0w?=
+ =?us-ascii?Q?w9ffKLh2PdQTaDgJpyz97jgVb4nAYvRb7PCOdlXeVHkpyP73GPPKKKY9uLQ0?=
+ =?us-ascii?Q?CBPbziO/bLFHGZmU1sLGOU7WXWy/6HNiUvzBS5lV//Fwx30wibzQAW9ZIynl?=
+ =?us-ascii?Q?Ikuw58DrW1xSDAEbnRKqRIM3IFj1G3h0s8Rm94i8fsbjs76ini8UsfSnz7Vz?=
+ =?us-ascii?Q?rrJvkT4ZkuMJbAsZIT9MKUVlS5f3atIFr1yGE0WdaDMPdfktXnolOEuHG/vf?=
+ =?us-ascii?Q?p4PfN0BW5eOmjqaW3eZ8UmKDyBx9c1/owhR+zQUCtmEuzbCXTbkmojk6DfUN?=
+ =?us-ascii?Q?K4f/ncRuLApExOnX2f/8U/dt+r3MhQtkB1L5bfM4qUVtKiylYQGNyUVzYo9H?=
+ =?us-ascii?Q?yJiZPlkX8XnikFLZcjm6pGre5oD/9RVz4aB/L+8DKgJggpmbXtqeKJti1kRA?=
+ =?us-ascii?Q?Lzg+L3SoduiF5Zbygo5JPk34J65BTsBQFy05MWitv0txouxXVsJbl1YulBH1?=
+ =?us-ascii?Q?PK9mfQvo6lYzrjWrYOG0w5KlFKWBJ+wcYkYAmL7Wl90cuzpYe4sUO0cteCUo?=
+ =?us-ascii?Q?Smr2IRaJxAkzmylP9IEHBHQFkI0sC/X2IIWry7Lx7XEr42OlPgT6ta++5MKe?=
+ =?us-ascii?Q?xHDjrLSCfZLkuhRqfK6yoluD+MEDinjpm4n1tBSZe7iSHXflMx1kOyjQqfO+?=
+ =?us-ascii?Q?8XC+uIjHeVrEGXvsbenYPE6b6mSdzatBmFWMMY/6vbu2ttN9WbFhfgJ5//VJ?=
+ =?us-ascii?Q?IkWFfA0knnqk5Xy0Z/nCCH2Mt5spgiHPsdduCXDRDYSnWQCQKM8uejH7hH9N?=
+ =?us-ascii?Q?If6gj8TN1WhdvXDFjdewbR4zRDfz2KeURnp0Qq4gdx/Wn8rt9wLoGhBIdqey?=
+ =?us-ascii?Q?rD+wPBor5Yx3leapfg9c2xG6JJeZHvCyMJaFGHnE8gKR//J3ZbADpveVGz92?=
+ =?us-ascii?Q?LlOyrvOjSqaIOlAHGH5Th+uqLKi1UAV1tsvBu5wy5ub2M/lArZQflQ1qf5i0?=
+ =?us-ascii?Q?QY9IbOAIQicb3hRE8QatxxUOSN1lRG4NvfzN0pIOnyQWp4+g+CNij4xHQF+J?=
+ =?us-ascii?Q?7lH7mEMURJjAMJTRMQnj1zpfa4MA3yYuV3SvxgrfN7C1Q+7LN/QY4uTK9Jg2?=
+ =?us-ascii?Q?8CxYSRXdCswRp3xmCt9fXbcnv77AkCk2ed3x1+IsymnKL1WKzKL69798mvKt?=
+ =?us-ascii?Q?RcwC2hWB/fD1saq523+lxUz5udoypGglKYB11mfIYhpdiph6UZePHPSFdfcH?=
+ =?us-ascii?Q?2Vlh1metT/Nc9OMwlsrC1lPfEhXad9mHU6QcZzpIjvd/liUtYYMcL3nBhxTR?=
+ =?us-ascii?Q?ErEl00F4MWXhCg2PWr9NV+5MweXyXX4=3D?=
 X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f6344bf6-302d-401e-7fea-08da49b33378
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2cb2e478-077a-4474-2b82-08da49b3329d
 X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB2663.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 00:58:43.9105
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 00:58:42.5199
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QbmrOfoWVaceqq7p3y9j6JLtOdNu500cOzOywMJ88LRFf9Aw04woiaUj2UrEnUplKciIQVh3+lFqRiN3fhajwQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: V3CtjPGlpYbIwnKPmsX+TYmcM+xROYmmG5MAt7VRiQB4NPCI9kvN1yLPZJGKUDf05jU/U/2TttCXRFFAEQIScQ==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5126
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.517,18.0.874
  definitions=2022-06-08_04:2022-06-07,2022-06-08 signatures=0
@@ -171,271 +168,89 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 s
  adultscore=0 suspectscore=0 malwarescore=0 phishscore=0 bulkscore=0
  mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2204290000 definitions=main-2206090001
-X-Proofpoint-GUID: jVJJJsSBSr0KhW_JAr0g-MNbDxv5_E8_
-X-Proofpoint-ORIG-GUID: jVJJJsSBSr0KhW_JAr0g-MNbDxv5_E8_
+X-Proofpoint-GUID: dNBDCVqEeGfksdhDcpmZcy8m6vklENs5
+X-Proofpoint-ORIG-GUID: dNBDCVqEeGfksdhDcpmZcy8m6vklENs5
 
-This patch is to implement the extra 'io_tlb_high_mem'. In the future, the
-device drivers may choose to use either 'io_tlb_default_mem' or
-'io_tlb_high_mem' as dev->dma_io_tlb_mem.
+Hello,
 
-The highmem buffer is regarded as active if
-(high_nslabs && io_tlb_high_mem.nslabs) returns true.
+I used to send out a patchset on 64-bit buffer and people thought it was
+the same as Restricted DMA. However, the 64-bit buffer is still not supported.
 
-Cc: Konrad Wilk <konrad.wilk@oracle.com>
-Cc: Joe Jin <joe.jin@oracle.com>
-Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
----
- arch/powerpc/kernel/dma-swiotlb.c |   8 ++-
- arch/x86/kernel/pci-dma.c         |   5 +-
- include/linux/swiotlb.h           |   2 +-
- kernel/dma/swiotlb.c              | 103 +++++++++++++++++++++---------
- 4 files changed, 84 insertions(+), 34 deletions(-)
+https://lore.kernel.org/all/20210203233709.19819-1-dongli.zhang@oracle.com/
 
-diff --git a/arch/powerpc/kernel/dma-swiotlb.c b/arch/powerpc/kernel/dma-swiotlb.c
-index ba256c37bcc0..f18694881264 100644
---- a/arch/powerpc/kernel/dma-swiotlb.c
-+++ b/arch/powerpc/kernel/dma-swiotlb.c
-@@ -20,9 +20,11 @@ void __init swiotlb_detect_4g(void)
- 
- static int __init check_swiotlb_enabled(void)
- {
--	if (ppc_swiotlb_enable)
--		swiotlb_print_info();
--	else
-+	if (ppc_swiotlb_enable) {
-+		swiotlb_print_info(false);
-+		if (swiotlb_high_active())
-+			swiotlb_print_info(true);
-+	} else
- 		swiotlb_exit();
- 
- 	return 0;
-diff --git a/arch/x86/kernel/pci-dma.c b/arch/x86/kernel/pci-dma.c
-index 30bbe4abb5d6..1504b349b312 100644
---- a/arch/x86/kernel/pci-dma.c
-+++ b/arch/x86/kernel/pci-dma.c
-@@ -196,7 +196,10 @@ static int __init pci_iommu_init(void)
- 	/* An IOMMU turned us off. */
- 	if (x86_swiotlb_enable) {
- 		pr_info("PCI-DMA: Using software bounce buffering for IO (SWIOTLB)\n");
--		swiotlb_print_info();
-+
-+		swiotlb_print_info(false);
-+		if (swiotlb_high_active())
-+			swiotlb_print_info(true);
- 	} else {
- 		swiotlb_exit();
- 	}
-diff --git a/include/linux/swiotlb.h b/include/linux/swiotlb.h
-index e61c074c55eb..8196bf961aab 100644
---- a/include/linux/swiotlb.h
-+++ b/include/linux/swiotlb.h
-@@ -166,7 +166,7 @@ static inline void swiotlb_adjust_size(unsigned long size)
- #endif /* CONFIG_SWIOTLB */
- 
- extern bool swiotlb_high_active(void);
--extern void swiotlb_print_info(void);
-+extern void swiotlb_print_info(bool high);
- 
- #ifdef CONFIG_DMA_RESTRICTED_POOL
- struct page *swiotlb_alloc(struct device *dev, size_t size);
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 7988883ca7f9..ff82b281ce01 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -101,6 +101,21 @@ setup_io_tlb_npages(char *str)
- }
- early_param("swiotlb", setup_io_tlb_npages);
- 
-+static struct io_tlb_mem *io_tlb_mem_get(bool high)
-+{
-+	return high ? &io_tlb_high_mem : &io_tlb_default_mem;
-+}
-+
-+static unsigned long nslabs_get(bool high)
-+{
-+	return high ? high_nslabs : default_nslabs;
-+}
-+
-+static char *swiotlb_name_get(bool high)
-+{
-+	return high ? "high" : "default";
-+}
-+
- bool swiotlb_high_active(void)
- {
- 	return high_nslabs && io_tlb_high_mem.nslabs;
-@@ -133,17 +148,18 @@ void __init swiotlb_adjust_size(unsigned long size)
- 	pr_info("SWIOTLB bounce buffer size adjusted to %luMB", size >> 20);
- }
- 
--void swiotlb_print_info(void)
-+void swiotlb_print_info(bool high)
- {
--	struct io_tlb_mem *mem = &io_tlb_default_mem;
-+	struct io_tlb_mem *mem = io_tlb_mem_get(high);
- 
- 	if (!mem->nslabs) {
- 		pr_warn("No low mem\n");
- 		return;
- 	}
- 
--	pr_info("mapped [mem %pa-%pa] (%luMB)\n", &mem->start, &mem->end,
--	       (mem->nslabs << IO_TLB_SHIFT) >> 20);
-+	pr_info("%s mapped [mem %pa-%pa] (%luMB)\n",
-+		swiotlb_name_get(high), &mem->start, &mem->end,
-+		(mem->nslabs << IO_TLB_SHIFT) >> 20);
- }
- 
- static inline unsigned long io_tlb_offset(unsigned long val)
-@@ -184,15 +200,9 @@ static void *swiotlb_mem_remap(struct io_tlb_mem *mem, unsigned long bytes)
- }
- #endif
- 
--/*
-- * Early SWIOTLB allocation may be too early to allow an architecture to
-- * perform the desired operations.  This function allows the architecture to
-- * call SWIOTLB when the operations are possible.  It needs to be called
-- * before the SWIOTLB memory is used.
-- */
--void __init swiotlb_update_mem_attributes(void)
-+static void __init __swiotlb_update_mem_attributes(bool high)
- {
--	struct io_tlb_mem *mem = &io_tlb_default_mem;
-+	struct io_tlb_mem *mem = io_tlb_mem_get(high);
- 	void *vaddr;
- 	unsigned long bytes;
- 
-@@ -207,6 +217,19 @@ void __init swiotlb_update_mem_attributes(void)
- 		mem->vaddr = vaddr;
- }
- 
-+/*
-+ * Early SWIOTLB allocation may be too early to allow an architecture to
-+ * perform the desired operations.  This function allows the architecture to
-+ * call SWIOTLB when the operations are possible.  It needs to be called
-+ * before the SWIOTLB memory is used.
-+ */
-+void __init swiotlb_update_mem_attributes(void)
-+{
-+	__swiotlb_update_mem_attributes(false);
-+	if (swiotlb_high_active())
-+		__swiotlb_update_mem_attributes(true);
-+}
-+
- static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 		unsigned long nslabs, unsigned int flags, bool late_alloc)
- {
-@@ -240,15 +263,13 @@ static void swiotlb_init_io_tlb_mem(struct io_tlb_mem *mem, phys_addr_t start,
- 	return;
- }
- 
--/*
-- * Statically reserve bounce buffer space and initialize bounce buffer data
-- * structures for the software IO TLB used to implement the DMA API.
-- */
--void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
--		int (*remap)(void *tlb, unsigned long nslabs, bool high))
-+static void __init
-+__swiotlb_init_remap(bool addressing_limit, unsigned int flags,
-+		     int (*remap)(void *tlb, unsigned long nslabs, bool high),
-+		     bool high)
- {
--	struct io_tlb_mem *mem = &io_tlb_default_mem;
--	unsigned long nslabs = default_nslabs;
-+	struct io_tlb_mem *mem = io_tlb_mem_get(high);
-+	unsigned long nslabs = nslabs_get(high);
- 	size_t alloc_size;
- 	size_t bytes;
- 	void *tlb;
-@@ -274,7 +295,7 @@ void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
- 		return;
- 	}
- 
--	if (remap && remap(tlb, nslabs, false) < 0) {
-+	if (remap && remap(tlb, nslabs, high) < 0) {
- 		memblock_free(tlb, PAGE_ALIGN(bytes));
- 
- 		nslabs = ALIGN(nslabs >> 1, IO_TLB_SEGSIZE);
-@@ -293,7 +314,20 @@ void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
- 	swiotlb_init_io_tlb_mem(mem, __pa(tlb), nslabs, flags, false);
- 
- 	if (flags & SWIOTLB_VERBOSE)
--		swiotlb_print_info();
-+		swiotlb_print_info(high);
-+}
-+
-+/*
-+ * Statically reserve bounce buffer space and initialize bounce buffer data
-+ * structures for the software IO TLB used to implement the DMA API.
-+ */
-+void __init swiotlb_init_remap(bool addressing_limit, unsigned int flags,
-+		int (*remap)(void *tlb, unsigned long nslabs, bool high))
-+{
-+	__swiotlb_init_remap(addressing_limit, flags, remap, false);
-+	if (high_nslabs)
-+		__swiotlb_init_remap(addressing_limit, flags | SWIOTLB_ANY,
-+				     remap, true);
- }
- 
- void __init swiotlb_init(bool addressing_limit, unsigned int flags)
-@@ -364,23 +398,20 @@ int swiotlb_init_late(size_t size, gfp_t gfp_mask,
- 			     (nslabs << IO_TLB_SHIFT) >> PAGE_SHIFT);
- 	swiotlb_init_io_tlb_mem(mem, virt_to_phys(vstart), nslabs, 0, true);
- 
--	swiotlb_print_info();
-+	swiotlb_print_info(false);
- 	return 0;
- }
- 
--void __init swiotlb_exit(void)
-+static void __init __swiotlb_exit(bool high)
- {
--	struct io_tlb_mem *mem = &io_tlb_default_mem;
-+	struct io_tlb_mem *mem = io_tlb_mem_get(high);
- 	unsigned long tbl_vaddr;
- 	size_t tbl_size, slots_size;
- 
--	if (swiotlb_force_bounce)
--		return;
--
- 	if (!mem->nslabs)
- 		return;
- 
--	pr_info("tearing down default memory pool\n");
-+	pr_info("tearing down %s memory pool\n", swiotlb_name_get(high));
- 	tbl_vaddr = (unsigned long)phys_to_virt(mem->start);
- 	tbl_size = PAGE_ALIGN(mem->end - mem->start);
- 	slots_size = PAGE_ALIGN(array_size(sizeof(*mem->slots), mem->nslabs));
-@@ -397,6 +428,16 @@ void __init swiotlb_exit(void)
- 	memset(mem, 0, sizeof(*mem));
- }
- 
-+void __init swiotlb_exit(void)
-+{
-+	if (swiotlb_force_bounce)
-+		return;
-+
-+	__swiotlb_exit(false);
-+	if (swiotlb_high_active())
-+		__swiotlb_exit(true);
-+}
-+
- /*
-  * Return the offset into a iotlb slot required to keep the device happy.
-  */
-@@ -786,6 +827,10 @@ static void swiotlb_create_debugfs_files(struct io_tlb_mem *mem,
- static int __init __maybe_unused swiotlb_create_default_debugfs(void)
- {
- 	swiotlb_create_debugfs_files(&io_tlb_default_mem, "swiotlb");
-+
-+	if (swiotlb_high_active())
-+		swiotlb_create_debugfs_files(&io_tlb_high_mem, "swiotlb-hi");
-+
- 	return 0;
- }
- 
--- 
-2.17.1
+This RFC is to introduce the extra swiotlb buffer with SWIOTLB_ANY flag,
+to support 64-bit swiotlb.
+
+The core ideas are:
+
+1. Create an extra io_tlb_mem with SWIOTLB_ANY flags.
+
+2. The dev->dma_io_tlb_mem is set to either default or the extra io_tlb_mem,
+   depending on dma mask.
+
+
+Would you please help suggest for below questions in the RFC?
+
+- Is it fine to create the extra io_tlb_mem?
+
+- Which one is better: to create a separate variable for the extra
+  io_tlb_mem, or make it an array of two io_tlb_mem?
+
+- Should I set dev->dma_io_tlb_mem in each driver (e.g., virtio driver as
+  in this patchset)based on the value of
+  min_not_zero(*dev->dma_mask, dev->bus_dma_limit), or at higher level
+  (e.g., post pci driver)?
+
+
+This patchset is to demonstrate that the idea works. Since this is just a
+RFC, I have only tested virtio-blk on qemu-7.0 by enforcing swiotlb. It is
+not tested on AMD SEV environment.
+
+qemu-system-x86_64 -cpu host -name debug-threads=on \
+-smp 8 -m 16G -machine q35,accel=kvm -vnc :5 -hda boot.img \
+-kernel mainline-linux/arch/x86_64/boot/bzImage \
+-append "root=/dev/sda1 init=/sbin/init text console=ttyS0 loglevel=7 swiotlb=327680,3145728,force" \
+-device virtio-blk-pci,id=vblk0,num-queues=8,drive=drive0,disable-legacy=on,iommu_platform=true \
+-drive file=test.raw,if=none,id=drive0,cache=none \
+-net nic -net user,hostfwd=tcp::5025-:22 -serial stdio
+
+
+The kernel command line "swiotlb=327680,3145728,force" is to allocate 6GB for
+the extra swiotlb.
+
+[    2.826676] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    2.826693] software IO TLB: default mapped [mem 0x0000000037000000-0x000000005f000000] (640MB)
+[    2.826697] software IO TLB: high mapped [mem 0x00000002edc80000-0x000000046dc80000] (6144MB)
+
+The highmem swiotlb is being used by virtio-blk.
+
+$ cat /sys/kernel/debug/swiotlb/swiotlb-hi/io_tlb_nslabs 
+3145728
+$ cat /sys/kernel/debug/swiotlb/swiotlb-hi/io_tlb_used 
+8960
+
+
+Dongli Zhang (7):
+  swiotlb: introduce the highmem swiotlb buffer
+  swiotlb: change the signature of remap function
+  swiotlb-xen: support highmem for xen specific code
+  swiotlb: to implement io_tlb_high_mem
+  swiotlb: add interface to set dev->dma_io_tlb_mem
+  virtio: use io_tlb_high_mem if it is active
+  swiotlb: fix the slot_addr() overflow
+
+arch/powerpc/kernel/dma-swiotlb.c      |   8 +-
+arch/x86/include/asm/xen/swiotlb-xen.h |   2 +-
+arch/x86/kernel/pci-dma.c              |   5 +-
+drivers/virtio/virtio.c                |   8 ++
+drivers/xen/swiotlb-xen.c              |  16 +++-
+include/linux/swiotlb.h                |  14 ++-
+kernel/dma/swiotlb.c                   | 136 +++++++++++++++++++++-------
+7 files changed, 145 insertions(+), 44 deletions(-)
+
+Thank you very much for feedback and suggestion!
+
+Dongli Zhang
+
 
 
