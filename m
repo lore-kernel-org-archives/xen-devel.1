@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E258C43334
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 10:47:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.344802.570646 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF572C433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 10:47:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344851.570673 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzFh8-000547-Qe; Thu, 09 Jun 2022 10:47:18 +0000
+	id 1nzFhA-0005TO-Ah; Thu, 09 Jun 2022 10:47:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 344802.570646; Thu, 09 Jun 2022 10:47:18 +0000
+Received: by outflank-mailman (output) from mailman id 344851.570673; Thu, 09 Jun 2022 10:47:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzFh8-000540-Ns; Thu, 09 Jun 2022 10:47:18 +0000
-Received: by outflank-mailman (input) for mailman id 344802;
- Thu, 09 Jun 2022 09:16:54 +0000
+	id 1nzFh9-0005RZ-VC; Thu, 09 Jun 2022 10:47:19 +0000
+Received: by outflank-mailman (input) for mailman id 344851;
+ Thu, 09 Jun 2022 10:14:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=7WWr=WQ=suse.com=pmladek@srs-se1.protection.inumbo.net>)
- id 1nzEHe-0007jN-Gk
- for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 09:16:54 +0000
+ id 1nzFBh-0008FU-B8
+ for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 10:14:49 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e65cface-e7d4-11ec-bd2c-47488cf2e6aa;
- Thu, 09 Jun 2022 11:16:53 +0200 (CEST)
+ id fdf9167a-e7dc-11ec-bd2c-47488cf2e6aa;
+ Thu, 09 Jun 2022 12:14:48 +0200 (CEST)
 Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
- by smtp-out1.suse.de (Postfix) with ESMTP id 317C521DE0;
- Thu,  9 Jun 2022 09:16:52 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTP id 8501C21E03;
+ Thu,  9 Jun 2022 10:14:47 +0000 (UTC)
 Received: from suse.cz (unknown [10.100.208.146])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by relay2.suse.de (Postfix) with ESMTPS id B45BB2C14F;
- Thu,  9 Jun 2022 09:16:46 +0000 (UTC)
+ by relay2.suse.de (Postfix) with ESMTPS id 311FB2C141;
+ Thu,  9 Jun 2022 10:14:40 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,16 +46,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e65cface-e7d4-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: fdf9167a-e7dc-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1654766212; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1654769687; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references;
-	bh=d57/DrqDiiJ2foYz2ew+5Cqn+PqODCYrsHqzu7X2C2Q=;
-	b=fo+sYmFjpmQOmpyD3JvJl9AYNinBjxAVeUE+HbamyvnKBmUJ4aJ/YSAu3A8+CqB7Ibeuz8
-	5d8JOsM43+X+4Im3fKziKImYEhGOTr+/e/e7kKF981tYnqb1CU7vBLnpyqhaj1HOQaPm0q
-	8dfR9EB/TBh2sOsSKiFiTu8q7nOVsPQ=
-Date: Thu, 9 Jun 2022 11:16:46 +0200
+	bh=DrcvBEFljM5p6TtbSeEidSTZ/fg57f/9Kkfw39rL09Y=;
+	b=DMcdvAORR690fi8pr+U8fk3+hyZsj7Tt5x9qwl047KjZChmxVjUcAfS5VoE+jvBI94jRA8
+	x1qWl9NmnYPcL1/wsN/jGmXJEl3+KOTwVVBHmebd33G6ciWPS6jZdzz9VOlvQCAFmLQ8Zj
+	Z7XOIERpCYK8sshW0SQuT7wCuIg0KcE=
+Date: Thu, 9 Jun 2022 12:14:42 +0200
 From: Petr Mladek <pmladek@suse.com>
 To: Peter Zijlstra <peterz@infradead.org>
 Cc: ink@jurassic.park.msu.ru, mattst88@gmail.com, vgupta@kernel.org,
@@ -115,13 +115,18 @@ Cc: ink@jurassic.park.msu.ru, mattst88@gmail.com, vgupta@kernel.org,
 	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
 	rcu@vger.kernel.org
 Subject: Re: [PATCH 24/36] printk: Remove trace_.*_rcuidle() usage
-Message-ID: <YqG6URbihTNCk9YR@alley>
+Message-ID: <YqHIEthhhi5e+Mtb@alley>
 References: <20220608142723.103523089@infradead.org>
  <20220608144517.444659212@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 In-Reply-To: <20220608144517.444659212@infradead.org>
+
+Sending again. The previous attempt was rejected by several
+recipients. It was caused by a mail server changes on my side.
+
+I am sorry for spamming those who got the 1st mail already.
 
 On Wed 2022-06-08 16:27:47, Peter Zijlstra wrote:
 > The problem, per commit fc98c3c8c9dc ("printk: use rcuidle console
