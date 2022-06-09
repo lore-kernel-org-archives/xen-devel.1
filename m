@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6CB3C433EF
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 10:18:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.344895.570514 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D81DC433EF
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Jun 2022 10:19:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.344904.570525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzFFZ-0002qj-7k; Thu, 09 Jun 2022 10:18:49 +0000
+	id 1nzFGS-0003UR-GQ; Thu, 09 Jun 2022 10:19:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 344895.570514; Thu, 09 Jun 2022 10:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 344904.570525; Thu, 09 Jun 2022 10:19:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzFFZ-0002qc-40; Thu, 09 Jun 2022 10:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 344895;
- Thu, 09 Jun 2022 10:18:48 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nzFGS-0003UK-Di; Thu, 09 Jun 2022 10:19:44 +0000
+Received: by outflank-mailman (input) for mailman id 344904;
+ Thu, 09 Jun 2022 10:19:43 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=jWvP=WQ=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1nzFFX-000264-OF
- for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 10:18:47 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on0625.outbound.protection.outlook.com
- [2a01:111:f400:fe0d::625])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8c3db64c-e7dd-11ec-b605-df0040e90b76;
- Thu, 09 Jun 2022 12:18:46 +0200 (CEST)
+ id 1nzFGR-0003U3-MK
+ for xen-devel@lists.xenproject.org; Thu, 09 Jun 2022 10:19:43 +0000
+Received: from EUR03-VE1-obe.outbound.protection.outlook.com
+ (mail-ve1eur03on0615.outbound.protection.outlook.com
+ [2a01:111:f400:fe09::615])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ad4bb61e-e7dd-11ec-bd2c-47488cf2e6aa;
+ Thu, 09 Jun 2022 12:19:42 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by DU2PR04MB8790.eurprd04.prod.outlook.com (2603:10a6:10:2e1::23)
+ by PAXPR04MB8559.eurprd04.prod.outlook.com (2603:10a6:102:216::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.13; Thu, 9 Jun
- 2022 10:18:45 +0000
+ 2022 10:19:41 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::dfa:a64a:432f:e26b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::dfa:a64a:432f:e26b%7]) with mapi id 15.20.5332.013; Thu, 9 Jun 2022
- 10:18:45 +0000
+ 10:19:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,29 +49,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8c3db64c-e7dd-11ec-b605-df0040e90b76
+X-Inumbo-ID: ad4bb61e-e7dd-11ec-bd2c-47488cf2e6aa
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KzbRGGGfZwiRpIwszqMeYG8MPArqTM5DUedH7Qsip/Lvz9fntrSo5qK6j3Y3+iNMm7flGN8k5VZWUcmNjAVHOMpFjYdxJNH9a3sfksECBRoGZzNOOUDvichbN0SdFfgcht3B+Jb3xVA8dM1h5C4ECSW9rKmJatknbn2g/uIsalNo65OSOQvSxPYcUpcRU7Eik3kEIJJEDzt12bgHFWCmg8J7hcIHy+z9VQvBWJgx7aHlcxedXqpuBj7D+Fnems3v20HzUtx5tOWT8t3ClO4s8zxuFlzLnRuPpkh6yySlTS0LHnIszx+TYIil4c7zpP8/DA+PB/MARAVrmIxAdxC1hQ==
+ b=OSG56MYUeDTBjUZtKwynHQfPfGEbVYGWxTbP6fxJb2xBFGwpc8RPGlHipIOoRbTs2z+84O98tlYeDS2415adZqc9yrH9Q7JATFDiNQJTn+cgu67jCEQ6z8B2YbkGwi/sjFkXJOyhZmx518gTx5qOw7hdOHB2yEjHsW8If/Qdh4TaN0QToQNwIiWM5QY5qR/skCVaR19bxGYnbfGyvzEM/7Kn3I8rh0ptF0ZpNw9OLAWlY7HRVK/aMFD4agRFBbO8toP3iuG0x1nr/c5+kzM4ZPjxw4sEdnqapD6eTZdMq8kqkLTqqCfypLul0OXwEG4f/fpKR+StgEmfRHU7YESrfg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=nzH6EFMW+e3+Xs7xettJZg30tav9rjlAdUzEqGTjlFU=;
- b=WZq5xNk8k/aZ3WAC/pYR7TnmZ9xZMUSFIMmIaPf57q9RAoDl1q3HjOqTpa8QBgos0DCAKwF1OsEHzHpNIdDh1bDsLbJiAVmZMOUox8USRh5GUdERceYfuXJUbOxUss4dtE2OLJF0NVBHkO3jGlma14Kl9WmfNgNzUn4flyvGSc2bPhBYVA+H710l6I1boKDcJT9MctbhldV3gbiPyAkxWw9YgYLczhfZlQjKPHrJ0q5e80l55A32363DYcp9p0IjfUlZOpuSmuoQW4LpqLPXUqvGUSuPItzbeKdOU3qzm4CpMqF9XHfMLafTLzwC6eAL2eaHYyREMLyLLj9Tvcbpww==
+ bh=i1SRbMZ5vtUn4A75NysmPVCeWEjl1KBkL8Pu3NNkQeY=;
+ b=QUtiBQexOROx22dYmxZBzyjk2js3wpx89FbfdPCf8rMCZtTY50PYyAyB+ifoyFLuhYDYXnkckF5gQkED1WsaZOJYRsL6abetr1Zy/GOkmCcFQA0dNXgctURr3uHKXRmWUuRRgXPYzr0g4uah9tMo3zuJdQZ7nfONHnORaffzeQ/qKm5BMJhnTsfSOmxKBXiJehseRrf5/abjQ5HdChlhGK7H+dFxJDoDbtV+jex4dg0Y2iqQ9w1pkKP92KgWRT7S25qBZqmhnmwHocEKw7dhF4XOqKAzjTTJYanip2LunAoT7xLQSGZpaYo07BFoA0HUztibU4pce5LTa23nycInhg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nzH6EFMW+e3+Xs7xettJZg30tav9rjlAdUzEqGTjlFU=;
- b=4ZIAI3IbTXjtYrTEodr/B8hdhaiWqSTIbRjV4Z4RitEQjM5oW1qIzcdvimWGLFdUreD28VPzgpq8m6BSTjTgUY9VlYtFkny9QuQ1zQ+pwvWQagjc0LagpCDTP2l/CSJDnJcYPiR2R4Wlo4pZHblefDpvKMwJBNwCDH64AMOvJe6kWFJoRptRvz+cVo7XDMI3DM1XPStpgfFP3EQ3SJLsiOKDPP0GqVZHjeJvDd2+sCgo2KsL48r02hJvzFP3OgTt9JIZzCJ4Tmhvn29yYVyCpVEvZqCIl41QjWP683KmclSEmq2vdajNomjcnm41+Rcjmu9h2XNJ8xOFbAkopo0zAw==
+ bh=i1SRbMZ5vtUn4A75NysmPVCeWEjl1KBkL8Pu3NNkQeY=;
+ b=4RD3TPjgOKvP/ILG99eZi6mlFo40A8sfUPofFnLfdgg/N5df/3FsMxA+6EzC80EDGAotxahVFTMwceuAUmGik0JsTQ59oTTbqMdQuf+7i1bdIZt3rv9nEnrMDDXAnjf4nrIX/gITLkwnrKBU/mO2UNlwbhulFc7FfgTQqe4Ky/Ns3PZGkaLRX0InBOvJFhbdzb6/vnD/tXDteyzM16UBGuIcElAHTjfAgHEw42sDbX50YR4EfIWk7KIa8+OgdEIgGTYyrjsD7gDBzE7xr9gpxYyzYddi7OR5hI49kBx8N5uwhaUbd090v2i2FP6zPn+DqIUFh22AahTa+1k+je9Z3w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <4932f8c0-26e5-4289-ef7b-6bba27a9216c@suse.com>
-Date: Thu, 9 Jun 2022 12:18:43 +0200
+Message-ID: <730648db-7a2b-ce0c-675d-cddca116474f@suse.com>
+Date: Thu, 9 Jun 2022 12:19:39 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.10.0
-Subject: [PATCH v6 05/12] x86: introduce helper for recording degree of
- contiguity in page tables
+Subject: [PATCH v6 07/12] AMD/IOMMU: free all-empty page tables
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -81,210 +80,181 @@ References: <e873e30c-7a04-a8a3-2fe5-0dda30e654fe@suse.com>
 In-Reply-To: <e873e30c-7a04-a8a3-2fe5-0dda30e654fe@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM7PR02CA0029.eurprd02.prod.outlook.com
- (2603:10a6:20b:100::39) To VE1PR04MB6560.eurprd04.prod.outlook.com
+X-ClientProxiedBy: AM7PR03CA0028.eurprd03.prod.outlook.com
+ (2603:10a6:20b:130::38) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: e503443c-0bb0-4455-9fcf-08da4a016f84
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8790:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0449f426-36e3-4ae6-e953-08da4a0190d1
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8559:EE_
 X-Microsoft-Antispam-PRVS:
-	<DU2PR04MB87904A21E836293CE8338C63B3A79@DU2PR04MB8790.eurprd04.prod.outlook.com>
+	<PAXPR04MB85595A340B7754680CCD7A7EB3A79@PAXPR04MB8559.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	5MoHlvozFHMcq9CkQ4I7r6cMveOku/ksD7Vy+IoIccFLbt5RgtEZOyFAIACS3pQsuqyHUHsqLcYnguZC8Q228BrumWB3OX0jEMAtmJcRBoFVhhVKtpQR8jb0fM9Z1VNEfFwD4S7SpJl77AFzCn1LdO++RmURUKfd2qRv+ZZ4Nx3Jv8WJlWWw86c2XyB3wpwoExRRSPxkLwhbnarTqnO7Jh8jB5y6wZRA/CjnvY7leO3Hlm9cSI2J3boSpiyL5dbUILq8mG6gC7mzcu6Lx0hOk2aPlb1GtsMzRfG68wK9FDL6+IB6s+EOlgswN+9KD1Xacn5i9IlGDPvFO2R9MDWpptJw/6ZkoRtBO6W3hCBMmMy2FRG4M/N6TVT6lNBn5j8ya/HaH/SKm03MVTLqpkYb0AkvisBUps0xbfKyXb29yypNn4Fx3V/1fEjcobY35M+Nk4ztZx4cI/YD9VwSUAkBuqjx0snTk7MUPhFzcVv/s+Na08gj27xLVkK9sVyr4I7GKtXsPt3EGGtvcZ3DLder9JnPgmrNLTAEvOXcU17XbdggLvpdSt/UwR6VQzExtRotxQGc6rxtcW7k4nKheYkkIgNvFPdt19QXqEy5HrFNgj0oV0DdWkD/1uxw4tTk6xoOXogaIkFeH4Ne6xIlAqa527jIkVVvxUrqlfIyuH3dzIsamFbsFQKkYIFavbQhEj42yN7xGNEXvRTvr6c2/N/haCUVhEw6c5qi6+k3cznW74XQO5gRfWLqomA6DQ+ggSGB
+	RVsT2Ku1jdNEZbZ0N+GhSIS70NTG05KKVgjDtwjuB34wV2kaSpVewDZmpdz8jOyTXae42iLJB7/oNVZlQRissuEHdWF2JimEAsyf3Q7NhMvl6tAa5ERLjvovoFnjRbWcksIvIhGPStuqelZlQhtmgmPSQouZ6vC7dPqEdGvKr30FR3KF5SiUBKXDacTehgZ+y92wDCDf8HdKODs+2Fj28QC8gehcwFgAXM1nWBK739/MrVfX1rNdUA2miU9tPaoSRa6xyx59k0t7n58CpHu+GQm6VQGqag8duZfUmrjY+Aw/5sZJpTJfdr0A++NGVSLs4rgz+9Aqqk5PuJ452xVVcmDOTj0o4o8WbQ6LBTEOYLh7vO00pFueCv3aHmFfvCC1OB5oUyilArrQEzIx51y4vP2kJvN6qgIo8HnBUW0gUqkt2uqcg9lm5ZsGUAvyD0MVi/ivwiEeJB/kVI30qUDhs1MWbhV6Sqe2sSscrCcvZlNpyNae88SKgPEkOcXC5HaNFa7OTFtslJDvmUrgqx1zV7gnVpwP3IEzY2i12PPpSQIlsBH4oREhdiHY2g3MiK7Ifc7LSwXxbeo4mrL6fhay9ZlaN2Oj5EfBWggkodtIwHyc06w8jPHtRdz6CNjJGS1zldcGCujLiz84cMC6wRIibu8cwJt8vO21Ix7tJKgwzolm0ZiYtbhT6DiRaXf+RDTxrsam9fbAckj2ZTWka5KAAYi3pK3DtU0ouutCHus0mcA=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(26005)(6512007)(31696002)(6486002)(6506007)(5660300002)(186003)(66946007)(83380400001)(2906002)(86362001)(508600001)(8936002)(36756003)(2616005)(38100700002)(66476007)(66556008)(8676002)(4326008)(6916009)(316002)(54906003)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(316002)(36756003)(66476007)(66556008)(66946007)(54906003)(6916009)(8676002)(4326008)(83380400001)(31686004)(6486002)(86362001)(5660300002)(6506007)(2906002)(508600001)(186003)(2616005)(38100700002)(8936002)(6512007)(26005)(31696002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?SExaRnlnbnRrcmxneEpKM1NKNzVvZUJVWnd4bTkzWSsvRi8yTjFJT1hVZ2s4?=
- =?utf-8?B?Zmg4LzA0eHlUOUoyYzZzNmpsMjFGRG5BbTRPSjlveWxuNkhJM3dUQ01UV0RL?=
- =?utf-8?B?VVlXOEdWOGxQNTZNMng0d2VLd2dWekFPVEoxcGhOdUdrK2VmL1RSM2tMMTVW?=
- =?utf-8?B?R2FUWng3K1BoRGZUUE1pNWxFMHFyWW0wVWdkd3RxK1BlaDZuWllGdTNsdWF2?=
- =?utf-8?B?WVJxT2ljTllZQkNqR2ZoQmNtdWx1MU5JWWlpY05XekN5cWxZbk90WlRPeGFh?=
- =?utf-8?B?bHNwVVZ5bU45V2hSdFl0L3YvQ2RLeTZmcFl4TnRiQmVDeTNuZyt2MnB6aE1B?=
- =?utf-8?B?UTRUN2JKTnNuYnBqRVZ6SWdJSkdoZWtCaFJMcWZaeU82VTRraHJqOHBqOGVG?=
- =?utf-8?B?UTRYU0JuNGk1dURkeW9pRE5BRXZZNFhCQS9sNFZZYlYyNnJqZnB4MHRyeTlU?=
- =?utf-8?B?WEs2RERRTXluY2RXOWxYT20yb3hiTnJoNVdRYVlKMmI3YXdFRTNzcHVFdjU0?=
- =?utf-8?B?N3lTNVZnODJ5WUpYT3FIMFMxSkdjM3pmcjNJQm53Smw3ZWRXMldSZUNPTUFL?=
- =?utf-8?B?eUlSb29Ga2V4aERabkhJM1JQWXV0bDgyNUpCa2lmTHNUY012eUtrNkRyaUFp?=
- =?utf-8?B?cHVtWi9wMkVtQ08vUDdKNkhoalVaaitLYjV5WTExelFJTWcwWmxSYVlQbG5T?=
- =?utf-8?B?OGFaTXJ4Vlc0aWs1V20weUxlMzdnTE9ZeSsxWGZOZUdVMS8vMHZPOGR6Ymsx?=
- =?utf-8?B?ZDZRbHpTeXQvY2F6UVpBazlEK2ljUVpwallPVDhiUlBkdWF5czFLajI0MlZp?=
- =?utf-8?B?UTIvcXhTQXUwbndGM0ZKSkM1MWI4QmhPRUtuRXhoR005RXpBbTErMVNoSTFR?=
- =?utf-8?B?ajJWaTVBUDZqRjhPdUdFamtzTjEvYUFpNUxQRWV2YVJHRCtjWVFrZXJlSjBP?=
- =?utf-8?B?bXRIaW1vRi9XQ0FRdndFeDVFVGZzeS9EQmdtUmFJSUxYZ1RES3cvTTV2RmdF?=
- =?utf-8?B?ZU9ZdGhKanI5dUV3SEIyWUY5Y1IrdWpuakVjZFZTVnlVTzhFVHMzNEo0djdI?=
- =?utf-8?B?SzdmNUExSk1JeU5LVG9iN2RZaUp0QmxCaHpqdHBuVVQxSENIU2VpNWRFdm80?=
- =?utf-8?B?ZlFyTklFZ2pPeGxHa1hPZ3M4bCtWNkNmdXFrbVZzb3VUUTFHUXlLenNWNGVY?=
- =?utf-8?B?RDdkYVVLODVXcDcyT25GR3VDelRMd0piUis2bU9MQ0Z0VVdSTG9mRU5FNjUr?=
- =?utf-8?B?eW0rVHVNYmx5UWh1eGlsVU9zdE1tRlFXeFh2bjdiOW4rU05vN2JrRUhHTlNS?=
- =?utf-8?B?SS82eTlhVlV2dzNja3laeUJ1bkRHSk9sQ0ppWS81Z3NGSDBodzBoSnJvN2Jo?=
- =?utf-8?B?ZWpVK2xnZDg4SXJGL1NxMk5tZkxWVzhXMm55UDZQekgwVEhlbjNyVDF2cTZz?=
- =?utf-8?B?czk4U3VobU1rNlJ6Z1RlanVxbE9NYWtLLytta3hTRmtmYWR3R0JtOXlobFIr?=
- =?utf-8?B?Q0pERkZuU1VzeW1zYk1ES1k5c2sxUUJDbnpYVXZLdkZpRjVQaWp4Tk1DR0hv?=
- =?utf-8?B?Q1lHQTBjY0NCZUtvVjc0SmhvNzdDdFlmVU5WYWxKQS8zUXV3OStOYzZrbWRP?=
- =?utf-8?B?elM3RmIvZ3lsMVozTUcwQk1qTjlXZ3gvL1ZWSCtEK0MrSkh2TjZUM1VoMFo3?=
- =?utf-8?B?OXRYY3JyZkM5VVJZbUYxdVhBeHkyMmw2cHpDTHpvNEhFcXc0Yms4REJUaWdB?=
- =?utf-8?B?WDB2UytqYXFmUHFkMkpXbUxkMmhBOVVwVGVQbWdTOFluTXJzQVY2WVh5WVhI?=
- =?utf-8?B?WStucm4vTFBvamp4Uk00WWtYNjZCOW15ZzNOVi9wOHo3Zm9lUmJoMktsMTlX?=
- =?utf-8?B?azZ2ZWFLMVQzOEowOTNQcGpyTWUwbzZhaEVNaWxsL3NpN25GdGR2QlcwYmh3?=
- =?utf-8?B?R0RobmRLZVV2Ui9EY1R5V09ReVMxZGlyOFp3MWtzVldtMjl4c25LekRDeEY3?=
- =?utf-8?B?bHJ6eWxzMUcwSERXU3dEeEoxR3FtZjBYOEFJTFZWVVMwSGRWNFlBdS9jU2F3?=
- =?utf-8?B?QW1xSVpnenl4K2N3RnhqMHQ2UHZGdDhpQU5lemZ1WmNuMjlkbkhnSTEvM3Na?=
- =?utf-8?B?QkNJTHpBNHZQOWZQQ3htNFVxNHFMNXB3Vi94b1ZOYnlVa2J1V2g4Zzd5VUFw?=
- =?utf-8?B?MitJbk1NRDhsS0VWd0Jnakt2eTVnWTNDVTVXbU15UlRwMjN0SEF4OEJCYmZ6?=
- =?utf-8?B?UnBTcTdTTnFYWTYzbUNjM3g3Ym9teG5ha1QxRXl5Yzd0OHRYYjEya01rd1Rp?=
- =?utf-8?B?WjBnSUZMbjM3MEk1ZzQ3c3ZuZlJoalpXNitVOWQ4a1pENXQ2TnBqQT09?=
+	=?utf-8?B?Vm03bERUYk5JNTFTaGc2SFpPL3NtSWZxRFJaS3dpS25rbmZRS1NkUDJaVXNG?=
+ =?utf-8?B?UU5ld1RDMUhCYXRDUGdEcmJPWUVpbndrVWVmS1ZLOVRzOXpyYmd2ajBMVmRI?=
+ =?utf-8?B?ZlAvTExmV0VsaExEMEdLTXdBaTJqeEkrYW9pNmEwbkwrY3VpUXNONVNEdTJP?=
+ =?utf-8?B?YmVkZWMybGl4NEY1cHVnNVNMQ2Z0UnNTN21tVTNDcjIyc1o5U1c2OHlLL1V3?=
+ =?utf-8?B?TWtVT25iMlQ0U2pFcm1xYjhjWTc1NTVXTFpvb1ZQdVJKUXlVZUNJcTVITmd3?=
+ =?utf-8?B?SjBrVmlsV0FaQUh4b3FsR3M4bmJnQ2VDcE01TXNMYkFVZlFnaEZqUzJRV0lx?=
+ =?utf-8?B?a2JYK0Nxc3pUUVdVelRPUW9Oa045VVJnZjErYU1kSCtLaVJNMlJWN0xYZjJx?=
+ =?utf-8?B?S29vTDl3bjJKSmw1WFBVU3hsaEZxUEduSWhlU1RySThaeVk0YXhNL09mQ3pa?=
+ =?utf-8?B?eDN3ZWkrK3lxTmdyRVVObkNvait5VjNxZnIvRG52S0gxdG1ZY1JVci8rRXFj?=
+ =?utf-8?B?U04rYmVLZFd3bG9hbFFNSGY2Z3RkRWtuaWJWK1g0QmVSUXFLalFHMGNsY1BF?=
+ =?utf-8?B?V1VnQ0N3U2t4NjRyWkZ3NEJVNUE1TjJUQU9XU2VkYXJZZkJSZERyVG9kVHdj?=
+ =?utf-8?B?aDBoZDJvRnhDWG4wZ1JIVWpPL0ZUU2IrdWRKUEJzS0xXREx5R2VyNktydi9m?=
+ =?utf-8?B?N081SDNJMkNBYmRrdmkvTGlKVlNzd0FMOGRZUUt3UGxyZzE0RHFMeDNhSWtE?=
+ =?utf-8?B?UW1OTi9nSDMrRmErWU1peThGUmtHN2xqKy9KVG9IOGFFK2QyNDJMOUpVdVVX?=
+ =?utf-8?B?ZEs3bFJieXlPNzA1ODhlNlNWUnA4Zlp3T0FCWE5IZnVvZFBsSFg1VE44N2wx?=
+ =?utf-8?B?OVdTOUhPVlpScTR3ZVBtSWVsbE80Uk5yeFRTUkFpKzlTdDFnVTAydk95eks0?=
+ =?utf-8?B?bXNSNDBNMkNBSHV6U28vVm05SHBCcktud0FuM0d0b2YxMFpBdUE4YThYbWJK?=
+ =?utf-8?B?L01ZcVFFZDQxVmtIczB0OVRSWmNPN01yS0N4a2lRYjVKekhxdEMveE82enpm?=
+ =?utf-8?B?ZG5qQXBXMVRUZHRmT0F1YlVaWGZGK0dsdjJETUMwTHlMeGtjQTcxdVJCb3F3?=
+ =?utf-8?B?UkwxQzcvaWVFRUFsaGdxcVFNTExkSWcwWmJpa3laQTZFdnZKN1ArRGdBVk53?=
+ =?utf-8?B?WnppSFlxeVFxbDEvL3RzdGtwdjl1Unc5ZXljL3gvRUc3VnBUQzROeUwwdjVU?=
+ =?utf-8?B?S2JYSkd4RVkzNFdnTlZGQTJTVkNLYWpTQ0RxRDZadm5HcnQxdEVRNVBrd09a?=
+ =?utf-8?B?UkorV05BYnVRWEg0dFlWK3Y0c0FZbG9CVFpaY1o0YTdjOTdPbFJtTGxzcTRp?=
+ =?utf-8?B?aWkrV0NERXZNODExRXlSeEdaeEJSQ2tRM3JwVVFjM1M1a1RLZTVpK3BNbUVY?=
+ =?utf-8?B?eFl6V29CN250cFFHRFBrbnpET1RhWS9ZWnJ4RHo1eVM3c1Vtcis0ODdTb0dY?=
+ =?utf-8?B?bUFXKzl6YzZTQjllVjc1S3Nsek9OL3RpNWVOT25Zd0hTZzVIVHdIaG5mQW5y?=
+ =?utf-8?B?c1hmSDM2OGgya2VkSW15ZDJ2azBLZnU5RFNGMmNSeEEvSFZMYlJwUjVRc0Mz?=
+ =?utf-8?B?L0s5RWpDRi9Bd0lyNFZIczlQbGJmcFh6Q29xNkQxclpCZDVmR3V5NkEyaE9M?=
+ =?utf-8?B?K1h0UEVIQXBVSWxzM25SaTh2eDJ2RDZKVjZsVXF6b1gwV0FwWEN3S2Z1U0l2?=
+ =?utf-8?B?WEsvNnIrNnhoRzZyZG1Fa2dYYy9zZXJURHFBWlp5Um5VaW13Y2tBajJVRDUw?=
+ =?utf-8?B?ckozYVZySUJIZzBUaFhWSTg5MGFSVVJhTFJZMndTREk0WU5BYjZKTTEzVnRw?=
+ =?utf-8?B?Q0FKNlplY1gwaHN0M2JHM1NYeWZXd3NOai9GQVBpOTV5RG12ZlpqelNXcW55?=
+ =?utf-8?B?Lzk2YWFOL3podFJzbzVSeFVEUlYrc3NwSVU2NGNMY1ZienY3Um1VbGduY1R2?=
+ =?utf-8?B?RE0zYVMzc1EyN3IrUXc4RDJ6bk1rN2poWVdmbUJodS9JbW5sQmFBY1ZXbUJh?=
+ =?utf-8?B?VE0zS1pDUXNObFZCSEJvRUJiYi9PSStwaDIwRDNkT0huNWJsWXVBQjg5YTQ1?=
+ =?utf-8?B?UGYraWlpQ2J6Vno1eW93RzFOd2FXSGpka1BReTN0U1RrUHRuNDZYWXpwV2lZ?=
+ =?utf-8?B?U1NwVHFVS2pWb0l0TUFJRXBLejNRcDBKK0RFa3VMb1VST0JFNDZKTUk3cTAw?=
+ =?utf-8?B?QjFPaDlmNzNldGxYRXl4UUk3L0JNdWNMQ01oLzhIeW9zdkxQTWdnVktNSXU2?=
+ =?utf-8?B?WjRUQy9qTHZscW5uaFFBVTRWTElOaktnbW02aWNFbVFzYVAzWHVjUT09?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e503443c-0bb0-4455-9fcf-08da4a016f84
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0449f426-36e3-4ae6-e953-08da4a0190d1
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 10:18:45.3981
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 10:19:41.2851
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ozcmZ5vgmGKPwYSYcnY6JQ3eJ9ICOyayjUBhirOlZEyIgVol2GxN6TZ+rkZN8oXwO911m/h/2HNJzkn2AlrXqQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8790
+X-MS-Exchange-CrossTenant-UserPrincipalName: X59Sn3qNiA4CQ9aWhDZL50U5FAq0MK/9X1RIsdI9z5SMoTXLTUE5kh4u+29rMXaG7rr+SrZCHimj5UB44Eijsw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8559
 
-This is a re-usable helper (kind of a template) which gets introduced
-without users so that the individual subsequent patches introducing such
-users can get committed independently of one another.
+When a page table ends up with no present entries left, it can be
+replaced by a non-present entry at the next higher level. The page table
+itself can then be scheduled for freeing.
 
-See the comment at the top of the new file. To demonstrate the effect,
-if a page table had just 16 entries, this would be the set of markers
-for a page table with fully contiguous mappings:
-
-index  0 1 2 3 4 5 6 7 8 9 A B C D E F
-marker 4 0 1 0 2 0 1 0 3 0 1 0 2 0 1 0
-
-"Contiguous" here means not only present entries with successively
-increasing MFNs, each one suitably aligned for its slot, but also a
-respective number of all non-present entries.
+Note that while its output isn't used there yet,
+pt_update_contig_markers() right away needs to be called in all places
+where entries get updated, not just the one where entries get cleared.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-v5: Bail early from step 1 if possible. Arrange for consumers who are
-    just after CONTIG_{LEVEL_SHIFT,NR}. Extend comment.
-v3: Rename function and header. Introduce IS_CONTIG().
+v5: Re-base over changes earlier in the series.
+v4: Re-base over changes earlier in the series.
+v3: Re-base over changes earlier in the series.
 v2: New.
 
---- /dev/null
-+++ b/xen/arch/x86/include/asm/pt-contig-markers.h
-@@ -0,0 +1,110 @@
-+#ifndef __ASM_X86_PT_CONTIG_MARKERS_H
-+#define __ASM_X86_PT_CONTIG_MARKERS_H
+--- a/xen/drivers/passthrough/amd/iommu_map.c
++++ b/xen/drivers/passthrough/amd/iommu_map.c
+@@ -21,6 +21,7 @@
+ 
+ #include "iommu.h"
+ 
++#define CONTIG_MASK IOMMU_PTE_CONTIG_MASK
+ #include <asm/pt-contig-markers.h>
+ 
+ /* Given pfn and page table level, return pde index */
+@@ -35,16 +36,20 @@ static unsigned int pfn_to_pde_idx(unsig
+ 
+ static union amd_iommu_pte clear_iommu_pte_present(unsigned long l1_mfn,
+                                                    unsigned long dfn,
+-                                                   unsigned int level)
++                                                   unsigned int level,
++                                                   bool *free)
+ {
+     union amd_iommu_pte *table, *pte, old;
++    unsigned int idx = pfn_to_pde_idx(dfn, level);
+ 
+     table = map_domain_page(_mfn(l1_mfn));
+-    pte = &table[pfn_to_pde_idx(dfn, level)];
++    pte = &table[idx];
+     old = *pte;
+ 
+     write_atomic(&pte->raw, 0);
+ 
++    *free = pt_update_contig_markers(&table->raw, idx, level, PTE_kind_null);
 +
-+/*
-+ * Short of having function templates in C, the function defined below is
-+ * intended to be used by multiple parties interested in recording the
-+ * degree of contiguity in mappings by a single page table.
-+ *
-+ * Scheme: Every entry records the order of contiguous successive entries,
-+ * up to the maximum order covered by that entry (which is the number of
-+ * clear low bits in its index, with entry 0 being the exception using
-+ * the base-2 logarithm of the number of entries in a single page table).
-+ * While a few entries need touching upon update, knowing whether the
-+ * table is fully contiguous (and can hence be replaced by a higher level
-+ * leaf entry) is then possible by simply looking at entry 0's marker.
-+ *
-+ * Prereqs:
-+ * - CONTIG_MASK needs to be #define-d, to a value having at least 4
-+ *   contiguous bits (ignored by hardware), before including this file (or
-+ *   else only CONTIG_LEVEL_SHIFT and CONTIG_NR will become available),
-+ * - page tables to be passed to the helper need to be initialized with
-+ *   correct markers,
-+ * - not-present entries need to be entirely clear except for the marker.
-+ */
-+
-+/* This is the same for all anticipated users, so doesn't need passing in. */
-+#define CONTIG_LEVEL_SHIFT 9
-+#define CONTIG_NR          (1 << CONTIG_LEVEL_SHIFT)
-+
-+#ifdef CONTIG_MASK
-+
-+#include <xen/bitops.h>
-+#include <xen/lib.h>
-+#include <xen/page-size.h>
-+
-+#define GET_MARKER(e) MASK_EXTR(e, CONTIG_MASK)
-+#define SET_MARKER(e, m) \
-+    ((void)((e) = ((e) & ~CONTIG_MASK) | MASK_INSR(m, CONTIG_MASK)))
-+
-+#define IS_CONTIG(kind, pt, i, idx, shift, b) \
-+    ((kind) == PTE_kind_leaf \
-+     ? (((pt)[i] ^ (pt)[idx]) & ~CONTIG_MASK) == (1ULL << ((b) + (shift))) \
-+     : !((pt)[i] & ~CONTIG_MASK))
-+
-+enum PTE_kind {
-+    PTE_kind_null,
-+    PTE_kind_leaf,
-+    PTE_kind_table,
-+};
-+
-+static bool pt_update_contig_markers(uint64_t *pt, unsigned int idx,
-+                                     unsigned int level, enum PTE_kind kind)
-+{
-+    unsigned int b, i = idx;
-+    unsigned int shift = (level - 1) * CONTIG_LEVEL_SHIFT + PAGE_SHIFT;
-+
-+    ASSERT(idx < CONTIG_NR);
-+    ASSERT(!(pt[idx] & CONTIG_MASK));
-+
-+    /* Step 1: Reduce markers in lower numbered entries. */
-+    while ( i )
+     unmap_domain_page(table);
+ 
+     return old;
+@@ -87,7 +92,11 @@ static union amd_iommu_pte set_iommu_pte
+     if ( !old.pr || old.next_level ||
+          old.mfn != next_mfn ||
+          old.iw != iw || old.ir != ir )
 +    {
-+        b = find_first_set_bit(i);
-+        i &= ~(1U << b);
-+        if ( GET_MARKER(pt[i]) <= b )
-+            break;
-+        SET_MARKER(pt[i], b);
+         set_iommu_pde_present(pde, next_mfn, 0, iw, ir);
++        pt_update_contig_markers(&table->raw, pfn_to_pde_idx(dfn, level),
++                                 level, PTE_kind_leaf);
 +    }
+     else
+         old.pr = false; /* signal "no change" to the caller */
+ 
+@@ -326,6 +335,9 @@ static int iommu_pde_from_dfn(struct dom
+             smp_wmb();
+             set_iommu_pde_present(pde, next_table_mfn, next_level, true,
+                                   true);
++            pt_update_contig_markers(&next_table_vaddr->raw,
++                                     pfn_to_pde_idx(dfn, level),
++                                     level, PTE_kind_table);
+ 
+             *flush_flags |= IOMMU_FLUSHF_modified;
+         }
+@@ -351,6 +363,9 @@ static int iommu_pde_from_dfn(struct dom
+                 next_table_mfn = mfn_x(page_to_mfn(table));
+                 set_iommu_pde_present(pde, next_table_mfn, next_level, true,
+                                       true);
++                pt_update_contig_markers(&next_table_vaddr->raw,
++                                         pfn_to_pde_idx(dfn, level),
++                                         level, PTE_kind_table);
+             }
+             else /* should never reach here */
+             {
+@@ -487,8 +502,24 @@ int cf_check amd_iommu_unmap_page(
+ 
+     if ( pt_mfn )
+     {
++        bool free;
 +
-+    /* An intermediate table is never contiguous with anything. */
-+    if ( kind == PTE_kind_table )
-+        return false;
+         /* Mark PTE as 'page not present'. */
+-        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level);
++        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level, &free);
 +
-+    /*
-+     * Present entries need in-sync index and address to be a candidate
-+     * for being contiguous: What we're after is whether ultimately the
-+     * intermediate table can be replaced by a superpage.
-+     */
-+    if ( kind != PTE_kind_null &&
-+         idx != ((pt[idx] >> shift) & (CONTIG_NR - 1)) )
-+        return false;
++        while ( unlikely(free) && ++level < hd->arch.amd.paging_mode )
++        {
++            struct page_info *pg = mfn_to_page(_mfn(pt_mfn));
 +
-+    /* Step 2: Check higher numbered entries for contiguity. */
-+    for ( b = 0; b < CONTIG_LEVEL_SHIFT && !(idx & (1U << b)); ++b )
-+    {
-+        i = idx | (1U << b);
-+        if ( !IS_CONTIG(kind, pt, i, idx, shift, b) || GET_MARKER(pt[i]) != b )
-+            break;
-+    }
++            if ( iommu_pde_from_dfn(d, dfn_x(dfn), level, &pt_mfn,
++                                    flush_flags, false) )
++                BUG();
++            BUG_ON(!pt_mfn);
 +
-+    /* Step 3: Update markers in this and lower numbered entries. */
-+    for ( ; SET_MARKER(pt[idx], b), b < CONTIG_LEVEL_SHIFT; ++b )
-+    {
-+        i = idx ^ (1U << b);
-+        if ( !IS_CONTIG(kind, pt, i, idx, shift, b) || GET_MARKER(pt[i]) != b )
-+            break;
-+        idx &= ~(1U << b);
-+    }
-+
-+    return b == CONTIG_LEVEL_SHIFT;
-+}
-+
-+#undef IS_CONTIG
-+#undef SET_MARKER
-+#undef GET_MARKER
-+#undef CONTIG_MASK
-+
-+#endif /* CONTIG_MASK */
-+
-+#endif /* __ASM_X86_PT_CONTIG_MARKERS_H */
++            clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level, &free);
++            *flush_flags |= IOMMU_FLUSHF_all;
++            iommu_queue_free_pgtable(hd, pg);
++        }
+     }
+ 
+     spin_unlock(&hd->arch.mapping_lock);
 
 
