@@ -4,56 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 671A9C43334
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 21:57:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.346760.572673 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43C2BC43334
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 23:02:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.346782.572719 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzmcw-0003vt-0k; Fri, 10 Jun 2022 21:57:10 +0000
+	id 1nzne2-0004P0-Kh; Fri, 10 Jun 2022 23:02:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 346760.572673; Fri, 10 Jun 2022 21:57:09 +0000
+Received: by outflank-mailman (output) from mailman id 346782.572719; Fri, 10 Jun 2022 23:02:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzmcv-0003vm-Td; Fri, 10 Jun 2022 21:57:09 +0000
-Received: by outflank-mailman (input) for mailman id 346760;
- Fri, 10 Jun 2022 21:57:09 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZtTF=WR=oracle.com=dongli.zhang@srs-se1.protection.inumbo.net>)
- id 1nzmcu-0003vg-3N
- for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 21:57:09 +0000
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 437d4bbf-e908-11ec-bd2c-47488cf2e6aa;
- Fri, 10 Jun 2022 23:57:05 +0200 (CEST)
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 25AK4PA3013538;
- Fri, 10 Jun 2022 21:56:16 GMT
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3gfydqxjwx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 10 Jun 2022 21:56:16 +0000
-Received: from pps.filterd
- (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.16.1.2/8.16.1.2)
- with SMTP id 25ALURow035728; Fri, 10 Jun 2022 21:56:15 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10lp2105.outbound.protection.outlook.com [104.47.55.105])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com with ESMTP id
- 3gfwu70apy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 10 Jun 2022 21:56:15 +0000
-Received: from BN7PR10MB2659.namprd10.prod.outlook.com (2603:10b6:406:c5::18)
- by MWHPR10MB1887.namprd10.prod.outlook.com (2603:10b6:300:10b::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5314.15; Fri, 10 Jun
- 2022 21:56:13 +0000
-Received: from BN7PR10MB2659.namprd10.prod.outlook.com
- ([fe80::54fd:3174:8ce4:985a]) by BN7PR10MB2659.namprd10.prod.outlook.com
- ([fe80::54fd:3174:8ce4:985a%6]) with mapi id 15.20.5332.014; Fri, 10 Jun 2022
- 21:56:13 +0000
+	id 1nzne2-0004Ot-FY; Fri, 10 Jun 2022 23:02:22 +0000
+Received: by outflank-mailman (input) for mailman id 346782;
+ Fri, 10 Jun 2022 23:02:20 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nzne0-0004OH-OV; Fri, 10 Jun 2022 23:02:20 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nzne0-0002xJ-M0; Fri, 10 Jun 2022 23:02:20 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1nzne0-0005oC-FC; Fri, 10 Jun 2022 23:02:20 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1nzne0-0002M0-Ej; Fri, 10 Jun 2022 23:02:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -65,158 +44,210 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 437d4bbf-e908-11ec-bd2c-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2021-07-09;
- bh=Ah1q/mlyzuwQjVr+0PaIA+PZqMDHC3wQFrogkSXgZ1o=;
- b=twvFhPE2hMl+9jDxQPaZ6hPSr5g5f+sVWYa5EKYaReCYaHZyme6fCvCluyt94gT1VK5L
- E9J76yJ+BXNaV/VKV3nAHOQ3ORCX8Br1cvV1hhLWsfKWWbX0J++lXtUsR69SjNbtMmbE
- KZ7sKY4oqn97s2kRqE+4s6GZZPXVHu0OqBlMKIi9TTp88xTu/mk5Vy5fWLsqVUGPqX+r
- W2fu/pjUhCvFW273l44LRRA2MZcuOqt+6bwqUP/+CCppi9/neIRopn4lMMi87fC3RuMv
- EON3GXFbE9TSWrJ7s/vAmBxrpink4+MGopueDV/BxmWUZ57u+JJD/O9BuzvqV3DiVa0m 7Q== 
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RkfIyM7RiKKEhZlKQMn5AG0Stv1daxuZRc6CgGjA+f5/gjHT0P8s6KWDVLOsMckVeVEiE4/RynRYK1ROhHRtthZRBOCGdE1td4UYabgcVMK1JpXCPmam3ZCvHOoJDOFfAPiqt54mBUIGSjPE5U41zmxgrqhciNJuMREXtdp97q3Jq/1HJmVIxJf2iwJLMzHBPGn+jp1oWEPAvQX6JMdaSpcSzmn7WrlC5/xU7sUTSA+AyPgH+E71WZIS2SQN/ds2QrAbrX9QtrNnt8/F0ZlanceoaDc05cebgoR9EcYTI+deTYIW5Kby+k4bNVEPRVKpN6utlz33RKxLSnamt7jz8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Ah1q/mlyzuwQjVr+0PaIA+PZqMDHC3wQFrogkSXgZ1o=;
- b=S+Q8TeJNBI8rDNDuZau8dDQmxhwc9ZWNJ6GrnYaRm62bwrNZrEZj3PWkfjPB9cwxy5UiE6ejFlZvC5HnrhCwd5XrYzA8acGcQzryw9M/yOsfeMuApuRhgORis8X2Kmvk5H7ZemSNummNlr8+7+ivL+kxEFFQUCGS9i5amuLKmhSj6HgUlc3Xd8yADQeQqseYdhYMTOmwlrkVa1Ww+OLZGimhNTt3/hJvI13ZkRqRadZPkpTf6Itc/tAP08Vm5glt8VCc1YAl9OB66AX8B7HBtPiovRPleJQTD/LYts3SQ/ycTDhQl5gsUX0coMhAK43TajmoUNymNM9jXgSRWMFdqg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Ah1q/mlyzuwQjVr+0PaIA+PZqMDHC3wQFrogkSXgZ1o=;
- b=AxKzW2CfhOl6Ha43E4IrDl+dLlbthxL9dgpYr2bNksa3w7cQlzNTKhxZils/pyA3y9drnQNIvMXsB0oxCOEG8ujj2BqZjh0Uj0H/OaazJ65ismvf66UXJKY6qRM8AdVhgXG2CfserLzhmNPCaHwSp1ycGfIRvAl5J6EZyhrJXpw=
-Subject: Re: [PATCH RFC v1 4/7] swiotlb: to implement io_tlb_high_mem
-To: Christoph Hellwig <hch@infradead.org>
-Cc: iommu@lists.linux-foundation.org, xen-devel@lists.xenproject.org,
-        x86@kernel.org, linuxppc-dev@lists.ozlabs.org,
-        virtualization@lists.linux-foundation.org,
-        linux-kernel@vger.kernel.org, m.szyprowski@samsung.com,
-        jgross@suse.com, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        dave.hansen@linux.intel.com, sstabellini@kernel.org,
-        mpe@ellerman.id.au, konrad.wilk@oracle.com, mst@redhat.com,
-        jasowang@redhat.com, joe.jin@oracle.com
-References: <20220609005553.30954-1-dongli.zhang@oracle.com>
- <20220609005553.30954-5-dongli.zhang@oracle.com>
- <YqF/sphJj6n+22Si@infradead.org>
-From: Dongli Zhang <dongli.zhang@oracle.com>
-Message-ID: <e6345c27-78fd-be72-9551-1d1fd5db37a4@oracle.com>
-Date: Fri, 10 Jun 2022 14:56:08 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
-In-Reply-To: <YqF/sphJj6n+22Si@infradead.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: DM6PR04CA0023.namprd04.prod.outlook.com
- (2603:10b6:5:334::28) To BN7PR10MB2659.namprd10.prod.outlook.com
- (2603:10b6:406:c5::18)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3d1c90ed-5e46-4fa9-ef24-08da4b2c0924
-X-MS-TrafficTypeDiagnostic: MWHPR10MB1887:EE_
-X-Microsoft-Antispam-PRVS: 
-	<MWHPR10MB18874953901C1646FDF821D9F0A69@MWHPR10MB1887.namprd10.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	g3DMbLC2NULjwmYZwgktrD/KIFgWWHKyIx4cQciMNUNL3NH3Dxaw508Vcej5050h3vD0RliliGOAbYLXZTuGwfDRxO/ePEL+vFlAgiwOL0ErnAAOt0L+9Lqs7iFkvUSQj2Iyux1CV5+Hn8JgLsJdE+HfZHyEJ6UPhNAlZIYOmHuer8YgQGvGteoqqgBqXVTwQe+BwNZtHpS8/cgkelYox3PrZC9q3D4SpmS7/pkgk9JM5dlMB4iAN7DkLhqsJrAIJsYDzrepUyjljKMcwJQrZWEjJQtTIBcR7IqYhdKHMjVpkg+rZHgJRAf+Tv8JL6A/ygvd3KK0Ap+BCTfWnioT1kAA5ehXZ9kJfZ0j18sRgLdsLDjvWYUcWqzeitx+4plaZ2au/vpQwTNIOD4lDfedzb/ONLLfWbXJan26VQtZVCMeCV5ngbVB8uHGinoJAbY/cXICdajPXZaG8ATZTyI8nW1unFq5Ydrm5DGiB+Rpq1D1HsAswwwwOWuvkDHHmOXF7HDGPKj1HKPj1gqBzXUbM5NFRPu/7yBU32P/eV93U1fNWDWwO2dlb5kZ6jFMWqwTVJRtYPtmeD7yhKhkUJIpivjQHpK6zeEgcZRjhTYtoU0auLC46NRbeeh7yPV+R/cdvPRhw+2iet7m4tGkrCsHMT7E9m/epqX48pFhiAdVaOL1An+B9ldXHIMwFklcc9E5RfLYuFKOJycct4Peitll1bSYexZk/pyLDWWO6k0EAGO+tsRLWWTe+7vXUcSh2Qwn
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN7PR10MB2659.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(366004)(44832011)(7416002)(2616005)(6486002)(508600001)(8936002)(5660300002)(83380400001)(186003)(6666004)(316002)(86362001)(2906002)(107886003)(6512007)(31696002)(6506007)(53546011)(36756003)(8676002)(66476007)(66946007)(66556008)(4326008)(6916009)(31686004)(38100700002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?SElMakVJdHpJcUg2VVlKOTA5OG9Od041YndoTzdGQ3FyVGNBS0d3amkrOHh6?=
- =?utf-8?B?RElTenFzSXRaQmZuSDlPOEhVK2N6blVnNElHRDJuY2FvSDJteVBpbnlieXE2?=
- =?utf-8?B?eXNUMlRHUXVqK0g3cjBaZXB1R3NEeElKRmcyRmNod0dYdzh5eEhGWTdteGJF?=
- =?utf-8?B?MEQzc1NUQkFlZzNRVnJZclk5UEpjU3cwTG1rSVlaUmh6L2xBUzlaTFY4dC9p?=
- =?utf-8?B?dDZxTTFXRWt2VHZTQ0J2eHFmclQ3TjhDbE90dDRLa1BJcVI0dHJlcFFGdTJB?=
- =?utf-8?B?dThyc3BNeGpjOXgzTTBOUzVwKy91Y25OUW1QQnJJUGphUEc5MWxPclN3T0pO?=
- =?utf-8?B?aVpNQ0QwNGZ5ZUk5d3g3ZWxHNW9aeW1mOW44WlpTMnE2VmtRSWNwdTRYUGox?=
- =?utf-8?B?OVlRUTZEdWNOT25LREE4eWtBU2N5dDVoUkUxZy90WUUyYTJwWmE0bXdvZFdM?=
- =?utf-8?B?SkNDaFM4dWZSekxad0pRSHphQzV2czUzTm11b1hHbm1aYVEwTmk5elRCbnpt?=
- =?utf-8?B?WnBlUkhjMEdDejVVa2tPU3FNS1RVTUZjVEFkVkw0YTFza1R4Rk9vMHorc2VY?=
- =?utf-8?B?blBIVE9FR0lrUmRzbjZNbmxUamIwQ3lDN003aVhvYUlZSnVJREdSVi9sZHZV?=
- =?utf-8?B?MDBGanAyQWFXRVVndkNpZlptaEJwM1dNU0xaTEgwZ0xKYUhZSi9NR0FnKzNI?=
- =?utf-8?B?ejRqZ1djM0w2QnM3WkJMV3Uxd01iUUhFY1hwT2d2K3kyNTZtUWlySnpEMUFk?=
- =?utf-8?B?TVhhcjU3K0pjWmtZalIzZkFaMmZtREYzVHU5eGZ0dkZRRTFJeTkrSU1KK2V3?=
- =?utf-8?B?NmlmVy9SOHM3dkdmdndPSzB2UVZQVHExSWpwVFdNOGRKZ2IwMUZOc0U1akpB?=
- =?utf-8?B?U1o4TWIySkFjVnpHZWpWamYxNEVubEowUEg4eDFqWnQwV25SZDI2TCs0U1Qv?=
- =?utf-8?B?S3lnVmFUZGhFV3dEbWtSZ0kwV1FuUWlWUFhTSWdSWTkrRWpHTnRXeWVGWHRv?=
- =?utf-8?B?U2RtT0JtTlduR0NkWVlVNUx6OXBFZ1lXNzUwdGRxdlpLcXk0TnRrcXdTZmRx?=
- =?utf-8?B?UGk3SWZJR3hua0RmZWRvQVRvRDV2elBXMFRYQjZIcm16dWsyUjVMQm5YNzNL?=
- =?utf-8?B?NVdFTVF0clU4ZjFiZzNUZzhGb2JyNnAwT3VqS2srY0RTaVFTZTdiVjNVVUts?=
- =?utf-8?B?TXc1bnNRdThwRFJiek02Y094YVlaMnJkaGsxMGJYSFVKS0JUelZXcVZ1T2pX?=
- =?utf-8?B?Q1VxOHd4dXRibDdxakNnQWNFSHJuWUZkSC9TQTFnOGVkeGVvUzUrL1lQSUIr?=
- =?utf-8?B?UnI4QlN4SUxsRmg1ZU1RQk0rU0FqUCtUV0JmN3MxVUxqcjM0SUlLdmRYSXo0?=
- =?utf-8?B?aHJrSFR6QWpGRUVGSjVpZ0ttUVBzWnUwbEVKdzd2bG5lWnM2Qm5aSktlaERq?=
- =?utf-8?B?K09Wc0s3amNRUUtLczRFbFB0QzZKN0tYOWtxSExGbllzSjhKck02Nmo4bndz?=
- =?utf-8?B?T0VUSU5WRG1rWGdheHN4R2QyRElZRm1UaG9EUTNoeGw0Q1FKOGVyY1cyNXdw?=
- =?utf-8?B?QitZdjRQQW9mZ3F1N2YzQ2V0Zk1lU2VHelZzV1diYmF4V28wOG5qZmxtYWlV?=
- =?utf-8?B?Q2RyZ3hFNzdKNG1RWi92THZweTlBQTQ4L3B5SEZ5a0tzTk9pTnAxRW5BckI5?=
- =?utf-8?B?Z1BvRnlkbXVvalIxc0ZFNWVUcGJUUDZBc0hMWHlObFBDRUFsVXlpbUx0ZmZ3?=
- =?utf-8?B?RS9WN2FiQXdlTFl0WUhaMWVGTzJiOVVuY1ZnbXNJdFcrSGZGRGJneXo4SjZI?=
- =?utf-8?B?OWhQNjg3RjdqQ2NvWkdHSmpCbGhoTSsyL24vamVaYXEwMHNINTVOcmExclF2?=
- =?utf-8?B?TkVJSXNRTDQ5UjRPaDlTWWFwRnU3TUlpUC8zaG9UWmUrQ2QvYkJ4U1NENnhQ?=
- =?utf-8?B?eTR1RXEvbG1iU0dzZFJSOHRiTHNjSnJsZFZ0KzRnd2dndGhiNFEzRHhmZzkx?=
- =?utf-8?B?aFdUa0psKzZ2c3pMZEl3enBEM003Tjl0bUpUQUZsRkZqU1lFL1h5VDBSbnd1?=
- =?utf-8?B?Mi9EcktDTTQ5eGlRTWxQUnk1L1h6N1dkVjRVSmwxK3owUkFTRlNtYzRxcXNr?=
- =?utf-8?B?cmRhYU5HR0R1VVBkZHhsbUV5QnJrUW9heDJVUnN3SFpJTlMvWXZEZmRHdzlE?=
- =?utf-8?B?dVpXZ3hNQzhvb3FBODFrcHNVTVFvNUVnU000RXcraWFtZ0NneUFSM0ZqSGlC?=
- =?utf-8?B?N3lOSzhTYVpndDgwd3U5amRhL1dnMDh1RDlHTUR5Z3RWNDhvR1ZZYnd1RE5P?=
- =?utf-8?B?VGh6T0hxTVJyU0E1KzYrVHBVaFcvSXFTR3N5Zmtqa25jdmVsZ0kvY213V2dG?=
- =?utf-8?Q?XbFAqF6a3vabdqTnQpttHFELvaFmdK/s2RvHB?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d1c90ed-5e46-4fa9-ef24-08da4b2c0924
-X-MS-Exchange-CrossTenant-AuthSource: BN7PR10MB2659.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2022 21:56:13.1656
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FxU1E+KjBkwdSLtMS5Eqqir0vGhxNcn33SnePkFruX5zkUnvfuLqNGXAqJlDVkrZiPFY7PcwSg6MgUl9Xy7U4Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR10MB1887
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.517,18.0.874
- definitions=2022-06-10_09:2022-06-09,2022-06-10 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 mlxscore=0 bulkscore=0
- malwarescore=0 phishscore=0 adultscore=0 suspectscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2204290000
- definitions=main-2206100082
-X-Proofpoint-GUID: X_VrRHmM9J-mUPYgf3I4FFxvCnOFl0Og
-X-Proofpoint-ORIG-GUID: X_VrRHmM9J-mUPYgf3I4FFxvCnOFl0Og
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Message-Id:Subject:To;
+	bh=LB9hrXRXMMWriNeo2FEZuQNEQaG4lYX6XEtSeMbn7Vk=; b=jDdwWmscfcBJsjgpAvTYrUWtmH
+	3g6lJfhnBCYCy6sjGoTGk9vmPNn4gCyHuTIEYznDE+2+1SFO6fosAjVO/ZSxn0IlXkDbWOrEMiCxA
+	4//0ejCIx73bz5OL+qlW1Fcn/god9RYhGQ1rY5CW1IPd6YJ+Uufs2RCtOtB1KRH1giuE=;
+To: xen-devel@lists.xenproject.org
+Subject: [xen-4.16-testing bisection] complete test-amd64-i386-xl-shadow
+Message-Id: <E1nzne0-0002M0-Ej@osstest.test-lab.xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Fri, 10 Jun 2022 23:02:20 +0000
 
-Hi Christoph,
+branch xen-4.16-testing
+xenbranch xen-4.16-testing
+job test-amd64-i386-xl-shadow
+testid xen-boot
 
-On 6/8/22 10:05 PM, Christoph Hellwig wrote:
-> All this really needs to be hidden under the hood.
-> 
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: ovmf git://xenbits.xen.org/osstest/ovmf.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: seabios git://xenbits.xen.org/osstest/seabios.git
+Tree: xen git://xenbits.xen.org/xen.git
 
-Since this patch file has 200+ lines, would you please help clarify what does
-'this' indicate?
+*** Found and reproduced problem changeset ***
 
-The idea of this patch:
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  b152dfbc3ad71a788996440b18174d995c3bffc9
+  Bug not present: 8e11ec8fbf6f933f8854f4bc54226653316903f2
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/170971/
 
-1. Convert the functions to initialize swiotlb into callee. The callee accepts
-'true' or 'false' as arguments to indicate whether it is for default or new
-swiotlb buffer, e.g., swiotlb_init_remap() into __swiotlb_init_remap().
 
-2. At the caller side to decide if we are going to call the callee to create the
-extra buffer.
+  commit b152dfbc3ad71a788996440b18174d995c3bffc9
+  Author: Andrew Cooper <andrew.cooper3@citrix.com>
+  Date:   Thu Jun 9 15:27:19 2022 +0200
+  
+      x86/pv: Clean up _get_page_type()
+      
+      Various fixes for clarity, ahead of making complicated changes.
+      
+       * Split the overflow check out of the if/else chain for type handling, as
+         it's somewhat unrelated.
+       * Comment the main if/else chain to explain what is going on.  Adjust one
+         ASSERT() and state the bit layout for validate-locked and partial states.
+       * Correct the comment about TLB flushing, as it's backwards.  The problem
+         case is when writeable mappings are retained to a page becoming read-only,
+         as it allows the guest to bypass Xen's safety checks for updates.
+       * Reduce the scope of 'y'.  It is an artefact of the cmpxchg loop and not
+         valid for use by subsequent logic.  Switch to using ACCESS_ONCE() to treat
+         all reads as explicitly volatile.  The only thing preventing the validated
+         wait-loop being infinite is the compiler barrier hidden in cpu_relax().
+       * Replace one page_get_owner(page) with the already-calculated 'd' already in
+         scope.
+      
+      No functional change.
+      
+      This is part of XSA-401 / CVE-2022-26362.
+      
+      Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+      Signed-off-by: George Dunlap <george.dunlap@eu.citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+      Reviewed-by: George Dunlap <george.dunlap@citrix.com>
+      master commit: 9186e96b199e4f7e52e033b238f9fe869afb69c7
+      master date: 2022-06-09 14:20:36 +0200
 
-Do you mean the callee if still *too high level* and all the
-decision/allocation/initialization should be down at *lower level functions*?
 
-E.g., if I re-work the "struct io_tlb_mem" to make the 64-bit buffer as the 2nd
-array of io_tlb_mem->slots[32_or_64][index], the user will only notice it is the
-default 'io_tlb_default_mem', but will not be able to know if it is allocated
-from 32-bit or 64-bit buffer.
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-4.16-testing/test-amd64-i386-xl-shadow.xen-boot.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
 
-Thank you very much for the feedback.
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-4.16-testing/test-amd64-i386-xl-shadow.xen-boot --summary-out=tmp/170971.bisection-summary --basis-template=170871 --blessings=real,real-bisect,real-retry xen-4.16-testing test-amd64-i386-xl-shadow xen-boot
+Searching for failure / basis pass:
+ 170901 fail [host=nobling1] / 170871 [host=albana1] 169333 [host=debina1] 169252 [host=chardonnay0] 169238 [host=albana0] 169194 [host=nobling0] 169179 [host=debina0] 169119 [host=huxelrebe0] 169086 ok.
+Failure / basis pass flights: 170901 / 169086
+(tree with no url: minios)
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: ovmf git://xenbits.xen.org/osstest/ovmf.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: seabios git://xenbits.xen.org/osstest/seabios.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af dc020d8d1ba420e2dd0e7a40f5045db897f3c4f4
+Basis pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b1b89f9009f2390652e0061bd7b24fc40732bc70 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 d239552ce7220e448ae81f41515138f7b9e3c4db e34c16cc6ee029fa75c35bd21f75103d5502ea30
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/linux-pvops.git#c3038e718a19fc596f7b1baba0f83d5146dc7784-c3038e718a19fc596f7b1baba0f83d5146dc7784 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/osstest/ovmf.git#b1b89f9009f2390652e0061bd7b24fc40732bc70-ff36b2550f94dc5fac838cf298ae5a23cfddf204 git://xenbits.xen.org/qemu-xen-traditional.git#3d273dd05e51e5a1ffba3d98c74\
+ 37ee84e8f8764-3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 git://xenbits.xen.org/qemu-xen.git#107951211a8d17658e1aaa0c23a8cf29f8806ad8-107951211a8d17658e1aaa0c23a8cf29f8806ad8 git://xenbits.xen.org/osstest/seabios.git#d239552ce7220e448ae81f41515138f7b9e3c4db-dc88f9b72df52b22c35b127b80c487e0b6fca4af git://xenbits.xen.org/xen.git#e34c16cc6ee029fa75c35bd21f75103d5502ea30-dc020d8d1ba420e2dd0e7a40f5045db897f3c4f4
+Loaded 7994 nodes in revision graph
+Searching for test results:
+ 169086 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b1b89f9009f2390652e0061bd7b24fc40732bc70 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 d239552ce7220e448ae81f41515138f7b9e3c4db e34c16cc6ee029fa75c35bd21f75103d5502ea30
+ 169119 [host=huxelrebe0]
+ 169179 [host=debina0]
+ 169194 [host=nobling0]
+ 169238 [host=albana0]
+ 169252 [host=chardonnay0]
+ 169333 [host=debina1]
+ 170871 [host=albana1]
+ 170901 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af dc020d8d1ba420e2dd0e7a40f5045db897f3c4f4
+ 170914 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b1b89f9009f2390652e0061bd7b24fc40732bc70 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 d239552ce7220e448ae81f41515138f7b9e3c4db e34c16cc6ee029fa75c35bd21f75103d5502ea30
+ 170917 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af dc020d8d1ba420e2dd0e7a40f5045db897f3c4f4
+ 170920 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a298a84478053872ed9da660a75f182ce81b8ddc 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 01774004c7f7fdc9c1e8f1715f70d3b913f8d491 2c026fe1f159494b3ec05f19ddfb3d39ff901296
+ 170926 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a332ffb6efb57c338087551325cc4fffb0c81210 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af f26544492298cb82d66f9bf36e29d2f75b3133f2
+ 170928 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b57911c84c10e9e374c1b3d30164648f72afdd57 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af f26544492298cb82d66f9bf36e29d2f75b3133f2
+ 170936 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a81a650da1dc40ec2b2825d1878cdf2778b4be14 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 6c6bbfdff9374ef41f84c4ebed7b8a7a40767ef6
+ 170943 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a81a650da1dc40ec2b2825d1878cdf2778b4be14 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 88b653f73928117461dc250acd1e830a47a14c2b
+ 170946 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 8e11ec8fbf6f933f8854f4bc54226653316903f2
+ 170950 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 9cfd796ae05421ded8e4f70b2c55352491cfa841
+ 170955 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af b152dfbc3ad71a788996440b18174d995c3bffc9
+ 170960 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 8e11ec8fbf6f933f8854f4bc54226653316903f2
+ 170961 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af b152dfbc3ad71a788996440b18174d995c3bffc9
+ 170969 pass c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 8e11ec8fbf6f933f8854f4bc54226653316903f2
+ 170971 fail c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af b152dfbc3ad71a788996440b18174d995c3bffc9
+Searching for interesting versions
+ Result found: flight 169086 (pass), for basis pass
+ For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 8e11ec8fbf6f933f8854f4bc54226653316903f2, results HASH(0x55b1c4c497f0) HASH(0x55b1c4d117a8) HASH(0x55b1c4d196c8) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1\
+ e6a472b0eb9558310b518f0dfcd8860 a81a650da1dc40ec2b2825d1878cdf2778b4be14 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 88b653f73928117461dc250acd1e830a47a14c2b, results HASH(0x55b1c4cf1e40) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a81a650da1dc40ec2b2825d1878cdf2778b4be14 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c\
+ 23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 6c6bbfdff9374ef41f84c4ebed7b8a7a40767ef6, results HASH(0x55b1c4c49df0) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b57911c84c10e9e374c1b3d30164648f72afdd57 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af f26544492298cb82d66f9bf36e29d2f75b3133f2, results HASH(0x55b1c4c42bb0) For basis\
+  failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a332ffb6efb57c338087551325cc4fffb0c81210 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af f26544492298cb82d66f9bf36e29d2f75b3133f2, results HASH(0x55b1c4c23898) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 a298a84478053872ed9d\
+ a660a75f182ce81b8ddc 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 01774004c7f7fdc9c1e8f1715f70d3b913f8d491 2c026fe1f159494b3ec05f19ddfb3d39ff901296, results HASH(0x55b1c4c4b7f8) For basis failure, parent search stopping at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b1b89f9009f2390652e0061bd7b24fc40732bc70 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 d239552ce7220e448ae81f41515138f7b9e\
+ 3c4db e34c16cc6ee029fa75c35bd21f75103d5502ea30, results HASH(0x55b1c4c37158) HASH(0x55b1c4c483e8) Result found: flight 170901 (fail), for basis failure (at ancestor ~646)
+ Repro found: flight 170914 (pass), for basis pass
+ Repro found: flight 170917 (fail), for basis failure
+ 0 revisions at c3038e718a19fc596f7b1baba0f83d5146dc7784 c530a75c1e6a472b0eb9558310b518f0dfcd8860 ff36b2550f94dc5fac838cf298ae5a23cfddf204 3d273dd05e51e5a1ffba3d98c7437ee84e8f8764 107951211a8d17658e1aaa0c23a8cf29f8806ad8 dc88f9b72df52b22c35b127b80c487e0b6fca4af 8e11ec8fbf6f933f8854f4bc54226653316903f2
+No revisions left to test, checking graph state.
+ Result found: flight 170946 (pass), for last pass
+ Result found: flight 170955 (fail), for first failure
+ Repro found: flight 170960 (pass), for last pass
+ Repro found: flight 170961 (fail), for first failure
+ Repro found: flight 170969 (pass), for last pass
+ Repro found: flight 170971 (fail), for first failure
 
-Dongli Zhang
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  b152dfbc3ad71a788996440b18174d995c3bffc9
+  Bug not present: 8e11ec8fbf6f933f8854f4bc54226653316903f2
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/170971/
+
+
+  commit b152dfbc3ad71a788996440b18174d995c3bffc9
+  Author: Andrew Cooper <andrew.cooper3@citrix.com>
+  Date:   Thu Jun 9 15:27:19 2022 +0200
+  
+      x86/pv: Clean up _get_page_type()
+      
+      Various fixes for clarity, ahead of making complicated changes.
+      
+       * Split the overflow check out of the if/else chain for type handling, as
+         it's somewhat unrelated.
+       * Comment the main if/else chain to explain what is going on.  Adjust one
+         ASSERT() and state the bit layout for validate-locked and partial states.
+       * Correct the comment about TLB flushing, as it's backwards.  The problem
+         case is when writeable mappings are retained to a page becoming read-only,
+         as it allows the guest to bypass Xen's safety checks for updates.
+       * Reduce the scope of 'y'.  It is an artefact of the cmpxchg loop and not
+         valid for use by subsequent logic.  Switch to using ACCESS_ONCE() to treat
+         all reads as explicitly volatile.  The only thing preventing the validated
+         wait-loop being infinite is the compiler barrier hidden in cpu_relax().
+       * Replace one page_get_owner(page) with the already-calculated 'd' already in
+         scope.
+      
+      No functional change.
+      
+      This is part of XSA-401 / CVE-2022-26362.
+      
+      Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+      Signed-off-by: George Dunlap <george.dunlap@eu.citrix.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+      Reviewed-by: George Dunlap <george.dunlap@citrix.com>
+      master commit: 9186e96b199e4f7e52e033b238f9fe869afb69c7
+      master date: 2022-06-09 14:20:36 +0200
+
+pnmtopng: 103 colors found
+Revision graph left in /home/logs/results/bisect/xen-4.16-testing/test-amd64-i386-xl-shadow.xen-boot.{dot,ps,png,html,svg}.
+----------------------------------------
+170971: tolerable ALL FAIL
+
+flight 170971 xen-4.16-testing real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/170971/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-amd64-i386-xl-shadow     8 xen-boot                fail baseline untested
+
+
+jobs:
+ test-amd64-i386-xl-shadow                                    fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
 
