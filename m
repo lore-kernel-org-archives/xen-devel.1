@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAE5DC433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:21:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.346080.571836 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6009CCA47B
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:21:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.346079.571831 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzapV-0005y7-K5; Fri, 10 Jun 2022 09:21:21 +0000
+	id 1nzapV-0005u8-52; Fri, 10 Jun 2022 09:21:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 346080.571836; Fri, 10 Jun 2022 09:21:21 +0000
+Received: by outflank-mailman (output) from mailman id 346079.571831; Fri, 10 Jun 2022 09:21:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzapV-0005x6-DH; Fri, 10 Jun 2022 09:21:21 +0000
-Received: by outflank-mailman (input) for mailman id 346080;
+	id 1nzapV-0005u1-1H; Fri, 10 Jun 2022 09:21:21 +0000
+Received: by outflank-mailman (input) for mailman id 346079;
  Fri, 10 Jun 2022 09:21:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2HR3=WR=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1nzapT-0005HE-Ht
+ id 1nzapT-00050F-18
  for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:21:19 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id aec5ad2e-e89e-11ec-bd2c-47488cf2e6aa;
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ae8c6d76-e89e-11ec-8179-c7c2a468b362;
  Fri, 10 Jun 2022 11:21:18 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-422-L28HogynNE2lkWLrb52jaw-1; Fri, 10 Jun 2022 05:21:05 -0400
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-498--HdTtoCQPHeme0T9yXjfvg-1; Fri, 10 Jun 2022 05:21:14 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BF36B85A583;
- Fri, 10 Jun 2022 09:21:04 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 54D40811E75;
+ Fri, 10 Jun 2022 09:21:13 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 47D442026D64;
- Fri, 10 Jun 2022 09:21:04 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 13CD1404E4B5;
+ Fri, 10 Jun 2022 09:21:12 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id E61E518003A8; Fri, 10 Jun 2022 11:20:43 +0200 (CEST)
+ id 1FC3F180060A; Fri, 10 Jun 2022 11:20:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: aec5ad2e-e89e-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: ae8c6d76-e89e-11ec-8179-c7c2a468b362
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	s=mimecast20190719; t=1654852877;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=wx3J1U/WRMVytLzUKnVNwgCHbbzsbHu+DjsV7mqclmI=;
-	b=GAVWfEdkWHAjpcz0EjlFoBuvBbBkCQtb82r5ClL0gqZI+Fvr6RAA3clr1veUQ9/Kq7dWwm
-	wzfrRxHF72Ty9oC0EiESB3kUs7EhT6SaA2bps+Z/xvtwxzqXT34hD8Z/FEW4JWn/lbpno4
-	HjxAC0NPxlPuzfzzAM8nhig+1S15wo0=
-X-MC-Unique: L28HogynNE2lkWLrb52jaw-1
+	bh=Ufj4JscCAW57Vs14x1NDo2rKzUHuAo6KJO/7yvjLaQA=;
+	b=hRVA5tBZNrI28pxvTX90+JpQH7jccCsXIFoJhe3Vj2k9PEqbm+JAl6+tQsBadF0QemOp1C
+	AIeeoh1H8DOOY+2onA/KjU+FipsLUTguWCeJrvr2+IdRNzGH3SM8i/s5RnlC69DH0jD0eZ
+	VzJQdRAMjY4LGUVH2Xc+dHngw/374gM=
+X-MC-Unique: -HdTtoCQPHeme0T9yXjfvg-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: "Canokeys.org" <contact@canokeys.org>,
@@ -80,134 +80,68 @@ Cc: "Canokeys.org" <contact@canokeys.org>,
 	Alex Williamson <alex.williamson@redhat.com>,
 	Gerd Hoffmann <kraxel@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
-	=?UTF-8?q?Volker=20R=C3=BCmelin?= <vr_qemu@t-online.de>
-Subject: [PULL 02/17] ui/gtk-gl-area: create the requested GL context version
-Date: Fri, 10 Jun 2022 11:20:28 +0200
-Message-Id: <20220610092043.1874654-3-kraxel@redhat.com>
+	Bernhard Beschow <shentey@gmail.com>
+Subject: [PULL 04/17] hw/audio/cs4231a: Const'ify global tables
+Date: Fri, 10 Jun 2022 11:20:30 +0200
+Message-Id: <20220610092043.1874654-5-kraxel@redhat.com>
 In-Reply-To: <20220610092043.1874654-1-kraxel@redhat.com>
 References: <20220610092043.1874654-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.4
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
 
-From: Volker Rümelin <vr_qemu@t-online.de>
+From: Bernhard Beschow <shentey@gmail.com>
 
-Since about 2018 virglrenderer (commit fa835b0f88 "vrend: don't
-hardcode context version") tries to open the highest available GL
-context version. This is done by creating the known GL context
-versions from the highest to the lowest until (*create_gl_context)
-returns a context != NULL.
+The tables contain spcifically crafted constants for algorithms, so make
+them immutable.
 
-This does not work properly with
-the current QEMU gd_gl_area_create_context() function, because
-gdk_gl_context_realize() on Wayland creates a version 3.0 legacy
-context if the requested GL context version can't be created.
-
-In order for virglrenderer to find the highest available GL
-context version, return NULL if the created context version is
-lower than the requested version.
-
-This fixes the following error:
-QEMU started with -device virtio-vga-gl -display gtk,gl=on.
-Under Wayland, the guest window remains black and the following
-information can be seen on the host.
-
-gl_version 30 - compat profile
-(qemu:5978): Gdk-WARNING **: 16:19:01.533:
-  gdk_gl_context_set_required_version
-  - GL context versions less than 3.2 are not supported.
-
-(qemu:5978): Gdk-WARNING **: 16:19:01.537:
-  gdk_gl_context_set_required_version -
-  GL context versions less than 3.2 are not supported.
-
-(qemu:5978): Gdk-WARNING **: 16:19:01.554:
-  gdk_gl_context_set_required_version -
-  GL context versions less than 3.2 are not supported.
-vrend_renderer_fill_caps: Entering with stale GL error: 1282
-
-To reproduce this error, an OpenGL driver is required on the host
-that doesn't have the latest OpenGL extensions fully implemented.
-An example for this is the Intel i965 driver on a Haswell processor.
-
-Signed-off-by: Volker Rümelin <vr_qemu@t-online.de>
-Message-Id: <20220605085131.7711-2-vr_qemu@t-online.de>
+Signed-off-by: Bernhard Beschow <shentey@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Message-Id: <20220520180109.8224-3-shentey@gmail.com>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- ui/gtk-gl-area.c | 31 ++++++++++++++++++++++++++++++-
- ui/trace-events  |  1 +
- 2 files changed, 31 insertions(+), 1 deletion(-)
+ hw/audio/cs4231a.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/ui/gtk-gl-area.c b/ui/gtk-gl-area.c
-index 0e20ea031d34..2e0129c28cd4 100644
---- a/ui/gtk-gl-area.c
-+++ b/ui/gtk-gl-area.c
-@@ -170,6 +170,23 @@ void gd_gl_area_switch(DisplayChangeListener *dcl,
-     }
- }
+diff --git a/hw/audio/cs4231a.c b/hw/audio/cs4231a.c
+index 0723e3943044..7f17a72a9cb7 100644
+--- a/hw/audio/cs4231a.c
++++ b/hw/audio/cs4231a.c
+@@ -84,7 +84,7 @@ struct CSState {
+     int transferred;
+     int aci_counter;
+     SWVoiceOut *voice;
+-    int16_t *tab;
++    const int16_t *tab;
+ };
  
-+static int gd_cmp_gl_context_version(int major, int minor, QEMUGLParams *params)
-+{
-+    if (major > params->major_ver) {
-+        return 1;
-+    }
-+    if (major < params->major_ver) {
-+        return -1;
-+    }
-+    if (minor > params->minor_ver) {
-+        return 1;
-+    }
-+    if (minor < params->minor_ver) {
-+        return -1;
-+    }
-+    return 0;
-+}
-+
- QEMUGLContext gd_gl_area_create_context(DisplayGLCtx *dgc,
-                                         QEMUGLParams *params)
+ #define MODE2 (1 << 6)
+@@ -142,13 +142,13 @@ enum {
+     Capture_Lower_Base_Count
+ };
+ 
+-static int freqs[2][8] = {
++static const int freqs[2][8] = {
+     { 8000, 16000, 27420, 32000,    -1,    -1, 48000, 9000 },
+     { 5510, 11025, 18900, 22050, 37800, 44100, 33075, 6620 }
+ };
+ 
+ /* Tables courtesy http://hazelware.luggle.com/tutorials/mulawcompression.html */
+-static int16_t MuLawDecompressTable[256] =
++static const int16_t MuLawDecompressTable[256] =
  {
-@@ -177,8 +194,8 @@ QEMUGLContext gd_gl_area_create_context(DisplayGLCtx *dgc,
-     GdkWindow *window;
-     GdkGLContext *ctx;
-     GError *err = NULL;
-+    int major, minor;
+      -32124,-31100,-30076,-29052,-28028,-27004,-25980,-24956,
+      -23932,-22908,-21884,-20860,-19836,-18812,-17788,-16764,
+@@ -184,7 +184,7 @@ static int16_t MuLawDecompressTable[256] =
+          56,    48,    40,    32,    24,    16,     8,     0
+ };
  
--    gtk_gl_area_make_current(GTK_GL_AREA(vc->gfx.drawing_area));
-     window = gtk_widget_get_window(vc->gfx.drawing_area);
-     ctx = gdk_window_create_gl_context(window, &err);
-     if (err) {
-@@ -196,6 +213,18 @@ QEMUGLContext gd_gl_area_create_context(DisplayGLCtx *dgc,
-         g_clear_object(&ctx);
-         return NULL;
-     }
-+
-+    gdk_gl_context_make_current(ctx);
-+    gdk_gl_context_get_version(ctx, &major, &minor);
-+    gdk_gl_context_clear_current();
-+    gtk_gl_area_make_current(GTK_GL_AREA(vc->gfx.drawing_area));
-+
-+    if (gd_cmp_gl_context_version(major, minor, params) == -1) {
-+        /* created ctx version < requested version */
-+        g_clear_object(&ctx);
-+    }
-+
-+    trace_gd_gl_area_create_context(ctx, params->major_ver, params->minor_ver);
-     return ctx;
- }
- 
-diff --git a/ui/trace-events b/ui/trace-events
-index 1040ba0f88c7..a922f00e10b4 100644
---- a/ui/trace-events
-+++ b/ui/trace-events
-@@ -26,6 +26,7 @@ gd_key_event(const char *tab, int gdk_keycode, int qkeycode, const char *action)
- gd_grab(const char *tab, const char *device, const char *reason) "tab=%s, dev=%s, reason=%s"
- gd_ungrab(const char *tab, const char *device) "tab=%s, dev=%s"
- gd_keymap_windowing(const char *name) "backend=%s"
-+gd_gl_area_create_context(void *ctx, int major, int minor) "ctx=%p, major=%d, minor=%d"
- gd_gl_area_destroy_context(void *ctx, void *current_ctx) "ctx=%p, current_ctx=%p"
- 
- # vnc-auth-sasl.c
+-static int16_t ALawDecompressTable[256] =
++static const int16_t ALawDecompressTable[256] =
+ {
+      -5504, -5248, -6016, -5760, -4480, -4224, -4992, -4736,
+      -7552, -7296, -8064, -7808, -6528, -6272, -7040, -6784,
 -- 
 2.36.1
 
