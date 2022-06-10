@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C0C8C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:23:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.346171.571979 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B324C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:23:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.346185.571996 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzarn-0005Hc-AG; Fri, 10 Jun 2022 09:23:43 +0000
+	id 1nzarr-00067I-U6; Fri, 10 Jun 2022 09:23:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 346171.571979; Fri, 10 Jun 2022 09:23:43 +0000
+Received: by outflank-mailman (output) from mailman id 346185.571996; Fri, 10 Jun 2022 09:23:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzarn-0005Fh-1e; Fri, 10 Jun 2022 09:23:43 +0000
-Received: by outflank-mailman (input) for mailman id 346171;
- Fri, 10 Jun 2022 09:23:41 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nzarr-00066b-Q5; Fri, 10 Jun 2022 09:23:47 +0000
+Received: by outflank-mailman (input) for mailman id 346185;
+ Fri, 10 Jun 2022 09:23:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2HR3=WR=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1nzapo-00050F-C0
- for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:21:40 +0000
+ id 1nzapz-0005HE-TA
+ for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:21:51 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id ba55ec05-e89e-11ec-8179-c7c2a468b362;
- Fri, 10 Jun 2022 11:21:38 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id c0e4520b-e89e-11ec-bd2c-47488cf2e6aa;
+ Fri, 10 Jun 2022 11:21:48 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-227-ruaRDZJFNMeO8ESM-paIQA-1; Fri, 10 Jun 2022 05:21:33 -0400
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-299-qygipjx1NYupOP8hE8i2Jw-1; Fri, 10 Jun 2022 05:21:42 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 21ADC101E169;
- Fri, 10 Jun 2022 09:21:33 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id F31F01C05AB7;
+ Fri, 10 Jun 2022 09:21:41 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id B77D42026985;
- Fri, 10 Jun 2022 09:21:32 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id A49F140D2827;
+ Fri, 10 Jun 2022 09:21:40 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 1F29218007A4; Fri, 10 Jun 2022 11:20:45 +0200 (CEST)
+ id 6241F1800865; Fri, 10 Jun 2022 11:20:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ba55ec05-e89e-11ec-8179-c7c2a468b362
+X-Inumbo-ID: c0e4520b-e89e-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1654852896;
+	s=mimecast20190719; t=1654852907;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nK8ui8MGXo28dreQTzjS6bbhtNnN1TEyDDyCd/Q1Dgo=;
-	b=BSTLxGAglSRdxtqPn9q3bMZgN5k6DfpdBu7pyPvmGZilsNFAJPa2OZ/ZHO6oVMj1aUgpow
-	UXh6SFnXWS9ohLC3BX63qahD1K5iSmS4oq0DiGr4BHzrhXaYQvHtLLseF3vIQGYhb2GuWT
-	8Dm4cdaoEVz/DZ4jKuLALFZ+L/kRgEs=
-X-MC-Unique: ruaRDZJFNMeO8ESM-paIQA-1
+	bh=hTTJvnegxxvfJsWseZ7+SmUjba5GRnY9ME/e3uOvaP0=;
+	b=Qt6NfMk14JEmdOand/QTiTIIuXfF1Jgs0EqHsxUREWwDsniQpfSG6OQEjFI+ifaq3WHkac
+	X7HdwbzHDBC2DB+gObn6Fu/DqU2tNY6WOcbmrwG24fm1V+K4H1tBIxYD5WMjs8tEDqUi2F
+	jUe7oGV4MNQFjhs6gmA3LO4Wrc/uHko=
+X-MC-Unique: qygipjx1NYupOP8hE8i2Jw-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: "Canokeys.org" <contact@canokeys.org>,
@@ -79,46 +79,124 @@ Cc: "Canokeys.org" <contact@canokeys.org>,
 	xen-devel@lists.xenproject.org,
 	Alex Williamson <alex.williamson@redhat.com>,
 	Gerd Hoffmann <kraxel@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
-	Dongwon Kim <dongwon.kim@intel.com>,
-	Vivek Kasireddy <vivek.kasireddy@intel.com>
-Subject: [PULL 13/17] virtio-gpu: update done only on the scanout associated with rect
-Date: Fri, 10 Jun 2022 11:20:39 +0200
-Message-Id: <20220610092043.1874654-14-kraxel@redhat.com>
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PULL 15/17] ui/console: Do not return a value with ui_info
+Date: Fri, 10 Jun 2022 11:20:41 +0200
+Message-Id: <20220610092043.1874654-16-kraxel@redhat.com>
 In-Reply-To: <20220610092043.1874654-1-kraxel@redhat.com>
 References: <20220610092043.1874654-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.4
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
 
-From: Dongwon Kim <dongwon.kim@intel.com>
+From: Akihiko Odaki <akihiko.odaki@gmail.com>
 
-It only needs to update the scanouts containing the rect area
-coming with the resource-flush request from the guest.
+The returned value is not used and misleading.
 
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Cc: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Signed-off-by: Dongwon Kim <dongwon.kim@intel.com>
-Message-Id: <20220505214030.4261-1-dongwon.kim@intel.com>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
+Message-Id: <20220226115516.59830-2-akihiko.odaki@gmail.com>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- hw/display/virtio-gpu.c | 3 +++
- 1 file changed, 3 insertions(+)
+ include/ui/console.h         | 2 +-
+ hw/display/virtio-gpu-base.c | 6 +++---
+ hw/display/virtio-vga.c      | 5 ++---
+ hw/vfio/display.c            | 8 +++-----
+ 4 files changed, 9 insertions(+), 12 deletions(-)
 
-diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
-index cd4a56056fd9..55c6dd576318 100644
---- a/hw/display/virtio-gpu.c
-+++ b/hw/display/virtio-gpu.c
-@@ -514,6 +514,9 @@ static void virtio_gpu_resource_flush(VirtIOGPU *g,
-         for (i = 0; i < g->parent_obj.conf.max_outputs; i++) {
-             scanout = &g->parent_obj.scanout[i];
-             if (scanout->resource_id == res->resource_id &&
-+                rf.r.x >= scanout->x && rf.r.y >= scanout->y &&
-+                rf.r.x + rf.r.width <= scanout->x + scanout->width &&
-+                rf.r.y + rf.r.height <= scanout->y + scanout->height &&
-                 console_has_gl(scanout->con)) {
-                 dpy_gl_update(scanout->con, 0, 0, scanout->width,
-                               scanout->height);
+diff --git a/include/ui/console.h b/include/ui/console.h
+index c44b28a972ca..642d6f5248cf 100644
+--- a/include/ui/console.h
++++ b/include/ui/console.h
+@@ -432,7 +432,7 @@ typedef struct GraphicHwOps {
+     bool gfx_update_async; /* if true, calls graphic_hw_update_done() */
+     void (*text_update)(void *opaque, console_ch_t *text);
+     void (*update_interval)(void *opaque, uint64_t interval);
+-    int (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
++    void (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
+     void (*gl_block)(void *opaque, bool block);
+ } GraphicHwOps;
+ 
+diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
+index 790cec333c8c..b21d6e5b0be8 100644
+--- a/hw/display/virtio-gpu-base.c
++++ b/hw/display/virtio-gpu-base.c
+@@ -69,12 +69,12 @@ static void virtio_gpu_notify_event(VirtIOGPUBase *g, uint32_t event_type)
+     virtio_notify_config(&g->parent_obj);
+ }
+ 
+-static int virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
++static void virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ {
+     VirtIOGPUBase *g = opaque;
+ 
+     if (idx >= g->conf.max_outputs) {
+-        return -1;
++        return;
+     }
+ 
+     g->req_state[idx].x = info->xoff;
+@@ -92,7 +92,7 @@ static int virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ 
+     /* send event to guest */
+     virtio_gpu_notify_event(g, VIRTIO_GPU_EVENT_DISPLAY);
+-    return 0;
++    return;
+ }
+ 
+ static void
+diff --git a/hw/display/virtio-vga.c b/hw/display/virtio-vga.c
+index c206b5da384b..4dcb34c4a740 100644
+--- a/hw/display/virtio-vga.c
++++ b/hw/display/virtio-vga.c
+@@ -47,15 +47,14 @@ static void virtio_vga_base_text_update(void *opaque, console_ch_t *chardata)
+     }
+ }
+ 
+-static int virtio_vga_base_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
++static void virtio_vga_base_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ {
+     VirtIOVGABase *vvga = opaque;
+     VirtIOGPUBase *g = vvga->vgpu;
+ 
+     if (g->hw_ops->ui_info) {
+-        return g->hw_ops->ui_info(g, idx, info);
++        g->hw_ops->ui_info(g, idx, info);
+     }
+-    return -1;
+ }
+ 
+ static void virtio_vga_base_gl_block(void *opaque, bool block)
+diff --git a/hw/vfio/display.c b/hw/vfio/display.c
+index 89bc90508fb8..78f4d82c1c35 100644
+--- a/hw/vfio/display.c
++++ b/hw/vfio/display.c
+@@ -106,14 +106,14 @@ err:
+     return;
+ }
+ 
+-static int vfio_display_edid_ui_info(void *opaque, uint32_t idx,
+-                                     QemuUIInfo *info)
++static void vfio_display_edid_ui_info(void *opaque, uint32_t idx,
++                                      QemuUIInfo *info)
+ {
+     VFIOPCIDevice *vdev = opaque;
+     VFIODisplay *dpy = vdev->dpy;
+ 
+     if (!dpy->edid_regs) {
+-        return 0;
++        return;
+     }
+ 
+     if (info->width && info->height) {
+@@ -121,8 +121,6 @@ static int vfio_display_edid_ui_info(void *opaque, uint32_t idx,
+     } else {
+         vfio_display_edid_update(vdev, false, 0, 0);
+     }
+-
+-    return 0;
+ }
+ 
+ static void vfio_display_edid_init(VFIOPCIDevice *vdev)
 -- 
 2.36.1
 
