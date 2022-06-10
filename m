@@ -4,32 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E3CDC43334
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:22:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.346113.571897 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 117DDC433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:23:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.346119.571908 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzaq9-0001RE-AL; Fri, 10 Jun 2022 09:22:01 +0000
+	id 1nzarI-0002PU-Lu; Fri, 10 Jun 2022 09:23:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 346113.571897; Fri, 10 Jun 2022 09:22:01 +0000
+Received: by outflank-mailman (output) from mailman id 346119.571908; Fri, 10 Jun 2022 09:23:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzaq9-0001R3-5Q; Fri, 10 Jun 2022 09:22:01 +0000
-Received: by outflank-mailman (input) for mailman id 346113;
- Fri, 10 Jun 2022 09:22:00 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1nzarI-0002PN-Ii; Fri, 10 Jun 2022 09:23:12 +0000
+Received: by outflank-mailman (input) for mailman id 346119;
+ Fri, 10 Jun 2022 09:23:11 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1nzaq8-0001QI-0K
- for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:22:00 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nzaq7-00052V-Gs; Fri, 10 Jun 2022 09:21:59 +0000
-Received: from 54-240-197-233.amazon.com ([54.240.197.233]
- helo=[192.168.23.251]) by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1nzaq7-0001By-Aq; Fri, 10 Jun 2022 09:21:59 +0000
+ (envelope-from <SRS0=2HR3=WR=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
+ id 1nzapn-0005HE-9H
+ for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:21:39 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id ba6716f7-e89e-11ec-bd2c-47488cf2e6aa;
+ Fri, 10 Jun 2022 11:21:38 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-271-OrbZa1CaOsm0-icMqDwwwA-1; Fri, 10 Jun 2022 05:21:31 -0400
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 17259101AA47;
+ Fri, 10 Jun 2022 09:21:31 +0000 (UTC)
+Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id C6582C53360;
+ Fri, 10 Jun 2022 09:21:30 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id CCF041800634; Fri, 10 Jun 2022 11:20:44 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,161 +54,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=1n1OGo/fhKvqbYvMMZubM5NgMCq1Vy19RgCUFKHE4IE=; b=mZn1NQO4rHVOv0qImiCOwyhW9J
-	mftMA7SrWQu8wCATy1Xla0GBbQicqcYswUpgqqxkJELW8chP8ghi65mnqefB5PatQyr5KJ87cYGHV
-	CzbojqXk4BYzFfGZ9BV0K0lsKMzWavT2WVSX9NqY/2wPy74o78RsnwGkRHPHfpyBo+qE=;
-Message-ID: <e1369888-4135-c2f6-727a-a018d78a4d3a@xen.org>
-Date: Fri, 10 Jun 2022 10:21:57 +0100
+X-Inumbo-ID: ba6716f7-e89e-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1654852896;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=o6vOmc4r9ui1udWdegwNJ5alAMO2M7wcYKQqptdB7KA=;
+	b=ggc3Vb20CnJEwmYZyMXpt+RhDFcZ7y7166LHQNnfbJ9/0rWwye2O+KStzjqyqQBSZfx7nB
+	Nb3U4oZoeBcIVhC0+AbaR+QT1My13biDuE0CY/7KE/e9ypIxtFIl3DwUt20dWLc06Jo6hb
+	fk/Mg/qFAEHf9tC+WLe7vBeJFYDq/5A=
+X-MC-Unique: OrbZa1CaOsm0-icMqDwwwA-1
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: "Canokeys.org" <contact@canokeys.org>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony Perard <anthony.perard@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	Akihiko Odaki <akihiko.odaki@gmail.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	"Hongren (Zenithal) Zheng" <i@zenithal.me>,
+	xen-devel@lists.xenproject.org,
+	Alex Williamson <alex.williamson@redhat.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
+Subject: [PULL 10/17] MAINTAINERS: add myself as CanoKey maintainer
+Date: Fri, 10 Jun 2022 11:20:36 +0200
+Message-Id: <20220610092043.1874654-11-kraxel@redhat.com>
+In-Reply-To: <20220610092043.1874654-1-kraxel@redhat.com>
+References: <20220610092043.1874654-1-kraxel@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.10.0
-Subject: Re: [PATCH] add more MISRA C rules to docs/misra/rules.rst
-To: Stefano Stabellini <sstabellini@kernel.org>,
- xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, George.Dunlap@citrix.com, roger.pau@citrix.com,
- Artem_Mygaiev@epam.com, Andrew.Cooper3@citrix.com, Bertrand.Marquis@arm.com
-References: <alpine.DEB.2.22.394.2206091748210.756493@ubuntu-linux-20-04-desktop>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <alpine.DEB.2.22.394.2206091748210.756493@ubuntu-linux-20-04-desktop>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
 
-Hi Stefano,
+From: "Hongren (Zenithal) Zheng" <i@zenithal.me>
 
-On 10/06/2022 01:48, Stefano Stabellini wrote:
-> Add the new MISRA C rules agreed by the MISRA C working group to
-> docs/misra/rules.rst.
-> 
-> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
+Message-Id: <YoY61xI0IcFT1fOP@Sun>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ MAINTAINERS | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Acked-by: Julien Grall <jgrall@amazon.com>
-
-Cheers,
-
-> 
-> ---
-> 
-> I added the rules that we agreed upon this morning together with all the
-> notes we discussed, in particular:
-> 
-> - macros as macro parameters at invocation time for Rule 5.3
-> - the clarification of Rule 9.1
-> - gnu_inline exception for Rule 8.10
-> 
-> 
-> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-> index 6ccff07765..5c28836bc8 100644
-> --- a/docs/misra/rules.rst
-> +++ b/docs/misra/rules.rst
-> @@ -89,6 +89,28 @@ existing codebase are work-in-progress.
->          (xen/include/public/) are allowed to retain longer identifiers
->          for backward compatibility.
->   
-> +   * - `Rule 5.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_02.c>`_
-> +     - Required
-> +     - Identifiers declared in the same scope and name space shall be
-> +       distinct
-> +     - The Xen characters limit for identifiers is 40. Public headers
-> +       (xen/include/public/) are allowed to retain longer identifiers
-> +       for backward compatibility.
-> +
-> +   * - `Rule 5.3 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_03.c>`_
-> +     - Required
-> +     - An identifier declared in an inner scope shall not hide an
-> +       identifier declared in an outer scope
-> +     - Using macros as macro parameters at invocation time is allowed,
-> +       e.g. MAX(var0, MIN(var1, var2))
-> +
-> +   * - `Rule 5.4 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_04.c>`_
-> +     - Required
-> +     - Macro identifiers shall be distinct
-> +     - The Xen characters limit for macro identifiers is 40. Public
-> +       headers (xen/include/public/) are allowed to retain longer
-> +       identifiers for backward compatibility.
-> +
->      * - `Rule 6.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_06_02.c>`_
->        - Required
->        - Single-bit named bit fields shall not be of a signed type
-> @@ -123,8 +145,75 @@ existing codebase are work-in-progress.
->          declarations of objects and functions that have internal linkage
->        -
->   
-> +   * - `Rule 8.10 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_10.c>`_
-> +     - Required
-> +     - An inline function shall be declared with the static storage class
-> +     - gnu_inline (without static) is allowed.
-> +
->      * - `Rule 8.12 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_12.c>`_
->        - Required
->        - Within an enumerator list the value of an implicitly-specified
->          enumeration constant shall be unique
->        -
-> +
-> +   * - `Rule 9.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_09_01.c>`_
-> +     - Mandatory
-> +     - The value of an object with automatic storage duration shall not
-> +       be read before it has been set
-> +     - Rule clarification: do not use variables before they are
-> +       initialized. An explicit initializer is not necessarily required.
-> +       Try reducing the scope of the variable. If an explicit
-> +       initializer is added, consider initializing the variable to a
-> +       poison value.
-> +
-> +   * - `Rule 9.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_09_02.c>`_
-> +     - Required
-> +     - The initializer for an aggregate or union shall be enclosed in
-> +       braces
-> +     -
-> +
-> +   * - `Rule 13.6 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_13_06.c>`_
-> +     - Mandatory
-> +     - The operand of the sizeof operator shall not contain any
-> +       expression which has potential side effects
-> +     -
-> +
-> +   * - `Rule 14.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_14_01.c>`_
-> +     - Required
-> +     - A loop counter shall not have essentially floating type
-> +     -
-> +
-> +   * - `Rule 16.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_16_07.c>`_
-> +     - Required
-> +     - A switch-expression shall not have essentially Boolean type
-> +     -
-> +
-> +   * - `Rule 17.3 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_03.c>`_
-> +     - Mandatory
-> +     - A function shall not be declared implicitly
-> +     -
-> +
-> +   * - `Rule 17.4 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_04.c>`_
-> +     - Mandatory
-> +     - All exit paths from a function with non-void return type shall
-> +       have an explicit return statement with an expression
-> +     -
-> +
-> +   * - `Rule 20.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_07.c>`_
-> +     - Required
-> +     - Expressions resulting from the expansion of macro parameters
-> +       shall be enclosed in parentheses
-> +     -
-> +
-> +   * - `Rule 20.13 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_13.c>`_
-> +     - Required
-> +     - A line whose first token is # shall be a valid preprocessing
-> +       directive
-> +     -
-> +
-> +   * - `Rule 20.14 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_14.c>`_
-> +     - Required
-> +     - All #else #elif and #endif preprocessor directives shall reside
-> +       in the same file as the #if #ifdef or #ifndef directive to which
-> +       they are related
-> +     -
-
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 5580a36b68e1..4ae9d707d5b0 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -2425,6 +2425,14 @@ F: hw/intc/s390_flic*.c
+ F: include/hw/s390x/s390_flic.h
+ L: qemu-s390x@nongnu.org
+ 
++CanoKey
++M: Hongren (Zenithal) Zheng <i@zenithal.me>
++S: Maintained
++R: Canokeys.org <contact@canokeys.org>
++F: hw/usb/canokey.c
++F: hw/usb/canokey.h
++F: docs/system/devices/canokey.rst
++
+ Subsystems
+ ----------
+ Overall Audio backends
 -- 
-Julien Grall
+2.36.1
+
 
