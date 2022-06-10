@@ -4,45 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B324C433EF
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:23:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.346185.571996 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E095C43334
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:36:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.346265.572027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzarr-00067I-U6; Fri, 10 Jun 2022 09:23:47 +0000
+	id 1nzb3k-0001dC-Qx; Fri, 10 Jun 2022 09:36:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 346185.571996; Fri, 10 Jun 2022 09:23:47 +0000
+Received: by outflank-mailman (output) from mailman id 346265.572027; Fri, 10 Jun 2022 09:36:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzarr-00066b-Q5; Fri, 10 Jun 2022 09:23:47 +0000
-Received: by outflank-mailman (input) for mailman id 346185;
- Fri, 10 Jun 2022 09:23:46 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1nzb3k-0001d5-Nm; Fri, 10 Jun 2022 09:36:04 +0000
+Received: by outflank-mailman (input) for mailman id 346265;
+ Fri, 10 Jun 2022 09:36:03 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2HR3=WR=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1nzapz-0005HE-TA
- for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:21:51 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c0e4520b-e89e-11ec-bd2c-47488cf2e6aa;
- Fri, 10 Jun 2022 11:21:48 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-299-qygipjx1NYupOP8hE8i2Jw-1; Fri, 10 Jun 2022 05:21:42 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id F31F01C05AB7;
- Fri, 10 Jun 2022 09:21:41 +0000 (UTC)
-Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id A49F140D2827;
- Fri, 10 Jun 2022 09:21:40 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 6241F1800865; Fri, 10 Jun 2022 11:20:45 +0200 (CEST)
+ (envelope-from <julien@xen.org>) id 1nzb3j-0001cz-Og
+ for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:36:03 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nzb3j-0005JX-DM; Fri, 10 Jun 2022 09:36:03 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=[192.168.23.251]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nzb3j-0002BA-6q; Fri, 10 Jun 2022 09:36:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,150 +41,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c0e4520b-e89e-11ec-bd2c-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1654852907;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=hTTJvnegxxvfJsWseZ7+SmUjba5GRnY9ME/e3uOvaP0=;
-	b=Qt6NfMk14JEmdOand/QTiTIIuXfF1Jgs0EqHsxUREWwDsniQpfSG6OQEjFI+ifaq3WHkac
-	X7HdwbzHDBC2DB+gObn6Fu/DqU2tNY6WOcbmrwG24fm1V+K4H1tBIxYD5WMjs8tEDqUi2F
-	jUe7oGV4MNQFjhs6gmA3LO4Wrc/uHko=
-X-MC-Unique: qygipjx1NYupOP8hE8i2Jw-1
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: "Canokeys.org" <contact@canokeys.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Akihiko Odaki <akihiko.odaki@gmail.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	"Hongren (Zenithal) Zheng" <i@zenithal.me>,
-	xen-devel@lists.xenproject.org,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PULL 15/17] ui/console: Do not return a value with ui_info
-Date: Fri, 10 Jun 2022 11:20:41 +0200
-Message-Id: <20220610092043.1874654-16-kraxel@redhat.com>
-In-Reply-To: <20220610092043.1874654-1-kraxel@redhat.com>
-References: <20220610092043.1874654-1-kraxel@redhat.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=s6BfmEU8864JGM4/VFVea1/LQptm4Ee9ClsMSi9Q/s8=; b=ajCsNIzqY9lSlw+s9QtqAv8EsR
+	ok524mac7uTXy8sV7gGfVmCKDdY/P30vBlIMdZKjDy+v28WYR9mm8rAj5BN9aClshGfqc84c/uXoR
+	xIoXYPlZxVjV3mk8pQpvOBQ5gzI6yZzs35pfOrBLyID2w6Y/XNd9pJs2oDp4Y/oGxTmc=;
+Message-ID: <015d87aa-936b-94d4-2500-c438814c5d71@xen.org>
+Date: Fri, 10 Jun 2022 10:36:01 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.10.0
+Subject: Re: [PATCH 0/2] xen/mm: Optimize init_heap_pages()
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, Julien Grall <jgrall@amazon.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <20220609083039.76667-1-julien@xen.org>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20220609083039.76667-1-julien@xen.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: Akihiko Odaki <akihiko.odaki@gmail.com>
+On 09/06/2022 09:30, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
+> 
+> Hi all,
+> 
+> As part of the Live-Update work, we noticed that a big part Xen boot
+> is spent to add pages in the heap. For instance, on when running Xen
+> in a nested envionment on a c5.metal, it takes ~1.5s.
 
-The returned value is not used and misleading.
+On IRC, Bertrand asked me how I measured the time taken here. I will 
+share on xen-devel so everyone can use it. Note the patch is x86 
+specific, but could be easily adapted for Arm.
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
-Message-Id: <20220226115516.59830-2-akihiko.odaki@gmail.com>
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- include/ui/console.h         | 2 +-
- hw/display/virtio-gpu-base.c | 6 +++---
- hw/display/virtio-vga.c      | 5 ++---
- hw/vfio/display.c            | 8 +++-----
- 4 files changed, 9 insertions(+), 12 deletions(-)
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 53a73010e029..d99b9f3abf5e 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -615,10 +615,16 @@ static inline bool using_2M_mapping(void)
+             !l1_table_offset((unsigned long)__2M_rwdata_end);
+  }
 
-diff --git a/include/ui/console.h b/include/ui/console.h
-index c44b28a972ca..642d6f5248cf 100644
---- a/include/ui/console.h
-+++ b/include/ui/console.h
-@@ -432,7 +432,7 @@ typedef struct GraphicHwOps {
-     bool gfx_update_async; /* if true, calls graphic_hw_update_done() */
-     void (*text_update)(void *opaque, console_ch_t *text);
-     void (*update_interval)(void *opaque, uint64_t interval);
--    int (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
-+    void (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
-     void (*gl_block)(void *opaque, bool block);
- } GraphicHwOps;
- 
-diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
-index 790cec333c8c..b21d6e5b0be8 100644
---- a/hw/display/virtio-gpu-base.c
-+++ b/hw/display/virtio-gpu-base.c
-@@ -69,12 +69,12 @@ static void virtio_gpu_notify_event(VirtIOGPUBase *g, uint32_t event_type)
-     virtio_notify_config(&g->parent_obj);
- }
- 
--static int virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
-+static void virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
- {
-     VirtIOGPUBase *g = opaque;
- 
-     if (idx >= g->conf.max_outputs) {
--        return -1;
-+        return;
-     }
- 
-     g->req_state[idx].x = info->xoff;
-@@ -92,7 +92,7 @@ static int virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
- 
-     /* send event to guest */
-     virtio_gpu_notify_event(g, VIRTIO_GPU_EVENT_DISPLAY);
--    return 0;
-+    return;
- }
- 
- static void
-diff --git a/hw/display/virtio-vga.c b/hw/display/virtio-vga.c
-index c206b5da384b..4dcb34c4a740 100644
---- a/hw/display/virtio-vga.c
-+++ b/hw/display/virtio-vga.c
-@@ -47,15 +47,14 @@ static void virtio_vga_base_text_update(void *opaque, console_ch_t *chardata)
-     }
- }
- 
--static int virtio_vga_base_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
-+static void virtio_vga_base_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
- {
-     VirtIOVGABase *vvga = opaque;
-     VirtIOGPUBase *g = vvga->vgpu;
- 
-     if (g->hw_ops->ui_info) {
--        return g->hw_ops->ui_info(g, idx, info);
-+        g->hw_ops->ui_info(g, idx, info);
-     }
--    return -1;
- }
- 
- static void virtio_vga_base_gl_block(void *opaque, bool block)
-diff --git a/hw/vfio/display.c b/hw/vfio/display.c
-index 89bc90508fb8..78f4d82c1c35 100644
---- a/hw/vfio/display.c
-+++ b/hw/vfio/display.c
-@@ -106,14 +106,14 @@ err:
-     return;
- }
- 
--static int vfio_display_edid_ui_info(void *opaque, uint32_t idx,
--                                     QemuUIInfo *info)
-+static void vfio_display_edid_ui_info(void *opaque, uint32_t idx,
-+                                      QemuUIInfo *info)
- {
-     VFIOPCIDevice *vdev = opaque;
-     VFIODisplay *dpy = vdev->dpy;
- 
-     if (!dpy->edid_regs) {
--        return 0;
-+        return;
-     }
- 
-     if (info->width && info->height) {
-@@ -121,8 +121,6 @@ static int vfio_display_edid_ui_info(void *opaque, uint32_t idx,
-     } else {
-         vfio_display_edid_update(vdev, false, 0, 0);
-     }
--
--    return 0;
- }
- 
- static void vfio_display_edid_init(VFIOPCIDevice *vdev)
++extern uint64_t myticks;
++
+  static void noreturn init_done(void)
+  {
+      void *va;
+      unsigned long start, end;
++    uint64_t elapsed = tsc_ticks2ns(myticks);
++
++    printk("elapsed %lu ms %lu ns\n", elapsed / MILLISECS(1),
++           elapsed % MILLISECS(1));
+
+      system_state = SYS_STATE_active;
+
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index ea59cd1a4aba..3e6504283f1e 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1865,9 +1865,12 @@ static unsigned long avail_heap_pages(
+      return free_pages;
+  }
+
++uint64_t myticks;
++
+  void __init end_boot_allocator(void)
+  {
+      unsigned int i;
++    uint64_t stsc = rdtsc_ordered();
+
+      /* Pages that are free now go to the domain sub-allocator. */
+      for ( i = 0; i < nr_bootmem_regions; i++ )
+@@ -1892,6 +1895,8 @@ void __init end_boot_allocator(void)
+      if ( !dma_bitsize && (num_online_nodes() > 1) )
+          dma_bitsize = arch_get_dma_bitsize();
+
++    myticks = rdtsc_ordered() - stsc;
++
+      printk("Domain heap initialised");
+      if ( dma_bitsize )
+          printk(" DMA width %u bits", dma_bitsize);
+
+Cheers,
+
 -- 
-2.36.1
-
+Julien Grall
 
