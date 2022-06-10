@@ -4,45 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12A8AC43334
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:21:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.346100.571885 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E3CDC43334
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jun 2022 09:22:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.346113.571897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzapj-0008Bk-Tz; Fri, 10 Jun 2022 09:21:35 +0000
+	id 1nzaq9-0001RE-AL; Fri, 10 Jun 2022 09:22:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 346100.571885; Fri, 10 Jun 2022 09:21:35 +0000
+Received: by outflank-mailman (output) from mailman id 346113.571897; Fri, 10 Jun 2022 09:22:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1nzapj-0008BP-Pj; Fri, 10 Jun 2022 09:21:35 +0000
-Received: by outflank-mailman (input) for mailman id 346100;
- Fri, 10 Jun 2022 09:21:35 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1nzaq9-0001R3-5Q; Fri, 10 Jun 2022 09:22:01 +0000
+Received: by outflank-mailman (input) for mailman id 346113;
+ Fri, 10 Jun 2022 09:22:00 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=2HR3=WR=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1nzapi-00050F-Sr
- for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:21:35 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b7d14d57-e89e-11ec-8179-c7c2a468b362;
- Fri, 10 Jun 2022 11:21:33 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-199-ie5LO4fzPN-Uj95gsVZ9kw-1; Fri, 10 Jun 2022 05:21:29 -0400
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
- [10.11.54.8])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E493938149A2;
- Fri, 10 Jun 2022 09:21:28 +0000 (UTC)
-Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6E551C53360;
- Fri, 10 Jun 2022 09:21:28 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id A169F180062F; Fri, 10 Jun 2022 11:20:44 +0200 (CEST)
+ (envelope-from <julien@xen.org>) id 1nzaq8-0001QI-0K
+ for xen-devel@lists.xenproject.org; Fri, 10 Jun 2022 09:22:00 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nzaq7-00052V-Gs; Fri, 10 Jun 2022 09:21:59 +0000
+Received: from 54-240-197-233.amazon.com ([54.240.197.233]
+ helo=[192.168.23.251]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1nzaq7-0001By-Aq; Fri, 10 Jun 2022 09:21:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,236 +41,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b7d14d57-e89e-11ec-8179-c7c2a468b362
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1654852892;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Iypp4lhP0vK8zaOIYv4YGS15C6hr5eRaL+NEXu7qlj4=;
-	b=FhB15AM2+IRbBqhTlkRbxzl+jI7PYkf+c5YybuLkZ4roa7T0rkisLF7ZTXEktPDty0Njfi
-	PX2UQIBmGN5Vbbo7rRX0M5gn3hSunDjgQVD59qMYSZeul5OhbK4yvziAeHZO1GgdOmr1jI
-	+qgmHLjv9cYdSFvOitX8qDUv1nkhF50=
-X-MC-Unique: ie5LO4fzPN-Uj95gsVZ9kw-1
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: "Canokeys.org" <contact@canokeys.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Akihiko Odaki <akihiko.odaki@gmail.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	"Hongren (Zenithal) Zheng" <i@zenithal.me>,
-	xen-devel@lists.xenproject.org,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: [PULL 08/17] docs: Add CanoKey documentation
-Date: Fri, 10 Jun 2022 11:20:34 +0200
-Message-Id: <20220610092043.1874654-9-kraxel@redhat.com>
-In-Reply-To: <20220610092043.1874654-1-kraxel@redhat.com>
-References: <20220610092043.1874654-1-kraxel@redhat.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=1n1OGo/fhKvqbYvMMZubM5NgMCq1Vy19RgCUFKHE4IE=; b=mZn1NQO4rHVOv0qImiCOwyhW9J
+	mftMA7SrWQu8wCATy1Xla0GBbQicqcYswUpgqqxkJELW8chP8ghi65mnqefB5PatQyr5KJ87cYGHV
+	CzbojqXk4BYzFfGZ9BV0K0lsKMzWavT2WVSX9NqY/2wPy74o78RsnwGkRHPHfpyBo+qE=;
+Message-ID: <e1369888-4135-c2f6-727a-a018d78a4d3a@xen.org>
+Date: Fri, 10 Jun 2022 10:21:57 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.10.0
+Subject: Re: [PATCH] add more MISRA C rules to docs/misra/rules.rst
+To: Stefano Stabellini <sstabellini@kernel.org>,
+ xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, George.Dunlap@citrix.com, roger.pau@citrix.com,
+ Artem_Mygaiev@epam.com, Andrew.Cooper3@citrix.com, Bertrand.Marquis@arm.com
+References: <alpine.DEB.2.22.394.2206091748210.756493@ubuntu-linux-20-04-desktop>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <alpine.DEB.2.22.394.2206091748210.756493@ubuntu-linux-20-04-desktop>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: "Hongren (Zenithal) Zheng" <i@zenithal.me>
+Hi Stefano,
 
-Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
-Message-Id: <YoY6ilQimrK+l5NN@Sun>
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
----
- docs/system/device-emulation.rst |   1 +
- docs/system/devices/canokey.rst  | 168 +++++++++++++++++++++++++++++++
- 2 files changed, 169 insertions(+)
- create mode 100644 docs/system/devices/canokey.rst
+On 10/06/2022 01:48, Stefano Stabellini wrote:
+> Add the new MISRA C rules agreed by the MISRA C working group to
+> docs/misra/rules.rst.
+> 
+> Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-diff --git a/docs/system/device-emulation.rst b/docs/system/device-emulation.rst
-index 3b729b920d7c..05060060563f 100644
---- a/docs/system/device-emulation.rst
-+++ b/docs/system/device-emulation.rst
-@@ -92,3 +92,4 @@ Emulated Devices
-    devices/vhost-user.rst
-    devices/virtio-pmem.rst
-    devices/vhost-user-rng.rst
-+   devices/canokey.rst
-diff --git a/docs/system/devices/canokey.rst b/docs/system/devices/canokey.rst
-new file mode 100644
-index 000000000000..169f99b8eb82
---- /dev/null
-+++ b/docs/system/devices/canokey.rst
-@@ -0,0 +1,168 @@
-+.. _canokey:
-+
-+CanoKey QEMU
-+------------
-+
-+CanoKey [1]_ is an open-source secure key with supports of
-+
-+* U2F / FIDO2 with Ed25519 and HMAC-secret
-+* OpenPGP Card V3.4 with RSA4096, Ed25519 and more [2]_
-+* PIV (NIST SP 800-73-4)
-+* HOTP / TOTP
-+* NDEF
-+
-+All these platform-independent features are in canokey-core [3]_.
-+
-+For different platforms, CanoKey has different implementations,
-+including both hardware implementions and virtual cards:
-+
-+* CanoKey STM32 [4]_
-+* CanoKey Pigeon [5]_
-+* (virt-card) CanoKey USB/IP
-+* (virt-card) CanoKey FunctionFS
-+
-+In QEMU, yet another CanoKey virt-card is implemented.
-+CanoKey QEMU exposes itself as a USB device to the guest OS.
-+
-+With the same software configuration as a hardware key,
-+the guest OS can use all the functionalities of a secure key as if
-+there was actually an hardware key plugged in.
-+
-+CanoKey QEMU provides much convenience for debuging:
-+
-+* libcanokey-qemu supports debuging output thus developers can
-+  inspect what happens inside a secure key
-+* CanoKey QEMU supports trace event thus event
-+* QEMU USB stack supports pcap thus USB packet between the guest
-+  and key can be captured and analysed
-+
-+Then for developers:
-+
-+* For developers on software with secure key support (e.g. FIDO2, OpenPGP),
-+  they can see what happens inside the secure key
-+* For secure key developers, USB packets between guest OS and CanoKey
-+  can be easily captured and analysed
-+
-+Also since this is a virtual card, it can be easily used in CI for testing
-+on code coping with secure key.
-+
-+Building
-+========
-+
-+libcanokey-qemu is required to use CanoKey QEMU.
-+
-+.. code-block:: shell
-+
-+    git clone https://github.com/canokeys/canokey-qemu
-+    mkdir canokey-qemu/build
-+    pushd canokey-qemu/build
-+
-+If you want to install libcanokey-qemu in a different place,
-+add ``-DCMAKE_INSTALL_PREFIX=/path/to/your/place`` to cmake below.
-+
-+.. code-block:: shell
-+
-+    cmake ..
-+    make
-+    make install # may need sudo
-+    popd
-+
-+Then configuring and building:
-+
-+.. code-block:: shell
-+
-+    # depending on your env, lib/pkgconfig can be lib64/pkgconfig
-+    export PKG_CONFIG_PATH=/path/to/your/place/lib/pkgconfig:$PKG_CONFIG_PATH
-+    ./configure --enable-canokey && make
-+
-+Using CanoKey QEMU
-+==================
-+
-+CanoKey QEMU stores all its data on a file of the host specified by the argument
-+when invoking qemu.
-+
-+.. parsed-literal::
-+
-+    |qemu_system| -usb -device canokey,file=$HOME/.canokey-file
-+
-+Note: you should keep this file carefully as it may contain your private key!
-+
-+The first time when the file is used, it is created and initialized by CanoKey,
-+afterwards CanoKey QEMU would just read this file.
-+
-+After the guest OS boots, you can check that there is a USB device.
-+
-+For example, If the guest OS is an Linux machine. You may invoke lsusb
-+and find CanoKey QEMU there:
-+
-+.. code-block:: shell
-+
-+    $ lsusb
-+    Bus 001 Device 002: ID 20a0:42d4 Clay Logic CanoKey QEMU
-+
-+You may setup the key as guided in [6]_. The console for the key is at [7]_.
-+
-+Debuging
-+========
-+
-+CanoKey QEMU consists of two parts, ``libcanokey-qemu.so`` and ``canokey.c``,
-+the latter of which resides in QEMU. The former provides core functionality
-+of a secure key while the latter provides platform-dependent functions:
-+USB packet handling.
-+
-+If you want to trace what happens inside the secure key, when compiling
-+libcanokey-qemu, you should add ``-DQEMU_DEBUG_OUTPUT=ON`` in cmake command
-+line:
-+
-+.. code-block:: shell
-+
-+    cmake .. -DQEMU_DEBUG_OUTPUT=ON
-+
-+If you want to trace events happened in canokey.c, use
-+
-+.. parsed-literal::
-+
-+    |qemu_system| --trace "canokey_*" \\
-+        -usb -device canokey,file=$HOME/.canokey-file
-+
-+If you want to capture USB packets between the guest and the host, you can:
-+
-+.. parsed-literal::
-+
-+    |qemu_system| -usb -device canokey,file=$HOME/.canokey-file,pcap=key.pcap
-+
-+Limitations
-+===========
-+
-+Currently libcanokey-qemu.so has dozens of global variables as it was originally
-+designed for embedded systems. Thus one qemu instance can not have
-+multiple CanoKey QEMU running, namely you can not
-+
-+.. parsed-literal::
-+
-+    |qemu_system| -usb -device canokey,file=$HOME/.canokey-file \\
-+         -device canokey,file=$HOME/.canokey-file2
-+
-+Also, there is no lock on canokey-file, thus two CanoKey QEMU instance
-+can not read one canokey-file at the same time.
-+
-+Another limitation is that this device is not compatible with ``qemu-xhci``,
-+in that this device would hang when there are FIDO2 packets (traffic on
-+interrupt endpoints). If you do not use FIDO2 then it works as intended,
-+but for full functionality you should use old uhci/ehci bus and attach canokey
-+to it, for example
-+
-+.. parsed-literal::
-+
-+   |qemu_system| -device piix3-usb-uhci,id=uhci -device canokey,bus=uhci.0
-+
-+References
-+==========
-+
-+.. [1] `<https://canokeys.org>`_
-+.. [2] `<https://docs.canokeys.org/userguide/openpgp/#supported-algorithm>`_
-+.. [3] `<https://github.com/canokeys/canokey-core>`_
-+.. [4] `<https://github.com/canokeys/canokey-stm32>`_
-+.. [5] `<https://github.com/canokeys/canokey-pigeon>`_
-+.. [6] `<https://docs.canokeys.org/>`_
-+.. [7] `<https://console.canokeys.org/>`_
+Acked-by: Julien Grall <jgrall@amazon.com>
+
+Cheers,
+
+> 
+> ---
+> 
+> I added the rules that we agreed upon this morning together with all the
+> notes we discussed, in particular:
+> 
+> - macros as macro parameters at invocation time for Rule 5.3
+> - the clarification of Rule 9.1
+> - gnu_inline exception for Rule 8.10
+> 
+> 
+> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+> index 6ccff07765..5c28836bc8 100644
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -89,6 +89,28 @@ existing codebase are work-in-progress.
+>          (xen/include/public/) are allowed to retain longer identifiers
+>          for backward compatibility.
+>   
+> +   * - `Rule 5.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_02.c>`_
+> +     - Required
+> +     - Identifiers declared in the same scope and name space shall be
+> +       distinct
+> +     - The Xen characters limit for identifiers is 40. Public headers
+> +       (xen/include/public/) are allowed to retain longer identifiers
+> +       for backward compatibility.
+> +
+> +   * - `Rule 5.3 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_03.c>`_
+> +     - Required
+> +     - An identifier declared in an inner scope shall not hide an
+> +       identifier declared in an outer scope
+> +     - Using macros as macro parameters at invocation time is allowed,
+> +       e.g. MAX(var0, MIN(var1, var2))
+> +
+> +   * - `Rule 5.4 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_05_04.c>`_
+> +     - Required
+> +     - Macro identifiers shall be distinct
+> +     - The Xen characters limit for macro identifiers is 40. Public
+> +       headers (xen/include/public/) are allowed to retain longer
+> +       identifiers for backward compatibility.
+> +
+>      * - `Rule 6.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_06_02.c>`_
+>        - Required
+>        - Single-bit named bit fields shall not be of a signed type
+> @@ -123,8 +145,75 @@ existing codebase are work-in-progress.
+>          declarations of objects and functions that have internal linkage
+>        -
+>   
+> +   * - `Rule 8.10 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_10.c>`_
+> +     - Required
+> +     - An inline function shall be declared with the static storage class
+> +     - gnu_inline (without static) is allowed.
+> +
+>      * - `Rule 8.12 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_08_12.c>`_
+>        - Required
+>        - Within an enumerator list the value of an implicitly-specified
+>          enumeration constant shall be unique
+>        -
+> +
+> +   * - `Rule 9.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_09_01.c>`_
+> +     - Mandatory
+> +     - The value of an object with automatic storage duration shall not
+> +       be read before it has been set
+> +     - Rule clarification: do not use variables before they are
+> +       initialized. An explicit initializer is not necessarily required.
+> +       Try reducing the scope of the variable. If an explicit
+> +       initializer is added, consider initializing the variable to a
+> +       poison value.
+> +
+> +   * - `Rule 9.2 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_09_02.c>`_
+> +     - Required
+> +     - The initializer for an aggregate or union shall be enclosed in
+> +       braces
+> +     -
+> +
+> +   * - `Rule 13.6 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_13_06.c>`_
+> +     - Mandatory
+> +     - The operand of the sizeof operator shall not contain any
+> +       expression which has potential side effects
+> +     -
+> +
+> +   * - `Rule 14.1 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_14_01.c>`_
+> +     - Required
+> +     - A loop counter shall not have essentially floating type
+> +     -
+> +
+> +   * - `Rule 16.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_16_07.c>`_
+> +     - Required
+> +     - A switch-expression shall not have essentially Boolean type
+> +     -
+> +
+> +   * - `Rule 17.3 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_03.c>`_
+> +     - Mandatory
+> +     - A function shall not be declared implicitly
+> +     -
+> +
+> +   * - `Rule 17.4 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_17_04.c>`_
+> +     - Mandatory
+> +     - All exit paths from a function with non-void return type shall
+> +       have an explicit return statement with an expression
+> +     -
+> +
+> +   * - `Rule 20.7 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_07.c>`_
+> +     - Required
+> +     - Expressions resulting from the expansion of macro parameters
+> +       shall be enclosed in parentheses
+> +     -
+> +
+> +   * - `Rule 20.13 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_13.c>`_
+> +     - Required
+> +     - A line whose first token is # shall be a valid preprocessing
+> +       directive
+> +     -
+> +
+> +   * - `Rule 20.14 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_20_14.c>`_
+> +     - Required
+> +     - All #else #elif and #endif preprocessor directives shall reside
+> +       in the same file as the #if #ifdef or #ifndef directive to which
+> +       they are related
+> +     -
+
 -- 
-2.36.1
-
+Julien Grall
 
