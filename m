@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F333CCA485
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 11:37:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.347969.574265 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30961CCA480
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 11:37:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.347979.574354 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0iNY-0003f4-HX; Mon, 13 Jun 2022 11:37:08 +0000
+	id 1o0iNg-0005dh-CU; Mon, 13 Jun 2022 11:37:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 347969.574265; Mon, 13 Jun 2022 11:37:08 +0000
+Received: by outflank-mailman (output) from mailman id 347979.574354; Mon, 13 Jun 2022 11:37:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0iNY-0003ew-Ea; Mon, 13 Jun 2022 11:37:08 +0000
-Received: by outflank-mailman (input) for mailman id 347969;
- Mon, 13 Jun 2022 11:37:07 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o0iNf-0005bA-QJ; Mon, 13 Jun 2022 11:37:15 +0000
+Received: by outflank-mailman (input) for mailman id 347979;
+ Mon, 13 Jun 2022 11:37:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SJWo=WU=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o0iNW-0003eX-U2
- for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 11:37:07 +0000
+ id 1o0iNd-0003eY-6O
+ for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 11:37:13 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 24fd8cdd-eb0d-11ec-8901-93a377f238d6;
- Mon, 13 Jun 2022 13:37:04 +0200 (CEST)
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2961440f-eb0d-11ec-bd2c-47488cf2e6aa;
+ Mon, 13 Jun 2022 13:37:11 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-458-ot4G2UMAMfGhoPZBJ64vxA-1; Mon, 13 Jun 2022 07:36:59 -0400
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ us-mta-501-KvVginEiNHufd-nXx3l_YA-1; Mon, 13 Jun 2022 07:37:07 -0400
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id EA9AA802804;
- Mon, 13 Jun 2022 11:36:58 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B0C0380A0B0;
+ Mon, 13 Jun 2022 11:37:06 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 703A92166B26;
- Mon, 13 Jun 2022 11:36:58 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6788810725;
+ Mon, 13 Jun 2022 11:37:06 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id CFF951800626; Mon, 13 Jun 2022 13:36:55 +0200 (CEST)
+ id 715551800989; Mon, 13 Jun 2022 13:36:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,17 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 24fd8cdd-eb0d-11ec-8901-93a377f238d6
+X-Inumbo-ID: 2961440f-eb0d-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655120222;
+	s=mimecast20190719; t=1655120230;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=duvBwvox7nwiHgrFheu6u9TsgJfSo6ljmtps4Jfms7E=;
-	b=WMEy6dN3zN2T0aeIPWSQeO6016dN+N3igYiKGACl5uQp54ZG9Mwkv0tmAMaXh0LmJQWX/2
-	R9JI6tkSSrfCzSKusw6f/YFUkxHeNL6YJ+04aLSta6jGQLv1H1K/YmQRakrUZLi9Z+JVSI
-	eH02yfCz7L6ZaT41ekdHbO1VkRi5XAg=
-X-MC-Unique: ot4G2UMAMfGhoPZBJ64vxA-1
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=obSiKgR2g439N1NCymTkGuD5ZtC+AWQDUPf1CsA55V4=;
+	b=HVbCChnxBj2IzVd6Ktjgn2FMM5amz7rlRjBP10bXGzPdsB6GvA/0oJ+3xn++XzockA+x1k
+	EiT2NZ8yKv4sZ/dNDuV8mP9CEpswinrVVJv40Pf414HQI5qZ+OJ8E/7ZxAwMwTjeB3O92F
+	a0TsSHj9uYvA/Q9/QZCNzBToMWCufyI=
+X-MC-Unique: KvVginEiNHufd-nXx3l_YA-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>,
@@ -78,170 +79,70 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
 	Paul Durrant <paul@xen.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
-	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PULL 00/16] Kraxel 20220613 patches
-Date: Mon, 13 Jun 2022 13:36:39 +0200
-Message-Id: <20220613113655.3693872-1-kraxel@redhat.com>
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Arnout Engelen <arnout@bzzt.net>
+Subject: [PULL 10/16] hw/usb/hcd-ehci: fix writeback order
+Date: Mon, 13 Jun 2022 13:36:49 +0200
+Message-Id: <20220613113655.3693872-11-kraxel@redhat.com>
+In-Reply-To: <20220613113655.3693872-1-kraxel@redhat.com>
+References: <20220613113655.3693872-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.6
+X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
 
-The following changes since commit dcb40541ebca7ec98a14d461593b3cd7282b4fac:
+From: Arnout Engelen <arnout@bzzt.net>
 
-  Merge tag 'mips-20220611' of https://github.com/philmd/qemu into staging (2022-06-11 21:13:27 -0700)
+The 'active' bit passes control over a qTD between the guest and the
+controller: set to 1 by guest to enable execution by the controller,
+and the controller sets it to '0' to hand back control to the guest.
 
-are available in the Git repository at:
+ehci_state_writeback write two dwords to main memory using DMA:
+the third dword of the qTD (containing dt, total bytes to transfer,
+cpage, cerr and status) and the fourth dword of the qTD (containing
+the offset).
 
-  git://git.kraxel.org/qemu tags/kraxel-20220613-pull-request
+This commit makes sure the fourth dword is written before the third,
+avoiding a race condition where a new offset written into the qTD
+by the guest after it observed the status going to go to '0' gets
+overwritten by a 'late' DMA writeback of the previous offset.
 
-for you to fetch changes up to 23b87f7a3a13e93e248eef8a4b7257548855a620:
+This race condition could lead to 'cpage out of range (5)' errors,
+and reproduced by:
 
-  ui: move 'pc-bios/keymaps' to 'ui/keymaps' (2022-06-13 10:59:25 +0200)
+./qemu-system-x86_64 -enable-kvm -bios $SEABIOS/bios.bin -m 4096 -device usb-ehci -blockdev driver=file,read-only=on,filename=/home/aengelen/Downloads/openSUSE-Tumbleweed-DVD-i586-Snapshot20220428-Media.iso,node-name=iso -device usb-storage,drive=iso,bootindex=0 -chardev pipe,id=shell,path=/tmp/pipe -device virtio-serial -device virtconsole,chardev=shell -device virtio-rng-pci -serial mon:stdio -nographic
 
-----------------------------------------------------------------
-usb: add CanoKey device, fixes for ehci + redir
-ui: fixes for gtk and cocoa, move keymaps (v2), rework refresh rate
-virtio-gpu: scanout flush fix
+(press a key, select 'Installation' (2), and accept the default
+values. On my machine the 'cpage out of range' is reproduced while
+loading the Linux Kernel about once per 7 attempts. With the fix in
+this commit it no longer fails)
 
-----------------------------------------------------------------
+This problem was previously reported as a seabios problem in
+https://mail.coreboot.org/hyperkitty/list/seabios@seabios.org/thread/OUTHT5ISSQJGXPNTUPY3O5E5EPZJCHM3/
+and as a nixos CI build failure in
+https://github.com/NixOS/nixpkgs/issues/170803
 
-Akihiko Odaki (4):
-  ui/cocoa: Fix poweroff request code
-  ui/console: Do not return a value with ui_info
-  ui: Deliver refresh rate via QemuUIInfo
-  virtio-gpu: Respect UI refresh rate for EDID
+Signed-off-by: Arnout Engelen <arnout@bzzt.net>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ hw/usb/hcd-ehci.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Arnout Engelen (1):
-  hw/usb/hcd-ehci: fix writeback order
-
-Daniel P. Berrangé (1):
-  ui: move 'pc-bios/keymaps' to 'ui/keymaps'
-
-Dongwon Kim (1):
-  virtio-gpu: update done only on the scanout associated with rect
-
-Hongren (Zenithal) Zheng (6):
-  hw/usb: Add CanoKey Implementation
-  hw/usb/canokey: Add trace events
-  meson: Add CanoKey
-  docs: Add CanoKey documentation
-  docs/system/devices/usb: Add CanoKey to USB devices examples
-  MAINTAINERS: add myself as CanoKey maintainer
-
-Joelle van Dyne (1):
-  usbredir: avoid queuing hello packet on snapshot restore
-
-Volker Rümelin (2):
-  ui/gtk-gl-area: implement GL context destruction
-  ui/gtk-gl-area: create the requested GL context version
-
- configure                           |   4 +
- meson_options.txt                   |   2 +
- hw/usb/canokey.h                    |  69 ++++++
- include/hw/virtio/virtio-gpu.h      |   1 +
- include/ui/console.h                |   4 +-
- include/ui/gtk.h                    |   2 +-
- hw/display/virtio-gpu-base.c        |   7 +-
- hw/display/virtio-gpu.c             |   4 +
- hw/display/virtio-vga.c             |   5 +-
- hw/display/xenfb.c                  |  14 +-
- hw/usb/canokey.c                    | 313 ++++++++++++++++++++++++++++
- hw/usb/hcd-ehci.c                   |   5 +-
- hw/usb/redirect.c                   |   3 +-
- hw/vfio/display.c                   |   8 +-
- ui/console.c                        |   6 -
- ui/gtk-egl.c                        |   4 +-
- ui/gtk-gl-area.c                    |  42 +++-
- ui/gtk.c                            |  45 ++--
- MAINTAINERS                         |   8 +
- docs/system/device-emulation.rst    |   1 +
- docs/system/devices/canokey.rst     | 168 +++++++++++++++
- docs/system/devices/usb.rst         |   4 +
- hw/usb/Kconfig                      |   5 +
- hw/usb/meson.build                  |   5 +
- hw/usb/trace-events                 |  16 ++
- meson.build                         |   6 +
- pc-bios/meson.build                 |   1 -
- scripts/meson-buildoptions.sh       |   3 +
- ui/cocoa.m                          |   6 +-
- {pc-bios => ui}/keymaps/ar          |   0
- {pc-bios => ui}/keymaps/bepo        |   0
- {pc-bios => ui}/keymaps/cz          |   0
- {pc-bios => ui}/keymaps/da          |   0
- {pc-bios => ui}/keymaps/de          |   0
- {pc-bios => ui}/keymaps/de-ch       |   0
- {pc-bios => ui}/keymaps/en-gb       |   0
- {pc-bios => ui}/keymaps/en-us       |   0
- {pc-bios => ui}/keymaps/es          |   0
- {pc-bios => ui}/keymaps/et          |   0
- {pc-bios => ui}/keymaps/fi          |   0
- {pc-bios => ui}/keymaps/fo          |   0
- {pc-bios => ui}/keymaps/fr          |   0
- {pc-bios => ui}/keymaps/fr-be       |   0
- {pc-bios => ui}/keymaps/fr-ca       |   0
- {pc-bios => ui}/keymaps/fr-ch       |   0
- {pc-bios => ui}/keymaps/hr          |   0
- {pc-bios => ui}/keymaps/hu          |   0
- {pc-bios => ui}/keymaps/is          |   0
- {pc-bios => ui}/keymaps/it          |   0
- {pc-bios => ui}/keymaps/ja          |   0
- {pc-bios => ui}/keymaps/lt          |   0
- {pc-bios => ui}/keymaps/lv          |   0
- {pc-bios => ui}/keymaps/meson.build |   0
- {pc-bios => ui}/keymaps/mk          |   0
- {pc-bios => ui}/keymaps/nl          |   0
- {pc-bios => ui}/keymaps/no          |   0
- {pc-bios => ui}/keymaps/pl          |   0
- {pc-bios => ui}/keymaps/pt          |   0
- {pc-bios => ui}/keymaps/pt-br       |   0
- {pc-bios => ui}/keymaps/ru          |   0
- {pc-bios => ui}/keymaps/sl          |   0
- {pc-bios => ui}/keymaps/sv          |   0
- {pc-bios => ui}/keymaps/th          |   0
- {pc-bios => ui}/keymaps/tr          |   0
- ui/meson.build                      |   1 +
- ui/trace-events                     |   2 +
- 66 files changed, 712 insertions(+), 52 deletions(-)
- create mode 100644 hw/usb/canokey.h
- create mode 100644 hw/usb/canokey.c
- create mode 100644 docs/system/devices/canokey.rst
- rename {pc-bios => ui}/keymaps/ar (100%)
- rename {pc-bios => ui}/keymaps/bepo (100%)
- rename {pc-bios => ui}/keymaps/cz (100%)
- rename {pc-bios => ui}/keymaps/da (100%)
- rename {pc-bios => ui}/keymaps/de (100%)
- rename {pc-bios => ui}/keymaps/de-ch (100%)
- rename {pc-bios => ui}/keymaps/en-gb (100%)
- rename {pc-bios => ui}/keymaps/en-us (100%)
- rename {pc-bios => ui}/keymaps/es (100%)
- rename {pc-bios => ui}/keymaps/et (100%)
- rename {pc-bios => ui}/keymaps/fi (100%)
- rename {pc-bios => ui}/keymaps/fo (100%)
- rename {pc-bios => ui}/keymaps/fr (100%)
- rename {pc-bios => ui}/keymaps/fr-be (100%)
- rename {pc-bios => ui}/keymaps/fr-ca (100%)
- rename {pc-bios => ui}/keymaps/fr-ch (100%)
- rename {pc-bios => ui}/keymaps/hr (100%)
- rename {pc-bios => ui}/keymaps/hu (100%)
- rename {pc-bios => ui}/keymaps/is (100%)
- rename {pc-bios => ui}/keymaps/it (100%)
- rename {pc-bios => ui}/keymaps/ja (100%)
- rename {pc-bios => ui}/keymaps/lt (100%)
- rename {pc-bios => ui}/keymaps/lv (100%)
- rename {pc-bios => ui}/keymaps/meson.build (100%)
- rename {pc-bios => ui}/keymaps/mk (100%)
- rename {pc-bios => ui}/keymaps/nl (100%)
- rename {pc-bios => ui}/keymaps/no (100%)
- rename {pc-bios => ui}/keymaps/pl (100%)
- rename {pc-bios => ui}/keymaps/pt (100%)
- rename {pc-bios => ui}/keymaps/pt-br (100%)
- rename {pc-bios => ui}/keymaps/ru (100%)
- rename {pc-bios => ui}/keymaps/sl (100%)
- rename {pc-bios => ui}/keymaps/sv (100%)
- rename {pc-bios => ui}/keymaps/th (100%)
- rename {pc-bios => ui}/keymaps/tr (100%)
-
+diff --git a/hw/usb/hcd-ehci.c b/hw/usb/hcd-ehci.c
+index 33a8a377bd95..d4da8dcb8d15 100644
+--- a/hw/usb/hcd-ehci.c
++++ b/hw/usb/hcd-ehci.c
+@@ -2011,7 +2011,10 @@ static int ehci_state_writeback(EHCIQueue *q)
+     ehci_trace_qtd(q, NLPTR_GET(p->qtdaddr), (EHCIqtd *) &q->qh.next_qtd);
+     qtd = (uint32_t *) &q->qh.next_qtd;
+     addr = NLPTR_GET(p->qtdaddr);
+-    put_dwords(q->ehci, addr + 2 * sizeof(uint32_t), qtd + 2, 2);
++    /* First write back the offset */
++    put_dwords(q->ehci, addr + 3 * sizeof(uint32_t), qtd + 3, 1);
++    /* Then write back the token, clearing the 'active' bit */
++    put_dwords(q->ehci, addr + 2 * sizeof(uint32_t), qtd + 2, 1);
+     ehci_free_packet(p);
+ 
+     /*
 -- 
 2.36.1
 
