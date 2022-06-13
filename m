@@ -4,43 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 832A8C43334
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 08:46:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.347861.574176 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457C0CCA47B
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 08:56:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.347843.574189 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0fi7-0005mH-56; Mon, 13 Jun 2022 08:46:11 +0000
+	id 1o0frz-0007UB-7u; Mon, 13 Jun 2022 08:56:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 347861.574176; Mon, 13 Jun 2022 08:46:11 +0000
+Received: by outflank-mailman (output) from mailman id 347843.574189; Mon, 13 Jun 2022 08:56:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0fi7-0005mA-2M; Mon, 13 Jun 2022 08:46:11 +0000
-Received: by outflank-mailman (input) for mailman id 347861;
- Mon, 13 Jun 2022 08:46:10 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o0frz-0007U4-2d; Mon, 13 Jun 2022 08:56:23 +0000
+Received: by outflank-mailman (input) for mailman id 347843;
+ Mon, 13 Jun 2022 08:26:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xNfa=WU=redhat.com=berrange@srs-se1.protection.inumbo.net>)
- id 1o0fi5-0005m4-Vk
- for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 08:46:10 +0000
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 42a4a149-eaf5-11ec-8901-93a377f238d6;
- Mon, 13 Jun 2022 10:46:05 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-634-9IpHJqSjOBatvPQxcG8MFA-1; Mon, 13 Jun 2022 04:46:00 -0400
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 0207D3801FE1;
- Mon, 13 Jun 2022 08:45:41 +0000 (UTC)
-Received: from redhat.com (unknown [10.33.36.124])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9B8F5475005;
- Mon, 13 Jun 2022 08:45:37 +0000 (UTC)
+ <SRS0=rOj1=WU=gmail.com=jiangshanlai@srs-se1.protection.inumbo.net>)
+ id 1o0fOo-00031i-0d
+ for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 08:26:14 +0000
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [2a00:1450:4864:20::32d])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 7c40d223-eaf2-11ec-bd2c-47488cf2e6aa;
+ Mon, 13 Jun 2022 10:26:13 +0200 (CEST)
+Received: by mail-wm1-x32d.google.com with SMTP id q15so2508417wmj.2
+ for <xen-devel@lists.xenproject.org>; Mon, 13 Jun 2022 01:26:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,113 +41,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 42a4a149-eaf5-11ec-8901-93a377f238d6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655109964;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=OsmIb8JBjamYO7HSXD7lvz9oKqmWR9je1VCbD+9sYo8=;
-	b=PUsT9hswdjnCMad4zVSgK+RQvxWv30of/H2q7cuQsVr7INAXwLISt8J1bhSUoRtzMiQBl8
-	wC4Uif4O3bv58YYFmbC8nBJAHRQJRS3ScH7SI1X6tzMsx493r/LX5RcaQdQ2ustghqPTeo
-	CHxiZVxs0/TO2MxmqnZct/Ku0gH1Ccc=
-X-MC-Unique: 9IpHJqSjOBatvPQxcG8MFA-1
-Date: Mon, 13 Jun 2022 09:45:35 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: Volker =?utf-8?Q?R=C3=BCmelin?= <vr_qemu@t-online.de>
-Cc: Richard Henderson <richard.henderson@linaro.org>,
-	Gerd Hoffmann <kraxel@redhat.com>, qemu-devel@nongnu.org,
-	"Canokeys.org" <contact@canokeys.org>,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony Perard <anthony.perard@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Akihiko Odaki <akihiko.odaki@gmail.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	"Hongren (Zenithal) Zheng" <i@zenithal.me>,
-	xen-devel@lists.xenproject.org,
-	Alex Williamson <alex.williamson@redhat.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
-Subject: Re: [PULL 00/17] Kraxel 20220610 patches
-Message-ID: <Yqb5L31cG/0cVM5B@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20220610092043.1874654-1-kraxel@redhat.com>
- <adec1cff-54f1-e2bf-8092-945601aeb912@linaro.org>
- <60c72935-85ce-4e24-43a5-119f6428b916@t-online.de>
+X-Inumbo-ID: 7c40d223-eaf2-11ec-bd2c-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=3JSggHLDbkXyuZCKaU+uQ7H5KVpBjE3ZWWl/F0t3JyI=;
+        b=hln/7KIUboOODQa9/Iv7zWAXFI8kFLhiLL+AWnA7ZL0itAJaB93eguKFQupB8Lv94a
+         mnMuLqlfVsMy6aSBFmNweaacWKXWw7aT6TScazfBGhspJqqH/PMOPWdnnnaxNLaf842d
+         D+3NPCattkXMe8VyippSy6AVlz1Q90Igxi/lQII1yr2hkIK0YZRpsj0TKs2Px7tXlVgY
+         915w6r1r+N9IHNGMPf7O4C6rOlcjLzR4xSEqc3Zfq8tMbY0ayFsU19Cug+0HkT25Saig
+         zkxTdXbzsbpEfsV6HhW0WtRME3JJZVdyKx57BtFZ0WE2gh0TSNH76QSkgUTVIoEuHNxT
+         f/gA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=3JSggHLDbkXyuZCKaU+uQ7H5KVpBjE3ZWWl/F0t3JyI=;
+        b=g8c4W/xTVMLeZGTKZ2bIoZCCkRMeYxUhKZ1GQo6i+ixBOACstvkagJme2Qv1gGzEum
+         3nuMr6ffzNdoSbFu1VwfuOcebvTy2Q/fwq86A57e4MoRb0fOF5oqckhm3ezesL6rOpdI
+         EtKm2sS3cusl6+jsr8xPkCWuAYBH11xLurtCiqBF8eMTpVreK5hxls6yTtpUW+aopq0X
+         XfmdjPjvNTj96kFMuiGhfTbuC7I4Dgo6r1JTXUS3j9fNkHcgbLeoYhI73F2s+8rscvH5
+         PvDk69JeLAiS/0KOCiFuFwCN0MJzd1kbPxczJ71qLlw1vezDZzxu7pUadA/I4Qsm8/Fs
+         waEA==
+X-Gm-Message-State: AOAM531hgUz3xgF8Ss01ic41l098ztHpdj6/ie6Aht/XBBoynC1UWS7t
+	0GNl6lhsghxzNxDYefi6/L9w69CueZw63H0gO3s=
+X-Google-Smtp-Source: ABdhPJxgJ3qlsWHXb4q5Q9LeHOXh1hQWbFNdZBk/6atfvyd1YyWRPGtuhT6/ZUDmb0vG1CLuyzfEgHlG2xi/itwptM8=
+X-Received: by 2002:a05:600c:1c9a:b0:39c:7db4:90c3 with SMTP id
+ k26-20020a05600c1c9a00b0039c7db490c3mr13053942wms.161.1655108772491; Mon, 13
+ Jun 2022 01:26:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <60c72935-85ce-4e24-43a5-119f6428b916@t-online.de>
-User-Agent: Mutt/2.2.1 (2022-02-19)
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+References: <20220608142723.103523089@infradead.org> <20220608144517.251109029@infradead.org>
+In-Reply-To: <20220608144517.251109029@infradead.org>
+From: Lai Jiangshan <jiangshanlai@gmail.com>
+Date: Mon, 13 Jun 2022 16:26:01 +0800
+Message-ID: <CAJhGHyCnu_BsKf5STMMJKMWm0NVZ8qXT8Qh=BhhCjSSgwchL3Q@mail.gmail.com>
+Subject: Re: [PATCH 21/36] x86/tdx: Remove TDX_HCALL_ISSUE_STI
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: Richard Henderson <rth@twiddle.net>, ink@jurassic.park.msu.ru, mattst88@gmail.com, 
+	vgupta@kernel.org, linux@armlinux.org.uk, ulli.kroll@googlemail.com, 
+	linus.walleij@linaro.org, shawnguo@kernel.org, 
+	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de, festevam@gmail.com, 
+	linux-imx@nxp.com, tony@atomide.com, khilman@kernel.org, 
+	catalin.marinas@arm.com, Will Deacon <will@kernel.org>, guoren@kernel.org, 
+	bcain@quicinc.com, Huacai Chen <chenhuacai@kernel.org>, kernel@xen0n.name, 
+	geert@linux-m68k.org, sammy@sammy.net, monstr@monstr.eu, 
+	tsbogend@alpha.franken.de, dinguyen@kernel.org, jonas@southpole.se, 
+	stefan.kristiansson@saunalahti.fi, shorne@gmail.com, 
+	James.Bottomley@hansenpartnership.com, deller@gmx.de, 
+	Michael Ellerman <mpe@ellerman.id.au>, benh@kernel.crashing.org, paulus@samba.org, 
+	Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+	Albert Ou <aou@eecs.berkeley.edu>, hca@linux.ibm.com, gor@linux.ibm.com, 
+	agordeev@linux.ibm.com, borntraeger@linux.ibm.com, svens@linux.ibm.com, 
+	ysato@users.sourceforge.jp, dalias@libc.org, davem@davemloft.net, 
+	Richard Weinberger <richard@nod.at>, anton.ivanov@cambridgegreys.com, 
+	Johannes Berg <johannes@sipsolutions.net>, Thomas Gleixner <tglx@linutronix.de>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, X86 ML <x86@kernel.org>, 
+	"H. Peter Anvin" <hpa@zytor.com>, acme <acme@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>, jolsa@kernel.org, 
+	Namhyung Kim <namhyung@kernel.org>, Juergen Gross <jgross@suse.com>, srivatsa@csail.mit.edu, 
+	amakhalov@vmware.com, VMware Inc <pv-drivers@vmware.com>, 
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, chris@zankel.net, jcmvbkbc@gmail.com, 
+	rafael@kernel.org, lenb@kernel.org, pavel@ucw.cz, gregkh@linuxfoundation.org, 
+	mturquette@baylibre.com, sboyd@kernel.org, daniel.lezcano@linaro.org, 
+	lpieralisi@kernel.org, sudeep.holla@arm.com, agross@kernel.org, 
+	bjorn.andersson@linaro.org, Anup Patel <anup@brainfault.org>, thierry.reding@gmail.com, 
+	jonathanh@nvidia.com, jacob.jun.pan@linux.intel.com, 
+	Arnd Bergmann <arnd@arndb.de>, yury.norov@gmail.com, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, linux@rasmusvillemoes.dk, 
+	rostedt@goodmis.org, pmladek@suse.com, senozhatsky@chromium.org, 
+	john.ogness@linutronix.de, paulmck@kernel.org, frederic@kernel.org, 
+	quic_neeraju@quicinc.com, josh@joshtriplett.org, 
+	mathieu.desnoyers@efficios.com, joel@joelfernandes.org, juri.lelli@redhat.com, 
+	vincent.guittot@linaro.org, dietmar.eggemann@arm.com, bsegall@google.com, 
+	mgorman@suse.de, bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org, 
+	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-snps-arc@lists.infradead.org, linux-arm-kernel@lists.infradead.org, 
+	linux-omap@vger.kernel.org, linux-csky@vger.kernel.org, 
+	linux-hexagon@vger.kernel.org, linux-ia64@vger.kernel.org, 
+	linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org, 
+	openrisc@lists.librecores.org, linux-parisc@vger.kernel.org, 
+	linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org, 
+	linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, 
+	sparclinux@vger.kernel.org, linux-um@lists.infradead.org, 
+	linux-perf-users@vger.kernel.org, virtualization@lists.linux-foundation.org, 
+	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org, 
+	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org, rcu@vger.kernel.org, 
+	Isaku Yamahata <isaku.yamahata@gmail.com>, kirill.shutemov@linux.intel.com
+Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Jun 11, 2022 at 06:34:28PM +0200, Volker Rümelin wrote:
-> Am 10.06.22 um 22:16 schrieb Richard Henderson:
-> > On 6/10/22 02:20, Gerd Hoffmann wrote:
-> > > The following changes since commit
-> > > 9cc1bf1ebca550f8d90f967ccd2b6d2e00e81387:
-> > > 
-> > >    Merge tag 'pull-xen-20220609' of
-> > > https://xenbits.xen.org/git-http/people/aperard/qemu-dm into staging
-> > > (2022-06-09 08:25:17 -0700)
-> > > 
-> > > are available in the Git repository at:
-> > > 
-> > >    git://git.kraxel.org/qemu tags/kraxel-20220610-pull-request
-> > > 
-> > > for you to fetch changes up to 02319a4d67d3f19039127b8dc9ca9478b6d6ccd8:
-> > > 
-> > >    virtio-gpu: Respect UI refresh rate for EDID (2022-06-10 11:11:44
-> > > +0200)
-> > > 
-> > > ----------------------------------------------------------------
-> > > usb: add CanoKey device, fixes for ehci + redir
-> > > ui: fixes for gtk and cocoa, move keymaps, rework refresh rate
-> > > virtio-gpu: scanout flush fix
-> > 
-> > This introduces regressions:
-> > 
-> > https://gitlab.com/qemu-project/qemu/-/jobs/2576157660
-> > https://gitlab.com/qemu-project/qemu/-/jobs/2576151565
-> > https://gitlab.com/qemu-project/qemu/-/jobs/2576154539
-> > https://gitlab.com/qemu-project/qemu/-/jobs/2575867208
-> > 
-> > 
-> >  (27/43)
-> > tests/avocado/vnc.py:Vnc.test_change_password_requires_a_password:
-> > ERROR: ConnectError: Failed to establish session: EOFError\n Exit code:
-> > 1\n    Command: ./qemu-system-x86_64 -display none -vga none -chardev socket,id=mon,path=/var/tmp/avo_qemu_sock_4nrz0r37/qemu-2912538-7f732e94e0f0-monitor.sock
-> > -mon chardev=mon,mode=control -node... (0.09 s)
-> >  (28/43) tests/avocado/vnc.py:Vnc.test_change_password:  ERROR:
-> > ConnectError: Failed to establish session: EOFError\n    Exit code:
-> > 1\n    Command: ./qemu-system-x86_64 -display none -vga none -chardev socket,id=mon,path=/var/tmp/avo_qemu_sock_yhpzy5c3/qemu-2912543-7f732e94b438-monitor.sock
-> > -mon chardev=mon,mode=control -node... (0.09 s)
-> >  (29/43)
-> > tests/avocado/vnc.py:Vnc.test_change_password_requires_a_password:
-> > ERROR: ConnectError: Failed to establish session: EOFError\n Exit code:
-> > 1\n    Command: ./qemu-system-x86_64 -display none -vga none -chardev socket,id=mon,path=/var/tmp/avo_qemu_sock_tk3pfmt2/qemu-2912548-7f732e93d7b8-monitor.sock
-> > -mon chardev=mon,mode=control -node... (0.09 s)
-> > 
-> > 
-> > r~
-> > 
-> 
-> This is caused by [PATCH 14/17] ui: move 'pc-bios/keymaps' to 'ui/keymaps'.
-> After this patch QEMU no longer finds it's keymaps if started directly from
-> the build directory.
+On Wed, Jun 8, 2022 at 10:48 PM Peter Zijlstra <peterz@infradead.org> wrote:
+>
+> Now that arch_cpu_idle() is expected to return with IRQs disabled,
+> avoid the useless STI/CLI dance.
+>
+> Per the specs this is supposed to work, but nobody has yet relied up
+> this behaviour so broken implementations are possible.
 
-I just sent Gerd an update version which adds a symlink from the source
-tree to the build dir to solve this problem, along with updated commit
-message to reflect this need
+I'm totally newbie here.
 
-With regards,
-Daniel
--- 
-|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
-|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
-|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+The point of safe_halt() is that STI must be used and be used
+directly before HLT to enable IRQ during the halting and stop
+the halting if there is any IRQ.
 
+In TDX case, STI must be used directly before the hypercall.
+Otherwise, no IRQ can come and the vcpu would be stalled forever.
+
+Although the hypercall has an "irq_disabled" argument.
+But the hypervisor doesn't (and can't) touch the IRQ flags no matter
+what the "irq_disabled" argument is.  The IRQ is not enabled during
+the halting if the IRQ is disabled before the hypercall even if
+irq_disabled=false.
+
+The "irq_disabled" argument is used for workaround purposes:
+https://lore.kernel.org/kvm/c020ee0b90c424a7010e979c9b32a28e9c488a51.1651774251.git.isaku.yamahata@intel.com/
+
+Hope my immature/incorrect reply elicits a real response from
+others.
+
+Thanks
+Lai
 
