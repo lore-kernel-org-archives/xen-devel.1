@@ -4,32 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D128C43334
-	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 12:45:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348230.574518 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C609C43334
+	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 12:53:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.348245.574541 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0jRZ-00087O-2b; Mon, 13 Jun 2022 12:45:21 +0000
+	id 1o0jZP-0001Uh-HB; Mon, 13 Jun 2022 12:53:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348230.574518; Mon, 13 Jun 2022 12:45:21 +0000
+Received: by outflank-mailman (output) from mailman id 348245.574541; Mon, 13 Jun 2022 12:53:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0jRY-00087H-UP; Mon, 13 Jun 2022 12:45:20 +0000
-Received: by outflank-mailman (input) for mailman id 348230;
- Mon, 13 Jun 2022 12:39:09 +0000
+	id 1o0jZP-0001SY-BC; Mon, 13 Jun 2022 12:53:27 +0000
+Received: by outflank-mailman (input) for mailman id 348245;
+ Mon, 13 Jun 2022 12:53:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=x+EV=WU=atomide.com=tony@srs-se1.protection.inumbo.net>)
- id 1o0jLZ-0007Gg-EB
- for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 12:39:09 +0000
-Received: from muru.com (muru.com [72.249.23.125])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=E7/M=WU=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
+ id 1o0jZN-0001I4-Uy
+ for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 12:53:26 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id d103bdb5-eb15-11ec-bd2c-47488cf2e6aa;
- Mon, 13 Jun 2022 14:39:07 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by muru.com (Postfix) with ESMTPS id AC04B82CC;
- Mon, 13 Jun 2022 12:34:24 +0000 (UTC)
+ id cf612d85-eb17-11ec-bd2c-47488cf2e6aa;
+ Mon, 13 Jun 2022 14:53:24 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AA11A1042;
+ Mon, 13 Jun 2022 05:53:23 -0700 (PDT)
+Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
+ [10.1.199.62])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E523A3F792;
+ Mon, 13 Jun 2022 05:53:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,201 +45,240 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d103bdb5-eb15-11ec-bd2c-47488cf2e6aa
-Date: Mon, 13 Jun 2022 15:39:05 +0300
-From: Tony Lindgren <tony@atomide.com>
-To: Peter Zijlstra <peterz@infradead.org>
-Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
-	vgupta@kernel.org, linux@armlinux.org.uk, ulli.kroll@googlemail.com,
-	linus.walleij@linaro.org, shawnguo@kernel.org,
-	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de,
-	festevam@gmail.com, linux-imx@nxp.com, khilman@kernel.org,
-	catalin.marinas@arm.com, will@kernel.org, guoren@kernel.org,
-	bcain@quicinc.com, chenhuacai@kernel.org, kernel@xen0n.name,
-	geert@linux-m68k.org, sammy@sammy.net, monstr@monstr.eu,
-	tsbogend@alpha.franken.de, dinguyen@kernel.org, jonas@southpole.se,
-	stefan.kristiansson@saunalahti.fi, shorne@gmail.com,
-	James.Bottomley@hansenpartnership.com, deller@gmx.de,
-	mpe@ellerman.id.au, benh@kernel.crashing.org, paulus@samba.org,
-	paul.walmsley@sifive.com, palmer@dabbelt.com, aou@eecs.berkeley.edu,
-	hca@linux.ibm.com, gor@linux.ibm.com, agordeev@linux.ibm.com,
-	borntraeger@linux.ibm.com, svens@linux.ibm.com,
-	ysato@users.sourceforge.jp, dalias@libc.org, davem@davemloft.net,
-	richard@nod.at, anton.ivanov@cambridgegreys.com,
-	johannes@sipsolutions.net, tglx@linutronix.de, mingo@redhat.com,
-	bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org,
-	hpa@zytor.com, acme@kernel.org, mark.rutland@arm.com,
-	alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-	namhyung@kernel.org, jgross@suse.com, srivatsa@csail.mit.edu,
-	amakhalov@vmware.com, pv-drivers@vmware.com,
-	boris.ostrovsky@oracle.com, chris@zankel.net, jcmvbkbc@gmail.com,
-	rafael@kernel.org, lenb@kernel.org, pavel@ucw.cz,
-	gregkh@linuxfoundation.org, mturquette@baylibre.com,
-	sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org,
-	sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org,
-	anup@brainfault.org, thierry.reding@gmail.com, jonathanh@nvidia.com,
-	jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-	yury.norov@gmail.com, andriy.shevchenko@linux.intel.com,
-	linux@rasmusvillemoes.dk, rostedt@goodmis.org, pmladek@suse.com,
-	senozhatsky@chromium.org, john.ogness@linutronix.de,
-	paulmck@kernel.org, frederic@kernel.org, quic_neeraju@quicinc.com,
-	josh@joshtriplett.org, mathieu.desnoyers@efficios.com,
-	jiangshanlai@gmail.com, joel@joelfernandes.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de,
-	bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org,
-	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-snps-arc@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
-	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
-	linux-ia64@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, openrisc@lists.librecores.org,
-	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org, linux-perf-users@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org,
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
-	rcu@vger.kernel.org
-Subject: [PATCH 34.5/36] cpuidle,omap4: Push RCU-idle into
- omap4_enter_lowpower()
-Message-ID: <Yqcv6crSNKuSWoTu@atomide.com>
-References: <20220608142723.103523089@infradead.org>
- <20220608144518.073801916@infradead.org>
+X-Inumbo-ID: cf612d85-eb17-11ec-bd2c-47488cf2e6aa
+From: Bertrand Marquis <bertrand.marquis@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 1/4] xen/arm: Sync sysregs and cpuinfo with Linux 5.18-rc3
+Date: Mon, 13 Jun 2022 13:53:11 +0100
+Message-Id: <b7b2a48eb1f8ed7f1a00e87189160accfc0d9625.1655124548.git.bertrand.marquis@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1655124548.git.bertrand.marquis@arm.com>
+References: <cover.1655124548.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220608144518.073801916@infradead.org>
+Content-Transfer-Encoding: 8bit
 
-OMAP4 uses full SoC suspend modes as idle states, as such it needs the
-whole power-domain and clock-domain code from the idle path.
+Sync existing ID registers sanitization with the status of Linux kernel
+version 5.18-rc3 and add sanitization of ISAR2 registers.
 
-All that code is not suitable to run with RCU disabled, as such push
-RCU-idle deeper still.
+Sync sysregs.h bit shift defintions with the status of Linux kernel
+version 5.18-rc3.
 
-Signed-off-by: Tony Lindgren <tony@atomide.com>
+Changes in this patch are splitted in a number of patches in Linux
+kernel and, as the previous synchronisation point was not clear, the
+changes are done in one patch with a status possible to compare easily
+by diffing Xen files to Linux kernel files.
+
+Origin: git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git b2d229d4ddb1
+Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
-
-Peter here's one more for your series, looks like this is needed to avoid
-warnings similar to what you did for omap3.
-
+Changes in v3
+- add Stefano r-b
+Changes in v2
+- move changes in cpufeature.h in an independent patch
+- add proper origin tag in the commit
+- rework the commit message
 ---
- arch/arm/mach-omap2/common.h              |  6 ++++--
- arch/arm/mach-omap2/cpuidle44xx.c         |  8 ++------
- arch/arm/mach-omap2/omap-mpuss-lowpower.c | 12 +++++++++++-
- arch/arm/mach-omap2/pm44xx.c              |  2 +-
- 4 files changed, 18 insertions(+), 10 deletions(-)
+ xen/arch/arm/arm64/cpufeature.c          | 18 +++++-
+ xen/arch/arm/include/asm/arm64/sysregs.h | 76 ++++++++++++++++++++----
+ 2 files changed, 80 insertions(+), 14 deletions(-)
 
-diff --git a/arch/arm/mach-omap2/common.h b/arch/arm/mach-omap2/common.h
---- a/arch/arm/mach-omap2/common.h
-+++ b/arch/arm/mach-omap2/common.h
-@@ -284,11 +284,13 @@ extern u32 omap4_get_cpu1_ns_pa_addr(void);
+diff --git a/xen/arch/arm/arm64/cpufeature.c b/xen/arch/arm/arm64/cpufeature.c
+index 6e5d30dc7b..d9039d37b2 100644
+--- a/xen/arch/arm/arm64/cpufeature.c
++++ b/xen/arch/arm/arm64/cpufeature.c
+@@ -143,6 +143,16 @@ static const struct arm64_ftr_bits ftr_id_aa64isar1[] = {
+ 	ARM64_FTR_END,
+ };
  
- #if defined(CONFIG_SMP) && defined(CONFIG_PM)
- extern int omap4_mpuss_init(void);
--extern int omap4_enter_lowpower(unsigned int cpu, unsigned int power_state);
-+extern int omap4_enter_lowpower(unsigned int cpu, unsigned int power_state,
-+				bool rcuidle);
- extern int omap4_hotplug_cpu(unsigned int cpu, unsigned int power_state);
- #else
- static inline int omap4_enter_lowpower(unsigned int cpu,
--					unsigned int power_state)
-+					unsigned int power_state,
-+					bool rcuidle)
- {
- 	cpu_do_idle();
- 	return 0;
-diff --git a/arch/arm/mach-omap2/cpuidle44xx.c b/arch/arm/mach-omap2/cpuidle44xx.c
---- a/arch/arm/mach-omap2/cpuidle44xx.c
-+++ b/arch/arm/mach-omap2/cpuidle44xx.c
-@@ -105,9 +105,7 @@ static int omap_enter_idle_smp(struct cpuidle_device *dev,
- 	}
- 	raw_spin_unlock_irqrestore(&mpu_lock, flag);
- 
--	cpuidle_rcu_enter();
--	omap4_enter_lowpower(dev->cpu, cx->cpu_state);
--	cpuidle_rcu_exit();
-+	omap4_enter_lowpower(dev->cpu, cx->cpu_state, true);
- 
- 	raw_spin_lock_irqsave(&mpu_lock, flag);
- 	if (cx->mpu_state_vote == num_online_cpus())
-@@ -186,10 +184,8 @@ static int omap_enter_idle_coupled(struct cpuidle_device *dev,
- 		}
- 	}
- 
--	cpuidle_rcu_enter();
--	omap4_enter_lowpower(dev->cpu, cx->cpu_state);
-+	omap4_enter_lowpower(dev->cpu, cx->cpu_state, true);
- 	cpu_done[dev->cpu] = true;
--	cpuidle_rcu_exit();
- 
- 	/* Wakeup CPU1 only if it is not offlined */
- 	if (dev->cpu == 0 && cpumask_test_cpu(1, cpu_online_mask)) {
-diff --git a/arch/arm/mach-omap2/omap-mpuss-lowpower.c b/arch/arm/mach-omap2/omap-mpuss-lowpower.c
---- a/arch/arm/mach-omap2/omap-mpuss-lowpower.c
-+++ b/arch/arm/mach-omap2/omap-mpuss-lowpower.c
-@@ -33,6 +33,7 @@
-  * and first to wake-up when MPUSS low power states are excercised
-  */
- 
-+#include <linux/cpuidle.h>
- #include <linux/kernel.h>
- #include <linux/io.h>
- #include <linux/errno.h>
-@@ -214,6 +215,7 @@ static void __init save_l2x0_context(void)
-  * of OMAP4 MPUSS subsystem
-  * @cpu : CPU ID
-  * @power_state: Low power state.
-+ * @rcuidle: RCU needs to be idled
-  *
-  * MPUSS states for the context save:
-  * save_state =
-@@ -222,7 +224,8 @@ static void __init save_l2x0_context(void)
-  *	2 - CPUx L1 and logic lost + GIC lost: MPUSS OSWR
-  *	3 - CPUx L1 and logic lost + GIC + L2 lost: DEVICE OFF
-  */
--int omap4_enter_lowpower(unsigned int cpu, unsigned int power_state)
-+int omap4_enter_lowpower(unsigned int cpu, unsigned int power_state,
-+			 bool rcuidle)
- {
- 	struct omap4_cpu_pm_info *pm_info = &per_cpu(omap4_pm_info, cpu);
- 	unsigned int save_state = 0, cpu_logic_state = PWRDM_POWER_RET;
-@@ -268,6 +271,10 @@ int omap4_enter_lowpower(unsigned int cpu, unsigned int power_state)
- 	cpu_clear_prev_logic_pwrst(cpu);
- 	pwrdm_set_next_pwrst(pm_info->pwrdm, power_state);
- 	pwrdm_set_logic_retst(pm_info->pwrdm, cpu_logic_state);
++static const struct arm64_ftr_bits ftr_id_aa64isar2[] = {
++	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_HIGHER_SAFE, ID_AA64ISAR2_CLEARBHB_SHIFT, 4, 0),
++	ARM64_FTR_BITS(FTR_VISIBLE_IF_IS_ENABLED(CONFIG_ARM64_PTR_AUTH),
++		       FTR_STRICT, FTR_EXACT, ID_AA64ISAR2_APA3_SHIFT, 4, 0),
++	ARM64_FTR_BITS(FTR_VISIBLE_IF_IS_ENABLED(CONFIG_ARM64_PTR_AUTH),
++		       FTR_STRICT, FTR_LOWER_SAFE, ID_AA64ISAR2_GPA3_SHIFT, 4, 0),
++	ARM64_FTR_BITS(FTR_VISIBLE, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64ISAR2_RPRES_SHIFT, 4, 0),
++	ARM64_FTR_END,
++};
 +
-+	if (rcuidle)
-+		cpuidle_rcu_enter();
-+
- 	set_cpu_wakeup_addr(cpu, __pa_symbol(omap_pm_ops.resume));
- 	omap_pm_ops.scu_prepare(cpu, power_state);
- 	l2x0_pwrst_prepare(cpu, save_state);
-@@ -283,6 +290,9 @@ int omap4_enter_lowpower(unsigned int cpu, unsigned int power_state)
- 	if (IS_PM44XX_ERRATUM(PM_OMAP4_ROM_SMP_BOOT_ERRATUM_GICD) && cpu)
- 		gic_dist_enable();
+ static const struct arm64_ftr_bits ftr_id_aa64pfr0[] = {
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_CSV3_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_CSV2_SHIFT, 4, 0),
+@@ -158,8 +168,8 @@ static const struct arm64_ftr_bits ftr_id_aa64pfr0[] = {
+ 	S_ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64PFR0_FP_SHIFT, 4, ID_AA64PFR0_FP_NI),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_EL3_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_EL2_SHIFT, 4, 0),
+-	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_EL1_SHIFT, 4, ID_AA64PFR0_EL1_64BIT_ONLY),
+-	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_EL0_SHIFT, 4, ID_AA64PFR0_EL0_64BIT_ONLY),
++	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_EL1_SHIFT, 4, ID_AA64PFR0_ELx_64BIT_ONLY),
++	ARM64_FTR_BITS(FTR_HIDDEN, FTR_NONSTRICT, FTR_LOWER_SAFE, ID_AA64PFR0_EL0_SHIFT, 4, ID_AA64PFR0_ELx_64BIT_ONLY),
+ 	ARM64_FTR_END,
+ };
  
-+	if (rcuidle)
-+		cpuidle_rcu_exit();
-+
+@@ -197,7 +207,7 @@ static const struct arm64_ftr_bits ftr_id_aa64zfr0[] = {
+ };
+ 
+ static const struct arm64_ftr_bits ftr_id_aa64mmfr0[] = {
+-	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR0_ECV_SHIFT, 4, 0),
++	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR0_ECV_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR0_FGT_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR0_EXS_SHIFT, 4, 0),
  	/*
- 	 * Restore the CPUx power state to ON otherwise CPUx
- 	 * power domain can transitions to programmed low power
-diff --git a/arch/arm/mach-omap2/pm44xx.c b/arch/arm/mach-omap2/pm44xx.c
---- a/arch/arm/mach-omap2/pm44xx.c
-+++ b/arch/arm/mach-omap2/pm44xx.c
-@@ -76,7 +76,7 @@ static int omap4_pm_suspend(void)
- 	 * domain CSWR is not supported by hardware.
- 	 * More details can be found in OMAP4430 TRM section 4.3.4.2.
- 	 */
--	omap4_enter_lowpower(cpu_id, cpu_suspend_state);
-+	omap4_enter_lowpower(cpu_id, cpu_suspend_state, false);
+@@ -243,6 +253,7 @@ static const struct arm64_ftr_bits ftr_id_aa64mmfr0[] = {
+ };
  
- 	/* Restore next powerdomain state */
- 	list_for_each_entry(pwrst, &pwrst_list, node) {
+ static const struct arm64_ftr_bits ftr_id_aa64mmfr1[] = {
++	ARM64_FTR_BITS(FTR_VISIBLE, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR1_AFP_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR1_ETS_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR1_TWED_SHIFT, 4, 0),
+ 	ARM64_FTR_BITS(FTR_HIDDEN, FTR_STRICT, FTR_LOWER_SAFE, ID_AA64MMFR1_XNX_SHIFT, 4, 0),
+@@ -588,6 +599,7 @@ void update_system_features(const struct cpuinfo_arm *new)
+ 
+ 	SANITIZE_ID_REG(isa64, 0, aa64isar0);
+ 	SANITIZE_ID_REG(isa64, 1, aa64isar1);
++	SANITIZE_ID_REG(isa64, 2, aa64isar2);
+ 
+ 	SANITIZE_ID_REG(zfr64, 0, aa64zfr0);
+ 
+diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
+index eac08ed33f..54670084c3 100644
+--- a/xen/arch/arm/include/asm/arm64/sysregs.h
++++ b/xen/arch/arm/include/asm/arm64/sysregs.h
+@@ -144,6 +144,30 @@
+ 
+ /* id_aa64isar2 */
+ #define ID_AA64ISAR2_CLEARBHB_SHIFT 28
++#define ID_AA64ISAR2_APA3_SHIFT     12
++#define ID_AA64ISAR2_GPA3_SHIFT     8
++#define ID_AA64ISAR2_RPRES_SHIFT    4
++#define ID_AA64ISAR2_WFXT_SHIFT     0
++
++#define ID_AA64ISAR2_RPRES_8BIT     0x0
++#define ID_AA64ISAR2_RPRES_12BIT    0x1
++/*
++ * Value 0x1 has been removed from the architecture, and is
++ * reserved, but has not yet been removed from the ARM ARM
++ * as of ARM DDI 0487G.b.
++ */
++#define ID_AA64ISAR2_WFXT_NI        0x0
++#define ID_AA64ISAR2_WFXT_SUPPORTED 0x2
++
++#define ID_AA64ISAR2_APA3_NI                  0x0
++#define ID_AA64ISAR2_APA3_ARCHITECTED         0x1
++#define ID_AA64ISAR2_APA3_ARCH_EPAC           0x2
++#define ID_AA64ISAR2_APA3_ARCH_EPAC2          0x3
++#define ID_AA64ISAR2_APA3_ARCH_EPAC2_FPAC     0x4
++#define ID_AA64ISAR2_APA3_ARCH_EPAC2_FPAC_CMB 0x5
++
++#define ID_AA64ISAR2_GPA3_NI             0x0
++#define ID_AA64ISAR2_GPA3_ARCHITECTED    0x1
+ 
+ /* id_aa64pfr0 */
+ #define ID_AA64PFR0_CSV3_SHIFT       60
+@@ -165,14 +189,13 @@
+ #define ID_AA64PFR0_AMU              0x1
+ #define ID_AA64PFR0_SVE              0x1
+ #define ID_AA64PFR0_RAS_V1           0x1
++#define ID_AA64PFR0_RAS_V1P1         0x2
+ #define ID_AA64PFR0_FP_NI            0xf
+ #define ID_AA64PFR0_FP_SUPPORTED     0x0
+ #define ID_AA64PFR0_ASIMD_NI         0xf
+ #define ID_AA64PFR0_ASIMD_SUPPORTED  0x0
+-#define ID_AA64PFR0_EL1_64BIT_ONLY   0x1
+-#define ID_AA64PFR0_EL1_32BIT_64BIT  0x2
+-#define ID_AA64PFR0_EL0_64BIT_ONLY   0x1
+-#define ID_AA64PFR0_EL0_32BIT_64BIT  0x2
++#define ID_AA64PFR0_ELx_64BIT_ONLY   0x1
++#define ID_AA64PFR0_ELx_32BIT_64BIT  0x2
+ 
+ /* id_aa64pfr1 */
+ #define ID_AA64PFR1_MPAMFRAC_SHIFT   16
+@@ -189,6 +212,7 @@
+ #define ID_AA64PFR1_MTE_NI           0x0
+ #define ID_AA64PFR1_MTE_EL0          0x1
+ #define ID_AA64PFR1_MTE              0x2
++#define ID_AA64PFR1_MTE_ASYMM        0x3
+ 
+ /* id_aa64zfr0 */
+ #define ID_AA64ZFR0_F64MM_SHIFT      56
+@@ -228,17 +252,37 @@
+ #define ID_AA64MMFR0_ASID_SHIFT      4
+ #define ID_AA64MMFR0_PARANGE_SHIFT   0
+ 
+-#define ID_AA64MMFR0_TGRAN4_NI         0xf
+-#define ID_AA64MMFR0_TGRAN4_SUPPORTED  0x0
+-#define ID_AA64MMFR0_TGRAN64_NI        0xf
+-#define ID_AA64MMFR0_TGRAN64_SUPPORTED 0x0
+-#define ID_AA64MMFR0_TGRAN16_NI        0x0
+-#define ID_AA64MMFR0_TGRAN16_SUPPORTED 0x1
++#define ID_AA64MMFR0_ASID_8          0x0
++#define ID_AA64MMFR0_ASID_16         0x2
++
++#define ID_AA64MMFR0_TGRAN4_NI             0xf
++#define ID_AA64MMFR0_TGRAN4_SUPPORTED_MIN  0x0
++#define ID_AA64MMFR0_TGRAN4_SUPPORTED_MAX  0x7
++#define ID_AA64MMFR0_TGRAN64_NI            0xf
++#define ID_AA64MMFR0_TGRAN64_SUPPORTED_MIN 0x0
++#define ID_AA64MMFR0_TGRAN64_SUPPORTED_MAX 0x7
++#define ID_AA64MMFR0_TGRAN16_NI            0x0
++#define ID_AA64MMFR0_TGRAN16_SUPPORTED_MIN 0x1
++#define ID_AA64MMFR0_TGRAN16_SUPPORTED_MAX 0xf
++
++#define ID_AA64MMFR0_PARANGE_32        0x0
++#define ID_AA64MMFR0_PARANGE_36        0x1
++#define ID_AA64MMFR0_PARANGE_40        0x2
++#define ID_AA64MMFR0_PARANGE_42        0x3
++#define ID_AA64MMFR0_PARANGE_44        0x4
+ #define ID_AA64MMFR0_PARANGE_48        0x5
+ #define ID_AA64MMFR0_PARANGE_52        0x6
+ 
++#define ARM64_MIN_PARANGE_BITS     32
++
++#define ID_AA64MMFR0_TGRAN_2_SUPPORTED_DEFAULT 0x0
++#define ID_AA64MMFR0_TGRAN_2_SUPPORTED_NONE    0x1
++#define ID_AA64MMFR0_TGRAN_2_SUPPORTED_MIN     0x2
++#define ID_AA64MMFR0_TGRAN_2_SUPPORTED_MAX     0x7
++
+ /* id_aa64mmfr1 */
+ #define ID_AA64MMFR1_ECBHB_SHIFT     60
++#define ID_AA64MMFR1_AFP_SHIFT       44
+ #define ID_AA64MMFR1_ETS_SHIFT       36
+ #define ID_AA64MMFR1_TWED_SHIFT      32
+ #define ID_AA64MMFR1_XNX_SHIFT       28
+@@ -271,6 +315,9 @@
+ #define ID_AA64MMFR2_CNP_SHIFT       0
+ 
+ /* id_aa64dfr0 */
++#define ID_AA64DFR0_MTPMU_SHIFT      48
++#define ID_AA64DFR0_TRBE_SHIFT       44
++#define ID_AA64DFR0_TRACE_FILT_SHIFT 40
+ #define ID_AA64DFR0_DOUBLELOCK_SHIFT 36
+ #define ID_AA64DFR0_PMSVER_SHIFT     32
+ #define ID_AA64DFR0_CTX_CMPS_SHIFT   28
+@@ -284,11 +331,18 @@
+ #define ID_AA64DFR0_PMUVER_8_1       0x4
+ #define ID_AA64DFR0_PMUVER_8_4       0x5
+ #define ID_AA64DFR0_PMUVER_8_5       0x6
++#define ID_AA64DFR0_PMUVER_8_7       0x7
+ #define ID_AA64DFR0_PMUVER_IMP_DEF   0xf
+ 
++#define ID_AA64DFR0_PMSVER_8_2      0x1
++#define ID_AA64DFR0_PMSVER_8_3      0x2
++
+ #define ID_DFR0_PERFMON_SHIFT        24
+ 
+-#define ID_DFR0_PERFMON_8_1          0x4
++#define ID_DFR0_PERFMON_8_0         0x3
++#define ID_DFR0_PERFMON_8_1         0x4
++#define ID_DFR0_PERFMON_8_4         0x5
++#define ID_DFR0_PERFMON_8_5         0x6
+ 
+ #define ID_ISAR4_SWP_FRAC_SHIFT        28
+ #define ID_ISAR4_PSR_M_SHIFT           24
 -- 
-2.36.1
+2.25.1
+
 
