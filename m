@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0653BCCA47F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FDDECCA481
 	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 11:37:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.347983.574393 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.347981.574375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0iNl-0006iQ-EW; Mon, 13 Jun 2022 11:37:21 +0000
+	id 1o0iNi-00068b-S3; Mon, 13 Jun 2022 11:37:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 347983.574393; Mon, 13 Jun 2022 11:37:21 +0000
+Received: by outflank-mailman (output) from mailman id 347981.574375; Mon, 13 Jun 2022 11:37:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0iNk-0006cd-B5; Mon, 13 Jun 2022 11:37:20 +0000
-Received: by outflank-mailman (input) for mailman id 347983;
- Mon, 13 Jun 2022 11:37:15 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o0iNh-00063G-SZ; Mon, 13 Jun 2022 11:37:17 +0000
+Received: by outflank-mailman (input) for mailman id 347981;
+ Mon, 13 Jun 2022 11:37:14 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SJWo=WU=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o0iNf-0003eX-7l
- for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 11:37:15 +0000
+ id 1o0iNe-0003eY-8x
+ for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 11:37:14 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2b61a9a0-eb0d-11ec-8901-93a377f238d6;
- Mon, 13 Jun 2022 13:37:14 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2a964cce-eb0d-11ec-bd2c-47488cf2e6aa;
+ Mon, 13 Jun 2022 13:37:13 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-393-QhGqS3mJPgWJlaJrwV9AAQ-1; Mon, 13 Jun 2022 07:37:08 -0400
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ us-mta-382-FkGXzRJ0PEWejaqlg6YRjg-1; Mon, 13 Jun 2022 07:37:09 -0400
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.1])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 6085A29ABA0C;
- Mon, 13 Jun 2022 11:37:07 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D7C5685A580;
+ Mon, 13 Jun 2022 11:37:08 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 69AC61415103;
- Mon, 13 Jun 2022 11:37:06 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9D66940CF8EB;
+ Mon, 13 Jun 2022 11:37:08 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 7D149180098C; Mon, 13 Jun 2022 13:36:56 +0200 (CEST)
+ id 9C5BB1800995; Mon, 13 Jun 2022 13:36:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2b61a9a0-eb0d-11ec-8901-93a377f238d6
+X-Inumbo-ID: 2a964cce-eb0d-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655120233;
+	s=mimecast20190719; t=1655120232;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ZStqjDDMtLMpDsz58F8O29JWAJ6F3RkNGXfWxICk7zU=;
-	b=fCm3a/3IykoUiHzE8p7cym22MSTvpjCjvtz9Jm8n7LzbXOuxETVo4e1dvHul2bGb6VkeKS
-	vM5wQ6r7aoIMCCPxArUzwz3bgagEE+F9OQIwW7LTh6Bz2GVTBGQO48Krlg3rDJZ1WpVlnj
-	Xg61MGlpmZJKDvOfzO4O8yGv7AcF0l0=
-X-MC-Unique: QhGqS3mJPgWJlaJrwV9AAQ-1
+	bh=hTTJvnegxxvfJsWseZ7+SmUjba5GRnY9ME/e3uOvaP0=;
+	b=BrBYKwRauwgZI0QtOUWV3bf9up6SdDUFYcu6ACMNpqH0sxvYuYXeDfcat53CMkSb6evpcE
+	Ii1xzDZVNPAlJckIr0cdg1pcD2fzbyEWasenRbKOrDGYJVkE+G2z0i/F8uBJvO7Ky9RvKG
+	gYTy+PA9UOGi+yZuLybZKuW7W0D6GH4=
+X-MC-Unique: FkGXzRJ0PEWejaqlg6YRjg-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>,
@@ -79,45 +79,124 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>,
 	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
 	Paul Durrant <paul@xen.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Joelle van Dyne <j@getutm.app>
-Subject: [PULL 11/16] usbredir: avoid queuing hello packet on snapshot restore
-Date: Mon, 13 Jun 2022 13:36:50 +0200
-Message-Id: <20220613113655.3693872-12-kraxel@redhat.com>
+	Gerd Hoffmann <kraxel@redhat.com>
+Subject: [PULL 13/16] ui/console: Do not return a value with ui_info
+Date: Mon, 13 Jun 2022 13:36:52 +0200
+Message-Id: <20220613113655.3693872-14-kraxel@redhat.com>
 In-Reply-To: <20220613113655.3693872-1-kraxel@redhat.com>
 References: <20220613113655.3693872-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.1
 
-From: Joelle van Dyne <j@getutm.app>
+From: Akihiko Odaki <akihiko.odaki@gmail.com>
 
-When launching QEMU with "-loadvm", usbredir_create_parser() should avoid
-setting up the hello packet (just as with "-incoming". On the latest version
-of libusbredir, usbredirparser_unserialize() will return error if the parser
-is not "pristine."
+The returned value is not used and misleading.
 
-Signed-off-by: Joelle van Dyne <j@getutm.app>
-Message-Id: <20220507041850.98716-1-j@getutm.app>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
+Message-Id: <20220226115516.59830-2-akihiko.odaki@gmail.com>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- hw/usb/redirect.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/ui/console.h         | 2 +-
+ hw/display/virtio-gpu-base.c | 6 +++---
+ hw/display/virtio-vga.c      | 5 ++---
+ hw/vfio/display.c            | 8 +++-----
+ 4 files changed, 9 insertions(+), 12 deletions(-)
 
-diff --git a/hw/usb/redirect.c b/hw/usb/redirect.c
-index fd7df599bc0b..1bd30efc3ef0 100644
---- a/hw/usb/redirect.c
-+++ b/hw/usb/redirect.c
-@@ -1280,7 +1280,8 @@ static void usbredir_create_parser(USBRedirDevice *dev)
-     }
- #endif
+diff --git a/include/ui/console.h b/include/ui/console.h
+index c44b28a972ca..642d6f5248cf 100644
+--- a/include/ui/console.h
++++ b/include/ui/console.h
+@@ -432,7 +432,7 @@ typedef struct GraphicHwOps {
+     bool gfx_update_async; /* if true, calls graphic_hw_update_done() */
+     void (*text_update)(void *opaque, console_ch_t *text);
+     void (*update_interval)(void *opaque, uint64_t interval);
+-    int (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
++    void (*ui_info)(void *opaque, uint32_t head, QemuUIInfo *info);
+     void (*gl_block)(void *opaque, bool block);
+ } GraphicHwOps;
  
--    if (runstate_check(RUN_STATE_INMIGRATE)) {
-+    if (runstate_check(RUN_STATE_INMIGRATE) ||
-+        runstate_check(RUN_STATE_PRELAUNCH)) {
-         flags |= usbredirparser_fl_no_hello;
+diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
+index 790cec333c8c..b21d6e5b0be8 100644
+--- a/hw/display/virtio-gpu-base.c
++++ b/hw/display/virtio-gpu-base.c
+@@ -69,12 +69,12 @@ static void virtio_gpu_notify_event(VirtIOGPUBase *g, uint32_t event_type)
+     virtio_notify_config(&g->parent_obj);
+ }
+ 
+-static int virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
++static void virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ {
+     VirtIOGPUBase *g = opaque;
+ 
+     if (idx >= g->conf.max_outputs) {
+-        return -1;
++        return;
      }
-     usbredirparser_init(dev->parser, VERSION, caps, USB_REDIR_CAPS_SIZE,
+ 
+     g->req_state[idx].x = info->xoff;
+@@ -92,7 +92,7 @@ static int virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ 
+     /* send event to guest */
+     virtio_gpu_notify_event(g, VIRTIO_GPU_EVENT_DISPLAY);
+-    return 0;
++    return;
+ }
+ 
+ static void
+diff --git a/hw/display/virtio-vga.c b/hw/display/virtio-vga.c
+index c206b5da384b..4dcb34c4a740 100644
+--- a/hw/display/virtio-vga.c
++++ b/hw/display/virtio-vga.c
+@@ -47,15 +47,14 @@ static void virtio_vga_base_text_update(void *opaque, console_ch_t *chardata)
+     }
+ }
+ 
+-static int virtio_vga_base_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
++static void virtio_vga_base_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ {
+     VirtIOVGABase *vvga = opaque;
+     VirtIOGPUBase *g = vvga->vgpu;
+ 
+     if (g->hw_ops->ui_info) {
+-        return g->hw_ops->ui_info(g, idx, info);
++        g->hw_ops->ui_info(g, idx, info);
+     }
+-    return -1;
+ }
+ 
+ static void virtio_vga_base_gl_block(void *opaque, bool block)
+diff --git a/hw/vfio/display.c b/hw/vfio/display.c
+index 89bc90508fb8..78f4d82c1c35 100644
+--- a/hw/vfio/display.c
++++ b/hw/vfio/display.c
+@@ -106,14 +106,14 @@ err:
+     return;
+ }
+ 
+-static int vfio_display_edid_ui_info(void *opaque, uint32_t idx,
+-                                     QemuUIInfo *info)
++static void vfio_display_edid_ui_info(void *opaque, uint32_t idx,
++                                      QemuUIInfo *info)
+ {
+     VFIOPCIDevice *vdev = opaque;
+     VFIODisplay *dpy = vdev->dpy;
+ 
+     if (!dpy->edid_regs) {
+-        return 0;
++        return;
+     }
+ 
+     if (info->width && info->height) {
+@@ -121,8 +121,6 @@ static int vfio_display_edid_ui_info(void *opaque, uint32_t idx,
+     } else {
+         vfio_display_edid_update(vdev, false, 0, 0);
+     }
+-
+-    return 0;
+ }
+ 
+ static void vfio_display_edid_init(VFIOPCIDevice *vdev)
 -- 
 2.36.1
 
