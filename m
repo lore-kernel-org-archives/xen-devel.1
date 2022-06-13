@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98F72CCA47F
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7AB3CCA47B
 	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 11:37:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.347980.574365 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.347974.574299 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0iNh-0005rh-I0; Mon, 13 Jun 2022 11:37:17 +0000
+	id 1o0iNb-0004L5-Cm; Mon, 13 Jun 2022 11:37:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 347980.574365; Mon, 13 Jun 2022 11:37:17 +0000
+Received: by outflank-mailman (output) from mailman id 347974.574299; Mon, 13 Jun 2022 11:37:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0iNg-0005mi-P8; Mon, 13 Jun 2022 11:37:16 +0000
-Received: by outflank-mailman (input) for mailman id 347980;
- Mon, 13 Jun 2022 11:37:14 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o0iNb-0004I5-5d; Mon, 13 Jun 2022 11:37:11 +0000
+Received: by outflank-mailman (input) for mailman id 347974;
+ Mon, 13 Jun 2022 11:37:09 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=SJWo=WU=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o0iNd-0003eX-T4
- for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 11:37:14 +0000
+ id 1o0iNZ-0003eY-5m
+ for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 11:37:09 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2a94b216-eb0d-11ec-8901-93a377f238d6;
- Mon, 13 Jun 2022 13:37:13 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 26bc0433-eb0d-11ec-bd2c-47488cf2e6aa;
+ Mon, 13 Jun 2022 13:37:06 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-546-czJqyPJ_Ov-1NAke0vpC9w-1; Mon, 13 Jun 2022 07:37:11 -0400
+ us-mta-294-d-L92S3vMnanKezqCR8Mgg-1; Mon, 13 Jun 2022 07:37:00 -0400
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4C54C833975;
- Mon, 13 Jun 2022 11:37:10 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5F65929AA3B9;
+ Mon, 13 Jun 2022 11:37:00 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 190C740C1247;
- Mon, 13 Jun 2022 11:37:10 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 2A9D9404E4C3;
+ Mon, 13 Jun 2022 11:37:00 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id C60EF1800999; Mon, 13 Jun 2022 13:36:56 +0200 (CEST)
+ id 031B8180091C; Mon, 13 Jun 2022 13:36:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a94b216-eb0d-11ec-8901-93a377f238d6
+X-Inumbo-ID: 26bc0433-eb0d-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655120232;
+	s=mimecast20190719; t=1655120225;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=fjkT/ghvgIP+ASWCtRqN8cFZ3mDw+gAHZxFgoi4zHGM=;
-	b=Ww6QgDXtpfiElI2nnlXuCkIzBD8thxW+HH/0px5Ug+/ps4Fx4sPn78QMlXWH5DxlihiojO
-	aA5/1SAwE5beBZYRINs6KlyrnSBxXzjOfRwiY9hvYfBAbZDQLM+OoUWzzNQoA/WTEFiZ41
-	3oIvmRMBf+9zXkFKVU1oFXxI9OLxPJM=
-X-MC-Unique: czJqyPJ_Ov-1NAke0vpC9w-1
+	bh=qgE0u/psF+5HbFaMEFEBF+1+y1Gn5UXWEs7HICOeN3Q=;
+	b=h+S36l/LCxfuEc3Y4TeKx8GaNlE/NcuWNEUhCygKkUvXQ5I3aYCIueI8GOWwh7WPCKO8ft
+	04Tje2bRNd/fCvXfM/zocp0T7KQfZ+pvR9yPD+9rjK8QXfAH9OXZoO5Ma3HDd94ehI23A8
+	3O871IA9ZCOfSsBcBN5J9TmDOT+s7wQ=
+X-MC-Unique: d-L92S3vMnanKezqCR8Mgg-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: "Michael S. Tsirkin" <mst@redhat.com>,
@@ -80,62 +80,50 @@ Cc: "Michael S. Tsirkin" <mst@redhat.com>,
 	Paul Durrant <paul@xen.org>,
 	Anthony Perard <anthony.perard@citrix.com>,
 	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PULL 15/16] virtio-gpu: Respect UI refresh rate for EDID
-Date: Mon, 13 Jun 2022 13:36:54 +0200
-Message-Id: <20220613113655.3693872-16-kraxel@redhat.com>
+Subject: [PULL 03/16] ui/cocoa: Fix poweroff request code
+Date: Mon, 13 Jun 2022 13:36:42 +0200
+Message-Id: <20220613113655.3693872-4-kraxel@redhat.com>
 In-Reply-To: <20220613113655.3693872-1-kraxel@redhat.com>
 References: <20220613113655.3693872-1-kraxel@redhat.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
 
 From: Akihiko Odaki <akihiko.odaki@gmail.com>
 
 Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
-Message-Id: <20220226115516.59830-4-akihiko.odaki@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Message-Id: <20220529082508.89097-1-akihiko.odaki@gmail.com>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- include/hw/virtio/virtio-gpu.h | 1 +
- hw/display/virtio-gpu-base.c   | 1 +
- hw/display/virtio-gpu.c        | 1 +
- 3 files changed, 3 insertions(+)
+ ui/cocoa.m | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/include/hw/virtio/virtio-gpu.h b/include/hw/virtio/virtio-gpu.h
-index afff9e158e31..2e28507efe21 100644
---- a/include/hw/virtio/virtio-gpu.h
-+++ b/include/hw/virtio/virtio-gpu.h
-@@ -80,6 +80,7 @@ struct virtio_gpu_scanout {
- struct virtio_gpu_requested_state {
-     uint16_t width_mm, height_mm;
-     uint32_t width, height;
-+    uint32_t refresh_rate;
-     int x, y;
- };
+diff --git a/ui/cocoa.m b/ui/cocoa.m
+index 09a62817f2a9..84c84e98fc5e 100644
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -35,6 +35,7 @@
+ #include "ui/kbd-state.h"
+ #include "sysemu/sysemu.h"
+ #include "sysemu/runstate.h"
++#include "sysemu/runstate-action.h"
+ #include "sysemu/cpu-throttle.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-block.h"
+@@ -1290,7 +1291,10 @@ - (void)applicationWillTerminate:(NSNotification *)aNotification
+ {
+     COCOA_DEBUG("QemuCocoaAppController: applicationWillTerminate\n");
  
-diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
-index b21d6e5b0be8..a29f191aa82e 100644
---- a/hw/display/virtio-gpu-base.c
-+++ b/hw/display/virtio-gpu-base.c
-@@ -79,6 +79,7 @@ static void virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+-    qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_UI);
++    with_iothread_lock(^{
++        shutdown_action = SHUTDOWN_ACTION_POWEROFF;
++        qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_UI);
++    });
  
-     g->req_state[idx].x = info->xoff;
-     g->req_state[idx].y = info->yoff;
-+    g->req_state[idx].refresh_rate = info->refresh_rate;
-     g->req_state[idx].width = info->width;
-     g->req_state[idx].height = info->height;
-     g->req_state[idx].width_mm = info->width_mm;
-diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
-index 55c6dd576318..20cc703dcc6e 100644
---- a/hw/display/virtio-gpu.c
-+++ b/hw/display/virtio-gpu.c
-@@ -217,6 +217,7 @@ virtio_gpu_generate_edid(VirtIOGPU *g, int scanout,
-         .height_mm = b->req_state[scanout].height_mm,
-         .prefx = b->req_state[scanout].width,
-         .prefy = b->req_state[scanout].height,
-+        .refresh_rate = b->req_state[scanout].refresh_rate,
-     };
- 
-     edid->size = cpu_to_le32(sizeof(edid->edid));
+     /*
+      * Sleep here, because returning will cause OSX to kill us
 -- 
 2.36.1
 
