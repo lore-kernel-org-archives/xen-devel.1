@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44CC8CCA480
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EFBFCCA47C
 	for <xen-devel@archiver.kernel.org>; Mon, 13 Jun 2022 12:53:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348246.574562 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.348243.574529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0jZQ-00023d-Ub; Mon, 13 Jun 2022 12:53:28 +0000
+	id 1o0jZO-0001Js-UV; Mon, 13 Jun 2022 12:53:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348246.574562; Mon, 13 Jun 2022 12:53:28 +0000
+Received: by outflank-mailman (output) from mailman id 348243.574529; Mon, 13 Jun 2022 12:53:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o0jZQ-00021k-Pk; Mon, 13 Jun 2022 12:53:28 +0000
-Received: by outflank-mailman (input) for mailman id 348246;
- Mon, 13 Jun 2022 12:53:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o0jZO-0001Jl-PR; Mon, 13 Jun 2022 12:53:26 +0000
+Received: by outflank-mailman (input) for mailman id 348243;
+ Mon, 13 Jun 2022 12:53:25 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=E7/M=WU=arm.com=bertrand.marquis@srs-se1.protection.inumbo.net>)
- id 1o0jZO-0001JY-QZ
- for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 12:53:26 +0000
+ id 1o0jZN-0001I4-6p
+ for xen-devel@lists.xenproject.org; Mon, 13 Jun 2022 12:53:25 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id d08b5895-eb17-11ec-8901-93a377f238d6;
- Mon, 13 Jun 2022 14:53:26 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id cece51e8-eb17-11ec-bd2c-47488cf2e6aa;
+ Mon, 13 Jun 2022 14:53:23 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 74B1BD6E;
- Mon, 13 Jun 2022 05:53:25 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C2DDBD6E;
+ Mon, 13 Jun 2022 05:53:22 -0700 (PDT)
 Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
  [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AF3F83F792;
- Mon, 13 Jun 2022 05:53:24 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 046DE3F792;
+ Mon, 13 Jun 2022 05:53:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,99 +45,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d08b5895-eb17-11ec-8901-93a377f238d6
+X-Inumbo-ID: cece51e8-eb17-11ec-bd2c-47488cf2e6aa
 From: Bertrand Marquis <bertrand.marquis@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v3 3/4] arm: add ISAR2, MMFR0 and MMFR1 fields in cpufeature
-Date: Mon, 13 Jun 2022 13:53:13 +0100
-Message-Id: <0d1bce834cc1d9949c9d77acfeb650f2f4c02601.1655124548.git.bertrand.marquis@arm.com>
+Subject: [PATCH v3 0/4] Spectre BHB follow up
+Date: Mon, 13 Jun 2022 13:53:10 +0100
+Message-Id: <cover.1655124548.git.bertrand.marquis@arm.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1655124548.git.bertrand.marquis@arm.com>
-References: <cover.1655124548.git.bertrand.marquis@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Complete AA64ISAR2 and AA64MMFR[0-1] with more fields.
-While there add a comment for MMFR bitfields as for other registers in
-the cpuinfo structure definition.
+Following up the handling of Spectre BHB on Arm (XSA-398), this serie
+contain several changes which were not needed in the XSA patches but
+should be done in Xen:
+- Sync sysregs and cpuinfo with latest version of Linux (5.18-rc3)
+- Add new fields inside cpufeature
+- Add sb instruction support. Some newer generations of CPU
+  (Neoverse-N2) do support the instruction so add support for it in Xen.
+- Create hidden Kconfig entries for CONFIG_ values actually used in
+  arm64 cpufeature.
 
-Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
----
 Changes in v3:
-- fix tgranule_4k_2
-- add Stefano r-b
+- add R-b and A-b on patches
+- fixes in sb support patch
 Changes in v2:
-- patch introduced to isolate changes in cpufeature.h
-- complete MMFR0 and ISAR2 to sync with sysregs.h status
----
- xen/arch/arm/include/asm/cpufeature.h | 28 ++++++++++++++++++++++-----
- 1 file changed, 23 insertions(+), 5 deletions(-)
+- remove patch which was merged (workaround 1 when workaround 3 is done)
+- split sync with linux and update of cpufeatures
+- add patch to define kconfig entries used by arm64 cpufeature
 
-diff --git a/xen/arch/arm/include/asm/cpufeature.h b/xen/arch/arm/include/asm/cpufeature.h
-index 24c01d2b9d..c86a2e7f29 100644
---- a/xen/arch/arm/include/asm/cpufeature.h
-+++ b/xen/arch/arm/include/asm/cpufeature.h
-@@ -234,6 +234,7 @@ struct cpuinfo_arm {
-     union {
-         register_t bits[3];
-         struct {
-+            /* MMFR0 */
-             unsigned long pa_range:4;
-             unsigned long asid_bits:4;
-             unsigned long bigend:4;
-@@ -242,18 +243,31 @@ struct cpuinfo_arm {
-             unsigned long tgranule_16K:4;
-             unsigned long tgranule_64K:4;
-             unsigned long tgranule_4K:4;
--            unsigned long __res0:32;
--
-+            unsigned long tgranule_16k_2:4;
-+            unsigned long tgranule_64k_2:4;
-+            unsigned long tgranule_4k_2:4;
-+            unsigned long exs:4;
-+            unsigned long __res0:8;
-+            unsigned long fgt:4;
-+            unsigned long ecv:4;
-+
-+            /* MMFR1 */
-             unsigned long hafdbs:4;
-             unsigned long vmid_bits:4;
-             unsigned long vh:4;
-             unsigned long hpds:4;
-             unsigned long lo:4;
-             unsigned long pan:4;
--            unsigned long __res1:8;
--            unsigned long __res2:28;
-+            unsigned long specsei:4;
-+            unsigned long xnx:4;
-+            unsigned long twed:4;
-+            unsigned long ets:4;
-+            unsigned long __res1:4;
-+            unsigned long afp:4;
-+            unsigned long __res2:12;
-             unsigned long ecbhb:4;
- 
-+            /* MMFR2 */
-             unsigned long __res3:64;
-         };
-     } mm64;
-@@ -297,7 +311,11 @@ struct cpuinfo_arm {
-             unsigned long __res2:8;
- 
-             /* ISAR2 */
--            unsigned long __res3:28;
-+            unsigned long wfxt:4;
-+            unsigned long rpres:4;
-+            unsigned long gpa3:4;
-+            unsigned long apa3:4;
-+            unsigned long __res3:12;
-             unsigned long clearbhb:4;
- 
-             unsigned long __res4:32;
+Bertrand Marquis (4):
+  xen/arm: Sync sysregs and cpuinfo with Linux 5.18-rc3
+  xen/arm: Add sb instruction support
+  arm: add ISAR2, MMFR0 and MMFR1 fields in cpufeature
+  arm: Define kconfig symbols used by arm64 cpufeatures
+
+ xen/arch/arm/Kconfig                     | 28 +++++++++
+ xen/arch/arm/arm64/cpufeature.c          | 18 +++++-
+ xen/arch/arm/cpufeature.c                | 28 +++++++++
+ xen/arch/arm/include/asm/arm64/sysregs.h | 76 ++++++++++++++++++++----
+ xen/arch/arm/include/asm/cpufeature.h    | 34 +++++++++--
+ xen/arch/arm/include/asm/macros.h        | 19 +++++-
+ xen/arch/arm/setup.c                     |  3 +
+ xen/arch/arm/smpboot.c                   |  1 +
+ 8 files changed, 186 insertions(+), 21 deletions(-)
+
 -- 
 2.25.1
 
