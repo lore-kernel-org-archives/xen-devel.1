@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87B53C43334
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:16:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348869.575114 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21D1C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:16:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.348870.575120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15T9-0001SW-KJ; Tue, 14 Jun 2022 12:16:27 +0000
+	id 1o15TA-0001Zu-FO; Tue, 14 Jun 2022 12:16:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348869.575114; Tue, 14 Jun 2022 12:16:27 +0000
+Received: by outflank-mailman (output) from mailman id 348870.575120; Tue, 14 Jun 2022 12:16:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15T9-0001Ru-CF; Tue, 14 Jun 2022 12:16:27 +0000
-Received: by outflank-mailman (input) for mailman id 348869;
- Tue, 14 Jun 2022 12:16:25 +0000
+	id 1o15TA-0001YW-4a; Tue, 14 Jun 2022 12:16:28 +0000
+Received: by outflank-mailman (input) for mailman id 348870;
+ Tue, 14 Jun 2022 12:16:26 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Hf0K=WV=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o15T7-0008Ek-0Q
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:25 +0000
+ id 1o15T7-0008Ek-V0
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:26 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cda789d3-ebdb-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 14:16:23 +0200 (CEST)
+ id cd53b940-ebdb-11ec-bd2c-47488cf2e6aa;
+ Tue, 14 Jun 2022 14:16:22 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-669-uS3o44O8OS2SpFNP5fHGSA-1; Tue, 14 Jun 2022 08:16:18 -0400
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
+ us-mta-480-77cUT6WpNIy3Zzv5R7gyFA-1; Tue, 14 Jun 2022 08:16:17 -0400
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 3AE9C1C05149;
- Tue, 14 Jun 2022 12:16:18 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4840938041D8;
+ Tue, 14 Jun 2022 12:16:16 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id B4E17416164;
- Tue, 14 Jun 2022 12:16:17 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id BE7331415132;
+ Tue, 14 Jun 2022 12:16:15 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 5832B1800622; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
+ id 34EE718003BA; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cda789d3-ebdb-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: cd53b940-ebdb-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
 	s=mimecast20190719; t=1655208981;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Iypp4lhP0vK8zaOIYv4YGS15C6hr5eRaL+NEXu7qlj4=;
-	b=ByYhOQoGo5lpU9WjWTlMduyw18WYF4e8z/qeOlNrQSXqGj0pdYvao7zwETV0qNFZqJAapL
-	El5go6ddDPML3GUGREhmEgSfjiTV6HNhmgh46JQoopiMjoGwIY1Pu8305Mtf1vZbF65r7j
-	a2oqAjOjNSM9TP9uBU2aOYy4rIfggsQ=
-X-MC-Unique: uS3o44O8OS2SpFNP5fHGSA-1
+	bh=XMFb51C69E0Si128czVwJqlqgwkrMEmsc4JCjQtiyLU=;
+	b=SrDegPrayZibgORa6z+ku62SoFinTM7GGDaWiJ11yogpuDLugoaibao2TbR5TCkOz8xS99
+	jksoLesj3n5R43C2cm+0U2//Lrn7vyyxV9GZXokstABtotRpXKnTPJMqtMoD7cBEml8K6T
+	jRag5S+Px3KMVBIei3+MrNK3iHxAFg4=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1655208981;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=XMFb51C69E0Si128czVwJqlqgwkrMEmsc4JCjQtiyLU=;
+	b=SrDegPrayZibgORa6z+ku62SoFinTM7GGDaWiJ11yogpuDLugoaibao2TbR5TCkOz8xS99
+	jksoLesj3n5R43C2cm+0U2//Lrn7vyyxV9GZXokstABtotRpXKnTPJMqtMoD7cBEml8K6T
+	jRag5S+Px3KMVBIei3+MrNK3iHxAFg4=
+X-MC-Unique: 77cUT6WpNIy3Zzv5R7gyFA-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -80,209 +90,157 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
 	"Canokeys.org" <contact@canokeys.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PULL 07/15] docs: Add CanoKey documentation
-Date: Tue, 14 Jun 2022 14:16:02 +0200
-Message-Id: <20220614121610.508356-8-kraxel@redhat.com>
+Subject: [PULL 05/15] hw/usb/canokey: Add trace events
+Date: Tue, 14 Jun 2022 14:16:00 +0200
+Message-Id: <20220614121610.508356-6-kraxel@redhat.com>
 In-Reply-To: <20220614121610.508356-1-kraxel@redhat.com>
 References: <20220614121610.508356-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
 
 From: "Hongren (Zenithal) Zheng" <i@zenithal.me>
 
 Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
-Message-Id: <YoY6ilQimrK+l5NN@Sun>
+Message-Id: <YoY6RoDKQIxSkFwL@Sun>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- docs/system/device-emulation.rst |   1 +
- docs/system/devices/canokey.rst  | 168 +++++++++++++++++++++++++++++++
- 2 files changed, 169 insertions(+)
- create mode 100644 docs/system/devices/canokey.rst
+ hw/usb/canokey.c    | 13 +++++++++++++
+ hw/usb/trace-events | 16 ++++++++++++++++
+ 2 files changed, 29 insertions(+)
 
-diff --git a/docs/system/device-emulation.rst b/docs/system/device-emulation.rst
-index 3b729b920d7c..05060060563f 100644
---- a/docs/system/device-emulation.rst
-+++ b/docs/system/device-emulation.rst
-@@ -92,3 +92,4 @@ Emulated Devices
-    devices/vhost-user.rst
-    devices/virtio-pmem.rst
-    devices/vhost-user-rng.rst
-+   devices/canokey.rst
-diff --git a/docs/system/devices/canokey.rst b/docs/system/devices/canokey.rst
-new file mode 100644
-index 000000000000..169f99b8eb82
---- /dev/null
-+++ b/docs/system/devices/canokey.rst
-@@ -0,0 +1,168 @@
-+.. _canokey:
+diff --git a/hw/usb/canokey.c b/hw/usb/canokey.c
+index 6cb8b7cdb089..4a08b1cbd776 100644
+--- a/hw/usb/canokey.c
++++ b/hw/usb/canokey.c
+@@ -14,6 +14,7 @@
+ #include "qapi/error.h"
+ #include "hw/usb.h"
+ #include "hw/qdev-properties.h"
++#include "trace.h"
+ #include "desc.h"
+ #include "canokey.h"
+ 
+@@ -66,6 +67,7 @@ static const USBDesc desc_canokey = {
+  */
+ int canokey_emu_stall_ep(void *base, uint8_t ep)
+ {
++    trace_canokey_emu_stall_ep(ep);
+     CanoKeyState *key = base;
+     uint8_t ep_in = CANOKEY_EP_IN(ep); /* INTR IN has ep 129 */
+     key->ep_in_size[ep_in] = 0;
+@@ -75,6 +77,7 @@ int canokey_emu_stall_ep(void *base, uint8_t ep)
+ 
+ int canokey_emu_set_address(void *base, uint8_t addr)
+ {
++    trace_canokey_emu_set_address(addr);
+     CanoKeyState *key = base;
+     key->dev.addr = addr;
+     return 0;
+@@ -83,6 +86,7 @@ int canokey_emu_set_address(void *base, uint8_t addr)
+ int canokey_emu_prepare_receive(
+         void *base, uint8_t ep, uint8_t *pbuf, uint16_t size)
+ {
++    trace_canokey_emu_prepare_receive(ep, size);
+     CanoKeyState *key = base;
+     key->ep_out[ep] = pbuf;
+     key->ep_out_size[ep] = size;
+@@ -92,6 +96,7 @@ int canokey_emu_prepare_receive(
+ int canokey_emu_transmit(
+         void *base, uint8_t ep, const uint8_t *pbuf, uint16_t size)
+ {
++    trace_canokey_emu_transmit(ep, size);
+     CanoKeyState *key = base;
+     uint8_t ep_in = CANOKEY_EP_IN(ep); /* INTR IN has ep 129 */
+     memcpy(key->ep_in[ep_in] + key->ep_in_size[ep_in],
+@@ -125,6 +130,7 @@ uint32_t canokey_emu_get_rx_data_size(void *base, uint8_t ep)
+  */
+ static void canokey_handle_reset(USBDevice *dev)
+ {
++    trace_canokey_handle_reset();
+     CanoKeyState *key = CANOKEY(dev);
+     for (int i = 0; i != CANOKEY_EP_NUM; ++i) {
+         key->ep_in_state[i] = CANOKEY_EP_IN_WAIT;
+@@ -137,6 +143,7 @@ static void canokey_handle_reset(USBDevice *dev)
+ static void canokey_handle_control(USBDevice *dev, USBPacket *p,
+                int request, int value, int index, int length, uint8_t *data)
+ {
++    trace_canokey_handle_control_setup(request, value, index, length);
+     CanoKeyState *key = CANOKEY(dev);
+ 
+     canokey_emu_setup(request, value, index, length);
+@@ -144,6 +151,7 @@ static void canokey_handle_control(USBDevice *dev, USBPacket *p,
+     uint32_t dir_in = request & DeviceRequest;
+     if (!dir_in) {
+         /* OUT */
++        trace_canokey_handle_control_out();
+         if (key->ep_out[0] != NULL) {
+             memcpy(key->ep_out[0], data, length);
+         }
+@@ -163,6 +171,7 @@ static void canokey_handle_control(USBDevice *dev, USBPacket *p,
+     case CANOKEY_EP_IN_READY:
+         memcpy(data, key->ep_in[0], key->ep_in_size[0]);
+         p->actual_length = key->ep_in_size[0];
++        trace_canokey_handle_control_in(p->actual_length);
+         /* reset state */
+         key->ep_in_state[0] = CANOKEY_EP_IN_WAIT;
+         key->ep_in_size[0] = 0;
+@@ -182,6 +191,7 @@ static void canokey_handle_data(USBDevice *dev, USBPacket *p)
+     uint32_t out_len;
+     switch (p->pid) {
+     case USB_TOKEN_OUT:
++        trace_canokey_handle_data_out(ep_out, p->iov.size);
+         usb_packet_copy(p, key->ep_out_buffer[ep_out], p->iov.size);
+         out_pos = 0;
+         while (out_pos != p->iov.size) {
+@@ -226,6 +236,7 @@ static void canokey_handle_data(USBDevice *dev, USBPacket *p)
+                 key->ep_in_size[ep_in] = 0;
+                 key->ep_in_pos[ep_in] = 0;
+             }
++            trace_canokey_handle_data_in(ep_in, in_len);
+             break;
+         }
+         break;
+@@ -237,6 +248,7 @@ static void canokey_handle_data(USBDevice *dev, USBPacket *p)
+ 
+ static void canokey_realize(USBDevice *base, Error **errp)
+ {
++    trace_canokey_realize();
+     CanoKeyState *key = CANOKEY(base);
+ 
+     if (key->file == NULL) {
+@@ -260,6 +272,7 @@ static void canokey_realize(USBDevice *base, Error **errp)
+ 
+ static void canokey_unrealize(USBDevice *base)
+ {
++    trace_canokey_unrealize();
+ }
+ 
+ static Property canokey_properties[] = {
+diff --git a/hw/usb/trace-events b/hw/usb/trace-events
+index 9773cb53300d..914ca7166829 100644
+--- a/hw/usb/trace-events
++++ b/hw/usb/trace-events
+@@ -345,3 +345,19 @@ usb_serial_set_baud(int bus, int addr, int baud) "dev %d:%u baud rate %d"
+ usb_serial_set_data(int bus, int addr, int parity, int data, int stop) "dev %d:%u parity %c, data bits %d, stop bits %d"
+ usb_serial_set_flow_control(int bus, int addr, int index) "dev %d:%u flow control %d"
+ usb_serial_set_xonxoff(int bus, int addr, uint8_t xon, uint8_t xoff) "dev %d:%u xon 0x%x xoff 0x%x"
 +
-+CanoKey QEMU
-+------------
-+
-+CanoKey [1]_ is an open-source secure key with supports of
-+
-+* U2F / FIDO2 with Ed25519 and HMAC-secret
-+* OpenPGP Card V3.4 with RSA4096, Ed25519 and more [2]_
-+* PIV (NIST SP 800-73-4)
-+* HOTP / TOTP
-+* NDEF
-+
-+All these platform-independent features are in canokey-core [3]_.
-+
-+For different platforms, CanoKey has different implementations,
-+including both hardware implementions and virtual cards:
-+
-+* CanoKey STM32 [4]_
-+* CanoKey Pigeon [5]_
-+* (virt-card) CanoKey USB/IP
-+* (virt-card) CanoKey FunctionFS
-+
-+In QEMU, yet another CanoKey virt-card is implemented.
-+CanoKey QEMU exposes itself as a USB device to the guest OS.
-+
-+With the same software configuration as a hardware key,
-+the guest OS can use all the functionalities of a secure key as if
-+there was actually an hardware key plugged in.
-+
-+CanoKey QEMU provides much convenience for debuging:
-+
-+* libcanokey-qemu supports debuging output thus developers can
-+  inspect what happens inside a secure key
-+* CanoKey QEMU supports trace event thus event
-+* QEMU USB stack supports pcap thus USB packet between the guest
-+  and key can be captured and analysed
-+
-+Then for developers:
-+
-+* For developers on software with secure key support (e.g. FIDO2, OpenPGP),
-+  they can see what happens inside the secure key
-+* For secure key developers, USB packets between guest OS and CanoKey
-+  can be easily captured and analysed
-+
-+Also since this is a virtual card, it can be easily used in CI for testing
-+on code coping with secure key.
-+
-+Building
-+========
-+
-+libcanokey-qemu is required to use CanoKey QEMU.
-+
-+.. code-block:: shell
-+
-+    git clone https://github.com/canokeys/canokey-qemu
-+    mkdir canokey-qemu/build
-+    pushd canokey-qemu/build
-+
-+If you want to install libcanokey-qemu in a different place,
-+add ``-DCMAKE_INSTALL_PREFIX=/path/to/your/place`` to cmake below.
-+
-+.. code-block:: shell
-+
-+    cmake ..
-+    make
-+    make install # may need sudo
-+    popd
-+
-+Then configuring and building:
-+
-+.. code-block:: shell
-+
-+    # depending on your env, lib/pkgconfig can be lib64/pkgconfig
-+    export PKG_CONFIG_PATH=/path/to/your/place/lib/pkgconfig:$PKG_CONFIG_PATH
-+    ./configure --enable-canokey && make
-+
-+Using CanoKey QEMU
-+==================
-+
-+CanoKey QEMU stores all its data on a file of the host specified by the argument
-+when invoking qemu.
-+
-+.. parsed-literal::
-+
-+    |qemu_system| -usb -device canokey,file=$HOME/.canokey-file
-+
-+Note: you should keep this file carefully as it may contain your private key!
-+
-+The first time when the file is used, it is created and initialized by CanoKey,
-+afterwards CanoKey QEMU would just read this file.
-+
-+After the guest OS boots, you can check that there is a USB device.
-+
-+For example, If the guest OS is an Linux machine. You may invoke lsusb
-+and find CanoKey QEMU there:
-+
-+.. code-block:: shell
-+
-+    $ lsusb
-+    Bus 001 Device 002: ID 20a0:42d4 Clay Logic CanoKey QEMU
-+
-+You may setup the key as guided in [6]_. The console for the key is at [7]_.
-+
-+Debuging
-+========
-+
-+CanoKey QEMU consists of two parts, ``libcanokey-qemu.so`` and ``canokey.c``,
-+the latter of which resides in QEMU. The former provides core functionality
-+of a secure key while the latter provides platform-dependent functions:
-+USB packet handling.
-+
-+If you want to trace what happens inside the secure key, when compiling
-+libcanokey-qemu, you should add ``-DQEMU_DEBUG_OUTPUT=ON`` in cmake command
-+line:
-+
-+.. code-block:: shell
-+
-+    cmake .. -DQEMU_DEBUG_OUTPUT=ON
-+
-+If you want to trace events happened in canokey.c, use
-+
-+.. parsed-literal::
-+
-+    |qemu_system| --trace "canokey_*" \\
-+        -usb -device canokey,file=$HOME/.canokey-file
-+
-+If you want to capture USB packets between the guest and the host, you can:
-+
-+.. parsed-literal::
-+
-+    |qemu_system| -usb -device canokey,file=$HOME/.canokey-file,pcap=key.pcap
-+
-+Limitations
-+===========
-+
-+Currently libcanokey-qemu.so has dozens of global variables as it was originally
-+designed for embedded systems. Thus one qemu instance can not have
-+multiple CanoKey QEMU running, namely you can not
-+
-+.. parsed-literal::
-+
-+    |qemu_system| -usb -device canokey,file=$HOME/.canokey-file \\
-+         -device canokey,file=$HOME/.canokey-file2
-+
-+Also, there is no lock on canokey-file, thus two CanoKey QEMU instance
-+can not read one canokey-file at the same time.
-+
-+Another limitation is that this device is not compatible with ``qemu-xhci``,
-+in that this device would hang when there are FIDO2 packets (traffic on
-+interrupt endpoints). If you do not use FIDO2 then it works as intended,
-+but for full functionality you should use old uhci/ehci bus and attach canokey
-+to it, for example
-+
-+.. parsed-literal::
-+
-+   |qemu_system| -device piix3-usb-uhci,id=uhci -device canokey,bus=uhci.0
-+
-+References
-+==========
-+
-+.. [1] `<https://canokeys.org>`_
-+.. [2] `<https://docs.canokeys.org/userguide/openpgp/#supported-algorithm>`_
-+.. [3] `<https://github.com/canokeys/canokey-core>`_
-+.. [4] `<https://github.com/canokeys/canokey-stm32>`_
-+.. [5] `<https://github.com/canokeys/canokey-pigeon>`_
-+.. [6] `<https://docs.canokeys.org/>`_
-+.. [7] `<https://console.canokeys.org/>`_
++# canokey.c
++canokey_emu_stall_ep(uint8_t ep) "ep %d"
++canokey_emu_set_address(uint8_t addr) "addr %d"
++canokey_emu_prepare_receive(uint8_t ep, uint16_t size) "ep %d size %d"
++canokey_emu_transmit(uint8_t ep, uint16_t size) "ep %d size %d"
++canokey_thread_start(void)
++canokey_thread_stop(void)
++canokey_handle_reset(void)
++canokey_handle_control_setup(int request, int value, int index, int length) "request 0x%04X value 0x%04X index 0x%04X length 0x%04X"
++canokey_handle_control_out(void)
++canokey_handle_control_in(int actual_len) "len %d"
++canokey_handle_data_out(uint8_t ep_out, uint32_t out_len) "ep %d len %d"
++canokey_handle_data_in(uint8_t ep_in, uint32_t in_len) "ep %d len %d"
++canokey_realize(void)
++canokey_unrealize(void)
 -- 
 2.36.1
 
