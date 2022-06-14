@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B08CCA473
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:05:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.349259.575678 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 183D0C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:05:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.349293.575706 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHj-0005az-Dr; Wed, 15 Jun 2022 04:05:39 +0000
+	id 1o1KHl-00066o-0R; Wed, 15 Jun 2022 04:05:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 349259.575678; Wed, 15 Jun 2022 04:05:39 +0000
+Received: by outflank-mailman (output) from mailman id 349293.575706; Wed, 15 Jun 2022 04:05:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHj-0005Z7-81; Wed, 15 Jun 2022 04:05:39 +0000
-Received: by outflank-mailman (input) for mailman id 349259;
- Tue, 14 Jun 2022 16:25:12 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o1KHk-000644-IJ; Wed, 15 Jun 2022 04:05:40 +0000
+Received: by outflank-mailman (input) for mailman id 349293;
+ Tue, 14 Jun 2022 17:00:10 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qq/B=WV=arm.com=mark.rutland@srs-se1.protection.inumbo.net>)
- id 1o19Ls-0005Qt-GL
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 16:25:12 +0000
+ id 1o19ti-0001vp-CI
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 17:00:10 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 8fd06c92-ebfe-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 18:25:11 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 7213b217-ec03-11ec-a26a-b96bd03d9e80;
+ Tue, 14 Jun 2022 19:00:08 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 983DA16A3;
- Tue, 14 Jun 2022 09:25:10 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 11469175A;
+ Tue, 14 Jun 2022 10:00:08 -0700 (PDT)
 Received: from FVFF77S0Q05N (unknown [10.57.41.154])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A00683F66F;
- Tue, 14 Jun 2022 09:24:52 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4A1F03F66F;
+ Tue, 14 Jun 2022 09:59:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,8 +44,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8fd06c92-ebfe-11ec-bd2c-47488cf2e6aa
-Date: Tue, 14 Jun 2022 17:24:48 +0100
+X-Inumbo-ID: 7213b217-ec03-11ec-a26a-b96bd03d9e80
+Date: Tue, 14 Jun 2022 17:59:46 +0100
 From: Mark Rutland <mark.rutland@arm.com>
 To: Peter Zijlstra <peterz@infradead.org>
 Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
@@ -58,7 +58,7 @@ Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
 	kernel@xen0n.name, geert@linux-m68k.org, sammy@sammy.net,
 	monstr@monstr.eu, tsbogend@alpha.franken.de, dinguyen@kernel.org,
 	jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
-	shorne@gmail.com, James.Bottomley@HansenPartnership.com,
+	shorne@gmail.com, James.Bottomley@hansenpartnership.com,
 	deller@gmx.de, mpe@ellerman.id.au, benh@kernel.crashing.org,
 	paulus@samba.org, paul.walmsley@sifive.com, palmer@dabbelt.com,
 	aou@eecs.berkeley.edu, hca@linux.ibm.com, gor@linux.ibm.com,
@@ -102,54 +102,63 @@ Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
 	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
 	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
-	rcu@vger.kernel.org, maz@kernel.org
-Subject: Re: [PATCH 23/36] arm64,smp: Remove trace_.*_rcuidle() usage
-Message-ID: <Yqi2UGb4alCAR5s4@FVFF77S0Q05N>
+	rcu@vger.kernel.org
+Subject: Re: [PATCH 14/36] cpuidle: Fix rcu_idle_*() usage
+Message-ID: <Yqi+gg+p0sv0F7Di@FVFF77S0Q05N>
 References: <20220608142723.103523089@infradead.org>
- <20220608144517.380962958@infradead.org>
+ <20220608144516.808451191@infradead.org>
+ <YqiB6YpVqq4wuDtO@FVFF77S0Q05N>
+ <Yqi6Fd38ZCsDUnQG@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220608144517.380962958@infradead.org>
+In-Reply-To: <Yqi6Fd38ZCsDUnQG@hirez.programming.kicks-ass.net>
 
-On Wed, Jun 08, 2022 at 04:27:46PM +0200, Peter Zijlstra wrote:
-> Ever since commit d3afc7f12987 ("arm64: Allow IPIs to be handled as
-> normal interrupts") this function is called in regular IRQ context.
+On Tue, Jun 14, 2022 at 06:40:53PM +0200, Peter Zijlstra wrote:
+> On Tue, Jun 14, 2022 at 01:41:13PM +0100, Mark Rutland wrote:
+> > On Wed, Jun 08, 2022 at 04:27:37PM +0200, Peter Zijlstra wrote:
+> > > --- a/kernel/time/tick-broadcast.c
+> > > +++ b/kernel/time/tick-broadcast.c
+> > > @@ -622,9 +622,13 @@ struct cpumask *tick_get_broadcast_onesh
+> > >   * to avoid a deep idle transition as we are about to get the
+> > >   * broadcast IPI right away.
+> > >   */
+> > > -int tick_check_broadcast_expired(void)
+> > > +noinstr int tick_check_broadcast_expired(void)
+> > >  {
+> > > +#ifdef _ASM_GENERIC_BITOPS_INSTRUMENTED_NON_ATOMIC_H
+> > > +	return arch_test_bit(smp_processor_id(), cpumask_bits(tick_broadcast_force_mask));
+> > > +#else
+> > >  	return cpumask_test_cpu(smp_processor_id(), tick_broadcast_force_mask);
+> > > +#endif
+> > >  }
+> > 
+> > This is somewhat not-ideal. :/
 > 
-> Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+> I'll say.
+> 
+> > Could we unconditionally do the arch_test_bit() variant, with a comment, or
+> > does that not exist in some cases?
+> 
+> Loads of build errors ensued, which is how I ended up with this mess ...
 
-[adding Marc since he authored that commit]
+Yaey :(
 
-Makes sense to me:
+I see the same is true for the thread flag manipulation too.
 
-  Acked-by: Mark Rutland <mark.rutland@arm.com>
+I'll take a look and see if we can layer things so that we can use the arch_*()
+helpers and wrap those consistently so that we don't have to check the CPP
+guard.
+
+Ideally we'd have a a better language that allows us to make some
+context-senstive decisions, then we could hide all this gunk in the lower
+levels with somethin like:
+
+	if (!THIS_IS_A_NOINSTR_FUNCTION()) {
+		explicit_instrumentation(...);
+	}
+
+... ho hum.
 
 Mark.
-
-> ---
->  arch/arm64/kernel/smp.c |    4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> --- a/arch/arm64/kernel/smp.c
-> +++ b/arch/arm64/kernel/smp.c
-> @@ -865,7 +865,7 @@ static void do_handle_IPI(int ipinr)
->  	unsigned int cpu = smp_processor_id();
->  
->  	if ((unsigned)ipinr < NR_IPI)
-> -		trace_ipi_entry_rcuidle(ipi_types[ipinr]);
-> +		trace_ipi_entry(ipi_types[ipinr]);
->  
->  	switch (ipinr) {
->  	case IPI_RESCHEDULE:
-> @@ -914,7 +914,7 @@ static void do_handle_IPI(int ipinr)
->  	}
->  
->  	if ((unsigned)ipinr < NR_IPI)
-> -		trace_ipi_exit_rcuidle(ipi_types[ipinr]);
-> +		trace_ipi_exit(ipi_types[ipinr]);
->  }
->  
->  static irqreturn_t ipi_handler(int irq, void *data)
-> 
-> 
 
