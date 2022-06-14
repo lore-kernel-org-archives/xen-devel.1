@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCB4CCA473
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:05:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.349289.575695 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60576C433EF
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:06:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.349280.575688 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHk-0005z7-CX; Wed, 15 Jun 2022 04:05:40 +0000
+	id 1o1KHj-0005o9-UL; Wed, 15 Jun 2022 04:05:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 349289.575695; Wed, 15 Jun 2022 04:05:40 +0000
+Received: by outflank-mailman (output) from mailman id 349280.575688; Wed, 15 Jun 2022 04:05:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHk-0005tN-1w; Wed, 15 Jun 2022 04:05:40 +0000
-Received: by outflank-mailman (input) for mailman id 349289;
- Tue, 14 Jun 2022 16:53:50 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o1KHj-0005lJ-Ma; Wed, 15 Jun 2022 04:05:39 +0000
+Received: by outflank-mailman (input) for mailman id 349280;
+ Tue, 14 Jun 2022 16:28:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qq/B=WV=arm.com=mark.rutland@srs-se1.protection.inumbo.net>)
- id 1o19nZ-0000tE-VT
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 16:53:49 +0000
+ id 1o19P0-0005jd-DX
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 16:28:26 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 8f15f558-ec02-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 18:53:48 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 03226e8a-ebff-11ec-a26a-b96bd03d9e80;
+ Tue, 14 Jun 2022 18:28:24 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 708A916F3;
- Tue, 14 Jun 2022 09:53:47 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D221916F3;
+ Tue, 14 Jun 2022 09:28:23 -0700 (PDT)
 Received: from FVFF77S0Q05N (unknown [10.57.41.154])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 913753F66F;
- Tue, 14 Jun 2022 09:53:29 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EEF753F66F;
+ Tue, 14 Jun 2022 09:28:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,8 +44,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8f15f558-ec02-11ec-bd2c-47488cf2e6aa
-Date: Tue, 14 Jun 2022 17:53:25 +0100
+X-Inumbo-ID: 03226e8a-ebff-11ec-a26a-b96bd03d9e80
+Date: Tue, 14 Jun 2022 17:28:02 +0100
 From: Mark Rutland <mark.rutland@arm.com>
 To: Peter Zijlstra <peterz@infradead.org>
 Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
@@ -58,7 +58,7 @@ Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
 	kernel@xen0n.name, geert@linux-m68k.org, sammy@sammy.net,
 	monstr@monstr.eu, tsbogend@alpha.franken.de, dinguyen@kernel.org,
 	jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
-	shorne@gmail.com, James.Bottomley@hansenpartnership.com,
+	shorne@gmail.com, James.Bottomley@HansenPartnership.com,
 	deller@gmx.de, mpe@ellerman.id.au, benh@kernel.crashing.org,
 	paulus@samba.org, paul.walmsley@sifive.com, palmer@dabbelt.com,
 	aou@eecs.berkeley.edu, hca@linux.ibm.com, gor@linux.ibm.com,
@@ -103,65 +103,68 @@ Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
 	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
 	rcu@vger.kernel.org
-Subject: Re: [PATCH 15/36] cpuidle,cpu_pm: Remove RCU fiddling from
- cpu_pm_{enter,exit}()
-Message-ID: <Yqi9BTTnlbcUsD5c@FVFF77S0Q05N>
+Subject: Re: [PATCH 25/36] time/tick-broadcast: Remove RCU_NONIDLE usage
+Message-ID: <Yqi3EmHbuvf3ItMI@FVFF77S0Q05N>
 References: <20220608142723.103523089@infradead.org>
- <20220608144516.871305980@infradead.org>
- <YqiznJL7qB9uSQ9c@FVFF77S0Q05N>
- <Yqi6Zp+DTm22dLB9@hirez.programming.kicks-ass.net>
+ <20220608144517.507286638@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <Yqi6Zp+DTm22dLB9@hirez.programming.kicks-ass.net>
+In-Reply-To: <20220608144517.507286638@infradead.org>
 
-On Tue, Jun 14, 2022 at 06:42:14PM +0200, Peter Zijlstra wrote:
-> On Tue, Jun 14, 2022 at 05:13:16PM +0100, Mark Rutland wrote:
-> > On Wed, Jun 08, 2022 at 04:27:38PM +0200, Peter Zijlstra wrote:
-> > > All callers should still have RCU enabled.
-> > 
-> > IIUC with that true we should be able to drop the RCU_NONIDLE() from
-> > drivers/perf/arm_pmu.c, as we only needed that for an invocation via a pm
-> > notifier.
-> > 
-> > I should be able to give that a spin on some hardware.
-> > 
-> > > 
-> > > Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> > > ---
-> > >  kernel/cpu_pm.c |    9 ---------
-> > >  1 file changed, 9 deletions(-)
-> > > 
-> > > --- a/kernel/cpu_pm.c
-> > > +++ b/kernel/cpu_pm.c
-> > > @@ -30,16 +30,9 @@ static int cpu_pm_notify(enum cpu_pm_eve
-> > >  {
-> > >  	int ret;
-> > >  
-> > > -	/*
-> > > -	 * This introduces a RCU read critical section, which could be
-> > > -	 * disfunctional in cpu idle. Copy RCU_NONIDLE code to let RCU know
-> > > -	 * this.
-> > > -	 */
-> > > -	rcu_irq_enter_irqson();
-> > >  	rcu_read_lock();
-> > >  	ret = raw_notifier_call_chain(&cpu_pm_notifier.chain, event, NULL);
-> > >  	rcu_read_unlock();
-> > > -	rcu_irq_exit_irqson();
-> > 
-> > To make this easier to debug, is it worth adding an assertion that RCU is
-> > watching here? e.g.
-> > 
-> > 	RCU_LOCKDEP_WARN(!rcu_is_watching(),
-> > 			 "cpu_pm_notify() used illegally from EQS");
-> > 
+On Wed, Jun 08, 2022 at 04:27:48PM +0200, Peter Zijlstra wrote:
+> No callers left that have already disabled RCU.
 > 
-> My understanding is that rcu_read_lock() implies something along those
-> lines when PROVE_RCU.
-
-Ah, duh. Given that:
+> Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 
 Acked-by: Mark Rutland <mark.rutland@arm.com>
 
 Mark.
+
+> ---
+>  kernel/time/tick-broadcast-hrtimer.c |   29 ++++++++++++-----------------
+>  1 file changed, 12 insertions(+), 17 deletions(-)
+> 
+> --- a/kernel/time/tick-broadcast-hrtimer.c
+> +++ b/kernel/time/tick-broadcast-hrtimer.c
+> @@ -56,25 +56,20 @@ static int bc_set_next(ktime_t expires,
+>  	 * hrtimer callback function is currently running, then
+>  	 * hrtimer_start() cannot move it and the timer stays on the CPU on
+>  	 * which it is assigned at the moment.
+> +	 */
+> +	hrtimer_start(&bctimer, expires, HRTIMER_MODE_ABS_PINNED_HARD);
+> +	/*
+> +	 * The core tick broadcast mode expects bc->bound_on to be set
+> +	 * correctly to prevent a CPU which has the broadcast hrtimer
+> +	 * armed from going deep idle.
+>  	 *
+> -	 * As this can be called from idle code, the hrtimer_start()
+> -	 * invocation has to be wrapped with RCU_NONIDLE() as
+> -	 * hrtimer_start() can call into tracing.
+> +	 * As tick_broadcast_lock is held, nothing can change the cpu
+> +	 * base which was just established in hrtimer_start() above. So
+> +	 * the below access is safe even without holding the hrtimer
+> +	 * base lock.
+>  	 */
+> -	RCU_NONIDLE( {
+> -		hrtimer_start(&bctimer, expires, HRTIMER_MODE_ABS_PINNED_HARD);
+> -		/*
+> -		 * The core tick broadcast mode expects bc->bound_on to be set
+> -		 * correctly to prevent a CPU which has the broadcast hrtimer
+> -		 * armed from going deep idle.
+> -		 *
+> -		 * As tick_broadcast_lock is held, nothing can change the cpu
+> -		 * base which was just established in hrtimer_start() above. So
+> -		 * the below access is safe even without holding the hrtimer
+> -		 * base lock.
+> -		 */
+> -		bc->bound_on = bctimer.base->cpu_base->cpu;
+> -	} );
+> +	bc->bound_on = bctimer.base->cpu_base->cpu;
+> +
+>  	return 0;
+>  }
+>  
+> 
+> 
 
