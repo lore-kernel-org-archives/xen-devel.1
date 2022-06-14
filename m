@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F092C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:16:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348863.575049 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9ACC43334
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:16:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.348865.575071 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15T3-0008F9-4r; Tue, 14 Jun 2022 12:16:21 +0000
+	id 1o15T4-0000Jy-NA; Tue, 14 Jun 2022 12:16:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348863.575049; Tue, 14 Jun 2022 12:16:21 +0000
+Received: by outflank-mailman (output) from mailman id 348865.575071; Tue, 14 Jun 2022 12:16:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15T2-0008F2-Vu; Tue, 14 Jun 2022 12:16:20 +0000
-Received: by outflank-mailman (input) for mailman id 348863;
- Tue, 14 Jun 2022 12:16:19 +0000
+	id 1o15T4-0000It-I3; Tue, 14 Jun 2022 12:16:22 +0000
+Received: by outflank-mailman (input) for mailman id 348865;
+ Tue, 14 Jun 2022 12:16:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Hf0K=WV=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o15T1-0008Ek-4g
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:19 +0000
+ id 1o15T2-0008Ek-Tv
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:20 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id ca390d91-ebdb-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 14:16:17 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ id cb66a6fa-ebdb-11ec-bd2c-47488cf2e6aa;
+ Tue, 14 Jun 2022 14:16:19 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-597-L15e5m9TNUyMxihfL8XLtA-1; Tue, 14 Jun 2022 08:16:13 -0400
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
+ us-mta-650-pVihZslYPXmGc_VmJgPZPg-1; Tue, 14 Jun 2022 08:16:14 -0400
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 80F2D1C0514D;
- Tue, 14 Jun 2022 12:16:12 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 417BF85A58E;
+ Tue, 14 Jun 2022 12:16:14 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 44AB1492C3B;
- Tue, 14 Jun 2022 12:16:12 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 0829E400F3FF;
+ Tue, 14 Jun 2022 12:16:14 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id E1A291800084; Tue, 14 Jun 2022 14:16:10 +0200 (CEST)
+ id 14D011800395; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,17 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: ca390d91-ebdb-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: cb66a6fa-ebdb-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655208976;
+	s=mimecast20190719; t=1655208978;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=6LLN3PRRdurbe5WDvmvbhPsA1qOqsjYEdVF0UsvlhBQ=;
-	b=ONZhyRikfdnThs445SmVSytwMaLt9vjU0OW37LoO0Ir0qzoWP4cFwLP0RDTv7VzdBm+aw+
-	9tVQeSq0sjK7MAQDtRYysyt+wq8rimLzgJ92uVv/MWYGFmTp+fqG3JL67e0awAiDdbH2lD
-	tVPob/Ffoot1Jt/9DSqBOVOSQTCbJqY=
-X-MC-Unique: L15e5m9TNUyMxihfL8XLtA-1
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qgE0u/psF+5HbFaMEFEBF+1+y1Gn5UXWEs7HICOeN3Q=;
+	b=ioqB0tc4u6bdrtzSqbNjGjgG6E+z6UAYTY0C0CnUoyry+J2n3rnG0n4G8B3xRoKtnANif3
+	YXETPnTTAzlwdZ87ikgU14unKr+R+xeYVj7UYrvgphMTiyjbadJ5YHW+3xAqzHoe08NNru
+	PB85iVBUZLNE7eF9ppzXvSaUngxRHQI=
+X-MC-Unique: pVihZslYPXmGc_VmJgPZPg-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -79,93 +80,50 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
 	"Canokeys.org" <contact@canokeys.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PULL 00/15] Kraxel 20220614 patches
-Date: Tue, 14 Jun 2022 14:15:55 +0200
-Message-Id: <20220614121610.508356-1-kraxel@redhat.com>
+Subject: [PULL 03/15] ui/cocoa: Fix poweroff request code
+Date: Tue, 14 Jun 2022 14:15:58 +0200
+Message-Id: <20220614121610.508356-4-kraxel@redhat.com>
+In-Reply-To: <20220614121610.508356-1-kraxel@redhat.com>
+References: <20220614121610.508356-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
 
-The following changes since commit debd0753663bc89c86f5462a53268f2e3f680f60:
+From: Akihiko Odaki <akihiko.odaki@gmail.com>
 
-  Merge tag 'pull-testing-next-140622-1' of https://github.com/stsquad/qemu into staging (2022-06-13 21:10:57 -0700)
+Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Message-Id: <20220529082508.89097-1-akihiko.odaki@gmail.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ ui/cocoa.m | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-are available in the Git repository at:
-
-  git://git.kraxel.org/qemu tags/kraxel-20220614-pull-request
-
-for you to fetch changes up to b95b56311a0890da0c9f7fc624529c3d7f8dbce0:
-
-  virtio-gpu: Respect UI refresh rate for EDID (2022-06-14 10:34:37 +0200)
-
-----------------------------------------------------------------
-usb: add CanoKey device, fixes for ehci + redir
-ui: fixes for gtk and cocoa, rework refresh rate
-virtio-gpu: scanout flush fix
-
-----------------------------------------------------------------
-
-Akihiko Odaki (4):
-  ui/cocoa: Fix poweroff request code
-  ui/console: Do not return a value with ui_info
-  ui: Deliver refresh rate via QemuUIInfo
-  virtio-gpu: Respect UI refresh rate for EDID
-
-Arnout Engelen (1):
-  hw/usb/hcd-ehci: fix writeback order
-
-Dongwon Kim (1):
-  virtio-gpu: update done only on the scanout associated with rect
-
-Hongren (Zenithal) Zheng (6):
-  hw/usb: Add CanoKey Implementation
-  hw/usb/canokey: Add trace events
-  meson: Add CanoKey
-  docs: Add CanoKey documentation
-  docs/system/devices/usb: Add CanoKey to USB devices examples
-  MAINTAINERS: add myself as CanoKey maintainer
-
-Joelle van Dyne (1):
-  usbredir: avoid queuing hello packet on snapshot restore
-
-Volker Rümelin (2):
-  ui/gtk-gl-area: implement GL context destruction
-  ui/gtk-gl-area: create the requested GL context version
-
- meson_options.txt                |   2 +
- hw/usb/canokey.h                 |  69 +++++++
- include/hw/virtio/virtio-gpu.h   |   1 +
- include/ui/console.h             |   4 +-
- include/ui/gtk.h                 |   2 +-
- hw/display/virtio-gpu-base.c     |   7 +-
- hw/display/virtio-gpu.c          |   4 +
- hw/display/virtio-vga.c          |   5 +-
- hw/display/xenfb.c               |  14 +-
- hw/usb/canokey.c                 | 313 +++++++++++++++++++++++++++++++
- hw/usb/hcd-ehci.c                |   5 +-
- hw/usb/redirect.c                |   3 +-
- hw/vfio/display.c                |   8 +-
- ui/console.c                     |   6 -
- ui/gtk-egl.c                     |   4 +-
- ui/gtk-gl-area.c                 |  42 ++++-
- ui/gtk.c                         |  45 +++--
- MAINTAINERS                      |   8 +
- docs/system/device-emulation.rst |   1 +
- docs/system/devices/canokey.rst  | 168 +++++++++++++++++
- docs/system/devices/usb.rst      |   4 +
- hw/usb/Kconfig                   |   5 +
- hw/usb/meson.build               |   5 +
- hw/usb/trace-events              |  16 ++
- meson.build                      |   6 +
- scripts/meson-buildoptions.sh    |   3 +
- ui/cocoa.m                       |   6 +-
- ui/trace-events                  |   2 +
- 28 files changed, 707 insertions(+), 51 deletions(-)
- create mode 100644 hw/usb/canokey.h
- create mode 100644 hw/usb/canokey.c
- create mode 100644 docs/system/devices/canokey.rst
-
+diff --git a/ui/cocoa.m b/ui/cocoa.m
+index 09a62817f2a9..84c84e98fc5e 100644
+--- a/ui/cocoa.m
++++ b/ui/cocoa.m
+@@ -35,6 +35,7 @@
+ #include "ui/kbd-state.h"
+ #include "sysemu/sysemu.h"
+ #include "sysemu/runstate.h"
++#include "sysemu/runstate-action.h"
+ #include "sysemu/cpu-throttle.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-block.h"
+@@ -1290,7 +1291,10 @@ - (void)applicationWillTerminate:(NSNotification *)aNotification
+ {
+     COCOA_DEBUG("QemuCocoaAppController: applicationWillTerminate\n");
+ 
+-    qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_UI);
++    with_iothread_lock(^{
++        shutdown_action = SHUTDOWN_ACTION_POWEROFF;
++        qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_UI);
++    });
+ 
+     /*
+      * Sleep here, because returning will cause OSX to kill us
 -- 
 2.36.1
 
