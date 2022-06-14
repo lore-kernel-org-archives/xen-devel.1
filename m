@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 129C9C43334
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B08CCA473
 	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:05:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.349222.575662 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.349259.575678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHi-0005Ow-Hj; Wed, 15 Jun 2022 04:05:38 +0000
+	id 1o1KHj-0005az-Dr; Wed, 15 Jun 2022 04:05:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 349222.575662; Wed, 15 Jun 2022 04:05:38 +0000
+Received: by outflank-mailman (output) from mailman id 349259.575678; Wed, 15 Jun 2022 04:05:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHi-0005Op-Ex; Wed, 15 Jun 2022 04:05:38 +0000
-Received: by outflank-mailman (input) for mailman id 349222;
- Tue, 14 Jun 2022 16:13:44 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o1KHj-0005Z7-81; Wed, 15 Jun 2022 04:05:39 +0000
+Received: by outflank-mailman (input) for mailman id 349259;
+ Tue, 14 Jun 2022 16:25:12 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Qq/B=WV=arm.com=mark.rutland@srs-se1.protection.inumbo.net>)
- id 1o19Am-0001O4-Ch
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 16:13:44 +0000
+ id 1o19Ls-0005Qt-GL
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 16:25:12 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id f3301dd3-ebfc-11ec-a26a-b96bd03d9e80;
- Tue, 14 Jun 2022 18:13:39 +0200 (CEST)
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTP
+ id 8fd06c92-ebfe-11ec-bd2c-47488cf2e6aa;
+ Tue, 14 Jun 2022 18:25:11 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0D6151684;
- Tue, 14 Jun 2022 09:13:38 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 983DA16A3;
+ Tue, 14 Jun 2022 09:25:10 -0700 (PDT)
 Received: from FVFF77S0Q05N (unknown [10.57.41.154])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4946B3F66F;
- Tue, 14 Jun 2022 09:13:20 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A00683F66F;
+ Tue, 14 Jun 2022 09:24:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,8 +44,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f3301dd3-ebfc-11ec-a26a-b96bd03d9e80
-Date: Tue, 14 Jun 2022 17:13:16 +0100
+X-Inumbo-ID: 8fd06c92-ebfe-11ec-bd2c-47488cf2e6aa
+Date: Tue, 14 Jun 2022 17:24:48 +0100
 From: Mark Rutland <mark.rutland@arm.com>
 To: Peter Zijlstra <peterz@infradead.org>
 Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
@@ -102,77 +102,54 @@ Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
 	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
 	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
 	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
-	rcu@vger.kernel.org
-Subject: Re: [PATCH 15/36] cpuidle,cpu_pm: Remove RCU fiddling from
- cpu_pm_{enter,exit}()
-Message-ID: <YqiznJL7qB9uSQ9c@FVFF77S0Q05N>
+	rcu@vger.kernel.org, maz@kernel.org
+Subject: Re: [PATCH 23/36] arm64,smp: Remove trace_.*_rcuidle() usage
+Message-ID: <Yqi2UGb4alCAR5s4@FVFF77S0Q05N>
 References: <20220608142723.103523089@infradead.org>
- <20220608144516.871305980@infradead.org>
+ <20220608144517.380962958@infradead.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220608144516.871305980@infradead.org>
+In-Reply-To: <20220608144517.380962958@infradead.org>
 
-On Wed, Jun 08, 2022 at 04:27:38PM +0200, Peter Zijlstra wrote:
-> All callers should still have RCU enabled.
-
-IIUC with that true we should be able to drop the RCU_NONIDLE() from
-drivers/perf/arm_pmu.c, as we only needed that for an invocation via a pm
-notifier.
-
-I should be able to give that a spin on some hardware.
-
+On Wed, Jun 08, 2022 at 04:27:46PM +0200, Peter Zijlstra wrote:
+> Ever since commit d3afc7f12987 ("arm64: Allow IPIs to be handled as
+> normal interrupts") this function is called in regular IRQ context.
 > 
 > Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> ---
->  kernel/cpu_pm.c |    9 ---------
->  1 file changed, 9 deletions(-)
-> 
-> --- a/kernel/cpu_pm.c
-> +++ b/kernel/cpu_pm.c
-> @@ -30,16 +30,9 @@ static int cpu_pm_notify(enum cpu_pm_eve
->  {
->  	int ret;
->  
-> -	/*
-> -	 * This introduces a RCU read critical section, which could be
-> -	 * disfunctional in cpu idle. Copy RCU_NONIDLE code to let RCU know
-> -	 * this.
-> -	 */
-> -	rcu_irq_enter_irqson();
->  	rcu_read_lock();
->  	ret = raw_notifier_call_chain(&cpu_pm_notifier.chain, event, NULL);
->  	rcu_read_unlock();
-> -	rcu_irq_exit_irqson();
 
-To make this easier to debug, is it worth adding an assertion that RCU is
-watching here? e.g.
+[adding Marc since he authored that commit]
 
-	RCU_LOCKDEP_WARN(!rcu_is_watching(),
-			 "cpu_pm_notify() used illegally from EQS");
+Makes sense to me:
 
->  
->  	return notifier_to_errno(ret);
->  }
-> @@ -49,11 +42,9 @@ static int cpu_pm_notify_robust(enum cpu
->  	unsigned long flags;
->  	int ret;
->  
-> -	rcu_irq_enter_irqson();
->  	raw_spin_lock_irqsave(&cpu_pm_notifier.lock, flags);
->  	ret = raw_notifier_call_chain_robust(&cpu_pm_notifier.chain, event_up, event_down, NULL);
->  	raw_spin_unlock_irqrestore(&cpu_pm_notifier.lock, flags);
-> -	rcu_irq_exit_irqson();
+  Acked-by: Mark Rutland <mark.rutland@arm.com>
 
-
-... and likewise here?
-
-Thanks,
 Mark.
 
+> ---
+>  arch/arm64/kernel/smp.c |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> --- a/arch/arm64/kernel/smp.c
+> +++ b/arch/arm64/kernel/smp.c
+> @@ -865,7 +865,7 @@ static void do_handle_IPI(int ipinr)
+>  	unsigned int cpu = smp_processor_id();
 >  
->  	return notifier_to_errno(ret);
+>  	if ((unsigned)ipinr < NR_IPI)
+> -		trace_ipi_entry_rcuidle(ipi_types[ipinr]);
+> +		trace_ipi_entry(ipi_types[ipinr]);
+>  
+>  	switch (ipinr) {
+>  	case IPI_RESCHEDULE:
+> @@ -914,7 +914,7 @@ static void do_handle_IPI(int ipinr)
+>  	}
+>  
+>  	if ((unsigned)ipinr < NR_IPI)
+> -		trace_ipi_exit_rcuidle(ipi_types[ipinr]);
+> +		trace_ipi_exit(ipi_types[ipinr]);
 >  }
+>  
+>  static irqreturn_t ipi_handler(int irq, void *data)
 > 
 > 
 
