@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0687C433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:18:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348912.575192 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E803FC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:18:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.348936.575203 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15V9-0006Xi-P1; Tue, 14 Jun 2022 12:18:31 +0000
+	id 1o15VO-0007LJ-23; Tue, 14 Jun 2022 12:18:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348912.575192; Tue, 14 Jun 2022 12:18:31 +0000
+Received: by outflank-mailman (output) from mailman id 348936.575203; Tue, 14 Jun 2022 12:18:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15V9-0006XQ-Lh; Tue, 14 Jun 2022 12:18:31 +0000
-Received: by outflank-mailman (input) for mailman id 348912;
- Tue, 14 Jun 2022 12:18:30 +0000
+	id 1o15VN-0007Kz-Uc; Tue, 14 Jun 2022 12:18:45 +0000
+Received: by outflank-mailman (input) for mailman id 348936;
+ Tue, 14 Jun 2022 12:18:44 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Hf0K=WV=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o15Tw-0008Ek-G8
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:17:16 +0000
+ id 1o15TD-0008Ek-24
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:31 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e2e5e89e-ebdb-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 14:16:58 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ id d08ed4dc-ebdb-11ec-bd2c-47488cf2e6aa;
+ Tue, 14 Jun 2022 14:16:28 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-211-09Nq8XZROquC41wzMebuLw-1; Tue, 14 Jun 2022 08:16:54 -0400
+ us-mta-604-wdmex2yGOJ-VOeDajZfdxQ-1; Tue, 14 Jun 2022 08:16:22 -0400
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
  [10.11.54.7])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 961E02999B20;
- Tue, 14 Jun 2022 12:16:53 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 28842801E6B;
+ Tue, 14 Jun 2022 12:16:22 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 614741415103;
- Tue, 14 Jun 2022 12:16:53 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id DA58A1402403;
+ Tue, 14 Jun 2022 12:16:21 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 282B41800084; Tue, 14 Jun 2022 14:16:52 +0200 (CEST)
+ id 936FD1800634; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,76 +54,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e2e5e89e-ebdb-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: d08ed4dc-ebdb-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655209017;
+	s=mimecast20190719; t=1655208986;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=nXD25YF84dW7uBlFN8SkZqBu0jvpmi2aaYUiV48m/S4=;
-	b=Rk2hD5gvCICUCQZEBspg0O4SFwR6aSrjU9kVRqjjBUlZ3cvM1VbUC8yti1tNWQAVgwX8Un
-	P8oP3kh4LJW/98O1Qp5xzUS9zQOMo+iPHmXeW96E9fxKf5lvqcTxrU2PsoTPEmjXDMRXwZ
-	SELKFBnVtHPcmaK1ZquNstDIsqyG8hk=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655209017;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=nXD25YF84dW7uBlFN8SkZqBu0jvpmi2aaYUiV48m/S4=;
-	b=Rk2hD5gvCICUCQZEBspg0O4SFwR6aSrjU9kVRqjjBUlZ3cvM1VbUC8yti1tNWQAVgwX8Un
-	P8oP3kh4LJW/98O1Qp5xzUS9zQOMo+iPHmXeW96E9fxKf5lvqcTxrU2PsoTPEmjXDMRXwZ
-	SELKFBnVtHPcmaK1ZquNstDIsqyG8hk=
-X-MC-Unique: 09Nq8XZROquC41wzMebuLw-1
-Date: Tue, 14 Jun 2022 14:16:52 +0200
+	bh=nK8ui8MGXo28dreQTzjS6bbhtNnN1TEyDDyCd/Q1Dgo=;
+	b=QaGyse8WQpqV+Fb1sk4omhhfdkGDM2MjkpCujnwXgfqDaF53IoaW1Y3ohMRe9lkb03JjV7
+	P1QmkJ+sn3HZzAfAEd+LKFv2NL86MuF7f00rPmSNlLrG7bvPWWeusZ24dlmqjKsdnxRYnm
+	HXaRAIHc/wuvMMnap7J+T0Jw1YTou+A=
+X-MC-Unique: wdmex2yGOJ-VOeDajZfdxQ-1
 From: Gerd Hoffmann <kraxel@redhat.com>
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: qemu-devel@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>,
-	xen-devel@lists.xenproject.org,
-	Akihiko Odaki <akihiko.odaki@gmail.com>,
-	"Hongren (Zenithal) Zheng" <i@zenithal.me>,
+To: qemu-devel@nongnu.org
+Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
 	Peter Maydell <peter.maydell@linaro.org>,
 	Alex Williamson <alex.williamson@redhat.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	"Canokeys.org" <contact@canokeys.org>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+	xen-devel@lists.xenproject.org,
 	Paul Durrant <paul@xen.org>,
-	Anthony Perard <anthony.perard@citrix.com>
-Subject: Re: [PULL 00/16] Kraxel 20220613 patches
-Message-ID: <20220614121652.6rzwet6cvhupamkv@sirius.home.kraxel.org>
-References: <20220613113655.3693872-1-kraxel@redhat.com>
- <37f8f623-bb1c-899b-5801-79acd6185c6d@linaro.org>
+	Anthony Perard <anthony.perard@citrix.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>,
+	"Hongren (Zenithal) Zheng" <i@zenithal.me>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	"Canokeys.org" <contact@canokeys.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Dongwon Kim <dongwon.kim@intel.com>,
+	Vivek Kasireddy <vivek.kasireddy@intel.com>
+Subject: [PULL 12/15] virtio-gpu: update done only on the scanout associated with rect
+Date: Tue, 14 Jun 2022 14:16:07 +0200
+Message-Id: <20220614121610.508356-13-kraxel@redhat.com>
+In-Reply-To: <20220614121610.508356-1-kraxel@redhat.com>
+References: <20220614121610.508356-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <37f8f623-bb1c-899b-5801-79acd6185c6d@linaro.org>
+Content-Transfer-Encoding: 8bit
 X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
 
-On Mon, Jun 13, 2022 at 08:52:21AM -0700, Richard Henderson wrote:
-> On 6/13/22 04:36, Gerd Hoffmann wrote:
-> > The following changes since commit dcb40541ebca7ec98a14d461593b3cd7282b4fac:
-> > 
-> >    Merge tag 'mips-20220611' of https://github.com/philmd/qemu into staging (2022-06-11 21:13:27 -0700)
-> > 
-> > are available in the Git repository at:
-> > 
-> >    git://git.kraxel.org/qemu tags/kraxel-20220613-pull-request
-> > 
-> > for you to fetch changes up to 23b87f7a3a13e93e248eef8a4b7257548855a620:
-> > 
-> >    ui: move 'pc-bios/keymaps' to 'ui/keymaps' (2022-06-13 10:59:25 +0200)
-> > 
-> > ----------------------------------------------------------------
-> > usb: add CanoKey device, fixes for ehci + redir
-> > ui: fixes for gtk and cocoa, move keymaps (v2), rework refresh rate
-> > virtio-gpu: scanout flush fix
-> 
-> This doesn't even configure:
-> 
-> ../src/ui/keymaps/meson.build:55:4: ERROR: File ar does not exist.
+From: Dongwon Kim <dongwon.kim@intel.com>
 
-dropped keymaps patch for now, new version sent.
+It only needs to update the scanouts containing the rect area
+coming with the resource-flush request from the guest.
 
-take care,
-  Gerd
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Vivek Kasireddy <vivek.kasireddy@intel.com>
+Signed-off-by: Dongwon Kim <dongwon.kim@intel.com>
+Message-Id: <20220505214030.4261-1-dongwon.kim@intel.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ hw/display/virtio-gpu.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
+index cd4a56056fd9..55c6dd576318 100644
+--- a/hw/display/virtio-gpu.c
++++ b/hw/display/virtio-gpu.c
+@@ -514,6 +514,9 @@ static void virtio_gpu_resource_flush(VirtIOGPU *g,
+         for (i = 0; i < g->parent_obj.conf.max_outputs; i++) {
+             scanout = &g->parent_obj.scanout[i];
+             if (scanout->resource_id == res->resource_id &&
++                rf.r.x >= scanout->x && rf.r.y >= scanout->y &&
++                rf.r.x + rf.r.width <= scanout->x + scanout->width &&
++                rf.r.y + rf.r.height <= scanout->y + scanout->height &&
+                 console_has_gl(scanout->con)) {
+                 dpy_gl_update(scanout->con, 0, 0, scanout->width,
+                               scanout->height);
+-- 
+2.36.1
 
 
