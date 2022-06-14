@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB6B5CCA47C
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:16:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348872.575135 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C514C43334
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:18:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.348900.575158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15TC-0001zb-AW; Tue, 14 Jun 2022 12:16:30 +0000
+	id 1o15V2-0005dG-Mf; Tue, 14 Jun 2022 12:18:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348872.575135; Tue, 14 Jun 2022 12:16:30 +0000
+Received: by outflank-mailman (output) from mailman id 348900.575158; Tue, 14 Jun 2022 12:18:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15TB-0001vn-TM; Tue, 14 Jun 2022 12:16:29 +0000
-Received: by outflank-mailman (input) for mailman id 348872;
- Tue, 14 Jun 2022 12:16:28 +0000
+	id 1o15V2-0005d9-Jl; Tue, 14 Jun 2022 12:18:24 +0000
+Received: by outflank-mailman (input) for mailman id 348900;
+ Tue, 14 Jun 2022 12:18:23 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Hf0K=WV=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o15T9-0008Ek-VW
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:28 +0000
+ id 1o15TB-0008Ek-VX
+ for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:30 +0000
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cecb6f1b-ebdb-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 14:16:25 +0200 (CEST)
+ id d067031f-ebdb-11ec-bd2c-47488cf2e6aa;
+ Tue, 14 Jun 2022 14:16:27 +0200 (CEST)
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-35-j3ECH_JHNIaqhgvfOeUaig-1; Tue, 14 Jun 2022 08:16:20 -0400
-Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
- [10.11.54.9])
+ us-mta-253-9-V6lrRoPN-wePOBAR4HAQ-1; Tue, 14 Jun 2022 08:16:25 -0400
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A513085A580;
- Tue, 14 Jun 2022 12:16:19 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4430B185A7B2;
+ Tue, 14 Jun 2022 12:16:24 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6CA1A492CA2;
- Tue, 14 Jun 2022 12:16:19 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 009C72166B26;
+ Tue, 14 Jun 2022 12:16:24 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 6F585180062D; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
+ id D094A180079D; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,38 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cecb6f1b-ebdb-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: d067031f-ebdb-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655208983;
+	s=mimecast20190719; t=1655208986;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PVva2fRC3vGqvRDPoZrUChjHwOIX197Reg0ezh6aFRw=;
-	b=hGTCtB7IjZbhA0aoXp8rLCQNRfd8XQ90ulnxua1YeNj3lyu1RUt/ESBjnwxL73yo3NsDXL
-	wN5Q3YlYxOHwVwMLNczsQI1/gxmXB+fJEoG8o/Iy4pnQnqoWY+uWE40DyRmzDOI+idAGph
-	bRAN8e341aQij1VMGxRlb1oQVRsXeO8=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655208983;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=PVva2fRC3vGqvRDPoZrUChjHwOIX197Reg0ezh6aFRw=;
-	b=hGTCtB7IjZbhA0aoXp8rLCQNRfd8XQ90ulnxua1YeNj3lyu1RUt/ESBjnwxL73yo3NsDXL
-	wN5Q3YlYxOHwVwMLNczsQI1/gxmXB+fJEoG8o/Iy4pnQnqoWY+uWE40DyRmzDOI+idAGph
-	bRAN8e341aQij1VMGxRlb1oQVRsXeO8=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655208983;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=PVva2fRC3vGqvRDPoZrUChjHwOIX197Reg0ezh6aFRw=;
-	b=hGTCtB7IjZbhA0aoXp8rLCQNRfd8XQ90ulnxua1YeNj3lyu1RUt/ESBjnwxL73yo3NsDXL
-	wN5Q3YlYxOHwVwMLNczsQI1/gxmXB+fJEoG8o/Iy4pnQnqoWY+uWE40DyRmzDOI+idAGph
-	bRAN8e341aQij1VMGxRlb1oQVRsXeO8=
-X-MC-Unique: j3ECH_JHNIaqhgvfOeUaig-1
+	bh=fjkT/ghvgIP+ASWCtRqN8cFZ3mDw+gAHZxFgoi4zHGM=;
+	b=VgxUziE8uhLC+rQ0gEU5G9yqj1A8dNwFl4K/3PynYs4kaW2OCp8aV4XjFUNKHTY6uEMYsr
+	fAP+U0U5nwu6aBES20zOKJ1h1R8tHVLMoy2WZ3JnlNlPznFWCb9nE59LqUEZ8Mb8U7lFm3
+	d/g7dIlu7FlYxru1ina1FXhhYSDP35M=
+X-MC-Unique: 9-V6lrRoPN-wePOBAR4HAQ-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -100,43 +80,62 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
 	"Canokeys.org" <contact@canokeys.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PULL 09/15] MAINTAINERS: add myself as CanoKey maintainer
-Date: Tue, 14 Jun 2022 14:16:04 +0200
-Message-Id: <20220614121610.508356-10-kraxel@redhat.com>
+Subject: [PULL 15/15] virtio-gpu: Respect UI refresh rate for EDID
+Date: Tue, 14 Jun 2022 14:16:10 +0200
+Message-Id: <20220614121610.508356-16-kraxel@redhat.com>
 In-Reply-To: <20220614121610.508356-1-kraxel@redhat.com>
 References: <20220614121610.508356-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.9
+X-Scanned-By: MIMEDefang 2.78 on 10.11.54.6
 
-From: "Hongren (Zenithal) Zheng" <i@zenithal.me>
+From: Akihiko Odaki <akihiko.odaki@gmail.com>
 
-Signed-off-by: Hongren (Zenithal) Zheng <i@zenithal.me>
-Message-Id: <YoY61xI0IcFT1fOP@Sun>
+Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
+Message-Id: <20220226115516.59830-4-akihiko.odaki@gmail.com>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ include/hw/virtio/virtio-gpu.h | 1 +
+ hw/display/virtio-gpu-base.c   | 1 +
+ hw/display/virtio-gpu.c        | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 0df25ed4b0a3..4cf6174f9f37 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -2427,6 +2427,14 @@ F: hw/intc/s390_flic*.c
- F: include/hw/s390x/s390_flic.h
- L: qemu-s390x@nongnu.org
+diff --git a/include/hw/virtio/virtio-gpu.h b/include/hw/virtio/virtio-gpu.h
+index afff9e158e31..2e28507efe21 100644
+--- a/include/hw/virtio/virtio-gpu.h
++++ b/include/hw/virtio/virtio-gpu.h
+@@ -80,6 +80,7 @@ struct virtio_gpu_scanout {
+ struct virtio_gpu_requested_state {
+     uint16_t width_mm, height_mm;
+     uint32_t width, height;
++    uint32_t refresh_rate;
+     int x, y;
+ };
  
-+CanoKey
-+M: Hongren (Zenithal) Zheng <i@zenithal.me>
-+S: Maintained
-+R: Canokeys.org <contact@canokeys.org>
-+F: hw/usb/canokey.c
-+F: hw/usb/canokey.h
-+F: docs/system/devices/canokey.rst
-+
- Subsystems
- ----------
- Overall Audio backends
+diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
+index b21d6e5b0be8..a29f191aa82e 100644
+--- a/hw/display/virtio-gpu-base.c
++++ b/hw/display/virtio-gpu-base.c
+@@ -79,6 +79,7 @@ static void virtio_gpu_ui_info(void *opaque, uint32_t idx, QemuUIInfo *info)
+ 
+     g->req_state[idx].x = info->xoff;
+     g->req_state[idx].y = info->yoff;
++    g->req_state[idx].refresh_rate = info->refresh_rate;
+     g->req_state[idx].width = info->width;
+     g->req_state[idx].height = info->height;
+     g->req_state[idx].width_mm = info->width_mm;
+diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
+index 55c6dd576318..20cc703dcc6e 100644
+--- a/hw/display/virtio-gpu.c
++++ b/hw/display/virtio-gpu.c
+@@ -217,6 +217,7 @@ virtio_gpu_generate_edid(VirtIOGPU *g, int scanout,
+         .height_mm = b->req_state[scanout].height_mm,
+         .prefx = b->req_state[scanout].width,
+         .prefy = b->req_state[scanout].height,
++        .refresh_rate = b->req_state[scanout].refresh_rate,
+     };
+ 
+     edid->size = cpu_to_le32(sizeof(edid->edid));
 -- 
 2.36.1
 
