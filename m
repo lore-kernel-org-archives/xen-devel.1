@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9ACC43334
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B79DCCA47A
 	for <xen-devel@archiver.kernel.org>; Tue, 14 Jun 2022 12:16:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.348865.575071 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.348864.575054 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15T4-0000Jy-NA; Tue, 14 Jun 2022 12:16:22 +0000
+	id 1o15T3-0008IB-Df; Tue, 14 Jun 2022 12:16:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 348865.575071; Tue, 14 Jun 2022 12:16:22 +0000
+Received: by outflank-mailman (output) from mailman id 348864.575054; Tue, 14 Jun 2022 12:16:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o15T4-0000It-I3; Tue, 14 Jun 2022 12:16:22 +0000
-Received: by outflank-mailman (input) for mailman id 348865;
+	id 1o15T3-0008Gt-87; Tue, 14 Jun 2022 12:16:21 +0000
+Received: by outflank-mailman (input) for mailman id 348864;
  Tue, 14 Jun 2022 12:16:20 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=Hf0K=WV=redhat.com=kraxel@srs-se1.protection.inumbo.net>)
- id 1o15T2-0008Ek-Tv
+ id 1o15T1-0008Ek-Ul
  for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 12:16:20 +0000
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cb66a6fa-ebdb-11ec-bd2c-47488cf2e6aa;
- Tue, 14 Jun 2022 14:16:19 +0200 (CEST)
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ id ca8d1326-ebdb-11ec-bd2c-47488cf2e6aa;
+ Tue, 14 Jun 2022 14:16:18 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-650-pVihZslYPXmGc_VmJgPZPg-1; Tue, 14 Jun 2022 08:16:14 -0400
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
+ us-mta-577-zNJqENUwOG2iqDFpqj-GJA-1; Tue, 14 Jun 2022 08:16:13 -0400
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 417BF85A58E;
- Tue, 14 Jun 2022 12:16:14 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id ADF9E1C0514E;
+ Tue, 14 Jun 2022 12:16:12 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.40])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 0829E400F3FF;
- Tue, 14 Jun 2022 12:16:14 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4089418EA5;
+ Tue, 14 Jun 2022 12:16:12 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 14D011800395; Tue, 14 Jun 2022 14:16:11 +0200 (CEST)
+ id EEC8E18000B3; Tue, 14 Jun 2022 14:16:10 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,18 +54,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cb66a6fa-ebdb-11ec-bd2c-47488cf2e6aa
+X-Inumbo-ID: ca8d1326-ebdb-11ec-bd2c-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1655208978;
+	s=mimecast20190719; t=1655208976;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=qgE0u/psF+5HbFaMEFEBF+1+y1Gn5UXWEs7HICOeN3Q=;
-	b=ioqB0tc4u6bdrtzSqbNjGjgG6E+z6UAYTY0C0CnUoyry+J2n3rnG0n4G8B3xRoKtnANif3
-	YXETPnTTAzlwdZ87ikgU14unKr+R+xeYVj7UYrvgphMTiyjbadJ5YHW+3xAqzHoe08NNru
-	PB85iVBUZLNE7eF9ppzXvSaUngxRHQI=
-X-MC-Unique: pVihZslYPXmGc_VmJgPZPg-1
+	bh=h/Rq0T4qHdj5P4fsrjuVBaKf49W5WppINvxKA/pkbYI=;
+	b=VRCtOH04hwZfrb/TggkWASGePToizBoas/O3n1C94GglalKMjOBx0+GEEZaE6MRTlLTbYm
+	3abrJpKreCgSMZa1Bu5FKVZSCBEaO7WYBRKmmO+RVhy+mFjVZsPO/nz5eWjB8sbKKFTB4h
+	+yfIHHSj/7OCAQzUxINUz86SgIBVrLo=
+X-MC-Unique: zNJqENUwOG2iqDFpqj-GJA-1
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
@@ -79,51 +79,63 @@ Cc: Akihiko Odaki <akihiko.odaki@gmail.com>,
 	"Michael S. Tsirkin" <mst@redhat.com>,
 	"Canokeys.org" <contact@canokeys.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Gerd Hoffmann <kraxel@redhat.com>
-Subject: [PULL 03/15] ui/cocoa: Fix poweroff request code
-Date: Tue, 14 Jun 2022 14:15:58 +0200
-Message-Id: <20220614121610.508356-4-kraxel@redhat.com>
+	Gerd Hoffmann <kraxel@redhat.com>,
+	=?UTF-8?q?Volker=20R=C3=BCmelin?= <vr_qemu@t-online.de>
+Subject: [PULL 01/15] ui/gtk-gl-area: implement GL context destruction
+Date: Tue, 14 Jun 2022 14:15:56 +0200
+Message-Id: <20220614121610.508356-2-kraxel@redhat.com>
 In-Reply-To: <20220614121610.508356-1-kraxel@redhat.com>
 References: <20220614121610.508356-1-kraxel@redhat.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
+X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
 
-From: Akihiko Odaki <akihiko.odaki@gmail.com>
+From: Volker Rümelin <vr_qemu@t-online.de>
 
-Signed-off-by: Akihiko Odaki <akihiko.odaki@gmail.com>
-Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-Message-Id: <20220529082508.89097-1-akihiko.odaki@gmail.com>
+The counterpart function for gd_gl_area_create_context() is
+currently empty. Implement the gd_gl_area_destroy_context()
+function to avoid GL context leaks.
+
+Signed-off-by: Volker Rümelin <vr_qemu@t-online.de>
+Message-Id: <20220605085131.7711-1-vr_qemu@t-online.de>
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
 ---
- ui/cocoa.m | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ ui/gtk-gl-area.c | 8 +++++++-
+ ui/trace-events  | 1 +
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/ui/cocoa.m b/ui/cocoa.m
-index 09a62817f2a9..84c84e98fc5e 100644
---- a/ui/cocoa.m
-+++ b/ui/cocoa.m
-@@ -35,6 +35,7 @@
- #include "ui/kbd-state.h"
- #include "sysemu/sysemu.h"
- #include "sysemu/runstate.h"
-+#include "sysemu/runstate-action.h"
- #include "sysemu/cpu-throttle.h"
- #include "qapi/error.h"
- #include "qapi/qapi-commands-block.h"
-@@ -1290,7 +1291,10 @@ - (void)applicationWillTerminate:(NSNotification *)aNotification
+diff --git a/ui/gtk-gl-area.c b/ui/gtk-gl-area.c
+index fc5a082eb846..0e20ea031d34 100644
+--- a/ui/gtk-gl-area.c
++++ b/ui/gtk-gl-area.c
+@@ -201,7 +201,13 @@ QEMUGLContext gd_gl_area_create_context(DisplayGLCtx *dgc,
+ 
+ void gd_gl_area_destroy_context(DisplayGLCtx *dgc, QEMUGLContext ctx)
  {
-     COCOA_DEBUG("QemuCocoaAppController: applicationWillTerminate\n");
+-    /* FIXME */
++    GdkGLContext *current_ctx = gdk_gl_context_get_current();
++
++    trace_gd_gl_area_destroy_context(ctx, current_ctx);
++    if (ctx == current_ctx) {
++        gdk_gl_context_clear_current();
++    }
++    g_clear_object(&ctx);
+ }
  
--    qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_UI);
-+    with_iothread_lock(^{
-+        shutdown_action = SHUTDOWN_ACTION_POWEROFF;
-+        qemu_system_shutdown_request(SHUTDOWN_CAUSE_HOST_UI);
-+    });
+ void gd_gl_area_scanout_texture(DisplayChangeListener *dcl,
+diff --git a/ui/trace-events b/ui/trace-events
+index f78b5e66061f..1040ba0f88c7 100644
+--- a/ui/trace-events
++++ b/ui/trace-events
+@@ -26,6 +26,7 @@ gd_key_event(const char *tab, int gdk_keycode, int qkeycode, const char *action)
+ gd_grab(const char *tab, const char *device, const char *reason) "tab=%s, dev=%s, reason=%s"
+ gd_ungrab(const char *tab, const char *device) "tab=%s, dev=%s"
+ gd_keymap_windowing(const char *name) "backend=%s"
++gd_gl_area_destroy_context(void *ctx, void *current_ctx) "ctx=%p, current_ctx=%p"
  
-     /*
-      * Sleep here, because returning will cause OSX to kill us
+ # vnc-auth-sasl.c
+ # vnc-auth-vencrypt.c
 -- 
 2.36.1
 
