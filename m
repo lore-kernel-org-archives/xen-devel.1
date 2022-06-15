@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD583C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 14:41:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.350197.576461 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BA39C43334
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 14:42:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.350210.576472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1UCJ-000257-HL; Wed, 15 Jun 2022 14:40:43 +0000
+	id 1o1UE0-00038v-UR; Wed, 15 Jun 2022 14:42:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 350197.576461; Wed, 15 Jun 2022 14:40:43 +0000
+Received: by outflank-mailman (output) from mailman id 350210.576472; Wed, 15 Jun 2022 14:42:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1UCJ-00024y-EK; Wed, 15 Jun 2022 14:40:43 +0000
-Received: by outflank-mailman (input) for mailman id 350197;
- Wed, 15 Jun 2022 14:40:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o1UE0-00038o-R9; Wed, 15 Jun 2022 14:42:28 +0000
+Received: by outflank-mailman (input) for mailman id 350210;
+ Wed, 15 Jun 2022 14:42:28 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=56zs=WW=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1o1UCJ-00024S-2e
- for xen-devel@lists.xenproject.org; Wed, 15 Jun 2022 14:40:43 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0631.outbound.protection.outlook.com
- [2a01:111:f400:fe0c::631])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 218793f5-ecb9-11ec-ab14-113154c10af9;
- Wed, 15 Jun 2022 16:40:42 +0200 (CEST)
+ id 1o1UE0-00038i-33
+ for xen-devel@lists.xenproject.org; Wed, 15 Jun 2022 14:42:28 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on0606.outbound.protection.outlook.com
+ [2a01:111:f400:fe0e::606])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 60154d30-ecb9-11ec-bd2c-47488cf2e6aa;
+ Wed, 15 Jun 2022 16:42:27 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by DB9PR04MB8494.eurprd04.prod.outlook.com (2603:10a6:10:2c6::12)
+ by DU2PR04MB9100.eurprd04.prod.outlook.com (2603:10a6:10:2f3::10)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5332.21; Wed, 15 Jun
- 2022 14:40:37 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.14; Wed, 15 Jun
+ 2022 14:42:25 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::dfa:a64a:432f:e26b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::dfa:a64a:432f:e26b%7]) with mapi id 15.20.5332.020; Wed, 15 Jun 2022
- 14:40:37 +0000
+ 14:42:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,28 +49,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 218793f5-ecb9-11ec-ab14-113154c10af9
+X-Inumbo-ID: 60154d30-ecb9-11ec-bd2c-47488cf2e6aa
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=n23jeP8Ge5yuVWYyMlmHFSjYHcRSCTExbzp1LO0A9YBYxwxZ34xrHt6Cy5+uudJUgwuJiUluWg5/bWSxZNaAWF+kTzFH3dYLJQet9iTK1I1OpzdZMYcenolc0uMmGstasQwjZWI3Yh2zFQNgraCnDqMJFSjrec+cXZ9k0wYGLNbwn7vdCfDIhZH5f0nx0wfRiFVCpv+b1APdWMojsbp8iTFila+IIc+lN9smQuv02BzK+vNZLCTDzRk5zYkaUDPTcYLLz6Bv/wVe4z/zfzL9IXVaflIFzwGPxJJdyqxHX1my0DjBypMU8T8uEMSlyOj5aIVrd7CAccJYITwzoLJvjQ==
+ b=iksRiiD7pqTtmZ/MeOMtBVEaRjDoWD9SIqUlT2TnY8eayJQoRl7Qupax6vTephdgrIE1kyXBOcioeoGRuHgFLUVSBnY7vsXoeHgdToW6Re0pb6yU4gVoAwsG8rMFWv3pwf/Py5qG6CKRng9SOGeromo9X+NeE8W49kejinUI3+TCD1G9ktmeyHRPjrS3gGTnR4+abL9A+LYQPAd4fKpJqDYgGO3gxvYlIpCvktpmEtLUfwJGCDVd1zSBr6t73llRKQFNHV9UJr7WSMqFbkRL1Y0TSXzVJn3fJwP4VpUHo0yyYFMrHv42tTRc3edQ0tCmoqQiMdkbRFvfRZ503ilhiA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Rj3fmlDvxl/e0346b/nVu82P4DRX6tiS7rI/NcjekSE=;
- b=GYHrzmZQXeTw5+IRIUHbVqVNAWHSq3rPT95z5yyVqhpHpJChzbXFXnPE8orkdQSxZpKRIvv6jM7/0vPERBrHrNKmLPP54n3XuK54gxryQOzpYz6Cp9ePaPFJUVzlu+KE8pTF+172ArdBrN2fvIbvU43Zh7SmWexLaNc5MvRSCp+QXQibqiimHInwi5t798KBwVt9w/iCE0Q5ibnH4XV5lodzHgGkSbc/nyPQSxtrAQtqQaJTTrKv9h9PaTn9t2GCzLvzEvIsFQpLAB+AMPRSN6EJOCtz4S+URqkTdSlO5dX2rLkh82K8bmkOcROKtnvE/BIS+6GXPJFhBhXvHbatyA==
+ bh=LQTfkArX5sRZ50VfTI+9jym17yc/bngL8yIUznBf0Ck=;
+ b=EkrxEiuNxoBLIs1iRf1QoXp530/5/4tDxcVoaK2D53oB5ny0kJ+hFwNbTeFqKSL/chIQdmKtjb536ft9a9pxCC6ndoUjlwa6c5qn9P73qR/poknRPR93INyqzsNWX0YJk+UlgJ+vnGt4Yb8ITe/rN0x/3L7BHn8nq1N5WGaW/YNWZFXnD4FWxF8/AieDtUe7CXREycojnaFlmFmO91/WAzQPCZdOJg+JdtwLmeZG76Rh1kzU5T0u01vjstwb3rgjk/65EYar/aA6fxzppO61a19Mqpywrpy0jq+je5pwVniWzPulE0GJAfwtOSML54/QuOwZxXuMl5Qb5iw+yo0ATQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rj3fmlDvxl/e0346b/nVu82P4DRX6tiS7rI/NcjekSE=;
- b=3NuMxV8SQFSe4/nlp7pgJsAwn8To+0uNxjQkilxVa4zyw5XjrdoiKOTurs/3qTQMd/4Dd3Lz4GG1wYdfqqnN4C29rHXfeXb0NhESEfPHdnZSeFmaNazTi+Wdt1ODK9+znJBvTNmIJKbtc4W6yfDCs+LrxJ5a38c88kHmHTrC5CFsU5KFCHWKwuP9hmPE5IghBG4pbwOau2iBk1xYTleWOXloQdRqBTnGftmAVBCl+b+fmic58QsIht8xkf6Qc/ZvFB54R6clXWPTZE3e4WSaO4swUZMEqwZ/X34dgyIr+S/SRArE3SAzAE6SVCk/q+Y3QVtUIJJcyncD4mQ4vD1frw==
+ bh=LQTfkArX5sRZ50VfTI+9jym17yc/bngL8yIUznBf0Ck=;
+ b=2uA9K+LyTyDwZnV7jfSULWAozu8C/AwZI1GUZUSUU2zWe32+T84E2dUBGVAu2VqmvKWlzFTrYYW7HvlACYIKme0u5fA/lRwnJsxOwCkLDcsqjpDWeOANM7e7JTTakTP9ibwYsg685BOjYnMLsNNidQzg1GAzu8bUCaR9w7cCV8SC1UKQ9XwODm5Om275iZx2FOBs5oV9X817/HSwIKT8I44SuVB17EhAF+9AjjfRefl8waY6VlLanAp2snKpVNgaxJWPqjjp0bPFKZ7wzw/QkEE4RVqZJw5OBOAFOSK5PRtVzBiNJunn2GwPs6Zi+c07otduuaNgAzusooU5fnuV4w==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <8eb0dfcb-4df2-f447-9ac9-235881d496ce@suse.com>
-Date: Wed, 15 Jun 2022 16:40:35 +0200
+Message-ID: <54267d0f-36b0-3ccf-f4a2-1c99efa2d66d@suse.com>
+Date: Wed, 15 Jun 2022 16:42:23 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.10.0
-Subject: Re: [PATCH v1 03/10] xue: add support for selecting specific xhci
+Subject: Re: [PATCH v1 04/10] ehci-dbgp: fix selecting n-th ehci controller
 Content-Language: en-US
 To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
  <marmarek@invisiblethingslab.com>
@@ -79,157 +79,89 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
  xen-devel@lists.xenproject.org
 References: <cover.5d286dc6304969ed7155051e900236947c1b14dc.1654612169.git-series.marmarek@invisiblethingslab.com>
- <b5466e495943210adc48c754df98862ae49ee489.1654612169.git-series.marmarek@invisiblethingslab.com>
+ <e7d63b72873de3791e26a6551fef7132fcc9f241.1654612169.git-series.marmarek@invisiblethingslab.com>
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <b5466e495943210adc48c754df98862ae49ee489.1654612169.git-series.marmarek@invisiblethingslab.com>
+In-Reply-To: <e7d63b72873de3791e26a6551fef7132fcc9f241.1654612169.git-series.marmarek@invisiblethingslab.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AS9PR06CA0358.eurprd06.prod.outlook.com
- (2603:10a6:20b:466::20) To VE1PR04MB6560.eurprd04.prod.outlook.com
+X-ClientProxiedBy: FR3P281CA0035.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1c::8) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1b88c8b7-040f-4f05-d005-08da4edd031a
-X-MS-TrafficTypeDiagnostic: DB9PR04MB8494:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0b0b7635-b418-40e3-963d-08da4edd432a
+X-MS-TrafficTypeDiagnostic: DU2PR04MB9100:EE_
 X-Microsoft-Antispam-PRVS:
-	<DB9PR04MB84941C3A1F6D247FBC8076A2B3AD9@DB9PR04MB8494.eurprd04.prod.outlook.com>
+	<DU2PR04MB9100DA6903E86D211F172EE8B3AD9@DU2PR04MB9100.eurprd04.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	DLgEmMjEOp7mbuZN53nLdvv+XKztPDYAxHm+s2+M2k889Ulhv2c+XCpewK34Kxa8h8B52lzvbHz5wrddmXvhUlXbBEYZ3U7kEHM/MK9MmkNLB0AHFLvjY6ot7QfKklWhQc/bpzluJlLhJFSl0Za1ypWWPh/pxebq0YO+SET4pZL00JIXQF+/JlPE6V1zprcQue116kguL01e+ysG4vHS1pa8TxqJ+4VyF0T60/xJlzJuq9+RqX2NqDcfBJOYqwE6AbKL0ABVlsQkd9eOPZ7xhEtZalrtMxUtjjDR/gPxF/d1mdCQ4VOrQJybaJ5ZSmUrUVpH5zwd6P0UELuytGta1lMI8n760w5rRpKXK5ptjnwbWUfFGPEOlzxLKfmBXGWjWGHO297CW23rUca63AggPWjx5quRO9/aLKPjE8FgkLYD2JTCu58/GyqobPcW7m/NwVU8hBca9pCi27X6ZqBBfLu30Ep0eVhyKbxh543R+aziKZcL8jAF2dnoERCESmPWXs1YWSmzpTBBGHoeNi/x9Chywe2lwlZKPeCniexir4hNeoBqmr9VHnLifTJpzlEH9b9vtwwXKxd2dIeITR2+ecsDLGWzE8ksAs3dJ7Bpx1h4wSW7ZpGDNT4NKF8E3t073sM46h2j/IqaUiRGS0tCGGbwzEbu97lbZI3LMiZkE5jdn3208W9yM+cOBU5k+w4jH9/XXHhiqOG8rNVVKyXgtx9omKvj+Ts+lGquoClNIP21TS+0KfoI+VfbfRKf3kgh
+	NtFyFfiQiEdgZgL58x/z43p24Q5tRzIcmixhgG5DdyJanJHSXXbMrERAhTfbH3tc8/qKw0GKHFjHFbb3kpc4LSNYvBwW36manSk6zZzPYXZjRe0TfHqYqRUnckK9BLNVCTeqIwJDFXjxzLsz+qjE65uv1Y/3DnyADpNEsBh5UQzWp9gQSi95CWsqdfiyY1pjLG1j0SByoPbMKFnvXynMZvZ0VRjKMB7psUJy4O5X0cCNyr6MwomghsmbvvYn+YB0olhLDJzrS6WLRtwe24tXcOwYDqg85rLkxAZOPiBalFD1OHdcVkRoxUa1jX75jkORv3F3FIG59tfsH5SCDJ3XC6IyqaUayU4ABF5puoAB5b5tabxVAXpEaXdTOr/asvlnrVZZbxkME1jrULiaMSCeMVZksqEgEzl4Y2/eu1eH/ND+9kEVH54QbErg1SpI8uecipX5g7W+l8oBks1WxcNIJwsDAyHhqNsWcqvGmyPOYxPy1V+4i/5lr+Ox3YHWyBKX/Jdm43PyH3fwHCcRWyXx/dVd6OOmKNEcQp6YbpBf0BNeSLWLYhoXBKy6Uocxv+7rhocmRTS9H2saWRB6YcL6bKDiagQjZzjoygVNCvtjiZMVjjbvtPQaLfCvxoMp9pLlm+iJB9B3mUxCeuCBoe1NjZvz7zhd6ILhudQIRmcTEXxacj2RNtoPxANgwaEOylrz7vL1gAJcAS6y75XizvJnLY/vTOE7RUOTOrUy/8wiZtE=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(366004)(31696002)(86362001)(26005)(6512007)(53546011)(38100700002)(186003)(2906002)(36756003)(66476007)(2616005)(6506007)(5660300002)(54906003)(6916009)(66556008)(4326008)(8936002)(8676002)(66946007)(6486002)(508600001)(31686004)(316002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(366004)(4326008)(54906003)(6916009)(508600001)(6506007)(36756003)(6512007)(2906002)(8936002)(316002)(86362001)(26005)(31686004)(5660300002)(6486002)(66476007)(66556008)(66946007)(8676002)(31696002)(186003)(38100700002)(53546011)(2616005)(558084003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NjNlWmtTaHFUVk42TUs0dCt3QkRpbGNPKzNjUHBYZ3FML01ab1kxd0Y0N0lT?=
- =?utf-8?B?b29UTUMzRzBkclU3YTJCdzlpY01tK3E0Y3VpSzNtM3VIVjdLYzVoUllET3k0?=
- =?utf-8?B?dXBQd2t1UUdnc1haWlhjS05IVEJPRGVodnUzZlVVQW5abXA5d0hEYnZoMWJh?=
- =?utf-8?B?cFB0UnIzcWJ2R09FZ1BXZ2RSTkxtL00yQUttd1d0YiswVlg0bS82WWV6NXhv?=
- =?utf-8?B?VzdaWTB0WHoxUTRGbW1qc0lBWmZNalBxNTA3cDQyZGRxT01nMlVBUHdndEFa?=
- =?utf-8?B?eHVWdWp6Nm9qWGpicjR0LzNZVDhkSHhEeC9LdDVKTHlTV0J5NGhyb1M5Uk91?=
- =?utf-8?B?TEJZRGhBbmpQeGthekRBM2ZvZno4L3dKelV0d1Bid0Ewd0NzOHMzS0lMaEVa?=
- =?utf-8?B?SHd1TzdDV0tYaGk3SnVFeTdQdktGaWpGb0UwVFBJaXpkbERQcVl4Y2M4aUFv?=
- =?utf-8?B?RmJWWVhLV2hwdW9uVW9EaElMQ1dNUDlLMHZESWtENCtoNWk3aElSNVBFQTVQ?=
- =?utf-8?B?OXlSOFVnaUx3RSt5SVhJaDZWR2lFcW9yWCtzbldUeXloRzVQVVJ5KzJVcmFM?=
- =?utf-8?B?NENRMjRUdFVhWTZVUHdST3VkU1cwNGEvb3NhdURDa3FUU2JDS0FDWWJ5K0cz?=
- =?utf-8?B?c1U3alovYW9xRVhiTlNWZzIwd1RvWUc3K1ZTNktVWXprRkhyak5IOEZpeS9U?=
- =?utf-8?B?YVhiU0pJY0NVSENqQnJrS2dBdnR6ZE91cFBsUmQwMXdPaStkekpMN0dIS3BB?=
- =?utf-8?B?WmNka2lRU1Y1Qk9nN1FhdG94dkpqajZ0RWxTTFprT0l0Y1ZvYUFKRXgrelF2?=
- =?utf-8?B?MFlHbVpTQTVUVUpkd1BDS090YnhJYnltalBTTVVYTDc0MG82RjQzd0Z6WTVX?=
- =?utf-8?B?UGJYMzkrbDRLU2gvSU9aS2l0aEFxL2RBUVJURGN0YzNKWTRLcjNGTkRyckk1?=
- =?utf-8?B?UkNaYTY3Ym5Uem96a290Yk5CN2c4dkJGQVdUNzdSUXFjWC9BenFtQVJWV0gw?=
- =?utf-8?B?NjREZjRaNDZRVEV5akRVcmRTdXRFa21sZjZyUVZiUjZXRDdHMUd2Nk1yNEl6?=
- =?utf-8?B?VXBUYXhZTGsxMElKZXlZUUZJVGlNSWNEeTVaR2Y0MFh6VG11UndKQVNORlox?=
- =?utf-8?B?TlZaMnI0RlJmalNyRWRUVDlZVkVIUnNzV2dqRXlNTmRyMk1NYU9QbU5ic3Fm?=
- =?utf-8?B?K2tBa3dGVExZem1wWTZrbktOOEROUTZHNzVXTFVoeUdzRXdFbEo5b0cxUElP?=
- =?utf-8?B?VVViaG1RL1VLMERDcXBZYWZBRGhFeUJNSHFIYnJYelNoUk9YM2tOWFU4d3Jh?=
- =?utf-8?B?Q2o2R2lhTytlN0RGTzNUOU1rRVVXWUZmT3JRM3pwa1FxTW03WVcxODBFOWMv?=
- =?utf-8?B?SHdUVWI2M3Rhb3h4SnhlR2hMd25tQjJYaUgwbXFSYmNjeC90ZlRtU3VqemhL?=
- =?utf-8?B?ZkwwL1dmdVYrQ1N5a1d5ajFKVndveGJzQ2o2NWNyZTM3RmZvN1VnSDZmRVUw?=
- =?utf-8?B?S04rZGZUaWxCZ1B4d2FyTC9Od3VDak4wTUR5WWJYaUpVWkJYOXVlSjduT2NQ?=
- =?utf-8?B?bW9GTFNGTlBKSUVZTURXcnN5UHVqWXMyNTJrN09GRk9aMk4vNkN3allzV0J5?=
- =?utf-8?B?SGhkSEZKTEp1dGZibnRPUHh4TDBkMW9JQnpDZ3gxVjJ5d252MWNyeGlvRUlv?=
- =?utf-8?B?cEtxMG50QnV6YkU0MWhLTGUxcGc2dmZLMDJUUW9RZHhka1NmV0V5Y2ZMOGFJ?=
- =?utf-8?B?U3JrTlNQVWY3dmVmTGJsRUNjZ09wT2V3TUF1K2RIMlNqYWQ4TnQ1OXR3MlY3?=
- =?utf-8?B?azVGd3hjTUdjV01TeWl6anZFRURtQmg3QXFLNWtnNHNxWktta0dpTzlrTFMz?=
- =?utf-8?B?YWh6VUo1VlF2cCs5dHdOa3NUYm1ZVlZYV3J6ZDlNSm1xMWRMb2VmZ2NRa1J6?=
- =?utf-8?B?TGlZSGVqWnlWbkl2dG9qT3A3YVJ3YUdwckcyYlRIay9iYXBNWC9JK29iNXF2?=
- =?utf-8?B?RDFZZHJpbXpUQTFQRGdEbG5pTmVrMFFvTS9wYjdVVUpETEJ2MzRZSzlQNXVk?=
- =?utf-8?B?cGdZUzB1bVJaOTMrOE92S1p2cXdGWkJWR2FZUWJVanhSbnlOcmp0dTY5Q25J?=
- =?utf-8?B?OXNxUm9PWjBsbWd1djNsaThSSmlIQnZGUllQTldwNitpVzZyWCtyQmoyK0po?=
- =?utf-8?B?NlFmZUI5OVAwQUpOQ21QaUdDeXRkS0N3NVhrSkVlYmRMaWZycEhyUmxwMGlW?=
- =?utf-8?B?UGZvbFBDbjBwSDJ6VG1wdDBjblNMMU9oODYzQ3FWeEdUV3RQSVg4dzNaRUZI?=
- =?utf-8?B?anh4VFNYSUgwM1JrNjFlQ0dZQ3RIM2sxRmdDSTZJRG1HVkhVU3BUQT09?=
+	=?utf-8?B?T0QxRTZleE5GRHluanhtdUEyODdCeGVOOWxaeVBTaVJFMUVHSkN2WmJjYmlU?=
+ =?utf-8?B?dDZVMkZ2bWd4Tnl5dGRLTVNJNWtwWHFyOG5kSVJlZmdvYUNQMCtuajM0U1N0?=
+ =?utf-8?B?cVE1QVI3SlloWG1QQ2ljRDF0UlRmM01KRWVnYjErNjlJdWlaZFNHS1JKamZI?=
+ =?utf-8?B?eE1oMW9OaXZnVkZZMzRseHFmbEJucEdQaHNlNlVma2ViV0FZT0ZHemcwWEZM?=
+ =?utf-8?B?N0cwT0FyaWN2cjBKaEdLZFdBOXg5dkxmWGFuNXBxNzFUbU81aHEweGtKWHFu?=
+ =?utf-8?B?OUJLREtzWFdTNFVzU1JjSVF0RzRBRnRmZzZ3WHpwSDh3bUxWNmpmRTRBbDE2?=
+ =?utf-8?B?cG1LUGtjOVczY3NIOVErbjd2R2xrUFN2Z1VZbDhHWG43cU01NVJjWldYWlNV?=
+ =?utf-8?B?QjVReUhzdk1KTDNhY1lTNnVNNk1SZ2M0b0ZwdWcyZnhobk96aU9sQmFwd3BT?=
+ =?utf-8?B?VDFyUmtSWWFRNkZWZ2ZEMzFDdkZqaUVHOXd6NUI1aFhWY21vNlNhbFdUNndo?=
+ =?utf-8?B?Z1dzMzFTNCtrcVVROFAwamRaNW5wQlkvcXExU2dqcGVnWXJDTGJ6MHM5YVU4?=
+ =?utf-8?B?bnoyalExbEl2SlhnalArb3hDNElDVFY2NkpYYVlvWjdXdmV0WEFHTzNHU0Za?=
+ =?utf-8?B?OVFwZE40eE1SbWUvc21Jd2dGWlk4ZFRuS3M4TzdDdnYrUTBpcWcyVUViYlZa?=
+ =?utf-8?B?NWFzM2VBSDRvbFRZYVNOS2tTdG5rOXdUbWxxRUVoU21iaitkMkJFbG5LYUp4?=
+ =?utf-8?B?ZmtnM3ovZ1JhL2ZTb2wzNWpEdGtvaWlIQnpvTUVKMEhreFdjOHRVVkd4ZWZn?=
+ =?utf-8?B?a3lCNG04NGcrYzNMS3ptMkFYc2NxTUZTd0RuSE5uQ1pYaU5wOEE1MGZxanRi?=
+ =?utf-8?B?NFBMd2xWVGpUVnlXbThjaG1VcEY3cUFObG14eTVlelU5Kzg5ZU00TndsL0Ev?=
+ =?utf-8?B?VngzeEFHSzhpaDJNYXhMOHpqMitoYjFJd2ZYdlN1dGlzTjhlWWlSNHVGMDBR?=
+ =?utf-8?B?MDYzR04ySUdzY0I5Uyt4ZHN3VXFSOVNLNnhYWWRPMDg3cm1PYVFJQ1dDT28v?=
+ =?utf-8?B?S29YUUs3M2tqcXRtTEJvZmZ4SUVaSWdteEVrc1J1SitFRkszc1dUUHZjbExr?=
+ =?utf-8?B?N2Z1c3FGalVqUHIyb01rNUN3cTZObmtUZnR4S2djMzJYdW1EdDcxcVZQaHVG?=
+ =?utf-8?B?MllYSWRhTUZwQ3dzelpySzhYU1JvVWJUNlJuZHM2WG9VUkpaV0wvK3hGaUVM?=
+ =?utf-8?B?TnlwbitSYXFsWjRXZ2RGN0dvVFhNSkp6SWpScjJYdS9pL3luT001VmR6OGp3?=
+ =?utf-8?B?ODI1MHI1TzhicHRENDdiUVlWVUpvSklML1dDRkZVTC9QOUpwSVY0S2t2eW5C?=
+ =?utf-8?B?STR5UlIvd2U5aHpTOCtxMEFXTVpEQUtCVnNkbnB3V2ZCRG90SkRNaGplamt2?=
+ =?utf-8?B?bkNuYlNIMzFVL3lyNGhWMzRnblZsQVZMenVxU3p2VUZqNUdEQkFrdEdIL0pV?=
+ =?utf-8?B?K1k4NzdSWlhRb1ZkTGRQc1Z3MitxTmRlN2crRFd0ODBWYlRCeWxkTnRzS3ZT?=
+ =?utf-8?B?eWY5Z2dMcmJrUDU3eTQ1NFNmZUtFWC9uYy9aOUUyb1I3d0F5M2doSDROazdJ?=
+ =?utf-8?B?a1B6dzFCenRyOE00Q2R0Y05NR2ZGVythNWg2TGFpcUJ5OXgzNE1BcU53U1VJ?=
+ =?utf-8?B?VEFJd2JYV0U1T1pFSkhCS1BxM1lEd2dlRmo4OUd5V25ZYitXVWU2RFhYK29n?=
+ =?utf-8?B?SW9VS0ZrcmlCM0ROTkUvR3RiY1RpY1dJMUZkS1c5Mk5zMFJzMXAxTEk5NGhi?=
+ =?utf-8?B?OVgwTjI0SXgvbXFQaXFRaXd1OVQzdVAxM3BFc0hlQmtKeVZCK2tBa0t3QmlY?=
+ =?utf-8?B?dFU0VVV0TjA0NXdJRWdPQ2JLeTFQb3ZZeUdkb1lmYitSbldzVnFKNm9uNjdO?=
+ =?utf-8?B?RmxCTndCVXVLYzJhakI2VTlTTUNDd0tWRWNraVVkUEdveTNubDNJdlFERito?=
+ =?utf-8?B?VlE4N0FLN0lwaVJwWGRsZWpGVHV1Q1FGeGZHVVR3aXlwUDdNRVhDd0Jrcm1L?=
+ =?utf-8?B?RklxWVRFcGVIQVdlbWxPQ0tVdXRSdU5lMnVMbG03clFHbGJiMVpqOHZrS2ps?=
+ =?utf-8?B?RjZ4Q1daQlMyVDBUbUpCckpXQ1B1UnE0ZEhQYkJpZ0NmaW1zeExNWlViRmZa?=
+ =?utf-8?B?aFhBOE1vRUY5aWxVS0JBM3hIT3VoVFA5ZjRsOW9qZ2NKaWNDUGFhUkp1eGI4?=
+ =?utf-8?B?TklEelE5WG14bk5zbEhwdlVkTmZLd2M0K2xIdUtqVlJzSlJtZ2xuWXRHYTM4?=
+ =?utf-8?B?cDhaVDF5dlF3MHJpK0liNGI4d1lXdEduZ0ljT2RueU5tZ2liaDIxQT09?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b88c8b7-040f-4f05-d005-08da4edd031a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0b0b7635-b418-40e3-963d-08da4edd432a
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2022 14:40:37.7549
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jun 2022 14:42:25.0137
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QVJloHUQrVWVSUlM1AhBMYdCkXCWolhUin3SRCkjDpKHe/gZXkSo9jz2qD/nDHdZLcKj7boGnGs3rpR3V6Kgig==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8494
+X-MS-Exchange-CrossTenant-UserPrincipalName: TCTyiFVDFgHmk8CYC3O7EbT5WOxhkf2ApaCK6QDZxSKYMYVS87dfWayOW3nXMACg/IMrlwK1ZKcoosNzVmvmRQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB9100
 
 On 07.06.2022 16:30, Marek Marczykowski-Górecki wrote:
-> --- a/docs/misc/xen-command-line.pandoc
-> +++ b/docs/misc/xen-command-line.pandoc
-> @@ -721,10 +721,15 @@ Available alternatives, with their meaning, are:
->  
->  ### dbgp
->  > `= ehci[ <integer> | @pci<bus>:<slot>.<func> ]`
-> +> `= xue[ <integer> | @pci<bus>:<slot>.<func> ]`
->  
->  Specify the USB controller to use, either by instance number (when going
->  over the PCI busses sequentially) or by PCI device (must be on segment 0).
->  
-> +Use `ehci` for EHCI debug port, use `xue` for XHCI debug capability.
+> The ehci<n> number was parsed but ignored.
 
-Ah, this answers one of my questions on patch 1. But I still think
-the option should appear here in patch 1, with this patch extending
-it (and its doc).
+Oops.
 
-> --- a/xen/drivers/char/xue.c
-> +++ b/xen/drivers/char/xue.c
-> @@ -204,6 +204,7 @@ struct xue {
->      void *xhc_mmio;
->  
->      int open;
-> +    int xhc_num; /* look for n-th xhc */
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-unsigned int?
-
-> @@ -252,24 +253,34 @@ static int xue_init_xhc(struct xue *xue)
->      uint64_t bar1;
->      uint64_t devfn;
->  
-> -    /*
-> -     * Search PCI bus 0 for the xHC. All the host controllers supported so far
-> -     * are part of the chipset and are on bus 0.
-> -     */
-> -    for ( devfn = 0; devfn < 256; devfn++ ) {
-> -        uint32_t dev = (devfn & 0xF8) >> 3;
-> -        uint32_t fun = devfn & 0x07;
-> -        pci_sbdf_t sbdf = PCI_SBDF(0, dev, fun);
-> -        uint32_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
-> -
-> -        if ( hdr == 0 || hdr == 0x80 )
-> +    if ( xue->sbdf.sbdf == 0 )
-> +    {
-> +        /*
-> +         * Search PCI bus 0 for the xHC. All the host controllers supported so far
-> +         * are part of the chipset and are on bus 0.
-> +         */
-> +        for ( devfn = 0; devfn < 256; devfn++ )
->          {
-> -            if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == XUE_XHC_CLASSC )
-> +            uint32_t dev = (devfn & 0xF8) >> 3;
-> +            uint32_t fun = devfn & 0x07;
-> +            pci_sbdf_t sbdf = PCI_SBDF(0, dev, fun);
-> +            uint32_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
-> +
-> +            if ( hdr == 0 || hdr == 0x80 )
->              {
-> -                xue->sbdf = sbdf;
-> -                break;
-> +                if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == XUE_XHC_CLASSC )
-> +                {
-> +                    if ( xue->xhc_num-- )
-> +                        continue;
-> +                    xue->sbdf = sbdf;
-> +                    break;
-> +                }
->              }
->          }
-> +    } else {
-
-Nit:
-
-    }
-    else
-    {
+This could do with a Fixes: tag. Then
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
