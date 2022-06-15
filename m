@@ -4,43 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F8DC43334
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:06:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.349287.575761 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42B03CCA473
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Jun 2022 04:06:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.349503.575784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHs-0007qx-40; Wed, 15 Jun 2022 04:05:48 +0000
+	id 1o1KHv-0008Sl-Lz; Wed, 15 Jun 2022 04:05:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 349287.575761; Wed, 15 Jun 2022 04:05:48 +0000
+Received: by outflank-mailman (output) from mailman id 349503.575784; Wed, 15 Jun 2022 04:05:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o1KHr-0007pP-N7; Wed, 15 Jun 2022 04:05:47 +0000
-Received: by outflank-mailman (input) for mailman id 349287;
- Tue, 14 Jun 2022 16:44:53 +0000
+	id 1o1KHu-0008Oe-KV; Wed, 15 Jun 2022 04:05:50 +0000
+Received: by outflank-mailman (input) for mailman id 349503;
+ Wed, 15 Jun 2022 00:44:16 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TaZI=WV=infradead.org=peterz@srs-se1.protection.inumbo.net>)
- id 1o19ev-0008Hf-1X
- for xen-devel@lists.xenproject.org; Tue, 14 Jun 2022 16:44:53 +0000
-Received: from desiato.infradead.org (desiato.infradead.org
- [2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ <SRS0=jzGX=WW=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
+ id 1o1H8q-0007mj-Dh
+ for xen-devel@lists.xenproject.org; Wed, 15 Jun 2022 00:44:16 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 4e4b972e-ec01-11ec-a26a-b96bd03d9e80;
- Tue, 14 Jun 2022 18:44:51 +0200 (CEST)
-Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
- helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1o19e7-007uTz-7Y; Tue, 14 Jun 2022 16:44:05 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id BBDAE3002BE;
- Tue, 14 Jun 2022 18:44:02 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id A1F7228B3F630; Tue, 14 Jun 2022 18:44:02 +0200 (CEST)
+ id 478cd092-ec44-11ec-9917-058037db3bb5;
+ Wed, 15 Jun 2022 02:44:14 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 02329B81A43;
+ Wed, 15 Jun 2022 00:44:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F6D3C3411F;
+ Wed, 15 Jun 2022 00:44:12 +0000 (UTC)
+Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
+ id 327DD5C0BCC; Tue, 14 Jun 2022 17:44:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,192 +47,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4e4b972e-ec01-11ec-a26a-b96bd03d9e80
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:
-	Sender:Reply-To:Content-ID:Content-Description;
-	bh=lGPDnVOvpW5cJYkNK5aiO+HQt8YloxSeZZcAt0L3T+0=; b=DAyjnelx4YBZDCDKjW1vABnwD6
-	bfuQInSMcO0k1N9c43zulrHrt0FEspCLqBV7dzVlaMMaDm/0d8h+E1vx/Mn16eV+mdIA5cFTuH3pJ
-	ZPctIYIGAc1IQVFMkXT59RectB0+FvezRUN6pXOBo7jPhyxeW7DquiSvQAiutE+ZX5GvtHgbHFHRx
-	6HNiF1zBAiNoXSUuUybOLrpKXxYLhLp7SkKzRQuOg8AsSzW4GjX7X7PIc8C1Yqe4MS+PoRyI4eENc
-	TnTVXl8b+mj78ByEoizyUwQl4K8tWC0/1bV8h78+HtzLeArX034mK97ekOVdMcZW15wljxz2QwCm7
-	eJasXJFA==;
-Date: Tue, 14 Jun 2022 18:44:02 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Nadav Amit <namit@vmware.com>
-Cc: "srivatsa@csail.mit.edu" <srivatsa@csail.mit.edu>,
-	"juri.lelli@redhat.com" <juri.lelli@redhat.com>,
-	"rafael@kernel.org" <rafael@kernel.org>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-	"linus.walleij@linaro.org" <linus.walleij@linaro.org>,
-	"bsegall@google.com" <bsegall@google.com>,
-	"guoren@kernel.org" <guoren@kernel.org>,
-	"pavel@ucw.cz" <pavel@ucw.cz>,
-	"agordeev@linux.ibm.com" <agordeev@linux.ibm.com>,
-	"linux-clk@vger.kernel.org" <linux-clk@vger.kernel.org>,
-	linux-arch <linux-arch@vger.kernel.org>,
-	"vincent.guittot@linaro.org" <vincent.guittot@linaro.org>,
-	"mpe@ellerman.id.au" <mpe@ellerman.id.au>,
-	"chenhuacai@kernel.org" <chenhuacai@kernel.org>,
-	"linux-acpi@vger.kernel.org" <linux-acpi@vger.kernel.org>,
-	"agross@kernel.org" <agross@kernel.org>,
-	"geert@linux-m68k.org" <geert@linux-m68k.org>,
-	"linux-imx@nxp.com" <linux-imx@nxp.com>,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"mattst88@gmail.com" <mattst88@gmail.com>,
-	"borntraeger@linux.ibm.com" <borntraeger@linux.ibm.com>,
-	"mturquette@baylibre.com" <mturquette@baylibre.com>,
-	"sammy@sammy.net" <sammy@sammy.net>,
-	"pmladek@suse.com" <pmladek@suse.com>,
-	"linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>,
-	"jiangshanlai@gmail.com" <jiangshanlai@gmail.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	"linux-um@lists.infradead.org" <linux-um@lists.infradead.org>,
-	"acme@kernel.org" <acme@kernel.org>,
-	Thomas Gleixner <tglx@linutronix.de>,
-	"linux-omap@vger.kernel.org" <linux-omap@vger.kernel.org>,
-	"dietmar.eggemann@arm.com" <dietmar.eggemann@arm.com>,
-	"rth@twiddle.net" <rth@twiddle.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	LKML <linux-kernel@vger.kernel.org>,
-	"linux-perf-users@vger.kernel.org" <linux-perf-users@vger.kernel.org>,
-	"senozhatsky@chromium.org" <senozhatsky@chromium.org>,
-	"svens@linux.ibm.com" <svens@linux.ibm.com>,
-	"jolsa@kernel.org" <jolsa@kernel.org>,
-	"paulus@samba.org" <paulus@samba.org>,
-	"mark.rutland@arm.com" <mark.rutland@arm.com>,
-	"linux-ia64@vger.kernel.org" <linux-ia64@vger.kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Linux Virtualization <virtualization@lists.linux-foundation.org>,
-	"James.Bottomley@hansenpartnership.com" <James.Bottomley@hansenpartnership.com>,
-	"jcmvbkbc@gmail.com" <jcmvbkbc@gmail.com>,
-	"thierry.reding@gmail.com" <thierry.reding@gmail.com>,
-	"kernel@xen0n.name" <kernel@xen0n.name>,
-	"quic_neeraju@quicinc.com" <quic_neeraju@quicinc.com>,
-	linux-s390 <linux-s390@vger.kernel.org>,
-	"vschneid@redhat.com" <vschneid@redhat.com>,
-	"john.ogness@linutronix.de" <john.ogness@linutronix.de>,
-	"ysato@users.sourceforge.jp" <ysato@users.sourceforge.jp>,
-	"linux-sh@vger.kernel.org" <linux-sh@vger.kernel.org>,
-	"festevam@gmail.com" <festevam@gmail.com>,
-	"deller@gmx.de" <deller@gmx.de>,
-	"daniel.lezcano@linaro.org" <daniel.lezcano@linaro.org>,
-	"jonathanh@nvidia.com" <jonathanh@nvidia.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	"frederic@kernel.org" <frederic@kernel.org>,
-	"lenb@kernel.org" <lenb@kernel.org>,
-	"linux-xtensa@linux-xtensa.org" <linux-xtensa@linux-xtensa.org>,
-	"kernel@pengutronix.de" <kernel@pengutronix.de>,
-	"gor@linux.ibm.com" <gor@linux.ibm.com>,
-	"linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
-	"linux-alpha@vger.kernel.org" <linux-alpha@vger.kernel.org>,
-	"linux-m68k@lists.linux-m68k.org" <linux-m68k@lists.linux-m68k.org>,
-	"shorne@gmail.com" <shorne@gmail.com>,
-	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
-	"chris@zankel.net" <chris@zankel.net>,
-	"sboyd@kernel.org" <sboyd@kernel.org>,
-	"dinguyen@kernel.org" <dinguyen@kernel.org>,
-	"bristot@redhat.com" <bristot@redhat.com>,
-	"alexander.shishkin@linux.intel.com" <alexander.shishkin@linux.intel.com>,
-	"lpieralisi@kernel.org" <lpieralisi@kernel.org>,
-	"linux@rasmusvillemoes.dk" <linux@rasmusvillemoes.dk>,
-	"joel@joelfernandes.org" <joel@joelfernandes.org>,
-	Will Deacon <will@kernel.org>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	"khilman@kernel.org" <khilman@kernel.org>,
-	"linux-csky@vger.kernel.org" <linux-csky@vger.kernel.org>,
-	Pv-drivers <Pv-drivers@vmware.com>,
-	"linux-snps-arc@lists.infradead.org" <linux-snps-arc@lists.infradead.org>,
-	Mel Gorman <mgorman@suse.de>,
-	"jacob.jun.pan@linux.intel.com" <jacob.jun.pan@linux.intel.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	"ulli.kroll@googlemail.com" <ulli.kroll@googlemail.com>,
-	"vgupta@kernel.org" <vgupta@kernel.org>,
-	"josh@joshtriplett.org" <josh@joshtriplett.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	"rcu@vger.kernel.org" <rcu@vger.kernel.org>,
-	Borislav Petkov <bp@alien8.de>,
-	"bcain@quicinc.com" <bcain@quicinc.com>,
-	"tsbogend@alpha.franken.de" <tsbogend@alpha.franken.de>,
-	"linux-parisc@vger.kernel.org" <linux-parisc@vger.kernel.org>,
-	"sudeep.holla@arm.com" <sudeep.holla@arm.com>,
-	"shawnguo@kernel.org" <shawnguo@kernel.org>,
-	"davem@davemloft.net" <davem@davemloft.net>,
-	"dalias@libc.org" <dalias@libc.org>,
-	"tony@atomide.com" <tony@atomide.com>,
-	"bjorn.andersson@linaro.org" <bjorn.andersson@linaro.org>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	"sparclinux@vger.kernel.org" <sparclinux@vger.kernel.org>,
-	"linux-hexagon@vger.kernel.org" <linux-hexagon@vger.kernel.org>,
-	"linux-riscv@lists.infradead.org" <linux-riscv@lists.infradead.org>,
-	Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-	"jonas@southpole.se" <jonas@southpole.se>,
-	"yury.norov@gmail.com" <yury.norov@gmail.com>,
-	"richard@nod.at" <richard@nod.at>, X86 ML <x86@kernel.org>,
-	"linux@armlinux.org.uk" <linux@armlinux.org.uk>,
-	Ingo Molnar <mingo@redhat.com>,
-	"aou@eecs.berkeley.edu" <aou@eecs.berkeley.edu>,
-	"paulmck@kernel.org" <paulmck@kernel.org>,
-	"hca@linux.ibm.com" <hca@linux.ibm.com>,
-	"stefan.kristiansson@saunalahti.fi" <stefan.kristiansson@saunalahti.fi>,
-	"openrisc@lists.librecores.org" <openrisc@lists.librecores.org>,
-	"paul.walmsley@sifive.com" <paul.walmsley@sifive.com>,
-	"linux-tegra@vger.kernel.org" <linux-tegra@vger.kernel.org>,
-	"namhyung@kernel.org" <namhyung@kernel.org>,
-	"andriy.shevchenko@linux.intel.com" <andriy.shevchenko@linux.intel.com>,
-	"jpoimboe@kernel.org" <jpoimboe@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	"monstr@monstr.eu" <monstr@monstr.eu>,
-	"linux-mips@vger.kernel.org" <linux-mips@vger.kernel.org>,
-	"palmer@dabbelt.com" <palmer@dabbelt.com>,
-	"anup@brainfault.org" <anup@brainfault.org>,
-	"ink@jurassic.park.msu.ru" <ink@jurassic.park.msu.ru>,
-	"johannes@sipsolutions.net" <johannes@sipsolutions.net>,
-	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>
-Subject: Re: [Pv-drivers] [PATCH 29/36] cpuidle,	xenpv: Make more
- PARAVIRT_XXL noinstr clean
-Message-ID: <Yqi60lnN6MQpysBw@hirez.programming.kicks-ass.net>
+X-Inumbo-ID: 478cd092-ec44-11ec-9917-058037db3bb5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1655253852;
+	bh=rcjBHcwDa3Vvz9ae34yYid9fcwgrK1WVNSLCfZ/KP5E=;
+	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+	b=fdhcRapfOZeMu89rXN1F9+PFgQBw1jq2TFCvdWilZKBPl7d60xoaf+Z1BoVI71oyo
+	 RqJwT7IyOmWKrdq1gGthk/wr5qRLVQoB8lFuH3bhpG8v28ehqFht7ixYYEHPsMm9AB
+	 B8Nl92yiOr67Th9tcRyEPi0fRLrSpOhoRzoC/T6UuHa5X12CLk5h++1bfLpyoCHqB+
+	 fvK77b4d+EdbOzzr1aIJ1u6gTHC44L8QS8SaSAp9SKbflwgVl3VgsZCvB9XatY8lhL
+	 9YwdPZU6iL7l0pnNRdqWmeOhCsfxrQ+i6D2NKXEGZhl5QpSSUjx5BoIk0tcHaLBiwv
+	 bedv5BuhTNO6Q==
+Date: Tue, 14 Jun 2022 17:44:12 -0700
+From: "Paul E. McKenney" <paulmck@kernel.org>
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: rth@twiddle.net, ink@jurassic.park.msu.ru, mattst88@gmail.com,
+	vgupta@kernel.org, linux@armlinux.org.uk, ulli.kroll@googlemail.com,
+	linus.walleij@linaro.org, shawnguo@kernel.org,
+	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de,
+	festevam@gmail.com, linux-imx@nxp.com, tony@atomide.com,
+	khilman@kernel.org, catalin.marinas@arm.com, will@kernel.org,
+	guoren@kernel.org, bcain@quicinc.com, chenhuacai@kernel.org,
+	kernel@xen0n.name, geert@linux-m68k.org, sammy@sammy.net,
+	monstr@monstr.eu, tsbogend@alpha.franken.de, dinguyen@kernel.org,
+	jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
+	shorne@gmail.com, James.Bottomley@HansenPartnership.com,
+	deller@gmx.de, mpe@ellerman.id.au, benh@kernel.crashing.org,
+	paulus@samba.org, paul.walmsley@sifive.com, palmer@dabbelt.com,
+	aou@eecs.berkeley.edu, hca@linux.ibm.com, gor@linux.ibm.com,
+	agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
+	svens@linux.ibm.com, ysato@users.sourceforge.jp, dalias@libc.org,
+	davem@davemloft.net, richard@nod.at,
+	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
+	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+	acme@kernel.org, mark.rutland@arm.com,
+	alexander.shishkin@linux.intel.com, jolsa@kernel.org,
+	namhyung@kernel.org, jgross@suse.com, srivatsa@csail.mit.edu,
+	amakhalov@vmware.com, pv-drivers@vmware.com,
+	boris.ostrovsky@oracle.com, chris@zankel.net, jcmvbkbc@gmail.com,
+	rafael@kernel.org, lenb@kernel.org, pavel@ucw.cz,
+	gregkh@linuxfoundation.org, mturquette@baylibre.com,
+	sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org,
+	sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org,
+	anup@brainfault.org, thierry.reding@gmail.com, jonathanh@nvidia.com,
+	jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
+	yury.norov@gmail.com, andriy.shevchenko@linux.intel.com,
+	linux@rasmusvillemoes.dk, rostedt@goodmis.org, pmladek@suse.com,
+	senozhatsky@chromium.org, john.ogness@linutronix.de,
+	frederic@kernel.org, quic_neeraju@quicinc.com,
+	josh@joshtriplett.org, mathieu.desnoyers@efficios.com,
+	jiangshanlai@gmail.com, joel@joelfernandes.org,
+	juri.lelli@redhat.com, vincent.guittot@linaro.org,
+	dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de,
+	bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org,
+	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-snps-arc@lists.infradead.org,
+	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
+	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
+	linux-ia64@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
+	linux-mips@vger.kernel.org, openrisc@lists.librecores.org,
+	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
+	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
+	linux-um@lists.infradead.org, linux-perf-users@vger.kernel.org,
+	virtualization@lists.linux-foundation.org,
+	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org,
+	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
+	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
+	rcu@vger.kernel.org
+Subject: Re: [PATCH 16/36] rcu: Fix rcu_idle_exit()
+Message-ID: <20220615004412.GA5766@paulmck-ThinkPad-P17-Gen-1>
+Reply-To: paulmck@kernel.org
 References: <20220608142723.103523089@infradead.org>
- <20220608144517.759631860@infradead.org>
- <510b9b68-7d53-7d4d-5a05-37fbd199eb4b@csail.mit.edu>
- <BAE566A0-AEA3-493E-8AC5-912C795BF1DE@vmware.com>
+ <20220608144516.935970247@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <BAE566A0-AEA3-493E-8AC5-912C795BF1DE@vmware.com>
+In-Reply-To: <20220608144516.935970247@infradead.org>
 
-On Mon, Jun 13, 2022 at 07:23:13PM +0000, Nadav Amit wrote:
-> On Jun 13, 2022, at 11:48 AM, Srivatsa S. Bhat <srivatsa@csail.mit.edu> wrote:
+On Wed, Jun 08, 2022 at 04:27:39PM +0200, Peter Zijlstra wrote:
+> Current rcu_idle_exit() is terminally broken because it uses
+> local_irq_{save,restore}(), which are traced which uses RCU.
 > 
-> > ⚠ External Email
-> > 
-> > On 6/8/22 4:27 PM, Peter Zijlstra wrote:
-> >> vmlinux.o: warning: objtool: acpi_idle_enter_s2idle+0xde: call to wbinvd() leaves .noinstr.text section
-> >> vmlinux.o: warning: objtool: default_idle+0x4: call to arch_safe_halt() leaves .noinstr.text section
-> >> vmlinux.o: warning: objtool: xen_safe_halt+0xa: call to HYPERVISOR_sched_op.constprop.0() leaves .noinstr.text section
-> >> 
-> >> Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> > 
-> > Reviewed-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
-> > 
-> >> 
-> >> -static inline void wbinvd(void)
-> >> +extern noinstr void pv_native_wbinvd(void);
-> >> +
-> >> +static __always_inline void wbinvd(void)
-> >> {
-> >>      PVOP_ALT_VCALL0(cpu.wbinvd, "wbinvd", ALT_NOT(X86_FEATURE_XENPV));
-> >> }
+> However, now that all the callers are sure to have IRQs disabled, we
+> can remove these calls.
 > 
-> I guess it is yet another instance of wrong accounting of GCC for
-> the assembly blocks’ weight. I guess it is not a solution for older
-> GCCs, but presumably ____PVOP_ALT_CALL() and friends should have
-> used asm_inline or some new “asm_volatile_inline” variant.
+> Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+> Acked-by: Paul E. McKenney <paulmck@kernel.org>
 
-Partially, some of the *SAN options also generate a metric ton of
-nonsense when enabled and skew the compilers towards not inlining
-things.
+We have some fun conflicts between this series and Frederic's context-tracking
+series.  But it looks like these can be resolved by:
+
+1.	A patch on top of Frederic's series that provides the old rcu_*()
+	names for the functions now prefixed with ct_*() such as
+	ct_idle_exit().
+
+2.	Another patch on top of Frederic's series that takes the
+	changes remaining from this patch, shown below.  Frederic's
+	series uses raw_local_irq_save() and raw_local_irq_restore(),
+	which can then be removed.
+
+Or is there a better way to do this?
+
+							Thanx, Paul
+
+------------------------------------------------------------------------
+
+commit f64cee8c159e9863a74594efe3d33fb513a6a7b5
+Author: Peter Zijlstra <peterz@infradead.org>
+Date:   Tue Jun 14 17:24:43 2022 -0700
+
+    context_tracking: Interrupts always disabled for ct_idle_exit()
+    
+    Now that the idle-loop cleanups have ensured that rcu_idle_exit() is
+    always invoked with interrupts disabled, remove the interrupt disabling
+    in favor of a debug check.
+    
+    Signed-off-by: Peter Zijlstra <peterz@infradead.org>
+    Cc: Frederic Weisbecker <frederic@kernel.org>
+    Signed-off-by: Paul E. McKenney <paulmck@kernel.org>
+
+diff --git a/kernel/context_tracking.c b/kernel/context_tracking.c
+index 1da44803fd319..99310cf5b0254 100644
+--- a/kernel/context_tracking.c
++++ b/kernel/context_tracking.c
+@@ -332,11 +332,8 @@ EXPORT_SYMBOL_GPL(ct_idle_enter);
+  */
+ void noinstr ct_idle_exit(void)
+ {
+-	unsigned long flags;
+-
+-	raw_local_irq_save(flags);
++	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !raw_irqs_disabled());
+ 	ct_kernel_enter(false, RCU_DYNTICKS_IDX - CONTEXT_IDLE);
+-	raw_local_irq_restore(flags);
+ }
+ EXPORT_SYMBOL_GPL(ct_idle_exit);
+ 
 
