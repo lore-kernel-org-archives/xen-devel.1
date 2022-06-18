@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 340F6C43334
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65AB3C433EF
 	for <xen-devel@archiver.kernel.org>; Sat, 18 Jun 2022 10:48:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.351764.578509 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.351763.578499 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o2W0B-0004Tl-1z; Sat, 18 Jun 2022 10:48:27 +0000
+	id 1o2W09-0004AZ-QP; Sat, 18 Jun 2022 10:48:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 351764.578509; Sat, 18 Jun 2022 10:48:27 +0000
+Received: by outflank-mailman (output) from mailman id 351763.578499; Sat, 18 Jun 2022 10:48:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o2W0A-0004Te-Un; Sat, 18 Jun 2022 10:48:26 +0000
-Received: by outflank-mailman (input) for mailman id 351764;
- Sat, 18 Jun 2022 10:48:25 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o2W09-0004A5-Ig; Sat, 18 Jun 2022 10:48:25 +0000
+Received: by outflank-mailman (input) for mailman id 351763;
+ Sat, 18 Jun 2022 10:48:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=c8TN=WZ=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o2W09-00049A-0J
- for xen-devel@lists.xenproject.org; Sat, 18 Jun 2022 10:48:25 +0000
+ id 1o2W08-000499-Nx
+ for xen-devel@lists.xenproject.org; Sat, 18 Jun 2022 10:48:24 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 2a73de96-eef4-11ec-b725-ed86ccbb4733;
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 2a7d2a1e-eef4-11ec-bd2d-47488cf2e6aa;
  Sat, 18 Jun 2022 12:48:22 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id EA8D81F99B;
- Sat, 18 Jun 2022 10:48:18 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 54F1D1FA6F;
+ Sat, 18 Jun 2022 10:48:19 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id B00241348B;
- Sat, 18 Jun 2022 10:48:18 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 265B31348B;
+ Sat, 18 Jun 2022 10:48:19 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 4ZpmKXKtrWIXKAAAMHmgww
- (envelope-from <jgross@suse.com>); Sat, 18 Jun 2022 10:48:18 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id wDcACHOtrWIXKAAAMHmgww
+ (envelope-from <jgross@suse.com>); Sat, 18 Jun 2022 10:48:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,52 +53,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 2a73de96-eef4-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: 2a7d2a1e-eef4-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1655549298; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=RInIqIonFLW15r0nOyuZItE2ii5IHR7IInXm5oJr6O0=;
-	b=nBEPrLOR64DhcXkRffIHR5xzxr3hXwZdB7FIRtYxv+0g2L7x92RESUSUMG1QwoFxZ3WXbm
-	xClM03iUTwX439VTp/VyJfEg0mxw46341i7CkZZFnlRPGHXdPoNfGqa7TJYDWsLMti7L09
-	TrOyd0he9ZBFY1LP+s3gIxzcfpriY+s=
+	t=1655549299; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=yDDn1mSreaoh9MuJXeryyxgSIBKCF/BQ2diMJ00W4gc=;
+	b=tot9UHjcC4L9sx2f56CUcELlvv/IVHFDTxeDcPAnz4Bj/i4fNtv5pPSqKmR/gLKf/HsxTo
+	SYkKOWctuqnHNaPikTwIrJkl6w0g4R2sX5N9s2flNReoYoXm8Eab6uozGYNJtw/tBzQ0cq
+	ydmFxdoJ7s1l6u7wTb2MAYCS9Ft63oY=
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
 Cc: samuel.thibault@ens-lyon.org,
 	wl@xen.org,
 	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 0/3] mini-os: some memory map updates for PVH
-Date: Sat, 18 Jun 2022 12:48:13 +0200
-Message-Id: <20220618104816.11527-1-jgross@suse.com>
+Subject: [PATCH 2/3] mini-os: prefer memory map via start_info for PVH
+Date: Sat, 18 Jun 2022 12:48:15 +0200
+Message-Id: <20220618104816.11527-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20220618104816.11527-1-jgross@suse.com>
+References: <20220618104816.11527-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Do some memory map related changes/fixes for PVH mode:
+Since some time now a guest started in PVH mode will get the memory
+map from Xen via the start_info structure.
 
-- Prefer the memory map delivered via start-info over the one obtained
-  from the hypervisor. This is a prerequisite for Xenstore-stubdom
-  live-update with rising the memory limit.
+Modify the PVH initialization to prefer this memory map over the one
+obtained via hypercall, as this will allow to add information to the
+memory map for a new kernel when supporting kexec.
 
-- Fix a bug related to ballooning in PVH mode: PVH Xenstore-stubdom
-  can't read its target memory size from Xenstore, as this introduces
-  a chicken-and-egg problem. The memory size read from the hypervisor
-  OTOH includes additional "special" pages marked as reserved in the
-  memory map. Those pages need to be subtracted from the read size.
+In case the start_info structure doesn't contain memory map information
+fall back to the hypercall.
 
-Juergen Gross (3):
-  mini-os: take newest version of arch-x86/hvm/start_info.h
-  mini-os: prefer memory map via start_info for PVH
-  mini-os: fix number of pages for PVH
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/mm.c  |  6 ++++++
+ e820.c         | 25 +++++++++++++++++++++++++
+ include/e820.h |  4 ++++
+ 3 files changed, 35 insertions(+)
 
- arch/x86/mm.c                         | 10 ++++-
- balloon.c                             |  2 +-
- e820.c                                | 53 +++++++++++++++++++---
- include/e820.h                        |  5 +++
- include/x86/arch_mm.h                 |  2 +
- include/xen/arch-x86/hvm/start_info.h | 63 ++++++++++++++++++++++++++-
- 6 files changed, 125 insertions(+), 10 deletions(-)
-
+diff --git a/arch/x86/mm.c b/arch/x86/mm.c
+index 220c0b4d..41fcee67 100644
+--- a/arch/x86/mm.c
++++ b/arch/x86/mm.c
+@@ -45,6 +45,7 @@
+ #include <mini-os/xmalloc.h>
+ #include <mini-os/e820.h>
+ #include <xen/memory.h>
++#include <xen/arch-x86/hvm/start_info.h>
+ 
+ #ifdef MM_DEBUG
+ #define DEBUG(_f, _a...) \
+@@ -108,6 +109,11 @@ void arch_mm_preinit(void *p)
+ {
+     long ret;
+     domid_t domid = DOMID_SELF;
++    struct hvm_start_info *hsi = p;
++
++    if ( hsi->version >= 1 && hsi->memmap_entries > 0 )
++        e820_init_memmap((struct hvm_memmap_table_entry *)(unsigned long)
++                         hsi->memmap_paddr, hsi->memmap_entries);
+ 
+     pt_base = page_table_base;
+     first_free_pfn = PFN_UP(to_phys(&_end));
+diff --git a/e820.c b/e820.c
+index 991ed382..ad91e00b 100644
+--- a/e820.c
++++ b/e820.c
+@@ -54,6 +54,7 @@ static char *e820_types[E820_TYPES] = {
+     [E820_ACPI]     = "ACPI",
+     [E820_NVS]      = "NVS",
+     [E820_UNUSABLE] = "Unusable",
++    [E820_DISABLED] = "Disabled",
+     [E820_PMEM]     = "PMEM"
+ };
+ 
+@@ -259,6 +260,30 @@ static void e820_get_memmap(void)
+     e820_sanitize();
+ }
+ 
++void e820_init_memmap(struct hvm_memmap_table_entry *entry, unsigned int num)
++{
++    unsigned int i;
++
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_RAM != E820_RAM);
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_RESERVED != E820_RESERVED);
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_ACPI != E820_ACPI);
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_NVS != E820_NVS);
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_UNUSABLE != E820_UNUSABLE);
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_DISABLED != E820_DISABLED);
++    BUILD_BUG_ON(XEN_HVM_MEMMAP_TYPE_PMEM != E820_PMEM);
++
++    for ( i = 0; i < num; i++ )
++    {
++        e820_map[i].addr = entry[i].addr;
++        e820_map[i].size = entry[i].size;
++        e820_map[i].type = entry[i].type;
++    }
++
++    e820_entries = num;
++
++    e820_sanitize();
++}
++
+ void arch_print_memmap(void)
+ {
+     int i;
+diff --git a/include/e820.h b/include/e820.h
+index aaf2f2ca..5438a7c8 100644
+--- a/include/e820.h
++++ b/include/e820.h
+@@ -26,6 +26,8 @@
+ 
+ #if defined(__arm__) || defined(__aarch64__) || defined(CONFIG_PARAVIRT)
+ #define CONFIG_E820_TRIVIAL
++#else
++#include <xen/arch-x86/hvm/start_info.h>
+ #endif
+ 
+ /* PC BIOS standard E820 types and structure. */
+@@ -34,6 +36,7 @@
+ #define E820_ACPI         3
+ #define E820_NVS          4
+ #define E820_UNUSABLE     5
++#define E820_DISABLED     6
+ #define E820_PMEM         7
+ #define E820_TYPES        8
+ 
+@@ -54,6 +57,7 @@ unsigned long e820_get_max_contig_pages(unsigned long pfn, unsigned long pages);
+ #ifndef CONFIG_E820_TRIVIAL
+ unsigned long e820_get_reserved_pfns(int pages);
+ void e820_put_reserved_pfns(unsigned long start_pfn, int pages);
++void e820_init_memmap(struct hvm_memmap_table_entry *entry, unsigned int num);
+ #endif
+ 
+ #endif /*__E820_HEADER*/
 -- 
 2.35.3
 
