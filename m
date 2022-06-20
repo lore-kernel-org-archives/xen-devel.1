@@ -4,44 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D7DC43334
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jun 2022 07:38:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.352540.579412 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2502FC43334
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jun 2022 08:56:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.352623.579437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3Bzj-0004pu-Tu; Mon, 20 Jun 2022 07:38:47 +0000
+	id 1o3DCn-0007uB-7z; Mon, 20 Jun 2022 08:56:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 352540.579412; Mon, 20 Jun 2022 07:38:47 +0000
+Received: by outflank-mailman (output) from mailman id 352623.579437; Mon, 20 Jun 2022 08:56:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3Bzj-0004n7-Js; Mon, 20 Jun 2022 07:38:47 +0000
-Received: by outflank-mailman (input) for mailman id 352540;
- Mon, 20 Jun 2022 07:38:45 +0000
+	id 1o3DCn-0007u4-5P; Mon, 20 Jun 2022 08:56:21 +0000
+Received: by outflank-mailman (input) for mailman id 352623;
+ Mon, 20 Jun 2022 08:56:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Hycu=W3=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o3Bzg-0002ZD-CV
- for xen-devel@lists.xenproject.org; Mon, 20 Jun 2022 07:38:44 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=l44P=W3=gmail.com=matiasevara@srs-se1.protection.inumbo.net>)
+ id 1o3DCl-0007ty-CN
+ for xen-devel@lists.xenproject.org; Mon, 20 Jun 2022 08:56:19 +0000
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [2a00:1450:4864:20::430])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id fcb15982-f06b-11ec-b725-ed86ccbb4733;
- Mon, 20 Jun 2022 09:38:33 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2193721BCE;
- Mon, 20 Jun 2022 07:38:34 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E52F6134CA;
- Mon, 20 Jun 2022 07:38:33 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id OEubNvkjsGI3DAAAMHmgww
- (envelope-from <jgross@suse.com>); Mon, 20 Jun 2022 07:38:33 +0000
+ id d88a1e3a-f076-11ec-b725-ed86ccbb4733;
+ Mon, 20 Jun 2022 10:56:17 +0200 (CEST)
+Received: by mail-wr1-x430.google.com with SMTP id q9so13655331wrd.8
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jun 2022 01:56:17 -0700 (PDT)
+Received: from horizon (lfbn-gre-1-214-221.w90-112.abo.wanadoo.fr.
+ [90.112.175.221]) by smtp.gmail.com with ESMTPSA id
+ k7-20020a7bc407000000b0039c747a1e8fsm19633449wmi.7.2022.06.20.01.56.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Jun 2022 01:56:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,442 +46,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fcb15982-f06b-11ec-b725-ed86ccbb4733
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1655710714; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=F2usykdrZz/ETCDtrSzcODBAgM6yVFNOOYprC5PICS8=;
-	b=sSC6tQ1TwuIm9F1IbZobt/BlZYlWRWpysSxHKvHzavFfCHHIa5nFk1ZdZElY8a3WwNwMRA
-	y9ZrzB/r5gPVTVtZ8kKydPNmy8Ic/jBpOArgr7WXEI28MTsM1sqy5oup9ByadnXzGCtIh0
-	ynmiF7xExpf2uig1Lusce6y7AOxIUqA=
-From: Juergen Gross <jgross@suse.com>
-To: minios-devel@lists.xenproject.org,
-	xen-devel@lists.xenproject.org
-Cc: samuel.thibault@ens-lyon.org,
-	wl@xen.org,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH 6/8] mini-os: eliminate console directory
-Date: Mon, 20 Jun 2022 09:38:18 +0200
-Message-Id: <20220620073820.9336-7-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20220620073820.9336-1-jgross@suse.com>
-References: <20220620073820.9336-1-jgross@suse.com>
+X-Inumbo-ID: d88a1e3a-f076-11ec-b725-ed86ccbb4733
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=/CYGdhvh0JTTrmuuZw+EA2MlPBAr2UuAM4GaC7CWKq4=;
+        b=OLS5nhf3UrAbhEEIJHfB0Gdoj7Tc47R89wHKqOPLqEDqeP25J7AVKI3+vzEMqjrsDH
+         AgIPPoSgFfdBiKU0te1kErNx4wjjOew3aH/GOE7mxxf+zSCSsrn/FKwCtWYf6JVxSs9m
+         gkre39OkCIzPO4JWbzuUn4YXhUPTywI6A45DjlNyJTF6nrvIaXjkmE3olHKpug7T3oBn
+         tqVabirXbQQtO5N8SF4Zx8uuB9Wi/4hiPh1gF5tynXtIttqlIG2BuNJRbPijtEn0lVQ1
+         nGaytsl+pDDPB7sI8kTOj8SKtDTztwZZWDVvixnY5TtKSilpgS80bXZuV5pczxSJzvxB
+         /A3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=/CYGdhvh0JTTrmuuZw+EA2MlPBAr2UuAM4GaC7CWKq4=;
+        b=7DkU8VUN/sdW9eQLLemYnZ6ox65jMd1TLUzmsaaLy+ALoOCtxjaU0quW5BkUKYD4iE
+         WEekfdFA9vNWbI/2C7w7B+lthI4e3IJHEA57LUIvQOwUFx87ERZy9x8p7PPjuJDPFQq0
+         +VbUtJHpwEFHAl/L8S2OQB1kvr+OsCLucLhnaUtno4mJlZ3CIweUQeYeubWT5wSN9A9a
+         /skFuTlyl7B2dFrPJz9aBPQSAKsHSxmYn0vz1Ulom+IXd+cHNBGHmn4vR5HRQQ3DcF4U
+         3kqPmldMxdf5W9ClJq1Qm73EDgiIbDu+U3VF/CladuQW8Vxs1OOf5/AOsYj932SLmRii
+         EIPg==
+X-Gm-Message-State: AJIora9ivN97ePFRBmhax1d2pR2hb6kXYijDa7Fn+OFjMp8MEJvdQbUA
+	l22FOtsgevYWk8fJJ5YWTRc=
+X-Google-Smtp-Source: AGRyM1t0QCJGOHa7pghE1mG2q/DLffpIncDXltiFj2wl1li+rotuu0dFTPYyg3kFTQ/ZnP3j25hSkg==
+X-Received: by 2002:a05:6000:1a88:b0:218:4e7f:279d with SMTP id f8-20020a0560001a8800b002184e7f279dmr22265148wry.670.1655715377277;
+        Mon, 20 Jun 2022 01:56:17 -0700 (PDT)
+Date: Mon, 20 Jun 2022 10:56:15 +0200
+From: Matias Ezequiel Vara Larsen <matiasevara@gmail.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
+	Matias Ezequiel Vara Larsen <matias.vara@vates.fr>,
+	Wei Liu <wl@xen.org>
+Subject: Re: [RFC PATCH 2/2] tools/misc: Add xen-stats tool
+Message-ID: <20220620085615.GA2039596@horizon>
+References: <cover.1652797713.git.matias.vara@vates.fr>
+ <e233c4f60c6fe97b93b3adf9affeb0404c554130.1652797713.git.matias.vara@vates.fr>
+ <YpX48uwOGVqayb/x@perard.uk.xensource.com>
+ <20220603110820.GA193297@horizon>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20220603110820.GA193297@horizon>
 
-Merge the two remaining source files in the console directory into
-a single one and move it to the main directory.
+Hello Anthony, 
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- Makefile                            |   4 +-
- console/xencons_ring.c => console.c | 171 ++++++++++++++++++++++++++-
- console/console.c                   | 177 ----------------------------
- 3 files changed, 170 insertions(+), 182 deletions(-)
- rename console/xencons_ring.c => console.c (51%)
- delete mode 100644 console/console.c
+On Fri, Jun 03, 2022 at 01:08:20PM +0200, Matias Ezequiel Vara Larsen wrote:
+> Hello Anthony and thanks for your comments. I addressed them below:
+> 
+> On Tue, May 31, 2022 at 12:16:02PM +0100, Anthony PERARD wrote:
+> > Hi Matias,
+> > 
+> > On Tue, May 17, 2022 at 04:33:15PM +0200, Matias Ezequiel Vara Larsen wrote:
+> > > Add a demostration tool that uses the stats_table resource to
+> > > query vcpu time for a DomU.
+> > > 
+> > > Signed-off-by: Matias Ezequiel Vara Larsen <matias.vara@vates.fr>
+> > > ---
+> > > diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+> > > index 2b683819d4..b510e3aceb 100644
+> > > --- a/tools/misc/Makefile
+> > > +++ b/tools/misc/Makefile
+> > > @@ -135,4 +135,9 @@ xencov: xencov.o
+> > >  xen-ucode: xen-ucode.o
+> > >  	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+> > >  
+> > > +xen-stats.o: CFLAGS += $(CFLAGS_libxenforeginmemory)
+> > > +
+> > > +xen-stats: xen-stats.o
+> > 
+> > The tools seems to be only about vcpu, maybe `xen-stats` is a bit too
+> > generic. Would `xen-vcpus-stats`, or maybe something with `time` would
+> > be better?
+> 
+> Do you think `xen-vcpus-stats` would be good enough?
+> 
 
-diff --git a/Makefile b/Makefile
-index 509d927b..f3acdd2f 100644
---- a/Makefile
-+++ b/Makefile
-@@ -41,6 +41,7 @@ src-$(CONFIG_CONSFRONT) += consfront.c
- src-$(CONFIG_TPMFRONT) += tpmfront.c
- src-$(CONFIG_TPM_TIS) += tpm_tis.c
- src-$(CONFIG_TPMBACK) += tpmback.c
-+src-y += console.c
- src-y += daytime.c
- src-y += e820.c
- src-y += events.c
-@@ -69,9 +70,6 @@ src-y += lib/sys.c
- src-y += lib/xmalloc.c
- src-$(CONFIG_LIBXS) += lib/xs.c
- 
--src-y += console/console.c
--src-y += console/xencons_ring.c
--
- # The common mini-os objects to build.
- APP_OBJS :=
- OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(src-y))
-diff --git a/console/xencons_ring.c b/console.c
-similarity index 51%
-rename from console/xencons_ring.c
-rename to console.c
-index 495f0a19..29277eac 100644
---- a/console/xencons_ring.c
-+++ b/console.c
-@@ -1,3 +1,39 @@
-+/* 
-+ ****************************************************************************
-+ * (C) 2006 - Grzegorz Milos - Cambridge University
-+ ****************************************************************************
-+ *
-+ *        File: console.c
-+ *      Author: Grzegorz Milos
-+ *     Changes: 
-+ *              
-+ *        Date: Mar 2006
-+ * 
-+ * Environment: Xen Minimal OS
-+ * Description: Console interface.
-+ *
-+ * Handles console I/O. Defines printk.
-+ *
-+ ****************************************************************************
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to
-+ * deal in the Software without restriction, including without limitation the
-+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-+ * sell copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ * 
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ * 
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-+ * DEALINGS IN THE SOFTWARE.
-+ */
-+ 
- #include <mini-os/types.h>
- #include <mini-os/wait.h>
- #include <mini-os/mm.h>
-@@ -7,12 +43,143 @@
- #include <mini-os/lib.h>
- #include <mini-os/console.h>
- #include <mini-os/xenbus.h>
-+#include <mini-os/xmalloc.h>
-+#include <mini-os/gnttab.h>
- #include <xen/io/console.h>
- #include <xen/io/protocols.h>
- #include <xen/io/ring.h>
- #include <xen/hvm/params.h>
--#include <mini-os/xmalloc.h>
--#include <mini-os/gnttab.h>
-+
-+/* If console not initialised the printk will be sent to xen serial line 
-+   NOTE: you need to enable verbose in xen/Rules.mk for it to work. */
-+static struct consfront_dev* xen_console = NULL;
-+static int console_initialised = 0;
-+
-+__attribute__((weak)) void console_input(char * buf, unsigned len)
-+{
-+    if(len > 0)
-+    {
-+        /* Just repeat what's written */
-+        buf[len] = '\0';
-+        printk("%s", buf);
-+        
-+        if(buf[len-1] == '\r')
-+            printk("\nNo console input handler.\n");
-+    }
-+}
-+
-+#ifndef HAVE_LIBC
-+void xencons_rx(char *buf, unsigned len, struct pt_regs *regs)
-+{
-+    console_input(buf, len);
-+}
-+
-+void xencons_tx(void)
-+{
-+    /* Do nothing, handled by _rx */
-+}
-+#endif
-+
-+
-+void console_print(struct consfront_dev *dev, const char *data, int length)
-+{
-+    char *curr_char, saved_char;
-+    char copied_str[length+1];
-+    char *copied_ptr;
-+    int part_len;
-+    int (*ring_send_fn)(struct consfront_dev *dev, const char *data, unsigned length);
-+
-+    if(!console_initialised)
-+        ring_send_fn = xencons_ring_send_no_notify;
-+    else
-+        ring_send_fn = xencons_ring_send;
-+
-+    if (dev && dev->is_raw) {
-+        ring_send_fn(dev, data, length);
-+        return;
-+    }
-+
-+    copied_ptr = copied_str;
-+    memcpy(copied_ptr, data, length);
-+    for(curr_char = copied_ptr; curr_char < copied_ptr+length-1; curr_char++)
-+    {
-+        if(*curr_char == '\n')
-+        {
-+            *curr_char = '\r';
-+            saved_char = *(curr_char+1);
-+            *(curr_char+1) = '\n';
-+            part_len = curr_char - copied_ptr + 2;
-+            ring_send_fn(dev, copied_ptr, part_len);
-+            *(curr_char+1) = saved_char;
-+            copied_ptr = curr_char+1;
-+            length -= part_len - 1;
-+        }
-+    }
-+
-+    if (copied_ptr[length-1] == '\n') {
-+        copied_ptr[length-1] = '\r';
-+        copied_ptr[length] = '\n';
-+        length++;
-+    }
-+    
-+    ring_send_fn(dev, copied_ptr, length);
-+}
-+
-+void print(int direct, const char *fmt, va_list args)
-+{
-+    static char __print_buf[1024];
-+    
-+    (void)vsnprintf(__print_buf, sizeof(__print_buf), fmt, args);
-+
-+    if(direct)
-+    {
-+        (void)HYPERVISOR_console_io(CONSOLEIO_write, strlen(__print_buf), __print_buf);
-+        return;
-+    } else {
-+#ifndef CONFIG_USE_XEN_CONSOLE
-+    if(!console_initialised)
-+#endif    
-+            (void)HYPERVISOR_console_io(CONSOLEIO_write, strlen(__print_buf), __print_buf);
-+        
-+        console_print(NULL, __print_buf, strlen(__print_buf));
-+    }
-+}
-+
-+void printk(const char *fmt, ...)
-+{
-+    va_list       args;
-+    va_start(args, fmt);
-+    print(0, fmt, args);
-+    va_end(args);        
-+}
-+
-+void xprintk(const char *fmt, ...)
-+{
-+    va_list       args;
-+    va_start(args, fmt);
-+    print(1, fmt, args);
-+    va_end(args);        
-+}
-+void init_console(void)
-+{   
-+    printk("Initialising console ... ");
-+    xen_console = xencons_ring_init();
-+    console_initialised = 1;
-+    /* This is also required to notify the daemon */
-+    printk("done.\n");
-+}
-+
-+void suspend_console(void)
-+{
-+    console_initialised = 0;
-+    xencons_ring_fini(xen_console);
-+}
-+
-+void resume_console(void)
-+{
-+    xencons_ring_resume(xen_console);
-+    console_initialised = 1;
-+}
- 
- DECLARE_WAIT_QUEUE_HEAD(console_queue);
- 
-diff --git a/console/console.c b/console/console.c
-deleted file mode 100644
-index 68c8435e..00000000
---- a/console/console.c
-+++ /dev/null
-@@ -1,177 +0,0 @@
--/* 
-- ****************************************************************************
-- * (C) 2006 - Grzegorz Milos - Cambridge University
-- ****************************************************************************
-- *
-- *        File: console.h
-- *      Author: Grzegorz Milos
-- *     Changes: 
-- *              
-- *        Date: Mar 2006
-- * 
-- * Environment: Xen Minimal OS
-- * Description: Console interface.
-- *
-- * Handles console I/O. Defines printk.
-- *
-- ****************************************************************************
-- * Permission is hereby granted, free of charge, to any person obtaining a copy
-- * of this software and associated documentation files (the "Software"), to
-- * deal in the Software without restriction, including without limitation the
-- * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-- * sell copies of the Software, and to permit persons to whom the Software is
-- * furnished to do so, subject to the following conditions:
-- * 
-- * The above copyright notice and this permission notice shall be included in
-- * all copies or substantial portions of the Software.
-- * 
-- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
-- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-- * DEALINGS IN THE SOFTWARE.
-- */
-- 
--#include <mini-os/types.h>
--#include <mini-os/wait.h>
--#include <mini-os/mm.h>
--#include <mini-os/hypervisor.h>
--#include <mini-os/events.h>
--#include <mini-os/os.h>
--#include <mini-os/lib.h>
--#include <mini-os/xenbus.h>
--#include <xen/io/console.h>
--
--
--/* If console not initialised the printk will be sent to xen serial line 
--   NOTE: you need to enable verbose in xen/Rules.mk for it to work. */
--static struct consfront_dev* xen_console = NULL;
--static int console_initialised = 0;
--
--__attribute__((weak)) void console_input(char * buf, unsigned len)
--{
--    if(len > 0)
--    {
--        /* Just repeat what's written */
--        buf[len] = '\0';
--        printk("%s", buf);
--        
--        if(buf[len-1] == '\r')
--            printk("\nNo console input handler.\n");
--    }
--}
--
--#ifndef HAVE_LIBC
--void xencons_rx(char *buf, unsigned len, struct pt_regs *regs)
--{
--    console_input(buf, len);
--}
--
--void xencons_tx(void)
--{
--    /* Do nothing, handled by _rx */
--}
--#endif
--
--
--void console_print(struct consfront_dev *dev, const char *data, int length)
--{
--    char *curr_char, saved_char;
--    char copied_str[length+1];
--    char *copied_ptr;
--    int part_len;
--    int (*ring_send_fn)(struct consfront_dev *dev, const char *data, unsigned length);
--
--    if(!console_initialised)
--        ring_send_fn = xencons_ring_send_no_notify;
--    else
--        ring_send_fn = xencons_ring_send;
--
--    if (dev && dev->is_raw) {
--        ring_send_fn(dev, data, length);
--        return;
--    }
--
--    copied_ptr = copied_str;
--    memcpy(copied_ptr, data, length);
--    for(curr_char = copied_ptr; curr_char < copied_ptr+length-1; curr_char++)
--    {
--        if(*curr_char == '\n')
--        {
--            *curr_char = '\r';
--            saved_char = *(curr_char+1);
--            *(curr_char+1) = '\n';
--            part_len = curr_char - copied_ptr + 2;
--            ring_send_fn(dev, copied_ptr, part_len);
--            *(curr_char+1) = saved_char;
--            copied_ptr = curr_char+1;
--            length -= part_len - 1;
--        }
--    }
--
--    if (copied_ptr[length-1] == '\n') {
--        copied_ptr[length-1] = '\r';
--        copied_ptr[length] = '\n';
--        length++;
--    }
--    
--    ring_send_fn(dev, copied_ptr, length);
--}
--
--void print(int direct, const char *fmt, va_list args)
--{
--    static char __print_buf[1024];
--    
--    (void)vsnprintf(__print_buf, sizeof(__print_buf), fmt, args);
--
--    if(direct)
--    {
--        (void)HYPERVISOR_console_io(CONSOLEIO_write, strlen(__print_buf), __print_buf);
--        return;
--    } else {
--#ifndef CONFIG_USE_XEN_CONSOLE
--    if(!console_initialised)
--#endif    
--            (void)HYPERVISOR_console_io(CONSOLEIO_write, strlen(__print_buf), __print_buf);
--        
--        console_print(NULL, __print_buf, strlen(__print_buf));
--    }
--}
--
--void printk(const char *fmt, ...)
--{
--    va_list       args;
--    va_start(args, fmt);
--    print(0, fmt, args);
--    va_end(args);        
--}
--
--void xprintk(const char *fmt, ...)
--{
--    va_list       args;
--    va_start(args, fmt);
--    print(1, fmt, args);
--    va_end(args);        
--}
--void init_console(void)
--{   
--    printk("Initialising console ... ");
--    xen_console = xencons_ring_init();
--    console_initialised = 1;
--    /* This is also required to notify the daemon */
--    printk("done.\n");
--}
--
--void suspend_console(void)
--{
--    console_initialised = 0;
--    xencons_ring_fini(xen_console);
--}
--
--void resume_console(void)
--{
--    xencons_ring_resume(xen_console);
--    console_initialised = 1;
--}
--- 
-2.35.3
+I will pick up `xen-vcpus-stats` for v1 if you are not against it.
 
+Thanks,
+
+Matias
+
+> > Also, is it a tools that could be useful enough to be installed by
+> > default? Should we at least build it by default so it doesn't rot? (By
+> > adding it to only $(TARGETS).)
+> 
+> I will add to build this tool by default in the next patches' version.
+>  
+> > > +	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(LDLIBS_libxenforeignmemory) $(APPEND_LDFLAGS)
+> > > +
+> > >  -include $(DEPS_INCLUDE)
+> > > diff --git a/tools/misc/xen-stats.c b/tools/misc/xen-stats.c
+> > > new file mode 100644
+> > > index 0000000000..5d4a3239cc
+> > > --- /dev/null
+> > > +++ b/tools/misc/xen-stats.c
+> > > @@ -0,0 +1,83 @@
+> > > +#include <err.h>
+> > > +#include <errno.h>
+> > > +#include <error.h>
+> > > +#include <stdio.h>
+> > > +#include <stdlib.h>
+> > > +#include <string.h>
+> > > +#include <sys/mman.h>
+> > > +#include <signal.h>
+> > > +
+> > > +#include <xenctrl.h>
+> > 
+> > It seems overkill to use this header when the tool only use
+> > xenforeignmemory interface. But I don't know how to replace
+> > XC_PAGE_SHIFT, so I guess that's ok.
+> > 
+> > > +#include <xenforeignmemory.h>
+> > > +#include <xen-tools/libs.h>
+> > 
+> > What do you use this headers for? Is it left over?
+> 
+> `xenforeignmemory.h` is used for `xenforeignmemory_*` functions.
+> `xen-tools/libs.h` is left over so I will remove it in next version.
+> 
+> > > +static sig_atomic_t interrupted;
+> > > +static void close_handler(int signum)
+> > > +{
+> > > +    interrupted = 1;
+> > > +}
+> > > +
+> > > +int main(int argc, char **argv)
+> > > +{
+> > > +    xenforeignmemory_handle *fh;
+> > > +    xenforeignmemory_resource_handle *res;
+> > > +    size_t size;
+> > > +    int rc, nr_frames, domid, frec, vcpu;
+> > > +    uint64_t * info;
+> > > +    struct sigaction act;
+> > > +
+> > > +    if (argc != 4 ) {
+> > > +        fprintf(stderr, "Usage: %s <domid> <vcpu> <period>\n", argv[0]);
+> > > +        return 1;
+> > > +    }
+> > > +
+> > > +    // TODO: this depends on the resource
+> > > +    nr_frames = 1;
+> > > +
+> > > +    domid = atoi(argv[1]);
+> > > +    frec = atoi(argv[3]);
+> > > +    vcpu = atoi(argv[2]);
+> > 
+> > Can you swap the last two line? I think it is better if the order is the same
+> > as on the command line.
+> 
+> Yes, I can.
+> 
+> > > +
+> > > +    act.sa_handler = close_handler;
+> > > +    act.sa_flags = 0;
+> > > +    sigemptyset(&act.sa_mask);
+> > > +    sigaction(SIGHUP,  &act, NULL);
+> > > +    sigaction(SIGTERM, &act, NULL);
+> > > +    sigaction(SIGINT,  &act, NULL);
+> > > +    sigaction(SIGALRM, &act, NULL);
+> > > +
+> > > +    fh = xenforeignmemory_open(NULL, 0);
+> > > +
+> > > +    if ( !fh )
+> > > +        err(1, "xenforeignmemory_open");
+> > > +
+> > > +    rc = xenforeignmemory_resource_size(
+> > > +        fh, domid, XENMEM_resource_stats_table,
+> > > +        vcpu, &size);
+> > > +
+> > > +    if ( rc )
+> > > +        err(1, "    Fail: Get size: %d - %s\n", errno, strerror(errno));
+> > 
+> > It seems that err() already does print strerror(), and add a "\n", so
+> > why print it again? Also, if we have strerror(), what the point of
+> > printing "errno"?
+> 
+> I will remove errno, strerror(errno), and the extra "\n".
+> 
+> > Also, I'm not sure the extra indentation in the error message is really
+> > useful, but that doesn't really matter.
+> 
+> I will remove the indentation.
+> 
+> > > +
+> > > +    if ( (size >> XC_PAGE_SHIFT) != nr_frames )
+> > > +        err(1, "    Fail: Get size: expected %u frames, got %zu\n",
+> > > +                    nr_frames, size >> XC_PAGE_SHIFT);
+> > 
+> > err() prints strerror(errno), maybe errx() is better here. 
+> 
+> I will use errx().
+> 
+> Thanks,
+>  
+> > 
+> > Thanks,
+> > 
+> > -- 
+> > Anthony PERARD
 
