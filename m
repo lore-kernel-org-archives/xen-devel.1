@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22488CCA479
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jun 2022 07:03:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.352424.579231 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BCCC43334
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jun 2022 07:03:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.352437.579274 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3BRU-00039B-0n; Mon, 20 Jun 2022 07:03:24 +0000
+	id 1o3BRc-0004k8-02; Mon, 20 Jun 2022 07:03:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 352424.579231; Mon, 20 Jun 2022 07:03:23 +0000
+Received: by outflank-mailman (output) from mailman id 352437.579274; Mon, 20 Jun 2022 07:03:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3BRT-00038q-Sr; Mon, 20 Jun 2022 07:03:23 +0000
-Received: by outflank-mailman (input) for mailman id 352424;
- Mon, 20 Jun 2022 07:03:22 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o3BRb-0004jS-S9; Mon, 20 Jun 2022 07:03:31 +0000
+Received: by outflank-mailman (input) for mailman id 352437;
+ Mon, 20 Jun 2022 07:03:30 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=k7+S=W3=arm.com=michal.orzel@srs-se1.protection.inumbo.net>)
- id 1o3BRS-0001Yr-Mz
- for xen-devel@lists.xenproject.org; Mon, 20 Jun 2022 07:03:22 +0000
+ id 1o3BRa-0001Yx-90
+ for xen-devel@lists.xenproject.org; Mon, 20 Jun 2022 07:03:30 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 12005090-f067-11ec-bd2d-47488cf2e6aa;
- Mon, 20 Jun 2022 09:03:21 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 16150c3d-f067-11ec-b725-ed86ccbb4733;
+ Mon, 20 Jun 2022 09:03:28 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B8311042;
- Mon, 20 Jun 2022 00:03:21 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 87ADE1424;
+ Mon, 20 Jun 2022 00:03:28 -0700 (PDT)
 Received: from e129167.arm.com (unknown [10.57.35.125])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DB2EC3F5A1;
- Mon, 20 Jun 2022 00:03:18 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9AA9E3F5A1;
+ Mon, 20 Jun 2022 00:03:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,18 +44,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 12005090-f067-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 16150c3d-f067-11ec-b725-ed86ccbb4733
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 5/9] include/public: Use explicitly specified types
-Date: Mon, 20 Jun 2022 09:02:41 +0200
-Message-Id: <20220620070245.77979-6-michal.orzel@arm.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 9/9] drivers/acpi: Use explicitly specified types
+Date: Mon, 20 Jun 2022 09:02:45 +0200
+Message-Id: <20220620070245.77979-10-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220620070245.77979-1-michal.orzel@arm.com>
 References: <20220620070245.77979-1-michal.orzel@arm.com>
@@ -66,65 +61,40 @@ According to MISRA C 2012 Rule 8.1, types shall be explicitly
 specified. Fix all the findings reported by cppcheck with misra addon
 by substituting implicit type 'unsigned' to explicit 'unsigned int'.
 
-Bump sysctl interface version.
-
 Signed-off-by: Michal Orzel <michal.orzel@arm.com>
 ---
- xen/include/public/physdev.h |  4 ++--
- xen/include/public/sysctl.h  | 10 +++++-----
- 2 files changed, 7 insertions(+), 7 deletions(-)
+This patch may not be applicable as these files come from Linux.
+---
+ xen/drivers/acpi/tables/tbfadt.c  | 2 +-
+ xen/drivers/acpi/tables/tbutils.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/include/public/physdev.h b/xen/include/public/physdev.h
-index d271766ad0..a2ca0ee564 100644
---- a/xen/include/public/physdev.h
-+++ b/xen/include/public/physdev.h
-@@ -211,8 +211,8 @@ struct physdev_manage_pci_ext {
-     /* IN */
-     uint8_t bus;
-     uint8_t devfn;
--    unsigned is_extfn;
--    unsigned is_virtfn;
-+    unsigned int is_extfn;
-+    unsigned int is_virtfn;
-     struct {
-         uint8_t bus;
-         uint8_t devfn;
-diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
-index b0a4af8789..a2a762fe46 100644
---- a/xen/include/public/sysctl.h
-+++ b/xen/include/public/sysctl.h
-@@ -35,7 +35,7 @@
- #include "domctl.h"
- #include "physdev.h"
+diff --git a/xen/drivers/acpi/tables/tbfadt.c b/xen/drivers/acpi/tables/tbfadt.c
+index f11fd5a900..ad55cd769a 100644
+--- a/xen/drivers/acpi/tables/tbfadt.c
++++ b/xen/drivers/acpi/tables/tbfadt.c
+@@ -235,7 +235,7 @@ void __init acpi_tb_create_local_fadt(struct acpi_table_header *table, u32 lengt
+ 		ACPI_WARNING((AE_INFO,
+ 			      "FADT (revision %u) is longer than ACPI 5.0 version,"
+ 			      " truncating length %u to %zu",
+-			      table->revision, (unsigned)length,
++			      table->revision, (unsigned int)length,
+ 			      sizeof(struct acpi_table_fadt)));
+ 	}
  
--#define XEN_SYSCTL_INTERFACE_VERSION 0x00000014
-+#define XEN_SYSCTL_INTERFACE_VERSION 0x00000015
- 
- /*
-  * Read console content from Xen buffer ring.
-@@ -644,18 +644,18 @@ struct xen_sysctl_credit_schedule {
-     /* Length of timeslice in milliseconds */
- #define XEN_SYSCTL_CSCHED_TSLICE_MAX 1000
- #define XEN_SYSCTL_CSCHED_TSLICE_MIN 1
--    unsigned tslice_ms;
--    unsigned ratelimit_us;
-+    unsigned int tslice_ms;
-+    unsigned int ratelimit_us;
-     /*
-      * How long we consider a vCPU to be cache-hot on the
-      * CPU where it has run (max 100ms, in microseconds)
-     */
- #define XEN_SYSCTL_CSCHED_MGR_DLY_MAX_US (100 * 1000)
--    unsigned vcpu_migr_delay_us;
-+    unsigned int vcpu_migr_delay_us;
- };
- 
- struct xen_sysctl_credit2_schedule {
--    unsigned ratelimit_us;
-+    unsigned int ratelimit_us;
- };
- 
- /* XEN_SYSCTL_scheduler_op */
+diff --git a/xen/drivers/acpi/tables/tbutils.c b/xen/drivers/acpi/tables/tbutils.c
+index d135a50ff9..ddb7f628c9 100644
+--- a/xen/drivers/acpi/tables/tbutils.c
++++ b/xen/drivers/acpi/tables/tbutils.c
+@@ -481,7 +481,7 @@ acpi_tb_parse_root_table(acpi_physical_address rsdp_address, u8 flags)
+ 			if (ACPI_FAILURE(status)) {
+ 				ACPI_WARNING((AE_INFO,
+ 					      "Truncating %u table entries!",
+-					      (unsigned)
++					      (unsigned int)
+ 					      (acpi_gbl_root_table_list.size -
+ 					       acpi_gbl_root_table_list.
+ 					       count)));
 -- 
 2.25.1
 
