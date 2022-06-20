@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27911C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 573AACCA47C
 	for <xen-devel@archiver.kernel.org>; Mon, 20 Jun 2022 05:12:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.352303.579077 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.352306.579099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o39hR-0001j5-Qi; Mon, 20 Jun 2022 05:11:45 +0000
+	id 1o39hY-0002Rv-GW; Mon, 20 Jun 2022 05:11:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 352303.579077; Mon, 20 Jun 2022 05:11:45 +0000
+Received: by outflank-mailman (output) from mailman id 352306.579099; Mon, 20 Jun 2022 05:11:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o39hR-0001in-MV; Mon, 20 Jun 2022 05:11:45 +0000
-Received: by outflank-mailman (input) for mailman id 352303;
- Mon, 20 Jun 2022 05:11:44 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o39hY-0002Ri-Cd; Mon, 20 Jun 2022 05:11:52 +0000
+Received: by outflank-mailman (input) for mailman id 352306;
+ Mon, 20 Jun 2022 05:11:51 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=dqE0=W3=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1o39hQ-0000ky-PL
- for xen-devel@lists.xenproject.org; Mon, 20 Jun 2022 05:11:44 +0000
+ id 1o39hW-0000aY-V7
+ for xen-devel@lists.xenproject.org; Mon, 20 Jun 2022 05:11:50 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 79a4a373-f057-11ec-bd2d-47488cf2e6aa;
- Mon, 20 Jun 2022 07:11:43 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 7d79a30a-f057-11ec-b725-ed86ccbb4733;
+ Mon, 20 Jun 2022 07:11:50 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 451211042;
- Sun, 19 Jun 2022 22:11:43 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C36271042;
+ Sun, 19 Jun 2022 22:11:49 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6E64B3F7D7;
- Sun, 19 Jun 2022 22:11:40 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id CD15F3F7D7;
+ Sun, 19 Jun 2022 22:11:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,7 +45,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79a4a373-f057-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 7d79a30a-f057-11ec-b725-ed86ccbb4733
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
 Cc: wei.chen@arm.com,
@@ -55,22 +55,19 @@ Cc: wei.chen@arm.com,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
 	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v5 4/8] xen/arm: introduce put_page_nr and get_page_nr
-Date: Mon, 20 Jun 2022 13:11:10 +0800
-Message-Id: <20220620051114.210118-5-Penny.Zheng@arm.com>
+Subject: [PATCH v5 6/8] xen/arm: set up shared memory foreign mapping for borrower domain
+Date: Mon, 20 Jun 2022 13:11:12 +0800
+Message-Id: <20220620051114.210118-7-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220620051114.210118-1-Penny.Zheng@arm.com>
 References: <20220620051114.210118-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Later, we need to add the right amount of references, which should be
-the number of borrower domains, to the owner domain. Since we only have
-get_page() to increment the page reference by 1, a loop is needed per
-page, which is inefficient and time-consuming.
+This commit sets up shared memory foreign mapping for borrower domain.
 
-To save the loop time, this commit introduces a set of new helpers
-put_page_nr() and get_page_nr() to increment/drop the page reference by nr.
+If owner domain is the default dom_io, all shared domain are treated as
+borrower domain.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
 Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
@@ -79,132 +76,38 @@ v5 change:
 - no change
 ---
 v4 changes:
-- fix the assert about checking overflow to make sure that the right equation
-return is at least equal to nr
-- simplify the assert about checking the underflow
+- no change
 ---
-v3 changes:
-- check overflow with "n"
-- remove spurious change
-- bring back the check that we enter the loop only when count_info is
-greater than 0
+v3 change:
+- use map_regions_p2mt instead
 ---
 v2 change:
-- new commit
+- remove guest_physmap_add_shm, since for borrower domain, we only
+do P2M foreign memory mapping now.
 ---
- xen/arch/arm/include/asm/mm.h |  4 ++++
- xen/arch/arm/mm.c             | 42 +++++++++++++++++++++++++++--------
- 2 files changed, 37 insertions(+), 9 deletions(-)
+ xen/arch/arm/domain_build.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
-index 045a8ba4bb..8384eac2c8 100644
---- a/xen/arch/arm/include/asm/mm.h
-+++ b/xen/arch/arm/include/asm/mm.h
-@@ -343,6 +343,10 @@ void free_init_memory(void);
- int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
-                                           unsigned int order);
- 
-+extern bool get_page_nr(struct page_info *page, const struct domain *domain,
-+                        unsigned long nr);
-+extern void put_page_nr(struct page_info *page, unsigned long nr);
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 650d18f5ef..1584e6c2ce 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -962,6 +962,15 @@ static int __init process_shm(struct domain *d,
+             if ( ret )
+                 return ret;
+         }
 +
- extern void put_page_type(struct page_info *page);
- static inline void put_page_and_type(struct page_info *page)
- {
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index be37176a47..79b7d8de56 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -1587,21 +1587,29 @@ long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg)
++        if ( owner_dom_io || (strcmp(role_str, "borrower") == 0) )
++        {
++            /* Set up P2M foreign mapping for borrower domain. */
++            ret = map_regions_p2mt(d, _gfn(PFN_UP(gbase)), PFN_DOWN(psize),
++                                   _mfn(PFN_UP(pbase)), p2m_map_foreign_rw);
++            if ( ret )
++                return ret;
++        }
+     }
+ 
      return 0;
- }
- 
--struct domain *page_get_owner_and_reference(struct page_info *page)
-+static struct domain *page_get_owner_and_nr_reference(struct page_info *page,
-+                                                      unsigned long nr)
- {
-     unsigned long x, y = page->count_info;
-     struct domain *owner;
- 
-+    /* Restrict nr to avoid "double" overflow */
-+    if ( nr >= PGC_count_mask )
-+    {
-+        ASSERT_UNREACHABLE();
-+        return NULL;
-+    }
-+
-     do {
-         x = y;
-         /*
-          * Count ==  0: Page is not allocated, so we cannot take a reference.
-          * Count == -1: Reference count would wrap, which is invalid.
-          */
--        if ( unlikely(((x + 1) & PGC_count_mask) <= 1) )
-+        if ( unlikely(((x + nr) & PGC_count_mask) <= nr) )
-             return NULL;
-     }
--    while ( (y = cmpxchg(&page->count_info, x, x + 1)) != x );
-+    while ( (y = cmpxchg(&page->count_info, x, x + nr)) != x );
- 
-     owner = page_get_owner(page);
-     ASSERT(owner);
-@@ -1609,14 +1617,19 @@ struct domain *page_get_owner_and_reference(struct page_info *page)
-     return owner;
- }
- 
--void put_page(struct page_info *page)
-+struct domain *page_get_owner_and_reference(struct page_info *page)
-+{
-+    return page_get_owner_and_nr_reference(page, 1);
-+}
-+
-+void put_page_nr(struct page_info *page, unsigned long nr)
- {
-     unsigned long nx, x, y = page->count_info;
- 
-     do {
--        ASSERT((y & PGC_count_mask) != 0);
-+        ASSERT((y & PGC_count_mask) >= nr);
-         x  = y;
--        nx = x - 1;
-+        nx = x - nr;
-     }
-     while ( unlikely((y = cmpxchg(&page->count_info, x, nx)) != x) );
- 
-@@ -1626,19 +1639,30 @@ void put_page(struct page_info *page)
-     }
- }
- 
--bool get_page(struct page_info *page, const struct domain *domain)
-+void put_page(struct page_info *page)
-+{
-+    put_page_nr(page, 1);
-+}
-+
-+bool get_page_nr(struct page_info *page, const struct domain *domain,
-+                 unsigned long nr)
- {
--    const struct domain *owner = page_get_owner_and_reference(page);
-+    const struct domain *owner = page_get_owner_and_nr_reference(page, nr);
- 
-     if ( likely(owner == domain) )
-         return true;
- 
-     if ( owner != NULL )
--        put_page(page);
-+        put_page_nr(page, nr);
- 
-     return false;
- }
- 
-+bool get_page(struct page_info *page, const struct domain *domain)
-+{
-+    return get_page_nr(page, domain, 1);
-+}
-+
- /* Common code requires get_page_type and put_page_type.
-  * We don't care about typecounts so we just do the minimum to make it
-  * happy. */
 -- 
 2.25.1
 
