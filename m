@@ -4,32 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE497C43334
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jun 2022 21:42:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.353340.580265 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9870C433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jun 2022 23:44:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.353359.580287 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3ldL-0007wR-A3; Tue, 21 Jun 2022 21:42:03 +0000
+	id 1o3nXx-0002pB-Ix; Tue, 21 Jun 2022 23:44:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 353340.580265; Tue, 21 Jun 2022 21:42:03 +0000
+Received: by outflank-mailman (output) from mailman id 353359.580287; Tue, 21 Jun 2022 23:44:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3ldL-0007wK-6p; Tue, 21 Jun 2022 21:42:03 +0000
-Received: by outflank-mailman (input) for mailman id 353340;
- Tue, 21 Jun 2022 21:42:01 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o3nXx-0002p4-Fg; Tue, 21 Jun 2022 23:44:37 +0000
+Received: by outflank-mailman (input) for mailman id 353359;
+ Tue, 21 Jun 2022 23:44:35 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=w6nJ=W4=gmail.com=christopher.w.clark@srs-se1.protection.inumbo.net>)
- id 1o3ldJ-0007wE-0Y
- for xen-devel@lists.xenproject.org; Tue, 21 Jun 2022 21:42:01 +0000
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [2607:f8b0:4864:20::936])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id fa675749-f1aa-11ec-bd2d-47488cf2e6aa;
- Tue, 21 Jun 2022 23:41:59 +0200 (CEST)
-Received: by mail-ua1-x936.google.com with SMTP id n16so3381085ual.12
- for <xen-devel@lists.xenproject.org>; Tue, 21 Jun 2022 14:41:59 -0700 (PDT)
+ <SRS0=D44s=W4=kernel.org=sstabellini@srs-se1.protection.inumbo.net>)
+ id 1o3nXv-0002oI-Jv
+ for xen-devel@lists.xenproject.org; Tue, 21 Jun 2022 23:44:35 +0000
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [2604:1380:4601:e00::1])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 189dbd11-f1bc-11ec-b725-ed86ccbb4733;
+ Wed, 22 Jun 2022 01:44:34 +0200 (CEST)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id B684EB81B80;
+ Tue, 21 Jun 2022 23:44:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2B7D1C3411C;
+ Tue, 21 Jun 2022 23:44:29 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,209 +46,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: fa675749-f1aa-11ec-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=l01jNFqiufAouH1VLt/1v8IOtPSNiuPd8CbkSmAR+i4=;
-        b=b3LOBQzuOWW30NhKqXW2uvyWxhGAWoDfpGyZ0ldEUqh2j+SgUpU+uSBSIQtIlBSn9I
-         zui7Y3/siSIuYokDQbdBiqDGOb0giTi/qspI3NNu27//Qd9Zxz61YBrPI8to6kCY5s9g
-         3eLtHLttMRSHx0Q5485RMnwAV+3UB3YzuHAXueytyo3fFZuMjfVOJiL5oNixNmEiTQYf
-         IA+okOE9Vkcy6JgmVTfaIbv9bKRpWCjGjrvYNoPiVOUD2L6Mv1sSDxcsz9KvrsbGyEdL
-         L30Rq3FbNNQZ2VCmZxPx3OUR2BDCti8I3JaxePqNJ3mLY20yYVS5qFELCWHo8K4bBNhc
-         FPJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=l01jNFqiufAouH1VLt/1v8IOtPSNiuPd8CbkSmAR+i4=;
-        b=egfkFWE7bvjHrhNoVJWmrQ5GrbDw8w4MFvyoaTGq3dil7zAdawy748NBVOMdMFRnbR
-         24Zk+sXwr+RCoTCcXpgqxjcQNuzcIB7RAfgPj8LK9PalKyP1qOypQCBTTZoZBaN79YLw
-         OKsoSrv0VPPKL5g83aUH+TNIjOsssz5OY3MV+ahqnYJQajnFcTaVMske98Gfvum/bkND
-         GuWIGdnWCEjpSqY6oV1jzYmiqwotF/LlYtck05yAxg+7UFZRv9uRMUrnAHetVa8J0djF
-         8m/KLLyK6le7AtEokC+TTk7UHdKVDBaXs87UcLIS0g/JpYlwPBJGP/nvh6NUNqG9bhTu
-         BtBA==
-X-Gm-Message-State: AJIora9qTGN8WhrTGbywsFhxJecOQjy8QRP1/Ky9SAXWIhLfN2ZAkZ60
-	PxvA1Bco6pPZCTHOP4gNlghRxbaI5ICYIdGdPu8=
-X-Google-Smtp-Source: AGRyM1u3O0F9+MT5pI3JMcg1G39K+uCYGX39B7w2LthGCsOksIE9XB4BgFxMMsDhYanSjLeHfx0hZ7D45QSXMR4tjI0=
-X-Received: by 2002:ab0:314f:0:b0:379:704d:a076 with SMTP id
- e15-20020ab0314f000000b00379704da076mr149589uam.55.1655847718469; Tue, 21 Jun
- 2022 14:41:58 -0700 (PDT)
+X-Inumbo-ID: 189dbd11-f1bc-11ec-b725-ed86ccbb4733
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1655855069;
+	bh=ZwuyshTN2DegwgRqLLCi7PSc5TuAIg0JJ5t8fSiwduw=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+	b=Te/elY0eIYeQ6kK8TP1l6rWfJcIDwTMeG4yspUyohrVO/OPfbKCnuVtICcfCYumY/
+	 6ADf896wDhtN6Sm/ayioi7Z/P88qeol2CIpqZCskQfNUiAnO746MaZHdCRdFnPuQGi
+	 E6V+aUtjvnBZSEZu99/U5tz6AQjtb9SaAMcq8CtT9XzRZQ5bZmP2Bcq+89Y0LIu4Pt
+	 30vrpBpy60jmpwYHXVm0U77dj26wzQTnYrCEs7lu0zGdY06VQe19POjUeN+J45rRmr
+	 Gno/5ivHcNllB74i6F00x6RSNCH2h31QIAl7BnOa2GW1fo5JrQQqjNsfxQSMmS2tol
+	 7yCH028YW045g==
+Date: Tue, 21 Jun 2022 16:44:28 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@ubuntu-linux-20-04-desktop
+To: Xenia Ragiadakou <burzalodowa@gmail.com>
+cc: xen-devel@lists.xenproject.org, 
+    Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+    Bertrand Marquis <bertrand.marquis@arm.com>, 
+    Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH 1/2] xen/arm: vtimer: Fix MISRA C 2012 Rule 8.4
+ violation
+In-Reply-To: <20220621154402.482857-1-burzalodowa@gmail.com>
+Message-ID: <alpine.DEB.2.22.394.2206211644210.788376@ubuntu-linux-20-04-desktop>
+References: <20220621154402.482857-1-burzalodowa@gmail.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-References: <7f490d75-153d-7e1d-b3c0-5418ff7fdf8f@citrix.com>
- <b8f05e22-c30d-d4b2-b725-9db91ee7a09d@xen.org> <fd30be68-d1ac-b1bc-b3f1-cff589f338ee@citrix.com>
- <c97de57c-4812-cdfc-f329-cc2e1d950dc7@xen.org>
-In-Reply-To: <c97de57c-4812-cdfc-f329-cc2e1d950dc7@xen.org>
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Date: Tue, 21 Jun 2022 14:41:47 -0700
-Message-ID: <CACMJ4GY+H7P733_-UNgSd7P8+Z4ryeJwVy3QfekMJskkmh9btQ@mail.gmail.com>
-Subject: Re: XTF-on-ARM: Bugs
-To: Julien Grall <julien@xen.org>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, 
-	Bertrand Marquis <Bertrand.Marquis@arm.com>, Michal Orzel <Michal.Orzel@arm.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Daniel Smith <dpsmith@apertussolutions.com>, Roger Pau Monne <roger.pau@citrix.com>, 
-	George Dunlap <George.Dunlap@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
 
-On Tue, Jun 21, 2022 at 7:05 AM Julien Grall <julien@xen.org> wrote:
->
-> Hi Andrew,
->
-> On 21/06/2022 14:30, Andrew Cooper wrote:
-> > On 21/06/2022 13:07, Julien Grall wrote:
-> >> On 21/06/2022 12:27, Andrew Cooper wrote:
-> >>> Hello,
-> >>> I tried to have a half hour respite from security and push forward
-> >>> with XTF-on-ARM, but the result was a mess.
+On Tue, 21 Jun 2022, Xenia Ragiadakou wrote:
+> Include vtimer.h so that the declarations of vtimer functions with external
+> linkage are visible before the function definitions.
+> 
+> Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
 
-Hi all - I've been quiet on this front but have actually been plugging
-away at this in the meantime, educating myself on the details of the
-Arm init code. I have made arm32 XTF tests run under qemu, with XTF
-result code reporting working via PV console and reading domid from
-very basic Xenstore, so far with the MMU off but a bringup of that
-part-implemented. I am following this thread and planning to be
-continuing work on this later this week.
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 
-Christopher
 
-> >>> https://github.com/andyhhp/xtf/commit/bc86e2d271f2107da9b1c9bc55a050dbdf07c6c6
-> >>> is the absolute bare minimum stub VM, which has a zImage{32,64}
-> >>> header, sets up the stack, makes one CONSOLEIO_write hypercall, and
-> >>> then a clean SCHEDOP_shutdown.
-> >>>
-> >>> There are some bugs:
-> >>>
-> >>> 1) kernel_zimage32_probe() rejects relocatable binaries, but if I
-> >>> skip the check it works fine.
-> >>
-> >> Hmmmm... which check are you referring to?
-> >
-> > if ( (end - start) > size )
-> >      return -EINVAL;
-> >
-> > Although now I think about it, the problem is subtly different.
-> >
-> > Section Headers:
-> >    [Nr] Name              Type            Addr     Off    Size   ES Flg
-> > Lk Inf Al
-> >    [ 0]                   NULL            00000000 000000 000000 00
-> > 0   0  0
-> >    [ 1] .text             PROGBITS        40000000 010000 000094 00  AX
-> > 0   0  4
-> >    [ 2] .data             PROGBITS        40001000 011000 000000 00  WA
-> > 0   0  1
-> >    [ 3] .rodata           PROGBITS        40001000 011000 000012 00   A
-> > 0   0  4
-> >    [ 4] .bss              NOBITS          40002000 011012 001000 00  WA
-> > 0   0  4
-> >
-> > end is calculated as 0x3000 which includes the bss (inc stack which is
-> > bss page aligned), while the raw binary size is 0x1012 because it stops
-> > at the end of .rodata.
->
-> Ok. I agree this is a bug. Can you send a patch?
-> >>> Furthermore, kernel_zimage64_probe() ignores the header and assumes
-> >>> the binary is relocatable.
-> >>
-> >> Are you referring to bit 3 "Kernel physical placement"?
-> >
-> > No. This:
-> >
-> > /* Currently there is no length in the header, so just use the size */
-> > start = 0;
-> > end = size;
-> >
-> > Which isn't true even for the v0 header.  The field named text_offset in
-> > Xen's code is start, and res1 is end (or size for relocatable).
->
-> Hmmm... text_offset is not the start. But I agree that res1 is the
-> effective size and should be used instead of the binary size.
->
-> >>
-> >>> Both probe functions fail to check the endianness marker.
-> >>
-> >> AFAIU the header is little endian. So it is not clear to me why we
-> >> should check the endianess marker?
-> >
-> > Not the endieness of the header, the endianness of the image.  Both
-> > headers have a field which should ought to be checked for != LE seeing
-> > as Xen doesn't support big endian domains yet
->
-> Aside potential bugs, big endian OS should boot on Xen (PV protocol and
-> hypercalls are always litte endian).
->
-> [...]
->
-> >>> (XEN) Hardware Dom0 halted: halting machine
-> >>>
-> >>> which is weird.  The CONSOLEIO_write fails to read the passed
-> >>> pointer, despite appearing to have a ip-relative load to find the
-> >>> string, while the SCHEDOP_shutdown passes its parameter fine (it's a
-> >>> stack relative load).
-> >>
-> >>  From a brief look, your code is still running with MMU off and Cache
-> >> "off" (on armv8, it is more a bypass "cache" rather than off).
-> >>
-> >> This means that you ought to be a lot more careful when
-> >> reading/writing value to avoid reading any stall data.
-> >
-> > There are no relocation/etc so everything has well defined behaviour
-> > even when the caches are off.
->
-> The problem is you are writing to the stack and then passing a pointer
-> to the stack to Xen. For hypercalls, we mandate the memory to be
-> cacheable (see arch-arm.h). So Xen may read a different value than what
-> you passed.
-> >>> Other observations:
-> >>>
-> >>> * There is no documented vCPU starting state.
-> >>
-> >> See
-> >> https://github.com/torvalds/linux/blob/master/Documentation/arm64/booting.rst.
-> >
-> > What's it got to do with Xen's vCPU starting state?
->
-> Because we are following what Image defined. Anything outside is
-> implementation defined and not something that an OS should rely on.
->
-> >  Also, that's
-> > clearly not relevant for arm32 even if the implication is "Xen only
-> > speaks the Linux ABI".
->
-> The interface exposed to the guest depends on the binary format used. At
-> the moment, we are implementing zImage, Image and U-boot. If there were
-> another, then the vCPU will be the same as defined by the new format.
->
-> >
-> > It needs to be in docs/ (or public at a stretch) and not in the heads of
-> > the maintainers.
->
-> Patches are welcomed.
->
-> >>
-> >>> * Qemu is infinitely easier to to use (i.e. no messing with dtb/etc)
-> >>> as -kernel xen -initrd test-$foo with a oneliner change to the dtb
-> >>> parsing to treat ramdisk and no kernel as the dom0 kernel.  Maybe a
-> >>> better change would be to modify qemu to understand multiple -kernel's.
-> >>> * Xen can't load ELFs.
-> >>
-> >> The support was dropped in 2018 because it was bogus and not used:
-> >>
-> >> https://lists.xenproject.org/archives/html/xen-devel/2018-06/msg00242.html
-> >>
-> >>
-> >> Personally, I think that zImage/Image is simple enough that
-> >> re-introducing ELF is not worth it. But I would be OK to consider
-> >> patches if you feel like writing them.
-> >
-> > There is a massive usability improvement from being able to point normal
-> > toolchain tools at the same binary you're trying to load.
-> Ditto.
->
-> Cheers,
->
-> --
-> Julien Grall
+> ---
+>  xen/arch/arm/vtimer.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/xen/arch/arm/vtimer.c b/xen/arch/arm/vtimer.c
+> index 5bb5970f58..5f26463354 100644
+> --- a/xen/arch/arm/vtimer.c
+> +++ b/xen/arch/arm/vtimer.c
+> @@ -29,6 +29,7 @@
+>  #include <asm/time.h>
+>  #include <asm/vgic.h>
+>  #include <asm/vreg.h>
+> +#include <asm/vtimer.h>
+>  #include <asm/regs.h>
+>  
+>  /*
+> -- 
+> 2.34.1
+> 
 
