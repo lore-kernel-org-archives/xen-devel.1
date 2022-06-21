@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1D89C43334
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Jun 2022 08:20:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.353053.579947 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 643EDC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Jun 2022 08:44:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.353067.579973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3Z7D-0001g4-6P; Tue, 21 Jun 2022 08:20:03 +0000
+	id 1o3ZUS-00056a-HS; Tue, 21 Jun 2022 08:44:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 353053.579947; Tue, 21 Jun 2022 08:20:03 +0000
+Received: by outflank-mailman (output) from mailman id 353067.579973; Tue, 21 Jun 2022 08:44:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3Z7D-0001fM-1h; Tue, 21 Jun 2022 08:20:03 +0000
-Received: by outflank-mailman (input) for mailman id 353053;
- Tue, 21 Jun 2022 08:20:01 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o3Z7B-0001X1-Kd; Tue, 21 Jun 2022 08:20:01 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o3Z7B-00085U-IK; Tue, 21 Jun 2022 08:20:01 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o3Z7B-0008IR-80; Tue, 21 Jun 2022 08:20:01 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1o3Z7B-0008P2-7Z; Tue, 21 Jun 2022 08:20:01 +0000
+	id 1o3ZUS-00056T-D7; Tue, 21 Jun 2022 08:44:04 +0000
+Received: by outflank-mailman (input) for mailman id 353067;
+ Tue, 21 Jun 2022 08:44:03 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=L66N=W4=arm.com=michal.orzel@srs-se1.protection.inumbo.net>)
+ id 1o3ZUR-0004kn-8t
+ for xen-devel@lists.xenproject.org; Tue, 21 Jun 2022 08:44:03 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 4c2c4069-f13e-11ec-b725-ed86ccbb4733;
+ Tue, 21 Jun 2022 10:44:01 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CEE221596;
+ Tue, 21 Jun 2022 01:44:00 -0700 (PDT)
+Received: from [10.57.35.142] (unknown [10.57.35.142])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 092BF3F5A1;
+ Tue, 21 Jun 2022 01:43:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +44,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=NYBmr9/U2F5A0lcv8yzFYO4zwhVy2DYL3IcR+8iNIVA=; b=CXgbf1qCjz5IzKchknsBedpASj
-	sud9egeh1u43l8oVXlJrejXZjdXApzAqj4Ne4z75MKGiHCeYbfDpPQAJH9elrIo5RHpkTq2Nv8irX
-	CptSoqDAnvhu7DCSBhDBzbf8YUoMN5vSMnON7EojlMweq5V69ObWegGzymlRSy2TDiDk=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-171298-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 4c2c4069-f13e-11ec-b725-ed86ccbb4733
+Message-ID: <44179ffe-e3c4-d9ea-80fe-67cf7d946a34@arm.com>
+Date: Tue, 21 Jun 2022 10:43:45 +0200
 MIME-Version: 1.0
-Subject: [ovmf test] 171298: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=cfe165140a7c140c2d2f382113abd6e9ac89ce77
-X-Osstest-Versions-That:
-    ovmf=e8034b534ab51635b62dca631514bb6305850a5a
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 21 Jun 2022 08:20:01 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: Re: [PATCH 5/9] include/public: Use explicitly specified types
+Content-Language: en-US
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+References: <20220620070245.77979-1-michal.orzel@arm.com>
+ <20220620070245.77979-6-michal.orzel@arm.com>
+ <e91f6bd2-271c-12c1-ee7e-bea3d74c8beb@xen.org>
+From: Michal Orzel <michal.orzel@arm.com>
+In-Reply-To: <e91f6bd2-271c-12c1-ee7e-bea3d74c8beb@xen.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-flight 171298 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/171298/
+Hi Julien,
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 cfe165140a7c140c2d2f382113abd6e9ac89ce77
-baseline version:
- ovmf                 e8034b534ab51635b62dca631514bb6305850a5a
+On 20.06.2022 11:54, Julien Grall wrote:
+> Hi Michal,
+> 
+> On 20/06/2022 08:02, Michal Orzel wrote:
+>> According to MISRA C 2012 Rule 8.1, types shall be explicitly
+>> specified. Fix all the findings reported by cppcheck with misra addon
+>> by substituting implicit type 'unsigned' to explicit 'unsigned int'.
+>>
+>> Bump sysctl interface version.
+> 
+> The sysctl version should only be bumped if the ABI has changed. AFAICT switching from "unsigned" to "unsigned" will not modify it, so I don't think this is necessary.
 
-Last test of basis   171286  2022-06-20 05:11:51 Z    1 days
-Testing same since   171298  2022-06-21 04:40:36 Z    0 days    1 attempts
+Sure, I can remove that in v2 but first I'd like to wait at least for xsm patch to be reviewed.
+Also as these patches are not dependent from each other, do you think it is worth respinning the reviewed ones?
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Gua Guo <gua.guo@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   e8034b534a..cfe165140a  cfe165140a7c140c2d2f382113abd6e9ac89ce77 -> xen-tested-master
+Cheers,
+Michal
 
