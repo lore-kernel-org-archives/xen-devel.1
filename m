@@ -4,35 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0ADCC433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 04:26:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.353446.580375 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E07E9C43334
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 06:39:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.353465.580386 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3rwf-0007N7-5o; Wed, 22 Jun 2022 04:26:25 +0000
+	id 1o3u0l-0003L5-S4; Wed, 22 Jun 2022 06:38:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 353446.580375; Wed, 22 Jun 2022 04:26:25 +0000
+Received: by outflank-mailman (output) from mailman id 353465.580386; Wed, 22 Jun 2022 06:38:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3rwf-0007N0-2C; Wed, 22 Jun 2022 04:26:25 +0000
-Received: by outflank-mailman (input) for mailman id 353446;
- Wed, 22 Jun 2022 04:26:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1o3u0l-0003Ky-Nr; Wed, 22 Jun 2022 06:38:47 +0000
+Received: by outflank-mailman (input) for mailman id 353465;
+ Wed, 22 Jun 2022 06:38:46 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o3rwd-0007Mp-PK; Wed, 22 Jun 2022 04:26:23 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o3rwd-00037D-KK; Wed, 22 Jun 2022 04:26:23 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o3rwd-00051k-57; Wed, 22 Jun 2022 04:26:23 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1o3rwd-00060r-4Q; Wed, 22 Jun 2022 04:26:23 +0000
+ (envelope-from <SRS0=zPYt=W5=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1o3u0j-0003Kb-Vb
+ for xen-devel@lists.xenproject.org; Wed, 22 Jun 2022 06:38:46 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id f5df2146-f1f5-11ec-bd2d-47488cf2e6aa;
+ Wed, 22 Jun 2022 08:38:44 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B7C881FA5C;
+ Wed, 22 Jun 2022 06:38:43 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8B0E313AC7;
+ Wed, 22 Jun 2022 06:38:43 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id UEeiIPO4smKNUAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 22 Jun 2022 06:38:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,74 +53,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=BPdm8AiVa/jSzSEIsEKBhE/CR+FMvqQ/hFGKpbE9R+A=; b=AbstYl9qqi3TcI9Im5ymkNOndc
-	nluME6WiqE5FtiT412QqrO7IXGA/EQHlhEnIqJ+ZSj5il1tIfwDu4hV0vez+GUY2OAUNaFF0jTuti
-	eI4jIGwCw16NMQHNdjrYjjCFjN0CKApOtSASWJIvxdB3grL6bbK/cox13y1QntcG1xXQ=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-171304-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: f5df2146-f1f5-11ec-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1655879923; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=+Mw0ys4QNDOfeayffGgMX8B88kpTSJxdLQDajglpGuY=;
+	b=LCVs0MbvhQNUhVhcKw0Gx4BjRA6mFWwQEuAQj795WvsjaDx3XJz3qFtwMtTQPA5LbOyk87
+	OoFglCNqL6Ouf6H3tU0YIMkaGx7B1rjpMdezz+TLJhEgpKvqmNmNXpBs3CC+xZlzR9/MnE
+	T67fj5LW4wb7JP9B0hROZTNq/kZYhU4=
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	linux-arch@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Arnd Bergmann <arnd@arndb.de>
+Subject: [PATCH v3 2/3] kernel: remove platform_has() infrastructure
+Date: Wed, 22 Jun 2022 08:38:37 +0200
+Message-Id: <20220622063838.8854-3-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20220622063838.8854-1-jgross@suse.com>
+References: <20220622063838.8854-1-jgross@suse.com>
 MIME-Version: 1.0
-Subject: [ovmf test] 171304: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=b97243dea3c95ad923fa4ca190940158209e8384
-X-Osstest-Versions-That:
-    ovmf=cfe165140a7c140c2d2f382113abd6e9ac89ce77
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 22 Jun 2022 04:26:23 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 171304 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/171304/
+The only use case of the platform_has() infrastructure has been
+removed again, so remove the whole feature.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 b97243dea3c95ad923fa4ca190940158209e8384
-baseline version:
- ovmf                 cfe165140a7c140c2d2f382113abd6e9ac89ce77
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ MAINTAINERS                            |  8 --------
+ include/asm-generic/Kbuild             |  1 -
+ include/asm-generic/platform-feature.h |  8 --------
+ include/linux/platform-feature.h       | 15 --------------
+ kernel/Makefile                        |  2 +-
+ kernel/platform-feature.c              | 27 --------------------------
+ 6 files changed, 1 insertion(+), 60 deletions(-)
+ delete mode 100644 include/asm-generic/platform-feature.h
+ delete mode 100644 include/linux/platform-feature.h
+ delete mode 100644 kernel/platform-feature.c
 
-Last test of basis   171298  2022-06-21 04:40:36 Z    0 days
-Testing same since   171304  2022-06-22 01:40:36 Z    0 days    1 attempts
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 3cf9842d9233..1a800f6becd2 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -15835,14 +15835,6 @@ S:	Maintained
+ F:	Documentation/devicetree/bindings/iio/chemical/plantower,pms7003.yaml
+ F:	drivers/iio/chemical/pms7003.c
+ 
+-PLATFORM FEATURE INFRASTRUCTURE
+-M:	Juergen Gross <jgross@suse.com>
+-S:	Maintained
+-F:	arch/*/include/asm/platform-feature.h
+-F:	include/asm-generic/platform-feature.h
+-F:	include/linux/platform-feature.h
+-F:	kernel/platform-feature.c
+-
+ PLDMFW LIBRARY
+ M:	Jacob Keller <jacob.e.keller@intel.com>
+ S:	Maintained
+diff --git a/include/asm-generic/Kbuild b/include/asm-generic/Kbuild
+index 8e47d483b524..302506bbc2a4 100644
+--- a/include/asm-generic/Kbuild
++++ b/include/asm-generic/Kbuild
+@@ -44,7 +44,6 @@ mandatory-y += msi.h
+ mandatory-y += pci.h
+ mandatory-y += percpu.h
+ mandatory-y += pgalloc.h
+-mandatory-y += platform-feature.h
+ mandatory-y += preempt.h
+ mandatory-y += rwonce.h
+ mandatory-y += sections.h
+diff --git a/include/asm-generic/platform-feature.h b/include/asm-generic/platform-feature.h
+deleted file mode 100644
+index 4b0af3d51588..000000000000
+--- a/include/asm-generic/platform-feature.h
++++ /dev/null
+@@ -1,8 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef _ASM_GENERIC_PLATFORM_FEATURE_H
+-#define _ASM_GENERIC_PLATFORM_FEATURE_H
+-
+-/* Number of arch specific feature flags. */
+-#define PLATFORM_ARCH_FEAT_N	0
+-
+-#endif /* _ASM_GENERIC_PLATFORM_FEATURE_H */
+diff --git a/include/linux/platform-feature.h b/include/linux/platform-feature.h
+deleted file mode 100644
+index 6ed859928b97..000000000000
+--- a/include/linux/platform-feature.h
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-#ifndef _PLATFORM_FEATURE_H
+-#define _PLATFORM_FEATURE_H
+-
+-#include <linux/bitops.h>
+-#include <asm/platform-feature.h>
+-
+-/* The platform features are starting with the architecture specific ones. */
+-#define PLATFORM_FEAT_N				(0 + PLATFORM_ARCH_FEAT_N)
+-
+-void platform_set(unsigned int feature);
+-void platform_clear(unsigned int feature);
+-bool platform_has(unsigned int feature);
+-
+-#endif /* _PLATFORM_FEATURE_H */
+diff --git a/kernel/Makefile b/kernel/Makefile
+index a7e1f49ab2b3..318789c728d3 100644
+--- a/kernel/Makefile
++++ b/kernel/Makefile
+@@ -7,7 +7,7 @@ obj-y     = fork.o exec_domain.o panic.o \
+ 	    cpu.o exit.o softirq.o resource.o \
+ 	    sysctl.o capability.o ptrace.o user.o \
+ 	    signal.o sys.o umh.o workqueue.o pid.o task_work.o \
+-	    extable.o params.o platform-feature.o \
++	    extable.o params.o \
+ 	    kthread.o sys_ni.o nsproxy.o \
+ 	    notifier.o ksysfs.o cred.o reboot.o \
+ 	    async.o range.o smpboot.o ucount.o regset.o
+diff --git a/kernel/platform-feature.c b/kernel/platform-feature.c
+deleted file mode 100644
+index cb6a6c3e4fed..000000000000
+--- a/kernel/platform-feature.c
++++ /dev/null
+@@ -1,27 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-
+-#include <linux/bitops.h>
+-#include <linux/cache.h>
+-#include <linux/export.h>
+-#include <linux/platform-feature.h>
+-
+-#define PLATFORM_FEAT_ARRAY_SZ  BITS_TO_LONGS(PLATFORM_FEAT_N)
+-static unsigned long __read_mostly platform_features[PLATFORM_FEAT_ARRAY_SZ];
+-
+-void platform_set(unsigned int feature)
+-{
+-	set_bit(feature, platform_features);
+-}
+-EXPORT_SYMBOL_GPL(platform_set);
+-
+-void platform_clear(unsigned int feature)
+-{
+-	clear_bit(feature, platform_features);
+-}
+-EXPORT_SYMBOL_GPL(platform_clear);
+-
+-bool platform_has(unsigned int feature)
+-{
+-	return test_bit(feature, platform_features);
+-}
+-EXPORT_SYMBOL_GPL(platform_has);
+-- 
+2.35.3
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Heng Luo <heng.luo@intel.com>
-  Luo, Heng <heng.luo@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   cfe165140a..b97243dea3  b97243dea3c95ad923fa4ca190940158209e8384 -> xen-tested-master
 
