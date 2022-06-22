@@ -4,39 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D23C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 14:47:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.354024.581058 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB76C43334
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 14:48:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.354034.581069 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o41di-0000UW-BE; Wed, 22 Jun 2022 14:47:30 +0000
+	id 1o41eh-00012G-Mr; Wed, 22 Jun 2022 14:48:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 354024.581058; Wed, 22 Jun 2022 14:47:30 +0000
+Received: by outflank-mailman (output) from mailman id 354034.581069; Wed, 22 Jun 2022 14:48:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o41di-0000UO-8H; Wed, 22 Jun 2022 14:47:30 +0000
-Received: by outflank-mailman (input) for mailman id 354024;
- Wed, 22 Jun 2022 14:47:29 +0000
+	id 1o41eh-000129-IP; Wed, 22 Jun 2022 14:48:31 +0000
+Received: by outflank-mailman (input) for mailman id 354034;
+ Wed, 22 Jun 2022 14:48:29 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=kzGk=W5=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1o41dh-0000UH-2r
- for xen-devel@lists.xenproject.org; Wed, 22 Jun 2022 14:47:29 +0000
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-eopbgr60042.outbound.protection.outlook.com [40.107.6.42])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 3c639f23-f23a-11ec-b725-ed86ccbb4733;
- Wed, 22 Jun 2022 16:47:28 +0200 (CEST)
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by AM9PR04MB9015.eurprd04.prod.outlook.com (2603:10a6:20b:40b::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.22; Wed, 22 Jun
- 2022 14:47:26 +0000
-Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::dfa:a64a:432f:e26b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
- ([fe80::dfa:a64a:432f:e26b%7]) with mapi id 15.20.5353.022; Wed, 22 Jun 2022
- 14:47:26 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=QBTv=W5=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
+ id 1o41X5-0004Nu-3S
+ for xen-devel@lists.xenproject.org; Wed, 22 Jun 2022 14:40:39 +0000
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 476aff44-f239-11ec-b725-ed86ccbb4733;
+ Wed, 22 Jun 2022 16:40:36 +0200 (CEST)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 85593D6E;
+ Wed, 22 Jun 2022 07:40:37 -0700 (PDT)
+Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
+ [10.1.199.62])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 7739C3F792;
+ Wed, 22 Jun 2022 07:40:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,147 +45,246 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 3c639f23-f23a-11ec-b725-ed86ccbb4733
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OjAMMM3FGYKxG5nNrx+wFgbETpazU/UcD4bDqHrxreEPX0nEGaeycw6pQIPotiF14RX8d6g70q4BQNZPYSb0aXGyKH2V9UvfvURcfcWhbtiejrJYSAgj1w/PeXEuT2Cn6i2sEpgcZyUd4DUCBmCMWiD+7nJulhEpXxW2FIF+zqcn7Kv2VkDtp/TVADxWKP9Pu1lfOhHEGrUy/ADGhyjHZ6Gr+bMSB3awp+oGTSBohzF7G0+DkIFuDU3ZIfZ9ovOWvzn1b+ehl65x/gBfGYxnI2uyQQAIxwJz5brcwXrEnuh44hNyLRlVk0dCBK6O1FuxR1W8N/1TdF4lXg4m9Depmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZqdmGhm9cWS7wDJEELqzqMhbHsqthLU+rE1P1HskFfI=;
- b=PbX3I/fl0hruSTRhiUKGO5mOQQL2MYRJjMgk34THhCyh0zfut8rt7EwFDq0InhDeAykaLtPPHSkyIjEPi2eol5AhYe4YO09meMlpsNRmv8kO286a2UEu33wj6209dkSgw5C8FnUGj4txlSBnxYxrlH0NJ7vNHZqHm9e7Z1CYKpdQwDtkSHVWnsV5mXlqd1M3aM8z4qUisWjN/u+djnSRDkuTW69qNKTs72VyoxFyhRr7xIfqB2366rk5M+QQwB5N546gR7e7Opuvi4IjA+hsaBE9uFT1riuUgti5wchvFuTf3jw7TfpwWjZM/7qCffrAhEZTCIg79FaupMrwa6cbdg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZqdmGhm9cWS7wDJEELqzqMhbHsqthLU+rE1P1HskFfI=;
- b=bPfSA9V3gRtLIDFQoSzjXCpl1tCNd/ex6RDYZ7pCmkkrO4HSYekDspevt8nkC21kf9g0BrQNTaJ3FCFjpTau/zAxTOkytAamArTJnfg+l6AFCLzYTku7maFB5VcCo31CMgI70Qt41s7M1OSG8fABZi1Brp6bUllM7wEl1XYWz/PGWxOFon73ohHN0edCIZajAU57c/Hcp5wNaQ6gIHP08GjrC0p7io2gaXAmXihpYazIqH+YlPAUVPznTce/ExGqVqrW4eJvdolxQW+asG2mYVVe1vY07qhG50eqVkL/XFDVLSJWmXyN76BgTE64gtUoywq34pXyj4V7wHLGBtEe4Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <60ee0a19-064f-c8e3-aa65-b8c3d998a32a@suse.com>
-Date: Wed, 22 Jun 2022 16:47:24 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.10.0
-Subject: Re: [XEN PATCH v2.1 1/4] build,include: rework shell script for
- headers++.chk
-Content-Language: en-US
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: Bertrand Marquis <Bertrand.Marquis@arm.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- xen-devel@lists.xenproject.org, Michal Orzel <michal.orzel@arm.com>
-References: <20220614162248.40278-1-anthony.perard@citrix.com>
- <20220621101128.50543-1-anthony.perard@citrix.com>
- <e264e3bf-b436-684a-13a1-be0aa0f6bfbb@arm.com>
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <e264e3bf-b436-684a-13a1-be0aa0f6bfbb@arm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS8PR04CA0039.eurprd04.prod.outlook.com
- (2603:10a6:20b:312::14) To VE1PR04MB6560.eurprd04.prod.outlook.com
- (2603:10a6:803:122::25)
+X-Inumbo-ID: 476aff44-f239-11ec-b725-ed86ccbb4733
+From: Rahul Singh <rahul.singh@arm.com>
+To: xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com,
+	rahul.singh@arm.com,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 8/8] xen/arm: introduce new xen,enhanced property value
+Date: Wed, 22 Jun 2022 15:38:05 +0100
+Message-Id: <67a86c52dfdcd5dd1f56ac3442089012aba09ff6.1655903088.git.rahul.singh@arm.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <cover.1655903088.git.rahul.singh@arm.com>
+References: <cover.1655903088.git.rahul.singh@arm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: aa9cc63f-4370-42e6-2cd9-08da545e1fb8
-X-MS-TrafficTypeDiagnostic: AM9PR04MB9015:EE_
-X-Microsoft-Antispam-PRVS:
-	<AM9PR04MB90153DC51B9487D2E4980AEEB3B29@AM9PR04MB9015.eurprd04.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	LVfsAu4j0WCSk6f/xDxpIcepIvctfwASHCMYpLYXlvgjTS8sCtLic5HcxswmionKDbe74i+Vm0YnnDWN+S+PTuH9XXCwvBfX/Cw8Qxqpku2spTFMAXZVeTxrU2wFOKMFaI8k1otec8scQkj6pJuHfWFF1Qv+fwckZS/DVKN5nfqIn5Qin5B2mwExf5+QR7uz09ash5VOaBNRbD4Q9/h9IQ89QVoXpC7oyc6liISxKW5KGYgRIzWAyc7sXEdbPVUGaU5syTqgrPomaffe6cW8rG58mMM/r/rd8okz+3uvC0g13cgTFT+xZMxpCSmXIGY2fhAF2HLdRWj5RxHlT/7iqRV0GbM6+qpUV94TWtqzDKGRlK+LLRhiEsqST29YNmrC8Mm3MEAxxQnAaGhbodiNm7r0PG9AeNVeJZ8PybWHBHgenU0rmuSSp0amgta5U1l3nF/3uU5sF6lhIrlZXH3Uag0KIVUnZTmPKbFvAe15qidUiKYwjXeaVrS/hD8C/uXIlaTmvl0+KPD8JS3OJTKgKseUvsuN+lC7iZK7vTuiDRMecp4QvtyahizF7MWK9L0Zqt0j3X7pU4fddiS676G2sGWujEP3R6PDZ0ZpsRMW/I2uOoVw0Ie53QFBGVw2ZOeNEf+kHob2GAqlXd623ySgTTDwmLblr2A7mlX/Msvm/IFbNk3QdvwnzH3l/HSQJcZGn0wxmo5oaZNNXP9ueDnTTWU6UNNESH+4g0g6WPHHKlB7Q6l1dnPA4rZibfEs/SQNFGzP7L5XU9n2D28qWx0JI/OUzc7fdQLYos8jS1hfiI0=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(396003)(376002)(39860400002)(366004)(346002)(136003)(53546011)(2906002)(6512007)(26005)(86362001)(6506007)(31696002)(54906003)(316002)(36756003)(4326008)(38100700002)(31686004)(6916009)(66476007)(66946007)(8676002)(66556008)(8936002)(2616005)(186003)(5660300002)(478600001)(83380400001)(41300700001)(6486002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?dWxJM1ZjMFp3djdvZEplYkN2U3IwSzlDcjNUYko0bU9uTVB5cW5ROWZKMGtw?=
- =?utf-8?B?YjFzYTVIcldkL2pEZzh4NkE3NkNqYW5hOU91WlRoTlJDOFU3NW5yc0pBMXRP?=
- =?utf-8?B?NU1NL2h3Y1RSbktNZTZuT1ZQQU95SzdVOGNVY0trZ3F3ZjZlUDhsV0lRcFFC?=
- =?utf-8?B?ZEpadnNNVjhkanpKak02YTRscjB3aWIxcjNmZmpqTExESjRsSkJmeVpmQ0pz?=
- =?utf-8?B?R2loSWtWbWxueVVMTVQ3QWViL3VhT3hvOTBXRDUzYXB5R1hBT21PanlLUmti?=
- =?utf-8?B?aDl5UVh4MTEyNExpQkpDRHJURWpiOUVjU0VtaDhkOWJlZTkvbUVSUS9xVk1D?=
- =?utf-8?B?cjFYaUVCZEgybUs5Q2pVdDdmcE9kK1Jld1JvN3NybTVJWnBGK3QwYU9xWWFW?=
- =?utf-8?B?VHBpVWROL2x2b2tDYjkybHBybkd6K2Jnb0g4L21qajI1dm1Xbk16bTFUYXpv?=
- =?utf-8?B?QmVzSnFocTNseU9WL2VHKzFTeHNaa0RSb1R0NjYzU0Z6OGJ4akNPaVpITFN0?=
- =?utf-8?B?My9kdDF6Q0FXeUUvaVRybTA2T3NsSTNtS0JnSnBIRUJFUk13R3FrMEt2Tzdt?=
- =?utf-8?B?NjdMcENwbi8xVWZ3K1p3bUswQW1CcXlock1TUzMrNEV4RDlia01EQ0Z4RmpF?=
- =?utf-8?B?M2pUcWQ5cmdDM255a2s1OWlrNHRwZlMxQkpRQUw5Tm05blFVdjVSSFdFUkhy?=
- =?utf-8?B?eFlHV3U3d1lwMXBFR1RpSjhOcUpRUFVYSWxGZVFReHJMZGVtZFF4MXNvZXk5?=
- =?utf-8?B?QUlYVDl5TTJYVTd4SkdxUXhDaXVjeXlnWXVwc0V6d0FKb2VBbFNZaHM2RytJ?=
- =?utf-8?B?aW1GMC9TbGVZNmw4MkMyTjdVeXpuSEtQbGY2VHRYYXZQbU0rWm5hMW0yTS9r?=
- =?utf-8?B?SGFTd0NsZWs3TCtOZjhFTFZ1MTBTODVsazRPMFdPU2hIV0t1NVZjc0QxcEIr?=
- =?utf-8?B?akZ1MkVjV2xObDdVUXJXKzM1Znh4MlByL2xtMGFJNnJuTzZ4WWhCWXdnS0w1?=
- =?utf-8?B?ZkJISFhNSEtEQ0xqSUZwQ0tLMDVCV1VUdmFEbGtEMnNadWNmelhWOVg4ZGdM?=
- =?utf-8?B?Y1RPQUpnL2hrdmk3K1BWY051MEJ0K1EvQXdNdUJWT3ZMSitXa3VLMjNQWnhU?=
- =?utf-8?B?SXNtaXk0bkJxRWFIaEhpTDZKN3FaNlAvT29VblNFdVBCOE1jRWpEZUNIeTFh?=
- =?utf-8?B?MGRvN1huVjV6S1gzM3VkMUxkMUYvRDFZYkRjcnFRd21qUVNKMlpWajZSaE1q?=
- =?utf-8?B?WkpvVDVHdkJwUGV2SnBUWnhLeWlmU0pnODlEeTRNK1ZoSDFNdlVaWFd3clRQ?=
- =?utf-8?B?MVRuRUsxcEhVZlQ3b2VxN3ZCYTRKWndzMnNSbGV5VUdIa0VOOG01TC9pTVd3?=
- =?utf-8?B?R3ZzN0RhNENHVHFiQUtVUW9qWXBXTWdGRTFwMkp1NVZuUVI4dys1eER5ZkYw?=
- =?utf-8?B?ODkxbTBCVjBNRm1teWRlKzJsODZ0MlVTRkZDN2JLakFiQTJkZzhwYmlhYW8x?=
- =?utf-8?B?ZmRTR3hpRnR1WkFtejhHN0ltU3gvL3ZTSFllVk1VYWVHZWwrbGF0akxrZXFY?=
- =?utf-8?B?QlJPSlFqOEx3NWxVYi9ycWJtaWFXNnJlQUdTQzNTc1VpVzNaVHdXenYzWFU3?=
- =?utf-8?B?RURWWkdYSk9SWW1tbnNyalVGNU1MdTNrbGdsYTlna0xTWHVZSXhLZHptNXR2?=
- =?utf-8?B?a0VlWlU1MWdVNUZJU1N4cE9sK200UnRmbGw2dXdKZFlpbG1qdGoyaUJKSFdN?=
- =?utf-8?B?R3pxWS9ib0MyMUNSMWJKU0RoVlpycGNqVWgwejlNRUFnSC81eUE1bEw2a3pj?=
- =?utf-8?B?VmdPYjJkZTc5NmJBeldPeE9TNUJOdng4Z1htSG1BZlVYZ3MwZWZaRDZaUVFR?=
- =?utf-8?B?OE1PdVhyMjNzYml3M0dhRUJuVFhVMUpvY3cxLzBvbXh5R0JRNHpnU0cxeG43?=
- =?utf-8?B?V1dXRTdRVEFOQTVVU29QNFFUUzNIeDg4YWVoL1Vjcm9WckVPY25kOE9WbTlx?=
- =?utf-8?B?djBYVEk0czdSUFY3WUxaczE4TThtSXBOVHFEQmNwR3JOVUxNV04zZjkzKzdt?=
- =?utf-8?B?YUprc1djbHBPazR3OG0rUW5mL0p6VlZoK21zOStsY0JXTENBZW9pVTRCLys5?=
- =?utf-8?B?Rjg0M20rb1drRVZmVTgvOEpwSHFDQVlCZVQ0OXZwVTd6YW0renNpK2IvNEJG?=
- =?utf-8?B?cVdUS1NFcnhkcE1GWDlNK3FES2w3S3dSNFRUek94dnVIK2tpSk1uOThNMXBk?=
- =?utf-8?B?RW1LS204UkFnL25YK2htamZQVmNtRGVDNGxoSEdEUDFqWkpBYjFiK3pLTVJk?=
- =?utf-8?B?bEoyR2dra0w1c3VscHQyM2oycWRqU2pCRGNuWTRmR2ZxRTY1eGdnUT09?=
-X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: aa9cc63f-4370-42e6-2cd9-08da545e1fb8
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jun 2022 14:47:26.3262
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1jMoFD15jhrkZ+PCPTi3fDj3nJQoiL/dcVn/wBBQI1KNhjAf2Qq9bI01nSQiu1fbVo5LqWDNtVgTsx9LPdlFqA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB9015
+Content-Transfer-Encoding: 8bit
 
-On 22.06.2022 14:35, Michal Orzel wrote:
-> Hi Anthony,
-> 
-> On 21.06.2022 12:11, Anthony PERARD wrote:
->> The command line generated for headers++.chk by make is quite long,
->> and in some environment it is too long. This issue have been seen in
->> Yocto build environment.
->>
->> Error messages:
->>     make[9]: execvp: /bin/sh: Argument list too long
->>     make[9]: *** [include/Makefile:181: include/headers++.chk] Error 127
->>
->> Rework so that we do the foreach loop in shell rather that make to
->> reduce the command line size by a lot. We also need a way to get
->> headers prerequisite for some public headers so we use a switch "case"
->> in shell to be able to do some simple pattern matching. Variables
->> alone in POSIX shell don't allow to work with associative array or
->> variables with "/".
->>
->> Also rework headers99.chk as it has a similar implementation, even if
->> with only two headers to check the command line isn't too long at the
->> moment.
->>
->> Reported-by: Bertrand Marquis <Bertrand.Marquis@arm.com>
->> Fixes: 28e13c7f43 ("build: xen/include: use if_changed")
->> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
->> Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-> 
-> Reviewed-by: Michal Orzel <michal.orzel@arm.com>
+Introduce a new "xen,enhanced" dom0less property value "evtchn" to
+enable/disable event-channel interfaces for dom0less guests.
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+The configurable option is for domUs only. For dom0 we always set the
+corresponding property in the Xen code to true.
 
-> Tested-by: Michal Orzel <michal.orzel@arm.com>
-> 
-> Cheers,
-> Michal
+Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+---
+ xen/arch/arm/domain_build.c       | 149 ++++++++++++++++--------------
+ xen/arch/arm/include/asm/kernel.h |   3 +
+ 2 files changed, 82 insertions(+), 70 deletions(-)
+
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 8925f0d80c..a1c1ab5877 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1396,85 +1396,92 @@ static int __init make_hypervisor_node(struct domain *d,
+     if ( res )
+         return res;
+ 
+-    if ( !opt_ext_regions )
+-    {
+-        printk(XENLOG_INFO "%pd: extended regions support is disabled\n", d);
+-        nr_ext_regions = 0;
+-    }
+-    else if ( is_32bit_domain(d) )
+-    {
+-        printk(XENLOG_WARNING
+-               "%pd: extended regions not supported for 32-bit guests\n", d);
+-        nr_ext_regions = 0;
+-    }
+-    else
++    if ( kinfo->dom0less_enhanced )
+     {
+-        ext_regions = xzalloc(struct meminfo);
+-        if ( !ext_regions )
+-            return -ENOMEM;
+-
+-        if ( is_domain_direct_mapped(d) )
++        if ( !opt_ext_regions )
+         {
+-            if ( !is_iommu_enabled(d) )
+-                res = find_unallocated_memory(kinfo, ext_regions);
+-            else
+-                res = find_memory_holes(kinfo, ext_regions);
++            printk(XENLOG_INFO
++                   "%pd: extended regions support is disabled\n", d);
++            nr_ext_regions = 0;
+         }
+-        else
++        else if ( is_32bit_domain(d) )
+         {
+-            res = find_domU_holes(kinfo, ext_regions);
++            printk(XENLOG_WARNING
++                   "%pd: extended regions not supported for 32-bit guests\n", d);
++            nr_ext_regions = 0;
+         }
++        else
++        {
++            ext_regions = xzalloc(struct meminfo);
++            if ( !ext_regions )
++                return -ENOMEM;
+ 
+-        if ( res )
+-            printk(XENLOG_WARNING "%pd: failed to allocate extended regions\n",
+-                   d);
+-        nr_ext_regions = ext_regions->nr_banks;
+-    }
++            if ( is_domain_direct_mapped(d) )
++            {
++                if ( !is_iommu_enabled(d) )
++                    res = find_unallocated_memory(kinfo, ext_regions);
++                else
++                    res = find_memory_holes(kinfo, ext_regions);
++            }
++            else
++            {
++                res = find_domU_holes(kinfo, ext_regions);
++            }
+ 
+-    reg = xzalloc_array(__be32, (nr_ext_regions + 1) * (addrcells + sizecells));
+-    if ( !reg )
+-    {
+-        xfree(ext_regions);
+-        return -ENOMEM;
+-    }
++            if ( res )
++                printk(XENLOG_WARNING
++                       "%pd: failed to allocate extended regions\n", d);
++            nr_ext_regions = ext_regions->nr_banks;
++        }
+ 
+-    /* reg 0 is grant table space */
+-    cells = &reg[0];
+-    dt_child_set_range(&cells, addrcells, sizecells,
+-                       kinfo->gnttab_start, kinfo->gnttab_size);
+-    /* reg 1...N are extended regions */
+-    for ( i = 0; i < nr_ext_regions; i++ )
+-    {
+-        u64 start = ext_regions->bank[i].start;
+-        u64 size = ext_regions->bank[i].size;
++        reg = xzalloc_array(__be32, (nr_ext_regions + 1) * (addrcells + sizecells));
++        if ( !reg )
++        {
++            xfree(ext_regions);
++            return -ENOMEM;
++        }
+ 
+-        printk("%pd: extended region %d: %#"PRIx64"->%#"PRIx64"\n",
+-               d, i, start, start + size);
++        /* reg 0 is grant table space */
++        cells = &reg[0];
++        dt_child_set_range(&cells, addrcells, sizecells,
++                           kinfo->gnttab_start, kinfo->gnttab_size);
++        /* reg 1...N are extended regions */
++        for ( i = 0; i < nr_ext_regions; i++ )
++        {
++            u64 start = ext_regions->bank[i].start;
++            u64 size = ext_regions->bank[i].size;
+ 
+-        dt_child_set_range(&cells, addrcells, sizecells, start, size);
+-    }
++            printk("%pd: extended region %d: %#"PRIx64"->%#"PRIx64"\n",
++                   d, i, start, start + size);
+ 
+-    res = fdt_property(fdt, "reg", reg,
+-                       dt_cells_to_size(addrcells + sizecells) *
+-                       (nr_ext_regions + 1));
+-    xfree(ext_regions);
+-    xfree(reg);
++            dt_child_set_range(&cells, addrcells, sizecells, start, size);
++        }
+ 
+-    if ( res )
+-        return res;
++        res = fdt_property(fdt, "reg", reg,
++                           dt_cells_to_size(addrcells + sizecells) *
++                           (nr_ext_regions + 1));
++        xfree(ext_regions);
++        xfree(reg);
+ 
+-    BUG_ON(d->arch.evtchn_irq == 0);
++        if ( res )
++            return res;
++    }
+ 
+-    /*
+-     * Interrupt event channel upcall:
+-     *  - Active-low level-sensitive
+-     *  - All CPUs
+-     *  TODO: Handle properly the cpumask;
+-     */
+-    set_interrupt(intr, d->arch.evtchn_irq, 0xf, DT_IRQ_TYPE_LEVEL_LOW);
+-    res = fdt_property_interrupts(kinfo, &intr, 1);
+-    if ( res )
+-        return res;
++    if ( kinfo->dom0less_evtchn )
++    {
++        BUG_ON(d->arch.evtchn_irq == 0);
++
++        /*
++         * Interrupt event channel upcall:
++         *  - Active-low level-sensitive
++         *  - All CPUs
++         *  TODO: Handle properly the cpumask;
++        */
++        set_interrupt(intr, d->arch.evtchn_irq, 0xf, DT_IRQ_TYPE_LEVEL_LOW);
++        res = fdt_property_interrupts(kinfo, &intr, 1);
++        if ( res )
++            return res;
++    }
+ 
+     res = fdt_end_node(fdt);
+ 
+@@ -2891,7 +2898,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+             goto err;
+     }
+ 
+-    if ( kinfo->dom0less_enhanced )
++    if ( kinfo->dom0less_enhanced || kinfo->dom0less_evtchn )
+     {
+         ret = make_hypervisor_node(d, kinfo, addrcells, sizecells);
+         if ( ret )
+@@ -3346,11 +3353,11 @@ static int __init construct_domU(struct domain *d,
+          rc == -ENODATA ||
+          (rc == 0 && !strcmp(dom0less_enhanced, "enabled")) )
+     {
+-        if ( hardware_domain )
+-            kinfo.dom0less_enhanced = true;
+-        else
+-            panic("Tried to use xen,enhanced without dom0\n");
++        kinfo.dom0less_enhanced = true;
++        kinfo.dom0less_evtchn = true;
+     }
++    else if ( rc == 0 && !strcmp(dom0less_enhanced, "evtchn") )
++        kinfo.dom0less_evtchn = true;
+ 
+     if ( vcpu_create(d, 0) == NULL )
+         return -ENOMEM;
+@@ -3529,6 +3536,8 @@ static int __init construct_dom0(struct domain *d)
+ 
+     kinfo.unassigned_mem = dom0_mem;
+     kinfo.d = d;
++    kinfo.dom0less_enhanced = true;
++    kinfo.dom0less_evtchn = true;
+ 
+     rc = kernel_probe(&kinfo, NULL);
+     if ( rc < 0 )
+diff --git a/xen/arch/arm/include/asm/kernel.h b/xen/arch/arm/include/asm/kernel.h
+index c4dc039b54..7cff19b997 100644
+--- a/xen/arch/arm/include/asm/kernel.h
++++ b/xen/arch/arm/include/asm/kernel.h
+@@ -39,6 +39,9 @@ struct kernel_info {
+     /* Enable PV drivers */
+     bool dom0less_enhanced;
+ 
++    /* Enable event-channel interface */
++    bool dom0less_evtchn;
++
+     /* GIC phandle */
+     uint32_t phandle_gic;
+ 
+-- 
+2.25.1
 
 
