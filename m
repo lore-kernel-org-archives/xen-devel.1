@@ -4,36 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B45CCA47D
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 14:48:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.354039.581080 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD4DC43334
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 14:52:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.354078.581102 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o41eo-0001Mk-4M; Wed, 22 Jun 2022 14:48:38 +0000
+	id 1o41hx-0003j7-SQ; Wed, 22 Jun 2022 14:51:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 354039.581080; Wed, 22 Jun 2022 14:48:38 +0000
+Received: by outflank-mailman (output) from mailman id 354078.581102; Wed, 22 Jun 2022 14:51:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o41en-0001Mb-WA; Wed, 22 Jun 2022 14:48:37 +0000
-Received: by outflank-mailman (input) for mailman id 354039;
- Wed, 22 Jun 2022 14:48:36 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QBTv=W5=arm.com=rahul.singh@srs-se1.protection.inumbo.net>)
- id 1o41WV-0003uL-0k
- for xen-devel@lists.xenproject.org; Wed, 22 Jun 2022 14:40:03 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 323eee82-f239-11ec-bd2d-47488cf2e6aa;
- Wed, 22 Jun 2022 16:40:01 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0A0F0D6E;
- Wed, 22 Jun 2022 07:40:01 -0700 (PDT)
-Received: from e109506.cambridge.arm.com (e109506.cambridge.arm.com
- [10.1.199.62])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A02233F792;
- Wed, 22 Jun 2022 07:39:59 -0700 (PDT)
+	id 1o41hx-0003j0-Ow; Wed, 22 Jun 2022 14:51:53 +0000
+Received: by outflank-mailman (input) for mailman id 354078;
+ Wed, 22 Jun 2022 14:51:51 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>) id 1o41hv-0003iu-UI
+ for xen-devel@lists.xenproject.org; Wed, 22 Jun 2022 14:51:51 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1o41hv-0006dn-HC; Wed, 22 Jun 2022 14:51:51 +0000
+Received: from 54-240-197-231.amazon.com ([54.240.197.231]
+ helo=[192.168.1.223]) by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1o41hv-0002FW-Ar; Wed, 22 Jun 2022 14:51:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,57 +41,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 323eee82-f239-11ec-bd2d-47488cf2e6aa
-From: Rahul Singh <rahul.singh@arm.com>
-To: xen-devel@lists.xenproject.org
-Cc: bertrand.marquis@arm.com,
-	rahul.singh@arm.com,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 6/8] xen/evtchn: don't set notification in evtchn_bind_interdomain()
-Date: Wed, 22 Jun 2022 15:38:03 +0100
-Message-Id: <0cb096d37f2ac6cb7c5aa04cad7ad5377a0934db.1655903088.git.rahul.singh@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <cover.1655903088.git.rahul.singh@arm.com>
-References: <cover.1655903088.git.rahul.singh@arm.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=vGgKW0gVOm12CZhxUySqbYVfpcHSXjAYjivITo6fojQ=; b=qPKs1VaXZyvnzTNjY+ndc+nxNJ
+	AsAJqJTEzpcoXueRpsluPLPgbRUyoJ8BXVXrisozm+xG7lQLX4xegSVTLMEsExI8wproiJf5FyaQk
+	pQIin2XTe6yYcb7fN49KXJbdj56JLfOfT7V22WM9hUmTUqLiXVEpqzW+QuL7kfgY8MTs=;
+Message-ID: <2cdde2eb-33ac-568b-a0ae-b819b7b4161b@xen.org>
+Date: Wed, 22 Jun 2022 15:51:49 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.10.0
+Subject: Re: [PATCH 2/8] xen/evtchn: modify evtchn_alloc_unbound to allocate
+ specified port
+To: Rahul Singh <rahul.singh@arm.com>, xen-devel@lists.xenproject.org
+Cc: bertrand.marquis@arm.com, Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>
+References: <cover.1655903088.git.rahul.singh@arm.com>
+ <5ea66595248c41a011ac465bfabd7a7a40dcd565.1655903088.git.rahul.singh@arm.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <5ea66595248c41a011ac465bfabd7a7a40dcd565.1655903088.git.rahul.singh@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-evtchn_bind_interdomain() sets the notification on the local port to
-handle the lost notification on remote unbound port.
+Hi,
 
-Static event-channel will be created during domain creation, there is no
-need to set the notification as remote domain is not alive.
+On 22/06/2022 15:37, Rahul Singh wrote:
+> evtchn_alloc_unbound() always allocates the next available port. Static
+> event channel support for dom0less domains requires allocating a
+> specified port.
+> 
+> Modify the evtchn_alloc_unbound() to accept the port number as an
+> argument and allocate the specified port if available. If the port
+> number argument is zero, the next available port will be allocated.
 
-Signed-off-by: Rahul Singh <rahul.singh@arm.com>
----
- xen/common/event_channel.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+I haven't yet fully reviewed this series. But I would like to point out 
+that this opening a security hole (which I thought I had mention before) 
+that could be exploited by a guest at runtime.
 
-diff --git a/xen/common/event_channel.c b/xen/common/event_channel.c
-index cedc98ccaf..420d18b986 100644
---- a/xen/common/event_channel.c
-+++ b/xen/common/event_channel.c
-@@ -435,8 +435,13 @@ int evtchn_bind_interdomain(evtchn_bind_interdomain_t *bind, struct domain *ld,
-     /*
-      * We may have lost notifications on the remote unbound port. Fix that up
-      * here by conservatively always setting a notification on the local port.
-+     *
-+     * There is no need to set the notification if event channel is created in
-+     * Xen because domain is not created at this time and no chance of lost
-+     * notification.
-      */
--    evtchn_port_set_pending(ld, lchn->notify_vcpu_id, lchn);
-+    if ( !is_static )
-+        evtchn_port_set_pending(ld, lchn->notify_vcpu_id, lchn);
- 
-     double_evtchn_unlock(lchn, rchn);
- 
+You would need [1] or similar in order to fix the issue. I am wrote 
+"similar" because the patch could potentially be a problem if you allow 
+a guest to use FIFO (you may need to allocate a lot of memory to fill 
+the hole).
+
+Cheers,
+
+[1] 
+https://xenbits.xen.org/gitweb/?p=people/julieng/xen-unstable.git;a=commit;h=2d89486fcf11216331e58a21b367b8a9be1af725
+
 -- 
-2.25.1
-
+Julien Grall
 
