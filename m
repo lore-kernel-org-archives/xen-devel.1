@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73775CCA47E
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 06:39:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.353468.580408 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96CDCCCA47A
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jun 2022 06:39:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.353467.580399 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3u0m-0003fX-VS; Wed, 22 Jun 2022 06:38:48 +0000
+	id 1o3u0m-0003Uu-JM; Wed, 22 Jun 2022 06:38:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 353468.580408; Wed, 22 Jun 2022 06:38:48 +0000
+Received: by outflank-mailman (output) from mailman id 353467.580399; Wed, 22 Jun 2022 06:38:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o3u0m-0003d0-Mq; Wed, 22 Jun 2022 06:38:48 +0000
-Received: by outflank-mailman (input) for mailman id 353468;
+	id 1o3u0m-0003UX-Bk; Wed, 22 Jun 2022 06:38:48 +0000
+Received: by outflank-mailman (input) for mailman id 353467;
  Wed, 22 Jun 2022 06:38:47 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=zPYt=W5=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o3u0l-0003Ka-LP
+ id 1o3u0l-0003Ka-47
  for xen-devel@lists.xenproject.org; Wed, 22 Jun 2022 06:38:47 +0000
 Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id f655841f-f1f5-11ec-b725-ed86ccbb4733;
- Wed, 22 Jun 2022 08:38:44 +0200 (CEST)
+ id f5e3d974-f1f5-11ec-b725-ed86ccbb4733;
+ Wed, 22 Jun 2022 08:38:43 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 2FB3421BD0;
- Wed, 22 Jun 2022 06:38:44 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BFDE2134A9;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 848C021BC4;
  Wed, 22 Jun 2022 06:38:43 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EBDE3134A9;
+ Wed, 22 Jun 2022 06:38:42 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ECZ+LfO4smKNUAAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 22 Jun 2022 06:38:43 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id kIg2OPK4smKNUAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 22 Jun 2022 06:38:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,239 +53,263 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f655841f-f1f5-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: f5e3d974-f1f5-11ec-b725-ed86ccbb4733
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1655879924; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1655879923; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=m9f7VaM7LHywgL8edWFIK8hnsYgPrl1K1+9FwdnrA7I=;
-	b=vWn95FYtCaOSmLs/qVgOFeVWZTPG7+811NqLHkzlTvdHZAEM+uKhWNhSIzKroY9Tx4StIW
-	9LRziyk8K/BhqzQQjfPycSfV65ys+LzcM05IUG2+GeA5wdikMrBaGOgvb25qF1yd5sYE4g
-	biRC2G6v9qRHicsZBZzi4xvaKXdrFeE=
+	bh=JrITqNYCJEt3p9uYO0wGQLTJBftwCzF3rWhJ29DtcVs=;
+	b=LEA/Lbcr+fb+XPiMkM1yGYxA5BbKwaxYNMfiUx71lus0oa+mBHLcgLZJythOp+jufQvJfE
+	rRNiACi9JjKfiX9SUsk2QkkTNLoBd1ZQdhkjglt2Stw5sRmEk+20hiki1/6CwdqGn7qXMU
+	hU1vE+Rn+gPHaC8ciSxiI7YuVQLY9xI=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
-	linux-kernel@vger.kernel.org
+	linux-s390@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	virtualization@lists.linux-foundation.org
 Cc: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Sven Schnelle <svens@linux.ibm.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
 	Thomas Gleixner <tglx@linutronix.de>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	linux-arm-kernel@lists.infradead.org,
-	Viresh Kumar <viresh.kumar@linaro.org>
-Subject: [PATCH v3 3/3] xen: don't require virtio with grants for non-PV guests
-Date: Wed, 22 Jun 2022 08:38:38 +0200
-Message-Id: <20220622063838.8854-4-jgross@suse.com>
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Jason Wang <jasowang@redhat.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH v3 1/3] virtio: replace restricted mem access flag with callback
+Date: Wed, 22 Jun 2022 08:38:36 +0200
+Message-Id: <20220622063838.8854-2-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220622063838.8854-1-jgross@suse.com>
 References: <20220622063838.8854-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit fa1f57421e0b ("xen/virtio: Enable restricted memory access using
-Xen grant mappings") introduced a new requirement for using virtio
-devices: the backend now needs to support the VIRTIO_F_ACCESS_PLATFORM
-feature.
+Instead of having a global flag to require restricted memory access
+for all virtio devices, introduce a callback which can select that
+requirement on a per-device basis.
 
-This is an undue requirement for non-PV guests, as those can be operated
-with existing backends without any problem, as long as those backends
-are running in dom0.
+For convenience add a common function returning always true, which can
+be used for use cases like SEV.
 
-Per default allow virtio devices without grant support for non-PV
-guests.
+Per default use a callback always returning false.
 
-On Arm require VIRTIO_F_ACCESS_PLATFORM for devices having been listed
-in the device tree to use grants.
+As the callback needs to be set in early init code already, add a
+virtio anchor which is builtin in case virtio is enabled.
 
-Add a new config item to always force use of grants for virtio.
-
-Fixes: fa1f57421e0b ("xen/virtio: Enable restricted memory access using Xen grant mappings")
-Reported-by: Viresh Kumar <viresh.kumar@linaro.org>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V2:
-- remove command line parameter (Christoph Hellwig)
-V3:
-- rebase to callback method
----
- arch/arm/xen/enlighten.c     |  4 +++-
- arch/x86/xen/enlighten_hvm.c |  4 +++-
- arch/x86/xen/enlighten_pv.c  |  5 ++++-
- drivers/xen/Kconfig          |  9 +++++++++
- drivers/xen/grant-dma-ops.c  | 10 ++++++++++
- include/xen/xen-ops.h        |  6 ++++++
- include/xen/xen.h            |  8 --------
- 7 files changed, 35 insertions(+), 11 deletions(-)
+ arch/s390/mm/init.c              |  4 ++--
+ arch/x86/mm/mem_encrypt_amd.c    |  4 ++--
+ drivers/virtio/Kconfig           |  4 ++++
+ drivers/virtio/Makefile          |  1 +
+ drivers/virtio/virtio.c          |  4 ++--
+ drivers/virtio/virtio_anchor.c   | 18 ++++++++++++++++++
+ include/linux/platform-feature.h |  6 +-----
+ include/linux/virtio_anchor.h    | 19 +++++++++++++++++++
+ include/xen/xen.h                |  4 ++--
+ 9 files changed, 51 insertions(+), 13 deletions(-)
+ create mode 100644 drivers/virtio/virtio_anchor.c
+ create mode 100644 include/linux/virtio_anchor.h
 
-diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
-index 1f9c3ba32833..93c8ccbf2982 100644
---- a/arch/arm/xen/enlighten.c
-+++ b/arch/arm/xen/enlighten.c
-@@ -34,6 +34,7 @@
- #include <linux/timekeeping.h>
- #include <linux/timekeeper_internal.h>
- #include <linux/acpi.h>
+diff --git a/arch/s390/mm/init.c b/arch/s390/mm/init.c
+index 6a0ac00d5a42..4a154a084966 100644
+--- a/arch/s390/mm/init.c
++++ b/arch/s390/mm/init.c
+@@ -31,7 +31,6 @@
+ #include <linux/cma.h>
+ #include <linux/gfp.h>
+ #include <linux/dma-direct.h>
+-#include <linux/platform-feature.h>
+ #include <asm/processor.h>
+ #include <linux/uaccess.h>
+ #include <asm/pgalloc.h>
+@@ -48,6 +47,7 @@
+ #include <asm/kasan.h>
+ #include <asm/dma-mapping.h>
+ #include <asm/uv.h>
 +#include <linux/virtio_anchor.h>
+ #include <linux/virtio_config.h>
  
- #include <linux/mm.h>
- 
-@@ -443,7 +444,8 @@ static int __init xen_guest_init(void)
- 	if (!xen_domain())
- 		return 0;
- 
--	xen_set_restricted_virtio_memory_access();
-+	if (IS_ENABLED(CONFIG_XEN_VIRTIO))
-+		virtio_set_mem_acc_cb(xen_virtio_mem_acc);
- 
- 	if (!acpi_disabled)
- 		xen_acpi_guest_init();
-diff --git a/arch/x86/xen/enlighten_hvm.c b/arch/x86/xen/enlighten_hvm.c
-index 8b71b1dd7639..28762f800596 100644
---- a/arch/x86/xen/enlighten_hvm.c
-+++ b/arch/x86/xen/enlighten_hvm.c
-@@ -4,6 +4,7 @@
- #include <linux/cpu.h>
- #include <linux/kexec.h>
- #include <linux/memblock.h>
-+#include <linux/virtio_anchor.h>
- 
- #include <xen/features.h>
- #include <xen/events.h>
-@@ -195,7 +196,8 @@ static void __init xen_hvm_guest_init(void)
- 	if (xen_pv_domain())
+ pgd_t swapper_pg_dir[PTRS_PER_PGD] __section(".bss..swapper_pg_dir");
+@@ -175,7 +175,7 @@ static void pv_init(void)
+ 	if (!is_prot_virt_guest())
  		return;
  
--	xen_set_restricted_virtio_memory_access();
-+	if (IS_ENABLED(CONFIG_XEN_VIRTIO_FORCE_GRANT))
-+		virtio_set_mem_acc_cb(virtio_require_restricted_mem_acc);
+-	platform_set(PLATFORM_VIRTIO_RESTRICTED_MEM_ACCESS);
++	virtio_set_mem_acc_cb(virtio_require_restricted_mem_acc);
  
- 	init_hvm_pv_info();
- 
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index e3297b15701c..5aaae8a77f55 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -31,6 +31,7 @@
- #include <linux/gfp.h>
- #include <linux/edd.h>
- #include <linux/reboot.h>
+ 	/* make sure bounce buffers are shared */
+ 	swiotlb_init(true, SWIOTLB_FORCE | SWIOTLB_VERBOSE);
+diff --git a/arch/x86/mm/mem_encrypt_amd.c b/arch/x86/mm/mem_encrypt_amd.c
+index f6d038e2cd8e..97452688f99f 100644
+--- a/arch/x86/mm/mem_encrypt_amd.c
++++ b/arch/x86/mm/mem_encrypt_amd.c
+@@ -20,8 +20,8 @@
+ #include <linux/bitops.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/virtio_config.h>
 +#include <linux/virtio_anchor.h>
+ #include <linux/cc_platform.h>
+-#include <linux/platform-feature.h>
  
- #include <xen/xen.h>
- #include <xen/events.h>
-@@ -109,7 +110,9 @@ static DEFINE_PER_CPU(struct tls_descs, shadow_tls_desc);
+ #include <asm/tlbflush.h>
+ #include <asm/fixmap.h>
+@@ -245,7 +245,7 @@ void __init sev_setup_arch(void)
+ 	swiotlb_adjust_size(size);
  
- static void __init xen_pv_init_platform(void)
- {
--	xen_set_restricted_virtio_memory_access();
-+	/* PV guests can't operate virtio devices without grants. */
-+	if (IS_ENABLED(CONFIG_XEN_VIRTIO))
-+		virtio_set_mem_acc_cb(virtio_require_restricted_mem_acc);
+ 	/* Set restricted memory access for virtio. */
+-	platform_set(PLATFORM_VIRTIO_RESTRICTED_MEM_ACCESS);
++	virtio_set_mem_acc_cb(virtio_require_restricted_mem_acc);
+ }
  
- 	populate_extra_pte(fix_to_virt(FIX_PARAVIRT_BOOTMAP));
- 
-diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index bfd5f4f706bc..a65bd92121a5 100644
---- a/drivers/xen/Kconfig
-+++ b/drivers/xen/Kconfig
-@@ -355,4 +355,13 @@ config XEN_VIRTIO
- 
- 	  If in doubt, say n.
- 
-+config XEN_VIRTIO_FORCE_GRANT
-+	bool "Require Xen virtio support to use grants"
-+	depends on XEN_VIRTIO
-+	help
-+	  Require virtio for Xen guests to use grant mappings.
-+	  This will avoid the need to give the backend the right to map all
-+	  of the guest memory. This will need support on the backend side
-+	  (e.g. qemu or kernel, depending on the virtio device types used).
+ static unsigned long pg_level_to_pfn(int level, pte_t *kpte, pgprot_t *ret_prot)
+diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+index a6dc8b5846fe..ce93966575a1 100644
+--- a/drivers/virtio/Kconfig
++++ b/drivers/virtio/Kconfig
+@@ -1,6 +1,10 @@
+ # SPDX-License-Identifier: GPL-2.0-only
++config VIRTIO_ANCHOR
++	bool
 +
- endmenu
-diff --git a/drivers/xen/grant-dma-ops.c b/drivers/xen/grant-dma-ops.c
-index fc0142484001..8973fc1e9ccc 100644
---- a/drivers/xen/grant-dma-ops.c
-+++ b/drivers/xen/grant-dma-ops.c
-@@ -12,6 +12,8 @@
+ config VIRTIO
+ 	tristate
++	select VIRTIO_ANCHOR
+ 	help
+ 	  This option is selected by any driver which implements the virtio
+ 	  bus, such as CONFIG_VIRTIO_PCI, CONFIG_VIRTIO_MMIO, CONFIG_RPMSG
+diff --git a/drivers/virtio/Makefile b/drivers/virtio/Makefile
+index 0a82d0873248..8e98d24917cc 100644
+--- a/drivers/virtio/Makefile
++++ b/drivers/virtio/Makefile
+@@ -1,5 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0
+ obj-$(CONFIG_VIRTIO) += virtio.o virtio_ring.o
++obj-$(CONFIG_VIRTIO_ANCHOR) += virtio_anchor.o
+ obj-$(CONFIG_VIRTIO_PCI_LIB) += virtio_pci_modern_dev.o
+ obj-$(CONFIG_VIRTIO_PCI_LIB_LEGACY) += virtio_pci_legacy_dev.o
+ obj-$(CONFIG_VIRTIO_MMIO) += virtio_mmio.o
+diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
+index 6bace84ae37e..21e753fe1b50 100644
+--- a/drivers/virtio/virtio.c
++++ b/drivers/virtio/virtio.c
+@@ -2,10 +2,10 @@
+ #include <linux/virtio.h>
+ #include <linux/spinlock.h>
+ #include <linux/virtio_config.h>
++#include <linux/virtio_anchor.h>
+ #include <linux/module.h>
+ #include <linux/idr.h>
  #include <linux/of.h>
- #include <linux/pfn.h>
- #include <linux/xarray.h>
-+#include <linux/virtio_anchor.h>
-+#include <linux/virtio.h>
- #include <xen/xen.h>
- #include <xen/xen-ops.h>
- #include <xen/grant_table.h>
-@@ -287,6 +289,14 @@ bool xen_is_grant_dma_device(struct device *dev)
- 	return has_iommu;
- }
+-#include <linux/platform-feature.h>
+ #include <uapi/linux/virtio_ids.h>
  
-+bool xen_virtio_mem_acc(struct virtio_device *dev)
-+{
-+	if (IS_ENABLED(CONFIG_XEN_VIRTIO_FORCE_GRANT))
-+		return true;
-+
-+	return xen_is_grant_dma_device(dev->dev.parent);
-+}
-+
- void xen_grant_setup_dma_ops(struct device *dev)
- {
- 	struct xen_grant_dma_data *data;
-diff --git a/include/xen/xen-ops.h b/include/xen/xen-ops.h
-index 80546960f8b7..98c399a960a3 100644
---- a/include/xen/xen-ops.h
-+++ b/include/xen/xen-ops.h
-@@ -5,6 +5,7 @@
- #include <linux/percpu.h>
- #include <linux/notifier.h>
- #include <linux/efi.h>
+ /* Unique numbering for virtio devices. */
+@@ -174,7 +174,7 @@ static int virtio_features_ok(struct virtio_device *dev)
+ 
+ 	might_sleep();
+ 
+-	if (platform_has(PLATFORM_VIRTIO_RESTRICTED_MEM_ACCESS)) {
++	if (virtio_check_mem_acc_cb(dev)) {
+ 		if (!virtio_has_feature(dev, VIRTIO_F_VERSION_1)) {
+ 			dev_warn(&dev->dev,
+ 				 "device must provide VIRTIO_F_VERSION_1\n");
+diff --git a/drivers/virtio/virtio_anchor.c b/drivers/virtio/virtio_anchor.c
+new file mode 100644
+index 000000000000..4d6a5d269b55
+--- /dev/null
++++ b/drivers/virtio/virtio_anchor.c
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0-only
++#include <linux/virtio.h>
 +#include <linux/virtio_anchor.h>
- #include <xen/features.h>
- #include <asm/xen/interface.h>
- #include <xen/interface/vcpu.h>
-@@ -217,6 +218,7 @@ static inline void xen_preemptible_hcall_end(void) { }
- #ifdef CONFIG_XEN_GRANT_DMA_OPS
- void xen_grant_setup_dma_ops(struct device *dev);
- bool xen_is_grant_dma_device(struct device *dev);
-+bool xen_virtio_mem_acc(struct virtio_device *dev);
- #else
- static inline void xen_grant_setup_dma_ops(struct device *dev)
- {
-@@ -225,6 +227,10 @@ static inline bool xen_is_grant_dma_device(struct device *dev)
- {
- 	return false;
- }
-+static inline bool xen_virtio_mem_acc(struct virtio_device *dev)
++
++bool virtio_require_restricted_mem_acc(struct virtio_device *dev)
++{
++	return true;
++}
++EXPORT_SYMBOL_GPL(virtio_require_restricted_mem_acc);
++
++static bool virtio_no_restricted_mem_acc(struct virtio_device *dev)
 +{
 +	return false;
 +}
- #endif /* CONFIG_XEN_GRANT_DMA_OPS */
++
++bool (*virtio_check_mem_acc_cb)(struct virtio_device *dev) =
++	virtio_no_restricted_mem_acc;
++EXPORT_SYMBOL_GPL(virtio_check_mem_acc_cb);
+diff --git a/include/linux/platform-feature.h b/include/linux/platform-feature.h
+index b2f48be999fa..6ed859928b97 100644
+--- a/include/linux/platform-feature.h
++++ b/include/linux/platform-feature.h
+@@ -6,11 +6,7 @@
+ #include <asm/platform-feature.h>
  
- #endif /* INCLUDE_XEN_OPS_H */
+ /* The platform features are starting with the architecture specific ones. */
+-
+-/* Used to enable platform specific DMA handling for virtio devices. */
+-#define PLATFORM_VIRTIO_RESTRICTED_MEM_ACCESS	(0 + PLATFORM_ARCH_FEAT_N)
+-
+-#define PLATFORM_FEAT_N				(1 + PLATFORM_ARCH_FEAT_N)
++#define PLATFORM_FEAT_N				(0 + PLATFORM_ARCH_FEAT_N)
+ 
+ void platform_set(unsigned int feature);
+ void platform_clear(unsigned int feature);
+diff --git a/include/linux/virtio_anchor.h b/include/linux/virtio_anchor.h
+new file mode 100644
+index 000000000000..432e6c00b3ca
+--- /dev/null
++++ b/include/linux/virtio_anchor.h
+@@ -0,0 +1,19 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _LINUX_VIRTIO_ANCHOR_H
++#define _LINUX_VIRTIO_ANCHOR_H
++
++#ifdef CONFIG_VIRTIO_ANCHOR
++struct virtio_device;
++
++bool virtio_require_restricted_mem_acc(struct virtio_device *dev);
++extern bool (*virtio_check_mem_acc_cb)(struct virtio_device *dev);
++
++static inline void virtio_set_mem_acc_cb(bool (*func)(struct virtio_device *))
++{
++	virtio_check_mem_acc_cb = func;
++}
++#else
++#define virtio_set_mem_acc_cb(func) do { } while (0)
++#endif
++
++#endif /* _LINUX_VIRTIO_ANCHOR_H */
 diff --git a/include/xen/xen.h b/include/xen/xen.h
-index ac5a144c6a65..a99bab817523 100644
+index 0780a81e140d..ac5a144c6a65 100644
 --- a/include/xen/xen.h
 +++ b/include/xen/xen.h
-@@ -52,14 +52,6 @@ bool xen_biovec_phys_mergeable(const struct bio_vec *vec1,
+@@ -52,12 +52,12 @@ bool xen_biovec_phys_mergeable(const struct bio_vec *vec1,
  extern u64 xen_saved_max_mem_size;
  #endif
  
--#include <linux/virtio_anchor.h>
--
--static inline void xen_set_restricted_virtio_memory_access(void)
--{
--	if (IS_ENABLED(CONFIG_XEN_VIRTIO) && xen_domain())
--		virtio_set_mem_acc_cb(virtio_require_restricted_mem_acc);
--}
--
+-#include <linux/platform-feature.h>
++#include <linux/virtio_anchor.h>
+ 
+ static inline void xen_set_restricted_virtio_memory_access(void)
+ {
+ 	if (IS_ENABLED(CONFIG_XEN_VIRTIO) && xen_domain())
+-		platform_set(PLATFORM_VIRTIO_RESTRICTED_MEM_ACCESS);
++		virtio_set_mem_acc_cb(virtio_require_restricted_mem_acc);
+ }
+ 
  #ifdef CONFIG_XEN_UNPOPULATED_ALLOC
- int xen_alloc_unpopulated_pages(unsigned int nr_pages, struct page **pages);
- void xen_free_unpopulated_pages(unsigned int nr_pages, struct page **pages);
 -- 
 2.35.3
 
