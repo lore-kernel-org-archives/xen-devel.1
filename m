@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441C5CCA480
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jun 2022 09:46:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.354726.581978 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9242ACCA481
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jun 2022 09:46:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.354729.582006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4JPi-0008Lq-Ge; Thu, 23 Jun 2022 09:46:14 +0000
+	id 1o4JPl-0000X7-Fc; Thu, 23 Jun 2022 09:46:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 354726.581978; Thu, 23 Jun 2022 09:46:14 +0000
+Received: by outflank-mailman (output) from mailman id 354729.582006; Thu, 23 Jun 2022 09:46:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4JPi-0008Li-Bl; Thu, 23 Jun 2022 09:46:14 +0000
-Received: by outflank-mailman (input) for mailman id 354726;
- Thu, 23 Jun 2022 09:46:13 +0000
+	id 1o4JPl-0000Up-9F; Thu, 23 Jun 2022 09:46:17 +0000
+Received: by outflank-mailman (input) for mailman id 354729;
+ Thu, 23 Jun 2022 09:46:16 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=j28/=W6=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o4JPh-0008LX-BP
- for xen-devel@lists.xenproject.org; Thu, 23 Jun 2022 09:46:13 +0000
+ id 1o4JPk-0008LX-32
+ for xen-devel@lists.xenproject.org; Thu, 23 Jun 2022 09:46:16 +0000
 Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 503ee856-f2d9-11ec-bd2d-47488cf2e6aa;
+ id 508d46e9-f2d9-11ec-bd2d-47488cf2e6aa;
  Thu, 23 Jun 2022 11:46:11 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 14A8F1FD8A;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B6B731FD8B;
  Thu, 23 Jun 2022 09:46:11 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AED21133A6;
- Thu, 23 Jun 2022 09:46:10 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7291713AB2;
+ Thu, 23 Jun 2022 09:46:11 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id XCAtKWI2tGLmLwAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 23 Jun 2022 09:46:10 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 4A6NGmM2tGLmLwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 23 Jun 2022 09:46:11 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,14 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 503ee856-f2d9-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 508d46e9-f2d9-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1655977571; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=IIvicZRTKlJOBgOc3++ZHzJfG9P22jzec6L0MnajaIo=;
-	b=HPHaGgfyCZ84QyQjmgfwZPXBbLogxmzAtQTOZqyOqAI/F39MK0TO4DKhXNYcJSj4jo+eX1
-	4LEt8gm8/e7JyZ+Gah81gPbuDHtiUtkXXTogbdVwTdSRavynFnglvqajH+3ROrBcVj3ETO
-	NGKDudBRBG152w3cUPz/VLCVqB1q+AE=
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=JeJlzEy9S9HO3UBMbEaEgVpv+aw7L6zfG0jvSaFE4ro=;
+	b=XTE+RGVoZDWEOCRBYwyFcbohYpKJ0tpbYKgmRUWXHS0+VkUaHPYT85AzuVlQqwIoTHLAGh
+	tgsvveadD+BFZE0w4NEj2C0G9PIi/KMBvbG23r1w+/0eAt/LTSkuq9N7QERf5nCB7vjHbS
+	0Tqza47Z5amQO5OYJVc/LVLFHU2SiTw=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
@@ -70,31 +72,48 @@ Cc: Juergen Gross <jgross@suse.com>,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: [PATCH v2 0/3] x86: fix brk area initialization
-Date: Thu, 23 Jun 2022 11:46:05 +0200
-Message-Id: <20220623094608.7294-1-jgross@suse.com>
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v2 2/3] x86: fix setup of brk area
+Date: Thu, 23 Jun 2022 11:46:07 +0200
+Message-Id: <20220623094608.7294-3-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20220623094608.7294-1-jgross@suse.com>
+References: <20220623094608.7294-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The brk area needs to be zeroed initially, like the .bss section.
-At the same time its memory should be covered by the ELF program
-headers.
+Commit e32683c6f7d2 ("x86/mm: Fix RESERVE_BRK() for older binutils")
+put the brk area into the .bss..brk section (placed directly behind
+.bss), causing it not to be cleared initially. As the brk area is used
+to allocate early page tables, these might contain garbage in not
+explicitly written entries.
 
-Juergen Gross (3):
-  x86/xen: use clear_bss() for Xen PV guests
-  x86: fix setup of brk area
-  x86: fix .brk attribute in linker script
+This is especially a problem for Xen PV guests, as the hypervisor will
+validate page tables (check for writable page tables and hypervisor
+private bits) before accepting them to be used. There have been reports
+of early crashes of PV guests due to illegal page table contents.
 
- arch/x86/include/asm/setup.h  |  3 +++
- arch/x86/kernel/head64.c      |  4 +++-
- arch/x86/kernel/vmlinux.lds.S |  2 +-
- arch/x86/xen/enlighten_pv.c   |  8 ++++++--
- arch/x86/xen/xen-head.S       | 10 +---------
- 5 files changed, 14 insertions(+), 13 deletions(-)
+Fix that by letting clear_bss() clear the brk area, too.
 
+Fixes: e32683c6f7d2 ("x86/mm: Fix RESERVE_BRK() for older binutils")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ arch/x86/kernel/head64.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
+index e7e233209a8c..6a3cfaf6b72a 100644
+--- a/arch/x86/kernel/head64.c
++++ b/arch/x86/kernel/head64.c
+@@ -430,6 +430,8 @@ void __init clear_bss(void)
+ {
+ 	memset(__bss_start, 0,
+ 	       (unsigned long) __bss_stop - (unsigned long) __bss_start);
++	memset(__brk_base, 0,
++	       (unsigned long) __brk_limit - (unsigned long) __brk_base);
+ }
+ 
+ static unsigned long get_cmd_line_ptr(void)
 -- 
 2.35.3
 
