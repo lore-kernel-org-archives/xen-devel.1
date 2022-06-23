@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F68DCCA47C
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jun 2022 07:23:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.354451.581548 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1AEDC43334
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jun 2022 07:29:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.354465.581570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4HBX-000694-VD; Thu, 23 Jun 2022 07:23:27 +0000
+	id 1o4HGs-0007QN-1B; Thu, 23 Jun 2022 07:28:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 354451.581548; Thu, 23 Jun 2022 07:23:27 +0000
+Received: by outflank-mailman (output) from mailman id 354465.581570; Thu, 23 Jun 2022 07:28:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4HBX-00068x-S4; Thu, 23 Jun 2022 07:23:27 +0000
-Received: by outflank-mailman (input) for mailman id 354451;
- Thu, 23 Jun 2022 07:23:26 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o4HGr-0007QG-UE; Thu, 23 Jun 2022 07:28:57 +0000
+Received: by outflank-mailman (input) for mailman id 354465;
+ Thu, 23 Jun 2022 07:28:57 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=aspq=W6=arm.com=Bertrand.Marquis@srs-se1.protection.inumbo.net>)
- id 1o4HBW-00068o-E1
- for xen-devel@lists.xenproject.org; Thu, 23 Jun 2022 07:23:26 +0000
+ id 1o4HGr-0007QA-6l
+ for xen-devel@lists.xenproject.org; Thu, 23 Jun 2022 07:28:57 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr70074.outbound.protection.outlook.com [40.107.7.74])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 23fac311-f2c6-11ec-bd2d-47488cf2e6aa;
+ Thu, 23 Jun 2022 09:28:56 +0200 (CEST)
+Received: from DB6PR0201CA0009.eurprd02.prod.outlook.com (2603:10a6:4:3f::19)
+ by AM0PR08MB3315.eurprd08.prod.outlook.com (2603:10a6:208:5c::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.15; Thu, 23 Jun
+ 2022 07:28:53 +0000
+Received: from DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:4:3f:cafe::18) by DB6PR0201CA0009.outlook.office365.com
+ (2603:10a6:4:3f::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.15 via Frontend
+ Transport; Thu, 23 Jun 2022 07:28:53 +0000
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ DBAEUR03FT056.mail.protection.outlook.com (100.127.142.88) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5373.15 via Frontend Transport; Thu, 23 Jun 2022 07:28:53 +0000
+Received: ("Tessian outbound e40990bc24d7:v120");
+ Thu, 23 Jun 2022 07:28:52 +0000
+Received: from f7be18b06458.2
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 1920B1DE-94C7-4FB3-B2E6-BBA7A1EDD0C5.1; 
+ Thu, 23 Jun 2022 07:28:46 +0000
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2065.outbound.protection.outlook.com [40.107.21.65])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 5e70effc-f2c5-11ec-b725-ed86ccbb4733;
- Thu, 23 Jun 2022 09:23:24 +0200 (CEST)
-Received: from AS9PR06CA0727.eurprd06.prod.outlook.com (2603:10a6:20b:487::9)
- by VI1PR08MB4301.eurprd08.prod.outlook.com (2603:10a6:803:f7::13)
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id f7be18b06458.2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Thu, 23 Jun 2022 07:28:46 +0000
+Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
+ by AM7PR08MB5319.eurprd08.prod.outlook.com (2603:10a6:20b:dc::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.14; Thu, 23 Jun
- 2022 07:23:21 +0000
-Received: from AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
- (2603:10a6:20b:487:cafe::35) by AS9PR06CA0727.outlook.office365.com
- (2603:10a6:20b:487::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.16 via Frontend
- Transport; Thu, 23 Jun 2022 07:23:20 +0000
-Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
- AM5EUR03FT031.mail.protection.outlook.com (10.152.16.111) with
- Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.5373.15 via Frontend Transport; Thu, 23 Jun 2022 07:23:20 +0000
-Received: ("Tessian outbound 1766a3bff204:v120");
- Thu, 23 Jun 2022 07:23:19 +0000
-Received: from 3339cb0617c1.1
- by 64aa7808-outbound-1.mta.getcheckrecipient.com id
- 270EA737-B413-44B3-B412-0C0D5CBE7508.1; 
- Thu, 23 Jun 2022 07:23:13 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 3339cb0617c1.1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
- Thu, 23 Jun 2022 07:23:13 +0000
-Received: from AM6PR08MB3784.eurprd08.prod.outlook.com (2603:10a6:20b:85::25)
- by VI1PR08MB4526.eurprd08.prod.outlook.com (2603:10a6:803:f1::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.16; Thu, 23 Jun
- 2022 07:23:02 +0000
+ 2022 07:28:44 +0000
 Received: from AM6PR08MB3784.eurprd08.prod.outlook.com
  ([fe80::d9f0:12ef:bfa3:3adb]) by AM6PR08MB3784.eurprd08.prod.outlook.com
  ([fe80::d9f0:12ef:bfa3:3adb%5]) with mapi id 15.20.5353.022; Thu, 23 Jun 2022
- 07:23:02 +0000
+ 07:28:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -73,14 +73,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e70effc-f2c5-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: 23fac311-f2c6-11ec-bd2d-47488cf2e6aa
 ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
- b=IclGPQf6c9ddUt8tj199QjiQjjo6qIA1lFkj++60lxeqOxpacMvuO/TRiCo7PrD0gj+hrdz72cHzYpWNje767i7rESiWpmrJH1MhNpvLtxr/hMc+MefFFNKdi1XKPZiEp8905qRHEXjZVis4u/Qgup5f7tdw3fsMg8qNiRmS5isUk17Y73me+AyXC6sRBTqXQ4Ezr+tTpMdv+BIfT60MmsZqscNFOpx7tZSBq10h1PDo87vvo6wnGHJ0aETPp4D/2uxd09EhXw87nYeoYbOFCW3OmzhQluC+94pqDjfXwQpAbU6HPTQEgEFdJ7qRZ9ueY2n7fuNEoLXqLODnL70YLg==
+ b=dRP0eEd5zBRGeA9VoQOyn4JlYqTII/0yA/EZpvqLArcLLBI3QCSiKs17ijxqhTU3mRVcyX2L1FWI+Z25nq/y4qizRyH6f6rMSqvqtT6A/tWNusq/e6JtUseZtCwISVKHPNB8lCcgrWgmYgH946OaEvLqTwl0zIi2WGfT9JvLZ9xwOh4gef+6ZnsiwUL/PAiBCAVCi0doJ1zYQv4hY5Yzos2syR8EguhWD0PCRGDne/UTIUnuZaz+L2Nl91kVP09Xech4e+mgth+NbIdGlDq9+AE7HNIPmKqYT/vuXOo9UMKNwNc/Dfdefnx2L5AKVvAJWb0UO+FpQzCdYzZgRr8zSQ==
 ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MzNd+DFQj7zzWXf4w12CX13CUGMp8yTcSkyDCfjEFec=;
- b=KgIaHG1Item6e467LIPHjOYwd+Z8OD6xUdfCRjwx9GA8TrpMhTctumv7EakTQElwVZBt1ubnTSeqry4WROvSmB5gigtqWeaZHCfm8m1xEo1lMab7In0vhZEWp5ebQaqUP09KxZu0BkT57tHG+vmC/wmno41lkjGv5sEG5DeumksVg/RyTf8kheQ6T9Lv3+RLxcnemK/pAC+Yqj+1F54h1lPB1Krov7nsjqwWn3NJu/E7lpo6Q6nvJ1swAFpIJaoJeGXzYv7Zeerc/PpocfaEh3/ROa8caZfzTS07JFq7cZ8fAz7xsSy7hd4bNNB0iZX2RP2j41mjyI+c8lqtG5+gRQ==
+ bh=Q2ynpdqnA17p//ZIIwi5zlfvptLNFe7iUYUZOX7A33k=;
+ b=VmJGm20jWb5EppsBCTxwM1b6TntRemP7g9b54OCCVAbLA0DUxwZxev59m/Fph4GH0R0/HrwZq0s3D0fxpwhMMeN6OSyBPU7J2q22LREC4/IYGKfq2gd9lyrYI9r9MIcrrGBdvqyHw0p/7yPePwhO1HRYFmJrTIG0QzdEE8gN55NrwxVE/6cmTq2PxOQQIHqQO/RVfVT9/1V26T7YT+P+B6fv+dIsUkH+wtn/l9BJ5PYa1krfqVY/aKbh1KhyFJN/w5Hl1NIColIgLLNhvfOc+7QgOzXVyisTjPXxnvCyTjafGU+U25YZ0OrMFdH+i6InoGa3zsPBmAa9xSrfTDT/ww==
 ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
  63.35.35.123) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=arm.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
@@ -90,8 +90,8 @@ ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MzNd+DFQj7zzWXf4w12CX13CUGMp8yTcSkyDCfjEFec=;
- b=ODC5cvUsj2fUt2c72QY/HMOa0lhAe5uaAQ7aZUKpB4NPNlTN8JA99Z6rq7pBIu0HA5K/m9c91e6SAp1CW4ONvrnKxchnj8EBuVz4fW32Ze6kh3zp7qOkWTvNV9dH+rKQbH2OPG5wJoWuoHXclNO8lZwkSVWpKLTZy4sZNKww2nU=
+ bh=Q2ynpdqnA17p//ZIIwi5zlfvptLNFe7iUYUZOX7A33k=;
+ b=mxbiaIchI7buuar3UKA4TFVhFyzNjP/Dhg3qxxZ6MsjC5qcU1n/Fk43ANiKIWv9FudTsA+HeISk+eaIk4zXiLRPzsApbMsYeAJnHiL1IQPRzFDye/W5Z8c/B5kmK7lfhiVrOo9IAdEtlgm8KBjWqmlMMWBXl9gMMVCMCbogto2I=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
  smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
@@ -100,41 +100,48 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
  pr=C
 X-CheckRecipientChecked: true
-X-CR-MTA-CID: 99f0b3797824a904
+X-CR-MTA-CID: 1dbeb9f98070b095
 X-CR-MTA-TID: 64aa7808
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HzR1LQxkzOdsQrKTzdrSICMMTTdDL347ZPAdPvF/R1RpNH8sdAdTKxmsqP/kNbqMPsBVEkTc9YcwlajtfYqmON2eQbZP0gkU2gOhU9fyfj4XtX6DeRrc6P4hRXun6HVQ+G4FlL7IWCeXhK9BrpKTRksRbkFCIn8G2bn7YCtzBi7qNbVWIjuLU5Ily7sHtEJ1WLaSD4RomZie+EDfPRA1ZW2uwQ4R7g7EShtg6F9FWQiDTdXNbPAhZxXMgHOyP8TbNP9VW4Hr779+PL/9CVBTDwyXr3esamfNP6RHPacnyB5k3CLf/mJ2LfznjSgLGWjqwaTgkcEy3U3q1HFH6H6Img==
+ b=DDPQBql9p0hQCQt40EB7QwhrqsZEUTKlrHJ8ue7NfwCNMLg7+biek2gndd7vPME/0edqfuuu5BzXq9U4GyTmuRePmKcLQbtuBXJk0LGBBw0FYQyJm+3ranHk/QYFtDj2/Rc+H4iJTU6lNfPCicD9jVepUK1PTGkIV+6t1WfX2yBM5LB9fphse4vD68/v3J23bRJCWr0a++CNUMC1/GVsH1z0/zuONmDzuRH2S76PXIAlvSxTijDAcv9Te9K5w3oeqZZoQ2Zd8bhZL2o+SCEDPvzV+PStDIvSUFYUnuPq27Cj3koyZFdNa7NJ+iz2Ev//OJO4hvHL2HLIzBdMG2CqZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MzNd+DFQj7zzWXf4w12CX13CUGMp8yTcSkyDCfjEFec=;
- b=AXjSZ8bOuQRizIPQsHtbgMi7u2+YFzJQXGZMOWobxyx1oaM/Po9EUeoKLbgBGKZ8ahYNaws/QfZz5rS31Iv7D5Ag61X5CPihJO+qOIpSdsJPEjCroWnzRoCGmk9is3Eafh972D9N9dohqwJw7iQ+0gkYAQwmP2q2Ko+Cfghx+0aQ3sid09hsZQtkYYoKYtba2PPlNQQetqw+JR15VDnVh8oqh9pB7mH5aK8FUh9YhESIvTraTFNKPc8W4C3AO6oDkGnvKUsH6ywN7sAqI+kU83VZJ3fwwLyf8qYqo8jSItas11RgM03Er4pke+w8W5OFTse5/11sID9cDe/HakoUmw==
+ bh=Q2ynpdqnA17p//ZIIwi5zlfvptLNFe7iUYUZOX7A33k=;
+ b=dvm8klWj9SYmzsJNWpzzclbbHqQOvtpaMOt04CDd8KI7VSSlxL7cTDXSqjrCE6rft202K8tgEJgAieyuqLfXKejkeTeFMPeDPqBFetAF5qHGwAyUjFuQzDk+ASWFxdszc//Nwm7wGaIBeNAv0bTdMKKhZV/RXNi3btne9ef462cUp0ay6BaoIkEEPtY3sOR9jYQB6vK5x9Uwkj0B/2IpBqp56XH+ExIyn6TCyE6fGkDEsSU+3jxIRtDXUhrqseCr4/xLqRMy3lajfHGEgMglwVDDLXBMamSzCk4KpCb304Gyq3Mts6QIIuzXM+D+aBERuG9qEQ4plRGdN1F7UgmGmA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
  header.d=arm.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
  s=selector2-armh-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MzNd+DFQj7zzWXf4w12CX13CUGMp8yTcSkyDCfjEFec=;
- b=ODC5cvUsj2fUt2c72QY/HMOa0lhAe5uaAQ7aZUKpB4NPNlTN8JA99Z6rq7pBIu0HA5K/m9c91e6SAp1CW4ONvrnKxchnj8EBuVz4fW32Ze6kh3zp7qOkWTvNV9dH+rKQbH2OPG5wJoWuoHXclNO8lZwkSVWpKLTZy4sZNKww2nU=
+ bh=Q2ynpdqnA17p//ZIIwi5zlfvptLNFe7iUYUZOX7A33k=;
+ b=mxbiaIchI7buuar3UKA4TFVhFyzNjP/Dhg3qxxZ6MsjC5qcU1n/Fk43ANiKIWv9FudTsA+HeISk+eaIk4zXiLRPzsApbMsYeAJnHiL1IQPRzFDye/W5Z8c/B5kmK7lfhiVrOo9IAdEtlgm8KBjWqmlMMWBXl9gMMVCMCbogto2I=
 From: Bertrand Marquis <Bertrand.Marquis@arm.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, Wei Liu
-	<wl@xen.org>
-Subject: Re: [PATCH v3] xen: Add MISRA support to cppcheck make rule
-Thread-Topic: [PATCH v3] xen: Add MISRA support to cppcheck make rule
-Thread-Index: AQHYfKpzLyGOfeb87kCDJ/BIB2eZQa1anOUAgACd+ACAANB4AIAAn3sA
-Date: Thu, 23 Jun 2022 07:23:02 +0000
-Message-ID: <99E7CA0A-B87F-40D3-BE15-AA344AFB9855@arm.com>
-References:
- <82a29dff7a0da97cc6ad9d247a97372bcf71f17c.1654850751.git.bertrand.marquis@arm.com>
- <alpine.DEB.2.22.394.2206211658480.788376@ubuntu-linux-20-04-desktop>
- <FE2CD795-09AC-4AD0-8F08-8320FE7122C5@arm.com>
- <alpine.DEB.2.22.394.2206221445520.2352613@ubuntu-linux-20-04-desktop>
+To: Christopher Clark <christopher.w.clark@gmail.com>
+CC: Andrew Cooper <Andrew.Cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+	xen-devel <xen-devel@lists.xenproject.org>, Michal Orzel
+	<Michal.Orzel@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Daniel Smith
+	<dpsmith@apertussolutions.com>, Roger Pau Monne <roger.pau@citrix.com>,
+	George Dunlap <George.Dunlap@citrix.com>
+Subject: Re: XTF-on-ARM: Bugs
+Thread-Topic: XTF-on-ARM: Bugs
+Thread-Index:
+ AQHYhWH1+fjNtvukV0adEqGEdTB7sq1ZxCsAgAAXIgCAAAnTAIAAf4aAgAD4xwCAAEImgIAAAyaAgABEQYCAALP9gA==
+Date: Thu, 23 Jun 2022 07:28:43 +0000
+Message-ID: <D0C78CF7-FF51-42E5-92C2-02C4C71187D6@arm.com>
+References: <7f490d75-153d-7e1d-b3c0-5418ff7fdf8f@citrix.com>
+ <b8f05e22-c30d-d4b2-b725-9db91ee7a09d@xen.org>
+ <fd30be68-d1ac-b1bc-b3f1-cff589f338ee@citrix.com>
+ <c97de57c-4812-cdfc-f329-cc2e1d950dc7@xen.org>
+ <CACMJ4GY+H7P733_-UNgSd7P8+Z4ryeJwVy3QfekMJskkmh9btQ@mail.gmail.com>
+ <30BB31A7-F49C-4908-8053-74E31D03BD33@arm.com>
+ <36854512-23fe-57dc-3c47-5f996927872b@citrix.com>
+ <A06EA6F6-BBB5-4FDC-BEA0-E5C6EB6B445B@arm.com>
+ <CACMJ4Gb4CPDP5OmW+D50QCALvVo82rvw_7yO0ze0u5fh6ey_Pw@mail.gmail.com>
 In-Reply-To:
- <alpine.DEB.2.22.394.2206221445520.2352613@ubuntu-linux-20-04-desktop>
+ <CACMJ4Gb4CPDP5OmW+D50QCALvVo82rvw_7yO0ze0u5fh6ey_Pw@mail.gmail.com>
 Accept-Language: en-GB, en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -142,121 +149,176 @@ X-MS-TNEF-Correlator:
 x-mailer: Apple Mail (2.3696.100.31)
 Authentication-Results-Original: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
-X-MS-Office365-Filtering-Correlation-Id: 674a6026-7da1-4814-85b8-08da54e93fd0
+X-MS-Office365-Filtering-Correlation-Id: af14352f-bd84-497a-440f-08da54ea0642
 x-ms-traffictypediagnostic:
-	VI1PR08MB4526:EE_|AM5EUR03FT031:EE_|VI1PR08MB4301:EE_
+	AM7PR08MB5319:EE_|DBAEUR03FT056:EE_|AM0PR08MB3315:EE_
 X-Microsoft-Antispam-PRVS:
-	<VI1PR08MB43018C1F4A088F549C7D9A8E9DB59@VI1PR08MB4301.eurprd08.prod.outlook.com>
+	<AM0PR08MB3315E9E154EB2383EA5B90DA9DB59@AM0PR08MB3315.eurprd08.prod.outlook.com>
 x-checkrecipientrouted: true
 nodisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted: BCL:0;
 X-Microsoft-Antispam-Message-Info-Original:
- PCYZpKMpnhTOBDgfLB0EeSwFHtjqr7HAJBelQOJCQN+lHpC+/FRz/INcrls8oyacQgZ4NxeWwNrYV3XoUf62hxiMCflQjid/cSTOBeeFwX2JKY4+CNErEiZ6Scm7/z8X3bteeEuXoE2TgA7FbDWk32aKnDG662Dp8aM8To4AUl8rdIReYoif1iIkyvYxzF9k1fm1wz1bj8EBn0BFBZFFd9m2lphT28LHZcPpHU/KNEJfJOcuCHBWop+D6/FH7vVJxMUpy92GdkLkjB8qDZ2cedwKYEAUum13+in8vQe0YdMjqwEcjPj1tcGntN5jjzhy9Ti69W6GB/L5YZHaVUWuW2qO3UtADnkRbrJ2L+AHny3ltDEaOjrEWywJSeZj/kL47nna+c+0dXV8z9lJpnV1EX7kOCeLJ7vuAl4+UVT2FwlnzsALPjBGvathKRwjyPDKStgcvBGW9/mxDGHZj+fQkK/B7peVt6fnoLafgoKf7ESEHwY7nvQqA/LhdGSZ8WIIDpP1SfayDl+6+aygjoQTHGcDwLAsKx7/jYsdz6yKdv1eFMFjbCfyCa6C9V8OFnczlcISa9F80RTV3POygGDXT4ETX/Oqr4yt2ZPqWdpbK0bS1Dim7cVf/Xb3mSL1J6D0J1LMDgCkhepT+y8NEqZuMm0ab2hAl/bsm6Oqk5bqFMWWhn/LET0YkTlcg+t40wq3ASEEgLE7hWE79J+KjuK/G0l1K9gQ7Qr8mZWSdR/i/QLfuD5odVP/l6l2llckkNjowhe+/rkb9dCikB3sF8Rb7g9T1Dbb9ESErFbmj9OvF8A=
+ RvgdO/+pFZy3KE0ZpPnAXKmfQXKx3oCdmHMHqrUiC1FQxQqN4t/6GphJS3FyqUsw2MqDZHd3EL7wsUqMQkzdMgqVhG+UV6fXtEzHGSa0PCO0tnihNMrs4XxvAwUTHGJbJVDtlI8kA5tCXgiC4ek589pJL3gE5rM88t5MNlRWD1s8RwrwbdfMVxI4RUTLDGJyvOgl22WHb2kVQRTzCtndTRna1RhzaNzN7DAMPNVwbb9D01GZHTPrnJ2+pGI0vd3UgyuOYwLgc9iKopY06lWY13ovUdOihbWdbkSm57dKsZwNrUQcAEdaNlhJZt5u8asoGvjifcW6VcLnagrbkTcW4wzwdlX0Qt2yciW8oVdHGNBK98vth3w65dRUGZaGcUU0LsIA1sIJaJo++LLZ0H3ZlVLDJnmpU2E/NkPJhHFDe53VuCAk89m3EAgskOFg4qf3cIySJ+ICfgu4OX2MtqlzdeDb3jYsAYjHj5ybVLFk7O6FrORne2crarr+fjotbyFEpLbJ55dQwbtGXim/l/svrgZPykONH/Hw+HieNz9jj3fMN2vhblUXD4T4bQxMmDKxBj7gIRwmOo9DuWWP6OhPdLIO/wrc6StupiMQnLVuZG+s5CnKG3TpdgmL5wqApU9uriFHV5955lRRi3YdrGUAV6dV/IrcgHjaOFcTmc0EHoHwJPmwRhIplfNgJaTwmNyiFTQDBZwX2oKK+ZtTxcSq0o3b1D0vQ8BY6YcyTrdfWbUjDj6NeXDgD5vzedDDtC8oSP5ZSiKq/noERCqIl31YTxrrIs7PrFH1TSHXe7B8C1n4hIRAjE14zidDQZ0lqUhw14+Xpdw6fv4KPmY80cZP9w==
 X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(346002)(39860400002)(396003)(136003)(366004)(91956017)(53546011)(6506007)(6512007)(186003)(33656002)(36756003)(41300700001)(83380400001)(71200400001)(26005)(6486002)(478600001)(2616005)(5660300002)(54906003)(66446008)(64756008)(8676002)(316002)(6916009)(38100700002)(66946007)(4326008)(2906002)(122000001)(86362001)(66476007)(76116006)(66556008)(8936002)(38070700005)(45980500001);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR08MB3784.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(396003)(366004)(136003)(39860400002)(376002)(346002)(8676002)(71200400001)(66946007)(4326008)(54906003)(66476007)(66556008)(478600001)(86362001)(76116006)(6916009)(6506007)(36756003)(6512007)(64756008)(91956017)(186003)(83380400001)(2616005)(41300700001)(53546011)(66446008)(5660300002)(6486002)(33656002)(38100700002)(26005)(316002)(122000001)(8936002)(2906002)(966005)(38070700005)(45980500001);DIR:OUT;SFP:1101;
 Content-Type: text/plain; charset="us-ascii"
-Content-ID: <C40D88EB4FC5244D9BD20F8D78003EC9@eurprd08.prod.outlook.com>
+Content-ID: <1AAFBA371139884A9726D7BACAEAF290@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4526
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR08MB5319
 Original-Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=arm.com;
 X-EOPAttributedMessage: 0
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
+ DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	b485db9e-246d-4c68-1136-08da54e93570
+	29654a63-6a1e-44e0-b602-08da54ea00ca
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	73ptMjvmRE2XEaWxbPPgAL/G5Tgif4L7moz3crOvulgFernovNZBYL2imG5K8uO+z1Kr5kwVG5RaVqK0/qpxc9yz6aTcjby3d64Cinitf/BhEWw5AzYDbwIUdLgjZFP83QuEe3b4EXvazcHFk6ulPVlHpq99ArBKuPLUIfGrtW3zCWdfMk0jPdPichWYa/fJAsNdHGSHtXcMyz2YH550YQbvqcdrBDsDwhT6hl+VOfvpY4ELE0YZbzec53gJs6A4ip729uJTcqJS25QP+cOvTMyzXWQv5GRa5wer5x8mgFMo13PEfpHBSs31n1NU2ngv3MTqMR2lHMa6irD1HHP4sPHKrNBvwLT4ZHzrHrWqP399wdMyc7QlrjPDwPUr3kors2cjKaPWP23kTZ9M3lbPnDCi20vTieYMO1tEpKJ1wWm8DfstStaLphXBadJALHyyHoy0JXP6c+46qWxI4piGaJcv6TB/D82stXpJA2Aj8selnUCSnL0ra3+LInycSJi2lFuEWC9tkVajmRYazqA42fRE+mb6FSVMRFLl6fUeyCXDCLtOvwZLB/jWvZlOUXFzet62dnvEGKedL3AsBO3IU99L+4vrh22H/eRQnAcOMnMWT+ULcAEWXB1ttX2H3nRlCsFDLcQDlkOMSft46zeNHJz1EH1QVGIbLUAI06rMeBH/SwVBpz60/lKOxzdb3Qq4z+wxATcbP5tp2XNpf4aD4dt7BIDTmjyQ+eD2U05Qa+/nBLVSw6bleqlW2fwBsdotA+XfoqfOQa99CWtSakf5rg==
+	JVkCoEHDUzs0mPApxWeJ0LyFqke9Asf/+GrQBsxpoPPsDZZiz9HCqx8OcJ1fyyIZhpZuPoFHTz4nMdXxn02dLUtDR0BM9YXDBlECZUfDTbi/ucBnPZf2/8lucZNuNPq+BhkvyPV+P0MOhESTrcxIdbgnZPmm0vx0FdECvei5CAY4mgwM5BdZF0e8tdMxWFSe7iV4e/GaS0Uw/RbjHRX/ebkHs0ey0OtTyX5BxRyO5OkT2CqSUmiUMLb5iqprF0vuJ33DmMYKQ/B4OYcO8NBDFycSAhJ0ETgsM0Blu94Wvvjw9dFDWQJwFLWXCEi1Pe2czWAILC9w/iUsmja11veHBSM/ykWyXNTn280gmAOPVjPjOUof7DScHuqu5uoa037rfh4lx85km2a5bA6yBaWjGluIgJGE1PCLaX6JhyxaWXQ2IY7sU1m98ihAuqdPvAnBxI8JnnhMtw7UdqU7CX0juMXhIWg7AgaegZCF17inoGPCymewRmcG2KHaZdeFzz2yrZ2ljVS9klkHibfVrrvM6WhUvxfhXUCw+fHniJs5s6ju/h0NU0U61dvRAOi55EkAYnGysjc14dsIcY6Ts/GFyUXi0x6UEFiICzNpx8pG9PtzlIwaPtkUIxHIde11eJcgIXgSu7QHBs5cJHu/h1caJilHwO8qnty9jlQoEUKkEu0zcSQu/O4qfE/GzJLguNcEx8PLhvJoZpUwCPOcWhcVykrJ9ZOXpfTiTgaghu6dOx6cdEKvd7xfwGAp/O50zXGZc7yQNJHdLVHcgdZ9BGEYRYi6Wup3gKf8OGUdBAavfpQ=
 X-Forefront-Antispam-Report:
-	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(136003)(39860400002)(396003)(376002)(346002)(46966006)(40470700004)(36840700001)(40480700001)(36756003)(6862004)(186003)(5660300002)(6486002)(336012)(8936002)(478600001)(41300700001)(82740400003)(33656002)(83380400001)(2616005)(47076005)(40460700003)(356005)(86362001)(2906002)(26005)(8676002)(53546011)(6512007)(70206006)(70586007)(4326008)(54906003)(36860700001)(81166007)(6506007)(316002)(82310400005);DIR:OUT;SFP:1101;
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(376002)(39860400002)(396003)(136003)(346002)(46966006)(40470700004)(36840700001)(5660300002)(356005)(6512007)(478600001)(966005)(33656002)(53546011)(8936002)(26005)(6862004)(6506007)(40460700003)(316002)(2906002)(41300700001)(86362001)(6486002)(36860700001)(82740400003)(81166007)(336012)(40480700001)(186003)(82310400005)(107886003)(2616005)(54906003)(70206006)(4326008)(83380400001)(36756003)(8676002)(70586007)(47076005);DIR:OUT;SFP:1101;
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2022 07:23:20.0465
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2022 07:28:53.0433
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 674a6026-7da1-4814-85b8-08da54e93fd0
+X-MS-Exchange-CrossTenant-Network-Message-Id: af14352f-bd84-497a-440f-08da54ea0642
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
+	DBAEUR03FT056.eop-EUR03.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4301
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR08MB3315
 
-Hi Stefano,
+Hi Christopher,
 
-> On 22 Jun 2022, at 22:52, Stefano Stabellini <sstabellini@kernel.org> wro=
+> On 22 Jun 2022, at 21:44, Christopher Clark <christopher.w.clark@gmail.co=
+m> wrote:
+>=20
+> On Wed, Jun 22, 2022 at 9:40 AM Bertrand Marquis
+> <Bertrand.Marquis@arm.com> wrote:
+>>=20
+>> Hi Andrew,
+>>=20
+>>> On 22 Jun 2022, at 17:28, Andrew Cooper <Andrew.Cooper3@citrix.com> wro=
 te:
+>>>=20
+>>> On 22/06/2022 13:32, Bertrand Marquis wrote:
+>>>> Hi Andrew and Christopher,
+>>>>=20
+>>>> I will not dig into the details of the issues you currently have
+>>>> but it seems you are trying to re-do the work we already did
+>>>> and have been using for quite a while.
 >=20
-> On Wed, 22 Jun 2022, Bertrand Marquis wrote:
->> Hi Stefano,
+> Hi Bertrand - I apologise if it seems that way, and for the pace of
+> this being slower than you had been expecting to see.
+> I don't think I have actually been re-doing it and I'm grateful that
+> you have made your team's work available. I am working to get what you
+> need integrated into the upstream.
+
+We have not been informed of anything or requested to review any
+patch you are working on.
+Only information we see is a claim that there is a bug.
+
+>=20
+>>>> Currently we maintain the xtf on arm code in gitlab and we
+>>>> recently rebased it on the latest xtf master:
+>>>> https://gitlab.com/xen-project/people/bmarquis/xtf
+>>>>=20
+>>>> If possible I would suggest to start from there.
+>=20
+> Thanks - I will add this to the sources I am working with.
+
+Ok
+
+>=20
+>>>=20
+>>> Sorry to be blunt, but no. I've requested several times for that series
+>>> to be broken down into something which is actually reviewable, and
+>>> because that has not been done, I'm doing it at the fastest pace my
+>>> other priorities allow.
 >>=20
->>> On 22 Jun 2022, at 01:00, Stefano Stabellini <sstabellini@kernel.org> w=
-rote:
->>>=20
->>> On Fri, 10 Jun 2022, Bertrand Marquis wrote:
->>>> cppcheck MISRA addon can be used to check for non compliance to some o=
-f
->>>> the MISRA standard rules.
->>>>=20
->>>> Add a CPPCHECK_MISRA variable that can be set to "y" using make comman=
-d
->>>> line to generate a cppcheck report including cppcheck misra checks.
->>>>=20
->>>> When MISRA checking is enabled, a file with a text description suitabl=
-e
->>>> for cppcheck misra addon is generated out of Xen documentation file
->>>> which lists the rules followed by Xen (docs/misra/rules.rst).
->>>>=20
->>>> By default MISRA checking is turned off.
->>>>=20
->>>> While adding cppcheck-misra files to gitignore, also fix the missing /
->>>> for htmlreport gitignore
->>>>=20
->>>> Signed-off-by: Bertrand Marquis <bertrand.marquis@arm.com>
->>>=20
->>> Hi Bertrand,
->>>=20
->>> I tried this patch and I am a bit confused by the output
->>> cppcheck-misra.txt file that I get (appended.)
->>>=20
->>> I can see that there are all the rules from docs/misra/rules.rst as it
->>> should be together with the one line summary, but there are also a bunc=
-h
->>> of additional rules not present in docs/misra/rules.rst. Starting from
->>> Rule 1.1 all the way to Rule 21.21. Is the expected?
+>> You have not requested anything, we have been asking for a year
+>> what we could do to help without getting any answer.
+>=20
+> At Andy's request I had been looking into verifying the minimal
+> necessary pieces to get the 32-bit Arm platform implementation to
+> support a minimal stub test and also the XTF infrastructure (eg.
+> printf, xtf return code reporting) that wasn't present in the posted
+> work. The aim for doing that work was to build my familiarity with it
+> and inform judgement involved in ensuring that the initial pieces that
+> are merged into XTF have a maintainable structure to support each of
+> the architectures (and configurations of each) that we need.
+> It's taken longer than I wanted and it is clear that there is urgency
+> to getting 64-bit Arm support integrated.
+
+So you do not want our help and our code in its current form is not accepta=
+ble.
+
+>=20
 >>=20
->> To make cppcheck happy I need to give a text for all rules so the python=
- script is generating a dummy sentence for not declared Misra rules to prev=
-ent cppcheck warnings. To make it simpler I just did it for 1 to 22 for mai=
-n and sub numbers.
+>>>=20
+>>> Notice how 2/3 of the patches in the past year have been bits
+>>> specifically carved out of the ARM series, or improvements to prevent
+>>> the ARM series introducing technical debt. Furthermore, you've not
+>>> taken the "build ARM in CI" patch that I wrote specifically for you to
+>>> be part of the series, and you've got breakages to x86 from rebasing.
 >>=20
->> So yes this is expected.
+>> Which patch ? Where ? There was no communication on anything like that.
+>>=20
+>>>=20
+>>> At this point, I am not interested in seeing any work which is not
+>>> morphing (and mostly pruning) the arm-wip branch down into a set of
+>>> clean build system modifications that can bootstrap the
+>>> as-minimal-as-I-can-make-it stub.
+>>=20
+>> You cannot expect us to poll on all the possible branches that you are c=
+reating
+>> and simply rework what we did when you do something on some branch.
+>>=20
+>> We went through what you requested using GitHub and asked you at almost =
+all
+>> Xen Community Call what we could do to go further without getting any an=
+swer.
 >=20
-> No problem about the dummy text sentence. My question was why are all
-> those additional rules listed?
+> I will continue to be reachable via the Community Calls. I will have a
+> better understanding of what steps are needed next after reviewing the
+> branch that you have posted.
 >=20
-> If you see below, the first few rules from 2.1 to 20.14 are coming from
-> docs/misra/rules.rst. Why are the other rules afterward from 1.1 to
-> 21.21 listed and where are they coming from?
-
-Those are dummy entries generated by the python script.
-
+>> You are not interested in us contributing to XTF, this is understood.
 >=20
-> Is it because all rules need to be listed? And the ones that are enabled
-> are marked as "Required"?
-
-If a rule is not listed in the file, cppcheck will give a warning.
-
+> No, that's really not the case; your contributions are highly valued.
 >=20
-> I take we couldn't just avoid listing the other rules (the ones not in
-> docs/misra/rules.rst)?
+> There's a gap that needs to be closed here between the needs of the
+> contributors (ie. you guys), to have platform support working and
+> ability to make incremental contributions for new tests, and what the
+> maintainer is looking for: a structure that implements an intended
+> design -- that is difficult for contributors to know without having
+> documentation for it, which is again time-consuming to produce --
+> supporting the many target configurations in a coherent fashion, and
+> introduced in small, concise logical steps. It's compounded by the
+> fact that this is intricate system software where hardware
+> platform-specific details are critical for reviewers and contributors
+> to understand and implement exactly correctly.
+>=20
+> So: I'm working on closing the current gap, aiming to make meaningful
+> progress in the short term and can communicate with you more clearly
+> as to the status of that in the coming weeks.
+> I also think that once the initial platform support is merged, ongoing
+> contributions will be both easier to produce and easier to review, to
+> the advantage of all.
 
-I can but each cppcheck command will output a warning for each rule which h=
-as no description in the generated file.
+We will wait for all this to be available and at this stage we will check
+if we use it or if we keep our own fork.
+XTF porting was done as a base to develop Xen tests and, as it is
+ now redesigned and we have no idea how, I will not have resources
+anymore to assign on work on this.
+
+All this could have been done in the open, discussing the needs and
+involving the people who have tried to make this happen in the first place.
 
 Cheers
 Bertrand
