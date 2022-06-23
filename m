@@ -4,42 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD26C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Jun 2022 10:04:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.354786.582066 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 655E4C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Jun 2022 10:08:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.354782.582076 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4JhR-0006an-F7; Thu, 23 Jun 2022 10:04:33 +0000
+	id 1o4Jl8-0007E3-Vq; Thu, 23 Jun 2022 10:08:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 354786.582066; Thu, 23 Jun 2022 10:04:33 +0000
+Received: by outflank-mailman (output) from mailman id 354782.582076; Thu, 23 Jun 2022 10:08:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4JhR-0006ag-Bi; Thu, 23 Jun 2022 10:04:33 +0000
-Received: by outflank-mailman (input) for mailman id 354786;
- Thu, 23 Jun 2022 10:04:31 +0000
+	id 1o4Jl8-0007Dw-Sq; Thu, 23 Jun 2022 10:08:22 +0000
+Received: by outflank-mailman (input) for mailman id 354782;
+ Thu, 23 Jun 2022 10:01:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uSRO=W6=citrix.com=prvs=166c34e93=roger.pau@srs-se1.protection.inumbo.net>)
- id 1o4JhP-0006aZ-TI
- for xen-devel@lists.xenproject.org; Thu, 23 Jun 2022 10:04:31 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id dea4a1af-f2db-11ec-b725-ed86ccbb4733;
- Thu, 23 Jun 2022 12:04:30 +0200 (CEST)
-Received: from mail-bn8nam12lp2169.outbound.protection.outlook.com (HELO
- NAM12-BN8-obe.outbound.protection.outlook.com) ([104.47.55.169])
- by ob1.hc3370-68.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 23 Jun 2022 06:04:27 -0400
-Received: from DS7PR03MB5608.namprd03.prod.outlook.com (2603:10b6:5:2c9::18)
- by BLAPR03MB5460.namprd03.prod.outlook.com (2603:10b6:208:292::20) with
+ <SRS0=qyAp=W6=amd.com=ayan.kumar.halder@srs-se1.protection.inumbo.net>)
+ id 1o4Jel-0006WW-Ux
+ for xen-devel@lists.xenproject.org; Thu, 23 Jun 2022 10:01:48 +0000
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2077.outbound.protection.outlook.com [40.107.223.77])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 7cf71192-f2db-11ec-b725-ed86ccbb4733;
+ Thu, 23 Jun 2022 12:01:46 +0200 (CEST)
+Received: from SN6PR12MB2621.namprd12.prod.outlook.com (2603:10b6:805:73::15)
+ by DM6PR12MB3162.namprd12.prod.outlook.com (2603:10b6:5:15c::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.16; Thu, 23 Jun
- 2022 10:04:25 +0000
-Received: from DS7PR03MB5608.namprd03.prod.outlook.com
- ([fe80::40af:d5f4:95eb:d534]) by DS7PR03MB5608.namprd03.prod.outlook.com
- ([fe80::40af:d5f4:95eb:d534%7]) with mapi id 15.20.5353.022; Thu, 23 Jun 2022
- 10:04:25 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5353.17; Thu, 23 Jun
+ 2022 10:01:43 +0000
+Received: from SN6PR12MB2621.namprd12.prod.outlook.com
+ ([fe80::4047:c750:5bc6:19d7]) by SN6PR12MB2621.namprd12.prod.outlook.com
+ ([fe80::4047:c750:5bc6:19d7%7]) with mapi id 15.20.5353.022; Thu, 23 Jun 2022
+ 10:01:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,179 +48,266 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dea4a1af-f2db-11ec-b725-ed86ccbb4733
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1655978670;
-  h=date:from:to:cc:subject:message-id:references:
-   content-transfer-encoding:in-reply-to:mime-version;
-  bh=9ZTR3EuZ5cyPZfBX3ahgjowQzgyarign0HQwhQAoySo=;
-  b=E65IGgmcqtBqypRVCiGICV6SMpiSpKa6a42Fv3lK1XP3/s+dbO+RIEG3
-   NclkXlvgnRmq/0A9kBCgDf0BHnkhLNWxCcYoGz7Zo1fXsYagC+PyEKoEY
-   diBr1gu6NF1XI7Ie27RAsC7rooqCqWc0dL6pTJEv5uotqMzezVpg/7fd1
-   A=;
-X-IronPort-RemoteIP: 104.47.55.169
-X-IronPort-MID: 74242059
-X-IronPort-Reputation: None
-X-IronPort-Listener: OutboundMail
-X-IronPort-SenderGroup: RELAY_O365
-X-IronPort-MailFlowPolicy: $RELAYED
-IronPort-Data: A9a23:v/NgrqAnIWL7hBVW/+Liw5YqxClBgxIJ4kV8jS/XYbTApGh21GQFm
- 2YZDDyBPP+CN2Gme9klOYuzo0oDvp/Qy4AwQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMZiaA4E/raNANlFEkvU2ybuOU5NXsZ2YgH2eIdA970Ug5w7Bj2NY06TSEK1jlV
- e3a8pW31GCNg1aYAkpMg05UgEoy1BhakGpwUm0WPZinjneH/5UmJMt3yZWKB2n5WuFp8tuSH
- I4v+l0bElTxpH/BAvv9+lryn9ZjrrT6ZWBigVIOM0Sub4QrSoXfHc/XOdJFAXq7hQllkPgq8
- MwT9qGVYzwiHY7FqM0+TR9oFAxHaPguFL/veRBTsOS15mifKT7G5aUrC0s7e4oF5uxwHGdCs
- +QCLywAZQyCgOTwx6+nTu5rhYIoK8yD0IE34yk8i22GS6t7B8mdEs0m5vcBtNs0rtpJEvvEI
- dIQdBJkbQjaYg0JMVASYH47tLj03CWlK2AJwL6Tjaom/UPfwUt16qfgLOCNIvLWS8lFpknN8
- woq+Ey8WHn2Lue3yzCI73atje/nhj7gVcQZE7jQ3vx3hFyewEQDBRtQUkG0ydGikVK3Ud9bL
- 00S+wItoLI0+UjtScPyNzWnpFaUsxhaXMBfe8U25w2AxbDdyxqIDWgDCDhaYZops9FebSwn0
- BqFks3kARRrsaaJUjSN+7GMtzSwNCMJa2gYakcsQRMe5tj/oKk6lh/VUst4C6mxk8H0Hjfrh
- TuNqUADa647iMcK0+Cx+wDBijf1/JzRFFdrt0PQQ36v6R5/aMi9fYu05FPH7PFGaoGEUl2Gu
- 3tCkM+bhAwTMayweOW2aL1lNNmUCzytaVUwXXYH80EdygmQ
-IronPort-HdrOrdr: A9a23:s3wLgqhMV04sXpgKLZWvyGoIaHBQX0h13DAbv31ZSRFFG/FwyP
- rCoB1L73XJYWgqM03I+eruBEBPewK4yXdQ2/hoAV7EZnichILIFvAa0WKG+VHd8kLFltK1uZ
- 0QEJSWTeeAd2SS7vyKnzVQcexQp+VvmZrA7Ym+854ud3ANV0gJ1XYENu/xKDwTeOApP+taKH
- LKjfA32gZINE5nJ/iTNz0gZazuttfLnJXpbVovAAMm0hCHiXeN5KThGxaV8x8CW3cXqI1Sul
- Ttokjc3OGOovu7whjT2yv66IlXosLozp9mCNaXgsYYBz3wgkKDZZhnWZeFoDcpydvfoGoCoZ
- 3pmVMNLs5z43TeciWcpgbs4RDp1HIU53rr2Taj8A/eiP28YAh/J9tKhIpffBecwVEnpstA3K
- VC2H/cn4ZLDDvb9R6NqOTgZlVPrA6ZsHAimekcgzh0So0FcoJcqoQZ4Qd8DIoAJiTn84oqed
- MeQP003MwmMG9yUkqp/lWGmLeXLzcO91a9MwU/U/WuonZrdCsT9Tpb+CQd9k1wga7VBaM0ot
- gsCZ4Y5Y2mfvVmE56VO91xMfdfKla9Ni4kY1jiV2gOKsk8SgHwgq+yxokJz8eXX7FN5KcOuf
- 36ISFlXCgJCgjTNfE=
-X-IronPort-AV: E=Sophos;i="5.92,215,1650945600"; 
-   d="scan'208";a="74242059"
+X-Inumbo-ID: 7cf71192-f2db-11ec-b725-ed86ccbb4733
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YxuriB9+/Uwj2gYwY9bR3G6LBxhRpYG6yrQLtSHWLV4Zn/apdxSaSCxZSUG7L98vICVuiK6BUcjHhDdVt9NEPuaL7KTzo9PAcfaKHBSzvBjeCgpusvUdQFu7mcohy4P1GIw9j3cxu/q1zRschQEk4hpD9FOsONTvsJ1NkKguyKavjkTdAc9My+rX1irvcKeSmiJw9WmvnwKDduvh0wHzwR/f2FPLHRVXkp60drPjLO5FE3viIPO70e6P6550nAKlYmCxBmLwQG7Nnw9ZB+ld/z3NeYELaoMSHwMG/UZTzy5LOpLMDzKENmlT7z6Mtt1vVT711DsrswlxXjA1EfbMOg==
+ b=BAUdodlVXEMz28ush/AUBB2qdeafSHPKTqUcJIl7nKIzCP5uGxWCrVsbR8HURgt17L9kGHDuHkCbuIcq9eoXN91fDmonlLkQoGuVMGqvUT35vHSmPhU7wZFyAZt8hzfuCL3BE9fceqvro4Pbpf9biugpwkL7TWwRvLO1CjEIOTtLcXgdagSSN1s0XXtxdvnZp1Nu9zmluJ9kLckLGS7h4QGVeMHDyOhizT5UKYYRoOf0Z8rEfKe9wSwR9pzZtrSlPdTwPWRzrnP/J2psN21ts5rhrV5nvJl4+BLerM2EK5CfES/AwX4m9LfxN4t+aWQZd72JqVvPULLcRbE9+NgvPg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0gZi33ta667xHrZ5UVLCTN8JnDNrhI4y5VrLEgyrsF4=;
- b=GNFtW7TfaHt7O5Npq6PFTc3Mhg5y4RXjKTTUC5j/CIdp/5s424Fi1UQvkPiCd8xOAkQ9scSlzTxz8z6F6B85dZmT5L/IT+fkT+4zdXdQJN8tJNj5KawdItt+qVxZ0D3AcEnsmaibOhqkXqACYu+8YWsUqW9NR/ZriOJYfNqhPnJbQOC/caUgJSUWyIE9HEOvr3Xwbc5KhA1XoEueVBhemMOFch2l3BbIk8vi8fWdmQRChJm79NoCYchvuMhERT/u2TI2J3TtxkTAx2sbvSI7wsoLNllcqRJnX0BjrwZDKH+gIYJspbbBzAxGsnEUl1/G3TR+uJfBLUR5okmrjE7AWA==
+ bh=QchqiwzMhFPp3iADoHJex6tyQYZPXj1IG5hE14D1wWE=;
+ b=RFWL+GOxoKi8YMWBnID6HjIvqV4Wx7pllkRNMhijw4pvzQ6FNeVry0ub9e40H+UZSOgoCBjx3n9XCMWtkahcWG0AR1g6uf//4eNCd4JL34/tzbmj5GPEMQA09lUggBxHnYntYZvAmnfEi2djGkRxopYXs8epCs0/nyoKF/ss7EX2C1MtEAXB1XWk01K2E/YMobWEIl+M4SuIa091sADoXiWVG9Swqy5H1QGuM8mQVZr5siAlonPHNK9wvd00ck8qNRs+nVr3FWFHXkJI7bd6K616l5HMvZFQRmiuDTRh7pfjB0c3krGgfh0o+cXBRBJaD4BTNp66QMDc9sWvViFOLQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=citrix.onmicrosoft.com; s=selector2-citrix-onmicrosoft-com;
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0gZi33ta667xHrZ5UVLCTN8JnDNrhI4y5VrLEgyrsF4=;
- b=BK6tGXdr3GiMvlt4wO3uIk3IKRZQK7gj8omQSenV8tN3eb/pT0lFDf/ECmjRF6/L/LT/MtaL87RPhLmoHAa5z61K5QeTHk7dobEyFXgSx+6H+bHyNCTiVBkF0Ci7Lts0CK7kbvbH+WBNpoS7cVmzFvY2Oa3KbLv7JqsOeGeswaA=
+ bh=QchqiwzMhFPp3iADoHJex6tyQYZPXj1IG5hE14D1wWE=;
+ b=lbQvDnhqQoBW9v+6roV0ZYfpz1HbM9H6FAvOJidtxjAvFXuJ4Ph4HKvk4JjDVr+ndA7KHPyqppT0FWn2Snd7nlPbn5Gtt2eRr83Lzg/fprYH02cpF2lVCkAUSrmCsxPDWglCs1yeoVMb8DAZ0crZ1SCMq3+wX0LkNQa5IBW48x8=
 Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Date: Thu, 23 Jun 2022 12:04:20 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: George Dunlap <George.Dunlap@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <Andrew.Cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
-	Daniel de Graaf <dgdegra@tycho.nsa.gov>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Daniel Smith <dpsmith@apertussolutions.com>
-Subject: Re: [PATCH] MAINTAINERS: drop XSM maintainer
-Message-ID: <YrQ6pNrr3pbZ2THo@Air-de-Roger>
-References: <baa7d303-1fcc-cd59-0872-a930ea43734d@suse.com>
- <16b02586-43a5-0f67-5479-1d7b77aa892e@suse.com>
- <DE900420-7474-45AC-B363-519D1D51020A@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Message-ID: <94cca06c-8439-ec92-3bc7-8f2a69929beb@amd.com>
+Date: Thu, 23 Jun 2022 11:01:37 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.10.0
+Subject: Re: [Viryaos-discuss] [ImageBuilder] [PATCH 1/2] uboot-script-gen:
+ Skip dom0 instead of exiting if DOM0_KERNEL is not set
+From: Ayan Kumar Halder <ayankuma@amd.com>
+To: Xenia Ragiadakou <burzalodowa@gmail.com>, xen-devel@lists.xenproject.org
+Cc: viryaos-discuss@lists.sourceforge.net
+References: <20220619124316.378365-1-burzalodowa@gmail.com>
+ <80dc865b-f053-d9c9-b8d4-efb19abb2e49@amd.com>
+In-Reply-To: <80dc865b-f053-d9c9-b8d4-efb19abb2e49@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <DE900420-7474-45AC-B363-519D1D51020A@citrix.com>
-X-ClientProxiedBy: LO4P265CA0047.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2ac::14) To DS7PR03MB5608.namprd03.prod.outlook.com
- (2603:10b6:5:2c9::18)
+X-ClientProxiedBy: LO2P265CA0311.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:a5::35) To SN6PR12MB2621.namprd12.prod.outlook.com
+ (2603:10b6:805:73::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 11b2a931-14ce-4735-b174-08da54ffc0bd
-X-MS-TrafficTypeDiagnostic: BLAPR03MB5460:EE_
+X-MS-Office365-Filtering-Correlation-Id: fba06cf1-3c6a-4509-127c-08da54ff5ffb
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3162:EE_
 X-Microsoft-Antispam-PRVS:
-	<BLAPR03MB54606D62894C88BE2D45386E8FB59@BLAPR03MB5460.namprd03.prod.outlook.com>
+	<DM6PR12MB316263F597647D8758716A4ABCB59@DM6PR12MB3162.namprd12.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	0zkpJudPuNooIsn1E+UFfAWjyByFCWcjL+NjqdHAMlBZu9V9+dd4QUIuqR4CgDvydVBN8lIERS5Jx2qc1/ruLFgp+Qc7fkwb8Co2gaTgywYT8mK8tEPxTYSpb5P3Qv4P7+pf5o6+6kaKNZ5j3OgQeqopgi0LiMoOab8NQifX7g180E9AOESU7so0CB7mTuO/TpbpQ7X8RBKOIlnC2NU9+8Adg7ebfDuzyTc2E4hRlwA4rNHZR+bLq8CHRj2R8HptEwYfllaGNA+9FK7sfDr6dCehwvLDx5qmKI8CihAw6H6dUORFCyPIHv33aMu1Z1g+QPttLk3Gpy/o3zdUKbq2PkyK21EEGZ+Faxul/6+zTf7Dsz/MHy6xAl+WZCrV5rSWTpjBcm7ewV+gOCybJjz7JyQ3ZvazgMehXJ4n/peNFI5I6PJ73eOEkJMl3NL4sKnTQY1U68pDA84JGWdmL13z2gOjvS08pm+b+rmrJ3pw5gkToimUFaS391fJISUQhH17iwvkjm87ajkYEkfLlN6OSy9xdr9DoulqeRpqZSIHiKS2dOn0XSF693edhFCeixQkvNE3nbklUnk+viHU2aLRNPNl70P/kniwuABTvHE5n4CKWWYqRK5/jZaHp2sBu6Q+ki7XdWnLbplU4Z/PUm9tBwmUjH55bWbfNbXhep/QdpIfwdn62dd3uE5jWIA32WbkJhHybPMeZIIYW/7+J9jlYQ==
+	JF1g9IYPbZ1vsaYvzI/ktFfoS2+Ar2fzR967pCeEJi73s1Dsq4w6ZoIGDkewvsrnr+KdxNxhCZP5hwQ5cNLu0sbQfkW5YQw+8E8T4MOvS8Udno/iUn1WrT76myvE9aDfvtg4OZdZRe0gLa2Ona6jtDdQ5FtKo4uUP0/HxOW6eTocxWFY0mPIsT5/8H8Ru7OSVt0oqmRYmZSVeCICRWY2uxz85tqEXrryHSFP59o98fEhoQIYO3D6mqDuqA3LAPPJwWQHKOfd5wV7+BTqV3hIlRZU/1+fOD+gei4MOIHgZsPzGtfiHIytNp6dwJvfflrxb73/Mw0Cv9RcDmwnsZ4c/KohARLVkft/hxxNyRlJffe54WIvoPKmN6lNBrpglhX3oMFB9qVs0LkCjSK0ifi/YQ5HxQg+qfb86PysxFoq97YpZJf/ROW+q6/yZNQAI1r/xP8vfenK7Z25UtFaPKC4iAST8wgPV5it1xip9Wp8CxxAVDLjxP/QkISVZto6ZnvCye3jFFz67+LNcqFfkRQH+62Qo0GKTu5NvKwd7lN4Sn9eXgcgHLx6TyWP73u/HlZu2UyCHPLla9FSVCAGQ0mG/wTA25oMY7kgBg36S0vYb+fX1alq66/xz0Ur0AWMkg1n5KpUbtxkGZ0E/HFqgkK8rRimsrnkiPbm99DDlw4/Qhs+xvTN7n1sEljuY2yZO4+kWAdmv9hV9QjGDAKQws1QPbXFsBgqp9KNFLHGG9yRsSZihCvB8TJwCK3yLqxtwjyYJx5I8LbuqR9h2N5M2ZnIy7MQvvpApO5L+5ajAlgKpNs=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR03MB5608.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(7916004)(4636009)(396003)(366004)(346002)(136003)(39860400002)(376002)(6486002)(2906002)(186003)(86362001)(82960400001)(8936002)(8676002)(66946007)(4326008)(66476007)(38100700002)(66556008)(6862004)(478600001)(33716001)(5660300002)(316002)(6636002)(26005)(54906003)(6666004)(6512007)(85182001)(9686003)(41300700001)(53546011)(83380400001)(6506007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN6PR12MB2621.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(39860400002)(376002)(366004)(396003)(136003)(346002)(6666004)(4326008)(66476007)(66556008)(66946007)(316002)(186003)(31686004)(6486002)(36756003)(8676002)(478600001)(83380400001)(6512007)(8936002)(2616005)(38100700002)(41300700001)(53546011)(6506007)(5660300002)(2906002)(31696002)(26005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?UkhBVmt5b1RHQU9BaTdrekRSb3J2RjBzWkxRQ3VxN3ExWlBwekhYeUc3YlRw?=
- =?utf-8?B?UkFSMUZRelJuZ1ZZaGlDdzU1SUdFVDJoVTFYNGsvM0hoMW9JSW40VlY2b3B2?=
- =?utf-8?B?YURwWGZDMWJXUDBqUjQxdjVCbElOUmFBNXhBazdvWmVuT01laDNDV2drT1Vw?=
- =?utf-8?B?a255WDVjOTYxMTRxdm1kMCtJanRCUTZkTTB1alkzbGZkYWlMZkJCd1g5NzNC?=
- =?utf-8?B?NUNUcFpXWENXem1HZGdHbWlBSTlLNEk4aHhFWkpqY01WeFMvUnkzdUZTRU5a?=
- =?utf-8?B?N0NKU0RVNWNpS3VZOGJydU5kWTNFbytaR21xYlFLZ1BRMmowZWt6U09qYkR2?=
- =?utf-8?B?ZlVmdG9yOTd4N1pHSGRhRndueWxRMWp5MzJ4dXpXU1RDbHoya09oVUNhZDhW?=
- =?utf-8?B?RW9QQWQydTNtb211VmZCajR1QmRESG8xRUxkUHRNSlZDbjErN3BUZGxvS2JZ?=
- =?utf-8?B?WjFZVW5vV3kyUDJkM2xKRFI0TVFlWE5aSS9mMHdiUStCUGNEUDdpOEZyMDU1?=
- =?utf-8?B?R2dNMmgxTmpHM2xhMnp2SG1Ua1E1S2pGUHZOOWVmdmZiSHJ6OTJac0NaZllX?=
- =?utf-8?B?ZkNzNlp6dVZvTE54MUpsVVZkR2hFVW5ZY2s5QjlpTlQzK0VZL0llUHlxSVgz?=
- =?utf-8?B?UFVNQkVycDdyTWQ4UTFhenltbTJLKzBocjBqRzBhTUUvdUxLNFRnMnV4NXBn?=
- =?utf-8?B?OWdRVkNpRU41dFMyZFVQTnd6MWpJZzRBR1NPWTE1RHJ3RXZBb05ra3plSXY0?=
- =?utf-8?B?Q0RjeGx3d0cxOFhrZ21EY1BDTmNFNTl4VDBJK2xBc1lFcldUczBHaVJvMEF4?=
- =?utf-8?B?TU4ycGMxQm9BVUU5bi9Wc2JXQi83UUZ4WW1HMjQzNmxaNm5LMWJYM2RrWGtt?=
- =?utf-8?B?THJlV0Y4b3ZnOUp1VmNhNTBRRWFSRWQzSGlhQ1lJUFcycEtzOGx5MkhCaEI1?=
- =?utf-8?B?NC8rVVFXbHNpTW8zUUdYWDhSclhTdXNGaU9TaHlOcWpuSE43eW1lSTVOM3Q0?=
- =?utf-8?B?N0xNSU1qSXdzd0lyU2JXRjdjSGdlanRrWDliVzVOanNpY3dFNzYwSC9rQjRT?=
- =?utf-8?B?MUhRM1hJS1duT0hEck50UXFYRFJhdEZ1WEtJMFRMT1BLUDlnS3k4WjEvR1Bn?=
- =?utf-8?B?K1lJMk9rL0pIa2NzZnFwK0xFSGtuMis4NnVYU1o4S0ZGNlNHVmpOVEJkNlU2?=
- =?utf-8?B?SFljbitvNVM3VHpnRitTei9WWmdqNkRRVjBvODczRnhJTjhDeHZtUE9lb0o3?=
- =?utf-8?B?cnVFejR0czJKUmRmZ0FaNlJLWEJvNFZJamZSdXJKR280bEpqZmRudHdvd1du?=
- =?utf-8?B?WXVZcWFLK2Z4bkhrRVZld2ZkZi96UWowWVovZ2NCZHJlY3pzMy84NlF6cTZl?=
- =?utf-8?B?UjFzWWtpQWdWaTYxMkVPVEZuQTd3OGVhN3ZTL3NNL1RDUENVWnVSVGxsdE9h?=
- =?utf-8?B?QUhsMlVVaXZVWU85Ty9YMUNOTXhvcFltaENBd3hvUDZkTkFyYnNhTGlDWFd6?=
- =?utf-8?B?Y3hxaTlZY1hEem5nTjRSQm9vOGdVR2pJWC9rVG90bFc3Z2l3NUVrWXRHMlJQ?=
- =?utf-8?B?TEcxWkhyTFgxYUxvWVpvUnhzQklyZzFuVkRNOHRvU1pGMC9YN0tYVnQzd2Ir?=
- =?utf-8?B?SnFOL0I3Q2VMdHBhakhsQjByZE5YS1U1Q1RIMVg1RTdOY3Bxa1p1UFNTZ0Rz?=
- =?utf-8?B?dmx3VHBob0M3cU9XUE56MVdGUkRwVDl0VGQyaEIybjJiZWlyV0Z4Z0ZkM1U2?=
- =?utf-8?B?NHNvdS9INFVGVGtmUXpmYzJSYmpYTFQxRDZsaGs3S1Q1dzRTNUt3ZEovQzBz?=
- =?utf-8?B?RmJ4Ry9iNUQ3NnVteHozancxUGptazlCVnRFZXQrbEZpellZbTJEMmgzb3Jn?=
- =?utf-8?B?TVFIWWVIc1Z3Wk5QdVVkN1FhOC9aNTh5VEpZTFlSRjFNbVRDeEVreE5vbnZS?=
- =?utf-8?B?dVoya21PbXlDeUsyc3EzeHV3RTJHYW93VmNWOWhtTjhzOGQwWmpHWTd3NUJR?=
- =?utf-8?B?WnNqWHk0ZFg1TVBoNGRJd0ZNMGIrMWhIVTZFb3A1dkhFQ3hzdG1oN052dVY1?=
- =?utf-8?B?UllCOU5QbEVsOG1VVXQ5U3FId2ROa1lhVFFEOGlZcS9peks3MFJFOWhYNjZq?=
- =?utf-8?B?OU9USUFyTTgva3RPdi9LSzVyQ2h2TXkvQkRwNEZPTFBZUmlHK2V0VzdVWWlx?=
- =?utf-8?B?clE9PQ==?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11b2a931-14ce-4735-b174-08da54ffc0bd
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR03MB5608.namprd03.prod.outlook.com
+	=?utf-8?B?ZVhneDlVMUdGQzAwT3NySTU0b0xLbkhVd092L1AzZkw5MWQ4aVhiZUxmc3Uy?=
+ =?utf-8?B?akhRUSt3N2lSZTY4NGZaMGZ3S2NidXg2MXZlczBLQ0tDTmpSQXR5NFZNaHZ6?=
+ =?utf-8?B?ajBUWndDOXNSL3ZKZWRob2tIQkhNNllldUI5aDhVeHltZk9TUXlCd2F0ZjBw?=
+ =?utf-8?B?QW5YTUpLVjRPRzBId1JaczFHRzRaMllKeUQ3Z3lZZ0lFdVZ6YlFNQklxMFRR?=
+ =?utf-8?B?THhsR0c4T0N4Q3pkSnlPLzIrRnAyMTQ5dWVkK3Y0RWlkWStBTDQ1dlA5a3da?=
+ =?utf-8?B?N3FTTTlURU54SjlHOGN5NkttTzgwalc5eUJKTGNlTm0wQzdsdnViUlB6a2VV?=
+ =?utf-8?B?RHFOekRYeG1pYzJuN0ZTeFh6bVZHU280TFd1c2YzdjZOU3Z6U0x5ekF2Rkpr?=
+ =?utf-8?B?NnlVTEJPcWUrd2F2cVZHSHNzczFDdHRzKzhVbnhoZXhYQUlFOU12VmRNckEz?=
+ =?utf-8?B?dDNWazlUNEFJZ3pzQVhpZGVBNTU4UFd0bmpoNDRRL3NIeVJRMnNYYzZoUDY3?=
+ =?utf-8?B?SlAyVkxGTERicTkwa1ZzZXl4OUhIUDBOc1dIZy9sdEhHZjY5OHJPclEyaVFG?=
+ =?utf-8?B?NUIrY3lPajAyckNDTExUa1ZxclI0V3ZlTFZFcGYrUHFCaTdOZVdkNlZaL0Vs?=
+ =?utf-8?B?RWlObnFHKy9aRmRhZkh4cnFBL1lpT2JQRUI1cFVKQXhkR3Y0Nk5PSXpwb2xH?=
+ =?utf-8?B?ZUlIVDd4Y296aCtLU25aMk0rSGJ5RWQySEgwYjlwelNweFpCOU52cTVlRFlj?=
+ =?utf-8?B?ejFuaGVOODhVOGZpNTB3Slg4cEMzWHprSmVvejA4MUduMFhGbVZ3VGlIT3d4?=
+ =?utf-8?B?K05LT1FWMU9UR0VLdkVQckFrRnZHcWRTK0szZnA3OXByUldOZ05MTitFTGRk?=
+ =?utf-8?B?T2E2OXVET1p1S2pUdWVyQ0h6bnhsY0dicy9kYnFyd3ZHZGtKUC9POFR4aTN3?=
+ =?utf-8?B?RHRKRWNuWVdvMnF6VUN4SFBuZ1ovUk1vUUVPc3ZYSnpZRHBSd29zNWZESXFv?=
+ =?utf-8?B?V3NXMjg3OWVXd21Nd3dsNWVTcXlya2x3dW5wUWk2TmU0YURraEg0TDFwKzFk?=
+ =?utf-8?B?VEhMaEdxOGxidXBRdmZWUFVzMWdxU0NhT2lOREpOVUQ5dmVMd28rSnpxanR5?=
+ =?utf-8?B?OCt0VnVudHNRTGgzTlB3V3paSUpDSFNrc2VFYnVyZ0ljY0dIU1d1WnBVczJ1?=
+ =?utf-8?B?OTlxWng2RzdUcnN5U1AwOUJWN2JDbmV0SDhtSTNDV1Ixc0RmVjNDdGhyb0pK?=
+ =?utf-8?B?U1IyQitURWpQVnFTZVVRR0dheVgrOXVkWDV3MmxuRFIxMmxDM3FvTlU1OTR4?=
+ =?utf-8?B?VDU5eWpiL1g2b2xGb3dHMnd0RGxUZ3lFMXowQ3RnYXlRaW5EdEhWUDk3WTBQ?=
+ =?utf-8?B?NFBiRjNLd3VSazk4ZzJPQ05PSXZlOVpyRHBDRmkwSFgzb2EwcE92OFltNHJU?=
+ =?utf-8?B?dHFOMUtNeXRrV0s3dUFGMmNDZW1wTHhreDNvWnlxU2NkZUdtL1BiZUl1dUZv?=
+ =?utf-8?B?MzlYQ2w3MFZyZE9sOWVOdzlHWUNJUGZvSXFSSDdGODdvK3NqcG9yVU9Kbkk2?=
+ =?utf-8?B?Njg2RGxGYjRFTVg4MVRpYitxTDk1Qzh4SFZyTDZ4OUk1Y1Rjc2UvTEptQ2tt?=
+ =?utf-8?B?aU10bVYwajE1ZmkyVzJBR2UwMkgrRmEwbEZoTm9NNUZmZ0xCcHZhdXlDaUQr?=
+ =?utf-8?B?a29MQmsvYXpQblhmNXFGUXlYVmNBckxIcUdjMGgxclhvZ0FWS1dxM3RQaWRC?=
+ =?utf-8?B?cncydG9BWmNZTmNXK3pJSHRqSTZzOUF6c2JVb0gyanNLUWRYTlIxYjZjbGV2?=
+ =?utf-8?B?VmczREtSS2oyVHZTOU12MzlEZ2ErVG12NFNmNTJndzdLMHRadVRlWkViR1NV?=
+ =?utf-8?B?U21LbjVoOFFyQUt3RWlaMGtmSU1sTlpwU2IwczV4d05zMlRMN0Fva0lZRjRK?=
+ =?utf-8?B?bENLS2RVOVU0WFNvWWphaG9PZ0ljRTU2eVc4VDY3VldxTjdxM2RYcjV2WGxD?=
+ =?utf-8?B?ZHlpRkx5RVl5eHFjTDVlVFc3UzNSRWZvTk1LejJCNmtnWVp1QUxOME5PeldK?=
+ =?utf-8?B?WW82UmRvUnpnSXVtTGxvdmM0NUlueFpsYm0veVBmY2N3UFRjTjRQdzcwblRO?=
+ =?utf-8?B?UXZRQjdQczVLTlh0TUo3U1F5cFM3MlJwY0pzSGpSSWZwaDBQQi82ZGJmdVdq?=
+ =?utf-8?B?OUwxZU9INys5dStjelo3WGJSUnQvYTI4NVJXaHAxcXlJRFJXRjh0S1BRSENk?=
+ =?utf-8?B?VFVmeFZpbzJGSHFQWUg5Q1JnbkhLLzhGNE5Od0s2dTRzcUxYUnlGenVFOTlk?=
+ =?utf-8?B?VjF5SkVUY2dlai9EbFN6V25DeGdTblEyVitRSVJVeDdJcXdzT3RrZz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fba06cf1-3c6a-4509-127c-08da54ff5ffb
+X-MS-Exchange-CrossTenant-AuthSource: SN6PR12MB2621.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2022 10:04:25.5272
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2022 10:01:43.1436
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Eta5oaTnpH7rGu/XxzO1b4qnYRVW4M/G6xacRjMDK8qwCtPloRjaT2Fpf+EPdwPuRx+FbAKsu5RELjWsXt10LQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BLAPR03MB5460
+X-MS-Exchange-CrossTenant-UserPrincipalName: baY/sfUoILVSvrB5FzYPT0tsvUhEspVkZ3YzwEWgCkE9HTFLCVl/EWBdaUkGYYsUxxIOLLCX6t7AdXJfhygnUA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3162
 
-On Thu, Jun 23, 2022 at 09:56:34AM +0000, George Dunlap wrote:
-> 
-> 
-> > On 23 Jun 2022, at 08:43, Jan Beulich <jbeulich@suse.com> wrote:
-> > 
-> > On 09.06.2022 17:33, Jan Beulich wrote:
-> >> While mail hasn't been bouncing, Daniel has not been responding to patch
-> >> submissions or otherwise interacting with the community for several
-> >> years. Move maintainership to THE REST in kind of an unusual way, with
-> >> the goal to avoid
-> >> - orphaning the component,
-> >> - repeating all THE REST members here,
-> >> - removing the entry altogether.
-> >> 
-> >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> >> ---
-> >> We hope this to be transient, with a new maintainer to be established
-> >> rather sooner than later.
-> >> 
-> >> I realize the way I'm expressing this may upset scripts/*_maintainer*.pl,
-> >> so I'd welcome any better alternative suggestion.
-> > 
-> > Two weeks have passed. May I ask for an ack so this can go in?
-> 
-> I’m happy to give you my Ack re the maintainership change, but I’m not qualified to comment on whether it will screw up the get_maintainer script.  Perhaps it would be better to send a v2 patch, proposing Daniel Smith as a replacement, to avoid the question of the script entirely.
+(Resending mail, as the previous delivery failed)
 
-Maybe we should modify the script so that any sections that don't have
-any Maintainer assigned (no M:) fallback into the rest if that's not
-the case already?
-
-Thanks, Roger.
+On 21/06/2022 11:57, Ayan Kumar Halder wrote:
+> Hi Xenia,
+>
+> Thanks for the change. It looks good.
+>
+> Some points :-
+>
+> 1. In README.md, please mention in 'DOM0_KERNEL' description that it 
+> is an optional parameter. When user does not provide this, it 
+> generates a dom0less configuration.
+>
+> 2. In uboot-script-gen, please provide a check like this :-
+>
+> if test -z "$DOM0_KERNEL"
+>
+> then
+>
+>     if test "DOM0_MEM" || "DOM0_VCPUS" || "DOM0_COLORS" || "DOM0_CMD" 
+> || "DOM0_RAMDISK" || "DOM0_ROOTFS"
+>
+>     then
+>
+>         echo "For Domoless configuration, "DOM0_MEM" || "DOM0_VCPUS" 
+> || "DOM0_COLORS" || "DOM0_CMD" || "DOM0_RAMDISK" || "DOM0_ROOTFS" 
+> should not be defined
+>
+>         exit 1
+>
+>     fi
+>
+> fi
+>
+> The reason is that user should not be allowed to provide with an 
+> incorrect configuration.
+>
+> 3. Please test the patch for both dom0 and dom0less. The reason being 
+> such a change might break something. :)
+>
+> - Ayan
+>
+> On 19/06/2022 13:43, Xenia Ragiadakou wrote:
+>> When the parameter DOM0_KERNEL is not specified and NUM_DOMUS is not 0,
+>> instead of failing the script, just skip any dom0 specific setup.
+>> This way the script can be used to boot XEN in dom0less mode.
+>>
+>> Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
+>> ---
+>>   scripts/uboot-script-gen | 60 ++++++++++++++++++++++++++++------------
+>>   1 file changed, 43 insertions(+), 17 deletions(-)
+>>
+>> diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
+>> index 455b4c0..bdc8a6b 100755
+>> --- a/scripts/uboot-script-gen
+>> +++ b/scripts/uboot-script-gen
+>> @@ -168,10 +168,15 @@ function xen_device_tree_editing()
+>>       dt_set "/chosen" "#address-cells" "hex" "0x2"
+>>       dt_set "/chosen" "#size-cells" "hex" "0x2"
+>>       dt_set "/chosen" "xen,xen-bootargs" "str" "$XEN_CMD"
+>> -    dt_mknode "/chosen" "dom0"
+>> -    dt_set "/chosen/dom0" "compatible" "str_a" "xen,linux-zimage 
+>> xen,multiboot-module multiboot,module"
+>> -    dt_set "/chosen/dom0" "reg" "hex" "0x0 $dom0_kernel_addr 0x0 
+>> $(printf "0x%x" $dom0_kernel_size)"
+>> -    dt_set "/chosen" "xen,dom0-bootargs" "str" "$DOM0_CMD"
+>> +
+>> +    if test "$DOM0_KERNEL"
+>> +    then
+>> +        dt_mknode "/chosen" "dom0"
+>> +        dt_set "/chosen/dom0" "compatible" "str_a" "xen,linux-zimage 
+>> xen,multiboot-module multiboot,module"
+>> +        dt_set "/chosen/dom0" "reg" "hex" "0x0 $dom0_kernel_addr 0x0 
+>> $(printf "0x%x" $dom0_kernel_size)"
+>> +        dt_set "/chosen" "xen,dom0-bootargs" "str" "$DOM0_CMD"
+>> +    fi
+>> +
+>>       if test "$DOM0_RAMDISK" && test $ramdisk_addr != "-"
+>>       then
+>>           dt_mknode "/chosen" "dom0-ramdisk"
+>> @@ -203,7 +208,10 @@ function xen_device_tree_editing()
+>>               add_device_tree_static_mem "/chosen/domU$i" 
+>> "${DOMU_STATIC_MEM[$i]}"
+>>           fi
+>>           dt_set "/chosen/domU$i" "vpl011" "hex" "0x1"
+>> -        dt_set "/chosen/domU$i" "xen,enhanced" "str" "enabled"
+>> +        if test "$DOM0_KERNEL"
+>> +        then
+>> +            dt_set "/chosen/domU$i" "xen,enhanced" "str" "enabled"
+>> +        fi
+>>             if test "${DOMU_COLORS[$i]}"
+>>           then
+>> @@ -433,6 +441,19 @@ function xen_config()
+>>               DOM0_CMD="$DOM0_CMD root=$root_dev"
+>>           fi
+>>       fi
+>> +    if test -z "$DOM0_KERNEL"
+>> +    then
+>> +        if test "$NUM_DOMUS" -eq "0"
+>> +        then
+>> +            echo "Neither dom0 or domUs are specified, exiting."
+>> +            exit 1
+>> +        fi
+>> +        echo "Dom0 kernel is not specified, continue with dom0less 
+>> setup."
+>> +        unset DOM0_RAMDISK
+>> +        # Remove dom0 specific parameters from the XEN command line.
+>> +        local params=($XEN_CMD)
+>> +        XEN_CMD="${params[@]/dom0*/}"
+>> +    fi
+>>       i=0
+>>       while test $i -lt $NUM_DOMUS
+>>       do
+>> @@ -490,11 +511,13 @@ generate_uboot_images()
+>>     xen_file_loading()
+>>   {
+>> -    check_compressed_file_type $DOM0_KERNEL "executable"
+>> -    dom0_kernel_addr=$memaddr
+>> -    load_file $DOM0_KERNEL "dom0_linux"
+>> -    dom0_kernel_size=$filesize
+>> -
+>> +    if test "$DOM0_KERNEL"
+>> +    then
+>> +        check_compressed_file_type $DOM0_KERNEL "executable"
+>> +        dom0_kernel_addr=$memaddr
+>> +        load_file $DOM0_KERNEL "dom0_linux"
+>> +        dom0_kernel_size=$filesize
+>> +    fi
+>>       if test "$DOM0_RAMDISK"
+>>       then
+>>           check_compressed_file_type $DOM0_RAMDISK "cpio archive"
+>> @@ -597,14 +620,16 @@ bitstream_load_and_config()
+>>     create_its_file_xen()
+>>   {
+>> -    if test "$ramdisk_addr" != "-"
+>> +    if test "$DOM0_KERNEL"
+>>       then
+>> -        load_files="\"dom0_linux\", \"dom0_ramdisk\""
+>> -    else
+>> -        load_files="\"dom0_linux\""
+>> -    fi
+>> -    # xen below
+>> -    cat >> "$its_file" <<- EOF
+>> +        if test "$ramdisk_addr" != "-"
+>> +        then
+>> +            load_files="\"dom0_linux\", \"dom0_ramdisk\""
+>> +        else
+>> +            load_files="\"dom0_linux\""
+>> +        fi
+>> +        # xen below
+>> +        cat >> "$its_file" <<- EOF
+>>           dom0_linux {
+>>               description = "dom0 linux kernel binary";
+>>               data = /incbin/("$DOM0_KERNEL");
+>> @@ -616,6 +641,7 @@ create_its_file_xen()
+>>               $fit_algo
+>>           };
+>>       EOF
+>> +    fi
+>>       # domUs
+>>       i=0
+>>       while test $i -lt $NUM_DOMUS
 
