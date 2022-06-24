@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E8FCCA47E
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E9FCCA47F
 	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 09:12:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355322.582920 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.355320.582904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4fM1-0003XY-Fx; Fri, 24 Jun 2022 09:11:53 +0000
+	id 1o4fLz-0003Fg-UB; Fri, 24 Jun 2022 09:11:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355322.582920; Fri, 24 Jun 2022 09:11:53 +0000
+Received: by outflank-mailman (output) from mailman id 355320.582904; Fri, 24 Jun 2022 09:11:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4fM1-0003X3-Ao; Fri, 24 Jun 2022 09:11:53 +0000
-Received: by outflank-mailman (input) for mailman id 355322;
- Fri, 24 Jun 2022 09:11:52 +0000
+	id 1o4fLz-0003FZ-RI; Fri, 24 Jun 2022 09:11:51 +0000
+Received: by outflank-mailman (input) for mailman id 355320;
+ Fri, 24 Jun 2022 09:11:50 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1o4fM0-0003JW-51
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 09:11:52 +0000
+ (envelope-from <julien@xen.org>) id 1o4fLy-0003FN-EM
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 09:11:50 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1o4fLz-0001zI-Ti; Fri, 24 Jun 2022 09:11:51 +0000
+ id 1o4fLx-0001yy-L3; Fri, 24 Jun 2022 09:11:49 +0000
 Received: from 54-240-197-232.amazon.com ([54.240.197.232]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1o4fLz-0005kh-La; Fri, 24 Jun 2022 09:11:51 +0000
+ id 1o4fLx-0005kh-Bd; Fri, 24 Jun 2022 09:11:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -43,112 +43,71 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
-	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=axjB04kMHfN9pAzvy+jzI10okTa32BNLwJRPdmioDVM=; b=bXb8SxvJFtPDGp5SOcKBg1Un+d
-	KM5InCR6Jw3nm52QKRmf5r2E7AnV0tJ6Cf7M5EkDqXp6fpJiTVg9I2v16gz+XqJe+ii8oJAli2rUK
-	YFPwzm5f+f6vPcDe/u/Soo07Hk6KsV78yiFn9i+9evPycJJtrcCm2GP0Bin7Z+4F+5yE=;
+	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:
+	Subject:Cc:To:From; bh=LUUTzfKjE4shgj9dPHcr74fVufq6DTQHJU2cvaX2OrE=; b=RIq7QV
+	NEy1DfvZqLmWWUHFIGX3CrIQTQEipBgRkJD49+r7U1FMkrptrYmsEqd3QNLkDy2t2988R4DO5qm05
+	/qzI1XOUha9PMGmqDBn6wUqTMlz2QqefCQUI+XmEo2PJJcgP0afrUruSoBYnxa9i+xQvSSjk8Vnq9
+	zeFEkSEBQe0=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
 	Julien Grall <jgrall@amazon.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 2/7] xen/arm32: head.S: Introduce a macro to load the physical address of a symbol
-Date: Fri, 24 Jun 2022 10:11:41 +0100
-Message-Id: <20220624091146.35716-3-julien@xen.org>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH 0/7] xen/arm: mm: Bunch of clean-ups
+Date: Fri, 24 Jun 2022 10:11:39 +0100
+Message-Id: <20220624091146.35716-1-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20220624091146.35716-1-julien@xen.org>
-References: <20220624091146.35716-1-julien@xen.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-A lot of places in the ARM32 assembly requires to load the physical address
-of a symbol. Rather than open-coding the translation, introduce a new macro
-that will load the phyiscal address of a symbol.
+Hi all,
 
-Lastly, use the new macro to replace all the current open-coded version.
+This series is a collection of patches to clean-up the MM subsystem
+I have done in preparation for the next revision of "xen/arm: Don't
+switch TTBR while the MMU is on" [1].
 
-Note that most of the comments associated to the code changed have been
-removed because the code is now self-explanatory.
+Cheers,
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- xen/arch/arm/arm32/head.S | 23 +++++++++++------------
- 1 file changed, 11 insertions(+), 12 deletions(-)
+[1] https://lore.kernel.org/all/20220309112048.17377-1-julien@xen.org/
 
-diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
-index c837d3054cf9..77f0a619ca51 100644
---- a/xen/arch/arm/arm32/head.S
-+++ b/xen/arch/arm/arm32/head.S
-@@ -65,6 +65,11 @@
-         .endif
- .endm
- 
-+.macro load_paddr rb, sym
-+        ldr   \rb, =\sym
-+        add   \rb, \rb, r10
-+.endm
-+
- /*
-  * Common register usage in this file:
-  *   r0  -
-@@ -157,8 +162,7 @@ past_zImage:
- 
-         /* Using the DTB in the .dtb section? */
- .ifnes CONFIG_DTB_FILE,""
--        ldr   r8, =_sdtb
--        add   r8, r10                /* r8 := paddr(DTB) */
-+        load_paddr r8, _stdb
- .endif
- 
-         /* Initialize the UART if earlyprintk has been enabled. */
-@@ -208,8 +212,7 @@ GLOBAL(init_secondary)
-         mrc   CP32(r1, MPIDR)
-         bic   r7, r1, #(~MPIDR_HWID_MASK) /* Mask out flags to get CPU ID */
- 
--        ldr   r0, =smp_up_cpu
--        add   r0, r0, r10            /* Apply physical offset */
-+        load_paddr r0, smp_up_cpu
-         dsb
- 2:      ldr   r1, [r0]
-         cmp   r1, r7
-@@ -376,8 +379,7 @@ ENDPROC(cpu_init)
-         and   r1, r1, r2             /* r1 := slot in \tlb */
-         lsl   r1, r1, #3             /* r1 := slot offset in \tlb */
- 
--        ldr   r4, =\tbl
--        add   r4, r4, r10            /* r4 := paddr(\tlb) */
-+        load_paddr r4, \tbl
- 
-         movw  r2, #PT_PT             /* r2:r3 := right for linear PT */
-         orr   r2, r2, r4             /*           + \tlb paddr */
-@@ -536,8 +538,7 @@ enable_mmu:
-         dsb   nsh
- 
-         /* Write Xen's PT's paddr into the HTTBR */
--        ldr   r0, =boot_pgtable
--        add   r0, r0, r10            /* r0 := paddr (boot_pagetable) */
-+        load_paddr r0, boot_pgtable
-         mov   r1, #0                 /* r0:r1 is paddr (boot_pagetable) */
-         mcrr  CP64(r0, r1, HTTBR)
-         isb
-@@ -782,10 +783,8 @@ ENTRY(lookup_processor_type)
-  */
- __lookup_processor_type:
-         mrc   CP32(r0, MIDR)                /* r0 := our cpu id */
--        ldr   r1, = __proc_info_start
--        add   r1, r1, r10                   /* r1 := paddr of table (start) */
--        ldr   r2, = __proc_info_end
--        add   r2, r2, r10                   /* r2 := paddr of table (end) */
-+        load_paddr r1, __proc_info_start
-+        load_paddr r2, __proc_info_end
- 1:      ldr   r3, [r1, #PROCINFO_cpu_mask]
-         and   r4, r0, r3                    /* r4 := our cpu id with mask */
-         ldr   r3, [r1, #PROCINFO_cpu_val]   /* r3 := cpu val in current proc info */
+Julien Grall (7):
+  xen/arm: Remove most of the *_VIRT_END defines
+  xen/arm32: head.S: Introduce a macro to load the physical address of a
+    symbol
+  xen/arm: head: Add missing isb after writing to SCTLR_EL2/HSCTLR
+  xen/arm: mm: Add more ASSERT() in {destroy, modify}_xen_mappings()
+  xen/arm32: mm: Consolidate the domheap mappings initialization
+  xen/arm: mm: Move domain_{,un}map_* helpers in a separate file
+  xen/arm: mm: Reduce the area that xen_second covers
+
+ xen/arch/arm/Kconfig                |   1 +
+ xen/arch/arm/Makefile               |   1 +
+ xen/arch/arm/arm32/head.S           |  24 +--
+ xen/arch/arm/arm64/head.S           |   1 +
+ xen/arch/arm/domain_page.c          | 193 +++++++++++++++++++++++
+ xen/arch/arm/include/asm/arm32/mm.h |   8 +
+ xen/arch/arm/include/asm/config.h   |  19 +--
+ xen/arch/arm/include/asm/lpae.h     |  17 ++
+ xen/arch/arm/livepatch.c            |   2 +-
+ xen/arch/arm/mm.c                   | 231 ++++------------------------
+ xen/arch/arm/setup.c                |  21 ++-
+ xen/arch/x86/Kconfig                |   1 +
+ xen/arch/x86/include/asm/config.h   |   1 -
+ xen/common/Kconfig                  |   3 +
+ 14 files changed, 297 insertions(+), 226 deletions(-)
+ create mode 100644 xen/arch/arm/domain_page.c
+
 -- 
 2.32.0
 
