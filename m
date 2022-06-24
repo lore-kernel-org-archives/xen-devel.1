@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75C1FCCA483
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6BBCCA473
 	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:05:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355603.583347 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.355611.583438 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lnY-00059p-RB; Fri, 24 Jun 2022 16:04:44 +0000
+	id 1o4lnh-0007ZA-CV; Fri, 24 Jun 2022 16:04:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355603.583347; Fri, 24 Jun 2022 16:04:44 +0000
+Received: by outflank-mailman (output) from mailman id 355611.583438; Fri, 24 Jun 2022 16:04:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lnY-00059Z-Mq; Fri, 24 Jun 2022 16:04:44 +0000
-Received: by outflank-mailman (input) for mailman id 355603;
- Fri, 24 Jun 2022 16:04:42 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o4lnh-0007YT-7K; Fri, 24 Jun 2022 16:04:53 +0000
+Received: by outflank-mailman (input) for mailman id 355611;
+ Fri, 24 Jun 2022 16:04:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7mLY=W7=citrix.com=prvs=16756bcf7=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1o4lnW-0004qc-MM
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:42 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 58be9a20-f3d7-11ec-b725-ed86ccbb4733;
- Fri, 24 Jun 2022 18:04:39 +0200 (CEST)
+ id 1o4lnf-0004qb-Bx
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:51 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 5f689afe-f3d7-11ec-bd2d-47488cf2e6aa;
+ Fri, 24 Jun 2022 18:04:50 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 58be9a20-f3d7-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: 5f689afe-f3d7-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1656086679;
+  d=citrix.com; s=securemail; t=1656086690;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=SYJTJIKxHEFQcMKNpvz4kHz4LT/E8ZyffBaU/35UM+o=;
-  b=HmzEjoLDOpRxONKwf00fObo3vaIJ5nB6CgEG5DHe/38eBMK1hMnarIcz
-   rh/MIbAT//k992vK1EAAAxeD49R5VToSRF7Dij1YpAchiESf/wDhZYrXf
-   BuLLRGwonlTwa4LqTU1j1syPrT6w5ooL5Gn8DYZuCZ8+pQjC/Qqp6K6rh
-   0=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=06doEHilS6AKmsVA0dHPUnjlMaGNmuuqrJF1JZCOe3k=;
+  b=M392P2F8vHceH75PhI2aXuB9FTGIEnHWqlm6emfUcPvsJhII8Vy9WvHi
+   8sWeEZJ6dVXB9mLG3DSPs6MP9Uh1UoT9nbsamKSH71epL5yB47l1j+scZ
+   7kUW6YPk+gy+akZuAUJelKjb3uWM7tZCOgVW0fvz9/18/E4Rz/oPWW2dk
+   U=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 74362336
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 74384185
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:nXFssakeiBmCED/TfVVOVYLo5gzbJkRdPkR7XQ2eYbSJt1+Wr1Gzt
- xJNCGHUMvuIajb2ctEjYYvj8EIF6pHUmINrGQJvqCs9ESMWpZLJC+rCIxarNUt+DCFioGGLT
- Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2EgLd9IR2NYy24DnWV/V4
- 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
- v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
- NtxWZOYSwEvPfbdmeghaBhKEjlkP/B+opP7Li3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
- RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3s3d8zTbfHLA+TIrKWani7t5ExjYgwMtJGJ4yY
- uJGNWExNk+bPXWjPH88A4sHpqCpvEXvbmcAsHexo5E2u3ncmVkZPL/Fb4OOJ43iqd9utlmcj
- nLL+SL+GB5yHN6VxCeB83msrvTShi69U4UXfJWo+/gvjFCNy2g7DBwNSUD9sfS/klS5Wd9UN
- woT4CVGkEQp3BX1FJ+nBUT++SPa+E5HMzZNLwEkwAOLzKmP8geVOlMFXD9Zct57jJUaeTN/g
- zdlgOjV6SxTXKy9ECzAqO/P8GvtaUD5PkdZO3ZaEFJtD83L5dhq00mRFosL/Lud1IWdJN3m/
- 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiG2NPdXABaDzt6ooEWpgZgDpU
- II4s8af9vsSKpqGiTaARu4AdJnwuavbaGWN2AEzR8F+n9hIx5JFVdoIiN2ZDBcBDyr5UWWxP
- B+7Vf15vve/w0dGnYcoOtnsWqzGPIDrFMj/V+C8U+eilqNZLVfdlAk3PBb49zm0zCAEzPFuU
- b/GIJ3EJStLVsxaIM+eGr51PUkDnXtlmws+hPnTknya7FZpTCTEF+5bbATfNb5RAWHtiFy9z
- uuz/vCik313ONASqAGNmWLPBTjm9UQGOK0=
-IronPort-HdrOrdr: A9a23:B2ve5Kt8OtcuMScEm3JqsGLs7skDcNV00zEX/kB9WHVpmszxra
+IronPort-Data: A9a23:9k7tQqv6Z6iLx6UJV8NT3JcTVufnVB9eMUV32f8akzHdYApBsoF/q
+ tZmKWGGOfeKY2KkfIp1bI208x9T7ZOHxtc1G1NopHg9RSxB+JbJXdiXEBz9bniYRiHhoOOLz
+ Cm8hv3odp1coqr0/0/1WlTZhSAgk/nOHNIQMcacUsxLbVYMpBwJ1FQywYbVvqYy2YLjW13X5
+ YuoyyHiEATNNwBcYzp8B52r8HuDjNyq0N/PlgVjDRzjlAa2e0g9VPrzF4noR5fLatA88tqBb
+ /TC1NmEElbxpH/BPD8HfoHTKSXmSpaKVeSHZ+E/t6KK2nCurQRquko32WZ1he66RFxlkvgoo
+ Oihu6BcRi8oPbCRifgaWiMFHh9xfp1F5OPKIVWG5Jn7I03uKxMAwt1rBUAye4YZ5vx2ESdF8
+ vlwxDIlN07ZwbjsmfTiF7cq1p9LwMrDZevzvllpyy3ZCvA3B4jOWazQ6fdT3Ssqh9AIFvHbD
+ yYcQWUzN0ScOk0SUrsRIJkhsPuFt2uuTwYbiVTWuKNt3zPOzRMkhdABN/KKI4fXFK25hH2wu
+ Wbu72n/RBYAO7S32TeDt36hmOLLtSf6Q54JUq218OZwh1+ezXBVDwcZPWZXutHg1BT4AYgGb
+ RVJpGx+9sDe6XBHUPH8XADlsWKDtyRBVuRfUN059F2AyofttlPx6nc/ctJRVDA3nJZoGGJyj
+ QLRwIOB6S9H6+PMFy/EnluAhXbrYHVOczdfDcMRZVFdi+QPtr3fmf4mojxLNKeuxuP4Fjjrq
+ 9xhhHhv3u5D5SLnOkjSwLwmv95PjsKQJuLNzl+LNl9JFysgDGJfW6Sm6ELA8dFLJ5uDQ1+Ks
+ RAswpbDsrhWXMjSyHTVH43h+Y1FAd7faFUwZnY/d6TNChz3oyLzFWyuyGsWyLhV3jYsJmayP
+ R67VfJ5755PJnq6BZJKj3aKI51yl8DITI29PtiNN4YmSsUhJWevoXA1DWbNjj+FraTZufxmU
+ XttWZ33Vihy5GUO5GfeetrxJpdxl35nmz+MFMulp/lluJLHDEOopX4+GAPmRogEAGms+m05L
+ /432xO29ihi
+IronPort-HdrOrdr: A9a23:3Z4m0atrXF3O64HgX2SeRV7I7skDcNV00zEX/kB9WHVpmszxra
  +TdZMgpHjJYVcqKQgdcL+7WZVoLUmwyXcx2/hyAV7AZniDhILLFuFfBOLZqlWKcREWtNQtsJ
  uIG5IObuEYZmIVsS+V2mWF+q4bsbq6zJw=
 X-IronPort-AV: E=Sophos;i="5.92,218,1650945600"; 
-   d="scan'208";a="74362336"
+   d="scan'208";a="74384185"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH v3 04/25] tools/firmware/hvmloader: rework Makefile
-Date: Fri, 24 Jun 2022 17:04:01 +0100
-Message-ID: <20220624160422.53457-5-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v3 10/25] tools/xentop: rework makefile
+Date: Fri, 24 Jun 2022 17:04:07 +0100
+Message-ID: <20220624160422.53457-11-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220624160422.53457-1-anthony.perard@citrix.com>
 References: <20220624160422.53457-1-anthony.perard@citrix.com>
@@ -91,79 +88,100 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Setup proper dependencies with libacpi so we don't need to run "make
-hvmloader" in the "all" target. ("build.o" new prerequisite isn't
-exactly proper but a side effect of building the $(DSDT_FILES) is to
-generate the "ssdt_*.h" needed by "build.o".)
+Add "xentop" to "TARGETS" because this variable will be useful later.
 
-Make use if "-iquote" instead of a plain "-I".
+Always define all the targets, even when configured with
+--disable-monitor, instead don't visit the subdirectory.
+This mean xentop/ isn't visited anymore during "make clean" that's how
+most other subdirs in the tools/ works.
 
-For "roms.inc" target, use "$(SHELL)" instead of plain "sh". And use
-full path to "mkhex" instead of a relative one. Lastly, add "-f" flag
-to "mv", in case the target already exist.
+Also add missing "xentop" rules. It only works without it because we
+still have make's built-ins rules and variables, but fix this to not
+have to rely on them.
+
+Use $(TARGETS) with $(INSTALL_PROG), and thus install into the
+directory rather than spelling the program name.
+
+In the "clean" rule, use $(RM) and remove all "*.o" instead of just
+one object.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/firmware/hvmloader/Makefile | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
-index b754220839..fc20932110 100644
---- a/tools/firmware/hvmloader/Makefile
-+++ b/tools/firmware/hvmloader/Makefile
-@@ -60,8 +60,7 @@ ROMS += $(ROMBIOS_ROM) $(STDVGA_ROM) $(CIRRUSVGA_ROM)
- endif
+Notes:
+    v2:
+    - use $(RM) in clean.
+    - remove all *.o instead of just one object in "clean" rule.
+    - in "install" rule, make use of $(TARGETS). install into a dir rather
+      than to a specific path, in case there's more targets.
+
+ tools/Makefile        |  2 +-
+ tools/xentop/Makefile | 21 +++++++++------------
+ 2 files changed, 10 insertions(+), 13 deletions(-)
+
+diff --git a/tools/Makefile b/tools/Makefile
+index 79b4c7e3de..0c1d8b64a4 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -17,7 +17,7 @@ SUBDIRS-$(CONFIG_XCUTILS) += xcutils
+ SUBDIRS-$(CONFIG_X86) += firmware
+ SUBDIRS-y += console
+ SUBDIRS-y += xenmon
+-SUBDIRS-y += xentop
++SUBDIRS-$(XENSTAT_XENTOP) += xentop
+ SUBDIRS-y += libfsimage
+ SUBDIRS-$(CONFIG_Linux) += vchan
+ 
+diff --git a/tools/xentop/Makefile b/tools/xentop/Makefile
+index 0034114684..7bd96f34d5 100644
+--- a/tools/xentop/Makefile
++++ b/tools/xentop/Makefile
+@@ -13,36 +13,33 @@
+ XEN_ROOT=$(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
+ 
+-ifneq ($(XENSTAT_XENTOP),y)
+-.PHONY: all install xentop uninstall
+-all install xentop uninstall:
+-else
+-
+ CFLAGS += -DGCC_PRINTF -Werror $(CFLAGS_libxenstat)
+ LDLIBS += $(LDLIBS_libxenstat) $(CURSES_LIBS) $(TINFO_LIBS) $(SOCKET_LIBS) -lm
+ CFLAGS += -DHOST_$(XEN_OS)
+ 
+ # Include configure output (config.h)
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-LDFLAGS += $(APPEND_LDFLAGS)
++
++TARGETS := xentop
  
  .PHONY: all
--all: acpi
--	$(MAKE) hvmloader
-+all: hvmloader
- 
- .PHONY: acpi
- acpi:
-@@ -73,12 +72,15 @@ smbios.o: CFLAGS += -D__SMBIOS_DATE__="\"$(SMBIOS_REL_DATE)\""
- ACPI_PATH = ../../libacpi
- DSDT_FILES = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c
- ACPI_OBJS = $(patsubst %.c,%.o,$(DSDT_FILES)) build.o static_tables.o
--$(ACPI_OBJS): CFLAGS += -I. -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
-+$(ACPI_OBJS): CFLAGS += -iquote . -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
- CFLAGS += -I$(ACPI_PATH)
- vpath build.c $(ACPI_PATH)
- vpath static_tables.c $(ACPI_PATH)
- OBJS += $(ACPI_OBJS)
- 
-+$(DSDT_FILES): acpi
-+build.o: $(DSDT_FILES)
+-all: xentop
++all: $(TARGETS)
 +
- hvmloader: $(OBJS) hvmloader.lds
- 	$(LD) $(LDFLAGS_DIRECT) -N -T hvmloader.lds -o $@ $(OBJS)
++xentop: xentop.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS) $(APPEND_LDFLAGS)
  
-@@ -87,21 +89,21 @@ roms.inc: $(ROMS)
+ .PHONY: install
+-install: xentop
++install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
+-	$(INSTALL_PROG) xentop $(DESTDIR)$(sbindir)/xentop
++	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(sbindir)
  
- ifneq ($(ROMBIOS_ROM),)
- 	echo "#ifdef ROM_INCLUDE_ROMBIOS" >> $@.new
--	sh ../../misc/mkhex rombios $(ROMBIOS_ROM) >> $@.new
-+	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex rombios $(ROMBIOS_ROM) >> $@.new
- 	echo "#endif" >> $@.new
- endif
+ .PHONY: uninstall
+ uninstall:
+ 	rm -f $(DESTDIR)$(sbindir)/xentop
  
- ifneq ($(STDVGA_ROM),)
- 	echo "#ifdef ROM_INCLUDE_VGABIOS" >> $@.new
--	sh ../../misc/mkhex vgabios_stdvga $(STDVGA_ROM) >> $@.new
-+	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex vgabios_stdvga $(STDVGA_ROM) >> $@.new
- 	echo "#endif" >> $@.new
- endif
- ifneq ($(CIRRUSVGA_ROM),)
- 	echo "#ifdef ROM_INCLUDE_VGABIOS" >> $@.new
--	sh ../../misc/mkhex vgabios_cirrusvga $(CIRRUSVGA_ROM) >> $@.new
-+	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex vgabios_cirrusvga $(CIRRUSVGA_ROM) >> $@.new
- 	echo "#endif" >> $@.new
- endif
--	mv $@.new $@
-+	mv -f $@.new $@
- 
+-endif
+-
  .PHONY: clean
  clean:
+-	rm -f xentop xentop.o $(DEPS_RM)
++	$(RM) *.o $(TARGETS) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
 -- 
 Anthony PERARD
 
