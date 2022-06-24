@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A139CCA482
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:05:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355608.583406 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2236CCA47E
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:05:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.355604.583352 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lnd-0006ej-PQ; Fri, 24 Jun 2022 16:04:49 +0000
+	id 1o4lnZ-0005Gw-6p; Fri, 24 Jun 2022 16:04:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355608.583406; Fri, 24 Jun 2022 16:04:49 +0000
+Received: by outflank-mailman (output) from mailman id 355604.583352; Fri, 24 Jun 2022 16:04:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lnd-0006dn-LP; Fri, 24 Jun 2022 16:04:49 +0000
-Received: by outflank-mailman (input) for mailman id 355608;
- Fri, 24 Jun 2022 16:04:48 +0000
+	id 1o4lnZ-0005G9-0X; Fri, 24 Jun 2022 16:04:45 +0000
+Received: by outflank-mailman (input) for mailman id 355604;
+ Fri, 24 Jun 2022 16:04:43 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7mLY=W7=citrix.com=prvs=16756bcf7=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1o4lnc-0004qb-0f
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:48 +0000
+ id 1o4lnX-0004qb-4T
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:43 +0000
 Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
  [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5e372a70-f3d7-11ec-bd2d-47488cf2e6aa;
- Fri, 24 Jun 2022 18:04:46 +0200 (CEST)
+ id 5b111485-f3d7-11ec-bd2d-47488cf2e6aa;
+ Fri, 24 Jun 2022 18:04:41 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,49 +38,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5e372a70-f3d7-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 5b111485-f3d7-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1656086686;
+  d=citrix.com; s=securemail; t=1656086681;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=Qi8ktRfGxKz6TVNBfNc+szyw4+rNfchyhf2q4Nw7GMs=;
-  b=LhGgRGkZtR1KvHYOYtPeJ8I9EBTe2tOk3L7sVfvykV5m0NkLWdoTvdVB
-   wdPP8OOo70hhqoulII07BDuzjRjYy9mN2waisjtA6vXcQHcMIh1tUEitD
-   mo+fqBZOr7ERPTyMimC3VRqP2PEoykcF5dFCVzfKPOY57VnKvvAX+JGqd
-   U=;
+  bh=X2aENXxRDTAvXRj798ueb4NLH5aVs5M0JBRhVknZte8=;
+  b=ClH0kvo4KWT9e2A7r9j16XV0jbMcL3LF/JMm5WwQvBma3xrDRMGVnMIB
+   McTVEtvGsIi/A34gmkNST27LPlkbFX8jq+c2QOV7Q9FsK4IjB139Ikr4M
+   vf2/8cxq0pXuak6cpX5vWuz97UdnfvsUVbcvzouNPAKCxXsYLcENqxRM3
+   4=;
 Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 73702017
+X-MesageID: 73701974
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:3wOXxq2nMSAqJSfmN/bD5Zpxkn2cJEfYwER7XKvMYLTBsI5bp2FSx
- 2UYXz+Hb/uKajH0fthyaom28UJS78TcnNYyQFNlpC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkjk7xdOCn9xGQ7InQLlbGILes1htZGEk1Ek/NtTo5w7Rj2tAy3YDja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /1uvLqSZiAABZbn2/4WDRoASyVRJpNZreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNamFO
- JJDMWMwBPjGSwVsIUYpOIo8p7ihpGHPVxJ+91LWjJNitgA/yyQuieOwYbI5YOeiWsF9jkue4
- GXc8AzREhwccdCS1zeB2natnfPU2zP2XpoIE7+1/eIsh0ecrlH/EzVPCwH9+6PgzBfjBZQPc
- CT45xbCs4AR/WqJYf7UZCaT42SP4B1EA95/CNMlvVTlJrXv3+qJOoQVZmcfNYJ+75JuGmxCO
- kyhxI2wW2E22FGBYTfEr+rP82vvUcQABTVaDRLoWzfp9DUKTGsbqhvUBuhuH6eu5jEeMWGhm
- mvaxMTSalh6sCLq60lY1Qqe695UjsKVJjPZHy2ONo5f0it3ZZS+e6uj4kXB4PBLIe6xFwfc4
- iBcypHBsLhWUvlhcRBhps1XRNlFAN7VWAAwfHY1R8Vxn9hT0yTLkX9sDMFWex4yb5dslc7Ba
- 07PowJBjKJu0I+RRfYvOeqZUp1ypYC5TIiNfq2EP7JmP8kqHCfarX4GWKJl9z20+KTaufpkY
- snznAfFJStyNJmLOxLsFrlEj+N0l3tgrY4RLLiipymaPXOlTCb9Yd843JGmMojVMIvsTN3pz
- uti
-IronPort-HdrOrdr: A9a23:w3tZ6a/xZKD7vDcso19uk+DeI+orL9Y04lQ7vn2YSXRuHfBw8P
+IronPort-Data: A9a23:qskwaqq/lrIITC6px2G7gZflUrpeBmIaZRIvgKrLsJaIsI4StFCzt
+ garIBnTb6yLYGL3KY9xPo7goEMHv5bQn9UyHgU6ry09EipB8JuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlVEliefQAOCU5NfsYkidfyc9IMsaoU8lyrRRbrJA24DjWVvT4
+ 4+q+aUzBXf+s9JKGjNMg068gEsHUMTa4Fv0aXRnOJinFHeH/5UkJMp3yZOZdhMUcaENdgKOf
+ M7RzanRw4/s10xF5uVJMFrMWhZirrb6ZWBig5fNMkSoqkAqSicais7XOBeAAKv+Zvrgc91Zk
+ b1wWZKMpQgBN4T0l9s2YQVjEgZVA/BtoJnGIELhvpnGp6HGWyOEL/RGCUg3OcsT+/ptAHEI/
+ vsdQNwPRknd3aTsmuv9E7QywJR4RCXoFNp3VnVIxDfFDfEgUNbbTr/D/9Nw1zYsnMFeW/3ZY
+ qL1bBIwN0uYOkwQZj/7DroYh9W22WKidgZbrV3MlfMU5nDV9ANIhe2F3N39JYXRGJQ9clyjj
+ nnd423zDxUeNdqe4TmI6HShgqnIhyyTcJ0WPK218LhtmlL77m4ODBwbU3OrrP//jVSxM/pPJ
+ kpR9icwoKwa8E2wUsK7TxC+uGSDvBMXR5xXCeJSwAOHx7fQ4g2ZLnMZVTMHY9sj3PLaXhRzi
+ AXPxYmwQ2Uy7vvFEhpx64t4sxu7EBAaEkQweRQFaiA7vvK7hoAytEzAG4ML/LGOsjHlJd3h6
+ 2nU8XZm3OhL0p5jO7aTpg6e3W/1znTdZktsv1iMADr4hu9sTNT9D7FE/2Q3+hqpwGyxalCa9
+ EYJlMGFhAzlJcHczXfdKAnh8VzA2hpkDNE/qQQ2d3XZ327xk0NPhKgJiN2EGG9nM9wfZRjia
+ 1LJtAVa6fd7ZSX3M/cvMtvuV5xyksAM8OgJsNiONrKihbAhHDJrAQk0PRLAt4wTuBJEfV4D1
+ WezLp/3UCdy5VVPxzuqXeYNuYIWKtQF7TqLH/jTlk3/uZLHPSL9YepVYTOmM7FihIvZ8Vq9z
+ jqqH5bTo/mpeLalOXe/HE96BQ1iEEXX8ris+pIOKLLcc1E4cIzjYteIqY4cl0Vet/w9vo/1E
+ ruVAye0FHKXaaX7FDi3
+IronPort-HdrOrdr: A9a23:ZnLoSq9EDDm87aa0KI1uk+DeI+orL9Y04lQ7vn2YSXRuHfBw8P
  re+8jztCWE8Qr5N0tApTntAsS9qDbnhPxICOoqTNOftWvd2FdARbsKheCJ/9SjIVyaygc079
  YHT0EUMrPN5DZB4foSmDPIcOod/A==
 X-IronPort-AV: E=Sophos;i="5.92,218,1650945600"; 
-   d="scan'208";a="73702017"
+   d="scan'208";a="73701974"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v3 09/25] tools/xenpaging: Rework makefile
-Date: Fri, 24 Jun 2022 17:04:06 +0100
-Message-ID: <20220624160422.53457-10-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
+ Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
+ Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v3 01/25] tools/console: have one Makefile per program/directory
+Date: Fri, 24 Jun 2022 17:03:58 +0100
+Message-ID: <20220624160422.53457-2-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220624160422.53457-1-anthony.perard@citrix.com>
 References: <20220624160422.53457-1-anthony.perard@citrix.com>
@@ -88,72 +92,229 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-- Rename $(SRCS) to $(OBJS-y), we don't need to collect sources.
-- Rename $(IBINS) to $(TARGETS)
-- Stop cleaning "xen" and non-set variable $(LIB).
+Sources of both xenconsoled and xenconsole are already separated into
+different directory and don't share anything in common. Having two
+different Makefile means it's easier to deal with *FLAGS.
+
+Some common changes:
+Rename $(BIN) to $(TARGETS), this will be useful later.
+Stop removing *.so *.rpm *.a as they aren't created here.
+Use $(OBJS-y) to list objects.
+Update $(CFLAGS) for the directory rather than a single object.
+
+daemon:
+    Remove the need for $(LDLIBS_xenconsoled), use $(LDLIBS) instead.
+    Remove the need for $(CONSOLE_CFLAGS-y) and use $(CFLAGS-y)
+	instead.
+
+client:
+    Remove the unused $(LDLIBS_xenconsole)
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/xenpaging/Makefile | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/tools/xenpaging/Makefile b/tools/xenpaging/Makefile
-index 04743b335c..e2ed9eaa3f 100644
---- a/tools/xenpaging/Makefile
-+++ b/tools/xenpaging/Makefile
-@@ -5,33 +5,33 @@ CFLAGS += $(CFLAGS_libxentoollog) $(CFLAGS_libxenevtchn) $(CFLAGS_libxenctrl) $(
- LDLIBS += $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenstore) $(PTHREAD_LIBS)
- LDFLAGS += $(PTHREAD_LDFLAGS)
+Notes:
+    v2:
+    - create per-directory .gitignore
+
+ tools/console/Makefile          | 49 ++------------------------------
+ tools/console/client/Makefile   | 39 +++++++++++++++++++++++++
+ tools/console/daemon/Makefile   | 50 +++++++++++++++++++++++++++++++++
+ .gitignore                      |  2 --
+ tools/console/client/.gitignore |  1 +
+ tools/console/daemon/.gitignore |  1 +
+ 6 files changed, 94 insertions(+), 48 deletions(-)
+ create mode 100644 tools/console/client/Makefile
+ create mode 100644 tools/console/daemon/Makefile
+ create mode 100644 tools/console/client/.gitignore
+ create mode 100644 tools/console/daemon/.gitignore
+
+diff --git a/tools/console/Makefile b/tools/console/Makefile
+index 207c04c9cd..63bd2ac302 100644
+--- a/tools/console/Makefile
++++ b/tools/console/Makefile
+@@ -1,50 +1,7 @@
+ XEN_ROOT=$(CURDIR)/../..
+ include $(XEN_ROOT)/tools/Rules.mk
  
--POLICY    = default
-+POLICY   := default
+-CFLAGS  += -Werror
++SUBDIRS-y := daemon client
  
--SRC      :=
--SRCS     += file_ops.c xenpaging.c policy_$(POLICY).c
--SRCS     += pagein.c
-+OBJS-y   := file_ops.o
-+OBJS-y   += xenpaging.o
-+OBJS-y   += policy_$(POLICY).o
-+OBJS-y   += pagein.o
- 
- CFLAGS   += -Werror
- CFLAGS   += -Wno-unused
- 
--OBJS     = $(SRCS:.c=.o)
--IBINS    = xenpaging
-+TARGETS := xenpaging
- 
--all: $(IBINS)
+-CFLAGS  += $(CFLAGS_libxenctrl)
+-CFLAGS  += $(CFLAGS_libxenstore)
+-LDLIBS += $(LDLIBS_libxenctrl)
+-LDLIBS += $(LDLIBS_libxenstore)
+-LDLIBS += $(SOCKET_LIBS)
+-
+-LDLIBS_xenconsoled += $(UTIL_LIBS)
+-LDLIBS_xenconsoled += -lrt
+-CONSOLE_CFLAGS-$(CONFIG_ARM) = -DCONFIG_ARM
+-
+-BIN      = xenconsoled xenconsole
+-
+-.PHONY: all
+-all: $(BIN)
+-
+-.PHONY: clean
+-clean:
+-	$(RM) *.a *.so *.o *.rpm $(BIN) $(DEPS_RM)
+-	$(RM) client/*.o daemon/*.o
+-
+-.PHONY: distclean
+-distclean: clean
+-
+-daemon/main.o: CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-daemon/io.o: CFLAGS += $(CFLAGS_libxenevtchn) $(CFLAGS_libxengnttab) $(CFLAGS_libxenforeignmemory) $(CONSOLE_CFLAGS-y)
+-xenconsoled: $(patsubst %.c,%.o,$(wildcard daemon/*.c))
+-	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxenforeignmemory) $(LDLIBS_xenconsoled) $(APPEND_LDFLAGS)
+-
+-client/main.o: CFLAGS += -include $(XEN_ROOT)/tools/config.h
+-xenconsole: $(patsubst %.c,%.o,$(wildcard client/*.c))
+-	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(LDLIBS_xenconsole) $(APPEND_LDFLAGS)
+-
+-.PHONY: install
+-install: $(BIN)
+-	$(INSTALL_DIR) $(DESTDIR)/$(sbindir)
+-	$(INSTALL_PROG) xenconsoled $(DESTDIR)/$(sbindir)
+-	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+-	$(INSTALL_PROG) xenconsole $(DESTDIR)$(LIBEXEC_BIN)
+-
+-.PHONY: uninstall
+-uninstall:
+-	rm -f $(DESTDIR)$(LIBEXEC_BIN)/xenconsole
+-	rm -f $(DESTDIR)$(sbindir)/xenconsoled
+-
+--include $(DEPS_INCLUDE)
++.PHONY: all clean install distclean uninstall
++all clean install distclean uninstall: %: subdirs-%
+diff --git a/tools/console/client/Makefile b/tools/console/client/Makefile
+new file mode 100644
+index 0000000000..44176c6d93
+--- /dev/null
++++ b/tools/console/client/Makefile
+@@ -0,0 +1,39 @@
++XEN_ROOT=$(CURDIR)/../../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++CFLAGS += -Werror
++CFLAGS += $(CFLAGS_libxenctrl)
++CFLAGS += $(CFLAGS_libxenstore)
++CFLAGS += -include $(XEN_ROOT)/tools/config.h
++
++LDLIBS += $(LDLIBS_libxenctrl)
++LDLIBS += $(LDLIBS_libxenstore)
++LDLIBS += $(SOCKET_LIBS)
++
++OBJS-y := main.o
++
++TARGETS := xenconsole
++
++.PHONY: all
 +all: $(TARGETS)
- 
--xenpaging: $(OBJS)
-+xenpaging: $(OBJS-y)
- 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS) $(APPEND_LDFLAGS)
- 
- install: all
- 	$(INSTALL_DIR) -m 0700 $(DESTDIR)$(XEN_PAGING_DIR)
- 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
--	$(INSTALL_PROG) $(IBINS) $(DESTDIR)$(LIBEXEC_BIN)
-+	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(LIBEXEC_BIN)
- 
- uninstall:
--	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(IBINS))
-+	rm -f $(addprefix $(DESTDIR)$(LIBEXEC_BIN)/, $(TARGETS))
- 
- clean:
--	rm -f *.o *~ $(DEPS_RM) xen TAGS $(IBINS) $(LIB)
-+	rm -f *.o *~ $(DEPS_RM) TAGS $(TARGETS)
- 
- distclean: clean
- 
-@@ -39,6 +39,6 @@ distclean: clean
- 
- .PHONY: TAGS
- TAGS:
--	etags -t $(SRCS) *.h
-+	etags -t *.c *.h
- 
- -include $(DEPS_INCLUDE)
++
++xenconsole: $(OBJS-y)
++	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(APPEND_LDFLAGS)
++
++.PHONY: install
++install: all
++	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
++	$(INSTALL_PROG) xenconsole $(DESTDIR)$(LIBEXEC_BIN)
++
++.PHONY: uninstall
++uninstall:
++	rm -f $(DESTDIR)$(LIBEXEC_BIN)/xenconsole
++
++.PHONY: clean
++clean:
++	$(RM) *.o $(TARGETS) $(DEPS_RM)
++
++.PHONY: distclean
++distclean: clean
++
++-include $(DEPS_INCLUDE)
+diff --git a/tools/console/daemon/Makefile b/tools/console/daemon/Makefile
+new file mode 100644
+index 0000000000..0f004f0b14
+--- /dev/null
++++ b/tools/console/daemon/Makefile
+@@ -0,0 +1,50 @@
++XEN_ROOT=$(CURDIR)/../../..
++include $(XEN_ROOT)/tools/Rules.mk
++
++CFLAGS += -Werror
++CFLAGS += $(CFLAGS_libxenctrl)
++CFLAGS += $(CFLAGS_libxenstore)
++CFLAGS += $(CFLAGS_libxenevtchn)
++CFLAGS += $(CFLAGS_libxengnttab)
++CFLAGS += $(CFLAGS_libxenforeignmemory)
++CFLAGS-$(CONFIG_ARM) += -DCONFIG_ARM
++CFLAGS += -include $(XEN_ROOT)/tools/config.h
++
++LDLIBS += $(LDLIBS_libxenctrl)
++LDLIBS += $(LDLIBS_libxenstore)
++LDLIBS += $(LDLIBS_libxenevtchn)
++LDLIBS += $(LDLIBS_libxengnttab)
++LDLIBS += $(LDLIBS_libxenforeignmemory)
++LDLIBS += $(SOCKET_LIBS)
++LDLIBS += $(UTIL_LIBS)
++LDLIBS += -lrt
++
++OBJS-y := main.o
++OBJS-y += io.o
++OBJS-y += utils.o
++
++TARGETS := xenconsoled
++
++.PHONY: all
++all: $(TARGETS)
++
++xenconsoled: $(OBJS-y)
++	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(APPEND_LDFLAGS)
++
++.PHONY: install
++install: all
++	$(INSTALL_DIR) $(DESTDIR)/$(sbindir)
++	$(INSTALL_PROG) xenconsoled $(DESTDIR)/$(sbindir)
++
++.PHONY: uninstall
++uninstall:
++	rm -f $(DESTDIR)$(sbindir)/xenconsoled
++
++.PHONY: clean
++clean:
++	$(RM) *.o $(TARGETS) $(DEPS_RM)
++
++.PHONY: distclean
++distclean: clean
++
++-include $(DEPS_INCLUDE)
+diff --git a/.gitignore b/.gitignore
+index 18ef56a780..7cf26051db 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -160,8 +160,6 @@ tools/libs/util/libxenutil.map
+ tools/libs/vchan/headers.chk
+ tools/libs/vchan/libxenvchan.map
+ tools/libs/vchan/xenvchan.pc
+-tools/console/xenconsole
+-tools/console/xenconsoled
+ tools/debugger/gdb/gdb-6.2.1-linux-i386-xen/*
+ tools/debugger/gdb/gdb-6.2.1/*
+ tools/debugger/gdb/gdb-6.2.1.tar.bz2
+diff --git a/tools/console/client/.gitignore b/tools/console/client/.gitignore
+new file mode 100644
+index 0000000000..b096a1d841
+--- /dev/null
++++ b/tools/console/client/.gitignore
+@@ -0,0 +1 @@
++/xenconsole
+diff --git a/tools/console/daemon/.gitignore b/tools/console/daemon/.gitignore
+new file mode 100644
+index 0000000000..55c8f84664
+--- /dev/null
++++ b/tools/console/daemon/.gitignore
+@@ -0,0 +1 @@
++/xenconsoled
 -- 
 Anthony PERARD
 
