@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 755DACCA482
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:08:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355647.583522 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7F2C433EF
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:08:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.355662.583550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lqx-0006M6-QZ; Fri, 24 Jun 2022 16:08:15 +0000
+	id 1o4lr2-0007CW-GD; Fri, 24 Jun 2022 16:08:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355647.583522; Fri, 24 Jun 2022 16:08:15 +0000
+Received: by outflank-mailman (output) from mailman id 355662.583550; Fri, 24 Jun 2022 16:08:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lqx-0006KY-HT; Fri, 24 Jun 2022 16:08:15 +0000
-Received: by outflank-mailman (input) for mailman id 355647;
- Fri, 24 Jun 2022 16:08:14 +0000
+	id 1o4lr2-0007CA-Bg; Fri, 24 Jun 2022 16:08:20 +0000
+Received: by outflank-mailman (input) for mailman id 355662;
+ Fri, 24 Jun 2022 16:08:19 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7mLY=W7=citrix.com=prvs=16756bcf7=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1o4lo3-0004qc-0f
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:05:15 +0000
-Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
- [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6c74b4c8-f3d7-11ec-b725-ed86ccbb4733;
- Fri, 24 Jun 2022 18:05:12 +0200 (CEST)
+ id 1o4lnv-0004qc-W5
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:05:08 +0000
+Received: from esa6.hc3370-68.iphmx.com (esa6.hc3370-68.iphmx.com
+ [216.71.155.175]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 68d89563-f3d7-11ec-b725-ed86ccbb4733;
+ Fri, 24 Jun 2022 18:05:05 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,49 +38,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6c74b4c8-f3d7-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: 68d89563-f3d7-11ec-b725-ed86ccbb4733
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1656086712;
+  d=citrix.com; s=securemail; t=1656086706;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=pBOCOfGvGT0Sraw3NBsPSjR52CXZ/ChD1FyPAVw+iMU=;
-  b=eDYKIzy4K62rJW4cnEeQ+Bs3qsgnt8VpnEMqYoIpRuTxUy7eJm2vGXf3
-   B34+3aABU68hK87miM18p2a8JqD7apd0Wy0GvHHbLHoNKtdYSr+yNZm8K
-   docpvwKkT6rHENRN9BkpkTyAqKvprcLYeKpqVpTK0yxbg083SMS+5KgQ5
-   s=;
-Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=tyXg2EhFGm7DWQjDWYVLoXwH1ePwX2W5U//FqRQR1+A=;
+  b=XQaczMrdsZsx5bP5lEnnKI9U/XMvImfvjCr0/Rjm1e9SInZGwlkKfNx3
+   7bP4n+W6f9b3e6DgZ1e6istOZDO7k34WYiwj/YQZ1kzKxTPJiEkYgua1a
+   1GEMoH+/MPNFO4vOZWqX9UWUmjFf5QTRhcq5L2YbeY0CByYJSfAO+mPqU
+   4=;
+Authentication-Results: esa6.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 74362408
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 74208140
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:xUFXnaMa7d7XakbvrR3sl8FynXyQoLVcMsEvi/4bfWQNrUon3z0Hy
- 2cYXm+DaKvbYWCkc9xzYI+x80sCuZDcyNExGwto+SlhQUwRpJueD7x1DKtR0wB+jCHnZBg6h
- ynLQoCYdKjYdleF+lH1dOKJQUBUjclkfJKlYAL/En03FFUMpBsJ00o5wbZn2NIw27BVPivW0
- T/Mi5yHULOa82Yc3lI8s8pvfzs24ZweEBtB1rAPTagjUG32zhH5P7pGTU2FFFPqQ5E8IwKPb
- 72rIIdVXI/u10xF5tuNyt4Xe6CRK1LYFVDmZnF+A8BOjvXez8CbP2lS2Pc0MC9qZzu1c99Zy
- 95z9qWxVwAQMPPFyOI6Y0ECLCRDIvgTkFPHCSDXXc27ykTHdz3nwul0DVFwNoodkgp1KTgQr
- 7pCcmlLN03dwbLtqF64YrAEasALJc/3PIQZqzd4wCvQF/oOSpHfWaTao9Rf2V/cg+gRQa2AP
- ZZBOVKDajyDZTduAU5MAa4ds+eF20TbYRNGkWmK8P9fD2/7k1UqjemF3MDuUsOObdVYmACfv
- G2u13T0BFQWOcKSzRKB82mwnanfkCXjQoUQGbaksPlwjzWuKnc7UUNMEwHh+L/g1xD4C4k3x
- 1EoFjQGrqMMt3WqUN7EUUOx8HijjkZGZN9tDLhvgO2S8ZY48zp1F0BdEGMfMId77JBmLdA5/
- gTXxo20XFSDpJXQECvArenM8FteLABPdQc/iTk4oRzpCjUJiKU6lVrxQ9lqC8ZZZfWlSGirk
- 1hmQMXT7oj/bPLnNI3hpDgrexr2+vD0ovcdv207pF6N4AJjf5KCbIe181Xd5vsoBN/HEwfZ5
- CldxJTGtL9m4XSxeMqlGr1l8FaBt5643MD02wYzT/HNCRz3k5JcQWygyG4nfxo4Wir1UTTof
- FXSqWts2XOnB1PzNfUfS9voU6wClPG8ffy4BqG8RocfOfBZKV7YlByCkGbNhggBZmB3yvphU
- XpaGO7xZUsn5VNPlmvoHrlBju5wmEjTBwr7HPjG8vhu6pLGDFb9dFvPGAHmgjwRhE9cnDjoz
- g==
-IronPort-HdrOrdr: A9a23:jbA+uqnjoAlil2h8e4qYsLG2plbpDfIq3DAbv31ZSRFFG/Fxl6
- iV88jzsiWE7wr5OUtQ4OxoV5PgfZqxz/NICMwqTNWftWrdyQ+VxeNZjbcKqgeIc0aVygce79
- YET0EXMqyXMbEQt6jHCWeDf+rIuOP3k5yVuQ==
+IronPort-Data: A9a23:CNulR6nu2NgbS3LUXnvdqdro5gzZJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xIXX27SOPmCZDf9KYp1a43k8E1T6MOBndRgSwM/pH80FCMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2EgLd9IR2NYy24DnWV/V4
+ 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
+ v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
+ NtxWZOYbCgnGrbR38okDUdfHBtUZL188+/VPi3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
+ RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3s3d8zTbfHLA+TIrKWani7t5ExjYgwMtJGJ4yY
+ uJGNWA3PE2cO3WjPH9NIsIRm9yunUDkLSRhhXy+v/QSz1PqmVkZPL/Fb4OOJ43iqd9utkSXv
+ GXd5EziHwoXcteYzFKt7XaEluLJ2yThV+o6BLC+s/JnnlCX7mgSEwENE0u2p+GjjUyzUM4ZL
+ FYbkhfCtoBrqhbtFIOkGUTl/jjU5XbwRua8DcUfxw+p0beTzT/HWG8LdBQYeOYt5N0pEGlCO
+ kCyoz/5OdB+mOTLFCzFrerM8mPa1Ts9djFbO3JdJecRy5y6+dxo0EqSJjp2OPTt5uAZDw0c1
+ NxjQMIWo7wIxfAG2Kyglbwsq2L9/8OZJuLZC+i+Y45E0u+aTNT8D2BQwQKHhcus1a7AJrV7g
+ FAKmtKF8McFBoyXmSqGTY0lRe/0ua7dYWSD3QY3QPHNEghBHVb5Jei8BxkuTHqFz+5eIWO5C
+ KMtkVk5CGBv0IuCMvYsPtPZ5zUCxqn8D9X1Ps3pgi51SsEpLmevpXg2DWbJhjyFuBV8wMkXZ
+ MbAGe7xXClyNEiS5GfvLwvr+eRwnX5WKKK6bc2T8ilLJpLENSDMF+taYQDQBg37hYvdyDjoH
+ x9kH5Pi431ivCfWOEE7LaZ7wYg2EEUG
+IronPort-HdrOrdr: A9a23:Hc1K86lMkwF9Eu8TzpxlfpyZgoXpDfIU3DAbv31ZSRFFG/Fxl6
+ iV8sjzsiWE7gr5OUtQ4exoV5PhfZqxz/JICMwqTNKftWrdyQyVxeNZnOjfKlTbckWUnINgPO
+ VbAsxD4bXLfCFHZK3BgTVQfexO/DD+ytHLudvj
 X-IronPort-AV: E=Sophos;i="5.92,218,1650945600"; 
-   d="scan'208";a="74362408"
+   d="scan'208";a="74208140"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v3 21/25] tools/helper: Cleanup Makefile
-Date: Fri, 24 Jun 2022 17:04:18 +0100
-Message-ID: <20220624160422.53457-22-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>, "Juergen
+ Gross" <jgross@suse.com>
+Subject: [XEN PATCH v3 18/25] tools: Introduce $(xenlibs-rpath,..) to replace $(SHDEPS_lib*)
+Date: Fri, 24 Jun 2022 17:04:15 +0100
+Message-ID: <20220624160422.53457-19-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220624160422.53457-1-anthony.perard@citrix.com>
 References: <20220624160422.53457-1-anthony.perard@citrix.com>
@@ -88,97 +89,94 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Use $(TARGETS) to collect targets.
-Collect library to link against in $(LDLIBS).
-Remove extra "-f" flags that is already part of $(RM).
+This patch introduce a new macro $(xenlibs-dependencies,) to generate
+a list of all the xen library that a library is list against, and they
+are listed only once. We use the side effect of $(sort ) which remove
+duplicates.
+
+This is used by another macro $(xenlibs-rpath,) which is to replace
+$(SHDEPS_libxen*).
+
+In libs.mk, we don't need to $(sort ) SHLIB_lib* anymore as this was used
+to remove duplicates and they are no more duplicates.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+ tools/Rules.mk     | 29 ++++++++++++++++-------------
+ tools/libs/libs.mk |  2 +-
+ 2 files changed, 17 insertions(+), 14 deletions(-)
 
-Notes:
-    v3:
-    - apply changes to the new "init-dom0less" helper.
-    - make use of the new macro $(xenlibs-ldlibs,)
-
- tools/helpers/Makefile | 23 +++++++++++++----------
- 1 file changed, 13 insertions(+), 10 deletions(-)
-
-diff --git a/tools/helpers/Makefile b/tools/helpers/Makefile
-index 8d78ab1e90..7c9d671b32 100644
---- a/tools/helpers/Makefile
-+++ b/tools/helpers/Makefile
-@@ -5,13 +5,13 @@
- XEN_ROOT = $(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 47424935ba..23979ed254 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -61,13 +61,8 @@ endif
+ #           public headers. Users of libfoo are therefore transitively
+ #           using libbaz's header but not linking against libbaz.
+ #
+-# SHDEPS_libfoo: Flags for linking recursive dependencies of
+-#                libfoo. Must contain SHLIB for every library which
+-#                libfoo links against. So must contain both
+-#                $(SHLIB_libbar) and $(SHLIB_libbaz).
+-#
+ # SHLIB_libfoo: Flags for recursively linking against libfoo. Must
+-#               contains SHDEPS_libfoo and:
++#               contains $(call xenlibs-rpath,foo) and:
+ #                   -Wl,-rpath-link=<directory containing libfoo.so>
+ #
+ # CFLAGS_libfoo: Flags for compiling against libfoo. Must add the
+@@ -79,23 +74,31 @@ endif
+ #                libfoo.
+ #
+ # LDLIBS_libfoo: Flags for linking against libfoo. Must contain
+-#                $(SHDEPS_libfoo) and the path to libfoo.so
++#                $(call xenlibs-rpath,foo) and the path to libfoo.so
+ #
+ # Consumers of libfoo should include $(CFLAGS_libfoo) and
+ # $(LDLIBS_libfoo) in their appropriate directories. They should not
+ # include any CFLAGS or LDLIBS relating to libbar or libbaz unless
+ # they use those libraries directly (not via libfoo) too.
+-#
+-# Consumers of libfoo should not directly use $(SHDEPS_libfoo) or
+-# $(SHLIB_libfoo)
++
++# Give the list of Xen library that the libraries in $(1) are linked against,
++# directly or indirectly.
++define xenlibs-dependencies
++    $(sort $(foreach lib,$(1), \
++        $(USELIBS_$(lib)) $(call xenlibs-dependencies,$(USELIBS_$(lib)))))
++endef
++
++# Flags for linking recursive dependencies of Xen libraries in $(1)
++define xenlibs-rpath
++    $(addprefix -Wl$(comma)-rpath-link=$(XEN_ROOT)/tools/libs/,$(call xenlibs-dependencies,$(1)))
++endef
  
--PROGS += xen-init-dom0
-+TARGETS += xen-init-dom0
- ifeq ($(CONFIG_Linux),y)
- ifeq ($(CONFIG_X86),y)
--PROGS += init-xenstore-domain
-+TARGETS += init-xenstore-domain
- endif
- ifeq ($(CONFIG_ARM),y)
--PROGS += init-dom0less
-+TARGETS += init-dom0less
- endif
- endif
+ define LIB_defs
+  FILENAME_$(1) ?= xen$(1)
+  XEN_libxen$(1) = $$(XEN_ROOT)/tools/libs/$(1)
+  CFLAGS_libxen$(1) = $$(CFLAGS_xeninclude)
+- SHDEPS_libxen$(1) = $$(foreach use,$$(USELIBS_$(1)),$$(SHLIB_libxen$$(use)))
+- LDLIBS_libxen$(1) = $$(SHDEPS_libxen$(1)) $$(XEN_libxen$(1))/lib$$(FILENAME_$(1))$$(libextension)
+- SHLIB_libxen$(1) = $$(SHDEPS_libxen$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
++ SHLIB_libxen$(1) = $$(call xenlibs-rpath,$(1)) -Wl,-rpath-link=$$(XEN_libxen$(1))
++ LDLIBS_libxen$(1) = $$(call xenlibs-rpath,$(1)) $$(XEN_libxen$(1))/lib$$(FILENAME_$(1))$$(libextension)
+ endef
  
-@@ -20,6 +20,7 @@ $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
- $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxenstore)
- $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxenlight)
- $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
-+xen-init-dom0: LDLIBS += $(call xenlibs-ldlibs,ctrl toollog store light)
+ $(foreach lib,$(LIBS_LIBS),$(eval $(call LIB_defs,$(lib))))
+diff --git a/tools/libs/libs.mk b/tools/libs/libs.mk
+index f778a7df82..d7e1274249 100644
+--- a/tools/libs/libs.mk
++++ b/tools/libs/libs.mk
+@@ -32,7 +32,7 @@ PKG_CONFIG ?= $(LIB_FILE_NAME).pc
+ PKG_CONFIG_NAME ?= Xen$(LIBNAME)
+ PKG_CONFIG_DESC ?= The $(PKG_CONFIG_NAME) library for Xen hypervisor
+ PKG_CONFIG_VERSION := $(MAJOR).$(MINOR)
+-PKG_CONFIG_USELIBS := $(sort $(SHLIB_libxen$(LIBNAME)))
++PKG_CONFIG_USELIBS := $(SHLIB_libxen$(LIBNAME))
+ PKG_CONFIG_LIB := $(LIB_FILE_NAME)
+ PKG_CONFIG_REQPRIV := $(subst $(space),$(comma),$(strip $(foreach lib,$(patsubst ctrl,control,$(USELIBS_$(LIBNAME))),xen$(lib))))
  
- INIT_XENSTORE_DOMAIN_OBJS = init-xenstore-domain.o init-dom-json.o
- $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
-@@ -28,6 +29,7 @@ $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
- $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxenstore)
- $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += $(CFLAGS_libxenlight)
- $(INIT_XENSTORE_DOMAIN_OBJS): CFLAGS += -include $(XEN_ROOT)/tools/config.h
-+init-xenstore-domain: LDLIBS += $(call xenlibs-ldlibs,toollog store ctrl guest light)
- 
- INIT_DOM0LESS_OBJS = init-dom0less.o init-dom-json.o
- $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
-@@ -35,30 +37,31 @@ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenstore)
- $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenlight)
- $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
- $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenevtchn)
-+init-dom0less: LDLIBS += $(call xenlibs-ldlibs,ctrl evtchn toollog store light guest foreignmemory)
- 
- .PHONY: all
--all: $(PROGS)
-+all: $(TARGETS)
- 
- xen-init-dom0: $(XEN_INIT_DOM0_OBJS)
--	$(CC) $(LDFLAGS) -o $@ $(XEN_INIT_DOM0_OBJS) $(LDLIBS_libxenctrl) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenlight) $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) -o $@ $(XEN_INIT_DOM0_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
- 
- init-xenstore-domain: $(INIT_XENSTORE_DOMAIN_OBJS)
--	$(CC) $(LDFLAGS) -o $@ $(INIT_XENSTORE_DOMAIN_OBJS) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenlight) $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) -o $@ $(INIT_XENSTORE_DOMAIN_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
- 
- init-dom0less: $(INIT_DOM0LESS_OBJS)
--	$(CC) $(LDFLAGS) -o $@ $(INIT_DOM0LESS_OBJS) $(LDLIBS_libxenctrl) $(LDLIBS_libxenevtchn) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenlight) $(LDLIBS_libxenguest) $(LDLIBS_libxenforeignmemory) $(APPEND_LDFLAGS)
-+	$(CC) $(LDFLAGS) -o $@ $(INIT_DOM0LESS_OBJS) $(LDLIBS) $(APPEND_LDFLAGS)
- 
- .PHONY: install
- install: all
- 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
--	for i in $(PROGS); do $(INSTALL_PROG) $$i $(DESTDIR)$(LIBEXEC_BIN); done
-+	for i in $(TARGETS); do $(INSTALL_PROG) $$i $(DESTDIR)$(LIBEXEC_BIN); done
- 
- .PHONY: uninstall
- uninstall:
--	for i in $(PROGS); do rm -f $(DESTDIR)$(LIBEXEC_BIN)/$$i; done
-+	for i in $(TARGETS); do rm -f $(DESTDIR)$(LIBEXEC_BIN)/$$i; done
- 
- .PHONY: clean
- clean:
--	$(RM) -f *.o $(PROGS) $(DEPS_RM)
-+	$(RM) *.o $(TARGETS) $(DEPS_RM)
- 
- distclean: clean
 -- 
 Anthony PERARD
 
