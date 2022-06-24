@@ -4,44 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6238DC43334
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:07:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355637.583506 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FD5C43334
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:08:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.355646.583517 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lqN-0005ex-2s; Fri, 24 Jun 2022 16:07:39 +0000
+	id 1o4lqx-0006Ju-Ed; Fri, 24 Jun 2022 16:08:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355637.583506; Fri, 24 Jun 2022 16:07:39 +0000
+Received: by outflank-mailman (output) from mailman id 355646.583517; Fri, 24 Jun 2022 16:08:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lqM-0005eq-W6; Fri, 24 Jun 2022 16:07:38 +0000
-Received: by outflank-mailman (input) for mailman id 355637;
- Fri, 24 Jun 2022 16:07:38 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=YVaO=W7=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o4lqM-0005eU-GT
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:07:38 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c3d1d118-f3d7-11ec-b725-ed86ccbb4733;
- Fri, 24 Jun 2022 18:07:37 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id C7BB41F8BF;
- Fri, 24 Jun 2022 16:07:36 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9145D13480;
- Fri, 24 Jun 2022 16:07:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id A5s3IUjhtWJDTQAAMHmgww
- (envelope-from <jgross@suse.com>); Fri, 24 Jun 2022 16:07:36 +0000
+	id 1o4lqx-0006Jh-9S; Fri, 24 Jun 2022 16:08:15 +0000
+Received: by outflank-mailman (input) for mailman id 355646;
+ Fri, 24 Jun 2022 16:08:13 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=7mLY=W7=citrix.com=prvs=16756bcf7=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1o4lnl-0004qb-SO
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:57 +0000
+Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
+ [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 6362446f-f3d7-11ec-bd2d-47488cf2e6aa;
+ Fri, 24 Jun 2022 18:04:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,62 +38,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c3d1d118-f3d7-11ec-b725-ed86ccbb4733
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1656086856; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=8wsGpUN1UHHjvwIixiG/ch3Vuvqb7p7EhnrZz6CUSYE=;
-	b=QrRyewZrCg6LT4hn5tCGnl9MAX7vPMxkYVG+zpI1aTS5sbpOUnliLWiA2UdkNiE71nQh3F
-	alPLupPQSY/RdqfutXxd7gJ5yMtMyaNlTv7kJp4esqU1y0OimrKaT8lPfHaa4IG/0pOaVk
-	QGu25m49rZ6c+Tsp/hxfqdJkFraXFVE=
-From: Juergen Gross <jgross@suse.com>
-To: torvalds@linux-foundation.org
-Cc: linux-kernel@vger.kernel.org,
-	xen-devel@lists.xenproject.org,
-	sstabellini@kernel.org
-Subject: [GIT PULL] xen: branch for v5.19-rc4
-Date: Fri, 24 Jun 2022 18:07:36 +0200
-Message-Id: <20220624160736.14606-1-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
+X-Inumbo-ID: 6362446f-f3d7-11ec-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1656086696;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=UgBJmLW71oTGL7rE/nyRfmo9v19OgU/6PqXrnkS62aw=;
+  b=FnlATABxyLu0/K1Qn4PuBXCjH5Ted+500K5KXo1FJWvvRD8uNviOHaeb
+   mMsF1VxRoM1yqpnXMeIVAv+bPk3R+LyCTwy0Pq87JP7FlPJFfZipC6iAM
+   vsFv0oD/+DYVj2YcNbHsposWmQNr+eNk4FX3RV8BSTx1H6rw1rk5NhuKa
+   s=;
+Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 5.1
+X-MesageID: 76935332
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:q8tK2K2q6N2S/JHIoPbD5ddxkn2cJEfYwER7XKvMYLTBsI5bpzYGn
+ DAeDW3Ua/6JZ2Wged4iO4W/o0IO65HQzdVhGQc6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
+ Zh2hgzodZhsJpPkjk7xdOCn9xGQ7InQLlbGILes1htZGEk1Ek/NtTo5w7Rj2tAy3YDja++wk
+ YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
+ 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
+ /1AhbivRTcsGpb2p+gjCUF5DzAjbJJJreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
+ KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNamAN
+ pFEMmE1BPjGSwQXN20JLLc+oPeXrULcfCN0hF6Ip6VitgA/yyQuieOwYbI5YOeiSd1Om0eEp
+ krP52njHgwBL9ub1CaE9XS3wOTImEvTR4Y6BLC+sPlwjzW71mEVTREbS1a/if24kVKlHcJSL
+ VQO/SgjprR081akJvHxUBG1r2SNlgINUNpXVesh4UeCzbS83uqCLjFaFHgbMoVg7ZJoA2xxv
+ rOUoz/3LTFflKKZeXe5zY2roQ3oYQkJPDJTWiBRGGPp/OLfTJEPYgPnF4g+Tvbu04WqSVkc0
+ BjR8nFg2ux7YdojkvzioAuZ22/ESo3hFFZd2+nBYo6yAuqVjqaBbpfg11XU5O0owG2xHgjY5
+ yhsdyRzAYkz4XCxeM+lGrxl8EmBvartDdElqQcH82Md3zqs4WW/Wotb/StzIkxkWu5dJ2K3O
+ BeC4FwNvMcMVJdPUUORS9jpYyjN5fiIKDgYfqqMMoomjmZZLmdrAx2ClWbPhjuwwSDAYIk0O
+ IuBcNbEMEv2/Z9PlWLsL89EiOdD7nlnmQv7GMCqpzz6gOH2TCPEFt843K6mM7lRAFWs+16Or
+ b6y9qKiln1ibQEJSnOGr9dNcQ9bdiZT6FKfg5U/S9Nv6zFOQAkJY8I9C5t+E2C5t8y5Ttv1w
+ 0w=
+IronPort-HdrOrdr: A9a23:4N5mOqjyY5S2aKl1zz0ybWr4EHBQXtwji2hC6mlwRA09TySZ//
+ rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
+ JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+X-IronPort-AV: E=Sophos;i="5.92,218,1650945600"; 
+   d="scan'208";a="76935332"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Daniel De Graaf
+	<dgdegra@tycho.nsa.gov>, "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+	Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v3 14/25] tools/flask/utils: list build targets in $(TARGETS)
+Date: Fri, 24 Jun 2022 17:04:11 +0100
+Message-ID: <20220624160422.53457-15-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220624160422.53457-1-anthony.perard@citrix.com>
+References: <20220624160422.53457-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Linus,
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ tools/flask/utils/Makefile | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-Please git pull the following tag:
+diff --git a/tools/flask/utils/Makefile b/tools/flask/utils/Makefile
+index db567b13dc..6be134142a 100644
+--- a/tools/flask/utils/Makefile
++++ b/tools/flask/utils/Makefile
+@@ -4,10 +4,10 @@ include $(XEN_ROOT)/tools/Rules.mk
+ CFLAGS += -Werror
+ CFLAGS += $(CFLAGS_libxenctrl)
+ 
+-CLIENTS := flask-loadpolicy flask-setenforce flask-getenforce flask-label-pci flask-get-bool flask-set-bool
++TARGETS := flask-loadpolicy flask-setenforce flask-getenforce flask-label-pci flask-get-bool flask-set-bool
+ 
+ .PHONY: all
+-all: $(CLIENTS)
++all: $(TARGETS)
+ 
+ flask-loadpolicy: loadpolicy.o
+ 	$(CC) $(LDFLAGS) $< $(LDLIBS) $(LDLIBS_libxenctrl) -o $@
+@@ -29,7 +29,7 @@ flask-set-bool: set-bool.o
+ 
+ .PHONY: clean
+ clean:
+-	$(RM) *.o $(CLIENTS) $(DEPS_RM)
++	$(RM) *.o $(TARGETS) $(DEPS_RM)
+ 
+ .PHONY: distclean
+ distclean: clean
+@@ -37,10 +37,10 @@ distclean: clean
+ .PHONY: install
+ install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
+-	$(INSTALL_PROG) $(CLIENTS) $(DESTDIR)$(sbindir)
++	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(sbindir)
+ 
+ .PHONY: uninstall
+ uninstall:
+-	rm -f $(addprefix $(DESTDIR)$(sbindir)/, $(CLIENTS))
++	rm -f $(addprefix $(DESTDIR)$(sbindir)/, $(TARGETS))
+ 
+ -include $(DEPS_INCLUDE)
+-- 
+Anthony PERARD
 
- git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git for-linus-5.19a-rc4-tag
-
-xen: branch for v5.19-rc4
-
-It contains the following fixes:
-
-- A rare deadlock in Qubes-OS between the i915 driver and Xen grant
-  unmapping, solved by making the unmapping fully asynchronous
-- A bug in the Xen blkfront driver caused by incomplete error handling
-- A fix for undefined behavior (shifting a signed int by 31 bits)
-- A fix in the Xen drmfront driver avoiding a WARN()
-
-Thanks.
-
-Juergen
-
- drivers/block/xen-blkfront.c            |  19 ++--
- drivers/gpu/drm/xen/xen_drm_front_gem.c |   2 +-
- drivers/xen/features.c                  |   2 +-
- drivers/xen/gntdev-common.h             |   7 ++
- drivers/xen/gntdev.c                    | 157 +++++++++++++++++++++-----------
- 5 files changed, 127 insertions(+), 60 deletions(-)
-
-Demi Marie Obenour (1):
-      xen/gntdev: Avoid blocking in unmap_grant_pages()
-
-Jason Andryuk (1):
-      xen-blkfront: Handle NULL gendisk
-
-Julien Grall (1):
-      x86/xen: Remove undefined behavior in setup_features()
-
-Oleksandr Tyshchenko (1):
-      drm/xen: Add missing VM_DONTEXPAND flag in mmap callback
 
