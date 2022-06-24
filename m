@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5FD5C43334
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:08:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355646.583517 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0387CCA473
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:08:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.355652.583538 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lqx-0006Ju-Ed; Fri, 24 Jun 2022 16:08:15 +0000
+	id 1o4lqz-0006lC-6O; Fri, 24 Jun 2022 16:08:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355646.583517; Fri, 24 Jun 2022 16:08:15 +0000
+Received: by outflank-mailman (output) from mailman id 355652.583538; Fri, 24 Jun 2022 16:08:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lqx-0006Jh-9S; Fri, 24 Jun 2022 16:08:15 +0000
-Received: by outflank-mailman (input) for mailman id 355646;
- Fri, 24 Jun 2022 16:08:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o4lqy-0006jo-RX; Fri, 24 Jun 2022 16:08:16 +0000
+Received: by outflank-mailman (input) for mailman id 355652;
+ Fri, 24 Jun 2022 16:08:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7mLY=W7=citrix.com=prvs=16756bcf7=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1o4lnl-0004qb-SO
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:57 +0000
-Received: from esa4.hc3370-68.iphmx.com (esa4.hc3370-68.iphmx.com
- [216.71.155.144]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 6362446f-f3d7-11ec-bd2d-47488cf2e6aa;
- Fri, 24 Jun 2022 18:04:56 +0200 (CEST)
+ id 1o4lo5-0004qc-1Q
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:05:17 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 6e40166c-f3d7-11ec-b725-ed86ccbb4733;
+ Fri, 24 Jun 2022 18:05:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,52 +38,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6362446f-f3d7-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 6e40166c-f3d7-11ec-b725-ed86ccbb4733
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1656086696;
+  d=citrix.com; s=securemail; t=1656086713;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=UgBJmLW71oTGL7rE/nyRfmo9v19OgU/6PqXrnkS62aw=;
-  b=FnlATABxyLu0/K1Qn4PuBXCjH5Ted+500K5KXo1FJWvvRD8uNviOHaeb
-   mMsF1VxRoM1yqpnXMeIVAv+bPk3R+LyCTwy0Pq87JP7FlPJFfZipC6iAM
-   vsFv0oD/+DYVj2YcNbHsposWmQNr+eNk4FX3RV8BSTx1H6rw1rk5NhuKa
-   s=;
-Authentication-Results: esa4.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=S8/hwL2N26ebpBrr2BTp9NQzqw/JJLwRIQMFuynDLXQ=;
+  b=ftg7FbNNJxiLX+Ax7R0/z9W6m6sU52764kHALcCqXgIq05akE6oCxsnl
+   qLH04GugxvJm4qH4NLD/Rj85iErbb62IhmvZUFqzJNSk7uFgtPemcVxE2
+   6gwtEQfrSOcvp/p8RUT2U7aTVuXkPzyrW39gok9yFhelFyJpBkjnxotbA
+   A=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 76935332
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 74362409
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:q8tK2K2q6N2S/JHIoPbD5ddxkn2cJEfYwER7XKvMYLTBsI5bpzYGn
- DAeDW3Ua/6JZ2Wged4iO4W/o0IO65HQzdVhGQc6pC1hF35El5HIVI+TRqvS04J+DSFhoGZPt
- Zh2hgzodZhsJpPkjk7xdOCn9xGQ7InQLlbGILes1htZGEk1Ek/NtTo5w7Rj2tAy3YDja++wk
- YiaT/P3aQfNNwFcagr424rbwP+4lK2v0N+wlgVWicFj5DcypVFMZH4sDfjZw0/DaptVBoaHq
- 9Prl9lVyI97EyAFUbtJmp6jGqEDryW70QKm0hK6UID66vROS7BbPg/W+5PwZG8O4whlkeydx
- /1AhbivRTcsGpb2p+gjCUF5DzAjbJJJreqvzXiX6aR/zmXDenrohf5vEFs3LcsT/eMf7WNmr
- KJCbmpXN1ba2rzwkOnTpupE36zPKOHiOp8fvXdxiynUF/88TbjIQrnQ5M8e1zA17ixLNamAN
- pFEMmE1BPjGSwQXN20JLLc+oPeXrULcfCN0hF6Ip6VitgA/yyQuieOwYbI5YOeiSd1Om0eEp
- krP52njHgwBL9ub1CaE9XS3wOTImEvTR4Y6BLC+sPlwjzW71mEVTREbS1a/if24kVKlHcJSL
- VQO/SgjprR081akJvHxUBG1r2SNlgINUNpXVesh4UeCzbS83uqCLjFaFHgbMoVg7ZJoA2xxv
- rOUoz/3LTFflKKZeXe5zY2roQ3oYQkJPDJTWiBRGGPp/OLfTJEPYgPnF4g+Tvbu04WqSVkc0
- BjR8nFg2ux7YdojkvzioAuZ22/ESo3hFFZd2+nBYo6yAuqVjqaBbpfg11XU5O0owG2xHgjY5
- yhsdyRzAYkz4XCxeM+lGrxl8EmBvartDdElqQcH82Md3zqs4WW/Wotb/StzIkxkWu5dJ2K3O
- BeC4FwNvMcMVJdPUUORS9jpYyjN5fiIKDgYfqqMMoomjmZZLmdrAx2ClWbPhjuwwSDAYIk0O
- IuBcNbEMEv2/Z9PlWLsL89EiOdD7nlnmQv7GMCqpzz6gOH2TCPEFt843K6mM7lRAFWs+16Or
- b6y9qKiln1ibQEJSnOGr9dNcQ9bdiZT6FKfg5U/S9Nv6zFOQAkJY8I9C5t+E2C5t8y5Ttv1w
- 0w=
-IronPort-HdrOrdr: A9a23:4N5mOqjyY5S2aKl1zz0ybWr4EHBQXtwji2hC6mlwRA09TySZ//
- rAoB19726StN9xYgBYpTnuAsi9qB/nmKKdpLNhX4tKPzOW3FdATrsD0WKK+VSJcEfDH6xmpM
- JdmsBFebvN5DNB4/oSjjPVLz9Z+qjlzJyV
+IronPort-Data: A9a23:sz7SNqIpVG7lSwGMFE+RmJUlxSXFcZb7ZxGr2PjKsXjdYENS0WYDm
+ jcZXzzUMvqMYTemKdB1PYzn809XsMTSn4I2TFZlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokf0/0vrav67xZVF/fngqoDUUYYoAQgsA14+IMsdoUg7wbRh3NQ02YLR7z6l4
+ rseneWOYDdJ5BYsWo4kw/rrRMRH5amaVJsw5zTSVNgT1LPsvyB94KE3fMldG0DQUIhMdtNWc
+ s6YpF2PEsE1yD92Yj+tuu6TnkTn2dc+NyDW4pZdc/DKbhSvOkXee0v0XRYRQR4/ttmHozx+4
+ MccrL3tWVskBaSWv+ItAyF3FyhwA6ITrdcrIVDn2SCS50jPcn+qyPRyFkAme4Yf/46bA0kXq
+ 6ZecmpUKEne2aTmm9pXScE17ignBMDtIIMYvGAm1TzDBOwqaZvCX7/L9ZlT2zJYasVmQqqFO
+ ZBFMWsHgBLoP0xhZUoNMrMFxb2rjWn8MCVig2qujP9ii4TU5FMoi+W8WDbPQfSVQe1Fk0Deo
+ XjJl0zpDxdfONGBxD6t9nO3mvSJjS79QJgVFrCz6rhtmlL7+4AIIERIDx3h+6D/0xPgHYIEQ
+ 6AJxsYwhbpj7W32XoXwZBTih3i07iYzX9NeLeJvvWlh1ZHoDxal6nksF2AcNoR96ZdpFVTGx
+ XfSwYq3WGUHXKm9DCvEq+zK9W7a1T09dzdqWMMScecSDzAPSqkXhwmHcNtsGbXdYjbdSWCpm
+ GDiQMTTatwuYS83O0aTpwmvb8qE/MShc+LMzly/spiZxg14fpW5QIej9ELW6/1NRK7AEATf5
+ CBVwpfCtLhRZX1oqMBraL9VdF1Oz6btDdEhqQQ3Q8lJG8qFoRZPgry8EBkhfRw0Y67oiBfiY
+ VPJuBM52aK/yECCNPctC6roUpxC5fG5SbzNC6CFBvITM8MZXFLWo0lTibu4gjmFfL4EyvpkZ
+ /92sK+EUB4nNEiQ5GDnGb5DjeB6nX5WKKG6bcmT8ilLGIG2PBa9IYrp+nPUBgzlxMtoeDnoz
+ us=
+IronPort-HdrOrdr: A9a23:az2aT60Y5gbwrYYEgUr6DAqjBLQkLtp133Aq2lEZdPRUGvb2qy
+ nIpoV96faUskdpZJhOo7G90cW7LE80sKQFg7X5Xo3SODUO2lHJEGgK1+KLqFfd8m/Fh4tgPM
+ 9bAs5D4bbLY2SS4/yX3ODBKadC/OW6
 X-IronPort-AV: E=Sophos;i="5.92,218,1650945600"; 
-   d="scan'208";a="76935332"
+   d="scan'208";a="74362409"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Daniel De Graaf
-	<dgdegra@tycho.nsa.gov>, "Daniel P. Smith" <dpsmith@apertussolutions.com>,
-	Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v3 14/25] tools/flask/utils: list build targets in $(TARGETS)
-Date: Fri, 24 Jun 2022 17:04:11 +0100
-Message-ID: <20220624160422.53457-15-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [XEN PATCH v3 22/25] tools/console: Use $(xenlibs-ldlibs,)
+Date: Fri, 24 Jun 2022 17:04:19 +0100
+Message-ID: <20220624160422.53457-23-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220624160422.53457-1-anthony.perard@citrix.com>
 References: <20220624160422.53457-1-anthony.perard@citrix.com>
@@ -93,48 +90,41 @@ Content-Type: text/plain
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
- tools/flask/utils/Makefile | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ tools/console/client/Makefile | 3 +--
+ tools/console/daemon/Makefile | 6 +-----
+ 2 files changed, 2 insertions(+), 7 deletions(-)
 
-diff --git a/tools/flask/utils/Makefile b/tools/flask/utils/Makefile
-index db567b13dc..6be134142a 100644
---- a/tools/flask/utils/Makefile
-+++ b/tools/flask/utils/Makefile
-@@ -4,10 +4,10 @@ include $(XEN_ROOT)/tools/Rules.mk
- CFLAGS += -Werror
- CFLAGS += $(CFLAGS_libxenctrl)
+diff --git a/tools/console/client/Makefile b/tools/console/client/Makefile
+index 44176c6d93..e2f2554f92 100644
+--- a/tools/console/client/Makefile
++++ b/tools/console/client/Makefile
+@@ -6,8 +6,7 @@ CFLAGS += $(CFLAGS_libxenctrl)
+ CFLAGS += $(CFLAGS_libxenstore)
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
  
--CLIENTS := flask-loadpolicy flask-setenforce flask-getenforce flask-label-pci flask-get-bool flask-set-bool
-+TARGETS := flask-loadpolicy flask-setenforce flask-getenforce flask-label-pci flask-get-bool flask-set-bool
+-LDLIBS += $(LDLIBS_libxenctrl)
+-LDLIBS += $(LDLIBS_libxenstore)
++LDLIBS += $(call xenlibs-ldlibs,ctrl store)
+ LDLIBS += $(SOCKET_LIBS)
  
- .PHONY: all
--all: $(CLIENTS)
-+all: $(TARGETS)
+ OBJS-y := main.o
+diff --git a/tools/console/daemon/Makefile b/tools/console/daemon/Makefile
+index 0f004f0b14..99bb33b6a2 100644
+--- a/tools/console/daemon/Makefile
++++ b/tools/console/daemon/Makefile
+@@ -10,11 +10,7 @@ CFLAGS += $(CFLAGS_libxenforeignmemory)
+ CFLAGS-$(CONFIG_ARM) += -DCONFIG_ARM
+ CFLAGS += -include $(XEN_ROOT)/tools/config.h
  
- flask-loadpolicy: loadpolicy.o
- 	$(CC) $(LDFLAGS) $< $(LDLIBS) $(LDLIBS_libxenctrl) -o $@
-@@ -29,7 +29,7 @@ flask-set-bool: set-bool.o
- 
- .PHONY: clean
- clean:
--	$(RM) *.o $(CLIENTS) $(DEPS_RM)
-+	$(RM) *.o $(TARGETS) $(DEPS_RM)
- 
- .PHONY: distclean
- distclean: clean
-@@ -37,10 +37,10 @@ distclean: clean
- .PHONY: install
- install: all
- 	$(INSTALL_DIR) $(DESTDIR)$(sbindir)
--	$(INSTALL_PROG) $(CLIENTS) $(DESTDIR)$(sbindir)
-+	$(INSTALL_PROG) $(TARGETS) $(DESTDIR)$(sbindir)
- 
- .PHONY: uninstall
- uninstall:
--	rm -f $(addprefix $(DESTDIR)$(sbindir)/, $(CLIENTS))
-+	rm -f $(addprefix $(DESTDIR)$(sbindir)/, $(TARGETS))
- 
- -include $(DEPS_INCLUDE)
+-LDLIBS += $(LDLIBS_libxenctrl)
+-LDLIBS += $(LDLIBS_libxenstore)
+-LDLIBS += $(LDLIBS_libxenevtchn)
+-LDLIBS += $(LDLIBS_libxengnttab)
+-LDLIBS += $(LDLIBS_libxenforeignmemory)
++LDLIBS += $(call xenlibs-ldlibs,ctrl store evtchn gnttab foreignmemory)
+ LDLIBS += $(SOCKET_LIBS)
+ LDLIBS += $(UTIL_LIBS)
+ LDLIBS += -lrt
 -- 
 Anthony PERARD
 
