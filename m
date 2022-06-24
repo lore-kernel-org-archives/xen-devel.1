@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2236CCA47E
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:05:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.355604.583352 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75C1FCCA483
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Jun 2022 16:05:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.355603.583347 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lnZ-0005Gw-6p; Fri, 24 Jun 2022 16:04:45 +0000
+	id 1o4lnY-00059p-RB; Fri, 24 Jun 2022 16:04:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 355604.583352; Fri, 24 Jun 2022 16:04:45 +0000
+Received: by outflank-mailman (output) from mailman id 355603.583347; Fri, 24 Jun 2022 16:04:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o4lnZ-0005G9-0X; Fri, 24 Jun 2022 16:04:45 +0000
-Received: by outflank-mailman (input) for mailman id 355604;
- Fri, 24 Jun 2022 16:04:43 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o4lnY-00059Z-Mq; Fri, 24 Jun 2022 16:04:44 +0000
+Received: by outflank-mailman (input) for mailman id 355603;
+ Fri, 24 Jun 2022 16:04:42 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=7mLY=W7=citrix.com=prvs=16756bcf7=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1o4lnX-0004qb-4T
- for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:43 +0000
-Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
- [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 5b111485-f3d7-11ec-bd2d-47488cf2e6aa;
- Fri, 24 Jun 2022 18:04:41 +0200 (CEST)
+ id 1o4lnW-0004qc-MM
+ for xen-devel@lists.xenproject.org; Fri, 24 Jun 2022 16:04:42 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 58be9a20-f3d7-11ec-b725-ed86ccbb4733;
+ Fri, 24 Jun 2022 18:04:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,53 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 5b111485-f3d7-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 58be9a20-f3d7-11ec-b725-ed86ccbb4733
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1656086681;
+  d=citrix.com; s=securemail; t=1656086679;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=X2aENXxRDTAvXRj798ueb4NLH5aVs5M0JBRhVknZte8=;
-  b=ClH0kvo4KWT9e2A7r9j16XV0jbMcL3LF/JMm5WwQvBma3xrDRMGVnMIB
-   McTVEtvGsIi/A34gmkNST27LPlkbFX8jq+c2QOV7Q9FsK4IjB139Ikr4M
-   vf2/8cxq0pXuak6cpX5vWuz97UdnfvsUVbcvzouNPAKCxXsYLcENqxRM3
-   4=;
-Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=SYJTJIKxHEFQcMKNpvz4kHz4LT/E8ZyffBaU/35UM+o=;
+  b=HmzEjoLDOpRxONKwf00fObo3vaIJ5nB6CgEG5DHe/38eBMK1hMnarIcz
+   rh/MIbAT//k992vK1EAAAxeD49R5VToSRF7Dij1YpAchiESf/wDhZYrXf
+   BuLLRGwonlTwa4LqTU1j1syPrT6w5ooL5Gn8DYZuCZ8+pQjC/Qqp6K6rh
+   0=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 5.1
-X-MesageID: 73701974
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 74362336
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:qskwaqq/lrIITC6px2G7gZflUrpeBmIaZRIvgKrLsJaIsI4StFCzt
- garIBnTb6yLYGL3KY9xPo7goEMHv5bQn9UyHgU6ry09EipB8JuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlVEliefQAOCU5NfsYkidfyc9IMsaoU8lyrRRbrJA24DjWVvT4
- 4+q+aUzBXf+s9JKGjNMg068gEsHUMTa4Fv0aXRnOJinFHeH/5UkJMp3yZOZdhMUcaENdgKOf
- M7RzanRw4/s10xF5uVJMFrMWhZirrb6ZWBig5fNMkSoqkAqSicais7XOBeAAKv+Zvrgc91Zk
- b1wWZKMpQgBN4T0l9s2YQVjEgZVA/BtoJnGIELhvpnGp6HGWyOEL/RGCUg3OcsT+/ptAHEI/
- vsdQNwPRknd3aTsmuv9E7QywJR4RCXoFNp3VnVIxDfFDfEgUNbbTr/D/9Nw1zYsnMFeW/3ZY
- qL1bBIwN0uYOkwQZj/7DroYh9W22WKidgZbrV3MlfMU5nDV9ANIhe2F3N39JYXRGJQ9clyjj
- nnd423zDxUeNdqe4TmI6HShgqnIhyyTcJ0WPK218LhtmlL77m4ODBwbU3OrrP//jVSxM/pPJ
- kpR9icwoKwa8E2wUsK7TxC+uGSDvBMXR5xXCeJSwAOHx7fQ4g2ZLnMZVTMHY9sj3PLaXhRzi
- AXPxYmwQ2Uy7vvFEhpx64t4sxu7EBAaEkQweRQFaiA7vvK7hoAytEzAG4ML/LGOsjHlJd3h6
- 2nU8XZm3OhL0p5jO7aTpg6e3W/1znTdZktsv1iMADr4hu9sTNT9D7FE/2Q3+hqpwGyxalCa9
- EYJlMGFhAzlJcHczXfdKAnh8VzA2hpkDNE/qQQ2d3XZ327xk0NPhKgJiN2EGG9nM9wfZRjia
- 1LJtAVa6fd7ZSX3M/cvMtvuV5xyksAM8OgJsNiONrKihbAhHDJrAQk0PRLAt4wTuBJEfV4D1
- WezLp/3UCdy5VVPxzuqXeYNuYIWKtQF7TqLH/jTlk3/uZLHPSL9YepVYTOmM7FihIvZ8Vq9z
- jqqH5bTo/mpeLalOXe/HE96BQ1iEEXX8ris+pIOKLLcc1E4cIzjYteIqY4cl0Vet/w9vo/1E
- ruVAye0FHKXaaX7FDi3
-IronPort-HdrOrdr: A9a23:ZnLoSq9EDDm87aa0KI1uk+DeI+orL9Y04lQ7vn2YSXRuHfBw8P
- re+8jztCWE8Qr5N0tApTntAsS9qDbnhPxICOoqTNOftWvd2FdARbsKheCJ/9SjIVyaygc079
- YHT0EUMrPN5DZB4foSmDPIcOod/A==
+IronPort-Data: A9a23:nXFssakeiBmCED/TfVVOVYLo5gzbJkRdPkR7XQ2eYbSJt1+Wr1Gzt
+ xJNCGHUMvuIajb2ctEjYYvj8EIF6pHUmINrGQJvqCs9ESMWpZLJC+rCIxarNUt+DCFioGGLT
+ Sk6QoOdRCzhZiaE/n9BCpC48T8kk/vgqoPUUIYoAAgoLeNfYHpn2EgLd9IR2NYy24DnWV/V4
+ 7senuWEULOb828sWo4rw/rrRCNH5JwebxtB4zTSzdgS1LPvvyF94KA3fMldHFOhKmVgJcaoR
+ v6r8V2M1jixEyHBqD+Suu2TnkUiGtY+NOUV45Zcc/DKbhNq/kTe3kunXRa1hIg+ZzihxrhMJ
+ NtxWZOYSwEvPfbdmeghaBhKEjlkP/B+opP7Li3q2SCT5xWun3rExvxvCAc9PJEC+/YxCmZLn
+ RAaAGlTNFbZ3bvwme/lDLk37iggBJCD0Ic3s3d8zTbfHLA+TIrKWani7t5ExjYgwMtJGJ4yY
+ uJGNWExNk+bPXWjPH88A4sHpqCpvEXvbmcAsHexo5E2u3ncmVkZPL/Fb4OOJ43iqd9utlmcj
+ nLL+SL+GB5yHN6VxCeB83msrvTShi69U4UXfJWo+/gvjFCNy2g7DBwNSUD9sfS/klS5Wd9UN
+ woT4CVGkEQp3BX1FJ+nBUT++SPa+E5HMzZNLwEkwAOLzKmP8geVOlMFXD9Zct57jJUaeTN/g
+ zdlgOjV6SxTXKy9ECzAqO/P8GvtaUD5PkdZO3ZaEFJtD83L5dhq00mRFosL/Lud1IWdJN3m/
+ 9ydQMHSbZ03hNVD6ai09Euvb9mE9smQFV5dCuk6swuYAuJFiG2NPdXABaDzt6ooEWpgZgDpU
+ II4s8af9vsSKpqGiTaARu4AdJnwuavbaGWN2AEzR8F+n9hIx5JFVdoIiN2ZDBcBDyr5UWWxP
+ B+7Vf15vve/w0dGnYcoOtnsWqzGPIDrFMj/V+C8U+eilqNZLVfdlAk3PBb49zm0zCAEzPFuU
+ b/GIJ3EJStLVsxaIM+eGr51PUkDnXtlmws+hPnTknya7FZpTCTEF+5bbATfNb5RAWHtiFy9z
+ uuz/vCik313ONASqAGNmWLPBTjm9UQGOK0=
+IronPort-HdrOrdr: A9a23:B2ve5Kt8OtcuMScEm3JqsGLs7skDcNV00zEX/kB9WHVpmszxra
+ +TdZMgpHjJYVcqKQgdcL+7WZVoLUmwyXcx2/hyAV7AZniDhILLFuFfBOLZqlWKcREWtNQtsJ
+ uIG5IObuEYZmIVsS+V2mWF+q4bsbq6zJw=
 X-IronPort-AV: E=Sophos;i="5.92,218,1650945600"; 
-   d="scan'208";a="73701974"
+   d="scan'208";a="74362336"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, "Jan
- Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: [XEN PATCH v3 01/25] tools/console: have one Makefile per program/directory
-Date: Fri, 24 Jun 2022 17:03:58 +0100
-Message-ID: <20220624160422.53457-2-anthony.perard@citrix.com>
+CC: Anthony PERARD <anthony.perard@citrix.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu
+	<wl@xen.org>
+Subject: [XEN PATCH v3 04/25] tools/firmware/hvmloader: rework Makefile
+Date: Fri, 24 Jun 2022 17:04:01 +0100
+Message-ID: <20220624160422.53457-5-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220624160422.53457-1-anthony.perard@citrix.com>
 References: <20220624160422.53457-1-anthony.perard@citrix.com>
@@ -92,229 +91,79 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Sources of both xenconsoled and xenconsole are already separated into
-different directory and don't share anything in common. Having two
-different Makefile means it's easier to deal with *FLAGS.
+Setup proper dependencies with libacpi so we don't need to run "make
+hvmloader" in the "all" target. ("build.o" new prerequisite isn't
+exactly proper but a side effect of building the $(DSDT_FILES) is to
+generate the "ssdt_*.h" needed by "build.o".)
 
-Some common changes:
-Rename $(BIN) to $(TARGETS), this will be useful later.
-Stop removing *.so *.rpm *.a as they aren't created here.
-Use $(OBJS-y) to list objects.
-Update $(CFLAGS) for the directory rather than a single object.
+Make use if "-iquote" instead of a plain "-I".
 
-daemon:
-    Remove the need for $(LDLIBS_xenconsoled), use $(LDLIBS) instead.
-    Remove the need for $(CONSOLE_CFLAGS-y) and use $(CFLAGS-y)
-	instead.
-
-client:
-    Remove the unused $(LDLIBS_xenconsole)
+For "roms.inc" target, use "$(SHELL)" instead of plain "sh". And use
+full path to "mkhex" instead of a relative one. Lastly, add "-f" flag
+to "mv", in case the target already exist.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
+ tools/firmware/hvmloader/Makefile | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
 
-Notes:
-    v2:
-    - create per-directory .gitignore
-
- tools/console/Makefile          | 49 ++------------------------------
- tools/console/client/Makefile   | 39 +++++++++++++++++++++++++
- tools/console/daemon/Makefile   | 50 +++++++++++++++++++++++++++++++++
- .gitignore                      |  2 --
- tools/console/client/.gitignore |  1 +
- tools/console/daemon/.gitignore |  1 +
- 6 files changed, 94 insertions(+), 48 deletions(-)
- create mode 100644 tools/console/client/Makefile
- create mode 100644 tools/console/daemon/Makefile
- create mode 100644 tools/console/client/.gitignore
- create mode 100644 tools/console/daemon/.gitignore
-
-diff --git a/tools/console/Makefile b/tools/console/Makefile
-index 207c04c9cd..63bd2ac302 100644
---- a/tools/console/Makefile
-+++ b/tools/console/Makefile
-@@ -1,50 +1,7 @@
- XEN_ROOT=$(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
+diff --git a/tools/firmware/hvmloader/Makefile b/tools/firmware/hvmloader/Makefile
+index b754220839..fc20932110 100644
+--- a/tools/firmware/hvmloader/Makefile
++++ b/tools/firmware/hvmloader/Makefile
+@@ -60,8 +60,7 @@ ROMS += $(ROMBIOS_ROM) $(STDVGA_ROM) $(CIRRUSVGA_ROM)
+ endif
  
--CFLAGS  += -Werror
-+SUBDIRS-y := daemon client
+ .PHONY: all
+-all: acpi
+-	$(MAKE) hvmloader
++all: hvmloader
  
--CFLAGS  += $(CFLAGS_libxenctrl)
--CFLAGS  += $(CFLAGS_libxenstore)
--LDLIBS += $(LDLIBS_libxenctrl)
--LDLIBS += $(LDLIBS_libxenstore)
--LDLIBS += $(SOCKET_LIBS)
--
--LDLIBS_xenconsoled += $(UTIL_LIBS)
--LDLIBS_xenconsoled += -lrt
--CONSOLE_CFLAGS-$(CONFIG_ARM) = -DCONFIG_ARM
--
--BIN      = xenconsoled xenconsole
--
--.PHONY: all
--all: $(BIN)
--
--.PHONY: clean
--clean:
--	$(RM) *.a *.so *.o *.rpm $(BIN) $(DEPS_RM)
--	$(RM) client/*.o daemon/*.o
--
--.PHONY: distclean
--distclean: clean
--
--daemon/main.o: CFLAGS += -include $(XEN_ROOT)/tools/config.h
--daemon/io.o: CFLAGS += $(CFLAGS_libxenevtchn) $(CFLAGS_libxengnttab) $(CFLAGS_libxenforeignmemory) $(CONSOLE_CFLAGS-y)
--xenconsoled: $(patsubst %.c,%.o,$(wildcard daemon/*.c))
--	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(LDLIBS_libxenevtchn) $(LDLIBS_libxengnttab) $(LDLIBS_libxenforeignmemory) $(LDLIBS_xenconsoled) $(APPEND_LDFLAGS)
--
--client/main.o: CFLAGS += -include $(XEN_ROOT)/tools/config.h
--xenconsole: $(patsubst %.c,%.o,$(wildcard client/*.c))
--	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(LDLIBS_xenconsole) $(APPEND_LDFLAGS)
--
--.PHONY: install
--install: $(BIN)
--	$(INSTALL_DIR) $(DESTDIR)/$(sbindir)
--	$(INSTALL_PROG) xenconsoled $(DESTDIR)/$(sbindir)
--	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
--	$(INSTALL_PROG) xenconsole $(DESTDIR)$(LIBEXEC_BIN)
--
--.PHONY: uninstall
--uninstall:
--	rm -f $(DESTDIR)$(LIBEXEC_BIN)/xenconsole
--	rm -f $(DESTDIR)$(sbindir)/xenconsoled
--
---include $(DEPS_INCLUDE)
-+.PHONY: all clean install distclean uninstall
-+all clean install distclean uninstall: %: subdirs-%
-diff --git a/tools/console/client/Makefile b/tools/console/client/Makefile
-new file mode 100644
-index 0000000000..44176c6d93
---- /dev/null
-+++ b/tools/console/client/Makefile
-@@ -0,0 +1,39 @@
-+XEN_ROOT=$(CURDIR)/../../..
-+include $(XEN_ROOT)/tools/Rules.mk
+ .PHONY: acpi
+ acpi:
+@@ -73,12 +72,15 @@ smbios.o: CFLAGS += -D__SMBIOS_DATE__="\"$(SMBIOS_REL_DATE)\""
+ ACPI_PATH = ../../libacpi
+ DSDT_FILES = dsdt_anycpu.c dsdt_15cpu.c dsdt_anycpu_qemu_xen.c
+ ACPI_OBJS = $(patsubst %.c,%.o,$(DSDT_FILES)) build.o static_tables.o
+-$(ACPI_OBJS): CFLAGS += -I. -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
++$(ACPI_OBJS): CFLAGS += -iquote . -DLIBACPI_STDUTILS=\"$(CURDIR)/util.h\"
+ CFLAGS += -I$(ACPI_PATH)
+ vpath build.c $(ACPI_PATH)
+ vpath static_tables.c $(ACPI_PATH)
+ OBJS += $(ACPI_OBJS)
+ 
++$(DSDT_FILES): acpi
++build.o: $(DSDT_FILES)
 +
-+CFLAGS += -Werror
-+CFLAGS += $(CFLAGS_libxenctrl)
-+CFLAGS += $(CFLAGS_libxenstore)
-+CFLAGS += -include $(XEN_ROOT)/tools/config.h
-+
-+LDLIBS += $(LDLIBS_libxenctrl)
-+LDLIBS += $(LDLIBS_libxenstore)
-+LDLIBS += $(SOCKET_LIBS)
-+
-+OBJS-y := main.o
-+
-+TARGETS := xenconsole
-+
-+.PHONY: all
-+all: $(TARGETS)
-+
-+xenconsole: $(OBJS-y)
-+	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(APPEND_LDFLAGS)
-+
-+.PHONY: install
-+install: all
-+	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
-+	$(INSTALL_PROG) xenconsole $(DESTDIR)$(LIBEXEC_BIN)
-+
-+.PHONY: uninstall
-+uninstall:
-+	rm -f $(DESTDIR)$(LIBEXEC_BIN)/xenconsole
-+
-+.PHONY: clean
-+clean:
-+	$(RM) *.o $(TARGETS) $(DEPS_RM)
-+
-+.PHONY: distclean
-+distclean: clean
-+
-+-include $(DEPS_INCLUDE)
-diff --git a/tools/console/daemon/Makefile b/tools/console/daemon/Makefile
-new file mode 100644
-index 0000000000..0f004f0b14
---- /dev/null
-+++ b/tools/console/daemon/Makefile
-@@ -0,0 +1,50 @@
-+XEN_ROOT=$(CURDIR)/../../..
-+include $(XEN_ROOT)/tools/Rules.mk
-+
-+CFLAGS += -Werror
-+CFLAGS += $(CFLAGS_libxenctrl)
-+CFLAGS += $(CFLAGS_libxenstore)
-+CFLAGS += $(CFLAGS_libxenevtchn)
-+CFLAGS += $(CFLAGS_libxengnttab)
-+CFLAGS += $(CFLAGS_libxenforeignmemory)
-+CFLAGS-$(CONFIG_ARM) += -DCONFIG_ARM
-+CFLAGS += -include $(XEN_ROOT)/tools/config.h
-+
-+LDLIBS += $(LDLIBS_libxenctrl)
-+LDLIBS += $(LDLIBS_libxenstore)
-+LDLIBS += $(LDLIBS_libxenevtchn)
-+LDLIBS += $(LDLIBS_libxengnttab)
-+LDLIBS += $(LDLIBS_libxenforeignmemory)
-+LDLIBS += $(SOCKET_LIBS)
-+LDLIBS += $(UTIL_LIBS)
-+LDLIBS += -lrt
-+
-+OBJS-y := main.o
-+OBJS-y += io.o
-+OBJS-y += utils.o
-+
-+TARGETS := xenconsoled
-+
-+.PHONY: all
-+all: $(TARGETS)
-+
-+xenconsoled: $(OBJS-y)
-+	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS) $(APPEND_LDFLAGS)
-+
-+.PHONY: install
-+install: all
-+	$(INSTALL_DIR) $(DESTDIR)/$(sbindir)
-+	$(INSTALL_PROG) xenconsoled $(DESTDIR)/$(sbindir)
-+
-+.PHONY: uninstall
-+uninstall:
-+	rm -f $(DESTDIR)$(sbindir)/xenconsoled
-+
-+.PHONY: clean
-+clean:
-+	$(RM) *.o $(TARGETS) $(DEPS_RM)
-+
-+.PHONY: distclean
-+distclean: clean
-+
-+-include $(DEPS_INCLUDE)
-diff --git a/.gitignore b/.gitignore
-index 18ef56a780..7cf26051db 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -160,8 +160,6 @@ tools/libs/util/libxenutil.map
- tools/libs/vchan/headers.chk
- tools/libs/vchan/libxenvchan.map
- tools/libs/vchan/xenvchan.pc
--tools/console/xenconsole
--tools/console/xenconsoled
- tools/debugger/gdb/gdb-6.2.1-linux-i386-xen/*
- tools/debugger/gdb/gdb-6.2.1/*
- tools/debugger/gdb/gdb-6.2.1.tar.bz2
-diff --git a/tools/console/client/.gitignore b/tools/console/client/.gitignore
-new file mode 100644
-index 0000000000..b096a1d841
---- /dev/null
-+++ b/tools/console/client/.gitignore
-@@ -0,0 +1 @@
-+/xenconsole
-diff --git a/tools/console/daemon/.gitignore b/tools/console/daemon/.gitignore
-new file mode 100644
-index 0000000000..55c8f84664
---- /dev/null
-+++ b/tools/console/daemon/.gitignore
-@@ -0,0 +1 @@
-+/xenconsoled
+ hvmloader: $(OBJS) hvmloader.lds
+ 	$(LD) $(LDFLAGS_DIRECT) -N -T hvmloader.lds -o $@ $(OBJS)
+ 
+@@ -87,21 +89,21 @@ roms.inc: $(ROMS)
+ 
+ ifneq ($(ROMBIOS_ROM),)
+ 	echo "#ifdef ROM_INCLUDE_ROMBIOS" >> $@.new
+-	sh ../../misc/mkhex rombios $(ROMBIOS_ROM) >> $@.new
++	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex rombios $(ROMBIOS_ROM) >> $@.new
+ 	echo "#endif" >> $@.new
+ endif
+ 
+ ifneq ($(STDVGA_ROM),)
+ 	echo "#ifdef ROM_INCLUDE_VGABIOS" >> $@.new
+-	sh ../../misc/mkhex vgabios_stdvga $(STDVGA_ROM) >> $@.new
++	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex vgabios_stdvga $(STDVGA_ROM) >> $@.new
+ 	echo "#endif" >> $@.new
+ endif
+ ifneq ($(CIRRUSVGA_ROM),)
+ 	echo "#ifdef ROM_INCLUDE_VGABIOS" >> $@.new
+-	sh ../../misc/mkhex vgabios_cirrusvga $(CIRRUSVGA_ROM) >> $@.new
++	$(SHELL) $(XEN_ROOT)/tools/misc/mkhex vgabios_cirrusvga $(CIRRUSVGA_ROM) >> $@.new
+ 	echo "#endif" >> $@.new
+ endif
+-	mv $@.new $@
++	mv -f $@.new $@
+ 
+ .PHONY: clean
+ clean:
 -- 
 Anthony PERARD
 
