@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25FB1C433EF
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49646CCA47C
 	for <xen-devel@archiver.kernel.org>; Sun, 26 Jun 2022 21:12:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.356137.584189 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.356135.584167 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o5ZXp-0003W8-Gp; Sun, 26 Jun 2022 21:11:49 +0000
+	id 1o5ZXl-0002zr-1j; Sun, 26 Jun 2022 21:11:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 356137.584189; Sun, 26 Jun 2022 21:11:49 +0000
+Received: by outflank-mailman (output) from mailman id 356135.584167; Sun, 26 Jun 2022 21:11:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o5ZXp-0003W1-Dq; Sun, 26 Jun 2022 21:11:49 +0000
-Received: by outflank-mailman (input) for mailman id 356137;
- Sun, 26 Jun 2022 21:11:48 +0000
+	id 1o5ZXk-0002zk-Ug; Sun, 26 Jun 2022 21:11:44 +0000
+Received: by outflank-mailman (input) for mailman id 356135;
+ Sun, 26 Jun 2022 21:11:43 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0i3P=XB=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1o5ZXo-0002ze-4J
- for xen-devel@lists.xenproject.org; Sun, 26 Jun 2022 21:11:48 +0000
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [2a00:1450:4864:20::52f])
+ id 1o5ZXj-0002ze-PW
+ for xen-devel@lists.xenproject.org; Sun, 26 Jun 2022 21:11:43 +0000
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [2a00:1450:4864:20::62e])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 96a317e6-f594-11ec-b725-ed86ccbb4733;
- Sun, 26 Jun 2022 23:11:47 +0200 (CEST)
-Received: by mail-ed1-x52f.google.com with SMTP id eo8so10553039edb.0
- for <xen-devel@lists.xenproject.org>; Sun, 26 Jun 2022 14:11:47 -0700 (PDT)
+ id 930c94fe-f594-11ec-b725-ed86ccbb4733;
+ Sun, 26 Jun 2022 23:11:42 +0200 (CEST)
+Received: by mail-ej1-x62e.google.com with SMTP id lw20so15193372ejb.4
+ for <xen-devel@lists.xenproject.org>; Sun, 26 Jun 2022 14:11:41 -0700 (PDT)
 Received: from uni.. (adsl-146.37.6.170.tellas.gr. [37.6.170.146])
  by smtp.googlemail.com with ESMTPSA id
- cq12-20020a056402220c00b004356b8ad003sm6367556edb.60.2022.06.26.14.11.45
+ cq12-20020a056402220c00b004356b8ad003sm6367556edb.60.2022.06.26.14.11.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Jun 2022 14:11:46 -0700 (PDT)
+ Sun, 26 Jun 2022 14:11:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,73 +46,75 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 96a317e6-f594-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: 930c94fe-f594-11ec-b725-ed86ccbb4733
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=nuU5RdK7p3A+qPrUO/Jr3dM+wawCSfpGpfW4baMZN1o=;
-        b=WpQxztn4nBsr82cJ9eOZah6UtylOZg7AnA56/KVKxKTt9oh2n1FZWC3Bm3MprrBI5m
-         9cNC6/OGiNYKWqZm14RYDQvL8OO5O6swZL1K91SmSlC+eJHvIubQmaS4RmNqAAP80U2g
-         CsTG1O68POh/vetLnbSuc+dS1GaV6PzisV1sVOA1PFgFVjOYK/NomIx/VuWyUrwc3ZDa
-         BTXw06zoRN8pLFb9aJoVyFbHaAw4INhhLeMpFKv6uyrP7TStYcWisyQbNlxb0NaV1btx
-         dw3ZcSaj/tmw4pRP0da5dyeUT2nL72p26qq0sKfqeMV491SnuGoh3I/WUE3wSQHvOezc
-         DgQg==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9qduxVfcPOGMNJk2aZ/6LiSflO/gNs4M/uoLPaxFuqI=;
+        b=l0umNaPa48VuyaWeWwKUHz/ZvTdUaBnP73WaWMnnelaE7bVPBYqmfKys0u1YU+3Uzq
+         iBXy9he3/DDh3QzJv6SNdjywm8m9cGW19NNDIUFwbdR0aZr2blGWwibGbjoQPE/B0Fsz
+         xNgKHppL4z9T0fDgVAfmcTLhNESHTI9hwQUwI8YT1PzwLch+BPtOclH/cDnp1oPMstes
+         9+vq6RZciDyOoX0hXlPX4XDOVIAOZQlvOYpyxtQpUq+omp5ujsgsTpUB6h/dNemYVZi4
+         RPoEGzhgBxpZqOj/CvKPe2QcdFAl2BrgrVweB8cif/5EO0hx6iqToStMLkY2T/A5yrhR
+         elUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=nuU5RdK7p3A+qPrUO/Jr3dM+wawCSfpGpfW4baMZN1o=;
-        b=t21KKj1KKy436cHUNN+AJNN2Tor0I8hPbB6+k8EeDcCnSy9USmYsuL/VIj3ZiGpE2j
-         TUzcYayZxXTUCOvVodehFSm/73bPXPkfk4vxvgSAmIcQ7os+DMInsyIq+/Oz+GUXUbP7
-         sm28gSD7Wowwpn9P+mItpoqhw7a+LVGS1GF47tZpf/U5rsfxLxcSHGmoWw+5LGXYnpjx
-         +Bg0PXsqv6vjOLoL6oLoHiX9dx0Rk720DQnbn0hYUEQtmuV02pGPBEjvCeUaJOFStpDD
-         hmyuvwp9sfKKD9QtPyZ6e8Z706+rylqKYW1mb1L0k/MR7I9i7E66iTwQkN8FBcUC6ozr
-         Kljg==
-X-Gm-Message-State: AJIora+RjC0SFh2vrHomQBWULY/4DT2jrkLvq9I7C5sLmnETWasccYx9
-	I8Q94BUZBYrlySsePVmsjYbcwrGZ7fU=
-X-Google-Smtp-Source: AGRyM1uqxPILZfgMHtiSrlaohNVIDdzBMh410mKVJtBS0assx2Gn2edp44afW8udB/i1s3pRO8iozA==
-X-Received: by 2002:a05:6402:4496:b0:435:d605:6ff8 with SMTP id er22-20020a056402449600b00435d6056ff8mr12821122edb.357.1656277906805;
-        Sun, 26 Jun 2022 14:11:46 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9qduxVfcPOGMNJk2aZ/6LiSflO/gNs4M/uoLPaxFuqI=;
+        b=l6WyTbnrk/HqeNJOH9rqDX5X/YH6Lr5dhYP7J1UlYfK8qmRDz1u/9MjU240YXMVvL5
+         aYtbrSl7Z4xZUOsCVeLOrbNPuxnpHBfcrZbEYjyygVhZYV1Iv4dZD5nS7GZ2qvL6ntc+
+         Tfuhhpjz97VZ1W/bSN3NEu0K3D6DvlQ+kAVmIUpgeJ376KvJyOnBsEUq/PYQnBcTICj8
+         uJMlaYuJt0EXMSnOwKGdFwwLTeqY2WnsZcoD2+ErtDyvalFxEy+HDjTqmDXrltvciz84
+         2L/SQ+Q52TrUMBI5rPk3AIwVqskxwJrQmA1/xoPD3uO89W0JlMpaoTgUUt/oGkZCrse1
+         58cg==
+X-Gm-Message-State: AJIora8rVl0F1bCPNKKzJQo3jPDqOPrMTzMuEtwP3w8y5S+9dQed+HeT
+	+zx67GaV/2f77MHN0+Lmpf0FnZTFB9tPig==
+X-Google-Smtp-Source: AGRyM1t9NbO0l9vtidZltnkofT1vz6DNU0R4X5dmgUIGYW1MYJ6Bym85yUDBHtGbpFteqvHRotynnw==
+X-Received: by 2002:a17:907:6e17:b0:726:2b3c:d373 with SMTP id sd23-20020a1709076e1700b007262b3cd373mr9520821ejc.357.1656277900662;
+        Sun, 26 Jun 2022 14:11:40 -0700 (PDT)
 From: Xenia Ragiadakou <burzalodowa@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Xenia Ragiadakou <burzalodowa@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
 	Tamas K Lengyel <tamas@tklengyel.com>,
 	Alexandru Isaila <aisaila@bitdefender.com>,
-	Petre Pircalabu <ppircalabu@bitdefender.com>
-Subject: [PATCH 2/5] xen/common: vm_event: Fix MISRA C 2012 Rule 8.7 violation
-Date: Mon, 27 Jun 2022 00:11:28 +0300
-Message-Id: <20220626211131.678995-3-burzalodowa@gmail.com>
+	Petre Pircalabu <ppircalabu@bitdefender.com>,
+	Paul Durrant <paul@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH 0/5] Fix MISRA C 2012 violations
+Date: Mon, 27 Jun 2022 00:11:26 +0300
+Message-Id: <20220626211131.678995-1-burzalodowa@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220626211131.678995-1-burzalodowa@gmail.com>
-References: <20220626211131.678995-1-burzalodowa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The function vm_event_wake() is referenced only in vm_event.c.
-Change the linkage of the function from external to internal by adding
-the storage-class specifier static to the function definition.
+Resolve MISRA C 2012 Rule 8.4 warnings.
 
-This patch aims to resolve indirectly a MISRA C 2012 Rule 8.4 violation warning.
+Xenia Ragiadakou (5):
+  xen/common: page_alloc: Fix MISRA C 2012 Rule 8.7 violation
+  xen/common: vm_event: Fix MISRA C 2012 Rule 8.7 violation
+  xen/drivers: iommu: Fix MISRA C 2012 Rule 8.7 violation
+  xen/sched: credit: Fix MISRA C 2012 Rule 8.7 violation
+  xen/arm64: traps: Fix MISRA C 2012 Rule 8.4 violations
 
-Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
----
- xen/common/vm_event.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/arch/arm/arm64/traps.c             | 1 +
+ xen/arch/arm/include/asm/arm64/traps.h | 2 ++
+ xen/common/page_alloc.c                | 4 ++--
+ xen/common/sched/credit.c              | 2 +-
+ xen/common/vm_event.c                  | 2 +-
+ xen/drivers/passthrough/iommu.c        | 2 +-
+ 6 files changed, 8 insertions(+), 5 deletions(-)
 
-diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
-index 0b99a6ea72..ecf49c38a9 100644
---- a/xen/common/vm_event.c
-+++ b/xen/common/vm_event.c
-@@ -173,7 +173,7 @@ static void vm_event_wake_queued(struct domain *d, struct vm_event_domain *ved)
-  * call vm_event_wake() again, ensuring that any blocked vCPUs will get
-  * unpaused once all the queued vCPUs have made it through.
-  */
--void vm_event_wake(struct domain *d, struct vm_event_domain *ved)
-+static void vm_event_wake(struct domain *d, struct vm_event_domain *ved)
- {
-     if ( !list_empty(&ved->wq.list) )
-         vm_event_wake_queued(d, ved);
 -- 
 2.34.1
 
