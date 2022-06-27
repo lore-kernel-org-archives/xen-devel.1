@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D52CCA481
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B33C433EF
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jun 2022 18:10:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.356886.585231 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.356885.585220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o5tBv-0005Mm-Dc; Mon, 27 Jun 2022 18:10:31 +0000
+	id 1o5tBq-00055Y-4P; Mon, 27 Jun 2022 18:10:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 356886.585231; Mon, 27 Jun 2022 18:10:31 +0000
+Received: by outflank-mailman (output) from mailman id 356885.585220; Mon, 27 Jun 2022 18:10:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o5tBv-0005Md-At; Mon, 27 Jun 2022 18:10:31 +0000
-Received: by outflank-mailman (input) for mailman id 356886;
- Mon, 27 Jun 2022 18:10:29 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o5tBq-00055R-1i; Mon, 27 Jun 2022 18:10:26 +0000
+Received: by outflank-mailman (input) for mailman id 356885;
+ Mon, 27 Jun 2022 18:10:24 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+dsg=XC=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1o5tBt-0005LG-HS
- for xen-devel@lists.xenproject.org; Mon, 27 Jun 2022 18:10:29 +0000
+ id 1o5tBo-00055L-EM
+ for xen-devel@lists.xenproject.org; Mon, 27 Jun 2022 18:10:24 +0000
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
- [66.111.4.25]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 6b76fac3-f644-11ec-b725-ed86ccbb4733;
- Mon, 27 Jun 2022 20:10:26 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 1A7B85C01CF;
- Mon, 27 Jun 2022 14:10:26 -0400 (EDT)
+ [66.111.4.25]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 67b59f01-f644-11ec-bd2d-47488cf2e6aa;
+ Mon, 27 Jun 2022 20:10:21 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id 9CED25C017C;
+ Mon, 27 Jun 2022 14:10:19 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Mon, 27 Jun 2022 14:10:26 -0400
+ by compute5.internal (MEProxy); Mon, 27 Jun 2022 14:10:19 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 27 Jun 2022 14:10:25 -0400 (EDT)
+ 27 Jun 2022 14:10:18 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,60 +45,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 6b76fac3-f644-11ec-b725-ed86ccbb4733
+X-Inumbo-ID: 67b59f01-f644-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:sender:subject:subject:to:to; s=fm2; t=
-	1656353426; x=1656439826; bh=lOgO7/MkD/pT4PfK69b91gFfkelWuZztBiA
-	L6+qToLw=; b=llieCiZBXLbkXZGOfCR9hyK5iUCGnrXyHEfu4pm/xco/WbiUYfw
-	m4YfIlTTed6Oq1/RusdqQeQqRdR9Svjlf1q6bKiCdzKjzfmcwhXpFvlYQfWN6UNP
-	TyZyfR9gNAWJbGHjpkeNXVVBU4AzRvkZcyPHKwffO8AYrRTy5iFTtIWjM0AeM6YF
-	0xTwOYPsW5LF0sMsN68uMuPvwg1yQwn5r8EDLKElaqEgFUorkUYHBn0ovqHRYzAB
-	AJkgsGBd1lJcpL11JqmhRZM3LkSXVG6HahP9CrvKDuZzpdOYsS3HXUUu8+vqqGHV
-	4cS2jyzhl/ROSxV7whtHWihNzdyz75yMCgg==
+	:date:from:from:in-reply-to:message-id:mime-version:reply-to
+	:sender:subject:subject:to:to; s=fm2; t=1656353419; x=
+	1656439819; bh=XZWK+bw9iY+oAJN0Z4Vfay10wlsKWP9yZKGtDt1PJP4=; b=T
+	JqByFNGRD/9fBh5O/htScTScPxK+rsdaHV1yGzCNInah2OFXA/fdtaizdHzYtAEM
+	DS3c/2xZVhK4JO6iHWFfVaPZ9v1xDqckC4uXsBQW88P7aAskYuq5fasbE61rrvlZ
+	zjewboZAzDCWtFR6kXlS/Sl31UvfwhXM6OZSyCHUdJJ2SU9Re7grITot1bWxZmPN
+	gwOQsKBtAw04/fvryivMWrtLOSlMOvMrWxjiMUkIgsR18gPV9xF6ynD/LbqC35WR
+	bzF/OBCNJ0sOzfwUf16OuVSynedG8PdS8M6TxC/+xUDYyb6uqP2IQnTzDR4zzbtf
+	DTttukg9G6Br20P5eWmyA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1656353426; x=1656439826; bh=lOgO7/MkD/pT4
-	PfK69b91gFfkelWuZztBiAL6+qToLw=; b=iO6uNxFtRmfY8kW6yvdkW90T/tkO7
-	+5+ihtclmMYmAAibdh624QgqV86qGPc31vcQ/PfX4gOQmT/vZaPg6o/RO0GoCdc5
-	EMJSGiKZEAyUQwj28pUlomwmj9ZXmf817sxkQdcGhublCGlu+1gsI2jdvMdv03GU
-	AGO7lhW139N3J3GIA9JPNnYxng9E5DPdb8R4zOK95QjGGFb10xfdwkdbw1Oe9gvj
-	dC2CWfz4sVr2sNQN5qo7syT8SIEke6vrlHUyg+R9RGR7seCUzoDgtmt9OYuWS08x
-	+jGmoKg9Y6D4+MyFV53jVyZQvyYEgJt9L3HvJQTdBAq8omuo8w+W+/QdQ==
-X-ME-Sender: <xms:kfK5YiEcRkT70Ov0wytkUB1WneSnm1OuXwsjriKQJCoblcQZ15Fr_w>
-    <xme:kfK5YjW8geMgrRWb2aZrW1EuqdYzYmukxFfzdKhvab60PPXlFzRLKKkbBH57BEYPs
-    S3e-RgKA9X4ZD0>
-X-ME-Received: <xmr:kfK5YsIYkdu1LPZGwMSnNsjBRhh6LBASKdIL4trLEGBbY0xXLOz5TCy39Tyn-RSbOaaPQMWVzRYF>
+	:feedback-id:feedback-id:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
+	1656353419; x=1656439819; bh=XZWK+bw9iY+oAJN0Z4Vfay10wlsKWP9yZKG
+	tDt1PJP4=; b=oCwdZDCN0J7MeBl3MsZLKkZyzSbHUQKF3qe77yTZ8b2cRUCrB61
+	4FDl9m/iqBNVOr5IkWV2K85aFbw5cwVr8hahrv3smJ60x8AR4G+hmrWIp1CQTLpM
+	3w6RycdHc2uZjDZXGR5XemzDl7lYqfhYVvwDENYsNkDN0hardCei9lfVrv+Oyqfp
+	k9CJG6XbJCu4VOZbKpaW5UgSf+8EUw/dW82oH0SWoDF0pwtifXuUZz/QKwfFRqCi
+	L2AbLAJKhFOqrjx0U6nmij7ihR+8eqaXMubeGumDTRBvIYeWZP4JKQGKawbiWaUf
+	mvO0n2ZCwHkqjp2CfKfqzYWDxx88AwcIDKw==
+X-ME-Sender: <xms:i_K5YsnU2K0hf72eRh6cuU4-AnBowEieiAjsKii0Es_Yshj7A-V2Iw>
+    <xme:i_K5Yr1LwZOocD-WYVuKxyZiFLHGWPQ0FslH-YNiXd3aFN86eBLeRBH0ux97HFug2
+    gHCb_Xb-boRZZc>
+X-ME-Received: <xmr:i_K5Yqpl9UI09Bx4w4u3XdXOUMfHEOi0ecGcxgIaYjN5qLwk-1pE36jLT20jIP_lJdeJncBUNn-q>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrudeghedguddvgecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-    enucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpeffvghm
-    ihcuofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinh
-    hgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeettdegudelkeelveejhefhvdek
-    hfevuedvvedtudfhhfdvledtgedtgfekuddugeenucffohhmrghinhepghhithhhuhgsrd
-    gtohhmpdhkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
-    mhepmhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhlrggsrd
-    gtohhm
-X-ME-Proxy: <xmx:kfK5YsFCwSy7ugcmGGoG21zHIZqaRrYPPB0VZprxYm_-jg70EqJEPg>
-    <xmx:kfK5YoWWctQWNbo7KvtdUArwO2noAMNQr2lsvVPXG6hHMKQJRfGYlA>
-    <xmx:kfK5YvMwiAH4aA5tyEL9n4ADEBiK0TObHtJMbY1b2NNkaYKY1schFQ>
-    <xmx:kvK5YjeFm22CkV5ZMhSBCJ9qJtMCPp9pYXYFeINpFtXljJ0v14f3UA>
+    enucfjughrpefhvfevufffkffoggfgsedtkeertdertddtnecuhfhrohhmpeffvghmihcu
+    ofgrrhhivgcuqfgsvghnohhurhcuoeguvghmihesihhnvhhishhisghlvghthhhinhhgsh
+    hlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeeiudeggfelhfeludeuffeifeegleef
+    vdehvdduvdeiteefteekueeuuefhteeileenucffohhmrghinhepghhithhhuhgsrdgtoh
+    hmpdhkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhep
+    mhgrihhlfhhrohhmpeguvghmihesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtoh
+    hm
+X-ME-Proxy: <xmx:i_K5YolxbmX71E8kDT9-FD2a8BmY_AOl5OXe_lYWMbTiHTpEqdClrA>
+    <xmx:i_K5Yq0xlx6S9tIvKkxFR_qOXg7ZmhGWIv1knEPnmPLY35ZE27Nt0g>
+    <xmx:i_K5YvswZC9ZrFvlVavnPzupBajC2LYFtZa38RheCMfWktOzCoOuDw>
+    <xmx:i_K5Yv_E5EYyEsCPPcug7VSSTGyj3dafMGc0AUxv1_acNAAJlzQ06g>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: stable@vger.kernel.org,
 	Xen developer discussion <xen-devel@lists.xenproject.org>,
 	Juergen Gross <jgross@suse.com>
 Cc: Demi Marie Obenour <demi@invisiblethingslab.com>
-Subject: [PATCH 4.19] xen/gntdev: Avoid blocking in unmap_grant_pages()
-Date: Mon, 27 Jun 2022 14:10:04 -0400
-Message-Id: <20220627181006.1954-3-demi@invisiblethingslab.com>
+Subject: [PATCH 5.10] xen/gntdev: Avoid blocking in unmap_grant_pages()
+Date: Mon, 27 Jun 2022 14:10:02 -0400
+Message-Id: <20220627181006.1954-1-demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20220627181006.1954-1-demi@invisiblethingslab.com>
-References: <20220627181006.1954-1-demi@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
@@ -137,24 +135,23 @@ Reviewed-by: Juergen Gross <jgross@suse.com>
 Link: https://lore.kernel.org/r/20220622022726.2538-1-demi@invisiblethingslab.com
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- drivers/xen/gntdev-common.h |   8 ++
- drivers/xen/gntdev.c        | 146 +++++++++++++++++++++++++-----------
- 2 files changed, 109 insertions(+), 45 deletions(-)
+ drivers/xen/gntdev-common.h |   7 ++
+ drivers/xen/gntdev.c        | 142 +++++++++++++++++++++++++-----------
+ 2 files changed, 106 insertions(+), 43 deletions(-)
 
 diff --git a/drivers/xen/gntdev-common.h b/drivers/xen/gntdev-common.h
-index 2f8b949c3eeb..fab6f5a54d5b 100644
+index 20d7d059dadb..40ef379c28ab 100644
 --- a/drivers/xen/gntdev-common.h
 +++ b/drivers/xen/gntdev-common.h
-@@ -15,6 +15,8 @@
- #include <linux/mman.h>
+@@ -16,6 +16,7 @@
  #include <linux/mmu_notifier.h>
  #include <linux/types.h>
-+#include <xen/interface/event_channel.h>
+ #include <xen/interface/event_channel.h>
 +#include <xen/grant_table.h>
  
  struct gntdev_dmabuf_priv;
  
-@@ -61,6 +63,7 @@ struct gntdev_grant_map {
+@@ -56,6 +57,7 @@ struct gntdev_grant_map {
  	struct gnttab_unmap_grant_ref *unmap_ops;
  	struct gnttab_map_grant_ref   *kmap_ops;
  	struct gnttab_unmap_grant_ref *kunmap_ops;
@@ -162,7 +159,7 @@ index 2f8b949c3eeb..fab6f5a54d5b 100644
  	struct page **pages;
  	unsigned long pages_vm_start;
  
-@@ -78,6 +81,11 @@ struct gntdev_grant_map {
+@@ -73,6 +75,11 @@ struct gntdev_grant_map {
  	/* Needed to avoid allocation in gnttab_dma_free_pages(). */
  	xen_pfn_t *frames;
  #endif
@@ -175,16 +172,23 @@ index 2f8b949c3eeb..fab6f5a54d5b 100644
  
  struct gntdev_grant_map *gntdev_alloc_map(struct gntdev_priv *priv, int count,
 diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
-index e519063e421e..492084814f55 100644
+index 54778aadf618..a631a453eb57 100644
 --- a/drivers/xen/gntdev.c
 +++ b/drivers/xen/gntdev.c
-@@ -64,11 +64,12 @@ MODULE_PARM_DESC(limit, "Maximum number of grants that may be mapped by "
+@@ -35,6 +35,7 @@
+ #include <linux/slab.h>
+ #include <linux/highmem.h>
+ #include <linux/refcount.h>
++#include <linux/workqueue.h>
  
- static atomic_t pages_mapped = ATOMIC_INIT(0);
+ #include <xen/xen.h>
+ #include <xen/grant_table.h>
+@@ -60,10 +61,11 @@ module_param(limit, uint, 0644);
+ MODULE_PARM_DESC(limit,
+ 	"Maximum number of grants that may be mapped by one mapping request");
  
 +/* True in PV mode, false otherwise */
  static int use_ptemod;
- #define populate_freeable_maps use_ptemod
  
 -static int unmap_grant_pages(struct gntdev_grant_map *map,
 -			     int offset, int pages);
@@ -193,23 +197,23 @@ index e519063e421e..492084814f55 100644
  
  static struct miscdevice gntdev_miscdev;
  
-@@ -125,6 +126,7 @@ static void gntdev_free_map(struct gntdev_grant_map *map)
- 	kfree(map->unmap_ops);
- 	kfree(map->kmap_ops);
- 	kfree(map->kunmap_ops);
-+	kfree(map->being_removed);
+@@ -120,6 +122,7 @@ static void gntdev_free_map(struct gntdev_grant_map *map)
+ 	kvfree(map->unmap_ops);
+ 	kvfree(map->kmap_ops);
+ 	kvfree(map->kunmap_ops);
++	kvfree(map->being_removed);
  	kfree(map);
  }
  
-@@ -144,12 +146,15 @@ struct gntdev_grant_map *gntdev_alloc_map(struct gntdev_priv *priv, int count,
- 	add->kmap_ops  = kcalloc(count, sizeof(add->kmap_ops[0]), GFP_KERNEL);
- 	add->kunmap_ops = kcalloc(count, sizeof(add->kunmap_ops[0]), GFP_KERNEL);
- 	add->pages     = kcalloc(count, sizeof(add->pages[0]), GFP_KERNEL);
+@@ -140,12 +143,13 @@ struct gntdev_grant_map *gntdev_alloc_map(struct gntdev_priv *priv, int count,
+ 	add->kunmap_ops = kvcalloc(count,
+ 				   sizeof(add->kunmap_ops[0]), GFP_KERNEL);
+ 	add->pages     = kvcalloc(count, sizeof(add->pages[0]), GFP_KERNEL);
 +	add->being_removed =
-+		kcalloc(count, sizeof(add->being_removed[0]), GFP_KERNEL);
++		kvcalloc(count, sizeof(add->being_removed[0]), GFP_KERNEL);
  	if (NULL == add->grants    ||
- 	    NULL == add->map_ops   ||
- 	    NULL == add->unmap_ops ||
+-	    NULL == add->map_ops   ||
+-	    NULL == add->unmap_ops ||
  	    NULL == add->kmap_ops  ||
  	    NULL == add->kunmap_ops ||
 -	    NULL == add->pages)
@@ -218,10 +222,11 @@ index e519063e421e..492084814f55 100644
  		goto err;
  
  #ifdef CONFIG_XEN_GRANT_DMA_ALLOC
-@@ -245,6 +250,35 @@ void gntdev_put_map(struct gntdev_priv *priv, struct gntdev_grant_map *map)
+@@ -240,9 +244,36 @@ void gntdev_put_map(struct gntdev_priv *priv, struct gntdev_grant_map *map)
+ 	if (!refcount_dec_and_test(&map->users))
  		return;
  
- 	atomic_sub(map->count, &pages_mapped);
+-	if (map->pages && !use_ptemod)
 +	if (map->pages && !use_ptemod) {
 +		/*
 +		 * Increment the reference count.  This ensures that the
@@ -240,8 +245,8 @@ index e519063e421e..492084814f55 100644
 +		 * is possible that the reference count is 1 on return, but it
 +		 * could also be greater than 1.
 +		 */
-+		unmap_grant_pages(map, 0, map->count);
-+
+ 		unmap_grant_pages(map, 0, map->count);
+ 
 +		/* Check if the memory now needs to be freed */
 +		if (!refcount_dec_and_test(&map->users))
 +			return;
@@ -251,10 +256,11 @@ index e519063e421e..492084814f55 100644
 +		 * map.
 +		 */
 +	}
- 
++
  	if (map->notify.flags & UNMAP_NOTIFY_SEND_EVENT) {
  		notify_remote_via_evtchn(map->notify.event);
-@@ -302,6 +336,7 @@ static int set_grant_ptes_as_special(pte_t *pte, pgtable_t token,
+ 		evtchn_put(map->notify.event);
+@@ -288,6 +319,7 @@ static int set_grant_ptes_as_special(pte_t *pte, unsigned long addr, void *data)
  
  int gntdev_map_grant_pages(struct gntdev_grant_map *map)
  {
@@ -262,7 +268,7 @@ index e519063e421e..492084814f55 100644
  	int i, err = 0;
  
  	if (!use_ptemod) {
-@@ -350,87 +385,109 @@ int gntdev_map_grant_pages(struct gntdev_grant_map *map)
+@@ -336,87 +368,109 @@ int gntdev_map_grant_pages(struct gntdev_grant_map *map)
  			map->pages, map->count);
  
  	for (i = 0; i < map->count; i++) {
@@ -406,58 +412,30 @@ index e519063e421e..492084814f55 100644
  }
  
  /* ------------------------------------------------------------------ */
-@@ -500,7 +557,6 @@ static int unmap_if_in_range(struct gntdev_grant_map *map,
- 			      bool blockable)
- {
+@@ -468,7 +522,6 @@ static bool gntdev_invalidate(struct mmu_interval_notifier *mn,
+ 	struct gntdev_grant_map *map =
+ 		container_of(mn, struct gntdev_grant_map, notifier);
  	unsigned long mstart, mend;
 -	int err;
  
- 	if (!in_range(map, start, end))
- 		return 0;
-@@ -514,10 +570,9 @@ static int unmap_if_in_range(struct gntdev_grant_map *map,
+ 	if (!mmu_notifier_range_blockable(range))
+ 		return false;
+@@ -489,10 +542,9 @@ static bool gntdev_invalidate(struct mmu_interval_notifier *mn,
  			map->index, map->count,
  			map->vma->vm_start, map->vma->vm_end,
- 			start, end, mstart, mend);
+ 			range->start, range->end, mstart, mend);
 -	err = unmap_grant_pages(map,
 +	unmap_grant_pages(map,
  				(mstart - map->vma->vm_start) >> PAGE_SHIFT,
  				(mend - mstart) >> PAGE_SHIFT);
 -	WARN_ON(err);
  
- 	return 0;
+ 	return true;
  }
-@@ -558,7 +613,6 @@ static void mn_release(struct mmu_notifier *mn,
- {
- 	struct gntdev_priv *priv = container_of(mn, struct gntdev_priv, mn);
- 	struct gntdev_grant_map *map;
--	int err;
- 
- 	mutex_lock(&priv->lock);
- 	list_for_each_entry(map, &priv->maps, next) {
-@@ -567,8 +621,7 @@ static void mn_release(struct mmu_notifier *mn,
- 		pr_debug("map %d+%d (%lx %lx)\n",
- 				map->index, map->count,
- 				map->vma->vm_start, map->vma->vm_end);
--		err = unmap_grant_pages(map, /* offset */ 0, map->count);
--		WARN_ON(err);
-+		unmap_grant_pages(map, /* offset */ 0, map->count);
- 	}
- 	list_for_each_entry(map, &priv->freeable_maps, next) {
- 		if (!map->vma)
-@@ -576,8 +629,7 @@ static void mn_release(struct mmu_notifier *mn,
- 		pr_debug("map %d+%d (%lx %lx)\n",
- 				map->index, map->count,
- 				map->vma->vm_start, map->vma->vm_end);
--		err = unmap_grant_pages(map, /* offset */ 0, map->count);
--		WARN_ON(err);
-+		unmap_grant_pages(map, /* offset */ 0, map->count);
- 	}
- 	mutex_unlock(&priv->lock);
- }
-@@ -1113,6 +1165,10 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
+@@ -980,6 +1032,10 @@ static int gntdev_mmap(struct file *flip, struct vm_area_struct *vma)
  		goto unlock_out;
- 	}
- 
+ 	if (use_ptemod && map->vma)
+ 		goto unlock_out;
 +	if (atomic_read(&map->live_grants)) {
 +		err = -EAGAIN;
 +		goto unlock_out;
