@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498CFC43334
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5746BCCA473
 	for <xen-devel@archiver.kernel.org>; Mon, 27 Jun 2022 13:16:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.356602.584864 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.356600.584842 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o5ob9-0005qw-4P; Mon, 27 Jun 2022 13:16:15 +0000
+	id 1o5ob4-0005HZ-Jg; Mon, 27 Jun 2022 13:16:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 356602.584864; Mon, 27 Jun 2022 13:16:15 +0000
+Received: by outflank-mailman (output) from mailman id 356600.584842; Mon, 27 Jun 2022 13:16:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o5ob9-0005qn-0j; Mon, 27 Jun 2022 13:16:15 +0000
-Received: by outflank-mailman (input) for mailman id 356602;
- Mon, 27 Jun 2022 13:16:13 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o5ob4-0005HS-FY; Mon, 27 Jun 2022 13:16:10 +0000
+Received: by outflank-mailman (input) for mailman id 356600;
+ Mon, 27 Jun 2022 13:16:09 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=vXPS=XC=arm.com=michal.orzel@srs-se1.protection.inumbo.net>)
- id 1o5ob7-0005lc-Ad
- for xen-devel@lists.xenproject.org; Mon, 27 Jun 2022 13:16:13 +0000
+ id 1o5ob3-0005HM-Gf
+ for xen-devel@lists.xenproject.org; Mon, 27 Jun 2022 13:16:09 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTP
- id 50b8281d-f61b-11ec-bd2d-47488cf2e6aa;
- Mon, 27 Jun 2022 15:16:12 +0200 (CEST)
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTP
+ id 4adb00ea-f61b-11ec-b725-ed86ccbb4733;
+ Mon, 27 Jun 2022 15:16:02 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B9545175A;
- Mon, 27 Jun 2022 06:16:11 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 238DD1758;
+ Mon, 27 Jun 2022 06:16:06 -0700 (PDT)
 Received: from e129167.arm.com (unknown [10.57.42.186])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D23983F5A1;
- Mon, 27 Jun 2022 06:16:08 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 905533F5A1;
+ Mon, 27 Jun 2022 06:16:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,59 +44,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50b8281d-f61b-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 4adb00ea-f61b-11ec-b725-ed86ccbb4733
 From: Michal Orzel <michal.orzel@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH 2/7] xen/domain: Use unsigned int instead of plain unsigned
-Date: Mon, 27 Jun 2022 15:15:38 +0200
-Message-Id: <20220627131543.410971-3-michal.orzel@arm.com>
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>,
+	Dario Faggioli <dfaggioli@suse.com>,
+	Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+	"Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: [PATCH 0/7] xen/arm: use unsigned int instead of plain unsigned
+Date: Mon, 27 Jun 2022 15:15:36 +0200
+Message-Id: <20220627131543.410971-1-michal.orzel@arm.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220627131543.410971-1-michal.orzel@arm.com>
-References: <20220627131543.410971-1-michal.orzel@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This is just for the style and consistency reasons as the former is
-being used more often than the latter.
+This is done purely for cosmetic/style reasons (as we tend to use unsigned int
+more often than just unsigned) and not to waste changes made as part of [1]
+series that contained invalid justification (this is not fixing MISRA 8.1 rule).
 
-Signed-off-by: Michal Orzel <michal.orzel@arm.com>
----
- xen/common/domain.c      | 2 +-
- xen/include/xen/domain.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Most of these patches have already been reviewed/acked but because of changing
+the commit messages/titles the tags are dropped now.
 
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 7570eae91a..57a8515f21 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -1446,7 +1446,7 @@ int vcpu_reset(struct vcpu *v)
-  * of memory, and it sets a pending event to make sure that a pending
-  * event doesn't get missed.
-  */
--int map_vcpu_info(struct vcpu *v, unsigned long gfn, unsigned offset)
-+int map_vcpu_info(struct vcpu *v, unsigned long gfn, unsigned int offset)
- {
-     struct domain *d = v->domain;
-     void *mapping;
-diff --git a/xen/include/xen/domain.h b/xen/include/xen/domain.h
-index 1c3c88a14d..628b14b086 100644
---- a/xen/include/xen/domain.h
-+++ b/xen/include/xen/domain.h
-@@ -65,7 +65,7 @@ void cf_check free_pirq_struct(void *);
- int  arch_vcpu_create(struct vcpu *v);
- void arch_vcpu_destroy(struct vcpu *v);
- 
--int map_vcpu_info(struct vcpu *v, unsigned long gfn, unsigned offset);
-+int map_vcpu_info(struct vcpu *v, unsigned long gfn, unsigned int offset);
- void unmap_vcpu_info(struct vcpu *v);
- 
- int arch_domain_create(struct domain *d,
+[1] https://lore.kernel.org/all/e6c10adc-27a8-2f31-7d84-6aee916c56bf@suse.com/t/
+
+
+Michal Orzel (7):
+  xen/arm: Use unsigned int instead of plain unsigned
+  xen/domain: Use unsigned int instead of plain unsigned
+  xen/common: Use unsigned int instead of plain unsigned
+  include/xen: Use unsigned int instead of plain unsigned
+  include/public: Use uint32_t instead of unsigned (int)
+  xsm/flask: Use unsigned int instead of plain unsigned
+  drivers/acpi: Drop the unneeded casts to unsigned
+
+ xen/arch/arm/domain_build.c             |  2 +-
+ xen/arch/arm/guestcopy.c                | 13 +++++++------
+ xen/arch/arm/include/asm/arm32/bitops.h |  8 ++++----
+ xen/arch/arm/include/asm/fixmap.h       |  4 ++--
+ xen/arch/arm/include/asm/guest_access.h |  8 ++++----
+ xen/arch/arm/include/asm/mm.h           |  2 +-
+ xen/arch/arm/irq.c                      |  2 +-
+ xen/arch/arm/kernel.c                   |  2 +-
+ xen/arch/arm/mm.c                       |  4 ++--
+ xen/common/domain.c                     |  2 +-
+ xen/common/grant_table.c                |  6 +++---
+ xen/common/gunzip.c                     |  8 ++++----
+ xen/common/sched/cpupool.c              |  4 ++--
+ xen/common/trace.c                      |  2 +-
+ xen/drivers/acpi/tables/tbfadt.c        |  6 +++---
+ xen/drivers/acpi/tables/tbutils.c       |  1 -
+ xen/include/public/physdev.h            |  4 ++--
+ xen/include/public/sysctl.h             | 10 +++++-----
+ xen/include/xen/domain.h                |  2 +-
+ xen/include/xen/perfc.h                 |  2 +-
+ xen/include/xen/sched.h                 |  2 +-
+ xen/xsm/flask/ss/avtab.c                |  2 +-
+ 22 files changed, 48 insertions(+), 48 deletions(-)
+
 -- 
 2.25.1
 
