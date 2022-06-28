@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E803FC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Jun 2022 15:04:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.357166.585655 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91D88C43334
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Jun 2022 15:09:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.357198.585676 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6Cl2-0001Pd-5U; Tue, 28 Jun 2022 15:04:04 +0000
+	id 1o6Cpn-0003vp-Cl; Tue, 28 Jun 2022 15:08:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 357166.585655; Tue, 28 Jun 2022 15:04:04 +0000
+Received: by outflank-mailman (output) from mailman id 357198.585676; Tue, 28 Jun 2022 15:08:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6Cl2-0001PR-21; Tue, 28 Jun 2022 15:04:04 +0000
-Received: by outflank-mailman (input) for mailman id 357166;
- Tue, 28 Jun 2022 15:04:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o6Cpn-0003vi-9x; Tue, 28 Jun 2022 15:08:59 +0000
+Received: by outflank-mailman (input) for mailman id 357198;
+ Tue, 28 Jun 2022 15:08:58 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=VwHr=XD=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1o6Cl1-0001MY-2P
- for xen-devel@lists.xenproject.org; Tue, 28 Jun 2022 15:04:03 +0000
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [2a00:1450:4864:20::534])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 8afb4271-f6f3-11ec-bd2d-47488cf2e6aa;
- Tue, 28 Jun 2022 17:04:01 +0200 (CEST)
-Received: by mail-ed1-x534.google.com with SMTP id c65so18004566edf.4
- for <xen-devel@lists.xenproject.org>; Tue, 28 Jun 2022 08:04:01 -0700 (PDT)
+ id 1o6Cpm-0003vc-Ai
+ for xen-devel@lists.xenproject.org; Tue, 28 Jun 2022 15:08:58 +0000
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [2a00:1450:4864:20::629])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 3b7542b4-f6f4-11ec-b725-ed86ccbb4733;
+ Tue, 28 Jun 2022 17:08:57 +0200 (CEST)
+Received: by mail-ej1-x629.google.com with SMTP id g26so26400667ejb.5
+ for <xen-devel@lists.xenproject.org>; Tue, 28 Jun 2022 08:08:57 -0700 (PDT)
 Received: from uni.. (adsl-146.37.6.170.tellas.gr. [37.6.170.146])
  by smtp.googlemail.com with ESMTPSA id
- k14-20020aa7c04e000000b00431962fe5d4sm9785589edo.77.2022.06.28.08.03.59
+ q10-20020a170906940a00b006fe8bf56f53sm6668274ejx.43.2022.06.28.08.08.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Jun 2022 08:04:00 -0700 (PDT)
+ Tue, 28 Jun 2022 08:08:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,80 +46,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8afb4271-f6f3-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 3b7542b4-f6f4-11ec-b725-ed86ccbb4733
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=IoisOmV2uP3Ir6MH/g/SxzICNH4UZsoy3K2WoiWM8Iw=;
-        b=EVvItujdDdLUU1KM6UOtMsojrD58ruvnpsKIenfvsus/T3FnBl1Vb8Y9j33kwFb7vh
-         sRF06HwvHGEKxWJBEVwxHX2LpyFJO00/uoeILCqtaU5XDBdbdgWlo1QDrOxw8cNO/r2R
-         W3pccvCq6cyibp4tzdFrwXpo1x+0xfhHYb6y/+JEgQhajbguOE6nC9DDsR0uxEK8UEs2
-         +ZG0OZ/Sm04bW9xZlZIxMuHZgiF9/1dFqV7VcI4ginV4nlC/T+Mrpe1LkBU+X/6GKBlB
-         wKPFFImyGl1QbPdC5OINPm34XsxA35LPK/XLl9A16UJ8Hf8tRsW8JaN6CxiwlbX9gPKj
-         M26Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ACpe12rHHvpdrdhy+82lhTBW41nWcQXj5b1t3gYtOfA=;
+        b=khYJQ/k0MsWHAgd+ZQevIeQNilPWk0kdo4dtM9JhXHyjdKPlaG4Pe43HZ2+HvFKrdY
+         mmU9MWIYV+1+45zuKuT0nuLVXXgu97I9zIgcHo0NiL1THmPAMQrsUnJ8ww/BA6qhMwVw
+         Dg6ndBJFcp0pqIc2XUhCq9Lz4ZB4YcSmthx3BcXCm2tBfENrO+yFWmq5WOEyHWm6Nmgo
+         Dmqq4Qr2mjSCkAnvP2VklU9XQ4HKYr6lz/oLSvQOMGUW8ib9n6OvBRWGe3aZgdo+Vvmi
+         me04ECpzP88d/yWNJS/HKOt3AoClILdyWhBXSqzmnJBsXiXWdezYrUHA2Kxijn5L3Mwh
+         lbPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=IoisOmV2uP3Ir6MH/g/SxzICNH4UZsoy3K2WoiWM8Iw=;
-        b=uCnXWzMSkPPfhGWUwLsv+rYNqUg0aaVqGgz4Yd2IQaqPVwnaACqOzKS+9zEMGdEzeM
-         JiqtKr6SNPudx73pnOxkXFDIddUE761qgNtehYP9s/7oiyrqmpMMOINK1r5Qwobs9FF3
-         uKdrErjTXDCePU5U4nvdrdKv10x1dacSdSGAfgJ8wIMa9A3Os2Sxx+Zx/VsF5zHp0YZe
-         VjJD3ToK+sfghCacTanOuyZTAdC9A8oxfPxh5FDmjdGVfshHgNG7mHJGahu7bUjAh5P2
-         QXbgFPPrSdFAwgV11gY2MmW1jjIl+4KRYp8wUTMSBtesGPEZ4wEbDBfBGKVBNF0Ch9Qu
-         nZGA==
-X-Gm-Message-State: AJIora88JSQPDwGDj4geHkqBacAbbCld2I7wXrkaJTboxA41MUtPrheP
-	oUkJl/Kx72mK2e7Or0bsEFo+sDbz0PQ=
-X-Google-Smtp-Source: AGRyM1v+sNPVN8DK0U9kto6+Lpl4hAQnuW0RIELbDg0B3b+egAaDEs9ErMIJgt/8bxOSz3b0bwJQ5A==
-X-Received: by 2002:a05:6402:360d:b0:435:710a:2531 with SMTP id el13-20020a056402360d00b00435710a2531mr23651364edb.377.1656428640739;
-        Tue, 28 Jun 2022 08:04:00 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ACpe12rHHvpdrdhy+82lhTBW41nWcQXj5b1t3gYtOfA=;
+        b=dH9GIiQAhipKJptmH0/oaTB/a9EGoC8Ny3ErsqaTcupYtNSAKnS1p7N/QrThWnRhUq
+         049EA7xFu3Nr9iedMFfkSEVBmHXDQrvJVGDN0xuj9idE0vuqEUbx72qzzyPUT2lfLLSV
+         lGhKvvjjF7ybRQywTf84PLaeZsdIYVo1hk/LN0tJJQ1rvRBriiwszectlmm+6dHMGZHa
+         yjgHC9X9V1DVCb52xlKv0fucJ+bOKkQ9Ml8nq8t7e1BtPA84IbHcIDtUbhadcuDWCadh
+         cGWaywvgmKdWBt065PXfcHcgFkucugMKszKTps/zTaS90xVWti2NGjUP7fpb9byV1s31
+         enlA==
+X-Gm-Message-State: AJIora+lW0xPvzjMdYoGReqym14rlXBAPGPZGR1Zbo/f5t+x5v+O/GK8
+	CPW/4TsLmc71zqSByTxtxhOytquqTiE=
+X-Google-Smtp-Source: AGRyM1uPxfWpPy+5aHbKyD8xmSQq4e2Mxji9oMECs2fAmTcKKzFXtl3t0lHG3/Vu0j7rKAVqs/N4tw==
+X-Received: by 2002:a17:906:5053:b0:70d:a0cc:b3fd with SMTP id e19-20020a170906505300b0070da0ccb3fdmr18473630ejk.162.1656428936737;
+        Tue, 28 Jun 2022 08:08:56 -0700 (PDT)
 From: Xenia Ragiadakou <burzalodowa@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Xenia Ragiadakou <burzalodowa@gmail.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Dario Faggioli <dfaggioli@suse.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 4/5] xen/sched: credit: Fix MISRA C 2012 Rule 8.7 violation
-Date: Tue, 28 Jun 2022 18:03:36 +0300
-Message-Id: <20220628150337.8520-5-burzalodowa@gmail.com>
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Rahul Singh <rahul.singh@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH] xen/arm: smmu-v3: Fix MISRA C 2012 Rule 1.3 violations
+Date: Tue, 28 Jun 2022 18:08:51 +0300
+Message-Id: <20220628150851.8627-1-burzalodowa@gmail.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220628150337.8520-1-burzalodowa@gmail.com>
-References: <20220628150337.8520-1-burzalodowa@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The per-cpu variable last_tickle_cpu is referenced only in credit.c.
-Change its linkage from external to internal by adding the storage-class
-specifier static to its definitions.
-
-Also, this patch aims to resolve indirectly a MISRA C 2012 Rule 8.4 violation
-warning.
+The expression 1 << 31 produces undefined behaviour because the type of integer
+constant 1 is (signed) int and the result of shifting 1 by 31 bits is not
+representable in the (signed) int type.
+Change the type of 1 to unsigned int by adding the U suffix.
 
 Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v2:
-- replace the phrase "This patch aims to resolve indirectly a MISRA C 2012
-  Rule 8.4 violation warning." with "Also, this patch aims to resolve
-  indirectly a MISRA C 2012 Rule 8.4 violation warning."
+Q_OVERFLOW_FLAG has already been fixed in upstream kernel code.
+For GBPA_UPDATE I will submit a patch.
 
- xen/common/sched/credit.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ xen/drivers/passthrough/arm/smmu-v3.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/common/sched/credit.c b/xen/common/sched/credit.c
-index 4d3bd8cba6..47945c2834 100644
---- a/xen/common/sched/credit.c
-+++ b/xen/common/sched/credit.c
-@@ -348,7 +348,7 @@ static void burn_credits(struct csched_unit *svc, s_time_t now)
- static bool __read_mostly opt_tickle_one_idle = true;
- boolean_param("tickle_one_idle_cpu", opt_tickle_one_idle);
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index 1e857f915a..f2562acc38 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -338,7 +338,7 @@ static int platform_get_irq_byname_optional(struct device *dev,
+ #define CR2_E2H				(1 << 0)
  
--DEFINE_PER_CPU(unsigned int, last_tickle_cpu);
-+static DEFINE_PER_CPU(unsigned int, last_tickle_cpu);
+ #define ARM_SMMU_GBPA			0x44
+-#define GBPA_UPDATE			(1 << 31)
++#define GBPA_UPDATE			(1U << 31)
+ #define GBPA_ABORT			(1 << 20)
  
- static inline void __runq_tickle(const struct csched_unit *new)
- {
+ #define ARM_SMMU_IRQ_CTRL		0x50
+@@ -410,7 +410,7 @@ static int platform_get_irq_byname_optional(struct device *dev,
+ 
+ #define Q_IDX(llq, p)			((p) & ((1 << (llq)->max_n_shift) - 1))
+ #define Q_WRP(llq, p)			((p) & (1 << (llq)->max_n_shift))
+-#define Q_OVERFLOW_FLAG			(1 << 31)
++#define Q_OVERFLOW_FLAG			(1U << 31)
+ #define Q_OVF(p)			((p) & Q_OVERFLOW_FLAG)
+ #define Q_ENT(q, p)			((q)->base +			\
+ 					 Q_IDX(&((q)->llq), p) *	\
 -- 
 2.34.1
 
