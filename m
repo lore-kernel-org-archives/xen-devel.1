@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC6EC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 07:15:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.358236.587332 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40CBC43334
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 07:15:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.358235.587325 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6oNz-0003cR-HK; Thu, 30 Jun 2022 07:14:47 +0000
+	id 1o6oNz-0003Yw-6M; Thu, 30 Jun 2022 07:14:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 358236.587332; Thu, 30 Jun 2022 07:14:47 +0000
+Received: by outflank-mailman (output) from mailman id 358235.587325; Thu, 30 Jun 2022 07:14:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6oNz-0003br-AJ; Thu, 30 Jun 2022 07:14:47 +0000
-Received: by outflank-mailman (input) for mailman id 358236;
- Thu, 30 Jun 2022 07:14:46 +0000
+	id 1o6oNz-0003Yp-3E; Thu, 30 Jun 2022 07:14:47 +0000
+Received: by outflank-mailman (input) for mailman id 358235;
+ Thu, 30 Jun 2022 07:14:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gQTH=XF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o6oNy-0003Yc-IU
- for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 07:14:46 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ id 1o6oNx-0003Yc-Pt
+ for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 07:14:45 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 51504260-f844-11ec-bdce-3d151da133c5;
+ id 512bc2b1-f844-11ec-bdce-3d151da133c5;
  Thu, 30 Jun 2022 09:14:44 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 8F8B821C17;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 3549C1F910;
  Thu, 30 Jun 2022 07:14:44 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3CAD313A5C;
- Thu, 30 Jun 2022 07:14:44 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CC6F913A5C;
+ Thu, 30 Jun 2022 07:14:43 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id sFx8DWRNvWKvKgAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 30 Jun 2022 07:14:44 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id C4qFMGNNvWKvKgAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 30 Jun 2022 07:14:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,16 +53,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 51504260-f844-11ec-bdce-3d151da133c5
+X-Inumbo-ID: 512bc2b1-f844-11ec-bdce-3d151da133c5
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
 	t=1656573284; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=38TnYLyTGlkUm6ORupS6PivJsuoTeOfCzm7BgT7zdQQ=;
-	b=fyg68Z2J2j/iqSbIIg7jvar8VY2mi3IdtR6AgHni//Ufu8+ErfvlFGZo2Eq/0tnuD+zeyT
-	FqU6rt5f7JUdr6NOd6EOq6RqPNAQu1WUQqEZVZQSbx0adbJEQmuk1UNvLZ7DWUe715qXoj
-	7dvpO8HOTIXQHHGaIWs3x963H4sf+f8=
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=w8JobtSvpzNoUpwJIImS2sf/s9H6qdugYtbCVXRzcT0=;
+	b=JFb6EH83ripqdvoD961Q5CiVgMh8sDno1KZ5b6pIW5+KAGWd8xoxWWwBT1Of6BlatnmRl4
+	vBiV4qmXv1K8NCPocoxFmfwWwn7DfVydWr2H4jUJLimfFQt4AVBxKY1VELUuG0TTjmjfD0
+	oTfF+bbPZeE2ZmvbSfI4g1OX4OExjtY=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
@@ -74,115 +72,30 @@ Cc: jpoimboe@kernel.org,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
 	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v3 1/3] x86/xen: use clear_bss() for Xen PV guests
-Date: Thu, 30 Jun 2022 09:14:39 +0200
-Message-Id: <20220630071441.28576-2-jgross@suse.com>
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: [PATCH v3 0/3] x86: fix brk area initialization
+Date: Thu, 30 Jun 2022 09:14:38 +0200
+Message-Id: <20220630071441.28576-1-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20220630071441.28576-1-jgross@suse.com>
-References: <20220630071441.28576-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Instead of clearing the bss area in assembly code, use the clear_bss()
-function.
+The brk area needs to be zeroed initially, like the .bss section.
+At the same time its memory should be covered by the ELF program
+headers.
 
-This requires to pass the start_info address as parameter to
-xen_start_kernel() in order to avoid the xen_start_info being zeroed
-again.
+Juergen Gross (3):
+  x86/xen: use clear_bss() for Xen PV guests
+  x86: clear .brk area at early boot
+  x86: fix .brk attribute in linker script
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
----
- arch/x86/include/asm/setup.h |  3 +++
- arch/x86/kernel/head64.c     |  2 +-
- arch/x86/xen/enlighten_pv.c  |  8 ++++++--
- arch/x86/xen/xen-head.S      | 10 +---------
- 4 files changed, 11 insertions(+), 12 deletions(-)
+ arch/x86/include/asm/setup.h  |  3 +++
+ arch/x86/kernel/head64.c      |  4 +++-
+ arch/x86/kernel/vmlinux.lds.S |  2 +-
+ arch/x86/xen/enlighten_pv.c   |  8 ++++++--
+ arch/x86/xen/xen-head.S       | 10 +---------
+ 5 files changed, 14 insertions(+), 13 deletions(-)
 
-diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
-index f8b9ee97a891..f37cbff7354c 100644
---- a/arch/x86/include/asm/setup.h
-+++ b/arch/x86/include/asm/setup.h
-@@ -120,6 +120,9 @@ void *extend_brk(size_t size, size_t align);
- 	static char __brk_##name[size]
- 
- extern void probe_roms(void);
-+
-+void clear_bss(void);
-+
- #ifdef __i386__
- 
- asmlinkage void __init i386_start_kernel(void);
-diff --git a/arch/x86/kernel/head64.c b/arch/x86/kernel/head64.c
-index bd4a34100ed0..e7e233209a8c 100644
---- a/arch/x86/kernel/head64.c
-+++ b/arch/x86/kernel/head64.c
-@@ -426,7 +426,7 @@ void __init do_early_exception(struct pt_regs *regs, int trapnr)
- 
- /* Don't add a printk in there. printk relies on the PDA which is not initialized 
-    yet. */
--static void __init clear_bss(void)
-+void __init clear_bss(void)
- {
- 	memset(__bss_start, 0,
- 	       (unsigned long) __bss_stop - (unsigned long) __bss_start);
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index e3297b15701c..70fb2ea85e90 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1183,15 +1183,19 @@ static void __init xen_domu_set_legacy_features(void)
- extern void early_xen_iret_patch(void);
- 
- /* First C function to be called on Xen boot */
--asmlinkage __visible void __init xen_start_kernel(void)
-+asmlinkage __visible void __init xen_start_kernel(struct start_info *si)
- {
- 	struct physdev_set_iopl set_iopl;
- 	unsigned long initrd_start = 0;
- 	int rc;
- 
--	if (!xen_start_info)
-+	if (!si)
- 		return;
- 
-+	clear_bss();
-+
-+	xen_start_info = si;
-+
- 	__text_gen_insn(&early_xen_iret_patch,
- 			JMP32_INSN_OPCODE, &early_xen_iret_patch, &xen_iret,
- 			JMP32_INSN_SIZE);
-diff --git a/arch/x86/xen/xen-head.S b/arch/x86/xen/xen-head.S
-index 3a2cd93bf059..13af6fe453e3 100644
---- a/arch/x86/xen/xen-head.S
-+++ b/arch/x86/xen/xen-head.S
-@@ -48,15 +48,6 @@ SYM_CODE_START(startup_xen)
- 	ANNOTATE_NOENDBR
- 	cld
- 
--	/* Clear .bss */
--	xor %eax,%eax
--	mov $__bss_start, %rdi
--	mov $__bss_stop, %rcx
--	sub %rdi, %rcx
--	shr $3, %rcx
--	rep stosq
--
--	mov %rsi, xen_start_info
- 	mov initial_stack(%rip), %rsp
- 
- 	/* Set up %gs.
-@@ -71,6 +62,7 @@ SYM_CODE_START(startup_xen)
- 	cdq
- 	wrmsr
- 
-+	mov	%rsi, %rdi
- 	call xen_start_kernel
- SYM_CODE_END(startup_xen)
- 	__FINIT
 -- 
 2.35.3
 
