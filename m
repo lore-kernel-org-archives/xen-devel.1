@@ -4,37 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79D26C43334
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 13:32:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.358503.587748 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E606DC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 14:05:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.358515.587784 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6uGi-0000Xi-0n; Thu, 30 Jun 2022 13:31:40 +0000
+	id 1o6ums-0004pm-3o; Thu, 30 Jun 2022 14:04:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 358503.587748; Thu, 30 Jun 2022 13:31:39 +0000
+Received: by outflank-mailman (output) from mailman id 358515.587784; Thu, 30 Jun 2022 14:04:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6uGh-0000Xb-UO; Thu, 30 Jun 2022 13:31:39 +0000
-Received: by outflank-mailman (input) for mailman id 358503;
- Thu, 30 Jun 2022 13:31:39 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o6umr-0004nh-Ti; Thu, 30 Jun 2022 14:04:53 +0000
+Received: by outflank-mailman (input) for mailman id 358515;
+ Thu, 30 Jun 2022 14:04:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=xIEj=XF=linuxfoundation.org=gregkh@srs-se1.protection.inumbo.net>)
- id 1o6uGg-0000XF-Vt
- for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 13:31:39 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id f6787e3e-f878-11ec-bd2d-47488cf2e6aa;
- Thu, 30 Jun 2022 15:31:36 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 342F761EA2;
- Thu, 30 Jun 2022 13:31:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F501C34115;
- Thu, 30 Jun 2022 13:31:34 +0000 (UTC)
+ <SRS0=2IH8=XF=oss.nxp.com=andrei.cherechesu@srs-se1.protection.inumbo.net>)
+ id 1o6umL-0004O6-5X
+ for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 14:04:21 +0000
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr70057.outbound.protection.outlook.com [40.107.7.57])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 845c74a2-f87d-11ec-bdce-3d151da133c5;
+ Thu, 30 Jun 2022 16:04:12 +0200 (CEST)
+Received: from VI1PR04MB5056.eurprd04.prod.outlook.com (2603:10a6:803:5a::13)
+ by DU0PR04MB9322.eurprd04.prod.outlook.com (2603:10a6:10:355::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.18; Thu, 30 Jun
+ 2022 14:04:18 +0000
+Received: from VI1PR04MB5056.eurprd04.prod.outlook.com
+ ([fe80::1549:6f15:1949:f1a5]) by VI1PR04MB5056.eurprd04.prod.outlook.com
+ ([fe80::1549:6f15:1949:f1a5%6]) with mapi id 15.20.5395.015; Thu, 30 Jun 2022
+ 14:04:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,85 +48,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: f6787e3e-f878-11ec-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1656595895;
-	bh=HnYgzoY2wpz25syeP/HHn4cFSw8pcDffdk1+i7c9erA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=WGugVafS/pr4OIuJad3zigQVZAlqgDOEqz69h1dDwdzvHWbVsFaZHMf4EgDPMrTlM
-	 ZmdHlaVXws/afeUK2G+MkzHts8RqBEYSwAxM7g5djaVi2tCd9kXjHWrb8C6RhGvgSi
-	 90/XUTu7wdBLB6MgsB5/wtv6IHfxZWS8pxBWuVc4=
-Date: Thu, 30 Jun 2022 15:31:32 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
-	stable@vger.kernel.org,
-	Xen developer discussion <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH 5.10] xen/gntdev: Avoid blocking in unmap_grant_pages()
-Message-ID: <Yr2ltPwSM7srft78@kroah.com>
-References: <20220627181006.1954-1-demi@invisiblethingslab.com>
- <Yr2KKpWSiuzOQr7v@kroah.com>
- <5136812e-e296-4acb-cafd-f189c4013ed3@suse.com>
+X-Inumbo-ID: 845c74a2-f87d-11ec-bdce-3d151da133c5
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=iaNeOhHqZRiDSLBjIYipfklZW9Ie3cfyB6qlqKLAY9+osIwNHCX2Z4oV6garVDFhCFPTZDj9Jc8/bBI3F4JhMwB9QVg/LjHaA06d+/gw2Pl/UlyKemZfw8O2EKruZGpH+oUVhIyWZCA0mxVGdn9nPqnu+b0P3Rx6+PvsQ3gA4ve3oDVj2bASEReS9W/lHB1IUihBAkM9tS3J1v2u41U8mJIyMaV69LySbl3BWiQeGS2Ww0ns6NdudVumlR454V61FW4wc9oicKlgSp698atFQntRKlyg2/9r8SPwuVGgmL7DO9FQmwEBq/AbVfzkUbYVNOOZwHfar0Dl6eOWlncifg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IEOir/TcWxDepJgogJp+rLWOzXH0RRWLH/R0bAwSxes=;
+ b=Y3Gd2hQrS94vwh16oJ2N70W43LWmaZtdvJKE2Zt2VcuxgbRYqMxnzMu0TSdDgPoUshpeRFDTp1fWXCll9q2BwXXwyVk03PPQ6Cu/Z4ucfbEgQZNJBMQ+Bw0HKSi9qcFKdffbDtDBoHn5cIjmhHtkygrGytwYwm7fj/Z9CJ1rtcFJ15nVr+oCeNVMprMZXXkCgOyYvMyNISLOtC+M36qNO8mOxUn2wqYszwkF1udHbPw6t1iBLmLYzaI6AepV+FH1FMpqvGbfzw98amyrLPTw13fafU3CrBn4Wk88Tmm3ZujTZEs1oXm3K+Fw5TYsix74/ALQuGK+Pp5paGE3k8Eh7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
+ s=selector2-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IEOir/TcWxDepJgogJp+rLWOzXH0RRWLH/R0bAwSxes=;
+ b=Z4ij3h4QhH+o8FEfpit/cKJUDNqRo4BGo6jBHrPyoDNLC6on4wf1xChSgB7itEzIvKd9uLcFIvWP+26hflWlmB+4UEyl3q5mMaaNUc0E9wstB/kaL7bwKsN6jSMqp3+4QAzXQ9Uz1roOo1Hcv5jLBNZ4ClD6Wn2FIcmuSFx4qGQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+From: "Andrei Cherechesu (OSS)" <andrei.cherechesu@oss.nxp.com>
+To: xen-devel@lists.xenproject.org
+Cc: viryaos-discuss@lists.sourceforge.net,
+	sstabellini@kernel.org,
+	Andrei Cherechesu <andrei.cherechesu@nxp.com>
+Subject: [ImageBuilder][PATCH v2 4/4] uboot-script-gen: Enable not adding boot command to script
+Date: Thu, 30 Jun 2022 17:00:29 +0300
+Message-Id: <20220630140028.3227385-5-andrei.cherechesu@oss.nxp.com>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220630140028.3227385-1-andrei.cherechesu@oss.nxp.com>
+References: <20220630140028.3227385-1-andrei.cherechesu@oss.nxp.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AM0PR03CA0089.eurprd03.prod.outlook.com
+ (2603:10a6:208:69::30) To VI1PR04MB5056.eurprd04.prod.outlook.com
+ (2603:10a6:803:5a::13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5136812e-e296-4acb-cafd-f189c4013ed3@suse.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 91ed6371-c465-42ee-1f5a-08da5aa16c93
+X-MS-TrafficTypeDiagnostic: DU0PR04MB9322:EE_
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info:
+	2R0yvQkVV0ZbmP+qQBWaoy+eo1ecg8F5/ZC0MyL1ZxXepCy83RY8kHeCzfOSoQR52FNG+xrOJH3ls4Adbnq8GYOGXJN1+DkvK689YcJSbzGkfbvvpxrFhg6oYqWnWhBKe/0L/+C+OfH9S7ycSK2BHClF5pxACUeljsI3JgVc6duED8+upYjopZfJ7KiZ/KsVCgMzVHwDBbxM6cMNRudm73qrv8SCyzpIkl2paCPNMhea44pivSRFfMA03c39VJKB2PL+zYWKCkZ2EC9PSJ5xxpOBW2i1R7Y0f8VRfcivwhNfuQQ+ynivlqPVF1x8r69skFcOWZX72iEAFf3wbZJomta0H/KbenL3YezO1BcUmo/6J//E8beFlpAl1k4sz1df2Ewa+pjIZizdiVzUACenrVcjKVPp9/EmwlUlE0erhzQh3rm6o57xSi22aiZEwoPL3Bq08qFB5w+cZnCKV0xkIvycc+YoAh0UgQsO9he9VVJlEaUEMRNK9//w9wNAkqWNo22LRyyBjbpCImNcuJiEED778/uyAAO5j1yrBbx+Ov7/RrUy/DJFwsNsRNOi6vLai5M/j+BfpZRY3BGY0UxSP9u78YWMU4IxkTxIaOpxeiS3VXL/x5UQBRrSDOTWmuaLTXDAe+wpDGMsALhbQ7KqettF2OprRgZskZqZsEXGRaxlzRcMtgz/oSZ95SNFpwnPDAe85vHR2RnSsvAKPToDp4sAyx6+SFaO34gwz6nM06U7Nzjuvs3Fh0VVZYMdz919h+Pqp1a+MIXIMgYz+cH6y2kSasO7mHQ9xBd/uCmO7Y/jCcY6PUdKQ0BDDZveI9x9
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5056.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(346002)(366004)(136003)(396003)(39860400002)(376002)(478600001)(41300700001)(5660300002)(6666004)(186003)(6486002)(6512007)(52116002)(1076003)(86362001)(26005)(8936002)(2906002)(2616005)(66946007)(4326008)(38100700002)(8676002)(6506007)(316002)(66476007)(66556008)(38350700002)(83380400001)(6916009);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?LsaCxl+YMIsKgAg1h9c7B4CTIvi+WIDV/juo2j+mf04+HNBfGNa75fFtUkAa?=
+ =?us-ascii?Q?DadxhNl+NTWCNRPX1trj8/VIQRypK38xVKtcrDnJI2I9bydO9veYf7XtvT8C?=
+ =?us-ascii?Q?a9jgs/vtXS5o8V9lGUcM85H0h4U2FCCdmjHJ5AihbtIqviRxXICppYyqP0XE?=
+ =?us-ascii?Q?anWu921kndKGTXFOIkDBxW3YT7csh7OiTxltvjVHksR8NuDPhPoAnmqwatVD?=
+ =?us-ascii?Q?0D9sjJy+qjLCBjbWl/QUshgQc79kGYO9S1Fl11fjEDaGPTKCw0fnsL5h9Oxv?=
+ =?us-ascii?Q?e3M+pb6HewoP2m89fb3YOwulmSDLHvlBgKU6fL8J/nM2TTXbuL7X0BckCrbz?=
+ =?us-ascii?Q?ReT5isJqfs1bj/KvqPHqYkt4DtPuzBb20itLXyjb4P0b+8d64c4Pb1iBK/yk?=
+ =?us-ascii?Q?F1pu1hqxf+en04Vv5BTNrf7wU14Wo5FGOtxyJeb4SKxX4QWvApHfqFCr8V/4?=
+ =?us-ascii?Q?aJTXsg628vMokulEsUfSXnaCwgDNwMlnbu7/tXLfV1VM/oIpkWzdTt4KwhgA?=
+ =?us-ascii?Q?gvEKRLHHzMlHp/niiicZUB2Hq1LUlAiSXedvuRvGFJPj8NBtq+LzU+qTUhq6?=
+ =?us-ascii?Q?xgLqcm5g9uh6YVzvoevNyz+v7aTbH7EvvStrdKy7nZ3x0YU00K5q78K/BYI+?=
+ =?us-ascii?Q?s0nxgnBTNF6MXdb6CiKLf4q8tZkwjUfdsE73NT1klGTxru6ESujv1/0I7Uvl?=
+ =?us-ascii?Q?IYa3HPm/GmVJB1A6mppbWo1L6MEnhnGUlcI9gmTPwALGx0S7AseSGl0mMhWl?=
+ =?us-ascii?Q?sOasHUrTz0MTmGV2/qmiua3PdwFhy5F+j6xHjh05SNWj85CA2gAhQCJARV9n?=
+ =?us-ascii?Q?1eDFV2SYd0BKLqjpXhjlHDoMxtHGJgFJKEz+UvPc4UAyC/wEnxbFgSklVZ8K?=
+ =?us-ascii?Q?I5fsg+31uwqhkab26yLtUIQNpgH+JH8HD+mGSaaf40JKEG7pt4PNkEWbpi0c?=
+ =?us-ascii?Q?cgt04z3CAKGyhb80KVkGrdGEgZYWTbmSHj9nb7eZ7cUHU2Xdre4WjQoOUAug?=
+ =?us-ascii?Q?zr+/0p6dWBDisnCxB2kI2ll9MIaJRjfUWXMsMVh8Zx+CJIEetS5rC+p3dKRo?=
+ =?us-ascii?Q?V66HOoDKQnjdDswXMHbudbfLkHCj/4+E5jfAGlCJIMeHG7OpoafHe24QfmGk?=
+ =?us-ascii?Q?yRr/IMSDMTEDf2ZTNNsHqFoEJv0Gl6YPi+M5J327UKJq9woP1BD0U0Q7oQ/c?=
+ =?us-ascii?Q?Kg5d8ptlzoqpekqc+cOKQcI8GgoZ6aUI3k5HlVwO1dwgxn9v1qszJntJhfji?=
+ =?us-ascii?Q?J2E6k4pm2MN7Icq8mlhEmiggKDwAzy7F9ERHXX9ueJ7rW1KsYRtvesHu+CNv?=
+ =?us-ascii?Q?0+6PXy6SXr4zulaUqrpiuVVyR7sCdztZ1bgh7v/qj41Zcf5OlDZbsxtFxAy+?=
+ =?us-ascii?Q?BMSF4cBxIgzf5VZZA5HDRH7RTvc7+m0OeK5iMKYD76J0S3Eu4QUCtyI7mWJk?=
+ =?us-ascii?Q?7l1hwkS5ey2iEgP7ikmFT5dVES+6RJwHAjCqEzSH7ffBkWUCO8LIz54rmYtK?=
+ =?us-ascii?Q?EfqWM1fIhchUm4PVbaoPJDCH67NqMyFU/YEmD4mj6LHpr01/3rjuPx5rSCDJ?=
+ =?us-ascii?Q?XSAQ+sjGWfz2dFSBLl50rGoNsLuIPjlWbT8KHtw0X1bdONFULNvIw6GHUMWP?=
+ =?us-ascii?Q?Zw=3D=3D?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 91ed6371-c465-42ee-1f5a-08da5aa16c93
+X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5056.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2022 14:04:18.5412
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: L5vxLpA8FjH1rw/tAW8CEsO+tDdQA1nyED8JOKEL42MJf7Nfu/7+s7bZfFo4Mi52c0QS64OJH5O5P263s4OJBwADWDPF1LdIGluXou/pYos=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9322
 
-On Thu, Jun 30, 2022 at 03:16:41PM +0200, Juergen Gross wrote:
-> On 30.06.22 13:34, Greg KH wrote:
-> > On Mon, Jun 27, 2022 at 02:10:02PM -0400, Demi Marie Obenour wrote:
-> > > commit dbe97cff7dd9f0f75c524afdd55ad46be3d15295 upstream
-> > > 
-> > > unmap_grant_pages() currently waits for the pages to no longer be used.
-> > > In https://github.com/QubesOS/qubes-issues/issues/7481, this lead to a
-> > > deadlock against i915: i915 was waiting for gntdev's MMU notifier to
-> > > finish, while gntdev was waiting for i915 to free its pages.  I also
-> > > believe this is responsible for various deadlocks I have experienced in
-> > > the past.
-> > > 
-> > > Avoid these problems by making unmap_grant_pages async.  This requires
-> > > making it return void, as any errors will not be available when the
-> > > function returns.  Fortunately, the only use of the return value is a
-> > > WARN_ON(), which can be replaced by a WARN_ON when the error is
-> > > detected.  Additionally, a failed call will not prevent further calls
-> > > from being made, but this is harmless.
-> > > 
-> > > Because unmap_grant_pages is now async, the grant handle will be sent to
-> > > INVALID_GRANT_HANDLE too late to prevent multiple unmaps of the same
-> > > handle.  Instead, a separate bool array is allocated for this purpose.
-> > > This wastes memory, but stuffing this information in padding bytes is
-> > > too fragile.  Furthermore, it is necessary to grab a reference to the
-> > > map before making the asynchronous call, and release the reference when
-> > > the call returns.
-> > > 
-> > > It is also necessary to guard against reentrancy in gntdev_map_put(),
-> > > and to handle the case where userspace tries to map a mapping whose
-> > > contents have not all been freed yet.
-> > > 
-> > > Fixes: 745282256c75 ("xen/gntdev: safely unmap grants in case they are still in use")
-> > > Cc: stable@vger.kernel.org
-> > > Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-> > > Reviewed-by: Juergen Gross <jgross@suse.com>
-> > > Link: https://lore.kernel.org/r/20220622022726.2538-1-demi@invisiblethingslab.com
-> > > Signed-off-by: Juergen Gross <jgross@suse.com>
-> > > ---
-> > >   drivers/xen/gntdev-common.h |   7 ++
-> > >   drivers/xen/gntdev.c        | 142 +++++++++++++++++++++++++-----------
-> > >   2 files changed, 106 insertions(+), 43 deletions(-)
-> > 
-> > All now queued up, thanks.
-> 
-> Sorry, but I think at least the version for 5.10 is fishy, as it removes
-> the tests for successful allocations of add->map_ops and add->unmap_ops.
-> 
-> I need to do a thorough review of the patches (the "Reviewed-by:" tag in
-> the patches is the one for the upstream patch).
-> 
-> Greg, can you please wait for my explicit "okay" for the backports?
+From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
 
-Ok, I'll go drop them all from the queues now.
+If the "BOOT_CMD" variable is set to "none" inside the config
+file, the boot command (i.e. "booti") will not by added to the
+generated script, to allow the user to customize the u-boot env
+or the device-tree after executing the script commands and before
+actually booting.
 
-thanks,
+Added commands to store the addresses where the Xen image and
+device-tree file are loaded, in 'host_kernel_addr' and 'host_fdt_addr'
+variables, if the boot command is skipped and the "-s" parameter is
+not used.
 
-greg k-h
+The `booti` command can then be executed as part of the 'bootcmd' variable
+in u-boot, which should contain:
+	1. fetching the generated u-boot script
+	2. executing the script
+	3. running `booti ${host_kernel_addr} - ${host_fdt_addr}` command
+
+Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+---
+ README.md                |  5 ++++-
+ scripts/uboot-script-gen | 16 +++++++++++++---
+ 2 files changed, 17 insertions(+), 4 deletions(-)
+
+diff --git a/README.md b/README.md
+index cb15ca5..b1a9b9d 100644
+--- a/README.md
++++ b/README.md
+@@ -80,7 +80,10 @@ Where:
+ 
+ - BOOT_CMD specifies the u-boot command used to boot the binaries.
+   By default, it is 'booti'. The acceptable values are 'booti', 'bootm'
+-  and 'bootefi'.
++  and 'bootefi' and 'none'. If the value is 'none', the BOOT_CMD is not
++  added to the boot script, and the addresses for the Xen binary and the
++  DTB are stored in 'host_kernel_addr' and 'host_fdt_addr' u-boot
++  env variables respectively, to be used manually when booting.
+ 
+ - DEVICE_TREE specifies the DTB file to load.
+ 
+diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
+index 444c65a..994369c 100755
+--- a/scripts/uboot-script-gen
++++ b/scripts/uboot-script-gen
+@@ -966,7 +966,7 @@ function check_depends()
+ 
+ function check_boot_cmd()
+ {
+-    if ! [[ " bootm booti bootefi " =~ " ${BOOT_CMD}" ]]
++    if ! [[ " bootm booti bootefi none " =~ " ${BOOT_CMD}" ]]
+     then
+         echo "\"BOOT_CMD=$BOOT_CMD\" is not valid"
+         exit 1
+@@ -1255,9 +1255,19 @@ echo "setenv fdt_high 0xffffffffffffffff" >> $UBOOT_SOURCE
+ 
+ if test "$dynamic_loading_opt"
+ then
+-    echo "$BOOT_CMD \${host_kernel_addr} - \${host_fdt_addr}" >> $UBOOT_SOURCE
++    if [ "$BOOT_CMD" != "none" ]
++    then
++        echo "$BOOT_CMD \${host_kernel_addr} - \${host_fdt_addr}" >> $UBOOT_SOURCE
++    fi
+ else
+-    echo "$BOOT_CMD $kernel_addr - $device_tree_addr" >> $UBOOT_SOURCE
++    if [ "$BOOT_CMD" != "none" ]
++    then
++        echo "$BOOT_CMD $kernel_addr - $device_tree_addr" >> $UBOOT_SOURCE
++    else
++        # skip boot command but store load addresses to be used later
++        echo "setenv host_kernel_addr $kernel_addr" >> $UBOOT_SOURCE
++        echo "setenv host_fdt_addr $device_tree_addr" >> $UBOOT_SOURCE
++    fi
+ fi
+ 
+ if test "$FIT"
+-- 
+2.35.1
+
 
