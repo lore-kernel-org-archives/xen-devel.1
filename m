@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40CBC43334
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 07:15:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.358235.587325 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C408C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 07:15:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.358238.587358 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6oNz-0003Yw-6M; Thu, 30 Jun 2022 07:14:47 +0000
+	id 1o6oO1-0004Ji-Tp; Thu, 30 Jun 2022 07:14:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 358235.587325; Thu, 30 Jun 2022 07:14:47 +0000
+Received: by outflank-mailman (output) from mailman id 358238.587358; Thu, 30 Jun 2022 07:14:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6oNz-0003Yp-3E; Thu, 30 Jun 2022 07:14:47 +0000
-Received: by outflank-mailman (input) for mailman id 358235;
- Thu, 30 Jun 2022 07:14:45 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o6oO1-0004JX-Qm; Thu, 30 Jun 2022 07:14:49 +0000
+Received: by outflank-mailman (input) for mailman id 358238;
+ Thu, 30 Jun 2022 07:14:48 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=gQTH=XF=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1o6oNx-0003Yc-Pt
- for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 07:14:45 +0000
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 512bc2b1-f844-11ec-bdce-3d151da133c5;
- Thu, 30 Jun 2022 09:14:44 +0200 (CEST)
+ id 1o6oO0-0003Yo-66
+ for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 07:14:48 +0000
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 51b166cf-f844-11ec-bd2d-47488cf2e6aa;
+ Thu, 30 Jun 2022 09:14:46 +0200 (CEST)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 3549C1F910;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 3F32A21C36;
+ Thu, 30 Jun 2022 07:14:45 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EA13713A5C;
  Thu, 30 Jun 2022 07:14:44 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id CC6F913A5C;
- Thu, 30 Jun 2022 07:14:43 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id C4qFMGNNvWKvKgAAMHmgww
- (envelope-from <jgross@suse.com>); Thu, 30 Jun 2022 07:14:43 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id 8Id4N2RNvWKvKgAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 30 Jun 2022 07:14:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,14 +53,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 512bc2b1-f844-11ec-bdce-3d151da133c5
+X-Inumbo-ID: 51b166cf-f844-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1656573284; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=w8JobtSvpzNoUpwJIImS2sf/s9H6qdugYtbCVXRzcT0=;
-	b=JFb6EH83ripqdvoD961Q5CiVgMh8sDno1KZ5b6pIW5+KAGWd8xoxWWwBT1Of6BlatnmRl4
-	vBiV4qmXv1K8NCPocoxFmfwWwn7DfVydWr2H4jUJLimfFQt4AVBxKY1VELUuG0TTjmjfD0
-	oTfF+bbPZeE2ZmvbSfI4g1OX4OExjtY=
+	t=1656573285; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=dCgMupKWsFTgcQQygfN0SR5QkcimXyNIOsA3rDiUr5Q=;
+	b=kiJN9aVoEGPb5m8eSiQoOTlZK2EQTATiQvG06ICc4EspsoI4rKTMRoaB0xF5U1ryWN9IfU
+	ZD942x/ZcThxVp3QaBx//I6RK0725O4ZA+6HIOiu6s0DmxhCkTOEB4nobwmczq6EHrrKLe
+	clRlM9l3SfiOE9GBBHsJFfuJf/7b1oE=
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org,
 	x86@kernel.org,
@@ -71,31 +73,55 @@ Cc: jpoimboe@kernel.org,
 	Ingo Molnar <mingo@redhat.com>,
 	Borislav Petkov <bp@alien8.de>,
 	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: [PATCH v3 0/3] x86: fix brk area initialization
-Date: Thu, 30 Jun 2022 09:14:38 +0200
-Message-Id: <20220630071441.28576-1-jgross@suse.com>
+	"H. Peter Anvin" <hpa@zytor.com>
+Subject: [PATCH v3 3/3] x86: fix .brk attribute in linker script
+Date: Thu, 30 Jun 2022 09:14:41 +0200
+Message-Id: <20220630071441.28576-4-jgross@suse.com>
 X-Mailer: git-send-email 2.35.3
+In-Reply-To: <20220630071441.28576-1-jgross@suse.com>
+References: <20220630071441.28576-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The brk area needs to be zeroed initially, like the .bss section.
-At the same time its memory should be covered by the ELF program
-headers.
+Commit e32683c6f7d2 ("x86/mm: Fix RESERVE_BRK() for older binutils")
+added the "NOLOAD" attribute to the .brk section as a "failsafe"
+measure.
 
-Juergen Gross (3):
-  x86/xen: use clear_bss() for Xen PV guests
-  x86: clear .brk area at early boot
-  x86: fix .brk attribute in linker script
+Unfortunately this leads to the linker no longer covering the .brk
+section in a program header, resulting in the kernel loader not knowing
+that the memory for the .brk section must be reserved.
 
- arch/x86/include/asm/setup.h  |  3 +++
- arch/x86/kernel/head64.c      |  4 +++-
- arch/x86/kernel/vmlinux.lds.S |  2 +-
- arch/x86/xen/enlighten_pv.c   |  8 ++++++--
- arch/x86/xen/xen-head.S       | 10 +---------
- 5 files changed, 14 insertions(+), 13 deletions(-)
+This has led to crashes when loading the kernel as PV dom0 under Xen,
+but other scenarios could be hit by the same problem (e.g. in case an
+uncompressed kernel is used and the initrd is placed directly behind
+it).
 
+So drop the "NOLOAD" attribute. This has been verified to correctly
+cover the .brk section by a program header of the resulting ELF file.
+
+Fixes: e32683c6f7d2 ("x86/mm: Fix RESERVE_BRK() for older binutils")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Josh Poimboeuf <jpoimboe@kernel.org>
+---
+V2:
+- new patch
+---
+ arch/x86/kernel/vmlinux.lds.S | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
+index 81aba718ecd5..9487ce8c13ee 100644
+--- a/arch/x86/kernel/vmlinux.lds.S
++++ b/arch/x86/kernel/vmlinux.lds.S
+@@ -385,7 +385,7 @@ SECTIONS
+ 	__end_of_kernel_reserve = .;
+ 
+ 	. = ALIGN(PAGE_SIZE);
+-	.brk (NOLOAD) : AT(ADDR(.brk) - LOAD_OFFSET) {
++	.brk : AT(ADDR(.brk) - LOAD_OFFSET) {
+ 		__brk_base = .;
+ 		. += 64 * 1024;		/* 64k alignment slop space */
+ 		*(.bss..brk)		/* areas brk users have reserved */
 -- 
 2.35.3
 
