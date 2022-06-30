@@ -4,39 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27678CCA481
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 14:05:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.358512.587772 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B0A3C43334
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Jun 2022 14:12:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.358547.587815 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6umr-0004br-GV; Thu, 30 Jun 2022 14:04:53 +0000
+	id 1o6utc-0008TI-6W; Thu, 30 Jun 2022 14:11:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 358512.587772; Thu, 30 Jun 2022 14:04:53 +0000
+Received: by outflank-mailman (output) from mailman id 358547.587815; Thu, 30 Jun 2022 14:11:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o6umr-0004Zn-B5; Thu, 30 Jun 2022 14:04:53 +0000
-Received: by outflank-mailman (input) for mailman id 358512;
- Thu, 30 Jun 2022 14:04:19 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o6utc-0008TB-3Z; Thu, 30 Jun 2022 14:11:52 +0000
+Received: by outflank-mailman (input) for mailman id 358547;
+ Thu, 30 Jun 2022 14:11:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2IH8=XF=oss.nxp.com=andrei.cherechesu@srs-se1.protection.inumbo.net>)
- id 1o6umJ-0004O6-OP
- for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 14:04:19 +0000
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-eopbgr70059.outbound.protection.outlook.com [40.107.7.59])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8319805a-f87d-11ec-bdce-3d151da133c5;
- Thu, 30 Jun 2022 16:04:09 +0200 (CEST)
-Received: from VI1PR04MB5056.eurprd04.prod.outlook.com (2603:10a6:803:5a::13)
- by DU0PR04MB9322.eurprd04.prod.outlook.com (2603:10a6:10:355::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.18; Thu, 30 Jun
- 2022 14:04:15 +0000
-Received: from VI1PR04MB5056.eurprd04.prod.outlook.com
- ([fe80::1549:6f15:1949:f1a5]) by VI1PR04MB5056.eurprd04.prod.outlook.com
- ([fe80::1549:6f15:1949:f1a5%6]) with mapi id 15.20.5395.015; Thu, 30 Jun 2022
- 14:04:15 +0000
+ <SRS0=nqik=XF=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
+ id 1o6utb-0008T5-1K
+ for xen-devel@lists.xenproject.org; Thu, 30 Jun 2022 14:11:51 +0000
+Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 94139ddb-f87e-11ec-bd2d-47488cf2e6aa;
+ Thu, 30 Jun 2022 16:11:49 +0200 (CEST)
+Received: from [10.10.1.138] (static-72-81-132-2.bltmmd.fios.verizon.net
+ [72.81.132.2]) by mx.zohomail.com
+ with SMTPS id 1656598291417507.4277519566392;
+ Thu, 30 Jun 2022 07:11:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,385 +42,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8319805a-f87d-11ec-bdce-3d151da133c5
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=g0TPi6aWJw0SO7x+DuRH21xHOnECvpwd0r0ZTSN/0C+JhUd8zMpFDTT9eZUTMQHK6+uxz04snj/mFZ5Hwcr/WD7rWEvVE5RvSFNZFs58sLW4oG0OpWDPCuBKjZlwXOe6BNuSQkVw2wbpfp4xNYLMoXMAb17gou6LzD3TcAIShzuzyfAefit0i4iH2m8/k5xR0GDJoGeCUt4d5FKGIl6+6SZ+utgoPiMhEhOBa7/9l8z3mOgFQHGl+Ja8ZtGmBh/qvn8cl0BKUzV89WjVWExpXtFzlr0Fq/uQFgEsmYABjnlq3Izp7hdZkSTVgAyy6BPSrrZ5l/WJPf5EkpkoeoPQIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0p9WID8wCWme7yTVDlS/nHDHlNEKgtykRbLwYbaQeI4=;
- b=mfbrWwedUKkeHZ6Vzec50C9Ikd+SBPs+wJbOhcnk7gjpJFkuSMl8fCTm5iURExowkUzuP4fDtjcJX6kb0sBJ9AhqZ0+W8gY4LYfFM1AP6fzYM1/tybx4DeB/PUOwqtAL9S5AIegQxgpcICifnfOZwkeUGPnSWelqDfFpZQ5inK1tyLY+0dstNax/rnoQiHj1eAYbbsWCanowMDxm9RqhgJadC7fX7vQM2fKzzI3nsUAuYZk+FeLAiliu6KFozvtWwCc8lg1h04OarUR8puEYXHyLGW1qXU+oZG/jmziGx/IMqW0cXqoZXYxuYA/J7fpbU0hX6exXzY/EyFTWHWHvng==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector2-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0p9WID8wCWme7yTVDlS/nHDHlNEKgtykRbLwYbaQeI4=;
- b=FpqiTeDycGl20L854ENWpvCiRyWibKzqfc8uPwHzhnDd5BNm7EoF+ZiLiwuLzP/REW/T7F8aBlp+IVeQ3FyojFetGjaFRbd/q4gjYCJNpUYxqSRdUmSGHTHoTYZW0w5y/d5CWg2+zzxq/EdV9DvhWIKBcukOQEjkvCIz5XSG57A=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-From: "Andrei Cherechesu (OSS)" <andrei.cherechesu@oss.nxp.com>
-To: xen-devel@lists.xenproject.org
-Cc: viryaos-discuss@lists.sourceforge.net,
-	sstabellini@kernel.org,
-	Andrei Cherechesu <andrei.cherechesu@nxp.com>
-Subject: [ImageBuilder][PATCH v2 2/4] uboot-script-gen: Dynamically compute addr and size when loading binaries
-Date: Thu, 30 Jun 2022 17:00:27 +0300
-Message-Id: <20220630140028.3227385-3-andrei.cherechesu@oss.nxp.com>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220630140028.3227385-1-andrei.cherechesu@oss.nxp.com>
-References: <20220630140028.3227385-1-andrei.cherechesu@oss.nxp.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: AM0PR03CA0089.eurprd03.prod.outlook.com
- (2603:10a6:208:69::30) To VI1PR04MB5056.eurprd04.prod.outlook.com
- (2603:10a6:803:5a::13)
+X-Inumbo-ID: 94139ddb-f87e-11ec-bd2d-47488cf2e6aa
+ARC-Seal: i=1; a=rsa-sha256; t=1656598293; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=AUCukss27nvcWdTpFyBZ8Quk0T/v/ezw5arMiQRYtp/E+zhJfTeeSLBPL9E+heNvyRIO8BMWzM8hbo0HKRE/hFaeKFm5+rNXJ7ZUsKmLad5lN4UHYRxPSI8QxdXk8MFQgW+rQ4JLGtVg+vKomR/ppwPe7WI574Kmen3M4GBw5lk=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1656598293; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=fd7RXl5+dt4+cELBUnmitpRnF8vkWWLIVA5/4Uzn+tw=; 
+	b=fZJxvakGWw9QzX2Scr/YLCeKHNUIyg5b/bVZIWYFNrBQFBV4j8ANHA0W1+OKtrLD6A2j3BTLsJrGRSRqD+KbHJsAheJNR9mArNySxpsaJvPFfxlY2JCWEucNnYvbuL6yow0e4ZINJ/JVZhR5JM9IHJc0dxCOlQBbFXvSI22jys8=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=apertussolutions.com;
+	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+	dmarc=pass header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1656598293;
+	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+	h=Message-ID:Date:Date:MIME-Version:To:To:Cc:Cc:References:From:From:Subject:Subject:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
+	bh=fd7RXl5+dt4+cELBUnmitpRnF8vkWWLIVA5/4Uzn+tw=;
+	b=XkVeJXYZeBR8C3u+zACMVY2tdaYvVK5PqPXYzQ0k7bqVZKs//XZhJfssdu786vwD
+	THrIOgNg6oA9yDweqaLdYfsn1p/IHOxCd6himvumtT0sG9YUf0UMMakBBcPgOdQnd6L
+	oVpIh8xaCXI+3WViTz7613wVUeCzjPlYzydtfutI=
+Message-ID: <d4f12e64-4db7-5c47-9412-70adfd245807@apertussolutions.com>
+Date: Thu, 30 Jun 2022 10:09:27 -0400
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d9c75e5c-1b4c-4582-c8fa-08da5aa16aac
-X-MS-TrafficTypeDiagnostic: DU0PR04MB9322:EE_
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info:
-	N59m1XvfonJiMTpf+UpG/yzpCE7zOaAYt3GjBy5A1i+bySQs6loarS8kvi4osTx1MKoDYVagDkAO78BJ07t+yVBfTNGsyhS6lJBjfXebx+woEGOewxF7DQDV3RhokQpT2CifvB+NM8Ke+y+nErbhnjf/a8ogGxDkGYKrBoBzvSHfpzJLOH/9jPFwbXTGf5bhT0t9ViDhJ+NDwCmlV0zcVb0WXWix4jkdmicD1U+LeE+6VZMUsUpuUNEhw3t2jZwWHFOUzmySpFb5IT0alpQMumuSg7IhBL2qtUMv717hx9LDzLtqfQJaw1+1pjuw+r34x3B5cOHs8H2O0INJjoSAma7IlbSPTEgG2IY5MbaFVEycQiDZ5t23DN60mBqAdmjEGRn2FAmbg0ItOgg0e37AgzS+zs6UjCLNfI30PcKvMLYeCrtLqxlhtPfdznWupMp2trUJ54QQl0BeWjV4X6/qTQmgLftOgd0PSZVcLjfzUqQDOozRYV/CGBnnuORDrG3pYSiLqtlutlqMWIpAlmhPFVo5cBiAO03XZ5u5nvf8ynMACiuppq6QcqsQmd9Hb9bZZaDu/NWniycjpFAvEelgolT99uI3FHngUwuOnCiXyWDq9jOYvKH4ZPmz09d7p3HtxT1m/8UQQD8VuEYdhgK7UiOGLlE7J6xAd82myKsj34AmOhhr291Ismo8pxqN8I7IBuWMUFN0lmwLoXpg4eamT5nwRRpojbHTpA18w4wvjYBSIEQGSfxnXVfVJfMfZAGPHKL5GMFwoVnJSS4XCibaDkJ4gRBxeBAQIlrRh1OkQ0ohfNooMN0iAOv/KGZExZtV
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI1PR04MB5056.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(346002)(366004)(136003)(396003)(39860400002)(376002)(478600001)(41300700001)(5660300002)(6666004)(186003)(6486002)(6512007)(52116002)(1076003)(86362001)(26005)(8936002)(2906002)(2616005)(30864003)(66946007)(4326008)(38100700002)(8676002)(6506007)(316002)(66476007)(66556008)(38350700002)(83380400001)(6916009);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?UqVlQVeYBSBgjIjgqtGzIINuDHvlUtdBkhqdpht7W1WhNJvjwmMQp0/VKFTB?=
- =?us-ascii?Q?XrJ2yAsG8Gz0wId8uNdO5dmrHs/Rj0F3zt4XMab3rhceNjzEGa44Vhfxi+ZE?=
- =?us-ascii?Q?HYcjIKvo92FWvHNlTYHdpE3fk/yKssE4kQLyZUv+HM9+ztSSuzz95wsRguix?=
- =?us-ascii?Q?KxbcF8zIKUaZqmSay5u9MzC19noNw6iCXBPhxVhcyfseDpgxrw+InLaegPTi?=
- =?us-ascii?Q?3FxiyQTzY7jFt+6IIPmvTg8H98IZHqAF7jPkgLrSQfghjka5JwV2ue2WmMRV?=
- =?us-ascii?Q?UIZqH//uO5HmkpIs03iW0b4HbWaH1Y13BRH5egrs+SCSNt7Y9nRzO2cjxm6w?=
- =?us-ascii?Q?/97SSSvDuMq7b07e4ALbdzIEwrbgQ9cl+njU/NOGVYEg8jQJ/ltAr9BfGMm5?=
- =?us-ascii?Q?K9bR+J33uPkggcOYIPPYuXVoAPOAxzkCTYeNhhC2yNzu7ZrsESJuOHeqYlSl?=
- =?us-ascii?Q?no0yXVsHCgBcs/8GLGKpzEl4SXmgXdU960rSzUbreat0zgpf3WaARm6d3+2y?=
- =?us-ascii?Q?Nxj49R+dX46q09ahzlT0V2SBM5cuueaU/R06vgPzYz5YWWq7joyConCnNMgz?=
- =?us-ascii?Q?0OFQ25MgxkzdI5VSDo3jnLIc1BeZ2ZKuXttR6eMsqIM8I4jn4ElGZ9V1/cO4?=
- =?us-ascii?Q?LllIcFfTtNvN38ACAz281ex4i/R+nnibl0XwMtEvb/cA/KOo9LTThfBPpwBn?=
- =?us-ascii?Q?srh7mZ99lNIjAWO2NHbfXTz7tZs5rFxq5Na0IZTJQkwNX8zc834+VRDdK4O4?=
- =?us-ascii?Q?XAHpgj/Q55/5XAo4kveJIRkeuxqZq9nvEWb+CX6pkf5zoMAHIcpvtTrI2aHz?=
- =?us-ascii?Q?y/rlkiaWj6ChxzzPVOyeRlFZgSWZWuNjcj4RWqL/YT5aI055EWeLJO7A0ElG?=
- =?us-ascii?Q?y5EapPm84aVgZy5LAdHv0Dxiqzx7P36C6k9Fnf9yaWsK7+G7JYdVHJkezL8G?=
- =?us-ascii?Q?H4qg2gJSzvehwjK7YwEUjMLwFd2z7DkDIq1lvDtMQ1kRU4hJL184ZtRiTJJR?=
- =?us-ascii?Q?7xm11C3uY4fR57X+EIV1chYiZx7cLYYSrwA1RI5Burctg6EN0LUZtNgEBH6o?=
- =?us-ascii?Q?KRslUvkvL3FkL4QMzXu3E173txSMvK/FU97ZIsabbO23xNVHr5hZT3lnW9n6?=
- =?us-ascii?Q?YJbc/jVyGWerYM2t1yuWhhU37BI22uKNOaA60IJiqz+YQeyiOUnFOeIrpgO+?=
- =?us-ascii?Q?ofOOGcq6kCclhHYuVXSeLzAryQCbhuJu9Ef48bsCn9Rp+W3wZr+FL/hPQ7PF?=
- =?us-ascii?Q?xbX/qvevfIpupq8q6FK2mKsa32P1dtAW4Anm4GcBQJRJ0tZDquNg5MROX3nn?=
- =?us-ascii?Q?5QAeuyK83JAPtFf2eBPXYK/T4xDJwFuszzt4vLovdNfFFrNjh8WR2s6RBb8+?=
- =?us-ascii?Q?OVupmjUplCAKVVipxvdWfxVAWb9yzqHEhzhe+6o53iE6/9r5oY0i3LHjjlcQ?=
- =?us-ascii?Q?TjXSxIgKL56VhadpgzkEDRoUuS5ncRcls/WtlPO1gmqpdv4ODbmg0n3PPaY9?=
- =?us-ascii?Q?Ih4hv3oFli26sHJ9Zz4BbVy5WNiqfe7ubSqraZnv3txb5g0pu5z2sRZhU0DK?=
- =?us-ascii?Q?KC+aW+iCSqI2/Pdr9BQyzkAgXBRkkDiW3uaRlwsPqTfddf/89EEafv8EwX3C?=
- =?us-ascii?Q?ZQ=3D=3D?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9c75e5c-1b4c-4582-c8fa-08da5aa16aac
-X-MS-Exchange-CrossTenant-AuthSource: VI1PR04MB5056.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Jun 2022 14:04:15.3851
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VoCm1R/4Tv579CrJBDiUZo5DW0flBwP9NdKGmmPYGSSNxoNrEVX9HE67SqbzQrhxC7/QLlMjZYXhpPlxVqRrd8x7fGFj7biLyLNlyleLIuI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9322
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: scott.davis@starlab.io, jandryuk@gmail.com, christopher.clark@starlab.io,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>, Wei Liu <wl@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+References: <20220630022110.31555-1-dpsmith@apertussolutions.com>
+ <20220630022110.31555-4-dpsmith@apertussolutions.com>
+ <9833c7cb-d71d-10a3-f74f-3caf46db3cb4@suse.com>
+From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH v9 3/3] xsm: refactor flask sid alloc and domain check
+In-Reply-To: <9833c7cb-d71d-10a3-f74f-3caf46db3cb4@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
-From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+On 6/30/22 02:14, Jan Beulich wrote:
+> Just a two nits - while the change looks plausible, I'm afraid I'm
+> not qualified to properly review it.
+> 
+> On 30.06.2022 04:21, Daniel P. Smith wrote:
+>> The function flask_domain_alloc_security() is where a default sid should be
+>> assigned to a domain under construction. For reasons unknown, the initial
+>> domain would be assigned unlabeled_t and then fixed up under
+>> flask_domain_create().  With the introduction of xenboot_t it is now possible
+>> to distinguish when the hypervisor is in the boot state.
+>>
+>> This commit looks to correct this by using a check to see if the hypervisor is
+>> under the xenboot_t context in flask_domain_alloc_security(). If it is, then it
+> 
+> While (or maybe because) I'm not a native speaker, the use of "looks"
+> reads ambiguous to me. I think you mean it in the sense of e.g. "aims",
+> but at first I read it in the sense of "seems", which made me think
+> you're not certain whether it actually does.
 
-Normally, the script would precompute the sizes of the loaded binaries
-and addresses where they are loaded before generating the script,
-and the sizes and addresses that needed to be provided to Xen via
-/chosen would be hardcoded in the boot script.
+Apologies, "look to" or "looks to" are forms of an American idiom, and
+was used for its meaning of "expected to happen"[1]. I will reword to
+provide a concise version of this statement.
 
-Added option via "-s" parameter to use the ${filesize} variable
-in u-boot, which is set automatically after a *load command.
-The value stored by filesize is now stored in a u-boot env variable
-with the name corresponding to the binary that was loaded before.
-The newly set variables are now used in setting the /chosen node,
-instead of the hardcoded values.
+[1] https://idioms.thefreedictionary.com/look+to
 
-Also, the loading addresses for the files are dynamically computed
-and aligned to 0x200000 using the `setexpr` u-boot command. Basically,
-if the option is used, there are zero hardcoded addresses inside the
-boot script, and everything is determined based on the MEMORY_START
-parameter and each binary's size.
+>> will inspect the domain's is_privileged field, and select the appropriate
+>> default label, dom0_t or domU_t, for the domain. The logic for
+>> flask_domain_create() was changed to allow the incoming sid to override the
+>> default label.
+>>
+>> The base policy was adjusted to allow the idle domain under the xenboot_t
+>> context to be able to construct domains of both types, dom0 and domU.
+>>
+>> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+>> ---
+>>  tools/flask/policy/modules/dom0.te |  3 +++
+>>  tools/flask/policy/modules/domU.te |  3 +++
+>>  xen/xsm/flask/hooks.c              | 34 ++++++++++++++++++------------
+>>  3 files changed, 26 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/tools/flask/policy/modules/dom0.te b/tools/flask/policy/modules/dom0.te
+>> index 0a63ce15b6..2022bb9636 100644
+>> --- a/tools/flask/policy/modules/dom0.te
+>> +++ b/tools/flask/policy/modules/dom0.te
+>> @@ -75,3 +75,6 @@ admin_device(dom0_t, ioport_t)
+>>  admin_device(dom0_t, iomem_t)
+>>  
+>>  domain_comms(dom0_t, dom0_t)
+>> +
+>> +# Allow they hypervisor to build domains of type dom0_t
+> 
+> Since it repeats ...
 
-If the "-s" parameter is not used, the script does not store the
-binaries' sizes and addresses in variables and uses the precomputed
-ones when advertising them in the /chosen node.
+Ack.
 
-Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
----
- scripts/uboot-script-gen | 136 ++++++++++++++++++++++++++++++++-------
- 1 file changed, 114 insertions(+), 22 deletions(-)
+>> +xen_build_domain(dom0_t)
+>> diff --git a/tools/flask/policy/modules/domU.te b/tools/flask/policy/modules/domU.te
+>> index b77df29d56..73fc90c3c6 100644
+>> --- a/tools/flask/policy/modules/domU.te
+>> +++ b/tools/flask/policy/modules/domU.te
+>> @@ -13,6 +13,9 @@ domain_comms(domU_t, domU_t)
+>>  migrate_domain_out(dom0_t, domU_t)
+>>  domain_self_comms(domU_t)
+>>  
+>> +# Allow they hypervisor to build domains of type domU_t
+>> +xen_build_domain(domU_t)
+> 
+> ... here - s/they/the/ in both places?
 
-diff --git a/scripts/uboot-script-gen b/scripts/uboot-script-gen
-index 8f08cd6..f8d2fb0 100755
---- a/scripts/uboot-script-gen
-+++ b/scripts/uboot-script-gen
-@@ -4,6 +4,9 @@ offset=$((2*1024*1024))
- filesize=0
- prog_req=(mkimage file fdtput mktemp awk)
- 
-+padding_mask=`printf "0x%X\n" $(($offset - 1))`
-+padding_mask_inv=`printf "0x%X\n" $((~$padding_mask))`
-+
- function cleanup_and_return_err()
- {
-     rm -f $UBOOT_SOURCE $UBOOT_SCRIPT
-@@ -91,10 +94,18 @@ function add_device_tree_kernel()
-     local size=$3
-     local bootargs=$4
- 
--    dt_mknode "$path" "module$addr"
--    dt_set "$path/module$addr" "compatible" "str_a" "multiboot,kernel multiboot,module"
--    dt_set "$path/module$addr" "reg" "hex"  "0x0 $addr 0x0 $(printf "0x%x" $size)"
--    dt_set "$path/module$addr" "bootargs" "str" "$bootargs"
-+    if test "$dynamic_loading_opt"
-+    then
-+        dt_mknode "$path" "module\${"$addr"}"
-+        dt_set "$path/module\${"$addr"}" "compatible" "str_a" "multiboot,kernel multiboot,module"
-+        dt_set "$path/module\${"$addr"}" "reg" "hex"  "0x0 0x\${"$addr"} 0x0 0x\${"$size"}"
-+        dt_set "$path/module\${"$addr"}" "bootargs" "str" "$bootargs"
-+    else
-+        dt_mknode "$path" "module$addr"
-+        dt_set "$path/module$addr" "compatible" "str_a" "multiboot,kernel multiboot,module"
-+        dt_set "$path/module$addr" "reg" "hex"  "0x0 $addr 0x0 $(printf "0x%x" $size)"
-+        dt_set "$path/module$addr" "bootargs" "str" "$bootargs"
-+    fi
- }
- 
- 
-@@ -104,9 +115,16 @@ function add_device_tree_ramdisk()
-     local addr=$2
-     local size=$3
- 
--    dt_mknode "$path"  "module$addr"
--    dt_set "$path/module$addr" "compatible" "str_a" "multiboot,ramdisk multiboot,module"
--    dt_set "$path/module$addr" "reg" "hex"  "0x0 $addr 0x0 $(printf "0x%x" $size)"
-+    if test "$dynamic_loading_opt"
-+    then
-+        dt_mknode "$path" "module\${"$addr"}"
-+        dt_set "$path/module\${"$addr"}" "compatible" "str_a" "multiboot,ramdisk multiboot,module"
-+        dt_set "$path/module\${"$addr"}" "reg" "hex"  "0x0 0x\${"$addr"} 0x0 0x\${"$size"}"
-+    else
-+        dt_mknode "$path" "module$addr"
-+        dt_set "$path/module$addr" "compatible" "str_a" "multiboot,ramdisk multiboot,module"
-+        dt_set "$path/module$addr" "reg" "hex"  "0x0 $addr 0x0 $(printf "0x%x" $size)"
-+    fi
- }
- 
- 
-@@ -116,9 +134,16 @@ function add_device_tree_passthrough()
-     local addr=$2
-     local size=$3
- 
--    dt_mknode "$path"  "module$addr"
--    dt_set "$path/module$addr" "compatible" "str_a" "multiboot,device-tree multiboot,module"
--    dt_set "$path/module$addr" "reg" "hex"  "0x0 $addr 0x0 $(printf "0x%x" $size)"
-+    if test "$dynamic_loading_opt"
-+    then
-+        dt_mknode "$path" "module\${"$addr"}"
-+        dt_set "$path/module\${"$addr"}" "compatible" "str_a" "multiboot,device-tree multiboot,module"
-+        dt_set "$path/module\${"$addr"}" "reg" "hex"  "0x0 0x\${"$addr"} 0x0 0x\${"$size"}"
-+    else
-+        dt_mknode "$path" "module$addr"
-+        dt_set "$path/module$addr" "compatible" "str_a" "multiboot,device-tree multiboot,module"
-+        dt_set "$path/module$addr" "reg" "hex"  "0x0 $addr 0x0 $(printf "0x%x" $size)"
-+    fi
- }
- 
- function add_device_tree_mem()
-@@ -186,7 +211,12 @@ function xen_device_tree_editing()
-     then
-         dt_mknode "/chosen" "dom0"
-         dt_set "/chosen/dom0" "compatible" "str_a" "xen,linux-zimage xen,multiboot-module multiboot,module"
--        dt_set "/chosen/dom0" "reg" "hex" "0x0 $dom0_kernel_addr 0x0 $(printf "0x%x" $dom0_kernel_size)"
-+        if test "$dynamic_loading_opt"
-+        then
-+            dt_set "/chosen/dom0" "reg" "hex" "0x0 0x\${dom0_linux_addr} 0x0 0x\${dom0_linux_size}"
-+        else
-+            dt_set "/chosen/dom0" "reg" "hex" "0x0 $dom0_kernel_addr 0x0 $(printf "0x%x" $dom0_kernel_size)"
-+        fi
-         dt_set "/chosen" "xen,dom0-bootargs" "str" "$DOM0_CMD"
-     fi
- 
-@@ -194,7 +224,12 @@ function xen_device_tree_editing()
-     then
-         dt_mknode "/chosen" "dom0-ramdisk"
-         dt_set "/chosen/dom0-ramdisk" "compatible" "str_a" "xen,linux-initrd xen,multiboot-module multiboot,module"
--        dt_set "/chosen/dom0-ramdisk" "reg" "hex" "0x0 $ramdisk_addr 0x0 $(printf "0x%x" $ramdisk_size)"
-+        if test "$dynamic_loading_opt"
-+        then
-+            dt_set "/chosen/dom0-ramdisk" "reg" "hex" "0x0 0x\${dom0_ramdisk_addr} 0x0 0x\${dom0_ramdisk_size}"
-+        else
-+            dt_set "/chosen/dom0-ramdisk" "reg" "hex" "0x0 $ramdisk_addr 0x0 $(printf "0x%x" $ramdisk_size)"
-+        fi
-     fi
- 
-     i=0
-@@ -241,14 +276,29 @@ function xen_device_tree_editing()
-             dt_set "/chosen/domU$i" "colors" "hex" "$(printf "0x%x" $bitcolors)"
-         fi
- 
--        add_device_tree_kernel "/chosen/domU$i" ${domU_kernel_addr[$i]} ${domU_kernel_size[$i]} "${DOMU_CMD[$i]}"
-+        if test "$dynamic_loading_opt"
-+        then
-+            add_device_tree_kernel "/chosen/domU$i" "domU${i}_kernel_addr" "domU${i}_kernel_size" "${DOMU_CMD[$i]}"
-+        else
-+            add_device_tree_kernel "/chosen/domU$i" ${domU_kernel_addr[$i]} ${domU_kernel_size[$i]} "${DOMU_CMD[$i]}"
-+        fi
-         if test "${domU_ramdisk_addr[$i]}"
-         then
--            add_device_tree_ramdisk "/chosen/domU$i" ${domU_ramdisk_addr[$i]} ${domU_ramdisk_size[$i]}
-+            if test "$dynamic_loading_opt"
-+            then
-+                add_device_tree_ramdisk "/chosen/domU$i" "domU${i}_ramdisk_addr" "domU${i}_ramdisk_size"
-+            else
-+                add_device_tree_ramdisk "/chosen/domU$i" ${domU_ramdisk_addr[$i]} ${domU_ramdisk_size[$i]}
-+            fi
-         fi
-         if test "${domU_passthrough_dtb_addr[$i]}"
-         then
--            add_device_tree_passthrough "/chosen/domU$i" ${domU_passthrough_dtb_addr[$i]} ${domU_passthrough_dtb_size[$i]}
-+            if test "$dynamic_loading_opt"
-+            then
-+                add_device_tree_passthrough "/chosen/domU$i" "domU${i}_fdt_addr" "domU${i}_fdt_size"
-+            else
-+                add_device_tree_passthrough "/chosen/domU$i" ${domU_passthrough_dtb_addr[$i]} ${domU_passthrough_dtb_size[$i]}
-+            fi
-         fi
-         i=$(( $i + 1 ))
-     done
-@@ -271,7 +321,12 @@ function device_tree_editing()
- 
-     if test $UBOOT_SOURCE
-     then
--        echo "fdt addr $device_tree_addr" >> $UBOOT_SOURCE
-+        if test $dynamic_loading_opt
-+        then
-+            echo "fdt addr \${host_fdt_addr}" >> $UBOOT_SOURCE
-+        else
-+            echo "fdt addr $device_tree_addr" >> $UBOOT_SOURCE
-+        fi
-         echo "fdt resize 1024" >> $UBOOT_SOURCE
- 
-         if test $NUM_DT_OVERLAY && test $NUM_DT_OVERLAY -gt 0
-@@ -306,7 +361,7 @@ function add_size()
- function load_file()
- {
-     local filename=$1
--    local fit_scr_name=$2
-+    local binary_name=$2
- 
-     local absolute_path="$(realpath --no-symlinks $filename)"
-     local base="$(realpath $PWD)"/
-@@ -314,11 +369,30 @@ function load_file()
- 
-     if test "$FIT"
-     then
--        echo "imxtract \$fit_addr $fit_scr_name $memaddr" >> $UBOOT_SOURCE
-+        echo "imxtract \$fit_addr $binary_name $memaddr" >> $UBOOT_SOURCE
-     else
--        echo "$LOAD_CMD $memaddr ${prepend_path:+$prepend_path/}$relative_path" >> $UBOOT_SOURCE
-+        if test "$dynamic_loading_opt"
-+        then
-+            echo "$LOAD_CMD \${curr_addr} ${prepend_path:+$prepend_path/}$relative_path" >> $UBOOT_SOURCE
-+        else
-+            echo "$LOAD_CMD $memaddr ${prepend_path:+$prepend_path/}$relative_path" >> $UBOOT_SOURCE
-+        fi
-     fi
-     add_size $filename
-+
-+    if test "$dynamic_loading_opt" && test ! "$FIT"
-+    then
-+        # Store each binary's load addr and size
-+        local binary_name_addr="${binary_name}_addr"
-+        local binary_name_size="${binary_name}_size"
-+        echo "setenv $binary_name_addr \${curr_addr}" >> $UBOOT_SOURCE
-+        echo "setenv $binary_name_size \${filesize}" >> $UBOOT_SOURCE
-+        
-+        # Compute load addr for next binary dynamically
-+        echo "setexpr curr_addr \${curr_addr} \+ \${filesize}" >> $UBOOT_SOURCE
-+        echo "setexpr curr_addr \${curr_addr} \+ \${padding_mask}" >> $UBOOT_SOURCE
-+        echo "setexpr curr_addr \${curr_addr} \& \${padding_mask_inv}" >> $UBOOT_SOURCE
-+    fi
- }
- 
- function check_file_type()
-@@ -536,6 +610,14 @@ generate_uboot_images()
- 
- xen_file_loading()
- {
-+    if test "$dynamic_loading_opt"
-+    then
-+        local curr_addr=`printf "%x\n" $memaddr`
-+        echo "setenv curr_addr $curr_addr" >> $UBOOT_SOURCE
-+        echo "setenv padding_mask $padding_mask" >> $UBOOT_SOURCE
-+        echo "setenv padding_mask_inv $padding_mask_inv" >> $UBOOT_SOURCE
-+    fi
-+
-     if test "$DOM0_KERNEL"
-     then
-         check_compressed_file_type $DOM0_KERNEL "executable"
-@@ -891,7 +973,7 @@ function print_help
- {
-     script=`basename "$0"`
-     echo "usage:"
--    echo "	$script -c CONFIG_FILE -d DIRECTORY [-t LOAD_CMD] [-o FILE] [-k KEY_DIR/HINT [-u U-BOOT_DTB]] [-e] [-f] [-p PREPEND_PATH]"
-+    echo "	$script -c CONFIG_FILE -d DIRECTORY [-t LOAD_CMD] [-o FILE] [-k KEY_DIR/HINT [-u U-BOOT_DTB]] [-e] [-f] [-p PREPEND_PATH] [-s]"
-     echo "	$script -h"
-     echo "where:"
-     echo "	CONFIG_FILE - configuration file"
-@@ -908,6 +990,7 @@ function print_help
-     echo "	U-BOOT_DTB - u-boot control dtb so that the public key gets added to it"
-     echo "	-f - enable generating a FIT image"
-     echo "	PREPEND_PATH - path to be appended before file names to match deploy location within rootfs"
-+    echo "	-s - enable dynamic loading of binaries by storing their addresses and sizes u-boot env variables"
-     echo "	-h - prints out the help message and exits "
-     echo "Defaults:"
-     echo "	CONFIG_FILE=$cfg_file, UBOOT_TYPE=\"LOAD_CMD\" env var, DIRECTORY=$uboot_dir"
-@@ -915,7 +998,7 @@ function print_help
-     echo "	$script -c ../config -d ./build42 -t \"scsi load 1:1\""
- }
- 
--while getopts ":c:t:d:ho:k:u:fp:" opt; do
-+while getopts ":c:t:d:ho:k:u:fp:s" opt; do
-     case ${opt} in
-     t )
-         case $OPTARG in
-@@ -957,6 +1040,9 @@ while getopts ":c:t:d:ho:k:u:fp:" opt; do
-     p )
-         prepend_path="$OPTARG"
-         ;;
-+    s )
-+        dynamic_loading_opt=y
-+        ;;
-     h )
-         print_help
-         exit 0
-@@ -1151,7 +1237,13 @@ device_tree_editing $device_tree_addr
- 
- # disable device tree reloation
- echo "setenv fdt_high 0xffffffffffffffff" >> $UBOOT_SOURCE
--echo "$BOOT_CMD $kernel_addr - $device_tree_addr" >> $UBOOT_SOURCE
-+
-+if test "$dynamic_loading_opt"
-+then
-+    echo "$BOOT_CMD \${host_kernel_addr} - \${host_fdt_addr}" >> $UBOOT_SOURCE
-+else
-+    echo "$BOOT_CMD $kernel_addr - $device_tree_addr" >> $UBOOT_SOURCE
-+fi
- 
- if test "$FIT"
- then
--- 
-2.35.1
+Ack.
 
+> Jan
 
