@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11783C43334
-	for <xen-devel@archiver.kernel.org>; Fri,  1 Jul 2022 20:19:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.359179.588603 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B27B1C433EF
+	for <xen-devel@archiver.kernel.org>; Fri,  1 Jul 2022 20:19:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.359171.588571 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o7N6H-00065X-Ri; Fri, 01 Jul 2022 20:18:49 +0000
+	id 1o7N6G-0005Wg-4x; Fri, 01 Jul 2022 20:18:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 359179.588603; Fri, 01 Jul 2022 20:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 359171.588571; Fri, 01 Jul 2022 20:18:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o7N6H-00061B-IN; Fri, 01 Jul 2022 20:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 359179;
- Fri, 01 Jul 2022 20:01:48 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o7N6G-0005Va-0C; Fri, 01 Jul 2022 20:18:48 +0000
+Received: by outflank-mailman (input) for mailman id 359171;
+ Fri, 01 Jul 2022 20:01:26 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rlr7=XG=sholland.org=samuel@srs-se1.protection.inumbo.net>)
- id 1o7Mpo-000470-Md
- for xen-devel@lists.xenproject.org; Fri, 01 Jul 2022 20:01:48 +0000
+ id 1o7MpS-00047i-P2
+ for xen-devel@lists.xenproject.org; Fri, 01 Jul 2022 20:01:26 +0000
 Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
- [66.111.4.224]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id a33720c3-f978-11ec-bd2d-47488cf2e6aa;
- Fri, 01 Jul 2022 22:01:47 +0200 (CEST)
+ [66.111.4.224]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 94c20f17-f978-11ec-bf74-3be3494bec92;
+ Fri, 01 Jul 2022 22:01:24 +0200 (CEST)
 Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailnew.nyi.internal (Postfix) with ESMTP id F1DE55802F6;
- Fri,  1 Jul 2022 16:01:46 -0400 (EDT)
+ by mailnew.nyi.internal (Postfix) with ESMTP id B24605802E7;
+ Fri,  1 Jul 2022 16:01:22 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute2.internal (MEProxy); Fri, 01 Jul 2022 16:01:46 -0400
+ by compute2.internal (MEProxy); Fri, 01 Jul 2022 16:01:22 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 1 Jul 2022 16:01:41 -0400 (EDT)
+ 1 Jul 2022 16:01:10 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,46 +45,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a33720c3-f978-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 94c20f17-f978-11ec-bf74-3be3494bec92
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
 	cc:cc:content-transfer-encoding:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:sender
-	:subject:subject:to:to; s=fm3; t=1656705706; x=1656712906; bh=SS
-	qXvxPvOnT181Alnoj0HfgL9fqTJVzreJxmfCVyBec=; b=hcAoBpvIf8eiMsWnHm
-	b6RJp+0UU2OILuy21U79vOjusxjAcQG94kzCl/SLOhhz8J4ASW+y84iY/hEL50ms
-	+t+80HjBAylZNEJe73yGhHSZF1RSQ8RBU9Nk62QyCXZpUC4CexurEGTlBgY/Xqfo
-	fnfCIqYMFwRBTgEwEckqi0Kl9E6cHZVfUrF5kxIWdFViA5bUJ11OHLJ7T0XapXw2
-	hQWKkSyPabF2oJi63qd5eTn9Zl4sQmG20eYW/wqRNYdW/SrAsFhGxn4LKFrrzqDC
-	C0MqxbtLaYxpKOf9o9kKWlf6yKvCjeXy1x18+k24AKggcDhNdzIH/iJu5OZQ3wo4
-	ssMA==
+	:subject:subject:to:to; s=fm3; t=1656705682; x=1656712882; bh=1g
+	Yq3VbEkPVty/pd1tEYQnVO1uU7x5LYLlMSe3zbDrE=; b=bdIu56u5NUcFW5hvaK
+	2/laTWzN8GTHoYTAZXrQlwuGxUO/51vWxcPMTA2kgfltyNMsvcq9NazmXFT1M9hf
+	Yy7nInyHLoEyitpTjDbv3GYoUVgLpWSo40ttAnfTRma7mvNYsPbG1mejs2Qgcb3t
+	LbFItmmgx0ui1jMDv36Wq3t0B7zszJ1O7HYnTX+/01o0+2PoRscDY1WPAVAiDqzA
+	lL8KiMkDxHJI+62Lumh+214ubp82KV2hgQ6WmN9StyO1UxZc5Jrl4uDo5CIcMf+v
+	w3d+EflqLt3LJ6h3D97ccfd/v3Oe7fE6Pop4QYptsoopZcfNSmaoapHf/0dyMeat
+	KJjA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1656705706; x=1656712906; bh=SSqXvxPvOnT18
-	1Alnoj0HfgL9fqTJVzreJxmfCVyBec=; b=HeWsMOcvIEpk7+MFtWHCXsiI6BlFC
-	2TQ2SkcGU6TjX/RAuIxgMoxDlrLAJRLOQUP5M4Vjn/Sk2LIfFF6zmyCdELkbAfiW
-	sNvfuqkLM1Vey2QklfYRRWjhcegVctGnxhxUwegYbB0z6YgklYBKnTe07fR9Aokx
-	OJk4Rl2PfNKRw931jKDBYNYjhcdhJJxhHzUaHJY1VFb0uXTx2Qq9+O7Z8+sDYq3K
-	dW+YTOeJLeT+EWHVFce25KHIXMDeukkeCTF05NMBW9QbVqWeENDneUsjCVRvIwS4
-	+pREO1Ryo1aq2EmzH+e4VaMl82vWzrZw+kMmsklRZow8dIJvLbZg3JAtQ==
-X-ME-Sender: <xms:qFK_YsIaYF4zQr4W2reW40ZCVdf18qMP0jUxBhRM2F9XT3OMoZE-fQ>
-    <xme:qFK_YsLMw7Ul-MFWvL5vjLl8kF8OII4_AxB68OblZjKrRy2kL3D-hexNKYm7eeilY
-    r3A0Nm-DvJnaB1bqw>
-X-ME-Received: <xmr:qFK_YsvSjEToVoJH77gEMjDuattqvftr9In9WoGGrsXJF0G4gbll_vSjSD0PfO7MeF139vM38mNTdntEoLC6DmjMwlneu3GzSMNeIsU0zW-j4HFzvCUiSUQZYQsfYrB4ht35Fw>
+	:x-sasl-enc; s=fm2; t=1656705682; x=1656712882; bh=1gYq3VbEkPVty
+	/pd1tEYQnVO1uU7x5LYLlMSe3zbDrE=; b=IIGVa/3L4rIIDkpm5x9kJF4p4zPgE
+	bekRQi2xgDfEmYrxPVdTUgxGIsZGgD0mmbIIymHEeJR6lUkDl7AgH4weEwbRvI39
+	z+3v4BNWVNKOg4Y3UKxsTxHjzdvdNIGGn03gzsHuwPtkq11popiSb4aRYBnIvyaL
+	L3pj53Cf9IJhHuC3KtMRhkQ9lEVDTzotxVI7nK9L+t1iY2zY5ZlKJF5XkZlzy1kW
+	qRxbxA7qUT5pUcyoRZWtPspZfkyMkSc2u3lh/Z1BI0SuCIzlQIrm1Ogt1M9ktsDh
+	yae+YwhKLB+1GibJY4Yhz0XeYPpHVyQA4KoXzDl26EyU2QNQe5gKGx26w==
+X-ME-Sender: <xms:iFK_YvH3FMyAZsKRZV3A0GprYtQC7s68B_MPFguwTi0KU6kqxq0xRQ>
+    <xme:iFK_YsUz0pMrVbXNSrGo0uGc-HB3zbb4nrlZSFsuHkdbMUP1sdU3HElrNL2KF-oGh
+    b34XdWEa03EJqcOog>
+X-ME-Received: <xmr:iFK_YhJh_1EQiu0zTxxgTBMM1Zw1nveGQHWRXFwuPPHyhoxhahmD-kB5FtEfBUWeLd1zUD8TKcYVLdTH_AwtDSrjfUIvksQpn43lCZI1ulvIDzhZY9rSagRLZXsv73Fdp0MsGA>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrudehfedgudeggecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
     enucfjughrpefhvfevufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefurghm
     uhgvlhcujfholhhlrghnugcuoehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhgqeenuc
     ggtffrrghtthgvrhhnpedukeetueduhedtleetvefguddvvdejhfefudelgfduveeggeeh
-    gfdufeeitdevteenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhgrihhlfh
+    gfdufeeitdevteenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
     hrohhmpehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhg
-X-ME-Proxy: <xmx:qFK_YpaOX1fO-6TE3RDUrGUqEks9gqQTGKtyHpwS4EkpGFs3D_QX1g>
-    <xmx:qFK_YjY-VtD47ytaYrZ-MHfYlS9aFWa7-aZfO5UVVLGUS3nufnJ-2Q>
-    <xmx:qFK_YlCdS98PzzFa3RHRnOz63A6BS-YMIMrSNYdRpcIEip8IzR4YhQ>
-    <xmx:qlK_YnrH17XSu6_tw5n16RVzGLdNEhRKaiCIhf79YUHgEBSwJGS5nQ>
+X-ME-Proxy: <xmx:iFK_YtHsbbj2iuY_FeCxakuRenry44VSu2B-fzKnQnYneTvRe9spSw>
+    <xmx:iFK_YlVfgRQNrxDo7Ai87dgvpBDjHa2HPao95ZSvgWSmF7Y8euI5pA>
+    <xmx:iFK_YoOR_g9PNyYJVLJ7TkcK34rcKMKV3h6pUl542yueucyJ1Rv_Gw>
+    <xmx:klK_Yuc4LCTmGZISjXfSPMcDk1VujGGWEKmzte1mSHk4yVLCHyf3JA>
 Feedback-ID: i0ad843c9:Fastmail
 From: Samuel Holland <samuel@sholland.org>
 To: Marc Zyngier <maz@kernel.org>,
@@ -131,63 +131,185 @@ Cc: Samuel Holland <samuel@sholland.org>,
 	linux-kernel@vger.kernel.org,	linux-mips@vger.kernel.org,
 	linux-parisc@vger.kernel.org,	linux-pci@vger.kernel.org,
 	linux-sh@vger.kernel.org,	linux-xtensa@linux-xtensa.org,	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 5/8] genirq: Refactor accessors to use irq_data_get_affinity_mask
-Date: Fri,  1 Jul 2022 15:00:53 -0500
-Message-Id: <20220701200056.46555-6-samuel@sholland.org>
+	xen-devel@lists.xenproject.org,	kernel test robot <lkp@intel.com>
+Subject: [PATCH v3 1/8] irqchip/mips-gic: Only register IPI domain when SMP is enabled
+Date: Fri,  1 Jul 2022 15:00:49 -0500
+Message-Id: <20220701200056.46555-2-samuel@sholland.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220701200056.46555-1-samuel@sholland.org>
 References: <20220701200056.46555-1-samuel@sholland.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-A couple of functions directly reference the affinity mask. Route them
-through irq_data_get_affinity_mask so they will pick up any refactoring
-done there.
+The MIPS GIC irqchip driver may be selected in a uniprocessor
+configuration, but it unconditionally registers an IPI domain.
 
+Limit the part of the driver dealing with IPIs to only be compiled when
+GENERIC_IRQ_IPI is enabled, which corresponds to an SMP configuration.
+
+Reported-by: kernel test robot <lkp@intel.com>
 Signed-off-by: Samuel Holland <samuel@sholland.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+ - New patch to fix build errors in uniprocessor MIPS configs
 
- include/linux/irq.h | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ drivers/irqchip/Kconfig        |  3 +-
+ drivers/irqchip/irq-mips-gic.c | 80 +++++++++++++++++++++++-----------
+ 2 files changed, 56 insertions(+), 27 deletions(-)
 
-diff --git a/include/linux/irq.h b/include/linux/irq.h
-index 505308253d23..69ee4e2f36ce 100644
---- a/include/linux/irq.h
-+++ b/include/linux/irq.h
-@@ -879,16 +879,16 @@ static inline int irq_data_get_node(struct irq_data *d)
- 	return irq_common_data_get_node(d->common);
- }
+diff --git a/drivers/irqchip/Kconfig b/drivers/irqchip/Kconfig
+index 1f23a6be7d88..d26a4ff7c99f 100644
+--- a/drivers/irqchip/Kconfig
++++ b/drivers/irqchip/Kconfig
+@@ -322,7 +322,8 @@ config KEYSTONE_IRQ
  
--static inline struct cpumask *irq_get_affinity_mask(int irq)
-+static inline struct cpumask *irq_data_get_affinity_mask(struct irq_data *d)
- {
--	struct irq_data *d = irq_get_irq_data(irq);
--
--	return d ? d->common->affinity : NULL;
-+	return d->common->affinity;
- }
+ config MIPS_GIC
+ 	bool
+-	select GENERIC_IRQ_IPI
++	select GENERIC_IRQ_IPI if SMP
++	select IRQ_DOMAIN_HIERARCHY
+ 	select MIPS_CM
  
--static inline struct cpumask *irq_data_get_affinity_mask(struct irq_data *d)
-+static inline struct cpumask *irq_get_affinity_mask(int irq)
- {
--	return d->common->affinity;
-+	struct irq_data *d = irq_get_irq_data(irq);
+ config INGENIC_IRQ
+diff --git a/drivers/irqchip/irq-mips-gic.c b/drivers/irqchip/irq-mips-gic.c
+index ff89b36267dd..8a9efb6ae587 100644
+--- a/drivers/irqchip/irq-mips-gic.c
++++ b/drivers/irqchip/irq-mips-gic.c
+@@ -52,13 +52,15 @@ static DEFINE_PER_CPU_READ_MOSTLY(unsigned long[GIC_MAX_LONGS], pcpu_masks);
+ 
+ static DEFINE_SPINLOCK(gic_lock);
+ static struct irq_domain *gic_irq_domain;
+-static struct irq_domain *gic_ipi_domain;
+ static int gic_shared_intrs;
+ static unsigned int gic_cpu_pin;
+ static unsigned int timer_cpu_pin;
+ static struct irq_chip gic_level_irq_controller, gic_edge_irq_controller;
 +
-+	return d ? irq_data_get_affinity_mask(d) : NULL;
- }
++#ifdef CONFIG_GENERIC_IRQ_IPI
+ static DECLARE_BITMAP(ipi_resrv, GIC_MAX_INTRS);
+ static DECLARE_BITMAP(ipi_available, GIC_MAX_INTRS);
++#endif /* CONFIG_GENERIC_IRQ_IPI */
  
- #ifdef CONFIG_GENERIC_IRQ_EFFECTIVE_AFF_MASK
-@@ -910,7 +910,7 @@ static inline void irq_data_update_effective_affinity(struct irq_data *d,
- static inline
- struct cpumask *irq_data_get_effective_affinity_mask(struct irq_data *d)
+ static struct gic_all_vpes_chip_data {
+ 	u32	map;
+@@ -472,9 +474,11 @@ static int gic_irq_domain_map(struct irq_domain *d, unsigned int virq,
+ 	u32 map;
+ 
+ 	if (hwirq >= GIC_SHARED_HWIRQ_BASE) {
++#ifdef CONFIG_GENERIC_IRQ_IPI
+ 		/* verify that shared irqs don't conflict with an IPI irq */
+ 		if (test_bit(GIC_HWIRQ_TO_SHARED(hwirq), ipi_resrv))
+ 			return -EBUSY;
++#endif /* CONFIG_GENERIC_IRQ_IPI */
+ 
+ 		err = irq_domain_set_hwirq_and_chip(d, virq, hwirq,
+ 						    &gic_level_irq_controller,
+@@ -567,6 +571,8 @@ static const struct irq_domain_ops gic_irq_domain_ops = {
+ 	.map = gic_irq_domain_map,
+ };
+ 
++#ifdef CONFIG_GENERIC_IRQ_IPI
++
+ static int gic_ipi_domain_xlate(struct irq_domain *d, struct device_node *ctrlr,
+ 				const u32 *intspec, unsigned int intsize,
+ 				irq_hw_number_t *out_hwirq,
+@@ -670,6 +676,48 @@ static const struct irq_domain_ops gic_ipi_domain_ops = {
+ 	.match = gic_ipi_domain_match,
+ };
+ 
++static int gic_register_ipi_domain(struct device_node *node)
++{
++	struct irq_domain *gic_ipi_domain;
++	unsigned int v[2], num_ipis;
++
++	gic_ipi_domain = irq_domain_add_hierarchy(gic_irq_domain,
++						  IRQ_DOMAIN_FLAG_IPI_PER_CPU,
++						  GIC_NUM_LOCAL_INTRS + gic_shared_intrs,
++						  node, &gic_ipi_domain_ops, NULL);
++	if (!gic_ipi_domain) {
++		pr_err("Failed to add IPI domain");
++		return -ENXIO;
++	}
++
++	irq_domain_update_bus_token(gic_ipi_domain, DOMAIN_BUS_IPI);
++
++	if (node &&
++	    !of_property_read_u32_array(node, "mti,reserved-ipi-vectors", v, 2)) {
++		bitmap_set(ipi_resrv, v[0], v[1]);
++	} else {
++		/*
++		 * Reserve 2 interrupts per possible CPU/VP for use as IPIs,
++		 * meeting the requirements of arch/mips SMP.
++		 */
++		num_ipis = 2 * num_possible_cpus();
++		bitmap_set(ipi_resrv, gic_shared_intrs - num_ipis, num_ipis);
++	}
++
++	bitmap_copy(ipi_available, ipi_resrv, GIC_MAX_INTRS);
++
++	return 0;
++}
++
++#else /* !CONFIG_GENERIC_IRQ_IPI */
++
++static inline int gic_register_ipi_domain(struct device_node *node)
++{
++	return 0;
++}
++
++#endif /* !CONFIG_GENERIC_IRQ_IPI */
++
+ static int gic_cpu_startup(unsigned int cpu)
  {
--	return d->common->affinity;
-+	return irq_data_get_affinity_mask(d);
- }
- #endif
+ 	/* Enable or disable EIC */
+@@ -688,11 +736,12 @@ static int gic_cpu_startup(unsigned int cpu)
+ static int __init gic_of_init(struct device_node *node,
+ 			      struct device_node *parent)
+ {
+-	unsigned int cpu_vec, i, gicconfig, v[2], num_ipis;
++	unsigned int cpu_vec, i, gicconfig;
+ 	unsigned long reserved;
+ 	phys_addr_t gic_base;
+ 	struct resource res;
+ 	size_t gic_len;
++	int ret;
+ 
+ 	/* Find the first available CPU vector. */
+ 	i = 0;
+@@ -780,30 +829,9 @@ static int __init gic_of_init(struct device_node *node,
+ 		return -ENXIO;
+ 	}
+ 
+-	gic_ipi_domain = irq_domain_add_hierarchy(gic_irq_domain,
+-						  IRQ_DOMAIN_FLAG_IPI_PER_CPU,
+-						  GIC_NUM_LOCAL_INTRS + gic_shared_intrs,
+-						  node, &gic_ipi_domain_ops, NULL);
+-	if (!gic_ipi_domain) {
+-		pr_err("Failed to add IPI domain");
+-		return -ENXIO;
+-	}
+-
+-	irq_domain_update_bus_token(gic_ipi_domain, DOMAIN_BUS_IPI);
+-
+-	if (node &&
+-	    !of_property_read_u32_array(node, "mti,reserved-ipi-vectors", v, 2)) {
+-		bitmap_set(ipi_resrv, v[0], v[1]);
+-	} else {
+-		/*
+-		 * Reserve 2 interrupts per possible CPU/VP for use as IPIs,
+-		 * meeting the requirements of arch/mips SMP.
+-		 */
+-		num_ipis = 2 * num_possible_cpus();
+-		bitmap_set(ipi_resrv, gic_shared_intrs - num_ipis, num_ipis);
+-	}
+-
+-	bitmap_copy(ipi_available, ipi_resrv, GIC_MAX_INTRS);
++	ret = gic_register_ipi_domain(node);
++	if (ret)
++		return ret;
+ 
+ 	board_bind_eic_interrupt = &gic_bind_eic_interrupt;
  
 -- 
 2.35.1
