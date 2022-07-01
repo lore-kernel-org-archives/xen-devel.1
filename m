@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BD71CCA479
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F5CFC43334
 	for <xen-devel@archiver.kernel.org>; Fri,  1 Jul 2022 20:19:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.359177.588592 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.359173.588576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o7N6H-0005xn-BX; Fri, 01 Jul 2022 20:18:49 +0000
+	id 1o7N6G-0005cr-Cx; Fri, 01 Jul 2022 20:18:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 359177.588592; Fri, 01 Jul 2022 20:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 359173.588576; Fri, 01 Jul 2022 20:18:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o7N6H-0005u7-4d; Fri, 01 Jul 2022 20:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 359177;
- Fri, 01 Jul 2022 20:01:43 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o7N6G-0005be-9O; Fri, 01 Jul 2022 20:18:48 +0000
+Received: by outflank-mailman (input) for mailman id 359173;
+ Fri, 01 Jul 2022 20:01:31 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=rlr7=XG=sholland.org=samuel@srs-se1.protection.inumbo.net>)
- id 1o7Mpj-00047i-2s
- for xen-devel@lists.xenproject.org; Fri, 01 Jul 2022 20:01:43 +0000
+ id 1o7MpX-000470-F1
+ for xen-devel@lists.xenproject.org; Fri, 01 Jul 2022 20:01:31 +0000
 Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
- [66.111.4.224]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 9ffb7752-f978-11ec-bf74-3be3494bec92;
- Fri, 01 Jul 2022 22:01:42 +0200 (CEST)
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailnew.nyi.internal (Postfix) with ESMTP id 88D6C5802F4;
- Fri,  1 Jul 2022 16:01:41 -0400 (EDT)
+ [66.111.4.224]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 9903102a-f978-11ec-bd2d-47488cf2e6aa;
+ Fri, 01 Jul 2022 22:01:30 +0200 (CEST)
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+ by mailnew.nyi.internal (Postfix) with ESMTP id D5ADC580285;
+ Fri,  1 Jul 2022 16:01:29 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Fri, 01 Jul 2022 16:01:41 -0400
+ by compute3.internal (MEProxy); Fri, 01 Jul 2022 16:01:29 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 1 Jul 2022 16:01:36 -0400 (EDT)
+ 1 Jul 2022 16:01:23 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 9ffb7752-f978-11ec-bf74-3be3494bec92
+X-Inumbo-ID: 9903102a-f978-11ec-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
 	cc:cc:content-transfer-encoding:date:date:from:from:in-reply-to
 	:in-reply-to:message-id:mime-version:references:reply-to:sender
-	:subject:subject:to:to; s=fm3; t=1656705701; x=1656712901; bh=0L
-	WuRMkphck+oUsETtbUMciB/g6XpbS+D68bi898KtM=; b=AqGoMTSNUno8lOmyDh
-	KCwBkoAA7CbRzCpTwUdrVZNLF/wgidvQ7dsm+84o2fZ7gQevOX9qgVYV5nm/9kgO
-	AMuQd8xE3VTWjlAJ7GrdD9VG7BV18Jcp9kKqlP10nOfIKsoMI+rW7kzM0NAfbTyC
-	NWr74D8Q3JSoeOaEx9LsHr33xds/373ohmcrmDKPwF8OjXUOpnM+aWDRtp6nuvq9
-	kg59XMZJPKD6+LWdXV+szMDXjt+Bh7ouD13imUf0Q05dynZ6LTdGmF8mVgEGl3Bl
-	ONZn3X292lorO+Z+uaZEodDFOzhGvINgJHQDr8YSLNCPUjVe/p4PN6U1+nlRcr03
-	GbWw==
+	:subject:subject:to:to; s=fm3; t=1656705689; x=1656712889; bh=f2
+	gTOnVVlawVp6N5bLg8smmhsDaH+rFeOulG3ok0Jrc=; b=S00usAZDc/YM64VNCn
+	FjrEnQNeYOIV4LNXFxrNe+DvmbJ1spyaNknAlkMKCOYdB8xZAB6BY9sx7dI8cRwD
+	aNrKuvCkIxj/PKyZRFpy+snzjxdT/wGYVUKvGizh4ybfVco0jpNkt9KuqI3lODmv
+	VgMOfXezM/xbArBQvHUjLN61LUq2x7L0hMa6QJigRe0ReXc8M/xo9kR71pvG5fav
+	zb0DMcwbxYzRwjHctt2+SKmtMgzgd0yTB8uENd3D0VqTECGgquIpAjLlEagHYC3j
+	iGuAmAltKJ2/jWPPQ1vs09gP9bynvMqw+WFPrd9CKAWkKbcNwG53wW45gJRugpgB
+	7etg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm2; t=1656705701; x=1656712901; bh=0LWuRMkphck+o
-	UsETtbUMciB/g6XpbS+D68bi898KtM=; b=oa1e9Su6i+EtxBIhYMfUYN1BBIh7+
-	NtLc3K9bSFNOEpdIhhM9orp+f/WF+uOfv1NI8kwLKLdemiOeS5HWJECGkfsHhJiH
-	/wrY8WMMNhZUZUQf87Y6I2nlwQL4IKXSCH2sx7h4StxNsLo412pY5+cK8XhqNURa
-	IF4psEvV+ZGo699etAF0/P+4jL5LalpbzQlttWsppbNEXfxA/dOghfaTOCAwlKrK
-	KEvs69E1t/EoreKt1IwBdd8N4B9H428Bsjz94BHuby3lv0Gnlfekvlya7hY+n98C
-	YWKS5+DGo6Bue2FdLbpuwQxoB2okv4DaH6kIF8BDFGbnyGUVJ78Jz+rvQ==
-X-ME-Sender: <xms:olK_YsFQaQWqF-aONlCFJ5uetgmJnec1thbISaSBgnaCH8jS6vgdlw>
-    <xme:olK_YlXkRgS5TvEifhOxL8eAll0aQOmledIk1hyN2rgNMA13JYmstRmbpGOaRmTU-
-    H2H_Gklvg3vNf_76g>
-X-ME-Received: <xmr:olK_YmLuD69cpfSzw-R4kmMPgu2jyauTWKCQHkDFAgmSZn9Gis4bbGNPIwkocA_DrrsH3sMvcbGjSDo8KSO7QZfNqsw4dV7PcL3l-1zAidbDC6DmKW4D1HlwVY3xH3m954qqMg>
+	:x-sasl-enc; s=fm2; t=1656705689; x=1656712889; bh=f2gTOnVVlawVp
+	6N5bLg8smmhsDaH+rFeOulG3ok0Jrc=; b=p8dJ+iBG+yyKxcHv8Ird4QI+8K5e2
+	deriiVPbLfaAp7jH0aTFXbKRlCyn1EkHQyKB2khg8+haSRMztqOCdPVXCF1Z0WCH
+	XMZ2dC520GBYyCM3t4JRbY69RiaW08lpNIFhNE6+kx66gd+4fAfUbrwSyPs6mbPc
+	nB4SQ4rjMwxLFceJ639l6X5Gnfabx0+YkFVX26GUHctAf/ClGo5S4UwBUh4m9yPh
+	5lA0hUcpMSQycZcnZaO6J6XLkQxj0nrANK1+St4Vqj9eYNEZlQb3hS2C/cwKEL+5
+	BILChd6I7vOuP7X0g3FgLvTGrvQkLzGX2qG9+nUpNgkqLUj+CVjSJhhdQ==
+X-ME-Sender: <xms:lVK_YvMmv4ox1Eme9_eVm7hG98FH-UgFJb0oHUzgJo8sA_XFPRxfzA>
+    <xme:lVK_Yp8DXLpqeSNLMrpiZQDvQSkKhvABFdw5gwEoYfjWHhRkkQPOyIiDrHvopn-gK
+    IdJbuVQ556syyMePg>
+X-ME-Received: <xmr:lVK_YuS8YjQHh6ATVN-N4qX2fapbY-KSFXLVNMLNNU3la4fhZVjZ3PEBhHGMgyvtfYJwcKnlGeDVe5f_RB6iDTTAKBt_f8gdCnW9mFED1WsqFUsldFlpUIHZTBu7mGIVas_bhA>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrudehfedgudeggecutefuodetggdotefrod
     ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
     necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
@@ -81,10 +81,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrudehfedgudeggecutefuodetgg
     ggtffrrghtthgvrhhnpedukeetueduhedtleetvefguddvvdejhfefudelgfduveeggeeh
     gfdufeeitdevteenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
     hrohhmpehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhg
-X-ME-Proxy: <xmx:olK_YuH3L90nAfoF2N8s9mi1lvzCGpKg5B0fSYH1opyql0hpPhTvBg>
-    <xmx:olK_YiV10CMXHptGh7LyGaSf02IoE_5CXIQLqvsRS8VJkIe4doHZvA>
-    <xmx:olK_YhO7Ax5bd7URto_P8m9sgMbfhMUEE1FQyOCxW1mjUcM8gkrmbw>
-    <xmx:pVK_YnWNuGw-JrwdgPZRMxAas6DoPrjYmDFLwWpctwyYTLAPtQGZKg>
+X-ME-Proxy: <xmx:lVK_Yjux0iKsqVqtDdBsTLFTukN4c0i-NDydJA7FsffE7qkd6SRhLg>
+    <xmx:lVK_Ync8mOd5Hs3XKGkkxQQutCnfzJtCXnCoUWrkxN9GQqvqdz4-EA>
+    <xmx:lVK_Yv1Ev9KmbIm3eUXMINBReiNIuyQcc8fQ3WcdbBD2eNMZPxFqzw>
+    <xmx:mVK_YimYxP6DsLw8htRlTj1olHyqAnO6Ea3SMp1xmXtGFF9Eh_CABA>
 Feedback-ID: i0ad843c9:Fastmail
 From: Samuel Holland <samuel@sholland.org>
 To: Marc Zyngier <maz@kernel.org>,
@@ -131,57 +131,58 @@ Cc: Samuel Holland <samuel@sholland.org>,
 	linux-kernel@vger.kernel.org,	linux-mips@vger.kernel.org,
 	linux-parisc@vger.kernel.org,	linux-pci@vger.kernel.org,
 	linux-sh@vger.kernel.org,	linux-xtensa@linux-xtensa.org,	x86@kernel.org,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 4/8] genirq: Drop redundant irq_init_effective_affinity
-Date: Fri,  1 Jul 2022 15:00:52 -0500
-Message-Id: <20220701200056.46555-5-samuel@sholland.org>
+	xen-devel@lists.xenproject.org,	kernel test robot <lkp@intel.com>
+Subject: [PATCH v3 2/8] genirq: GENERIC_IRQ_IPI depends on SMP
+Date: Fri,  1 Jul 2022 15:00:50 -0500
+Message-Id: <20220701200056.46555-3-samuel@sholland.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220701200056.46555-1-samuel@sholland.org>
 References: <20220701200056.46555-1-samuel@sholland.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-It does exactly the same thing as irq_data_update_effective_affinity.
+The generic IPI code depends on the IRQ affinity mask being allocated
+and initialized. This will not be the case if SMP is disabled. Fix up
+the remaining driver that selected GENERIC_IRQ_IPI in a non-SMP config.
 
+Reported-by: kernel test robot <lkp@intel.com>
 Signed-off-by: Samuel Holland <samuel@sholland.org>
 ---
 
-Changes in v3:
- - New patch to drop irq_init_effective_affinity
+(no changes since v2)
 
- kernel/irq/manage.c | 10 +---------
- 1 file changed, 1 insertion(+), 9 deletions(-)
+Changes in v2:
+ - New patch to prevent GENERIC_IRQ_IPI from being selected on !SMP
 
-diff --git a/kernel/irq/manage.c b/kernel/irq/manage.c
-index 8c396319d5ac..40fe7806cc8c 100644
---- a/kernel/irq/manage.c
-+++ b/kernel/irq/manage.c
-@@ -205,16 +205,8 @@ static void irq_validate_effective_affinity(struct irq_data *data)
- 	pr_warn_once("irq_chip %s did not update eff. affinity mask of irq %u\n",
- 		     chip->name, data->irq);
- }
--
--static inline void irq_init_effective_affinity(struct irq_data *data,
--					       const struct cpumask *mask)
--{
--	cpumask_copy(irq_data_get_effective_affinity_mask(data), mask);
--}
- #else
- static inline void irq_validate_effective_affinity(struct irq_data *data) { }
--static inline void irq_init_effective_affinity(struct irq_data *data,
--					       const struct cpumask *mask) { }
- #endif
+ drivers/irqchip/Kconfig | 2 +-
+ kernel/irq/Kconfig      | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/irqchip/Kconfig b/drivers/irqchip/Kconfig
+index d26a4ff7c99f..5dd98a81efc8 100644
+--- a/drivers/irqchip/Kconfig
++++ b/drivers/irqchip/Kconfig
+@@ -177,7 +177,7 @@ config MADERA_IRQ
+ config IRQ_MIPS_CPU
+ 	bool
+ 	select GENERIC_IRQ_CHIP
+-	select GENERIC_IRQ_IPI if SYS_SUPPORTS_MULTITHREADING
++	select GENERIC_IRQ_IPI if SMP && SYS_SUPPORTS_MULTITHREADING
+ 	select IRQ_DOMAIN
+ 	select GENERIC_IRQ_EFFECTIVE_AFF_MASK
  
- int irq_do_set_affinity(struct irq_data *data, const struct cpumask *mask,
-@@ -347,7 +339,7 @@ static bool irq_set_affinity_deactivated(struct irq_data *data,
- 		return false;
+diff --git a/kernel/irq/Kconfig b/kernel/irq/Kconfig
+index 10929eda9825..fc760d064a65 100644
+--- a/kernel/irq/Kconfig
++++ b/kernel/irq/Kconfig
+@@ -82,6 +82,7 @@ config IRQ_FASTEOI_HIERARCHY_HANDLERS
+ # Generic IRQ IPI support
+ config GENERIC_IRQ_IPI
+ 	bool
++	depends on SMP
+ 	select IRQ_DOMAIN_HIERARCHY
  
- 	cpumask_copy(desc->irq_common_data.affinity, mask);
--	irq_init_effective_affinity(data, mask);
-+	irq_data_update_effective_affinity(data, mask);
- 	irqd_set(data, IRQD_AFFINITY_SET);
- 	return true;
- }
+ # Generic MSI interrupt support
 -- 
 2.35.1
 
