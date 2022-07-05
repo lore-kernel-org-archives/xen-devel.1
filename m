@@ -4,35 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D238C43334
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jul 2022 16:33:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.361483.591039 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92B78C43334
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jul 2022 18:07:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.361499.591053 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o8lUU-0007G0-7M; Tue, 05 Jul 2022 16:33:34 +0000
+	id 1o8mws-0000Xv-5h; Tue, 05 Jul 2022 18:06:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 361483.591039; Tue, 05 Jul 2022 16:33:34 +0000
+Received: by outflank-mailman (output) from mailman id 361499.591053; Tue, 05 Jul 2022 18:06:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o8lUU-0007Ft-4m; Tue, 05 Jul 2022 16:33:34 +0000
-Received: by outflank-mailman (input) for mailman id 361483;
- Tue, 05 Jul 2022 16:33:33 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o8lUT-0007Fj-DU; Tue, 05 Jul 2022 16:33:33 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o8lUT-0000jV-Ap; Tue, 05 Jul 2022 16:33:33 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1o8lUS-00035e-TO; Tue, 05 Jul 2022 16:33:32 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1o8lUS-0008AT-Si; Tue, 05 Jul 2022 16:33:32 +0000
+	id 1o8mws-0000Xo-35; Tue, 05 Jul 2022 18:06:58 +0000
+Received: by outflank-mailman (input) for mailman id 361499;
+ Tue, 05 Jul 2022 18:06:57 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=pHCC=XK=gmail.com=jandryuk@srs-se1.protection.inumbo.net>)
+ id 1o8mwr-0000Xi-1t
+ for xen-devel@lists.xen.org; Tue, 05 Jul 2022 18:06:57 +0000
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [2a00:1450:4864:20::12b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 40aa4b69-fc8d-11ec-924f-1f966e50362f;
+ Tue, 05 Jul 2022 20:06:54 +0200 (CEST)
+Received: by mail-lf1-x12b.google.com with SMTP id z13so21838994lfj.13
+ for <xen-devel@lists.xen.org>; Tue, 05 Jul 2022 11:06:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,196 +41,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=SERdplDQqnLGoG6YRUhbwLdPaa/josmxJJ1JO6ZLHO4=; b=06p67u34KXi88HPa1cU2f26/ti
-	cgI/DX910HQjeisj+PDfFFKd3HOFKzNP2TKxN1dRd0KAyxWHK3oV33POwVsnsWUmlapnGcxrBWI/B
-	tIF5xFPyf7RsU/uWGpeJ4tOUpdY0ElbTn0CqCzj0yQ1ksdzfKaLJj3ixdv31d9h5ClxE=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-171501-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 40aa4b69-fc8d-11ec-924f-1f966e50362f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=xm9cRnemvM2twGxx12IaU3wNC0/7wuDcrWZFyp+aCCw=;
+        b=P7Wl3YdFag8Abxx4LfcrDjXIKPqHVyRZxnhKH15469ihaLBzSkN3d1h1EZZPlyAW1m
+         mrxjd5VpwggHVKaPdBZIo2Lrq6XjTq/sSFiinApZXyteG5a8mT8PyFZwY9hXdb1ArlzN
+         lCOj0v/lRWGqZCKR4F+Fj/WoypNAbSOPmWk98ToWLQtUtRnPsSXFVC8+BfKLeYtlXH9P
+         w8f/tQ/nbrDIXjTkIe8ts6APK3Zi1zWpl+opmimxdWeAS8jDuFkgjMWMmTmX/jJo3gIQ
+         HSVXnYilMyt1/9fzwkqLRaT5c6CCPMj42aItlgkhRPVt/Z/c3S+JxNxoaPECkak+qJst
+         qUlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=xm9cRnemvM2twGxx12IaU3wNC0/7wuDcrWZFyp+aCCw=;
+        b=lWoIEn6QPr2iHgNI+MeK/Fop1rqkCVm30BOZ4KmcOKDXHnIx48/ZzdKDiuhYzkirOi
+         0ysdO79bXxW3Kn4r8M1tVLBNY7FrQy3SpmMrR+qF+0pNMaqpaIMeYkal8wckZvmPL4SA
+         rnckiGgJWjWWwQCbZwgNVQbcqCW8VjWYOZD3nOgpeoCyy48oUZvxoPB2/0uGQGQjxM5Q
+         RD3IYGXkFnPI8LhhFFdjBXHJEV+KMjW5PpQAgilaQrEKFrvMkcAkwgNrFJsQKp+j6eMt
+         a8uOFKor+eCFCKWTb5htsw5cTkZIqlSg19J3byr8x0YXpi1KTRJfmDdui6RbN/FzBAjk
+         jy6Q==
+X-Gm-Message-State: AJIora8JblWiMHpqPltRl/r/cH6nsC8KJUwXDViS5z5at2rlBVZSI2Ig
+	n+pnp9+9OSL1p1rXSgNo4XqQiRTezY/6Vjs98oKz8DKe8vQ=
+X-Google-Smtp-Source: AGRyM1uSn/QH7bfzo5fp8z3n9qjaAvtm9f77xE8UGvbjK4eoo9jdTpV0RPWb6owf4zAnuoiQDx7luEfsq0K4sqS889k=
+X-Received: by 2002:a05:6512:11d2:b0:47f:7ca3:c533 with SMTP id
+ h18-20020a05651211d200b0047f7ca3c533mr22885472lfr.388.1657044414289; Tue, 05
+ Jul 2022 11:06:54 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 171501: regressions - FAIL
-X-Osstest-Failures:
-    xen-unstable-smoke:test-arm64-arm64-xl-xsm:xen-boot:fail:regression
-    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
-    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This:
-    xen=a4d4c541f58b378bc9d499dcb554eb9fe22312c8
-X-Osstest-Versions-That:
-    xen=4df2e99d731402da48afb19dc970ccab5a0814d6
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 05 Jul 2022 16:33:32 +0000
+References: <CAKhsbWb4FyqWBraid=99mfr=_wbXQHfKq6jBszN9-WmV_OiBYw@mail.gmail.com>
+ <YsK3/fDX8c0Tzfv0@MacBook-Air-de-Roger.local> <CAKhsbWakmx6Bw+fJZ49pbcmRx68WWuSCpYzJDg7uiYWuEnu0qg@mail.gmail.com>
+ <YsLmlIrCBt/Ldg1G@MacBook-Air-de-Roger.local> <CAKhsbWZkbx8WrmuhAO3P_UxFihx_4UZHnUjrKZaFV1uwF6ifEg@mail.gmail.com>
+ <YsMIO3E5/hzFgxSa@MacBook-Air-de-Roger.local> <CAKhsbWY2OwkGQQ-dqjOOr3Ed7dThdiFpAWbdUOnzbnOkYVqF4A@mail.gmail.com>
+ <YsMN1dA8RL62vm33@MacBook-Air-de-Roger.local>
+In-Reply-To: <YsMN1dA8RL62vm33@MacBook-Air-de-Roger.local>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Tue, 5 Jul 2022 14:06:42 -0400
+Message-ID: <CAKf6xpuehkkUmr88Q358mHgmEc6YEtXrVjJbeNtDBx2prDfvug@mail.gmail.com>
+Subject: Re: PCI pass-through problem for SN570 NVME SSD
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: "G.R." <firemeteor@users.sourceforge.net>, xen-devel <xen-devel@lists.xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-flight 171501 xen-unstable-smoke real [real]
-flight 171504 xen-unstable-smoke real-retest [real]
-http://logs.test-lab.xenproject.org/osstest/logs/171501/
-http://logs.test-lab.xenproject.org/osstest/logs/171504/
+On Mon, Jul 4, 2022 at 11:57 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com>=
+ wrote:
+>
+> On Mon, Jul 04, 2022 at 11:44:14PM +0800, G.R. wrote:
+> > On Mon, Jul 4, 2022 at 11:33 PM Roger Pau Monn=C3=A9 <roger.pau@citrix.=
+com> wrote:
+> > >
+> > > Right, so hvmloader attempts to place a BAR from 05:00.0 and a BAR
+> > > from 00:17.0 into the same page, which is not that good behavior.  It
+> > > might be sensible to attempt to share the page if both BARs belong to
+> > > the same device, but not if they belong to different devices.
+> > >
+> > > I think the following patch:
+> > >
+> > > https://lore.kernel.org/xen-devel/20200117110811.43321-1-roger.pau@ci=
+trix.com/
+> > >
+> > > Might help with this.
+> > >
+> > > Thanks, Roger.
+> > I suppose this patch has been released in a newer XEN version that I
+> > can pick up if I decide to upgrade?
+> > Which version would it be?
+> >
+> > On the other hand, according to the other experiment I did, this may
+> > not be the only issue related to this device.
+> > Still not sure if the device or the SW stack is faulty this time...
+>
+> I don't think this patch has been applied to any release, adding Jason
+> who I think was also interested in the fix and might provide more
+> info.
 
-Regressions :-(
+Roger wrote the above patch after I tried to upstream a Qubes QEMU
+patch https://lore.kernel.org/xen-devel/20190311180216.18811-7-jandryuk@gma=
+il.com/.
+The patch rounded up BAR sizes for passed through devices which
+ensured they couldn't share a page.  But Roger rightfully pointed out
+that changing the BAR size is incorrect, and hvmloader could just
+enforce a minimum alignment.  However, nothing prevents a guest from
+relocating the BARs again.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-arm64-arm64-xl-xsm       8 xen-boot                 fail REGR. vs. 171486
-
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
-
-version targeted for testing:
- xen                  a4d4c541f58b378bc9d499dcb554eb9fe22312c8
-baseline version:
- xen                  4df2e99d731402da48afb19dc970ccab5a0814d6
-
-Last test of basis   171486  2022-07-04 13:00:25 Z    1 days
-Testing same since   171501  2022-07-05 12:03:08 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Anthony PERARD <anthony.perard@citrix.com>
-  Demi Marie Obenour <demi@invisiblethingslab.com>
-  Jan Beulich <jbeulich@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Luca Fancellu <luca.fancellu@arm.com>
-  Wei Chen <wei.chen@arm.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      fail    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+I tested Roger's patch, but Qubes and OpenXT have kept using the QEMU
+patch.  When I added the QEMU patch to OpenXT, I wrote in the commit
+message that it fixed probing an e1000e nic
 
 
-Not pushing.
-
-------------------------------------------------------------
-commit a4d4c541f58b378bc9d499dcb554eb9fe22312c8
-Author: Wei Chen <wei.chen@arm.com>
-Date:   Tue Jul 5 13:12:15 2022 +0200
-
-    xen/arm32: avoid EFI stub wchar_t size linker warning
-    
-    Xen uses "-fshort-wchar" in CFLAGS for EFI common code. Arm32
-    is using stub.c of EFI common code for EFI stub functions. But
-    "-fshort-wchar" CFLAG will cause a warning when build stub.c
-    for Arm32:
-    "arm-linux-gnueabihf-ld: warning: arch/arm/efi/built_in.o uses
-    2-byte wchar_t yet the output is to use 4-byte wchar_t; use of
-    wchar_t values across objects may fail"
-    
-    This is because the "-fshort-wchar" flag causes GCC to generate
-    code that is not binary compatible with code generated without
-    that flag. Why this warning hasn't been triggered in Arm64 is
-    because Arm64 does not use wchar type directly in any code for
-    parameters, variables and return values. And in EFI code, wchar
-    has been replaced by CHAR16 (the UEFI "abstraction" of wchar_t).
-    CHAR16 has been specified as unsigned short type in typedef, the
-    "-fshort-wchar" flag will not affect CHAR16. So Arm64 object
-    files are exactly the same with "-fshort-wchar" and without
-    "-fshort-wchar".
-    
-    We are also not using wchar in Arm32 codes, but Arm32 will embed
-    ABI information in ".ARM.attributes" section. This section stores
-    some object file attributes, like ABI version, CPU arch and etc.
-    And wchar size is described in this section by "Tag_ABI_PCS_wchar_t"
-    too. Tag_ABI_PCS_wchar_t is 2 for object files with "-fshort-wchar",
-    but for object files without "-fshort-wchar" is 4. Arm32 GCC
-    ld will check this tag, and throw above warning when it finds
-    the object files have different Tag_ABI_PCS_wchar_t values.
-    
-    Xen need to keep "-fshort-wchar" in EFI code to force wchar to use
-    short integers (2 bytes) instead of integers (4 bytes), but this is
-    unnecessary for code out of EFI. So in this patch, we add
-    "-fno-short-wchar" to override "-fshort-wchar" for Arm architectures
-    without EFI enabled to remove above warning."
-    
-    Reported-and-Suggested-by: Jan Beulich <jbeulich@suse.com>
-    Tested-by: Jan Beulich <jbeulich@suse.com>
-    Signed-off-by: Wei Chen <wei.chen@arm.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-    Acked-by: Julien Grall <jgrall@amazon.com>
-
-commit c4184bf305dc14c3e150617904c40b120664efe6
-Author: Jan Beulich <jbeulich@suse.com>
-Date:   Tue Jul 5 13:11:51 2022 +0200
-
-    public: constify xsd_errors[]
-    
-    While in principle this could break existing users, I think such users
-    deserve to be put in trouble. After all the table should have been const
-    from the very beginning.
-    
-    Signed-off-by: Jan Beulich <jbeulich@suse.com>
-    Reviewed-by: Juergen Gross <jgross@suse.com>
-
-commit 2b1ee386122a6e8bf66f5163cbda51084af6e0f4
-Author: Luca Fancellu <luca.fancellu@arm.com>
-Date:   Tue Jul 5 13:11:25 2022 +0200
-
-    tools/helpers: fix snprintf argument in init-dom0less.c
-    
-    Fix snprintf argument in init-dom0less.c because two instances of
-    the function are using libxl_dominfo struct members that are uint64_t
-    types, so change "%lu" to "%"PRIu64 to handle it properly when
-    building on arm32 and arm64.
-    
-    Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
-    Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
-    Acked-by: Anthony PERARD <anthony.perard@citrix.com>
-
-commit 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
-Author: Demi Marie Obenour <demi@invisiblethingslab.com>
-Date:   Tue Jul 5 13:10:46 2022 +0200
-
-    EFI: preserve the System Resource Table for dom0
-    
-    The EFI System Resource Table (ESRT) is necessary for fwupd to identify
-    firmware updates to install.  According to the UEFI specification §23.4,
-    the ESRT shall be stored in memory of type EfiBootServicesData.  However,
-    memory of type EfiBootServicesData is considered general-purpose memory
-    by Xen, so the ESRT needs to be moved somewhere where Xen will not
-    overwrite it.  Copy the ESRT to memory of type EfiRuntimeServicesData,
-    which Xen will not reuse.  dom0 can use the ESRT if (and only if) it is
-    in memory of type EfiRuntimeServicesData.
-    
-    Earlier versions of this patch reserved the memory in which the ESRT was
-    located.  This created awkward alignment problems, and required either
-    splitting the E820 table or wasting memory.  It also would have required
-    a new platform op for dom0 to use to indicate if the ESRT is reserved.
-    By copying the ESRT into EfiRuntimeServicesData memory, the E820 table
-    does not need to be modified, and dom0 can just check the type of the
-    memory region containing the ESRT.  The copy is only done if the ESRT is
-    not already in EfiRuntimeServicesData memory, avoiding memory leaks on
-    repeated kexec.
-    
-    See https://lore.kernel.org/xen-devel/20200818184018.GN1679@mail-itl/T/
-    for details.
-    
-    Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-    Reviewed-by: Jan Beulich <jbeulich@suse.com>
-(qemu changes not included)
+Regards,
+Jason
 
