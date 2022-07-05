@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B21A3CCA47B
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jul 2022 12:48:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.361161.590519 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A6FC43334
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jul 2022 12:48:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.361164.590541 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o8hyH-00056r-G2; Tue, 05 Jul 2022 12:48:05 +0000
+	id 1o8hyS-0005tm-A8; Tue, 05 Jul 2022 12:48:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 361161.590519; Tue, 05 Jul 2022 12:48:05 +0000
+Received: by outflank-mailman (output) from mailman id 361164.590541; Tue, 05 Jul 2022 12:48:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o8hyH-00056c-CB; Tue, 05 Jul 2022 12:48:05 +0000
-Received: by outflank-mailman (input) for mailman id 361161;
- Tue, 05 Jul 2022 12:48:03 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o8hyS-0005td-6z; Tue, 05 Jul 2022 12:48:16 +0000
+Received: by outflank-mailman (input) for mailman id 361164;
+ Tue, 05 Jul 2022 12:48:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IaUl=XK=suse.com=JBeulich@srs-se1.protection.inumbo.net>)
- id 1o8hyF-0004qy-Fs
- for xen-devel@lists.xenproject.org; Tue, 05 Jul 2022 12:48:03 +0000
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2067.outbound.protection.outlook.com [40.107.22.67])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b4afddd3-fc60-11ec-bd2d-47488cf2e6aa;
- Tue, 05 Jul 2022 14:48:02 +0200 (CEST)
+ id 1o8hwr-0002H7-4s
+ for xen-devel@lists.xenproject.org; Tue, 05 Jul 2022 12:46:37 +0000
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on2052.outbound.protection.outlook.com [40.107.104.52])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 818efadb-fc60-11ec-a8e4-439420d8e422;
+ Tue, 05 Jul 2022 14:46:36 +0200 (CEST)
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com (2603:10a6:803:122::25)
- by AM0PR04MB5252.eurprd04.prod.outlook.com (2603:10a6:208:cf::33)
+ by AM0PR04MB6065.eurprd04.prod.outlook.com (2603:10a6:208:139::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.21; Tue, 5 Jul
- 2022 12:48:00 +0000
+ 2022 12:46:34 +0000
 Received: from VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::dfa:a64a:432f:e26b]) by VE1PR04MB6560.eurprd04.prod.outlook.com
  ([fe80::dfa:a64a:432f:e26b%7]) with mapi id 15.20.5395.021; Tue, 5 Jul 2022
- 12:48:00 +0000
+ 12:46:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,28 +48,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b4afddd3-fc60-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: 818efadb-fc60-11ec-a8e4-439420d8e422
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nm3IJ4XilEA5dQuHiLq0ypPMUDrcfS9yHJVrPCwgx/BxjECU73yZOWB0pkDlB4HmBcmklt1Lz6cT0f7a9adZCr07nYvRsrhVFDAhKst2mSclsuzq417yXvmnt4NHnbVC5PO6ZBQZa5UeGdP70CNTsyqDoRhn2CWLuBLkuWKXg14xKKBeQNBhtI25ReJZqJaK71yeGBTF3fXia6xlvN3CUKN/c5k2d23Qk0fjlcuV88T3grPQBKX2/nWxv8/pRGfP4atzrjnlS/WfqJ4EqgDoPhh88BeE70m6QtME5NLvRuGOjQpm//1Zdq0XAYiN+vzhsL0G3SVOH0Fi5XayEjL5Ug==
+ b=iwLfJM6XjWiHI5Mb/VNr/+4IM6o8NlBY4BuKhUpLzjtKn7RtTTCCYb8hUoZgf2HypT3ymJdEZlKnYhVVSJhHNboLKpS87kJtV0SxKgHrDRP7eupEDQlIXtgrZ4eXSowj5yt3YDHmkbMcQB2nL+kfiWLaM8zJM4hjf7Ee5U/2DFKKFc6aV0AQOyilUhAtQ6t6ko0vVJ4M9V/+8pFp/fy4dVN5P6VV+nmHFvgV3bBvNQSPErYAwSAlMXTHgOOOnRTCU6nuetmE0v7tPs2BLD/tfe/Tyn1BW1t1roCACz8nHAagyZFxAle9E6erA2K9ZnvjBEZbn63LZPOyq0MhtRlzOQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=i1SRbMZ5vtUn4A75NysmPVCeWEjl1KBkL8Pu3NNkQeY=;
- b=cCRCT5sbnFJsYYp/dLCVIAyMhqlinWAfrijRae1CyliIsgVnvotXTiOl46e+vGa94jPqCoLoPofOjdue15L4lHDeC+o0Pxnxk0o08RNoiBvgXO2YkzreuCNzBBkyjvg0NUHWhqGmA9xM+injsqCHpk/pOaEzMoHQQnzdMgpG7OqW7XreG8xydMgZDTiaJ9wkcr5h3gFNOXA0R9s+Ln9josbXelelbaWRcgFWfEfcpXfvSFv9DPG6okiV6iuE59OFiLCQ1m2oqNodIjO1vPAWnfQMyKXr1NuTwObtw68N/8XO7/TnP916waTb9u9SxKW4jRt/rrgxfSOAKnXOHB6Omw==
+ bh=r9TbBkHolhWw357aMMMhJeh7vv8iPQuKs2+KWYhw3tU=;
+ b=Jhy7PtBpO4/IbzKKwebjPIIvYBWG0jMo6k6/pyVrzJzknog1PRZZQwK1rIeVwfuiTsEAUtF70k9WYVLSl+lqYmf3n44zQtVzbUj8mN+DFGQlnlE99atepZZ/8KnQOWHY6zTkzGZ/SXvrVYxotknfK2Qc5DH7NiyFHYHvIcwoksdDqaWRSKYNfh3ZyYx6lkSIM5HaV8QOf1KhSWxnEGrqJJe3bZKOSJLW+dh6zD7g7ss8BbGDYvgNTDMqx0nZ1yyvMU5CpeAZnQ462+dWO7RCNZeUu+ewR9Dg9k9MZuKu4KyfCF5m8MuvLvrC4z3p9XORL84Nf/mDGzuanDu36Tejxw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
  dkim=pass header.d=suse.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i1SRbMZ5vtUn4A75NysmPVCeWEjl1KBkL8Pu3NNkQeY=;
- b=OWe7mQQ1XegK+LkJ7EX8uhxjrh6da1L0UQKlZmnJYy5aTHCEzU8AiqM6hOY3kB7NdBLtsQV7QZkTnHfDeOAcg8MjcCbAvzmJjRIPbpOlpVO+6hys6sBfaEgLkCxBaYPk9rYhmr1oaAq9PINmln2uJeemGWiHrGitEMAJX01AoDq81a5/fzxqIs3yBoA0bZhgjOQWffWxG51S3GGAJEkb5H3Ax2vwuk1NCr7R8KmN2VHml7UMBDe1o53ORAu3G3ijN00Tsj57fZZUu1VuzhaFu6Ti/+056VMa94XrXqvvAFniARRHvloZ9+SS2aicbMBU5J+TKKGV1ZiFpR86wrUQUQ==
+ bh=r9TbBkHolhWw357aMMMhJeh7vv8iPQuKs2+KWYhw3tU=;
+ b=30F6K3uBwjJUuRu93fYxfi9eZ4lzhQOWT2Ss5hs/0HkMrssJjpLLrdYjkaFSuoLqaS4TSvSoRhoLhM1HstUmZTASaf9IbcZxiqK8jJ78J6xjYnwrp7dCeVn4EgLQ0zsdOFLDbo8piuOt3sg0a5IME7cwyseZmK93E5NV8cuHJiRMnaAyzdeXFy+1OrnAiTrHP7fB5Ow1lzc74P1yd7VI6D3Sfpb5f55JF55oNp8hcG+UKhSLnyzVyWeSJUAokgo8yP5bqWLnDU5wgkYzhAiGkjHDwZcfwUV8Iy+hHIbmjT9NMQruEGczC0XYFfZU09KPxRehir8KJ/bxIDNCEl9lmg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=suse.com;
-Message-ID: <8b375834-5f36-c1d5-f13d-dc9bb7b53134@suse.com>
-Date: Tue, 5 Jul 2022 14:47:46 +0200
+Message-ID: <629e7e8a-b846-14cd-08eb-75433c8c3369@suse.com>
+Date: Tue, 5 Jul 2022 14:46:33 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: [PATCH v7 09/14] AMD/IOMMU: free all-empty page tables
+Subject: [PATCH v7 06/14] VT-d: allow use of superpage mappings
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -79,176 +79,262 @@ References: <4c9d4b32-d4db-3a4f-fe92-6022e63c3f82@suse.com>
 In-Reply-To: <4c9d4b32-d4db-3a4f-fe92-6022e63c3f82@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0011.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1d::17) To VE1PR04MB6560.eurprd04.prod.outlook.com
+X-ClientProxiedBy: AS9PR06CA0087.eurprd06.prod.outlook.com
+ (2603:10a6:20b:464::8) To VE1PR04MB6560.eurprd04.prod.outlook.com
  (2603:10a6:803:122::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: dfc798b1-66fb-4430-4631-08da5e84902d
-X-MS-TrafficTypeDiagnostic: AM0PR04MB5252:EE_
+X-MS-Office365-Filtering-Correlation-Id: e0d20481-ace4-43af-cb40-08da5e8464ce
+X-MS-TrafficTypeDiagnostic: AM0PR04MB6065:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info:
-	i8eYTngNIfSMExO9QXmyQkMhACZnADrE7jxudhD9cU6ElmI2uQZsPamZWb71zdKjHpZRAFM7xF+sYCbFyjsPqRyAqQjD7cIQDLq4hKJwDidchauKEZFUATwggkmswHXPYkgTQxnpVc3kW1B6vKwRifA2PpFEf/X7byRFjoVfXDcXGMCI5E7KemKVbLwR8+/SrgRW6okOgLPYZn9GnTH6Zxb2eVNjyaHSRQZDzZw+iLn+8PRFG46Z+cefEmTOy4neEAWynrtryRx3KTr/6IYWCLz+JN8g2200JzNRTZgM/v7EnuSUmVWYctW9QYGX2BICOYHNqjzN8rdztoBceeLKSVS70eRirsi35RiY3e5aRMPZf8de2FYu9C8VamK34Ruo1R0TpPFi4x0VZLEBIErsD6x0r034tLWJjF+w+RdcpxQj2uEcz8B4vc/g16nlONz7/DI6ZUkTSQBpb3LbNAGgKPg7vpU8pmMLKQtIAIOlmkc7b75enoo8ubrr+5tzxF9KVhqyfpdq0nIS5pTbQR59I2jSus+BzZBSa9CJnOc/pbnUaDJb1HIJTQd8LKQZpbIay/WlvrNT/Z5hr1gQRZPykt8BCEuOBMtV8IZrLquEnsW3dtHj6qMajyFRnBI7menEKqmEZNC7PUXgdcMHK6TvEMFDJU+Z9IT2lxpsXKHj/SuTvYR1IpIdvVUVB6YPBjRSog/lXsjlv1fHgjY9UOZmj3D1D0G3fmQuFE7+4PqmQKIgg/p+qI84NIym9i373gPL8WPuOgAHJ+EMOQ1A0MqEP5ozqqCJhC3mTzxvWCjCnxP5HGmMRcGbjfdFqxikCAtKssu8p3Nwu9TOGQW/c16wIg==
+	UVnmM27Nhwn7EPjuVI9rcbxI5SVaANOlv6d5HbDhFucy07l/duo3635renKb810yapyrLuuJXAhllUGD+WqEqOmnI+n/jUsQFc3FkyS4hfdMYSaAWfVhYtefF4IkBEXFqOQv7o/3EtjJYOOhFN5BQXUpXB2y8zIxkasGTi8jaL/qU/jhBt3AmAHRv4M3zKpP6TdvCQyFAk3AC+FdtjT9KGD62D9XA+jdHt+H7HzmzWsBSVMnw3KXaCybUsy7oqAm4ma3CAYjWHZcnOYIGBMkb6wYwualo0g50wGy/LpoF2H8qM7QNdnf969jrVgY56h3JONdF3V941MXfxZbCyJeurVlo3hBghfUC9xi3RTeoRHNmdVMj+k61QIa01EDMRjP4HsOiaKYNLjRXrBajvI4xKiTILmoDHFx2ibCB8LO+8d9k9kS9AcB7uIIsO0nBtS352jneJIqQO66bd7e1pAyMGifhidRVm7/r2CD56rwN7KwNG2m/9BXqkHaDRk+VAfVvmHsuBDlIwlzWVfXNDOfkRbaV2smjcuaDxQvxNErG8E5zxBNiart1MbbLjQKrlC0rPj62zmzW2e9AsnSCg3HUqyjis+/43sIZbhbv0LnX+yyra3nqUtirOLznWHtz81BKjcEAecpjbbFjw/X76z0x14eN8CF+XAybSAEI9RrWbKjBNwAAWbCq7Ti26ISqf+hyjr0Wygcg5X3xxt3iKRGhqI9uMly2O6U6L8UHdDbWFFdjYsE0KCbENO5HTGOqm37YzWdd6oMJXGuetmT9eEYGFk1C85gRutx5p0SRZNp2JtVoL0EbxmABlKfyTo4TzXhHWdiemAKalT/k4c6dvFTdukqjSEWeJPunfMzXQ/WgEc=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(136003)(346002)(376002)(396003)(366004)(39860400002)(478600001)(5660300002)(8936002)(6916009)(54906003)(316002)(86362001)(31696002)(6486002)(66946007)(4326008)(66476007)(8676002)(66556008)(31686004)(2906002)(83380400001)(2616005)(186003)(6512007)(26005)(38100700002)(41300700001)(6506007)(6666004)(36756003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR04MB6560.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(396003)(136003)(376002)(39860400002)(346002)(366004)(83380400001)(31686004)(6506007)(36756003)(6486002)(478600001)(26005)(186003)(2616005)(6512007)(41300700001)(2906002)(31696002)(86362001)(54906003)(6916009)(4326008)(316002)(38100700002)(66476007)(66556008)(66946007)(8676002)(5660300002)(8936002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?aktlcHdjNnFQVkRiRFg0K0JwV3dEWnNKcTMyTzFTM1ZJVTg2cU5BRE11OVds?=
- =?utf-8?B?UEV5Zmx5UmdpbGNKRHltMnRoY3FOVkt3NndacGtEcGNMa0xmY2VvaXVDVzNP?=
- =?utf-8?B?aHROOTEzWGgvbGYxcDkvZVh0clU0NWNyWU9FRVdXNGtJNWJEelhSOFhYUWZw?=
- =?utf-8?B?R1pnUXAyNmdsTnQ2eGxFNHk1TFhQelJUNXZLVW9uSGJhdDhLUURlZTBXU09W?=
- =?utf-8?B?TG5GZjdRNHF5ZHErWGdyYzQ1c1g1WHNNSWVuTDhlM1dyVUllaWE1QU40NmRL?=
- =?utf-8?B?bWd1dm5zeENZZ0hJUCs5WDhPZWJHck1zT05uQVR5U281NC9FNk5xUVVjaXpa?=
- =?utf-8?B?MVhRemdueFZ5QlpFVEpKRVNyYVIwektNVnV1NFVzSFRDd21JcklnK25Wc0ZQ?=
- =?utf-8?B?dS9wM05kZnNaWFpLYzRwN2gzYzdNTng3Rmo5V004M1laSGJpa08yeXdVVFlP?=
- =?utf-8?B?bk5HNEhrQmxOMVVRT1VZQkg1b1E0TDF6a29pcDA4L0xBQVRtenR3SzMyczZU?=
- =?utf-8?B?S0djRlp4SkdBV3dIMmxtaWU4a3hxdElyVGpuKzU5d0JuaERxajJ5UkNJckdN?=
- =?utf-8?B?UENKb1N1YmgzNWVSU2hiQXJKNzI2NnhrR2tBRFZqNXl4WFR6UFRnQkhqcXpa?=
- =?utf-8?B?ZCtxanZVR2ZQUmMxajB5ajJhMGhpZ2tkMjY4OUo1VVI0aHZLMHgrZlpFbWZo?=
- =?utf-8?B?N2pNc0ZGSDNMVFBFUFRyT3BSaHMyNVJQM2VTSEVtU2p3M2s2Z3F2eHM0aVky?=
- =?utf-8?B?QXZDUlpXdnB4amlMSDdzVGpoK0ZvMnl2cTlETUxlM0pIc1dDNHc2NWluQVBU?=
- =?utf-8?B?MlJpeEVrTFNZL2thMnBsWDBpN1kxTFpNTGJsTjJjSEs5ODRnZ1dnYmpmY01a?=
- =?utf-8?B?ZWxjdVEyM3JzdFFIYlZtWThhcTg2VlZaWmlZTy9Sdm5EMGtzWEtMQ2QrVEZN?=
- =?utf-8?B?MWg3dm42REJvZ0RQNi9OdHc1ZEVXRE5qRnQyT2ZHRWR4cExrdGZ2akRkaGNF?=
- =?utf-8?B?UDVoc1dqMUo0dFJOMEltQWpsSHNjRmJBaWp3KzBNMUhldms1Y1ppTXpDNlVk?=
- =?utf-8?B?N3RabkV0b29ZUTV1V1R0aEVkeGphV3MwRTFZd3lCTlhPZ0Z2MXZKUGI3QVZD?=
- =?utf-8?B?VHpYeTVXRkplU0toUXlMd1IxMVFzTUJQT2RQbmRTVDFiMHBaNTRJT0QrYVRJ?=
- =?utf-8?B?QlorZDVuYTFaQ1lTczdvTHVSbzZHOVNmKzZHalZjSFV0em9RSncrOC9ycysy?=
- =?utf-8?B?MFN1cVFmVVF4Ky9JSUszcW9Lc3hxYW04Skl3L3BZcHVyVGdFMUJlUGxtQ0t1?=
- =?utf-8?B?OFRFWGtWY01ZL0dIUmFJUUlvUit1SUFwUVdnNUVKZWpsQTFSRkMyY2d2ZWlV?=
- =?utf-8?B?TkZva1d5ZWhPVk1lSTVUYXZOWXFJck1CeGQ4c3hiMFNDd0FWQ1V0RzNjRk9m?=
- =?utf-8?B?TUMzWWY3RDN6LzFZd3lFZ1NJdkpJdFJDYlM2R1BZV0t0cXdkaHl4SEUzbXBn?=
- =?utf-8?B?cVJFYXFBKzl5d2VkQ2hVc1J0N1VMWFlwY2dGRjdQWmlSOWxUREtheFV3cm1D?=
- =?utf-8?B?MkFwOE1NeUdNUlJUVVhiYWZWT3FZSDY4YnR2dFNrbnpqcVRsMTVJalRNWTV2?=
- =?utf-8?B?ZjhsUEFjTlBtaml0OCtGV0UvNlBiWDJoQ1ZxTy9vWlRGR0Z2TFF3dkJGUEov?=
- =?utf-8?B?Q3puYityYkJvT2lGQ2xsS0NHbkYvZnV0dXJ0ekp3bk11bEVxdnNkcmNuZ1ow?=
- =?utf-8?B?MjZrUVRjVWJQeEVGRFQ3YkJabEhjcDdyaS9Zdi9sRDRSbGRXdEJCamdFZlRN?=
- =?utf-8?B?bXYyMVhUcElIL3p4K3dHWjVtb1pkSjFsT21yMUNFd3Zja1pwQmpzUTV2aGg1?=
- =?utf-8?B?K0hYZjJURmdOaVZUdTF1ZUMyQ0RrOHNCTWIvWDMxY3B0SUtPeGVVK053bTV2?=
- =?utf-8?B?Rkk3d1VJbU45enZqRnJ3V0YxcTBtQ3RCcnBaSHJYWXRlQUJ2WHN3M0hQY1Nk?=
- =?utf-8?B?bGxQM0RKMG1CcXhObTVQWEsvV0lvZ0I4MmYwOVY1ekQ5OFkycDdvT0RZQ0Vi?=
- =?utf-8?B?TXErWlJvUEdNTnBoTkhjb1ZwT1B0U0dtOHJxMHBqdUNFTnVjckRTNlZCL3k1?=
- =?utf-8?Q?lQvyHCC0xHjfMn6s8VsclPvO1?=
+	=?utf-8?B?OEQ0L0JTV3o5ZnRSeXppMlo0ejlXNlZlR09SdHFnVTVOdEdKcGFpOGdzaktE?=
+ =?utf-8?B?N25SdXNlTTZ5T3pjU3pSTUFwdVZSOFQzeHlOclFjNzRvNXcrM3lhSGJoLzJ2?=
+ =?utf-8?B?Y204OVEwRkVrK0lFbkpNbXNuZ3ZKcnhXRnQwdCtaR1RRTmxDVDY5UHdLY20v?=
+ =?utf-8?B?Q2h4cDAyL2FncTdmeDVMQTF4cE1aelhxZDBlN3VJR2RNKytSMzk4eHBNcTh2?=
+ =?utf-8?B?L3ZlM1ZXVU8yRnpYTTBQZms2T2lkMWZjdFpRZkJpQzQzcjNxNkd2Vzd0aUFr?=
+ =?utf-8?B?ZUdEdWRZRE5qeWVNZVlUT2xiaTRrRG5jYzJpR1pHOTdYM1ZieHFrdllHWXM4?=
+ =?utf-8?B?aTNld04xZzdHTHJ5WkV6M2ViQ1ZrSjNJa0lQMTc2RDB4Z3FZY3plWFA0SHRJ?=
+ =?utf-8?B?UlJnN0s4V2ZrUTRNbjhiamhPTVkzTStBWjFFM0Jxd1kza0dRY1h6MXFSczJ3?=
+ =?utf-8?B?dWlwaVViMFBmOVlHS1NRcmE1azh3M3phK1p5SEtxRzJKTjF0UnUwVE9tdlFO?=
+ =?utf-8?B?cHgvUDRrWmFaakhhT09PRUdyR2RBdXg3YlFKTFI5ekNGZXNXVkwzQzV2Uzg4?=
+ =?utf-8?B?YVJueDZkc0QyM0RWVkFqRE9oTTZ6MFR3Unl0Z2JnSmV4OTdVU1psZW8weDVu?=
+ =?utf-8?B?R0NGRmJoY1hXcHVYTlFpNGtMNUxnWmt1TEl5dFRaUlVWWEtNdWYwR2s2dFFM?=
+ =?utf-8?B?cWkrbktGanF5WEVDaXR3VUloNmdkcG5YU1Y1UDFqWGh3dEN2YkhVUEg5dWRE?=
+ =?utf-8?B?YW5JbG00UGk0azNFeUx2TUNOUTlqWlNHcHhLQkI0RVJxY1p1VWYxQVBZQjFR?=
+ =?utf-8?B?blREbXp6YmwxU2pscUlkZzgwd2VzaU5tbjZFTjFiNTIvaTBBZHh1RGY5Y0Fj?=
+ =?utf-8?B?WVBrcDNTZngwZCtvbDlMMXd1MHBOcUVralRBT2RJYTI1dis2V2xkMHQyZDVy?=
+ =?utf-8?B?ampZYWo4S1JnNkVDQkRiRUFMTzh4ajhKN0NNeDltaVRQdS9LUThmN2hiUHh3?=
+ =?utf-8?B?QmtyK0RZUVhLWHRQdDloMUtMYS90ajhCbURNMmV3TE91Q0dFRU1oYUR4Q1hz?=
+ =?utf-8?B?dWFJbXZwMWc2aFpycElaT1FpTkJueldJTC9pRHlMbGx3R09qZFN6YzBZcW85?=
+ =?utf-8?B?RGg3NEZYRXc3elVhWnFsTm1DZUZHbUMweVM2WmIwYm1MbzlpNnVKUCs4bjVM?=
+ =?utf-8?B?WFdUeTYzYmJ5TUxDV1V5VEpNWUxDM0s5eWdmUGtlQVlJVmZCVlZaaEdxd25m?=
+ =?utf-8?B?bnBieHpFbEpObXc0Rm1Qc2RzVHZzc3VDR0pEdm5CL1FzQlJ2N0hKd3g4bmFm?=
+ =?utf-8?B?aVQ5T0duSFVMalIwQ3FpUHdaL0FyRFl3Vm1tM1BSYlFtRHZ3aVBaMThBYmIz?=
+ =?utf-8?B?MStIL2h1aDJOTGdFSStXRzFNR2NYUmw3b0JjNi9tM1pHWDNIa1BLVStOanJv?=
+ =?utf-8?B?TVYzYSt6T3FBRkd5UzVnVGVPR2I4MlBCLzdEbmhTUDZVZDN3d3FWdjN4c1Nr?=
+ =?utf-8?B?NTJmWnVzOVA2TjdVZ0JWVUROOUxFbXNrRVZpS0VwUDFROUZybjRld1hUNGZl?=
+ =?utf-8?B?YjF4YXFJMjJoRlBQNkEyZ1pnMDJLYnR0VVpsSEl0aDZQc0pPcGlDb2llS3F1?=
+ =?utf-8?B?N3lhNWdtdmpHLzNwRS96S2p1QlorWGJpd1BwQTFldVBXR0NBQzBudWdsakR1?=
+ =?utf-8?B?UnBwTXVYNFMxa3hVMEtoclFzUEVzVXgwSmZRRy9jYW81SEJHY3hQekFKdXl1?=
+ =?utf-8?B?Q1k2UTlXdllIc1FDWkszYUVaMWZ2YlZPcTkxdko0eEErWVBBSm5SbVhIWEdG?=
+ =?utf-8?B?NVEvYUhwaHpUNU1jNW5aYzJndFY2WUZWZlozcmtrbzN2Rks3Z295dDA3OElV?=
+ =?utf-8?B?emtUM2F3REJ0N280ZFdjcWFOSlRnaG1GczNOK20rQTZJcDVBd0owSnBXRGxY?=
+ =?utf-8?B?dEx1UWZQQzk3dFRodWxZdlZEYnhpMXQvdm1nejA4eCtaNzJtUkRneTg5Sk52?=
+ =?utf-8?B?UkJXMFI1TEZ6aHUxSXlvd2p5eVZwT0NtWHk3NEZPQXZHcXRtVWZvSDJmWG1l?=
+ =?utf-8?B?SkRrMWVZUVZGeG9sSGJoK3FMaEVudHc1aWgvaWtScUgvVzRMVytkWUtZMG1T?=
+ =?utf-8?Q?sQcNZKWlgKwcH4AjwG+UFBk5s?=
 X-OriginatorOrg: suse.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfc798b1-66fb-4430-4631-08da5e84902d
+X-MS-Exchange-CrossTenant-Network-Message-Id: e0d20481-ace4-43af-cb40-08da5e8464ce
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR04MB6560.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2022 12:47:47.5176
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jul 2022 12:46:34.8189
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: f7a17af6-1c5c-4a36-aa8b-f5be247aa4ba
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HhKj/Gwz7LR4mr+KHf6MrEZD2xZXCne6zeiyd/uhEbtlkwfQrzu3fB+UwA3tvgZrKBMJmrR7RyvL0vOmCFVmkA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB5252
+X-MS-Exchange-CrossTenant-UserPrincipalName: pyEXXP1xKVZZJ3W7dFCoixVirL0irMd9YCEB6KbF1N/3OnMYREpnlRv50q22D1mF7UkuDl6UF/ucAJS9xgdY5A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB6065
 
-When a page table ends up with no present entries left, it can be
-replaced by a non-present entry at the next higher level. The page table
-itself can then be scheduled for freeing.
+... depending on feature availability (and absence of quirks).
 
-Note that while its output isn't used there yet,
-pt_update_contig_markers() right away needs to be called in all places
-where entries get updated, not just the one where entries get cleared.
+Also make the page table dumping function aware of superpages.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Kevin Tian <kevin.tian@intel.com>
 Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
-v5: Re-base over changes earlier in the series.
-v4: Re-base over changes earlier in the series.
-v3: Re-base over changes earlier in the series.
-v2: New.
+v6: Re-base over addition of "iommu=no-superpages" command line option.
+v5: In intel_iommu_{,un}map_page() assert page order is supported.
+v4: Change type of queue_free_pt()'s 1st parameter. Re-base.
+v3: Rename queue_free_pt()'s last parameter. Replace "level > 1" checks
+    where possible. Tighten assertion.
 
---- a/xen/drivers/passthrough/amd/iommu_map.c
-+++ b/xen/drivers/passthrough/amd/iommu_map.c
-@@ -21,6 +21,7 @@
+--- a/xen/drivers/passthrough/vtd/iommu.c
++++ b/xen/drivers/passthrough/vtd/iommu.c
+@@ -779,18 +779,37 @@ static int __must_check cf_check iommu_f
+     return ret;
+ }
  
- #include "iommu.h"
- 
-+#define CONTIG_MASK IOMMU_PTE_CONTIG_MASK
- #include <asm/pt-contig-markers.h>
- 
- /* Given pfn and page table level, return pde index */
-@@ -35,16 +36,20 @@ static unsigned int pfn_to_pde_idx(unsig
- 
- static union amd_iommu_pte clear_iommu_pte_present(unsigned long l1_mfn,
-                                                    unsigned long dfn,
--                                                   unsigned int level)
-+                                                   unsigned int level,
-+                                                   bool *free)
- {
-     union amd_iommu_pte *table, *pte, old;
-+    unsigned int idx = pfn_to_pde_idx(dfn, level);
- 
-     table = map_domain_page(_mfn(l1_mfn));
--    pte = &table[pfn_to_pde_idx(dfn, level)];
-+    pte = &table[idx];
-     old = *pte;
- 
-     write_atomic(&pte->raw, 0);
- 
-+    *free = pt_update_contig_markers(&table->raw, idx, level, PTE_kind_null);
-+
-     unmap_domain_page(table);
- 
-     return old;
-@@ -87,7 +92,11 @@ static union amd_iommu_pte set_iommu_pte
-     if ( !old.pr || old.next_level ||
-          old.mfn != next_mfn ||
-          old.iw != iw || old.ir != ir )
++static void queue_free_pt(struct domain_iommu *hd, mfn_t mfn, unsigned int level)
++{
++    if ( level > 1 )
 +    {
-         set_iommu_pde_present(pde, next_mfn, 0, iw, ir);
-+        pt_update_contig_markers(&table->raw, pfn_to_pde_idx(dfn, level),
-+                                 level, PTE_kind_leaf);
++        struct dma_pte *pt = map_domain_page(mfn);
++        unsigned int i;
++
++        for ( i = 0; i < PTE_NUM; ++i )
++            if ( dma_pte_present(pt[i]) && !dma_pte_superpage(pt[i]) )
++                queue_free_pt(hd, maddr_to_mfn(dma_pte_addr(pt[i])),
++                              level - 1);
++
++        unmap_domain_page(pt);
 +    }
-     else
-         old.pr = false; /* signal "no change" to the caller */
++
++    iommu_queue_free_pgtable(hd, mfn_to_page(mfn));
++}
++
+ /* clear one page's page table */
+ static int dma_pte_clear_one(struct domain *domain, daddr_t addr,
+                              unsigned int order,
+                              unsigned int *flush_flags)
+ {
+     struct domain_iommu *hd = dom_iommu(domain);
+-    struct dma_pte *page = NULL, *pte = NULL;
++    struct dma_pte *page = NULL, *pte = NULL, old;
+     u64 pg_maddr;
++    unsigned int level = (order / LEVEL_STRIDE) + 1;
  
-@@ -326,6 +335,9 @@ static int iommu_pde_from_dfn(struct dom
-             smp_wmb();
-             set_iommu_pde_present(pde, next_table_mfn, next_level, true,
-                                   true);
-+            pt_update_contig_markers(&next_table_vaddr->raw,
-+                                     pfn_to_pde_idx(dfn, level),
-+                                     level, PTE_kind_table);
- 
-             *flush_flags |= IOMMU_FLUSHF_modified;
-         }
-@@ -351,6 +363,9 @@ static int iommu_pde_from_dfn(struct dom
-                 next_table_mfn = mfn_x(page_to_mfn(table));
-                 set_iommu_pde_present(pde, next_table_mfn, next_level, true,
-                                       true);
-+                pt_update_contig_markers(&next_table_vaddr->raw,
-+                                         pfn_to_pde_idx(dfn, level),
-+                                         level, PTE_kind_table);
-             }
-             else /* should never reach here */
-             {
-@@ -487,8 +502,24 @@ int cf_check amd_iommu_unmap_page(
- 
-     if ( pt_mfn )
+     spin_lock(&hd->arch.mapping_lock);
+-    /* get last level pte */
+-    pg_maddr = addr_to_dma_page_maddr(domain, addr, 1, flush_flags, false);
++    /* get target level pte */
++    pg_maddr = addr_to_dma_page_maddr(domain, addr, level, flush_flags, false);
+     if ( pg_maddr < PAGE_SIZE )
      {
-+        bool free;
-+
-         /* Mark PTE as 'page not present'. */
--        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level);
-+        old = clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level, &free);
-+
-+        while ( unlikely(free) && ++level < hd->arch.amd.paging_mode )
-+        {
-+            struct page_info *pg = mfn_to_page(_mfn(pt_mfn));
-+
-+            if ( iommu_pde_from_dfn(d, dfn_x(dfn), level, &pt_mfn,
-+                                    flush_flags, false) )
-+                BUG();
-+            BUG_ON(!pt_mfn);
-+
-+            clear_iommu_pte_present(pt_mfn, dfn_x(dfn), level, &free);
-+            *flush_flags |= IOMMU_FLUSHF_all;
-+            iommu_queue_free_pgtable(hd, pg);
-+        }
+         spin_unlock(&hd->arch.mapping_lock);
+@@ -798,7 +817,7 @@ static int dma_pte_clear_one(struct doma
      }
  
+     page = (struct dma_pte *)map_vtd_domain_page(pg_maddr);
+-    pte = page + address_level_offset(addr, 1);
++    pte = &page[address_level_offset(addr, level)];
+ 
+     if ( !dma_pte_present(*pte) )
+     {
+@@ -807,14 +826,20 @@ static int dma_pte_clear_one(struct doma
+         return 0;
+     }
+ 
++    old = *pte;
+     dma_clear_pte(*pte);
+-    *flush_flags |= IOMMU_FLUSHF_modified;
+ 
      spin_unlock(&hd->arch.mapping_lock);
+     iommu_sync_cache(pte, sizeof(struct dma_pte));
+ 
+     unmap_vtd_domain_page(page);
+ 
++    *flush_flags |= IOMMU_FLUSHF_modified;
++
++    if ( order && !dma_pte_superpage(old) )
++        queue_free_pt(hd, maddr_to_mfn(dma_pte_addr(old)),
++                      order / LEVEL_STRIDE);
++
+     return 0;
+ }
+ 
+@@ -2092,8 +2117,12 @@ static int __must_check cf_check intel_i
+     struct domain_iommu *hd = dom_iommu(d);
+     struct dma_pte *page, *pte, old, new = {};
+     u64 pg_maddr;
++    unsigned int level = (IOMMUF_order(flags) / LEVEL_STRIDE) + 1;
+     int rc = 0;
+ 
++    ASSERT((hd->platform_ops->page_sizes >> IOMMUF_order(flags)) &
++           PAGE_SIZE_4K);
++
+     /* Do nothing if VT-d shares EPT page table */
+     if ( iommu_use_hap_pt(d) )
+         return 0;
+@@ -2116,7 +2145,7 @@ static int __must_check cf_check intel_i
+         return 0;
+     }
+ 
+-    pg_maddr = addr_to_dma_page_maddr(d, dfn_to_daddr(dfn), 1, flush_flags,
++    pg_maddr = addr_to_dma_page_maddr(d, dfn_to_daddr(dfn), level, flush_flags,
+                                       true);
+     if ( pg_maddr < PAGE_SIZE )
+     {
+@@ -2125,13 +2154,15 @@ static int __must_check cf_check intel_i
+     }
+ 
+     page = (struct dma_pte *)map_vtd_domain_page(pg_maddr);
+-    pte = &page[dfn_x(dfn) & LEVEL_MASK];
++    pte = &page[address_level_offset(dfn_to_daddr(dfn), level)];
+     old = *pte;
+ 
+     dma_set_pte_addr(new, mfn_to_maddr(mfn));
+     dma_set_pte_prot(new,
+                      ((flags & IOMMUF_readable) ? DMA_PTE_READ  : 0) |
+                      ((flags & IOMMUF_writable) ? DMA_PTE_WRITE : 0));
++    if ( IOMMUF_order(flags) )
++        dma_set_pte_superpage(new);
+ 
+     /* Set the SNP on leaf page table if Snoop Control available */
+     if ( iommu_snoop )
+@@ -2152,14 +2183,26 @@ static int __must_check cf_check intel_i
+ 
+     *flush_flags |= IOMMU_FLUSHF_added;
+     if ( dma_pte_present(old) )
++    {
+         *flush_flags |= IOMMU_FLUSHF_modified;
+ 
++        if ( IOMMUF_order(flags) && !dma_pte_superpage(old) )
++            queue_free_pt(hd, maddr_to_mfn(dma_pte_addr(old)),
++                          IOMMUF_order(flags) / LEVEL_STRIDE);
++    }
++
+     return rc;
+ }
+ 
+ static int __must_check cf_check intel_iommu_unmap_page(
+     struct domain *d, dfn_t dfn, unsigned int order, unsigned int *flush_flags)
+ {
++    /*
++     * While really we could unmap at any granularity, for now we assume unmaps
++     * are issued by common code only at the same granularity as maps.
++     */
++    ASSERT((dom_iommu(d)->platform_ops->page_sizes >> order) & PAGE_SIZE_4K);
++
+     /* Do nothing if VT-d shares EPT page table */
+     if ( iommu_use_hap_pt(d) )
+         return 0;
+@@ -2516,6 +2559,7 @@ static int __init cf_check vtd_setup(voi
+ {
+     struct acpi_drhd_unit *drhd;
+     struct vtd_iommu *iommu;
++    unsigned int large_sizes = iommu_superpages ? PAGE_SIZE_2M | PAGE_SIZE_1G : 0;
+     int ret;
+     bool reg_inval_supported = true;
+ 
+@@ -2558,6 +2602,11 @@ static int __init cf_check vtd_setup(voi
+                cap_sps_2mb(iommu->cap) ? ", 2MB" : "",
+                cap_sps_1gb(iommu->cap) ? ", 1GB" : "");
+ 
++        if ( !cap_sps_2mb(iommu->cap) )
++            large_sizes &= ~PAGE_SIZE_2M;
++        if ( !cap_sps_1gb(iommu->cap) )
++            large_sizes &= ~PAGE_SIZE_1G;
++
+ #ifndef iommu_snoop
+         if ( iommu_snoop && !ecap_snp_ctl(iommu->ecap) )
+             iommu_snoop = false;
+@@ -2629,6 +2678,9 @@ static int __init cf_check vtd_setup(voi
+     if ( ret )
+         goto error;
+ 
++    ASSERT(iommu_ops.page_sizes == PAGE_SIZE_4K);
++    iommu_ops.page_sizes |= large_sizes;
++
+     register_keyhandler('V', vtd_dump_iommu_info, "dump iommu info", 1);
+ 
+     return 0;
+@@ -2961,7 +3013,7 @@ static void vtd_dump_page_table_level(pa
+             continue;
+ 
+         address = gpa + offset_level_address(i, level);
+-        if ( next_level >= 1 ) 
++        if ( next_level && !dma_pte_superpage(*pte) )
+             vtd_dump_page_table_level(dma_pte_addr(*pte), next_level,
+                                       address, indent + 1);
+         else
 
 
