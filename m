@@ -4,37 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41CE6C43334
-	for <xen-devel@archiver.kernel.org>; Tue,  5 Jul 2022 21:02:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.361535.591093 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4387C43334
+	for <xen-devel@archiver.kernel.org>; Tue,  5 Jul 2022 21:21:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.361568.591137 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o8pgg-0003qi-6Q; Tue, 05 Jul 2022 21:02:26 +0000
+	id 1o8pz5-0000CB-Kl; Tue, 05 Jul 2022 21:21:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 361535.591093; Tue, 05 Jul 2022 21:02:26 +0000
+Received: by outflank-mailman (output) from mailman id 361568.591137; Tue, 05 Jul 2022 21:21:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o8pgg-0003qa-3H; Tue, 05 Jul 2022 21:02:26 +0000
-Received: by outflank-mailman (input) for mailman id 361535;
- Tue, 05 Jul 2022 21:02:24 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=TLZa=XK=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1o8pge-0003b1-IA
- for xen-devel@lists.xenproject.org; Tue, 05 Jul 2022 21:02:24 +0000
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [2a00:1450:4864:20::42a])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c427c8de-fca5-11ec-bd2d-47488cf2e6aa;
- Tue, 05 Jul 2022 23:02:23 +0200 (CEST)
-Received: by mail-wr1-x42a.google.com with SMTP id cl1so19261074wrb.4
- for <xen-devel@lists.xenproject.org>; Tue, 05 Jul 2022 14:02:23 -0700 (PDT)
-Received: from uni.. (adsl-146.37.6.170.tellas.gr. [37.6.170.146])
- by smtp.googlemail.com with ESMTPSA id
- l26-20020a1ced1a000000b003a03ae64f57sm2897401wmh.8.2022.07.05.14.02.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 05 Jul 2022 14:02:22 -0700 (PDT)
+	id 1o8pz5-0000C4-HV; Tue, 05 Jul 2022 21:21:27 +0000
+Received: by outflank-mailman (input) for mailman id 361568;
+ Tue, 05 Jul 2022 21:21:25 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1o8pz3-0000Bu-UF; Tue, 05 Jul 2022 21:21:25 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1o8pz3-0005rc-R1; Tue, 05 Jul 2022 21:21:25 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1o8pz3-0003x5-E2; Tue, 05 Jul 2022 21:21:25 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1o8pz3-00084x-Dc; Tue, 05 Jul 2022 21:21:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,94 +44,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c427c8de-fca5-11ec-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=AQT9Zg3S1V+SLzJ9mIrWY3ddQbg0abcQqmYDqdswck8=;
-        b=AFccQjNrQmfDG4VaWaef4xE8J6saJ7xJQU2+GqZgfhh3f4xKHvoOcergdPc8v6EZHB
-         W8PpgIETewLVrLtE8R9SgobXUK/+twapNT7rfOAAy8o4KG1q9tilbcZ0O5lpDnjfffkm
-         wpGNB4Co6W2b6dHDkhfv8qn6WvH6EmfRxh01kBX/nvQyCXNt2jwTye2XekvYS48NH1Gj
-         XsVm+ZjelZR5VC4Cuxmm5CsT/9OLLqJRlX6jvF5n/TPuyRiQ3Wt878V/IACErpUdPda+
-         uQB4YXgo5oRIcn1dJoWBZOcOM0Amy/UkcShxImHmtnp49oxqJXh85b0T43VICgbLUSMs
-         +wtQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=AQT9Zg3S1V+SLzJ9mIrWY3ddQbg0abcQqmYDqdswck8=;
-        b=gttK81RYvI/aXKZNBVphCbKabgnQRFPxCCoLzGrfCyekcIjqDRFTjrGVNt6YYD77rf
-         tPrkBXKjfrSQsXAwsAgNiHIE2eMnSyjwpVN4iY20gp2jC6DOHpxnMTl6SpWODVCiA3Jr
-         MMe+ri8a6PbYCOgflZaTJJfUrtaq7qwsfp42/Eg9DBLHyEfOVCiFwK+cOChPyA1srq4K
-         E3webX8slzDOBNzY7q4ZoC4VcPOETU8IyVES6G2N9/p82hegJO2blUYWITTssZQ6j+Gu
-         i4cH7p5fpY+tSuCRzSmp00QGB5XtyVCHFOjaAsZfOLUFIA2nFxc5emPb0hKK4GAOsz8r
-         QF2Q==
-X-Gm-Message-State: AJIora9sev63NwgQqd8MyW/UfIBU5AsfOFTMHhCYHhGVvpx4AKU3Ef4M
-	/zZWq7uwrP82ySSVS8MzULnDCo4Ibe8=
-X-Google-Smtp-Source: AGRyM1uPOb9BIMjvnqYCviSjSCmTkegKo3dPghVnCPYleuQuvV702Na9iW7j4NSzdmepl3cQRLxReQ==
-X-Received: by 2002:a5d:64c3:0:b0:21d:720c:4ade with SMTP id f3-20020a5d64c3000000b0021d720c4ademr5695443wri.570.1657054942891;
-        Tue, 05 Jul 2022 14:02:22 -0700 (PDT)
-From: Xenia Ragiadakou <burzalodowa@gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=gQn4vuZpDhODBIVu07I6aggOJUfKYlfBOYWON8l1Ab0=; b=KSR++mtbxi2gNWYcQhqKG5QyP1
+	VSeLgGNUA99UPD5xRsugqGLX9hOsN4es7Koz4ciXaHi4KMweNwPxUeFrBgkMyuQ1Y6dzugxGJnHdg
+	2tEtuuGu7eQAQPfhNf3ahgNkRHV4wzlfBXK4oNcWJKfqcbaeNHQ8z9D1/w8kAoETJZWY=;
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 1/4] xen/arm: traps: Fix MISRA C 2012 Rule 8.4 violations
-Date: Wed,  6 Jul 2022 00:02:15 +0300
-Message-Id: <20220705210218.483854-2-burzalodowa@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220705210218.483854-1-burzalodowa@gmail.com>
-References: <20220705210218.483854-1-burzalodowa@gmail.com>
-MIME-Version: 1.0
+Message-ID: <osstest-171506-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 171506: regressions - FAIL
+X-Osstest-Failures:
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:xen-boot:fail:regression
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+X-Osstest-Versions-That:
+    xen=4df2e99d731402da48afb19dc970ccab5a0814d6
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 05 Jul 2022 21:21:25 +0000
 
-Add the function prototypes of the functions below in <asm/processor.h> header
-file so that they are visible before the function definitions in traps.c.
-enter_hypervisor_from_guest_preirq()
-enter_hypervisor_from_guest()
-do_trap_hyp_sync()
-do_trap_guest_sync()
-do_trap_irq()
-do_trap_fiq()
-leave_hypervisor_to_guest()
+flight 171506 xen-unstable-smoke real [real]
+flight 171508 xen-unstable-smoke real-retest [real]
+http://logs.test-lab.xenproject.org/osstest/logs/171506/
+http://logs.test-lab.xenproject.org/osstest/logs/171508/
 
-Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
----
- xen/arch/arm/include/asm/processor.h | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+Regressions :-(
 
-diff --git a/xen/arch/arm/include/asm/processor.h b/xen/arch/arm/include/asm/processor.h
-index c021160412..74cc07028f 100644
---- a/xen/arch/arm/include/asm/processor.h
-+++ b/xen/arch/arm/include/asm/processor.h
-@@ -576,10 +576,24 @@ void vcpu_regs_hyp_to_user(const struct vcpu *vcpu,
- void vcpu_regs_user_to_hyp(struct vcpu *vcpu,
-                            const struct vcpu_guest_core_regs *regs);
- 
-+void enter_hypervisor_from_guest_preirq(void);
-+
-+void enter_hypervisor_from_guest(void);
-+
-+void do_trap_hyp_sync(struct cpu_user_regs *regs);
-+
-+void do_trap_guest_sync(struct cpu_user_regs *regs);
-+
- void do_trap_hyp_serror(struct cpu_user_regs *regs);
- 
- void do_trap_guest_serror(struct cpu_user_regs *regs);
- 
-+void do_trap_irq(struct cpu_user_regs *regs);
-+
-+void do_trap_fiq(struct cpu_user_regs *regs);
-+
-+void leave_hypervisor_to_guest(void);
-+
- register_t get_default_hcr_flags(void);
- 
- /*
--- 
-2.34.1
+Tests which did not succeed and are blocking,
+including tests which could not be run:
+ test-arm64-arm64-xl-xsm       8 xen-boot                 fail REGR. vs. 171486
 
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+baseline version:
+ xen                  4df2e99d731402da48afb19dc970ccab5a0814d6
+
+Last test of basis   171486  2022-07-04 13:00:25 Z    1 days
+Failing since        171501  2022-07-05 12:03:08 Z    0 days    2 attempts
+Testing same since   171506  2022-07-05 17:00:29 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Anthony PERARD <anthony.perard@citrix.com>
+  Demi Marie Obenour <demi@invisiblethingslab.com>
+  Jan Beulich <jbeulich@suse.com>
+  Julien Grall <jgrall@amazon.com>
+  Luca Fancellu <luca.fancellu@arm.com>
+  Michal Orzel <michal.orzel@arm.com>
+  Roger Pau Monne <roger.pau@citrix.com>
+  Roger Pau Monné <roger.pau@citrix.com>
+  Wei Chen <wei.chen@arm.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      fail    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Not pushing.
+
+------------------------------------------------------------
+commit 61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+Author: Michal Orzel <michal.orzel@arm.com>
+Date:   Mon Jun 27 15:15:39 2022 +0200
+
+    xen/common: Use unsigned int instead of plain unsigned
+    
+    This is just for the style and consistency reasons as the former is
+    being used more often than the latter.
+    
+    Signed-off-by: Michal Orzel <michal.orzel@arm.com>
+    Reviewed-by: Juergen Gross <jgross@suse.com>
+    Acked-by: Jan Beulich <jbeulich@suse.com>
+
+commit 54d8f27d0477937e1f99a414fc1ffd93d184b38a
+Author: Roger Pau Monne <roger.pau@citrix.com>
+Date:   Fri Apr 8 10:21:11 2022 +0200
+
+    tools/libxl: report trusted backend status to frontends
+    
+    Allow administrators to notify a frontend driver that it's backend
+    counterpart is not to be trusted, so the frontend can deploy whatever
+    mitigations required in order to secure itself.
+    
+    Allow such option for disk and network frontends only, as those are
+    the only hardened ones currently supported.
+    
+    This is part of XSA-403
+    
+    Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+    Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
+
+commit a4d4c541f58b378bc9d499dcb554eb9fe22312c8
+Author: Wei Chen <wei.chen@arm.com>
+Date:   Tue Jul 5 13:12:15 2022 +0200
+
+    xen/arm32: avoid EFI stub wchar_t size linker warning
+    
+    Xen uses "-fshort-wchar" in CFLAGS for EFI common code. Arm32
+    is using stub.c of EFI common code for EFI stub functions. But
+    "-fshort-wchar" CFLAG will cause a warning when build stub.c
+    for Arm32:
+    "arm-linux-gnueabihf-ld: warning: arch/arm/efi/built_in.o uses
+    2-byte wchar_t yet the output is to use 4-byte wchar_t; use of
+    wchar_t values across objects may fail"
+    
+    This is because the "-fshort-wchar" flag causes GCC to generate
+    code that is not binary compatible with code generated without
+    that flag. Why this warning hasn't been triggered in Arm64 is
+    because Arm64 does not use wchar type directly in any code for
+    parameters, variables and return values. And in EFI code, wchar
+    has been replaced by CHAR16 (the UEFI "abstraction" of wchar_t).
+    CHAR16 has been specified as unsigned short type in typedef, the
+    "-fshort-wchar" flag will not affect CHAR16. So Arm64 object
+    files are exactly the same with "-fshort-wchar" and without
+    "-fshort-wchar".
+    
+    We are also not using wchar in Arm32 codes, but Arm32 will embed
+    ABI information in ".ARM.attributes" section. This section stores
+    some object file attributes, like ABI version, CPU arch and etc.
+    And wchar size is described in this section by "Tag_ABI_PCS_wchar_t"
+    too. Tag_ABI_PCS_wchar_t is 2 for object files with "-fshort-wchar",
+    but for object files without "-fshort-wchar" is 4. Arm32 GCC
+    ld will check this tag, and throw above warning when it finds
+    the object files have different Tag_ABI_PCS_wchar_t values.
+    
+    Xen need to keep "-fshort-wchar" in EFI code to force wchar to use
+    short integers (2 bytes) instead of integers (4 bytes), but this is
+    unnecessary for code out of EFI. So in this patch, we add
+    "-fno-short-wchar" to override "-fshort-wchar" for Arm architectures
+    without EFI enabled to remove above warning."
+    
+    Reported-and-Suggested-by: Jan Beulich <jbeulich@suse.com>
+    Tested-by: Jan Beulich <jbeulich@suse.com>
+    Signed-off-by: Wei Chen <wei.chen@arm.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+    Acked-by: Julien Grall <jgrall@amazon.com>
+
+commit c4184bf305dc14c3e150617904c40b120664efe6
+Author: Jan Beulich <jbeulich@suse.com>
+Date:   Tue Jul 5 13:11:51 2022 +0200
+
+    public: constify xsd_errors[]
+    
+    While in principle this could break existing users, I think such users
+    deserve to be put in trouble. After all the table should have been const
+    from the very beginning.
+    
+    Signed-off-by: Jan Beulich <jbeulich@suse.com>
+    Reviewed-by: Juergen Gross <jgross@suse.com>
+
+commit 2b1ee386122a6e8bf66f5163cbda51084af6e0f4
+Author: Luca Fancellu <luca.fancellu@arm.com>
+Date:   Tue Jul 5 13:11:25 2022 +0200
+
+    tools/helpers: fix snprintf argument in init-dom0less.c
+    
+    Fix snprintf argument in init-dom0less.c because two instances of
+    the function are using libxl_dominfo struct members that are uint64_t
+    types, so change "%lu" to "%"PRIu64 to handle it properly when
+    building on arm32 and arm64.
+    
+    Signed-off-by: Luca Fancellu <luca.fancellu@arm.com>
+    Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+    Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+
+commit 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+Author: Demi Marie Obenour <demi@invisiblethingslab.com>
+Date:   Tue Jul 5 13:10:46 2022 +0200
+
+    EFI: preserve the System Resource Table for dom0
+    
+    The EFI System Resource Table (ESRT) is necessary for fwupd to identify
+    firmware updates to install.  According to the UEFI specification §23.4,
+    the ESRT shall be stored in memory of type EfiBootServicesData.  However,
+    memory of type EfiBootServicesData is considered general-purpose memory
+    by Xen, so the ESRT needs to be moved somewhere where Xen will not
+    overwrite it.  Copy the ESRT to memory of type EfiRuntimeServicesData,
+    which Xen will not reuse.  dom0 can use the ESRT if (and only if) it is
+    in memory of type EfiRuntimeServicesData.
+    
+    Earlier versions of this patch reserved the memory in which the ESRT was
+    located.  This created awkward alignment problems, and required either
+    splitting the E820 table or wasting memory.  It also would have required
+    a new platform op for dom0 to use to indicate if the ESRT is reserved.
+    By copying the ESRT into EfiRuntimeServicesData memory, the E820 table
+    does not need to be modified, and dom0 can just check the type of the
+    memory region containing the ESRT.  The copy is only done if the ESRT is
+    not already in EfiRuntimeServicesData memory, avoiding memory leaks on
+    repeated kexec.
+    
+    See https://lore.kernel.org/xen-devel/20200818184018.GN1679@mail-itl/T/
+    for details.
+    
+    Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+    Reviewed-by: Jan Beulich <jbeulich@suse.com>
+(qemu changes not included)
 
