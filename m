@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A767C43334
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:08:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362548.592653 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D833CC433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:08:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362550.592668 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CGA-0008Fi-MO; Wed, 06 Jul 2022 21:08:34 +0000
+	id 1o9CGC-0000Ey-Db; Wed, 06 Jul 2022 21:08:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362548.592653; Wed, 06 Jul 2022 21:08:34 +0000
+Received: by outflank-mailman (output) from mailman id 362550.592668; Wed, 06 Jul 2022 21:08:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CGA-0008F4-Ex; Wed, 06 Jul 2022 21:08:34 +0000
-Received: by outflank-mailman (input) for mailman id 362548;
- Wed, 06 Jul 2022 21:08:33 +0000
+	id 1o9CGC-0000EN-6F; Wed, 06 Jul 2022 21:08:36 +0000
+Received: by outflank-mailman (input) for mailman id 362550;
+ Wed, 06 Jul 2022 21:08:34 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJEZ=XL=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1o9CEo-0003HV-Mr
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:07:11 +0000
+ id 1o9CFl-0003HV-0C
+ for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:08:09 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
  [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 980f365c-fd6f-11ec-924f-1f966e50362f;
- Wed, 06 Jul 2022 23:07:09 +0200 (CEST)
+ id bae41d24-fd6f-11ec-924f-1f966e50362f;
+ Wed, 06 Jul 2022 23:08:07 +0200 (CEST)
 Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1657141513567683.6191702459943;
- Wed, 6 Jul 2022 14:05:13 -0700 (PDT)
+ with SMTPS id 1657141520651940.6489274956703;
+ Wed, 6 Jul 2022 14:05:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,664 +42,530 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 980f365c-fd6f-11ec-924f-1f966e50362f
-ARC-Seal: i=1; a=rsa-sha256; t=1657141515; cv=none; 
+X-Inumbo-ID: bae41d24-fd6f-11ec-924f-1f966e50362f
+ARC-Seal: i=1; a=rsa-sha256; t=1657141522; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=hH8iSSh7V0tdIXTzS1Ubw9vFs83PaKUcRziQHL+OnMqNVNS+E5snNAWFFY5OgSg7/Gn3kZdza2/V1tL0Gjl7aAPtFzGdnkjby2Uckzh9VRrTTaMC5aZGjQZgi4gcQBUSIMAgp9PQ+PCiyz4TtSOizHarcl43IQz+VbnCbrkgkwM=
+	b=bmYSXXAUB8n4jSmYj9pKCDn2/3VNyaxHV4BJgn8SwBVOKjN4q5kJ6wB7JaTqWt+inxiWwVfWvTTdeP5mfEITFjzQoqbHXvMxBx/9V1hgI1JIZc8HO2zLpB4YfWrdECHcz5sOTii9yjMbBosZWbaUom5EXUkbEfTS6GHdMTQfp7w=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1657141515; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=J77O8suVeejM9qg7gYOMo0/ft/qDVUpd9vIxutDZU4s=; 
-	b=PixWEodVN4GaUxiV7hsApDpWo0eO9647EbCs+EHkpFT7xrLOaxCIVbyEZyqhxqp89wC7ITrCcfNZWZNQ0gyliRHsIoJ+BPETPEVBEIuwOmwH0hd9vpiX0RHoz40lmz/ELE6LeFvijQnw1K9hKBctI+tRo/7TAog5aCu502CgyUI=
+	t=1657141522; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=eTpqwxpSkEMWg//PoKCMIGmKB8+qr3bwNRO2rt7uCKo=; 
+	b=inPXKKpZqe9qe9iysKSIX2T1UnQj+vvh9u+rMs9FCpDbfzpENQQXg/rkhWdb9J7Lpz/I23ah36RQOCM1O/yQjnOgFw/Wx+LoqNcCEhHI7aYI9tHM3RiNbDwuVY9NLsyiQ0yAtI1V7EPibmXkebWlefXxu+fyEwzXvsNhSfOCWwU=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141515;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141522;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding:Reply-To;
-	bh=J77O8suVeejM9qg7gYOMo0/ft/qDVUpd9vIxutDZU4s=;
-	b=QTlDaaVUp7U5CqwKiB/RSI74HNKmbgltsH7KOnzePAGUpWbfNmJ/rarveUhifBDu
-	EYaHRDLi8V5n4IjeHtUC/HUFz/wS6mv+XhJ1oEU9BM8/SSW2TdMEkndQRIlFt9VZoSa
-	9khOUqhvWovwIACE+Kb5mpEKGTUOyPIdIzZ2JUy8=
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
+	bh=eTpqwxpSkEMWg//PoKCMIGmKB8+qr3bwNRO2rt7uCKo=;
+	b=Uo4wzGK9lFd7R8bDuJokrOPOnARrls4G0FKlTP2ZIIA3y0D6zX+sWF1RQvA9SBdF
+	tpvS/wxIfvEmRz6AbtHsSkSuF9f0hU0XvPUfqHJ1SOQ453SpXIlmZbmOF2JJoOfLAFA
+	fPum7fIiqay1QIJx7SWKiUGo6X8e2FIFD/+bb7g4=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org,
+	Wei Liu <wl@xen.org>
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	scott.davis@starlab.io,
 	christopher.clark@starlab.io,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v1 07/18] docs: update hyperlaunch device tree documentation
-Date: Wed,  6 Jul 2022 17:04:42 -0400
-Message-Id: <20220706210454.30096-8-dpsmith@apertussolutions.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v1 11/18] x86: initial conversion to domain builder
+Date: Wed,  6 Jul 2022 17:04:46 -0400
+Message-Id: <20220706210454.30096-12-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220706210454.30096-1-dpsmith@apertussolutions.com>
 References: <20220706210454.30096-1-dpsmith@apertussolutions.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This commit is to update the hyperlaunch device tree documentation to align
-with the DTB parsing implementation.
+This commit is the first step in adopting domain builder. It goes through the
+dom0 creation and construction functions, converting them over to consume
+struct boot_domaain and changes the startup sequence to use the domain builder
+to create and construct dom0.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Reviewed-by: Christopher Clark <christopher.clark@starlab.io>
 ---
- .../designs/launch/hyperlaunch-devicetree.rst | 497 +++++++++++-------
- 1 file changed, 306 insertions(+), 191 deletions(-)
+ xen/arch/x86/dom0_build.c             |  30 +++----
+ xen/arch/x86/hvm/dom0_build.c         |  10 +--
+ xen/arch/x86/include/asm/dom0_build.h |   8 +-
+ xen/arch/x86/include/asm/setup.h      |   5 +-
+ xen/arch/x86/pv/dom0_build.c          |  39 ++++-----
+ xen/arch/x86/setup.c                  | 114 +++++++++++++++-----------
+ 6 files changed, 109 insertions(+), 97 deletions(-)
 
-diff --git a/docs/designs/launch/hyperlaunch-devicetree.rst b/docs/designs/launch/hyperlaunch-devicetree.rst
-index b49c98cfbd..ae1a786d0b 100644
---- a/docs/designs/launch/hyperlaunch-devicetree.rst
-+++ b/docs/designs/launch/hyperlaunch-devicetree.rst
-@@ -13,12 +13,268 @@ difference is the introduction of the ``hypervisor`` node that is under the
- 2. Allows for the domain construction information to easily be sanitized by
-    simple removing the ``/chosen/hypervisor`` node.
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index e44f7f3c43..216c9e3590 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -6,6 +6,7 @@
  
-+
-+The Hypervisor node
-+-------------------
-+
-+The ``hypervisor`` node is a top level container for the domains that will be built
-+by hypervisor on start up. The node will be named ``hypervisor``  with a ``compatible``
-+property to identify which hypervisors the configuration is intended. The hypervisor
-+node will consist of one or more config nodes and one or more domain nodes.
-+
-+Properties
-+""""""""""
-+
-+compatible
-+  Identifies which hypervisors the configuration is compatible. Required.
-+
-+  Format: "hypervisor,<hypervisor name>", e.g "hypervisor,xen"
-+
-+Child Nodes
-+"""""""""""
-+
-+* config
-+* domain
-+
-+Config Node
-+-----------
-+
-+A ``config`` node is for passing configuration data and identifying any boot
-+modules that is of interest to the hypervisor.  For example this would be where
-+Xen would be informed of microcode or XSM policy locations. Each ``config``
-+node will require a unique device-tree compliant name as there may be one or
-+more ``config`` nodes present in a single dtb file. To identify which
-+hypervisor the configuration is intended, the required ``compatible`` property
-+must be present.
-+
-+While the config node is not meant to replace the hypervisor commandline, there
-+may be cases where it is better suited for passing configuration details at
-+boot time.  This additional information may be carried in properties assigned
-+to a ``config`` node. If there are any boot modules that are intended for the
-+hypervisor, then a ``module`` child node should be provided to identify the
-+boot module.
-+
-+Properties
-+""""""""""
-+
-+compatible
-+  Identifies the hypervisor the confiugration is intended. Required.
-+
-+  Format: "<hypervisor name>,config", e.g "xen,config"
-+
-+bootargs
-+  This is used to provide the boot params for Xen.
-+
-+  Format: String, e.g. "flask=silo"
-+
-+Child Nodes
-+"""""""""""
-+
-+* module
-+
-+Domain Node
-+-----------
-+
-+A ``domain`` node is for describing the construction of a domain. Since there
-+may be one or more domain nodes, each one requires a unique, DTB compliant name
-+and a ``compatible`` property to identify as a domain node.
-+
-+A ``domain`` node  may provide a ``domid`` property which will be used as the
-+requested domain id for the domain with a value of “0” signifying to use the
-+next available domain id, which is the default behavior if omitted. It should
-+be noted that a domain configuration is not able to request a domid of “0”.
-+Beyond that a domain node may have any of the following optional properties.
-+
-+Properties
-+""""""""""
-+
-+compatible
-+  Identifies the node as a domain node and for which hypervisor. Required.
-+
-+  Format: "<hypervisor name>,domain", e.g "xen,domain"
-+
-+domid
-+  Identifies the domid requested to assign to the domain.
-+
-+  Format: Integer, e.g <0>
-+
-+permissions
-+  This sets what Discretionary Access Control permissions
-+  a domain is assigned. Optional, default is none.
-+
-+  Format: Bitfield, e.g <3> or <0x00000003>
-+
-+          PERMISSION_NONE          (0)
-+          PERMISSION_CONTROL       (1 << 0)
-+          PERMISSION_HARDWARE      (1 << 1)
-+
-+functions
-+  This identifies what system functions a domain will fulfill.
-+  Optional, the default is none.
-+
-+  Format: Bitfield, e.g <3221225487> or <0xC0000007>
-+
-+          FUNCTION_NONE            (0)
-+          FUNCTION_BOOT            (1 << 0)
-+          FUNCTION_CRASH           (1 << 1)
-+          FUNCTION_CONSOLE         (1 << 2)
-+          FUNCTION_XENSTORE        (1 << 30)
-+          FUNCTION_LEGACY_DOM0     (1 << 31)
-+
-+.. note::  The `functions` bits that have been selected to indicate
-+   ``FUNCTION_XENSTORE`` and ``FUNCTION_LEGACY_DOM0`` are the last two bits
-+   (30, 31) such that should these features ever be fully replaced or retired,
-+   the flags may be dropped without leaving a gap in the flag set.
-+
-+mode
-+  The mode the domain will be executed under. Required.
-+
-+  Format: Bitfield, e.g <5> or <0x00000005>
-+
-+          MODE_PARAVIRTUALIZED     (1 << 0) PV | PVH/HVM
-+          MODE_ENABLE_DEVICE_MODEL (1 << 1) HVM | PVH
-+          MODE_LONG                (1 << 2) 64 BIT | 32 BIT
-+
-+domain-uuid
-+  A globally unique identifier for the domain. Optional,
-+  the default is NULL.
-+
-+  Format: Byte Array, e.g [B3 FB 98 FB 8F 9F 67 A3]
-+
-+cpus
-+  The number of vCPUs to be assigned to the domain. Optional,
-+  the default is “1”.
-+
-+  Format: Integer, e.g <0>
-+
-+memory
-+  The amount of memory to assign to the domain, in KBs. This field uses a DTB
-+  Reg which contains a start and size. For memory allocation start may or may
-+  not have significance but size will always be used for the amount of memory
-+  Required.
-+
-+  Format: String  min:<sz> | max:<sz> | <sz>, e.g. "256M"
-+
-+security-id
-+  The security identity to be assigned to the domain when XSM
-+  is the access control mechanism being used. Optional,
-+  the default is “system_u:system_r:domU_t”.
-+
-+  Format: string, e.g. "system_u:system_r:domU_t"
-+
-+Child Nodes
-+"""""""""""
-+
-+* module
-+
-+Module node
-+-----------
-+
-+This node describes a boot module loaded by the boot loader. A ``module`` node
-+will often appear repeatedly and will require a unique and DTB compliant name
-+for each instance. The compatible property is required to identify that the
-+node is a ``module`` node, the type of boot module, and what it represents.
-+
-+Depending on the type of boot module, the ``module`` node will require either a
-+``module-index`` or ``module-addr`` property must be present. They provide the
-+boot module specific way of locating the boot module in memory.
-+
-+Properties
-+""""""""""
-+
-+compatible
-+  This identifies what the module is and thus what the hypervisor
-+  should use the module for during domain construction. Required.
-+
-+  Format: "module,<module type>"[, "module,<locating type>"]
-+          module type: kernel, ramdisk, device-tree, microcode, xsm-policy,
-+                       config
-+
-+          locating type: index, addr
-+
-+module-index
-+  This identifies the index for this module when in a module chain.
-+  Required for multiboot environments.
-+
-+  Format: Integer, e.g. <0>
-+
-+module-addr
-+  This identifies where in memory this module is located. Required for
-+  non-multiboot environments.
-+
-+  Format: DTB Reg <start size>, e.g. <0x0 0x20000>
-+
-+bootargs
-+  This is used to provide the boot params to kernel modules.
-+
-+  Format: String, e.g. "ro quiet"
-+
-+.. note::  The bootargs property is intended for situations where the same kernel multiboot module is used for more than one domain.
-+
- Example Configuration
- ---------------------
+ #include <xen/bootdomain.h>
+ #include <xen/bootinfo.h>
++#include <xen/domain_builder.h>
+ #include <xen/init.h>
+ #include <xen/iocap.h>
+ #include <xen/libelf.h>
+@@ -556,31 +557,32 @@ int __init dom0_setup_permissions(struct domain *d)
+     return rc;
+ }
  
--Below are two example device tree definitions for the hypervisor node. The
--first is an example of a multiboot-based configuration for x86 and the second
--is a module-based configuration for Arm.
-+Below are examples device tree definitions for the hypervisor node. The first
-+is an example of booting a dom0 only configuration. Afterh that are a
-+multiboot-based configuration for x86 and a module-based configuration for Arm.
-+
-+Multiboot x86 Configuration Dom0-only:
-+""""""""""""""""""""""""""""""""""""""
-+The following dts file can be provided to the Device Tree compiler, ``dtc``, to
-+produce a dtb file.
-+::
-+
-+  /dts-v1/;
-+
-+  / {
-+      chosen {
-+          hypervisor {
-+              compatible = "hypervisor,xen";
-+
-+              dom0 {
-+                  compatible = "xen,domain";
-+
-+                  domid = <0>;
-+
-+                  permissions = <3>;
-+                  functions = <0xC000000F>;
-+                  mode = <5>;
-+
-+                  domain-uuid = [B3 FB 98 FB 8F 9F 67 A3 8A 6E 62 5A 09 13 F0 8C];
-+
-+                  cpus = <1>;
-+                  memory = <0x0 0x20000000>;
-+
-+                  kernel {
-+                      compatible = "module,kernel", "module,index";
-+                      module-index = <1>;
-+                  };
-+              };
-+
-+          };
-+      };
-+  };
-+
-+The resulting dtb file, in this case dom0-only.dtb, can then be used with a
-+GRUB menuentry as such,
-+::
-+
-+  menuentry 'Devuan GNU/Linux, with Xen hyperlaunch' {
-+        insmod part_gpt
-+        insmod ext2
-+        set root='hd0,gpt2'
-+
-+        echo    'Loading Xen hyperlaunch ...'
-+
-+        multiboot2      /xen.gz placeholder sync_console
-+        echo    'Loading Dom0 hyperlaunch dtb ...'
-+        module2 --nounzip   /dom0-only.dtb
-+        echo    'Loading Linux 5.4.36+ ...'
-+        module2 /vmlinuz-5.4.36+ placeholder root=/dev/mapper/test01--vg-root ro  quiet
-+        echo    'Loading initial ramdisk ...'
-+        module2 --nounzip   /initrd.img-5.4.36+
-+  }
-+
+-int __init construct_dom0(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, char *cmdline)
++int __init construct_domain(struct boot_domain *bd)
+ {
+-    int rc;
++    int rc = 0;
  
- Multiboot x86 Configuration:
- """"""""""""""""""""""""""""
-@@ -31,89 +287,70 @@ Multiboot x86 Configuration:
-         compatible = “hypervisor,xen”
+     /* Sanity! */
+-    BUG_ON(!pv_shim && d->domain_id != 0);
+-    BUG_ON(d->vcpu[0] == NULL);
+-    BUG_ON(d->vcpu[0]->is_initialised);
++    BUG_ON(!pv_shim && bd->domid != 0);
++    BUG_ON(bd->domain->vcpu[0] == NULL);
++    BUG_ON(bd->domain->vcpu[0]->is_initialised);
  
-         // Configuration container
--        config {
-+        xen-config {
-             compatible = "xen,config";
+     process_pending_softirqs();
  
--            module {
--                compatible = "module,microcode", "multiboot,module";
--                mb-index = <1>;
-+            bootargs = "console=com1,vga com1=115200,8n1 loglvl=all";
+-    if ( is_hvm_domain(d) )
+-        rc = dom0_construct_pvh(d, image, initrd, cmdline);
+-    else if ( is_pv_domain(d) )
+-        rc = dom0_construct_pv(d, image, initrd, cmdline);
+-    else
+-        panic("Cannot construct Dom0. No guest interface available\n");
++    if ( builder_is_initdom(bd) )
++    {
++        if ( is_hvm_domain(bd->domain) )
++            rc = dom0_construct_pvh(bd);
++        else if ( is_pv_domain(bd->domain) )
++            rc = dom0_construct_pv(bd);
++        else
++            panic("Cannot construct Dom0. No guest interface available\n");
++    }
+ 
+     if ( rc )
+         return rc;
+ 
+     /* Sanity! */
+-    BUG_ON(!d->vcpu[0]->is_initialised);
++    BUG_ON(!bd->domain->vcpu[0]->is_initialised);
+ 
+     return 0;
+ }
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index 4e903a848d..2fee2ed926 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -19,6 +19,7 @@
+  */
+ 
+ #include <xen/acpi.h>
++#include <xen/bootdomain.h>
+ #include <xen/bootinfo.h>
+ #include <xen/init.h>
+ #include <xen/libelf.h>
+@@ -1217,10 +1218,9 @@ static void __hwdom_init pvh_setup_mmcfg(struct domain *d)
+     }
+ }
+ 
+-int __init dom0_construct_pvh(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, char *cmdline)
++int __init dom0_construct_pvh(struct boot_domain *bd)
+ {
++    struct domain *d = bd->domain;
+     paddr_t entry, start_info;
+     int rc;
+ 
+@@ -1249,8 +1249,8 @@ int __init dom0_construct_pvh(
+         return rc;
+     }
+ 
+-    rc = pvh_load_kernel(d, image, initrd, bootstrap_map(image),
+-                         cmdline, &entry, &start_info);
++    rc = pvh_load_kernel(d, bd->kernel, bd->ramdisk, bootstrap_map(bd->kernel),
++                         bd->kernel->string.bytes, &entry, &start_info);
+     if ( rc )
+     {
+         printk("Failed to load Dom0 kernel\n");
+diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
+index ad33413710..571b25ea71 100644
+--- a/xen/arch/x86/include/asm/dom0_build.h
++++ b/xen/arch/x86/include/asm/dom0_build.h
+@@ -14,13 +14,9 @@ unsigned long dom0_compute_nr_pages(struct domain *d,
+                                     unsigned long initrd_len);
+ int dom0_setup_permissions(struct domain *d);
+ 
+-int __init dom0_construct_pv(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, char *cmdline);
++int dom0_construct_pv(struct boot_domain *bd);
+ 
+-int __init dom0_construct_pvh(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, char *cmdline);
++int dom0_construct_pvh(struct boot_domain *bd);
+ 
+ unsigned long dom0_paging_pages(const struct domain *d,
+                                 unsigned long nr_pages);
+diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
+index 27c0d61819..f9c1468fcc 100644
+--- a/xen/arch/x86/include/asm/setup.h
++++ b/xen/arch/x86/include/asm/setup.h
+@@ -33,9 +33,8 @@ void vesa_init(void);
+ static inline void vesa_init(void) {};
+ #endif
+ 
+-int construct_dom0(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, char *cmdline);
++int construct_domain(struct boot_domain *bd);
 +
-+            microcode {
-+                compatible = "module,microcode", "module,index";
-+                module-index = <1>;
-             };
+ void setup_io_bitmap(struct domain *d);
  
--            module {
--                compatible = "module,xsm-policy", "multiboot,module";
--                mb-index = <2>;
-+            policy {
-+                compatible = "module,xsm-policy", "module,index";
-+                module-index = <2>;
-             };
-         };
+ unsigned long initial_images_nrpages(nodeid_t node);
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index f6131147ef..78ebb03b1b 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -4,6 +4,7 @@
+  * Copyright (c) 2002-2005, K A Fraser
+  */
  
-         // Boot Domain definition
--        domain {
-+        domB {
-             compatible = "xen,domain";
++#include <xen/bootdomain.h>
+ #include <xen/bootinfo.h>
+ #include <xen/console.h>
+ #include <xen/domain.h>
+@@ -295,9 +296,7 @@ static struct page_info * __init alloc_chunk(struct domain *d,
+     return page;
+ }
  
-             domid = <0x7FF5>;
+-int __init dom0_construct_pv(
+-    struct domain *d, const struct boot_module *image,
+-    struct boot_module *initrd, char *cmdline)
++int __init dom0_construct_pv(struct boot_domain *bd)
+ {
+     int i, rc, order, machine;
+     bool compatible, compat;
+@@ -311,11 +310,12 @@ int __init dom0_construct_pv(
+     unsigned long count;
+     struct page_info *page = NULL;
+     start_info_t *si;
++    struct domain *d = bd->domain;
+     struct vcpu *v = d->vcpu[0];
+-    void *image_base = bootstrap_map(image);
+-    unsigned long image_len = image->size;
+-    void *image_start = image_base + image->arch->headroom;
+-    unsigned long initrd_len = initrd ? initrd->size : 0;
++    void *image_base = bootstrap_map(bd->kernel);
++    unsigned long image_len = bd->kernel->size;
++    void *image_start = image_base + bd->kernel->arch->headroom;
++    unsigned long initrd_len = bd->ramdisk ? bd->ramdisk->size : 0;
+     l4_pgentry_t *l4tab = NULL, *l4start = NULL;
+     l3_pgentry_t *l3tab = NULL, *l3start = NULL;
+     l2_pgentry_t *l2tab = NULL, *l2start = NULL;
+@@ -355,7 +355,7 @@ int __init dom0_construct_pv(
+     d->max_pages = ~0U;
  
--            // FUNCTION_NONE            (0)
--            // FUNCTION_BOOT            (1 << 0)
--            // FUNCTION_CRASH           (1 << 1)
--            // FUNCTION_CONSOLE         (1 << 2)
--            // FUNCTION_XENSTORE        (1 << 30)
--            // FUNCTION_LEGACY_DOM0     (1 << 31)
-             functions = <0x00000001>;
+     if ( (rc =
+-          bzimage_parse(image_base, &image_start, image->arch->headroom,
++          bzimage_parse(image_base, &image_start, bd->kernel->arch->headroom,
+                          &image_len)) != 0 )
+         return rc;
  
-             memory = <0x0 0x20000>;
-             cpus = <1>;
--            module {
--                compatible = "module,kernel", "multiboot,module";
--                mb-index = <3>;
--            };
+@@ -545,7 +545,7 @@ int __init dom0_construct_pv(
+         initrd_pfn = vinitrd_start ?
+                      (vinitrd_start - v_start) >> PAGE_SHIFT :
+                      domain_tot_pages(d);
+-        initrd_mfn = mfn = mfn_x(initrd->mfn);
++        initrd_mfn = mfn = mfn_x(bd->ramdisk->mfn);
+         count = PFN_UP(initrd_len);
+         if ( d->arch.physaddr_bitsize &&
+              ((mfn + count - 1) >> (d->arch.physaddr_bitsize - PAGE_SHIFT)) )
+@@ -560,13 +560,13 @@ int __init dom0_construct_pv(
+                     free_domheap_pages(page, order);
+                     page += 1UL << order;
+                 }
+-            memcpy(page_to_virt(page), maddr_to_virt(initrd->start),
++            memcpy(page_to_virt(page), maddr_to_virt(bd->ramdisk->start),
+                    initrd_len);
+-            mpt_alloc = initrd->start;
++            mpt_alloc = bd->ramdisk->start;
+             init_domheap_pages(mpt_alloc,
+                                mpt_alloc + PAGE_ALIGN(initrd_len));
+-            bootmodule_update_mfn(initrd, page_to_mfn(page));
+-            initrd_mfn = mfn_x(initrd->mfn);
++            bootmodule_update_mfn(bd->ramdisk, page_to_mfn(page));
++            initrd_mfn = mfn_x(bd->ramdisk->mfn);
+         }
+         else
+         {
+@@ -574,7 +574,7 @@ int __init dom0_construct_pv(
+                 if ( assign_pages(mfn_to_page(_mfn(mfn++)), 1, d, 0) )
+                     BUG();
+         }
+-        initrd->size = 0;
++        bd->ramdisk->size = 0;
+     }
  
--            module {
--                compatible = "module,ramdisk", "multiboot,module";
--                mb-index = <4>;
-+            kernel {
-+                compatible = "module,kernel", "module,index";
-+                module-index = <3>;
-             };
--            module {
--                compatible = "module,config", "multiboot,module";
--                mb-index = <5>;
-+            initrd {
-+                compatible = "module,ramdisk", "module,index";
-+                module-index = <4>;
-+            };
-+            dom-config {
-+                compatible = "module,config", "module,index";
-+                module-index = <5>;
-             };
+     printk("PHYSICAL MEMORY ARRANGEMENT:\n"
+@@ -583,9 +583,9 @@ int __init dom0_construct_pv(
+     if ( domain_tot_pages(d) < nr_pages )
+         printk(" (%lu pages to be allocated)",
+                nr_pages - domain_tot_pages(d));
+-    if ( initrd )
++    if ( bd->ramdisk )
+     {
+-        mpt_alloc = initrd->start;
++        mpt_alloc = bd->ramdisk->start;
+         printk("\n Init. ramdisk: %"PRIpaddr"->%"PRIpaddr,
+                mpt_alloc, mpt_alloc + initrd_len);
+     }
+@@ -806,7 +806,7 @@ int __init dom0_construct_pv(
+         if ( pfn >= initrd_pfn )
+         {
+             if ( pfn < initrd_pfn + PFN_UP(initrd_len) )
+-                mfn = mfn_x(initrd->mfn) + (pfn - initrd_pfn);
++                mfn = mfn_x(bd->ramdisk->mfn) + (pfn - initrd_pfn);
+             else
+                 mfn -= PFN_UP(initrd_len);
+         }
+@@ -866,8 +866,9 @@ int __init dom0_construct_pv(
+     }
  
-         // Classic Dom0 definition
--        domain {
-+        dom0 {
-             compatible = "xen,domain";
+     memset(si->cmd_line, 0, sizeof(si->cmd_line));
+-    if ( cmdline != NULL )
+-        strlcpy((char *)si->cmd_line, cmdline, sizeof(si->cmd_line));
++    if ( strlen(bd->kernel->string.bytes) > 0 )
++        strlcpy((char *)si->cmd_line, bd->kernel->string.bytes,
++                sizeof(si->cmd_line));
  
-             domid = <0>;
+ #ifdef CONFIG_VIDEO
+     if ( !pv_shim && fill_console_start_info((void *)(si + 1)) )
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 28dbfcd209..860b9e3d64 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -45,7 +45,6 @@
+ #include <asm/edd.h>
+ #include <xsm/xsm.h>
+ #include <asm/tboot.h>
+-#include <asm/bzimage.h> /* for bzimage_headroom */
+ #include <asm/mach-generic/mach_apic.h> /* for generic_apic_probe */
+ #include <asm/setup.h>
+ #include <xen/cpu.h>
+@@ -272,6 +271,24 @@ static int __init cf_check parse_acpi_param(const char *s)
+ }
+ custom_param("acpi", parse_acpi_param);
  
--            // PERMISSION_NONE          (0)
--            // PERMISSION_CONTROL       (1 << 0)
--            // PERMISSION_HARDWARE      (1 << 1)
-             permissions = <3>;
--
--            // FUNCTION_NONE            (0)
--            // FUNCTION_BOOT            (1 << 0)
--            // FUNCTION_CRASH           (1 << 1)
--            // FUNCTION_CONSOLE         (1 << 2)
--            // FUNCTION_XENSTORE        (1 << 30)
--            // FUNCTION_LEGACY_DOM0     (1 << 31)
-             functions = <0xC0000006>;
--
--            // MODE_PARAVIRTUALIZED     (1 << 0) /* PV | PVH/HVM */
--            // MODE_ENABLE_DEVICE_MODEL (1 << 1) /* HVM | PVH */
--            // MODE_LONG                (1 << 2) /* 64 BIT | 32 BIT */
-             mode = <5>; /* 64 BIT, PV */
++void __init arch_builder_apply_cmdline(
++    struct boot_info *info, struct boot_domain *bd)
++{
++    if ( skip_ioapic_setup && !strstr(bd->kernel->string.bytes, "noapic") )
++        strlcat(bd->kernel->string.bytes, " noapic", MAX_GUEST_CMDLINE);
++    if ( (strlen(acpi_param) == 0) && acpi_disabled )
++    {
++        printk("ACPI is disabled, notifying Domain 0 (acpi=off)\n");
++        strlcpy(acpi_param, "off", sizeof(acpi_param));
++    }
++    if ( (strlen(acpi_param) != 0) &&
++         !strstr(bd->kernel->string.bytes, "acpi=") )
++    {
++        strlcat(bd->kernel->string.bytes, " acpi=", MAX_GUEST_CMDLINE);
++        strlcat(bd->kernel->string.bytes, acpi_param, MAX_GUEST_CMDLINE);
++    }
++}
++
+ struct boot_info __initdata *boot_info;
  
--            // UUID
-             domain-uuid = [B3 FB 98 FB 8F 9F 67 A3];
+ unsigned long __init initial_images_nrpages(nodeid_t node)
+@@ -728,7 +745,8 @@ static unsigned int __init copy_bios_e820(struct e820entry *map, unsigned int li
+     return n;
+ }
  
-             cpus = <1>;
-             memory = <0x0 0x20000>;
--            security-id = “dom0_t;
-+            security-id = “system_u:system_r:dom0_t;
- 
--            module {
--                compatible = "module,kernel", "multiboot,module";
--                mb-index = <6>;
-+            kernel {
-+                compatible = "module,kernel", "module,index";
-+                module-index = <6>;
-                 bootargs = "console=hvc0";
-             };
--            module {
--                compatible = "module,ramdisk", "multiboot,module";
--                mb-index = <7>;
-+            initrd {
-+                compatible = "module,ramdisk", "module,index";
-+                module-index = <7>;
-             };
+-static struct domain *__init create_dom0(const struct boot_info *bi)
++static struct domain *__init create_dom0(
++    const struct boot_info *bi, struct boot_domain *bd)
+ {
+     struct xen_domctl_createdomain dom0_cfg = {
+         .flags = IS_ENABLED(CONFIG_TBOOT) ? XEN_DOMCTL_CDF_s3_integrity : 0,
+@@ -741,14 +759,10 @@ static struct domain *__init create_dom0(const struct boot_info *bi)
+             .misc_flags = opt_dom0_msr_relaxed ? XEN_X86_MSR_RELAXED : 0,
+         },
      };
+-    struct boot_module *image = bootmodule_next_by_kind(bi, BOOTMOD_KERNEL, 0);
+-    struct boot_module *initrd = bootmodule_next_by_kind(bi, BOOTMOD_RAMDISK, 0);
+-    struct domain *d;
+     char *cmdline;
+-    domid_t domid = 0;
  
-@@ -137,89 +374,68 @@ Module Arm Configuration:
-         compatible = “hypervisor,xen”
+-    if ( image == NULL )
+-        panic("Error creating d%uv0\n", domid);
++    if ( bd->kernel == NULL )
++        panic("Error creating d%uv0\n", bd->domid);
  
-         // Configuration container
--        config {
-+        xen-config {
-             compatible = "xen,config";
+     if ( opt_dom0_pvh )
+     {
+@@ -764,45 +778,46 @@ static struct domain *__init create_dom0(const struct boot_info *bi)
+         dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
  
--            module {
--                compatible = "module,microcode”;
-+            microcode {
-+                compatible = "module,microcode”,"module,addr";
-                 module-addr = <0x0000ff00 0x80>;
-             };
+     /* Create initial domain.  Not d0 for pvshim. */
+-    domid = get_initial_domain_id();
+-    d = domain_create(domid, &dom0_cfg, pv_shim ? 0 : CDF_privileged);
+-    if ( IS_ERR(d) )
+-        panic("Error creating d%u: %ld\n", domid, PTR_ERR(d));
++    bd->domid = get_initial_domain_id();
++    bd->domain = domain_create(bd->domid, &dom0_cfg, pv_shim ?
++                               0 : CDF_privileged);
++    if ( IS_ERR(bd->domain) )
++        panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(bd->domain));
  
--            module {
--                compatible = "module,xsm-policy";
-+            policy {
-+                compatible = "module,xsm-policy","module,addr";
-                 module-addr = <0x0000ff00 0x80>;
+-    init_dom0_cpuid_policy(d);
++    init_dom0_cpuid_policy(bd->domain);
  
-             };
-         };
+-    if ( alloc_dom0_vcpu0(d) == NULL )
+-        panic("Error creating d%uv0\n", domid);
++    if ( alloc_dom0_vcpu0(bd->domain) == NULL )
++        panic("Error creating d%uv0\n", bd->domid);
  
-         // Boot Domain definition
--        domain {
-+        domB {
-             compatible = "xen,domain";
+     /* Grab the DOM0 command line. */
+-    cmdline = (image->string.kind == BOOTSTR_CMDLINE) ?
+-              image->string.bytes : NULL;
++    cmdline = (bd->kernel->string.kind == BOOTSTR_CMDLINE) ?
++              bd->kernel->string.bytes : NULL;
+     if ( cmdline || bi->arch->kextra )
+     {
+-        static char __initdata dom0_cmdline[MAX_GUEST_CMDLINE];
++        char dom0_cmdline[MAX_GUEST_CMDLINE];
  
-             domid = <0x7FF5>;
+         cmdline = arch_prepare_cmdline(cmdline, bi->arch);
+-        safe_strcpy(dom0_cmdline, cmdline);
++        strlcpy(dom0_cmdline, cmdline, MAX_GUEST_CMDLINE);
  
--            // FUNCTION_NONE            (0)
--            // FUNCTION_BOOT            (1 << 0)
--            // FUNCTION_CRASH           (1 << 1)
--            // FUNCTION_CONSOLE         (1 << 2)
--            // FUNCTION_XENSTORE        (1 << 30)
--            // FUNCTION_LEGACY_DOM0     (1 << 31)
-             functions = <0x00000001>;
+         if ( bi->arch->kextra )
+             /* kextra always includes exactly one leading space. */
+-            safe_strcat(dom0_cmdline, bi->arch->kextra);
++            strlcat(dom0_cmdline, bi->arch->kextra, MAX_GUEST_CMDLINE);
  
-             memory = <0x0 0x20000>;
-             cpus = <1>;
--            module {
--                compatible = "module,kernel";
+         /* Append any extra parameters. */
+         if ( skip_ioapic_setup && !strstr(dom0_cmdline, "noapic") )
+-            safe_strcat(dom0_cmdline, " noapic");
++            strlcat(dom0_cmdline, " noapic", MAX_GUEST_CMDLINE);
+         if ( (strlen(acpi_param) == 0) && acpi_disabled )
+         {
+             printk("ACPI is disabled, notifying Domain 0 (acpi=off)\n");
+-            safe_strcpy(acpi_param, "off");
++            strlcpy(acpi_param, "off", sizeof(acpi_param));
+         }
+         if ( (strlen(acpi_param) != 0) && !strstr(dom0_cmdline, "acpi=") )
+         {
+-            safe_strcat(dom0_cmdline, " acpi=");
+-            safe_strcat(dom0_cmdline, acpi_param);
++            strlcat(dom0_cmdline, " acpi=", MAX_GUEST_CMDLINE);
++            strlcat(dom0_cmdline, acpi_param, MAX_GUEST_CMDLINE);
+         }
+ 
+-        cmdline = dom0_cmdline;
++        strlcpy(bd->kernel->string.bytes, dom0_cmdline, MAX_GUEST_CMDLINE);
+     }
+ 
+     /*
+@@ -816,7 +831,7 @@ static struct domain *__init create_dom0(const struct boot_info *bi)
+         write_cr4(read_cr4() & ~X86_CR4_SMAP);
+     }
+ 
+-    if ( construct_dom0(d, image, initrd, cmdline) != 0 )
++    if ( construct_domain(bd) != 0 )
+         panic("Could not construct domain 0\n");
+ 
+     if ( cpu_has_smap )
+@@ -825,14 +840,14 @@ static struct domain *__init create_dom0(const struct boot_info *bi)
+         cr4_pv32_mask |= X86_CR4_SMAP;
+     }
+ 
+-    return d;
++    return bd->domain;
+ }
+ 
+ void __init arch_create_dom(
+     const struct boot_info *bi, struct boot_domain *bd)
+ {
+     if ( builder_is_initdom(bd) )
+-        create_dom0(bi);
++        create_dom0(bi, bd);
+ }
+ 
+ /* How much of the directmap is prebuilt at compile time. */
+@@ -1010,10 +1025,7 @@ void __init noreturn __start_xen(unsigned long bi_p)
+                boot_info->nr_mods);
+     }
+ 
+-    /* Dom0 kernel is the first boot module */
+-    boot_info->mods[0].kind = BOOTMOD_KERNEL;
+-    if ( boot_info->mods[0].string.len )
+-        boot_info->mods[0].string.kind = BOOTSTR_CMDLINE;
++    builder_init(boot_info);
+ 
+     if ( pvh_boot )
+     {
+@@ -1168,11 +1180,6 @@ void __init noreturn __start_xen(unsigned long bi_p)
+         boot_info->mods[boot_info->nr_mods].size = __2M_rwdata_end - _stext;
+     }
+ 
+-    boot_info->mods[0].arch->headroom = bzimage_headroom(
+-                                        bootstrap_map(&boot_info->mods[0]),
+-                                        boot_info->mods[0].size);
+-    bootstrap_map(NULL);
+-
+ #ifndef highmem_start
+     /* Don't allow split below 4Gb. */
+     if ( highmem_start < GB(4) )
+@@ -1905,22 +1912,29 @@ void __init noreturn __start_xen(unsigned long bi_p)
+            cpu_has_nx ? XENLOG_INFO : XENLOG_WARNING "Warning: ",
+            cpu_has_nx ? "" : "not ");
+ 
+-    initrdidx = bootmodule_next_idx_by_kind(boot_info, BOOTMOD_UNKNOWN, 0);
+-    if ( initrdidx < boot_info->nr_mods )
+-        boot_info->mods[initrdidx].kind = BOOTMOD_RAMDISK;
+-
+-    if ( bootmodule_count_by_kind(boot_info, BOOTMOD_UNKNOWN) > 1 )
+-        printk(XENLOG_WARNING
+-               "Multiple initrd candidates, picking module #%u\n",
+-               initrdidx);
+-
+     /*
+-     * We're going to setup domain0 using the module(s) that we stashed safely
+-     * above our heap. The second module, if present, is an initrd ramdisk.
++     * Boot description not provided, check to see if there are any remaining
++     * boot modules, the first one found will be provided as the ramdisk.
+      */
+-    dom0 = create_dom0(boot_info);
++    if ( ! boot_info->builder->fdt_enabled )
++    {
++        initrdidx = bootmodule_next_idx_by_kind(boot_info, BOOTMOD_UNKNOWN, 0);
++        if ( initrdidx < boot_info->nr_mods )
++        {
++            boot_info->builder->domains[0].ramdisk = &boot_info->mods[initrdidx];
++            boot_info->mods[initrdidx].kind = BOOTMOD_RAMDISK;
++        }
++        if ( bootmodule_count_by_kind(boot_info, BOOTMOD_UNKNOWN) > 1 )
++            printk(XENLOG_WARNING
++                   "Multiple initrd candidates, picking module #%u\n",
++                   initrdidx);
++    }
 +
-+            kernel {
-+                compatible = "module,kernel","module,addr";
-                 module-addr = <0x0000ff00 0x80>;
-             };
--
--            module {
--                compatible = "module,ramdisk";
-+            initrd {
-+                compatible = "module,ramdisk","module,addr";
-                 module-addr = <0x0000ff00 0x80>;
-             };
--            module {
--                compatible = "module,config";
-+            dom-config {
-+                compatible = "module,config","module,addr";
-                 module-addr = <0x0000ff00 0x80>;
-             };
++    builder_create_domains(boot_info);
++
++    dom0 = builder_get_hwdom(boot_info);
+     if ( !dom0 )
+-        panic("Could not set up DOM0 guest OS\n");
++        panic("No hardware domain was built\n");
  
-         // Classic Dom0 definition
--        domain@0 {
-+        dom0 {
-             compatible = "xen,domain";
+     heap_init_late();
  
-             domid = <0>;
- 
--            // PERMISSION_NONE          (0)
--            // PERMISSION_CONTROL       (1 << 0)
--            // PERMISSION_HARDWARE      (1 << 1)
-             permissions = <3>;
--
--            // FUNCTION_NONE            (0)
--            // FUNCTION_BOOT            (1 << 0)
--            // FUNCTION_CRASH           (1 << 1)
--            // FUNCTION_CONSOLE         (1 << 2)
--            // FUNCTION_XENSTORE        (1 << 30)
--            // FUNCTION_LEGACY_DOM0     (1 << 31)
-             functions = <0xC0000006>;
--
--            // MODE_PARAVIRTUALIZED     (1 << 0) /* PV | PVH/HVM */
--            // MODE_ENABLE_DEVICE_MODEL (1 << 1) /* HVM | PVH */
--            // MODE_LONG                (1 << 2) /* 64 BIT | 32 BIT */
-             mode = <5>; /* 64 BIT, PV */
- 
--            // UUID
-             domain-uuid = [B3 FB 98 FB 8F 9F 67 A3];
- 
-             cpus = <1>;
-             memory = <0x0 0x20000>;
--            security-id = “dom0_t”;
-+            security-id = “system_u:system_r:dom0_t”;
- 
--            module {
--                compatible = "module,kernel";
-+            kernel {
-+                compatible = "module,kernel","module,addr";
-                 module-addr = <0x0000ff00 0x80>;
-                 bootargs = "console=hvc0";
-             };
--            module {
--                compatible = "module,ramdisk";
-+            intird {
-+                compatible = "module,ramdisk","module,addr";
-                 module-addr = <0x0000ff00 0x80>;
-             };
-     };
-@@ -240,104 +456,3 @@ provided to Xen using the standard method currently in use. The remaining
- modules would need to be loaded in the respective addresses specified in the
- `module-addr` property.
- 
--
--The Hypervisor node
---------------------
--
--The hypervisor node is a top level container for the domains that will be built
--by hypervisor on start up. On the ``hypervisor`` node the ``compatible``
--property is used to identify the type of hypervisor node present..
--
--compatible
--  Identifies the type of node. Required.
--
--The Config node
-----------------
--
--A config node is for detailing any modules that are of interest to Xen itself.
--For example this would be where Xen would be informed of microcode or XSM
--policy locations. If the modules are multiboot modules and are able to be
--located by index within the module chain, the ``mb-index`` property should be
--used to specify the index in the multiboot module chain.. If the module will be
--located by physical memory address, then the ``module-addr`` property should be
--used to identify the location and size of the module.
--
--compatible
--  Identifies the type of node. Required.
--
--The Domain node
-----------------
--
--A domain node is for describing the construction of a domain. It may provide a
--domid property which will be used as the requested domain id for the domain
--with a value of “0” signifying to use the next available domain id, which is
--the default behavior if omitted. A domain configuration is not able to request
--a domid of “0”. After that a domain node may have any of the following
--parameters,
--
--compatible
--  Identifies the type of node. Required.
--
--domid
--  Identifies the domid requested to assign to the domain. Required.
--
--permissions
--  This sets what Discretionary Access Control permissions
--  a domain is assigned. Optional, default is none.
--
--functions
--  This identifies what system functions a domain will fulfill.
--  Optional, the default is none.
--
--.. note::  The `functions` bits that have been selected to indicate
--   ``FUNCTION_XENSTORE`` and ``FUNCTION_LEGACY_DOM0`` are the last two bits
--   (30, 31) such that should these features ever be fully retired, the flags may
--   be dropped without leaving a gap in the flag set.
--
--mode
--  The mode the domain will be executed under. Required.
--
--domain-uuid
--  A globally unique identifier for the domain. Optional,
--  the default is NULL.
--
--cpus
--  The number of vCPUs to be assigned to the domain. Optional,
--  the default is “1”.
--
--memory
--  The amount of memory to assign to the domain, in KBs.
--  Required.
--
--security-id
--  The security identity to be assigned to the domain when XSM
--  is the access control mechanism being used. Optional,
--  the default is “domu_t”.
--
--The Module node
-----------------
--
--This node describes a boot module loaded by the boot loader. The required
--compatible property follows the format: module,<type> where type can be
--“kernel”, “ramdisk”, “device-tree”, “microcode”, “xsm-policy” or “config”. In
--the case the module is a multiboot module, the additional property string
--“multiboot,module” may be present. One of two properties is required and
--identifies how to locate the module. They are the mb-index, used for multiboot
--modules, and the module-addr for memory address based location.
--
--compatible
--  This identifies what the module is and thus what the hypervisor
--  should use the module for during domain construction. Required.
--
--mb-index
--  This identifies the index for this module in the multiboot module chain.
--  Required for multiboot environments.
--
--module-addr
--  This identifies where in memory this module is located. Required for
--  non-multiboot environments.
--
--bootargs
--  This is used to provide the boot params to kernel modules.
--
--.. note::  The bootargs property is intended for situations where the same kernel multiboot module is used for more than one domain.
 -- 
 2.20.1
 
