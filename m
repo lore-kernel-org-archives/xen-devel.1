@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1377BC43334
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:05:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362516.592553 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9588AC43334
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:05:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362522.592575 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CCw-0003Hs-B8; Wed, 06 Jul 2022 21:05:14 +0000
+	id 1o9CDR-0004EL-TG; Wed, 06 Jul 2022 21:05:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362516.592553; Wed, 06 Jul 2022 21:05:14 +0000
+Received: by outflank-mailman (output) from mailman id 362522.592575; Wed, 06 Jul 2022 21:05:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CCw-0003Hl-8I; Wed, 06 Jul 2022 21:05:14 +0000
-Received: by outflank-mailman (input) for mailman id 362516;
- Wed, 06 Jul 2022 21:05:12 +0000
+	id 1o9CDR-0004EE-PN; Wed, 06 Jul 2022 21:05:45 +0000
+Received: by outflank-mailman (input) for mailman id 362522;
+ Wed, 06 Jul 2022 21:05:45 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJEZ=XL=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1o9CCu-0003HV-5d
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:05:12 +0000
+ id 1o9CDQ-0003HV-Ux
+ for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:05:45 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
  [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 50096e6b-fd6f-11ec-924f-1f966e50362f;
- Wed, 06 Jul 2022 23:05:09 +0200 (CEST)
+ id 6569030e-fd6f-11ec-924f-1f966e50362f;
+ Wed, 06 Jul 2022 23:05:44 +0200 (CEST)
 Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1657141502311577.7833419610672;
- Wed, 6 Jul 2022 14:05:02 -0700 (PDT)
+ with SMTPS id 1657141505647707.2048656643256;
+ Wed, 6 Jul 2022 14:05:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,156 +42,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 50096e6b-fd6f-11ec-924f-1f966e50362f
-ARC-Seal: i=1; a=rsa-sha256; t=1657141504; cv=none; 
+X-Inumbo-ID: 6569030e-fd6f-11ec-924f-1f966e50362f
+ARC-Seal: i=1; a=rsa-sha256; t=1657141507; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=kyW+l8tpmRu4KURI7nguDCk1XU6ruJVxwuNPOeI/B+gCqnkW/GiJTvQX8GSXd4WAEA4oJPjiKC0gD06SBD9qTHai6fHj8l34A6Hv/EZ1xmYtfs0+0LWFERFtMTTldceRYQixHfTDbdwXDxq6WWNFdifVa+366NJKL0beP7AemLk=
+	b=F53S/fI0beguCKqm60AlEo0l4La9lTDv2Z7hwppp/9JlW0psYjuMVI0JmH4kZ7D9k6SngKWBHKNlTysjOK4KKdVAzHrLdvM10X44uJnj+gmSTx0+6DpA/Tgov94a+pEBYWiRahgXLUWzQXZIAVRxda/LAnACOEl/CXKLg+4BgRU=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1657141504; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:MIME-Version:Message-ID:Subject:To; 
-	bh=nTRkkvW+5JHPNvq9pdfiGGHPPr03Uu0sr0CrPi6JF7M=; 
-	b=K9a1cZ5KGyN5DnbS7w+VuzBqzxZHC2FHO2VDwVYmFPSubUxn/lAmc9nHmAF4fddPayVCZhpy6yOsqEOZ5SvL4jfvmYUTULRmF3F56+bqUh+3fimdPx/Ej+YkO10djHt2fP8s7GsTJcL5/R31/lsSVgnVU/ypYnpBgz7cZNDQQOg=
+	t=1657141507; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=l2m2wX7dK/BSzsuu2D0GCQSog1dryKjASVBBBj6qczc=; 
+	b=d+iNWiPGJvePrA882j0GnmZRKYwp7SDM2Da0ONiwyrk6IqSjb2Dtw1JKuV1dz3d7KCiEXj7c6BDCl8TRG75msUAbyX3TEN2WPvPUEyoGoAcVCazhQFrPjDRq6KXH2JFbtbJvMAFfUaFCHsslpVTe1rlZ2/o8vm60SrWzgwkYRXE=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141504;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141507;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:Reply-To;
-	bh=nTRkkvW+5JHPNvq9pdfiGGHPPr03Uu0sr0CrPi6JF7M=;
-	b=cr8yHJ0R4w31Lljh61DPi2DMAYp8maiL4tr/1kDp8EFfN5YaGgTWLgqSwFpDdO5Z
-	U8D5xFhZkEFw2rQux2xmf7HIfKicI9a8VtYhoFwUy2C/DR6OGYJPCxQbvS6RTu7F3XM
-	NGe0EHyHhDehDYekByjQKiINFxWBgnCnkUUxyQmE=
+	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding:Reply-To;
+	bh=l2m2wX7dK/BSzsuu2D0GCQSog1dryKjASVBBBj6qczc=;
+	b=jZ3HDRBPmvgVEqQvaScvN6a7x+QzCI/HJxuq+G73s//FuigK1Kbkxg8aZApKRXPj
+	BNUgBu1PTyrJT02m9fLWYAKzGQaGDLPpB9+5WLIxOIKskirDq4l+geAIgG8ibjTKIky
+	3h331NjICkt+HVEOcDtZe6s7uq/+nBKzXJQXDkdM=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org,
+	Wei Liu <wl@xen.org>
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	scott.davis@starlab.io,
-	christopher.clark@starlab.io
-Subject: [PATCH v1 00/18] Hyperlaunch
-Date: Wed,  6 Jul 2022 17:04:35 -0400
-Message-Id: <20220706210454.30096-1-dpsmith@apertussolutions.com>
+	christopher.clark@starlab.io,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v1 02/18] introduction of generalized boot info
+Date: Wed,  6 Jul 2022 17:04:37 -0400
+Message-Id: <20220706210454.30096-3-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20220706210454.30096-1-dpsmith@apertussolutions.com>
+References: <20220706210454.30096-1-dpsmith@apertussolutions.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This work being submitted in this series was made possible with a great thanks
-to Star Lab Cop ration and their generous funding of this project.
+The x86 and Arm architectures represent in memory the general boot information
+and boot modules differently despite having commonality. The x86
+representations are bound to the multiboot v1 structures while the Arm
+representations are a slightly generalized meta-data container for the boot
+material. The multiboot structure does not lend itself well to being expanded
+to accommodate additional metadata, both general and boot module specific. The
+Arm structures are not bound to an external specification and thus are able to
+be expanded for solutions such as dom0less.
 
-The patch series is based on the existing xsm series for starting the idle
-domain privileged. After that, the first four commits were previously submitted
-as an RFC and expanded by an additional commit to refactor xen commandline
-handling. The remaining preliminary patches are FDT refactoring and a doc
-update. From there is where the series begins to  morph x86 arch to support
-building multiple domains at boot.
+This commit introduces a set of structures patterned off the Arm structures to
+represent the boot information in a manner that captures common data. The
+structures provide an arch field to allow arch specific expansions to the
+structures. The intended goal of these new common structures is to enable
+commonality between the different architectures.  Specifically to enable
+dom0less and hyperlaunch to have a common representation of boot-time
+constructed domains.
 
-This series has been fairly well tested using qemu with a multiboot1 bootoader
-and under EFI + GRUB multiboot2 boot. While there are likely some rough spots
-remaining in the series, it is at a point now where the series should be reviewed,
-exercised, and tested for consideration into tree.
-
-Information, including docuemntation, meeting minutes, presentations, and past
-series postings can be found on the Xen wiki:
-
-https://wiki.xenproject.org/wiki/Hyperlaunch
-
-Daniel P. Smith (18):
-  kconfig: allow configuration of maximum modules
-  introduction of generalized boot info
-  x86: adopt new boot info structures
-  x86: refactor entrypoints to new boot info
-  x86: refactor xen cmdline into general framework
-  fdt: make fdt handling reusable across arch
-  docs: update hyperlaunch device tree documentation
-  kconfig: introduce domain builder config option
-  x86: introduce abstractions for domain builder
-  x86: introduce the domain builder
-  x86: initial conversion to domain builder
-  x86: convert dom0 creation to domain builder
-  x86: generalize physmap logic
-  x86: generalize vcpu for domain building
-  x86: rework domain page allocation
-  x86: add pv multidomain construction
-  builder: introduce domain builder hypfs tree
-  tools: introduce example late pv helper
-
- .gitignore                                    |   1 +
- .../designs/launch/hyperlaunch-devicetree.rst | 497 +++++++++++-------
- tools/helpers/Makefile                        |  11 +
- tools/helpers/builder-hypfs.c                 | 253 +++++++++
- tools/helpers/hypfs-helpers.h                 |   9 +
- tools/helpers/late-init-pv.c                  | 287 ++++++++++
- tools/helpers/late-init-pv.h                  |  29 +
- tools/helpers/xs-helpers.c                    | 117 +++++
- tools/helpers/xs-helpers.h                    |  27 +
- xen/arch/Kconfig                              |  12 +
- xen/arch/arm/bootfdt.c                        | 115 +---
- xen/arch/arm/include/asm/setup.h              |   5 +-
- xen/arch/x86/Makefile                         |   1 +
- xen/arch/x86/boot/boot_info32.h               |  97 ++++
- xen/arch/x86/boot/defs.h                      |  17 +-
- xen/arch/x86/boot/reloc.c                     | 187 +++++--
- xen/arch/x86/bzimage.c                        |  18 +-
- xen/arch/x86/cpu/microcode/core.c             | 133 +++--
- xen/arch/x86/dom0_build.c                     | 129 +----
- xen/arch/x86/domain_builder.c                 | 284 ++++++++++
- xen/arch/x86/efi/efi-boot.h                   |  96 ++--
- xen/arch/x86/guest/xen/pvh-boot.c             |  64 ++-
- xen/arch/x86/hvm/dom0_build.c                 |  62 +--
- xen/arch/x86/include/asm/bootdomain.h         |  30 ++
- xen/arch/x86/include/asm/bootinfo.h           |  99 ++++
- xen/arch/x86/include/asm/bzimage.h            |   5 +-
- xen/arch/x86/include/asm/dom0_build.h         |  27 +-
- xen/arch/x86/include/asm/guest/pvh-boot.h     |   6 +-
- xen/arch/x86/include/asm/setup.h              |  18 +-
- xen/arch/x86/pv/Makefile                      |   2 +-
- .../x86/pv/{dom0_build.c => domain_builder.c} | 141 ++---
- xen/arch/x86/pv/shim.c                        |   4 +-
- xen/arch/x86/setup.c                          | 392 ++++++--------
- xen/common/Kconfig                            |   5 +
- xen/common/Makefile                           |   4 +-
- xen/common/domain-builder/Kconfig             |  36 ++
- xen/common/domain-builder/Makefile            |   3 +
- xen/common/domain-builder/core.c              | 207 ++++++++
- xen/common/domain-builder/fdt.c               | 295 +++++++++++
- xen/common/domain-builder/fdt.h               |   7 +
- xen/common/domain-builder/hypfs.c             | 193 +++++++
- xen/common/efi/boot.c                         |   4 +-
- xen/common/fdt.c                              | 131 +++++
- xen/common/sched/core.c                       |  25 +-
- xen/include/xen/bootdomain.h                  |  58 ++
- xen/include/xen/bootinfo.h                    | 132 +++++
- xen/include/xen/device_tree.h                 |  50 +-
- xen/include/xen/domain_builder.h              |  88 ++++
- xen/include/xen/fdt.h                         |  79 +++
- xen/include/xen/sched.h                       |   3 +-
- xen/include/xsm/xsm.h                         |  26 +-
- xen/xsm/xsm_core.c                            |  43 +-
- xen/xsm/xsm_policy.c                          |  56 +-
- 53 files changed, 3544 insertions(+), 1076 deletions(-)
- create mode 100644 tools/helpers/builder-hypfs.c
- create mode 100644 tools/helpers/hypfs-helpers.h
- create mode 100644 tools/helpers/late-init-pv.c
- create mode 100644 tools/helpers/late-init-pv.h
- create mode 100644 tools/helpers/xs-helpers.c
- create mode 100644 tools/helpers/xs-helpers.h
- create mode 100644 xen/arch/x86/boot/boot_info32.h
- create mode 100644 xen/arch/x86/domain_builder.c
- create mode 100644 xen/arch/x86/include/asm/bootdomain.h
+Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+Reviewed-by: Christopher Clark <christopher.clark@starlab.io>
+---
+ xen/arch/x86/include/asm/bootinfo.h | 48 +++++++++++++++++++++++++
+ xen/include/xen/bootinfo.h          | 54 +++++++++++++++++++++++++++++
+ 2 files changed, 102 insertions(+)
  create mode 100644 xen/arch/x86/include/asm/bootinfo.h
- rename xen/arch/x86/pv/{dom0_build.c => domain_builder.c} (88%)
- create mode 100644 xen/common/domain-builder/Kconfig
- create mode 100644 xen/common/domain-builder/Makefile
- create mode 100644 xen/common/domain-builder/core.c
- create mode 100644 xen/common/domain-builder/fdt.c
- create mode 100644 xen/common/domain-builder/fdt.h
- create mode 100644 xen/common/domain-builder/hypfs.c
- create mode 100644 xen/common/fdt.c
- create mode 100644 xen/include/xen/bootdomain.h
  create mode 100644 xen/include/xen/bootinfo.h
- create mode 100644 xen/include/xen/domain_builder.h
- create mode 100644 xen/include/xen/fdt.h
 
+diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
+new file mode 100644
+index 0000000000..b0754a3ed0
+--- /dev/null
++++ b/xen/arch/x86/include/asm/bootinfo.h
+@@ -0,0 +1,48 @@
++#ifndef __ARCH_X86_BOOTINFO_H__
++#define __ARCH_X86_BOOTINFO_H__
++
++/* unused for x86 */
++struct arch_bootstring { };
++
++struct __packed arch_bootmodule {
++#define BOOTMOD_FLAG_X86_RELOCATED      1U << 0
++    uint32_t flags;
++    uint32_t headroom;
++};
++
++struct __packed arch_boot_info {
++    uint32_t flags;
++#define BOOTINFO_FLAG_X86_MEMLIMITS  	1U << 0
++#define BOOTINFO_FLAG_X86_BOOTDEV    	1U << 1
++#define BOOTINFO_FLAG_X86_CMDLINE    	1U << 2
++#define BOOTINFO_FLAG_X86_MODULES    	1U << 3
++#define BOOTINFO_FLAG_X86_AOUT_SYMS  	1U << 4
++#define BOOTINFO_FLAG_X86_ELF_SYMS   	1U << 5
++#define BOOTINFO_FLAG_X86_MEMMAP     	1U << 6
++#define BOOTINFO_FLAG_X86_DRIVES     	1U << 7
++#define BOOTINFO_FLAG_X86_BIOSCONFIG 	1U << 8
++#define BOOTINFO_FLAG_X86_LOADERNAME 	1U << 9
++#define BOOTINFO_FLAG_X86_APM        	1U << 10
++
++    bool xen_guest;
++
++    char *boot_loader_name;
++    char *kextra;
++
++    uint32_t mem_lower;
++    uint32_t mem_upper;
++
++    uint32_t mmap_length;
++    paddr_t mmap_addr;
++};
++
++struct __packed mb_memmap {
++    uint32_t size;
++    uint32_t base_addr_low;
++    uint32_t base_addr_high;
++    uint32_t length_low;
++    uint32_t length_high;
++    uint32_t type;
++};
++
++#endif
+diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
+new file mode 100644
+index 0000000000..42b53a3ca6
+--- /dev/null
++++ b/xen/include/xen/bootinfo.h
+@@ -0,0 +1,54 @@
++#ifndef __XEN_BOOTINFO_H__
++#define __XEN_BOOTINFO_H__
++
++#include <xen/mm.h>
++#include <xen/types.h>
++
++#include <asm/bootinfo.h>
++
++typedef enum {
++    BOOTMOD_UNKNOWN,
++    BOOTMOD_XEN,
++    BOOTMOD_FDT,
++    BOOTMOD_KERNEL,
++    BOOTMOD_RAMDISK,
++    BOOTMOD_XSM,
++    BOOTMOD_UCODE,
++    BOOTMOD_GUEST_DTB,
++}  bootmodule_kind;
++
++typedef enum {
++    BOOTSTR_EMPTY,
++    BOOTSTR_STRING,
++    BOOTSTR_CMDLINE,
++} bootstring_kind;
++
++#define BOOTMOD_MAX_STRING 1024
++struct __packed boot_string {
++    bootstring_kind kind;
++    struct arch_bootstring *arch;
++
++    char bytes[BOOTMOD_MAX_STRING];
++    size_t len;
++};
++
++struct __packed boot_module {
++    bootmodule_kind kind;
++    paddr_t start;
++    mfn_t mfn;
++    size_t size;
++
++    struct arch_bootmodule *arch;
++    struct boot_string string;
++};
++
++struct __packed boot_info {
++    char *cmdline;
++
++    uint32_t nr_mods;
++    struct boot_module *mods;
++
++    struct arch_boot_info *arch;
++};
++
++#endif
 -- 
 2.20.1
 
