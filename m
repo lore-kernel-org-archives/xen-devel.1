@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37AE3C433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:18:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362584.592695 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 029D6C43334
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:18:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362587.592707 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CPV-00047x-4f; Wed, 06 Jul 2022 21:18:13 +0000
+	id 1o9CPh-0004Uf-DP; Wed, 06 Jul 2022 21:18:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362584.592695; Wed, 06 Jul 2022 21:18:13 +0000
+Received: by outflank-mailman (output) from mailman id 362587.592707; Wed, 06 Jul 2022 21:18:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CPV-00047q-1w; Wed, 06 Jul 2022 21:18:13 +0000
-Received: by outflank-mailman (input) for mailman id 362584;
- Wed, 06 Jul 2022 21:18:11 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o9CPh-0004UY-9X; Wed, 06 Jul 2022 21:18:25 +0000
+Received: by outflank-mailman (input) for mailman id 362587;
+ Wed, 06 Jul 2022 21:18:24 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJEZ=XL=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1o9CGd-0007yd-8I
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:09:03 +0000
+ id 1o9CH2-0003HV-NY
+ for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:09:28 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id db23b078-fd6f-11ec-bd2d-47488cf2e6aa;
- Wed, 06 Jul 2022 23:09:01 +0200 (CEST)
+ [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id ea5ee30e-fd6f-11ec-924f-1f966e50362f;
+ Wed, 06 Jul 2022 23:09:27 +0200 (CEST)
 Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1657141527503522.1572181705782;
- Wed, 6 Jul 2022 14:05:27 -0700 (PDT)
+ with SMTPS id 1657141530530395.5815075032556;
+ Wed, 6 Jul 2022 14:05:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,40 +42,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: db23b078-fd6f-11ec-bd2d-47488cf2e6aa
-ARC-Seal: i=1; a=rsa-sha256; t=1657141528; cv=none; 
+X-Inumbo-ID: ea5ee30e-fd6f-11ec-924f-1f966e50362f
+ARC-Seal: i=1; a=rsa-sha256; t=1657141532; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=gyMMf/zIGC9Fq0T/pchioGdYxETpEQ8ygFPgLloVVR0kmUPJl4bGNK733wllR1bzvUqrPOByzdvNe0DwmtEpNORy779oUDrojao7j6eMLlhfERlOZ21kmzvVAEJZTQAF2/A9bS7QDkehJ6T8voTCf1WySFOL3X0cCPVJ9+p8MZM=
+	b=S4Pd5Ua+YLIwBW93VjYZA95MP8py3To/IxTEvHAqYduNamfMq2orRibCfrPlbw4e0W5SbEcQjzJNHoO8adi04PODNP7v1xVl6Ge3ZxKm+WoV+YjmcdBjKq7Gs02QsPSrOEg4soztxITQkF2b1tdvUdz1G50FPFgtd2bd6aLeYo8=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1657141528; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=wO71seG+2JNeV652NZFdlSDXjvFFYd1IqGaFh2WZtlI=; 
-	b=VI5MXUQS/c+tlvAWLP9HWBYIaRff7f2hWCsV+c1f2rOSeQFywFoy0kLC8FuLSl07f/B0x7kVktXfUPSVrlX9RlLFsQK2YGwWjS6zuPC9npOMsS4AkcuRUtGZhn7B3X00wJF/cG1602PQFCGzGnJdWQO1QI78LjbKCFYrv+K9jn4=
+	t=1657141532; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=TzFqy4EBOd/GMNv9mujkd/fHHyBVp+g+FM7/J81/w1g=; 
+	b=OnuQQ+lSE0NsCnvaZf7N5Oy4t7uo60pBy6j7JWFFJAUU2ZRoTtzvxJHk3hkBUPH9SyfpnoSBA86fsYVAfu45QgGpiUWn7FkmsJCQBbHlGYPOkDHQN1BG8qhwOx4pHLFVlmY1aEWpToFmcpomKZEjPeVf8y5H9P+PTwzgx5aFo0k=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141528;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141532;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=wO71seG+2JNeV652NZFdlSDXjvFFYd1IqGaFh2WZtlI=;
-	b=I0y8K00pZ6ObMS2+85N1SZsq8Mekv/hZPJ2S606KXO/zt/f9QcXMKFwry/zwVMa1
-	55PkRhPS+rMlky8qIZaAvkfIkc7/nNh5sXvpCN3Ppi4LJjyqp8GlvTD3Ey6ixXYlidp
-	pf2tKFSL+39oAY2iJsR9vy5dU+3KQWbAkV1DnVOM=
+	bh=TzFqy4EBOd/GMNv9mujkd/fHHyBVp+g+FM7/J81/w1g=;
+	b=VAT6AYQwoX3OC7hTtJyOksAXMnty1p42z36rkGo+COOWjf0qxxKa4yhRTWg51dnl
+	DHjvb7Y0BR1DgJjTt9EaYI5B/oD2kEBacJGpeB7jlz6VxSAiAYWkzBkVod9i/Z/ojsJ
+	Lcu4E9lvYH6WH+L1shVEAjQ8RUHBT1v40cCqBzE0=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org,
-	Wei Liu <wl@xen.org>
+To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	scott.davis@starlab.io,
 	christopher.clark@starlab.io,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 16/18] x86: add pv multidomain construction
-Date: Wed,  6 Jul 2022 17:04:51 -0400
-Message-Id: <20220706210454.30096-17-dpsmith@apertussolutions.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>,
+	Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v1 18/18] tools: introduce example late pv helper
+Date: Wed,  6 Jul 2022 17:04:53 -0400
+Message-Id: <20220706210454.30096-19-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220706210454.30096-1-dpsmith@apertussolutions.com>
 References: <20220706210454.30096-1-dpsmith@apertussolutions.com>
@@ -83,695 +83,834 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This adds the ability to domain builder for the construction of multiple pv
-domains at boot.
+The late pv helper is an example helper tool for late setup of Xenstore for a
+domain that was created by the hypervisor using hyperlaunch.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-Reviewed-by: Christopher Clark <christopher.clark@starlab.io>
+Reviewed-by: Christopher Clark christopher.clark@starlab.io
 ---
- xen/arch/x86/dom0_build.c                     |  31 -----
- xen/arch/x86/domain_builder.c                 |  58 ++++++--
- xen/arch/x86/include/asm/dom0_build.h         |   2 -
- xen/arch/x86/include/asm/setup.h              |   2 +
- xen/arch/x86/pv/Makefile                      |   2 +-
- .../x86/pv/{dom0_build.c => domain_builder.c} |  86 +++++++-----
- xen/common/domain-builder/Kconfig             |  10 ++
- xen/common/domain-builder/core.c              | 130 ++++++++++++++++--
- xen/include/xen/bootdomain.h                  |   6 +
- xen/include/xen/domain_builder.h              |  19 +++
- 10 files changed, 259 insertions(+), 87 deletions(-)
- rename xen/arch/x86/pv/{dom0_build.c => domain_builder.c} (92%)
+ .gitignore                    |   1 +
+ tools/helpers/Makefile        |  11 ++
+ tools/helpers/builder-hypfs.c | 253 ++++++++++++++++++++++++++++++
+ tools/helpers/hypfs-helpers.h |   9 ++
+ tools/helpers/late-init-pv.c  | 287 ++++++++++++++++++++++++++++++++++
+ tools/helpers/late-init-pv.h  |  29 ++++
+ tools/helpers/xs-helpers.c    | 117 ++++++++++++++
+ tools/helpers/xs-helpers.h    |  27 ++++
+ 8 files changed, 734 insertions(+)
+ create mode 100644 tools/helpers/builder-hypfs.c
+ create mode 100644 tools/helpers/hypfs-helpers.h
+ create mode 100644 tools/helpers/late-init-pv.c
+ create mode 100644 tools/helpers/late-init-pv.h
+ create mode 100644 tools/helpers/xs-helpers.c
+ create mode 100644 tools/helpers/xs-helpers.h
 
-diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
-index 0600773b8f..85a10f63aa 100644
---- a/xen/arch/x86/dom0_build.c
-+++ b/xen/arch/x86/dom0_build.c
-@@ -524,37 +524,6 @@ int __init dom0_setup_permissions(struct domain *d)
+diff --git a/.gitignore b/.gitignore
+index 18ef56a780..0e5d5ceaab 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -206,6 +206,7 @@ tools/fuzz/x86_instruction_emulator/x86_emulate
+ tools/fuzz/x86_instruction_emulator/x86-emulate.[ch]
+ tools/helpers/init-xenstore-domain
+ tools/helpers/xen-init-dom0
++tools/helpers/late-init-pv
+ tools/hotplug/common/hotplugpath.sh
+ tools/hotplug/FreeBSD/rc.d/xencommons
+ tools/hotplug/FreeBSD/rc.d/xendriverdomain
+diff --git a/tools/helpers/Makefile b/tools/helpers/Makefile
+index 8d78ab1e90..c32481202d 100644
+--- a/tools/helpers/Makefile
++++ b/tools/helpers/Makefile
+@@ -14,6 +14,7 @@ ifeq ($(CONFIG_ARM),y)
+ PROGS += init-dom0less
+ endif
+ endif
++PROGS += late-init-pv
  
-     return rc;
- }
--
--int __init construct_domain(struct boot_domain *bd)
--{
--    int rc = 0;
--
--    /* Sanity! */
--    BUG_ON(!pv_shim && bd->domid != 0);
--    BUG_ON(bd->domain->vcpu[0] == NULL);
--    BUG_ON(bd->domain->vcpu[0]->is_initialised);
--
--    process_pending_softirqs();
--
--    if ( builder_is_initdom(bd) )
--    {
--        if ( is_hvm_domain(bd->domain) )
--            rc = dom0_construct_pvh(bd);
--        else if ( is_pv_domain(bd->domain) )
--            rc = dom0_construct_pv(bd);
--        else
--            panic("Cannot construct Dom0. No guest interface available\n");
--    }
--
--    if ( rc )
--        return rc;
--
--    /* Sanity! */
--    BUG_ON(!bd->domain->vcpu[0]->is_initialised);
--
--    return 0;
--}
--
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/domain_builder.c b/xen/arch/x86/domain_builder.c
-index d8babb1090..94f3ff4d5a 100644
---- a/xen/arch/x86/domain_builder.c
-+++ b/xen/arch/x86/domain_builder.c
-@@ -6,6 +6,7 @@
- #include <xen/grant_table.h>
- #include <xen/iommu.h>
- #include <xen/sched.h>
-+#include <xen/softirq.h>
+ XEN_INIT_DOM0_OBJS = xen-init-dom0.o init-dom-json.o
+ $(XEN_INIT_DOM0_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
+@@ -36,6 +37,13 @@ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenlight)
+ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
+ $(INIT_DOM0LESS_OBJS): CFLAGS += $(CFLAGS_libxenevtchn)
  
- #include <asm/pv/shim.h>
- #include <asm/dom0_build.h>
-@@ -189,18 +190,22 @@ void __init arch_create_dom(
-     if ( !pv_shim && builder_is_ctldom(bd) )
-         is_privileged = CDF_privileged;
- 
--    /* Create initial domain.  Not d0 for pvshim. */
--    bd->domid = get_initial_domain_id();
-+    /* Determine proper domain id. */
-+    if ( builder_is_initdom(bd) )
-+        bd->domid = get_initial_domain_id();
-+    else
-+        bd->domid = bd->domid ? bd->domid : get_next_domid();
-     bd->domain = domain_create(bd->domid, &dom_cfg, is_privileged);
-     if ( IS_ERR(bd->domain) )
-         panic("Error creating d%u: %ld\n", bd->domid, PTR_ERR(bd->domain));
- 
--    init_dom0_cpuid_policy(bd->domain);
-+    if ( builder_is_initdom(bd) )
-+        init_dom0_cpuid_policy(bd->domain);
- 
-     if ( alloc_dom_vcpu0(bd) == NULL )
-         panic("Error creating d%uv0\n", bd->domid);
- 
--    /* Grab the DOM0 command line. */
-+    /* Grab the command line. */
-     cmdline = (bd->kernel->string.kind == BOOTSTR_CMDLINE) ?
-               bd->kernel->string.bytes : NULL;
-     if ( cmdline || bi->arch->kextra )
-@@ -210,15 +215,23 @@ void __init arch_create_dom(
-         cmdline = arch_prepare_cmdline(cmdline, bi->arch);
-         strlcpy(dom_cmdline, cmdline, MAX_GUEST_CMDLINE);
- 
--        if ( bi->arch->kextra )
--            /* kextra always includes exactly one leading space. */
--            strlcat(dom_cmdline, bi->arch->kextra, MAX_GUEST_CMDLINE);
-+        if ( builder_is_initdom(bd) )
-+        {
-+            if ( bi->arch->kextra )
-+                /* kextra always includes exactly one leading space. */
-+                strlcat(dom_cmdline, bi->arch->kextra, MAX_GUEST_CMDLINE);
- 
--        apply_xen_cmdline(dom_cmdline);
-+            apply_xen_cmdline(dom_cmdline);
-+        }
- 
-         strlcpy(bd->kernel->string.bytes, dom_cmdline, MAX_GUEST_CMDLINE);
-     }
- 
-+    if ( alloc_system_evtchn(bi, bd) != 0 )
-+        printk(XENLOG_WARNING "%s: "
-+               "unable set up system event channels for Dom%d\n",
-+               __func__, bd->domid);
++LATE_INIT_PV_OBJS = late-init-pv.o builder-hypfs.o xs-helpers.o
++$(LATE_INIT_PV_OBJS): CFLAGS += $(CFLAGS_libxentoollog)
++$(LATE_INIT_PV_OBJS): CFLAGS += $(CFLAGS_libxenguest)
++$(LATE_INIT_PV_OBJS): CFLAGS += $(CFLAGS_libxenctrl)
++$(LATE_INIT_PV_OBJS): CFLAGS += $(CFLAGS_libxenhypfs)
++$(LATE_INIT_PV_OBJS): CFLAGS += $(CFLAGS_libxenstore)
 +
-     /*
-      * Temporarily clear SMAP in CR4 to allow user-accesses in construct_dom0().
-      * This saves a large number of corner cases interactions with
-@@ -240,3 +253,32 @@ void __init arch_create_dom(
-     }
- }
+ .PHONY: all
+ all: $(PROGS)
  
-+int __init construct_domain(struct boot_domain *bd)
+@@ -48,6 +56,9 @@ init-xenstore-domain: $(INIT_XENSTORE_DOMAIN_OBJS)
+ init-dom0less: $(INIT_DOM0LESS_OBJS)
+ 	$(CC) $(LDFLAGS) -o $@ $(INIT_DOM0LESS_OBJS) $(LDLIBS_libxenctrl) $(LDLIBS_libxenevtchn) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenlight) $(LDLIBS_libxenguest) $(LDLIBS_libxenforeignmemory) $(APPEND_LDFLAGS)
+ 
++late-init-pv: $(LATE_INIT_PV_OBJS)
++	$(CC) $(LDFLAGS) -o $@ $(LATE_INIT_PV_OBJS) $(LDLIBS_libxentoollog) $(LDLIBS_libxenstore) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenhypfs) $(APPEND_LDFLAGS)
++
+ .PHONY: install
+ install: all
+ 	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC_BIN)
+diff --git a/tools/helpers/builder-hypfs.c b/tools/helpers/builder-hypfs.c
+new file mode 100644
+index 0000000000..d123426cfa
+--- /dev/null
++++ b/tools/helpers/builder-hypfs.c
+@@ -0,0 +1,253 @@
++
++#include <errno.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <xenhypfs.h>
++
++#include "late-init-pv.h"
++
++/* general size for static path array */
++#define HYPFS_MAX_PATH 100
++
++bool has_builder_hypfs(xenhypfs_handle *hdl, uint32_t domid)
 +{
-+    int rc = 0;
++    struct xenhypfs_dirent *ent;
++    char path[HYPFS_MAX_PATH];
++    unsigned int n;
 +
-+    /* Sanity! */
-+    BUG_ON(bd->domid != bd->domain->domain_id);
-+    BUG_ON(bd->domain->vcpu[0] == NULL);
-+    BUG_ON(bd->domain->vcpu[0]->is_initialised);
++    snprintf(path, HYPFS_MAX_PATH, "/builder/%d", domid);
 +
-+    process_pending_softirqs();
-+
-+    if ( is_hvm_domain(bd->domain) )
-+        if ( builder_is_initdom(bd) )
-+            rc = dom0_construct_pvh(bd);
-+        else
-+            panic("Cannot construct HVM DomU. Not supported.\n");
-+    else if ( is_pv_domain(bd->domain) )
-+            rc = dom_construct_pv(bd);
-+    else
-+        panic("Cannot construct Dom0. No guest interface available\n");
-+
-+    if ( rc )
-+        return rc;
-+
-+    /* Sanity! */
-+    BUG_ON(!bd->domain->vcpu[0]->is_initialised);
-+
-+    return 0;
-+}
-diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
-index 6c26ab0878..3624a57641 100644
---- a/xen/arch/x86/include/asm/dom0_build.h
-+++ b/xen/arch/x86/include/asm/dom0_build.h
-@@ -22,8 +22,6 @@ unsigned long dom_compute_nr_pages(
- 
- int dom0_setup_permissions(struct domain *d);
- 
--int dom0_construct_pv(struct boot_domain *bd);
--
- int dom0_construct_pvh(struct boot_domain *bd);
- 
- unsigned long dom0_paging_pages(const struct domain *d,
-diff --git a/xen/arch/x86/include/asm/setup.h b/xen/arch/x86/include/asm/setup.h
-index 6f53623fb3..328f9a8611 100644
---- a/xen/arch/x86/include/asm/setup.h
-+++ b/xen/arch/x86/include/asm/setup.h
-@@ -36,6 +36,8 @@ static inline void vesa_init(void) {};
- void apply_xen_cmdline(char *cmdline);
- int construct_domain(struct boot_domain *bd);
- 
-+int dom_construct_pv(struct boot_domain *bd);
-+
- void setup_io_bitmap(struct domain *d);
- 
- unsigned long initial_images_nrpages(nodeid_t node);
-diff --git a/xen/arch/x86/pv/Makefile b/xen/arch/x86/pv/Makefile
-index 6cda354cc4..d06a3c1de1 100644
---- a/xen/arch/x86/pv/Makefile
-+++ b/xen/arch/x86/pv/Makefile
-@@ -15,5 +15,5 @@ obj-$(CONFIG_PV_SHIM) += shim.o
- obj-$(CONFIG_TRACEBUFFER) += trace.o
- obj-y += traps.o
- 
--obj-bin-y += dom0_build.init.o
-+obj-bin-y += domain_builder.init.o
- obj-bin-y += gpr_switch.o
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/domain_builder.c
-similarity index 92%
-rename from xen/arch/x86/pv/dom0_build.c
-rename to xen/arch/x86/pv/domain_builder.c
-index ff5c93fa14..2ecf1b0ae3 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/domain_builder.c
-@@ -1,5 +1,5 @@
- /******************************************************************************
-- * pv/dom0_build.c
-+ * pv/domain_builder.c
-  *
-  * Copyright (c) 2002-2005, K A Fraser
-  */
-@@ -8,6 +8,7 @@
- #include <xen/bootinfo.h>
- #include <xen/console.h>
- #include <xen/domain.h>
-+#include <xen/domain_builder.h>
- #include <xen/domain_page.h>
- #include <xen/init.h>
- #include <xen/libelf.h>
-@@ -296,7 +297,7 @@ static struct page_info * __init alloc_chunk(struct domain *d,
-     return page;
- }
- 
--int __init dom0_construct_pv(struct boot_domain *bd)
-+int __init dom_construct_pv(struct boot_domain *bd)
- {
-     int i, rc, order, machine;
-     bool compatible, compat;
-@@ -350,7 +351,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     /* Machine address of next candidate page-table page. */
-     paddr_t mpt_alloc;
- 
--    printk(XENLOG_INFO "*** Building a PV Dom%d ***\n", d->domain_id);
-+    printk(XENLOG_INFO "*** Constructing a PV Dom%d ***\n", d->domain_id);
- 
-     d->max_pages = ~0U;
- 
-@@ -362,7 +363,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     if ( (rc = elf_init(&elf, image_start, image_len)) != 0 )
-         return rc;
- 
--    if ( opt_dom0_verbose )
-+    if ( builder_is_ctldom(bd) && opt_dom0_verbose )
-         elf_set_verbose(&elf);
- 
-     elf_parse_binary(&elf);
-@@ -384,7 +385,8 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-         {
-             if ( unlikely(rc = switch_compat(d)) )
-             {
--                printk("Dom0 failed to switch to compat: %d\n", rc);
-+                printk("Dom%d failed to switch to compat: %d\n",
-+                        d->domain_id, rc);
-                 return rc;
-             }
- 
-@@ -404,22 +406,23 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     if ( elf_msb(&elf) )
-         compatible = false;
- 
--    printk(" Dom0 kernel: %s-bit%s, %s, paddr %#" PRIx64 " -> %#" PRIx64 "\n",
--           elf_64bit(&elf) ? "64" : elf_32bit(&elf) ? "32" : "??",
-+    printk(" Dom%d kernel: %s-bit%s, %s, paddr %#" PRIx64 " -> %#" PRIx64 "\n",
-+           d->domain_id, elf_64bit(&elf) ? "64" : elf_32bit(&elf) ? "32" : "??",
-            parms.pae       ? ", PAE" : "",
-            elf_msb(&elf)   ? "msb"   : "lsb",
-            elf.pstart, elf.pend);
-     if ( elf.bsd_symtab_pstart )
--        printk(" Dom0 symbol map %#" PRIx64 " -> %#" PRIx64 "\n",
--               elf.bsd_symtab_pstart, elf.bsd_symtab_pend);
-+        printk(" Dom%d symbol map %#" PRIx64 " -> %#" PRIx64 "\n",
-+               d->domain_id, elf.bsd_symtab_pstart, elf.bsd_symtab_pend);
- 
-     if ( !compatible )
-     {
--        printk("Mismatch between Xen and DOM0 kernel\n");
-+        printk("Mismatch between Xen and DOM%d kernel\n", d->domain_id);
-         return -EINVAL;
-     }
- 
--    if ( parms.elf_notes[XEN_ELFNOTE_SUPPORTED_FEATURES].type != XEN_ENT_NONE )
-+    if ( builder_is_initdom(bd) &&
-+         parms.elf_notes[XEN_ELFNOTE_SUPPORTED_FEATURES].type != XEN_ENT_NONE )
-     {
-         if ( !pv_shim && !test_bit(XENFEAT_dom0, parms.f_supported) )
-         {
-@@ -443,7 +446,8 @@ int __init dom0_construct_pv(struct boot_domain *bd)
- 
-             if ( value > __HYPERVISOR_COMPAT_VIRT_START )
-             {
--                printk("Dom0 expects too high a hypervisor start address\n");
-+                printk("Dom%d expects too high a hypervisor start address\n",
-+                       d->domain_id);
-                 return -ERANGE;
-             }
-             HYPERVISOR_COMPAT_VIRT_START(d) =
-@@ -487,7 +491,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     vstartinfo_start = round_pgup(vphysmap_end);
-     vstartinfo_end   = vstartinfo_start + sizeof(struct start_info);
- 
--    if ( pv_shim )
-+    if ( pv_shim || ! builder_is_initdom(bd) )
-     {
-         vxenstore_start  = round_pgup(vstartinfo_end);
-         vxenstore_end    = vxenstore_start + PAGE_SIZE;
-@@ -578,8 +582,8 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     }
- 
-     printk("PHYSICAL MEMORY ARRANGEMENT:\n"
--           " Dom0 alloc.:   %"PRIpaddr"->%"PRIpaddr,
--           pfn_to_paddr(alloc_spfn), pfn_to_paddr(alloc_epfn));
-+           " Dom%d alloc.:   %"PRIpaddr"->%"PRIpaddr,
-+           d->domain_id, pfn_to_paddr(alloc_spfn), pfn_to_paddr(alloc_epfn));
-     if ( domain_tot_pages(d) < nr_pages )
-         printk(" (%lu pages to be allocated)",
-                nr_pages - domain_tot_pages(d));
-@@ -596,7 +600,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-         printk(" Init. ramdisk: %p->%p\n", _p(vinitrd_start), _p(vinitrd_end));
-     printk(" Phys-Mach map: %p->%p\n", _p(vphysmap_start), _p(vphysmap_end));
-     printk(" Start info:    %p->%p\n", _p(vstartinfo_start), _p(vstartinfo_end));
--    if ( pv_shim )
-+    if ( pv_shim || ! builder_is_initdom(bd) )
-     {
-         printk(" Xenstore ring: %p->%p\n", _p(vxenstore_start), _p(vxenstore_end));
-         printk(" Console ring:  %p->%p\n", _p(vconsole_start), _p(vconsole_end));
-@@ -617,7 +621,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-          ? v_end > HYPERVISOR_COMPAT_VIRT_START(d)
-          : (v_start < HYPERVISOR_VIRT_END) && (v_end > HYPERVISOR_VIRT_START) )
-     {
--        printk("DOM0 image overlaps with Xen private area.\n");
-+        printk("DOM%d image overlaps with Xen private area.\n", d->domain_id);
-         return -EINVAL;
-     }
- 
-@@ -768,9 +772,6 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-         init_hypercall_page(d, _p(parms.virt_hypercall));
-     }
- 
--    /* Free temporary buffers. */
--    discard_initial_images();
--
-     /* Set up start info area. */
-     si = (start_info_t *)vstartinfo_start;
-     clear_page(si);
-@@ -778,7 +779,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
- 
-     si->shared_info = virt_to_maddr(d->shared_info);
- 
--    if ( !pv_shim )
-+    if ( !pv_shim && builder_is_ctldom(bd) )
-         si->flags    = SIF_PRIVILEGED | SIF_INITDOMAIN;
-     if ( !vinitrd_start && initrd_len )
-         si->flags   |= SIF_MOD_START_PFN;
-@@ -789,6 +790,19 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     snprintf(si->magic, sizeof(si->magic), "xen-3.0-x86_%d%s",
-              elf_64bit(&elf) ? 64 : 32, parms.pae ? "p" : "");
- 
-+    if ( !builder_is_initdom(bd) )
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if ( ent )
 +    {
-+        si->store_mfn = ((vxenstore_start - v_start) >> PAGE_SHIFT)
-+                        + alloc_spfn;
-+        bd->store.mfn = si->store_mfn;
-+        si->store_evtchn = bd->store.evtchn;
-+
-+        si->console.domU.mfn = ((vconsole_start - v_start) >> PAGE_SHIFT)
-+                               + alloc_spfn;
-+        bd->console.mfn = si->console.domU.mfn;
-+        si->console.domU.evtchn = bd->console.evtchn;
-+    }
-+
-     count = domain_tot_pages(d);
- 
-     /* Set up the phys->machine table if not part of the initial mapping. */
-@@ -871,23 +885,24 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-                 sizeof(si->cmd_line));
- 
- #ifdef CONFIG_VIDEO
--    if ( !pv_shim && fill_console_start_info((void *)(si + 1)) )
--    {
--        si->console.dom0.info_off  = sizeof(struct start_info);
--        si->console.dom0.info_size = sizeof(struct dom0_vga_console_info);
--    }
-+    if ( builder_is_hwdom(bd) )
-+        if ( !pv_shim && fill_console_start_info((void *)(si + 1)) )
-+        {
-+            si->console.dom0.info_off  = sizeof(struct start_info);
-+            si->console.dom0.info_size = sizeof(struct dom0_vga_console_info);
-+        }
- #endif
- 
-     /*
-      * TODO: provide an empty stub for fill_console_start_info in the
-      * !CONFIG_VIDEO case so the logic here can be simplified.
-      */
--    if ( pv_shim )
-+    if ( builder_is_hwdom(bd) && pv_shim )
-         pv_shim_setup_dom(d, l4start, v_start, vxenstore_start, vconsole_start,
-                           vphysmap_start, si);
- 
- #ifdef CONFIG_COMPAT
--    if ( compat )
-+    if ( builder_is_hwdom(bd) && compat )
-         xlat_start_info(si, pv_shim ? XLAT_start_info_console_domU
-                                     : XLAT_start_info_console_dom0);
- #endif
-@@ -926,15 +941,18 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     if ( test_bit(XENFEAT_supervisor_mode_kernel, parms.f_required) )
-         panic("Dom0 requires supervisor-mode execution\n");
- 
--    rc = dom0_setup_permissions(d);
--    BUG_ON(rc != 0);
-+    if ( builder_is_hwdom(bd) )
-+    {
-+        rc = dom0_setup_permissions(d);
-+        BUG_ON(rc != 0);
-+    }
- 
-     if ( d->domain_id == hardware_domid )
-         iommu_hwdom_init(d);
- 
- #ifdef CONFIG_SHADOW_PAGING
-     /* Fill the shadow pool if necessary. */
--    if ( opt_dom0_shadow || opt_pv_l1tf_hwdom )
-+    if ( builder_is_hwdom(bd) && (opt_dom0_shadow || opt_pv_l1tf_hwdom) )
-     {
-         bool preempted;
- 
-@@ -948,7 +966,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
-     }
- 
-     /* Activate shadow mode, if requested.  Reuse the pv_l1tf tasklet. */
--    if ( opt_dom0_shadow )
-+    if ( builder_is_hwdom(bd) && opt_dom0_shadow )
-     {
-         printk("Switching dom0 to using shadow paging\n");
-         tasklet_schedule(&d->arch.paging.shadow.pv_l1tf_tasklet);
-@@ -960,8 +978,8 @@ int __init dom0_construct_pv(struct boot_domain *bd)
- 
- out:
-     if ( elf_check_broken(&elf) )
--        printk(XENLOG_WARNING "Dom0 kernel broken ELF: %s\n",
--               elf_check_broken(&elf));
-+        printk(XENLOG_WARNING "Dom%d kernel broken ELF: %s\n",
-+               d->domain_id, elf_check_broken(&elf));
- 
-     return rc;
- }
-diff --git a/xen/common/domain-builder/Kconfig b/xen/common/domain-builder/Kconfig
-index 893038cab3..0232e1ed8a 100644
---- a/xen/common/domain-builder/Kconfig
-+++ b/xen/common/domain-builder/Kconfig
-@@ -12,4 +12,14 @@ config BUILDER_FDT
- 
- 	  If unsure, say N.
- 
-+config MULTIDOM_BUILDER
-+	bool "Multidomain building (UNSUPPORTED)" if UNSUPPORTED
-+	depends on BUILDER_FDT
-+	---help---
-+	  Enables the domain builder to construct multiple domains.
-+
-+	  This feature is currently experimental.
-+
-+	  If unsure, say N.
-+
- endmenu
-diff --git a/xen/common/domain-builder/core.c b/xen/common/domain-builder/core.c
-index b030b07d71..c6a268eb96 100644
---- a/xen/common/domain-builder/core.c
-+++ b/xen/common/domain-builder/core.c
-@@ -1,6 +1,7 @@
- #include <xen/bootdomain.h>
- #include <xen/bootinfo.h>
- #include <xen/domain_builder.h>
-+#include <xen/event.h>
- #include <xen/init.h>
- #include <xen/types.h>
- 
-@@ -60,37 +61,144 @@ void __init builder_init(struct boot_info *info)
-         d->kernel->string.kind = BOOTSTR_CMDLINE;
- }
- 
-+static bool __init build_domain(struct boot_info *info, struct boot_domain *bd)
-+{
-+    if ( bd->constructed == true )
-+        return true;
-+
-+    if ( bd->kernel == NULL )
-+        return false;
-+
-+    printk(XENLOG_INFO "*** Building Dom%d ***\n", bd->domid);
-+
-+    arch_create_dom(info, bd);
-+    if ( bd->domain )
-+    {
-+        bd->constructed = true;
++        free(ent);
 +        return true;
 +    }
 +
 +    return false;
 +}
 +
- uint32_t __init builder_create_domains(struct boot_info *info)
- {
-     uint32_t build_count = 0, functions_built = 0;
-+    struct boot_domain *bd;
-     int i;
- 
-+    if ( IS_ENABLED(CONFIG_MULTIDOM_BUILDER) )
++static int read_hypfs_bool(xenhypfs_handle *fshdl, const char *path, bool *val)
++{
++    struct xenhypfs_dirent *dirent;
++    void *raw_value;
++
++    errno = 0;
++
++    raw_value = xenhypfs_read_raw(fshdl, path, &dirent);
++    if ( raw_value == NULL )
 +    {
-+        bd = builder_dom_by_function(info, BUILD_FUNCTION_XENSTORE);
-+        if ( build_domain(info, bd) )
-+        {
-+            functions_built |= bd->functions;
-+            build_count++;
-+        }
-+        else
-+            printk(XENLOG_WARNING "Xenstore build failed, system may be unusable\n");
-+
-+        bd = builder_dom_by_function(info, BUILD_FUNCTION_CONSOLE);
-+        if ( build_domain(info, bd) )
-+        {
-+            functions_built |= bd->functions;
-+            build_count++;
-+        }
-+        else
-+            printk(XENLOG_WARNING "Console build failed, system may be unusable\n");
++        errno = EIO;
++        return false;
 +    }
 +
-     for ( i = 0; i < info->builder->nr_doms; i++ )
-     {
--        struct boot_domain *d = &info->builder->domains[i];
-+        bd = &info->builder->domains[i];
- 
-         if ( ! IS_ENABLED(CONFIG_MULTIDOM_BUILDER) &&
--             ! builder_is_initdom(d) &&
-+             ! builder_is_initdom(bd) &&
-              functions_built & BUILD_FUNCTION_INITIAL_DOM )
-             continue;
- 
--        if ( d->kernel == NULL )
-+        if ( !build_domain(info, bd) )
-         {
--            if ( builder_is_initdom(d) )
-+            if ( builder_is_initdom(bd) )
-                 panic("%s: intial domain missing kernel\n", __func__);
- 
--            printk(XENLOG_ERR "%s:Dom%d definiton has no kernel\n", __func__,
--                    d->domid);
-+            printk(XENLOG_WARNING "Dom%d build failed, skipping\n", bd->domid);
-             continue;
-         }
- 
--        arch_create_dom(info, d);
--        if ( d->domain )
-+        functions_built |= bd->functions;
-+        build_count++;
++    if ( dirent->type != xenhypfs_type_bool )
++    {
++        errno = EINVAL;
++        return false;
 +    }
 +
-+    if ( IS_ENABLED(CONFIG_X86) )
-+        /* Free temporary buffers. */
-+        discard_initial_images();
++    *val = *(bool *)raw_value;
 +
-+    return build_count;
++    free(raw_value); free(dirent);
++    return true;
 +}
 +
-+domid_t __init get_next_domid(void)
++static bool read_hypfs_uint(
++    xenhypfs_handle *fshdl, const char *path, size_t sz, void *val)
 +{
-+    static domid_t __initdata last_domid = 0;
-+    domid_t next;
++    struct xenhypfs_dirent *dirent;
++    void *raw_value;
 +
-+    for ( next = last_domid + 1; next < DOMID_FIRST_RESERVED; next++ )
++    errno = 0;
++
++    raw_value = xenhypfs_read_raw(fshdl, path, &dirent);
++    if ( raw_value == NULL )
 +    {
-+        struct domain *d;
++        errno = EIO;
++        return false;
++    }
 +
-+        if ( (d = rcu_lock_domain_by_id(next)) == NULL )
-         {
--            functions_built |= d->functions;
--            build_count++;
-+            last_domid = next;
-+            return next;
-         }
++    if ( (dirent->type != xenhypfs_type_uint) ||
++         (dirent->size != sz) )
++    {
++        errno = EINVAL;
++        return false;
++    }
 +
-+        rcu_unlock_domain(d);
-     }
- 
--    return build_count;
-+    return 0;
++    switch ( sz )
++    {
++    case sizeof(uint8_t):
++        *(uint8_t *)val = *(uint8_t *)raw_value;
++        break;
++    case sizeof(uint16_t):
++        *(uint16_t *)val = *(uint16_t *)raw_value;
++        break;
++    case sizeof(uint32_t):
++        *(uint32_t *)val = *(uint32_t *)raw_value;
++        break;
++    case sizeof(uint64_t):
++        *(uint64_t *)val = *(uint64_t *)raw_value;
++        break;
++    default:
++        free(raw_value); free(dirent);
++        errno = EINVAL;
++        return false;
++    }
++
++    free(raw_value); free(dirent);
++    return true;
 +}
 +
-+int __init alloc_system_evtchn(
-+    const struct boot_info *info, struct boot_domain *bd)
++static uint8_t read_hypfs_uint8(xenhypfs_handle *fshdl, const char *path)
 +{
-+    evtchn_alloc_unbound_t evtchn_req;
-+    struct boot_domain *c = builder_dom_by_function(info,
-+                                                    BUILD_FUNCTION_CONSOLE);
-+    struct boot_domain *s = builder_dom_by_function(info,
-+                                                    BUILD_FUNCTION_XENSTORE);
-+    int rc;
++    uint8_t value;
 +
-+    evtchn_req.dom = bd->domid;
-+
-+    if ( c != NULL && c != bd && c->constructed )
++    if ( !read_hypfs_uint(fshdl, path, sizeof(value), &value) )
 +    {
-+        evtchn_req.remote_dom = c->domid;
-+
-+        rc = evtchn_alloc_unbound(&evtchn_req);
-+        if ( rc )
-+        {
-+            printk("Failed allocating console event channel for domain %d\n",
-+                   bd->domid);
-+            return rc;
-+        }
-+
-+        bd->console.evtchn = evtchn_req.port;
++        fprintf(stderr, "error: unable to read uint8_t from %s \n", path);
++        return 0;
 +    }
 +
-+    if ( s != NULL && s != bd && s->constructed )
++    return value;
++}
++
++static uint16_t read_hypfs_uint16(xenhypfs_handle *fshdl, const char *path)
++{
++    uint16_t value;
++
++    if ( !read_hypfs_uint(fshdl, path, sizeof(value), &value) )
 +    {
-+        evtchn_req.remote_dom = s->domid;
-+
-+        rc = evtchn_alloc_unbound(&evtchn_req);
-+        if ( rc )
-+        {
-+            printk("Failed allocating xenstore event channel for domain %d\n",
-+                   bd->domid);
-+            return rc;
-+        }
-+
-+        bd->store.evtchn = evtchn_req.port;
++        fprintf(stderr, "error: unable to read uint16_t from %s \n", path);
++        return 0;
 +    }
 +
-+    return 0;
- }
-diff --git a/xen/include/xen/bootdomain.h b/xen/include/xen/bootdomain.h
-index b172d16f4e..9c5d4d385e 100644
---- a/xen/include/xen/bootdomain.h
-+++ b/xen/include/xen/bootdomain.h
-@@ -47,6 +47,12 @@ struct boot_domain {
-     struct boot_module *configs[BUILD_MAX_CONF_MODS];
- 
-     struct domain *domain;
-+    struct {
-+        xen_pfn_t mfn;
-+        unsigned int evtchn;
-+    } store, console;
++    return value;
++}
++
++static uint32_t read_hypfs_uint32(xenhypfs_handle *fshdl, const char *path)
++{
++    uint32_t value;
++
++    if ( !read_hypfs_uint(fshdl, path, sizeof(value), &value) )
++    {
++        fprintf(stderr, "error: unable to read uint32_t from %s \n", path);
++        return 0;
++    }
++
++    return value;
++}
++
++static uint64_t read_hypfs_uint64(xenhypfs_handle *fshdl, const char *path)
++{
++    uint64_t value;
++
++    if ( !read_hypfs_uint(fshdl, path, sizeof(value), &value) )
++    {
++        fprintf(stderr, "error: unable to read uint64_t from %s \n", path);
++        return 0;
++    }
++
++    return value;
++}
++
++static bool is_constructed(xenhypfs_handle *fshdl, uint32_t domid)
++{
++    char path[HYPFS_MAX_PATH];
 +    bool constructed;
 +
- };
- 
- #endif
-diff --git a/xen/include/xen/domain_builder.h b/xen/include/xen/domain_builder.h
-index c0d997f7bd..f9e43c9689 100644
---- a/xen/include/xen/domain_builder.h
-+++ b/xen/include/xen/domain_builder.h
-@@ -34,6 +34,22 @@ static inline bool builder_is_hwdom(struct boot_domain *bd)
-             bd->permissions & BUILD_PERMISSION_HARDWARE );
- }
- 
-+static inline struct boot_domain *builder_dom_by_function(
-+    const struct boot_info *info, uint32_t func)
-+{
-+    int i;
++    snprintf(path, HYPFS_MAX_PATH, "/builder/%d/constructed", domid);
 +
-+    for ( i = 0; i < info->builder->nr_doms; i++ )
++    if ( !read_hypfs_bool(fshdl, path, &constructed) )
 +    {
-+        struct boot_domain *bd = &info->builder->domains[i];
-+
-+        if ( bd->functions & func )
-+            return bd;
++        fprintf(stderr, "error: unable to read constructed field\n");
++        return false;
 +    }
 +
-+    return NULL;
++    return constructed;
 +}
 +
- static inline struct domain *builder_get_hwdom(struct boot_info *info)
- {
-     int i;
-@@ -51,6 +67,9 @@ static inline struct domain *builder_get_hwdom(struct boot_info *info)
- 
- void builder_init(struct boot_info *info);
- uint32_t builder_create_domains(struct boot_info *info);
-+domid_t get_next_domid(void);
-+int alloc_system_evtchn(
-+    const struct boot_info *info, struct boot_domain *bd);
- void arch_create_dom(const struct boot_info *bi, struct boot_domain *bd);
- 
- #endif /* XEN_DOMAIN_BUILDER_H */
++#define XS_PATH   "/builder/%d/xenstore"
++#define CONS_PATH "/builder/%d/devices/console"
++
++int read_hypfs_tree(xenhypfs_handle *hdl, struct domain_info *di)
++{
++    char path[HYPFS_MAX_PATH];
++
++    if ( !is_constructed(hdl, di->domid) )
++    {
++        fprintf(stderr, "error: domain %d did not get constructed\n",
++                di->domid);
++        return -EEXIST;
++    }
++
++    if ( !di->override_uuid )
++    {
++        snprintf(path, HYPFS_MAX_PATH, "/builder/%d/uuid", di->domid);
++        di->uuid = xenhypfs_read(hdl, path);
++    }
++
++    snprintf(path, HYPFS_MAX_PATH, "/builder/%d/ncpus", di->domid);
++    di->num_cpu = read_hypfs_uint32(hdl, path);
++    if ( errno != 0 )
++    {
++        fprintf(stderr, "error: unable to read number of cpus\n");
++        return -errno;
++    }
++
++    snprintf(path, HYPFS_MAX_PATH, "/builder/%d/mem_size", di->domid);
++    di->mem_info.target = read_hypfs_uint32(hdl, path);
++    if ( errno != 0 )
++    {
++        fprintf(stderr, "error: unable to read memory size\n");
++        return -errno;
++    }
++
++    snprintf(path, HYPFS_MAX_PATH, "/builder/%d/mem_max", di->domid);
++    di->mem_info.max = read_hypfs_uint32(hdl, path);
++    if ( errno != 0 )
++    {
++        fprintf(stderr, "error: unable to read max memory\n");
++        return -errno;
++    }
++
++    /* Xenstore */
++    snprintf(path, HYPFS_MAX_PATH, XS_PATH "/evtchn", di->domid);
++    di->xs_info.evtchn_port = read_hypfs_uint32(hdl, path);
++    if ( errno != 0 )
++    {
++        fprintf(stderr, "error: unable to read xenstore event channel port\n");
++        return -errno;
++    }
++
++    snprintf(path, HYPFS_MAX_PATH, XS_PATH "/mfn", di->domid);
++    di->xs_info.mfn = read_hypfs_uint64(hdl, path);
++    if ( errno != 0 )
++    {
++        fprintf(stderr, "error: unable to read xenstore page mfn\n");
++        return -errno;
++    }
++
++    /* Console */
++    if ( di->cons_info.enable )
++    {
++        snprintf(path, HYPFS_MAX_PATH, CONS_PATH "/evtchn", di->domid);
++        di->cons_info.evtchn_port = read_hypfs_uint32(hdl, path);
++        if ( errno != 0 )
++        {
++            fprintf(stderr, "error: unable to read xenstore event channel port\n");
++            return -errno;
++        }
++
++        snprintf(path, HYPFS_MAX_PATH, CONS_PATH "/mfn", di->domid);
++        di->cons_info.mfn = read_hypfs_uint64(hdl, path);
++        if ( errno != 0 )
++        {
++            fprintf(stderr, "error: unable to read xenstore page mfn\n");
++            return -errno;
++        }
++    }
++
++    return 0;
++}
++
+diff --git a/tools/helpers/hypfs-helpers.h b/tools/helpers/hypfs-helpers.h
+new file mode 100644
+index 0000000000..2b2de5967f
+--- /dev/null
++++ b/tools/helpers/hypfs-helpers.h
+@@ -0,0 +1,9 @@
++#ifndef __HYPFS_HELPERS_H
++#define __HYPFS_HELPERS_H
++
++#include "late-init-pv.h"
++
++bool has_builder_hypfs(xenhypfs_handle *hdl, uint32_t domid);
++int read_hypfs_tree(xenhypfs_handle *hdl, struct domain_info *di);
++
++#endif
+diff --git a/tools/helpers/late-init-pv.c b/tools/helpers/late-init-pv.c
+new file mode 100644
+index 0000000000..e1602be6d5
+--- /dev/null
++++ b/tools/helpers/late-init-pv.c
+@@ -0,0 +1,287 @@
++
++#include <errno.h>
++#include <getopt.h>
++#include <stdio.h>
++#include <string.h>
++#include <stdint.h>
++#include <stdlib.h>
++#include <unistd.h>
++#include <xenctrl.h>
++#include <xenguest.h>
++#include <xenhypfs.h>
++#include <xenstore.h>
++#include <xentoollog.h>
++#include <xen/io/xenbus.h>
++
++#include "hypfs-helpers.h"
++#include "late-init-pv.h"
++#include "xs-helpers.h"
++
++static struct option options[] = {
++    { "uuid", 1, NULL, 'u' },
++    { "console", 0, NULL, 'c' },
++    { "force", 0, NULL, 'f' },
++    { "domain", 1, NULL, 'd' },
++    { "verbose", 0, NULL, 'v' },
++    { NULL, 0, NULL, 0 }
++};
++
++static void usage(void)
++{
++    fprintf(stderr,
++"Usage:\n"
++"\n"
++"late-init-pv <options>\n"
++"\n"
++"where options may include:\n"
++"\n"
++"  --uuid <UUID string>     override the UUID to use for the domain\n"
++"  --console                configure the console\n"
++"  --force                  for @introduceDomain even if xenstore entries exist\n"
++"  --domain <domain id>     domain id of the domain to be initialized\n"
++"  -v[v[v]]                 verbosity constructing xenstore tree\n");
++}
++
++#define XS_DOM_PERM(x, d, k, v)                                             \
++    ret = do_xs_write_dom_with_perm(x, d, k, v, perms, num_perms);          \
++    if ( ret != 0 ) return ret                                              \
++
++#define XS_DIR_PERM(x, p, k, v)                                             \
++    ret = do_xs_write_dir_node_with_perm(x, p, k, v, perms, num_perms);     \
++    if ( ret != 0 ) return ret                                              \
++
++static int create_xs_entries(
++    struct xs_handle *xsh, uint16_t curr_domid, struct domain_info *di)
++{
++    char value[16];
++    struct xs_permissions perms[2] = {
++        {.id = curr_domid, .perms = XS_PERM_NONE},
++        {.id = di->domid, .perms = XS_PERM_READ},
++    };
++    uint32_t num_perms = (sizeof(perms) / sizeof((perms)[0]));
++    int ret = 0;
++
++    while ( do_xs_start_transaction(xsh) == 0 )
++    {
++        XS_DOM_PERM(xsh, di->domid, "", "");
++
++        snprintf(value, 16, "%d", di->domid);
++        XS_DOM_PERM(xsh, di->domid, "domid", value);
++
++        XS_DOM_PERM(xsh, di->domid, "memory", "");
++        snprintf(value, 16, "%d", di->mem_info.target);
++        XS_DOM_PERM(xsh, di->domid, "memory/target", value);
++
++        if ( di->mem_info.max )
++            snprintf(value, 16, "%d", di->mem_info.max);
++        else
++            snprintf(value, 16, "%d", di->mem_info.target);
++        XS_DOM_PERM(xsh, di->domid, "memory/static-max", value);
++
++        XS_DOM_PERM(xsh, di->domid, "store", "");
++        snprintf(value, 16, "%d", di->xs_info.evtchn_port);
++        XS_DOM_PERM(xsh, di->domid, "store/port", value);
++
++        snprintf(value, 16, "%ld", di->xs_info.mfn);
++        XS_DOM_PERM(xsh, di->domid, "store/ring-ref", value);
++
++        if ( di->cons_info.enable )
++        {
++            char be_path[64], fe_path[64];
++
++            snprintf(fe_path, 64, "/local/domain/%d/console", di->domid);
++            snprintf(be_path, 64, "/local/domain/%d/backend/console/%d/0",
++                     di->cons_info.be_domid, di->domid);
++
++            /* Backend entries */
++            XS_DIR_PERM(xsh, be_path, "", "");
++            snprintf(value, 16, "%d", di->domid);
++            XS_DIR_PERM(xsh, be_path, "frontend-id", value);
++            XS_DIR_PERM(xsh, be_path, "frontend", fe_path);
++            XS_DIR_PERM(xsh, be_path, "online", "1");
++            XS_DIR_PERM(xsh, be_path, "protocol", "vt100");
++
++            snprintf(value, 16, "%d", XenbusStateInitialising);
++            XS_DIR_PERM(xsh, be_path, "state", value);
++
++            /* Frontend entries */
++            XS_DOM_PERM(xsh, di->domid, "console", "");
++            snprintf(value, 16, "%d", di->cons_info.be_domid);
++            XS_DIR_PERM(xsh, fe_path, "backend", be_path);
++            XS_DIR_PERM(xsh, fe_path, "backend-id", value);
++            XS_DIR_PERM(xsh, fe_path, "limit", "1048576");
++            XS_DIR_PERM(xsh, fe_path, "type", "xenconsoled");
++            XS_DIR_PERM(xsh, fe_path, "output", "pty");
++            XS_DIR_PERM(xsh, fe_path, "tty", "");
++
++            snprintf(value, 16, "%d", di->cons_info.evtchn_port);
++            XS_DIR_PERM(xsh, fe_path, "port", value);
++
++            snprintf(value, 16, "%ld", di->cons_info.mfn);
++            XS_DIR_PERM(xsh, fe_path, "ring-ref", value);
++
++        }
++
++        ret = do_xs_end_transaction(xsh);
++        switch ( ret )
++        {
++        case 0:
++            break; /* proceed to loop break */
++        case -EAGAIN:
++            continue; /* try again */
++        default:
++            return ret; /* failed */
++        }
++
++        break;
++    }
++
++    return ret;
++}
++
++static bool init_domain(struct xs_handle *xsh, struct domain_info *di)
++{
++    xc_interface *xch = xc_interface_open(0, 0, 0);
++    xen_pfn_t con_mfn = 0L;
++    /*xc_dom_gnttab_seed will do nothing of front == back */
++    uint32_t con_domid = di->domid;
++    int ret;
++
++    /* console */
++    if ( di->cons_info.enable )
++    {
++        con_domid = di->cons_info.be_domid;
++        con_mfn = di->cons_info.mfn;
++    }
++
++    ret = xc_dom_gnttab_seed(xch, di->domid, di->is_hvm, con_mfn,
++            di->xs_info.mfn, con_domid, di->xs_info.be_domid);
++    if ( ret != 0 )
++    {
++        fprintf(stderr, "error (%d) setting up grant tables for dom%d\n",
++                ret, di->domid);
++        xc_interface_close(xch);
++        return false;
++    }
++
++    xc_interface_close(xch);
++
++    return xs_introduce_domain(xsh, di->domid, di->xs_info.mfn,
++                               di->xs_info.evtchn_port);
++}
++
++int main(int argc, char** argv)
++{
++    int opt, rv;
++    bool force = false;
++    struct xs_handle *xsh = NULL;
++    xenhypfs_handle *xhfs = NULL;
++    xentoollog_level minmsglevel = XTL_PROGRESS;
++    xentoollog_logger *logger = NULL;
++    struct domain_info di = { .domid = ~0 };
++
++    while ( (opt = getopt_long(argc, argv, "cfd:v", options, NULL)) != -1 )
++    {
++        switch ( opt )
++        {
++        case 'u':
++            di.override_uuid = true;
++            di.uuid = optarg;
++            break;
++        case 'c':
++            di.cons_info.enable = true;
++            break;
++        case 'f':
++            force = true;
++            break;
++        case 'd':
++            di.domid = strtol(optarg, NULL, 10);
++            break;
++        case 'v':
++            if ( minmsglevel )
++                minmsglevel--;
++            break;
++        default:
++            usage();
++            return 2;
++        }
++    }
++
++    if ( optind != argc || di.domid == ~0 )
++    {
++        usage();
++        return 1;
++    }
++
++    logger = (xentoollog_logger *)xtl_createlogger_stdiostream(stderr,
++                                                               minmsglevel, 0);
++
++    xhfs = xenhypfs_open(logger, 0);
++    if ( !xhfs )
++    {
++        fprintf(stderr, "error: unable to acces xen hypfs\n");
++        rv = 2;
++        goto out;
++    }
++
++    if ( !has_builder_hypfs(xhfs, di.domid) )
++    {
++        fprintf(stderr, "error: hypfs entry for domain %d not present\n",
++                di.domid);
++        rv = 3;
++        goto out;
++    }
++
++    if ( read_hypfs_tree(xhfs, &di) != 0 )
++    {
++        fprintf(stderr, "error: unable to parse hypfs for domain %d\n",
++                di.domid);
++        rv = 4;
++        goto out;
++    }
++
++    xsh = xs_open(0);
++    if ( xsh == NULL )
++    {
++        fprintf(stderr, "error: unable to connect to xenstored\n");
++        rv = 5;
++        goto out;
++    }
++
++    if ( xs_is_domain_introduced(xsh, di.domid) )
++    {
++        if ( !force )
++        {
++            fprintf(stderr, "error: domain %d already introduced\n", di.domid);
++            rv = 6;
++            goto out;
++        }
++        else
++        {
++            fprintf(stderr, "warning: re-introducting domain %d\n", di.domid);
++        }
++    }
++
++    /* TODO: hardcdoding local domain to 0 for testing purposes */
++    if ( (rv = create_xs_entries(xsh, 0, &di)) != 0 )
++    {
++        fprintf(stderr, "error(%d): unable create xenstore entries\n", rv);
++        rv = 7;
++        goto out;
++    }
++
++    init_domain(xsh, &di);
++    rv = 0;
++
++out:
++    if ( xsh )
++        xs_close(xsh);
++
++    if ( xhfs )
++        xenhypfs_close(xhfs);
++
++    if ( logger )
++        xtl_logger_destroy(logger);
++
++    return rv;
++}
+diff --git a/tools/helpers/late-init-pv.h b/tools/helpers/late-init-pv.h
+new file mode 100644
+index 0000000000..5d66e7870f
+--- /dev/null
++++ b/tools/helpers/late-init-pv.h
+@@ -0,0 +1,29 @@
++#ifndef __LATE_INIT_PV_H
++#define __LATE_INIT_PV_H
++
++struct domain_info {
++    uint16_t domid;
++    bool is_hvm;
++    bool override_uuid;
++    const char *uuid;
++    uint32_t num_cpu;
++    uint32_t max_cpu;
++    struct {
++        uint32_t target;
++        uint32_t max;
++        uint32_t video;
++    } mem_info;
++    struct {
++        uint16_t be_domid;
++        uint32_t evtchn_port;
++        uint64_t mfn;
++    } xs_info;
++    struct {
++        bool enable;
++        uint16_t be_domid;
++        uint32_t evtchn_port;
++        uint64_t mfn;
++    } cons_info;
++};
++
++#endif
+diff --git a/tools/helpers/xs-helpers.c b/tools/helpers/xs-helpers.c
+new file mode 100644
+index 0000000000..a4d2bebbbd
+--- /dev/null
++++ b/tools/helpers/xs-helpers.c
+@@ -0,0 +1,117 @@
++
++#include <err.h>
++#include <stdio.h>
++#include <string.h>
++#include <xenstore.h>
++
++#define MAX_XS_PAATH 100
++
++static xs_transaction_t t_id = XBT_NULL;
++
++int do_xs_start_transaction(struct xs_handle *xsh)
++{
++    t_id = xs_transaction_start(xsh);
++    if (t_id == XBT_NULL)
++        return -errno;
++
++    return 0;
++}
++
++int do_xs_end_transaction(struct xs_handle *xsh)
++{
++    if ( t_id == XBT_NULL )
++        return -EINVAL;
++
++    if (!xs_transaction_end(xsh, t_id, false))
++        return -errno;
++
++    return 0;
++}
++
++int do_xs_write(struct xs_handle *xsh, char *path, char *val)
++{
++    if ( !xs_write(xsh, t_id, path, val, strlen(val)) )
++    {
++        fprintf(stderr, "failed write: %s\n", path);
++        return -errno;
++    }
++
++    return 0;
++}
++
++int do_xs_perms(
++    struct xs_handle *xsh, char *path, struct xs_permissions *perms,
++    uint32_t num_perms)
++{
++    if ( !xs_set_permissions(xsh, t_id, path, perms, num_perms) )
++    {
++        fprintf(stderr, "failed set perm: %s\n", path);
++        return -errno;
++    }
++
++    return 0;
++}
++
++int do_xs_write_dir_node_with_perm(
++    struct xs_handle *xsh, char *dir, char *node, char *val,
++    struct xs_permissions *perms, uint32_t num_perms)
++{
++    char full_path[MAX_XS_PAATH];
++    int ret = 0;
++
++    /*
++     * mainly for creating a value holding node, but
++     * also support creating directory nodes.
++     */
++    if ( strlen(node) != 0 )
++        snprintf(full_path, MAX_XS_PAATH, "%s/%s", dir, node);
++    else
++        snprintf(full_path, MAX_XS_PAATH, "%s", dir);
++
++    ret = do_xs_write(xsh, full_path, val);
++    if ( ret < 0 )
++        return ret;
++
++    if ( perms != NULL && num_perms > 0 )
++        ret = do_xs_perms(xsh, full_path, perms, num_perms);
++
++    return ret;
++}
++
++int do_xs_write_dir_node(
++    struct xs_handle *xsh, char *dir, char *node, char *val)
++{
++    return do_xs_write_dir_node_with_perm(xsh, dir, node, val, NULL, 0);
++}
++
++int do_xs_write_dom_with_perm(
++    struct xs_handle *xsh, uint32_t domid, char *path, char *val,
++    struct xs_permissions *perms, uint32_t num_perms)
++{
++    char full_path[MAX_XS_PAATH];
++    int ret = 0;
++
++    /*
++     * mainly for creating a value holding node, but
++     * also support creating directory nodes.
++     */
++    if ( strlen(path) != 0 )
++        snprintf(full_path, MAX_XS_PAATH, "/local/domain/%d/%s", domid, path);
++    else
++        snprintf(full_path, MAX_XS_PAATH, "/local/domain/%d", domid);
++
++    ret = do_xs_write(xsh, full_path, val);
++    if ( ret < 0 )
++        return ret;
++
++    if ( perms != NULL && num_perms > 0 )
++        ret = do_xs_perms(xsh, full_path, perms, num_perms);
++
++    return ret;
++}
++
++int do_xs_write_dom(
++    struct xs_handle *xsh, uint32_t domid, char *path, char *val)
++{
++    return do_xs_write_dom_with_perm(xsh, domid, path, val, NULL, 0);
++}
+diff --git a/tools/helpers/xs-helpers.h b/tools/helpers/xs-helpers.h
+new file mode 100644
+index 0000000000..f57fcab843
+--- /dev/null
++++ b/tools/helpers/xs-helpers.h
+@@ -0,0 +1,27 @@
++#ifndef __XS_HELPERS_H
++#define __XS_HELPERS_H
++
++#include <xenstore.h>
++
++int do_xs_start_transaction(struct xs_handle *xsh);
++int do_xs_end_transaction(struct xs_handle *xsh);
++
++int do_xs_write(struct xs_handle *xsh, char *path, char *val);
++int do_xs_perms(
++    struct xs_handle *xsh, char *path, struct xs_permissions *perms,
++    uint32_t num_perms);
++
++int do_xs_write_dir_node_with_perm(
++    struct xs_handle *xsh, char *dir, char *node, char *val,
++    struct xs_permissions *perms, uint32_t num_perms);
++int do_xs_write_dir_node(
++    struct xs_handle *xsh, char *dir, char *node, char *val);
++
++int do_xs_write_dom_with_perm(
++    struct xs_handle *xsh, uint32_t domid, char *path, char *val,
++    struct xs_permissions *perms, uint32_t num_perms);
++int do_xs_write_dom(
++    struct xs_handle *xsh, uint32_t domid, char *path, char *val);
++
++#endif
++
 -- 
 2.20.1
 
