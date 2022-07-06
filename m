@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B9A0CCA47C
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:08:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362549.592663 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD89DC433EF
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:09:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362561.592685 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CGB-0000AX-Vu; Wed, 06 Jul 2022 21:08:35 +0000
+	id 1o9CGT-0001kc-1k; Wed, 06 Jul 2022 21:08:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362549.592663; Wed, 06 Jul 2022 21:08:35 +0000
+Received: by outflank-mailman (output) from mailman id 362561.592685; Wed, 06 Jul 2022 21:08:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CGB-00008t-Rn; Wed, 06 Jul 2022 21:08:35 +0000
-Received: by outflank-mailman (input) for mailman id 362549;
- Wed, 06 Jul 2022 21:08:33 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1o9CGS-0001kP-TC; Wed, 06 Jul 2022 21:08:52 +0000
+Received: by outflank-mailman (input) for mailman id 362561;
+ Wed, 06 Jul 2022 21:08:51 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJEZ=XL=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1o9CFW-0003HV-9b
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:07:54 +0000
+ id 1o9CGR-0007yd-FG
+ for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:08:51 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b1eea131-fd6f-11ec-924f-1f966e50362f;
- Wed, 06 Jul 2022 23:07:52 +0200 (CEST)
+ [136.143.188.51]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id d449487b-fd6f-11ec-bd2d-47488cf2e6aa;
+ Wed, 06 Jul 2022 23:08:50 +0200 (CEST)
 Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1657141518204185.36893009232347;
- Wed, 6 Jul 2022 14:05:18 -0700 (PDT)
+ with SMTPS id 1657141525983954.9774962986977;
+ Wed, 6 Jul 2022 14:05:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,25 +42,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b1eea131-fd6f-11ec-924f-1f966e50362f
-ARC-Seal: i=1; a=rsa-sha256; t=1657141520; cv=none; 
+X-Inumbo-ID: d449487b-fd6f-11ec-bd2d-47488cf2e6aa
+ARC-Seal: i=1; a=rsa-sha256; t=1657141527; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=Ue1eFEAVuXgejFvAA+0yve4SHos8OvlwOoZRAvApcYMSGy+9pBEIMLkrMJiSyhD0HscYiMrbOqu8ZYkcnyyr/gJB0jISG4TDkwqKmpJspwli5Cd1urWnGazn6WLsIJN5PZlJspDbC6CiLa7eUI11SN3HUOHIPMEG956hzP0lfbs=
+	b=jeWDZKBFeS35Z9RwtifusSZdaz0wVhsCakQYdv1hC4oUrttUSv33m2Y7yH0bD2P6QVUjqMXCmcOgTkxjv5x9t0fKUE97ORr9n01rm6rWasw+RXYc3BaSlKHRE+4fNWyKC7g7NkGv8UEwUdnws6FhBq+7V7W+aXRFvHwIm/+AZu4=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1657141520; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=F4LzAhNPz1Ut05j8lMJsWMf8SmFv3K61ZtdVdpesbfA=; 
-	b=gc6mXWqlp7guNMHg/OlgAe8zR8zr9/2z6/Hi3fR9d7Dn5sij9HLJzf3nVKYrM1vEE1M5AMbj59iBJ6ua5DkWYWGZxeij3czMtL4vYS2BhAe1+Fe0b2L39GADKlrdt5PAml8UOfz+iMKtGc2KYMSIL4dbWnyPu+mLQgxVGQvvvVQ=
+	t=1657141527; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=S145Tne13TWHR+Kbw2vROFs6IyEj+oY3nk3bfwwUXUQ=; 
+	b=RoIBD+Zdh1XKu5+7HD8tGQnZfQopwwZc5FMABbKmX6p+j6GILN4HjaOtPwRGGFDSEesWd1WYT5MTYzalRFM1UVOnz3Cp/Z9LywO30LOU0ZHKzWgts0LwBkT5CKKp6RuRh6uG6BYXkd/01XPijhDq414neIFdFbFmSaEeEicwLTc=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141520;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141527;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=F4LzAhNPz1Ut05j8lMJsWMf8SmFv3K61ZtdVdpesbfA=;
-	b=e6xBEFOFce8A+eAooJUkrcJudnW0akQ8Er0WlYkmWnsHROtQYQ50y3+5ETDM1qiv
-	mK0gjlizY++GnCuUB+7EG5yKBevt3+AaS7hhI8YHSPQ2ov/mamqP2kXJ/pUbCegif9r
-	FR67yWmaULGDF3K0z6yMWppXs+d5NLFunVisrfAQ=
+	bh=S145Tne13TWHR+Kbw2vROFs6IyEj+oY3nk3bfwwUXUQ=;
+	b=nWNxOPu9Um2DRf6axihFZiQAw/zxtqclsbSsukXxsvcWKO+i4ULxpEmdDK3sOIBO
+	USrlVMoZSQbi6KtDGQedZxaT8w9mO8edn3A+OL2ULR0MAOoay6/CdSjzLSbOo8KXjEN
+	ltSed0UtH5hymmAU40fuCOoTw7exZvZ5o+97Rj6o=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
 To: xen-devel@lists.xenproject.org,
 	Wei Liu <wl@xen.org>
@@ -69,13 +69,10 @@ Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	christopher.clark@starlab.io,
 	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 10/18] x86: introduce the domain builder
-Date: Wed,  6 Jul 2022 17:04:45 -0400
-Message-Id: <20220706210454.30096-11-dpsmith@apertussolutions.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v1 15/18] x86: rework domain page allocation
+Date: Wed,  6 Jul 2022 17:04:50 -0400
+Message-Id: <20220706210454.30096-16-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220706210454.30096-1-dpsmith@apertussolutions.com>
 References: <20220706210454.30096-1-dpsmith@apertussolutions.com>
@@ -83,527 +80,325 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This commit introduces the domain builder configuration FDT parser along with
-the domain builder core for domain creation. To enable domain builder to be a
-cross architecture internal API, a new arch domain creation call is introduced
-for use by the domain builder.
+This reworks all the dom0 page allocation functions for general domain
+construction. Where possible, common logic between the two was split into a
+separate function for reuse by the two functions.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Reviewed-by: Christopher Clark <christopher.clark@starlab.io>
 ---
- xen/arch/x86/setup.c               |   9 +
- xen/common/Makefile                |   1 +
- xen/common/domain-builder/Makefile |   2 +
- xen/common/domain-builder/core.c   |  96 ++++++++++
- xen/common/domain-builder/fdt.c    | 295 +++++++++++++++++++++++++++++
- xen/common/domain-builder/fdt.h    |   7 +
- xen/include/xen/bootinfo.h         |  16 ++
- xen/include/xen/domain_builder.h   |   1 +
- 8 files changed, 427 insertions(+)
- create mode 100644 xen/common/domain-builder/Makefile
- create mode 100644 xen/common/domain-builder/core.c
- create mode 100644 xen/common/domain-builder/fdt.c
- create mode 100644 xen/common/domain-builder/fdt.h
+ xen/arch/x86/dom0_build.c             |  76 ++++++-------------
+ xen/arch/x86/domain_builder.c         | 102 ++++++++++++++++++++++++++
+ xen/arch/x86/hvm/dom0_build.c         |  11 +--
+ xen/arch/x86/include/asm/dom0_build.h |  14 +++-
+ xen/arch/x86/pv/dom0_build.c          |   2 +-
+ 5 files changed, 142 insertions(+), 63 deletions(-)
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index e4060d6219..28dbfcd209 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1,4 +1,6 @@
-+#include <xen/bootdomain.h>
- #include <xen/bootinfo.h>
-+#include <xen/domain_builder.h>
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/err.h>
-@@ -826,6 +828,13 @@ static struct domain *__init create_dom0(const struct boot_info *bi)
-     return d;
+diff --git a/xen/arch/x86/dom0_build.c b/xen/arch/x86/dom0_build.c
+index 216c9e3590..0600773b8f 100644
+--- a/xen/arch/x86/dom0_build.c
++++ b/xen/arch/x86/dom0_build.c
+@@ -320,69 +320,31 @@ static unsigned long __init default_nr_pages(unsigned long avail)
  }
  
-+void __init arch_create_dom(
-+    const struct boot_info *bi, struct boot_domain *bd)
-+{
-+    if ( builder_is_initdom(bd) )
-+        create_dom0(bi);
-+}
-+
- /* How much of the directmap is prebuilt at compile time. */
- #define PREBUILT_MAP_LIMIT (1 << L2_PAGETABLE_SHIFT)
- 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index ebd3e2d659..eb108fa107 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -72,6 +72,7 @@ extra-y := symbols-dummy.o
- obj-$(CONFIG_COVERAGE) += coverage/
- obj-y += sched/
- obj-$(CONFIG_UBSAN) += ubsan/
-+obj-y += domain-builder/
- 
- obj-$(CONFIG_NEEDS_LIBELF) += libelf/
- obj-$(CONFIG_CORE_DEVICE_TREE) += libfdt/
-diff --git a/xen/common/domain-builder/Makefile b/xen/common/domain-builder/Makefile
-new file mode 100644
-index 0000000000..9561602502
---- /dev/null
-+++ b/xen/common/domain-builder/Makefile
-@@ -0,0 +1,2 @@
-+obj-$(CONFIG_BUILDER_FDT) += fdt.o
-+obj-y += core.o
-diff --git a/xen/common/domain-builder/core.c b/xen/common/domain-builder/core.c
-new file mode 100644
-index 0000000000..b030b07d71
---- /dev/null
-+++ b/xen/common/domain-builder/core.c
-@@ -0,0 +1,96 @@
-+#include <xen/bootdomain.h>
-+#include <xen/bootinfo.h>
-+#include <xen/domain_builder.h>
-+#include <xen/init.h>
-+#include <xen/types.h>
-+
-+#include <asm/bzimage.h>
-+#include <asm/setup.h>
-+
-+#include "fdt.h"
-+
-+static struct domain_builder __initdata builder;
-+
-+void __init builder_init(struct boot_info *info)
-+{
-+    struct boot_domain *d = NULL;
-+
-+    info->builder = &builder;
-+
-+    if ( IS_ENABLED(CONFIG_BUILDER_FDT) )
-+    {
-+        /* fdt is required to be module 0 */
-+        switch ( check_fdt(info, __va(info->mods[0].start)) )
-+        {
-+        case 0:
-+            printk("Domain Builder: initialized from config\n");
-+            info->builder->fdt_enabled = true;
-+            return;
-+        case -EINVAL:
-+            info->builder->fdt_enabled = false;
-+            break;
-+        case -ENODATA:
-+        default:
-+            panic("%s: error occured processing DTB\n", __func__);
-+        }
-+    }
-+
-+    /*
-+     * No FDT config support or an FDT wasn't present, do an initial
-+     * domain construction
-+     */
-+    printk("Domain Builder: falling back to initial domain build\n");
-+    info->builder->nr_doms = 1;
-+    d = &info->builder->domains[0];
-+
-+    d->mode = opt_dom0_pvh ? 0 : BUILD_MODE_PARAVIRTUALIZED;
-+
-+    d->kernel = &info->mods[0];
-+    d->kernel->kind = BOOTMOD_KERNEL;
-+
-+    d->permissions = BUILD_PERMISSION_CONTROL | BUILD_PERMISSION_HARDWARE;
-+    d->functions = BUILD_FUNCTION_CONSOLE | BUILD_FUNCTION_XENSTORE |
-+                     BUILD_FUNCTION_INITIAL_DOM;
-+
-+    d->kernel->arch->headroom = bzimage_headroom(bootstrap_map(d->kernel),
-+                                                   d->kernel->size);
-+    bootstrap_map(NULL);
-+
-+    if ( d->kernel->string.len )
-+        d->kernel->string.kind = BOOTSTR_CMDLINE;
-+}
-+
-+uint32_t __init builder_create_domains(struct boot_info *info)
-+{
-+    uint32_t build_count = 0, functions_built = 0;
-+    int i;
-+
-+    for ( i = 0; i < info->builder->nr_doms; i++ )
-+    {
-+        struct boot_domain *d = &info->builder->domains[i];
-+
-+        if ( ! IS_ENABLED(CONFIG_MULTIDOM_BUILDER) &&
-+             ! builder_is_initdom(d) &&
-+             functions_built & BUILD_FUNCTION_INITIAL_DOM )
-+            continue;
-+
-+        if ( d->kernel == NULL )
-+        {
-+            if ( builder_is_initdom(d) )
-+                panic("%s: intial domain missing kernel\n", __func__);
-+
-+            printk(XENLOG_ERR "%s:Dom%d definiton has no kernel\n", __func__,
-+                    d->domid);
-+            continue;
-+        }
-+
-+        arch_create_dom(info, d);
-+        if ( d->domain )
-+        {
-+            functions_built |= d->functions;
-+            build_count++;
-+        }
-+    }
-+
-+    return build_count;
-+}
-diff --git a/xen/common/domain-builder/fdt.c b/xen/common/domain-builder/fdt.c
-new file mode 100644
-index 0000000000..937cc61e7a
---- /dev/null
-+++ b/xen/common/domain-builder/fdt.c
-@@ -0,0 +1,295 @@
-+#include <xen/bootdomain.h>
-+#include <xen/bootinfo.h>
-+#include <xen/domain_builder.h>
-+#include <xen/fdt.h>
-+#include <xen/init.h>
-+#include <xen/lib.h>
-+#include <xen/libfdt/libfdt.h>
-+#include <xen/page-size.h>
-+#include <xen/pfn.h>
-+#include <xen/types.h>
-+
-+#include <asm/bzimage.h>
-+#include <asm/setup.h>
-+
-+#include "fdt.h"
-+
-+#define BUILDER_FDT_TARGET_UNK 0
-+#define BUILDER_FDT_TARGET_X86 1
-+#define BUILDER_FDT_TARGET_ARM 2
-+static int __initdata target_arch = BUILDER_FDT_TARGET_UNK;
-+
-+static struct boot_module *read_module(
-+    const void *fdt, int node, uint32_t address_cells, uint32_t size_cells,
-+    struct boot_info *info)
-+{
-+    const struct fdt_property *prop;
-+    const __be32 *cell;
-+    struct boot_module *bm;
-+    bootmodule_kind kind = BOOTMOD_UNKNOWN;
-+    int len;
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,kernel") )
-+        kind = BOOTMOD_KERNEL;
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,ramdisk") )
-+        kind = BOOTMOD_RAMDISK;
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,microcode") )
-+        kind = BOOTMOD_UCODE;
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,xsm-policy") )
-+        kind = BOOTMOD_XSM;
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,config") )
-+        kind = BOOTMOD_GUEST_CONF;
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,index") )
-+    {
-+        uint32_t idx;
-+
-+        idx = (uint32_t)device_tree_get_u32(fdt, node, "module-index", 0);
-+        if ( idx == 0 )
-+            return NULL;
-+
-+        bm = &info->mods[idx];
-+
-+        bm->kind = kind;
-+
-+        return bm;
-+    }
-+
-+    if ( device_tree_node_compatible(fdt, node, "module,addr") )
-+    {
-+        uint64_t addr, size;
-+
-+        prop = fdt_get_property(fdt, node, "module-addr", &len);
-+        if ( !prop )
-+            return NULL;
-+
-+        if ( len < dt_cells_to_size(address_cells + size_cells) )
-+            return NULL;
-+
-+        cell = (const __be32 *)prop->data;
-+        device_tree_get_reg(
-+            &cell, address_cells, size_cells, &addr, &size);
-+
-+        bm = bootmodule_next_by_addr(info, addr, NULL);
-+
-+        bm->kind = kind;
-+
-+        return bm;
-+    }
-+
-+    printk(XENLOG_WARNING
-+           "builder fdt: module node %d, no index or addr provided\n",
-+           node);
-+
-+    return NULL;
-+}
-+
-+static int process_config_node(
-+    const void *fdt, int node, const char *name, int depth,
-+    uint32_t address_cells, uint32_t size_cells, void *data)
-+{
-+    struct boot_info *info = (struct boot_info *)data;
-+    int node_next;
-+
-+    if ( !info )
-+        return -1;
-+
-+    for ( node_next = fdt_first_subnode(fdt, node);
-+          node_next > 0;
-+          node_next = fdt_next_subnode(fdt, node_next))
-+        read_module(fdt, node_next, address_cells, size_cells, info);
-+
-+    return 0;
-+}
-+
-+static int process_domain_node(
-+    const void *fdt, int node, const char *name, int depth,
-+    uint32_t address_cells, uint32_t size_cells, void *data)
-+{
-+    struct boot_info *info = (struct boot_info *)data;
-+    const struct fdt_property *prop;
-+    struct boot_domain *domain;
-+    int node_next, i, plen;
-+
-+    if ( !info )
-+        return -1;
-+
-+    if ( info->builder->nr_doms >= BUILD_MAX_BOOT_DOMAINS )
-+        return -1;
-+
-+    domain = &info->builder->domains[info->builder->nr_doms];
-+
-+    domain->domid = (domid_t)device_tree_get_u32(fdt, node, "domid", 0);
-+    domain->permissions = device_tree_get_u32(fdt, node, "permissions", 0);
-+    domain->functions = device_tree_get_u32(fdt, node, "functions", 0);
-+    domain->mode = device_tree_get_u32(fdt, node, "mode", 0);
-+
-+    prop = fdt_get_property(fdt, node, "domain-uuid", &plen);
-+    if ( prop )
-+        for ( i=0; i < sizeof(domain->uuid) % sizeof(uint32_t); i++ )
-+            *(domain->uuid + i) = fdt32_to_cpu((uint32_t)prop->data[i]);
-+
-+    domain->ncpus = device_tree_get_u32(fdt, node, "cpus", 1);
-+
-+    if ( target_arch == BUILDER_FDT_TARGET_X86 )
-+    {
-+        prop = fdt_get_property(fdt, node, "memory", &plen);
-+        if ( prop )
-+        {
-+            int sz = fdt32_to_cpu(prop->len);
-+            char s[64];
-+            unsigned long val;
-+
-+            if ( sz >= 64 )
-+                panic("node %s invalid `memory' property\n", name);
-+
-+            memcpy(s, prop->data, sz);
-+            s[sz] = '\0';
-+            val = parse_size_and_unit(s, NULL);
-+
-+            domain->meminfo.mem_size.nr_pages = PFN_UP(val);
-+            domain->meminfo.mem_max.nr_pages = PFN_UP(val);
-+        }
-+        else
-+            panic("node %s missing `memory' property\n", name);
-+    }
-+    else
-+            panic("%s: only x86 memory parsing supported\n", __func__);
-+
-+    prop = fdt_get_property(fdt, node, "security-id",
-+                                &plen);
-+    if ( prop )
-+    {
-+        int sz = fdt32_to_cpu(prop->len);
-+        sz = sz > BUILD_MAX_SECID_LEN ?  BUILD_MAX_SECID_LEN : sz;
-+        memcpy(domain->secid, prop->data, sz);
-+    }
-+
-+    for ( node_next = fdt_first_subnode(fdt, node);
-+          node_next > 0;
-+          node_next = fdt_next_subnode(fdt, node_next))
-+    {
-+        struct boot_module *bm = read_module(fdt, node_next, address_cells,
-+                                             size_cells, info);
-+
-+        switch ( bm->kind )
-+        {
-+        case BOOTMOD_KERNEL:
-+            /* kernel was already found */
-+            if ( domain->kernel != NULL )
-+                continue;
-+
-+            bm->arch->headroom = bzimage_headroom(bootstrap_map(bm), bm->size);
-+            bootstrap_map(NULL);
-+
-+            if ( bm->string.len )
-+                bm->string.kind = BOOTSTR_CMDLINE;
-+            else
-+            {
-+                prop = fdt_get_property(fdt, node_next, "bootargs", &plen);
-+                if ( prop )
-+                {
-+                    int size = fdt32_to_cpu(prop->len);
-+                    size = size > BOOTMOD_MAX_STRING ?
-+                           BOOTMOD_MAX_STRING : size;
-+                    memcpy(bm->string.bytes, prop->data, size);
-+                    bm->string.kind = BOOTSTR_CMDLINE;
-+                }
-+            }
-+
-+            domain->kernel = bm;
-+
-+            break;
-+        case BOOTMOD_RAMDISK:
-+            /* ramdisk was already found */
-+            if ( domain->ramdisk != NULL )
-+                continue;
-+
-+            domain->ramdisk = bm;
-+
-+            break;
-+        case BOOTMOD_GUEST_CONF:
-+            /* guest config was already found */
-+            if ( domain->configs[BUILD_DOM_CONF_IDX] != NULL )
-+                continue;
-+
-+            domain->configs[BUILD_DOM_CONF_IDX] = bm;
-+
-+            break;
-+        default:
-+            continue;
-+        }
-+    }
-+
-+    info->builder->nr_doms++;
-+
-+    return 0;
-+}
-+
-+static int __init scan_node(
-+    const void *fdt, int node, const char *name, int depth, u32 address_cells,
-+    u32 size_cells, void *data)
-+{
-+    int rc = -1;
-+
-+    /* skip nodes that are not direct children of the hyperlaunch node */
-+    if ( depth > 1 )
-+        return 0;
-+
-+    if ( device_tree_node_compatible(fdt, node, "xen,config") )
-+        rc = process_config_node(fdt, node, name, depth,
-+                                 address_cells, size_cells, data);
-+    else if ( device_tree_node_compatible(fdt, node, "xen,domain") )
-+        rc = process_domain_node(fdt, node, name, depth,
-+                                 address_cells, size_cells, data);
-+
-+    if ( rc < 0 )
-+        printk("hyperlaunch fdt: node `%s'failed to parse\n", name);
-+
-+    return rc;
-+}
-+
-+/* check_fdt
-+ *   Attempts to initialize hyperlaunch config
-+ *
-+ * Returns:
-+ *    -EINVAL: Not a valid DTB
-+ *   -ENODATA: Valid DTB but not a valid hyperlaunch device tree
-+ *          0: Valid hyperlaunch device tree
-+ */
-+int __init check_fdt(struct boot_info *info, void *fdt)
-+{
-+    int hv_node, ret;
-+
-+    ret = fdt_check_header(fdt);
-+    if ( ret < 0 )
-+        return -EINVAL;
-+
-+    hv_node = fdt_path_offset(fdt, "/chosen/hypervisor");
-+    if ( hv_node < 0 )
-+        return -ENODATA;
-+
-+    if ( !device_tree_node_compatible(fdt, hv_node, "hypervisor,xen") )
-+        return -EINVAL;
-+
-+    if ( IS_ENABLED(CONFIG_X86) &&
-+         device_tree_node_compatible(fdt, hv_node, "xen,x86") )
-+        target_arch = BUILDER_FDT_TARGET_X86;
-+    else if ( IS_ENABLED(CONFIG_ARM) &&
-+              device_tree_node_compatible(fdt, hv_node, "xen,arm") )
-+        target_arch = BUILDER_FDT_TARGET_ARM;
-+
-+    if ( target_arch != BUILDER_FDT_TARGET_X86 &&
-+         target_arch != BUILDER_FDT_TARGET_ARM )
-+        return -EINVAL;
-+
-+    ret = device_tree_for_each_node(fdt, hv_node, scan_node, boot_info);
-+    if ( ret > 0 )
-+        return -ENODATA;
-+
-+    return 0;
-+}
-diff --git a/xen/common/domain-builder/fdt.h b/xen/common/domain-builder/fdt.h
-new file mode 100644
-index 0000000000..b185718412
---- /dev/null
-+++ b/xen/common/domain-builder/fdt.h
-@@ -0,0 +1,7 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+#ifndef COMMON_BUILDER_FDT_H
-+#define COMMON_BUILDER_FDT_H
-+
-+int __init check_fdt(struct boot_info *info, void *fdt);
-+#endif
-diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
-index 1d76d99a40..07b151e318 100644
---- a/xen/include/xen/bootinfo.h
-+++ b/xen/include/xen/bootinfo.h
-@@ -101,6 +101,22 @@ static inline struct boot_module *bootmodule_next_by_kind(
-     return NULL;
- }
- 
-+static inline struct boot_module *bootmodule_next_by_addr(
-+    const struct boot_info *bi, paddr_t addr, struct boot_module *start)
-+{
-+    /* point end at the entry for xen */
-+    struct boot_module *end = &bi->mods[bi->nr_mods];
-+
-+    if ( !start )
-+        start = bi->mods;
-+
-+    for ( ; start < end; start++ )
-+        if ( start->start == addr )
-+            return start;
-+
-+    return NULL;
-+}
-+
- static inline void bootmodule_update_start(struct boot_module *b, paddr_t new_start)
+ unsigned long __init dom0_compute_nr_pages(
+-    struct domain *d, struct elf_dom_parms *parms, unsigned long initrd_len)
++    struct boot_domain *bd, struct elf_dom_parms *parms,
++    unsigned long initrd_len)
  {
-     b->start = new_start;
-diff --git a/xen/include/xen/domain_builder.h b/xen/include/xen/domain_builder.h
-index 79785ef251..c0d997f7bd 100644
---- a/xen/include/xen/domain_builder.h
-+++ b/xen/include/xen/domain_builder.h
-@@ -51,5 +51,6 @@ static inline struct domain *builder_get_hwdom(struct boot_info *info)
+-    nodeid_t node;
+-    unsigned long avail = 0, nr_pages, min_pages, max_pages, iommu_pages = 0;
++    unsigned long avail, nr_pages, min_pages, max_pages;
  
- void builder_init(struct boot_info *info);
- uint32_t builder_create_domains(struct boot_info *info);
-+void arch_create_dom(const struct boot_info *bi, struct boot_domain *bd);
+     /* The ordering of operands is to work around a clang5 issue. */
+     if ( CONFIG_DOM0_MEM[0] && !dom0_mem_set )
+         parse_dom0_mem(CONFIG_DOM0_MEM);
  
- #endif /* XEN_DOMAIN_BUILDER_H */
+-    for_each_node_mask ( node, dom0_nodes )
+-        avail += avail_domheap_pages_region(node, 0, 0) +
+-                 initial_images_nrpages(node);
+-
+-    /* Reserve memory for further dom0 vcpu-struct allocations... */
+-    avail -= (d->max_vcpus - 1UL)
+-             << get_order_from_bytes(sizeof(struct vcpu));
+-    /* ...and compat_l4's, if needed. */
+-    if ( is_pv_32bit_domain(d) )
+-        avail -= d->max_vcpus - 1;
+-
+-    /* Reserve memory for iommu_dom0_init() (rough estimate). */
+-    if ( is_iommu_enabled(d) && !iommu_hwdom_passthrough )
+-    {
+-        unsigned int s;
+-
+-        for ( s = 9; s < BITS_PER_LONG; s += 9 )
+-            iommu_pages += max_pdx >> s;
+-
+-        avail -= iommu_pages;
+-    }
++    avail = dom_avail_nr_pages(bd, dom0_nodes);
+ 
+-    if ( paging_mode_enabled(d) || opt_dom0_shadow || opt_pv_l1tf_hwdom )
++    /* command line overrides configuration */
++    if (  dom0_mem_set )
+     {
+-        unsigned long cpu_pages;
+-
+-        nr_pages = get_memsize(&dom0_size, avail) ?: default_nr_pages(avail);
+-
+-        /*
+-         * Clamp according to min/max limits and available memory
+-         * (preliminary).
+-         */
+-        nr_pages = max(nr_pages, get_memsize(&dom0_min_size, avail));
+-        nr_pages = min(nr_pages, get_memsize(&dom0_max_size, avail));
+-        nr_pages = min(nr_pages, avail);
+-
+-        cpu_pages = dom0_paging_pages(d, nr_pages);
+-
+-        if ( !iommu_use_hap_pt(d) )
+-            avail -= cpu_pages;
+-        else if ( cpu_pages > iommu_pages )
+-            avail -= cpu_pages - iommu_pages;
++        bd->meminfo.mem_size = dom0_size;
++        bd->meminfo.mem_min = dom0_min_size;
++        bd->meminfo.mem_max = dom0_max_size;
+     }
+ 
+-    nr_pages = get_memsize(&dom0_size, avail) ?: default_nr_pages(avail);
+-    min_pages = get_memsize(&dom0_min_size, avail);
+-    max_pages = get_memsize(&dom0_max_size, avail);
+-
+-    /* Clamp according to min/max limits and available memory (final). */
+-    nr_pages = max(nr_pages, min_pages);
+-    nr_pages = min(nr_pages, max_pages);
+-    nr_pages = min(nr_pages, avail);
++    nr_pages = get_memsize(&bd->meminfo.mem_size, avail) ?
++               : default_nr_pages(avail);
++    min_pages = get_memsize(&bd->meminfo.mem_min, avail);
++    max_pages = get_memsize(&bd->meminfo.mem_max, avail);
+ 
+-    if ( is_pv_domain(d) &&
++    if ( is_pv_domain(bd->domain) &&
+          (parms->p2m_base == UNSET_ADDR) && !memsize_gt_zero(&dom0_size) &&
+          (!memsize_gt_zero(&dom0_min_size) || (nr_pages > min_pages)) )
+     {
+@@ -395,7 +357,8 @@ unsigned long __init dom0_compute_nr_pages(
+          * available between params.virt_base and the address space end.
+          */
+         unsigned long vstart, vend, end;
+-        size_t sizeof_long = is_pv_32bit_domain(d) ? sizeof(int) : sizeof(long);
++        size_t sizeof_long = is_pv_32bit_domain(bd->domain) ?
++                             sizeof(int) : sizeof(long);
+ 
+         vstart = parms->virt_base;
+         vend = round_pgup(parms->virt_kend);
+@@ -416,7 +379,12 @@ unsigned long __init dom0_compute_nr_pages(
+         }
+     }
+ 
+-    d->max_pages = min_t(unsigned long, max_pages, UINT_MAX);
++    /* Clamp according to min/max limits and available memory (final). */
++    nr_pages = max(nr_pages, min_pages);
++    nr_pages = min(nr_pages, max_pages);
++    nr_pages = min(nr_pages, avail);
++
++    bd->domain->max_pages = min_t(unsigned long, max_pages, UINT_MAX);
+ 
+     return nr_pages;
+ }
+diff --git a/xen/arch/x86/domain_builder.c b/xen/arch/x86/domain_builder.c
+index 1a4a6b1ca7..d8babb1090 100644
+--- a/xen/arch/x86/domain_builder.c
++++ b/xen/arch/x86/domain_builder.c
+@@ -8,7 +8,9 @@
+ #include <xen/sched.h>
+ 
+ #include <asm/pv/shim.h>
++#include <asm/dom0_build.h>
+ #include <asm/setup.h>
++#include <asm/spec_ctrl.h>
+ 
+ extern unsigned long cr4_pv32_mask;
+ 
+@@ -40,6 +42,106 @@ struct vcpu *__init alloc_dom_vcpu0(struct boot_domain *bd)
+ }
+ 
+ 
++unsigned long __init dom_avail_nr_pages(
++    struct boot_domain *bd, nodemask_t nodes)
++{
++    unsigned long avail = 0, iommu_pages = 0;
++    bool is_ctldom = false, is_hwdom = false;
++    unsigned long nr_pages = bd->meminfo.mem_size.nr_pages;
++    nodeid_t node;
++
++    if ( builder_is_ctldom(bd) )
++        is_ctldom = true;
++    if ( builder_is_hwdom(bd) )
++        is_hwdom = true;
++
++    for_each_node_mask ( node, nodes )
++        avail += avail_domheap_pages_region(node, 0, 0) +
++                 initial_images_nrpages(node);
++
++    /* Reserve memory for further dom0 vcpu-struct allocations... */
++    avail -= (bd->domain->max_vcpus - 1UL)
++             << get_order_from_bytes(sizeof(struct vcpu));
++    /* ...and compat_l4's, if needed. */
++    if ( is_pv_32bit_domain(bd->domain) )
++        avail -= bd->domain->max_vcpus - 1;
++
++    /* Reserve memory for iommu_dom0_init() (rough estimate). */
++    if ( is_hwdom && is_iommu_enabled(bd->domain) && !iommu_hwdom_passthrough )
++    {
++        unsigned int s;
++
++        for ( s = 9; s < BITS_PER_LONG; s += 9 )
++            iommu_pages += max_pdx >> s;
++
++        avail -= iommu_pages;
++    }
++
++    if ( paging_mode_enabled(bd->domain) ||
++         (is_ctldom && opt_dom0_shadow) ||
++         (is_hwdom && opt_pv_l1tf_hwdom) )
++    {
++        unsigned long cpu_pages = dom0_paging_pages(bd->domain, nr_pages);
++
++        if ( !iommu_use_hap_pt(bd->domain) )
++            avail -= cpu_pages;
++        else if ( cpu_pages > iommu_pages )
++            avail -= cpu_pages - iommu_pages;
++    }
++
++    return avail;
++}
++
++unsigned long __init dom_compute_nr_pages(
++    struct boot_domain *bd, struct elf_dom_parms *parms,
++    unsigned long initrd_len)
++{
++    unsigned long avail, nr_pages = bd->meminfo.mem_size.nr_pages;
++
++    if ( builder_is_initdom(bd) )
++        return dom0_compute_nr_pages(bd, parms, initrd_len);
++
++    avail = dom_avail_nr_pages(bd, node_online_map);
++
++    if ( is_pv_domain(bd->domain) && (parms->p2m_base == UNSET_ADDR) )
++    {
++        /*
++         * Legacy Linux kernels (i.e. such without a XEN_ELFNOTE_INIT_P2M
++         * note) require that there is enough virtual space beyond the initial
++         * allocation to set up their initial page tables. This space is
++         * roughly the same size as the p2m table, so make sure the initial
++         * allocation doesn't consume more than about half the space that's
++         * available between params.virt_base and the address space end.
++         */
++        unsigned long vstart, vend, end;
++        size_t sizeof_long = is_pv_32bit_domain(bd->domain) ?
++                             sizeof(int) : sizeof(long);
++
++        vstart = parms->virt_base;
++        vend = round_pgup(parms->virt_kend);
++        if ( !parms->unmapped_initrd )
++            vend += round_pgup(initrd_len);
++        end = vend + nr_pages * sizeof_long;
++
++        if ( end > vstart )
++            end += end - vstart;
++        if ( end <= vstart ||
++             (sizeof_long < sizeof(end) && end > (1UL << (8 * sizeof_long))) )
++        {
++            end = sizeof_long >= sizeof(end) ? 0 : 1UL << (8 * sizeof_long);
++            nr_pages = (end - vend) / (2 * sizeof_long);
++            printk("Dom0 memory clipped to %lu pages\n", nr_pages);
++        }
++    }
++
++    /* Clamp according to available memory (final). */
++    nr_pages = min(nr_pages, avail);
++
++    bd->domain->max_pages = min_t(unsigned long, nr_pages, UINT_MAX);
++
++    return nr_pages;
++}
++
+ void __init arch_create_dom(
+     const struct boot_info *bi, struct boot_domain *bd)
+ {
+diff --git a/xen/arch/x86/hvm/dom0_build.c b/xen/arch/x86/hvm/dom0_build.c
+index ae3ffc614d..e94392be07 100644
+--- a/xen/arch/x86/hvm/dom0_build.c
++++ b/xen/arch/x86/hvm/dom0_build.c
+@@ -412,15 +412,16 @@ static __init void pvh_setup_e820(struct domain *d, unsigned long nr_pages)
+     ASSERT(cur_pages == nr_pages);
+ }
+ 
+-static void __init pvh_init_p2m(struct domain *d)
++static void __init pvh_init_p2m(struct boot_domain *bd)
+ {
+-    unsigned long nr_pages = dom0_compute_nr_pages(d, NULL, 0);
++    unsigned long nr_pages = dom_compute_nr_pages(bd, NULL, 0);
+     bool preempted;
+ 
+-    pvh_setup_e820(d, nr_pages);
++    pvh_setup_e820(bd->domain, nr_pages);
+     do {
+         preempted = false;
+-        paging_set_allocation(d, dom0_paging_pages(d, nr_pages),
++        paging_set_allocation(bd->domain,
++                              dom0_paging_pages(bd->domain, nr_pages),
+                               &preempted);
+         process_pending_softirqs();
+     } while ( preempted );
+@@ -1239,7 +1240,7 @@ int __init dom0_construct_pvh(struct boot_domain *bd)
+      * be done before the iommu initializion, since iommu initialization code
+      * will likely add mappings required by devices to the p2m (ie: RMRRs).
+      */
+-    pvh_init_p2m(d);
++    pvh_init_p2m(bd);
+ 
+     iommu_hwdom_init(d);
+ 
+diff --git a/xen/arch/x86/include/asm/dom0_build.h b/xen/arch/x86/include/asm/dom0_build.h
+index f30e4b860a..6c26ab0878 100644
+--- a/xen/arch/x86/include/asm/dom0_build.h
++++ b/xen/arch/x86/include/asm/dom0_build.h
+@@ -9,9 +9,17 @@
+ 
+ extern unsigned int dom0_memflags;
+ 
+-unsigned long dom0_compute_nr_pages(struct domain *d,
+-                                    struct elf_dom_parms *parms,
+-                                    unsigned long initrd_len);
++unsigned long dom_avail_nr_pages(
++    struct boot_domain *bd, nodemask_t nodes);
++
++unsigned long dom0_compute_nr_pages(
++    struct boot_domain *bd, struct elf_dom_parms *parms,
++    unsigned long initrd_len);
++
++unsigned long dom_compute_nr_pages(
++    struct boot_domain *bd, struct elf_dom_parms *parms,
++    unsigned long initrd_len);
++
+ int dom0_setup_permissions(struct domain *d);
+ 
+ int dom0_construct_pv(struct boot_domain *bd);
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 9d1c9fb8b0..ff5c93fa14 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -428,7 +428,7 @@ int __init dom0_construct_pv(struct boot_domain *bd)
+         }
+     }
+ 
+-    nr_pages = dom0_compute_nr_pages(d, &parms, initrd_len);
++    nr_pages = dom_compute_nr_pages(bd, &parms, initrd_len);
+ 
+     if ( parms.pae == XEN_PAE_EXTCR3 )
+             set_bit(VMASST_TYPE_pae_extended_cr3, &d->vm_assist);
 -- 
 2.20.1
 
