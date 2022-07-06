@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E14C433EF
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 15:18:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362317.592304 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06402C43334
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 15:32:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362323.592315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o96mr-0004i6-AN; Wed, 06 Jul 2022 15:17:57 +0000
+	id 1o970b-0007cK-IX; Wed, 06 Jul 2022 15:32:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362317.592304; Wed, 06 Jul 2022 15:17:57 +0000
+Received: by outflank-mailman (output) from mailman id 362323.592315; Wed, 06 Jul 2022 15:32:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o96mr-0004hz-6B; Wed, 06 Jul 2022 15:17:57 +0000
-Received: by outflank-mailman (input) for mailman id 362317;
- Wed, 06 Jul 2022 15:17:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=Lo2B=XL=citrix.com=prvs=179813542=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1o96mq-0004ht-3E
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 15:17:56 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id cdec6f4c-fd3e-11ec-bd2d-47488cf2e6aa;
- Wed, 06 Jul 2022 17:17:54 +0200 (CEST)
+	id 1o970b-0007cD-Fa; Wed, 06 Jul 2022 15:32:09 +0000
+Received: by outflank-mailman (input) for mailman id 362323;
+ Wed, 06 Jul 2022 15:32:08 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1o970Z-0007c3-WF; Wed, 06 Jul 2022 15:32:08 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1o970Z-0003uE-SW; Wed, 06 Jul 2022 15:32:07 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1o970Z-0005WC-Iw; Wed, 06 Jul 2022 15:32:07 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1o970Z-0005Ux-IS; Wed, 06 Jul 2022 15:32:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,145 +44,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: cdec6f4c-fd3e-11ec-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1657120674;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=h8ds19eScE8j3L+YzqslAKx1TfX5HX9CLCVB/Da1hOY=;
-  b=MHQMvOucpvNPns3N0/grzOpfJzFXHlSGzNlHN7j63QNciCkEU3tmboap
-   IskdRoQW0w3UtFZCT5YGvbO3mwUgErPFEEVAOaKQLVaOg3TSVwIXXzo0E
-   5lR0+svOwNwdl1yRPHmwLOBqGAfJrVV1IV3i06TozvGCnlHDU+rnwV/95
-   Q=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 5.1
-X-MesageID: 75228734
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:aoZqA6ua8+bNB2hQLLUxVWqbPOfnVC5eMUV32f8akzHdYApBsoF/q
- tZmKWnTa/eMZWH1f9wjbIrg/EJS7Z7RydJmT1Y9rXoxHi4b+JbJXdiXEBz9bniYRiHhoOOLz
- Cm8hv3odp1coqr0/0/1WlTZhSAgk/nOHNIQMcacUsxLbVYMpBwJ1FQywYbVvqYy2YLjW1zV5
- 4uoyyHiEATNNwBcYzp8B52r8HuDjNyq0N/PlgVjDRzjlAa2e0g9VPrzF4noR5fLatA88tqBb
- /TC1NmEElbxpH/BPD8HfoHTKSXmSpaKVeSHZ+E/t6KK2nCurQRquko32WZ1he66RFxlkvgoo
- Oihu6BcRi80MJWXur0TVyMATQFYZqRgp6fLcVyW5Jn7I03uKxMAwt1rBUAye4YZ5vx2ESdF8
- vlwxDIlN07ZwbjsmfTiF7cq1p9LwMrDZevzvllpyy3ZCvA3B4jOWazQ6fdT3Ssqh9AIFvHbD
- yYcQWUyNk6QPEYTUrsRIIgcvsqh1l+8SB13mWm8pIhp0WXp0AMkhdABN/KKI4fXFK25hH2wv
- Xna9m70BhUbMt23yjef9H+owOjVkkvTR4Y6BLC+sPlwjzW7xHEXCRAQfUu2p7++kEHWc9BVJ
- lEQ+yEuhbMv70HtRd74NzWorXjBshMCVt54F+wh9BrL2qfS+xyeBGUPUnhGctNOiSMtbWV0j
- BnTxYqvXGEx9u3OIZ6AyluKhS68AXM3dGEGX3dabS1e6v+8uI1jqjuaG76PD5WJYs3J9SDYm
- m7X83Fm3+VO16bnxI3gowmZ3mvESozhC1dsu16JBj/NAhZRPtbNWmC+1bTMAR+sxq69R0LJg
- nULktP2AAsmXcDUz3zlrAng8diUCxe53N702wcH82EJrWjFxpJaVdk4DMtCDEloKN0YXjTif
- VXevwhcjLcKYib1NfMpOdjqUpp6pUQFKTgCfqmNBuein7ArLFPXlM2QTRT4M5/RfLgEzvhkZ
- MbznTeEBncGE6V3pAeLqxMm+eZznEgWnDqLLbiilkjP+efPPxa9FOZaWGZim8hktctoVi2Oq
- 4YBXyZLoj0CONDDjt7/rddMcwtbcCNkVPgbaaV/L4a+H+avI0l5Y9e5/F/rU9YNc3h9/gsQw
- kyAZw==
-IronPort-HdrOrdr: A9a23:jWhyJq5YyJfCPGOhWQPXwMjXdLJyesId70hD6qhwISY6TiW9rb
- HLoB17726QtN9/YhwdcLy7VJVoBEmskqKdgrNhX4tKPjOHhILAFugLhuHfKn/bak7DH4ZmpM
- FdmsNFaeEYY2IUsfrH
-X-IronPort-AV: E=Sophos;i="5.92,250,1650945600"; 
-   d="scan'208";a="75228734"
-Date: Wed, 6 Jul 2022 16:17:48 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Andrew
- Cooper" <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] EFI: strip xen.efi when putting it on the EFI partition
-Message-ID: <YsWnnMZYwB7UGuv6@perard.uk.xensource.com>
-References: <79ebbde2-4be8-d393-476d-25326a2aa327@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <79ebbde2-4be8-d393-476d-25326a2aa327@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Message-Id:Subject:To;
+	bh=j6rltrRj/RPAg7Cp7lMqZhG0YBIS/UGLa9KNYmQZQHs=; b=gTeVMG7SIBmkM1Geo7bcoGd8Zx
+	X6MdUkQeQi2+cvIHHnB8xFgw3Tulfj/DDM26GVwFZd2wC1nmCPcOk/yTGXB4tS7wgMmYULen8CJA6
+	4vzu9k+EtBtTTNmHnvzCvcRGCx8cpBgmcAc37d3jky0th/M0mfRU3k/CugrEfPZvzOCg=;
+To: xen-devel@lists.xenproject.org
+Subject: [xen-unstable-smoke bisection] complete test-arm64-arm64-xl-xsm
+Message-Id: <E1o970Z-0005Ux-IS@osstest.test-lab.xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 06 Jul 2022 15:32:07 +0000
 
-On Thu, Jun 09, 2022 at 05:52:45PM +0200, Jan Beulich wrote:
-> With debug info retained, xen.efi can be quite large. Unlike for xen.gz
-> there's no intermediate step (mkelf32 there) involved which would strip
-> debug info kind of as a side effect. While the installing of xen.efi on
-> the EFI partition is an optional step (intended to be a courtesy to the
-> developer), adjust it also for the purpose of documenting what distros
-> would be expected to do during boot loader configuration (which is what
-> would normally put xen.efi into the EFI partition).
-> 
-> Model the control over stripping after Linux'es module installation,
-> except that the stripped executable is constructed in the build area
-> instead of in the destination location. This is to conserve on space
-> used there - EFI partitions tend to be only a few hundred Mb in size.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> GNU strip 2.38 appears to have issues when acting on a PE binary:
-> - file name symbols are also stripped; while there is a separate
->   --keep-file-symbols option (which I would have thought to be on by
->   default anyway), its use so far makes no difference,
-> - the string table grows in size, when one would expect it to retain its
->   size (or shrink),
-> - linker version is changed in and timestamp zapped from the header.
-> Older GNU strip (observed with 2.35.1) doesn't work at all ("Data
-> Directory size (1c) exceeds space left in section (8)").
-> 
-> Future GNU strip is going to honor --keep-file-symbols (and will also
-> have the other issues fixed). Question is whether we should use that
-> option (for the symbol table as a whole to make sense), or whether
-> instead we should (by default) strip the symbol table as well.
+branch xen-unstable-smoke
+xenbranch xen-unstable-smoke
+job test-arm64-arm64-xl-xsm
+testid xen-boot
 
-I guess trying to keep those symbol might be useful, if it's not too
-big, to help debugging system in production.
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
 
-> --- a/xen/Makefile
-> +++ b/xen/Makefile
-> @@ -465,6 +465,22 @@ endif
->  .PHONY: _build
->  _build: $(TARGET)$(CONFIG_XEN_INSTALL_SUFFIX)
->  
-> +# Strip
-> +#
-> +# INSTALL_EFI_STRIP, if defined, will cause xen.efi to be stripped before it
-> +# is installed. If INSTALL_EFI_STRIP is '1', then the default option
-> +# --strip-debug will be used. Otherwise, INSTALL_EFI_STRIP value will be used
-> +# as the option(s) to the strip command.
+*** Found and reproduced problem changeset ***
 
-It would be useful to also document INSTALL_EFI_STRIP in ./INSTALL or in
-./docs/misc/efi.pandoc (efi.pandoc is where EFI_VENDOR is documented for
-example, so probably a better place for the doc of the new option).
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+  Bug not present: 4df2e99d731402da48afb19dc970ccab5a0814d6
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/171534/
 
-> +ifdef INSTALL_EFI_STRIP
-> +
-> +ifeq ($(INSTALL_EFI_STRIP),1)
-> +efi-strip-opt := --strip-debug
-> +else
-> +efi-strip-opt := $(INSTALL_EFI_STRIP)
-> +endif
-> +
-> +endif
-> +
->  .PHONY: _install
->  _install: D=$(DESTDIR)
->  _install: T=$(notdir $(TARGET))
-> @@ -489,6 +505,9 @@ _install: $(TARGET)$(CONFIG_XEN_INSTALL_
->  		ln -sf $(T)-$(XEN_FULLVERSION).efi $(D)$(EFI_DIR)/$(T)-$(XEN_VERSION).efi; \
->  		ln -sf $(T)-$(XEN_FULLVERSION).efi $(D)$(EFI_DIR)/$(T).efi; \
->  		if [ -n '$(EFI_MOUNTPOINT)' -a -n '$(EFI_VENDOR)' ]; then \
-> +			$(if $(efi-strip-opt), \
-> +			     $(STRIP) $(efi-strip-opt) -p -o $(TARGET).efi.stripped $(TARGET).efi && \
-> +			     $(INSTALL_DATA) $(TARGET).efi.stripped $(D)$(EFI_MOUNTPOINT)/efi/$(EFI_VENDOR)/$(T)-$(XEN_FULLVERSION).efi ||) \
 
-This optional part of the script that ends with "||" means that if
-`strip` or `install` fails, we would install the non stripped binary. Is
-this something that's acceptable? (Plus of doing that is avoiding
-changing the next line, and avoiding a longer $(if ,).
+  commit 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+  Author: Demi Marie Obenour <demi@invisiblethingslab.com>
+  Date:   Tue Jul 5 13:10:46 2022 +0200
+  
+      EFI: preserve the System Resource Table for dom0
+      
+      The EFI System Resource Table (ESRT) is necessary for fwupd to identify
+      firmware updates to install.  According to the UEFI specification §23.4,
+      the ESRT shall be stored in memory of type EfiBootServicesData.  However,
+      memory of type EfiBootServicesData is considered general-purpose memory
+      by Xen, so the ESRT needs to be moved somewhere where Xen will not
+      overwrite it.  Copy the ESRT to memory of type EfiRuntimeServicesData,
+      which Xen will not reuse.  dom0 can use the ESRT if (and only if) it is
+      in memory of type EfiRuntimeServicesData.
+      
+      Earlier versions of this patch reserved the memory in which the ESRT was
+      located.  This created awkward alignment problems, and required either
+      splitting the E820 table or wasting memory.  It also would have required
+      a new platform op for dom0 to use to indicate if the ESRT is reserved.
+      By copying the ESRT into EfiRuntimeServicesData memory, the E820 table
+      does not need to be modified, and dom0 can just check the type of the
+      memory region containing the ESRT.  The copy is only done if the ESRT is
+      not already in EfiRuntimeServicesData memory, avoiding memory leaks on
+      repeated kexec.
+      
+      See https://lore.kernel.org/xen-devel/20200818184018.GN1679@mail-itl/T/
+      for details.
+      
+      Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
->  			$(INSTALL_DATA) $(TARGET).efi $(D)$(EFI_MOUNTPOINT)/efi/$(EFI_VENDOR)/$(T)-$(XEN_FULLVERSION).efi; \
->  		elif [ "$(D)" = "$(patsubst $(shell cd $(XEN_ROOT) && pwd)/%,%,$(D))" ]; then \
->  			echo 'EFI installation only partially done (EFI_VENDOR not set)' >&2; \
 
-An other thing, the "*.efi.stripped" file is I think going to be left
-over and not removed during `make clean`.
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable-smoke/test-arm64-arm64-xl-xsm.xen-boot.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
 
-Cheers,
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable-smoke/test-arm64-arm64-xl-xsm.xen-boot --summary-out=tmp/171534.bisection-summary --basis-template=171486 --blessings=real,real-bisect,real-retry xen-unstable-smoke test-arm64-arm64-xl-xsm xen-boot
+Searching for failure / basis pass:
+ 171529 fail [host=laxton1] / 171486 ok.
+Failure / basis pass flights: 171529 / 171486
+Tree: linux git://xenbits.xen.org/linux-pvops.git
+Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+Basis pass f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6
+Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/linux-pvops.git#f0f0e602f7c9781699ecda9be763eac0b03d54f0-f0f0e602f7c9781699ecda9be763eac0b03d54f0 git://xenbits.xen.org/osstest/linux-firmware.git#c530a75c1e6a472b0eb9558310b518f0dfcd8860-c530a75c1e6a472b0eb9558310b518f0dfcd8860 git://xenbits.xen.org/qemu-xen.git#b746458e1ce1bec85e58b458386f8b7a0bedfaa6-b746458e1ce1bec85e58b458386f8b7a0bedfaa6 git://xenbits.xen.org/xen.git#4df2e99d731402da48afb19dc970ccab5a0814d6-61ff273\
+ 3221e3b5bae5f647d9a460c7a68a5ace8
+Loaded 5001 nodes in revision graph
+Searching for test results:
+ 171486 pass f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6
+ 171501 [host=rochester0]
+ 171505 [host=rochester0]
+ 171506 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+ 171507 [host=rochester0]
+ 171510 pass f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6
+ 171513 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+ 171511 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+ 171515 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 c4184bf305dc14c3e150617904c40b120664efe6
+ 171518 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+ 171521 pass f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6
+ 171522 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+ 171519 [host=rochester1]
+ 171524 pass f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6
+ 171527 [host=rochester1]
+ 171530 [host=rochester1]
+ 171531 [host=rochester1]
+ 171529 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 61ff2733221e3b5bae5f647d9a460c7a68a5ace8
+ 171532 [host=rochester1]
+ 171534 fail f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+Searching for interesting versions
+ Result found: flight 171486 (pass), for basis pass
+ For basis failure, parent search stopping at f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6, results HASH(0x558b35d49170) HASH(0x558b35d531c0) HASH(0x558b35d5c8b0) HASH(0x558b35d605c0) Result found: flight 171506 (fail), for basis failure (at ancestor ~260)
+ Repro found: flight 171510 (pass), for basis pass
+ Repro found: flight 171511 (fail), for basis failure
+ 0 revisions at f0f0e602f7c9781699ecda9be763eac0b03d54f0 c530a75c1e6a472b0eb9558310b518f0dfcd8860 b746458e1ce1bec85e58b458386f8b7a0bedfaa6 4df2e99d731402da48afb19dc970ccab5a0814d6
+No revisions left to test, checking graph state.
+ Result found: flight 171486 (pass), for last pass
+ Result found: flight 171518 (fail), for first failure
+ Repro found: flight 171521 (pass), for last pass
+ Repro found: flight 171522 (fail), for first failure
+ Repro found: flight 171524 (pass), for last pass
+ Repro found: flight 171534 (fail), for first failure
 
--- 
-Anthony PERARD
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  xen git://xenbits.xen.org/xen.git
+  Bug introduced:  8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+  Bug not present: 4df2e99d731402da48afb19dc970ccab5a0814d6
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/171534/
+
+
+  commit 8d410ac2c178e1dd1001cadddbe9ca75a9738c95
+  Author: Demi Marie Obenour <demi@invisiblethingslab.com>
+  Date:   Tue Jul 5 13:10:46 2022 +0200
+  
+      EFI: preserve the System Resource Table for dom0
+      
+      The EFI System Resource Table (ESRT) is necessary for fwupd to identify
+      firmware updates to install.  According to the UEFI specification §23.4,
+      the ESRT shall be stored in memory of type EfiBootServicesData.  However,
+      memory of type EfiBootServicesData is considered general-purpose memory
+      by Xen, so the ESRT needs to be moved somewhere where Xen will not
+      overwrite it.  Copy the ESRT to memory of type EfiRuntimeServicesData,
+      which Xen will not reuse.  dom0 can use the ESRT if (and only if) it is
+      in memory of type EfiRuntimeServicesData.
+      
+      Earlier versions of this patch reserved the memory in which the ESRT was
+      located.  This created awkward alignment problems, and required either
+      splitting the E820 table or wasting memory.  It also would have required
+      a new platform op for dom0 to use to indicate if the ESRT is reserved.
+      By copying the ESRT into EfiRuntimeServicesData memory, the E820 table
+      does not need to be modified, and dom0 can just check the type of the
+      memory region containing the ESRT.  The copy is only done if the ESRT is
+      not already in EfiRuntimeServicesData memory, avoiding memory leaks on
+      repeated kexec.
+      
+      See https://lore.kernel.org/xen-devel/20200818184018.GN1679@mail-itl/T/
+      for details.
+      
+      Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
+      Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Revision graph left in /home/logs/results/bisect/xen-unstable-smoke/test-arm64-arm64-xl-xsm.xen-boot.{dot,ps,png,html,svg}.
+----------------------------------------
+171534: tolerable ALL FAIL
+
+flight 171534 xen-unstable-smoke real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/171534/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ test-arm64-arm64-xl-xsm       8 xen-boot                fail baseline untested
+
+
+jobs:
+ test-arm64-arm64-xl-xsm                                      fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
 
