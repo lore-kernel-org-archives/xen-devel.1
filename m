@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD0CCCA480
-	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:08:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362543.592619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DA4C43334
+	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 21:08:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362545.592630 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CFq-0006kT-IR; Wed, 06 Jul 2022 21:08:14 +0000
+	id 1o9CG0-0007Gm-SX; Wed, 06 Jul 2022 21:08:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362543.592619; Wed, 06 Jul 2022 21:08:14 +0000
+Received: by outflank-mailman (output) from mailman id 362545.592630; Wed, 06 Jul 2022 21:08:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9CFq-0006kM-EV; Wed, 06 Jul 2022 21:08:14 +0000
-Received: by outflank-mailman (input) for mailman id 362543;
- Wed, 06 Jul 2022 21:08:12 +0000
+	id 1o9CG0-0007GQ-Nk; Wed, 06 Jul 2022 21:08:24 +0000
+Received: by outflank-mailman (input) for mailman id 362545;
+ Wed, 06 Jul 2022 21:08:22 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FJEZ=XL=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1o9CEG-0003HV-HK
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:06:36 +0000
+ id 1o9CF4-0003HV-Ba
+ for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 21:07:26 +0000
 Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
  [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 8429ed03-fd6f-11ec-924f-1f966e50362f;
- Wed, 06 Jul 2022 23:06:35 +0200 (CEST)
+ id a1ce176b-fd6f-11ec-924f-1f966e50362f;
+ Wed, 06 Jul 2022 23:07:25 +0200 (CEST)
 Received: from sisyou.hme. (static-72-81-132-2.bltmmd.fios.verizon.net
  [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 1657141510464427.8856190700619;
- Wed, 6 Jul 2022 14:05:10 -0700 (PDT)
+ with SMTPS id 1657141515007710.3122852676397;
+ Wed, 6 Jul 2022 14:05:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,40 +42,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 8429ed03-fd6f-11ec-924f-1f966e50362f
-ARC-Seal: i=1; a=rsa-sha256; t=1657141512; cv=none; 
+X-Inumbo-ID: a1ce176b-fd6f-11ec-924f-1f966e50362f
+ARC-Seal: i=1; a=rsa-sha256; t=1657141516; cv=none; 
 	d=zohomail.com; s=zohoarc; 
-	b=Sj9GD3wXJe1li2qmx6rCzq1a5bPyg/IU4xYez+aVKX/fxmGBiqp1rKPXeyTsThr6aET3CADBk7qdBmJvg8yeJPITrq6RLI8RPsgUZtKTelNBNsmokrLWHNv2PnB5dCGAoY1t1QI6YeqkXndAtzbp16tMdjeN8KV1sJ+enU6D0P8=
+	b=kn/VLgVHdrNiMJYv6C8ca0f3cdXI0qCRcFQLsnDcyMGQ1mki8dYJaC3NtgtMnjfgYBfWCjCcWod+iM56MB7VjEdyNP8q1wWzOTBPgidoReSQ46jpnhM77OeMjLtS9WasAHtekYzXvH7tBW3IoEpMn7uttyv5zClFn5gUZTO6KFI=
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1657141512; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=AEMYHg/g52JmQvYb/2PyAV5djmhaoa0EO/NLhuQyF24=; 
-	b=Cel0AKW74PFnVWaGk0Nr9FEYBuxI7D17IguiYiq+eJM+i+/zjT7YopKyKdE9jtBJ4eQD10vKCzyGYZfA5kSHsgXCbeZrzBRjTzPUz0SD2TK4py9oGvxsakGYUf8QIXwbkeN3+qy34KfaEFrZ10gzm2/41/MfCxlXOPews7YOc4w=
+	t=1657141516; h=Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+	bh=HKjJTQMRAU0h0mGoRHhFPzIn/dQiHWAlt9SCRVrEJ6w=; 
+	b=Tpb6tPRG3vu03zYlMxnzKUhhBtf1S5wuRqC8BBy2YpSyaWrcZEQRzU+/Jw+8zg14X2ifEFgBihC0cWFnLBYSX1XlJ3Tjg2XjkCDf3hYgaN5QH4ymcLFJHwHxSAILg0xL/yxB6gkEPIGLaxgxyx/CU0Q6YB3gIHZMlSb1h4MrGyE=
 ARC-Authentication-Results: i=1; mx.zohomail.com;
 	dkim=pass  header.i=apertussolutions.com;
 	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
 	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141512;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1657141516;
 	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
 	h=From:From:To:To:Cc:Cc:Subject:Subject:Date:Date:Message-Id:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Reply-To;
-	bh=AEMYHg/g52JmQvYb/2PyAV5djmhaoa0EO/NLhuQyF24=;
-	b=RPSyGPOqI3Ul6wYg6fIT7iqgt/RRDASbnvyhK7y64L0peQF7aP7hEsbWP1WL4xBQ
-	KREuegYf57Bqj038i0OWJ0jMyNwKwKNBcG/EcgaLClt4w7VZPMP5CgwKIU7HPcXveeZ
-	iPTS1mrz1yYkUGrzTXmYYUcav7Qo0vD2K44nIadw=
+	bh=HKjJTQMRAU0h0mGoRHhFPzIn/dQiHWAlt9SCRVrEJ6w=;
+	b=mARI0734kr2pktMr8wWc2nsNy5B6xK65nm0w1Rh8HNsFD0TZD1DC4JRFO1tG5/nh
+	53OJP4pGyVDIdK8mbuWT30tkLnig2RETxO93J7Kq9ijq2BdngSh0PYZBX72uFlEMPVr
+	iquDN14+baAoOa9kZEiPo89oz1Fc4x7gHiuF2w8M=
 From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-To: xen-devel@lists.xenproject.org,
-	Wei Liu <wl@xen.org>
+To: xen-devel@lists.xenproject.org
 Cc: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	scott.davis@starlab.io,
 	christopher.clark@starlab.io,
-	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 05/18] x86: refactor xen cmdline into general framework
-Date: Wed,  6 Jul 2022 17:04:40 -0400
-Message-Id: <20220706210454.30096-6-dpsmith@apertussolutions.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v1 08/18] kconfig: introduce domain builder config option
+Date: Wed,  6 Jul 2022 17:04:43 -0400
+Message-Id: <20220706210454.30096-9-dpsmith@apertussolutions.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20220706210454.30096-1-dpsmith@apertussolutions.com>
 References: <20220706210454.30096-1-dpsmith@apertussolutions.com>
@@ -83,207 +82,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-ZohoMailClient: External
 
-This refactors xen cmdline processing into a general framework
-under the new boot info abstraction.
+Hyperlaunch domain builder is the consolidated boot time domain building logic
+framework.  This commit introduces the first config option for the domain
+builder to control support for loading the domain configurations via the
+flattened device tree.
 
 Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 Reviewed-by: Christopher Clark <christopher.clark@starlab.io>
 ---
- xen/arch/x86/include/asm/bootinfo.h | 49 ++++++++++++++++++++++++
- xen/arch/x86/setup.c                | 58 ++++-------------------------
- xen/include/xen/bootinfo.h          | 11 ++++++
- 3 files changed, 68 insertions(+), 50 deletions(-)
+ xen/common/Kconfig                |  1 +
+ xen/common/domain-builder/Kconfig | 15 +++++++++++++++
+ 2 files changed, 16 insertions(+)
+ create mode 100644 xen/common/domain-builder/Kconfig
 
-diff --git a/xen/arch/x86/include/asm/bootinfo.h b/xen/arch/x86/include/asm/bootinfo.h
-index e5135e402b..2fcd576023 100644
---- a/xen/arch/x86/include/asm/bootinfo.h
-+++ b/xen/arch/x86/include/asm/bootinfo.h
-@@ -45,4 +45,53 @@ struct __packed mb_memmap {
-     uint32_t type;
- };
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 9fc6683932..5a1c40e392 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -355,6 +355,7 @@ config ARGO
  
-+static inline bool loader_is_grub2(const char *loader_name)
-+{
-+    /* GRUB1="GNU GRUB 0.xx"; GRUB2="GRUB 1.xx" */
-+    const char *p = strstr(loader_name, "GRUB ");
-+    return (p != NULL) && (p[5] != '0');
-+}
-+
-+static inline char *arch_prepare_cmdline(char *p, struct arch_boot_info *arch)
-+{
-+    p = p ? : "";
-+
-+    /* Strip leading whitespace. */
-+    while ( *p == ' ' )
-+        p++;
-+
-+    /* GRUB2 and PVH don't not include image name as first item on command line. */
-+    if ( !(arch->xenguest || loader_is_grub2(arch->boot_loader_name)) )
-+    {
-+        /* Strip image name plus whitespace. */
-+        while ( (*p != ' ') && (*p != '\0') )
-+            p++;
-+        while ( *p == ' ' )
-+            p++;
-+    }
-+
-+    return p;
-+}
-+
-+static inline char *arch_bootinfo_prepare_cmdline(
-+    char *cmdline, struct arch_boot_info *arch)
-+{
-+    if ( !cmdline )
-+        return "";
-+
-+    if ( (arch->kextra = strstr(cmdline, " -- ")) != NULL )
-+    {
-+        /*
-+         * Options after ' -- ' separator belong to dom0.
-+         *  1. Orphan dom0's options from Xen's command line.
-+         *  2. Skip all but final leading space from dom0's options.
-+         */
-+        *arch->kextra = '\0';
-+        arch->kextra += 3;
-+        while ( arch->kextra[1] == ' ' ) arch->kextra++;
-+    }
-+
-+
-+    return arch_prepare_cmdline(cmdline, arch);
-+}
- #endif
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index ad37f4a658..e4060d6219 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -716,34 +716,6 @@ ignore_param("edid");
-  */
- ignore_param("placeholder");
+ 	  If unsure, say N.
  
--static bool __init loader_is_grub2(const char *loader_name)
--{
--    /* GRUB1="GNU GRUB 0.xx"; GRUB2="GRUB 1.xx" */
--    const char *p = strstr(loader_name, "GRUB ");
--    return (p != NULL) && (p[5] != '0');
--}
--
--static char * __init cmdline_cook(char *p, const char *loader_name)
--{
--    p = p ? : "";
--
--    /* Strip leading whitespace. */
--    while ( *p == ' ' )
--        p++;
--
--    /* GRUB2 and PVH don't not include image name as first item on command line. */
--    if ( xen_guest || loader_is_grub2(loader_name) )
--        return p;
--
--    /* Strip image name plus whitespace. */
--    while ( (*p != ' ') && (*p != '\0') )
--        p++;
--    while ( *p == ' ' )
--        p++;
--
--    return p;
--}
--
- static unsigned int __init copy_bios_e820(struct e820entry *map, unsigned int limit)
- {
-     unsigned int n = min(bootsym(bios_e820nr), limit);
-@@ -754,8 +726,7 @@ static unsigned int __init copy_bios_e820(struct e820entry *map, unsigned int li
-     return n;
- }
++source "common/domain-builder/Kconfig"
+ source "common/sched/Kconfig"
  
--static struct domain *__init create_dom0(
--    const struct boot_info *bi, const char *kextra, const char *loader)
-+static struct domain *__init create_dom0(const struct boot_info *bi)
- {
-     struct xen_domctl_createdomain dom0_cfg = {
-         .flags = IS_ENABLED(CONFIG_TBOOT) ? XEN_DOMCTL_CDF_s3_integrity : 0,
-@@ -804,16 +775,16 @@ static struct domain *__init create_dom0(
-     /* Grab the DOM0 command line. */
-     cmdline = (image->string.kind == BOOTSTR_CMDLINE) ?
-               image->string.bytes : NULL;
--    if ( cmdline || kextra )
-+    if ( cmdline || bi->arch->kextra )
-     {
-         static char __initdata dom0_cmdline[MAX_GUEST_CMDLINE];
- 
--        cmdline = cmdline_cook(cmdline, loader);
-+        cmdline = arch_prepare_cmdline(cmdline, bi->arch);
-         safe_strcpy(dom0_cmdline, cmdline);
- 
--        if ( kextra )
-+        if ( bi->arch->kextra )
-             /* kextra always includes exactly one leading space. */
--            safe_strcat(dom0_cmdline, kextra);
-+            safe_strcat(dom0_cmdline, bi->arch->kextra);
- 
-         /* Append any extra parameters. */
-         if ( skip_ioapic_setup && !strstr(dom0_cmdline, "noapic") )
-@@ -861,7 +832,7 @@ static struct domain *__init create_dom0(
- void __init noreturn __start_xen(unsigned long bi_p)
- {
-     char *memmap_type = NULL;
--    char *cmdline, *kextra, *loader;
-+    char *cmdline, *loader;
-     void *bsp_stack;
-     struct cpu_info *info = get_cpu_info(), *bsp_info;
-     unsigned int initrdidx, num_parked = 0;
-@@ -929,20 +900,7 @@ void __init noreturn __start_xen(unsigned long bi_p)
-         ? boot_info->arch->boot_loader_name : "unknown";
- 
-     /* Parse the command-line options. */
--    cmdline = cmdline_cook((boot_info->arch->flags & BOOTINFO_FLAG_X86_CMDLINE) ?
--                            boot_info->cmdline : NULL,
--                           loader);
--    if ( (kextra = strstr(cmdline, " -- ")) != NULL )
--    {
--        /*
--         * Options after ' -- ' separator belong to dom0.
--         *  1. Orphan dom0's options from Xen's command line.
--         *  2. Skip all but final leading space from dom0's options.
--         */
--        *kextra = '\0';
--        kextra += 3;
--        while ( kextra[1] == ' ' ) kextra++;
--    }
-+    cmdline = bootinfo_prepare_cmdline(boot_info);
-     cmdline_parse(cmdline);
- 
-     /* Must be after command line argument parsing and before
-@@ -1951,7 +1909,7 @@ void __init noreturn __start_xen(unsigned long bi_p)
-      * We're going to setup domain0 using the module(s) that we stashed safely
-      * above our heap. The second module, if present, is an initrd ramdisk.
-      */
--    dom0 = create_dom0(boot_info, kextra, loader);
-+    dom0 = create_dom0(boot_info);
-     if ( !dom0 )
-         panic("Could not set up DOM0 guest OS\n");
- 
-diff --git a/xen/include/xen/bootinfo.h b/xen/include/xen/bootinfo.h
-index dde8202f62..477294dc10 100644
---- a/xen/include/xen/bootinfo.h
-+++ b/xen/include/xen/bootinfo.h
-@@ -53,6 +53,17 @@ struct __packed boot_info {
- 
- extern struct boot_info *boot_info;
- 
-+static inline char *bootinfo_prepare_cmdline(struct boot_info *bi)
-+{
-+    bi->cmdline = arch_bootinfo_prepare_cmdline(bi->cmdline, bi->arch);
+ config CRYPTO
+diff --git a/xen/common/domain-builder/Kconfig b/xen/common/domain-builder/Kconfig
+new file mode 100644
+index 0000000000..893038cab3
+--- /dev/null
++++ b/xen/common/domain-builder/Kconfig
+@@ -0,0 +1,15 @@
 +
-+    if ( *bi->cmdline == ' ' )
-+        printk(XENLOG_WARNING "%s: leading whitespace left on cmdline\n",
-+               __func__);
++menu "Domain Builder Features"
 +
-+    return bi->cmdline;
-+}
++config BUILDER_FDT
++	bool "Domain builder device tree (UNSUPPORTED)" if UNSUPPORTED
++	select CORE_DEVICE_TREE
++	---help---
++	  Enables the ability to configure the domain builder using a
++	  flattened device tree.
 +
- static inline unsigned long bootmodule_next_idx_by_kind(
-     const struct boot_info *bi, bootmodule_kind kind, unsigned long start)
- {
++	  This feature is currently experimental.
++
++	  If unsure, say N.
++
++endmenu
 -- 
 2.20.1
 
