@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50DECCCA481
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A75CCA47F
 	for <xen-devel@archiver.kernel.org>; Wed,  6 Jul 2022 15:33:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362334.592359 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.362331.592326 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o971O-0000ac-7p; Wed, 06 Jul 2022 15:32:58 +0000
+	id 1o971L-0008D5-1C; Wed, 06 Jul 2022 15:32:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362334.592359; Wed, 06 Jul 2022 15:32:58 +0000
+Received: by outflank-mailman (output) from mailman id 362331.592326; Wed, 06 Jul 2022 15:32:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o971O-0000aN-4E; Wed, 06 Jul 2022 15:32:58 +0000
-Received: by outflank-mailman (input) for mailman id 362334;
- Wed, 06 Jul 2022 15:32:56 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1o971K-0008Cy-Tu; Wed, 06 Jul 2022 15:32:54 +0000
+Received: by outflank-mailman (input) for mailman id 362331;
+ Wed, 06 Jul 2022 15:32:53 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=lWdV=XL=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1o971M-000854-2b
- for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 15:32:56 +0000
+ id 1o971I-00081g-Ll
+ for xen-devel@lists.xenproject.org; Wed, 06 Jul 2022 15:32:53 +0000
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
- [66.111.4.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id e77d41e5-fd40-11ec-bd2d-47488cf2e6aa;
- Wed, 06 Jul 2022 17:32:55 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id 56BAA5C0110;
- Wed,  6 Jul 2022 11:32:54 -0400 (EDT)
+ [66.111.4.28]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id e4461717-fd40-11ec-924f-1f966e50362f;
+ Wed, 06 Jul 2022 17:32:50 +0200 (CEST)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id C2C9E5C0190;
+ Wed,  6 Jul 2022 11:32:48 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Wed, 06 Jul 2022 11:32:54 -0400
+ by compute4.internal (MEProxy); Wed, 06 Jul 2022 11:32:48 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 6 Jul 2022 11:32:52 -0400 (EDT)
+ 6 Jul 2022 11:32:45 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,48 +45,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: e77d41e5-fd40-11ec-bd2d-47488cf2e6aa
+X-Inumbo-ID: e4461717-fd40-11ec-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm2; t=1657121574; x=1657207974; bh=APJyRhX6/2
-	wxNUIPxM+2LptgYjBbjDcQ/gEU4+XF8Xs=; b=naexuyo7OOluAJjx3VQHuw8Gl6
-	aW45I0V55oVSyghev1vf3BRqZWyJE+tCeC1DTR4ADT4Yhm3FpbrGMUcNaRc7DR6J
-	hEVsp9HyIRungb6cVyeEjrDIGxY3Xy0DB9ywqkz/s08qv6Ostexnj06+cmMRoOYe
-	YOSSET76ixGIcZ4wYtH2EhUY4pL8HY54VbTYyUtxBYSmvgyd7w6ZAgxJiIFLqm04
-	BC/dgUWXgcHSTYJxHi1euS9aXoK6lBN+m7qJbmrW0tJhSTHK7aUNPOBwM38uh5oA
-	2p59nWLCgmaW1L9KzA5KrCIumU/NUnMf70xOnX59qlWc3GJhX45ThVNs5hYQ==
+	:content-type:date:date:from:from:in-reply-to:message-id
+	:mime-version:reply-to:sender:subject:subject:to:to; s=fm2; t=
+	1657121568; x=1657207968; bh=gXRVGiGc2esI8GnrDirdRc23m3W8gp6wUHz
+	KCWUNLqg=; b=IUlZYj8f0MHmJYK8S606DeGQBwEbRHFDc+0GOatQc4r524hejGb
+	E7GYO817FMbN34gSfJJTWn3beFHJHB809X6YLSZ+ZGkw/qnFrOV7/wmhaYYUhz9+
+	yt/pR9HtNFcIwMHzUjLY89M5AsiQ4pU+3YhZZ5c6a6GpLkW3oKK3UnCvMJiQBhY+
+	BcrDFW8ULr7vlynArX2M+w78NydirWGz8MdRfSoT2qutGp/HJL5eN43V2YSW3KFg
+	QShHpNdem/iCyHYUoif9KrHD2EDgFVa4XX8FJud8C7NXp+FjTnnUYaZgISJp00XF
+	gUiDe8e5lpjdhNwO8AOt0/OKaf7lsBLhs6Q==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1657121574; x=
-	1657207974; bh=APJyRhX6/2wxNUIPxM+2LptgYjBbjDcQ/gEU4+XF8Xs=; b=s
-	UBi9VBdnDNPFrCpmFVea1nnjHnpNK0csRJtERX9rbUF1mnNZB5MnVLlN9Z03pscR
-	SS51evZo5v68evtzvWs8XXW/NXgXIkMeMp2R1pwWyeV5C1op1IYEw/XTwJStocEa
-	BGtkqx5JpcjCMkE215zTF5z/j8myto0kDOU78wxf0z1rY/61rZWMLwmfJz6LXGnE
-	SEsOejcJ2jSqFCTkRZc6wkgk6zp5Ywhlp56icQBqeMZkqk1nFIo49CChUfTm5qvf
-	bfQuDSkOh6tjP2h/37skRNvJ/25TdOyYoZvlxRpT133EBGfMDDyBxS+twCKGgo5c
-	9eMeLIOxrg9oOmgqtSZOA==
-X-ME-Sender: <xms:JqvFYm3FaguAcTt03gpiyMuIi40-oej4oTiyDTXjmo6ieHDj6tnSog>
-    <xme:JqvFYpEZSJjzv_VNqAyq1YjSF0jMeUrDyfWgNOSiW-o2-SqVkvbJh7smAweR_ZCVQ
-    QyXmj2o9rzVUw>
-X-ME-Received: <xmr:JqvFYu6At-RgH8GSRRtoNyZSYlkTxMLrXsoVPisghBjxnQawlkYCoP7Pxi7EmDoh346pO0LP6nrUbe8WrQvguxIKXnW_SwwdHTzTP0IR9sAS-75MZpc>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrudeifedgkeekucetufdoteggodetrfdotf
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm3; t=1657121568; x=1657207968; bh=gXRVGiGc2esI8
+	GnrDirdRc23m3W8gp6wUHzKCWUNLqg=; b=3UFyDPQfzYosTaxseH7KuVuye5BVT
+	vM1mhcshooWsV5bQ76uLp1wlU+/e95N062VrkT6uj5Md3ncP7tE07EhhCiQpxj29
+	hUj1ycj5WDvXT01h76BYn8Sl9W8E8BMBM64794risP5vjU+VM9H9DQb3/w78BmvL
+	ZfG7qEkK7WJr3Leul7LNKexXcE40Yo139WDLSvMq8k1IOtiNG5ITtKqepiJ55WwK
+	LvE78DyjedcPWbciS6mmtIdyOiHj+dK1/hm8t2/6eEpJfjE9tBAjyKksWRTE+uAt
+	t5LEkZA0UPou8eoLmOzDDYEOTU/bjU2bpe3MOlx/GJm4RmlLhL/s3nacw==
+X-ME-Sender: <xms:H6vFYujpDS2E3YORW68ivifGNrJSVd0zXKQCmGrSuLI8YgXo_ptY5Q>
+    <xme:H6vFYvAj6cjTiuLQSShfvC0jE0GwvSejqZCGdqPfyDicN8Iu7inwK0TTVzJNhvmFG
+    yyAOETGC49YPg>
+X-ME-Received: <xmr:H6vFYmFFLjo8ttMjQ1vPCgOzWnEiZa3NcFWrjn57PHBeaWTpEZQiVlaL1I_qRkjg1SdkbO2ltf-3APk0PchJPWpzTBQ5M07LwaRtgRXowlfODtc_teY>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrudeifedgkeelucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
-    vghkucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesih
-    hnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpefg
-    ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
-    hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
-    khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:JqvFYn0lQ8SHWINgKRw8u4ozPLZ1EOVaYFxAhVhXdtqgPDgG5iaG2A>
-    <xmx:JqvFYpEIxRUek7-PJDR5b2fpmuTYlwC8whbHF46rLkwmShtSu1N21A>
-    <xmx:JqvFYg-IKW-829223yNMXwx1DRaumRf3mza01nono25IIb_tQmsfiw>
-    <xmx:JqvFYiMuP6T4wVi7A6p5wbihH-WN0UQPUMkcRDhrIGsiYoE8OESm6Q>
+    cujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghk
+    ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+    hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucggtffrrghtthgvrhhnpeefgffg
+    geevhffggfetfefhffeuvefhvdevkeehkedttddtgeefkeduheevffduleenucffohhmrg
+    hinhepghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghm
+    pehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslh
+    grsgdrtghomh
+X-ME-Proxy: <xmx:H6vFYnQcWLBBtYqPG7_5EvnFyUuAAqP0-9zkzi9vti-zj-Wh_D5kdw>
+    <xmx:H6vFYrwZSE4SbIVTjkyBDAXeTHbZcR5oQG-_zakGJJB9rFxkNKbLxQ>
+    <xmx:H6vFYl55CF699q6Fm_vge1o7SB2y86KGZ6bu2UijRH0iDvDV3IgQOw>
+    <xmx:IKvFYjdCPfjPjoyj17c0MDA0ZSx1XdwUmdBM0i9uO5-IbV2Cqnnh1A>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
@@ -96,136 +96,77 @@ Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.c
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v2 3/9] xue: add support for selecting specific xhci
-Date: Wed,  6 Jul 2022 17:32:08 +0200
-Message-Id: <399a41db5eb32197364b47a7031c30464803fa76.1657121519.git-series.marmarek@invisiblethingslab.com>
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Paul Durrant <paul@xen.org>,
+	Kevin Tian <kevin.tian@intel.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v2 0/9] Add Xue - console over USB 3 Debug Capability
+Date: Wed,  6 Jul 2022 17:32:05 +0200
+Message-Id: <cover.991b72d99d9e5bd4c2c76791ceb49f1056ce5d1c.1657121519.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
-In-Reply-To: <cover.991b72d99d9e5bd4c2c76791ceb49f1056ce5d1c.1657121519.git-series.marmarek@invisiblethingslab.com>
-References: <cover.991b72d99d9e5bd4c2c76791ceb49f1056ce5d1c.1657121519.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Handle parameters similar to dbgp=ehci.
+This is integration of https://github.com/connojd/xue into mainline Xen.
+This patch series includes several patches that I made in the process, some are
+very loosely related.
 
-Implement this by not resettting xhc_cf8 again in xue_init_xhc(), but
-using a value found there if non-zero. Additionally, add xue->xhc_num to
-select n-th controller.
+The driver developed by Connor supports output-only console via USB3 debug
+capability. The capability is designed to operate mostly independently of
+normal XHCI driver, so this patch series allows dom0 to drive standard USB3
+controller part, while Xen uses DbC for console output.
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-Changes in v2:
- - unsigned int xhc_num
- - code style
----
- docs/misc/xen-command-line.pandoc |  2 +-
- xen/drivers/char/xue.c            | 53 ++++++++++++++++++++++++--------
- 2 files changed, 42 insertions(+), 13 deletions(-)
+Changes since RFC:
+ - move the driver to xue.c, remove non-Xen parts, remove now unneeded abstraction
+ - adjust for Xen code style
+ - build for x86 only
+ - drop patch hidding the device from dom0
+Changes since v1:
+ - drop ehci patch - already applied
+ - adjust for review comments from Jan (see changelogs in individual patches)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index f9fa857bd84e..1ab92bf7b50a 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -721,7 +721,7 @@ Available alternatives, with their meaning, are:
- 
- ### dbgp
- > `= ehci[ <integer> | @pci<bus>:<slot>.<func> ]`
--> `= xue`
-+> `= xue[ <integer> | @pci<bus>:<slot>.<func> ]`
- 
- Specify the USB controller to use, either by instance number (when going
- over the PCI busses sequentially) or by PCI device (must be on segment 0).
-diff --git a/xen/drivers/char/xue.c b/xen/drivers/char/xue.c
-index 2cbbaea11fa0..9d48068a5fba 100644
---- a/xen/drivers/char/xue.c
-+++ b/xen/drivers/char/xue.c
-@@ -205,6 +205,7 @@ struct xue {
-     void *xhc_mmio;
- 
-     int open;
-+    unsigned int xhc_num; /* look for n-th xhc */
- };
- 
- static void xue_sys_pause(void)
-@@ -238,24 +239,35 @@ static bool __init xue_init_xhc(struct xue *xue)
-     uint64_t bar1;
-     uint64_t devfn;
- 
--    /*
--     * Search PCI bus 0 for the xHC. All the host controllers supported so far
--     * are part of the chipset and are on bus 0.
--     */
--    for ( devfn = 0; devfn < 256; devfn++ )
-+    if ( xue->sbdf.sbdf == 0 )
-     {
--        pci_sbdf_t sbdf = PCI_SBDF(0, 0, devfn);
--        uint32_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
--
--        if ( hdr == 0 || hdr == 0x80 )
-+        /*
-+         * Search PCI bus 0 for the xHC. All the host controllers supported so far
-+         * are part of the chipset and are on bus 0.
-+         */
-+        for ( devfn = 0; devfn < 256; devfn++ )
-         {
--            if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == XUE_XHC_CLASSC )
-+            pci_sbdf_t sbdf = PCI_SBDF(0, 0, devfn);
-+            uint32_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
-+
-+            if ( hdr == 0 || hdr == 0x80 )
-             {
--                xue->sbdf = sbdf;
--                break;
-+                if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == XUE_XHC_CLASSC )
-+                {
-+                    if ( xue->xhc_num-- )
-+                        continue;
-+                    xue->sbdf = sbdf;
-+                    break;
-+                }
-             }
-         }
-     }
-+    else
-+    {
-+        /* Verify if selected device is really xHC */
-+        if ( (pci_conf_read32(xue->sbdf, PCI_CLASS_REVISION) >> 8) != XUE_XHC_CLASSC )
-+            xue->sbdf.sbdf = 0;
-+    }
- 
-     if ( !xue->sbdf.sbdf )
-     {
-@@ -955,12 +967,29 @@ void __init xue_uart_init(void)
- {
-     struct xue_uart *uart = &xue_uart;
-     struct xue *xue = &uart->xue;
-+    const char *e;
- 
-     if ( strncmp(opt_dbgp, "xue", 3) )
-         return;
- 
-     memset(xue, 0, sizeof(*xue));
- 
-+    if ( isdigit(opt_dbgp[3]) || !opt_dbgp[3] )
-+    {
-+        if ( opt_dbgp[3] )
-+            xue->xhc_num = simple_strtoul(opt_dbgp + 3, &e, 10);
-+    }
-+    else if ( strncmp(opt_dbgp + 3, "@pci", 4) == 0 )
-+    {
-+        unsigned int bus, slot, func;
-+
-+        e = parse_pci(opt_dbgp + 7, NULL, &bus, &slot, &func);
-+        if ( !e || *e )
-+            return;
-+
-+        xue->sbdf = PCI_SBDF(0, bus, slot, func);
-+    }
-+
-     xue->dbc_ctx = &ctx;
-     xue->dbc_erst = &erst;
-     xue->dbc_ering.trb = evt_trb;
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Wei Liu <wl@xen.org>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Paul Durrant <paul@xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>
+Cc: Connor Davis <connojdavis@gmail.com>
+
+Connor Davis (1):
+  drivers/char: Add support for Xue USB3 debugger
+
+Marek Marczykowski-Górecki (8):
+  xue: reset XHCI ports when initializing dbc
+  xue: add support for selecting specific xhci
+  console: support multiple serial console simultaneously
+  IOMMU: add common API for device reserved memory
+  IOMMU/VT-d: wire common device reserved memory API
+  IOMMU/AMD: wire common device reserved memory API
+  xue: mark DMA buffers as reserved for the device
+  xue: allow driving the rest of XHCI by a domain while Xen uses DbC
+
+ docs/misc/xen-command-line.pandoc        |    5 +-
+ xen/arch/x86/include/asm/fixmap.h        |    4 +-
+ xen/arch/x86/setup.c                     |    3 +-
+ xen/drivers/char/Kconfig                 |    9 +-
+ xen/drivers/char/Makefile                |    1 +-
+ xen/drivers/char/console.c               |   58 +-
+ xen/drivers/char/xue.c                   | 1066 +++++++++++++++++++++++-
+ xen/drivers/passthrough/amd/iommu_acpi.c |   16 +-
+ xen/drivers/passthrough/iommu.c          |   40 +-
+ xen/drivers/passthrough/vtd/dmar.c       |  203 ++--
+ xen/include/xen/iommu.h                  |   11 +-
+ xen/include/xen/serial.h                 |    3 +-
+ 12 files changed, 1323 insertions(+), 96 deletions(-)
+ create mode 100644 xen/drivers/char/xue.c
+
+base-commit: 0544c4ee4b48f7e2715e69ff3e73c3d5545b0526
 -- 
 git-series 0.9.1
 
