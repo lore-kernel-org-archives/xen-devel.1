@@ -4,36 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1258C43334
-	for <xen-devel@archiver.kernel.org>; Thu,  7 Jul 2022 09:32:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.362864.593125 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D743C43334
+	for <xen-devel@archiver.kernel.org>; Thu,  7 Jul 2022 09:39:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.362877.593135 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9NrU-0001VG-Px; Thu, 07 Jul 2022 09:31:52 +0000
+	id 1o9Nye-0002ih-Gk; Thu, 07 Jul 2022 09:39:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 362864.593125; Thu, 07 Jul 2022 09:31:52 +0000
+Received: by outflank-mailman (output) from mailman id 362877.593135; Thu, 07 Jul 2022 09:39:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1o9NrU-0001V9-L7; Thu, 07 Jul 2022 09:31:52 +0000
-Received: by outflank-mailman (input) for mailman id 362864;
- Thu, 07 Jul 2022 09:31:52 +0000
+	id 1o9Nye-0002ia-Df; Thu, 07 Jul 2022 09:39:16 +0000
+Received: by outflank-mailman (input) for mailman id 362877;
+ Thu, 07 Jul 2022 09:39:14 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=DTeC=XM=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1o9NjX-00032J-2a
- for xen-devel@lists.xenproject.org; Thu, 07 Jul 2022 09:23:39 +0000
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 79d1636a-fdd6-11ec-924f-1f966e50362f;
- Thu, 07 Jul 2022 11:23:35 +0200 (CEST)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 75F361063;
- Thu,  7 Jul 2022 02:23:35 -0700 (PDT)
-Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
- [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 89C893F792;
- Thu,  7 Jul 2022 02:23:31 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=tn4w=XM=suse.com=jgross@srs-se1.protection.inumbo.net>)
+ id 1o9Nyc-0002iU-RW
+ for xen-devel@lists.xenproject.org; Thu, 07 Jul 2022 09:39:14 +0000
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id a94cc52a-fdd8-11ec-924f-1f966e50362f;
+ Thu, 07 Jul 2022 11:39:13 +0200 (CEST)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D42A81FDCE;
+ Thu,  7 Jul 2022 09:39:13 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8B52413A33;
+ Thu,  7 Jul 2022 09:39:13 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id vNrDIMGpxmKbGwAAMHmgww
+ (envelope-from <jgross@suse.com>); Thu, 07 Jul 2022 09:39:13 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,151 +53,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 79d1636a-fdd6-11ec-924f-1f966e50362f
-From: Penny Zheng <Penny.Zheng@arm.com>
+X-Inumbo-ID: a94cc52a-fdd8-11ec-924f-1f966e50362f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1657186753; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=8x8nnPqZhI2NQboezzcWTnGNqtcfgmJkkNECedEEebk=;
+	b=jkczioW1jes3NWRNRo4QpczESuCY9sfPC9TW1dxjRrcd4ksg2m4OQuSzMAZ5PQq6ZL6Kgs
+	YqCPvERM67Cwp2D9O0f5Of2X7c+Bo/7ex101l9jNmFtGPZdn0LT30lO5ehjKfJRJUXtsvl
+	+dfzPjmoWEA/OYn3behMRt5Y71O+MIk=
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Cc: wei.chen@arm.com,
-	Penny Zheng <Penny.Zheng@arm.com>,
+Cc: Juergen Gross <jgross@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	George Dunlap <george.dunlap@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>,
-	Penny Zheng <penny.zheng@arm.com>
-Subject: [PATCH v8 8/9] xen: introduce prepare_staticmem_pages
-Date: Thu,  7 Jul 2022 17:22:43 +0800
-Message-Id: <20220707092244.485936-9-Penny.Zheng@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220707092244.485936-1-Penny.Zheng@arm.com>
-References: <20220707092244.485936-1-Penny.Zheng@arm.com>
+	Wei Liu <wl@xen.org>
+Subject: [PATCH] Config.mk: use newest Mini-OS commit
+Date: Thu,  7 Jul 2022 11:39:11 +0200
+Message-Id: <20220707093911.22182-1-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Later, we want to use acquire_domstatic_pages() for populating memory
-for static domain on runtime, however, there are a lot of pointless work
-(checking mfn_valid(), scrubbing the free part, cleaning the cache...)
-considering we know the page is valid and belong to the guest.
+Switch to use the newest Mini-OS commit in order to get the recent
+fixes.
 
-This commit splits acquire_staticmem_pages() in two parts, and
-introduces prepare_staticmem_pages to bypass all "pointless work".
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ Config.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Signed-off-by: Penny Zheng <penny.zheng@arm.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-v8 changes:
-- no change
----
-v7 changes:
-- no change
----
-v6 changes:
-- adapt to PGC_static
----
-v5 changes:
-- new commit
----
- xen/common/page_alloc.c | 61 ++++++++++++++++++++++++-----------------
- 1 file changed, 36 insertions(+), 25 deletions(-)
-
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index b01272a59a..6112f6a3ed 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -2702,26 +2702,13 @@ void free_domstatic_page(struct page_info *page)
-         put_domain(d);
- }
+diff --git a/Config.mk b/Config.mk
+index a806ef0afb..e56844d964 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -230,7 +230,7 @@ MINIOS_UPSTREAM_URL ?= git://xenbits.xen.org/mini-os.git
+ endif
+ OVMF_UPSTREAM_REVISION ?= 7b4a99be8a39c12d3a7fc4b8db9f0eab4ac688d5
+ QEMU_UPSTREAM_REVISION ?= master
+-MINIOS_UPSTREAM_REVISION ?= 83ff43bff4bdd6879539fcb2b3d6ba5e61a64135
++MINIOS_UPSTREAM_REVISION ?= 5bcb28aaeba1c2506a82fab0cdad0201cd9b54b3
  
--/*
-- * Acquire nr_mfns contiguous reserved pages, starting at #smfn, of
-- * static memory.
-- * This function needs to be reworked if used outside of boot.
-- */
--static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
--                                                         unsigned long nr_mfns,
--                                                         unsigned int memflags)
-+static bool __init prepare_staticmem_pages(struct page_info *pg,
-+                                           unsigned long nr_mfns,
-+                                           unsigned int memflags)
- {
-     bool need_tlbflush = false;
-     uint32_t tlbflush_timestamp = 0;
-     unsigned long i;
--    struct page_info *pg;
--
--    ASSERT(nr_mfns);
--    for ( i = 0; i < nr_mfns; i++ )
--        if ( !mfn_valid(mfn_add(smfn, i)) )
--            return NULL;
--
--    pg = mfn_to_page(smfn);
+ SEABIOS_UPSTREAM_REVISION ?= rel-1.16.0
  
-     spin_lock(&heap_lock);
- 
-@@ -2732,7 +2719,7 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-         {
-             printk(XENLOG_ERR
-                    "pg[%lu] Static MFN %"PRI_mfn" c=%#lx t=%#x\n",
--                   i, mfn_x(smfn) + i,
-+                   i, mfn_x(page_to_mfn(pg)) + i,
-                    pg[i].count_info, pg[i].tlbflush_timestamp);
-             goto out_err;
-         }
-@@ -2756,6 +2743,38 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-     if ( need_tlbflush )
-         filtered_flush_tlb_mask(tlbflush_timestamp);
- 
-+    return true;
-+
-+ out_err:
-+    while ( i-- )
-+        pg[i].count_info = PGC_static | PGC_state_free;
-+
-+    spin_unlock(&heap_lock);
-+
-+    return false;
-+}
-+
-+/*
-+ * Acquire nr_mfns contiguous reserved pages, starting at #smfn, of
-+ * static memory.
-+ * This function needs to be reworked if used outside of boot.
-+ */
-+static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-+                                                         unsigned long nr_mfns,
-+                                                         unsigned int memflags)
-+{
-+    unsigned long i;
-+    struct page_info *pg;
-+
-+    ASSERT(nr_mfns);
-+    for ( i = 0; i < nr_mfns; i++ )
-+        if ( !mfn_valid(mfn_add(smfn, i)) )
-+            return NULL;
-+
-+    pg = mfn_to_page(smfn);
-+    if ( !prepare_staticmem_pages(pg, nr_mfns, memflags) )
-+        return NULL;
-+
-     /*
-      * Ensure cache and RAM are consistent for platforms where the guest
-      * can control its own visibility of/through the cache.
-@@ -2764,14 +2783,6 @@ static struct page_info * __init acquire_staticmem_pages(mfn_t smfn,
-         flush_page_to_ram(mfn_x(smfn) + i, !(memflags & MEMF_no_icache_flush));
- 
-     return pg;
--
-- out_err:
--    while ( i-- )
--        pg[i].count_info = PGC_static | PGC_state_free;
--
--    spin_unlock(&heap_lock);
--
--    return NULL;
- }
- 
- /*
 -- 
-2.25.1
+2.35.3
 
 
