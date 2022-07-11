@@ -4,35 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0659FC43334
-	for <xen-devel@archiver.kernel.org>; Mon, 11 Jul 2022 14:18:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.365161.595266 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B77C433EF
+	for <xen-devel@archiver.kernel.org>; Mon, 11 Jul 2022 14:27:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.365191.595294 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oAuEy-0003cv-FQ; Mon, 11 Jul 2022 14:18:24 +0000
+	id 1oAuNL-0005mu-Kj; Mon, 11 Jul 2022 14:27:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 365161.595266; Mon, 11 Jul 2022 14:18:24 +0000
+Received: by outflank-mailman (output) from mailman id 365191.595294; Mon, 11 Jul 2022 14:27:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oAuEy-0003co-CX; Mon, 11 Jul 2022 14:18:24 +0000
-Received: by outflank-mailman (input) for mailman id 365161;
- Mon, 11 Jul 2022 14:18:22 +0000
+	id 1oAuNL-0005mn-Gw; Mon, 11 Jul 2022 14:27:03 +0000
+Received: by outflank-mailman (input) for mailman id 365191;
+ Mon, 11 Jul 2022 14:27:02 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=eoAO=XQ=aim.com=brchuckz@srs-se1.protection.inumbo.net>)
- id 1oAuEv-0003MV-My
- for xen-devel@lists.xenproject.org; Mon, 11 Jul 2022 14:18:22 +0000
-Received: from sonic306-20.consmr.mail.gq1.yahoo.com
- (sonic306-20.consmr.mail.gq1.yahoo.com [98.137.68.83])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4ed2f871-0124-11ed-bd2d-47488cf2e6aa;
- Mon, 11 Jul 2022 16:18:19 +0200 (CEST)
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic306.consmr.mail.gq1.yahoo.com with HTTP; Mon, 11 Jul 2022 14:18:16 +0000
-Received: by hermes--production-ne1-7864dcfd54-8q7fk (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 393f9d76813cf2fb95aa8646fdc67e8e; 
- Mon, 11 Jul 2022 14:18:10 +0000 (UTC)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=79kg=XQ=citrix.com=prvs=184793b5a=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1oAuNK-0005mh-4L
+ for xen-devel@lists.xenproject.org; Mon, 11 Jul 2022 14:27:02 +0000
+Received: from esa5.hc3370-68.iphmx.com (esa5.hc3370-68.iphmx.com
+ [216.71.155.168]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 85ae4f93-0125-11ed-bd2d-47488cf2e6aa;
+ Mon, 11 Jul 2022 16:27:00 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,154 +38,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4ed2f871-0124-11ed-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=netscape.net; s=a2048; t=1657549096; bh=R/XMnj1qIU9tgCHkr7IC0xOtwixzIp8+uQb/ugngDu4=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=OMwACxHT0Brt4IwXkS2dQ8yifnA9WdjEkO44sGRfNkXY+E+Rf04exnhE9EsWQd6Ox/wyLPW3916HQIP1ej5LUNmFoqE9EfmVRjYV2dAOgb81wPWeAkBmzOxArC+2LoZdSKCCyxrazEflZESRH+5jM4UM5sH1IJpPm9Mps3wMaEqtNAV0sK2J9x1+iiloBShMyS6DDOV6zA0jkUi6Xf2/XcvIjyXz1j9iP6o6u9KeWL09cLsSNP4GDvJvjM8t/jBMN5nYWWYqKsxb19uiknusJgffFwntdXdh8BfNkzUGd6G0rOUIdwryfgaohH3TIXF7wX5w23zuZ63k7c5d3blWVQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1657549096; bh=ZdXLxkl/Eo6HEtCnr/qRivqI9jPbOdRlWFPqnEqhM+4=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=Tn2PQwU/alVRwy+mqt8F0wefvrQ3Hmy9m7bOiylRRahz9nNIdPpPsANTYl3V/mFoHpG5lNMoEAPyrRlefbjRWGXCjt/jQYG9OHy/DtowN/dL8QtXKpD3DGhblrSDUcRi9dwSRG+e6G0yKZGPH1XvrSP2XRM1ytXTNhXIBjTd+hos3h8pOWOKkxP/oyYKZkjzImjJk9DlUsAAwnzWjaKGBXmw+kVIW2fLAfWyI8NvPGC6+147YDVSSWgdCqCdAFD2mR++kiFFTSsP6klx1JwQTjg3rUX85NcBkkgZnEtnoYaj2A5AAjIkHs1mkYUY7O1Uyjf5oKilTlnSYUdRT34dQg==
-X-YMail-OSG: 8V.DSTEVM1mrc4lotEROYeiaCxEjKspywy8V9Kld6BBifq53SFVi7nBgOAc0xnJ
- jB2Q6XgvUJxY1Ft5S0fc.7qXuepA6sozMwzEn1SZeGT_pqvy1uICE.b7PbBt.UpUf2P7386Ky5Rn
- Csae4Ub8odZl3EuNzB9lzFsZfZVOKVIajWMw0QnKtqEyzZcuC.OqmDxNxeGmnUFZoH4nHKFwYf7P
- wA9jWZMbaPWpSx0niM2diIzV0nN3bgKmj.VthVCeyNai9qbOHo8i1WCsLAjJ46im9qN2Nn6riol3
- S3nUDB13GbhWCCizO7htDWUz4gU8duJQInBun.j4_MvNdcz.txVKVj0egSDpm6jgueGXd2T_kT.B
- E3pekACI5Ifpy9wmYVB48j7vGwPMhnYX0YTMT8LE_KNHdyx4UippxXOt6Z3j4OTQzXTJsihe9P9b
- zQcORHpUYSonBBsFSYDO8qrNzICyFFXfuR3XHfMatly7pVXs5uHEshZ0_FzNCYTRN8liCq72ieeD
- c0B8mxrOc4OpK.5e9rKzqUXAmsjB3mBa5BpXgAbMxY3kJuxPMEEgu9yGqFKUEQgQoE4mA7TwWJs7
- s5GcX8x3zdYD_id_D74CppAWc.ZfAEnIho2ULkjVrGkUUfoSHKeuZwI54MUpbiBnJrOH6.rwb01V
- 40jaxzN0E.FG9LIqQA0Kem0QvqCcxKXR36T7TFAmQt8W.fxpGdROfAgkzNSOKjh6FsSl7YtvzaG_
- sakTHfLIg9CKJehfZajePzJl6BqslFmjYkpRFsQL1XdS9adTfA7dRqchSw5m87A_fcjRdKrazt4B
- RgOsADWZ8LIAQhwjTS_iHQdu_wg1F6nhZnzGgvWEFLPWxkSIhIq2HYyevDDDob3H1OPxeWDZzkga
- i9vVxw.pI8pUZmfNDDqiOv0P0998DZZsAoR0Az85ntu4VJUSaRfK873sFgiHPENKXgGS5rRpdTw3
- 8Rm_1FUWv.IX4znaO5NbcNIsHlXOghrniWaS.guPu0LX7R8Z7bK7D3YZrglSZcn6oWZKwsON3Qlm
- 0hJLrlsgE.xPP2x6IxJv5qxYaInzZTeIfb4bFdl6.mmeAWPV5ZjGmP2l12EBUso2XrzrUBQdRFb5
- n2iVeYKKhnbUS6g68yhRljBh9sXthC0hk4W_3qZlVFkrjdNDEcerlpZhU0o.FR0u6LbHJ8oVm7jT
- ZaCC1t4lcuPXP._xoGwYb.A_MtpY8vIjYZQQoIuSxtbjE.X_022DTjIWreGPhdJFX58P5izmQiF3
- LQyq0ozBhv3RsdddChTY3DnVsJkiCpkxPQ5asWEVCCyGljfcrUyDREugRrE6jBkXn_e7LxSdU_yo
- 6TIPr0IObbKVAFBmL9fSgVZOlUfSU4P_5cooJ1EMKgVXmsRdLOAL0PhC0mpci0sCjPG9N4IujYkH
- .gLbELb5Y_OUc1rSIzEx7I1Km65448ACNkydL6L37pDMe1SUJcBayn0n6R93IkiuUAC1_33InfOV
- JPIgHV3oOz07RCnUcu906v8UdEP5WUBt_xkRCZA94lLEmxo5LX0AYeZvaixh2xMBEIE1ars_V2Ie
- 6Uh81AiHw_Ou7gKYongCMWEYAp8aBDK2qdypHRa06_u08ALCAtjgP4ZWB_3bn9BhvWqymqdwf2h4
- OR4Bxlb9tS0fb.RRZ.tc.dd5Vcl9a5xe10B6932xh5WGeF_DFaiUV1iCKkjxL8MbCH4YBMbzI_uq
- k39XP4olWl5p4GgKyRWLtWZrVx39UbdaiF5_K_c_OkM1gqhfzIoJO6wOvUZDIGk4CjpS7MKDjxtI
- Asv9XnlX8F8M6yCuT.IQSS84V8UlSx.nHQuoC39gPB5.WgjOp7zL7UXbzI3y2Ic2M.dw_x89kDi7
- sxyvMgyO4FyBz9jzqmCrA27OGCOKii55sFtHK32QAkFnjtKURRqOEzmlsBHcVArpZdoOnvDymPi1
- I7vmn2BlqrfgNLnyi7ZVQBGiC8kmfOtVsJOf.JPa7CupAWVCOWDyHPWvcixnNzP1DOxk0UAhrZSo
- 4PHQt7LIm209G_bTxJXuKLAwvOmjazal4b_M.u935ITTjkMk4gIsJPvSSBABy_c5pJ3WrUXvW5pR
- xRcBipqsGnJUi8d99R5iNtRTMHOj_Zf3oBH8H4npttulelXOtp_SwGesRyjWVykutleOKEI5iUHn
- IWmif0M4Ze8OmjjI_X8gfAjD0mSwATatwOzXcyT05Z.uNjtHED_x2S761fSIiEmm2U.yvHUdl4cy
- LvpknkcsYhNa4WtndJ9wKUQ--
-X-Sonic-MF: <brchuckz@aim.com>
-Message-ID: <4e099e2d-e429-252b-ceeb-678066d85e61@netscape.net>
-Date: Mon, 11 Jul 2022 10:18:08 -0400
+X-Inumbo-ID: 85ae4f93-0125-11ed-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1657549620;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=MY570fFK4YsmxDWYZjD5dBJlRpHK/oRe5S8X0AvzdIY=;
+  b=XXLKy7qYUiqTV1C/CMvONyjskHApG5jNTT/jRgPnN33N5zY3xPv44v3m
+   mB2KaYOd6514Nc9RrziO64dwQltidaFZtzf0vhg1Q/7G+IilIgpe5X+Oj
+   GVUozsiGbDyR0sW0M3NLascN70+z2R+MBnmqFAEwxvqxrcXJa/XzBwpxM
+   w=;
+Authentication-Results: esa5.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: None
+X-MesageID: 74830718
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: A9a23:nArWqK9VDryxEi3Fnm0GDrUDN3yTJUtcMsCJ2f8bNWPcYEJGY0x3y
+ zYZUWuObqyOYmanfdB1YYjioUsFsMWByNE3SFc4/iA8E34SpcT7XtnIdU2Y0wF+jyHgoOCLy
+ +1EN7Es+ehtFie0Si+Fa+Sn9T8mvU2xbuKU5NTsY0idfic5DnZ74f5fs7Rh2NQw3oHgW1nlV
+ e7a+KUzBnf0g1aYDUpMg06zgEsHUCPa4W5wUvQWPJinjXeG/5UnJMt3yZKZdhMUdrJ8DO+iL
+ 9sv+Znilo/vE7XBPfv++lrzWhVirrc/pmFigFIOM0SpqkAqSiDfTs/XnRfTAKtao2zhojx/9
+ DlCnaWPGQNuApHoo85eaghGDDB+OpxF1qCSdBBTseTLp6HHW37lwvEoB0AqJ4wIvO1wBAmi9
+ 9RBdmpLNErawbvrnvTrEYGAhex6RCXvFIoZpnFnyyCfFfs8SIrPa67L+cVZzHE7gcUm8fP2O
+ JZJMmIwNUSojxtnGlkaNr0FpueUnnjPcxpqlV+xqolsyj2GpOB2+P23WDbPQfSVQe1Fk0Deo
+ XjJl0zpDxdfONGBxD6t9nO3mvSJjS79QJgVFrCz6rhtmlL77m4cEhoNTnOgvOK0zEW5Xrpix
+ 1c8o3R06/JorQryE4e7D0bQTGO4gyPwkuF4S4USgDxhAIKNi+pFLgDolgJ8VeE=
+IronPort-HdrOrdr: A9a23:bF2DHKxYrFmJTa/Z1t9VKrPwLr1zdoMgy1knxilNoRw8SK2lfu
+ SV7ZMmPH7P+VIssR4b9exoVJPufZqYz+8S3WBzB8bGYOCFghrKEGgK1+KLqFeMJ8S9zJ8+6U
+ 4JSdkGNDSaNzhHZKjBjjWFLw==
+X-IronPort-AV: E=Sophos;i="5.92,263,1650945600"; 
+   d="scan'208";a="74830718"
+Date: Mon, 11 Jul 2022 15:26:44 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+CC: <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>
+Subject: Re: [PATCH] tools/init-xenstore-domain: fix memory map for PVH
+ stubdom
+Message-ID: <YswzJN6UJqauUeQ8@perard.uk.xensource.com>
+References: <20220624092806.27700-1-jgross@suse.com>
+ <YsbxkNT+3w/lL9He@perard.uk.xensource.com>
+ <165f61ae-3eae-d595-308a-d60e76cbe130@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH] x86/PAT: have pat_enabled() properly reflect state when
- running on e.g. Xen
-Content-Language: en-US
-To: Borislav Petkov <bp@alien8.de>, Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Lutomirski <luto@kernel.org>,
- "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
- Peter Zijlstra <peterz@infradead.org>, lkml <linux-kernel@vger.kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <9385fa60-fa5d-f559-a137-6608408f88b0@suse.com>
- <YsRTAGI2PhfZ5V7M@zn.tnic> <016d281b-7e40-f1bd-66ee-c19c3cc56efe@suse.com>
- <YsRjX/U1XN8rq+8u@zn.tnic>
-From: Chuck Zmudzinski <brchuckz@netscape.net>
-In-Reply-To: <YsRjX/U1XN8rq+8u@zn.tnic>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.20381 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <165f61ae-3eae-d595-308a-d60e76cbe130@suse.com>
 
-On 7/5/22 12:14 PM, Borislav Petkov wrote:
-> On Tue, Jul 05, 2022 at 05:56:36PM +0200, Jan Beulich wrote:
-> > Re-using pat_disabled like you do in your suggestion below won't
-> > work, because mtrr_bp_init() calls pat_disable() when MTRRs
-> > appear to be disabled (from the kernel's view). The goal is to
-> > honor "nopat" without honoring any other calls to pat_disable().
->
-> Actually, the current goal is to adjust Xen dom0 because:
->
-> 1. it uses the PAT code
->
-> 2. but then it does something special and hides the MTRRs
->
-> which is not something real hardware does.
->
-> So this one-off thing should be prominent, visible and not get in the
-> way.
+On Thu, Jul 07, 2022 at 05:01:38PM +0200, Juergen Gross wrote:
+> On 07.07.22 16:45, Anthony PERARD wrote:
+> > On Fri, Jun 24, 2022 at 11:28:06AM +0200, Juergen Gross wrote:
+> > > In case of maxmem != memsize the E820 map of the PVH stubdom is wrong,
+> > > as it is missing the RAM above memsize.
+> > > 
+> > > Additionally the MMIO area should only cover the HVM special pages.
+> > > 
+> > > Signed-off-by: Juergen Gross <jgross@suse.com>
+> > > ---
+> > >   tools/helpers/init-xenstore-domain.c | 16 ++++++++++------
+> > >   1 file changed, 10 insertions(+), 6 deletions(-)
+> > > 
+> > > diff --git a/tools/helpers/init-xenstore-domain.c b/tools/helpers/init-xenstore-domain.c
+> > > index b4f3c65a8a..dad8e43c42 100644
+> > > --- a/tools/helpers/init-xenstore-domain.c
+> > > +++ b/tools/helpers/init-xenstore-domain.c
+> > > @@ -157,21 +158,24 @@ static int build(xc_interface *xch)
+> > >           config.flags |= XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap;
+> > >           config.arch.emulation_flags = XEN_X86_EMU_LAPIC;
+> > >           dom->target_pages = mem_size >> XC_PAGE_SHIFT;
+> > > -        dom->mmio_size = GB(4) - LAPIC_BASE_ADDRESS;
+> > > +        dom->mmio_size = X86_HVM_NR_SPECIAL_PAGES << XC_PAGE_SHIFT;
+> > >           dom->lowmem_end = (mem_size > LAPIC_BASE_ADDRESS) ?
+> > >                             LAPIC_BASE_ADDRESS : mem_size;
+> > >           dom->highmem_end = (mem_size > LAPIC_BASE_ADDRESS) ?
+> > >                              GB(4) + mem_size - LAPIC_BASE_ADDRESS : 0;
+> > > -        dom->mmio_start = LAPIC_BASE_ADDRESS;
+> > > +        dom->mmio_start = (X86_HVM_END_SPECIAL_REGION -
+> > > +                           X86_HVM_NR_SPECIAL_PAGES) << XC_PAGE_SHIFT;
+> > >           dom->max_vcpus = 1;
+> > >           e820[0].addr = 0;
+> > > -        e820[0].size = dom->lowmem_end;
+> > > +        e820[0].size = (max_size > LAPIC_BASE_ADDRESS) ?
+> > > +                       LAPIC_BASE_ADDRESS : max_size;
+> > >           e820[0].type = E820_RAM;
+> > > -        e820[1].addr = LAPIC_BASE_ADDRESS;
+> > > +        e820[1].addr = dom->mmio_start;
+> > 
+> > 
+> > So, it isn't expected to have an entry covering the LAPIC addresses,
+> > right? I guess not as seen in df1ca1dfe20.
+> > 
+> > But based on that same commit info, shouldn't the LAPIC address part of
+> > `dom->mmio_start, dom->mmio_size`? (I don't know how dom->mmio_start is
+> > used, yet, but maybe it's used by Xen or xen libraries to avoid
+> > allocations in the wrong places)
+> 
+> In my understanding this is the purpose of lowmem_end.
 
-Hello,
+It looks like dom->mmio_start is used in libxenguest.meminit_hvm() to
+check if a super page can be allocated, but lowmem_end would probably
+prevent the check from been done in the first place. So I guess
+mmio_start value doesn't matter in this case.
 
-I have spent a fair amount of time this past weekend
-investigating this regression and what might have caused
-it and I also have done several tests on my Xen workstation
-that exhibits the regression to verify my understanding
-of the problem and also raise other problematic points.
+There is another use of mmio_start, it's in module_init_one(), which I
+think is used to blobs to the guest like the firmware or the acpi
+tables. It's an other check to be sure the new "module" doesn't overlap
+with the mmio region. So based on that, I kind of think that mmio_start
+should include the LAPIC. But on the other end, I don't think
+"init-xenstore-domain" have any "module", so again, the value of
+mmio_start probably doesn't matter at this point.
 
-I think, in addition to immediately fixing the regression by
-fixing the now five-year-old commit that is the root cause
-of the recently exposed regression, as discussed in my
-earlier message which proposes a simple patch to fix that
-five-year-old broken commit,
+But maybe we should keep LAPIC in [mmio_start,mmio_size] just in case it
+matter later.
 
-https://lore.kernel.org/lkml/63583497-152f-5880-4c8f-d47e2a81f5a6@netscape.net/
+> OTOH I can modify the patch to be along the lines of df1ca1dfe20.
+> 
+> 
+> Juergen
 
-there needs to be a decision about how best to deal with
-this very aptly described "one-off Xen thing" in the future.
-
-One problem in x86/mm/pat/memtype.c is the fact that there
-exist two functions, pat_init(), and init_cache_modes(), that
-do more or less the same thing, so that when one of those
-functions needs to be updated, the other also needs to
-be updated. In the past, when changes to the pat_enable
-and pat_disable functions and variables were made, all
-too often, the change was only applied to pat_init() and not
-to init_cache_modes() and the one-off Xen case was simply
-not addressed and dealt with properly.
-
-So I propose the following:
-
-1) Identify those things that always need to be done in
-either pat_init() or init_cache_modes() and try to combine
-those things into a single function so that changes will
-be applied for both cases. We sort of have that now with
-__init_cache_modes(), but it is not really good enough to
-prevent the regressions we sometimes get in Xen PV
-domains such as the current regression we have with
-Xen Dom0 and certain particular Intel graphics devices.
-
-2) If it is not possible to do what is proposed in 1), at least
-re-factor the code to make it very clear that whenever
-either pat_init() needs to be adjusted or init_cache_modes()
-needs to be adjusted, care must be taken to ensure that
-all cases are properly dealt with, including the
-one-off Xen case of enabling PAT with MTRR disabled,
-Currently, AIUI, all one really needs to know is that
-init_cached_modes() handles two special cases:
-First, when PAT is disabled for any reason, including when
-the "nopat" boot option is set, and second, the one-off
-Xen case of MTRR being disabled but PAT being enabled.
-
-I am trying to do number 2 with a patch series I am
-working on. It is up to the experts to decide if it
-is possible or even desirable to improve the code so
-that any changes to the caching configuration are more
-likely to be properly implemented for all supported platforms
-by successfully combining the two functions pat_init() and
-init_cache_modes() into a single function. The new function
-would probably need to be renamed and include bits from
-mtrr_bp_enabled, etc. for it to function properly.
-
-If anyone wants to argue that it is not desirable to try
-combine pat_init() and init_cache_modes() into a single
-function, I think the burden of proof rests on that
-person to demonstrate why it is good and clean
-coding practice to continue to have them separate
-and independent from each other in the code when
-they both essentially do the same thing in the end, which
-is call __init_cache_modes() and determine the PAT
-state, and also probably the MTRR state.
-
-Best Regards,
-
-Chuck
+-- 
+Anthony PERARD
 
