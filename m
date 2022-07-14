@@ -4,32 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B467C433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jul 2022 11:27:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.367610.598675 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE3A9C43334
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jul 2022 11:30:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.367411.598687 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oBx00-0000kK-Pc; Thu, 14 Jul 2022 11:27:16 +0000
+	id 1oBx3C-0002J7-8T; Thu, 14 Jul 2022 11:30:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 367610.598675; Thu, 14 Jul 2022 11:27:16 +0000
+Received: by outflank-mailman (output) from mailman id 367411.598687; Thu, 14 Jul 2022 11:30:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oBx00-0000kD-N2; Thu, 14 Jul 2022 11:27:16 +0000
-Received: by outflank-mailman (input) for mailman id 367610;
- Thu, 14 Jul 2022 11:27:15 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1oBx3C-0002J0-5W; Thu, 14 Jul 2022 11:30:34 +0000
+Received: by outflank-mailman (input) for mailman id 367411;
+ Thu, 14 Jul 2022 10:37:50 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1oBwzz-0000k5-4l
- for xen-devel@lists.xenproject.org; Thu, 14 Jul 2022 11:27:15 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1oBwzv-0002Vs-2l; Thu, 14 Jul 2022 11:27:11 +0000
-Received: from 54-240-197-226.amazon.com ([54.240.197.226] helo=[10.7.239.30])
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1oBwzu-0008EN-Sv; Thu, 14 Jul 2022 11:27:11 +0000
+ (envelope-from <SRS0=J3x0=XT=redhat.com=pabeni@srs-se1.protection.inumbo.net>)
+ id 1oBwE9-0000sT-KS
+ for xen-devel@lists.xenproject.org; Thu, 14 Jul 2022 10:37:49 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 005b1819-0361-11ed-bd2d-47488cf2e6aa;
+ Thu, 14 Jul 2022 12:37:48 +0200 (CEST)
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-241-Feqbb9jJOOGBsmIhHqyL7w-1; Thu, 14 Jul 2022 06:37:45 -0400
+Received: by mail-wm1-f69.google.com with SMTP id
+ a6-20020a05600c348600b003a2d72b7a15so2447015wmq.9
+ for <xen-devel@lists.xenproject.org>; Thu, 14 Jul 2022 03:37:45 -0700 (PDT)
+Received: from gerbillo.redhat.com (146-241-97-238.dyn.eolo.it.
+ [146.241.97.238]) by smtp.gmail.com with ESMTPSA id
+ y18-20020a05600c365200b003a2c67aa6c0sm1744360wmq.23.2022.07.14.03.37.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Jul 2022 03:37:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,88 +51,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=65AcNvDRfMlCqNJ2gUxekm50rS2E2CK6wUc8u4O4XfI=; b=ENcp8AoOiauClZ3zaEHvtokUYe
-	A9bGal+mzmFg24KKWMMVIWYsiN+0bF83JspulLSFN8X7XFZq/VGJZN/ZoN/7CjThEv2x9a+AERLzS
-	TtjDgnHPccOh1QmK3VDi5E40fO9H91lFW/ZlhWFfNoGrfHqpFfFXY8cCpFkmbhVQwbAk=;
-Message-ID: <a9cd1e2f-fb49-ef68-41a9-58eb7c546266@xen.org>
-Date: Thu, 14 Jul 2022 12:27:08 +0100
+X-Inumbo-ID: 005b1819-0361-11ed-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1657795066;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=4aMq9d6XOL2BYD5DztJ4VTiy/FnmnCeD5N5a+nINSVM=;
+	b=TfOJe27aUqpExY64HMllRYd3rLsto1wK/MSUUQjm4GQcgX3V3uDyTu0YX47UKrb1DbxhZL
+	4FAgHIi6+aA/gAuEmNxgIl7o8HLeOQYgr0RvVdfCoGeMLOqXmXntqFLvCFyK9mtj7DVDdT
+	vatDJfLnezvkLRzgwsvcr16cjSouN4c=
+X-MC-Unique: Feqbb9jJOOGBsmIhHqyL7w-1
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+         :references:user-agent:mime-version:content-transfer-encoding;
+        bh=4aMq9d6XOL2BYD5DztJ4VTiy/FnmnCeD5N5a+nINSVM=;
+        b=h42oZ1mSS/tJVGE7IEzEg7PJ1IARyDVAdwyDpkhVsjXDNXAnDnw193zO3N+3iiPCO9
+         /47fYZV8N3j4jX+0kCyKEb5LmHlcdMaXpc8IqMh0SwE+31v/kkkedFRVueCSTIrN47FI
+         rf3TM8lVFZQbxcwLP/tENxEKYmfZYD1R3vvTgTQi4cSI2i+MC95aZNpW9sqcj5nOkLZU
+         E044V3nPb6oCHXs7okAkaHnxEF0GGzelj2ZvW23fog88rY92WTFb4/375DBDqXfO1jTA
+         VcSWd2V/y/h5JHmZPLZEKtxMDzVcVNFsDR2nCW62xdRTX3I6r5MUMpt8QJqK8kQd3Fq8
+         090Q==
+X-Gm-Message-State: AJIora+7LR2yTsIx/U36Tv1zIasIlSDv1aEtvnTAXtS6/u3bXaRkZknc
+	iXkv6yAPOy7fGtqH2sWipNRXxar0PNdoGU5OfS+xwJBhKMT2pA0ul632xwAITyjVhIZ6b8oJgXl
+	vd/oVzg1dZYfensYTNoVnth5IsnA=
+X-Received: by 2002:a5d:5268:0:b0:21d:6c45:fe6 with SMTP id l8-20020a5d5268000000b0021d6c450fe6mr7908393wrc.380.1657795064437;
+        Thu, 14 Jul 2022 03:37:44 -0700 (PDT)
+X-Google-Smtp-Source: AGRyM1tnjBGgvWE3ovLJfa/IOyiITy8LVVfr+LAvxJzgOIn3iB+Jjr4weNUd9JZmrQbt3acfbGY+ng==
+X-Received: by 2002:a5d:5268:0:b0:21d:6c45:fe6 with SMTP id l8-20020a5d5268000000b0021d6c450fe6mr7908378wrc.380.1657795064245;
+        Thu, 14 Jul 2022 03:37:44 -0700 (PDT)
+Message-ID: <9582eec95583412e51484092e13d7a773c338f34.camel@redhat.com>
+Subject: Re: [PATCH net-next 2/2] xen-netfront: re-order error checks in
+ xennet_get_responses()
+From: Paolo Abeni <pabeni@redhat.com>
+To: Jan Beulich <jbeulich@suse.com>, "netdev@vger.kernel.org"
+	 <netdev@vger.kernel.org>, "xen-devel@lists.xenproject.org"
+	 <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini
+ <stefano@stabellini.net>,  Oleksandr Tyshchenko
+ <oleksandr_tyshchenko@epam.com>
+Date: Thu, 14 Jul 2022 12:37:42 +0200
+In-Reply-To: <743b3ff3-896c-bfc9-e187-6d50da88f103@suse.com>
+References: <7fca0e44-43b5-8448-3653-249d117dc084@suse.com>
+	 <743b3ff3-896c-bfc9-e187-6d50da88f103@suse.com>
+User-Agent: Evolution 3.42.4 (3.42.4-2.fc35)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.11.0
-Subject: Re: [PATCH v2 9/9] xen: introduce a Kconfig option to configure NUMA
- nodes number
-To: Jan Beulich <jbeulich@suse.com>, Wei Chen <Wei.Chen@arm.com>
-Cc: nd <nd@arm.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20220708145424.1848572-1-wei.chen@arm.com>
- <20220708145424.1848572-10-wei.chen@arm.com>
- <b7d914bc-a2d7-d12e-15ac-ae7389d8bcd2@suse.com>
- <PAXPR08MB74200E2A75A2D755AC95BF519E889@PAXPR08MB7420.eurprd08.prod.outlook.com>
- <a54d09a2-6629-16f1-8893-37d022c2dd5b@suse.com>
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <a54d09a2-6629-16f1-8893-37d022c2dd5b@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pabeni@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi Jan,
-
-On 14/07/2022 12:10, Jan Beulich wrote:
-> On 14.07.2022 12:14, Wei Chen wrote:
->> Hi Jan,
->>
->>> -----Original Message-----
->>> From: Jan Beulich <jbeulich@suse.com>
->>> Sent: 2022年7月12日 22:34
->>> To: Wei Chen <Wei.Chen@arm.com>
->>> Cc: nd <nd@arm.com>; Andrew Cooper <andrew.cooper3@citrix.com>; George
->>> Dunlap <george.dunlap@citrix.com>; Julien Grall <julien@xen.org>; Stefano
->>> Stabellini <sstabellini@kernel.org>; Wei Liu <wl@xen.org>; Roger Pau Monné
->>> <roger.pau@citrix.com>; xen-devel@lists.xenproject.org
->>> Subject: Re: [PATCH v2 9/9] xen: introduce a Kconfig option to configure
->>> NUMA nodes number
->>>
->>> On 08.07.2022 16:54, Wei Chen wrote:
->>>> --- a/xen/arch/Kconfig
->>>> +++ b/xen/arch/Kconfig
->>>> @@ -17,3 +17,14 @@ config NR_CPUS
->>>>   	  For CPU cores which support Simultaneous Multi-Threading or
->>> similar
->>>>   	  technologies, this the number of logical threads which Xen will
->>>>   	  support.
->>>> +
->>>> +config NR_NUMA_NODES
->>>> +	int "Maximum number of NUMA nodes supported"
->>>> +	range 1 255
->>>> +	default "64"
->>>> +	depends on NUMA
->>>
->>> Does 1 make sense? That's not going to be NUMA then, I would say.
->>>
->>
->> Ok, we need at least 2 nodes to be a real NUMA.
->>
->>> Does the value being (perhaps far) larger than NR_CPUS make sense?
->>>
->>
->> Arm has 128 default NR_CPUS (except some platforms) and x86 has 256.
->> So I am not very clear about your comments about far larger? As my
->> Understanding, one node has 2 or 4 cores are very common in a NUMA
->> System.
+On Wed, 2022-07-13 at 11:19 +0200, Jan Beulich wrote:
+> Check the retrieved grant reference first; there's no point trying to
+> have xennet_move_rx_slot() move invalid data (and further defer
+> recognition of the issue, likely making diagnosis yet more difficult).
 > 
-> The defaults are fine. But does it make sense to have 255 nodes when
-> just 32 CPUs were selected? I'm afraid kconfig is going to get in the
-> way, but I think I'd like the upper bound to be min(NR_CPUS, 255).
-Looking around NUMA nodes with 0 CPUs exists. So I don't think we should 
-tie the two.
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> I question the log message claiming a bad ID (which is how I read its
+> wording): rx->id isn't involved in determining ref. I don't see what
+> else to usefully log, though, yet making the message just "Bad rx
+> response" also doesn't look very useful.
+
+For the records, I (mis-)read that log message differently, claiming
+there is a bad RX response, and specifying the ID of such response,
+which may or may be not useful to diagnose where/when the problem
+happens.
 
 Cheers,
 
--- 
-Julien Grall
+Paolo
+
 
