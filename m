@@ -4,29 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A187CC433EF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 Jul 2022 14:39:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.367663.598747 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D05FC433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 14 Jul 2022 14:51:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.367682.598774 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oBzzq-0002Y3-HJ; Thu, 14 Jul 2022 14:39:18 +0000
+	id 1oC0Bl-0006Eq-0p; Thu, 14 Jul 2022 14:51:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 367663.598747; Thu, 14 Jul 2022 14:39:18 +0000
+Received: by outflank-mailman (output) from mailman id 367682.598774; Thu, 14 Jul 2022 14:51:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oBzzq-0002Xd-CI; Thu, 14 Jul 2022 14:39:18 +0000
-Received: by outflank-mailman (input) for mailman id 367663;
- Thu, 14 Jul 2022 14:39:17 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=SkWo=XT=citrix.com=prvs=1879e8f0d=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oBzzp-0002UF-6s
- for xen-devel@lists.xenproject.org; Thu, 14 Jul 2022 14:39:17 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id bba4ace8-0382-11ed-924f-1f966e50362f;
- Thu, 14 Jul 2022 16:39:15 +0200 (CEST)
+	id 1oC0Bk-0006Ej-US; Thu, 14 Jul 2022 14:51:36 +0000
+Received: by outflank-mailman (input) for mailman id 367682;
+ Thu, 14 Jul 2022 14:51:35 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oC0Bj-0006EZ-7v; Thu, 14 Jul 2022 14:51:35 +0000
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oC0Bj-00065B-6n; Thu, 14 Jul 2022 14:51:35 +0000
+Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1oC0Bi-0006bu-Jf; Thu, 14 Jul 2022 14:51:34 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.92) (envelope-from <osstest-admin@xenproject.org>)
+ id 1oC0Bi-0004jp-J8; Thu, 14 Jul 2022 14:51:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,104 +44,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: bba4ace8-0382-11ed-924f-1f966e50362f
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1657809554;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Nc5Of1JguiIJKYdeJhWijIYiWRv/ScVk33+JiERSYGg=;
-  b=KYH0OLfzZ3I0ocFT0wZbfP/EykCmbVhy1E3B5Er3oUtH+LhX67fKZoKg
-   wl/oxwxiZiijxCxdm43MfIKJLZfvq9zr3FwbKo+RYn9BvB/aopS9fpAA6
-   mbj4P+Pspk4J7GKyeAOK4zP2mFd3jKWa+4e9oFDIBYMIMDf5vnPr5FzsP
-   M=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: 5.1
-X-MesageID: 76233202
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:gN8p9qD3SjtKExVW//Xjw5YqxClBgxIJ4kV8jS/XYbTApDoggz0Bz
- moXXj2EPq2La2v3Kd0jbtu09EIPvcXXx9EyQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMZiaA4E3ratANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq3uU0meaEu/Dga++2k
- Y608pe31GONgWYuaDpLsv7b8nuDgdyp0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSq
- zHrlezREsvxpn/BO/v9+lrJWhRiro36ZGBivkF+Sam66iWukwRpukoN2FjwXm8M49mBt4gZJ
- NygLvVcQy9xVkHHsLx1vxW1j0iSlECJkVPKCSHXjCCd86HJW3S9ztlIHkQ5BIcn2MpcGCZh8
- OEjCC9YO3hvh8ruqF66Yuxlh8BlJ8j3JoIP/HpnyFk1D95/H8qFGf+To4YFgnFg3aiiHt6HD
- yYdQTNpcBTHZQwJIloNAYgytOypmmP+Y3tTr1f9Sa8fvDaJl1criOKF3Nz9J8yEX9l2tHijp
- F3Uo1zCGUEnBN2D1m/Qmp6rrrCWxn6qMG4IL5W66/prjVu71mEVThoMWjOTuuKlg0SzX9ZeL
- U08+Sc0q6U2skuxQbHVQBmQsHOC+BkGVLJ4Eec39QWMwar8+BuCCy4PSTspQMwrsoo6SCIn0
- neNnsj1Hnp/vbuNU3Wf+7yI6zSoNkA9CXIJbGkqRA0O7t3nvak6lBeJRdFmeIawh8H1GDzth
- SyDtjI3g50Ll8kX0KO+9FHDxTmro/D0ohUdv1uNGDj/t0UgOdDjN9fABUXnAehoI9eUYn+Tu
- Xc9kfe8wMsXSr6IiRetX7BYdF223MppIAEwkHY2QcR+qmX1pif7FWxDyGogfRk0a67obResO
- RaO4l0Jufe/KVPwNcdKj5SN59PGJEQKPfDsTbjqY9VHefCdnyfXrXg1NSZ8M40A+XXAcJ3T2
- r/BKK5A9V5AVcxaIMOeHo/xK4MDyCEk3n/0Tpvm1Rmh2rf2TCfLFOhaawTSNr9jtPjsTODpH
- zF3bpHi9vmieLemPnm/HXA7dzjm0kTX9bip8pcKJ4Zv0yJtGX07Cu+5/I7Nj7dNxvwP/s+Rp
- ynVchYBmDLX2CycQS3XOy8LVV8adcsmxZ7NFXd3ZgjANrlKSdvH0ZrzgLNtIeJ+rrUznaQrJ
- xTHEu3Zaslypv3802x1RfHAQEZKLnxHWSrm0/KZXQUC
-IronPort-HdrOrdr: A9a23:RDxlcaFXdJliAEVtpLqE7seALOsnbusQ8zAXP0AYc3Nom6uj5q
- eTdZUgpGbJYVkqOU3I9ersBEDEewK/yXcX2/h0AV7BZmnbUQKTRekIh7cKgQeQfhEWntQts5
- uIGJIRNDSfNzRHZL7BkWqFL+o=
-X-IronPort-AV: E=Sophos;i="5.92,271,1650945600"; 
-   d="scan'208";a="76233202"
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>, Luca Fancellu
-	<Luca.Fancellu@arm.com>, Mathieu Tarral <mathieu.tarral@protonmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap
-	<george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>, Julien Grall
-	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu
-	<wl@xen.org>
-Subject: [XEN PATCH 1/2] xen: Fix check-endbr with mawk
-Date: Thu, 14 Jul 2022 15:39:06 +0100
-Message-ID: <20220714143907.25938-2-anthony.perard@citrix.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220714143907.25938-1-anthony.perard@citrix.com>
-References: <20220714143907.25938-1-anthony.perard@citrix.com>
-MIME-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+	Content-Transfer-Encoding:Content-Type:Message-ID:To;
+	bh=59YvDnt27p9yC4BLNXr+EUSiBsw4IvfysDzkPhN6inM=; b=2kWPjSwqnE7hbrPtvfA/PtXggf
+	XJWJg42Oc7/97RL/CSzWiQpK8gFsvJHk4xFSEuR+qXGCK3yuLdKCg2nKjCp96+kXQDHCrNVLBA3Ld
+	ofTtqnG8uX7JPDk8MJWfllSi81jT8qPKT4sK7ydHzQ5HAmvRu4ebm4FY/+46XBNY8zd0=;
+To: xen-devel@lists.xenproject.org
+Message-ID: <osstest-171629-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 171629: tolerable all pass - PUSHED
+X-Osstest-Failures:
+    xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+    xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This:
+    xen=355caa9ef29fd4bcdf48bc263e6ca3b24392490b
+X-Osstest-Versions-That:
+    xen=d8cb7e0f069e0f106d24941355b59b45a731eabe
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Thu, 14 Jul 2022 14:51:34 +0000
 
-check-endbr.sh works well with gawk, but fails with mawk. The produced
-$ALL file is smaller, it is missing 0x$vma_lo on every line. On mawk,
-int(0x2A) just produce 0, instead of the expected value.
+flight 171629 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/171629/
 
-The use of hexadecimal-constant in awk is an optional part of the
-posix spec, and mawk doesn't seems to implemented.
+Failures :-/ but no regressions.
 
-There is a way to convert an hexadecimal to a number be putting it in
-a string, and awk as I understand is supposed to use strtod() to
-convert the string to a number when needed. The expression
-'int("0x15") + 21' would produce the expected value in `mawk` but now
-`gawk` won't convert the string to a number unless we use the option
-"--non-decimal-data".
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      15 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      16 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          15 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          16 saverestore-support-check    fail   never pass
 
-So let's convert the hexadecimal number before using it in the awk
-script. The shell as no issue with dealing with hexadecimal-constant
-so we'll simply use the expression "$(( 0x15 ))" to convert the value
-before using it in awk.
+version targeted for testing:
+ xen                  355caa9ef29fd4bcdf48bc263e6ca3b24392490b
+baseline version:
+ xen                  d8cb7e0f069e0f106d24941355b59b45a731eabe
 
-Fixes: 4d037425dc ("x86: Build check for embedded endbr64 instructions")
-Reported-by: Luca Fancellu <Luca.Fancellu@arm.com>
-Reported-by: Mathieu Tarral <mathieu.tarral@protonmail.com>
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
----
- xen/tools/check-endbr.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Last test of basis   171602  2022-07-12 17:03:16 Z    1 days
+Testing same since   171629  2022-07-14 12:02:14 Z    0 days    1 attempts
 
-diff --git a/xen/tools/check-endbr.sh b/xen/tools/check-endbr.sh
-index 552f233912..64fa9a56b7 100755
---- a/xen/tools/check-endbr.sh
-+++ b/xen/tools/check-endbr.sh
-@@ -78,7 +78,7 @@ then
- else
-     grep -aob -e "$(printf '\363\17\36\372')" -e "$(printf '\363\17\36\373')" \
-          -e "$(printf '\146\17\37\1')" $TEXT_BIN
--fi | awk -F':' '{printf "%s%x\n", "'$vma_hi'", int(0x'$vma_lo') + $1}' > $ALL
-+fi | awk -F':' '{printf "%s%x\n", "'$vma_hi'", int('$((0x$vma_lo))') + $1}' > $ALL
- 
- # Wait for $VALID to become complete
- wait
--- 
-Anthony PERARD
+------------------------------------------------------------
+People who touched revisions under test:
+  Jiamei Xie <jiamei.xie@arm.com>
+  Stefano Stabellini <sstabellini@kernel.org>
+  Xenia Ragiadakou <burzalodowa@gmail.com>
 
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   d8cb7e0f06..355caa9ef2  355caa9ef29fd4bcdf48bc263e6ca3b24392490b -> smoke
 
