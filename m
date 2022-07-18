@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FE66C43334
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3928CCA485
 	for <xen-devel@archiver.kernel.org>; Mon, 18 Jul 2022 07:19:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.369275.600619 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.369277.600635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDL1m-0005LY-8d; Mon, 18 Jul 2022 07:18:50 +0000
+	id 1oDL1n-0005jt-82; Mon, 18 Jul 2022 07:18:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 369275.600619; Mon, 18 Jul 2022 07:18:50 +0000
+Received: by outflank-mailman (output) from mailman id 369277.600635; Mon, 18 Jul 2022 07:18:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDL1l-0005IR-Vg; Mon, 18 Jul 2022 07:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 369275;
- Mon, 18 Jul 2022 07:18:48 +0000
+	id 1oDL1m-0005gn-WD; Mon, 18 Jul 2022 07:18:51 +0000
+Received: by outflank-mailman (input) for mailman id 369277;
+ Mon, 18 Jul 2022 07:18:49 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=fb5k=XX=citrix.com=prvs=1919bed39=Andrew.Cooper3@srs-se1.protection.inumbo.net>)
- id 1oDL1k-0004tp-Br
- for xen-devel@lists.xenproject.org; Mon, 18 Jul 2022 07:18:48 +0000
+ id 1oDL1l-0004tp-GG
+ for xen-devel@lists.xenproject.org; Mon, 18 Jul 2022 07:18:49 +0000
 Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
  [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id dcff2983-0669-11ed-bd2d-47488cf2e6aa;
- Mon, 18 Jul 2022 09:18:47 +0200 (CEST)
+ id ddd22d0f-0669-11ed-bd2d-47488cf2e6aa;
+ Mon, 18 Jul 2022 09:18:48 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,74 +38,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: dcff2983-0669-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: ddd22d0f-0669-11ed-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1658128727;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=Mum1aKh8B28t6+mlcr+GzyZyZrglrMoFRYfHGq4I0qs=;
-  b=Zuu7XkbW4U82RljWa/OJqD8BvI9FPCqBCsPbUewEoLDUWg97ABwt/tqZ
-   TzUDcXuw3x9mw9bvKdmH8s7g7GDe57TJmeiR2U2lRZEhy9TYt90+oK6gN
-   H9xu0ymW4oiyL18q6+6RvM+iFNuUqMgV4v+dSB+CS4zEnMPN76fHxH3vE
-   g=;
+  d=citrix.com; s=securemail; t=1658128728;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=XkwkicbnqybarudXENzuLnv1vjxC0glvjl5QcpNJ1bw=;
+  b=Vz3PPRUgdVdDfZEX51XXFe+pmhT1AL5iIn+wrslCYDDwMuYRR3eaTSQ1
+   KDP11ZTmTJHofKwcAxPNuARg/IjlcC/NyKc4N+++LirLZO3FV+ZTa1J/e
+   76ZK486u99VGRgEdVGbNyYn4bOdymMtZPzgChq8IYjHk21vDkrECDamBg
+   0=;
 Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 76442483
+X-MesageID: 76442484
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:Rcff2qBxOxqi9BVW/z3jw5YqxClBgxIJ4kV8jS/XYbTApGtwgjRWn
- TccX2nQOPyKMDH8Lt90O9zkoxlV75TXx4ViQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMZiaA4E3ratANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq3uU0meaEu/Dga++2k
- Y608pe31GONgWYuaDpLsv3b8nuDgdyp0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSq
- zHrlezREsvxpn/BO/v9+lrJWhRiro36ZGBivkF+Sam66iWukwRpukoN2FjwXm8M49mBt4gZJ
- NygLvVcQy9xVkHHsLx1vxW1j0iSlECJkVPKCSHXjCCd86HJW0rR095NIRE1B7Rb3P1zDUVQx
- 6YqNS9YO3hvh8ruqF66Yuxlh8BlJ8j3JoIP/HpnyFk1D95/H8qFGf+To4YFgnFg3aiiHt6HD
- yYdQRNpYA7NfFtkPVAPBYhltOypmmP+Y3tTr1f9Sa8fvDaPkFYtgOOF3Nz9JeDSY8xloFqh/
- 3uB8GvyW04aD/nC8G/Qmp6rrrCWxn6qMG4IL5W6+eRtm0a73XEIBVsdUl7TifW3g0GxWtVbK
- mQP5zEj66M18SSDbPPwQhm5q36spQMHVpxbFOhSwBGAzO/Y7hiUAkAATyVdc5o2uckuXzso2
- 1SV2dTzClRHr7m9WX+bsLCOoluP1TM9dDFYI3VeFE1cvoel8NpbYg/zoshLIZOlpf7YSTLK+
- nOstywyo6sh1/wWyPDulbzYuA5AtqQlXyZsuFiIDzr0v18jDGK2T9f2sAaGtJ6sOK7cFwDc5
- yZcxqBy+chUVfmweDqxrPLh9V1Dz9KMK3XijFFmBPHNHBz9qif4Lei8DNyTTXqF0/romhezO
- Sc/QSsLuPdu0IKCNMebmb6ZBcUw1rTHHt/4TP3SZdcmSsEvKV/frHs/OhbJjjyFfK0QfUYXY
- M3zTCpRJSxCVfQPIMSeHY/xLoPHNghhnDiOFPgXPjys0KaEZW79dIrpxGCmN7lhhIvZ8Vq9z
- jqqH5HVo/mpeLGhP3K/HE96BQxiEEXX8ris9pQJJrbeflY+cIzjYteIqY4cl0Vet/w9vo/1E
- ruVACe0FHKXaaX7FDi3
-IronPort-HdrOrdr: A9a23:Kho/nKhMTd6jj0eTVbL0W7Yk/nBQXtQji2hC6mlwRA09TySZ//
- rOoB19726TtN9xYgBGpTnuAtjifZqxz/FICOoqTNOftWvdyQmVxehZhOOIqVCNJ8SXzJ8l6U
- 4KSchD4bPLY2SS9fyKhTWFLw==
+IronPort-Data: A9a23:YD4n06JDNufvLTwkFE+RuJUlxSXFcZb7ZxGr2PjKsXjdYENS1j1Wn
+ WRLXWGBb/mIM2D8KIhzYdi+9kkF7ZfRm9NlHgJlqX01Q3x08seUXt7xwmUcns+xwm8vaGo9s
+ q3yv/GZdJhcokf0/0vraP65xZVF/fngbqLmD+LZMTxGSwZhSSMw4TpugOd8iYNz6TSDK1rlV
+ eja/ouOYjdJ5xYuajhOs/3a90s11BjPkGhwUmIWNKgjUGD2zxH5PLpHTYmtIn3xRJVjH+LSb
+ 44vG5ngows1Vz90Yj+Uuu6Tnn8iG9Y+DiDX4pZiYICwgwAqm8AH+v1T2Mzwy6tgo27hc9hZk
+ L2hvHErIOsjFvWkdO81C3G0H8ziVEHvFXCuzXWX6KSuI0P6n3TE8sh+J2IbbY4iw6VRGmVC0
+ eIqcgIQcUXW7w626OrTpuhEg80iKI/gPZ8Fu2EmxjbcZRokacmdGeOQv4YehWpuwJAVdRrdT
+ 5NxhT5HRRLMeRBQfHwQD4ozhryAjXjjaTxI7lmSoMLb5kCMklAtiuS9bLI5fPSJaf1Rwk/Bq
+ ljo/m/aLEgIaMXClheKpyfEaujnwnqgBdN6+KeD3uFuqE2ewCoUEhJ+fXmRrOS9i0W+c8lCM
+ EFS8S0rxYAi+UruQtTjUhmQpH+fogVaS9dWC/c96gyG1uzT+QnxO4QfZmcfMpp87pZwHGF0k
+ A/S9z/0OdBxmIyoWVm+2+eXlwrxHzMRIUscV3U2UBRQtrEPv7oPYgLzosdLSfDo0YytSGCsm
+ VhmvwBl2exN0JdjO7GTuAme3mny/sWhohsdvF2/Y46z0u9uiGdJjaSM4EOT0/tPJZ3xorKp7
+ CldwJj2AAzj4PiweM2xrAYlRujBCw6tamG0vLKWN8BJG86R03CiZ5tMxzp1OV1kNM0JERewP
+ hKD4VMLtcALZSr2BUOSX25WI51wpZUM6Py/DqyEBjawSsIZmPC7ENFGOhfLgjGFfLkEmqAjI
+ 5aLGfuR4YIhIf0+lFKeGrZCuYLHMwhkmgs/s7inkEn8uVdfDVbJIYo43KymNL1hsvPc/VmJq
+ 76y9aKikn1ibQE3WQGPmaZ7ELzABSJT6UzewyCPStO+Hw==
+IronPort-HdrOrdr: A9a23:ENnVu62qu+sCT10vgT5uSwqjBIgkLtp133Aq2lEZdPRUGvb4qy
+ nIpoVi6faUskdpZJhOo6HiBEDtexzhHNtOkO0s1NSZLW/bUQmTXeNfBOLZqlWKcUCTygce79
+ YGT0EXMqyKMbEQt6bHCWeDferIuOP3lZyVuQ==
 X-IronPort-AV: E=Sophos;i="5.92,280,1650945600"; 
-   d="scan'208";a="76442483"
+   d="scan'208";a="76442484"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
 	<JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>, Juergen Gross
-	<jgross@suse.com>, Dario Faggioli <dfaggioli@suse.com>
-Subject: [PATCH 0/5] xen/wait: Improvements
-Date: Mon, 18 Jul 2022 08:18:20 +0100
-Message-ID: <20220718071825.22113-1-andrew.cooper3@citrix.com>
+	<roger.pau@citrix.com>, Wei Liu <wl@xen.org>
+Subject: [PATCH 3/5] xen/wait: Minor asm improvements
+Date: Mon, 18 Jul 2022 08:18:23 +0100
+Message-ID: <20220718071825.22113-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20220718071825.22113-1-andrew.cooper3@citrix.com>
+References: <20220718071825.22113-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-This started out as patch 2 for a different task, and quickly identified some
-technical debt, long overdue for cleaning up.
+There is no point preserving all registers.  Instead, preserve an arbitrary 6
+registers, and list the rest as clobbered.  This does not alter the register
+scheduling at all, but does reduce the amount of state needing saving.
 
-Andrew Cooper (5):
-  xen/wait: Drop vestigial remnants of TRAP_regs_partial
-  xen/wait: Extend the description of how this logic actually works
-  xen/wait: Minor asm improvements
-  xen/wait: Use relative stack adjustments
-  xen/wait: Remove VCPU_AFFINITY_WAIT
+Use a named parameter for page size, instead of needing to parse which is
+parameter 3.  Adjust the formatting of the parameters slightly to simply the
+diff of the subsequent patch.
 
- xen/common/domain.c     |   2 -
- xen/common/sched/core.c |   4 +-
- xen/common/wait.c       | 117 +++++++++++++++++++++++++-----------------------
- xen/include/xen/sched.h |   1 -
- 4 files changed, 63 insertions(+), 61 deletions(-)
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Wei Liu <wl@xen.org>
+---
+ xen/common/wait.c | 30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
+diff --git a/xen/common/wait.c b/xen/common/wait.c
+index 4dcfa17a8a3f..4bc030d1a09d 100644
+--- a/xen/common/wait.c
++++ b/xen/common/wait.c
+@@ -151,13 +151,12 @@ static void __prepare_to_wait(struct waitqueue_vcpu *wqv)
+      * copies in from wqv->stack over the active stack.
+      */
+     asm volatile (
+-        "push %%rax; push %%rbx; push %%rdx; push %%rbp;"
+-        "push %%r8;  push %%r9;  push %%r10; push %%r11;"
+-        "push %%r12; push %%r13; push %%r14; push %%r15;"
++        "push %%rbx; push %%rbp; push %%r12;"
++        "push %%r13; push %%r14; push %%r15;"
+ 
+         "sub %%esp,%%ecx;"
+-        "cmp %3,%%ecx;"
+-        "ja .L_skip;"
++        "cmp %[sz], %%ecx;"
++        "ja .L_skip;"       /* Bail if >4k */
+         "mov %%rsp,%%rsi;"
+ 
+         /* check_wakeup_from_wait() longjmp()'s to this point. */
+@@ -165,12 +164,12 @@ static void __prepare_to_wait(struct waitqueue_vcpu *wqv)
+         "mov %%rsp,%%rsi;"
+ 
+         ".L_skip:"
+-        "pop %%r15; pop %%r14; pop %%r13; pop %%r12;"
+-        "pop %%r11; pop %%r10; pop %%r9;  pop %%r8;"
+-        "pop %%rbp; pop %%rdx; pop %%rbx; pop %%rax"
++        "pop %%r15; pop %%r14; pop %%r13;"
++        "pop %%r12; pop %%rbp; pop %%rbx;"
+         : "=&S" (wqv->esp), "=&c" (dummy), "=&D" (dummy)
+-        : "i" (PAGE_SIZE), "0" (0), "1" (cpu_info), "2" (wqv->stack)
+-        : "memory" );
++        : "0" (0), "1" (cpu_info), "2" (wqv->stack),
++          [sz] "i" (PAGE_SIZE)
++        : "memory", "rax", "rdx", "r8", "r9", "r10", "r11" );
+ 
+     if ( unlikely(wqv->esp == 0) )
+     {
+@@ -224,11 +223,12 @@ void check_wakeup_from_wait(void)
+      * All other GPRs are available for use; they're either restored from
+      * wqv->stack or explicitly clobbered.
+      */
+-    asm volatile (
+-        "mov %1,%%"__OP"sp; jmp .L_wq_resume;"
+-        : : "S" (wqv->stack), "D" (wqv->esp),
+-          "c" ((char *)get_cpu_info() - (char *)wqv->esp)
+-        : "memory" );
++    asm volatile ( "mov %%rdi, %%rsp;"
++                   "jmp .L_wq_resume;"
++                   :
++                   : "S" (wqv->stack), "D" (wqv->esp),
++                     "c" ((char *)get_cpu_info() - (char *)wqv->esp)
++                   : "memory" );
+     unreachable();
+ }
+ 
 -- 
 2.11.0
 
