@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C94B0C433EF
-	for <xen-devel@archiver.kernel.org>; Mon, 18 Jul 2022 13:58:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.369813.601335 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E853CCA47F
+	for <xen-devel@archiver.kernel.org>; Mon, 18 Jul 2022 13:59:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.369819.601346 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDRGj-00032q-Nf; Mon, 18 Jul 2022 13:58:41 +0000
+	id 1oDRHM-0003hy-41; Mon, 18 Jul 2022 13:59:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 369813.601335; Mon, 18 Jul 2022 13:58:41 +0000
+Received: by outflank-mailman (output) from mailman id 369819.601346; Mon, 18 Jul 2022 13:59:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDRGj-00032j-KB; Mon, 18 Jul 2022 13:58:41 +0000
-Received: by outflank-mailman (input) for mailman id 369813;
- Mon, 18 Jul 2022 13:58:39 +0000
+	id 1oDRHM-0003hr-1P; Mon, 18 Jul 2022 13:59:20 +0000
+Received: by outflank-mailman (input) for mailman id 369819;
+ Mon, 18 Jul 2022 13:59:19 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=4MkP=XX=riversideresearch.org=rsmith@srs-se1.protection.inumbo.net>)
- id 1oDRGh-0002Wp-Hp
- for xen-devel@lists.xenproject.org; Mon, 18 Jul 2022 13:58:39 +0000
-Received: from USG02-BN3-obe.outbound.protection.office365.us
- (mail-bn3usg02on0125.outbound.protection.office365.us [23.103.208.125])
+ id 1oDRHL-0002Wp-A3
+ for xen-devel@lists.xenproject.org; Mon, 18 Jul 2022 13:59:19 +0000
+Received: from USG02-CY1-obe.outbound.protection.office365.us
+ (mail-cy1usg02on0139.outbound.protection.office365.us [23.103.209.139])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id b928cca5-06a1-11ed-bd2d-47488cf2e6aa;
- Mon, 18 Jul 2022 15:58:38 +0200 (CEST)
+ id cfe1721b-06a1-11ed-bd2d-47488cf2e6aa;
+ Mon, 18 Jul 2022 15:59:18 +0200 (CEST)
 Received: from BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:185::22)
- by BN0P110MB1323.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:182::11)
+ by BN0P110MB0967.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:16f::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5417.25; Mon, 18 Jul
- 2022 13:58:35 +0000
+ 2022 13:59:15 +0000
 Received: from BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM
  ([fe80::5c73:fd8e:2a33:be27]) by BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM
  ([fe80::5c73:fd8e:2a33:be27%3]) with mapi id 15.20.5438.022; Mon, 18 Jul 2022
- 13:58:35 +0000
+ 13:59:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,14 +48,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b928cca5-06a1-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: cfe1721b-06a1-11ed-bd2d-47488cf2e6aa
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
- b=GAEWm03wPPeJV/jtFy2zQEwYP5hcpBdmhHC7h265Dq2/f2wHyRDuvEPPyhJKi0hKxZedkyr3X3eG3w7cBAnEeEu4pXAiMIEmrMbJEJ3ByU00sBPNze9hma3cJ6VVL5aAKgxD06ZjGUbDUQO2/Oo1Jm+Dfpawml9cFOvPyuvVMvFZjYs9DQ8nEPuHWT9chK47+UJJq+gH4ueylUM/n+EFd8EWg+PS8aMPz44MxKTqlf1u6hmqSv7O7rmqVKLrn5G+EDOuvXaTV2LqfJJTNJSVZp9fo4Gq0HlavEv3K9WRk4DX0qzPx2bSyJZJpKnhrOww6e7c8cHEB9vJX5uczu9kOA==
+ b=tdL0rh5ApMDvZixSsTQgHXR5tF2QUyydeHVEg8OdIcv4/6XYr3trSn4c+GssqmLyvnMzK/VtPI1iVan80O9yeNZCeDpVg+T496Sr/4j6jtpXObgm98Klvue1Vd+tJabbrLmHeO777tV8AaFuc5HHaE4iVdHb02qJIAZlvOx4RZWubGNqTHq+VL56Hak0KIDVqFrPcIYBxD6IairIgN+/z91Ra38Ae3069NIBzmv3G0uZgtos7HwALp/ObFlCaIeasIheA/MfeDi9AtvWuYkK06T2XeSY/tFuRazBvrVHEwOfRKMcIwDl3DgGKHjaBx9VklWcLxxN1DfZuXTbMhroFA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector5401;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bfgsxtHOgQRRggHd/sEp2IwzSm7ATQj+oNLqHdWz+lM=;
- b=o6YfVnAAFYMPlGW0Q977gEAF+QiyItBC0Nw6yFiE3wC+5+oWevM3nCs5aL2n7RtQu3nOBtcGYnvIZelA3BuYSKlBydgFqe/UPlG1t/9M+2sqZLIGPCMWiyY8gZqhZStqu2rK+6SnsTx9i5TY6KsMd+3qea53W6YcbCX5fe2hck6cSvvWDouv2t+/XZ4uggJmRU3TNbp3ztQSY/vp6TuXWPjSDDklltub+IvpyrAQpuT4XyYJc/CYZEdyx1IDiIQgBfdY9dspvdLsNEeY8D/hVL/xkgmsGY5VEKvJRAFCC4DhENwx/ciBUEAyYgN9Fa3bntogs51gG1sSo5jIZJotAQ==
+ bh=BymDOuYM+p3UPAbdT0Q6XQxs2t3u1E5D+WGrIRpGL2g=;
+ b=BYi5WCaC8Cc07mooKU2BjUpK8sMjeZeYwV5RA6QEnpd8JQEoCLg5pNd3i7RJBAKHusRCdgJBZWUxnoDt7UOBnUXnfHLAAIUt9tTygy4SFGQzS7Yxzj1t5+VsGK1UqvxDW78t6mTsDlnTv9j86BB2ArUhtArBLMXytKXvYBhGR0FYkV4/24Et3WFKN1vBaNNhtPJuZWGkus8y7dMl3vNZA1gwFcDZTnbds2m/f1DsM3zzGje0nq77Pf7M9D8bPDPxsut6T0Bw/PIM/RmvVtXwe/TsvMPB8yvJkTYzOzoN0Drohg1DrUtbCEv15LARe0gCEaCQs1UYhmoMTPZHdTOE4g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=riversideresearch.org; dmarc=pass action=none
  header.from=riversideresearch.org; dkim=pass header.d=riversideresearch.org;
@@ -63,24 +63,26 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=riversideresearch.org;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bfgsxtHOgQRRggHd/sEp2IwzSm7ATQj+oNLqHdWz+lM=;
- b=BHYZPhnMvesqXTE55DhDjK5pHgG/HBTt/5aNWw8lWVUESECAOe5WoLuChmTbubihrt5zLVV1Q6VlRD+k7Q4G85Y7GjMtDC9Kv5GWpwgXstmzsuiBsFZs6oywAp0e++OTqAMS8y7R8QCqvAZrSSEKcL/eYuifx74hBHdfDvH8IlrPyeaScL8FX3Fvo/4g8RzK68OxgT0xIXLD1flWa2OLfMHMWd4ZPgl0iu+4rYzhW5fvcgtbXFgEy1gq9Y+MdnJJ8Q5TdvUAB3Mkw54Q1SfVsPC7rW5hDldgmyh7LxOy2jJJk4OFlzKDBAtwnsKg9gIuZ7BCMAId1sMlMZlC8Mv95w==
+ bh=BymDOuYM+p3UPAbdT0Q6XQxs2t3u1E5D+WGrIRpGL2g=;
+ b=bH3XkhiwYdoy+lHsDRqGnG9hr7wPsLBNVl9X+uu5vqWMqvNGWs4h36HYb/hWU3wNkGlghJYMHpwRs5AlziFhKKKiS/jArnzVZiBFf1NZ+iBK07e6Cp8QdJUCBrG71x9Q6nRWI8YPEYCvwlqoPfwYxBl8UQFKi8PAcHkMA2euAzgx/fjLGVH6Yny6YlnX4U2cZCWnRLhvM7vi15mCDi6karsnBq5iV/AhHZhTQdJLEdyA90cNA5646z05fL7guGAkugrb5iJh9BZ+UcV/yB5R0YObRidJzZq6dOKp0YihawfqNrGxCK0FmISGB/g9tibI0vNwJ6tQKYicoCEVorEktQ==
 From: "Smith, Jackson" <rsmith@RiversideResearch.org>
 To: "Daniel P. Smith" <dpsmith@apertussolutions.com>,
 	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: "scott.davis@starlab.io" <scott.davis@starlab.io>,
 	"christopher.clark@starlab.io" <christopher.clark@starlab.io>, Jan Beulich
 	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
-Subject: RE: [PATCH v1 04/18] x86: refactor entrypoints to new boot info
-Thread-Topic: [PATCH v1 04/18] x86: refactor entrypoints to new boot info
-Thread-Index: AQHDrne88XyYXkgxTAt6TFUls0rRYAHkVRHErZp+x6A=
-Date: Mon, 18 Jul 2022 13:58:35 +0000
+	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, George Dunlap
+	<george.dunlap@citrix.com>, Julien Grall <julien@xen.org>, Stefano Stabellini
+	<sstabellini@kernel.org>
+Subject: RE: [PATCH v1 10/18] x86: introduce the domain builder
+Thread-Topic: [PATCH v1 10/18] x86: introduce the domain builder
+Thread-Index: AQHDrne88XyYXkgxTAt6TFUls0rRYAIuncUgrZgzpLA=
+Date: Mon, 18 Jul 2022 13:59:15 +0000
 Message-ID:
- <BN0P110MB16429A1A79CCA746EEE720F1CF8C9@BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM>
+ <BN0P110MB16425760D6D6991942DEE6DCCF8C9@BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM>
 References: <20220706210454.30096-1-dpsmith@apertussolutions.com>
- <20220706210454.30096-5-dpsmith@apertussolutions.com>
-In-Reply-To: <20220706210454.30096-5-dpsmith@apertussolutions.com>
+ <20220706210454.30096-11-dpsmith@apertussolutions.com>
+In-Reply-To: <20220706210454.30096-11-dpsmith@apertussolutions.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: yes
@@ -88,85 +90,105 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=RiversideResearch.org;
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 21e352e3-6f05-4355-2339-08da68c59bac
-x-ms-traffictypediagnostic: BN0P110MB1323:EE_
+x-ms-office365-filtering-correlation-id: a786c582-69d6-4267-db28-08da68c5b352
+x-ms-traffictypediagnostic: BN0P110MB0967:EE_
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info:
- cOdVEyIGcE5DsJomLy8FuojyDW5Y9WHN5EQvVmBtj7VfrcVJ8EAzLXfuqtm5BGhFkm5/hv00Y1BGp/b1h942I+0CIQcBz6UIcHi8t8R62l6jzyx7OXlprqVsylB9cAdRjar0r/PIyR4C7uquAFnbDhpkyTd7IZ9D5LETVZclt7Q8JnHG7tgFuHIPiW5WjajTgmfVcNcoSBavIOJ8gJCrh2iAIUWv7PYNrea2fRgL1W0O7VtpAd3fo47V6MObzKtNrmwW6/RHxFocSDh83d4Yey+yqm8AC0tgErWXOHbfbYF319YIN1OxukZaR3/2JQOd0+YlrBScJFfRg5U1r15s8AlGggFqXxduI1bWVXN6bBjkCSmvE5e0mQRXnwbUHdWC88N26TltNxIyqPwoVkm8gohicIlEsu3lOqtYA1ukQ/z32S8j/fTiQYc6zMlo5Kuw3jg7tNHJjIkDvjNWI50N1OIHW6w/S2S1ymDq9WAX9gULhB7epegv0OrR+uHkBODFFtRquZhYR5p1yzThpnEp3/wUDyMz3vJ96nC+oWbPFbFx6WjEYmvQF2u25sciqpB7+Sy/m3MaOmptizX264VHnpokJI/v7WW47uI3rHTPFMuciIeAUGZgqBZrSP1lXVPoRN2d2O5FBr8yy8j1JkX3mbuyx8HTJlKxkGWg6PUYZoGWQFE2fHKw9dqNmtMVSZaSC8S0akp1bWIUB9flV8Y5AQO/0TrA/VC6NokVFlUrqMKaYWrqZNgb3NHSfAm22Tdu
+ r7auTB2zwTsP5poCHc+8uiuA/CA2wV0Y2gYaD/jAq7470RqFJUt10mQGurQ9PdaH84cMkIRoARveC6HtsVveay8rSS5WzvrPQRerddM7XAe1eTIUqd35r32pgPFS0bu2awMpibodWK789IwmNqa56t05FCz7R0afDnW/GcowJoAkMO39g3SC79aDax++s0Xt9E4wjrjCTN1sJEijpHrCuocef7UHX61yI60OHH15u6YVyvGj/Wnf2L/hHrEYsjZTDj4K9rKSdNIxwReLY6KziLdSQNxeZ5dDL+9kRMB/oWevuVjEUuj+kzBpJVwT6dj3WroLquulsDFkJT/lwoPTnoyXMT0RWU0oQ/pxvLU2ZW31bhDyqkGKb+ehuMfYlqkyIy8yk/xLt+Hcm5ov0dda5vtFqW/fz7Su5dI6edV80NdiHBQHFax+sRKO+QhXuOZ6JI4z+8N1SOlpvubC0O80A8lifdf4B995obRGHTj7ddoCxgZLQG4kiHTxy+TdCiUEqFNZ2JWrA97fESZKzVqyq4jbfS89R2SEPJGyvqc3Ty4OuHKB8BAG1VIIF5OcUsQZDnHIMICb2v7g7G0/z8SuuQ4LDTM+6NRWwmkdpBd+LrrPmVkFZ5sIke3LmlTJvrsqqDOmHdPa70f8G4gefR0IQTrXwZC0D0RbAeU4UHVBT/unJZjMD0+Eix1DkMM4EfNPmoEl7DTjOCLH3AGl9HiQPG4dXQ3nrhXFTS+rUiSnJ/Vhx6mlIctmaEYa/E7iN4lr
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(366004)(99936003)(64756008)(2906002)(76116006)(66476007)(33656002)(66946007)(52536014)(4326008)(8936002)(9686003)(66556008)(110136005)(66446008)(8676002)(5660300002)(71200400001)(6506007)(54906003)(86362001)(7696005)(498600001)(55016003)(82960400001)(122000001)(45080400002)(38100700002)(38070700005)(186003)(83380400001)(85282002);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230016)(366004)(38100700002)(76116006)(8676002)(4326008)(33656002)(71200400001)(99936003)(54906003)(186003)(8936002)(110136005)(66476007)(66946007)(66446008)(64756008)(66556008)(7416002)(5660300002)(82960400001)(2906002)(86362001)(6506007)(52536014)(7696005)(83380400001)(498600001)(9686003)(122000001)(38070700005)(55016003)(85282002);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- b1YkxT8rxHNJZJBPMgcfiUs/w/LOtrMoBwZ05emJbaT5Ev9DXzUVBuvMtVx45UFYEOi8vhoU2U2YPVdiXr5zfZcEAHoHF1QS3w99/Wyfk3BAeSVUEWar56eA91CiytezmyPLNSxMMEiQ0h31VS8aSdIHxhF86kPnL2ab5dAX6dynsEfW0EnFg/xL6Vw2XY7kDluILO//lITfMwRr/ThjRfwlkCnukUgFArxt3XuN/izytOFDR5VB0cNmbH/wTQ34oOtKFeh3+i5Lr3IL/8a6tSzF7H1NjC9JwYlOaZ3fAF5F4Fo90ZMqyoRi1EN2HaFuuI108VRNtmxGuV1cIwdk7vnGK80xAbC6VNZD4Jjyvd7e8ZVcCnaCn1Tg4bWsxr1afSWhrWLx2cz9wgld22gLpndd9UMOYE8g+theV7RTeLN099bwuKcIjpGEsrSxphMOi2Fy6UO4iOqtYfHekiotsLDMx0WWwVzPBxTw9ZhCl0o=
+ zo+JyV8SMrxTiT4/3ENCeuGC1sKz+a8CHuUXH1joZpnDFcG4tV8qw1g9w/4bKL6aYVH3Ex2wz9xM40eBtS5UgRKk2qxwr+gdKzjuVMbbWYMwC8LpUQs1BbBkADVQ6jL6V65ZKus8H3tAfs+tc1y7zZIf+fiv5z7vexmcnlcoQZz8IQFfR4SNxBM5fER0UNwfOf3dF9cqjptiu/xpRTvph+NsuLNwV8y4M2xkGP7ngoHPw34SiWXB4mAbE5+SafaepZQywmVSI2/v6tFHoypl6tXxj6zUkN9lUFrtVntz5ei9nj7T7ylDJnbUkY4vdnVZGUpBEw6NFyPubAepMNnUtKiIc67UHZrPM92QYys1txj1aRQN50hiyh8dptjVFuFwkWxSAhLwSspf2JKL1N9SypzilBs0YuyHrtw9biBSjxN36gSZG+LBYUL1thhEm+GvVT6A13N+ZzNSBwPtopA3vlgTvT0/IIsSVEAYwlaFxR8=
 Content-Type: multipart/signed;
 	protocol="application/x-pkcs7-signature";
 	micalg=SHA1;
-	boundary="----=_NextPart_000_0077_01D89A8C.F110D220"
+	boundary="----=_NextPart_000_008B_01D89A8D.08C84B00"
 MIME-Version: 1.0
 X-OriginatorOrg: riversideresearch.org
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: BN0P110MB1642.NAMP110.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 21e352e3-6f05-4355-2339-08da68c59bac
-X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jul 2022 13:58:35.5785
+X-MS-Exchange-CrossTenant-Network-Message-Id: a786c582-69d6-4267-db28-08da68c5b352
+X-MS-Exchange-CrossTenant-originalarrivaltime: 18 Jul 2022 13:59:15.2431
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: bfc64a8d-9064-4c64-91c3-9d10b44c1cb6
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0P110MB1323
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0P110MB0967
 
-------=_NextPart_000_0077_01D89A8C.F110D220
+------=_NextPart_000_008B_01D89A8D.08C84B00
 Content-Type: text/plain;
-	charset="utf-8"
+	charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
 
 Hi Daniel,
 
-I hope outlook gets this reply right.
-
 > -----Original Message-----
-> Subject: [PATCH v1 04/18] x86: refactor entrypoints to new boot info
+> Subject: [PATCH v1 10/18] x86: introduce the domain builder
+> 
+> This commit introduces the domain builder configuration FDT parser along
+> with the domain builder core for domain creation. To enable domain builder
+> to be a cross architecture internal API, a new arch domain creation call
+is
+> introduced for use by the domain builder.
 
-> diff --git a/xen/arch/x86/guest/xen/pvh-boot.c
-> b/xen/arch/x86/guest/xen/pvh-boot.c
-> index 834b1ad16b..28cf5df0a3 100644
-> --- a/xen/arch/x86/guest/xen/pvh-boot.c
-> +++ b/xen/arch/x86/guest/xen/pvh-boot.c
+> diff --git a/xen/common/domain-builder/core.c
 
-> @@ -99,13 +118,16 @@ static void __init get_memory_map(void)
->      sanitize_e820_map(e820_raw.map, &e820_raw.nr_map);
->  }
->
-> -void __init pvh_init(multiboot_info_t **mbi, module_t **mod)
-> +void __init pvh_init(struct boot_info **bi)
->  {
-> -    convert_pvh_info(mbi, mod);
-> +    *bi = init_pvh_info();
-> +    convert_pvh_info(*bi);
->
->      hypervisor_probe();
->      ASSERT(xen_guest);
->
-> +    (*bi)->arch->xen_guest = xen_guest;
-
-I think you may have a typo/missed refactoring here?
-I changed this line to "(*bi)->arch->xenguest = xen_guest;" to get the 
-patchset to build.
-
-The arch_boot_info struct in boot_info32.h has a field 'xen_guest' but the 
-same field in asm/bootinfo.h was re-named from 'xen_guest' to 'xenguest' in 
-the 'x86: adopt new boot info structures' commit.
-
-What was your intent?
-
+> +void __init builder_init(struct boot_info *info) {
+> +    struct boot_domain *d = NULL;
 > +
->      get_memory_map();
->  }
->
+> +    info->builder = &builder;
+> +
+> +    if ( IS_ENABLED(CONFIG_BUILDER_FDT) )
+> +    {
+
+> +    }
+> +
+> +    /*
+> +     * No FDT config support or an FDT wasn't present, do an initial
+> +     * domain construction
+> +     */
+> +    printk("Domain Builder: falling back to initial domain build\n");
+> +    info->builder->nr_doms = 1;
+> +    d = &info->builder->domains[0];
+> +
+> +    d->mode = opt_dom0_pvh ? 0 : BUILD_MODE_PARAVIRTUALIZED;
+> +
+> +    d->kernel = &info->mods[0];
+> +    d->kernel->kind = BOOTMOD_KERNEL;
+> +
+> +    d->permissions = BUILD_PERMISSION_CONTROL |
+> BUILD_PERMISSION_HARDWARE;
+> +    d->functions = BUILD_FUNCTION_CONSOLE |
+> BUILD_FUNCTION_XENSTORE |
+> +                     BUILD_FUNCTION_INITIAL_DOM;
+> +
+> +    d->kernel->arch->headroom = bzimage_headroom(bootstrap_map(d-
+> >kernel),
+> +                                                   d->kernel->size);
+> +    bootstrap_map(NULL);
+> +
+> +    if ( d->kernel->string.len )
+> +        d->kernel->string.kind = BOOTSTR_CMDLINE; }
+
+Forgive me if I'm incorrect, but I believe there is an issue with this
+fallback logic for the case where no FDT was provided.
+
+If dom0_mem is not supplied to the xen cmd line, then d->meminfo is never
+initialized. (See dom0_compute_nr_pages/dom0_build.c:335)
+This was giving me trouble because bd->meminfo.mem_max.nr_pages was left at
+0, effectivity clamping dom0 to 0 pages of ram.
+
+I'm not sure what the best solution is but one (easy) possibility is just
+initializing meminfo to the dom0 defaults near the end of this function:
+        d->meminfo.mem_size = dom0_size;
+        d->meminfo.mem_min = dom0_min_size;
+        d->meminfo.mem_max = dom0_max_size;
 
 Thanks,
-Jackson Smith
+Jackson
 
-------=_NextPart_000_0077_01D89A8C.F110D220
+------=_NextPart_000_008B_01D89A8D.08C84B00
 Content-Type: application/pkcs7-signature;
 	name="smime.p7s"
 Content-Transfer-Encoding: base64
@@ -256,17 +278,17 @@ uo/q3WNG/XDC8oO6oJLZfnpl9LiDBrsHEzDaR3Ct3XCR6rJ4ezjwFjH4SEOWCWeWsLhk+uoOgAx5
 4cKlGpprXf5oje+0nSz1bAw5kaGD8k83rXL75YVcIuRTlDGCAskwggLFAgEBMFgwQTETMBEGCgmS
 JomT8ixkARkWA29yZzEXMBUGCgmSJomT8ixkARkWB3JyaS11c2ExETAPBgNVBAMTCEJSTy1EUzAy
 AhMsAARwT/LbBVtfmneXAAcABHBPMAkGBSsOAwIaBQCgggHHMBgGCSqGSIb3DQEJAzELBgkqhkiG
-9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIyMDcxODEzNTgzM1owIwYJKoZIhvcNAQkEMRYEFEJrZzwY
-BJiQgw8BvVhV8FPByQX/MGcGCSsGAQQBgjcQBDFaMFgwQTETMBEGCgmSJomT8ixkARkWA29yZzEX
+9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTIyMDcxODEzNTkxM1owIwYJKoZIhvcNAQkEMRYEFLWsnCm3
+EbADPL53CMXmWqn4IxdoMGcGCSsGAQQBgjcQBDFaMFgwQTETMBEGCgmSJomT8ixkARkWA29yZzEX
 MBUGCgmSJomT8ixkARkWB3JyaS11c2ExETAPBgNVBAMTCEJSTy1EUzAyAhMsAARwT/LbBVtfmneX
 AAcABHBPMGkGCyqGSIb3DQEJEAILMVqgWDBBMRMwEQYKCZImiZPyLGQBGRYDb3JnMRcwFQYKCZIm
 iZPyLGQBGRYHcnJpLXVzYTERMA8GA1UEAxMIQlJPLURTMDICEywABHBP8tsFW1+ad5cABwAEcE8w
 gZMGCSqGSIb3DQEJDzGBhTCBgjALBglghkgBZQMEASowCwYJYIZIAWUDBAEWMAoGCCqGSIb3DQMH
 MAsGCWCGSAFlAwQBAjAOBggqhkiG9w0DAgICAIAwDQYIKoZIhvcNAwICAUAwBwYFKw4DAhowCwYJ
-YIZIAWUDBAIDMAsGCWCGSAFlAwQCAjALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEgYB4h328
-rJ4q8rg5L8sVKv49pcH8YhEQ+5/TKKoEcc7F6AqAPpm7F9w4gVxtPqkNWmfApdG7Rfb7Z98mz0Av
-ri9DOkYkzvI7uP6wvy56yKuj0aaYeCoUhytR9E2/p9WO8WQC52Jg8KuYnLtGsLXETmmRbBGHqBls
-YNKyovrXqDS4EwAAAAAAAA==
+YIZIAWUDBAIDMAsGCWCGSAFlAwQCAjALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEgYBhPc1M
+K95w1rwxwNgXs+3NGLIr5y/sEFqisqxkicSUSJd51uNPt0qlwDq69seIBjLhZAmoTXZLeam0V81Y
+b+LCh6PHOQzE8MH+wcPLSCb3TLP7kyX51EbIWZ7kjmGe9i7aRGHvmCg6CJLKr5p03lXXiufp14iP
+ywhn3TSYZPbkxwAAAAAAAA==
 
-------=_NextPart_000_0077_01D89A8C.F110D220--
+------=_NextPart_000_008B_01D89A8D.08C84B00--
 
