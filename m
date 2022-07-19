@@ -4,36 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE6DC433EF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 Jul 2022 17:19:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.370787.602660 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71CFFC433EF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 Jul 2022 17:43:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.370803.602736 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDqrx-0002W1-68; Tue, 19 Jul 2022 17:18:49 +0000
+	id 1oDrFg-0007iH-0N; Tue, 19 Jul 2022 17:43:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 370787.602660; Tue, 19 Jul 2022 17:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 370803.602736; Tue, 19 Jul 2022 17:43:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDqrx-0002Vu-2g; Tue, 19 Jul 2022 17:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 370787;
- Tue, 19 Jul 2022 17:18:47 +0000
+	id 1oDrFf-0007he-Rz; Tue, 19 Jul 2022 17:43:19 +0000
+Received: by outflank-mailman (input) for mailman id 370803;
+ Tue, 19 Jul 2022 17:43:18 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=B0fU=XY=intel.com=tamas.lengyel@srs-se1.protection.inumbo.net>)
- id 1oDqrv-0002Vo-HA
- for xen-devel@lists.xenproject.org; Tue, 19 Jul 2022 17:18:47 +0000
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ <SRS0=D6sG=XY=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1oDrFe-00065R-48
+ for xen-devel@lists.xenproject.org; Tue, 19 Jul 2022 17:43:18 +0000
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [2a00:1450:4864:20::62c])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id d75ccb72-0786-11ed-bd2d-47488cf2e6aa;
- Tue, 19 Jul 2022 19:18:45 +0200 (CEST)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jul 2022 10:18:30 -0700
-Received: from jlirvin-mobl5.amr.corp.intel.com (HELO ubuntu.localdomain)
- ([10.212.39.211])
- by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 19 Jul 2022 10:18:29 -0700
+ id 4543bb89-078a-11ed-bd2d-47488cf2e6aa;
+ Tue, 19 Jul 2022 19:43:16 +0200 (CEST)
+Received: by mail-ej1-x62c.google.com with SMTP id l23so28588728ejr.5
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Jul 2022 10:43:16 -0700 (PDT)
+Received: from otyshchenko.router ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id
+ wj18-20020a170907051200b0072af92fa086sm6903268ejb.32.2022.07.19.10.43.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Jul 2022 10:43:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,243 +46,152 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: d75ccb72-0786-11ed-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1658251125; x=1689787125;
-  h=from:to:cc:subject:date:message-id:mime-version:
-   content-transfer-encoding;
-  bh=7OuMzZMeAVedQlxQcpp8HXe51NYN54wYxaB9nOgs/74=;
-  b=nZcs3cFO6ezobCUnFm09uwHQQBbnbDH6wZ6R/LoicPXYKGGVVkP6f7mD
-   52w/z15u4mo+EcwI0Wv6eB/1zo3P+8SK6QC1WrGu3OiMON1qD497SW4oD
-   KhwZdQymdT/ykmjObbtMbtDTM306Th49nllOSrxJFa+Gx2Pxxh4OAThhs
-   LOURijGgqAq0BgvcXSF1EFkWDtiurU5yjR9DHqwHgmM0YJIKkCXWYJr8d
-   Z7eVOPisBsYyUMi+GjS92cxyZbUJ+NJ78E0FTUC5ujlaS8qa7nQxDam6o
-   eoob1QvRdqxqnHbTZ55sdC3fjD3ody+7apYtEGZICvQ7ne/kWqKB0nMXO
-   A==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10413"; a="284110682"
-X-IronPort-AV: E=Sophos;i="5.92,284,1650956400"; 
-   d="scan'208";a="284110682"
-X-IronPort-AV: E=Sophos;i="5.92,284,1650956400"; 
-   d="scan'208";a="924859998"
-From: Tamas K Lengyel <tamas.lengyel@intel.com>
+X-Inumbo-ID: 4543bb89-078a-11ed-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=shxNV9joemK5imu4wT4+Id91nCPY01JMn0lJabYidsY=;
+        b=eVHUjDx8fQyS+XcgwN0giiiOlBNaG1kuJPLiM5qEXzokJ/H8xzEiCobcMgiP1TD4tt
+         g7YfLq9ADCL1ix35Dnb3kvv+QacuObxCwfEke6l9P5BfQ0mDfZEh4CvOy/CEQJI8qrGX
+         M7bILaJys4OtfsRv0P/ZeJxyTKaYtkJlNlF7dcX767gA/TvEQQqNa9n5aEOd+lXRvum7
+         Yy7ktAlWEwWeaHCT02VSbtQEzIBZc58NMWMv388dOUBu5WHzs+REF6t65kW849DVZsWO
+         xRudRUPW2uTys3nT4SHheP+DzE5NuwSQqSsogtNBT6t1THv0J9I5KVsZZLajiwprbck/
+         dEoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=shxNV9joemK5imu4wT4+Id91nCPY01JMn0lJabYidsY=;
+        b=kIR2ldiTGTJesMPLh0onwX2pme+DEx/CVyY7m79r2ZTYPlXn4508GVE6KpDPhza4DD
+         pPxwCTtXRcFN1UqCbJFIq8p3zxhWa3pLwDCDeN3X856zVtgzgHB9ns4aBKGkRC39FKvY
+         MLL4+SxGutTJKORWvFoIKjSkUSruvDLjWyKQAkbp7jm5d4mi+dhewsDbKMo9heBFQ2Ob
+         /FGby+yNE8+7XZtSP/TTrocgm5SoMNbSly21ccNiPfujko5jloxVS+m36p7/rBSUTxF3
+         IA5Daxxhc98CKbKAqmm6hLmL5EJf1NtZpcLwOBuKOGfkHWI1CxtbWFbW7jTntt/S6k43
+         03GQ==
+X-Gm-Message-State: AJIora87Yny0IrU7wMcQW5t6rmR8oGdMu+kNp1DffkVeFMTX9w+SDeLs
+	V6tZKxUolAib6qB0cNmpY7O+IeAQ6p4Cbg==
+X-Google-Smtp-Source: AGRyM1tToApNxORVJ+5ePOsc4RwRSTArOU6bp+WD5v34DnOee+CQ52yyGCpFW054KCZ6s5dnBIPCjA==
+X-Received: by 2002:a17:907:3fa8:b0:72b:5895:f54f with SMTP id hr40-20020a1709073fa800b0072b5895f54fmr31647848ejc.464.1658252596053;
+        Tue, 19 Jul 2022 10:43:16 -0700 (PDT)
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
-Cc: Tamas K Lengyel <tamas.lengyel@intel.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Wei Liu <wl@xen.org>,
-	Jun Nakajima <jun.nakajima@intel.com>,
-	Kevin Tian <kevin.tian@intel.com>,
-	Tamas K Lengyel <tamas@tklengyel.com>,
-	George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH] xen/mem_sharing: support forks with active vPMU state
-Date: Tue, 19 Jul 2022 13:18:11 -0400
-Message-Id: <4f3ff38d8226d10dab3440f020c9ba7f07cab1fd.1658250756.git.tamas.lengyel@intel.com>
-X-Mailer: git-send-email 2.34.1
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH V7 06/11] vpci/header: program p2m with guest BAR view
+Date: Tue, 19 Jul 2022 20:42:48 +0300
+Message-Id: <20220719174253.541965-7-olekstysh@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20220719174253.541965-1-olekstysh@gmail.com>
+References: <20220719174253.541965-1-olekstysh@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Currently the vPMU state from a parent isn't copied to VM forks. To enable the
-vPMU state to be copied to a fork VM we export certain vPMU functions. First,
-the vPMU context needs to be allocated for the fork if the parent has one. For
-this we introduce vpmu->allocate_context, which has previously only been called
-when the guest enables the PMU on itself. Furthermore, we export
-vpmu_save_force so that the PMU context can be saved on-demand even if no
-context switch took place on the parent's CPU yet. Additionally, we make sure
-all relevant configuration MSRs are saved in the vPMU context so the copy is
-complete and the fork starts with the same PMU config as the parent.
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
+Take into account guest's BAR view and program its p2m accordingly:
+gfn is guest's view of the BAR and mfn is the physical BAR value as set
+up by the PCI bus driver in the hardware domain.
+This way hardware domain sees physical BAR values and guest sees
+emulated ones.
+
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
- xen/arch/x86/cpu/vpmu.c         | 12 ++++++++-
- xen/arch/x86/cpu/vpmu_intel.c   | 16 +++++++++++
- xen/arch/x86/include/asm/vpmu.h |  5 ++++
- xen/arch/x86/mm/mem_sharing.c   | 48 +++++++++++++++++++++++++++++++++
- 4 files changed, 80 insertions(+), 1 deletion(-)
+Since v5:
+- remove debug print in map_range callback
+- remove "identity" from the debug print
+Since v4:
+- moved start_{gfn|mfn} calculation into map_range
+- pass vpci_bar in the map_data instead of start_{gfn|mfn}
+- s/guest_addr/guest_reg
+Since v3:
+- updated comment (Roger)
+- removed gfn_add(map->start_gfn, rc); which is wrong
+- use v->domain instead of v->vpci.pdev->domain
+- removed odd e.g. in comment
+- s/d%d/%pd in altered code
+- use gdprintk for map/unmap logs
+Since v2:
+- improve readability for data.start_gfn and restructure ?: construct
+Since v1:
+ - s/MSI/MSI-X in comments
+---
+ xen/drivers/vpci/header.c | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/vpmu.c b/xen/arch/x86/cpu/vpmu.c
-index d2c03a1104..2b5d64a60d 100644
---- a/xen/arch/x86/cpu/vpmu.c
-+++ b/xen/arch/x86/cpu/vpmu.c
-@@ -336,7 +336,7 @@ void vpmu_do_interrupt(struct cpu_user_regs *regs)
- #endif
- }
+diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
+index f14ff11882..4e6547a54d 100644
+--- a/xen/drivers/vpci/header.c
++++ b/xen/drivers/vpci/header.c
+@@ -30,6 +30,7 @@
  
--static void cf_check vpmu_save_force(void *arg)
-+void cf_check vpmu_save_force(void *arg)
- {
-     struct vcpu *v = arg;
-     struct vpmu_struct *vpmu = vcpu_vpmu(v);
-@@ -529,6 +529,16 @@ void vpmu_initialise(struct vcpu *v)
-         put_vpmu(v);
- }
- 
-+void vpmu_allocate_context(struct vcpu *v)
-+{
-+    struct vpmu_struct *vpmu = vcpu_vpmu(v);
-+
-+    if ( vpmu_is_set(vpmu, VPMU_CONTEXT_ALLOCATED) )
-+        return;
-+
-+    alternative_call(vpmu_ops.allocate_context, v);
-+}
-+
- static void cf_check vpmu_clear_last(void *arg)
- {
-     if ( this_cpu(last_vcpu) == arg )
-diff --git a/xen/arch/x86/cpu/vpmu_intel.c b/xen/arch/x86/cpu/vpmu_intel.c
-index 8612f46973..31dc0ee14b 100644
---- a/xen/arch/x86/cpu/vpmu_intel.c
-+++ b/xen/arch/x86/cpu/vpmu_intel.c
-@@ -282,10 +282,17 @@ static inline void __core2_vpmu_save(struct vcpu *v)
-     for ( i = 0; i < fixed_pmc_cnt; i++ )
-         rdmsrl(MSR_CORE_PERF_FIXED_CTR0 + i, fixed_counters[i]);
-     for ( i = 0; i < arch_pmc_cnt; i++ )
-+    {
-         rdmsrl(MSR_IA32_PERFCTR0 + i, xen_pmu_cntr_pair[i].counter);
-+        rdmsrl(MSR_P6_EVNTSEL(i), xen_pmu_cntr_pair[i].control);
-+    }
- 
-     if ( !is_hvm_vcpu(v) )
-         rdmsrl(MSR_CORE_PERF_GLOBAL_STATUS, core2_vpmu_cxt->global_status);
-+    /* Save MSR to private context to make it fork-friendly */
-+    else if ( mem_sharing_enabled(v->domain) )
-+        vmx_read_guest_msr(v, MSR_CORE_PERF_GLOBAL_CTRL,
-+                           &core2_vpmu_cxt->global_ctrl);
- }
- 
- static int cf_check core2_vpmu_save(struct vcpu *v, bool to_guest)
-@@ -346,6 +353,10 @@ static inline void __core2_vpmu_load(struct vcpu *v)
-         core2_vpmu_cxt->global_ovf_ctrl = 0;
-         wrmsrl(MSR_CORE_PERF_GLOBAL_CTRL, core2_vpmu_cxt->global_ctrl);
-     }
-+    /* Restore MSR from context when used with a fork */
-+    else if ( mem_sharing_is_fork(v->domain) )
-+        vmx_write_guest_msr(v, MSR_CORE_PERF_GLOBAL_CTRL,
-+                            core2_vpmu_cxt->global_ctrl);
- }
- 
- static int core2_vpmu_verify(struct vcpu *v)
-@@ -474,7 +485,11 @@ static int core2_vpmu_alloc_resource(struct vcpu *v)
-                                     sizeof(uint64_t) * fixed_pmc_cnt;
- 
-     vpmu->context = core2_vpmu_cxt;
-+    vpmu->context_size = sizeof(struct xen_pmu_intel_ctxt) +
-+                         fixed_pmc_cnt * sizeof(uint64_t) +
-+                         arch_pmc_cnt * sizeof(struct xen_pmu_cntr_pair);
-     vpmu->priv_context = p;
-+    vpmu->priv_context_size = sizeof(uint64_t);
- 
-     if ( !has_vlapic(v->domain) )
-     {
-@@ -882,6 +897,7 @@ static int cf_check vmx_vpmu_initialise(struct vcpu *v)
- 
- static const struct arch_vpmu_ops __initconst_cf_clobber core2_vpmu_ops = {
-     .initialise = vmx_vpmu_initialise,
-+    .allocate_context = core2_vpmu_alloc_resource,
-     .do_wrmsr = core2_vpmu_do_wrmsr,
-     .do_rdmsr = core2_vpmu_do_rdmsr,
-     .do_interrupt = core2_vpmu_do_interrupt,
-diff --git a/xen/arch/x86/include/asm/vpmu.h b/xen/arch/x86/include/asm/vpmu.h
-index e5709bd44a..14d0939247 100644
---- a/xen/arch/x86/include/asm/vpmu.h
-+++ b/xen/arch/x86/include/asm/vpmu.h
-@@ -40,6 +40,7 @@
- /* Arch specific operations shared by all vpmus */
- struct arch_vpmu_ops {
-     int (*initialise)(struct vcpu *v);
-+    int (*allocate_context)(struct vcpu *v);
-     int (*do_wrmsr)(unsigned int msr, uint64_t msr_content);
-     int (*do_rdmsr)(unsigned int msr, uint64_t *msr_content);
-     int (*do_interrupt)(struct cpu_user_regs *regs);
-@@ -59,6 +60,8 @@ struct vpmu_struct {
-     u32 hw_lapic_lvtpc;
-     void *context;      /* May be shared with PV guest */
-     void *priv_context; /* hypervisor-only */
-+    size_t context_size;
-+    size_t priv_context_size;
-     struct xen_pmu_data *xenpmu_data;
-     spinlock_t vpmu_lock;
+ struct map_data {
+     struct domain *d;
++    const struct vpci_bar *bar;
+     bool map;
  };
-@@ -106,8 +109,10 @@ void vpmu_lvtpc_update(uint32_t val);
- int vpmu_do_msr(unsigned int msr, uint64_t *msr_content, bool is_write);
- void vpmu_do_interrupt(struct cpu_user_regs *regs);
- void vpmu_initialise(struct vcpu *v);
-+void vpmu_allocate_context(struct vcpu *v);
- void vpmu_destroy(struct vcpu *v);
- void vpmu_save(struct vcpu *v);
-+void vpmu_save_force(void *arg);
- int vpmu_load(struct vcpu *v, bool_t from_guest);
- void vpmu_dump(struct vcpu *v);
  
-diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
-index 8f9d9ed9a9..39cd03abf7 100644
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -1653,6 +1653,50 @@ static void copy_vcpu_nonreg_state(struct vcpu *d_vcpu, struct vcpu *cd_vcpu)
-     hvm_set_nonreg_state(cd_vcpu, &nrs);
- }
+@@ -41,8 +42,21 @@ static int cf_check map_range(
  
-+static int copy_vpmu(struct vcpu *d_vcpu, struct vcpu *cd_vcpu)
-+{
-+    struct vpmu_struct *d_vpmu = vcpu_vpmu(d_vcpu);
-+    struct vpmu_struct *cd_vpmu = vcpu_vpmu(cd_vcpu);
+     for ( ; ; )
+     {
++        /* Start address of the BAR as seen by the guest. */
++        gfn_t start_gfn = _gfn(PFN_DOWN(is_hardware_domain(map->d)
++                                        ? map->bar->addr
++                                        : map->bar->guest_reg));
++        /* Physical start address of the BAR. */
++        mfn_t start_mfn = _mfn(PFN_DOWN(map->bar->addr));
+         unsigned long size = e - s + 1;
+ 
++        /*
++         * Ranges to be mapped don't always start at the BAR start address, as
++         * there can be holes or partially consumed ranges. Account for the
++         * offset of the current address from the BAR start.
++         */
++        start_gfn = gfn_add(start_gfn, s - mfn_x(start_mfn));
 +
-+    if ( !vpmu_are_all_set(d_vpmu, VPMU_INITIALIZED | VPMU_CONTEXT_ALLOCATED) )
-+        return 0;
-+    if ( !vpmu_is_set(cd_vpmu, VPMU_CONTEXT_ALLOCATED) )
-+    {
-+        vpmu_allocate_context(cd_vcpu);
-+        if ( !vpmu_is_set(cd_vpmu, VPMU_CONTEXT_ALLOCATED) )
-+            return -ENOMEM;
-+    }
-+
-+    /*
-+     * The VPMU subsystem only saves the context when the CPU does a context
-+     * switch. Otherwise, the relevant MSRs are not saved on vmexit.
-+     * We force a save here in case the parent CPU context is still loaded.
-+     */
-+    if ( vpmu_is_set(d_vpmu, VPMU_CONTEXT_LOADED) )
-+    {
-+        int pcpu = smp_processor_id();
-+
-+        if ( d_vpmu->last_pcpu != pcpu )
-+        {
-+            on_selected_cpus(cpumask_of(d_vpmu->last_pcpu),
-+                             vpmu_save_force, (void *)d_vcpu, 1);
-+            vpmu_reset(d_vpmu, VPMU_CONTEXT_LOADED);
-+        } else
-+            vpmu_save(d_vcpu);
-+    }
-+
-+    if ( vpmu_is_set(d_vpmu, VPMU_RUNNING) )
-+        vpmu_set(cd_vpmu, VPMU_RUNNING);
-+
-+    /* Make sure context gets (re-)loaded when scheduled next */
-+    vpmu_reset(cd_vpmu, VPMU_CONTEXT_LOADED);
-+
-+    memcpy(cd_vpmu->context, d_vpmu->context, d_vpmu->context_size);
-+    memcpy(cd_vpmu->priv_context, d_vpmu->priv_context, d_vpmu->priv_context_size);
-+
-+    return 0;
-+}
-+
- static int copy_vcpu_settings(struct domain *cd, const struct domain *d)
- {
-     unsigned int i;
-@@ -1702,6 +1746,10 @@ static int copy_vcpu_settings(struct domain *cd, const struct domain *d)
-             copy_domain_page(new_vcpu_info_mfn, vcpu_info_mfn);
+         /*
+          * ARM TODOs:
+          * - On ARM whether the memory is prefetchable or not should be passed
+@@ -52,8 +66,8 @@ static int cf_check map_range(
+          * - {un}map_mmio_regions doesn't support preemption.
+          */
+ 
+-        rc = map->map ? map_mmio_regions(map->d, _gfn(s), size, _mfn(s))
+-                      : unmap_mmio_regions(map->d, _gfn(s), size, _mfn(s));
++        rc = map->map ? map_mmio_regions(map->d, start_gfn, size, _mfn(s))
++                      : unmap_mmio_regions(map->d, start_gfn, size, _mfn(s));
+         if ( rc == 0 )
+         {
+             *c += size;
+@@ -62,8 +76,8 @@ static int cf_check map_range(
+         if ( rc < 0 )
+         {
+             printk(XENLOG_G_WARNING
+-                   "Failed to identity %smap [%lx, %lx] for d%d: %d\n",
+-                   map->map ? "" : "un", s, e, map->d->domain_id, rc);
++                   "Failed to %smap [%lx, %lx] for %pd: %d\n",
++                   map->map ? "" : "un", s, e, map->d, rc);
+             break;
          }
+         ASSERT(rc < size);
+@@ -155,6 +169,7 @@ bool vpci_process_pending(struct vcpu *v)
+             if ( rangeset_is_empty(bar->mem) )
+                 continue;
  
-+        ret = copy_vpmu(d_vcpu, cd_vcpu);
-+        if ( ret )
-+            return ret;
-+
-         hvm_vmtrace_reset(cd_vcpu);
++            data.bar = bar;
+             rc = rangeset_consume_ranges(bar->mem, map_range, &data);
  
-         copy_vcpu_nonreg_state(d_vcpu, cd_vcpu);
+             if ( rc == -ERESTART )
+@@ -218,6 +233,7 @@ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
+         if ( rangeset_is_empty(bar->mem) )
+             continue;
+ 
++        data.bar = bar;
+         while ( (rc = rangeset_consume_ranges(bar->mem, map_range,
+                                               &data)) == -ERESTART )
+         {
 -- 
-2.34.1
+2.25.1
 
 
