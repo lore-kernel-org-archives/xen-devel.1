@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5305C3F2D4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA366CCA47F
 	for <xen-devel@archiver.kernel.org>; Tue, 19 Jul 2022 17:43:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.370806.602752 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.370800.602715 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDrFi-0008At-6s; Tue, 19 Jul 2022 17:43:22 +0000
+	id 1oDrFd-00077o-5d; Tue, 19 Jul 2022 17:43:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 370806.602752; Tue, 19 Jul 2022 17:43:22 +0000
+Received: by outflank-mailman (output) from mailman id 370800.602715; Tue, 19 Jul 2022 17:43:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDrFi-00089A-28; Tue, 19 Jul 2022 17:43:22 +0000
-Received: by outflank-mailman (input) for mailman id 370806;
- Tue, 19 Jul 2022 17:43:20 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oDrFd-00077Z-19; Tue, 19 Jul 2022 17:43:17 +0000
+Received: by outflank-mailman (input) for mailman id 370800;
+ Tue, 19 Jul 2022 17:43:15 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=D6sG=XY=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1oDrFg-00065R-DZ
- for xen-devel@lists.xenproject.org; Tue, 19 Jul 2022 17:43:20 +0000
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [2a00:1450:4864:20::632])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 46a6d59e-078a-11ed-bd2d-47488cf2e6aa;
- Tue, 19 Jul 2022 19:43:19 +0200 (CEST)
-Received: by mail-ej1-x632.google.com with SMTP id j22so28609572ejs.2
- for <xen-devel@lists.xenproject.org>; Tue, 19 Jul 2022 10:43:19 -0700 (PDT)
+ id 1oDrFb-00065X-2k
+ for xen-devel@lists.xenproject.org; Tue, 19 Jul 2022 17:43:15 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 43cfb566-078a-11ed-924f-1f966e50362f;
+ Tue, 19 Jul 2022 19:43:14 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id m16so20604420edb.11
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Jul 2022 10:43:14 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- wj18-20020a170907051200b0072af92fa086sm6903268ejb.32.2022.07.19.10.43.17
+ wj18-20020a170907051200b0072af92fa086sm6903268ejb.32.2022.07.19.10.43.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Jul 2022 10:43:17 -0700 (PDT)
+ Tue, 19 Jul 2022 10:43:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,41 +46,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 46a6d59e-078a-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: 43cfb566-078a-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=QdkNpMhNG/rH2hDrjEqNlnDvarGoZ2Hnwipc//T8xoA=;
-        b=kCtcd6y9IjewbRIotgLC7v/cJIoXJ/MN4xbaTvTJxILlca8FQtjx948FxXUmHlH9Nz
-         u7PCFpRxM0iUCn/e7JteV+V+nQVNBckd9beuv9H/J1pMA1MyWT1jLP9rliJuApMopxEt
-         E3Bc/5rvdaKAIsFW9B3ucUUa+3PPeuChPaBvKj3LzlB+cMDTrf9vfoFIJzE1bd4yAWt3
-         7BsZG9BYr5VjPQFcUblpnLgZE91KDhSkilg1V4smxIBkAgOp4gRWVzKJZM86l+J3vebi
-         8ve5+kyCH7QB0JDzVJyCdhqepz1TuVEuVkTJjOTw9zlA4zPbwG0Rzt7Rgxct++30Bmd5
-         3FKA==
+        bh=cpVLKnhd6vjujxD0bO2KThhMDJ+iVwVoqh13SC2q0cs=;
+        b=CaEKmCTRcR8/SMRC0bQf+dOv9ySs6y3MjxkY0nxL38jn9DyDTVsUkvy9ZAHNwAQLUb
+         9PsHRS/MaA6iyDNGA87wfELTHOAsXgeUi44dzyPCvik1wvaojXPc4Cx5sdfckg0fWebP
+         cc219FKu25+5dlHkgUDbhuknkXK8lem6VSZwLGW/7cdxLwwGTYenTN6e3PjlMmAbN2W4
+         CS9Sm/Psi7omj8llD7gcATQhopxoKJIfBZvlhyRJbQ3upJpAY5JvVVFv3ikETm0FZci/
+         g/ZeKkUGDsrsiaPWABpUrGO/2OwrY9PmD99wwQoNmAYMJsvw3q7zfdJMDKbtNZ4Bw5LB
+         /jFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=QdkNpMhNG/rH2hDrjEqNlnDvarGoZ2Hnwipc//T8xoA=;
-        b=vT3/jQIt44NR9n1nXzMupEyK0KVzhTuG5ytbiOxxyEfhjDI95GR4GRB+iYkp3ZkDXQ
-         6rKPTcLVCniIGbJx8PJCf+Quhpzvn1G7W4LkODX35KvTBmoTiIbjUXm9nTDmjmd38LMj
-         jSkLup7ZbSyPpnM1QQUblifIct2Z3WLU2PzVkVEER8UTPnckaiMZPGyBqkSrwIGApv75
-         Rxcfg7/wUOnfaaRpmg4ldwRDqF5VdsFsH0DzXaCx81O8UnUqM5KVogd83grOPPyzobq/
-         MU/W6u1u/tw/GOWJISg8dgkbgwCe4yC+2otcLkx1FvCpUT3jYpJrKawoa6ZqHssV6+Kc
-         p7Xg==
-X-Gm-Message-State: AJIora83D9rLmzAoRu33D4QxzEPjAJ3EKAAlOYu+JYZAclxRj/uhDLAc
-	ODhI3mWbAPn+0OZX98yu5PQpiC6G+o0yCA==
-X-Google-Smtp-Source: AGRyM1vWyMAQazg5NUObXpt91XDu9miFPFNRbJJ25XFfOGHsIqfJSP8H9L3QnEklIiBZJi3ckOePmw==
-X-Received: by 2002:a17:907:94cb:b0:72f:1d8e:7305 with SMTP id dn11-20020a17090794cb00b0072f1d8e7305mr14904155ejc.625.1658252598420;
-        Tue, 19 Jul 2022 10:43:18 -0700 (PDT)
+        bh=cpVLKnhd6vjujxD0bO2KThhMDJ+iVwVoqh13SC2q0cs=;
+        b=kkPEF8SOekhfihud6SJ3BwzPidYZGYxYnKb2p2IX7k9W2ctGEpqYYAzk1KcwOljoNd
+         Y19bH9CEqbxsTfcHcCepXv7vL4L6TZ0Q3cziHZW1nFAkkDN+WbUaXeHKTF4+GT8ZXG0j
+         pyHsl6fiznMiQaZskDYx6qDL6g3kc7zlYtzsXNazAQII6j+GzgPZ0GZNgWYnkYUHOYao
+         fHF08rE5DhCNhyX1cnWEG3cr4lVKuJx/XoYjwE3MRIvw4vU4kHABa0DUkhqJ4yINO7Ay
+         1rl6pA31NxJy6xn/xsIp2A1ErE2b2EbH7bDLoEQ/8ThsAHMRDPuvQI/RZkzzuLcCjEfB
+         IjNw==
+X-Gm-Message-State: AJIora9RIbrwqi+ihS7TYXQXxLExEoIA70owytqJl6sCJ7HEawplO1L7
+	8ckZ33c7V8VKM8/FDOyInwRwGX0T73VtgQ==
+X-Google-Smtp-Source: AGRyM1tJIw9jRhYJ3lV/7WT5PUgwsKPZGJm0z6/cKEw7ZfGIW7GlhYz1AxpnWJFoCsR9lgCnsRsy1Q==
+X-Received: by 2002:a05:6402:5245:b0:43a:a024:82cc with SMTP id t5-20020a056402524500b0043aa02482ccmr45478822edd.56.1658252593657;
+        Tue, 19 Jul 2022 10:43:13 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH V7 08/11] vpci/header: reset the command register when adding devices
-Date: Tue, 19 Jul 2022 20:42:50 +0300
-Message-Id: <20220719174253.541965-9-olekstysh@gmail.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH V7 04/11] rangeset: add RANGESETF_no_print flag
+Date: Tue, 19 Jul 2022 20:42:46 +0300
+Message-Id: <20220719174253.541965-5-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220719174253.541965-1-olekstysh@gmail.com>
 References: <20220719174253.541965-1-olekstysh@gmail.com>
@@ -89,42 +94,66 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Reset the command register when assigning a PCI device to a guest:
-according to the PCI spec the PCI_COMMAND register is typically all 0's
-after reset, but this might not be true for the guest as it needs
-to respect host's settings.
-For that reason, do not write 0 to the PCI_COMMAND register directly,
-but go through the corresponding emulation layer (cmd_write), which
-will take care about the actual bits written.
+There are range sets which should not be printed, so introduce a flag
+which allows marking those as such. Implement relevant logic to skip
+such entries while printing.
 
+While at it also simplify the definition of the flags by directly
+defining those without helpers.
+
+Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Since v6:
-- use cmd_write directly without introducing emulate_cmd_reg
-- update commit message with more description on all 0's in PCI_COMMAND
 Since v5:
-- updated commit message
+- comment indentation (Jan)
 Since v1:
- - do not write 0 to the command register, but respect host settings.
+- update BUG_ON with new flag
+- simplify the definition of the flags
 ---
- xen/drivers/vpci/header.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ xen/common/rangeset.c      | 5 ++++-
+ xen/include/xen/rangeset.h | 5 +++--
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 2ce69a63a2..1be9775dda 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -701,6 +701,10 @@ static int cf_check init_bars(struct pci_dev *pdev)
-      */
-     ASSERT(header->guest_cmd == 0);
+diff --git a/xen/common/rangeset.c b/xen/common/rangeset.c
+index a6ef264046..f8b909d016 100644
+--- a/xen/common/rangeset.c
++++ b/xen/common/rangeset.c
+@@ -433,7 +433,7 @@ struct rangeset *rangeset_new(
+     INIT_LIST_HEAD(&r->range_list);
+     r->nr_ranges = -1;
  
-+    /* Reset the command register for guests. */
-+    if ( !is_hwdom )
-+        cmd_write(pdev, PCI_COMMAND, 0, header);
+-    BUG_ON(flags & ~RANGESETF_prettyprint_hex);
++    BUG_ON(flags & ~(RANGESETF_prettyprint_hex | RANGESETF_no_print));
+     r->flags = flags;
+ 
+     safe_strcpy(r->name, name ?: "(no name)");
+@@ -575,6 +575,9 @@ void rangeset_domain_printk(
+ 
+     list_for_each_entry ( r, &d->rangesets, rangeset_list )
+     {
++        if ( r->flags & RANGESETF_no_print )
++            continue;
 +
-     /* Setup a handler for the command register. */
-     rc = vpci_add_register(pdev->vpci, cmd_read, cmd_write, PCI_COMMAND,
-                            2, header);
+         printk("    ");
+         rangeset_printk(r);
+         printk("\n");
+diff --git a/xen/include/xen/rangeset.h b/xen/include/xen/rangeset.h
+index 135f33f606..f7c69394d6 100644
+--- a/xen/include/xen/rangeset.h
++++ b/xen/include/xen/rangeset.h
+@@ -49,8 +49,9 @@ void rangeset_limit(
+ 
+ /* Flags for passing to rangeset_new(). */
+  /* Pretty-print range limits in hexadecimal. */
+-#define _RANGESETF_prettyprint_hex 0
+-#define RANGESETF_prettyprint_hex  (1U << _RANGESETF_prettyprint_hex)
++#define RANGESETF_prettyprint_hex   (1U << 0)
++ /* Do not print entries marked with this flag. */
++#define RANGESETF_no_print          (1U << 1)
+ 
+ bool_t __must_check rangeset_is_empty(
+     const struct rangeset *r);
 -- 
 2.25.1
 
