@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868B3CCA488
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97557CCA48A
 	for <xen-devel@archiver.kernel.org>; Tue, 19 Jul 2022 17:43:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.370804.602747 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.370807.602761 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDrFh-00080n-Ft; Tue, 19 Jul 2022 17:43:21 +0000
+	id 1oDrFj-0008Jh-57; Tue, 19 Jul 2022 17:43:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 370804.602747; Tue, 19 Jul 2022 17:43:21 +0000
+Received: by outflank-mailman (output) from mailman id 370807.602761; Tue, 19 Jul 2022 17:43:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oDrFh-000801-5Q; Tue, 19 Jul 2022 17:43:21 +0000
-Received: by outflank-mailman (input) for mailman id 370804;
- Tue, 19 Jul 2022 17:43:19 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oDrFi-0008ID-Pb; Tue, 19 Jul 2022 17:43:22 +0000
+Received: by outflank-mailman (input) for mailman id 370807;
+ Tue, 19 Jul 2022 17:43:21 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=D6sG=XY=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
- id 1oDrFf-00065R-4W
- for xen-devel@lists.xenproject.org; Tue, 19 Jul 2022 17:43:19 +0000
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [2a00:1450:4864:20::52c])
- by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 4614dfb9-078a-11ed-bd2d-47488cf2e6aa;
- Tue, 19 Jul 2022 19:43:18 +0200 (CEST)
-Received: by mail-ed1-x52c.google.com with SMTP id y8so20648513eda.3
- for <xen-devel@lists.xenproject.org>; Tue, 19 Jul 2022 10:43:18 -0700 (PDT)
+ id 1oDrFh-00065X-Em
+ for xen-devel@lists.xenproject.org; Tue, 19 Jul 2022 17:43:21 +0000
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [2a00:1450:4864:20::52b])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 478036d2-078a-11ed-924f-1f966e50362f;
+ Tue, 19 Jul 2022 19:43:20 +0200 (CEST)
+Received: by mail-ed1-x52b.google.com with SMTP id m16so20604833edb.11
+ for <xen-devel@lists.xenproject.org>; Tue, 19 Jul 2022 10:43:20 -0700 (PDT)
 Received: from otyshchenko.router ([212.22.223.21])
  by smtp.gmail.com with ESMTPSA id
- wj18-20020a170907051200b0072af92fa086sm6903268ejb.32.2022.07.19.10.43.16
+ wj18-20020a170907051200b0072af92fa086sm6903268ejb.32.2022.07.19.10.43.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Jul 2022 10:43:16 -0700 (PDT)
+ Tue, 19 Jul 2022 10:43:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,41 +46,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 4614dfb9-078a-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: 478036d2-078a-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=NQVKGUXCWq6gwb2au9pJADkwFsbt3FsEYw9qYU1cR14=;
-        b=D9S5tYQQeZHWtI9eesc3VZSqYMxyAotVHoWWiJ7yYXf2UlUbz9JY1/YTEO0g6yWeiY
-         UCsW4olncR1OY0PPhWMKYCCGmJIGcnv1JXE7Ls4LWcidv9XU1RYDp0ThkNPxN8/GouGj
-         all35/LcBjtqVPu2CWxYD1ydAvgOTHOjD9SQ5ekMPVm9o47Lqfp5kyt6YHAaH3u69y73
-         CFqNXyJpq+nWoR2SixcgsPVzGesYfFRXnDR9eoKSadi12IwNeJxpfiXd53HaLxUPfpK5
-         j/acfgMEh845vECyhcRq4LfK5ADBzdyGyzxBdVEDUlRYE9nKzPWo9lEfhy3HkENZgASF
-         gIfQ==
+        bh=rMoBmnl3ZpBTv1UmtiTdiuto4NAuEX1ahKih6uEYEJw=;
+        b=j+R/OvzbEZtIhpUEhIGWc3q1bbZHYp0Ul+K4Dz37jhZz1+6vh8PCxAdE6dTmaGXtW6
+         AVnPLavEd7Syclorws2JcUeO0Ym2q9+9XlivFihN3LffQaeuDEQZcQuLS3PhI8c3e0M8
+         H5d8biejz0cHioAeGCZa0kcBFxN6ksKnK8+XWSKEeS/l4Cqv9N4V7/f6qbhg629nMOnw
+         rEOKgkL+i552j3dW2PRr0/3H69bdD2k/vTwnLDG49dNpkqLKW+ac3A6SNOchhs6cCtVK
+         MXNTUs9RN9Ubp8B9PbOMfDTxeUqgEOhqONELTgmT+axiBQMnvZvssNO2OpyaF6kTEi/y
+         r7Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=NQVKGUXCWq6gwb2au9pJADkwFsbt3FsEYw9qYU1cR14=;
-        b=26VWz8Hg/8Iuy/yMBh8FnczxRtPIa7RyCGAE9kpMFc2sVBTaN1dPwJeFo2f1YsP31B
-         2gH/LGUt5OmTMcDC/KoF3LjoMMOqGMc2Q6ezUEbnpL94aiJA4Mkp/rXzwL1HKgg8LTeY
-         hPlgOX8/prMuk6m97Wf8/oZlatZRFlaXE15lRGxNuxoPSyI8aUWBXfCLhV4Zcq+gZB4J
-         XpRbnFWqSSjebpYyepXYXd0rQzvyGlV7vkcqFSCK/L79cn00c8HghX8ZQflMu5bUH/eu
-         EWGUWzehNQv5zghIl1xh5Tp+ZG2Ob/EdLzMAZocDMiDkVwZaRUc25QGDac2GGeoeicxs
-         r7fA==
-X-Gm-Message-State: AJIora8hBUr5mu7XH4+5ibYvVUpiIPQC7elJURy1EjmMhWmcB8bEGrTd
-	zVpoYp9H6JRTERveotlgz3T3P9ViZR4+rg==
-X-Google-Smtp-Source: AGRyM1vJguGRMwMPFUWXrI9LSVBvRsLUYgXtF2tzmcgsvM+heKS5t0myo4bf5MxMeZPzYYVdvf+WsA==
-X-Received: by 2002:a05:6402:3881:b0:43a:691f:8e3b with SMTP id fd1-20020a056402388100b0043a691f8e3bmr45389885edb.217.1658252597458;
-        Tue, 19 Jul 2022 10:43:17 -0700 (PDT)
+        bh=rMoBmnl3ZpBTv1UmtiTdiuto4NAuEX1ahKih6uEYEJw=;
+        b=5dyBaKsu0MYfAYICVh/9ljA9TidTryulC0zAlKibiN4Jtv/iZd2vtecXdUO1bZFb4s
+         cLSWIjqUEo1AJzzhzzZrzJV5uIOnqX4sIrwTWuhpuMau7rinA9gSe4f8heCMZECpUnSo
+         oeff1Zl1X3c+n0LilhRkBNU1mTtxg9WkGd96bwDqS2c6ASgDhg2j++zXIHc6g28buszI
+         1gF2e0S2EX2y7Bxn/ygVFDuGG7MW3VGpKxcLrCVjXwv/W7wVk8MkF0YOXk3/H9Z5rram
+         fllaNCc49P42kmpOIxDYcaE9F8dhjMbPl1nfg0dVLi4mMWnFASxobpWgtRsncWmZkZ4i
+         9gsg==
+X-Gm-Message-State: AJIora8gcIF0U8o3ZWD8XBZ7AIqgPoi+XEI9jDImLyIPHwzp+CS5fTD1
+	w5UUc7/KbrcdSSKm5a3CTfXFDeF9ylUWtw==
+X-Google-Smtp-Source: AGRyM1vwWKS94qRtIYCQT74pZ5Yf4pcr8nEvoMGSizTcpXdveRMSImguFS8MGQrIxdv0ZUQ8RxYMAg==
+X-Received: by 2002:a05:6402:26c3:b0:43a:a846:b2c1 with SMTP id x3-20020a05640226c300b0043aa846b2c1mr45920791edd.133.1658252599786;
+        Tue, 19 Jul 2022 10:43:19 -0700 (PDT)
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH V7 07/11] vpci/header: emulate PCI_COMMAND register for guests
-Date: Tue, 19 Jul 2022 20:42:49 +0300
-Message-Id: <20220719174253.541965-8-olekstysh@gmail.com>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH V7 09/11] vpci: add initial support for virtual PCI bus topology
+Date: Tue, 19 Jul 2022 20:42:51 +0300
+Message-Id: <20220719174253.541965-10-olekstysh@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220719174253.541965-1-olekstysh@gmail.com>
 References: <20220719174253.541965-1-olekstysh@gmail.com>
@@ -89,172 +95,207 @@ Content-Transfer-Encoding: 8bit
 
 From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Xen and/or Dom0 may have put values in PCI_COMMAND which they expect
-to remain unaltered. PCI_COMMAND_SERR bit is a good example: while the
-guest's view of this will want to be zero initially, the host having set
-it to 1 may not easily be overwritten with 0, or else we'd effectively
-imply giving the guest control of the bit. Thus, PCI_COMMAND register needs
-proper emulation in order to honor host's settings.
+Assign SBDF to the PCI devices being passed through with bus 0.
+The resulting topology is where PCIe devices reside on the bus 0 of the
+root complex itself (embedded endpoints).
+This implementation is limited to 32 devices which are allowed on
+a single PCI bus.
 
-There are examples of emulators [1], [2] which already deal with PCI_COMMAND
-register emulation and it seems that at most they care about is the only INTx
-bit (besides IO/memory enable and bus master which are write through).
-It could be because in order to properly emulate the PCI_COMMAND register
-we need to know about the whole PCI topology, e.g. if any setting in device's
-command register is aligned with the upstream port etc.
-This makes me think that because of this complexity others just ignore that.
-Neither I think this can easily be done in Xen case.
-
-According to "PCI LOCAL BUS SPECIFICATION, REV. 3.0", section "6.2.2
-Device Control" the reset state of the command register is typically 0,
-so when assigning a PCI device use 0 as the initial state for the guest's view
-of the command register.
-
-For now our emulation only makes sure INTx is set according to the host
-requirements, i.e. depending on MSI/MSI-X enabled state.
-
-This implementation and the decision to only emulate INTx bit for now
-is based on the previous discussion at [3].
-
-[1] https://github.com/qemu/qemu/blob/master/hw/xen/xen_pt_config_init.c#L310
-[2] https://github.com/projectacrn/acrn-hypervisor/blob/master/hypervisor/hw/pci.c#L336
-[3] https://patchwork.kernel.org/project/xen-devel/patch/20210903100831.177748-9-andr2000@gmail.com/
+Please note, that at the moment only function 0 of a multifunction
+device can be passed through.
 
 Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 ---
 Since v6:
-- fold guest's logic into cmd_write
-- implement cmd_read, so we can report emulated INTx state to guests
-- introduce header->guest_cmd to hold the emulated state of the
-  PCI_COMMAND register for guests
-- OT: rebased
-- OT: add cf_check specifier to cmd_read()
+- re-work wrt new locking scheme
+- OT: add ASSERT(pcidevs_write_locked()); to add_virtual_device()
 Since v5:
-- add additional check for MSI-X enabled while altering INTX bit
-- make sure INTx disabled while guests enable MSI/MSI-X
+- s/vpci_add_virtual_device/add_virtual_device and make it static
+- call add_virtual_device from vpci_assign_device and do not use
+  REGISTER_VPCI_INIT machinery
+- add pcidevs_locked ASSERT
+- use DECLARE_BITMAP for vpci_dev_assigned_map
+Since v4:
+- moved and re-worked guest sbdf initializers
+- s/set_bit/__set_bit
+- s/clear_bit/__clear_bit
+- minor comment fix s/Virtual/Guest/
+- added VPCI_MAX_VIRT_DEV constant (PCI_SLOT(~0) + 1) which will be used
+  later for counting the number of MMIO handlers required for a guest
+  (Julien)
 Since v3:
-- gate more code on CONFIG_HAS_MSI
-- removed logic for the case when MSI/MSI-X not enabled
+ - make use of VPCI_INIT
+ - moved all new code to vpci.c which belongs to it
+ - changed open-coded 31 to PCI_SLOT(~0)
+ - added comments and code to reject multifunction devices with
+   functions other than 0
+ - updated comment about vpci_dev_next and made it unsigned int
+ - implement roll back in case of error while assigning/deassigning devices
+ - s/dom%pd/%pd
+Since v2:
+ - remove casts that are (a) malformed and (b) unnecessary
+ - add new line for better readability
+ - remove CONFIG_HAS_VPCI_GUEST_SUPPORT ifdef's as the relevant vPCI
+    functions are now completely gated with this config
+ - gate common code with CONFIG_HAS_VPCI_GUEST_SUPPORT
+New in v2
 ---
- xen/drivers/vpci/header.c | 38 +++++++++++++++++++++++++++++++++++++-
- xen/drivers/vpci/msi.c    |  4 ++++
- xen/drivers/vpci/msix.c   |  4 ++++
- xen/include/xen/vpci.h    |  3 +++
- 4 files changed, 48 insertions(+), 1 deletion(-)
+ xen/drivers/vpci/vpci.c | 70 ++++++++++++++++++++++++++++++++++++++++-
+ xen/include/xen/sched.h |  8 +++++
+ xen/include/xen/vpci.h  | 11 +++++++
+ 3 files changed, 88 insertions(+), 1 deletion(-)
 
-diff --git a/xen/drivers/vpci/header.c b/xen/drivers/vpci/header.c
-index 4e6547a54d..2ce69a63a2 100644
---- a/xen/drivers/vpci/header.c
-+++ b/xen/drivers/vpci/header.c
-@@ -443,11 +443,27 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
-     return 0;
- }
+diff --git a/xen/drivers/vpci/vpci.c b/xen/drivers/vpci/vpci.c
+index f683346285..d4601ecf9b 100644
+--- a/xen/drivers/vpci/vpci.c
++++ b/xen/drivers/vpci/vpci.c
+@@ -84,6 +84,9 @@ int vpci_add_handlers(struct pci_dev *pdev)
  
-+/* TODO: Add proper emulation for all bits of the command register. */
- static void cf_check cmd_write(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t cmd, void *data)
- {
-     uint16_t current_cmd = pci_conf_read16(pdev->sbdf, reg);
- 
-+    if ( !is_hardware_domain(pdev->domain) )
-+    {
-+        struct vpci_header *header = data;
-+
-+        header->guest_cmd = cmd;
-+#ifdef CONFIG_HAS_PCI_MSI
-+        if ( pdev->vpci->msi->enabled || pdev->vpci->msix->enabled )
-+            /*
-+             * Guest wants to enable INTx, but it can't be enabled
-+             * if MSI/MSI-X enabled.
-+             */
-+            cmd |= PCI_COMMAND_INTX_DISABLE;
+     INIT_LIST_HEAD(&pdev->vpci->handlers);
+     spin_lock_init(&pdev->vpci->lock);
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    pdev->vpci->guest_sbdf.sbdf = ~0;
 +#endif
-+    }
-+
-     /*
-      * Let Dom0 play with all the bits directly except for the memory
-      * decoding one.
-@@ -464,6 +480,19 @@ static void cf_check cmd_write(
-         pci_conf_write16(pdev->sbdf, reg, cmd);
+ 
+     for ( i = 0; i < NUM_VPCI_INIT; i++ )
+     {
+@@ -99,6 +102,62 @@ int vpci_add_handlers(struct pci_dev *pdev)
  }
  
-+static uint32_t cf_check cmd_read(
-+    const struct pci_dev *pdev, unsigned int reg, void *data)
+ #ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++static int add_virtual_device(struct pci_dev *pdev)
 +{
-+    if ( !is_hardware_domain(pdev->domain) )
-+    {
-+        struct vpci_header *header = data;
++    struct domain *d = pdev->domain;
++    pci_sbdf_t sbdf = { 0 };
++    unsigned long new_dev_number;
 +
-+        return header->guest_cmd;
++    if ( is_hardware_domain(d) )
++        return 0;
++
++    ASSERT(pcidevs_write_locked());
++
++    /*
++     * Each PCI bus supports 32 devices/slots at max or up to 256 when
++     * there are multi-function ones which are not yet supported.
++     */
++    if ( pdev->info.is_extfn )
++    {
++        gdprintk(XENLOG_ERR, "%pp: only function 0 passthrough supported\n",
++                 &pdev->sbdf);
++        return -EOPNOTSUPP;
 +    }
 +
-+    return pci_conf_read16(pdev->sbdf, reg);
++    new_dev_number = find_first_zero_bit(d->vpci_dev_assigned_map,
++                                         VPCI_MAX_VIRT_DEV);
++    if ( new_dev_number >= VPCI_MAX_VIRT_DEV )
++        return -ENOSPC;
++
++    __set_bit(new_dev_number, &d->vpci_dev_assigned_map);
++
++    /*
++     * Both segment and bus number are 0:
++     *  - we emulate a single host bridge for the guest, e.g. segment 0
++     *  - with bus 0 the virtual devices are seen as embedded
++     *    endpoints behind the root complex
++     *
++     * TODO: add support for multi-function devices.
++     */
++    sbdf.devfn = PCI_DEVFN(new_dev_number, 0);
++    pdev->vpci->guest_sbdf = sbdf;
++
++    return 0;
++
 +}
 +
- static void cf_check bar_write(
-     const struct pci_dev *pdev, unsigned int reg, uint32_t val, void *data)
++static void vpci_remove_virtual_device(const struct pci_dev *pdev)
++{
++    ASSERT(pcidevs_write_locked());
++
++    if ( pdev->vpci )
++    {
++        __clear_bit(pdev->vpci->guest_sbdf.dev,
++                    &pdev->domain->vpci_dev_assigned_map);
++        pdev->vpci->guest_sbdf.sbdf = ~0;
++    }
++}
++
+ /* Notify vPCI that device is assigned to guest. */
+ int vpci_assign_device(struct pci_dev *pdev)
  {
-@@ -665,8 +694,15 @@ static int cf_check init_bars(struct pci_dev *pdev)
-         return -EOPNOTSUPP;
-     }
+@@ -111,8 +170,16 @@ int vpci_assign_device(struct pci_dev *pdev)
  
-+    /*
-+     * According to "PCI LOCAL BUS SPECIFICATION, REV. 3.0", section "6.2.2
-+     * Device Control" the reset state of the command register is
-+     * typically all 0's, so this is used as initial value for the guests.
-+     */
-+    ASSERT(header->guest_cmd == 0);
-+
-     /* Setup a handler for the command register. */
--    rc = vpci_add_register(pdev->vpci, vpci_hw_read16, cmd_write, PCI_COMMAND,
-+    rc = vpci_add_register(pdev->vpci, cmd_read, cmd_write, PCI_COMMAND,
-                            2, header);
+     rc = vpci_add_handlers(pdev);
      if ( rc )
-         return rc;
-diff --git a/xen/drivers/vpci/msi.c b/xen/drivers/vpci/msi.c
-index d864f740cf..c8c495e2d7 100644
---- a/xen/drivers/vpci/msi.c
-+++ b/xen/drivers/vpci/msi.c
-@@ -70,6 +70,10 @@ static void cf_check control_write(
+-        vpci_deassign_device(pdev);
++        goto fail;
++
++    rc = add_virtual_device(pdev);
++    if ( rc )
++        goto fail;
++
++    return 0;
  
-         if ( vpci_msi_arch_enable(msi, pdev, vectors) )
-             return;
-+
-+        /* Make sure guest doesn't enable INTx while enabling MSI. */
-+        if ( !is_hardware_domain(pdev->domain) )
-+            pci_intx(pdev, false);
-     }
-     else
-         vpci_msi_arch_disable(msi, pdev);
-diff --git a/xen/drivers/vpci/msix.c b/xen/drivers/vpci/msix.c
-index 35cc9280f4..06f84b8b02 100644
---- a/xen/drivers/vpci/msix.c
-+++ b/xen/drivers/vpci/msix.c
-@@ -92,6 +92,10 @@ static void cf_check control_write(
-         for ( i = 0; i < msix->max_entries; i++ )
-             if ( !msix->entries[i].masked && msix->entries[i].updated )
-                 update_entry(&msix->entries[i], pdev, i);
-+
-+        /* Make sure guest doesn't enable INTx while enabling MSI-X. */
-+        if ( !is_hardware_domain(pdev->domain) )
-+            pci_intx(pdev, false);
-     }
-     else if ( !new_enabled && msix->enabled )
-     {
++ fail:
++    vpci_deassign_device(pdev);
+     return rc;
+ }
+ 
+@@ -124,6 +191,7 @@ void vpci_deassign_device(struct pci_dev *pdev)
+     if ( !has_vpci(pdev->domain) )
+         return;
+ 
++    vpci_remove_virtual_device(pdev);
+     vpci_remove_device(pdev);
+ }
+ #endif /* CONFIG_HAS_VPCI_GUEST_SUPPORT */
+diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+index b9515eb497..a2848a5740 100644
+--- a/xen/include/xen/sched.h
++++ b/xen/include/xen/sched.h
+@@ -457,6 +457,14 @@ struct domain
+ 
+ #ifdef CONFIG_HAS_PCI
+     struct list_head pdev_list;
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    /*
++     * The bitmap which shows which device numbers are already used by the
++     * virtual PCI bus topology and is used to assign a unique SBDF to the
++     * next passed through virtual PCI device.
++     */
++    DECLARE_BITMAP(vpci_dev_assigned_map, VPCI_MAX_VIRT_DEV);
++#endif
+ #endif
+ 
+ #ifdef CONFIG_HAS_PASSTHROUGH
 diff --git a/xen/include/xen/vpci.h b/xen/include/xen/vpci.h
-index 6332659c4a..1010f68c28 100644
+index 1010f68c28..cc14b0086d 100644
 --- a/xen/include/xen/vpci.h
 +++ b/xen/include/xen/vpci.h
-@@ -87,6 +87,9 @@ struct vpci {
-         } bars[PCI_HEADER_NORMAL_NR_BARS + 1];
-         /* At most 6 BARS + 1 expansion ROM BAR. */
+@@ -21,6 +21,13 @@ typedef int vpci_register_init_t(struct pci_dev *dev);
  
-+        /* Guest view of the PCI_COMMAND register. */
-+        uint16_t guest_cmd;
+ #define VPCI_ECAM_BDF(addr)     (((addr) & 0x0ffff000) >> 12)
+ 
++/*
++ * Maximum number of devices supported by the virtual bus topology:
++ * each PCI bus supports 32 devices/slots at max or up to 256 when
++ * there are multi-function ones which are not yet supported.
++ */
++#define VPCI_MAX_VIRT_DEV       (PCI_SLOT(~0) + 1)
 +
-         /*
-          * Store whether the ROM enable bit is set (doesn't imply ROM BAR
-          * is mapped into guest p2m) if there's a ROM BAR on the device.
+ #define REGISTER_VPCI_INIT(x, p)                \
+   static vpci_register_init_t *const x##_entry  \
+                __used_section(".data.vpci." p) = x
+@@ -145,6 +152,10 @@ struct vpci {
+             struct vpci_arch_msix_entry arch;
+         } entries[];
+     } *msix;
++#ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
++    /* Guest SBDF of the device. */
++    pci_sbdf_t guest_sbdf;
++#endif
+ #endif
+ };
+ 
 -- 
 2.25.1
 
