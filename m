@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE766C433EF
-	for <xen-devel@archiver.kernel.org>; Wed, 20 Jul 2022 18:45:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.372154.604011 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599A3C43334
+	for <xen-devel@archiver.kernel.org>; Wed, 20 Jul 2022 18:45:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.372156.604033 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oEEh1-0003i4-V8; Wed, 20 Jul 2022 18:45:07 +0000
+	id 1oEEh3-0004E8-VR; Wed, 20 Jul 2022 18:45:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 372154.604011; Wed, 20 Jul 2022 18:45:07 +0000
+Received: by outflank-mailman (output) from mailman id 372156.604033; Wed, 20 Jul 2022 18:45:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oEEh1-0003hx-R1; Wed, 20 Jul 2022 18:45:07 +0000
-Received: by outflank-mailman (input) for mailman id 372154;
- Wed, 20 Jul 2022 18:45:06 +0000
+	id 1oEEh3-0004Dr-PZ; Wed, 20 Jul 2022 18:45:09 +0000
+Received: by outflank-mailman (input) for mailman id 372156;
+ Wed, 20 Jul 2022 18:45:08 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1oEEh0-0003Zu-2Q
- for xen-devel@lists.xenproject.org; Wed, 20 Jul 2022 18:45:06 +0000
+ (envelope-from <julien@xen.org>) id 1oEEh2-0003ri-Ey
+ for xen-devel@lists.xenproject.org; Wed, 20 Jul 2022 18:45:08 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1oEEgz-00077P-Ia; Wed, 20 Jul 2022 18:45:05 +0000
+ id 1oEEh2-00077p-1r; Wed, 20 Jul 2022 18:45:08 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=dev-dsk-jgrall-1b-035652ec.eu-west-1.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1oEEgz-000309-AI; Wed, 20 Jul 2022 18:45:05 +0000
+ id 1oEEh1-000309-QO; Wed, 20 Jul 2022 18:45:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,9 +45,9 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
 	s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
 	In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
-	bh=hYBserRHCKnxjEBZbsMua2qzdvwsIdV+2glCDCaTlZQ=; b=XdW7vqYlbVh26LBYfdiQxTq3rk
-	6GHrE0ZwYKd8nwVfpe/XwbcyPC5YwYI/TxYGxhRNEKCradEp3S6BPzZDjNkgnE6StTutfhnEipk3m
-	HSrfNl0TIRhVu0RmI7mwdESxZ+gyfRjSjPJ7V0t1SHEV7s7qCD19rC5i11VGQk+V9n9g=;
+	bh=ZCcbJJZ0Rn+Gw3fU5XlJ9t1HEWrkwplqjvNtiYujb+U=; b=mgfkhn8HmiKixAUJGLH7LNTgmO
+	mU+d2SWubeDXGLatCRQ1GhcpZh2cssgZarwNFrKkFR1D/XCixHhi2h5IClQUi/YidmJDEg8v5pRBK
+	SfALmDJCWtenAHbvJjZZoq0C7cQFnJ6hZ8FPS2OFi4Xp4fYfoPNjyyxFGmi5OmF9qnlw=;
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
 Cc: julien@xen.org,
@@ -55,11 +55,14 @@ Cc: julien@xen.org,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-	Ross Lagerwall <ross.lagerwall@citrix.com>
-Subject: [PATCH v2 1/5] xen/arm: Remove most of the *_VIRT_END defines
-Date: Wed, 20 Jul 2022 19:44:55 +0100
-Message-Id: <20220720184459.51582-2-julien@xen.org>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Wei Liu <wl@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Subject: [PATCH v2 3/5] xen: Rename CONFIG_DOMAIN_PAGE to CONFIG_ARCH_MAP_DOMAIN_PAGE and...
+Date: Wed, 20 Jul 2022 19:44:57 +0100
+Message-Id: <20220720184459.51582-4-julien@xen.org>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20220720184459.51582-1-julien@xen.org>
 References: <20220720184459.51582-1-julien@xen.org>
@@ -68,164 +71,138 @@ Content-Transfer-Encoding: 8bit
 
 From: Julien Grall <jgrall@amazon.com>
 
-At the moment, *_VIRT_END may either point to the address after the end
-or the last address of the region.
+move it to Kconfig.
 
-The lack of consistency make quite difficult to reason with them.
+The define CONFIG_DOMAIN_PAGE indicates whether the architecture provide
+helpers to map/unmap a domain page. Rename it to the define to
+CONFIG_ARCH_MAP_DOMAIN_PAGE so it is clearer that this will not remove
+support for domain page (this is not a concept that Xen can't get
+away with).
 
-Furthermore, there is a risk of overflow in the case where the address
-points past to the end. I am not aware of any cases, so this is only a
-latent bug.
-
-Start to solve the problem by removing all the *_VIRT_END exclusively used
-by the Arm code and add *_VIRT_SIZE when it is not present.
-
-Take the opportunity to rename BOOT_FDT_SLOT_SIZE to BOOT_FDT_VIRT_SIZE
-for better consistency and use _AT(vaddr_t, ).
-
-Also take the opportunity to fix the coding style of the comment touched
-in mm.c.
+Take the opportunity to move CONFIG_MAP_DOMAIN_PAGE to Kconfig as this
+will soon be necessary to use it in the Makefile.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 
 ----
-
-I noticed that a few functions in Xen expect [start, end[. This is risky
-as we may end up with end < start if the region is defined right at the
-top of the address space.
-
-I haven't yet tackle this issue. But I would at least like to get rid
-of *_VIRT_END.
-
-This was originally sent separately (lets call it v0).
-
     Changes in v2:
-        - Correct the check in domain_page_map_to_mfn()
-
-    Changes in v1:
-        - Mention the coding style change.
+        - New patch
 ---
- xen/arch/arm/include/asm/config.h | 18 ++++++++----------
- xen/arch/arm/livepatch.c          |  2 +-
- xen/arch/arm/mm.c                 | 13 ++++++++-----
- 3 files changed, 17 insertions(+), 16 deletions(-)
+ xen/arch/arm/Kconfig              | 1 +
+ xen/arch/arm/include/asm/config.h | 1 -
+ xen/arch/arm/mm.c                 | 2 +-
+ xen/arch/x86/Kconfig              | 1 +
+ xen/arch/x86/include/asm/config.h | 1 -
+ xen/common/Kconfig                | 3 +++
+ xen/include/xen/domain_page.h     | 6 +++---
+ 7 files changed, 9 insertions(+), 6 deletions(-)
 
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index be9eff014120..33e004d702bf 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -1,6 +1,7 @@
+ config ARM_32
+ 	def_bool y
+ 	depends on "$(ARCH)" = "arm32"
++	select ARCH_MAP_DOMAIN_PAGE
+ 
+ config ARM_64
+ 	def_bool y
 diff --git a/xen/arch/arm/include/asm/config.h b/xen/arch/arm/include/asm/config.h
-index 3e2a55a91058..66db618b34e7 100644
+index 66db618b34e7..2fafb9f2283c 100644
 --- a/xen/arch/arm/include/asm/config.h
 +++ b/xen/arch/arm/include/asm/config.h
-@@ -111,12 +111,11 @@
- #define FIXMAP_ADDR(n)        (_AT(vaddr_t,0x00400000) + (n) * PAGE_SIZE)
+@@ -122,7 +122,6 @@
  
- #define BOOT_FDT_VIRT_START    _AT(vaddr_t,0x00600000)
--#define BOOT_FDT_SLOT_SIZE     MB(4)
--#define BOOT_FDT_VIRT_END      (BOOT_FDT_VIRT_START + BOOT_FDT_SLOT_SIZE)
-+#define BOOT_FDT_VIRT_SIZE     _AT(vaddr_t, MB(4))
+ #ifdef CONFIG_ARM_32
  
- #ifdef CONFIG_LIVEPATCH
- #define LIVEPATCH_VMAP_START   _AT(vaddr_t,0x00a00000)
--#define LIVEPATCH_VMAP_END     (LIVEPATCH_VMAP_START + MB(2))
-+#define LIVEPATCH_VMAP_SIZE    _AT(vaddr_t, MB(2))
- #endif
+-#define CONFIG_DOMAIN_PAGE 1
+ #define CONFIG_SEPARATE_XENHEAP 1
  
- #define HYPERVISOR_VIRT_START  XEN_VIRT_START
-@@ -132,18 +131,18 @@
- #define FRAMETABLE_VIRT_END    (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
- 
- #define VMAP_VIRT_START        _AT(vaddr_t,0x10000000)
-+#define VMAP_VIRT_SIZE         _AT(vaddr_t, GB(1) - MB(256))
- 
- #define XENHEAP_VIRT_START     _AT(vaddr_t,0x40000000)
--#define XENHEAP_VIRT_END       _AT(vaddr_t,0x7fffffff)
--#define DOMHEAP_VIRT_START     _AT(vaddr_t,0x80000000)
--#define DOMHEAP_VIRT_END       _AT(vaddr_t,0xffffffff)
-+#define XENHEAP_VIRT_SIZE      _AT(vaddr_t, GB(1))
- 
--#define VMAP_VIRT_END    XENHEAP_VIRT_START
-+#define DOMHEAP_VIRT_START     _AT(vaddr_t,0x80000000)
-+#define DOMHEAP_VIRT_SIZE      _AT(vaddr_t, GB(2))
- 
- #define DOMHEAP_ENTRIES        1024  /* 1024 2MB mapping slots */
- 
- /* Number of domheap pagetable pages required at the second level (2MB mappings) */
--#define DOMHEAP_SECOND_PAGES ((DOMHEAP_VIRT_END - DOMHEAP_VIRT_START + 1) >> FIRST_SHIFT)
-+#define DOMHEAP_SECOND_PAGES (DOMHEAP_VIRT_SIZE >> FIRST_SHIFT)
- 
- #else /* ARM_64 */
- 
-@@ -152,12 +151,11 @@
- #define SLOT0_ENTRY_SIZE  SLOT0(1)
- 
- #define VMAP_VIRT_START  GB(1)
--#define VMAP_VIRT_END    (VMAP_VIRT_START + GB(1))
-+#define VMAP_VIRT_SIZE   GB(1)
- 
- #define FRAMETABLE_VIRT_START  GB(32)
- #define FRAMETABLE_SIZE        GB(32)
- #define FRAMETABLE_NR          (FRAMETABLE_SIZE / sizeof(*frame_table))
--#define FRAMETABLE_VIRT_END    (FRAMETABLE_VIRT_START + FRAMETABLE_SIZE - 1)
- 
- #define DIRECTMAP_VIRT_START   SLOT0(256)
- #define DIRECTMAP_SIZE         (SLOT0_ENTRY_SIZE * (265-256))
-diff --git a/xen/arch/arm/livepatch.c b/xen/arch/arm/livepatch.c
-index 75e8adcfd6a1..57abc746e60b 100644
---- a/xen/arch/arm/livepatch.c
-+++ b/xen/arch/arm/livepatch.c
-@@ -175,7 +175,7 @@ void __init arch_livepatch_init(void)
-     void *start, *end;
- 
-     start = (void *)LIVEPATCH_VMAP_START;
--    end = (void *)LIVEPATCH_VMAP_END;
-+    end = start + LIVEPATCH_VMAP_SIZE;
- 
-     vm_init_type(VMAP_XEN, start, end);
- 
+ #define FRAMETABLE_VIRT_START  _AT(vaddr_t,0x02000000)
 diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 56fd0845861f..0177bc6b34d2 100644
+index 9311f3530066..7a722d6c86c6 100644
 --- a/xen/arch/arm/mm.c
 +++ b/xen/arch/arm/mm.c
-@@ -128,9 +128,11 @@ static DEFINE_PAGE_TABLE(xen_first);
- /* xen_pgtable == root of the trie (zeroeth level on 64-bit, first on 32-bit) */
- static DEFINE_PER_CPU(lpae_t *, xen_pgtable);
- #define THIS_CPU_PGTABLE this_cpu(xen_pgtable)
--/* xen_dommap == pages used by map_domain_page, these pages contain
-+/*
-+ * xen_dommap == pages used by map_domain_page, these pages contain
-  * the second level pagetables which map the domheap region
-- * DOMHEAP_VIRT_START...DOMHEAP_VIRT_END in 2MB chunks. */
-+ * starting at DOMHEAP_VIRT_START in 2MB chunks.
-+ */
- static DEFINE_PER_CPU(lpae_t *, xen_dommap);
- /* Root of the trie for cpu0, other CPU's PTs are dynamically allocated */
- static DEFINE_PAGE_TABLE(cpu0_pgtable);
-@@ -476,7 +478,7 @@ mfn_t domain_page_map_to_mfn(const void *ptr)
-     int slot = (va - DOMHEAP_VIRT_START) >> SECOND_SHIFT;
-     unsigned long offset = (va>>THIRD_SHIFT) & XEN_PT_LPAE_ENTRY_MASK;
- 
--    if ( va >= VMAP_VIRT_START && va < VMAP_VIRT_END )
-+    if ( (va >= VMAP_VIRT_START) && ((va - VMAP_VIRT_START) < VMAP_VIRT_SIZE) )
-         return virt_to_mfn(va);
- 
-     ASSERT(slot >= 0 && slot < DOMHEAP_ENTRIES);
-@@ -570,7 +572,8 @@ void __init remove_early_mappings(void)
-     int rc;
- 
-     /* destroy the _PAGE_BLOCK mapping */
--    rc = modify_xen_mappings(BOOT_FDT_VIRT_START, BOOT_FDT_VIRT_END,
-+    rc = modify_xen_mappings(BOOT_FDT_VIRT_START,
-+                             BOOT_FDT_VIRT_START + BOOT_FDT_VIRT_SIZE,
-                              _PAGE_BLOCK);
-     BUG_ON(rc);
+@@ -371,7 +371,7 @@ void clear_fixmap(unsigned int map)
+     BUG_ON(res != 0);
  }
-@@ -850,7 +853,7 @@ void __init setup_frametable_mappings(paddr_t ps, paddr_t pe)
  
- void *__init arch_vmap_virt_end(void)
- {
--    return (void *)VMAP_VIRT_END;
-+    return (void *)(VMAP_VIRT_START + VMAP_VIRT_SIZE);
- }
+-#ifdef CONFIG_DOMAIN_PAGE
++#ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
+ /*
+  * Prepare the area that will be used to map domheap pages. They are
+  * mapped in 2MB chunks, so we need to allocate the page-tables up to
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index 6bed72b79141..6a7825f4ba3c 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -8,6 +8,7 @@ config X86
+ 	select ACPI_LEGACY_TABLES_LOOKUP
+ 	select ACPI_NUMA
+ 	select ALTERNATIVE_CALL
++	select ARCH_MAP_DOMAIN_PAGE
+ 	select ARCH_SUPPORTS_INT128
+ 	select CORE_PARKING
+ 	select HAS_ALTERNATIVE
+diff --git a/xen/arch/x86/include/asm/config.h b/xen/arch/x86/include/asm/config.h
+index 07bcd158314b..fbc4bb3416bd 100644
+--- a/xen/arch/x86/include/asm/config.h
++++ b/xen/arch/x86/include/asm/config.h
+@@ -22,7 +22,6 @@
+ #define CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS 1
+ #define CONFIG_DISCONTIGMEM 1
+ #define CONFIG_NUMA_EMU 1
+-#define CONFIG_DOMAIN_PAGE 1
+ 
+ #define CONFIG_PAGEALLOC_MAX_ORDER (2 * PAGETABLE_ORDER)
+ #define CONFIG_DOMU_MAX_ORDER      PAGETABLE_ORDER
+diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+index 41a67891bcc8..f1ea3199c8eb 100644
+--- a/xen/common/Kconfig
++++ b/xen/common/Kconfig
+@@ -25,6 +25,9 @@ config GRANT_TABLE
+ config ALTERNATIVE_CALL
+ 	bool
+ 
++config ARCH_MAP_DOMAIN_PAGE
++	bool
++
+ config HAS_ALTERNATIVE
+ 	bool
+ 
+diff --git a/xen/include/xen/domain_page.h b/xen/include/xen/domain_page.h
+index a182d33b6701..149b217b9619 100644
+--- a/xen/include/xen/domain_page.h
++++ b/xen/include/xen/domain_page.h
+@@ -17,7 +17,7 @@
+ void clear_domain_page(mfn_t mfn);
+ void copy_domain_page(mfn_t dst, const mfn_t src);
+ 
+-#ifdef CONFIG_DOMAIN_PAGE
++#ifdef CONFIG_ARCH_MAP_DOMAIN_PAGE
  
  /*
+  * Map a given page frame, returning the mapped virtual address. The page is
+@@ -51,7 +51,7 @@ static inline void *__map_domain_page_global(const struct page_info *pg)
+     return map_domain_page_global(page_to_mfn(pg));
+ }
+ 
+-#else /* !CONFIG_DOMAIN_PAGE */
++#else /* !CONFIG_ARCH_MAP_DOMAIN_PAGE */
+ 
+ #define map_domain_page(mfn)                __mfn_to_virt(mfn_x(mfn))
+ #define __map_domain_page(pg)               page_to_virt(pg)
+@@ -70,7 +70,7 @@ static inline void *__map_domain_page_global(const struct page_info *pg)
+ 
+ static inline void unmap_domain_page_global(const void *va) {};
+ 
+-#endif /* !CONFIG_DOMAIN_PAGE */
++#endif /* !CONFIG_ARCH_MAP_DOMAIN_PAGE */
+ 
+ #define UNMAP_DOMAIN_PAGE(p) do {   \
+     unmap_domain_page(p);           \
 -- 
 2.32.0
 
