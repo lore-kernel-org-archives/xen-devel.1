@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DCF7CCA488
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jul 2022 13:21:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.372752.604689 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D32A3C433EF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jul 2022 13:21:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.372757.604723 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oEW7Y-0001zk-Mx; Thu, 21 Jul 2022 13:21:40 +0000
+	id 1oEW7h-0002vT-MZ; Thu, 21 Jul 2022 13:21:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 372752.604689; Thu, 21 Jul 2022 13:21:40 +0000
+Received: by outflank-mailman (output) from mailman id 372757.604723; Thu, 21 Jul 2022 13:21:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oEW7Y-0001zb-Jq; Thu, 21 Jul 2022 13:21:40 +0000
-Received: by outflank-mailman (input) for mailman id 372752;
- Thu, 21 Jul 2022 13:21:38 +0000
+	id 1oEW7h-0002vK-Il; Thu, 21 Jul 2022 13:21:49 +0000
+Received: by outflank-mailman (input) for mailman id 372757;
+ Thu, 21 Jul 2022 13:21:48 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=AEVB=X2=arm.com=Penny.Zheng@srs-se1.protection.inumbo.net>)
- id 1oEW7W-0001je-BN
- for xen-devel@lists.xenproject.org; Thu, 21 Jul 2022 13:21:38 +0000
+ id 1oEW7f-0001je-Ro
+ for xen-devel@lists.xenproject.org; Thu, 21 Jul 2022 13:21:47 +0000
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTP
- id 0c2d2859-08f8-11ed-924f-1f966e50362f;
- Thu, 21 Jul 2022 15:21:37 +0200 (CEST)
+ id 120ceba8-08f8-11ed-924f-1f966e50362f;
+ Thu, 21 Jul 2022 15:21:46 +0200 (CEST)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D567713D5;
- Thu, 21 Jul 2022 06:21:36 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B30E723A;
+ Thu, 21 Jul 2022 06:21:46 -0700 (PDT)
 Received: from a011292.shanghai.arm.com (a011292.shanghai.arm.com
  [10.169.190.94])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 223733F73D;
- Thu, 21 Jul 2022 06:21:33 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 93A0A3F73D;
+ Thu, 21 Jul 2022 06:21:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,429 +45,170 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 0c2d2859-08f8-11ed-924f-1f966e50362f
+X-Inumbo-ID: 120ceba8-08f8-11ed-924f-1f966e50362f
 From: Penny Zheng <Penny.Zheng@arm.com>
 To: xen-devel@lists.xenproject.org
-Cc: Penny Zheng <penny.zheng@arm.com>,
+Cc: Penny Zheng <Penny.Zheng@arm.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v6 1/9] xen/arm: introduce static shared memory
-Date: Thu, 21 Jul 2022 21:21:07 +0800
-Message-Id: <20220721132115.3015761-2-Penny.Zheng@arm.com>
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Penny Zheng <penny.zheng@arm.com>,
+	Julien Grall <jgrall@amazon.com>
+Subject: [PATCH v6 4/9] xen/arm: introduce put_page_nr and get_page_nr
+Date: Thu, 21 Jul 2022 21:21:10 +0800
+Message-Id: <20220721132115.3015761-5-Penny.Zheng@arm.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220721132115.3015761-1-Penny.Zheng@arm.com>
 References: <20220721132115.3015761-1-Penny.Zheng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Penny Zheng <penny.zheng@arm.com>
+Later, we need to add the right amount of references, which should be
+the number of borrower domains, to the owner domain. Since we only have
+get_page() to increment the page reference by 1, a loop is needed per
+page, which is inefficient and time-consuming.
 
-This patch series introduces a new feature: setting up static
-shared memory on a dom0less system, through device tree configuration.
-
-This commit parses shared memory node at boot-time, and reserve it in
-bootinfo.reserved_mem to avoid other use.
-
-This commits proposes a new Kconfig CONFIG_STATIC_SHM to wrap
-static-shm-related codes, and this option depends on static memory(
-CONFIG_STATIC_MEMORY). That's because that later we want to reuse a few
-helpers, guarded with CONFIG_STATIC_MEMORY, like acquire_staticmem_pages, etc,
-on static shared memory.
+To save the loop time, this commit introduces a set of new helpers
+put_page_nr() and get_page_nr() to increment/drop the page reference by nr.
 
 Signed-off-by: Penny Zheng <penny.zheng@arm.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
+Reviewed-by: Julien Grall <jgrall@amazon.com>
 ---
 v6 change:
-- when host physical address is ommited, output the error message since
-xen doesn't support it at the moment
-- add the following check: 1) The shm ID matches and the region exactly match
-2) The shm ID doesn't match and the region doesn't overlap
-- change it to "unsigned int" to be aligned with nr_banks
-- check the len of the property to confirm is it big enough to
-contain "paddr", "size", and "gaddr"
-- shm_id defined before nr_shm_domain, so we could re-use the existing hole and
-avoid increasing the size of the structure.
-- change "nr_shm_domain" to "nr_shm_borrowers", to not increment if the role
-is owner in parsing code
-- make "xen,shm_id" property as arbitrary string, with a strict limit on
-the number of characters, MAX_SHM_ID_LENGTH
+- no change
 ---
 v5 change:
 - no change
 ---
-v4 change:
-- nit fix on doc
+v4 changes:
+- fix the assert about checking overflow to make sure that the right equation
+return is at least equal to nr
+- simplify the assert about checking the underflow
 ---
-v3 change:
-- make nr_shm_domain unsigned int
+v3 changes:
+- check overflow with "n"
+- remove spurious change
+- bring back the check that we enter the loop only when count_info is
+greater than 0
 ---
 v2 change:
-- document refinement
-- remove bitmap and use the iteration to check
-- add a new field nr_shm_domain to keep the number of shared domain
+- new commit
 ---
- docs/misc/arm/device-tree/booting.txt | 124 ++++++++++++++++++++
- xen/arch/arm/Kconfig                  |   6 +
- xen/arch/arm/bootfdt.c                | 157 ++++++++++++++++++++++++++
- xen/arch/arm/include/asm/setup.h      |   9 ++
- 4 files changed, 296 insertions(+)
+ xen/arch/arm/include/asm/mm.h |  4 ++++
+ xen/arch/arm/mm.c             | 42 +++++++++++++++++++++++++++--------
+ 2 files changed, 37 insertions(+), 9 deletions(-)
 
-diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
-index 98253414b8..8013fb98fe 100644
---- a/docs/misc/arm/device-tree/booting.txt
-+++ b/docs/misc/arm/device-tree/booting.txt
-@@ -378,3 +378,127 @@ device-tree:
+diff --git a/xen/arch/arm/include/asm/mm.h b/xen/arch/arm/include/asm/mm.h
+index c4bc3cd1e5..f1ab0fd030 100644
+--- a/xen/arch/arm/include/asm/mm.h
++++ b/xen/arch/arm/include/asm/mm.h
+@@ -343,6 +343,10 @@ void free_init_memory(void);
+ int guest_physmap_mark_populate_on_demand(struct domain *d, unsigned long gfn,
+                                           unsigned int order);
  
- This will reserve a 512MB region starting at the host physical address
- 0x30000000 to be exclusively used by DomU1.
++extern bool get_page_nr(struct page_info *page, const struct domain *domain,
++                        unsigned long nr);
++extern void put_page_nr(struct page_info *page, unsigned long nr);
 +
-+Static Shared Memory
-+====================
-+
-+The static shared memory device tree nodes allow users to statically set up
-+shared memory on dom0less system, enabling domains to do shm-based
-+communication.
-+
-+- compatible
-+
-+    "xen,domain-shared-memory-v1"
-+
-+- xen,shm-id
-+
-+    An arbitrary string that represents the unique identifier of the shared
-+    memory region, with a strict limit on the number of characters(\0 included),
-+    `MAX_SHM_ID_LENGTH(16)`. e.g. "xen,shm-id = "my-shared-mem-1"".
-+
-+- xen,shared-mem
-+
-+    An array takes a physical address, which is the base address of the
-+    shared memory region in host physical address space, a size, and a guest
-+    physical address, as the target address of the mapping.
-+    e.g. xen,shared-mem = < [host physical address] [size] [guest address] >
-+
-+    The number of cells for the host address (and size) is the same as the
-+    guest pseudo-physical address and they are inherited from the parent node.
-+
-+
-+- role (Optional)
-+
-+    A string property specifying the ownership of a shared memory region,
-+    the value must be one of the following: "owner", or "borrower"
-+    A shared memory region could be explicitly backed by one domain, which is
-+    called "owner domain", and all the other domains who are also sharing
-+    this region are called "borrower domain".
-+    If not specified, the default value is "borrower" and owner is
-+    DOMID_IO, a system domain.
-+
-+As an example:
-+
-+chosen {
-+    #address-cells = <0x1>;
-+    #size-cells = <0x1>;
-+    xen,xen-bootargs = "console=dtuart dtuart=serial0 bootscrub=0";
-+
-+    ......
-+
-+    /* this is for Dom0 */
-+    dom0-shared-mem@10000000 {
-+        compatible = "xen,domain-shared-memory-v1";
-+        role = "owner";
-+        xen,shm-id = "my-shared-mem-0";
-+        xen,shared-mem = <0x10000000 0x10000000 0x10000000>;
-+    }
-+
-+    domU1 {
-+        compatible = "xen,domain";
-+        #address-cells = <0x1>;
-+        #size-cells = <0x1>;
-+        memory = <0 131072>;
-+        cpus = <2>;
-+        vpl011;
-+
-+        /*
-+         * shared memory region identified as 0x0(xen,shm-id = <0x0>)
-+         * is shared between Dom0 and DomU1.
-+         */
-+        domU1-shared-mem@10000000 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            role = "borrower";
-+            xen,shm-id = "my-shared-mem-0";
-+            xen,shared-mem = <0x10000000 0x10000000 0x50000000>;
-+        }
-+
-+        /*
-+         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
-+         * is shared between DomU1 and DomU2.
-+         */
-+        domU1-shared-mem@50000000 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            xen,shm-id = "my-shared-mem-1";
-+            xen,shared-mem = <0x50000000 0x20000000 0x60000000>;
-+        }
-+
-+        ......
-+
-+    };
-+
-+    domU2 {
-+        compatible = "xen,domain";
-+        #address-cells = <0x1>;
-+        #size-cells = <0x1>;
-+        memory = <0 65536>;
-+        cpus = <1>;
-+
-+        /*
-+         * shared memory region identified as 0x1(xen,shm-id = <0x1>)
-+         * is shared between domU1 and domU2.
-+         */
-+        domU2-shared-mem@50000000 {
-+            compatible = "xen,domain-shared-memory-v1";
-+            xen,shm-id = "my-shared-mem-1";
-+            xen,shared-mem = <0x50000000 0x20000000 0x70000000>;
-+        }
-+
-+        ......
-+    };
-+};
-+
-+This is an example with two static shared memory regions.
-+
-+For the static shared memory region identified as "my-shared-mem-0", host
-+physical address starting at 0x10000000 of 256MB will be reserved to be
-+shared between Dom0 and DomU1. It will get mapped at 0x10000000 in Dom0 guest
-+physical address space, and at 0x50000000 in DomU1 guest physical address space.
-+Dom0 is explicitly defined as the owner domain, and DomU1 is the borrower domain.
-+
-+For the static shared memory region identified as "my-shared-mem-1", host
-+physical address starting at 0x50000000 of 512MB will be reserved to be
-+shared between DomU1 and DomU2. It will get mapped at 0x60000000 in DomU1 guest
-+physical address space, and at 0x70000000 in DomU2 guest physical address space.
-+DomU1 and DomU2 are both the borrower domain, the owner domain is the default
-+owner domain DOMID_IO.
-diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-index be9eff0141..7321f47c0f 100644
---- a/xen/arch/arm/Kconfig
-+++ b/xen/arch/arm/Kconfig
-@@ -139,6 +139,12 @@ config TEE
- 
- source "arch/arm/tee/Kconfig"
- 
-+config STATIC_SHM
-+	bool "Statically shared memory on a dom0less system" if UNSUPPORTED
-+	depends on STATIC_MEMORY
-+	help
-+	  This option enables statically shared memory on a dom0less system.
-+
- endmenu
- 
- menu "ARM errata workaround via the alternative framework"
-diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
-index ec81a45de9..c62d8867ec 100644
---- a/xen/arch/arm/bootfdt.c
-+++ b/xen/arch/arm/bootfdt.c
-@@ -13,6 +13,7 @@
- #include <xen/init.h>
- #include <xen/efi.h>
- #include <xen/device_tree.h>
-+#include <xen/lib.h>
- #include <xen/libfdt/libfdt.h>
- #include <xen/sort.h>
- #include <xsm/xsm.h>
-@@ -361,6 +362,158 @@ static int __init process_domain_node(const void *fdt, int node,
-                                    size_cells, &bootinfo.reserved_mem, true);
+ extern void put_page_type(struct page_info *page);
+ static inline void put_page_and_type(struct page_info *page)
+ {
+diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
+index 009b8cd9ef..d654980706 100644
+--- a/xen/arch/arm/mm.c
++++ b/xen/arch/arm/mm.c
+@@ -1587,21 +1587,29 @@ long arch_memory_op(int op, XEN_GUEST_HANDLE_PARAM(void) arg)
+     return 0;
  }
  
-+#ifdef CONFIG_STATIC_SHM
-+static int __init process_shm_node(const void *fdt, int node,
-+                                   u32 address_cells, u32 size_cells)
+-struct domain *page_get_owner_and_reference(struct page_info *page)
++static struct domain *page_get_owner_and_nr_reference(struct page_info *page,
++                                                      unsigned long nr)
+ {
+     unsigned long x, y = page->count_info;
+     struct domain *owner;
+ 
++    /* Restrict nr to avoid "double" overflow */
++    if ( nr >= PGC_count_mask )
++    {
++        ASSERT_UNREACHABLE();
++        return NULL;
++    }
++
+     do {
+         x = y;
+         /*
+          * Count ==  0: Page is not allocated, so we cannot take a reference.
+          * Count == -1: Reference count would wrap, which is invalid.
+          */
+-        if ( unlikely(((x + 1) & PGC_count_mask) <= 1) )
++        if ( unlikely(((x + nr) & PGC_count_mask) <= nr) )
+             return NULL;
+     }
+-    while ( (y = cmpxchg(&page->count_info, x, x + 1)) != x );
++    while ( (y = cmpxchg(&page->count_info, x, x + nr)) != x );
+ 
+     owner = page_get_owner(page);
+     ASSERT(owner);
+@@ -1609,14 +1617,19 @@ struct domain *page_get_owner_and_reference(struct page_info *page)
+     return owner;
+ }
+ 
+-void put_page(struct page_info *page)
++struct domain *page_get_owner_and_reference(struct page_info *page)
 +{
-+    const struct fdt_property *prop, *prop_id, *prop_role;
-+    const __be32 *cell;
-+    paddr_t paddr, size;
-+    struct meminfo *mem = &bootinfo.reserved_mem;
-+    unsigned int i;
-+    int len;
-+    bool owner = false;
-+    const char *shm_id;
-+
-+    if ( address_cells < 1 || size_cells < 1 )
-+    {
-+        printk("fdt: invalid #address-cells or #size-cells for static shared memory node.\n");
-+        return -EINVAL;
-+    }
-+
-+    /*
-+     * "xen,shm-id" property holds an arbitrary string with a strict limit
-+     * on the number of characters, MAX_SHM_ID_LENGTH
-+     */
-+    prop_id = fdt_get_property(fdt, node, "xen,shm-id", NULL);
-+    if ( !prop_id )
-+        return -ENOENT;
-+    shm_id = (const char *)prop_id->data;
-+    if ( strnlen(shm_id, MAX_SHM_ID_LENGTH) == MAX_SHM_ID_LENGTH )
-+    {
-+        printk("fdt: invalid xen,shm-id %s, it must be limited to %d characters\n",
-+               shm_id, MAX_SHM_ID_LENGTH);
-+        return -EINVAL;
-+    }
-+
-+    /*
-+     * "role" property is optional and if it is defined explicitly,
-+     * it must be either `owner` or `borrower`.
-+     */
-+    prop_role = fdt_get_property(fdt, node, "role", NULL);
-+    if ( prop_role )
-+    {
-+        if ( !strcmp(prop_role->data, "owner") )
-+            owner = true;
-+        else if ( strcmp(prop_role->data, "borrower") )
-+        {
-+            printk("fdt: invalid `role` property for static shared memory node.\n");
-+            return -EINVAL;
-+        }
-+    }
-+
-+    /*
-+     * xen,shared-mem = <paddr, size, gaddr>;
-+     * Memory region starting from physical address #paddr of #size shall
-+     * be mapped to guest physical address #gaddr as static shared memory
-+     * region.
-+     */
-+    prop = fdt_get_property(fdt, node, "xen,shared-mem", &len);
-+    if ( !prop )
-+        return -ENOENT;
-+
-+    if ( len != dt_cells_to_size(address_cells + size_cells + address_cells) )
-+    {
-+        /* TODO: physical address is optional. */
-+        if ( len == dt_cells_to_size(size_cells + address_cells) )
-+            printk("fdt: host physical address must be chosen by users at the moment.\n");
-+
-+        printk("fdt: invalid `xen,shared-mem` property.\n");
-+        return -EINVAL;
-+    }
-+
-+    cell = (const __be32 *)prop->data;
-+    device_tree_get_reg(&cell, address_cells, size_cells, &paddr, &size);
-+
-+    if ( !size )
-+    {
-+        printk("fdt: the size for static shared memory region can not be zero\n");
-+        return -EINVAL;
-+    }
-+
-+    for ( i = 0; i < mem->nr_banks; i++ )
-+    {
-+        /*
-+         * Meet the following check:
-+         * 1) The shm ID matches and the region exactly match
-+         * 2) The shm ID doesn't match and the region doesn't overlap
-+         * with an existing one
-+         */
-+        if ( paddr == mem->bank[i].start && size == mem->bank[i].size )
-+        {
-+            if ( strncmp(shm_id, mem->bank[i].shm_id, MAX_SHM_ID_LENGTH) == 0 )
-+                break;
-+            else
-+            {
-+                printk("fdt: xen,shm-id %s does not match for all the nodes using the same region.\n",
-+                       shm_id);
-+                return -EINVAL;
-+            }
-+        }
-+        else
-+        {
-+            paddr_t end = paddr + size;
-+            paddr_t bank_end = mem->bank[i].start + mem->bank[i].size;
-+
-+            if ( (end <= mem->bank[i].start) || (paddr >= bank_end) )
-+            {
-+                if ( strncmp(shm_id, mem->bank[i].shm_id,
-+                             MAX_SHM_ID_LENGTH) != 0 )
-+                    continue;
-+                else
-+                {
-+                    printk("fdt: different shared memory region could not share the same shm ID %s\n",
-+                           shm_id);
-+                    return -EINVAL;
-+                }
-+            }
-+            else
-+            {
-+                printk("fdt: shared memory region overlap with an existing entry %#"PRIpaddr" - %#"PRIpaddr"\n",
-+                        mem->bank[i].start, bank_end);
-+                return -EINVAL;
-+            }
-+        }
-+    }
-+
-+    if ( i == mem->nr_banks )
-+    {
-+        if ( i < NR_MEM_BANKS )
-+        {
-+            /* Static shared memory shall be reserved from any other use. */
-+            safe_strcpy(mem->bank[mem->nr_banks].shm_id, shm_id);
-+            mem->bank[mem->nr_banks].start = paddr;
-+            mem->bank[mem->nr_banks].size = size;
-+            mem->bank[mem->nr_banks].xen_domain = true;
-+            mem->nr_banks++;
-+        }
-+        else
-+        {
-+            printk("Warning: Max number of supported memory regions reached.\n");
-+            return -ENOSPC;
-+        }
-+    }
-+    /*
-+     * keep a count of the number of borrowers, which later may be used
-+     * to calculate the reference count.
-+     */
-+    if ( !owner )
-+        mem->bank[i].nr_shm_borrowers++;
-+
-+    return 0;
++    return page_get_owner_and_nr_reference(page, 1);
 +}
-+#endif
 +
- static int __init early_scan_node(const void *fdt,
-                                   int node, const char *name, int depth,
-                                   u32 address_cells, u32 size_cells,
-@@ -386,6 +539,10 @@ static int __init early_scan_node(const void *fdt,
-         process_chosen_node(fdt, node, name, address_cells, size_cells);
-     else if ( depth == 2 && device_tree_node_compatible(fdt, node, "xen,domain") )
-         rc = process_domain_node(fdt, node, name, address_cells, size_cells);
-+#ifdef CONFIG_STATIC_SHM
-+    else if ( depth <= 3 && device_tree_node_compatible(fdt, node, "xen,domain-shared-memory-v1") )
-+        rc = process_shm_node(fdt, node, address_cells, size_cells);
-+#endif
++void put_page_nr(struct page_info *page, unsigned long nr)
+ {
+     unsigned long nx, x, y = page->count_info;
  
-     if ( rc < 0 )
-         printk("fdt: node `%s': parsing failed\n", name);
-diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
-index 2bb01ecfa8..39d4e93b8b 100644
---- a/xen/arch/arm/include/asm/setup.h
-+++ b/xen/arch/arm/include/asm/setup.h
-@@ -23,10 +23,19 @@ typedef enum {
- }  bootmodule_kind;
+     do {
+-        ASSERT((y & PGC_count_mask) != 0);
++        ASSERT((y & PGC_count_mask) >= nr);
+         x  = y;
+-        nx = x - 1;
++        nx = x - nr;
+     }
+     while ( unlikely((y = cmpxchg(&page->count_info, x, nx)) != x) );
  
+@@ -1626,19 +1639,30 @@ void put_page(struct page_info *page)
+     }
+ }
  
-+#ifdef CONFIG_STATIC_SHM
-+/* Indicates the maximum number of characters(\0 included) for shm_id */
-+#define MAX_SHM_ID_LENGTH 16
-+#endif
+-bool get_page(struct page_info *page, const struct domain *domain)
++void put_page(struct page_info *page)
++{
++    put_page_nr(page, 1);
++}
 +
- struct membank {
-     paddr_t start;
-     paddr_t size;
-     bool xen_domain; /* whether the memory bank is bound to a Xen domain. */
-+#ifdef CONFIG_STATIC_SHM
-+    char shm_id[MAX_SHM_ID_LENGTH];
-+    unsigned int nr_shm_borrowers;
-+#endif
- };
++bool get_page_nr(struct page_info *page, const struct domain *domain,
++                 unsigned long nr)
+ {
+-    const struct domain *owner = page_get_owner_and_reference(page);
++    const struct domain *owner = page_get_owner_and_nr_reference(page, nr);
  
- struct meminfo {
+     if ( likely(owner == domain) )
+         return true;
+ 
+     if ( owner != NULL )
+-        put_page(page);
++        put_page_nr(page, nr);
+ 
+     return false;
+ }
+ 
++bool get_page(struct page_info *page, const struct domain *domain)
++{
++    return get_page_nr(page, domain, 1);
++}
++
+ /* Common code requires get_page_type and put_page_type.
+  * We don't care about typecounts so we just do the minimum to make it
+  * happy. */
 -- 
 2.25.1
 
