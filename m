@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 690DCCCA479
-	for <xen-devel@archiver.kernel.org>; Thu, 21 Jul 2022 12:46:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.372692.604589 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43384C43334
+	for <xen-devel@archiver.kernel.org>; Thu, 21 Jul 2022 12:46:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.372695.604601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oEVZI-0000cU-Pe; Thu, 21 Jul 2022 12:46:16 +0000
+	id 1oEVZN-0000wm-2D; Thu, 21 Jul 2022 12:46:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 372692.604589; Thu, 21 Jul 2022 12:46:16 +0000
+Received: by outflank-mailman (output) from mailman id 372695.604601; Thu, 21 Jul 2022 12:46:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oEVZI-0000cN-Mx; Thu, 21 Jul 2022 12:46:16 +0000
-Received: by outflank-mailman (input) for mailman id 372692;
- Thu, 21 Jul 2022 12:46:15 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oEVZM-0000wc-UI; Thu, 21 Jul 2022 12:46:20 +0000
+Received: by outflank-mailman (input) for mailman id 372695;
+ Thu, 21 Jul 2022 12:46:19 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=K6kJ=X2=citrix.com=prvs=194f9e755=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oEVZG-0008VQ-Ts
- for xen-devel@lists.xenproject.org; Thu, 21 Jul 2022 12:46:15 +0000
-Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
- [216.71.145.153]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 19ab8c06-08f3-11ed-bd2d-47488cf2e6aa;
- Thu, 21 Jul 2022 14:46:13 +0200 (CEST)
+ id 1oEVZL-0008VW-0h
+ for xen-devel@lists.xenproject.org; Thu, 21 Jul 2022 12:46:19 +0000
+Received: from esa3.hc3370-68.iphmx.com (esa3.hc3370-68.iphmx.com
+ [216.71.145.155]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1c77fd5f-08f3-11ed-924f-1f966e50362f;
+ Thu, 21 Jul 2022 14:46:18 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,79 +38,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 19ab8c06-08f3-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: 1c77fd5f-08f3-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1658407573;
+  d=citrix.com; s=securemail; t=1658407577;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=HAlpDIChBskJIISW7qvJGVshVai7WZqyDUdysqvHuck=;
-  b=MpjzucklPChO7QxXd/zk7reCDchzzC448k2o2Hs+AApsDzX71dMxokAt
-   Jo52iwa+NQLi0Kr2uhgO9qh6155q/9bzMljITbnnTHBE7VrQg/S1CosIW
-   PRHXBwBABuSV/brA3boRJQ+hMNC95Q2qBBmzloIrMT24gW8nz1sktrTEG
-   s=;
-Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=4IwZ7MQ+unUkmwqNzuLpSWlb6ulXC3M5GmYE0wL7TYY=;
+  b=biaWCaxyTr6eIUvQBoT2lAVxOp0MmMNUs68AbsD01G5kMt/DhOJN0o/O
+   mHiv/Gm2ltMauWdGVd4knI5LGnqFwvSLt4porYSxcGFxcYnYkSCP8or4G
+   yM1M5yT5shYVryHcepU6tdINpAkPWI1nsMkNAdToD8UpojUDvQJhTvkx3
+   8=;
+Authentication-Results: esa3.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 76317781
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 76321715
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: =?us-ascii?q?A9a23=3AfAblU64YbhhkzbLN3BdB1wxR2vbMJYAXvycv2?=
- =?us-ascii?q?9bIaENr3hjvzP4J6zDmcekdWPrztNzMcNnPa4wPmlJv28rgB4V/YzDj45YBn?=
- =?us-ascii?q?oOIehmiOdS4m1JWvl0QTppBfgQHDvWpMe/+9kbRsIQ8+YpucBSt17uEG9ZvD?=
- =?us-ascii?q?fCwbx9gmzDTinl1BbEx9wiViOdJZqX+8z5UTDW2jj3khVj/5fuhK441iX77D?=
- =?us-ascii?q?itHHmNyQBbiMwJAS3wcQ98JIokfWyDR9F10mcJ+Y7NCDXDhjUJnNrTGknQ9q?=
- =?us-ascii?q?MWajTdf2ui02dBsxgL8DZcXf7iAxSmdqbrYe4GiQPhqEMiOd5k/4OMHiean+?=
- =?us-ascii?q?wTGHA9vNDfss+kcJqxEncjCqkT7zl2cDR2I+RxpKb2HbFjzm6ssSlvNWyyt/?=
- =?us-ascii?q?cBpH71KBvRMIzUMFIPp1g1+WDJVujT6VhO9OSJ+Wz9hQLX5Dtj0uzzniOGBV?=
- =?us-ascii?q?+ONYvz/V676WN21YMFUTbaeHwVwhGpdA6+KauZF2xtdB/YZiO9f2PB7P9jh2?=
- =?us-ascii?q?JWoiKYh+G13BtizrMQAdqaNL+yj6LJlb8qhdjxbQT9LrNsSTxLGQ6miivWDI?=
- =?us-ascii?q?/LxJtdo7LQgrA1iKfYEdXfuq3vFM/jT4wrIfJ+U16RKbkvfFF3SPoMGe4jqO?=
- =?us-ascii?q?563V2px2L1AzPWhlutgkrBC4Z7inJiIMjzbyANmY5wD3K+27VmsuOJ245VT8?=
- =?us-ascii?q?vbWxa5aInRrNpC/wWBQbUn+AiZI8556VV06oOabezFT8uxS9WbUVgfEgJw1m?=
- =?us-ascii?q?ahcLxaAzgTMRDayv0hz8XtW3uHfiy6O3GiUyc0ykUUlwjVcpg45zCorpBvEo?=
- =?us-ascii?q?MiIg4znvKWpclYbALW8MTVNUEHh9mQvKnRxlaZnjj0yMySbfKTE0spewzneW?=
- =?us-ascii?q?kieusoKD44eseNRStUo+lPcbgtoF1L+MVccZGIIkoljiVzbi1aAcFXMp343L?=
- =?us-ascii?q?vkxGSEwmJ+03+eirGNnjYYHfsaSzo0UojK6dOpmJEv7QP5r5g6JoySFQdB/S?=
- =?us-ascii?q?wCgBDufGrKtcrO4rmzvfG6teB+0swZmR7GDE8WfUrk1amIXu6aw36cCuJ8zE?=
- =?us-ascii?q?1GzEkbhS2gBVoPQ2SNYonk3LE4+2IYHMFJgN4Ii6T/jmbukAnQp94XvOIYGQ?=
- =?us-ascii?q?rf344R2lXHvnBH2zwWvK1tDOvLJuTrRO6VI8IjYstoZszv4TY2luziRAmddY?=
- =?us-ascii?q?XzWtB3/LfxItsHFGP1hE+ZWc0pDEslW08PRbwIN8tTog6O10zGGQ+mRu2JIo?=
- =?us-ascii?q?ptmIkmxS+YJhkpC8KAbP4Vo0Z0ZWRhjWBeJuL5o8INBeMVTyvOkfqivAlC8f?=
- =?us-ascii?q?FqqqgWod2O+71KLSLQPAXzcmUv1GJzKTnrgsyF4NfBJo3HXvUhtA76Krm5PY?=
- =?us-ascii?q?hJjMQVe1stqBtMcDv+OZyNxW7yzrk7paeWjhBsG2E2xZ1BeRJ8zzG3Cxg5nn?=
- =?us-ascii?q?BLncmWy3xL3HgbsfK+tScRPfBac0Pbg92DqeQHmcCdYvQtfpvPBl5CZYcwcH?=
- =?us-ascii?q?3b3ACzgb1bm2nhxhVAC+eZdhflSqSVbbsViqG3ExZdoZqXXo55nfGBEl9azB?=
- =?us-ascii?q?8L4ZB/4iRiKqfCLnifMStHnePW559ShnR+9FGXIFv5RvvbbnRY8oHaA2+hxh?=
- =?us-ascii?q?E/wNV6OcRl9IJSIGx8rcWFETbCotgEzz09RrzRPMeFk+29va6Cct9iNPWnHC?=
- =?us-ascii?q?uj16m4SY/MhrJYFw0pvglEdKluiEWOXnJ9uwiLem3M7V924Dk/l9/pkY/16M?=
- =?us-ascii?q?J4+FS2aOnDMu6cYckbTT/Rvs9DGT24epLhWrsR23TXRtqiLkLURsWbOQeNLU?=
- =?us-ascii?q?i2/QQISxf2YwbXYrFcqSEiBTpls4IpzudjFQTdbSW1cmwGTtQOhZmbWjQE0x?=
- =?us-ascii?q?qrt0o/+1zOHkWrZOj7cU1di3WYULSmnZGSaMi1lPlCroaNfutr3L3F2ai7G4?=
- =?us-ascii?q?qj6TqFqByfAX8w63+i3Yfo8LygVHlh7Xlx56qfXYEDJbq0w0azFAvxzd6G58?=
- =?us-ascii?q?UsTJh4Q0pJMpdlgGaKcduqvQe85Qi/OhTq4TWFaJR3EpxJOu8iZL1qozqhvY?=
- =?us-ascii?q?au2xeEisYsy+84j1ugSr2X2HYLKuQbboQT5AGyD0KZBIknximlxC/GZrIj7+?=
- =?us-ascii?q?QHUfJDRkddUoyCd73v5+aXlaFfw4ytdhNI/QabIaGenW1pACZRJm8yAO7Yue?=
- =?us-ascii?q?IHdMuZ8nqqw8AgSSiDmDMo6LZSUXiVvZwKArVyzOsmvPtIxEt9WWAg76b5x/?=
- =?us-ascii?q?ZJBdOqjtWBCcUxuHVb2J3YCOuIdzEyQIOrCQHm/Qdnhda3Lzik+pHG0w1rEW?=
- =?us-ascii?q?SNIDOZatqypi+crX0wV38tySXtL9sU9p6HOdzT5Cx+wU7ZaWRtGXO+Jtu8yE?=
- =?us-ascii?q?ee+OOsZKuIdQla2QPpC8D4yee53GwpuZnUuO3XljuCQE76Gmk93Koq4WdnXh?=
- =?us-ascii?q?E02TvRz/MFvT+5DWlHGA04teEj52fq3mPu4V9JQZBOpJnVb0AXK+qID392fz?=
- =?us-ascii?q?kCNR3mWnajiEsnD+//82/fmxHP9W0kKF4dnZyjM6L8emVX1EcdnJ7OxuGB26?=
- =?us-ascii?q?0dID5v5QdaHBUIo6RO4xC7Tk+XSSdqMV9utDptCL5xMEQUgABHHtei4Miwdp?=
- =?us-ascii?q?9thTvxaxEXNDcXJITDwYGVyrxOj/hifehm2cYPA37h8yE23LcNMX5HuBbZGd?=
- =?us-ascii?q?+cxDTHbvUMQjeDw6wXCqTZ/NPcyU7VSVxldUvDKcenLPEsdQ3vfBNdoqEAXQ?=
- =?us-ascii?q?tX5mzBjWX/8mWUlQe0syOM9p/My8U+WxX6Ox/NzOVmgu547EiOfwNI3ue8Is?=
- =?us-ascii?q?sx28tyPp0p4NXpxm2bGUDpk1HlRpw=3D=3D?=
+IronPort-Data: A9a23:recdo6oT8GD6U1pZsj3Dueasxp5eBmIeZRIvgKrLsJaIsI4StFCzt
+ garIBmCO/3YNzCgfdp/a42/pEMFvpLTm9BlTQNs+C5mQiJG+ZuZCYyVIHmrMnLJJKUvbq7GA
+ +byyDXkBJppJpMJjk71atANlVEliefSAOKU5NfsYkhZXRVjRDoqlSVtkus4hp8AqdWiCkaGt
+ MiaT/f3YTdJ4BYpdDNOg06/gEk35q6q52lB5gZWic1j5zcyqVFEVPrzGonpR5fIatE8NvK3Q
+ e/F0Ia48gvxl/v6Ior4+lpTWhRiro/6ZWBiuFIPM0SRqkEqShgJ+rQ6LJIhhXJ/0F1lqTzTJ
+ OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXWV+ACQqflO1q8iCAn3aMqUdq9h2G15V5
+ cYADzMcdSK6nfDx8LOSH7wEasQLdKEHPasas3BkizrYEewnUdbIRKCiCd1whWlqwJoURLCHO
+ pRfOWEHgBfoOnWjPn8eDo4+m+G5wGHyaTRCpHqepLYt4niVxwt0uFToGIWLIYbTGpwI9qqej
+ m3K01nFORNACPug8SK5q3StmuXemAquDer+E5Xnr6U30TV/3Fc7EwYKXFG2pf24jE+WWN9FL
+ UEQvC00osAa/0WxQt7wdxaxunKDs1gXXN84O/037kSBx7TZ5y6dB3MYVXhRZdo+rsg0SDc2k
+ FiTkLvBGjhHoLCTD3WH+d+pQSiaYHZPazVYPGldEFVDs4KLTJwPYgznS4ddEbSKlc3PARbz0
+ iu4lTIswIUSpJtev0mkxmwrkw5At7CQEFNlvFyNDz78hu9qTNX7PtL1sDA3+d4Fdd/EFQfZ4
+ RDojuDEtIgz4YexeDthqQnnNJWg/L67PTLVmjaD9LFxpm32qxZPkW29iQySxXuF0e5eIFcFm
+ GeJ5WtsCGZ7ZRNGl5NfbYOrENgNxqP9D9njXf28RoMQP8gqKFXeono/Pxb4M4XRfK8EyPpXB
+ HtmWZz0USZy5VpPl1JauNvxIZd0n3tjlAs/tLjwzgi90Kr2WUN5vYwtaQLWBshkvfzsnekg2
+ 4wAXyd840kADbaWj+i+2dJ7EG3m2lBgXsis9JMGJ7frz8gPMDhJNsI9CIgJI+RN95m5XM+Rl
+ p1hcie0EGbCuEA=
+IronPort-HdrOrdr: A9a23:PlS6eqmaNFOadbrrrl679gs9hu/pDfIU3DAbv31ZSRFFG/Fxl6
+ iV8sjzsiWE7gr5OUtQ4exoV5PhfZqxz/JICMwqTNKftWrdyQyVxeNZnOjfKlTbckWUnINgPO
+ VbAsxD4bXLfCFHZK3BgTVQfexO/DD+ytHLudvj
 X-IronPort-AV: E=Sophos;i="5.92,289,1650945600"; 
-   d="scan'208";a="76317781"
+   d="scan'208";a="76321715"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
 CC: <wl@xen.org>, <andrew.cooper3@citrix.com>, <sstabellini@kernel.org>,
 	Anthony PERARD <anthony.perard@citrix.com>, Doug Goldstein
 	<cardoe@cardoe.com>
-Subject: [XEN PATCH v2 2/4] automation: add a templates for test jobs
-Date: Thu, 21 Jul 2022 13:46:00 +0100
-Message-ID: <20220721124602.9910-3-anthony.perard@citrix.com>
+Subject: [XEN PATCH v2 4/4] automation: use "needs" instead of "dependencies" for test jobs
+Date: Thu, 21 Jul 2022 13:46:02 +0100
+Message-ID: <20220721124602.9910-5-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220721124602.9910-1-anthony.perard@citrix.com>
 References: <20220721124602.9910-1-anthony.perard@citrix.com>
@@ -118,8 +91,9 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Allow to set common configuration from a single place for all tests
-jobs.
+Like with "dependencies", the jobs will get artifacts from the jobs
+listed in "needs". But the test jobs can run as soon as the build jobs
+listed have finished.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
@@ -128,176 +102,94 @@ Notes:
     v2:
     - rebased, to include "qemu-smoke-arm32-gcc".
 
- automation/gitlab-ci/test.yaml | 81 ++++++++--------------------------
- 1 file changed, 18 insertions(+), 63 deletions(-)
+ automation/gitlab-ci/test.yaml | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
-index 42cd725a12..53b43801f4 100644
+index 53b43801f4..26bdbcc3ea 100644
 --- a/automation/gitlab-ci/test.yaml
 +++ b/automation/gitlab-ci/test.yaml
-@@ -1,7 +1,15 @@
--# Test jobs
--build-each-commit-gcc:
-+.test-jobs-common:
-   stage: test
-   image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  except:
-+    - master
-+    - smoke
-+    - /^coverity-tested\/.*/
-+    - /^stable-.*/
-+
-+# Test jobs
-+build-each-commit-gcc:
-+  extends: .test-jobs-common
-   variables:
-     CONTAINER: debian:stretch
-     XEN_TARGET_ARCH: x86_64
-@@ -16,15 +24,9 @@ build-each-commit-gcc:
-   dependencies: []
+@@ -21,7 +21,7 @@ build-each-commit-gcc:
+     paths:
+       - '*.log'
+     when: always
+-  dependencies: []
++  needs: []
    tags:
      - x86_64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
  
- qemu-alpine-arm64-gcc:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
+@@ -31,7 +31,7 @@ qemu-alpine-arm64-gcc:
      CONTAINER: debian:unstable-arm64v8
    script:
-@@ -41,15 +43,9 @@ qemu-alpine-arm64-gcc:
-     when: always
-   tags:
-     - arm64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-alpine-x86_64-gcc:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
+     - ./automation/scripts/qemu-alpine-arm64.sh 2>&1 | tee qemu-smoke-arm64.log
+-  dependencies:
++  needs:
+     - alpine-3.12-gcc-arm64
+     - alpine-3.12-arm64-rootfs-export
+     - kernel-5.9.9-arm64-export
+@@ -50,7 +50,7 @@ qemu-alpine-x86_64-gcc:
      CONTAINER: debian:stretch
    script:
-@@ -65,15 +61,9 @@ qemu-alpine-x86_64-gcc:
-     when: always
-   tags:
-     - x86_64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-smoke-arm64-gcc:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
+     - ./automation/scripts/qemu-alpine-x86_64.sh 2>&1 | tee qemu-smoke-x86_64.log
+-  dependencies:
++  needs:
+     - alpine-3.12-gcc
+     - alpine-3.12-rootfs-export
+     - kernel-5.10.74-export
+@@ -68,7 +68,7 @@ qemu-smoke-arm64-gcc:
      CONTAINER: debian:unstable-arm64v8
    script:
-@@ -89,15 +79,9 @@ qemu-smoke-arm64-gcc:
-     when: always
-   tags:
-     - arm64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-smoke-arm32-gcc:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
+     - ./automation/scripts/qemu-smoke-arm64.sh 2>&1 | tee qemu-smoke-arm64.log
+-  dependencies:
++  needs:
+     - debian-unstable-gcc-arm64
+     - kernel-5.9.9-arm64-export
+     - qemu-system-aarch64-6.0.0-arm64-export
+@@ -86,7 +86,7 @@ qemu-smoke-arm32-gcc:
      CONTAINER: debian:unstable-arm64v8
    script:
-@@ -112,15 +96,9 @@ qemu-smoke-arm32-gcc:
+     - ./automation/scripts/qemu-smoke-arm32.sh 2>&1 | tee qemu-smoke-arm32.log
+-  dependencies:
++  needs:
+     - debian-unstable-gcc-arm32
+     - qemu-system-aarch64-6.0.0-arm32-export
+   artifacts:
+@@ -108,7 +108,7 @@ qemu-smoke-x86-64-gcc:
+       - smoke.serial
+       - '*.log'
      when: always
-   tags:
-     - arm64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-smoke-x86-64-gcc:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
-     CONTAINER: debian:stretch
-   script:
-@@ -134,15 +112,9 @@ qemu-smoke-x86-64-gcc:
+-  dependencies:
++  needs:
      - debian-stretch-gcc-debug
    tags:
      - x86_64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-smoke-x86-64-clang:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
-     CONTAINER: debian:stretch
-   script:
-@@ -156,15 +128,9 @@ qemu-smoke-x86-64-clang:
+@@ -124,7 +124,7 @@ qemu-smoke-x86-64-clang:
+       - smoke.serial
+       - '*.log'
+     when: always
+-  dependencies:
++  needs:
      - debian-unstable-clang-debug
    tags:
      - x86_64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-smoke-x86-64-gcc-pvh:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
-     CONTAINER: debian:stretch
-   script:
-@@ -178,15 +144,9 @@ qemu-smoke-x86-64-gcc-pvh:
+@@ -140,7 +140,7 @@ qemu-smoke-x86-64-gcc-pvh:
+       - smoke.serial
+       - '*.log'
+     when: always
+-  dependencies:
++  needs:
      - debian-stretch-gcc-debug
    tags:
      - x86_64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
- 
- qemu-smoke-x86-64-clang-pvh:
--  stage: test
--  image: registry.gitlab.com/xen-project/xen/${CONTAINER}
-+  extends: .test-jobs-common
-   variables:
-     CONTAINER: debian:stretch
-   script:
-@@ -200,8 +160,3 @@ qemu-smoke-x86-64-clang-pvh:
+@@ -156,7 +156,7 @@ qemu-smoke-x86-64-clang-pvh:
+       - smoke.serial
+       - '*.log'
+     when: always
+-  dependencies:
++  needs:
      - debian-unstable-clang-debug
    tags:
      - x86_64
--  except:
--    - master
--    - smoke
--    - /^coverity-tested\/.*/
--    - /^stable-.*/
 -- 
 Anthony PERARD
 
