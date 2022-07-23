@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14713C3F2D4
-	for <xen-devel@archiver.kernel.org>; Sat, 23 Jul 2022 03:44:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.373540.605768 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB4ECCA483
+	for <xen-devel@archiver.kernel.org>; Sat, 23 Jul 2022 03:44:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.373545.605823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oF648-000870-MA; Sat, 23 Jul 2022 03:44:32 +0000
+	id 1oF64E-00012V-CC; Sat, 23 Jul 2022 03:44:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 373540.605768; Sat, 23 Jul 2022 03:44:32 +0000
+Received: by outflank-mailman (output) from mailman id 373545.605823; Sat, 23 Jul 2022 03:44:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oF648-00086o-GG; Sat, 23 Jul 2022 03:44:32 +0000
-Received: by outflank-mailman (input) for mailman id 373540;
- Sat, 23 Jul 2022 03:44:31 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oF64E-00011z-86; Sat, 23 Jul 2022 03:44:38 +0000
+Received: by outflank-mailman (input) for mailman id 373545;
+ Sat, 23 Jul 2022 03:44:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=6fEO=X4=invisiblethingslab.com=demi@srs-se1.protection.inumbo.net>)
- id 1oF647-00086N-8s
- for xen-devel@lists.xenproject.org; Sat, 23 Jul 2022 03:44:31 +0000
+ id 1oF64B-0000F2-Ul
+ for xen-devel@lists.xenproject.org; Sat, 23 Jul 2022 03:44:36 +0000
 Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c01b9550-0a39-11ed-bd2d-47488cf2e6aa;
- Sat, 23 Jul 2022 05:44:28 +0200 (CEST)
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
- by mailout.nyi.internal (Postfix) with ESMTP id DE2435C00A8;
- Fri, 22 Jul 2022 23:44:26 -0400 (EDT)
+ [66.111.4.26]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id c298500b-0a39-11ed-924f-1f966e50362f;
+ Sat, 23 Jul 2022 05:44:32 +0200 (CEST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailout.nyi.internal (Postfix) with ESMTP id 1EA145C00A8;
+ Fri, 22 Jul 2022 23:44:31 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute2.internal (MEProxy); Fri, 22 Jul 2022 23:44:26 -0400
+ by compute5.internal (MEProxy); Fri, 22 Jul 2022 23:44:31 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 22 Jul 2022 23:44:26 -0400 (EDT)
+ 22 Jul 2022 23:44:30 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,34 +45,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c01b9550-0a39-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: c298500b-0a39-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding:date
 	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
 	:references:reply-to:sender:subject:subject:to:to; s=fm3; t=
-	1658547866; x=1658634266; bh=9EVYFQs3TfjexPazUkgkLFWSM4eN+61vSya
-	zDvU3JXY=; b=RcBEtNP8oYQgdE7PhROvqMVJnmJebGH9Dxpv/SnrKBJk1fDlr1v
-	fZgw30SFvmeZbNGJCV3k5YwBly3Ik0M5cDx8Si33qIyKNg3uaG3xPQ27/+JLvfwS
-	VvDy4Lenhc8igbigKtRiQmg+ojnjnyDBG70Ueo8OZZhsXioKaMQgnZYR3erfwXKZ
-	rqUOS2AAMVbPvQ2pxBxKdtercd7sXCV2I/gxt+dlI92XaawMv+aIsENFQX8/sRNT
-	3f9mHVsKt/XthsHhiCjnjdaQBK0uOHYF/v1pC48hzRv+YRYgCI149TP8GmugOypp
-	r/DzRapvNBkF7KsXTlR6Ni+4re4tD7/ytQQ==
+	1658547871; x=1658634271; bh=kIshqhgj647286FiEwZIn8F2MuAyAKY1Gro
+	0c4s+gcU=; b=JSx2PtzEibgqrkEZvGoBG8CqK+2r9TveSD7YgfXhFqGIPOCRIDx
+	CNqujNo0dpXwsCZYMb77VVlctLv+wq85vt4nTZVQB3aDmLTJu4X9bMrCpOI60n6H
+	Ut6f4JX2r1Wo2xdRTgp+ScdCBzvEMaDz4ECoUXV2kseUr+m8TejW+P5VQGAKS62y
+	MUfynq/6Zzi9cB5MWxMkDT5jw1jyqfmdHJAOnfGvKZ7bRAqBHnGIatZ7OLruAnCw
+	09IMEHA5ogA0Ni7xY5Q24+3xaJCMBz5oze2bxC3lTxRMNRwP+Xcu+G2xmJrI1ut+
+	K2SE9ej2nkUynmRVsaCgYhJCJbnnaZQFUTQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding:date:date
 	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
 	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
-	:x-sasl-enc; s=fm3; t=1658547866; x=1658634266; bh=9EVYFQs3Tfjex
-	PazUkgkLFWSM4eN+61vSyazDvU3JXY=; b=Y/A0P4Tc/sW0dbP6uJYXE3eVZJQ1E
-	rtbAL/RtaQhhliRjoxxYyHKVGpxcAmDpAf8n4bT73/d3kbJuRaBKPrxMh9K38E35
-	1OB+14RaUsVux01fx9FB7JNlmUh2JAsxuTuDRxrG03ALZr5TDJJpcu7lxoZAhDKU
-	dDX90LldNTeBcW3qttqZTPZ+FKDP4dtQiLqPw5p8pqshnMw9f4Yy6XZ18B+iwLYT
-	2Z+LjCQabPi4MftzQmGj4x5lOGsGpnCJR/KbCVp06fgumYWD9CLvqakJN1VRt1+N
-	kw7HhV5ZSM1h/nLn3PCbXt6hz4gGaPD9swFyB155/cA8q1QfBpGBjwo9w==
-X-ME-Sender: <xms:mm7bYlifrfwiqP6Eofstz2tcMXFdkTOkxhITL8mHS9UcKjaFmy57hg>
-    <xme:mm7bYqAELBC_seMCrcWT8S8O8keJhKCneeFAybJbTFbOH_yQR38J3CvtJKljGdz7_
-    jQLLT9wG6M-5kQ>
-X-ME-Received: <xmr:mm7bYlEQxmkJOAc7QR7nP_jXVY3f4lE8BTfs4G-3uOlT3RXMVm4ELAF2YSgrJwzPvBrycRtOtZ5s>
+	:x-sasl-enc; s=fm3; t=1658547871; x=1658634271; bh=kIshqhgj64728
+	6FiEwZIn8F2MuAyAKY1Gro0c4s+gcU=; b=QLHmLeMDfqL+icAIL083qO6iMLevo
+	3NggKb84AMD2NMJwLlCzStS5W4tJNeNqznnJ8R6zNyxVuK88pE7RICfFZ2cX6Jh1
+	BzoTbL6VST26O/6XLo0SkU1SaJ3pDx5crVPNVhC5Fi8mS/ZBhQRYKH+TVSyJ3UOZ
+	4KbTWwM6s3yiQeruZ5dwanozvwnDCmqGAemsEu5wVba1KnTzgurum6krrLSf5w2n
+	qvEBEzEqamTrSh092ifXcbA736Ou12PA8pasS5pG5irRRP+MRoGJokDYnJjURmWu
+	UnBmPgbJULdtFxXMThGb/xL/gi1DyDA8tsNTccGkk9v5An1VghyN8GXvg==
+X-ME-Sender: <xms:nm7bYjrbS9jNjBw7nbXefDMu46YSbGbp1KsJ2tTIXD4TZ7GbCbtZ4Q>
+    <xme:nm7bYtqPsOyODtYH9KifjONihUQ7K310TB5Oxy0n7Y-XDagt_GgGToO6CpbN6-LZv
+    h_hXtRRlPLyCBE>
+X-ME-Received: <xmr:nm7bYgN0wwjtQnACIK3HtJt_IqaeGBo2o0CrDByvjIEL7Cz0gip0xLonzDapB1mSZQHCz9GObAvk>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvddtfedgjeejucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
@@ -82,10 +82,10 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvddtfedgjeejucetufdoteggod
     gffhhfffjeetkeelueefffetfffhtdduheetnecuvehluhhsthgvrhfuihiivgeptdenuc
     frrghrrghmpehmrghilhhfrhhomhepuggvmhhisehinhhvihhsihgslhgvthhhihhnghhs
     lhgrsgdrtghomh
-X-ME-Proxy: <xmx:mm7bYqQkjYnHgxLSmK1-Qd4BoLcndVGukJH4M1hB-NMEiHzvkp5cZw>
-    <xmx:mm7bYiy2d5v7Wz8YC3woQOpp0ZjG0XaUBTSnAd3rf3nBm2zazrUsfg>
-    <xmx:mm7bYg61GlnDmWZrIuw5t9cmmRguh4_ET4UkGLaFcHu4pHoCbbbDpw>
-    <xmx:mm7bYpq0QN_InW8uGxoBnzhUmlI6S7nf-JBWwIoEaSvSVGmXzXakXg>
+X-ME-Proxy: <xmx:nm7bYm6DGifxtU6PZuxoN0HN3T5cnUzFQuBm_uy_c3SqiTsIO6abrg>
+    <xmx:nm7bYi6OCkJp-hpquKGgWSLKF2mgWoBWWrt5XgyNjfFAvdwAHR_Kog>
+    <xmx:nm7bYuh5ihGotun_aMnTFIMzFk5iZtvcEb6-GyG6NncagM0OyxZWnw>
+    <xmx:n27bYt0TVlw4gktHC4Mm_-INdehySHYfE6gwa-oHLP9e2KrcJM99AQ>
 Feedback-ID: iac594737:Fastmail
 From: Demi Marie Obenour <demi@invisiblethingslab.com>
 To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
@@ -94,11 +94,10 @@ To: Boris Ostrovsky <boris.ostrovsky@oracle.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc: Demi Marie Obenour <demi@invisiblethingslab.com>,
 	xen-devel@lists.xenproject.org,
-	linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH 4.9] Ignore failure to unmap -1
-Date: Fri, 22 Jul 2022 23:44:11 -0400
-Message-Id: <20220723034415.1560-2-demi@invisiblethingslab.com>
+Subject: [PATCH 5.4] Ignore failure to unmap -1
+Date: Fri, 22 Jul 2022 23:44:14 -0400
+Message-Id: <20220723034415.1560-5-demi@invisiblethingslab.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20220723034415.1560-1-demi@invisiblethingslab.com>
 References: <20220723034415.1560-1-demi@invisiblethingslab.com>
@@ -121,16 +120,16 @@ unmapping can legitimately fail.
 Suggested-by: Juergen Gross <jgross@suse.com>
 Cc: stable@vger.kernel.org
 Signed-off-by: Demi Marie Obenour <demi@invisiblethingslab.com>
-Fixes: 36cd49b071fc ("xen/gntdev: Avoid blocking in unmap_grant_pages()")
+Fixes: ee25841221c1 ("xen/gntdev: Avoid blocking in unmap_grant_pages()")
 ---
  drivers/xen/gntdev.c | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
-index 2c3248e71e9c1a3e032b847d177b02855cdda1a1..a6585854a85fc6fffc16c3498ba73fbee84ad6ca 100644
+index f464793477650e631c8928e85c1990c5964c2e94..bba849e5d8a7b4d54925b842fbe3c6792e0f0214 100644
 --- a/drivers/xen/gntdev.c
 +++ b/drivers/xen/gntdev.c
-@@ -390,7 +390,8 @@ static void __unmap_grant_pages_done(int result,
+@@ -413,7 +413,8 @@ static void __unmap_grant_pages_done(int result,
  	unsigned int offset = data->unmap_ops - map->unmap_ops;
  
  	for (i = 0; i < data->count; i++) {
