@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE3ECCA48C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB973CCA48F
 	for <xen-devel@archiver.kernel.org>; Tue, 26 Jul 2022 03:23:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.374939.607202 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.374937.607181 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oGBAY-0004iO-Kr; Tue, 26 Jul 2022 03:23:38 +0000
+	id 1oGBAW-0004Dn-P5; Tue, 26 Jul 2022 03:23:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 374939.607202; Tue, 26 Jul 2022 03:23:38 +0000
+Received: by outflank-mailman (output) from mailman id 374937.607181; Tue, 26 Jul 2022 03:23:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oGBAY-0004hn-Ct; Tue, 26 Jul 2022 03:23:38 +0000
-Received: by outflank-mailman (input) for mailman id 374939;
- Tue, 26 Jul 2022 03:23:37 +0000
+	id 1oGBAW-0004D1-JO; Tue, 26 Jul 2022 03:23:36 +0000
+Received: by outflank-mailman (input) for mailman id 374937;
+ Tue, 26 Jul 2022 03:23:35 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=zoO2=X7=invisiblethingslab.com=marmarek@srs-se1.protection.inumbo.net>)
- id 1oGBAX-0003P0-3o
- for xen-devel@lists.xenproject.org; Tue, 26 Jul 2022 03:23:37 +0000
+ id 1oGBAU-0003P0-SU
+ for xen-devel@lists.xenproject.org; Tue, 26 Jul 2022 03:23:34 +0000
 Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
  [66.111.4.28]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 556b9709-0c92-11ed-bd2d-47488cf2e6aa;
- Tue, 26 Jul 2022 05:23:36 +0200 (CEST)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
- by mailout.nyi.internal (Postfix) with ESMTP id 757E45C00CC;
- Mon, 25 Jul 2022 23:23:35 -0400 (EDT)
+ id 53c69a50-0c92-11ed-bd2d-47488cf2e6aa;
+ Tue, 26 Jul 2022 05:23:33 +0200 (CEST)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+ by mailout.nyi.internal (Postfix) with ESMTP id B00DB5C00D2;
+ Mon, 25 Jul 2022 23:23:32 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute1.internal (MEProxy); Mon, 25 Jul 2022 23:23:35 -0400
+ by compute4.internal (MEProxy); Mon, 25 Jul 2022 23:23:32 -0400
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 25 Jul 2022 23:23:34 -0400 (EDT)
+ 25 Jul 2022 23:23:31 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -45,36 +45,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 556b9709-0c92-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: 53c69a50-0c92-11ed-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:from:from:in-reply-to:in-reply-to
 	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm3; t=1658805815; x=1658892215; bh=r/M8YO8NxS
-	0KXBQpVOXd9NU+IPTWyvROd1xBgr9fbs4=; b=vXZrlGKoAaUGT1udv1cL6dhpyg
-	wCRG4ZpDq9IXG21Z6avFkoAdI66wWzgq3BO6INFDP882IlG/BHY3XM+qiTAqNaLN
-	bJOODnXTsmVrtoJgBNsgywuJDSX+QZcCYcYygy7mUP0zzIyxVIL7P6l+7+epJfM7
-	eh+EjlsfGDUOTgGGSG+FFPkCv33FzmLXrvcElFXPzlAkF4/1PAU4+WgP30D20uOj
-	fR9+yZRDzaW3JVAiW5IxrVlKT0R7+vtCSwYQzYtDOXiP766jNgzVffmwRQNJZSZy
-	3E3Vynw88a+IjzIbo1A3/dO5yZKjoLu8DatbYTKjU4/KFAR++S9BgSrRYkHg==
+	:subject:to:to; s=fm3; t=1658805812; x=1658892212; bh=3+Myjyd1Ql
+	jUjc3rIyJbwALSLpFyz/2kcKDHAc8UTjU=; b=jUaEBIvUae6flJleBjXEEGUdFe
+	JAgTIwisnWqcQvdsZCoYNpqROwJ6mMBWsWMe07I2VpM3XHBPiUxUIJya53PcsT3s
+	dEFEjZccdU5uplmijE33r65KMhJmh85GbQ7PsF6DW+oTu9BKCka0i2BmSb3z/WRC
+	TztkyKNO15+yxHt+btr7BlQMjhaaltCO6VuxDo/Tf3Dro6cJsBVib7Gpx+ZS/0ev
+	6HMYyBjtnhhvFCUAUFBzbw5oTYn9uX+iKsasLWIvLMcKGCfecE8iTSi/PEdapsT1
+	2j+acUrTBpVRrNBdn7KuXUniK0XxIZcMyx17L3ST1PGQH0ZmZqjh8D2M+bAQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1658805815; x=
-	1658892215; bh=r/M8YO8NxS0KXBQpVOXd9NU+IPTWyvROd1xBgr9fbs4=; b=S
-	n5ZcBWVs6JXO2qrBfnsQe5Fx4mMs60ftfsPf8MiNJp74+jEiyT824eDwhb2U8U2o
-	fPSO1VKu0QGCIzIYSubMa5831nCxv7X7jGQz6lk9seQl6XR/yGCUqZvLAAeNxR5j
-	GXq2V26Sls4wMtPHkZgusNwMHvyH1DRFy/zF8aTLfTxJUNigdqR3DKoFytvAH6O6
-	UxwdvDD0LtBlW9RAyzaGb7kSAezM1jxZwQRFdkNnFwaD1h2NOY+eC0Mya+drY3tf
-	hH8SbOFTQ2U6QDi1gzL4+/Yq+gOGt84xZ4IYYrFbPNXw0EM9FkPKzFzTD0m7ymoF
-	Kzgy59Y7vJ0OaOVICXtnA==
-X-ME-Sender: <xms:N17fYr7Wq6UJeoX68WxTamqccq0bF2jvqmJUpYeEXnNNSjEu_Uwijg>
-    <xme:N17fYg4_N_AfJC3Mjxp2uxK6ZxQMlXtNNeKr7IXRg6p0GYd4zv6QkM7SOkv37-mkY
-    JOWxIsN3tHPpQ>
-X-ME-Received: <xmr:N17fYifFdCbHGSyvLCQiej_nOujbaE4If3jB28V32iIpyMPDT3K_We8RmzewykSSP_JIofxMOq-J2jdVcyrtQr2QOMWv4UTiX5YCVa_gmvIFySAd2ovY1A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvddtledgieelucetufdoteggodetrfdotf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1658805812; x=
+	1658892212; bh=3+Myjyd1QljUjc3rIyJbwALSLpFyz/2kcKDHAc8UTjU=; b=z
+	2RPsAdyciG6IBHebVkU63AHlkXtawGFyZoTcWMYv8EJGOuL3THT343Ytxu1zA17s
+	geCjuVORzo0Fg65LckTxdbsyMkax3NEwyNPxwZOn1ff9E7lnSN/8X6xhJPTE2qZD
+	AN9UIIuamYi++MKNOgNrJ0rgTlJ5fMFCW++ViHRPlWWFhHq5ptBymwDJmhBcC0Wt
+	MY8e7TeqieqQArEVxbp56FeRcbe81DGyn+Ht9/pYAv2e0yHc5FmTDBSDKPmkHbd9
+	YTh7TZ1PLBH9orceO6vcyzWW/fEToARRhaJjZLmFHm8kX+qBUz6LZqw/9wa4PLlp
+	XsJ1G4FgXrsfMI2mWI/8g==
+X-ME-Sender: <xms:NF7fYpkkVZUY8aoqO6Cmqz9xcOecF0DC_Ef5gaLZ9XjP8YFnHt9lWw>
+    <xme:NF7fYk0nJMdkZTZucNxp1OIhUyfVRZHmqvw3JETLt_mIRTo3VxU6Bm4ba-aHLYOZD
+    7A2O76L1tuhYQ>
+X-ME-Received: <xmr:NF7fYvpBED5u28OUYbDGJxWbzRGfOcq7LAqB-E0SFWzz3PWYvwG-eID3kWBWfKVz6Hh6TAYH_Jc0zHFwQ3YvRjqCd_XF_YBBJaswnTiKoifQOoKmgRi3Tg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvddtledgjedtucetufdoteggodetrfdotf
     fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
     uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
     cujfgurhephffvvefufffkofgjfhggtgfgsehtkeertdertdejnecuhfhrohhmpeforghr
@@ -83,20 +83,23 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvddtledgieelucetufdoteggod
     ueduhefgvdefheehudejheefudevueeghfekhfehleegveduteeuiedugffgffenucevlh
     hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgv
     khesihhnvhhishhisghlvghthhhinhhgshhlrggsrdgtohhm
-X-ME-Proxy: <xmx:N17fYsJnsB-AQ9D10SCXEmwDgCXiHhvmxg4SMqr0sYLRq7tY30vWPA>
-    <xmx:N17fYvI9cBoA9_jNBIvLlPzFMEhLV4sg0KPEUt6QloZYdUrZG4nYCw>
-    <xmx:N17fYlxocJFEbuCWZrqgoSIx_wF6bavD97XOAIHX1Jd9kxumaGc65A>
-    <xmx:N17fYmVXth0yuYNVNfdzHhBBMBKHtvUyoSuDsUEZgb-iAVxnpDy1zQ>
+X-ME-Proxy: <xmx:NF7fYpkfjuu3607JpGRv-Tmv_8DAM5858LDoMs_XARmAFrWeAOih8g>
+    <xmx:NF7fYn2uNgfuVa3Dmt3A3yFq0iBthgOzSTOEM9un7NSd6Ui-hryh5g>
+    <xmx:NF7fYos1L_X3IxluO_rG17WvB8fYB4GT_5FYxGeC6tBh-ygeJ8NUag>
+    <xmx:NF7fYn_N7-o9IpIl5Ix7sXAiYtlo8cNWaTpDWyHK5V-8_smqvRhg-w>
 Feedback-ID: i1568416f:Fastmail
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Paul Durrant <paul@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Subject: [PATCH v3 05/10] IOMMU: add common API for device reserved memory
-Date: Tue, 26 Jul 2022 05:23:10 +0200
-Message-Id: <6a99f9b99b419a20e895d54db2e345c80270248c.1658804819.git-series.marmarek@invisiblethingslab.com>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	George Dunlap <george.dunlap@citrix.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Wei Liu <wl@xen.org>
+Subject: [PATCH v3 03/10] drivers/char: add support for selecting specific xhci
+Date: Tue, 26 Jul 2022 05:23:08 +0200
+Message-Id: <97e54ccf5f9a21cf1226a1e9de6aae8dc09d2406.1658804819.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <cover.981658add2114d2558989cedba5877aa8b82d8a4.1658804819.git-series.marmarek@invisiblethingslab.com>
 References: <cover.981658add2114d2558989cedba5877aa8b82d8a4.1658804819.git-series.marmarek@invisiblethingslab.com>
@@ -104,108 +107,130 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Add API similar to rmrr= and ivmd= arguments, but in a common code. This
-will allow drivers to register reserved memory regardless of the IOMMU
-vendor.
-The direct reason for this API is xhci-dbc console driver (aka xue),
-that needs to use DMA. But future change may unify command line
-arguments for user-supplied reserved memory, and it may be useful for
-other drivers in the future too.
+Handle parameters similar to dbgp=ehci.
 
-This commit just introduces an API, subsequent patches will plug it in
-appropriate places. The reserved memory ranges needs to be saved
-locally, because at the point when they are collected, Xen doesn't know
-yet which IOMMU driver will be used.
+Implement this by not resettting dbc->sbdf again in dbc_init_xhc(), but
+using a value found there if non-zero. Additionally, add xue->xhc_num to
+select n-th controller.
 
 Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v3:
- - adjust code style
+ - adjust for xhci-dbc rename
+ - drop redundant check in parsing dbgp= option
+Changes in v2:
+ - unsigned int xhc_num
+ - code style
 ---
- xen/drivers/passthrough/iommu.c | 45 ++++++++++++++++++++++++++++++++++-
- xen/include/xen/iommu.h         | 13 ++++++++++-
- 2 files changed, 58 insertions(+)
+ docs/misc/xen-command-line.pandoc |  2 +-
+ xen/drivers/char/xhci-dbc.c       | 54 ++++++++++++++++++++++++--------
+ 2 files changed, 43 insertions(+), 13 deletions(-)
 
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index 77f64e61748d..74efd865ab69 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -651,6 +651,51 @@ bool_t iommu_has_feature(struct domain *d, enum iommu_feature feature)
-     return is_iommu_enabled(d) && test_bit(feature, dom_iommu(d)->features);
- }
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index f936283cd187..d594bd5c7436 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -721,7 +721,7 @@ Available alternatives, with their meaning, are:
  
-+#define MAX_EXTRA_RESERVED_RANGES 20
-+struct extra_reserved_range {
-+    unsigned long start;
-+    unsigned long nr;
-+    uint32_t sbdf;
-+};
-+static unsigned int __initdata nr_extra_reserved_ranges;
-+static struct extra_reserved_range __initdata
-+    extra_reserved_ranges[MAX_EXTRA_RESERVED_RANGES];
-+
-+int iommu_add_extra_reserved_device_memory(unsigned long start,
-+                                           unsigned long nr,
-+                                           uint32_t sbdf)
-+{
-+    unsigned int idx;
-+
-+    if ( nr_extra_reserved_ranges >= MAX_EXTRA_RESERVED_RANGES )
-+        return -ENOMEM;
-+
-+    idx = nr_extra_reserved_ranges++;
-+    extra_reserved_ranges[idx].start = start;
-+    extra_reserved_ranges[idx].nr = nr;
-+    extra_reserved_ranges[idx].sbdf = sbdf;
-+
-+    return 0;
-+}
-+
-+int iommu_get_extra_reserved_device_memory(iommu_grdm_t *func, void *ctxt)
-+{
-+    unsigned int idx;
-+    int ret;
-+
-+    for ( idx = 0; idx < nr_extra_reserved_ranges; idx++ )
-+    {
-+        ret = func(extra_reserved_ranges[idx].start,
-+                   extra_reserved_ranges[idx].nr,
-+                   extra_reserved_ranges[idx].sbdf,
-+                   ctxt);
-+        if ( ret < 0 )
-+            return ret;
-+    }
-+
-+    return 0;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-index 79529adf1fa5..aa87c3fd9ebc 100644
---- a/xen/include/xen/iommu.h
-+++ b/xen/include/xen/iommu.h
-@@ -297,6 +297,19 @@ struct iommu_ops {
- #endif
+ ### dbgp
+ > `= ehci[ <integer> | @pci<bus>:<slot>.<func> ]`
+-> `= xhci`
++> `= xhci[ <integer> | @pci<bus>:<slot>.<func> ]`
+ 
+ Specify the USB controller to use, either by instance number (when going
+ over the PCI busses sequentially) or by PCI device (must be on segment 0).
+diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
+index 53c39eedd4a6..11026d3b71f0 100644
+--- a/xen/drivers/char/xhci-dbc.c
++++ b/xen/drivers/char/xhci-dbc.c
+@@ -243,6 +243,7 @@ struct dbc {
+     void __iomem *xhc_mmio;
+ 
+     bool open;
++    unsigned int xhc_num; /* look for n-th xhc */
  };
  
-+/*
-+ * To be called by Xen internally, to register extra RMRR/IVMD ranges.
-+ * Needs to be called before IOMMU initialization.
-+ */
-+extern int iommu_add_extra_reserved_device_memory(unsigned long start,
-+                                                  unsigned long nr,
-+                                                  uint32_t sbdf);
-+/*
-+ * To be called by specific IOMMU driver during initialization,
-+ * to fetch ranges registered with iommu_add_extra_reserved_device_memory().
-+ */
-+extern int iommu_get_extra_reserved_device_memory(iommu_grdm_t *func, void *ctxt);
-+
- #include <asm/iommu.h>
+ static void *dbc_sys_map_xhc(uint64_t phys, size_t size)
+@@ -274,24 +275,37 @@ static bool __init dbc_init_xhc(struct dbc *dbc)
+     uint16_t cmd;
+     size_t xhc_mmio_size;
  
- #ifndef iommu_call
+-    /*
+-     * Search PCI bus 0 for the xHC. All the host controllers supported so far
+-     * are part of the chipset and are on bus 0.
+-     */
+-    for ( devfn = 0; devfn < 256; devfn++ )
++    if ( dbc->sbdf.sbdf == 0 )
+     {
+-        pci_sbdf_t sbdf = PCI_SBDF(0, 0, devfn);
+-        uint8_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
+-
+-        if ( hdr == 0 || hdr == 0x80 )
++        /*
++         * Search PCI bus 0 for the xHC. All the host controllers supported so
++         * far are part of the chipset and are on bus 0.
++         */
++        for ( devfn = 0; devfn < 256; devfn++ )
+         {
+-            if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) == DBC_XHC_CLASSC )
++            pci_sbdf_t sbdf = PCI_SBDF(0, 0, devfn);
++            uint8_t hdr = pci_conf_read8(sbdf, PCI_HEADER_TYPE);
++
++            if ( hdr == 0 || hdr == 0x80 )
+             {
+-                dbc->sbdf = sbdf;
+-                break;
++                if ( (pci_conf_read32(sbdf, PCI_CLASS_REVISION) >> 8) ==
++                     DBC_XHC_CLASSC )
++                {
++                    if ( dbc->xhc_num-- )
++                        continue;
++                    dbc->sbdf = sbdf;
++                    break;
++                }
+             }
+         }
+     }
++    else
++    {
++        /* Verify if selected device is really xHC */
++        if ( (pci_conf_read32(dbc->sbdf, PCI_CLASS_REVISION) >> 8) !=
++             DBC_XHC_CLASSC )
++            dbc->sbdf.sbdf = 0;
++    }
+ 
+     if ( !dbc->sbdf.sbdf )
+     {
+@@ -1047,12 +1061,28 @@ void __init xhci_dbc_uart_init(void)
+ {
+     struct dbc_uart *uart = &dbc_uart;
+     struct dbc *dbc = &uart->dbc;
++    const char *e;
+ 
+     if ( strncmp(opt_dbgp, "xhci", 4) )
+         return;
+ 
+     memset(dbc, 0, sizeof(*dbc));
+ 
++    if ( isdigit(opt_dbgp[4]) )
++    {
++        dbc->xhc_num = simple_strtoul(opt_dbgp + 4, &e, 10);
++    }
++    else if ( strncmp(opt_dbgp + 4, "@pci", 4) == 0 )
++    {
++        unsigned int bus, slot, func;
++
++        e = parse_pci(opt_dbgp + 8, NULL, &bus, &slot, &func);
++        if ( !e || *e )
++            return;
++
++        dbc->sbdf = PCI_SBDF(0, bus, slot, func);
++    }
++
+     dbc->dbc_ctx = &ctx;
+     dbc->dbc_erst = &erst;
+     dbc->dbc_ering.trb = evt_trb;
 -- 
 git-series 0.9.1
 
