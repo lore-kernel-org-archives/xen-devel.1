@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB7A3C19F2B
-	for <xen-devel@archiver.kernel.org>; Wed, 27 Jul 2022 17:19:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.376388.609113 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B21EC04A68
+	for <xen-devel@archiver.kernel.org>; Wed, 27 Jul 2022 17:31:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.376400.609136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oGkgT-0005pk-LF; Wed, 27 Jul 2022 17:18:57 +0000
+	id 1oGks8-0000Ra-0H; Wed, 27 Jul 2022 17:31:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 376388.609113; Wed, 27 Jul 2022 17:18:57 +0000
+Received: by outflank-mailman (output) from mailman id 376400.609136; Wed, 27 Jul 2022 17:30:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oGkgT-0005pd-Ia; Wed, 27 Jul 2022 17:18:57 +0000
-Received: by outflank-mailman (input) for mailman id 376388;
- Wed, 27 Jul 2022 17:18:57 +0000
+	id 1oGks7-0000RT-SN; Wed, 27 Jul 2022 17:30:59 +0000
+Received: by outflank-mailman (input) for mailman id 376400;
+ Wed, 27 Jul 2022 17:30:58 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=uTNG=YA=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
- id 1oGkgT-0005pW-4W
- for xen-devel@lists.xenproject.org; Wed, 27 Jul 2022 17:18:57 +0000
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [2a00:1450:4864:20::531])
+ <SRS0=0cJb=YA=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1oGks6-0000RN-DF
+ for xen-devel@lists.xenproject.org; Wed, 27 Jul 2022 17:30:58 +0000
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [2a00:1450:4864:20::235])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 31dae75d-0dd0-11ed-bd2d-47488cf2e6aa;
- Wed, 27 Jul 2022 19:18:56 +0200 (CEST)
-Received: by mail-ed1-x531.google.com with SMTP id f15so13868880edc.4
- for <xen-devel@lists.xenproject.org>; Wed, 27 Jul 2022 10:18:56 -0700 (PDT)
-Received: from uni.router.wind (adsl-141.176.58.226.tellas.gr.
- [176.58.226.141]) by smtp.googlemail.com with ESMTPSA id
- k14-20020a170906578e00b0072f03d10fa0sm7826551ejq.207.2022.07.27.10.18.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Jul 2022 10:18:54 -0700 (PDT)
+ id dfcd726c-0dd1-11ed-bd2d-47488cf2e6aa;
+ Wed, 27 Jul 2022 19:30:57 +0200 (CEST)
+Received: by mail-lj1-x235.google.com with SMTP id e11so20592895ljl.4
+ for <xen-devel@lists.xenproject.org>; Wed, 27 Jul 2022 10:30:57 -0700 (PDT)
+Received: from [192.168.1.7] ([212.22.223.21])
+ by smtp.gmail.com with ESMTPSA id
+ k6-20020a05651c10a600b0025dd5b3fabesm3889541ljn.102.2022.07.27.10.30.56
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 27 Jul 2022 10:30:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -46,64 +46,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 31dae75d-0dd0-11ed-bd2d-47488cf2e6aa
+X-Inumbo-ID: dfcd726c-0dd1-11ed-bd2d-47488cf2e6aa
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6dc4z0oKWGxuRUkvqyuKc5/mNW97MFIan+sLcG8xT44=;
-        b=hyHH8GyxXttS+QeEhdoDw4/erFOXrx6xBxlE5c0sdMZ6CG2yTJVIi+Dr2H/Qzq8KMn
-         gfLY1vIcUBEXq81y+UKbnv3q1fZYXDRS+lpxuS4UVaWaO8KgIvF2hnS06qDs2UOmyvV0
-         3X59ibFyNGewcmMUPSbat6xyspvGNPwCK5BMHlA/FAdPnB3cpe0EM7BJ9dnSa8G2XSra
-         w+wUX1qGq0yIgXGecMrCEF4F6Udob5BgsD4DLn01uFX0yv0LoDJBYfRvgPVXGIbl82Hd
-         TIjnCOBXSwuxry89AKpmFw7zyf1tsAoQsiLLTG5pZVW4mledMydNAxSPBO+0zPTkOtzB
-         ia7A==
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc;
+        bh=zjfjI1qOAot5uSZpRbjgv22gTCd0jDySVkMsyPMiU0k=;
+        b=lYykyt7oEGtZAkPJXwWKoxcUUaBf9jN6Uc6qvIg8LUPv1K4adfqgJ05Qm4XQoiEUTh
+         udcMS7bKzmgl7lFZ82APMhBrHzD4M2zzZ8af4idoaY60ozHuti/tZe5hAwjolFlWw8Tc
+         2+X1DYJiz6+ySBMGBEpJFAqZYjSHCtGGbqPCx0hBY+6qEb/2NUtnmwlIljCvRONczafd
+         PQYs6xzBucZJ+tyBArfdySHxkHaqfO+1bUwm8UC94ogfjCzwQHMWf+lg7a3SjJ2HHYmw
+         eHzeuXbBuAGBt/QSnCF7f8BFcrayjFhqUG97kkiyBVXX1FrdO4QXWENQ66H4U7aMaH/W
+         9UlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6dc4z0oKWGxuRUkvqyuKc5/mNW97MFIan+sLcG8xT44=;
-        b=Q4djabd9ELD5rKlbjDZqBPgwto6al6qz7o9RqN/SbydfX8Dtj8jeli4er23dmmNHYy
-         xU6YAJ9hBdejZfNaYUNa5PKgYW0FoVbEgN+/6IcQbFCtN7+mkmHyygtMtpql5fwFBqvu
-         2JIn1Bb5Ce2a43zzGIqmvfOx7GTvXmDrAPOW0SlEMKttpOUgi3bsBlc/vnxAtgGvTKlx
-         0AQa8+/R3UduiHe1Uj6JvJ/ttJ3DL6R5nofFz1ou0M5J5eesKb2jMizQV4gdWlEZP414
-         mavUjQdfvdHHAh7RDXEPnVRykJ2lN5uiD6/7Q/KiLek8KRVZ4ftn0e846IsVIk9+SzHt
-         Uimg==
-X-Gm-Message-State: AJIora91k5tGNfH6nBy3MWBa23vgZha/9PmmSGlfEG1YzbnVk2Qayei4
-	wJtlLaTlT1g9xb2LDZsxWoBlTVcm82E=
-X-Google-Smtp-Source: AGRyM1uvZH/I4fshtv90uZKvfa2I+EYfM+xq27caYRGuw7brhwyXtxKzyH/WVPU88ybx6rzsaE2nsg==
-X-Received: by 2002:a05:6402:5384:b0:431:6d84:b451 with SMTP id ew4-20020a056402538400b004316d84b451mr24037645edb.46.1658942335109;
-        Wed, 27 Jul 2022 10:18:55 -0700 (PDT)
-From: Xenia Ragiadakou <burzalodowa@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v2 0/1] xen/arm: asm/atomic.h: Fix MISRA C 2012 Rule violations
-Date: Wed, 27 Jul 2022 20:18:40 +0300
-Message-Id: <20220727171841.1163075-1-burzalodowa@gmail.com>
-X-Mailer: git-send-email 2.34.1
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc;
+        bh=zjfjI1qOAot5uSZpRbjgv22gTCd0jDySVkMsyPMiU0k=;
+        b=zyk2/V3KzKamGwzR1PNZQBnrC7VDsJ0GR3l5NLp+EHL8DLgh+hDZOuba7nftMztgae
+         PtGSt3OlIbaDXiopigqYrhqulBk0gwkRdis1Zg1eHkLz1uaJ0rJ3wNA9oDfR8akW9Rqu
+         qW/gZtP9Nlz8C7DCPiZKjo7w6K0EuviQpD6DPne1Yf7MQOgC+ciLRy9t7HXCPPo7PJHa
+         hVN0d/qpcRKaMqMUwVuKTy4DG540YClydRnKedy2eaW9w6BSUx1zZHc6IXTYhn9ygSPg
+         DGpR68PenGUwkf+nhtUngxCPp68tsxnfd0mGvfY3rNjlugyncWIcrLhww+QgKdHhVDIL
+         sG+w==
+X-Gm-Message-State: AJIora+lqLyHUrwYIOlIR5vwaTKV+BhjcYsGXm9BoCiC2aiwjMNDspNE
+	RH3m+3OZIWPlSjCUFXtZbPI=
+X-Google-Smtp-Source: AGRyM1u7vpeIEM6smt9OW6QpOYV5TJhbyYdRQ6x+O9VPk9VsGynVqN77BRh9zs4ffzSo+Aty2rkXoQ==
+X-Received: by 2002:a05:651c:981:b0:253:b87e:ba6c with SMTP id b1-20020a05651c098100b00253b87eba6cmr8063323ljq.530.1658943056989;
+        Wed, 27 Jul 2022 10:30:56 -0700 (PDT)
+Message-ID: <fba54c4b-e82d-cf27-256a-e4c61dc025cd@gmail.com>
+Date: Wed, 27 Jul 2022 20:30:55 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH V7 07/11] vpci/header: emulate PCI_COMMAND register for
+ guests
+Content-Language: en-US
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ xen-devel@lists.xenproject.org
+References: <20220719174253.541965-1-olekstysh@gmail.com>
+ <20220719174253.541965-8-olekstysh@gmail.com>
+ <9f2bd47d-cd48-f544-4e8d-a8a698470889@suse.com>
+From: Oleksandr <olekstysh@gmail.com>
+In-Reply-To: <9f2bd47d-cd48-f544-4e8d-a8a698470889@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This patch series fixes violations of rule 20.7 found in
-xen/arch/arm/include/asm/atomic.h.
 
-Changes in v2:
-- removed redundant parentheses in patch 1/2
-- dropped patch 2/2 that removes unused atomic_xchg() because changes Xen's
-  atomic API, and such a change cannot be justified since compliance to
-  MISRA C Rule 2.5 is advisory. If at some point it is decided to remove the
-  relevant macro, this will be done for both arm and x86 with a separate patch.
+On 26.07.22 18:30, Jan Beulich wrote:
 
-Xenia Ragiadakou (1):
-  xen/arm: asm/atomic.h: Fix MISRA C 2012 Rule 20.7 violation
+Hello Jan
 
- xen/arch/arm/include/asm/atomic.h | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+> On 19.07.2022 19:42, Oleksandr Tyshchenko wrote:
+>> --- a/xen/drivers/vpci/header.c
+>> +++ b/xen/drivers/vpci/header.c
+>> @@ -443,11 +443,27 @@ static int modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+>>       return 0;
+>>   }
+>>   
+>> +/* TODO: Add proper emulation for all bits of the command register. */
+>>   static void cf_check cmd_write(
+>>       const struct pci_dev *pdev, unsigned int reg, uint32_t cmd, void *data)
+>>   {
+>>       uint16_t current_cmd = pci_conf_read16(pdev->sbdf, reg);
+>>   
+>> +    if ( !is_hardware_domain(pdev->domain) )
+>> +    {
+>> +        struct vpci_header *header = data;
+>> +
+>> +        header->guest_cmd = cmd;
+>> +#ifdef CONFIG_HAS_PCI_MSI
+>> +        if ( pdev->vpci->msi->enabled || pdev->vpci->msix->enabled )
+>> +            /*
+>> +             * Guest wants to enable INTx, but it can't be enabled
+>> +             * if MSI/MSI-X enabled.
+>> +             */
+>> +            cmd |= PCI_COMMAND_INTX_DISABLE;
+>> +#endif
+>> +    }
+>> +
+>>       /*
+>>        * Let Dom0 play with all the bits directly except for the memory
+>>        * decoding one.
+>> @@ -464,6 +480,19 @@ static void cf_check cmd_write(
+>>           pci_conf_write16(pdev->sbdf, reg, cmd);
+>>   }
+>>   
+>> +static uint32_t cf_check cmd_read(
+>> +    const struct pci_dev *pdev, unsigned int reg, void *data)
+>> +{
+>> +    if ( !is_hardware_domain(pdev->domain) )
+>> +    {
+>> +        struct vpci_header *header = data;
+>> +
+>> +        return header->guest_cmd;
+>> +    }
+>> +
+>> +    return pci_conf_read16(pdev->sbdf, reg);
+>> +}
+> This function wants the same leading comment as cmd_write().
+
+ok
+
+
+>   I also
+> think you better wouldn't give the guest the impression that r/o bits
+> can actually be written to (but getting this right may well fall
+> under the TODO).
+
+ok
+
+
+>
+> Jan
 
 -- 
-2.34.1
+Regards,
+
+Oleksandr Tyshchenko
 
 
