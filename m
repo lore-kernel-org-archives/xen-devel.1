@@ -4,33 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46DB3C04A68
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jul 2022 13:44:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.376795.609795 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2CCC04A68
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jul 2022 13:50:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.376804.609818 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oH3oD-0003jR-LS; Thu, 28 Jul 2022 13:44:13 +0000
+	id 1oH3te-0004tx-MA; Thu, 28 Jul 2022 13:49:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 376795.609795; Thu, 28 Jul 2022 13:44:13 +0000
+Received: by outflank-mailman (output) from mailman id 376804.609818; Thu, 28 Jul 2022 13:49:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oH3oD-0003jK-Ij; Thu, 28 Jul 2022 13:44:13 +0000
-Received: by outflank-mailman (input) for mailman id 376795;
- Thu, 28 Jul 2022 13:44:13 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oH3te-0004tq-Hj; Thu, 28 Jul 2022 13:49:50 +0000
+Received: by outflank-mailman (input) for mailman id 376804;
+ Thu, 28 Jul 2022 13:49:49 +0000
+Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
+ helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=ZgEr=YB=apertussolutions.com=dpsmith@srs-se1.protection.inumbo.net>)
- id 1oH3oC-0003jC-Tm
- for xen-devel@lists.xenproject.org; Thu, 28 Jul 2022 13:44:13 +0000
-Received: from sender4-of-o51.zoho.com (sender4-of-o51.zoho.com
- [136.143.188.51]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 59b6deb0-0e7b-11ed-924f-1f966e50362f;
- Thu, 28 Jul 2022 15:44:10 +0200 (CEST)
-Received: from [10.10.1.164] (static-72-81-132-2.bltmmd.fios.verizon.net
- [72.81.132.2]) by mx.zohomail.com
- with SMTPS id 165901584069079.73373381885733;
- Thu, 28 Jul 2022 06:44:00 -0700 (PDT)
+ <SRS0=dfiA=YB=gmail.com=burzalodowa@srs-se1.protection.inumbo.net>)
+ id 1oH3td-0004d0-2y
+ for xen-devel@lists.xenproject.org; Thu, 28 Jul 2022 13:49:49 +0000
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [2a00:1450:4864:20::62f])
+ by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
+ id 254e16f5-0e7c-11ed-bd2d-47488cf2e6aa;
+ Thu, 28 Jul 2022 15:49:48 +0200 (CEST)
+Received: by mail-ej1-x62f.google.com with SMTP id tk8so3260961ejc.7
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Jul 2022 06:49:48 -0700 (PDT)
+Received: from uni.router.wind (adsl-69.109.242.233.tellas.gr.
+ [109.242.233.69]) by smtp.googlemail.com with ESMTPSA id
+ i8-20020aa7dd08000000b0043bea0a48d0sm726038edv.22.2022.07.28.06.49.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Jul 2022 06:49:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,98 +46,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 59b6deb0-0e7b-11ed-924f-1f966e50362f
-ARC-Seal: i=1; a=rsa-sha256; t=1659015846; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=GD4tUhfVP2lCne6+H74NmvjGCf7IqGsr4qtgni6GVzMg4SpyMaUIXTDGyIggrS5mv90azfoKjfOE9YkD6slnMv9ykpF4xjgv4oZihA2sD3CNI0iDdnydFyF0SCs8kuvdTHZqjhC1bulYzqcYOCymB9OiJ0uSnEYxbw/vwTHMkIQ=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1659015846; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
-	bh=WhkfHmQIFWCfqZmvNGvalf8cSH4ULdgERHVpM9FNsYk=; 
-	b=SVHTP9EatwlWwsVEUrzlnzW31DxYp79SAUM4ktYuh5ROuntx3eV4biM/r3HEX1cBeEm5JNQjLr1o6rmCjzUXPUfQT0sC2VboLXlIEiE6SMMIettX1TerKiBIccuH69DPy8Nv2by67yyYQg6+G1NjYcN9RnOfMatrRocvkfaHlh0=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=apertussolutions.com;
-	spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
-	dmarc=pass header.from=<dpsmith@apertussolutions.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1659015846;
-	s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
-	h=Message-ID:Date:Date:MIME-Version:Subject:Subject:To:To:Cc:Cc:References:From:From:In-Reply-To:Content-Type:Content-Transfer-Encoding:Message-Id:Reply-To;
-	bh=WhkfHmQIFWCfqZmvNGvalf8cSH4ULdgERHVpM9FNsYk=;
-	b=NDCUPS8Ksqp5ruKPqzmiv6ymOP0szvuK4T0CewbkXNHlXJUvhhJRa97nkD1VNgeG
-	xKuOQ+0cZw1LjbrEbIsw89ZwJ1ukDdGusuIWARfuVwQIO82cLRY8jPVtLQ2qFgpuQFI
-	sSMvvgkRHNguE/SH1ax7oT5XbzLwxL0GoeTeQ8O0=
-Message-ID: <472e25cf-79aa-0969-177a-0cf4846d707e@apertussolutions.com>
-Date: Thu, 28 Jul 2022 09:42:46 -0400
+X-Inumbo-ID: 254e16f5-0e7c-11ed-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=AGvhw52qZ7yhX++JHeFH0Mw9fFAY30IDyCfGWdJWM5A=;
+        b=hfwMuJI0tFFN3Nzwlg4bbRD1MHy8xjGTbR5sIrtGc/6gXXGVAOEJSuzTJf4mRv07IP
+         sh+LX4KM860zdiC9hnGIU5ftYTCXsgrUQIKXgosU5gGs3tAXi4FH69g1SaAPfW2OowwU
+         BK3pgCZc2ZPHa5EW0+PvOs+S/HvC7qfjzL72ndQZubIIy7+Yvm/OMddH2bMo/4l8e3ZB
+         T8U+3M48EIekRS7jJ4fzsIisSG1smO6vivzR/UAKo6piEqgJUNji2Nun1vr1/SAJbHxT
+         nLm9kjMykKqPANw7Qt4+095/DhcMktR1iRebkmkVDUhn/KoBqnUNpE5Haa7BNcTaD1e6
+         /fQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=AGvhw52qZ7yhX++JHeFH0Mw9fFAY30IDyCfGWdJWM5A=;
+        b=m2ZPNadnF7NX7bP0dQw3RDgxETWiwL4ogh4xb5CuDu8H6SFo7ASr5kFEk16jDJ/WaW
+         JvuLo2SfZ7jzTdFzcg9NJTveXK62EGNwvrJg/FVjAH7qOlx/GPJMdNcUTvjf7J+vwjK2
+         fPudv7Zg6lfZS9/YZtHdvi+V2SzdTHEHwEZ7cPcCvIQOtIpJEHHseqNYHP2Y0WVx9sAx
+         E1JpdGypjPa/mLJh131r89NV/ZdrpGmB2VgzWGwkI9II+vUGRosD5E3QxuPbC3ouhDkk
+         rwPV9pO/0PIilYuMG2tMwBqwO7vCnEBSAX4gFH005DN/zWnxi6CuZ5mSONqclmEvvSu6
+         FsiA==
+X-Gm-Message-State: AJIora8qALJDDebgU3gZJsPRdM7DFyKrmRer9crvF4/Uo8r+cxv1OY2y
+	kFrlvrFvT869duK/t66ajSqKByj/HjI=
+X-Google-Smtp-Source: AGRyM1u+HXbTeWKD3fQrligIHWFLnCzwsu/mZ++K3zohb3LEU1+xDS930v9zbzeJ+i00/FgeTrL32A==
+X-Received: by 2002:a17:907:762f:b0:72b:3203:2f52 with SMTP id jy15-20020a170907762f00b0072b32032f52mr21579149ejc.395.1659016187439;
+        Thu, 28 Jul 2022 06:49:47 -0700 (PDT)
+From: Xenia Ragiadakou <burzalodowa@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH] xen/arm64: sysreg.h: Fix MISRA C 2012 Rule 20.7 violation
+Date: Thu, 28 Jul 2022 16:49:43 +0300
+Message-Id: <20220728134943.1185621-1-burzalodowa@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.0
-Subject: Re: [PATCH v7] evtchn: convert domain event lock to an r/w one
-Content-Language: en-US
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
- Kevin Tian <kevin.tian@intel.com>
-References: <d6a04eb7-bea7-0757-38da-526ee5d5448b@suse.com>
-From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
-In-Reply-To: <d6a04eb7-bea7-0757-38da-526ee5d5448b@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ZohoMailClient: External
+Content-Transfer-Encoding: 8bit
 
-On 7/27/22 11:56, Jan Beulich wrote:
-> Especially for the use in evtchn_move_pirqs() (called when moving a vCPU
-> across pCPU-s) and the ones in EOI handling in PCI pass-through code,
-> serializing perhaps an entire domain isn't helpful when no state (which
-> isn't e.g. further protected by the per-channel lock) changes.
-> 
-> Unfortunately this implies dropping of lock profiling for this lock,
-> until r/w locks may get enabled for such functionality.
-> 
-> While ->notify_vcpu_id is now meant to be consistently updated with the
-> per-channel lock held, an extension applies to ECS_PIRQ: The field is
-> also guaranteed to not change with the per-domain event lock held for
-> writing. Therefore the link_pirq_port() call from evtchn_bind_pirq()
-> could in principle be moved out of the per-channel locked regions, but
-> this further code churn didn't seem worth it.
-> 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> v6: Re-vive and re-base.
-> v5: Re-base, also over dropped earlier patch.
-> v4: Re-base, in particular over new earlier patches. Acquire both
->      per-domain locks for writing in evtchn_close(). Adjust
->      spin_barrier() related comments.
-> v3: Re-base.
-> v2: Consistently lock for writing in evtchn_reset(). Fix error path in
->      pci_clean_dpci_irqs(). Lock for writing in pt_irq_time_out(),
->      hvm_dirq_assist(), hvm_dpci_eoi(), and hvm_dpci_isairq_eoi(). Move
->      rw_barrier() introduction here. Re-base over changes earlier in the
->      series.
-> 
+The macro parameter 'v' is used as an expression and needs to be enclosed in
+parentheses.
 
-<snip/>
+Signed-off-by: Xenia Ragiadakou <burzalodowa@gmail.com>
+---
+ xen/arch/arm/include/asm/arm64/sysregs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> --- a/xen/xsm/flask/flask_op.c
-> +++ b/xen/xsm/flask/flask_op.c
-> @@ -530,7 +530,7 @@ static int flask_get_peer_sid(struct xen
->       struct evtchn *chn;
->       struct domain_security_struct *dsec;
->   
-> -    spin_lock(&d->event_lock);
-> +    read_lock(&d->event_lock);
->   
->       if ( !port_is_valid(d, arg->evtchn) )
->           goto out;
-> @@ -548,7 +548,7 @@ static int flask_get_peer_sid(struct xen
->       rv = 0;
->   
->    out:
-> -    spin_unlock(&d->event_lock);
-> +    read_unlock(&d->event_lock);
->       return rv;
->   }
+diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/include/asm/arm64/sysregs.h
+index 54670084c3..f5a7269a27 100644
+--- a/xen/arch/arm/include/asm/arm64/sysregs.h
++++ b/xen/arch/arm/include/asm/arm64/sysregs.h
+@@ -461,7 +461,7 @@
+ /* Access to system registers */
+ 
+ #define WRITE_SYSREG64(v, name) do {                    \
+-    uint64_t _r = v;                                    \
++    uint64_t _r = (v);                                              \
+     asm volatile("msr "__stringify(name)", %0" : : "r" (_r));       \
+ } while (0)
+ #define READ_SYSREG64(name) ({                          \
+-- 
+2.34.1
 
-Acked-by: Daniel P. Smith <dpsmith@apertussolutions.com>
 
