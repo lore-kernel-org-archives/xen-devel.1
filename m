@@ -4,39 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F2B1C04A68
-	for <xen-devel@archiver.kernel.org>; Thu, 28 Jul 2022 18:47:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.376971.610097 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AF42C19F2B
+	for <xen-devel@archiver.kernel.org>; Thu, 28 Jul 2022 19:00:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.377040.610108 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oH8XK-0002GO-RT; Thu, 28 Jul 2022 18:47:06 +0000
+	id 1oH8k2-0004k3-0i; Thu, 28 Jul 2022 19:00:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 376971.610097; Thu, 28 Jul 2022 18:47:06 +0000
+Received: by outflank-mailman (output) from mailman id 377040.610108; Thu, 28 Jul 2022 19:00:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oH8XK-0002GH-OU; Thu, 28 Jul 2022 18:47:06 +0000
-Received: by outflank-mailman (input) for mailman id 376971;
- Thu, 28 Jul 2022 17:20:58 +0000
+	id 1oH8k1-0004jw-UI; Thu, 28 Jul 2022 19:00:13 +0000
+Received: by outflank-mailman (input) for mailman id 377040;
+ Thu, 28 Jul 2022 19:00:12 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EGN+=YB=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 1oH7By-00077z-2l
- for xen-devel@lists.xenproject.org; Thu, 28 Jul 2022 17:20:58 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ <SRS0=B2Bu=YB=gmail.com=olekstysh@srs-se1.protection.inumbo.net>)
+ id 1oH8k0-0004jq-DR
+ for xen-devel@lists.xenproject.org; Thu, 28 Jul 2022 19:00:12 +0000
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [2607:f8b0:4864:20::432])
  by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id a36a0206-0e99-11ed-924f-1f966e50362f;
- Thu, 28 Jul 2022 19:20:56 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9441F612B2;
- Thu, 28 Jul 2022 17:20:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ED372C43140;
- Thu, 28 Jul 2022 17:20:53 +0000 (UTC)
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
- id 9739D5C0B3E; Thu, 28 Jul 2022 10:20:53 -0700 (PDT)
+ id 80e5b8ba-0ea7-11ed-924f-1f966e50362f;
+ Thu, 28 Jul 2022 21:00:11 +0200 (CEST)
+Received: by mail-pf1-x432.google.com with SMTP id g12so2694012pfb.3
+ for <xen-devel@lists.xenproject.org>; Thu, 28 Jul 2022 12:00:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,209 +41,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: a36a0206-0e99-11ed-924f-1f966e50362f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1659028854;
-	bh=3juGR+P+/PoNu1lEhZFgztJ6A9LmEO7Lb+rh9Y4NDdw=;
-	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
-	b=Ajcg/8L4izAZKa2mPe4A6mwD2xhNPSF6zD8jqYYYRNqfhpnanJCwPLkeDTtzMAAXY
-	 M7oUXZ6CZuH31IjVxAqM2gRnsWZITNKb55wlZ5JnD/DUCRDg3UdeAIrzeX0lNHjHAR
-	 wzgi3C8wJdIpBMqt7sc3STjd7C0uykM6U86/xrKMdBkv3A6gpbtO4hXjJ5l+TjHaLy
-	 e4DKSoCgdb1tzebEFm0O9AJWb9AqCOKWaWW3sVozalRIPGLkf5E1tw9aRE4zu/+akq
-	 X3FcajNE+AfhyfG4rrsgNdfZt/xVPEzBnwFe9tFjDbwwql6CH8YXjM30w46DcxQYCb
-	 8dZ4kaIUmww0Q==
-Date: Thu, 28 Jul 2022 10:20:53 -0700
-From: "Paul E. McKenney" <paulmck@kernel.org>
-To: Michel Lespinasse <michel@lespinasse.org>
-Cc: Peter Zijlstra <peterz@infradead.org>, rth@twiddle.net,
-	ink@jurassic.park.msu.ru, mattst88@gmail.com, vgupta@kernel.org,
-	linux@armlinux.org.uk, ulli.kroll@googlemail.com,
-	linus.walleij@linaro.org, shawnguo@kernel.org,
-	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de,
-	festevam@gmail.com, linux-imx@nxp.com, tony@atomide.com,
-	khilman@kernel.org, catalin.marinas@arm.com, will@kernel.org,
-	guoren@kernel.org, bcain@quicinc.com, chenhuacai@kernel.org,
-	kernel@xen0n.name, geert@linux-m68k.org, sammy@sammy.net,
-	monstr@monstr.eu, tsbogend@alpha.franken.de, dinguyen@kernel.org,
-	jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
-	shorne@gmail.com, James.Bottomley@HansenPartnership.com,
-	deller@gmx.de, mpe@ellerman.id.au, benh@kernel.crashing.org,
-	paulus@samba.org, paul.walmsley@sifive.com, palmer@dabbelt.com,
-	aou@eecs.berkeley.edu, hca@linux.ibm.com, gor@linux.ibm.com,
-	agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
-	svens@linux.ibm.com, ysato@users.sourceforge.jp, dalias@libc.org,
-	davem@davemloft.net, richard@nod.at,
-	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-	acme@kernel.org, mark.rutland@arm.com,
-	alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-	namhyung@kernel.org, jgross@suse.com, srivatsa@csail.mit.edu,
-	amakhalov@vmware.com, pv-drivers@vmware.com,
-	boris.ostrovsky@oracle.com, chris@zankel.net, jcmvbkbc@gmail.com,
-	rafael@kernel.org, lenb@kernel.org, pavel@ucw.cz,
-	gregkh@linuxfoundation.org, mturquette@baylibre.com,
-	sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org,
-	sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org,
-	anup@brainfault.org, thierry.reding@gmail.com, jonathanh@nvidia.com,
-	jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-	yury.norov@gmail.com, andriy.shevchenko@linux.intel.com,
-	linux@rasmusvillemoes.dk, rostedt@goodmis.org, pmladek@suse.com,
-	senozhatsky@chromium.org, john.ogness@linutronix.de,
-	frederic@kernel.org, quic_neeraju@quicinc.com,
-	josh@joshtriplett.org, mathieu.desnoyers@efficios.com,
-	jiangshanlai@gmail.com, joel@joelfernandes.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de,
-	bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org,
-	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-snps-arc@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
-	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
-	linux-ia64@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, openrisc@lists.librecores.org,
-	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org, linux-perf-users@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org,
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
-	rcu@vger.kernel.org, rh0@fb.com
-Subject: Re: [PATCH 04/36] cpuidle,intel_idle: Fix CPUIDLE_FLAG_IRQ_ENABLE
-Message-ID: <20220728172053.GA3607379@paulmck-ThinkPad-P17-Gen-1>
-Reply-To: paulmck@kernel.org
-References: <20220608142723.103523089@infradead.org>
- <20220608144516.172460444@infradead.org>
- <20220725194306.GA14746@lespinasse.org>
+X-Inumbo-ID: 80e5b8ba-0ea7-11ed-924f-1f966e50362f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=GSO0e+K/595xy9Bblk5pFyUK2CqoEV+q1TQVPsYLSZk=;
+        b=XyG+Uu2v7ec9cgbFi6RizyeUBw6R9gIRURjVrQjXfJmUFP8mv5VHBKBSQssjTHqYDo
+         ZkRFiq/DIm7dbIO0VJ4WXtfnAmLqx7lUQ9Nxl0rG0ycdGbzZ707FH5auak9yFpDowswf
+         I070SNNnnfB9DL5aZr3fhHvIhWGow3w04uKKDKBFMcKsZpRgSlQ/qpD2ljCs5IWNFGet
+         SZTlSPGycXimPM6mW5NvahZv1JDXDoPfd41csuoa5qHoA0IlTX/6LFoeMVMWBndDc1/y
+         lK9y6uuMgJBEHfaOzLWWRWGC73urB5USsBoFJJDXIpjiaNykbPJyWJjK60pY1MfBWExe
+         99iQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=GSO0e+K/595xy9Bblk5pFyUK2CqoEV+q1TQVPsYLSZk=;
+        b=ZwlTIoKTLKc7nrG2FpzLGwj1XNH5xfI9NfTXKv/A0b1/8MUBpTE7SQoS5E1iV7nPWm
+         4+5Jhj+0oVEc7Qq9ru8cy4JNCyY/BYG3UMKbAP9ilVEB0KYcuWKh8I4Ho9aKmoleApkI
+         rGOk7+NjlJd7UiftqHYMrRrQP8h23JdtFZ0E7jvAzyMnk3c8U98ZFbRWTBo43YTZXDcD
+         ulw2X0heiHqq7Xzg+DA7wxdYGxH4FNFSHci/vc/38TO+itDdrx9WDjjHF1ZeQ3YuOABT
+         Jc+C9Otdzf0iJAvL0WbeJNMVspGcMEWh4wlBy0NCeG2Jct+VA463VVrKc+A2cjdY+RWO
+         oDeQ==
+X-Gm-Message-State: AJIora80j0ryPD4KXemDdf+XSh8c2aFTMD01qAHHSsQ6uYOuGs4xFQaM
+	ow+Zu1UMhLvcepwNAPDP1SQ0tpDQD4lZ5ae7q7k=
+X-Google-Smtp-Source: AGRyM1si9Hsm9KLkrtmLWsEkTPmJF6TfVJs8WGCFRk+s/vbndn/gRzz98S+O+vLHJdO6MvLpQVtyCmgMGoxU1VSLBFI=
+X-Received: by 2002:a63:f74e:0:b0:41a:716c:bfc4 with SMTP id
+ f14-20020a63f74e000000b0041a716cbfc4mr157561pgk.14.1659034809655; Thu, 28 Jul
+ 2022 12:00:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220725194306.GA14746@lespinasse.org>
+References: <540d44a5-6966-a9d7-4e62-63ae845c6f62@epam.com>
+ <20220716163745.28712-1-olekstysh@gmail.com> <15aebc64-aa2d-235c-fec0-e83b6fde3113@xen.org>
+In-Reply-To: <15aebc64-aa2d-235c-fec0-e83b6fde3113@xen.org>
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+Date: Thu, 28 Jul 2022 21:59:58 +0300
+Message-ID: <CAPD2p-nmTadz=+vswTmJRXftUB00j_W_RtLybXA7=BNfdy6evw@mail.gmail.com>
+Subject: Re: [PATCH V11.1 1/3] libxl: Add support for Virtio disk configuration
+To: Julien Grall <julien@xen.org>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Wei Liu <wl@xen.org>, 
+	Anthony PERARD <anthony.perard@citrix.com>, George Dunlap <george.dunlap@citrix.com>, 
+	Nick Rosbrook <rosbrookn@gmail.com>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>
+Content-Type: multipart/alternative; boundary="0000000000007fe7db05e4e224c4"
 
-On Mon, Jul 25, 2022 at 12:43:06PM -0700, Michel Lespinasse wrote:
-> On Wed, Jun 08, 2022 at 04:27:27PM +0200, Peter Zijlstra wrote:
-> > Commit c227233ad64c ("intel_idle: enable interrupts before C1 on
-> > Xeons") wrecked intel_idle in two ways:
-> > 
-> >  - must not have tracing in idle functions
-> >  - must return with IRQs disabled
-> > 
-> > Additionally, it added a branch for no good reason.
-> > 
-> > Fixes: c227233ad64c ("intel_idle: enable interrupts before C1 on Xeons")
-> > Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> 
-> After this change was introduced, I am seeing "WARNING: suspicious RCU
-> usage" when booting a kernel with debug options compiled in. Please
-> see the attached dmesg output. The issue starts with commit 32d4fd5751ea
-> and is still present in v5.19-rc8.
-> 
-> I'm not sure, is this too late to fix or revert in v5.19 final ?
+--0000000000007fe7db05e4e224c4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I finally got a chance to take a quick look at this.
+=D1=87=D1=82, 28 =D0=B8=D1=8E=D0=BB. 2022 =D0=B3., 21:28 Julien Grall <juli=
+en@xen.org>:
 
-The rcu_eqs_exit() function is making a lockdep complaint about
-being invoked with interrupts enabled.  This function is called from
-rcu_idle_exit(), which is an expected code path from cpuidle_enter_state()
-via its call to rcu_idle_exit().  Except that rcu_idle_exit() disables
-interrupts before invoking rcu_eqs_exit().
+> Hi Oleksandr,
+>
 
-The only other call to rcu_idle_exit() does not disable interrupts,
-but it is via rcu_user_exit(), which would be a very odd choice for
-cpuidle_enter_state().
 
-It seems unlikely, but it might be that it is the use of local_irq_save()
-instead of raw_local_irq_save() within rcu_idle_exit() that is causing
-the trouble.  If this is the case, then the commit shown below would
-help.  Note that this commit removes the warning from lockdep, so it
-is necessary to build the kernel with CONFIG_RCU_EQS_DEBUG=y to enable
-equivalent debugging.
+Hello Julien
 
-Could you please try your test with the -rce commit shown below applied?
+(sorry for the possible format issues)
 
-							Thanx, Paul
 
-------------------------------------------------------------------------
+> On 16/07/2022 17:37, Oleksandr Tyshchenko wrote:
+> > Changes V10.1 -> V11:
+> >     - Anthony already gave his Reviewed-by, I dropped it due to the
+> changes
+> >     - George already gave his Acked-by, I dropped it due to the changes
+> >     - s/other/standalone for the backendtype
+>
+> As discussed with Andrew on IRC, the golang changes are autogenerated.
+> So I have kept George's acked-by and committed the series.
+>
 
-commit ed4ae5eff4b38797607cbdd80da394149110fb37
-Author: Paul E. McKenney <paulmck@kernel.org>
-Date:   Tue May 17 21:00:04 2022 -0700
 
-    rcu: Apply noinstr to rcu_idle_enter() and rcu_idle_exit()
-    
-    This commit applies the "noinstr" tag to the rcu_idle_enter() and
-    rcu_idle_exit() functions, which are invoked from portions of the idle
-    loop that cannot be instrumented.  These tags require reworking the
-    rcu_eqs_enter() and rcu_eqs_exit() functions that these two functions
-    invoke in order to cause them to use normal assertions rather than
-    lockdep.  In addition, within rcu_idle_exit(), the raw versions of
-    local_irq_save() and local_irq_restore() are used, again to avoid issues
-    with lockdep in uninstrumented code.
-    
-    This patch is based in part on an earlier patch by Jiri Olsa, discussions
-    with Peter Zijlstra and Frederic Weisbecker, earlier changes by Thomas
-    Gleixner, and off-list discussions with Yonghong Song.
-    
-    Link: https://lore.kernel.org/lkml/20220515203653.4039075-1-jolsa@kernel.org/
-    Reported-by: Jiri Olsa <jolsa@kernel.org>
-    Reported-by: Alexei Starovoitov <ast@kernel.org>
-    Reported-by: Andrii Nakryiko <andrii@kernel.org>
-    Signed-off-by: Paul E. McKenney <paulmck@kernel.org>
-    Reviewed-by: Yonghong Song <yhs@fb.com>
+Thank you very much!
 
-diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
-index c25ba442044a6..9a5edab5558c9 100644
---- a/kernel/rcu/tree.c
-+++ b/kernel/rcu/tree.c
-@@ -631,8 +631,8 @@ static noinstr void rcu_eqs_enter(bool user)
- 		return;
- 	}
- 
--	lockdep_assert_irqs_disabled();
- 	instrumentation_begin();
-+	lockdep_assert_irqs_disabled();
- 	trace_rcu_dyntick(TPS("Start"), rdp->dynticks_nesting, 0, atomic_read(&rdp->dynticks));
- 	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !user && !is_idle_task(current));
- 	rcu_preempt_deferred_qs(current);
-@@ -659,9 +659,9 @@ static noinstr void rcu_eqs_enter(bool user)
-  * If you add or remove a call to rcu_idle_enter(), be sure to test with
-  * CONFIG_RCU_EQS_DEBUG=y.
-  */
--void rcu_idle_enter(void)
-+void noinstr rcu_idle_enter(void)
- {
--	lockdep_assert_irqs_disabled();
-+	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !raw_irqs_disabled());
- 	rcu_eqs_enter(false);
- }
- EXPORT_SYMBOL_GPL(rcu_idle_enter);
-@@ -861,7 +861,7 @@ static void noinstr rcu_eqs_exit(bool user)
- 	struct rcu_data *rdp;
- 	long oldval;
- 
--	lockdep_assert_irqs_disabled();
-+	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !raw_irqs_disabled());
- 	rdp = this_cpu_ptr(&rcu_data);
- 	oldval = rdp->dynticks_nesting;
- 	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && oldval < 0);
-@@ -896,13 +896,13 @@ static void noinstr rcu_eqs_exit(bool user)
-  * If you add or remove a call to rcu_idle_exit(), be sure to test with
-  * CONFIG_RCU_EQS_DEBUG=y.
-  */
--void rcu_idle_exit(void)
-+void noinstr rcu_idle_exit(void)
- {
- 	unsigned long flags;
- 
--	local_irq_save(flags);
-+	raw_local_irq_save(flags);
- 	rcu_eqs_exit(false);
--	local_irq_restore(flags);
-+	raw_local_irq_restore(flags);
- }
- EXPORT_SYMBOL_GPL(rcu_idle_exit);
- 
+
+> Cheers,
+>
+> --
+> Julien Grall
+>
+
+--0000000000007fe7db05e4e224c4
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr" =
+class=3D"gmail_attr">=D1=87=D1=82, 28 =D0=B8=D1=8E=D0=BB. 2022 =D0=B3., 21:=
+28 Julien Grall &lt;<a href=3D"mailto:julien@xen.org">julien@xen.org</a>&gt=
+;:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
+rder-left:1px #ccc solid;padding-left:1ex">Hi Oleksandr,<br></blockquote></=
+div></div><div dir=3D"auto"><br></div><div dir=3D"auto"><br></div><div dir=
+=3D"auto">Hello Julien</div><div dir=3D"auto"><br></div><div dir=3D"auto">(=
+sorry for the possible format issues)</div><div dir=3D"auto"><br></div><div=
+ dir=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" =
+style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<br>
+On 16/07/2022 17:37, Oleksandr Tyshchenko wrote:<br>
+&gt; Changes V10.1 -&gt; V11:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0- Anthony already gave his Reviewed-by, I dropped i=
+t due to the changes<br>
+&gt;=C2=A0 =C2=A0 =C2=A0- George already gave his Acked-by, I dropped it du=
+e to the changes<br>
+&gt;=C2=A0 =C2=A0 =C2=A0- s/other/standalone for the backendtype<br>
+<br>
+As discussed with Andrew on IRC, the golang changes are autogenerated. <br>
+So I have kept George&#39;s acked-by and committed the series.<br></blockqu=
+ote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=3D=
+"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
+border-left:1px #ccc solid;padding-left:1ex"></blockquote></div></div><div =
+dir=3D"auto"><br></div><div dir=3D"auto">Thank you very much!</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquot=
+e class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc sol=
+id;padding-left:1ex">
+<br>
+Cheers,<br>
+<br>
+-- <br>
+Julien Grall<br>
+</blockquote></div></div></div>
+
+--0000000000007fe7db05e4e224c4--
 
