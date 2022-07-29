@@ -4,31 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B53F7C19F29
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Jul 2022 13:18:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.377454.610743 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 661D2C3F6B0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Jul 2022 13:27:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.377531.610766 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oHPsP-00053q-Ly; Fri, 29 Jul 2022 13:18:01 +0000
+	id 1oHQ10-000778-Tc; Fri, 29 Jul 2022 13:26:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 377454.610743; Fri, 29 Jul 2022 13:18:01 +0000
+Received: by outflank-mailman (output) from mailman id 377531.610766; Fri, 29 Jul 2022 13:26:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oHPsP-00053j-J6; Fri, 29 Jul 2022 13:18:01 +0000
-Received: by outflank-mailman (input) for mailman id 377454;
- Fri, 29 Jul 2022 10:25:05 +0000
+	id 1oHQ10-000771-QT; Fri, 29 Jul 2022 13:26:54 +0000
+Received: by outflank-mailman (input) for mailman id 377531;
+ Fri, 29 Jul 2022 13:26:53 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=atAJ=YC=lespinasse.org=michel@srs-se1.protection.inumbo.net>)
- id 1oHNB3-0006yM-0r
- for xen-devel@lists.xenproject.org; Fri, 29 Jul 2022 10:25:05 +0000
-Received: from server.lespinasse.org (unknown [63.205.204.226])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id b359c384-0f28-11ed-924f-1f966e50362f;
- Fri, 29 Jul 2022 12:25:01 +0200 (CEST)
-Received: by server.lespinasse.org (Postfix, from userid 1000)
- id 43C591608FB; Fri, 29 Jul 2022 03:24:58 -0700 (PDT)
+ <SRS0=8bg2=YC=citrix.com=prvs=2023e7475=anthony.perard@srs-se1.protection.inumbo.net>)
+ id 1oHQ0z-0006rA-9o
+ for xen-devel@lists.xenproject.org; Fri, 29 Jul 2022 13:26:53 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 1a3a013f-0f42-11ed-924f-1f966e50362f;
+ Fri, 29 Jul 2022 15:26:52 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -40,180 +38,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: b359c384-0f28-11ed-924f-1f966e50362f
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
- d=lespinasse.org; i=@lespinasse.org; q=dns/txt; s=srv-79-ed;
- t=1659090298; h=date : from : to : cc : subject : message-id :
- references : mime-version : content-type : in-reply-to : from;
- bh=a/XS8F6DJ0UncG2aNUIYHtQzj6v+HgUrBJ1uNti4iPo=;
- b=z07fAc3s82E8eDjOmWqCiQ8bXbav83TEx3/Re97NlSxxiCQo28PSqhP5HNIn+14JJNint
- RyzSM6g4CHMlWDtCg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lespinasse.org;
- i=@lespinasse.org; q=dns/txt; s=srv-79-rsa; t=1659090298; h=date :
- from : to : cc : subject : message-id : references : mime-version :
- content-type : in-reply-to : from;
- bh=a/XS8F6DJ0UncG2aNUIYHtQzj6v+HgUrBJ1uNti4iPo=;
- b=I1XE4PG3J6WdBxHBHPO8gz729jU9NwxFGePQBg2SGh03K5MaVR21Or0F1Ed2fJkedXwqn
- 73ZEg9HBg/VtqO2lKkpr4whjhup8i+ouV+MRlyl12YqkOIbBlxYxGShIJKbmEieaOBGjn22
- ZXDWImDNaRHLW7cNGx8eSPR5smKlm5X/Vadfwpk61igIRp4T13wJ8QuAfpZsGCdgjSHCAt3
- xICHC0gdRmgeZ4VsHAxcqkS8UkYtj/62Fy/MANXsihH037ZiFlqRtJ1IH4+gKYbMZ+SX1Jj
- 7eSPi+obGVy9GT10OfxqZ1++H06soXF8UFwZNT5FhqZM4eGuNqJqYx1H9gbg==
-Date: Fri, 29 Jul 2022 03:24:58 -0700
-From: Michel Lespinasse <michel@lespinasse.org>
-To: "Paul E. McKenney" <paulmck@kernel.org>
-Cc: Michel Lespinasse <michel@lespinasse.org>,
-	Peter Zijlstra <peterz@infradead.org>, rth@twiddle.net,
-	ink@jurassic.park.msu.ru, mattst88@gmail.com, vgupta@kernel.org,
-	linux@armlinux.org.uk, ulli.kroll@googlemail.com,
-	linus.walleij@linaro.org, shawnguo@kernel.org,
-	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de,
-	festevam@gmail.com, linux-imx@nxp.com, tony@atomide.com,
-	khilman@kernel.org, catalin.marinas@arm.com, will@kernel.org,
-	guoren@kernel.org, bcain@quicinc.com, chenhuacai@kernel.org,
-	kernel@xen0n.name, geert@linux-m68k.org, sammy@sammy.net,
-	monstr@monstr.eu, tsbogend@alpha.franken.de, dinguyen@kernel.org,
-	jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
-	shorne@gmail.com, James.Bottomley@HansenPartnership.com,
-	deller@gmx.de, mpe@ellerman.id.au, benh@kernel.crashing.org,
-	paulus@samba.org, paul.walmsley@sifive.com, palmer@dabbelt.com,
-	aou@eecs.berkeley.edu, hca@linux.ibm.com, gor@linux.ibm.com,
-	agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
-	svens@linux.ibm.com, ysato@users.sourceforge.jp, dalias@libc.org,
-	davem@davemloft.net, richard@nod.at,
-	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-	acme@kernel.org, mark.rutland@arm.com,
-	alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-	namhyung@kernel.org, jgross@suse.com, srivatsa@csail.mit.edu,
-	amakhalov@vmware.com, pv-drivers@vmware.com,
-	boris.ostrovsky@oracle.com, chris@zankel.net, jcmvbkbc@gmail.com,
-	rafael@kernel.org, lenb@kernel.org, pavel@ucw.cz,
-	gregkh@linuxfoundation.org, mturquette@baylibre.com,
-	sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org,
-	sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org,
-	anup@brainfault.org, thierry.reding@gmail.com, jonathanh@nvidia.com,
-	jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-	yury.norov@gmail.com, andriy.shevchenko@linux.intel.com,
-	linux@rasmusvillemoes.dk, rostedt@goodmis.org, pmladek@suse.com,
-	senozhatsky@chromium.org, john.ogness@linutronix.de,
-	frederic@kernel.org, quic_neeraju@quicinc.com,
-	josh@joshtriplett.org, mathieu.desnoyers@efficios.com,
-	jiangshanlai@gmail.com, joel@joelfernandes.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de,
-	bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org,
-	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-snps-arc@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
-	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
-	linux-ia64@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, openrisc@lists.librecores.org,
-	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org, linux-perf-users@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org,
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
-	rcu@vger.kernel.org, rh0@fb.com
-Subject: Re: [PATCH 04/36] cpuidle,intel_idle: Fix CPUIDLE_FLAG_IRQ_ENABLE
-Message-ID: <20220729102458.GA1695@lespinasse.org>
-References: <20220608142723.103523089@infradead.org>
- <20220608144516.172460444@infradead.org>
- <20220725194306.GA14746@lespinasse.org>
- <20220728172053.GA3607379@paulmck-ThinkPad-P17-Gen-1>
+X-Inumbo-ID: 1a3a013f-0f42-11ed-924f-1f966e50362f
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=citrix.com; s=securemail; t=1659101212;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=Xag00GhheHezUELouMZ36MTWxrrWM9y1zSsNJWcF1U8=;
+  b=PQ8hzeZh5GHEJBYiE3fkrEmK+7IiqOP8NWM3nfe2x8W3DjPET7Y0tvL3
+   olhXRCx4tRJ0m6a1jORLy2E9OS9581JvCcxD7i9ZpV2T0O8urp7dUiflo
+   N8hg4ib0UFdSn+gOOPpYnApB15VaUUlza2iEvZOgX65K6ZR8kbib/HfZm
+   g=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+X-SBRS: 2.7
+X-MesageID: 76933073
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.156.83
+X-Policy: $RELAYED
+IronPort-Data: =?us-ascii?q?A9a23=3AdIrv+6KjlqATiKahFE//H55y3J0nRxNeGxL0i?=
+ =?us-ascii?q?kilI80cnZWQUeEPdw9qPMoIMlI7Zkq1ybYU6pjk1CcKHzt1ght/QUK0NyA2K?=
+ =?us-ascii?q?EpqG9lA2JNDUBPUje0YwoEHz3Ja7MxMpXWQ7QQlt0yKgMcZUAcEg5gMNkkTO?=
+ =?us-ascii?q?fD2cQK/E294acydWC6odUkRQ/6V6RiSbpLfIHHDY9r0CF3pauzThPh+POmYy?=
+ =?us-ascii?q?oL5TN3WsLCy6cAYIIKHz6GVwVC15dVudqtm3w1GOuFK3kxO7cBmMHg54luXF?=
+ =?us-ascii?q?V7Ybo76rfLd8no1rUnRPXspg+z10KiapIFWAi5fHJfICtd2EfkNXlqk9PtEz?=
+ =?us-ascii?q?fYLQWVg+OhkPAB2lHX2+aL8nJxcKBKR6GgactTX3VRAqOxZKHZrR6QVdzpFD?=
+ =?us-ascii?q?Rn/JKV1m5zIWbSP98WdJHAtfibcOUOQRl9fYwSaGfCkXvD2yrfratdekFnU0?=
+ =?us-ascii?q?O8CHrKJX+1AKbQfV5xc5zEAPeEVo3+EzPSUXqQWmFHVq8T8Ns5NcgNJbvRJp?=
+ =?us-ascii?q?fUFvPmszQc/UAJV2d/2lFxnOcObWMif0f+Bo4QHBzC7sStI4rDC4VnjM/MsK?=
+ =?us-ascii?q?uJbA/tgJd1YpwnBc+wrKnSh59QAtI0O6FbZ3qK8KGmsGfYcfbZa1VuR5Ddtn?=
+ =?us-ascii?q?TcUqdxj1w9uvjGW1n92yrxiUGvwazgyzZsAaVXyvDHPRFRFL61iZx9Tht5Oy?=
+ =?us-ascii?q?OS5Z0ou74xClZpfG7QOmMCZ5RYV7SICpP8yhG38HDEb3VGQfUXoPz0FuScGy?=
+ =?us-ascii?q?OL59fJIM9294UyjKanKbcXkKxLKsTH2U5cq4zG0YaFFbGGQm8LJ0v/XSjPAV?=
+ =?us-ascii?q?yb4Oo6gZp8DBnbKMlNjT2nZ5wU9AgxDgqmuTzcY53xsahir7vx9ckrR+k6Do?=
+ =?us-ascii?q?xSMEcd1WJajeSI0XOso1rTnbKLGUIGvnCcBpkxuTuWTz0Wwn8qMQ6aiGZSw2?=
+ =?us-ascii?q?0Qspq/kUOIzhsocWbx48lTc7V5hhFr7f6VeE4n3AAcmGNa/V3aqL0JO1sEfn?=
+ =?us-ascii?q?uJrXhvUA6u8cOeQM5D4E0eCTnaLWEHJQ9mWK7VFcLtJsxrOg+0NmcXIQk+Tf?=
+ =?us-ascii?q?7ZmSEvWqNKEqbe4RECbPbjU+NQhlQLKMX2YfRPnhS4LJZDflZP6PRy6JhfMa?=
+ =?us-ascii?q?YwC1gO02R4F1m/7RBU+t1k+U1E2BnbmKmbclL1kwBA89KBgfypqeBKBDqumF?=
+ =?us-ascii?q?Rh4VD5l46YK/ViFQTCd/muD0MVN10D8EbPplA2K4nsivseSBLpavASwH8N9t?=
+ =?us-ascii?q?UevErGaZtBAAffwGDH7yQGiGigkfM3ZutesCbGoVapxdD9a2idmrpG7Lt1z5?=
+ =?us-ascii?q?h8gAMpi+DkJhetLLMO1TEmtt7CuTt79v4xKqiZsdFL1LsQ1T28BRpZm39vhy?=
+ =?us-ascii?q?O5Xh+yJN2Hdc7EiB7BT6WWwpBqtEKniOPGrgPFL9MUtmt3Y6VK2M29wRjJ4U?=
+ =?us-ascii?q?0yd9Pefsdxe2+bTa5R6nvxL5AkIQWFGsIx/MwYNJRI5tPLoisZvWD8wcQXF6?=
+ =?us-ascii?q?QcyJKwzBtCpdHp3RpyknTGV0UJW1WVCjQfyr2VSmZOgdAfZbiF30KkCyhZjN?=
+ =?us-ascii?q?Vlj6GwhVRylNv43kswKnKhilLfwAsOvKd8FXKtx6mN9lj65kdA7exq9mSunp?=
+ =?us-ascii?q?G5wNuaKRdu8aFe/UWTL9KIsc909Hko6HEUyBjB5pNEA0Z3ZQXH7sVNLJOGj5?=
+ =?us-ascii?q?T8ryej2OmTH4IvXvdF3+lFnCxRFKZ0jU34GFlsg6FPP/2ghQy2ZeD+cl1L8v?=
+ =?us-ascii?q?PDhbuj2haNwOfa6DfwW26tOiM4sv8sdCnaX/hg+///WiH7kz5cVNrD+xr9yK?=
+ =?us-ascii?q?ZOxKg6n9fqAYbS25A6hYaNFP9Hk80jU/2zuZeVWwlg+gk1qED15RmPSlDEgs?=
+ =?us-ascii?q?/yZQrIxcWU6Y1JdPt9jIldkiLxfW73q2U68prKLt3pa7YP3uIzB9USu+4Z0E?=
+ =?us-ascii?q?66vQzq81+jtTsYcbyRdqXoX0gzNFNNJcdHJ2KA6CgHZNN+IETeHnCCrLmFJe?=
+ =?us-ascii?q?5bQI+jWpJmpORQbU7NaHyxjYNlUA9IOVUBa/2G+DjaEQaFVJYVTAw2+xHuma?=
+ =?us-ascii?q?4lh/Pl+/34+yZkvxRnUn6CDnYvpY9rb0+FkJb2THM6I7x/SYRbBl/Zk1w/bY?=
+ =?us-ascii?q?CzgT7oVGTxXjJICPpXalL7m5hralhYWTPFnJu7bgsL3fLGiOSoy3B3oQiQuZ?=
+ =?us-ascii?q?J5VJ3ZkGHWswnvyC1rn/y8vv2M+LTVr21iN/IwO5r3exsI527WoTfJW/p15+?=
+ =?us-ascii?q?IB0FshXe+ihMs+UxL+PLiBkDLBS8BncdqpGuty37+z4HJ+myPAXA78qeAAHx?=
+ =?us-ascii?q?m0/HRwzKD4y+3pKGI4d7GWL+hQ6ceiM4jBFuCpU2ClleDCtn/sn/0/78W/IO?=
+ =?us-ascii?q?8XPE3KhW895dGRhS8XSa/Ou97UJBV4WC1TJxWIT/+vzEVFwkUHtW4bgH45so?=
+ =?us-ascii?q?EDTBbZrVAtGW7qe3ycGbH7bdWFGZYTAJmbu3AH1pN2gAMRCVT1/+vcQf0tKS?=
+ =?us-ascii?q?aEw7W/iJcOFVX09jTARq6alGE2nLZKKTKpV6ATwm+hJMzV/DMEMwwWF/w6N7?=
+ =?us-ascii?q?OFP6MbejZV3KimGzhK78tuuOZaiJ3oHbeuINMqpsT8jnewG6NbAedGINA5BN?=
+ =?us-ascii?q?ueqWz5S0FAjEfuJ4nl1ybLsrCUoHppPAbZy/zbiVkefFGGdWacQD4wZOtdIv?=
+ =?us-ascii?q?ClT5LlJlKh8xnFeL/FPFJ7oaxRtE/do8lO+RArqI5YsEesVKmTaOOMGpWi6o?=
+ =?us-ascii?q?n0q3YOnuaShQcll50ExwUqKzl9gQL2bIXGNBEPJ5kH1f4S5yPJRzz196EUGo?=
+ =?us-ascii?q?X0knfh0yfU6k3FepGO0Nh6fsdTD4nvUlirBTFVf4NoU/M2L1w=3D=3D?=
+X-IronPort-AV: E=Sophos;i="5.93,201,1654574400"; 
+   d="scan'208";a="76933073"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Juergen Gross <jgross@suse.com>, Wei Liu <wl@xen.org>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Roger Pau
+ Monne" <roger.pau@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [XEN PATCH stable-4.16] tools/libxl: env variable to signal whether disk/nic backend is trusted
+Date: Fri, 29 Jul 2022 14:26:40 +0100
+Message-ID: <20220729132641.21221-2-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220729132641.21221-1-anthony.perard@citrix.com>
+References: <20220729132641.21221-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20220728172053.GA3607379@paulmck-ThinkPad-P17-Gen-1>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jul 28, 2022 at 10:20:53AM -0700, Paul E. McKenney wrote:
-> On Mon, Jul 25, 2022 at 12:43:06PM -0700, Michel Lespinasse wrote:
-> > On Wed, Jun 08, 2022 at 04:27:27PM +0200, Peter Zijlstra wrote:
-> > > Commit c227233ad64c ("intel_idle: enable interrupts before C1 on
-> > > Xeons") wrecked intel_idle in two ways:
-> > > 
-> > >  - must not have tracing in idle functions
-> > >  - must return with IRQs disabled
-> > > 
-> > > Additionally, it added a branch for no good reason.
-> > > 
-> > > Fixes: c227233ad64c ("intel_idle: enable interrupts before C1 on Xeons")
-> > > Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-> > 
-> > After this change was introduced, I am seeing "WARNING: suspicious RCU
-> > usage" when booting a kernel with debug options compiled in. Please
-> > see the attached dmesg output. The issue starts with commit 32d4fd5751ea
-> > and is still present in v5.19-rc8.
-> > 
-> > I'm not sure, is this too late to fix or revert in v5.19 final ?
-> 
-> I finally got a chance to take a quick look at this.
-> 
-> The rcu_eqs_exit() function is making a lockdep complaint about
-> being invoked with interrupts enabled.  This function is called from
-> rcu_idle_exit(), which is an expected code path from cpuidle_enter_state()
-> via its call to rcu_idle_exit().  Except that rcu_idle_exit() disables
-> interrupts before invoking rcu_eqs_exit().
-> 
-> The only other call to rcu_idle_exit() does not disable interrupts,
-> but it is via rcu_user_exit(), which would be a very odd choice for
-> cpuidle_enter_state().
-> 
-> It seems unlikely, but it might be that it is the use of local_irq_save()
-> instead of raw_local_irq_save() within rcu_idle_exit() that is causing
-> the trouble.  If this is the case, then the commit shown below would
-> help.  Note that this commit removes the warning from lockdep, so it
-> is necessary to build the kernel with CONFIG_RCU_EQS_DEBUG=y to enable
-> equivalent debugging.
-> 
-> Could you please try your test with the -rce commit shown below applied?
+From: Roger Pau Monne <roger.pau@citrix.com>
 
-Thanks for looking into it.
+Introduce support in libxl for fetching the default backend trusted
+option for disk and nic devices.
 
-After checking out Peter's commit 32d4fd5751ea,
-cherry picking your commit ed4ae5eff4b3,
-and setting CONFIG_RCU_EQS_DEBUG=y in addition of my usual debug config,
-I am now seeing this a few seconds into the boot:
+Users can set LIBXL_{DISK,NIC}_BACKEND_UNTRUSTED environment variable
+to notify libxl of whether the backends for disk and nic devices
+should be trusted.  Such information is passed into the frontend so it
+can take the appropriate measures.
 
-[    3.010650] ------------[ cut here ]------------
-[    3.010651] WARNING: CPU: 0 PID: 0 at kernel/sched/clock.c:397 sched_clock_tick+0x27/0x60
-[    3.010657] Modules linked in:
-[    3.010660] CPU: 0 PID: 0 Comm: swapper/0 Not tainted 5.19.0-rc1-test-00005-g1be22fea0611 #1
-[    3.010662] Hardware name: LENOVO 30BFS44D00/1036, BIOS S03KT51A 01/17/2022
-[    3.010663] RIP: 0010:sched_clock_tick+0x27/0x60
-[    3.010665] Code: 1f 40 00 53 eb 02 5b c3 66 90 8b 05 2f c3 40 01 85 c0 74 18 65 8b 05 60 88 8f 4e 85 c0 75 0d 65 8b 05 a9 85 8f 4e 85 c0 74 02 <0f> 0b e8 e2 6c 89 00 48 c7 c3 40 d5 02 00
- 89 c0 48 03 1c c5 c0 98
-[    3.010667] RSP: 0000:ffffffffb2803e28 EFLAGS: 00010002
-[    3.010670] RAX: 0000000000000001 RBX: ffffc8ce7fa07060 RCX: 0000000000000001
-[    3.010671] RDX: 0000000000000000 RSI: ffffffffb268dd21 RDI: ffffffffb269ab13
-[    3.010673] RBP: 0000000000000001 R08: ffffffffffc300d5 R09: 000000000002be80
-[    3.010674] R10: 000003625b53183a R11: ffffa012b802b7a4 R12: ffffffffb2aa9e80
-[    3.010675] R13: ffffffffb2aa9e00 R14: 0000000000000001 R15: 0000000000000000
-[    3.010677] FS:  0000000000000000(0000) GS:ffffa012b8000000(0000) knlGS:0000000000000000
-[    3.010678] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    3.010680] CR2: ffffa012f81ff000 CR3: 0000000c99612001 CR4: 00000000003706f0
-[    3.010681] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-[    3.010682] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-[    3.010683] Call Trace:
-[    3.010685]  <TASK>
-[    3.010688]  cpuidle_enter_state+0xb7/0x4b0
-[    3.010694]  cpuidle_enter+0x29/0x40
-[    3.010697]  do_idle+0x1d4/0x210
-[    3.010702]  cpu_startup_entry+0x19/0x20
-[    3.010704]  rest_init+0x117/0x1a0
-[    3.010708]  arch_call_rest_init+0xa/0x10
-[    3.010711]  start_kernel+0x6d8/0x6ff
-[    3.010716]  secondary_startup_64_no_verify+0xce/0xdb
-[    3.010728]  </TASK>
-[    3.010729] irq event stamp: 44179
-[    3.010730] hardirqs last  enabled at (44179): [<ffffffffb2000ccb>] asm_sysvec_apic_timer_interrupt+0x1b/0x20
-[    3.010734] hardirqs last disabled at (44177): [<ffffffffb22003f0>] __do_softirq+0x3f0/0x498
-[    3.010736] softirqs last  enabled at (44178): [<ffffffffb2200332>] __do_softirq+0x332/0x498
-[    3.010738] softirqs last disabled at (44171): [<ffffffffb16c760b>] irq_exit_rcu+0xab/0xf0
-[    3.010741] ---[ end trace 0000000000000000 ]---
+This is part of XSA-403.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+changes:
+- envvar now upper case
+- documentation in xl man page
+- value "0" also mean "trusted"
+---
+ docs/man/xl.1.pod.in          | 18 ++++++++++++++++++
+ tools/libs/light/libxl_disk.c |  5 +++++
+ tools/libs/light/libxl_nic.c  |  7 +++++++
+ 3 files changed, 30 insertions(+)
+
+diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
+index e2176bd696..45e1430aeb 100644
+--- a/docs/man/xl.1.pod.in
++++ b/docs/man/xl.1.pod.in
+@@ -1946,6 +1946,24 @@ shows the decimal value. For non-linear mode, it shows hexadecimal value.
+ 
+ =back
+ 
++=head1 ENVIRONMENT
++
++=over 4
++
++=item B<LIBXL_DISK_BACKEND_UNTRUSTED>
++
++Set this environment variable to "1" to suggest to the guest that the disk
++backend shouldn't be trusted. If the variable is absent or set to "0", the
++backend will be trusted.
++
++=item B<LIBXL_NIC_BACKEND_UNTRUSTED>
++
++Set this environment variable to "1" to suggest to the guest that the network
++backend shouldn't be trusted. If the variable is absent or set to "0", the
++backend will be trusted.
++
++=back
++
+ =head1 IGNORED FOR COMPATIBILITY WITH XM
+ 
+ xl is mostly command-line compatible with the old xm utility used with
+diff --git a/tools/libs/light/libxl_disk.c b/tools/libs/light/libxl_disk.c
+index 93936d0dd0..67d1cc1857 100644
+--- a/tools/libs/light/libxl_disk.c
++++ b/tools/libs/light/libxl_disk.c
+@@ -246,6 +246,7 @@ static void device_disk_add(libxl__egc *egc, uint32_t domid,
+     libxl_domain_config d_config;
+     libxl_device_disk disk_saved;
+     libxl__flock *lock = NULL;
++    const char *envvar;
+ 
+     libxl_domain_config_init(&d_config);
+     libxl_device_disk_init(&disk_saved);
+@@ -395,6 +396,10 @@ static void device_disk_add(libxl__egc *egc, uint32_t domid,
+         flexarray_append(front, GCSPRINTF("%d", device->devid));
+         flexarray_append(front, "device-type");
+         flexarray_append(front, disk->is_cdrom ? "cdrom" : "disk");
++        flexarray_append(front, "trusted");
++        envvar = getenv("LIBXL_DISK_BACKEND_UNTRUSTED");
++        /* Set "trusted=1" if envvar missing or is "0". */
++        flexarray_append(front, !envvar || !strcmp("0", envvar) ? "1" : "0");
+ 
+         /*
+          * Old PV kernel disk frontends before 2.6.26 rely on tool stack to
+diff --git a/tools/libs/light/libxl_nic.c b/tools/libs/light/libxl_nic.c
+index 0b9e70c9d1..f87890d1d6 100644
+--- a/tools/libs/light/libxl_nic.c
++++ b/tools/libs/light/libxl_nic.c
+@@ -132,6 +132,8 @@ static int libxl__set_xenstore_nic(libxl__gc *gc, uint32_t domid,
+                                    flexarray_t *back, flexarray_t *front,
+                                    flexarray_t *ro_front)
+ {
++    const char *envvar;
++
+     flexarray_grow(back, 2);
+ 
+     if (nic->script)
+@@ -255,6 +257,11 @@ static int libxl__set_xenstore_nic(libxl__gc *gc, uint32_t domid,
+     flexarray_append(back, "hotplug-status");
+     flexarray_append(back, "");
+ 
++    flexarray_append(front, "trusted");
++    envvar = getenv("LIBXL_NIC_BACKEND_UNTRUSTED");
++    /* Set "trusted=1" if envvar missing or is "0". */
++    flexarray_append(front, !envvar || !strcmp("0", envvar) ? "1" : "0");
++
+     return 0;
+ }
+ 
+-- 
+Anthony PERARD
+
 
