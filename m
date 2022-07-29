@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15BAC19F2D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 Jul 2022 17:54:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.377691.611019 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDA60C19F2A
+	for <xen-devel@archiver.kernel.org>; Fri, 29 Jul 2022 17:54:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.377688.610996 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oHUBn-0007jt-2O; Fri, 29 Jul 2022 17:54:19 +0000
+	id 1oHUBi-00076l-Fc; Fri, 29 Jul 2022 17:54:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 377691.611019; Fri, 29 Jul 2022 17:54:19 +0000
+Received: by outflank-mailman (output) from mailman id 377688.610996; Fri, 29 Jul 2022 17:54:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oHUBm-0007jh-Uy; Fri, 29 Jul 2022 17:54:18 +0000
-Received: by outflank-mailman (input) for mailman id 377691;
- Fri, 29 Jul 2022 17:54:17 +0000
+	id 1oHUBi-00076c-Bx; Fri, 29 Jul 2022 17:54:14 +0000
+Received: by outflank-mailman (input) for mailman id 377688;
+ Fri, 29 Jul 2022 17:54:13 +0000
 Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
  helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=UihI=YC=citrix.com=prvs=202bfa127=edvin.torok@srs-se1.protection.inumbo.net>)
- id 1oHUBl-0006a9-Bo
- for xen-devel@lists.xenproject.org; Fri, 29 Jul 2022 17:54:17 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id 75963896-0f67-11ed-924f-1f966e50362f;
- Fri, 29 Jul 2022 19:54:16 +0200 (CEST)
+ id 1oHUBg-0006a9-SJ
+ for xen-devel@lists.xenproject.org; Fri, 29 Jul 2022 17:54:12 +0000
+Received: from esa2.hc3370-68.iphmx.com (esa2.hc3370-68.iphmx.com
+ [216.71.145.153]) by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 73981336-0f67-11ed-924f-1f966e50362f;
+ Fri, 29 Jul 2022 19:54:11 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,51 +38,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 75963896-0f67-11ed-924f-1f966e50362f
+X-Inumbo-ID: 73981336-0f67-11ed-924f-1f966e50362f
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1659117256;
+  d=citrix.com; s=securemail; t=1659117251;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version:content-transfer-encoding;
-  bh=RkbRUEdOWEaCHa9+/Ptg/amm9wD5Jpr8o1Ls9yYeJ4s=;
-  b=gN5sn3moo+oRFf86iejqDq7FlUjbatC2OJyxQ1g0DRDlFXogVjcZB1ws
-   pMj5OLQg39fqcGR0yHAiNuSSO2kJHKXPw6VgmyHi/Rcr/UjJGINKO1BKN
-   eFj68MGpwU3v3KF6QoF71s3ZDl04OGDQs05d0cv6IY0buWEamcGJZliDT
-   A=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
+  bh=YsqAUruZxEJZb5m63knmpMxcbbh9Lwsahf6qP5J6SRg=;
+  b=csiKeO3Qi3BK7huzdBDZRIfrD21iNnMzO0rF22E5T++Ui8ZVT9tRzwBy
+   y2nSUVUj/bWBsuvmzpY5e5xEqx9ruzhBXOGENRAzIEbPH54lyANAungxW
+   sSjncoCZq4hIek7L3zkruR+dSzBr9Z67/UBY0Uuw5VOA/MLvOxrYBl9t4
+   M=;
+Authentication-Results: esa2.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
 X-SBRS: 2.7
-X-MesageID: 77388875
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 76954909
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.156.83
 X-Policy: $RELAYED
-IronPort-Data: A9a23:CWTGF6ooLySU/BLxNlG4Siz64opeBmJ7ZRIvgKrLsJaIsI4StFCzt
- garIBmBb/aPZWfzftgjbYSyp04G6sSDmIJnGQdppSk2EXgU+JuZCYyVIHmrMnLJJKUvbq7GA
- +byyDXkBJppJpMJjk71atANlVEliefSAOKU5NfsYkhZXRVjRDoqlSVtkus4hp8AqdWiCkaGt
- MiaT/f3YTdJ4BYpdDNPg06/gEk35q6q52lJ5gZWic1j5zcyqVFEVPrzGonpR5fIatE8NvK3Q
- e/F0Ia48gvxl/v6Ior4+lpTWhRiro/6ZWBiuFIPM0SRqkEqShgJ+rQ6LJIhhXJ/0F1lqTzTJ
- OJl7vRcQS9xVkHFdX90vxNwS0mSNoUekFPLzOTWXWV+ACQqflO1q8iCAn3aMqU80PhLMGYV9
- MdBLS4ucFOOiPKz4rmSH7wEasQLdKEHPasas3BkizrYEewnUdbIRKCiCd1whWlqwJoURLCHO
- pRfOWEHgBfoOnWjPn8aBIw/mqG0gWP4cBVTqU6PpLpx6G/WpOB0+Oeya4qFKoPXLSlTtkiZn
- Vr50UrDOCwXLNGW7TGI9ky8j/CayEsXX6pNTeblp5aGmma7ymUNBTUMWFC8oP3/jVSxM/pAL
- 2QE9yxoqrI9nGS7Q9+4UxCmrXqsuh8HR8EWA+A88BuKyKff/0CeHGdsc9JaQIV47olsH2Vsj
- wLX2YOybdByjFGLYVa36IulqmizAnEQM0wcJiILXQ4n6PC29enfkSnzosZf/L+d14OoSGmtk
- m3S/UDSlJ1I05dVivzTEUTvxmv1+8OXFlNdChD/BDrN0+9vWGKyi2VEA3D/5O0IEouWR0LpU
- JMsy5nHt7Bm4X1geUWwrAQx8FKBva/t3MX02wIHInXY323FF4SfVY5R+ipiA0xiL9wJfzTkC
- GeK514AvMQIZyv2MvUoC25UNyjN5fG6fekJq9iONoYeCnSPXFTvEN5Sib64gDm2zRlEfVAXM
- paHa8e8ZUsn5VBc5GPvH481jO50rh3SMEuJGvgXOTz7jufFDJNUIJ9ZWGazghcRtv/d+VWNq
- IoCXyZIoj0GONDDjuDs2dZ7BTg3wbITXPgad+Q/mja/Hzdb
-IronPort-HdrOrdr: A9a23:BZPhpqzw6gv8Rot2yYapKrPwFL1zdoMgy1knxilNoRw8SKKlfq
- eV7Y0mPH7P+VAssR4b+exoVJPtfZqYz+8R3WBzB8bEYOCFghrKEGgK1+KLqFeMJ8S9zJ846U
- 4JSdkHNDSaNzlHZKjBjzVQa+xQouW6zA==
+IronPort-Data: =?us-ascii?q?A9a23=3AFxXJPawBzM7eICQM0pF6t4n5zX0HO/c/ZkZSj?=
+ =?us-ascii?q?0bt7gibmJ9p5j4zwXa+PPA8n6MSOj+oBzLS1YKs1foezaYk266aquEDHqvKj?=
+ =?us-ascii?q?qCfOsM6bLDre/KbNWdY6s4SBA5s+mKOzHkOM/ISFHkvY9UAfsMjU7+bXqUrz?=
+ =?us-ascii?q?JLSLOobNlPUVXVjmdP4dYsj+QTJro8s6wH8SPKjhKP/YcDZk/OMio2BbITP5?=
+ =?us-ascii?q?Sk/mVEVEC/+6spRb7BO+yISBg7gNFo9fF4k303rZYrP0QGJb7w/GSNHejqED?=
+ =?us-ascii?q?sOBjtxvSfUyR5ARWgdXeWV3FBaoO3SsojjwVn74Akjg7VDFHt7otLIq4LLWr?=
+ =?us-ascii?q?N6NnvAWNCzNtmH6yy2SQu3grTMhNJLPI6Izdr16gWc34e9VdK2K9LgeEuOl4?=
+ =?us-ascii?q?GZ5WWYZCoi+TUjAx/JGPH+cWD15qx2vw0c598Cu+viJjz2YCMAOPdCtPLKcu?=
+ =?us-ascii?q?p8e2HXIjRioyrACeSWohFQXNNjQFnCuaTnwR8dBnuRRuio2HAQoVRwtaDD0O?=
+ =?us-ascii?q?URJcGGl7vRdiWg9fGpp1wPGN6MpnDfpfE/IB20JBP9OBHmroLfYyWeGG7zYC?=
+ =?us-ascii?q?BNHn3eYGDdQALzSkTy9kS/uAdFAodWgePyLBXQe7yBmktTgTlZjbGPnRz0gP?=
+ =?us-ascii?q?p19xduFE8kyxkMrSVKOWUK/vee/yekHhEa9Ob9Gf8fGg6cbo+5/iAs4Skg/y?=
+ =?us-ascii?q?AUUXdtmDCWwAxLkRWRwYdYy9ozzj9+rB0f2GFwYXDuXliuH9Q+QgBUnFYOUU?=
+ =?us-ascii?q?qlBFJIeSzQcMY90r56TctOM/YK8r/kQaro5YCKeyrTDitMy1lxRR1j2EN1+j?=
+ =?us-ascii?q?gU7u2d4mvnasCpWMvOeWdh1v/WUv74XKHkLE4fCTcqvVK3BZW9RPPhD/mvWA?=
+ =?us-ascii?q?6Qf9ihRhgeXotRkpacgwqcXT5aJa7bssCOzV/WlFUgzQuiJ28zyUFmcxmz4o?=
+ =?us-ascii?q?O1NifmzVivdJCz9DFP29c9pFRYW6N7Xwe6d7vu7q9T4Iy8zJqe9qg1dooGbl?=
+ =?us-ascii?q?W0hXuGZozhqjADDB9i3TTVm3q7lu60ghVMCU8XBVse6dgD2t15zocwtNz4xM?=
+ =?us-ascii?q?YtFTNfpj/N+ZycDmqzp2+e38F5w/eG7b9IrPOgE1IMliP169Qi0KA9RZPUEe?=
+ =?us-ascii?q?7kYCX6q9gnj1KOQyINCmhthEwnCDNstzggbKejBflewiF9a3MhmKKE9hO5og?=
+ =?us-ascii?q?yTvCiWw436pKs8FTB3SrOpyrag69lFO05JZX2TDizkkoTyMAP7JMwQ9zIlJH?=
+ =?us-ascii?q?doaclgtTWRX6GDvFK8/+3R+MttnM7ezZBi9YkQJZt6VRxf+YuIUzRVjvCzEf?=
+ =?us-ascii?q?px4HBEdi1NYRIsEWqPPD29Q6sF3t68gbHAiFiSwsv+rMjAmrs3EnLGvJkXwB?=
+ =?us-ascii?q?ijPLXEkpWaIGdioh7B3NS/BZd481N/S6jctN6WdVp2wVHcT9cuQ1Kcb1TG9v?=
+ =?us-ascii?q?+z/mnwvXvB8D4se0sp5NbtaZxXGfCF9M+3+TaIjLDCMy+qAwiR2hiIlHByze?=
+ =?us-ascii?q?bq7ryODLonhLuEBs5kBGcN9hucVrqDelGdmnA3EfKQqFkUP8WxscT5i3M5fn?=
+ =?us-ascii?q?rky7x2I/aJwLz1rlPkOv2JFlBa0rXZPMKFRPlt4ZcW63OEEg4SrEv2vyiGQ2?=
+ =?us-ascii?q?rG/cbtw1QGuFG2Bqratc9jv2GnctgtE3eLIdVEE444P/j77nDfW2V5p6c2n9?=
+ =?us-ascii?q?7hSij7N6AFwFZlfOXLC/pSJtQwOsTVCX0rlhNzowWeiyQzbUFS0eJpo6YPN8?=
+ =?us-ascii?q?vGdqA+/Mn86OHMQTKx6EyqBrNZIU/zfKerQw5IwQKJbejFpDtQ7gCUqV3eJ7?=
+ =?us-ascii?q?irjqN5vaNES26vwawBGid0FvNOyQVJOvDnuaaetC5UR9jXwlcxM34xnZVmbU?=
+ =?us-ascii?q?OTTN5TtzoAcGtE2J2uNLY1WwYra0ZxAuVatbl5x5k/myEFyWsnYeaSbe79Ar?=
+ =?us-ascii?q?0N5j4s8hzRB2LEulgbGTqGqtNxL9PRFDbf4pWk0X2dY/ddRkti0jBdjd4gez?=
+ =?us-ascii?q?lJXFCZerst/RA5sZ434r3yLYVDK+dXiks3v3W2omjYQ2+R2lcpTHl6DCVKqK?=
+ =?us-ascii?q?NgifenREYzc+klASUeo6iWtLAcMlinvc26ZHWnuvu2e6QlmDxIGoTToqFoBb?=
+ =?us-ascii?q?DNsPo5pVxQbRQYPhBVXz7Z07t2f4f0W7oL9ffCjYmeJQo9rjTvpp7ZfuJmxs?=
+ =?us-ascii?q?GhASa5YY3CHieSCaINgW+T8l3LGhGfMNtKgQt68ZOIqulAmrbySx1V7dJ8mI?=
+ =?us-ascii?q?WZEAn8VUx7I5MzosyOD45h8uuDNbYGXr2QAGVtzXTdvR6WNiuAGS9co53jXm?=
+ =?us-ascii?q?MhV6bWrj9OJD1vaMUmMsxtxwbEFQqb3C7yva8Mk8PL2W0hUnE9Q5+ZDmCkRj?=
+ =?us-ascii?q?/jLxmZa0WFsD9RfONd8a6wfTxRGs/m4iYgSEn8pRKi/44wXhJU/jxRvaltMP?=
+ =?us-ascii?q?oyVgYe/YO3tZG3XoPGK+wAI+ir33oRb+7towEfPcBMM6P750lZSVNvBZ4jJS?=
+ =?us-ascii?q?k0cMiDKBqeTaIek3TmCwHvtoR4CdrPj0D+5sDfEIixf1r3PWkqAkcTqKS4Jo?=
+ =?us-ascii?q?gNLkyagnvPfrWUKNyy/TIeq5d/hVEPwT4A3KcsDFvb+EWuHMlmVNjJNQSy2F?=
+ =?us-ascii?q?qTaMnTZazeVsAKlYH9VgAAljGMBiNJEY0iPbcLrw3k0cLtc8FUVuDb05y0GA?=
+ =?us-ascii?q?FCHwDKWouSBN3kqp5WEXPc8Nr7ObtOzp+EhvKFB32wk9rH1h1bUMHtJdIBLV?=
+ =?us-ascii?q?lMqrK6Xt863KErEZqkoojaR8oFHZy5hq8cP3z1lQVDCOOmylyDtQA=3D=3D?=
 X-IronPort-AV: E=Sophos;i="5.93,201,1654574400"; 
-   d="scan'208";a="77388875"
+   d="scan'208";a="76954909"
 From: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Wei Liu
-	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Christian Lindig
-	<christian.lindig@citrix.com>, David Scott <dave@recoil.org>
-Subject: [PATCH v1 3/7] tools/ocaml/*/dune: dune based build system
-Date: Fri, 29 Jul 2022 18:53:26 +0100
-Message-ID: <0f2c08734668626a618767680493a006827e123b.1659116941.git.edvin.torok@citrix.com>
+CC: =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, "Christian
+ Lindig" <christian.lindig@citrix.com>, David Scott <dave@recoil.org>, Wei Liu
+	<wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>
+Subject: [PATCH v1 6/7] tools/ocaml/libs/xb: hide type of Xb.t
+Date: Fri, 29 Jul 2022 18:53:29 +0100
+Message-ID: <74ab9ad3ed031654fbfc343f299cedba2ebe3ac9.1659116941.git.edvin.torok@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1659116941.git.edvin.torok@citrix.com>
 References: <cover.1659116941.git.edvin.torok@citrix.com>
@@ -90,258 +117,90 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Based on Christian Lindig's work.
+The only user of 'xb' that I can find is in-tree oxenstored.
+Other code (e.g. xenopsd) would use the mirage 'xenstore' implementation
+instead, so changing the API here shouldn't require anyone to update
+their code.
 
-Initially this will be used to build unit tests, and to make development
-easier.
-
-Dune supports proper incremental builds and editor integration with
-merlin/LSP.
-
-For now the Makefile based build system is retained too: this is not a
-hard dependency on Dune.
-
-Using version 2.1 of Dune build language here, because that is the one
-available in Ubuntu Focal (part of the CI here).
+Hiding the type will make it easier to change the implementation
+in the future without breaking code that relies on it.
 
 No functional change.
 
 Signed-off-by: Edwin Török <edvin.torok@citrix.com>
 ---
- tools/.gitignore               |  7 +++++
- tools/dune                     |  5 ++++
- tools/dune-project             |  1 +
- tools/ocaml/dune-project       | 27 ++++++++++++++++++
- tools/ocaml/libs/eventchn/dune | 11 ++++++++
- tools/ocaml/libs/mmap/dune     |  9 ++++++
- tools/ocaml/libs/xb/dune       | 10 +++++++
- tools/ocaml/libs/xc/dune       | 16 +++++++++++
- tools/ocaml/libs/xs/dune       | 15 ++++++++++
- tools/ocaml/xenstored/dune     | 51 ++++++++++++++++++++++++++++++++++
- 10 files changed, 152 insertions(+)
- create mode 100644 tools/.gitignore
- create mode 100644 tools/dune
- create mode 100644 tools/dune-project
- create mode 100644 tools/ocaml/dune-project
- create mode 100644 tools/ocaml/libs/eventchn/dune
- create mode 100644 tools/ocaml/libs/mmap/dune
- create mode 100644 tools/ocaml/libs/xb/dune
- create mode 100644 tools/ocaml/libs/xc/dune
- create mode 100644 tools/ocaml/libs/xs/dune
- create mode 100644 tools/ocaml/xenstored/dune
+ tools/ocaml/libs/xb/xb.ml           | 3 +++
+ tools/ocaml/libs/xb/xb.mli          | 9 ++-------
+ tools/ocaml/xenstored/connection.ml | 8 ++------
+ 3 files changed, 7 insertions(+), 13 deletions(-)
 
-diff --git a/tools/.gitignore b/tools/.gitignore
-new file mode 100644
-index 0000000000..c211749a3b
---- /dev/null
-+++ b/tools/.gitignore
-@@ -0,0 +1,7 @@
-+dune-workspace*
-+_build/
-+.merlin
-+*.h.gch
-+*.opam
-+ocaml/*.install
-+include/_xentoolcore_list.h
-diff --git a/tools/dune b/tools/dune
-new file mode 100644
-index 0000000000..febbd078f0
---- /dev/null
-+++ b/tools/dune
-@@ -0,0 +1,5 @@
-+; only look inside ocaml and include subdirectory, speeds up the build
-+; since dune doesn't need to copy/hash/monitor all the other files
-+(dirs ocaml)
-+
-+(data_only_dirs include libs)
-diff --git a/tools/dune-project b/tools/dune-project
-new file mode 100644
-index 0000000000..cd8d4e3d86
---- /dev/null
-+++ b/tools/dune-project
-@@ -0,0 +1 @@
-+(lang dune 2.1)
-diff --git a/tools/ocaml/dune-project b/tools/ocaml/dune-project
-new file mode 100644
-index 0000000000..1dae7b0acb
---- /dev/null
-+++ b/tools/ocaml/dune-project
-@@ -0,0 +1,27 @@
-+(lang dune 2.1)
-+
-+(name xen)
-+
-+(formatting (enabled_for dune))
-+(generate_opam_files true)
-+
-+(maintainers christian.lindig@citrix.com)
-+(license LGPL)
-+
-+(package
-+ (name xen)
-+ (synopsis "Xen interfaces")
-+ (depends
-+  base-unix
-+  (dune (>= 2.1))
-+ )
-+)
-+
-+(package
-+ (name xenstored)
-+ (synopsis "In-memory key-value store for the Xen hypervisor")
-+ (depends
-+  base-unix
-+  (dune (>= 2.1))
-+ )
-+)
-diff --git a/tools/ocaml/libs/eventchn/dune b/tools/ocaml/libs/eventchn/dune
-new file mode 100644
-index 0000000000..4468f2e769
---- /dev/null
-+++ b/tools/ocaml/libs/eventchn/dune
-@@ -0,0 +1,11 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xeneventchn_stubs)
-+  (extra_deps ../../../include/xen/xen.h ../../../libs/evtchn/libxenevtchn.so)
-+  (include_dirs ../../../include))
-+ (name xeneventchn)
-+ (public_name xen.eventchn)
-+ (libraries unix)
-+ (no_dynlink)
-+ (c_library_flags -lxenevtchn))
-diff --git a/tools/ocaml/libs/mmap/dune b/tools/ocaml/libs/mmap/dune
-new file mode 100644
-index 0000000000..57a8ab5b9b
---- /dev/null
-+++ b/tools/ocaml/libs/mmap/dune
-@@ -0,0 +1,9 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xenmmap_stubs))
-+ (name xenmmap)
-+ (public_name xen.mmap)
-+ (libraries unix)
-+ (no_dynlink)
-+ (install_c_headers mmap_stubs))
-diff --git a/tools/ocaml/libs/xb/dune b/tools/ocaml/libs/xb/dune
-new file mode 100644
-index 0000000000..13a507ea87
---- /dev/null
-+++ b/tools/ocaml/libs/xb/dune
-@@ -0,0 +1,10 @@
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (extra_deps ../../../include/xen/xen.h)
-+  (include_dirs ../../../include)
-+  (names xenbus_stubs xs_ring_stubs))
-+ (name xenbus)
-+ (public_name xen.bus)
-+ (no_dynlink)
-+ (libraries unix xenmmap))
-diff --git a/tools/ocaml/libs/xc/dune b/tools/ocaml/libs/xc/dune
-new file mode 100644
-index 0000000000..6f9450cd27
---- /dev/null
-+++ b/tools/ocaml/libs/xc/dune
-@@ -0,0 +1,16 @@
-+(rule
-+ (with-stdout-to
-+  xenctrl_abi_check.h
-+  (run perl -w %{dep:abi-check} %{dep:xenctrl_stubs.c} %{dep:xenctrl.ml})))
-+
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names xenctrl_stubs)
-+  (extra_deps ../../../include/xen/xen.h ../../../libs/ctrl/libxenctrl.so)
-+  (include_dirs ../../../include))
-+ (name xenctrl)
-+ (public_name xen.ctrl)
-+ (libraries unix xenmmap)
-+ (no_dynlink)
-+ (c_library_flags -lxenctrl -lxenguest))
-diff --git a/tools/ocaml/libs/xs/dune b/tools/ocaml/libs/xs/dune
-new file mode 100644
-index 0000000000..086259f51d
---- /dev/null
-+++ b/tools/ocaml/libs/xs/dune
-@@ -0,0 +1,15 @@
-+; fallback mode: the files may have been generated by configure already
-+
-+(rule
-+ (targets paths.ml)
-+ (deps paths.ml.in)
-+ (mode fallback)
-+ (action
-+  (run ../../../config.status --file=paths.ml)))
-+
-+(library
-+ ; avoid conflict with mirage lib: name it differently
-+ (name xenstore_xen)
-+ (public_name xen.store)
-+ (no_dynlink)
-+ (libraries unix xenbus))
-diff --git a/tools/ocaml/xenstored/dune b/tools/ocaml/xenstored/dune
-new file mode 100644
-index 0000000000..d71decebcf
---- /dev/null
-+++ b/tools/ocaml/xenstored/dune
-@@ -0,0 +1,51 @@
-+; fallback mode: the files may have been generated by configure already
-+; also for fallback mode either all files must be present or none
-+; hence the 2 separate rules here
-+
-+(rule
-+ (targets oxenstored.conf)
-+ (deps oxenstored.conf.in)
-+ (mode fallback)
-+ (action
-+  (run ../../config.status --file=oxenstored.conf)))
-+
-+(rule
-+ (targets paths.ml)
-+ (deps paths.ml.in)
-+ (mode fallback)
-+ (action
-+  (run ../../config.status --file=paths.ml)))
-+
-+(executable
-+ (modes native)
-+ (name xenstored)
-+ (modules
-+  (:standard \ syslog systemd))
-+ (flags
-+  (:standard -w -52))
-+ (libraries unix xen.bus xen.mmap xen.ctrl xen.eventchn xenstubs))
-+
-+(install
-+ (package xenstored)
-+ (section sbin)
-+ (files
-+  (xenstored.exe as oxenstored)))
-+
-+(install
-+ (package xen)
-+ (section etc)
-+ (files oxenstored.conf))
-+
-+(library
-+ (foreign_stubs
-+  (language c)
-+  (names syslog_stubs systemd_stubs select_stubs)
-+  (extra_deps ../../dune-workspace)
-+  (flags
-+   (:standard -DHAVE_SYSTEMD)))
-+ (modules syslog systemd)
-+ (name xenstubs)
-+ (wrapped false)
-+ (libraries unix)
-+ (no_dynlink)
-+ (c_library_flags -lsystemd))
+diff --git a/tools/ocaml/libs/xb/xb.ml b/tools/ocaml/libs/xb/xb.ml
+index 104d319d77..8404ddd8a6 100644
+--- a/tools/ocaml/libs/xb/xb.ml
++++ b/tools/ocaml/libs/xb/xb.ml
+@@ -196,6 +196,9 @@ let peek_output con = Queue.peek con.pkt_out
+ let input_len con = Queue.length con.pkt_in
+ let has_in_packet con = Queue.length con.pkt_in > 0
+ let get_in_packet con = Queue.pop con.pkt_in
++let has_partial_input con = match con.partial_in with
++	| HaveHdr _ -> true
++	| NoHdr (n, _) -> n < Partial.header_size ()
+ let has_more_input con =
+ 	match con.backend with
+ 	| Fd _         -> false
+diff --git a/tools/ocaml/libs/xb/xb.mli b/tools/ocaml/libs/xb/xb.mli
+index 3a00da6cdd..794e35bb34 100644
+--- a/tools/ocaml/libs/xb/xb.mli
++++ b/tools/ocaml/libs/xb/xb.mli
+@@ -66,13 +66,7 @@ type backend_mmap = {
+ type backend_fd = { fd : Unix.file_descr; }
+ type backend = Fd of backend_fd | Xenmmap of backend_mmap
+ type partial_buf = HaveHdr of Partial.pkt | NoHdr of int * bytes
+-type t = {
+-  backend : backend;
+-  pkt_in : Packet.t Queue.t;
+-  pkt_out : Packet.t Queue.t;
+-  mutable partial_in : partial_buf;
+-  mutable partial_out : string;
+-}
++type t
+ val init_partial_in : unit -> partial_buf
+ val reconnect : t -> unit
+ val queue : t -> Packet.t -> unit
+@@ -97,6 +91,7 @@ val has_output : t -> bool
+ val peek_output : t -> Packet.t
+ val input_len : t -> int
+ val has_in_packet : t -> bool
++val has_partial_input : t -> bool
+ val get_in_packet : t -> Packet.t
+ val has_more_input : t -> bool
+ val is_selectable : t -> bool
+diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
+index a94d47cdc2..0ce54cd7f9 100644
+--- a/tools/ocaml/xenstored/connection.ml
++++ b/tools/ocaml/xenstored/connection.ml
+@@ -125,9 +125,7 @@ let get_perm con =
+ let set_target con target_domid =
+ 	con.perm <- Perms.Connection.set_target (get_perm con) ~perms:[Perms.READ; Perms.WRITE] target_domid
+ 
+-let is_backend_mmap con = match con.xb.Xenbus.Xb.backend with
+-	| Xenbus.Xb.Xenmmap _ -> true
+-	| _ -> false
++let is_backend_mmap con = Xenbus.Xb.is_mmap con.xb
+ 
+ let send_reply con tid rid ty data =
+ 	if (String.length data) > xenstore_payload_max && (is_backend_mmap con) then
+@@ -280,9 +278,7 @@ let get_transaction con tid =
+ 
+ let do_input con = Xenbus.Xb.input con.xb
+ let has_input con = Xenbus.Xb.has_in_packet con.xb
+-let has_partial_input con = match con.xb.Xenbus.Xb.partial_in with
+-	| HaveHdr _ -> true
+-	| NoHdr (n, _) -> n < Xenbus.Partial.header_size ()
++let has_partial_input con = Xenbus.Xb.has_partial_input con.xb
+ let pop_in con = Xenbus.Xb.get_in_packet con.xb
+ let has_more_input con = Xenbus.Xb.has_more_input con.xb
+ 
 -- 
 2.34.1
 
