@@ -4,39 +4,31 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75E81C19F2C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAB86C19F29
 	for <xen-devel@archiver.kernel.org>; Sun, 31 Jul 2022 04:09:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.378154.611498 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.378188.611508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oI0GM-0005vd-HC; Sun, 31 Jul 2022 04:09:10 +0000
+	id 1oI0GN-00063S-33; Sun, 31 Jul 2022 04:09:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 378154.611498; Sun, 31 Jul 2022 04:09:10 +0000
+Received: by outflank-mailman (output) from mailman id 378188.611508; Sun, 31 Jul 2022 04:09:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oI0GM-0005vW-Dk; Sun, 31 Jul 2022 04:09:10 +0000
-Received: by outflank-mailman (input) for mailman id 378154;
- Sat, 30 Jul 2022 18:16:44 +0000
+	id 1oI0GM-000625-U2; Sun, 31 Jul 2022 04:09:10 +0000
+Received: by outflank-mailman (input) for mailman id 378188;
+ Sat, 30 Jul 2022 23:45:38 +0000
 Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
  helo=se1-gles-sth1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=WHEM=YD=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 1oHr12-0007UW-06
- for xen-devel@lists.xenproject.org; Sat, 30 Jul 2022 18:16:44 +0000
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [2604:1380:4641:c500::1])
+ <SRS0=34kf=YD=lespinasse.org=michel@srs-se1.protection.inumbo.net>)
+ id 1oHw9K-0001kq-3u
+ for xen-devel@lists.xenproject.org; Sat, 30 Jul 2022 23:45:38 +0000
+Received: from server.lespinasse.org (unknown [63.205.204.226])
  by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id c254c24f-1033-11ed-bd2d-47488cf2e6aa;
- Sat, 30 Jul 2022 20:16:42 +0200 (CEST)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4276E60EEB;
- Sat, 30 Jul 2022 18:16:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 98DEFC433D7;
- Sat, 30 Jul 2022 18:16:39 +0000 (UTC)
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
- id 3BA285C0266; Sat, 30 Jul 2022 11:16:39 -0700 (PDT)
+ id b2a004ca-1061-11ed-bd2d-47488cf2e6aa;
+ Sun, 31 Jul 2022 01:45:33 +0200 (CEST)
+Received: by server.lespinasse.org (Postfix, from userid 1000)
+ id F117B160977; Sat, 30 Jul 2022 16:45:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,117 +40,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c254c24f-1033-11ed-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1659204999;
-	bh=YJXP6A7d+KZPrg8HQv8x+gqLEMy1sjVdzXnl/qX62uw=;
-	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
-	b=gJSpKVSsAKz8pom4RuAB5Je2VfXHGMhI5S8QuPgLw6sbq0QnDrcsB984Q3KCjMEP4
-	 SYUjeqdnSm23czJoxrwT8/cSChg2wZ3j8oXxKHXQSMFJwdsOWYkZ8L3yHTrxHHHv/B
-	 PCAYHs9Jnrby4wbTToGryEY6Ex3TIpS7AHVXuUJU6nS/OoMCgZLC69/yQVKdeU26z2
-	 g1F1UjpLlSrDEHmQXbwyZ9oeANnc2U7/KwPArewe4hoBbjnHbzgEqXp6HAhF3f96Ro
-	 rfGOh77ykaTrG15ZCImyvdTTA95ZiEUj+F32tOHQ6Prrb5v2smeceYH3zHnZYF0uH1
-	 p/j3tMujFTrgw==
-Date: Sat, 30 Jul 2022 11:16:39 -0700
-From: "Paul E. McKenney" <paulmck@kernel.org>
-To: Michel Lespinasse <michel@lespinasse.org>
-Cc: Peter Zijlstra <peterz@infradead.org>, rth@twiddle.net,
-	ink@jurassic.park.msu.ru, mattst88@gmail.com, vgupta@kernel.org,
-	linux@armlinux.org.uk, ulli.kroll@googlemail.com,
-	linus.walleij@linaro.org, shawnguo@kernel.org,
-	Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de,
-	festevam@gmail.com, linux-imx@nxp.com, tony@atomide.com,
-	khilman@kernel.org, catalin.marinas@arm.com, will@kernel.org,
-	guoren@kernel.org, bcain@quicinc.com, chenhuacai@kernel.org,
-	kernel@xen0n.name, geert@linux-m68k.org, sammy@sammy.net,
-	monstr@monstr.eu, tsbogend@alpha.franken.de, dinguyen@kernel.org,
-	jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
-	shorne@gmail.com, James.Bottomley@HansenPartnership.com,
-	deller@gmx.de, mpe@ellerman.id.au, benh@kernel.crashing.org,
-	paulus@samba.org, paul.walmsley@sifive.com, palmer@dabbelt.com,
-	aou@eecs.berkeley.edu, hca@linux.ibm.com, gor@linux.ibm.com,
-	agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
-	svens@linux.ibm.com, ysato@users.sourceforge.jp, dalias@libc.org,
-	davem@davemloft.net, richard@nod.at,
-	anton.ivanov@cambridgegreys.com, johannes@sipsolutions.net,
-	tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-	dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
-	acme@kernel.org, mark.rutland@arm.com,
-	alexander.shishkin@linux.intel.com, jolsa@kernel.org,
-	namhyung@kernel.org, jgross@suse.com, srivatsa@csail.mit.edu,
+X-Inumbo-ID: b2a004ca-1061-11ed-bd2d-47488cf2e6aa
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
+ d=lespinasse.org; i=@lespinasse.org; q=dns/txt; s=srv-79-ed;
+ t=1659224730; h=date : from : to : cc : subject : message-id :
+ references : mime-version : content-type : in-reply-to : from;
+ bh=nAVqtDkPyoGTnjQOsobKhENqaeU5rNiWFfP8mKVev5k=;
+ b=HFFhCK7R4iKO9dp7xadnNvlJ3TFgnIFCD+mWF8YiQOWKhEk/dwPTWNRYWGC9XfN1WRDf2
+ g306xaRkvMw+dqoAw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lespinasse.org;
+ i=@lespinasse.org; q=dns/txt; s=srv-79-rsa; t=1659224730; h=date :
+ from : to : cc : subject : message-id : references : mime-version :
+ content-type : in-reply-to : from;
+ bh=nAVqtDkPyoGTnjQOsobKhENqaeU5rNiWFfP8mKVev5k=;
+ b=xEm4vrS+nhrfg16KlTSOz6xKHVgl2anxivbQOaQ8iyITrSIXx3k7S+7DNm3/9PE3/hP5/
+ weBfs5WCmns8PrJOUh5+LyucC170rSw2K/NgNrAjDpputAJGflo+dG36LsXYxD+GZSSZKbP
+ Pj/N5DYITgz/J3aBedmEOjvEEcNa6ityOyI32KA+gNj6htWosOb+QOsIsRx/2q9SXnXOMQE
+ CoO7nRU+J2kcBx1HiMTnfjr/eN+QixQZGT0tRp8own4vN9hl237pUBRGLyuycFtncUUh4v4
+ MsO6ge1ke2qwlIabxdvLZxjhahuiQC5BaBfCoCYkudJkUo4tS5HM55MrUsVw==
+Date: Sat, 30 Jul 2022 16:45:29 -0700
+From: Michel Lespinasse <michel@lespinasse.org>
+To: "Rafael J. Wysocki" <rafael@kernel.org>
+Cc: Michel Lespinasse <michel@lespinasse.org>,
+	"Paul E. McKenney" <paulmck@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Richard Henderson <rth@twiddle.net>,
+	Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
+	Matt Turner <mattst88@gmail.com>, vgupta@kernel.org,
+	Russell King - ARM Linux <linux@armlinux.org.uk>,
+	ulli.kroll@googlemail.com, Linus Walleij <linus.walleij@linaro.org>,
+	Shawn Guo <shawnguo@kernel.org>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Sascha Hauer <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	dl-linux-imx <linux-imx@nxp.com>, Tony Lindgren <tony@atomide.com>,
+	Kevin Hilman <khilman@kernel.org>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Guo Ren <guoren@kernel.org>,
+	bcain@quicinc.com, Huacai Chen <chenhuacai@kernel.org>,
+	kernel@xen0n.name, Geert Uytterhoeven <geert@linux-m68k.org>,
+	sammy@sammy.net, Michal Simek <monstr@monstr.eu>,
+	Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+	dinguyen@kernel.org, jonas@southpole.se,
+	stefan.kristiansson@saunalahti.fi,
+	Stafford Horne <shorne@gmail.com>,
+	James Bottomley <James.Bottomley@hansenpartnership.com>,
+	Helge Deller <deller@gmx.de>, Michael Ellerman <mpe@ellerman.id.au>,
+	Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+	Paul Mackerras <paulus@samba.org>,
+	Paul Walmsley <paul.walmsley@sifive.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Albert Ou <aou@eecs.berkeley.edu>,
+	Heiko Carstens <hca@linux.ibm.com>,
+	Vasily Gorbik <gor@linux.ibm.com>,
+	Alexander Gordeev <agordeev@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Sven Schnelle <svens@linux.ibm.com>,
+	Yoshinori Sato <ysato@users.sourceforge.jp>,
+	Rich Felker <dalias@libc.org>, David Miller <davem@davemloft.net>,
+	Richard Weinberger <richard@nod.at>,
+	anton.ivanov@cambridgegreys.com,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Thomas Gleixner <tglx@linutronix.de>,
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	the arch/x86 maintainers <x86@kernel.org>,
+	"H. Peter Anvin" <hpa@zytor.com>, acme@kernel.org,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	jolsa@kernel.org, namhyung@kernel.org,
+	Juergen Gross <jgross@suse.com>, srivatsa@csail.mit.edu,
 	amakhalov@vmware.com, pv-drivers@vmware.com,
-	boris.ostrovsky@oracle.com, chris@zankel.net, jcmvbkbc@gmail.com,
-	rafael@kernel.org, lenb@kernel.org, pavel@ucw.cz,
-	gregkh@linuxfoundation.org, mturquette@baylibre.com,
-	sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org,
-	sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org,
-	anup@brainfault.org, thierry.reding@gmail.com, jonathanh@nvidia.com,
-	jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
-	yury.norov@gmail.com, andriy.shevchenko@linux.intel.com,
-	linux@rasmusvillemoes.dk, rostedt@goodmis.org, pmladek@suse.com,
-	senozhatsky@chromium.org, john.ogness@linutronix.de,
-	frederic@kernel.org, quic_neeraju@quicinc.com,
-	josh@joshtriplett.org, mathieu.desnoyers@efficios.com,
-	jiangshanlai@gmail.com, joel@joelfernandes.org,
-	juri.lelli@redhat.com, vincent.guittot@linaro.org,
-	dietmar.eggemann@arm.com, bsegall@google.com, mgorman@suse.de,
-	bristot@redhat.com, vschneid@redhat.com, jpoimboe@kernel.org,
-	linux-alpha@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Chris Zankel <chris@zankel.net>, Max Filippov <jcmvbkbc@gmail.com>,
+	Len Brown <lenb@kernel.org>, Pavel Machek <pavel@ucw.cz>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@linaro.org>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Sudeep Holla <sudeep.holla@arm.com>, Andy Gross <agross@kernel.org>,
+	Bjorn Andersson <bjorn.andersson@linaro.org>,
+	Anup Patel <anup@brainfault.org>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Jon Hunter <jonathanh@nvidia.com>,
+	Jacob Pan <jacob.jun.pan@linux.intel.com>,
+	Arnd Bergmann <arnd@arndb.de>, Yury Norov <yury.norov@gmail.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Petr Mladek <pmladek@suse.com>, senozhatsky@chromium.org,
+	John Ogness <john.ogness@linutronix.de>,
+	Frederic Weisbecker <frederic@kernel.org>, quic_neeraju@quicinc.com,
+	Josh Triplett <josh@joshtriplett.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Juri Lelli <juri.lelli@redhat.com>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	Dietmar Eggemann <dietmar.eggemann@arm.com>,
+	Benjamin Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+	Daniel Bristot de Oliveira <bristot@redhat.com>,
+	vschneid@redhat.com, jpoimboe@kernel.org,
+	linux-alpha@vger.kernel.org,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
 	linux-snps-arc@lists.infradead.org,
-	linux-arm-kernel@lists.infradead.org, linux-omap@vger.kernel.org,
+	Linux ARM <linux-arm-kernel@lists.infradead.org>,
+	Linux OMAP Mailing List <linux-omap@vger.kernel.org>,
 	linux-csky@vger.kernel.org, linux-hexagon@vger.kernel.org,
-	linux-ia64@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-	linux-mips@vger.kernel.org, openrisc@lists.librecores.org,
-	linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
-	linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
-	linux-um@lists.infradead.org, linux-perf-users@vger.kernel.org,
+	linux-ia64@vger.kernel.org,
+	linux-m68k <linux-m68k@lists.linux-m68k.org>,
+	"open list:BROADCOM NVRAM DRIVER" <linux-mips@vger.kernel.org>,
+	openrisc@lists.librecores.org,
+	Parisc List <linux-parisc@vger.kernel.org>,
+	linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+	linux-riscv <linux-riscv@lists.infradead.org>,
+	linux-s390@vger.kernel.org,
+	Linux-sh list <linux-sh@vger.kernel.org>,
+	sparclinux@vger.kernel.org, linux-um@lists.infradead.org,
+	linux-perf-users@vger.kernel.org,
 	virtualization@lists.linux-foundation.org,
 	xen-devel@lists.xenproject.org, linux-xtensa@linux-xtensa.org,
-	linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
-	rcu@vger.kernel.org, rh0@fb.com
+	ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
+	Linux PM <linux-pm@vger.kernel.org>,
+	linux-clk <linux-clk@vger.kernel.org>,
+	linux-arm-msm <linux-arm-msm@vger.kernel.org>,
+	linux-tegra <linux-tegra@vger.kernel.org>,
+	linux-arch <linux-arch@vger.kernel.org>, rcu@vger.kernel.org,
+	rh0@fb.com
 Subject: Re: [PATCH 04/36] cpuidle,intel_idle: Fix CPUIDLE_FLAG_IRQ_ENABLE
-Message-ID: <20220730181639.GS2860372@paulmck-ThinkPad-P17-Gen-1>
-Reply-To: paulmck@kernel.org
+Message-ID: <20220730234529.GC1587@lespinasse.org>
 References: <20220608142723.103523089@infradead.org>
  <20220608144516.172460444@infradead.org>
  <20220725194306.GA14746@lespinasse.org>
  <20220728172053.GA3607379@paulmck-ThinkPad-P17-Gen-1>
  <20220729102458.GA1695@lespinasse.org>
- <20220729152622.GM2860372@paulmck-ThinkPad-P17-Gen-1>
- <20220730094032.GA1587@lespinasse.org>
+ <CAJZ5v0gyPtX=ksCibo2ZN_BztCqUn9KRtRu+gsJ5KetB_1MwEQ@mail.gmail.com>
+ <20220730094800.GB1587@lespinasse.org>
+ <CAJZ5v0hXVjsWab=qYZfXBTqcjkpWV0CFT9_oQBKQ28rFG3_VLw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20220730094032.GA1587@lespinasse.org>
+In-Reply-To: <CAJZ5v0hXVjsWab=qYZfXBTqcjkpWV0CFT9_oQBKQ28rFG3_VLw@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 
-On Sat, Jul 30, 2022 at 02:40:32AM -0700, Michel Lespinasse wrote:
-> On Fri, Jul 29, 2022 at 08:26:22AM -0700, Paul E. McKenney wrote:> Would you be willing to try another shot in the dark, but untested
-> > this time?  I freely admit that this is getting strange.
-> > 
-> > 							Thanx, Paul
+On Sat, Jul 30, 2022 at 09:52:34PM +0200, Rafael J. Wysocki wrote:
+> On Sat, Jul 30, 2022 at 11:48 AM Michel Lespinasse
+> <michel@lespinasse.org> wrote:
+> > I'm not sure if that was the patch you meant to send though, as it
+> > seems it's only adding a tracepoint so shouldn't make any difference
+> > if I'm not actually using the tracepoint ?
 > 
-> Yes, adding this second change got rid of the boot time warning for me.
+> You are right, it looks like I pasted a link to a different patch by
+> mistake.  Sorry about that.
+> 
+> I meant this one:
+> 
+> https://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm.git/commit/?h=pm&id=d295ad34f236c3518634fb6403d4c0160456e470
+> 
+> which will appear in the final 5.19.
 
-OK, I will make a real patch.  May I have your Tested-by?
+Thanks. I can confirm that this patch fixes the boot time debug
+warnings for me. And I see that linus already merged it, nice!
 
-							Thanx, Paul
-
-> > ------------------------------------------------------------------------
-> > 
-> > diff --git a/kernel/sched/clock.c b/kernel/sched/clock.c
-> > index e374c0c923dae..279f557bf60bb 100644
-> > --- a/kernel/sched/clock.c
-> > +++ b/kernel/sched/clock.c
-> > @@ -394,7 +394,7 @@ notrace void sched_clock_tick(void)
-> >  	if (!static_branch_likely(&sched_clock_running))
-> >  		return;
-> >  
-> > -	lockdep_assert_irqs_disabled();
-> > +	WARN_ON_ONCE(IS_ENABLED(CONFIG_RCU_EQS_DEBUG) && !raw_irqs_disabled());
-> >  
-> >  	scd = this_scd();
-> >  	__scd_stamp(scd);
+--
+Michel "walken" Lespinasse.
 
