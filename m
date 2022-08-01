@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83272C00140
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Aug 2022 02:38:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.378485.611698 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E3DAC00144
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Aug 2022 05:52:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.378496.611710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oILKG-0005Wn-OJ; Mon, 01 Aug 2022 02:38:36 +0000
+	id 1oIOLJ-0001qX-EJ; Mon, 01 Aug 2022 05:51:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 378485.611698; Mon, 01 Aug 2022 02:38:36 +0000
+Received: by outflank-mailman (output) from mailman id 378496.611710; Mon, 01 Aug 2022 05:51:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oILKG-0005Wg-LU; Mon, 01 Aug 2022 02:38:36 +0000
-Received: by outflank-mailman (input) for mailman id 378485;
- Mon, 01 Aug 2022 02:38:35 +0000
+	id 1oIOLJ-0001qQ-9X; Mon, 01 Aug 2022 05:51:53 +0000
+Received: by outflank-mailman (input) for mailman id 378496;
+ Mon, 01 Aug 2022 05:51:51 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1oILKF-0005WW-N0; Mon, 01 Aug 2022 02:38:35 +0000
+ id 1oIOLH-0001px-Qx; Mon, 01 Aug 2022 05:51:51 +0000
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1oILKF-0006pd-JH; Mon, 01 Aug 2022 02:38:35 +0000
+ id 1oIOLH-0002dC-Nb; Mon, 01 Aug 2022 05:51:51 +0000
 Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1oILKF-0003UT-8N; Mon, 01 Aug 2022 02:38:35 +0000
+ id 1oIOLH-0007RH-7u; Mon, 01 Aug 2022 05:51:51 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1oILKF-0004Zd-5k; Mon, 01 Aug 2022 02:38:35 +0000
+ id 1oIOLH-0004ix-7M; Mon, 01 Aug 2022 05:51:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -47,15 +47,15 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
 	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=YcO4YyMAQpcNvA0aYNy+xfEB3VtDvsFg9C6ThccGizI=; b=ybd/eYUfaOq9lb//hA2uyucrUk
-	JGD3GFR8In3shbmG7x3TWFgXG7ESkTdU0MzQhCGM01zLelWGpJuaD1FlI8I+eAInqz/p0XEUmXKsr
-	03MbY17WtA1mJBa3uUp6CXFfFzY+jdx7gPEZDf3Hk0Qr8pVpW+yC2rvl+OjLrfZCEnFI=;
+	bh=fvlCGMyzQb70rQTFE8+1TH9P7BbExoFZaOGAE9cHqz8=; b=k9AmR4hxadnHT+CV/SFUGKgPHO
+	raj48Yo4YYJOTdBLguP5vUALXt1QOCoeIWhPN01UQn5ipkUMmmOMfm/p44fil0MoVVESWC8APGkna
+	9/sc0oRz1GiyZLbRdFBhn+u73cqg+HDAj+048w1SNa51bM9z99iHZ3KZCY2/Y0w3c/QM=;
 To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-172056-mainreport@xen.org>
+Message-ID: <osstest-172059-mainreport@xen.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 172056: regressions - FAIL
+Subject: [xen-unstable-smoke test] 172059: regressions - FAIL
 X-Osstest-Failures:
     xen-unstable-smoke:build-amd64-libvirt:libvirt-build:fail:regression
     xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
@@ -68,10 +68,10 @@ X-Osstest-Versions-This:
 X-Osstest-Versions-That:
     xen=f732240fd3bac25116151db5ddeb7203b62e85ce
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 01 Aug 2022 02:38:35 +0000
+Date: Mon, 01 Aug 2022 05:51:51 +0000
 
-flight 172056 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/172056/
+flight 172059 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/172059/
 
 Regressions :-(
 
@@ -92,8 +92,8 @@ baseline version:
  xen                  f732240fd3bac25116151db5ddeb7203b62e85ce
 
 Last test of basis   171884  2022-07-27 12:03:31 Z    4 days
-Failing since        171899  2022-07-28 19:01:47 Z    3 days   22 attempts
-Testing same since   171934  2022-07-30 02:00:28 Z    2 days   14 attempts
+Failing since        171899  2022-07-28 19:01:47 Z    3 days   23 attempts
+Testing same since   171934  2022-07-30 02:00:28 Z    2 days   15 attempts
 
 ------------------------------------------------------------
 People who touched revisions under test:
