@@ -4,29 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A611C19F28
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Aug 2022 13:36:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.379328.612693 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4FADC00140
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Aug 2022 13:39:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.379337.612704 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oIs4S-0004rS-NB; Tue, 02 Aug 2022 13:36:28 +0000
+	id 1oIs7W-0005os-4h; Tue, 02 Aug 2022 13:39:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 379328.612693; Tue, 02 Aug 2022 13:36:28 +0000
+Received: by outflank-mailman (output) from mailman id 379337.612704; Tue, 02 Aug 2022 13:39:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oIs4S-0004rL-K5; Tue, 02 Aug 2022 13:36:28 +0000
-Received: by outflank-mailman (input) for mailman id 379328;
- Tue, 02 Aug 2022 13:36:27 +0000
-Received: from se1-gles-sth1-in.inumbo.com ([159.253.27.254]
- helo=se1-gles-sth1.inumbo.com)
+	id 1oIs7W-0005ol-1i; Tue, 02 Aug 2022 13:39:38 +0000
+Received: by outflank-mailman (input) for mailman id 379337;
+ Tue, 02 Aug 2022 13:39:36 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gPpP=YG=citrix.com=prvs=206784369=anthony.perard@srs-se1.protection.inumbo.net>)
- id 1oIs4R-0004av-Lv
- for xen-devel@lists.xenproject.org; Tue, 02 Aug 2022 13:36:27 +0000
-Received: from esa1.hc3370-68.iphmx.com (esa1.hc3370-68.iphmx.com
- [216.71.145.142]) by se1-gles-sth1.inumbo.com (Halon) with ESMTPS
- id 1a553bdf-1268-11ed-bd2d-47488cf2e6aa;
- Tue, 02 Aug 2022 15:36:26 +0200 (CEST)
+ <SRS0=1BTa=YG=redhat.com=berrange@srs-se1.protection.inumbo.net>)
+ id 1oIs7U-0005of-G5
+ for xen-devel@lists.xenproject.org; Tue, 02 Aug 2022 13:39:36 +0000
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 8ad59a15-1268-11ed-924f-1f966e50362f;
+ Tue, 02 Aug 2022 15:39:34 +0200 (CEST)
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-18-U6IUAjxTM9uGOWNhdYZ0Aw-1; Tue, 02 Aug 2022 09:39:30 -0400
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 54C66185A7BA;
+ Tue,  2 Aug 2022 13:39:29 +0000 (UTC)
+Received: from redhat.com (unknown [10.33.36.227])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 0658918EA8;
+ Tue,  2 Aug 2022 13:39:27 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -38,106 +52,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: 1a553bdf-1268-11ed-bd2d-47488cf2e6aa
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-  d=citrix.com; s=securemail; t=1659447386;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=PpfpV5nkngWKXwIzMuzDvmEu5G/siM6B6JBZhHRYfO8=;
-  b=bpVq/R1Hh0n9OIfLEweslxGyCD513brfGP1BME7+hAWU8VpCGBnT0BTL
-   5RD1G6vtw287sytT+UDTwNhSaB3zyLLgRmHnL/64meJeYY5a8eKbrf9rS
-   LpGIYKMmlu3vqCr7IBowzRnbFAMrYs33rkwi0veLMeMxVYkCfBk8RoR+J
-   o=;
-Authentication-Results: esa1.hc3370-68.iphmx.com; dkim=none (message not signed) header.i=none
-X-SBRS: None
-X-MesageID: 77611014
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.156.83
-X-Policy: $RELAYED
-IronPort-Data: A9a23:/690IKBKkP6TjhVW/3Tjw5YqxClBgxIJ4kV8jS/XYbTApDki1jYOm
- 2IeCj3XOKneYDH9c9pzPI22px9S7JfTxt9qQQY4rX1jcSlH+JHPbTi7wuYcHM8wwunrFh8PA
- xA2M4GYRCwMZiaA4E3ratANlFEkvYmQXL3wFeXYDS54QA5gWU8JhAlq3uU0meaEu/Dga++2k
- Y608pa31GONgWYuaDpEs/jb83uDgdyp0N8mlg1mDRx0lAe2e0k9VPo3Oay3Jn3kdYhYdsbSq
- zHrlezREsvxpn/BO/v9+lrJWhRiro36ZGBivkF+Sam66iWukwRpukoN2FjwXm8M49mBt4gZJ
- NygLvVcQy9xVkHHsLx1vxW1j0iSlECJkVPKCSHXjCCd86HJW2PT5KhxKmMXBJA32e9xA0UNx
- foSERlYO3hvh8ruqF66Yuxlh8BlJ8j3JoIP/HpnyFk1D95/H8qFGf+To4YFgnFg3aiiHt6HD
- yYdQTNpcBTHZQwJIloNAYgytOypmmP+Y3tTr1f9Sa8fvDeNlVUpieSF3Nz9R/O7YZlOxBajm
- 3/s5E7cHRYaKNvAxm/Qmp6rrrCWxn6qMG4IL5Wo+/gvjFCNy2g7DBwNSUD9sfS/klS5Wd9UN
- woT4CVGhakw/UeoVd77dxa4oXeevVgTQdddFeA85EeK0KWS/gXxO4QfZmcfMpp87pZwHGF0k
- A/S9z/0OdBxmKWqbi+C0JW1lC6dGiETL0tBVSkOdCJQtrEPv7oPYgLzosdLSfDo34GtRGitm
- VhmvwBl2exN0JdjO7GTuAme3mny/sWhohsdvF2/Y46z0u9uiGdJjaSM4EOT0/tPJZ3xorKp7
- CldwJj2AAzj4PiweM2xrAYlRujBCw6tamG0vLKWN8BJGvTE0yfLkXpsyD9/Plx1Fc0PZCXkZ
- kTe0SsIusICZyT7NfYsMtPoYyjP8UQHPY28Ps04k/IUOsQhHON51HsGibGsM5DFzxF3zPBX1
- WazesewF3cKYZlaIfvfb7l17ILHMQhnlT6JFM+kkEj5uVdcDVbMIYo43JK1RrhRxMu5TM/9r
- 76z6+PiJ81jbdDD
-IronPort-HdrOrdr: A9a23:0QCekqFtv0fLIyJ3pLqFaZHXdLJyesId70hD6qkvc3Fom52j/f
- xGws5x6fatskd2ZJhSo6H4BEDgewKryXcR2+Us1NiZLWvbUQeTQ72KqLGSpAEIeBeOv9K1t5
- 0QFpSWYeeYZWSSz/yKhDVQeOxA/DDzytHKuQ6o9RdQpG9RBZ1I3kNcMEK2A0d2TA5JCd4SD5
- yH/PdKoDKmZDA+ctm7LmNtZZmJm/T70LbdJTIWDR8u7weDyRmy7qThLhSe1hACFxtS3LYZ93
- TfmQCR3NTojxj78G6Q64bg1eUYpDLT8KoMOCVKsLlVFtzYsHflWG2mYczDgNl6mpDt1L9gqq
- i1n/5pBbUJ15qWRBD8nfKl4Xib7B8+r3Lj01WciXvmrdeRfkNFN+NRwY1eaRfX8EwmoZV117
- 9KxXuQs95NAQrHhzmV3am8a/hGrDvGnZMZq59gs1VPFY8FLLNBp40W+01YVJ8GASLh8YgiVO
- 1jFtvV6vpaeU6TKymxhBgZ/PW8GnAoWhuWSEkLvcKYlzBQgXBi1kMdgMgShG0J+p4xQ4RNo+
- 7ELqNrnrdTSdJ+V9MIOM4RBc+sTmDdSxPFN2yfZVzhCaEcInrI74X65b0kjdvaCKDgDKFC6a
- gpfGkoyVLaIXiedPFm9Kc7jSzwfA==
-X-IronPort-AV: E=Sophos;i="5.93,211,1654574400"; 
-   d="scan'208";a="77611014"
-Date: Tue, 2 Aug 2022 14:36:13 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Ian Jackson <ijackson@chiark.greenend.org.uk>
-CC: <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
-Subject: Re: [OSSTEST PATCH 1/2] TestSupport: Add support for installing from
- backport repo
-Message-ID: <YukoTdtWbExEVCH7@perard.uk.xensource.com>
-References: <20220802102602.131992-1-anthony.perard@citrix.com>
- <20220802102602.131992-2-anthony.perard@citrix.com>
- <25321.6183.866850.867719@chiark.greenend.org.uk>
+X-Inumbo-ID: 8ad59a15-1268-11ed-924f-1f966e50362f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1659447573;
+	h=from:from:reply-to:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=5WEoZygjzqMSSH7tx9J19kK8fi3fwB7HNVYvZTJSVFg=;
+	b=JxmZNdMwwChtbP+zbREPKo1NIVuiToYxNgDGn0fGIXHHrptSXVDMd2TE4vltEhP8EmfcVX
+	j0JFa3kBd0nOU3xonv2TLFrOK4m9cWzqIvD1o/WqqK2LFOREEkPp+xwDC0C3L/0YhUVPfU
+	fF1+qJih8lhwXtd09jjGfefqKgRk3N8=
+X-MC-Unique: U6IUAjxTM9uGOWNhdYZ0Aw-1
+Date: Tue, 2 Aug 2022 14:39:25 +0100
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+Cc: Julien Grall <julien@xen.org>,
+	Michal =?utf-8?B?UHLDrXZvem7DrWs=?= <mprivozn@redhat.com>,
+	Oleksandr Tyshchenko <olekstysh@gmail.com>,
+	xen-devel@lists.xenproject.org, libvir-list@redhat.com,
+	Anthony PERARD <anthony.perard@citrix.com>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: Re: [libvirt PATCH] libxl: Fix build with recent Xen that introduces
+ new disk backend type
+Message-ID: <YukpDR2frtExoke+@redhat.com>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+References: <20220729155024.3327364-1-olekstysh@gmail.com>
+ <d29b2ad1-fa32-4897-a113-c8a0864c6630@redhat.com>
+ <7444eeec-5a7c-6a18-ffde-cb32528a0e20@xen.org>
+ <Yueeh9w1EiY2sNEK@redhat.com>
+ <YukM85j+Q+w0YLCu@mail-itl>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+In-Reply-To: <YukM85j+Q+w0YLCu@mail-itl>
+User-Agent: Mutt/2.2.6 (2022-06-05)
+X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <25321.6183.866850.867719@chiark.greenend.org.uk>
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 02, 2022 at 01:27:19PM +0100, Ian Jackson wrote:
-> Anthony PERARD writes ("[OSSTEST PATCH 1/2] TestSupport: Add support for installing from backport repo"):
-> > We are going to need to install package from the debian backport
-> > repository in order to do a build.
+On Tue, Aug 02, 2022 at 01:39:31PM +0200, Marek Marczykowski-Górecki wrote:
+> On Mon, Aug 01, 2022 at 10:36:07AM +0100, Daniel P. Berrangé wrote:
+> > Generally we want to see errors triggered from new enums arriving,
+> > as it can be a sign that libvirt code needs a semantic change in
+> > order to continue operating correctly.  It isn't always correct
+> > to assume that the 'default' case gives the correct behaviour.
 > 
-> LGTM.  I was kind of surprised we didn't have this already, but now I
-> come to think of it, I think that was only for kernels ?  (I haven't
-> UTSL to check.)
-
-Yes, there's preseed_backports_packages() to install from backports repo
-at host/guest installation. But nothing once the OS is already
-installed. I thought it would not be a good idea to install meson on
-every host.
-
-> > +sub target_install_packages_backport ($@) {
-> > +    my ($ho, @packages) = @_;
-> > +    my $had_backport_repo = 0;
-> > +    target_editfile_root($ho, '/etc/apt/sources.list', sub {
-> > +        my $suite = $ho->{Suite};
-> > +        my $bp_url = Osstest::Debian::debian_mirror_url($ho);
-> > +        while (<::EI>) {
-> > +            if (m/^# $suite backports/) {
-> > +                $had_backport_repo = 1;
-> > +            }
-> > +            print ::EO;
-> > +        }
-> > +        print ::EO <<EOF unless $had_backport_repo;
-> > +
-> > +# $suite backports
-> > +deb $bp_url $suite-backports main
-> > +EOF
-> > +        });
+> Isn't that the exact purpose of 'default' label? If use of 'default'
+> means "any of the other 5 specific values, but lets save some characters
+> to not name them explicitly", then IMHO better to name them
+> explicitly...
 > 
-> Nit: this last line looks misindented to me.
+> I can see a value of -Werror=switch-enum when adding new (internal) enum
+> value, to find all the cases where code needs to be adjusted, but even
+> then a grep is probably sufficient enough. On the other hand, if there
+> are cases where indeed all the values of (internal API) enum needs to be
+> handled explicitly, maybe simply omit 'default' label and use
+> -Werror=switch?
+> 
+> Anyway, if tracking all the enums values of all the used 3rd-party APIs
+> is desirable (like, noticing when libxl adds new disk type), then it
+> probably should be a separate CI job, not the default devel build.
+> Otherwise breakages like this will happen from time to time, and will
+> be annoyed for people on involved in specific code part at all.
+> 
+> As a short term fix, maybe Xen's CI can build libvirt with
+> -Wno-error=switch-enum?
 
-Would be nice to fix on commit, I guess.
+I think makes sense for a 3rd party CI todo that, since these warnings
+are primarily targetted at libvirt upstream maintainers, so that we
+catch problems before code is committed.
 
-> Acked-by: Ian Jackson <ijackson@chiark.greenend.org.uk>
-
-Thanks,
-
+With regards,
+Daniel
 -- 
-Anthony PERARD
+|: https://berrange.com      -o-    https://www.flickr.com/photos/dberrange :|
+|: https://libvirt.org         -o-            https://fstop138.berrange.com :|
+|: https://entangle-photo.org    -o-    https://www.instagram.com/dberrange :|
+
 
