@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E259C25B07
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Aug 2022 12:00:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.379829.613646 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4BAFC19F28
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Aug 2022 12:02:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.379856.613684 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJD2b-0000js-NK; Wed, 03 Aug 2022 11:59:57 +0000
+	id 1oJD4s-0004Yp-Eo; Wed, 03 Aug 2022 12:02:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 379829.613646; Wed, 03 Aug 2022 11:59:57 +0000
+Received: by outflank-mailman (output) from mailman id 379856.613684; Wed, 03 Aug 2022 12:02:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJD2b-0000jc-GP; Wed, 03 Aug 2022 11:59:57 +0000
-Received: by outflank-mailman (input) for mailman id 379829;
- Wed, 03 Aug 2022 11:59:55 +0000
-Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
- helo=se1-gles-flk1.inumbo.com)
+	id 1oJD4s-0004Yi-C5; Wed, 03 Aug 2022 12:02:18 +0000
+Received: by outflank-mailman (input) for mailman id 379856;
+ Wed, 03 Aug 2022 12:02:16 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=XCkI=YH=suse.com=jgross@srs-se1.protection.inumbo.net>)
- id 1oJD2Z-00008E-Ct
- for xen-devel@lists.xenproject.org; Wed, 03 Aug 2022 11:59:55 +0000
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
- id c91c58bb-1323-11ed-924f-1f966e50362f;
- Wed, 03 Aug 2022 13:59:53 +0200 (CEST)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A607E3FF38;
- Wed,  3 Aug 2022 11:59:53 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6B60313AD8;
- Wed,  3 Aug 2022 11:59:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id cJn7GDlj6mKNUgAAMHmgww
- (envelope-from <jgross@suse.com>); Wed, 03 Aug 2022 11:59:53 +0000
+ (envelope-from <julien@xen.org>) id 1oJD4q-0004YW-LO
+ for xen-devel@lists.xenproject.org; Wed, 03 Aug 2022 12:02:16 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oJD4o-0007Z2-FM; Wed, 03 Aug 2022 12:02:14 +0000
+Received: from [54.239.6.189] (helo=[10.7.237.20])
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1oJD4o-0001Io-9n; Wed, 03 Aug 2022 12:02:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,81 +41,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-X-Inumbo-ID: c91c58bb-1323-11ed-924f-1f966e50362f
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1659527993; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=aEQopuLdWValM7nidZ9WkbS29HDB7GZW9XHtrUpHG2E=;
-	b=ZzORzULIhMATytSzjLQiP1BXdg5NirLRZS4Ep079EugR2FMuCKeYWVJFlHt01FEU0IMNnu
-	FvY+a9VmZ3+9PmLxySSNSw3qJBC0mAMb3ppeoGn7PMvRslEAXAJT6uLCrK4OPshmRaUXBv
-	RkY6l0pTLAketVLSucjmDFgiz6jwRFM=
-From: Juergen Gross <jgross@suse.com>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	George Dunlap <george.dunlap@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Wei Liu <wl@xen.org>
-Subject: [PATCH v3 2/5] tools/xenstore: add documentation for new set/get-feature commands
-Date: Wed,  3 Aug 2022 13:59:47 +0200
-Message-Id: <20220803115950.10904-3-jgross@suse.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20220803115950.10904-1-jgross@suse.com>
-References: <20220803115950.10904-1-jgross@suse.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Cc:
+	References:To:Subject:MIME-Version:Date:Message-ID;
+	bh=tqqqxGtEV4G+2l+h9SD9LaY+UvqrDzHj83h+UhNhUGU=; b=f2pnLN8G09efuCZElEHHYjnUVl
+	aSotKt6nKFfvysmHF6X5wj83z0TV8I1BU/PNB9q+VAWZFeDwvom+ZgpfoNbw6+VTN677SgENWokQb
+	IFMS1BvXLKOozEiB5y+PAxwQiFl6H3/5+UcMHyOsAlMaQF1HH6p3DTA6S1qGUMXw6fQA=;
+Message-ID: <9a72a1ef-c332-7dd3-b84d-baf34f9d7d9f@xen.org>
+Date: Wed, 3 Aug 2022 13:02:12 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
+ Gecko/20100101 Thunderbird/102.1.0
+Subject: Re: [xen-unstable test] 172089: regressions - FAIL
+Content-Language: en-US
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <osstest-172089-mainreport@xen.org>
+Cc: osstest service owner <osstest-admin@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Anthony PERARD <anthony.perard@citrix.com>
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <osstest-172089-mainreport@xen.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add documentation for two new Xenstore wire commands SET_FEATURE and
-GET_FEATURE used to set or query the Xenstore features visible in the
-ring page of a given domain.
+Hi,
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V2:
-- remove feature bit (Julien Grall)
-- GET_FEATURE without domid will return Xenstore supported features
-  (triggered by Julien Grall)
-V3:
-- clarify that guest only sees a copy of features (Julien Grall)
-- add remark that SET_FEATURE will be rejected after INTRODUCE of a
-  domain (Julien Grall)
----
- docs/misc/xenstore.txt | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+On 03/08/2022 08:13, osstest service owner wrote:
+> flight 172089 xen-unstable real [real]
+> http://logs.test-lab.xenproject.org/osstest/logs/172089/
+> 
+> Regressions :-(
+> 
+> Tests which did not succeed and are blocking,
+> including tests which could not be run:
+>   build-i386-libvirt            6 libvirt-build            fail REGR. vs. 172073
+>   build-amd64-libvirt           6 libvirt-build            fail REGR. vs. 172073
+>   build-arm64-libvirt           6 libvirt-build            fail REGR. vs. 172073
 
-diff --git a/docs/misc/xenstore.txt b/docs/misc/xenstore.txt
-index a3d3da0a5b..9134cb7947 100644
---- a/docs/misc/xenstore.txt
-+++ b/docs/misc/xenstore.txt
-@@ -331,6 +331,23 @@ SET_TARGET		<domid>|<tdomid>|
- 
- 	xenstored prevents the use of SET_TARGET other than by dom0.
- 
-+GET_FEATURE		[<domid>|]		<value>|
-+SET_FEATURE		<domid>|<value>|
-+	Returns or sets the contents of the "feature" field copied to
-+	offset 2064 of the Xenstore ring page of the domain specified by
-+	<domid>. <value> is a decimal number being a logical or of the
-+	feature bits as defined in docs/misc/xenstore-ring.txt. Trying
-+	to set a bit for a feature not being supported by the running
-+	Xenstore will be denied. Providing no <domid> with the
-+	GET_FEATURE command will return the features which are supported
-+	by Xenstore.
-+
-+	SET_FEATURE for a domain will be rejected after the INTRODUCE
-+	command for this domain has been sent to xenstored.
-+
-+	xenstored prevents the use of GET_FEATURE and SET_FEATURE other
-+	than by dom0.
-+
- ---------- Miscellaneous ----------
- 
- CONTROL			<command>|[<parameters>|]
+I was going to force this flight because of the libvirt issues. But...
+
+>   test-amd64-amd64-xl-qemuu-debianhvm-i386-xsm 12 debian-hvm-install fail REGR. vs. 172073
+
+... this is not a test related to libvirt. Can one of the x86 folks 
+advise whether the issue is benign?
+
+Cheers,
+
 -- 
-2.35.3
-
+Julien Grall
 
