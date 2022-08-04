@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D695C00144
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Aug 2022 06:43:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.380176.614203 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 399D1C00144
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Aug 2022 07:02:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.380190.614250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJUZa-0005Z9-HJ; Thu, 04 Aug 2022 06:43:10 +0000
+	id 1oJUs4-0000ZF-De; Thu, 04 Aug 2022 07:02:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 380176.614203; Thu, 04 Aug 2022 06:43:10 +0000
+Received: by outflank-mailman (output) from mailman id 380190.614250; Thu, 04 Aug 2022 07:02:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1oJUZa-0005Z2-EX; Thu, 04 Aug 2022 06:43:10 +0000
-Received: by outflank-mailman (input) for mailman id 380176;
- Thu, 04 Aug 2022 06:43:09 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oJUZZ-0005Ys-Aw; Thu, 04 Aug 2022 06:43:09 +0000
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oJUZZ-0004E7-74; Thu, 04 Aug 2022 06:43:09 +0000
-Received: from [172.16.148.1] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1oJUZY-0006tz-St; Thu, 04 Aug 2022 06:43:08 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.92) (envelope-from <osstest-admin@xenproject.org>)
- id 1oJUZY-0005zM-SR; Thu, 04 Aug 2022 06:43:08 +0000
+	id 1oJUs4-0000Z8-8V; Thu, 04 Aug 2022 07:02:16 +0000
+Received: by outflank-mailman (input) for mailman id 380190;
+ Thu, 04 Aug 2022 07:02:14 +0000
+Received: from se1-gles-flk1-in.inumbo.com ([94.247.172.50]
+ helo=se1-gles-flk1.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Wk0C=YI=linaro.org=viresh.kumar@srs-se1.protection.inumbo.net>)
+ id 1oJUs2-0000K7-Jc
+ for xen-devel@lists.xen.org; Thu, 04 Aug 2022 07:02:14 +0000
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [2607:f8b0:4864:20::436])
+ by se1-gles-flk1.inumbo.com (Halon) with ESMTPS
+ id 5c8d323c-13c3-11ed-924f-1f966e50362f;
+ Thu, 04 Aug 2022 09:02:13 +0200 (CEST)
+Received: by mail-pf1-x436.google.com with SMTP id h28so12217860pfq.11
+ for <xen-devel@lists.xen.org>; Thu, 04 Aug 2022 00:02:12 -0700 (PDT)
+Received: from localhost ([122.171.18.80]) by smtp.gmail.com with ESMTPSA id
+ w3-20020a170902e88300b0016be96e07d1sm46803plg.121.2022.08.04.00.02.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Aug 2022 00:02:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,73 +45,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
-	Content-Transfer-Encoding:Content-Type:Message-ID:To;
-	bh=RMUXF8QUyBHsZAth/8TXFTms0vNZhfZQKfPrCWHPa68=; b=bsehLFOnxEtuzVj2UXko3hrgdG
-	fN5rayDj2F4hBvkHPGUgc8TMK7Dli+bWSsmk6+/Tmuu8Ye8rS6siO3FnF8hp04Aw+iMnsbLfxT+O1
-	pddiajZeCJ0T0ygl+xHhBCP74R6vRM3eZwqGOCJxxkw8Ge8mwhIYqh5e+B/RP5ohVWhI=;
-To: xen-devel@lists.xenproject.org
-Message-ID: <osstest-172126-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Inumbo-ID: 5c8d323c-13c3-11ed-924f-1f966e50362f
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=XNF5lFqkiEnLHtnRZXOdPOJLnrAuWb9MTwMC64Rff4g=;
+        b=e3ZvLaojG2E72Ta3MxOi+qccJQPC6b8WYdL7kygELyRlQdwQDZ3/nakfLdc3ClC9Hx
+         ao586GkbiYS1aSItaG/kwC2e1j7BA69a4+DJOjScu0MSZW9lMEn0yHYpl1TpVXl/H+p5
+         KCiJwx9E0Sq/S+uJJq21ato8miVUyES7yr1HD92BU4wsbYGAmH3tXFJxit/4TKFKxBKK
+         LRAbZcN4vAkR+sp0AIx77Ssb5zMLab4GGyZ2fmwl+0tygtQc0ZcKDZFc3ihwCCUNVvMM
+         USiCTqSVJG1Hvcvc2XowYl7jQitz6r1fV8kGO/nBtjUa5ehx1AARUI30nuo3DJFRT/WV
+         e9Kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=XNF5lFqkiEnLHtnRZXOdPOJLnrAuWb9MTwMC64Rff4g=;
+        b=CeXFDXpkOm8QFPS7mF+PV/6LJuX5jsUkjmjSOavmwAYPV6ycyLbRHg2saizvTsE2ld
+         kc1iA3f7m98XK9uzIoWKzdzeTkLoHEtT247kUaQ4ENBRJpZr231YeuZb//5WvjSmYnJm
+         HUFCBnGr347D0A5wds7cfFPX1WOzFiVC/LgYL2cQ4OHDP7jx4VhqhoRc1GAmZh3Xn2n4
+         C3C7Of3Mxg2LAM0pK2ngVrKx20iQnypGTDtSP+b7DRXXvospq/eOP8R2B62uD7ho+tFi
+         2bmTuUDVs6+l2/xWQrFtM3Wr2GQBPp12u9lPqW8Xh4rjQMd6W0hsuc8m5ihk01zw+Zkq
+         GJbg==
+X-Gm-Message-State: ACgBeo19AoWYjwh6eHbw6AXKMp0QoC2g3877Gk2MlL803QZCQNpRkwE+
+	xwweE27nBz0jiD4a6OLd8hGmZ2nXSTMgpA==
+X-Google-Smtp-Source: AA6agR7gitQUj4IOmeOqn77IlXVXzoGacsho48zQcudPw1kc2hYZ8NewuGzPCxAAncAnQI5Y+oiCLA==
+X-Received: by 2002:aa7:919a:0:b0:52a:eeef:3e65 with SMTP id x26-20020aa7919a000000b0052aeeef3e65mr391687pfa.15.1659596531003;
+        Thu, 04 Aug 2022 00:02:11 -0700 (PDT)
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: xen-devel@lists.xen.org
+Cc: Viresh Kumar <viresh.kumar@linaro.org>,
+	Vincent Guittot <vincent.guittot@linaro.org>,
+	stratos-dev@op-lists.linaro.org,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Stefano Stabellini <stefano.stabellini@xilinx.com>,
+	Mathieu Poirier <mathieu.poirier@linaro.com>,
+	Mike Holmes <mike.holmes@linaro.org>,
+	Oleksandr Tyshchenko <olekstysh@gmail.com>,
+	Wei Liu <wl@xen.org>,
+	Juergen Gross <jgross@suse.com>,
+	Julien Grall <julien@xen.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Subject: [PATCH V3 3/6] libxl: arm: Create alloc_virtio_mmio_params()
+Date: Thu,  4 Aug 2022 12:31:51 +0530
+Message-Id: <ae3e61fe687cb2d9dac17622da2ec81c4064db39.1659596139.git.viresh.kumar@linaro.org>
+X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
+In-Reply-To: <cover.1659596139.git.viresh.kumar@linaro.org>
+References: <cover.1659596139.git.viresh.kumar@linaro.org>
 MIME-Version: 1.0
-Subject: [ovmf test] 172126: all pass - PUSHED
-X-Osstest-Versions-This:
-    ovmf=d2191197217f9d16541c2d051235c494fa80bce3
-X-Osstest-Versions-That:
-    ovmf=0dc9b78a46813d61533b2bb0f7ef897a06a273be
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Thu, 04 Aug 2022 06:43:08 +0000
+Content-Transfer-Encoding: 8bit
 
-flight 172126 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/172126/
+Create a separate routine to allocate base and irq for a device as the
+same code will be required for each device type.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 d2191197217f9d16541c2d051235c494fa80bce3
-baseline version:
- ovmf                 0dc9b78a46813d61533b2bb0f7ef897a06a273be
+Suggested-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
+---
+ tools/libs/light/libxl_arm.c | 38 ++++++++++++++++++++++++------------
+ 1 file changed, 25 insertions(+), 13 deletions(-)
 
-Last test of basis   172091  2022-08-03 00:41:46 Z    1 days
-Testing same since   172126  2022-08-03 22:12:01 Z    0 days    1 attempts
+diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
+index 1a3ac1646e94..2f64b9f0ebee 100644
+--- a/tools/libs/light/libxl_arm.c
++++ b/tools/libs/light/libxl_arm.c
+@@ -48,6 +48,24 @@ static uint32_t alloc_virtio_mmio_irq(libxl__gc *gc, uint32_t *virtio_mmio_irq)
+     return irq;
+ }
+ 
++static int alloc_virtio_mmio_params(libxl__gc *gc, uint64_t *base,
++                                    uint32_t *irq, uint64_t *virtio_mmio_base,
++                                    uint32_t *virtio_mmio_irq)
++{
++    *base = alloc_virtio_mmio_base(gc, virtio_mmio_base);
++    if (!*base)
++        return ERROR_FAIL;
++
++    *irq = alloc_virtio_mmio_irq(gc, virtio_mmio_irq);
++    if (!*irq)
++        return ERROR_FAIL;
++
++    LOG(DEBUG, "Allocate Virtio MMIO params: IRQ %u BASE 0x%"PRIx64, *irq,
++        *base);
++
++    return 0;
++}
++
+ static const char *gicv_to_string(libxl_gic_version gic_version)
+ {
+     switch (gic_version) {
+@@ -85,20 +103,12 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+         libxl_device_disk *disk = &d_config->disks[i];
+ 
+         if (disk->specification == LIBXL_DISK_SPECIFICATION_VIRTIO) {
+-            disk->base = alloc_virtio_mmio_base(gc, &virtio_mmio_base);
+-            if (!disk->base)
+-                return ERROR_FAIL;
++            int rc = alloc_virtio_mmio_params(gc, &disk->base, &disk->irq,
++                    &virtio_mmio_base, &virtio_mmio_irq);
++            if (rc)
++                return rc;
+ 
+-            disk->irq = alloc_virtio_mmio_irq(gc, &virtio_mmio_irq);
+-            if (!disk->irq)
+-                return ERROR_FAIL;
+-
+-            if (virtio_irq < disk->irq)
+-                virtio_irq = disk->irq;
+             virtio_enabled = true;
+-
+-            LOG(DEBUG, "Allocate Virtio MMIO params for Vdev %s: IRQ %u BASE 0x%"PRIx64,
+-                disk->vdev, disk->irq, disk->base);
+         }
+     }
+ 
+@@ -107,8 +117,10 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
+      * present, make sure that we allocate enough SPIs for them.
+      * The resulting "nr_spis" needs to cover the highest possible SPI.
+      */
+-    if (virtio_enabled)
++    if (virtio_mmio_irq != GUEST_VIRTIO_MMIO_SPI_FIRST) {
++        virtio_irq = virtio_mmio_irq - 1;
+         nr_spis = max(nr_spis, virtio_irq - 32 + 1);
++    }
+ 
+     for (i = 0; i < d_config->b_info.num_irqs; i++) {
+         uint32_t irq = d_config->b_info.irqs[i];
+-- 
+2.31.1.272.g89b43f80a514
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Sean Rhodes <sean@starlabs.systems>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   0dc9b78a46..d219119721  d2191197217f9d16541c2d051235c494fa80bce3 -> xen-tested-master
 
